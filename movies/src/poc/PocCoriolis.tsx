@@ -236,13 +236,16 @@ const sci = (v: number) => {
 };
 const fLat = (lat: number) => s3.f[s3.lat_deg.indexOf(lat)];
 
-const GLOBE = { cx: 1480, cy: 530, rpx: 218, tilt: 20 };
+const GLOBE_Z = 8.2, GLOBE_TILT = 20;
+// apparent radius in px of the unit sphere for the house Globe camera (fov 35°, 1080 px tall)
+const GLOBE = { cx: 1460, cy: 470, rpx: 540 / (Math.tan((17.5 * Math.PI) / 180) * Math.sqrt(GLOBE_Z ** 2 - 1)), tilt: GLOBE_TILT };
+const SHADOW = "0 0 6px #0f1420, 0 0 3px #0f1420, 0 0 2px #0f1420";
 const SceneEquation: React.FC = () => {
   const f = useCurrentFrame();
   const start2 = sec(sc[2].sentences[1].start) - CUT2 - 6; // second line fades in with the second sentence (~15.5 s)
   const endStrip = sec(18.5) - CUT2;
-  // reveal in step with the narration: LHS, then "minus two Omega cross v" (Coriolis), centrifugal, caption;
-  // "On Earth" -> the f line and the globe; then hemisphere labels and the legend with the data readouts
+  // reveal in step with the narration: LHS + spinning globe, then "minus two Omega cross v" (Coriolis), centrifugal,
+  // caption; "On Earth" -> the f line; then hemisphere labels and the legend with the data readouts
   const t0 = sc[2].sentences[0].start;
   const tC = sec(t0 + 0.9) - CUT2, tF = sec(t0 + 2.2) - CUT2, tA = sec(t0 + 3.0) - CUT2;
   const o1 = ramp(f, 0, 10), oC = ramp(f, tC, tC + 10), oF = ramp(f, tF, tF + 10), oA = ramp(f, tA, tA + 10);
@@ -257,7 +260,11 @@ const SceneEquation: React.FC = () => {
           <div style={{ position: "absolute", left: 60, top: 170, ...FONT, fontSize: 30, color: HOUSE.muted }}>
             Vallis §2.1 — acceleration seen in the rotating frame
           </div>
-          <EqLine latex={eq212Shown(oC, oF)} number="2.12" size={38} y={33} />
+          <div style={{ position: "absolute", left: 0, width: 1090, top: 0, height: 1080 }}>
+            <EqLine latex={eq212Shown(oC, oF)} size={38} y={33} />
+          </div>
+          <div style={{ position: "absolute", left: 1090, top: 0.33 * 1080, transform: "translateY(-50%)", ...FONT,
+            fontSize: 33, color: HOUSE.muted }}>(2.12)</div>
           <div style={{ position: "absolute", left: 60, right: 40, top: 480, ...FONT, fontSize: 30, color: HOUSE.muted,
             textAlign: "center", opacity: oA }}>
             both are apparent (“as if”) forces, seen only from the rotating frame
@@ -270,34 +277,46 @@ const SceneEquation: React.FC = () => {
         </div>
       </div>
       {/* right 40 %: globe shaded by f (one turn per 10 s, anticlockwise seen from above the North Pole) */}
-      <div style={{ position: "absolute", left: GLOBE.cx - 960, top: GLOBE.cy - 540, width: 1920, height: 1080,
-        opacity: o2 }}>
-        <Globe degPerSecond={36} tiltDeg={GLOBE.tilt} cameraZ={7.8} paths={BAND_PATHS} sphereColor="#2a3347" />
+      {/* plain globe while (2.12) is introduced; the f shading cross-fades in with "On Earth, f is …" */}
+      {o2 < 1 ? (
+        <div style={{ position: "absolute", left: GLOBE.cx - 960, top: GLOBE.cy - 540, width: 1920, height: 1080,
+          opacity: o1 * (1 - o2) }}>
+          <Globe degPerSecond={36} tiltDeg={GLOBE.tilt} cameraZ={GLOBE_Z} sphereColor="#2a3347" />
+        </div>
+      ) : null}
+      {o2 > 0 ? (
+        <div style={{ position: "absolute", left: GLOBE.cx - 960, top: GLOBE.cy - 540, width: 1920, height: 1080,
+          opacity: o2 }}>
+          <Globe degPerSecond={36} tiltDeg={GLOBE.tilt} cameraZ={GLOBE_Z} paths={BAND_PATHS} sphereColor="#2a3347" />
+        </div>
+      ) : null}
+      <div style={{ position: "absolute", right: 1920 - GLOBE.cx + 16, top: GLOBE.cy - GLOBE.rpx - 78,
+        ...FONT, fontSize: 28, color: HOUSE.muted, opacity: o1, whiteSpace: "nowrap" }}>
+        ↺ anticlockwise seen from above the N. Pole
       </div>
       <div style={{ opacity: oL }}>
-        {[{ lat: 50, t: "NH: turns right", c: hex(fColor(FMAX)) }, { lat: 0, t: "equator: f = 0", c: HOUSE.accent },
-          { lat: -40, t: "SH: turns left", c: hex(fColor(-FMAX)) }].map((l) => (
-          <div key={l.t} style={{ position: "absolute", left: GLOBE.cx + GLOBE.rpx + 10, top: ylat(l.lat) - 20, ...FONT,
-            fontSize: 28, color: l.c, whiteSpace: "nowrap" }}>{l.t}</div>
+        {[{ lat: 50, t: "NH: turns right" }, { lat: 0, t: "equator: f = 0" }, { lat: -40, t: "SH: turns left" }].map((l) => (
+          <div key={l.t} style={{ position: "absolute", left: GLOBE.cx - 200, width: 400, textAlign: "center",
+            top: ylat(l.lat) - 20, ...FONT, fontSize: 30, fontWeight: 600, color: HOUSE.ink, textShadow: SHADOW,
+            whiteSpace: "nowrap" }}>{l.t}</div>
         ))}
-        <div style={{ position: "absolute", left: GLOBE.cx - 250, top: GLOBE.cy - GLOBE.rpx - 140, width: 500,
-          textAlign: "center", ...FONT, fontSize: 24, color: HOUSE.muted }}>
-          ↺ one turn per {(360 / 36).toFixed(0)} s of film,<br />anticlockwise seen from above the North Pole
-        </div>
       </div>
       <div style={{ opacity: oR }}>
-        {/* legend with the data readouts */}
-        <div style={{ position: "absolute", left: 1240, top: GLOBE.cy + GLOBE.rpx + 40, width: 640, ...FONT, fontSize: 24 }}>
-          <div style={{ height: 18, borderRadius: 4, background: `linear-gradient(90deg, ${fColor(-FMAX)}, ${fColor(0)}, ${fColor(FMAX)})` }} />
-          <div style={{ display: "flex", justifyContent: "space-between", color: HOUSE.muted, marginTop: 6 }}>
-            <span>{sci(-FMAX)}</span><span>f [s⁻¹]</span><span>{sci(FMAX)}</span>
+        {/* legend with the data readouts (fluidpy coriolis_parameter, s3_coriolis_f.json) */}
+        <div style={{ position: "absolute", left: GLOBE.cx - 330, top: GLOBE.cy + GLOBE.rpx + 40, width: 660, ...FONT,
+          fontSize: 28, textAlign: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, color: HOUSE.muted }}>
+            <span>f &lt; 0</span>
+            <div style={{ flex: 1, height: 18, borderRadius: 4,
+              background: `linear-gradient(90deg, ${fColor(-FMAX)}, ${fColor(0)}, ${fColor(FMAX)})` }} />
+            <span>f &gt; 0</span>
           </div>
-          <div style={{ color: HOUSE.ink, marginTop: 8 }}>
-            90°N {sci(fLat(90))} · 45°N {sci(fLat(45))} · 0° {sci(fLat(0))} · 45°S {sci(fLat(-45))}
+          <div style={{ color: HOUSE.ink, marginTop: 10 }}>
+            90°N {sci(fLat(90))} · 45°N {sci(fLat(45))} s⁻¹
           </div>
+          <div style={{ color: HOUSE.ink }}>0°: 0 · 45°S {sci(fLat(-45))} s⁻¹</div>
           <div style={{ color: HOUSE.muted, marginTop: 8 }}>
-            table: 2Ω = 1 s⁻¹ · Earth at 45°N: f ≈ {sci(fLat(45)).replace(/^1\.03/, "1.0")} s⁻¹ — the table is
-            ~{(Math.round(ratio / 1000) * 1000).toLocaleString("en-US").replace(",", " ")}× faster
+            table 2Ω = 1 s⁻¹: ~{(Math.round(ratio / 1000) * 1000).toLocaleString("en-US").replace(",", " ")}× Earth's f at 45°N
           </div>
         </div>
       </div>
