@@ -30,14 +30,14 @@ adds what each `/make-movies N` run teaches. Skill: `motion-graphics`.
 
 | Step | Result |
 |---|---|
-| storyboard validates | |
-| V1 trajectory test | |
-| TTS: clips + gaps = audio length ± 1 frame | |
-| render wall time / frames per second | |
-| file size | |
-| GPU or SwiftShader | |
-| movie_qa.py gates | |
-| render-twice framemd5 comparison | |
-| movie-reviewer verdict | |
-| test page playback with captions | |
-| user verdict (voice, speed, pace, captions) | |
+| storyboard validates | PASS (post-write schema hook); (2.12) p077 and (2.80) p089 read from page images |
+| V1 trajectory test | PASS — 16 pre-write checks; inertial path x = 0.15 t to 1e-12, rotating path vs solve_ivp of (2.12) 1e-8 |
+| TTS: clips + gaps = audio length ± 1 frame | PASS — 0 ms drift; Kokoro af_bella ×1.0, 38 words, 19.30 s audio, −16.1 LUFS |
+| render wall time / frames per second | 42.1 s for 600 frames (14.3 fps); re-render 48.7 s; empty composition cold 3 min 31 s |
+| file size | 3.51 MB for 20.01 s (budget 4 MB for the clip; scales to ~25 MB per 3 min) |
+| GPU or SwiftShader | GPU — ANGLE D3D11 on Intel Iris Xe (Remotion Chrome --use-gl=angle) |
+| movie_qa.py gates | 10/10 PASS (duration, size, codec, black, frozen, loudness, flashes, captions, physics, equations) |
+| render-twice framemd5 comparison | 600/600 frames identical |
+| movie-reviewer verdict | FIX (text ~7 px at 640 px) → re-render → PASS |
+| test page playback with captions | PASS — plays, captions show, 0 console errors (Edge via Playwright) |
+| user verdict (voice, speed, pace, captions) | pending |

@@ -97,3 +97,24 @@ physics (4 functions re-run with matching hashes) and equations gates all PASS. 
 Enlarge the (2.12) tag and the text under the globe. The physics, equations, captions, pacing, badges and accessibility are all correct.
 
 ## Overall: FIX
+
+## Re-review (2026-10-21, after fix loop 1)
+Movie: `movies/out/poc/1080.mp4` (rendered 01:53). 20.011 s, 3.51 MB. qa.json is 10/10 PASS, and the equations gate now reports "2 storyboard equation(s) present".
+Frames: `reports/movies/poc_coriolis_turntable/review/rr640_{9,12,15,17.5,19.5}.png` and `rr1080_*.png`. Heights are ink heights measured by row scan in the 1080p frame; dividing by 3 gives the height at 640 px.
+
+| item | before | now (1080p ink → 640 px) | target | result |
+|---|---|---|---|---|
+| "(2.12)" tag, 11.2–20 s | ≈ 20 px → 7 px | 29 px → ≈ 10 px (font 33 px) | ≥ "(2.80)" = 29 px | PASS (same size as "(2.80)") |
+| colour-bar ticks "f < 0 / f > 0" | 22–24 px | 21 px ink (no descender), font 28 px | font ≥ 28 px | PASS |
+| readout rows (90°N…, 0°…) | 22–24 px | 24 px ink, font 28 px → ≈ 8 px | font ≥ 28 px | PASS (readable in rr640_17.5) |
+| table-vs-Earth line | 22–24 px | 24 px ink, font 28 px | font ≥ 28 px | PASS |
+
+Regression check:
+- Physics: s2 still curves to the right, and the Coriolis arrow is perpendicular, on the right of the motion (rr640_9). The room view is straight. The table is labelled anticlockwise (NH). The globe reads "NH: turns right / equator: f = 0 / SH: turns left", with f > 0 violet and f < 0 green. The readouts are unchanged (1.46×10⁻⁴, 1.03×10⁻⁴, −1.03×10⁻⁴ s⁻¹, about 10 000×). "Apparent ('as if') forces" is still on screen.
+- Badges: "not to scale" appears in all three scenes (contact sheet). s3 now shows the plain globe from 11.2 s, so the earlier "empty right 40 %" note is resolved. The hemisphere labels now sit at x ≈ 1330–1600, inside title-safe, so that note is resolved too.
+- Captions: `en.vtt` and `en.srt` have mtime 01:08, from before the re-render. The 6 cues are the same, and the captions gate is PASS.
+- No new overlaps. The end strip (19.5 s) clears the f equation and the readouts.
+- NOTE (no action needed): the "Coriolis" and "centrifugal" underbrace labels are about 24 px at 1080p (≈ 8 px at 640). They are legible, and their size has not changed since round 1.
+
+### Verdict: PASS (becomes `qa_pass`; the user watches the movie before `/approve-movie`)
+## Overall: PASS

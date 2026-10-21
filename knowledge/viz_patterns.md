@@ -2165,15 +2165,21 @@ except as the labelled bad example (`viz:badexample`). Sign never by hue alone (
 
 Drawing invariants become selftest rows (cross result ⟂ both inputs, |r·a| < 1e-9; Ekman transport ⟂ wind).
 
-## 2.4 PoC record (PLANNING §12 step 11) — filled by the setup session
+## 2.4 PoC record (PLANNING §12 step 11) — filled by the setup session, 2026-10-21
 
-| PoC | Item | Render / build time | Size | GPU vs SwiftShader | Audit result | User verdict (look, voice, depth) |
+| PoC | Item | Build | Size | GPU vs SwiftShader | Audit result | User verdict (look, voice, depth) |
 |---|---|---|---|---|---|---|
-| A | `viz/ch00/vector_products_lab.html` | | | | | |
-| B | `templates/viz_example_globe.html` | | | | | |
-| C | Fig. 21.23 Southern Ocean map (`figs/ch21/fig_21_23.py`) | | | | | |
-| E | Colab smoke notebook | | | | | |
-| F | `scenes/ch00/the_500hPa_surface.html` | | | | | |
-| G | Chapter 0A sample block (dot product) | | | | | |
+| A | `viz/ch00/vector_products_lab.html` | viz-builder ∥ viz3d-builder → viz-integrator; 2 review rounds | ~410 kB (scene module 20 kB, no data) | SwiftShader 0.42 ms/frame; 17 draw calls, 660 triangles | `shot.py --3d` PASS 8 sizes, 130 rows (46 vs fluidpy at 1e-12, 84 invariant/drawn/camera), `--no-webgl` PASS; viz-reviewer PASS ("Kundu level for a Ch. 0 primer") | pending |
+| B | `templates/viz_example_globe.html` | viz3d-builder; 3 review rounds | 360 kB | Iris Xe ~120 renders/s (vsync-limited), SwiftShader 4.7/s; 28–34 draw calls | `--3d` PASS 8 sizes, 69 rows; `--no-webgl` PASS 56 rows; tolerances derived from ε = U cot ϑ/(\|f₀\|a); viz-reviewer PASS round 2 | pending |
+| C | Fig. 21.23 analogue (`figs/ch21/fig_21_23.py`) | figure-reproducer; ~20 s render | PNG 1.24 MB | n/a | `test_fig_21_23` PASS (PF 49.6°S, SAF 47.5°S at 20°E, Drake +0.21 m/s, Agulhas retroflection 17.5°E); orchestrator side-by-side PASS | pending |
+| F | `scenes/ch00/the_500hPa_surface.html` | viz3d-builder; 2 review rounds | 389 kB (21 kB uint16 field) | Iris Xe 60 fps, SwiftShader 12 fps; 10 draw calls, 62 k triangles | `--scene` PASS 8 sizes, 49 rows (field spots, u_g vs fluidpy, gradient wind (2.234b), equal-area arrows); viz-reviewer PASS | pending |
+| kit | `assets/viz3d.js` + self-test | step 8 | 79 kB (23 kB gz), LUTs 13.9 kB, coast 27.5 kB | Iris Xe 0.21–0.36 ms/frame, SwiftShader 0.71–0.86 ms/frame | `--3d` PASS 8 sizes; dispose 0/0 (after switching to MeshLambertMaterial) | — |
 
-(PoC D, the movie clip, is recorded in `movie_patterns.md`.)
+**Lessons from the PoC (promote into the skills at the first knowledge pass):**
+- Builder and 3-D scene written in parallel need ONE written contract (view id, state keys, global name, swept vectors);
+  the PoC needed an integrator adapter because two agents chose different hooks.
+- Reviewers find what audits cannot: autoplay contradicting step 1, wrong turn icons, ghost arrows that read as the
+  real one, phone chips covering 40 % of the 3-D view, captions too fast to read.
+- Tolerances against an approximate model must be DERIVED (expansion parameter in the row), never picked to pass.
+- Dense vector fields on a globe: equal-area sampling + limb culling + ≥ 28 px spacing (1 872 → 605 arrows).
+- three r186: MeshStandardMaterial leaves one internal texture after dispose; use MeshLambertMaterial for audits to reach 0/0.

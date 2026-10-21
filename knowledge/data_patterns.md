@@ -32,7 +32,7 @@ knowledge-keeper adds what each chapter's data phase teaches. Skills: `open-data
 
 | Item | Source / route | Bytes downloaded | Derived product (size) | C: free before → after | G: free before → after | Checks |
 |---|---|---|---|---|---|---|
-| Natural Earth land / bathymetry | | | | | | |
-| Orsi fronts (AADC) | | | | | | |
-| GDP drifter mean velocity | | | | | | |
-| NCEP R1 daily hgt 500 hPa | | | | | | |
+| Natural Earth land / bathymetry | Natural Earth S3 zips (50 m land; 10 m bathymetry H_3000 only) | 457 183 + 2 528 623 | bathy3000 mask 0.25° int8 (34 kB) | 97.0 → 90.9 GB (parallel jobs) | 589.7 → 589.6 GB | public domain |
+| Orsi fronts (AADC) | AAD GitHub package orsifronts @ 76d4f6d (AADC zip needs an email; not submitted) | 85 249 | fronts .npz (24 kB) | — | — | PF 49.7°S, SAF 47.6°S at 20°E; CC-BY 4.0 |
+| GDP drifter mean velocity | AOML ERDDAP griddap subset 72.9–30.1°S | 9 925 136 | mean velocity .nc (2.8 MB) | — | — | Drake U +0.21 m/s; CC-BY 4.0 (registry corrected from R3) |
+| NCEP R1 daily hgt 500 hPa | PSL OPeNDAP via pydap (one day, 37 kB) + HTTPS fallback hgt.2014.nc (84.9 MB, sha256) | 84 922 526 | ncep_r1_z500_20140106.nc (28 kB) | — | — | both routes identical (max diff 0 m); public domain |

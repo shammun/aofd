@@ -1184,3 +1184,19 @@ The setup session (§12) **skips** these steps. It verifies them and builds on t
 | Secret guard | `tools/check_secrets.py` (stdlib only) + `.githooks/pre-commit` (`--staged`) + `.githooks/pre-push` (`--push`) in **both** repos, and a credential/root-screenshot block in both `.gitignore`s. Tested: it blocks real token/password values, `key:` UUIDs, netrc lines, credential files and root screenshots, also on push after `--no-verify`. **The setup session keeps these hooks** (it runs `git config core.hooksPath .githooks`), chains `check_public.py` after `check_secrets.py --push`, and lists `check_secrets.py` in the `.claude/settings.json` hook docs (§7). |
 | Tools added | `tools/check_data_access.py` (one-line OK/NEEDS LOGIN/FAIL per source, disk report), `tools/voice_samples.py`, `tools/build_guide_docx.py` (copied from fluidpy). |
 | User guides | `WORKFLOW_GUIDE.md/.docx` (whole workflow, every phase) and `CREDENTIALS_GUIDE.md/.docx` (the three accounts, vault, protection). |
+
+### 15.9 Setup session results and errata (2026-10-21)
+
+- **Erratum — latitude symbol.** Vallis writes latitude as **ϑ** (vartheta) and uses **θ for potential
+  temperature** (checked on the notation pages and PDF p. 79). Wherever this document or R1–R4 say "Vallis latitude φ"
+  or "f = 2Ω sin φ", read ϑ. The skills, agents, `knowledge/symbols.yaml` and `notation.md` already use ϑ.
+- **Units trap.** `fluidpy.geo.frames.coriolis_parameter(lat)` takes radians (as `fluidpy.core`), while
+  `fluidpy.geo.atmos.geostrophic_wind_from_height` takes degrees; parity rows convert explicitly.
+- **§12 steps 1–10 done; step 12 done early** at the user's request: `shammun/aofd` created (public) and GitHub Pages
+  enabled on `main /` (https://shammun.github.io/aofd/). `shammun/aofd-media` not yet created (needed only when the
+  first movie is approved). fluidpy `v0.3.0` tagged and pushed; the PoC library code is committed locally in fluidpy
+  (6d2c52e) and becomes `v0.3.1` after the user approves the PoC.
+- **Agents created mid-session** are only registered as agent types in a new session; the setup session ran the first
+  PoC agents as general agents that loaded their own `.claude/agents/<name>.md`, the later ones natively.
+- **PoC A–G results** are recorded in `progress.json → setup.poc`, `reports/ch00_poc_*.md` and the PoC record tables
+  of `knowledge/{viz,movie,data}_patterns.md`.
