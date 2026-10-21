@@ -15,7 +15,12 @@
      }
    State keys read: ax ay az bx by bz (components), showDot showCross (booleans);
      optional: showCoriolis (bool, the "f k×u" preset: ghost −f k×u arrow ×10⁴), lat (deg, default 45).
-   Layer ids: grid · glyphDot · glyphCross · signedBar · barLabel · ghostCoriolis · cams (+ triad in the proj3 fallback).
+   Layer ids: grid · glyphDot · glyphCross · signedBar · barLabel · ghostCoriolis · coriolisLabels · cams (+ triad in the
+   proj3 fallback). The ghost −f k×u is BEADED (a chain of short light-violet arrows) so it never reads as a continuation
+   of the solid violet k×u, which points the opposite way on the same line; each tip has its own label.
+   Camera presets are FITTED to what is drawn (cameraPresetsFor(a, b, fit), fit = {pts, w, h}): same view directions as
+   Part H, aimed at the centre of the drawn points, pulled back until every tip is inside the canvas with a pixel margin
+   for the badge (top) and the provenance chips (bottom).
    Every drawn quantity comes from the pure functions below (mirrors of fluidpy.geo.vectors); only Viz3D layers are used.
    Candidate kit features (not drawn here, noted for the knowledge-keeper): right-angle tick at the shadow foot
    (vectorGlyph showShadow), arc + arrowhead in the proj3 fallback of op:'cross', dashed vectorField arrows (ghost).
@@ -44,10 +49,10 @@
   function parallelogram_area(a, b) { return norm(cross(a, b)); }
   /** fluidpy.geo.vectors.triple_scalar(a, b, c) = a·(b×c) — Eq. (K 2.21). */
   function triple_scalar(a, b, c) { return dot(a, cross(b, c)); }
-  /** fluidpy.geo.vectors.k_cross(u) = (−u_y, u_x, 0) — Vallis (2.79): u turned 90° to the left. */
+  /** fluidpy.geo.vectors.k_cross(u) = (−u_y, u_x, 0) — u turned 90° to the left (the k×u of Vallis (2.55)). */
   function k_cross(u) { return [-u[1], u[0], 0]; }
   var OMEGA = 7.292115e-5;                       // fluidpy.geo.constants.OMEGA [rad/s]
-  /** fluidpy.geo.frames.coriolis_parameter(lat, Omega) — Vallis (2.80): f = 2Ω sin ϑ, lat in radians. */
+  /** fluidpy.geo.frames.coriolis_parameter(lat, Omega) — f ≡ 2Ω sin ϑ (Vallis, text after (2.51)), lat in radians. */
   function coriolis_parameter(lat, Omega) { return 2 * (Omega === undefined ? OMEGA : Omega) * Math.sin(lat); }
 
   var physics = { dot: dot, cross: cross, norm: norm, angle_between: angle_between, scalar_projection: scalar_projection,
@@ -55,7 +60,8 @@
     coriolis_parameter: coriolis_parameter, OMEGA: OMEGA };
 
   /* ---------- scene description (declarative: the kit rebuilds it after context loss / release) ---------- */
-  var TEAL = '#0fa39c', ORANGE = '#f97316', VIOLET = '#7c3aed', ROSE = '#e11d6a';
+  var TEAL = '#0fa39c', ORANGE = '#f97316', VIOLET = '#7c3aed', ROSE = '#e11d6a', GHOST = '#b197fc';
+  var GHOST_DASHES = 7, FOV = 35;
   var BAR_AT = [-0.6, -0.6, 0], BAR_SCALE = 0.2;          // signed bar: 0.2 scene units per unit of a·b
   var GHOST_SCALE = 1e4;                                   // −f k×u drawn ×10⁴ (exaggeration badge)
   var STEP_CAMERAS = ['iso', 'faceOn', 'faceOn', 'iso', 'iso', 'edgeOn', 'top', 'iso'];
@@ -79,7 +85,38 @@
     return u[2] < 0 ? [-u[0], -u[1], -u[2]] : u;
   }
   /** Camera presets (Part H): pos/target from a and b; recomputed whenever a or b changes. */
-  function cameraPresetsFor(a, b) {
+  /** Pull a preset back along its own direction, aimed at the centre of the drawn points, until every point fits the
+      canvas (w × h px) with pixel margins: 16 px at the sides, room for the badge / chips at top and bottom. */
+  function frame(P, w, h) {
+    var d = unit([P.pos[0] - P.target[0], P.pos[1] - P.target[1], P.pos[2] - P.target[2]]), f = [-d[0], -d[1], -d[2]];
+    var r = cross(f, [0, 0, 1]); r = norm(r) > 1e-9 ? unit(r) : [1, 0, 0];
+    var small = w < 420 || h < 200, padY = small ? 24 : 40, tv = Math.tan(FOV / 2 * Math.PI / 180);
+    return { d: d, r: r, u: cross(r, f), tv: tv * Math.max(0.45, 1 - 2 * padY / h), th: tv * w / h * Math.max(0.5, 1 - 2 * 16 / w) };
+  }
+  function fitPreset(P, pts, w, h) {
+    var lo = [0, 1, 2].map(function (i) { return Math.min.apply(null, pts.map(function (p) { return p[i]; })); });
+    var hi = [0, 1, 2].map(function (i) { return Math.max.apply(null, pts.map(function (p) { return p[i]; })); });
+    var c = [(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2], F = frame(P, w, h), d = F.d, D = 1;
+    pts.forEach(function (p) {
+      var v = [p[0] - c[0], p[1] - c[1], p[2] - c[2]], z = dot(v, d);
+      D = Math.max(D, z + Math.abs(dot(v, F.r)) / F.th, z + Math.abs(dot(v, F.u)) / F.tv);
+    });
+    return { pos: [c[0] + D * d[0], c[1] + D * d[1], c[2] + D * d[2]], target: c, normal: P.normal, fitted: true };
+  }
+  /** Fraction of the usable half-width / half-height reached by the farthest drawn point (≤ 1: all inside). */
+  function fillFraction(P, pts, w, h) {
+    var F = frame(P, w, h), D = norm([P.pos[0] - P.target[0], P.pos[1] - P.target[1], P.pos[2] - P.target[2]]);
+    return Math.max.apply(null, pts.map(function (p) {
+      var v = [p[0] - P.target[0], p[1] - P.target[1], p[2] - P.target[2]], z = D - dot(v, F.d);
+      return Math.max(Math.abs(dot(v, F.r)) / (z * F.th), Math.abs(dot(v, F.u)) / (z * F.tv));
+    }));
+  }
+  function cameraPresetsFor(a, b, fit) {
+    var P = presetDirections(a, b);
+    if (fit && fit.pts && fit.w > 0 && fit.h > 0) Object.keys(P).forEach(function (k) { P[k] = fitPreset(P[k], fit.pts, fit.w, fit.h); });
+    return P;
+  }
+  function presetDirections(a, b) {
     var n = planeNormal(a, b), T = [0, 0, 0];
     var mid = [(a[0] + b[0]) / 3, (a[1] + b[1]) / 3, (a[2] + b[2]) / 3];   // aim near the parallelogram's centre (in the a–b plane)
     function along(v, L) { return [mid[0] + L * v[0], mid[1] + L * v[1], mid[2] + L * v[2]]; }
@@ -106,9 +143,28 @@
     var lat = (s.lat === undefined ? 45 : +s.lat) * Math.PI / 180, f = coriolis_parameter(lat);
     var kxu = k_cross(b), ghost = [-f * kxu[0] * GHOST_SCALE, -f * kxu[1] * GHOST_SCALE, 0];
     var showDot = s.showDot !== false, showCross = s.showCross !== false;
-    return { a: a, b: b, dot: d, showDot: showDot, showCross: showCross, coriolis: coriolis, f: f, ghost: ghost,
+    var pts = [[0, 0, 0], a, b];
+    var cr = cross(a, b);
+    if (showCross) pts.push([a[0] + b[0], a[1] + b[1], a[2] + b[2]], cr, [cr[0] * 1.12, cr[1] * 1.12, cr[2] * 1.12]);   // + readout / label anchor
+    if (coriolis) pts.push(ghost, [ghost[0] * 1.08, ghost[1] * 1.08, 0]);                                              // + its label anchor
+    if (showDot) pts.push([BAR_AT[0], BAR_AT[1], BAR_SCALE * d + (d >= 0 ? 0.25 : -0.25)]);
+    return { a: a, b: b, dot: d, showDot: showDot, showCross: showCross, coriolis: coriolis, f: f, ghost: ghost, pts: pts, kxu: kxu,
       bar: [0, 0, BAR_SCALE * d], key: [a, b, showDot, showCross, coriolis, lat].join('|'),
       la: coriolis ? String.raw`\hat{\mathbf k}` : String.raw`\mathbf a`, lb: coriolis ? String.raw`\mathbf u` : String.raw`\mathbf b` };
+  }
+  /** The beaded ghost: GHOST_DASHES short arrows along −f k×u ×10⁴, the last one ending exactly at the tip. */
+  function ghostBeads(g) {
+    var pts = [], vs = [], n = GHOST_DASHES;
+    for (var i = 0; i < n; i++) {
+      var s0 = i / n, len = i === n - 1 ? 1 / n : 0.6 / n;
+      pts.push([g[0] * s0, g[1] * s0, g[2] * s0]); vs.push([g[0] * len, g[1] * len, g[2] * len]);
+    }
+    return { points: pts, vectors: vs };
+  }
+  function coriolisItems(d) {
+    var it = [{ at: [d.ghost[0] * 1.08, d.ghost[1] * 1.08, 0], text: '−f k×u ×10⁴ (beaded): right of u', color: VIOLET, priority: 0 }];
+    if (d.showCross) { var c = cross(d.a, d.b); it.push({ at: [c[0] * 1.1, c[1] * 1.1, c[2] * 1.1], text: 'k×u (solid): left of u', color: VIOLET, priority: 1 }); }
+    return it;
   }
 
   function glyphParams(d, which) {
@@ -136,7 +192,7 @@
       if (S.fallback) S.add(Viz3D.axesTriad({ id: 'triad', at: [-5, -5, 0], length: 2.2, labels: ['x east', 'y north', 'z up'] }));
       var gc = glyphParams(d, 'cross'), gd = glyphParams(d, 'dot');
       S.add(Viz3D.vectorGlyph({ id: 'glyphCross', at: [0, 0, 0], op: 'cross', a: gc.a, b: gc.b, showParallelogram: true, showArc: true,
-        readout: true, resultColor: VIOLET, visible: gc.visible, radius: 0.045,
+        readout: !d.coriolis, resultColor: VIOLET, visible: gc.visible, radius: 0.045,
         provenance: { kind: 'computed', text: 'fluidpy.geo.vectors.cross' } }));
       S.add(Viz3D.vectorGlyph({ id: 'glyphDot', at: [0, 0, 0], op: 'dot', a: gd.a, b: gd.b, showShadow: gd.showShadow, readout: false,
         visible: gd.visible, radius: 0.045, provenance: { kind: 'computed', text: 'fluidpy.geo.vectors.dot' } }));
@@ -144,15 +200,20 @@
         color: d.dot >= 0 ? TEAL : ROSE, visible: d.showDot, pick: false,
         provenance: { kind: 'computed', text: 'fluidpy.geo.vectors.dot' } }));
       S.add(Viz3D.labels([barLabelItem(d)], { id: 'barLabel', visible: d.showDot }));
-      S.add(Viz3D.vectorField({ id: 'ghostCoriolis', points: [[0, 0, 0]], vectors: [d.ghost], scale: 1, radius: 0.035, color: VIOLET,
+      var gb = ghostBeads(d.ghost);
+      S.add(Viz3D.vectorField({ id: 'ghostCoriolis', points: gb.points, vectors: gb.vectors, scale: 1, radius: 0.035, color: GHOST,
         visible: d.coriolis, exaggeration: true, exaggerationLabel: '−f k×u ×10⁴ for visibility', pick: false,
         provenance: { kind: 'computed', text: 'fluidpy.geo.vectors.k_cross · frames.coriolis_parameter' } }));
-      S.add(Viz3D.cameraPresets(cameraPresetsFor(d.a, d.b), { id: 'cams', tween: 700, reducedMotion: 'cut' }));
-      S._vpl = { key: d.key, ab: d.a.join(',') + '|' + d.b.join(','), state: Object.assign({}, s0) };
+      S.add(Viz3D.labels(coriolisItems(d), { id: 'coriolisLabels', visible: d.coriolis }));
+      var fit = fitFor(S, d);
+      S.add(Viz3D.cameraPresets(cameraPresetsFor(d.a, d.b, fit), { id: 'cams', tween: 700, reducedMotion: 'cut' }));
+      S._vpl = { key: d.key, ab: camKey(d, fit), fit: fit, state: Object.assign({}, s0) };
       return S;
     });
   }
 
+  function fitFor(S, d) { return { pts: d.pts, w: (S.holder && S.holder.clientWidth) || 640, h: (S.holder && S.holder.clientHeight) || 360 }; }
+  function camKey(d, fit) { return d.key + '|' + fit.w + 'x' + fit.h; }
   function barLabelItem(d) {
     return { at: [BAR_AT[0], BAR_AT[1], d.bar[2] + (d.dot >= 0 ? 0.25 : -0.25)], text: 'a·b = ' + fmt(d.dot), color: d.dot >= 0 ? TEAL : ROSE, priority: 0 };
   }
@@ -161,6 +222,8 @@
     if (!S || !S._vpl) return;
     var d = describe(state || {});
     S._vpl.state = Object.assign({}, state);
+    var fit = fitFor(S, d), ck = camKey(d, fit);
+    if (ck !== S._vpl.ab) { S._vpl.ab = ck; S._vpl.fit = fit; S.remove('cams'); S.add(global.Viz3D.cameraPresets(cameraPresetsFor(d.a, d.b, fit), { id: 'cams', tween: 700, reducedMotion: 'cut' })); }
     if (d.key === S._vpl.key) return;
     S._vpl.key = d.key;
     var gc = glyphParams(d, 'cross'), gd = glyphParams(d, 'dot');
@@ -169,11 +232,12 @@
     S.set('glyphDot', { a: gd.a, b: gd.b, showShadow: gd.showShadow });
     S.set('signedBar', { vectors: [d.bar], color: d.dot >= 0 ? TEAL : ROSE });
     S.set('barLabel', { items: [barLabelItem(d)] });
-    S.set('ghostCoriolis', { vectors: [d.ghost] });
-    [['glyphCross', gc.visible], ['glyphDot', gd.visible], ['signedBar', d.showDot], ['barLabel', d.showDot], ['ghostCoriolis', d.coriolis]]
+    var gb = ghostBeads(d.ghost);
+    S.set('ghostCoriolis', { points: gb.points, vectors: gb.vectors });
+    S.set('coriolisLabels', { items: coriolisItems(d) });
+    if (!!S.get('glyphCross').opts.readout === d.coriolis) S.set('glyphCross', { readout: !d.coriolis });   // the readout sat on the k×u label
+    [['glyphCross', gc.visible], ['glyphDot', gd.visible], ['signedBar', d.showDot], ['barLabel', d.showDot], ['ghostCoriolis', d.coriolis], ['coriolisLabels', d.coriolis]]
       .forEach(function (x) { S.set(x[0], { visible: x[1] }); });
-    var ab = d.a.join(',') + '|' + d.b.join(',');
-    if (ab !== S._vpl.ab) { S._vpl.ab = ab; S.remove('cams'); S.add(global.Viz3D.cameraPresets(cameraPresetsFor(d.a, d.b), { id: 'cams', tween: 700, reducedMotion: 'cut' })); }
   }
 
   function goto(S, name) { return S ? S.goto(name) : Promise.resolve(); }
@@ -215,8 +279,8 @@
       rows.push({ name: 'invariant (a·b)² + |a×b|² = |a|²|b|² ' + c.n, js: dot(c.a, c.b) * dot(c.a, c.b) + dot(x, x), expect: dot(c.a, c.a) * dot(c.b, c.b), rtol: 1e-12 });
     });
     rows.push({ name: 'triple_scalar e_x·(e_y×e_z) (K 2.21)', js: triple_scalar([1, 0, 0], [0, 1, 0], [0, 0, 1]), py: V + 'triple_scalar([1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0])', rtol: 1e-12 });
-    [0, 1, 2].forEach(function (i) { rows.push({ name: 'k_cross(8, 6, 0)[' + i + '] (2.79)', js: k_cross([8, 6, 0])[i], py: V + 'k_cross([8.0, 6.0, 0.0])[' + i + ']', rtol: 1e-12, atol: 1e-15 }); });
-    rows.push({ name: 'coriolis_parameter(45°) (2.80)', js: coriolis_parameter(Math.PI / 4), py: 'fluidpy.geo.frames.coriolis_parameter(math.pi / 4)', rtol: 1e-12 });
+    [0, 1, 2].forEach(function (i) { rows.push({ name: 'k_cross(8, 6, 0)[' + i + '] (u turned 90° left)', js: k_cross([8, 6, 0])[i], py: V + 'k_cross([8.0, 6.0, 0.0])[' + i + ']', rtol: 1e-12, atol: 1e-15 }); });
+    rows.push({ name: 'coriolis_parameter(45°): f = 2Ω sin ϑ', js: coriolis_parameter(Math.PI / 4), py: 'fluidpy.geo.frames.coriolis_parameter(math.pi / 4)', rtol: 1e-12 });
     rows.push({ name: 'k_cross(u) ⟂ u (Coriolis does no work)', js: dot(k_cross([8, 6, 0]), [8, 6, 0]), expect: 0, atol: 1e-12 });
 
     if (!S || !S._vpl) return rows;
@@ -239,9 +303,21 @@
       if (Math.abs(d.dot) > 1e-6) rows.push({ name: 'drawn signed bar points up iff a·b > 0', js: bar.dir[2], expect: Math.sign(d.dot), atol: 1e-5 });
     }
     var gh = readArrow(S, 'ghostCoriolis');
-    if (gh && d.coriolis && norm(d.b) > 0) rows.push({ name: 'drawn −f k×u ⟂ u (float32)', js: dot(gh.dir, unit(d.b)), expect: 0, atol: 1e-5 });
+    if (gh && d.coriolis && norm(d.b) > 0) {
+      rows.push({ name: 'drawn −f k×u ⟂ u (float32)', js: dot(gh.dir, unit(d.b)), expect: 0, atol: 1e-5 });
+      rows.push({ name: 'drawn −f k×u opposite k×u when f > 0: dir·unit(k×u) = −sign f', js: dot(gh.dir, unit(d.kxu)), expect: -Math.sign(d.f), atol: 1e-5 });
+      var GL = S.get('ghostCoriolis'), m4 = new S.THREE.Matrix4(), tipv = new S.THREE.Vector3(0, 1, 0);
+      GL.obj.userData.head.getMatrixAt(GHOST_DASHES - 1, m4); tipv.applyMatrix4(m4);
+      rows.push({ name: 'drawn ghost: last bead ends at −f k×u ×10⁴ (float32)', js: tipv.distanceTo(new S.THREE.Vector3().fromArray(d.ghost)), expect: 0, atol: 1e-4 * Math.max(1, norm(d.ghost)) });
+      rows.push({ name: 'ghost is beaded (' + GHOST_DASHES + ' dashes), not one solid arrow', js: GL.obj.userData.shaft.count, expect: GHOST_DASHES });
+    }
     // camera presets: one per walkthrough step, and the face-on / edge-on geometry
-    var P = cameraPresetsFor(d.a, d.b);
+    var fit = S._vpl.fit || fitFor(S, d), P = cameraPresetsFor(d.a, d.b, fit);
+    Object.keys(P).forEach(function (k) {
+      var fr = fillFraction(P[k], fit.pts, fit.w, fit.h);
+      rows.push({ name: 'camera "' + k + '" fits every drawn tip inside the view (fraction ≤ 1)', js: fr <= 1 + 1e-9 ? 1 : 0, expect: 1 });
+      rows.push({ name: 'camera "' + k + '" is not loose (farthest tip ≥ 99 % of the usable frame)', js: fr >= 0.99 ? 1 : 0, expect: 1 });
+    });
     STEP_CAMERAS.forEach(function (c, i) { rows.push({ name: 'walkthrough step ' + (i + 1) + ' camera "' + c + '" is a preset', js: S.presets[c] ? 1 : 0, expect: 1 }); });
     function rel(p) { return unit([p.pos[0] - p.target[0], p.pos[1] - p.target[1], p.pos[2] - p.target[2]]); }
     var fo = rel(P.faceOn), eo = rel(P.edgeOn);
@@ -257,6 +333,6 @@
     return rows;
   }
 
-  global.SCENE_vector_products_lab = { create: create, update: update, selftestRows: selftestRows, goto: goto,
+  global.SCENE_vector_products_lab = { create: create, update: update, selftestRows: selftestRows, goto: goto, ghostBeads: ghostBeads, fillFraction: fillFraction,
     physics: physics, STEP_CAMERAS: STEP_CAMERAS, cameraPresetsFor: cameraPresetsFor, describe: describe };
 })(window);
