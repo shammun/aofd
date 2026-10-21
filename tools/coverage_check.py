@@ -56,7 +56,16 @@ def check(chapter: str, nb_path: Path | None = None, executed: bool = False) -> 
     import nbkit
 
     book = yaml.safe_load((ROOT / "book.yaml").read_text(encoding="utf-8"))
-    row = next(c for c in book["chapters"] if c["id"] == chapter)
+    row = next((c for c in book["chapters"] if c["id"] == chapter), None)
+    if row is None:                       # a Chapter 0 part (ch00a/b/c) has no book sections of its own
+        for c in book["chapters"]:
+            part = next((q for q in c.get("parts", []) if q["id"] == chapter), None)
+            if part:
+                row = {**c, **part, "sections": []}
+                break
+    if row is None:
+        raise SystemExit(f"{chapter} not in book.yaml")
+    soft_cap = chapter.startswith("ch00")  # Q11: Chapter 0 explainer count is a soft target (warning only)
     errors: list[str] = []
     warns: list[str] = []
     path = nb_path or (ROOT / "notebooks" / f"{chapter}_{row['slug']}.ipynb")
@@ -110,7 +119,8 @@ def check(chapter: str, nb_path: Path | None = None, executed: bool = False) -> 
     n_viz = len(set(nbkit.explainer_calls(path))) if nb_path is None else sum(
         1 for c in nb.cells if c.cell_type == "code" and "show_viz(" in c.source)
     if not (lo <= n_viz <= hi):
-        errors.append(f"{n_viz} explainers embedded (need {lo}–{hi})")
+        msg = f"{n_viz} explainers embedded (need {lo}–{hi})"
+        (warns if soft_cap else errors).append(msg + (" — Chapter 0 soft target (about 12 per part)" if soft_cap else ""))
 
     # 5 ledger
     design = ROOT / "analysis" / f"{chapter}_design.md"

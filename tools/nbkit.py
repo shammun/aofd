@@ -406,7 +406,8 @@ class ChapterNotebook:
         self.explainers.append(slug)
         try_md = "\n".join(f"- {t}" for t in tries)
         self.md(f"#### 🎮 Interactive: {heading}\n\n{textwrap.dedent(why).strip()}\n\n**What to try:**\n{try_md}")
-        self.code(f'show_viz("{self.chapter}", "{slug}")   # full-width explainer; ⤢ Full screen for more room',
+        viz_ch = self.row.get("part_of", self.chapter)          # Chapter 0 parts share viz/ch00/
+        self.code(f'show_viz("{viz_ch}", "{slug}")   # full-width explainer; ⤢ Full screen for more room',
                   tags=["explainer"])
         return self
 
@@ -443,18 +444,20 @@ class ChapterNotebook:
                   ["recap", "kundu-recap"])
         return self
 
-    def scratch_vs_lib(self, eq: str, scratch_src: str, lib_src: str, explain: str | None = None) -> "ChapterNotebook":
+    def scratch_vs_lib(self, eq: str, scratch_src: str, lib_src: str, explain: str | None = None,
+                       eq_tex: str = "") -> "ChapterNotebook":
         """🐍 From scratch, then the library: two cells for equation ``eq`` ("2.12", "K 13.15", "B.3.9", "0A.1").
+        ``eq_tex`` is the equation itself (shown next to its number — never the number alone, CLAUDE.md rule 3).
         The scratch cell must not call fluidpy/aofd; the library cell must assert that both agree."""
         if re.search(r"\b(fluidpy|aofd)\.", scratch_src) or re.search(r"^\s*(from|import)\s+(fluidpy|aofd)\b", scratch_src, re.M):
             raise ValueError(f"eq {eq}: the from-scratch cell calls the library — it must compute by hand")
         if not re.search(r"assert_allclose|assert ", lib_src):
             raise ValueError(f"eq {eq}: the library cell must assert that scratch and library agree")
         tag = "eq:" + eq.replace(" ", "")
-        self.md(f"#### 🐍 From scratch — Eq. ({eq})")
+        self.md(f"#### 🐍 From scratch — ${eq_tex.strip()}$ ({eq})" if eq_tex else f"#### 🐍 From scratch — Eq. ({eq})")
         self.code(scratch_src, tags=["from-scratch", tag])
         self.code(lib_src, explain=explain, tags=["library-check", tag])
-        self.ledger.append({"eq": eq, "tag": tag, "status": "coded", "core": self.current_core})
+        self.ledger.append({"eq": eq, "tex": eq_tex, "tag": tag, "status": "coded", "core": self.current_core})
         return self
 
     def ledger_row(self, eq: str, status: str, why: str = "") -> "ChapterNotebook":
@@ -469,7 +472,8 @@ class ChapterNotebook:
         """The equation-code ledger table for the current block (eq → cell tag → status)."""
         rows = [r for r in self.ledger if r.get("core") == self.current_core] or self.ledger
         table = "| Eq. | Cell tag | Status |\n|---|---|---|\n" + "\n".join(
-            f"| ({r['eq']}) | `{r['tag']}` | {r.get('kind', r['status'])} |" for r in rows)
+            f"| {('$' + r['tex'] + '$ ') if r.get('tex') else ''}({r['eq']}) | `{r['tag']}` | {r.get('kind', r['status'])} |"
+            for r in rows)
         self._add(nbf.v4.new_markdown_cell(f"**📒 Equation-code ledger**\n\n{table}"), ["ledger"])
         return self
 
