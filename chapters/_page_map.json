@@ -1,0 +1,160 @@
+{
+  "pdf_pages": 966,
+  "printed_offset": 20,
+  "chapters": {
+    "ch01": {
+      "title": "Equations of Motion",
+      "pdf_start": 23,
+      "pdf_end": 74,
+      "printed_start": 3,
+      "printed_end": 54
+    },
+    "ch02": {
+      "title": "Effects of Rotation and Stratification",
+      "pdf_start": 75,
+      "pdf_end": 124,
+      "printed_start": 55,
+      "printed_end": 104
+    },
+    "ch03": {
+      "title": "Shallow Water Systems",
+      "pdf_start": 125,
+      "pdf_end": 162,
+      "printed_start": 105,
+      "printed_end": 142
+    },
+    "ch04": {
+      "title": "Vorticity and Potential Vorticity",
+      "pdf_start": 163,
+      "pdf_end": 190,
+      "printed_start": 143,
+      "printed_end": 170
+    },
+    "ch05": {
+      "title": "Geostrophic Theory",
+      "pdf_start": 191,
+      "pdf_end": 232,
+      "printed_start": 171,
+      "printed_end": 212
+    },
+    "ch06": {
+      "title": "Wave Fundamentals",
+      "pdf_start": 235,
+      "pdf_end": 270,
+      "printed_start": 215,
+      "printed_end": 250
+    },
+    "ch07": {
+      "title": "Gravity Waves",
+      "pdf_start": 271,
+      "pdf_end": 316,
+      "printed_start": 251,
+      "printed_end": 296
+    },
+    "ch08": {
+      "title": "Linear Dynamics at Low Latitudes",
+      "pdf_start": 317,
+      "pdf_end": 354,
+      "printed_start": 297,
+      "printed_end": 334
+    },
+    "ch09": {
+      "title": "Barotropic and Baroclinic Instability",
+      "pdf_start": 355,
+      "pdf_end": 398,
+      "printed_start": 335,
+      "printed_end": 378
+    },
+    "ch10": {
+      "title": "Waves, Mean Flows, and their Interaction",
+      "pdf_start": 399,
+      "pdf_end": 432,
+      "printed_start": 379,
+      "printed_end": 412
+    },
+    "ch11": {
+      "title": "Basics of Incompressible Turbulence",
+      "pdf_start": 433,
+      "pdf_end": 464,
+      "printed_start": 413,
+      "printed_end": 444
+    },
+    "ch12": {
+      "title": "Geostrophic Turbulence and Baroclinic Eddies",
+      "pdf_start": 465,
+      "pdf_end": 492,
+      "printed_start": 445,
+      "printed_end": 472
+    },
+    "ch13": {
+      "title": "Turbulent Diffusion and Eddy Transport",
+      "pdf_start": 493,
+      "pdf_end": 528,
+      "printed_start": 473,
+      "printed_end": 508
+    },
+    "ch14": {
+      "title": "The Overturning Circulation: Hadley and Ferrel Cells",
+      "pdf_start": 531,
+      "pdf_end": 558,
+      "printed_start": 511,
+      "printed_end": 538
+    },
+    "ch15": {
+      "title": "Zonally Averaged Mid-Latitude Atmospheric Circulation",
+      "pdf_start": 559,
+      "pdf_end": 604,
+      "printed_start": 539,
+      "printed_end": 584
+    },
+    "ch16": {
+      "title": "Planetary Waves and Zonal Asymmetries",
+      "pdf_start": 605,
+      "pdf_end": 646,
+      "printed_start": 585,
+      "printed_end": 626
+    },
+    "ch17": {
+      "title": "The Stratosphere",
+      "pdf_start": 647,
+      "pdf_end": 692,
+      "printed_start": 627,
+      "printed_end": 672
+    },
+    "ch18": {
+      "title": "Water Vapour and the Tropical Atmosphere",
+      "pdf_start": 693,
+      "pdf_end": 748,
+      "printed_start": 673,
+      "printed_end": 728
+    },
+    "ch19": {
+      "title": "Wind-Driven Gyres",
+      "pdf_start": 751,
+      "pdf_end": 780,
+      "printed_start": 731,
+      "printed_end": 760
+    },
+    "ch20": {
+      "title": "Structure of the Upper Ocean",
+      "pdf_start": 781,
+      "pdf_end": 820,
+      "printed_start": 761,
+      "printed_end": 800
+    },
+    "ch21": {
+      "title": "The Meridional Overturning Circulation and the Antarctic Circumpolar Current",
+      "pdf_start": 821,
+      "pdf_end": 880,
+      "printed_start": 801,
+      "printed_end": 860
+    },
+    "ch22": {
+      "title": "Equatorial Circulation and El Ni\u00f1o",
+      "pdf_start": 881,
+      "pdf_end": 928,
+      "printed_start": 861,
+      "printed_end": 908
+    }
+  }
+}

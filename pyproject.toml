@@ -1,0 +1,25 @@
+# The AOFD book glue package `aofd` (parameter sets, notebook helpers, figure wrappers). All reusable physics and data
+# access live in the shared library fluidpy (../Fluid Dynamics, installed editable locally; a pinned git tag on Colab).
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aofd"
+dynamic = ["version"]
+description = "Vallis, Atmospheric and Oceanic Fluid Dynamics (2nd ed.), learned through Python, 3-D explainers and movies — book glue"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Shammunul Islam" }]
+dependencies = ["fluidpy[geo,data]>=0.3.0", "pyyaml>=6.0"]
+
+[project.urls]
+Homepage = "https://shammun.github.io/aofd/"
+Source = "https://github.com/shammun/aofd"
+
+[tool.setuptools.dynamic]
+version = { attr = "aofd.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["aofd*"]

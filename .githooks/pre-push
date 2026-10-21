@@ -1,0 +1,7 @@
+#!/bin/sh
+# 1) no credentials in any commit being pushed; 2) nothing book-derived (CLAUDE.md rule 10); 3) size budget.
+# Installed once with: git config core.hooksPath .githooks
+PY=".venv/Scripts/python.exe"; [ -x "$PY" ] || PY=python
+"$PY" tools/check_secrets.py --push || exit 1
+"$PY" tools/check_public.py || exit 1
+if [ -f tools/size_budget.py ]; then exec "$PY" tools/size_budget.py; fi

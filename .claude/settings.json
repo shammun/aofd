@@ -1,0 +1,45 @@
+{
+  "env": {
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1"
+  },
+  "permissions": {
+    "additionalDirectories": [
+      "C:\\Users\\sislam27\\Work\\Climate Dynamics PHD\\Fluid Dynamics",
+      "C:\\Users\\sislam27\\Work\\Climate Dynamics PHD\\AOFD Media",
+      "G:\\Geophysical Fluid Dynamics\\aofd-data"
+    ],
+    "allow": [
+      "Bash(.venv/Scripts/python.exe:*)", "Bash(.venv\\Scripts\\python.exe:*)", "Bash(.venv-tts/Scripts/python.exe:*)",
+      "Bash(pytest:*)", "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)",
+      "Bash(git commit:*)", "Bash(git fetch:*)", "Bash(git rev-parse:*)", "Bash(git ls-files:*)", "Bash(git tag:*)",
+      "Bash(git -C:*)", "Bash(git push:*)", "Bash(git describe:*)",
+      "Bash(npx remotion:*)", "Bash(npm ci:*)", "Bash(npm run:*)", "Bash(ffprobe:*)", "Bash(ffmpeg:*)", "Bash(node:*)",
+      "Bash(ls:*)", "Bash(mkdir:*)", "Bash(cp:*)", "Bash(grep:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(wc:*)",
+      "Bash(curl:*)", "Read", "Write", "Edit", "Glob", "Grep", "WebSearch", "WebFetch"
+    ],
+    "deny": [
+      "Edit(*.pdf)", "Write(*.pdf)",
+      "Bash(git push --force:*)", "Bash(git push -f:*)", "Bash(git push --force-with-lease:*)",
+      "Bash(gh repo create:*)", "Bash(gh repo delete:*)", "Bash(gh api -X POST repos/*/pages:*)",
+      "Bash(git config core.hooksPath:*)", "Bash(npm i -g:*)", "Bash(rm -rf:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR/.venv/Scripts/python.exe\" \"$CLAUDE_PROJECT_DIR/tools/progress.py\" --brief" } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash|PowerShell", "hooks": [ { "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR/.venv/Scripts/python.exe\" \"$CLAUDE_PROJECT_DIR/tools/hooks/guard_bash.py\"" } ] },
+      { "matcher": "Write|Edit|MultiEdit|NotebookEdit", "hooks": [ { "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR/.venv/Scripts/python.exe\" \"$CLAUDE_PROJECT_DIR/tools/hooks/guard_write.py\"" } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Write|Edit|MultiEdit", "hooks": [ { "type": "command",
+        "command": "\"$CLAUDE_PROJECT_DIR/.venv/Scripts/python.exe\" \"$CLAUDE_PROJECT_DIR/tools/hooks/post_write.py\"" } ] }
+    ]
+  },
+  "_hooks_doc": "PLANNING §7. guard_bash: staged-path rules, no force-push, origin = shammun/aofd, check_secrets.py --push + check_public.py + size_budget.py before push, Kundu site read-only. guard_write: no *.pdf, no Kundu-site writes, _private read-only except compare/, no >10 MB outside data/derived, no credentials. post_write: viz_lint --quick, fluidpy geo/data/diag pyflakes + docstring contract, storyboard/registry schema. Git hooks (.githooks, core.hooksPath): pre-commit = check_secrets.py --staged + staged-path/size rules; pre-push = check_secrets.py --push + check_public.py (+ size_budget.py)."
+}

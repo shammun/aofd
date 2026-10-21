@@ -1,0 +1,67 @@
+# AOFD Vallis — public repo shammun/aofd. PLANNING §2.6 + the credential block from the 2026-10-20 session.
+
+# --- environments and caches ---
+.venv/
+.venv-*/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+*.log
+~$*
+~WRL*.tmp
+
+# --- never public: the book and anything derived from it (CLAUDE.md rule 9) ---
+*.pdf
+*.zip
+*.docx
+chapters/*
+!chapters/_page_map.json
+_private/
+tests/book_values_*.json
+
+# --- local products ---
+outputs/
+reports/viz/
+reports/movies/
+notebooks/executed_*.ipynb
+
+# --- data: raw downloads live on G:, only small derived products are committed ---
+*.nc
+*.npz
+*.zarr/
+!data/derived/**/*.nc
+!data/derived/**/*.npz
+data/raw/
+data/cache/
+
+# --- movies ---
+movies/out/
+movies/.cache/
+movies/**/audio/
+
+# --- credentials: never commit (tools/check_secrets.py also blocks them in hooks) ---
+.cdsapirc
+*netrc
+.env
+.env.*
+*credential*
+*secret*
+!tools/check_secrets.py
+!tools/secrets_vault.py
+!tools/setup_credentials.py
+!CREDENTIALS_GUIDE.md
+*.pem
+*.key
+*.p12
+.copernicusmarine*
+# screenshots and scans dropped in the repo root (they can show passwords/tokens)
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.webp
+/*.heic
+/*.pdf

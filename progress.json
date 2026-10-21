@@ -1,0 +1,32 @@
+{
+  "project": "aofd",
+  "current_chapter": "ch00",
+  "library_pin": "v0.3.0",
+  "setup": {
+    "s01_git": "pass",
+    "s02_copy": "pass",
+    "s03_fluidpy": "running",
+    "s04_venv": "pass",
+    "s05_split": "pass",
+    "s06_rules": "running",
+    "s07_kundu_index": "todo",
+    "s08_viz3d": "todo",
+    "s09_movies": "todo",
+    "s10_selftests": "todo",
+    "poc": {"A": "todo", "B": "todo", "C": "todo", "D": "todo", "E": "todo", "F": "todo", "G": "todo"},
+    "notes": "setup session 2026-10-20; §15.8 items verified (venvs, kernel, Remotion 4.0.537, ffmpeg 9.0.2, data root on G:)",
+    "updated": "2026-10-20"
+  },
+  "chapters": {
+    "ch00": {
+      "analyze": "todo", "scout": "todo", "curate": "todo", "crossref": "todo", "design": "todo",
+      "implement": "todo", "data": "todo", "verify": "todo", "review": "todo", "code_review": "todo",
+      "viz": "todo", "viz3d": "todo", "figures": "todo", "notebook": "todo", "knowledge": "todo",
+      "library": "todo", "publish": "todo",
+      "parts": ["ch00a", "ch00b", "ch00c"],
+      "movies": {"m0_1_climate_machine": "todo", "m0_2_spinning_planet": "todo", "m0_3_read_a_climate_map": "todo"},
+      "explainers": [], "scenes3d": [], "figures_list": [], "fluidpy_tag": "v0.3.0",
+      "notes": "", "updated": "2026-10-20"
+    }
+  }
+}

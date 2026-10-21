@@ -1,0 +1,26 @@
+# Data, geoscience and mapping stack — PLANNING §2.7, research R3 §4.1
+xarray
+dask[array]
+netCDF4
+pydap            # OPeNDAP on Windows: netCDF4's bundled curl fails TLS (CA cert), pydap uses requests
+h5netcdf
+zarr
+fsspec
+gcsfs
+aiohttp
+pooch
+requests
+cdsapi
+earthaccess
+gsw
+xgcm
+copernicusmarine
+metpy
+cartopy
+shapely
+pyproj
+pyshp
+cmocean
+scikit-image
+# Optional / Windows-fragile, installed only when a chapter needs them (R3 §6.4):
+# ecco_v4_py, neutralocean, copernicusmarine, easyclimate, climlab, windspharm, dedalus

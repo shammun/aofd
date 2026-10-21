@@ -1,0 +1,6 @@
+#!/bin/sh
+# 1) no credentials (tokens, passwords, key files, root screenshots); 2) no private/book-derived paths, no file > 10 MB,
+# no Colab twin with outputs (PLANNING §7.2). Installed once with: git config core.hooksPath .githooks
+PY=".venv/Scripts/python.exe"; [ -x "$PY" ] || PY=python
+"$PY" tools/check_secrets.py --staged || exit 1
+exec "$PY" tools/hooks/precommit_paths.py

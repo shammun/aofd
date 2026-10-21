@@ -1,0 +1,262 @@
+---
+name: verify-implementation
+description: How to prove that Python written from a textbook's equations is correct when there is no reference implementation — the V1-V7 evidence ladder, tolerances, test skeletons and report format, plus the AOFD additions: the GFD benchmark catalogue (RAPID 17 Sv, QBO ≈ 28 months, Kelvin h_e ≈ 25 m, Munk width, Eady 0.31 f Λ/N), data-figure checks, JS/GPU/drawing parity, library tests in the fluidpy repo, and why scratch-vs-library parity is not evidence. Load when testing, verifying or reviewing any chapter.
+---
+
+# verify-implementation — evidence that the physics is right
+
+The book ships no code, so there is nothing to diff against. Correctness is established by making the mathematics test
+itself. Evidence is proportional to the curation tier (`analysis/chNN_curation.md` §2): every computable **CORE** item
+(every depth-A, load-bearing idea of the chapter) needs **at least two independent evidence levels**, at least one of them V1, V2, V3 or
+V5; a conceptual CORE item with no computable output gets a demonstration test (the notebook's code for it runs and
+asserts its point); coded **NOTE** items at least one level; every function the notebook or an explainer calls (design
+Part C) at least a smoke test with a physical sanity assertion. RECAP items were tested in their own chapter; SKIP
+items are not coded.
+"Independent" means a bug that fools one level must not fool the other: an analytic check and a symbolic check of the
+*same* wrong equation are not independent; an analytic check plus a conservation check are.
+
+---
+
+## V1 — Analytic truth (the strongest, use it wherever a closed form exists)
+Compare the code to an exact solution of the *same* problem on a field of points, not at one point.
+
+Classic exact solutions to test against (state which one, and its assumptions, in the test name):
+Couette and plane/pipe Poiseuille flow · Stokes' first (Rayleigh) and second problems (erf / exponentially damped
+oscillation) · starting/decaying flows by separation of variables · Lamb–Oseen and Rankine vortices · potential-flow
+superpositions (source+sink+uniform = Rankine oval, doublet = cylinder, with and without circulation; the Kutta–
+Joukowski lift) · hydrostatics and manometry · 1-D isentropic relations, normal-shock jump conditions, Prandtl–Meyer ·
+the Sod shock-tube exact solution · Stokes flow past a sphere (drag 6πμaU) · Womersley pulsatile flow · linear
+gravity/acoustic wave dispersion relations · Ekman and Stokes layers.
+
+```python
+def test_stokes_first_problem_matches_erf():
+    y = np.linspace(0, 0.05, 200); t, nu, U = 2.0, 1e-6, 1.0
+    u = ch05.stokes_first_problem(y, t, nu, U)
+    exact = U * erfc(y / (2 * np.sqrt(nu * t)))          # Book Eq. (5.31)
+    assert np.max(np.abs(u - exact)) < 1e-10
+```
+
+## V2 — Symbolic re-derivation (sympy) and dimensional homogeneity
+Two distinct checks:
+1. **Residual check** — substitute the coded solution into the governing equation and simplify to zero:
+```python
+import sympy as sp
+y, h, mu, dpdx = sp.symbols("y h mu dpdx", positive=True)
+u = dpdx / (2*mu) * (y**2 - h**2)                        # Book Eq. (5.14)
+assert sp.simplify(mu * sp.diff(u, y, 2) - dpdx) == 0    # governing equation
+assert sp.simplify(u.subs(y,  h)) == 0                   # no-slip, Eq. (5.15)
+```
+2. **Dimensional homogeneity** — every term of every implemented equation must have the same dimensions. Use
+   `fluidpy/core/units.py` (a `pint` registry) and assert the function's output unit:
+```python
+from fluidpy.core.units import Q_, dimensional_check
+def test_dynamic_pressure_units():
+    dimensional_check(lambda rho, U: 0.5*rho*U**2, "pressure", rho=Q_(998, "kg/m**3"), U=Q_(2, "m/s"))
+```
+A dimensional-homogeneity test catches ν↔μ, missing ρ and missing ½ faster than any other test.
+
+## V3 — Convergence / order of accuracy (for every discretisation)
+Refine and measure; do not eyeball. `tools/convergence.py` provides `observed_order(h, err)` (least-squares slope of
+log err vs log h) and `richardson(f_coarse, f_fine, p)`.
+* With an **exact solution**: errors at h, h/2, h/4 → observed order within ±0.15 of the design order.
+* Without one: **method of manufactured solutions** — pick a smooth analytic field, substitute it into the operator to
+  get a source term, solve with that source, and measure the error against the manufactured field.
+* Also assert the *stability* limit the book states (CFL, diffusion number): the scheme must blow up just above it and
+  be stable just below.
+```python
+def test_laplacian_second_order():
+    hs, errs = [], []
+    for n in (32, 64, 128, 256):
+        x = np.linspace(0, 1, n+1); u = np.sin(2*np.pi*x)
+        num = core.operators.laplacian_1d(u, x[1]-x[0])
+        errs.append(np.max(np.abs(num[1:-1] + (2*np.pi)**2*u[1:-1]))); hs.append(x[1]-x[0])
+    assert abs(observed_order(hs, errs) - 2.0) < 0.15
+```
+
+## V4 — Conservation laws and invariants
+Assert the budget, not the vibe: total mass, momentum and energy; `div(u)` to machine precision for an incompressible
+solver; circulation (Kelvin's theorem) for an inviscid barotropic flow; vorticity in 2-D inviscid flow; entropy
+non-decreasing across a shock; Bernoulli constant along a streamline in steady inviscid flow; the Reynolds transport
+identity between the integral and differential forms the book derives.
+Report the residual as a number in the verification report; a solver whose mass drifts by 1e-3 per step is broken even
+if the picture looks right.
+
+## V5 — Published benchmarks (with a citation, never from memory)
+Store the numbers in `reference/chNN/` via `make_refs.py`, and record each in `reference/chNN/SOURCES.md`
+(value, source, DOI/URL, date verified). `tools/benchmarks.py` holds the ones already digitised.
+Candidates — **verify each against the cited source before using it**:
+
+| Benchmark | Value to reproduce | Usual source |
+|---|---|---|
+| Blasius flat plate | f''(0) = 0.332057; δ99 = 5.0 x/√Re_x; c_f = 0.664/√Re_x | Howarth (1938); Schlichting |
+| Falkner–Skan | separation at β = −0.198838 | Schlichting, *Boundary-Layer Theory* |
+| Lid-driven cavity | centreline u and v profiles at Re = 100/400/1000 | Ghia, Ghia & Shin, JCP 48 (1982) |
+| Sod shock tube | densities/pressures at t = 0.2 | Sod, JCP 27 (1978) — or your own exact Riemann solver |
+| Pipe friction | f = 64/Re (laminar); Colebrook–White implicit form; Moody chart | Moody (1944); Colebrook (1939) |
+| Rayleigh–Bénard | Ra_c = 1707.762 (rigid–rigid), 657.51 (free–free) | Chandrasekhar (1961) |
+| Plane Poiseuille stability | Re_c = 5772.22 at α = 1.02056 | Orszag, JFM 50 (1971) |
+| Taylor–Couette | critical Taylor number, narrow gap | Taylor (1923); Chandrasekhar |
+| Sphere/cylinder drag | C_D = 24/Re (Stokes); standard drag curve; Strouhal ≈ 0.2 in the vortex-shedding range | Schlichting; Roshko (1954) |
+| Turbulent channel | law of the wall u+ = y+ and u+ = (1/κ)ln y+ + B, κ ≈ 0.41, B ≈ 5.0–5.2; DNS profiles at Re_τ = 180 | Kim, Moin & Moser, JFM 177 (1987) |
+| Fluid properties | ρ, μ, c_p of water/air vs T | NIST / CoolProp / the ICAO standard atmosphere |
+
+## V5b — GFD and climate benchmarks for Vallis (AOFD)
+Same rule: cite and date each in `reference/chNN/SOURCES.md`; verify against the source before use.
+
+| Benchmark | Value to reproduce | Usual source |
+|---|---|---|
+| AMOC at 26.5°N | ≈ 17 Sv (time mean, RAPID 2004–) | RAPID-MOCHA `moc_transports.nc`; McCarthy et al. 2015 |
+| QBO | period ≈ 28 months; amplitude max near 10–20 hPa; descent ≈ 1 km/month | FU Berlin Singapore winds; Baldwin et al. 2001 |
+| Convectively coupled Kelvin waves | spectral peak along equivalent depth h_e ≈ 12–50 m (≈ 25 m) | Wheeler & Kiladis 1999 |
+| Munk boundary layer | width δ_M = (A_H/β)^{1/3} (≈ 50–80 km for A_H = 1–5×10⁴ m² s⁻¹) | Munk 1950; Vallis ch. 19 |
+| Eady growth rate | σ_max ≈ 0.31 f Λ / N (Λ = ∂U/∂z) at k L_d ≈ 1.61 | Eady 1949; Vallis ch. 9 |
+| Subtropical Sverdrup transport | ψ ≈ 30 Sv (N Atlantic), subpolar ≈ −20 Sv | from observed wind-stress curl |
+| ACC fronts south of Africa | PF ≈ 50°S, SAF ≈ 45°S | Orsi et al. 1995 |
+| Deformation radius | atmosphere ≈ 1000 km; ocean mid-latitudes ≈ 30–50 km | Chelton et al. 1998 |
+| Inertial oscillation | period 2π/f (≈ 17 h at 45°) | analytic (V1) |
+| Standard atmosphere | scale height ≈ 7–8 km; 500 hPa ≈ 5.5 km | ICAO / US Standard Atmosphere 1976 |
+
+### Data-figure checks (`tests/test_figs_chNN.py`, skill `figure-reproduction`)
+2–4 independent published numbers per data figure (table above), plus: orientation (latitude not flipped — check a
+known point such as the warm-pool maximum near 150°E or the Antarctic coast at the bottom of a S-polar map), sign
+convention of every streamfunction stated and tested, units, licence flag of any committed product, file size, and the
+pseudo-data stamp when `synthetic: true`. A figure that "looks like the book" is not evidence; its numbers are.
+
+### JS, GPU and drawing parity (explainers, scenes, movies)
+- JS ↔ Python `selftest()` rows (rtol stated, typically 1e-9–1e-12 for closed forms).
+- **GPU ↔ CPU read-back rows** for shader physics (`readRenderTargetPixels`, FloatType): float32 tolerance
+  (rtol 1e-4 – 1e-5) stated in the row; never loosened to pass.
+- **Drawing invariants**: cross-product result ⟂ both inputs (|r·a| < 1e-9), Ekman transport ⟂ wind, isosurface
+  volume/area vs Python ±2 %, decoded data-texture values vs the Python array.
+- Movies: `movie_qa.py` re-runs each `manifest.json` function and compares hashes.
+
+### Scratch-vs-library parity is not evidence
+Every `eq:` cell asserts that the from-scratch code agrees with the `fluidpy` function (skill `from-scratch-code`). That
+is teaching, not verification: both can share the same transcription mistake. Library evidence comes only from V1–V7
+tests in `../Fluid Dynamics/tests/{geo,data,diag}/` (library) and `tests/test_chNN.py` (chapter level). The fluidpy full
+suite, including every Kundu chapter, must stay green after any library change.
+
+## V6 — Numbers and figures the book prints
+Grep `chapters/chNN.txt` for `= `, `%`, `Re =`, "approximately", worked-example answers and table captions. Reproduce
+each and tabulate `book value | our value | relative error | comment`. Because these are book-derived, keep the raw
+table **private**: put the values in `tests/book_values_chNN.json` (git-ignored) and guard the tests with
+
+```python
+BOOK = Path("tests/book_values_ch05.json")
+book_only = pytest.mark.skipif(not BOOK.exists(), reason="book values are private; see CLAUDE.md rule 9")
+```
+The published report may say "reproduces the book's Example 5.3 to 0.2 %" — not the book's table itself.
+
+## V7 — Limits, symmetry and invariance (cheap, catches sign errors)
+Asymptotic limits (Re → 0 and → ∞, μ → ∞, Ma → 0, γ → 1, gap → 0) · symmetry (mirror the geometry, the solution must
+mirror) · Galilean invariance (add a uniform velocity; the pressure field must not change) · rotational invariance of
+tensor quantities · monotonicity (drag must increase with speed) · positivity (density, absolute temperature,
+turbulent kinetic energy) · reciprocity in Stokes flow.
+
+---
+
+## Default tolerances
+| Quantity | Pass |
+|---|---|
+| closed-form comparison, analytic function | ≤ 1e-10 relative |
+| ODE/BVP solution vs exact (rtol=1e-8 solver) | ≤ 1e-6 relative |
+| observed order of accuracy | within ±0.15 of design order (±0.25 if the error range spans < 2 decades) |
+| conservation residual, incompressible divergence | ≤ 1e-12 absolute (machine) or the stated truncation error |
+| published benchmark table | ≤ 1 % of the reported value unless the source states its own uncertainty |
+| digitised-from-a-plot benchmark | ≤ 3 %, and say "digitised" in the report |
+| book-quoted value | ≤ 0.5 %, or explain the difference (rounding in the book, different property table) |
+Tighten these where the algorithm is deterministic. **Never loosen one to make a test pass.**
+
+## Test file skeleton (`tests/test_chNN.py`)
+```python
+import numpy as np, pytest, sympy as sp
+from pathlib import Path
+from tools.convergence import observed_order
+from tools.benchmarks import BLASIUS
+from fluidpy import ch09_boundary_layers as ch7   # (illustrative)
+
+REF = Path("reference/ch07")
+needs_ref = pytest.mark.skipif(not REF.exists(), reason="run reference/ch07/make_refs.py")
+
+def test_blasius_wall_shear_benchmark():            # V5
+    eta, f = ch7.blasius_similarity()
+    assert abs(f[2, 0] - BLASIUS["fpp0"]) < 1e-5    # Howarth (1938), see reference/ch07/SOURCES.md
+
+def test_blasius_satisfies_ode():                   # V2 (independent of the benchmark)
+    eta, f = ch7.blasius_similarity()
+    res = np.gradient(f[2], eta) + 0.5 * f[0] * f[2]
+    assert np.max(np.abs(res[10:-10])) < 1e-6
+
+def test_blasius_far_field_limit():                 # V7
+    eta, f = ch7.blasius_similarity(eta_max=12.0)
+    assert abs(f[1, -1] - 1.0) < 1e-8
+```
+Run with `.venv/Scripts/python.exe -m pytest tests/test_chNN.py -q -p no:cacheprovider`.
+
+## Report format (`reports/chNN_verification.md`)
+```
+# Chapter N verification — <title>                     date, commit hash
+## Environment: python x.y, numpy, scipy, sympy versions
+## Validation table
+| Concept / Eq. | Tier | fluidpy target | Evidence (V-levels) | Numbers (error, order, residual) | Label | Notes |
+## Functions used by the notebook and explainers (design Part C) — test name each
+## Convergence studies (scheme | grids | observed order | design order)
+## Conservation / invariant residuals
+## Benchmarks used (value | our value | source + DOI | date verified)
+## Numbers from the text (book vs ours)  [private values redacted to percentages]
+## Figures reproduced with our code (figure number | outputs/chNN/verify/<png> (local) | one-sentence visual verdict)
+## Deviations & justifications (every `# DEVIATION` in the code appears here)
+## Open items (anything qualitative/unverified, missing benchmark, needs user)
+## Verdict: PASS / FAIL
+```
+
+## Failure loop
+If a test fails: (1) check the *test* first — wrong reference length, degrees vs radians, a benchmark quoted at a
+different Reynolds number, comparing a non-dimensional result to a dimensional one; (2) then the code; (3) rerun.
+Maximum 3 rounds, then write the discrepancy in Open items with your best hypothesis and stop.
+
+Hypotheses that explain most failures in this domain, in the order they actually occur:
+sign convention (pressure gradient, stress tensor, y-axis direction) · a factor of 2 or ½ (dynamic pressure, half-gap
+vs full gap, half-angle) · ν vs μ · the wrong reference length or velocity in a Reynolds number · boundary condition
+applied at the node instead of the face (half-cell offset) · degrees vs radians · gauge vs absolute pressure ·
+per-unit-depth vs total force · a non-dimensionalisation that changed between book sections · an equation the book
+states for one regime being used in another.
+
+## Lessons (the knowledge-keeper appends; one line each, dated by chapter)
+- (ch01) Prove a test discriminates: copy `fluidpy/` to the scratchpad, patch in the most likely wrong variant (e.g.
+  divide by the environment instead of the parcel density), run the test, and record that it fails. Six ch01 parcel
+  tests passed on the wrong variant.
+- (ch01) An exact first integral (energy of the un-linearised ODE) or another invariant pins a factor that limits and
+  linearised solutions cannot see; measure it as ptp/scale with a tolerance well above the integrator's O(dt²).
+- (ch01) Labels mean what they say: V4 only for a conservation law or a state-function invariant; invariance under a
+  change of units or sign convention is V7; an algebraic identity (θρ_θ = p_ref/R) is V1; a closed form evaluated at
+  shrinking dz is V1, not V3.
+- (ch01) Statistical checks: seed the generator and set the tolerance at 5 standard errors of the estimator.
+- (ch01) Primary benchmark sources can carry errata (USSA-1976 Table 2's Sutherland S and r0 are corrected by the
+  errata sheet bound into the same PDF) and old unit conventions (EOS-80 in IPTS-68): read the whole document.
+- (ch01) Book worked examples (inputs or results) never go into the public test file — only into the private
+  `tests/book_values_chNN.json` V6 test; the public test uses its own inputs and the analytic formula.
+- (ch01) ★★★ symbolic checks re-run the derivation's own construction step by step (build the groups as step 9 says,
+  test step 12 for an arbitrary Gibbs function), not only the final identity.
+- (ch01) Docstring validation text goes stale after test changes ("not yet pinned", "benchmark pending"): grep for
+  such phrases before the verdict.
+- (ch14) Before a cited curve is used as V5, write down which quantity it is a ratio of and its value at the start,
+  and check both against the chapter's conservation law (Wagner's lift ratio sat on a circulation axis in five
+  documents; no mutant could see it). Each member of a printed chain of equalities gets its own check.
+- (ch15) A review fix gets its own pin shown to fail on the pre-fix code, and pre-fix against post-fix are compared on
+  every call the fix should not change (here max difference 0.0 on every air call).
+- (ch15) Audit docstring labels by script: every test cited in a `Validation:` line exists and calls the function, and
+  every claimed V-level appears in a cited test's name or header (`outputs/ch15/_verify_scratch/label_audit.py`);
+  tables carry "V7 (structure)" — there is no analytic truth in a table.
+- (ch15) A physics-changing slip is confirmed by at least two independent routes before it is coded corrected
+  (finite differences of a closed form, sympy on the linearised laws, sympy on the finite laws).
+- (ch16) A sign slip in a printed nonlinear PDE may change nothing until the order where the nonlinear term first acts
+  (Dean (16.174): c₂ unchanged, c₄ +1.5 %): solve the equations independently in another form (here a spectral
+  Navier–Stokes solve) and compare at that order, not only at the leading ones.
+- (ch16) "V3" only with an asserted refinement order; an independent-route agreement is a V1 cross-check, and a
+  characteristic transport at Courant number 1 is exact (nothing to refine). Guarded functions get a
+  `-W error::RuntimeWarning` run, and the guard itself a test on both sides of the limit and at the round-off allowance.
+
+## Public-repo rule
+Benchmark tables are committed only with a citable public source. Book tables, page crops and figure comparisons stay
+local (`tests/book_values_*.json`, `reports/**/figures/` — both git-ignored). `tools/check_public.py` enforces it.

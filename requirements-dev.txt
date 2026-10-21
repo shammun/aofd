@@ -1,0 +1,24 @@
+# Core stack (as fluidpy's requirements.txt) — PLANNING §2.7
+numpy
+scipy
+sympy
+matplotlib
+pandas
+pint
+pyyaml
+plotly
+ipywidgets
+imageio-ffmpeg
+pytest
+pytest-xdist
+jupyter
+ipykernel
+nbformat
+nbconvert
+nbclient
+pypdf
+pymupdf
+playwright
+python-docx
+pyflakes
+keyring

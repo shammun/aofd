@@ -1,0 +1,37 @@
+{
+  "name": "movies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "render:empty": "remotion render src/index.ts Empty out/empty.mp4",
+    "render": "remotion render src/index.ts",
+    "still": "remotion still src/index.ts",
+    "versions": "remotion versions"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@remotion/captions": "4.0.537",
+    "@remotion/cli": "4.0.537",
+    "@remotion/media-utils": "4.0.537",
+    "@remotion/three": "4.0.537",
+    "d3-geo": "3.1.1",
+    "katex": "0.19.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.537",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "3.1.1",
+    "@types/react": "19.3.0",
+    "@types/three": "0.186.0",
+    "typescript": "7.0.2"
+  }
+}
