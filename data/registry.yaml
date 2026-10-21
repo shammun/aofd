@@ -1,0 +1,127 @@
+# AOFD dataset registry (open-data skill §5). One entry per dataset/file family. Read by fluidpy.data.registry.
+# Fields: catalogue (R3 key), url, raw_url, access route, login, licence + licence_url, citation, attribution,
+# size_bytes, sha256 (fixed files), variables, subset, coordinate order / sign conventions, fetch_date,
+# redistributable, raw_files (under the data root), derived_on_root (under the data root), derived_in_repo.
+datasets:
+  NCEP1-hgt-daily:
+    catalogue: NCEP1
+    title: NCEP/NCAR Reanalysis 1, daily-mean geopotential height on pressure levels (2.5 deg)
+    url: https://psl.noaa.gov/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/hgt.2014.nc
+    raw_url: https://downloads.psl.noaa.gov/Datasets/ncep.reanalysis.dailyavgs/pressure/hgt.2014.nc
+    route: OPeNDAP server-side subset via pydap (preferred; one day x one level = 37 kB); HTTPS whole-year file as fallback
+    fetcher: fluidpy.data.psl.fetch_daily / z500_day
+    login: none
+    licence: US Government work, public domain (no restrictions); PSL asks for an acknowledgement
+    licence_url: https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html
+    citation: "Kalnay, E., et al., 1996: The NCEP/NCAR 40-Year Reanalysis Project. Bull. Amer. Meteor. Soc., 77, 437-471, doi:10.1175/1520-0477(1996)077<0437:TNYRP>2.0.CO;2"
+    attribution: NCEP/NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA, from their website at https://psl.noaa.gov
+    size_bytes: 84885420
+    sha256: 3e1cf6ef52fbbadf6170410d72771bac2fa87a7bdb7206d33763d2fce117e838
+    sha256_note: sha256 of the whole-year file hgt.2014.nc (fixed; year complete); OPeNDAP subsets are not hash-pinned
+    variables: {hgt: "geopotential height [m]", level: "[hPa], 17 levels 1000-10", lat: "[deg]", lon: "[deg E]"}
+    coordinates: lat runs N->S in the file (90 .. -90), sorted S->N by every fluidpy reader; lon 0..357.5 E; time daily, 00-24 UTC means
+    subset: "2014-01-06, 500 hPa, global"
+    fetch_date: "2026-10-21"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NCEP1-hgt-daily/hgt.2014.nc, raw/NCEP1-hgt-daily/hgt.2014-01-06.500hPa.nc]
+    derived_on_root: [derived/ch00/ncep_r1_z500_20140106.nc]
+    derived_in_repo: [data/derived/ch00/ncep_r1_z500_20140106.nc]
+    used_by: [PoC E (Colab smoke notebook), PoC F (scenes/ch00/the_500hPa_surface.html)]
+  NE-50m-land:
+    catalogue: NE
+    title: Natural Earth 1:50m land polygons
+    url: https://naturalearth.s3.amazonaws.com/50m_physical/ne_50m_land.zip
+    route: HTTPS (pooch, hash pinned)
+    fetcher: fluidpy.data.naturalearth.land_50m
+    login: none
+    licence: Public domain
+    licence_url: https://www.naturalearthdata.com/about/terms-of-use/
+    citation: Natural Earth, free vector and raster map data, naturalearthdata.com
+    attribution: Made with Natural Earth (public domain)
+    size_bytes: 457183
+    sha256: 0b8e670cf80dce9cbebe2a193bc44ba5602758c22e1fa603980553646d7ff162
+    variables: {polygons: "land, WGS84 lon/lat [deg]"}
+    subset: whole file
+    fetch_date: "2026-10-21"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NE-50m-land/ne_50m_land.zip]
+    derived_on_root: [derived/ch21/fig_21_23_bathy3000_mask.nc]
+    derived_in_repo: [data/derived/ch21/fig_21_23_bathy3000_mask.nc]
+  NE-10m-bathy-3000:
+    catalogue: NE
+    title: Natural Earth 1:10m bathymetry band H_3000 (sea floor deeper than 3000 m)
+    url: https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_bathymetry_H_3000.zip
+    route: HTTPS (pooch, hash pinned); only the one band needed (2.5 MB) instead of ne_10m_bathymetry_all.zip (15.6 MB)
+    fetcher: fluidpy.data.naturalearth.bathymetry_band(3000) / shallow_mask
+    login: none
+    licence: Public domain
+    licence_url: https://www.naturalearthdata.com/about/terms-of-use/
+    citation: Natural Earth, free vector and raster map data, naturalearthdata.com
+    attribution: Made with Natural Earth (public domain)
+    size_bytes: 2528623
+    sha256: 5f0d480ffbd7a1dc39c48a9c29164b1a92094225d1d0399ab67ea61581add98a
+    variables: {polygons: "areas deeper than 3000 m, WGS84 lon/lat [deg]"}
+    subset: whole file; derived mask 90S-30S at 0.25 deg
+    fetch_date: "2026-10-21"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NE-10m-bathy-3000/ne_10m_bathymetry_H_3000.zip]
+    derived_on_root: [derived/ch21/fig_21_23_bathy3000_mask.nc]
+    derived_in_repo: [data/derived/ch21/fig_21_23_bathy3000_mask.nc]
+  FRONTS-orsi1995:
+    catalogue: FRONTS
+    title: Orsi et al. (1995) fronts of the Antarctic Circumpolar Current (STF, SAF, PF, SACCF, SB)
+    url: https://data.aad.gov.au/metadata/antarctic_circumpolar_current_fronts
+    raw_url: https://raw.githubusercontent.com/AustralianAntarcticDivision/orsifronts/76d4f6d901d6d02b12eae4625a080f615a18542a/data-raw/
+    route: >-
+      AADC record (CC-BY 4.0). The AADC download endpoint (https://data.aad.gov.au/eds/4892/download) needs an e-mail
+      address to issue a one-time zip link, so it was NOT used without the user's consent. The same original Orsi files
+      ({stf,saf,pf,saccf,sbdy}.txt; byte sizes match AADC's 'data from Alejandro Orsi/*.asc' within 1 byte) are read
+      from the AAD's own GitHub package AustralianAntarcticDivision/orsifronts, pinned to commit 76d4f6d.
+      (saccf_loop1/2.asc, two tiny SACCF loops, are not in the mirror.)
+    fetcher: fluidpy.data.fronts.orsi_fronts
+    login: none (mirror); e-mail address (AADC direct)
+    licence: CC-BY 4.0 (data, per the AADC record); the R package code around it is GPL-3 and is not used
+    licence_url: https://creativecommons.org/licenses/by/4.0/
+    citation: "Orsi, A.H., Whitworth III, T., Nowlin Jr., W.D., 1995: On the meridional extent and fronts of the Antarctic Circumpolar Current. Deep-Sea Res. I, 42(5), 641-673, doi:10.1016/0967-0637(95)00021-W. Data: Orsi, A.H., Harris, U. (2019) Fronts of the Antarctic Circumpolar Current - GIS data, Ver. 1, Australian Antarctic Data Centre."
+    attribution: "ACC fronts: Orsi et al. (1995), via the Australian Antarctic Data Centre (CC BY 4.0)"
+    size_bytes: 85249
+    sha256_files:
+      stf.txt: 1bb49d8dd8fbd825e5e3e585f8da86223de636c0a1b6cac711cdc31dd7ef0883
+      saf.txt: f9130dd8469971f44629ddb02aaeb5baf366d61445c9050f7cf616f4d632e730
+      pf.txt: 60674584751a21a67b6fb9dc1cf94cff9c4f70e26f60786ff20640b08fbd4d98
+      saccf.txt: c7e4e59bfc650abf7828788faea3549cadf3221bce0ca8a6f3c7706831a90ffc
+      sbdy.txt: 793ba88ba0139660da1b28f07116031c974e9641c083fa37875c29e35ca0a6f3
+    variables: {lon: "[deg E]", lat: "[deg N]"}
+    coordinates: text 'lon lat' rows, '%' lines separate segments; lon wrapped to -180..180 in the derived product
+    subset: all five fronts
+    fetch_date: "2026-10-21"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/FRONTS-orsi1995/stf.txt, raw/FRONTS-orsi1995/saf.txt, raw/FRONTS-orsi1995/pf.txt, raw/FRONTS-orsi1995/saccf.txt, raw/FRONTS-orsi1995/sbdy.txt]
+    derived_on_root: [derived/ch21/fig_21_23_fronts_orsi.npz]
+    derived_in_repo: [data/derived/ch21/fig_21_23_fronts_orsi.npz]
+  CURR-gdp-annual:
+    catalogue: CURR
+    title: NOAA Global Drifter Program drifter-derived annual-mean near-surface velocity (0.25 deg; Laurindo et al. 2017)
+    url: https://erddap.aoml.noaa.gov/gdp/erddap/griddap/drifter_annualmeans.nc
+    route: ERDDAP griddap server-side subset (lon -179.875..179.875, lat -72.875..-30.125; U,V,eU,eV,N)
+    size_bytes: 9925136
+    sha256_raw_subset: cfadb9239f5ccfd51445492060a22f049254b1ea75d52b7ffd448b6d4defc5ba  # informational; server-generated file, not pinned
+    fetcher: fluidpy.data.gdp.southern_ocean_mean_velocity
+    login: none
+    licence: CC-BY 4.0 (dataset 'license' attribute on ERDDAP; R3 had listed it as public domain - corrected)
+    licence_url: https://creativecommons.org/licenses/by/4.0/
+    citation: "Laurindo, L., Mariano, A., Lumpkin, R., 2017: An improved near-surface velocity climatology for the global ocean from drifter observations. Deep-Sea Res. I, 124, 73-92, doi:10.1016/j.dsr.2017.04.009"
+    attribution: "This study used data collected and made freely available by the NOAA Global Drifter Program (https://www.aoml.noaa.gov/phod/gdp/) accessed from https://erddap.aoml.noaa.gov/gdp/erddap/index.html"
+    variables: {U: "eastward velocity [m s-1]", V: "northward velocity [m s-1]", eU: "[m s-1]", eV: "[m s-1]", N: "drifter-days per square degree"}
+    coordinates: ERDDAP axis order (longitude, latitude); lat ascending; lon -180..180; transposed to (lat, lon) in the derived product
+    subset: 72.875S-30.125S, all longitudes
+    fetch_date: "2026-10-21"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/CURR-gdp-annual/drifter_annualmeans_-72.875_-30.125.nc]
+    derived_on_root: [derived/ch21/fig_21_23_gdp_mean_velocity.nc]
+    derived_in_repo: [data/derived/ch21/fig_21_23_gdp_mean_velocity.nc]
