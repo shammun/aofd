@@ -231,3 +231,154 @@ The blocking items, in order of priority:
 3. The scene's card 6 geostrophic overclaim (F-M1).
 4. Phone legibility: the 3-D view in A (A-M4); a 2-D view on portrait in B (B-M2); the arrows in F (F-M2); the hidden badge in B (B-M3).
 5. The A status symbol, ghost arrow style and notebook clip (A-M2, A-M3, A-M5), and the F caption pacing (F-M3).
+
+
+---
+
+## Re-review after fix round 1                                                     2026-10-21
+
+What I ran again:
+- `viz_lint.py` on all three: ok. The only warnings are the soft 0A/0B count warnings.
+- `shot.py` on A: PASS (8 sizes, 288 views, 8 steps, 125 rows).
+- `shot.py --3d` on A: PASS (SwiftShader, 130/130 rows). `--no-webgl` on A: PASS (121 rows).
+- `shot.py` on B: PASS (8 sizes, 88 views, 6 steps, 68 rows).
+- `shot.py --3d` on B: PASS (68/68). `--no-webgl` on B: PASS (8 sizes, 55 rows).
+- `shot.py --scene` on F: PASS (8 sizes, 49/49 rows).
+- `eq_refs.py` on all three.
+- My own walks with real **Next →** and ⏭ clicks, at 360×640, 390×844, 844×390, 1000×700 and 1366×768: A 8 steps and B 6 steps (WebGL), F 8 cards (WebGL plus no-WebGL). Result: 0 KaTeX errors and 0 console errors.
+- A page-by-page pager walk of A's step card and all five F panel tabs.
+- A load test with no step clicked, with and without reduced motion and `?audit=1`.
+- A Python sweep of the sphere loop residuals with `fluidpy.geo.frames.inertial_oscillation_sphere`.
+
+Outputs are in the scratchpad under `rr/`.
+
+| slug | kind | lint | shot (sizes/views) | parity ok | 3-D checks | explain | derivations | teaching | polish | exemplar compared | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| vector_products_lab | 3-D explainer | ok | PASS 8/288; `--3d` PASS; no-WebGL PASS | 130/130 (GL), 121/121 (proj3) | autoplay off and reduced motion OK; beaded ghost; chips collapse to "ⓘ 3 sources"; E/N/U letters; fallback now fills the view | 7 sections | D0A-PoC1/2 unchanged, checked | strong | 360×640: 3-D illegible, step card pages 3–8 | rossby_waves, geostrophic_adjustment, ekman_spiral | **PASS** |
+| viz_example_globe | 3-D template | ok | PASS 8/88; `--3d` PASS; no-WebGL PASS | 68/68; sphere rows now on the right reference, tolerances not derived (B-R1) | 3-D + `local`, swapped to `fcurve` on step 4, on portrait; badge visible; reduced motion OK | 6 sections; §4 does not yet teach 17.2 h | n/a | good | chips cover the lower half of the globe at 844×390 | geostrophic_adjustment, ekman_spiral | **FIX** (one item) |
+| the_500hPa_surface | standalone scene | ok | `--scene` PASS 8 sizes; my walk: 8 cards × 5 sizes, panel overflow 0 on every tab | 49/49 incl. (2.234b) rows at 1e-9 vs numpy | arrows equal-area (worst spacing 18 %), culled; ⟂ ∇Z 3.6e-8 (float32) | Eq. tab adds (2.234b) with live R, Ro, U | n/a | card 6 honest | orphan heading page at 360×640 | ekman_spiral, rossby_waves | **PASS** |
+
+### A · vector_products_lab: previous Must-fix items
+1. **Autoplay. Fixed.**
+   - On load: `{t: 0, playing: false}` with plain URL, `?audit=1`, and `prefers-reduced-motion`.
+   - `viz_lib.js` now also skips autoplay when `tour[0].play === false`.
+2. **Status symbol. Fixed.** It now reads "↻ … right (clockwise seen from above, NH)" and "↺ … left (anticlockwise …, SH)".
+3. **Ghost arrow. Fixed.**
+   - The ghost −f k×u ×10⁴ is beaded; k×u is solid.
+   - The legend sits in the view title.
+   - A parity row checks the dash count.
+4. **Phone 3-D. Fixed where it counts.**
+   - The camera fit is tighter: edge-on fills the canvas at 1366×768 and 390×844.
+   - The chips collapse to one "ⓘ n sources" chip, and the triad uses E/N/U letters.
+   - At 360×640 the 3-D view is still 348×106 px, and its labels pile up at step 7.
+5. **Notebook clip. Fixed.** Step 2's (0A.3) live line now breaks onto two lines at 1000×700.
+- **Should-fix items from last round now done:** (K 2.2) is cited; the wrong (2.80) label is gone; `import numpy as np` is in both snippets; the proj3 fallback fills the view.
+
+**(b) 360×640, step 7.** The 3-D view is decoration there, and that is acceptable on a 360×640 phone *for the picture*:
+- the 2-D map (348×89) shows u, the solid k×u and the dashed −f k×u with "right (NH)";
+- the status line names the turn and the hemisphere;
+- 390×844 and every larger size show the 3-D view legibly.
+
+The real weakness at this size is the **text**:
+- Step 7's card has 8 pages. Page 1 is the title only, and pages 2–3 show one visible line each, under "continued on the next page".
+- The (2.55) equation card is cut into 4 slices.
+- The exemplars also start some steps with a title-only page at this size (geostrophic_adjustment step 3: 1/4; rossby_waves: up to 6 pages). A is at the bad end of that range (3–8 pages per step), so this is a **Should-fix**, not a Must-fix.
+
+**(c) Depth.** Yes, at the level of rossby_waves and geostrophic_adjustment for a Chapter-0 primer.
+
+| feature | A | rossby_waves | geostrophic_adjustment |
+|---|---|---|---|
+| linked views on one clock | 3 | ✓ | ✓ |
+| ghost reference | ✓ | | |
+| prediction step | ✓ | | |
+| inspector with component arithmetic | ✓ | | |
+| term bars | ✓ | | |
+| derivations | 2 (9 + 10 steps) | D22, D23 | D16 (11 steps) |
+| bridge to a book balance | f k×u → (2.55) | | |
+| Explain sections | 7 | 11 | |
+| parity rows | 130 | 53 | 67 |
+
+A has fewer Explain sections, which fits the smaller topic. What it still lacks against them is a 3-D tip drag (below).
+
+**Should fix (A)**
+- **360×640 step card.**
+  - Hide the preset strip in the Walkthrough on portrait phones; the step sets the case.
+  - Shorten the status to one line ("↻ turns right · NH").
+  - Fit the step dots on one row.
+  - On steps 7–8 under 700 px of height, either swap the 3-D view out or hide its tip labels.
+  - Target ≤ 3 pages per step.
+- **3-D tip drag** (design Part H) is still missing.
+- **Explain §1 in f k×u mode:** check that it uses `nameA`/`nameB`.
+
+### B · viz_example_globe: previous Must-fix items
+1. **The 2 % rows are replaced.**
+   - New rows compare against ϑ_c = ϑ₀ − u₀/(f₀a) and against the U = 1 m/s f-plane limit, at 30°N, 45°N, 60°N and 45°S.
+   - The JS values match my Python run to 4 digits (for example 30°N: T = 89 725 s vs 2π/|f(ϑ_c)| = 89 522 s).
+   - **The tolerances are not right; see B-R1 below.**
+2. **Portrait layout. Fixed.**
+   - 360×640 and 390×844 show `scene3d` plus `local` on steps 1–3, 5 and 6, and `fcurve` on step 4.
+   - 844×390 shows the 3-D view only. That is acceptable for landscape.
+3. **Badge. Fixed.** The legend has moved to the top right and the not-to-scale badge is visible at 390×844 step 4. The "f k" tip label is still cut at the bottom edge (Should-fix).
+4. **Reduced motion. Fixed.** Under reduce: `playing: false, t: 0`.
+
+**(a) Is the 30°N rtol 3e-3 derivable? No: it was picked to pass.**
+
+Define the expansion parameter ε = U·cot ϑ/(|f₀|a): 0.0373, 0.0152 and 0.0072 at 30°, 45° and 60° for U = 10 m/s. My sweep (RK4, dt 60 s) gives:
+
+| row | measured residual | as a multiple of ε or ε² |
+|---|---|---|
+| centre row, period | 2.27e-3 / 4.32e-4 / 1.47e-4 | **1.6 / 1.9 / 2.9 ε²** |
+| centre row, radius | 1.68e-3 / 2.89e-4 / 7.9e-5 | 1.2 / 1.25 / 1.5 ε² |
+| f-plane row (U = 1) | 3.76e-3 / 1.53e-3 / 7.2e-4 | **1.01 / 1.00 / 1.00 ε** |
+
+- Halving U cuts the centre residual by 4.3 / 4.1 / 4.1 times, so the centre rows really are second order.
+- The f-plane rows are exactly first order.
+
+The chosen tolerances do not follow this law:
+- The 30°N centre row at 3e-3 has a margin of only 1.3×, while 45°N has 2.3× and 60°N has 6.8×.
+- The f-plane rows have 5e-3 / 3e-3 / 3e-3, margins 1.3× / 2× / 4×.
+
+**B-R1 (Must fix).** Compute each row's tolerance from ε inside the row and say so in its name:
+- Centre rows: `rtol = 5·ε²` (30°N 7.0e-3, 45°N 1.16e-3, 60°N 2.6e-4; margins 3.1×, 2.7×, 1.75×).
+- f-plane rows: replace them with expect rows `(T_run/T_f0 − 1)/ε = 1`, rtol 0.1 (measured 1.01 / 1.00 / 1.00). This tests the β-shift theory instead of hiding it.
+- Add one order row: `residual(U = 10)/residual(U = 5) = 4`, rtol 0.15.
+
+**Should fix (B)**
+- **Explain §4 and step 2 still say "comes round in 16.9 h"**, while the run on screen takes 17.2 h on a 98.5 km loop. Add the line "its centre sits 97 km equatorward, where f is 1.5 % smaller". The readouts are already labelled U/|f₀| and 2π/|f₀|.
+- **f(ϑ) panel labels are still on the wrong hemisphere.** Line 4190 places "f > 0" at ϑ = −85° and "f < 0" at +85°.
+- **Chips over the globe.** At 844×390 and 360×640 the badge and two full-width chips cover the lower 40–50 % of the globe, and the teal u is hidden at 844×390 step 3. Use the "ⓘ n sources" chip collapse that A uses.
+- **Step 1 autoplays while asking "Where does it go?"** Give it `play: false` so the prediction stands.
+- **Step 1 cites (2.55)** without `eq: 'vec'`.
+- **No E/N/U triad** at the puck.
+- **No real-GPU fps** number recorded.
+
+### F · the_500hPa_surface: previous Must-fix items
+1. **Card 6. Fixed.**
+   - It now reads geostrophic ≈ 68 m/s, R ≈ 1700 km, Ro 0.5, gradient wind (2.234b) ≈ 49 m/s.
+   - The Eq. tab writes out U²/R + fU = −∂φ/∂n = fU_g and the root with live numbers.
+   - New rows: R, Ro and U at 1e-9 vs numpy; the residual at 1e-12; the R → ∞ limit; U < U_g.
+2. **Arrows. Fixed.**
+   - Equal-area rows; worst spacing 18 %.
+   - n̂·ĉ < 0.3 culled.
+   - At 390×844 the arrows are clear and follow the lines; the 1366×768 limb is clean.
+3. **Pacing. Fixed.** Each card lasts max(8, 3 + 0.3·words) s.
+- **Should-fix items from last round now done:**
+  - the panel is paged with no scrolling (overflow 0 on every tab at all 5 sizes);
+  - the tab labels read "Eq." and "Ctrl";
+  - card 3 says "mostly … not necessarily";
+  - the no-WebGL view culls the far side.
+
+**Should fix (F)**
+- **Orphan heading at 360×640.** Page 1 of the Idea tab holds only the heading "What you are looking at". `paginate` keeps an H3 alone when the next block does not fit; move a lone H3 to the next page.
+- **Eq. tab length at 360×640.** It has 11 pages; merge the two component lines.
+- **Card 6 caption** cites "Eq. 2.234b" without the equation. Add "U²/R + fU = fU_g".
+
+## Re-review verdict
+
+| item | verdict |
+|---|---|
+| A · vector_products_lab | **PASS** (Should-fix items listed) |
+| B · viz_example_globe | **FIX**: only B-R1, the tolerances derived from ε as above |
+| F · the_500hPa_surface | **PASS** (Should-fix items listed) |
+
+Overall: **FAIL until B-R1 is done**. That change is about 10 lines and touches no physics. Everything else from round 1 is resolved.
