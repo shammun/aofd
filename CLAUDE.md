@@ -28,6 +28,15 @@ K-recaps not counted) · B/C · NOTE `N01…` · **K · Kundu recap `K01…`** (
 re-teaching + deep links; later uses = short recap) · R · recap `R01…` · S · skip `S01…` · D · derivation `D01…`
 (★–★★★). Chapter 0 IDs: `C0A-01…`, `C0B-01…`, `C0C-01…`; primers `P0-…`.
 
+## Session start (read first)
+The SessionStart hook prints `tools/progress.py --brief`. **If it shows "WAITING FOR THE USER"**
+(`progress.json → setup.s11_poc` is not `approved`), the first reply of the session must be: a short status update
+(what is done, PoC A–G states, disk on C:/G:), the "what to open" list, and the open questions from
+`progress.json → setup.awaiting_user` — then **stop and wait for the user's answers**. Do not start `/do-chapter`,
+release fluidpy, or publish anything until the user has answered. After the answers: record the verdict
+(`setup.poc`, `knowledge/*_patterns.md` PoC records, PLANNING §15), apply the requested fixes through the owning
+agents, set `setup.s11_poc` to `approved` and remove `setup.awaiting_user`.
+
 ## One command
 `/do-chapter N` runs the pipeline (PLANNING §6: preflight → analyze ∥ scout → curate → crossref → design ∥ implement ∥
 data → verify → review ∥ viz/viz3d ∥ figures ∥ notebook → knowledge ∥ library ∥ publish → push). `/make-movies N` runs

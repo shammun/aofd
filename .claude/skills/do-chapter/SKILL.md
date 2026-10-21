@@ -6,6 +6,10 @@ disable-model-invocation: true
 
 # /do-chapter N [--from P] [--only P] [--part 0A|0B|0C] [--consult] [--no-push]
 
+**Hard gate (checked before anything else):** if `progress.json → setup.s11_poc` is not `approved`, STOP. Do not run any
+phase. Give the user the status and the questions in `progress.json → setup.awaiting_user` (as CLAUDE.md "Session
+start" says) and wait for the answers. The proof of concept (PLANNING §12 step 11) must be approved first.
+
 You are the **orchestrator**. You delegate; you do not write physics, tests, notebooks, explainers or figures yourself.
 Keep your context small: read `progress.json`, `book.yaml`, agent *replies* and verdict lines, not whole files. Every
 brief is self-contained and ends with: *"Do not return while a run is in progress; wait for it and report real numbers."*

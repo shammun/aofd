@@ -35,7 +35,26 @@ def brief() -> None:
               + " ".join(f"{k}:{v}" for k, v in phases.items()))
         if data.get("setup"):
             s = data["setup"]
-            print("setup: " + " ".join(f"{k}:{v}" for k, v in s.items() if k not in ("notes", "updated")))
+            skip = ("notes", "updated", "awaiting_user", "poc")
+            print("setup: " + " ".join(f"{k}:{v}" for k, v in s.items() if k not in skip))
+            for k, v in (s.get("poc") or {}).items():
+                print(f"  PoC {k}: {v}")
+            wait = s.get("awaiting_user")
+            if wait and s.get("s11_poc") != "approved":
+                print("\n=== WAITING FOR THE USER — do NOT start /do-chapter 0 or any chapter work yet ===")
+                print("Session instruction (CLAUDE.md 'Session start'): first give the user this status, then ask these")
+                print("questions and wait for the answers.\n")
+                print(wait.get("summary", ""))
+                print("\nWhat to open and judge:")
+                for k, v in (wait.get("open") or {}).items():
+                    print(f"  {k}: {v}")
+                print("\nQuestions:")
+                for q in wait.get("questions", []):
+                    print("  " + q)
+                for c in wait.get("optional_cleanup", []):
+                    print("  (optional) " + c)
+                print("\nAfter the answers: " + wait.get("after_approval", ""))
+                print("=" * 86)
     dg = ROOT / "tools" / "disk_guard.py"
     if dg.exists():
         r = subprocess.run([sys.executable, str(dg)], capture_output=True, text=True)
