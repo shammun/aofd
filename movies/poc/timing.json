@@ -1,0 +1,119 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "scenes": [
+  {
+   "id": "s1_inertial",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "A puck slides on a spinning table.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 3.0,
+     "dur": 2.7,
+     "start_frame": 9,
+     "end_frame": 90
+    },
+    {
+     "text": "From the room, it goes straight.",
+     "audio_text": null,
+     "start": 3.35,
+     "end": 5.625,
+     "dur": 2.275,
+     "start_frame": 100,
+     "end_frame": 169
+    }
+   ],
+   "end": 6.425,
+   "start_frame": 9,
+   "end_frame": 193
+  },
+  {
+   "id": "s2_rotating",
+   "start": 6.425,
+   "sentences": [
+    {
+     "text": "Now ride with the table.",
+     "audio_text": null,
+     "start": 6.425,
+     "end": 8.475,
+     "dur": 2.05,
+     "start_frame": 193,
+     "end_frame": 254
+    },
+    {
+     "text": "It curves to the right.",
+     "audio_text": null,
+     "start": 8.825,
+     "end": 10.75,
+     "dur": 1.925,
+     "start_frame": 265,
+     "end_frame": 322
+    }
+   ],
+   "end": 11.55,
+   "start_frame": 193,
+   "end_frame": 346
+  },
+  {
+   "id": "s3_equation",
+   "start": 11.55,
+   "sentences": [
+    {
+     "text": "Coriolis adds minus two Omega cross v.",
+     "audio_text": "Cor-ee-oh-liss adds minus two Omega cross v.",
+     "start": 11.55,
+     "end": 15.15,
+     "dur": 3.6,
+     "start_frame": 346,
+     "end_frame": 454
+    },
+    {
+     "text": "On Earth, f is two Omega sine latitude.",
+     "audio_text": null,
+     "start": 15.5,
+     "end": 19.0,
+     "dur": 3.5,
+     "start_frame": 465,
+     "end_frame": 570
+    }
+   ],
+   "end": 19.3,
+   "start_frame": 346,
+   "end_frame": 579
+  }
+ ],
+ "total_s": 19.3,
+ "total_frames": 579,
+ "render_s": 12.6,
+ "loudnorm_input": {
+  "input_i": "-25.51",
+  "input_tp": "-5.83",
+  "input_lra": "3.00",
+  "input_thresh": "-36.20",
+  "output_i": "-16.37",
+  "output_tp": "-1.50",
+  "output_lra": "3.30",
+  "output_thresh": "-27.02",
+  "normalization_type": "dynamic",
+  "target_offset": "0.37"
+ },
+ "cues": 6,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 19.3,
+  "audio_s": 19.3,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true
+ }
+}
