@@ -143,3 +143,66 @@ day). A prediction prompt is in the explainer bullets. The only formal passages 
 There are 4 Must-fix items, all small and local (about 15 minutes in the builder): define Coriolis, define the (2.55)
 symbols, prime vector addition/subtraction, and write out (K 2.20) or drop the bare numbers. Voice and depth are at the
 standard the PoC gate asks for. After these four fixes, the block should PASS.
+
+---
+
+# Re-review (after fix loop 1)                                        2026-10-21
+
+I re-read the committed `notebooks/poc_ch00a_dot.ipynb`, which is now saved with outputs: **48 cells, 15 code cells
+executed in order (1–15), 0 errors**. coverage_check `ch00 --nb notebooks/poc_ch00a_dot.ipynb`: **OK, 0 errors, 3 warnings**
+(the same chapter-level warnings as before, not applicable to a sample block) · crossref_check: **still missing**
+(`tools/crossref_check.py`). I re-checked the links by hand and all of them resolve · sections 1/1 · CORE 1/1 · K 1/1
+complete · eq-code 4/4. I looked at the saved figure (cell 10).
+
+## Previous Must-fix: all closed
+| # | Item | Status |
+|---|---|---|
+| 1 | Coriolis unexplained | **Fixed.** Cell 0 now explains it at first use ("anything moving seems to curve sideways: to the right in the NH, to the left in the SH"), and it is in the 📖 word list (cell 45). |
+| 2 | (2.55) symbols unnamed | **Fixed.** Cell 43 lists Du/Dt, **f** = f**k** = 2Ω sin ϑ **k** (Ω and f each with easy and exact values), ρ, p and ∇_z, each with a unit and a typical value. Ω, f, ρ, p and ∇_z are added to the 📇 table. |
+| 3 | Vector addition/subtraction not primed | **Fixed.** A 📎 primer (cell 15, head to tail, (2,1) − (1,3) = (1,−2)) with a numpy demo (cell 16, output `[1 −2] [2 1]`) now sits before the law-of-cosines primer and is listed under "Tools we use". |
+| 4 | (K 2.20)–(K 2.21) cited by number only | **Fixed.** Both are written out in cell 43, with ε_ijk defined. I checked them against Kundu p. 52 (PDF 79): the components match (2.20) in a/b and i/j/k letters, and (a×b)_k = ε_ijk a_i b_j matches (2.21). The sign table for ε is correct (k = 3 gives a₁b₂ − a₂b₁). |
+
+## Previous Should-fix
+Fixed: the figure (the stripe is now beside b and visible, the label sits left of it, and θ is clear of the arc) · all
+three K-recap parts ("What Vallis adds", "no Kundu derivation; D0A-PoC1 ours (9 steps)", and the note that
+`geo.vectors.dot` wraps `core.tensors.dot`, which I confirmed in its docstring) · the §2.8 link label · the typical-value
+column · the colatitude and potential-temperature half-sentences in cell 7 · the (**v**·∇)T = **v**·(∇T) bridge (cell 38) ·
+∇·**v** with the Kundu 3-D note · the ∇ forward pointer · "(cross product: next block)" in the tolerance comment ·
+round-off explained (cell 31) · the opening-story payoff (7.07 m/s → 6.11 K/day of cooling, sign explained) · the
+"why interactive" sentence · "glyph pair" replaced.
+Still open:
+- **The atlas link still 404s** (`viz/atlas.html` does not exist). This blocks publishing, not the lesson.
+- **`tools/crossref_check.py` still does not exist.** This is a tooling gap.
+- **Potential temperature is still defined three different ways.** The 📖 glossary uses "adiabatically … 1000 hPa", the
+  📇 table says "p_R", and cell 7 says "a temperature-like quantity". Make the glossary line plain: "…brought to a
+  standard pressure without heating or cooling".
+
+## New, introduced by the fixes (all Should fix)
+- **An unsupported claim in cell 43.** It says "**u**·(**k**×**u**) = 0 because the turned wind is at right angles to the
+  wind", but nothing in this block shows that **k**×**u** is **u** turned 90°. Add "(**k**×**u** = (−v, u, 0): **u** turned a
+  quarter-turn to the left; next block)". With that, the dot product is −uv + vu = 0 and the reader can check it.
+- **The Du/Dt description is simplified.** Cell 43 calls Du/Dt "the material derivative of (1.7), applied to the wind".
+  On Vallis p. 66 it also carries the turning of **i** and **j** on the sphere (u Di/Dt + v Dj/Dt, (2.56)). Add "(on a
+  sphere, plus a small term because east and north turn as you move)". This would match the 📇 note about **i**, **j**, **k**.
+- **A stderr warning is saved under the figure.** Cell 10 shows "findfont: Failed to find font weight semibold for DejaVu
+  Sans, now using 700." in its output, which would appear on the web page. Suppress it in the style setup, or use `fontweight="bold"`.
+
+## Re-checks
+- **Numbers vs outputs:** all match. Values: 2.236 · [1 −2] [2 1] · 5.0/3.606/1.0 · loop 5.000 / θ 45.0° · 1.581 ·
+  (0.5, 1.5, 0) · leftover·b 1.3e-15 · 5.000e-05 K/s = 4.320 K/day · 7.071e-05 K/s = 6.11 K/day. The tolerance comment
+  claims θ agrees to "1.6e-16", and I recomputed it as 1.58e-16 relative.
+- **Equations vs page images:** all match. (K 2.2) and the unnumbered cosine form on Kundu p. 41/52 · (K 2.20) and
+  (K 2.21) on p. 52 · Vallis (2.55) on p. 66, Du/Dt + **f**×**u** = −(1/ρ)∇_z p, with **u** = (u, v, 0) and
+  **f** = 2Ω sin ϑ **k** · (1.7) as before.
+- **Derivation D0A-PoC1:** unchanged and still passes. Its tool for steps 1 and 3 is now primed beforehand.
+- **Voice:** still informal and second person, one idea per headed block. The new text (the Coriolis clause, the
+  (2.55) symbol list, the primer, the breeze payoff) is plain and can be read aloud. A grep for
+  clearly/obviously/simply/trivially returns 0. There are no clock words. "Right in the NH" is stated with the hemisphere.
+- **Unexplained-first-use:** the four Must rows are now explained at first use (Coriolis in cell 0; (2.55) symbols in
+  cell 43; vector add/subtract in cell 15; (K 2.20)/(K 2.21) in cell 43). Colatitude and ∇ are explained or pointed to at
+  first use. There are no new missing rows; only the **k**×**u** "turned 90°" claim (Should) is new.
+- **R4 checks 7–14:** 7 pass (atlas page not yet built) · 8 pass · 9 n/a · 10 n/a · 11 pass · 12 pass · 13 pass · 14 pass.
+
+## Verdict (re-review): PASS
+0 Must-fix. There are 6 Should-fix items: atlas page, crossref_check tool, potential-temperature wording, the
+**k**×**u** = (−v, u, 0) line, the Du/Dt sphere note, and the font warning in the saved output.
