@@ -229,11 +229,18 @@ def chapter_namespace(chapter: str) -> dict:
         pkg = Path(importlib.import_module("fluidpy").__file__).parent
     except Exception:  # noqa: BLE001
         pkg = ROOT / "fluidpy"
+    import pkgutil
     for sub in ("geo", "data", "diag"):
         try:
             ns[sub] = importlib.import_module(f"fluidpy.{sub}")
         except Exception:  # noqa: BLE001
-            pass
+            continue
+        # import every submodule too, so py rows can say geo.vectors.dot(...) / fluidpy.geo.frames.f(...)
+        for info in pkgutil.walk_packages(ns[sub].__path__, prefix=f"fluidpy.{sub}."):
+            try:
+                importlib.import_module(info.name)
+            except Exception:  # noqa: BLE001
+                pass
     try:
         ns["aofd"] = importlib.import_module("aofd")
     except Exception:  # noqa: BLE001
