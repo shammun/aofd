@@ -382,3 +382,40 @@ The chosen tolerances do not follow this law:
 | F · the_500hPa_surface | **PASS** (Should-fix items listed) |
 
 Overall: **FAIL until B-R1 is done**. That change is about 10 lines and touches no physics. Everything else from round 1 is resolved.
+
+## Round 2 — B · viz_example_globe (2026-10-21)
+
+**B-R1: fixed.** The selftest code (`templates/viz_example_globe.html` lines 4103–4122) computes every tolerance from ε inside the row, with no per-latitude constants.
+- It defines `epsOf(lat, U) = U·cot|ϑ0| / (|f(ϑ0)|·a)` and loops over `[30, 45, 60, -45]` with the same expressions at every latitude.
+- **Centre rows** use `rtol: r5` with `r5 = 5·ε(U=10)²`. ε and the rtol are printed in each row name. The Python side evaluates `inertial_circle(10, coriolis_parameter(ϑ0 − 10/(f0·a)))`; in the south this moves the centre equatorward, which is correct.
+- **f-plane rows** are expect rows `(T_run/T_f0 − 1)/ε = 1` and `(R_run/R_f0 − 1)/ε = 1`, rtol 0.1.
+- **Order row**: `res(10)/res(5) = 4` at 45°N, rtol 0.15.
+
+**Re-run results**
+- `viz_lint`: ok.
+- `shot.py --3d`: **PASS**. SwiftShader, 8 sizes, 88 views, 6 steps, **69/69 selftest rows ok**.
+- `shot.py --no-webgl`: **PASS**. Viz.proj3, 8 sizes, 88 views, 56 rows.
+
+**Measured values (audit.json)**
+
+| row | 30°N | 45°N | 60°N | 45°S |
+|---|---|---|---|---|
+| period residual, in ε² | 1.6 | 1.9 | 2.9 | same as 45°N |
+| f-plane coefficient, T | 1.0097 | 1.0050 | 1.0038 | 1.0050 |
+| f-plane coefficient, R | 1.0083 | 1.0025 | 1.0025 | 1.0025 |
+
+- Order ratio: **4.13**.
+- The builder's stated f-plane range of 1.004–1.010 is slightly off: the R rows go down to 1.0025. All rows are well inside 0.1.
+
+**Should-fix items from round 1**
+- **17.2 h text: done.** Step 2 says "comes round in 17.2 h (16.9 h on an f-plane; β slows it…)". The readouts are labelled U/|f₀| and 2π/|f₀|.
+- **f(ϑ) labels: done.** "NH: f > 0, turns right" is now on the right half and "SH: f < 0, turns left" on the left (seen at 1280×720 and 1366×768).
+- **Chips: done on the phone views.** Phone-tall and phone-land show "ⓘ 2 sources". The "not to scale" badge still crosses the lower globe at 844×390 and 390×844. It is acceptable because it is a badge, not a data layer.
+
+**Still open (Should fix)**
+- Step 1 still autoplays: the pause icon shows and t = 0.44 h at phone-land. It needs `play: false`.
+- Step 1 cites "(2.55)" without the equation written out.
+- At 390×844 the rotated "y north [km]" title touches the −100 and −200 tick labels.
+- In the proj3 fallback the arrows are labelled "a" and "b" instead of u and f k̂.
+
+**B verdict: PASS.** No open Must-fix items, so the PoC viz overall is **PASS** (A PASS, B PASS, F PASS).

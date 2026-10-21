@@ -14,12 +14,12 @@
     "s09_movies": "pass",
     "s10_selftests": "pass",
     "poc": {
-      "A": "built (shot --3d PASS); viz review pending",
-      "B": "built (shot --3d PASS); viz review pending",
+      "A": "pass (viz review round 1)",
+      "B": "pass (viz review round 2, derived tolerances)",
       "C": "pass (orchestrator review; literature values to re-verify in ch21)",
       "D": "QA PASS; reviewer FIX (text size) -> re-render running",
       "E": "local + clean-venv/git-clone simulation PASS; real Colab run by user pending",
-      "F": "built (shot --scene PASS); viz review pending",
+      "F": "pass (viz review round 1)",
       "G": "pass (lesson re-review PASS; code review: release v0.3.1 pin pending user approval)"
     },
     "notes": "setup session 2026-10-20; §15.8 items verified (venvs, kernel, Remotion 4.0.537, ffmpeg 9.0.2, data root on G:); fluidpy v0.3.0 tagged and pushed (c3b6f13); movie toolchain: empty render 60 frames OK, movie_qa PASS, tts self-check 0 ms drift; viz3d kit: shot --3d PASS 8 sizes (SwiftShader), context-loss restore, dispose 0/0, no-webgl proj3 PASS; self-tests: machinery 14 passed, viz_example PASS, pipeline_selftest PASS (after copying clean-educational.css + aofd-site.css)",
