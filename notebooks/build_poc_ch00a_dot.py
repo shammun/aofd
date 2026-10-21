@@ -22,6 +22,7 @@ from nbkit import ChapterNotebook  # noqa: E402
 ATLAS = "https://shammun.github.io/aofd/viz/atlas.html"          # the symbol atlas page (built from knowledge/symbols.yaml)
 K02 = "https://shammun.github.io/fluidpy/notebooks/ch02_cartesian_tensors.html"
 K21 = f"{K02}#2.1-Scalars,-Vectors,-Tensors,-Notation"
+K_C08 = f"{K02}#%F0%9F%A7%A9-The-alternating-tensor-%CE%B5_ijk-C08"
 K_LINKS = {
     "Kundu notebook §2.1": f"{K02}#2.1-Scalars,-Vectors,-Tensors,-Notation",
     "C01 summation convention": f"{K02}#%F0%9F%A7%A9-The-summation-convention:-a-repeated-index-is-a-sum-C01",
@@ -42,13 +43,15 @@ def symbols_table(wanted: list[str], extra: list[tuple[str, str, str, str]]) -> 
     """Rows for the symbols used in this block: atlas entries (knowledge/symbols.yaml) + Ch. 0A-only symbols."""
     atlas = yaml.safe_load((ROOT / "knowledge" / "symbols.yaml").read_text(encoding="utf-8"))["symbols"]
     entries = {e["symbol"]: e for fam in atlas.values() for e in fam}
-    rows = ["| Symbol | Name | Unit | Meaning | ⚠️ Watch out |", "|---|---|---|---|---|"]
+    rows = ["| Symbol | Name | Unit | Typical value | Meaning | ⚠️ Watch out |", "|---|---|---|---|---|---|"]
     for s in wanted:
         e = entries[s]                                  # KeyError = the atlas lacks it: fix the list, never guess
-        pit = str(e.get("pitfall", "")).replace("|", "/")
-        rows.append(f"| ${s}$ | {e['name']} | {e.get('unit', '')} | {e['meaning']} | {pit} |")
-    for s, name, unit, meaning in extra:
-        rows.append(f"| ${s}$ | {name} | {unit} | {meaning} | Chapter 0A symbol (not yet in the atlas) |")
+        typ = e.get("typical", "—")
+        typ = typ.get("atmosphere", "—") if isinstance(typ, dict) else typ
+        cells = [str(x).replace("|", "/") for x in (e["name"], e.get("unit", ""), typ, e["meaning"], e.get("pitfall", ""))]
+        rows.append(f"| ${s}$ | " + " | ".join(cells) + " |")
+    for s, name, unit, typ, meaning in extra:
+        rows.append(f"| ${s}$ | {name} | {unit} | {typ} | {meaning} | Chapter 0A symbol (not yet in the atlas) |")
     return "\n".join(rows)
 
 
@@ -61,12 +64,6 @@ def glossary_box(words: list[str], ours: dict[str, str]) -> str:
     for w, d in ours.items():
         lines.append(f"> - **{w}** — {d}")
     return "\n".join(lines)
-
-
-def show_eq(nb: ChapterNotebook, eq: str, tex: str) -> None:
-    """Write the equation itself under the "From scratch — Eq. (n)" heading that nbkit.scratch_vs_lib just added."""
-    head = next(c for c in reversed(nb.cells) if c.source.startswith(f"#### 🐍 From scratch — Eq. ({eq})"))
-    head.source += f"\n\n$$ {tex} $$"
 
 
 LEDGER_WHAT = {
@@ -93,7 +90,9 @@ def build() -> ChapterNotebook:
         *Proof-of-concept sample — one block of Chapter 0A, written in the Chapter-0 voice.*
 
         Vallis multiplies arrows on almost every page: the wind **dotted** with a temperature slope tells you how fast a
-        place warms or cools, the wind **crossed** with the Earth's spin gives the Coriolis effect. This sample teaches
+        place warms or cools, the wind **crossed** with the Earth's spin gives the **Coriolis effect** (on a spinning
+        planet, anything moving seems to curve sideways: to the right in the northern hemisphere, to the left in the
+        southern). This sample teaches
         the first of the two products from scratch: what it measures (a shadow), why the two ways of computing it give the
         same number, how to compute it by hand in Python and with the tested library, and where it shows up in Vallis.""",
         roadmap=["The dot product: how much of one arrow points along another (C0A-PoC1)"],
@@ -145,8 +144,9 @@ def build() -> ChapterNotebook:
         - $\theta$ — the **angle between** the two arrows, somewhere from 0° (same direction) to 180° (opposite).
 
         > ⚠️ **Which convention?** In this block only, $\theta$ means "the angle between two arrows". In Vallis, $\theta$ is
-        > **potential temperature** and latitude is the curly $\vartheta$; Kundu uses $\theta$ for latitude in his
-        > Chapter 13 and for colatitude in Appendix B. And Vallis's $a$ (not bold) is the Earth's radius, 6371 km — our bold
+        > **potential temperature** (a temperature-like quantity you will meet in Chapter 1) and latitude is the curly
+        > $\vartheta$; Kundu uses $\theta$ for latitude in his Chapter 13 and for **colatitude** (the angle down from the
+        > North Pole, 90° minus the latitude) in Appendix B. And Vallis's $a$ (not bold) is the Earth's radius, 6371 km — our bold
         > $\mathbf a$ is just "some arrow".""")
 
     nb.primer("length from components (Pythagoras in 3-D)", r"""
@@ -174,7 +174,9 @@ def build() -> ChapterNotebook:
 
         fig, ax = plt.subplots(figsize=(5.6, 5.0))            # one square-ish panel
         ax.plot([-0.4*b_hat[0], 1.2*b[0]], [-0.4*b_hat[1], 1.2*b[1]], color=COLORS["grid"], lw=1, zorder=0)  # b's line, extended
-        ax.plot([0, foot[0]], [0, foot[1]], color=COLORS["teal"], lw=9, alpha=0.35, solid_capstyle="butt")    # the shadow (thick teal)
+        off = -0.13 * n_hat                                   # shift the stripe a little to the side of b's line, away from a
+        ax.plot([off[0], foot[0] + off[0]], [off[1], foot[1] + off[1]], color=COLORS["teal"], lw=7, alpha=0.75,
+                solid_capstyle="butt")                        # the shadow (thick teal), drawn just beside b so b does not hide it
         ax.plot([a[0], foot[0]], [a[1], foot[1]], ls="--", color=COLORS["muted"], lw=1.3)                    # light ray from a's tip
         s = 0.14                                              # size of the right-angle tick [plot units]
         sq = np.array([foot - s*b_hat, foot - s*b_hat + s*n_hat, foot + s*n_hat])   # three corners of the tick
@@ -185,15 +187,15 @@ def build() -> ChapterNotebook:
         ang_a = np.degrees(np.arctan2(a[1], a[0]))            # direction of a, measured from east [°] ≈ 26.6
         ang_b = np.degrees(np.arctan2(b[1], b[0]))            # direction of b [°] ≈ 71.6
         ax.add_patch(Arc((0, 0), 1.3, 1.3, theta1=ang_a, theta2=ang_b, color=COLORS["ink"], lw=1.2))   # the angle between them
-        ax.text(0.78, 0.40, f"θ = {ang_b - ang_a:.0f}°", fontsize=11)               # θ = 45°
-        ax.text(foot[0] - 1.25, foot[1] + 0.05, f"shadow = |a| cos θ\\n= {shadow:.3f}", color=COLORS["teal"], fontsize=10)
+        ax.text(0.80, 0.22, f"θ = {ang_b - ang_a:.0f}°", fontsize=11)               # θ = 45°, clear of the arc's ends
+        ax.text(-0.55, 0.95, f"shadow\\n= |a| cos θ\\n= {shadow:.3f}", color=COLORS["teal"], fontsize=10)   # left of the stripe
         ax.set_xlim(-0.6, 3.2); ax.set_ylim(-0.4, 3.6); ax.set_aspect("equal")    # same scale on both axes (angles look right)
         ax.set_xlabel("east component"); ax.set_ylabel("north component")
         ax.set_title(f"a's shadow on b's line is {shadow:.2f} long\\na·b = shadow × |b| = {shadow:.3f} × {len_b:.3f} = {shadow*len_b:.0f}", fontsize=11)
         plt.show()""",
         see="""Two arrows from the same corner: **a** (teal) and **b** (orange), 45° apart. Light falls at right angles onto
         b's line (dashed ray, with the little square showing the right angle). The thick teal stripe is a's **shadow** on
-        that line, 1.581 long.""",
+        that line, 1.581 long (drawn a hair to the side of b's line so the orange arrow does not cover it).""",
         read=r"""Both axes are components (east and north), drawn at the same scale so angles are true. The shadow starts at
         the origin and ends at the point $(0.5,\ 1.5)$, where the dashed ray meets b's line. Multiply the shadow by b's length
         3.162 and you get 5 — the dot product, in the title.""",
@@ -207,8 +209,14 @@ def build() -> ChapterNotebook:
         > 🔁 **From Kundu ch02 §2.1 and §2.8 — the dot product.** {links}
         >
         > Kundu introduces the dot product in his §2.1 as the first example of the summation convention and comes back to
-        > it in §2.8 (vector, dot and cross products); his Appendix B §B.3 then uses it inside every $\nabla$ formula.
-        > Here it is re-taught from zero, in Vallis's letters.
+        > it in §2.8 (vector, dot and cross products); his Appendix B §B.3 then uses it inside every $\nabla$ formula
+        > ($\nabla$ is the "slope arrow", primed further down). Here it is re-taught from zero, in Vallis's letters.
+        > Kundu leaves the cosine form to his Exercises 2.12–2.13, so there is no Kundu derivation to reuse: D0A-PoC1 below
+        > is ours (9 steps). On the Kundu site the §2.8 material is taught under §2.1 (C01) and C08 (links above).
+        >
+        > **What Vallis adds.** Nothing new in the maths; what is new is where it is used: the wind dotted with the
+        > temperature slope, $\mathbf u\cdot\nabla T$, in Vallis's material derivative (1.7), and the turned wind
+        > $\mathbf k\times\mathbf u$ of the Coriolis term — both written out further down.
 
         | Kundu | Vallis / this notebook | Note |
         |---|---|---|
@@ -239,13 +247,25 @@ def build() -> ChapterNotebook:
 
         ((0A.2) is kept for the cross product's area, $|\mathbf a\times\mathbf b| = |\mathbf a|\,|\mathbf b|\sin\theta$, in the next block.)""")
     nb.anatomy(EQ_0A1, ref="0A.1", terms=[
-        (r"\mathbf a\cdot\mathbf b", "the dot product: a's share along b, times the length of b (computed as a₁b₁ + a₂b₂ + a₃b₃)", "teal (a) · orange (b) glyph pair"),
+        (r"\mathbf a\cdot\mathbf b", "the dot product: a's share along b, times the length of b (computed as a₁b₁ + a₂b₂ + a₃b₃)", "a in teal, b in orange, as in the figure"),
         (r"\lvert\mathbf a\rvert\cos\theta", "a's shadow on b's line — positive if a leans along b, negative if it leans against it", "teal"),
         (r"\lvert\mathbf b\rvert", "the length of the direction arrow; makes the product symmetric (a·b = b·a)", "orange"),
         (r"\cos\theta", "1 if parallel, 0 if at right angles, −1 if opposite", "—"),
     ])
 
     # ---- derivation ----------------------------------------------------------------------------------------------------
+    nb.primer("adding and subtracting arrows", r"""
+        To **add** two arrows, put them **head to tail**: walk along $\mathbf b$, then along $\mathbf c$; the arrow from
+        where you started to where you ended is $\mathbf b + \mathbf c$. By components you just add matching parts:
+        $(1, 3) + (1, -2) = (2, 1)$. To **subtract**, $\mathbf a - \mathbf b$ is the arrow you must add to $\mathbf b$ to
+        reach $\mathbf a$ — it runs from $\mathbf b$'s tip to $\mathbf a$'s tip — and by components you subtract matching
+        parts: $(2, 1) - (1, 3) = (1, -2)$.""",
+        code="""
+        import numpy as np                       # arrays
+        a = np.array([2.0, 1.0])                 # arrow a = (2, 1)
+        b = np.array([1.0, 3.0])                 # arrow b = (1, 3)
+        c = a - b                                # subtract matching parts: the arrow from b's tip to a's tip
+        print(c, b + c)                          # [ 1. -2.] and [2. 1.]: head-to-tail, b then c lands on a""")
     nb.primer("law of cosines", r"""
         For any triangle with two sides $A$ and $B$ meeting at angle $\theta$, the third side $C$ obeys
         $C^2 = A^2 + B^2 - 2AB\cos\theta$. At $\theta = 90°$ the last term vanishes and you are back to Pythagoras; at
@@ -263,7 +283,8 @@ def build() -> ChapterNotebook:
         plan=["Build a triangle out of a, b and the arrow from b's tip to a's tip.",
               "Measure that third side twice: with the law of cosines (geometry) and with Pythagoras (components).",
               "Set the two answers equal and cancel everything that matches."],
-        uses=["length from components (primer above)", "law of cosines (primer above)", "the rule (x − y)² = x² − 2xy + y²"],
+        uses=["adding and subtracting arrows, head to tail and by components (primer above)",
+              "length from components (primer above)", "law of cosines (primer above)", "the rule (x − y)² = x² − 2xy + y²"],
         start=(DOT_DEF, "the component recipe (K 2.2). We assume neither arrow is zero; if one is, θ means nothing and both sides are 0."),
         steps=[
             dict(did="Draw the third side", tex=r"\mathbf c = \mathbf a - \mathbf b",
@@ -355,8 +376,12 @@ def build() -> ChapterNotebook:
 
         products = a * b                                # the same thing all at once: matching parts multiplied [2, 3, 0]
         dot_ab = products.sum()                         # add them up: the dot product a·b = 5 (K 2.2)
-        len_a = np.sqrt((a * a).sum())                  # length |a| = sqrt(a1² + a2² + a3²) ≈ 2.236 (Pythagoras)
-        len_b = np.sqrt((b * b).sum())                  # length |b| ≈ 3.162
+        squares_a = a * a                               # each part of a squared: [4, 1, 0]
+        len_a2 = squares_a.sum()                        # |a|² = a1² + a2² + a3² = 5 (Pythagoras)
+        len_a = np.sqrt(len_a2)                         # length |a| = √5 ≈ 2.236
+        squares_b = b * b                               # each part of b squared: [1, 9, 0]
+        len_b2 = squares_b.sum()                        # |b|² = 10
+        len_b = np.sqrt(len_b2)                         # length |b| = √10 ≈ 3.162
         cos_theta = dot_ab / (len_a * len_b)            # (0A.1) solved for cos θ ≈ 0.7071
         theta_rad = np.arccos(cos_theta)                # the angle whose cosine that is [rad]
         theta_deg = np.degrees(theta_rad)               # the same angle in degrees: 45
@@ -364,65 +389,69 @@ def build() -> ChapterNotebook:
         r'''
         # 🐍 The library — the same numbers through the tested fluidpy functions
         from fluidpy.geo import vectors as V                       # Chapter 0A vector toolkit (tested in fluidpy)
-        dot_lib = V.dot(a, b)                                      # a·b, (K 2.2)
-        theta_lib = V.angle_between(a, b, degrees=True)            # θ in degrees, from (0A.1) together with |a×b|
-        np.testing.assert_allclose([dot_loop, dot_ab, theta_deg], [dot_lib, dot_lib, theta_lib], rtol=1e-12)
-        # rtol 1e-12: the same closed-form arithmetic in both, so only round-off (~1e-16) can differ. The library gets θ
-        # from atan2(|a×b|, a·b), which stays accurate near 0° and 180° where arccos loses digits — at 45° both agree to
-        # ~1e-15, but do NOT reuse 1e-12 for a nearly parallel pair with this scratch arccos.
-        print(f"scratch and library agree: a·b = {dot_lib:.3f}, θ = {theta_lib:.1f}°")''',
+        dot_lib = V.dot(a, b)                                      # a·b, (K 2.2) — a thin wrapper of Kundu's fluidpy.core.tensors.dot
+        len_a_lib = V.norm(a)                                      # |a|
+        len_b_lib = V.norm(b)                                      # |b|
+        theta_lib = V.angle_between(a, b, degrees=True)            # θ in degrees
+        np.testing.assert_allclose([dot_loop, dot_ab, len_a, len_b, theta_deg],
+                                   [dot_lib, dot_lib, len_a_lib, len_b_lib, theta_lib], rtol=1e-12)
+        # rtol 1e-12: a·b and the lengths use the same formula in both, so only round-off (~1e-16) can differ. For θ the two
+        # use different exact formulas: we take arccos(a·b/(|a||b|)); the library takes atan2(|a×b|, a·b), where a×b is the
+        # cross product (next block). They agree to round-off away from 0° and 180° (here 1.6e-16), but arccos loses digits
+        # for nearly parallel arrows, so do NOT reuse 1e-12 for such a pair with this scratch arccos.
+        print(f"scratch and library agree: a·b = {dot_lib:.3f}, |a| = {len_a_lib:.3f}, |b| = {len_b_lib:.3f}, θ = {theta_lib:.1f}°")''',
         explain="""
         1. `a`, `b` — the two arrows as arrays of three components (east, north, up).
         2. The loop builds `dot_loop` one matching pair at a time — this is (K 2.2) read aloud.
         3. `products = a * b` and `dot_ab = products.sum()` do the same thing in one go (numpy primer above).
-        4. `len_a`, `len_b` are the lengths by Pythagoras; `cos_theta` is (0A.1) solved for cos θ; `theta_deg` turns it into degrees.
-        5. The second cell asks `fluidpy.geo.vectors` for the same numbers and `assert_allclose` stops the notebook if they differ by more than one part in 10¹².
+        4. `squares_a` → `len_a2` → `len_a` (and the same for b) are the lengths by Pythagoras, one move per line; `cos_theta` is (0A.1) solved for cos θ; `theta_deg` turns it into degrees.
+        5. The second cell asks `fluidpy.geo.vectors` (`dot`, `norm`, `angle_between`) for the same numbers and `assert_allclose` stops the notebook if they differ by more than one part in 10¹².
 
-        **What does this show?** a·b = 5 and θ = 45.0° from both routes — the numbers of the tiny example.""")
+        **What does this show?** a·b = 5, |a| = 2.236, |b| = 3.162 and θ = 45.0° from both routes — the numbers of the tiny example.""",
+        eq_tex=r"\mathbf a\cdot\mathbf b = a_1b_1 + a_2b_2 + a_3b_3 = |\mathbf a|\,|\mathbf b|\cos\theta")
     nb.ledger[-1]["kind"] = "scratch + library + assert (rtol 1e-12)"
-    show_eq(nb, "0A.1", EQ_0A1 + r" \quad\text{with}\quad " + DOT_DEF)
     nb.ledger.insert(len(nb.ledger) - 1, {"eq": "K 2.2", "tag": "eq:0A.1", "status": "coded", "core": nb.current_core,
                                           "kind": "scratch + library + assert — shares the (0A.1) cells"})
 
     nb.scratch_vs_lib("0A.3", r'''
         # 🐍 From scratch — eq (0A.3): a's shadow on b, as a length and as an arrow   (no fluidpy here)
-        shadow_len = dot_ab / len_b                     # shadow length |a| cos θ = a·b / |b| = 5 / 3.162 ≈ 1.581
+        shadow_cos = len_a * cos_theta                  # left side of (0A.3): |a| cos θ = 2.236 × 0.7071 ≈ 1.581
+        shadow_len = dot_ab / len_b                     # right side of (0A.3): a·b / |b| = 5 / 3.162 ≈ 1.581
         scale = dot_ab / (len_b * len_b)                # how many b's fit in the shadow: a·b / |b|² = 5 / 10 = 0.5
         shadow_vec = scale * b                          # the shadow as an arrow along b: 0.5 × (1, 3, 0) = (0.5, 1.5, 0)
         leftover = a - shadow_vec                       # what is left of a after removing its shadow: (1.5, −0.5, 0)
         check_perp = (leftover * b).sum()               # the leftover is at right angles to b, so this dot product is 0
-        print(f"shadow = {shadow_len:.3f}, shadow arrow = {shadow_vec}, leftover·b = {check_perp:.1e}")''',
+        print(f"|a| cos θ = {shadow_cos:.3f}, a·b/|b| = {shadow_len:.3f}, shadow arrow = {shadow_vec}, leftover·b = {check_perp:.1e}")''',
         r'''
         # 🐍 The library — scalar and vector projection
         shadow_len_lib = V.scalar_projection(a, b)                 # a·b / |b|
         shadow_vec_lib = V.projection(a, b)                        # (a·b / |b|²) b
-        np.testing.assert_allclose(shadow_len, shadow_len_lib, rtol=1e-12)    # same formula → round-off only
-        np.testing.assert_allclose(shadow_vec, shadow_vec_lib, rtol=1e-12, atol=1e-15)   # atol: the up part is exactly 0
+        np.testing.assert_allclose([shadow_cos, shadow_len], [shadow_len_lib, shadow_len_lib], rtol=1e-12)   # both sides; exact formulas → round-off only
+        np.testing.assert_allclose(shadow_vec, shadow_vec_lib, rtol=1e-12)   # same formula → round-off only (the up parts are both exactly 0.0)
         np.testing.assert_allclose(check_perp, 0.0, atol=1e-12)    # true value 0 → an absolute tolerance, not a relative one
         print("scratch and library agree:", round(shadow_len_lib, 3), shadow_vec_lib)''',
         explain=r"""
-        1. `shadow_len` is (0A.3) as a length; `scale` is how many copies of b fit along the shadow.
+        1. `shadow_cos` and `shadow_len` are the two sides of (0A.3): |a| cos θ and a·b/|b|; `scale` is how many copies of b fit along the shadow.
         2. `shadow_vec` turns the shadow into an arrow lying along b — the end point $(0.5,\ 1.5)$ in the figure above.
-        3. `leftover = a − shadow_vec` is the dashed light ray of the figure; its dot product with b is zero (at right angles).
-        4. The library cell repeats both with `V.scalar_projection` and `V.projection` and asserts agreement.""")
-    nb.ledger[-1]["kind"] = "scratch + library + assert (rtol 1e-12; atol for exact zeros)"
-    show_eq(nb, "0A.3", EQ_0A3)
+        3. `leftover = a − shadow_vec` is the dashed light ray of the figure; its dot product with b should be zero (at right angles).
+        4. The library cell repeats both with `V.scalar_projection` and `V.projection` and asserts agreement.
+
+        **What does this show?** Both sides of (0A.3) give 1.581 — the length of the teal stripe in the figure — and the
+        shadow arrow ends at $(0.5,\ 1.5)$. The printed `leftover·b` of about 1e-15 is **round-off**: the computer keeps
+        about 16 significant digits, so "zero" comes out as a few times 10⁻¹⁶–10⁻¹⁵. That is why its check uses an
+        absolute tolerance (`atol`), not a relative one.""",
+        eq_tex=r"|\mathbf a|\cos\theta = \frac{\mathbf a\cdot\mathbf b}{|\mathbf b|},\quad \frac{\mathbf a\cdot\mathbf b}{|\mathbf b|^2}\,\mathbf b")
+    nb.ledger[-1]["kind"] = "scratch + library + assert (rtol 1e-12; atol only for the true-zero check)"
 
     # ---- explainer (show_viz("ch00", ...): the explainer lives in viz/ch00/, shared by the three Chapter-0 parts) ----------
-    nb.md("""
-        #### 🎮 Interactive: drag the arrows and watch the shadow
-
-        The explainer below puts both arrows in 3-D. The thick teal stripe is the shadow, and the bar beside the origin
-        *is* a·b (teal above zero, rose below). The second product, the cross product, is in the same explainer and gets
-        its own block next.
-
-        **What to try:**
-        - Drag b until the bar hits exactly 0 — read θ. (Predict first: what angle will it be?)
-        - Press ▶ and watch the bar rise and fall like a cosine while b swings round.
-        - Pick the *anti-parallel* preset: why is a·b negative, and where does the shadow point?""")
-    nb.code('show_viz("ch00", "vector_products_lab")   # full-width explainer; ⤢ Full screen for more room',
-            tags=["explainer"])
-    nb.explainers.append("vector_products_lab")       # nbkit.explainer() would write show_viz("ch00a", …); the file is viz/ch00/
+    nb.explainer("vector_products_lab", heading="drag the arrows and watch the shadow",
+                 why="""A static picture shows one angle; dragging shows a·b following cos θ all the way through zero and
+                 below, and the 3-D view shows that nothing changes when the pair is tilted out of the floor. The thick
+                 teal stripe is the shadow, and the bar beside the origin *is* a·b (teal above zero, rose below). The
+                 second product, the cross product, is in the same explainer and gets its own block next.""",
+                 tries=["Drag b until the bar hits exactly 0 — read θ. (Predict first: what angle will it be?)",
+                        "Press ▶ and watch the bar rise and fall like a cosine while b swings round.",
+                        "Pick the *anti-parallel* preset: why is a·b negative, and where does the shadow point?"])
 
     # ---- analogy, confusion --------------------------------------------------------------------------------------------
     nb.like_unlike(
@@ -458,7 +487,12 @@ def build() -> ChapterNotebook:
 
         Here $\boldsymbol v = (u, v, w)$ is the wind (bold italic in Vallis; for a flat wind $w = 0$ it is just the
         horizontal wind $\mathbf u$), $\partial\varphi/\partial t$ is the change you would measure standing still, and the
-        last term is our dot product: the **wind dotted with the temperature gradient**, $\mathbf u\cdot\nabla T$. Read
+        last term is our dot product. Vallis writes it as an operator, $(\boldsymbol v\cdot\nabla)$, "acting on" $\varphi$;
+        for a single number like temperature that is the same thing as a dot product with the slope arrow:
+
+        $$ (\boldsymbol v\cdot\nabla)T = u\frac{{\partial T}}{{\partial x}} + v\frac{{\partial T}}{{\partial y}} + w\frac{{\partial T}}{{\partial z}} = \boldsymbol v\cdot(\nabla T). $$
+
+        So the last term is the **wind dotted with the temperature gradient**, $\mathbf u\cdot\nabla T$ for a flat wind. Read
         with (0A.1), that is (wind speed) × (how steep the temperature slope is) × cos(angle between them). This is
         **advection**: temperature being *carried* by the wind.
 
@@ -470,58 +504,104 @@ def build() -> ChapterNotebook:
         $\mathbf u\cdot\nabla T = 10 \times 10^{{-5}} \times \cos 60° = 5\times10^{{-5}}$ K/s. A day has 86 400 s, so
         that is ≈ **4 | 4.32 K per day** of cooling at a fixed spot (computed below). That's like going from a mild day to a
         noticeably cooler one overnight — tiny per second, but it keeps going as long as the wind does. Wind blowing **along** the isotherms ($\theta = 90°$) gives zero: no
-        advection, however strong the wind.""")
+        advection, however strong the wind.
+
+        **And the breeze from the start?** Its share toward the warm side was 7.07 m/s. With the same 1 K per 100 km, that
+        is $7.07 \times 10^{{-5}}$ K/s ≈ **6 | 6.1 K per day** — and note the sign: air flowing *toward* the warm side means
+        air arriving from the *cold* side, so the spot where you stand **cools** (also computed below).""")
     nb.scratch_vs_lib("1.7-adv", r'''
         # 🐍 From scratch — the advection term u·∇T in eq (1.7), with Earth numbers   (no fluidpy here)
         speed = 10.0                                    # wind speed |u| [m/s]
-        angle = np.radians(60.0)                        # angle between the wind and ∇T (which points north) [rad]
-        u_east = speed * np.sin(angle)                  # east part of the wind: 10 sin 60° ≈ 8.660 m/s
-        u_north = speed * np.cos(angle)                 # north part of the wind: 10 cos 60° = 5.000 m/s
+        theta = np.radians(60.0)                        # θ of (0A.1): angle between the wind and ∇T (which points north) [rad]
+        u_east = speed * np.sin(theta)                  # east part of the wind: 10 sin 60° ≈ 8.660 m/s
+        u_north = speed * np.cos(theta)                 # north part of the wind: 10 cos 60° = 5.000 m/s
         u = np.array([u_east, u_north, 0.0])            # the wind arrow [m/s] (flat: no up part)
-        gradT = np.array([0.0, 1.0 / 100e3, 0.0])       # ∇T: 1 K warmer per 100 km northward [K/m]
-        adv = (u * gradT).sum()                         # u·∇T: multiply matching parts and add [K/s]
+        dT_dy = 1.0 / 100e3                             # 1 K warmer per 100 km northward = 1e-5 [K/m]
+        gradT = np.array([0.0, dT_dy, 0.0])             # ∇T: points north, toward the warm side [K/m]
+        products = u * gradT                            # matching parts multiplied [K/s]
+        adv = products.sum()                            # u·∇T by components (K 2.2) [K/s]
+        len_gradT = dT_dy                               # |∇T|: only the north part is nonzero [K/m]
+        adv_cos = speed * len_gradT * np.cos(theta)     # the same by (0A.1): |u| |∇T| cos θ [K/s]
         adv_day = adv * 86400.0                         # the same per day (86 400 s in a day) [K/day]
         dTdt_here = -adv_day                            # (1.7) with DT/Dt = 0: change at a fixed spot [K/day]
-        print(f"u·∇T = {adv:.3e} K/s = {adv_day:.3f} K/day → the fixed spot changes by {dTdt_here:+.3f} K/day")''',
+        print(f"u·∇T = {adv:.3e} K/s (components) = {adv_cos:.3e} K/s (|u||∇T|cos θ) = {adv_day:.3f} K/day")
+        print(f"→ the fixed spot changes by {dTdt_here:+.3f} K/day")
+
+        breeze_north = 10.0 * np.cos(np.radians(45.0))  # the opening breeze: its share toward the warm north ≈ 7.071 m/s
+        breeze_adv = breeze_north * dT_dy               # its u·∇T [K/s]
+        breeze_day = breeze_adv * 86400.0               # per day [K/day]
+        print(f"opening breeze: u·∇T = {breeze_adv:.3e} K/s → the spot cools by {breeze_day:.2f} K/day")''',
         r'''
         # 🐍 The library — the same dot product
         adv_lib = V.dot(u, gradT)                                  # u·∇T [K/s]
-        np.testing.assert_allclose(adv, adv_lib, rtol=1e-12)       # same multiply-and-add → round-off only
+        np.testing.assert_allclose([adv, adv_cos], [adv_lib, adv_lib], rtol=1e-12)   # components and |u||∇T|cos θ: exact formulas → round-off only
         print(f"scratch and library agree: {adv_lib:.3e} K/s")''',
         explain=r"""
         1. `u_east`, `u_north` split the 10 m/s wind into parts (a wind at 60° from north leans toward the east).
-        2. `gradT` is the temperature-slope arrow from the primer; `adv` is the dot product (K 2.2) — the same recipe as before, now with units: (m/s) × (K/m) = K/s.
+        2. `gradT` is the temperature-slope arrow from the primer; `adv` is the dot product (K 2.2) — the same recipe as before, now with units: (m/s) × (K/m) = K/s. `adv_cos` gets the same number the (0A.1) way, $|\mathbf u||\nabla T|\cos\theta$.
         3. `adv_day` converts to kelvin per day; `dTdt_here` puts in the minus sign: with $DT/Dt = 0$, (1.7) $\frac{DT}{Dt} = \frac{\partial T}{\partial t} + (\boldsymbol v\cdot\nabla)T$ gives $\partial T/\partial t = -\mathbf u\cdot\nabla T$.
 
-        **What does this show?** 5.000 × 10⁻⁵ K/s, or 4.320 K per day of cooling at a spot downwind of the cold side.""")
+        4. The last three lines redo the opening breeze: 7.071 m/s toward the warm side.
+
+        **What does this show?** 5.000 × 10⁻⁵ K/s by both routes, or 4.320 K per day of cooling at a spot downwind of the
+        cold side; the opening breeze gives 7.07 × 10⁻⁵ K/s, about 6.11 K per day of cooling.""",
+        eq_tex=r"\mathbf u\cdot\nabla T = |\mathbf u|\,|\nabla T|\cos\theta,\ \text{the last term of}\ " + V17)
     nb.ledger[-1]["kind"] = "B note: scratch + library + assert (rtol 1e-12)"
-    show_eq(nb, "1.7-adv", r"\mathbf u\cdot\nabla T,\ \text{the last term of}\ " + V17 + r"\ \text{(1.7) with}\ \varphi = T")
 
     nb.md(rf"""
         **Two more places it hides.** Kundu's Appendix B writes the divergence of a wind as a dot product with the
         $\nabla$ arrow, $\nabla\cdot\mathbf u = \partial u/\partial x + \partial v/\partial y + \partial w/\partial z$
-        (App. B §B.3, unnumbered) — multiply-and-add again, with "multiply" replaced by "take the slope of". And the cross
-        product, next block, gives Vallis's Coriolis term $\boldsymbol f\times\boldsymbol u$ in
+        (App. B §B.3, unnumbered; Kundu's $\mathbf u = (u, v, w)$ is the full 3-D wind, which Vallis calls $\boldsymbol v$,
+        so in Vallis's letters this is $\nabla\cdot\boldsymbol v$) — multiply-and-add again, with "multiply" replaced by
+        "take the slope of". And the cross product, next block, gives Vallis's Coriolis term $\boldsymbol f\times\boldsymbol u$ in
+        the horizontal momentum equation (how the wind speeds up, slows down and turns):
 
         $$ {V255} \qquad \text{{(2.55)}} $$
 
-        with $\boldsymbol f = f\mathbf k = 2\Omega\sin\vartheta\,\mathbf k$ (Vallis writes the bold **f** for $f\mathbf k$;
-        in Chapter 0 we write $f\,\mathbf k\times\mathbf u$). A dot product shows why that term never speeds the wind up:
-        $\mathbf u\cdot(\mathbf k\times\mathbf u) = 0$, because the turned wind is at right angles to the wind.
+        Every symbol, in plain words:
+        - $D\boldsymbol u/Dt$ — the acceleration of the horizontal wind $\boldsymbol u = (u, v, 0)$ as felt by the moving
+          air itself (the material derivative of (1.7), applied to the wind) [m s⁻²];
+        - $\boldsymbol f = f\mathbf k = 2\Omega\sin\vartheta\,\mathbf k$ — an arrow pointing straight up, whose length $f$
+          is the **Coriolis parameter**: $\Omega$ is the Earth's spin rate, ≈ 7×10⁻⁵ | 7.29×10⁻⁵ s⁻¹, and $\vartheta$ the
+          latitude, so $f$ ≈ 10⁻⁴ | 1.03×10⁻⁴ s⁻¹ at 45° and 0 at the equator (Vallis writes bold **f** for $f\mathbf k$;
+          in Chapter 0 we write $f\,\mathbf k\times\mathbf u$);
+        - $\rho$ — the air's density, ≈ 1.2 kg m⁻³ near the ground;
+        - $p$ — pressure, ≈ 10⁵ Pa (1000 hPa) at sea level;
+        - $\nabla_z p$ — the slope arrow of pressure measured along a level surface (fixed height $z$): it points toward
+          higher pressure, so $-\frac{{1}}{{\rho}}\nabla_z p$ pushes air from high toward low pressure.
 
-        **Where next.** Chapter 0A §0.4 (the cross product, (K 2.20)–(K 2.21) and the area (0A.2)); Vallis §1.1 for (1.7);
-        Kundu ch02 §2.8 ([notebook]({K21})).""")
+        A dot product shows why the Coriolis term never speeds the wind up: $\mathbf u\cdot(\mathbf k\times\mathbf u) = 0$,
+        because the turned wind is at right angles to the wind.
+
+        **Where next.** Chapter 0A §0.4, the cross product, starts from its component formula (Kundu writes $\mathbf u,\mathbf v$
+        and $\mathbf e_1, \mathbf e_2, \mathbf e_3$; here in our letters)
+
+        $$ \mathbf a\times\mathbf b = (a_2b_3-a_3b_2)\,\mathbf i + (a_3b_1-a_1b_3)\,\mathbf j + (a_1b_2-a_2b_1)\,\mathbf k \qquad \text{{(K 2.20)}} $$
+
+        and its index form, where $\varepsilon_{{ijk}}$ (the **alternating symbol**) is $+1$ for $ijk$ = 123, 231, 312,
+        $-1$ for 321, 213, 132 and 0 when two indices repeat, and repeated indices are summed:
+
+        $$ (\mathbf a\times\mathbf b)_k = \varepsilon_{{ijk}}\,a_ib_j \qquad \text{{(K 2.21)}} $$
+
+        plus its length, the area $|\mathbf a\times\mathbf b| = |\mathbf a|\,|\mathbf b|\sin\theta$ (0A.2). Vallis §1.1 for
+        (1.7). On the Kundu site, §2.8's material is taught under [§2.1]({K21}) and
+        [C08, the alternating tensor]({K_C08}).""")
 
     # ---- symbols, words, ledger ----------------------------------------------------------------------------------------
     nb.md("#### 📇 Symbols in this block\n\n" + symbols_table(
-        ["x, y, z", r"\mathbf i, \mathbf j, \mathbf k", r"\mathbf u", r"\nabla", "T", r"\frac{D}{Dt}", r"\vartheta", r"\theta"],
-        [(r"\mathbf a, \mathbf b", "two generic arrows (vectors)", "any (the unit of what they describe)",
+        ["x, y, z", r"\mathbf i, \mathbf j, \mathbf k", r"\mathbf u", r"\nabla", "T", r"\frac{D}{Dt}", r"\vartheta", r"\theta",
+         r"\Omega", "f", r"\rho", "p", r"\nabla_z", r"\delta_{ij}, \epsilon_{ijk}"],
+        [(r"\mathbf a, \mathbf b", "two generic arrows (vectors)", "any (the unit of what they describe)", "—",
           "Arrows given by components (east, north, up)."),
-         (r"\lvert\mathbf a\rvert", "length (magnitude) of a", "unit of a", "√(a₁² + a₂² + a₃²), Pythagoras."),
-         (r"\theta\ \text{(0A)}", "angle between two arrows", "rad (shown in °)", "0° same direction, 90° at right angles, 180° opposite."),
-         (r"\mathbf a\cdot\mathbf b", "dot product", "unit of a × unit of b", "a₁b₁ + a₂b₂ + a₃b₃ = |a||b| cos θ: shadow × length.")])
+         (r"\lvert\mathbf a\rvert", "length (magnitude) of a", "unit of a", "—", "√(a₁² + a₂² + a₃²), Pythagoras."),
+         (r"\theta\ \text{(0A)}", "angle between two arrows", "rad (shown in °)", "—", "0° same direction, 90° at right angles, 180° opposite."),
+         (r"\mathbf a\cdot\mathbf b", "dot product", "unit of a × unit of b", "—", "a₁b₁ + a₂b₂ + a₃b₃ = |a||b| cos θ: shadow × length."),
+         (r"\nabla T", "temperature gradient", "K m⁻¹", "≈ 10⁻⁵ K/m (1 K per 100 km)", "Arrow toward warmer air; length = kelvin gained per metre."),
+         (r"\text{colatitude}", "angle down from the North Pole", "rad (shown in °)", "0° at the pole, 90° at the equator",
+          "90° minus the latitude; Kundu's App. B θ.")])
         + f"\n\nFull entries (say-it, typical Earth values, Kundu names): [📇 symbol atlas]({ATLAS}).")
-    nb.md(glossary_box(["Potential temperature"], {
+    nb.md(glossary_box(["Coriolis effect", "Potential temperature"], {
+        "Colatitude": "the angle measured down from the North Pole: 90° minus the latitude (0° at the pole, 90° at the equator).",
         "Wind direction (south-westerly)": "forecasters name a wind after where it comes FROM; a south-westerly blows toward the north-east.",
         "Fluid parcel": "a small blob of air or water followed as it moves, small enough to have one temperature and one velocity.",
         "Advection": "a property (temperature, salt, moisture) being carried along by the wind or a current; in equations, u·∇T.",
@@ -546,6 +626,7 @@ def build() -> ChapterNotebook:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Build notebooks/poc_ch00a_dot.ipynb (PoC G).")
     ap.add_argument("--dump", action="store_true", help="print the cell outline and write nothing")
+    ap.add_argument("--no-exec", action="store_true", help="save without executing (default: execute on the aofd-venv kernel and keep outputs)")
     args = ap.parse_args(argv)
     nb = build()
     if args.dump:
@@ -554,6 +635,15 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     dest = nb.save()
     print(f"wrote {dest.relative_to(ROOT).as_posix()} ({len(nb.cells)} cells)")
+    if not args.no_exec:                       # the PoC is reviewed and shown executed (outputs kept)
+        import nbformat
+        import publish_notebook as pub         # tools/: execute() runs on the dedicated aofd-venv kernel
+        done, secs = pub.execute(dest)
+        problems = pub.execution_problems(done)
+        if problems:
+            raise SystemExit("execution failed:\n  " + "\n  ".join(problems))
+        nbformat.write(done, dest)
+        print(f"executed in {secs:.1f} s on the aofd-venv kernel, 0 errors; outputs saved in {dest.name}")
     return 0
 
 
