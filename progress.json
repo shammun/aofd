@@ -38,7 +38,7 @@
         "G": "notebooks/poc_ch00a_dot.ipynb — Chapter 0A dot-product block in the informal voice"
       },
       "questions": [
-        "1. Verdict on PoC A-G in plain words (e.g. 'A, B, D, F, G approved. C: thicker fronts. Voice OK.'); fixes go back to the owning agents before /do-chapter 0.",
+        "1. The user has said they have detailed feedback, corrections and improvement suggestions for ALL of PoC A-G. Invite them to give it item by item (A..G, plus voice/look/depth in general); collect it into reports/ch00_poc_user_feedback.md, turn it into a fix plan per owning agent and agree the plan with the user before running fixes; re-run the gates; then ask for the final verdict.",
         "2. May the session tag and push fluidpy v0.3.1 (local commit 6d2c52e: geo.vectors/frames/atmos + data fetch) to shammun/fluidpy and bump book.yaml library_pin? Without it PoC G and later notebooks fail on Colab.",
         "3. PoC D is a test clip: keep it local (default), or publish it, which needs `! gh repo create shammun/aofd-media --public` first?"
       ],
