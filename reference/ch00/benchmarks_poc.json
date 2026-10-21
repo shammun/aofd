@@ -1,0 +1,30 @@
+{
+  "omega_wgs84_rad_s": {
+    "value": 7.292115e-05,
+    "source": "NGA WGS 84 TR8350.2"
+  },
+  "inertial_period_45deg_h": {
+    "value": 16.9,
+    "precision": 0.1,
+    "source": "cleonis.nl table; Charles Univ. ex. 10"
+  },
+  "ussa1976_scale_height_0km_m": {
+    "value": 8435.0,
+    "precision": 1.0,
+    "source": "USSA-1976 via pdas.com Table 2"
+  },
+  "ussa1976_scale_height_20km_m": {
+    "value": 6382.0,
+    "precision": 1.0,
+    "source": "USSA-1976 via pdas.com Table 2"
+  },
+  "ussa1976_5km_T_K": {
+    "value": 255.676,
+    "source": "USSA-1976 via pdas.com Table 1"
+  },
+  "ussa1976_5km_p_Pa": {
+    "value": 54048.0,
+    "precision": 1.0,
+    "source": "USSA-1976 via pdas.com Table 1"
+  }
+}

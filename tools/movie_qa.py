@@ -337,8 +337,13 @@ def main() -> int:
     else:
         gate("physics", "SKIP", "no --manifest given")
     # equations present in the composition
-    eqs = [sc["on_screen_eq"]["latex"] for sc in (sb or {}).get("scenes", [])
-           if isinstance(sc.get("on_screen_eq"), dict) and sc["on_screen_eq"].get("latex")]
+    eqs = []                                  # every on-screen equation: on_screen_eq and on_screen_eq_extra, dict or list
+    for sc in (sb or {}).get("scenes", []):
+        for key in ("on_screen_eq", "on_screen_eq_extra"):
+            val = sc.get(key)
+            for item in (val if isinstance(val, list) else [val]):
+                if isinstance(item, dict) and item.get("latex"):
+                    eqs.append(item["latex"])
     if eqs and a.composition:
         src = Path(a.composition).read_text(encoding="utf-8")
         squash = lambda s: re.sub(r"\s+", "", s.replace("\\\\", "\\"))   # noqa: E731
