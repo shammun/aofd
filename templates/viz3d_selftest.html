@@ -2503,7 +2503,10 @@ button, input, select { font: inherit; color: inherit; }
     if (der.els) app.goDerive(hash.d ? Number(hash.d) - 1 : 0, hash.ds ? Number(hash.ds) : 0, { quiet: firstTab !== 'derive' });
     app.setTab(firstTab);
     queueLive();
-    if (animated && cfg.autoplay !== false) app.play(true); else app.draw();
+    // AOFD: never autoplay for readers who asked for reduced motion (PoC A review, 2026-10-21)
+    var reduceMotion = !!(global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var firstStepStill = !!(cfg.tour && cfg.tour[0] && cfg.tour[0].play === false);   // step 1 describes a still picture
+    if (animated && cfg.autoplay !== false && !reduceMotion && !firstStepStill) app.play(true); else app.draw();
 
     app.ready = loadKatex().then(function (ok) {
       app.katex = ok; retypesetPending(); queueLive();

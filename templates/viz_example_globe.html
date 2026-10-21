@@ -2520,7 +2520,8 @@ button, input, select { font: inherit; color: inherit; }
     queueLive();
     // AOFD: never autoplay for readers who asked for reduced motion (PoC A review, 2026-10-21)
     var reduceMotion = !!(global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    if (animated && cfg.autoplay !== false && !reduceMotion) app.play(true); else app.draw();
+    var firstStepStill = !!(cfg.tour && cfg.tour[0] && cfg.tour[0].play === false);   // step 1 describes a still picture
+    if (animated && cfg.autoplay !== false && !reduceMotion && !firstStepStill) app.play(true); else app.draw();
 
     app.ready = loadKatex().then(function (ok) {
       app.katex = ok; retypesetPending(); queueLive();
