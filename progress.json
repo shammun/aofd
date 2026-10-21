@@ -85,5 +85,11 @@
       "notes": "",
       "updated": "2026-10-20"
     }
+  },
+  "last_update": {
+    "commit": "root",
+    "fluidpy_commit": "d379326",
+    "time": "before the setup session (2026-10-20)",
+    "note": "the first 'update' of the next session covers everything the setup session generated"
   }
 }

@@ -30,12 +30,26 @@ re-teaching + deep links; later uses = short recap) · R · recap `R01…` · S 
 
 ## Session start (read first)
 The SessionStart hook prints `tools/progress.py --brief`. **If it shows "WAITING FOR THE USER"**
-(`progress.json → setup.s11_poc` is not `approved`), the first reply of the session must be: a short status update
+(`progress.json → setup.s11_poc` is not `approved`), the first reply of the session must be an **update in the format of the
+next section** (run `tools/update_report.py`; list every file the setup session generated) — a short status update
 (what is done, PoC A–G states, disk on C:/G:), the "what to open" list, and the open questions from
 `progress.json → setup.awaiting_user` — then **stop and wait for the user's answers**. Do not start `/do-chapter`,
 release fluidpy, or publish anything until the user has answered. After the answers: record the verdict
 (`setup.poc`, `knowledge/*_patterns.md` PoC records, PLANNING §15), apply the requested fixes through the owning
 agents, set `setup.s11_poc` to `approved` and remove `setup.awaiting_user`.
+
+## When the user says "update" (or asks where things stand)
+Run `.venv/Scripts/python.exe tools/update_report.py` (facts since the last update: commits, every file added /
+changed / deleted grouped by folder in both repos, uncommitted files, push state, disk on C:/G:). Then reply with:
+1. **What I did** since the last update, in plain words, step by step, with the outcome of each gate (PASS/FAIL, real numbers).
+2. **Files generated or changed**, listed with their full path and one line each on what the file is (group by kind:
+   explainers, scenes, figures, notebooks, movies, library code, tests, reports, tools, docs). Say which are committed
+   and pushed, which are local only, and which are ignored/private.
+3. **Where to look**: the exact file or link to open for each item worth checking, and what to look for.
+4. **What needs your feedback or decision**, as a numbered list of concrete questions (each with the options and my
+   recommendation), plus anything only the user can do (commands to run with `!`, cleanup the session may not do).
+5. **Disk**: free space on C: and G:, project data size, anything evicted.
+Keep it a table or short lists, not prose. After giving the update, run `tools/update_report.py --mark`.
 
 ## One command
 `/do-chapter N` runs the pipeline (PLANNING §6: preflight → analyze ∥ scout → curate → crossref → design ∥ implement ∥
