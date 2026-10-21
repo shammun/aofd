@@ -501,16 +501,16 @@ builder writes `nb.md`/`nb.code` with the exact headings from `teaching-style` �
 | 12 | 🎮 `nb.explainer("vector_products_lab", "🎮 Interactive: drag the arrows and watch the shadow", why, tries)` | tries: "Drag b until the bar hits 0 — read θ." · "Press ▶ and watch the bar follow a cosine." · "Preset *anti-parallel*: why is a·b negative?" | — |
 | 13 | ⚠️ Like… / Unlike… | **Like…** a shadow on the floor under a lamp: tilt the stick and the shadow shrinks. **Unlike…** a real shadow, the dot product can be *negative* (the shadow points backwards along b), and it is multiplied by \|b\| — a shadow is only \|a\| cos θ. | — |
 | 14 | `> ⚠️ Common confusion:` | "a·b is a number, not an arrow. (a·b)c is an arrow; a·(b·c) does not make sense." | — |
-| 15 | 🌍/➡️ Where Vallis uses it | "Vallis §1.1, the material derivative `$$\frac{D\varphi}{Dt}=\frac{\partial\varphi}{\partial t}+(\mathbf v\cdot\nabla)\varphi \qquad (1.7)$$` — the last term is a dot product of the wind v with the temperature-slope arrow ∇T: **u·∇T** = (wind's share along the temperature slope) × (steepness). A worked number: wind 10 m/s blowing at 60° to a temperature gradient of 1 K per 100 km → u·∇T = 10 × 10⁻⁵ × cos 60° = 5×10⁻⁶ K/s ≈ **0.43 K per day** of change at a fixed spot as the air arrives (sign: for a conserved T, ∂T/∂t = −u·∇T, so wind blowing from the cold side toward the warm side cools the spot). Wind along the isotherms (θ = 90°) → 0: no advection." Then pointers: Vallis §2.2 (2.55) for the cross product, Chapter 0A §0.4. | 0.43 K/day |
-| 16 | small scratch + assert for the advection number (B note, `eq:1.7-adv`) | u = (10 sin 60°, 10 cos 60°) = (8.660, 5.000) m/s, ∇T = (0, 1e-5) K/m → u·∇T, × 86 400 s/day; then `V.dot` + assert (1e-12) | 5.000e-6 K/s, 0.432 K/day |
+| 15 | 🌍/➡️ Where Vallis uses it | "Vallis §1.1, the material derivative `$$\frac{D\varphi}{Dt}=\frac{\partial\varphi}{\partial t}+(\mathbf v\cdot\nabla)\varphi \qquad (1.7)$$` — the last term is a dot product of the wind v with the temperature-slope arrow ∇T: **u·∇T** = (wind's share along the temperature slope) × (steepness). A worked number: wind 10 m/s blowing at 60° to a temperature gradient of 1 K per 100 km → u·∇T = 10 × 10⁻⁵ × cos 60° = 5×10⁻⁵ K/s ≈ **4.3 K per day** of change at a fixed spot as the air arrives (sign: for a conserved T, ∂T/∂t = −u·∇T, so wind blowing from the cold side toward the warm side cools the spot). Wind along the isotherms (θ = 90°) → 0: no advection." Then pointers: Vallis §2.2 (2.55) for the cross product, Chapter 0A §0.4. | 4.3 K/day |
+| 16 | small scratch + assert for the advection number (B note, `eq:1.7-adv`) | u = (10 sin 60°, 10 cos 60°) = (8.660, 5.000) m/s, ∇T = (0, 1e-5) K/m → u·∇T, × 86 400 s/day; then `V.dot` + assert (1e-12) | 5.000e-5 K/s, 4.32 K/day |
 | 17 | 📇 Symbols introduced | table rendered from `knowledge/symbols.yaml` (see list below) | — |
 | 18 | Equation-code ledger | Part G rows for this section | — |
 | 19 | `nb.summary` "✅ What should have clicked" | "a·b multiplies matching components and adds them up — and that equals \|a\|\|b\|cos θ, a's shadow on b times \|b\|. Zero means perpendicular; negative means 'against'. In Vallis it is how much the wind blows *across* the temperature lines." | — |
 
 (Cells 15–16 numbers: u = 10 m/s at 60° to a northward ∇T of 1 K/100 km, u = (8.660, 5.000) m/s, ∇T = (0, 1e-5)
-K/m → u·∇T = 10 × 1e-5 × cos 60° = 5.000e-6 K/s = **0.432 K/day**; the prose quotes the printed value. Sign convention
+K/m → u·∇T = 10 × 1e-5 × cos 60° = 5.000e-5 K/s = **4.32 K/day**; the prose quotes the printed value. Sign convention
 stated once: for a conserved temperature, ∂T/∂t = −u·∇T at a fixed point, so wind blowing *up* the temperature slope
-(from cold toward warm, u·∇T > 0) cools the fixed spot by 0.43 K per day.)
+(from cold toward warm, u·∇T > 0) cools the fixed spot by 4.3 K per day.)
 
 **From-scratch spec (cell 9, tag `eq:0A.1`) — inputs with units, one operation per line, comment per line:**
 ```python
