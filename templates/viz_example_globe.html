@@ -33,6 +33,11 @@
 /* portrait phones: the globe + ONE 2-D view — the local map, swapped for f(lat) while the globe is coloured by f (step 4) */
 .viz-app[data-layout="portrait"]:not([data-pview="f"]) .viz-view[data-view="fcurve"] { display: none; }
 .viz-app[data-layout="portrait"][data-pview="f"] .viz-view[data-view="local"] { display: none; }
+/* small 3-D views: provenance chips collapse into one "ⓘ N sources" chip that opens them on tap (as PoC A) */
+.gex-src { display: none; position: absolute; left: 6px; bottom: 6px; min-height: 24px; pointer-events: auto; cursor: pointer; background: var(--viz-card); color: var(--viz-text); }
+.gex-small3d .gex-src { display: inline-flex; align-items: center; }
+.gex-small3d:not(.gex-src-open) .v3d-chips { display: none; }
+.gex-small3d.gex-src-open .v3d-chips { bottom: 58px; }
 /* phones: the not-to-scale badge moves to a line just above the chips (bottom-left) so the f legend (top-right) never covers it */
 .viz-app:is([data-layout="portrait"], [data-layout="landscape"]) .v3d-badge { top: auto; bottom: 32px; max-width: calc(100% - 12px); }
 /* phones: provenance chips and the badge stay on one line each (ellipsis; full text in the title tooltip) */
@@ -3713,7 +3718,14 @@ function getRun(s) {
     const r = inertialOscillationSphere(lat0, lon0, u0, v0, circ.period, DT);
     drift = { dx: A_EARTH * Math.cos(lat0) * wrapLon(r[0] - lon0), dy: A_EARTH * (r[1] - lat0) };
   }
-  RUN = { key, lat0, lon0, u0, v0, U, f0, circ, t, lon, lat, u, v, E, I, G, n: E.P.length, drift };
+  // the loop period on the sphere, measured from the run: first time the velocity has turned through 2π (any heading)
+  let Tsph = NaN, cum = 0;
+  for (let k = 1; k < u.length && isFinite(u[k]); k++) {
+    let d = Math.atan2(v[k], u[k]) - Math.atan2(v[k - 1], u[k - 1]); d = d > Math.PI ? d - 2 * Math.PI : d < -Math.PI ? d + 2 * Math.PI : d;
+    if (Math.abs(cum + d) >= 2 * Math.PI) { Tsph = t[k - 1] + DT * (2 * Math.PI - Math.abs(cum)) / Math.abs(d); break; }
+    cum += d;
+  }
+  RUN = { key, lat0, lon0, u0, v0, U, f0, circ, t, lon, lat, u, v, E, I, G, n: E.P.length, drift, Tsph };
   return RUN;
 }
 function getProbe(s) {
@@ -3754,6 +3766,7 @@ const fField = () => ({ data: FFIELD, w: FW, h: FH, latOrder: 'S->N', units: '1/
 
 /* ---------------- the 3-D scene (declarative layers; the kit rebuilds them after context loss) ---------------- */
 const SUB = {};
+let SRC = () => {};
 let S3 = null, pendingCam = null, lastKey = '', curK = 1, glyphNear = false, lastState = null;
 const TRAJ = ['pathBack', 'pathFwd', 'spaceBack', 'spaceFwd', 'ghost', 'probeBack', 'probeFwd'];
 const dir = (lonDeg, latDeg, r) => Viz3D.lonlatToXYZ(lonDeg, latDeg, r || 1);
@@ -3843,6 +3856,7 @@ function sceneUpdate(s) {
     { at: dir(LON0_DEG + ang / D2R + 25, 0, 1.05), text: 'Equator', priority: 3 } ].filter(it => !S3.fallback || it.priority === 1 || it.priority === 3) });
   TRAJ.forEach(id => fitMarkers(S3.get(id), curK));
   S3.renderNow();
+  SRC();
 }
 function buildScene(S, s) {
   S3 = S; lastKey = ''; Object.keys(SUB).forEach(k => delete SUB[k]);
@@ -3876,6 +3890,13 @@ function buildScene(S, s) {
   S.add(Viz3D.cameraPresets(presetsFor(s), { tween: 700, reducedMotion: 'cut' }));
   S.on('frame', () => { if (!S.fallback) setTimeout(() => applyZoom(false), 0); });
   S.on('contextrestored', () => { TRAJ.forEach(id => fitMarkers(S.get(id), curK)); S.renderNow(); });
+  /* small views (phones, < 420 × 200 px): the provenance chips collapse into one "ⓘ N sources" chip that opens them on
+     tap (same pattern as PoC A, vector_products_lab) — they covered the globe at 390×844 */
+  const src = document.createElement('button'); src.type = 'button'; src.className = 'v3d-chip gex-src';
+  src.onclick = () => S.holder.classList.toggle('gex-src-open'); S.ui.appendChild(src);
+  SRC = () => { const small = S.holder.clientWidth < 420 || S.holder.clientHeight < 200; S.holder.classList.toggle('gex-small3d', small);
+    const chips = [...S.chips.querySelectorAll('.v3d-chip')].map(c => c.textContent); src.textContent = 'ⓘ ' + chips.length + ' sources'; src.title = chips.join(' · '); };
+  S.on('frame', () => SRC());
   sceneUpdate(s);
   if (pendingCam) { const c = pendingCam; pendingCam = null; goCam(c, null); }
 }
@@ -3962,7 +3983,7 @@ const app = Viz.app({
   tour: [
     { title: 'A puck on a spinning Earth', text: String.raw`A puck slides east at 10 m/s from 45°N. No pressure gradient, no friction: only the Coriolis term of (2.55) acts. Where does it go? The green line is where it would go if the Earth did not spin.`,
       set: { lat0: 45, U: 10, heading: 90, frame: 'earth', t: 0, fshade: false, ghost: true }, enter: a => goCam('space', a) },
-    { title: 'It curves to the right', text: String.raw`Now at true scale. Press ▶: dashed = where it came from, solid = where it goes, dots every 3 h. It turns right and comes round in 16.9 h, on a loop about 97 km in radius.`,
+    { title: 'It curves to the right', text: String.raw`True scale. Press ▶: dashed = came from, solid = goes to, dots every 3 h. It turns right and comes round in 17.2 h (16.9 h on an f-plane; β slows it here on the sphere), on a loop about 97 km in radius.`,
       play: !RM, readouts: ['R', 'T'], enter: a => goCam('over', a) },
     { title: 'The push is always sideways', text: String.raw`Teal $\mathbf u$, orange $f\mathbf k$ (the local spin, length ∝ $f$). Violet $\mathbf u\times f\mathbf k = -f\mathbf k\times\mathbf u$ is at 90° to $\mathbf u$: it turns the puck but never speeds it up.`,
       set: { t: 4 }, eq: 'cor', readouts: ['speed'], enter: a => goCam('near', a) },
@@ -4000,8 +4021,9 @@ const app = Viz.app({
         W.line(String.raw`$f_0 = 2\Omega\sin\vartheta_0 = 2\times7.292\times10^{-5}\times\sin(${s.lat0}^\circ)$`, Viz.fmt(f0, { sig: 4 }) + ' s⁻¹', 'Vallis defines f after (2.51)') +
         (isFinite(c.radius)
           ? W.line(String.raw`$|R| = U/|f_0| = ${Viz.tnum(run.U)}/${Viz.tnum(Math.abs(f0), 4)}$`, Viz.fmt(km(c.radius), { sig: 3 }) + ' km', '(2.234b) with no pressure gradient: U/R + f = 0') +
-            W.line(String.raw`$T = 2\pi/|f_0|$`, Viz.fmt(c.period / 3600, { sig: 3 }) + ' h', '= one sidereal day / (2 sin ϑ)') +
-            W.box(String.raw`a loop of about $\mathbf{${Viz.tnum(km(c.radius), 2)}}$ km radius every $\mathbf{${Viz.tnum(c.period / 3600, 3)}}$ h, turning to the ${hemi} (${c.sense})`)
+            W.line(String.raw`$T = 2\pi/|f_0|$`, Viz.fmt(c.period / 3600, { sig: 3 }) + ' h', 'f-plane; = one sidereal day / (2 sin ϑ)') +
+            (isFinite(run.Tsph) ? W.line('loop period measured on the sphere', Viz.fmt(run.Tsph / 3600, { sig: 3 }) + ' h', 'longer: the loop is centred equatorward, where |f| is smaller (β)') : '') +
+            W.box(String.raw`a loop of about $\mathbf{${Viz.tnum(km(c.radius), 2)}}$ km radius every $\mathbf{${Viz.tnum((isFinite(run.Tsph) ? run.Tsph : c.period) / 3600, 3)}}$ h on the sphere (≈ ${Viz.tnum(c.period / 3600, 3)} h on an f-plane), turning to the ${hemi} (${c.sense})`)
           : W.box('At the equator f₀ = 0: no loop at the start; the radius U/|f| is infinite.')) +
         W.hint('Easy numbers: at mid-latitudes f ≈ 10⁻⁴ s⁻¹, so 10 m/s gives loops of about 100 km and periods of about 17 h.') +
         W.step(3, 'Why the speed never changes') +
@@ -4078,18 +4100,26 @@ print(np.rad2deg(lat[-1]))             # {{latEnd}} deg after 48 h`,
       let lo = Infinity, hi = -Infinity; for (let k = 0; k < kE; k++) { lo = Math.min(lo, r[1][k]); hi = Math.max(hi, r[1][k]); }
       return { T, R: (hi - lo) * A_EARTH / 2 };
     }
-    // centre-latitude rows: the loop is centred at ϑ_c = ϑ0 − u0/(f0 a), so f(ϑ_c) — not f(ϑ0) — sets its size and period
+    // Sphere-vs-plane rows with tolerances DERIVED from the expansion parameter ε = U cot|ϑ0| / (|f0| a) (the loop's
+    // latitude excursion U/(f0 a) times the relative change of f per radian, cot ϑ0): f(ϑ_c) is right to O(ε²),
+    // f0 only to O(ε). No hand-set tolerance: centre rows rtol = 5 ε²; f-plane rows test the O(ε) coefficient = 1.
     const loopRows = [];
-    [[30, 3e-3, 5e-3], [45, 1e-3, 3e-3], [60, 1e-3, 3e-3], [-45, 1e-3, 3e-3]].forEach(([lat, rC, rS]) => {
-      const m10 = measureLoop(lat, 10), m1 = measureLoop(lat, 1), L = 'np.deg2rad(' + lat.toFixed(1) + ')';
-      const fc = U => py('coriolis_parameter', L + ' - ' + U.toFixed(1) + ' / (' + py('coriolis_parameter', L) + ' * 6.371e6)');
-      const ic = (U, f) => py('inertial_circle', U.toFixed(1) + ', ' + f);
+    const epsOf = (lat, U) => U / Math.tan(Math.abs(lat * D2R)) / (Math.abs(coriolisParameter(lat * D2R)) * A_EARTH);
+    const fcOf = (lat, U) => coriolisParameter(lat * D2R - U / (coriolisParameter(lat * D2R) * A_EARTH));
+    [30, 45, 60, -45].forEach(lat => {
+      const m10 = measureLoop(lat, 10), m1 = measureLoop(lat, 1), e10 = epsOf(lat, 10), e1 = epsOf(lat, 1), L = 'np.deg2rad(' + lat.toFixed(1) + ')';
+      const fc = py('coriolis_parameter', L + ' - 10.0 / (' + py('coriolis_parameter', L) + ' * 6.371e6)'), ic = py('inertial_circle', '10.0, ' + fc);
+      const c1 = inertialCircle(1, coriolisParameter(lat * D2R)), r5 = 5 * e10 * e10;
       loopRows.push(
-        { name: `loop period, U = 10 at ${lat}°: run vs 2π/|f(ϑ_c)|, ϑ_c = ϑ0 − u0/(f0 a) (rtol ${rC})`, js: m10.T, py: ic(10, fc(10)) + "['period']", rtol: rC },
-        { name: `loop radius, U = 10 at ${lat}°: run vs U/|f(ϑ_c)| (rtol ${rC})`, js: m10.R, py: ic(10, fc(10)) + "['radius']", rtol: rC },
-        { name: `f-plane limit, U = 1 at ${lat}°: period vs 2π/|f0| (rtol ${rS})`, js: m1.T, py: ic(1, py('coriolis_parameter', L)) + "['period']", rtol: rS },
-        { name: `f-plane limit, U = 1 at ${lat}°: radius vs U/|f0| (rtol ${rS})`, js: m1.R, py: ic(1, py('coriolis_parameter', L)) + "['radius']", rtol: rS });
+        { name: `loop period, U = 10 at ${lat}°: run vs 2π/|f(ϑ_c)|, ϑ_c = ϑ0 − u0/(f0 a); ε = ${e10.toExponential(2)}, rtol 5ε² = ${r5.toExponential(1)}`, js: m10.T, py: ic + "['period']", rtol: r5 },
+        { name: `loop radius, U = 10 at ${lat}°: run vs U/|f(ϑ_c)|; ε = ${e10.toExponential(2)}, rtol 5ε² = ${r5.toExponential(1)}`, js: m10.R, py: ic + "['radius']", rtol: r5 },
+        { name: `f-plane limit, U = 1 at ${lat}°: (T_run/(2π/|f0|) − 1)/ε = 1 (O(ε) coefficient), ε = ${e1.toExponential(2)}, rtol 0.1`, js: (m1.T / c1.period - 1) / e1, expect: 1, rtol: 0.1 },
+        { name: `f-plane limit, U = 1 at ${lat}°: (R_run/(U/|f0|) − 1)/ε = 1 (same O(ε) scaling, measured), ε = ${e1.toExponential(2)}, rtol 0.1`, js: (m1.R / c1.radius - 1) / e1, expect: 1, rtol: 0.1 });
     });
+    { // order of accuracy of the centre-latitude form: residual ∝ ε² ∝ U², so halving U divides it by 4
+      const res = U => measureLoop(45, U).T / inertialCircle(U, fcOf(45, U)).period - 1;
+      loopRows.push({ name: 'order of accuracy at 45°N: centre-row period residual(U = 10)/residual(U = 5) = 4 (∝ ε²), rtol 0.15', js: res(10) / res(5), expect: 4, rtol: 0.15 });
+    }
     const ghostRK = inertialOscillationSphere(L45, LON, 10, 0, 86400, 60, OMEGA, A_EARTH, true, false);
     const rows = [
       { name: 'f(45°N) = 2Ω sin ϑ', js: f45, py: py('coriolis_parameter', 'np.deg2rad(45.0)'), rtol: 1e-12 },
@@ -4174,7 +4204,7 @@ function drawLocal(v, s, run, n, a) {
     if (v.w > 240) { P.text(p[0] + L * u / U, p[1] + L * vv / U, 'u', { color: COL.u, size: 13, weight: 700, dx: 6 }); if (fl) P.text(p[0] + L * fl * vv / U, p[1] - L * fl * u / U, '−f k×u', { color: COL.cor, size: 12, weight: 700, dx: 6 }); }
   });
   if (a && a.holding && isFinite(run.circ.radius)) {
-    const lines = ['loop radius ' + Viz.fmt(km(run.circ.radius), { sig: 3 }) + ' km · period ' + Viz.fmt(run.circ.period / 3600, { sig: 3 }) + ' h'];
+    const lines = ['loop radius ' + Viz.fmt(km(run.circ.radius), { sig: 3 }) + ' km · period ' + Viz.fmt(run.circ.period / 3600, { sig: 3 }) + ' h on an f-plane' + (isFinite(run.Tsph) ? ', ' + Viz.fmt(run.Tsph / 3600, { sig: 3 }) + ' h here (β)' : '')];
     if (run.drift) lines.push('drift per loop: ' + Viz.fmt(Math.abs(km(run.drift.dx)), { sig: 3 }) + ' km ' + (run.drift.dx < 0 ? 'west' : 'east'));
     Viz.card(v.ctx, v.w / 2, v.h * 0.22, lines, { color: COL.path });
   }
@@ -4187,7 +4217,7 @@ function drawF(v, s, run, n) {
   P.fillBetween(xs, fs.map(y => Math.min(0, y)), 0, { color: Viz3D.lutCss('cmocean.balance', 0.15), alpha: 0.35 });
   P.line(xs, fs, { color: Viz.color('text'), width: 2 });
   P.line([-90, 90], [2 * OMEGA * 1e4, 2 * OMEGA * 1e4], { color: Viz.color('muted'), width: 1, dash: [4, 4] });
-  if (v.w > 200) { P.text(-85, 1.1, 'f > 0: turns right', { size: 12, align: 'left', dx: 0 }); P.text(85, -1.1, 'f < 0: turns left', { size: 12, align: 'right' }); P.text(0, 2 * OMEGA * 1e4, '2Ω', { size: 12, dy: -8, color: Viz.color('muted') }); }
+  if (v.w > 200) { P.text(85, -0.7, 'NH: f > 0, turns right', { size: 12, align: 'right' }); P.text(-85, 0.7, 'SH: f < 0, turns left', { size: 12, align: 'left' }); P.text(0, 2 * OMEGA * 1e4, '2Ω', { size: 12, dy: -8, color: Viz.color('muted') }); }
   const lat = run.lat[n] / D2R;
   P.dot(s.lat0, coriolisParameter(s.lat0 * D2R) * 1e4, 3.5, { color: Viz.color('muted') });
   P.dot(lat, coriolisParameter(lat * D2R) * 1e4, 5.5, { color: COL.path, stroke: '#fff', strokeWidth: 2 });
