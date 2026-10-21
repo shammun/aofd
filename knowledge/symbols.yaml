@@ -1,0 +1,252 @@
+# Symbol atlas — ONE source of truth for symbols (R4 §2.3). Rendered into: the notebook appendix table, hover cards in
+# every explainer (Viz.symbols), and viz/atlas.html. Written in our own words; meanings checked against the Vallis
+# notation pages (PDF 19–20, read privately) and the Kundu site's knowledge/notation.md.
+# Schema per entry: symbol (TeX) · name · say_it · unit · typical {atmosphere, ocean} · meaning (≤ 20 words) ·
+#   first (where it is first taught: ch00 part / Vallis §) · aka (other books' symbol, esp. Kundu) · pitfall · see
+# ⚠️ in `pitfall` = a convention that differs between Vallis, Kundu or common practice (lesson-reviewer check 7).
+# The concept-analyst extends this file every chapter; never delete an entry, add a meaning instead.
+
+meta:
+  version: 1
+  seeded: "2026-10-20 (setup session, §12 step 7)"
+  families: [coordinates, rotation, kinematics, operators, thermodynamics, ocean, waves, nondimensional]
+  notation_rules:
+    - "Vectors bold (u horizontal (u, v); bold v three-dimensional (u, v, w)); unit vectors i, j, k upright."
+    - "A subscript is a derivative only when it is a coordinate (u_y = ∂u/∂y) or the text says so; subscript 0 = reference value."
+    - "Vector components are often written as superscripts in Vallis (A^x, A^y)."
+
+symbols:
+  # ---------------------------------------------------------------- coordinates
+  coordinates:
+    - {symbol: 'x, y, z', name: 'east, north, up coordinates', say_it: 'x, y, z', unit: m,
+       typical: {atmosphere: 'L ~ 1000 km, H ~ 10 km', ocean: 'L ~ 100–1000 km, H ~ 4 km'},
+       meaning: 'Local Cartesian axes: x eastward (zonal), y northward (meridional), z upward.',
+       first: ch00a 0.2, aka: 'Kundu x_1, x_2, x_3; Kundu ch13 also east/north/up', pitfall: 'Some ocean texts measure depth positive downward; Vallis z is up, so depths are negative z.', see: ['\lambda', '\vartheta']}
+    - {symbol: '\vartheta', name: 'latitude', say_it: 'theta (curly) / latitude', unit: 'rad (shown in °)',
+       typical: {atmosphere: '0 at the equator, ±90° at the poles', ocean: same},
+       meaning: 'Angle north (+) or south (−) of the equator.',
+       first: ch00a 0.18, aka: 'Kundu ch13 θ (latitude); Kundu ch04 φ; Kundu App. B and spherical maths: θ = colatitude; many GFD texts φ',
+       pitfall: '⚠️ Vallis uses ϑ (vartheta) for latitude and θ for POTENTIAL TEMPERATURE. Kundu uses θ for latitude (ch13) and θ for colatitude (App. B). Always check which.',
+       see: ['\theta', '\lambda', f]}
+    - {symbol: '\lambda', name: longitude, say_it: lambda, unit: 'rad (shown in °)', typical: {atmosphere: '0–360° or −180–180°', ocean: same},
+       meaning: 'Angle east of the Greenwich meridian.', first: ch00a 0.18, aka: 'Kundu φ (azimuth in spherical coordinates)',
+       pitfall: 'λ is also a wavelength in many books (and in Kundu ch07). Data files mix 0–360 and −180–180.', see: ['\vartheta']}
+    - {symbol: 'r', name: 'distance from the Earth''s centre', say_it: r, unit: m, typical: {atmosphere: 'r = a + z ≈ a', ocean: 'r ≈ a'},
+       meaning: 'Radial coordinate; the thin-shell approximation replaces r by a almost everywhere.', first: ch00a 0.18,
+       aka: 'Kundu App. B r', pitfall: 'Replacing r by a must be done consistently (Vallis §2.2) or energy and angular momentum are lost.', see: [a]}
+    - {symbol: 'a', name: 'radius of the Earth', say_it: a, unit: m, typical: {atmosphere: '6.371e6 m (easy: 6400 km)', ocean: same},
+       meaning: 'Mean Earth radius; one degree of latitude is a·π/180 ≈ 111 km.', first: ch00a 0.18, aka: 'Kundu R_e / a',
+       pitfall: '"a" is also the generic vector a in Chapter 0A; context decides.', see: [r]}
+    - {symbol: 'Z', name: 'log-pressure height', say_it: 'capital Z', unit: m, typical: {atmosphere: 'Z = −H ln(p/p_R), H ≈ 7 km', ocean: '—'},
+       meaning: 'A height built from pressure so that a log-p axis reads almost like kilometres.', first: ch00c, aka: 'many texts z*',
+       pitfall: 'Not the geometric height: they differ where the temperature differs from the reference.', see: [p, H]}
+    - {symbol: 'p_R', name: 'reference pressure', say_it: 'p R', unit: Pa, typical: {atmosphere: '1000 hPa = 1e5 Pa', ocean: '—'},
+       meaning: 'The pressure that defines potential temperature and log-pressure height.', first: ch00b 3,
+       aka: 'Kundu p_o / code P_REF = 1.0e5 Pa', pitfall: 'Kundu calls it p_o and treats it as the surface pressure; code uses exactly 1000 hPa.', see: ['\theta', Z]}
+
+  # ---------------------------------------------------------------- rotation
+  rotation:
+    - {symbol: '\Omega', name: 'Earth''s rotation rate', say_it: Omega, unit: 's^-1',
+       typical: {atmosphere: '7.292e-5 s⁻¹ (easy: 7e-5)', ocean: same},
+       meaning: '2π per sidereal day (86 164 s), not per solar day.', first: ch00b 7, aka: 'Kundu Ω', pitfall: 'Using 86 400 s gives a 0.3 % error.', see: ['\boldsymbol\Omega', f]}
+    - {symbol: '\boldsymbol\Omega', name: 'rotation vector', say_it: 'Omega vector', unit: 's^-1', typical: {atmosphere: 'points along the axis, south pole → north pole', ocean: same},
+       meaning: 'Vector along the spin axis; its local vertical part is Ω sin ϑ.', first: ch00b 7, aka: 'Kundu Ω',
+       pitfall: 'Only the local vertical component matters for horizontal large-scale flow (traditional approximation).', see: [f]}
+    - {symbol: 'f', name: 'Coriolis parameter', say_it: f, unit: 's^-1',
+       typical: {atmosphere: '1.03e-4 s⁻¹ at 45° (easy: 1e-4); 0 at the equator', ocean: same},
+       meaning: 'f = 2Ω sin ϑ: twice the local vertical spin rate; sets how strongly motion is deflected.', first: ch00b 7,
+       aka: 'Kundu f = 2Ω sin θ (13.8) with θ = latitude',
+       pitfall: '⚠️ Negative in the southern hemisphere, so deflection is to the left there. Same formula, different latitude symbol in Kundu.',
+       see: ['f_0', '\beta', Ro]}
+    - {symbol: 'f_0', name: 'reference Coriolis parameter', say_it: 'f nought', unit: 's^-1', typical: {atmosphere: '1e-4 s⁻¹ at 45°', ocean: same},
+       meaning: 'f at the central latitude of an f-plane or β-plane.', first: ch00b 7, aka: 'Kundu f_0', pitfall: '', see: [f, '\beta']}
+    - {symbol: '\beta', name: 'beta, the northward gradient of f', say_it: beta, unit: 'm^-1 s^-1',
+       typical: {atmosphere: '1.6e-11 m⁻¹ s⁻¹ at 45°; 2.3e-11 at the equator', ocean: same},
+       meaning: 'β = ∂f/∂y = 2Ω cos ϑ / a; the cause of Rossby waves and western boundary currents.', first: ch00b 7,
+       aka: 'Kundu β (13.10)', pitfall: 'Also used for expansion coefficients β_T, β_S in Vallis. β* = β − u_yy is the effective gradient with a mean flow.', see: [f]}
+    - {symbol: '\beta^*', name: 'effective planetary vorticity gradient', say_it: 'beta star', unit: 'm^-1 s^-1', typical: {atmosphere: '≈ β, larger on jet flanks', ocean: same},
+       meaning: 'β − ∂²ū/∂y²: the PV gradient a Rossby wave feels in a sheared zonal flow.', first: 'Vallis ch06/ch09', aka: 'Kundu β − U″ (Rayleigh–Kuo, 13.124)', pitfall: '', see: ['\beta']}
+
+  # ---------------------------------------------------------------- kinematics
+  kinematics:
+    - {symbol: '\mathbf u', name: 'horizontal velocity', say_it: 'u vector', unit: 'm s^-1', typical: {atmosphere: '10 m/s (jets 30–50)', ocean: '0.1 m/s (Gulf Stream 1–2)'},
+       meaning: 'The horizontal wind or current (u, v).', first: ch00a 0.2, aka: 'Kundu u means the full 3-D velocity',
+       pitfall: '⚠️ Vallis: bold u = horizontal (u, v), bold v = 3-D (u, v, w). Kundu: bold u = 3-D.', see: [u, v, w]}
+    - {symbol: 'u', name: 'zonal (eastward) velocity', say_it: u, unit: 'm s^-1', typical: {atmosphere: '10 m/s', ocean: '0.1 m/s'},
+       meaning: 'Velocity component toward the east; positive = westerly wind.', first: ch00a 0.2, aka: 'Kundu u_1 or u', pitfall: 'A "westerly" wind blows FROM the west, i.e. u > 0.', see: ['\mathbf u']}
+    - {symbol: 'v', name: 'meridional (northward) velocity', say_it: v, unit: 'm s^-1', typical: {atmosphere: '1–10 m/s', ocean: '0.01–0.1 m/s'},
+       meaning: 'Velocity component toward the north.', first: ch00a 0.2, aka: 'Kundu u_2 or v', pitfall: 'Vallis sets it upright (υ) to tell it from the bold 3-D velocity v.', see: ['\mathbf u']}
+    - {symbol: 'w', name: 'vertical velocity', say_it: w, unit: 'm s^-1', typical: {atmosphere: '1 cm/s (large scale)', ocean: '1e-6–1e-5 m/s (Ekman pumping ~ 30 m/yr)'},
+       meaning: 'Upward velocity; tiny at large scales because the fluid layers are thin.', first: ch00a 0.2, aka: 'Kundu u_3 or w',
+       pitfall: 'In Vallis w is also the water-vapour mixing ratio (ch18).', see: ['\omega_p']}
+    - {symbol: '\omega_p', name: 'pressure velocity (omega)', say_it: omega, unit: 'Pa s^-1', typical: {atmosphere: '±0.1 Pa/s (≈ ∓1 cm/s)', ocean: '—'},
+       meaning: 'Dp/Dt: the vertical velocity in pressure coordinates; negative = rising air.', first: 'Vallis §2.6', aka: 'often written ω',
+       pitfall: '⚠️ Sign opposite to w, and the same letter as vorticity ω. Our atlas writes ω_p for clarity.', see: [w, '\boldsymbol\omega']}
+    - {symbol: '\boldsymbol\omega', name: vorticity, say_it: 'omega vector', unit: 's^-1', typical: {atmosphere: '1e-5 s⁻¹ (synoptic)', ocean: '1e-5–1e-4 s⁻¹'},
+       meaning: 'Curl of velocity, ∇ × v: twice the local spin rate of a fluid element.', first: ch00a 0.10, aka: 'Kundu ω (ch03, ch05)', pitfall: 'Not the angular frequency ω of a wave.', see: ['\zeta']}
+    - {symbol: '\zeta', name: 'relative (vertical) vorticity', say_it: zeta, unit: 's^-1', typical: {atmosphere: '±1e-5–1e-4 s⁻¹', ocean: '±1e-5 s⁻¹ (eddies up to f)'},
+       meaning: 'ζ = ∂v/∂x − ∂u/∂y = k·∇×u; positive = anticlockwise seen from above.', first: ch00b 9,
+       aka: 'Kundu ζ or ω_z', pitfall: 'Positive ζ is cyclonic in the NH but anticyclonic in the SH (where f < 0).', see: ['\zeta + f', q]}
+    - {symbol: '\zeta + f', name: 'absolute vorticity', say_it: 'zeta plus f', unit: 's^-1', typical: {atmosphere: '≈ f ~ 1e-4 s⁻¹', ocean: same},
+       meaning: 'Spin relative to the Earth plus the Earth''s own local spin.', first: ch00b 9, aka: 'Kundu ζ + f', pitfall: '', see: ['\zeta', f]}
+    - {symbol: '\psi', name: streamfunction, say_it: psi, unit: 'm^2 s^-1 (ocean transport: Sv)', typical: {atmosphere: '1e7 m²/s (synoptic)', ocean: '30 Sv subtropical gyre'},
+       meaning: 'A field whose contours are streamlines; u = −∂ψ/∂y, v = ∂ψ/∂x.', first: ch00c,
+       aka: 'Kundu ch04/ch06/ch11: u = +∂ψ/∂y, v = −∂ψ/∂x; Kundu ch13: same as Vallis',
+       pitfall: '⚠️ Sign convention differs: with Vallis''s sign, high ψ is on the RIGHT of the flow; with Kundu ch04 it is on the left. Overturning ψ (lat–depth) has its own sign, stated in each caption.',
+       see: ['\zeta', Sv]}
+    - {symbol: '\eta', name: 'surface or interface displacement; specific entropy', say_it: eta, unit: 'm (or J kg^-1 K^-1)', typical: {atmosphere: '—', ocean: 'sea-surface height ±1 m'},
+       meaning: 'Height of a free surface or interface above rest; in thermodynamics, specific entropy.', first: 'Vallis ch01/ch03',
+       aka: 'Kundu η (surface), s (entropy)', pitfall: '⚠️ Vallis uses η for entropy AND perturbation height AND enstrophy dissipation; Kundu uses s for entropy.', see: [h]}
+    - {symbol: 'h', name: 'layer thickness', say_it: h, unit: m, typical: {atmosphere: '—', ocean: 'upper layer 500 m'},
+       meaning: 'Thickness of a shallow-water layer; total depth = mean depth + η − bottom height.', first: 'Vallis §3.1', aka: 'Kundu h, H + η', pitfall: '', see: ['\eta', q]}
+    - {symbol: 'q', name: 'potential vorticity (QG or shallow-water); specific humidity', say_it: q, unit: 's^-1 or m^-1 s^-1 (PV); kg/kg (humidity)',
+       typical: {atmosphere: 'SW PV (ζ+f)/h ~ 1e-8 m⁻¹s⁻¹; humidity up to 0.02 kg/kg', ocean: '(ζ+f)/h ~ 1e-7 m⁻¹ s⁻¹'},
+       meaning: 'A spin per unit thickness that a fluid column keeps when frictionless and unheated.', first: ch00b 9,
+       aka: 'Kundu (ζ + f)/h (13.xx)', pitfall: '⚠️ q means PV in dynamics chapters and specific humidity in ch18.', see: [Q, '\zeta']}
+    - {symbol: 'Q', name: 'Ertel potential vorticity', say_it: 'capital Q', unit: 'K m^2 kg^-1 s^-1 (1 PVU = 1e-6)', typical: {atmosphere: '1 PVU troposphere, > 2 PVU stratosphere', ocean: '—'},
+       meaning: 'Absolute vorticity times the gradient of potential temperature, divided by density.', first: ch00b 9, aka: '—',
+       pitfall: 'Q̇ (Q with a dot) is a heating rate, not PV.', see: [q, PVU]}
+    - {symbol: '\mathbf c_g', name: 'group velocity', say_it: 'c g', unit: 'm s^-1', typical: {atmosphere: 'Rossby packets ~ 30 m/s east', ocean: 'first-mode Rossby ~ 5 cm/s west'},
+       meaning: 'The velocity of a wave packet''s energy: ∂ω/∂k.', first: ch00a 0.16, aka: 'Kundu c_g', pitfall: 'Can point opposite to the phase velocity (Rossby waves).', see: [c_p]}
+
+  # ---------------------------------------------------------------- operators
+  operators:
+    - {symbol: '\nabla', name: 'del (gradient operator)', say_it: 'del or nabla', unit: 'm^-1', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'The vector of partial derivatives (∂x, ∂y, ∂z); acts on what follows it.', first: ch00a 0.8, aka: 'Kundu ∇', pitfall: 'Order matters: (u·∇) is an operator, (∇·u) is a number.', see: ['\nabla_z', '\nabla^2']}
+    - {symbol: '\nabla_z', name: 'horizontal gradient at constant height', say_it: 'del z', unit: 'm^-1', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Gradient along a level surface; ∇_p is the same along a pressure surface.', first: 'ch00a (B.2 bridge), Vallis §2.6',
+       aka: '—', pitfall: '⚠️ The subscript names the coordinate held fixed, not a derivative.', see: ['\nabla']}
+    - {symbol: '\nabla^2', name: Laplacian, say_it: 'del squared', unit: 'm^-2', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Divergence of the gradient: a value minus the average of its neighbours (times −).', first: ch00a 0.11, aka: 'Kundu ∇²', pitfall: '', see: ['\zeta']}
+    - {symbol: '\nabla^\perp', name: 'perpendicular gradient', say_it: 'del perp', unit: 'm^-1', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'k × ∇: the gradient turned 90° to the left; u = ∇⊥ψ.', first: 'ch00a 0.5', aka: '—', pitfall: '', see: ['\psi']}
+    - {symbol: '\mathrm{curl}_z', name: 'vertical curl', say_it: 'curl z', unit: 'm^-1', typical: {atmosphere: '—', ocean: 'wind-stress curl ~ 1e-7 N m⁻³'},
+       meaning: 'k·∇×A = ∂A^y/∂x − ∂A^x/∂y; drives Ekman pumping when A is the wind stress.', first: ch00a 0.10, aka: '—', pitfall: '', see: ['\boldsymbol\tau']}
+    - {symbol: '\frac{D}{Dt}', name: 'material derivative', say_it: 'D by D t', unit: 's^-1', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Rate of change following a fluid parcel: ∂/∂t + v·∇.', first: ch00a 0.14, aka: 'Kundu D/Dt (3.5)', pitfall: 'Vallis D_g/Dt uses the geostrophic velocity only.', see: ['\nabla']}
+    - {symbol: '\left(\frac{\partial a}{\partial b}\right)_c', name: 'partial derivative at constant c', say_it: 'partial a by partial b at constant c', unit: '—', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Change of a with b while c is held fixed; the brackets matter in thermodynamics.', first: ch00a 0.7, aka: 'Kundu same', pitfall: 'Not the same as the value of ∂a/∂b at b = c (a vertical bar).', see: []}
+    - {symbol: '\delta(x)', name: 'Dirac delta', say_it: delta, unit: '1/(unit of x)', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'A spike of zero width and area one; picks out a value under an integral.', first: 'ch00a (B.4)', aka: 'Kundu δ (B.4.1)',
+       pitfall: '⚠️ δ is also a boundary-layer thickness (Ekman δ) and a small change (δT); context decides.', see: []}
+    - {symbol: '\delta_{ij}, \epsilon_{ijk}', name: 'Kronecker delta, alternating tensor', say_it: 'delta i j, epsilon i j k', unit: '—', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Index-notation tools: δ_ij = 1 if i = j; ε_ijk gives cross products.', first: ch00a 0.6, aka: 'Kundu same (ch02)', pitfall: '', see: []}
+    - {symbol: '\mathbf i, \mathbf j, \mathbf k', name: 'unit vectors east, north, up', say_it: 'i, j, k', unit: '—', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Length-one arrows along x, y, z; on a sphere they turn as you move.', first: ch00a 0.2, aka: 'Kundu e_1, e_2, e_3',
+       pitfall: '⚠️ Bold italic k is the wave vector; upright k is the vertical unit vector.', see: []}
+
+  # ---------------------------------------------------------------- thermodynamics (atmosphere)
+  thermodynamics:
+    - {symbol: 'p', name: pressure, say_it: p, unit: 'Pa (maps: hPa)', typical: {atmosphere: '1000 hPa at the surface, 500 hPa ≈ 5.5 km', ocean: '1 dbar per metre of depth'},
+       meaning: 'Force per area; hydrostatically, the weight of the fluid above.', first: ch00b 3, aka: 'Kundu p', pitfall: '1 hPa = 100 Pa = 1 mbar.', see: ['p_R', '\Phi']}
+    - {symbol: '\rho', name: density, say_it: rho, unit: 'kg m^-3', typical: {atmosphere: '1.2 kg/m³ at the surface', ocean: '1025–1028 kg/m³'},
+       meaning: 'Mass per volume.', first: ch00b 3, aka: 'Kundu ρ', pitfall: '', see: ['\rho_0', '\sigma']}
+    - {symbol: '\rho_0', name: 'reference density', say_it: 'rho nought', unit: 'kg m^-3', typical: {atmosphere: '—', ocean: '1025 kg/m³'},
+       meaning: 'A constant density used by the Boussinesq approximation.', first: 'Vallis §2.4', aka: 'Kundu ρ_0', pitfall: '', see: [b]}
+    - {symbol: 'T', name: temperature, say_it: T, unit: K, typical: {atmosphere: '288 K surface, 220 K tropopause', ocean: '275–300 K'},
+       meaning: 'Thermodynamic temperature; formulas use kelvin.', first: ch00b 3, aka: 'Kundu T', pitfall: 'T is also a time scale in scaling arguments.', see: ['\theta']}
+    - {symbol: '\theta', name: 'potential temperature', say_it: theta, unit: K, typical: {atmosphere: '290 K surface, 350 K at 12 km', ocean: '≈ in-situ T (0–30 °C)'},
+       meaning: 'Temperature a parcel would have if brought without heating to p_R; conserved in dry adiabatic motion.', first: ch00b 3,
+       aka: 'Kundu θ (1.31) — same meaning in ch01', pitfall: '⚠️ In Kundu ch13 θ is LATITUDE; in Vallis it is always potential temperature (latitude is ϑ).', see: ['\vartheta', N]}
+    - {symbol: '\Theta', name: 'conservative temperature', say_it: 'capital theta', unit: 'K or °C', typical: {atmosphere: '—', ocean: '0–30 °C'},
+       meaning: 'TEOS-10 temperature variable for seawater, proportional to potential enthalpy.', first: 'Vallis §1.7', aka: 'gsw CT', pitfall: 'Close to, but not equal to, potential temperature.', see: [S]}
+    - {symbol: 'b', name: buoyancy, say_it: b, unit: 'm s^-2', typical: {atmosphere: '0.03 m/s² for 1 K anomaly', ocean: '1e-3 m/s² across the thermocline'},
+       meaning: 'Upward force per unit mass from a density (or θ) anomaly: −g δρ/ρ0 or g δθ/θ̄.', first: ch00b 6,
+       aka: 'Kundu works with ρ′ (density perturbation) and writes −gρ′/ρ0',
+       pitfall: '⚠️ b > 0 means LIGHTER fluid; ρ′ > 0 means heavier. The signs are opposite.', see: [N, '\rho_0']}
+    - {symbol: 'N', name: 'buoyancy (Brunt–Väisälä) frequency', say_it: N, unit: 's^-1', typical: {atmosphere: '0.01 s⁻¹ troposphere, 0.02 stratosphere', ocean: '1e-3–1e-2 s⁻¹ (thermocline), 1e-3 deep'},
+       meaning: 'N² = ∂b/∂z: how fast a displaced parcel bobs; N² > 0 is stable.', first: ch00b 6, aka: 'Kundu N (1.36)', pitfall: 'Period 2π/N ≈ 10 min in the troposphere.', see: [b, L_d]}
+    - {symbol: '\Gamma', name: 'lapse rate', say_it: gamma, unit: 'K m^-1 (shown K/km)', typical: {atmosphere: 'met: +6.5 K/km mean, +9.8 K/km dry adiabatic', ocean: '—'},
+       meaning: 'Rate of temperature change with height.',  first: ch00b 3,
+       aka: 'Kundu Γ ≡ dT/dz (dry adiabat −9.8 K/km); meteorology and Vallis Γ ≡ −dT/dz (+9.8 K/km)',
+       pitfall: '⚠️ Project rule: COMPUTE with Kundu Γ = dT/dz (fluidpy code) and ALWAYS SHOW the meteorological Γ = −dT/dz next to it; the stability inequality flips.',
+       see: ['\theta', N]}
+    - {symbol: 'c_p, c_v', name: 'heat capacities at constant pressure / volume', say_it: 'c p, c v', unit: 'J kg^-1 K^-1', typical: {atmosphere: 'dry air 1004 / 717', ocean: 'seawater c_p ≈ 3990'},
+       meaning: 'Energy to warm 1 kg by 1 K holding pressure or volume fixed.', first: ch00b 3, aka: 'Kundu C_p, C_v',
+       pitfall: '⚠️ Vallis c_p is ALSO the phase speed of a wave.', see: [R, '\kappa']}
+    - {symbol: 'R', name: 'gas constant of dry air', say_it: R, unit: 'J kg^-1 K^-1', typical: {atmosphere: '287 J/(kg K)', ocean: '—'},
+       meaning: 'p = ρRT for dry air (the specific, not universal, gas constant).', first: ch00b 3, aka: 'Kundu R (R_AIR)', pitfall: 'Universal R_u = 8.314 J/(mol K) differs.', see: [c_p]}
+    - {symbol: '\kappa', name: 'R/c_p; diffusivity', say_it: kappa, unit: '— (R/c_p) or m² s⁻¹', typical: {atmosphere: 'R/c_p ≈ 2/7 = 0.286', ocean: 'heat diffusivity 1.4e-7 m²/s'},
+       meaning: 'Two meanings: the exponent in θ = T(p_R/p)^κ, or a diffusivity.', first: ch00b 3, aka: 'Kundu κ (diffusivity)', pitfall: '⚠️ Two meanings in one book.', see: ['\theta']}
+    - {symbol: '\gamma', name: 'c_p/c_v', say_it: gamma, unit: '—', typical: {atmosphere: '1.4', ocean: '—'},
+       meaning: 'Ratio of heat capacities; also a vorticity gradient in Vallis ch09.', first: 'Vallis §1.5', aka: 'Kundu γ', pitfall: '', see: [c_p]}
+    - {symbol: '\Phi', name: geopotential, say_it: phi, unit: 'm^2 s^-2', typical: {atmosphere: '≈ g z; 500 hPa ≈ 55 000 m²/s²', ocean: '—'},
+       meaning: 'Potential energy per unit mass from gravity (and centrifugal), ≈ gz.', first: ch00b 3,
+       aka: 'Kundu Π or Φ (body-force potential)', pitfall: 'Geopotential HEIGHT is Φ/g0 in (geopotential) metres.', see: [Z_g, '\phi']}
+    - {symbol: 'Z_g', name: 'geopotential height', say_it: 'geopotential height', unit: 'm (gpm)', typical: {atmosphere: '500 hPa: 5500–5900 m', ocean: '—'},
+       meaning: 'Height of a pressure surface measured as Φ/g0; what 500 hPa maps contour.', first: ch00b 3, aka: 'often Z or z',
+       pitfall: 'Atlas-only symbol (Vallis uses Φ); low heights on a 500 hPa map mean cold air below.', see: ['\Phi']}
+    - {symbol: '\phi', name: 'pressure over density (p/ρ0)', say_it: phi, unit: 'm^2 s^-2', typical: {atmosphere: '—', ocean: '—'},
+       meaning: 'Kinematic pressure, the Boussinesq stand-in for p.', first: 'Vallis §2.4', aka: 'Kundu p/ρ0',
+       pitfall: '⚠️ Not latitude (Vallis latitude is ϑ); φ (curly) is a passive tracer in Vallis.', see: ['\Phi']}
+    - {symbol: '\Pi', name: 'Exner function', say_it: pi, unit: 'J kg^-1 K^-1', typical: {atmosphere: 'c_p (p/p_R)^κ ≈ 1004 at 1000 hPa', ocean: '—'},
+       meaning: 'c_p T/θ, an enthalpy-like vertical coordinate helper.', first: 'Vallis §2.5', aka: 'Kundu Π = Buckingham groups',
+       pitfall: '⚠️ Kundu uses Π for dimensionless groups.', see: ['\theta']}
+    - {symbol: 'H', name: 'scale height; vertical scale', say_it: H, unit: m, typical: {atmosphere: '7–8 km (scale height)', ocean: '4 km depth'},
+       meaning: 'Height over which pressure falls by e; also any typical depth.', first: ch00b 3, aka: 'Kundu H', pitfall: '', see: [Z]}
+    - {symbol: '\mu, \nu', name: 'dynamic and kinematic viscosity', say_it: 'mu, nu', unit: 'Pa s; m^2 s^-1', typical: {atmosphere: 'ν = 1.5e-5 m²/s', ocean: 'ν = 1e-6 m²/s'},
+       meaning: 'Internal friction; ν = μ/ρ is a momentum diffusivity.', first: 'Vallis §1.3', aka: 'Kundu μ, ν', pitfall: 'Vallis μ is also a chemical potential (§1.7).', see: [Re, Ek]}
+    - {symbol: '\alpha', name: 'specific volume; aspect ratio', say_it: alpha, unit: 'm^3 kg^-1 or —', typical: {atmosphere: '0.83 m³/kg', ocean: '9.7e-4 m³/kg'},
+       meaning: '1/ρ in thermodynamics; H/L in scaling.', first: 'Vallis §1.5', aka: 'Kundu v (specific volume)', pitfall: '⚠️ Two meanings.', see: ['\rho']}
+    - {symbol: '\dot Q', name: 'heating rate', say_it: 'Q dot', unit: 'W kg^-1', typical: {atmosphere: '1–2 K/day radiative', ocean: '—'},
+       meaning: 'Heat added per unit mass per second.', first: 'Vallis §1.6', aka: 'Kundu q̇', pitfall: 'Not Ertel PV Q.', see: [Q]}
+
+  # ---------------------------------------------------------------- ocean
+  ocean:
+    - {symbol: 'S', name: salinity, say_it: S, unit: 'g/kg (TEOS-10 SA) or psu (practical)', typical: {atmosphere: '—', ocean: '34–37 g/kg'},
+       meaning: 'Mass of dissolved salt per kilogram of seawater.', first: ch00b 5, aka: 'gsw SA / SP', pitfall: 'Vallis S is also a source term.', see: ['\sigma']}
+    - {symbol: '\sigma', name: 'density anomaly ρ − 1000; layer thickness; Prandtl number', say_it: sigma, unit: 'kg m^-3 (σ) ', typical: {atmosphere: '—', ocean: 'σ = 26.0–27.9 kg/m³'},
+       meaning: 'Oceanographers'' shorthand: σ = ρ − 1000 kg m⁻³ (σθ, σ0, σ2 use potential density).', first: ch00b 5,
+       aka: '—', pitfall: '⚠️ Three meanings in Vallis (also ∂z/∂θ thickness and ν/κ).', see: ['\rho_\theta']}
+    - {symbol: '\rho_\theta', name: 'potential density', say_it: 'rho theta', unit: 'kg m^-3', typical: {atmosphere: '—', ocean: '1026–1028 kg/m³'},
+       meaning: 'Density a parcel would have at a reference pressure; isopycnals are its level surfaces.', first: ch00b 5, aka: 'Kundu ρ_θ (1.33)', pitfall: '', see: ['\sigma']}
+    - {symbol: '\beta_T, \beta_S', name: 'thermal expansion and haline contraction coefficients', say_it: 'beta T, beta S', unit: 'K^-1; (g/kg)^-1', typical: {atmosphere: '—', ocean: 'β_T ≈ 2e-4 K⁻¹ (smaller in cold water), β_S ≈ 7.6e-4'},
+       meaning: 'Fractional density change per degree warming / per unit salinity.', first: 'Vallis §1.7', aka: 'often α, β',
+       pitfall: '⚠️ Not the planetary β.', see: ['\beta']}
+    - {symbol: '\boldsymbol\tau', name: 'wind stress', say_it: tau, unit: 'N m^-2', typical: {atmosphere: '—', ocean: '0.1 N/m² mid-latitude westerlies'},
+       meaning: 'Horizontal force per area of the wind on the sea surface.', first: ch00b 12, aka: 'Kundu τ (13.22)', pitfall: 'τ̃ = τ/ρ is the kinematic stress; τ is also an optical depth and a turnover time.', see: ['\mathrm{curl}_z', Sv]}
+    - {symbol: 'Sv', name: Sverdrup, say_it: Sverdrup, unit: '1 Sv = 1e6 m^3 s^-1', typical: {atmosphere: '—', ocean: 'AMOC 17 Sv at 26°N; ACC ≈ 130–170 Sv'},
+       meaning: 'Unit of ocean volume transport: a million cubic metres per second.', first: ch00b 16, aka: '—', pitfall: 'Also the name of the Sverdrup balance βV = curl τ/ρ0.', see: ['\psi']}
+
+  # ---------------------------------------------------------------- waves
+  waves:
+    - {symbol: '\mathbf k = (k, l, m)', name: 'wave vector', say_it: 'k vector', unit: 'rad m^-1', typical: {atmosphere: 'k = 2π/(5000 km)', ocean: '2π/(200 km)'},
+       meaning: 'Points along the direction of travel of crests; length 2π/wavelength.', first: ch00a 0.16, aka: 'Kundu K, (k, l, m)', pitfall: '⚠️ Bold italic k (wave vector) vs upright k (vertical unit vector).', see: ['\omega', c_p]}
+    - {symbol: '\omega', name: 'angular frequency', say_it: omega, unit: 'rad s^-1', typical: {atmosphere: 'Rossby ~ 1e-6 s⁻¹', ocean: 'inertial f ~ 1e-4 s⁻¹'},
+       meaning: 'How fast the phase turns in time: 2π/period.', first: ch00a 0.16, aka: 'Kundu ω', pitfall: '⚠️ Same letter as vorticity and pressure velocity.', see: [c_p, '\mathbf c_g']}
+    - {symbol: 'c_p', name: 'phase speed', say_it: 'c p', unit: 'm s^-1', typical: {atmosphere: 'Rossby waves ~ −10 m/s relative to the flow', ocean: 'first baroclinic Kelvin ~ 2–3 m/s'},
+       meaning: 'Speed of a crest: ω/k.', first: ch00a 0.16, aka: 'Kundu c', pitfall: '⚠️ Same symbol as heat capacity c_p.', see: ['\mathbf c_g']}
+    - {symbol: 'c_s', name: 'sound speed', say_it: 'c s', unit: 'm s^-1', typical: {atmosphere: '340 m/s', ocean: '1500 m/s'},
+       meaning: 'Speed of sound waves, √(∂p/∂ρ at constant entropy).', first: 'Vallis §1.8', aka: 'Kundu c', pitfall: '', see: []}
+    - {symbol: 'L_d', name: 'deformation radius (Rossby radius)', say_it: 'L d', unit: m, typical: {atmosphere: 'NH/f ≈ 1000 km', ocean: '30–50 km (first baroclinic)'},
+       meaning: 'Length where rotation and stratification matter equally; sets the size of weather systems and eddies.', first: ch00b 7,
+       aka: 'Kundu Λ = c/f (ch13)', pitfall: 'Barotropic √(gH)/f (≈ 2000 km ocean) differs from the baroclinic NH/f.', see: [Bu, k_d]}
+    - {symbol: 'k_d', name: 'deformation wavenumber', say_it: 'k d', unit: 'm^-1', typical: {atmosphere: '1/L_d ≈ 1e-6 m⁻¹', ocean: '3e-5 m⁻¹'},
+       meaning: 'Inverse of the deformation radius.', first: 'Vallis §5', aka: '—', pitfall: '', see: [L_d]}
+    - {symbol: '\boldsymbol{\mathcal F}', name: 'Eliassen–Palm flux', say_it: 'E P flux', unit: 'varies (m² s⁻²)', typical: {atmosphere: 'arrows upward from the troposphere in winter', ocean: '—'},
+       meaning: 'Vector (F^y, F^z) of eddy momentum and heat flux; its divergence forces the mean flow.', first: 'Vallis ch10 (named in ch00b 17)', aka: '—', pitfall: 'Plots rescale the two components differently.', see: []}
+
+  # ---------------------------------------------------------------- nondimensional numbers
+  nondimensional:
+    - {symbol: 'Ro', name: 'Rossby number', say_it: 'Rossby number', unit: '—', typical: {atmosphere: 'U/(fL) = 10/(1e-4·1e6) = 0.1', ocean: '0.1/(1e-4·1e5) = 0.01'},
+       meaning: 'Inertia vs rotation, U/(fL); Ro ≪ 1 means rotation dominates (geostrophy).', first: ch00a 0.20, aka: 'Kundu Ro', pitfall: 'Bathtubs have Ro ≫ 1: Coriolis does not set their swirl.', see: [f]}
+    - {symbol: 'Ek', name: 'Ekman number', say_it: 'Ekman number', unit: '—', typical: {atmosphere: 'tiny with molecular ν', ocean: 'tiny'},
+       meaning: 'Friction vs rotation, ν/(fH²).', first: ch00a 0.20, aka: 'Kundu E', pitfall: 'Use an eddy viscosity for realistic values.', see: ['\nu']}
+    - {symbol: 'Bu', name: 'Burger number', say_it: 'Burger number', unit: '—', typical: {atmosphere: '(L_d/L)² ~ 1 for weather', ocean: '~ 1 for mesoscale eddies'},
+       meaning: 'Stratification vs rotation, (L_d/L)².', first: ch00a 0.20, aka: '—', pitfall: '', see: [L_d]}
+    - {symbol: 'Fr', name: 'Froude number', say_it: 'Froude number', unit: '—', typical: {atmosphere: 'U/(NH) ~ 0.1', ocean: '≪ 1'},
+       meaning: 'Flow speed vs a wave speed (U/√(gH) or U/(NH)).', first: ch00a 0.20, aka: 'Kundu Fr', pitfall: 'Two definitions in use; say which.', see: [N]}
+    - {symbol: 'Ri', name: 'Richardson number', say_it: 'Richardson number', unit: '—', typical: {atmosphere: '≫ 1 in the free troposphere', ocean: '< 1/4 in mixing layers'},
+       meaning: 'Stratification vs shear, N²/(∂U/∂z)²; Ri < 1/4 permits shear instability.', first: ch00a 0.20, aka: 'Kundu Ri (11.67)', pitfall: '', see: [N]}
+    - {symbol: 'Re', name: 'Reynolds number', say_it: 'Reynolds number', unit: '—', typical: {atmosphere: '~ 1e11', ocean: '~ 1e10'},
+       meaning: 'Inertia vs viscosity, UL/ν: geophysical flows are always turbulent.', first: ch00a 0.20, aka: 'Kundu Re',
+       pitfall: '⚠️ Upright Re also means "real part of".', see: ['\nu']}
+    - {symbol: 'Pr', name: 'Prandtl ratio f0/N; Prandtl number ν/κ', say_it: 'Prandtl ratio', unit: '—', typical: {atmosphere: 'f0/N ≈ 0.01', ocean: 'ν/κ ≈ 7'},
+       meaning: 'In Vallis mostly the ratio f0/N, the slope of QG eigen-structures.', first: 'Vallis §5', aka: 'Kundu Pr = ν/κ', pitfall: '⚠️ Two meanings.', see: [N, f_0]}
+    - {symbol: 'Ra', name: 'Rayleigh number', say_it: 'Rayleigh number', unit: '—', typical: {atmosphere: '—', ocean: 'sideways convection 1e6–1e9 (Vallis ch21)'},
+       meaning: 'Buoyant forcing vs viscous and thermal diffusion.', first: 'Vallis ch21', aka: 'Kundu Ra (11.44)', pitfall: '', see: []}
+
+  # ---------------------------------------------------------------- units (also in the glossary)
+  units:
+    - {symbol: 'PVU', name: 'potential vorticity unit', say_it: 'P V U', unit: '1e-6 K m^2 kg^-1 s^-1', typical: {atmosphere: '2 PVU marks the dynamical tropopause', ocean: '—'},
+       meaning: 'Convenient unit of Ertel PV.', first: ch00b 9, aka: '—', pitfall: 'Negative in the SH (f < 0).', see: [Q]}

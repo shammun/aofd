@@ -24,7 +24,7 @@ the Kundu `../Fluid Dynamics/analysis/chNN_design.md` Part F for each reused der
    approximation, new regime), and whether the Kundu explainer is embedded as is, re-skinned (geophysical presets) or
    only linked.
 3. **Notation crosswalk** per K row and chapter-wide: Kundu symbol ↔ Vallis symbol, meaning, sign or angle convention
-   differences (Kundu colatitude θ vs Vallis latitude φ; Kundu Γ = dT/dz vs met Γ = −dT/dz; ψ sign; b vs ρ′; Kundu ω vs
+   differences (Kundu colatitude θ (App. B) and latitude θ (ch13) vs Vallis latitude ϑ; Kundu Γ = dT/dz vs met Γ = −dT/dz; ψ sign; b vs ρ′; Kundu ω vs
    Vallis ζ for vorticity) with a ⚠️ flag and the exact substitution.
 4. R rows: the Vallis chapter where it was re-taught + the Kundu link.
 5. Run `.venv/Scripts/python.exe tools/crossref_check.py chNN` (every link resolves to a local file + anchor, every

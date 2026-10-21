@@ -1,0 +1,135 @@
+# Glossary — ONE source of truth for WORDS (symbols live in symbols.yaml). Every climate/GFD term is defined on first
+# use from here (teaching-style, lesson-reviewer check 14 "no climate background assumed"). Our own words throughout.
+# Seeded from R4 §5 (kept as written) + the PLANNING §15.6 vocabulary. The concept-analyst extends it every chapter.
+# Schema: term · short (one line) · long (optional, 2–3 sentences) · first_use (ch00 part/group) · see · misconception (optional)
+
+meta: {version: 1, seeded: "2026-10-20 (setup session, §12 step 7)"}
+
+terms:
+  # ------------------------------------------------------------ R4 §5 (kept)
+  - {term: Geophysical fluid dynamics (GFD), short: "The physics of large-scale flows on a rotating planet with layered (stratified) fluids.", first_use: ch00b 1, see: [Rotating frame, Stratification]}
+  - {term: Rotating frame, short: "Describing motion as seen by someone standing on the spinning Earth; this introduces Coriolis and centrifugal terms.", first_use: ch00b 7, see: [Coriolis effect, Effective gravity]}
+  - {term: Coriolis parameter f, short: "2Ω sin(latitude): how strongly rotation deflects horizontal motion; zero at the equator, largest at the poles.", first_use: ch00b 7, see: [Beta]}
+  - {term: Beta, short: "How fast f increases northward (≈ 1.6×10⁻¹¹ m⁻¹ s⁻¹ at 45°); the cause of Rossby waves and western boundary currents.", first_use: ch00b 7, see: [Rossby wave, Western boundary current]}
+  - {term: f-plane / β-plane, short: "A local flat patch of the planet with constant f / with f changing linearly in y.", first_use: ch00b 7}
+  - {term: Hydrostatic balance, short: "Pressure at a level equals the weight of the fluid above; vertical acceleration is neglected.", first_use: ch00b 3, see: [Scale height]}
+  - {term: Geostrophic balance, short: "Coriolis force balances the pressure-gradient force; the flow runs along isobars.", first_use: ch00b 8, see: [Buys-Ballot law], misconception: "Air flows from high to low pressure — only friction near the ground lets it cross the isobars a little."}
+  - {term: Ageostrophic flow, short: "The (small) part of the wind that is not geostrophic; it does the converging and the rising.", first_use: ch00b 8}
+  - {term: Thermal wind, short: "The vertical change of geostrophic wind tied to horizontal temperature (density) gradients.", first_use: ch00b 8, misconception: "The jet is caused by heat flowing poleward — the shear is a balance with the temperature gradient, not a flow down it."}
+  - {term: Stratification, short: "Layering by density; the buoyancy frequency N is how fast a displaced parcel bobs (≈ 0.01 s⁻¹ in air).", first_use: ch00b 6}
+  - {term: Potential temperature, short: "The temperature a parcel would have if brought adiabatically to 1000 hPa; conserved without heating.", first_use: ch00b 3}
+  - {term: Buoyancy, short: "The upward force per unit mass from a density difference, −g ρ′/ρ₀.", first_use: ch00b 6}
+  - {term: Boussinesq approximation, short: "Density differences are kept only where they multiply gravity; good for the ocean.", first_use: "Vallis §2.4 (named in ch00b 3)"}
+  - {term: Anelastic / pseudo-height, short: "Ways of filtering sound waves from atmospheric equations; z* uses log-pressure as height.", first_use: "Vallis §2.5"}
+  - {term: Isobaric / isentropic / isopycnal surface, short: "A surface of constant pressure / of constant θ / of constant density.", first_use: ch00b 3}
+  - {term: Vorticity, short: "Local spin of the fluid, k·∇×u; positive = anticlockwise seen from above.", first_use: ch00b 9}
+  - {term: Planetary / absolute vorticity, short: "f is the Earth's own spin at that latitude; absolute vorticity = ζ + f.", first_use: ch00b 9}
+  - {term: Cyclonic / anticyclonic, short: "Rotating the same way / the opposite way to the Earth seen from above the local pole (anticlockwise / clockwise in the NH, reversed in the SH).", first_use: ch00b 8, misconception: "Cyclonic = anticlockwise everywhere — in the SH cyclonic is clockwise."}
+  - {term: Potential vorticity (PV), short: "Absolute vorticity times stratification (or ÷ layer thickness); conserved by adiabatic, frictionless flow — the master variable of large-scale dynamics.", first_use: ch00b 9, misconception: "PV is just spin — it involves stratification (or thickness) too, and is conserved only without heating and friction."}
+  - {term: Rossby number Ro, short: "U/(fL): inertia vs rotation; Ro ≪ 1 means rotation dominates.", first_use: ch00a 0.20}
+  - {term: Ekman number Ek, short: "Friction vs rotation, ν/(fH²).", first_use: ch00a 0.20}
+  - {term: Burger number Bu, short: "(L_d/L)²: stratification vs rotation.", first_use: ch00a 0.20}
+  - {term: Deformation radius, short: "NH/f (≈ 1000 km in the atmosphere, ≈ 30–50 km in the ocean): the scale of weather systems / ocean eddies.", first_use: ch00b 7}
+  - {term: Rhines scale, short: "√(U/β): beyond it, Rossby waves stop turbulence from growing and organise jets.", first_use: "Vallis ch12 (named in ch00b 11)"}
+  - {term: Richardson number Ri, short: "N² / (shear)²: stratification vs shear; Ri < 1/4 allows shear instability.", first_use: ch00a 0.20}
+  - {term: Quasi-geostrophy (QG), short: "Equations for flows close to geostrophic balance, Ro ≪ 1; Vallis's workhorse.", first_use: "Vallis ch05 (named in ch00b 8)"}
+  - {term: Shallow-water equations, short: "A single thin layer of fluid with a free surface; the simplest model with gravity waves, rotation and PV.", first_use: "Vallis ch03 (named in ch00b 10)"}
+  - {term: Rossby wave, short: "A slow westward-propagating wave caused by β; the meanders of the jet.", first_use: ch00b 10}
+  - {term: Kelvin wave, short: "A wave trapped against a coast or the equator that moves with the boundary on its right (NH) or travels eastward along the equator.", first_use: ch00b 10}
+  - {term: Inertia–gravity wave, short: "A gravity wave modified by rotation; frequency between f and N.", first_use: ch00b 10}
+  - {term: Dispersion relation, short: "The rule ω(k) linking a wave's frequency to its wavenumber; it sets the phase and group speeds.", first_use: ch00a 0.16}
+  - {term: Group velocity, short: "The speed at which a wave packet's energy travels (can differ from the crest speed).", first_use: ch00a 0.16}
+  - {term: Baroclinic instability, short: "The growth of weather systems from the energy stored in sloping density surfaces.", first_use: ch00b 11}
+  - {term: Barotropic / baroclinic, short: "Pressure surfaces parallel to density surfaces (flow the same at all heights) / not parallel (flow changes with height).", first_use: ch00b 11}
+  - {term: Eddy, short: "A swirl departing from the mean flow; in GFD 'eddies' (weather systems, ocean mesoscale eddies) transport heat and momentum.", first_use: ch00b 11}
+  - {term: Zonal / meridional, short: "East–west / north–south.", first_use: ch00a 0.2}
+  - {term: Zonal mean, short: "The average around a latitude circle; u = ū + u′ splits mean and eddy.", first_use: ch00b 17, misconception: "A zonal mean is a slice at one longitude — it is an average over all longitudes."}
+  - {term: Eliassen–Palm (EP) flux, short: "A vector measuring how eddies transport heat and momentum; its divergence is the eddy force on the mean flow.", first_use: "ch00b 17 (pointer)"}
+  - {term: Residual circulation, short: "The mean overturning once the eddies' effect on the mean is accounted for (TEM).", first_use: "ch00b 17 (pointer)"}
+  - {term: Hadley / Ferrel / polar cells, short: "The three zonal-mean overturning cells; the Ferrel cell is indirect, driven by eddies.", first_use: ch00b 13, misconception: "One cell goes all the way to the pole — rotation stops it in the subtropics."}
+  - {term: Jet stream, short: "Narrow bands of fast westerly wind near the tropopause (subtropical and eddy-driven).", first_use: ch00b 13, misconception: "The jet stream is one fixed ring — it meanders, splits and shifts with the seasons."}
+  - {term: Tropopause / stratosphere, short: "The boundary (~10–16 km) between the weather layer and the stable layer above.", first_use: ch00b 1}
+  - {term: Sverdrup balance, short: "In the ocean interior, northward flow is set by the wind-stress curl: βV = curl τ/ρ.", first_use: ch00b 15}
+  - {term: Ekman layer, short: "The friction layer under the wind or above the ground; its net transport is 90° to the wind; convergence pushes water down (pumping).", first_use: ch00b 12, misconception: "Surface water moves with the wind — at the surface about 45° to it, the depth-integrated transport at 90°."}
+  - {term: Western boundary current, short: "The narrow, fast current on the west side of an ocean basin (Gulf Stream, Kuroshio, Agulhas).", first_use: ch00b 15}
+  - {term: Gyre, short: "A basin-wide ocean circulation loop (subtropical: anticyclonic; subpolar: cyclonic).", first_use: ch00b 15, misconception: "Gyres are water blown round by the wind — the interior flow is mostly across the wind, and western intensification needs β."}
+  - {term: Thermocline, short: "A depth range where temperature drops fast; separates the warm upper ocean from the cold abyss.", first_use: ch00b 1}
+  - {term: Meridional overturning circulation (MOC), short: "The zonally integrated north–south and up–down ocean circulation, measured in Sv.", first_use: ch00b 15}
+  - {term: Sverdrup (Sv), short: "10⁶ m³ s⁻¹ of volume transport (about a hundred times all the world's rivers combined).", first_use: ch00b 16}
+  - {term: Mixed layer, short: "The top tens of metres of the ocean, stirred by wind and cooling so that it is nearly uniform.", first_use: ch00b 1}
+  - {term: ENSO, short: "El Niño–Southern Oscillation: coupled year-to-year swings of tropical Pacific SST, winds and rain.", first_use: ch00b 15, misconception: "El Niño is a warm current — it is a basin-wide coupled ocean–atmosphere pattern."}
+  - {term: QBO, short: "Quasi-biennial oscillation: ~28-month reversal of tropical stratospheric winds, descending with time.", first_use: ch00b 14, misconception: "It is driven by the seasons — its period is not tied to the annual cycle."}
+  - {term: MJO, short: "Madden–Julian oscillation: a 30–60 day eastward-moving pulse of tropical rain and wind.", first_use: "ch00c (spectrum reader)"}
+  - {term: Polar vortex / SSW, short: "Winter westerly ring in the polar stratosphere / its sudden disruption and warming.", first_use: ch00b 14, misconception: "The polar vortex is a cold storm coming south — it is a stratospheric wind system."}
+  - {term: Anomaly / climatology / composite, short: "Departure from normal / the normal for that time of year / average over chosen events.", first_use: ch00b 17, long: "Always say what an anomaly is relative to: the base period (e.g. 1991–2020)."}
+  - {term: Reanalysis / state estimate, short: "Observations blended with a weather model into a complete gridded history / a model run fitted to observations that keeps budgets closed.", first_use: ch00b 17}
+  - {term: Equivalent depth, short: "The depth of the shallow-water layer that has the same wave speed as a mode of a stratified fluid.", first_use: "ch00c (spectrum reader)"}
+  - {term: Wave–mean-flow interaction, short: "Waves carrying momentum and depositing it where they break or are absorbed, changing the mean wind (QBO, SSW).", first_use: ch00b 14}
+  - {term: Angular momentum (axial), short: "Ωa²cos²φ + u a cos φ: conserved by a ring of air moving poleward without torque — why upper-level winds speed up poleward.", first_use: ch00b 13}
+
+  # ------------------------------------------------------------ PLANNING §15.6 additions
+  - {term: Thin shell, short: "The atmosphere and ocean are a few kilometres deep on a planet 6400 km in radius — thinner, relatively, than an apple's skin.", first_use: ch00b 1, long: "Aspect ratio H/a ≈ 10 km / 6400 km ≈ 0.002. Pictures exaggerate the depth and must say so.", see: [Hydrostatic balance]}
+  - {term: Troposphere, short: "The lowest ~10–16 km of the atmosphere, where temperature falls with height and weather happens.", first_use: ch00b 1}
+  - {term: Weather vs climate, short: "Weather is the state on a given day; climate is its statistics (means, variability, extremes) over decades.", first_use: ch00b 1}
+  - {term: Abyssal ocean, short: "The deep, cold, slowly moving ocean below about 2–3 km.", first_use: ch00b 1}
+  - {term: Greenhouse effect, short: "Gases that absorb infrared make the planet emit to space from a colder, higher level, so the surface must be warmer.", first_use: ch00b 2}
+  - {term: Poleward heat transport, short: "Atmosphere and ocean carry about 5 PW of heat from the tropics, which gain energy, to the poles, which lose it.", first_use: ch00b 2}
+  - {term: hPa (hectopascal), short: "100 Pa; sea-level pressure is about 1013 hPa, the same number as millibars.", first_use: ch00b 3}
+  - {term: Scale height, short: "The height over which pressure falls by a factor e, about 7–8 km in the atmosphere.", first_use: ch00b 3}
+  - {term: Geopotential height, short: "The height of a pressure surface, measured in metres from the gravitational potential energy; what a 500 hPa map shows.", first_use: ch00b 3, misconception: "A low 500 hPa height is a low surface pressure — it means the air column below is cold."}
+  - {term: Thickness (hypsometric equation), short: "The height difference between two pressure surfaces; it is proportional to the mean temperature of the layer between them.", first_use: ch00b 3}
+  - {term: Lapse rate, short: "How fast temperature drops with height; meteorologists count a drop as positive (6.5 K/km typical, 9.8 K/km dry adiabatic).", first_use: ch00b 3, long: "Kundu and our code use Γ = dT/dz (negative when it cools upward); we always show both."}
+  - {term: Dry adiabatic lapse rate, short: "The cooling rate of a rising unsaturated parcel, g/c_p ≈ 9.8 K per km.", first_use: ch00b 3}
+  - {term: Specific humidity / mixing ratio, short: "Mass of water vapour per mass of moist air / per mass of dry air (both ~ g/kg).", first_use: ch00b 4}
+  - {term: Clausius–Clapeyron relation, short: "Saturation vapour pressure rises about 7 % per kelvin of warming.", first_use: ch00b 4}
+  - {term: Relative humidity, short: "Water vapour present as a fraction of the most the air could hold at that temperature.", first_use: ch00b 4}
+  - {term: Latent heat, short: "Heat released when vapour condenses (2.5 MJ per kg); the fuel of storms and tropical convection.", first_use: ch00b 4}
+  - {term: Moist adiabat, short: "The slower cooling (≈ 4–7 K/km) of a rising saturated parcel, warmed by condensation.", first_use: ch00b 4}
+  - {term: Equivalent potential temperature, short: "Potential temperature a parcel would have if all its vapour condensed and the heat stayed in it; conserved in moist adiabatic motion.", first_use: ch00b 4}
+  - {term: Salinity, short: "Grams of dissolved salt per kilogram of seawater (about 35 g/kg).", first_use: ch00b 5}
+  - {term: Equation of state (seawater), short: "Density as a function of temperature, salinity and pressure; nonlinear — cold water's density depends less on temperature.", first_use: ch00b 5}
+  - {term: Potential density, short: "The density a water parcel would have if moved without mixing to a reference pressure; removes the squeezing effect of depth.", first_use: ch00b 5}
+  - {term: Sigma notation, short: "σ = ρ − 1000 kg m⁻³, so 1027.5 kg/m³ is written σ = 27.5 (σθ, σ0, σ2 name the reference pressure).", first_use: ch00b 5}
+  - {term: Water mass, short: "A body of water with a recognisable temperature–salinity signature from where it formed (e.g. North Atlantic Deep Water, Antarctic Bottom Water).", first_use: ch00b 5}
+  - {term: Parcel argument, short: "Imagine nudging a small blob up or down: if it is pushed back it is stable, if it keeps going it is unstable.", first_use: ch00b 6}
+  - {term: Convection, short: "Overturning driven by heavy fluid sitting on light fluid (e.g. air heated from below).", first_use: ch00b 6}
+  - {term: Inversion, short: "A layer where temperature increases with height; very stable, it caps mixing and traps pollution.", first_use: ch00b 6}
+  - {term: Coriolis effect, short: "Moving things seem to curve sideways on a rotating planet — to the right in the NH, to the left in the SH.", first_use: ch00b 7, misconception: "Coriolis decides which way bathtubs drain — far too weak at that scale (Ro ≫ 1)."}
+  - {term: Centrifugal force and effective gravity, short: "In the rotating frame an outward push away from the axis combines with true gravity into the 'gravity' a plumb line feels.", first_use: ch00b 7}
+  - {term: Inertial oscillation, short: "A parcel moving with nothing but the Coriolis force goes round in a circle with period 2π/f (≈ 17 h at 45°).", first_use: ch00b 7}
+  - {term: Buys-Ballot law, short: "In the NH, stand with your back to the wind and low pressure is on your left (on your right in the SH).", first_use: ch00b 8}
+  - {term: Gradient wind / cyclostrophic wind, short: "Wind balancing pressure gradient, Coriolis and the centrifugal effect of a curved path / the small-scale case where Coriolis is negligible (tornadoes).", first_use: ch00b 8}
+  - {term: Circulation, short: "The line integral of velocity round a closed loop: the total 'swirl' inside it.", first_use: ch00b 9}
+  - {term: PVU, short: "Potential vorticity unit, 10⁻⁶ K m² kg⁻¹ s⁻¹; about 2 PVU marks the tropopause.", first_use: ch00b 9}
+  - {term: Gravity wave, short: "A wave whose restoring force is buoyancy (internal) or gravity at a free surface.", first_use: ch00b 10}
+  - {term: Equatorial waves, short: "Waves trapped near the equator because f changes sign there: Kelvin, Rossby, mixed Rossby–gravity, inertia–gravity.", first_use: ch00b 10}
+  - {term: Phase velocity, short: "The speed of a crest, ω/k.", first_use: ch00a 0.16}
+  - {term: Turbulence and cascades, short: "Chaotic flow that hands energy (or enstrophy) from scale to scale; in 2-D-like flows energy goes to larger scales.", first_use: ch00b 11}
+  - {term: Wind stress and its curl, short: "The wind's drag on the sea per area; its curl (spin) decides whether water is pumped down or sucked up.", first_use: ch00b 12}
+  - {term: Ekman pumping / suction, short: "Downward / upward motion at the base of the Ekman layer where its transport converges / diverges.", first_use: ch00b 12}
+  - {term: Upwelling (coastal, equatorial), short: "Cold deep water brought up where Ekman transport pushes surface water offshore or away from the equator.", first_use: ch00b 12}
+  - {term: Trade winds, short: "Steady easterly surface winds of the tropics, the return branch of the Hadley cell.", first_use: ch00b 13}
+  - {term: ITCZ, short: "The Intertropical Convergence Zone: the band near the equator where the trades meet, air rises and rain is heavy.", first_use: ch00b 13}
+  - {term: Monsoon, short: "A seasonal reversal of winds and rain driven by the land heating faster than the ocean.", first_use: ch00b 13}
+  - {term: Westerlies, short: "Mid-latitude winds blowing from the west (u > 0), at the surface and strongest aloft.", first_use: ch00b 13}
+  - {term: Storm track, short: "The regions (e.g. North Atlantic, North Pacific, Southern Ocean) where mid-latitude storms grow and travel most often.", first_use: ch00b 13}
+  - {term: Stationary waves, short: "Planetary-scale troughs and ridges fixed in place by mountains and land–sea heating contrasts.", first_use: ch00b 13}
+  - {term: Walker circulation, short: "An east–west overturning along the equatorial Pacific: rising over the warm west, sinking over the cool east.", first_use: ch00b 13}
+  - {term: Brewer–Dobson circulation, short: "The slow stratospheric overturning: rising in the tropics, moving poleward, sinking at high latitudes, driven by breaking waves.", first_use: ch00b 14}
+  - {term: Sudden stratospheric warming (SSW), short: "Planetary waves from below slow or reverse the polar vortex, warming the polar stratosphere by tens of kelvin in days.", first_use: ch00b 14}
+  - {term: Antarctic Circumpolar Current (ACC), short: "The current flowing eastward all round Antarctica, carrying 130–170 Sv; it has several fronts.", first_use: ch00b 15}
+  - {term: Southern Ocean fronts, short: "Narrow jets in the ACC where water properties change sharply (Subantarctic Front, Polar Front, …).", first_use: ch00b 15}
+  - {term: AMOC, short: "The Atlantic MOC: warm water flowing north near the surface, sinking at high latitudes, returning south at depth (≈ 17 Sv at 26°N).", first_use: ch00b 15, misconception: "A conveyor belt driven only by sinking — wind and mixing set much of the return path."}
+  - {term: Deep-water formation, short: "Surface water made dense by cooling and salt rejection sinks to depth in a few places (Nordic and Labrador Seas, around Antarctica).", first_use: ch00b 15}
+  - {term: Thermohaline circulation, short: "An older name for the overturning, stressing heat and salt; it is also wind-driven, so 'MOC' is preferred.", first_use: ch00b 15}
+  - {term: Thermocline tilt (ENSO), short: "The equatorial Pacific thermocline is deep in the west and shallow in the east; El Niño flattens it.", first_use: ch00b 15}
+  - {term: Bjerknes feedback, short: "Weaker trades → warmer east Pacific → weaker trades: the positive feedback behind El Niño.", first_use: ch00b 15}
+  - {term: Sidereal day, short: "One rotation relative to the stars, 86 164 s — the day that sets Ω (not the 86 400 s solar day).", first_use: ch00b 16}
+  - {term: W/m² (energy flux), short: "Watts per square metre: the unit of radiation and heat fluxes (sunlight at the top of the atmosphere ≈ 340 W/m² on average).", first_use: ch00b 16}
+  - {term: Observation, short: "A direct measurement (radiosonde, ship, buoy, Argo float); accurate but sparse.", first_use: ch00b 17}
+  - {term: Satellite retrieval, short: "A quantity inferred from radiation a satellite measures, through a model of the atmosphere.", first_use: ch00b 17}
+  - {term: Model / GCM, short: "A general circulation model solves the equations on a grid; free-running output is a possible climate, not a given day's weather.", first_use: ch00b 17, misconception: "A free model's year 2000 should match the observed year 2000 — only its statistics should."}
+  - {term: Reynolds averaging (mean vs eddy), short: "Splitting a field into a mean and a fluctuation, u = ū + u′; averages of products leave eddy fluxes like u′v′.", first_use: ch00b 17}
+  - {term: Hovmöller diagram, short: "A plot of a quantity against longitude (or height) and time; tilted stripes are things moving.", first_use: ch00c}
+  - {term: Contour interval, short: "The step in value between neighbouring contour lines; closer lines mean a steeper gradient.", first_use: ch00c}
+  - {term: Map projection, short: "A rule for flattening the round Earth onto a page; each distorts area, shape or distance.", first_use: ch00c}

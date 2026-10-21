@@ -55,7 +55,7 @@ def _head(title: str, prefix: str, desc: str) -> str:
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
 <link rel="stylesheet" href="{prefix}assets/clean-educational.css?v={v}">
-<link rel="stylesheet" href="{prefix}assets/fluidpy-site.css?v={v}">
+<link rel="stylesheet" href="{prefix}assets/aofd-site.css?v={v}">
 </head>
 <body>
 """

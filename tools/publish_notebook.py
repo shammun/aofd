@@ -53,7 +53,7 @@ BANNER = re.compile(r"book values active", re.I)
 # ---------------------------------------------------------------------------------------------------------------------
 # execution
 # ---------------------------------------------------------------------------------------------------------------------
-KERNEL = "fluidpy-venv"
+KERNEL = "aofd-venv"
 
 
 def ensure_kernel() -> str:
@@ -71,7 +71,7 @@ def ensure_kernel() -> str:
     import subprocess
 
     subprocess.run([sys.executable, "-m", "ipykernel", "install", "--sys-prefix", "--name", KERNEL,
-                    "--display-name", "Python (fluidpy .venv)"], check=True, capture_output=True)
+                    "--display-name", "aofd (venv)"], check=True, capture_output=True)
     return KERNEL
 
 
@@ -305,7 +305,7 @@ def render_page(nb_page, *, row: dict, name: str, prev_row: dict | None, next_ro
     body, _ = exporter.from_notebook_node(nb_page)
     v = int(time.time())
     head_extra = (f'\n<link rel="stylesheet" href="../assets/clean-educational.css?v={v}">'
-                  f'\n<link rel="stylesheet" href="../assets/fluidpy-site.css?v={v}">'
+                  f'\n<link rel="stylesheet" href="../assets/aofd-site.css?v={v}">'
                   f'\n<meta name="description" content="{E(row.get("blurb", ""))}">'
                   "\n<style>.ce-container table code { white-space: pre-wrap; overflow-wrap: anywhere; }</style>")
     body = re.sub(r'(<meta charset="utf-8"\s*/?>)', lambda m: m.group(1) + head_extra, body, count=1)

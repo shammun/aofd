@@ -36,6 +36,12 @@ and the coverage rules are checked the moment the notebook is saved.
 ``tools/coverage_check.py chNN`` repeats these checks on the executed notebook (real outputs) and checks the
 prerequisite ledger.
 
+AOFD additions (PLANNING §2.5, §8.1): Chapter 0 parts (``ChapterNotebook("ch00a")`` -> ``notebooks/ch00a_maths.ipynb``),
+CORE ids ``C0A-01``/``C0A-PoC1``, the Colab setup cell that installs the pinned fluidpy tag, and the blocks
+``kundu_recap`` · ``scratch_vs_lib`` · ``ledger_row`` · ``equation_ledger`` · ``mechanism`` · ``reading_card`` ·
+``data_figure`` · ``anatomy`` · ``magnitude_table`` · ``like_unlike`` · ``movie`` · ``scene``. For Chapter 0 the explainer
+count is a soft target (warning only, Q11).
+
 Cell metadata written here (read by ``tools/publish_notebook.py`` and ``tools/coverage_check.py``):
   tags: ``setup`` · ``explainer`` · ``animation`` · ``plotly`` · ``figure`` · ``live-only`` · ``from-scratch`` · ``primer`` · ``recap``
         · ``derivation`` · ``derivation-check``
@@ -69,40 +75,45 @@ MAX_EXPLAINERS = explainer_limits()[1] if (ROOT / "book.yaml").exists() else 5
 SETUP_MD = """## ⚙️ Setup — run this cell first
 
 It works in three places without changes:
-* **Google Colab** — clones the public repository into `/content/fluidpy` (the `fluidpy` package, its tests and the
-  interactive explainers) and installs the one package Colab lacks (`pint`). No GPU is needed.
-* **Jupyter / VS Code on your computer** — finds the repository root (the folder with `book.yaml`) and imports from it.
+* **Google Colab** — clones the public repository `{repo}` into `/content/aofd`, installs the shared library
+  `fluidpy` at the pinned release `{pin}` and the few packages Colab lacks. **No account or key is needed**: data come from
+  small files already in the repository.
+* **Jupyter / VS Code on your computer** — finds the repository root (the folder with `book.yaml`); `fluidpy` is
+  already installed there.
 * **The published web page** — already executed; nothing to run.
 """
 
-SETUP_CODE = '''# ── Setup: find (or fetch) the fluidpy repository, then load the house style ─────────────────────────────
+SETUP_CODE = """# ── Setup: find (or fetch) the aofd repository, install fluidpy {pin}, then load the house style ─────────────
 import os, sys, subprocess, pathlib                     # standard library only, so this cell never fails on imports
 
 IN_COLAB = "google.colab" in sys.modules                 # True when this notebook runs inside Google Colab
-REPO_URL = "https://github.com/{repo}.git"               # the public repository with the fluidpy package
+REPO_URL = "https://github.com/{repo}.git"               # the public repository with the notebooks and explainers
+FLUIDPY = "fluidpy[geo,data] @ git+https://github.com/{library_repo}@{pin}"   # the tested library, pinned release
 
 if IN_COLAB:
-    ROOT = pathlib.Path("/content/fluidpy")              # where the repository is cloned on Colab
+    ROOT = pathlib.Path("/content/aofd")                 # where the repository is cloned on Colab
     if not ROOT.exists():                                 # first run in this Colab session: clone it
         subprocess.run(["git", "clone", "--depth", "1", REPO_URL, str(ROOT)], check=True)
-    else:                                                 # later runs: fetch the newest version
-        subprocess.run(["git", "-C", str(ROOT), "pull", "--ff-only", "-q"], check=False)
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", str(ROOT / "requirements-colab.txt")], check=True)
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", FLUIDPY], check=True)          # the library
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", str(ROOT / "requirements.txt")], check=True)
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-e", str(ROOT), "--no-deps"], check=True)  # book glue
+    os.environ.setdefault("AOFD_DATA_ROOT", "/content/aofd-data")   # downloads go here (only on a refresh)
 else:
     ROOT = pathlib.Path.cwd().resolve()                   # start where Jupyter was launched …
     while not (ROOT / "book.yaml").exists() and ROOT != ROOT.parent:
         ROOT = ROOT.parent                                # … and walk up until we find the repository root
 
-os.chdir(ROOT)                                            # relative paths (outputs/, viz/) now resolve from the root
+os.chdir(ROOT)                                            # relative paths (data/, viz/) now resolve from the root
 if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))                         # make `import fluidpy` work
+    sys.path.insert(0, str(ROOT))                         # make `import aofd` work even without the install
 
+import fluidpy                                            # the shared library (physics, data access, diagnostics)
 from fluidpy.core.style import setup_notebook            # matplotlib + plotly style shared with the explainers
 from fluidpy.core.embed import show_viz                  # shows an interactive explainer in the notebook
 from fluidpy.core.anim import show_animation             # plays a matplotlib animation inline
 FAST = setup_notebook()                                   # FAST=True (env FLUIDPY_FAST=1) shrinks grids for quick runs
-print(f"IN_COLAB = {{IN_COLAB}} | repository root: {{ROOT.name}} | FAST = {{FAST}}")  # folder name only (no local path)
-'''
+print(f"IN_COLAB = {{IN_COLAB}} | repository root: {{ROOT.name}} | fluidpy {{fluidpy.__version__}} | FAST = {{FAST}}")
+"""
 
 LIVE_NOTE = ("> ▶️ **Live cell.** The widget below needs a running Python kernel. On the web page it is frozen — open this "
              "notebook in Colab (button at the top) or run it locally to drag the sliders.")
@@ -138,13 +149,25 @@ def curation_items(chapter: str) -> dict[str, dict]:
 class ChapterNotebook:
     """Accumulates cells for one chapter notebook and writes ``notebooks/chNN_<slug>.ipynb``."""
 
-    def __init__(self, chapter: str):
+    def __init__(self, chapter: str, name: str | None = None):
+        """``chapter`` is a book.yaml id (``ch02``) or a Chapter 0 part (``ch00a``, ``ch00b``, ``ch00c``). ``name`` overrides
+        the file stem (e.g. ``"poc_ch00a_dot"`` for the proof-of-concept sample)."""
         book = _book()
         row = next((c for c in book["chapters"] if c["id"] == chapter), None)
+        if row is None:
+            for c in book["chapters"]:
+                part = next((q for q in c.get("parts", []) if q["id"] == chapter), None)
+                if part:
+                    row = {**c, **part, "number": c["number"], "sections": [], "part_of": c["id"]}
+                    break
         if row is None:
             raise KeyError(f"{chapter} not in book.yaml")
         self.chapter, self.row, self.book = chapter, row, book
         self.slug = row["slug"]
+        self.name = name or f"{chapter}_{self.slug}"
+        self.soft_explainer_cap = chapter.startswith("ch00")     # Q11: Chapter 0 about 12 per part, a soft target
+        self.warnings: list[str] = []
+        self.ledger: list[dict] = []              # equation-code ledger rows (eq, cell tag, status)
         self.nb = nbf.v4.new_notebook()
         self.cells = self.nb.cells
         self.explainers: list[str] = []
@@ -228,10 +251,12 @@ class ChapterNotebook:
         return self
 
     def setup(self) -> "ChapterNotebook":
-        repo = self.book.get("project", {}).get("repo", "shammun/fluidpy")
+        proj = self.book.get("project", {})
+        fmt = dict(repo=proj.get("repo", "shammun/aofd"), library_repo=proj.get("library_repo", "shammun/fluidpy"),
+                   pin=proj.get("library_pin", "v0.3.0"))
         self.current_core = None
-        self.md(SETUP_MD)
-        self.code(SETUP_CODE.format(repo=repo), tags=["setup"])
+        self.md(SETUP_MD.format(**fmt))
+        self.code(SETUP_CODE.format(**fmt), tags=["setup"])
         self._has_setup = True
         return self
 
@@ -245,8 +270,8 @@ class ChapterNotebook:
     def core(self, cid: str, title: str, question: str = "") -> "ChapterNotebook":
         """Start the block of a CORE (new) idea. Every following cell belongs to it until the next core/section/recap.
         The block must contain at least one code cell and one visual — ``save()`` checks it."""
-        if not re.fullmatch(r"C\d{2,3}", cid):
-            raise ValueError(f"CORE ids look like C07 (got {cid!r})")
+        if not re.fullmatch(r"C\d{2,3}|C0[ABC]-(\d{2}|PoC\d)", cid):
+            raise ValueError(f"CORE ids look like C07 or C0A-01 (got {cid!r})")
         if cid in self.cores:
             raise ValueError(f"CORE {cid} started twice")
         self.cores[cid] = {"title": title, "code": 0, "visual": 0}
@@ -305,7 +330,7 @@ class ChapterNotebook:
         first), ``plain`` = what the new line says in words. ``start``/``result`` are LaTeX or ``(tex, in words)``.
         ``check_src`` = a code cell that verifies the result with sympy (required for ★★★ derivations; every line
         commented). The same steps, word for word, drive the explainer's Derivation tab when one exists."""
-        if not re.fullmatch(r"D\d{2,3}", key):
+        if not re.fullmatch(r"D\d{2,3}|D0[ABC]-(\d{2}|PoC\d)", key):
             raise ValueError(f"derivation ids look like D03 (got {key!r})")
         if key in self.derivations:
             raise ValueError(f"derivation {key} written twice")
@@ -376,7 +401,7 @@ class ChapterNotebook:
         lo, hi = explainer_limits(self.book)
         if slug in self.explainers:
             raise ValueError(f"explainer {slug} embedded twice")
-        if len(self.explainers) >= hi:
+        if len(self.explainers) >= hi and not self.soft_explainer_cap:
             raise ValueError(f"at most {hi} explainers per chapter")
         self.explainers.append(slug)
         try_md = "\n".join(f"- {t}" for t in tries)
@@ -398,6 +423,115 @@ class ChapterNotebook:
     def check_agree(self, src: str) -> "ChapterNotebook":
         """The from-scratch version next to the tested fluidpy function, with an assertion that both agree."""
         return self.code(src, tags=["from-scratch"])
+
+    # ---- AOFD blocks (PLANNING §8.1, R4 §1–§4) ---------------------------------------------------------------------
+    def kundu_recap(self, kid: str, title: str, kundu: str, urls: dict, crosswalk: list, body_md: str, adds: str,
+                    derivation: str = "") -> "ChapterNotebook":
+        """🔁 From Kundu — the full K-recap block at the first Vallis use of a Kundu idea. ``urls`` maps link labels to
+        kundu_index URLs; ``crosswalk`` rows are (Kundu symbol, Vallis symbol, note); ``body_md`` is the full
+        re-teaching (plain words → equation → derivation → example); ``adds`` = "What Vallis adds". Code, figure and
+        derivation cells follow with the normal methods."""
+        self.current_core = None
+        self.recaps.add(kid)
+        links = " · ".join(f"[{k}]({v})" for k, v in urls.items())
+        head = f"> 🔁 **From Kundu {kundu} — {title}** ({kid})  \n> {links}"
+        if derivation:
+            head += f" · Kundu derivation {derivation}"
+        table = "| Kundu | Vallis | Note |\n|---|---|---|\n" + "\n".join(f"| {a} | {b} | {c} |" for a, b, c in crosswalk)
+        self._add(nbf.v4.new_markdown_cell(f"{head}\n\n**Notation crosswalk**\n\n{table}\n\n{textwrap.dedent(body_md).strip()}"
+                                           f"\n\n**What Vallis adds.** {textwrap.dedent(adds).strip()}"),
+                  ["recap", "kundu-recap"])
+        return self
+
+    def scratch_vs_lib(self, eq: str, scratch_src: str, lib_src: str, explain: str | None = None) -> "ChapterNotebook":
+        """🐍 From scratch, then the library: two cells for equation ``eq`` ("2.12", "K 13.15", "B.3.9", "0A.1").
+        The scratch cell must not call fluidpy/aofd; the library cell must assert that both agree."""
+        if re.search(r"\b(fluidpy|aofd)\.", scratch_src) or re.search(r"^\s*(from|import)\s+(fluidpy|aofd)\b", scratch_src, re.M):
+            raise ValueError(f"eq {eq}: the from-scratch cell calls the library — it must compute by hand")
+        if not re.search(r"assert_allclose|assert ", lib_src):
+            raise ValueError(f"eq {eq}: the library cell must assert that scratch and library agree")
+        tag = "eq:" + eq.replace(" ", "")
+        self.md(f"#### 🐍 From scratch — Eq. ({eq})")
+        self.code(scratch_src, tags=["from-scratch", tag])
+        self.code(lib_src, explain=explain, tags=["library-check", tag])
+        self.ledger.append({"eq": eq, "tag": tag, "status": "coded", "core": self.current_core})
+        return self
+
+    def ledger_row(self, eq: str, status: str, why: str = "") -> "ChapterNotebook":
+        """Record an equation without a scratch/library pair: ``status`` = "sympy" (checked symbolically) or
+        "not computable" (with ``why``)."""
+        ok = status in ("sympy", "not computable")
+        self.ledger.append({"eq": eq, "tag": "", "status": "coded" if ok else status, "why": why,
+                            "kind": status, "core": self.current_core})
+        return self
+
+    def equation_ledger(self) -> "ChapterNotebook":
+        """The equation-code ledger table for the current block (eq → cell tag → status)."""
+        rows = [r for r in self.ledger if r.get("core") == self.current_core] or self.ledger
+        table = "| Eq. | Cell tag | Status |\n|---|---|---|\n" + "\n".join(
+            f"| ({r['eq']}) | `{r['tag']}` | {r.get('kind', r['status'])} |" for r in rows)
+        self._add(nbf.v4.new_markdown_cell(f"**📒 Equation-code ledger**\n\n{table}"), ["ledger"])
+        return self
+
+    def anatomy(self, tex: str, terms: list, ref: str = "") -> "ChapterNotebook":
+        """The equation in full with an anatomy strip: ``terms`` = (term TeX, plain name and role, colour family)."""
+        tag = f"\\qquad \\text{{({ref})}}" if ref else ""
+        rows = "| Term | What it is | Family |\n|---|---|---|\n" + "\n".join(f"| ${t}$ | {w} | {c} |" for t, w, c in terms)
+        self._add(nbf.v4.new_markdown_cell(f"$$ {tex.strip()} {tag} $$\n\n**Anatomy**\n\n{rows}"), ["anatomy"])
+        return self
+
+    def magnitude_table(self, rows: list, dominant: str) -> "ChapterNotebook":
+        """Term-magnitude table: (term TeX, easy estimate, exact value, unit) + the dominant balance in words."""
+        body = "| Term | Easy estimate | Exact | Unit |\n|---|---|---|---|\n" + "\n".join(
+            f"| ${t}$ | {e} | {v:.3g} | {u} |" for t, e, v, u in rows)
+        self._add(nbf.v4.new_markdown_cell(f"**📏 How big is each term?**\n\n{body}\n\n**Dominant balance:** {dominant}"),
+                  ["magnitude"])
+        return self
+
+    def like_unlike(self, like: str, unlike: str) -> "ChapterNotebook":
+        """An analogy with the place where it breaks (teaching-style: Like… / Unlike…)."""
+        self._add(nbf.v4.new_markdown_cell(f"> 💡 **Like…** {textwrap.dedent(like).strip()}  \n"
+                                           f"> 🚧 **Unlike…** {textwrap.dedent(unlike).strip()}"), ["analogy"])
+        return self
+
+    def mechanism(self, name: str, story: str, picture_src: str, equation: str, number: str, misconception: str,
+                  where_next: str, ref: str = "") -> "ChapterNotebook":
+        """🌍 Mechanism card (R4 §4): story · picture (a code cell) · one equation · a number · misconception · where next."""
+        tag = f"\\qquad \\text{{({ref})}}" if ref else ""
+        self.md(f"### 🌍 Mechanism — {name}\n\n**The story.** {textwrap.dedent(story).strip()}")
+        self.code(picture_src, tags=["figure", "mechanism"])
+        self.md(f"**One equation.**\n\n$$ {equation.strip()} {tag} $$\n\n**A number.** {textwrap.dedent(number).strip()}\n\n"
+                f"> ⚠️ **Misconception.** {textwrap.dedent(misconception).strip()}\n\n**Where next.** {where_next}")
+        return self
+
+    def reading_card(self, what: str, axes: str, encoding: str, feature: str, physics: str, source: str) -> "ChapterNotebook":
+        """🗺️ How to read this figure — the five questions + source line, always BEFORE the interpretation."""
+        self._add(nbf.v4.new_markdown_cell(
+            "> 🗺️ **How to read this figure**\n>\n"
+            f"> 1. **What is plotted?** {what}\n> 2. **Where and when are the axes?** {axes}\n"
+            f"> 3. **How is value encoded?** {encoding}\n> 4. **What is the one big feature?** {feature}\n"
+            f"> 5. **Which physics explains it, and what would change it?** {physics}\n>\n> **Where it comes from.** {source}"),
+            ["reading-card"])
+        return self
+
+    def data_figure(self, fig: str, call_src: str, card: dict, see: str, read: str, change: str) -> "ChapterNotebook":
+        """A reproduced data figure (``figs/chNN/fig_NN_MM.py``): reading card first, then the figure, then notes."""
+        self.reading_card(**card)
+        self.code(call_src, tags=["figure", f"fig:{fig}"])
+        return self.figure_notes(see, read, change)
+
+    def scene(self, chapter: str, slug: str, heading: str, why: str) -> "ChapterNotebook":
+        """A standalone full-window 3-D scene (``scenes/chNN/<slug>.html``) embedded next to its CORE block."""
+        self.md(f"#### 🌐 3-D scene: {heading}\n\n{textwrap.dedent(why).strip()}")
+        self.code('from aofd.embed import show_scene      # scenes live in scenes/, not viz/\n'
+                  f'show_scene("{chapter}", "{slug}")          # standalone 3-D scene, full window', tags=["scene"])
+        return self
+
+    def movie(self, slug: str, title: str, poster: str, url: str = "") -> "ChapterNotebook":
+        """🎬 A movie block (only after /approve-movie): poster + link; the page gets the <video> block."""
+        link = f"[watch]({url})" if url else "(published after approval)"
+        self._add(nbf.v4.new_markdown_cell(f"#### 🎬 Movie: {title}\n\n![poster]({poster})\n\n{link}"), ["movie"])
+        return self
 
     def summary(self, clicked: list[str], feeds_forward: list[str], left_out: list[str] | None = None) -> "ChapterNotebook":
         self.current_core = None
@@ -443,7 +577,14 @@ class ChapterNotebook:
                         problems.append(f"DERIVATION {cid} is ★★★ (hard) but has no check_src (sympy verification cell)")
         lo, hi = explainer_limits(self.book)
         if not (lo <= len(self.explainers) <= hi) and "explainers" not in allow:
-            problems.append(f"{len(self.explainers)} explainers embedded (need {lo}–{hi})")
+            msg = f"{len(self.explainers)} explainers embedded (need {lo}–{hi})"
+            if self.soft_explainer_cap:
+                self.warnings.append(msg + " — Chapter 0 soft target (about 12 per part), warning only")
+            else:
+                problems.append(msg)
+        for row in self.ledger:
+            if row["status"] != "coded":
+                problems.append(f"equation-code ledger: ({row['eq']}) is {row['status']}")
         return problems
 
     def save(self, allow_missing: list[str] | None = None) -> Path:
@@ -458,11 +599,13 @@ class ChapterNotebook:
         self.nb.metadata["language_info"] = {"name": "python"}
         self.nb.metadata["fluidpy"] = {"chapter": self.chapter, "explainers": self.explainers,
                                       "cores": sorted(self.cores), "recaps": sorted(self.recaps), "primers": self.primers,
-                                      "derivations": self.derivations}
+                                      "derivations": self.derivations, "ledger": self.ledger}
         for i, c in enumerate(self.cells):           # stable, readable cell ids
             c["id"] = f"{self.chapter}-{i:03d}"
         nbf.validate(self.nb)
-        dest = ROOT / "notebooks" / f"{self.chapter}_{self.slug}.ipynb"
+        for w in self.warnings:
+            print("nbkit warning:", w)
+        dest = ROOT / "notebooks" / f"{self.name}.ipynb"
         dest.parent.mkdir(exist_ok=True)
         nbf.write(self.nb, dest)
         return dest

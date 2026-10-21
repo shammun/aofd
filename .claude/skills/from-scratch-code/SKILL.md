@@ -23,8 +23,8 @@ fails if a computable equation has no `eq:` cell or a cell has no assert.
 # 🐍 From scratch — eq (2.12): geostrophic wind from a pressure gradient
 # u_g = -(1/(rho0 f)) dp/dy ,  v_g = (1/(rho0 f)) dp/dx
 Omega = 7.292e-5            # Earth's rotation rate Ω [rad/s]
-lat = np.deg2rad(45.0)      # latitude φ = 45° converted to radians
-f = 2 * Omega * np.sin(lat) # Coriolis parameter f = 2Ω sin φ [1/s]  (≈ 1.03e-4)
+lat = np.deg2rad(45.0)      # latitude ϑ = 45° converted to radians (Vallis writes ϑ for latitude)
+f = 2 * Omega * np.sin(lat) # Coriolis parameter f = 2Ω sin ϑ [1/s]  (≈ 1.03e-4)
 rho0 = 1.2                  # air density ρ0 [kg/m^3]
 dpdx = 0.0                  # no east-west pressure change [Pa/m]
 dpdy = -100 / 100e3         # pressure falls 1 hPa (100 Pa) over 100 km northward [Pa/m]

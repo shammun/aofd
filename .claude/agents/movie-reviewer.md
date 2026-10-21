@@ -17,7 +17,7 @@ scene-boundary and midpoint frames (extract more around anything suspicious, e.g
 (`chapters/pages/chNN/`), `knowledge/movie_patterns.md`.
 
 ## Checklist (R1 §6)
-1. **Physics honesty**: deflection to the right in the NH and left in the SH; f = 2Ω sin φ → 0 at the equator; Rossby
+1. **Physics honesty**: deflection to the right in the NH and left in the SH; f = 2Ω sin ϑ → 0 at the equator; Rossby
    phase westward, group velocity direction right; western intensification of gyres; Ekman transport 90° to the right
    of the wind (NH); Coriolis called an apparent force in the rotating frame; every moving thing matches its
    `physics_source` (manifest hash parity in qa.json).

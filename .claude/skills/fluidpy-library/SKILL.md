@@ -38,7 +38,7 @@ R_d, c_p, ρ₀ …), each with its source; it may re-export `core` values.
 
 ## 3. Docstring contract (checked by `tools/hooks/post_write.py`)
 numpy docstring with: **Vallis §** and **equation number(s)**; **"Kundu: K§ / (K n.m)"** when the idea is shared;
-every symbol with its SI unit; assumptions (thin shell, Boussinesq, f-plane, linear …); sign conventions (latitude φ,
+every symbol with its SI unit; assumptions (thin shell, Boussinesq, f-plane, linear …); sign conventions (latitude ϑ — Vallis's symbol; θ is potential temperature —,
 ψ sign, lapse-rate sign — compute with Kundu Γ = dT/dz and document met Γ = −dT/dz); validation label (V1–V7 levels
 achieved, filled in by the math-verifier). Type hints; SI units everywhere; pure functions; `xarray` in/out only in
 `data`/`diag` (geo works on numpy arrays and accepts xarray via `np.asarray`).

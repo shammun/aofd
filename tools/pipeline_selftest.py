@@ -43,7 +43,7 @@ def build_notebook() -> Path:
     nb = nbf.v4.new_notebook()
     C = nb.cells
     C.append(nbf.v4.new_markdown_cell("# Pipeline self-test\n\nA notebook with every kind of cell.\n\n## 1 Setup"))
-    setup = nbkit.SETUP_CODE.format(repo="shammun/fluidpy")
+    setup = nbkit.SETUP_CODE.format(repo="shammun/aofd", library_repo="shammun/fluidpy", pin="v0.3.0")
     C.append(nbf.v4.new_code_cell(setup, metadata={"tags": ["setup"]}))
     C.append(nbf.v4.new_markdown_cell("## 2 A matplotlib figure"))
     C.append(nbf.v4.new_code_cell(

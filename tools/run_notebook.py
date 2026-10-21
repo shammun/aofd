@@ -1,4 +1,4 @@
-"""Execute a chapter notebook headlessly (on the fluidpy-venv kernel) and report errors — without publishing anything.
+"""Execute a chapter notebook headlessly (on the aofd-venv kernel) and report errors — without publishing anything.
 
 Usage (repo root)::
 

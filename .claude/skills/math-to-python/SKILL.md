@@ -92,19 +92,19 @@ description: How to turn textbook mathematics (definitions, theorems, derivation
 ## 6b. GFD methods the Vallis chapters need (AOFD additions)
 Physics goes into `fluidpy.geo` (skill `fluidpy-library`); reuse `fluidpy.core.gfd`, `rotating`, `shallow_water`,
 `stratification`, `vertical_modes` first (check `knowledge/kundu_index.yaml`).
-- **Spherical coordinates and metric terms.** Vallis uses longitude λ, **latitude φ**, radius r (Kundu uses colatitude
-  θ: cos θ ↔ sin φ, ∂/∂θ = −∂/∂φ — write the crosswalk in the docstring). Keep the metric terms explicitly
-  (u v tan φ / a, u w / a, …) and test each against sympy's vector module in spherical form; the thin-shell
+- **Spherical coordinates and metric terms.** Vallis uses longitude λ, **latitude ϑ** (θ is potential temperature), radius r (Kundu uses colatitude
+  θ: cos θ ↔ sin ϑ, ∂/∂θ = −∂/∂ϑ — write the crosswalk in the docstring). Keep the metric terms explicitly
+  (u v tan ϑ / a, u w / a, …) and test each against sympy's vector module in spherical form; the thin-shell
   approximation r ≈ a is a named switch, not a silent simplification. Grids: `lat` ascending S→N inside fluidpy (PSL
-  files run N→S: `sortby("lat")` at load); `lon` 0–360 or −180–180 stated once per module; area weights cos φ.
-- **f- and β-plane.** f₀ = 2Ω sin φ₀, β = 2Ω cos φ₀ / a; y = a(φ − φ₀). Ω = 7.2921×10⁻⁵ s⁻¹ (sidereal), a = 6.371×10⁶ m
+  files run N→S: `sortby("lat")` at load); `lon` 0–360 or −180–180 stated once per module; area weights cos ϑ.
+- **f- and β-plane.** f₀ = 2Ω sin ϑ₀, β = 2Ω cos ϑ₀ / a; y = a(ϑ − ϑ₀). Ω = 7.2921×10⁻⁵ s⁻¹ (sidereal), a = 6.371×10⁶ m
   from `fluidpy.geo.constants` (one source); state which in every docstring. Test the β-plane error against the full
-  f(φ) (`gfd.beta_plane_error`).
+  f(ϑ) (`gfd.beta_plane_error`).
 - **Spectral / pseudo-spectral** (2-D turbulence, β-plane jets, QG): `numpy.fft.rfft2`, wavenumbers from
   `2π fftfreq(n, d)`, 2/3-rule dealiasing, integrating-factor or ETDRK4 for stiff linear terms; check energy and enstrophy
   budgets (V4) and the inviscid conservation to round-off for the nonlinear term alone. Periodic only — say so.
 - **Sparse elliptic solves** (Stommel–Munk gyres, PV inversion): assemble with `scipy.sparse` (5-point Laplacian,
-  13-point biharmonic, metric cos φ factors on the sphere), boundary rows for ψ = 0 (and ∂ψ/∂n = 0 for Munk), solve with
+  13-point biharmonic, metric cos ϑ factors on the sphere), boundary rows for ψ = 0 (and ∂ψ/∂n = 0 for Munk), solve with
   `scipy.sparse.linalg.spsolve` (or `splu` reused across steps); verify on a manufactured solution (V1) and second-order
   convergence (V3); the Munk layer width (A_H/β)^{1/3} must be resolved by ≥ 4 points.
 - **Eigenproblems** (Charney, Eady, Phillips, Rayleigh–Kuo, vertical modes): generalised `scipy.linalg.eig(A, B)` on a

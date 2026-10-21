@@ -52,7 +52,7 @@ nb.save()                                           # → notebooks/ch07_gravity
 ```
 **AOFD blocks** (PLANNING §8.1; skills `cross-book-continuity`, `from-scratch-code`, `teaching-style`):
 ```python
-nb.kundu_recap("K03", "Thermal wind", kundu="ch13 §13.5", urls={...}, crosswalk=[("θ (colatitude)", "φ (latitude)", "cos θ = sin φ")], ...)
+nb.kundu_recap("K03", "Thermal wind", kundu="ch13 §13.5", urls={...}, crosswalk=[("θ (colatitude)", "ϑ (latitude)", "cos θ = sin ϑ")], ...)
 nb.scratch_vs_lib("2.12", scratch="...one operation per line, every line commented...",
                   lib="fluidpy.geo.balance.geostrophic_velocity(...)", rtol=1e-12, why_rtol="same closed form")   # tag eq:2.12
 nb.anatomy(r"f\hat{\mathbf z}\times\mathbf u_g = -\nabla p/\rho_0", terms=[("Coriolis", "violet"), ("pressure gradient", "orange")])
