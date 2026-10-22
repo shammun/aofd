@@ -4,7 +4,7 @@
  "builder": "movies/data/build_ch00_dot_product_why.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "6d2c52ef04ab630a05bce6968609ef38188f9fc5",
+  "commit": "bd7f59ae7117ad88ea131b21619ee6e45339223b",
   "vectors_py_tracked": true,
   "dirty_tracked": false,
   "vectors_py_sha256": "e090585bf718740e7465d811cada6c6c2b3ce5dee1c46d955a978176b0312abf",
@@ -42,6 +42,8 @@
    2e-05
   ],
   "T_west_C": 10.0,
+  "T_pin_C": 13.0,
+  "steep_map": "T = 13 °C + 2e-5 K/m (x − x_pin)",
   "map_km": [
    600.0,
    360.0
@@ -59,7 +61,7 @@
   "s1_s3_pair.json": "fe52555063fa9ebfa79e68bdb67bbf0cdb5a409dd9eb421df18a106b6cf495f6",
   "s4_cheap.json": "a170261a00689ac17261ffe85b15d5f7021ecb12bbc479b339ac503b4e8efb6a",
   "s5_work.json": "1ed37614bdf50355da44bc21edb2a669a46804c103045a7086b8e42b52e771ac",
-  "s6_s7_advection.json": "43628b6b6ab192b4dc360d681263929461c56adae1311b58c4ef386a6d7a309e",
+  "s6_s7_advection.json": "63bfaf0fc0c1417d2dadf8a67e90864c60bd75d6db9b9e6676a2b0f38f522d0c",
   "s8_sign.json": "b02a7611d974a40bdad4b6adfcce0542d1ddf24087d8cb951e2b86bc92477961"
  },
  "checks": [
@@ -442,6 +444,34 @@
     13.0,
     12.82,
     11.92
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "steep map: T(pin) 13.00 → 12.64 after 1 h → 10.84 after 6 h",
+   "value": [
+    13.0,
+    12.64,
+    10.84
+   ],
+   "ref": [
+    13.0,
+    12.64,
+    10.84
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "steep map: 7 °C at x = 0, 19 °C at x = 600 km",
+   "value": [
+    7.0,
+    19.0
+   ],
+   "ref": [
+    7.0,
+    19.0
    ],
    "tol": 1e-09,
    "pass": true

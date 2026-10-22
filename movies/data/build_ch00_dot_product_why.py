@@ -42,7 +42,8 @@ F_N, F_DEG = 20.0, 60.0  # s5 force
 D5, D10 = [5.0, 0.0], [10.0, 0.0]
 U_ADV, U_ADV_DEG = 10.0, 60.0           # s6 wind speed m/s and angle from grad T
 G1, G2 = 1.0e-5, 2.0e-5                 # K/m: 1 K per 100 km, then twice as steep
-T_WEST = 10.0                           # °C at x = 0 km
+T_WEST = 10.0                           # °C at x = 0 km (first map)
+T_PIN = 13.0                            # °C at the pin: the steep map is built around it (review S2a)
 PROBE_KM = (300.0, 180.0)
 MAP_KM = (600.0, 360.0)
 
@@ -190,20 +191,23 @@ def main() -> int:
     row("u·∇T = 0.180 K/h", adv1 * 3600, 0.18, 1e-12)
     row("steep: shadow still 5.00, u·∇T doubles", [sh_u2, adv2 / adv1], [5.0, 2.0], 1e-12)
     # independent cross-check: T(x, t) = T0 + G (x − u_x t) carried by the wind (each parcel keeps its T)
-    for G, adv in ((G1, adv1), (G2, adv2)):
-        Tf = lambda x, t, G=G: T_WEST + G * (x[0] - ux * t)  # noqa: E731
+    T_west2 = T_PIN - G2 * PROBE_KM[0] * 1e3   # steep map T = 13 °C + G2 (x − x_pin) → 7 °C at x = 0
+    for G, adv, Tw in ((G1, adv1, T_WEST), (G2, adv2, T_west2)):
+        Tf = lambda x, t, G=G, Tw=Tw: Tw + G * (x[0] - ux * t)  # noqa: E731
         uf = lambda x, t: np.array([u[0], u[1]])  # noqa: E731
         mdt = material_derivative_terms(Tf, uf, np.array([PROBE_KM[0] * 1e3, PROBE_KM[1] * 1e3]), 0.0, h=10.0, ht=10.0)
         row(f"material_derivative_terms G={G:g}: local = −u·∇T, advective = u·∇T, total 0",
             [mdt.local, mdt.advective, mdt.total], [-adv, adv, 0.0], 1e-12)
     t_h = np.linspace(0.0, 6.0, 121)
     T0p1 = T_WEST + G1 * PROBE_KM[0] * 1e3   # 13 °C at the pin
-    T0p2 = T_WEST + G2 * PROBE_KM[0] * 1e3   # 16 °C at the pin on the steep map
+    T0p2 = T_west2 + G2 * PROBE_KM[0] * 1e3   # 13 °C at the pin on the steep map too (same place, gradient ×2)
     dTdt1, dTdt2 = -adv1, -adv2               # ∂T/∂t = −u·∇T when DT/Dt = 0
     Tp1 = T0p1 + dTdt1 * t_h * 3600
     Tp2 = T0p2 + dTdt2 * t_h * 3600
     shift_km = ux * t_h * 3600 / 1e3
     row("T(pin) 13.00 → 12.82 after 1 h → 11.92 after 6 h", [Tp1[0], Tp1[20], Tp1[-1]], [13.0, 12.82, 11.92], 1e-9)
+    row("steep map: T(pin) 13.00 → 12.64 after 1 h → 10.84 after 6 h", [Tp2[0], Tp2[20], Tp2[-1]], [13.0, 12.64, 10.84], 1e-9)
+    row("steep map: 7 °C at x = 0, 19 °C at x = 600 km", [T_west2, T_west2 + G2 * MAP_KM[0] * 1e3], [7.0, 19.0], 1e-9)
     row("−4.32 K per day", dTdt1 * 86400, -4.32, 1e-12)
     rng = np.random.default_rng(20261022)
     n_par = 42
@@ -215,10 +219,14 @@ def main() -> int:
            "norm_gradT": r6(ngrad), "shadow_m_s": r6(sh_u1), "shadow_steep_m_s": r6(sh_u2),
            "u_dot_gradT": float(f"{adv1:.6e}"), "u_dot_gradT_steep": float(f"{adv2:.6e}"),
            "K_per_h": r6(adv1 * 3600), "K_per_h_steep": r6(adv2 * 3600), "K_per_day": r6(adv1 * 86400),
+           # local tendency at the pin, ∂T/∂t = −u·∇T (signed; the composition prints the sign from these)
+           "dTdt_K_s": float(f"{dTdt1:.6e}"), "dTdt_K_s_steep": float(f"{dTdt2:.6e}"),
+           "dTdt_K_h": r6(dTdt1 * 3600), "dTdt_K_h_steep": r6(dTdt2 * 3600),
+           "dTdt_K_day": r6(dTdt1 * 86400), "dTdt_K_day_steep": r6(dTdt2 * 86400), "T_west_steep": r6(T_west2),
            "u_x": r6(ux), "T_west": T_WEST, "map_km": list(MAP_KM), "probe_km": list(PROBE_KM),
            "t_h": r6(t_h), "shift_km": r6(shift_km), "T_pin": r6(Tp1), "T_pin_steep": r6(Tp2),
            "parcels_x0": r6(x0), "parcels_y0": r6(y0), "parcels_x_km": r6(px), "parcels_y_km": r6(py),
-           "lut_thermal": thermal_lut(64), "lut_range_C": [10.0, 22.0]}
+           "lut_thermal": thermal_lut(64), "lut_range_C": [4.0, 20.0]}
 
     # ------------------------------------------------------------------ s8: b swings, |b| fixed
     f8 = "s8_sign.json"
@@ -271,7 +279,7 @@ def main() -> int:
                       "(0A.3)": "|a| cos θ = a·b̂ = a·b/|b| (ours)", "(1.7)": "Vallis §1.1 Dφ/Dt = ∂φ/∂t + (v·∇)φ"},
         "parameters": {"a": A, "b": B, "u_wind_s4_m_s": U_WIND, "F_N": F_N, "F_angle_deg": F_DEG, "d_m": [5, 10],
                        "u_s6_m_s": U_ADV, "u_angle_from_gradT_deg": U_ADV_DEG, "gradT_K_m": [G1, G2],
-                       "T_west_C": T_WEST, "map_km": list(MAP_KM), "probe_km": list(PROBE_KM),
+                       "T_west_C": T_WEST, "T_pin_C": T_PIN, "steep_map": "T = 13 °C + 2e-5 K/m (x − x_pin)", "map_km": list(MAP_KM), "probe_km": list(PROBE_KM),
                        "time_compression": "6 h in 6 s (×3600)", "parcel_seed": 20261022,
                        "s8_theta_grid": "angle_between(a, b) … 180° step 0.05° plus 90, 120, 180 exactly"},
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",

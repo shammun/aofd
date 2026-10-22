@@ -28,7 +28,7 @@ const SS = (k: number, j: number) => Math.round(sc[k].sentences[j].start * DPW_F
 const SE = (k: number, j: number) => Math.round(sc[k].sentences[j].end * DPW_FPS) - CUT[k];
 
 // ---------------------------------------------------------------- equations (verbatim from the storyboard)
-const EQ_K22 = String.raw`\mathbf a\cdot\mathbf b = a_1b_1 + a_2b_2 + a_3b_3 = a_ib_i`;
+const EQ_K22 = String.raw`\mathbf a\cdot\mathbf b = a_1b_1 + a_2b_2 + a_3b_3 \equiv a_ib_i`; // ≡ as on the page (Kundu p. 41)
 const EQ_0A1 = String.raw`\mathbf a\cdot\mathbf b = |\mathbf a|\,|\mathbf b|\cos\theta = (|\mathbf a|\cos\theta)\,|\mathbf b|`;
 const EQ_0A3 = String.raw`|\mathbf a|\cos\theta = \mathbf a\cdot\hat{\mathbf b} = \frac{\mathbf a\cdot\mathbf b}{|\mathbf b|},\qquad \hat{\mathbf b} = \frac{\mathbf b}{|\mathbf b|}`;
 const EQ_SYM = String.raw`\mathbf a\cdot\mathbf b = (|\mathbf a|\cos\theta)\,|\mathbf b| = (|\mathbf b|\cos\theta)\,|\mathbf a| = \mathbf b\cdot\mathbf a`;
@@ -65,8 +65,8 @@ type Pt = [number, number];
 const mkP = (ox: number, oy: number, u: number) => (x: number, y: number): Pt => [ox + x * u, oy - y * u];
 const lerp = (p: Pt, q: Pt, t: number): Pt => [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t];
 
-const Arrow: React.FC<{ p: Pt; q: Pt; color: string; w?: number; head?: number; o?: number }> = ({
-  p, q, color, w = 6, head = 26, o = 1,
+const Arrow: React.FC<{ p: Pt; q: Pt; color: string; w?: number; head?: number; o?: number; halo?: boolean }> = ({
+  p, q, color, w = 6, head = 26, o = 1, halo = false,
 }) => {
   const dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
   if (L < 1) return null;
@@ -74,6 +74,10 @@ const Arrow: React.FC<{ p: Pt; q: Pt; color: string; w?: number; head?: number; 
   const bx = q[0] - ux * h, by = q[1] - uy * h;
   return (
     <g opacity={o}>
+      {halo ? <g stroke={HOUSE.bg} strokeWidth={5} strokeLinejoin="round" fill={HOUSE.bg}>
+        <line x1={p[0]} y1={p[1]} x2={q[0] - ux * h * 0.6} y2={q[1] - uy * h * 0.6} strokeWidth={w + 6} strokeLinecap="round" />
+        <polygon points={`${q[0]},${q[1]} ${bx + nx * h * 0.5},${by + ny * h * 0.5} ${bx - nx * h * 0.5},${by - ny * h * 0.5}`} />
+      </g> : null}
       <line x1={p[0]} y1={p[1]} x2={q[0] - ux * h * 0.6} y2={q[1] - uy * h * 0.6} stroke={color} strokeWidth={w}
         strokeLinecap="round" />
       <polygon points={`${q[0]},${q[1]} ${bx + nx * h * 0.5},${by + ny * h * 0.5} ${bx - nx * h * 0.5},${by - ny * h * 0.5}`}
@@ -630,15 +634,16 @@ const uScr: Pt = [adv.speed * US * Math.cos(UANG), -adv.speed * US * Math.sin(UA
 const shScr = adv.shadow_m_s * US;
 
 /** T(x, t) = T_west + G (x − shift): G and shift from the data file (shift_km = u·x̂ t). Drawn as 5-km strips. */
-const TMap: React.FC<{ G: number; shiftKm: number; o?: number; id: string }> = ({ G, shiftKm, o = 1, id }) => {
+const TMap: React.FC<{ G: number; shiftKm: number; o?: number; id: string; tWest?: number }> = ({ G, shiftKm, o = 1, id,
+  tWest = adv.T_west }) => {
   const strips = [];
   for (let i = 0; i < 120; i++) {
     const xk = i * 5 + 2.5;
-    strips.push(<rect key={i} x={MX + i * 5 * KM} y={MY} width={5 * KM + 0.6} height={MH} fill={tColor(adv.T_west + G * (xk - shiftKm) * 1000)} />);
+    strips.push(<rect key={i} x={MX + i * 5 * KM} y={MY} width={5 * KM + 0.6} height={MH} fill={tColor(tWest + G * (xk - shiftKm) * 1000)} />);
   }
   const iso = [];
   for (let T = 0; T <= 22; T++) {
-    const xk = (T - adv.T_west) / G / 1000 + shiftKm;
+    const xk = (T - tWest) / G / 1000 + shiftKm;
     if (xk < 2 || xk > adv.map_km[0] - 2) continue;
     const px = MX + xk * KM;
     iso.push(<g key={T}><line x1={px} y1={MY} x2={px} y2={MY + MH} stroke="#ffffff" strokeOpacity={0.45} strokeWidth={2} />
@@ -663,7 +668,7 @@ const CBW = MW - 120; // colour-bar width (label to its right, inside the map's 
 const ColourBar: React.FC = () => (
   <g>
     {LUT.map((c, i) => <rect key={i} x={MX + (i * CBW) / LUT.length} y={MY + MH + 92} width={CBW / LUT.length + 0.6} height={26} fill={c} />)}
-    {[10, 12, 14, 16, 18, 20, 22].map((T) => <Lbl key={T} x={MX + ((T - T_LO) / (T_HI - T_LO)) * CBW} y={MY + MH + 140} t={`${T}`} c={MUTED} s={28} a="middle" />)}
+    {[4, 8, 12, 16, 20].map((T) => <Lbl key={T} x={MX + ((T - T_LO) / (T_HI - T_LO)) * CBW} y={MY + MH + 140} t={`${T}`} c={MUTED} s={28} a="middle" />)}
     <Lbl x={MX + CBW + 22} y={MY + MH + 105} t="T (°C)" c={INK} s={28} />
   </g>
 );
@@ -685,11 +690,11 @@ const S6: React.FC = () => {
         <ColourBar />
         {oR > 0 ? <ProdRect pts={rect} neg={false} o={oR} id="h6" /> : null}
         <Band p={P0} q={lerp(P0, sh, oS)} color={TEAL} o={oS > 0 ? 1 : 0} />
-        <Arrow p={P0} q={gT} color={ORANGE} o={oG} w={7} />
-        <Arrow p={P0} q={uT} color={TEAL} o={oU} w={7} />
+        <Arrow p={P0} q={gT} color={ORANGE} o={oG} w={7} halo />
+        <Arrow p={P0} q={uT} color={TEAL} o={oU} w={7} halo />
         <circle cx={P0[0]} cy={P0[1]} r={7} fill={INK} stroke={HOUSE.bg} strokeWidth={2} opacity={oG} />
         <Lbl x={gT[0] + 12} y={gT[1]} t="∇T" c={ORANGE} s={36} b o={oG} />
-        <Bracket p={P0} q={gT} off={-20} c={ORANGE} label="|∇T|" lo={22} s={30} o={oL * (1 - oR)} />
+        <Bracket p={P0} q={gT} off={20} c={ORANGE} label="|∇T|" lo={22} s={30} o={oL * (1 - oR)} />{/* below: the 60° arc is above */}
         <g opacity={oU}>
           <Arc P={mkP(P0[0], P0[1], 1)} a0={0} a1={adv.angle_deg} r={62} c={INK} />
           <Lbl x={P0[0] + 70} y={P0[1] - 32} t={`${adv.angle_deg.toFixed(0)}°`} s={30} />
@@ -733,15 +738,21 @@ const S7: React.FC = () => {
   const k = isB ? kB : kA;
   const G = isB ? adv.gradT_steep[0] : adv.gradT[0];
   const Tpin = isB ? adv.T_pin_steep[k] : adv.T_pin[k];
-  const rate = isB ? adv.K_per_h_steep : adv.K_per_h;
+  const tWest = isB ? adv.T_west_steep : adv.T_west;
+  const dKs = isB ? adv.dTdt_K_s_steep : adv.dTdt_K_s, dKh = isB ? adv.dTdt_K_h_steep : adv.dTdt_K_h;
+  const dKd = isB ? adv.dTdt_K_day_steep : adv.dTdt_K_day;
+  // signed value, minus sign in rose (∂T/∂t = −u·∇T from the data, never hard-coded)
+  const sgn = (v: number, txt: string) => <>{v < 0 ? <span style={{ color: ROSE }}>−</span> : null}{txt}</>;
   const GL = 150 * (isB ? 2 : 1);
   const P0 = PROBE;
   const parcels = adv.parcels_x_km.map((xs, i) => {
     const x = ((xs[k] % adv.map_km[0]) + adv.map_km[0]) % adv.map_km[0];
     const y = ((adv.parcels_y_km[i][k] % adv.map_km[1]) + adv.map_km[1]) % adv.map_km[1];
     // colour = T at the wrapped position: a parcel that leaves the east edge is replaced by one entering from the west
-    return <circle key={i} cx={MX + x * KM} cy={MY + MH - y * KM} r={9} fill={tColor(adv.T_west + G * (x - adv.shift_km[k]) * 1000)}
-      stroke="#ffffff" strokeWidth={2.5} />;
+    // filled with the parcel's temperature colour, with a dark ring so the fill reads against the same-coloured field
+    return <g key={i}><circle cx={MX + x * KM} cy={MY + MH - y * KM} r={12} fill="none" stroke="#ffffff" strokeWidth={2} />
+      <circle cx={MX + x * KM} cy={MY + MH - y * KM} r={10} fill={tColor(tWest + G * (x - adv.shift_km[k]) * 1000)}
+        stroke={HOUSE.bg} strokeWidth={3} /></g>;
   });
   // upwind cone (where the arriving air comes from): opposite to u
   const back = Math.atan2(-uScr[1], -uScr[0]), half = (25 * Math.PI) / 180, R = 230;
@@ -755,16 +766,16 @@ const S7: React.FC = () => {
         <g clipPath="url(#mapclip)">
           {fade > 0 ? (<>
             <TMap G={adv.gradT[0]} shiftKm={adv.shift_km[kA]} id="m7a" />
-            <TMap G={adv.gradT_steep[0]} shiftKm={0} o={fade} id="m7b" />
-          </>) : <TMap G={G} shiftKm={adv.shift_km[k]} id="m7" />}
+            <TMap G={adv.gradT_steep[0]} shiftKm={0} o={fade} id="m7b" tWest={adv.T_west_steep} />
+          </>) : <TMap G={G} shiftKm={adv.shift_km[k]} id="m7" tWest={tWest} />}
           {fade === 0 ? parcels : null}
           <path d={cone} fill="#ffffff" fillOpacity={0.16} stroke="#ffffff" strokeOpacity={0.6} strokeWidth={2} strokeDasharray="8 6" />
         </g>
         <MapFrame />
         <ColourBar />
         <Band p={P0} q={sh} color={TEAL} />
-        <Arrow p={P0} q={[P0[0] + GL, P0[1]]} color={ORANGE} w={7} />
-        <Arrow p={P0} q={uT} color={TEAL} w={7} />
+        <Arrow p={P0} q={[P0[0] + GL, P0[1]]} color={ORANGE} w={7} halo />
+        <Arrow p={P0} q={uT} color={TEAL} w={7} halo />
         <Lbl x={P0[0] + GL + 12} y={P0[1]} t="∇T" c={ORANGE} s={34} b />
         <Lbl x={uT[0] + 12} y={uT[1] - 6} t="u" c={TEAL} s={34} b />
         {/* the pin: you, standing still */}
@@ -775,11 +786,12 @@ const S7: React.FC = () => {
         <Lbl x={P0[0] + 30} y={P0[1] + 30} t={`shadow ${isB ? "still " : ""}${adv.shadow_m_s.toFixed(2)} m/s`} c={TEAL} s={28} />
       </Svg>
       <Chip text="Mind the sign: what a thermometer that stays put sees" x={40} y={30} size={30} />
+      <Chip text="same place, gradient ×2 — clock restarts" x={830} y={34} size={28} color={ORANGE} o={steep} />
       <EqBox latex={EQ_17} x={RX} y={95} w={RW} h={110} size={34} number="Vallis 1.7" />
       <EqBox latex={EQ_DTDT_HL} x={RX} y={220} w={RW} h={110} size={36} o={oEq} />
       <Txt x={RX} y={340} w={RW} s={30} o={oEq}>
-        = <span style={{ color: ROSE }}>−</span>{isB ? sci(adv.u_dot_gradT_steep) : sci(adv.u_dot_gradT)} K/s = <b><span style={{ color: ROSE }}>−</span>{rate.toFixed(3)} K/h</b>
-        {isB ? "" : ` (${fx(adv.K_per_day, 2)} K per day)`}
+        = {sgn(dKs, `${sci(Math.abs(dKs))} K/s`)} = <b>{sgn(dKh, `${Math.abs(dKh).toFixed(3)} K/h`)}</b>{" "}
+        ({sgn(dKd, `${Math.abs(dKd).toFixed(2)} K per day`)})
       </Txt>
       <Txt x={RX} y={386} w={RW} s={28} c={MUTED} o={oEq}>assumes each parcel keeps its temperature: no heating, no mixing (DT/Dt = 0)</Txt>
       <div style={{ position: "absolute", left: RX, top: 475, width: RW, ...FONT, fontSize: 32, background: HOUSE.panel,
@@ -793,7 +805,7 @@ const S7: React.FC = () => {
           shadow |u| cos θ = <b>{adv.shadow_m_s.toFixed(2)} m/s</b> → how fast the air heads towards warmth (same on both maps)
         </div>
         <div style={{ borderLeft: `6px solid ${ROSE}`, paddingLeft: 14 }}>
-          −u·∇T = {fx(-adv.K_per_h)} → {fx(-adv.K_per_h_steep)} K/h → how fast YOUR temperature changes (doubles)
+          −u·∇T = {fx(adv.dTdt_K_h)} → {fx(adv.dTdt_K_h_steep)} K/h → how fast YOUR temperature changes (doubles)
         </div>
       </div>
       <Badge detail="time ×3600 (6 h in 6 s) · arrows not to the km scale · idealised field" corner="bl" />
@@ -840,7 +852,7 @@ const S8: React.FC = () => {
         <Grid P={P} xr={[-4, 7]} yr={[-5, 4]} />
         {/* b's line, extended backwards behind O (dashed) */}
         <Dash p={P(-bh[0] * 6, -bh[1] * 6)} q={P(bh[0] * 6, bh[1] * 6)} c={ORANGE} o={0.45} w={2.5} />
-        <ProdRect pts={rect} neg={neg} id="h8" />
+        {Math.abs(ab) > 0.05 ? <ProdRect pts={rect} neg={neg} id="h8" /> : null}{/* zero area at 90°: nothing drawn */}
         <Band p={O} q={foot} color={TEAL} w={i === sign.i180 ? 22 : 16} />
         <Arrow p={O} q={bT} color={ORANGE} />
         <Arrow p={O} q={aTip} color={TEAL} />
@@ -889,14 +901,15 @@ const S9: React.FC = () => {
         <div style={{ opacity: b(2), marginTop: 14 }}><b style={{ color: HOUSE.accent }}>3 · Physics needs both sizes:</b>{" "}
           W = F·d (J), −u·∇T (K/s)</div>
       </div>
-      <div style={{ position: "absolute", left: 140, top: 430, width: 1640, ...FONT, fontSize: 28, color: MUTED, lineHeight: 1.35,
+      <div style={{ position: "absolute", left: 140, top: 425, width: 1640, ...FONT, fontSize: 28, color: MUTED, lineHeight: 1.35,
         opacity: b(3) }}>
         From Kundu: §2.1 (K 2.2) and §2.8 — fluidpy ch02 C01 (summation convention, a·b = aᵢbᵢ) and C09 (the gradient ∇φ
-        points up the steepest climb); App. B §B.3 builds ∇· and ∇× from these products.
+        points up the steepest climb): <span style={{ color: INK }}>shammun.github.io/fluidpy/notebooks/ch02_cartesian_tensors.html</span>;
+        App. B §B.3 builds ∇· and ∇× from these products.
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 540, bottom: 0, opacity: b(3) }}>
-        <EndCard notebook="notebooks/poc_ch00a_dot.ipynb (until the Chapter 0A notebook is published)"
-          explainer="Vector products lab · viz/ch00/vector_products_lab.html" />
+        <EndCard notebook="https://shammun.github.io/aofd/notebooks/poc_ch00a_dot.html"
+          explainer="https://shammun.github.io/aofd/viz/ch00/vector_products_lab.html" />
       </div>
     </AbsoluteFill>
   );

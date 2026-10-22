@@ -77,7 +77,7 @@ scenes:
       shadow of a on b"; EqLine (0A.3) fades in, small, under it.
     voiceover: "Arrow a is five, one, and arrow b is one, three. Multiply matching parts and add: five times one, plus one times three, is eight. Geometry gives eight too: both lengths, times the cosine of the angle. The length of arrow a times that cosine is its shadow on b."
     on_screen_eq:
-      latex: "\\mathbf a\\cdot\\mathbf b = a_1b_1 + a_2b_2 + a_3b_3 = a_ib_i"
+      latex: "\\mathbf a\\cdot\\mathbf b = a_1b_1 + a_2b_2 + a_3b_3 \\equiv a_ib_i"   # ≡ as on the page (review N2, 2026-10-22)
       vallis_eq: "(K 2.2) — Kundu §2.1; Vallis gives no number (background maths)"
       page_png: "../Fluid Dynamics/chapters/pages/ch02/p068.png"   # Kundu printed p. 41; read from the image 2026-10-22
       page_text: "a·b = a1b1 + a2b2 + a3b3 = Σ_{i=1}^{3} a_i b_i ≡ a_i b_i  (2.2) — we show the first, second and last forms"
@@ -238,9 +238,12 @@ scenes:
       "6 h of weather in 6 s (×3600)"; the thermometer counts down 13.00 -> 12.82 °C after 1 h -> 11.92 °C after 6 h.
       117.6 s: an upwind cone behind the pin shades the colder air that is arriving, label "arriving air comes from the
       colder side". 123.6 s: the derived line below (1.7) appears: "∂T/∂t = −u·∇T = −5.00×10⁻⁵ K/s = −0.180 K/h
-      (−4.32 K per day)", minus sign in rose. 127.5 s: the map becomes twice as steep (isotherms every 50 km, 10 ->
-      22 °C across the map, |∇T| = 2.00×10⁻⁵ K/m); the shadow label stays "5.00 m/s"; the readout changes to
-      "−0.360 K/h"; the thermometer now falls twice as fast. 132.9 s: a two-row card: "shadow |u| cos θ = 5.00 m/s →
+      (−4.32 K per day)", minus signs in rose, signs taken from the data. 127.5 s: the map becomes twice as steep, built
+      around the pin (review S2a): T = 13 °C + 2 K per 100 km × (x − x_pin), 7 -> 19 °C across the map, isotherms every
+      50 km, |∇T| = 2.00×10⁻⁵ K/m; chip "same place, gradient ×2 — clock restarts"; the clock restarts at 13.00 °C; the
+      shadow label stays "5.00 m/s"; the readout changes to "−0.360 K/h (−8.64 K per day)"; the thermometer now falls
+      twice as fast: 13.00 -> 12.64 °C after 1 h -> 10.84 °C after 6 h (first run: 11.92 °C after 6 h). Colour scale
+      4–20 °C (cmocean thermal) shared by both maps. 132.9 s: a two-row card: "shadow |u| cos θ = 5.00 m/s →
       how fast the air heads towards warmth (same on both maps)" / "−u·∇T = −0.180 → −0.360 K/h → how fast YOUR
       temperature changes (doubles)". Mini note under the equation: "assumes each parcel keeps its temperature: no
       heating, no mixing (DT/Dt = 0)". ScaleBadge: "time ×3600".
@@ -252,9 +255,11 @@ scenes:
       highlight: [{term: "-\\,\\mathbf u\\cdot\\nabla T", colour: teal}]
     physics_source:
       fn: fluidpy.geo.vectors.dot
-      params: {u_m_s: [5.000, 8.660], gradT_K_m: [1.0e-5, 0.0], gradT_steep_K_m: [2.0e-5, 0.0], T_probe_t0_C: 13.0}
+      params: {u_m_s: [5.000, 8.660], gradT_K_m: [1.0e-5, 0.0], gradT_steep_K_m: [2.0e-5, 0.0], T_probe_t0_C: 13.0,
+              steep_map: "T = 13 °C + 2.0e-5 K/m (x − x_pin): same pin, clock restarts"}
       outputs: {dTdt_K_s: -5.000e-5, dTdt_K_h: -0.180, dTdt_K_day: -4.32, dTdt_steep_K_h: -0.360, shadow_both_maps_m_s: 5.000,
-                T_probe_C: {t_1h: 12.82, t_6h: 11.92}}
+                dTdt_steep_K_day: -8.64, T_probe_C: {t_1h: 12.82, t_6h: 11.92},
+                T_probe_steep_C: {t_0: 13.00, t_1h: 12.64, t_6h: 10.84}}
       also: ["fluidpy.core.kinematics.material_derivative_terms on T(x, t) = T0 + G (x − u_x t): local = −5.00e-5 K/s, advective = +5.00e-5 K/s, total 0",
              fluidpy.geo.vectors.scalar_projection]
       test: >-
