@@ -14,7 +14,7 @@
     "s09_movies": "pass",
     "s10_selftests": "pass",
     "poc": {
-      "A": "pass (viz review round 1)",
+      "A": "pass (viz review round 4b after user feedback rounds 1-2; awaiting the user's second look)",
       "B": "pass (viz review round 2, derived tolerances)",
       "C": "pass (orchestrator review; literature values to re-verify in ch21)",
       "D": "pass (QA 10/10, movie-reviewer re-review PASS; user must watch before /approve-movie)",
@@ -87,8 +87,8 @@
     }
   },
   "last_update": {
-    "commit": "49cd85d",
+    "commit": "1d88ab6",
     "fluidpy_commit": "6d2c52e",
-    "time": "2026-10-21T19:28"
+    "time": "2026-10-22T00:22"
   }
 }
