@@ -45,3 +45,10 @@ symbols:
   "≈": "about"
   "°": "degrees"
   "f = 2Ω sin φ": "f equals two Omega sine phi"
+  # the vector a (ch00_dot_product_why, 2026-10-22): a lone "a" is read as the article (ɐ) and "ay" as "eye";
+  # these exact, case-sensitive phrases make Kokoro say the letter name (eɪ). "[A](/ˈA/)" is misaki's inline phoneme
+  # override. Side effect: "arrow a " also matches inside "narrow a " (same sound, harmless).
+  "a dot b": "[A](/ˈA/) dot b"
+  # "Arrow A " alone still gave the article (ɐ) in "arrow A times" (phoneme check 2026-10-22), so all three use the override
+  "Arrow a ": "Arrow [A](/ˈA/) "
+  "arrow a ": "arrow [A](/ˈA/) "

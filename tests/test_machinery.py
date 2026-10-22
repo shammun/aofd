@@ -148,3 +148,14 @@ def test_shot_cli_has_3d_flags():
     r = subprocess.run([sys.executable, str(ROOT / "tools" / "shot.py"), "--help"], capture_output=True, text=True)
     for flag in ("--3d", "--no-webgl", "--scene", "--contexts", "--page"):
         assert flag in r.stdout, flag
+
+
+def test_movie_qa_frozen_gate_counts_only_silence():
+    """The frozen gate fails a static stretch only for > 4 s without narration (motion-graphics skill)."""
+    import movie_qa
+
+    speech = [(0.3, 5.75), (6.1, 11.2), (20.0, 22.0)]
+    assert movie_qa.longest_silence(0.0, 11.0, speech) == pytest.approx(0.35)    # narrated slide: gaps only
+    assert movie_qa.longest_silence(11.0, 20.0, speech) == pytest.approx(8.8)    # silent hold: 11.2 → 20.0
+    assert movie_qa.longest_silence(21.0, 30.0, speech) == pytest.approx(8.0)    # silence to the end
+    assert movie_qa.narration_spans(None) is None

@@ -16,7 +16,7 @@ Gates (each PASS / FAIL / SKIP with a reason; exit 0 only when no gate FAILs):
 | size | > --budget-mb (default 25) — FAIL above --hard-mb (default 40), WARN between |
 | codec | video not H.264 High (or Main for tiny clips) yuv420p, audio not AAC, or moov atom not before mdat (faststart) |
 | black | black > 0.5 s outside the first/last 0.5 s (blackdetect) |
-| frozen | a frozen stretch > 4 s (freezedetect) |
+| frozen | a frozen stretch > 4 s (freezedetect) holding > 4 s of silence (narration from timing.json; without one, any) |
 | loudness | integrated outside −18…−14 LUFS or true peak > −1 dBTP (ebur128) |
 | flashes | > 3 large luminance flashes in any 1 s window (WCAG 2.3.1), from frames sampled at the video fps |
 | captions | VTT cues out of order, outside the audio, > 2 lines, > 42 chars/line, > 17 cps, or text ≠ script text |
@@ -175,6 +175,25 @@ def framemd5(a: Path, b: Path) -> int:
     return 0 if not diff and len(ha) == len(hb) else 1
 
 
+def narration_spans(timing: Path | None) -> list[tuple[float, float]] | None:
+    """Spoken (start, end) seconds of every sentence in a tools/tts.py timing.json, or None without one."""
+    if timing is None or not timing.exists():
+        return None
+    t = json.loads(timing.read_text(encoding="utf-8"))
+    return sorted((float(s["start"]), float(s["end"])) for sc in t.get("scenes", []) for s in sc.get("sentences", []))
+
+
+def longest_silence(s: float, e: float, speech: list[tuple[float, float]]) -> float:
+    """Longest stretch inside [s, e] that no narration sentence covers [s]."""
+    longest, cursor = 0.0, s
+    for a, b in speech:
+        if b <= cursor or a >= e:
+            continue
+        longest = max(longest, a - cursor)
+        cursor = max(cursor, b)
+    return max(longest, e - cursor)
+
+
 def review_frames(path: Path, outdir: Path, dur: float, storyboard: dict | None) -> list[str]:
     outdir.mkdir(parents=True, exist_ok=True)
     files = []
@@ -214,6 +233,8 @@ def main() -> int:
     ap.add_argument("--script")
     ap.add_argument("--manifest")
     ap.add_argument("--composition", help="the .tsx source to grep for on-screen equations")
+    ap.add_argument("--timing", help="tools/tts.py timing.json (default: next to --storyboard); makes the frozen "
+                                     "gate fail only on > 4 s of silence inside a frozen stretch")
     ap.add_argument("--id", help="report folder name (default: the movie's file stem)")
     ap.add_argument("--duration", type=float, help="target seconds (±3 %); overrides the storyboard target")
     ap.add_argument("--duration-window", default="120,180")
@@ -235,6 +256,7 @@ def main() -> int:
         import yaml
 
         sb = yaml.safe_load(Path(a.storyboard).read_text(encoding="utf-8"))
+    timing_path = Path(a.timing) if a.timing else (Path(a.storyboard).with_name("timing.json") if a.storyboard else None)
     mid = a.id or (sb or {}).get("id") or path.stem
     outdir = ROOT / "reports" / "movies" / mid
     info = probe(path)
@@ -291,8 +313,24 @@ def main() -> int:
     inner = [(s, e) for s, e in blacks if s > 0.5 and e < dur - 0.5]
     gate("black", "FAIL" if inner else "PASS", f"{len(blacks)} black stretch(es); inside: {inner}")
     err = detect(path, "freezedetect=n=0.003:d=4")
-    fr = re.findall(r"freeze_duration: ([\d.]+)", err)
-    gate("frozen", "FAIL" if fr else "PASS", f"frozen > 4 s: {fr}" if fr else "no frozen stretch > 4 s")
+    starts = [float(x) for x in re.findall(r"freeze_start: ([\d.]+)", err)]
+    ends = [float(x) for x in re.findall(r"freeze_end: ([\d.]+)", err)]
+    ends += [dur] * (len(starts) - len(ends))          # a freeze running to the last frame has no end line
+    freezes = list(zip(starts, ends))
+    speech = narration_spans(timing_path)
+    if speech is None:
+        # no timing.json: every frozen stretch > 4 s fails (silent clips, old behaviour)
+        gate("frozen", "FAIL" if freezes else "PASS",
+             f"frozen > 4 s: {[round(e - s, 2) for s, e in freezes]}" if freezes else "no frozen stretch > 4 s")
+    else:
+        # skill rule: fail only a frozen stretch holding > 4 s of continuous silence (a static slide while the
+        # narrator talks is fine)
+        silent = [(s, e, longest_silence(s, e, speech)) for s, e in freezes]
+        bad = [(round(s, 2), round(e, 2), round(g, 2)) for s, e, g in silent if g > 4.0]
+        worst = max((g for *_, g in silent), default=0.0)
+        gate("frozen", "FAIL" if bad else "PASS",
+             f"{len(freezes)} frozen stretch(es) > 4 s; silent > 4 s inside: {bad}" if bad else
+             f"{len(freezes)} frozen stretch(es) > 4 s, all narrated (longest silence inside {worst:.2f} s)")
     # loudness
     if au is None:
         gate("loudness", "SKIP" if a.no_audio_ok else "FAIL", "no audio stream")

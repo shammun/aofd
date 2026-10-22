@@ -1,0 +1,443 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "scenes": [
+  {
+   "id": "s1_hook",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "Here's a puzzle: the shadow of one arrow on another looks like the natural answer.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 5.75,
+     "dur": 5.45,
+     "start_frame": 9,
+     "end_frame": 172
+    },
+    {
+     "text": "So why does the dot product multiply that shadow by the other arrow's length?",
+     "audio_text": null,
+     "start": 6.1,
+     "end": 11.175,
+     "dur": 5.075,
+     "start_frame": 183,
+     "end_frame": 335
+    }
+   ],
+   "end": 11.975,
+   "start_frame": 9,
+   "end_frame": 359
+  },
+  {
+   "id": "s2_two_faces",
+   "start": 11.975,
+   "sentences": [
+    {
+     "text": "Arrow a is five, one, and arrow b is one, three.",
+     "audio_text": "Arrow [A](/ˈA/) is five, one, and arrow b is one, three.",
+     "start": 11.975,
+     "end": 15.925,
+     "dur": 3.95,
+     "start_frame": 359,
+     "end_frame": 478
+    },
+    {
+     "text": "Multiply matching parts and add: five times one, plus one times three, is eight.",
+     "audio_text": null,
+     "start": 16.275,
+     "end": 22.425,
+     "dur": 6.15,
+     "start_frame": 488,
+     "end_frame": 673
+    },
+    {
+     "text": "Geometry gives eight too: both lengths, times the cosine of the angle.",
+     "audio_text": null,
+     "start": 22.775,
+     "end": 27.9,
+     "dur": 5.125,
+     "start_frame": 683,
+     "end_frame": 837
+    },
+    {
+     "text": "The length of arrow a times that cosine is its shadow on b.",
+     "audio_text": "The length of arrow [A](/ˈA/) times that cosine is its shadow on b.",
+     "start": 28.25,
+     "end": 32.45,
+     "dur": 4.2,
+     "start_frame": 848,
+     "end_frame": 974
+    }
+   ],
+   "end": 33.25,
+   "start_frame": 359,
+   "end_frame": 998
+  },
+  {
+   "id": "s3_symmetry",
+   "start": 33.25,
+   "sentences": [
+    {
+     "text": "Reason one: a shadow depends on who casts it.",
+     "audio_text": null,
+     "start": 33.25,
+     "end": 36.95,
+     "dur": 3.7,
+     "start_frame": 998,
+     "end_frame": 1109
+    },
+    {
+     "text": "The shadow of arrow a on b is two point five three.",
+     "audio_text": "The shadow of arrow [A](/ˈA/) on b is two point five three.",
+     "start": 37.3,
+     "end": 41.125,
+     "dur": 3.825,
+     "start_frame": 1119,
+     "end_frame": 1234
+    },
+    {
+     "text": "But the shadow of b on arrow a is one point five seven.",
+     "audio_text": "But the shadow of b on arrow [A](/ˈA/) is one point five seven.",
+     "start": 41.475,
+     "end": 45.85,
+     "dur": 4.375,
+     "start_frame": 1244,
+     "end_frame": 1376
+    },
+    {
+     "text": "Multiply each by the other arrow's length, and both give eight.",
+     "audio_text": null,
+     "start": 46.2,
+     "end": 50.475,
+     "dur": 4.275,
+     "start_frame": 1386,
+     "end_frame": 1514
+    },
+    {
+     "text": "The dot product doesn't care about order.",
+     "audio_text": null,
+     "start": 50.825,
+     "end": 53.75,
+     "dur": 2.925,
+     "start_frame": 1525,
+     "end_frame": 1613
+    }
+   ],
+   "end": 54.55,
+   "start_frame": 998,
+   "end_frame": 1636
+  },
+  {
+   "id": "s4_cheap",
+   "start": 54.55,
+   "sentences": [
+    {
+     "text": "Reason two: it's cheap, with no angle and no square root.",
+     "audio_text": null,
+     "start": 54.55,
+     "end": 58.875,
+     "dur": 4.325,
+     "start_frame": 1637,
+     "end_frame": 1766
+    },
+    {
+     "text": "The shadow comes from it: a dot b over the length of b.",
+     "audio_text": "The shadow comes from it: [A](/ˈA/) dot b over the length of b.",
+     "start": 59.225,
+     "end": 63.325,
+     "dur": 4.1,
+     "start_frame": 1777,
+     "end_frame": 1900
+    },
+    {
+     "text": "When b has length one, they're the same.",
+     "audio_text": null,
+     "start": 63.675,
+     "end": 66.65,
+     "dur": 2.975,
+     "start_frame": 1910,
+     "end_frame": 2000
+    },
+    {
+     "text": "So a wind dotted with x hat, one unit east, gives its eastward part.",
+     "audio_text": null,
+     "start": 67.0,
+     "end": 72.475,
+     "dur": 5.475,
+     "start_frame": 2010,
+     "end_frame": 2174
+    }
+   ],
+   "end": 73.275,
+   "start_frame": 1636,
+   "end_frame": 2198
+  },
+  {
+   "id": "s5_work",
+   "start": 73.275,
+   "sentences": [
+    {
+     "text": "Reason three: physics needs both sizes.",
+     "audio_text": null,
+     "start": 73.275,
+     "end": 76.75,
+     "dur": 3.475,
+     "start_frame": 2198,
+     "end_frame": 2302
+    },
+    {
+     "text": "Pull a sled with twenty newtons, at sixty degrees, for five metres.",
+     "audio_text": null,
+     "start": 77.1,
+     "end": 82.2,
+     "dur": 5.1,
+     "start_frame": 2313,
+     "end_frame": 2466
+    },
+    {
+     "text": "The force's shadow is ten newtons, still a force.",
+     "audio_text": null,
+     "start": 82.55,
+     "end": 86.175,
+     "dur": 3.625,
+     "start_frame": 2476,
+     "end_frame": 2585
+    },
+    {
+     "text": "The dot product is fifty joules of work; walk twice as far and it doubles.",
+     "audio_text": null,
+     "start": 86.525,
+     "end": 91.7,
+     "dur": 5.175,
+     "start_frame": 2596,
+     "end_frame": 2751
+    }
+   ],
+   "end": 92.5,
+   "start_frame": 2198,
+   "end_frame": 2775
+  },
+  {
+   "id": "s6_advection",
+   "start": 92.5,
+   "sentences": [
+    {
+     "text": "Now the weather: grad T is an arrow pointing towards warmer air.",
+     "audio_text": null,
+     "start": 92.5,
+     "end": 97.35,
+     "dur": 4.85,
+     "start_frame": 2775,
+     "end_frame": 2920
+    },
+    {
+     "text": "Its length is the steepness: one degree per hundred kilometres.",
+     "audio_text": null,
+     "start": 97.7,
+     "end": 102.3,
+     "dur": 4.6,
+     "start_frame": 2931,
+     "end_frame": 3069
+    },
+    {
+     "text": "The wind is ten metres per second, sixty degrees from it.",
+     "audio_text": null,
+     "start": 102.65,
+     "end": 106.95,
+     "dur": 4.3,
+     "start_frame": 3079,
+     "end_frame": 3208
+    },
+    {
+     "text": "Its shadow, five metres per second, is how fast the air heads towards warmth.",
+     "audio_text": null,
+     "start": 107.3,
+     "end": 112.95,
+     "dur": 5.65,
+     "start_frame": 3219,
+     "end_frame": 3388
+    },
+    {
+     "text": "Times the steepness: point one eight degrees an hour.",
+     "audio_text": null,
+     "start": 113.3,
+     "end": 116.975,
+     "dur": 3.675,
+     "start_frame": 3399,
+     "end_frame": 3509
+    }
+   ],
+   "end": 117.775,
+   "start_frame": 2775,
+   "end_frame": 3533
+  },
+  {
+   "id": "s7_both_sizes",
+   "start": 117.775,
+   "sentences": [
+    {
+     "text": "Mind the sign: if you stand still, the air arriving comes from the colder side.",
+     "audio_text": null,
+     "start": 117.775,
+     "end": 123.375,
+     "dur": 5.6,
+     "start_frame": 3533,
+     "end_frame": 3701
+    },
+    {
+     "text": "So you cool: that's minus u dot grad T.",
+     "audio_text": null,
+     "start": 123.725,
+     "end": 127.325,
+     "dur": 3.6,
+     "start_frame": 3712,
+     "end_frame": 3820
+    },
+    {
+     "text": "Make the map twice as steep: the shadow stays five, the cooling doubles.",
+     "audio_text": null,
+     "start": 127.675,
+     "end": 132.7,
+     "dur": 5.025,
+     "start_frame": 3830,
+     "end_frame": 3981
+    },
+    {
+     "text": "The shadow says how fast the air heads for warmth.",
+     "audio_text": null,
+     "start": 133.05,
+     "end": 136.375,
+     "dur": 3.325,
+     "start_frame": 3991,
+     "end_frame": 4091
+    },
+    {
+     "text": "The dot product says how fast you cool.",
+     "audio_text": null,
+     "start": 136.725,
+     "end": 139.6,
+     "dur": 2.875,
+     "start_frame": 4102,
+     "end_frame": 4188
+    }
+   ],
+   "end": 140.4,
+   "start_frame": 3533,
+   "end_frame": 4212
+  },
+  {
+   "id": "s8_sign",
+   "start": 140.4,
+   "sentences": [
+    {
+     "text": "The sign tells you the angle.",
+     "audio_text": null,
+     "start": 140.4,
+     "end": 142.65,
+     "dur": 2.25,
+     "start_frame": 4212,
+     "end_frame": 4279
+    },
+    {
+     "text": "Under ninety degrees, the shadow falls forward: positive.",
+     "audio_text": null,
+     "start": 143.0,
+     "end": 147.35,
+     "dur": 4.35,
+     "start_frame": 4290,
+     "end_frame": 4420
+    },
+    {
+     "text": "At ninety, no shadow, zero.",
+     "audio_text": null,
+     "start": 147.7,
+     "end": 150.45,
+     "dur": 2.75,
+     "start_frame": 4431,
+     "end_frame": 4513
+    },
+    {
+     "text": "Past ninety, it falls behind: negative.",
+     "audio_text": null,
+     "start": 150.8,
+     "end": 154.375,
+     "dur": 3.575,
+     "start_frame": 4524,
+     "end_frame": 4631
+    },
+    {
+     "text": "Opposite, it points backwards: a dot b is minus sixteen point one.",
+     "audio_text": "Opposite, it points backwards: [A](/ˈA/) dot b is minus sixteen point one.",
+     "start": 154.725,
+     "end": 159.95,
+     "dur": 5.225,
+     "start_frame": 4642,
+     "end_frame": 4798
+    }
+   ],
+   "end": 160.75,
+   "start_frame": 4212,
+   "end_frame": 4822
+  },
+  {
+   "id": "s9_end",
+   "start": 160.75,
+   "sentences": [
+    {
+     "text": "Three reasons: it's symmetric, it's cheap, and physics needs both sizes.",
+     "audio_text": null,
+     "start": 160.75,
+     "end": 165.85,
+     "dur": 5.1,
+     "start_frame": 4822,
+     "end_frame": 4975
+    },
+    {
+     "text": "Try it in the vector products lab.",
+     "audio_text": null,
+     "start": 166.2,
+     "end": 168.85,
+     "dur": 2.65,
+     "start_frame": 4986,
+     "end_frame": 5065
+    }
+   ],
+   "end": 169.15,
+   "start_frame": 4822,
+   "end_frame": 5074
+  }
+ ],
+ "total_s": 169.15,
+ "total_frames": 5075,
+ "render_s": 6226.7,
+ "loudnorm_input": {
+  "input_i": "-25.03",
+  "input_tp": "-4.63",
+  "input_lra": "4.60",
+  "input_thresh": "-35.63",
+  "output_i": "-16.45",
+  "output_tp": "-1.50",
+  "output_lra": "4.10",
+  "output_thresh": "-27.03",
+  "normalization_type": "dynamic",
+  "target_offset": "0.45"
+ },
+ "cues": 36,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 169.15,
+  "audio_s": 169.15,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true
+ }
+}
