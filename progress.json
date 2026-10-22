@@ -14,7 +14,7 @@
     "s09_movies": "pass",
     "s10_selftests": "pass",
     "poc": {
-      "A": "pass (viz review round 4b after user feedback rounds 1-2; awaiting the user's second look)",
+      "A": "NOT accepted by the user (2026-10-22); round-3 feedback coming",
       "B": "pass (viz review round 2, derived tolerances)",
       "C": "pass (orchestrator review; literature values to re-verify in ch21)",
       "D": "pass (QA 10/10, movie-reviewer re-review PASS; user must watch before /approve-movie)",

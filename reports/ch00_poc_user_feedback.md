@@ -71,3 +71,5 @@ Rounds: rework `bccd851` → fix 1 `8956d4b` → user round 2 (consistency, intu
 fix 2 `47d692e`; kit: expand `7a51d12`, 3-D restore `06c0203`. viz review round 4b: **PASS** (264/264 GL, 217/217 fallback).
 Open Should: S2 (3-D curl arc small in the tilted view), S10 (no-WebGL fallback fills ~40 % × 30 %). P-A.9 → knowledge-keeper.
 Awaiting the user's second look.
+
+2026-10-22: user says A is **not right yet**; a larger round-3 feedback list is being prepared. B-G feedback will follow later.
