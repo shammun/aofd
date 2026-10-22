@@ -1,7 +1,7 @@
 {
   "project": "aofd",
   "current_chapter": "ch00",
-  "library_pin": "v0.3.0",
+  "library_pin": "v0.3.1",
   "setup": {
     "s01_git": "pass",
     "s02_copy": "pass",
@@ -20,34 +20,19 @@
       "D": "pass (QA 10/10, movie-reviewer re-review PASS; user must watch before /approve-movie)",
       "E": "local + clean-venv/git-clone simulation PASS; real Colab run by user pending",
       "F": "pass (viz review round 1)",
-      "G": "pass (lesson re-review PASS; code review: release v0.3.1 pin pending user approval)"
+      "G": "pass (lesson re-review PASS); fluidpy v0.3.1 released and pinned 2026-10-22 (user approved)"
     },
     "notes": "setup session 2026-10-20; §15.8 items verified (venvs, kernel, Remotion 4.0.537, ffmpeg 9.0.2, data root on G:); fluidpy v0.3.0 tagged and pushed (c3b6f13); movie toolchain: empty render 60 frames OK, movie_qa PASS, tts self-check 0 ms drift; viz3d kit: shot --3d PASS 8 sizes (SwiftShader), context-loss restore, dispose 0/0, no-webgl proj3 PASS; self-tests: machinery 14 passed, viz_example PASS, pipeline_selftest PASS (after copying clean-educational.css + aofd-site.css)",
     "updated": "2026-10-21",
     "s11_poc": "awaiting user verdict",
     "s12_repos": "aofd created + Pages (early, user request); aofd-media not yet",
-    "awaiting_user": {
-      "summary": "Setup §12 steps 1-11 done (step 12 done early: shammun/aofd + Pages). PoC A-G built; A, B, C, D, F, G passed their reviews; E needs the user's Colab run. Nothing in Chapter 0 may start until the user answers.",
-      "open": {
-        "A": "viz/ch00/vector_products_lab.html — 3-D dot/cross explainer (Kundu format?)",
-        "B": "templates/viz_example_globe.html — Coriolis on a rotating globe",
-        "C": "outputs/ch21/fig_21_23.png (+ reading card in figs/ch21/fig_21_23.py) — Southern Ocean map from real data",
-        "D": "movies/out/poc/index.html — 20-s narrated clip (voice af_bella 1.0, pace, captions)",
-        "E": "https://colab.research.google.com/github/shammun/aofd/blob/main/notebooks/poc_colab_smoke_colab.ipynb — Runtime > Run all, must run with no keys",
-        "F": "scenes/ch00/the_500hPa_surface.html — standalone 3-D scene, 8-card tour",
-        "G": "notebooks/poc_ch00a_dot.ipynb — Chapter 0A dot-product block in the informal voice"
-      },
-      "questions": [
-        "1. The user has said they have detailed feedback, corrections and improvement suggestions for ALL of PoC A-G. Invite them to give it item by item (A..G, plus voice/look/depth in general); collect it into reports/ch00_poc_user_feedback.md, turn it into a fix plan per owning agent and agree the plan with the user before running fixes; re-run the gates; then ask for the final verdict.",
-        "2. May the session tag and push fluidpy v0.3.1 (local commit 6d2c52e: geo.vectors/frames/atmos + data fetch) to shammun/fluidpy and bump book.yaml library_pin? Without it PoC G and later notebooks fail on Colab.",
-        "3. PoC D is a test clip: keep it local (default), or publish it, which needs `! gh repo create shammun/aofd-media --public` first?"
-      ],
-      "optional_cleanup": [
-        "Delete G:/Geophysical Fluid Dynamics/aofd-data/scratch/colab_sim/ (1.1 GB) and scratch/movies/poc/ (12 MB) — the session may not delete them",
-        "! .venv\\Scripts\\python.exe -m pip cache purge   (7.3 GB pip cache on C:)"
-      ],
-      "after_approval": "record the verdict in setup.poc + knowledge/*_patterns.md, apply fixes, release v0.3.1 if approved, set setup.s11_poc = 'approved', then /do-chapter 0"
-    }
+    "awaiting_user": [
+      "summary",
+      "open",
+      "questions",
+      "optional_cleanup",
+      "after_approval"
+    ]
   },
   "chapters": {
     "ch00": {
@@ -81,14 +66,14 @@
       "explainers": [],
       "scenes3d": [],
       "figures_list": [],
-      "fluidpy_tag": "v0.3.0",
+      "fluidpy_tag": "v0.3.1",
       "notes": "",
       "updated": "2026-10-20"
     }
   },
   "last_update": {
-    "commit": "1d88ab6",
+    "commit": "9a6d861",
     "fluidpy_commit": "6d2c52e",
-    "time": "2026-10-22T00:22"
+    "time": "2026-10-22T14:09"
   }
 }

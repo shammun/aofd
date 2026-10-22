@@ -15,9 +15,9 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from nbkit import ChapterNotebook  # noqa: E402
+from nbkit import ChapterNotebook, _book  # noqa: E402
 
-PIN = "0.3.0"   # book.yaml → project.library_pin is v0.3.0
+PIN = _book()["project"]["library_pin"].lstrip("v")   # book.yaml → project.library_pin, e.g. "0.3.1"
 
 
 def build() -> ChapterNotebook:
