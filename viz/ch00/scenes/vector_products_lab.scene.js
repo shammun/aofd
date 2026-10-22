@@ -82,10 +82,10 @@
 
   /* ---------- colours: glyph pair teal/orange, Coriolis/rotation violet, negative rose, axes neutral (R4 §1.3) ---------- */
   var TEAL = '#0fa39c', ORANGE = '#f97316', VIOLET = '#7c3aed', ROSE = '#e11d6a', GHOST = '#b197fc';
-  var NEUTRAL = '#5b6475', HANDC = '#dfe4ec', CUFF = '#8b95a7';
+  var NEUTRAL = '#5b6475', HANDC = '#9aa3b2', CUFF = '#6b7385', HAND_EDGE = '#2f3542';
   var GHOST_DASHES = 7, FOV = 35, GHOST_SCALE = 1e4;
   /* walkthrough steps 1–8: arrows · shadow · rectangle · sign · parallelogram · right hand · f k×u · your turn */
-  var STEP_CAMERAS = ['iso', 'faceOn', 'faceOn', 'faceOn', 'iso', 'iso', 'iso', 'iso'];
+  var STEP_CAMERAS = ['iso', 'faceOn', 'faceOn', 'faceOn', 'iso', 'hand', 'iso', 'iso'];
   var ISO_DIR = [6, -7, 5];
   function isDark() { return global.document && document.documentElement.getAttribute('data-theme') === 'dark'; }
   function textColor() { return isDark() ? '#cbd5e1' : '#334155'; }
@@ -141,7 +141,8 @@
       return pts;
     });
     var psi = c * Math.PI / 2, td = add(scl(F.e1, Math.cos(psi)), scl(F.n, Math.sin(psi)));
-    var t0 = P(-0.40 * s, 0.02 * s, 0.40 * s), t1 = add(t0, scl(td, 0.36 * s)), t2 = add(t1, scl(td, 0.34 * s));
+    /* thumb 1.5× longer, its base right beside the foot of the a×b arrow, so at full curl it runs along that arrow */
+    var t0 = P(-0.16 * s, 0.02 * s, 0.30 * s), t1 = add(t0, scl(td, 0.54 * s)), t2 = add(t1, scl(td, 0.51 * s));
     var tipDir = add(scl(F.e1, Math.cos(c * th)), scl(F.e2, Math.sin(c * th)));
     return { F: F, s: s, fingers: fingers, thumb: [t0, t1, t2], thumbDir: td, tipDir: tipDir,
       palm: { c: P(-0.47 * s, 0, 0), dims: [0.92 * s, 0.26 * s, 0.80 * s] }, cuff: [P(-0.90 * s, 0, 0), P(-1.35 * s, 0, 0)],
@@ -175,6 +176,7 @@
     var radius = 0.045 * clamp(Lmax / 5, 1, 3);
     var hs = clamp(0.75 * Math.min(norm(first), norm(second)), 0.5, 2.2);
     var pose = hand && !deg ? handPose(first, second, curl, hs) : null;
+    var handPts = pose ? [[0, 0, 0], a, b, pose.cuff[1], pose.thumb[2], add(pose.palm.c, scl(pose.F.n, -0.45 * hs)), add(pose.palm.c, scl(pose.F.n, 0.45 * hs)), scl(cr, 0.5)].concat(pose.fingers.map(function (f) { return f[3]; })) : null;
     if (pose) pts.push(pose.cuff[1], pose.thumb[2], add(pose.palm.c, scl(pose.F.n, -0.45 * hs)), add(pose.palm.c, scl(pose.F.n, 0.45 * hs)));
     var mxy = Math.max.apply(null, pts.map(function (p) { return Math.max(Math.abs(p[0]), Math.abs(p[1])); }));
     var G2 = Math.max(3, Math.ceil(mxy) + 1);
@@ -185,26 +187,31 @@
     G2 = Math.max(G2, Math.ceil(Math.max(Math.abs(triAt[0]), Math.abs(triAt[1]))) + 1);
     var d = { a: a, b: b, K: K, show: show, swap: swap, first: first, second: second, nmA: nmA, nmB: nmB, na: na, nb: nb,
       cr: cr, area: area, deg: deg, dotOn: dotOn, rectOn: rectOn, crossOn: crossOn, hand: hand, curl: curl, pose: pose,
-      lat: lat, f: f, kxu: kxu, ghost: ghost, R: R, dot: d0, th: th, pts: pts, radius: radius, G2: G2, hs: hs, triAt: triAt, TL: TL };
+      lat: lat, f: f, kxu: kxu, ghost: ghost, R: R, dot: d0, th: th, pts: pts, radius: radius, G2: G2, hs: hs, triAt: triAt, TL: TL,
+      handPts: handPts, fade: s.cam === 'tip', dark: isDark() };
     d.tags = tagItems(d);
     d.keys = {
       grid: [G2, K, radius.toFixed(3), TA.toFixed(3)].join('|'),
       dotGlyph: [a, b, dotOn, rectOn, radius.toFixed(3)].join('|'),
       crossGlyph: [first, second, crossOn, K, radius.toFixed(3)].join('|'),
-      hand: [first, second, hand, curl.toFixed(4)].join('|')
+      hand: [first, second, hand, curl.toFixed(4), s.cam === 'tip'].join('|')
     };
-    d.key = [d.keys.grid, d.keys.dotGlyph, d.keys.crossGlyph, first, second, hand, curl.toFixed(1), show, swap, s.lat].join('#');
+    d.key = [d.keys.grid, d.keys.dotGlyph, d.keys.crossGlyph, first, second, hand, curl.toFixed(1), show, swap, s.lat, d.dark, s.cam === 'tip'].join('#');
     return d;
   }
 
   /** Scene labels (≤ 6, fewer on small views; full text → short text for views under 420 × 200 px). */
   function tagItems(d) {
-    var it = [], A = d.nmA, B = d.nmB;
+    var it = [], A = d.nmA, B = d.nmB, VIOLET = d.dark ? '#c4b5fd' : '#6d28d9', NEUTRAL = d.dark ? '#e2e8f0' : '#334155', TEAL = d.dark ? '#5eead4' : '#0f766e';
     if (d.K) {
       it.push({ at: [0.18, 0, 1.2], text: 'k̂ (up)', color: TEAL, priority: 0, short: 'k̂' });
       it.push({ at: scl(d.b, 1.06), text: 'u (wind)', color: ORANGE, priority: 1, short: 'u' });
+      if (d.f < 0) {                                   // SH: −f k×u points the same way as k×u: one label for both
+        it.push({ at: scl(d.kxu, 1.1), text: 'k×u (solid) and −f k×u ×10⁴ (beaded): both 90° left of u (SH)', color: VIOLET, priority: 2, short: 'k×u, −f k×u' });
+        return it;
+      }
       it.push({ at: scl(d.kxu, 1.08), text: 'k×u: 90° left of u', color: VIOLET, priority: 2, short: 'k×u' });
-      var side = d.f > 0 ? 'right of u (NH)' : d.f < 0 ? 'left of u (SH)' : 'zero (equator)';
+      var side = d.f > 0 ? 'right of u (NH)' : 'zero (equator)';
       if (norm(d.ghost) > 0) it.push({ at: scl(d.ghost, 1.1), text: '−f k×u ×10⁴: ' + side, color: VIOLET, priority: 3, short: '−f k×u' });
       return it;
     }
@@ -272,14 +279,16 @@
       faceOn: { pos: nudge(n), target: T, normal: n },
       tip: { pos: nudge(tipN), target: T, normal: tipN },
       edgeOn: { pos: e, target: T, normal: n },
-      top: { pos: unit([0, -0.08, 1]), target: T }
+      top: { pos: unit([0, -0.08, 1]), target: T },
+      /* step 6: a 3/4 view framed on the hand (thumb up the a×b arrow, fingers curling from the first arrow to the second) */
+      hand: { pos: d.pose ? unit(add(add(scl(d.pose.F.n, 0.55), scl(d.pose.F.e1, 0.35)), scl(d.pose.F.e2, -0.75))) : unit(ISO_DIR), target: T, handFit: !!d.pose }
     };
   }
   function cameraPresetsFor(d, fit) {
     var P = presetDirections(d);
     Object.keys(P).forEach(function (k) { P[k].padY = d.K ? 78 : 46; });   // k-mode: badge + legend HUD at the top
     Object.keys(P).forEach(function (k) {
-      if (fit && fit.pts && fit.w > 0 && fit.h > 0) P[k] = fitPreset(P[k], fit.pts, fit.w, fit.h);
+      if (fit && fit.pts && fit.w > 0 && fit.h > 0) P[k] = fitPreset(P[k], k === 'hand' && d.handPts ? d.handPts : fit.pts, fit.w, fit.h);
       else P[k] = { pos: scl(P[k].pos, 14), target: [0, 0, 0], normal: P[k].normal };
     });
     return P;
@@ -329,11 +338,11 @@
   }
   /** A tube arc from u1 (unit) turning toward u2 (unit, ⟂ u1) by angle th at radius r, with a cone arrowhead. */
   function arcMesh(T, u1, u2, th, r, rad, col) {
-    var n = Math.max(8, Math.ceil(th / (Math.PI / 36))), parts = [], pts = [], head = Math.min(r * 0.45, rad * 7), stop = th - head / r;
+    var n = Math.max(8, Math.ceil(th / (Math.PI / 36))), parts = [], pts = [], head = Math.min(r * 0.5, rad * 8, 0.4 * r * th), stop = th - head / r;   // the head never eats the arc (it did for θ = 37°)
     for (var k = 0; k <= n; k++) { var ph = Math.max(0, stop) * k / n; pts.push(add(scl(u1, r * Math.cos(ph)), scl(u2, r * Math.sin(ph)))); }
     for (var j = 0; j + 1 < pts.length; j++) parts.push(cylGeo(T, pts[j], pts[j + 1], rad, 8));
     var end = pts[pts.length - 1], tang = add(scl(u1, -Math.sin(Math.max(0, stop))), scl(u2, Math.cos(Math.max(0, stop))));
-    parts.push(coneGeo(T, end, tang, rad * 2.8, head));
+    parts.push(coneGeo(T, end, tang, rad * 3.4, head));
     return new T.Mesh(mergeGeos(T, parts), lambert(T, col));
   }
   function disposeTree(o) {
@@ -360,8 +369,8 @@
       if (Math.abs(R.sp) > 1e-9) {
         /* the shadow: a thick segment ON b's line, nudged 2.2 shaft radii toward the rectangle side so it never hides a
            (anti-parallel: a lies on b's line itself) — F-A.12 */
-        var off = scl(R.e, rad * 2.2);
-        g.add(new T.Mesh(mergeGeos(T, [cylGeo(T, off, add(R.foot, off), rad * 1.7, 10), sphGeo(T, add(R.foot, off), rad * 2.2)]), lambert(T, col)));
+        var off = scl(R.e, rad * 3.6);
+        g.add(new T.Mesh(mergeGeos(T, [cylGeo(T, off, add(R.foot, off), rad * 1.35, 10), sphGeo(T, add(R.foot, off), rad * 1.8)]), lambert(T, col)));
       }
       var da = sub(d.a, R.foot);
       if (norm(da) > 1e-6) {
@@ -403,7 +412,10 @@
         g.add(line(T, [add(hf, scl(u1, t)), add(add(hf, scl(u1, t)), scl(u2, t)), add(hf, scl(u2, t))], VIOLET, { opacity: 0.9 }));
       }
       var F = handFrame(P, Q);                                         // the curl arc first → second, arrowhead at second
-      if (F.ok) g.add(arcMesh(T, F.e1, F.e2, F.theta, 0.3 * Math.min(norm(P), norm(Q)), rad * 0.55, textColor()));
+      if (F.ok) {
+        var am = arcMesh(T, F.e1, F.e2, F.theta, 0.55 * Math.min(norm(P), norm(Q)), rad * 1.3, isDark() ? '#e2e8f0' : '#1e293b');
+        am.material.depthTest = false; am.renderOrder = 10; g.add(am);
+      }
       return g;
     },
     hand: function (S, d) {
@@ -418,8 +430,15 @@
       var tc1 = cylGeo(T, H.thumb[0], H.thumb[1], H.rt, 10), tc2 = cylGeo(T, H.thumb[1], H.thumb[2], H.rt * 0.95, 10);
       var thumbM = tc2 ? tc2.userData.m.clone() : null;
       parts.push(tc1, tc2); H.thumb.forEach(function (p, i) { parts.push(sphGeo(T, p, (i ? 0.97 : 1.15) * H.rt)); });
-      var hm = new T.Mesh(mergeGeos(T, parts), lambert(T, HANDC)); g.add(hm);
-      g.add(new T.Mesh(mergeGeos(T, [cylGeo(T, H.cuff[0], H.cuff[1], 0.3 * H.s, 14)]), lambert(T, CUFF)));
+      var op = d.fade ? { opacity: 0.3 } : {};                       // the tip view looks through the hand at the turn
+      var hm = new T.Mesh(mergeGeos(T, parts), lambert(T, HANDC, op)); g.add(hm);
+      /* darker edges: an inverted hull (the same surface pushed out along its normals, back faces only) */
+      var eg = hm.geometry.clone(), pa = eg.attributes.position.array, na = eg.attributes.normal.array, w = 0.022 * H.s;
+      for (var q = 0; q < pa.length; q++) pa[q] += na[q] * w;
+      var em = new T.Mesh(eg, new T.MeshBasicMaterial({ color: new T.Color(HAND_EDGE), side: T.BackSide, transparent: !!d.fade, opacity: d.fade ? 0.25 : 1 }));
+      g.add(em);
+      g.add(new T.Mesh(mergeGeos(T, [cylGeo(T, H.cuff[0], H.cuff[1], 0.3 * H.s, 14)]), lambert(T, CUFF, op)));
+      g.add(new T.Mesh(mergeGeos(T, [sphGeo(T, H.fingers[0][3], H.rf * 1.5)]), lambert(T, TEAL, op)));   // index fingertip (teal: along a at curl 0)
       if (thumbM) { var y = new T.Vector3().setFromMatrixColumn(thumbM, 1).normalize(); g.userData.thumbAxis = [y.x, y.y, y.z]; }
       var lf = H.fingers[1], dv = sub(lf[3], lf[2]); g.userData.tipDir = unit(dv);
       return g;
@@ -457,7 +476,7 @@
   }
   function axisItems(d) {
     var at = d.triAt, L = d.TL, lab = d.K ? ['E', 'N', 'U'] : ['x', 'y', 'z'];          // E/N/U explained in the HUD legend
-    return [[L, 0, 0], [0, L, 0], [0, 0, L]].map(function (v, i) { return { at: add(at, scl(v, 1.18)), text: lab[i], color: NEUTRAL, priority: i, short: lab[i].charAt(0) }; });
+    return [[L, 0, 0], [0, L, 0], [0, 0, L]].map(function (v, i) { return { at: add(at, scl(v, 1.18)), text: lab[i], color: isDark() ? '#cbd5e1' : NEUTRAL, priority: i, short: lab[i].charAt(0) }; });
   }
   var GHOST_LABEL = '−f k×u drawn ×10⁴, in m/s² (k×u is in m/s)';
 
@@ -491,8 +510,9 @@
           S.controls._vplHooked = true;
           S.controls.addEventListener('start', function () { if (S._vpl) S._vpl.userCam = true; });
         }
+        if (S._vpl && S._vpl.d && S._vpl.d.dark !== isDark()) { S._vpl.key = ''; update(S, S._vpl.state); }
         if (attach(S)) S.render();
-        shortLabels(S);
+        shortLabels(S); declutter(S);
       });
       if ('ResizeObserver' in global) {
         var pend = false;
@@ -505,6 +525,18 @@
       }
       update(S, s0);
       return S;
+    });
+  }
+  /** Two scene labels that overlap on screen: the lower-priority one is hidden (it came back when they part). */
+  function declutter(S) {
+    var L = S.get('tags'); if (!L || !L.obj) return;
+    var kept = [];
+    L.obj.children.slice().sort(function (a, b) { return a.userData.priority - b.userData.priority; }).forEach(function (o) {
+      var e = o.element; if (!e) return; e.style.visibility = '';
+      if (e.style.display === 'none') return;
+      var r = e.getBoundingClientRect(); if (!r.width) return;
+      var hit = kept.some(function (k) { return !(r.right < k.left + 2 || r.left > k.right - 2 || r.bottom < k.top + 1 || r.top > k.bottom - 1); });
+      if (hit) e.style.visibility = 'hidden'; else kept.push(r);
     });
   }
   /** Small views (< 420 × 200 px): each label switches to its short text (and back). */
@@ -691,6 +723,7 @@
     update(S, keep); attach(S);
     var d = S._vpl.d, fit = S._vpl.fit || fitFor(S, d), P = cameraPresetsFor(d, fit);
     Object.keys(P).forEach(function (k) {
+      if (k === 'hand') return;                                          // framed on the hand on purpose (a×b may leave the view)
       var fr = fillFraction(P[k], fit.pts, fit.w, fit.h);
       rows.push({ name: 'camera "' + k + '" fits every drawn tip inside the view (fraction ≤ 1)', js: fr <= 1 + 1e-9 ? 1 : 0, expect: 1 });
     });
@@ -709,7 +742,7 @@
     return rows;
   }
 
-  global.SCENE_vector_products_lab = { create: create, update: update, selftestRows: selftestRows, goto: goto, refit: refit, ghostBeads: ghostBeads,
+  global.SCENE_vector_products_lab = { declutter: declutter, create: create, update: update, selftestRows: selftestRows, goto: goto, refit: refit, ghostBeads: ghostBeads,
     fillFraction: fillFraction, physics: physics, STEP_CAMERAS: STEP_CAMERAS, cameraPresetsFor: cameraPresetsFor, describe: describe,
     handPose: handPose, handFrame: handFrame, dotRect: dotRect, planeNormal: planeNormal, GHOST_LABEL: GHOST_LABEL };
 })(window);
