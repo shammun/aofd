@@ -665,7 +665,10 @@
     full: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
     reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4v6h6"/><path d="M5.5 15a7.5 7.5 0 1 0 1.8-7.8L4 10"/></svg>',
     play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',
-    pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg>'
+    pause: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg>',
+    expand: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>',
+    shrink: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 11h-6V5M5 13h6v6M13 11l7-7M11 13l-7 7"/></svg>',
+    newtab: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
   };
   Viz.ICON = ICON;
 
@@ -1066,6 +1069,21 @@
     });
     var badge = h('div', { class: 'viz-stage-badge' });
     views[0].holder.appendChild(badge);
+    /* AOFD (PoC A user feedback, 2026-10-21): every view of a multi-view stage can fill the window (⤢, Esc returns)
+       or open in a new tab with the current settings in the URL hash (↗; hidden inside srcdoc / sandboxed frames).
+       A view opts out with { expand: false }. app.maximise(id | null); boot reads #max=<id>. */
+    var canNewTab = /^https?:|^file:/.test((global.location && global.location.protocol) || '');
+    if (multi) views.forEach(function (v) {
+      if (v.cfg.expand === false) return;
+      var bar = h('div', { class: 'viz-view-bar' });
+      v.maxBtn = h('button', { class: 'viz-icon-btn viz-view-max-btn', type: 'button', title: 'Fill the window with this view (Esc returns)', 'aria-label': 'Expand this view', html: ICON.expand,
+        onclick: function (ev) { ev.stopPropagation(); app.maximise(app.maxView === v.id ? null : v.id); } });
+      bar.appendChild(v.maxBtn);
+      if (canNewTab) bar.appendChild(h('button', { class: 'viz-icon-btn', type: 'button', title: 'Open this view in a new tab (same settings)', 'aria-label': 'Open this view in a new tab', html: ICON.newtab,
+        onclick: function (ev) { ev.stopPropagation(); try { global.open(app.viewUrl(v.id), '_blank', 'noopener'); } catch (e) { /* blocked */ } } }));
+      ['pointerdown', 'pointerup', 'click'].forEach(function (t) { bar.addEventListener(t, function (ev) { ev.stopPropagation(); }); });
+      v.holder.appendChild(bar);
+    });
     var playBtn = h('button', { class: 'viz-icon-btn viz-play', type: 'button', title: 'Play / pause (space)', 'aria-label': 'Play or pause', html: ICON.play });
 
     var topEl = null, statusEl = null, presetsEl = null;
@@ -1855,6 +1873,30 @@
       return app;
     };
 
+    /* ---------- one view fills the window (⤢) / a link that reopens it with the current settings (↗) ---------- */
+    app.maxView = null;
+    app.maximise = function (id) {
+      id = id && viewById[id] ? id : null;
+      app.maxView = id;
+      if (id) root.setAttribute('data-maxview', id); else root.removeAttribute('data-maxview');
+      views.forEach(function (v) {
+        var on = v.id === id; v.el.classList.toggle('viz-view-max', on);
+        if (v.maxBtn) { v.maxBtn.innerHTML = on ? ICON.shrink : ICON.expand; v.maxBtn.title = on ? 'Back to all views (Esc)' : 'Fill the window with this view (Esc returns)'; }
+      });
+      Array.prototype.forEach.call(rowsEl.children, function (row) { row.classList.toggle('viz-row-max', !!id && !!row.querySelector('.viz-view-max')); });
+      if (resizeCanvas()) drawNow(); else app.draw();
+      global.requestAnimationFrame(function () { if (resizeCanvas()) drawNow(); app.fit(); });
+      try { global.dispatchEvent(new Event('resize')); } catch (e) { /* old browsers */ }
+      return app;
+    };
+    app.viewUrl = function (id) {
+      var o = {};
+      Object.keys(params).forEach(function (k) { var v = app.state[k]; if (v === undefined || v === null || typeof v === 'object') return; o[k] = typeof v === 'boolean' ? (v ? 1 : 0) : v; });
+      o.tab = 'explore'; o.max = id;
+      var base = String(global.location.href).split('#')[0];
+      return base + '#' + Object.keys(o).map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(o[k]); }).join('&');
+    };
+
     function saveHash() {
       if (!app._ready || app._fromLoop) return;
       var o = { tab: app.tab };
@@ -1873,7 +1915,7 @@
       else if (ev.key === 'ArrowLeft' && app.tab === 'derive') { app.goDerive(der.i, der.s - 1); ev.preventDefault(); }
       else if (ev.key === ' ' && animated) { app.play(); ev.preventDefault(); }
       else if (ev.key === '?') { help.classList.toggle('open'); }
-      else if (ev.key === 'Escape') { help.classList.remove('open'); }
+      else if (ev.key === 'Escape') { help.classList.remove('open'); if (app.maxView) app.maximise(null); }
     });
     helpBtn.onclick = function () { help.classList.toggle('open'); };
     themeBtn.onclick = function () {
@@ -2026,6 +2068,11 @@
     if (cfg.tour && cfg.tour.length) app.goStep(hash.step ? Number(hash.step) - 1 : 0);
     if (der.els) app.goDerive(hash.d ? Number(hash.d) - 1 : 0, hash.ds ? Number(hash.ds) : 0, { quiet: firstTab !== 'derive' });
     app.setTab(firstTab);
+    if (hash.max && viewById[hash.max]) {          // opened from ↗: the tour's step 1 must not overwrite the settings in the link
+      var hs = {};
+      Object.keys(params).forEach(function (k) { if (hash[k] !== undefined && hash[k] !== '') { var p = params[k]; hs[k] = (p.type || 'range') === 'range' ? Number(hash[k]) : (p.type === 'toggle' ? hash[k] === '1' || hash[k] === 'true' : hash[k]); } });
+      app.set(hs); app.maximise(hash.max);
+    }
     queueLive();
     // AOFD: never autoplay for readers who asked for reduced motion (PoC A review, 2026-10-21)
     var reduceMotion = !!(global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches);
