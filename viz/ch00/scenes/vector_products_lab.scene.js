@@ -225,7 +225,7 @@
         var txt = Math.abs(R.sp) < 1e-9 ? 'a·b = 0: no shadow, no rectangle'
           : d.onA ? 'b·a = shadow of b on a × |a| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot)
           : 'a·b = shadow of a × |b| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot);
-        it.push({ at: cen, text: txt, color: d.dot < 0 ? ROSE : TEAL, priority: 2, short: 'a·b = ' + fmt(d.dot) });
+        it.push({ at: cen, text: txt, color: d.dot < 0 ? ROSE : TEAL, priority: d.crossOn ? 3 : 2, short: 'a·b = ' + fmt(d.dot) });
       } else {
         it.push({ at: add(scl(R.foot, 0.55), scl(R.e, 0.45)), text: 'shadow ' + fmt(R.sp), color: R.sp < 0 ? ROSE : TEAL, priority: 2, short: fmt(R.sp) });
       }
@@ -234,7 +234,7 @@
       var P = d.first, Q = d.second, nm = d.swap ? 'b×a' : 'a×b';
       if (d.deg) it.push({ at: add(scl(d.a, 0.5), [0, 0, 0.6]), text: nm + ' = 0: parallel, no area', color: VIOLET, priority: 2, short: nm + ' = 0' });
       else {
-        it.push({ at: scl(d.cr, 1.07), text: nm + ' = ' + vtxt(d.cr), color: VIOLET, priority: d.rectOn ? 3 : 2, short: nm });
+        it.push({ at: scl(d.cr, 1.07), text: nm + ' = ' + vtxt(d.cr), color: VIOLET, priority: 2, short: nm });
         it.push({ at: scl(add(P, Q), 0.5), text: 'area = |' + nm + '| = ' + fmt(d.area), color: VIOLET, priority: d.rectOn ? 4 : 3, short: 'area ' + fmt(d.area) });
       }
     }
@@ -340,11 +340,11 @@
   }
   /** A tube arc from u1 (unit) turning toward u2 (unit, ⟂ u1) by angle th at radius r, with a cone arrowhead. */
   function arcMesh(T, u1, u2, th, r, rad, col) {
-    var n = Math.max(8, Math.ceil(th / (Math.PI / 36))), parts = [], pts = [], head = Math.min(r * 0.5, rad * 8, 0.4 * r * th), stop = th - head / r;   // the head never eats the arc (it did for θ = 37°)
+    var n = Math.max(8, Math.ceil(th / (Math.PI / 36))), parts = [], pts = [], head = Math.min(r * 0.5, rad * 8, 0.25 * r * th), stop = th - head / r;   // the head never eats the arc (it did for θ = 37°)
     for (var k = 0; k <= n; k++) { var ph = Math.max(0, stop) * k / n; pts.push(add(scl(u1, r * Math.cos(ph)), scl(u2, r * Math.sin(ph)))); }
     for (var j = 0; j + 1 < pts.length; j++) parts.push(cylGeo(T, pts[j], pts[j + 1], rad, 8));
     var end = pts[pts.length - 1], tang = add(scl(u1, -Math.sin(Math.max(0, stop))), scl(u2, Math.cos(Math.max(0, stop))));
-    parts.push(coneGeo(T, end, tang, rad * 3.4, head));
+    parts.push(coneGeo(T, end, tang, rad * 2.6, head));
     return new T.Mesh(mergeGeos(T, parts), lambert(T, col));
   }
   function disposeTree(o) {
@@ -415,7 +415,8 @@
       }
       var F = handFrame(P, Q);                                         // the curl arc first → second, arrowhead at second
       if (F.ok) {
-        var am = arcMesh(T, F.e1, F.e2, F.theta, 0.55 * Math.min(norm(P), norm(Q)), rad * 1.3, isDark() ? '#e2e8f0' : '#1e293b');
+        var am = arcMesh(T, F.e1, F.e2, F.theta, 0.35 * Math.min(norm(P), norm(Q)), rad * 0.55, isDark() ? '#c4b5fd' : '#4c1d95');
+        am.position.set(F.n[0] * 0.02, F.n[1] * 0.02, F.n[2] * 0.02);
         am.material.depthTest = false; am.renderOrder = 10; g.add(am);
       }
       return g;
@@ -610,7 +611,11 @@
       dragged the camera since, or a walkthrough step just started its own (tweened) camera move. */
   function refit(S) {
     var V = S && S._vpl; if (!V || V.userCam || !S.presets[V.cam]) return;
-    if (V.lastGoto && Date.now() - V.lastGoto < 900) return;
+    var el = V.lastGoto ? Date.now() - V.lastGoto : 1e9;
+    if (el < 900) {                                                     // inside the step's camera move: retry right after it
+      if (!V.refitT) V.refitT = setTimeout(function () { V.refitT = 0; refit(S); }, 900 - el + 20);
+      return;
+    }
     S.goto(V.cam, 0);
   }
 

@@ -3936,7 +3936,7 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
         var txt = Math.abs(R.sp) < 1e-9 ? 'a·b = 0: no shadow, no rectangle'
           : d.onA ? 'b·a = shadow of b on a × |a| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot)
           : 'a·b = shadow of a × |b| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot);
-        it.push({ at: cen, text: txt, color: d.dot < 0 ? ROSE : TEAL, priority: 2, short: 'a·b = ' + fmt(d.dot) });
+        it.push({ at: cen, text: txt, color: d.dot < 0 ? ROSE : TEAL, priority: d.crossOn ? 3 : 2, short: 'a·b = ' + fmt(d.dot) });
       } else {
         it.push({ at: add(scl(R.foot, 0.55), scl(R.e, 0.45)), text: 'shadow ' + fmt(R.sp), color: R.sp < 0 ? ROSE : TEAL, priority: 2, short: fmt(R.sp) });
       }
@@ -3945,7 +3945,7 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
       var P = d.first, Q = d.second, nm = d.swap ? 'b×a' : 'a×b';
       if (d.deg) it.push({ at: add(scl(d.a, 0.5), [0, 0, 0.6]), text: nm + ' = 0: parallel, no area', color: VIOLET, priority: 2, short: nm + ' = 0' });
       else {
-        it.push({ at: scl(d.cr, 1.07), text: nm + ' = ' + vtxt(d.cr), color: VIOLET, priority: d.rectOn ? 3 : 2, short: nm });
+        it.push({ at: scl(d.cr, 1.07), text: nm + ' = ' + vtxt(d.cr), color: VIOLET, priority: 2, short: nm });
         it.push({ at: scl(add(P, Q), 0.5), text: 'area = |' + nm + '| = ' + fmt(d.area), color: VIOLET, priority: d.rectOn ? 4 : 3, short: 'area ' + fmt(d.area) });
       }
     }
@@ -4051,11 +4051,11 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
   }
   /** A tube arc from u1 (unit) turning toward u2 (unit, ⟂ u1) by angle th at radius r, with a cone arrowhead. */
   function arcMesh(T, u1, u2, th, r, rad, col) {
-    var n = Math.max(8, Math.ceil(th / (Math.PI / 36))), parts = [], pts = [], head = Math.min(r * 0.5, rad * 8, 0.4 * r * th), stop = th - head / r;   // the head never eats the arc (it did for θ = 37°)
+    var n = Math.max(8, Math.ceil(th / (Math.PI / 36))), parts = [], pts = [], head = Math.min(r * 0.5, rad * 8, 0.25 * r * th), stop = th - head / r;   // the head never eats the arc (it did for θ = 37°)
     for (var k = 0; k <= n; k++) { var ph = Math.max(0, stop) * k / n; pts.push(add(scl(u1, r * Math.cos(ph)), scl(u2, r * Math.sin(ph)))); }
     for (var j = 0; j + 1 < pts.length; j++) parts.push(cylGeo(T, pts[j], pts[j + 1], rad, 8));
     var end = pts[pts.length - 1], tang = add(scl(u1, -Math.sin(Math.max(0, stop))), scl(u2, Math.cos(Math.max(0, stop))));
-    parts.push(coneGeo(T, end, tang, rad * 3.4, head));
+    parts.push(coneGeo(T, end, tang, rad * 2.6, head));
     return new T.Mesh(mergeGeos(T, parts), lambert(T, col));
   }
   function disposeTree(o) {
@@ -4126,7 +4126,8 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
       }
       var F = handFrame(P, Q);                                         // the curl arc first → second, arrowhead at second
       if (F.ok) {
-        var am = arcMesh(T, F.e1, F.e2, F.theta, 0.55 * Math.min(norm(P), norm(Q)), rad * 1.3, isDark() ? '#e2e8f0' : '#1e293b');
+        var am = arcMesh(T, F.e1, F.e2, F.theta, 0.35 * Math.min(norm(P), norm(Q)), rad * 0.55, isDark() ? '#c4b5fd' : '#4c1d95');
+        am.position.set(F.n[0] * 0.02, F.n[1] * 0.02, F.n[2] * 0.02);
         am.material.depthTest = false; am.renderOrder = 10; g.add(am);
       }
       return g;
@@ -4321,7 +4322,11 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
       dragged the camera since, or a walkthrough step just started its own (tweened) camera move. */
   function refit(S) {
     var V = S && S._vpl; if (!V || V.userCam || !S.presets[V.cam]) return;
-    if (V.lastGoto && Date.now() - V.lastGoto < 900) return;
+    var el = V.lastGoto ? Date.now() - V.lastGoto : 1e9;
+    if (el < 900) {                                                     // inside the step's camera move: retry right after it
+      if (!V.refitT) V.refitT = setTimeout(function () { V.refitT = 0; refit(S); }, 900 - el + 20);
+      return;
+    }
     S.goto(V.cam, 0);
   }
 
@@ -4726,6 +4731,19 @@ function polyPx(ctx, pts, fill, alpha) {
   ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = fill; ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); ctx.fill(); ctx.restore();
 }
 function textW(ctx, t, size) { ctx.save(); ctx.font = Viz.font(size || 12, 700); const w = ctx.measureText(t).width; ctx.restore(); return w; }
+/** Draw labels in priority order (low number first); each may move up or down by up to two line heights to clear the
+    ones already placed, else it is dropped (round-4 S1). 'fixed' labels (legends) are always drawn where they are. */
+function placeLabels(ctx, recs, W, H) {
+  const boxes = [];
+  recs.slice().sort((a, b) => a.p - b.p).forEach(r => {
+    const size = (r.o && r.o.size) || 12, w = textW(ctx, r.t, size) + 8, h = size + 6, al = (r.o && r.o.align) || 'left';
+    const x0 = al === 'center' ? r.x - w / 2 : al === 'right' ? r.x - w : r.x - 4;
+    for (const dy of r.fixed ? [0] : [0, -0.9, 0.9, -1.8, 1.8].map(k => k * h)) {
+      const b = [x0, r.y + dy - h / 2, x0 + w, r.y + dy + h / 2];
+      if (r.fixed || !boxes.some(q => !(b[2] < q[0] || b[0] > q[2] || b[3] < q[1] || b[1] > q[3]))) { boxes.push(b); Viz.text(ctx, r.t, r.x, r.y + dy, r.o); return; }
+    }
+  });
+}
 /** Pick the first label that fits the width (long → short), so phones get the short text, never a smaller font. */
 function fitText(ctx, opts, maxW, size) { ctx.save(); ctx.font = Viz.font(size || 12, 700); const t = opts.find(o => ctx.measureText(o).width + 10 <= maxW) || opts[opts.length - 1]; ctx.restore(); return t; }
 /** Arc (canvas px, centre O, radius r) from screen angle a0 turning by dA (canvas y down: negative dA = anticlockwise on screen), arrowhead at the end. */
@@ -4749,7 +4767,7 @@ function drawFace(v, s, app) {
   const X = x => P.X(x), Y = y => P.Y(y), O = [X(0), Y(0)], px = p => [X(p[0]), Y(p[1])];
   faceFrame = { P, e1: G.e1, e2: G.e2, B2, A2 };
   const ang = Math.atan2(B2[1], B2[0]);                                  // θ in plane coordinates (0 … π)
-  const later = [];                                                       // labels are drawn after the clip (never cut at the plot edge)
+  const later = [], lab = (p, t, x, y, o, fixed) => later.push({ p, t, x, y, o, fixed });   // labels: placed after the clip, in priority order
   P.clip(() => {
     if (rOn && G.nL > 0 && Math.abs(G.sp) > 1e-9) {                       // the a·b rectangle: shadow × |b| (or b's shadow × |a|)
       const neg = q.d < 0, col = neg ? COL.rose() : COL.teal(), C = [[0, 0], F, [F[0] + S2[0], F[1] + S2[1]], S2].map(px);
@@ -4761,12 +4779,12 @@ function drawFace(v, s, app) {
       const sN = G.onA ? 'b' : 'a', lN = G.onA ? 'a' : 'b', big = roomy && Math.min(sw, sh) > 64;
       const t = big ? 'area = a·b = ' + fm(q.d, 3) : roomy ? fitText(ctx, ['shadow of ' + sN + ' × |' + lN + '| = ' + fm(G.sp, 3) + ' × ' + fm(G.nL, 3) + ' = ' + fm(q.d, 3), fm(G.sp, 3) + ' × ' + fm(G.nL, 3) + ' = ' + fm(q.d, 3), 'a·b = ' + fm(q.d, 3)], W - 16) : 'a·b = ' + fm(q.d, 3);
       const tw = textW(ctx, t, 12);
-      later.push(() => Viz.text(ctx, t, Math.min(Math.max(cx, 8 + tw / 2), W - 8 - tw / 2), cy, { size: 12, weight: 700, color: col, bg: true, align: 'center' }));
+      lab(1, t, Math.min(Math.max(cx, 8 + tw / 2), W - 8 - tw / 2), cy, { size: 12, weight: 700, color: col, bg: true, align: 'center' });
       if (big) {                                                           // the two sides, labelled inside the rectangle
         const m1 = [(C[0][0] + C[1][0]) / 2, (C[0][1] + C[1][1]) / 2], m2 = [C[0][0] + (C[3][0] - C[0][0]) * 0.8, C[0][1] + (C[3][1] - C[0][1]) * 0.8];
         const into1 = [(cx - m1[0]), (cy - m1[1])], n1 = Math.hypot(into1[0], into1[1]) || 1, into2 = [(cx - m2[0]), (cy - m2[1])], n2 = Math.hypot(into2[0], into2[1]) || 1;
-        later.push(() => Viz.text(ctx, 'shadow of ' + sN + ' = ' + fm(G.sp, 3), m1[0] + into1[0] / n1 * 14, m1[1] + into1[1] / n1 * 14, { size: 12, color: col, bg: true, align: 'center' }));
-        later.push(() => Viz.text(ctx, '|' + lN + '| = ' + fm(G.nL, 3), m2[0] + into2[0] / n2 * 34, m2[1] + into2[1] / n2 * 34, { size: 12, color: col, bg: true, align: 'center' }));
+        lab(2, 'shadow of ' + sN + ' = ' + fm(G.sp, 3), m1[0] + into1[0] / n1 * 14, m1[1] + into1[1] / n1 * 14, { size: 12, color: col, bg: true, align: 'center' });
+        lab(3, '|' + lN + '| = ' + fm(G.nL, 3), m2[0] + into2[0] / n2 * 34, m2[1] + into2[1] / n2 * 34, { size: 12, color: col, bg: true, align: 'center' });
       }
     }
     if (cOn && q.area > 1e-12 * q.na * q.nb) {                            // the parallelogram, base and height
@@ -4779,14 +4797,14 @@ function drawFace(v, s, app) {
       const nmR = q.swap ? 'b×a' : 'a×b', sym = q.swap ? '⊗' : '⊙';
       const mid = [(C[0][0] + C[2][0]) / 2, (C[0][1] + C[2][1]) / 2];
       const t = roomy ? fitText(ctx, [sym + ' area = |' + nmR + '| = ' + fm(q.area, 3), sym + ' area ' + fm(q.area, 3)], W * 0.6) : sym + ' ' + fm(q.area, 3);
-      later.push(() => Viz.text(ctx, t, mid[0], mid[1], { size: 12, weight: 700, color: COL.violet(), bg: true, align: 'center' }));
+      lab(1.5, t, mid[0], mid[1], { size: 12, weight: 700, color: COL.violet(), bg: true, align: 'center' });
       if (roomy) {
         const hy = hb[1] + (px(B2)[1] - hb[1]) * 0.22, right = B2[0] > A2[0] * 0.5;
-        later.push(() => Viz.text(ctx, 'height |b| sin θ = ' + fm(q.h, 3), hb[0] + (right ? 6 : -6), hy, { size: 12, color: COL.violet(), bg: true, align: right ? 'left' : 'right' }));
-        later.push(() => Viz.text(ctx, 'base |a| = ' + fm(q.na, 3), (O[0] + X(A2[0])) / 2, O[1] + 14, { size: 12, color: COL.teal(), bg: true, align: 'center' }));
+        lab(4, 'height |b| sin θ = ' + fm(q.h, 3), hb[0] + (right ? 6 : -6), hy, { size: 12, color: COL.violet(), bg: true, align: right ? 'left' : 'right' });
+        lab(5, 'base |a| = ' + fm(q.na, 3), (O[0] + X(A2[0])) / 2, O[1] + 14, { size: 12, color: COL.teal(), bg: true, align: 'center' });
       }
       const lg = fitText(ctx, roomy ? [sym + ' = ' + nmR + ' points ' + (q.swap ? 'into the screen, away from you' : 'out of the screen, at you'), sym + (q.swap ? ' into the screen' : ' out of the screen, at you')] : [sym + ' = ' + nmR + (q.swap ? ' into the screen' : ' out of the screen'), sym + (q.swap ? ' into screen' : ' out of screen')], W - 12);
-      later.push(() => Viz.text(ctx, lg, 8, v.h - 11, { size: 12, color: COL.violet(), bg: true }));
+      lab(0, lg, 8, v.h - 11, { size: 12, color: COL.violet(), bg: true }, true);
       const r = Math.min(Math.hypot(X(A2[0]) - O[0], 1), Math.hypot(X(B2[0]) - O[0], Y(B2[1]) - O[1])) * 0.3;
       if (q.swap) arcArrowPx(ctx, O, r, -ang, ang, COL.text(), 1.6); else arcArrowPx(ctx, O, r, 0, -ang, COL.text(), 1.6);
     }
@@ -4806,20 +4824,20 @@ function drawFace(v, s, app) {
         const p0 = [X(F[0]) + w[0] * r, Y(F[1]) + w[1] * r];
         linePx(ctx, [p0, [p0[0] + u[0] * r, p0[1] + u[1] * r], [X(F[0]) + u[0] * r, Y(F[1]) + u[1] * r]], COL.muted(), 1.2);
       }
-      if (s.show === 'shadow') later.push(() => Viz.text(ctx, fitText(ctx, ['the shadow is a length: |a| cos θ = ' + fm(G.sp, 3) + ' (a·b = shadow × |b|)', 'shadow = ' + fm(G.sp, 3) + ', a length'], W - 12), 8, v.h - 11, { size: 12, color: col, bg: true }));
+      if (s.show === 'shadow') lab(0, fitText(ctx, ['the shadow is a length: |a| cos θ = ' + fm(G.sp, 3) + ' (a·b = shadow × |b|)', 'shadow = ' + fm(G.sp, 3) + ', a length'], W - 12), 8, v.h - 11, { size: 12, color: col, bg: true }, true);
       const mx = O[0] + (X(F[0]) - O[0]) * 0.55, my = O[1] + (Y(F[1]) - O[1]) * 0.55;
-      if (!rOn) later.push(() => Viz.text(ctx, (roomy ? 'shadow ' : '') + fm(G.sp, 3), mx + off[0] * 5, my + off[1] * 5, { size: 12, weight: 700, color: col, align: 'center', bg: true }));
+      if (!rOn || !roomy) lab(2, 'shadow ' + fm(G.sp, 3), mx + off[0] * 5, my + off[1] * 5, { size: 12, weight: 700, color: col, align: 'center', bg: true });
     }
   });
   if (q.na > 0 && q.nb > 0 && Math.min(Math.hypot(X(A2[0]) - O[0], 0), Math.hypot(X(B2[0]) - O[0], Y(B2[1]) - O[1])) > 70) {   // θ arc; label outside the arrows
     const r = Math.min(Math.hypot(X(A2[0]) - O[0], 1) * 0.22, Math.hypot(X(B2[0]) - O[0], Y(B2[1]) - O[1]) * 0.22, 30);
     ctx.save(); ctx.strokeStyle = COL.text(); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(O[0], O[1], r, 0, -ang, true); ctx.stroke(); ctx.restore();
     const la = (q.thd < 28 || s.show === 'shadow') ? -0.6 : ang / 2, lr = r + 8;
-    Viz.text(ctx, 'θ ' + fm(q.thd, 3) + '°', O[0] + lr * Math.cos(la), O[1] - lr * Math.sin(la), { size: 12, color: COL.text(), bg: true, align: Math.cos(la) < -0.3 ? 'right' : Math.cos(la) > 0.3 ? 'left' : 'center' });
+    lab(6, 'θ ' + fm(q.thd, 3) + '°', O[0] + lr * Math.cos(la), O[1] - lr * Math.sin(la), { size: 12, color: COL.text(), bg: true, align: Math.cos(la) < -0.3 ? 'right' : Math.cos(la) > 0.3 ? 'left' : 'center' });
   }
   arrowPx(ctx, O[0], O[1], X(A2[0]), Y(A2[1]), COL.teal(), 3);
   arrowPx(ctx, O[0], O[1], X(B2[0]), Y(B2[1]), COL.orange(), 3);
-  later.forEach(f => f());
+  placeLabels(ctx, later, W, v.h);
   const tipLabel = (T, name, col) => { const d = [X(T[0]) - O[0], Y(T[1]) - O[1]], L = Math.hypot(d[0], d[1]) || 1; Viz.text(ctx, name, X(T[0]) + d[0] / L * 12, Y(T[1]) + d[1] / L * 12, { size: 15, weight: 700, color: col, align: 'center' }); };
   tipLabel(A2, nameA(s), COL.teal()); tipLabel(B2, nameB(s), COL.orange());
   ctx.save(); ctx.fillStyle = COL.orange(); ctx.globalAlpha = 0.22; ctx.beginPath(); ctx.arc(X(B2[0]), Y(B2[1]), 10, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
@@ -4829,7 +4847,7 @@ function drawFace(v, s, app) {
     product, the turning score sin θ = |a×b|/(|a||b|) for the cross product. */
 function drawGauges(v, s, q, x0, w, dOn, cOn) {
   const ctx = v.ctx, top = 52, bot = v.h - 30, mid = (top + bot) / 2, half = (bot - top) / 2 - 4, full = q.na * q.nb;
-  const items = []; if (dOn) items.push(['cos θ', full > 0 ? q.d / full : 0, true]); if (cOn) items.push(['sin θ', full > 0 ? q.area / full : 0, false]);
+  const items = [], w0 = w; if (dOn) items.push(['cos θ', full > 0 ? q.d / full : 0, true]); if (cOn) items.push(['sin θ', full > 0 ? q.area / full : 0, false]);
   const cw = items.length ? w / items.length : w;
   items.forEach(([lab, val, signed], i) => {
     const cx = x0 + cw * (i + 0.5), neg = val < 0, col = signed ? (neg ? COL.rose() : COL.teal()) : COL.violet();
@@ -4841,22 +4859,13 @@ function drawGauges(v, s, q, x0, w, dOn, cOn) {
     if (neg) { ctx.strokeStyle = col; ctx.setLineDash([4, 3]); ctx.lineWidth = 2; ctx.strokeRect(cx - 8, base, 16, -hh); }
     ctx.fillRect(cx - 8, Math.min(base, base - hh), 16, Math.abs(hh)); ctx.restore();
     Viz.text(ctx, lab, cx, top - 14, { size: 12, color: COL.text(), align: 'center' });
+    if (w0 / items.length >= 44) {                                          // the scale: +1 / 0 / −1 (cos), 1 / 0 (sin)
+      Viz.text(ctx, signed ? '+1' : '1', cx + 11, signed ? mid - half : top, { size: 12, color: COL.muted() });
+      Viz.text(ctx, '0', cx + 11, base, { size: 12, color: COL.muted() });
+      if (signed) Viz.text(ctx, '−1', cx + 11, mid + half, { size: 12, color: COL.muted() });
+    }
     Viz.text(ctx, fm(val, 2), cx, v.h - 14, { size: 12, weight: 700, color: col, align: 'center', bg: true });
   });
-}
-function drawSignedBar() { /* replaced by drawGauges (round 2) */ }
-/** The flat a·b gauge (a bar chart beside the face-on plane — a NUMBER, so it lives in 2-D only). */
-function drawSignedBar(v, s, q, x0, w) {
-  const ctx = v.ctx, top = 52, bot = v.h - 12, mid = (top + bot) / 2, half = (bot - top) / 2 - 8, cx = x0 + w / 2;   // below the ⤢ ↗ buttons
-  const full = q.na * q.nb, hh = full > 0 ? q.d / full * half : 0, neg = q.d < 0;
-  linePx(ctx, [[x0 + 4, mid], [x0 + w - 4, mid]], COL.muted(), 1);
-  linePx(ctx, [[cx - 10, mid - half], [cx + 10, mid - half]], COL.muted(), 1, [3, 3]);
-  linePx(ctx, [[cx - 10, mid + half], [cx + 10, mid + half]], COL.muted(), 1, [3, 3]);
-  ctx.save(); ctx.fillStyle = Viz.alpha(neg ? COL.rose() : COL.teal(), 0.85);
-  if (neg) { ctx.strokeStyle = COL.rose(); ctx.setLineDash([4, 3]); ctx.lineWidth = 2; ctx.strokeRect(cx - 9, mid, 18, -hh); ctx.globalAlpha = 0.35; }
-  ctx.fillRect(cx - 9, Math.min(mid, mid - hh), 18, Math.abs(hh)); ctx.restore();
-  Viz.text(ctx, 'a·b', cx, top - 14, { size: 12, color: COL.text(), align: 'center' });
-  Viz.text(ctx, fm(q.d, 3), cx, neg ? Math.min(bot - 2, mid - hh + 12) : Math.max(top + 4, mid - hh - 10), { size: 12, weight: 700, color: neg ? COL.rose() : COL.teal(), align: 'center', bg: true });
 }
 function drawComponents(v, s) {
   const q = Q(s), ctx = v.ctx, names = ['x', 'y', 'z'], pad = 12, top = 30, bot = v.h - 40;
@@ -4899,8 +4908,10 @@ function drawMap(v, s) {
   arrowPx(ctx, O[0], O[1], M.u[0], M.u[1], COL.orange(), 3);
   arrowPx(ctx, O[0], O[1], M.kxu[0], M.kxu[1], COL.violet(), 3.4);
   ctx.save(); ctx.strokeStyle = COL.teal(); ctx.fillStyle = COL.teal(); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(O[0], O[1], 7, 0, 2 * Math.PI); ctx.stroke(); ctx.beginPath(); ctx.arc(O[0], O[1], 2.4, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
-  const tip = (T, str, col, wgt) => { const dx = T[0] - O[0], dy = T[1] - O[1], L = Math.hypot(dx, dy) || 1;
-    Viz.text(ctx, str, T[0] + dx / L * 10, T[1] + dy / L * 12, { size: 12, weight: wgt || 700, color: col, bg: true, align: dx < -4 ? 'right' : dx > 4 ? 'left' : 'center', maxWidth: v.w * 0.5 }); };
+  const tip = (T, str, col, wgt) => { const dx = T[0] - O[0], dy = T[1] - O[1], L = Math.hypot(dx, dy) || 1, tw = textW(ctx, str, 12) + 8;
+    const al = dx < -4 ? 'right' : dx > 4 ? 'left' : 'center'; let x = T[0] + dx / L * 10;
+    if (al === 'right') x = Math.max(x, 8 + tw); else if (al === 'left') x = Math.min(x, v.w - 8 - tw); else x = Math.min(Math.max(x, 8 + tw / 2), v.w - 8 - tw / 2);
+    Viz.text(ctx, str, x, T[1] + dy / L * 12, { size: 12, weight: wgt || 700, color: col, bg: true, align: al }); };
   tip(M.u, small ? 'u' : 'u (wind)', COL.orange());
   if (q.f < 0) tip(M.g, small ? 'k×u, −f k×u' : 'k×u and −f k×u ×10⁴: both left (SH)', COL.violet());
   else { tip(M.kxu, small ? 'k×u' : 'k×u: 90° left', COL.violet());
@@ -5148,7 +5159,7 @@ const app = Viz.app({
             const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
             const c = add(c0, add(scl(rx, (x0 + x1) / 2), scl(uy, (y0 + y1) / 2)));
             const W = S.holder.clientWidth || 400, Hh = S.holder.clientHeight || 300, k0 = sc0 * Math.min(W, Hh) * 0.45;
-            const m = Math.min(0.42 * W / (Math.max(1e-9, (x1 - x0) / 2) * k0), 0.34 * Hh / (Math.max(1e-9, (y1 - y0) / 2) * k0));   // fill the view, leave the chip rows
+            const m = Math.min(0.46 * W / (Math.max(1e-9, (x1 - x0) / 2) * k0), 0.40 * Hh / (Math.max(1e-9, (y1 - y0) / 2) * k0));   // fill the view, leave the chip rows
             const mp = p => add(scl(sub(p, c), m), T0);
             return { lines: o.lines.map(l => Object.assign({}, l, { pts: l.pts.map(mp) })), points: o.points.map(x => Object.assign({}, x, { p: mp(x.p) })),
                      arrows: o.arrows.map(x => Object.assign({}, x, { from: mp(x.from), to: mp(x.to) })), polys: o.polys.map(x => Object.assign({}, x, { pts: x.pts.map(mp) })),
@@ -5225,9 +5236,9 @@ const app = Viz.app({
       set: Object.assign({}, PDEF, { show: 'both', swap: false, hand: false, flat: 'face', showC: false, insp: null, cam: 'iso' }), play: false,
       callout: { kind: 'key', html: `<table class="vpl-cmp"><tr><th></th><th class="c-teal">a·b</th><th class="c-violet">a×b</th></tr><tr><td>answer</td><td>a number, ${LV('dot')}</td><td>an arrow, ${LV('r')}</td></tr><tr><td>asks</td><td>same way?</td><td>different ways, and which way the turn a→b faces</td></tr><tr><td>picture</td><td>rectangle: shadow × |b|</td><td>parallelogram; arrow ⟂ it</td></tr><tr><td>size</td><td>|a||b| cos θ = Σ aᵢbᵢ</td><td>|a||b| sin θ = area</td></tr><tr><td>parallel</td><td>biggest</td><td>0</td></tr><tr><td>at 90°</td><td>0</td><td>biggest</td></tr><tr><td>pointing apart</td><td>negative</td><td>shrinks again</td></tr></table>` },
       enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } },
-    { title: 'The shadow is a length; a·b is a different number', text: String.raw`Parallel arrows: a's shadow on b is all of a, ${LV('splen')}. That is the projection, a <i>length</i>, as you'd expect. a·b is a different number: shadow × |b| = ${LV('sp')} × ${LV('nb')} = ${LV('dot')}. Drag <b>stretch b</b>: the shadow stays, a·b grows with |b|.${MM}`,
+    { title: 'The shadow is a length; a·b is a different number', text: String.raw`Parallel arrows: a's shadow on b is all of a, ${LV('splen')}: a length, the projection. a·b is another number: shadow × |b| = ${LV('sp')} × ${LV('nb')} = ${LV('dot')}. Drag <b>stretch b</b>: the shadow stays, a·b grows.${MM}`,
       set: { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, stretch: 1, onA: false, show: 'dot', swap: false, hand: false, cam: 'faceOn' }, play: false, controls: ['stretch'], readouts: ['sproj', 'dot'],
-      callout: { kind: 'key', html: `Why × |b|? It treats a and b alike (b's shadow on a × |a| is the same number), it is the component sum ${LV('comp')}, and it is how work counts: a force of shadow N along a |b| m path. Shadow and a·b agree only if |b| = 1 (b shrunk to length 1).` },
+      callout: { kind: 'key', html: `Why × |b|? It treats a and b alike (b's shadow on a × |a| is the same number), it is the component sum ${LV('comp')}, and it is how work counts: a force whose part along the path is ${LV('sp')} N, pushed ${LV('nb')} m, does ${LV('dot')} J. Shadow and a·b agree only if |b| = 1 (b shrunk to length 1).` },
       enter(app) { stepView(app, 'flat'); goCam(app, 'faceOn'); } },
     { title: 'Seeing a·b: the rectangle', text: String.raw`One side is the shadow of a on b (${LV('sp')}), the other |b| (${LV('nb')}): the area ${LV('dot')} is a·b. cos θ = ${LV('cos')} is the agreement score (1 same way, −1 opposite). Tick <b>build the rectangle on a</b>: b's shadow × |a| gives the same area.${MM}`,
       set: Object.assign({}, PDEF, { show: 'dot', swap: false, hand: false, cam: 'faceOn' }), play: false, controls: ['onA'],
@@ -5242,7 +5253,8 @@ const app = Viz.app({
       callout: { kind: 'key', html: 'Like a spanner on a bolt: push along the handle and nothing turns; push at right angles and it turns most; the bolt moves along your thumb.' },
       enter(app) { stepView(app, 'v3d'); goCam(app, 'hand'); animateCurl(app); } },
     { title: 'f k×u turns the wind', text: String.raw`Now a = $\hat{\mathbf k}$ (up) and b = a wind u = ${LV('b')} m/s. $\hat{\mathbf k}\times\mathbf u$ = ${LV('kxu')}: u turned 90° left. $f$ = ${LV('f')} s⁻¹ scales each component: $-f\,\hat{\mathbf k}\times\mathbf u$ pushes ${LV('side')} of u (${LV('hemi')}).${MM}`,
-      set: Object.assign({}, PK, { show: 'cross', swap: false, hand: false, cam: 'iso' }), play: false, turn: true, eq: 'momentum', readouts: ['fkxu', 'Ti'], enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } },
+      set: Object.assign({}, PK, { show: 'cross', swap: false, hand: false, cam: 'iso' }), play: false, turn: true, eq: 'momentum', readouts: ['fkxu', 'Ti'],
+      enter(app) { stepView(app, 'v3d'); const ph = app.root && app.root.getAttribute('data-layout') === 'portrait'; if (ph) app.set({ cam: 'top' }); goCam(app, ph ? 'top' : 'iso'); } },
     { title: 'Your turn: predict', text: String.raw`Predict, then test. (1) Tick swap: where does the thumb point? (2) Drag the latitude below 0° (f k×u mode): which side of u is $-f\,\mathbf k\times\mathbf u$? (3) Make $\mathbf a\cdot\mathbf b$ negative with the same $|\mathbf a|$, $|\mathbf b|$.`,
       set: Object.assign({}, PDEF, { show: 'both', hand: true, swap: false, kmode: false, cam: 'iso' }), play: false, controls: ['swap', 'lat'],
       callout: { kind: 'try', html: 'Only one of the two products changes sign when you swap a and b.' }, enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } }
@@ -5378,7 +5390,7 @@ const app = Viz.app({
         { live: DLIVE.d1s7, did: 'Set the two routes equal', tex: String.raw`\begin{aligned}&|\mathbf a|^2+|\mathbf b|^2-2\,\mathbf a\cdot\mathbf b\\&=|\mathbf a|^2+|\mathbf b|^2-2|\mathbf a||\mathbf b|\cos\theta\end{aligned}`, why: 'Both sides equal |a − b|² (steps 2 and 6).', plain: 'Same side, two descriptions.' },
         { live: DLIVE.d1s8, did: 'Cancel the squares', tex: String.raw`-2\,\mathbf a\cdot\mathbf b=-2|\mathbf a||\mathbf b|\cos\theta`, why: 'Subtract |a|² + |b|² from both sides.', plain: 'Only the mixed part was ever different.' },
         { did: 'Divide by −2', tex: String.raw`\mathbf a\cdot\mathbf b=|\mathbf a||\mathbf b|\cos\theta`, why: 'Allowed because −2 ≠ 0. This is our (0A.1).', plain: 'Component recipe = length × length × cos θ = (shadow) × |b|.',
-          live: s => { const q = Q(s); return String.raw`${tn(q.d)} = ${tn(q.na)}\times${tn(q.nb)}\times\cos ${tn(q.thd)}^\circ`; }, watch: 'The bar beside the face-on view has height a·b; the dashed ticks are ±|a||b|.' }
+          live: s => { const q = Q(s); return String.raw`${tn(q.d)} = ${tn(q.na)}\times${tn(q.nb)}\times\cos ${tn(q.thd)}^\circ`; }, watch: 'The cos θ gauge beside the face-on view shows a·b/(|a||b|); its dashed ticks are +1 and −1.' }
       ],
       result: { tex: String.raw`\mathbf a\cdot\mathbf b = |\mathbf a|\,|\mathbf b|\cos\theta\quad\text{(0A.1)}`, plain: "|a| cos θ is a's shadow on b, so a·b = (shadow) × |b|: the area of the rectangle." },
       interpret: s => { const q = Q(s); return `With your arrows: shadow ${fm(q.sp, 4)} × |b| ${fm(q.nb, 4)} = ${fm(q.sp * q.nb, 4)}, and the component sum is ${fm(q.d, 4)}. θ is the angle <i>between</i> the arrows (0…180°), not an angle to the x-axis.`; },
@@ -5582,6 +5594,37 @@ print(T / 3600)              # turning period = {{Ti}} h`,
       rows.push({ name: 'build on a: its long side is |a|', js: Math.hypot(...Go.S2), expect: Math.sqrt(5), rtol: 1e-12 });
       if (SCN()) rows.push({ name: 'build on a: 3-D rectangle (dotRect(b, a)) area = a·b', js: SCN().dotRect([2, 4, 0], [2, 1, 0]).area, expect: 8, rtol: 1e-12 });
     }
+    /* M1: the Derivation tab's picture, entered from walkthrough steps 1, 3, 5 and after a D2 visit */
+    {
+      const keepTab = app.tab, keepStep = app.step, keepState = Object.assign({}, app.state), keepD = [derI, derS];
+      derI = 0; derS = 3;
+      [0, 2, 4].forEach(k => {
+        app.setTab('tour'); app.goStep(k); app.setTab('derive');
+        rows.push({ name: `Derivation entered from step ${k + 1}: D1 draws the shadow and c = a − b`, js: app.state.show === 'shadow' && app.state.showC === true ? 1 : 0, expect: 1 });
+        const ss = app.state, b0 = baseB(ss);
+        rows.push({ name: `Derivation entered from step ${k + 1}: the vectors are not replaced`, js: norm(sub(b0, baseB(app.cfg.tour[k].set))) + norm(sub(vecA(ss), vecA(app.cfg.tour[k].set))), expect: 0, atol: 1e-12 });
+      });
+      app.goDerive(1, 4);
+      rows.push({ name: 'D2 page: the parallelogram is on (show cross)', js: app.state.show === 'cross' ? 1 : 0, expect: 1 });
+      app.setTab('tour'); app.goStep(2);
+      rows.push({ name: 'leaving the Derivation tab restores the picture (step 3: show a·b)', js: app.state.show === 'dot' && !app.state.showC ? 1 : 0, expect: 1 });
+      app.setTab('derive');
+      rows.push({ name: 'Derivation re-entered after a D2 visit: D2 still draws the parallelogram', js: app.state.show === 'cross' ? 1 : 0, expect: 1 });
+      app.setTab(keepTab === 'derive' ? 'explore' : keepTab); if (keepTab === 'tour') app.goStep(keepStep);
+      app.set(keepState); derI = keepD[0]; derS = keepD[1];
+    }
+    /* M2: a re-frame asked for inside a step's camera move is retried, not dropped */
+    if (SCN() && S3 && S3._vpl && SCN().refit) {
+      const V = S3._vpl, lg = V.lastGoto, uc = V.userCam, cam = V.cam;
+      V.userCam = false; V.cam = 'iso'; V.lastGoto = Date.now(); if (V.refitT) { clearTimeout(V.refitT); V.refitT = 0; }
+      SCN().refit(S3);
+      rows.push({ name: 'refit inside the camera window schedules one retry (step change → preset)', js: V.refitT ? 1 : 0, expect: 1 });
+      if (V.refitT) { clearTimeout(V.refitT); V.refitT = 0; }
+      V.lastGoto = lg; V.userCam = uc; V.cam = cam;
+      const pr = PRESETS[3]; V.userCam = true; pr.action(app);
+      rows.push({ name: 'a preset click clears the "user dragged the camera" flag', js: V.userCam ? 0 : 1, expect: 1 });
+      V.userCam = uc;
+    }
     /* adapter rows (the scene draws the TURNED b; f k×u mode follows kmode) */
     const ss = sceneState(st);
     rows.push({ name: 'adapter: scene b = turned vecB(state)', js: norm(sub([ss.bx, ss.by, ss.bz], vecB(st))), expect: 0, atol: 1e-15 });
@@ -5602,6 +5645,30 @@ print(T / 3600)              # turning period = {{Ti}} h`,
     return rows.concat(extra).filter(r => { const k = canon(r); if (seen.has(k)) return false; seen.add(k); return true; });
   }
 });
+/* M1 (round 4): entering the Derivation tab applies the derivation's own picture setup (d.set: show, showC, flat, kmode —
+   never the vectors) at every page; leaving restores what the reader had. */
+const DER_KEYS = ['show', 'showC', 'flat', 'kmode', 'swap', 'hand', 'onA'];
+let derI = 0, derS = 0, derSaved = null;
+{
+  const goD = app.goDerive, setT = app.setTab;
+  app.goDerive = function (i, s, o) {
+    derI = Math.max(0, Math.min(app.cfg.derivations.length - 1, i || 0)); derS = s || 0;
+    if (!(o && o.quiet)) {
+      if (app.tab !== 'derive' && !derSaved) derSaved = Object.fromEntries(DER_KEYS.map(k => [k, app.state[k]]));
+      const d = app.cfg.derivations[derI]; if (d.set) app.set(d.set);
+    }
+    return goD.call(app, i, s, o);
+  };
+  app.setTab = function (id) {
+    const prev = app.tab;
+    if (id === 'derive' && prev !== 'derive') { if (!derSaved) derSaved = Object.fromEntries(DER_KEYS.map(k => [k, app.state[k]])); setT.call(app, id); return app.goDerive(derI, derS); }
+    const r = setT.call(app, id);
+    if (prev === 'derive' && id !== 'derive' && derSaved) { const sv = derSaved; derSaved = null; app.set(sv); }
+    return r;
+  };
+}
+/* M2 / S7: a preset is an explicit "show me this": it re-frames the 3-D view even after a camera drag */
+PRESETS.forEach(pr => { const act = pr.action; pr.action = a => { if (S3 && S3._vpl) S3._vpl.userCam = false; if (act) act(a); }; });
 document.addEventListener('click', ev => { const b = ev.target.closest && ev.target.closest('.vpl-back'); if (b) { ev.preventDefault(); app.goStep(app.step); } });
 /** The screen-space cue of the moment in the 3-D view (a DOM chip, never an object in the scene). */
 function hudText(s, small) {
