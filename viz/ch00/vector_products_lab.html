@@ -570,6 +570,9 @@ button, input, select { font: inherit; color: inherit; }
 .vpl-hud:empty { display: none; }
 .vpl-hud.vpl-hud-low { top: 34px; }
 .vpl-live { font-variant-numeric: tabular-nums; }
+.vpl-cmp { border-collapse: collapse; font-size: 12.5px; width: 100%; margin-top: 4px; }
+.vpl-cmp th, .vpl-cmp td { border-bottom: 1px solid var(--viz-border); padding: 2px 4px; text-align: left; vertical-align: top; }
+.vpl-cmp th { font-weight: 700; }
 @media (max-height: 699px) { .viz-app[data-layout="portrait"]:not([data-vplk]) .viz-status { display: none; } }
 /* portrait walkthrough: a fixed picture/text split, so the one view stays ≥ 220 px and the card keeps its question */
 .viz-app[data-layout="portrait"][data-tab="tour"]:not([data-maxview]) .viz-stage.multi { flex: 0 0 auto !important; min-height: 0 !important; height: max(272px, 50%) !important; }
@@ -2861,11 +2864,19 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
     var down = null;
     canvas.addEventListener('pointerdown', function (e) { down = [e.clientX, e.clientY]; });
     canvas.addEventListener('pointerup', function (e) { if (down && Math.abs(e.clientX - down[0]) + Math.abs(e.clientY - down[1]) < 5) { var hit = S.pick(e); if (hit) { S.emit('pick', hit); if (isFn(o.onPick)) o.onPick(hit, e); } } down = null; });
-    canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); S.lost = true; S.paused.hidden = false; S.emit('contextlost'); });
-    canvas.addEventListener('webglcontextrestored', function () { S.lost = false; S.paused.hidden = true; S._rebuild(); S.renderNow(); S.emit('contextrestored'); });
+    /* A context lost by the browser / GPU driver (not by forceContextLoss) is often never handed back, so a tap — and an
+       automatic retry 1.5 s later — throws the dead canvas away and builds a fresh one (AOFD, PoC A user report 2026-10-21). */
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault(); if (canvas._v3dTearing || S.canvas !== canvas) return;
+      S.lost = true; S.paused.hidden = false; S.emit('contextlost');
+      clearTimeout(S._autoRestore);
+      var now = Date.now(); S._lossTimes = (S._lossTimes || []).filter(function (t) { return now - t < 60000; }); S._lossTimes.push(now);
+      if (S._lossTimes.length <= 3 && !S._disposed) S._autoRestore = setTimeout(function () { if (S.lost && S.canvas === canvas) S._recreate(); }, 1500);
+    });
+    canvas.addEventListener('webglcontextrestored', function () { if (S.canvas !== canvas) return; clearTimeout(S._autoRestore); S.lost = false; S.paused.hidden = true; S._rebuild(); S.renderNow(); S.emit('contextrestored'); });
     if ('ResizeObserver' in global) { S._ro = new ResizeObserver(function () { S.render(); }); S._ro.observe(S.holder); }
     if ('MutationObserver' in global) { S._mo = new MutationObserver(function () { S._theme(); }); S._mo.observe(doc.documentElement, { attributes: true, attributeFilter: ['data-theme'] }); }
-    S.active = true;
+    S.active = true; S.lost = false; S.paused.hidden = true;     // a fresh canvas is never "paused"
     S.layers.forEach(function (L) { S._build(L); });
     S._decor();
     S.renderNow();
@@ -2882,6 +2893,7 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
     S.active = false;
     if (S._ro) S._ro.disconnect(); if (S._mo) S._mo.disconnect();
     S.controls.dispose(); S.renderer.renderLists.dispose(); S.renderer.dispose();
+    S.canvas._v3dTearing = true;          // our own release: its webglcontextlost must not show "3-D paused"
     try { S.renderer.forceContextLoss(); } catch (e) { /* already lost */ }
     if (S.canvas.parentNode) S.canvas.parentNode.removeChild(S.canvas);
     if (S.css2d.domElement.parentNode) S.css2d.domElement.parentNode.removeChild(S.css2d.domElement);
@@ -3023,7 +3035,20 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
     return { stop: function () { S.loopStop(); }, time: function () { return t; }, reset: function (t0) { t = t0 || 0; acc = 0; } };
   };
   SP.loopStop = function () { if (this._loop) global.cancelAnimationFrame(this._loop); this._loop = 0; };
-  SP.restore = function () { var S = this; if (S.renderer && S.lost) { try { S.renderer.forceContextRestore(); } catch (e) { /* ignore */ } } };
+  /** Tap on "3-D paused": always rebuild on a fresh canvas (forceContextRestore only revives a context WE lost on purpose). */
+  SP.restore = function () { var S = this; if (S.lost || (!S.active && !S.fallback && !S._disposed)) S._recreate(); };
+  SP._recreate = function () {
+    var S = this; if (S._disposed || S.fallback) return;
+    clearTimeout(S._autoRestore);
+    if (S.renderer) {
+      S._camPos = S.camera.position.toArray(); S._camTarget = S.controls.target.toArray();
+      S.layers.forEach(function (L) { disposeObj(L.obj); L.obj = null; });
+      S._teardownGL();
+    }
+    S.lost = false; S.paused.hidden = true;
+    try { S._createGL(); } catch (e) { console.warn('viz3d: could not rebuild the 3-D view, using the canvas projector', e); S._toFallback('WebGL could not be restarted'); return; }
+    S.emit('contextrestored');
+  };
   /** Dispose everything; returns renderer.info.memory measured after the layers were freed (audit: must be 0, 0). */
   SP.dispose = function () {
     var S = this; S.loopStop(); S._disposed = true;
@@ -3846,7 +3871,8 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
     var hand = !!s.hand && !K && crossOn, curl = s.curl === undefined ? 1 : clamp(+s.curl, 0, 1);
     var lat = (s.lat === undefined ? 45 : +s.lat) * D2R, f = coriolis_parameter(lat), kxu = k_cross(b);
     var ghost = K ? scl(kxu, -f * GHOST_SCALE) : [0, 0, 0];
-    var R = nb > 0 ? dotRect(a, b) : null, d0 = dot(a, b), th = angle_between(a, b);
+    var onA = !!s.onA && !K, src = onA ? b : a;
+    var R = (onA ? na > 0 : nb > 0) ? (onA ? dotRect(b, a) : dotRect(a, b)) : null, d0 = dot(a, b), th = angle_between(a, b);
     var pts = [[0, 0, 0], a, b];
     if (K) {
       var M = Math.max(nb, norm(ghost)) * 1.06;
@@ -3874,11 +3900,11 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
     var d = { a: a, b: b, K: K, show: show, swap: swap, first: first, second: second, nmA: nmA, nmB: nmB, na: na, nb: nb,
       cr: cr, area: area, deg: deg, dotOn: dotOn, rectOn: rectOn, crossOn: crossOn, hand: hand, curl: curl, pose: pose,
       lat: lat, f: f, kxu: kxu, ghost: ghost, R: R, dot: d0, th: th, pts: pts, radius: radius, G2: G2, hs: hs, triAt: triAt, TL: TL,
-      handPts: handPts, fade: s.cam === 'tip', dark: isDark() };
+      handPts: handPts, fade: s.cam === 'tip', dark: isDark(), onA: onA, src: src };
     d.tags = tagItems(d);
     d.keys = {
       grid: [G2, K, radius.toFixed(3), TA.toFixed(3)].join('|'),
-      dotGlyph: [a, b, dotOn, rectOn, radius.toFixed(3)].join('|'),
+      dotGlyph: [a, b, dotOn, rectOn, onA, radius.toFixed(3)].join('|'),
       crossGlyph: [first, second, crossOn, K, radius.toFixed(3)].join('|'),
       hand: [first, second, hand, curl.toFixed(4), s.cam === 'tip'].join('|')
     };
@@ -3908,7 +3934,8 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
       if (d.rectOn) {
         var cen = scl(add(R.foot, R.side), 0.5);
         var txt = Math.abs(R.sp) < 1e-9 ? 'a·b = 0: no shadow, no rectangle'
-          : 'a·b = shadow × |b| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot);
+          : d.onA ? 'b·a = shadow of b on a × |a| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot)
+          : 'a·b = shadow of a × |b| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot);
         it.push({ at: cen, text: txt, color: d.dot < 0 ? ROSE : TEAL, priority: 2, short: 'a·b = ' + fmt(d.dot) });
       } else {
         it.push({ at: add(scl(R.foot, 0.55), scl(R.e, 0.45)), text: 'shadow ' + fmt(R.sp), color: R.sp < 0 ? ROSE : TEAL, priority: 2, short: fmt(R.sp) });
@@ -4058,9 +4085,9 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
         var off = scl(R.e, rad * 3.6);
         g.add(new T.Mesh(mergeGeos(T, [cylGeo(T, off, add(R.foot, off), rad * 1.35, 10), sphGeo(T, add(R.foot, off), rad * 1.8)]), lambert(T, col)));
       }
-      var da = sub(d.a, R.foot);
+      var da = sub(d.src, R.foot);
       if (norm(da) > 1e-6) {
-        g.add(line(T, [d.a, R.foot], textColor(), { dash: [0.12, 0.09], opacity: 0.8 }));
+        g.add(line(T, [d.src, R.foot], textColor(), { dash: [0.12, 0.09], opacity: 0.8 }));
         var t = Math.min(0.28, 0.25 * norm(da), 0.25 * Math.max(Math.abs(R.sp), 0.4)), u1 = scl(R.bh, R.sp >= 0 ? -1 : 1), u2 = unit(da);
         g.add(line(T, [add(R.foot, scl(u1, t)), add(add(R.foot, scl(u1, t)), scl(u2, t)), add(R.foot, scl(u2, t))], textColor(), { opacity: 0.9 }));
       }
@@ -4191,6 +4218,13 @@ window.VIZ3D_COAST = {"_about":"Natural Earth 1:110m coastline (public domain), 
         provenance: { kind: 'computed', text: 'vectors.k_cross · frames.coriolis_parameter' } }));
       S.add(Viz3D.labels(d.tags, { id: 'tags' }));
       S.add(Viz3D.cameraPresets(cameraPresetsFor(d, null), { id: 'cams', tween: 700, reducedMotion: 'cut' }));
+      S.on('contextrestored', function () {
+        var V = S._vpl; if (!V) return;
+        V.key = ''; V.ck = ''; V.axk = ''; V.tgk = '';
+        update(S, V.state); attach(S);
+        if (S.presets[V.cam]) S.goto(V.cam, 0);
+        S.render();
+      });
       S.on('frame', function () {
         if (S.controls && !S.controls._vplHooked) {                    // a real drag: keep the user's camera on resize
           S.controls._vplHooked = true;
@@ -4495,9 +4529,10 @@ function sweepAxis(a, b) {
 /** The drawn b after "turn b by" t [deg]. Maths mode: about n̂ in the a–b plane (θ changes). f k×u mode: the wind turns
     about k (local up), so u stays horizontal, keeps its speed and k×u stays 90° to its left (F-A.4). */
 function vecB(s) {
-  const b0 = baseB(s); if (!s.t) return b0;
-  if (isK(s)) return rotate(b0, [0, 0, 1], s.t * D2R);
-  return rotate(b0, sweepAxis(vecA(s), b0), s.t * D2R);
+  const b0 = baseB(s), k = s.stretch || 1;                       // "stretch b": same direction, |b| × k
+  if (!s.t) return scl(b0, k);
+  if (isK(s)) return scl(rotate(b0, [0, 0, 1], s.t * D2R), k);
+  return scl(rotate(b0, sweepAxis(vecA(s), b0), s.t * D2R), k);
 }
 const dotOn = s => !isK(s) && (s.show === 'shadow' || s.show === 'dot' || s.show === 'both');
 const rectOn = s => !isK(s) && (s.show === 'dot' || s.show === 'both');
@@ -4530,14 +4565,14 @@ const GHOSTC = '#a78bfa';                        // the ghost −f k×u: lighter
 const nameA = s => (isK(s) ? 'k' : 'a'), nameB = s => (isK(s) ? 'u' : 'b');
 
 /* ---------- presets (each set carries every distinguishing value: ch15 lesson) ---------- */
-const PDEF = { ax: 2, ay: 1, az: 0, bx: 2, by: 4, bz: 0, t: 0, kmode: false };
-const PK = { ax: 0, ay: 0, az: 1, bx: 8, by: 6, bz: 0, t: 0, kmode: true, lat: 45 };
+const PDEF = { ax: 2, ay: 1, az: 0, bx: 2, by: 4, bz: 0, t: 0, kmode: false, stretch: 1, onA: false };
+const PK = { ax: 0, ay: 0, az: 1, bx: 8, by: 6, bz: 0, t: 0, kmode: true, lat: 45, stretch: 1, onA: false };
 const PRESETS = [
   { label: 'start', title: 'a = (2, 1, 0), b = (2, 4, 0): a·b = 8, |a×b| = 6, |a||b| = 10 (a 6-8-10 triangle), θ = 36.87°', set: Object.assign({}, PDEF, { hand: false }) },
-  { label: '⟂ perp.', title: 'perpendicular, b = (−2, 4, 0): a·b = 0 (no shadow), the biggest area |a||b| = 10', set: { ax: 2, ay: 1, az: 0, bx: -2, by: 4, bz: 0, t: 0, kmode: false } },
-  { label: 'parallel', title: 'b = (4, 2, 0): shadow = |a| = √5 ≈ 2.24, a·b = 2.24 × 4.47 = 10; no area', set: { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, show: 'dot' } },
-  { label: 'anti-parallel', title: 'b = (−4, −2, 0): the shadow is all of a, backwards: a·b = −2.24 × 4.47 = −10', set: { ax: 2, ay: 1, az: 0, bx: -4, by: -2, bz: 0, t: 0, kmode: false, show: 'dot' } },
-  { label: 'tilted', title: 'a general 3-D pair: θ = 70.5°, a×b = (0, 6, −6), not vertical', set: { ax: 1, ay: 2, az: 2, bx: 3, by: 0, bz: 0, t: 0, kmode: false } },
+  { label: '⟂ perp.', title: 'perpendicular, b = (−2, 4, 0): a·b = 0 (no shadow), the biggest area |a||b| = 10', set: { ax: 2, ay: 1, az: 0, bx: -2, by: 4, bz: 0, t: 0, kmode: false, stretch: 1 } },
+  { label: 'parallel', title: 'b = (4, 2, 0): shadow = |a| = √5 ≈ 2.24, a·b = 2.24 × 4.47 = 10; no area', set: { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, show: 'dot', stretch: 1 } },
+  { label: 'anti-parallel', title: 'b = (−4, −2, 0): the shadow is all of a, backwards: a·b = −2.24 × 4.47 = −10', set: { ax: 2, ay: 1, az: 0, bx: -4, by: -2, bz: 0, t: 0, kmode: false, show: 'dot', stretch: 1 } },
+  { label: 'tilted', title: 'a general 3-D pair: θ = 70.5°, a×b = (0, 6, −6), not vertical', set: { ax: 1, ay: 2, az: 2, bx: 3, by: 0, bz: 0, t: 0, kmode: false, stretch: 1 } },
   { label: 'right hand', title: 'the right-hand rule: fingers along a curl toward b; the thumb is a×b', set: Object.assign({}, PDEF, { hand: true, show: 'cross' }), action: app => { animateCurl(app); goCam(app, app.state.cam); } },
   { label: 'f k×u', title: 'a = k̂ (up), b = wind u = (8, 6, 0) m/s at 45°N: k̂×u is u turned 90° left', set: PK }
 ];
@@ -4561,17 +4596,18 @@ function fallbackPrims(s, w, h) {
     out.lines.push({ pts: arc.slice(0, 23), color: col, width: 1.8 }); out.arrows.push({ from: arc[21], to: arc[24], color: col, width: 1.8, head: 9 });
   };
   if (dotOn(s) && q.nb > 0) {
-    const R = SCN() ? SCN().dotRect(q.a, q.b) : null, foot = scl(q.pv, k), neg = q.d < 0, col = neg ? COL.rose() : COL.teal();
+    const onA = !!s.onA, R = SCN() ? (onA ? SCN().dotRect(q.b, q.a) : SCN().dotRect(q.a, q.b)) : null, foot = R ? scl(R.foot, k) : scl(q.pv, k), neg = q.d < 0, col = neg ? COL.rose() : COL.teal();
+    const LD = onA ? A : B, SRC = onA ? B : A;
     const e = R ? R.e : [0, 0, 1], off = scl(e, 0.07);
-    out.lines.push({ pts: [scl(unit(B), -2.6), scl(unit(B), 2.6)], color: Viz.alpha(COL.orange(), 0.5), width: 1.2, dash: [5, 4] });
-    out.lines.push({ pts: [A, foot], color: COL.muted(), width: 1.4, dash: [4, 4] });
+    out.lines.push({ pts: [scl(unit(LD), -2.6), scl(unit(LD), 2.6)], color: Viz.alpha(onA ? COL.teal() : COL.orange(), 0.5), width: 1.2, dash: [5, 4] });
+    out.lines.push({ pts: [SRC, foot], color: COL.muted(), width: 1.4, dash: [4, 4] });
     if (Math.abs(q.sp) > 1e-9) out.lines.push({ pts: [off, add(foot, off)], color: col, width: 6, dash: neg ? [8, 4] : [] });
     if (rectOn(s) && R && Math.abs(q.sp) > 1e-9) {
       const C = R.corners.map(p => scl(p, k));
       out.polys.push({ pts: C, fill: col, alpha: neg ? 0.16 : 0.22 });
       out.lines.push({ pts: C.concat([C[0]]), color: col, width: 1.6, dash: neg ? [6, 4] : [] });
-      labels.push([2, { p: scl(add(C[1], C[3]), 0.5), text: small ? 'a·b = ' + fm(q.d, 3) : 'a·b = ' + fm(q.sp, 3) + ' × ' + fm(q.nb, 3) + ' = ' + fm(q.d, 3), color: col }]);
-      out.meta.rectArea = Math.sign(dot(sub(C[1], C[0]), q.b)) * norm(cross(sub(C[1], C[0]), sub(C[3], C[0]))) / (k * k);
+      labels.push([2, { p: scl(add(C[1], C[3]), 0.5), text: small ? 'a·b = ' + fm(q.d, 3) : 'a·b = ' + fm(R.sp, 3) + ' × ' + fm(R.long, 3) + ' = ' + fm(q.d, 3), color: col }]);
+      out.meta.rectArea = Math.sign(dot(sub(C[1], C[0]), LD)) * norm(cross(sub(C[1], C[0]), sub(C[3], C[0]))) / (k * k);
       out.meta.rectLong = norm(sub(C[3], C[0])) / k;
     } else labels.push([2, { p: add(scl(foot, 0.5), scl(e, 0.35)), text: 'shadow ' + fm(q.sp, 3), color: col }]);
     out.meta.foot = foot;
@@ -4627,7 +4663,7 @@ const SCN = () => window.SCENE_vector_products_lab || null;
 function sceneState(s) {
   const b = vecB(s);
   return { ax: s.ax, ay: s.ay, az: s.az, bx: b[0], by: b[1], bz: b[2], show: s.show, swap: !!s.swap, hand: !!s.hand,
-           curl: s.curl, kmode: isK(s), lat: s.lat, cam: s.cam };
+           curl: s.curl, kmode: isK(s), lat: s.lat, cam: s.cam, onA: !!s.onA };
 }
 let lastCam = 'iso';
 function sync3d(s) {
@@ -4667,11 +4703,12 @@ function faceBasis(a, b) {
 /** Face-on geometry in plane coordinates (x along a, y toward b; seen from the tip of a×b, so a → b is anticlockwise):
     the shadow foot F, the rectangle side S2 (|b| long, ⟂ b, away from a) and its signed area (= a·b). */
 function faceGeom(s) {
-  const q = Q(s), { e1, e2 } = faceBasis(q.a, q.b), A2 = [q.na, 0], B2 = [dot(q.b, e1), dot(q.b, e2)];
-  const nb = q.nb || 1, bh = [B2[0] / nb, B2[1] / nb], F = [q.sp * bh[0], q.sp * bh[1]];
-  let p2 = [-bh[1], bh[0]]; if (A2[0] * p2[0] + A2[1] * p2[1] > 1e-12) p2 = [-p2[0], -p2[1]];
-  const S2 = [p2[0] * q.nb, p2[1] * q.nb], area = Math.sign(F[0] * bh[0] + F[1] * bh[1]) * Math.abs(F[0] * S2[1] - F[1] * S2[0]);
-  return { q, e1, e2, A2, B2, bh, F, p2, S2, area };
+  const q = Q(s), { e1, e2 } = faceBasis(q.a, q.b), A2 = [q.na, 0], B2 = [dot(q.b, e1), dot(q.b, e2)], onA = !!s.onA && !isK(s);
+  const Lp = onA ? A2 : B2, Sp = onA ? B2 : A2, nL = Math.hypot(Lp[0], Lp[1]) || 1, bh = [Lp[0] / nL, Lp[1] / nL];
+  const sp = Sp[0] * bh[0] + Sp[1] * bh[1], F = [sp * bh[0], sp * bh[1]];        // the shadow's foot on the base line
+  let p2 = [-bh[1], bh[0]]; if (Sp[0] * p2[0] + Sp[1] * p2[1] > 1e-12) p2 = [-p2[0], -p2[1]];
+  const S2 = [p2[0] * nL, p2[1] * nL], area = Math.sign(F[0] * bh[0] + F[1] * bh[1]) * Math.abs(F[0] * S2[1] - F[1] * S2[0]);
+  return { q, e1, e2, A2, B2, bh, F, p2, S2, area, onA, Sp, sp, nL };
 }
 function arrowPx(ctx, x0, y0, x1, y1, color, width, dash) {
   const dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy); if (L < 1) return;
@@ -4700,13 +4737,12 @@ function arcArrowPx(ctx, O, r, a0, dA, color, width) {
 }
 function drawFace(v, s, app) {
   const G = faceGeom(s), q = G.q, ctx = v.ctx, dOn = dotOn(s), rOn = rectOn(s), cOn = crossOn(s);
-  const barW = dOn ? (v.w > 300 ? 60 : 44) : 0, W = v.w - barW, roomy = W > 340 && v.h > 170;
+  const nG = (dOn ? 1 : 0) + (cOn ? 1 : 0), barW = nG * (v.w > 300 ? 52 : 40), W = v.w - barW, roomy = W > 340 && v.h > 170;
   const { A2, B2, bh, F, p2, S2 } = G;
   const pts = [[0, 0], A2, B2];
   if (rOn) pts.push(F, [F[0] + S2[0], F[1] + S2[1]], S2);
   if (cOn) pts.push([A2[0] + B2[0], A2[1] + B2[1]]);
   if (dOn && q.nb > 0) pts.push(F);
-  if (s.show === 'shadow' && q.nb > 0) pts.push(bh);
   const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), span = Math.max(1e-9, q.na, q.nb) * 0.14;
   const P = Viz.Plot(v, { rect: { x: 0, y: 0, w: W, h: v.h }, pad: { l: 14, r: 18, t: 22, b: cOn || s.show === 'shadow' ? 26 : 14 },
     xlim: [Math.min(...xs) - span, Math.max(...xs) + span], ylim: [Math.min(...ys) - span, Math.max(...ys) + span], equal: true });
@@ -4715,16 +4751,23 @@ function drawFace(v, s, app) {
   const ang = Math.atan2(B2[1], B2[0]);                                  // θ in plane coordinates (0 … π)
   const later = [];                                                       // labels are drawn after the clip (never cut at the plot edge)
   P.clip(() => {
-    if (rOn && q.nb > 0 && Math.abs(q.sp) > 1e-9) {                       // the a·b rectangle: shadow × |b|
+    if (rOn && G.nL > 0 && Math.abs(G.sp) > 1e-9) {                       // the a·b rectangle: shadow × |b| (or b's shadow × |a|)
       const neg = q.d < 0, col = neg ? COL.rose() : COL.teal(), C = [[0, 0], F, [F[0] + S2[0], F[1] + S2[1]], S2].map(px);
       polyPx(ctx, C, col, neg ? 0.14 : 0.2);
       linePx(ctx, C.concat([C[0]]), col, 1.6, neg ? [6, 4] : []);
       if (neg) { ctx.save(); ctx.beginPath(); C.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); ctx.clip();
         for (let k = -20; k <= 20; k++) linePx(ctx, [[C[0][0] + k * 12 - 400, C[0][1] - 400], [C[0][0] + k * 12 + 400, C[0][1] + 400]], Viz.alpha(COL.rose(), 0.35), 1); ctx.restore(); }
-      const cx = (C[0][0] + C[2][0]) / 2, cy = (C[0][1] + C[2][1]) / 2;
-      const t = roomy ? fitText(ctx, ['a·b = shadow × |b| = ' + fm(q.sp, 3) + ' × ' + fm(q.nb, 3) + ' = ' + fm(q.d, 3), fm(q.sp, 3) + ' × ' + fm(q.nb, 3) + ' = ' + fm(q.d, 3), 'a·b = ' + fm(q.d, 3)], W - 16) : 'a·b = ' + fm(q.d, 3);
+      const cx = (C[0][0] + C[2][0]) / 2, cy = (C[0][1] + C[2][1]) / 2, sw = Math.hypot(C[1][0] - C[0][0], C[1][1] - C[0][1]), sh = Math.hypot(C[3][0] - C[0][0], C[3][1] - C[0][1]);
+      const sN = G.onA ? 'b' : 'a', lN = G.onA ? 'a' : 'b', big = roomy && Math.min(sw, sh) > 64;
+      const t = big ? 'area = a·b = ' + fm(q.d, 3) : roomy ? fitText(ctx, ['shadow of ' + sN + ' × |' + lN + '| = ' + fm(G.sp, 3) + ' × ' + fm(G.nL, 3) + ' = ' + fm(q.d, 3), fm(G.sp, 3) + ' × ' + fm(G.nL, 3) + ' = ' + fm(q.d, 3), 'a·b = ' + fm(q.d, 3)], W - 16) : 'a·b = ' + fm(q.d, 3);
       const tw = textW(ctx, t, 12);
       later.push(() => Viz.text(ctx, t, Math.min(Math.max(cx, 8 + tw / 2), W - 8 - tw / 2), cy, { size: 12, weight: 700, color: col, bg: true, align: 'center' }));
+      if (big) {                                                           // the two sides, labelled inside the rectangle
+        const m1 = [(C[0][0] + C[1][0]) / 2, (C[0][1] + C[1][1]) / 2], m2 = [C[0][0] + (C[3][0] - C[0][0]) * 0.8, C[0][1] + (C[3][1] - C[0][1]) * 0.8];
+        const into1 = [(cx - m1[0]), (cy - m1[1])], n1 = Math.hypot(into1[0], into1[1]) || 1, into2 = [(cx - m2[0]), (cy - m2[1])], n2 = Math.hypot(into2[0], into2[1]) || 1;
+        later.push(() => Viz.text(ctx, 'shadow of ' + sN + ' = ' + fm(G.sp, 3), m1[0] + into1[0] / n1 * 14, m1[1] + into1[1] / n1 * 14, { size: 12, color: col, bg: true, align: 'center' }));
+        later.push(() => Viz.text(ctx, '|' + lN + '| = ' + fm(G.nL, 3), m2[0] + into2[0] / n2 * 34, m2[1] + into2[1] / n2 * 34, { size: 12, color: col, bg: true, align: 'center' }));
+      }
     }
     if (cOn && q.area > 1e-12 * q.na * q.nb) {                            // the parallelogram, base and height
       const C = [[0, 0], A2, [A2[0] + B2[0], A2[1] + B2[1]], B2].map(px);
@@ -4751,25 +4794,21 @@ function drawFace(v, s, app) {
       linePx(ctx, [px(B2), px(A2)], COL.muted(), 2, [6, 4]);
       Viz.text(ctx, 'c = a − b', X((A2[0] + B2[0]) / 2) + 8, Y((A2[1] + B2[1]) / 2) - 4, { size: 12, color: COL.muted(), bg: true });
     }
-    if (dOn && q.nb > 0) {                                                 // b's line, the shadow, the drop line and tick
-      const neg = q.d < 0, far = Math.max(q.na, q.nb) * 3, col = neg ? COL.rose() : COL.teal();
-      linePx(ctx, [px([-bh[0] * far, -bh[1] * far]), px([bh[0] * far, bh[1] * far])], Viz.alpha(COL.orange(), 0.45), 1.2, [5, 4]);
-      linePx(ctx, [px(A2), px(F)], COL.muted(), 1.5, [4, 4]);
+    if (dOn && G.nL > 0) {                                                 // the base line, the shadow, the drop line and tick
+      const neg = q.d < 0, far = Math.max(q.na, q.nb) * 3, col = neg ? COL.rose() : COL.teal(), Sp = G.Sp;
+      linePx(ctx, [px([-bh[0] * far, -bh[1] * far]), px([bh[0] * far, bh[1] * far])], Viz.alpha(G.onA ? COL.teal() : COL.orange(), 0.45), 1.2, [5, 4]);
+      linePx(ctx, [px(Sp), px(F)], COL.muted(), 1.5, [4, 4]);
       const off = [p2[0] * 4, -p2[1] * 4];                                  // 4 px toward the rectangle side: a stays visible
-      if (Math.abs(q.sp) > 1e-9) linePx(ctx, [[O[0] + off[0], O[1] + off[1]], [X(F[0]) + off[0], Y(F[1]) + off[1]]], col, 7, neg ? [9, 4] : []);
-      const dpx = [X(A2[0]) - X(F[0]), Y(A2[1]) - Y(F[1])], dl = Math.hypot(dpx[0], dpx[1]);
+      if (Math.abs(G.sp) > 1e-9) linePx(ctx, [[O[0] + off[0], O[1] + off[1]], [X(F[0]) + off[0], Y(F[1]) + off[1]]], col, 7, neg ? [9, 4] : []);
+      const dpx = [X(Sp[0]) - X(F[0]), Y(Sp[1]) - Y(F[1])], dl = Math.hypot(dpx[0], dpx[1]);
       if (dl > 14) {
         const u = [dpx[0] / dl, dpx[1] / dl], sg = neg ? 1 : -1, w = [sg * bh[0], -sg * bh[1]], r = 8;
         const p0 = [X(F[0]) + w[0] * r, Y(F[1]) + w[1] * r];
         linePx(ctx, [p0, [p0[0] + u[0] * r, p0[1] + u[1] * r], [X(F[0]) + u[0] * r, Y(F[1]) + u[1] * r]], COL.muted(), 1.2);
       }
-      if (s.show === 'shadow') {                                           // the length-1 arrow b̂ along b (dark orange)
-        arrowPx(ctx, O[0] - off[0] * 2, O[1] - off[1] * 2, X(bh[0]) - off[0] * 2, Y(bh[1]) - off[1] * 2, '#c2410c', 3.2);
-        later.push(() => Viz.text(ctx, 'b̂', X(bh[0]) - off[0] * 5, Y(bh[1]) - off[1] * 5, { size: 13, weight: 700, color: '#c2410c', bg: true, align: 'center' }));
-        later.push(() => Viz.text(ctx, fitText(ctx, ['dark orange b̂ = b/|b|: length 1, along b', 'b̂ = b/|b|, length 1'], W - 12), 8, v.h - 11, { size: 12, color: '#c2410c', bg: true }));
-      }
+      if (s.show === 'shadow') later.push(() => Viz.text(ctx, fitText(ctx, ['the shadow is a length: |a| cos θ = ' + fm(G.sp, 3) + ' (a·b = shadow × |b|)', 'shadow = ' + fm(G.sp, 3) + ', a length'], W - 12), 8, v.h - 11, { size: 12, color: col, bg: true }));
       const mx = O[0] + (X(F[0]) - O[0]) * 0.55, my = O[1] + (Y(F[1]) - O[1]) * 0.55;
-      if (!rOn) later.push(() => Viz.text(ctx, (roomy ? 'shadow ' : '') + fm(q.sp, 3), mx + off[0] * 5, my + off[1] * 5, { size: 12, weight: 700, color: col, align: 'center', bg: true }));
+      if (!rOn) later.push(() => Viz.text(ctx, (roomy ? 'shadow ' : '') + fm(G.sp, 3), mx + off[0] * 5, my + off[1] * 5, { size: 12, weight: 700, color: col, align: 'center', bg: true }));
     }
   });
   if (q.na > 0 && q.nb > 0 && Math.min(Math.hypot(X(A2[0]) - O[0], 0), Math.hypot(X(B2[0]) - O[0], Y(B2[1]) - O[1])) > 70) {   // θ arc; label outside the arrows
@@ -4784,8 +4823,28 @@ function drawFace(v, s, app) {
   const tipLabel = (T, name, col) => { const d = [X(T[0]) - O[0], Y(T[1]) - O[1]], L = Math.hypot(d[0], d[1]) || 1; Viz.text(ctx, name, X(T[0]) + d[0] / L * 12, Y(T[1]) + d[1] / L * 12, { size: 15, weight: 700, color: col, align: 'center' }); };
   tipLabel(A2, nameA(s), COL.teal()); tipLabel(B2, nameB(s), COL.orange());
   ctx.save(); ctx.fillStyle = COL.orange(); ctx.globalAlpha = 0.22; ctx.beginPath(); ctx.arc(X(B2[0]), Y(B2[1]), 10, 0, 2 * Math.PI); ctx.fill(); ctx.restore();
-  if (dOn) drawSignedBar(v, s, q, W, barW);
+  drawGauges(v, s, q, W, barW, dOn, cOn);
 }
+/** Gauges beside the face-on plane (2-D, bar charts of NUMBERS): the agreement score cos θ = a·b/(|a||b|) for the dot
+    product, the turning score sin θ = |a×b|/(|a||b|) for the cross product. */
+function drawGauges(v, s, q, x0, w, dOn, cOn) {
+  const ctx = v.ctx, top = 52, bot = v.h - 30, mid = (top + bot) / 2, half = (bot - top) / 2 - 4, full = q.na * q.nb;
+  const items = []; if (dOn) items.push(['cos θ', full > 0 ? q.d / full : 0, true]); if (cOn) items.push(['sin θ', full > 0 ? q.area / full : 0, false]);
+  const cw = items.length ? w / items.length : w;
+  items.forEach(([lab, val, signed], i) => {
+    const cx = x0 + cw * (i + 0.5), neg = val < 0, col = signed ? (neg ? COL.rose() : COL.teal()) : COL.violet();
+    const base = signed ? mid : bot, hh = signed ? val * half : val * (bot - top);
+    linePx(ctx, [[cx - 12, base], [cx + 12, base]], COL.muted(), 1);
+    linePx(ctx, [[cx - 9, signed ? mid - half : top], [cx + 9, signed ? mid - half : top]], COL.muted(), 1, [3, 3]);
+    if (signed) linePx(ctx, [[cx - 9, mid + half], [cx + 9, mid + half]], COL.muted(), 1, [3, 3]);
+    ctx.save(); ctx.fillStyle = Viz.alpha(col, neg ? 0.35 : 0.85);
+    if (neg) { ctx.strokeStyle = col; ctx.setLineDash([4, 3]); ctx.lineWidth = 2; ctx.strokeRect(cx - 8, base, 16, -hh); }
+    ctx.fillRect(cx - 8, Math.min(base, base - hh), 16, Math.abs(hh)); ctx.restore();
+    Viz.text(ctx, lab, cx, top - 14, { size: 12, color: COL.text(), align: 'center' });
+    Viz.text(ctx, fm(val, 2), cx, v.h - 14, { size: 12, weight: 700, color: col, align: 'center', bg: true });
+  });
+}
+function drawSignedBar() { /* replaced by drawGauges (round 2) */ }
 /** The flat a·b gauge (a bar chart beside the face-on plane — a NUMBER, so it lives in 2-D only). */
 function drawSignedBar(v, s, q, x0, w) {
   const ctx = v.ctx, top = 52, bot = v.h - 12, mid = (top + bot) / 2, half = (bot - top) / 2 - 8, cx = x0 + w / 2;   // below the ⤢ ↗ buttons
@@ -4936,7 +4995,8 @@ function liveValues(s) {
     comp: `${pmt(q.a[0], 3)}·${pmt(q.b[0], 3)} + ${pmt(q.a[1], 3)}·${pmt(q.b[1], 3)} + ${pmt(q.a[2], 3)}·${pmt(q.b[2], 3)} = ${fm(q.d, 3)}`,
     mab: fm(-q.na * q.nb, 3), area: fm(q.area, 3), h: fm(q.h, 3), th: fm(q.thd, 3), z2: fm(q.z2, 3),
     z2sign: Math.abs(q.z2) < 1e-12 ? 'zero: no turning' : q.z2 > 0 ? 'positive: b is anticlockwise from a (seen from above)' : 'negative: b is clockwise from a (seen from above)',
-    rn: q.rn, r: vtxt(q.r), kxu: vtxt(q.kxu), f: Viz.fmt(q.f, { sig: 3 }), side: q.f > 0 ? 'right' : q.f < 0 ? 'left' : 'neither side',
+    rn: q.rn, r: vtxt(q.r), kxu: vtxt(q.kxu), ab: fm(q.na * q.nb, 3), cos: fm(q.na * q.nb > 0 ? q.d / (q.na * q.nb) : 0, 2),
+    sin: fm(q.na * q.nb > 0 ? q.area / (q.na * q.nb) : 0, 2), st: '×' + fm(s.stretch || 1, 3), f: Viz.fmt(q.f, { sig: 3 }), side: q.f > 0 ? 'right' : q.f < 0 ? 'left' : 'neither side',
     hemi: s.lat >= 0 ? 'NH' : 'SH' };
 }
 const MM_KEYS = ['ax', 'ay', 'az', 'bx', 'by', 'bz', 'kmode', 'show', 'hand'];     // swap: every step's text stays true (the product's name is live)
@@ -4960,6 +5020,28 @@ function liveTour(app) {
   app.fit();
 }
 
+/** The derivation steps with the reader's current vectors substituted (one line per step; user feedback round 2). */
+const DQ = s => { const q = Q(s), c = sub(q.a, q.b), cos = q.na * q.nb > 0 ? q.d / (q.na * q.nb) : 0; return { q, c, cos, a: q.a, b: q.b }; };
+const DLIVE = {
+  d1s1: s => { const { c } = DQ(s); return String.raw`\mathbf c = ${vtex(c, 3)}`; },
+  d1s2: s => { const { q, c, cos } = DQ(s); return String.raw`${tn(dot(c, c))} = ${tn(q.na * q.na)} + ${tn(q.nb * q.nb)} - 2\times${tn(q.na, 3)}\times${tn(q.nb, 3)}\times${tn(cos, 3)}`; },
+  d1s3: s => { const { c } = DQ(s); return String.raw`${pm(c[0], 3)}^2 + ${pm(c[1], 3)}^2 + ${pm(c[2], 3)}^2 = ${tn(dot(c, c))}`; },
+  d1s4: s => { const { a, b } = DQ(s); return String.raw`(${pm(a[0], 3)}-${pm(b[0], 3)})^2 = ${tn(a[0] * a[0])} - ${tn(2 * a[0] * b[0])} + ${tn(b[0] * b[0])}`; },
+  d1s5: s => { const { q } = DQ(s); return String.raw`= ${tn(q.na * q.na)} + ${tn(q.nb * q.nb)} - 2\times${tn(q.d)} = ${tn(q.na * q.na + q.nb * q.nb - 2 * q.d)}`; },
+  d1s7: s => { const { q, cos } = DQ(s); return String.raw`${tn(q.na * q.na + q.nb * q.nb - 2 * q.d)} = ${tn(q.na * q.na + q.nb * q.nb - 2 * q.na * q.nb * cos)}`; },
+  d1s8: s => { const { q, cos } = DQ(s); return String.raw`-2\times${tn(q.d)} = -2\times${tn(q.na, 3)}\times${tn(q.nb, 3)}\times${tn(cos, 3)}`; },
+  d2s1: s => String.raw`\mathbf a\times\mathbf b = ${vtex(Q(s).c, 3)}`,
+  d2s2: s => { const c = Q(s).c; return String.raw`${tn(c[0] * c[0])} + ${tn(c[1] * c[1])} + ${tn(c[2] * c[2])} = ${tn(dot(c, c))}`; },
+  d2s3: s => { const { a, b } = DQ(s); return String.raw`(${pm(a[1], 3)}\cdot${pm(b[2], 3)} - ${pm(a[2], 3)}\cdot${pm(b[1], 3)})^2 = ${tn((a[1] * b[2] - a[2] * b[1]) ** 2)}`; },
+  d2s4: s => { const { a, b } = DQ(s); let S1 = 0; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) if (i !== j) S1 += a[i] * a[i] * b[j] * b[j];
+    const M = a[0] * a[1] * b[0] * b[1] + a[1] * a[2] * b[1] * b[2] + a[2] * a[0] * b[2] * b[0]; return String.raw`${tn(S1)} - 2\times${tn(M)} = ${tn(S1 - 2 * M)}`; },
+  d2s5: s => { const { q, a, b } = DQ(s), diag = a[0] * a[0] * b[0] * b[0] + a[1] * a[1] * b[1] * b[1] + a[2] * a[2] * b[2] * b[2], M = a[0] * a[1] * b[0] * b[1] + a[1] * a[2] * b[1] * b[2] + a[2] * a[0] * b[2] * b[0];
+    return String.raw`${tn(q.na * q.na * q.nb * q.nb)} - (${tn(diag)} + 2\times${tn(M)}) = ${tn(q.na * q.na * q.nb * q.nb - diag - 2 * M)}`; },
+  d2s7: s => { const { q, cos } = DQ(s); return String.raw`${tn(q.area * q.area)} = ${tn(q.na * q.na * q.nb * q.nb)} - ${tn(q.na * q.na * q.nb * q.nb)}\times${tn(cos * cos, 3)}`; },
+  d2s8: s => { const { q, cos } = DQ(s); return String.raw`${tn(q.na * q.na * q.nb * q.nb)}\times(1 - ${tn(cos * cos, 3)}) = ${tn(q.area * q.area)}`; },
+  d2s9: s => { const { q } = DQ(s); return String.raw`${tn(q.area)} = ${tn(q.na, 3)}\times${tn(q.nb, 3)}\times${tn(Math.sin(q.th), 3)}`; }
+};
+
 const app = Viz.app({
   title: 'What do a·b and a×b actually measure?',
   subtitle: 'Both are areas. a·b is a number: the signed shadow of a on b, times |b|. a×b is an arrow: the parallelogram’s area, standing up by the right-hand rule.',
@@ -4977,6 +5059,8 @@ const app = Viz.app({
     bz: { label: String.raw`$b_z$ (up)`, min: -10, max: 10, step: 0.1, value: 0, optional: true },
     kmode: { type: 'toggle', label: 'f k×u mode (a = k̂, b = wind u)', value: false, optional: true },
     lat: { label: String.raw`latitude $\vartheta$ (f k×u)`, min: -90, max: 90, step: 1, value: 45, unit: '°', optional: true, help: 'Negative = southern hemisphere, where f < 0.' },
+    stretch: { label: 'stretch b', min: 0.5, max: 2, step: 0.05, value: 1, optional: true, fmt: v => '×' + fm(v, 3), help: 'Same direction, |b| times this factor: the shadow of a stays, a·b grows with |b|.' },
+    onA: { type: 'toggle', label: 'build the rectangle on a (b’s shadow × |a|)', value: false, optional: true },
     flat: { type: 'select', label: '2-D view', options: [['face', 'face-on'], ['comp', 'components']], value: 'face', display: 'chips', optional: true },
     t: { label: 'turn b by', min: 0, max: 360, step: 'any', value: 0, unit: '°', optional: true,
          fmt: v => Math.round(v) + '°' + (curS && !isK(curS) && isFinite(Q(curS).thd) ? ' · θ ' + Math.round(Q(curS).thd) + '°' : ''),
@@ -4991,7 +5075,7 @@ const app = Viz.app({
     { id: 'b', label: String.raw`$\mathbf b$`, value: s => norm(vecB(s)), fmt: (v, s) => vtxt(vecB(s)) },
     { id: 'theta', label: String.raw`angle $\theta$`, unit: '°', value: s => Q(s).thd },
     { id: 'dot', label: String.raw`$\mathbf a\cdot\mathbf b$ (a number)`, value: s => Q(s).d, tone: v => (v > 1e-12 ? 'pos' : v < -1e-12 ? 'neg' : '') },
-    { id: 'sproj', label: String.raw`shadow $\mathbf a\cdot\hat{\mathbf b}$`, value: s => Q(s).sp },
+    { id: 'sproj', label: 'shadow of a (a length)', value: s => Q(s).sp },
     { id: 'spba', label: String.raw`b's shadow on a`, value: s => Q(s).spBA },
     { id: 'cross', label: String.raw`$\mathbf a\times\mathbf b$ (an arrow)`, value: s => Q(s).area, fmt: (v, s) => vtxt(Q(s).c) },
     { id: 'area', label: String.raw`area $|\mathbf a\times\mathbf b|$`, value: s => Q(s).area },
@@ -5029,7 +5113,7 @@ const app = Viz.app({
             app.set({ insp: crossOn(s) ? 'cross' : 'dot' }); return true;
           }
           if (ev.type === 'pointermove' && dragB && v.pointer.down) {
-            const X = dragB.P.ix(px), Y = dragB.P.iy(py), b = add(scl(dragB.e1, X), scl(dragB.e2, Y)), r = x => Math.round(x * 10) / 10;
+            const X = dragB.P.ix(px), Y = dragB.P.iy(py), b = scl(add(scl(dragB.e1, X), scl(dragB.e2, Y)), 1 / (s.stretch || 1)), r = x => Math.round(x * 10) / 10;
             app.set({ bx: r(b[0]), by: r(b[1]), bz: r(b[2]), t: 0 }); return true;
           }
           if (ev.type === 'pointerup' || ev.type === 'pointercancel') dragB = null;
@@ -5101,13 +5185,15 @@ const app = Viz.app({
         const st = g.app.cfg.tour[g.app.step], turn = !!(st && st.turn);
         if (turn !== g.app.root.hasAttribute('data-vplturn')) { g.app.root.toggleAttribute('data-vplturn', turn); g.app.fit(); }
       }
+      const tval = g.app.root && g.app.root.querySelector('.viz-transport .viz-control-value');
+      if (tval) { const tw = g.app.cfg.params.t.fmt(s.t); if (tval.textContent !== tw) tval.textContent = tw; }
       const lab = g.app.root && g.app.root.querySelector('.viz-transport .viz-control-label');
       const want = isK(s) ? 'turn the wind by' : 'turn b by';
       if (lab && lab.textContent !== want) lab.textContent = want;
     }
   },
   onChange(s, key, app) {
-    if (['ax', 'ay', 'az', 'bx', 'by', 'bz', 'kmode', 'show', 'swap', 'hand'].indexOf(key) >= 0 && !refitQueued) {
+    if (['ax', 'ay', 'az', 'bx', 'by', 'bz', 'kmode', 'show', 'swap', 'hand', 'stretch', 'onA'].indexOf(key) >= 0 && !refitQueued) {
       refitQueued = true;                                                   // a preset / typed value moved the drawing: re-frame the camera
       requestAnimationFrame(() => { refitQueued = false; const SC = SCN(); if (SC && SC.refit && S3 && S3._vpl) { SC.update(S3, sceneState(app.state)); SC.refit(S3); } });
     }
@@ -5129,25 +5215,32 @@ const app = Viz.app({
   notes: s => reading(s),
   explore: {
     intro: String.raw`Drag the sliders, or drag the tip of <b class="c-orange">b</b> in the face-on view. <b class="c-teal">Teal</b> is $\mathbf a$, <b class="c-orange">orange</b> is $\mathbf b$; the teal (rose if negative) rectangle is $\mathbf a\cdot\mathbf b$, <b class="c-violet">violet</b> is the parallelogram and the arrow $\mathbf a\times\mathbf b$.`,
-    controls: ['ax', 'ay', 'bx', 'by', 'show', 'swap', 'hand', 'curl', 'cam', 'az', 'bz', 'kmode', 'lat', 'flat'],
+    controls: ['ax', 'ay', 'bx', 'by', 'show', 'stretch', 'onA', 'swap', 'hand', 'curl', 'cam', 'az', 'bz', 'kmode', 'lat', 'flat'],
     readouts: ['theta', 'dot', 'sproj', 'area', 'cross'],
     callouts: [{ kind: 'try', html: String.raw`Make $\mathbf a\cdot\mathbf b = 0$ without making either arrow zero. What angle did you need, and what happened to the area?` },
                { kind: 'watch', html: 'Press ▶: b turns round a. Watch the rectangle shrink to nothing at 90° and come back rose (negative) beyond it.' }]
   },
   tour: [
-    { title: 'Two arrows, one question', text: `Two arrows: <b class="c-teal">a</b> = ${LV('a')} and <b class="c-orange">b</b> = ${LV('b')}. What could it mean to multiply two <i>arrows</i>? There are two answers: one gives a number, the other a new arrow, and both are areas.${MM}`,
-      set: Object.assign({}, PDEF, { show: 'arrows', swap: false, hand: false, flat: 'face', showC: false, insp: null, cam: 'iso' }), play: false, readouts: ['a', 'b'], enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } },
-    { title: 'The shadow is not a·b (yet)', text: String.raw`Shine a light straight down onto b's line: a's <b class="c-teal">shadow</b> is ${LV('splen')}. That is not $\mathbf a\cdot\mathbf b$. It is $\mathbf a\cdot\hat{\mathbf b}$, the dot product with $\hat{\mathbf b} = \mathbf b/|\mathbf b|$, the length-1 arrow along b.${MM}`,
-      set: Object.assign({}, PDEF, { show: 'shadow', swap: false, hand: false, cam: 'faceOn' }), play: false, readouts: ['sproj', 'theta'], code: { id: 'py', lines: [6, 7] }, enter(app) { stepView(app, 'flat'); goCam(app, 'faceOn'); } },
-    { title: 'Shadow × |b| = a·b: a rectangle', text: String.raw`Stretch the shadow sideways by $|\mathbf b|$ = ${LV('nb')}: the rectangle's area, ${LV('sp')} × ${LV('nb')} = ${LV('dot')}, is $\mathbf a\cdot\mathbf b$. Components agree: ${LV('comp')}.${MM}`,
-      set: Object.assign({}, PDEF, { show: 'dot', swap: false, hand: false, cam: 'faceOn' }), play: false, derive: { id: 'D0A-PoC1', step: 9 },
-      callout: { kind: 'key', html: "Swap the roles: b's shadow on a, times |a|, gives the same number (Explain §3 has it with your values)." }, enter(app) { stepView(app, 'flat'); goCam(app, 'faceOn'); } },
+    { title: 'Two ways to multiply arrows, at a glance', text: String.raw`<b class="c-teal">a·b</b> = ${LV('dot')} is a <b>number</b>: how much a and b point the <i>same</i> way (the teal rectangle). <b class="c-violet">${LV('rn')}</b> = ${LV('r')} is an <b>arrow</b>: how much they point <i>different</i> ways, standing on the violet parallelogram.${MM}`,
+      set: Object.assign({}, PDEF, { show: 'both', swap: false, hand: false, flat: 'face', showC: false, insp: null, cam: 'iso' }), play: false,
+      callout: { kind: 'key', html: `<table class="vpl-cmp"><tr><th></th><th class="c-teal">a·b</th><th class="c-violet">a×b</th></tr><tr><td>answer</td><td>a number, ${LV('dot')}</td><td>an arrow, ${LV('r')}</td></tr><tr><td>asks</td><td>same way?</td><td>different ways, and which way the turn a→b faces</td></tr><tr><td>picture</td><td>rectangle: shadow × |b|</td><td>parallelogram; arrow ⟂ it</td></tr><tr><td>size</td><td>|a||b| cos θ = Σ aᵢbᵢ</td><td>|a||b| sin θ = area</td></tr><tr><td>parallel</td><td>biggest</td><td>0</td></tr><tr><td>at 90°</td><td>0</td><td>biggest</td></tr><tr><td>pointing apart</td><td>negative</td><td>shrinks again</td></tr></table>` },
+      enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } },
+    { title: 'The shadow is a length; a·b is a different number', text: String.raw`Parallel arrows: a's shadow on b is all of a, ${LV('splen')}. That is the projection, a <i>length</i>, as you'd expect. a·b is a different number: shadow × |b| = ${LV('sp')} × ${LV('nb')} = ${LV('dot')}. Drag <b>stretch b</b>: the shadow stays, a·b grows with |b|.${MM}`,
+      set: { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, stretch: 1, onA: false, show: 'dot', swap: false, hand: false, cam: 'faceOn' }, play: false, controls: ['stretch'], readouts: ['sproj', 'dot'],
+      callout: { kind: 'key', html: `Why × |b|? It treats a and b alike (b's shadow on a × |a| is the same number), it is the component sum ${LV('comp')}, and it is how work counts: a force of shadow N along a |b| m path. Shadow and a·b agree only if |b| = 1 (b shrunk to length 1).` },
+      enter(app) { stepView(app, 'flat'); goCam(app, 'faceOn'); } },
+    { title: 'Seeing a·b: the rectangle', text: String.raw`One side is the shadow of a on b (${LV('sp')}), the other |b| (${LV('nb')}): the area ${LV('dot')} is a·b. cos θ = ${LV('cos')} is the agreement score (1 same way, −1 opposite). Tick <b>build the rectangle on a</b>: b's shadow × |a| gives the same area.${MM}`,
+      set: Object.assign({}, PDEF, { show: 'dot', swap: false, hand: false, cam: 'faceOn' }), play: false, controls: ['onA'],
+      callout: { kind: 'key', html: `<table class="vpl-cmp"><tr><th>b is…</th><th>shadow of a</th><th>rectangle</th><th>a·b</th></tr><tr><td>parallel</td><td>+${LV('na')}</td><td>|a| by |b|</td><td>+${LV('ab')}</td></tr><tr><td>opposite</td><td>−${LV('na')}</td><td>same, negative side</td><td>${LV('mab')}</td></tr><tr><td>at 90°</td><td>0</td><td>none</td><td>0</td></tr></table>` },
+      enter(app) { stepView(app, 'flat'); goCam(app, 'faceOn'); } },
     { title: 'The sign: where the foot lands', text: String.raw`b turns (▶). Below 90°: shadow along b, $\mathbf a\cdot\mathbf b > 0$. At 90°: none. Beyond, the foot lands behind the start: the rectangle counts negative (rose), down to $-|\mathbf a||\mathbf b|$ = ${LV('mab')}.${MM}`,
       set: Object.assign({}, PDEF, { show: 'dot', swap: false, hand: false, cam: 'faceOn' }), play: true, turn: true, readouts: ['theta', 'dot'], code: { id: 'py', lines: [9, 9] }, enter(app) { stepView(app, 'flat'); goCam(app, 'faceOn'); if (reducedMotion()) app.play(false); } },
-    { title: 'The parallelogram', text: String.raw`a and b span a <b class="c-violet">parallelogram</b>: base $|\mathbf a|$ = ${LV('na')}, height $|\mathbf b|\sin\theta$ = ${LV('h')}, area ${LV('area')}. In 2-D, $a_xb_y - a_yb_x$ = ${LV('z2')} gives it with a sign, ${LV('z2sign')}.${MM}`,
+    { title: 'Seeing a×b: the parallelogram', text: String.raw`a and b span a <b class="c-violet">parallelogram</b>: base $|\mathbf a|$ = ${LV('na')}, height $|\mathbf b|\sin\theta$ = ${LV('h')}, area ${LV('area')}. sin θ = ${LV('sin')} is the turning score: 0 parallel, 1 at 90°. In 2-D, $a_xb_y - a_yb_x$ = ${LV('z2')}: ${LV('z2sign')}.${MM}`,
       set: Object.assign({}, PDEF, { show: 'cross', swap: false, hand: false, cam: 'iso' }), play: false, readouts: ['area', 'height'], eq: 'area2d', enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } },
-    { title: 'The answer points: right-hand rule', text: String.raw`$\mathbf a\times\mathbf b$ is an arrow at right angles to the parallelogram, as long as its area. Right hand: fingers along a, curl them toward b; the thumb gives ${LV('rn')} = ${LV('r')}. From its tip, the turn looks anticlockwise. Tick swap: the thumb flips.${MM}`,
-      set: Object.assign({}, PDEF, { show: 'cross', swap: false, hand: true, cam: 'hand' }), play: false, controls: ['swap', 'cam'], enter(app) { stepView(app, 'v3d'); goCam(app, 'hand'); animateCurl(app); } },
+    { title: 'The answer points: right-hand rule', text: String.raw`An area in 3-D faces some way, so $\mathbf a\times\mathbf b$ is an arrow at right angles to the parallelogram, as long as its area. Right hand: fingers along a, curl toward b; the thumb gives ${LV('rn')} = ${LV('r')}. Tick swap: the thumb flips.${MM}`,
+      set: Object.assign({}, PDEF, { show: 'cross', swap: false, hand: true, cam: 'hand' }), play: false, controls: ['swap', 'cam'],
+      callout: { kind: 'key', html: 'Like a spanner on a bolt: push along the handle and nothing turns; push at right angles and it turns most; the bolt moves along your thumb.' },
+      enter(app) { stepView(app, 'v3d'); goCam(app, 'hand'); animateCurl(app); } },
     { title: 'f k×u turns the wind', text: String.raw`Now a = $\hat{\mathbf k}$ (up) and b = a wind u = ${LV('b')} m/s. $\hat{\mathbf k}\times\mathbf u$ = ${LV('kxu')}: u turned 90° left. $f$ = ${LV('f')} s⁻¹ scales each component: $-f\,\hat{\mathbf k}\times\mathbf u$ pushes ${LV('side')} of u (${LV('hemi')}).${MM}`,
       set: Object.assign({}, PK, { show: 'cross', swap: false, hand: false, cam: 'iso' }), play: false, turn: true, eq: 'momentum', readouts: ['fkxu', 'Ti'], enter(app) { stepView(app, 'v3d'); goCam(app, 'iso'); } },
     { title: 'Your turn: predict', text: String.raw`Predict, then test. (1) Tick swap: where does the thumb point? (2) Drag the latitude below 0° (f k×u mode): which side of u is $-f\,\mathbf k\times\mathbf u$? (3) Make $\mathbf a\cdot\mathbf b$ negative with the same $|\mathbf a|$, $|\mathbf b|$.`,
@@ -5187,47 +5280,67 @@ const app = Viz.app({
     html: s => {
       const q = Q(s), A = nameA(s), B = nameB(s), W = Viz.work, K = isK(s), LN = (f, v, w) => W.line(f, '$' + v + '$', w);
       const reg = regime(q), na = q.na, nb = q.nb;
-      let h = W.step(1, 'What you are looking at') +
+      const cosT = na * nb > 0 ? q.d / (na * nb) : NaN, sinT = na * nb > 0 ? q.area / (na * nb) : NaN;
+      let h = W.step(1, 'Two ways to multiply arrows, at a glance') +
+        W.say(String.raw`Multiplying two numbers gives one number. Two <i>arrows</i> can be multiplied in two useful ways, and each answers a different question about how they sit relative to each other.`) +
+        W.table(['', 'a·b', 'a×b'], [
+          ['answer', 'a <b>number</b>, ' + fm(q.d, 3), 'an <b>arrow</b>, ' + vtxt(q.c)],
+          ['asks', 'same way?', 'different ways? which way?'],
+          ['picture', 'rectangle', 'parallelogram']]) +
+        W.table(['', 'a·b', 'a×b'], [
+          ['size', '|a||b| cos θ', '|a||b| sin θ'],
+          ['parallel', 'biggest', '0'],
+          ['at 90°', '0', 'biggest']]) +
+        LN(String.raw`$\cos\theta = \dfrac{\mathbf a\cdot\mathbf b}{|\mathbf a||\mathbf b|} = \dfrac{${tn(q.d)}}{${tn(na * nb)}}$`, tn(cosT, 3), 'the agreement score: 1 same way, 0 at right angles, −1 opposite') +
+        LN(String.raw`$\sin\theta = \dfrac{|\mathbf a\times\mathbf b|}{|\mathbf a||\mathbf b|} = \dfrac{${tn(q.area)}}{${tn(na * nb)}}$`, tn(sinT, 3), 'the turning score: 0 parallel, 1 at right angles') +
+        LN(String.raw`$(\mathbf a\cdot\mathbf b)^2 + |\mathbf a\times\mathbf b|^2 = ${tn(q.d * q.d)} + ${tn(q.area * q.area)}$`, tn(q.d * q.d + q.area * q.area) + String.raw` = (|\mathbf a||\mathbf b|)^2 = ${tn(na * na * nb * nb)}`, "Lagrange's identity (D0A-PoC2 step 6)") +
+        W.box(String.raw`agreement² + turning² = 1, i.e. $\cos^2\theta + \sin^2\theta = 1$: the two products split $|\mathbf a||\mathbf b|$ = ${fm(na * nb, 3)} into an <b>along</b> part (${fm(q.d, 3)}) and an <b>across</b> part (${fm(q.area, 3)})`);
+      h += W.step(2, 'What you are looking at') +
         W.say(String.raw`<b class="c-teal">Teal</b> is $\mathbf ${A}$, <b class="c-orange">orange</b> is $\mathbf ${B}$. ` + (K
           ? String.raw`In f k×u mode $\hat{\mathbf k}$ is the local "up" arrow (length 1) and $\mathbf u$ a horizontal wind in m/s. The axes are labelled E, N, U = east, north, up. <b class="c-violet">Solid violet</b> is $\hat{\mathbf k}\times\mathbf u$ (m/s); the <b class="c-violet">beaded light violet</b> arrow is the Coriolis term $-f\,\hat{\mathbf k}\times\mathbf u$, in m/s², drawn ×10⁴ so you can see it.`
-          : String.raw`The teal rectangle (rose and hatched when negative) is $\mathbf a\cdot\mathbf b$: a <b>number</b>, so it is drawn flat as an area, never as an arrow. The <b class="c-violet">violet</b> parallelogram, the curled arc from a to b and the violet arrow belong to $\mathbf a\times\mathbf b$: an <b>arrow</b>. In the face-on view ⊙ means "an arrow coming out of the screen at you" and ⊗ "going away from you". The axes are plain x, y, z here.`)) +
-        W.hint('On portrait phones only one 2-D view fits under the 3-D view; the walkthrough swaps them (step 4 shows the θ-curves). Each view has ⤢ (fill the window) at its top right.');
-      h += W.step(2, 'The shadow: a·b̂, the dot product with a length-1 arrow') +
-        LN(String.raw`$|\mathbf b| = \sqrt{${pm(q.b[0])}^2+${pm(q.b[1])}^2+${pm(q.b[2])}^2}$`, tn(nb), 'Pythagoras in 3-D') +
-        LN(String.raw`$\hat{\mathbf b} = \mathbf b/|\mathbf b|$`, vtex(q.bhat, 3), 'same direction as b, length 1') +
-        LN(String.raw`$\mathbf a\cdot\hat{\mathbf b} = ${pm(q.a[0])}\cdot${pm(q.bhat[0], 3)} + ${pm(q.a[1])}\cdot${pm(q.bhat[1], 3)} + ${pm(q.a[2])}\cdot${pm(q.bhat[2], 3)}$`, tn(q.sp), "the dot product with a length-1 arrow measures a's shadow") +
-        W.box(String.raw`shadow $= \mathbf a\cdot\hat{\mathbf b} = |\mathbf a|\cos\theta = \mathbf{${tn(q.sp)}}$, not $\mathbf a\cdot\mathbf b$`) +
-        W.say(String.raw`This is where a $\sqrt5$ comes from in the <b>parallel</b> preset: there the shadow is all of $\mathbf a$, $|\mathbf a| = \sqrt5 \approx 2.24$; $\mathbf a\cdot\mathbf b$ is that times $|\mathbf b|$.`);
-      h += W.step(3, 'a·b = shadow × |b|: the area of a rectangle') +
-        LN(String.raw`$\text{shadow}\times|\mathbf b| = ${tn(q.sp)}\times${tn(nb)}$`, tn(q.sp * nb), 'the rectangle: one side the shadow, the other |b|') +
+          : String.raw`The teal rectangle (rose and hatched when negative) is $\mathbf a\cdot\mathbf b$: a <b>number</b>, so it is drawn flat as an area, never as an arrow. The <b class="c-violet">violet</b> parallelogram, the curled arc from a to b and the violet arrow belong to $\mathbf a\times\mathbf b$: an <b>arrow</b>. In the face-on view ⊙ means "an arrow coming out of the screen at you" and ⊗ "going away from you". The gauges beside the face-on view show the agreement score cos θ and the turning score sin θ. The axes are plain x, y, z here.`)) +
+        W.hint('On portrait phones the walkthrough shows one view per step. Each view has ⤢ (fill the window) at its top right.');
+      h += W.step(3, 'The shadow is a length; a·b is a different number') +
+        W.say(String.raw`Shine a light straight down onto b's line. a's <b>shadow</b> (its projection on b) is a <i>length</i>: ${q.sp >= 0 ? fm(q.sp, 3) + ' long' : fm(-q.sp, 3) + ' long, pointing backwards'}. For parallel arrows the shadow is all of a, $|\mathbf a|$ = ${fm(na, 3)}. That picture is right. The dot product is a <i>different</i> number built from it:`) +
+        LN(String.raw`$\text{shadow} = |\mathbf a|\cos\theta = \dfrac{\mathbf a\cdot\mathbf b}{|\mathbf b|} = \dfrac{${tn(q.d)}}{${tn(nb)}}$`, tn(q.sp), "a's shadow on b, a length (0A.3)") +
+        LN(String.raw`$\mathbf a\cdot\mathbf b = \text{shadow}\times|\mathbf b| = ${tn(q.sp)}\times${tn(nb)}$`, tn(q.d), 'the dot product: the shadow, times the length of b') +
+        W.say(String.raw`Proof that it is not the shadow: <b>stretch b</b> (the slider; now ×${fm(s.stretch || 1, 3)}). b keeps its direction, so the shadow does not change, but a·b grows in step with |b|. Doubling b doubles every product $a_ib_i$, so the component sum doubles too.`) +
+        W.say(String.raw`Why the definition multiplies by |b|: it treats a and b alike (b's shadow on a, ${fm(q.spBA, 3)}, times |a|, ${fm(na, 3)}, gives the same ${fm(q.d, 3)}), and it is exactly the component sum $a_xb_x + a_yb_y + a_zb_z$. The shadow and a·b are equal only when |b| = 1: b shrunk to length 1, same direction (written $\hat{\mathbf b}$).`) +
+        W.box(String.raw`shadow = ${fm(q.sp, 3)} (a length) · a·b = shadow × |b| = ${fm(q.d, 3)} (a number)`);
+      const tbl = W.table(['b is …', 'shadow of a', 'rectangle', 'a·b'], [
+        ['parallel', '+' + fm(na, 3), '|a| by |b|', '+' + fm(na * nb, 3)],
+        ['opposite', '−' + fm(na, 3), 'flipped', fm(-na * nb, 3)],
+        ['perpendicular', '0', 'none', '0'],
+        ['yours', fm(q.sp, 3), fm(q.sp, 3) + '×' + fm(nb, 3), fm(q.d, 3)]], reg === 'par' ? 0 : reg === 'anti' ? 1 : reg === 'perp' ? 2 : 3);
+      h += W.step(4, 'Seeing a·b: a rectangle, an agreement score, a symmetry') +
+        W.say(String.raw`<b>The rectangle.</b> One side is the shadow of a on b, the other side is |b|. Its area, counted negative when the shadow points backwards, is a·b. Same direction: the biggest rectangle. Opposite: the same rectangle on the negative side. Perpendicular: it collapses to nothing.`) +
+        LN(String.raw`$\text{shadow}\times|\mathbf b| = ${tn(q.sp)}\times${tn(nb)}$`, tn(q.sp * nb), 'the rectangle in the pictures') +
         LN(String.raw`$a_xb_x + a_yb_y + a_zb_z = ${pm(q.a[0])}\cdot${pm(q.b[0])} + ${pm(q.a[1])}\cdot${pm(q.b[1])} + ${pm(q.a[2])}\cdot${pm(q.b[2])}$`, tn(q.d), 'the component recipe (K 2.2): the same number') +
-        LN(String.raw`$\dfrac{\mathbf a\cdot\mathbf b}{|\mathbf a|}\times|\mathbf a| = ${tn(q.spBA)}\times${tn(na)}$`, tn(q.spBA * na), "the other way round: b's shadow on a, times |a|") +
+        LN(String.raw`$\dfrac{\mathbf a\cdot\mathbf b}{|\mathbf a|}\times|\mathbf a| = ${tn(q.spBA)}\times${tn(na)}$`, tn(q.spBA * na), "the symmetry: b's shadow on a, times |a| (tick 'build it on a')") +
+        LN(String.raw`$\cos\theta = ${tn(q.d)}/${tn(na * nb)}$`, tn(cosT, 3), 'the agreement score on the gauge') +
+        tbl +
         W.box(String.raw`$\mathbf a\cdot\mathbf b = (|\mathbf a|\cos\theta)\,|\mathbf b| = \mathbf{${tn(q.d)}}$: the rectangle's signed area (0A.1)`) +
-        W.say(String.raw`<b>Like…</b> work: a force with ${fm(q.sp, 3)} N along a ${fm(nb, 3)} m path does ${fm(q.d, 3)} J. <b>Unlike…</b> work, our arrows have no units, and the rectangle is a picture of a number: it has no direction in space.`);
-      const tbl = W.table(['b is …', 'shadow', 'a·b = shadow × |b|'], [
-        ['perpendicular', '0', '0'], ['parallel', '+' + fm(na, 3), '+' + fm(na * nb, 3)],
-        ['anti-parallel', '−' + fm(na, 3), fm(-na * nb, 3)],
-        ['yours, ' + fm(q.thd, 3) + '°', fm(q.sp, 3), fm(q.d, 3)]], reg === 'perp' ? 0 : reg === 'par' ? 1 : reg === 'anti' ? 2 : 3);
-      h += W.step(4, 'Negative and zero: where the shadow’s foot lands') +
-        W.say(String.raw`Drop a line from a's tip at right angles onto b's line. The foot lands ${q.sp > 1e-9 ? 'ahead of the start, on the side b points to, so the shadow and a·b are positive' : q.sp < -1e-9 ? 'behind the start, on the side b points away from, so the shadow counts negative and so does a·b' : 'exactly on the start: no shadow, a·b = 0'}. With your |a| and |b|:`) + tbl +
+        W.say(String.raw`<b>Like…</b> work: a force of ${fm(q.sp, 3)} N along a ${fm(nb, 3)} m path does ${fm(q.d, 3)} J; only the part of the force along the path counts, and the longer the path the more work. Or walking a path in a wind: a tailwind helps (positive), a headwind costs (negative), a crosswind does neither (zero). <b>Unlike…</b> work, our arrows have no units, and the rectangle is a picture of a number: it has no direction in space.`);
+      h += W.step(5, 'Negative and zero: where the shadow’s foot lands') +
+        W.say(String.raw`Drop a line from a's tip at right angles onto b's line. The foot lands ${q.sp > 1e-9 ? 'ahead of the start, on the side b points to, so the shadow and a·b are positive' : q.sp < -1e-9 ? 'behind the start, on the side b points away from, so the shadow counts negative and so does a·b' : 'exactly on the start: no shadow, a·b = 0'}.`) +
         W.say('Anti-parallel is not "no shadow": a lies on b’s line itself, pointing backwards, so the whole of a is the shadow, with a minus sign.');
-      h += W.step(5, 'The cross product: a parallelogram') +
+      h += W.step(6, 'Seeing a×b: a parallelogram, a turning score, an arrow') +
+        W.say(String.raw`<b>The parallelogram.</b> Put a and b tail to tail and complete the four-sided shape. Its area is base × height: the base is |a|, the height is the part of b at right angles to a, $|\mathbf b|\sin\theta$. Parallel arrows give a flat shape with no area, so no arrow at all; perpendicular arrows give the biggest area.`) +
+        LN(String.raw`$\text{base}\times\text{height} = |\mathbf a|\times|\mathbf b|\sin\theta = ${tn(na)}\times${tn(q.h)}$`, tn(na * q.h), String.raw`(0A.2), $|\mathbf a\times\mathbf b| = |\mathbf a||\mathbf b|\sin\theta$`) +
+        LN(String.raw`$\sin\theta = ${tn(q.area)}/${tn(na * nb)}$`, tn(sinT, 3), 'the turning score on the violet gauge') +
+        LN(String.raw`$z:\ a_xb_y - a_yb_x = ${pm(q.a[0])}\cdot${pm(q.b[1])} - ${pm(q.a[1])}\cdot${pm(q.b[0])}$`, tn(q.c[2]), 'in 2-D this one number is the area with a sign: + when b is anticlockwise from a (seen from above)') +
         LN(String.raw`$x:\ a_yb_z - a_zb_y = ${pm(q.a[1])}\cdot${pm(q.b[2])} - ${pm(q.a[2])}\cdot${pm(q.b[1])}$`, tn(q.c[0]), '(K 2.20), first row') +
         LN(String.raw`$y:\ a_zb_x - a_xb_z = ${pm(q.a[2])}\cdot${pm(q.b[0])} - ${pm(q.a[0])}\cdot${pm(q.b[2])}$`, tn(q.c[1]), '') +
-        LN(String.raw`$z:\ a_xb_y - a_yb_x = ${pm(q.a[0])}\cdot${pm(q.b[1])} - ${pm(q.a[1])}\cdot${pm(q.b[0])}$`, tn(q.c[2]), 'in 2-D this one number is the signed area') +
-        LN(String.raw`$\text{base}\times\text{height} = |\mathbf a|\times|\mathbf b|\sin\theta = ${tn(na)}\times${tn(q.h)}$`, tn(na * q.h), String.raw`(0A.2), $|\mathbf a\times\mathbf b| = |\mathbf a||\mathbf b|\sin\theta$`) +
+        W.say(String.raw`<b>Why an arrow?</b> An area in 3-D has an orientation: which way it faces, and which way round you go from a to b. One arrow stores both: its length is the area, its direction is straight out of the plane, on the side from which the turn a → b looks anticlockwise.`) +
+        W.say(String.raw`<b>Like…</b> a spanner on a bolt (torque $\mathbf r\times\mathbf F$): push along the handle (parallel) and nothing turns; push at right angles and it turns most; the bolt moves along the thumb of your right hand. <b>Unlike…</b> a spanner, a×b is defined for any two arrows, with no force or lever needed.`) +
         W.box(String.raw`$\mathbf a\times\mathbf b = ${vtex(q.c)}$, length $\mathbf{${tn(q.area)}}$ = the area`);
-      h += W.step(6, 'Which way does a×b point? The right-hand rule') +
+      h += W.step(7, 'Which way does a×b point? The right-hand rule') +
         W.say(String.raw`Point the fingers of your <b>right</b> hand along the first arrow, then curl them toward the second through the smaller angle θ. Your thumb points along the product.`) +
         W.say(String.raw`Same rule another way: index finger along a, middle finger along b, thumb = a×b. Looking back down from the thumb's tip, the turn from first to second is anticlockwise. In 3-D: tick <i>right hand</i>, view from the <i>a×b tip</i>.`) +
         LN(String.raw`$\mathbf i\times\mathbf j$ (east × north)`, vtex(cross([1, 0, 0], [0, 1, 0]), 1) + String.raw` = \mathbf k`, 'check: fingers east, curl north, thumb up') +
         LN(String.raw`$\mathbf b\times\mathbf a = -(\mathbf a\times\mathbf b)$`, vtex(cross(q.b, q.a)), 'swap the order: the fingers curl the other way, the thumb flips') +
         LN(String.raw`$(\mathbf a\times\mathbf b)\cdot\mathbf a,\ (\mathbf a\times\mathbf b)\cdot\mathbf b$`, tn(dot(q.c, q.a)) + ',\\ ' + tn(dot(q.c, q.b)), 'at right angles to both arrows') +
         W.box(String.raw`you are showing $${q.swap ? String.raw`\mathbf b\times\mathbf a` : String.raw`\mathbf a\times\mathbf b`} = ${vtex(q.r)}$`);
-      h += W.step(7, 'Both together: an exact bookkeeping') +
-        LN(String.raw`$(\mathbf a\cdot\mathbf b)^2 + |\mathbf a\times\mathbf b|^2 = ${tn(q.d * q.d)} + ${tn(q.area * q.area)}$`, tn(q.d * q.d + q.area * q.area), "Lagrange's identity, D0A-PoC2 step 6") +
-        LN(String.raw`$|\mathbf a|^2|\mathbf b|^2 = ${tn(na * na)}\times${tn(nb * nb)}$`, tn(na * na * nb * nb), 'the same: cos² θ + sin² θ = 1') +
-        W.say(String.raw`The <i>both</i> chip shows the rectangle and the parallelogram together: the more of a lies along b, the bigger the rectangle and the flatter the parallelogram.`);
       const uE = K ? q.b : [8, 6, 0], latE = K ? s.lat : 45, fE = coriolisParameter(latE * D2R), kE = kCross(uE), cE = scl(kE, -fE), UE = norm(uE);
       h += W.step(8, 'What f k×u means') +
         W.say(K ? 'With your wind and latitude:' : 'Press the <b>f k×u</b> preset to see it; here with the preset’s wind u = (8, 6, 0) m/s at 45°N:') +
@@ -5253,17 +5366,17 @@ const app = Viz.app({
       start: { tex: String.raw`\mathbf a\cdot\mathbf b = a_1b_1+a_2b_2+a_3b_3`, plain: 'The recipe: multiply matching components and add, (K 2.2).' },
       plan: ['Build a triangle from $\\mathbf a$, $\\mathbf b$ and $\\mathbf a - \\mathbf b$.', 'Measure the third side two ways: geometry (law of cosines) and components (Pythagoras).', 'Set them equal and cancel.'],
       uses: [String.raw`Pythagoras in 3-D: $|\mathbf c|^2 = c_1^2+c_2^2+c_3^2$`, String.raw`law of cosines: $c^2 = a^2 + b^2 - 2ab\cos\theta$`, String.raw`$(x-y)^2 = x^2 - 2xy + y^2$`],
-      view: 'flat', set: Object.assign({}, PDEF, { show: 'shadow', swap: false, hand: false, showC: true, flat: 'face' }),
+      view: 'flat', set: { show: 'shadow', swap: false, hand: false, showC: true, flat: 'face', kmode: false, onA: false },
       steps: [
-        { did: 'Draw the third side', tex: String.raw`\mathbf c = \mathbf a - \mathbf b`, why: 'Head to tail, b + c = a. We want a triangle whose three sides we know; neither arrow may be zero, or θ has no meaning.', plain: 'c runs from the tip of b to the tip of a (dashed in the face-on view).' },
-        { did: 'Law of cosines on that triangle', tex: String.raw`|\mathbf a-\mathbf b|^2 = |\mathbf a|^2+|\mathbf b|^2-2|\mathbf a||\mathbf b|\cos\theta`, why: 'True for any triangle; θ is the angle between the sides a and b.', plain: 'The geometry route to the third side.' },
-        { did: 'The same side by Pythagoras', tex: String.raw`\begin{aligned}|\mathbf a-\mathbf b|^2 = {}&(a_1-b_1)^2+(a_2-b_2)^2\\&+(a_3-b_3)^2\end{aligned}`, why: 'A length squared is the sum of its squared components.', plain: 'The component route.' },
-        { did: 'Expand one bracket', tex: String.raw`(a_1-b_1)^2=a_1^2-2a_1b_1+b_1^2`, why: 'The (x − y)² rule; the brackets with 2 and 3 work the same way.', plain: 'Each bracket gives an a², a b², and a cross term.' },
-        { did: 'Expand all three and group', tex: String.raw`\begin{aligned}=\ &(a_1^2+a_2^2+a_3^2)+(b_1^2+b_2^2+b_3^2)\\&-2(a_1b_1+a_2b_2+a_3b_3)\end{aligned}`, why: 'Addition can be done in any order, so we collect like pieces.', plain: 'Squares of a, squares of b, and the mixed products.' },
+        { live: DLIVE.d1s1, did: 'Draw the third side', tex: String.raw`\mathbf c = \mathbf a - \mathbf b`, why: 'Head to tail, b + c = a. We want a triangle whose three sides we know; neither arrow may be zero, or θ has no meaning.', plain: 'c runs from the tip of b to the tip of a (dashed in the face-on view).' },
+        { live: DLIVE.d1s2, did: 'Law of cosines on that triangle', tex: String.raw`|\mathbf a-\mathbf b|^2 = |\mathbf a|^2+|\mathbf b|^2-2|\mathbf a||\mathbf b|\cos\theta`, why: 'True for any triangle; θ is the angle between the sides a and b.', plain: 'The geometry route to the third side.' },
+        { live: DLIVE.d1s3, did: 'The same side by Pythagoras', tex: String.raw`\begin{aligned}|\mathbf a-\mathbf b|^2 = {}&(a_1-b_1)^2+(a_2-b_2)^2\\&+(a_3-b_3)^2\end{aligned}`, why: 'A length squared is the sum of its squared components.', plain: 'The component route.' },
+        { live: DLIVE.d1s4, did: 'Expand one bracket', tex: String.raw`(a_1-b_1)^2=a_1^2-2a_1b_1+b_1^2`, why: 'The (x − y)² rule; the brackets with 2 and 3 work the same way.', plain: 'Each bracket gives an a², a b², and a cross term.' },
+        { live: DLIVE.d1s5, did: 'Expand all three and group', tex: String.raw`\begin{aligned}=\ &(a_1^2+a_2^2+a_3^2)+(b_1^2+b_2^2+b_3^2)\\&-2(a_1b_1+a_2b_2+a_3b_3)\end{aligned}`, why: 'Addition can be done in any order, so we collect like pieces.', plain: 'Squares of a, squares of b, and the mixed products.' },
         { did: 'Recognise the pieces', tex: String.raw`=|\mathbf a|^2+|\mathbf b|^2-2\,\mathbf a\cdot\mathbf b`, why: 'Pythagoras twice for the squares, and the component recipe for the mixed products.', plain: 'The mixed products are the dot product.',
           live: s => { const q = Q(s); return String.raw`${tn(q.na * q.na)} + ${tn(q.nb * q.nb)} - 2\times${tn(q.d)} = ${tn(q.na * q.na + q.nb * q.nb - 2 * q.d)}`; } },
-        { did: 'Set the two routes equal', tex: String.raw`\begin{aligned}&|\mathbf a|^2+|\mathbf b|^2-2\,\mathbf a\cdot\mathbf b\\&=|\mathbf a|^2+|\mathbf b|^2-2|\mathbf a||\mathbf b|\cos\theta\end{aligned}`, why: 'Both sides equal |a − b|² (steps 2 and 6).', plain: 'Same side, two descriptions.' },
-        { did: 'Cancel the squares', tex: String.raw`-2\,\mathbf a\cdot\mathbf b=-2|\mathbf a||\mathbf b|\cos\theta`, why: 'Subtract |a|² + |b|² from both sides.', plain: 'Only the mixed part was ever different.' },
+        { live: DLIVE.d1s7, did: 'Set the two routes equal', tex: String.raw`\begin{aligned}&|\mathbf a|^2+|\mathbf b|^2-2\,\mathbf a\cdot\mathbf b\\&=|\mathbf a|^2+|\mathbf b|^2-2|\mathbf a||\mathbf b|\cos\theta\end{aligned}`, why: 'Both sides equal |a − b|² (steps 2 and 6).', plain: 'Same side, two descriptions.' },
+        { live: DLIVE.d1s8, did: 'Cancel the squares', tex: String.raw`-2\,\mathbf a\cdot\mathbf b=-2|\mathbf a||\mathbf b|\cos\theta`, why: 'Subtract |a|² + |b|² from both sides.', plain: 'Only the mixed part was ever different.' },
         { did: 'Divide by −2', tex: String.raw`\mathbf a\cdot\mathbf b=|\mathbf a||\mathbf b|\cos\theta`, why: 'Allowed because −2 ≠ 0. This is our (0A.1).', plain: 'Component recipe = length × length × cos θ = (shadow) × |b|.',
           live: s => { const q = Q(s); return String.raw`${tn(q.d)} = ${tn(q.na)}\times${tn(q.nb)}\times\cos ${tn(q.thd)}^\circ`; }, watch: 'The bar beside the face-on view has height a·b; the dashed ticks are ±|a||b|.' }
       ],
@@ -5275,18 +5388,18 @@ const app = Viz.app({
       start: { tex: String.raw`\mathbf a\times\mathbf b=(a_2b_3-a_3b_2,\;a_3b_1-a_1b_3,\;a_1b_2-a_2b_1)`, plain: 'The cross product from components, (K 2.20).' },
       plan: ['Square the length.', "Spot Lagrange's identity.", String.raw`Use $\mathbf a\cdot\mathbf b = |\mathbf a||\mathbf b|\cos\theta$ (0A.1).`, 'Read it as base × height.'],
       uses: ['D0A-PoC1', String.raw`$\sin^2\theta + \cos^2\theta = 1$`, 'area of a parallelogram = base × perpendicular height'],
-      view: 'flat', set: Object.assign({}, PDEF, { show: 'cross', swap: false, hand: false, showC: false, flat: 'face' }),
+      view: 'flat', set: { show: 'cross', swap: false, hand: false, showC: false, flat: 'face', kmode: false },
       steps: [
-        { did: 'Write the components', tex: String.raw`\begin{aligned}\mathbf a\times\mathbf b=(&a_2b_3-a_3b_2,\\&a_3b_1-a_1b_3,\\&a_1b_2-a_2b_1)\end{aligned}`, why: 'The definition we start from, (K 2.20). We need 0 ≤ θ ≤ 180°, so sin θ ≥ 0.', plain: 'Three "criss-cross" differences.' },
-        { did: 'Square the length', tex: String.raw`\begin{aligned}|\mathbf a\times\mathbf b|^2=\ &(a_2b_3-a_3b_2)^2\\&+(a_3b_1-a_1b_3)^2\\&+(a_1b_2-a_2b_1)^2\end{aligned}`, why: 'Pythagoras: a length squared is the sum of squared components.', plain: 'Length² = sum of squared components.' },
-        { did: 'Expand the first bracket', tex: String.raw`(a_2b_3-a_3b_2)^2=a_2^2b_3^2-2a_2a_3b_2b_3+a_3^2b_2^2`, why: 'The (x − y)² rule, used with x = a₂b₃ and y = a₃b₂.', plain: 'Two "off-diagonal" squares and one mixed term.' },
-        { did: 'Collect all three', tex: String.raw`\begin{aligned}=\ &\textstyle\sum_{i\neq j}a_i^2b_j^2\\&-2(a_1a_2b_1b_2+a_2a_3b_2b_3+a_3a_1b_3b_1)\end{aligned}`, why: 'The other two brackets are the same with the indices cycled.', plain: 'Six squares aᵢ²bⱼ² with i ≠ j, minus the mixed terms.' },
-        { did: 'Add and subtract the diagonal squares', tex: String.raw`\begin{aligned}=\ &\Big(\textstyle\sum_{i,j}a_i^2b_j^2\Big)\\&-\Big(\textstyle\sum_i a_i^2b_i^2+2\sum_{i<j}a_ib_ia_jb_j\Big)\end{aligned}`, why: 'Adding a₁²b₁² + a₂²b₂² + a₃²b₃² and taking it away again adds zero; it completes both groups.', plain: 'Now each bracket is a famous product.' },
+        { live: DLIVE.d2s1, did: 'Write the components', tex: String.raw`\begin{aligned}\mathbf a\times\mathbf b=(&a_2b_3-a_3b_2,\\&a_3b_1-a_1b_3,\\&a_1b_2-a_2b_1)\end{aligned}`, why: 'The definition we start from, (K 2.20). We need 0 ≤ θ ≤ 180°, so sin θ ≥ 0.', plain: 'Three "criss-cross" differences.' },
+        { live: DLIVE.d2s2, did: 'Square the length', tex: String.raw`\begin{aligned}|\mathbf a\times\mathbf b|^2=\ &(a_2b_3-a_3b_2)^2\\&+(a_3b_1-a_1b_3)^2\\&+(a_1b_2-a_2b_1)^2\end{aligned}`, why: 'Pythagoras: a length squared is the sum of squared components.', plain: 'Length² = sum of squared components.' },
+        { live: DLIVE.d2s3, did: 'Expand the first bracket', tex: String.raw`(a_2b_3-a_3b_2)^2=a_2^2b_3^2-2a_2a_3b_2b_3+a_3^2b_2^2`, why: 'The (x − y)² rule, used with x = a₂b₃ and y = a₃b₂.', plain: 'Two "off-diagonal" squares and one mixed term.' },
+        { live: DLIVE.d2s4, did: 'Collect all three', tex: String.raw`\begin{aligned}=\ &\textstyle\sum_{i\neq j}a_i^2b_j^2\\&-2(a_1a_2b_1b_2+a_2a_3b_2b_3+a_3a_1b_3b_1)\end{aligned}`, why: 'The other two brackets are the same with the indices cycled.', plain: 'Six squares aᵢ²bⱼ² with i ≠ j, minus the mixed terms.' },
+        { live: DLIVE.d2s5, did: 'Add and subtract the diagonal squares', tex: String.raw`\begin{aligned}=\ &\Big(\textstyle\sum_{i,j}a_i^2b_j^2\Big)\\&-\Big(\textstyle\sum_i a_i^2b_i^2+2\sum_{i<j}a_ib_ia_jb_j\Big)\end{aligned}`, why: 'Adding a₁²b₁² + a₂²b₂² + a₃²b₃² and taking it away again adds zero; it completes both groups.', plain: 'Now each bracket is a famous product.' },
         { did: "Recognise them (Lagrange's identity)", tex: String.raw`|\mathbf a\times\mathbf b|^2=|\mathbf a|^2|\mathbf b|^2-(\mathbf a\cdot\mathbf b)^2`, why: '(Σaᵢ²)(Σbⱼ²) has all nine terms aᵢ²bⱼ²; (Σaᵢbᵢ)² is the three squares plus twice each pair.', plain: 'Area² + dot² = |a|²|b|².',
           live: s => { const q = Q(s); return String.raw`${tn(q.area * q.area)} = ${tn(q.na * q.na * q.nb * q.nb)} - ${tn(q.d * q.d)}`; } },
-        { did: 'Use D0A-PoC1', tex: String.raw`|\mathbf a\times\mathbf b|^2=|\mathbf a|^2|\mathbf b|^2-|\mathbf a|^2|\mathbf b|^2\cos^2\theta`, why: 'Square a·b = |a||b| cos θ (0A.1) and substitute it.', plain: 'Everything is now lengths and the angle.' },
-        { did: 'Factor', tex: String.raw`|\mathbf a\times\mathbf b|^2=|\mathbf a|^2|\mathbf b|^2(1-\cos^2\theta)`, why: '|a|²|b|² is a common factor of both terms.', plain: 'Only the bracket depends on the angle.' },
-        { did: 'Use sin² + cos² = 1, take the root', tex: String.raw`|\mathbf a\times\mathbf b|=|\mathbf a||\mathbf b|\sin\theta`, why: 'sin θ ≥ 0 on 0…180°, so the positive root is the right one.', plain: 'The length of a×b grows like sin θ.' },
+        { live: DLIVE.d2s7, did: 'Use D0A-PoC1', tex: String.raw`|\mathbf a\times\mathbf b|^2=|\mathbf a|^2|\mathbf b|^2-|\mathbf a|^2|\mathbf b|^2\cos^2\theta`, why: 'Square a·b = |a||b| cos θ (0A.1) and substitute it.', plain: 'Everything is now lengths and the angle.' },
+        { live: DLIVE.d2s8, did: 'Factor', tex: String.raw`|\mathbf a\times\mathbf b|^2=|\mathbf a|^2|\mathbf b|^2(1-\cos^2\theta)`, why: '|a|²|b|² is a common factor of both terms.', plain: 'Only the bracket depends on the angle.' },
+        { live: DLIVE.d2s9, did: 'Use sin² + cos² = 1, take the root', tex: String.raw`|\mathbf a\times\mathbf b|=|\mathbf a||\mathbf b|\sin\theta`, why: 'sin θ ≥ 0 on 0…180°, so the positive root is the right one.', plain: 'The length of a×b grows like sin θ.' },
         { did: 'Read it as base × height', tex: String.raw`\text{area}=|\mathbf a|\,(|\mathbf b|\sin\theta)=|\mathbf a\times\mathbf b|`, why: "A parallelogram's area is base × perpendicular height; the height is the part of b at right angles to a. This is our (0A.2).", plain: "The arrow's length is the area.",
           live: s => { const q = Q(s); return String.raw`${tn(q.na)}\times${tn(q.nb * Math.sin(q.th))} = ${tn(q.area)}`; }, watch: 'The violet parallelogram in the face-on view: base and height are marked, and its ⊙ label shows the same number.' }
       ],
@@ -5321,6 +5434,9 @@ print(T / 3600)              # turning period = {{Ti}} h`,
       live: s => { const q = Q(s), j = v => v.map(x => fm(x, 3).replace('−', '-')).join(', '); return { u: j(q.b), lat: fm(s.lat, 3), f: fm(q.f, 4), kxu: '[' + j(q.kxu) + ']', cor: '[' + j(q.cor) + ']', Ti: isFinite(q.Ti) ? fm(q.Ti / 3600, 4) : 'inf (f = 0)' }; } }
   ],
   check: [
+    { q: 'Step 2: drag stretch b to ×2 with the parallel arrows. What happens to the shadow of a, and to a·b?', a: String.raw`The shadow stays √5 ≈ 2.24: b only got longer, its direction did not change, so a casts the same shadow. a·b doubles from 10 to 20, because it is shadow × |b| and |b| doubled (the component sum: 2·8 + 1·4 = 20). So a·b cannot be the shadow.`, set: { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, show: 'dot', stretch: 2 } },
+    { q: 'Parallel arrows: why is a×b = 0, while a·b is as big as it can be?', a: 'The parallelogram of two parallel arrows is flat: its height (the part of b at right angles to a) is 0, so its area, and with it the length of a×b, is 0. There is no turning from a to b, so no direction to point either. a·b is biggest because all of a lies along b (cos 0° = 1).', set: { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, show: 'both', stretch: 1 } },
+    { q: 'Tick "build the rectangle on a". Why is the area the same?', a: "Now the rectangle is b's shadow on a times |a|. Both are |a||b| cos θ: the same number, read from the other arrow's side. The dot product does not care about the order.", set: Object.assign({}, PDEF, { show: 'dot', onA: true }) },
     { q: 'Press the parallel preset. The shadow of a on b is a itself, √5 ≈ 2.24 long. So why is a·b = 10 and not √5?', a: String.raw`Because the dot product is the shadow <i>times</i> $|\mathbf b|$: $2.24 \times 4.47 = 10$. The √5 is $\mathbf a\cdot\hat{\mathbf b}$, the dot product with the length-1 arrow $\hat{\mathbf b} = \mathbf b/|\mathbf b|$.`, set: PRESETS[2].set },
     { q: 'Press anti-parallel. It looks as if there is no shadow, so why is a·b = −10 and not 0?', a: 'The shadow is all of a: a lies on b’s line, pointing backwards, so its foot lands at −2.24 along b. a·b = −2.24 × 4.47 = −10. A zero shadow needs perpendicular arrows.', set: PRESETS[3].set },
     { q: 'Tick swap (b×a) with the right hand on. Which way does the thumb point, and what is b×a?', a: String.raw`Down: the fingers now start along b and curl toward a, the other way round, so the thumb flips. $\mathbf b\times\mathbf a = -(\mathbf a\times\mathbf b) = (0, 0, -6)$. The dot product does not change: $\mathbf b\cdot\mathbf a = \mathbf a\cdot\mathbf b = 8$.`, set: Object.assign({}, PRESETS[5].set, { swap: true }) },
@@ -5439,6 +5555,33 @@ print(T / 3600)              # turning period = {{Ti}} h`,
       const s8 = app.cfg.tour[7].set || {};
       rows.push({ name: 'step 8 opens in maths mode with the hand and both products', js: !s8.kmode && s8.hand && s8.show === 'both' ? 1 : 0, expect: 1 });
     }
+    /* round 2: every panel shows the chosen vectors (3-D scene = face-on = tour text = derivation line) */
+    {
+      const keep = Object.assign({}, app.state), rr = Viz.rng ? Viz.rng(11) : Math.random;
+      for (let k = 0; k < 3; k++) {
+        const v = () => Math.round((rr() * 8 - 4) * 10) / 10;
+        app.set({ ax: v(), ay: v(), az: v(), bx: v(), by: v(), bz: v(), t: 0, kmode: false, stretch: 1, onA: false });
+        const s1 = app.state, a1 = vecA(s1), b1 = vecB(s1), G = faceGeom(s1), lv = liveValues(s1);
+        if (SCN()) { const d = SCN().describe(sceneState(s1)); rows.push({ name: `consistency ${k + 1}: 3-D a, b = chosen vectors`, js: norm(sub(d.a, a1)) + norm(sub(d.b, b1)), expect: 0, atol: 1e-12 }); }
+        rows.push({ name: `consistency ${k + 1}: face-on |a|, |b|, a·b = chosen vectors`, js: Math.abs(Math.hypot(...G.A2) - norm(a1)) + Math.abs(Math.hypot(...G.B2) - norm(b1)) + Math.abs(G.A2[0] * G.B2[0] + G.A2[1] * G.B2[1] - dot(a1, b1)), expect: 0, atol: 1e-9 });
+        rows.push({ name: `consistency ${k + 1}: tour text vectors = chosen vectors`, js: lv.a === vtxt(a1) && lv.b === vtxt(b1) ? 1 : 0, expect: 1 });
+        const span = app.root && app.root.querySelector('[data-vpl="a"]');
+        if (span) rows.push({ name: `consistency ${k + 1}: the tour text on screen shows a`, js: span.textContent === vtxt(a1) ? 1 : 0, expect: 1 });
+        rows.push({ name: `consistency ${k + 1}: derivation live line uses the chosen vectors (c = a − b)`, js: DLIVE.d1s1(s1) === String.raw`\mathbf c = ${vtex(sub(a1, b1), 3)}` ? 1 : 0, expect: 1 });
+      }
+      app.set(keep);
+    }
+    rows.push({ name: 'derivations: every step has a live line with the current numbers', js: app.cfg.derivations.every(d => d.steps.every(st => typeof st.live === 'function')) ? 1 : 0, expect: 1 });
+    rows.push({ name: 'derivations do not replace the chosen vectors', js: app.cfg.derivations.some(d => d.set && ('ax' in d.set || 'bx' in d.set)) ? 1 : 0, expect: 0 });
+    {
+      const sp = Object.assign({}, st, { ax: 2, ay: 1, az: 0, bx: 4, by: 2, bz: 0, t: 0, kmode: false, stretch: 2, onA: false }), qs = Q(sp);
+      rows.push({ name: 'stretch b ×2 (parallel): the shadow stays √5', js: qs.sp, expect: Math.sqrt(5), rtol: 1e-12 });
+      rows.push({ name: 'stretch b ×2 (parallel): a·b doubles to 20', js: qs.d, py: V + 'dot([2, 1, 0], [8, 4, 0])', rtol: 1e-12 });
+      const so = Object.assign({}, st, PDEF, { onA: true }), Go = faceGeom(so);
+      rows.push({ name: "build on a: face-on rectangle area = b's shadow × |a| = a·b = 8", js: Go.area, expect: 8, rtol: 1e-12 });
+      rows.push({ name: 'build on a: its long side is |a|', js: Math.hypot(...Go.S2), expect: Math.sqrt(5), rtol: 1e-12 });
+      if (SCN()) rows.push({ name: 'build on a: 3-D rectangle (dotRect(b, a)) area = a·b', js: SCN().dotRect([2, 4, 0], [2, 1, 0]).area, expect: 8, rtol: 1e-12 });
+    }
     /* adapter rows (the scene draws the TURNED b; f k×u mode follows kmode) */
     const ss = sceneState(st);
     rows.push({ name: 'adapter: scene b = turned vecB(state)', js: norm(sub([ss.bx, ss.by, ss.bz], vecB(st))), expect: 0, atol: 1e-15 });
@@ -5467,8 +5610,8 @@ function hudText(s, small) {
     : 'E, N, U = east, north, up · <span class="c-orange">u</span> wind (m/s) · <span class="c-teal">k̂</span> up, length 1 · <span class="c-violet">k×u</span> solid, 90° left · <span class="c-violet">−f k×u</span> beaded, ×10⁴, m/s²';
   if (s.hand && crossOn(s) && q.area > 1e-12 * q.na * q.nb) return small ? 'thumb = ' + q.rn : 'from the tip of ' + q.rn + ', ' + (q.swap ? 'b → a' : 'a → b') + ' turns anticlockwise';
   if (s.hand && crossOn(s)) return 'parallel: no turning, no thumb';
-  if (s.show === 'shadow') return small ? 'shadow = a·b̂' : 'shadow = a·b̂ (b̂ = b/|b|, length 1)';
-  if (s.show === 'dot') return small ? 'a·b: a number' : 'a·b is a number: the rectangle’s signed area';
+  if (s.show === 'shadow') return small ? 'shadow: a length' : 'shadow of a on b = |a| cos θ: a length, not yet a·b';
+  if (s.show === 'dot') return small ? 'a·b: a number' : (s.onA ? 'built on a: b’s shadow × |a|, the same area' : 'a·b is a number: the rectangle’s signed area');
   if (s.show === 'cross') return small ? 'a×b: an arrow' : 'a×b is an arrow ⟂ the parallelogram, length = area';
   if (s.show === 'both') return small ? '(a·b)² + |a×b|² = |a|²|b|²' : 'compare: (a·b)² + |a×b|² = |a|²|b|²';
   return '';

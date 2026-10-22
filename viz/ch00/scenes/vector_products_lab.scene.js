@@ -160,7 +160,8 @@
     var hand = !!s.hand && !K && crossOn, curl = s.curl === undefined ? 1 : clamp(+s.curl, 0, 1);
     var lat = (s.lat === undefined ? 45 : +s.lat) * D2R, f = coriolis_parameter(lat), kxu = k_cross(b);
     var ghost = K ? scl(kxu, -f * GHOST_SCALE) : [0, 0, 0];
-    var R = nb > 0 ? dotRect(a, b) : null, d0 = dot(a, b), th = angle_between(a, b);
+    var onA = !!s.onA && !K, src = onA ? b : a;
+    var R = (onA ? na > 0 : nb > 0) ? (onA ? dotRect(b, a) : dotRect(a, b)) : null, d0 = dot(a, b), th = angle_between(a, b);
     var pts = [[0, 0, 0], a, b];
     if (K) {
       var M = Math.max(nb, norm(ghost)) * 1.06;
@@ -188,11 +189,11 @@
     var d = { a: a, b: b, K: K, show: show, swap: swap, first: first, second: second, nmA: nmA, nmB: nmB, na: na, nb: nb,
       cr: cr, area: area, deg: deg, dotOn: dotOn, rectOn: rectOn, crossOn: crossOn, hand: hand, curl: curl, pose: pose,
       lat: lat, f: f, kxu: kxu, ghost: ghost, R: R, dot: d0, th: th, pts: pts, radius: radius, G2: G2, hs: hs, triAt: triAt, TL: TL,
-      handPts: handPts, fade: s.cam === 'tip', dark: isDark() };
+      handPts: handPts, fade: s.cam === 'tip', dark: isDark(), onA: onA, src: src };
     d.tags = tagItems(d);
     d.keys = {
       grid: [G2, K, radius.toFixed(3), TA.toFixed(3)].join('|'),
-      dotGlyph: [a, b, dotOn, rectOn, radius.toFixed(3)].join('|'),
+      dotGlyph: [a, b, dotOn, rectOn, onA, radius.toFixed(3)].join('|'),
       crossGlyph: [first, second, crossOn, K, radius.toFixed(3)].join('|'),
       hand: [first, second, hand, curl.toFixed(4), s.cam === 'tip'].join('|')
     };
@@ -222,7 +223,8 @@
       if (d.rectOn) {
         var cen = scl(add(R.foot, R.side), 0.5);
         var txt = Math.abs(R.sp) < 1e-9 ? 'a·b = 0: no shadow, no rectangle'
-          : 'a·b = shadow × |b| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot);
+          : d.onA ? 'b·a = shadow of b on a × |a| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot)
+          : 'a·b = shadow of a × |b| = ' + fmt(R.sp) + ' × ' + fmt(R.long) + ' = ' + fmt(d.dot);
         it.push({ at: cen, text: txt, color: d.dot < 0 ? ROSE : TEAL, priority: 2, short: 'a·b = ' + fmt(d.dot) });
       } else {
         it.push({ at: add(scl(R.foot, 0.55), scl(R.e, 0.45)), text: 'shadow ' + fmt(R.sp), color: R.sp < 0 ? ROSE : TEAL, priority: 2, short: fmt(R.sp) });
@@ -372,9 +374,9 @@
         var off = scl(R.e, rad * 3.6);
         g.add(new T.Mesh(mergeGeos(T, [cylGeo(T, off, add(R.foot, off), rad * 1.35, 10), sphGeo(T, add(R.foot, off), rad * 1.8)]), lambert(T, col)));
       }
-      var da = sub(d.a, R.foot);
+      var da = sub(d.src, R.foot);
       if (norm(da) > 1e-6) {
-        g.add(line(T, [d.a, R.foot], textColor(), { dash: [0.12, 0.09], opacity: 0.8 }));
+        g.add(line(T, [d.src, R.foot], textColor(), { dash: [0.12, 0.09], opacity: 0.8 }));
         var t = Math.min(0.28, 0.25 * norm(da), 0.25 * Math.max(Math.abs(R.sp), 0.4)), u1 = scl(R.bh, R.sp >= 0 ? -1 : 1), u2 = unit(da);
         g.add(line(T, [add(R.foot, scl(u1, t)), add(add(R.foot, scl(u1, t)), scl(u2, t)), add(R.foot, scl(u2, t))], textColor(), { opacity: 0.9 }));
       }
@@ -505,6 +507,13 @@
         provenance: { kind: 'computed', text: 'vectors.k_cross · frames.coriolis_parameter' } }));
       S.add(Viz3D.labels(d.tags, { id: 'tags' }));
       S.add(Viz3D.cameraPresets(cameraPresetsFor(d, null), { id: 'cams', tween: 700, reducedMotion: 'cut' }));
+      S.on('contextrestored', function () {
+        var V = S._vpl; if (!V) return;
+        V.key = ''; V.ck = ''; V.axk = ''; V.tgk = '';
+        update(S, V.state); attach(S);
+        if (S.presets[V.cam]) S.goto(V.cam, 0);
+        S.render();
+      });
       S.on('frame', function () {
         if (S.controls && !S.controls._vplHooked) {                    // a real drag: keep the user's camera on resize
           S.controls._vplHooked = true;
