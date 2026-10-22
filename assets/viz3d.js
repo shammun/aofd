@@ -221,11 +221,19 @@
     var down = null;
     canvas.addEventListener('pointerdown', function (e) { down = [e.clientX, e.clientY]; });
     canvas.addEventListener('pointerup', function (e) { if (down && Math.abs(e.clientX - down[0]) + Math.abs(e.clientY - down[1]) < 5) { var hit = S.pick(e); if (hit) { S.emit('pick', hit); if (isFn(o.onPick)) o.onPick(hit, e); } } down = null; });
-    canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); S.lost = true; S.paused.hidden = false; S.emit('contextlost'); });
-    canvas.addEventListener('webglcontextrestored', function () { S.lost = false; S.paused.hidden = true; S._rebuild(); S.renderNow(); S.emit('contextrestored'); });
+    /* A context lost by the browser / GPU driver (not by forceContextLoss) is often never handed back, so a tap — and an
+       automatic retry 1.5 s later — throws the dead canvas away and builds a fresh one (AOFD, PoC A user report 2026-10-21). */
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault(); if (canvas._v3dTearing || S.canvas !== canvas) return;
+      S.lost = true; S.paused.hidden = false; S.emit('contextlost');
+      clearTimeout(S._autoRestore);
+      var now = Date.now(); S._lossTimes = (S._lossTimes || []).filter(function (t) { return now - t < 60000; }); S._lossTimes.push(now);
+      if (S._lossTimes.length <= 3 && !S._disposed) S._autoRestore = setTimeout(function () { if (S.lost && S.canvas === canvas) S._recreate(); }, 1500);
+    });
+    canvas.addEventListener('webglcontextrestored', function () { if (S.canvas !== canvas) return; clearTimeout(S._autoRestore); S.lost = false; S.paused.hidden = true; S._rebuild(); S.renderNow(); S.emit('contextrestored'); });
     if ('ResizeObserver' in global) { S._ro = new ResizeObserver(function () { S.render(); }); S._ro.observe(S.holder); }
     if ('MutationObserver' in global) { S._mo = new MutationObserver(function () { S._theme(); }); S._mo.observe(doc.documentElement, { attributes: true, attributeFilter: ['data-theme'] }); }
-    S.active = true;
+    S.active = true; S.lost = false; S.paused.hidden = true;     // a fresh canvas is never "paused"
     S.layers.forEach(function (L) { S._build(L); });
     S._decor();
     S.renderNow();
@@ -242,6 +250,7 @@
     S.active = false;
     if (S._ro) S._ro.disconnect(); if (S._mo) S._mo.disconnect();
     S.controls.dispose(); S.renderer.renderLists.dispose(); S.renderer.dispose();
+    S.canvas._v3dTearing = true;          // our own release: its webglcontextlost must not show "3-D paused"
     try { S.renderer.forceContextLoss(); } catch (e) { /* already lost */ }
     if (S.canvas.parentNode) S.canvas.parentNode.removeChild(S.canvas);
     if (S.css2d.domElement.parentNode) S.css2d.domElement.parentNode.removeChild(S.css2d.domElement);
@@ -383,7 +392,20 @@
     return { stop: function () { S.loopStop(); }, time: function () { return t; }, reset: function (t0) { t = t0 || 0; acc = 0; } };
   };
   SP.loopStop = function () { if (this._loop) global.cancelAnimationFrame(this._loop); this._loop = 0; };
-  SP.restore = function () { var S = this; if (S.renderer && S.lost) { try { S.renderer.forceContextRestore(); } catch (e) { /* ignore */ } } };
+  /** Tap on "3-D paused": always rebuild on a fresh canvas (forceContextRestore only revives a context WE lost on purpose). */
+  SP.restore = function () { var S = this; if (S.lost || (!S.active && !S.fallback && !S._disposed)) S._recreate(); };
+  SP._recreate = function () {
+    var S = this; if (S._disposed || S.fallback) return;
+    clearTimeout(S._autoRestore);
+    if (S.renderer) {
+      S._camPos = S.camera.position.toArray(); S._camTarget = S.controls.target.toArray();
+      S.layers.forEach(function (L) { disposeObj(L.obj); L.obj = null; });
+      S._teardownGL();
+    }
+    S.lost = false; S.paused.hidden = true;
+    try { S._createGL(); } catch (e) { console.warn('viz3d: could not rebuild the 3-D view, using the canvas projector', e); S._toFallback('WebGL could not be restarted'); return; }
+    S.emit('contextrestored');
+  };
   /** Dispose everything; returns renderer.info.memory measured after the layers were freed (audit: must be 0, 0). */
   SP.dispose = function () {
     var S = this; S.loopStop(); S._disposed = true;
