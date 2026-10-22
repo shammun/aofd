@@ -26,13 +26,27 @@
     "updated": "2026-10-21",
     "s11_poc": "awaiting user verdict",
     "s12_repos": "aofd created + Pages (early, user request); aofd-media not yet",
-    "awaiting_user": [
-      "summary",
-      "open",
-      "questions",
-      "optional_cleanup",
-      "after_approval"
-    ]
+    "awaiting_user": {
+      "summary": "Setup §12 steps 1-11 done (step 12 done early: shammun/aofd + Pages). PoC A-G built; A, B, C, D, F, G passed their reviews; E needs the user's Colab run. Nothing in Chapter 0 may start until the user answers.",
+      "open": {
+        "A": "viz/ch00/vector_products_lab.html — 3-D dot/cross explainer (Kundu format?)",
+        "B": "templates/viz_example_globe.html — Coriolis on a rotating globe",
+        "C": "outputs/ch21/fig_21_23.png (+ reading card in figs/ch21/fig_21_23.py) — Southern Ocean map from real data",
+        "D": "movies/out/poc/index.html — 20-s narrated clip (voice af_bella 1.0, pace, captions)",
+        "E": "https://colab.research.google.com/github/shammun/aofd/blob/main/notebooks/poc_colab_smoke_colab.ipynb — Runtime > Run all, must run with no keys",
+        "F": "scenes/ch00/the_500hPa_surface.html — standalone 3-D scene, 8-card tour",
+        "G": "notebooks/poc_ch00a_dot.ipynb — Chapter 0A dot-product block in the informal voice"
+      },
+      "questions": [
+        "1. The user has said they have detailed feedback, corrections and improvement suggestions for ALL of PoC A-G. Invite them to give it item by item (A..G, plus voice/look/depth in general); collect it into reports/ch00_poc_user_feedback.md, turn it into a fix plan per owning agent and agree the plan with the user before running fixes; re-run the gates; then ask for the final verdict.",
+        "3. PoC D is a test clip: keep it local (default), or publish it, which needs `! gh repo create shammun/aofd-media --public` first?"
+      ],
+      "optional_cleanup": [
+        "Delete G:/Geophysical Fluid Dynamics/aofd-data/scratch/colab_sim/ (1.1 GB) and scratch/movies/poc/ (12 MB) — the session may not delete them",
+        "! .venv\\Scripts\\python.exe -m pip cache purge   (7.3 GB pip cache on C:)"
+      ],
+      "after_approval": "record the verdict in setup.poc + knowledge/*_patterns.md, apply fixes, release v0.3.1 if approved, set setup.s11_poc = 'approved', then /do-chapter 0"
+    }
   },
   "chapters": {
     "ch00": {
