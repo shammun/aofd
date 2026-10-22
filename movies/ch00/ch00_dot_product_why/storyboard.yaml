@@ -1,0 +1,333 @@
+# Chapter 0A movie, made NOW at the user's explicit request (feedback U-A.17, reports/ch00_poc_user_feedback.md):
+# "Why is a·b the shadow of a on b TIMES |b|, not just the shadow? What do we gain?"
+# USER OVERRIDE (2026-10-22): made before the Chapter-0 batch-1 movies (M0-1..M0-3, Q12) and before notebook: pass;
+# Chapter-0 curation does not exist yet, so the concept id is the PoC id C0A-PoC1 (remap when analysis/ch00_curation.md
+# exists). See movies/ch00/plan.md.
+# Scene boundaries are the MEASURED Kokoro narration (tools/tts.py, af_bella x1.0, 2026-10-22, 36 sentences, 168.975 s
+# audio, self-check diff 0.0 ms, -16.46 LUFS, TP -1.50 dBTP, run on the audio text with the lexicon_additions below
+# applied by hand; output in the session scratchpad, not the repo). The last 1.025 s (168.975 -> 170.0) is a silent
+# hold on the end card. The motion-builder re-runs tools/tts.py after the lexicon is updated and takes the final cut
+# points from timing.json.
+# Colour contract for the whole movie (house palette movies/src/house/palette.tsx): the FIRST vector of every pair is
+# teal HOUSE.glyphA #2aa198 (a, the force F, the wind u), the SECOND is orange HOUSE.glyphB #e8833a (b, the path d,
+# the gradient grad T, the unit arrows x-hat / k-hat). A shadow takes the colour of the arrow that CASTS it and lies on
+# the other arrow's line. Products (scalars) are NEVER arrows: they are a number, a horizontal number-line gauge, or the
+# "product rectangle" (shadow x other length, drawn on the other arrow's line), neutral ink #e8ecf4 at 18 % fill with a
+# solid outline when positive, rose #d9667f hatched + dashed outline when negative. Every drawn object carries a label.
+id: ch00_dot_product_why
+title: "Why times the other length? What the dot product really measures"
+concepts: [C0A-PoC1]          # dot product (PoC A/G id); provisional until Chapter-0 curation exists
+target_duration_s: 170
+fps: 30
+size: [1920, 1080]
+style: house-dark-v1
+audio: {voice: af_bella, speed: 1.0, music: none, loudness_lufs: -16}
+measured_narration_s: 168.975
+measured_frames: 5070
+words: 385                    # 385 words / 168.975 s = 136.7 words per minute (limit 150)
+captions_measured: {cues: 36, max_chars_per_line: 42, max_cps: 15.4, cue_seconds: [2.25, 6.15]}
+lexicon_additions:
+  # Kokoro reads a lone "a" as the article (phoneme ɐ) — also "A dot b" at the start of a clause — and the respelling
+  # "ay" as "eye" (aɪ). Checked with KPipeline(model=False) phonemes on 2026-10-22. These three keys contain spaces, so
+  # tools/tts.py applies them as exact, case-sensitive substrings (audio text only; captions keep the script text).
+  # "[A](/ˈA/)" is misaki's inline phoneme override (ˈA = the letter name "ay", eɪ). The script only ever speaks the
+  # vector a inside these phrases.
+  symbols:
+    "a dot b": "[A](/ˈA/) dot b"
+    "Arrow a ": "Arrow A "
+    "arrow a ": "arrow A "
+  # side effect to know: "arrow a " also matches inside "narrow a " (pronounced the same way, so harmless).
+  checked_ok_without_entries: ["b (bˈi)", "grad T (ɡɹˈæd tˈi)", "x hat", "k hat", "u (jˈu)", "root ten", "kelvin"]
+
+scenes:
+  - id: s1_hook
+    t: [0.0, 11.975]
+    visual: >-
+      Frame 0: dark plane with a faint square grid (1 unit per square, x right, y up; world window x -4..7, y -5.5..4.5,
+      left 62 % of the frame), origin O marked. The question is already on screen top-left in the TitleCard style,
+      two lines: "The shadow of a on b looks like the answer." / "So why does a·b multiply it by |b|?". Teal arrow a =
+      (5, 1) and orange arrow b = (1, 3) grow from O in the first 1.0 s, labelled "a" and "b" at their tips. At 2.0 s a
+      dashed drop-line falls from a's tip at right angles onto b's line (right-angle tick at the foot (0.8, 2.4)); the
+      teal shadow segment O -> (0.8, 2.4) grows along b's line, label "shadow of a on b". At 6.1 s (second sentence) the
+      text "× |b| ?" fades in beside the shadow label, and a short orange bracket along b labelled "|b|" pulses once
+      (opacity 0.6 -> 1 -> 0.6 over 1 s; no flashes). Nothing else moves. No result arrow is drawn for a·b.
+    voiceover: "Here's a puzzle: the shadow of one arrow on another looks like the natural answer. So why does the dot product multiply that shadow by the other arrow's length?"
+    on_screen_eq: null
+    physics_source:
+      fn: fluidpy.geo.vectors.projection
+      params: {a: [5, 1], b: [1, 3]}
+      outputs: {shadow_vector: [0.800, 2.400], shadow_length: 2.530}
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_projection_V1_remainder_perpendicular_and_idempotent,
+        ::test_scalar_projection_V1_and_V7
+    exaggeration: []
+
+  - id: s2_two_faces
+    t: [11.975, 33.075]
+    visual: >-
+      Same plane, a and b stay. Right 38 % becomes an equation panel. (i) 11.98 s: component chips appear by the arrows,
+      "a = (5, 1)" teal and "b = (1, 3)" orange, with dotted component legs (a: 5 along x, 1 along y; b: 1 along x, 3
+      along y). (ii) 16.3 s: EqLine (K 2.2) appears, then a live line below it with matching parts paired by colour
+      boxes: "5·1 + 1·3 + 0·0 = 8" (third pair greyed: "flat picture, z-parts are 0"); the result 8 drops onto a
+      horizontal number-line gauge (range -16.1..+16.1, tick every 4, labelled "a·b"), marker at +8.000. (iii) 22.8 s:
+      the angle arc θ between a and b is drawn with readout "θ = 60.3°"; length brackets "|a| = 5.099" (teal) and
+      "|b| = 3.162" (orange); EqLine (0A.1) appears with live numbers "5.099 × 3.162 × cos 60.3° = 5.099 × 3.162 ×
+      0.496 = 8.000"; the gauge marker does not move (same 8). (iv) 28.3 s: the factor (|a| cos θ) in (0A.1) is
+      boxed teal and connected by a thin leader to the teal shadow segment on b's line; label "|a| cos θ = 2.530 =
+      shadow of a on b"; EqLine (0A.3) fades in, small, under it.
+    voiceover: "Arrow a is five, one, and arrow b is one, three. Multiply matching parts and add: five times one, plus one times three, is eight. Geometry gives eight too: both lengths, times the cosine of the angle. The length of arrow a times that cosine is its shadow on b."
+    on_screen_eq:
+      latex: "\\mathbf a\\cdot\\mathbf b = a_1b_1 + a_2b_2 + a_3b_3 = a_ib_i"
+      vallis_eq: "(K 2.2) — Kundu §2.1; Vallis gives no number (background maths)"
+      page_png: "../Fluid Dynamics/chapters/pages/ch02/p068.png"   # Kundu printed p. 41; read from the image 2026-10-22
+      page_text: "a·b = a1b1 + a2b2 + a3b3 = Σ_{i=1}^{3} a_i b_i ≡ a_i b_i  (2.2) — we show the first, second and last forms"
+      highlight: [{term: "a_1b_1", colour: teal}, {term: "a_2b_2", colour: teal}]
+    on_screen_eq_extra:
+      - latex: "\\mathbf a\\cdot\\mathbf b = |\\mathbf a|\\,|\\mathbf b|\\cos\\theta = (|\\mathbf a|\\cos\\theta)\\,|\\mathbf b|"
+        vallis_eq: "(0A.1) — our Chapter-0 label; Kundu §2.8 states u·v = uv cos θ unnumbered"
+        page_png: "../Fluid Dynamics/chapters/pages/ch02/p079.png"   # Kundu printed p. 52, first line; read 2026-10-22
+        tex_source: "viz/ch00/vector_products_lab.html ref '(0A.1)' and analysis/ch00_poc_design.md §0 (copied, not retyped)"
+      - latex: "|\\mathbf a|\\cos\\theta = \\mathbf a\\cdot\\hat{\\mathbf b} = \\frac{\\mathbf a\\cdot\\mathbf b}{|\\mathbf b|},\\qquad \\hat{\\mathbf b} = \\frac{\\mathbf b}{|\\mathbf b|}"
+        vallis_eq: "(0A.3) — ours (shadow = scalar projection); no book number"
+        page_png: null
+        tex_source: "viz/ch00/vector_products_lab.html ref '(0A.3)'"
+    physics_source:
+      fn: fluidpy.geo.vectors.dot
+      params: {a: [5, 1], b: [1, 3]}
+      outputs: {a_dot_b: 8.000, norm_a: 5.099, norm_b: 3.162, theta_deg: 60.255, cos_theta: 0.4961, shadow_a_on_b: 2.530}
+      also: [fluidpy.geo.vectors.norm, fluidpy.geo.vectors.angle_between, fluidpy.geo.vectors.scalar_projection]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_dot_V1_cosine_form_on_field_of_angles,
+        ::test_dot_V2_symbolic_cosine_law, ::test_norm_V1_and_V7_scaling, ::test_angle_between_V1_known_angles_and_field,
+        ::test_scalar_projection_V1_and_V7
+    exaggeration: []
+
+  - id: s3_symmetry
+    t: [33.075, 54.375]
+    visual: >-
+      Chip top-left: "Reason 1 · the same number both ways". The plane splits into two side-by-side copies (left and
+      right halves, same scale, same a and b). LEFT copy, 37.1 s: a casts its teal shadow on b's line, O -> (0.8, 2.4),
+      readout "shadow of a on b = 2.530". RIGHT copy, 41.3 s: b casts its orange shadow on a's line, O -> (1.538,
+      0.308), readout "shadow of b on a = 1.569". A small comparison bar between them shows the two shadow lengths
+      2.530 vs 1.569 side by side, caption "same pair, two different shadows". 46.0 s: in each copy the product
+      rectangle grows from the shadow, standing at right angles to the line it lies on. LEFT rectangle: corners (0, 0),
+      (0.8, 2.4), (-2.2, 3.4), (-3, 1) — base = the shadow 2.530 along b, height = |b| = 3.162 (orange bracket);
+      label "2.530 × 3.162 = 8.000". RIGHT rectangle: corners (0, 0), (1.538, 0.308), (2.538, -4.692), (1, -5) —
+      base = the shadow 1.569 along a, height = |a| = 5.099 (teal bracket); label "1.569 × 5.099 = 8.000". Both
+      rectangles then lift off and slide to a centre tray, side by side, with one shared readout "area = a·b = 8.000"
+      and the gauge marker at +8.000 (unchanged). 50.7 s: caption "a·b = b·a: order doesn't matter".
+    voiceover: "Reason one: a shadow depends on who casts it. The shadow of arrow a on b is two point five three. But the shadow of b on arrow a is one point five seven. Multiply each by the other arrow's length, and both give eight. The dot product doesn't care about order."
+    on_screen_eq:
+      latex: "\\mathbf a\\cdot\\mathbf b = (|\\mathbf a|\\cos\\theta)\\,|\\mathbf b| = (|\\mathbf b|\\cos\\theta)\\,|\\mathbf a| = \\mathbf b\\cdot\\mathbf a"
+      vallis_eq: "(0A.1), written both ways — our label; symmetry a·b = b·a is in Kundu §2.8 (unnumbered, p. 51)"
+      page_png: "../Fluid Dynamics/chapters/pages/ch02/p078.png"   # Kundu printed p. 51, last line (u·v = v·u = …); read 2026-10-22
+    physics_source:
+      fn: fluidpy.geo.vectors.scalar_projection
+      params: {pairs: [[[5, 1], [1, 3]], [[1, 3], [5, 1]]]}
+      outputs: {shadow_a_on_b: 2.530, shadow_b_on_a: 1.569, products: [8.000, 8.000],
+                shadow_vectors: {a_on_b: [0.800, 2.400], b_on_a: [1.538, 0.308]},
+                rectangle_height_sides: {on_b: "k_cross(b) = (-3, 1), length 3.162", on_a: "-k_cross(a) = (1, -5), length 5.099"}}
+      also: [fluidpy.geo.vectors.projection, fluidpy.geo.vectors.norm, fluidpy.geo.vectors.k_cross, fluidpy.geo.vectors.dot]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_projection_V1_remainder_perpendicular_and_idempotent,
+        ::test_dot_V7_rotation_invariance_symmetry_and_padding, ::test_k_cross_V7_quarter_turn_properties
+    exaggeration: []
+
+  - id: s4_cheap
+    t: [54.375, 73.1]
+    visual: >-
+      Chip: "Reason 2 · the cheap number; the shadow comes from it". Two "recipe cards" side by side, top right.
+      Card 1 "a·b": 5×1, 1×3, + -> 8 (icons: 2 multiplications, 1 addition; tick). Card 2 "shadow": needs |b| = √10
+      (square-root icon) and a division: 8 ÷ 3.162 = 2.530 (icons: 1 square root, 1 division, plus the whole a·b
+      card). At 59.1 s an arrow from card 1 into card 2 labelled "shadow = a·b ÷ |b|". EqLine (0A.3) is shown with live
+      numbers "8 ÷ 3.162 = 2.530". 63.5 s: on the plane, b shrinks smoothly to the unit arrow b̂ = (0.316, 0.949)
+      (orange, label "b̂, length 1"); the teal shadow does NOT change (2.530); the gauge readout changes from "a·b =
+      8.000" to "a·b̂ = 2.530 = shadow"; caption "length one: dividing by |b| does nothing". 66.8 s: cross-fade to a
+      wind example on a small east/north map: teal wind arrow u = (6, 8) m/s (label "wind u, |u| = 10.0 m/s"), orange
+      unit arrow x̂ pointing east (label "x̂: east, length 1"); the teal shadow of u on x̂'s line, 6 units long, label
+      "u·x̂ = 6.00 m/s = eastward part". A small second chip (not narrated, 2.5 s): "u·ŷ = 8.00 m/s northward part ·
+      k̂ = local up in Vallis: u·k̂ = vertical part (0 for this flat wind)".
+    voiceover: "Reason two: it's cheap, with no angle and no square root. The shadow comes from it: a dot b over the length of b. When b has length one, they're the same. So a wind dotted with x hat, one unit east, gives its eastward part."
+    on_screen_eq:
+      latex: "|\\mathbf a|\\cos\\theta = \\mathbf a\\cdot\\hat{\\mathbf b} = \\frac{\\mathbf a\\cdot\\mathbf b}{|\\mathbf b|},\\qquad \\hat{\\mathbf b} = \\frac{\\mathbf b}{|\\mathbf b|}"
+      vallis_eq: "(0A.3) — ours (scalar projection); no book number"
+      page_png: null
+      tex_source: "viz/ch00/vector_products_lab.html ref '(0A.3)'"
+    physics_source:
+      fn: fluidpy.geo.vectors.scalar_projection
+      params: {a: [5, 1], b: [1, 3], b_hat: [0.31623, 0.94868], u: [6, 8], x_hat: [1, 0], y_hat: [0, 1]}
+      outputs: {shadow: 2.530, a_dot_bhat: 2.530, u_dot_xhat: 6.000, u_dot_yhat: 8.000, norm_u: 10.000}
+      also: [fluidpy.geo.vectors.dot, fluidpy.geo.vectors.norm]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7 (projection independent of |b|;
+        projection of (3, 4) on e_x = 3), ::test_dot_V1_component_sum_on_field, ::test_norm_V1_and_V7_scaling
+    exaggeration: ["wind arrow drawn at 1 grid unit = 1 m/s on its own small map (arrow length not a distance)"]
+
+  - id: s5_work
+    t: [73.1, 92.325]
+    visual: >-
+      Chip: "Reason 3 · physics needs both sizes — (a) work". Side view: flat ground line, a simple sled icon (flat
+      rectangle on two runners, labelled "sled", illustrative). Teal force arrow F along a rope at 60° above the ground
+      (label "F = 20 N"), orange displacement arrow d along the ground (label "d = 5 m"); angle arc "60°". 82.4 s:
+      teal shadow of F on the ground line, label "shadow = 20 cos 60° = 10.0 N (still a force)". 86.4 s: product
+      rectangle on d's line, base = shadow (10.0 N), length along d = 5 m; readout "W = F·d = 10.0 N × 5 m = 50.0 J";
+      gauge relabelled "work W (J)", marker at 50.0. 89.0 s: the sled slides on to d = 10 m; d doubles, the
+      rectangle doubles in length, readout "W = 100 J"; the shadow label stays "10.0 N". Small chip: "double either
+      arrow → the product doubles". ScaleBadge: "force and distance drawn on different scales".
+    voiceover: "Reason three: physics needs both sizes. Pull a sled with twenty newtons, at sixty degrees, for five metres. The force's shadow is ten newtons, still a force. The dot product is fifty joules of work; walk twice as far and it doubles."
+    on_screen_eq:
+      latex: "W = \\mathbf F\\cdot\\mathbf d = |\\mathbf F|\\,|\\mathbf d|\\cos\\theta"
+      vallis_eq: "none — definition of work (school mechanics), not a Vallis or Kundu App. B equation; shown unnumbered"
+      page_png: null
+    physics_source:
+      fn: fluidpy.geo.vectors.dot
+      params: {F: "20 N × (cos 60°, sin 60°) = (10.000, 17.321) N", d: [5, 0], d_doubled: [10, 0]}
+      outputs: {shadow_N: 10.000, W_J: 50.000, W_doubled_J: 100.000}
+      also: [fluidpy.geo.vectors.scalar_projection]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_dot_V1_cosine_form_on_field_of_angles,
+        ::test_scalar_projection_V1_and_V7 (shadow independent of |d|)
+    exaggeration:
+      - "sled icon illustrative (no friction, no mass shown)"
+      - "force (N) and distance (m) arrows drawn on different scales — not to scale"
+
+  - id: s6_advection
+    t: [92.325, 117.6]
+    visual: >-
+      Chip: "Reason 3 · (b) the weather version". A flat temperature map, 600 km east × 360 km north (MapPanel style,
+      no coastlines, axes in km), coloured by T with a colour-blind-safe sequential map (cmocean 'thermal' or the house
+      sequential; NOT jet/rainbow; colourbar "T (°C)"): T rises eastward from 10 °C at the west edge to 16 °C at the
+      east edge, isotherms every 1 °C (every 100 km), labelled. 92.3 s: orange arrow ∇T at a probe point (300 km, 180
+      km), pointing east, label "∇T: points uphill, towards warmer air"; 97.5 s: its length bracket "|∇T| = 1 K per
+      100 km = 1.00×10⁻⁵ K/m". 102.5 s: teal wind arrow u at the same point, 60° from ∇T (north-east), label "u, |u| =
+      10.0 m/s"; angle arc "60°". 107.1 s: teal shadow of u on ∇T's line, label "shadow = 10.0 cos 60° = 5.00 m/s
+      towards warmer air". 113.1 s: product rectangle on ∇T's line (base 5.00 m/s, height |∇T|); units strip below:
+      "(m/s) × (K/m) = K/s" with the two m's struck through; readout "u·∇T = 5.00 m/s × 1.00×10⁻⁵ K/m = 5.00×10⁻⁵ K/s
+      = 0.180 K per hour". The word "advection" appears once, teal, with "= carrying by the wind". Vallis (1.7) is
+      shown small at the bottom with the (v·∇) term boxed teal and the note "this dot product is the advection term".
+      ScaleBadge: "arrows not drawn to the map's km scale".
+    voiceover: "Now the weather: grad T is an arrow pointing towards warmer air. Its length is the steepness: one degree per hundred kilometres. The wind is ten metres per second, sixty degrees from it. Its shadow, five metres per second, is how fast the air heads towards warmth. Times the steepness: point one eight degrees an hour."
+    on_screen_eq:
+      latex: "\\frac{D\\varphi}{Dt} = \\frac{\\partial\\varphi}{\\partial t} + (\\mathbf v\\cdot\\nabla)\\varphi"
+      vallis_eq: "(1.7)"
+      page_png: chapters/pages/ch01/p025.png     # Vallis §1.1, printed p. 5 (PDF 25); rendered and read 2026-10-22
+      page_text: "Dφ/Dt = ∂φ/∂t + (v·∇)φ (1.7) — upright D, d; bold italic v; (1.6) is the same with dφ/dt and v·∇φ"
+      highlight: [{term: "(\\mathbf v\\cdot\\nabla)\\varphi", colour: teal}]
+      tex_source: "viz/ch00/vector_products_lab.html ref '(1.7)' (Vallis typesets v bold italic; we use \\mathbf as the explainer does)"
+    physics_source:
+      fn: fluidpy.geo.vectors.dot
+      params: {u_m_s: "10 × (cos 60°, sin 60°) = (5.000, 8.660)", gradT_K_m: [1.0e-5, 0.0]}
+      outputs: {shadow_m_s: 5.000, u_dot_gradT_K_s: 5.000e-5, u_dot_gradT_K_h: 0.180}
+      also: [fluidpy.geo.vectors.scalar_projection,
+             "fluidpy.core.kinematics.material_derivative_terms (Kundu §3.2, (K 3.4)–(K 3.5)): advective part u·∇T on the linear field T = T0 + Gx"]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V2_dimensions_pint_advection_unit (m/s × K/m = K/s),
+        ::test_dot_V1_component_sum_on_field, ::test_scalar_projection_V1_and_V7;
+        ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V7_local_and_advective_vanish,
+        ::test_material_derivative_V1_equals_rate_along_pathline
+    exaggeration:
+      - "uniform temperature gradient and uniform steady wind (idealised map; illustrative field, not data)"
+      - "wind and gradient arrows not drawn on the map's km scale — not to scale"
+
+  - id: s7_both_sizes
+    t: [117.6, 140.225]
+    visual: >-
+      Same map. A person pin "you (standing still)" at (300 km, 180 km) with a thermometer readout. Small dots (air
+      parcels, each keeping its own colour — it keeps its temperature) drift with the wind u = (5.00, 8.66) m/s, so
+      the colour pattern and the isotherms slide east past the pin at the wind's eastward part, 5.00 m/s. Clock chip
+      "6 h of weather in 6 s (×3600)"; the thermometer counts down 13.00 -> 12.82 °C after 1 h -> 11.92 °C after 6 h.
+      117.6 s: an upwind cone behind the pin shades the colder air that is arriving, label "arriving air comes from the
+      colder side". 123.6 s: the derived line below (1.7) appears: "∂T/∂t = −u·∇T = −5.00×10⁻⁵ K/s = −0.180 K/h
+      (−4.32 K per day)", minus sign in rose. 127.5 s: the map becomes twice as steep (isotherms every 50 km, 10 ->
+      22 °C across the map, |∇T| = 2.00×10⁻⁵ K/m); the shadow label stays "5.00 m/s"; the readout changes to
+      "−0.360 K/h"; the thermometer now falls twice as fast. 132.9 s: a two-row card: "shadow |u| cos θ = 5.00 m/s →
+      how fast the air heads towards warmth (same on both maps)" / "−u·∇T = −0.180 → −0.360 K/h → how fast YOUR
+      temperature changes (doubles)". Mini note under the equation: "assumes each parcel keeps its temperature: no
+      heating, no mixing (DT/Dt = 0)". ScaleBadge: "time ×3600".
+    voiceover: "Mind the sign: if you stand still, the air arriving comes from the colder side. So you cool: that's minus u dot grad T. Make the map twice as steep: the shadow stays five, the cooling doubles. The shadow says how fast the air heads for warmth. The dot product says how fast you cool."
+    on_screen_eq:
+      latex: "\\frac{\\partial T}{\\partial t} = -\\,\\mathbf u\\cdot\\nabla T \\quad\\text{when } \\frac{DT}{Dt} = 0"
+      vallis_eq: "unnumbered — follows from (1.7) with φ = T, DT/Dt = 0 and a horizontal wind u; not a numbered Vallis equation"
+      page_png: chapters/pages/ch01/p025.png
+      highlight: [{term: "-\\,\\mathbf u\\cdot\\nabla T", colour: teal}]
+    physics_source:
+      fn: fluidpy.geo.vectors.dot
+      params: {u_m_s: [5.000, 8.660], gradT_K_m: [1.0e-5, 0.0], gradT_steep_K_m: [2.0e-5, 0.0], T_probe_t0_C: 13.0}
+      outputs: {dTdt_K_s: -5.000e-5, dTdt_K_h: -0.180, dTdt_K_day: -4.32, dTdt_steep_K_h: -0.360, shadow_both_maps_m_s: 5.000,
+                T_probe_C: {t_1h: 12.82, t_6h: 11.92}}
+      also: ["fluidpy.core.kinematics.material_derivative_terms on T(x, t) = T0 + G (x − u_x t): local = −5.00e-5 K/s, advective = +5.00e-5 K/s, total 0",
+             fluidpy.geo.vectors.scalar_projection]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V2_dimensions_pint_advection_unit, ::test_scalar_projection_V1_and_V7
+        (independent of |∇T|); ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline,
+        ::test_material_derivative_V7_local_and_advective_vanish
+    exaggeration:
+      - "time compressed ×3600 (6 h in 6 s)"
+      - "idealised: parcels keep their temperature (no heating, radiation or mixing); uniform, steady wind and gradient"
+      - "arrows not to the map's km scale — not to scale"
+
+  - id: s8_sign
+    t: [140.225, 160.575]
+    visual: >-
+      Back to the plane with a = (5, 1) (teal, fixed) and b (orange) keeping |b| = 3.162 while it swings
+      anticlockwise (seen from above the page) about O. Readouts update every frame: θ, shadow of a on b, a·b; the
+      gauge marker moves along the number line (-16.1..+16.1). Holds (0.6 s each) at the key angles: θ = 60.3° ->
+      shadow +2.530, a·b = +8.000 (rectangle ink, solid) [142.8 s, "positive: shadow falls forward"]; θ = 90° -> no
+      drop-line length, shadow 0, a·b = 0.000, rectangle collapses to a line [147.5 s, "perpendicular: no shadow"];
+      θ = 120° -> b = (-2.087, 2.375), the teal shadow now lies on b's line extended BACKWARDS behind O (dashed
+      extension of b's line), shadow -2.550, a·b = -8.062, rectangle rose and hatched [150.6 s, "negative: shadow falls
+      behind the start"]; θ = 180° -> b = (-3.101, -0.620), the shadow is a itself, pointing away from b, length 5.099,
+      signed shadow -5.099, a·b = -16.12 = −|a||b|, rose hatched rectangle 5.099 × 3.162 [154.6 s, "opposite: the
+      shadow points backwards, a·b = −|a||b|"]. Last 2.5 s (not narrated): chip "turn it around: cos θ = a·b ÷
+      (|a||b|) = −16.12 ÷ 16.12 = −1.000 → θ = 180°" (matches the state on screen).
+    voiceover: "The sign tells you the angle. Under ninety degrees, the shadow falls forward: positive. At ninety, no shadow, zero. Past ninety, it falls behind: negative. Opposite, it points backwards: a dot b is minus sixteen point one."
+    on_screen_eq:
+      latex: "\\cos\\theta = \\frac{\\mathbf a\\cdot\\mathbf b}{|\\mathbf a|\\,|\\mathbf b|}"
+      vallis_eq: "(0A.1) solved for cos θ — our label; Kundu §2.8 u·v = uv cos θ is unnumbered (p. 52)"
+      page_png: "../Fluid Dynamics/chapters/pages/ch02/p079.png"
+    physics_source:
+      fn: fluidpy.geo.vectors.dot
+      params: {a: [5, 1], b: "3.1623 × (cos(φa + θ), sin(φa + θ)), φa = atan2(1, 5), θ from 60.255° to 180°"}
+      outputs: {theta_60_255: {a_dot_b: 8.000, shadow: 2.530}, theta_90: {a_dot_b: 0.000, shadow: 0.000},
+                theta_120: {b: [-2.087, 2.375], a_dot_b: -8.062, shadow: -2.550},
+                theta_180: {b: [-3.101, -0.620], a_dot_b: -16.12, shadow: -5.099, minus_norm_a_norm_b: -16.12}}
+      also: [fluidpy.geo.vectors.scalar_projection, fluidpy.geo.vectors.projection, fluidpy.geo.vectors.angle_between]
+      test: >-
+        ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_cosine_form_on_field_of_angles,
+        ::test_scalar_projection_V1_and_V7 (sign flips with b), ::test_angle_between_V1_known_angles_and_field,
+        ::test_angle_between_V7_invariance_and_zero_vector
+    exaggeration: []
+
+  - id: s9_end
+    t: [160.575, 170.0]
+    visual: >-
+      EndCard. Title "Why times the other length?" Three bullets fade in with the first sentence: "1 · Same number both
+      ways: a·b = b·a (8 = 2.530 × 3.162 = 1.569 × 5.099)" · "2 · Cheap: Σ aᵢbᵢ, no angle; shadow = a·b ÷ |b|; with
+      a unit arrow they are equal" · "3 · Physics needs both sizes: W = F·d (J), −u·∇T (K/s)". Links block: "Try it:
+      Vector products lab (viz/ch00/vector_products_lab.html)" · "Notebook: Chapter 0A, the dot product (PoC notebook
+      notebooks/poc_ch00a_dot.ipynb until the Chapter 0A notebook is published)" · "From Kundu: §2.1 (K 2.2) and §2.8 —
+      fluidpy ch02 C01 (summation convention, a·b = aᵢbᵢ) and C09 (the gradient ∇φ points up the steepest climb);
+      App. B §B.3 builds ∇·, ∇× from these products". Silent hold 168.975 -> 170.0 s. No autoplay to anything next.
+    voiceover: "Three reasons: it's symmetric, it's cheap, and physics needs both sizes. Try it in the vector products lab."
+    on_screen_eq: null
+    physics_source: null   # end card: text and links only
+    exaggeration: ["end card: text only, illustrative"]
+    links:
+      explainer: viz/ch00/vector_products_lab.html
+      notebook: notebooks/poc_ch00a_dot.ipynb      # PoC G; becomes notebooks/ch00a_maths.ipynb (dot-product block) later
+      kundu_dot: https://shammun.github.io/fluidpy/notebooks/ch02_cartesian_tensors.html#%F0%9F%A7%A9-The-summation-convention:-a-repeated-index-is-a-sum-C01
+      kundu_gradient: https://shammun.github.io/fluidpy/notebooks/ch02_cartesian_tensors.html#%F0%9F%A7%A9-The-gradient-%E2%88%87%CF%86:-perpendicular-to-the-level-sets,-along-the-steepest-climb-C09
+      kundu_appendix_b: "Kundu App. B §B.3 (no dot-product entry of its own in knowledge/kundu_index.yaml; pointer text only)"
+
+honesty_notes:
+  - "A scalar is never drawn as an arrow: a·b, W and u·∇T appear as numbers, a number-line gauge or the product rectangle (shadow × other length) lying on the other arrow's line; negative products are rose and hatched."
+  - "The shadow is SIGNED: past 90° it lies on b's line extended behind the origin, and for anti-parallel arrows it is the whole of a pointing backwards (−|a|), so a·b = −|a||b| — the anti-parallel case does have a shadow."
+  - "Example numbers are ours (a = (5, 1), b = (1, 3), θ = 60.3°), chosen so the two shadows differ clearly (2.530 vs 1.569) and θ is not 45° (where cos = sin) nor 0° or 90°."
+  - "Sign of advection: the local tendency is ∂T/∂t = −u·∇T (from Vallis (1.7) with DT/Dt = 0). Wind with a component towards warm air (u·∇T > 0) brings colder upwind air to a fixed point, so the temperature there falls. Stated in s7 with the 'you stand still' frame; the s6 shadow is described as the air's speed towards warmth (a moving-air statement), so the two frames are never mixed."
+  - "∇T is defined in words (an arrow pointing uphill towards warmer air; its length is how fast T rises per metre) and the full gradient is only primed here; Chapter 0A teaches it (Kundu C09 link on the end card)."
+  - "The weather map is an idealised, uniform field (illustrative, not data); real temperature changes also involve heating, radiation and mixing — the movie says it assumes DT/Dt = 0."
+  - "Work W = F·d is shown without a number because it is not a Vallis or Kundu App. B equation; (0A.1) and (0A.3) are our Chapter-0 labels, and the cosine form appears unnumbered in Kundu §2.8 (p. 52)."
+  - "θ here is the angle between two arrows. In Vallis θ is potential temperature; the movie never uses θ for anything else. Likewise b is just our second arrow, not Vallis's buoyancy b."
+  - "The (K 2.2) number: analysis/ch00_poc_design.md §0 says the component definition is unnumbered (§2.8), but the rendered Kundu page p. 41 shows it numbered (2.2) in §2.1; the explainer and fluidpy.geo.vectors.dot already cite (K 2.2), so the movie does too."
+  - "Spoken numbers are rounded to three figures (two point five three, one point five seven, minus sixteen point one); on-screen numbers carry three decimals or three significant figures and match the frame's state."
+quiz_hook: "If you double b, what happens to the shadow of a on b, and what happens to a·b? (Shadow: unchanged, 2.530. a·b: doubles, 8 -> 16.)"

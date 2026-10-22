@@ -73,3 +73,10 @@ Open Should: S2 (3-D curl arc small in the tilted view), S10 (no-WebGL fallback 
 Awaiting the user's second look.
 
 2026-10-22: user says A is **not right yet**; a larger round-3 feedback list is being prepared. B-G feedback will follow later.
+
+### Round 3 user points (collecting, 2026-10-22)
+- U-A.17 (with 3Blue1Brown screenshot `dot_pro.png`) Why is a·b the shadow of a on b **times |b|**, not just the shadow? What do we gain by
+  multiplying by |b|: what is the geometric intuition and what useful information does it give? The explainer must answer
+  this. Answer given in chat: (i) the shadow alone depends on which vector you project onto, while shadow × the other length gives
+  the same number both ways; (ii) a·b is the cheap formula (Σ aᵢbᵢ) and the shadow is derived from it, a·b/|b|; with a unit vector the
+  two are equal (components, u·x̂); (iii) the physics needs both sizes: work F·d, advection u·∇T (m/s × K/m = K/s).
