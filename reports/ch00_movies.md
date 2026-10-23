@@ -7,6 +7,7 @@ before this review, so nothing in it was overwritten. The Chapter-0 movie review
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | ch00_dot_product_why (review 1) | 170.005 s (target 170) | 12.90 MB (≤ 25) | 9/10 PASS; **frozen FAIL** (`pass: false`) | PASS (one sign slip in a readout, see M1) | PASS | **FIX** (label overlap) | PASS | PASS | PASS | PASS | **FIX** (minor; one re-render + QA re-run) |
 | ch00_dot_product_why (review 2) | 170.005 s | 13.16 MB | 10/10 PASS (`pass: true`) | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **PASS** (one publish condition, P1) |
+| ch00_dot_product_why (review 3, v2 @ 3787a8b) | 367.253 s (target 367.225; user window 6:00–6:10) | 25.38 MB (override budget 60) | 10/10 PASS (`pass: true`) | **FIX** (M1: s17 says the map stays put, s18–s20 move it) | PASS | PASS (S2, S4 small overlaps) | PASS | PASS (S5 orphan words) | PASS | PASS (but S1: captions cover badges) | **FIX** (one Must, one re-render) |
 
 ## ch00_dot_product_why (review 1, 2026-10-22)
 
@@ -262,4 +263,317 @@ N6 (the sled does not slide) and N7 (the card rows are not highlighted) were not
 ### Verdict: PASS → `qa_pass`
 The movie can go to drafts for the user to watch, with P1 to be resolved before it is published.
 
-## Overall: PASS (ch00_dot_product_why review 2; P1 is a publish condition)
+### Overall after review 2: PASS (P1 is a publish condition)
+
+
+## ch00_dot_product_why (review 3 — version 2, commit 3787a8b, 2026-10-22)
+
+Reviewer: movie-reviewer, fresh eyes, frames only (I cannot hear the audio). Version 2 is a rewrite: 21 scenes, 844 words,
+367.253 s, with a music bed. It answers the user's round-1 movie feedback U-M.1…U-M.8
+(`reports/ch00_poc_user_feedback.md`; v1 screenshots `5_2.png`, `6.png`–`9.png`).
+
+**Inputs.**
+- `movies/out/ch00/ch00_dot_product_why/{1080.mp4, en.vtt, index.html}`.
+- `movies/ch00/ch00_dot_product_why/{storyboard.yaml, script.md, timing.json, manifest.json}`.
+- `reports/movies/ch00_dot_product_why/{qa.json, contact_sheet.png, frame_*.png}`.
+- `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/public/{music.json, music.wav, narration.wav, narration_music.wav}`.
+- Page images: Kundu p. 41 (`../Fluid Dynamics/chapters/pages/ch02/p068.png`), pp. 51–52 (`p078.png`, `p079.png`) and Vallis p. 5 (`chapters/pages/ch01/p025.png`).
+
+**My frames** are in `reports/movies/ch00_dot_product_why/review/`:
+- `g640/t_NNN.png`: 123 frames, 640 px wide, at exactly t = 3·NNN s (0–366 s). They are tiled six to a sheet in
+  `sheets/sheet_00…20.png`, each tile labelled with its time.
+- `full/`: full-resolution frames at 40, 81, 147.5, 169.5, 186, 302 and 308 s, and `iso_*.png` (the isotherm
+  positions in s18).
+- `part3/` and `part3_title_sheet.png`: 209.80–212.30 s, every 0.2 s.
+- `eq03/` and `eq03_sheet.png`: the (0A.3) line, 145–148.2 s.
+- `drift/` and `drift_sheet.png`: the map in s18–s20, 307–353 s.
+- `capsim_t/` and `caption_collision_sheet.png`: the en.vtt cues drawn at `line:76%` on frames (see S1).
+- `ebur128.log`: the ebur128 run on the mix.
+- `f640/` and the loose `sheet_*.png` at the top of `review/` come from a first extraction whose timestamps I could not
+  pin down. They are superseded by `g640/` and `sheets/`; ignore them. I am not allowed to delete files, so they stay.
+
+### qa.json: 10/10 PASS, `pass: true` (run with the user-authorised per-movie overrides)
+| gate | result |
+|---|---|
+| duration | 367.25 s vs 367.225 s (±3 %) |
+| size | 25.38 MB (budget 60, hard cap 80; overrides) |
+| codec | H.264 High, yuv420p, AAC, faststart, 30 fps, 1920×1080 |
+| black | 0 stretches |
+| frozen | 34 stretches longer than 4 s, all narrated; the longest silence inside one is 2.83 s |
+| loudness | −16.0 LUFS, true peak −3.5 dBTP |
+| flashes | at most 0 per second |
+| captions | 88 cues match the script |
+| physics | 32 functions reproduce their hashes |
+| equations | 20 storyboard equations present |
+
+**Independent checks.**
+- **Captions.** I parsed en.vtt myself and found:
+  - 88 cues, in order, from 0.300 to 364.425 s, all inside the 367.25-s audio;
+  - at most 2 lines and at most 42 characters per line;
+  - at most 15.6 characters per second;
+  - cues of 1.06–6.30 s;
+  - `line:76%` on every cue;
+  - cue text identical to the `timing.json` sentences (844 words).
+- **Loudness.** ebur128 on the mix gives I = −16.0 LUFS, LRA 4.1 LU and a true peak of −3.5 dBFS.
+
+### U-M.1…U-M.8: is each point really fixed?
+| item | verdict | evidence (time · frame) |
+|---|---|---|
+| **U-M.1** teach first, then the question | **Fixed** | 0:00–2:28 teaches before any question is asked: the agenda chip "1 · what it is · 2 · why it's built this way" (0:06, `g640/t_002`); vectors, components and Pythagoras (0:15–0:27, `t_005–t_009`); definition 1 (0:30–0:44, `t_010–t_014`); the labels card (0:45–1:03, `t_015–t_021`); a worked 8 (1:06–1:12); definition 2 with what cos does (1:15–1:30, `t_025–t_030`); "how much two arrows point the same way" with +6 / 0 / −6 (1:36–1:45, `t_032–t_035`); the shadow derived (1:48–2:27, `t_036–t_049`). The question "Why multiply by \|b\|? Why not stop at the shadow?" first appears at 2:28–2:33 (`t_050–t_051`). Tell the user that the teaching part is about 2:28 long, not the "~1.5 min" they mentioned: the extra time is the step-by-step shadow derivation they asked for in U-M.4. |
+| **U-M.2** length 6:00–6:10 | **Fixed** | 367.253 s = 6:07.3 (qa.json); the narration runs 364.4 s at 138.8 words per minute. |
+| **U-M.3** labels explained once, and a source footnote on every frame that shows a label | **Fixed, with one gap (S3)** | The card "How to read the equation labels" (0:44–1:04, `t_015–t_021`) gives three rows: (K 2.2) is Kundu, Cohen & Dowling, 5th ed. (2012), equation 2.2; "0A = zero-A, with the **digit zero** (not the letter O): our label for Chapter 0, Part A … not a book number", with a ring around the digit; (Vallis 1.7) is Vallis, AOFD, 2nd ed. (2017), equation 1.7. An arrow then points to the footnote strip. The footnote strip is present in s03–s06, s08–s11, s12 (work), s13–s16 and s18–s20. It is about 28 px tall at 1080p (`full/f_40.png`, `f_81.png`), so about 9 px at 640 px, which meets the agreed bar. Every footnote is correct against the page images (next table). The **gap**: from 0:52 to 1:04 the card shows the (0A.1) and (Vallis 1.7) pills, but the strip still names only (K 2.2), while the card says "exact section and page: always in the footnote" (`t_018–t_021`). |
+| **U-M.4** (0A.3) derived step by step | **Fixed** | s08, 1:45–2:28 (`t_036–t_049`, `full/f_147.5.png`). The drop line, the shadow and the right triangle come first. Then seven numbered steps, each with its reason: cos θ = side next to θ ÷ long side = shadow ÷ \|a\| → shadow = \|a\| cos θ ("multiply both sides by \|a\|") → divide (0A.1) by \|b\| (the \|b\| struck out in rose) → a·b/\|b\| = \|a\| cos θ = shadow → 8 ÷ 3.162 = 2.530 → a·b/\|b\| = a·(b/\|b\|) = a·b̂ → the check 5 × 0.316 + 1 × 0.949 = 2.530 ✓. Then (0A.3) is assembled with its label. b̂ = (0.316, 0.949), length 1, "b hat", is drawn on the plane. |
+| **U-M.5** say plainly that the dot product equals the shadow | **Fixed** | 2:58–3:04 (`t_060`, `t_061`). b shrinks to b̂ while the shadow label stays "2.530 (does not change)". The gauge falls from +8.000 to +2.530. The orange caption reads "if \|b\| = 1, then a·b ÷ \|b\| = a·b ÷ 1 = a·b, **so the dot product equals the shadow: a·b̂ = 2.530**". The narration says "the dot product is the shadow". The wind example follows: v·x̂ = 6 × 1 + 8 × 0 = 6.00 m/s = the eastward part (3:06, `t_062`, `full/f_186.png`). |
+| **U-M.6** the weather part | **Partly** (see M1) | All the requested pieces are on screen; see the sub-table below. But s17's answer "No. The map stays put." with a lock "map does not change" (4:52–5:06) is contradicted 3 s later, when the isotherms slide with the wind (s18), and again in s19, when the fixed pole cools. |
+| **U-M.7** DT/Dt = 0, the one-move algebra, and no "(doubles)" | **Fixed** | 5:06–5:26 (`t_103–t_108`). The meaning comes first: "each parcel keeps its temperature: no sunshine heating it, no mixing — it carries its temperature like a label (tags never change)", with parcel tags on the map and the chip "DT/Dt = 0: the balloon's reading never changes". Then the strip: (1) DT/Dt = ∂T/∂t + v·∇T, "(Vallis 1.7) with φ = T" → (2) 0 = ∂T/∂t + v·∇T → (3) 0 − v·∇T = ∂T/∂t + v·∇T − v·∇T, "subtract v·∇T from both sides", with the pair struck out → (4) ∂T/∂t = −v·∇T, boxed, "what's left: the pair on the right cancels". "doubles" and "YOUR" appear nowhere in script.md, en.vtt or the s18–s20 composition. (The only "doubles" left is the s12 work chip "double either arrow → the product doubles", which is correct and was not part of the complaint.) The twice-as-steep result is clear at 5:39–5:54 (`t_113–t_118`). |
+| **U-M.8** smooth background music | **Fixed (by numbers; the user must judge by ear)** | See "Music" below: the bed is −28.0 LUFS, ducked 5 dB; in the gaps the music sits about 16 dB below the speech. |
+
+**U-M.6 sub-items**
+| asked for | where | result |
+|---|---|---|
+| (1.7) first | 3:32 (`part3/t_212.30`, `t_071`): (1.7) alone, large, with its label and footnote, before any map or number | ✔ |
+| φ = T, and v = the wind | 3:36–3:42 (`t_072–t_074`): φ boxed in all three places; "φ = any quantity the air carries (temperature, moisture, …)"; "here φ = T, the temperature", with the T-form; v boxed, "v = the velocity of the air: the wind (Vallis's letter, bold v)", with a teal arrow | ✔ |
+| the pole and balloon contrast | 3:45–4:12 (`t_075–t_084`): ∂T/∂t boxed slate with a leader to the pole, "how fast the reading changes at ONE FIXED place"; DT/Dt with a leader to the balloon, "the material derivative: the change felt riding with the air"; v·∇T boxed teal; the anatomy braces "balloon's change = pole's change + change from crossing the slope", and "advection = carrying by the wind" | ✔ |
+| ∇T explained | 4:13–4:30 (`t_085–t_090`): an east probe "50 km east: +0.5 K"; ∂T/∂x = 1 K per 100 km = 1.00×10⁻⁵ K/m; ∂T/∂y = 0 ("the isotherms run north–south"); ∇T = (∂T/∂x, ∂T/∂y) = (1.00×10⁻⁵ K m⁻¹, 0); "points uphill, towards warmer air"; \|∇T\| = how steep the map is; "100 km per 1 K" bracket. No north probe arrow is drawn; the ∂T/∂y = 0 line carries that point. | ✔ |
+| v·∇T = (\|v\| cos θ) × \|∇T\| | 4:42–4:48 (`t_094–t_096`): v·∇T = (shadow of v on ∇T) × \|∇T\| = (\|v\| cos θ) × \|∇T\| = (10.0 m/s × cos 60°) × 1.00×10⁻⁵ K/m = 5.00×10⁻⁵ K/s; × 3600 s = 0.180 K per hour; units (m/s) × (K/m) = K/s with the m struck out; definition-1 check ✓; product rectangle "area = v·∇T" | ✔ |
+| 0.180 K/h as a rate in time (18 km/h × 1 K/100 km) | 4:49–5:06 (`t_097–t_102`, `full/f_302.png`): a two-column card, "rate in SPACE · the map's slope · 1 K per 100 km · fixed" against "rate in TIME · what the moving air meets · 0.180 K per hour"; the balloon goes 36.0 km along the wind and 18.0 km towards warmer air in 1 h (I measured 318 km, 211 km on the zoomed axes, which matches the data); "5.00 m/s = 18.0 km per hour", "18.0 km × (1 K per 100 km) = 0.180 K" | ✔, but see **M1** |
+| DT/Dt = 0 and the one-move algebra | see U-M.7 | ✔ |
+| no "(doubles)"; twice as steep clear | 5:36–5:54: "same place, map ×2 steeper — clock restarts"; \|∇T\| = 2.00×10⁻⁵ K/m (twice as steep); "shadow of v on ∇T: still 5.00 m/s — it belongs to the wind alone"; ∂T/∂t = −v·∇T = −1.00×10⁻⁴ K/s = −0.360 K per hour (−8.64 K per day): twice as fast; a two-row card, "shadow \|v\| cos θ = 5.00 m/s on both maps → the wind alone" against "∂T/∂t: −0.180 → −0.360 K per hour → the wind AND the map: the shadow alone can't give this" | ✔ |
+
+### Footnotes against the page images: all correct
+| footnote | page image | check |
+|---|---|---|
+| (K 2.2) = Kundu, Cohen & Dowling, *Fluid Mechanics*, 5th ed. (2012), §2.1, eq. (2.2), p. 41 | p068: running head "2.1 SCALARS, VECTORS, TENSORS, NOTATION 41"; a·b = a₁b₁ + a₂b₂ + a₃b₃ = Σ aᵢbᵢ ≡ aᵢbᵢ (2.2) | ✔ The screen shows the first, second and last forms with ≡, and spells out the Σ form in the annotation. |
+| (0A.1) = our label; Kundu states u·v = uv cos θ unnumbered, §2.8, p. 52 | p079, first line: "u·v = uv cos θ" (unnumbered); §2.8 begins on p. 51 | ✔ |
+| a·b = b·a: Kundu §2.8, p. 51 (unnumbered) | p078, bottom: "2.8 VECTOR, DOT, AND CROSS PRODUCTS … u·v = v·u = …" | ✔ |
+| ∇T = (∂T/∂x, ∂T/∂y): the gradient, Kundu §2.9, p. 52 (unnumbered, after (K 2.22)) | p079: §2.9; (2.22) defines ∇; ∇φ = Σ eᵢ ∂φ/∂xᵢ follows, unnumbered | ✔ |
+| (Vallis 1.7) = Vallis, AOFD, 2nd ed. (2017), §1.1.2, eq. (1.7), p. 5 | p025: printed page 5; Dφ/Dt = ∂φ/∂t + (v·∇)φ (1.7), boxed; §1.1.3 starts lower on the same page, so (1.7) is in §1.1.2 | ✔ Symbol for symbol. The page has upright D and bold-italic v; the movie has italic D and bold-upright v, a typographic difference already accepted in review 1. |
+| (0A.3) = our label; derived on screen from (0A.1); no book number · W = F·d: school definition; no book number · ∂T/∂t = −v·∇T: derived on screen; not a numbered equation | — | ✔ Honest, and no number is invented. |
+
+### Equation fidelity: PASS
+- Every on-screen equation is as listed above. I saw no KaTeX error box in any of the 123 frames.
+- The derived lines are labelled as derived: the T-form, v·∇T = (\|v\| cos θ)\|∇T\|, and ∂T/∂t = −v·∇T when DT/Dt = 0.
+
+### Physics honesty: FIX (one consistency error, M1); every sign and number is right
+**Numbers, recomputed.**
+- a·b = 8, \|a\| = 5.099, \|b\| = 3.162, θ = 60.3°, cos θ = 0.496.
+- Shadows 2.530 and 1.569. The tray rectangles are to scale: 202 × 253 px and 126 × 408 px on an 80-px grid, i.e. 2.53 × 3.16 and 1.57 × 5.10 (`full/f_169.5.png`).
+- s07 gives +6, 0 and −6; the negative case is rose and hatched.
+- Work: 20 cos 60° = 10.0 N; W = 50.0 J, then 100.0 J (`part3/t_209.80`).
+- Wind map: v·x̂ = 6.00 m/s, drawn 6 × 8 squares at 60 px per unit.
+
+**Advection.**
+- The wind is 10 m/s at 60° from east, towards the NE (teal). ∇T points east, towards the warm side (orange).
+- The shadow is 5.00 m/s, so v·∇T = 5.00×10⁻⁵ K/s = 0.180 K/h.
+- ∂T/∂t = −0.180 K/h (−4.32 K per day).
+- The pole reads 12.84 at 0.9 h, 12.30 at 3.9 h and 11.92 °C at 6 h, which is 13 − 0.18 t. The balloon reads 13.00 °C.
+- On the steep map the pole reads 12.42 at 1.6 h and 10.84 °C at 6 h, which is 13 − 0.36 t.
+- The upwind cone opens to the SW of the pole, towards the colder side. That is right for a NE-bound wind.
+- The sign rule is on the end card.
+
+**Map motion (my pixel measurement, `full/iso_*.png`).** In s18 the isotherms move east with the parcels: 0, 6.2, 15.4
+and 17.7 km at 306.6, 308.0, 309.5 and 311.5 s. Each parcel's tag matches the map beneath it (e.g. "10.3" at 35 km with
+the 10° line at 6 km). That is honest for DT/Dt = 0.
+
+**M1 is the problem**: the scene just before (s17) tells the viewer the opposite (see Findings).
+
+**Colour contract.**
+- The first vector is teal: a, p, F, v.
+- The second is orange: b, q, d, ∇T, b̂, x̂.
+- A shadow takes the caster's colour. Products are neutral, or rose when negative.
+- ∂T/∂t is slate and v·∇T is teal.
+- The map uses a dark-blue → purple → orange → yellow sequential map on a fixed 4–20 °C bar; no jet, no red/green.
+- ✔ throughout.
+
+### Part 3 title at 209.97–212.03 s: confirmed
+`part3_title_sheet.png` shows the sequence:
+- 209.80 s: the s12 end (W = 100.0 J).
+- 209.97 s: the chip "Reason 3 · (b) the weather" with the title fading in.
+- 210.20–211.80 s: "**Part 3 · the weather** / the same dot product, inside the equation for how temperature changes",
+  fully legible.
+- 212.03 s: a cross-fade into (1.7).
+- 212.30 s: (1.7) with its footnote.
+
+Mean luminance stays at 18.7–21.0 of 255 (the dark house background), so nothing goes near-black. The narration "Now the
+weather." (209.97–211.62) runs under the title, and "This is Vallis one point seven" (211.97) lands as (1.7) appears.
+
+### Music (U-M.8): PASS by the numbers
+- **The plan.** `music.json` sets bed_lufs −28.0, duck_db 5.0, target −16.0, premix −13.2 LUFS, seed 7, tail 2.5 s.
+- **The stems.** music.wav measures I = −28.0 LUFS (peak −16.4 dBFS). narration.wav measures −16.1 LUFS. The mix
+  (narration_music.wav, and the MP4) measures −16.0 LUFS, −3.5 dBTP, LRA 4.1 LU. Loudness gate PASS.
+- **Speech against the gaps** (ebur128 momentary, 400-ms window):
+  - Inside sentences (2914 samples): median −17.2 LUFS (p90 −13.2).
+  - In the 20 scene gaps of 0.8 s or more, a window lying wholly in the gap: median −33.2 LUFS (range −34.8 to −30.5).
+  - So the bed sits about 16 dB under the narration when it is heard alone, and lower still under speech (ducked 5 dB).
+    **The narration is clearly dominant.**
+- **Fade-out.** Over the end-card hold, momentary loudness falls smoothly from −44.6 to −58.6 LUFS.
+- **What I cannot check.** I cannot verify "no beats / no melody / soothing", or the gentle lift in s21, by ear. The user
+  should listen at 0:00–0:10, in any scene gap, and at 5:55–6:07.
+
+### Legibility at 640 px: PASS, with two small overlaps (S2, S4)
+- Body text is 28 px or more at 1080p; the footnotes are about 28 px. Everything is readable on the 640-px sheets.
+- Halos keep the map labels readable on the orange half.
+- Overlaps: the Σ limit at 0:37–0:44 (S2), the s18 parcel tags (S4), the wind label at 3:05 (N1) and the b̂ hat at 2:21 (N2).
+
+### Footnote strip against the captions: no collision; captions collide with content instead (S1)
+- **The strip and the captions.** With `line:76%`, a cue box starts at y ≈ 821 px. Two lines at a Chrome-like 5 %-height
+  font reach about y 950. The footnote strip is at y 1000–1072. **No collision** (`caption_collision_sheet.png`).
+- **The content in that band.** The y 820–960 band holds content in many scenes:
+  - the number-line gauges in s01, s05 and s06;
+  - the s07 mini gauges;
+  - "area = a·b = 8.000 (both)" in s10;
+  - the s12 work gauge;
+  - the yellow "not to scale" badges in s14–s17 (bottom right) and s19–s20 (bottom left);
+  - the s18 legend.
+- My simulation (54-px Arial, 85 % panel) shows the cues covering parts of these (S1).
+
+### Pacing: PASS
+Reveals land on the spoken words:
+- 0:04.3 agenda;
+- 0:13.9 a's legs;
+- 0:22.3 Pythagoras;
+- 0:33 subscripts;
+- 0:37 Σ;
+- 0:52 the (0A.1) row;
+- 0:58.6 the Vallis row;
+- 1:22 the cos inset;
+- 1:28.9 the numbers;
+- 1:37.6, 1:40.9 and 1:43 the three panels;
+- 1:50.7 the shadow;
+- 1:57 steps 1–7 one per sentence (2:00, 2:03, 2:09, 2:12, 2:15, 2:20, 2:25);
+- 2:28 the question;
+- 2:38 and 2:43 the shadows;
+- 2:47 the tray;
+- 2:58 b → b̂;
+- 3:05 the wind;
+- 3:21 the force shadow;
+- 3:24–3:29 50 J → 100 J;
+- 3:32 (1.7);
+- 3:35 φ;
+- 3:39.6 v;
+- 3:45 pole;
+- 3:51 balloon;
+- 3:57 v·∇T;
+- 4:04 braces;
+- 4:13 ∇T;
+- 4:32 v;
+- 4:37 shadow;
+- 4:41 product;
+- 4:49 question;
+- 4:52 answer;
+- 4:57 balloon;
+- 5:01 check lines;
+- 5:12 DT/Dt = 0;
+- 5:16 subtract;
+- 5:27 pole cools;
+- 5:32 upwind cone;
+- 5:36 steep map;
+- 5:45 twice as fast;
+- 5:55 recap.
+
+The rate is 138.8 words per minute. Two soft spots:
+- 1:33–1:37 is nearly empty (only the heading chip) while "So the dot product measures…" is spoken (N5).
+- (0A.3) is on screen only 2.2 s (2:25.8–2:28) before the cut to s09 (N3). It returns at 2:57–3:04.
+
+### Badges and integrity: PASS
+- **"Not to scale" badges** appear on s11 (wind arrow), s12 (N and m scales; sled illustrative), s14–s20 (time ×1200 /
+  ×900 / ×3600; idealised field, illustrative, not data; arrows not to the km scale).
+- **Text cards** (s03, s04, s13, s21) draw no physics.
+- **Integrity.** No book scans or quoted text, and the narration is in our own words.
+- **End-card links.** `shammun.github.io/aofd/viz/ch00/vector_products_lab.html` (the repo file exists) and the fluidpy
+  ch02 page.
+- **P1 is still open:** the end card links to `shammun.github.io/aofd/notebooks/poc_ch00a_dot.html`, and
+  `notebooks/poc_ch00a_dot.html` still does not exist (only the `.ipynb`). This must be resolved before `/approve-movie`.
+
+### Accessibility: PASS
+- 0 flashes.
+- The title and all fades are gentle.
+- No full-screen noise.
+- Every arrow is labelled, so colour is never the only cue.
+- Negative values are rose, hatched or dashed.
+
+### Findings
+
+**Must**
+- **M1 · 4:52–5:06 (s17), against 5:06–5:36 (s18–s19). "The map stays put" contradicts the next scene.**
+  - **What s17 shows.** The answer chip "No. The map stays put.", the narration "No, the map stays put; its slope is a rate
+    in space", a lock icon "map does not change", and "map under the balloon: 13.00 °C → 13.18 °C after 1 h"
+    (`full/f_302.png`, `g640/t_098–t_102`).
+  - **What follows.** About 3 s later, s18 slides the isotherms 17.7 km east with the parcels (`full/iso_308.0.png`,
+    `iso_311.5.png`). Then s19 says that the thermometer on the pole — a fixed place on the map — falls 0.180 K per hour.
+  - **Why it matters.** A first-time viewer is told the map does not change and then sees it change at a fixed place.
+    That reopens exactly the confusion U-M.6 asked to remove (rate in time vs. slope in space). It also clashes with
+    "DT/Dt = 0: the balloon's reading never changes": s17 has the balloon meeting 13.18 °C air after 1 h.
+  - **Physics.** Both pictures are legitimate *limits*, but s17 never says it is a "suppose":
+    - frozen map: ∂T/∂t = 0 and DT/Dt = +v·∇T;
+    - parcels keep T: DT/Dt = 0 and ∂T/∂t = −v·∇T.
+  - **Fix (recommended).** Re-say s17 as "the slope is a rate in space; 0.180 K per hour is a rate in time":
+    - Answer chip: "No: 1 K per 100 km is the map's slope — a rate in space."
+    - Narration sentence 2: "No: one degree per hundred kilometres is the map's slope, a rate in space."
+    - Replace the lock with "slope: 1 K per 100 km everywhere".
+    - Change "map under the balloon 13.00 → 13.18" to "after 1 h the air is over a spot that was 0.180 K warmer at the
+      start".
+    - In s18, add one chip when the isotherms start to move: "the air carries its temperature, so the pattern slides with
+      the wind".
+  - **Minimal alternative** (no new audio): a chip "for this question, hold the map still for a moment" in s17, plus the
+    s18 chip above. One sentence of TTS changes in the recommended fix; the s17 length may move by about 0.5 s.
+
+**Should**
+- **S1 · captions over content (`caption_collision_sheet.png`, frames `capsim_t/t_*.png`).** The `line:76%` cues sit at
+  y ≈ 821–950 and cover:
+  - the gauges at 0:03–1:32;
+  - the mini gauges at 1:37–1:45;
+  - "area = a·b = 8.000 (both)" at 2:47–2:50;
+  - the W gauge at 3:24–3:30;
+  - the **"not to scale" badges** at 3:45–5:06 (bottom right) and 5:27–5:55 (bottom left);
+  - the s18 legend at 5:06–5:26.
+
+  Hiding an honesty badge while captions are on (they are `default` on the page) is the important part. Fix: move the
+  ScaleBadge to the top right in s14–s17 and s19–s20, as s11, s12 and s18 already do. Keep y 820–960 free of essential
+  text where possible (the gauges could move up about 60 px). The footnote/caption spacing itself is fine.
+- **S2 · 0:36.9–0:44.4 (s03).** The Σ lower limit "i=1" prints over "(a shorthand" in the note
+  "≡ : 'is defined as' (a shorthand, not a new fact)" (`full/f_40.png`). Move the note down about 30 px.
+- **S3 · 0:52–1:04 (s04).** The card shows the (0A.1) and (Vallis 1.7) pills, but the footnote strip names only
+  (K 2.2), while the card itself says "exact section and page: always in the footnote" (`g640/t_018–t_021`). Add the 0A.1
+  and V1.7 footnotes as each row appears. This is the one place where the U-M.3 rule is not met.
+- **S4 · 5:06–5:26 (s18).** The parcel tags overlap their neighbours' dots: "14.4" under the 15.0 dot, "11.2" under 11.6,
+  "13.8" under 14.4, "10.4" under 11.0, "13.1" under 13.7 (`full/iso_308.0.png`). At 640 px several tags are unreadable,
+  and the tags are the point of the scene ("tags never change"). Use five or six parcels per row, or put each tag above its
+  dot.
+- **S5 · captions.** 13 cues end on a one-word second line: 0:00.3 "product.", 0:09.97 "direction.", 0:13.95 "one.",
+  0:18.15 "components.", 0:48.1 "edition.", 1:28.9 "again.", 1:40.9 "six.", 2:02.5 "theta.", 4:25.05 "east:",
+  4:48.9 "hour?", 5:32.1 "upwind.", 5:54.8 "ways,", 6:01.1 "lab.". The worst is "Arrow a goes five right and one up: five, /
+  one.", which splits the pair (5, 1). Rebalance the line breaks (v1 N1 was fixed by hand; `tools/tts.py` still breaks
+  greedily).
+
+**Nice**
+- **N1 · 3:04.9–3:10.** "wind v = (6, 8) m/s, \|v\| = 10.0 m/s" starts on the dashed drop line and runs off the grid
+  (`full/f_186.png`). Put it left of the arrow.
+- **N2 · 2:20–2:28.** In the step-6 note, the hat of "b̂" is drawn up on the line above, over "a" in "by a number"
+  (`full/f_147.5.png`).
+- **N3 · 2:25.8–2:28.** (0A.3) is held only about 2.2 s before s09 (`eq03_sheet.png`). Hold it 1 s longer, or say
+  "that's (0A.3)" at its s11 reprise.
+- **N4 · 3:45–4:13.** "(v·∇)T = v·∇T … the dot product of the wind with ∇T" shows ∇T before s15 explains it at 4:13. The
+  narration gives the meaning, but a small chip "∇T, 'grad T': next" would help.
+- **N5 · 1:33–1:37.** Only the heading chip is on screen while the s07 headline is spoken. Bring panel 1 in earlier.
+- **N6 · 5:29–5:36.** The balloon leaves the top of the map at about 3.9 h, but the readout keeps "balloon: 13.00 °C".
+  Add "(off the map, still 13.00)".
+- **N7.** Only Part 3 has a title card. Matching "Part 1 · what it is" at 0:10 and "Part 2 · why" at 2:28 would echo
+  the agenda chip.
+
+### Verdict: FIX
+Version 2 answers the user's points much better than v1:
+- U-M.1, 2, 4, 5, 7 and 8 are fixed.
+- U-M.3 is fixed except for a 12-s gap (S3).
+- U-M.6 has every requested element.
+
+Everything that moves is right, and every footnote matches its page. **One Must remains.** M1 is the s17 "map stays put"
+statement, which the next scene contradicts on the very point U-M.6 was about. M1 needs one re-render (and one new TTS
+sentence if the recommended wording is used). S1–S4 should go in the same re-render. A re-review needs:
+- frames at 0:36–1:05, 4:49–5:36 and the badge scenes;
+- a caption simulation;
+- the new qa.json.
+
+P1 (the notebook page) is still a publish condition.
+
+## Overall: FIX (ch00_dot_product_why review 3 — M1; S1–S5 recommended; P1 before publishing)
