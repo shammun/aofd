@@ -24,859 +24,832 @@
      "end_frame": 118
     },
     {
-     "text": "First, what it is.",
+     "text": "First what it is, then why.",
      "audio_text": null,
      "start": 4.275,
-     "end": 6.275,
-     "dur": 2.0,
-     "start_frame": 128,
-     "end_frame": 188
-    },
-    {
-     "text": "Then, why it's built this way.",
-     "audio_text": null,
-     "start": 6.625,
-     "end": 9.175,
+     "end": 6.825,
      "dur": 2.55,
-     "start_frame": 199,
-     "end_frame": 275
+     "start_frame": 128,
+     "end_frame": 205
     }
    ],
-   "end": 9.975,
+   "end": 7.625,
    "start_frame": 9,
-   "end_frame": 299
+   "end_frame": 229
   },
   {
    "id": "s02_arrows",
-   "start": 9.975,
+   "start": 7.625,
    "sentences": [
     {
-     "text": "An arrow, or vector, has a length and a direction.",
+     "text": "A vector, an arrow, has a length and a direction.",
      "audio_text": null,
-     "start": 9.975,
-     "end": 13.6,
-     "dur": 3.625,
-     "start_frame": 299,
-     "end_frame": 408
+     "start": 7.625,
+     "end": 11.15,
+     "dur": 3.525,
+     "start_frame": 229,
+     "end_frame": 334
     },
     {
      "text": "Arrow a goes five right and one up: five, one.",
      "audio_text": "Arrow [A](/ˈA/) goes five right and one up: five, one.",
-     "start": 13.95,
-     "end": 17.8,
+     "start": 11.5,
+     "end": 15.35,
      "dur": 3.85,
-     "start_frame": 418,
-     "end_frame": 534
+     "start_frame": 345,
+     "end_frame": 460
     },
     {
      "text": "Arrow b is one, three; the numbers are components.",
      "audio_text": null,
-     "start": 18.15,
-     "end": 21.975,
+     "start": 15.7,
+     "end": 19.525,
      "dur": 3.825,
-     "start_frame": 545,
-     "end_frame": 659
+     "start_frame": 471,
+     "end_frame": 586
     },
     {
      "text": "Pythagoras gives the lengths: about five point one and three point one six.",
      "audio_text": null,
-     "start": 22.325,
-     "end": 27.625,
+     "start": 19.875,
+     "end": 25.175,
      "dur": 5.3,
-     "start_frame": 670,
-     "end_frame": 829
+     "start_frame": 596,
+     "end_frame": 755
     }
    ],
-   "end": 28.425,
-   "start_frame": 299,
-   "end_frame": 853
+   "end": 25.975,
+   "start_frame": 229,
+   "end_frame": 779
   },
   {
    "id": "s03_def_components",
-   "start": 28.425,
+   "start": 25.975,
    "sentences": [
     {
      "text": "Definition one: multiply matching parts, then add.",
      "audio_text": null,
-     "start": 28.425,
-     "end": 32.575,
+     "start": 25.975,
+     "end": 30.125,
      "dur": 4.15,
-     "start_frame": 853,
-     "end_frame": 977
+     "start_frame": 779,
+     "end_frame": 904
     },
     {
      "text": "The small number under each letter says which part.",
      "audio_text": null,
-     "start": 32.925,
-     "end": 36.5,
+     "start": 30.475,
+     "end": 34.05,
      "dur": 3.575,
-     "start_frame": 988,
-     "end_frame": 1095
+     "start_frame": 914,
+     "end_frame": 1022
     },
     {
      "text": "The last form writes i twice: a repeated index means add over i equals one, two and three.",
      "audio_text": null,
-     "start": 36.85,
-     "end": 43.6,
+     "start": 34.4,
+     "end": 41.15,
      "dur": 6.75,
-     "start_frame": 1106,
-     "end_frame": 1308
+     "start_frame": 1032,
+     "end_frame": 1235
     }
    ],
-   "end": 44.4,
-   "start_frame": 853,
-   "end_frame": 1332
+   "end": 41.95,
+   "start_frame": 779,
+   "end_frame": 1258
   },
   {
    "id": "s04_labels",
-   "start": 44.4,
+   "start": 41.95,
    "sentences": [
     {
      "text": "K two point two is equation two point two of Kundu, Cohen and Dowling's Fluid Mechanics, fifth edition.",
      "audio_text": "K two point two is equation two point two of Koondoo, Cohen and Dowling's Fluid Mechanics, fifth edition.",
-     "start": 44.4,
-     "end": 51.8,
+     "start": 41.95,
+     "end": 49.35,
      "dur": 7.4,
-     "start_frame": 1332,
-     "end_frame": 1554
+     "start_frame": 1258,
+     "end_frame": 1480
     },
     {
      "text": "Labels with 0A, the digit zero, are ours: Chapter Zero, Part A of this course.",
      "audio_text": null,
-     "start": 52.15,
-     "end": 58.25,
+     "start": 49.7,
+     "end": 55.8,
      "dur": 6.1,
-     "start_frame": 1565,
-     "end_frame": 1748
+     "start_frame": 1491,
+     "end_frame": 1674
     },
     {
      "text": "Vallis labels point to the main book, and the footnote gives each page.",
      "audio_text": "Valiss labels point to the main book, and the footnote gives each page.",
-     "start": 58.6,
-     "end": 63.45,
+     "start": 56.15,
+     "end": 61.0,
      "dur": 4.85,
-     "start_frame": 1758,
-     "end_frame": 1904
+     "start_frame": 1685,
+     "end_frame": 1830
     }
    ],
-   "end": 64.25,
-   "start_frame": 1332,
-   "end_frame": 1928
+   "end": 61.8,
+   "start_frame": 1258,
+   "end_frame": 1854
   },
   {
    "id": "s05_example",
-   "start": 64.25,
+   "start": 61.8,
    "sentences": [
     {
      "text": "Try it: five times one, plus one times three, is eight.",
      "audio_text": null,
-     "start": 64.25,
-     "end": 68.5,
+     "start": 61.8,
+     "end": 66.05,
      "dur": 4.25,
-     "start_frame": 1928,
-     "end_frame": 2055
-    },
-    {
-     "text": "The z-parts are zero here.",
-     "audio_text": null,
-     "start": 68.85,
-     "end": 71.05,
-     "dur": 2.2,
-     "start_frame": 2066,
-     "end_frame": 2132
+     "start_frame": 1854,
+     "end_frame": 1982
     },
     {
      "text": "Eight is a number, not an arrow.",
      "audio_text": null,
-     "start": 71.4,
-     "end": 74.0,
+     "start": 66.4,
+     "end": 69.0,
      "dur": 2.6,
-     "start_frame": 2142,
-     "end_frame": 2220
+     "start_frame": 1992,
+     "end_frame": 2070
     }
    ],
-   "end": 74.8,
-   "start_frame": 1928,
-   "end_frame": 2244
+   "end": 69.8,
+   "start_frame": 1854,
+   "end_frame": 2094
   },
   {
    "id": "s06_def_cosine",
-   "start": 74.8,
+   "start": 69.8,
    "sentences": [
     {
-     "text": "Definition two uses theta, the angle between the arrows: both lengths times the cosine of theta.",
+     "text": "Definition two: both lengths times the cosine of theta, the angle between them.",
      "audio_text": null,
-     "start": 74.8,
-     "end": 81.875,
-     "dur": 7.075,
-     "start_frame": 2244,
-     "end_frame": 2456
+     "start": 69.8,
+     "end": 75.675,
+     "dur": 5.875,
+     "start_frame": 2094,
+     "end_frame": 2270
     },
     {
      "text": "Cosine is one for the same direction, zero at a right angle, minus one for opposite.",
      "audio_text": null,
-     "start": 82.225,
-     "end": 88.525,
+     "start": 76.025,
+     "end": 82.325,
      "dur": 6.3,
-     "start_frame": 2467,
-     "end_frame": 2656
+     "start_frame": 2281,
+     "end_frame": 2470
     },
     {
      "text": "Here it's point four nine six: eight again.",
      "audio_text": null,
-     "start": 88.875,
-     "end": 92.125,
+     "start": 82.675,
+     "end": 85.925,
      "dur": 3.25,
-     "start_frame": 2666,
-     "end_frame": 2764
+     "start_frame": 2480,
+     "end_frame": 2578
     }
    ],
-   "end": 92.925,
-   "start_frame": 2244,
-   "end_frame": 2788
+   "end": 86.725,
+   "start_frame": 2094,
+   "end_frame": 2602
   },
   {
    "id": "s07_same_way",
-   "start": 92.925,
+   "start": 86.725,
    "sentences": [
     {
      "text": "So the dot product measures how much two arrows point the same way.",
      "audio_text": null,
-     "start": 92.925,
-     "end": 97.225,
+     "start": 86.725,
+     "end": 91.025,
      "dur": 4.3,
-     "start_frame": 2788,
-     "end_frame": 2917
+     "start_frame": 2602,
+     "end_frame": 2731
     },
     {
      "text": "Three, zero with two, zero: six.",
      "audio_text": null,
-     "start": 97.575,
-     "end": 100.55,
+     "start": 91.375,
+     "end": 94.35,
      "dur": 2.975,
-     "start_frame": 2927,
-     "end_frame": 3016
+     "start_frame": 2741,
+     "end_frame": 2830
     },
     {
      "text": "At a right angle, zero; backwards, minus six.",
      "audio_text": null,
-     "start": 100.9,
-     "end": 104.55,
+     "start": 94.7,
+     "end": 98.35,
      "dur": 3.65,
-     "start_frame": 3027,
-     "end_frame": 3136
+     "start_frame": 2841,
+     "end_frame": 2950
     }
    ],
-   "end": 105.35,
-   "start_frame": 2788,
-   "end_frame": 3160
+   "end": 99.15,
+   "start_frame": 2602,
+   "end_frame": 2974
   },
   {
    "id": "s08_shadow",
-   "start": 105.35,
+   "start": 99.15,
    "sentences": [
     {
      "text": "Drop a line from the tip of arrow a onto b's line, at a right angle.",
      "audio_text": "Drop a line from the tip of arrow [A](/ˈA/) onto b's line, at a right angle.",
-     "start": 105.35,
-     "end": 110.375,
+     "start": 99.15,
+     "end": 104.175,
      "dur": 5.025,
-     "start_frame": 3160,
-     "end_frame": 3311
+     "start_frame": 2974,
+     "end_frame": 3125
     },
     {
      "text": "The stretch it marks off is the shadow of arrow a on b.",
      "audio_text": "The stretch it marks off is the shadow of arrow [A](/ˈA/) on b.",
-     "start": 110.725,
-     "end": 114.8,
+     "start": 104.525,
+     "end": 108.6,
      "dur": 4.075,
-     "start_frame": 3322,
-     "end_frame": 3444
+     "start_frame": 3136,
+     "end_frame": 3258
     },
     {
      "text": "In this right-angled triangle, arrow a is the long side.",
      "audio_text": "In this right-angled triangle, arrow [A](/ˈA/) is the long side.",
-     "start": 115.15,
-     "end": 119.575,
+     "start": 108.95,
+     "end": 113.375,
      "dur": 4.425,
-     "start_frame": 3454,
-     "end_frame": 3587
+     "start_frame": 3268,
+     "end_frame": 3401
     },
     {
      "text": "The shadow is the side next to theta, so it's the length of arrow a times cos theta.",
      "audio_text": "The shadow is the side next to theta, so it's the length of arrow [A](/ˈA/) times cos theta.",
-     "start": 119.925,
-     "end": 125.65,
+     "start": 113.725,
+     "end": 119.45,
      "dur": 5.725,
-     "start_frame": 3598,
-     "end_frame": 3769
+     "start_frame": 3412,
+     "end_frame": 3583
     },
     {
      "text": "Divide definition two by the length of b: it cancels on the right, leaving the shadow, a dot b over the length of b.",
      "audio_text": "Divide definition two by the length of b: it cancels on the right, leaving the shadow, [A](/ˈA/) dot b over the length of b.",
-     "start": 126.0,
-     "end": 134.4,
+     "start": 119.8,
+     "end": 128.2,
      "dur": 8.4,
-     "start_frame": 3780,
-     "end_frame": 4032
+     "start_frame": 3594,
+     "end_frame": 3846
     },
     {
      "text": "Eight over three point one six two: two point five three.",
      "audio_text": null,
-     "start": 134.75,
-     "end": 138.875,
+     "start": 128.55,
+     "end": 132.675,
      "dur": 4.125,
-     "start_frame": 4042,
-     "end_frame": 4166
+     "start_frame": 3856,
+     "end_frame": 3980
     },
     {
      "text": "And b over its own length, b hat, is b shrunk to length one.",
      "audio_text": null,
-     "start": 139.225,
-     "end": 143.975,
+     "start": 133.025,
+     "end": 137.775,
      "dur": 4.75,
-     "start_frame": 4177,
-     "end_frame": 4319
+     "start_frame": 3991,
+     "end_frame": 4133
     },
     {
      "text": "So the shadow is also a dot b hat.",
      "audio_text": "So the shadow is also [A](/ˈA/) dot b hat.",
-     "start": 144.325,
-     "end": 147.25,
+     "start": 138.125,
+     "end": 141.05,
      "dur": 2.925,
-     "start_frame": 4330,
-     "end_frame": 4417
+     "start_frame": 4144,
+     "end_frame": 4231
     }
    ],
-   "end": 148.05,
-   "start_frame": 3160,
-   "end_frame": 4442
+   "end": 141.85,
+   "start_frame": 2974,
+   "end_frame": 4256
   },
   {
    "id": "s09_question",
-   "start": 148.05,
+   "start": 141.85,
    "sentences": [
     {
      "text": "So the dot product is the shadow times the length of b.",
      "audio_text": null,
-     "start": 148.05,
-     "end": 152.025,
+     "start": 141.85,
+     "end": 145.825,
      "dur": 3.975,
-     "start_frame": 4441,
-     "end_frame": 4561
+     "start_frame": 4255,
+     "end_frame": 4375
     },
     {
      "text": "Why not just stop at the shadow?",
      "audio_text": null,
-     "start": 152.375,
-     "end": 154.675,
+     "start": 146.175,
+     "end": 148.475,
      "dur": 2.3,
-     "start_frame": 4571,
-     "end_frame": 4640
+     "start_frame": 4385,
+     "end_frame": 4454
     }
    ],
-   "end": 155.475,
-   "start_frame": 4442,
-   "end_frame": 4664
+   "end": 149.275,
+   "start_frame": 4256,
+   "end_frame": 4478
   },
   {
    "id": "s10_reason1_order",
-   "start": 155.475,
+   "start": 149.275,
    "sentences": [
     {
      "text": "Reason one: order.",
      "audio_text": null,
-     "start": 155.475,
-     "end": 157.825,
+     "start": 149.275,
+     "end": 151.625,
      "dur": 2.35,
-     "start_frame": 4664,
-     "end_frame": 4735
+     "start_frame": 4478,
+     "end_frame": 4549
     },
     {
-     "text": "The shadow of arrow a on b is two point five three.",
-     "audio_text": "The shadow of arrow [A](/ˈA/) on b is two point five three.",
-     "start": 158.175,
-     "end": 162.0,
-     "dur": 3.825,
-     "start_frame": 4745,
-     "end_frame": 4860
-    },
-    {
-     "text": "The shadow of b on arrow a is one point five seven.",
-     "audio_text": "The shadow of b on arrow [A](/ˈA/) is one point five seven.",
-     "start": 162.35,
-     "end": 166.35,
-     "dur": 4.0,
-     "start_frame": 4870,
-     "end_frame": 4990
+     "text": "The shadow of arrow a on b is two point five three; of b on arrow a, one point five seven.",
+     "audio_text": "The shadow of arrow [A](/ˈA/) on b is two point five three; of b on arrow a, one point five seven.",
+     "start": 151.975,
+     "end": 158.875,
+     "dur": 6.9,
+     "start_frame": 4559,
+     "end_frame": 4766
     },
     {
      "text": "Times the other length, both give eight.",
      "audio_text": null,
-     "start": 166.7,
-     "end": 169.375,
+     "start": 159.225,
+     "end": 161.9,
      "dur": 2.675,
-     "start_frame": 5001,
-     "end_frame": 5081
+     "start_frame": 4777,
+     "end_frame": 4857
     }
    ],
-   "end": 170.175,
-   "start_frame": 4664,
-   "end_frame": 5105
+   "end": 162.7,
+   "start_frame": 4478,
+   "end_frame": 4881
   },
   {
    "id": "s11_reason2_cheap",
-   "start": 170.175,
+   "start": 162.7,
    "sentences": [
     {
      "text": "Reason two: it's cheap: no angle, no square root.",
      "audio_text": null,
-     "start": 170.175,
-     "end": 174.175,
+     "start": 162.7,
+     "end": 166.7,
      "dur": 4.0,
-     "start_frame": 5105,
-     "end_frame": 5225
+     "start_frame": 4881,
+     "end_frame": 5001
     },
     {
      "text": "The shadow comes from it by one division.",
      "audio_text": null,
-     "start": 174.525,
-     "end": 177.5,
+     "start": 167.05,
+     "end": 170.025,
      "dur": 2.975,
-     "start_frame": 5236,
-     "end_frame": 5325
+     "start_frame": 5011,
+     "end_frame": 5101
     },
     {
      "text": "If b has length one, a dot b over one is just a dot b: the dot product is the shadow.",
      "audio_text": "If b has length one, [A](/ˈA/) dot b over one is just [A](/ˈA/) dot b: the dot product is the shadow.",
-     "start": 177.85,
-     "end": 184.575,
+     "start": 170.375,
+     "end": 177.1,
      "dur": 6.725,
-     "start_frame": 5335,
-     "end_frame": 5537
+     "start_frame": 5111,
+     "end_frame": 5313
     },
     {
-     "text": "That's how x hat, one unit east, picks out a wind's eastward part.",
+     "text": "So x hat, one unit east, picks out the wind's eastward part.",
      "audio_text": null,
-     "start": 184.925,
-     "end": 189.9,
-     "dur": 4.975,
-     "start_frame": 5548,
-     "end_frame": 5697
+     "start": 177.45,
+     "end": 182.175,
+     "dur": 4.725,
+     "start_frame": 5323,
+     "end_frame": 5465
     }
    ],
-   "end": 190.7,
-   "start_frame": 5105,
-   "end_frame": 5721
+   "end": 182.975,
+   "start_frame": 4881,
+   "end_frame": 5489
   },
   {
    "id": "s12_reason3_work",
-   "start": 190.7,
+   "start": 182.975,
    "sentences": [
     {
      "text": "Reason three: physics needs both sizes.",
      "audio_text": null,
-     "start": 190.7,
-     "end": 194.175,
+     "start": 182.975,
+     "end": 186.45,
      "dur": 3.475,
-     "start_frame": 5721,
-     "end_frame": 5825
+     "start_frame": 5489,
+     "end_frame": 5593
     },
     {
      "text": "Pull a sled with twenty newtons, at sixty degrees, for five metres.",
      "audio_text": null,
-     "start": 194.525,
-     "end": 199.625,
+     "start": 186.8,
+     "end": 191.9,
      "dur": 5.1,
-     "start_frame": 5836,
-     "end_frame": 5989
+     "start_frame": 5604,
+     "end_frame": 5757
     },
     {
-     "text": "The force's shadow, ten newtons, is still a force.",
+     "text": "Its shadow, ten newtons, is still a force.",
      "audio_text": null,
-     "start": 199.975,
-     "end": 203.7,
-     "dur": 3.725,
-     "start_frame": 5999,
-     "end_frame": 6111
+     "start": 192.25,
+     "end": 195.575,
+     "dur": 3.325,
+     "start_frame": 5767,
+     "end_frame": 5867
     },
     {
-     "text": "Times five metres: fifty joules of work; twice as far, double the work.",
+     "text": "Times five metres: fifty joules; twice as far, twice the work.",
      "audio_text": null,
-     "start": 204.05,
-     "end": 209.175,
-     "dur": 5.125,
-     "start_frame": 6121,
-     "end_frame": 6275
+     "start": 195.925,
+     "end": 200.7,
+     "dur": 4.775,
+     "start_frame": 5878,
+     "end_frame": 6021
     }
    ],
-   "end": 209.975,
-   "start_frame": 5721,
-   "end_frame": 6299
+   "end": 201.5,
+   "start_frame": 5489,
+   "end_frame": 6045
   },
   {
    "id": "s13_vallis17",
-   "start": 209.975,
+   "start": 201.5,
    "sentences": [
     {
      "text": "Now the weather.",
      "audio_text": null,
-     "start": 209.975,
-     "end": 211.625,
+     "start": 201.5,
+     "end": 203.15,
      "dur": 1.65,
-     "start_frame": 6299,
-     "end_frame": 6349
+     "start_frame": 6045,
+     "end_frame": 6094
     },
     {
      "text": "This is Vallis one point seven.",
      "audio_text": "This is Valiss one point seven.",
-     "start": 211.975,
-     "end": 214.725,
+     "start": 203.5,
+     "end": 206.25,
      "dur": 2.75,
-     "start_frame": 6359,
-     "end_frame": 6442
+     "start_frame": 6105,
+     "end_frame": 6187
     },
     {
-     "text": "Phi is anything the air carries; here, temperature T.",
+     "text": "Phi is anything the air carries; here, temperature T, and v is the wind.",
      "audio_text": null,
-     "start": 215.075,
-     "end": 219.225,
-     "dur": 4.15,
-     "start_frame": 6452,
-     "end_frame": 6577
-    },
-    {
-     "text": "Vallis calls the wind v.",
-     "audio_text": "Valiss calls the wind v.",
-     "start": 219.575,
-     "end": 221.825,
-     "dur": 2.25,
-     "start_frame": 6587,
-     "end_frame": 6655
+     "start": 206.6,
+     "end": 211.975,
+     "dur": 5.375,
+     "start_frame": 6198,
+     "end_frame": 6359
     }
    ],
-   "end": 222.625,
-   "start_frame": 6299,
-   "end_frame": 6679
+   "end": 212.775,
+   "start_frame": 6045,
+   "end_frame": 6383
   },
   {
    "id": "s14_two_thermometers",
-   "start": 222.625,
+   "start": 212.775,
    "sentences": [
     {
      "text": "Picture two thermometers.",
      "audio_text": null,
-     "start": 222.625,
-     "end": 224.825,
+     "start": 212.775,
+     "end": 214.975,
      "dur": 2.2,
-     "start_frame": 6679,
-     "end_frame": 6745
+     "start_frame": 6383,
+     "end_frame": 6449
     },
     {
-     "text": "One is fixed on a pole: partial T by partial t is how fast it changes.",
+     "text": "One is fixed on a pole: partial T by partial t is how fast its reading changes at that fixed point.",
      "audio_text": null,
-     "start": 225.175,
-     "end": 230.75,
-     "dur": 5.575,
-     "start_frame": 6755,
-     "end_frame": 6922
+     "start": 215.325,
+     "end": 222.75,
+     "dur": 7.425,
+     "start_frame": 6460,
+     "end_frame": 6682
     },
     {
-     "text": "One rides a balloon with the air: D T by D t, the material derivative.",
+     "text": "The other rides a balloon that drifts with the wind, so it always measures the same air parcel: a small volume of air that moves with the flow.",
      "audio_text": null,
-     "start": 231.1,
-     "end": 237.0,
-     "dur": 5.9,
-     "start_frame": 6933,
-     "end_frame": 7110
+     "start": 223.1,
+     "end": 232.725,
+     "dur": 9.625,
+     "start_frame": 6693,
+     "end_frame": 6982
     },
     {
-     "text": "The last term, v dot grad T, is the extra change from moving through the temperature map.",
+     "text": "Its rate of change, D T by D t, is the material derivative: the rate of change following a fluid parcel.",
      "audio_text": null,
-     "start": 237.35,
-     "end": 243.75,
-     "dur": 6.4,
-     "start_frame": 7120,
-     "end_frame": 7312
+     "start": 233.075,
+     "end": 240.925,
+     "dur": 7.85,
+     "start_frame": 6992,
+     "end_frame": 7228
     },
     {
-     "text": "Balloon's change equals pole's change, plus the change from crossing the slope, called advection: carrying by the wind.",
+     "text": "The two differ because the parcel travels across the temperature map, and that extra change is v dot grad T.",
      "audio_text": null,
-     "start": 244.1,
-     "end": 252.225,
-     "dur": 8.125,
-     "start_frame": 7323,
-     "end_frame": 7567
+     "start": 241.275,
+     "end": 248.75,
+     "dur": 7.475,
+     "start_frame": 7238,
+     "end_frame": 7462
+    },
+    {
+     "text": "So the parcel's change equals the change at the fixed point, plus the change from moving across the gradient: advection, transport by the wind.",
+     "audio_text": null,
+     "start": 249.1,
+     "end": 258.625,
+     "dur": 9.525,
+     "start_frame": 7473,
+     "end_frame": 7759
     }
    ],
-   "end": 253.025,
-   "start_frame": 6679,
-   "end_frame": 7591
+   "end": 259.425,
+   "start_frame": 6383,
+   "end_frame": 7783
   },
   {
    "id": "s15_grad_t",
-   "start": 253.025,
+   "start": 259.425,
    "sentences": [
     {
      "text": "Grad T is an arrow of two slopes: how fast T changes per metre east, and per metre north.",
      "audio_text": null,
-     "start": 253.025,
-     "end": 259.75,
+     "start": 259.425,
+     "end": 266.15,
      "dur": 6.725,
-     "start_frame": 7591,
-     "end_frame": 7792
+     "start_frame": 7783,
+     "end_frame": 7984
     },
     {
      "text": "It points uphill, towards warmer air; its length is the steepness.",
      "audio_text": null,
-     "start": 260.1,
-     "end": 264.7,
+     "start": 266.5,
+     "end": 271.1,
      "dur": 4.6,
-     "start_frame": 7803,
-     "end_frame": 7941
+     "start_frame": 7995,
+     "end_frame": 8133
     },
     {
      "text": "Here, one degree per hundred kilometres east: ten to the minus five kelvin per metre.",
      "audio_text": null,
-     "start": 265.05,
-     "end": 271.35,
+     "start": 271.45,
+     "end": 277.75,
      "dur": 6.3,
-     "start_frame": 7951,
-     "end_frame": 8140
+     "start_frame": 8144,
+     "end_frame": 8332
     }
    ],
-   "end": 272.15,
-   "start_frame": 7591,
-   "end_frame": 8164
+   "end": 278.55,
+   "start_frame": 7783,
+   "end_frame": 8356
   },
   {
    "id": "s16_calculation",
-   "start": 272.15,
+   "start": 278.55,
    "sentences": [
     {
      "text": "The wind is ten metres per second, sixty degrees from grad T.",
      "audio_text": null,
-     "start": 272.15,
-     "end": 277.025,
+     "start": 278.55,
+     "end": 283.425,
      "dur": 4.875,
-     "start_frame": 8164,
-     "end_frame": 8311
+     "start_frame": 8356,
+     "end_frame": 8503
     },
     {
      "text": "Its shadow: five metres per second.",
      "audio_text": null,
-     "start": 277.375,
-     "end": 280.475,
+     "start": 283.775,
+     "end": 286.875,
      "dur": 3.1,
-     "start_frame": 8321,
-     "end_frame": 8414
+     "start_frame": 8513,
+     "end_frame": 8606
     },
     {
      "text": "Times the steepness: five times ten to the minus five kelvin per second, point one eight kelvin per hour.",
      "audio_text": null,
-     "start": 280.825,
-     "end": 288.075,
+     "start": 287.225,
+     "end": 294.475,
      "dur": 7.25,
-     "start_frame": 8425,
-     "end_frame": 8642
+     "start_frame": 8617,
+     "end_frame": 8834
     }
    ],
-   "end": 288.875,
-   "start_frame": 8164,
-   "end_frame": 8666
+   "end": 295.275,
+   "start_frame": 8356,
+   "end_frame": 8858
   },
   {
    "id": "s17_rate_in_time",
-   "start": 288.875,
+   "start": 295.275,
    "sentences": [
     {
      "text": "Does the map warm by point one eight an hour?",
      "audio_text": null,
-     "start": 288.875,
-     "end": 291.925,
+     "start": 295.275,
+     "end": 298.325,
      "dur": 3.05,
-     "start_frame": 8666,
-     "end_frame": 8758
+     "start_frame": 8858,
+     "end_frame": 8950
     },
     {
-     "text": "No, the map stays put; its slope is a rate in space.",
+     "text": "No: one degree per hundred kilometres is the map's slope, a rate in space.",
      "audio_text": null,
-     "start": 292.275,
-     "end": 296.525,
+     "start": 298.675,
+     "end": 304.275,
+     "dur": 5.6,
+     "start_frame": 8960,
+     "end_frame": 9128
+    },
+    {
+     "text": "The parcel heads towards warmth at eighteen kilometres an hour.",
+     "audio_text": null,
+     "start": 304.625,
+     "end": 308.875,
      "dur": 4.25,
-     "start_frame": 8768,
-     "end_frame": 8896
-    },
-    {
-     "text": "The air heads towards warmth at eighteen kilometres an hour.",
-     "audio_text": null,
-     "start": 296.875,
-     "end": 300.85,
-     "dur": 3.975,
-     "start_frame": 8906,
-     "end_frame": 9026
+     "start_frame": 9139,
+     "end_frame": 9266
     },
     {
      "text": "Each hour, it reaches places point one eight degrees warmer.",
      "audio_text": null,
-     "start": 301.2,
-     "end": 305.575,
+     "start": 309.225,
+     "end": 313.6,
      "dur": 4.375,
-     "start_frame": 9036,
-     "end_frame": 9167
+     "start_frame": 9277,
+     "end_frame": 9408
     }
    ],
-   "end": 306.375,
-   "start_frame": 8666,
-   "end_frame": 9191
+   "end": 314.4,
+   "start_frame": 8858,
+   "end_frame": 9432
   },
   {
    "id": "s18_label_zero",
-   "start": 306.375,
+   "start": 314.4,
    "sentences": [
     {
      "text": "Suppose each parcel keeps its temperature: no sunshine, no mixing.",
      "audio_text": null,
-     "start": 306.375,
-     "end": 311.25,
+     "start": 314.4,
+     "end": 319.275,
      "dur": 4.875,
-     "start_frame": 9191,
-     "end_frame": 9338
+     "start_frame": 9432,
+     "end_frame": 9578
     },
     {
      "text": "It carries it like a label, so D T by D t is zero.",
      "audio_text": null,
-     "start": 311.6,
-     "end": 315.8,
+     "start": 319.625,
+     "end": 323.825,
      "dur": 4.2,
-     "start_frame": 9348,
-     "end_frame": 9474
+     "start_frame": 9589,
+     "end_frame": 9715
     },
     {
      "text": "Put zero in, then subtract v dot grad T from both sides: partial T by partial t equals minus v dot grad T.",
      "audio_text": null,
-     "start": 316.15,
-     "end": 325.3,
+     "start": 324.175,
+     "end": 333.325,
      "dur": 9.15,
-     "start_frame": 9485,
-     "end_frame": 9759
+     "start_frame": 9725,
+     "end_frame": 10000
     }
    ],
-   "end": 326.1,
-   "start_frame": 9191,
-   "end_frame": 9783
+   "end": 334.125,
+   "start_frame": 9432,
+   "end_frame": 10024
   },
   {
    "id": "s19_pole_cools",
-   "start": 326.1,
+   "start": 334.125,
    "sentences": [
     {
-     "text": "So the thermometer on the pole falls point one eight degrees an hour, over four a day.",
+     "text": "So the pole's thermometer falls point one eight degrees an hour.",
      "audio_text": null,
-     "start": 326.1,
-     "end": 331.75,
-     "dur": 5.65,
-     "start_frame": 9783,
-     "end_frame": 9953
+     "start": 334.125,
+     "end": 338.3,
+     "dur": 4.175,
+     "start_frame": 10024,
+     "end_frame": 10149
     },
     {
-     "text": "The arriving air comes from colder places upwind.",
+     "text": "Arriving parcels come from colder places upwind.",
      "audio_text": null,
-     "start": 332.1,
-     "end": 335.775,
-     "dur": 3.675,
-     "start_frame": 9963,
-     "end_frame": 10073
+     "start": 338.65,
+     "end": 342.55,
+     "dur": 3.9,
+     "start_frame": 10160,
+     "end_frame": 10277
     }
    ],
-   "end": 336.575,
-   "start_frame": 9783,
-   "end_frame": 10097
+   "end": 343.35,
+   "start_frame": 10024,
+   "end_frame": 10300
   },
   {
    "id": "s20_twice_as_steep",
-   "start": 336.575,
+   "start": 343.35,
    "sentences": [
     {
      "text": "Make the map twice as steep.",
      "audio_text": null,
-     "start": 336.575,
-     "end": 338.925,
+     "start": 343.35,
+     "end": 345.7,
      "dur": 2.35,
-     "start_frame": 10097,
-     "end_frame": 10168
+     "start_frame": 10301,
+     "end_frame": 10371
     },
     {
      "text": "The wind's shadow stays five metres per second: it belongs to the wind.",
      "audio_text": null,
-     "start": 339.275,
-     "end": 344.575,
+     "start": 346.05,
+     "end": 351.35,
      "dur": 5.3,
-     "start_frame": 10178,
-     "end_frame": 10337
+     "start_frame": 10382,
+     "end_frame": 10541
     },
     {
-     "text": "But the pole cools twice as fast, point three six degrees an hour: the dot product holds the steepness, and the shadow alone doesn't.",
+     "text": "But the pole cools twice as fast, point three six degrees an hour: the dot product holds the steepness; the shadow doesn't.",
      "audio_text": null,
-     "start": 344.925,
-     "end": 353.975,
-     "dur": 9.05,
-     "start_frame": 10348,
-     "end_frame": 10619
+     "start": 351.7,
+     "end": 360.175,
+     "dur": 8.475,
+     "start_frame": 10551,
+     "end_frame": 10805
     }
    ],
-   "end": 354.775,
-   "start_frame": 10097,
-   "end_frame": 10643
+   "end": 360.975,
+   "start_frame": 10300,
+   "end_frame": 10829
   },
   {
    "id": "s21_recap_end",
-   "start": 354.775,
+   "start": 360.975,
    "sentences": [
     {
-     "text": "Three reasons, then: it's the same both ways, it's cheap, and physics needs both sizes.",
+     "text": "Three reasons: same both ways, cheap, and physics needs both sizes.",
      "audio_text": null,
-     "start": 354.775,
-     "end": 360.775,
-     "dur": 6.0,
-     "start_frame": 10643,
-     "end_frame": 10823
+     "start": 360.975,
+     "end": 366.1,
+     "dur": 5.125,
+     "start_frame": 10829,
+     "end_frame": 10983
     },
     {
-     "text": "Try it yourself in the vector products lab.",
+     "text": "Try it in the vector products lab.",
      "audio_text": null,
-     "start": 361.125,
-     "end": 364.425,
-     "dur": 3.3,
-     "start_frame": 10834,
-     "end_frame": 10933
+     "start": 366.45,
+     "end": 369.1,
+     "dur": 2.65,
+     "start_frame": 10994,
+     "end_frame": 11073
     }
    ],
-   "end": 364.725,
-   "start_frame": 10643,
-   "end_frame": 10942
+   "end": 369.4,
+   "start_frame": 10829,
+   "end_frame": 11082
   }
  ],
- "total_s": 364.725,
- "total_frames": 10942,
- "render_s": 251.4,
+ "total_s": 369.4,
+ "total_frames": 11082,
+ "render_s": 2320.6,
  "loudnorm_input": {
-  "input_i": "-24.93",
-  "input_tp": "-3.34",
-  "input_lra": "4.40",
-  "input_thresh": "-35.50",
+  "input_i": "-24.92",
+  "input_tp": "-4.42",
+  "input_lra": "4.70",
+  "input_thresh": "-35.45",
   "output_i": "-16.46",
   "output_tp": "-1.50",
-  "output_lra": "4.00",
-  "output_thresh": "-27.03",
+  "output_lra": "4.30",
+  "output_thresh": "-27.00",
   "normalization_type": "dynamic",
   "target_offset": "0.46"
  },
  "cues": 88,
  "warnings": [],
  "self_check": {
-  "expected_s": 364.725,
-  "audio_s": 364.725,
+  "expected_s": 369.4,
+  "audio_s": 369.4,
   "diff_ms": -0.0,
   "len_ok": true,
   "cues_ok": true

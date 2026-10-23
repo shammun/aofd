@@ -12,7 +12,9 @@ import wx from "../../ch00/ch00_dot_product_why/data/weather.json";
 
 /**
  * Chapter 0A movie "What the dot product measures, and why it multiplies by the other length"
- * (movies/ch00/ch00_dot_product_why/storyboard.yaml, round 4: 21 scenes), 1920×1080, 30 fps, 367.2 s.
+ * (movies/ch00/ch00_dot_product_why/storyboard.yaml, round 4: 21 scenes), 1920×1080, 30 fps, 371.9 s (fix loop 1, v3).
+ * Caption band: player captions (en.vtt, line:76%) cover y ≈ 821–950, so nothing essential sits between y 815 and the
+ * footnote strip (y 1000); badges in bottom corners end at y 812.
  * Every number on screen is read from data/*.json, written by movies/data/build_ch00_dot_product_why.py from the tested
  * fluidpy functions (fluidpy.geo.vectors, fluidpy.core.operators.gradient, fluidpy.core.kinematics). This file only
  * indexes those samples by frame. Scene cuts and reveals come from timing.json (tools/tts.py, af_bella ×1.0).
@@ -260,9 +262,10 @@ const TeX: React.FC<{ s: string; x: number; y: number; size?: number; o?: number
     <div style={{ position: "absolute", left: x, top: y, width: w, textAlign: align, fontSize: size, color: c, opacity: o }}
       dangerouslySetInnerHTML={{ __html: tex(s, false) }} />
 );
-/** House ScaleBadge, enlarged 1.15× (26 → 30 px text); bottom corners sit above the footnote strip (y < 1000). */
-const Badge: React.FC<{ detail: string; corner?: "tl" | "tr" | "bl" | "br"; o?: number }> = ({ detail, corner = "tr", o = 1 }) => (
-  <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: corner[0] === "b" ? 985 : 1080, opacity: o,
+/** House ScaleBadge, enlarged 1.15× (26 → 30 px text). Bottom corners end at y = `bottom` (default 812): above the
+ * player-caption band (cues at line:76% cover y ≈ 821–950) and the footnote strip (y ≥ 1000). */
+const Badge: React.FC<{ detail: string; corner?: "tl" | "tr" | "bl" | "br"; o?: number; bottom?: number }> = ({ detail, corner = "tr", o = 1, bottom = 812 }) => (
+  <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: corner[0] === "b" ? bottom + 41 : 1080, opacity: o,
     transform: "scale(1.15)", transformOrigin: { tl: "top left", tr: "top right", bl: "bottom left", br: "bottom right" }[corner] }}>
     <ScaleBadge detail={detail} corner={corner} />
   </div>
@@ -273,7 +276,7 @@ const Svg: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 const Scene: React.FC<{ children: React.ReactNode; o?: number }> = ({ children, o = 1 }) => (
   <AbsoluteFill style={{ background: HOUSE.bg }}><AbsoluteFill style={{ opacity: o }}>{children}</AbsoluteFill></AbsoluteFill>
 );
-const GridNote: React.FC<{ o?: number; y?: number }> = ({ o = 1, y = 950 }) => (
+const GridNote: React.FC<{ o?: number; y?: number }> = ({ o = 1, y = 958 }) => (
   <Txt x={40} y={y} s={28} c={MUTED} o={o}>1 grid square = 1 unit (equal axes)</Txt>
 );
 
@@ -288,7 +291,7 @@ const nL_B: Pt = [pair.k_cross_b[0] / NB, pair.k_cross_b[1] / NB]; // unit left 
 const nR_A: Pt = [-pair.k_cross_a[0] / NA, -pair.k_cross_a[1] / NA]; // unit right normal of a
 
 // =============================================================== the pair plane (s01-s09, s11)
-const P12 = mkP(380, 790, 95);
+const P12 = mkP(380, 760, 95);
 const PairBase: React.FC<{ g?: number; dim?: number; gridO?: number }> = ({ g = 1, dim = 1, gridO = 1 }) => {
   const P = P12, O = P(0, 0);
   return (
@@ -318,7 +321,7 @@ const S01: React.FC = () => {
   const t2 = SS(0, 1), oAg = ramp(f, t2, t2 + 12);
   const box: Pt = [1440, 470];
   const ca: Pt = lerp([1010, 300], [box[0] - 150, box[1] - 30], slide), cb: Pt = lerp([1640, 300], [box[0] + 40, box[1] - 30], slide);
-  const GX = 1040, GW = 780, GY = 820;
+  const GX = 1040, GW = 780, GY = 740;
   const markX = GX + ((AB + 16.1) / 32.2) * GW;
   const num: Pt = lerp([box[0] + 20, box[1] + 90], [markX, GY - 60], drop);
   return (
@@ -413,7 +416,7 @@ const S03: React.FC = () => {
       </Txt>
       <Txt x={PX + 20} y={430} w={PW - 40} s={32} o={oIdx}><span style={{ color: GOLD }}>i</span> appears twice → add over i = 1, 2, 3:</Txt>
       <TeX s={String.raw`a_ib_i\ \text{ means }\ \displaystyle\sum_{i=1}^{3} a_ib_i = a_1b_1 + a_2b_2 + a_3b_3`} x={PX + 20} y={490} size={36} o={oSum} />
-      <Txt x={PX + 20} y={600} w={PW - 40} s={30} c={MUTED} o={oSum}>≡ : “is defined as” (a shorthand, not a new fact)</Txt>
+      <Txt x={PX + 20} y={630} w={PW - 40} s={30} c={MUTED} o={oSum}>≡ : “is defined as” (a shorthand, not a new fact)</Txt>
       <GridNote />
       <Footnote items={[FN.K22]} o={oEq} />
     </Scene>
@@ -455,12 +458,12 @@ const S04: React.FC = () => {
       <Txt x={196} y={470} w={300} s={28} c={GOLD} o={r(t1)}>↑ digit 0</Txt>
       <Svg>
         <g opacity={r(tF)}>
-          <line x1={960} y1={870} x2={960} y2={985} stroke={HOUSE.accent} strokeWidth={4} />
-          <polygon points="960,997 948,975 972,975" fill={HOUSE.accent} />
+          <line x1={1800} y1={790} x2={1800} y2={985} stroke={HOUSE.accent} strokeWidth={4} />
+          <polygon points="1800,997 1788,975 1812,975" fill={HOUSE.accent} />
         </g>
       </Svg>
-      <Txt x={990} y={895} w={880} s={32} c={HOUSE.accent} o={r(tF)} bold>exact section and page: always in the footnote</Txt>
-      <Footnote items={[FN.K22]} emphasis={emph} />
+      <Txt x={960} y={735} w={900} s={32} c={HOUSE.accent} o={r(tF)} align="right" bold>exact section and page: always in the footnote</Txt>
+      <Footnote items={[FN.K22, ...(f >= t1 ? [FN.A1] : []), ...(f >= t2 ? [FN.V17] : [])]} emphasis={emph} />
     </Scene>
   );
 };
@@ -468,15 +471,15 @@ const S04: React.FC = () => {
 // ---------------------------------------------------------------- s05 worked example
 const S05: React.FC = () => {
   const f = useCurrentFrame(), k = 4;
-  const t1 = SS(k, 1), t2 = SS(k, 2);
-  const oSum = ramp(f, 6, 20), oZ = ramp(f, t1, t1 + 12), oG = ramp(f, t2, t2 + 14);
+  const tZ = AT(k, 0, "is eight"), t2 = SS(k, 1); // "The z-parts are zero here." was cut (v3): the note comes with "is eight"
+  const oSum = ramp(f, 6, 20), oZ = ramp(f, tZ, tZ + 12), oG = ramp(f, t2, t2 + 14);
   const sumTex = String.raw`\boxed{${col(TEAL, "5")}\cdot ${col(ORANGE, "1")}} + \boxed{${col(TEAL, "1")}\cdot ${col(ORANGE, "3")}} + ${col(GREY, "0\\cdot 0")} = ${AB.toFixed(0)}`;
   return (
     <Scene>
       <Svg>
         <PairBase />
-        <Gauge x={PX + 60} y={800} w={PW - 120} min={-16.1} max={16.1} step={4} value={AB} label="a·b = 8: a number, not an arrow" lc={INK} o={oG} />
-        <GhostArrow x={1640} y={610} len={130} o={0.9 * oG} />
+        <Gauge x={PX + 60} y={740} w={PW - 120} min={-16.1} max={16.1} step={4} value={AB} label="a·b = 8: a number, not an arrow" lc={INK} o={oG} />
+        <GhostArrow x={1640} y={560} len={130} o={0.9 * oG} />
       </Svg>
       <PairChips />
       <Chip text="Try it" x={40} y={30} />
@@ -493,15 +496,15 @@ const S05: React.FC = () => {
 
 // ---------------------------------------------------------------- s06 definition 2 (0A.1)
 const CosMini: React.FC<{ x: number; q: Pt; th: number; c: number; label: string }> = ({ x, q, th, c, label }) => {
-  const U = 40, O: Pt = [x + 115, 470];
+  const U = 40, O: Pt = [x + 115, 465];
   const P = mkP(O[0], O[1], 1);
   return (
     <g>
       <Arrow p={O} q={[O[0] + 3 * U, O[1]]} color={TEAL} w={5} head={18} />
       <Arrow p={O} q={[O[0] + q[0] * U, O[1] - q[1] * U]} color={ORANGE} w={5} head={18} />
       {th > 0 ? <Arc P={P} a0={0} a1={th} r={th > 100 ? 22 : 30} /> : null}
-      <Lbl x={x + 125} y={540} t={label} s={30} a="middle" />
-      <Lbl x={x + 125} y={578} t={`= ${fx(c, 0)}`} s={30} a="middle" b />
+      <Lbl x={x + 125} y={520} t={label} s={30} a="middle" />
+      <Lbl x={x + 125} y={555} t={`= ${fx(c, 0)}`} s={30} a="middle" b />
     </g>
   );
 };
@@ -518,29 +521,29 @@ const S06: React.FC = () => {
         <g opacity={oA}>
           <Arc P={P} a0={PHI_A} a1={PHI_B} r={0.8} />
           <Lbl x={P(0.95, 0.95)[0]} y={P(0.95, 0.95)[1]} t={`θ = ${TH.toFixed(1)}°`} s={32} />
-          <Bracket p={P(nR_A[0] * off, nR_A[1] * off)} q={P(A[0] + nR_A[0] * off, A[1] + nR_A[1] * off)} off={0} c={TEAL} />
-          <Lbl x={P(2.5 + nR_A[0] * 1.05, 0.5 + nR_A[1] * 1.05)[0]} y={P(2.5 + nR_A[0] * 1.05, 0.5 + nR_A[1] * 1.05)[1]}
+          <Bracket p={P(-nR_A[0] * off, -nR_A[1] * off)} q={P(A[0] - nR_A[0] * off, A[1] - nR_A[1] * off)} off={0} c={TEAL} />
+          <Lbl x={P(2.5 - nR_A[0] * 1.05, 0.5 - nR_A[1] * 1.05)[0]} y={P(2.5 - nR_A[0] * 1.05, 0.5 - nR_A[1] * 1.05)[1]}
             t={`|a| = ${NA.toFixed(3)}`} c={TEAL} s={32} a="middle" b />
           <Bracket p={P(nL_B[0] * off, nL_B[1] * off)} q={P(B[0] + nL_B[0] * off, B[1] + nL_B[1] * off)} off={0} c={ORANGE} />
           <Lbl x={P(B[0] * 0.5 + nL_B[0] * 0.8, B[1] * 0.5 + nL_B[1] * 0.8)[0]} y={P(B[0] * 0.5 + nL_B[0] * 0.8, B[1] * 0.5 + nL_B[1] * 0.8)[1]}
             t={`|b| = ${NB.toFixed(3)}`} c={ORANGE} s={32} a="end" b />
         </g>
         <g opacity={oCos}>
-          <rect x={PX} y={380} width={PW} height={220} rx={14} fill={HOUSE.panel} />
-          <Lbl x={PX + 20} y={405} t="what cos does" c={MUTED} s={28} />
+          <rect x={PX} y={350} width={PW} height={230} rx={14} fill={HOUSE.panel} />
+          <Lbl x={PX + 20} y={375} t="what cos does" c={MUTED} s={28} />
           <CosMini x={PX + 20} q={cr["0"].q as Pt} th={cr["0"].theta_deg} c={cr["0"].cos} label="cos 0°" />
           <CosMini x={PX + 320} q={cr["90"].q as Pt} th={cr["90"].theta_deg} c={cr["90"].cos} label="cos 90°" />
           <CosMini x={PX + 620} q={cr["180"].q as Pt} th={cr["180"].theta_deg} c={cr["180"].cos} label="cos 180°" />
         </g>
-        <Gauge x={PX + 60} y={890} w={PW - 120} min={-16.1} max={16.1} step={4} value={AB} label="" />
+        <Gauge x={PX + 60} y={765} w={PW - 120} min={-16.1} max={16.1} step={4} value={AB} label="" />
       </Svg>
       <Chip text="Definition 2 · lengths and the angle" x={40} y={30} />
       <EqBox latex={EQ_K22} x={PX - 20} y={130} w={PW + 20} h={90} size={34} number="K 2.2" />
       <EqBox latex={EQ_0A1_DIM} x={PX - 20} y={230} w={PW + 20} h={110} size={40} number="0A.1" o={oA} />
-      <Txt x={PX + 20} y={630} w={PW - 40} s={34} o={oN}>
+      <Txt x={PX + 20} y={595} w={PW - 40} s={32} o={oN}>
         = {NA.toFixed(3)} × {NB.toFixed(3)} × cos {TH.toFixed(1)}°<br />= {NA.toFixed(3)} × {NB.toFixed(3)} × {pair.cos_theta.toFixed(3)} = <b>{AB.toFixed(3)}</b>
       </Txt>
-      <Txt x={PX + 20} y={740} w={PW - 40} s={32} c={HOUSE.accent} o={oN} bold>two recipes, one number</Txt>
+      <Txt x={40} y={120} w={820} s={36} c={HOUSE.accent} o={oN} bold>two recipes, one number</Txt>
       <GridNote />
       <Footnote items={[FN.K22, FN.A1]} />
     </Scene>
@@ -551,7 +554,7 @@ const S06: React.FC = () => {
 const S07: React.FC = () => {
   const f = useCurrentFrame(), k = 6;
   const tA = [SS(k, 1), SS(k, 2), AT(k, 2, "backwards")];
-  const U = 64, OY = 620;
+  const U = 64, OY = 560;
   const caps = ["same way: positive", "across: zero", "opposite: negative"];
   const lines = ["3·2 + 0·0", "3·0 + 0·2", "3·(−2) + 0·0"];
   const p = same.p as Pt;
@@ -574,10 +577,10 @@ const S07: React.FC = () => {
               <Lbl x={P(3.2, 0.35)[0]} y={P(3.2, 0.35)[1]} t="p" c={TEAL} s={38} b />
               <Lbl x={P(q[0] * 1.15 + (q[0] === 0 ? 0.35 : 0), q[1] * 1.15 + (q[1] === 0 ? 0.45 : 0))[0]}
                 y={P(q[0] * 1.15 + (q[0] === 0 ? 0.35 : 0), q[1] * 1.15 + (q[1] === 0 ? 0.45 : 0))[1]} t="q" c={ORANGE} s={38} b a="middle" />
-              <Lbl x={x0 + 290} y={190} t={`q = (${q.map((v) => fx(v, 0)).join(", ")}) · angle ${same.angle_deg[i].toFixed(0)}°`} s={30} a="middle" c={MUTED} />
-              <Lbl x={x0 + 290} y={290} t={`${lines[i]} = ${fs(d, 0)}`} s={38} a="middle" b c={d < 0 ? ROSE : INK} />
-              <Lbl x={x0 + 290} y={350} t={caps[i]} s={32} a="middle" c={d < 0 ? ROSE : HOUSE.accent} />
-              <Gauge x={x0 + 60} y={900} w={460} min={-8} max={8} step={4} value={d} label="p·q" dec={0} />
+              <Lbl x={x0 + 290} y={180} t={`q = (${q.map((v) => fx(v, 0)).join(", ")}) · angle ${same.angle_deg[i].toFixed(0)}°`} s={30} a="middle" c={MUTED} />
+              <Lbl x={x0 + 290} y={268} t={`${lines[i]} = ${fs(d, 0)}`} s={38} a="middle" b c={d < 0 ? ROSE : INK} />
+              <Lbl x={x0 + 290} y={322} t={caps[i]} s={32} a="middle" c={d < 0 ? ROSE : HOUSE.accent} />
+              <Gauge x={x0 + 60} y={765} w={460} min={-8} max={8} step={4} value={d} label="" readout={`p·q = ${fs(d, 0)}`} dec={0} />
             </g>
           );
         })}
@@ -604,7 +607,7 @@ const S08: React.FC = () => {
   const t = [0, 1, 2, 3, 4, 5, 6, 7].map((j) => SS(k, j));
   const tCancel = AT(k, 4, "it cancels");
   const at = [t[2] + 20, t[3], t[4], tCancel + 10, t[5], t[6] + 20, t[7]];
-  const t03 = Math.min(t[7] + 40, LEN(k) - 50);
+  const t03 = Math.min(t[7] + 3, LEN(k) - 90);
   const P = P12, O = P(0, 0), aTip = P(...A), foot = P(...PAB);
   const drop = ramp(f, 6, 30), band = ramp(f, t[1], t[1] + 20), tri = ramp(f, t[2], t[2] + 15);
   const oBh = ramp(f, t[6], t[6] + 15);
@@ -628,7 +631,7 @@ const S08: React.FC = () => {
         <g opacity={oBh}>
           <Arrow p={O} q={P(...BH)} color={ORANGE} w={8} head={20} halo />
           <Lbl x={P(0.4, 1.0)[0] + 6} y={P(0.4, 1.0)[1]} t="b̂" c={ORANGE} s={38} b />
-          <Lbl x={110} y={915} t={`b̂ = b ÷ |b| = (${BH[0].toFixed(3)}, ${BH[1].toFixed(3)}), length 1 · “b hat”`} c={ORANGE} s={30} />
+          <Lbl x={40} y={262} t={`b̂ = b ÷ |b| = (${BH[0].toFixed(3)}, ${BH[1].toFixed(3)}), length 1 · “b hat”`} c={ORANGE} s={30} />
         </g>
       </Svg>
       <Chip text="The shadow, step by step" x={40} y={30} />
@@ -648,12 +651,12 @@ const S08: React.FC = () => {
               </div>
             ) : (<>
               <div style={{ width: TW, flex: "0 0 auto", fontSize: 30, color: INK }} dangerouslySetInnerHTML={{ __html: tex(texS, false) }} />
-              <div style={{ ...FONT, fontSize: 28, color: MUTED, lineHeight: 1.08, width: 960 - 26 - 32 - TW }}>{l.why}</div>
+              <div style={{ ...FONT, fontSize: 28, color: MUTED, lineHeight: i === 5 ? 1.22 : 1.08, width: 960 - 26 - 32 - TW }}>{l.why}</div>
             </>)}
           </div>
         ) : null;
       })}
-      <EqBox latex={EQ_0A3} x={930} y={845} w={960} h={130} size={36} number="0A.3" o={ramp(f, t03, t03 + 12)} />
+      <EqBox latex={EQ_0A3} x={20} y={112} w={900} h={130} size={34} number="0A.3" nw={150} o={ramp(f, t03, t03 + 12)} />
       <Footnote items={f >= t03 ? [FN.A1, FN.A3] : [FN.A1]} />
     </Scene>
   );
@@ -697,7 +700,7 @@ const S09: React.FC = () => {
 
 // ---------------------------------------------------------------- s10 reason 1: order
 const U3 = 80;
-const PL = mkP(400, 560, U3), PR = mkP(1240, 500, U3);
+const PL = mkP(400, 560, U3), PR = mkP(1240, 420, U3);
 type Pose = { c: Pt; phi: number; w: number; h: number; side: number };
 const rectPts = (p: Pose): Pt[] => {
   const t = (p.phi * Math.PI) / 180, bx = Math.cos(t), by = -Math.sin(t);
@@ -707,7 +710,7 @@ const rectPts = (p: Pose): Pt[] => {
 };
 const S10: React.FC = () => {
   const f = useCurrentFrame(), k = 9;
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3);
+  const t1 = SS(k, 1), t2 = AT(k, 1, "of b on arrow a"), t3 = SS(k, 2); // v3: the two shadow sentences are one
   const o0 = ramp(f, 0, 12);
   const dL = ramp(f, t1, t1 + 15), sL = ramp(f, t1 + 15, t1 + 35);
   const dR = ramp(f, t2, t2 + 15), sR = ramp(f, t2 + 15, t2 + 35), oCmp = ramp(f, t2 + 40, t2 + 52) * (1 - ramp(f, t3 + 18, t3 + 28));
@@ -717,8 +720,9 @@ const S10: React.FC = () => {
   const oTray = ramp(f, t3 + 22, t3 + 36), oRead = ramp(f, t3 + 40, t3 + 50), oCap = ramp(f, t3 + 46, t3 + 56);
   const poseL: Pose = { c: PL(0, 0), phi: PHI_B, w: SHAB * U3, h: NB * U3 * grow, side: 1 };
   const poseR: Pose = { c: PR(0, 0), phi: PHI_A, w: SHBA * U3, h: NA * U3 * grow, side: -1 };
-  const trayL: Pose = { c: [720, 780], phi: 0, w: SHAB * U3, h: NB * U3, side: 1 };
-  const trayR: Pose = { c: [1200, 780], phi: 180, w: SHBA * U3, h: NA * U3, side: -1 };
+  const TB = 720; // tray base line (was 780: lifted out of the caption band)
+  const trayL: Pose = { c: [720, TB], phi: 0, w: SHAB * U3, h: NB * U3, side: 1 };
+  const trayR: Pose = { c: [1200, TB], phi: 180, w: SHBA * U3, h: NA * U3, side: -1 };
   const mix = (p: Pose, q: Pose, t: number): Pose => ({ c: lerp(p.c, q.c, t), phi: p.phi + (q.phi - p.phi) * t,
     w: p.w + (q.w - p.w) * t, h: p.h + (q.h - p.h) * t, side: p.side });
   const rL = rectPts(mix(poseL, trayL, tray)), rR = rectPts(mix(poseR, trayR, tray));
@@ -752,35 +756,35 @@ const S10: React.FC = () => {
           <Copy P={PR} caster="b" />
           <line x1={960} y1={130} x2={960} y2={960} stroke={HOUSE.grid} strokeWidth={3} />
           <Lbl x={120} y={660} t={`shadow of a on b = ${SHAB.toFixed(3)}`} c={TEAL} s={32} o={sL} b />
-          <Lbl x={1400} y={250} t={`shadow of b on a = ${SHBA.toFixed(3)}`} c={ORANGE} s={32} o={sR} b />
+          <Lbl x={1400} y={175} t={`shadow of b on a = ${SHBA.toFixed(3)}`} c={ORANGE} s={32} o={sR} b />
           {grow > 0 ? (
             <g>
               <Bracket p={rL[1]} q={rL[2]} off={16} c={ORANGE} label={`|b| = ${NB.toFixed(3)}`} lo={44} s={28} a="end" o={grow} />
               <Lbl x={130} y={710} t={`${SHAB.toFixed(3)} × ${NB.toFixed(3)} = ${pair.area_on_b.toFixed(3)}`} s={34} o={grow} b />
               <Bracket p={rR[1]} q={rR[2]} off={-16} c={TEAL} label={`|a| = ${NA.toFixed(3)}`} lo={22} s={28} a="start" o={grow} />
-              <Lbl x={1400} y={300} t={`${SHBA.toFixed(3)} × ${NA.toFixed(3)} = ${pair.area_on_a.toFixed(3)}`} s={34} o={grow} b />
+              <Lbl x={1400} y={222} t={`${SHBA.toFixed(3)} × ${NA.toFixed(3)} = ${pair.area_on_a.toFixed(3)}`} s={34} o={grow} b />
             </g>
           ) : null}
         </g>
         <g opacity={oCmp}>
-          <Lbl x={120} y={790} t="same pair, two different shadows" c={MUTED} s={30} />
-          <line x1={120} y1={850} x2={120 + SHAB * U3} y2={850} stroke={TEAL} strokeWidth={16} strokeOpacity={0.8} />
-          <Lbl x={140 + SHAB * U3} y={850} t={`${SHAB.toFixed(3)}  (a on b)`} c={TEAL} s={30} />
-          <line x1={120} y1={910} x2={120 + SHBA * U3} y2={910} stroke={ORANGE} strokeWidth={16} strokeOpacity={0.8} />
-          <Lbl x={140 + SHBA * U3} y={910} t={`${SHBA.toFixed(3)}  (b on a)`} c={ORANGE} s={30} />
+          <Lbl x={120} y={118} t="same pair, two different shadows" c={MUTED} s={30} />
+          <line x1={120} y1={162} x2={120 + SHAB * U3} y2={162} stroke={TEAL} strokeWidth={16} strokeOpacity={0.8} />
+          <Lbl x={140 + SHAB * U3} y={162} t={`${SHAB.toFixed(3)}  (a on b)`} c={TEAL} s={30} />
+          <line x1={120} y1={206} x2={120 + SHBA * U3} y2={206} stroke={ORANGE} strokeWidth={16} strokeOpacity={0.8} />
+          <Lbl x={140 + SHBA * U3} y={206} t={`${SHBA.toFixed(3)}  (b on a)`} c={ORANGE} s={30} />
         </g>
         <g opacity={oTray}>
-          {Array.from({ length: 9 }, (_, i) => <line key={`tx${i}`} x1={640 + i * 80} y1={300} x2={640 + i * 80} y2={780} stroke={HOUSE.grid} strokeWidth={1.5} />)}
-          {Array.from({ length: 7 }, (_, i) => <line key={`ty${i}`} x1={640} y1={300 + i * 80} x2={1280} y2={300 + i * 80} stroke={HOUSE.grid} strokeWidth={1.5} />)}
-          <line x1={620} y1={780} x2={1300} y2={780} stroke={MUTED} strokeWidth={3} />
-          <Lbl x={1300} y={330} t="1 square = 1 unit²" c={MUTED} s={28} />
+          {Array.from({ length: 9 }, (_, i) => <line key={`tx${i}`} x1={640 + i * 80} y1={TB - 400} x2={640 + i * 80} y2={TB} stroke={HOUSE.grid} strokeWidth={1.5} />)}
+          {Array.from({ length: 6 }, (_, i) => <line key={`ty${i}`} x1={640} y1={TB - 400 + i * 80} x2={1280} y2={TB - 400 + i * 80} stroke={HOUSE.grid} strokeWidth={1.5} />)}
+          <line x1={620} y1={TB} x2={1300} y2={TB} stroke={MUTED} strokeWidth={3} />
+          <Lbl x={1300} y={TB - 370} t="1 square = 1 unit²" c={MUTED} s={28} />
         </g>
         {grow > 0 ? <ProdRect pts={rL} neg={false} id="h10l" /> : null}
         {grow > 0 ? <ProdRect pts={rR} neg={false} id="h10r" /> : null}
         <g opacity={oRead}>
-          <Lbl x={821} y={812} t={`${SHAB.toFixed(3)} × ${NB.toFixed(3)}`} c={INK} s={30} a="middle" />
-          <Lbl x={1137} y={812} t={`${SHBA.toFixed(3)} × ${NA.toFixed(3)}`} c={INK} s={30} a="middle" />
-          <Lbl x={960} y={880} t={`area = a·b = ${AB.toFixed(3)}  (both)`} c={INK} s={40} a="middle" b />
+          <Lbl x={821} y={TB + 30} t={`${SHAB.toFixed(3)} × ${NB.toFixed(3)}`} c={INK} s={30} a="middle" />
+          <Lbl x={1137} y={TB + 30} t={`${SHBA.toFixed(3)} × ${NA.toFixed(3)}`} c={INK} s={30} a="middle" />
+          <Lbl x={960} y={TB + 74} t={`area = a·b = ${AB.toFixed(3)}  (both)`} c={INK} s={38} a="middle" b />
         </g>
       </Svg>
       <Chip text="Reason 1 · order: the same number both ways" x={40} y={30} o={o0} />
@@ -815,7 +819,7 @@ const S11: React.FC = () => {
   const oChip2 = ramp(f, t3 + 45, t3 + 57);
   const P = P12, O = P(0, 0), foot = P(...PAB), aTip = P(...A);
   const gl = kk === 0 ? `a·b = ${dk.toFixed(3)}` : shrunk ? `a·b̂ = ${dk.toFixed(3)} = the shadow` : `a·(shrinking b) = ${dk.toFixed(3)}`;
-  const PWm = mkP(250, 860, 60);
+  const PWm = mkP(250, 770, 52);
   const v = cheap.v as Pt, Ow = PWm(0, 0), vT = PWm(...v), vx = PWm(cheap.v_dot_xhat, 0);
   const X = 1010, W = 870;
   return (
@@ -839,17 +843,17 @@ const S11: React.FC = () => {
             <path d="M 1215 405 Q 1440 470 1650 410" fill="none" stroke={HOUSE.accent} strokeWidth={4} />
             <polygon points="1665,402 1640,400 1650,422" fill={HOUSE.accent} />
           </g>
-          <Gauge x={X + 40} y={790} w={W - 80} min={-16.1} max={16.1} step={4} value={dk} label={gl} lc={INK} readout={fs(dk)} />
+          <Gauge x={X + 40} y={752} w={W - 80} min={-16.1} max={16.1} step={4} value={dk} label={gl} lc={INK} readout={fs(dk)} />
         </Svg>
         <Card x={X} y={95} w={400} title="a·b" tc={TEAL} o={o0}
           lines={["5 × 1 = 5", "1 × 3 = 3", `5 + 3 = ${cheap.a_dot_b.toFixed(0)}  ✓`]} foot="2 multiplications, 1 addition; no angle" />
         <Card x={X + 450} y={95} w={420} title="shadow" tc={TEAL} o={o0}
           lines={["|b| = √(1² + 3²) = √10", `= ${cheap.norm_b.toFixed(3)}`, `${cheap.a_dot_b.toFixed(0)} ÷ ${cheap.norm_b.toFixed(3)} = ${cheap.shadow.toFixed(3)}`]}
           foot="needs a·b first, then 1 square root and 1 division" />
-        <Txt x={X} y={445} w={W} s={32} align="center" c={HOUSE.accent} o={oArr} bold>shadow = a·b ÷ |b|  (one division)</Txt>
-        <EqBox latex={EQ_0A3} x={X - 40} y={492} w={W + 50} h={115} size={32} number="0A.3" o={oEq} />
-        <Txt x={X} y={606} w={W} s={32} align="center" o={oEq}>{cheap.a_dot_b.toFixed(0)} ÷ {cheap.norm_b.toFixed(3)} = {cheap.shadow.toFixed(3)}</Txt>
-        <Txt x={X - 40} y={850} w={W + 50} s={32} align="center" c={ORANGE} o={oCap}>
+        <Txt x={X} y={438} w={W} s={32} align="center" c={HOUSE.accent} o={oArr} bold>shadow = a·b ÷ |b|  (one division)</Txt>
+        <EqBox latex={EQ_0A3} x={X - 40} y={478} w={W + 50} h={110} size={32} number="0A.3" o={oEq} />
+        <Txt x={X} y={588} w={W} s={32} align="center" o={oEq}>{cheap.a_dot_b.toFixed(0)} ÷ {cheap.norm_b.toFixed(3)} = {cheap.shadow.toFixed(3)}</Txt>
+        <Txt x={40} y={108} w={900} s={32} c={ORANGE} o={oCap}>
           if |b| = 1, then a·b ÷ |b| = a·b ÷ 1 = a·b,<br /><b>so the dot product equals the shadow: a·b̂ = {cheap.shadow.toFixed(3)}</b>
         </Txt>
         <Chip text="Reason 2 · cheap: no angle, no square root" x={40} y={30} o={o0} />
@@ -858,7 +862,7 @@ const S11: React.FC = () => {
       {wind > 0 ? (
         <div style={{ position: "absolute", inset: 0, opacity: wind }}>
           <Svg>
-            <Grid P={PWm} xr={[-2, 9]} yr={[-1, 10]} />
+            <Grid P={PWm} xr={[-2, 9]} yr={[0, 10]} />
             <Band p={Ow} q={vx} color={TEAL} />
             <Arrow p={Ow} q={PWm(1, 0)} color={ORANGE} w={7} head={22} />
             <Arrow p={Ow} q={vT} color={TEAL} />
@@ -866,8 +870,8 @@ const S11: React.FC = () => {
             <RightTick at={vx} u1={unit(vx, Ow)} u2={unit(vx, vT)} />
             <Lbl x={PWm(9, -0.1)[0]} y={PWm(9, -0.1)[1] - 26} t="east →" c={MUTED} s={30} a="end" />
             <Lbl x={PWm(-0.25, 9.6)[0]} y={PWm(-0.25, 9.6)[1]} t="north ↑" c={MUTED} s={30} a="end" />
-            <Lbl x={600} y={470} a="start" t={`wind v = (6, 8) m/s, |v| = ${cheap.norm_v.toFixed(1)} m/s`} c={TEAL} s={32} b />
-            <Lbl x={PWm(0.3, -0.75)[0]} y={PWm(0.3, -0.75)[1]} t="x̂: east, length 1" c={ORANGE} s={30} />
+            <Lbl x={300} y={232} a="start" t={`wind v = (6, 8) m/s, |v| = ${cheap.norm_v.toFixed(1)} m/s`} c={TEAL} s={32} b />
+            <Lbl x={PWm(0.2, -0.5)[0]} y={PWm(0.2, -0.5)[1]} t="x̂: east, length 1" c={ORANGE} s={30} />
           </Svg>
           <Chip text="Reason 2 · with a unit arrow, the dot product IS the shadow" x={40} y={30} w={1100} size={30} />
           <Txt x={1000} y={300} w={860} s={44} bold c={TEAL}>v·x̂ = 6 × 1 + 8 × 0 = {cheap.v_dot_xhat.toFixed(2)} m/s</Txt>
@@ -891,7 +895,7 @@ const S12: React.FC = () => {
   const kd = Math.round(clamp((f - tD) / 40, 0, 1) * nd);
   const dm = work.d_m[kd], W = work.W_J[kd];
   const oChip = ramp(f, tD + 30, tD + 42);
-  const GY = 470, X0 = 330, FSC = 14, DSC = 40;
+  const GY = 400, X0 = 330, FSC = 14, DSC = 40;
   const Fv = work.F as Pt;
   const Ft: Pt = [X0 + Fv[0] * FSC, GY - Fv[1] * FSC];
   const sh: Pt = [X0 + work.shadow_N * FSC, GY];
@@ -934,10 +938,10 @@ const S12: React.FC = () => {
       </Svg>
       <Chip text="Reason 3 · physics needs both sizes — (a) work" x={40} y={30} />
       <EqBox latex={EQ_W} x={1100} y={190} w={780} size={44} />
-      <Txt x={1130} y={300} w={760} s={30} c={MUTED}>work: a definition from school mechanics (no book number)</Txt>
-      <Txt x={1130} y={380} w={760} s={32} c={TEAL} o={oSh}>shadow = 20 cos 60° = {work.shadow_N.toFixed(1)} N<br /><span style={{ fontSize: 30 }}>(still a force)</span></Txt>
-      <Txt x={1130} y={500} w={760} s={34} o={oW} bold>W = F·d = {work.shadow_N.toFixed(1)} N × {dl} m = {W.toFixed(1)} J</Txt>
-      <Chip text={`twice as far: shadow still ${work.shadow_N_d10.toFixed(1)} N · double either arrow → the product doubles`} x={1130} y={850} color={ORANGE} o={oChip} w={760} size={30} />
+      <Txt x={1130} y={312} w={760} s={30} c={MUTED}>work: a definition from school mechanics (no book number)</Txt>
+      <Txt x={1130} y={392} w={760} s={32} c={TEAL} o={oSh}>shadow = 20 cos 60° = {work.shadow_N.toFixed(1)} N<br /><span style={{ fontSize: 30 }}>(still a force)</span></Txt>
+      <Txt x={1130} y={484} w={760} s={34} o={oW} bold>W = F·d = {work.shadow_N.toFixed(1)} N × {dl} m = {W.toFixed(1)} J</Txt>
+      <Chip text={`twice as far: shadow still ${work.shadow_N_d10.toFixed(1)} N · double either arrow → the product doubles`} x={1130} y={545} color={ORANGE} o={oChip} w={760} size={30} />
       <Badge detail="force (N) and distance (m) drawn on different scales · sled icon illustrative" corner="tr" />
       <Footnote items={[FN.work]} />
     </Scene>
@@ -947,7 +951,7 @@ const S12: React.FC = () => {
 // ---------------------------------------------------------------- s13 Vallis (1.7) first
 const S13: React.FC = () => {
   const f = useCurrentFrame(), k = 12;
-  const t1 = SS(k, 1), t2 = SS(k, 2), t2b = AT(k, 2, "here, temperature"), t3 = SS(k, 3);
+  const t1 = SS(k, 1), t2 = SS(k, 2), t2b = AT(k, 2, "here, temperature"), t3 = AT(k, 2, "and v is the wind");
   const oEq = ramp(f, t1, t1 + 14), oPhi = ramp(f, t2, t2 + 12), oT = ramp(f, t2b, t2b + 14), oV = ramp(f, t3, t3 + 12);
   const eq = f >= t3 ? EQ_17_V : f >= t2 ? EQ_17_PHI : EQ_17;
   const oTitle = ramp(f, 0, 12) * (1 - ramp(f, t1 - 10, t1 + 4)); // part title while "Now the weather." is spoken
@@ -963,8 +967,8 @@ const S13: React.FC = () => {
       <Txt x={0} y={640} w={1920} s={36} c={TEAL} o={oV} align="center"><b>v</b> = the velocity of the air: the wind (Vallis’s letter, bold v)</Txt>
       <Svg>
         <g opacity={oV}>
-          <Arrow p={[880, 820]} q={[1040, 740]} color={TEAL} w={8} />
-          <Lbl x={1056} y={736} t="v" c={TEAL} s={48} b />
+          <Arrow p={[880, 790]} q={[1040, 710]} color={TEAL} w={8} />
+          <Lbl x={1056} y={706} t="v" c={TEAL} s={48} b />
         </g>
       </Svg>
       <Footnote items={[FN.V17]} o={oEq} />
@@ -975,8 +979,9 @@ const S13: React.FC = () => {
 // ---------------------------------------------------------------- weather maps (s14-s20)
 type Geo = { mx: number; my: number; km: number; x0: number; y0: number; w: number; h: number };
 const GW: Geo = { mx: 110, my: 180, km: 1.3, x0: 0, y0: 0, w: 600, h: 360 };
-const GSM: Geo = { mx: 110, my: 400, km: 1.3, x0: 0, y0: 0, w: 600, h: 360 };
-const GZ: Geo = { mx: 110, my: 200, km: 3.875, x0: 180, y0: 105, w: 240, h: 150 };
+const GSM: Geo = { mx: 110, my: 410, km: 1.0, x0: 0, y0: 0, w: 600, h: 360 };
+const G18: Geo = { mx: 110, my: 230, km: 1.2, x0: 0, y0: 0, w: 600, h: 360 };
+const GZ: Geo = { mx: 110, my: 200, km: 3.5, x0: 180, y0: 105, w: 240, h: 150 };
 const gX = (g: Geo, xk: number) => g.mx + (xk - g.x0) * g.km;
 const gY = (g: Geo, yk: number) => g.my + (g.h - (yk - g.y0)) * g.km;
 const LUT = wx.lut_thermal as string[];
@@ -1004,7 +1009,7 @@ const TMap: React.FC<{ g: Geo; G: number; shiftKm: number; o?: number; tWest?: n
   }
   return <g opacity={o}>{strips}{iso}</g>;
 };
-const MapFrame: React.FC<{ g: Geo; dx?: number; dy?: number }> = ({ g, dx = 100, dy = 100 }) => {
+const MapFrame: React.FC<{ g: Geo; dx?: number; dy?: number; eastRight?: boolean }> = ({ g, dx = 100, dy = 100, eastRight = false }) => {
   const ticks = [];
   for (let x = Math.ceil(g.x0 / dx) * dx; x <= g.x0 + g.w + 1e-6; x += dx)
     ticks.push(<Lbl key={`e${x}`} x={gX(g, x)} y={g.my + g.h * g.km + 26} t={`${x}`} c={MUTED} s={28} a="middle" />);
@@ -1014,7 +1019,9 @@ const MapFrame: React.FC<{ g: Geo; dx?: number; dy?: number }> = ({ g, dx = 100,
     <g>
       <rect x={g.mx} y={g.my} width={g.w * g.km} height={g.h * g.km} fill="none" stroke={HOUSE.grid} strokeWidth={3} />
       {ticks}
-      <Lbl x={g.mx + g.w * g.km} y={g.my + g.h * g.km + 62} t="east (km) →" c={MUTED} s={28} a="end" />
+      {eastRight
+        ? <Lbl x={g.mx + g.w * g.km + 30} y={g.my + g.h * g.km + 26} t="east (km) →" c={MUTED} s={28} a="start" />
+        : <Lbl x={g.mx + g.w * g.km} y={g.my + g.h * g.km + 62} t="east (km) →" c={MUTED} s={28} a="end" />}
       <g transform={`translate(28 ${g.my + (g.h * g.km) / 2}) rotate(-90)`}><Lbl x={0} y={0} t="north (km) →" c={MUTED} s={28} a="middle" /></g>
     </g>
   );
@@ -1041,18 +1048,37 @@ const GL = 150; // ∇T arrow px (not to the km scale)
 
 // ---------------------------------------------------------------- s14 two thermometers
 const TERMS14 = [
-  { tex: String.raw`\frac{DT}{Dt}`, x: 250, c: INK, label: "balloon’s change" },
+  { tex: String.raw`\frac{DT}{Dt}`, x: 250, c: INK, label: ["parcel’s change", "(balloon)"] },
   { tex: "=", x: 405, c: INK },
-  { tex: String.raw`\frac{\partial T}{\partial t}`, x: 560, c: SLATE, label: "pole’s change" },
+  { tex: String.raw`\frac{\partial T}{\partial t}`, x: 560, c: SLATE, label: ["change at a fixed point", "(pole)"] },
   { tex: "+", x: 715, c: INK },
-  { tex: String.raw`\mathbf v\cdot\nabla T`, x: 900, c: TEAL, label: "change from crossing the slope" },
+  { tex: String.raw`\mathbf v\cdot\nabla T`, x: 880, c: TEAL, label: ["change from moving", "across the gradient"] },
 ];
 // the T-form shown term by term is exactly EQ_TFORM (kept whole above for the equation check)
+/** Definition card (user request 2026-10-22): material vs local derivative, and what an air parcel is. Each row carries
+ * its own icon and the term colour used by the (1.7) leaders: balloon / DT/Dt in ink, pole / ∂T/∂t in slate. */
+const DefCard: React.FC<{ x: number; y: number; w: number; o: number }> = ({ x, y, w, o }) => (
+  o <= 0 ? null :
+    <div style={{ position: "absolute", left: x, top: y, width: w, opacity: o, background: HOUSE.panel, borderRadius: 12,
+      border: `2px solid ${HOUSE.grid}`, padding: "10px 16px", boxSizing: "border-box", ...FONT, lineHeight: 1.25 }}>
+      <div style={{ display: "flex", gap: 12, alignItems: "center", borderLeft: `6px solid ${INK}`, paddingLeft: 10 }}>
+        <svg width={44} height={66} style={{ flex: "0 0 auto" }}><BalloonThermometer x={22} y={64} s={0.33} /></svg>
+        <div style={{ fontSize: 28 }}><b style={{ color: INK }}>material derivative DT/Dt</b>: rate of change following an
+          air parcel (moving with the flow)</div>
+      </div>
+      <div style={{ display: "flex", gap: 12, alignItems: "center", borderLeft: `6px solid ${SLATE}`, paddingLeft: 10, marginTop: 8 }}>
+        <svg width={44} height={66} style={{ flex: "0 0 auto" }}><PoleThermometer x={22} y={64} s={0.44} /></svg>
+        <div style={{ fontSize: 28 }}><b style={{ color: SLATE }}>local derivative ∂T/∂t</b>: rate of change at a fixed point</div>
+      </div>
+      <div style={{ fontSize: 28, color: MUTED, marginTop: 6 }}>air parcel = a small volume of air that moves with the flow</div>
+    </div>
+);
 const S14: React.FC = () => {
   const f = useCurrentFrame(), k = 13;
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), tAdv = AT(k, 4, "called advection");
-  const oPole = ramp(f, t1, t1 + 14), oBal = ramp(f, t2, t2 + 14), oAdv = ramp(f, t3, t3 + 14), oAn = ramp(f, t4, t4 + 14);
-  const oAdvW = ramp(f, tAdv, tAdv + 12);
+  // v3 narration (6 sentences): 0 picture · 1 pole · 2 balloon + air parcel · 3 material derivative · 4 v·∇T · 5 anatomy
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), tAdv = AT(k, 5, "advection, transport");
+  const oPole = ramp(f, t1, t1 + 14), oBal = ramp(f, t2, t2 + 14), oCard = ramp(f, t3, t3 + 14), oAdv = ramp(f, t4, t4 + 14);
+  const oAn = ramp(f, t5, t5 + 14), oAdvW = ramp(f, tAdv, tAdv + 12);
   const g = GSM;
   // balloon: x(t) = x_pin + v t from the data (1 min per sample), ×1200 → 1 sample per 1.5 frames
   const nb = wx.balloon_x_km.length - 1;
@@ -1069,17 +1095,17 @@ const S14: React.FC = () => {
     <Scene>
       <Svg>
         <TMap g={g} G={wx.gradT[0]} shiftKm={0} />
-        <MapFrame g={g} />
+        <MapFrame g={g} eastRight />
         {/* path so far */}
         <line x1={pin[0]} y1={pin[1]} x2={bal[0]} y2={bal[1]} stroke={TEAL} strokeWidth={3} strokeDasharray="6 6" opacity={oBal} />
         <Arrow p={pin} q={[pin[0] + vs[0], pin[1] + vs[1]]} color={TEAL} w={6} halo o={oBal} />
         <Lbl x={pin[0] + vs[0] + 10} y={pin[1] + vs[1] - 4} t="v" c={TEAL} s={34} b o={oBal} />
         <PoleThermometer x={pin[0]} y={pin[1]} o={oPole} s={0.7} />
-        <Lbl x={pin[0] - 26} y={pin[1] - 40} t="thermometer on a pole:" c={INK} s={28} a="end" o={oPole} b />
-        <Lbl x={pin[0] - 26} y={pin[1] - 6} t="one fixed place" c={INK} s={28} a="end" o={oPole} />
+        <Lbl x={pin[0]} y={pin[1] + 34} t="thermometer on a pole:" c={INK} s={28} a="middle" o={oPole} b />
+        <Lbl x={pin[0]} y={pin[1] + 66} t="one fixed point" c={INK} s={28} a="middle" o={oPole} />
         <BalloonThermometer x={bal[0]} y={bal[1]} o={oBal} s={0.6} />
         <Lbl x={bal[0] + 34} y={bal[1] - 70} t="thermometer on a balloon:" c={INK} s={28} o={oBal} b />
-        <Lbl x={bal[0] + 34} y={bal[1] - 36} t="rides WITH the air" c={INK} s={28} o={oBal} />
+        <Lbl x={bal[0] + 34} y={bal[1] - 36} t="rides with an air parcel" c={INK} s={28} o={oBal} />
         {/* leaders from the equation terms to the icons (before the anatomy strip) */}
         <Dash p={[560, 240]} q={[pin[0] - 4, pin[1] - 110]} c={SLATE} w={2.5} o={oPole * leadO} d="6 6" />
         <Dash p={[250, 240]} q={[bal[0] - 16, bal[1] - 110]} c={INK} w={2.5} o={oBal * leadO} d="6 6" />
@@ -1089,10 +1115,11 @@ const S14: React.FC = () => {
             <g key={t.x}>
               <path d={`M ${t.x - 70} 240 Q ${t.x - 70} 252 ${t.x - 50} 252 L ${t.x - 10} 252 L ${t.x} 262 L ${t.x + 10} 252 L ${t.x + 50} 252 Q ${t.x + 70} 252 ${t.x + 70} 240`}
                 fill="none" stroke={t.c} strokeWidth={3} />
-              <Lbl x={t.x} y={286} t={t.label!} c={t.c} s={28} a="middle" b />
+              <Lbl x={t.x} y={284} t={t.label![0]} c={t.c} s={28} a="middle" b />
+              <Lbl x={t.x} y={316} t={t.label![1]} c={t.c} s={26} a="middle" />
             </g>
           ))}
-          <Lbl x={900} y={324} t="advection = carrying by the wind" c={TEAL} s={28} a="middle" o={oAdvW} />
+          <Lbl x={880} y={352} t="advection = transport by the wind" c={TEAL} s={28} a="middle" o={oAdvW} />
         </g>
       </Svg>
       <EqBox latex={EQ_17_HL} x={40} y={10} w={880} h={110} size={42} number="Vallis 1.7" nw={220} />
@@ -1104,10 +1131,11 @@ const S14: React.FC = () => {
         );
       })}
       <Txt x={1000} y={20} w={880} s={30} c={MUTED}>(v·∇)T = v·∇T: the same thing, the dot product of the wind with ∇T</Txt>
-      <Chip text={`time ×1200: 1 h of drift in 3 s · t = ${hours.toFixed(1)} h`} x={1000} y={380} size={28} color={MUTED} o={oBal} />
-      <Txt x={1000} y={460} w={880} s={30} o={oPole}><b style={{ color: SLATE }}>∂T/∂t</b>: how fast the reading changes at ONE FIXED place</Txt>
-      <Txt x={1000} y={560} w={880} s={30} o={oBal}><b>DT/Dt</b>, the material derivative: the change felt riding with the air</Txt>
-      <Txt x={1000} y={660} w={880} s={30} o={oAdv}><b style={{ color: TEAL }}>v·∇T</b>: the extra change from moving through a map where T differs from place to place</Txt>
+      <Chip text={`time ×1200: 1 h of drift in 3 s · t = ${hours.toFixed(1)} h`} x={1000} y={128} size={28} color={MUTED} o={oBal} />
+      <Txt x={1000} y={200} w={880} s={30} o={oPole}><b style={{ color: SLATE }}>∂T/∂t</b>: change at ONE FIXED point (the pole)</Txt>
+      <Txt x={1000} y={380} w={880} s={30} o={oBal * (1 - oCard)}><b>DT/Dt</b>: change riding with an air parcel (the balloon)</Txt>
+      <DefCard x={1000} y={372} w={880} o={oCard} />
+      <Txt x={1000} y={606} w={880} s={30} o={oAdv}><b style={{ color: TEAL }}>v·∇T</b>: extra change from crossing the temperature map</Txt>
       <Badge detail="time ×1200 · idealised field, illustrative (not data) · icons illustrative · wind arrow not to the km scale" corner="br" />
       <Footnote items={[FN.V17]} />
     </Scene>
@@ -1212,12 +1240,6 @@ const S16: React.FC = () => {
 };
 
 // ---------------------------------------------------------------- s17 a rate in time, not a slope in space
-const Lock: React.FC<{ x: number; y: number }> = ({ x, y }) => (
-  <g>
-    <path d={`M ${x - 12} ${y} v -12 a 12 12 0 0 1 24 0 v 12`} fill="none" stroke={INK} strokeWidth={4} />
-    <rect x={x - 18} y={y} width={36} height={28} rx={4} fill={INK} />
-  </g>
-);
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = 16;
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3);
@@ -1247,26 +1269,25 @@ const S17: React.FC = () => {
           <Lbl x={P0[0] - 6} y={P0[1] + 92} t={`${wx.km_per_h_towards_warm.toFixed(1)} km towards warmer air`} c={ORANGE} s={30} b />
           <Lbl x={P0[0] - 6} y={P0[1] + 130} t={`(= the shadow: ${wx.shadow_m_s.toFixed(2)} m/s × 3600 s)`} c={ORANGE} s={28} />
         </g>
-        <g opacity={oA}><Lock x={gX(g, g.x0 + g.w) - 40} y={g.my + g.h * g.km - 60} /></g>
-        <Lbl x={gX(g, g.x0 + g.w) - 72} y={g.my + g.h * g.km - 44} t="map does not change" c={INK} s={28} a="end" o={oA} b />
+        <Lbl x={gX(g, g.x0 + g.w) - 20} y={g.my + g.h * g.km - 32} t="slope: 1 K per 100 km everywhere" c={INK} s={30} a="end" o={oA} b />
       </Svg>
       <Chip text="Does the map warm by 0.180 K per hour as you go east?" x={40} y={30} size={32} />
-      <Chip text="No. The map stays put." x={40} y={98} size={32} color={ORANGE} o={oA} />
-      <div style={{ position: "absolute", left: RX, top: 150, width: RW, display: "flex", gap: 20, opacity: oA, ...FONT, fontSize: 30, lineHeight: 1.3 }}>
+      <Chip text="No: 1 K per 100 km is the map’s slope — a rate in space" x={40} y={98} size={32} color={ORANGE} o={oA} />
+      <div style={{ position: "absolute", left: RX, top: 205, width: RW, display: "flex", gap: 20, opacity: oA, ...FONT, fontSize: 30, lineHeight: 1.3 }}>
         <div style={{ flex: 1, background: HOUSE.panel, borderTop: `6px solid ${ORANGE}`, borderRadius: 10, padding: "12px 16px" }}>
-          <b style={{ color: ORANGE }}>rate in SPACE</b><br />the map’s slope<br /><b>1 K per 100 km</b><br /><span style={{ color: MUTED }}>fixed</span>
+          <b style={{ color: ORANGE }}>rate in SPACE</b><br />the map’s slope<br /><b>1 K per 100 km</b><br /><span style={{ color: MUTED }}>the same everywhere</span>
         </div>
         <div style={{ flex: 1, background: HOUSE.panel, borderTop: `6px solid ${TEAL}`, borderRadius: 10, padding: "12px 16px" }}>
-          <b style={{ color: TEAL }}>rate in TIME</b><br />what the moving air meets<br /><b>{wx.K_per_h.toFixed(3)} K per hour</b>
+          <b style={{ color: TEAL }}>rate in TIME</b><br />what the moving air parcel meets<br /><b>{wx.K_per_h.toFixed(3)} K per hour</b>
         </div>
       </div>
-      <Txt x={RX} y={440} w={RW} s={30} o={ck(0)}>{wx.shadow_m_s.toFixed(2)} m/s = <b>{wx.km_per_h_towards_warm.toFixed(1)} km per hour</b> towards warmer air</Txt>
-      <Txt x={RX} y={530} w={RW} s={30} o={ck(1)}>{wx.km_per_h_towards_warm.toFixed(1)} km × (1 K per 100 km) = <b>{wx.warming_met_K.toFixed(3)} K</b></Txt>
-      <Txt x={RX} y={590} w={RW} s={30} o={ck(2)}>map under the balloon: {wx.T_under_balloon[0].toFixed(2)} °C → {wx.T_under_balloon[1].toFixed(2)} °C after 1 h</Txt>
-      <Txt x={RX} y={680} w={RW} s={30} c={TEAL} o={ck(3)}>each hour, the air reaches map spots {wx.warming_met_K.toFixed(3)} K warmer than where it was an hour before</Txt>
-      <Chip text={`clock: 1 h in 4 s (×900) · t = ${(run).toFixed(2)} h`} x={40} y={880} size={28} color={MUTED} o={oB} />
-      <Txt x={540} y={888} w={520} s={28} c={MUTED}>zoomed in: 240 km × 150 km around the start</Txt>
-      <Badge detail="time ×900 · idealised field, illustrative (not data) · arrows not to the km scale" corner="br" />
+      <Txt x={RX} y={420} w={RW} s={30} o={ck(0)}>{wx.shadow_m_s.toFixed(2)} m/s = <b>{wx.km_per_h_towards_warm.toFixed(1)} km per hour</b> towards warmer air</Txt>
+      <Txt x={RX} y={472} w={RW} s={30} o={ck(1)}>{wx.km_per_h_towards_warm.toFixed(1)} km × (1 K per 100 km) = <b>{wx.warming_met_K.toFixed(3)} K</b></Txt>
+      <Txt x={RX} y={524} w={RW} s={30} o={ck(2)}>after 1 h the air parcel is over a spot that was <b>{wx.warming_met_K.toFixed(3)} K warmer</b> when it started</Txt>
+      <Txt x={RX} y={612} w={RW} s={30} c={TEAL} o={ck(3)}>each hour, the air parcel reaches map spots {wx.warming_met_K.toFixed(3)} K warmer than where it was an hour before</Txt>
+      <Chip text={`clock: 1 h in 4 s (×900) · t = ${(run).toFixed(2)} h`} x={RX} y={700} size={28} color={MUTED} o={oB} />
+      <Txt x={RX} y={762} w={RW} s={28} c={MUTED}>zoomed in: 240 km × 150 km around the start</Txt>
+      <Badge detail="time ×900 · idealised field, illustrative (not data) · arrows not to the km scale" corner="tr" />
     </Scene>
   );
 };
@@ -1278,6 +1299,16 @@ const STRIP18 = [
   { tex: String.raw`0 - \mathbf v\cdot\nabla T = \frac{\partial T}{\partial t} ${col(TEAL, String.raw`\cancel{+ \mathbf v\cdot\nabla T - \mathbf v\cdot\nabla T}`)}`, why: "subtract v·∇T from both sides" },
   { tex: String.raw`\boxed{\frac{\partial T}{\partial t} = ${col(ROSE, "-")}\,\mathbf v\cdot\nabla T}`, why: "what’s left: the pair on the right cancels" },
 ];
+/** S4: tags must not overlap: keep a parcel only if its tag box (dot + 64 px label) clears every kept one at t = 0.
+ * All parcels move with the same wind, so the spacing holds for the whole drift. */
+const KEEP18 = (() => {
+  const kept: number[] = [];
+  wx.tags_T.forEach((_, i) => {
+    const x = gX(G18, wx.tags_x_km[i][0]), y = gY(G18, wx.tags_y_km[i][0]);
+    if (kept.every((j) => Math.abs(gY(G18, wx.tags_y_km[j][0]) - y) > 40 || Math.abs(gX(G18, wx.tags_x_km[j][0]) - x) > 100)) kept.push(i);
+  });
+  return kept;
+})();
 // storyboard derivation_strip line 3, uncancelled: 0 - \mathbf v\cdot\nabla T = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T - \mathbf v\cdot\nabla T
 const S18: React.FC = () => {
   const f = useCurrentFrame(), k = 17;
@@ -1285,7 +1316,7 @@ const S18: React.FC = () => {
   const at = [t1, AT(k, 1, "so D T by D t") + 10, t2 + 20, t2b + 10];
   const drift = clamp((f - 15) / 90, 0, 1) * 60; // 1 h in 3 s (×1200)
   const i0 = Math.floor(drift), i1 = Math.min(60, i0 + 1), w = drift - i0;
-  const g = GW;
+  const g = G18;
   const shift = (wx.v_x * (drift * 60)) / 1000;
   const cur = at.reduce((c, a, i) => (f >= a ? i : c), -1);
   return (
@@ -1293,7 +1324,8 @@ const S18: React.FC = () => {
       <Svg>
         <ClipMap g={g} id="clip18">
           <TMap g={g} G={wx.gradT[0]} shiftKm={shift} />
-          {wx.tags_T.map((T, i) => {
+          {KEEP18.map((i) => {
+            const T = wx.tags_T[i];
             const xk = wx.tags_x_km[i][i0] + (wx.tags_x_km[i][i1] - wx.tags_x_km[i][i0]) * w;
             const yk = wx.tags_y_km[i][i0] + (wx.tags_y_km[i][i1] - wx.tags_y_km[i][i0]) * w;
             const x = gX(g, xk), y = gY(g, yk);
@@ -1309,18 +1341,19 @@ const S18: React.FC = () => {
         <MapFrame g={g} />
         <ColourBar g={g} />
       </Svg>
-      <Chip text={f >= t1 ? "DT/Dt = 0: the balloon’s reading never changes" : "Suppose each parcel keeps its temperature"} x={40} y={30} size={30} />
-      <Txt x={40} y={905} w={1050} s={28} c={MUTED}>each parcel keeps its temperature: no sunshine heating it, no mixing — it carries its temperature like a label (tags never change)</Txt>
+      <Chip text={f >= t1 ? "DT/Dt = 0: the balloon’s reading never changes" : "Suppose each parcel keeps its temperature: no heating, no mixing"} x={40} y={26} size={30} />
+      <Chip text="the air carries its temperature, so the pattern slides with the wind" x={40} y={92} size={28} color={ORANGE} o={ramp(f, 15, 27)} />
+      <Txt x={40} y={150} w={1040} s={26} c={MUTED}>tags = each parcel’s own temperature, carried like a label: they never change</Txt>
       {STRIP18.map((l, i) => {
         const o = ramp(f, at[i], at[i] + 12) * (cur > i ? 0.55 : 1);
         return o > 0 ? (
-          <div key={i} style={{ position: "absolute", left: RX - 20, top: 175 + i * 150, width: RW + 30, opacity: o }}>
-            <div style={{ fontSize: 40, color: INK }} dangerouslySetInnerHTML={{ __html: tex(l.tex, false) }} />
+          <div key={i} style={{ position: "absolute", left: RX - 20, top: 156 + i * 126, width: RW + 30, opacity: o }}>
+            <div style={{ fontSize: 36, color: INK }} dangerouslySetInnerHTML={{ __html: tex(l.tex, false) }} />
             <div style={{ ...FONT, fontSize: 28, color: MUTED, marginTop: 6 }}>{i + 1} · {l.why}</div>
           </div>
         ) : null;
       })}
-      <EqBox latex={EQ_DTDT_HL} x={RX - 20} y={810} w={RW + 30} h={110} size={34} o={ramp(f, at[3] + 30, at[3] + 42)} />
+      <EqBox latex={EQ_DTDT_HL} x={RX - 20} y={712} w={RW + 30} h={96} size={32} o={ramp(f, at[3] + 30, at[3] + 42)} />
       <Badge detail="time ×1200 · idealised field, illustrative (not data)" corner="tr" />
       <Footnote items={[FN.V17, FN.dTdt]} o={ramp(f, at[0], at[0] + 12)} />
     </Scene>
@@ -1384,25 +1417,25 @@ const Weather: React.FC<{ k: number; steepMode: boolean }> = ({ k, steepMode }) 
         <PoleThermometer x={P0[0]} y={P0[1]} s={0.9} />
         <Lbl x={P0[0] - 24} y={P0[1] - 80} t="thermometer on a pole (fixed)" c={INK} s={28} a="end" b />
         <Lbl x={P0[0] - 24} y={P0[1] - 46} t={`${Tpole.toFixed(2)} °C`} c={INK} s={30} a="end" b />
-        <Lbl x={g.mx + 16} y={g.my + g.h * g.km - 30} t="the air arriving at the pole comes from colder places upwind" c={INK} s={28} o={oCone} />
+        <Lbl x={g.mx + 16} y={g.my + g.h * g.km - 30} t="parcels arriving at the pole come from colder places upwind" c={INK} s={28} o={oCone} />
       </Svg>
-      <EqBox latex={EQ_17} x={RX - 20} y={20} w={RW + 30} h={95} size={30} number="Vallis 1.7" nw={210} />
-      <EqBox latex={EQ_DTDT_HL} x={RX - 20} y={118} w={RW + 30} h={100} size={34} />
-      <div style={{ position: "absolute", left: RX, top: 230, width: RW, ...FONT, fontSize: 30, background: HOUSE.panel,
+      <EqBox latex={EQ_DTDT_HL} x={RX - 20} y={20} w={RW + 30} h={100} size={34} />
+      <div style={{ position: "absolute", left: RX, top: 132, width: RW, ...FONT, fontSize: 30, background: HOUSE.panel,
         borderRadius: 12, padding: "10px 18px", boxSizing: "border-box", lineHeight: 1.35 }}>
         <div style={{ color: MUTED, fontSize: 28 }}>clock: 6 h of weather in 6 s (×3600){isB ? " · steeper map" : ""}</div>
-        <div>t = {wx.t_h[kk].toFixed(1)} h · pole: <b>{Tpole.toFixed(2)} °C</b>{!steepMode ? <> · balloon: <b>13.00 °C</b></> : null}</div>
+        <div>t = {wx.t_h[kk].toFixed(1)} h · pole: <b>{Tpole.toFixed(2)} °C</b></div>
+        {!steepMode ? <div>balloon{byk > 360 ? " (now off the map)" : ""}: still <b>13.00 °C</b></div> : null}
         <div style={{ color: ORANGE }}>|∇T| = {sci(G)} K/m{isB ? " (twice as steep)" : ""}</div>
       </div>
-      <Txt x={RX} y={385} w={RW} s={30} o={oR}>
+      <Txt x={RX} y={steepMode ? 287 : 330} w={RW} s={30} o={oR}>
         ∂T/∂t = −v·∇T = {sgn(dKs, `${sci(Math.abs(dKs))} K/s`)} = <b>{sgn(dKh, `${Math.abs(dKh).toFixed(3)} K per hour`)}</b>{" "}
         ({sgn(dKd, `${Math.abs(dKd).toFixed(2)} K per day`)}){steepMode ? ": twice as fast" : ""}
       </Txt>
       {steepMode ? (<>
-        <Txt x={RX} y={475} w={RW} s={30} c={TEAL} o={oSh}>shadow of v on ∇T: still {wx.shadow_steep_m_s.toFixed(2)} m/s — it belongs to the wind alone</Txt>
-        <Txt x={RX} y={560} w={RW} s={30} o={oR}>v·∇T = (|v| cos θ) × <span style={{ color: ORANGE }}>|∇T|</span> = {wx.shadow_steep_m_s.toFixed(2)} m/s × <span style={{ color: ORANGE }}>{sci(wx.gradT_steep[0])} K/m</span></Txt>
-        <div style={{ position: "absolute", left: RX, top: 655, width: RW, ...FONT, fontSize: 29, opacity: oCard, lineHeight: 1.3 }}>
-          <div style={{ borderLeft: `6px solid ${TEAL}`, paddingLeft: 14, marginBottom: 14 }}>
+        <Txt x={RX} y={377} w={RW} s={28} c={TEAL} o={oSh}>shadow of v on ∇T: still {wx.shadow_steep_m_s.toFixed(2)} m/s (the wind alone)</Txt>
+        <Txt x={RX} y={425} w={RW} s={28} o={oR}>v·∇T = (|v| cos θ) × <span style={{ color: ORANGE }}>|∇T|</span> = {wx.shadow_steep_m_s.toFixed(2)} m/s × <span style={{ color: ORANGE }}>{sci(wx.gradT_steep[0])} K/m</span></Txt>
+        <div style={{ position: "absolute", left: RX, top: 482, width: RW, ...FONT, fontSize: 27, opacity: oCard, lineHeight: 1.25 }}>
+          <div style={{ borderLeft: `6px solid ${TEAL}`, paddingLeft: 14, marginBottom: 12 }}>
             shadow |v| cos θ = <b>{wx.shadow_m_s.toFixed(2)} m/s</b> on both maps → the wind alone
           </div>
           <div style={{ borderLeft: `6px solid ${ROSE}`, paddingLeft: 14 }}>
@@ -1417,7 +1450,7 @@ const S19: React.FC = () => (
   <Scene>
     <Weather k={18} steepMode={false} />
     <Chip text="So the thermometer on the pole cools" x={40} y={30} size={30} />
-    <Badge detail="time ×3600 (6 h in 6 s) · arrows not to the km scale · idealised field, illustrative (not data)" corner="bl" />
+    <Badge detail="time ×3600 (6 h in 6 s) · arrows not to the km scale · idealised, illustrative (not data)" corner="br" />
     <Footnote items={[FN.V17, FN.dTdt]} />
   </Scene>
 );
@@ -1428,7 +1461,7 @@ const S20: React.FC = () => {
       <Weather k={19} steepMode />
       <Chip text="Make the map twice as steep" x={40} y={30} size={30} />
       <Chip text="same place, map ×2 steeper — clock restarts" x={40} y={92} size={28} color={ORANGE} o={ramp(f, 10, 25)} />
-      <Badge detail="time ×3600 (6 h in 6 s) · arrows not to the km scale · idealised field, illustrative (not data)" corner="bl" />
+      <Badge detail="time ×3600 (6 h in 6 s) · arrows not to the km scale · idealised, illustrative (not data)" corner="br" />
       <Footnote items={[FN.V17, FN.dTdt]} />
     </Scene>
   );
@@ -1454,11 +1487,11 @@ const S21: React.FC = () => {
           sign: <span style={{ color: INK }}>+ same way (under 90°)</span> · <span style={{ color: INK }}>0 at 90°</span> ·{" "}
           <span style={{ color: ROSE }}>− opposite (beyond 90°)</span></div>
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 420, bottom: 120, opacity: oL }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 380, bottom: 340, opacity: oL }}>
         <EndCard notebook="Chapter 0A, the dot product — shammun.github.io/aofd/notebooks/poc_ch00a_dot.html"
           explainer="Try it: vector products lab — shammun.github.io/aofd/viz/ch00/vector_products_lab.html" credit="" />
       </div>
-      <div style={{ position: "absolute", left: 140, top: 880, width: 1660, ...FONT, fontSize: 28, color: MUTED, lineHeight: 1.35, opacity: oL }}>
+      <div style={{ position: "absolute", left: 140, top: 706, width: 1660, ...FONT, fontSize: 26, color: MUTED, lineHeight: 1.3, opacity: oL }}>
         From Kundu: §2.1 (K 2.2), §2.8 (dot product), §2.9 (gradient) — fluidpy ch02 C01 and C09:{" "}
         <span style={{ color: INK }}>shammun.github.io/fluidpy/notebooks/ch02_cartesian_tensors.html</span><br />
         Made with tested fluidpy physics · shammun.github.io/aofd

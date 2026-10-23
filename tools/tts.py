@@ -101,10 +101,9 @@ def read_scenes(path: Path | None, text: str | None) -> list[dict]:
     return [{"id": s["id"], "sentences": sentences(" ".join(s["text"]))} for s in scenes]
 
 
-def wrap(text: str) -> list[str]:
-    """Greedy wrap into lines of <= MAX_LINE characters."""
+def _greedy(words: list[str]) -> list[str]:
     lines, cur = [], ""
-    for w in text.split():
+    for w in words:
         if cur and len(cur) + 1 + len(w) > MAX_LINE:
             lines.append(cur)
             cur = w
@@ -113,6 +112,55 @@ def wrap(text: str) -> list[str]:
     if cur:
         lines.append(cur)
     return lines
+
+
+def _pair_split(left: str, right: str) -> bool:
+    """True if a break between `left` and `right` would split a short comma pair such as "five, one" or "(6, 8)"."""
+    return left.endswith(",") and len(left.strip("(,")) <= 6 and len(right.strip(").,;:!?")) <= 6
+
+
+# words that bind to the next one ("the shadow", "point one", "dot grad T"): a line should not end on them
+_GLUE = {"a", "an", "the", "of", "to", "per", "by", "dot", "point", "times", "over", "minus", "plus", "and", "or",
+         "in", "on", "at", "for", "with", "from", "is", "its", "it's", "how", "as"}
+_GLUE_NEXT = {"hat", "dot", "point", "by", "over", "times"}  # ... nor should a line start on these
+_NUM = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "point"}
+
+
+def _break_cost(left: str, right: str) -> int:
+    """Extra cost of breaking between `left` and `right` (0 = a natural place)."""
+    lw, rw = left.strip("()").lower(), right.strip("(),.;:!?").lower()
+    cost = 0
+    if len(lw) == 1 or (len(rw) == 1 and not re.search(r"[,;:]$", left)):  # "arrow / a", "a dot / b", "b / hat"
+        cost += 40
+    if lw.rstrip(",") in _NUM and rw in _NUM:   # a spoken number or pair: "point one / six two", "five, / one"
+        cost += 40
+    if lw in _GLUE or rw in _GLUE_NEXT:
+        cost += 15
+    return cost
+
+
+def wrap(text: str) -> list[str]:
+    """Wrap into lines of <= MAX_LINE characters.
+
+    One line if it fits. If the greedy wrap needs exactly two lines, the break is re-chosen (2026-10-22, review 3 S5):
+    each line holds at least two words, a short comma pair ("five, one") is never split, and the two lines are as
+    even as possible, with a small preference for breaking after a clause mark (, ; : —). If no break meets the rules,
+    the greedy wrap is kept. Three or more lines are left greedy (split_for_cues splits such text into several cues).
+    """
+    words = text.split()
+    greedy = _greedy(words)
+    if len(greedy) != 2:
+        return greedy
+    best, best_score = None, None
+    for i in range(2, len(words) - 1):
+        l1, l2 = " ".join(words[:i]), " ".join(words[i:])
+        if len(l1) > MAX_LINE or len(l2) > MAX_LINE or _pair_split(words[i - 1], words[i]):
+            continue
+        score = (abs(len(l1) - len(l2)) - (10 if re.search(r"[,;:—–]$", l1) else 0)
+                 + _break_cost(words[i - 1], words[i]))
+        if best_score is None or score < best_score:
+            best, best_score = [l1, l2], score
+    return best or greedy
 
 
 def split_for_cues(sentence: str, dur: float) -> list[str]:

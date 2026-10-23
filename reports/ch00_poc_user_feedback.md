@@ -96,3 +96,6 @@ Awaiting the user's second look.
 - U-M.8 Add smooth, soothing background music (overrides "no music by default" for this movie). Tool: `tools/music.py` (procedural, our own, CC0).
 - Decisions (user, 2026-10-22): music level as proposed (bed −28 LUFS, duck 5 dB); length 6:00–6:10; the wind is **v** in the weather
   part (matches Vallis 1.7); otherwise the orchestrator's recommendations (PoC D test clip stays local).
+- U-M.9 (2026-10-22): explain the material derivative clearly where it is first used (s14): following the same bit of air vs a fixed
+  place, with an on-screen definition card. Added to the fix loop 1 of v2.
+  User correction: say **air parcel** (defined: a small volume of air that moves with the flow), never "bit of air"; DT/Dt = rate of change following an air parcel; ∂T/∂t = local derivative, rate at a fixed point.
