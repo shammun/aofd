@@ -80,3 +80,19 @@ Awaiting the user's second look.
   this. Answer given in chat: (i) the shadow alone depends on which vector you project onto, while shadow × the other length gives
   the same number both ways; (ii) a·b is the cheap formula (Σ aᵢbᵢ) and the shadow is derived from it, a·b/|b|; with a unit vector the
   two are equal (components, u·x̂); (iii) the physics needs both sizes: work F·d, advection u·∇T (m/s × K/m = K/s).
+
+## Movie `ch00_dot_product_why` — user round 1 (2026-10-22, screenshots `5_2.png`, `6.png`–`9.png`)
+- U-M.1 Don't open with the puzzle: first the definition, explanation, intuition and examples (up to ~1.5 min), then the question, then the answers.
+- U-M.2 Length at least 6 min (the user first said 5–6 min, then "at least 6"): target 6:00–6:10.
+- U-M.3 Labels (K 2.2), (0A.1), (0A.3), (Vallis 1.7) unexplained (the user read "0A" as "O = Vallis"). Explain the labels once, and give a
+  source footnote on every frame that shows a labelled equation.
+- U-M.4 (0A.3) `|a|cosθ = a·b̂ = a·b/|b|`, `b̂ = b/|b|` was shown at ~0:30 without explanation: explain it step by step.
+- U-M.5 At ~1:04, "they're the same" doesn't say what is the same; "dividing by |b| does nothing" is unclear. Say that the dot product equals the shadow.
+- U-M.6 Reason 3 (the weather) jumps in difficulty: explain ∇T, the material derivative, (v·∇)φ, what v and φ are here, and how (Vallis 1.7)
+  is advection. Put (1.7) first, then the numbers; write u·∇T = (shadow of u) × |∇T|; explain what 0.180 K per hour means (a rate in time, not
+  the map's slope in space).
+- U-M.7 At ~1:58, why DT/Dt = 0 gives ∂T/∂t = −u·∇T and what a zero material derivative means; the line "how fast YOUR temperature changes
+  (doubles)" is unclear.
+- U-M.8 Add smooth, soothing background music (overrides "no music by default" for this movie). Tool: `tools/music.py` (procedural, our own, CC0).
+- Decisions (user, 2026-10-22): music level as proposed (bed −28 LUFS, duck 5 dB); length 6:00–6:10; the wind is **v** in the weather
+  part (matches Vallis 1.7); otherwise the orchestrator's recommendations (PoC D test clip stays local).
