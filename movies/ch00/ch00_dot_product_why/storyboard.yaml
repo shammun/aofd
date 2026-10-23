@@ -5,6 +5,11 @@
 # (2) LENGTH at least 6 min (book.yaml project.movie_seconds is 120-180 s and tools/movie_qa.py gates on it: the
 # orchestrator must pass a per-movie duration override); (3) MUSIC under the narration (MOVIES_BUDGET.md and
 # knowledge/movie_patterns.md say "no music": overridden for this movie by the user, 2026-10-22).
+# QA OVERRIDES (authorised by the user's 6-minute request, 2026-10-22; used by the motion-builder's v2 render):
+#   tools/movie_qa.py ... --duration 367.225 --duration-window 355,375 --budget-mb 60 --hard-mb 80
+#   (default gates are 120-180 s, 25 MB budget, 40 MB hard cap; the loudness gate measures narration + music).
+# CAPTIONS ON THE MOVIE PAGE: the published en.vtt carries "line:76%" on every cue so player captions sit above the
+#   footnote strip (y 1000-1072); tools/tts.py is unchanged (the setting is added when en.vtt is copied out).
 # Concept id: C0A-PoC1 (the dot product), provisional until analysis/ch00_curation.md exists.
 #
 # Scene boundaries = MEASURED Kokoro narration (tools/tts.py, af_bella x1.0) of script.md, with the two NEW lexicon

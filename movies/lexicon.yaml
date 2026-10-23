@@ -2,6 +2,8 @@
 # Keys are matched as whole words, case-insensitively; longer keys first. Values are respellings Kokoro reads well.
 # Add a word whenever a reviewer hears it mispronounced (R1 §7 item 6).
 respell:
+  Vallis: "Valiss"
+  Kundu: "Koondoo"
   Ekman: "Eckman"
   Sverdrup: "Svair-drup"
   Sverdrups: "Svair-drups"

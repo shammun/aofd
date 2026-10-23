@@ -15,3 +15,5 @@ export { ParticleField } from "./ParticleField";
 export { MapPanel } from "./MapPanel";
 export { LowerThird } from "./LowerThird";
 export { EndCard } from "./EndCard";
+export { Footnote, FOOTNOTE_TOP } from "./Footnote";
+export { BalloonThermometer, PoleThermometer, GhostArrow } from "./Icons";

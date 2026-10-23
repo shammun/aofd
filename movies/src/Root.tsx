@@ -14,6 +14,6 @@ export const Root: React.FC = () => (
     <Composition id="PocCoriolis" component={PocCoriolis} durationInFrames={POC_FRAMES} fps={POC_FPS} width={1920}
       height={1080} defaultProps={{ audio: "narration.wav" }} />
     <Composition id="Ch00DotProductWhy" component={DotProductWhy} durationInFrames={DPW_FRAMES} fps={DPW_FPS} width={1920}
-      height={1080} defaultProps={{ audio: "narration.wav" }} />
+      height={1080} defaultProps={{ audio: "narration_music.wav" }} />
   </>
 );
