@@ -8,6 +8,7 @@ before this review, so nothing in it was overwritten. The Chapter-0 movie review
 | ch00_dot_product_why (review 1) | 170.005 s (target 170) | 12.90 MB (≤ 25) | 9/10 PASS; **frozen FAIL** (`pass: false`) | PASS (one sign slip in a readout, see M1) | PASS | **FIX** (label overlap) | PASS | PASS | PASS | PASS | **FIX** (minor; one re-render + QA re-run) |
 | ch00_dot_product_why (review 2) | 170.005 s | 13.16 MB | 10/10 PASS (`pass: true`) | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **PASS** (one publish condition, P1) |
 | ch00_dot_product_why (review 3, v2 @ 3787a8b) | 367.253 s (target 367.225; user window 6:00–6:10) | 25.38 MB (override budget 60) | 10/10 PASS (`pass: true`) | **FIX** (M1: s17 says the map stays put, s18–s20 move it) | PASS | PASS (S2, S4 small overlaps) | PASS | PASS (S5 orphan words) | PASS | PASS (but S1: captions cover badges) | **FIX** (one Must, one re-render) |
+| ch00_dot_product_why (review 4, v4 @ d029eba) | 492.181 s (target 492.15; user accepted 8:12) | 30.85 MB (override budget 60) | 10/10 PASS (`pass: true`) | PASS (advection sign, upwind 12.82/12.64/12.46 °C all right) | PASS | **FIX** (M2: s11 label overlap) | **FIX** (M1: s19 clock vs spoken readings) | PASS (113 cues, ≤ 15.7 cps, no collisions) | PASS | PASS (none, per user G2) | **FIX** (two visual-only Musts; P1 before publishing) |
 
 ## ch00_dot_product_why (review 1, 2026-10-22)
 
@@ -577,3 +578,210 @@ sentence if the recommended wording is used). S1–S4 should go in the same re-r
 P1 (the notebook page) is still a publish condition.
 
 ## Overall: FIX (ch00_dot_product_why review 3 — M1; S1–S5 recommended; P1 before publishing)
+
+## ch00_dot_product_why (review 4 — version 4, commit d029eba, 2026-10-23)
+
+Reviewer: movie-reviewer, with fresh eyes. I looked only at frames, not at the running movie.
+The yardstick is the user's round-2 feedback (`reports/ch00_poc_user_feedback.md`, "user round 2 on v3": U-M2.G1–G5 and
+U-M2.1–U-M2.17) and the decisions recorded under it:
+- the 8:12 length is accepted;
+- at 180° the movie says "pointing in opposite directions";
+- the upwind track replaces the s19 wedge;
+- the end-card notebook page exists.
+
+Inputs:
+- `movies/out/ch00/ch00_dot_product_why/{1080.mp4, en.vtt}`;
+- `movies/ch00/ch00_dot_product_why/{storyboard.yaml, script.md, timing.json}`;
+- `reports/movies/ch00_dot_product_why/qa.json`;
+- the page image `chapters/pages/ch01/p025.png`;
+- `movies/lexicon.yaml`.
+
+Frames (scratch on G:, `aofd-data/scratch/movies/ch00_dot_product_why/review4_v4/`, 174 full frames, 64 MB):
+- one frame at every scene start (+0.6 s) and at the end of every sentence (113 frames). They are tiled at 640 px with the
+  caption band (y 821–950) outlined, in `tiles/sent_000…028.png`.
+- sweeps: s19 clock every 0.5 s from 436.5 to 444 s; s19 opening every 1.5 s; s11 every 1 s from 234 to 244 s; s03 every
+  0.75 s from 38 to 43.5 s; s05 every 1 s from 75 to 80 s.
+- full-resolution crops `full/c_*.png` (s06 strip, s08 title, s11 labels, s13 equation, s16, s17 map, s18 strip, s21 rows).
+
+### qa.json: 10/10 PASS, `pass: true`
+- duration 492.18 s (target 492.15, ±3 %);
+- size 30.85 MB (budget 60, hard 80);
+- codec: H.264 High, yuv420p, AAC, faststart;
+- black: 0 stretches;
+- frozen: 59 stretches longer than 4 s, all narrated; the longest silence inside one is 2.83 s;
+- loudness −16.0 LUFS, true peak −3.5 dBTP;
+- flashes: 0 per second;
+- captions: 113 cues match the script;
+- physics: 36 functions reproduce their hashes;
+- equations: 36 present.
+
+### My own checks of the captions and audio
+- **Captions:** 113 cues, at most 2 lines and 42 characters per line, at most 15.72 characters per second. Every cue
+  lasts 1–7 s and the cues are in order. The last cue ends at 489.35 s. There are no one-word second lines.
+  - No cue contains "Vallis", "Kundu", "Cohen", "Dowling", "not to scale", "0A" or "bit of air".
+  - Every one of the 113 frames is empty inside the caption band (y 821–950). The gauges and reason slots sit below it
+    (y ≥ 960), and the s21 rows end at y 788, so **captions and content never collide**.
+- **Music** (ebur128 on the narration gaps): the bed is ≈ −32.5 LUFS in the 0.7-s scene gaps (7.7 s, 100.1 s,
+  443.4 s, 484.3 s) and −53 LUFS in the end-card hold. Speech is −16.6 LUFS (300–302 s).
+  - So the bed sits about 16 dB under the voice. It can be heard in the gaps and does not mask any word. This matches
+    the level the user confirmed.
+  - The 5-s fade-in, the 8-s fade-out and the missing lift on s21 differ from the storyboard text, but the user said
+    "music unchanged". **Accepted** (storyboard doc drift, S11).
+- **"arrow a,"** (lexicon line 61) covers the s09 comma form "of b on arrow a, one point five seven". The caption keeps
+  "arrow a,". **Accepted.**
+
+### U-M2 items: is each one fixed?
+| Item | Verdict | Evidence (timestamps in v4) |
+|---|---|---|
+| G1 no references | **PASS** | No label, book or author name or footnote strip appears in any of the 174 frames. The only number on screen is a plain "(1)": at 0:55–1:14 on the cosine form, with the note "equation (1): we use it in a moment" at 1:13, then in the s06 strip from 1:41 ("divide both sides of (1) by \|b\|", 2:02). The end card says only "Made with tested fluidpy physics · shammun.github.io/aofd". The captions are clean (above). |
+| G2 no "not to scale" badges | **PASS** | There is no badge anywhere. Mixed units are explained by their own labels: "wind map: 1 grid square = 1 m/s (an arrow's length is a speed)" (3:17), "force ruler (N)" and "path ruler (m)" (3:38–4:03), "(the arrow has its own scale, in K/m; the bracket gives its value)" (5:47). |
+| G3 titles stand out | **PASS** | A full-width band with an accent bar, a kicker in capitals, a 60-px bold title with an underline, and "n / 22" on the right, in every scene. PartCards appear at 2:44 and 4:05. The KaTeX symbols inside titles are slightly oversized (S10). |
+| G4 every new term explained | **PASS** (one forward reference, S5) | **Components:** "component = how far the arrow reaches along one axis" (0:25). **Straight bars:** "\|a\| (two straight bars) = the length of a" (0:32). **θ:** "the angle between the arrows" (0:55). **cos θ:** the dial (1:06). **Shadow:** 1:50. **b̂:** "unit vector b̂: length 1, same direction as b" (2:23). **x̂:** "the unit vector pointing east — 1 eastward, 0 northward" (3:22). **N, J:** 3:38 and 4:00. **∂:** "only one thing changes — here the time" (4:17). **Air parcel:** 4:28. **Material derivative:** 4:36. **φ and v:** 4:50. **Advection:** 4:56. **Isotherm:** 5:04. **∂T/∂x, ∂T/∂y:** 5:22 and 5:28. **∇ "grad, short for gradient":** 5:37. **1 K step = 1 °C step:** 5:41. The one gap: ∇ first appears at 4:37 with only a name chip, "∇ = 'grad': explained in two scenes" (S5). |
+| G5 narration = screen | **FIX** (M1) | Every other line is revealed with the sentence that says it (checked at all 90 sentence ends). The exception is s19 at 7:17–7:23: the spoken pole readings lag the on-screen clock by about 1 h. |
+| U-M2.1 | **PASS** | The 0:21–0:25 narration and chips say "5 and 1 are the components of vector a: a = (5, 1)" and "1 and 3 are the components of vector b: b = (1, 3)". |
+| U-M2.2 | **PASS** | 0:38.75 shows a·b = a₁b₁ + a₂b₂ + a₃b₃ ("arrows in space: 3 components"). By 0:43 the a₃b₃ term is struck through ("our flat arrows: 2 components") and a·b = a₁b₁ + a₂b₂ is shown. At 0:48 the tags "a₁ = 5 b₁ = 1 / first components" and "a₂ = 1 b₂ = 3 / second components" appear. No label and no "small number = which part" line. |
+| U-M2.3 | **PASS** | The labels scene is gone. The worked line "= 5 × 1 + 1 × 3 = 5 + 3 = 8" is in the definition scene at 0:54. The extra "5 + 3" is correct and helps a beginner (deviation **accepted**). |
+| U-M2.4 | **PASS** (S7) | At 1:15–1:18 a large p is alone at the top with "p stays the same in all three pictures". At 1:19.5 "only q turns" appears, and the three panels have a pinned p, each tagged "same p". The panels are 0° → +6 (1:25), 90° → 0 (1:29) and 180° → "opposite directions: negative", −6 (1:35), and the band "a·b measures how much two arrows point the same way" closes the scene (1:40). Once the panels appear, p is no larger than q (S7). |
+| U-M2.5 | **PASS** | "(1)" at 0:55 and 2:02. The narration says "Divide both sides of equation one by the length of b" (2:02.7). |
+| U-M2.6 | **PASS** | At 2:17–2:23 b shrinks to b̂, with "b̂ ('b hat') = b ÷ \|b\|" and "unit vector b̂: length 1, same direction as b (\|b̂\| = 1)". |
+| U-M2.7 | **PASS** | The strip is headed "Computing the shadow of a on b" and each row is tagged "shadow:". The merged row at 2:12 is "shadow = \|a\| cos θ = a·b/\|b\| = 8/3.162 = 2.530". At 2:28, b̂ = (1/3.162, 3/3.162) = (0.316, 0.949). The merged row "shadow = a·b̂ = 5 × 0.316 + 1 × 0.949 = 2.530" comes at 2:42.5, with "✓ same shadow as before". |
+| U-M2.8 | **PASS** | At 3:02.6 both calculation panels are written out in full: (5,1)·(1,3)/√10 = 8/3.162 = 2.530 and (1,3)·(5,1)/√26 = 8/5.099 = 1.569. At 3:06.4 come "× \|b\| = 8.000" and "× \|a\| = 8.000", the rectangles, and "a·b = b·a". The rectangles grow in place instead of sliding to a tray (deviation **accepted**: the centre still shows "area 8.000 both ways"). |
+| U-M2.9 | **PASS** | At 3:17 the label reads "wind v = (6, 8): 6 m/s eastward, 8 m/s northward", with the legs labelled "6 m/s east" and "8 m/s north". At 3:22, "x̂ = (1, 0): … 1 eastward, 0 northward", and at 3:29 "v·x̂ = 6 × 1 + 8 × 0 = 6 m s⁻¹ = the eastward part of the wind". No "Vallis calls…" chip and no badge. |
+| U-M2.10 | **PASS** (narration and content); the label overlap is M2 | The scene has 7 sentences over 34 s. **17.3 N:** "across the motion, does no work" (3:42). **Shadow:** "along the ground = the shadow of F on the motion = 20 × cos 60° = 10.0 N" (3:48). **10 N:** "this shadow is a force: 10 N pulling forward — the only part that does work" (3:52). **Work:** 50 J, then 100 J (4:00). **Close:** "twice the distance → twice the work" (4:03). |
+| U-M2.11 | **PASS** | s12 (4:04–4:37) teaches the pole, ∂, the balloon, the air parcel and DT/Dt before any equation appears. s13 then shows Dφ/Dt = ∂φ/∂t + v·∇φ without brackets. On screen: "φ = any quantity the air carries: temperature T, moisture, …"; "v·∇φ = advection of φ"; DT/Dt = ∂T/∂t + v·∇T with "v·∇T = advection of temperature"; "moisture q: v·∇q = advection of moisture" (5:02). No "Vallis". |
+| U-M2.12 | **PASS** | **5:07:** isotherms at 100…500 km, labelled 11…15 °C, with "isotherm = a line of equal temperature". **5:12:** "100 km" brackets. **5:16:** the walk east, "+1 °C" at each crossing. **5:22:** ∂T/∂x = 1 °C/100 km, "change going east only (north position held fixed)". **5:28:** ∂T/∂y = 0, "you stay on the 13 °C isotherm". **5:41:** ∇T = (∂T/∂x, ∂T/∂y) = (1.00 × 10⁻⁵ K m⁻¹, 0). No badge. |
+| U-M2.13 | **PASS** | The narration has 4 sentences and 69 words. The shadow "= speed straight towards warmer air" (6:02); "8.66 m/s along the isotherm: no temperature change" (6:06); "units: (m/s) × (K/m) = K/s" with the m's struck through, then 0.180 K per hour (6:16). No footnote, no "1.7". |
+| U-M2.14 | **PASS** | "rate in SPACE · the map's slope · 1 °C per 100 km" (6:23) and "rate in TIME · what the moving air parcel meets · 0.180 K per hour" (6:27) are each revealed with their own sentence. At 6:35, "36.0 km along the wind", "18.0 km towards warmer air = 5.00 m/s × 3600 s" and "after 1 h the parcel is over a spot that was 0.180 °C warmer when it set off" match the narration word for word. |
+| U-M2.15 | **PASS** (S3) | **Chips:** "suppose: each parcel keeps its temperature (no sunshine, no mixing)" (6:37), then "balloon: 13.00 °C, never changes · DT/Dt = 0" and "the pattern slides with the wind" (6:50). **Strip:** rows 1–4, one move each, with the pair struck through and −v·∇T boxed with a rose minus (7:00). |
+| U-M2.16 | **PASS** in content; the timing is M1 | The wedge is gone. **Upwind line:** "upwind = where the wind comes from" (7:09). **Dots and formula:** the three dots "arrives in 1 h · 12.82 °C / 2 h · 12.64 °C / 3 h · 12.46 °C" (7:10.5) and T_upwind = 13.00 + ∇T·(−v t) (7:16.5). **Clock:** the dots slide into the pole and the readout steps down: 12.78 at 1.20 h, 12.59 at 2.26 h, 12.31 at 3.85 h, 11.92 at 6.00 h. **Balloon:** it stays at 13.00 °C. |
+| U-M2.17 | **PASS** | Four rows with icons, one per sentence (7:45–8:04). Each row has its formula and number: a·b = (\|a\| cos θ)\|b\| = \|a\|\|b\| cos θ; "+ same way · 0 at a right angle · − opposite directions"; v·x̂ = 6 m s⁻¹; W = F·d = 50 J, v·∇T = 0.180 K per hour. No references. The links are on a separate end card. |
+
+### Physics honesty: PASS
+I recomputed every number on screen and every one is right:
+- **Definitions:** \|a\| = √26 = 5.099, \|b\| = √10 = 3.162; θ = 60.26°, cos θ = 8/16.125 = 0.4961.
+- **Shadows:** a·b/\|b\| = 2.530 with foot (0.8, 2.4); b·a/\|a\| = 1.569. b̂ = (0.316, 0.949), and 5 × 0.316 + 0.949 = 2.530.
+- **p·q:** +6, 0, −6.
+- **Wind and sled:** v·x̂ = 6 m/s. F = (10.0, 17.3) N, W = 50 J and 100 J.
+- **The weather map:** ∇T = 1.00 × 10⁻⁵ K/m; v = (5.00, 8.66) m/s; v·∇T = 5.00 × 10⁻⁵ K/s = 0.180 K/h; 18.0 km per hour
+  towards warmer air and 36.0 km along the wind.
+- **Advection sign:** the screen derives ∂T/∂t = −v·∇T from DT/Dt = 0 (7:00). The wind has a part towards warmer air
+  (v·∇T > 0), so the fixed thermometer **cools**: 13.00 → 11.92 °C in 6 h. The balloon stays at 13.00 °C. Both are
+  right.
+- **Upwind dots:** pin − v·t = (300, 180) − (18.0, 31.18) km × n gives (282.0, 148.8), (264.0, 117.6) and
+  (246.0, 86.5) km. Their temperatures now are 10 + x/100 = 12.82, 12.64 and 12.46 °C. These are exactly the pole's
+  readings at 1, 2 and 3 h, because the pattern slides at v. The dots move along the wind (towards the north-east),
+  into the pole. **Correct.**
+- **Twice as steep:** the shadow is still 5.00 m/s; v·∇T = 0.360 K/h; the pole reads 11.48 °C at 4.23 h and 10.84 °C at
+  6 h (13 − 0.36 × 6). **Correct.**
+- **s17** no longer claims a frozen map, and s18 shows the pattern sliding, so v3's M1 stays fixed.
+
+### Equation fidelity: PASS
+- **Material derivative:** I compared Dφ/Dt = ∂φ/∂t + v·∇φ (s13, 4:37–5:03) with the rendered page `chapters/pages/ch01/p025.png`.
+  - The boxed (1.7) there is Dφ/Dt = ∂φ/∂t + (v·∇)φ, and (1.6) on the same page writes the same right-hand side as
+    v·∇φ. For a scalar the two are identical, so the bracket-free form is faithful.
+  - φ is the curly φ as on the page, and v is bold.
+  - One cosmetic difference: the movie's D is italic, while the page's D is upright (`\mathrm D`), as the storyboard
+    itself specifies (S8).
+- **The other strings are unchanged since review 3** and were checked against their page images there: a·b = a₁b₁ + a₂b₂ + a₃b₃, a·b = \|a\|\|b\| cos θ and
+  ∇T = (∂T/∂x, ∂T/∂y).
+- No KaTeX error box appears in any frame.
+
+### Builder-declared deviations
+| Deviation | Verdict |
+|---|---|
+| lexicon "arrow a," | Accepted: needed for the s09 comma form; the caption text is unchanged. |
+| music bed as in v3 (5-s fade-in, 8-s fade-out, no lift on s21) | Accepted: the user asked for "unchanged" music. Update the storyboard `audio.music.notes` (S11). |
+| s09 rectangles grow in place | Accepted: both areas and "area 8.000 both ways" are on screen at 3:06. |
+| s11 sled still while d grows | Accepted with S9. d is labelled on a "path ruler (m)", but a still sled under a growing displacement reads oddly. |
+| s22 local two-row links card | Accepted: the links are correct. The lab page is on origin; the notebook page is not yet (P1). |
+| s03 worked line "5 + 3" | Accepted. |
+
+### Legibility at 640 px: FIX (one text-on-text overlap, M2); small secondary text (S4)
+All titles, equations and the main labels can be read at 640 px. There is no clipped text, except the balloon leaving
+the map in s19 (S1).
+
+### Pacing: FIX (M1); everything else PASS
+No scene is rushed or frozen. The densest scene, s09 (14 s), puts both calculation panels up with their sentence.
+
+### Accessibility: PASS
+- The palette is teal and orange, with rose plus hatching for negative values, so nothing depends on red and green.
+- The map uses cmocean thermal.
+- There are no flashes (QA: 0 per second).
+- PartCards dim the stage to 35 % and never flash it.
+
+### Integrity: PASS
+- No book scans and no quoted text.
+- The narration is in our own words.
+- The end card links to `viz/ch00/vector_products_lab.html` and `notebooks/poc_ch00a_dot.html`.
+
+### Findings
+**Must fix**
+- **M1 (s19, 7:17.7–7:23.3, pacing, G5).** The 6-h clock starts at 7:17.9 and runs at 1 h per second, so the spoken
+  readings trail the readout by about an hour:
+  - at "thirteen" (≈ 7:18.5) the screen shows 12.88 °C;
+  - at "twelve point eight two" (≈ 7:19.5–7:20) it shows 12.69–12.59 °C;
+  - at "twelve point six four" (≈ 7:21.5–7:22.5) it shows 12.31–12.12 °C.
+
+  The user's G5 rule asks that what is said is what is on screen.
+  **Fix:** drive the clock from the sentence-4 word times so that 0 h, 1 h and 2 h land on "thirteen", "twelve point
+  eight two" and "twelve point six four". About 1 h per 1.6 s for the first 2–3 h fits the 5.65-s sentence. Then let it
+  run on to 6 h over the scene tail, or end at 3 h. Visuals only, no new TTS.
+- **M2 (s11, 3:53.6–3:59.0, legibility).** The teal "10 N forward" label and the orange "d = 5 m" label are drawn on top
+  of each other, and both cover the "60°" angle label (crop `full/c_s11_labels.png`). The overlap lasts until d grows
+  past about 6 m.
+  **Fix:** move "d = 5 m" under the ground line (or to the arrow tip), lift "10 N forward" about 30 px, and fade the 60°
+  arc and label with the 17.3-N leg.
+
+**Should fix**
+- **S1 (s19, 7:00–7:23).**
+  - The panel lists "balloon: 13.00 °C, keeps its temperature" from 7:01.4, but no balloon is visible until 7:18
+    (it is hidden under the pole).
+  - From 7:22.3 to 7:23.3 the balloon leaves the map through the top edge. It is drawn outside the map frame and is cut
+    off under the title band at 7:23.0, without its "off the map" tag on the map.
+
+  **Fix:** offset the balloon icon from the pole at the start, and fade it out at the map edge.
+- **S2 (s16, 5:49–6:16).** The label "a new wind: \|v\| = 10 m/s, 60° from ∇T" is wrong: this is the same wind the
+  balloon rode in s12 (10 m/s, 60° from east). Say "the wind".
+- **S3 (s18, 7:00.5–7:01.4).** The summary line "∂T/∂t = −v·∇T when DT/Dt = 0" fades in during the last ≈ 0.8 s before
+  the cut, so a viewer only glimpses it. Show it with sentence 4 or drop it.
+- **S4 (legibility at 640 px).** Several pieces of secondary text are ≤ 9 px at 640 px wide. Raise them to ≥ 28 px at
+  1080, full-opacity muted ink:
+  - the reason-slot captions "same number both ways / cheap / physics needs both sizes" (≈ 18 px at 1080 → 6 px; 3:06–4:03, 7:41);
+  - the strip "why" lines in s06, s07 and s18 (≈ 26 px → 8.7 px);
+  - the dimmed s16 components check chip (6:16);
+  - the s04 cos-dial labels (1:06);
+  - "uphill → warmer" and "\|∇T\|" in s15 (5:47).
+- **S5 (s13, 4:37).** ∇ first appears here with only "∇ = 'grad': explained in two scenes". G4 asks for an explanation at
+  first use. Add a five-word gloss, for example "grad φ: how φ changes across the map".
+- **S6 (s13, 5:02).** "v·∇T = advection of temperature" touches the teal ring. Leave a 16-px gap.
+- **S7 (s05, 1:19.5–1:40).** U-M2.4 asked for p to be "larger". The big p is visible alone only from 1:15 to 1:18.5,
+  and in the panels p is the same size as q. Keep a large reference p in the free space at the top through the scene.
+- **S8 (s13, s16, s18).** D/Dt is set in italic; the page and the storyboard use upright D (`\mathrm{D}`).
+- **S9 (s11, 3:59–4:01).** d grows from 5 to 10 m while the sled stands still. Move the sled with the tip of d, or label
+  d "distance pulled".
+- **S10 (titles of s07, s08, s15, s16).** KaTeX symbols in the titles render larger than the sans title. The \|b\| bars in
+  s08 cross the band's lower edge, and the underline runs through the KaTeX descenders (crop `full/c_s08_title.png`).
+  Render the title symbols at title size in the title font.
+- **S11 (docs).** The storyboard still says 2-s fades with a lift on s21, a centre tray in s09 and a sliding sled in
+  s11. Update the storyboard to what was built.
+
+**Publish condition**
+- **P1.** `notebooks/poc_ch00a_dot.html` is committed (7eb99d5) but not on `origin/main` (the local branch is 10 commits
+  ahead). The end card's second link returns 404 until it is pushed.
+
+### Verdict: FIX
+Version 4 does what round 2 asked:
+- 21 of the 22 U-M2 items PASS. The one FIX is G5, through M1. G1–G4 hold on every frame and in the captions.
+- The physics and the advection sign are right, every number checks, and the captions are clean and never collide with
+  content.
+
+**Two small Musts remain**, both visual only, so no TTS is needed:
+- M1, the s19 clock pacing (7:17–7:23);
+- M2, the s11 label overlap (3:53–3:59).
+
+Fixing them needs a re-render of s11 and s19 (S1–S4 and S6–S10 should go in the same pass) and a QA re-run. A
+re-review needs only frames at 3:50–4:03 and 7:00–7:24 and the new qa.json.
+
+Disk at review time: C: 83 GB free, G: 588 GB free. The review scratch is 64 MB on G: (deletable after the re-review).
+
+## Overall: FIX (ch00_dot_product_why review 4 — M1, M2; S1–S11 recommended; P1 before publishing)
