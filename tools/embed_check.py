@@ -10,6 +10,7 @@ Checks for chapter ``chNN``:
      the files on disk (warning only — the design may legitimately drop one).
 
 Usage::  .venv/Scripts/python.exe tools/embed_check.py ch07        (exit 0 = OK)
+         .venv/Scripts/python.exe tools/embed_check.py ch00 --notebook notebooks/poc_ch00a_dot.ipynb   (PoC: only its explainers)
 """
 from __future__ import annotations
 
@@ -23,7 +24,9 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
 
-def check(chapter: str) -> list[str]:
+def check(chapter: str, notebook: Path | None = None) -> list[str]:
+    """``notebook`` (PoC / sample notebooks such as ``notebooks/poc_ch00a_dot.ipynb``): check only the explainers that
+    notebook embeds (exist, current, lint-clean, embedded exactly once); the per-chapter count is not applied."""
     import yaml
 
     import viz_inline
@@ -38,14 +41,17 @@ def check(chapter: str) -> list[str]:
         return [f"{chapter} not in book.yaml"]
     problems: list[str] = []
     files = sorted(p for p in (ROOT / "viz" / chapter).glob("*.html") if p.name != "index.html")
+    if notebook is not None:
+        wanted = set(explainer_calls(notebook))
+        files = [p for p in files if p.stem in wanted]
     slugs = [p.stem for p in files]
-    if len(files) < minimum:
+    if notebook is None and len(files) < minimum:
         problems.append(f"{len(files)} explainers in viz/{chapter}/ (need at least {minimum})")
-    if len(files) > limit:
+    if notebook is None and len(files) > limit:
         problems.append(f"{len(files)} explainers in viz/{chapter}/ (limit {limit})")
 
     if files:
-        bodies = {k: viz_inline.asset_body(k) for k in viz_inline.BLOCKS}
+        bodies = {k: viz_inline.asset_body(k) for k in (viz_inline.BLOCKS | viz_inline.OPTIONAL)}   # 3-D blocks too
         for f in files:
             new, missing = viz_inline.inline_text(f.read_text(encoding="utf-8"), bodies)
             if missing:
@@ -57,13 +63,16 @@ def check(chapter: str) -> list[str]:
         # derivation ids in an explainer must be derivations the curation planned (D01… rows)
         from nbkit import curation_items
         planned_d = {k for k, v in curation_items(chapter).items() if v["tier"] == "DERIVATION"}
+        poc_design = ROOT / "analysis" / f"{chapter}_poc_design.md"
+        if notebook is not None and poc_design.exists():     # PoC derivations are planned in the PoC design, not a curation
+            planned_d |= set(re.findall(r"^\*\*(D[\w\-]+) ·", poc_design.read_text(encoding="utf-8"), flags=re.M))
         for f in files:
             m = re.search(r'<meta\s+name="viz:derivations"\s+content="([^"]*)"', f.read_text(encoding="utf-8"))
             for d in (re.split(r"[\s,;]+", m.group(1)) if m else []):
                 if d and d.lower() != "none" and d not in planned_d:
                     problems.append(f"{f.name}: viz:derivations lists {d}, which is not a D row of analysis/{chapter}_curation.md")
 
-    nb = ROOT / "notebooks" / f"{chapter}_{row['slug']}.ipynb"
+    nb = notebook if notebook is not None else ROOT / "notebooks" / f"{chapter}_{row['slug']}.ipynb"
     if not nb.exists():
         problems.append(f"{nb.relative_to(ROOT).as_posix()} does not exist")
     else:
@@ -94,7 +103,13 @@ def main(argv: list[str]) -> int:
     if not argv:
         print(__doc__)
         return 2
-    problems = check(argv[0])
+    notebook = None
+    if "--notebook" in argv:                       # embed_check.py ch00 --notebook notebooks/poc_ch00a_dot.ipynb
+        i = argv.index("--notebook")
+        notebook = Path(argv[i + 1])
+        notebook = notebook if notebook.is_absolute() else ROOT / notebook
+        argv = argv[:i] + argv[i + 2:]
+    problems = check(argv[0], notebook)
     if problems:
         print(f"EMBED CHECK FAILED for {argv[0]}:")
         for p in problems:

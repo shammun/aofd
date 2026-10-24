@@ -115,7 +115,7 @@ Scene points:
 - U-M2.2 (~0:30–0:31) Definition a·b = a₁b₁ + a₂b₂ + a₃b₃: drop the (K 2.2) label; drop the "small number = which part, 1 ↔ x, 2 ↔ y, 3 ↔ z" line entirely. Instead say these vectors have two components, so we write only a₁b₁ + a₂b₂, with a₁ = 5, b₁ = 1, a₂ = 1, b₂ = 3 shown on screen.
 - U-M2.3 (~0:43–1:01) Delete the whole "how to read the equation labels / references" scene (s04). The following "try it" scene is then not needed as a separate scene: show the worked calculation in the definition scene itself.
 - U-M2.4 (~1:31, angle cases) θ = 0° as now; then θ = 90° ⇒ dot product 0; then state clearly θ = 180° (pointing opposite ways) ⇒ dot product negative. Put vector **p** prominently (centre/top, larger, distinct colour); say p is the same in all three pictures and only q changes, i.e. we change the angle to show how the dot product changes.
-  (User wrote "180° … that is they are parallel"; teach it as antiparallel/opposite directions — flag to the user.)
+  Decision (user, 2026-10-23): at 180° say "pointing in opposite directions" (confirmed).
 - U-M2.5 (~1:39, derivation) Equations are acceptable here because step 3 refers back: label the first equation just (1) (not 0A.1) and say "divide both sides of (1) by |b|".
 - U-M2.6 (~2:14) Explain b̂: the unit vector along b (length 1, same direction as b), b̂ = b/|b|.
 - U-M2.7 (~2:20–2:29, shadow numbers chain) No 0A.1 label; no footnote. Make clear every line is a computation of the shadow. Merge lines 4+5 (a·b/|b| = 8/3.162 = 2.530 — the shadow) and lines 6+7 (a·b̂ computed another way, same shadow), and show how b̂ = (0.316, 0.949) is obtained (1/3.162, 3/3.162).
@@ -130,3 +130,4 @@ Scene points:
 - U-M2.16 (~5:42) Remove "not to scale". Explain the **shaded area behind the green arrow** (the user does not know what it is or how it relates to the shadow / to ∂T/∂t = −v·∇T); either explain it clearly or remove it. Make "parcels arriving at the pole come from colder places upwind" clear.
 - U-M2.17 (last scene, "what the dot product measures") Improve the content, the wording on screen and the narration. No references.
 - Decision (user): length up to ~8 min is fine. Background music: unchanged (not mentioned).
+- Decisions (user, 2026-10-23, v4): length 8:12 accepted; build `notebooks/poc_ch00a_dot.html` so the end-card link works (P1); s19 shaded wedge replaced by the upwind track (1 h / 2 h / 3 h dots) accepted.

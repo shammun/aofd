@@ -24,6 +24,7 @@ Usage (repo root)::
     .venv/Scripts/python.exe tools/publish_notebook.py ch07                # execute + publish one chapter
     .venv/Scripts/python.exe tools/publish_notebook.py ch07 --fast         # FLUIDPY_FAST=1 for the run
     .venv/Scripts/python.exe tools/publish_notebook.py --site-only         # only index.html, gallery, README
+    .venv/Scripts/python.exe tools/publish_notebook.py --poc poc_ch00a_dot # PoC sample: page + Colab twin, no site nav
 """
 from __future__ import annotations
 
@@ -190,6 +191,9 @@ def _clean_plotly_outputs(nb) -> None:
             o["data"]["text/html"] = h
 
 
+_FINDFONT_ONLY = re.compile(r"(?:findfont: [^\n]*\n?)+")
+
+
 def transform(nb, mode: str) -> tuple[nbformat.NotebookNode, list[str]]:
     """mode="page": explainer outputs → full-window blocks, live-only outputs → note, plotly includes de-duplicated.
     mode="ipynb": explainer outputs → static link cards (GitHub view); everything else unchanged."""
@@ -203,6 +207,9 @@ def transform(nb, mode: str) -> tuple[nbformat.NotebookNode, list[str]]:
         tags = c.metadata.get("tags", [])
         new_outputs = []
         for o in c.get("outputs", []):
+            if (mode == "page" and o.get("output_type") == "stream" and o.get("name") == "stderr"
+                    and _FINDFONT_ONLY.fullmatch(o.get("text", ""))):
+                continue                    # matplotlib's "findfont: … semibold …" warning (fluidpy.core.style) is noise
             h = _html_of(o)
             if h and MARKER_RE.search(h):
                 for m in MARKER_RE.finditer(h):
@@ -298,7 +305,11 @@ PAGE_JS = r"""
 """
 
 
-def render_page(nb_page, *, row: dict, name: str, prev_row: dict | None, next_row: dict | None, title: str) -> str:
+def render_page(nb_page, *, row: dict, name: str, prev_row: dict | None, next_row: dict | None, title: str,
+                viz_keys: list[str] | None = None, crumbs: str | None = None, chapnav: str | None = None,
+                strip_title: str = "Interactive explainers in this chapter") -> str:
+    """``viz_keys`` / ``crumbs`` / ``chapnav`` / ``strip_title`` are overrides for non-chapter pages (PoC samples):
+    the explainer strip lists only the given ``chNN/slug`` keys, and the top bar gets its own links."""
     from nbconvert import HTMLExporter
 
     exporter = HTMLExporter(template_name="lab")
@@ -316,16 +327,24 @@ def render_page(nb_page, *, row: dict, name: str, prev_row: dict | None, next_ro
             return f"<span>{label}</span>"
         return f'<a href="{r["id"]}_{r["slug"]}.html" title="{E(r["title"])}">{label}</a>'
 
-    viz = list_viz(row["id"], ROOT)
+    if viz_keys is None:
+        viz = list_viz(row["id"], ROOT)
+    else:
+        viz = [dict(_viz_meta(k), slug=k.split("/")[1]) for k in dict.fromkeys(viz_keys)]
     cards = "".join(f'<a class="fp-viz-card" href="#viz-{E(m["slug"])}"><span class="fp-num">&#127918; {i + 1}</span>'
                     f'<b>{title_html(m["title"])}</b><span>{title_html(m.get("summary", ""))}</span></a>' for i, m in enumerate(viz))
-    strip = (f'<div class="fp-viz-strip"><h2 id="fp-explainers">Interactive explainers in this chapter</h2>'
+    strip = (f'<div class="fp-viz-strip"><h2 id="fp-explainers">{E(strip_title)}</h2>'
              f'<div class="fp-viz-cards">{cards}</div></div>') if viz else ""
+    foot_crumbs = crumbs if crumbs is not None else '<a href="../index.html">&larr; All chapters</a>'
+    if crumbs is None:
+        crumbs = '<a href="../index.html">&larr; All chapters</a><a href="../viz/index.html">&#127918; All explainers</a>'
+    if chapnav is None:
+        chapnav = nav(prev_row, "&larr; Previous") + nav(next_row, "Next &rarr;")
     header = f"""
 <div class="ce-container">
 <div class="fp-topbar">
-  <div class="fp-crumbs"><a href="../index.html">&larr; All chapters</a><a href="../viz/index.html">&#127918; All explainers</a></div>
-  <div class="fp-chapnav">{nav(prev_row, "&larr; Previous")}{nav(next_row, "Next &rarr;")}</div>
+  <div class="fp-crumbs">{crumbs}</div>
+  <div class="fp-chapnav">{chapnav}</div>
 </div>
 <div class="fp-actions">
   <a class="fp-btn colab" href="{E(colab_url(name + '_colab', ROOT))}" target="_blank" rel="noopener">&#9654; Open in Colab</a>
@@ -336,8 +355,8 @@ def render_page(nb_page, *, row: dict, name: str, prev_row: dict | None, next_ro
 """
     footer = f"""
 <div class="fp-topbar" style="margin-top:40px">
-  <div class="fp-crumbs"><a href="../index.html">&larr; All chapters</a></div>
-  <div class="fp-chapnav">{nav(prev_row, "&larr; Previous")}{nav(next_row, "Next &rarr;")}</div>
+  <div class="fp-crumbs">{foot_crumbs}</div>
+  <div class="fp-chapnav">{chapnav}</div>
 </div>
 <p class="ce-source">Code and explanations: <a href="{E(repo_url(ROOT))}">{E(config(ROOT)['project']['repo'])}</a> (MIT).
 The book is not reproduced here; equations are cited by number.</p>
@@ -408,13 +427,72 @@ def publish(chapter: str, *, fast: bool = False, skip_checks: bool = False) -> d
     return rep
 
 
+def publish_poc(name: str, *, fast: bool = False, skip_checks: bool = False, write_ipynb: bool = False) -> dict:
+    """Page + Colab twin for a PoC / sample notebook ``notebooks/<name>.ipynb`` (e.g. ``poc_ch00a_dot``), which is not
+    a book.yaml chapter row. The chapter id is read from the name (``poc_ch00a_dot`` → ``ch00``). Differences from
+    :func:`publish`: embed_check runs in ``--notebook`` mode (only this notebook's explainers, no count rule); the
+    executed ``.ipynb`` is left as it is unless ``write_ipynb``; the site navigation (``index.html``, galleries) is NOT
+    rebuilt and the page is not linked from it; the top bar links to the repository instead of the (unbuilt) index."""
+    cfg = config(ROOT)
+    m = re.search(r"(ch\d{2})", name)
+    if not m:
+        raise SystemExit(f"cannot read a chapter id from {name!r}")
+    chapter = m.group(1)
+    row = next(c for c in cfg["chapters"] if c["id"] == chapter)
+    src_path = ROOT / "notebooks" / f"{name}.ipynb"
+    if not src_path.exists():
+        raise SystemExit(f"{src_path.relative_to(ROOT)} not found")
+
+    if not skip_checks:
+        import embed_check
+        problems = embed_check.check(chapter, src_path)
+        if problems:
+            raise SystemExit("embed_check failed:\n  - " + "\n  - ".join(problems))
+
+    print(f"== {name}: executing (FAST={fast}) …")
+    executed, secs = execute(src_path, fast=fast)
+    probs = execution_problems(executed)
+    if probs:
+        raise SystemExit("execution problems:\n  - " + "\n  - ".join(probs))
+    print(f"   executed in {secs:.0f} s")
+
+    colab = colab_variant(executed, name)            # colab_variant strips every output itself
+    colab_path = ROOT / "notebooks" / f"{name}_colab.ipynb"
+    nbformat.write(colab, colab_path)
+
+    page_nb, keys = transform(executed, "page")
+    if write_ipynb:
+        ipynb_nb, _ = transform(executed, "ipynb")
+        nbformat.write(ipynb_nb, src_path)
+
+    title = notebook_title(executed)
+    crumbs = (f'<a href="{E(repo_url(ROOT))}">&larr; aofd on GitHub</a>'
+              + "".join(f'<a href="../viz/{k}.html">&#127918; Explainer alone</a>' for k in dict.fromkeys(keys)))
+    page = render_page(page_nb, row={"id": chapter, "blurb": row.get("blurb", "")}, name=name, prev_row=None,
+                       next_row=None, title=f"{title} — aofd", viz_keys=keys, crumbs=crumbs,
+                       chapnav="<span>Proof-of-concept sample · Chapter 0A</span>",
+                       strip_title="Interactive explainer on this page")
+    out = ROOT / "notebooks" / f"{name}.html"
+    out.write_text(page, encoding="utf-8")
+    rep = {"notebook": name, "chapter": chapter, "seconds": round(secs, 1), "explainers": keys,
+           "html_mb": round(out.stat().st_size / 1e6, 2), "colab_kb": round(colab_path.stat().st_size / 1e3, 1),
+           "page_url": pages_url(f"notebooks/{name}.html", ROOT), "colab_url": colab_url(f"{name}_colab", ROOT),
+           "site_navigation": "not rebuilt (PoC page is not linked from index.html)"}
+    print(json.dumps(rep, indent=2))
+    return rep
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("chapter", nargs="?")
     ap.add_argument("--fast", action="store_true", help="run with FLUIDPY_FAST=1")
     ap.add_argument("--site-only", action="store_true")
     ap.add_argument("--skip-checks", action="store_true", help="(debug only) skip embed_check")
+    ap.add_argument("--poc", metavar="NAME", help="PoC/sample notebook notebooks/NAME.ipynb (e.g. poc_ch00a_dot): page + Colab twin only")
     a = ap.parse_args(argv)
+    if a.poc:
+        publish_poc(a.poc, fast=a.fast, skip_checks=a.skip_checks)
+        return 0
     if a.site_only:
         import build_site as _site
         for p in _site.build_all():
