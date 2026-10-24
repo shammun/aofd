@@ -131,3 +131,6 @@ Scene points:
 - U-M2.17 (last scene, "what the dot product measures") Improve the content, the wording on screen and the narration. No references.
 - Decision (user): length up to ~8 min is fine. Background music: unchanged (not mentioned).
 - Decisions (user, 2026-10-23, v4): length 8:12 accepted; build `notebooks/poc_ch00a_dot.html` so the end-card link works (P1); s19 shaded wedge replaced by the upwind track (1 h / 2 h / 3 h dots) accepted.
+
+## Movie `ch00_dot_product_why` — status after v4 (2026-10-23 evening)
+- v4 fix 1 (d5bcb3f, 8:12) passed QA 10/10 and review 4b, but **the user is not satisfied**. Round-3 feedback (U-M3.*) comes in the next session; the scene map with v4 times is in `reports/ch00_session_handoff.md`.
