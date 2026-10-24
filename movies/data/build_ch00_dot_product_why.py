@@ -1,5 +1,5 @@
 """Physics data for the Chapter-0A movie "What the dot product measures, and why it multiplies by the other length"
-(movies/ch00/ch00_dot_product_why/storyboard.yaml, round 4: 21 scenes).
+(movies/ch00/ch00_dot_product_why/storyboard.yaml, version 4: 22 scenes).
 
 Run with the main venv::
 
@@ -9,8 +9,10 @@ Every number the movie shows is computed here by the tested functions named in t
 fields: ``fluidpy.geo.vectors`` (``dot``, ``norm``, ``angle_between``, ``scalar_projection``, ``projection``,
 ``k_cross``), ``fluidpy.core.operators.gradient`` (∇T on the 5-km map grid, s15) and
 ``fluidpy.core.kinematics.material_derivative_terms`` (local / advective / total rates, s14, s18-s20, as an independent
-cross-check of ∂T/∂t = −v·∇T). The composition (movies/src/ch00/DotProductWhy.tsx) only indexes these samples by
-frame; it never recomputes physics. The wind is called **v** throughout (Vallis's letter in (1.7)).
+cross-check of ∂T/∂t = −v·∇T). v4 adds the isotherm positions (s14), the along-isotherm part of the wind (s16, via
+``projection``) and the upwind track (s19, recorded ``dot`` calls). The composition (movies/src/ch00/DotProductWhy.tsx) only indexes these samples by
+frame; it never recomputes physics. The wind is called **v** throughout. The ``eq`` strings in the manifest are
+provenance for QA and review only; the movie draws no equation labels (storyboard rule G1).
 
 Writes movies/ch00/ch00_dot_product_why/data/{pair,same_way,cheap,work,weather}.json and
 movies/ch00/ch00_dot_product_why/manifest.json (function, equation, parameters, fluidpy git SHA + sha256 of the source
@@ -113,22 +115,22 @@ def main() -> int:
     VEC = "fluidpy.geo.vectors."
     # ------------------------------------------------------------------ s01-s10, s21: the pair a = (5, 1), b = (1, 3)
     f1 = "pair.json"
-    ab = call(VEC + "dot", "s01,s05,s06,s09", f1, "(K 2.2)", a=A, b=B)
-    na = call(VEC + "norm", "s02,s06", f1, "|a| (Pythagoras)", a=A)
-    nb = call(VEC + "norm", "s02,s06", f1, "|b| (Pythagoras)", a=B)
-    th = call(VEC + "angle_between", "s06", f1, "(0A.1)", a=A, b=B, degrees=True)
-    sh_ab = call(VEC + "scalar_projection", "s08-s10", f1, "(0A.3)", a=A, b=B)
-    sh_ba = call(VEC + "scalar_projection", "s10", f1, "(0A.3)", a=B, b=A)
-    p_ab = call(VEC + "projection", "s08-s10", f1, "(0A.3) times b-hat: foot of the drop-line", a=A, b=B)
-    p_ba = call(VEC + "projection", "s10", f1, "(0A.3) times a-hat", a=B, b=A)
-    kb = call(VEC + "k_cross", "s09,s10", f1, "rectangle side perpendicular to b", u=B)
-    ka = call(VEC + "k_cross", "s10", f1, "rectangle side perpendicular to a", u=A)
+    ab = call(VEC + "dot", "s01,s03,s08,s09", f1, "Kundu (2.2) definition (provenance)", a=A, b=B)
+    na = call(VEC + "norm", "s02,s04", f1, "|a| (Pythagoras)", a=A)
+    nb = call(VEC + "norm", "s02,s04", f1, "|b| (Pythagoras)", a=B)
+    th = call(VEC + "angle_between", "s04", f1, "cosine form (1), Kundu §2.8 unnumbered (provenance)", a=A, b=B, degrees=True)
+    sh_ab = call(VEC + "scalar_projection", "s06-s09", f1, "shadow = a·b/|b| (ours)", a=A, b=B)
+    sh_ba = call(VEC + "scalar_projection", "s09", f1, "shadow of b on a (ours)", a=B, b=A)
+    p_ab = call(VEC + "projection", "s06-s09", f1, "shadow times b-hat: foot of the drop-line", a=A, b=B)
+    p_ba = call(VEC + "projection", "s09", f1, "shadow of b on a times a-hat", a=B, b=A)
+    kb = call(VEC + "k_cross", "s08,s09", f1, "rectangle side perpendicular to b", u=B)
+    ka = call(VEC + "k_cross", "s09", f1, "rectangle side perpendicular to a", u=A)
     bhat = np.asarray(B) / nb
-    a_bhat = call(VEC + "dot", "s08", f1, "(0A.3) a·b-hat", a=A, b=bhat.tolist())
-    n_bhat = call(VEC + "norm", "s08", f1, "|b-hat| = 1", a=bhat.tolist())
+    a_bhat = call(VEC + "dot", "s07", f1, "a·b-hat (ours)", a=A, b=bhat.tolist())
+    n_bhat = call(VEC + "norm", "s07", f1, "|b-hat| = 1", a=bhat.tolist())
     terms5 = [A[0] * B[0], A[1] * B[1], 0.0]           # 5·1, 1·3, 0·0 (the z-parts of the flat picture)
     terms8 = [A[0] * bhat[0], A[1] * bhat[1]]          # 5 × 0.316, 1 × 0.949
-    cos_rem = {k: call(VEC + "angle_between", "s06", f1, f"cos reminder {k}°", a=p, b=q, degrees=True)
+    cos_rem = {k: call(VEC + "angle_between", "s04", f1, f"cos reminder {k}°", a=p, b=q, degrees=True)
                for k, (p, q) in COS_PAIRS.items()}
     ba = V.dot(B, A)
     row("a·b = 5·1 + 1·3 = 8", ab, 8.0, 1e-12)
@@ -137,13 +139,13 @@ def main() -> int:
     row("|b| = √10 = 3.162", nb, np.sqrt(10), 1e-12)
     row("|a|² = 26, |b|² = 10 (Pythagoras)", [na ** 2, nb ** 2], [26, 10], 1e-12)
     row("θ = 60.255°", th, 60.2551187, 1e-6)
-    row("(0A.1) |a||b|cos θ = a·b", na * nb * np.cos(np.radians(th)), ab, 1e-12)
+    row("(1) |a||b|cos θ = a·b", na * nb * np.cos(np.radians(th)), ab, 1e-12)
     row("cos θ = 0.496", np.cos(np.radians(th)), 8 / np.sqrt(260), 1e-12)
     row("cos reminder: 0°, 90°, 180° → cos 1, 0, −1",
         [np.cos(np.radians(cos_rem[k])) for k in ("0", "90", "180")], [1, 0, -1], 1e-12)
     row("shadow a on b = 8/√10 = 2.530", sh_ab, 8 / np.sqrt(10), 1e-12)
     row("shadow b on a = 8/√26 = 1.569", sh_ba, 8 / np.sqrt(26), 1e-12)
-    row("shadow = |a| cos θ (s08 step 2)", sh_ab, na * np.cos(np.radians(th)), 1e-12)
+    row("shadow = |a| cos θ (s06 row 2)", sh_ab, na * np.cos(np.radians(th)), 1e-12)
     row("projection a on b = (0.8, 2.4) (foot of the drop-line)", p_ab, [0.8, 2.4], 1e-12)
     row("projection b on a = (1.538, 0.308)", p_ba, [20 / 13, 4 / 13], 1e-12)
     row("(a − proj)·b = 0 (drop-line at right angles)", V.dot(np.subtract(A, p_ab), B), 0.0, 1e-12)
@@ -155,7 +157,7 @@ def main() -> int:
     row("k×b = (−3, 1), length |b|", np.r_[kb, V.norm(kb)], [-3, 1, np.sqrt(10)], 1e-12)
     rect_left = [[0, 0], list(p_ab), list(p_ab + kb), list(kb)]
     rect_right = [[0, 0], list(p_ba), list(p_ba - ka), list(-ka)]
-    row("s09 rectangle corners (0,0), (0.8,2.4), (−2.2,3.4), (−3,1)", np.ravel(rect_left),
+    row("s08 rectangle corners (0,0), (0.8,2.4), (−2.2,3.4), (−3,1)", np.ravel(rect_left),
         [0, 0, 0.8, 2.4, -2.2, 3.4, -3, 1], 1e-12)
     row("right rectangle corner (2.538, −4.692)", rect_right[2], [2.538462, -4.692308], 1e-6)
     pair = {"a": A, "b": B, "a_dot_b": r6(ab), "b_dot_a": r6(ba), "terms": r6(terms5), "norm_a": r6(na), "norm_b": r6(nb),
@@ -168,27 +170,27 @@ def main() -> int:
             "k_cross_b": r6(kb), "k_cross_a": r6(ka), "rect_on_b": r6(rect_left), "rect_on_a": r6(rect_right),
             "area_on_b": r6(sh_ab * nb), "area_on_a": r6(sh_ba * na)}
 
-    # ------------------------------------------------------------------ s07: how much two arrows point the same way
+    # ------------------------------------------------------------------ s05: how much two arrows point the same way
     f7 = "same_way.json"
-    pq = call(VEC + "dot", "s07", f7, "(K 2.2) p·q", a=P7, b=Q7)
-    ang7 = call(VEC + "angle_between", "s07", f7, "angle p, q", a=P7, b=Q7, degrees=True)
-    sh7 = call(VEC + "scalar_projection", "s07", f7, "shadow of p on q (signed)", a=P7, b=Q7)
+    pq = call(VEC + "dot", "s05", f7, "definition 1, p·q", a=P7, b=Q7)
+    ang7 = call(VEC + "angle_between", "s05", f7, "angle p, q", a=P7, b=Q7, degrees=True)
+    sh7 = call(VEC + "scalar_projection", "s05", f7, "shadow of p on q (signed)", a=P7, b=Q7)
     row("p·q = 6, 0, −6", pq, [6, 0, -6], 1e-12)
     row("angles 0°, 90°, 180°", ang7, [0, 90, 180], 1e-12)
     row("shadow of p on q = 3, 0, −3", sh7, [3, 0, -3], 1e-12)
     same_way = {"p": P7, "q": Q7, "p_dot_q": r6(pq), "angle_deg": r6(ang7), "shadow_p_on_q": r6(sh7),
                 "norm_q": r6(V.norm(Q7))}
 
-    # ------------------------------------------------------------------ s11: cheap number, unit arrow, wind v
+    # ------------------------------------------------------------------ s07 (b shrinks to b-hat) and s10 (wind v, x-hat)
     f11 = "cheap.json"
     scales = np.linspace(1.0, 1.0 / np.sqrt(10.0), 61)            # b shrinks smoothly to the unit arrow b-hat
     b_series = np.outer(scales, B)
-    dots_series = call(VEC + "dot", "s11", f11, "(K 2.2) a·(s b)", a=A, b=b_series)
-    sh_series = call(VEC + "scalar_projection", "s11", f11, "(0A.3) shadow independent of |b|", a=A, b=b_series)
+    dots_series = call(VEC + "dot", "s07", f11, "definition 1, a·(s b)", a=A, b=b_series)
+    sh_series = call(VEC + "scalar_projection", "s07", f11, "shadow independent of |b|", a=A, b=b_series)
     len_series = V.norm(b_series)
     xh = [1.0, 0.0]
-    v_x = call(VEC + "dot", "s11", f11, "v·x̂ (eastward part)", a=V_WIND11, b=xh)
-    nv = call(VEC + "norm", "s11", f11, "|v|", a=V_WIND11)
+    v_x = call(VEC + "dot", "s10", f11, "v·x̂ (eastward part)", a=V_WIND11, b=xh)
+    nv = call(VEC + "norm", "s10", f11, "|v|", a=V_WIND11)
     row("b shrinks to b̂, |b̂| = 1", [*b_series[-1], len_series[-1]], [0.316228, 0.948683, 1.0], 1e-6)
     row("a·b̂ = shadow = 2.530", dots_series[-1], 8 / np.sqrt(10), 1e-12)
     row("shadow unchanged while b shrinks", np.ptp(sh_series), 0.0, 1e-12)
@@ -200,13 +202,13 @@ def main() -> int:
              "v": V_WIND11, "x_hat": xh, "v_dot_xhat": r6(v_x), "norm_v": r6(nv),
              "proj_v_on_xhat": r6(V.projection(V_WIND11, xh))}
 
-    # ------------------------------------------------------------------ s12: work
+    # ------------------------------------------------------------------ s11: work
     f12 = "work.json"
     Fv = F_N * np.array([np.cos(np.radians(F_DEG)), np.sin(np.radians(F_DEG))])
     d_len = np.linspace(5.0, 10.0, 51)
     d_series = np.stack([d_len, 0 * d_len], axis=-1)
-    W_series = call(VEC + "dot", "s12", f12, "W = F·d", a=Fv.tolist(), b=d_series)
-    shF = call(VEC + "scalar_projection", "s12", f12, "shadow of F on d", a=Fv.tolist(), b=D5)
+    W_series = call(VEC + "dot", "s11", f12, "W = F·d", a=Fv.tolist(), b=d_series)
+    shF = call(VEC + "scalar_projection", "s11", f12, "shadow of F on d", a=Fv.tolist(), b=D5)
     shF10 = V.scalar_projection(Fv, D10)
     row("F = (10.000, 17.321) N", Fv, [10.0, 17.320508], 1e-6)
     row("shadow of F on d = 20 cos 60° = 10 N", shF, 10.0, 1e-12)
@@ -215,7 +217,7 @@ def main() -> int:
     work = {"F": r6(Fv), "F_N": F_N, "F_deg": F_DEG, "d_m": r6(d_len), "W_J": r6(W_series), "shadow_N": r6(shF),
             "shadow_N_d10": r6(shF10), "angle_deg": r6(V.angle_between(Fv, D5, degrees=True))}
 
-    # ------------------------------------------------------------------ s14-s20: the weather (wind v)
+    # ------------------------------------------------------------------ s12-s20: the weather (wind v)
     fw = "weather.json"
     v = V_SPEED * np.array([np.cos(np.radians(V_DEG)), np.sin(np.radians(V_DEG))])
     # s15: ∇T from the tested gradient on the 5-km map grid. T is an (ny, nx) array (x = last axis); fluidpy's partial
@@ -227,7 +229,7 @@ def main() -> int:
     # recorded call: a 25 × 25 window of the same grid centred on the pin (the field is uniform; full grid checked here)
     i0, j0 = int(round(PIN_KM[1] * 1e3 / H_GRID)), int(round(PIN_KM[0] * 1e3 / H_GRID))
     patch = TT[i0 - 12:i0 + 13, j0 - 12:j0 + 13]
-    gpatch = call("fluidpy.core.operators.gradient", "s15", fw, "∇T = (∂T/∂x, ∂T/∂y), Kundu §2.9 (2-D)",
+    gpatch = call("fluidpy.core.operators.gradient", "s14,s15", fw, "∇T = (∂T/∂x, ∂T/∂y), Kundu §2.9 (2-D, provenance)",
                   phi=patch, h=H_GRID)
     dTdx, dTdy = float(gpatch[0][12, 12]), float(gpatch[1][12, 12])
     row("∇T on the full 5-km grid: ∂T/∂x = 1e-5 K/m everywhere", gfull[0], G1, 1e-15)
@@ -238,7 +240,7 @@ def main() -> int:
     row("|∇T| = 1.00e-5 K/m", ngrad, G1, 1e-15)
     g2 = [G2, 0.0]
     # s16: v·∇T = (shadow of v on ∇T) × |∇T|
-    adv1 = call(VEC + "dot", "s16", fw, "v·∇T (Vallis (1.7) advection term, φ = T)", a=v.tolist(), b=gT)
+    adv1 = call(VEC + "dot", "s16", fw, "v·∇T, advection term of the material derivative, Vallis (1.7) (provenance)", a=v.tolist(), b=gT)
     sh_v1 = call(VEC + "scalar_projection", "s16,s17", fw, "shadow of v on ∇T", a=v.tolist(), b=gT)
     nv_w = call(VEC + "norm", "s16,s17", fw, "|v|", a=v.tolist())
     ang_vg = call(VEC + "angle_between", "s16", fw, "angle between v and ∇T", a=v.tolist(), b=gT, degrees=True)
@@ -250,6 +252,16 @@ def main() -> int:
     row("v·∇T by components: 5.00 × 1e-5 + 8.66 × 0", v[0] * gT[0] + v[1] * gT[1], adv1, 1e-18)
     row("v·∇T = 0.180 K/h", adv1 * 3600, 0.18, 1e-12)
     row("steep: shadow still 5.00, v·∇T doubles", [sh_v2, adv2 / adv1], [5.0, 2.0], 1e-12)
+    # s16: the part of the wind along the isotherms, v − projection(v, ∇T)  (v4, new)
+    pv = call(VEC + "projection", "s16", fw, "projection of v on ∇T (the part towards warmer air)", a=v.tolist(), b=gT)
+    v_along = np.asarray(v) - np.asarray(pv)
+    row("v − proj(v, ∇T) = (0, 8.660) m/s along the isotherm", v_along, [0.0, 8.660254], 1e-6)
+    row("along-isotherm part ⟂ ∇T (dot = 0)", V.dot(v_along, gT), 0.0, 1e-18)
+    # s14: isotherm positions x = (T − T_west)/G  (v4, new)
+    iso_T = np.arange(11.0, 16.0)
+    iso_km = (iso_T - T_WEST) / G1 / 1e3
+    row("isotherms 11..15 °C at x = 100..500 km", iso_km, [100, 200, 300, 400, 500], 1e-9)
+    row("tested gradient across the isotherms: 1 °C per 100 km", [dTdx * 1e5], [1.0], 1e-12)
     # s17: what 0.180 K per hour means
     km_warm = sh_v1 * 3600 / 1e3               # km per hour towards warmer air
     km_wind = nv_w * 3600 / 1e3                 # km per hour along the wind
@@ -284,6 +296,29 @@ def main() -> int:
     Tp2 = T0p2 + dTdt2 * t_h * 3600
     shift_km = vx * t_h * 3600 / 1e3
     row("T(pole) 13.00 → 12.82 after 1 h → 11.92 after 6 h", [Tp1[0], Tp1[20], Tp1[-1]], [13.0, 12.82, 11.92], 1e-9)
+    # s19 (v4, new): the upwind track. The air that reaches the pole after n hours is now at pin − v n h; its present
+    # temperature is T_pin + ∇T·(−v n h), one recorded dot-product call per dot.
+    up_t_h = [1, 2, 3]
+    up_x, up_y, up_dT = [], [], []
+    for n in up_t_h:
+        off = (-np.asarray(v) * n * 3600.0).tolist()                     # m
+        dT = call(VEC + "dot", "s19", fw, f"∇T·(−v t), upwind dot {n} h (ours)", a=gT, b=off)
+        up_x.append(PIN_KM[0] + off[0] / 1e3)
+        up_y.append(PIN_KM[1] + off[1] / 1e3)
+        up_dT.append(float(dT))
+    up_T = [T_PIN + d for d in up_dT]
+    row("upwind dots: dT = −0.18, −0.36, −0.54 K", up_dT, [-0.18, -0.36, -0.54], 1e-12)
+    row("upwind dots' temperature now = T(pole) at 1, 2, 3 h (t_h indices 20, 40, 60)", up_T,
+        [Tp1[20], Tp1[40], Tp1[60]], 1e-9)
+    row("upwind positions = balloon path run backwards (pin − v t)", np.r_[up_x, up_y],
+        np.r_[2 * PIN_KM[0] - bal_x[[60, 120, 180]], 2 * PIN_KM[1] - bal_y[[60, 120, 180]]], 1e-9)
+    row("upwind dots inside the map", [min(up_x) > 0, max(up_x) < MAP_KM[0], min(up_y) > 0, max(up_y) < MAP_KM[1]],
+        [1, 1, 1, 1], 0)
+    row("t_h samples at 1, 2, 3 h", [t_h[20], t_h[40], t_h[60]], [1.0, 2.0, 3.0], 1e-12)
+    # s19: balloon path over the 6-h run, sampled at t_h (the balloon keeps 13.00 °C; it leaves the map near 5.8 h)
+    bal6_x = PIN_KM[0] + v[0] * t_h * 3600 / 1e3
+    bal6_y = PIN_KM[1] + v[1] * t_h * 3600 / 1e3
+    row("balloon 6-h path matches the 3-h path at 1 h", [bal6_x[20], bal6_y[20]], [bal_x[60], bal_y[60]], 1e-9)
     row("steep map: T(pole) 13.00 → 12.64 after 1 h → 10.84 after 6 h", [Tp2[0], Tp2[20], Tp2[-1]],
         [13.0, 12.64, 10.84], 1e-9)
     row("steep map: 7 °C at x = 0, 19 °C at x = 600 km", [T_west2, T_west2 + G2 * MAP_KM[0] * 1e3], [7.0, 19.0], 1e-9)
@@ -320,7 +355,12 @@ def main() -> int:
                "t_h": r6(t_h), "shift_km": r6(shift_km), "T_pole": r6(Tp1), "T_pole_steep": r6(Tp2),
                "parcels_x_km": r6(px), "parcels_y_km": r6(py),
                "tags_x_km": r6(tag_x), "tags_y_km": r6(tag_y), "tags_T": r6(tag_T),
-               "lut_thermal": thermal_lut(64), "lut_range_C": [4.0, 20.0]}
+               "lut_thermal": thermal_lut(64), "lut_range_C": [4.0, 20.0],
+               # v4 additions (storyboard new_builder_data)
+               "isotherms_km": r6(iso_km), "isotherm_T_C": r6(iso_T), "v_along_isotherm_m_s": r6(v_along),
+               "proj_v_on_gradT_m_s": r6(pv),
+               "upwind_t_h": up_t_h, "upwind_x_km": r6(up_x), "upwind_y_km": r6(up_y), "upwind_dT_K": r6(up_dT),
+               "upwind_T_C": r6(up_T), "balloon6_x_km": r6(bal6_x), "balloon6_y_km": r6(bal6_y)}
 
     for r in rows:
         print(f"  {'PASS' if r['pass'] else 'FAIL'}  {r['name']}")
@@ -341,18 +381,19 @@ def main() -> int:
         "id": "ch00_dot_product_why", "storyboard": "movies/ch00/ch00_dot_product_why/storyboard.yaml",
         "builder": "movies/data/build_ch00_dot_product_why.py",
         "fluidpy": {"repo": "../Fluid Dynamics", **git_sha(FLUID)},
-        "equations": {"(K 2.2)": "Kundu §2.1 p. 41: a·b = a1b1 + a2b2 + a3b3 ≡ a_i b_i",
-                      "(0A.1)": "a·b = |a||b| cos θ (our Chapter-0 label; Kundu §2.8 p. 52 unnumbered)",
-                      "(0A.3)": "|a| cos θ = a·b̂ = a·b/|b| (ours; derived on screen in s08)",
-                      "(Vallis 1.7)": "Vallis §1.1.2 p. 5: Dφ/Dt = ∂φ/∂t + (v·∇)φ",
-                      "gradient": "Kundu §2.9 p. 52: ∇φ = e_i ∂φ/∂x_i (2-D here)",
-                      "∂T/∂t = −v·∇T": "(Vallis 1.7) with φ = T and DT/Dt = 0 (derived on screen in s18)"},
+        "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels except a plain (1) (rule G1)",
+        "equations": {"dot_components": "Kundu §2.1 p. 41 (2.2): a·b = a1b1 + a2b2 + a3b3 (s03)",
+                      "dot_cosine": "a·b = |a||b| cos θ, Kundu §2.8 p. 52 unnumbered; on screen a plain (1) (s04, s06)",
+                      "shadow": "|a| cos θ = a·b̂ = a·b/|b| (ours; derived on screen in s06, s07)",
+                      "material_derivative": "Vallis §1.1.2 p. 5 (1.7) Dφ/Dt = ∂φ/∂t + (v·∇)φ, shown as v·∇φ (s13)",
+                      "gradient": "Kundu §2.9 p. 52: ∇φ = e_i ∂φ/∂x_i (2-D here, s14, s15)",
+                      "local_tendency": "∂T/∂t = −v·∇T: material derivative with φ = T and DT/Dt = 0 (derived on screen in s18)"},
         "parameters": {"a": A, "b": B, "p_s07": P7, "q_s07": Q7, "v_wind_s11_m_s": V_WIND11, "F_N": F_N,
                        "F_angle_deg": F_DEG, "d_m": [5, 10], "v_speed_m_s": V_SPEED, "v_angle_from_gradT_deg": V_DEG,
                        "gradT_K_m": [G1, G2], "grid_h_m": H_GRID, "T_west_C": T_WEST, "T_pin_C": T_PIN,
                        "steep_map": "T = 13 °C + 2e-5 K/m (x − x_pin)", "map_km": list(MAP_KM), "pin_km": list(PIN_KM),
-                       "time_compression": {"s14": "1 h in 3 s (×1200)", "s17": "1 h in 4 s (×900)",
-                                            "s18": "×1200", "s19_s20": "6 h in 6 s (×3600)"},
+                       "time_compression": {"s12": "1 h in 3 s (×1200)", "s17": "1 h in 4 s (×900)",
+                                            "s18": "1 h in 4 s (×900)", "s19_s20": "6 h in 6 s (×3600)"},
                        "parcel_seed": 20261022},
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
         "data_files": data_hashes, "checks": rows, "physics": entries,

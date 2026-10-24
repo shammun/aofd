@@ -13,13 +13,14 @@
   "operators_py_tracked": true,
   "operators_py_sha256": "1886f90dd8ad24f25d831658796b4da111330c25bb8ece87f682e260828ce26e"
  },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels except a plain (1) (rule G1)",
  "equations": {
-  "(K 2.2)": "Kundu §2.1 p. 41: a·b = a1b1 + a2b2 + a3b3 ≡ a_i b_i",
-  "(0A.1)": "a·b = |a||b| cos θ (our Chapter-0 label; Kundu §2.8 p. 52 unnumbered)",
-  "(0A.3)": "|a| cos θ = a·b̂ = a·b/|b| (ours; derived on screen in s08)",
-  "(Vallis 1.7)": "Vallis §1.1.2 p. 5: Dφ/Dt = ∂φ/∂t + (v·∇)φ",
-  "gradient": "Kundu §2.9 p. 52: ∇φ = e_i ∂φ/∂x_i (2-D here)",
-  "∂T/∂t = −v·∇T": "(Vallis 1.7) with φ = T and DT/Dt = 0 (derived on screen in s18)"
+  "dot_components": "Kundu §2.1 p. 41 (2.2): a·b = a1b1 + a2b2 + a3b3 (s03)",
+  "dot_cosine": "a·b = |a||b| cos θ, Kundu §2.8 p. 52 unnumbered; on screen a plain (1) (s04, s06)",
+  "shadow": "|a| cos θ = a·b̂ = a·b/|b| (ours; derived on screen in s06, s07)",
+  "material_derivative": "Vallis §1.1.2 p. 5 (1.7) Dφ/Dt = ∂φ/∂t + (v·∇)φ, shown as v·∇φ (s13)",
+  "gradient": "Kundu §2.9 p. 52: ∇φ = e_i ∂φ/∂x_i (2-D here, s14, s15)",
+  "local_tendency": "∂T/∂t = −v·∇T: material derivative with φ = T and DT/Dt = 0 (derived on screen in s18)"
  },
  "parameters": {
   "a": [
@@ -77,9 +78,9 @@
    180.0
   ],
   "time_compression": {
-   "s14": "1 h in 3 s (×1200)",
+   "s12": "1 h in 3 s (×1200)",
    "s17": "1 h in 4 s (×900)",
-   "s18": "×1200",
+   "s18": "1 h in 4 s (×900)",
    "s19_s20": "6 h in 6 s (×3600)"
   },
   "parcel_seed": 20261022
@@ -90,7 +91,7 @@
   "same_way.json": "7ce05570c0317941c5ee1f02fea9d4a3c595553c505c54132c25803ded35b7f6",
   "cheap.json": "433ed377a8912c9209899b6b6910083f91f0f61f2c43d36fbf809be0b0cae815",
   "work.json": "1ed37614bdf50355da44bc21edb2a669a46804c103045a7086b8e42b52e771ac",
-  "weather.json": "cf3a23959e64a9469e67adb8c8c5a7c9a7a5629e63e4c1bf522b0a10c353c953"
+  "weather.json": "73a9aa8a5edfa2cac1adc6ca1e73b40e5f3746d09d4229073885907d55a67d00"
  },
  "checks": [
   {
@@ -162,7 +163,7 @@
    "pass": true
   },
   {
-   "name": "(0A.1) |a||b|cos θ = a·b",
+   "name": "(1) |a||b|cos θ = a·b",
    "value": [
     8.0
    ],
@@ -221,7 +222,7 @@
    "pass": true
   },
   {
-   "name": "shadow = |a| cos θ (s08 step 2)",
+   "name": "shadow = |a| cos θ (s06 row 2)",
    "value": [
     2.529822
    ],
@@ -347,7 +348,7 @@
    "pass": true
   },
   {
-   "name": "s09 rectangle corners (0,0), (0.8,2.4), (−2.2,3.4), (−3,1)",
+   "name": "s08 rectangle corners (0,0), (0.8,2.4), (−2.2,3.4), (−3,1)",
    "value": [
     0.0,
     0.0,
@@ -665,6 +666,58 @@
    "pass": true
   },
   {
+   "name": "v − proj(v, ∇T) = (0, 8.660) m/s along the isotherm",
+   "value": [
+    0.0,
+    8.660254
+   ],
+   "ref": [
+    0.0,
+    8.660254
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "along-isotherm part ⟂ ∇T (dot = 0)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "isotherms 11..15 °C at x = 100..500 km",
+   "value": [
+    100.0,
+    200.0,
+    300.0,
+    400.0
+   ],
+   "ref": [
+    100.0,
+    200.0,
+    300.0,
+    400.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "tested gradient across the isotherms: 1 °C per 100 km",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
    "name": "18.0 km per hour towards warmer air, 36.0 km along the wind",
    "value": [
     18.0,
@@ -764,6 +817,98 @@
    "pass": true
   },
   {
+   "name": "upwind dots: dT = −0.18, −0.36, −0.54 K",
+   "value": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "ref": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "upwind dots' temperature now = T(pole) at 1, 2, 3 h (t_h indices 20, 40, 60)",
+   "value": [
+    12.82,
+    12.64,
+    12.46
+   ],
+   "ref": [
+    12.82,
+    12.64,
+    12.46
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "upwind positions = balloon path run backwards (pin − v t)",
+   "value": [
+    282.0,
+    264.0,
+    246.0,
+    148.823085
+   ],
+   "ref": [
+    282.0,
+    264.0,
+    246.0,
+    148.823085
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "upwind dots inside the map",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "t_h samples at 1, 2, 3 h",
+   "value": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "ref": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "balloon 6-h path matches the 3-h path at 1 h",
+   "value": [
+    318.0,
+    211.176915
+   ],
+   "ref": [
+    318.0,
+    211.176915
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
    "name": "steep map: T(pole) 13.00 → 12.64 after 1 h → 10.84 after 6 h",
    "value": [
     13.0,
@@ -821,9 +966,9 @@
  "physics": [
   {
    "fn": "fluidpy.geo.vectors.dot",
-   "scene": "s01,s05,s06,s09",
+   "scene": "s01,s03,s08,s09",
    "data": "data/pair.json",
-   "eq": "(K 2.2)",
+   "eq": "Kundu (2.2) definition (provenance)",
    "params": {
     "a": [
      5.0,
@@ -838,7 +983,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.norm",
-   "scene": "s02,s06",
+   "scene": "s02,s04",
    "data": "data/pair.json",
    "eq": "|a| (Pythagoras)",
    "params": {
@@ -851,7 +996,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.norm",
-   "scene": "s02,s06",
+   "scene": "s02,s04",
    "data": "data/pair.json",
    "eq": "|b| (Pythagoras)",
    "params": {
@@ -864,9 +1009,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s06",
+   "scene": "s04",
    "data": "data/pair.json",
-   "eq": "(0A.1)",
+   "eq": "cosine form (1), Kundu §2.8 unnumbered (provenance)",
    "params": {
     "a": [
      5.0,
@@ -882,9 +1027,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.scalar_projection",
-   "scene": "s08-s10",
+   "scene": "s06-s09",
    "data": "data/pair.json",
-   "eq": "(0A.3)",
+   "eq": "shadow = a·b/|b| (ours)",
    "params": {
     "a": [
      5.0,
@@ -899,9 +1044,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.scalar_projection",
-   "scene": "s10",
+   "scene": "s09",
    "data": "data/pair.json",
-   "eq": "(0A.3)",
+   "eq": "shadow of b on a (ours)",
    "params": {
     "a": [
      1.0,
@@ -916,9 +1061,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.projection",
-   "scene": "s08-s10",
+   "scene": "s06-s09",
    "data": "data/pair.json",
-   "eq": "(0A.3) times b-hat: foot of the drop-line",
+   "eq": "shadow times b-hat: foot of the drop-line",
    "params": {
     "a": [
      5.0,
@@ -933,9 +1078,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.projection",
-   "scene": "s10",
+   "scene": "s09",
    "data": "data/pair.json",
-   "eq": "(0A.3) times a-hat",
+   "eq": "shadow of b on a times a-hat",
    "params": {
     "a": [
      1.0,
@@ -950,7 +1095,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.k_cross",
-   "scene": "s09,s10",
+   "scene": "s08,s09",
    "data": "data/pair.json",
    "eq": "rectangle side perpendicular to b",
    "params": {
@@ -963,7 +1108,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.k_cross",
-   "scene": "s10",
+   "scene": "s09",
    "data": "data/pair.json",
    "eq": "rectangle side perpendicular to a",
    "params": {
@@ -976,9 +1121,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.dot",
-   "scene": "s08",
+   "scene": "s07",
    "data": "data/pair.json",
-   "eq": "(0A.3) a·b-hat",
+   "eq": "a·b-hat (ours)",
    "params": {
     "a": [
      5.0,
@@ -993,7 +1138,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.norm",
-   "scene": "s08",
+   "scene": "s07",
    "data": "data/pair.json",
    "eq": "|b-hat| = 1",
    "params": {
@@ -1006,7 +1151,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s06",
+   "scene": "s04",
    "data": "data/pair.json",
    "eq": "cos reminder 0°",
    "params": {
@@ -1024,7 +1169,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s06",
+   "scene": "s04",
    "data": "data/pair.json",
    "eq": "cos reminder 90°",
    "params": {
@@ -1042,7 +1187,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s06",
+   "scene": "s04",
    "data": "data/pair.json",
    "eq": "cos reminder 180°",
    "params": {
@@ -1060,9 +1205,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.dot",
-   "scene": "s07",
+   "scene": "s05",
    "data": "data/same_way.json",
-   "eq": "(K 2.2) p·q",
+   "eq": "definition 1, p·q",
    "params": {
     "a": [
      3.0,
@@ -1087,7 +1232,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s07",
+   "scene": "s05",
    "data": "data/same_way.json",
    "eq": "angle p, q",
    "params": {
@@ -1115,7 +1260,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.scalar_projection",
-   "scene": "s07",
+   "scene": "s05",
    "data": "data/same_way.json",
    "eq": "shadow of p on q (signed)",
    "params": {
@@ -1142,9 +1287,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.dot",
-   "scene": "s11",
+   "scene": "s07",
    "data": "data/cheap.json",
-   "eq": "(K 2.2) a·(s b)",
+   "eq": "definition 1, a·(s b)",
    "params": {
     "a": [
      5.0,
@@ -1401,9 +1546,9 @@
   },
   {
    "fn": "fluidpy.geo.vectors.scalar_projection",
-   "scene": "s11",
+   "scene": "s07",
    "data": "data/cheap.json",
-   "eq": "(0A.3) shadow independent of |b|",
+   "eq": "shadow independent of |b|",
    "params": {
     "a": [
      5.0,
@@ -1660,7 +1805,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.dot",
-   "scene": "s11",
+   "scene": "s10",
    "data": "data/cheap.json",
    "eq": "v·x̂ (eastward part)",
    "params": {
@@ -1677,7 +1822,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.norm",
-   "scene": "s11",
+   "scene": "s10",
    "data": "data/cheap.json",
    "eq": "|v|",
    "params": {
@@ -1690,7 +1835,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.dot",
-   "scene": "s12",
+   "scene": "s11",
    "data": "data/work.json",
    "eq": "W = F·d",
    "params": {
@@ -1909,7 +2054,7 @@
   },
   {
    "fn": "fluidpy.geo.vectors.scalar_projection",
-   "scene": "s12",
+   "scene": "s11",
    "data": "data/work.json",
    "eq": "shadow of F on d",
    "params": {
@@ -1926,9 +2071,9 @@
   },
   {
    "fn": "fluidpy.core.operators.gradient",
-   "scene": "s15",
+   "scene": "s14,s15",
    "data": "data/weather.json",
-   "eq": "∇T = (∂T/∂x, ∂T/∂y), Kundu §2.9 (2-D)",
+   "eq": "∇T = (∂T/∂x, ∂T/∂y), Kundu §2.9 (2-D, provenance)",
    "params": {
     "phi": [
      [
@@ -2628,7 +2773,7 @@
    "fn": "fluidpy.geo.vectors.dot",
    "scene": "s16",
    "data": "data/weather.json",
-   "eq": "v·∇T (Vallis (1.7) advection term, φ = T)",
+   "eq": "v·∇T, advection term of the material derivative, Vallis (1.7) (provenance)",
    "params": {
     "a": [
      5.000000000000001,
@@ -2722,6 +2867,74 @@
     ]
    },
    "sha256": "0bf19ea2196f4741047bdb908aa93b702a228a01c6a0bf5709c028ec0d4eb464"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s16",
+   "data": "data/weather.json",
+   "eq": "projection of v on ∇T (the part towards warmer air)",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "1cee94368510ac075569ee51da842a19c90aff03300bcbc756ff5cfc9beadb2a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19",
+   "data": "data/weather.json",
+   "eq": "∇T·(−v t), upwind dot 1 h (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     -18000.000000000004,
+     -31176.914536239787
+    ]
+   },
+   "sha256": "f4f66a7376a6151fce59f25238218d031529ff330c2343f5cd81bb66f2bd88b0"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19",
+   "data": "data/weather.json",
+   "eq": "∇T·(−v t), upwind dot 2 h (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     -36000.00000000001,
+     -62353.82907247957
+    ]
+   },
+   "sha256": "8269dda281ec6e0c1f6a03ecb8b971ca6f66bd2066e8b12bc6ef50677ccd54df"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19",
+   "data": "data/weather.json",
+   "eq": "∇T·(−v t), upwind dot 3 h (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     -54000.000000000015,
+     -93530.74360871936
+    ]
+   },
+   "sha256": "cef251bc7556e4ff781aacc7e4145690a4fdea17fb6ebacf0cac4d9e4844b921"
   }
  ]
 }

@@ -54,3 +54,8 @@ symbols:
   # "Arrow A " alone still gave the article (ɐ) in "arrow A times" (phoneme check 2026-10-22), so all three use the override
   "Arrow a ": "Arrow [A](/ˈA/) "
   "arrow a ": "arrow [A](/ˈA/) "
+  # ch00_dot_product_why v4 (2026-10-23): "vector a " was read vˈɛktəɹ ɐ (the article); with the override vˈɛktəɹ ˈA
+  "Vector a ": "Vector [A](/ˈA/) "
+  "vector a ": "vector [A](/ˈA/) "
+  # v4 s09 "of b on arrow a, one point five seven": the comma form was not covered by "arrow a "
+  "arrow a,": "arrow [A](/ˈA/),"
