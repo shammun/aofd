@@ -9,6 +9,7 @@ before this review, so nothing in it was overwritten. The Chapter-0 movie review
 | ch00_dot_product_why (review 2) | 170.005 s | 13.16 MB | 10/10 PASS (`pass: true`) | PASS | PASS | PASS | PASS | PASS | PASS | PASS | **PASS** (one publish condition, P1) |
 | ch00_dot_product_why (review 3, v2 @ 3787a8b) | 367.253 s (target 367.225; user window 6:00–6:10) | 25.38 MB (override budget 60) | 10/10 PASS (`pass: true`) | **FIX** (M1: s17 says the map stays put, s18–s20 move it) | PASS | PASS (S2, S4 small overlaps) | PASS | PASS (S5 orphan words) | PASS | PASS (but S1: captions cover badges) | **FIX** (one Must, one re-render) |
 | ch00_dot_product_why (review 4, v4 @ d029eba) | 492.181 s (target 492.15; user accepted 8:12) | 30.85 MB (override budget 60) | 10/10 PASS (`pass: true`) | PASS (advection sign, upwind 12.82/12.64/12.46 °C all right) | PASS | **FIX** (M2: s11 label overlap) | **FIX** (M1: s19 clock vs spoken readings) | PASS (113 cues, ≤ 15.7 cps, no collisions) | PASS | PASS (none, per user G2) | **FIX** (two visual-only Musts; P1 before publishing) |
+| ch00_dot_product_why (review 4b, v4 fix 1 @ d5bcb3f) | 492.181 s | 30.95 MB | 10/10 PASS (`pass: true`) | PASS | PASS | PASS (M2 fixed) | PASS (M1 fixed; the clock holds at 3 h, accepted) | PASS (113 cues, unchanged) | PASS | PASS (none) | **PASS → `qa_pass`** (P1 before publishing; S12 optional) |
 
 ## ch00_dot_product_why (review 1, 2026-10-22)
 
@@ -785,3 +786,61 @@ re-review needs only frames at 3:50–4:03 and 7:00–7:24 and the new qa.json.
 Disk at review time: C: 83 GB free, G: 588 GB free. The review scratch is 64 MB on G: (deletable after the re-review).
 
 ## Overall: FIX (ch00_dot_product_why review 4 — M1, M2; S1–S11 recommended; P1 before publishing)
+
+## ch00_dot_product_why (review 4b — v4 fix loop 1, commit d5bcb3f, 2026-10-23)
+
+I re-reviewed the movie at the same path from my own frames. The narration and captions are unchanged (113 cues).
+Frames are in `aofd-data/scratch/movies/ch00_dot_product_why/review4b_v4fix1/` on G::
+- s11 every 1 s from 3:50 to 4:04;
+- s19 every 1.5 s from 7:01.5 to 7:13.5, then every 0.5 s from 7:14 to 7:24;
+- s18 at 6:58–7:01.3;
+- one frame at each S-item spot (1:06, 1:19.5, 1:40, 2:12, 2:17, 2:42.5, 2:47, 3:06, 4:37, 4:50, 5:02.5, 5:47.5, 6:06.6,
+  6:16.4, 6:17.0, 7:41.7);
+- full-resolution crops `full/c_*.png`.
+
+### qa.json: 10/10 PASS, `pass: true`
+- duration 492.18 s; size 30.95 MB;
+- frozen: 60 stretches longer than 4 s, all narrated (longest silence 2.83 s);
+- −16.0 LUFS, peak −3.5 dBTP; 0 flashes;
+- 113 captions match the script; 36 physics hashes; 36 equations.
+
+### Round-4 findings
+| Item | Verdict | Evidence |
+|---|---|---|
+| M1 s19 clock vs the spoken readings | **PASS** | The clock is still at 0.00 h (13.00 °C) through "thirteen" (7:17.7–7:18.9). It reads 1.05 h / 12.81 °C at 7:20.0, inside "twelve point eight two", and 2.09 h / 12.62 °C at 7:22.0, inside "twelve point six four". It ends at 3.00 h / 12.46 °C at 7:24.0. Each upwind dot reaches the pole as its value is spoken. **The hold at 3 h is acceptable:** the narration names only 13, 12.82 and 12.64. Ending on the third dot (12.46 °C, the last tag on screen) closes the picture without racing past the voice. The 0.18 °C per hour rule is still shown by ∂T/∂t = −0.180 K per hour in the panel. Nothing said or written needs 6 h any more: the panel now reads "clock: 1 h in 1.5 s". |
+| M2 s11 label overlap | **PASS** | From 3:50 to 4:04, "10 N forward" sits alone above the sled's nose. "d = 5 m (distance pulled)", growing to "d = 10 m", sits under the product rectangle, clear of "path ruler (m)". The 60° arc and label have gone with the dimmed 17.3-N leg. No text touches other text. |
+| S1 s19 balloon | **PASS** | The balloon is beside the pole from 7:01.5 with "balloon: 13.00 °C". At 7:24 it is still inside the map, at the top edge. |
+| S2 s16 "a new wind" | **PASS** | The label now reads "the wind (as the balloon's): \|v\| = 10 m/s, 60° from ∇T" (6:06). |
+| S3 s18 summary line | **PASS** | The line is on screen with sentence 4 (seen at 6:58.0, held to the cut). |
+| S4 small text | **PASS** (with one leftover, S12) | The reason slots now wrap onto two lines at a readable size (3:06, 7:41.7). The s06 "why" lines grew from about 26 to about 28 px (crops `c_s06why.png` / `c_s06why_old.png`). In s15, "uphill → warmer" and "\|∇T\|" are about 30 px (5:47.5). The s04 dial labels are larger (1:06). The s16 components chip is now full-opacity ink once shown, but see S12. |
+| S5 ∇ at first use | **PASS** | s13 (4:50) says "∇φ ("grad φ"): how φ changes across the map". |
+| S6 ring gap | **PASS** | At 5:02.5 "v·∇T = advection of temperature" stands clear of the ring. |
+| S7 large p | **PASS** | "p = (3, 0), fixed" is drawn large at the top left from 1:19.5 to 1:40, beside the three panels. |
+| S8 upright D | **PASS** | The D/Dt is upright in s13 (4:50, 5:02.5), s16 (6:06) and s18 (6:58). |
+| S9 sled | **PASS** | d is labelled "distance pulled". The sled still does not move, but the label now explains the arrow. |
+| S10 title symbols | **PASS** | Titles use plain text at title size: "the unit vector b̂" (2:17), "by \|b\|?" (2:47), "∇T: the temperature gradient", "Advection: v·∇T = shadow × steepness". Nothing crosses the band edge. |
+| S11 storyboard | **PASS** | The storyboard has `as_built:` notes in s05, s09, s11, s13, s16, s18, s19 and s22, and they match the frames. |
+
+### Regression sweep: PASS
+- No references, badges or footnotes appear in any new frame.
+- The caption band (y 821–950) is empty in every frame.
+- No new overlaps.
+- Physics values are unchanged: 12.82, 12.64 and 12.46 °C; 0.180 and 0.360 K per hour; the pole reads 10.84 °C at 6 h
+  in s20.
+
+### New finding (optional)
+- **S12 (s16, 6:16.4–6:17.3).** The components check chip fades in at the very end of sentence 4. It is fully visible
+  for only about 0.3 s before the cut to s17 (crops `c_s16chip.png` at 6:16.4 and `c_s16chip_377.png` at 6:17.0).
+  Reveal it with "the metres cancel", or hold the scene about 1 s. This does not block `qa_pass`.
+
+### Publish condition
+- **P1 is still open.** `notebooks/poc_ch00a_dot.html` is not on `origin/main` (the local branch is 12 commits ahead), so
+  the end card's notebook link returns 404 until it is pushed.
+
+### Verdict: PASS → `qa_pass`
+Both Musts are fixed, S1–S11 are applied, and no regressions appeared. The user's round-2 items (G1–G5 and U-M2.1–17)
+all pass now. The movie can become `qa_pass` for the user to watch. Push P1 before `/approve-movie`.
+
+Disk at re-review: C: 83 GB free, G: 588 GB free. Review scratch on G: `review4_v4` 64 MB + `review4b_v4fix1` 34 MB (both deletable).
+
+## Overall: PASS (ch00_dot_product_why review 4b — `qa_pass`; P1 before publishing; S12 optional)

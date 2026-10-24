@@ -17,7 +17,7 @@
       "A": "NOT accepted by the user (2026-10-22); round-3 feedback coming",
       "B": "pass (viz review round 2, derived tolerances)",
       "C": "pass (orchestrator review; literature values to re-verify in ch21)",
-      "D": "movie ch00_dot_product_why v3 rendered 2026-10-23 01:49 (6:12, 25.9 MB); QA on it NOT run (chain stopped for low memory); prior render QA 10/10. Next: QA, then review 4. See reports/ch00_session_handoff.md",
+      "D": "movie ch00_dot_product_why v4 (user round 2, U-M2.*) + fix loop 1 @ d5bcb3f: 8:12, 30.95 MB, QA 10/10, review 4b PASS -> qa_pass; awaiting the user's verdict. Publish needs push (P1 page notebooks/poc_ch00a_dot.html) + shammun/aofd-media + /approve-movie",
       "E": "local + clean-venv/git-clone simulation PASS; real Colab run by user pending",
       "F": "pass (viz review round 1)",
       "G": "pass (lesson re-review PASS); fluidpy v0.3.1 released and pinned 2026-10-22 (user approved)"
@@ -27,9 +27,9 @@
     "s11_poc": "awaiting user verdict",
     "s12_repos": "aofd created + Pages (early, user request); aofd-media not yet",
     "awaiting_user": {
-      "summary": "FIRST read reports/ch00_session_handoff.md (2026-10-23). Movie ch00_dot_product_why v3 is rendered, QA pending: run movie_qa (command in the hand-off), commit, fresh movie-reviewer (review 4), then send the user the link. PoC A not accepted (round-3 feedback being collected); B-G feedback later; E needs the user's Colab run. Nothing in Chapter 0 may start until the user answers.",
+      "summary": "Movie ch00_dot_product_why v4 is qa_pass (review 4b PASS, 2026-10-23); waiting for the user's verdict after watching. P1 page built (7eb99d5), needs push. PoC A not accepted (round-3 feedback being collected); B-G feedback later; E needs the user's Colab run. Nothing in Chapter 0 may start until the user answers.",
       "open": {
-        "MOVIE": "movies/out/ch00/ch00_dot_product_why.html — v3, 6:12; check 3:33-4:19 (material derivative, air parcel), 4:55-5:14 (rate in space vs time), 5:14-5:34 (DT/Dt = 0), music, captions",
+        "MOVIE": "movies/out/ch00/ch00_dot_product_why.html — v4, 8:12 (user round 2 addressed; reports/ch00_movies.md review 4/4b)",
         "A": "viz/ch00/vector_products_lab.html — 3-D dot/cross explainer (Kundu format?)",
         "B": "templates/viz_example_globe.html — Coriolis on a rotating globe",
         "C": "outputs/ch21/fig_21_23.png (+ reading card in figs/ch21/fig_21_23.py) — Southern Ocean map from real data",
@@ -39,9 +39,9 @@
         "G": "notebooks/poc_ch00a_dot.ipynb — Chapter 0A dot-product block in the informal voice"
       },
       "questions": [
-        "M1. Movie length 6:12 (2 s over 6:00-6:10): accept (recommended) or trim?",
-        "M2. Movie verdict after watching v3: PASS or round-2 feedback?",
-        "M3. P1: build notebooks/poc_ch00a_dot.html before /approve-movie (recommended) or drop the end-card link?",
+        "M4. Movie v4 verdict after watching: PASS (then push + aofd-media + /approve-movie) or round-3 feedback?",
+        "M5. Optional S12 (s16 components chip visible only 0.3 s): fix now or leave?",
+        "M6. Push the local commits to origin/main (needed for the end-card notebook link)?",
         "1. The user has said they have detailed feedback, corrections and improvement suggestions for ALL of PoC A-G. Invite them to give it item by item (A..G, plus voice/look/depth in general); collect it into reports/ch00_poc_user_feedback.md, turn it into a fix plan per owning agent and agree the plan with the user before running fixes; re-run the gates; then ask for the final verdict."
       ],
       "optional_cleanup": [
@@ -89,8 +89,8 @@
     }
   },
   "last_update": {
-    "commit": "c3d247e",
+    "commit": "4b1d5d2",
     "fluidpy_commit": "bd7f59a",
-    "time": "2026-10-23T01:31"
+    "time": "2026-10-23T21:22"
   }
 }
