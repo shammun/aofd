@@ -99,3 +99,34 @@ Awaiting the user's second look.
 - U-M.9 (2026-10-22): explain the material derivative clearly where it is first used (s14): following the same bit of air vs a fixed
   place, with an on-screen definition card. Added to the fix loop 1 of v2.
   User correction: say **air parcel** (defined: a small volume of air that moves with the flow), never "bit of air"; DT/Dt = rate of change following an air parcel; ∂T/∂t = local derivative, rate at a fixed point.
+
+## Movie `ch00_dot_product_why` — user round 2 on v3 (2026-10-23) → version 4
+**Supersedes U-M.2 (length) and U-M.3 (labels/footnotes).** New length limit: up to ~8 min (just over 8 is OK). Times refer to v3.
+
+Global rules for v4 (all scenes):
+- U-M2.G1 **No references anywhere**: no equation labels (K 2.2), (0A.1), (0A.3), (Vallis 1.7); no book names, authors (Kundu, Cohen, Dowling, Vallis), no "a definition from school mechanics, no book number"; **no footnote strip at all**. Equations stay; their labels go. If a step must refer back to an equation, number it plainly (1), (2), (3)… inside that scene only.
+- U-M2.G2 **No "not to scale" badges** anywhere (s?, 3:07, 4:32, 4:38, 5:42, …) — the user finds them an unnecessary complication.
+- U-M2.G3 **Scene titles must stand out**: today they read as one more line of text. Redesign the title treatment (size, weight, colour/band, position, spacing) for every scene.
+- U-M2.G4 **Explain every new term or symbol the first time it appears**, in easy words (b̂, isotherm, ∂/∂x, ∇, …).
+- U-M2.G5 Narration and screen must agree: what is said is shown, and dense screens get enough narration (no packing 3 ideas into 2 lines).
+
+Scene points:
+- U-M2.1 (~0:18–0:19) Don't say "the numbers are components". Say: "5 and 1 are the components of vector a; 1 and 3 are the components of vector b."
+- U-M2.2 (~0:30–0:31) Definition a·b = a₁b₁ + a₂b₂ + a₃b₃: drop the (K 2.2) label; drop the "small number = which part, 1 ↔ x, 2 ↔ y, 3 ↔ z" line entirely. Instead say these vectors have two components, so we write only a₁b₁ + a₂b₂, with a₁ = 5, b₁ = 1, a₂ = 1, b₂ = 3 shown on screen.
+- U-M2.3 (~0:43–1:01) Delete the whole "how to read the equation labels / references" scene (s04). The following "try it" scene is then not needed as a separate scene: show the worked calculation in the definition scene itself.
+- U-M2.4 (~1:31, angle cases) θ = 0° as now; then θ = 90° ⇒ dot product 0; then state clearly θ = 180° (pointing opposite ways) ⇒ dot product negative. Put vector **p** prominently (centre/top, larger, distinct colour); say p is the same in all three pictures and only q changes, i.e. we change the angle to show how the dot product changes.
+  (User wrote "180° … that is they are parallel"; teach it as antiparallel/opposite directions — flag to the user.)
+- U-M2.5 (~1:39, derivation) Equations are acceptable here because step 3 refers back: label the first equation just (1) (not 0A.1) and say "divide both sides of (1) by |b|".
+- U-M2.6 (~2:14) Explain b̂: the unit vector along b (length 1, same direction as b), b̂ = b/|b|.
+- U-M2.7 (~2:20–2:29, shadow numbers chain) No 0A.1 label; no footnote. Make clear every line is a computation of the shadow. Merge lines 4+5 (a·b/|b| = 8/3.162 = 2.530 — the shadow) and lines 6+7 (a·b̂ computed another way, same shadow), and show how b̂ = (0.316, 0.949) is obtained (1/3.162, 3/3.162).
+- U-M2.8 (~2:30) "Shadow of a on b" and "shadow of b on a": also show the calculation for each on screen (the full vectors and the formula with numbers); narration need not spell it all out.
+- U-M2.9 (~2:58, reason 2, wind) Say v = (6, 8) means 6 m/s eastward and 8 m/s northward. Say x̂ is the eastward unit vector, so its components are 1 eastward and 0 northward; then v·x̂ = 6 is the eastward part of the wind. Remove "Vallis calls the wind v, its eastward part is written u". Remove "not to scale".
+- U-M2.10 (~3:07–3:20, reason 3, work) Remove "not to scale" and "Work: a definition from school mechanics, no book number". Expand "its shadow 10 N is still a force … × 5 m = 50 J, twice as far, twice the work": explain that the shadow (the part of the force along the motion) is itself a force of 10 N, that only it does work, work = 10 N × 5 m = 50 J, and over 10 m it is 100 J — twice the distance, twice the work. Slow down, more narration.
+- U-M2.11 (~3:24–3:32, the weather equation) Don't call it "Vallis's equation"; drop "Vallis 1.7". **First** teach what the material derivative is (the two-thermometer / air-parcel explanation the user liked, currently ~4:00 — integrate it at the start), then the equation Dφ/Dt = ∂φ/∂t + (v·∇)φ: φ can be any quantity carried by the air — temperature T, moisture, … Explain v·∇φ is advection: of temperature if φ = T, of moisture if φ = moisture. Avoid the confusing "(v·∇) in brackets, φ outside" reading — show it written as v·∇T together for temperature.
+- U-M2.12 (~4:23–4:34, ∇T) Explain ∂/∂x, ∂/∂y (partial derivatives: change in one direction only) and ∇T = (∂T/∂x, ∂T/∂y). Define **isotherm** (a line of equal temperature). Say explicitly: the vertical isotherms at 100, 200, 300 km mean T rises 1 °C (user wrote "1 kilometer" — means 1 °C) per 100 km eastward and does not change northward, so ∂T/∂y = 0. Remove "not to scale".
+- U-M2.13 (~4:38) Visual is great but narration is too thin: add more explanation. Remove "not to scale", footnotes, "1.7".
+- U-M2.14 (~4:57, rate in space vs time) Already good; check narration ↔ screen agreement and improve clarity where possible.
+- U-M2.15 (~5:20, DT/Dt = 0) Already good; see if clarity can be increased.
+- U-M2.16 (~5:42) Remove "not to scale". Explain the **shaded area behind the green arrow** (the user does not know what it is or how it relates to the shadow / to ∂T/∂t = −v·∇T); either explain it clearly or remove it. Make "parcels arriving at the pole come from colder places upwind" clear.
+- U-M2.17 (last scene, "what the dot product measures") Improve the content, the wording on screen and the narration. No references.
+- Decision (user): length up to ~8 min is fine. Background music: unchanged (not mentioned).
