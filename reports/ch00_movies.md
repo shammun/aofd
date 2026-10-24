@@ -844,3 +844,176 @@ all pass now. The movie can become `qa_pass` for the user to watch. Push P1 befo
 Disk at re-review: C: 83 GB free, G: 588 GB free. Review scratch on G: `review4_v4` 64 MB + `review4b_v4fix1` 34 MB (both deletable).
 
 ## Overall: PASS (ch00_dot_product_why review 4b — `qa_pass`; P1 before publishing; S12 optional)
+
+## ch00_dot_product_why (review 5 — version 5, commit cc1d979, 2026-10-24)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_why v5 | 733.78 s (12:13.8) | 39.58 MB | 10/10 PASS | PASS (43 hashes; every number re-checked) | PASS (KaTeX clean; plain (1) only) | FIX (systematic label/tick collisions; small text at 390 px) | PASS (reveals land on their sentences) | PASS (177 cues, ≤ 2 × 42, max 15.9 cps, text = script) | PASS (plasma-type map, hatched negative bars, 0 flashes) | PASS (none, per U-M2.G2) | **FIX** |
+
+**How I reviewed it.** I extracted 242 frames with ffmpeg from `1080.mp4`: one 0.1 s before every sentence end, one at
+every sentence midpoint (114 sentences × 2), plus extra frames at scene cuts and the |a| underbrace. They are in
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/review5_v5/` (62 MB), with 390-px copies in
+`p390/` and tiles in `tiles/`. I looked at every frame at phone size (390 px) and at about 40 of them at full size.
+The VTT was checked against the script and timing.json. Every number on screen was recomputed: |a| = 5.099, |b| = 3.162,
+θ = 60.26°, cos θ = 0.496, 8/3.162 = 2.530, 8/5.099 = 1.569, b̂ = (0.316, 0.949), 20 cos 60° = 10 N, 17.3 N,
+10 sin 60° = 8.66 m/s, 5 × 10⁻⁵ K/s × 3600 = 0.18 K/h, 18 km, 12.82 / 12.64 / 12.46 °C, 0.36 K/h and 12.64 °C after 1 h.
+The geometry was measured in pixels: the upwind dots, the balloon on the 13 °C isotherm at 1 h and 3 h, and the isotherm
+shift of 54 km at 3 h. All of them agree with the physics.
+
+### U-M3 acceptance table
+
+| Item | Result | Evidence (movie time) |
+|---|---|---|
+| G1 no headings, kickers, counters or PartCards | **PASS** | None in any frame. The only title-like words are the keyword "Pythagoras" (0:28–0:31) and "a·b = b·a" (3:52). Both are acceptable. |
+| G2 keywords, not sentences; no boxes except the s03 tags | **FAIL (partial)** | The text is keywords throughout and the s03 tags are kept (1:04–1:16). But there are unexplained filled rectangles in s05 (1:59–2:33, grey and hatched), s08 (3:30), s09 (3:52), s11 (4:51–5:09) and s16b (8:04–8:23, on the temperature map). There is also an unlabelled gradient block in s01 (0:05–0:09). See M3 and S1. |
+| G3 natural, unhurried narration | **PASS (with S12)** | 147.9 wpm overall. The bridges are natural ("Now let's look at how the angle…", "Now let's look at how the dot product is used in weather."). Four short spots still sound clipped (S12). |
+| G4 no "1 grid square" | **PASS** | Not in any frame and not spoken. |
+| G5 advection, uphill, local rate | **PASS** | "local rate" 5:17; advection defined 6:08–6:17; "the way the temperature increases fastest" 7:28. |
+| G6 no links or paths | **PASS** | The end card (11:48–12:14) has no URL, path or book name. |
+| U-M3.1 natural opening, no agenda box | **PASS** | 0:00 "What is the dot product?" with a and b only. |
+| U-M3.2 "vector" without a box | **PASS** | 0:09–0:12: large "vector" with "length" and "direction" pointers. |
+| U-M3.3 a = (5, 1) + "components" pointers | **PASS** | 0:19–0:27, two gold pointers to each pair. |
+| U-M3.4 Pythagoras kept; \|a\| note without a box | **PASS** | 0:28–0:31: underbrace "length of a", which fades. Spacing is uneven after the fade (S9). |
+| U-M3.5 3-D remark, then strike a₃b₃ | **PASS** | x, y, z under the terms at 0:47. The strike lands on "drops out" at 0:56. |
+| U-M3.6 a, b under the picture; no grid note | **PASS** | a = (5, 1) and b = (1, 3) stay under the picture from 0:28 to 3:30. |
+| U-M3.7 tags kept; "scalar" sentence | **PASS** | Tags 1:00–1:16. "scalar" and "scalar product" point to 8 (1:10–1:16). |
+| U-M3.8 natural transition, no counter | **PASS** | 1:17. |
+| U-M3.9 √(5² + 1²) = √26 = 5.099 and √(1² + 3²) = √10 = 3.162 in s04 | **FAIL** | 1:38–1:44 shows only "\|a\| = √26 = 5.099" and "\|b\| = √10 = 3.162", without the squares. By 1:46 the \|a\| line is gone, so "5.099 × 3.162 × 0.496 ≈ 8" (1:46–1:49) has lost the line its 5.099 comes from. See M4. |
+| U-M3.10 user wording; p's components; three full cases | **PASS (with S12)** | 1:49–2:32: 3×2 + 0×0 = 6 positive; 3×0 + 0×2 = 0 right angle; 3×(−2) + 0×0 = −6 negative. The closing sentence is kept. |
+| U-M3.11 q labels at the q tips | **PASS / M6** | The labels sit at the tips. But in panel 1 (1:59–2:33) q is drawn under p, and only its arrowhead shows. |
+| U-M3.12 work: F, d vectors; 50 J → 100 J; the shadow alone is not the work | **PASS** | 4:28–5:09: "force" / "displacement" pointers, 10 N × 5 m = 50 J, 10 m → 100 J, "× 2 → × 2", underbraced W = (\|F\| cos θ)\|d\|. The sled never moves (S11). |
+| U-M3.13 weather transition, two thermometers | **PASS** | 5:09–5:44, including "Partial means only time changes; the place stays fixed." |
+| U-M3.14 say what the equation is; define advection; material ≠ partial | **PASS** | 5:44–6:36. Underbraces "following the parcel", "one fixed place" and "advection"; "carried by the flow" 6:08; "material derivative" 6:18. |
+| U-M3.15 no leaked box in s13 | **PASS** | 5:45.3 and 5:45.8 are clean. Nothing leaks during s13. |
+| U-M3.16 map in words first, then isotherms | **PASS** | No lines at 6:45.8. Lines draw at 6:46–6:50, then "isotherm" at 6:54. The ∂T/∂x and ∂T/∂y walker is kept (6:57–7:12). |
+| U-M3.17 no "uphill" | **PASS** | 7:28 "towards warmer". |
+| U-M3.18 meaning of 0.18 K/h; 8.66 = 10 sin 60° | **PASS** | 7:53–8:03: "10 × sin 60° = 8.66", "along: no change", "8.66 × 0 = 0". The 0.18 K/h chain is at 8:04–8:23, and its meaning (rate in time vs rate in space, the pole, upwind) at 8:23–8:56. |
+| U-M3.19a snapshot; the pattern slides | **PASS (with S5)** | Snapshot corners and "t = 0 h" 8:32. "the pattern slides" 9:14. But the slide in s18 is only 18 km ≈ 26 px (≈ 5 px at 390 px). The slide is clear only in s19a (54 km at 3 h, 9:37). |
+| U-M3.19b colder air from upwind | **PASS** | 8:37–8:43 "upwind" / "colder side"; 9:37 "colder air from upwind". |
+| U-M3.19c pole falls, balloon stays 13 °C | **PASS** | 9:25–9:46 on one clock: 13.00 → 12.82 → 12.64 → 12.46 °C for the pole, 13.00 °C for the balloon. No thermometer is ever said to warm. |
+| U-M3.20 DT/Dt = 0 ⇒ ∂T/∂t = −v·∇T; +0.18 / −0.18 cancel | **FAIL (partial)** | The derivation (9:49–10:00) and the balance bars (10:23–10:40, "0 = −0.18 + 0.18") are good. But in s19b (10:00–10:14) "+0.18 K/h →" floats under the stack with an arrow pointing at nothing, and "= −0.18 K per hour" has no left side. The sign step the user asked to make "much clearer" is the least clear frame. See M1. |
+| U-M3.21 twice as steep, concretely | **PASS** | 10:40–11:12: "1 °C per 50 km", "× 2", "5.00 m/s same", the 1.00 × 10⁻⁴ K/s × 3600 = 0.36 K per hour chain, "twice as fast", and the pole at 12.64 °C after 1 h. |
+| U-M3.22 recap signs spelled out | **PASS** | 11:25–11:35: "+ same way", "0 right angle", "− opposite", one beat per sentence. |
+| U-M3.23 end card in words | **PASS** | 11:48–12:14. |
+| U-M3.24 series wording; no thanks; no book | **PASS** | "a series of maths tutorials" and "atmospheric science · meteorology · fluid dynamics". The dot-product notebook and the other notebooks are mentioned in words only. No lab, no book. |
+| Decisions: ~12 min, keep b̂, one movie | **PASS** | 12:13.8; b̂ at 3:04–3:30; one movie. |
+| Rounds 1–2 rules | **PASS** | Equations carry only the plain label "(1)" (U-M2.5). No book or author names, footnotes or "not to scale". "air parcel" is used throughout, and the movie says "point in opposite directions" (1:29) and "pointing in the opposite direction" (2:18). |
+
+**Background #171f33.** It looks fine. The navy reads as deliberate, the text contrast is good, and I saw no banding.
+The only side effect is that the dark (4 °C) end of the colour bar merges into the background. That is harmless.
+
+**Listen-proxy (VTT = script, QA verified).** Most of the narration now reads as natural speech. Four sentences still
+sound clipped or label-like (S12). I found no physics wording problems: the movie says "at sixty degrees to grad T", the
+pole cools, the balloon stays at 13 °C, advection is defined before it is used, and the cold air comes from upwind.
+
+### Must-fix
+- **M1 (s19b, 10:00.6–10:14.7): the sign step.** "+0.18 K/h →" sits under the equations with an arrow to nothing, and
+  the next line, "= −0.18 K per hour", has no left side.
+  - Fix: on the line ∂T/∂t = −v·∇T, put the underbrace "+0.18 K/h" under v·∇T. Then write the full result line
+    "∂T/∂t = −0.18 K per hour" in rose, under ∂T/∂t. Delete the dangling arrow.
+  - Reveal "+0.18" on "plus point one eight kelvin per hour" (10:03) and "−0.18" on "The minus sign makes it a fall"
+    (10:08).
+- **M2 (s19c, 10:23–10:40): builder-flagged collision.** The ghost label "13.18 °C, an hour ago" runs past the map's
+  right edge (x ≈ 1048) into the colour-bar column, directly above "20".
+  - Fix: anchor the label's right end at x ≤ 980, inside the map, or place it on the left of the dashed line at
+    y ≈ 170.
+- **M3 (s16b, 8:04–8:23; s05, 1:59–2:33): unexplained filled rectangles.** This is the same kind of problem as the
+  shaded area the user asked about in U-M2.16, and it breaks U-M3.G2.
+  - s16b: a white-outlined, filled rectangle sits on the temperature map under ∇T, at about 300–390 km × 50–180 km. It
+    reads like a region of the map.
+  - s05: a grey box (panel 1) and a hatched rose box (panel 3) hang under p, and neither is narrated.
+  - Fix: remove the s16b and s05 rectangles. If the area picture is kept in s08, s09 and s11, see S10.
+- **M4 (s04, 1:38–1:49): U-M3.9 is not met.**
+  - Show "\|a\| = √(5² + 1²) = √26 = 5.099" and "\|b\| = √(1² + 3²) = √10 = 3.162".
+  - Keep both lines on screen until "≈ 8" (the \|a\| line disappears at about 1:46 today). Make room by putting
+    "θ = 60.3°, cos θ = 0.496" on one line, or by moving the cos-scale out after 1:38.
+- **M5 (s06, s12, s15–s19b): systematic label collisions.** Pointer curves and labels cut through axis tick labels or
+  cover numbers:
+  - "air parcel" pointer over "500" (5:38–5:44);
+  - "towards warmer" pointer over "500" (7:28–7:36);
+  - "along: no change" pointer over "200" (7:53–8:04);
+  - "36 km along the wind" pointer over "200" (8:44–8:56);
+  - snapshot corner brackets through "360" and "0" (8:33–8:56);
+  - the "each parcel keeps its T" arrowhead covers the parcel tag, so "13.0" reads "1?.0" (9:00–9:21);
+  - "colder air from upwind" pointer over "200" (9:37–9:46);
+  - the "colder air carried in" arrowhead covers the "1" of "12.46 °C" (10:08–10:14);
+  - "\|a\| = 5.099" sits on the x-axis line (2:47–3:04).
+
+  Fix: end every pointer at least 8 px short of its target. Route the curves between ticks, or anchor the keyword
+  inside the map so the curve never crosses the tick row. Inset the snapshot corners 12 px. Move the \|a\| label below
+  the axis.
+- **M6 (s05, 1:59–2:33): q is invisible in the "same way" picture.** In panel 1 the orange q lies under the teal p, and
+  only its arrowhead peeks out.
+  - Fix: draw q on top, offset 12 px above p (or draw p as an outline). Keep the tip label "q = (2, 0)".
+
+### Should-fix
+- **S1 (s01, 0:05–0:09): gradient block.** The "map thumbnail" is an unlabelled purple-to-orange block. Add two isotherm
+  lines and a wind arrow so it reads as a weather map, or drop it.
+- **S2 (s10 4:23; s15–s20): units.** The screen uses m s⁻¹, K m⁻¹ and K s⁻¹, while the labels and the voice use m/s
+  and K per hour (the storyboard for s16b specifies (m/s)(K/m)). Use slash units everywhere for this audience.
+- **S3 (s12–s20): no axis unit.** The map axes (0–600, 0–360) never say km. Add "km" to the last tick, or an axis title.
+- **S4 (s12, 5:29–5:44): pole inside the parcel.** The pole thermometer sits inside the balloon's dashed "air parcel"
+  ellipse. The clock "t = 1.5 h" is never mentioned. Offset the ellipse from the pole, and drop the clock.
+- **S5 (s18, 9:01–9:21): the slide is too small.** The isotherms slide 18 km (about 26 px, about 5 px on a phone), and
+  the clock freezes at 1.0 h from about 9:11. Run s18 to 3 h, or brighten the 13 °C isotherm and leave a ghost at its
+  t = 0 position so the slide can be seen.
+- **S6 (cut s18 → s19a, 9:21.6): clock reset.** The clock jumps back from 1.0 h to 0.0 h, and the balloon reappears on
+  top of the pole thermometer, so the two icons merge. Either add "Let's start the clock again" to the first s19a
+  sentence or continue from the s18 state. Offset the balloon from the pole at t = 0.
+- **S7 (s17, 8:44–8:56; s19c, 10:23–10:40): "18 km across".** The bracket is about 26 px wide, and the label sits
+  40–300 px to its right, so it seems to describe the right half of the map. Put the label beside the bracket with a
+  short pointer.
+- **S8 (s15–s20): weak map labels.** The "∇T" label on the map has a heavy dark stroke that smudges the glyphs. In s20
+  (10:56–11:12) "5.00 m/s" is muted teal on pink and hard to read. Use a clean fill with a thin outline.
+- **S9 (s02 0:33–0:36; s06 3:00–3:04): spacing.** In s02 the \|b\| block crowds right under "= √26 = 5.099", while the
+  faded underbrace leaves a gap above. In s06 the gold underline touches the "3.162" denominator. Even out the spacing.
+- **S10 (s08 3:30–3:40; s09 3:52–3:58; s11 4:51–5:09): the area picture.** The rectangles are never mentioned. Add one
+  clause in s08: "…the shadow times the length of b, which is the area of this rectangle." Otherwise remove them. The
+  s09 rectangles also spill outside the grids, and the panel-2 rectangle nearly touches "a·b = b·a".
+- **S11 (s11, 4:28–5:09): the sled never moves**, while the voice says "while it moves along a displacement vector, d".
+  Slide it along d (5 m, then 10 m).
+- **S12: four clipped sentences.** I would replace them as follows.
+  - s05 2:00 / 2:08 / 2:18: "First, q is two, zero, …" → "First, q has components two and zero, so it points the same
+    way as p: …". Use the same pattern for (0, 2) and (−2, 0).
+  - s15 7:19: "…ten to the minus five kelvin per metre, and zero." → "…ten to the minus five kelvin per metre going east,
+    and zero going north."
+  - s19c 10:18–10:35: "…that's the advection term, plus point one eight. But … cooled by point one eight: the local rate,
+    minus point one eight." → "That gain of point one eight is the advection term. But in that hour every place has
+    cooled by point one eight degrees, and that fall is the local rate."
+  - s20 11:08: "As with the sled, the shadow alone missed the change." → "Just as with the sled, the shadow stayed the
+    same, so on its own it would miss this change. Multiplying by the length of grad T catches it."
+- **S13 (390-px legibility).** These elements render at about 5–7 px on a 390-px-wide phone, below the 44-px floor at
+  1080p:
+  - the underbrace labels "length of b" (3:30) and "length of ∇T" (8:04);
+  - the s05 calculation lines;
+  - "1 K step = 1 °C step" (7:21);
+  - the s21 recap strip labels (11:12–11:48);
+  - the map tick labels.
+
+  Raise them to the floor, or drop the strip labels and let the icons carry them.
+- **S14 (s16a, 7:52–8:04): wind components hidden.** The 5 m/s "across" part lies under the orange ∇T arrow. The
+  8.66 m/s "along" part is a grey dashed line on top of the white 13 °C isotherm. Draw each part as its own arrow,
+  offset from ∇T and from the isotherm.
+- **S15 (s13, 6:30–6:36): icon and keyword.** The pole icon's stem overlaps the ∂ glyph. The keyword "dot product" has
+  no pointer to the dot in v·∇T.
+- **S16 (s05, 2:18–2:33): panel 3 labels.** "q = (−2, 0)" reaches left into the gap between panels 2 and 3, and
+  "opposite" floats unattached. Place the label just left of the q tip, and put "opposite" under the 180° arc.
+- **S17 (s03, 1:10–1:16): crowding.** The "scalar" keyword and its gold curve crowd the "= 5 + 3 = 8" line. Move them
+  down about 30 px.
+
+### Verdict: FIX
+Physics, numbers, captions, pacing and the round-1 and round-2 rules all pass. The user's round-3 items pass, except
+three:
+- U-M3.9: the √ working is incomplete, and the \|a\| line vanishes before the product (M4).
+- U-M3.20: the s19b sign step is unclear (M1).
+- U-M3.G2: there are unexplained filled boxes (M3).
+
+There is also one confirmed label collision near the colour bar (M2), a pattern of pointer and tick-label collisions
+(M5), and an invisible q in s05 (M6). All six Musts are layout or text changes. None of them needs new narration audio
+except the optional S12 rewrites, which would change timing.json for s05, s15, s19c and s20. After M1–M6, the movie
+should pass at re-review.
+
+Disk at review: C: 77 GB free, G: 587 GB free. Review scratch on G: `review5_v5` 62 MB (deletable).
+
+## Overall: FIX (ch00_dot_product_why review 5 — M1–M6; S1–S17 recommended)
