@@ -51,7 +51,7 @@ audio:
     source: "tools/music.py (procedural, our own, CC0)"
     level: "music bed about -28 LUFS, ducked a further 5 dB under speech (user-confirmed 2026-10-22; unchanged in v4)"
     mood: "slow ambient pad"
-    notes: "fade in over the first 2 s of s01, out over the last 2 s of the end-card hold; one gentle lift on s21 only"
+    notes: "AS BUILT (v4, user: music unchanged from v3): tools/music.py score, seed 7, 5-s fade in, 8-s fade out at the end, no lift on s21"
 measured_narration_s: 489.525
 measured_frames: 14761        # 489.525 s x 30 = 14686 narration frames + 75 hold
 words: 1142                   # 1142 words / 492.0 s = 139.3 words per minute (limit 150)
@@ -65,6 +65,8 @@ lexicon_additions:
   checked_ok_without_entries: ["isotherm(s) -> ˈIsəθˌɜɹm(z)", "p dot q -> pˈi dˈɑt kjˈu", "grad phi -> ɡɹˈæd fˈI", "capital D phi by D t", "partial phi by partial t", "x hat, b hat", "newtons, joules", "upwind -> ˌʌpwˈɪnd"]
   no_longer_needed_in_this_movie: ["Vallis", "Kundu (no references are spoken in v4)"]
 
+# AS BUILT v4 fix loop 1 (review 4, 2026-10-23): titles use the title font for symbols (b̂, |b|, ∇T, v·∇T), no KaTeX in
+# titles; secondary text >= 28 px; lexicon "arrow a," added; per-scene `as_built:` notes below.
 title_treatment:              # G3: new house component SceneTitle (movies/src/house/SceneTitle.tsx; promote via the orchestrator)
   component: SceneTitle
   props: {kicker: "string (part name, CAPS)", title: "string (<= 48 chars)", index: "n / 22", partChange: "bool"}
@@ -89,7 +91,7 @@ equations:   # every on-screen TeX string; checked 2026-10-23 against the render
     page_png: "../Fluid Dynamics/chapters/pages/ch02/p079.png"
     checked: "first line of that page, u·v = uv cos θ (unnumbered there), rewritten with a, b and |·| for the lengths; on screen numbered plainly (1)"
   material_derivative:
-    latex: '\frac{D\varphi}{Dt} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi'
+    latex: '\frac{\mathrm{D}\varphi}{\mathrm{D}t} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi'
     page_png: chapters/pages/ch01/p025.png
     checked: "the boxed equation on that page is Dφ/Dt = ∂φ/∂t + (v·∇)φ; the equation above it on the same page writes the same right-hand side as v·∇φ. For a scalar φ, (v·∇)φ and v·∇φ are identical, so we show the bracket-free form the user asked for (U-M2.11). Upright D, bold v (\\mathbf, as in the explainer)."
   gradient:
@@ -208,6 +210,7 @@ scenes:
     exaggeration: []
 
   - id: s05_angle_cases
+    as_built: "a large reference p = (3, 0) stays at the top left for the whole scene (review 4 S7); copies fly into the panels"
     t: [74.350, 100.875]
     title: {kicker: "PART 1 · WHAT THE DOT PRODUCT IS", text: "The angle sets the sign"}
     visual: >-
@@ -349,6 +352,7 @@ scenes:
     exaggeration: []
 
   - id: s09_reason1_order
+    as_built: "the product rectangles grow in place on each plane; the centre shows 'area 8.000 both ways', the tray line and a·b = b·a (no slide into a tray)"
     t: [173.000, 187.200]
     title: {kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: "Reason 1 · the order doesn't matter"}
     visual: >-
@@ -415,6 +419,7 @@ scenes:
     exaggeration: ["the wind map has its own scale (1 grid unit = 1 m/s; an arrow length is a speed, not a distance) — stated in its axis labels; badge: none"]
 
   - id: s11_work
+    as_built: "the sled stays still; d is labelled 'd = 5 m (distance pulled)' under the rectangle, then 10 m; '10 N forward' sits above the sled nose; the 60° arc fades with the 17.3-N leg"
     t: [210.000, 244.250]
     title: {kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: "Reason 3 · physics needs both sizes: work"}
     visual: >-
@@ -477,7 +482,7 @@ scenes:
       thermometers yet.
     voiceover: "Now the weather. One thermometer is fixed on a pole: its rate is partial T by partial t, the local rate. Partial means only time changes; the place stays fixed. A second one rides a balloon drifting with the wind. It always measures the same air parcel: a small volume of air that moves with the flow. Its rate, capital D T by D t, is the material derivative: the rate following an air parcel."
     on_screen_eq:
-      latex: '\frac{\partial T}{\partial t}\ \ \text{(pole: a fixed place)}\qquad \frac{DT}{Dt}\ \ \text{(balloon: follows an air parcel)}'
+      latex: '\frac{\partial T}{\partial t}\ \ \text{(pole: a fixed place)}\qquad \frac{\mathrm{D}T}{\mathrm{D}t}\ \ \text{(balloon: follows an air parcel)}'
       vallis_eq: "provenance only: the two terms of the material-derivative equation (p025 image), named before the equation is shown"
       page_png: chapters/pages/ch01/p025.png
       highlight: [{term: '\frac{\partial T}{\partial t}', colour: slate}]
@@ -491,6 +496,7 @@ scenes:
     exaggeration: ["time compressed (1 h of drift in 3 s, shown by the clock chip)", "idealised field, not data: uniform eastward gradient and uniform steady wind (stated in the scene once as 'an idealised map')", "pole and balloon icons illustrative; badge: none"]
 
   - id: s13_equation
+    as_built: "∇ glossed at first use: '∇φ (“grad φ”): how φ changes across the map'; upright D in D/Dt"
     t: [276.800, 303.300]
     title: {kicker: "PART 3 · THE WEATHER", text: "The material-derivative equation"}
     visual: >-
@@ -507,12 +513,12 @@ scenes:
       with the chip "this dot = our dot product".
     voiceover: "The equation: capital D phi by D t equals partial phi by partial t, plus v dot grad phi. Phi is anything the air carries, like temperature or moisture; v is the wind. The last term is the change from being carried across the map: the advection of phi. For temperature, phi is T, and v dot grad T is the advection of temperature."
     on_screen_eq:
-      latex: '\frac{D\varphi}{Dt} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi'
+      latex: '\frac{\mathrm{D}\varphi}{\mathrm{D}t} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi'
       vallis_eq: "provenance only, not drawn: Vallis (1.7) with (v·∇)φ written v·∇φ, as in (1.6) on the same page (identical for a scalar φ)"
       page_png: chapters/pages/ch01/p025.png
       highlight: [{term: '\frac{\partial\varphi}{\partial t}', colour: slate}, {term: '\mathbf v\cdot\nabla\varphi', colour: teal}]
     on_screen_eq_extra:
-      - latex: '\frac{DT}{Dt} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T'
+      - latex: '\frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T'
         vallis_eq: "provenance only: the same with φ = T"
         page_png: chapters/pages/ch01/p025.png
       - latex: '\mathbf v\cdot\nabla q'
@@ -575,6 +581,7 @@ scenes:
     exaggeration: ["∇T arrow length drawn on its own scale (K/m), not the map's km — the bracket gives its value; badge: none"]
 
   - id: s16_advection_number
+    as_built: "the wind label reads 'the wind (as the balloon’s): |v| = 10 m/s, 60° from ∇T' (same wind as s12, not a new one)"
     t: [348.325, 377.150]
     title: {kicker: "PART 3 · THE WEATHER", text: "Advection: v·∇T = shadow × steepness"}
     visual: >-
@@ -597,7 +604,7 @@ scenes:
       page_png: null
       highlight: [{term: '\mathbf v\cdot\nabla T', colour: teal}]
     on_screen_eq_extra:
-      - latex: '\frac{DT}{Dt} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T'
+      - latex: '\frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T'
         vallis_eq: "provenance only: as s13"
         page_png: chapters/pages/ch01/p025.png
       - latex: '= 5.00\ \mathrm{m\,s^{-1}}\times1.00\times10^{-5}\ \mathrm{K\,m^{-1}} = 5.00\times10^{-5}\ \mathrm{K\,s^{-1}} = 0.180\ \mathrm{K\ per\ hour}'
@@ -641,6 +648,7 @@ scenes:
     exaggeration: ["time compressed (1 h in 4 s, clock chip)", "idealised field, not data; badge: none"]
 
   - id: s18_label_zero
+    as_built: "the summary line ∂T/∂t = −v·∇T when DT/Dt = 0 appears with sentence 4"
     t: [396.550, 421.250]
     title: {kicker: "PART 3 · THE WEATHER", text: "If each air parcel keeps its temperature"}
     visual: >-
@@ -660,13 +668,13 @@ scenes:
       row 4 '∂T/∂t = −v·∇T' (why "what's left: the change at a fixed place is minus the advection"), boxed, minus in rose.
     voiceover: "Now suppose each air parcel keeps its temperature, with no sunshine or mixing. Then the balloon's reading never changes: capital D T by D t is zero, and the pattern slides with the wind. Put zero in, then subtract v dot grad T from both sides. Partial T by partial t equals minus v dot grad T."
     on_screen_eq:
-      latex: '\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T \quad\text{when } \frac{DT}{Dt} = 0'
+      latex: '\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T \quad\text{when } \frac{\mathrm{D}T}{\mathrm{D}t} = 0'
       vallis_eq: "provenance only: follows from the material-derivative equation (p025) with φ = T and DT/Dt = 0; derived on screen"
       page_png: chapters/pages/ch01/p025.png
       highlight: [{term: '-\,\mathbf v\cdot\nabla T', colour: teal}]
     derivation_strip:
       rows:
-        - {line: '\frac{DT}{Dt} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T', why: "the equation, for temperature", sentence: 2}
+        - {line: '\frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T', why: "the equation, for temperature", sentence: 2}
         - {line: '0 = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T', why: "each parcel keeps its temperature: DT/Dt = 0", sentence: 2}
         - {line: '0 - \mathbf v\cdot\nabla T = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T - \mathbf v\cdot\nabla T', why: "subtract v·∇T from both sides", sentence: 3}
         - {line: '\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T', why: "what's left: change at a fixed place = minus the advection", sentence: 4}
@@ -679,6 +687,7 @@ scenes:
     exaggeration: ["idealised: parcels keep their temperature exactly (no heating, radiation or mixing), said in the narration", "time compressed (clock chip); badge: none"]
 
   - id: s19_pole_cools
+    as_built: "the clock follows sentence 4: 0 h on 'thirteen', 1 h on 'twelve point eight two', 2 h on 'twelve point six four' (1 h ≈ 1.6 s), then on at the same pace to 3 h (12.46 °C, the third upwind dot) and holds — running to 6 h would race past the spoken 12.64; the balloon is shown from the start beside the pole and stays inside the map (fade + 'off the map' tag kept for safety at the top edge)"
     t: [421.250, 444.000]
     title: {kicker: "PART 3 · THE WEATHER", text: "Why the pole cools: the air comes from upwind"}
     visual: >-
@@ -776,9 +785,10 @@ scenes:
         page_png: null
     physics_source: null   # recap card: numbers repeated from s03-s16 data, no new computation
     exaggeration: ["recap card: text and icons only, illustrative; badge: none"]
-    music: "one gentle lift (pad opens up, +2 dB over 3 s, still ducked under speech)"
+    music: "AS BUILT: no lift (the bed is unchanged from v3, user decision)"
 
   - id: s22_end
+    as_built: "a local two-row links card (title + URL per row), not the house EndCard, whose one-line rows would wrap the URLs"
     t: [484.900, 492.025]
     title: {kicker: "RECAP", text: "Try it yourself"}
     visual: >-

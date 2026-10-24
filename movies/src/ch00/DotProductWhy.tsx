@@ -53,16 +53,16 @@ const TITLES: { kicker: string; text: string; part?: boolean }[] = [
   { kicker: "PART 1 · WHAT THE DOT PRODUCT IS", text: "Definition 2: two lengths and the angle" },
   { kicker: "PART 1 · WHAT THE DOT PRODUCT IS", text: "The angle sets the sign" },
   { kicker: "PART 1 · WHAT THE DOT PRODUCT IS", text: "The shadow of a on b, step by step" },
-  { kicker: "PART 1 · WHAT THE DOT PRODUCT IS", text: String.raw`The same shadow, another way: the unit vector $\hat{\mathbf b}$` },
-  { kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: String.raw`Why multiply the shadow by $|\mathbf b|$?`, part: true },
+  { kicker: "PART 1 · WHAT THE DOT PRODUCT IS", text: "The same shadow, another way: the unit vector b̂" },
+  { kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: "Why multiply the shadow by |b|?", part: true },
   { kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: "Reason 1 · the order doesn’t matter" },
   { kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: "Reason 2 · cheap, and a unit vector picks out a part" },
   { kicker: "PART 2 · WHY TIMES THE OTHER LENGTH?", text: "Reason 3 · physics needs both sizes: work" },
   { kicker: "PART 3 · THE WEATHER", text: "Two thermometers: a fixed place, or moving air", part: true },
   { kicker: "PART 3 · THE WEATHER", text: "The material-derivative equation" },
   { kicker: "PART 3 · THE WEATHER", text: "Isotherms, and partial derivatives in space" },
-  { kicker: "PART 3 · THE WEATHER", text: String.raw`$\nabla T$: the temperature gradient` },
-  { kicker: "PART 3 · THE WEATHER", text: String.raw`Advection: $\mathbf v\cdot\nabla T$ = shadow × steepness` },
+  { kicker: "PART 3 · THE WEATHER", text: "∇T: the temperature gradient" },
+  { kicker: "PART 3 · THE WEATHER", text: "Advection: v·∇T = shadow × steepness" },
   { kicker: "PART 3 · THE WEATHER", text: "A rate in space, and a rate in time" },
   { kicker: "PART 3 · THE WEATHER", text: "If each air parcel keeps its temperature" },
   { kicker: "PART 3 · THE WEATHER", text: "Why the pole cools: the air comes from upwind" },
@@ -99,10 +99,10 @@ const EQ_W = String.raw`W = \mathbf F\cdot\mathbf d = (|\mathbf F|\cos\theta)\,|
 const EQ_W5 = String.raw`W = (20\cos 60^\circ)\ \mathrm N\times5\ \mathrm m = 10\ \mathrm N\times5\ \mathrm m = 50\ \mathrm J`;
 const EQ_W10 = String.raw`W = 10\ \mathrm N\times10\ \mathrm m = 100\ \mathrm J`;
 // s12
-const EQ_12 = String.raw`\frac{\partial T}{\partial t}\ \ \text{(pole: a fixed place)}\qquad \frac{DT}{Dt}\ \ \text{(balloon: follows an air parcel)}`;
+const EQ_12 = String.raw`\frac{\partial T}{\partial t}\ \ \text{(pole: a fixed place)}\qquad \frac{\mathrm{D}T}{\mathrm{D}t}\ \ \text{(balloon: follows an air parcel)}`;
 // s13
-const EQ_MD = String.raw`\frac{D\varphi}{Dt} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi`;
-const EQ_TF = String.raw`\frac{DT}{Dt} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T`;
+const EQ_MD = String.raw`\frac{\mathrm{D}\varphi}{\mathrm{D}t} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi`;
+const EQ_TF = String.raw`\frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T`;
 const EQ_VQ = String.raw`\mathbf v\cdot\nabla q`;
 // s14
 const EQ_DXDY = String.raw`\frac{\partial T}{\partial x} = \frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}},\qquad \frac{\partial T}{\partial y} = 0`;
@@ -114,7 +114,7 @@ const EQ_VGTN = String.raw`= 5.00\ \mathrm{m\,s^{-1}}\times1.00\times10^{-5}\ \m
 // s17
 const EQ_S17 = String.raw`5.00\ \mathrm{m\,s^{-1}}\times3600\ \mathrm s = 18.0\ \mathrm{km},\qquad 18.0\ \mathrm{km}\times\frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}} = 0.180\ ^\circ\mathrm C`;
 // s18
-const EQ_DTDT = String.raw`\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T \quad\text{when } \frac{DT}{Dt} = 0`;
+const EQ_DTDT = String.raw`\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T \quad\text{when } \frac{\mathrm{D}T}{\mathrm{D}t} = 0`;
 // s19
 const EQ_P19 = String.raw`\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T = -0.180\ \mathrm{K\ per\ hour}`;
 const EQ_TUP = String.raw`T_{\text{upwind}} = 13.00 + \nabla T\cdot(-\mathbf v\,t)`;
@@ -353,22 +353,22 @@ const Row: React.FC<{ x: number; y: number; w: number; tag?: string; latex: stri
           <TeXi s={latex} size={size} d={d} />
         </div>
       </div>
-      {why ? <div style={{ fontSize: 26, color: MUTED, marginLeft: tag ? 126 : 0, marginTop: 2 }}>{why}</div> : null}
+      {why ? <div style={{ fontSize: 28, color: MUTED, marginLeft: tag ? 126 : 0, marginTop: 2 }}>{why}</div> : null}
     </div>
 );
 /** The reason slots "1 · 2 · 3" (s08 large; s09–s11, s20 small in the free band at the bottom). */
 const REASONS = ["same number both ways", "cheap", "physics needs both sizes"];
 const Slots: React.FC<{ filled: number[]; glow?: number; big?: boolean; o?: number; fillO?: number[] }> = ({ filled, glow = -1, big = false, o = 1, fillO = [] }) => (
   o <= 0 ? null :
-    <div style={{ position: "absolute", left: big ? 1010 : 1010, top: big ? 520 : 965, display: "flex", gap: 14, opacity: o, ...FONT }}>
+    <div style={{ position: "absolute", left: 1010, top: big ? 520 : 962, display: "flex", gap: 14, opacity: o, ...FONT }}>
       {[0, 1, 2].map((i) => {
         const on = filled.includes(i), fo = on ? (fillO[i] ?? 1) : 0;
         return (
-          <div key={i} style={{ width: big ? 280 : 280, height: big ? 120 : 64, border: `2px ${on ? "solid" : "dashed"} ${glow === i ? GOLD : on ? ACC : HOUSE.grid}`,
+          <div key={i} style={{ width: 280, height: big ? 120 : 86, border: `2px ${on ? "solid" : "dashed"} ${glow === i ? GOLD : on ? ACC : HOUSE.grid}`,
             borderRadius: 12, background: HOUSE.panel, display: "flex", alignItems: "center", gap: 10, padding: "0 12px", boxSizing: "border-box",
             boxShadow: glow === i ? `0 0 18px rgba(216,178,58,0.6)` : undefined }}>
             <div style={{ fontSize: big ? 48 : 30, fontWeight: 700, color: on ? ACC : MUTED }}>{i + 1}</div>
-            <div style={{ fontSize: big ? 26 : 22, color: INK, opacity: fo, lineHeight: 1.15 }}>{REASONS[i]}</div>
+            <div style={{ fontSize: 28, color: INK, opacity: fo, lineHeight: 1.1 }}>{REASONS[i]}</div>
           </div>
         );
       })}
@@ -559,7 +559,7 @@ const CosDial: React.FC<{ o: number; oMark: number }> = ({ o, oMark }) => {
         <Arrow p={O} q={[O[0] + 3 * U, O[1]]} color={TEAL} w={5} head={16} />
         <Arrow p={O} q={[O[0] + q[0] * U, O[1] - q[1] * U]} color={ORANGE} w={key === "0" ? 10 : 5} head={16} o={key === "0" ? 0.8 : 1} />
         <line x1={X(c)} y1={y - 10} x2={X(c)} y2={y + 10} stroke={INK} strokeWidth={3} />
-        <Lbl x={X(c)} y={y + 34} t={`cos ${cr[key].theta_deg.toFixed(0)}° = ${fx(c, 0)}`} s={26} a="middle" />
+        <Lbl x={X(c)} y={y + 34} t={`cos ${cr[key].theta_deg.toFixed(0)}° = ${fx(c, 0)}`} s={28} a="middle" />
       </g>
     );
   };
@@ -571,7 +571,7 @@ const CosDial: React.FC<{ o: number; oMark: number }> = ({ o, oMark }) => {
       {mini("180")}{mini("90")}{mini("0")}
       <g opacity={oMark}>
         <polygon points={`${X(pair.cos_theta)},${y - 4} ${X(pair.cos_theta) - 10},${y - 22} ${X(pair.cos_theta) + 10},${y - 22}`} fill={ACC} />
-        <Lbl x={X(pair.cos_theta)} y={y - 40} t={`${pair.cos_theta.toFixed(3)}`} c={ACC} s={26} a="middle" b />
+        <Lbl x={X(pair.cos_theta)} y={y - 40} t={`${pair.cos_theta.toFixed(3)}`} c={ACC} s={28} a="middle" b />
       </g>
     </g>
   );
@@ -615,7 +615,7 @@ const S05: React.FC = () => {
   const p = same.p as Pt;
   const caps = ["same direction: positive", "right angle: zero", "opposite directions: negative"];
   const lines = ["3 × 2 + 0 × 0", "3 × 0 + 0 × 2", "3 × (−2) + 0 × 0"];
-  const BIG = { o: [690, 250] as Pt, u: 90 };
+  const BIG = { o: [130, 255] as Pt, u: 90 };
   return (
     <Scene o={ramp(f, 0, 10)}>
       <Svg>
@@ -658,14 +658,15 @@ const S05: React.FC = () => {
           );
         })}
         {/* the large p, alone at the top centre before it is copied */}
-        <g opacity={oBig * (1 - fly)}>
-          <Arrow p={BIG.o} q={[BIG.o[0] + p[0] * BIG.u, BIG.o[1]]} color={TEAL} w={10} head={34} />
-          <Lbl x={BIG.o[0] + p[0] * BIG.u + 20} y={BIG.o[1] - 30} t="p" c={TEAL} s={48} b />
+        <g opacity={oBig}>
+          <Arrow p={BIG.o} q={[BIG.o[0] + p[0] * BIG.u, BIG.o[1]]} color={TEAL} w={12} head={36} />
+          <Lbl x={BIG.o[0] + p[0] * BIG.u + 20} y={BIG.o[1] - 28} t="p" c={TEAL} s={52} b />
+          <Lbl x={BIG.o[0] + p[0] * BIG.u * 0.5} y={BIG.o[1] + 36} t="p = (3, 0), fixed" c={TEAL} s={28} a="middle" />
         </g>
       </Svg>
-      <Chip text="p stays the same in all three pictures" x={1060} y={180} color={TEAL} o={oBig * (1 - ramp(f, t4 - 10, t4))} />
-      <Chip text="only q turns" x={1060} y={250} color={ORANGE} o={ramp(f, tQ, tQ + 12) * (1 - ramp(f, t4 - 10, t4))} />
-      <Txt x={0} y={215} w={1920} s={40} c={ACC} o={ramp(f, t4, t4 + 14)} align="center" bold>a·b measures how much two arrows point the same way</Txt>
+      <Chip text="p stays the same in all three pictures" x={1100} y={170} color={TEAL} o={oBig * (1 - ramp(f, t4 - 10, t4))} />
+      <Chip text="only q turns" x={1100} y={236} color={ORANGE} o={ramp(f, tQ, tQ + 12) * (1 - ramp(f, t4 - 10, t4))} />
+      <Txt x={480} y={228} w={1400} s={40} c={ACC} o={ramp(f, t4, t4 + 14)} align="center" bold>a·b measures how much two arrows point the same way</Txt>
     </Scene>
   );
 };
@@ -713,7 +714,7 @@ const S06: React.FC = () => {
       {ROW6.map((r, i) => (
         <Row key={i} x={X} y={[270, 398, 516][i]} w={W} tag="shadow:" latex={i === 2 && f >= tCancel ? ROW6_3_CANCEL : r.line}
           why={i === 2 ? <>divide both sides of <span style={{ color: lit > 0 ? ACC : MUTED, fontWeight: lit > 0 ? 700 : 400 }}>(1)</span> by |b|</> : r.why}
-          o={oR[i] * (f >= at[i + 1] ? 0.7 : 1)} />
+          o={oR[i]} />
       ))}
       <Row x={X} y={660} w={W} tag="shadow:" latex={EQ_SHADOW} d why="|b| cancels on the right; then our numbers" o={oR[3]} boxed size={30} />
       <GridNote />
@@ -921,6 +922,7 @@ const S11: React.FC = () => {
   const t = [0, 1, 2, 3, 4, 5, 6].map((j) => SS(k, j));
   const tD = AT(k, 5, "one hundred over ten");
   const oF = ramp(f, t[1], t[1] + 15), oLeg = ramp(f, t[2], t[2] + 15), dimUp = 1 - 0.6 * ramp(f, t[3] - 10, t[3] + 5);
+  const oAng = 1 - ramp(f, t[3] - 10, t[3] + 5); // the 60° arc fades with the upward leg
   const oSh = ramp(f, t[3], t[3] + 18), oForce = ramp(f, t[4], t[4] + 15), oW = ramp(f, t[5], t[5] + 18), oChip = ramp(f, t[6], t[6] + 12);
   const nd = work.d_m.length - 1;
   const kd = Math.round(clamp((f - tD) / 45, 0, 1) * nd);
@@ -944,10 +946,10 @@ const S11: React.FC = () => {
         {oW > 0 ? <ProdRect pts={rect} neg={false} o={oW} id="h11" /> : null}
         {oW > 0 ? <Lbl x={X0 + (dT[0] - X0) / 2} y={GY + work.shadow_N * RH / 2} t={`${work.shadow_N.toFixed(0)} N × ${dl} m = ${W.toFixed(0)} J`} s={28} a="middle" b o={oW} /> : null}
         <Arrow p={[X0, GY]} q={dT} color={ORANGE} o={oW} />
-        {oW > 0 ? <Lbl x={dT[0] - 4} y={GY - 30} t={`d = ${dl} m`} c={ORANGE} s={30} b o={oW} a="end" /> : null}
+        {oW > 0 ? <Lbl x={dT[0]} y={GY + work.shadow_N * RH + 26} t={`d = ${dl} m (distance pulled)`} c={ORANGE} s={30} b o={oW} a="end" /> : null}
         {/* the force and its two parts */}
         <Arrow p={[X0, GY]} q={Ft} color={TEAL} o={oF * (1 - 0.5 * oSh)} />
-        <g opacity={oF * (1 - 0.8 * oForce)}>
+        <g opacity={oF * oAng}>
           <Arc P={mkP(X0, GY, 1)} a0={0} a1={work.F_deg} r={60} />
           <Lbl x={X0 + 70} y={GY - 26} t={`${work.F_deg.toFixed(0)}°`} s={28} />
         </g>
@@ -964,7 +966,7 @@ const S11: React.FC = () => {
         {oSh > 0 ? <RightTick at={sh} u1={[-1, 0]} u2={[0, -1]} o={oSh} /> : null}
         <Lbl x={X0 + 60} y={GY + 30} t={`${work.shadow_N.toFixed(1)} N`} c={TEAL} s={26} a="middle" b o={oSh * (1 - oW)} />
         <Arrow p={[X0 - 8, GY - 42]} q={[X0 - 8 + work.shadow_N * FSC, GY - 42]} color={TEAL} w={8} head={22} o={oForce} />
-        <Lbl x={X0 - 8 + work.shadow_N * FSC + 12} y={GY - 50} t={`${work.shadow_N.toFixed(0)} N forward`} c={TEAL} s={26} b o={oForce} />
+        <Lbl x={X0 - 8 + work.shadow_N * FSC + 12} y={GY - 80} t={`${work.shadow_N.toFixed(0)} N forward`} c={TEAL} s={26} b o={oForce} />
         {/* the two rulers: force in N, path in m */}
         <g opacity={oF}>
           <line x1={80} y1={770} x2={80 + 20 * FSC} y2={770} stroke={TEAL} strokeWidth={3} />
@@ -1181,15 +1183,15 @@ const S13: React.FC = () => {
         <Arrow p={[1580, 538]} q={[1680, 508]} color={TEAL} w={6} head={20} o={oV} />
       </Svg>
       <Txt x={260} y={510} w={1300} s={30} c={TEAL} o={oV}>v = the wind (the velocity of the air)</Txt>
-      <Chip text="∇ = “grad”: explained in two scenes" x={260} y={568} size={26} color={MUTED} o={oV} />
+      <Chip text={<>∇φ (“grad φ”): how φ changes across the map</>} x={260} y={568} size={28} color={MUTED} o={oV} />
       {[TF_L, "=", TF_A, "+", TF_B].map((s, i) => (
         <div key={i} style={{ position: "absolute", left: tx[i], top: 700, transform: "translate(-50%, -50%)", opacity: oT,
           borderRadius: 40, boxShadow: i === 4 && oRing > 0 ? `0 0 0 ${3 + 2 * oRing}px rgba(42,161,152,${oRing})` : undefined, padding: "0 12px" }}>
           <TeXi s={s} size={52} c={i === 2 ? SLATE : i === 4 ? TEAL : INK} />
         </div>
       ))}
-      <Txt x={1430} y={660} w={460} s={28} c={TEAL} o={oT}>v·∇T = advection of temperature</Txt>
-      <Chip text="this dot = our dot product" x={1430} y={708} size={26} color={TEAL} o={oRing} />
+      <Txt x={1450} y={660} w={450} s={28} c={TEAL} o={oT}>v·∇T = advection of temperature</Txt>
+      <Chip text="this dot = our dot product" x={1450} y={708} size={28} color={TEAL} o={oRing} />
       <div style={{ position: "absolute", left: 600, top: 768, opacity: oQ * 0.85, ...FONT, fontSize: 28, color: MUTED, display: "flex", gap: 12, alignItems: "center" }}>
         moisture q: <TeXi s={EQ_VQ} size={32} c={MUTED} /> = advection of moisture
       </div>
@@ -1267,8 +1269,8 @@ const S15: React.FC = () => {
         <ColourBar />
         <Arrow p={P0} q={[P0[0] + GL * oG, P0[1]]} color={ORANGE} o={oG > 0 ? 1 : 0} w={8} halo />
         <Lbl x={P0[0] + GL + 14} y={P0[1]} t="∇T" c={ORANGE} s={38} b o={oG} />
-        <Bracket p={P0} q={[P0[0] + GL, P0[1]]} off={26} c={ORANGE} label="|∇T|" lo={26} s={28} o={oLen} />
-        <Lbl x={P0[0] + GL / 2} y={P0[1] - 36} t="uphill → warmer" c={ORANGE} s={26} b o={oUp} a="middle" />
+        <Bracket p={P0} q={[P0[0] + GL, P0[1]]} off={26} c={ORANGE} label="|∇T|" lo={28} s={30} o={oLen} />
+        <Lbl x={P0[0] + GL / 2} y={P0[1] - 36} t="uphill → warmer" c={ORANGE} s={30} b o={oUp} a="middle" />
         <circle cx={P0[0]} cy={P0[1]} r={7} fill={INK} stroke={HOUSE.bg} strokeWidth={2} />
       </Svg>
       <TeX s={oNum > 0.5 ? EQ_GRAD : GRAD_A} x={RX} y={172} size={oNum > 0.5 ? 30 : 38} o={oG} d />
@@ -1279,7 +1281,7 @@ const S15: React.FC = () => {
       <Chip text="1 K step = 1 °C step;  100 km = 10⁵ m" x={RX} y={460} size={28} color={MUTED} o={oNum} />
       <Txt x={RX} y={550} w={RW} s={30} c={ORANGE} o={oUp} bold>∇T points uphill, towards warmer air, straight across the isotherms</Txt>
       <Txt x={RX} y={650} w={RW} s={30} o={oLen}>|∇T| = {sci(wx.norm_gradT)} K/m = how steep the map is</Txt>
-      <Txt x={RX} y={710} w={RW} s={24} c={MUTED} o={oLen}>(the arrow has its own scale, in K/m; the bracket gives its value)</Txt>
+      <Txt x={RX} y={706} w={RW} s={28} c={MUTED} o={oLen}>(the arrow has its own scale, in K/m; the bracket gives its value)</Txt>
     </Scene>
   );
 };
@@ -1326,14 +1328,14 @@ const S16: React.FC = () => {
         </g> : null}
       </Svg>
       <TeX s={EQ_TF_HL} x={RX} y={150} size={30} d />
-      <Txt x={RX} y={248} w={RW} s={28} c={TEAL} o={oV}>a new wind: |v| = {wx.norm_v.toFixed(0)} m/s, {wx.angle_deg.toFixed(0)}° from ∇T</Txt>
+      <Txt x={RX} y={248} w={RW} s={28} c={TEAL} o={oV}>the wind (as the balloon’s): |v| = {wx.norm_v.toFixed(0)} m/s, {wx.angle_deg.toFixed(0)}° from ∇T</Txt>
       <Txt x={RX} y={290} w={RW} s={28} c={TEAL} o={oS}>shadow of v on ∇T = 10 × cos 60° = <b>{wx.shadow_m_s.toFixed(2)} m/s</b><br /><span style={{ color: INK }}>= speed straight towards warmer air</span></Txt>
       <TeX s={EQ_VGT} x={RX} y={390} size={36} o={oE} />
       <TeX s={"= " + VGTN[0]} x={RX + 60} y={448} size={32} o={oE1} />
       <Txt x={RX + 60} y={500} w={RW - 60} s={26} c={MUTED} o={oU}>units: (<s>m</s>/s) × (K/<s>m</s>) = K/s</Txt>
       <TeX s={"= " + VGTN[1]} x={RX + 60} y={548} size={32} o={oE2} />
       <TeX s={String.raw`\times 3600\ \mathrm{s\ per\ hour} = ` + VGTN[2]} x={RX + 60} y={604} size={32} o={oE3} />
-      <Chip text={`components: ${VV[0].toFixed(2)} × ${sci(wx.gradT[0])} + ${VV[1].toFixed(2)} × 0 = ${sci(wx.v_dot_gradT)} ✓`} x={RX} y={672} w={RW} size={26} color={MUTED} o={oChk} />
+      <Chip text={`components: ${VV[0].toFixed(2)} × ${sci(wx.gradT[0])} + ${VV[1].toFixed(2)} × 0 = ${sci(wx.v_dot_gradT)} ✓`} x={RX} y={668} w={RW} size={28} color={MUTED} o={oChk} />
     </Scene>
   );
 };
@@ -1439,9 +1441,9 @@ const S18: React.FC = () => {
       <Chip text="the air carries its temperature, so the pattern slides with the wind" x={X} y={636} w={W} size={26} color={ORANGE} o={ramp(f, tSlide, tSlide + 12)} />
       <Txt x={110} y={1036} w={1200} s={22} c={MUTED} o={ramp(f, 6, 18)}>tag = the parcel’s own temperature: it never changes · clock: 1 h in 4 s</Txt>
       {ROW18.map((r, i) => (
-        <Row key={i} x={X} y={160 + i * 118} w={W} latex={r.line} why={`${i + 1} · ${r.why}`} o={ramp(f, at[i], at[i] + 12) * (cur > i ? 0.65 : 1)} size={34} boxed={i === 3} />
+        <Row key={i} x={X} y={160 + i * 118} w={W} latex={r.line} why={`${i + 1} · ${r.why}`} o={ramp(f, at[i], at[i] + 12)} size={34} boxed={i === 3} />
       ))}
-      <EqBox latex={EQ_DTDT} x={X} y={704} w={W} h={100} size={34} o={ramp(f, Math.min(SE(k, 3) + 6, LEN(k) - 30), Math.min(SE(k, 3) + 18, LEN(k) - 18))} />
+      <EqBox latex={EQ_DTDT} x={X} y={704} w={W} h={100} size={34} o={ramp(f, t[3] + 36, t[3] + 48)} />
     </Scene>
   );
 };
@@ -1453,12 +1455,20 @@ const S19: React.FC = () => {
   const t = [0, 1, 2, 3].map((j) => SS(k, j));
   const g = GM, P0 = gP(g, PIN);
   const n = wx.t_h.length - 1; // 121 samples over 6 h
-  const runF = Math.min(180, LEN(k) - t[3] - 24); // 6 h of weather, finished before the cut
-  const run = clamp((f - t[3] - 6) / runF, 0, 1), kx = run * n, hours = atIdx(wx.t_h, kx);
+  // M1 (review 4): the clock follows sentence 4 — 0 h on "thirteen", 1 h on "twelve point eight two", 2 h on
+  // "twelve point six four" (about 1 h per 1.6 s), then on at the same pace to 3 h (12.46 °C, the third upwind dot) and
+  // holds there: running on to 6 h would need 4 h in the last ~2 s of the scene, racing past the spoken 12.64.
+  const h0 = AT(k, 3, "thirteen"), h1 = AT(k, 3, "twelve point eight two"), h2 = AT(k, 3, "twelve point six four");
+  const hours = f < h0 ? 0 : f < h1 ? (f - h0) / (h1 - h0) : Math.min(3, 1 + (f - h1) / (h2 - h1));
+  const secPerH = (h2 - h0) / 2 / FPS;
+  const run = hours / 6, kx = run * n;
   const Tpole = atIdx(wx.T_pole, kx), shift = atIdx(wx.shift_km, kx);
   const balk: Pt = [atIdx(wx.balloon6_x_km, kx), atIdx(wx.balloon6_y_km, kx)];
-  const offMap = balk[1] > GM.h;
+
   const bal = gP(g, balk);
+  const balDX = 40 * (1 - clamp(hours / 0.6, 0, 1));                        // beside the pole while both are at the pin
+  const oBalIn = clamp((bal[1] - 97 - g.my) / 30, 0, 1);                     // icon top (97 px above the anchor) inside the map
+  const offMap = oBalIn < 0.5;
   const oUp = ramp(f, t[1], t[1] + 14), oDots = ramp(f, t[2], t[2] + 14), oChip = ramp(f, AT(k, 2, "in two hours"), AT(k, 2, "in two hours") + 12);
   const far = gP(g, [PIN[0] - VV[0] * 4 * 3.6, PIN[1] - VV[1] * 4 * 3.6]); // 4 h upwind (km)
   const vs = vScr(US), vT: Pt = [P0[0] + vs[0], P0[1] + vs[1]];
@@ -1489,15 +1499,18 @@ const S19: React.FC = () => {
         <Arrow p={P0} q={vT} color={TEAL} w={6} halo />
         <Lbl x={P0[0] + GL + 10} y={P0[1]} t="∇T" c={ORANGE} s={30} b />
         <Lbl x={vT[0] + 10} y={vT[1] - 4} t="v" c={TEAL} s={30} b />
-        {!offMap ? <BalloonThermometer x={bal[0]} y={bal[1]} s={0.55} o={run > 0 ? 1 : 0} /> : null}
-        {!offMap && run > 0 ? <Lbl x={bal[0] + 26} y={bal[1] - 96} t="balloon: 13.00 °C" c={INK} s={24} b /> : null}
+        {/* S1: the balloon is shown from the start (drawn just right of the pole while they share the pin) and fades
+            out at the top edge of the map; then a tag on the map says where it went */}
+        <BalloonThermometer x={bal[0] + balDX} y={bal[1]} s={0.55} o={oBalIn} />
+        <Lbl x={bal[0] + balDX + 24} y={bal[1] - 66} t="balloon: 13.00 °C" c={INK} s={26} b o={clamp(2 * oBalIn - 1, 0, 1)} />
+        <Lbl x={clamp(bal[0], g.mx + 200, g.mx + g.w * g.km - 200)} y={g.my + 24} t="balloon (off the map): 13.00 °C" c={INK} s={26} b a="middle" o={clamp(1 - 2 * oBalIn, 0, 1)} />
         <PoleThermometer x={P0[0]} y={P0[1]} s={0.8} />
         <Lbl x={P0[0] - 26} y={P0[1] - 130} t={`pole: ${Tpole.toFixed(2)} °C`} c={INK} s={30} a="end" b />
       </Svg>
       <TeX s={rep(EQ_P19, "= -0.180", `= ${col(ROSE, "-")}0.180`)} x={RX} y={160} size={32} d />
       <div style={{ position: "absolute", left: RX, top: 250, width: RW, ...FONT, fontSize: 28, background: HOUSE.panel,
         borderRadius: 12, padding: "10px 18px", boxSizing: "border-box", lineHeight: 1.4 }}>
-        <div style={{ color: MUTED, fontSize: 26 }}>clock: 6 h in 6 s · t = {hours.toFixed(2)} h</div>
+        <div style={{ color: MUTED, fontSize: 28 }}>clock: 1 h in {secPerH.toFixed(1)} s · t = {hours.toFixed(2)} h</div>
         <div>pole (fixed): <b>{Tpole.toFixed(2)} °C</b></div>
         <div>balloon{offMap ? " (off the map)" : ""}: <b>13.00 °C</b>, keeps its temperature</div>
       </div>
@@ -1552,7 +1565,7 @@ const S20: React.FC = () => {
         </div>
       </div>
       <div style={{ position: "absolute", left: 0, top: 660 - 965, width: 1920, height: 1080 }}><Slots filled={[0, 1, 2]} glow={oCard > 0.5 ? 2 : -1} o={oCard} /></div>
-      <Txt x={RX} y={740} w={RW} s={26} c={GOLD} o={ramp(f, t[3] + 20, t[3] + 32)} align="right">reason 3: the dot product holds both sizes</Txt>
+      <Txt x={RX} y={758} w={RW} s={28} c={GOLD} o={ramp(f, t[3] + 20, t[3] + 32)} align="right">reason 3: the dot product holds both sizes</Txt>
     </Scene>
   );
 };
