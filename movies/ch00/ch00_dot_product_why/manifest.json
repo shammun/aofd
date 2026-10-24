@@ -77,21 +77,16 @@
    300.0,
    180.0
   ],
-  "time_compression": {
-   "s12": "1 h in 3 s (×1200)",
-   "s17": "1 h in 4 s (×900)",
-   "s18": "1 h in 4 s (×900)",
-   "s19_s20": "6 h in 6 s (×3600)"
-  },
+  "time_compression": "1 h in 2.127 s (x 1693), one rate for s12, s18, s19a, s20",
   "parcel_seed": 20261022
  },
  "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
  "data_files": {
-  "pair.json": "ec7c145429097558e86eebcd38f4b4d257e0abb3002d6072221900859fd9ffe6",
+  "pair.json": "7bbc6400120019670f95d433f961c2a2845b45824d1c4c90875baf7ccb973f76",
   "same_way.json": "7ce05570c0317941c5ee1f02fea9d4a3c595553c505c54132c25803ded35b7f6",
   "cheap.json": "433ed377a8912c9209899b6b6910083f91f0f61f2c43d36fbf809be0b0cae815",
-  "work.json": "1ed37614bdf50355da44bc21edb2a669a46804c103045a7086b8e42b52e771ac",
-  "weather.json": "73a9aa8a5edfa2cac1adc6ca1e73b40e5f3746d09d4229073885907d55a67d00"
+  "work.json": "bd2cf9107a88824e82d626427d12d59c7cb29373dc4a4e434937e166cbd355d4",
+  "weather.json": "421d08bcf97cdf1d66ae5f8cc00f756454a597b211516824719ce02761c59e47"
  },
  "checks": [
   {
@@ -960,6 +955,462 @@
     1.0
    ],
    "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N1 display product 5.099 × 3.162 × 0.496 within 0.005 of 8",
+   "value": [
+    0.002973
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "name": "N1 display product is NOT 8.000 to 3 dp (so the screen says ≈ 8)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N1 display factors (5.099, 3.162, 0.496)",
+   "value": [
+    5.099,
+    3.162,
+    0.496
+   ],
+   "ref": [
+    5.099,
+    3.162,
+    0.496
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N2 display b̂ = (0.316, 0.949); terms 1.580, 0.949; sum 2.529",
+   "value": [
+    0.316,
+    0.949,
+    1.58,
+    0.949
+   ],
+   "ref": [
+    0.316,
+    0.949,
+    1.58,
+    0.949
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N2 |display sum − a·b̂| < 0.005",
+   "value": [
+    0.000822
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "name": "N3 v_along·∇T = 0",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "N3 v_along[1] = 10 sin 60° = 8.660254",
+   "value": [
+    8.660254
+   ],
+   "ref": [
+    8.660254
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "N4 chain G1 = [5.00, 1.00e-5, 5.00e-5, 0.18]",
+   "value": [
+    5.0,
+    1e-05,
+    5e-05,
+    0.18
+   ],
+   "ref": [
+    5.0,
+    1e-05,
+    5e-05,
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N4 chain G2 = [5.00, 2.00e-5, 1.00e-4, 0.36]",
+   "value": [
+    5.0,
+    2e-05,
+    0.0001,
+    0.36
+   ],
+   "ref": [
+    5.0,
+    2e-05,
+    0.0001,
+    0.36
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N4 1 °C/100 km = 1 K/1e5 m = 1e-5 K/m; 1 °C/50 km = 2e-5 K/m",
+   "value": [
+    1e-05,
+    2e-05
+   ],
+   "ref": [
+    1e-05,
+    2e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "N5 isotherm shift after 1 h = 18.0 km (t index 60)",
+   "value": [
+    18.0
+   ],
+   "ref": [
+    18.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N5 shift after 3 h = 54.0 km",
+   "value": [
+    54.0
+   ],
+   "ref": [
+    54.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "profile: 13.00 °C at the pin (300 km), both maps",
+   "value": [
+    13.0,
+    13.0
+   ],
+   "ref": [
+    13.0,
+    13.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N6 T_pole_field = 13 − 0.18 t",
+   "value": [
+    13.0,
+    12.997,
+    12.994,
+    12.991
+   ],
+   "ref": [
+    13.0,
+    12.997,
+    12.994,
+    12.991
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N6 T_pole_field at 0, 1, 2, 3 h = 13.00, 12.82, 12.64, 12.46",
+   "value": [
+    13.0,
+    12.82,
+    12.64,
+    12.46
+   ],
+   "ref": [
+    13.0,
+    12.82,
+    12.64,
+    12.46
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N6 material_derivative_terms local at the pin = −5.00e-5 K/s",
+   "value": [
+    -5e-05
+   ],
+   "ref": [
+    -5e-05
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "N7 T_balloon_field = 13.00 all along",
+   "value": [
+    13.0,
+    13.0,
+    13.0,
+    13.0
+   ],
+   "ref": [
+    13.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N7 material_derivative_terms total at the balloon after 1, 2, 3 h = 0",
+   "value": [
+    -0.0,
+    -0.0,
+    -0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N7 balloon inside the map up to 3 h",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N8 moved = +0.18, +0.36, +0.54 K",
+   "value": [
+    0.18,
+    0.36,
+    0.54
+   ],
+   "ref": [
+    0.18,
+    0.36,
+    0.54
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N8 local = −0.18, −0.36, −0.54 K",
+   "value": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "ref": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 sums = 0",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 T_under_balloon[1] = 13.18 °C (t = 0 map)",
+   "value": [
+    13.18
+   ],
+   "ref": [
+    13.18
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 the 13.18 °C line of the t = 0 map lies under the 1-h balloon (x = 318 km)",
+   "value": [
+    318.0
+   ],
+   "ref": [
+    318.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N9 upwind far point (228.0, 55.29) km inside the map",
+   "value": [
+    228.0,
+    55.292342,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    228.0,
+    55.292342,
+    1.0,
+    1.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "upwind dot tracks reach the pole at 1, 2, 3 h",
+   "value": [
+    300.0,
+    300.0,
+    300.0
+   ],
+   "ref": [
+    300.0,
+    300.0,
+    300.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N10 across 18.0 km, along 36.0 km",
+   "value": [
+    18.0,
+    36.0
+   ],
+   "ref": [
+    18.0,
+    36.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N11 steep isotherms at 50..550 km, spacing 50 km",
+   "value": [
+    50.0,
+    550.0,
+    0.0,
+    50.0
+   ],
+   "ref": [
+    50.0,
+    550.0,
+    0.0,
+    50.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N11 steep pole 13.00 → 12.64 after 1 h (field)",
+   "value": [
+    13.0,
+    12.64
+   ],
+   "ref": [
+    13.0,
+    12.64
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N12 10.000 × 5 + 17.321 × 0 = 50 J = W(5 m)",
+   "value": [
+    50.0,
+    0.0,
+    50.0
+   ],
+   "ref": [
+    50.0,
+    0.0,
+    50.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "0.18 °C per 18 km: 18 km × 1 °C/100 km = v·∇T × 1 h",
+   "value": [
+    0.18
+   ],
+   "ref": [
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "s08 rectangle on b, right side: corners (0.8, 2.4), (3.8, 1.4), (3, −1); area 8",
+   "value": [
+    0.8,
+    2.4,
+    3.8,
+    1.4
+   ],
+   "ref": [
+    0.8,
+    2.4,
+    3.8,
+    1.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "s09 rectangle on a, upper side: corner (0.538, 5.308); area 8",
+   "value": [
+    0.538462,
+    5.307692,
+    8.0
+   ],
+   "ref": [
+    0.538462,
+    5.307692,
+    8.0
+   ],
+   "tol": 1e-06,
    "pass": true
   }
  ],
@@ -2935,6 +3386,121 @@
     ]
    },
    "sha256": "cef251bc7556e4ff781aacc7e4145690a4fdea17fb6ebacf0cac4d9e4844b921"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s16a",
+   "data": "data/weather.json",
+   "eq": "v_along·∇T = 0: moving along an isotherm brings no change (ours)",
+   "params": {
+    "a": [
+     0.0,
+     8.660254037844
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s18,s19a",
+   "data": "data/weather.json",
+   "eq": "eastward speed of the pattern v·x̂ (ours)",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "0bf19ea2196f4741047bdb908aa93b702a228a01c6a0bf5709c028ec0d4eb464"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19c",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 1 h: moved to a spot that was warmer (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     18000.000000000004,
+     31176.914536239787
+    ]
+   },
+   "sha256": "00beeaba34073f4125606af21f0010aba49a5f56e2aa67d947337f22961d5411"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19c",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 2 h: moved to a spot that was warmer (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     36000.00000000001,
+     62353.82907247957
+    ]
+   },
+   "sha256": "59f4a8fde7b17e35f3f833d7329a0817f2f93cb97f1028eb5668bae0779deebe"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19c",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 3 h: moved to a spot that was warmer (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     54000.000000000015,
+     93530.74360871936
+    ]
+   },
+   "sha256": "5b2c561dfb0f5e580bc560865c47a51d669570c9a5ae1d198631ecc66deec1ec"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s17",
+   "data": "data/weather.json",
+   "eq": "across-isotherm distance of the 1-h upwind dot (m, ours)",
+   "params": {
+    "a": [
+     18000.0,
+     31176.914536239783
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "2fa4675962505918931205bbcff81f831fcc59cb369f26539d05b290d1a6fa95"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s17",
+   "data": "data/weather.json",
+   "eq": "along-wind distance of the 1-h upwind dot (m)",
+   "params": {
+    "a": [
+     18000.0,
+     31176.914536239783
+    ]
+   },
+   "sha256": "08f0be3545f518a1803e712788ab65f1fc96ebebd79d01365ebfb52063b8b12c"
   }
  ]
 }

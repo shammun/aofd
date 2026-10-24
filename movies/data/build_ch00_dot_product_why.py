@@ -1,5 +1,5 @@
 """Physics data for the Chapter-0A movie "What the dot product measures, and why it multiplies by the other length"
-(movies/ch00/ch00_dot_product_why/storyboard.yaml, version 4: 22 scenes).
+(movies/ch00/ch00_dot_product_why/storyboard.yaml, version 5: 25 scenes; v5 adds N1-N12).
 
 Run with the main venv::
 
@@ -92,6 +92,22 @@ def thermal_lut(n: int = 64) -> list[str]:
     rgb = np.frombuffer(base64.b64decode(tab), dtype=np.uint8).reshape(-1, 3)
     idx = np.round(np.linspace(0, len(rgb) - 1, n)).astype(int)
     return ["#%02x%02x%02x" % tuple(int(c) for c in rgb[i]) for i in idx]
+
+
+def clock_rate() -> str:
+    """ONE model clock for s12, s18, s19a, s20 (storyboard clock_rate): 0 h on the spoken 'thirteen' and 3 h on
+    'twelve point four six' in s19a sentence 2 (clip-proportional character times from timing.json, the same rule as
+    AT() in DotProductWhy.tsx)."""
+    tp = OUT / "timing.json"
+    if not tp.exists():
+        return "timing.json missing"
+    sc = {s["id"]: s for s in json.loads(tp.read_text(encoding="utf-8"))["scenes"]}.get("s19a_pole_cools")
+    if sc is None:
+        return "s19a not in timing.json"
+    s = sc["sentences"][1]
+    at = lambda ph: s["start"] + (s["end"] - s["start"]) * s["text"].index(ph) / len(s["text"])  # noqa: E731
+    sec_per_h = (at("twelve point four six") - at("thirteen")) / 3.0
+    return f"1 h in {sec_per_h:.3f} s (x {3600 / sec_per_h:.0f}), one rate for s12, s18, s19a, s20"
 
 
 def main() -> int:
@@ -362,6 +378,136 @@ def main() -> int:
                "upwind_t_h": up_t_h, "upwind_x_km": r6(up_x), "upwind_y_km": r6(up_y), "upwind_dT_K": r6(up_dT),
                "upwind_T_C": r6(up_T), "balloon6_x_km": r6(bal6_x), "balloon6_y_km": r6(bal6_y)}
 
+    # ================================================================== v5 additions (storyboard new_builder_data N1-N12)
+    # N1 (s04): the display product of the rounded factors (R1): 5.099 × 3.162 × 0.496 = 7.997, shown "≈ 8"
+    cos_th = float(np.cos(np.radians(th)))
+    dcf = [round(float(na), 3), round(float(nb), 3), round(cos_th, 3)]
+    dcp = dcf[0] * dcf[1] * dcf[2]
+    row("N1 display product 5.099 × 3.162 × 0.496 within 0.005 of 8", abs(dcp - 8.0), 0.0, 0.005)
+    row("N1 display product is NOT 8.000 to 3 dp (so the screen says ≈ 8)", round(dcp, 3) != 8.0, 1, 0)
+    row("N1 display factors (5.099, 3.162, 0.496)", dcf, [5.099, 3.162, 0.496], 1e-12)
+    # N2 (s07): the display sum with the shown digits (R2): 5 × 0.316 + 1 × 0.949 = 2.529, shown "≈ 2.53"
+    dbh = [round(float(bhat[0]), 3), round(float(bhat[1]), 3)]
+    dbt = [A[0] * dbh[0], A[1] * dbh[1]]
+    dbs = dbt[0] + dbt[1]
+    row("N2 display b̂ = (0.316, 0.949); terms 1.580, 0.949; sum 2.529", [*dbh, *dbt, dbs],
+        [0.316, 0.949, 1.58, 0.949, 2.529], 1e-9)
+    row("N2 |display sum − a·b̂| < 0.005", abs(dbs - a_bhat), 0.0, 0.005)
+    # N3 (s16a): the along-isotherm part brings no change (recorded dot) and 10 sin 60° = 8.660
+    along_dot = call(VEC + "dot", "s16a", fw, "v_along·∇T = 0: moving along an isotherm brings no change (ours)",
+                     a=np.round(v_along, 12).tolist(), b=gT)
+    row("N3 v_along·∇T = 0", along_dot, 0.0, 1e-18)
+    row("N3 v_along[1] = 10 sin 60° = 8.660254", v_along[1], V_SPEED * np.sin(np.radians(V_DEG)), 1e-6)
+    # N4 (s16b, s20): the display chains [shadow m/s, |∇T| K/m, v·∇T K/s, K per hour]
+    chain1 = [float(sh_v1), float(ngrad), float(adv1), float(adv1 * 3600)]
+    chain2 = [float(sh_v2), float(V.norm(g2)), float(adv2), float(adv2 * 3600)]
+    row("N4 chain G1 = [5.00, 1.00e-5, 5.00e-5, 0.18]", chain1, [5.0, 1e-5, 5e-5, 0.18], 1e-12)
+    row("N4 chain G2 = [5.00, 2.00e-5, 1.00e-4, 0.36]", chain2, [5.0, 2e-5, 1e-4, 0.36], 1e-12)
+    row("N4 1 °C/100 km = 1 K/1e5 m = 1e-5 K/m; 1 °C/50 km = 2e-5 K/m", [1.0 / 1e5, 1.0 / 5e4], [G1, G2], 1e-18)
+    # N5 (s18, s19a): sliding isotherms, one sample per minute over 0-3 h; shift = scalar_projection(v, x̂) t
+    iso_t_h = np.linspace(0.0, 3.0, 181)
+    v_east = call(VEC + "scalar_projection", "s18,s19a", fw, "eastward speed of the pattern v·x̂ (ours)",
+                  a=v.tolist(), b=[1.0, 0.0])
+    iso5_T = np.arange(10.0, 17.0)                                        # 10..16 °C
+    iso5_x0 = (iso5_T - T_WEST) / G1 / 1e3                                # 0..600 km at t = 0
+    iso_shift = float(v_east) * iso_t_h * 3600 / 1e3                      # km
+    iso_x = iso5_x0[:, None] + iso_shift[None, :]
+    row("N5 isotherm shift after 1 h = 18.0 km (t index 60)", iso_x[3, 60] - iso_x[3, 0], 18.0, 1e-9)
+    row("N5 shift after 3 h = 54.0 km", iso_shift[-1], 54.0, 1e-9)
+    # the map field T(x, t) = T_west + G (x − v_x t) evaluated on the 5-km profile (the composition only interpolates it)
+    prof_x = np.arange(-200.0, 800.0 + 1e-9, 5.0)                         # km, wide enough for 3 h of sliding
+    T_field = lambda xk, t_s, G=G1, Tw=T_WEST: Tw + G * (np.asarray(xk) * 1e3 - vx * t_s)  # noqa: E731
+    prof_T1 = T_field(prof_x, 0.0)
+    prof_T2 = T_field(prof_x, 0.0, G2, T_west2)
+    row("profile: 13.00 °C at the pin (300 km), both maps", [np.interp(300, prof_x, prof_T1), np.interp(300, prof_x, prof_T2)],
+        [13.0, 13.0], 1e-12)
+    # N6 (s19a): the pole series evaluated on the sliding field (not the formula)
+    pin_m = np.array(PIN_KM) * 1e3
+    T_pole_field = T_field(PIN_KM[0], iso_t_h * 3600)
+    row("N6 T_pole_field = 13 − 0.18 t", T_pole_field, 13.0 - 0.18 * iso_t_h, 1e-9)
+    row("N6 T_pole_field at 0, 1, 2, 3 h = 13.00, 12.82, 12.64, 12.46", T_pole_field[[0, 60, 120, 180]],
+        [13.0, 12.82, 12.64, 12.46], 1e-9)
+    row("N6 material_derivative_terms local at the pin = −5.00e-5 K/s", mdt_rows["G1"]["local_K_s"], -5e-5, 1e-15)
+    # N7 (s19a): the balloon series on the sliding field, and DT/Dt = 0 at its positions after 1, 2, 3 h
+    bal_xm = pin_m[0] + v[0] * iso_t_h * 3600
+    T_balloon_field = T_field(bal_xm / 1e3, iso_t_h * 3600)
+    row("N7 T_balloon_field = 13.00 all along", T_balloon_field, 13.0, 1e-9)
+    Tf1 = lambda x, t: T_WEST + G1 * (x[0] - vx * t)  # noqa: E731
+    uf1 = lambda x, t: np.array([v[0], v[1]])  # noqa: E731
+    bal_mdt = []
+    for n in (1, 2, 3):
+        xb = pin_m + v * n * 3600.0
+        md = material_derivative_terms(Tf1, uf1, xb, n * 3600.0, h=10.0, ht=10.0)
+        bal_mdt.append(float(f"{md.total:.6e}"))
+    row("N7 material_derivative_terms total at the balloon after 1, 2, 3 h = 0", bal_mdt, [0, 0, 0], 1e-12)
+    row("N7 balloon inside the map up to 3 h", [bal_x[-1] < MAP_KM[0], bal_y[-1] < MAP_KM[1]], [1, 1], 0)
+    # N8 (s19c): the balance as bookkeeping: moved to a spot that read +0.18 t warmer on the t = 0 map; local −0.18 t
+    bal_t = [1, 2, 3]
+    moved, local = [], []
+    for n in bal_t:
+        mv = call(VEC + "dot", "s19c", fw, f"∇T·(v t), t = {n} h: moved to a spot that was warmer (ours)",
+                  a=gT, b=(np.asarray(v) * n * 3600.0).tolist())
+        moved.append(float(mv))
+        xb = (pin_m[0] + v[0] * n * 3600.0) / 1e3
+        local.append(float(T_field(xb, n * 3600.0) - T_field(xb, 0.0)))
+    bsum = [m + lo for m, lo in zip(moved, local)]
+    row("N8 moved = +0.18, +0.36, +0.54 K", moved, [0.18, 0.36, 0.54], 1e-12)
+    row("N8 local = −0.18, −0.36, −0.54 K", local, [-0.18, -0.36, -0.54], 1e-9)
+    row("N8 sums = 0", bsum, [0, 0, 0], 1e-9)
+    row("N8 T_under_balloon[1] = 13.18 °C (t = 0 map)", T_under1, 13.18, 1e-9)
+    iso_1318_x0 = (T_under1 - T_WEST) / G1 / 1e3
+    row("N8 the 13.18 °C line of the t = 0 map lies under the 1-h balloon (x = 318 km)", iso_1318_x0, bal_x[60], 1e-9)
+    # N9 (s17, s19a): the upwind track's far end, 4 h upwind
+    far = np.array(PIN_KM) - v * 4 * 3600.0 / 1e3
+    row("N9 upwind far point (228.0, 55.29) km inside the map", [*far, far[0] > 0, far[1] > 0], [228.0, 55.29234186, 1, 1], 1e-6)
+    # upwind dots drifting with the air (per-minute tracks; each reaches the pole at n hours and stops there)
+    up_tr_x = [np.minimum(up_x[i] + v[0] * iso_t_h * 3600 / 1e3, PIN_KM[0]).tolist() for i in range(3)]
+    up_tr_y = [np.minimum(up_y[i] + v[1] * iso_t_h * 3600 / 1e3, PIN_KM[1]).tolist() for i in range(3)]
+    row("upwind dot tracks reach the pole at 1, 2, 3 h", [up_tr_x[i][60 * (i + 1)] for i in range(3)], [300, 300, 300], 1e-9)
+    # N10 (s17): across-isotherm and along-wind distance of the 1-h upwind dot
+    off1 = (pin_m - np.array([up_x[0], up_y[0]]) * 1e3).tolist()
+    across1 = call(VEC + "scalar_projection", "s17", fw, "across-isotherm distance of the 1-h upwind dot (m, ours)",
+                   a=off1, b=gT)
+    along1 = call(VEC + "norm", "s17", fw, "along-wind distance of the 1-h upwind dot (m)", a=off1)
+    row("N10 across 18.0 km, along 36.0 km", [across1 / 1e3, along1 / 1e3], [18.0, 36.0], 1e-9)
+    # N11 (s20): isotherms of the steep map, every 50 km (8..18 °C), sliding on the same clock
+    isoS_T = np.arange(8.0, 19.0)
+    isoS_x0 = (isoS_T - T_west2) / G2 / 1e3
+    isoS_x = isoS_x0[:, None] + iso_shift[None, :]
+    row("N11 steep isotherms at 50..550 km, spacing 50 km", [isoS_x0[0], isoS_x0[-1], np.ptp(np.diff(isoS_x0)),
+                                                            np.diff(isoS_x0)[0]], [50, 550, 0, 50], 1e-9)
+    T_pole_steep_field = T_field(PIN_KM[0], iso_t_h * 3600, G2, T_west2)
+    row("N11 steep pole 13.00 → 12.64 after 1 h (field)", T_pole_steep_field[[0, 60]], [13.0, 12.64], 1e-9)
+    # N12 (s11): work by components
+    wct = [float(Fv[0] * D5[0]), float(Fv[1] * D5[1])]
+    row("N12 10.000 × 5 + 17.321 × 0 = 50 J = W(5 m)", [*wct, sum(wct)], [50.0, 0.0, W_series[0]], 1e-9)
+    # s17 / s19b / s19c display numbers
+    row("0.18 °C per 18 km: 18 km × 1 °C/100 km = v·∇T × 1 h", 18.0 * 1.0 / 100.0, float(adv1 * 3600), 1e-12)
+
+    # v5 layout: the product rectangles on the side that fits the larger pair plane (same areas, k_cross sides)
+    rect_b_right = [[0, 0], list(p_ab), list(np.asarray(p_ab) - kb), list(-np.asarray(kb))]
+    rect_a_up = [[0, 0], list(p_ba), list(np.asarray(p_ba) + ka), list(ka)]
+    row("s08 rectangle on b, right side: corners (0.8, 2.4), (3.8, 1.4), (3, −1); area 8",
+        [*np.ravel(rect_b_right[1:]), sh_ab * V.norm(kb)], [0.8, 2.4, 3.8, 1.4, 3, -1, 8.0], 1e-9)
+    row("s09 rectangle on a, upper side: corner (0.538, 5.308); area 8", [*rect_a_up[2], sh_ba * V.norm(ka)],
+        [0.538462, 5.307692, 8.0], 1e-6)
+    pair.update({"rect_on_b_right": r6(rect_b_right), "rect_on_a_up": r6(rect_a_up),
+                 "display_cos_factors": dcf, "display_cos_product": round(dcp, 6),
+                 "display_bhat": dbh, "display_bhat_terms": r6(dbt), "display_bhat_sum": round(dbs, 6)})
+    work.update({"work_component_terms": r6(wct)})
+    weather.update({
+        "along_dot_gradT": float(along_dot), "v_along_check_10sin60": r6(v_along[1]),
+        "chain_G1": chain1, "chain_G2": chain2,
+        "iso_t_h": r6(iso_t_h), "iso_T_C": r6(iso5_T), "iso_x_km": r6(iso_x), "iso_shift_km": r6(iso_shift),
+        "prof_x_km": r6(prof_x), "prof_T_C": r6(prof_T1), "prof_T_steep_C": r6(prof_T2),
+        "T_pole_field_C": r6(T_pole_field), "T_balloon_field_C": r6(T_balloon_field), "balloon_mdt_total_K_s": bal_mdt,
+        "balance_t_h": bal_t, "balance_moved_K": r6(moved), "balance_local_K": r6(local), "balance_sum_K": r6(bsum),
+        "iso_1318_x0_km": r6(iso_1318_x0),
+        "upwind_far_km": r6(far), "upwind_track_x_km": r6(up_tr_x), "upwind_track_y_km": r6(up_tr_y),
+        "across_km_1h": r6(across1 / 1e3), "along_km_1h": r6(along1 / 1e3),
+        "isotherms_steep_T_C": r6(isoS_T), "isotherms_steep_km": r6(isoS_x0), "isotherms_steep_x_km": r6(isoS_x),
+        "T_pole_steep_field_C": r6(T_pole_steep_field)})
+
     for r in rows:
         print(f"  {'PASS' if r['pass'] else 'FAIL'}  {r['name']}")
     if not all(r["pass"] for r in rows):
@@ -392,8 +538,7 @@ def main() -> int:
                        "F_angle_deg": F_DEG, "d_m": [5, 10], "v_speed_m_s": V_SPEED, "v_angle_from_gradT_deg": V_DEG,
                        "gradT_K_m": [G1, G2], "grid_h_m": H_GRID, "T_west_C": T_WEST, "T_pin_C": T_PIN,
                        "steep_map": "T = 13 °C + 2e-5 K/m (x − x_pin)", "map_km": list(MAP_KM), "pin_km": list(PIN_KM),
-                       "time_compression": {"s12": "1 h in 3 s (×1200)", "s17": "1 h in 4 s (×900)",
-                                            "s18": "1 h in 4 s (×900)", "s19_s20": "6 h in 6 s (×3600)"},
+                       "time_compression": clock_rate(),
                        "parcel_seed": 20261022},
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
         "data_files": data_hashes, "checks": rows, "physics": entries,
