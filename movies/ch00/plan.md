@@ -13,11 +13,22 @@ is 120–180 s and `tools/movie_qa.py` gates on it, so the orchestrator must pas
 `tools/music.py` (CC0), bed about −28 LUFS, ducked a further 5 dB under speech; the size budget (≤ 25 MB per 3 min)
 scales to about 50 MB for 6 min and needs the orchestrator's decision.
 
+## Version 5 (2026-10-24)
+User round 3 (U-M3.G1-G6, U-M3.1-24) and the decisions of 2026-10-24 supersede the round-4 notes below where they differ:
+one movie of about 12 min (per-movie override of `project.movie_seconds`; QA window 712-756 s, size budget 60 MB);
+no headings, scene titles, part cards or counter; the screen carries keywords, symbols and numbers only (no boxes
+except the s03 component tags); no references, no "not to scale", no book name and no lab in the ending; the weather
+part follows one story with one assumption (DT/Dt = 0), pole first, then the equation, then the balance. Reused:
+the v4 pair plane, map kit (TMap, parcels, upwind track), sled scene; new kit components Keyword, TipLabel,
+CalcStack, BraceNote, Balance (`movies/src/ch00/kit/`, promotion to `house/` by the orchestrator). The changelog
+(item -> fix -> scene) is at the top of `ch00_dot_product_why/script.md`; the builder additions N1-N12 are in the
+storyboard (`new_builder_data`). The round-4 text below is history.
+
 ## Movie
 
 | Slug | Title | Concepts | Length | Status |
 |---|---|---|---|---|
-| `ch00_dot_product_why` | What the dot product measures, and why it multiplies by the other length | C0A-PoC1 | 367.2 s = 6:07 (narration measured at 364.725 s, 844 words, 138.8 wpm, + 2.5-s end-card hold) | round-4 storyboard + script rewritten from the ground up (21 scenes); needs re-build |
+| `ch00_dot_product_why` | What the dot product measures, and why it multiplies by the other length | C0A-PoC1 | **v5: 733.75 s = 12:13.8** (narration measured at 731.25 s, tools/tts.py dry run v5b; 1809 words, 114 sentences, 25 scenes; 148 wpm overall, + 2.5-s end-card hold) | v5 storyboard + script written 2026-10-24 from the user's round-3 feedback (U-M3.*); needs the build-script additions N1-N12 and a re-build |
 
 **What it does (round 4).** Part 1 (0:00–2:28) teaches the dot product first: arrows and components with Pythagoras;
 definition 1 (K 2.2) with the subscripts, the repeated index and ≡ explained; how to read the labels K, 0A and Vallis
