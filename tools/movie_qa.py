@@ -194,7 +194,8 @@ def longest_silence(s: float, e: float, speech: list[tuple[float, float]]) -> fl
     return max(longest, e - cursor)
 
 
-def review_frames(path: Path, outdir: Path, dur: float, storyboard: dict | None) -> list[str]:
+def review_frames(path: Path, outdir: Path, dur: float, storyboard: dict | None,
+                  timing: dict | None = None) -> list[str]:
     outdir.mkdir(parents=True, exist_ok=True)
     files = []
     sheet = outdir / "contact_sheet.png"
@@ -206,7 +207,11 @@ def review_frames(path: Path, outdir: Path, dur: float, storyboard: dict | None)
     if sheet.exists():
         files.append(sheet.name)
     times = set()
-    for sc in (storyboard or {}).get("scenes", []):
+    for sc in (timing or {}).get("scenes", []):   # measured scene times win over the storyboard's
+        if "start" in sc and "end" in sc:
+            a, b = float(sc["start"]), float(sc["end"])
+            times.update([a + 0.05, (a + b) / 2, max(a, b - 0.1)])
+    for sc in ([] if times else (storyboard or {}).get("scenes", [])):
         if isinstance(sc.get("t"), list) and len(sc["t"]) == 2:
             a, b = sc["t"]
             times.update([a + 0.05, (a + b) / 2, max(a, b - 0.1)])
@@ -270,7 +275,10 @@ def main() -> int:
     def gate(name: str, status: str, detail: str) -> None:
         gates[name] = {"status": status, "detail": detail}
 
-    files = review_frames(path, outdir, dur, sb)
+    timing = None
+    if timing_path and timing_path.exists():
+        timing = json.loads(timing_path.read_text(encoding="utf-8"))
+    files = review_frames(path, outdir, dur, sb, timing)
     if a.frames_only:
         print(f"review frames -> {outdir}: {files}")
         return 0
@@ -278,7 +286,13 @@ def main() -> int:
     # duration
     target = a.duration if a.duration is not None else (sb or {}).get("target_duration_s")
     lo, hi = (float(x) for x in a.duration_window.split(","))
-    if a.duration is not None:
+    if timing and "total_s" in timing:
+        # the narration's measured end is the target: the movie may only add a short silent end hold (≤ 5 s)
+        tt = float(timing["total_s"])
+        ok = tt - 0.1 <= dur <= tt + 5.0 and lo <= dur <= hi
+        gate("duration", "PASS" if ok else "FAIL",
+             f"{dur:.2f} s vs narration end {tt:.2f} s from timing.json (+0 … +5 s hold); window {lo:g}–{hi:g} s")
+    elif a.duration is not None:
         ok = abs(dur - target) <= 0.03 * target + 1e-6 or abs(dur - target) <= 0.1
         gate("duration", "PASS" if ok else "FAIL", f"{dur:.2f} s vs target {target} s (±3 %)")
     else:
