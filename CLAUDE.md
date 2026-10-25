@@ -16,7 +16,7 @@ dynamics). Same four deliverables per chapter as fluidpy, same formats, same qua
 | `viz/chNN/<slug>.html` (**5–14**; Ch. 0 about 12 per part, soft) | Explainers in the **unchanged Kundu format** (`interactive-viz`), with three.js 3-D as one linked view where the third dimension helps |
 | `scenes/chNN/<slug>.html` (0–4; Ch. 0 up to 6) | Standalone full-window three.js scenes for dense ideas (PLANNING §15.1) |
 | `figs/chNN/fig_NN_MM.py` | The book's data figures **rebuilt by our code from open data**, each with a reading card |
-| movies (1–3 × 2–3 min, async) | Remotion + Kokoro (`af_bella`, speed 1.0) motion graphics, published in `shammun/aofd-media` only after the user approves |
+| movies (1–3 per chapter, length set by the teaching, async) | Remotion + Kokoro (`af_bella`, speed 1.0) motion graphics **in the house style `movies/HOUSE_STYLE.md`** (reference: `ch00_dot_product_why` v6; same opening title, arc, voice, look and series end card in every movie), published in `shammun/aofd-media` only after the user approves |
 
 **Repos.** `shammun/aofd` (this repo: site, notebooks, explainers, book glue `aofd/`), `shammun/fluidpy` (the shared
 library in `../Fluid Dynamics`, installed editable; Colab pins a git tag), `shammun/aofd-media` (MP4s, `../AOFD Media`).

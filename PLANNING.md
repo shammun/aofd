@@ -1200,3 +1200,12 @@ The setup session (§12) **skips** these steps. It verifies them and builds on t
   PoC agents as general agents that loaded their own `.claude/agents/<name>.md`, the later ones natively.
 - **PoC A–G results** are recorded in `progress.json → setup.poc`, `reports/ch00_poc_*.md` and the PoC record tables
   of `knowledge/{viz,movie,data}_patterns.md`.
+
+### 15.10 Movie house style (user decision, 2026-10-25)
+The user approved movie `ch00_dot_product_why` v6 fix 1 ("I love it") and asked that its taste, methods, formats, style,
+voice, narration, opening frame, explanations, animation, equation treatment and ending carry into **every** later
+movie automatically. That style is written down in **`movies/HOUSE_STYLE.md`** (binding; it supersedes the movie rules in
+§8.4 and R1 where they differ: length by the teaching, no headings except the s00 title, no references/badges/links on
+screen, music bed on, series end card). The motion-graphics skill and the movie-director, motion-builder and
+movie-reviewer agents point to it; the reusable code is in `movies/src/house/kit/`; long renders use
+`tools/render_chunks.py`.

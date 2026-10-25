@@ -41,3 +41,18 @@ adds what each `/make-movies N` run teaches. Skill: `motion-graphics`.
 | movie-reviewer verdict | FIX (text ~7 px at 640 px) → re-render → PASS |
 | test page playback with captions | PASS — plays, captions show, 0 console errors (Edge via Playwright) |
 | user verdict (voice, speed, pace, captions) | pending |
+
+## House style (2026-10-25) — binding, see `movies/HOUSE_STYLE.md`
+The user approved `ch00_dot_product_why` v6 ("I love it") and asked that every later movie follow it. Lessons from its
+six feedback rounds (U-M … U-M6 in `reports/ch00_poc_user_feedback.md`), one line each:
+- Opening title s00 (only heading) + one sentence; hook question; spoken bridges, never cards; "To sum up" recap; series end card word for word.
+- Keywords on screen, explanation in the voice; no boxes, headings, counters, references, badges, links, grid notes.
+- Goal before calculation; answer named after it; general rule stated right after each case.
+- Define every new term in plain words at first use; name observers concretely ("the fixed thermometer", never "the pole").
+- For each key number: what it means, for whom, why that sign — with contrast cases and a summary grid.
+- Highlight the piece of the picture a number comes from and link it with a short gold arrow that crosses nothing.
+- Nothing appears before it is spoken; no half-screen empty > 3 s; text ≥ 44 px (ticks 52 px); hide the colour bar when zoomed.
+- Measure narration (tts dry run); length follows the teaching (17:40 approved).
+- Render long movies in 4000-frame chunks, concurrency 3, stall watchdog, concat-filter join (`tools/render_chunks.py`); audio must be in `<bundle>/public`; kill orphans first; ~40–100 min for 32k frames.
+- Git-bash rewrites arguments starting with `//` (MSYS path conversion) — use Python for such edits.
+- KaTeX raw layers default to black on the dark background: wrap them in `\textcolor`.

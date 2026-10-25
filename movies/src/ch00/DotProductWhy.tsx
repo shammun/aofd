@@ -8,12 +8,13 @@ import cheap from "../../ch00/ch00_dot_product_why/data/cheap.json";
 import work from "../../ch00/ch00_dot_product_why/data/work.json";
 import wx from "../../ch00/ch00_dot_product_why/data/weather.json";
 import sweep from "../../ch00/ch00_dot_product_why/data/sweep.json";
-import { CurvedLink, SunGlyph, TimeGraph, tgXY } from "./kit/v6";
-import { C, FONT as FONTF, T } from "./kit/type";
-import { Arc, Arrow, Band, Bracket, Dash, Grid, Lbl, Pt, RightTick, Svg, add, bracketMid, clamp, lerp, mkP, pulse, textW, unit } from "./kit/draw";
-import { CalcRow, CalcStack, Layer, Layered, Part, TeX, base, col, eqPieces, plainOf, rep, splitEq, texHtml } from "./kit/tex";
-import { Balance, Keyword, TipLabel, placeLabels } from "./kit/notes";
-import { CameraGlyph, Check, ClockGlyph, Droplet, Notebook, SnapCorners, Sled } from "./kit/icons";
+import { CurvedLink, SunGlyph, TimeGraph, tgXY } from "../house/kit/extras";
+import { C, FONT as FONTF, T } from "../house/kit/type";
+import { Arc, Arrow, Band, Bracket, Dash, Grid, Lbl, Pt, RightTick, Svg, add, bracketMid, clamp, lerp, mkP, pulse, textW, unit } from "../house/kit/draw";
+import { CalcRow, CalcStack, Layer, Layered, Part, TeX, base, col, eqPieces, plainOf, rep, splitEq, texHtml } from "../house/kit/tex";
+import { Balance, Keyword, TipLabel, placeLabels } from "../house/kit/notes";
+import { RiseText, TitleGradient } from "../house/kit/title";
+import { CameraGlyph, Check, ClockGlyph, Droplet, Notebook, SnapCorners, Sled } from "../house/kit/icons";
 
 /**
  * Chapter 0A movie "What the dot product measures, and why it multiplies by the other length", VERSION 6
@@ -264,21 +265,6 @@ const Tuple: React.FC<{ L: ReturnType<typeof tupleLayout>; c: string; s: number;
 );
 
 // ================================================================ s00 title (U-M6.3: the one title frame)
-/** staggered letters (each rises 24 px and fades in over 8 frames, 2-frame stagger) in one SVG text: dy carries the rise */
-const RiseText: React.FC<{ f: number; t: string; x: number; y: number; s: number; at: number; fill: string; colors?: (i: number) => string | undefined }> = ({
-  f, t, x, y, s, at, fill, colors,
-}) => {
-  const ch = [...t];
-  const rise = ch.map((_, i) => 24 * (1 - ramp(f, at + 2 * i, at + 2 * i + 8)));
-  return (
-    <text x={x} y={y} fontSize={s} fontFamily={FONTF} fontWeight={800} fill={fill} stroke={C.bg} strokeWidth={0.06 * s} paintOrder="stroke">
-      {ch.map((c, i) => (
-        <tspan key={i} dy={rise[i] - (i ? rise[i - 1] : 0)} fillOpacity={ramp(f, at + 2 * i, at + 2 * i + 8)} strokeOpacity={ramp(f, at + 2 * i, at + 2 * i + 8)}
-          fill={colors?.(i)}>{c === " " ? " " : c}</tspan>
-      ))}
-    </text>
-  );
-};
 const SW_O: Pt = [1400, 405], SW_U = 75; // review 6 S13: the animation fills x 1080-1840, y 180-630
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
@@ -306,9 +292,7 @@ const S00: React.FC = () => {
     <Scene fadeIn={false}>
       <Svg>
         <defs>
-          <linearGradient id="ttl" gradientUnits="userSpaceOnUse" x1={100} y1={0} x2={760} y2={0}>
-            <stop offset="0" stopColor={C.first} /><stop offset="1" stopColor={C.gold} />
-          </linearGradient>
+          <TitleGradient id="ttl" x1={100} x2={760} />
         </defs>
         <RiseText f={f} t="The dot" x={100} y={250} s={150} at={2} fill="url(#ttl)" />
         <RiseText f={f} t="product" x={100} y={410} s={150} at={10} fill="url(#ttl)" />

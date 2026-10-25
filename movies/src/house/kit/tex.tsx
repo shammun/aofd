@@ -2,7 +2,7 @@
 // underset keywords, cancel strikes, per-part colour/glow) and the CalcStack (rows aligned at "=").
 // Sizes are the EFFECTIVE glyph size: KaTeX draws at 1.21 × its container's font size, so the container gets size/1.21.
 import React from "react";
-import { ramp, tex } from "../../house";
+import { ramp, tex } from "..";
 import { clamp } from "./draw";
 import { C, floor } from "./type";
 

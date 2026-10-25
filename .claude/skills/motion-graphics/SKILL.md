@@ -1,9 +1,19 @@
 ---
 name: motion-graphics
-description: How aofd makes its 2–3-minute narrated motion-graphics movies - Remotion 4 (+ @remotion/three, KaTeX, d3-geo) driven by physics precomputed from tested fluidpy functions with a manifest, deterministic frame-indexed rendering on Windows, the storyboard.yaml schema and script.md, Kokoro TTS per sentence (voice af_bella, speed 1.0) with captions written from the script (VTT + SRT, timing.json), house components, render and poster commands, render scratch on G:, tools/movie_qa.py gates (duration, size, codec, black/frozen, loudness −16 LUFS, flashes, captions, physics parity, equations), the movie-reviewer, size budgets, publishing to shammun/aofd-media only after /approve-movie, and accessibility (no autoplay, WCAG flashes, transcript). Load when planning, scripting, building, rendering, checking, reviewing or publishing any movie, and for the PoC test clip.
+description: How aofd makes its narrated motion-graphics movies (house style: movies/HOUSE_STYLE.md, reference movie ch00_dot_product_why v6) - Remotion 4 (+ @remotion/three, KaTeX, d3-geo) driven by physics precomputed from tested fluidpy functions with a manifest, deterministic frame-indexed rendering on Windows, the storyboard.yaml schema and script.md, Kokoro TTS per sentence (voice af_bella, speed 1.0) with captions written from the script (VTT + SRT, timing.json), house components, render and poster commands, render scratch on G:, tools/movie_qa.py gates (duration, size, codec, black/frozen, loudness −16 LUFS, flashes, captions, physics parity, equations), the movie-reviewer, size budgets, publishing to shammun/aofd-media only after /approve-movie, and accessibility (no autoplay, WCAG flashes, transcript). Load when planning, scripting, building, rendering, checking, reviewing or publishing any movie, and for the PoC test clip.
 ---
 
 # motion-graphics — honest movies from tested physics
+
+## 0. House style — READ FIRST, BINDING
+**`movies/HOUSE_STYLE.md` is the binding style for every movie** (approved by the user 2026-10-25 on the reference movie
+`ch00_dot_product_why` v6: "I love it"). It fixes the arc (opening title s00 → hook → building blocks → intuition → why →
+application → recap → series end card), the exact opening and ending, the voice and narration rules, the screen rules
+(no headings except the title, keywords only, no boxes, no references/badges/links), the type scale and colours, the
+teaching moves (build in words first, goal before calculation, picture-to-number gold links, contrast cases, clock +
+TimeGraph), the reusable code in `movies/src/house/kit/`, and the render/QA recipe. **Where this skill disagrees with
+HOUSE_STYLE.md, HOUSE_STYLE.md wins** (several older rules below — 2–3 min length, "not to scale" badges, Vallis numbers
+on screen, no music, TitleCard/LowerThird/Footnote — are retired by it).
 
 Source: research note R1 (§3–§7); PLANNING §6.3, §8.4. Movies are **async** (`/make-movies N` after `notebook: pass`)
 and never block chapter N+1. Chapter 0: M0-1…M0-3 first; the user watches them; M0-4…M0-6 are made with that
@@ -54,7 +64,7 @@ honesty_notes: ["Coriolis is an apparent force in the rotating frame; we say so 
 quiz_hook: "Which way does the ball curve in the southern hemisphere?"
 ```
 Rules: every scene has narration (empty needs a reason); every on-screen equation has LaTeX **and** its Vallis number
-from the page image; every non-decorative visual names a tested `physics_source`; every exaggeration listed; hook in the
+from the page image as *provenance only* (never drawn on screen — HOUSE_STYLE §5); every non-decorative visual names a tested `physics_source`; every exaggeration listed; hook in the
 first 10 s; one idea per scene; ends on an end card pointing to the notebook section and explainer. Narration ≤ 150
 words/min (≈ 2.5 words/s), **our own words**, maths spoken in words ("f equals two Omega sine phi"). Pronunciations in
 `movies/lexicon.yaml` (Ekman, Sverdrup, Rossby, β-plane…). The post-write hook schema-checks every storyboard.
@@ -68,21 +78,22 @@ words/min (≈ 2.5 words/s), **our own words**, maths spoken in words ("f equals
 - **Determinism**: everything is a function of `useCurrentFrame()`; never `requestAnimationFrame` or R3F `useFrame`;
   `random(seed)` not `Math.random`; `delayRender/continueRender` for data; bundled local fonts;
   `Config.setChromiumOpenGlRenderer('angle')` for `<ThreeCanvas>`.
-- "Not to scale" badge (`ScaleBadge`) on every exaggerated scene; decoration only when labelled "illustrative".
+- ~~"Not to scale" badge~~ retired (user U-M2.G2): exaggerations and time compression are listed in the storyboard and
+  manifest, not badged on screen; thought experiments are said as such in the narration.
 
 ## 5. Narration and captions (`tools/tts.py`)
 Kokoro **one clip per sentence** from `script.md`; measure each clip (`soundfile`); concatenate with fixed gaps; write
 `en.vtt` / `en.srt` cues from the cumulative times (exact text from the script, **no speech recognition**) and
 `timing.json`; scene durations come from `timing.json` (narration drives timing; visuals stretch). Caption rules: ≤ 2
-lines, ≤ 42 chars/line, ≤ 17 chars/s, cues 1–7 s. Captions are a separate track, never burned in. No music by default;
+lines, ≤ 42 chars/line, ≤ 17 chars/s, cues 1–7 s. Captions are a separate track, never burned in. Music bed by default (`tools/music.py score`, seed 7, −28 LUFS bed, duck 5 dB — HOUSE_STYLE §8);
 loudness normalised to **−16 LUFS** (`ffmpeg -af loudnorm`), true peak ≤ −1 dBTP.
 
-## 6. House components (`movies/src/house/*.tsx`, written once, promoted by the orchestrator/knowledge-keeper only)
+## 6. House components (`movies/src/house/*.tsx` and **`movies/src/house/kit/`** — the current kit is listed in HOUSE_STYLE §9; the retired TitleCard/LowerThird/Footnote/ScaleBadge are not used)
 `TitleCard`, `EqLine` (KaTeX + term highlight in the project term colours), `DerivationStrip`, `ScaleBadge`, `Globe`
 (three.js sphere + graticule + lat/lon arrows), `BetaPlane`, `ParticleField` (instanced points along precomputed paths),
 `MapPanel` (d3-geo), `LowerThird`, `EndCard`. Scene modules are shared with `assets/viz3d.js` where possible.
 
-## 7. Render (Windows: props via a file — inline JSON breaks in shells)
+## 7. Render (Windows: props via a file — inline JSON breaks in shells). Long movies: `tools/render_chunks.py` (HOUSE_STYLE §10)
 ```powershell
 cd movies
 npx remotion render <CompId> out/chNN/<slug>/1080.mp4 --codec h264 --crf 23 --concurrency 50% --props props.json

@@ -17,7 +17,7 @@
       "A": "NOT accepted by the user (2026-10-22); round-3 feedback coming",
       "B": "pass (viz review round 2, derived tolerances)",
       "C": "pass (orchestrator review; literature values to re-verify in ch21)",
-      "D": "movie ch00_dot_product_why v4 fix 1 @ d5bcb3f (8:12, QA 10/10, review 4b PASS) — user NOT satisfied (2026-10-23); round-3 feedback coming next session. See reports/ch00_session_handoff.md",
+      "D": "movie ch00_dot_product_why v6 fix 1 @ b8c6859 (17:40.6, 51.27 MB, QA 10/10, review 6b PASS) — user: 'I love it' (2026-10-25); house style captured in movies/HOUSE_STYLE.md. Not published yet: needs gh repo create shammun/aofd-media + /approve-movie 0 ch00_dot_product_why on the user's go",
       "E": "local + clean-venv/git-clone simulation PASS; real Colab run by user pending",
       "F": "pass (viz review round 1)",
       "G": "pass (lesson re-review PASS); fluidpy v0.3.1 released and pinned 2026-10-22 (user approved)"
@@ -27,9 +27,9 @@
     "s11_poc": "awaiting user verdict",
     "s12_repos": "aofd created + Pages (early, user request); aofd-media not yet",
     "awaiting_user": {
-      "summary": "FIRST read reports/ch00_session_handoff.md (2026-10-23 evening). Movie ch00_dot_product_why v4 (8:12) passed QA + review 4b, but the user is NOT satisfied: ask for their round-3 feedback (U-M3.*), log it, agree the plan, then director -> builder -> QA -> reviewer. 13+ local commits not pushed (end-card notebook page 404 until push). PoC A not accepted; B-G feedback later; E needs the user's Colab run. Nothing in Chapter 0 may start until the user answers.",
+      "summary": "Movie ch00_dot_product_why v6 (17:40) is loved by the user (2026-10-25) and its style is binding for all movies (movies/HOUSE_STYLE.md). Open: publishing the movie (user's go + gh repo create), pushing the local commits, PoC A not accepted, B-G feedback, E needs the user's Colab run. Nothing in Chapter 0 may start until the user answers.",
       "open": {
-        "MOVIE": "movies/out/ch00/ch00_dot_product_why.html — v4 fix 1, 8:12; scene map with times in reports/ch00_session_handoff.md",
+        "MOVIE": "movies/out/ch00/ch00_dot_product_why.html — v6 fix 1, 17:40 (approved in content; optional cosmetic T1–T8 in reports/ch00_movies.md review 6b)",
         "A": "viz/ch00/vector_products_lab.html — 3-D dot/cross explainer (Kundu format?)",
         "B": "templates/viz_example_globe.html — Coriolis on a rotating globe",
         "C": "outputs/ch21/fig_21_23.png (+ reading card in figs/ch21/fig_21_23.py) — Southern Ocean map from real data",
@@ -39,9 +39,9 @@
         "G": "notebooks/poc_ch00a_dot.ipynb — Chapter 0A dot-product block in the informal voice"
       },
       "questions": [
-        "M7. Round-3 movie feedback on v4 (the user is not satisfied): collect item by item with timestamps into reports/ch00_poc_user_feedback.md (U-M3.*), map to scenes, agree the fix plan before running agents.",
-        "M8. Push the local commits to origin/main (needed for the end-card notebook link)?",
-        "M9. Optional S12 (s16 components chip 0.3 s): fold into round 3?",
+        "M10. Publish the movie: the user runs `! gh repo create shammun/aofd-media --public`, then says go for `/approve-movie 0 ch00_dot_product_why`.",
+        "M8. Push the local commits to origin/main (needed for the end-card notebook page)?",
+        "M11. Optional review-6b cosmetics T1–T8: fold into the next movie round or re-render now?",
         "1. The user has said they have detailed feedback, corrections and improvement suggestions for ALL of PoC A-G. Invite them to give it item by item (A..G, plus voice/look/depth in general); collect it into reports/ch00_poc_user_feedback.md, turn it into a fix plan per owning agent and agree the plan with the user before running fixes; re-run the gates; then ask for the final verdict."
       ],
       "optional_cleanup": [
@@ -89,8 +89,8 @@
     }
   },
   "last_update": {
-    "commit": "4b1d5d2",
+    "commit": "0d62684",
     "fluidpy_commit": "bd7f59a",
-    "time": "2026-10-23T21:22"
+    "time": "2026-10-25T17:47"
   }
 }

@@ -1,7 +1,7 @@
-// v6 kit for the Chapter-0 dot-product movie (storyboard composition_changes): CurvedLink, TimeGraph, SunGlyph.
-// Pure functions of their props (frame passed in): deterministic. Candidates for promotion to movies/src/house/.
+// House kit (from the ch00 dot-product movie v6, the reference movie): CurvedLink, TimeGraph, SunGlyph.
+// House kit: promoted 2026-10-25 from movies/src/ch00/kit/ (reference movie ch00_dot_product_why v6); see movies/HOUSE_STYLE.md.
 import React from "react";
-import { ramp } from "../../house";
+import { ramp } from "..";
 import { Lbl, Pt, clamp } from "./draw";
 import { C } from "./type";
 

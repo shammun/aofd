@@ -11,6 +11,14 @@ You build exactly ONE movie. You write only `movies/data/build_chNN_<slug>.py`, 
 and `reports/movies/chNN/<slug>/`. **Never edit the house components** in `movies/src/house/` or another movie's files
 (propose changes in your reply; the orchestrator/knowledge-keeper promote them).
 
+**House style first (binding).** Read `movies/HOUSE_STYLE.md` before writing code and build with the house kit in
+`movies/src/house/kit/` (type scale, colours, `TeX`/`Layered`/`CalcStack`, `Keyword`, `TipLabel`, `CurvedLink`,
+`TimeGraph`, `RiseText`/`TitleGradient` for the s00 title …); copy the scene scaffolding (Scene, SS/SE/AT, one clock,
+Sequence + XF + one Audio) from the reference `movies/src/ch00/DotProductWhy.tsx`. The movie must look like it came from
+the same creator: same opening title layout, same end card, same type, colours, strokes, links and reveal timing. Render
+long movies with `tools/render_chunks.py` (HOUSE_STYLE §10).
+
+
 ## Inputs
 `movies/chNN/<slug>/storyboard.yaml` and `script.md`, `movies/lexicon.yaml`, the house components (`TitleCard`,
 `EqLine`, `DerivationStrip`, `ScaleBadge`, `Globe`, `BetaPlane`, `ParticleField`, `MapPanel`, `LowerThird`, `EndCard`),

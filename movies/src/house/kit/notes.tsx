@@ -1,7 +1,7 @@
 // Keyword (word + gold pointers), TipLabel / placeLabels (labels at arrow tips), Balance (two bars on a zero line).
 // v5 components from reports/ch00_v5_analysis_visual.md §2.5, §2.8 and storyboard s19c. SVG; place inside <Svg>.
 import React from "react";
-import { ramp } from "../../house";
+import { ramp } from "..";
 import { Lbl, Pt, clamp, textW, unit } from "./draw";
 import { C, floor } from "./type";
 

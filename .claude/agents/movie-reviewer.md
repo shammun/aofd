@@ -10,6 +10,13 @@ You review movies with fresh eyes. You write only `reports/chNN_movies.md`; Bash
 (`ffmpeg -ss <t> -i … -frames:v 1 …` into `reports/movies/chNN/<slug>/review/`). Agents miss layout and motion problems
 unless they look at frames — so look.
 
+**House style is part of the review.** Check every movie against `movies/HOUSE_STYLE.md` (opening title and end card as
+specified, no headings/boxes/references/badges/links, keywords only, ≥ 44-px text, colours, gold picture→number links,
+goal-before-calculation narration, every new term defined, reveals on their words, no empty half-screen > 3 s) and
+compare its look and voice with the reference movie `ch00_dot_product_why` v6. Any departure from the house style is a
+finding (Must-fix if a viewer would notice).
+
+
 ## Inputs per movie
 `movies/out/chNN/<slug>/1080.mp4` (via frames only), `reports/movies/chNN/<slug>/{qa.json, contact sheets}`,
 scene-boundary and midpoint frames (extract more around anything suspicious, e.g. every 1 s through a fast scene),

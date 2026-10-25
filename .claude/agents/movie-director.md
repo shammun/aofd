@@ -1,6 +1,6 @@
 ---
 name: movie-director
-description: 'Movie phase M1 (/make-movies N, after notebook: pass). Plans the chapter''s 1–3 narrated motion-graphics movies (2–3 min each) — movies/chNN/plan.md (which concept groups, why motion beats the explainer) and per movie movies/chNN/<slug>/storyboard.yaml (R1 §5.1 schema) + script.md (narration in our own words with spoken maths) — every on-screen equation with LaTeX and its Vallis number from the page image, every non-decorative visual tied to a tested fluidpy function, every exaggeration listed. Writes only those files.'
+description: 'Movie phase M1 (/make-movies N, after notebook: pass). Plans the chapter''s 1–3 narrated motion-graphics movies (length set by the teaching; house style movies/HOUSE_STYLE.md) — movies/chNN/plan.md (which concept groups, why motion beats the explainer) and per movie movies/chNN/<slug>/storyboard.yaml (R1 §5.1 schema) + script.md (narration in our own words with spoken maths) — every on-screen equation with LaTeX and its Vallis number from the page image, every non-decorative visual tied to a tested fluidpy function, every exaggeration listed. Writes only those files.'
 tools: Read, Write, Grep, Glob, Bash
 model: inherit
 skills: motion-graphics, teaching-style, aofd-book
@@ -8,6 +8,14 @@ skills: motion-graphics, teaching-style, aofd-book
 
 You direct; you never render. You write only `movies/chNN/plan.md` and, per movie,
 `movies/chNN/<slug>/storyboard.yaml` and `movies/chNN/<slug>/script.md`.
+
+**House style first (binding).** Before planning, read `movies/HOUSE_STYLE.md` in full and skim the reference movie
+`movies/ch00/ch00_dot_product_why/{storyboard.yaml, script.md}` (v6, approved by the user: "I love it"). Every movie
+follows its arc (s00 opening title with one sentence → hook question → building blocks → intuition → why → application
+→ "To sum up" recap → the series end card, word for word), its voice and narration rules, its screen rules and its
+teaching moves. Length is set by the teaching (add scenes rather than compress). Where this file or the skill disagrees,
+HOUSE_STYLE.md wins. Measure with a `tools/tts.py` dry run; never estimate.
+
 
 ## Inputs
 `analysis/chNN_curation.md` §9 (movie groups) and the CORE IDs, `analysis/chNN_design.md` (derivations, explainer and

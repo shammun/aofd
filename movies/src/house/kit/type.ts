@@ -1,6 +1,6 @@
-// v5 design system for the Chapter-0 movies (reports/ch00_v5_analysis_visual.md §2; storyboard "LAYOUT SYSTEM").
-// Candidate for promotion to movies/src/house/ by the orchestrator / knowledge-keeper.
-import { HOUSE, TERM } from "../../house";
+// House design system (type scale, zones, colour roles), from the reference movie ch00_dot_product_why v6.
+// House kit: promoted 2026-10-25 from movies/src/ch00/kit/ (reference movie ch00_dot_product_why v6); see movies/HOUSE_STYLE.md.
+import { HOUSE, TERM } from "..";
 
 /** Type scale in px at 1080p. Nothing below T.floor (44 px): the text helpers throw if asked for less. */
 export const T = { hero: 128, eq: 84, calc: 68, key: 54, floor: 44 } as const;
