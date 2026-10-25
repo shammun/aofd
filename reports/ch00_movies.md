@@ -1503,3 +1503,112 @@ Each one undercuts exactly the points the user found confusing. They are layout 
 Disk at review: C: 85 GB free, G: 584 GB free.
 
 ## Overall: FIX (ch00_dot_product_why review 6 — M1–M4; S1–S15 recommended)
+
+## ch00_dot_product_why (review 6b — version 6 fix loop 1, commit b8c6859, 2026-10-25)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_why v6 fix 1 | 1060.567 s (17:40.6) | 51.27 MB | 10/10 PASS | PASS (balloon on its true path; "18 km across" on the across-isotherm bracket; every number and sign correct) | PASS (65 present, KaTeX clean) | PASS (M1, M2 fixed; T1–T8 cosmetic) | PASS (reveals on their words; A/V sync within 0.3–0.6 s, no drift) | PASS (261 cues, ≤ 2 × 42, max 15.7 cps, text = script, no "pole") | PASS (0 flashes; teal / rose / grey) | PASS (none, per U-M2.G2) | **PASS** |
+
+**How I reviewed it.** ffprobe: 1060.567 s, 51 270 111 bytes. qa.json (17:50): all 10 gates PASS. The duration gate now checks against timing.json (window 1045–1076 s), and the review frames sit on the timing.json boundaries (for example 10.33 / 10.48 s around the s00 → s01 cut at 10.425 s), so S14 is closed. I re-checked the captions myself: 261 cues, 1.01–6.53 s, ≤ 2 lines, ≤ 42 characters per line, max 15.7 cps, and no "pole". Frames are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/review6b/` (deletable):
+- `tiles/adv_01…38.png`: 1 frame/s over 8:35–16:00, timestamped;
+- `tiles/s00_*`: 2 frames/s over 0–12 s; `tiles/s05_*` and `tiles/s21_*`: one frame every 2 s;
+- `f/`: full 1080p frames at every beat quoted below.
+
+For A/V sync I ran silencedetect (high-pass 300 Hz, −32 dB) over s17 (9:33–11:03), s19a (12:34–13:44) and s22. The speech onsets fall within 0.3–0.6 s of the VTT cue starts throughout (Kokoro lead-in), with no drift.
+
+### Review 6 items
+| Item | Status | Evidence |
+|---|---|---|
+| **M1** s17 collision / crossing links | **FIXED** | 9:50–10:59. The colour bar is hidden in the zoom. "5.00 m/s × 3600 s = 18 km" (y ≈ 770) and "18 km × 1 °C/100 km = 0.18 °C" (y ≈ 845) now sit under the map. The two links no longer cross each other or the map. "13.18 °C" is shown once, at the ghost balloon. Residual: the 0.18 °C link crosses the "350" tick label (T3). |
+| **M2** "+0.18 K per hour" clipped | **FIXED** | 10:44: "v·∇T = +0.18 K per hour" ends at x ≈ 1790. |
+| **M3** balloon far from its parcel | **FIXED** | s19a 12:34: the balloon's string ends at (≈ 318 km, 180 km), beside the thermometer (300, 180); the glyph is offset to the right as in s17. 13:38 (3 h): pin at ≈ (371, 277 km), i.e. the true (354, 273) plus the same glyph offset. s19c 14:20: pin at ≈ (318, 215 km), with the "18 km across" bracket from 300 to 318 km just under the thermometer. The balloon is the same air parcel in s17, s17b, s18, s19a and s19c. |
+| **M4** "18 km" on the 36-km diagonal | **FIXED** | 12:50–12:59: a horizontal bracket runs from the 1-h parcel (535 px) to the 300-km line (560 px), labelled "18 km across" on its left, with "12.82 °C" above it. |
+| S1 s16a/b gold link | **Half fixed** | s16a 8:51–9:02: a straight vertical link from "shadow" down to "10 × cos 60° = 5.00 m/s across" under the map. Clean. s16b 9:19–9:24: the curved link still crosses the ∇T arrowhead, the 14 °C isotherm and the colour bar, and its tip lands on the "=" of "= 5.00 m/s" (T2). |
+| S2 "13.18 °C" early | FIXED | Fades in at 10:12.5–10:13, on "the map reads thirteen point one eight". |
+| S3 fork labels late | FIXED | "map frozen / map slides" is on screen from 10:55, inside the "two cases" cue (10:54–10:59). |
+| S4 s17b marks early / rotated / empty right | FIXED | 13.18 / 13.36 / 13.54 are horizontal above the map (13.36 is on a raised row) and appear at 11:20 / 11:23 / 11:25, as each one is spoken. Both readouts and the empty graph axes are on screen from 10:59. |
+| S5 balloon on the map border | FIXED | 11:25–11:57: the map is panned (y 150–300 km), and the 3-h glyph sits 40 px inside the top edge. |
+| S6 thermometer line style | FIXED | 13:10–13:38: solid rose line with dots at 1, 2 and 3 h; rose legend swatch. |
+| S7 clock start | FIXED | The clock leaves 0.0 h at 13:07.6, at the end of "Now let's start the clock". 1.0 h at 13:14.0 ("twelve point eight two after one hour", 13:14.2); 2.0 h ≈ 13:16.3; 3.0 h ≈ 13:19. |
+| S8 queue labels | FIXED | "in 1 h / in 2 h / in 3 h" stay on until each parcel arrives (13:08–13:19). |
+| S9 "colder air arriving" link | **Not fixed (T4)** | 13:22–13:38: the arrow still runs through the "400" tick label. |
+| S10 s19c bars | FIXED | No gold outline; the hatched bar has only its own dashed rose edge, which reads as part of the bar. The frozen row says "local rate 0". The thumbnail graph is gone. |
+| S11 s19d glyph / "same" | FIXED | 15:00: the isotherm-crossing glyph sits under "the wind" (x 495–640, y 428). "same" is dropped. |
+| S12 row-3 colour | FIXED | The DT/Dt row is warm white / cream. Teal stays for advection only. |
+| S13 s00 small visual | FIXED (new T1) | 0:04.5–0:10: the map is now 760 × 455 at x 1080–1840, y 180–635, with "12.86 °C" at y 725. See T1. |
+| S14 QA tool | FIXED (orchestrator, 0d62684) | As above. |
+| S15 s18 visuals ahead of narration | FIXED | "map slides" appears at 12:25, on "slides with the wind" (12:23–12:27). The slide runs 12:25–12:28. The "18 km" bracket comes at 12:31 on "eighteen kilometres every hour". |
+| Text < 44 px | FIXED (mostly) | Colour-bar ticks and title and the graph ticks are now 52 px. Remaining small glyphs: the gold "+" signs beside the s19d brackets (~30 px) and the s18 isotherm-label row (unchanged, ~44 px). |
+
+### Touched scenes: new problems?
+- **s00:** one near-collision (T1). Everything else reads well at 640 px.
+- **s05:** clean. Three panels; equations and "= 6 positive / = 0 right angle / = −6 negative" fit (rightmost edge x ≈ 1818); no overlap.
+- **s16a:** the link is clean. Because the calculation moved under the map, the right 40 % of the screen (x > 1110) is empty for the whole scene, 8:38–9:02 (T5).
+- **s16b:** T2.
+- **s17:**
+  - T3.
+  - The right column holds only "0.18 K per hour" from 9:33 to 10:14, before the unit chain arrives (T5).
+  - "towards warmer air" (10:40) runs to x ≈ 998, flush with the map's right border at 1000 (T6).
+- **s17b:** clean apart from a crowded corner. The map's x-axis unit "km" (x 1053) sits 15 px from the graph's "13.0" tick and reads as "km 13.0". The same happens in s19a (T7).
+- **s18:** clean.
+- **s19a:**
+  - T4 and T7.
+  - At 13:14.3–13:15, the "12.82 °C" label flies to the readout and briefly crosses the colour-bar "20" tick. This is a transient arrival animation and acceptable.
+- **s19c:** two small items (T8):
+  - The rotated colour-bar title "T (°C)" ends 15 px from the "map slides" row label, so it reads "⊢ map slides". The local-rate thermometer icon sits on the bar axis line.
+  - "13.18 °C, an hour ago" is parked at the map's top-left (x 130–570). It is not attached to the dashed 318-km line it refers to, and that line is now also where the 13 °C isotherm sits.
+- **s19d:** clean.
+- **s21:** clean, unchanged.
+
+No new must-fix collision, no off-word reveal, no text clipped.
+
+### User-facing rules
+- **No "pole":** PASS. Not in the VTT. Not on screen in any frame checked; labels say "fixed thermometer".
+- **No boxes except the s03 tags:** PASS. The −0.18 hatched bar has no gold outline. The s22 thumbnails were accepted in earlier rounds.
+- **No links or book names:** PASS. The end card says "a series of maths tutorials · atmospheric science · meteorology · fluid dynamics". No URL, no book title, no equation numbers in the touched scenes.
+- **"air parcel":** PASS. Narration uses "air parcel" (17 cues). On screen: "each parcel keeps its T".
+
+### The advection stretch (8:38–15:53) read as a confused first-time learner
+1. **What +0.18 K/h means.** 9:33–10:44. The ghost-balloon picture (teal 18-km span, gold strip from 13.00 to 13.18) feeds the two-line calculation under the map. The space × speed = time unit chain follows, then "v·∇T = +0.18 K per hour, advection term". Every step is on screen as it is said. **Clear.**
+2. **Which air parcel.** The balloon and the fixed thermometer start side by side inside one dashed ellipse in s17. They stay together at t = 0 in s17b, s18 and s19a. The balloon then follows its own dashed track in s19a and ends 18 km across in s19c. M3 is gone, so there is only ever one balloon parcel. **Clear.**
+3. **Why × 1 hour.** "5.00 m/s × 3600 s" appears on "Distance is speed times time" (9:50), then "= 18 km" with the link from the teal span (10:00). **Clear.**
+4. **The + vs − sign.**
+   - The forward direction comes first ("towards warmer air", +0.18).
+   - Frozen map: 0 + 0.18.
+   - Upwind and colder (12:39–12:45), the falling readout, the rose −0.18 °C per hour.
+   - s19b: the brace "+0.18 K/h" under v·∇T, then the rose "∂T/∂t = −0.18 K per hour" underlined.
+   - The s19c bars, then the s19d 3 × 2 table.
+
+   The sign is carried by colour (teal +, rose −) and by words. **Clear.**
+5. **The falling readings.** The s19a queue (12.82 / 12.64 / 12.46) falls upwind. The parcels arrive one by one, the readout drops in step, and the rose line falls on the graph while the teal balloon line stays flat. No rising labels remain to contradict it. **Clear.**
+
+The stretch is now seamless. The cuts s16b → s17 (zoom into the same map), s17 → s17b (the fork carries "map frozen" into the title), s17b → s18 (zoom out) and s18 → s19a (clock reset, same map) keep the same map, icons and colours. Nothing jumps.
+
+### Must-fix
+None.
+
+### Optional (T) — cosmetic, for any future re-render
+- **T1 (s00, 0:04.5–0:10):** "and how meteorology uses it" ends at x ≈ 1075, 5 px from the enlarged map (x 1080) and next to the readout thermometer icon (x 1100). At 640 px it looks joined. Move the map and readout to x ≥ 1130 (map 1130–1860), or set the subtitle at 64 px.
+- **T2 (s16b, 9:19–9:24):** the shadow → 5.00 m/s link still crosses the ∇T arrowhead, the 14 °C isotherm and the colour bar, and its tip lands on the "=". Route it below the map (from "shadow" down to y ≈ 760, then right to x ≈ 1270, then up), or end it at the left edge of "5.00".
+- **T3 (s17, 9:58–10:44):** the 0.18 °C link crosses the "350" tick label. Start it at (476, 668) and end it at (600, 805) so that it passes left of "350".
+- **T4 (s19a, 13:22–13:38, S9 carry-over):** the "colder air arriving" arrow runs through the "400" tick label. Bend it left of x = 450, or put the label at (300, 800).
+- **T5 (s16a 8:38–9:02; s17 9:33–10:14):** the right 40 % of the screen is empty. Optional: set "10 × cos 60° = 5.00 m/s across" larger, or keep a copy of v·∇T = (shadow)(length) on the right.
+- **T6 (s17, 10:40–10:59):** "towards warmer air" touches the map's right border. Shift it 30 px left, or drop "air".
+- **T7 (s17b, s19a):** the map's "km" unit sits next to the graph's "13.0" tick. Move the "km" under "600", or start the graph 40 px further right.
+- **T8 (s19c, 14:06–14:52):** hide the colour bar, as in s17, so that "T (°C)" stops reading as "⊢ map slides". Lift the local-rate thermometer icon off the bar axis. Attach "13.18 °C, an hour ago" to the dashed line with a short tick, or put it right of the dashed line.
+
+### Verdict: PASS
+All four must-fix items from review 6 are fixed:
+- **M1:** the s17 layout.
+- **M2:** no clipping.
+- **M3:** the balloon is on its true path in s19a and s19c.
+- **M4:** "18 km across" is on a horizontal bracket.
+
+Of the should-fix items, S2–S8 and S10–S15 are fixed. S1 is half fixed and S9 is not fixed; both are now cosmetic (T2, T4). Physics, numbers, signs, captions and A/V sync are unchanged and correct. The advection stretch now answers the user's five questions on screen, in order, without visual contradictions. T1–T8 are optional polish. T1 (title card) and T2 are the most visible if another render happens.
+
+The movie becomes `qa_pass`. The user watches it before `/approve-movie 0 ch00_dot_product_why`.
+
+Disk at review: C: 85 GB free, G: 584 GB free.
+
+## Overall: PASS (ch00_dot_product_why review 6b — `qa_pass`; T1–T8 optional)
