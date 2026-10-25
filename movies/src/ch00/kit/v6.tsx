@@ -55,18 +55,18 @@ export const TimeGraph: React.FC<{ x: number; y: number; w: number; h: number; t
         {Array.from({ length: tMax + 1 }, (_, k) => (
           <g key={`t${k}`}>
             <line x1={X(k)} y1={y + h} x2={X(k)} y2={y + h + 10} stroke={C.muted} strokeWidth={3} />
-            <Lbl x={X(k)} y={y + h + 36} t={`${k}`} c={C.muted} s={44} a="middle" b={false} />
+            <Lbl x={X(k)} y={y + h + 36} t={`${k}`} c={C.muted} s={52} a="middle" b={false} />
           </g>
         ))}
-        <Lbl x={X(tMax) + 40} y={y + h + 36} t="time (h)" c={C.muted} s={44} a="start" b={false} />
+        <Lbl x={X(tMax) + 40} y={y + h + 36} t="time (h)" c={C.muted} s={52} a="start" b={false} />
         {Tticks.map((T) => (
           <g key={`T${T}`}>
             <line x1={x - 10} y1={Y(T)} x2={x} y2={Y(T)} stroke={C.muted} strokeWidth={3} />
             <line x1={x} y1={Y(T)} x2={x + w} y2={Y(T)} stroke={C.grid} strokeWidth={1.5} />
-            <Lbl x={x - 16} y={Y(T)} t={T.toFixed(1)} c={C.muted} s={44} a="end" b={false} />
+            <Lbl x={x - 16} y={Y(T)} t={T.toFixed(1)} c={C.muted} s={52} a="end" b={false} />
           </g>
         ))}
-        <Lbl x={x - 16} y={y - 40} t="T (°C)" c={C.muted} s={44} a="end" b={false} />
+        <Lbl x={x - 16} y={y - 40} t="T (°C)" c={C.muted} s={52} a="end" b={false} />
       </> : null}
       {series.map((S, i) => {
         const so = S.o ?? 1;

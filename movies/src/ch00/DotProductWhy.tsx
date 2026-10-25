@@ -65,7 +65,6 @@ const fout = (f: number, a: number, n = 10) => 1 - ramp(f, a, a + n);
 const K19A = K("s19a_pole_cools");
 const H1 = AT(K19A, 5, "twelve point eight two after"), H3 = AT(K19A, 5, "twelve point four six after");
 const FPH = (H3 - H1) / 2; // frames per model hour
-const H0 = H1 - FPH; // s19a clock start (scene-relative)
 const hoursFrom = (f: number, start: number, maxH: number) => clamp((f - start) / FPH, 0, maxH);
 
 // ---------------------------------------------------------------- equations (verbatim from the storyboard)
@@ -280,7 +279,7 @@ const RiseText: React.FC<{ f: number; t: string; x: number; y: number; s: number
     </text>
   );
 };
-const SW_O: Pt = [1330, 400], SW_U = 70;
+const SW_O: Pt = [1400, 405], SW_U = 75; // review 6 S13: the animation fills x 1080-1840, y 180-630
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way");
@@ -297,7 +296,8 @@ const S00: React.FC = () => {
   const oA = fin(f, 4, 10) * fout(f, tMet, 12), oB = fin(f, tMet, 12);
   // Animation B: the mini map (the s12 map at 640 × 384 px), 1 model hour in 4 s from the word "meteorology"
   const hB = clamp((f - tMet) / (4 * FPS), 0, 1);
-  const mg: Geo = { mx: 1160, my: 200, km: 640 / 600, w: 600, h: 360 };
+  const MW = 760, MH = 456; // review 6 S13
+  const mg: Geo = { mx: 1080, my: 180, km: MW / 600, w: 600, h: 360 };
   const shiftB = atH(W.iso_shift_km as number[], hB), isoB = ISO_X.map((xs) => atH(xs, hB));
   const TpB = atH(W.T_pole_field_C as number[], hB);
   const pinB = gP(mg, PIN), vB: Pt = [pinB[0] + 150 * Math.cos(VANG), pinB[1] - 150 * Math.sin(VANG)];
@@ -326,21 +326,21 @@ const S00: React.FC = () => {
           <Arrow p={O0} q={qT} color={C.second} />
           <Lbl x={Psw(3, 0)[0] + 24} y={O0[1] - 40} t="p" c={C.first} s={T.calc} />
           <Lbl x={qT[0] + (q[0] >= 0 ? 22 : -22)} y={qT[1] - 30} t="q" c={C.second} s={T.calc} a={q[0] >= 0 ? "start" : "end"} />
-          <Lbl x={1272} y={770} t={`${sGlyph}${zero ? "" : " "}${Math.abs(dq).toFixed(2)}`} c={sCol} s={84} a="start" />
+          <Lbl x={1322} y={720} t={`${sGlyph}${zero ? "" : " "}${Math.abs(dq).toFixed(2)}`} c={sCol} s={84} a="start" />
         </g>
         {/* B: the mini map with sliding isotherms and the pole ticking down */}
         <g opacity={oB}>
-          {Array.from({ length: 80 }, (_, i) => <rect key={i} x={mg.mx + (i * 640) / 80} y={mg.my} width={640 / 80 + 0.6} height={384}
+          {Array.from({ length: 80 }, (_, i) => <rect key={i} x={mg.mx + (i * MW) / 80} y={mg.my} width={MW / 80 + 0.6} height={MH}
             fill={tColor(T_AT(((i + 0.5) * 600) / 80, shiftB))} />)}
-          {isoB.map((xk, i) => xk > 1 && xk < 599 ? <line key={i} x1={gX(mg, xk)} y1={mg.my} x2={gX(mg, xk)} y2={mg.my + 384} stroke="#fff" strokeOpacity={0.75} strokeWidth={3} /> : null)}
-          <rect x={mg.mx} y={mg.my} width={640} height={384} fill="none" stroke={C.grid} strokeWidth={3} />
+          {isoB.map((xk, i) => xk > 1 && xk < 599 ? <line key={i} x1={gX(mg, xk)} y1={mg.my} x2={gX(mg, xk)} y2={mg.my + MH} stroke="#fff" strokeOpacity={0.75} strokeWidth={3} /> : null)}
+          <rect x={mg.mx} y={mg.my} width={MW} height={MH} fill="none" stroke={C.grid} strokeWidth={3} />
           <Arrow p={pinB} q={vB} color={C.first} w={9} head={32} />
           <PoleThermometer x={pinB[0]} y={pinB[1]} s={1.1} />
-          <PoleThermometer x={1180} y={700} s={0.7} />
-          <Lbl x={1220} y={660} t={`${TpB.toFixed(2)} °C`} c={C.local} s={T.calc} />
+          <PoleThermometer x={1100} y={770} s={0.7} />
+          <Lbl x={1140} y={720} t={`${TpB.toFixed(2)} °C`} c={C.local} s={T.calc} />
         </g>
       </Svg>
-      <TeX s={`${EQ_PQ0} =`} x={1250} y={770} size={84} ax={1} o={oA} />
+      <TeX s={`${EQ_PQ0} =`} x={1300} y={720} size={84} ax={1} o={oA} />
     </Scene>
   );
 };
@@ -976,9 +976,9 @@ const ColourBar: React.FC<{ o?: number }> = ({ o = 1 }) => {
   return (
     <g opacity={o}>
       {LUT.map((c, i) => <rect key={i} x={x} y={y1 - ((i + 1) * (y1 - y0)) / LUT.length} width={20} height={(y1 - y0) / LUT.length + 0.7} fill={c} />)}
-      <Lbl x={1040} y={y0 + 8} t={`${T_HI}`} c={C.muted} s={T.floor} b={false} />
-      <Lbl x={1040} y={y1 - 26} t={`${T_LO}`} c={C.muted} s={T.floor} b={false} />
-      <Lbl x={1070} y={(y0 + y1) / 2} t="T (°C)" c={C.muted} s={T.floor} a="middle" rot={-90} b={false} />
+      <Lbl x={1040} y={y0 + 8} t={`${T_HI}`} c={C.muted} s={52} b={false} />
+      <Lbl x={1040} y={y1 - 26} t={`${T_LO}`} c={C.muted} s={52} b={false} />
+      <Lbl x={1074} y={(y0 + y1) / 2} t="T (°C)" c={C.muted} s={52} a="middle" rot={-90} b={false} />
     </g>
   );
 };
@@ -1261,7 +1261,8 @@ const WindLayer: React.FC<{ oV: number; oSh: number; oAl: number; f: number; tDo
 const [C60_L, C60_R] = splitEq(EQ_COS60);
 const SHADOW_LBL: Pt = [(PINS[0] + SHT[0]) / 2, ACR_Y + 46];
 const LINK16_FROM: Pt = [SHADOW_LBL[0] + 108, SHADOW_LBL[1] - 10];
-const LINK16A_TO: Pt = [1550, 240];
+const LINK16A_TO: Pt = [618, 756];
+const LINK16A_FROM: Pt = [618, 514];
 const ShadowLabel: React.FC<{ o?: number; g?: number }> = ({ o = 1, g = 0 }) =>
   <Lbl x={SHADOW_LBL[0]} y={SHADOW_LBL[1]} t="shadow" c={C.key} s={T.key + 10 * g} a="middle" o={o} />;
 const S16A: React.FC = () => {
@@ -1289,13 +1290,14 @@ const S16A: React.FC = () => {
           <Lbl x={VTIP[0] + 22} y={VTIP[1] + 6} t={`v = ${W.speed} m/s`} c={C.first} s={T.key} />
         </g>
         <ShadowLabel o={oSh} g={pl} />
-        <Keyword f={f} text="towards warmer" at={[560, 620]} appear={tWarm} targets={[[SHT[0] + 8, ACR_Y + 16]]} />
-        <Lbl x={1490} y={310} t="across" c={C.key} s={T.key} o={fin(f, tAcross)} />
-        <CurvedLink f={f} from={LINK16_FROM} to={LINK16A_TO} start={tFive} bend={-50} />
+        <Keyword f={f} text="towards" at={[660, 578]} appear={tWarm} targets={[[SHT[0] + 8, ACR_Y + 16]]} />
+        <Lbl x={660} y={632} t="warmer" c={C.key} s={T.key} o={fin(f, tWarm + 4, 8)} />
+        <Lbl x={820} y={790} t="across" c={C.key} s={T.key} o={fin(f, tAcross)} />
+        <CurvedLink f={f} from={LINK16A_FROM} to={LINK16A_TO} ctl={lerp(LINK16A_FROM, LINK16A_TO, 0.5)} start={tFive} />
       </Svg>
       <GradLabel x={PINS[0] + GL + 22} y={PINS[1]} />
-      <TeX s={C60_L} x={1428} y={200} size={62} c={C.first} ax={1} o={fin(f, t1 + 10)} />
-      <TeX s={C60_R} x={1440} y={200} size={62} c={C.first} o={fin(f, t1 + 10)} />
+      <TeX s={C60_L} x={480} y={790} size={62} c={C.first} ax={1} o={fin(f, t1 + 10)} />
+      <TeX s={C60_R} x={490} y={790} size={62} c={C.first} o={fin(f, t1 + 10)} />
     </Scene>
   );
 };
@@ -1346,7 +1348,7 @@ const S16B: React.FC = () => {
         <WindLayer oV={1} oSh={1} oAl={0} f={f} />
         <ShadowLabel />
         {/* v6 (U-M6.7): the map's 'shadow' → the 5.00 m/s factor of v·∇T, from its reveal until sentence 3 */}
-        <CurvedLink f={f} from={LINK16_FROM} to={[1425, 328]} start={AT(k, 1, "five metres per second times")} end={t1} bend={-40} />
+        <CurvedLink f={f} from={[SHADOW_LBL[0] + 104, SHADOW_LBL[1] - 6]} to={[1310, 322]} ctl={[800, 150]} start={AT(k, 1, "five metres per second times")} end={t1} />
         <g opacity={fin(f, tKh + 10)}>
           <BalloonThermometer x={MAPX + 40} y={850} s={0.5} />
           <Lbl x={MAPX + 90} y={800} t="advection term" c={C.key} s={T.key} />
@@ -1367,9 +1369,9 @@ type Cam = { x0: number; y0: number; km: number };
 const BOXW = GM.w * GM.km, BOXH = GM.h * GM.km;
 const ZW = W.zoom_window_km as number[][], ZK = W.zoom_px_per_km as number;
 const ZC: Pt = [(ZW[0][0] + ZW[0][1]) / 2, (ZW[1][0] + ZW[1][1]) / 2];
-const camAt = (z: number): Cam => {
+const camAt = (z: number, cyZ: number = ZC[1]): Cam => {
   const km = Math.exp(Math.log(GM.km) + (Math.log(ZK) - Math.log(GM.km)) * z);
-  const cx = GM.w / 2 + (ZC[0] - GM.w / 2) * z, cy = GM.h / 2 + (ZC[1] - GM.h / 2) * z;
+  const cx = GM.w / 2 + (ZC[0] - GM.w / 2) * z, cy = GM.h / 2 + (cyZ - GM.h / 2) * z;
   return { x0: cx - BOXW / 2 / km, y0: cy - BOXH / 2 / km, km };
 };
 const cX = (c: Cam, xk: number) => GM.mx + (xk - c.x0) * c.km;
@@ -1426,7 +1428,8 @@ const GXY = tgXY(GR.x, GR.y, GR.w, GR.h, GTR);
 const TH = W.iso_t_h as number[];
 
 // ================================================================ s17 what +0.18 K per hour means (forward view, snapshot)
-const [E18L, E18R] = splitEq(EQ_18KM), [E018L, E018R] = splitEq(EQ_018), [EU_L, EU_R] = splitEq(EQ_UNITS17);
+const [E18L, E18R] = splitEq(EQ_18KM), [E018L, E018R] = splitEq(EQ_018);
+const L18_TO: Pt = [560, 738], L018_TO: Pt = [805, 806];
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = K("s17_meaning");
   const s = (j: number) => SS(k, j);
@@ -1435,7 +1438,7 @@ const S17: React.FC = () => {
   const t5 = s(5), t6 = s(6), t7 = s(7), t8 = s(8), t9 = s(9), t10 = s(10), t11 = s(11), t12 = s(12);
   const pin = cP(c, PIN), ghost = cP(c, [BX[60], BY[60]]), spanEnd = cP(c, [W.fwd_span_km[1], PIN[1]]);
   const xS0 = cX(c, W.fwd_span_km[0]), xS1 = cX(c, W.fwd_span_km[1]);
-  const oWind = fin(f, t2) * fout(f, t3, 14), oSh = fin(f, t2 + 8) * fout(f, t6);
+  const oWind = fin(f, t2) * fout(f, t3, 14), oSh = fin(f, t2 + 8) * fout(f, t18 - 12);
   const shY = pin[1] + 36, shEnd: Pt = [pin[0] + W.shadow_m_s * US, shY];
   const vT: Pt = [pin[0] + W.speed * US * Math.cos(VANG), pin[1] - W.speed * US * Math.sin(VANG)];
   const path = clamp((f - t3 - 4) / 30, 0, 1);
@@ -1457,12 +1460,10 @@ const S17: React.FC = () => {
         </ClipBox>
         <CamIsos c={c} xs={ISO0} Ts={ISO_T} />
         <CamFrame c={c} />
-        <ColourBar />
         <SnapCorners x0={GM.mx + 12} y0={GM.my + 12} x1={GM.mx + BOXW - 12} y1={GM.my + BOXH - 12} o={1} />
         <CameraGlyph x={950} y={190} />
         <Lbl x={905} y={192} t="t = 0 h" c={C.ink} s={T.key} a="end" />
         <Keyword f={f} text="right now" at={[905, 252]} a="end" appear={tRight} out={t2 + 20} targets={[]} />
-        {oStrip > 0 ? <Lbl x={xS1 + 10} y={GM.my + 38} t={`${W.fwd_strip_T_C[1].toFixed(2)} °C`} c={C.ink} s={T.floor} o={oStrip} /> : null}
         {/* the pole just left of the pin, the balloon with its air-parcel ellipse on the pin */}
         <PoleThermometer x={pin[0] - 40} y={pin[1]} s={1.0} />
         <ellipse cx={pin[0]} cy={pin[1] - 53} rx={48} ry={86} fill="#ffffff" fillOpacity={0.07 + 0.06 * fin(f, s(1))} stroke="#ffffff" strokeWidth={4} strokeDasharray="10 8" opacity={0.6 + 0.4 * fin(f, s(1))} />
@@ -1488,9 +1489,9 @@ const S17: React.FC = () => {
           <Bracket p={[cX(c, 300), 332]} q={[cX(c, 400), 332]} c={C.second} off={0} />
           <Lbl x={(cX(c, 300) + cX(c, 400)) / 2} y={294} t="1 °C per 100 km" c={C.second} s={T.key} a="middle" />
         </g>
-        <Lbl x={1330} y={828} t="space" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 6, "a rate in space")) * fout(f, t12)} />
-        <Lbl x={1600} y={828} t="time" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 7, "a rate in time")) * fout(f, t12)} />
-        <g opacity={fin(f, AT(k, 7, "a rate in time")) * fout(f, t12)}><ClockGlyph x={1690} y={828} r={24} /></g>
+        <Lbl x={1180} y={530} t="space" c={C.key} s={T.key} o={fin(f, AT(k, 6, "a rate in space")) * fout(f, t12)} />
+        <Lbl x={1470} y={530} t="time" c={C.key} s={T.key} o={fin(f, AT(k, 7, "a rate in time")) * fout(f, t12)} />
+        <g opacity={fin(f, AT(k, 7, "a rate in time")) * fout(f, t12)}><ClockGlyph x={1610} y={530} r={24} /></g>
         {/* S11: towards warmer air */}
         <Keyword f={f} text="towards warmer air" at={[1000, 530]} a="end" appear={AT(k, 10, "towards warmer")} out={t11} targets={[[(pin[0] + spanEnd[0]) / 2 + 20, pin[1] - 14]]} />
         {/* S12-S13: the question and the fork to the two cases */}
@@ -1498,22 +1499,23 @@ const S17: React.FC = () => {
         <g opacity={fin(f, t12)} stroke={C.gold} strokeWidth={5} fill="none" strokeLinecap="round">
           <polyline points="1485,740 1485,765 1300,790" /><polyline points="1485,765 1670,790" />
         </g>
-        <Lbl x={1120} y={826} t="map frozen" c={C.key} s={T.key} o={fin(f, AT(k, 12, "two cases"))} />
-        <Lbl x={1840} y={826} t="map slides" c={C.key} s={T.key} a="end" o={fin(f, AT(k, 12, "two cases") + 8)} />
+        <Lbl x={1120} y={826} t="map frozen" c={C.key} s={T.key} o={fin(f, t12)} />
+        <Lbl x={1840} y={826} t="map slides" c={C.key} s={T.key} a="end" o={fin(f, t12 + 8)} />
         {/* the two links (U-M6.8/9): span → 18 km, strip → 0.18 °C; at most two at once; gone by sentence 7 */}
-        <CurvedLink f={f} from={[(pin[0] + spanEnd[0]) / 2, pin[1] - 14]} to={[1650, 418]} ctl={[1100, 120]} start={t18} end={t6} o={1 - 0.6 * fin(f, t018)} />
-        <CurvedLink f={f} from={[(xS0 + xS1) / 2, GM.my + 120]} to={[1792, 586]} ctl={[2000, 330]} start={t018} end={t6} />
+        {/* review 6 M1: straight, short links down to the results under the map (nothing crossed) */}
+        <CurvedLink f={f} from={[(pin[0] + spanEnd[0]) / 2, pin[1] + 14]} to={L18_TO} ctl={lerp([(pin[0] + spanEnd[0]) / 2, pin[1] + 14], L18_TO, 0.5)} start={t18} end={t9} o={1 - 0.5 * fin(f, t018)} />
+        <CurvedLink f={f} from={[xS1 - 4, GM.my + BOXH - 4]} to={L018_TO} ctl={lerp([xS1 - 4, GM.my + BOXH - 4], L018_TO, 0.5)} start={t018} end={t9} />
       </Svg>
       <TeX s={String.raw`0.18\ \mathrm{K\ per\ hour}`} x={MAPX + 20} y={150} size={big} c={C.first} o={fin(f, 4) * oHead} />
-      <TeX s={EQ_ADV17} x={MAPX + 20} y={150} size={T.calc} c={C.first} o={oAdv} glow={pulse(f, AT(k, 10, "It's positive"), 30)} />
+      <TeX s={EQ_ADV17} x={1110} y={150} size={58} c={C.first} o={oAdv} glow={pulse(f, AT(k, 10, "It's positive"), 30)} />
       <TeX s={String.raw`\text{advection term}`} x={MAPX + 20} y={228} size={T.key} c={C.first} o={fin(f, AT(k, 9, "the advection term"))} />
       <TeX s={String.raw`5.00\ \mathrm{m/s}\ \text{across}`} x={MAPX + 20} y={240} size={T.key} c={C.first} o={fin(f, t2 + 8) * fout(f, t3)} />
-      {/* the stack sits low (y 410-800) so the two links reach '18 km' from above and '0.18 °C' from the right */}
-      <CalcStack f={f} x={1530} y={410} size={58} maxLines={3} rows={[
-        { lhs: E18L, rhs: { raw: [{ s: col(C.ink, E18R), o: fin(f, t18) }] }, at: t3 + 10, h: 100, out: t9 },
-        { lhs: E018L, rhs: { raw: [{ s: col(C.ink, E018R), o: fin(f, t018) }] }, at: AT(k, 4, "so eighteen"), h: 150, out: t9 },
-        { lhs: EU_L, rhs: EU_R, at: AT(k, 7, "Multiply it"), h: 140, out: t12 },
-      ]} />
+      {/* review 6 M1: the two calculations under the map (x ≥ 90, y 740-875), the unit chain in the right column */}
+      <TeX s={E18L} x={455} y={770} size={52} ax={1} o={fin(f, t3 + 10) * fout(f, t9)} />
+      <TeX s={E18R} x={465} y={770} size={52} o={fin(f, t18) * fout(f, t9)} />
+      <TeX s={rep(E018L, String.raw`\frac`, String.raw`\tfrac`)} x={685} y={842} size={52} ax={1} o={fin(f, AT(k, 4, "so eighteen")) * fout(f, t9)} />
+      <TeX s={E018R} x={695} y={842} size={52} o={fin(f, t018) * fout(f, t9)} />
+      <TeX s={EQ_UNITS17} x={1130} y={420} size={58} o={fin(f, AT(k, 7, "Multiply it")) * fout(f, t12)} />
     </Scene>
   );
 };
@@ -1526,13 +1528,14 @@ const [FRZ_L, FRZ_R] = splitEq(EQ_FRZ), FRZP = eqPieces(FRZ_R); // DT/Dt | "= �
 const MARK_KM = W.frozen_marks_km as number[], MARK_T = W.frozen_marks_T_C as number[];
 const S17B: React.FC = () => {
   const f = useCurrentFrame(), k = K17B;
-  const c = camAt(1);
+  // review 6 S5: pan 14 km north over the first 45 frames so the 3-h balloon stays clear of the top edge
+  const c = camAt(1, ZC[1] + 14 * ramp(f, 4, 49));
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), tPlus = AT(k, 4, "plus point one eight"), t5 = SS(k, 5), t6 = SS(k, 6);
   const h = clamp((f - F0) / FPH17, 0, 3);
   const Tb = atH(W.frozen_balloon_T_C as number[], h), Tp = atH(W.frozen_pole_T_C as number[], h);
   const pin = cP(c, PIN), bal = cP(c, balloonAtH(h));
   const glow = pulse(f, 6, 30);
-  const oGraph = fin(f, t2);
+  const oGraph = fin(f, 6);
   const span = (n: number) => fin(f, t3 + n * 18, 10);
   const tFlat = AT(k, 5, "stays flat"), tClimb = AT(k, 5, "line climbs");
   const trail: string[] = [];
@@ -1544,7 +1547,7 @@ const S17B: React.FC = () => {
         <ClipBox id="clip17b">
           <CamTMap c={c} />
           {glow > 0 ? <rect x={GM.mx} y={GM.my} width={BOXW} height={BOXH} fill={C.gold} fillOpacity={0.14 * glow} /> : null}
-          {MARK_KM.map((xk, i) => <line key={i} x1={cX(c, xk)} y1={GM.my} x2={cX(c, xk)} y2={GM.my + BOXH} stroke="#ffffff" strokeWidth={3} strokeDasharray="10 8" opacity={0.8} />)}
+          {MARK_KM.map((xk, i) => <line key={i} x1={cX(c, xk)} y1={GM.my} x2={cX(c, xk)} y2={GM.my + BOXH} stroke="#ffffff" strokeWidth={3} strokeDasharray="10 8" opacity={0.8 * fin(f, F0 + (i + 1) * FPH17 - 4, 8)} />)}
           {/* S4: the three hourly spans across the isotherms, along the top edge */}
           {[0, 1, 2].map((n) => {
             const a = n === 0 ? 300 : MARK_KM[n - 1], b = MARK_KM[n];
@@ -1553,9 +1556,9 @@ const S17B: React.FC = () => {
         </ClipBox>
         <CamIsos c={c} xs={ISO0} Ts={ISO_T} />
         <CamFrame c={c} />
-        <ColourBar />
         <SnapCorners x0={GM.mx + 12} y0={GM.my + 12} x1={GM.mx + BOXW - 12} y1={GM.my + BOXH - 12} o={fout(f, 4, 14)} />
-        {MARK_KM.map((xk, i) => <Lbl key={i} x={cX(c, xk) + 24} y={GM.my + BOXH - 12} t={`${MARK_T[i].toFixed(2)} °C`} c={C.ink} s={T.floor} a="start" rot={-90} />)}
+        {/* review 6 S4: each mark appears when the balloon reaches it, horizontal, above the map (two rows) */}
+        {MARK_KM.map((xk, i) => <Lbl key={i} x={cX(c, xk) + 4} y={i === 1 ? 78 : 118} t={MARK_T[i].toFixed(2)} c={C.ink} s={T.floor} o={fin(f, F0 + (i + 1) * FPH17 - 4, 8)} />)}
         <SunGlyph x={150} y={58} />
         <Lbl x={196} y={58} t="map frozen" c={C.key} s={T.key} />
         <PoleThermometer x={pin[0] - 40} y={pin[1]} s={1.0} />
@@ -1564,16 +1567,16 @@ const S17B: React.FC = () => {
         <BalloonThermometer x={bal[0]} y={bal[1]} s={0.5} />
         <ClockText x={120} y={790} h={h} o={fin(f, t2)} />
         {/* maths zone: the two readouts */}
-        <g opacity={fin(f, t1)}><PoleThermometer x={1130} y={166} s={0.7} /></g>
-        <Lbl x={1162} y={120} t={`${Tp.toFixed(2)} °C`} c={C.local} s={T.calc} o={fin(f, t1)} />
-        <g opacity={fin(f, t2)}><BalloonThermometer x={1490} y={170} s={0.45} /></g>
-        <Lbl x={1524} y={120} t={`${Tb.toFixed(2)} °C`} c={C.first} s={T.calc} o={fin(f, t2)} />
+        <g opacity={fin(f, 6)}><PoleThermometer x={1130} y={166} s={0.7} /></g>
+        <Lbl x={1162} y={120} t={`${Tp.toFixed(2)} °C`} c={C.local} s={T.calc} o={fin(f, 6)} />
+        <g opacity={fin(f, 6)}><BalloonThermometer x={1490} y={170} s={0.45} /></g>
+        <Lbl x={1524} y={120} t={`${Tb.toFixed(2)} °C`} c={C.first} s={T.calc} o={fin(f, 6)} />
         <Lbl x={1440} y={262} t="local rate" c={C.local} s={T.key} o={fin(f, AT(k, 1, "local rate")) * fout(f, t4)} />
         {/* S5: the underlined terms of the equation */}
         <Lbl x={1150} y={366} t="local rate" c={C.local} s={T.floor} o={fin(f, AT(k, 4, "zero plus"))} />
         <Lbl x={1385} y={366} t="advection term" c={C.first} s={T.floor} o={fin(f, AT(k, 4, "plus v dot"))} />
         <TimeGraph x={GR.x} y={GR.y} w={GR.w} h={GR.h} Tr={GTR} o={oGraph} series={[
-          { t: TH, T: W.frozen_pole_T_C as number[], upto: h, c: C.local, dash: true },
+          { t: TH, T: W.frozen_pole_T_C as number[], upto: h, c: C.local },
           { t: TH, T: W.frozen_balloon_T_C as number[], upto: h, c: C.first, pts: [1, 2, 3].map((n) => ({ h: n, o: h >= n ? 1 : 0 })) },
         ]} />
         {[1, 2, 3].map((n) => <Lbl key={n} x={GXY.X(n - 0.5)} y={GXY.Y(13 + 0.18 * (n - 0.5)) - 34} t="+0.18" c={C.first} s={T.floor} a="middle" o={fin(f, t3 + (n - 1) * 18, 10)} />)}
@@ -1596,8 +1599,8 @@ const S18: React.FC = () => {
   // 4 = the pattern slides, 5 = 18 km per hour; the camera eases back from the s17b zoom on sentence 0
   const t1 = SS(k, 1), tNoSun = AT(k, 1, "no sunshine"), tZero = AT(k, 2, "is zero"), t3 = SS(k, 3), t4 = SS(k, 4);
   const tSlides = AT(k, 4, "slides with the wind"), t5 = SS(k, 5), t18 = AT(k, 5, "eighteen kilometres");
-  const z = 1 - ramp(f, 4, 49), cam = camAt(z);
-  const h = hoursFrom(f, t4 + 10, 1);
+  const z = 1 - ramp(f, 4, 49), cam = camAt(z, ZC[1] + 14);
+  const h = hoursFrom(f, tSlides, 1); // review 6 S15: the slide runs on "slides with the wind"
   const shift = atH(W.iso_shift_km as number[], h);
   const isoXs = ISO_X.map((xs) => atH(xs, h));
   const i13 = ISO_T.indexOf(13);
@@ -1637,8 +1640,8 @@ const S18: React.FC = () => {
           <MapFrame />
           {isoXs.map((xk, i) => (xk > 25 && xk < GM.w - 35 ? <Lbl key={i} x={gX(GM, xk)} y={GM.my - 34} t={`${ISO_T[i]} °C`} c={C.ink} s={T.floor} a="middle" /> : null))}
         </>}
-        <ColourBar />
-        <Lbl x={120} y={58} t="map slides" c={C.key} s={T.key} o={fin(f, 4)} />
+        <ColourBar o={1 - z} />
+        <Lbl x={120} y={58} t="map slides" c={C.key} s={T.key} o={fin(f, tSlides)} />
         <Keyword f={f} text="keeps its temperature" at={[140, 572]} appear={t1 + 20} out={t3} bend={0.1} targets={[[bal[0] - 10, bal[1] + 40]]} />
         <Lbl x={120} y={830} t="no sun · no mixing" c={C.key} s={T.floor} o={fin(f, tNoSun)} />
         <Keyword f={f} text="each parcel keeps its T" at={[100, 760]} appear={t3 + 10} bend={0.05}
@@ -1652,7 +1655,7 @@ const S18: React.FC = () => {
         <g opacity={fin(f, t1)}><BalloonThermometer x={MAPX + 50} y={420} s={0.6} /></g>
         <Lbl x={MAPX + 110} y={350} t={`${W.T_balloon_field_C[0].toFixed(2)} °C`} c={C.first} s={T.calc} o={fin(f, t1)} />
         <Keyword f={f} text="material derivative" at={[MAPX + 20, 268]} appear={tZero + 8} targets={[]} />
-        <ClockText x={MAPX + 10} y={680} h={h} o={fin(f, t4)} />
+        <ClockText x={MAPX + 10} y={680} h={h} o={fin(f, tSlides)} />
       </Svg>
       <TeX s={EQ_D0} x={MAPX + 20} y={150} size={T.eq} c={C.first} o={fin(f, tZero)} />
     </Scene>
@@ -1669,14 +1672,20 @@ const S19A: React.FC = () => {
   const t2 = SS(k, 2), tIn1 = AT(k, 2, "in one hour"), t18 = AT(k, 2, "eighteen kilometres"), tP1 = AT(k, 2, "twelve point eight two");
   const tP2 = AT(k, 3, "in two hours"), tP3 = AT(k, 3, "in three hours"), t6 = SS(k, 6), t7 = SS(k, 7);
   const tParcel = [tIn1, tP2, tP3], tTemp = [tP1, tP2 + 6, tP3 + 6];
-  const h = clamp((f - H0) / FPH, 0, 3);
+  // review 6 S7: the clock starts as "Now let's start the clock" ends; the first hour lands on "twelve point eight two
+  // after", then one constant rate (FPH) puts 2 h and 3 h on their words
+  const tC0 = SE(k, 4);
+  const h = f < H1 ? clamp((f - tC0) / (H1 - tC0), 0, 1) : clamp(1 + (f - H1) / FPH, 0, 3);
+  const FA = (n: number) => H1 + (n - 1) * FPH;
   const Tp = atH(W.T_pole_field_C as number[], h), Tb = atH(W.T_balloon_field_C as number[], h);
   const shift = atH(W.iso_shift_km as number[], h);
   const isoXs = ISO_X.map((xs) => atH(xs, h));
-  const bal = gP(GM, balloonOffAtH(h));
+  // review 6 M3: the balloon on its true path from the fixed thermometer's place, drawn 25 px to its right
+  const bal = add(gP(GM, balloonAtH(h)), [25, 0]);
   const oLine = fin(f, t1, 14);
   const x282 = gX(GM, W.upwind_x_km[0]);
-  const oBand = fin(f, t18) * fout(f, H0, 12);
+  const oBand = fin(f, t18) * fout(f, tP2, 12);
+  const P1 = gP(GM, [W.upwind_x_km[0], W.upwind_y_km[0]]);
   return (
     <Scene>
       <Svg>
@@ -1689,21 +1698,23 @@ const S19A: React.FC = () => {
         {isoXs.map((xk, i) => (xk > 25 && xk < GM.w - 35 ? <Lbl key={i} x={gX(GM, xk)} y={GM.my - 34} t={`${ISO_T[i]} °C`} c={C.ink} s={T.floor} a="middle" /> : null))}
         <MapFrame />
         <ColourBar />
-        <Lbl x={DOWN[0] + 24} y={DOWN[1] - 6} t="warmer" c={C.key} s={T.key} o={fin(f, tWarm)} />
+        <Lbl x={DOWN[0] + 64} y={DOWN[1] + 40} t="warmer" c={C.key} s={T.key} o={fin(f, tWarm)} />
         <Lbl x={FAR[0] - 24} y={FAR[1] - 18} t="colder" c={C.key} s={T.key} a="end" o={fin(f, tCold) * fout(f, t2)} />
         <Lbl x={FAR[0] - 24} y={FAR[1] + 38} t="upwind" c={C.key} s={T.key} a="end" o={fin(f, tUp) * fout(f, t2)} />
         {/* S3: the mirror of s17's span: 18 km across the isotherms on the colder side (rose) */}
+        {/* review 6 M4: 18 km ACROSS the isotherms = a horizontal bracket at the parcel's height, parcel → 300-km line */}
         {oBand > 0 ? <g opacity={oBand}>
-          <line x1={x282} y1={PINS[1]} x2={PINS[0]} y2={PINS[1]} stroke={C.neg} strokeWidth={20} strokeOpacity={0.9} />
-          <Lbl x={PINS[0] + 26} y={PINS[1] - 26} t={`${W.upwind_across_km[0].toFixed(0)} km`} c={C.ink} s={T.key} a="start" />
+          <Bracket p={[P1[0], P1[1] + 26]} q={[PINS[0], P1[1] + 26]} c={C.ink} off={0} />
+          <Dash p={[PINS[0], PINS[1] + 4]} q={[PINS[0], P1[1] + 26]} w={3} d="4 6" />
+          <Lbl x={P1[0] - 18} y={P1[1] + 34} t={`${W.upwind_across_km[0].toFixed(0)} km across`} c={C.ink} s={T.key} a="end" />
         </g> : null}
         <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.2} />
         {/* the queued parcels, labelled by arrival; each number rides with its parcel, then flies into the pole readout */}
         {UPT.map((Tc, i) => {
-          const n = i + 1, fa = H0 + n * FPH;
+          const n = i + 1, fa = FA(n);
           const p = gP(GM, [atH(UPTX[i], h), atH(UPTY[i], h)]);
           const oDot = fin(f, tParcel[i], 10) * (1 - ramp(f, fa, fa + 8));
-          const lp: Pt = [p[0] - 26, p[1] + 4 + (i - 1) * 28];
+          const lp: Pt = [p[0] - 26, p[1] + (i - 1) * 20];
           const fly = ramp(f, fa, fa + 12);
           const pos = lerp(lp, [POLE_RD[0] + textW(`${Tc.toFixed(2)} °C`, T.calc), POLE_RD[1]], fly);
           const oNum = fin(f, tTemp[i], 10) * (1 - ramp(f, fa + 10, fa + 14));
@@ -1711,28 +1722,28 @@ const S19A: React.FC = () => {
             <g key={i}>
               {oDot > 0 ? <g opacity={oDot}>
                 <circle cx={p[0]} cy={p[1]} r={14} fill={tColor(Tc)} stroke={C.ink} strokeWidth={4} />
-                <Lbl x={p[0] + 24} y={p[1] + 2} t={`in ${n} h`} c={C.key} s={T.floor} o={1 - ramp(f, SS(k, 4), SS(k, 4) + 10)} />
+                <Lbl x={p[0] + 24} y={p[1] + 2} t={`in ${n} h`} c={C.key} s={T.floor} o={1 - ramp(f, fa - 6, fa + 2)} />
               </g> : null}
               <Lbl x={pos[0]} y={pos[1]} t={i === 0 || fly > 0 ? `${Tc.toFixed(2)} °C` : Tc.toFixed(2)} c={fly > 0.5 ? C.local : C.ink} s={T.key + (T.calc - T.key) * fly} a="end" o={oNum} />
             </g>
           );
         })}
-        <BalloonThermometer x={bal[0]} y={bal[1]} s={0.6} o={fin(f, SS(k, 4) + 6, 12)} />
+        <BalloonThermometer x={bal[0]} y={bal[1]} s={0.6} />
         <ClockText x={120} y={790} h={h} />
-        <Keyword f={f} text="colder air arriving" at={[520, 790]} appear={AT(k, 6, "Colder and colder")} targets={[lerp(PINS, FAR, 0.65)]} bend={0.08} />
+        <Keyword f={f} text="colder air arriving" at={[520, 790]} appear={AT(k, 6, "Colder and colder")} targets={[lerp(FAR, PINS, 0.18)]} bend={-0.05} />
         {/* maths zone: the two readouts on one clock, and the graph (same axes as s17b) */}
         <PoleThermometer x={1130} y={196} s={0.7} />
         {/* while a parcel's number flies in, the readout steps aside, then shows the arrived value */}
-        <Lbl x={POLE_RD[0]} y={POLE_RD[1]} t={`${Tp.toFixed(2)} °C`} c={C.local} s={T.calc} o={1 - Math.max(...[1, 2, 3].map((n) => ramp(f, H0 + n * FPH - 2, H0 + n * FPH + 2) * (1 - ramp(f, H0 + n * FPH + 10, H0 + n * FPH + 14))))} />
+        <Lbl x={POLE_RD[0]} y={POLE_RD[1]} t={`${Tp.toFixed(2)} °C`} c={C.local} s={T.calc} o={1 - Math.max(...[1, 2, 3].map((n) => ramp(f, FA(n) - 2, FA(n) + 2) * (1 - ramp(f, FA(n) + 10, FA(n) + 14))))} />
         <BalloonThermometer x={1490} y={200} s={0.45} />
         <Lbl x={1524} y={150} t={`${Tb.toFixed(2)} °C`} c={C.first} s={T.calc + 8 * pulse(f, t7 + 10, 24)} />
         <TimeGraph x={GR.x} y={GR.y} w={GR.w} h={GR.h} Tr={GTR} series={[
           { t: TH, T: W.T_balloon_field_C as number[], upto: h, c: C.first, o: 0.4 + 0.6 * fin(f, t7) },
-          { t: TH, T: W.T_pole_field_C as number[], upto: h, c: C.local, dash: true, pts: [1, 2, 3].map((n) => ({ h: n, o: fin(f, H0 + n * FPH + 16, 8) })) },
+          { t: TH, T: W.T_pole_field_C as number[], upto: h, c: C.neg, pts: [1, 2, 3].map((n) => ({ h: n, o: fin(f, FA(n) + 12, 8) })) },
         ]} />
         {/* the legend (no word 'pole' on screen: orchestrator update 2) */}
-        <line x1={GR.x} y1={300} x2={GR.x + 70} y2={300} stroke={C.local} strokeWidth={6} strokeDasharray="16 10" />
-        <Lbl x={GR.x + 90} y={300} t="fixed thermometer" c={C.local} s={T.floor} />
+        <line x1={GR.x} y1={300} x2={GR.x + 70} y2={300} stroke={C.neg} strokeWidth={6} />
+        <Lbl x={GR.x + 90} y={300} t="fixed thermometer" c={C.neg} s={T.floor} />
         <line x1={GR.x} y1={360} x2={GR.x + 70} y2={360} stroke={C.first} strokeWidth={6} />
         <Lbl x={GR.x + 90} y={360} t="balloon" c={C.first} s={T.floor} />
         <Lbl x={GR.x} y={470} t="−0.18 °C per hour" c={C.neg} s={T.key} o={fin(f, AT(k, 6, "falls by"))} />
@@ -1798,7 +1809,8 @@ const S19C: React.FC = () => {
   // 6 = same advection term, different local rate
   const t1 = SS(k, 1), tAdv = AT(k, 2, "that's the advection"), t3 = SS(k, 3), t4 = SS(k, 4), tLoc = AT(k, 4, "minus point one eight"), t5 = SS(k, 5);
   const tSame = AT(k, 6, "the same in both"), tDiff = AT(k, 6, "only the local rate");
-  const bal = gP(GM, balloonOffAtH(1)), bal0 = gP(GM, balloonOffAtH(0));
+  // review 6 M3: the balloon on its true path: from the fixed thermometer's place (300, 180 km) to (318, 211 km) at 1 h
+  const bal = gP(GM, balloonAtH(1)), bal0 = PINS;
   const x1318 = gX(GM, W.iso_1318_x0_km);
   const gP1 = fin(f, t1 + 10, 24), gM = fin(f, tLoc - 10, 24), gU = fin(f, t3 + 10, 24);
   const plA = Math.max(pulse(f, tAdv, 24), pulse(f, tSame, 30)), plL = pulse(f, tDiff, 30);
@@ -1822,36 +1834,27 @@ const S19C: React.FC = () => {
         <Lbl x={bal[0] + 34} y={bal[1] - 110} t={`${W.T_balloon_field_C[60].toFixed(2)} °C`} c={C.first} s={T.key + 14 * pulse(f, 6, 24) + 14 * fin(f, t5)} />
         <g opacity={fin(f, t1 + 20)}>
           {/* S7: bracket under the balloon's 1-h move, label right beside it */}
-          <Bracket p={[bal0[0], 640]} q={[x1318, 640]} c={C.ink} />
-          <Lbl x={x1318 + 16} y={640} t={`${W.across_km_1h.toFixed(0)} km across`} c={C.ink} s={T.key} a="start" />
+          <Bracket p={[bal0[0], bal0[1] + 30]} q={[x1318, bal0[1] + 30]} c={C.ink} off={0} />
+          <Lbl x={x1318 + 16} y={bal0[1] + 30} t={`${W.across_km_1h.toFixed(0)} km across`} c={C.ink} s={T.key} a="start" />
         </g>
         {/* the upper row: map frozen (Case 1), with the s17b graph as a thumbnail */}
         <g opacity={fin(f, t3)}>
           <SunGlyph x={1136} y={270} s={0.8} />
           <Lbl x={1170} y={270} t="map frozen" c={C.key} s={T.key} />
-          <TimeGraph thumb x={1130} y={330} w={210} h={100} Tr={GTR} series={[
-            { t: TH, T: W.frozen_pole_T_C as number[], upto: 3, c: C.local, dash: true },
-            { t: TH, T: W.frozen_balloon_T_C as number[], upto: 3, c: C.first },
-          ]} />
         </g>
         <Balance o={fin(f, t3)} x0={BAL_X0} y={BU_Y} scale={BAL_SC} plus={FR.advective_K_s * 3600} minus={FR.local_K_s * 3600} gPlus={gU} gMinus={1} id="bal19u" h={40} />
-        <Lbl x={BAL_X0 + 150} y={BU_Y - 52} t={`+${adv[0].toFixed(2)}`} c={C.first} s={T.floor} a="middle" o={gU} />
-        <Lbl x={BAL_X0 - 16} y={BU_Y} t="0" c={C.local} s={T.floor} a="end" o={gU} />
+        <Lbl x={BAL_X0 + 150} y={BU_Y - 52} t={`+${adv[0].toFixed(2)}`} c={C.first} s={T.floor + 10 * plA} a="middle" o={gU} />
+        <Lbl x={BAL_X0 - 16} y={BU_Y} t="local rate 0" c={C.local} s={T.floor + 10 * plL} a="end" o={gU} />
         {/* the lower row: map slides (Case 2) */}
         <Lbl x={1110} y={478} t="map slides" c={C.key} s={T.key} o={fin(f, t1)} />
         <Balance o={fin(f, t1)} x0={BAL_X0} y={BL_Y} scale={BAL_SC} plus={W.balance_moved_K[0]} minus={W.balance_local_K[0]} gPlus={gP1} gMinus={gM} id="bal19" />
-        <Lbl x={BAL_X0 + 180} y={BL_Y - 70} t={`+${W.balance_moved_K[0].toFixed(2)}`} c={C.first} s={T.key} a="middle" o={gP1} />
+        <Lbl x={BAL_X0 + 180} y={BL_Y - 70} t={`+${W.balance_moved_K[0].toFixed(2)}`} c={C.first} s={T.key + 12 * plA} a="middle" o={gP1} />
         <Lbl x={BAL_X0 + 180} y={BL_Y + 90} t="advection term" c={C.first} s={T.key} a="middle" o={gP1} />
-        <Lbl x={BAL_X0 - 180} y={BL_Y - 70} t={`−${Math.abs(W.balance_local_K[0]).toFixed(2)}`} c={C.neg} s={T.key} a="middle" o={gM} />
+        <Lbl x={BAL_X0 - 180} y={BL_Y - 70} t={`−${Math.abs(W.balance_local_K[0]).toFixed(2)}`} c={C.neg} s={T.key + 12 * plL} a="middle" o={gM} />
         <Lbl x={BAL_X0 - 180} y={BL_Y + 90} t="local rate" c={C.local} s={T.key} a="middle" o={gM} />
         <g opacity={gM}><PoleThermometer x={1150} y={720} s={0.6} /></g>
         {/* pulses: the two teal bars (same advection term), then the two local bars (local rate differs) */}
-        {plA > 0 ? <g opacity={plA} fill="none" stroke={C.gold} strokeWidth={5}>
-          <rect x={BAL_X0 - 4} y={BU_Y - 24} width={300 * gU + 8} height={48} /><rect x={BAL_X0 - 4} y={BL_Y - 32} width={300 * gP1 + 8} height={64} />
-        </g> : null}
-        {plL > 0 ? <g opacity={plL} fill="none" stroke={C.gold} strokeWidth={5}>
-          <line x1={BAL_X0 - 30} y1={BU_Y} x2={BAL_X0 - 4} y2={BU_Y} /><rect x={BAL_X0 - 304} y={BL_Y - 32} width={300} height={64} />
-        </g> : null}
+        {/* review 6 S10: no outlines (boxes); the pulses grow the bar labels instead */}
         <Lbl x={120} y={772} t="same advection term" c={C.key} s={T.key} o={fin(f, tSame)} />
         <Lbl x={120} y={836} t="local rate differs" c={C.key} s={T.key} o={fin(f, tDiff)} />
       </Svg>
@@ -1873,7 +1876,7 @@ const S19D: React.FC = () => {
     [AT(k, 4, "plus point one eight when"), AT(k, 4, "and zero in our story")]];
   const dim = (r: number) => (r === 0 ? 1 : 1 - 0.65 * fin(f, t5, 14));
   const fmt = (v: number) => (Math.abs(v) < 5e-4 ? "0" : v > 0 ? `+${v.toFixed(2)}` : `−${Math.abs(v).toFixed(2)}`);
-  const colr = (v: number) => (Math.abs(v) < 5e-4 ? C.local : v > 0 ? C.first : C.neg);
+  const colr = (v: number, r: number) => (Math.abs(v) < 5e-4 ? C.local : v < 0 ? C.neg : r === 2 ? C.key : C.first); // review 6 S12: row 3 warm white
   const sym = [String.raw`\mathbf v\cdot\nabla T`, EQ_DTDT_LOCAL, EQ_DTDT_MAT];
   const words = ["advection term", "local rate", "material derivative"];
   const run = clamp((f - t1 - 20) / 70, 0, 1);
@@ -1892,17 +1895,18 @@ const S19D: React.FC = () => {
             {r === 0 ? <Arrow p={[110, rowY[0] + 20]} q={[190, rowY[0] - 30]} color={C.first} w={8} head={26} /> : null}
             {r === 1 ? <PoleThermometer x={150} y={rowY[1] + 50} s={0.75} /> : null}
             {r === 2 ? <BalloonThermometer x={150} y={rowY[2] + 50} s={0.5} /> : null}
-            <Lbl x={460} y={rowY[r]} t={words[r]} c={r === 0 ? C.first : r === 1 ? C.local : C.first} s={T.key + 8 * (r === 0 ? pulse(f, t1, 24) : r === 1 ? pulse(f, t3, 24) : pulse(f, t4, 24))} />
+            <Lbl x={460} y={rowY[r]} t={words[r]} c={r === 0 ? C.first : r === 1 ? C.local : C.key} s={T.key + 8 * (r === 0 ? pulse(f, t1, 24) : r === 1 ? pulse(f, t3, 24) : pulse(f, t4, 24))} />
             <Lbl x={460} y={rowY[r] + 52} t={["the wind", "fixed thermometer", "balloon"][r]} c={C.muted} s={T.floor} />
-            {[0, 1].map((cI) => <Lbl key={cI} x={colX[cI]} y={rowY[r]} t={fmt(R3[r][cI])} c={colr(R3[r][cI])} s={84} a="middle" o={fin(f, tV[r][cI], 10)} />)}
+            {[0, 1].map((cI) => <Lbl key={cI} x={colX[cI]} y={rowY[r]} t={fmt(R3[r][cI])} c={colr(R3[r][cI], r)} s={84} a="middle" o={fin(f, tV[r][cI], 10)} />)}
           </g>
         ))}
         {/* S2: a tiny wind arrow crossing three isotherm ticks beside the advection row */}
         <g opacity={fin(f, t1) * fout(f, t2 + 30)}>
-          {[0, 1, 2].map((i) => <line key={i} x1={860 + i * 40} y1={rowY[0] - 32} x2={860 + i * 40} y2={rowY[0] + 32} stroke="#ffffff" strokeWidth={3} opacity={0.7} />)}
-          <Arrow p={[830 + 110 * run, rowY[0]]} q={[880 + 110 * run, rowY[0]]} color={C.first} w={6} head={20} halo={false} />
+          {/* review 6 S11: the glyph sits under "the wind" (x 460-640), clear of the value columns */}
+          {[0, 1, 2].map((i) => <line key={i} x1={500 + i * 50} y1={rowY[0] + 82} x2={500 + i * 50} y2={rowY[0] + 114} stroke="#ffffff" strokeWidth={3} opacity={0.7} />)}
+          <Arrow p={[460 + 120 * run, rowY[0] + 98]} q={[520 + 120 * run, rowY[0] + 98]} color={C.first} w={6} head={20} halo={false} />
         </g>
-        <Lbl x={colX[0] + 120} y={rowY[0]} t="same" c={C.key} s={T.floor} a="start" o={fin(f, tV[0][1] + 6) * fout(f, t3)} />
+        <Lbl x={colX[0] + 120} y={rowY[0]} t="same" c={C.key} s={T.key} a="start" o={fin(f, tV[0][1] + 6) * fout(f, t3)} />
         {/* S5: row 3 = row 1 + row 2 in each column: a gold sum line and a '+' */}
         <g opacity={fin(f, AT(k, 4, "it's the local rate plus")) * dim(1)} stroke={C.gold} strokeWidth={4}>
           {colX.map((x, i) => <g key={i}>
@@ -1913,7 +1917,7 @@ const S19D: React.FC = () => {
         {colX.map((x, i) => <Lbl key={i} x={x + 186} y={(rowY[0] + rowY[1]) / 2} t="+" c={C.gold} s={T.key} o={fin(f, AT(k, 4, "it's the local rate plus")) * dim(1)} />)}
         <Lbl x={960} y={820} t="degrees per hour from crossing isotherms" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 5, "think of"))} />
       </Svg>
-      {[0, 1, 2].map((r) => <TeX key={r} s={sym[r]} x={230} y={rowY[r]} size={T.calc} c={r === 1 ? C.local : C.first} o={fin(f, 6 + 8 * r) * dim(r)} />)}
+      {[0, 1, 2].map((r) => <TeX key={r} s={sym[r]} x={230} y={rowY[r]} size={T.calc} c={r === 1 ? C.local : r === 2 ? C.key : C.first} o={fin(f, 6 + 8 * r) * dim(r)} />)}
       <TeX s={EQ_TF} x={960} y={80} size={60} ax={0.5} o={fin(f, AT(k, 4, "is what the balloon"))} />
     </Scene>
   );

@@ -113,7 +113,8 @@ def clock_rate() -> str:
         return (at(p3) - at(p1)) / 2.0                     # whole hours 1 and 3 on the spoken numbers
     r19 = rate("s19a_pole_cools", 5, "twelve point eight two after", "twelve point four six after")
     r17 = rate("s17b_frozen", 2, "thirteen point one eight after", "thirteen point five four after")
-    return {"s19a (also s12, s18, s20)": f"1 h in {r19:.3f} s (x {3600 / r19:.0f})",
+    return {"s19a (also s12, s18, s20)": f"1 h in {r19:.3f} s (x {3600 / r19:.0f}); s19a's first hour runs from the end of "
+                                          "'Now let's start the clock' to 'twelve point eight two after' (review 6 S7)",
             "s17b": f"1 h in {r17:.3f} s (x {3600 / r17:.0f})", "s00": "1 h in 4.000 s (x 900), title"}
 
 
