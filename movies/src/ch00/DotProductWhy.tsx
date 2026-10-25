@@ -86,6 +86,8 @@ const EQ_SH_AB = String.raw`\frac{8}{3.162} = 2.530`;
 const EQ_SH_BA = String.raw`\frac{8}{5.099} = 1.569`;
 const EQ_TRAY = String.raw`2.530\times3.162 \approx 8 \approx 1.569\times5.099`;
 const EQ_VX = String.raw`\mathbf v\cdot\hat{\mathbf x} = 6\times1 + 8\times0 = 6\ \mathrm{m/s}`;
+const EQ_V6 = String.raw`\mathbf v = (6,\ 8)\ \mathrm{m/s}`;
+const EQ_XHAT = String.raw`\hat{\mathbf x} = (1,\ 0)`;
 const EQ_W = String.raw`W = \mathbf F\cdot\mathbf d = (|\mathbf F|\cos\theta)\,|\mathbf d|`;
 const EQ_WSH = String.raw`\text{shadow} = 20\cos 60^\circ = 10\ \mathrm N`;
 const EQ_W5 = String.raw`W = 10\ \mathrm N\times5\ \mathrm m = 50\ \mathrm J`;
@@ -98,6 +100,8 @@ const EQ_DXDY = String.raw`\frac{\partial T}{\partial x} = \frac{1\ ^\circ\mathr
 const EQ_GRAD = String.raw`\nabla T = \left(\frac{\partial T}{\partial x},\ \frac{\partial T}{\partial y}\right)`;
 const EQ_GRADN = String.raw`\nabla T = (1.00\times10^{-5}\ \mathrm{K/m},\ 0)`;
 const EQ_UNIT = String.raw`\frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}} = \frac{1\ \mathrm K}{10^{5}\ \mathrm m}`;
+const EQ_GNORM = String.raw`|\nabla T| = \sqrt{(\partial T/\partial x)^2 + (\partial T/\partial y)^2} = \sqrt{(1.00\times10^{-5})^2 + 0^2} = 1.00\times10^{-5}\ \mathrm{K/m}`;
+const EQ_GNORM2 = String.raw`|\nabla T| = \sqrt{(2.00\times10^{-5})^2 + 0^2} = 2.00\times10^{-5}\ \mathrm{K/m}`;
 const EQ_COS60 = String.raw`10\times\cos 60^\circ = 5.00\ \mathrm{m/s}`;
 const EQ_SIN60 = String.raw`10\times\sin 60^\circ = 8.66\ \mathrm{m/s}`;
 const EQ_VGT = String.raw`\mathbf v\cdot\nabla T = (|\mathbf v|\cos\theta)\,|\nabla T|`;
@@ -141,6 +145,9 @@ const CHECK: [string, number, number, number][] = [
   ["balloon 3 h", W.T_balloon_field_C[180], 13, 1e-9], ["N8 moved", W.balance_moved_K[0], 0.18, 1e-9], ["N8 local", W.balance_local_K[0], -0.18, 1e-9],
   ["N8 sum", W.balance_sum_K[0], 0, 1e-9], ["13.18", W.T_under_balloon[1], 13.18, 1e-9], ["∂T/∂t", W.dTdt_K_h, -0.18, 1e-9],
   ["iso shift 1 h", W.iso_shift_km[60], 18, 1e-9], ["N11 steep spacing", W.isotherms_steep_km[1] - W.isotherms_steep_km[0], 50, 1e-9],
+  ["s10 v", cheap.v[0] * 10 + cheap.v[1], 68, 1e-9], ["s10 |v|", cheap.norm_v, 10, 1e-9],
+  ["U-M4.3 |∇T|", W.pyth_G1[2], 1e-5, 1e-15], ["U-M4.3 ∂T/∂x, ∂T/∂y", W.pyth_G1[0] + W.pyth_G1[1] * 1e9, 1e-5, 1e-15],
+  ["U-M4.3 |∇T| steep", W.pyth_G2[2], 2e-5, 1e-15], ["U-M4.3 steep components", W.pyth_G2[0] + W.pyth_G2[1] * 1e9, 2e-5, 1e-15],
   ["steep pole 1 h", W.T_pole_steep_field_C[60], 12.64, 1e-9], ["pin T", W.T_pin, 13, 1e-9],
 ];
 for (const [n, v, ref, tol] of CHECK) if (Math.abs(v - ref) > tol) throw new Error(`data ≠ storyboard TeX: ${n} = ${v}, TeX ${ref}`);
@@ -684,25 +691,29 @@ const S09: React.FC = () => {
 const PWm = mkP(260, 740, 70);
 const [VX_L, VX_R] = splitEq(EQ_VX), VXP = eqPieces(VX_R);
 const S10: React.FC = () => {
+  // U-M4.1/U-M4.2 (fix loop 3): the wind picture is on the left from the first second; the goal ("how much blows east?")
+  // comes before the calculation; the eastward shadow and "6 m/s east" appear only after the result is said.
   const f = useCurrentFrame(), k = K("s10_reason2_cheap");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tPart = AT(k, 3, "the eastward part");
-  const o0 = fin(f, 6) * fout(f, t1 + 20), wind = fin(f, t1, 15), oX = fin(f, t2), oSh = fin(f, t3, 18);
-  const v = cheap.v as Pt, Ow = PWm(0, 0), vT = PWm(...v), vx = PWm(cheap.v_dot_xhat, 0);
+  const t2 = SS(k, 2), t3 = SS(k, 3), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7);
+  const tTen = AT(k, 1, "at ten metres"), tComp = AT(k, 2, "components six"), tX = AT(k, 4, "x hat"), tPart = AT(k, 6, "the eastward part");
+  const o0 = fin(f, 6) * fout(f, t2 - 12), pic = fin(f, 4, 15), oLegs = fin(f, tComp), oX = fin(f, tX), oSh = fin(f, t6, 18);
+  const v = cheap.v as Pt, Ow = PWm(0, 0), vT = PWm(...v), vx = PWm(cheap.v_dot_xhat, 0), mid = lerp(Ow, vT, 0.5);
   return (
     <Scene>
       <Svg>
-        <g opacity={wind}>
+        <g opacity={pic}>
           <Grid P={PWm} xr={[0, 9]} yr={[0, 9]} o={0.7} />
           <Lbl x={PWm(9, 0)[0]} y={Ow[1] + 52} t="east" c={C.muted} s={T.floor} a="end" />
           <Lbl x={Ow[0] - 20} y={PWm(0, 9)[1]} t="north" c={C.muted} s={T.floor} a="end" rot={-90} />
           <Band p={Ow} q={lerp(Ow, vx, oSh)} color={C.first} o={oSh > 0 ? 1 : 0} w={22} />
           {oSh > 0 ? <><Dash p={vT} q={vx} o={oSh} w={4} /><RightTick at={vx} u1={unit(vx, Ow)} u2={unit(vx, vT)} o={oSh} /></> : null}
-          <Dash p={Ow} q={PWm(v[0], 0)} c={C.first} w={5} d="5 10" o={1 - oSh} />
-          <Dash p={PWm(v[0], 0)} q={vT} c={C.first} w={5} d="5 10" />
-          <Lbl x={PWm(3.6, 0)[0]} y={Ow[1] - 44} t={`${v[0]} m/s east`} c={C.first} s={T.key} a="middle" />
-          <Lbl x={PWm(6.25, 0)[0]} y={PWm(0, 4)[1]} t={`${v[1]} m/s north`} c={C.first} s={T.key} />
+          <Dash p={Ow} q={PWm(v[0], 0)} c={C.first} w={5} d="5 10" o={oLegs * (1 - oSh)} />
+          <Dash p={PWm(v[0], 0)} q={vT} c={C.first} w={5} d="5 10" o={oLegs} />
+          <Lbl x={PWm(3.6, 0)[0]} y={Ow[1] - 44} t={`${cheap.v_dot_xhat} m/s east`} c={C.first} s={T.key} a="middle" o={oSh} />
           <Arrow p={Ow} q={vT} color={C.first} />
-          <Lbl x={vT[0] + 26} y={vT[1] - 20} t={`v = (${v[0]}, ${v[1]}) m/s`} c={C.first} s={T.key} />
+          <Lbl x={mid[0] - 34} y={mid[1] - 34} t={`${cheap.norm_v} m/s`} c={C.first} s={T.key} a="end" o={fin(f, tTen) * fout(f, t5)} />
+          <Lbl x={vT[0] + 26} y={vT[1] - 20} t="north-east" c={C.key} s={T.key} o={fin(f, AT(k, 1, "north-east")) * fout(f, tComp - 10)} />
+          <Lbl x={vT[0] + 26} y={vT[1] - 20} t="v" c={C.first} s={T.calc} o={fin(f, tComp)} />
           <Arrow p={Ow} q={PWm(1, 0)} color={C.second} w={10} head={34} o={oX} />
           <Lbl x={PWm(1, 0)[0] + 10} y={Ow[1] + 56} t="x̂ = (1, 0)" c={C.second} s={T.key} a="middle" o={oX} />
         </g>
@@ -710,13 +721,17 @@ const S10: React.FC = () => {
           <Lbl x={1580} y={175} t="no angle" c={C.key} s={N7} />
           <Lbl x={1580} y={255} t="no √" c={C.key} s={N7} />
         </g>
+        <Keyword f={f} text="how much east?" at={[1080, 340]} s={N7} appear={t3} out={tX - 4} targets={[[PWm(7.6, 0)[0], Ow[1] - 14]]} bend={0.12} />
         <Keyword f={f} text="eastward part" at={[560, 830]} appear={tPart} targets={[add(lerp(Ow, vx, 0.75), [0, 14])]} />
+        <Keyword f={f} text="the first component" at={[1150, 310]} appear={t7} targets={[[1252, 246]]} bend={0.1} />
       </Svg>
       <TeX s={String.raw`5\times1 + 1\times3`} x={1080} y={210} size={T.calc} o={o0} />
       <TeX s={String.raw`|\mathbf a|\,|\mathbf b|\cos\theta`} x={1080} y={340} size={T.calc} c={C.muted} o={o0} />
-      <CalcStack f={f} x={1250} y={330} rows={[
-        { lhs: VX_L, rhs: VXP[0], at: t3 },
-        { rhs: rep(VXP[1], "= 6", String.raw`= \mathbf{6}`), at: AT(k, 3, "six, the"), cont: true, c: C.first, ul: tPart },
+      <TeX s={EQ_V6} x={1080} y={200} size={T.calc} c={C.first} o={fin(f, t2 - 2)} />
+      <TeX s={EQ_XHAT} x={1080} y={460} size={T.calc} c={C.second} o={fin(f, tX + 6)} />
+      <CalcStack f={f} x={1250} y={560} rows={[
+        { lhs: VX_L, rhs: VXP[0], at: t5 },
+        { rhs: rep(VXP[1], "= 6", String.raw`= \mathbf{6}`), at: AT(k, 5, "which is six"), cont: true, c: C.first, ul: tPart },
       ]} />
     </Scene>
   );
@@ -1047,7 +1062,8 @@ const S14: React.FC = () => {
         <g opacity={oW2}>
           {f < t4 ? [400, 500].map((x, i) => <Lbl key={x} x={gX(GM, x)} y={PINS[1] - 70 - 56 * i} t="+1 °C" c={C.ink} s={T.key} a="middle" o={xk2 >= x ? 1 : 0} />) : null}
           <circle cx={w2[0]} cy={w2[1]} r={16} fill={tColor(T2)} stroke={C.ink} strokeWidth={4} />
-          <Lbl x={w2[0] + 26} y={w2[1] + 40} t={`${T2.toFixed(0)} °C`} c={C.ink} s={T.key} />
+          {/* S3 (review 5c): the tag sits left of the dot, clear of the colour bar */}
+          <Lbl x={w2[0] - 26} y={w2[1] + 40} t={`${T2.toFixed(0)} °C`} c={C.ink} s={T.key} a="end" />
         </g>
         <Lbl x={MAPX + 20} y={330} t="east only" c={C.key} s={T.key} o={fin(f, AT(k, 3, "east only"))} />
       </Svg>
@@ -1092,7 +1108,8 @@ const ALONG_T: Pt = [PINS[0], PINS[1] - (W.v_along_isotherm_m_s as number[])[1] 
 const ACR_Y = PINS[1] + 36; // the across part, drawn 36 px below ∇T (same length: 5 m/s × US px)
 const ALG_X = PINS[0] - 52; // the along part, drawn 52 px west of the 13 °C isotherm (N9: room for the balloon at the pin)
 const WindLayer: React.FC<{ oV: number; oSh: number; oAl: number; f: number; tDot?: number }> = ({ oV, oSh, oAl, f, tDot }) => {
-  const dotY = tDot !== undefined ? clamp((f - tDot) / 60, 0, 1) : 0; // a dot sliding along the 13 °C isotherm
+  // S4 (review 5c): the slide ends 30 px higher, so the "13 °C" tag clears the map's bottom border
+  const dotY = tDot !== undefined ? clamp((f - tDot) / 60, 0, 1) * 0.8 : 0; // a dot sliding along the 13 °C isotherm
   return (
     <g>
       {/* S14 (review 5): each wind part is its own arrow, offset from ∇T and from the 13 °C isotherm */}
@@ -1155,16 +1172,27 @@ if (plainOf(VGT_PARTS) !== rep(VGT_R, String.raw`\,|`, String.raw` \,|`)) throw 
 const VGTN_P = eqPieces(EQ_VGTN); // "= 5.00 m/s × 1.00e-5 K/m", "= 5.00e-5 K/s"
 const [VGTN_A, VGTN_B] = VGTN_P[0].split(String.raw`\times1.00`);
 const KH_R = splitEq(EQ_KH)[1];
+const [LNG2_L, LNG2_R] = splitEq(EQ_GNORM2), LNG2_P = eqPieces(LNG2_R); // |∇T| | "= √((2.00e-5)² + 0²)", "= 2.00e-5 K/m"
+if (LNG2_P.length !== 2) throw new Error("s20 |∇T| pieces");
+const [LNG_L, LNG_R] = splitEq(EQ_GNORM), LNG_P = eqPieces(LNG_R); // |∇T| | "= √(…)", "= √((1.00e-5)² + 0²)", "= 1.00e-5 K/m"
+if (LNG_P.length !== 3) throw new Error("s16b |∇T| pieces");
 // S2 (review 5): slash units, as spoken; the two metres cancel
 const UNITS: Part[] = [{ t: "(" }, { t: String.raw`\mathrm m`, x: C.neg }, { t: String.raw`/\mathrm s)\times(\mathrm K/` },
   { t: String.raw`\mathrm m`, x: C.neg }, { t: String.raw`) = \mathrm K/\mathrm s` }];
 const S16B: React.FC = () => {
   const f = useCurrentFrame(), k = K("s16b_advection_number");
-  const t1 = SS(k, 1), tKs = AT(k, 1, "leaving five"), tKh = AT(k, 1, "or point one eight");
+  // U-M4.3 (fix loop 3): sentence 0 = |∇T| by Pythagoras, shown first; sentence 1 = v·∇T, sentence 2 = the units
+  const t0b = SS(k, 1), t1 = SS(k, 2), tKs = AT(k, 2, "leaving five"), tKh = AT(k, 2, "or point one eight");
+  // the |∇T| block has its own stack (52 px, "=" at x 1200) and gives way to the v·∇T stack as sentence 1 starts
+  const gnRows: CalcRow[] = [
+    { lhs: LNG_L, rhs: LNG_P[0], at: 4, c: C.second, lc: C.second, h: 110 },
+    { rhs: LNG_P[1], at: AT(k, 0, "the square root"), cont: true, h: 100 },
+    { rhs: LNG_P[2], at: AT(k, 0, "just ten"), cont: true, c: C.second, h: 100, ul: AT(k, 0, "just ten") + 12 },
+  ];
   const rows: CalcRow[] = [
-    { lhs: VGT_L, rhs: { parts: VGT_PARTS, layers: [base(), { u: [1], o: fin(f, 20) }, { u: [2], o: fin(f, AT(k, 0, "the length of grad")) }] }, at: 4, h: 210 },
-    { rhs: VGTN_A, at: AT(k, 0, "five metres per second times"), cont: true, h: 92 },
-    { rhs: String.raw`{}\times1.00${VGTN_B}`, at: AT(k, 0, "ten to the minus five kelvin per metre"), cont: true, h: 92 },
+    { lhs: VGT_L, rhs: { parts: VGT_PARTS, layers: [base(), { u: [1], o: fin(f, t0b + 20) }, { u: [2], o: fin(f, AT(k, 1, "the length of grad")) }] }, at: t0b + 8, h: 210 },
+    { rhs: VGTN_A, at: AT(k, 1, "five metres per second times"), cont: true, h: 92 },
+    { rhs: String.raw`{}\times1.00${VGTN_B}`, at: AT(k, 1, "ten to the minus five kelvin per metre"), cont: true, h: 92 },
     { rhs: VGTN_P[1], at: tKs, h: 92 },
     { rhs: String.raw`{}\times3600\ \mathrm s`, at: tKh, h: 92 },
     { rhs: rep(KH_R, "0.18", String.raw`\mathbf{0.18}`), at: tKh + 14, c: C.first, ul: tKh + 26, cont: true, h: 92 },
@@ -1183,7 +1211,8 @@ const S16B: React.FC = () => {
         </g>
       </Svg>
       <GradLabel x={PINS[0] + GL + 22} y={PINS[1]} />
-      <Layered parts={UNITS} layers={[base(), { x: [1, 3], o: fin(f, AT(k, 1, "The metres cancel") + 20, 10) }]} x={GM.mx} y={790} size={54} o={fin(f, t1)} />
+      <Layered parts={UNITS} layers={[base(), { x: [1, 3], o: fin(f, AT(k, 2, "The metres cancel") + 20, 10) }]} x={GM.mx} y={790} size={54} o={fin(f, t1)} />
+      <CalcStack f={f} x={1200} y={50} rows={gnRows} maxLines={3} size={52} o={fout(f, t0b - 4, 12)} />
       <CalcStack f={f} x={1275} y={50} rows={rows} maxLines={3} size={64} />
     </Scene>
   );
@@ -1216,14 +1245,14 @@ const S17: React.FC = () => {
         <g opacity={0.6 + 0.4 * fin(f, tPole)}><PoleThermometer x={PINS[0]} y={PINS[1]} s={1.2} /></g>
         {track > 0 ? <Dash p={PINS} q={lerp(PINS, FAR, track)} c={C.first} w={6} d="16 10" /> : null}
         <Arrow p={add(FAR, back, -10)} q={add(FAR, back, -110)} color={C.first} w={8} head={28} o={fin(f, t3 + 30)} />
-        <Lbl x={FAR[0] - 30} y={FAR[1] + 40} t="upwind" c={C.key} s={T.key} a="end" o={fin(f, t3 + 20)} />
+        <Lbl x={FAR[0] - 30} y={FAR[1] + 50} t="upwind" c={C.key} s={T.key} a="end" o={fin(f, t3 + 20)} />
         <Lbl x={gX(GM, 60)} y={gY(GM, 300)} t="colder side" c={C.key} s={T.key} o={fin(f, tCold)} />
         <g opacity={fin(f, t1 + 20) * fout(f, t4)}>
           <Bracket p={[gX(GM, 200), 600]} q={[gX(GM, 300), 600]} c={C.second} />
         </g>
         <g opacity={oUp}>
           <circle cx={UP1[0]} cy={UP1[1]} r={14} fill={tColor(W.upwind_T_C[0])} stroke={C.ink} strokeWidth={4} />
-          <Lbl x={UP1[0] - 26} y={UP1[1] + 6} t={`${W.upwind_T_C[0].toFixed(2)} °C`} c={C.ink} s={T.key} a="end" />
+          <Lbl x={UP1[0] - 26} y={UP1[1] - 6} t={`${W.upwind_T_C[0].toFixed(2)} °C`} c={C.ink} s={T.key} a="end" />
           <Bracket p={[UP1[0], PINS[1] + 215]} q={[PINS[0], PINS[1] + 215]} c={C.ink} />
           <Dash p={[UP1[0], UP1[1] + 18]} q={[UP1[0], PINS[1] + 205]} w={3} d="4 6" />
           {/* S7: the label sits right beside its 26-px bracket */}
@@ -1231,8 +1260,9 @@ const S17: React.FC = () => {
         </g>
         {/* M5: keyword inside the map (two lines), short pointer to the track, no tick crossing */}
         {/* N2 (review 5b): the label sits right against the 1-h track, so no pointer (it collapsed to a chevron) */}
-        <Keyword f={f} text={`${W.along_km_1h.toFixed(0)} km`} at={[PINS[0] + 34, PINS[1] + 70]} appear={t4 + 20} targets={[]} />
-        <Lbl x={PINS[0] + 34} y={PINS[1] + 126} t="along the wind" c={C.key} s={T.key} o={fin(f, t4 + 28, 8)} />
+        {/* S2 (review 5c): the label sits along the left of the dashed upwind track it measures */}
+        <Keyword f={f} text={`${W.along_km_1h.toFixed(0)} km`} at={[440, 510]} a="end" appear={t4 + 20} targets={[]} />
+        <Lbl x={440} y={563} t="along the wind" c={C.key} s={T.key} a="end" o={fin(f, t4 + 28, 8)} />
         {/* maths zone */}
         <Lbl x={MAPX + 20} y={260} t="1 °C per 100 km" c={C.second} s={T.key} o={fin(f, tTime) * fout(f, t4)} />
         <Lbl x={1840} y={260} t="space" c={C.key} s={T.key} a="end" o={fin(f, tTime + 15) * fout(f, t4)} />
@@ -1299,8 +1329,9 @@ const S18: React.FC = () => {
         <Lbl x={120} y={830} t="no sun · no mixing" c={C.key} s={T.floor} o={fin(f, AT(k, 0, "no sunshine"))} />
         <Keyword f={f} text="the pattern slides" at={[560, 830]} appear={tSlides} out={t3 + 30} bend={0.05} targets={[[gX(GM, isoXs[i13]) + 4, GM.my + GM.h * GM.km - 14]]} />
         <g opacity={fin(f, t18)}>
-          <Bracket p={[gX(GM, 300), 335]} q={[gX(GM, isoXs[i13]), 335]} c={C.ink} off={0} />
-          <Lbl x={gX(GM, isoXs[i13]) + 20} y={335} t="18 km" c={C.ink} s={T.key} />
+          {/* S1 (review 5c): bracket at the top of the map, label left of the ghost line, away from the balloon */}
+          <Bracket p={[gX(GM, 300), 170]} q={[gX(GM, isoXs[i13]), 170]} c={C.ink} off={0} />
+          <Lbl x={gX(GM, 300) - 16} y={172} t="18 km" c={C.ink} s={T.key} a="end" />
         </g>
         <Lbl x={1840} y={560} t="east, 18 km per hour" c={C.key} s={T.key} a="end" o={fin(f, t18)} />
         <g opacity={fin(f, t1)}><BalloonThermometer x={MAPX + 50} y={420} s={0.6} /></g>
@@ -1462,7 +1493,8 @@ const [V20_A, V20_B] = V20P[0].split(String.raw`\times2.00`);
 const [KH2_L, KH2_R] = splitEq(EQ_KH2);
 const S20: React.FC = () => {
   const f = useCurrentFrame(), k = K("s20_twice_steep");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tTw = AT(k, 3, "twice as fast"), t4 = SS(k, 4), t5 = SS(k, 5);
+  // U-M4.3 (fix loop 3): new sentence 2 = |∇T| by Pythagoras on the steep map; later sentences shift by one
+  const t1 = SS(k, 1), tL = SS(k, 2), t2 = SS(k, 3), t3 = SS(k, 4), tTw = AT(k, 4, "twice as fast"), t4 = SS(k, 5);
   const steep = fin(f, 10, 24);
   const h = hoursFrom(f, t3 + 10, 1);
   const shift = atH(W.iso_shift_km as number[], h);
@@ -1472,11 +1504,13 @@ const S20: React.FC = () => {
   const i13 = ISS_T.indexOf(13);
   const rows: CalcRow[] = [
     { lhs: ST_L, rhs: ST_R, at: t1 + 6, c: C.second, h: 170 },
+    { lhs: LNG2_L, rhs: LNG2_P[0], at: tL, c: C.second, lc: C.second, h: 92, size: 56 },
+    { rhs: LNG2_P[1], at: AT(k, 2, "that same number"), cont: true, c: C.second, h: 84, size: 56 },
     { lhs: V20_L, rhs: V20_A, at: t3, h: 88 },
     { rhs: String.raw`{}\times2.00${V20_B}`, at: t3 + 20, cont: true, h: 88 },
     { rhs: V20P[1], at: t3 + 40, cont: true, h: 88 },
-    { rhs: "{}" + KH2_L.slice(KH2_L.indexOf(String.raw`\times3600`)), at: AT(k, 3, "to point three six"), h: 88 },
-    { rhs: rep(KH2_R, "0.36", String.raw`\mathbf{0.36}`), at: AT(k, 3, "to point three six") + 14, c: C.first, ul: tTw, cont: true, h: 88 },
+    { rhs: "{}" + KH2_L.slice(KH2_L.indexOf(String.raw`\times3600`)), at: AT(k, 4, "to point three six"), h: 88 },
+    { rhs: rep(KH2_R, "0.36", String.raw`\mathbf{0.36}`), at: AT(k, 4, "to point three six") + 14, c: C.first, ul: tTw, cont: true, h: 88 },
   ];
   return (
     <Scene>
@@ -1501,7 +1535,7 @@ const S20: React.FC = () => {
         <Arrow p={PINS} q={VTIP} color={C.first} />
         <Lbl x={PINS[0] - 20} y={ACR_Y + 50} t={`${W.shadow_steep_m_s.toFixed(2)} m/s`} c={C.key} s={T.key} a="start" />
         <Lbl x={PINS[0] + 250} y={ACR_Y + 50} t="same" c={C.key} s={T.key} o={fin(f, t2 + 10)} />
-        <Lbl x={PINS[0] + 225} y={PINS[1] - 52} t="× 2" c={C.key} s={T.key + 16 * pulse(f, AT(k, 5, "length of grad T"), 24)} a="middle" o={fin(f, t1 + 30)} />
+        <Lbl x={PINS[0] + 225} y={PINS[1] - 52} t="× 2" c={C.key} s={T.key + 16 * pulse(f, AT(k, 6, "length of grad T"), 24)} a="middle" o={fin(f, t1 + 30)} />
         <g opacity={fin(f, t4)}><Sled x={(PINS[0] + SHT[0]) / 2 - 10} y={PINS[1] + 190} s={0.4} /></g>
         <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.0} />
         <g opacity={fin(f, t3)}>
@@ -1512,7 +1546,7 @@ const S20: React.FC = () => {
         <Lbl x={1840} y={790} t="twice as fast" c={C.key} s={T.key} a="end" o={fin(f, tTw)} />
       </Svg>
       <GradLabel x={PINS[0] + GLk - 80} y={PINS[1] - 52} />
-      <CalcStack f={f} x={1270} y={50} rows={rows} maxLines={3} size={62} />
+      <CalcStack f={f} x={1270} y={50} rows={rows} maxLines={2} size={62} />
     </Scene>
   );
 };

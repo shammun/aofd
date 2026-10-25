@@ -255,6 +255,10 @@ def main() -> int:
     ngrad = call(VEC + "norm", "s15", fw, "|∇T|", a=gT)
     row("|∇T| = 1.00e-5 K/m", ngrad, G1, 1e-15)
     g2 = [G2, 0.0]
+    # U-M4.3 (fix loop 3): |∇T| by Pythagoras on screen in s16b and s20, sqrt((∂T/∂x)² + (∂T/∂y)²)
+    ngrad2 = call(VEC + "norm", "s20", fw, "|∇T| on the steep map (Pythagoras, U-M4.3)", a=g2)
+    row("U-M4.3 |∇T| = sqrt((1.00e-5)² + 0²) = 1.00e-5 K/m", [ngrad, np.sqrt(gT[0] ** 2 + gT[1] ** 2)], [1e-5, 1e-5], 1e-18)
+    row("U-M4.3 |∇T| steep = sqrt((2.00e-5)² + 0²) = 2.00e-5 K/m", [ngrad2, np.sqrt(g2[0] ** 2 + g2[1] ** 2)], [2e-5, 2e-5], 1e-18)
     # s16: v·∇T = (shadow of v on ∇T) × |∇T|
     adv1 = call(VEC + "dot", "s16", fw, "v·∇T, advection term of the material derivative, Vallis (1.7) (provenance)", a=v.tolist(), b=gT)
     sh_v1 = call(VEC + "scalar_projection", "s16,s17", fw, "shadow of v on ∇T", a=v.tolist(), b=gT)
@@ -498,6 +502,8 @@ def main() -> int:
     weather.update({
         "along_dot_gradT": float(along_dot), "v_along_check_10sin60": r6(v_along[1]),
         "chain_G1": chain1, "chain_G2": chain2,
+        "norm_gradT_steep": r6(ngrad2), "pyth_G1": [float(gT[0]), float(gT[1]), float(ngrad)],
+        "pyth_G2": [float(g2[0]), float(g2[1]), float(ngrad2)],
         "iso_t_h": r6(iso_t_h), "iso_T_C": r6(iso5_T), "iso_x_km": r6(iso_x), "iso_shift_km": r6(iso_shift),
         "prof_x_km": r6(prof_x), "prof_T_C": r6(prof_T1), "prof_T_steep_C": r6(prof_T2),
         "T_pole_field_C": r6(T_pole_field), "T_balloon_field_C": r6(T_balloon_field), "balloon_mdt_total_K_s": bal_mdt,

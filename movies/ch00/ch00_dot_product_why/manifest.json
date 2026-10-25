@@ -86,7 +86,7 @@
   "same_way.json": "7ce05570c0317941c5ee1f02fea9d4a3c595553c505c54132c25803ded35b7f6",
   "cheap.json": "433ed377a8912c9209899b6b6910083f91f0f61f2c43d36fbf809be0b0cae815",
   "work.json": "bd2cf9107a88824e82d626427d12d59c7cb29373dc4a4e434937e166cbd355d4",
-  "weather.json": "421d08bcf97cdf1d66ae5f8cc00f756454a597b211516824719ce02761c59e47"
+  "weather.json": "7b49d7faa411d93f89e1c61da0d89d37ab7a804f9d6a5acada95e51297b0d40b"
  },
  "checks": [
   {
@@ -582,6 +582,32 @@
     1e-05
    ],
    "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "U-M4.3 |∇T| = sqrt((1.00e-5)² + 0²) = 1.00e-5 K/m",
+   "value": [
+    1e-05,
+    1e-05
+   ],
+   "ref": [
+    1e-05,
+    1e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "U-M4.3 |∇T| steep = sqrt((2.00e-5)² + 0²) = 2.00e-5 K/m",
+   "value": [
+    2e-05,
+    2e-05
+   ],
+   "ref": [
+    2e-05,
+    2e-05
+   ],
+   "tol": 1e-18,
    "pass": true
   },
   {
@@ -3219,6 +3245,19 @@
     ]
    },
    "sha256": "b2ebd391cc72085c8940fca62d8330d7e2872a457632b9a404e8237b7ce5bf59"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s20",
+   "data": "data/weather.json",
+   "eq": "|∇T| on the steep map (Pythagoras, U-M4.3)",
+   "params": {
+    "a": [
+     2e-05,
+     0.0
+    ]
+   },
+   "sha256": "28254df338356ca6c3ef7355fbea20a5633ad87964d917ed9bdb9b7d8a6c358f"
   },
   {
    "fn": "fluidpy.geo.vectors.dot",
