@@ -1353,3 +1353,43 @@ T1–T4 are cosmetic and do not block. The movie can become `qa_pass`. The user 
 Disk at review: C: 87 GB free, G: 587 GB free. Review scratch `review5d` is 93 MB (deletable).
 
 ## Overall: PASS (ch00_dot_product_why review 5d — `qa_pass`; T1–T4 optional)
+
+## ch00_dot_product_why (review 5e — version 5 fix loop 4, commit d1e04e3, 2026-10-25)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_why v5 fix 4 | 802.60 s (13:22.6), 24 078 frames | 38.45 MB | 10/10 PASS | PASS (44 hashes; s05 3·(−2)+0·0 = −6; s12 unchanged maths) | PASS (59 present, KaTeX clean) | PASS (U1 tight, Should-fix) | PASS | PASS (194 cues, ≤ 2 × 42, max 15.93 cps, text = script) | PASS (0 flashes) | PASS (none, per U-M2.G2) | **PASS** |
+
+**How I reviewed it.** ffprobe: video 802.600 s, 24 078 frames (= 802.6 × 30, so no net drop/duplicate); AAC LC 44.1 kHz stereo, 802.575 s. qa.json all 10 gates PASS (duration 802.60 s in 773–833; 38.45 MB; H.264 High yuv420p faststart; 0 black; 83 frozen stretches all narrated, longest silence 0.80 s; −16.0 LUFS / −3.5 dBTP; 0 flashes; 194 cues; 44 physics hashes; 59 equations). Frames in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/review5e/` (deletable): s05 every ~1 s 2:21.9–2:42.5 plus pulse peaks, s12 every ~1 s 5:47–6:21 plus the label move (frames 10840/10845/10850), 390-px copies, one reveal frame per scene s06–s22 (`grid.png`), s19a balloon strip (`balloon.png`), and `diffs.npy` (frame-to-frame differences of the whole movie).
+
+**Audio (the 0.80 s vs 2.82 s question).** The mp4 track is the right mix: cross-correlation of the mp4 audio with `v5fix4/public/narration_music.wav` gives lag 0.0 ms and correlation 1.000 at 16 points (0:05, 2:10, 2:13, 2:30, 4:26, 4:27, 5:52, 6:40, 8:52, 8:53, 10:40, 11:06, 11:07, 11:40, 13:10, 13:18), and with the bare `narration.wav` lag 0.0 ms, correlation 0.986–0.998 (the remainder is the −28 LUFS music bed, ducked 5 dB; music.json tail 2.5 s). The narration is complete and in place at the end (13:18 still matches). The lower "longest silence" is consistent with the continuous music bed and the 0.80 s scene gap; nothing is missing. 44.1 kHz comes from the pre-mixed WAV and is fine for AAC.
+
+**Seams (frames 4000, 8000, 12000, 16000, 20000, 24000 = 2:13.3, 4:26.7, 6:40.0, 8:53.3, 11:06.7, 13:20.0): clean.** Every seam falls on a static picture (s05 middle panel, s10 question, s13 equation, s16b between sentences, s19c opening, end card). Frame-to-frame differences across each seam are 0.03–0.09 grey levels (invisible encoder noise), no jump, no flash. **Video sync:** I listed every visual onset (motion after ≥ 10 still frames, 232 onsets) and matched them to `timing.json` sentence starts: the median offset is +2 frames (the fade-in's first visible step) in every chunk 0–5 (chunk 5: +0.5), so no chunk is shifted and there is no drift after the +5.35 s / +17.05 s shifts. Audio sync: lag 0 everywhere (above).
+
+### U-M5 acceptance
+
+| Item | Result | Evidence |
+|---|---|---|
+| **U-M5.2** s05 rule after "minus six, a negative number" | **PASS** | VTT 2:27.9–2:31.9 "three times minus two / is minus six, a negative number." then 2:32.2–2:37.6 "When two vectors point in opposite / directions, their dot product is negative." then 2:37.9 "So the dot product measures…" — word-identical to script.md. On screen "opposite" pulses at 2:34.1–2:34.8 (peak 2:34.45, still inside panel 3, clear of the arrows and "p") and "−6 negative" pulses at 2:36.8–2:37.5 (peak 2:37.15, right edge x ≈ 1872 < 1920, no clipping). Both read at 390 px. Natural: it repeats the pattern of the right-angle rule two sentences earlier. |
+| **U-M5.1** s12 "partial capital T by partial small t" + meaning | **PASS** | VTT 5:52.8–5:56.1 "written partial / capital T by partial small t." then 5:56.4–6:01.1 "Here capital T stands for temperature, / and small t for time." = script. "T = temperature" / "t = time" (54 px, no box) fade in at ~5:57–5:59 beside ∂T/∂t, then slide down at 6:01.2–6:01.9 to y ≈ 770/835 under "following the parcel"; during the slide they cross nothing ("time changes" fades in only after they have passed). At 6:21 (DT/Dt shown) the legend sits below "following the parcel" with ~70 px clearance. Legible at 390 px. Later uses (s14 ∂T/∂x, s19b ∂T/∂t) unchanged, as intended. |
+
+### No regressions (sampled one reveal frame per scene s06–s22)
+- s06 shadow chain = 2.530 (3:12.5); s07 b̂ = (0.316, 0.949), ≈ 2.53 (3:38.5); s08 × |b| ? (3:47.5); s09 2.530 × 3.162 ≈ 8, 1.569 × 5.099 ≈ 8 (4:06.5); s10 v·x̂ = 6 × 1 + 8 × 0 = 6 m/s with "6 m/s east" (4:44); s11 W = 10 N × 5 m = 50 J (5:21); s13 material derivative anatomy + "dot product" (7:11.5); s14 isotherm label (7:32.5); s15 ∇T = (1.00 × 10⁻⁵ K/m, 0) (8:05); s16a 10 cos 60° = 5.00, 10 sin 60° = 8.66 (8:40); s16b = 0.18 K per hour (9:10.5); s17 18 km, 0.18 °C, "colder side" (9:41); s18 DT/Dt = 0, "east, 18 km per hour" (10:09); s19a/b/c 12.46 / 13.00 °C, ∂T/∂t = −v·∇T, bars −0.18 / +0.18 (10:26–11:34); s20 0.36 K per hour, "twice as fast" (12:09.5); s21 + / 0 / − (12:43.5); s22 end card (13:19.5, 13:22.4). Each shows what its sentence says at that moment.
+- **Balloon 13 °C:** 10:17–10:36.8 the upwind labels 12.82 / 12.64 / 12.46 °C sit left of their dots; the balloon carries no number beside it, only its own 13.00 °C readout in the right panel.
+- **Ending:** "a series of maths tutorials", "atmospheric science · meteorology · fluid dynamics", "dot-product notebook", "notebooks for the other maths concepts"; spoken: "one of a series of related maths tutorials… watch out for the others… on the website that goes with this video". No book/author name, URL, lab or thanks.
+- **Rules:** no headings, counters, footnotes or "not to scale" badges. VTT contains no "Vallis", "Kundu", "http", "www", "lab", "not to scale", "bit of air", "uphill", "thank" ("simply" only in s10's kept sentence, T4). Captions: 194 cues, in order, all 1–7 s, longest line 42, max 15.93 cps, last cue ends 799.775 s < audio 802.575 s.
+
+### Must-fix
+None.
+
+### Should-fix (cosmetic, optional)
+- **U1 (s12, 5:57–6:01.2): "T = temperature" is close under ∂t.** The cap of "T = temperature" (y ≈ 285) is about 8 px below the bottom of the ∂t denominator (y ≈ 278). It reads clearly at full size and at 390 px, but it looks cramped. Fix: start the label at y 320 / 390 (instead of 300 / 370), or start the slide 20 px lower.
+- **U2 (caption 5:52.8): awkward line break "written partial / capital T by partial small t."** Better: "written partial capital T / by partial small t." (both lines ≤ 42). Caption-only, no re-render needed.
+- T1–T4 from review 5d remain (user: "all else are good enough").
+
+### Verdict: PASS
+Fix loop 4 delivers U-M5.1 and U-M5.2 word for word, with on-screen keywords on cue and no overlaps. The 7-chunk render has clean seams, exactly 24 078 frames, audio identical to the narration+music mix with 0 ms lag from start to end, and visual reveals on their sentences in every chunk. No regressions of the user's rules. `qa_pass`; the user watches it before `/approve-movie 0 ch00_dot_product_why`.
+
+Disk at review: C: 86 GB free, G: 586 GB free.
+
+## Overall: PASS (ch00_dot_product_why review 5e — `qa_pass`; U1–U2 optional)
