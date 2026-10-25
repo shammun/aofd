@@ -1,5 +1,7 @@
 """Physics data for the Chapter-0A movie "What the dot product measures, and why it multiplies by the other length"
-(movies/ch00/ch00_dot_product_why/storyboard.yaml, version 5: 25 scenes; v5 adds N1-N12).
+(movies/ch00/ch00_dot_product_why/storyboard.yaml, version 6: 28 scenes; v5 adds N1-N12, v6 adds V1-V5 and V7:
+sweep.json for the s00 title, the forward span / strip of s17, the frozen-map Case 1 of s17b, the queued parcels of
+s19a, the camera zoom window and the s19d three-rates grid).
 
 Run with the main venv::
 
@@ -14,7 +16,7 @@ cross-check of ∂T/∂t = −v·∇T). v4 adds the isotherm positions (s14), th
 frame; it never recomputes physics. The wind is called **v** throughout. The ``eq`` strings in the manifest are
 provenance for QA and review only; the movie draws no equation labels (storyboard rule G1).
 
-Writes movies/ch00/ch00_dot_product_why/data/{pair,same_way,cheap,work,weather}.json and
+Writes movies/ch00/ch00_dot_product_why/data/{pair,same_way,cheap,work,weather,sweep}.json and
 movies/ch00/ch00_dot_product_why/manifest.json (function, equation, parameters, fluidpy git SHA + sha256 of the source
 files, sha256 of each data file, and a parity hash per call computed the way tools/movie_qa.py re-computes it).
 The checks below must pass before anything is written (exit 1 otherwise).
@@ -101,13 +103,18 @@ def clock_rate() -> str:
     tp = OUT / "timing.json"
     if not tp.exists():
         return "timing.json missing"
-    sc = {s["id"]: s for s in json.loads(tp.read_text(encoding="utf-8"))["scenes"]}.get("s19a_pole_cools")
-    if sc is None:
-        return "s19a not in timing.json"
-    s = sc["sentences"][1]
-    at = lambda ph: s["start"] + (s["end"] - s["start"]) * s["text"].index(ph) / len(s["text"])  # noqa: E731
-    sec_per_h = (at("twelve point four six") - at("thirteen")) / 3.0
-    return f"1 h in {sec_per_h:.3f} s (x {3600 / sec_per_h:.0f}), one rate for s12, s18, s19a, s20"
+    scs = {s["id"]: s for s in json.loads(tp.read_text(encoding="utf-8"))["scenes"]}
+    if "s19a_pole_cools" not in scs or "s17b_frozen" not in scs:
+        return "v6 scenes not in timing.json"
+
+    def rate(sid: str, j: int, p1: str, p3: str) -> float:
+        s = scs[sid]["sentences"][j]
+        at = lambda ph: s["start"] + (s["end"] - s["start"]) * s["text"].index(ph) / len(s["text"])  # noqa: E731
+        return (at(p3) - at(p1)) / 2.0                     # whole hours 1 and 3 on the spoken numbers
+    r19 = rate("s19a_pole_cools", 5, "twelve point eight two after", "twelve point four six after")
+    r17 = rate("s17b_frozen", 2, "thirteen point one eight after", "thirteen point five four after")
+    return {"s19a (also s12, s18, s20)": f"1 h in {r19:.3f} s (x {3600 / r19:.0f})",
+            "s17b": f"1 h in {r17:.3f} s (x {3600 / r17:.0f})", "s00": "1 h in 4.000 s (x 900), title"}
 
 
 def main() -> int:
@@ -488,6 +495,93 @@ def main() -> int:
     # s17 / s19b / s19c display numbers
     row("0.18 °C per 18 km: 18 km × 1 °C/100 km = v·∇T × 1 h", 18.0 * 1.0 / 100.0, float(adv1 * 3600), 1e-12)
 
+    # ================================================================== v6 additions (storyboard new_builder_data V1-V5)
+    # V1 (s00_title): q of length 2 sweeps round p = (3, 0); one recorded dot call on the stacked q, one projection call
+    fs = "sweep.json"
+    sw_deg = np.arange(0.0, 360.0 + 1e-9, 2.0)                                # 181 samples
+    sw_q = 2.0 * np.stack([np.cos(np.radians(sw_deg)), np.sin(np.radians(sw_deg))], axis=-1)
+    sw_q = np.round(sw_q, 12)                                                  # exact zeros at 90°, 270°
+    sw_dot = call(VEC + "dot", "s00", fs, "p·q(θ) for the title sweep (definition, ours)", a=P7, b=sw_q.tolist())
+    sw_sh = call(VEC + "scalar_projection", "s00", fs, "shadow of q on p (signed, ours)", a=sw_q.tolist(), b=P7)
+    row("V1 p·q = 6 cos θ on 181 samples", sw_dot, 6.0 * np.cos(np.radians(sw_deg)), 1e-11)
+    row("V1 p·q at 0°, 90°, 180° = same_way.json (6, 0, −6)", np.asarray(sw_dot)[[0, 45, 90]], pq, 1e-11)
+    row("V1 shadow of q on p = 2 cos θ", sw_sh, 2.0 * np.cos(np.radians(sw_deg)), 1e-11)
+    sgn = np.sign(np.round(np.asarray(sw_dot), 9))
+    row("V1 sign series runs + → 0 → − (first sign change at 90°)", [sgn[0], sgn[45], sgn[90]], [1, 0, -1], 0)
+    sweep = {"p": P7, "q_len": 2.0, "theta_deg": r6(sw_deg), "q_xy": r6(sw_q), "p_dot_q": r6(sw_dot),
+             "shadow_q_on_p": r6(sw_sh)}
+    # V2 (s17_meaning): the forward meaning of +0.18 K per hour, the balloon parcel's 1-h span across the isotherms
+    fwd_disp = (np.asarray(v) * 3600.0).tolist()
+    fwd_across = call(VEC + "scalar_projection", "s17", fw, "1-h displacement across the isotherms (m, ours)", a=fwd_disp, b=gT)
+    fwd_along = call(VEC + "norm", "s17", fw, "1-h displacement along the wind (m)", a=fwd_disp)
+    fwd_span = [PIN_KM[0], PIN_KM[0] + float(fwd_across) / 1e3]
+    T0 = lambda xk: T_WEST + G1 * np.asarray(xk) * 1e3  # noqa: E731   the t = 0 (frozen) map
+    fwd_strip = [float(T0(fwd_span[0])), float(T0(fwd_span[1]))]
+    row("V2 across 18.0 km, along 36.0 km", [fwd_across / 1e3, fwd_along / 1e3], [18.0, 36.0], 1e-9)
+    row("V2 span = [300.0, 318.0] km; span end = balloon_x_km[60]", [*fwd_span, fwd_span[1] - bal_x[60]], [300.0, 318.0, 0.0], 1e-9)
+    row("V2 strip = [13.00, 13.18] °C = T_under_balloon", fwd_strip, [T_under0, T_under1], 1e-9)
+    row("V2 18 km × 1 °C/100 km = 0.18 = K_per_h", (fwd_across / 1e3) * 1.0 / 100.0, adv1 * 3600, 1e-12)
+    # V3 (s17b, s19c): Case 1, the frozen map: the pole stays 13.00, the balloon reads T0 where it is
+    frz_bal = T0(bal_x)                                               # bal_x is on the iso_t_h grid (181, 0-3 h)
+    frz_pole = np.full_like(frz_bal, float(T0(PIN_KM[0])))
+    frz_dot = []
+    for n in (1, 2, 3):
+        dv = call(VEC + "dot", "s17b", fw, f"∇T·(v t), t = {n} h on the frozen map (ours)",
+                  a=gT, b=(np.asarray(v) * n * 3600.0).tolist())
+        frz_dot.append(float(dv))
+    Tfz = lambda x, t: T_WEST + G1 * x[0]  # noqa: E731   frozen field, no t
+    frz_md = [material_derivative_terms(Tfz, uf1, xp, 0.0, h=10.0, ht=10.0) for xp in
+              [pin_m] + [pin_m + v * n * 3600.0 for n in (1, 2, 3)]]
+    row("V3 frozen material_derivative_terms: local 0, advective +5e-5, total +5e-5 K/s (pin and 1, 2, 3 h)",
+        [[m.local, m.advective, m.total] for m in frz_md], [[0.0, 5e-5, 5e-5]] * 4, 1e-12)
+    row("V3 13 + ∇T·(v t) = frozen_balloon_T_C at samples 60, 120, 180 = 13.18, 13.36, 13.54",
+        [13.0 + d for d in frz_dot] + list(frz_bal[[60, 120, 180]]), [13.18, 13.36, 13.54] * 2, 1e-9)
+    row("V3 frozen pole = 13.00 at every sample", frz_pole, 13.0, 1e-12)
+    row("V3 mirror of Case 2: frozen_balloon − 13 = −(T_pole_field − 13)", frz_bal - 13.0, -(T_pole_field - 13.0), 1e-9)
+    frz_marks_km = [float(bal_x[60]), float(bal_x[120]), float(bal_x[180])]
+    row("V3 frozen marks at 318, 336, 354 km", frz_marks_km, [318.0, 336.0, 354.0], 1e-9)
+    frozen_mdt = {"local_K_s": float(f"{frz_md[0].local:.6e}"), "advective_K_s": float(f"{frz_md[0].advective:.6e}"),
+                  "total_K_s": float(f"{frz_md[0].total:.6e}"), "total_K_h": r6(frz_md[0].total * 3600)}
+    # V4 (s19a): the queued parcels, labelled by arrival, and the graph range
+    up_across = []
+    for i in range(3):
+        offn = (pin_m - np.array([up_x[i], up_y[i]]) * 1e3).tolist()
+        up_across.append(float(call(VEC + "scalar_projection", "s19a", fw,
+                                    f"across-isotherm distance of the {i + 1}-h parcel (m, ours)", a=offn, b=gT)) / 1e3)
+    row("V4 queued parcels 18, 36, 54 km across the isotherms", up_across, [18.0, 36.0, 54.0], 1e-9)
+    row("V4 upwind_T_C[n] = T_pole_field_C at 60 (n+1)", up_T, T_pole_field[[60, 120, 180]], 1e-9)
+    graph_rng = [12.4, 13.6]
+    allg = np.r_[frz_bal, frz_pole, T_pole_field, T_balloon_field]
+    row("V4 every graph value inside 12.4-13.6 °C", [allg.min() >= graph_rng[0], allg.max() <= graph_rng[1]], [1, 1], 0)
+    # V5 (s17, s17b): the camera zoom window (4.0 px/km)
+    zw = [[220.0, 440.0], [160.0, 292.0]]
+    inside = lambda p: zw[0][0] <= p[0] <= zw[0][1] and zw[1][0] <= p[1] <= zw[1][1]  # noqa: E731
+    pts = [PIN_KM, (bal_x[60], bal_y[60]), (bal_x[180], bal_y[180]), (300.0, 200.0), (400.0, 200.0)] + \
+          [(x, 200.0) for x in frz_marks_km]
+    row("V5 pin, 1-h ghost, 3-h balloon, 13 and 14 °C isotherms, frozen marks inside the zoom window",
+        [inside(p) for p in pts], [1] * len(pts), 0)
+    row("V5 window 220 km x 4 px/km = 880 px wide, 132 km = 528 px high", [(zw[0][1] - zw[0][0]) * 4, (zw[1][1] - zw[1][0]) * 4],
+        [880, 528], 1e-9)
+    # V7 (s19d_three_rates): the 3 x 2 grid [advection, local, material] x [map frozen, our story], K per hour,
+    # from material_derivative_terms at the pin on the frozen field and on the sliding field
+    md_frz = frz_md[0]
+    md_sld = material_derivative_terms(Tf1, uf1, pin_m, 0.0, h=10.0, ht=10.0)
+    three = [[md_frz.advective * 3600, md_sld.advective * 3600], [md_frz.local * 3600, md_sld.local * 3600],
+             [md_frz.total * 3600, md_sld.total * 3600]]
+    row("V7 three rates: advection +0.18 | +0.18, local 0 | −0.18, material +0.18 | 0 K/h", three,
+        [[0.18, 0.18], [0.0, -0.18], [0.18, 0.0]], 1e-9)
+    row("V7 row 3 = row 1 + row 2 in each column", [three[2][j] - three[0][j] - three[1][j] for j in (0, 1)], [0, 0], 1e-12)
+    weather["three_rates_K_h"] = {"rows": ["advection", "local", "material"], "cols": ["map frozen", "our story"],
+                                  "values": [[round(float(x), 6) + 0.0 for x in rw] for rw in three]}
+    weather.update({
+        "fwd_across_km_1h": r6(fwd_across / 1e3), "fwd_along_km_1h": r6(fwd_along / 1e3), "fwd_span_km": r6(fwd_span),
+        "fwd_strip_T_C": r6(fwd_strip),
+        "frozen_t_h": r6(iso_t_h), "frozen_balloon_T_C": r6(frz_bal), "frozen_pole_T_C": r6(frz_pole),
+        "frozen_mdt": frozen_mdt, "frozen_dot_K": r6(frz_dot), "frozen_marks_km": r6(frz_marks_km),
+        "frozen_marks_T_C": r6(frz_bal[[60, 120, 180]]),
+        "arrival_t_h": [1, 2, 3], "upwind_across_km": r6(up_across), "graph_T_range_C": graph_rng,
+        "zoom_window_km": zw, "zoom_px_per_km": 4.0})
+
     # v5 layout: the product rectangles on the side that fits the larger pair plane (same areas, k_cross sides)
     rect_b_right = [[0, 0], list(p_ab), list(np.asarray(p_ab) - kb), list(-np.asarray(kb))]
     rect_a_up = [[0, 0], list(p_ba), list(np.asarray(p_ba) + ka), list(ka)]
@@ -520,7 +614,7 @@ def main() -> int:
         print("build_ch00_dot_product_why: checks FAILED — no data written")
         return 1
 
-    files = {f1: pair, f7: same_way, f11: cheap, f12: work, fw: weather}
+    files = {f1: pair, f7: same_way, f11: cheap, f12: work, fw: weather, fs: sweep}
     for old in DATA.glob("*.json"):                     # round-3 files (s1_s3_pair.json …) are replaced
         if old.name not in files:
             old.unlink()
