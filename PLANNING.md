@@ -1209,3 +1209,12 @@ movie automatically. That style is written down in **`movies/HOUSE_STYLE.md`** (
 screen, music bed on, series end card). The motion-graphics skill and the movie-director, motion-builder and
 movie-reviewer agents point to it; the reusable code is in `movies/src/house/kit/`; long renders use
 `tools/render_chunks.py`.
+
+### 15.11 Chapter 0 movie series order (user decision, 2026-10-25)
+Replaces the M0-1…M0-6 list of §8.4 / Q12. Maths series and climate basics, each just before the Vallis chapter that first
+needs it; detailed derivations (rotating frame, geostrophic/thermal wind) stay with Vallis ch. 2 movies.
+Before ch. 1: (1) dot product ✅ (`ch00_dot_product_why`), (2) cross product (`ch00_cross_product_why`, brief
+`reports/ch00_cross_product_brief.md`), (3) grad/div/curl + Gauss and Stokes, (4) the climate machine, (5) air and seawater
+basics. Before ch. 2: (6) a spinning planet (Coriolis), (7) reading weather maps (isobars, highs/lows, Buys-Ballot,
+geostrophic), (8) coordinates on a sphere, (9) stability and buoyancy, (10) Taylor, linearisation and scaling. Later, just
+in time: waves maths (before ch. 6), water in the air (before ch. 18), reading climate figures (before ch. 14).
