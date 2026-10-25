@@ -187,3 +187,18 @@ Scene points:
 - U-M5.1 (s12, ~5:48) "partial T by partial t" is ambiguous when spoken: at first use say "partial capital T by partial small t", then say that capital T means temperature and small t denotes time.
 - U-M5.2 (s05, ~2:32) Right after "minus six, a negative number", state the rule: "When two vectors point in opposite directions, their dot product is negative." Then the existing conclusion line ("So the dot product measures how much two arrows point the same way").
 - User: "All else are good enough." → review 5d T1–T4 not done (no further layout changes).
+
+## Movie `ch00_dot_product_why` — user round 6 on v5 fix 4 (2026-10-25, commit d1e04e3, 13:22.6)
+- U-M6.1 (s05, ~2:00) First case: say "the other vector, q, points in the same direction as p and has components two and zero" instead of "First, q has components two and zero".
+- U-M6.2 (s05, ~2:10) Second case: "In the next case, vector q is at a right angle to p, with components zero and two, and the dot product is zero." Everything else in s05 is good.
+- U-M6.3 (new opening, before s01) A new first frame: big, colourful type saying we will learn the dot product the easy way and how meteorology uses it, with a very catchy visualisation/animation; then the current s01. (Overrides U-M3.G1 for this one title frame only.)
+- U-M6.4 (s13, ~6:25) Bug: the balloon / second-thermometer symbol sits on top of ∂φ/∂t. Remove it (the other symbols on the equation are fine).
+- U-M6.5 (s13, ~6:53) Don't say "where phi is different"; say phi can stand for different quantities (moisture, temperature, …) — or better wording.
+- U-M6.6 (s16a, ~8:33) Drop the "other part" 10 × sin 60° = 8.66 m/s from both narration and screen (supersedes U-M3.18's 8.66 request).
+- U-M6.7 (s16a/s16b) When 5.00 m/s appears, show and label on the picture that it is the shadow of the wind arrow, with a curved arrow from the shadow to the 5.00 m/s in the calculation.
+- U-M6.8 (s17, ~9:19–9:40) What 0.18 K/h means is still not clear: "a rate in time" is not explained; which air parcel the advection term is about; why the shadow is multiplied by one hour ("the air that reaches it in an hour is 18 km upwind" was lost on the user); and the sign — the value is positive, yet the narration says "0.18 degrees colder". The user's own reading: "for every hour the wind adds 0.18 K to a parcel because it is moved east, towards warmth" — check this and answer it in the movie.
+- U-M6.9 (s17) When 0.18 °C is calculated, highlight the part of the picture it corresponds to, with an arrow from that highlight to the 0.18 °C.
+- U-M6.10 (new scene(s)) At least one more frame showing that ∂T/∂t is negative: colder air is arriving, so the fixed thermometer's temperature falls. And show the case where an air parcel moving with the wind gains temperature, by how much (the advection term?) — an earlier version had this. Verify which sign holds at ~9:40.
+- U-M6.11 (s18, ~9:45) Say clearly at the start that we now assume the air parcel inside the balloon does not change its temperature as it moves with the air, which means the material derivative DT/Dt is zero; then the scene.
+- U-M6.12 (s19a, ~10:11–10:40) Confusing: the map's upwind dots read 12.46, 12.64, 12.82 (rising towards the pole) while the bottom row reads 13 → 12.82 → 12.64 → 12.46. Re-sequence and re-animate so it is intuitive that the fixed pole sees its temperature fall while advection makes up exactly that much for the moving parcel. s19b (from ~10:40) and s19c (from ~11:05) are better — keep their spirit, make the whole stretch seamless.
+- Decision (user): add as many frames as needed; over 15 minutes is fine. "Most of the other things … look great."
