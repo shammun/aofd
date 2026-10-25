@@ -182,3 +182,8 @@ Scene points:
 - Orchestrator: fold in review 5c S1–S4 (cosmetic) in the same round.
 - U-M4.1a (user correction): do not say "6 m/s eastward and 8 northward" and then ask "how much blows east?" (answer given before the question). Introduce the wind as "towards the north-east at 10 m/s, components six and eight", ask how much blows east, dot with x̂, then "so 6 m/s is the eastward part"; highlight the eastward leg only after the result.
 - Decision (user, 2026-10-25): v5 fix 3 length ~13:11 accepted (supersedes ~12 min); keep the full s10 wording incl. the closing 'first component' sentence.
+
+## Movie `ch00_dot_product_why` — user round 5 on v5 fix 3 (2026-10-25, commit 4ce751c, 13:10.9)
+- U-M5.1 (s12, ~5:48) "partial T by partial t" is ambiguous when spoken: at first use say "partial capital T by partial small t", then say that capital T means temperature and small t denotes time.
+- U-M5.2 (s05, ~2:32) Right after "minus six, a negative number", state the rule: "When two vectors point in opposite directions, their dot product is negative." Then the existing conclusion line ("So the dot product measures how much two arrows point the same way").
+- User: "All else are good enough." → review 5d T1–T4 not done (no further layout changes).
