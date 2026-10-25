@@ -457,7 +457,9 @@ const S05: React.FC = () => {
   const tFly = AT(k, 0, "fixed in all three"), tP = SS(k, 1);
   const tQ = [SS(k, 2), SS(k, 3), SS(k, 5)], tR = [AT(k, 2, "six, a positive"), AT(k, 3, "both products"), AT(k, 5, "minus six")];
   const tL = [AT(k, 2, "three times"), AT(k, 3, "both products"), AT(k, 5, "three times")];
-  const tRA = SS(k, 4), tOpp = AT(k, 5, "opposite direction"), t7 = SS(k, 6);
+  // fix loop 4 (U-M5.2): new sentence 6 = the opposite-directions rule; "So the dot product measures…" is now sentence 7
+  const tRA = SS(k, 4), tOpp = AT(k, 5, "opposite direction"), tRule = AT(k, 6, "opposite directions"), tNeg = AT(k, 6, "is negative"), t7 = SS(k, 7);
+  const plOpp = pulse(f, tRule, 24), plNeg = pulse(f, tNeg, 24);
   const fly = ramp(f, tFly, tFly + 30);
   const p = same.p as Pt;
   const pBigTip: Pt = [BIG_P.o[0] + p[0] * BIG_P.u, BIG_P.o[1]];
@@ -503,14 +505,14 @@ const S05: React.FC = () => {
           const pl = pulse(f, t7 + i * 18, 18);
           return (
             <g key={`r${i}`} opacity={fin(f, tR[i], 10)}>
-              <Lbl x={ROW_C[i] + 80} y={812} t={i === 1 ? "right angle" : kw[i]} c={d < 0 ? C.neg : C.key} s={T.key} a="start"
+              <Lbl x={ROW_C[i] + 80} y={812} t={i === 1 ? "right angle" : kw[i]} c={d < 0 ? C.neg : C.key} s={T.key + (i === 2 ? 14 * plNeg : 0)} a="start"
                 o={i === 1 ? fin(f, tRA, 10) : 1} />
               <Lbl x={ROW_C[i] + 60} y={812} t={`= ${minus(d.toFixed(0))}`} c={d < 0 ? C.neg : C.ink} s={T.calc + 20 * pl} a="end" />
             </g>
           );
         })}
         {/* S16: "opposite" sits under the two arrows of panel 3, centred on the 180° picture */}
-        <Lbl x={PANEL_O[2][0]} y={PANEL_O[2][1] + 70} t="opposite" c={C.key} s={T.key} a="middle" o={fin(f, tOpp, 10)} />
+        <Lbl x={PANEL_O[2][0]} y={PANEL_O[2][1] + 70} t="opposite" c={C.key} s={T.key + 14 * plOpp} a="middle" o={fin(f, tOpp, 10)} />
       </Svg>
       {[0, 1, 2].map((i) => (
         <TeX key={i} s={lines[i]} x={ROW_C[i]} y={736} size={54} ax={0.5} o={fin(f, tL[i], 10)} />
@@ -912,7 +914,12 @@ const ClockText: React.FC<{ x: number; y: number; h: number; o?: number }> = ({ 
 // ================================================================ s12 two thermometers
 const S12: React.FC = () => {
   const f = useCurrentFrame(), k = K("s12_parcel");
-  const t1 = SS(k, 1), t2 = SS(k, 2), tLR = AT(k, 2, "the local rate"), t3 = SS(k, 3), tPl = AT(k, 3, "the place stays"), t4 = SS(k, 4), tPar = AT(k, 4, "inside one air parcel"), t5 = SS(k, 5);
+  // fix loop 4 (U-M5.1): new sentence 3 = "Here capital T stands for temperature, and small t for time."; later ones shift by one
+  const t1 = SS(k, 1), t2 = SS(k, 2), tLR = AT(k, 2, "the local rate"), tCT = AT(k, 3, "capital T stands"), tST = AT(k, 3, "small t for time");
+  const t3 = SS(k, 4), tPl = AT(k, 4, "the place stays"), t4 = SS(k, 5), tPar = AT(k, 5, "inside one air parcel"), t5 = SS(k, 6);
+  // T / t keywords sit beside the fraction in the slot "time changes / place fixed" will use, then move down to the
+  // empty band under "following the parcel" (y 770 / 835) as sentence 4 starts, so they stay readable for DT/Dt too
+  const dn = ramp(f, t3 - 6, t3 + 14), yT = 300 + 470 * dn, yt = 370 + 465 * dn;
   // S4 (review 5): the balloon starts on the same 13 °C isotherm as the pole but BAL_DY km south of it (the map does not
   // vary north–south), so the parcel outline never encloses the pole; no clock here (the clock is introduced in s18)
   const h = hoursFrom(f, t4 + 20, 1.5);
@@ -940,13 +947,15 @@ const S12: React.FC = () => {
         {/* maths zone */}
         <g opacity={fin(f, t2)}><PoleThermometer x={1370} y={250} s={0.9} /></g>
         <Lbl x={1420} y={150} t="local rate" c={C.local} s={T.key} o={fin(f, tLR)} />
+        <Lbl x={1150} y={yT} t="T = temperature" c={C.local} s={T.key} o={fin(f, tCT)} />
+        <Lbl x={1150} y={yt} t="t = time" c={C.local} s={T.key} o={fin(f, tST)} />
         <Lbl x={1150} y={300} t="time changes" c={C.key} s={T.key} o={fin(f, t3 + 4)} />
         <Lbl x={1150} y={370} t="place fixed" c={C.key} s={T.key} o={fin(f, tPl)} />
         <g opacity={fin(f, t5)}><BalloonThermometer x={1370} y={590} s={0.7} /></g>
         <Lbl x={MAPX + 40} y={655} t="following the parcel" c={C.first} s={T.key} o={fin(f, t5 + 20)} />
       </Svg>
       <TeX s={EQ_DTDT_LOCAL} x={MAPX + 40} y={190} size={T.eq} c={C.local} o={fin(f, AT(k, 2, "written partial"))} />
-      <TeX s={EQ_DTDT_MAT} x={MAPX + 40} y={540} size={T.eq} c={C.first} o={fin(f, AT(k, 5, "written capital"))} />
+      <TeX s={EQ_DTDT_MAT} x={MAPX + 40} y={540} size={T.eq} c={C.first} o={fin(f, AT(k, 6, "written capital"))} />
     </Scene>
   );
 };

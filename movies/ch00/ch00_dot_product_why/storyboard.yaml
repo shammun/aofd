@@ -46,7 +46,7 @@ title: What the dot product measures, and why it multiplies by the other length
 version: 5
 concepts:
 - C0A-PoC1
-target_duration_s: 790.875
+target_duration_s: 802.575
 fps: 30
 size:
 - 1920
@@ -63,17 +63,17 @@ audio:
     source: tools/music.py (procedural, our own, CC0)
     level: bed about -28 LUFS, ducked a further 5 dB under speech (unchanged since v3)
     notes: seed 7, 5-s fade in, 8-s fade out at the end
-measured_narration_s: 788.375
-measured_frames: 23652
-words: 1960
-sentences: 122
+measured_narration_s: 800.075
+measured_frames: 24003
+words: 1985
+sentences: 124
 dry_run:
   tool: tools/tts.py
-  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/v5fix3/public
-  audio_s: 788.375
-  cues: 192
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/v5fix4/public
+  audio_s: 800.075
+  cues: 194
   self_check_diff_ms: 0.0
-  render_s: 619.6
+  render_s: 683.5
   warnings: []
 scenes:
 - id: s01_hook
@@ -344,11 +344,12 @@ scenes:
 - id: s05_angle_cases
   t:
   - 109.475
-  - 157.325
+  - 163.025
   fixes:
   - U-M3.10
   - U-M3.11
   - U-M2.4
+  - U-M5.2
   sentence_times:
   - - 109.475
     - 114.9
@@ -363,7 +364,9 @@ scenes:
   - - 142.1
     - 151.875
   - - 152.225
-    - 156.525
+    - 157.575
+  - - 157.925
+    - 162.225
   visual: 'The a, b plane fades. No panel frames, no chips, no gauges.
 
     S1 (''Let''s keep one arrow fixed…''): a large teal p (260 px long, 10-px shaft) at the top centre (800-1060, 140);
@@ -385,13 +388,17 @@ scenes:
     + 0×0 = −6'' with −6 in rose; rose hatched rectangle behind the start; keyword ''negative''; keyword ''opposite'' under
     the arrows.
 
-    S7 (''So the dot product measures…''): the three results 6, 0, −6 pulse in turn; no sentence on screen.'
+    S7 (''When two vectors point in opposite directions, their dot product is negative.'', fix loop 4 / U-M5.2): no new
+    text; ''opposite'' pulses on ''opposite directions'' and ''negative'' on ''is negative'' (54 -> 68 px), mirroring
+    the right-angle rule of S5.
+
+    S8 (''So the dot product measures…''): the three results 6, 0, −6 pulse in turn; no sentence on screen.'
   voiceover: 'Let''s keep one arrow fixed in all three pictures, and change only the other one. The fixed arrow, p, has
     components three and zero. First, q has components two and zero, pointing the same way as p: three times two plus zero
     times zero is six, a positive number. Next, q has components zero and two, at a right angle to p, and both products
     are zero. When two vectors are at right angles, their dot product is zero. Last, q has components minus two and zero,
-    pointing in the opposite direction: three times minus two is minus six, a negative number. So the dot product measures
-    how much two arrows point the same way.'
+    pointing in the opposite direction: three times minus two is minus six, a negative number. When two vectors point in
+    opposite directions, their dot product is negative. So the dot product measures how much two arrows point the same way.'
   on_screen_eq: null
   on_screen_eq_extra:
   - latex: \mathbf p\cdot\mathbf q = 3\times2 + 0\times0 = 6
@@ -438,23 +445,23 @@ scenes:
   exaggeration: []
 - id: s06_shadow
   t:
-  - 157.325
-  - 188.225
+  - 163.025
+  - 193.925
   fixes:
   - U-M3.G2
   - U-M2.5
   - U-M2.7
   sentence_times:
-  - - 157.325
-    - 160.55
-  - - 160.9
-    - 166.45
-  - - 166.8
-    - 171.175
-  - - 171.525
-    - 176.85
-  - - 177.2
-    - 187.425
+  - - 163.025
+    - 166.25
+  - - 166.6
+    - 172.15
+  - - 172.5
+    - 176.875
+  - - 177.225
+    - 182.55
+  - - 182.9
+    - 193.125
   visual: 'Back to the a, b plane (a = (5, 1), b = (1, 3) under the picture). No heading strip, no ''why'' sentences, no
     boxed row.
 
@@ -511,22 +518,22 @@ scenes:
   exaggeration: []
 - id: s07_unit_vector
   t:
-  - 188.225
-  - 214.375
+  - 193.925
+  - 220.075
   fixes:
   - user decision 2026-10-24 (keep b-hat)
   - U-M2.6
   - U-M2.7
   - R2
   sentence_times:
-  - - 188.225
-    - 191.075
-  - - 191.425
-    - 198.55
-  - - 198.9
-    - 203.975
-  - - 204.325
-    - 213.575
+  - - 193.925
+    - 196.775
+  - - 197.125
+    - 204.25
+  - - 204.6
+    - 209.675
+  - - 210.025
+    - 219.275
   visual: 'Restored scene (v5 style: keywords only, no strip header, no card). Plane with a, b and the 2.530 shadow band.
 
     S1 (''There''s another way…''): the shadow band pulses once.
@@ -578,18 +585,18 @@ scenes:
   exaggeration: []
 - id: s08_question
   t:
-  - 214.375
-  - 224.375
+  - 220.075
+  - 230.075
   fixes:
   - U-M3.G1
   - U-M3.G3
   sentence_times:
-  - - 214.375
-    - 218.35
-  - - 218.7
-    - 221.05
-  - - 221.4
-    - 223.575
+  - - 220.075
+    - 224.05
+  - - 224.4
+    - 226.75
+  - - 227.1
+    - 229.275
   visual: 'No PartCard, no Slots, no boxed TeX. Picture: the product rectangle grows from the shadow (base 2.530 on b''s
     line, height |b| = 3.162; corners (0, 0), (0.8, 2.4), (−2.2, 3.4), (−3, 1)), ink 18 % fill.
 
@@ -635,18 +642,18 @@ scenes:
   exaggeration: []
 - id: s09_reason1_order
   t:
-  - 224.375
-  - 242.575
+  - 230.075
+  - 248.275
   fixes:
   - U-M3.G3
   - U-M2.8
   sentence_times:
-  - - 224.375
-    - 227.625
-  - - 227.975
-    - 236.25
-  - - 236.6
-    - 241.775
+  - - 230.075
+    - 233.325
+  - - 233.675
+    - 241.95
+  - - 242.3
+    - 247.475
   visual: 'Two planes side by side, each 880 px wide (70 px per unit, y 120-600), no panel rects, no chips.
 
     S1 (''The first is that the order shouldn''t matter''): both planes draw a and b.
@@ -701,8 +708,8 @@ scenes:
   exaggeration: []
 - id: s10_reason2_cheap
   t:
-  - 242.575
-  - 289.45
+  - 248.275
+  - 295.15
   fixes:
   - U-M4.1
   - U-M4.2
@@ -710,22 +717,22 @@ scenes:
   - U-M3.G2
   - U-M2.9
   sentence_times:
-  - - 242.575
-    - 248.85
-  - - 249.2
-    - 254.175
-  - - 254.525
-    - 258.425
-  - - 258.775
-    - 261.875
-  - - 262.225
-    - 270.925
-  - - 271.275
-    - 276.725
-  - - 277.075
-    - 281.525
-  - - 281.875
-    - 288.65
+  - - 248.275
+    - 254.55
+  - - 254.9
+    - 259.875
+  - - 260.225
+    - 264.125
+  - - 264.475
+    - 267.575
+  - - 267.925
+    - 276.625
+  - - 276.975
+    - 282.425
+  - - 282.775
+    - 287.225
+  - - 287.575
+    - 294.35
   visual: 'U-M4.2: the wind picture (grid, axis words ''east'', ''north'', teal arrow v) is in the picture zone from frame
     4; the maths zone is never empty.
 
@@ -798,24 +805,24 @@ scenes:
     page_png: null
 - id: s11_work
   t:
-  - 289.45
-  - 334.3
+  - 295.15
+  - 340.0
   fixes:
   - U-M3.12
   - U-M3.G2
   sentence_times:
-  - - 289.45
-    - 293.55
-  - - 293.9
-    - 302.65
-  - - 303.0
-    - 310.525
-  - - 310.875
-    - 317.325
-  - - 317.675
-    - 325.075
-  - - 325.425
-    - 333.5
+  - - 295.15
+    - 299.25
+  - - 299.6
+    - 308.35
+  - - 308.7
+    - 316.225
+  - - 316.575
+    - 323.025
+  - - 323.375
+    - 330.775
+  - - 331.125
+    - 339.2
   visual: 'Sled scene in the picture zone x 80-1000, ground y 560 (sled icon illustrative). No chips, no gauge, no rulers
     below 44 px.
 
@@ -880,27 +887,30 @@ scenes:
     with its true value; badge: none'
 - id: s12_parcel
   t:
-  - 334.3
-  - 369.825
+  - 340.0
+  - 381.525
   fixes:
   - U-M3.13
+  - U-M5.1
   - U-M3.G5
   - U-M3.G1
   - U-M2.11
   - U-M.9
   sentence_times:
-  - - 334.3
-    - 338.275
-  - - 338.625
-    - 341.85
-  - - 342.2
-    - 349.35
-  - - 349.7
-    - 353.975
-  - - 354.325
-    - 363.55
-  - - 363.9
-    - 369.025
+  - - 340.0
+    - 343.975
+  - - 344.325
+    - 347.55
+  - - 347.9
+    - 356.075
+  - - 356.425
+    - 361.05
+  - - 361.4
+    - 365.675
+  - - 366.025
+    - 375.25
+  - - 375.6
+    - 380.725
   visual: 'No PartCard. Map GM larger: 600 x 360 km at 1.47 px/km, x 120-1002, y 140-669, cmocean thermal, NO isotherm lines
     yet; vertical colour bar x 1010-1030 with ''T (°C)'' (44 px); muted ''idealised map'' (44 px) under the map once. Maths
     zone x 1060-1840, no row panels.
@@ -910,21 +920,27 @@ scenes:
     S2 (''Imagine one thermometer fixed on a pole''): pole thermometer icon (x1.4) at the pin (300, 180 km); keyword ''fixed
     place'' (54 px) under it.
 
-    S3 (''…the local rate, written partial T by partial t''): ''∂T/∂t'' (T.eq, slate #aab4c8) at (1100, 160) with the pole
+    S3 (''…the local rate, written partial capital T by partial small t''): ''∂T/∂t'' (T.eq, slate #aab4c8) at (1100, 160) with the pole
     icon beside it and keyword ''local rate''.
 
-    S4 (''Partial means only time changes…''): two keywords under ∂T/∂t: ''time changes'' and ''place fixed'' (54 px).
+    S4 (''Here capital T stands for temperature, and small t for time.'', fix loop 4 / U-M5.1): keywords
+    ''T = temperature'' on ''capital T stands'' and ''t = time'' on ''small t for time'' (54 px, slate, no box) at
+    (1150, 300 / 370) beside the fraction; as S5 starts they slide down to (1150, 770 / 835), under ''following the
+    parcel'', and stay for DT/Dt.
 
-    S5 (''A second thermometer rides a balloon…''): balloon icon starts at the pin and drifts with a teal wind arrow (clock
+    S5 (''Partial means only time changes…''): two keywords under ∂T/∂t: ''time changes'' and ''place fixed'' (54 px).
+
+    S6 (''A second thermometer rides a balloon…''): balloon icon starts at the pin and drifts with a teal wind arrow (clock
     ''t = 0.0 h …'' at 54 px beside the map; same clock rate as s18-s19); dashed ellipse round the balloon; keyword ''air
     parcel'' with a pointer to the ellipse.
 
-    S6 (''Its rate, following the air parcel…''): ''DT/Dt'' (T.eq, teal) at (1100, 460) with the balloon icon and keyword
+    S7 (''Its rate, following the air parcel…''): ''DT/Dt'' (T.eq, teal) at (1100, 460) with the balloon icon and keyword
     ''following the parcel''.'
   voiceover: 'Now let''s look at how the dot product is used in weather. Imagine one thermometer fixed on a pole. How fast
-    its temperature changes over time is called the local rate, written partial T by partial t. Partial means only time
-    changes; the place stays fixed. A second thermometer rides a balloon drifting with the wind, inside one air parcel:
-    a small volume of air that moves with the flow. Its rate, following the air parcel, is written capital D T by D t.'
+    its temperature changes over time is called the local rate, written partial capital T by partial small t. Here capital
+    T stands for temperature, and small t for time. Partial means only time changes; the place stays fixed. A second thermometer
+    rides a balloon drifting with the wind, inside one air parcel: a small volume of air that moves with the flow. Its rate,
+    following the air parcel, is written capital D T by D t.'
   on_screen_eq:
     latex: \frac{\partial T}{\partial t}
     vallis_eq: 'provenance only: the local term of (1.7) (page image checked)'
@@ -958,30 +974,30 @@ scenes:
   - 'pole and balloon icons illustrative; badge: none'
 - id: s13_equation
   t:
-  - 369.825
-  - 421.95
+  - 381.525
+  - 433.65
   fixes:
   - U-M3.14
   - U-M3.15
   - U-M3.G5
   - user decision Q4
   sentence_times:
-  - - 369.825
-    - 373.625
-  - - 373.975
-    - 381.975
-  - - 382.325
-    - 385.725
-  - - 386.075
-    - 393.425
-  - - 393.775
-    - 402.725
-  - - 403.075
-    - 406.575
-  - - 406.925
-    - 414.875
-  - - 415.225
-    - 421.15
+  - - 381.525
+    - 385.325
+  - - 385.675
+    - 393.675
+  - - 394.025
+    - 397.425
+  - - 397.775
+    - 405.125
+  - - 405.475
+    - 414.425
+  - - 414.775
+    - 418.275
+  - - 418.625
+    - 426.575
+  - - 426.925
+    - 432.85
   visual: 'NO MAP and no veil (U-M3.15: the v4 ''leak'' was s13''s own dimmed map, DotProductWhy.tsx L1157-1160 and storyboard
     v4 L503/L528; both deleted). Plain background, full width.
 
@@ -1030,23 +1046,23 @@ scenes:
   - 'equation scene: illustrative icons only (balloon, pole, thermometer, droplet); badge: none'
 - id: s14_isotherms
   t:
-  - 421.95
-  - 458.5
+  - 433.65
+  - 470.2
   fixes:
   - U-M3.16
   - U-M2.12
   - W11 (snapshot wording)
   sentence_times:
-  - - 421.95
-    - 431.0
-  - - 431.35
-    - 439.25
-  - - 439.6
-    - 441.875
-  - - 442.225
-    - 451.225
-  - - 451.575
-    - 457.7
+  - - 433.65
+    - 442.7
+  - - 443.05
+    - 450.95
+  - - 451.3
+    - 453.575
+  - - 453.925
+    - 462.925
+  - - 463.275
+    - 469.4
   visual: 'Map GM as s12, km axes 0-600 east, 0-360 north (44 px ticks).
 
     S1 (''…temperature rises one degree for every hundred kilometres east…''): colour map only; a walker dot moves east
@@ -1098,20 +1114,20 @@ scenes:
   - 'idealised field, not data (T rises uniformly eastward); badge: none'
 - id: s15_grad_t
   t:
-  - 458.5
-  - 482.7
+  - 470.2
+  - 494.4
   fixes:
   - U-M3.17
   - U-M3.G5
   - W4
   - W7
   sentence_times:
-  - - 458.5
-    - 463.7
-  - - 464.05
-    - 474.525
-  - - 474.875
-    - 481.9
+  - - 470.2
+    - 475.4
+  - - 475.75
+    - 486.225
+  - - 486.575
+    - 493.6
   visual: 'Map with isotherms as s14. No ''uphill'' anywhere (U-M3.17; v4 L1273/L1282 deleted).
 
     S1 (''These two rates form one arrow…''): ∂T/∂x and ∂T/∂y fly into ''∇T = (∂T/∂x, ∂T/∂y)'' (T.eq); the orange ∇T arrow
@@ -1154,8 +1170,8 @@ scenes:
   - '∇T arrow drawn on its own scale (K/m), not the map''s km; its value is written beside it; badge: none'
 - id: s16a_wind_parts
   t:
-  - 482.7
-  - 510.6
+  - 494.4
+  - 522.3
   fixes:
   - U-M3.18
   - W1
@@ -1164,12 +1180,12 @@ scenes:
   - W6
   - W9
   sentence_times:
-  - - 482.7
-    - 491.275
-  - - 491.625
-    - 499.275
-  - - 499.625
-    - 509.8
+  - - 494.4
+    - 502.975
+  - - 503.325
+    - 510.975
+  - - 511.325
+    - 521.5
   visual: 'Map with isotherms and ∇T at the pin.
 
     S1 (''Now a wind blows across the map…''): teal v grows at the pin, 60° from ∇T (towards north-north-east); ''v = 10
@@ -1216,20 +1232,20 @@ scenes:
   - 'wind and gradient arrows drawn on their own scales (m/s, K/m), not the map''s km; badge: none'
 - id: s16b_advection_number
   t:
-  - 510.6
-  - 541.225
+  - 522.3
+  - 552.925
   fixes:
   - U-M4.3
   - U-M3.18
   - U-M2.13
   - W5
   sentence_times:
-  - - 510.6
-    - 521.35
-  - - 521.7
-    - 532.15
-  - - 532.5
-    - 540.425
+  - - 522.3
+    - 533.05
+  - - 533.4
+    - 543.85
+  - - 544.2
+    - 552.125
   visual: 'Map as s16a (shadow band and ∇T kept). Maths zone:
 
 
@@ -1284,8 +1300,8 @@ scenes:
   exaggeration: []
 - id: s17_space_time
   t:
-  - 541.225
-  - 573.775
+  - 552.925
+  - 585.475
   fixes:
   - U-M3.18
   - U-M3.19a
@@ -1295,18 +1311,18 @@ scenes:
   - W2
   - W6
   sentence_times:
-  - - 541.225
-    - 544.325
-  - - 544.675
-    - 550.225
-  - - 550.575
-    - 554.25
-  - - 554.6
-    - 561.125
-  - - 561.475
-    - 570.05
-  - - 570.4
-    - 572.975
+  - - 552.925
+    - 556.025
+  - - 556.375
+    - 561.925
+  - - 562.275
+    - 565.95
+  - - 566.3
+    - 572.825
+  - - 573.175
+    - 581.75
+  - - 582.1
+    - 584.675
   visual: 'Map as s16 (isotherms, ∇T, wind), FROZEN in this scene only, with a SNAPSHOT marker: four white camera-frame
     corners on the map and a small camera glyph + ''t = 0 h'' (54 px) at the map''s top-right (Q3). No column cards, no
     emoji, no ''parcel meets'' text (W1/W2).
@@ -1367,8 +1383,8 @@ scenes:
   - 'idealised field, not data; badge: none'
 - id: s18_keeps_temperature
   t:
-  - 573.775
-  - 599.25
+  - 585.475
+  - 610.95
   fixes:
   - U-M3.19a
   - U-M3.20
@@ -1376,14 +1392,14 @@ scenes:
   - W7
   - W12
   sentence_times:
-  - - 573.775
-    - 578.975
-  - - 579.325
-    - 584.925
-  - - 585.275
-    - 591.75
-  - - 592.1
-    - 598.45
+  - - 585.475
+    - 590.675
+  - - 591.025
+    - 596.625
+  - - 596.975
+    - 603.45
+  - - 603.8
+    - 610.15
   visual: 'Map GM with the isotherms; tagged air parcels (3 rows x 4, tags 44 px above their dots, each tag its own temperature,
     unchanging); clock ''t = … h'' (54 px) beside the map; the clock rate is ONE rate for s18-s19a (see clock_rate below).
 
@@ -1432,8 +1448,8 @@ scenes:
   - 'time compressed (the clock shows model hours); badge: none'
 - id: s19a_pole_cools
   t:
-  - 599.25
-  - 625.425
+  - 610.95
+  - 637.125
   fixes:
   - U-M3.19b
   - U-M3.19c
@@ -1442,14 +1458,14 @@ scenes:
   - W9
   - W14
   sentence_times:
-  - - 599.25
-    - 603.35
-  - - 603.7
-    - 615.55
-  - - 615.9
-    - 618.975
-  - - 619.325
-    - 624.625
+  - - 610.95
+    - 615.05
+  - - 615.4
+    - 627.25
+  - - 627.6
+    - 630.675
+  - - 631.025
+    - 636.325
   visual: 'Map with sliding isotherms; pole thermometer at the pin; balloon with its parcel; the upwind track from s17 with
     dots ''12.82'', ''12.64'', ''12.46 °C'' (54 px, left of the dots).
 
@@ -1510,22 +1526,22 @@ scenes:
   - 'idealised: parcels keep their temperature; uniform steady wind and gradient; badge: none'
 - id: s19b_equation
   t:
-  - 625.425
-  - 653.35
+  - 637.125
+  - 665.05
   fixes:
   - U-M3.20
   - U-M2.15
   - W10
   - S1 (sign of 'advection')
   sentence_times:
-  - - 625.425
-    - 627.75
-  - - 628.1
-    - 638.9
-  - - 639.25
-    - 646.275
-  - - 646.625
-    - 652.55
+  - - 637.125
+    - 639.45
+  - - 639.8
+    - 650.6
+  - - 650.95
+    - 657.975
+  - - 658.325
+    - 664.25
   visual: 'Map dims to 60 % (clock held at 3 h, readouts kept small at the map''s right). Maths zone CalcStack, one move
     per line, revealed with the clauses:
 
@@ -1572,23 +1588,23 @@ scenes:
   exaggeration: []
 - id: s19c_balance
   t:
-  - 653.35
-  - 684.45
+  - 665.05
+  - 696.15
   fixes:
   - U-M3.19c
   - U-M3.20
   - W11
   sentence_times:
-  - - 653.35
-    - 656.175
-  - - 656.525
-    - 664.7
   - - 665.05
-    - 671.1
-  - - 671.45
-    - 679.725
-  - - 680.075
-    - 683.65
+    - 667.875
+  - - 668.225
+    - 676.4
+  - - 676.75
+    - 682.8
+  - - 683.15
+    - 691.425
+  - - 691.775
+    - 695.35
   visual: 'Balance scene (Balance component, no box). Left: the map at t = 1 h with the balloon 36 km along the wind from
     the pin; a faint GHOST of the t = 0 snapshot''s 13.18 °C contour under the balloon (dashed, 44 px label ''13.18 °C,
     an hour ago'').
@@ -1644,26 +1660,26 @@ scenes:
   - 'the two bars are bookkeeping of one cause (the moving pattern), not two separate processes; badge: none'
 - id: s20_twice_steep
   t:
-  - 684.45
-  - 729.575
+  - 696.15
+  - 741.275
   fixes:
   - U-M4.3
   - U-M3.21
   sentence_times:
-  - - 684.45
-    - 692.3
-  - - 692.65
-    - 700.4
-  - - 700.75
-    - 707.425
-  - - 707.775
-    - 711.35
-  - - 711.7
-    - 718.55
-  - - 718.9
-    - 724.85
-  - - 725.2
-    - 728.775
+  - - 696.15
+    - 704.0
+  - - 704.35
+    - 712.1
+  - - 712.45
+    - 719.125
+  - - 719.475
+    - 723.05
+  - - 723.4
+    - 730.25
+  - - 730.6
+    - 736.55
+  - - 736.9
+    - 740.475
   visual: 'No Slots, no cards, no chips.
 
     S1 (''Now let''s change only the map…''): the map becomes T = 13 °C + 2 °C per 100 km × (x − x_pin) (7 → 19 °C); isotherms
@@ -1728,27 +1744,27 @@ scenes:
   - 'idealised field, not data; badge: none'
 - id: s21_recap
   t:
-  - 729.575
-  - 765.15
+  - 741.275
+  - 776.85
   fixes:
   - U-M3.22
   - U-M3.G1
   - W8
   sentence_times:
-  - - 729.575
-    - 736.6
-  - - 736.95
-    - 742.35
-  - - 742.7
-    - 746.2
-  - - 746.55
-    - 748.925
-  - - 749.275
-    - 752.4
-  - - 752.75
-    - 756.725
-  - - 757.075
-    - 764.35
+  - - 741.275
+    - 748.3
+  - - 748.65
+    - 754.05
+  - - 754.4
+    - 757.9
+  - - 758.25
+    - 760.625
+  - - 760.975
+    - 764.1
+  - - 764.45
+    - 768.425
+  - - 768.775
+    - 776.05
   visual: 'Full width, no panels, no heading, no ''RECAP'' band; one beat per sentence, each beat replaces the previous
     (a mini picture left x 120-760, keywords/maths right at 68/54 px):
 
@@ -1788,19 +1804,19 @@ scenes:
   - 'recap icons illustrative; badge: none'
 - id: s22_end
   t:
-  - 765.15
-  - 788.375
+  - 776.85
+  - 800.075
   fixes:
   - U-M3.23
   - 'U-M3.24 (as corrected 2026-10-24: no book name)'
   - U-M3.G6
   sentence_times:
-  - - 765.15
-    - 771.35
-  - - 771.7
-    - 779.75
-  - - 780.1
-    - 788.075
+  - - 776.85
+    - 783.05
+  - - 783.4
+    - 791.45
+  - - 791.8
+    - 799.775
   visual: 'End card, no URLs, no paths, no panels, no book name, no lab (user corrections 2026-10-24). S1 (''one of a series…''):
     a row of four faint tutorial thumbnails (abstract icons: arrows, a cross product, a gradient map, a globe) at y 300
     with the keyword ''a series of maths tutorials'' (68 px). S2 (''They''re made for students…''): keywords ''atmospheric
@@ -2017,11 +2033,11 @@ quiz_hook: 'If the map were twice as steep AND the wind blew along the isotherms
   thermometer change? (Not at all: the shadow of v on ∇T is 0, so v·∇T = 0 however steep the map is.)'
 qa_expectations:
   duration_window_s:
-  - 760
-  - 820
-  duration_s: 790.875
+  - 773
+  - 833
+  duration_s: 802.575
   captions:
-    cues: 192
+    cues: 194
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 16.1
