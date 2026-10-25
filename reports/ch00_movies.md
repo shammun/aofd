@@ -1145,3 +1145,111 @@ optional polish.
 Disk at review: C: 76 GB free, G: 587 GB free. Review scratch `review5b` 59 MB (deletable).
 
 ## Overall: FIX (ch00_dot_product_why review 5b — N1 only; N2–N9 optional)
+
+## ch00_dot_product_why (review 5c — version 5 fix loop 2, commit deb750f, 2026-10-25)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_why v5 fix 2 | 751.81 s (12:31.8) | 40.35 MB | 10/10 PASS | PASS (N1 gone; every number checked) | PASS (KaTeX clean; plain (1) only) | PASS (two small collisions, Should-fix) | PASS (N3 fixed) | PASS (182 cues, ≤ 2 × 42, max 15.93 cps, text = script) | PASS (0 flashes; hatched negative bar) | PASS (none, per U-M2.G2) | **PASS** |
+
+**How I reviewed it.** The render has md5 b095a441…. I re-ran the qa.json gates and all 10 pass:
+- duration 751.81 s;
+- size 40.35 MB;
+- codec: H.264 High, yuv420p, AAC, faststart;
+- 0 black stretches;
+- 82 frozen stretches, all narrated (longest silence 2.81 s);
+- loudness −16.0 LUFS, peak −3.6 dBTP;
+- 0 flashes;
+- captions: 182 cues match the script;
+- physics: 43 functions reproduce their hashes;
+- equations: 55 present.
+
+I extracted 380 frames with ffmpeg from `movies/out/ch00/ch00_dot_product_why/1080.mp4`:
+- one at the midpoint of every sentence and one 0.15 s before its end (116 sentences, times from `timing.json`);
+- one every 2 s through 4:00–5:50 and 7:40–10:45;
+- a crop strip every 0.3–0.5 s through 9:24–9:28.
+
+The frames are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/review5c/` (99 MB, deletable). The folder also has 390-px copies in `p390/`, 32 phone tiles (12 frames each) in `tiles/` and crops in `extra/`. I looked at every tile at 390 px and at about 25 frames at full size.
+
+I re-checked the VTT: 182 cues, longest line 42 characters, peak 15.93 cps. It contains no "Vallis", "Kundu", URL, "lab", "not to scale", "bit of air", "uphill" or "thanks for watching". Narration and timing are unchanged from fix loop 1.
+
+**Numbers on screen.** All of them are right:
+- **Pole:** 13.00 → 12.82 → 12.64 → 12.46 °C, in the readout and in the chain at the bottom (9:31–9:52). The readout passes through 12.89 at 0.6 h, 12.72 at 1.5 h and 12.55 at 2.5 h, which is linear at −0.18 K/h.
+- **Balloon:** 13.00 °C throughout.
+  - It moves 80 px east (54 km) and 135 px north (92 km ≈ 8.66 m/s × 3 h) in 3 h, and it stays on the 13 °C isotherm. That isotherm moves from 300 km to 354 km.
+  - At 3 h the pole sits 54 km upwind of 13 °C, so it reads 13 − 0.54 = 12.46 °C.
+- **Other values:** 0.36 K/h and 12.64 °C at 1 h in s20; 10 cos 60° = 5.00; 10 sin 60° = 8.66; 5 m/s × 3600 s = 18 km; 18 km × 1 °C/100 km = 0.18 °C; 36 km along the wind = 10 m/s × 1 h.
+
+### N1–N9 (review 5b): did they land?
+
+| Item | Fixed? | Evidence (times in this render) |
+|---|---|---|
+| **N1** (Must) "12.64" beside the balloon, s19a | **Yes** | 9:27.2–9:52: all three upwind labels sit to the left of their dots: "12.82" (x 370–510), "12.64" (x 345–485) and "12.46 °C" (x 250–455). At 9:30 the balloon is at x ≈ 560, so its nearest number is about 100 px away. At 9:38 "12.46 °C" ends at x ≈ 497 and the balloon is at x ≈ 600. From 9:42 to 9:52 the only label left is "12.46 °C", at the pole's foot, to the left. Nothing but its own "13.00 °C" readout (right panel) and "stays 13 °C" sits beside the balloon. |
+| N2 collapsed pointer, s17 | Yes (chevron removed) | 8:50–9:00: the stray "<" chevron is gone. "36 km along the wind" stands as a free label to the right of the pole (x 595–975, y 455–560). It is next to the wind arrow rather than the dashed upwind track, which is acceptable (S2 below is optional). |
+| N3 early "+0.18", s19b | Yes | 10:00–10:11: only ∂T/∂t = −v·∇T is shown. The underbrace and "+0.18 K/h" appear together between 10:10.7 and 10:12, on "is plus point one eight" (10:07.2–10:14.2). |
+| N4 balloon over a parcel, s18 | Yes (mostly) | 9:08–9:26: the balloon sits on the bright 13 °C isotherm (x ≈ 587 at 1 h), between the "13.1" and "13.0" tags, and overlaps no parcel circle. The bright line still passes behind the "13.1", "13.0" and "13.1" tags, but their dark outline keeps them readable. A new "18 km" label now sits beside the balloon (S1). |
+| N5 "air parcel" at the edges, s12 | Yes | 5:38–5:48: the label is inside the map (x 715–950, y 595–645), clear of the bottom border and 60 px left of the colour bar. |
+| N6 "d = 5 m" crossed by a line, s11 | Yes | 4:41–5:00: the dashed 17.3 N line is at x ≈ 519, and "d = 5 m" starts at x ≈ 550. |
+| N7 text under 44 px | Yes | "N = newton" (4:36) and "J = joule" (4:54) have a cap height of about 50 px, "idealised map" (5:14) about 55 px, and "no angle / no √" (4:02–4:10) about 50 px. |
+| N8 empty bar axis, s19c | Yes | 10:22–10:37: no axis. The axis fades in with the "+0.18 / advection term" bar at about 10:38. |
+| N9 balloon far from its isotherm, s16a | Yes | 7:42–8:09: the balloon is at x ≈ 560 (300 km), on the 13 °C isotherm, just above the wind and ∇T arrows. |
+
+All nine are fixed.
+
+### U-M3 acceptance (re-checked on this render)
+
+| Item | Result | Evidence |
+|---|---|---|
+| G1 no headings or counters | PASS | none in any of 380 frames |
+| G2 keywords only, no boxes except the s03 tags | PASS | 1:00–1:16 tags kept; elsewhere keywords and pointers only |
+| G3 natural narration | PASS | unchanged from 5b (148 wpm) |
+| G4 no grid note | PASS | — |
+| G5 advection, local rate, no "uphill" | PASS | 5:21 local rate; 6:12–6:21 "carried by the flow"; 7:33 "towards warmer" |
+| G6 no links or paths | PASS | 12:06–12:31 shows words and icons only |
+| U-M3.1 – 3.8 | PASS | 0:00–1:22 |
+| U-M3.9 √ working | PASS | 1:38–1:49 |
+| U-M3.10 / 3.11 three cases, labels at the tips | PASS | 1:52–2:37 |
+| U-M3.12 work (50 J, doubled to 100 J, shadow alone is not the work) | PASS | 4:28–5:13 |
+| U-M3.13 – 3.18 | PASS | 5:13–8:29 |
+| U-M3.19a snapshot and slide | PASS | 8:40 snapshot corners; 9:13–9:26 ghost and slid isotherm, "east, 18 km per hour" |
+| U-M3.19b colder air from upwind | PASS | 8:44–9:00 "upwind" and "colder side"; 9:44 "colder air from upwind" |
+| **U-M3.19c pole falls, balloon stays 13 °C** | **PASS** | 9:27–9:52: the balloon reads 13.00 °C and no other temperature sits beside it. The pole reads 13.00 → 12.82 → 12.64 → 12.46 °C, and "stays 13 °C" appears at 9:52. |
+| U-M3.20 DT/Dt = 0 ⇒ ∂T/∂t = −v·∇T; the terms cancel | PASS | 9:54–10:52, with "+0.18" now revealed on cue |
+| U-M3.21 twice as steep | PASS | 10:52–11:30: 1 °C per 50 km, ×2, 5.00 m/s "same", 0.36 K per hour, "twice as fast" |
+| U-M3.22 recap signs | PASS | 11:45–11:53: + same way, 0 right angle, − opposite |
+| U-M3.23 / 3.24 ending | PASS | 12:09–12:31: "a series of maths tutorials", the three fields, "dot-product notebook", "notebooks for the other maths concepts"; no book, no lab, no URL, no thanks |
+| Rounds 1–2 rules | PASS | no book or author names, no "not to scale" badges, no footnotes; only the plain "(1)" label (narrated "equation one"); "air parcel" (5:38, 9:04) |
+
+### Must-fix
+None.
+
+### Should-fix (cosmetic, optional)
+- **S1 (s18, 9:24.5–9:27.2): "18 km" beside the balloon.**
+  - The bracket label for the isotherm shift sits right next to the balloon icon (x 610–765, y 315–365) for about 3 s.
+  - It carries "km", so it does not read as a temperature, and the balloon has in fact moved 18 km east. It still breaks the rule that no other number sits beside the balloon.
+  - Fix: move the bracket and label to the top of the map, between the dashed ghost line (x 560) and the bright line (x 587) at y ≈ 165. Or move the label left of the ghost line ("18 km →" ending at x ≤ 540).
+- **S2 (s17, 8:50–9:00): "36 km along the wind" floats.**
+  - The label sits beside the wind arrow at the pole, not beside the dashed upwind track it measures.
+  - Fix: place it along the left of the dashed track (right end at x ≤ 450, y ≈ 520), or add a 60-px pointer to the track's midpoint.
+- **S3 (s14, 7:05–7:10): "15 °C" walker tag touches the colour bar.**
+  - The right end of the tag (x ≈ 1012) overlaps the colour-bar column (x 1010–1030).
+  - Fix: put the tag to the left of the dot (right end at x ≤ 840).
+- **S4 (s16a, 8:06–8:09): "13 °C" tag on the map's bottom border.**
+  - The walker tag at the bottom of the 13 °C isotherm (y 620–670) sits on the frame line.
+  - Fix: raise it 30 px.
+- **S5 (s10, 4:02–4:10): empty left half.**
+  - For about 7 s, "no angle / no √" and the two formulas fill only the right half.
+  - Fix: optionally centre the group, or start the wind picture 2 s earlier.
+
+### Verdict: PASS
+The second fix loop landed with no regressions that mislead:
+- **N1:** the only Must from review 5b, it is fixed. In s19a nothing but its own 13.00 °C sits beside the balloon, while the pole visibly falls 13.00 → 12.82 → 12.64 → 12.46 °C.
+- **N2–N9:** all fixed.
+- **Other checks:** QA 10/10, captions, every number and all U-M3 items pass.
+- **Should-fixes:** S1–S5 are cosmetic polish and do not block.
+
+The movie can become `qa_pass`. The user watches it before `/approve-movie 0 ch00_dot_product_why`.
+
+Disk at review: C: 75 GB free, G: 587 GB free. Review scratch `review5c` is 99 MB (deletable).
+
+## Overall: PASS (ch00_dot_product_why review 5c — `qa_pass`; S1–S5 optional)
