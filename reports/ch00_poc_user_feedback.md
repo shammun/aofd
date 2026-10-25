@@ -174,3 +174,9 @@ Scene points:
 - Decision (user, 2026-10-24): v5 may run **10–12 min**, and stays **one movie** (no split). Supersedes the U-M2 ~8-min cap.
 - Decisions (user, 2026-10-24, after the three analyses): accept **~12 min** (apply the narration trim set T, ~12:05; nothing taught is cut); **keep the b̂ scene** (s07).
 - U-M3.24 (end, user) No "Thanks for watching". Instead the ending says this video is **one of a series of related maths tutorials — watch out for the others**; they are prepared to help students of **atmospheric science, meteorology and fluid dynamics**, and anyone else who needs these concepts. **Do not name the book** (user, 2026-10-24: U-M2.G1 holds with no exception). Closing pointer (user, replaces U-M3.23's wording): say that the notebook for this dot product, and notebooks for the other maths concepts, are also on the website — in words only; do not mention the vector products lab.
+
+## Movie `ch00_dot_product_why` — user round 4 on v5 fix 2 (2026-10-25, commit 212b487, 12:31.8)
+- U-M4.1 (s10, ~4:02–4:28) Unnatural: the scene only says at its very end "six, the eastward part of the wind". Start the scene with what we want to do, e.g. "If the wind blows towards the north-east …", then ask/explain how we get its eastward component (dot it with the eastward unit vector x̂), do the calculation v·x̂ = 6 × 1 + 8 × 0, and only then say clearly that this 6 m/s is the eastward part of the wind.
+- U-M4.2 (s10, ~4:02–4:10) The left half of the screen is empty for ~7 s — must be fixed (was review 5c S5).
+- U-M4.3 (s16b, ~8:17) The length of grad T is shown/said without its calculation: show |∇T| = √((∂T/∂x)² + (∂T/∂y)²) = √((1.00 × 10⁻⁵)² + 0²) = 1.00 × 10⁻⁵ K/m (and the same for the steep map in s20, 2.00 × 10⁻⁵ K/m, for consistency).
+- Orchestrator: fold in review 5c S1–S4 (cosmetic) in the same round.
