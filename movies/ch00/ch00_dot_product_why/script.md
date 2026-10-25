@@ -4,6 +4,8 @@ Version 5 (2026-10-24), rewritten from the user's round-3 feedback on v4 (`repor
 
 **Measured, not estimated.** `tools/tts.py` dry run v5b on 2026-10-24 (G:, `aofd-data/scratch/movies/ch00_dot_product_why/dryrun/v5b`; the current `movies/lexicon.yaml`, no new entries needed): **25 scenes, 114 sentences, 1809 words, 731.250 s narration + 2.5-s silent end-card hold = 733.750 s (12:13.75)**; speech alone 680.3 s = 159.5 words per minute while speaking, 147.9 words per minute overall (limit 150); 177 caption cues, max 16.1 characters per second; self-check diff -0.0 ms; Kokoro render 842.8 s. Earlier runs: v5a (1833 words, 739.02 s narration, 741.5 s movie, 181 cues: over the window; about 25 words of wording trims and the corrected ending gave v5b).
 
+**Fix loop 1 (review 5, 2026-10-24).** Seven sentences reworded for natural, complete speech (S12: s05 ×3, s15, s19c split into two, s20 + one sentence) and S6 (s19a "start the clock again"). Real `tools/tts.py` run (v5fix1): **25 scenes, 116 sentences, 1856 words, 749.300 s narration + 2.5-s hold = 751.800 s (12:31.80)**; speech 697.6 s; 148.1 words per minute overall; 182 cues; self-check diff 0.0 ms; Kokoro render 473.7 s.
+
 ### v5 changelog (each user item → the fix → the scene)
 
 | Item | What the user asked | v5 fix | Scenes |
@@ -77,129 +79,129 @@ Now let's look at how the angle between the two arrows plays a role. The dot pro
 > Screen: a·b = |a| |b| cos θ (1); cos 0° = 1, cos 90° = 0, cos 180° = −1; |a| = √26 = 5.099, |b| = √10 = 3.162; θ = 60.3°, cos θ = 0.496; 5.099 × 3.162 × 0.496 ≈ 8 (R1).
 
 ## s05_angle_cases
-Let's keep one arrow fixed in all three pictures, and change only the other one. The fixed arrow, p, has components three and zero. First, q is two, zero, pointing the same way: three times two plus zero times zero is six, a positive number. Next, q is zero, two, at a right angle, and both products are zero. When two vectors are at right angles, their dot product is zero. Last, q is minus two, zero, pointing in the opposite direction: three times minus two is minus six, a negative number. So the dot product measures how much two arrows point the same way.
+Let's keep one arrow fixed in all three pictures, and change only the other one. The fixed arrow, p, has components three and zero. First, q has components two and zero, pointing the same way as p: three times two plus zero times zero is six, a positive number. Next, q has components zero and two, at a right angle to p, and both products are zero. When two vectors are at right angles, their dot product is zero. Last, q has components minus two and zero, pointing in the opposite direction: three times minus two is minus six, a negative number. So the dot product measures how much two arrows point the same way.
 
-> 105 words · 7 sentences · 109.475–153.125 s (43.7 s; speech 40.8 s) · 1:49.47–2:33.12 (measured).
+> 115 words · 7 sentences · 109.475–157.325 s (47.8 s; speech 45.0 s) · 1:49.47–2:37.32 (measured).
 > Screen: p = (3, 0) large; q = (2, 0) / (0, 2) / (−2, 0) at the q tips; 3×2 + 0×0 = 6 positive; 3×0 + 0×2 = 0; 3×(−2) + 0×0 = −6 negative.
 
 ## s06_shadow
 Now let's find a picture for the dot product. From the tip of vector a we drop a line onto b's line, at a right angle. The piece it marks off is called the shadow of vector a on b. In this right triangle, the shadow is the length of vector a times cos theta. Divide both sides of equation one by the length of b, and only the shadow is left on the right: eight over three point one six, or two point five three.
 
-> 86 words · 5 sentences · 153.125–184.025 s (30.9 s; speech 28.7 s) · 2:33.12–3:04.03 (measured).
+> 86 words · 5 sentences · 157.325–188.225 s (30.9 s; speech 28.7 s) · 2:37.32–3:08.22 (measured).
 > Screen: drop-line, 'shadow' pointer; cos θ = shadow/|a| → shadow = |a| cos θ → (1) ÷ |b| → 8 / 3.162 = 2.530.
 
 ## s07_unit_vector
 There's another way to reach the same shadow. Divide b by its own length to get b hat, the unit vector along b: length one, same direction. Its components are one and three, each divided by three point one six. Dividing b by its length divides the dot product by it too, so a dot b hat is the shadow itself: two point five three again.
 
-> 66 words · 4 sentences · 184.025–210.175 s (26.2 s; speech 24.3 s) · 3:04.03–3:30.18 (measured).
+> 66 words · 4 sentences · 188.225–214.375 s (26.2 s; speech 24.3 s) · 3:08.22–3:34.38 (measured).
 > Screen: b shrinks to b̂ (length 1); 'unit vector'; b̂ = (1/3.162, 3/3.162) = (0.316, 0.949); a·b̂ = 5 × 0.316 + 1 × 0.949 ≈ 2.53 (R2).
 
 ## s08_question
 So the dot product is the shadow times the length of b. But why not stop at the shadow? There are three good reasons.
 
-> 24 words · 3 sentences · 210.175–220.175 s (10.0 s; speech 8.5 s) · 3:30.18–3:40.18 (measured).
+> 24 words · 3 sentences · 214.375–224.375 s (10.0 s; speech 8.5 s) · 3:34.38–3:44.38 (measured).
 > Screen: product rectangle; a·b = (|a| cos θ)|b| with underbraces 'shadow', 'length of b'; '× |b| ?'.
 
 ## s09_reason1_order
 The first is that the order shouldn't matter. The shadow of vector a on b is two point five three, but the shadow of b on vector a is one point five seven. Multiply each by the length of the arrow it falls on, and both give eight.
 
-> 48 words · 3 sentences · 220.175–238.375 s (18.2 s; speech 16.7 s) · 3:40.18–3:58.38 (measured).
+> 48 words · 3 sentences · 224.375–242.575 s (18.2 s; speech 16.7 s) · 3:44.38–4:02.57 (measured).
 > Screen: 8 / 3.162 = 2.530 and 8 / 5.099 = 1.569; × the other length ≈ 8 both ways; a·b = b·a.
 
 ## s10_reason2_cheap
 The second reason is practical: it's quick to calculate, with no angle and no square root. Take a wind, v, of six metres per second eastward and eight northward. The unit vector pointing east, x hat, has components one and zero. So v dot x hat is six times one plus eight times zero: six, the eastward part of the wind.
 
-> 61 words · 4 sentences · 238.375–264.300 s (25.9 s; speech 24.1 s) · 3:58.38–4:24.30 (measured).
+> 61 words · 4 sentences · 242.575–268.500 s (25.9 s; speech 24.1 s) · 4:02.57–4:28.50 (measured).
 > Screen: 'no angle · no √'; v = (6, 8) m/s, legs '6 m/s east', '8 m/s north'; x̂ = (1, 0); v·x̂ = 6×1 + 8×0 = 6 m/s, 'eastward part'.
 
 ## s11_work
 The third reason is that physics often needs both sizes. Pull a sled with a force vector, F, of twenty newtons, tilted sixty degrees up, while it moves along a displacement vector, d. The upward part of the pull does no work; the part along the ground, the shadow of F on d, is ten newtons. Work, in joules, is that force times the distance: fifty joules if d is five metres. If d doubles to ten metres, the work doubles to one hundred joules, but the shadow is still ten newtons. So the shadow alone can't give the work: we must multiply by the length of d, and the dot product does exactly that.
 
-> 115 words · 6 sentences · 264.300–309.150 s (44.8 s; speech 42.3 s) · 4:24.30–5:09.15 (measured).
+> 115 words · 6 sentences · 268.500–313.350 s (44.9 s; speech 42.3 s) · 4:28.50–5:13.35 (measured).
 > Screen: F = 20 N (force), d = 5 m (displacement); shadow = 20 × cos 60° = 10 N; 17.3 N dimmed; W = 10 N × 5 m = 50 J → 10 m: 100 J; W = (|F| cos θ)|d| with 'shadow', 'length of d'.
 
 ## s12_parcel
 Now let's look at how the dot product is used in weather. Imagine one thermometer fixed on a pole. How fast its temperature changes over time is called the local rate, written partial T by partial t. Partial means only time changes; the place stays fixed. A second thermometer rides a balloon drifting with the wind, inside one air parcel: a small volume of air that moves with the flow. Its rate, following the air parcel, is written capital D T by D t.
 
-> 84 words · 6 sentences · 309.150–344.675 s (35.5 s; speech 33.0 s) · 5:09.15–5:44.68 (measured).
+> 84 words · 6 sentences · 313.350–348.875 s (35.5 s; speech 33.0 s) · 5:13.35–5:48.88 (measured).
 > Screen: map without isotherms; pole 'fixed place', ∂T/∂t 'local rate', 'time changes · place fixed'; balloon + 'air parcel'; DT/Dt 'following the parcel'.
 
 ## s13_equation
 Here is the equation the balloon's thermometer obeys. It tells us how anything the air carries, called phi, like temperature or moisture, changes as we follow an air parcel. On the left is the change following the parcel. On the right is the change at one fixed place, plus a term with v, the wind, and grad, which we'll meet soon. Advection means being carried along by the flow, so this advection term is the change from being carried to places where phi is different. The left side is called the material derivative. It isn't a partial derivative, because the place moves with the parcel: it's the partial derivative plus the advection term. For temperature, that term is v dot grad T, and its dot is our dot product.
 
-> 129 words · 8 sentences · 344.675–396.800 s (52.1 s; speech 48.9 s) · 5:44.68–6:36.80 (measured).
+> 129 words · 8 sentences · 348.875–401.000 s (52.1 s; speech 48.9 s) · 5:48.88–6:41.00 (measured).
 > Screen (no map): Dφ/Dt = ∂φ/∂t + v·∇φ built, not read aloud; φ: T, moisture; underbraces 'following the parcel' · 'one fixed place' · 'advection'; 'material derivative' → D/Dt; D/Dt = ∂/∂t + advection; DT/Dt = ∂T/∂t + v·∇T with the dot = 'dot product'.
 
 ## s14_isotherms
 To see it at work, picture a map where the temperature rises one degree for every hundred kilometres east, and doesn't change as you walk north. Join the places with the same temperature right now, and you get straight north to south lines, one every hundred kilometres. These are called isotherms. Walk east, and each isotherm you cross is one degree warmer: that's partial T by partial x, the change going east only. Walk north, and you stay on one isotherm, so partial T by partial y is zero.
 
-> 89 words · 5 sentences · 396.800–433.350 s (36.6 s; speech 34.4 s) · 6:36.80–7:13.35 (measured).
+> 89 words · 5 sentences · 401.000–437.550 s (36.6 s; speech 34.4 s) · 6:41.00–7:17.55 (measured).
 > Screen: walker '+1 °C' every 100 km east, 'no change' north; isotherms drawn only on 'Join the places…'; 'isotherm'; ∂T/∂x = 1 °C/100 km; ∂T/∂y = 0.
 
 ## s15_grad_t
-These two rates form one arrow: the temperature gradient, read grad T. A kelvin step is the same size as a degree Celsius step, so grad T is ten to the minus five kelvin per metre, and zero. It points the way the temperature increases fastest: straight across the isotherms, towards warmer air.
+These two rates form one arrow: the temperature gradient, read grad T. A kelvin step is the same size as a degree Celsius step, so grad T is ten to the minus five kelvin per metre going east, and zero going north. It points the way the temperature increases fastest: straight across the isotherms, towards warmer air.
 
-> 53 words · 3 sentences · 433.350–456.100 s (22.8 s; speech 21.2 s) · 7:13.35–7:36.10 (measured).
+> 57 words · 3 sentences · 437.550–461.750 s (24.2 s; speech 22.7 s) · 7:17.55–7:41.75 (measured).
 > Screen: ∇T = (∂T/∂x, ∂T/∂y), 'grad'; 1 °C/100 km = 1 K/10⁵ m; ∇T = (1.00 × 10⁻⁵ K/m, 0); 'towards warmer'.
 
 ## s16a_wind_parts
 Now a wind blows across the map, the one carrying our balloon: ten metres per second, at sixty degrees to grad T. Its shadow on grad T, ten times cos sixty, is five metres per second, straight across the isotherms. The other part, ten times sine sixty, is eight point six six metres per second along them, and moving along an isotherm brings no temperature change.
 
-> 66 words · 3 sentences · 456.100–484.000 s (27.9 s; speech 26.4 s) · 7:36.10–8:04.00 (measured).
+> 66 words · 3 sentences · 461.750–489.650 s (27.9 s; speech 26.4 s) · 7:41.75–8:09.65 (measured).
 > Screen: v = 10 m/s at 60°; 10 × cos 60° = 5.00 m/s 'across'; 10 × sin 60° = 8.66 m/s 'along: no change'; 8.66 × 0 = 0.
 
 ## s16b_advection_number
 So v dot grad T is the wind's shadow times the length of grad T: five metres per second times ten to the minus five kelvin per metre. The metres cancel, leaving five times ten to the minus five kelvin per second, or point one eight kelvin per hour.
 
-> 49 words · 2 sentences · 484.000–503.525 s (19.5 s; speech 18.4 s) · 8:04.00–8:23.52 (measured).
+> 49 words · 2 sentences · 489.650–509.175 s (19.5 s; speech 18.4 s) · 8:09.65–8:29.18 (measured).
 > Screen: v·∇T = (|v| cos θ)|∇T| = 5.00 m/s × 1.00 × 10⁻⁵ K/m = 5.00 × 10⁻⁵ K/s; (m/s)(K/m) with m struck; × 3600 s = 0.18 K per hour, 'advection term'.
 
 ## s17_space_time
 What does point one eight kelvin per hour mean? It's a rate in time, while one degree per hundred kilometres is a rate in space. Think of the map as a snapshot, and look at the pole. Its air comes from upwind, where the wind comes from: down and to the left, on the colder side. The air that reaches it in an hour is now eighteen kilometres upwind across the isotherms, so it's point one eight degrees colder. But the snapshot doesn't stay still.
 
-> 85 words · 6 sentences · 503.525–536.075 s (32.6 s; speech 30.0 s) · 8:23.52–8:56.08 (measured).
+> 85 words · 6 sentences · 509.175–541.725 s (32.6 s; speech 30.0 s) · 8:29.18–9:01.73 (measured).
 > Screen: SNAPSHOT corners + 't = 0 h' (Q3); '1 °C per 100 km' = space, '0.18 °C per hour' = time; upwind track, 'upwind', 'colder side'; 1-h dot 12.82 °C; 36 km along / 18 km across; 5.00 m/s × 3600 s = 18 km; 18 km × 1 °C/100 km = 0.18 °C; pole 13.00 °C.
 
 ## s18_keeps_temperature
 Suppose each air parcel keeps its temperature: no sunshine and no mixing. Then the balloon's reading never changes, so capital D T by D t is zero. And since the air carries its temperature along, the whole pattern of isotherms slides with the wind. Our wind is the same everywhere, so the lines move east, eighteen kilometres every hour.
 
-> 59 words · 4 sentences · 536.075–561.550 s (25.5 s; speech 23.6 s) · 8:56.08–9:21.55 (measured).
+> 59 words · 4 sentences · 541.725–567.200 s (25.5 s; speech 23.6 s) · 9:01.73–9:27.20 (measured).
 > Screen: tagged parcels keep their numbers; balloon 13.00 °C; DT/Dt = 0; isotherms slide (precomputed); '18 km' shift bracket at 1 h.
 
 ## s19a_pole_cools
-Now watch both thermometers on one clock. As the isotherms slide past, the pole reads thirteen, then twelve point eight two after one hour, twelve point six four after two, and twelve point four six after three. That's the colder air from upwind arriving. Meanwhile the balloon moves with its parcel, so it stays at thirteen degrees.
+Now let's start the clock again and watch both thermometers. As the isotherms slide past, the pole reads thirteen, then twelve point eight two after one hour, twelve point six four after two, and twelve point four six after three. That's the colder air from upwind arriving. Meanwhile the balloon moves with its parcel, so it stays at thirteen degrees.
 
-> 57 words · 4 sentences · 561.550–586.775 s (25.2 s; speech 23.4 s) · 9:21.55–9:46.77 (measured).
+> 60 words · 4 sentences · 567.200–593.375 s (26.2 s; speech 24.3 s) · 9:27.20–9:53.38 (measured).
 > Screen: one clock from 0 h; pole 13.00 → 12.82 → 12.64 → 12.46 °C on the spoken numbers; balloon 13.00 °C beside it; upwind dots arrive.
 
 ## s19b_equation
 Our equation says the same. Put zero for capital D T by D t, and subtract v dot grad T from both sides: partial T by partial t equals minus v dot grad T. The wind has a part towards warmer air, so v dot grad T is plus point one eight kelvin per hour. The minus sign makes it a fall of point one eight at the pole, as colder air is carried in.
 
-> 75 words · 4 sentences · 586.775–614.700 s (27.9 s; speech 26.1 s) · 9:46.77–10:14.70 (measured).
+> 75 words · 4 sentences · 593.375–621.300 s (27.9 s; speech 26.1 s) · 9:53.38–10:21.30 (measured).
 > Screen: DT/Dt = ∂T/∂t + v·∇T → 0 = ∂T/∂t + v·∇T → ∂T/∂t = −v·∇T; +0.18 K/h under v·∇T, −0.18 K/h under ∂T/∂t; 'colder air carried in'.
 
 ## s19c_balance
-So why does the balloon stay at thirteen? In one hour it moves eighteen kilometres across the isotherms, to where the map read thirteen point one eight an hour ago: that's the advection term, plus point one eight. But in that hour every place has cooled by point one eight: the local rate, minus point one eight. They cancel, so the balloon still reads thirteen.
+So why does the balloon stay at thirteen? In one hour it moves eighteen kilometres across the isotherms, to where the map read thirteen point one eight an hour ago. Crossing the isotherms like that is worth plus point one eight: that's the advection term. But in that hour every place has cooled by point one eight degrees, and that fall, minus point one eight, is the local rate. They cancel, so the balloon still reads thirteen.
 
-> 65 words · 4 sentences · 614.700–640.400 s (25.7 s; speech 23.9 s) · 10:14.70–10:40.40 (measured).
+> 77 words · 5 sentences · 621.300–652.400 s (31.1 s; speech 28.9 s) · 10:21.30–10:52.40 (measured).
 > Screen: Balance bars +0.18 'advection term' / −0.18 'local rate'; ghost '13.18 °C, an hour ago'; 0 = −0.18 + 0.18; balloon 13.00 °C.
 
 ## s20_twice_steep
-Now let's change only the map: the temperature rises one degree every fifty kilometres, instead of every hundred. The isotherms are twice as close, so grad T doubles, to two times ten to the minus five kelvin per metre. The wind's shadow is still five metres per second. But the dot product doubles, to point three six kelvin per hour, so the pole cools twice as fast. As with the sled, the shadow alone missed the change.
+Now let's change only the map: the temperature rises one degree every fifty kilometres, instead of every hundred. The isotherms are twice as close, so grad T doubles, to two times ten to the minus five kelvin per metre. The wind's shadow is still five metres per second. But the dot product doubles, to point three six kelvin per hour, so the pole cools twice as fast. Just as with the sled, the shadow stayed the same, so on its own it would miss this change. Multiplying by the length of grad T catches it.
 
-> 77 words · 5 sentences · 640.400–672.450 s (32.1 s; speech 29.9 s) · 10:40.40–11:12.45 (measured).
+> 95 words · 6 sentences · 652.400–690.500 s (38.1 s; speech 35.5 s) · 10:52.40–11:30.50 (measured).
 > Screen: isotherms every 50 km, '1 °C per 50 km'; ∇T = 2.00 × 10⁻⁵ K/m '× 2'; shadow 5.00 m/s 'same'; 5.00 × 2.00 × 10⁻⁵ = 1.00 × 10⁻⁴ K/s → 0.36 K per hour '× 2'; pole 13.00 → 12.64 in 1 h.
 
 ## s21_recap
 To sum up, the dot product multiplies matching components and adds, giving a number, not an arrow. In pictures, it's the shadow of one arrow on the other, times the other's length. When the arrows point the same way, it's positive. At right angles, it's zero. In opposite directions, it's negative. With a unit vector, it picks out one part of an arrow. And in physics, it gives the work a force does, and how fast the wind changes the temperature at a fixed place.
 
-> 85 words · 7 sentences · 672.450–708.025 s (35.6 s; speech 32.7 s) · 11:12.45–11:48.02 (measured).
+> 85 words · 7 sentences · 690.500–726.075 s (35.6 s; speech 32.7 s) · 11:30.50–12:06.08 (measured).
 > Screen: one beat per sentence: 5×1 + 1×3 = 8 · shadow × length · + / 0 / − with mini pictures · v·x̂ = 6 m/s · W = 50 J, v·∇T = 0.18 K per hour.
 
 ## s22_end
 This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for this dot product, and the notebooks for the other maths concepts, are on the website that goes with this video.
 
-> 58 words · 3 sentences · 708.025–733.750 s (25.7 s; speech 22.2 s) · 11:48.02–12:13.75 (measured).
+> 58 words · 3 sentences · 726.075–751.800 s (25.7 s; speech 22.2 s) · 12:06.08–12:31.80 (measured).
 > Screen: 'a series of maths tutorials'; 'atmospheric science · meteorology · fluid dynamics'; 'dot-product notebook' + 'notebooks for the other maths concepts' (no URL, no path, no book name, no lab); 2.5-s silent hold.
 
-> Total: 1809 words · 114 sentences · 731.250 s narration · 733.750 s movie (12:13.75) · 147.9 words per minute.
+> Total: 1856 words · 116 sentences · 749.300 s narration · 751.800 s movie (12:31.80) · 148.1 words per minute.

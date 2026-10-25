@@ -54,10 +54,10 @@ export const eqPieces = (s: string): string[] => {
 
 /** Positioned TeX string. ax: 0 left / 0.5 centre / 1 right of x; ay likewise for y. */
 export const TeX: React.FC<{ s: string; x: number; y: number; size?: number; c?: string; o?: number; ax?: number; ay?: number;
-  glow?: number; halo?: boolean }> = ({ s, x, y, size = 68, c = C.ink, o = 1, ax = 0, ay = 0.5, glow = 0, halo = false }) => {
+  glow?: number; halo?: boolean; haloW?: number }> = ({ s, x, y, size = 68, c = C.ink, o = 1, ax = 0, ay = 0.5, glow = 0, halo = false, haloW = 0.08 }) => {
   floor(size, s);
   if (o <= 0) return null;
-  const hs = 0.08 * size;
+  const hs = haloW * size;
   return (
     <div style={{ position: "absolute", left: x, top: y, transform: `translate(${-ax * 100}%, ${-ay * 100}%)`,
       fontSize: size / KX, color: c, opacity: o, whiteSpace: "nowrap", lineHeight: 1.2,
@@ -114,7 +114,7 @@ export const Layered: React.FC<{ parts: Part[]; layers: Layer[]; x: number; y: n
 /** One row. lhs/rhs are TeX strings or layered parts. `cont` = continuation row of the line above. */
 export type Side = string | { parts: Part[]; layers: Layer[] } | { raw: { s: string; o: number }[] };
 export type CalcRow = { lhs?: Side; rhs: Side; at: number; c?: string; lc?: string; cont?: boolean; h?: number; ul?: number;
-  out?: number; size?: number; keep?: boolean; glow?: number };
+  out?: number; size?: number; keep?: boolean; glow?: number; ulOff?: number };
 const SideView: React.FC<{ s: Side; size: number; c: string }> = ({ s, size, c }) =>
   typeof s === "string"
     ? <span style={{ fontSize: size / KX, color: c, whiteSpace: "nowrap" }} dangerouslySetInnerHTML={{ __html: texHtml(s) }} />
@@ -169,7 +169,7 @@ export const CalcStack: React.FC<{ f: number; x: number; y: number; rows: CalcRo
         </div>
         <div style={{ marginLeft: gap, display: "flex", alignItems: "baseline", position: "relative" }}>
           <SideView s={r.rhs} size={sz} c={r.c ?? C.ink} />
-          {ulA > 0 ? <div style={{ position: "absolute", left: 0, right: 0, bottom: -10, height: 6, background: C.gold, opacity: ulA }} /> : null}
+          {ulA > 0 ? <div style={{ position: "absolute", left: 0, right: 0, bottom: -(r.ulOff ?? 10), height: 6, background: C.gold, opacity: ulA }} /> : null}
         </div>
       </div>,
     );

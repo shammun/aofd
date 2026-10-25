@@ -8,7 +8,7 @@ import cheap from "../../ch00/ch00_dot_product_why/data/cheap.json";
 import work from "../../ch00/ch00_dot_product_why/data/work.json";
 import wx from "../../ch00/ch00_dot_product_why/data/weather.json";
 import { C, T } from "./kit/type";
-import { Arc, Arrow, Band, Bracket, Dash, Grid, Lbl, ProdRect, Pt, RightTick, Svg, add, bracketMid, clamp, lerp, mkP, pulse, textW, unit } from "./kit/draw";
+import { Arc, Arrow, Band, Bracket, Dash, Grid, Lbl, Pt, RightTick, Svg, add, bracketMid, clamp, lerp, mkP, pulse, textW, unit } from "./kit/draw";
 import { CalcRow, CalcStack, Layer, Layered, Part, TeX, base, col, eqPieces, plainOf, rep, splitEq, texHtml } from "./kit/tex";
 import { Balance, Keyword, TipLabel, placeLabels } from "./kit/notes";
 import { CameraGlyph, Check, ClockGlyph, Droplet, Notebook, SnapCorners, Sled } from "./kit/icons";
@@ -83,7 +83,7 @@ const EQ_SYM = String.raw`\mathbf a\cdot\mathbf b = \mathbf b\cdot\mathbf a`;
 const EQ_SH_AB = String.raw`\frac{8}{3.162} = 2.530`;
 const EQ_SH_BA = String.raw`\frac{8}{5.099} = 1.569`;
 const EQ_TRAY = String.raw`2.530\times3.162 \approx 8 \approx 1.569\times5.099`;
-const EQ_VX = String.raw`\mathbf v\cdot\hat{\mathbf x} = 6\times1 + 8\times0 = 6\ \mathrm{m\,s^{-1}}`;
+const EQ_VX = String.raw`\mathbf v\cdot\hat{\mathbf x} = 6\times1 + 8\times0 = 6\ \mathrm{m/s}`;
 const EQ_W = String.raw`W = \mathbf F\cdot\mathbf d = (|\mathbf F|\cos\theta)\,|\mathbf d|`;
 const EQ_WSH = String.raw`\text{shadow} = 20\cos 60^\circ = 10\ \mathrm N`;
 const EQ_W5 = String.raw`W = 10\ \mathrm N\times5\ \mathrm m = 50\ \mathrm J`;
@@ -94,14 +94,14 @@ const EQ_MD = String.raw`\frac{\mathrm{D}\varphi}{\mathrm{D}t} = \frac{\partial\
 const EQ_TF = String.raw`\frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T`;
 const EQ_DXDY = String.raw`\frac{\partial T}{\partial x} = \frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}},\qquad \frac{\partial T}{\partial y} = 0`;
 const EQ_GRAD = String.raw`\nabla T = \left(\frac{\partial T}{\partial x},\ \frac{\partial T}{\partial y}\right)`;
-const EQ_GRADN = String.raw`\nabla T = (1.00\times10^{-5}\ \mathrm{K\,m^{-1}},\ 0)`;
+const EQ_GRADN = String.raw`\nabla T = (1.00\times10^{-5}\ \mathrm{K/m},\ 0)`;
 const EQ_UNIT = String.raw`\frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}} = \frac{1\ \mathrm K}{10^{5}\ \mathrm m}`;
-const EQ_COS60 = String.raw`10\times\cos 60^\circ = 5.00\ \mathrm{m\,s^{-1}}`;
-const EQ_SIN60 = String.raw`10\times\sin 60^\circ = 8.66\ \mathrm{m\,s^{-1}}`;
+const EQ_COS60 = String.raw`10\times\cos 60^\circ = 5.00\ \mathrm{m/s}`;
+const EQ_SIN60 = String.raw`10\times\sin 60^\circ = 8.66\ \mathrm{m/s}`;
 const EQ_VGT = String.raw`\mathbf v\cdot\nabla T = (|\mathbf v|\cos\theta)\,|\nabla T|`;
-const EQ_VGTN = String.raw`= 5.00\ \mathrm{m\,s^{-1}}\times1.00\times10^{-5}\ \mathrm{K\,m^{-1}} = 5.00\times10^{-5}\ \mathrm{K\,s^{-1}}`;
-const EQ_KH = String.raw`5.00\times10^{-5}\ \mathrm{K\,s^{-1}}\times3600\ \mathrm s = 0.18\ \mathrm{K\ per\ hour}`;
-const EQ_18KM = String.raw`5.00\ \mathrm{m\,s^{-1}}\times3600\ \mathrm s = 18\ \mathrm{km}`;
+const EQ_VGTN = String.raw`= 5.00\ \mathrm{m/s}\times1.00\times10^{-5}\ \mathrm{K/m} = 5.00\times10^{-5}\ \mathrm{K/s}`;
+const EQ_KH = String.raw`5.00\times10^{-5}\ \mathrm{K/s}\times3600\ \mathrm s = 0.18\ \mathrm{K\ per\ hour}`;
+const EQ_18KM = String.raw`5.00\ \mathrm{m/s}\times3600\ \mathrm s = 18\ \mathrm{km}`;
 const EQ_018 = String.raw`18\ \mathrm{km}\times\frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}} = 0.18\ ^\circ\mathrm C`;
 const EQ_D0 = String.raw`\frac{\mathrm{D}T}{\mathrm{D}t} = 0`;
 const EQ_POLE = String.raw`13.00 \to 12.82 \to 12.64 \to 12.46\ ^\circ\mathrm C`;
@@ -109,11 +109,11 @@ const EQ_LOCAL = String.raw`\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\na
 const EQ_ZERO = String.raw`0 = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T`;
 const EQ_LOCALN = String.raw`\frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T = -0.18\ \mathrm{K\ per\ hour}`;
 const EQ_BAL = String.raw`0 = -0.18 + 0.18`;
-const EQ_V20 = String.raw`\mathbf v\cdot\nabla T = 5.00\ \mathrm{m\,s^{-1}}\times2.00\times10^{-5}\ \mathrm{K\,m^{-1}} = 1.00\times10^{-4}\ \mathrm{K\,s^{-1}}`;
-const EQ_KH2 = String.raw`1.00\times10^{-4}\ \mathrm{K\,s^{-1}}\times3600\ \mathrm s = 0.36\ \mathrm{K\ per\ hour}`;
-const EQ_STEEP = String.raw`\frac{1\ ^\circ\mathrm C}{50\ \mathrm{km}} = 2.00\times10^{-5}\ \mathrm{K\,m^{-1}}`;
+const EQ_V20 = String.raw`\mathbf v\cdot\nabla T = 5.00\ \mathrm{m/s}\times2.00\times10^{-5}\ \mathrm{K/m} = 1.00\times10^{-4}\ \mathrm{K/s}`;
+const EQ_KH2 = String.raw`1.00\times10^{-4}\ \mathrm{K/s}\times3600\ \mathrm s = 0.36\ \mathrm{K\ per\ hour}`;
+const EQ_STEEP = String.raw`\frac{1\ ^\circ\mathrm C}{50\ \mathrm{km}} = 2.00\times10^{-5}\ \mathrm{K/m}`;
 const EQ_R1 = String.raw`\mathbf a\cdot\mathbf b = (|\mathbf a|\cos\theta)\,|\mathbf b|`;
-const EQ_R3 = String.raw`\mathbf v\cdot\hat{\mathbf x} = 6\ \mathrm{m\,s^{-1}}`;
+const EQ_R3 = String.raw`\mathbf v\cdot\hat{\mathbf x} = 6\ \mathrm{m/s}`;
 const EQ_R4 = String.raw`W = \mathbf F\cdot\mathbf d = 50\ \mathrm J`;
 const EQ_R5 = String.raw`\mathbf v\cdot\nabla T = 0.18\ \mathrm{K\ per\ hour}`;
 
@@ -158,6 +158,21 @@ const atH = (arr: number[], h: number) => interp(h, W.iso_t_h, arr);
 const Scene: React.FC<{ children: React.ReactNode; fadeIn?: boolean }> = ({ children, fadeIn = true }) => {
   const f = useCurrentFrame();
   return <AbsoluteFill style={{ background: C.bg, opacity: fadeIn ? ramp(f, 0, XF) : 1 }}>{children}</AbsoluteFill>;
+};
+/** TeX pieces on one line (left edge x, vertical centre y), each with its own opacity; optional gold underline */
+const InlineTeX: React.FC<{ x: number; y: number; size: number; pieces: { s: string; o: number; c?: string }[]; gap?: number; ul?: number }> = ({
+  x, y, size, pieces, gap = 24, ul = 0,
+}) => {
+  if (pieces.every((p) => p.o <= 0)) return null;
+  return (
+    <div style={{ position: "absolute", left: x, top: y, transform: "translate(0, -50%)", display: "flex", alignItems: "baseline", gap,
+      whiteSpace: "nowrap", lineHeight: 1.2 }}>
+      {pieces.map((p, i) => (
+        <span key={i} style={{ fontSize: size / 1.21, color: p.c ?? C.ink, opacity: Math.max(0, p.o) }} dangerouslySetInnerHTML={{ __html: texHtml(p.s) }} />
+      ))}
+      {ul > 0 ? <div style={{ position: "absolute", left: 0, right: 0, bottom: -12, height: 6, background: C.gold, opacity: ul }} /> : null}
+    </div>
+  );
 };
 // ---------------------------------------------------------------- the pair plane (s01–s08)
 const A = pair.a as Pt, B = pair.b as Pt;
@@ -232,8 +247,10 @@ const S01: React.FC = () => {
     <Scene fadeIn={false}>
       <Svg>
         <PairBase g={g} />
-        <g opacity={0.5 * oMap}>
+        <g opacity={0.85 * oMap}>
           <MiniMap x={1240} y={560} w={420} h={250} />
+          {/* S1 (review 5): the thumbnail reads as a weather map: isotherms (in MiniMap) + a wind arrow at 60° */}
+          <Arrow p={[1400, 760]} q={[1400 + 150 * Math.cos(VANG), 760 - 150 * Math.sin(VANG)]} color={C.first} w={9} head={32} />
         </g>
       </Svg>
       <TeX s={String.raw`\mathbf a\cdot\mathbf b`} x={1450 - 130 * slide} y={330} size={T.hero} ax={0.5} o={fin(f, SS(k, 0), 10)} />
@@ -252,14 +269,16 @@ if (`\\underbrace{${LA_L}}_{${BRACE_W}}` !== EQ_BRACE_A) throw new Error("BRACE_
 const BRACE_A: Part[] = [{ t: LA_L, c: C.first, u: { w: String.raw`\mathclap{${BRACE_W}}`, c: C.first } }];
 const lenRows = (f: number, ta: number, tac: number, tb: number, tbc: number, brace: boolean, flashAt?: number): CalcRow[] => {
   const fl = flashAt !== undefined ? pulse(f, flashAt, 16) : 0;
+  const braceO = fout(f, ta + 75, 15);
   const lhsA = brace
-    ? { parts: BRACE_A, layers: [{ t: "all" as const, tc: { 0: fl > 0.3 ? C.gold : C.first }, o: 1 }, { u: [0], o: fout(f, ta + 75, 15) }] }
+    ? { parts: BRACE_A, layers: [{ t: "all" as const, tc: { 0: fl > 0.3 ? C.gold : C.first }, o: 1 }, { u: [0], o: braceO }] }
     : String.raw`\textcolor{${C.first}}{${LA_L}}`;
+  // S9 (review 5): the brace row closes up as its words fade, and every line gets the same 120-px pitch
   return [
-    { lhs: lhsA, rhs: LA[0], at: ta, c: C.first, h: brace ? 165 : undefined },
-    { rhs: `${LA[1]} ${LA[2]}`, at: tac, c: C.first, cont: true },
-    { lhs: LB_L, rhs: LBp[0], at: tb, c: C.second },
-    { rhs: `${LBp[1]} ${LBp[2]}`, at: tbc, c: C.second, cont: true },
+    { lhs: lhsA, rhs: LA[0], at: ta, c: C.first, h: brace ? 120 + 45 * braceO : 120 },
+    { rhs: `${LA[1]} ${LA[2]}`, at: tac, c: C.first, cont: true, h: 120 },
+    { lhs: LB_L, rhs: LBp[0], at: tb, c: C.second, h: 120 },
+    { rhs: `${LBp[1]} ${LBp[2]}`, at: tbc, c: C.second, cont: true, h: 120 },
   ];
 };
 const ABRK_OFF = 34;
@@ -335,8 +354,8 @@ const S03: React.FC = () => {
         <PairBase />
         <Legs oA={1} oB={1} px={pz} py={py} />
         <SmallPairs o={1} />
-        <Keyword f={f} text="scalar" at={[1080, 770]} appear={t6} targets={[[1750, 712]]} />
-        <Lbl x={1080} y={832} t="scalar product" c={C.key} s={T.key} o={fin(f, tSP, 8)} />
+        <Keyword f={f} text="scalar" at={[1080, 790]} appear={t6} targets={[[1745, 730]]} bend={0.12} />
+        <Lbl x={1080} y={851} t="scalar product" c={C.key} s={T.key} o={fin(f, tSP, 8)} />
         <GhostArrow x={1660} y={812} len={110} o={0.9 * fin(f, AT(k, 5, "not an arrow"))} />
       </Svg>
       <Layered parts={P3} layers={layers} x={1070} y={50} size={70} ay={0} o={fin(f, t2)} />
@@ -381,15 +400,9 @@ const S04: React.FC = () => {
       <Arrow p={[x - 45, 255]} q={[x - 45 + q[0] * 30, 255 - q[1] * 30]} color={C.second} w={6} head={18} halo={false} />
     </g>
   );
-  const rows: CalcRow[] = [
-    { lhs: String.raw`\textcolor{${C.first}}{${LA_L}}`, rhs: `${LA[1]} ${LA[2]}`, at: t3, c: C.first },
-    { lhs: LB_L, rhs: `${LBp[1]} ${LBp[2]}`, at: t3 + 15, c: C.second },
-    { lhs: TH_A.split(" = ")[0], rhs: "= " + TH_A.split(" = ")[1], at: tTh },
-    { lhs: TH_B.split(" = ")[0], rhs: "= " + TH_B.split(" = ")[1], at: tCo, cont: true },
-    { lhs: CN_L, rhs: CN_A, at: t4 },
-    { rhs: String.raw`{}\times0.496${CN_B}`, at: t4 + 15, cont: true },
-    { rhs: rep(CNP[1], "8", String.raw`\mathbf{8}`), at: t8, cont: true, ul: t8 + 8 },
-  ];
+  // M4 (review 5, U-M3.9): the full Pythagoras lines for |a| and |b|, θ and cos θ on one line, then the product;
+  // all five lines stay on screen until "≈ 8" (no scrolling stack), so 5.099 and 3.162 keep their source lines.
+  const MX = 1100;
   const thetaLbl = P(1.35 * Math.cos(ANG_MID), 1.35 * Math.sin(ANG_MID));
   return (
     <Scene>
@@ -415,7 +428,11 @@ const S04: React.FC = () => {
         <Lbl x={1774} y={150} t="(1)" c={C.muted} s={T.key} o={fin(f, tOne, 8)} />
       </Svg>
       <TeX s={EQ_COS} x={1080} y={150} size={T.eq} o={fin(f, t1)} />
-      <CalcStack f={f} x={1250} y={235} rows={rows} maxLines={3} />
+      <TeX s={String.raw`\textcolor{${C.first}}{${LA_L}} ${LA_R}`} x={MX} y={270} size={54} c={C.first} o={fin(f, t3)} />
+      <TeX s={EQ_LEN_B} x={MX} y={378} size={54} c={C.second} o={fin(f, t3 + 15)} />
+      <InlineTeX x={MX} y={486} size={60} pieces={[{ s: `${TH_A},`, o: fin(f, tTh) }, { s: TH_B, o: fin(f, tCo) }]} />
+      <InlineTeX x={MX} y={594} size={60} pieces={[{ s: `${CN_L} ${CN_A}`, o: fin(f, t4) }, { s: String.raw`{}\times0.496`, o: fin(f, t4 + 15) }]} gap={0} />
+      <InlineTeX x={MX + 102} y={700} size={68} pieces={[{ s: rep(CNP[1], "8", String.raw`\mathbf{8}`), o: fin(f, t8) }]} ul={clamp((f - t8 - 8) / 10, 0, 1)} />
     </Scene>
   );
 };
@@ -447,30 +464,28 @@ const S05: React.FC = () => {
           const Op = PANEL_O[i], Pq = mkP(Op[0], Op[1], U5);
           const q = same.q[i] as Pt, d = same.p_dot_q[i], sh = same.shadow_p_on_q[i], nq = same.norm_q[i];
           const oq = fin(f, tQ[i], 14);
-          const qT = Pq(...q);
           const pO = lerp(BIG_P.o, Op, fly), pu = BIG_P.u + (U5 - BIG_P.u) * fly;
-          // product rectangle: the signed shadow of p along q (from the start) × |q|, drawn below q's line;
-          // rose + hatched + dashed when negative (it then lies behind q's start)
-          const qh: Pt = [q[0] / nq, q[1] / nq];
-          const foot: Pt = [sh * qh[0], sh * qh[1]];
-          const rect: Pt[] = [Op, Pq(...foot), Pq(foot[0], foot[1] - nq), Pq(0, -nq)];
-          const tip = i === 2 ? { x: qT[0] + 34, y: qT[1] - 62, a: "end" as const } : { x: qT[0], y: qT[1] - (i === 0 ? 62 : 52), a: "middle" as const };
+          // M6 (review 5): in panel 1 q lies along p, so it is drawn ON TOP of p and lifted 16 px above p's shaft
+          // (a drawing offset only; q is still (2, 0)). M3: no product rectangles (never narrated).
+          const lift = i === 0 ? -16 : 0;
+          const Oq: Pt = [Op[0], Op[1] + lift], qT: Pt = add(Pq(...q), [0, lift]);
+          void d; void sh; void nq;
+          const tip = i === 2 ? { x: qT[0] - 10, y: qT[1] - 112, a: "middle" as const } : { x: qT[0], y: qT[1] - (i === 0 ? 50 : 52), a: "middle" as const };
           return (
             <g key={i}>
               <Grid P={Pq} xr={PANEL_XR[i]} yr={[-2, 3]} o={0.6 * fly} />
-              <g opacity={oq}>
-                {Math.abs(d) > 1e-9 ? <ProdRect pts={rect} neg={d < 0} id={`h5${i}`} o={fin(f, tR[i], 12)} /> : null}
-                <Arrow p={Op} q={qT} color={C.second} w={i === 0 ? 16 : 10} head={i === 0 ? 44 : 40} />
-                {i === 1 ? <RightTick at={Op} u1={[1, 0]} u2={[0, -1]} s={30} /> : null}
-                {i === 2 ? <Arc P={Pq} a0={0} a1={180} r={0.8} w={4} /> : null}
-                <Lbl x={i === 1 ? Op[0] + 70 : i === 0 ? Op[0] - 60 : Op[0]} y={i === 1 ? Op[1] - 52 : i === 0 ? Op[1] - 44 : Op[1] - 104}
-                  t={["0°", "90°", "180°"][i]} s={T.floor} c={C.ink} a={i === 1 ? "start" : "middle"} />
-                <Lbl x={tip.x} y={tip.y} t={`q = (${minus(String(q[0]))}, ${minus(String(q[1]))})`} c={C.second} s={T.key} a={tip.a} />
-              </g>
               {fly > 0 ? <g>
                 <Arrow p={pO} q={[pO[0] + p[0] * pu, pO[1]]} color={C.first} w={10} head={36} />
                 <Lbl x={pO[0] + p[0] * pu + 16} y={pO[1] + (fly > 0.9 ? 40 : 0)} t="p" c={C.first} s={T.key} o={fly} />
               </g> : null}
+              <g opacity={oq}>
+                <Arrow p={Oq} q={qT} color={C.second} w={10} head={38} />
+                {i === 1 ? <RightTick at={Op} u1={[1, 0]} u2={[0, -1]} s={30} /> : null}
+                {i === 2 ? <Arc P={Pq} a0={0} a1={180} r={0.8} w={4} /> : null}
+                <Lbl x={i === 1 ? Op[0] + 70 : i === 0 ? Op[0] - 60 : Op[0] + 112} y={i === 1 ? Op[1] - 52 : i === 0 ? Op[1] - 44 : Op[1] - 82}
+                  t={["0°", "90°", "180°"][i]} s={T.floor} c={C.ink} a={i === 2 ? "start" : i === 1 ? "start" : "middle"} />
+                <Lbl x={tip.x} y={tip.y} t={`q = (${minus(String(q[0]))}, ${minus(String(q[1]))})`} c={C.second} s={T.key} a={tip.a} />
+              </g>
             </g>
           );
         })}
@@ -485,10 +500,11 @@ const S05: React.FC = () => {
             </g>
           );
         })}
-        <Lbl x={1440} y={330} t="opposite" c={C.key} s={T.key} a="end" o={fin(f, tOpp, 10)} />
+        {/* S16: "opposite" sits under the two arrows of panel 3, centred on the 180° picture */}
+        <Lbl x={PANEL_O[2][0]} y={PANEL_O[2][1] + 70} t="opposite" c={C.key} s={T.key} a="middle" o={fin(f, tOpp, 10)} />
       </Svg>
       {[0, 1, 2].map((i) => (
-        <TeX key={i} s={lines[i]} x={ROW_C[i]} y={738} size={46} ax={0.5} o={fin(f, tL[i], 10)} />
+        <TeX key={i} s={lines[i]} x={ROW_C[i]} y={736} size={54} ax={0.5} o={fin(f, tL[i], 10)} />
       ))}
     </Scene>
   );
@@ -514,7 +530,7 @@ const S06: React.FC = () => {
     { lhs: String.raw`\text{shadow}`, rhs: String.raw`= |\mathbf a|\cos\theta`, at: AT(k, 3, "is the length"), c: C.first },
     { lhs: DIV_L, h: 175, rhs: { raw: [{ s: DIVc(C.ink, "transparent"), o: 1 }, { s: DIVc("transparent", C.neg), o: strike }] }, at: t4 + 4 },
     { lhs: SHF_L, rhs: SHFP[0], at: tLeft + 14, c: C.first, h: 185 },
-    { rhs: `${SHFP[1]} ${rep(SHFP[2], "2.530", String.raw`\mathbf{2.530}`)}`, at: tNum, cont: true, c: C.first, h: 165, ul: tNum + 30 },
+    { rhs: `${SHFP[1]} ${rep(SHFP[2], "2.530", String.raw`\mathbf{2.530}`)}`, at: tNum, cont: true, c: C.first, h: 165, ul: tNum + 30, ulOff: 30 },
   ];
   const lbl = f >= tNum + 30 ? `shadow = ${SHAB.toFixed(3)}` : "shadow";
   return (
@@ -529,7 +545,8 @@ const S06: React.FC = () => {
         <g opacity={tri}>
           <Arc P={P} a0={PHI_A} a1={PHI_B} r={0.75} w={4} />
           <Lbl x={P(0.95 * Math.cos(ANG_MID), 0.95 * Math.sin(ANG_MID))[0]} y={P(0.95 * Math.cos(ANG_MID), 0.95 * Math.sin(ANG_MID))[1]} t="θ" s={T.key} />
-          <Lbl x={P(3.3, 0.66)[0]} y={P(3.3, 0.66)[1] + 84} t={`|a| = ${NA.toFixed(3)}`} c={C.first} s={T.key} a="middle" />
+          {/* M5: |a| below the x-axis line, under a's arrow, clear of the axis */}
+          <Lbl x={P(3.3, 0)[0]} y={P(0, 0)[1] + 52} t={`|a| = ${NA.toFixed(3)}`} c={C.first} s={T.key} a="middle" />
         </g>
         <SmallPairs o={1} />
         <Lbl x={1080} y={86} t="(1) ÷ |b|" c={C.gold} s={T.key} o={fin(f, t4) * fout(f, tNum + 40)} />
@@ -590,19 +607,19 @@ const RECT_B = (pair.rect_on_b_right as Pt[]).map((p) => P(...p));
 const [Q8_L, Q8_R] = splitEq(EQ_Q8), Q8P = eqPieces(Q8_R); // a·b | "= (|a|cosθ)|b|", "= 2.530×3.162", "≈ 8"
 const Q8_PARTS: Part[] = [
   { t: "=" },
-  { t: String.raw`(|\mathbf a|\cos\theta)`, c: C.first, u: { w: String.raw`\text{shadow}`, c: C.first } },
-  { t: String.raw`\,|\mathbf b|`, c: C.second, u: { w: String.raw`\substack{\text{length}\\ \text{of }\mathbf b}`, c: C.second } },
+  { t: String.raw`(|\mathbf a|\cos\theta)`, c: C.first, u: { w: String.raw`\small\text{shadow}`, c: C.first } },
+  { t: String.raw`\,|\mathbf b|`, c: C.second, u: { w: String.raw`\substack{\small\text{length}\\ \small\text{of }\mathbf b}`, c: C.second } },
 ];
 if (plainOf(Q8_PARTS) !== rep(Q8P[0], String.raw`\,|`, String.raw` \,|`)) throw new Error("s08 parts ≠ EQ_Q8");
 const S08: React.FC = () => {
   const f = useCurrentFrame(), k = K("s08_question");
-  const grow = ramp(f, 6, 36), t1 = SS(k, 1), t2 = SS(k, 2);
-  const rect: Pt[] = [RECT_B[0], RECT_B[1], lerp(RECT_B[1], RECT_B[2], grow), lerp(RECT_B[0], RECT_B[3], grow)];
+  const t1 = SS(k, 1), t2 = SS(k, 2);
+  void RECT_B; // S10 (review 5): the un-narrated area rectangle is removed; the band (shadow) and |b| carry the picture
   return (
     <Scene>
       <Svg>
         <PairBase />
-        {grow > 0 ? <ProdRect pts={rect} neg={false} id="h8" /> : null}
+        <Bracket p={O} q={BTIP} off={-ABRK_OFF} c={C.second} o={fin(f, 22)} />
         <Band p={O} q={FOOT} color={C.first} />
         <Arrow p={O} q={ATIP} color={C.first} />
         <Lbl x={SH_LBL[0]} y={SH_LBL[1]} t={`shadow = ${SHAB.toFixed(3)}`} c={C.first} s={T.key} />
@@ -628,13 +645,12 @@ const S09: React.FC = () => {
   const Plane: React.FC<{ Pp: (x: number, y: number) => Pt; caster: "a" | "b" }> = ({ Pp, caster }) => {
     const Oo = Pp(0, 0), isA = caster === "a";
     const proj = (isA ? pair.proj_a_on_b : pair.proj_b_on_a) as Pt, onto = isA ? B : A, from = isA ? A : B;
-    const rc = (isA ? pair.rect_on_b : pair.rect_on_a_up) as Pt[];
-    const rect: Pt[] = [Pp(...rc[0]), Pp(...rc[1]), lerp(Pp(...rc[1]), Pp(...rc[2]), grow), lerp(Pp(...rc[0]), Pp(...rc[3]), grow)];
+    // S10 (review 5): no area rectangles; "× the other length" is shown by a bracket along the arrow the shadow falls on
     const s = isA ? sL : sR, foot = Pp(...proj), cTip = Pp(...from);
     return (
       <g>
         <Grid P={Pp} xr={isA ? [-3, 5] : [-1, 5]} yr={[0, isA ? 4 : 5]} o={0.7} />
-        {grow > 0 ? <ProdRect pts={rect} neg={false} id={`h9${caster}`} /> : null}
+        <Bracket p={Oo} q={Pp(...onto)} off={isA ? -28 : 28} c={isA ? C.second : C.first} o={grow} />
         <Dash p={Pp(-onto[0] * 0.2, -onto[1] * 0.2)} q={Pp(onto[0] * 1.3, onto[1] * 1.3)} c={isA ? C.second : C.first} o={0.4} w={3} />
         <Band p={Oo} q={lerp(Oo, foot, s)} color={isA ? C.first : C.second} o={s > 0 ? 1 : 0} w={20} />
         <Arrow p={Oo} q={Pp(...B)} color={C.second} w={9} head={34} />
@@ -709,8 +725,8 @@ const GY = 560, X0 = 300, FSC = 22, DSC = 70, RH = 10;
 const [W_L, W_R] = splitEq(EQ_W), WRP = eqPieces(W_R); // W | "= F·d", "= (|F|cosθ)|d|"
 const W_PARTS: Part[] = [
   { t: "=" },
-  { t: String.raw`(|\mathbf F|\cos\theta)`, c: C.first, u: { w: String.raw`\text{shadow}`, c: C.first } },
-  { t: String.raw`\,|\mathbf d|`, c: C.second, u: { w: String.raw`\substack{\text{length}\\ \text{of }\mathbf d}`, c: C.second } },
+  { t: String.raw`(|\mathbf F|\cos\theta)`, c: C.first, u: { w: String.raw`\small\text{shadow}`, c: C.first } },
+  { t: String.raw`\,|\mathbf d|`, c: C.second, u: { w: String.raw`\substack{\small\text{length}\\ \small\text{of }\mathbf d}`, c: C.second } },
 ];
 if (plainOf(W_PARTS) !== rep(WRP[1], String.raw`\,|`, String.raw` \,|`)) throw new Error("s11 parts ≠ EQ_W");
 const [WS_L, WS_R] = splitEq(EQ_WSH), WSP = eqPieces(WS_R);
@@ -726,8 +742,10 @@ const S11: React.FC = () => {
   const Fv = work.F as Pt;
   const Ft: Pt = [X0 + Fv[0] * FSC, GY - Fv[1] * FSC], sh: Pt = [X0 + work.shadow_N * FSC, GY];
   const dT: Pt = [X0 + dm * DSC, GY];
-  const rect: Pt[] = [[X0, GY + 8], [dT[0], GY + 8], [dT[0], GY + 8 + work.shadow_N * RH], [X0, GY + 8 + work.shadow_N * RH]];
+  void RH; void oW; // S10: no area rectangle under d
   const dl = dm.toFixed(dm % 1 ? 1 : 0);
+  // S11 (review 5): the sled slides along d (a faint copy marks where it ends up), first 5 m, then 10 m
+  const slide = clamp((f - tD - 6) / 40, 0, 1) * dm * DSC;
   const rows: CalcRow[] = [
     { lhs: WS_L, rhs: WSP[0], at: tShadow + 10, c: C.first },
     { rhs: WSP[1], at: tShadow + 30, cont: true, c: C.first },
@@ -740,9 +758,9 @@ const S11: React.FC = () => {
       <Svg>
         <line x1={90} y1={GY} x2={1000} y2={GY} stroke="#6b7690" strokeWidth={5} />
         <Sled x={175} y={GY} o={fin(f, 4)} />
-        {oW > 0 ? <ProdRect pts={rect} neg={false} o={oW} id="h11" /> : null}
+        {slide > 0 ? <Sled x={175 + slide} y={GY - 12} o={0.45} /> : null}
         <Arrow p={[X0, GY]} q={dT} color={C.second} o={fin(f, tD)} />
-        <Lbl x={dT[0]} y={GY - 50} t={`d = ${dl} m`} c={C.second} s={T.key} a="end" o={fin(f, tD)} />
+        <Lbl x={dT[0]} y={GY - 116} t={`d = ${dl} m`} c={C.second} s={T.key} a="end" o={fin(f, tD)} />
         <Arrow p={[X0, GY]} q={Ft} color={C.first} o={oF * (1 - 0.5 * oSh)} />
         <Lbl x={Ft[0] + 20} y={Ft[1] - 30} t={`F = ${work.F_N.toFixed(0)} N`} c={C.first} s={T.key} o={fin(f, tN)} />
         <g opacity={oF * (1 - oLeg)}>
@@ -821,7 +839,10 @@ const MapFrame: React.FC<{ o?: number; ticks?: boolean }> = ({ o = 1, ticks = tr
   <g opacity={o}>
     <rect x={GM.mx} y={GM.my} width={GM.w * GM.km} height={GM.h * GM.km} fill="none" stroke={C.grid} strokeWidth={3} />
     {ticks ? [0, 100, 200, 300, 400, 500, 600].map((x) => <Lbl key={x} x={gX(GM, x)} y={GM.my + GM.h * GM.km + 34} t={`${x}`} c={C.muted} s={T.floor} a="middle" b={false} />) : null}
+    {/* S3 (review 5): the axis unit, after the last tick of each axis */}
+    {ticks ? <Lbl x={gX(GM, 600) + 50} y={GM.my + GM.h * GM.km + 34} t="km" c={C.muted} s={T.floor} a="start" b={false} /> : null}
     {ticks ? [0, 180, 360].map((y) => <Lbl key={y} x={GM.mx - 12} y={gY(GM, y)} t={`${y}`} c={C.muted} s={T.floor} a="end" b={false} />) : null}
+    {ticks ? <Lbl x={GM.mx - 12} y={GM.my - 46} t="km" c={C.muted} s={T.floor} a="end" b={false} /> : null}
   </g>
 );
 const ColourBar: React.FC<{ o?: number }> = ({ o = 1 }) => {
@@ -830,7 +851,7 @@ const ColourBar: React.FC<{ o?: number }> = ({ o = 1 }) => {
     <g opacity={o}>
       {LUT.map((c, i) => <rect key={i} x={x} y={y1 - ((i + 1) * (y1 - y0)) / LUT.length} width={20} height={(y1 - y0) / LUT.length + 0.7} fill={c} />)}
       <Lbl x={1040} y={y0 + 8} t={`${T_HI}`} c={C.muted} s={T.floor} b={false} />
-      <Lbl x={1040} y={y1 - 10} t={`${T_LO}`} c={C.muted} s={T.floor} b={false} />
+      <Lbl x={1040} y={y1 - 26} t={`${T_LO}`} c={C.muted} s={T.floor} b={false} />
       <Lbl x={1070} y={(y0 + y1) / 2} t="T (°C)" c={C.muted} s={T.floor} a="middle" rot={-90} b={false} />
     </g>
   );
@@ -854,8 +875,12 @@ const MiniMap: React.FC<{ x: number; y: number; w: number; h: number }> = ({ x, 
 const MAPX = 1110; // left edge of the maths zone in map scenes (the colour bar labels end near x 1095)
 /** "∇T" next to the gradient arrow, set by KaTeX (an SVG ∇ glyph falls back to an outline font) */
 const GradLabel: React.FC<{ x: number; y: number; o?: number; s?: number }> = ({ x, y, o = 1, s = T.key }) =>
-  <TeX s={String.raw`\nabla T`} x={x} y={y} size={s} c={C.second} o={o} halo />;
+  <TeX s={String.raw`\nabla T`} x={x} y={y} size={s} c={C.second} o={o} halo haloW={0.035} />; // S8: thin outline, clean fill
 const balloonAtH = (h: number): Pt => [atH(W.balloon_x_km as number[], h), atH(W.balloon_y_km as number[], h)];
+/** S4/S6 (review 5): where the pole is drawn too, the balloon starts BAL_DY km south of the pole on the same 13 °C
+ * isotherm (the map is uniform north–south, so every temperature it reads equals the one on the data track) */
+const BAL_DY = -150;
+const balloonOffAtH = (h: number): Pt => { const b = balloonAtH(h); return [b[0], b[1] + BAL_DY]; };
 const ClockText: React.FC<{ x: number; y: number; h: number; o?: number }> = ({ x, y, h, o = 1 }) => (
   <g opacity={o}>
     <ClockGlyph x={x + 30} y={y} r={28} h={(h * 12) % 12} />
@@ -867,8 +892,11 @@ const ClockText: React.FC<{ x: number; y: number; h: number; o?: number }> = ({ 
 const S12: React.FC = () => {
   const f = useCurrentFrame(), k = K("s12_parcel");
   const t1 = SS(k, 1), t2 = SS(k, 2), tLR = AT(k, 2, "the local rate"), t3 = SS(k, 3), tPl = AT(k, 3, "the place stays"), t4 = SS(k, 4), tPar = AT(k, 4, "inside one air parcel"), t5 = SS(k, 5);
+  // S4 (review 5): the balloon starts on the same 13 °C isotherm as the pole but BAL_DY km south of it (the map does not
+  // vary north–south), so the parcel outline never encloses the pole; no clock here (the clock is introduced in s18)
   const h = hoursFrom(f, t4 + 20, 1.5);
-  const bal = gP(GM, balloonAtH(h));
+  const s12 = (hh: number): Pt => { const b = balloonOffAtH(hh); return [b[0] + 30, b[1]]; }; // s12 only: also 30 km east (no readings shown in s12)
+  const bal = gP(GM, s12(h)), bal0 = gP(GM, s12(0));
   const vs: Pt = [Math.cos(VANG) * 110, -Math.sin(VANG) * 110];
   const oBal = fin(f, t4);
   return (
@@ -881,13 +909,13 @@ const S12: React.FC = () => {
         <g opacity={fin(f, t1)}>
           <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.4} />
         </g>
-        <Lbl x={PINS[0]} y={PINS[1] + 46} t="fixed place" c={C.key} s={T.key} a="middle" o={fin(f, t1 + 20) * fout(f, t4)} />
-        <line x1={PINS[0]} y1={PINS[1]} x2={bal[0]} y2={bal[1]} stroke={C.first} strokeWidth={4} strokeDasharray="8 8" opacity={oBal} />
+        <Lbl x={PINS[0] - 34} y={PINS[1] - 60} t="fixed place" c={C.key} s={T.key} a="end" o={fin(f, t1 + 20)} />
+        <line x1={bal0[0]} y1={bal0[1]} x2={bal[0]} y2={bal[1]} stroke={C.first} strokeWidth={4} strokeDasharray="8 8" opacity={oBal} />
         <Arrow p={bal} q={add(bal, vs)} color={C.first} w={8} head={30} o={oBal} />
-        {fin(f, tPar) > 0 ? <ellipse cx={bal[0]} cy={bal[1] - 75} rx={62} ry={120} fill="#ffffff" fillOpacity={0.07} stroke="#ffffff" strokeWidth={4} strokeDasharray="10 8" opacity={fin(f, tPar)} /> : null}
-        <BalloonThermometer x={bal[0]} y={bal[1]} s={0.85} o={oBal} />
-        <Keyword f={f} text="air parcel" at={[760, 760]} appear={tPar + 6} targets={[[bal[0] + 40, bal[1] - 10]]} />
-        <ClockText x={MAPX + 10} y={790} h={h} o={oBal} />
+        {fin(f, tPar) > 0 ? <ellipse cx={bal[0]} cy={bal[1] - 62} rx={56} ry={100} fill="#ffffff" fillOpacity={0.07} stroke="#ffffff" strokeWidth={4} strokeDasharray="10 8" opacity={fin(f, tPar)} /> : null}
+        <BalloonThermometer x={bal[0]} y={bal[1]} s={0.7} o={oBal} />
+        {/* M5: the keyword sits inside the map, so its pointer never crosses the tick labels */}
+        <Keyword f={f} text="air parcel" at={[bal0[0] + 150, bal0[1] + 20]} appear={tPar + 6} targets={[[bal[0] + 64, bal[1] - 40]]} />
         {/* maths zone */}
         <g opacity={fin(f, t2)}><PoleThermometer x={1370} y={250} s={0.9} /></g>
         <Lbl x={1420} y={150} t="local rate" c={C.local} s={T.key} o={fin(f, tLR)} />
@@ -940,13 +968,13 @@ const S13: React.FC = () => {
     { s: MD({ bR2: C.first }), o: fin(f, t4 + 4) },
   ];
   // the plain equation must be the storyboard string: strip the colour/brace wrappers of the base layer
-  const balPos: Pt = lerp([960, 132], [MD_POS.L[0], 132], fin(f, t2, 20));
+  const balPos: Pt = lerp([960, 104], [MD_POS.L[0], 104], fin(f, t2, 20)); // S15: icons sit above the equation
   const dotGlow = pulse(f, tDot, 30);
   return (
     <Scene>
       <Svg>
         <BalloonThermometer x={balPos[0]} y={balPos[1]} s={0.45} o={fin(f, 4)} />
-        <g opacity={fin(f, t3)}><PoleThermometer x={MD_POS.R1[0]} y={135} s={0.55} /></g>
+        <g opacity={fin(f, t3)}><PoleThermometer x={MD_POS.R1[0]} y={104} s={0.55} /></g>
         <g opacity={fin(f, t1 + 6) * fout(f, t3)}>
           <Lbl x={330} y={580} t="φ: T, moisture" c={C.gold} s={T.key} />
           <PoleThermometer x={760} y={620} s={0.5} />
@@ -957,7 +985,7 @@ const S13: React.FC = () => {
         <Keyword f={f} text="carried by the flow" at={[MD_POS.bR2[0], 560]} a="middle" appear={AT(k, 4, "being carried")} out={t5} targets={[[MD_POS.bR2[0], MD_POS.bR2[1] + 40]]} />
         <Keyword f={f} text="material" at={[100, 240]} appear={t5} targets={[[MD_POS.L[0] - 82, MD_POS.L[1] - 4]]} />
         <Lbl x={100} y={302} t="derivative" c={C.key} s={T.key} o={fin(f, t5 + 4, 8)} />
-        <Keyword f={f} text="dot product" at={[1330, TFY]} appear={tDot} targets={[]} c={C.gold} />
+        <Keyword f={f} text="dot product" at={[1300, 846]} appear={tDot} targets={[[TF_DOT[0] + 4, TFY + 30]]} c={C.gold} bend={-0.25} />
       </Svg>
       <div style={{ position: "absolute", left: 960, top: MDY, transform: "translate(-50%, 0)", opacity: oEq }}>
         {layers.map((L, i) => L.o > 0 ? (
@@ -1039,9 +1067,9 @@ const S15: React.FC = () => {
         <Arrow p={PINS} q={[PINS[0] + GL * oG, PINS[1]]} color={C.second} o={oG > 0 ? 1 : 0} />
         <circle cx={PINS[0]} cy={PINS[1]} r={9} fill={C.ink} stroke={C.bg} strokeWidth={3} />
         <RightTick at={PINS} u1={[1, 0]} u2={[0, -1]} s={30} o={fin(f, t2 + 20)} />
-        <Keyword f={f} text="towards warmer" at={[PINS[0] + 40, 790]} appear={tWarm} targets={[[PINS[0] + GL - 8, PINS[1] + 10]]} />
+        <Keyword f={f} text="towards warmer" at={[PINS[0] - 20, PINS[1] + 150]} appear={tWarm} targets={[[PINS[0] + GL - 30, PINS[1] + 28]]} />
         <Keyword f={f} text="grad" at={[MAPX + 20, 300]} appear={tRead} targets={[[MAPX + 55, 190]]} out={t1 + 20} />
-        <Lbl x={1840} y={300} t="1 K step = 1 °C step" c={C.key} s={T.floor} a="end" o={fin(f, t1)} />
+        <Lbl x={1840} y={300} t="1 K step = 1 °C step" c={C.key} s={T.key} a="end" o={fin(f, t1)} />
       </Svg>
       <GradLabel x={PINS[0] + GL + 22} y={PINS[1]} o={oG} />
       <TeX s={EQ_GRAD} x={MAPX + 20} y={140} size={T.eq} o={fin(f, 4)} />
@@ -1055,14 +1083,19 @@ const S15: React.FC = () => {
 
 // ================================================================ s16a the wind's two parts
 const ALONG_T: Pt = [PINS[0], PINS[1] - (W.v_along_isotherm_m_s as number[])[1] * US];
+const ACR_Y = PINS[1] + 36; // the across part, drawn 36 px below ∇T (same length: 5 m/s × US px)
+const ALG_X = PINS[0] - 34; // the along part, drawn 34 px west of the 13 °C isotherm
 const WindLayer: React.FC<{ oV: number; oSh: number; oAl: number; f: number; tDot?: number }> = ({ oV, oSh, oAl, f, tDot }) => {
   const dotY = tDot !== undefined ? clamp((f - tDot) / 60, 0, 1) : 0; // a dot sliding along the 13 °C isotherm
   return (
     <g>
-      <Band p={PINS} q={lerp(PINS, SHT, oSh)} color={C.first} o={oSh > 0 ? 1 : 0} w={22} />
-      {oSh > 0 ? <g opacity={oSh}><Dash p={VTIP} q={SHT} w={4} /><RightTick at={SHT} u1={[-1, 0]} u2={[0, -1]} /></g> : null}
+      {/* S14 (review 5): each wind part is its own arrow, offset from ∇T and from the 13 °C isotherm */}
+      {oSh > 0 ? <g opacity={oSh}>
+        <Dash p={VTIP} q={[SHT[0], ACR_Y]} w={4} />
+        <Arrow p={[PINS[0], ACR_Y]} q={[PINS[0] + (SHT[0] - PINS[0]) * oSh, ACR_Y]} color={C.first} w={8} head={30} />
+      </g> : null}
       <Arrow p={PINS} q={[PINS[0] + GL, PINS[1]]} color={C.second} />
-      {oAl > 0 ? <Dash p={PINS} q={ALONG_T} c="#c9d2e3" w={6} d="12 9" o={oAl} /> : null}
+      {oAl > 0 ? <Arrow p={[ALG_X, PINS[1]]} q={[ALG_X, ALONG_T[1]]} color="#dfe5f0" w={7} head={28} o={oAl} /> : null}
       <Arrow p={PINS} q={VTIP} color={C.first} o={oV} />
       {tDot !== undefined && f >= tDot ? <g>
         <circle cx={PINS[0]} cy={PINS[1] + 90 + 150 * dotY} r={12} fill={tColor(13)} stroke={C.ink} strokeWidth={4} />
@@ -1082,17 +1115,18 @@ const S16A: React.FC = () => {
         <Isos xs={ISO14_X} Ts={ISO14_T} />
         <MapFrame />
         <ColourBar />
-        <BalloonThermometer x={PINS[0] - 80} y={PINS[1] + 190} s={0.6} o={0.9} />
+        <BalloonThermometer x={230} y={660} s={0.6} o={0.9} />
         <WindLayer oV={oV} oSh={oSh} oAl={oAl} f={f} tDot={tNo} />
         <g opacity={oV}>
           <Arc P={mkP(PINS[0], PINS[1], 1)} a0={0} a1={W.angle_deg} r={70} w={4} />
           <Lbl x={PINS[0] + 96} y={PINS[1] - 34} t="60°" s={T.floor} c={C.ink} />
           <Lbl x={VTIP[0] + 22} y={VTIP[1] + 6} t={`v = ${W.speed} m/s`} c={C.first} s={T.key} />
         </g>
-        <Lbl x={(PINS[0] + SHT[0]) / 2} y={PINS[1] + 48} t={`${W.shadow_m_s.toFixed(0)} m/s`} c={C.first} s={T.key} a="middle" o={oSh} />
-        <Lbl x={PINS[0] - 24} y={(PINS[1] + ALONG_T[1]) / 2 - 10} t={`${(W.v_along_isotherm_m_s as number[])[1].toFixed(2)} m/s`} c="#dfe5f0" s={T.key} a="end" o={oAl} />
+        <Lbl x={(PINS[0] + SHT[0]) / 2} y={ACR_Y + 46} t={`${W.shadow_m_s.toFixed(0)} m/s`} c={C.first} s={T.key} a="middle" o={oSh} />
+        <Lbl x={ALG_X - 18} y={(PINS[1] + ALONG_T[1]) / 2 + 10} t={`${(W.v_along_isotherm_m_s as number[])[1].toFixed(2)} m/s`} c="#dfe5f0" s={T.key} a="end" o={oAl} />
         <Lbl x={MAPX + 20} y={300} t="across" c={C.key} s={T.key} o={fin(f, tAcross)} />
-        <Keyword f={f} text="along: no change" at={[130, 780]} appear={tNo} targets={[[PINS[0] - 10, (PINS[1] + ALONG_T[1]) / 2 + 30]]} />
+        <Keyword f={f} text="along:" at={[150, 470]} appear={tNo} targets={[[ALG_X - 14, PINS[1] - 50]]} />
+        <Lbl x={150} y={530} t="no change" c={C.key} s={T.key} o={fin(f, tNo + 6, 8)} />
       </Svg>
       <GradLabel x={PINS[0] + GL + 22} y={PINS[1]} />
       <TeX s={EQ_COS60} x={MAPX + 20} y={200} size={62} c={C.first} o={fin(f, t1 + 10)} />
@@ -1105,16 +1139,17 @@ const S16A: React.FC = () => {
 // ================================================================ s16b the advection number
 const VGT_PARTS: Part[] = [
   { t: "=" },
-  { t: String.raw`(|\mathbf v|\cos\theta)`, c: C.first, u: { w: String.raw`\text{shadow}`, c: C.first } },
-  { t: String.raw`\,|\nabla T|`, c: C.second, u: { w: String.raw`\substack{\text{length}\\ \text{of }\nabla T}`, c: C.second } },
+  { t: String.raw`(|\mathbf v|\cos\theta)`, c: C.first, u: { w: String.raw`\small\text{shadow}`, c: C.first } },
+  { t: String.raw`\,|\nabla T|`, c: C.second, u: { w: String.raw`\substack{\small\text{length}\\ \small\text{of }\nabla T}`, c: C.second } },
 ];
 const [VGT_L, VGT_R] = splitEq(EQ_VGT);
 if (plainOf(VGT_PARTS) !== rep(VGT_R, String.raw`\,|`, String.raw` \,|`)) throw new Error("s16b parts ≠ EQ_VGT");
 const VGTN_P = eqPieces(EQ_VGTN); // "= 5.00 m/s × 1.00e-5 K/m", "= 5.00e-5 K/s"
 const [VGTN_A, VGTN_B] = VGTN_P[0].split(String.raw`\times1.00`);
 const KH_R = splitEq(EQ_KH)[1];
-const UNITS: Part[] = [{ t: "(" }, { t: String.raw`\mathrm m`, x: C.neg }, { t: String.raw`\,\mathrm s^{-1})\times(\mathrm K\,` },
-  { t: String.raw`\mathrm m^{-1}`, x: C.neg }, { t: String.raw`) = \mathrm K\,\mathrm s^{-1}` }];
+// S2 (review 5): slash units, as spoken; the two metres cancel
+const UNITS: Part[] = [{ t: "(" }, { t: String.raw`\mathrm m`, x: C.neg }, { t: String.raw`/\mathrm s)\times(\mathrm K/` },
+  { t: String.raw`\mathrm m`, x: C.neg }, { t: String.raw`) = \mathrm K/\mathrm s` }];
 const S16B: React.FC = () => {
   const f = useCurrentFrame(), k = K("s16b_advection_number");
   const t1 = SS(k, 1), tKs = AT(k, 1, "leaving five"), tKh = AT(k, 1, "or point one eight");
@@ -1133,7 +1168,6 @@ const S16B: React.FC = () => {
         <Isos xs={ISO14_X} Ts={ISO14_T} />
         <MapFrame />
         <ColourBar />
-        <ProdRect pts={[PINS, SHT, [SHT[0], PINS[1] + GL * fin(f, 10, 20)], [PINS[0], PINS[1] + GL * fin(f, 10, 20)]]} neg={false} id="h16" />
         <WindLayer oV={1} oSh={1} oAl={0} f={f} />
         <g opacity={fin(f, tKh + 10)}>
           <BalloonThermometer x={MAPX + 40} y={850} s={0.5} />
@@ -1165,7 +1199,8 @@ const S17: React.FC = () => {
         <MapFrame />
         <ColourBar />
         <WindLayer oV={1} oSh={0} oAl={0} f={f} />
-        <SnapCorners x0={GM.mx - 14} y0={GM.my - 14} x1={GM.mx + GM.w * GM.km + 14} y1={GM.my + GM.h * GM.km + 14} o={corners} />
+        {/* M5: corners inset 12 px inside the map, clear of the tick labels */}
+        <SnapCorners x0={GM.mx + 12} y0={GM.my + 12} x1={GM.mx + GM.w * GM.km - 12} y1={GM.my + GM.h * GM.km - 12} o={corners} />
         <g opacity={corners}>
           <CameraGlyph x={950} y={190} />
           <Lbl x={905} y={192} t="t = 0 h" c={C.ink} s={T.key} a="end" />
@@ -1181,11 +1216,14 @@ const S17: React.FC = () => {
         <g opacity={oUp}>
           <circle cx={UP1[0]} cy={UP1[1]} r={14} fill={tColor(W.upwind_T_C[0])} stroke={C.ink} strokeWidth={4} />
           <Lbl x={UP1[0] - 26} y={UP1[1] + 6} t={`${W.upwind_T_C[0].toFixed(2)} °C`} c={C.ink} s={T.key} a="end" />
-          <Bracket p={[PINS[0], PINS[1] + 150]} q={[UP1[0], PINS[1] + 150]} c={C.ink} />
-          <Dash p={[UP1[0], UP1[1] + 18]} q={[UP1[0], PINS[1] + 140]} w={3} d="4 6" />
-          <Lbl x={PINS[0] + 20} y={PINS[1] + 196} t={`${W.across_km_1h.toFixed(0)} km across`} c={C.ink} s={T.key} a="start" />
+          <Bracket p={[UP1[0], PINS[1] + 215]} q={[PINS[0], PINS[1] + 215]} c={C.ink} />
+          <Dash p={[UP1[0], UP1[1] + 18]} q={[UP1[0], PINS[1] + 205]} w={3} d="4 6" />
+          {/* S7: the label sits right beside its 26-px bracket */}
+          <Lbl x={PINS[0] + 14} y={PINS[1] + 215} t={`${W.across_km_1h.toFixed(0)} km across`} c={C.ink} s={T.key} a="start" />
         </g>
-        <Keyword f={f} text={`${W.along_km_1h.toFixed(0)} km along the wind`} at={[130, 790]} appear={t4 + 20} targets={[add(lerp(PINS, UP1, 0.5), [-12, 4])]} />
+        {/* M5: keyword inside the map (two lines), short pointer to the track, no tick crossing */}
+        <Keyword f={f} text={`${W.along_km_1h.toFixed(0)} km`} at={[PINS[0] + 34, PINS[1] + 70]} appear={t4 + 20} targets={[add(lerp(PINS, UP1, 0.5), [10, 2])]} />
+        <Lbl x={PINS[0] + 34} y={PINS[1] + 126} t="along the wind" c={C.key} s={T.key} o={fin(f, t4 + 28, 8)} />
         {/* maths zone */}
         <Lbl x={MAPX + 20} y={260} t="1 °C per 100 km" c={C.second} s={T.key} o={fin(f, tTime) * fout(f, t4)} />
         <Lbl x={1840} y={260} t="space" c={C.key} s={T.key} a="end" o={fin(f, tTime + 15) * fout(f, t4)} />
@@ -1234,15 +1272,20 @@ const S18: React.FC = () => {
               </g>
             );
           })}
+          {/* S5 (review 5): a ghost of the 13 °C isotherm stays at its t = 0 place; the moving 13 °C line is brighter */}
+          <line x1={gX(GM, ISO_X[i13][0])} y1={GM.my} x2={gX(GM, ISO_X[i13][0])} y2={GM.my + GM.h * GM.km} stroke="#ffffff" strokeOpacity={0.55} strokeWidth={3} strokeDasharray="6 10" opacity={fin(f, t2)} />
+          <line x1={gX(GM, isoXs[i13])} y1={GM.my} x2={gX(GM, isoXs[i13])} y2={GM.my + GM.h * GM.km} stroke="#ffffff" strokeWidth={7} opacity={fin(f, t2)} />
           <BalloonThermometer x={gP(GM, balloonAtH(h))[0]} y={gP(GM, balloonAtH(h))[1]} s={0.6} o={fin(f, t1)} />
         </ClipMap>
         <MapFrame />
         <ColourBar />
         {/* isotherm labels above the map follow the lines */}
         {isoXs.map((xk, i) => (xk > 25 && xk < GM.w - 35 ? <Lbl key={i} x={gX(GM, xk)} y={GM.my - 34} t={`${ISO_T[i]} °C`} c={C.ink} s={T.floor} a="middle" /> : null))}
-        <Keyword f={f} text="each parcel keeps its T" at={[120, 760]} appear={6} targets={[[gX(GM, W.tags_x_km[12][i0]), gY(GM, W.tags_y_km[12][i0]) - 50]]} />
+        {/* M5: the pointer ends below the bottom-left parcel's circle (not on its number) and passes between ticks 100 and 200 */}
+        <Keyword f={f} text="each parcel keeps its T" at={[100, 760]} appear={6} bend={0.05}
+          targets={[[gX(GM, W.tags_x_km[0][i0] + (W.tags_x_km[0][i1] - W.tags_x_km[0][i0]) * w) + 6, gY(GM, W.tags_y_km[0][i0] + (W.tags_y_km[0][i1] - W.tags_y_km[0][i0]) * w) + 20]]} />
         <Lbl x={120} y={830} t="no sun · no mixing" c={C.key} s={T.floor} o={fin(f, AT(k, 0, "no sunshine"))} />
-        <Keyword f={f} text="the pattern slides" at={[760, 830]} appear={tSlides} out={t3 + 30} targets={[[gX(GM, isoXs[i13 + 1]), GM.my + GM.h * GM.km - 40]]} />
+        <Keyword f={f} text="the pattern slides" at={[560, 830]} appear={tSlides} out={t3 + 30} bend={0.05} targets={[[gX(GM, isoXs[i13]) + 4, GM.my + GM.h * GM.km - 14]]} />
         <g opacity={fin(f, t18)}>
           <Bracket p={[gX(GM, 300), 335]} q={[gX(GM, isoXs[i13]), 335]} c={C.ink} off={0} />
           <Lbl x={gX(GM, isoXs[i13]) + 20} y={335} t="18 km" c={C.ink} s={T.key} />
@@ -1268,7 +1311,7 @@ const S19A: React.FC = () => {
   const Tp = atH(W.T_pole_field_C as number[], h), Tb = atH(W.T_balloon_field_C as number[], h);
   const shift = atH(W.iso_shift_km as number[], h);
   const isoXs = ISO_X.map((xs) => atH(xs, h));
-  const bal = gP(GM, balloonAtH(h));
+  const bal = gP(GM, balloonOffAtH(h)); // S6: offset start, clear of the pole
   const oTrack = fin(f, 4);
   return (
     <Scene>
@@ -1283,7 +1326,7 @@ const S19A: React.FC = () => {
             return (
               <g key={i} opacity={o}>
                 <circle cx={p[0]} cy={p[1]} r={14} fill={tColor(Tc)} stroke={C.ink} strokeWidth={4} />
-                <Lbl x={p[0] + (i === 1 ? 26 : -26)} y={p[1] + 4} t={i === 2 ? `${Tc.toFixed(2)} °C` : Tc.toFixed(2)} c={C.ink} s={T.key} a={i === 1 ? "start" : "end"} />
+                <Lbl x={p[0] + (i === 1 ? 84 : -26)} y={p[1] + 4} t={i === 2 ? `${Tc.toFixed(2)} °C` : Tc.toFixed(2)} c={C.ink} s={T.key} a={i === 1 ? "start" : "end"} />
               </g>
             );
           })}
@@ -1293,7 +1336,7 @@ const S19A: React.FC = () => {
         <ColourBar />
         <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.2} />
         <BalloonThermometer x={bal[0]} y={bal[1]} s={0.6} />
-        <Keyword f={f} text="colder air from upwind" at={[130, 765]} appear={t2} targets={[lerp(PINS, FAR, 0.8)]} />
+        <Keyword f={f} text="colder air from upwind" at={[180, 765]} appear={t2} bend={0.04} targets={[lerp(PINS, FAR, 0.8)]} />
         {/* the two readouts on one clock */}
         <g><PoleThermometer x={MAPX + 40} y={300} s={0.8} /></g>
         <Lbl x={MAPX + 90} y={250} t={`${Tp.toFixed(2)} °C`} c={C.local} s={T.calc} />
@@ -1312,7 +1355,9 @@ const S19A: React.FC = () => {
 };
 
 // ================================================================ s19b our equation says the same
-const LOCAL_PARTS: Part[] = [{ t: "=" }, { t: "-", c: C.neg }, { t: String.raw`\,\mathbf v\cdot\nabla T` }];
+// M1 (review 5): the underbrace "+0.18 K/h" sits under v·∇T on the line ∂T/∂t = −v·∇T
+const LOCAL_PARTS: Part[] = [{ t: "=" }, { t: "-", c: C.neg },
+  { t: String.raw`\,\mathbf v\cdot\nabla T`, u: { w: String.raw`\mathclap{\small\textcolor{${C.first}}{+0.18\ \mathrm{K/h}}}`, c: C.first } }];
 const [LOC_L, LOC_R] = splitEq(EQ_LOCAL);
 if (plainOf(LOCAL_PARTS) !== LOC_R.replace("-\\,", "- \\,")) throw new Error("s19b parts ≠ EQ_LOCAL");
 const [LOCN_L, LOCN_R] = splitEq(EQ_LOCALN), LOCNP = eqPieces(LOCN_R);
@@ -1323,11 +1368,11 @@ const S19B: React.FC = () => {
   const rows: CalcRow[] = [
     { lhs: TF_L, rhs: TF_R, at: 4, h: 170 },
     { lhs: ZERO_L, rhs: ZERO_R, at: AT(k, 1, "Put zero"), h: 170 },
-    { lhs: LOC_L, rhs: { parts: LOCAL_PARTS, layers: [base()] }, at: tSub + 20, h: 270 },
-    { rhs: rep(LOCNP[1], "-0.18", String.raw`\textcolor{${C.neg}}{-0.18}`), at: t3 + 10, cont: true, ul: t3 + 20, size: 60 },
+    { lhs: LOC_L, rhs: { parts: LOCAL_PARTS, layers: [base(), { u: [2], o: fin(f, tPlus, 10) }] }, at: tSub + 20, h: 250 },
+    // the full result line, in rose, revealed on "The minus sign makes it a fall"
+    { lhs: LOCN_L, lc: C.neg, rhs: LOCNP[1], c: C.neg, at: t3, ul: t3 + 14, ulOff: 26, h: 180, size: 62 },
   ];
-  void LOCN_L;
-  const x = 1340;
+  const x = 1300;
   return (
     <Scene>
       <Svg>
@@ -1340,9 +1385,8 @@ const S19B: React.FC = () => {
           <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.2} />
         </g>
         <Lbl x={PINS[0] + 40} y={PINS[1] - 130} t={`${W.T_pole_field_C[180].toFixed(2)} °C`} c={C.local} s={T.key} />
-        <Lbl x={x + 200} y={585} t={`+${W.chain_G1[3].toFixed(2)} K/h`} c={C.first} s={T.key} a="middle" o={fin(f, tPlus)} />
-        <Arrow p={[x + 340, 585]} q={[x + 440, 585]} color={C.first} w={8} head={26} o={fin(f, tPlus + 8)} />
-        <Keyword f={f} text="colder air carried in" at={[GM.mx + 20, 800]} appear={tCold} targets={[[PINS[0] + 60, PINS[1] - 130]]} />
+        {/* M5: keyword inside the (dimmed) map, pointer to the pole's bulb, not onto 12.46 °C */}
+        <Keyword f={f} text="colder air carried in" at={[GM.mx + 30, 580]} appear={tCold} targets={[[PINS[0] - 14, PINS[1] - 96]]} />
       </Svg>
       <CalcStack f={f} x={x} y={40} rows={rows} maxLines={4} />
     </Scene>
@@ -1353,8 +1397,9 @@ const S19B: React.FC = () => {
 const BAL_X0 = 1470, BAL_Y = 520, BAL_SC = 300 / 0.18;
 const S19C: React.FC = () => {
   const f = useCurrentFrame(), k = K("s19c_balance");
-  const t1 = SS(k, 1), tAdv = AT(k, 1, "that's the advection"), t2 = SS(k, 2), tLoc = AT(k, 2, "the local rate"), t3 = SS(k, 3);
-  const bal = gP(GM, balloonAtH(1));
+  // v5 fix 1 narration: sentence 1 = the move, 2 = the advection term, 3 = the local rate, 4 = "They cancel"
+  const t1 = SS(k, 1), tAdv = AT(k, 2, "that's the advection"), tLoc = AT(k, 3, "is the local rate"), t3 = SS(k, 4);
+  const bal = gP(GM, balloonOffAtH(1)), bal0 = gP(GM, balloonOffAtH(0));
   const x1318 = gX(GM, W.iso_1318_x0_km);
   const gP1 = fin(f, tAdv - 10, 24), gM = fin(f, tLoc - 10, 24);
   return (
@@ -1368,14 +1413,16 @@ const S19C: React.FC = () => {
         {ISO_X.map((xs, i) => (xs[60] > 25 && xs[60] < GM.w - 35 ? <Lbl key={i} x={gX(GM, xs[60])} y={GM.my - 34} t={`${ISO_T[i]} °C`} c={C.ink} s={T.floor} a="middle" /> : null))}
         <MapFrame />
         <ColourBar />
-        <Lbl x={x1318 + 18} y={gY(GM, 345)} t={`${W.T_under_balloon[1].toFixed(2)} °C, an hour ago`} c={C.ink} s={T.floor} o={fin(f, t1 + 10)} />
+        {/* M2 (review 5): the ghost label sits inside the map, left of the dashed line */}
+        <Lbl x={x1318 - 16} y={GM.my + 34} t={`${W.T_under_balloon[1].toFixed(2)} °C, an hour ago`} c={C.ink} s={T.floor} a="end" o={fin(f, t1 + 10)} />
         <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.0} />
-        <Dash p={PINS} q={bal} c={C.first} w={4} d="8 8" />
+        <Dash p={bal0} q={bal} c={C.first} w={4} d="8 8" />
         <BalloonThermometer x={bal[0]} y={bal[1]} s={0.6} />
         <Lbl x={bal[0] + 34} y={bal[1] - 110} t={`${W.T_balloon_field_C[60].toFixed(2)} °C`} c={C.first} s={T.key + 14 * pulse(f, 6, 24) + 14 * fin(f, t3)} />
         <g opacity={fin(f, t1 + 20)}>
-          <Bracket p={[PINS[0], PINS[1] + 110]} q={[x1318, PINS[1] + 110]} c={C.ink} />
-          <Lbl x={PINS[0] - 10} y={PINS[1] + 160} t={`${W.across_km_1h.toFixed(0)} km across`} c={C.ink} s={T.key} a="start" />
+          {/* S7: bracket under the balloon's 1-h move, label right beside it */}
+          <Bracket p={[bal0[0], 640]} q={[x1318, 640]} c={C.ink} />
+          <Lbl x={x1318 + 16} y={640} t={`${W.across_km_1h.toFixed(0)} km across`} c={C.ink} s={T.key} a="start" />
         </g>
         <Balance x0={BAL_X0} y={BAL_Y} scale={BAL_SC} plus={W.balance_moved_K[0]} minus={W.balance_local_K[0]} gPlus={gP1} gMinus={gM} id="bal19" />
         <Lbl x={BAL_X0 + 180} y={BAL_Y - 70} t={`+${W.balance_moved_K[0].toFixed(2)}`} c={C.first} s={T.key} a="middle" o={gP1} />
@@ -1387,7 +1434,7 @@ const S19C: React.FC = () => {
       </Svg>
       <CalcStack f={f} x={1360} y={90} rows={[
         { lhs: TF_L, rhs: TF_R, at: t3 - 4, h: 170 },
-        { lhs: splitEq(EQ_BAL)[0], rhs: rep(rep(splitEq(EQ_BAL)[1], "-0.18", String.raw`\textcolor{${C.neg}}{-0.18}`), "+ 0.18", String.raw`+ \textcolor{${C.first}}{0.18}`), at: AT(k, 3, "They cancel") + 6, size: 62 },
+        { lhs: splitEq(EQ_BAL)[0], rhs: rep(rep(splitEq(EQ_BAL)[1], "-0.18", String.raw`\textcolor{${C.neg}}{-0.18}`), "+ 0.18", String.raw`+ \textcolor{${C.first}}{0.18}`), at: AT(k, 4, "They cancel") + 6, size: 62 },
       ]} />
     </Scene>
   );
@@ -1400,7 +1447,7 @@ const [V20_A, V20_B] = V20P[0].split(String.raw`\times2.00`);
 const [KH2_L, KH2_R] = splitEq(EQ_KH2);
 const S20: React.FC = () => {
   const f = useCurrentFrame(), k = K("s20_twice_steep");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tTw = AT(k, 3, "twice as fast"), t4 = SS(k, 4);
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tTw = AT(k, 3, "twice as fast"), t4 = SS(k, 4), t5 = SS(k, 5);
   const steep = fin(f, 10, 24);
   const h = hoursFrom(f, t3 + 10, 1);
   const shift = atH(W.iso_shift_km as number[], h);
@@ -1432,13 +1479,15 @@ const S20: React.FC = () => {
           <Bracket p={[gX(GM, isoS[i13 - 2]), 620]} q={[gX(GM, isoS[i13 - 1]), 620]} c={C.ink} />
           <Lbl x={gX(GM, isoS[i13 - 2]) - 14} y={580} t="1 °C per 50 km" c={C.ink} s={T.key} a="end" />
         </g>
-        <Band p={PINS} q={SHT} color={C.first} w={22} />
+        {/* S14/S8 (review 5): the wind's shadow as its own arrow under ∇T; "5.00 m/s" in warm white with a dark outline */}
+        <Dash p={VTIP} q={[SHT[0], ACR_Y]} w={4} />
+        <Arrow p={[PINS[0], ACR_Y]} q={[SHT[0], ACR_Y]} color={C.first} w={8} head={30} />
         <Arrow p={PINS} q={[PINS[0] + GLk, PINS[1]]} color={C.second} />
         <Arrow p={PINS} q={VTIP} color={C.first} />
-        <Lbl x={(PINS[0] + SHT[0]) / 2} y={PINS[1] + 48} t={`${W.shadow_steep_m_s.toFixed(2)} m/s`} c={C.first} s={T.key} a="middle" o={1 - 0.5 * fin(f, t4 + 10)} />
-        <Lbl x={(PINS[0] + SHT[0]) / 2 + 150} y={PINS[1] + 48} t="same" c={C.key} s={T.key} o={fin(f, t2 + 10)} />
-        <Lbl x={PINS[0] + 225} y={PINS[1] - 52} t="× 2" c={C.key} s={T.key} a="middle" o={fin(f, t1 + 30)} />
-        <g opacity={fin(f, t4)}><Sled x={(PINS[0] + SHT[0]) / 2 - 10} y={PINS[1] + 140} s={0.4} /></g>
+        <Lbl x={PINS[0] - 20} y={ACR_Y + 50} t={`${W.shadow_steep_m_s.toFixed(2)} m/s`} c={C.key} s={T.key} a="start" />
+        <Lbl x={PINS[0] + 250} y={ACR_Y + 50} t="same" c={C.key} s={T.key} o={fin(f, t2 + 10)} />
+        <Lbl x={PINS[0] + 225} y={PINS[1] - 52} t="× 2" c={C.key} s={T.key + 16 * pulse(f, AT(k, 5, "length of grad T"), 24)} a="middle" o={fin(f, t1 + 30)} />
+        <g opacity={fin(f, t4)}><Sled x={(PINS[0] + SHT[0]) / 2 - 10} y={PINS[1] + 190} s={0.4} /></g>
         <PoleThermometer x={PINS[0]} y={PINS[1]} s={1.0} />
         <g opacity={fin(f, t3)}>
           <PoleThermometer x={GM.mx + 30} y={830} s={0.6} />
@@ -1458,7 +1507,7 @@ const MiniPair: React.FC<{ x: number; y: number; u: number; rect?: boolean }> = 
   const Pm = mkP(x, y, u), Om = Pm(0, 0);
   return (
     <g>
-      {rect ? <ProdRect pts={(pair.rect_on_b_right as Pt[]).map((p) => Pm(...p))} neg={false} id={`rm${x}`} /> : null}
+      {rect ? <Bracket p={Om} q={Pm(...B)} off={-Math.max(10, u * 0.3)} c={C.second} w={4} /> : null}
       {rect ? <Band p={Om} q={Pm(...PAB)} color={C.first} w={14} /> : null}
       <Arrow p={Om} q={Pm(...B)} color={C.second} w={8} head={28} />
       <Arrow p={Om} q={Pm(...A)} color={C.first} w={8} head={28} />
@@ -1484,7 +1533,8 @@ const RECAP_ICONS = (o: number[]) => {
       {i === 2 ? <><MiniPQ x={x - 120} y={735} i={0} k={0.4} /><MiniPQ x={x + 70} y={765} i={2} k={0.4} /></> : null}
       {i === 3 ? <><Arrow p={[x - 70, 770]} q={[x + 10, 690]} color={C.first} w={8} head={26} /><Band p={[x - 70, 770]} q={[x + 10, 770]} color={C.first} w={12} /></> : null}
       {i === 4 ? <><Sled x={x - 60} y={770} s={0.35} /><PoleThermometer x={x + 70} y={770} s={0.6} /></> : null}
-      <Lbl x={x} y={830} t={words[i]} c={C.key} s={T.floor} a="middle" />
+      {/* S13 (review 5): the strip words were below phone legibility; the icons carry the beats */}
+      {void words[i]}
     </g>
   ));
 };
@@ -1493,7 +1543,7 @@ const S21: React.FC = () => {
   const t = [0, 1, 2, 3, 4, 5, 6].map((j) => SS(k, j));
   const beat = (j: number, jEnd?: number) => fin(f, t[j] + (j === 0 ? 4 : 0), 10) * (jEnd !== undefined ? fout(f, t[jEnd] - 6, 10) : 1);
   const [D2_L, D2_R] = splitEq(EQ_DEF2N), D2P = eqPieces(D2_R);
-  const R1_PARTS: Part[] = [{ t: "=" }, { t: String.raw`(|\mathbf a|\cos\theta)`, c: C.first, u: { w: String.raw`\text{shadow}`, c: C.first } },
+  const R1_PARTS: Part[] = [{ t: "=" }, { t: String.raw`(|\mathbf a|\cos\theta)`, c: C.first, u: { w: String.raw`\small\text{shadow}`, c: C.first } },
     { t: String.raw`\,|\mathbf b|`, c: C.second, u: { w: String.raw`\text{length}`, c: C.second } }];
   if (`${splitEq(EQ_R1)[0]} ${plainOf(R1_PARTS)}` !== rep(EQ_R1, String.raw`\,|`, String.raw` \,|`)) throw new Error("s21 parts ≠ EQ_R1");
   const icons = [beat(0), beat(1), beat(2), beat(5), beat(6)];
