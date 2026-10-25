@@ -1033,7 +1033,7 @@ scenes:
 
     S7 (''Its rate, following the air parcel…''): ''DT/Dt'' (T.eq, teal) at (1100, 460) with the balloon icon and keyword
     ''following the parcel''.'
-  voiceover: 'Now let''s look at how the dot product is used in weather. Imagine one thermometer fixed on a pole. How fast
+  voiceover: 'Now let''s look at how the dot product is used in weather. Imagine one thermometer fixed at one place, so it never moves: we''ll call it the fixed thermometer. How fast
     its temperature changes over time is called the local rate, written partial capital T by partial small t. Here capital
     T stands for temperature, and small t for time. Partial means only time changes; the place stays fixed. A second thermometer
     rides a balloon drifting with the wind, inside one air parcel: a small volume of air that moves with the flow. Its rate,
@@ -1531,8 +1531,7 @@ scenes:
     S13 (''That depends on what the map does…''): two keywords appear under the maths zone at y 800, side by side, 54 px,
     no boxes: ''map frozen'' (left) and ''map slides'' (right), with a small fork glyph from the ''?''. The snapshot corners
     stay (they go in s17b, where the map is frozen on purpose).'
-  voiceover: 'What does point one eight kelvin per hour mean? Let''s follow the balloon''s air parcel, which is at the pole
-    right now. The wind carries it straight across the isotherms at five metres per second, the wind''s shadow. Distance is
+  voiceover: 'What does point one eight kelvin per hour mean? Let''s follow the balloon''s air parcel, which is at the fixed thermometer right now. The wind carries it straight across the isotherms at five metres per second, the wind''s shadow. Distance is
     speed times time, so in one hour, three thousand six hundred seconds, it moves eighteen kilometres across them. On the
     map as it is right now, each hundred kilometres east is one degree warmer, so eighteen kilometres is worth point one eight
     degrees. So in one hour, the wind carries the parcel to a place where the map reads thirteen point one eight. One degree
@@ -1623,7 +1622,7 @@ scenes:
     the whole map (opacity ramp >= 12 frames, never a flash).
 
 
-    S2 (''Then the pole always reads thirteen degrees…''): the pole readout ''13.00 °C'' (68 px slate) at (1150, 170) beside
+    S2 (''Then the fixed thermometer always reads thirteen degrees…''): the pole readout ''13.00 °C'' (68 px slate) at (1150, 170) beside
     the pole icon; maths zone ''∂T/∂t = 0'' (T.eq 84 px, slate) with keyword ''local rate'' (54 px).
 
 
@@ -1651,11 +1650,11 @@ scenes:
 
     S7 (''So when the map is frozen…''): ''+0.18 K per hour'' and ''advection term'' glow; gold underline.'
   voiceover: 'In the first case, imagine the map stays frozen, because the sun keeps every place at exactly its temperature.
-    Then the pole always reads thirteen degrees, so its local rate, partial T by partial t, is zero. The balloon, though,
+    Then the fixed thermometer always reads thirteen degrees, so its local rate, partial T by partial t, is zero. The balloon, though,
     reads the map wherever the wind takes it: thirteen point one eight after one hour, thirteen point three six after two,
     and thirteen point five four after three. Its reading climbs by point one eight degrees every hour, because the wind keeps
     carrying it into warmer places. In our equation, capital D T by D t is zero plus v dot grad T: plus point one eight kelvin
-    per hour. On the graph, the pole''s line stays flat, while the balloon''s line climbs. So when the map is frozen, the
+    per hour. On the graph, the fixed thermometer''s line stays flat, while the balloon''s line climbs. So when the map is frozen, the
     parcel warms by exactly the advection term.'
   on_screen_eq:
     latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T = 0 + 0.18\ \mathrm{K\
@@ -1837,7 +1836,7 @@ scenes:
     x 1100-1800, y 430-800 with the SAME axes as s17b (t 0-3 h, T 12.4-13.6 °C), empty at first.
 
 
-    S1 (''Now let''s set the clock back to zero and watch the pole.''): 10-frame cross-fade of the map back to its t = 0 state
+    S1 (''Now let''s set the clock back to zero and watch the fixed thermometer.''): 10-frame cross-fade of the map back to its t = 0 state
     (isotherms at weather.json -> iso_x_km sample 0), clock ''t = 0 h''; the pole icon brightens.
 
 
@@ -1846,7 +1845,7 @@ scenes:
     end (upper right of the pin), then ''colder'' and ''upwind'' near its upwind end (lower left).
 
 
-    S3 (''The air that will reach the pole in one hour…''): the first queued parcel appears at (282.0, 148.82) km (weather.json
+    S3 (''The air that will reach the fixed thermometer in one hour…''): the first queued parcel appears at (282.0, 148.82) km (weather.json
     -> upwind_x_km[0], upwind_y_km[0]) as a dot with its arrival tag ''in 1 h'' (44 px) and its temperature ''12.82 °C'' (54
     px, left of the dot; upwind_T_C[0]); the mirror of s17''s span: a rose 20-px band along ∇T from x = 282 to 300 km labelled
     ''18 km'' (NEW upwind_across_km[0]) and the strip between x = 282 and 300 km shaded rose at 20 % (12.82 → 13.00 °C).
@@ -1859,7 +1858,7 @@ scenes:
     S5 (''Now let''s start the clock.''): the clock begins to run (one constant rate, see clock_rate).
 
 
-    S6 (''One by one, each air parcel reaches the pole…''): the isotherms slide (iso_x_km) and the three parcels travel along
+    S6 (''One by one, each air parcel reaches the fixed thermometer…''): the isotherms slide (iso_x_km) and the three parcels travel along
     the wind (weather.json -> upwind_track_x_km / upwind_track_y_km; each stops at the pole at 1, 2, 3 h); the balloon moves
     off along balloon_x_km / balloon_y_km. As each parcel reaches the pole, on its spoken number, its ''12.82'' / ''12.64''
     / ''12.46'' lifts off the dot (its ''in … h'' tag fades), flies into the pole readout, which then shows it, and a slate
@@ -1875,12 +1874,11 @@ scenes:
     S8 (''Meanwhile, the balloon moves with its parcel…''): the balloon line brightens to 100 %, flat at 13.00 (T_balloon_field_C);
     keyword ''balloon: stays 13 °C'' at its end; the balloon readout pulses (still 13.00; the balloon is 108 km along the
     wind by 3 h, inside the map).'
-  voiceover: 'Now let''s set the clock back to zero and watch the pole. Ahead of the wind it''s warmer, so behind it, upwind,
-    where the wind comes from, it''s colder. The air that will reach the pole in one hour is now eighteen kilometres across
+  voiceover: 'Now let''s set the clock back to zero and watch the fixed thermometer. Ahead of the wind it''s warmer, so behind it, upwind,
+    where the wind comes from, it''s colder. The air that will reach the fixed thermometer in one hour is now eighteen kilometres across
     the isotherms on the colder side, at twelve point eight two degrees. Behind it waits the air that will arrive in two hours,
-    at twelve point six four, and in three hours, at twelve point four six. Now let''s start the clock. One by one, each air
-    parcel reaches the pole and brings its temperature with it: twelve point eight two after one hour, twelve point six four
-    after two, and twelve point four six after three. Colder and colder air keeps arriving, so the pole''s temperature falls
+    at twelve point six four, and in three hours, at twelve point four six. Now let''s start the clock. One by one, each air parcel reaches the fixed thermometer and brings its temperature with it: twelve point eight two after one hour, twelve point six four
+    after two, and twelve point four six after three. Colder and colder air keeps arriving, so the fixed thermometer''s reading falls
     by point one eight degrees every hour. Meanwhile, the balloon moves with its parcel, so its line on the graph stays flat
     at thirteen degrees.'
   on_screen_eq: null
@@ -1976,7 +1974,7 @@ scenes:
     flat) and stays; the pointer in S4 goes to the pole readout above it. Narration unchanged.'
   voiceover: 'Our equation says the same. Put zero for capital D T by D t, and subtract v dot grad T from both sides: partial
     T by partial t equals minus v dot grad T. The wind has a part towards warmer air, so v dot grad T is plus point one eight
-    kelvin per hour. The minus sign makes it a fall of point one eight at the pole, as colder air is carried in.'
+    kelvin per hour. The minus sign makes it a fall of point one eight at the fixed thermometer, as colder air is carried in.'
   on_screen_eq:
     latex: \frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T
     vallis_eq: 'provenance only: follows from (1.7) with φ = T and DT/Dt = 0; derived on screen'
@@ -2147,7 +2145,7 @@ scenes:
   voiceover: 'Let''s put the three rates side by side, and say what each one means. The advection term, v dot grad T, tells
     us how fast the wind carries an air parcel into warmer or colder places. Here it''s plus point one eight kelvin per hour
     in both cases, because the wind and the spacing of the isotherms are the same. The local rate, partial T by partial t,
-    is what the thermometer on the pole sees: zero when the map is frozen, and minus point one eight in our story, as colder
+    is what the fixed thermometer sees, at one place that never moves: zero when the map is frozen, and minus point one eight in our story, as colder
     air arrives. The material derivative, capital D T by D t, is what the balloon''s thermometer sees, and it''s the local
     rate plus the advection term: plus point one eight when the map is frozen, and zero in our story. So whenever you meet
     v dot grad T, think of how fast the wind carries air across the isotherms, measured in degrees per hour.'
@@ -2206,7 +2204,7 @@ scenes:
   voiceover: 'Now let''s change only the map: the temperature rises one degree every fifty kilometres, instead of every hundred.
     The isotherms are twice as close, so grad T doubles, to two times ten to the minus five kelvin per metre. Its length,
     by Pythagoras again, is that same number, because the northward part is still zero. The wind''s shadow is still five metres
-    per second. But the dot product doubles, to point three six kelvin per hour, so the pole cools twice as fast. Just as
+    per second. But the dot product doubles, to point three six kelvin per hour, so the fixed thermometer cools twice as fast. Just as
     with the sled, the shadow stayed the same, so on its own it would miss this change. Multiplying by the length of grad
     T catches it.'
   on_screen_eq:
