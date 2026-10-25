@@ -2111,6 +2111,60 @@ scenes:
   exaggeration:
   - 'the bars are bookkeeping of one cause (the moving pattern, or in Case 1 the heating that holds the map), not separate
     processes; badge: none'
+- id: s19d_three_rates
+  t: null
+  fixes:
+  - U-M6.8 (which rate belongs to whom), U-M6.10, user 2026-10-25 "add multiple scenes if needed to make this clear"
+  sentence_times: null
+  visual: 'Capstone of the advection stretch, no map, no boxes. A 3 x 2 grid of numbers on the full screen (row labels left,
+    68 px symbols + 54 px keywords; numbers 84 px, teal for +, slate for 0, rose with a "−" glyph for −). Columns, headed
+    by 54-px keywords with small icons: ''map frozen'' (SunGlyph) and ''our story'' (sliding isotherm lines). Rows, in this
+    order, each with its observer icon: v·∇T ''advection term'' (wind arrow) = +0.18 | +0.18; ∂T/∂t ''local rate'' (pole)
+    = 0 | −0.18; DT/Dt ''material derivative'' (balloon) = +0.18 | 0. Unit ''K per hour'' once, top right (44 px).
+
+
+    S1 (''Let''s put the three rates side by side…''): the grid frame (labels only) fades in; values hidden.
+
+
+    S2 (''The advection term…tells us how fast…''): row 1 label pulses with the wind icon; a tiny wind arrow crosses three
+    isotherm ticks beside it.
+
+
+    S3 (''Here it''s plus point one eight…in both cases''): both row-1 values appear on the spoken number; keyword ''same''
+    between them.
+
+
+    S4 (''The local rate…what the thermometer on the pole sees…''): row 2 values appear on ''zero'' and on ''minus point
+    one eight''; the pole icon glows.
+
+
+    S5 (''The material derivative…what the balloon''s thermometer sees…''): row 3 values appear on the spoken numbers; a
+    thin ''+'' brace shows row 3 = row 2 + row 1 in each column (the sum lines up under its column).
+
+
+    S6 (''So whenever you meet v dot grad T…''): the other rows dim; row 1 stays bright with keyword ''degrees per hour
+    from crossing isotherms'' (54 px).'
+  voiceover: 'Let''s put the three rates side by side, and say what each one means. The advection term, v dot grad T, tells
+    us how fast the wind carries an air parcel into warmer or colder places. Here it''s plus point one eight kelvin per hour
+    in both cases, because the wind and the spacing of the isotherms are the same. The local rate, partial T by partial t,
+    is what the thermometer on the pole sees: zero when the map is frozen, and minus point one eight in our story, as colder
+    air arrives. The material derivative, capital D T by D t, is what the balloon''s thermometer sees, and it''s the local
+    rate plus the advection term: plus point one eight when the map is frozen, and zero in our story. So whenever you meet
+    v dot grad T, think of how fast the wind carries air across the isotherms, measured in degrees per hour.'
+  on_screen_eq:
+    latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T
+    vallis_eq: 'provenance only: (1.7) with φ = T'
+    page_png: chapters/pages/ch01/p025.png
+  physics_source:
+    fn: fluidpy.core.kinematics.material_derivative_terms
+    params: frozen map (∂T/∂t = 0) and sliding map (DT/Dt = 0), v = (5.00, 8.66) m/s, ∇T = (1.00e-5, 0) K/m
+    outputs:
+      advection_K_per_h: [0.18, 0.18]
+      local_K_per_h: [0.0, -0.18]
+      material_K_per_h: [0.18, 0.0]
+    data: data/weather.json -> NEW three_rates grid (V7), reusing frozen_mdt (V3) and balloon_mdt_total / T_pole_field (N6, N7)
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline
+  exaggeration: []
 - id: s20_twice_steep
   t:
   - 882.175

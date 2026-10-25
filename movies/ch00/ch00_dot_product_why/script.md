@@ -230,6 +230,12 @@ So why does the balloon stay at thirteen? In one hour it moves eighteen kilometr
 > 118 words · 7 sentences · 836.025–882.175 s (46.1 s; speech 43.2 s) · 13:56.02–14:42.17 (measured) · **changed in v6**.
 > Screen: ghost '13.18 °C, an hour ago'; two Balance rows: 'map frozen' +0.18 / 0 → +0.18 (with the s17b graph thumbnail) and 'map slides' +0.18 / −0.18 → 0; DT/Dt = ∂T/∂t + v·∇T; '+0.18 = 0 + 0.18', '0 = −0.18 + 0.18'; 'same advection term', 'local rate differs'; balloon 13.00 °C.
 
+## s19d_three_rates
+Let's put the three rates side by side, and say what each one means. The advection term, v dot grad T, tells us how fast the wind carries an air parcel into warmer or colder places. Here it's plus point one eight kelvin per hour in both cases, because the wind and the spacing of the isotherms are the same. The local rate, partial T by partial t, is what the thermometer on the pole sees: zero when the map is frozen, and minus point one eight in our story, as colder air arrives. The material derivative, capital D T by D t, is what the balloon's thermometer sees, and it's the local rate plus the advection term: plus point one eight when the map is frozen, and zero in our story. So whenever you meet v dot grad T, think of how fast the wind carries air across the isotherms, measured in degrees per hour.
+
+> New scene (orchestrator, user 2026-10-25: "add multiple scenes if needed to make this clear"). Times: measured by the builder's TTS run.
+> Screen: 3 × 2 grid, no boxes: rows v·∇T 'advection term' (wind), ∂T/∂t 'local rate' (pole), DT/Dt 'material derivative' (balloon); columns 'map frozen' / 'our story'; +0.18 | +0.18, 0 | −0.18, +0.18 | 0 K per hour; row 3 = row 1 + row 2 brace.
+
 ## s20_twice_steep
 Now let's change only the map: the temperature rises one degree every fifty kilometres, instead of every hundred. The isotherms are twice as close, so grad T doubles, to two times ten to the minus five kelvin per metre. Its length, by Pythagoras again, is that same number, because the northward part is still zero. The wind's shadow is still five metres per second. But the dot product doubles, to point three six kelvin per hour, so the pole cools twice as fast. Just as with the sled, the shadow stayed the same, so on its own it would miss this change. Multiplying by the length of grad T catches it.
 
