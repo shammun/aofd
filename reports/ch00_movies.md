@@ -1253,3 +1253,103 @@ The movie can become `qa_pass`. The user watches it before `/approve-movie 0 ch0
 Disk at review: C: 75 GB free, G: 587 GB free. Review scratch `review5c` is 99 MB (deletable).
 
 ## Overall: PASS (ch00_dot_product_why review 5c — `qa_pass`; S1–S5 optional)
+
+
+## ch00_dot_product_why (review 5d — version 5 fix loop 3, commit 104d3d7, 2026-10-25)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_why v5 fix 3 | 790.90 s (13:10.9) | 39.50 MB | 10/10 PASS | PASS (6·1 + 8·0 = 6; √((1.00e-5)² + 0²) = 1.00e-5 K/m; 2.00e-5 K/m; 0.18 and 0.36 K/h; pole 13.00 → 12.82 → 12.64 → 12.46) | PASS (KaTeX clean, no error boxes) | PASS (three small crowding items, Should-fix) | PASS | PASS (192 cues, ≤ 2 × 42, max 15.73 cps, text = script) | PASS (0 flashes) | PASS (none, per U-M2.G2) | **PASS** |
+
+**How I reviewed it.** The render has md5 d6db618c…. qa.json has all 10 gates PASS:
+- duration 790.90 s (window 760–820 s, which the user accepted);
+- size 39.50 MB;
+- codec: H.264 High, yuv420p, AAC, faststart;
+- 0 black stretches;
+- 85 frozen stretches, all narrated (longest silence 2.82 s);
+- loudness −16.0 LUFS, peak −3.5 dBTP;
+- 0 flashes;
+- captions: 192 cues match the script;
+- physics: 44 functions reproduce their hashes;
+- equations: 59 present.
+
+I extracted 338 full frames with ffmpeg into `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/review5d/` (93 MB, deletable):
+- one every 1.5 s through s10 (4:02.5–4:49.5), s16b (8:30.5–9:01) and s20 (11:24.4–12:09.7);
+- the midpoint and the end (minus 0.15 s) of each of the 122 sentences;
+- ±0.5 s and ±1 s around each seam.
+
+The folder also has 390-px copies (`p390/`) and labelled tiles (`tiles/`). I looked at every tile and at about 15 frames at full size.
+
+**Seams (frames 7200, 8760, 12000 = 4:00.0, 4:52.0, 6:40.0): clean.**
+- **Frame count:** sorted video PTS run without a gap from 0 to 790.867 s at exactly 1/30 s steps. That is 23 727 frames = 790.9 s × 30, so no frame is dropped or duplicated anywhere.
+- **What the seams show:** 12-frame strips across each seam show s09's two static shadow panels (4:00), the sled alone on its track (4:52, s11 opening) and the static material-derivative equation (6:40). None has a jump, a flash or a re-encode artefact. The framemd5 alternation inside these windows is ordinary encoder noise on a static picture.
+- **A/V sync:** I matched speech onsets (300–3400 Hz band energy) to the `timing.json` sentence starts in each of the four chunks. The best lag is +0.44 s in all four (0–240, 240–292, 292–400, 400–790 s), so the seams add no drift. The constant 0.44 s is Kokoro's lead-in silence inside each clip: captions appear about 0.4 s before the voice, as in every earlier version.
+
+### U-M4 acceptance
+
+| Item | Result | Evidence (times in this render) |
+|---|---|---|
+| **U-M4.1** s10 starts with the goal; dot with x̂; calculation; only then "6 m/s is the eastward part" | **PASS** | The narration order is right:<br>- 4:09.2 "Suppose the wind blows towards the north-east at ten metres per second."<br>- 4:14.5 "Written as a vector, v has components six and eight."<br>- 4:18.8 "How much of this wind blows towards the east?"<br>- 4:22.2 the dot product with x hat, (1, 0)<br>- 4:31.3 "six times one, plus eight times zero, which is six"<br>- 4:37.1 "So six metres per second is the eastward part of the wind."<br>- 4:41.9 the closing "first component" sentence, which the user kept.<br><br>The screen follows the same order:<br>- arrow + "north-east", "10 m/s" (4:13)<br>- v = (6, 8) m/s (4:14.6)<br>- "how much east?" with a pointer (4:19–4:27)<br>- x̂ = (1, 0) (4:29)<br>- v·x̂ = 6 × 1 + 8 × 0 (4:32)<br>- "= 6 m/s" (4:36.6)<br>- then the "6 m/s east" leg bar (4:38.5), a gold underline and "eastward part" (4:40)<br>- "the first component" pointer on the 6 (4:43). |
+| **U-M4.1a** the eastward part is not named before the question; the leg is highlighted only after the result | **PASS** | No "6 m/s eastward" is spoken or shown before 4:37. From 4:17.5 both legs are only thin dashed construction lines with no labels. The solid "6 m/s east" bar first appears at 4:38.5, after "= 6 m/s". |
+| **U-M4.2** no empty half of the screen in s10 | **PASS** | The wind picture is on the left from 4:04.0 (s10 starts at 4:02.6; 4:02.5 is still s09's two panels). The right half holds "5×1+1×3 / \|a\|\|b\|cos θ / no angle, no √" until about 4:14.2, then v = (6, 8) m/s from 4:14.6. The only gap is a cross-fade of about 0.5 s (4:14.1–4:14.6). Nothing is empty at any time a sentence is spoken. |
+| **U-M4.3** s16b shows \|∇T\| = √(…) = 1.00 × 10⁻⁵ K/m before it is used; s20 shows 2.00 × 10⁻⁵ | **PASS** | s16b (8:30.6–8:41.4): the √((∂T/∂x)² + (∂T/∂y)²) line appears at 8:32, then = √((1.00 × 10⁻⁵)² + 0²) at 8:33.5–8:35, then = 1.00 × 10⁻⁵ K/m, underlined, at 8:39.5. It is used at 8:50 ("× 1.00 × 10⁻⁵ K/m" under "length of ∇T"). In s20 (11:40.9–11:52), \|∇T\| = √((2.00 × 10⁻⁵)² + 0²) = 2.00 × 10⁻⁵ K/m appears with "Its length, by Pythagoras again…" and stays until v·∇T = 5.00 m/s × 2.00 × 10⁻⁵ K/m (11:52.9). It reaches = 0.36 K per hour at 11:54.4. All three lines are legible at full size; at 390 px the −5 exponents are small but readable. |
+
+### Review 5c should-fixes S1–S4
+
+| Item | Result | Evidence |
+|---|---|---|
+| S1 "18 km" beside the balloon (s18) | **Fixed** | 9:58.3: "18 km" sits at the top of the map (x 390–545, y 150–200), left of the ghost line. That is about 120 px above the balloon (y ≈ 310). The balloon has only its own 13.00 °C readout (right panel). |
+| S2 "36 km along the wind" floats (s17) | **Fixed** (new small nit T2) | 9:25.8–9:32.8: "36 km / along the wind" now sits left of the dashed upwind track, with a teal pointer to it. |
+| S3 "15 °C" tag on the colour bar (s14) | **Fixed** | 7:26.7–7:31: the tag is left of the walker dot (it ends at x ≈ 915 of 1920) and is clear of the colour bar. |
+| S4 "13 °C" tag on the map border (s16a) | **Fixed** | 8:24.7–8:30: "13 °C" (y ≈ 590–640) is inside the map, about 25 px above the bottom frame line (y 668). |
+
+### No regressions (review 5c PASS items re-checked)
+- **Pole and balloon (s19a, 10:01–10:25):** the chain reads 13.00 → 12.82 → 12.64 → 12.46 °C. The pole readout falls (12.76 °C at 1.3 h, 12.46 °C at 3.0 h). The balloon readout stays 13.00 °C, and "stays 13 °C" appears at 10:24.5. In the map, the upwind labels "12.64" and "12.46 °C" sit left of their dots, and the balloon (x ≈ 595 at 1.3 h) is about 50 px from the nearest dot. Nothing but its own readout sits beside the balloon.
+- **s19b/c:** "+0.18 K/h" appears with its underbrace on cue (10:46). ∂T/∂t = −0.18 K per hour (10:49.6). The bars −0.18 local rate / +0.18 advection term (11:10–11:24) are hatched for the negative bar.
+- **s20:** "1 °C per 50 km", ×2, 5.00 m/s "same", 0.36 K per hour, "twice as fast". The pole reads 12.64 °C at 1.0 h (= 13 − 0.36).
+- **Ending (12:48–13:10.9):** "a series of maths tutorials", "atmospheric science · meteorology · fluid dynamics", "dot-product notebook", "notebooks for the other maths concepts". There is no book or author name, no URL, no lab and no thanks.
+- **Earlier rules:**
+  - No headings, counters, footnotes or "not to scale" badges. The only equation label is the plain "(1)" (1:48).
+  - "air parcel" at 5:59 and in s18.
+  - The VTT contains no "Vallis", "Kundu", URL, "lab", "not to scale", "bit of air", "uphill" or "thanks".
+  - Captions: 192 cues, longest line 42, max 15.73 cps, all 1–7 s, in order; the last cue ends at 788.08 s, before the audio ends (790.875 s).
+
+### Narration of the changed sentences (VTT = script)
+- **s10:** it now reads as a natural problem → method → answer arc. "Suppose the wind blows towards the north-east…" / "Written as a vector, v has components six and eight." / "How much of this wind blows towards the east?" / "To find out, we take the dot product…" / "So six metres per second is the eastward part of the wind." These are full, unhurried sentences (12.8–14.5 cps), with the question asked before any answer.
+- **s16b:** "The length of grad T, by Pythagoras, is the square root of ten to the minus five squared, plus zero squared: just ten to the minus five kelvin per metre." It is clear with the screen. Spoken alone, "ten to the minus five squared" is slightly ambiguous, but the on-screen (1.00 × 10⁻⁵)² resolves it.
+- **s20:** "Its length, by Pythagoras again, is that same number, because the northward part is still zero." This is natural and short.
+- **One wording note, not a defect:** s10's closing sentence starts "It's simply the first component". "Simply" is on the Chapter-0 voice list of words to avoid (teaching-style §1d). The user asked to keep this sentence, so I list it only as an optional Should-fix (T4).
+
+### Must-fix
+None.
+
+### Should-fix (cosmetic, optional)
+- **T1 (s10, 4:40–4:49): "east" crowds "eastward part".**
+  - The new "eastward part" label (y ≈ 810–860) sits about 5 px under the "east" axis label (x 805–890, y 775–815). At 390 px they read as one block, "east / eastward part".
+  - Fix: move "eastward part" and its pointer below the bar's midpoint (x ≈ 380–620, y ≈ 800), or drop the axis word "east" once the bar appears.
+- **T2 (s17, 9:25.8–9:32.8): the S2 label crowds the upwind dot and crosses the map edge.**
+  - "36 km" sits about 15 px under "12.82 °C".
+  - "along the wind" starts at x ≈ 60, over the map's left border (x 120) and next to the white corner bracket.
+  - Everything is readable. Fix: shift the two-line label 40 px down and 60 px right, so it starts inside the map.
+- **T3 (s14 7:06–7:31, s12 5:36–5:48, s16a 8:07–8:15, s20 11:25.9–11:33): the right part of the screen is empty while the map builds.**
+  - These are the longest stretches; s14 runs about 25 s.
+  - Nothing is missing that the narration needs, and this layout passed reviews 5b/5c. However, the user rejected exactly this pattern in s10 (U-M4.2).
+  - Optional fix: centre the map while it is alone, or bring the right-hand keyword or formula in earlier. In s20, the "1 °C / 50 km = 2.00 × 10⁻⁵ K/m" fraction could appear with "one degree every fifty kilometres" (11:26.6) instead of at 11:33.4.
+- **T4 (s10, 4:41.9): "It's simply the first component".**
+  - Fix: optionally drop "simply" ("That's just the first component: …").
+  - This needs one sentence re-voiced. Only do it if the user agrees, since the user asked to keep this sentence.
+
+### Verdict: PASS
+Fix loop 3 delivers every user item:
+- **U-M4.1 / U-M4.1a:** s10 is goal → question → dot with x̂ → 6 × 1 + 8 × 0 = 6 → "six metres per second is the eastward part". The leg is highlighted only after the result.
+- **U-M4.2:** no empty half in s10.
+- **U-M4.3:** \|∇T\| is computed on screen before it is used, as 1.00 × 10⁻⁵ K/m in s16b and 2.00 × 10⁻⁵ K/m in s20.
+- **S1–S4:** all fixed.
+- **Seams:** the chunk joins at 4:00, 4:52 and 6:40 have no glitches, no dropped or duplicated frames and no A/V drift.
+- **Regressions:** none. The pole/balloon numbers, ending wording, rules and captions all hold.
+
+T1–T4 are cosmetic and do not block. The movie can become `qa_pass`. The user watches it before `/approve-movie 0 ch00_dot_product_why`.
+
+Disk at review: C: 87 GB free, G: 587 GB free. Review scratch `review5d` is 93 MB (deletable).
+
+## Overall: PASS (ch00_dot_product_why review 5d — `qa_pass`; T1–T4 optional)
