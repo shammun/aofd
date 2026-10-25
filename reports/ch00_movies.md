@@ -1017,3 +1017,131 @@ should pass at re-review.
 Disk at review: C: 77 GB free, G: 587 GB free. Review scratch on G: `review5_v5` 62 MB (deletable).
 
 ## Overall: FIX (ch00_dot_product_why review 5 — M1–M6; S1–S17 recommended)
+
+## ch00_dot_product_why (review 5b — version 5 fix loop 1, commit 14b658c, 2026-10-24)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_why v5 fix 1 | 751.81 s (12:31.8) | 40.36 MB | 10/10 PASS | FIX (one misleading label, N1); all numbers correct | PASS (KaTeX clean; plain (1) only) | PASS (only minor collisions left) | PASS (one early reveal, N3) | PASS (182 cues, ≤ 2 × 42, max 15.93 cps, text = script) | PASS (0 flashes; hatched negative bar) | PASS (none, per U-M2.G2) | **FIX** |
+
+**How I reviewed it.** I extracted 232 frames with ffmpeg from `movies/out/ch00/ch00_dot_product_why/1080.mp4` (md5
+9a2fee9f…): one 0.15 s before every sentence end and one at every sentence midpoint (116 sentences, times from
+`timing.json`). I added runs every 1–2 s through s11 (sled), s19a (clock) and s19b (sign step), and crops of every
+pointer that M5 listed. The frames are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_why/review5b/`
+(59 MB), with 390-px copies in `p390/` and 12-up phone tiles in `tiles/`. I looked at all 116 sentence-end frames at
+390 px and about 40 frames or crops at full size.
+
+I checked the VTT against the limits: 182 cues, none out of order, at most 2 lines, longest line 42 characters, peak
+15.93 cps, last cue ending at 749.0 s, inside the audio. It contains no forbidden words (book or author names, URL,
+"not to scale", "bit of air", "uphill", "thanks for watching").
+
+I re-checked the numbers on screen:
+- The s18 parcel tags match T = 10 + x/100 at their positions.
+- The parcels move 26 px east and 45 px north per hour, which is 18 km across and 31 km along at 60°.
+- The s19a balloon moves 80 px east in 3 h (54 km) and stays on the 13 °C isotherm.
+- The pole reads 13.00 → 12.82 → 12.64 → 12.46 °C.
+- The other values: 0.36 K/h, 12.64 °C at 1 h in s20, 10 cos 60° = 5, 10 sin 60° = 8.66.
+
+### Review 5 fixes: did they land?
+
+| Item | Fixed? | Evidence (new times) |
+|---|---|---|
+| M1 s19b sign step | **Yes (residual N3)** | 10:11–10:20: an underbrace "+0.18 K/h" sits under v·∇T, the dangling arrow is gone, and the full rose line "∂T/∂t = −0.18 K per hour" is underlined in gold. The "+0.18" text appears at about 10:00.5, which is 11 s before it is spoken (N3). |
+| M2 "13.18 °C, an hour ago" off the map | **Yes** | 10:24–10:52: the label is inside the map at the top left (x 130–570), clear of the colour bar. |
+| M3 unexplained rectangles (s16b, s05) | **Yes** | s05 (1:59–2:37) and s16b (8:09–8:29) have no boxes. |
+| M4 √ working, kept until ≈ 8 | **Yes** | 1:38–1:49: "\|a\| = √(5² + 1²) = √26 = 5.099" and "\|b\| = √(1² + 3²) = √10 = 3.162" stay on screen through "5.099 × 3.162 × 0.496 ≈ 8". |
+| M5 pointer and tick collisions | **Yes (all 9 cases)** | "air parcel" 5:33 is now in the map; "towards warmer" 7:34 is in the map; "along: no change" 7:59 is in the map; the snapshot corners 8:38 are inset; the "each parcel" arrowhead stops short of "10.4" (9:02); "colder air from upwind" 9:44 runs between the 200 and 300 ticks; "colder air carried in" 10:15 ends at the bulb; \|a\| = 5.099 is below the axis (2:51). One new pointer collapsed (N2). |
+| M6 q hidden under p | **Yes** | 2:00–2:37: q = (2, 0) is drawn above p. |
+| S1 gradient block | Yes | 0:03–0:08: stripes (isotherms) and an arrow on the thumbnail. |
+| S2 slash units | Yes | 7:23 "1.00 × 10⁻⁵ K/m"; s16b "K/m", "K/s", "(m/s) × (K/m) = K/s". |
+| S3 km on axes | Yes | "km" above 360 and "600 km". |
+| S4 pole inside the parcel; t = 1.5 h | Yes | 5:33: the ellipse is offset to (350–400 km, 50–180 km) and there is no clock. |
+| S5 slide too small | Yes | 9:13–9:26: a ghost dashed line stays at t = 0, the bright 13 °C isotherm moves to 318 km, and "east, 18 km per hour" is shown. |
+| S6 clock reset | Yes | 9:27 "Now let's start the clock again…". The balloon is offset from the pole, but that created N1. |
+| S7 "18 km across" far from its bracket | Yes | 8:49 and 10:24: the label is attached to the bracket. |
+| S8 ∇T stroke; "5.00 m/s" on pink | Yes | Clean ∇T glyph; white "5.00 m/s" with an outline (10:52–11:30). |
+| S9 spacing | Yes | 0:28–0:36: even spacing. 3:04: the gold underline sits 25 px below "3.162". |
+| S10 area rectangles s08, s09, s11 | Yes (removed) | 3:34–5:13: no rectangles. |
+| S11 sled never moves | Yes | 4:49–5:13: a ghost sled at 5 m, then the sled at 10 m. |
+| S12 four clipped sentences | Yes | All seven rewrites are in the VTT and read naturally. |
+| S13 small text at 390 px | Mostly | The recap strip labels are dropped. The underbrace labels are now about 44 px. "N = newton", "J = joule" (4:33–4:56) and "idealised map" (5:13–5:21) are about 34–40 px, which is under the floor (N7). |
+| S14 wind parts hidden | Yes | 7:58: a white vertical 8.66 m/s arrow and a teal 5 m/s arrow, both offset from ∇T. |
+| S15 icon on ∂; no pointer to the dot | Yes | 6:34: the icons sit above the fractions, and "dot product" points to the dot. |
+| S16 panel-3 labels | Mostly | "opposite" is under the arrow pair, not under the arc. "q = (−2, 0)" starts about 65 px left of the panel 3 grid. This is acceptable. |
+| S17 "scalar" crowding | Yes | 1:10: the keyword is 50 px below "= 5 + 3 = 8". |
+
+### U-M3 acceptance (re-checked on the new render)
+
+| Item | Result | Evidence |
+|---|---|---|
+| G1 no headings or counters | PASS | none in any frame |
+| G2 keywords only, no boxes except the s03 tags | PASS | The boxes from review 5 are gone. The tags are kept (1:00–1:16). The s06 triangle fill is narrated ("In this right triangle", 2:51). |
+| G3 natural narration | PASS | 148.1 wpm overall. The S12 rewrites remove the clipped spots. No sentence sounds robotic. The only long one is s19a 9:31 (12 s, a list of four readings), which is acceptable because it lands on the clock. |
+| G4 no grid note | PASS | — |
+| G5 advection, local rate, no "uphill" | PASS | 5:21, 6:12, 7:34 |
+| G6 no links or paths | PASS | 12:06–12:31 |
+| U-M3.1 – 3.8 | PASS | 0:00–1:22 (as in review 5) |
+| U-M3.9 √ working | **PASS** | 1:38–1:49 (M4) |
+| U-M3.10 / 3.11 three cases, labels at the tips | PASS | 1:49–2:37 |
+| U-M3.12 work | PASS | 4:28–5:13, and the sled now moves |
+| U-M3.13 – 3.18 | PASS | 5:13–8:29 |
+| U-M3.19a snapshot and slide | PASS | 8:38 snapshot; 9:13–9:26 visible slide with ghost |
+| U-M3.19b colder air from upwind | PASS | 8:42, 9:44 |
+| U-M3.19c pole falls, balloon stays 13 °C | **FAIL (visual)** | The readouts are right: pole 13.00 → 12.46, balloon 13.00, "stays 13 °C". But from 9:27 to about 9:39 the upwind-dot label "12.64" sits right beside the balloon, so the balloon appears to read 12.64 (N1). |
+| U-M3.20 DT/Dt = 0 ⇒ ∂T/∂t = −v·∇T; cancel | PASS (N3 minor) | 9:56–10:52 |
+| U-M3.21 twice as steep | PASS | 10:52–11:30 |
+| U-M3.22 recap signs | PASS | 11:43–11:53 |
+| U-M3.23 / 3.24 ending | PASS | 12:06–12:31: no book, no lab, no URL, no thanks |
+| Decisions (~12 min, b̂, one movie) | PASS | 12:31.8 |
+| Rounds 1–2 rules | PASS | Only the plain "(1)" label; "air parcel"; "point in opposite directions" (1:29); "pointing in the opposite direction" (2:22). |
+
+### Must-fix
+- **N1 (s19a, 9:27.2–≈9:39): "12.64" beside the balloon.** This is a regression from the S6 fix.
+  - The 2-hour upwind dot sits at about (507, 495), but its label "12.64" is drawn to the right of the balloon, at about
+    (600–730, 440–505). For 12 s the balloon seems to read 12.64 °C, while the voice says the balloon stays at 13. That
+    is exactly the who-warms, who-cools confusion behind U-M3.19c.
+  - Fix: place the 2-hour label on the left of its dot, like the 12.82 and 12.46 labels (right end at x ≤ 490,
+    y ≈ 495). Or drop the middle label, since the bottom-left chain already shows 12.64. Keep at least 60 px between
+    any number and the balloon icon.
+
+### Should-fix
+- **N2 (s17, 8:49–8:58): collapsed pointer.** The "36 km along the wind" pointer has shrunk to a lone yellow "<"
+  chevron at about (580, 435), with no curve. Either draw a 60–80 px curve from the label to the midpoint of the dashed
+  upwind track, or delete the chevron.
+- **N3 (s19b, 10:00.5–10:11.5): early reveal.** "+0.18 K/h" appears with the line ∂T/∂t = −v·∇T, 11 s before it is
+  spoken and before its underbrace. Reveal the number together with the brace, on "so v dot grad T is plus point one
+  eight" (≈ 10:10).
+- **N4 (s18, 9:13–9:26): balloon over a parcel.** The balloon overlaps the "13.1" parcel circle. The bright sliding
+  13 °C isotherm also runs through the "13.1" and "13.0" tags. Offset the balloon 30 px left of the parcel, and keep the
+  tags clear of the isotherm, or let the outline hide the line.
+- **N5 (s12, 5:33–5:48): "air parcel" label at the edges.** The label sits on the map's bottom border, and its right
+  end (x ≈ 990) touches the colour-bar column next to "4". Move it up 30 px and left 40 px.
+- **N6 (s11, 4:42–4:56): label crossed by a line.** The dashed vertical line of the 17.3 N part crosses "d = 5 m",
+  through the "=". Move "d = 5 m" to the right of x = 540, or under the arrow.
+- **N7: text under the 44-px floor.** These labels are about 34–40 px high:
+  - "N = newton" and "J = joule" (4:33–4:56);
+  - "idealised map" (5:13–5:21);
+  - the s10 "no angle / no √" (4:02–4:09).
+
+  Raise them to 44 px.
+- **N8 (s19c, 10:24–10:33): empty axis.** An empty bar axis (a line with a tick) sits alone for about 8 s before the
+  bars arrive. Fade it in together with the "+0.18" bar.
+- **N9 (s16a, 7:41–8:09): balloon far from its isotherm.** The balloon icon sits at about 80 km east, near the bottom
+  (about 10.8 °C), yet later it is the 13 °C balloon. Place it on the 13 °C isotherm, or hide it until s18.
+
+### Verdict: FIX
+The fix loop landed:
+- all six Musts M1–M6 are fixed (M1 with a small timing residual);
+- 15 of the 17 Shoulds are fully fixed, and the other two (S13, S16) are mostly fixed.
+
+Captions, QA (10/10), numbers and narration all pass.
+
+One new Must comes from the S6 rearrangement. In s19a, the upwind label "12.64" sits next to the balloon for 12 s
+(N1), which undercuts U-M3.19c. It is a one-line layout change (no audio, no timing change).
+
+After N1, the movie can become `qa_pass` without another full review: a spot-check of 9:25–9:45 is enough. N2–N9 are
+optional polish.
+
+Disk at review: C: 76 GB free, G: 587 GB free. Review scratch `review5b` 59 MB (deletable).
+
+## Overall: FIX (ch00_dot_product_why review 5b — N1 only; N2–N9 optional)
