@@ -181,3 +181,4 @@ Scene points:
 - U-M4.3 (s16b, ~8:17) The length of grad T is shown/said without its calculation: show |∇T| = √((∂T/∂x)² + (∂T/∂y)²) = √((1.00 × 10⁻⁵)² + 0²) = 1.00 × 10⁻⁵ K/m (and the same for the steep map in s20, 2.00 × 10⁻⁵ K/m, for consistency).
 - Orchestrator: fold in review 5c S1–S4 (cosmetic) in the same round.
 - U-M4.1a (user correction): do not say "6 m/s eastward and 8 northward" and then ask "how much blows east?" (answer given before the question). Introduce the wind as "towards the north-east at 10 m/s, components six and eight", ask how much blows east, dot with x̂, then "so 6 m/s is the eastward part"; highlight the eastward leg only after the result.
+- Decision (user, 2026-10-25): v5 fix 3 length ~13:11 accepted (supersedes ~12 min); keep the full s10 wording incl. the closing 'first component' sentence.
