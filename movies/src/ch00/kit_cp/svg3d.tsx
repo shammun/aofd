@@ -23,7 +23,8 @@ export const FloorGrid: React.FC<{ pr: Projector; xr?: [number, number]; yr?: [n
     const a = pr.p([xr[0], y, z]), b = pr.p([xr[1], y, z]);
     ls.push(<line key={`y${y}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={y === 0 && axes ? "#4a5677" : C.grid} strokeWidth={y === 0 && axes ? 3 : 1.5} />);
   }
-  return <g opacity={o}>{ls}</g>;
+  // house: the caption band y 880-1040 and a 20-px frame margin stay empty
+  return <g opacity={o}><defs><clipPath id="fgsafe"><rect x={24} y={24} width={1872} height={842} /></clipPath></defs><g clipPath="url(#fgsafe)">{ls}</g></g>;
 };
 
 export const Seg3: React.FC<{ pr: Projector; a: V3; b: V3; c?: string; w?: number; o?: number; dash?: string }> = ({ pr, a, b, c = C.ink, w = 4, o = 1, dash }) => {

@@ -90,9 +90,10 @@ export const Ball3D: React.FC<{ at: V3; px?: number; color: string; o?: number; 
  * glyph added by the overlay). Sizes follow the SVG house Arrow: head ≤ 0.6 L, head half-width 0.42 × head.
  */
 export const Arrow3D: React.FC<{ from: V3; to: V3; color: string; px?: number; head?: number; o?: number; grow?: number; dash?: boolean;
-  scaleAt?: V3 }> = ({ from, to, color, px = 10, head = 40, o = 1, grow = 1, dash = false, scaleAt }) => {
+  scaleAt?: V3; onTop?: boolean }> = ({ from, to, color, px = 10, head = 40, o = 1, grow = 1, dash = false, scaleAt, onTop = false }) => {
   const { pr } = useView3D();
   const mat = useMat(color, o);
+  mat.depthTest = !onTop;
   const tip = add3(from, sub3(to, from), Math.max(0, Math.min(1, grow)));
   const d = sub3(tip, from), L = len3(d);
   if (L < 1e-5 || o <= 0 || grow <= 0) return null;
@@ -116,7 +117,7 @@ export const Arrow3D: React.FC<{ from: V3; to: V3; color: string; px?: number; h
     }
   }
   return (
-    <group>
+    <group renderOrder={onTop ? 20 : 0}>
       {shafts}
       <mesh geometry={GEO.cone} material={mat} position={conePos} quaternion={q} scale={[hr, h, hr]} />
     </group>

@@ -73,7 +73,7 @@ const Seg: React.FC<{ a: V3; b: V3; r: number; geo: THREE.CapsuleGeometry; mat: 
  * (1 → about 1.9 world units from wrist to the middle fingertip). `glow` recolours parts (index, middle, thumb, all).
  */
 export const Hand3D: React.FC<{ q: THREE.Quaternion; at: V3; s?: number; angles: HandAngles; o?: number;
-  glow?: { index?: string; middle?: string; thumb?: string; all?: string }; glowK?: number }> = ({ q, at, s = 1, angles, o = 1, glow = {}, glowK = 1 }) => {
+  glow?: { index?: string; middle?: string; thumb?: string; all?: string }; glowK?: number; thumb?: number }> = ({ q, at, s = 1, angles, o = 1, glow = {}, glowK = 1, thumb = 1 }) => {
   const skin = useMemo(() => new THREE.MeshStandardMaterial({ color: SKIN, roughness: 0.62, metalness: 0, transparent: true }), []);
   const line = useMemo(() => new THREE.MeshBasicMaterial({ color: LINE, side: THREE.BackSide, transparent: true }), []);
   const gMats = useMemo(() => ({} as Record<string, THREE.MeshStandardMaterial>), []);
@@ -115,7 +115,10 @@ export const Hand3D: React.FC<{ q: THREE.Quaternion; at: V3; s?: number; angles:
   });
   let tp: V3 = THUMB.base;
   THUMB.L.forEach((L, j) => {
-    const d = norm3(THUMB.dirs[j]);
+    // thumb = 0: lying along the side of the index finger (open flat hand); 1: straight up (the thumb's direction)
+    const flatDir: V3 = j === 0 ? [0.75, 0.12, 0.45] : [1, 0.05, 0.12];
+    const tw = Math.max(0, Math.min(1, thumb));
+    const d = norm3([flatDir[0] + (THUMB.dirs[j][0] - flatDir[0]) * tw, flatDir[1] + (THUMB.dirs[j][1] - flatDir[1]) * tw, flatDir[2] + (THUMB.dirs[j][2] - flatDir[2]) * tw]);
     const nx: V3 = [tp[0] + d[0] * L, tp[1] + d[1] * L, tp[2] + d[2] * L];
     parts.push(<Seg key={`t${j}`} a={tp} b={nx} r={THUMB.r[j]} geo={geos.thumb[j]} mat={matFor("thumb")} line={line} noLine={j > 0} />);
     if (j > 0) parts.push(<mesh key={`tk${j}`} geometry={geos.knuck} material={matFor("thumb")} position={tp} scale={[THUMB.r[j] * 1.08, THUMB.r[j] * 1.08, THUMB.r[j] * 1.08]} />);
@@ -135,6 +138,18 @@ export const Hand3D: React.FC<{ q: THREE.Quaternion; at: V3; s?: number; angles:
       {parts}
     </group>
   );
+};
+/** local position of finger i's tip for the given joint angles (the same forward kinematics as Hand3D) */
+export const fingerTipLocal = (angles: HandAngles, i: number): V3 => {
+  const F = FINGERS[i];
+  let p: V3 = [FINGER_BASE_X - 0.05, 0.02, F.z];
+  let ang = 0;
+  F.L.forEach((L, j) => {
+    ang += angles[i][j];
+    const d = rotZ(ang);
+    p = [p[0] + d[0] * L, p[1] + d[1] * L, p[2]];
+  });
+  return p;
 };
 /** local positions of useful points (for overlays and anchoring) */
 export const HAND_PTS = {

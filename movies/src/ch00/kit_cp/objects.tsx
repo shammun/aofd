@@ -62,25 +62,25 @@ export const BottleCap3D: React.FC<{ angle: number; lift: number; markA: number;
     cap.rotateX(Math.PI / 2);
     return { bottle, cap };
   }, []);
-  const mats = useMemo(() => ({ bottle: std("#5b7fa8", 0.32, 0.15, 0.3), cap: std("#c9d2e3", 1, 0.2, 0.55), a: std("#2aa198", 1, 0.45), b: std("#e8833a", 1, 0.45) }), []);
-  mats.bottle.opacity = 0.32 * o;
+  const mats = useMemo(() => ({ bottle: std("#8fb3d9", 0.5, 0.3, 0.3), cap: std("#e2e8f2", 1, 0.25, 0.55), a: std("#2aa198", 1, 0.5), b: std("#e8833a", 1, 0.5) }), []);
+  mats.bottle.opacity = 0.5 * o;
   const capZ = 1.42 + 0.14 + lift;
   return (
     <group>
       <mesh geometry={g.bottle} material={mats.bottle} renderOrder={3} />
       <group position={[0, 0, capZ]} rotation={[0, 0, angle]}>
         <mesh geometry={g.cap} material={mats.cap} />
-        <mesh material={mats.a} position={[0.3 * Math.cos(markA), 0.3 * Math.sin(markA), 0.15]}><boxGeometry args={[0.1, 0.1, 0.03]} /></mesh>
+        <mesh material={mats.a} position={[0.24 * Math.cos(markA), 0.24 * Math.sin(markA), 0.15]} rotation={[0, 0, markA]}><boxGeometry args={[0.2, 0.09, 0.03]} /></mesh>
         <mesh material={mats.a} position={[0.355 * Math.cos(markA), 0.355 * Math.sin(markA), 0]} rotation={[0, 0, markA]}><boxGeometry args={[0.03, 0.08, 0.26]} /></mesh>
       </group>
-      <mesh material={mats.b} position={[0.27 * Math.cos(markB), 0.27 * Math.sin(markB), 1.36]} rotation={[0, 0, markB]}><boxGeometry args={[0.06, 0.1, 0.1]} /></mesh>
+      <mesh material={mats.b} position={[0.36 * Math.cos(markB), 0.36 * Math.sin(markB), 1.4]} rotation={[0, 0, markB]}><boxGeometry args={[0.16, 0.12, 0.16]} /></mesh>
     </group>
   );
 };
 
 /** A right-handed wood screw entering a block whose top is at z = 0: the screw turns by `angle` and rises by
  * `advance` (z of its head = 0.5 + advance). Thread: helix (r cos t, r sin t, p t / 2π) — right-handed (rhr.json). */
-export const Screw3D: React.FC<{ angle: number; advance: number; o?: number }> = ({ angle, advance }) => {
+export const Screw3D: React.FC<{ angle: number; advance: number; o?: number; markA?: number; markB?: number }> = ({ angle, advance, markA, markB }) => {
   const g = useMemo(() => {
     const pitch = 0.25, turns = 7, R = 0.16;
     const pts: THREE.Vector3[] = [];
@@ -97,7 +97,8 @@ export const Screw3D: React.FC<{ angle: number; advance: number; o?: number }> =
     head.translate(0, 0, 0.36);
     return { thread, shaft, head };
   }, []);
-  const mats = useMemo(() => ({ metal: std("#c9d2e3", 1, 0.18, 0.35), slot: std("#1d2740", 1, 0.0), block: std("#3a4766", 1, 0.12, 0.85) }), []);
+  const mats = useMemo(() => ({ metal: std("#d6dde9", 1, 0.22, 0.35), slot: std("#1d2740", 1, 0.0), block: std("#6b7ca6", 1, 0.2, 0.85),
+    a: std("#2aa198", 1, 0.5), b: std("#e8833a", 1, 0.5) }), []);
   return (
     <group>
       <group position={[0, 0, advance]} rotation={[0, 0, angle]}>
@@ -105,7 +106,9 @@ export const Screw3D: React.FC<{ angle: number; advance: number; o?: number }> =
         <mesh geometry={g.thread} material={mats.metal} />
         <mesh geometry={g.head} material={mats.metal} />
         <mesh material={mats.slot} position={[0, 0, 0.445]}><boxGeometry args={[0.6, 0.07, 0.04]} /></mesh>
+        {markA !== undefined ? <mesh material={mats.a} position={[0.24 * Math.cos(markA), 0.24 * Math.sin(markA), 0.47]} rotation={[0, 0, markA]}><boxGeometry args={[0.16, 0.08, 0.03]} /></mesh> : null}
       </group>
+      {markB !== undefined ? <mesh material={mats.b} position={[0.5 * Math.cos(markB), 0.5 * Math.sin(markB), 0.02]} rotation={[0, 0, markB]}><boxGeometry args={[0.18, 0.1, 0.05]} /></mesh> : null}
       <mesh material={mats.block} position={[0, 0, -0.6]}><boxGeometry args={[1.8, 1.4, 1.2]} /></mesh>
     </group>
   );
@@ -113,7 +116,7 @@ export const Screw3D: React.FC<{ angle: number; advance: number; o?: number }> =
 
 /** Open-ended spanner on a hex bolt in a plate. Bolt axis z at the origin; the spanner lies along `angle` (rad) with
  * its grip at 0.3 m; `sink` lowers the bolt (thread travel). 1 world unit = 1 m. */
-export const Spanner3D: React.FC<{ angle: number; sink?: number; o?: number }> = ({ angle, sink = 0 }) => {
+export const Spanner3D: React.FC<{ angle: number; sink?: number; o?: number; plateO?: number }> = ({ angle, sink = 0, plateO = 0.4 }) => {
   const g = useMemo(() => {
     const s = new THREE.Shape();
     // handle from x = 0.045 to 0.34, 0.032 wide, rounded end; jaw ring round the bolt with an opening facing −x
@@ -128,10 +131,11 @@ export const Spanner3D: React.FC<{ angle: number; sink?: number; o?: number }> =
     stud.rotateX(Math.PI / 2);
     return { sp, hex, stud };
   }, []);
-  const mats = useMemo(() => ({ steel: std("#c9d2e3", 1, 0.22, 0.35), bolt: std("#aab4c8", 1, 0.18, 0.45), plate: std("#3a4766", 1, 0.1, 0.85) }), []);
+  const mats = useMemo(() => ({ steel: std("#c9d2e3", 1, 0.22, 0.35), bolt: std("#aab4c8", 1, 0.18, 0.45), plate: std("#5a6a92", 0.4, 0.15, 0.85) }), []);
+  mats.plate.transparent = true; mats.plate.opacity = plateO; mats.plate.depthWrite = false;
   return (
     <group>
-      <mesh material={mats.plate} position={[0.12, 0, -0.012]}><boxGeometry args={[0.62, 0.42, 0.024]} /></mesh>
+      <mesh material={mats.plate} position={[0.15, 0, -0.012]} renderOrder={5}><boxGeometry args={[0.46, 0.17, 0.024]} /></mesh>
       <group position={[0, 0, -sink]} rotation={[0, 0, angle]}>
         <mesh geometry={g.stud} material={mats.bolt} position={[0, 0, 0.0]} />
         <mesh geometry={g.hex} material={mats.bolt} position={[0, 0, 0.012]} rotation={[0, 0, Math.PI / 6]} />

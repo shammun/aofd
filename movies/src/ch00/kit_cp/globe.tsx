@@ -157,8 +157,9 @@ const featherMask = (() => {
     if (t) return t;
     const n = 128, d = new Uint8Array(n * n * 4);
     for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) {
-      const fx = Math.min(i, n - 1 - i) / (n * 0.06), fy = Math.min(j, n - 1 - j) / (n * 0.06);
-      const a = Math.round(255 * clamp01(Math.min(fx, fy)));
+      const fx = Math.min(i, n - 1 - i) / (n * 0.16), fy = Math.min(j, n - 1 - j) / (n * 0.16);
+      const sm = (x: number) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
+      const a = Math.round(255 * sm(fx) * sm(fy));
       const k = 4 * (j * n + i); d[k] = d[k + 1] = d[k + 2] = a; d[k + 3] = 255;
     }
     t = new THREE.DataTexture(d, n, n); t.needsUpdate = true; t.magFilter = THREE.LinearFilter;

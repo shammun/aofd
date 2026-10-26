@@ -4,7 +4,7 @@
  "builder": "movies/data/build_ch00_cross_product_why.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "be918300e2df7970b453e44ce6c3724967f6ae3c",
+  "commit": "9176882a4fd465716e77d97088aa71bb60de2d04",
   "dirty_tracked": false,
   "vectors_py_tracked": true,
   "vectors_py_sha256": "e090585bf718740e7465d811cada6c6c2b3ce5dee1c46d955a978176b0312abf",
@@ -18,10 +18,10 @@
   "operators_py_sha256": "1886f90dd8ad24f25d831658796b4da111330c25bb8ece87f682e260828ce26e",
   "rotating_py_tracked": true,
   "rotating_py_sha256": "00ea8fb99f612c6c64974ff41292005dbcc40ca11e5ee252c6ab35497cc96447",
-  "trajectories_py_tracked": false,
-  "trajectories_py_sha256": "2768195d448324706a5ed88f7fa1502656c22786a19bd8cd78f642effea63ac2",
-  "cyclone_py_tracked": false,
-  "cyclone_py_sha256": "daedf51af12c4d9644e3e80462eee8b25918f13dcdfa3c42bc90fd72aa8a7c39"
+  "trajectories_py_tracked": true,
+  "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e",
+  "cyclone_py_tracked": true,
+  "cyclone_py_sha256": "632c32637a0c2014dd7806cdd14ba5722e6c316281451daaaf16d3a15c03b835"
  },
  "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
  "equations": {
@@ -142,7 +142,7 @@
   "trails_global.json": "11a7fa23697b09a8e540f9e7cbf9e4f108c22299dc77349e76b321abc7471558",
   "trails_ian.json": "f043f65dfc65e81bb91df5c91e122cf9793a65a868dcf5c6001e5e98e45cfd43",
   "trails_idai.json": "26a8be26e53b37f76e8aad679536fa29d013e69c7d7d23a49d41926e4d863103",
-  "storm.json": "aba88bd1576540d8f40d9076240adefe5f1fb13d5331e251732ab32773d4bdb7",
+  "storm.json": "c6ec53683593d92167c9fad01cbebf48dba68a57beb2ea8cc1c7d60affaa0f8f",
   "trails_global.bin": "9a8c92dc05076c8a79a81a35c1dcb4d69a8d1f03857e8dc333b0bc1098a4a748",
   "trails_ian.bin": "9b0c850285abf40578d9bccb2d3a9aa96aa254468510640afbd829ae69211eed",
   "trails_idai.bin": "feade087cb6bf7b67e533bdd0efd297cef5f2ab08aa2baea9f9a1a0489e4aafd"
@@ -1357,6 +1357,13 @@
     954.6
    ],
    "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "Ciarán: every drawn arrow is over open sea (≥ 0.5° from land) and ≥ 400 km from the low",
+   "value": true,
+   "ref": true,
+   "tol": 0,
    "pass": true
   },
   {

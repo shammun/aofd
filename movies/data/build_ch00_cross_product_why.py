@@ -728,6 +728,13 @@ def real_parts(row, truth, call, entries, heavy, files, bins, pending) -> None:
             la = np.interp(c[:, 0], np.arange(slat.size), slat)
             lo = np.interp(c[:, 1], np.arange(slon.size), slon)
             iso.append({"hPa": float(lev), "pts": [[round(a, 3), round(b, 3)] for a, b in zip(la, lo)]})
+    # distance of every grid point to the nearest Natural Earth 50m land (degrees): arrows are drawn only over open sea
+    # (≥ 0.5° from any coast) and ≥ 400 km from the low (where curvature makes the real wind sub-geostrophic)
+    from shapely.geometry import Point
+    from shapely.ops import unary_union
+    from fluidpy.data import naturalearth as NE
+    LANDU = unary_union([g for g in NE.read_polygons(NE.land_50m()) if g.bounds[0] < slon[-1] + 5 and g.bounds[2] > slon[0] - 5
+                         and g.bounds[3] > slat[0] - 5 and g.bounds[1] < slat[-1] + 5])
     # thinned sea points every 1.5° for the arrows (|lat| ≥ 20 is guaranteed by the box)
     js = np.arange(0, slat.size, 6)
     is_ = np.arange(0, slon.size, 6)
@@ -739,7 +746,10 @@ def real_parts(row, truth, call, entries, heavy, files, bins, pending) -> None:
             d_km = np.hypot(*enu_offsets_km(slat[j], slon[i], low[0], low[1]))
             arrows.append({"lat": float(slat[j]), "lon": float(slon[i]), "geo": [round(float(ug8[j, i]), 2), round(float(vg8[j, i]), 2)],
                            "act": [round(float(u850[j, i]), 2), round(float(v850[j, i]), 2)],
-                           "w10": [round(float(u10[j, i]), 2), round(float(v10[j, i]), 2)], "r_km": round(float(d_km), 0)})
+                           "w10": [round(float(u10[j, i]), 2), round(float(v10[j, i]), 2)], "r_km": round(float(d_km), 0),
+                           "coast_deg": round(float(LANDU.distance(Point(float(slon[i]), float(slat[j])))), 2)})
+    shown = [a for a in arrows if a["coast_deg"] >= 0.5 and a["r_km"] >= 400]
+    truth("Ciarán: every drawn arrow is over open sea (≥ 0.5° from land) and ≥ 400 km from the low", len(shown) > 50)
     # anticlockwise round the low: k·(r × u_g) > 0 on a 400-km ring (sea points near the ring)
     ring_pts = [a for a in arrows if 300 <= a["r_km"] <= 500]
     rv = np.array([enu_offsets_km(a["lat"], a["lon"], low[0], low[1]) for a in ring_pts]) * 1e3
