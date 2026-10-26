@@ -36,6 +36,9 @@ respell:
   AMOC: "ay-mock"
   ITCZ: "I T C Z"
   PV: "P V"
+  # ch00_cross_product_why (2026-10-25): storm names
+  Idai: "Ee-dye"
+  Ciarán: "Keer-awn"
 # Spoken maths: the script should already say maths in words; these catch common symbols if they slip through.
 symbols:
   "Ω": "Omega"
@@ -59,3 +62,7 @@ symbols:
   "vector a ": "vector [A](/ˈA/) "
   # v4 s09 "of b on arrow a, one point five seven": the comma form was not covered by "arrow a "
   "arrow a,": "arrow [A](/ˈA/),"
+  # ch00_cross_product_why (2026-10-25): the vector a inside a cross product, same override as "a dot b"
+  "a cross b": "[A](/ˈA/) cross b"
+  "b cross a": "b cross [A](/ˈA/)"
+  "b dot a": "b dot [A](/ˈA/)"
