@@ -298,3 +298,106 @@ datasets:
     derived_on_root: [derived/ch00/globe_ne_shaded_relief_5400x2700.png]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/globe_ne_shaded_relief_5400x2700.png]
     used_by: [movie ch00_cross_product_why (optional relief layer)]
+  IBTrACS-v04r01:
+    catalogue: IBTRACS
+    title: IBTrACS v04r01 best tracks, North Atlantic and South Indian basin files (Hurricane Ian 2022, Tropical Cyclone Idai 2019)
+    url: https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/netcdf/IBTrACS.NA.v04r01.nc
+    raw_url: https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r01/access/netcdf/IBTrACS.SI.v04r01.nc
+    route: HTTPS (pooch) whole basin netCDF files (4.3 + 6.1 MB); rebuilt weekly by NCEI, so not hash-pinned
+    fetcher: fluidpy.data.ibtracs.fetch_basin / storm_table
+    login: none
+    licence: NOAA NCEI, US Government work, public domain
+    licence_url: https://www.ncei.noaa.gov/products/international-best-track-archive
+    citation: "Knapp, K. R., M. C. Kruk, D. H. Levinson, H. J. Diamond, C. J. Neumann, 2010: The International Best Track Archive for Climate Stewardship (IBTrACS). Bull. Amer. Meteor. Soc., 91, 363-376, doi:10.1175/2009BAMS2755.1; IBTrACS v04r01, NOAA NCEI, doi:10.25921/82ty-9e16"
+    attribution: IBTrACS v04r01 best tracks (Knapp et al. 2010), NOAA NCEI (public domain)
+    size_bytes: 10347862
+    sha256_files:  # informational (files change weekly); fetched 2026-10-25
+      IBTrACS.NA.v04r01.nc: 9abd69f657a4187687dff0ace916c48896a9b2b8702ffe241a2bbed689fdca86
+      IBTrACS.SI.v04r01.nc: b3621c8e24b0e551fddd4785753e1ccfbca6428b80b171c22a998855be399b17
+    variables: {usa_wind: "[kt] 1-min (NHC / JTWC)", usa_pres: "[hPa]", usa_rmw: "[nmi]", usa_r34_r50_r64: "[nmi] per quadrant NE SE SW NW", reunion_wind: "[kt] 10-min (RSMC La Reunion)", reunion_pres: "[hPa]", reunion_rmw: "[nmi]", reunion_r34_r50_r64: "[nmi]", landfall: "[km] distance to land within 6 h"}
+    coordinates: storm x date_time; lat/lon [deg]; times UTC (3-hourly plus HURDAT2 landfall/peak rows)
+    subset: Ian sid 2022266N12294 (74 fixes), Idai sid 2019063S18038 (101 fixes)
+    fetch_date: "2026-10-25"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/IBTrACS-v04r01/IBTrACS.NA.v04r01.nc, raw/IBTrACS-v04r01/IBTrACS.SI.v04r01.nc]
+    derived_on_root: [derived/ch00/ibtracs_ian_2022.json, derived/ch00/ibtracs_idai_2019.json]
+    derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/ibtracs_ian_2022.json, movies/ch00/ch00_cross_product_why/data/real/ibtracs_idai_2019.json]
+    used_by: [movie ch00_cross_product_why scene 10 (observed intensity, track, wind radii)]
+  HRRR-zarr-ian2022:
+    catalogue: HRRR
+    title: NOAA HRRR 3 km hour-0 analyses, Hurricane Ian, 2022-09-28 12-21 UTC hourly, 23.2-30.3N 85.8-78.3W (236 x 217 points)
+    url: s3://hrrrzarr/sfc/20220928/20220928_18z_anl.zarr
+    raw_url: https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220928/conus/hrrr.t18z.wrfsfcf00.grib2
+    route: >-
+      Anonymous HRRR-zarr archive (University of Utah) read lazily through fluidpy.data.fetch (zarr group
+      level/var/level, isel window, 150x150 chunks, so the transfer is a few MB). The GRIB2 + .idx byte-range route on
+      noaa-hrrr-bdp-pds was not used because no GRIB decoder (cfgrib/eccodes) is installed in .venv.
+    fetcher: fluidpy.data.hrrr.fetch_fields / storm_box
+    login: none
+    licence: "NOAA data via NODD: open to the public, use as desired; credit NOAA; do not present modified data as original NOAA data or imply endorsement"
+    licence_url: https://registry.opendata.aws/noaa-hrrr-pds/
+    citation: "Dowell, D. C., et al., 2022: The High-Resolution Rapid Refresh (HRRR). Part I. Wea. Forecasting, 37, 1371-1395, doi:10.1175/WAF-D-21-0151.1; Gowan, T. A., et al., 2022: Using cloud computing to analyze model output archived in Zarr format. J. Atmos. Oceanic Technol., 39, 449-462, doi:10.1175/JTECH-D-21-0106.1"
+    attribution: Derived from NOAA HRRR analyses (University of Utah HRRR-zarr archive); not original NOAA data
+    size_bytes: 2346645
+    variables: {MSLMA: "MAPS mean sea-level pressure [Pa]", PRES: "surface pressure [Pa]", UGRD_VGRD: "10 m wind [m s-1], grid-relative, float16 in the store; rotated to earth-relative in the derived product"}
+    coordinates: Lambert conformal (lat_0=lat_1=lat_2=38.5, lon_0=-97.5, R=6371229 m), x/y [m]; the derived product adds 2-D lat/lon
+    subset: 10 analyses x 4 fields x 236 x 217
+    fetch_date: "2026-10-25"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/HRRR-zarr/hrrr_ian_2022_20220928T12_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T12_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T12_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T12_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T13_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T14_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T15_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T16_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T17_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T18_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T19_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T20_v10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_mslma.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_psfc.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_u10.nc, raw/HRRR-zarr/hrrr_ian_2022_20220928T21_v10.nc]
+    derived_on_root: [derived/ch00/hrrr_ian_2022.nc]
+    derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/ian_hrrr_2022.bin, movies/ch00/ch00_cross_product_why/data/real/ian_hrrr_2022.json]
+    used_by: [movie ch00_cross_product_why scene 10 (Ian near landfall at 3 km, eye and eyewall)]
+  GOES16-ABI-ian2022:
+    catalogue: GOES
+    title: GOES-16 ABI L2 CONUS cloud and moisture imagery, 2022-09-28 18:01 UTC scan (MCMIPC all bands; CMIPC band 13)
+    url: https://noaa-goes16.s3.amazonaws.com/ABI-L2-MCMIPC/2022/271/18/OR_ABI-L2-MCMIPC-M6_G16_s20222711801174_e20222711803553_c20222711804049.nc
+    raw_url: https://noaa-goes16.s3.amazonaws.com/ABI-L2-CMIPC/2022/271/18/OR_ABI-L2-CMIPC-M6C13_G16_s20222711801174_e20222711803558_c20222711804048.nc
+    route: HTTPS (pooch), file names from an anonymous s3fs listing; reprojected from the geostationary fixed grid to 0.02 deg lat/lon (nearest neighbour)
+    fetcher: fluidpy.data.goes.fetch_abi / true_colour / brightness_temperature
+    login: none
+    licence: NOAA data, US Government work, public domain (NODD)
+    licence_url: https://registry.opendata.aws/noaa-goes/
+    citation: "GOES-R Calibration Working Group and GOES-R Series Program, 2017: NOAA GOES-R Series ABI Level 2+ Cloud and Moisture Imagery Products. NOAA NCEI, doi:10.7289/V5736P36"
+    attribution: NOAA GOES-16 ABI imagery (public domain), NOAA Open Data Dissemination on AWS
+    size_bytes: 72084370
+    sha256_files:
+      OR_ABI-L2-MCMIPC-M6_G16_s20222711801174_e20222711803553_c20222711804049.nc: afd94c4947202274cc4b42ea187f8106e788d4899d50966c32e5a4c776f19525
+      OR_ABI-L2-CMIPC-M6C13_G16_s20222711801174_e20222711803558_c20222711804048.nc: f950843c876714b1705fd5a97d0dfe8582ee95a67f6bbc00da7752a09b30b9d7
+    variables: {CMI_C01_C02_C03: "reflectance factor", CMI_C13: "brightness temperature [K]"}
+    coordinates: fixed grid x/y scan angles [rad]; outputs 18-32N, 92-74W at 0.02 deg, row 0 = north
+    subset: one scan; box 18-32N 92-74W
+    fetch_date: "2026-10-25"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/GOES16-ABI/OR_ABI-L2-MCMIPC-M6_G16_s20222711801174_e20222711803553_c20222711804049.nc, raw/GOES16-ABI/OR_ABI-L2-CMIPC-M6C13_G16_s20222711801174_e20222711803558_c20222711804048.nc]
+    derived_on_root: [derived/ch00/ian_goes16_truecolour_20220928T1801.jpg, derived/ch00/ian_goes16_ir13_20220928T1801.png, derived/ch00/ian_goes16_20220928T1801.json]
+    derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/ian_goes16_truecolour_20220928T1801.jpg, movies/ch00/ch00_cross_product_why/data/real/ian_goes16_ir13_20220928T1801.png, movies/ch00/ch00_cross_product_why/data/real/ian_goes16_20220928T1801.json]
+    used_by: [movie ch00_cross_product_why scene 10 (real image of Ian)]
+  NASA-GIBS-idai2019:
+    catalogue: GIBS
+    title: NASA GIBS VIIRS (Suomi NPP) Corrected Reflectance true colour, 2019-03-13 and 2019-03-14, 30-10S 30-50E
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=VIIRS_SNPP_CorrectedReflectance_TrueColor&STYLES=&CRS=EPSG:4326&BBOX=-30,30,-10,50&WIDTH=2000&HEIGHT=2000&FORMAT=image/jpeg&TIME=2019-03-14
+    route: WMS GetMap (anonymous); no Content-Length, so the guard used a 4 MB estimate per image. MODIS Terra/Aqua were also tried and dropped (swath gaps across the box)
+    fetcher: fluidpy.data.gibs.fetch_wms
+    login: none
+    licence: "NASA EOSDIS: NASA-led mission data CC0, no use restrictions; credit NASA; no endorsement implied"
+    licence_url: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+    citation: NASA EOSDIS GIBS / Worldview, layer VIIRS_SNPP_CorrectedReflectance_TrueColor (NASA LANCE)
+    attribution: Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS)
+    size_bytes: 1893983
+    sha256_files:  # server-rendered images, informational
+      gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-13.jpg: b1effc35121a17b5ed7e7f5c89cf8f653087da96c2731b346480eeff8b35e3c7
+      gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-14.jpg: 567f1044ffed88fc6404f67150fa3035d49a492ca8a5f9dc83571fcafc82cb97
+    variables: {rgb: "8-bit sRGB"}
+    coordinates: EPSG:4326, 2000 x 2000 px over 30-10S 30-50E (0.01 deg), row 0 = 10S
+    subset: two days
+    fetch_date: "2026-10-25"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NASA-GIBS/gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-13.jpg, raw/NASA-GIBS/gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-14.jpg]
+    derived_on_root: [derived/ch00/idai_viirs_truecolour_2019-03-13.jpg, derived/ch00/idai_viirs_truecolour_2019-03-14.jpg]
+    derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/idai_viirs_truecolour_2019-03-13.jpg, movies/ch00/ch00_cross_product_why/data/real/idai_viirs_truecolour_2019-03-14.jpg]
+    used_by: [movie ch00_cross_product_why scene 10 (real image of Idai)]

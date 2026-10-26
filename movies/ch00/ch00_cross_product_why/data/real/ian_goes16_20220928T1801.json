@@ -1,0 +1,32 @@
+{
+ "files": {
+  "ian_goes16_truecolour_20220928T1801.jpg": "simple hybrid-green true colour (R=C02, B=C01, G=0.45R+0.1C03+0.45B), gamma 2.2",
+  "ian_goes16_ir13_20220928T1801.png": "band 13 (10.3 um) brightness temperature, grey = (310 K - BT)/(130 K) * 255 (cold cloud tops bright)"
+ },
+ "scan_start_utc": "2022-09-28T18:01:17",
+ "grid": "regular lat/lon, 0.02 deg, row 0 = 32 N edge, col 0 = 92 W edge",
+ "lat_edges": [
+  18,
+  32
+ ],
+ "lon_edges": [
+  -92,
+  -74
+ ],
+ "shape": [
+  700,
+  900
+ ],
+ "bt_K_min_max": [
+  194.09063720703125,
+  307.779296875
+ ],
+ "source_urls": [
+  "https://noaa-goes16.s3.amazonaws.com/ABI-L2-MCMIPC/2022/271/18/OR_ABI-L2-MCMIPC-M6_G16_s20222711801174_e20222711803553_c20222711804049.nc",
+  "https://noaa-goes16.s3.amazonaws.com/ABI-L2-CMIPC/2022/271/18/OR_ABI-L2-CMIPC-M6C13_G16_s20222711801174_e20222711803558_c20222711804048.nc"
+ ],
+ "licence": "NOAA data, US Government work, public domain (https://registry.opendata.aws/noaa-goes/)",
+ "credit": "NOAA GOES-16 ABI imagery (public domain), NOAA Open Data Dissemination on AWS",
+ "citation": "GOES-R Calibration Working Group and GOES-R Series Program, 2017: NOAA GOES-R Series ABI Level 2+ Cloud and Moisture Imagery Products. NOAA NCEI, doi:10.7289/V5736P36",
+ "dataset_key": "GOES16-ABI"
+}

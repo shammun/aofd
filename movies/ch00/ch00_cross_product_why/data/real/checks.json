@@ -1319,5 +1319,251 @@
   },
   "disk_before": "C: 78.9 GB free (floor 40) | G: 583.2 GB free (floor 50) | project data 6.34 GB of 150 (raw 0.12, cache 0.0, scratch 6.18)",
   "disk_after": "C: 78.9 GB free (floor 40) | G: 583.2 GB free (floor 50) | project data 6.36 GB of 150 (raw 0.14, cache 0.0, scratch 6.18)"
+ },
+ "hrrr_ian_2022": {
+  "per_hour": {
+   "2022-09-28T12": {
+    "centre": [
+     25.94,
+     -82.75
+    ],
+    "psfc_min_hPa": 957.5,
+    "mslma_min_hPa": 965.8,
+    "max10m": 41.0,
+    "max10m_r_km": 41.6,
+    "vt_azmean_max": 30.4,
+    "rmw_km": 40.5,
+    "eye_mean_speed_r_lt_6km": 13.9,
+    "vt_10_100km": 26.1,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T13": {
+    "centre": [
+     26.01,
+     -82.68
+    ],
+    "psfc_min_hPa": 969.4,
+    "mslma_min_hPa": 975.7,
+    "max10m": 35.2,
+    "max10m_r_km": 35.5,
+    "vt_azmean_max": 25.9,
+    "rmw_km": 55.5,
+    "eye_mean_speed_r_lt_6km": 10.9,
+    "vt_10_100km": 23.1,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T14": {
+    "centre": [
+     26.05,
+     -82.64
+    ],
+    "psfc_min_hPa": 969.0,
+    "mslma_min_hPa": 975.1,
+    "max10m": 43.5,
+    "max10m_r_km": 36.3,
+    "vt_azmean_max": 24.2,
+    "rmw_km": 37.5,
+    "eye_mean_speed_r_lt_6km": 7.6,
+    "vt_10_100km": 22.0,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T15": {
+    "centre": [
+     26.08,
+     -82.79
+    ],
+    "psfc_min_hPa": 969.7,
+    "mslma_min_hPa": 975.4,
+    "max10m": 39.8,
+    "max10m_r_km": 47.4,
+    "vt_azmean_max": 25.6,
+    "rmw_km": 34.5,
+    "eye_mean_speed_r_lt_6km": 9.1,
+    "vt_10_100km": 21.1,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T16": {
+    "centre": [
+     26.28,
+     -82.54
+    ],
+    "psfc_min_hPa": 970.6,
+    "mslma_min_hPa": 975.1,
+    "max10m": 42.9,
+    "max10m_r_km": 29.5,
+    "vt_azmean_max": 26.4,
+    "rmw_km": 34.5,
+    "eye_mean_speed_r_lt_6km": 5.5,
+    "vt_10_100km": 22.1,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T17": {
+    "centre": [
+     26.36,
+     -82.56
+    ],
+    "psfc_min_hPa": 934.2,
+    "mslma_min_hPa": 951.9,
+    "max10m": 61.0,
+    "max10m_r_km": 27.1,
+    "vt_azmean_max": 43.9,
+    "rmw_km": 25.5,
+    "eye_mean_speed_r_lt_6km": 14.9,
+    "vt_10_100km": 27.8,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T18": {
+    "centre": [
+     26.43,
+     -82.46
+    ],
+    "psfc_min_hPa": 947.9,
+    "mslma_min_hPa": 960.3,
+    "max10m": 50.8,
+    "max10m_r_km": 23.7,
+    "vt_azmean_max": 37.6,
+    "rmw_km": 28.5,
+    "eye_mean_speed_r_lt_6km": 20.0,
+    "vt_10_100km": 24.7,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T19": {
+    "centre": [
+     26.52,
+     -82.38
+    ],
+    "psfc_min_hPa": 943.7,
+    "mslma_min_hPa": 961.0,
+    "max10m": 64.3,
+    "max10m_r_km": 21.4,
+    "vt_azmean_max": 38.4,
+    "rmw_km": 19.5,
+    "eye_mean_speed_r_lt_6km": 22.9,
+    "vt_10_100km": 22.4,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T20": {
+    "centre": [
+     26.68,
+     -82.17
+    ],
+    "psfc_min_hPa": 939.1,
+    "mslma_min_hPa": 956.9,
+    "max10m": 47.3,
+    "max10m_r_km": 31.6,
+    "vt_azmean_max": 29.4,
+    "rmw_km": 19.5,
+    "eye_mean_speed_r_lt_6km": 13.5,
+    "vt_10_100km": 23.0,
+    "sense": "anticlockwise"
+   },
+   "2022-09-28T21": {
+    "centre": [
+     26.79,
+     -82.0
+    ],
+    "psfc_min_hPa": 958.5,
+    "mslma_min_hPa": 969.2,
+    "max10m": 39.4,
+    "max10m_r_km": 23.0,
+    "vt_azmean_max": 20.8,
+    "rmw_km": 43.5,
+    "eye_mean_speed_r_lt_6km": 8.0,
+    "vt_10_100km": 18.7,
+    "sense": "anticlockwise"
+   }
+  },
+  "note": "centre = min surface pressure; rmw from azimuthal-mean tangential 10 m wind in 3 km rings; eye = mean speed within 6 km; MSLMA is the MAPS-smoothed reduction (10-18 hPa shallower than surface pressure in the core)",
+  "observed_landfall_HURDAT2": {
+   "time": "2022-09-28T19:05",
+   "wind_kt": 130,
+   "wind_ms": 66.9,
+   "pres_hPa": 941,
+   "rmw_nmi": 20
+  }
+ },
+ "ibtracs": {
+  "ian": {
+   "peak": {
+    "time": "2022-09-28T12:00",
+    "usa_wind_kt": 140,
+    "usa_wind_ms": 72.0,
+    "usa_pres_hPa": 937,
+    "rmw_nmi": 20,
+    "r34_r50_r64_max_nmi": [
+     150,
+     80,
+     40
+    ]
+   },
+   "landfall_cuba": {
+    "time": "2022-09-27T08:30",
+    "kt": 110,
+    "hPa": 947
+   },
+   "landfall_florida": {
+    "time": "2022-09-28T19:05",
+    "kt": 130,
+    "hPa": 941,
+    "rmw_nmi": 20,
+    "r34_r50_r64_max_nmi": [
+     150,
+     80,
+     45
+    ]
+   }
+  },
+  "idai": {
+   "peak_jtwc_1min": {
+    "time": "2019-03-11T03:00",
+    "kt": 115,
+    "hPa": 947,
+    "rmw_nmi": 5
+   },
+   "peak_jtwc_second": {
+    "time": "2019-03-13T18:00",
+    "kt": 115,
+    "hPa": 948,
+    "rmw_nmi": 22
+   },
+   "peak_reunion_10min": {
+    "time": "2019-03-13T18:00 to 2019-03-14T00:00",
+    "kt": 105,
+    "hPa_min": 940,
+    "time_pmin": "2019-03-14T00:00",
+    "rmw_nmi": 22
+   },
+   "landfall_beira": {
+    "time": "2019-03-14T21:00 (first fix over land; WMO: about 23:30)",
+    "jtwc_kt": 100,
+    "jtwc_hPa": 964,
+    "reunion_kt": 84,
+    "reunion_hPa": 958,
+    "rmw_nmi": 20
+   }
+  }
+ },
+ "holland_feasibility_ian_20220928T18": {
+  "Vmax_ms": 69.4,
+  "pc_hPa": 938,
+  "poci_hPa": 1010,
+  "rmw_km": 37,
+  "rho": 1.15,
+  "B": 2.09,
+  "radii_model_vs_ibtracs_nmi": {
+   "r64": [
+    57,
+    "30-45"
+   ],
+   "r50": [
+    70,
+    "50-80"
+   ],
+   "r34": [
+    93,
+    "100-150"
+   ]
+  },
+  "note": "scratch check only; not in the library"
  }
 }
