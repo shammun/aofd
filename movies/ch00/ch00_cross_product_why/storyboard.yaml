@@ -829,11 +829,8 @@ scenes:
   - latex: \mathbf v\cdot\nabla T
     vallis_eq: 'provenance only: the last video'
     page_png: null
-  - latex: \mathbf k\times\nabla p
-    vallis_eq: 'provenance only: the turning in geostrophic balance (from Vallis (2.195), derived in s42)'
-    page_png: chapters/pages/ch02/p108.png
   physics_source: null
-  physics_source_note: 'summary grid: words and symbols only, every entry taught in s02-s18 or taught after it (torque s20, turning s23-s43)'
+  physics_source_note: 'summary grid: words and symbols only, every entry taught in s02-s18 or taught after it (torque s20, turning s23-s43); the weather row shows v·∇T beside the keyword "turns the wind" (k×∇p is met in s42-s43, review 1 S10)'
   exaggeration:
   - 'mini pictures illustrative'
 - id: s20_torque

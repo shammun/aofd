@@ -340,6 +340,21 @@ def main() -> int:
     row("inertial period 16.92 h", ic["period"] / 3600, 16.92, 0.01)
     row("radius 96.97 km; diameter ≈ 193.9 km", ic["radius"] / 1e3, 96.97, 0.01)
     row("|−f k×u| = 1.0313e-3 m/s²", np.hypot(*tr[0]), 1.0313e-3, 2e-7)
+    # s30: the f-plane inertial circle drawn from ONE integration (path, velocity and push all from the same solution)
+    t30 = np.linspace(0.0, ic["period"], 241)
+    io = call(FRM + "inertial_oscillation", "s30", "inertial30.json", "Vallis (3.126)-(3.127): free parcel on the f-plane, u0 = 10 m/s east at 45°N",
+              t=t30.tolist(), u0=10.0, v0=0.0, f=float(fl[0]))
+    x30, y30, u30, v30 = (np.asarray(io[k]) for k in ("x", "y", "u", "v"))
+    ax30, ay30 = float(fl[0]) * v30, -float(fl[0]) * u30          # −f k×u = (f v, −f u)
+    row("s30 circle centre = start + (0, −U/f)", [io["xc"], io["yc"]], [0.0, -10.0 / float(fl[0])], 1e-6)
+    for j in (0, 60, 120, 180):                                    # 0, ¼, ½, ¾ period
+        tx, ty = np.gradient(x30, t30)[j], np.gradient(y30, t30)[j]
+        row(f"s30 t={t30[j] / 3600:.1f} h: u tangent to the trace (u·t̂ = |u|)", (u30[j] * tx + v30[j] * ty) / np.hypot(tx, ty), 10.0, 1e-2)
+        cx_, cy_ = io["xc"] - x30[j], io["yc"] - y30[j]
+        row(f"s30 t={t30[j] / 3600:.1f} h: push points to the centre (cos = 1)", (ax30[j] * cx_ + ay30[j] * cy_) / (np.hypot(ax30[j], ay30[j]) * np.hypot(cx_, cy_)), 1.0, 1e-9)
+    files["inertial30.json"] = {"t_h": r6(t30 / 3600, 4), "x_km": r6(x30 / 1e3, 3), "y_km": r6(y30 / 1e3, 3), "u": r6(u30, 5), "v": r6(v30, 5),
+                                "ax": r6(ax30, 9), "ay": r6(ay30, 9), "centre_km": [r6(io["xc"] / 1e3, 3), r6(io["yc"] / 1e3, 3)],
+                                "radius_km": r6(ic["radius"] / 1e3, 3)}
     files[fo] = {"Omega_45N": r6(om45, 10), "accel_45N": r6(acc45, 9), "dot_with_u": r6(dotu, 12),
                  "lat_deg": lat3, "f": r6(fl, 9), "shadow": r6(shad, 10), "turn_rule": r6(tr, 9),
                  "size_45N": {"U": 10.0, "f": r6(fl[0], 9), "accel": r6(np.hypot(*tr[0]), 9), "period_h": r6(ic["period"] / 3600, 3),
