@@ -92,5 +92,10 @@
     "commit": "871167e",
     "fluidpy_commit": "9176882",
     "time": "2026-10-26T09:32"
+  },
+  "resume": {
+    "file": "RESUME.md",
+    "summary": "Movie ch00_cross_product_why: fix loop 2 is committed in source (19628fa) but NOT rendered — drive G: disconnected mid-render (2026-10-26 ~11:00). v2 (33:26, 77.5 MB) is in movies/out; the user's preview copy is preview_v2.mp4 (never touch it).",
+    "instruction": "Read RESUME.md, give the user a short status (incl. whether G: is back and the open M10/M8/M11/PoC questions), then START its 'Do automatically' steps without waiting: check G: -> check files and rebuild data -> motion-builder renders v3 (tools/movie_cp/*) -> QA -> commit -> fresh review 3. If G: is missing, tell the user and stop."
   }
 }

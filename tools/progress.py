@@ -28,6 +28,12 @@ def brief() -> None:
         print("aofd: no progress.json yet (setup session)")
     else:
         data = json.loads(PROGRESS.read_text(encoding="utf-8"))
+        res = data.get("resume")
+        if res:
+            print("=== RESUME INTERRUPTED WORK FIRST — read " + res.get("file", "RESUME.md") + " now ===")
+            print(res.get("summary", ""))
+            print("Instruction: " + res.get("instruction", ""))
+            print("=" * 86)
         cur = data.get("current_chapter")
         ch = data.get("chapters", {}).get(cur, {})
         phases = {k: v for k, v in ch.items() if isinstance(v, str) and k not in ("notes", "updated")}
