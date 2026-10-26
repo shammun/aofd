@@ -1612,3 +1612,283 @@ The movie becomes `qa_pass`. The user watches it before `/approve-movie 0 ch00_d
 Disk at review: C: 85 GB free, G: 584 GB free.
 
 ## Overall: PASS (ch00_dot_product_why review 6b — `qa_pass`; T1–T8 optional)
+
+
+---
+
+# ch00_cross_product_why v1 review (review 1, commit d40480e)                    2026-10-26
+
+Fresh-eyes review of the final render `movies/out/ch00/ch00_cross_product_why/1080.mp4` (2006.17 s). 468 frames
+extracted with ffmpeg at every sentence end minus 0.25 s (build complete) and at every scene end, plus spot frames;
+per-scene 640-px montages (the legibility test) in `reports/movies/ch00_cross_product_why/review1/montage/sNN.jpg`.
+Frame names are `sNN_Skk_<seconds>.jpg` (scene, sentence, time), all under
+`reports/movies/ch00_cross_product_why/review1/`. Builder stills on G: were not used.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product_why (review 1, v1 @ d40480e) | 2006.17 s (33:26; narration end 2003.65 + 2.5 hold) | 80.76 MB (**over the house hard cap of 80 MB**, §10.3; qa.json says WARN against 80/100) | 9 PASS + size WARN | **FIX** (picture contradicts the words in s21, s38, s23, s46; the narration itself is right) | PASS against the page images; **FIX** for rendering (s40/s42/s43 fractions, s42 collisions) | **FIX** (about 30 collisions or clipped labels, caption-band intrusions) | **FIX** (s18 reveals early, s15 hand turns late, empty halves) | PASS (494 cues, ≤ 16.8 cps, ≤ 42 chars, ≤ 2 lines; 1 cue of 0.98 s) | **FIX** (teal against violet in deuteranopia, ΔE 16) | n/a (none, as the house style requires) | **FIX** |
+
+## What is right (checked, no action)
+- **Narration physics: all correct.**
+  - Cross-product chirality: x̂×ŷ=ẑ, ŷ×ẑ=x̂, ẑ×x̂=ŷ and the reverses; ⊙ out of the screen and ⊗ into it.
+  - Views: from above anticlockwise → towards you; from below clockwise → away.
+  - Bottle cap: opens anticlockwise and rises.
+  - Torque: tightens clockwise from above → down; 0.3 × 50 × sin 90° = 15 N·m and × sin 30° = 7.5 N·m.
+  - Rotation and Coriolis:
+    - Ω follows west→east to the North Pole; Ω = 2π/86 164 s = 7.29×10⁻⁵ rad/s.
+    - Ground speed |Ω×r| is 465 m/s at the equator, 465 cos 45° ≈ 329 m/s at 45°N, and 0 at the poles.
+    - The Coriolis effect is called "apparent"; −2Ω×u does no work.
+    - f = 2Ω sin φ, with φ = 90° − angle(Ω, k), is 1.03×10⁻⁴ s⁻¹ at 45°N, 0 at the equator, and negative in the SH.
+    - The push −f k×u is to the right in the NH and to the left in the SH.
+    - f|u| = 1.03×10⁻³ m s⁻², 2π/f = 16.9 h, and the inertial loop is 193.9 km across.
+  - Winds:
+    - The trades blow from the NE and SE, and the westerlies blow towards the east.
+    - Ian is anticlockwise from above (NH) and Idai clockwise (SH); each inward stream turns to its right in s36.
+    - The geostrophic derivation k×(k×u) = −u is right, and the low is on the left in the NH.
+    - 400 Pa / 400 000 m = 1.00×10⁻³ Pa/m; fρ = 1.24×10⁻⁴; |u| ≈ 8.1 m/s, blowing east.
+  - Strength is spoken only from IBTrACS: Ian landfall 130 kt = 66.9 m/s ("about 67"), Idai 105–115 kt = 54–59 m/s.
+  - "All the way round" for the data claim (s38) uses the 150-km ring, with CHECK rows "all 16 > 0" and "all 16 < 0".
+- **Equations versus the page images:**
+  - I read `chapters/pages/ch02/p089.png` (2.79, 2.80) and `p108.png` (2.195–2.197).
+  - −f k×u, f = 2Ω sin φ, f k×u = −(1/ρ)∇p and u = (1/(fρ)) k×∇p are consistent with them, symbol by symbol. Vallis writes ϑ, the movie writes φ (brief), and the movie drops the subscript z on ∇.
+  - No equation numbers, book names or links are on screen.
+- **House style:**
+  - The opening sentence follows the house pattern exactly.
+  - The title layout, gradient and type sizes match the reference (`review1/ref_dot_title.jpg` against `x_4.5.jpg`).
+  - The end card matches the reference word for word, with the concept changed (`ref_dot_end.jpg` against `s48_S03_2003.10.jpg`).
+  - No headings, badges, URLs or "thanks for watching"; "air parcel" is used; spoken bridges, not cards.
+- **The s11 hand (the orchestrator's question):**
+  - It now reads clearly as a right-hand **thumbs-up**, not a rude gesture.
+  - The curled fingers wrap anticlockwise seen from the thumb tip (front → right → back), which only a right hand can do. The gold curl arrow agrees, and so do the thumb and the violet arrow.
+  - Chirality is also right in every s14 and s15 pose that I checked: thumb +ẑ, +x̂ and +ŷ, then −ẑ, −x̂ and −ŷ.
+  - **But** see M3: the fingers never visibly lie along a, and the screen is unbalanced.
+
+## MUST fix
+- **M1 · 28:12–28:43 s42 — the geostrophic derivation collides (the orchestrator's r5/f51662 issue is still in the final render).**
+  - Frame: `s42_S06_1722.03.jpg`.
+  - The problems:
+    - Line 4's ρ sits on line 5's numerator "1".
+    - The "pressure push" brace label overlaps line 2's numerator "1".
+    - The gold underline runs through "fρ".
+    - "geostrophic wind" is only about 20 px from ∇p.
+    - All 5 lines are shown at once; the house CalcStack allows ≤ 3 lines with older lines dimmed.
+    - Every −(1/ρ) has a fraction bar as short as a minus sign, so it reads "− − 1/ρ" (also s40 27:17, s43, s44).
+    - The planned rose strike of the two minus signs is missing.
+  - The fix:
+    - Use a CalcStack of 3 lines, dropping the oldest; pitch ≥ 1.5 × the fraction height.
+    - Use `\dfrac{1}{\rho}` with padding (`\dfrac{\,1\,}{\,\rho\,}`) so the bar is clearly wider than the minus.
+    - Put the underline 20 px below the descender of ρ.
+    - Move "geostrophic wind" under the underline.
+    - Add the strike.
+- **M2 · 27:12–27:18 s40 — the "high → low" keyword covers the numerator "1" of −(1/ρ)∇p.**
+  - Frame: `s40_S05_1637.83.jpg`.
+  - Fix: put the keyword at least 40 px above the equation, or to its left; widen the fraction bar as in M1.
+- **M3 · 06:29–06:53 s11 — the hand never does the move the voice describes.**
+  - Frames: `s11_S02_0396.38.jpg`, `s11_S06_0412.77.jpg`, `s11_S99_0413.70.jpg`.
+  - The problems:
+    - The hand is already a thumbs-up fist on "Hold out your right hand".
+    - On "point your fingers along vector a" the straight fingers point to the screen-right, parallel to **b**, and float a hand-height above the origin.
+    - On "curl towards b" nothing sweeps from a to b.
+    - The keyword "curl · thumb · arrow agree" is cut at the right frame edge.
+    - The "a" label and the tip of a are in the caption band (y ≈ 1040).
+    - The right half is empty during the orbit (06:46–06:53).
+  - The fix:
+    - Start with an open flat hand whose wrist is behind O and whose fingers lie **on** a.
+    - Animate the curl so the fingertips travel along the gold arc from a to b.
+    - Keep the keywords visible during the orbit, at x ≤ 1800.
+    - Raise the camera target so a ends above y 860.
+    - Optional: scale the hand up 1.3× and move the whole group 150 px right, so the screen is balanced.
+- **M4 · 14:02–14:31 s21 — the picture contradicts the words.**
+  - Frames: `s21_S01_0845.08.jpg`, `s21_S04_0858.90.jpg`, `s21_S05_0864.48.jpg`.
+  - S1–S3: the τ arrow points down **under the opaque plate**, so only a floating "τ" and "−" are visible on "the torque arrow points along the bolt's axis".
+  - S5–S6 ("a clockwise turn makes the arrow point down, away from you"): the main view still shows the reversed push, with τ **up** ("loosens"); only the inset shows clockwise/⊗.
+  - Fix:
+    - Make the plate translucent or draw τ above it.
+    - Return to the clockwise push with τ down for S5–S6.
+- **M5 · 25:53–26:05 s38 — the demo of "anticlockwise → r×u up" is drawn on the wrong storm.**
+  - Frame: `s38_S05_1564.80.jpg`.
+  - The thumbs-up hand, the r/u mini arrows and the keyword sit on the **Idai** panel, whose columns all point down, and spill outside the panel.
+  - Fix: move the hand inset to one Ian ring point inside the Ian panel, and put the keyword under Ian.
+- **M6 · 15:44–16:05 s23 — wrong and overlapping labels.**
+  - Frames: `s23_S08_0941.15.jpg`, `s23_S11_0951.33.jpg`, `s23_S13_0964.27.jpg`.
+  - The problems:
+    - In the wind-north case the CalcStack still shows the east-wind result "(0, 5, 0)" beside "k × u: west".
+    - The labels "u" and "east" overlap, and so do "k × u" and "north".
+    - The "−k × u" label is garbled: two labels are drawn on top of each other.
+  - The fix:
+    - Swap the calc to `k × u = (0×0 − 1×5, 1×0 − 0×0, 0) = (−5, 0, 0)` for the second case.
+    - Offset the tip labels from the axis words.
+    - Draw a single "−k × u" label.
+- **M7 · 11:00–12:17 s18 — the cases are revealed early and drawn wrongly.**
+  - Frames: `s18_S01_0664.98.jpg`, `s18_S03_0672.62.jpg`, `s18_S14_0726.17.jpg`, `s18_S15_0733.15.jpg`.
+  - The problems:
+    - 11:00–11:08 is an almost empty screen.
+    - At 11:12 all three panels already show their final states (the 3×2 rectangle and the opposite q) before the voice reaches them (11:27, 11:43).
+    - At 12:05 "same way or opposite → 0" is overwritten by "right angle → longest" (the "0" is hidden under the "r").
+    - At 12:13 the sweep fills a **pentagon**, not a parallelogram, and the downward p×q is a stub hidden behind q.
+  - The fix:
+    - Show the panels empty until each case is spoken.
+    - Use two separate keyword lines.
+    - Build the polygon from the 4 corners O, p, p+q, q only.
+    - Draw p×q in front, with its "(0, 0, −6)" label.
+- **M8 · 31:09–31:46 s46 — the real-wind comparison does not show what the voice says.**
+  - Frame: `s46_S05_1894.80.jpg`.
+  - The problems:
+    - Long violet "geostrophic" arrows lie over land near the low (Britain/France), crossing the isobars at large angles. This contradicts "they run along the isobars" and the storyboard's "sea points only".
+    - The 13°–21° turn of the 10-m wind is not visible in the zooms (only a tiny gold tick).
+    - The dashed zoom links cross the "real wind / geostrophic" keywords.
+  - The fix:
+    - Apply the NE 50m land mask to the arrows, as for the isobars.
+    - Draw a gold angle arc labelled "13°" and "21°" in each zoom.
+    - Route the links above the keywords.
+- **M9 · Caption band intrusions (house: y 880–1040 stays empty).**
+  - The intrusions:
+    - s10 06:25, "down?" and the ghost arrow (`s10_S09_0388.50.jpg`).
+    - s11 06:53, a and "a".
+    - s12 07:11, "a".
+    - s15 09:10–09:25, the "b × a" arrow and label (`s15_S08_0550.85.jpg`).
+    - s28 19:37–19:46, "k · up" (`s28_S10_1185.70.jpg`).
+  - Fix: raise the camera targets / shrink the 3-D groups so everything ends at y ≤ 860.
+- **M10 · Things cut at the frame edge.**
+  - The cuts:
+    - s11 06:53, "agree".
+    - s34 22:59–23:33, "named from where they bl…" (`s34_S04_1385.97.jpg`).
+    - s25 16:53–17:44, the Ω axis runs off the top with no arrowhead or label (`s25_S06_1045.35.jpg`).
+    - s28 18:55–19:46, Ω and k at the site run off the top, and the k label at 19:38 is cut at the left edge (`s28_S02_1143.92.jpg`, `s28_S08_1177.97.jpg`).
+    - s22 14:34, the τ arrowhead and "up" touch the top edge (`s22_S02_0879.10.jpg`).
+    - s47 32:07, the recap hand is cut by the left edge (`x_1932.0.jpg`).
+  - Fix: keep everything inside x 80–1840, y 40–860.
+- **M11 · Empty half for more than 3 s (house §5, U-M4.2).**
+  - The cases:
+    - s03 00:57–01:16, right half (19 s).
+    - s09 05:01–05:26, right half (25 s; `s09_S05_0321.32.jpg`).
+    - s10 05:54–06:05 (11 s).
+    - s13 07:21–07:29 (8 s).
+    - s21 14:02–14:19 (17 s, one keyword).
+    - s23 15:02–15:13 (bare grid).
+    - s24 16:05–16:30, right half (25 s; `s24_S05_0987.05.jpg`).
+    - s47 recap beats S2–S3 and S6–S7 (left half empty) and S13–S14 (right half empty).
+  - Fix: reveal the scene's goal keyword or first calculation line with its sentence, and give each recap beat its left mini picture plus right keywords.
+- **M12 · Other collisions.**
+  - The collisions:
+    - s05 02:45, "east" touches "a = (5, 1, 0)" (`s05_S06_0165.03.jpg`).
+    - s08 04:59, "θ" overlaps "14"; the 14 bracket floats away from a×b; the gold link crosses a (`s08_S09_0299.88.jpg`).
+    - s09 05:53, the area link's arrowhead lands on "≈" and crosses "a" (`s09_S11_0353.35.jpg`).
+    - s20 13:51–14:01, "F = 50 N", "30°" and "r = 0.3 m" pile up, and "F" sits under "torque" (`s20_S09_0832.05.jpg`, `s20_S11_0841.10.jpg`).
+    - s24 16:35–16:51, the stacked fractions 2π/(23 h 56 min) and 2π/86 164 s overlap.
+    - s25 17:07–17:44, "v" sits on "6371 km".
+    - s26 17:55–18:00, "without the effect" touches "turning with Earth" (`s26_S05_1083.45.jpg`).
+    - s27 18:37–18:52, "push", "u" and "east" pile up.
+    - s28, "shadow" sits on "90° − φ", and "φ < 0" on Ω.
+    - s37 25:18–25:27, "observed" sits on "Madagascar" (`s37_S06_1526.53.jpg`).
+    - s39 26:43–26:51, the "isobars" pointer crosses the colour bar and "1006".
+    - s43 28:58–29:16, "sets the speed" sits on "L low on the left" (`s43_S05_1743.95.jpg`).
+    - s44 29:31–29:40, the link crosses "45°N" and its arrowhead sits on "400 000 m" (`s44_S05_1780.33.jpg`).
+  - Fix: placeLabels with a ≥ 12-px gap; route links around text.
+- **M13 · 17:07–17:44 s25 — v = Ω×r, the result of the scene, is invisible.**
+  - It points along the line of sight, so it shows as an orange dot.
+  - Fix: turn the camera so east lies in the picture plane, and draw v ≥ 200 px.
+- **M14 · 08:00–08:04 s14 — on "curl them towards y hat", ŷ points straight into the screen.**
+  - Its label sits on the thumb and the ẑ shaft (`s14_S02_0483.73.jpg`).
+  - Fix: start beat A from the az 225° view, so x̂ and ŷ are both visible.
+- **M15 · 22:48–23:00 s34 — "turned left" has nothing visible to point to.**
+  - The SH poleward arrow from the South Indian high is behind the globe (`s34_S03_1379.67.jpg`).
+  - Fix: use the South Atlantic high, or tilt the camera to show both.
+- **M16 · 16:20–16:30 s24 — "curl your fingers the way Earth turns" uses a hand about 120 px tall.**
+  - The curl cannot be seen.
+  - Fix: show a 300-px inset of the hand on the axis.
+- **M17 · 17:56–18:26 s26 — the NH and SH Coriolis tracks are about 40 px curves at full-globe zoom.**
+  - At 640 px they are illegible; the SH track sits on the globe's lower limb.
+  - Fix: add two zoom windows on the tracks, as s31 does.
+- **M18 · Size: 80.76 MB is over the house hard cap for long movies.**
+  - HOUSE_STYLE §10.3 sets the budget at 60 MB and the hard cap at 80 MB.
+  - `movie_qa.py` judged it against 80/100 and so only warned.
+  - Fix: re-encode at crf 21–22 (or 64-kbps-lower AAC), or record a user-approved exception; align the movie_qa thresholds with the house style.
+
+## SHOULD fix
+- **S1 · 00:32 s02** — "= 8" wraps onto a second line at a larger size (`s02_S04_0038.27.jpg`). Keep it on one line.
+- **S2 · 01:20–01:28 s03** — on "push along the door" the F arrow is hidden along r, behind the translucent door. Draw it on top, slightly offset.
+- **S3 · 02:16–03:31 s05–s06** — a and b lose their tip labels on the 3-D floor while the voice says "part of vector a". The ẑ label sits on b.
+- **S4 · 02:49 s06** — the "x y z" slot letters are not centred under the slots, and the slot line ends at x 1895, beyond 1840.
+- **S5 · 04:30 s08** — the gold underline under "sin θ" is shifted right, and the multiplied-out line reaches x 1868.
+- **S6 · 06:54–07:20 s12** — the index and middle fingers are short stubs floating above the arrows; the index is foreshortened to a dot. Lay the fingers on a and b.
+- **S7 · 07:21–07:55 s13** — the bottle and block are dark navy on the dark background, and the a/b marks on the cap are about 6 px.
+  - While the voice says "moves along their cross product", the screw drives **in** (dashed down) with no first/second marks.
+  - Show the a→b turn on the screw head with the up arrow.
+- **S8 · 08:42–09:25 s15** — several problems:
+  - The hand stays thumbs-up through "curl them towards x hat… turn your hand over" and flips only at about 08:51.
+  - The rose "−" glyph is drawn on the back of the hand.
+  - The "flip glyph" is a stray gold ")".
+  - a and b swap colours (b teal) against the house rule that a quantity keeps its colour; the "first: b" keyword does not fully save it.
+- **S9 · 09:26–10:21 s16** — the arrow-tip sketch reads like a car logo and sits at x 1865. No hands appear in s16: the mini-hands were dropped.
+- **S10 · 12:17–13:10 s19** — problems in the last row:
+  - It overflows the cross column.
+  - "k × ∇p" appears 2 min before k and about 14 min before ∇p are defined.
+  - The KaTeX in the cells sits above the text baseline.
+- **S11 · 13:10–14:02 s20** — the plate fills the caption band, and the maths sits on the plate.
+- **S12 · 14:46–15:01 s22** — the downward τ is hidden inside the door, and the "down" label sits on the door.
+- **S13 · 16:00–16:05 s23** — the "right" arc spans 180° from k×u to −k×u. Draw 90° from u to −k×u.
+- **S14 · 18:29–18:52 s27** — the −2Ω×u push looks almost parallel to u and has no visible right-angle tick, in the scene whose point is "always at a right angle".
+- **S15 · 20:53–21:02 s31** — two featureless dark-blue panels; the sense arcs have no arrowheads. Show where the windows sit on the globe first.
+- **S16 · 22:30–22:43 s33** — during the flight the keywords sit over the busy globe, and the globe fills the caption band. The illustrative turning arrows in s33 and s34 are about 30 px at 640 px.
+- **S17 · 23:34–25:40 s35–s37**:
+  - The GOES patch shows hard rectangular edges, which read as a pasted box.
+  - "Florida" and "Mozambique" sit on the cloud shields.
+  - "spirals inwards" is crammed under "from above" (`s36_S12_1495.58.jpg`).
+- **S18 · 24:42 s36** — "All the way round" is spoken over a 250-km arc and 300-km arrows. The data CHECK exists only for the 150-km ring (s38). Shrink the sketch to ≤ 150 km, or say "around the centre".
+- **S19 · 26:24–29:56 s39–s44**:
+  - The colour bar puts 1010 at the top while the map has 1010 at the bottom.
+  - The km axis has no unit.
+  - The "1010" isobar label is clipped by the map's bottom edge.
+- **S20 · 27:19–28:12 s41** — the parcel arrows are about 40 px at 640 px, and the "=" between the pushes is a tiny box.
+- **S21 · 28:43–29:16 s43** — the equation pieces are spread with large gaps, "quarter turn left" and "across the isobars" touch, and there is a stray mark in "twice às close".
+- **S22 · 29:16–30:15 s44** — the CalcStack shows 6–7 lines (house ≤ 3), and "4 hPa = 400 Pa" sits alone at the bottom.
+- **S23 · 30:15–31:08 s45**:
+  - The keyword stack grows to 9 items with touching lines.
+  - At 31:04 the gold circles mark the secondary western low, not "where the isobars crowd".
+- **S24 · 31:09–31:46 s46**:
+  - The two zooms are boxed panels (house: no boxes).
+  - "Over the sea, they match… within a few per cent" generalises from two check points (5.9 % and 5.2 %, 2.7° and 4.1°). Say "at these two places".
+- **S25 · colour-blind safety of the new violet #a58be0.**
+  - CIEDE2000 distance to teal: 36 for normal vision, **16 deuteranopia**, 22 protanopia, 27 tritanopia.
+  - The two colours have similar lightness.
+  - Against orange it is ≥ 28 and against gold ≥ 23 in every vision type: fine.
+  - Where teal and violet arrows are compared side by side by hue alone (s45–s46 real against geostrophic), add a second cue: dashed shafts or open heads for the geostrophic arrows.
+- **S26 · 00:00–00:10 s00** — the Part-A floor grid runs under "uses it". The subtitle must be ≥ 50 px clear of the animation (`x_4.5.jpg`).
+- **S27 · glossary order**:
+  - "Belts of high pressure" and "subtropical highs" (21:46) come before pressure is introduced (26:24).
+  - "Density" (27:12) is never explained in plain words ("the mass of one cubic metre of air").
+- **S28 · 20:21–20:53 s30** — the wind and push arrows are unlabelled.
+
+## NICE
+- **N1** · 25:18.100 — the cue "Near its peak," lasts 0.98 s (house minimum 1 s).
+- **N2** · Length 33:26 is longer than the brief's expected 22–27 min. The user allowed more than 25; worth saying so when handing over.
+- **N3** · 33:00 recap — the ∇· and ∇× icons are unexplained (a pointer only, acceptable).
+- **N4** · Say once that ∇p here means the change of pressure along the ground (Vallis' ∇_z).
+- **N5** · 10:24 s17 — "a × b" sits over b.
+- **N6** · 12:50 s19 — the "work" mini picture (a grey bar) is not readable as a sled.
+
+## U-CP.5 coverage (every way, every direction)
+| Requirement | Where | State |
+|---|---|---|
+| Curl grip | s11, s14, s15, s21, s24, s38 | present; s11 does not show the fingers along a (M3); s24 hand too small (M16); s38 on the wrong storm (M5) |
+| Flat (index/middle/thumb) | s12 | present, but the fingers are stubs (S6) |
+| Bottle cap and screw | s13 | present; the screw lacks first/second marks (S7) |
+| x̂×ŷ=ẑ cycle and reverses, the hand turned to each pose | s14–s15 | present and chirally right; ŷ hidden at 08:00 (M14); turn late (S8) |
+| Up/down, left/right, into/out of the screen | s16 | present (flat SVG, no hands; mini-hands dropped) |
+| From the top, from below, from the side | s17 | present and right (no hand) |
+| Order swap flips the thumb | s15 | present (late, S8) |
+| three.js orbit | s11 (360°), s12 (+90°) | present |
+
+## Overall: FIX (ch00_cross_product_why review 1 — M1–M18; S1–S28 recommended)
+- The teaching arc, the narration and the physics are sound, and the house opening, voice and end card match the reference.
+- The render is not ready for the user:
+  - In four places the picture contradicts the words (M4 s21, M5 s38, M6 s23, M8 s46).
+  - s18 reveals its cases before they are spoken and draws a wrong shape (M7).
+  - The s11 right-hand rule never shows the fingers along a (M3).
+  - There are many collisions and clipped labels (M1, M2, M10, M12), the most visible in the s42 derivation.
+  - Seven scenes leave half the screen empty for 8–25 s (M11).
+  - The file is 0.76 MB over the house hard cap (M18).
+- After the fix loop: re-render the changed scenes, re-run `tools/movie_qa.py --storyboard`, then review again.
+
+Disk at review: C: 83 GB free, G: 581 GB free; review frames 47 MB (local, not committed).
