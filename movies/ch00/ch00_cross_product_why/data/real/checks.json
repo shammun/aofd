@@ -1,0 +1,1323 @@
+{
+ "P1": {
+  "derived": "<data_root>/derived/ch00/ncep_r1_sfc_wind_mslp_ltm_1991-2020.nc",
+  "derived_MB": 0.481,
+  "bin_MB": 0.65,
+  "json_MB": 0.006,
+  "grid": "T62 Gaussian 94 x 192",
+  "seconds": 294.1,
+  "u_zonal_mean": {
+   "15": -3.1,
+   "-15": -3.93,
+   "45": 1.67,
+   "-45": 5.55,
+   "50": 1.6,
+   "-50": 6.9
+  },
+  "u_sectors_ann": {
+   "15N central Pacific 180-220E": -6.86,
+   "15N Atlantic 320-340E": -4.93,
+   "15S east Pacific 230-260E": -6.71,
+   "15S Indian 60-90E": -6.2,
+   "15S Atlantic 340-355E": -6.55,
+   "45N Atlantic 320-345E": 3.17,
+   "45N Pacific 160-220E": 3.55,
+   "45S Indian 40-100E": 7.51,
+   "50S zonal ring": 6.9
+  },
+  "mslp_hPa_ann": {
+   "Azores high max 20-45N 320-350E": 1022.1,
+   "N Pacific high max 20-45N 180-240E": 1021.9,
+   "Icelandic low min 50-70N 300-360E": 1003.5,
+   "global min/max": [
+    979.6,
+    1035.4
+   ]
+  },
+  "pass_trades": true,
+  "pass_westerlies": true,
+  "disk_before": "C: 84.2 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.27 GB of 150 (raw 0.09, cache 0.0, scratch 6.18)",
+  "disk_after": "C: 84.2 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.28 GB of 150 (raw 0.09, cache 0.0, scratch 6.18)"
+ },
+ "ian_2022": {
+  "raw": "<data_root>/raw/ERA5-ARCO/era5_ian_2022_u10-v10-msl_2022-09-26T00_2022-09-29T23_1h.nc",
+  "raw_MB": 6.484,
+  "derived": "<data_root>/derived/ch00/era5_ian_2022.nc",
+  "derived_MB": 6.459,
+  "bin_MB": 9.426,
+  "json_MB": 0.01,
+  "fetch_seconds": 173.0,
+  "grid": "0.25 deg, 81 lat x 101 lon",
+  "times": 96,
+  "period": "2022-09-26T00 .. 2022-09-29T23 UTC hourly",
+  "msl_min_hPa": 971.9,
+  "msl_min_time": "2022-09-28T10:00",
+  "msl_min_at": [
+   25.75,
+   -82.75
+  ],
+  "max_10m_speed_ms": 32.4,
+  "max_10m_speed_time": "2022-09-28T11:00",
+  "vt_annulus_50_250km_at_min": 14.7,
+  "vr_annulus_at_min": -8.1,
+  "inflow_angle_deg_at_min": 28.9,
+  "zeta_mean_250km_at_min": 0.000118,
+  "sense_at_min": "anticlockwise",
+  "hours_anticlockwise": 96,
+  "hours_clockwise": 0,
+  "hours_inflow": 96,
+  "track_6h_lat_lon_hPa": {
+   "2022-09-26T00": [
+    17.0,
+    -80.75,
+    999.4
+   ],
+   "2022-09-26T06": [
+    17.75,
+    -81.5,
+    997.7
+   ],
+   "2022-09-26T12": [
+    18.75,
+    -82.5,
+    991.2
+   ],
+   "2022-09-26T18": [
+    19.75,
+    -83.0,
+    991.3
+   ],
+   "2022-09-27T00": [
+    20.75,
+    -83.25,
+    986.1
+   ],
+   "2022-09-27T06": [
+    21.75,
+    -83.75,
+    982.8
+   ],
+   "2022-09-27T12": [
+    22.5,
+    -83.75,
+    984.6
+   ],
+   "2022-09-27T18": [
+    23.5,
+    -83.5,
+    984.4
+   ],
+   "2022-09-28T00": [
+    24.5,
+    -83.0,
+    981.5
+   ],
+   "2022-09-28T06": [
+    25.25,
+    -83.0,
+    983.0
+   ],
+   "2022-09-28T12": [
+    26.0,
+    -82.75,
+    975.5
+   ],
+   "2022-09-28T18": [
+    26.5,
+    -82.5,
+    979.9
+   ],
+   "2022-09-29T00": [
+    27.0,
+    -81.75,
+    987.2
+   ],
+   "2022-09-29T06": [
+    27.75,
+    -81.25,
+    992.0
+   ],
+   "2022-09-29T12": [
+    28.5,
+    -80.75,
+    992.6
+   ],
+   "2022-09-29T18": [
+    28.75,
+    -80.25,
+    993.0
+   ]
+  },
+  "pass_sense": true,
+  "disk_before": "C: 84.2 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.28 GB of 150 (raw 0.09, cache 0.0, scratch 6.18)",
+  "disk_after": "C: 84.2 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.29 GB of 150 (raw 0.1, cache 0.0, scratch 6.18)"
+ },
+ "idai_2019": {
+  "raw": "<data_root>/raw/ERA5-ARCO/era5_idai_2019_u10-v10-msl_2019-03-11T00_2019-03-15T23_1h.nc",
+  "raw_MB": 6.567,
+  "derived": "<data_root>/derived/ch00/era5_idai_2019.nc",
+  "derived_MB": 6.54,
+  "bin_MB": 9.45,
+  "json_MB": 0.01,
+  "fetch_seconds": 119.3,
+  "grid": "0.25 deg, 81 lat x 81 lon",
+  "times": 120,
+  "period": "2019-03-11T00 .. 2019-03-15T23 UTC hourly",
+  "msl_min_hPa": 974.3,
+  "msl_min_time": "2019-03-14T14:00",
+  "msl_min_at": [
+   -19.75,
+   36.0
+  ],
+  "max_10m_speed_ms": 31.5,
+  "max_10m_speed_time": "2019-03-14T08:00",
+  "vt_annulus_50_250km_at_min": -11.7,
+  "vr_annulus_at_min": -8.0,
+  "inflow_angle_deg_at_min": 34.5,
+  "zeta_mean_250km_at_min": -9.38e-05,
+  "sense_at_min": "clockwise",
+  "hours_anticlockwise": 0,
+  "hours_clockwise": 120,
+  "hours_inflow": 120,
+  "track_6h_lat_lon_hPa": {
+   "2019-03-11T00": [
+    -17.25,
+    43.0,
+    990.4
+   ],
+   "2019-03-11T06": [
+    -17.25,
+    43.0,
+    990.2
+   ],
+   "2019-03-11T12": [
+    -17.5,
+    42.75,
+    986.3
+   ],
+   "2019-03-11T18": [
+    -17.75,
+    42.5,
+    986.1
+   ],
+   "2019-03-12T00": [
+    -18.0,
+    42.0,
+    986.3
+   ],
+   "2019-03-12T06": [
+    -18.25,
+    41.5,
+    986.7
+   ],
+   "2019-03-12T12": [
+    -18.75,
+    41.0,
+    984.1
+   ],
+   "2019-03-12T18": [
+    -19.0,
+    40.5,
+    984.1
+   ],
+   "2019-03-13T00": [
+    -19.25,
+    40.0,
+    977.6
+   ],
+   "2019-03-13T06": [
+    -19.25,
+    39.5,
+    978.4
+   ],
+   "2019-03-13T12": [
+    -19.5,
+    39.0,
+    977.8
+   ],
+   "2019-03-13T18": [
+    -19.5,
+    38.5,
+    977.1
+   ],
+   "2019-03-14T00": [
+    -19.75,
+    37.75,
+    978.9
+   ],
+   "2019-03-14T06": [
+    -19.75,
+    36.75,
+    977.7
+   ],
+   "2019-03-14T12": [
+    -19.75,
+    36.25,
+    975.0
+   ],
+   "2019-03-14T18": [
+    -19.75,
+    35.5,
+    979.0
+   ],
+   "2019-03-15T00": [
+    -19.75,
+    34.75,
+    987.2
+   ],
+   "2019-03-15T06": [
+    -19.5,
+    33.75,
+    996.3
+   ],
+   "2019-03-15T12": [
+    -19.25,
+    33.0,
+    1002.4
+   ],
+   "2019-03-15T18": [
+    -18.75,
+    32.25,
+    1004.8
+   ]
+  },
+  "pass_sense": true,
+  "disk_before": "C: 84.2 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.29 GB of 150 (raw 0.1, cache 0.0, scratch 6.18)",
+  "disk_after": "C: 76.7 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.3 GB of 150 (raw 0.11, cache 0.0, scratch 6.18)",
+  "fetch_seconds_note": "from logs/downloads.log; the in-script timer read 7602 s because the host clock jumped ~2 h (sleep) during the run"
+ },
+ "P4": {
+  "raw_sfc": "<data_root>/raw/ERA5-ARCO/era5_ciaran_2023_u10-v10-msl-t2m_2023-11-01T00_2023-11-02T23_1h.nc",
+  "raw_sfc_MB": 16.446,
+  "raw_upper": "<data_root>/raw/ERA5-ARCO/era5_ciaran_2023_z-u-v_850-500_4t_2023-11-01T12.nc",
+  "raw_upper_MB": 2.194,
+  "fetch_seconds_sfc": 100.4,
+  "fetch_seconds_upper": 218.8,
+  "derived_sfc": "<data_root>/derived/ch00/era5_ciaran_2023_sfc.nc",
+  "derived_sfc_MB": 16.327,
+  "derived_upper": "<data_root>/derived/ch00/era5_ciaran_2023_upper.nc",
+  "derived_upper_MB": 2.197,
+  "bin_sfc_MB (3-hourly)": 6.524,
+  "bin_upper_MB": 3.262,
+  "grid": "0.25 deg, 141 x 241",
+  "msl_min_hPa": 953.7,
+  "msl_min_time": "2023-11-02T04:00",
+  "msl_min_at": [
+   50.25,
+   -3.0
+  ],
+  "track_3h": {
+   "2023-11-01T00": [
+    55.5,
+    -22.5,
+    968.5
+   ],
+   "2023-11-01T03": [
+    55.75,
+    -23.0,
+    966.4
+   ],
+   "2023-11-01T06": [
+    56.0,
+    -24.0,
+    965.4
+   ],
+   "2023-11-01T09": [
+    56.25,
+    -24.75,
+    964.9
+   ],
+   "2023-11-01T12": [
+    56.25,
+    -25.5,
+    965.3
+   ],
+   "2023-11-01T15": [
+    48.5,
+    -14.25,
+    964.3
+   ],
+   "2023-11-01T18": [
+    48.75,
+    -11.75,
+    960.7
+   ],
+   "2023-11-01T21": [
+    49.0,
+    -8.0,
+    958.6
+   ],
+   "2023-11-02T00": [
+    49.75,
+    -5.75,
+    954.6
+   ],
+   "2023-11-02T03": [
+    50.0,
+    -3.75,
+    953.7
+   ],
+   "2023-11-02T06": [
+    50.5,
+    -1.5,
+    954.0
+   ],
+   "2023-11-02T09": [
+    51.5,
+    0.75,
+    955.4
+   ],
+   "2023-11-02T12": [
+    52.5,
+    1.75,
+    955.9
+   ],
+   "2023-11-02T15": [
+    53.5,
+    2.5,
+    956.3
+   ],
+   "2023-11-02T18": [
+    54.25,
+    3.0,
+    958.0
+   ],
+   "2023-11-02T21": [
+    54.75,
+    3.25,
+    959.5
+   ]
+  },
+  "geostrophic_check": {
+   "2023-11-01T12": {
+    "centre": [
+     56.25,
+     -25.5,
+     965.3
+    ],
+    "850": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       50.25,
+       -25.5
+      ],
+      "geo_uv": [
+       13.1,
+       -10.4
+      ],
+      "act_uv": [
+       14.8,
+       -8.7
+      ],
+      "msl_geo_uv": [
+       11.5,
+       -13.2
+      ],
+      "10m_uv": [
+       11.1,
+       -6.8
+      ],
+      "rho_sfc": 1.227,
+      "speed_geo_act": [
+       16.7,
+       17.2
+      ],
+      "angle_act_minus_geo_deg": 8.0,
+      "speed_mslgeo_10m": [
+       17.5,
+       13.0
+      ],
+      "angle_10m_minus_mslgeo_deg": 17.4
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       56.25,
+       -35.5
+      ],
+      "geo_uv": [
+       7.2,
+       -13.7
+      ],
+      "act_uv": [
+       12.1,
+       -9.1
+      ],
+      "msl_geo_uv": [
+       10.2,
+       -14.7
+      ],
+      "10m_uv": [
+       11.5,
+       -6.5
+      ],
+      "rho_sfc": 1.237,
+      "speed_geo_act": [
+       15.5,
+       15.1
+      ],
+      "angle_act_minus_geo_deg": 25.3,
+      "speed_mslgeo_10m": [
+       17.9,
+       13.2
+      ],
+      "angle_10m_minus_mslgeo_deg": 25.8
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       62.25,
+       -25.5
+      ],
+      "geo_uv": [
+       -21.2,
+       1.9
+      ],
+      "act_uv": [
+       -21.7,
+       0.5
+      ],
+      "msl_geo_uv": [
+       -25.2,
+       2.1
+      ],
+      "10m_uv": [
+       -16.3,
+       -2.3
+      ],
+      "rho_sfc": 1.235,
+      "speed_geo_act": [
+       21.3,
+       21.7
+      ],
+      "angle_act_minus_geo_deg": 3.8,
+      "speed_mslgeo_10m": [
+       25.3,
+       16.5
+      ],
+      "angle_10m_minus_mslgeo_deg": 12.8
+     },
+     "SE (-5, +6)": {
+      "at": [
+       51.25,
+       -19.5
+      ],
+      "geo_uv": [
+       4.9,
+       -5.0
+      ],
+      "act_uv": [
+       8.4,
+       -4.6
+      ],
+      "msl_geo_uv": [
+       5.1,
+       -7.6
+      ],
+      "10m_uv": [
+       7.7,
+       -4.9
+      ],
+      "rho_sfc": 1.212,
+      "speed_geo_act": [
+       7.0,
+       9.6
+      ],
+      "angle_act_minus_geo_deg": 16.9,
+      "speed_mslgeo_10m": [
+       9.2,
+       9.1
+      ],
+      "angle_10m_minus_mslgeo_deg": 23.7
+     }
+    },
+    "500": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       50.25,
+       -25.5
+      ],
+      "geo_uv": [
+       23.4,
+       -5.1
+      ],
+      "act_uv": [
+       21.8,
+       -2.7
+      ],
+      "speed_geo_act": [
+       23.9,
+       22.0
+      ],
+      "angle_act_minus_geo_deg": 5.2
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       56.25,
+       -35.5
+      ],
+      "geo_uv": [
+       -16.1,
+       5.4
+      ],
+      "act_uv": [
+       -22.8,
+       2.7
+      ],
+      "speed_geo_act": [
+       17.0,
+       23.0
+      ],
+      "angle_act_minus_geo_deg": 11.8
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       62.25,
+       -25.5
+      ],
+      "geo_uv": [
+       -16.3,
+       -1.6
+      ],
+      "act_uv": [
+       -16.0,
+       -0.9
+      ],
+      "speed_geo_act": [
+       16.4,
+       16.0
+      ],
+      "angle_act_minus_geo_deg": -2.4
+     },
+     "SE (-5, +6)": {
+      "at": [
+       51.25,
+       -19.5
+      ],
+      "geo_uv": [
+       14.2,
+       6.4
+      ],
+      "act_uv": [
+       13.7,
+       2.5
+      ],
+      "speed_geo_act": [
+       15.6,
+       13.9
+      ],
+      "angle_act_minus_geo_deg": -13.9
+     }
+    }
+   },
+   "2023-11-01T18": {
+    "centre": [
+     48.75,
+     -11.75,
+     960.7
+    ],
+    "850": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       42.75,
+       -11.75
+      ],
+      "geo_uv": [
+       39.6,
+       3.9
+      ],
+      "act_uv": [
+       36.3,
+       6.1
+      ],
+      "msl_geo_uv": [
+       39.6,
+       5.0
+      ],
+      "10m_uv": [
+       15.6,
+       9.8
+      ],
+      "rho_sfc": 1.194,
+      "speed_geo_act": [
+       39.8,
+       36.8
+      ],
+      "angle_act_minus_geo_deg": 3.9,
+      "speed_mslgeo_10m": [
+       39.9,
+       18.4
+      ],
+      "angle_10m_minus_mslgeo_deg": 24.9
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       48.75,
+       -21.75
+      ],
+      "geo_uv": [
+       19.1,
+       -9.9
+      ],
+      "act_uv": [
+       18.6,
+       -9.1
+      ],
+      "msl_geo_uv": [
+       16.5,
+       -12.3
+      ],
+      "10m_uv": [
+       14.3,
+       -6.0
+      ],
+      "rho_sfc": 1.224,
+      "speed_geo_act": [
+       21.5,
+       20.7
+      ],
+      "angle_act_minus_geo_deg": 1.3,
+      "speed_mslgeo_10m": [
+       20.6,
+       15.5
+      ],
+      "angle_10m_minus_mslgeo_deg": 13.9
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       54.75,
+       -11.75
+      ],
+      "geo_uv": [
+       22.8,
+       4.1
+      ],
+      "act_uv": [
+       16.4,
+       3.0
+      ],
+      "msl_geo_uv": [
+       23.6,
+       3.4
+      ],
+      "10m_uv": [
+       12.7,
+       3.3
+      ],
+      "rho_sfc": 1.194,
+      "speed_geo_act": [
+       23.2,
+       16.7
+      ],
+      "angle_act_minus_geo_deg": 0.2,
+      "speed_mslgeo_10m": [
+       23.8,
+       13.1
+      ],
+      "angle_10m_minus_mslgeo_deg": 6.4
+     },
+     "SE (-5, +6)": {
+      "at": [
+       43.75,
+       -5.75
+      ],
+      "geo_uv": [
+       33.8,
+       12.7
+      ],
+      "act_uv": [
+       27.7,
+       18.8
+      ],
+      "msl_geo_uv": [
+       35.7,
+       13.1
+      ],
+      "10m_uv": [
+       3.4,
+       8.8
+      ],
+      "rho_sfc": 1.202,
+      "speed_geo_act": [
+       36.1,
+       33.5
+      ],
+      "angle_act_minus_geo_deg": 13.6,
+      "speed_mslgeo_10m": [
+       38.0,
+       9.4
+      ],
+      "angle_10m_minus_mslgeo_deg": 48.7
+     }
+    },
+    "500": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       42.75,
+       -11.75
+      ],
+      "geo_uv": [
+       54.6,
+       3.3
+      ],
+      "act_uv": [
+       48.6,
+       0.7
+      ],
+      "speed_geo_act": [
+       54.7,
+       48.6
+      ],
+      "angle_act_minus_geo_deg": -2.6
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       48.75,
+       -21.75
+      ],
+      "geo_uv": [
+       26.2,
+       -3.6
+      ],
+      "act_uv": [
+       25.3,
+       0.2
+      ],
+      "speed_geo_act": [
+       26.4,
+       25.3
+      ],
+      "angle_act_minus_geo_deg": 8.3
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       54.75,
+       -11.75
+      ],
+      "geo_uv": [
+       4.8,
+       1.6
+      ],
+      "act_uv": [
+       6.3,
+       3.1
+      ],
+      "speed_geo_act": [
+       5.1,
+       7.0
+      ],
+      "angle_act_minus_geo_deg": 7.8
+     },
+     "SE (-5, +6)": {
+      "at": [
+       43.75,
+       -5.75
+      ],
+      "geo_uv": [
+       42.1,
+       5.1
+      ],
+      "act_uv": [
+       39.3,
+       0.2
+      ],
+      "speed_geo_act": [
+       42.4,
+       39.3
+      ],
+      "angle_act_minus_geo_deg": -6.6
+     }
+    }
+   },
+   "2023-11-02T00": {
+    "centre": [
+     49.75,
+     -5.75,
+     954.6
+    ],
+    "850": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       43.75,
+       -5.75
+      ],
+      "geo_uv": [
+       26.6,
+       -2.5
+      ],
+      "act_uv": [
+       28.1,
+       -0.6
+      ],
+      "msl_geo_uv": [
+       24.6,
+       -6.9
+      ],
+      "10m_uv": [
+       13.1,
+       1.2
+      ],
+      "rho_sfc": 1.198,
+      "speed_geo_act": [
+       26.7,
+       28.1
+      ],
+      "angle_act_minus_geo_deg": 4.1,
+      "speed_mslgeo_10m": [
+       25.5,
+       13.2
+      ],
+      "angle_10m_minus_mslgeo_deg": 20.9
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       49.75,
+       -15.75
+      ],
+      "geo_uv": [
+       20.0,
+       -11.0
+      ],
+      "act_uv": [
+       19.3,
+       -9.5
+      ],
+      "msl_geo_uv": [
+       20.0,
+       -13.4
+      ],
+      "10m_uv": [
+       14.5,
+       -5.5
+      ],
+      "rho_sfc": 1.216,
+      "speed_geo_act": [
+       22.8,
+       21.5
+      ],
+      "angle_act_minus_geo_deg": 2.6,
+      "speed_mslgeo_10m": [
+       24.1,
+       15.5
+      ],
+      "angle_10m_minus_mslgeo_deg": 13.0
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       55.75,
+       -5.75
+      ],
+      "geo_uv": [
+       3.1,
+       10.4
+      ],
+      "act_uv": [
+       2.1,
+       7.2
+      ],
+      "msl_geo_uv": [
+       2.5,
+       12.1
+      ],
+      "10m_uv": [
+       1.0,
+       5.6
+      ],
+      "rho_sfc": 1.201,
+      "speed_geo_act": [
+       10.9,
+       7.5
+      ],
+      "angle_act_minus_geo_deg": 0.3,
+      "speed_mslgeo_10m": [
+       12.4,
+       5.7
+      ],
+      "angle_10m_minus_mslgeo_deg": 1.5
+     },
+     "SE (-5, +6)": {
+      "at": [
+       44.75,
+       0.25
+      ],
+      "geo_uv": [
+       31.7,
+       19.0
+      ],
+      "act_uv": [
+       21.4,
+       23.7
+      ],
+      "msl_geo_uv": [
+       24.1,
+       23.5
+      ],
+      "10m_uv": [
+       -0.6,
+       7.6
+      ],
+      "rho_sfc": 1.206,
+      "speed_geo_act": [
+       37.0,
+       31.9
+      ],
+      "angle_act_minus_geo_deg": 17.0,
+      "speed_mslgeo_10m": [
+       33.7,
+       7.6
+      ],
+      "angle_10m_minus_mslgeo_deg": 50.2
+     }
+    },
+    "500": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       43.75,
+       -5.75
+      ],
+      "geo_uv": [
+       60.0,
+       12.5
+      ],
+      "act_uv": [
+       48.9,
+       16.7
+      ],
+      "speed_geo_act": [
+       61.3,
+       51.7
+      ],
+      "angle_act_minus_geo_deg": 7.1
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       49.75,
+       -15.75
+      ],
+      "geo_uv": [
+       19.3,
+       -1.8
+      ],
+      "act_uv": [
+       18.8,
+       -2.0
+      ],
+      "speed_geo_act": [
+       19.4,
+       18.9
+      ],
+      "angle_act_minus_geo_deg": -0.7
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       55.75,
+       -5.75
+      ],
+      "geo_uv": [
+       -5.6,
+       7.7
+      ],
+      "act_uv": [
+       -4.3,
+       7.3
+      ],
+      "speed_geo_act": [
+       9.5,
+       8.5
+      ],
+      "angle_act_minus_geo_deg": -5.5
+     },
+     "SE (-5, +6)": {
+      "at": [
+       44.75,
+       0.25
+      ],
+      "geo_uv": [
+       41.8,
+       18.4
+      ],
+      "act_uv": [
+       39.8,
+       5.4
+      ],
+      "speed_geo_act": [
+       45.7,
+       40.2
+      ],
+      "angle_act_minus_geo_deg": -16.0
+     }
+    }
+   },
+   "2023-11-02T06": {
+    "centre": [
+     50.5,
+     -1.5,
+     954.0
+    ],
+    "850": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       44.5,
+       -1.5
+      ],
+      "geo_uv": [
+       27.4,
+       5.2
+      ],
+      "act_uv": [
+       23.3,
+       -0.1
+      ],
+      "msl_geo_uv": [
+       23.3,
+       4.9
+      ],
+      "10m_uv": [
+       12.7,
+       1.6
+      ],
+      "rho_sfc": 1.2,
+      "speed_geo_act": [
+       27.9,
+       23.3
+      ],
+      "angle_act_minus_geo_deg": -11.0,
+      "speed_mslgeo_10m": [
+       23.8,
+       12.8
+      ],
+      "angle_10m_minus_mslgeo_deg": -4.7
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       50.5,
+       -11.5
+      ],
+      "geo_uv": [
+       16.5,
+       -12.7
+      ],
+      "act_uv": [
+       17.8,
+       -9.0
+      ],
+      "msl_geo_uv": [
+       16.6,
+       -13.7
+      ],
+      "10m_uv": [
+       14.2,
+       -6.1
+      ],
+      "rho_sfc": 1.205,
+      "speed_geo_act": [
+       20.8,
+       19.9
+      ],
+      "angle_act_minus_geo_deg": 10.8,
+      "speed_mslgeo_10m": [
+       21.5,
+       15.5
+      ],
+      "angle_10m_minus_mslgeo_deg": 16.3
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       56.5,
+       -1.5
+      ],
+      "geo_uv": [
+       -10.8,
+       6.7
+      ],
+      "act_uv": [
+       -6.9,
+       5.7
+      ],
+      "msl_geo_uv": [
+       -11.6,
+       5.2
+      ],
+      "10m_uv": [
+       -6.3,
+       2.5
+      ],
+      "rho_sfc": 1.198,
+      "speed_geo_act": [
+       12.7,
+       8.9
+      ],
+      "angle_act_minus_geo_deg": -7.7,
+      "speed_mslgeo_10m": [
+       12.7,
+       6.8
+      ],
+      "angle_10m_minus_mslgeo_deg": 2.5
+     },
+     "SE (-5, +6)": {
+      "at": [
+       45.5,
+       4.5
+      ],
+      "geo_uv": [
+       14.0,
+       3.7
+      ],
+      "act_uv": [
+       4.4,
+       22.5
+      ],
+      "msl_geo_uv": [
+       14.9,
+       2.1
+      ],
+      "10m_uv": [
+       0.2,
+       6.3
+      ],
+      "rho_sfc": 1.212,
+      "speed_geo_act": [
+       14.5,
+       22.9
+      ],
+      "angle_act_minus_geo_deg": 64.1,
+      "speed_mslgeo_10m": [
+       15.0,
+       6.3
+      ],
+      "angle_10m_minus_mslgeo_deg": 80.2
+     }
+    },
+    "500": {
+     "S flank (-6 deg lat)": {
+      "at": [
+       44.5,
+       -1.5
+      ],
+      "geo_uv": [
+       58.6,
+       18.6
+      ],
+      "act_uv": [
+       46.7,
+       26.3
+      ],
+      "speed_geo_act": [
+       61.5,
+       53.6
+      ],
+      "angle_act_minus_geo_deg": 11.8
+     },
+     "W flank (-10 deg lon)": {
+      "at": [
+       50.5,
+       -11.5
+      ],
+      "geo_uv": [
+       11.3,
+       1.5
+      ],
+      "act_uv": [
+       7.5,
+       -2.1
+      ],
+      "speed_geo_act": [
+       11.4,
+       7.8
+      ],
+      "angle_act_minus_geo_deg": -23.2
+     },
+     "N flank (+6 deg lat)": {
+      "at": [
+       56.5,
+       -1.5
+      ],
+      "geo_uv": [
+       0.8,
+       15.2
+      ],
+      "act_uv": [
+       0.4,
+       12.3
+      ],
+      "speed_geo_act": [
+       15.2,
+       12.3
+      ],
+      "angle_act_minus_geo_deg": 1.2
+     },
+     "SE (-5, +6)": {
+      "at": [
+       45.5,
+       4.5
+      ],
+      "geo_uv": [
+       32.9,
+       29.6
+      ],
+      "act_uv": [
+       25.6,
+       18.6
+      ],
+      "speed_geo_act": [
+       44.3,
+       31.6
+      ],
+      "angle_act_minus_geo_deg": -6.0
+     }
+    }
+   }
+  },
+  "disk_before": "C: 76.6 GB free (floor 40) | G: 583.3 GB free (floor 50) | project data 6.3 GB of 150 (raw 0.11, cache 0.0, scratch 6.18)",
+  "disk_after": "C: 78.7 GB free (floor 40) | G: 583.2 GB free (floor 50) | project data 6.34 GB of 150 (raw 0.12, cache 0.0, scratch 6.18)"
+ },
+ "P5": {
+  "topography": {
+   "raw": "<data_root>/raw/BMNG-2004/world.topo.200409.3x5400x2700.jpg",
+   "size": [
+    5400,
+    2700
+   ],
+   "MB": 1.72,
+   "sha256": "5f5d16b1c12c7e2e5efc236ed02ce2212c7f9c90d2cbdaafd9d470dd875b6d09",
+   "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography/september/world.topo.200409.3x5400x2700.jpg"
+  },
+  "topography-bathymetry": {
+   "raw": "<data_root>/raw/BMNG-2004/world.topo.bathy.200409.3x5400x2700.jpg",
+   "size": [
+    5400,
+    2700
+   ],
+   "MB": 2.403,
+   "sha256": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
+   "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/september/world.topo.bathy.200409.3x5400x2700.jpg"
+  },
+  "ne_lines_50m": {
+   "path": "movies/ch00/ch00_cross_product_why/data/real/ne_lines_50m.json",
+   "MB": 1.016,
+   "coastline_lines": 1429,
+   "coastline_points": 60392,
+   "border_lines": 392,
+   "border_points": 19735
+  },
+  "ne_lines_110m": {
+   "path": "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json",
+   "MB": 0.103
+  },
+  "ne_sha256": {
+   "ne_50m_coastline.zip": "640f805509b822f57f4840a2e18d9ff2412cf1cf6976124701c2789436166fde",
+   "ne_110m_coastline.zip": "664449b39070027e882abb295974d182afec18ca21107273d17e9e8bf6f64817",
+   "ne_50m_admin_0_boundary_lines_land.zip": "02f369ae10578c4ce33fc4a08f8cdd69ea11eb39b44d7923e88eb7199aaff8ea",
+   "ne_110m_admin_0_boundary_lines_land.zip": "bb2954981570498a4b4344f8e83fa54caa5858e15e800094112407d2bd2f940d"
+  },
+  "ne_relief": {
+   "path": "movies/ch00/ch00_cross_product_why/data/real/globe_ne_shaded_relief_5400x2700.png",
+   "MB": 2.762,
+   "size": [
+    5400,
+    2700
+   ],
+   "raw_sha256": "ff810f5f2747463fd8ffa612b23e5f5e5d593a345218976872b6749610976ab7"
+  },
+  "disk_before": "C: 78.9 GB free (floor 40) | G: 583.2 GB free (floor 50) | project data 6.34 GB of 150 (raw 0.12, cache 0.0, scratch 6.18)",
+  "disk_after": "C: 78.9 GB free (floor 40) | G: 583.2 GB free (floor 50) | project data 6.36 GB of 150 (raw 0.14, cache 0.0, scratch 6.18)"
+ }
+}
