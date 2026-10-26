@@ -1,0 +1,1 @@
+{"n":6000,"L":90,"format":"Int16 (lat, lon) ×100 [N, L, 2] then Uint8 speed ×4 [N, L]","dt_s":7200,"seed":11}

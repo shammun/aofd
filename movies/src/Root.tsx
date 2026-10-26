@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { Empty } from "./Empty";
 import { POC_FPS, POC_FRAMES, PocCoriolis } from "./poc/PocCoriolis";
 import { DPW_FPS, DPW_FRAMES, DotProductWhy } from "./ch00/DotProductWhy";
+import { CPW_FPS, CPW_FRAMES, CrossProductWhy } from "./ch00/CrossProductWhy";
 
 // Every movie is one <Composition>. Ids: Empty (toolchain test), PocCoriolis (PoC D, movies/src/poc/), and per chapter
 // ChNN<Slug> (movies/src/chNN/<Slug>.tsx). Durations of real movies come from timing.json via calculateMetadata,
@@ -14,6 +15,8 @@ export const Root: React.FC = () => (
     <Composition id="PocCoriolis" component={PocCoriolis} durationInFrames={POC_FRAMES} fps={POC_FPS} width={1920}
       height={1080} defaultProps={{ audio: "narration.wav" }} />
     <Composition id="Ch00DotProductWhy" component={DotProductWhy} durationInFrames={DPW_FRAMES} fps={DPW_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music.wav" }} />
+    <Composition id="Ch00CrossProductWhy" component={CrossProductWhy} durationInFrames={CPW_FRAMES} fps={CPW_FPS} width={1920}
       height={1080} defaultProps={{ audio: "narration_music.wav" }} />
   </>
 );
