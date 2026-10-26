@@ -65,3 +65,12 @@ This is the second video of the Chapter 0 maths series, coming straight after `c
   - Small time and area subsets only.
 - **Long-term mean surface winds:** ERA5 monthly climatology or NCEP long-term mean, at 1° or coarser.
 - **Imagery and coastlines:** NASA Blue Marble (public domain) for the globe texture; Natural Earth coastlines.
+
+## User decision, 2026-10-26 (U-CP.7): hurricane data
+The user asked for data that shows the storms' full strength. ERA5 at 0.25° gives Ian 972 hPa / 32 m/s, against 937 hPa / 72 m/s observed.
+- **Tested:** IBTrACS best track, HRRR at 3 km, GOES-16 and VIIRS imagery, and a Holland vortex.
+- **Approved:**
+  - real satellite images draped on the 3-D globe (GOES-16 for Ian, VIIRS for Idai);
+  - real wind streamlines from HRRR for Ian (resolves the eye at about 40 km, up to 43.5 m/s) and from ERA5 for Idai;
+  - strength spoken only from IBTrACS observed values;
+  - no Holland vortex.
