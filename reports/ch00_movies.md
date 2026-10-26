@@ -1892,3 +1892,183 @@ Frame names are `sNN_Skk_<seconds>.jpg` (scene, sentence, time), all under
 - After the fix loop: re-render the changed scenes, re-run `tools/movie_qa.py --storyboard`, then review again.
 
 Disk at review: C: 83 GB free, G: 581 GB free; review frames 47 MB (local, not committed).
+
+
+# ch00_cross_product_why v2 review (review 2, commit 414c736)                    2026-10-26
+
+Fresh-eyes review of the fix-loop-1 render `movies/out/ch00/ch00_cross_product_why/1080.mp4` (2006.17 s, 77.49 MB).
+I extracted 471 frames with ffmpeg: one at every sentence end minus 0.25 s, one at every scene end, and extra frames
+around anything suspicious. All review-1 timestamps were covered, because the timing is unchanged.
+- Per-scene 640-px montages (the legibility test) are in `reports/movies/ch00_cross_product_why/review2/montage/`.
+- Frame names are `sNN_Skk_<s>.jpg` and `x_<s>.jpg`, all under `reports/movies/ch00_cross_product_why/review2/`.
+- I also scanned the caption band (y 880–1040) of the final MP4 at 2 fps.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product_why (review 2, v2 @ 414c736) | 2006.17 s (33:26) | 77.49 MB (inside the accepted 60–80 MB band, under the 80 MB hard cap) | 9 PASS + size WARN | **FIX** (in s30 the velocity arrow is not tangent to the inertial circle; this was already in v1 and review 1 missed it) | PASS (s42 is clean; the s19 storyboard row is stale) | **FIX** (s04 door covers the equations; s23 "leftanticlockwise"; in s11/s12 **b** is hidden behind the hand) | **FIX** (s04 and s15 leave the right half empty for 13–14 s) | PASS (494 cues, QA PASS) | PASS (dashed geostrophic arrows plus a legend give a second cue; 0 flashes) | n/a (none, as the house style requires) | **FIX** |
+
+## Review 1 items, verified on the v2 frames
+| item | state | evidence |
+|---|---|---|
+| M1 s42 derivation | **FIXED**: 3 lines; padded fraction bars clearly longer than the minus; rose strike on both minus signs; gold underline about 20 px under fρ; "geostrophic wind" below | `s42_S06_1722.03.jpg`, `s42_S04_1712.10.jpg` |
+| M2 s40 keyword | **FIXED**: "high → low" sits beside the equation, not on the 1 | `s40_S05_1637.83.jpg` |
+| M3 s11 hand | **FIXED** as specified: open hand, fingers along a (teal), gold fingertip trace to b at 06:38–06:40, thumb rises, keywords in the right half at x ≤ 1700, a above y 860. **New problem**: b is never visible (see N-M4) | `x_s11.jpg`, `s11_S02_0396.38.jpg`, `s11_S04_0405.90.jpg` |
+| M4 s21 plate | **FIXED**: translucent plate; τ down for the clockwise case; thumb-down hand at 14:13–14:16 | `x_s21.jpg`, `s21_S05_0864.48.jpg` |
+| M5 s38 demo | **FIXED**: hand inset with r/u inside the Ian panel; keyword under Ian | `s38_S05_1564.80.jpg` |
+| M6 s23 | **FIXED**: (0×0−1×5, 1×0−0×0, 0) = (−5, 0, 0); single "−k × u" label. **New problem**: typo (N-M3) | `s23_S11_0951.33.jpg`, `s23_S13_0964.27.jpg` |
+| M7 s18 cases | **FIXED**: each panel appears with its sentence; 4-corner parallelogram; p × q = (0, 0, −6) in front, dashed down | `montage/s18_1.jpg`, `s18_S16_0736.12.jpg` |
+| M8 s45/s46 | **PARTIAL**: sea-only arrows, numbered round lenses and no box links are done. Still open: the 13°/21° "arcs" are a 6-px tick, and the labels sit on the violet arrowheads (S-new 12) | `s46_S05_1894.80.jpg`, `x_s46_lens_crop_1894.8.jpg` |
+| M9 caption band | **FIXED**: the 2-fps scan finds one 0.3-s transient (10:35, s17 camera flip, "a × b" label) | `montage/x_s17flip.jpg` |
+| M10 edges | **FIXED**: s11 keywords, s34 "named from where they blow", s25 Ω with head and label, s28 Ω/k labels, s22 τ head and s47 recap hand all sit inside the frame | montages s11, s22, s25, s28, s34, s47 |
+| M11 empty halves (listed cases) | **FIXED** for s03, s09, s10, s13, s21, s23, s24 and the s47 recap beats. **Other empty halves remain** (N-M5, S-new 15) | montages |
+| M12 collisions (listed) | **FIXED** for all 13 listed spots (s05, s08, s09, s20, s24, s25, s26, s27, s28, s37, s39, s43, s44). New collisions are listed below | montages |
+| M13 s25 v | **FIXED**: v is orange and about 260 px, perpendicular to r and Ω | `s25_S06_1045.35.jpg` |
+| M14 s14 view | **FIXED**: x̂ and ŷ are both visible at 08:00 | `s14_S02_0483.73.jpg` |
+| M15 s34 SH arrow | **FIXED**: the South Atlantic high's poleward arrow is turned left (east) and visible (still small, S16) | `s34_S03_1379.67.jpg` |
+| M16 s24 hand | **FIXED**: about 300-px inset, thumb on the Ω axis, curl anticlockwise from above | `s24_S05_0987.05.jpg` |
+| M17 s26 tracks | **FIXED**: two lenses, NH bends right and SH bends left | `s26_S10_1105.33.jpg` |
+| M18 size | **FIXED**: 77.49 MB, under the 80 MB hard cap | qa.json |
+| S1 · S2 · S3 · S4 · S5 | FIXED | s02, s03, s05, s06, s08 montages |
+| S6 s12 fingers | **NOT FIXED**: the index lies along a, but the middle finger points straight up next to the thumb and a × b, and b is hidden (N-M4) | `s12_S04_0428.02.jpg` |
+| S7 · S8 · S9 · S11 · S12 · S13 · S14 · S15 · S18 · S19 · S21 · S25 · S26 · S28 | FIXED | montages |
+| S10 s19 | FIXED on screen: v·∇T sits beside advection, and k×∇p is gone. **The storyboard is stale** (S-new 1) | `s19_S13_0789.70.jpg` |
+| S16 s33/s34 | PARTIAL: the flight keywords overlap the map's faded edge; the turning arrows are still about 25–30 px at 640 px | `s33_S09_1362.15.jpg` |
+| S17 s35–s37 | PARTIAL: "spirals inwards" is fixed. Still open: 24:08–24:10 swaps to a greyscale image with a hard black rectangle; the s37 Ian thumbnail still shows a hard-edged patch | `x_s36.jpg`, `s36_S03_1449.70.jpg`, `s37_S99_1540.75.jpg` |
+| S20 s41 | PARTIAL: the arrows are fine; the "=" between the pushes is still a tiny glyph | `s41_S09_1679.20.jpg` |
+| S22 s44 | PARTIAL: "4 hPa = 400 Pa" now sits at the top, but the stack still shows 6–7 lines (older lines dimmed) | `s44_S08_1797.85.jpg` |
+| S23 s45 | PARTIAL (as the builder says): 8 keyword items remain, and at 31:07 one gold circle is still on the secondary western low, where the arrows are short | `s45_S12_1867.78.jpg` |
+| S24 s46 | FIXED for the boxes (round lenses) and for "at points 1 and 2:" | `s46_S03_1883.92.jpg` |
+| S27 glossary | FIXED: high pressure and density are explained in plain words. Both glosses are about 36 px high (S-new 13) | `x_s40_density_crop.jpg` |
+
+**Physics re-checked on the v2 frames: all correct except s30 (N-M2).**
+- Chirality of the hand poses:
+  - s11 orbit, s14 x̂×ŷ=ẑ / ŷ×ẑ=x̂ / ẑ×x̂=ŷ.
+  - s15 reverses: thumb −ẑ, −x̂, −ŷ.
+  - s16 mini-hands: y×z → right, z×y → left, z×x → up, x×z → down.
+  - s21 thumb down = tightens.
+  - s24 thumb to the North Pole.
+  - s38 inset r→u anticlockwise → up.
+- ⊙/⊗:
+  - ⊙ = towards you and ⊗ = away in s16 and s17.
+  - In s38 Ian is ⊙ (violet columns up) and Idai is ⊗ (rose columns down).
+- Turning by hemisphere:
+  - NH turns right and SH turns left in s26 (lenses), s29, s31 (NH loop clockwise from the top start, SH anticlockwise from the bottom start), s33 and s34.
+  - Ian is anticlockwise from above (south side flows east) and Idai is clockwise (south side flows west).
+  - In s36 the turned streams follow the narration: from the south → east, from the east → north.
+- Geostrophic wind and the numbers:
+  - Low on the left (NH) in s41, s43, s44 and s45.
+  - s25: 465 / 329 / 0 m/s.
+  - s20: 15 / 7.5 N·m.
+  - s44: 1.00×10⁻³ Pa/m, fρ = 1.24×10⁻⁴, 8.1 m/s, and the units reduce to m/s.
+  - s28: f = 1.03×10⁻⁴ s⁻¹; the SH shadow is negative (drawn opposite k).
+  - s42: the algebra is right.
+
+## MUST fix
+- **N-M1 · 01:59.5–02:05 s04 — the door picture flies over the equations.**
+  - Frames: `x_0122.50.jpg`, `s04_S07_0124.10.jpg`, `montage/x_s04door.jpg`.
+  - During "A turning also has an axis…", the door enlarges onto "wind · push west = 0" and covers "west = 0" for about 5 s.
+  - Fix: put the door in free space (for example x 1450–1750, y 560–860), or fade the two equations to 30 % first.
+- **N-M2 · 20:43–20:53 s30 — the inertial-circle picture is physically inconsistent. It was the same in v1; review 1 missed it.**
+  - Frames: `x_1246.00.jpg`, `montage/x_s30.jpg`, `s30_S06_1247.92.jpg`.
+  - The velocity u is drawn with its tip on the parcel, but it is not tangent to the gold trace:
+    - The trace leaves the start point heading south, while u = east.
+    - At t = 4.7 h, u points south while the trace runs west under it.
+    - At 8.5 h, u points west at the circle's leftmost point.
+  - The push is tangent to the trace, not pointing to the circle's centre.
+  - The trace is rotated 90° from the arrows. A parcel starting east and turning right moves on a circle whose centre is south of the start, so the start is the **top** of the circle (as s31 draws correctly).
+  - Fix: build the trace from the same integration as the arrows (circle centre = start + (0, −U/f)), or rotate the trace by −90° about the start point. Then check that u is tangent and the push points to the centre in 3 frames.
+- **N-M3 · 16:00–16:05 s23 — a text bug: "quarter turn leftanticlockwise".**
+  - Frames: `s23_S12_0960.05.jpg`, `s23_S13_0964.27.jpg`.
+  - The two keyword spans are joined with no space or separator.
+  - Fix: "quarter turn left · anticlockwise from above" (the house rule: clockwise words always carry their viewpoint).
+- **N-M4 · 06:30–06:46 s11 and 06:54–07:17 s12 — b, "the second arrow", is hidden behind the hand.**
+  - Frames: `s11_S02_0396.38.jpg`, `s11_S04_0405.90.jpg`, `s12_S04_0428.02.jpg`.
+  - Only the orange "b" label shows, and at 06:45 and 07:08 it sits on the a × b arrowhead and on the gold curl arrowhead.
+  - The narration says "curl your fingers towards b, the second arrow" and "middle finger along b".
+  - In s12 the middle finger also points straight up beside the thumb, so a viewer cannot tell "middle along b" from "thumb up" until the camera turns at 07:17 (S6 is still open).
+  - The fix:
+    - Choose a camera azimuth where b (1, 3, 0) recedes visibly beside the hand, for example the view s11 reaches at 06:49; alternatively make the hand body 60 % opaque.
+    - Put the b label at b's tip, ≥ 12 px from a × b.
+    - In s12, lay the middle finger along the visible b.
+- **N-M5 · Empty right half for more than 10 s (house §5, U-M4.2), not listed in review 1.**
+  - The cases:
+    - s04 01:36–01:50: only a 30-px door icon (`s04_S02_0100.42.jpg`, `s04_S03_0103.88.jpg`).
+    - s15 08:39–08:53: only a dim, small "x̂ × ŷ = ẑ" (`s15_S01_0521.27.jpg`, `s15_S04_0533.08.jpg`).
+  - Fix:
+    - s04: show "wind ↑ · push east / push west" or the question "which way does the push go?" with S02–S03.
+    - s15: show "ŷ × x̂ = ?" (then "−ẑ") with S02–S03.
+
+## SHOULD fix
+1. **s19 storyboard**: `on_screen_eq_extra` for s19 still lists `\mathbf k\times\nabla p`, which v2 no longer draws there.
+   - The equations gate passes only because k×∇p appears later, in s42.
+   - Update the storyboard row so that the contract matches the screen; this is a documentation fix, no re-render needed. It does matter for traceability.
+2. **11:08–11:13 s18**: "p = (3, 0, 0)" fades out exactly while the voice reads "p has components three, zero and zero", and the three panels never label p.
+   - Frame: `montage/x_s18.jpg`.
+   - Fix: keep the p line at the top through S03–S16, and put "p" at each panel's teal tip.
+3. **Keywords run into the colour-bar tick labels.** They read as "1004 pressure", "1006 high → low", "1010 pressure push" (s39–s40, 26:31–27:19) and "1200 km geostrophic balance" (s41, 28:06–28:12).
+   - Frames: `s40_S04_1631.47.jpg`, `s41_S10_1686.38.jpg`.
+   - Fix: start the keyword column ≥ 60 px right of the tick labels.
+4. **15:31–15:51 s23**: the "east" axis word ends 20 px before the calculation "k × u = (…)" on the same baseline (`s23_S11_0951.33.jpg`). Fix: move "east" below the grid edge, or start the calculation at x ≥ 1100.
+5. **18:52–18:54 s27**: after the camera turn, "push" sits on the k and Ω shafts (`s27_S06_1133.50.jpg`). Fix: anchor the label on the push's outer side.
+6. **19:42–19:47 s28 (SH case)**: the "Ω" label sits on the latitude arc, and "φ < 0" is placed far away on the globe (`s28_S10_1185.70.jpg`). Fix: Ω label at the Ω arrow's tip; "φ < 0" beside the gold arc.
+7. **s44**:
+   - 29:40: the gold link from "400 km" lands its arrowhead on the ∇ of |∇p|; it should end at "400 000 m", 12 px clear (`s44_S05_1780.33.jpg`).
+   - 30:07–30:15: the 8.1 m/s arrow starts on the "400 km" label (`s44_S99_1815.65.jpg`).
+8. **06:51–06:53 s11 orbit**: the "a" label sits under "a × b" (`x_0412.00.jpg`).
+9. **16:20–16:30 s24 inset**: the curl ellipse runs through its own label, which reads "west-→-east" (`s24_S05_0987.05.jpg`). Fix: move the label under the ellipse.
+10. **16:53–17:44 s25**:
+    - The two cut-away half-discs read as a heart shape.
+    - The globe's polar texture shows concentric ring artefacts (top left).
+    - Frame: `s25_S06_1045.35.jpg`.
+    - Fix: one meridional cut, or a translucent globe; fix the pole UVs.
+11. **17:56–18:04 s26**: "without the effect" sits on the globe's limb, about 250 px from the dashed path it names (`s26_S05_1083.45.jpg`). Fix: put it next to the dashed line, or drop it once the lenses appear.
+12. **31:18–31:36 s46 lenses**:
+    - Only a 6-px tick marks each angle, and "13°" and "21°" sit on the violet arrowheads.
+    - The 10-m wind is drawn in the same teal as the "real wind" legend (which means 1.5 km).
+    - Frame: `x_s46_lens_crop_1894.8.jpg`.
+    - Fix:
+      - Draw a gold arc (r ≥ 60 px) between the geostrophic and the 10-m arrow, with the label outside the ring.
+      - Draw the 10-m wind as a hollow or shorter teal arrow labelled "10 m".
+13. **Two new glosses are about 36 px high**, below the 44-px floor: "the mass of one cubic metre of air" (s40, 27:12) and "the air presses down harder" (s32, 21:46).
+    - Frames: `x_s40_density_crop.jpg`, `s32_S07_1313.15.jpg`.
+    - Fix: 44 px.
+14. **s47 recap 31:46–32:12**:
+    - b collapses to a dot because of the camera.
+    - The recap introduces "⊥", which the movie never defines.
+    - Frame: `s47_S01_1912.35.jpg`.
+    - Fix: turn the camera so b shows; write "a × b at right angles to a and b", or keep the right-angle tick and drop ⊥.
+15. **Shorter empty halves (3–7 s)**:
+    - s16 09:26–09:32.
+    - s20 13:11–13:17.
+    - s41 27:49–27:53.
+    - s36 24:42–24:48 (only the title).
+    - Fix: reveal the scene's goal keyword with the first sentence.
+16. **24:08–24:10 s36**: the hard cut from true colour to a greyscale image with black rectangles reads as a pasted box (S17). Fix: crossfade over ≥ 1 s and feather the patch edges, or stay in true colour.
+17. **31:07 s45**: one gold circle still marks the secondary western low (S23). Move it to the crowded isobars south-west of the main low.
+
+## NICE
+- **N1–N6** from review 1 are unchanged. N2 (33:26 is longer than the brief) is still worth saying at hand-over.
+- **00:04.5 title teaser**: a stray rose "−" floats under p, and the label reads "(0, 0, −0.41)" (`x_0004.50.jpg`). Harmless, but the dot reference's teaser had no orphan glyph.
+- **10:35**: a 0.3-s caption-band transient during the s17 camera flip.
+- **s33 22:36**: the "lean west" chevrons sit only on the northern side of the equator; the narration says "on either side".
+- **s46**: point 2 sits on a coastline at 640 px. Confirm it is a sea grid point (the CHECK row says sea points).
+- **s42**: the small unlabelled pressure-map thumbnail on the left is decoration with no role.
+- **s12**: the keyword "index × middle = thumb" has uneven spacing around × and =.
+- **s08 05:00**: a 7-line stack, with the product line starting 70 px left of the others.
+
+## Overall: FIX (ch00_cross_product_why review 2 — N-M1 … N-M5; SHOULD 1–17 recommended)
+- Fix loop 1 worked. 17 of 18 review-1 MUST items are fixed, and the 18th (M8) is partly fixed; the s42 derivation, the s21/s38/s23 picture-vs-narration problems and the s18 build now read cleanly.
+- What still blocks `qa_pass`:
+  - One physics error that review 1 missed: the s30 inertial circle is rotated 90° from its velocity arrows.
+  - One visible typo (s23).
+  - The s04 door covering the equations.
+  - The hidden b in the two key right-hand-rule scenes (s11, s12).
+  - Two right halves empty for 13–14 s (s04, s15).
+- All five are local fixes.
+- After the fix loop:
+  1. Re-render s04, s11, s12, s15, s23 and s30, plus any SHOULD scenes taken.
+  2. Re-run `tools/movie_qa.py --storyboard`.
+  3. Update the s19 storyboard row.
+  4. Review again (a short review 3 of the changed scenes is enough).
+
+Disk at review: C: 81 GB free, G: 580 GB free. Review-2 frames: 51 MB, 536 files, local and not committed.
