@@ -102,3 +102,4 @@ run for the changed sentences.
 - D10 ETOPO 2022 (or a DEM via Earth Engine) for sharp Tibet/Alps relief: fetch if the capability tests pick a DEM-based terrain.
 - CalcStack auto-height for fraction rows: house-kit change for the orchestrator.
 - The four CHECK rows re-defined in stage 1 (W44, W45, s53, D11) were reviewed by the orchestrator: claims about the data, narration follows the data; accepted.
+- s00 title: "and how meteorology uses them" is longer than the dot-product subtitle that touched its animation (user phone review 2026-10-27): keep the right-column animation >= 50 px clear (x >= ~1130).
