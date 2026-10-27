@@ -2364,3 +2364,229 @@ I did not edit the movie or its sources.
   5. The size WARN (129.5 MB, cap 160) needs no action.
 
 Disk at review: C: 71 GB free, G: 576 GB free. Review-1 frames: 180 MB, 392 frames + tiles + crops under `reports/movies/ch00/ch00_cross_product_why/review/` (local, not committed).
+
+
+# ch00_cross_product_why v4 fix 1: review 2 (commit 2bf998c)                       2026-10-27
+
+This is a fresh-eyes review of the fix-1 render, `movies/out/ch00/ch00_cross_product_why/1080.mp4` (2907.80 s = 48:28, 129.50 MB, 71 scenes; narration ends at 48:25.00, then a 2.8-s hold).
+
+**How the frames were taken.** I extracted 558 frames with ffmpeg and looked at them:
+- one at every scene midpoint;
+- one at every sentence end minus 0.25 s in s08, s09a, s18–s31 and s39–s46, and at the last sentence of every other scene;
+- one at every review-1 timestamp;
+- one every 1.5 s through the new end scene (47:59–48:28);
+- extra frames and full-resolution crops around anything suspicious.
+
+I also ran a pixel scan of every frame for ink in the edges, in the caption band and in each half of the screen. The frames are in `reports/movies/ch00/ch00_cross_product_why/review/r2/` (`frames/`, `tiles/t_NNN.jpg`, the extra sheets `tiles/x_*.jpg` and `tiles/y_*.jpg`, and `crops/`), 104 MB, local only. I did not edit the movie or its sources.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product_why (v4 fix 1, review 2, @ 2bf998c) | 2907.80 s (48:28); narration ends at 2905.00 s + 2.8-s hold | 129.50 MB (QA WARN: over the 120 MB budget, under the 160 MB cap) | 9 PASS + size WARN (duration, codec, black, frozen 260/260 narrated, loudness −16.0 LUFS / −3.2 dBTP, flashes 0, captions 719 cues, physics 121 hashes, equations 116) | PASS: M1 fixed (the s30 loop is now ≈ 194 km on the map, the same as s31); M2 fixed (× 10 m/s, °, units); deflection, f, k ×, the rotating frame and the geostrophic numbers are all still right | PASS: no KaTeX errors; every equation still matches (2.7)–(2.12) and (2.80) in our notation | **FIX**: 15 of the 17 MUST collisions are gone. Three new places are unreadable: s42 (maths drawn over the strip), s28a (label pile) and s20 (a readout that contradicts the calculation) | SHOULD: the right half stays empty for 14–20 s in s18b, s18c, s25 and s44 | PASS (719 cues = script, ≤ 42 chars, ≤ 17 cps). Three cues are under 1 s (cosmetic) | PASS: 0 flashes. One colour inconsistency is left (the Coriolis push is orange in s23a, s33 and s34) | n/a (none, as the house style requires) | **FIX** |
+
+## Review-1 items, checked at their timestamps
+
+| item | time · scene | state | evidence |
+|---|---|---|---|
+| M1 | 34:47–34:59 · s30 | **FIXED** | The loop is drawn at about 85 px against the 100-km bar, so about 194 km across, as in s31 (35:33). The push is violet |
+| M2 | 32:47–33:05 · s28c | **FIXED** | `2Ω cos φ u = 2 × 7.29×10⁻⁵ s⁻¹ × cos 45° × 10 m/s ≈ 1.03×10⁻³ m/s²` is a three-line CalcStack. Line 1 ends at x ≈ 1878 (cosmetic, C5) |
+| M3 | 06:35–06:52 · s09a | **FIXED** | The key line ends at x ≈ 1875, followed by "= a₁b₂ + a₂b₁ − 2a₂b₁" and "= a₁b₂ − a₂b₁" (underlined) |
+| M4 | 04:49–04:54 · s08 | **FIXED** | "θ ≈ 60.3°, sin θ ≈ 0.868" is on its own row below "≈ 0.496" |
+| M5 | 15:04–15:23 · s20 | **FIXED** (layout). New issue: N-M3 | The keyword "torque" sits beside τ = r × F, and "across = 50 × sin 30° = 25 N" is in the maths zone. The τ readout is under the spanner and the F label at the arrow tip |
+| M6 | 18:14–18:23 · s22c | **FIXED** (layout). New small collisions: S6 | The r label is below the arrow and the L stack starts at x ≥ 1060 |
+| M7 | 19:21–20:05 · s22e | **FIXED** | "east" is at the end of the axis and u is labelled below it. The bars read 0.05 / 0.005 / 0.0005 above "1 kick / 10 kicks / 100 kicks" |
+| M8 | 21:30–22:05 · s23 | **FIXED** | k × u is labelled at its tip and the recipe sits in the maths zone. In S10 the old k × u is dimmed and −k × u = (5, 0, 0) has its own label |
+| M9 | 22:16–22:58 · s23a | **FIXED** | "u = (5, 0, 0) m/s" is below the arrow and the right-angle tick is clear. "30°" and "across: turns" sit above the push |
+| M10 | 24:41–25:23 · s25 | **FIXED** | "radius" is on the circle and the r label is clear of it. The dashed axis passes between "r" and "=" (cosmetic) |
+| M11 | 29:15–29:37 · s27 | **FIXED** | The duplicate line is gone and "Newton" is a gold pointer below the equation |
+| M12 | 30:29–30:35 · s27a | **FIXED** | The inset and "outside: straight" are top right; "route 2: rider's equation" is clear |
+| M13 | 31:48–32:18 · s28b | **FIXED** | The table is at x ≥ 1500 and the top equation is broken into two lines inside the frame |
+| M14 | 32:43–33:05 · s28c | **FIXED** | "u = (u, v, 0)" is at the arrow and "flat part = Ω sin φ k × u" is in the maths zone |
+| M15 | 34:13–34:22 · s29 | **FIXED** | In the SH panel, "−f k × u" is left of its arrow. The NH u label is still split by the arrow (C2) |
+| M16 | 41:03–41:10 · s40 | **FIXED** | "density" sits beside ρ ≈ 1.2 kg/m³ |
+| M17 | 42:37–42:44 · s41a | **FIXED** | "left: L" / "right: H" are clear of "equal and opposite" |
+| S1 | Coriolis push colour | **PARTLY** | It is violet in s27, s27a, s28_f, s29, s30 and s41–s46. It is still **orange** in s23a (22:16–22:58: "push ⊥ wind" and the push arrows along the bending path), s33 (36:11–36:30) and s34 (36:53–37:10). See S1 below |
+| S2 | empty halves | **PARTLY** | Filled: s22a, s22d, s28_f, s47 S10, s22e S1, s23 S1. Still empty: s42 (now a blank thumbnail), s18b and s27 29:03–29:07. New: s18c, s25 and s44. See S2 below |
+| S3 | text at the edges | **FIXED** (mostly) | s26d, s22e, s25, s23, s09a, s28a and s22b are inside. Text still runs to about x 1873–1878 (past 1840, inside 1900) in s09a 06:35, s28c 32:47 and s33 36:47 (C5) |
+| S4 | gold links crossing text | **NOT FIXED** (the builder said partly) | All six are still there, plus one new one. See S4 below |
+| S5 | small collisions | **PARTLY** | Fixed: s08 "sine", s21 F arrow, s23a proton, s43, s45 fρ. Still there: s09, s09a, s22e, s26a, s26b, s26d, s28b, s29. s28a got worse (N-M2) |
+| S6 | 25:30–26:17 · s25b | **FIXED** | A ⊙ y tag sits at the v arrow. The pole case "r = (0, 0, 6371) km, v = (0, 0, 0)" is shown at 26:16.9–26:18.2. Cosmetic: at 26:12 the ⊙ glyph sits on the "6" of "r = (6371, 0, 0) km", and at 26:16.5 the old r label passes over "v = Ω × r" for about 0.4 s |
+| S7 | 29:37 · s27 | **FIXED** | The outside equation stays dimmed above, and the moved terms are highlighted below |
+| S8 | 12:27–12:36 · s18 | **FIXED** | "q = (−0.3, 2, 0)" is shown while q turns, then "q = (0, −2, 0)" with "p × q = (0, 0, −6)" in rose with a "−" |
+| S9 | 35:30 · s31 | **FIXED** | "≈ 194 km" |
+| S10 | 21:05–21:10 · s23 | **FIXED** | "wind: u" is fully in by the end of S2 |
+
+**About the label checker.** The builder's checker reports 0 overlaps, but N-M1, N-M2, S6 and S7 are real overlaps. It seems to miss three kinds of overlap:
+- KaTeX blocks drawn over picture fills (the s42 strip);
+- labels on projected 3-D arrows (s28a);
+- arrowheads and arcs that cross text (s22c).
+
+Extend it to test text boxes against the boxes of filled shapes and arrow or arc paths, not only against other text boxes.
+
+## The UV2 items that review 1 marked PARTLY
+
+| # | state now | evidence / what is left |
+|---|---|---|
+| UV2-08 | **FIXED** | The s18 q past "opposite" now has its components (12:30, 12:35), and every component label that review 1 found overprinted is now readable |
+| UV2-10 | **PARTLY** | s09a, s22c and s22e are clean. Left: N-M3 (s20, the τ readout shows 7.5 about 10 s before it is spoken, next to the "15" calculation), S2 (s18b and s18c empty right halves), S3 (the s18b S9 keyword lines are missing) and S6 (s22c) |
+| UV2-20 | **FIXED** | M10 and S6 are done. Left: S2 (s25, 24:37–24:57, the maths zone is empty) |
+| UV2-22 | **FIXED** | M11, M12 and S7 are done |
+| UV2-23 | **FIXED** | M13 is done. New small issue: S5 (s28_f "sin φCoriolis parameter"). Note that s28a (UV2-21, FIXED in review 1) has regressed into a label pile (N-M2) |
+| UV2-24 | **FIXED** | M2 and M14 are done |
+| UV2-29 | **PARTLY** | M16 and M17 are done. New: N-M1 (s42, the derivation is drawn over the strip). Still there: S4 (s44 link arrowhead on "∇p =", s45 crossing links) and S2 (s44 empty right half) |
+
+## Physics and equations (checked again on the changed scenes, no action)
+- **s30.** The loop radius now matches 97 km on the Dordogne patch, the period 2π/f ≈ 16.9 h and the speed 10.0 m/s. It turns clockwise seen from above in the NH, the same as s31.
+- **s28c.** 2 × 7.29×10⁻⁵ × cos 45° × 10 ≈ 1.03×10⁻³ m/s² is right. "About 10 000 × weaker than g" is fair (9.8 / 1.03×10⁻³ ≈ 9500).
+- **s29.** With an east wind, k × u = (0, 10) north in every panel:
+  - NH: −f k × u points south (right);
+  - equator: f = 0, no turning;
+  - SH: f < 0, so −f k × u points north (left).
+  All right.
+- **s25b.** Ω × r = (0, 7.29×10⁻⁵ × 4 505 000, 0) ≈ (0, 329, 0) m/s, east. At the equator (0, 465, 0) m/s; at the pole (0, 0, 0). All right.
+- **s42.** −f k × u − (1/ρ)∇p = 0, then −f k × u = (1/ρ)∇p, then −f k × (k × u) = (1/ρ) k × ∇p, then k × (k × u) = −u, then f u = (1/ρ) k × ∇p, then u = (1/(fρ)) k × ∇p. Each step is right, one move per line.
+- **s48.** The narration is the house §3 weather/climate ending word for word, with "the cross product" as the concept. It has no URL, no book, no lab and no "thanks for watching".
+
+## MUST fix
+
+1. **N-M1 · 42:54–43:14 · s42 S2–S5. The derivation is drawn over the picture.**
+   - What is wrong:
+     - The maths stack starts at x ≈ 760, inside the picture zone (80–1000).
+     - The orange brace label "pressure push" lies on the strip's top-right corner (42:56).
+     - Line 2 "−f k × u = (1/ρ)∇p" starts on the strip's right edge (43:04).
+     - Line 3 "−f **k** × (k × u) = …" begins inside the purple strip (43:12). The gold "k ×" that the narration points at sits on purple and cannot be read at 640 px.
+     - From 43:17 to 43:36 the picture zone shows only a small blank purple rectangle (the strip thumbnail) under the k × (k × u) half-turn icon. This is review-1 S2 for s42, still open.
+   - Fix:
+     - Keep the strip and its two push arrows in x 80–1000 for the whole scene.
+     - Set the four-line CalcStack at x ≥ 1060, older lines dimmed (the house §6 pattern). Put the two brace labels under line 1 inside the maths zone.
+     - Drop the blank thumbnail. Instead, keep the small strip with its two equal and opposite arrows beside the half-turn icon, so the picture stays the situation being derived.
+2. **N-M2 · 31:09–31:37 · s28a S5–S9. The local-axes labels pile up at the place.**
+   - What is wrong:
+     - 31:09–31:30: "Ω sin φ", "up = k", the yellow "φ" and "Ω cos φ" are printed on top of each other around the place, with two separate "Ω" labels and the east arrow running through "Ω cos·φ".
+     - 31:31–31:37: "Ω cos φ" sits on "up = k", and an arrow tip strikes the "=" (it reads "up ± k").
+     - This is the scene that answers UV2-21 ("three directions = 3-D"). A first-time viewer cannot tell which label belongs to which arrow.
+     - Review 1 had it as a small S5 item; it is now worse.
+   - Fix:
+     - Put the three axis words (east / north / up = k) at the far tips of long axis arrows, outside the globe silhouette.
+     - Put "Ω cos φ" and "Ω sin φ" at the tips of their component arrows, on the side away from the axes. Hide the duplicate Ω label at the place while the split is shown.
+     - Fade "up = k" once "Ω sin φ" appears, since the maths zone already says "up".
+3. **N-M3 · 15:04–15:14 · s20 S8. The τ readout gives the answer early and contradicts the screen.**
+   - What is wrong:
+     - When F swings to 30° at the start of S8 ("Push at thirty degrees…", 15:04.3), the readout under the spanner already shows **τ = (0, 0, 7.5) N m**.
+     - At the same moment the maths zone still shows |τ| = 0.3 × 50 = **15** N m, and the voice is still on "about forty three newtons… twenty five newtons".
+     - 7.5 is first spoken at 15:14.2 ("The torque drops to seven point five newton metres").
+     - This breaks two house rules (§4 goal-first, answer after the calculation; §6 nothing appears before it is spoken). For 10 s, two different torques are on screen.
+   - Fix: hold the readout at "(0, 0, 15)", or dim it to "τ = ?", until AT(9, "seven point five"). Then switch it to 7.5 together with the "|τ| = 0.3 × 25 = 7.5 N m" line.
+
+## SHOULD fix
+
+1. **S1 · Coriolis push colour (house §5: a quantity keeps its colour).** The builder's note says "violet throughout", but three scenes still draw the Earth-spin push in orange (the second-vector and pressure colour):
+   - s23a 22:16–22:58: "push ⊥ wind" and the push arrows along the bending path. This is the first time the spin's push is drawn.
+   - s33 36:11–36:30: the −f k × u mini arrows on the trades.
+   - s34 36:53–37:10: the same on the westerlies.
+   - The storyboard still says "orange" for s23a, s29 and s33. Fix those entries too, so a re-render does not bring the colour back.
+   - The proton's magnetic push (s22d) and the kicks (s22e) may stay orange (generic pushes), but s23a S3 says the spin's push is "like the magnet's push", so violet there makes the link visible.
+2. **S2 · Empty halves (house §5, ≤ 3 s).** Fix: show the keyword or the first calculation line on its words.
+   - s18b 12:55–13:15: the right half is empty except "dot product: along" for about 3 s.
+   - **s18b S9 13:39–13:45: the right half is completely empty.** The CalcStack has gone, and the storyboard's two keyword lines are not drawn (`a·b → along (cos θ)` slate, `a × b → across (sin θ)` violet, plus the tick on "sin θ ?"). The voice says exactly that comparison, so this is also picture-vs-voice.
+   - s18c 13:45–14:04, 19 s, S1–S5: nothing on the right until the recipe at S6. Fix: show "only the part along changes" on S1, "base 5.099 · height 2.75 → area 14" on S4–S5, and move the "a × b = (0, 0, 14)" line earlier.
+   - s25 24:37–24:57, 20 s, S2–S5: only "how fast?" is shown (for 3 s). Fix: show "circle of latitude" (S2), "radius = distance from the axis" (S3), "θ: angle between Ω and r" (S4), then the radius = |r| sin θ line on S5.
+   - s44 44:02–44:12, 10 s: the right half is empty before "4 hPa = 400 Pa". Fix: show the goal keyword "how fast is the geostrophic wind?" on S1.
+   - s42 43:17–43:36: see N-M1.
+   - Shorter, cosmetic: s20 14:28–14:32 (the frame is empty except one keyword); s19 20:17–20:22 (only the two column heads); s27 29:03–29:07.
+3. **S3 · 21:42–21:52 · s23 S7. The stick figure contradicts its label.**
+   - What is wrong: the figure labelled "facing downwind" stands upright with a gold arrow above its head pointing north (up the map), while the wind blows east. A first-time viewer reads it as "a person facing north".
+   - Fix: draw the figure seen from above, facing east (along u), with its left arm (gold) pointing north on "ninety degrees to its left", as the storyboard describes.
+4. **S4 · Gold links crossing text or each other (house §6).** None of review-1 S4 is fixed:
+   - s08 04:33 (arrowhead inside "√(5² + 1²)") and 04:42 (two links cross each other and the θ arc);
+   - s09a 06:50–06:52 (the link from "= a₁b₂ − a₂b₁" curls up and lands on the ")" of the top line, through the struck "−2a₂b₁");
+   - s18b 13:27–13:38 (the arrowhead lands on the "×" of "3.162 × 0.868");
+   - s22b 17:40 (the arrowhead lands on the "14" of "(0, 0, 14)");
+   - s44 44:19–44:27 (the arrowhead lands on the "=" of "∇p =");
+   - s45 45:22–45:33 (the two links cross).
+   - New: s23 21:21–21:28 (the link from "axis of turning" crosses the map label "east").
+   - Fix: end every link 12 px short of the text's bounding box, on its near side, and route the s08 and s45 pairs so that they do not cross. Add link-versus-text and link-versus-link tests to the label checker.
+5. **S5 · 33:11–33:55 · s28_f.** The keyword "Coriolis parameter" butts against the KaTeX "f = 2Ω sin φ" with no gap ("sin φCoriolis parameter").
+   - Fix: put the keyword under the equation, or leave a 30-px gap.
+6. **S6 · 18:13–18:29 · s22c S7–S8. Three new small collisions.**
+   - The violet L arrowhead overprints "kg" in "p = (0, 6, 0) kg m/s".
+   - The gold rotation arc passes through the third component of "r = (0.5, 0, 0) m".
+   - At 18:22–18:29, "string pulls along r" is crossed by the r arrow and touches the "r" tip label.
+   - Fix: put the p label above and left of the ball; draw the arc inside the r label's box or move the r label below the centre; put "string pulls along r" under the circle.
+7. **S7 · House-style decision: the end card.**
+   - HOUSE_STYLE §3 (2026-10-27) says: "The pure maths movies (dot product, cross product, grad/div/curl…) keep the maths-tutorial ending above."
+   - This movie now uses the weather/climate ending (voice and three keyword lines).
+   - The ending itself is well made:
+     - the text is word for word;
+     - the reveals land on their words (48:09 the line "meteorology · atmospheric science · climate", 48:15.8 the gold line, 48:18.5 the notebook, 48:20 the other notebooks);
+     - there is a 2.8-s hold.
+   - It fits, since half the movie is meteorology. But it departs from the written rule, and I found no user note asking for it.
+   - Fix (either one):
+     - Ask the user, and if they agree, record the exception in HOUSE_STYLE §3 and §12 (for example "maths movies whose second half is a weather application may use the weather ending").
+     - Or revert s48 to the maths ending.
+
+## COSMETIC
+- **C1 · Small overlaps left from review-1 S5:**
+  - s09 05:52: "parallelogram" touches "b = (1, 3)";
+  - s09a 06:23+: the corner "1" touches the b arrow;
+  - s22a 16:27: "plane of r and F" butts against "τ = r × F";
+  - s22a 16:49–17:09: "area 14" is crossed by the a arrow;
+  - s22e 19:42–20:02: "≈ 5.7°" is sliced by u;
+  - s26a 27:18: the keyword is on the arc;
+  - s26b 27:30–27:57: the r label is under the ball;
+  - s26d 28:44–29:01: "0.75 m/s" and "Ω × u" are on the rim;
+  - s28b 31:42–32:18: "k" touches "Ω sin φ";
+  - s29 34:05–34:22: the NH arrow splits "u | (10, 0) m/s";
+  - s31 35:27: the clock touches "left · towards the north";
+  - s44 44:30–44:47: "k × ∇p" crosses the strip's edge.
+- **C2 · Review-1 cosmetics still open:**
+  - s18 grid planes in the caption band (11:42–12:30);
+  - s38 orange wind arrows and u label;
+  - s39 "1000 km" with no bar, and "north" touching the map edge;
+  - s40/s40a: the L glyph is cut by the top of the map;
+  - s43: the brace labels abut;
+  - s03 01:08–01:14: the right half is empty;
+  - s22c 17:42–17:46: only a dot and a keyword;
+  - s03 / s06 text at x ≈ 1860.
+- **C3 · 26:12 · s25b.** The ⊙ glyph sits on the "6" of "r = (6371, 0, 0) km". At 26:16.5 the old r label passes over "v = Ω × r" for about 0.4 s.
+- **C4 · Captions.** Three cues are shorter than 1 s (house §8: 1–7 s):
+  - 00:38.45 "In weather," (0.84 s);
+  - 04:24.15 "By Pythagoras," (0.99 s);
+  - 39:10.85 "Near its peak," (0.98 s).
+  Merge each with the next cue.
+- **C5 · Text past x 1840 (inside 1900):** s09a 06:35–06:52 (x ≈ 1875), s28c 32:47 (x ≈ 1878), s33 36:47 (x ≈ 1873).
+
+## House-style conformance
+- **Conforms.** The opening title and voice are unchanged and conform. There are:
+  - no headings, boxes, references, badges or URLs;
+  - keywords only;
+  - no text below 44 px seen;
+  - picture-to-number links (but see S4);
+  - goal-before-calculation, except N-M3;
+  - new terms defined (Coriolis parameter, geostrophic, reanalysis, isobars, hectopascals).
+- **The end card** matches the reference layout (`ch00_dot_product_why` end frame compared): the four thumbnails, the keyword lines, the notebook icons and the hold. The only difference is the third keyword line, which comes from the chosen ending (S7).
+- **Departures:** N-M1, N-M2, N-M3 (collisions and an early number); S1 (colour); S2 (empty halves); S4 (links); S7 (the ending rule).
+
+## Overall: FIX (ch00_cross_product_why v4 fix 1 review 2 — N-M1…N-M3; S1–S7 recommended)
+- **Fix 1 cleared review 1's blocking list.**
+  - Both physics or arithmetic errors (M1 the s30 scale, M2 the s28c product) are fixed.
+  - All fifteen review-1 collisions (M3–M17) are fixed.
+  - S6–S10 are fixed.
+  - UV2-08, 20, 22, 23 and 24 are now FIXED; UV2-10 and UV2-29 are still PARTLY.
+- **What blocks `qa_pass`:** three new problems that a viewer will notice, all local to `CrossProductWhy.tsx`:
+  - s42: the derivation is drawn over the strip;
+  - s28a: the local-axes labels pile up;
+  - s20: τ = 7.5 shows 10 s early, next to the "15" calculation.
+- **SHOULD items.** These are what the builder reported as only partly done, or claimed done:
+  - S1: the Coriolis push is still orange in s23a, s33 and s34, despite "violet throughout";
+  - S2: 14–20-s empty right halves in s18b (with the missing S9 keywords), s18c, s25 and s44;
+  - S4: all the gold-link crossings;
+  - S3: the s23 stick figure faces north;
+  - S7: the end card follows the weather ending against the written rule. This needs one user decision.
+- **No re-narration or new data is needed.**
+- **Next steps:**
+  1. Re-render s18b, s18c, s20, s22c, s23, s23a, s25, s28a, s28_f, s33, s34, s42 and s44 (plus s08, s09a, s22b and s45 for the links).
+  2. Extend the label checker to test text against filled shapes and against arrow, arc and link paths.
+  3. Re-run `tools/movie_qa.py --storyboard`.
+  4. Run a short review 3 of those scenes.
+
+Disk at review: C: 65 GB free, G: 564 GB free. Review-2 frames: 104 MB (558 frames, 141 sheets, 78 crops) under `reports/movies/ch00/ch00_cross_product_why/review/r2/` (local, not committed).

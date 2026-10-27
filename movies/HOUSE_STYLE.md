@@ -93,7 +93,9 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   - "a series of tutorials" (68 px);
   - "meteorology · atmospheric science · climate" (54 px; ocean movies use "· oceanography");
   - "the ideas, and the maths behind them" (54 px, gold).
-- The pure maths movies (dot product, cross product, grad/div/curl…) keep the maths-tutorial ending above.
+- The pure maths movies (dot product, grad/div/curl…) keep the maths-tutorial ending above. **Exception:** the
+  cross-product movie uses the weather/climate ending (user, 2026-10-27: "use the new ending for the cross-product movie too"),
+  because its second half is Coriolis and real weather.
 
 ## 4. Voice and narration
 - **Voice:** Kokoro `af_bella`, speed **1.0**. Every movie sounds the same.
@@ -288,3 +290,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-25: created from the approved reference movie ch00_dot_product_why v6 fix 1 (user: "I love it… make sure next time … these design choices … are automatically passed to all the next videos").
 - 2026-10-27: §3 adds the ending for weather, climate and ocean movies (user: say and write that the videos are made for students of meteorology, atmospheric science and climate, and anyone who wants to see the maths behind the ideas).
 - 2026-10-27: §8 a different score per movie, matched to its content; sound effects (water, waves, rain, wind, storm…) where the picture shows them (user).
+- 2026-10-27: §3 the cross-product movie takes the weather/climate ending (user).
