@@ -128,6 +128,8 @@ possible … appropriate animation and also data animation."
 - **Render GPU:** the RTX A1000 renders every movie (user set Windows graphics preference "High performance" for
   Remotion's chrome-headless-shell, 2026-10-27); each movie renders entirely on one GPU and `qa.json` records it.
 
+- **User likes the Cesium drape** (2026-10-27, on `captests/C1_static_map_to_3d/cesium_drape_capture.mp4`: "looks great"): for static-map-on-globe/terrain shots, try Cesium (no Ion; our imagery + heightmap, pixel-identical frames, ~0.5 s/frame) alongside the three.js route and use it where it looks better; its frames are composited in Remotion with our own labels.
+
 ## Map toolkit set-up (user, 2026-10-27: "go ahead")
 The map and 3-D tools are installed so agents can run them on their own: separate environments (`.venv-maps`, a
 conda/micromamba env for GMT if pip cannot supply it, an npm tree under `tools/maptools/js/`), one render command
