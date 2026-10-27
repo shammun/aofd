@@ -6,7 +6,10 @@ well together and what does not work at all (dropped from later planning), not t
 
 Rules: real data only (`data/derived/ch00/`, G: raw, Earth Engine with project `uhiphd`, GIBS); render on the RTX via
 Remotion's chrome-headless-shell; every output gets a sidecar (data, tool versions, GPU, time, licence, credit);
-outputs under `outputs/captests/<id>/` (git-ignored) plus a contact sheet; short clips ≤ 20 s at 1080p.
+ALL outputs in one folder, `G:/Geophysical Fluid Dynamics/aofd-data/captests/<id>_<short-name>/` (never committed, never
+uploaded: the user views and then deletes them), plus a contact sheet per case; short clips ≤ 20 s at 1080p; for the
+interactive kinds (leafmap / MapLibre / deck.gl / Cesium / GeoLibre) also a self-contained local HTML page the user can
+open and play with.
 
 ## The cases (≈ 26)
 
@@ -43,7 +46,14 @@ outputs under `outputs/captests/<id>/` (git-ignored) plus a contact sheet; short
 works? (yes / partly / no) · best tool or combination · runner-up · what failed and why · time per frame · deterministic?
 (bit-identical, pixel-close, or not) · licence and credit · a one-line verdict on how well it teaches.
 
-## Output
-`research/capability_tests.md` (results table + verdicts + "drop list" of tools/combinations not to use again),
-contact sheets and clips under `outputs/captests/`, the best clips uploaded to the user's Drive (`aofd movies/capability
-tests/`) with links, and updates to the `map-toolkit` skill (what works, recipes that worked).
+## Output (user, 2026-10-27: "share all the outputs … don't push them to Google Drive … I will delete them")
+1. **The folder** `G:/Geophysical Fluid Dynamics/aofd-data/captests/` holds everything: one sub-folder per case
+   (`S1_synoptic_map/`, `A1_ciaran_loop/`, `G1_globe_field/` …) with every tool's output (PNG, MP4, HTML), its sidecar
+   and a contact sheet, plus `INDEX.html` (a local page listing every case and tool with thumbnails, links to the files,
+   and the verdicts) and `README.md`. Not on Drive, not in git.
+2. **A narrated showcase movie** `captests/showcase.mp4` (Remotion + Kokoro af_bella, house look, local review only):
+   case by case it shows each output (stills, clips, 3-D renders, screen captures of the interactive pages), names the
+   data and the tool or combination that made it, says what worked, what did not and why, and which one wins. It ends
+   with the drop list and the recommended toolchain. Captions included.
+3. `research/capability_tests.md` (results table + verdicts + "drop list"), committed (text only, no images).
+4. The `map-toolkit` skill updated with what works and the recipes that worked.
