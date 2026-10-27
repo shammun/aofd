@@ -2590,3 +2590,199 @@ Extend it to test text boxes against the boxes of filled shapes and arrow or arc
   4. Run a short review 3 of those scenes.
 
 Disk at review: C: 65 GB free, G: 564 GB free. Review-2 frames: 104 MB (558 frames, 141 sheets, 78 crops) under `reports/movies/ch00/ch00_cross_product_why/review/r2/` (local, not committed).
+
+
+# ch00_cross_product_why v4 fix 2: review 3 (commit a1cc435)                       2026-10-27
+
+This is the third and last fresh-eyes review. It covers the fix-2 render, `movies/out/ch00/ch00_cross_product_why/1080.mp4`: 2907.80 s (48:28), 128.79 MB, 71 scenes. The narration ends at 48:25.30, followed by a 2.5-s hold. I did not edit the movie or its sources.
+
+**How the frames were taken.** I extracted 520 frames with ffmpeg and looked at all of them, as 640-px cells, with full-resolution crops where something looked wrong:
+- one frame at every scene midpoint (71);
+- every review-2 item at its timestamp:
+  - s20 at 1–3-s steps;
+  - s28a at 2–4-s steps;
+  - s42 at 2–4-s steps;
+- sentence end minus 0.25 s in 34 dense scenes (s08, s09a, s18, s18b, s18c, s19–s22e, s23, s25–s31, s39–s46);
+- the representative frame of each of the checker's 109 contact keys;
+- the end card every 1–5 s from 47:59 to 48:27.7;
+- 0.15-s steps through the s03 door swing.
+
+I also ran two measurements over the whole movie:
+- a pixel scan at 2 fps for empty screen halves;
+- an audio analysis: loudness of speech against music-only gaps, stereo balance, peaks and clipping.
+
+The frames are in `reports/movies/ch00/ch00_cross_product_why/review/r3/` (`frames/`, `tiles/`, `crops/`), 61 MB, local only.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product_why (v4 fix 2, review 3, @ a1cc435) | 2907.80 s (48:28); narration ends at 2905.30 s, then a 2.5-s hold | 128.79 MB (QA WARN: over the 120-MB budget, under the 160-MB cap) | 9 PASS + size WARN: duration, codec (H.264 High, yuv420p, AAC, faststart), black 0, frozen 262/262 narrated, loudness −16.0 LUFS / −3.2 dBTP, flashes 0/s, captions 719, physics 121 hashes, equations 116 | PASS: Northern Hemisphere right / Southern Hemisphere left (s29, s31, s33, s34); f = 0 at the equator; s27a minus → right, against the turning; s30 loop clockwise seen from above (Northern Hemisphere); "Coriolis" is called a push felt in the turning frame | PASS: s42 chain checked again line by line; no KaTeX errors | PASS with notes: N-M1 and N-M2 are fixed. One real contact is left (s25b label, SHOULD). The rest are cosmetic | PASS: N-M3 is fixed. Empty halves remain (SHOULD) | PASS: 719 cues = script, ≤ 42 chars, ≤ 17 cps. Three cues are under 1 s (cosmetic) | PASS: 0 flashes; voice centred; music ≈ 15 dB under the voice; no clipping | n/a (none, as the house style requires) | **PASS** |
+
+## Review-2 items, checked at their timestamps
+
+| item | time · scene | state | evidence |
+|---|---|---|---|
+| N-M1 | 42:54–43:36 · s42 | **FIXED** | The strip and its two pushes stay in the picture zone (x 80–1000), with their labels inside the strip. The CalcStack is entirely in the maths zone (x ≥ 1060), with the brace labels under line 1. The lines appear on their words: line 2 at 43:04, line 3 at 43:12, k × (k × u) = −u at 43:20, f u at 43:26, u = … at 43:29, then the gold underline. The blank thumbnail is gone: from 43:15 a small strip with both arrows sits under the half-turn icon (k × u, −u). Cosmetic C3: the labels overflow for about 1 s while the strip shrinks (43:13–43:15) |
+| N-M2 | 31:09–31:37 · s28a | **FIXED** | "east" / "north" / "up = k" are at the far tips. On the split (31:09), "up = k" fades to "up". "Ω cos φ" and "Ω sin φ" sit at their component tips on the outer side, with one Ω label. Nothing overprints at 31:13–31:30. Pole (31:32) and equator (31:35) are clean. Cosmetic: at 31:32–31:34 the pole Ω arrowhead touches the top frame edge (the checker's single "edge" flag) |
+| N-M3 | 15:04–15:14 · s20 | **FIXED** | The readout shows "τ = (0, 0, ?) N m" from 15:04.6 until 7.5 is spoken (15:14.2). It counts down (10.2 at 15:16.0) and shows "(0, 0, 7.5)" next to "\|τ\| = 0.3 × 25 = 7.5 N m" at 15:17.5. Only one torque is on screen at a time |
+| S1 | Coriolis push colour | **FIXED** | Violet in s23a (22:16–22:55: "push ⊥ wind", the push arrows, "push = (strength) × k × u"), s33 (36:20, 36:30) and s34 (37:03, 37:10). The storyboard has no orange Coriolis push left |
+| S2 | empty halves | **PARTLY** | All five listed places are fixed: s18b S1–S9 (including the S9 lines `a·b → along (cos θ)`, `a×b → across (sin θ)` at 13:43.9), s18c, s25, s44 and s42. The whole-movie scan finds others, mostly at scene starts (R3-S1 below) |
+| S3 | 21:42–21:52 · s23 | **FIXED** | The figure is seen from above, facing east along u, with the gold "left arm" pointing north. The "facing downwind" label is clear |
+| S4 | gold links | **PARTLY** | Clean now: s09a 06:33 (ends 12 px short of "14"), s09a 06:52 (now goes round line 2 to ")"; it grazes the struck "−2a₂b₁", cosmetic), s18b 13:37, s22b 17:40, s44 44:21, s45 45:27 (parallel, no crossing), s23 21:21–21:28 (clear of "east"). Left: s08 04:42–04:59 (R3-S4) |
+| S5 | 33:11–33:55 · s28_f | **FIXED** | "Coriolis parameter" sits under "f = 2Ω sin φ" |
+| S6 | 18:13–18:29 · s22c | **FIXED** | The p label is above and left of the ball, the L arrowhead is clear of "kg", and "string pulls along r" (rose) is in the maths zone |
+| S7 | end card rule | **RESOLVED** | HOUSE_STYLE §3 now records the user's exception: the cross-product movie uses the weather/climate ending. The end card at 48:01–48:27.7 shows four thumbnails, then "a series of tutorials" (48:01), "meteorology · atmospheric science · climate" (48:09.5), the gold "the ideas, and the maths behind them" (48:16.5), the cross-product notebook (48:18) and the other notebooks (48:21), then the hold. There is no URL, book or "thanks" |
+
+## The label checker's contacts, triaged
+
+`G:/…/v4/labels/f2_after3/report.json` has 733 flags. They group into **109 unique contacts** (108 shape, arrow or text contacts plus 1 edge flag) in **36 scenes**. I looked at the representative frame of each, and at a sequence wherever a contact could be real.
+
+| class | count | where | judgement |
+|---|---|---|---|
+| **(a) Real legibility defect at 640 px** | **4 keys, 1 place** | s25b 26:11.5–26:16.0: "r = (6371, 0, 0) km" with the ⊙ y glyph ring and the gold axis on "(6", and the r arrow tail through "r =" | It reads "r = ⊙371, 0, 0) km". See **R3-S2** |
+| Readable, but touched (cosmetic) | 39 | s22a "area 14" / "normal" crossed by arrows · s25a "6371 km" and "φ = 45°" crossed by the bracket, the z axis and the arc · s26d rim labels "0.75 m/s", "Ω × u", "1.4 m/s" · s28b/s28c "north" on the dashed Ω cos φ line and "Ω sin φ" crossed by the thin k arrow · s29 the Northern-Hemisphere "u \| (10, 0) m/s" split · s17 11:02 "a × b = (0, 0, 14)" crossed during the camera move · s46 ring over the "C" of Cornwall · s26a "measured against a turning floor" on the rim · s28a the pole Ω arrowhead at the top edge | All readable at 640 px. See C1 |
+| (b) Intended or harmless | 66 | Labels on box or disc fills by design: s09a "2.5 / 1.5 / 1" and the "+" proton in s22d. Labels touching isobars or map rectangles (s39, s40, s40a, s32). Labels on arcs or bands by design: s03/s22 "r" on the swing arc, s31 "≈ 194 km", s47 "across", s30 "push". Momentary sweeps: s00 title q/p, s12 "a × b" in the camera move, s20 "30°" on the spanner. Small glyphs: s05 ŷ / "1", s07 "3", s10 "?", s11 θ, s21 τ / "−" | No action |
+
+What the checker misses, found in the frames: R3-S3 (s03, a 2-D right-angle tick left floating while the 3-D door swings), R3-S4 (s08, a link knot at the origin) and the s42 transition overflow (C3).
+
+## Full-movie pass
+
+**Scene midpoints.** I looked at all 71 midpoints and found no regression from the 331-line TSX change in fix 2. Every equation was re-read on screen against the storyboard's LaTeX; all match:
+- (2.7)–(2.12) and (2.80) chains in our notation;
+- s28b/s28c Ω × u components;
+- s44 numbers: ∇p = (0, −1.00×10⁻³) Pa/m, fρ ≈ 1.24×10⁻⁴, u ≈ (8.1, 0) m/s, both pushes ≈ 8.3×10⁻⁴ m/s².
+
+**Sentence ends in dense scenes.** I checked 34 scenes at the end of each sentence.
+- Reveals sit on their words in all of them. Checked: s42 (above), s28a (split 31:09, numbers 31:21, components 31:30, pole/equator 31:33), s25 (one keyword per sentence) and s44 (each CalcStack line at its sentence).
+- One small timing slip: in s28a S2 (30:45–30:52) the north arrow appears about 1 s before east, although "east" is said first (cosmetic).
+
+**End card.** Conforms (see S7).
+
+**Audio.** The music is "rotation-turning", seed 3, recorded in `sound.yaml` and the storyboard `music:` block, with `effects: []`. These are measured checks only; I did not listen to the audio.
+
+| quantity | value |
+|---|---|
+| Integrated loudness | −16.0 LUFS |
+| Loudness range (LRA) | 4.3 LU |
+| Peak | L −3.5 dBFS / R −3.2 dBFS (≤ −1.5 dBTP) |
+| Flat factor | 0 (no clipping) |
+| Speech RMS, median | −16.7 dBFS |
+| Speech RMS, quietest sentence | −18.9 dBFS (20:30.8) |
+| Music-only gaps, median | −34.2 dBFS |
+| Music-only gaps, p95 | −32.0 dBFS |
+| Music-only gaps, loudest | −30.5 dBFS (35:37) |
+
+- **Voice over music.** The voice sits about 15 dB above the music bed (more under speech, which is ducked a further 5 dB), so the music never drowns the voice.
+- **Stereo.** The voice is centred (L/R balance within ±0.23 dB). The music pans about ±5 dB in the gaps, which is the "circling" design.
+- **Edges.** The 0.3-s lead-in is silent (−84 dBFS) and the final hold fades to −52 dBFS.
+- **No sound effects.** No gap is louder than the bed.
+
+**Captions.** 719 cues, in order, with none longer than 7 s, none over 42 chars and none over 17 cps. The last cue ends at 48:25.0, inside the audio. Three cues are still under 1 s (C5).
+
+## MUST fix
+None.
+
+## SHOULD fix (recommended for any future re-render; none blocks `qa_pass`)
+
+1. **R3-S1 · Empty halves longer than about 3 s (house §5, U-M4.2).** These were found by the whole-movie scan and are not in review 2's list. The picture is present in each, but the other half is empty.
+
+   | time | scene | length | fix |
+   |---|---|---|---|
+   | 14:33–14:52 | s20 S3–S5 | 19 s | Keep the keyword "only the part across turns" (now shown only from 14:28.8 to 14:33) until S6. Add "along → pulls · across → turns" on AT(5, "only the part across") |
+   | 30:40.5–30:56 | s28a S1–S3 | 15.5 s | Add "on Earth: a sphere, Ω tilted" on S1 and "east · north · up" on S2, each word lit as it is spoken (and the axis arrows in that order), then "up = k" on S3 |
+   | 05:00.5–05:10 | s09 S1–S2 | 9.5 s | Add "a picture for \|a × b\|" on S1, then "drop ⊥ onto b's line" on S2 |
+   | 30:04.5–30:13.5 | s27a S1–S2 | 9 s | Add "the minus?" on S1, then "Ω up → Ω × u: left" on S2 |
+   | 17:49.5–17:57.5 | s22c S2–S3 | 8 s | Keep "many places", then add "ball on a string" (S2) and "r = (0.5, 0, 0) m" in the maths zone (S3) |
+   | 23:43–23:51 | s25a S1–S2 | 8 s | Add "where is our place?" on S1, then "position vector r: centre → place" on S2 |
+
+   Cosmetic, 3.5–7 s:
+   - 27:20–27:27 s26b, 35:02.5–35:09.5 s31, 36:54–37:00.5 s34;
+   - 01:09–01:14.5 s03, 04:04–04:09 s08, 40:09–40:14 s39;
+   - 08:49–08:53 s14, 10:59–11:03.5 s17, 18:30.5–18:34.5 s22d, 22:06–22:10.5 s23a;
+   - 31:38–31:42 s28b, 36:08–36:12 s33, 42:51–42:55 s42, 26:18.5–26:22 s26;
+   - left half 14:26–14:32 s20.
+2. **R3-S2 · 26:10.5–26:16.0 · s25b S8. The r label is overprinted.**
+   - What is wrong:
+     - The ⊙ y-axis glyph ring and the gold Earth axis sit on the start of the r label: "(" of "(4505, 0, 4505)" at 26:10.5, then "(6" of "(6371, 0, 0)" from 26:11.5.
+     - The r arrow's tail runs through "r =".
+     - For about 4.5 s the equator case reads "r = ⊙371, 0, 0) km". It is the only checker contact that a viewer would notice at 640 px.
+   - Fix (either one):
+     - Put the r tip label below and left of the place, outside the globe's silhouette, with the arrow tail clear.
+     - Or hide the ⊙ y glyph while the r label is shown.
+   - Also stop the old r label sliding over "v = Ω × r" at 26:16.5 (review-2 C3).
+3. **R3-S3 · 01:15.6–01:16.85 · s03 S6 ("Yet the door turns the most"). A motion glitch.**
+   - What is wrong:
+     - The door swings open in about 0.45 s, holds for 0.7 s, then snaps shut in 5 frames (01:16.70 → 01:16.85).
+     - During the swing the white right-angle tick between r and F stays behind as a floating "<" in empty space (about x 590, y 445).
+   - Fix:
+     - Parent the right-angle tick to the door group, or fade it out with the swing.
+     - Ease the swing back over ≥ 0.5 s, or keep the door open until S7 starts.
+4. **R3-S4 · 04:42–04:59 · s08 S7–S9. A link knot at the origin (review-2 S4 residual).**
+   - What is wrong: the gold link from the |b| band loops down through the origin. On the way it crosses:
+     - the a arrow;
+     - the b arrow;
+     - the a × b arrow's base;
+     - the |a| band, next to the "1" label.
+   - Together with the |a| link this makes a tangle of gold lines where θ is being read.
+   - Fix: route the |b| link above the picture (from the top of the |b| band, right, to "|b| = √10"), so that the two links run parallel and cross nothing.
+
+## COSMETIC
+- **C1 · Readable but touched labels (the checker's 39), with the fix for each:**
+  - s22a 16:43–17:09: move "area 14" above the a arrow and "normal" beside the arrow, not on it.
+  - s25a 24:04–24:33: put "6371 km" outside the bracket, and "φ = 45°" in the angle's open wedge left of the z axis.
+  - s26d 28:29–28:58: put the rim labels inside the disc.
+  - s28b/s28c 31:40–33:05: put "north" beyond its arrow tip, and "Ω sin φ" right of the k arrow.
+  - s29 34:05–34:22: put the Northern-Hemisphere u label under the arrow. The Southern-Hemisphere "k × u = (0, 10)" sits on the bright Andes; add a dark halo.
+  - s17 11:02: hold the label until the camera settles.
+  - s46 46:11–46:25: move the "1" ring off "Cornwall". The grey place names on white cloud ("England", "Bretagne", "France") have low contrast; use a dark halo.
+  - s28a 31:32–31:34: keep the pole Ω arrowhead ≥ 40 px below the top edge.
+- **C2 · Brace labels under KaTeX** ("Coriolis push", "pressure push", "Coriolis push (per kg)", "centrifugal: outwards", "shadow", "length of b"):
+  - They render at KaTeX script size, about 40 px, below the 44-px floor. The `floor()` guard does not see KaTeX scripts.
+  - The reference movie does the same, so this is a house-wide kit note: give `BraceNote` text an explicit 44 px.
+- **C3 · 43:13–43:15 · s42.** While the strip shrinks, "pressure push", "Coriolis push", "L (north)" and "H (south)" spill outside it for about 1 s. Fade the labels out before the shrink.
+- **C4 · Spacing.**
+  - s18c 14:03–14:25: "a × b = (0, 0, 14)" butts under "base 5.099 · height 2.75" with no gap.
+  - s12 08:10–08:19: "index  × middle=thumb" has uneven gaps around "×" and "=".
+- **C5 · Captions.** Three cues are still under 1 s: 00:38.45 "In weather," (0.84 s), 04:24.15 "By Pythagoras," (0.99 s) and 39:10.85 "Near its peak," (0.98 s). Merge each with the next cue.
+- **C6 · Review-2 cosmetics still open:**
+  - s39/s40/s40a: the H and L glyphs are cut by the map top, and "north" touches the map edge;
+  - s19 20:17–20:22: only the column heads are shown;
+  - s22e 19:42–20:02: "≈ 5.7°" sits close to u.
+
+## House-style conformance
+- **Conforms:**
+  - the opening title and voice;
+  - no headings, boxes, references, badges or URLs;
+  - keywords only, with no narrated sentence on screen;
+  - colours (the Coriolis push is violet everywhere now; the pressure push is orange);
+  - picture-to-number gold links (except R3-S4);
+  - goal before calculation (N-M3 fixed);
+  - every new term defined (Coriolis parameter, geostrophic, reanalysis, isobars, hectopascals);
+  - reveals on their words;
+  - the end card under the recorded exception;
+  - a per-movie score (§8) with no sound effects.
+- **Departures:**
+  - R3-S1 (empty halves);
+  - R3-S2, R3-S4 (a label contact, a link knot);
+  - C2 (KaTeX brace text below 44 px, house-wide).
+
+  None is a Must-fix: a viewer can follow every scene.
+
+## Overall: PASS (ch00_cross_product_why v4 fix 2 review 3 — `qa_pass`; R3-S1…S4 and C1–C6 recommended)
+- **Review 2's blocking items are all fixed:**
+  - N-M1 (s42 maths over the strip);
+  - N-M2 (s28a label pile);
+  - N-M3 (s20 early τ readout).
+- **Review 2's SHOULD items:**
+  - S1, S3, S5 and S6 are fixed, and S7 is resolved by the user's recorded exception;
+  - S2 and S4 are fixed at every place review 2 listed, except the s08 link knot.
+- **Checker triage:** of the 109 unique contacts, 1 place is a real legibility defect (s25b, SHOULD), 39 are readable but touched (cosmetic) and 66 are intended or harmless.
+- **Physics, equations, captions, loudness and accessibility all pass.** The new score sits about 15 dB under a centred voice, with no clipping and no effects.
+- **Next steps:**
+  1. Mark the movie `qa_pass`.
+  2. The user watches it before `/approve-movie 0 ch00_cross_product_why`.
+  3. If a re-render happens for any other reason, take R3-S1 (s20, s28a first), R3-S2, R3-S3 and R3-S4. All are local to `CrossProductWhy.tsx`; no new narration or data is needed.
+  4. Optionally teach the label checker two more cases:
+     - 2-D overlay glyphs left behind by 3-D motion (R3-S3);
+     - link-versus-arrow and link-versus-band crossings (R3-S4).
+
+Disk at review: C: 62 GB free, G: 557 GB free. Review-3 frames: 61 MB (520 frames, 83 tiles, 29 crops) under `reports/movies/ch00/ch00_cross_product_why/review/r3/` (local, not committed).
