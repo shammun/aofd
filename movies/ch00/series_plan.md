@@ -39,6 +39,28 @@ Lengths are targets set by the teaching, not quotas.
 Order reasoning: 2a/2b reuse v4 material, so they come cheaply right after it; weather basics and map reading come
 before Coriolis, geostrophic and thermal wind because those movies read real weather maps.
 
+## Extra requirements for #10 ENSO and #11 climate modes (user, 2026-10-27)
+- **Latest data, fetched at production time** (not frozen): the newest sea-surface temperature (NOAA OISST v2.1 daily and
+  ERSST v5 monthly), the latest SST-anomaly world map and the current ENSO state (NOAA CPC ONI / Niño 3.4, the
+  official advisory status, and the BoM/IRI outlook where they are open), plus the latest PDO, NAO, IOD (DMI), MJO
+  (RMM), SAM and QBO index values from NOAA PSL/CPC, BoM and FU Berlin.
+- **Historic vs recent.** Compare the current event with the big ones (1982–83, 1997–98, 2015–16, 2023–24, and the
+  strongest La Niñas): peak ONI and Niño 3.4, duration, spatial extent of the anomaly, and rank tables; for other modes,
+  index history with recent years highlighted.
+- **Impacts with statistics, from cited sources only.** Deaths, economic losses, rainfall, drought and floods,
+  coral bleaching, global temperature bumps, and how the current event compares with past ones. Use published
+  datasets and studies only (e.g. EM-DAT, WMO and NOAA assessments, peer-reviewed attribution papers). Say how
+  uncertain the death counts are, and never invent a figure; the source of every number goes in the storyboard and manifest.
+- **Visuals:**
+  - index animations (time series drawing themselves, with El Niño and La Niña shading);
+  - animated 3-D globes of SST anomalies through an event (three.js, as in the cross-product movie);
+  - static world maps;
+  - composites and correlation (teleconnection) maps;
+  - bar charts and rank charts.
+
+  All of it is computed by tested `fluidpy.data` / `fluidpy.diag` functions.
+- The research phase (research-scout) runs before the director for these movies.
+
 ## Cumulative log
 | Date | Movie | Version | Length | Size | Reviews | Final path |
 |---|---|---|---|---|---|---|
