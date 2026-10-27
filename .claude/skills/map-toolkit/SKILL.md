@@ -1,6 +1,6 @@
 ---
 name: map-toolkit
-description: The aofd map and 3-D visual toolkit agents run on their own - one recipe (YAML) rendered by any of 13 tools behind adapters (matplotlib/cartopy, PyGMT, GeoVista/pyvista, MapLibre GL JS, deck.gl, CesiumJS without Ion, leafmap, RustGIS, QGIS, ArcGIS Pro/arcpy, Google Earth Engine, NASA GIBS, STAC/COG Sentinel-2/Landsat) incl. archived timelapses, before/after pairs and time-series CSVs via tools/maptools/render.py, side-by-side contact sheets with compare.py, selftest.py, the per-visual "data + tool + why + runner-up" choice rule from movies/ch00/series_plan.md, recipe examples for every visual kind (synoptic map, relief, 3-D terrain, globe, texture, heightmap, data-animation frames, satellite overlay), feeding outputs to three.js and Remotion (textures, heightmaps, PNG sequences via staticFile), licences and credit lines (no Esri/Google/Bing/Mapbox imagery), Earth Engine datasets, determinism rules, environments (.venv-maps, GMT micromamba env on G:, tools/maptools/js), the RustGIS/GeoLibre MCP servers. Load for any map, globe, 3-D terrain, section, satellite image, data animation or chart in a movie, explainer or figure.
+description: The aofd map and 3-D visual toolkit agents run on their own (with the 2026-10-27 capability-test verdicts, recommended toolchain per visual kind and drop list in §12) - one recipe (YAML) rendered by any of 13 tools behind adapters (matplotlib/cartopy, PyGMT, GeoVista/pyvista, MapLibre GL JS, deck.gl, CesiumJS without Ion, leafmap, RustGIS, QGIS, ArcGIS Pro/arcpy, Google Earth Engine, NASA GIBS, STAC/COG Sentinel-2/Landsat) incl. archived timelapses, before/after pairs and time-series CSVs via tools/maptools/render.py, side-by-side contact sheets with compare.py, selftest.py, the per-visual "data + tool + why + runner-up" choice rule from movies/ch00/series_plan.md, recipe examples for every visual kind (synoptic map, relief, 3-D terrain, globe, texture, heightmap, data-animation frames, satellite overlay), feeding outputs to three.js and Remotion (textures, heightmaps, PNG sequences via staticFile), licences and credit lines (no Esri/Google/Bing/Mapbox imagery), Earth Engine datasets, determinism rules, environments (.venv-maps, GMT micromamba env on G:, tools/maptools/js), the RustGIS/GeoLibre MCP servers. Load for any map, globe, 3-D terrain, section, satellite image, data animation or chart in a movie, explainer or figure.
 ---
 
 # map-toolkit — the best data and the best tool for every visual
@@ -235,3 +235,78 @@ Draft: `tools/maptools/mcp_rustgis.json`. RustGIS `rustgis-cli mcp` (portable ex
 `G:/…/envs/rustgis-0.4.0`. Caches on G: (`cache/pip`, `cache/npm`, `cache/geovista`, `cache/gmt_user`).
 Install/upgrade only with `tools/maptools/install.py` (C: floor 12 GB for installs; reports disk before/after).
 Never install into `.venv`, `.venv-tts`, `movies/`, QGIS or ArcGIS Pro.
+
+## 12. Capability tests: what works (2026-10-27; `research/capability_tests.md`)
+The evidence is on G: in `captests/` (`INDEX.html`, `showcase.mp4`, and `_scripts/` holding every script that made
+an output). These defaults hold for the movies until a new test says otherwise. Still run §2 for every visual.
+
+| visual | use | runner-up | proven by |
+|---|---|---|---|
+| synoptic chart | cartopy + MetPy + `cartostyle` movie preset (cartography skill) | d3-geo SVG in Remotion, built layer by layer | `S1_*/cartopy_metpy_pro/s1_pro.py`, `CTS1Build` |
+| satellite + analysis | GIBS image (`data/derived/ch00/*modis*`) + cartostyle lines (white, dark halo) | GIBS + d3-geo overlay | `_scripts/pro_maps.py s2` |
+| relief / locator | cartostyle hillshade tint + places + scale bar + locator globe | PyGMT | `pro_maps.py s3` |
+| climatology | GEE `ee.data.computePixels` server mean → nc → cartostyle Equal Earth | PyGMT | `_scripts/gee_jobs.py s4` |
+| chart from values | GEE `reduceRegion` (render.py `kind: timeseries`) / `getRegion` per year → CSV → Remotion SVG | matplotlib | `CTA6Chart` |
+| animated weather map | d3-geo in Remotion; hourly contours precomputed to JSON; cross-fade the hours | cartopy frames | `CTA1D3` |
+| wind particles | Python RK2 tracks (scipy RegularGridInterpolator, fixed seed) → `.bin` → three.js `lineSegments`/`points` | deck.gl TripsLayer page | `CTA2Particles` |
+| satellite loop | GIBS `timelapse` (GOES-East GeoColor hourly; archive at once: rolling window) | GEE `getVideoThumbURL` (IR, day and night) | `A3_*` |
+| timelapse | GEE `kind: timelapse` frames (cmocean palette) + a Remotion colour bar | geemap (needs work-arounds) | `CTA4Bar` |
+| before/after | GEE/STAC `before_after` + Remotion slider (eased keyframes: glide, pause, reverse, settle; then a difference pass) | offline HTML swipe | `flights.tsx Slider` |
+| globe + field / animation | three.js `SphereGeometry` + cartopy `kind: texture` (sequence; cross-fade in a shader) | CesiumJS SingleTile | `CTG1Globe`, `CTG2Globe` |
+| static map → 3-D | three.js: exact sphere patch (`SphereGeometry(r, …, π+w, e−w, 90−n, n−s)`), heightmap drape, tilted plate; **lines draped, labels as billboards** | CesiumJS imagery drape + custom heightmap | `CTH2HGlobe`, `CTH2HTerrain`, `CTC1Plate` |
+| terrain / fly-over | three.js `PlaneGeometry` displaced from ETOPO (float32 `.bin`) + Blue Marble crop | deck.gl TerrainLayer | `CTT1Terrain` |
+| camera flights | slerp the sub-camera point, ease log(distance) and tilt (`flights.tsx flight()`); ETOPO-displaced globe (`displacementMap`, ×30) | MapLibre globe + terrain | `CTFlightA/B/C` |
+| space → town | MapLibre globe → terrain, local XYZ tiles (`_scripts/tiles.py`) | three.js globe → terrain cross-fade | `T3_*` |
+| sections, soundings, stacks | three.js planes/columns with matplotlib textures | — | `CTX1/2/3` |
+| terrain prep | `qgis_process` `gdal:hillshade` (multidirectional) / `gdal:contour`; RustGIS `raster.function hillshade` → `share.exportRaster` | Horn hillshade in prep | `C4_*`, `C3_*` |
+
+Recipes and patterns that worked:
+- **Remotion three.js textures must be loaded before the canvas mounts.** The kit's `Stage assets=[…]` preloads
+  textures and `.bin` files. A texture that arrives after R3F has drawn the frame is never drawn: the frame comes out
+  blank.
+- **ShaderMaterial**: `#include <colorspace_fragment>` must sit on its own line.
+- **Remotion bundles copy `public/` at bundle time.** Re-bundle after changing any asset or JSON.
+- **Render in pieces in the foreground**: 1500 frames at concurrency 2, ports 4800+. Measured cost was 0.06–0.17
+  s/frame; the heaviest scene took 0.09.
+- **Equirectangular drapes**: savefig can leave a white last column, which shows as a dateline seam. Pad the edge
+  columns.
+- **Draped text fails on terrain and globes** in every tool.
+  - Draw it in Remotion as billboards with a fixed pixel size.
+  - Fade them at the limb (dot < 0.15).
+  - Run a greedy collision pass in priority order (kit `Billboards`).
+- **MapLibre tiles**:
+  - Build tile URLs as `new URL(base) + "{z}/{x}/{y}.png"`, so the braces are not percent-encoded.
+  - Fill regional tiles from the global layer outside their bounds.
+  - Use one terrain source at a time, switched by zoom.
+  - Wait for `idle` per frame.
+  - Steep-pitch frames do not repeat in a fresh page.
+- **Interactive pages work offline**: libraries in `captests/_web/lib`, `serve.py` (ES modules and workers do not
+  run from `file://`).
+- **Screen recordings**: Playwright video needs `playwright install ffmpeg`. Use a screenshot per interaction step
+  instead (`_scripts/interact.py`).
+- **GEE grids for our own colouring**:
+  ```
+  ee.data.computePixels({"expression": img, "fileFormat": "NUMPY_NDARRAY",
+                         "grid": {"dimensions": …, "affineTransform": …, "crsCode": "EPSG:4326"}})
+  ```
+  Archive the result with `adapters/_remote.cached`. GEE `ECMWF/ERA5/MONTHLY` ends 2020-06. GEE `NOAA/GOES/19/MCMIPF`
+  is current.
+- **A storm-centre track** needs continuity: take the nearest local minimum to the previous hour's centre. A
+  min-in-box search jumps between lows.
+
+Drop list:
+- **ArcGIS**: not tested (user decision).
+- **PyGMT `kind: texture`**: an adapter bug produces a 4.6-gigapixel raster.
+- **PyGMT `grdview` drapes and animation.**
+- **MapLibre and deck.gl data globes**: polar holes.
+- **MapLibre at steep pitch in final frames.**
+- **leafmap split map** (CDN, tile server) and **geemap timelapse** in the pipeline.
+- **Draped text.**
+- **RustGIS globe**: ignores lon0/lat0.
+- **GeoVista `add_base_layer(texture=)`**: crashes with pyvista 0.49; use `Transform.from_1d(..., rgb=True)`.
+- **datashader**: not installed.
+- **GeoLibre MCP for frames.**
+
+MCP:
+- `rustgis-cli mcp` answers `run_command {"command": "raster.function", "params": {...}}` in about 0.1 s.
+- The `run` tool takes `id {json}` lines.
