@@ -122,6 +122,12 @@ possible … appropriate animation and also data animation."
   band (CSV) that our own code turns into charts and animated charts (e.g. "how unusual is this compared with
   history"). All via `tools/maptools` recipes, frames archived on G: so renders never hit the network.
 
+- **Use and credits** (user, 2026-10-27): the movies are educational and **not monetised** on any channel, so
+  noncommercial-licensed sources (Earth Engine Community Tier, CC BY-NC imagery such as EOX s2cloudless) may be used;
+  every source is credited (manifest credits and the movie page; nothing on screen beyond the house rules).
+- **Render GPU:** the RTX A1000 renders every movie (user set Windows graphics preference "High performance" for
+  Remotion's chrome-headless-shell, 2026-10-27); each movie renders entirely on one GPU and `qa.json` records it.
+
 ## Map toolkit set-up (user, 2026-10-27: "go ahead")
 The map and 3-D tools are installed so agents can run them on their own: separate environments (`.venv-maps`, a
 conda/micromamba env for GMT if pip cannot supply it, an npm tree under `tools/maptools/js/`), one render command
