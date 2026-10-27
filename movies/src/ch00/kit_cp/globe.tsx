@@ -112,7 +112,7 @@ export const globeProj = (st: CamState, W: number, H: number, ox = 0, oy = 0, M?
 };
 
 // ------------------------------------------------------------------------------------------------ WebGL globe
-const sphereGeo = (lon0: number, lon1: number, nLon: number, nLat: number, r = 1, lat0 = -90, lat1 = 90) => {
+export const sphereGeo = (lon0: number, lon1: number, nLon: number, nLat: number, r = 1, lat0 = -90, lat1 = 90) => {
   const pos: number[] = [], uv: number[] = [], idx: number[] = [], nrm: number[] = [];
   for (let j = 0; j <= nLat; j++) {
     const lat = lat0 + ((lat1 - lat0) * j) / nLat;
@@ -173,11 +173,11 @@ export const GlobeMesh: React.FC<{ tex: THREE.Texture | null; M?: THREE.Matrix4;
   tex, M, cut = false, drapes = [], dim = 1 }) => {
   const geo = useMemo(() => (cut ? sphereGeo(90, 360, 270, 180) : sphereGeo(-180, 180, 360, 180)), [cut]);
   const discs = useMemo(() => (cut ? [halfDisc(0), halfDisc(90)] : []), [cut]);
-  const mat = useMemo(() => new THREE.MeshStandardMaterial({ roughness: 1, metalness: 0 }), []);
+  // UV2-14: the daytime Blue Marble at full brightness everywhere: unlit (no terminator, no dark limb)
+  const mat = useMemo(() => new THREE.MeshBasicMaterial({}), []);
   const cutMat = useMemo(() => { const m = new THREE.MeshStandardMaterial({ color: "#3a4766", roughness: 0.9, side: THREE.DoubleSide }); m.emissive.set("#2b3550").multiplyScalar(0.5); return m; }, []);
   if (mat.map !== tex) { mat.map = tex; mat.needsUpdate = true; }
   mat.color.setScalar(dim);
-  mat.emissive.set("#ffffff").multiplyScalar(0);
   const dGeos = useMemo(() => drapes.map((d) => {
     const g = sphereGeo(d.lon[0], d.lon[1], 120, 120, d.r ?? 1.0015, d.lat[0], d.lat[1]);
     const uv = g.attributes.uv as THREE.BufferAttribute;
@@ -341,7 +341,9 @@ export const Streaks: React.FC<{ G: GProj; T: Trails | null; fr: number; tail?: 
         if (!ps.length) return null;
         const ab = Math.floor(k / NS), sb = k % NS;
         const a = (0.35 + 0.6 * ((sb + 0.5) / NS)) * (1 - ab / NB);
-        return <path key={k} d={ps.join("")} fill="none" stroke={c} strokeOpacity={a} strokeWidth={w} strokeLinecap="round" />;
+        // UV2-14: a 1-px dark edge under each streak so it reads over bright land and cloud-free ocean alike
+        return <g key={k}><path d={ps.join("")} fill="none" stroke="#0b1020" strokeOpacity={0.55 * a} strokeWidth={w + 2} strokeLinecap="round" />
+          <path d={ps.join("")} fill="none" stroke={c} strokeOpacity={a} strokeWidth={w} strokeLinecap="round" /></g>;
       })}
     </g>
   );
@@ -349,3 +351,61 @@ export const Streaks: React.FC<{ G: GProj; T: Trails | null; fr: number; tail?: 
 /** the brightness of a streakline sample from a latitude band mask: 1 inside [a, b] (either hemisphere if sym), dim outside */
 export const band = (a: number, b: number, inside: number, outside: number, sym = true) => (lat: number) =>
   (lat >= a && lat <= b) || (sym && -lat >= a && -lat <= b) ? inside : outside;
+
+// ------------------------------------------------------------------------------------------------ v4 additions
+/** UV2-19: the spin axis as dashed gold rods in the SAME transform as the textured sphere (child of the globe's matrix),
+ * from (0, -L, 0) to (0, +L, 0) in globe coordinates, so it leaves the sphere exactly at the texture's poles; drawn with the
+ * depth test on, so the part inside the globe and the part behind it are hidden by the opaque sphere. */
+export const Axis3D: React.FC<{ M?: THREE.Matrix4; L?: number; o?: number; r?: number; color?: string }> = ({ M, L = 1.35, o = 1, r = 0.012, color = "#d8b23a" }) => {
+  const mat = useMemo(() => new THREE.MeshBasicMaterial({ color, transparent: true }), [color]);
+  mat.opacity = o;
+  const geo = useMemo(() => new THREE.CylinderGeometry(1, 1, 1, 12, 1), []);
+  if (o <= 0) return null;
+  const segs: React.ReactNode[] = [];
+  const on = 0.075, off = 0.05;
+  for (let y = -L, i = 0; y < L - 1e-6; y += on + off, i++) {
+    const e = Math.min(L, y + on);
+    segs.push(<mesh key={i} geometry={geo} material={mat} position={[0, (y + e) / 2, 0]} scale={[r, e - y, r]} />);
+  }
+  return <group matrixAutoUpdate={false} matrix={M ?? new THREE.Matrix4()}>{segs}</group>;
+};
+/** the meridian-plane disc through longitude lon0 (contains the polar axis), radius rr, as a flat mesh */
+export const faceDisc = (lon0: number, rr = 0.999) => {
+  const m = ll(0, lon0);
+  const pos: number[] = [0, 0, 0];
+  const n = 128;
+  for (let i = 0; i <= n; i++) {
+    const a = (2 * Math.PI * i) / n;
+    pos.push(rr * (Math.cos(a) * m[0]), rr * Math.sin(a), rr * (Math.cos(a) * m[2]));
+  }
+  const idx: number[] = [];
+  for (let i = 1; i <= n; i++) idx.push(0, i, i + 1);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx);
+  return g;
+};
+/** HalfEarth (UV2-20): the half of the globe WEST of the meridian plane through lon0 (textured outside), its flat face the
+ * meridian-plane disc (slate, 90 %); the eastern half slides away by `slide` (0..1 → 0.6 units along local east) and fades.
+ * The axis and r are drawn on the face by the caller. */
+export const HalfEarthMesh: React.FC<{ tex: THREE.Texture | null; lon0: number; slide?: number; whole?: number }> = ({ tex, lon0, slide = 1, whole = 0 }) => {
+  const west = useMemo(() => sphereGeo(lon0 - 180, lon0, 180, 180), [lon0]);
+  const east = useMemo(() => sphereGeo(lon0, lon0 + 180, 180, 180), [lon0]);
+  const disc = useMemo(() => faceDisc(lon0), [lon0]);
+  const mW = useMemo(() => new THREE.MeshBasicMaterial({ side: THREE.FrontSide }), []);
+  const mE = useMemo(() => new THREE.MeshBasicMaterial({ transparent: true, side: THREE.FrontSide }), []);
+  const mF = useMemo(() => new THREE.MeshBasicMaterial({ color: "#2b3550", transparent: true, opacity: 0.94, side: THREE.DoubleSide }), []);
+  if (mW.map !== tex) { mW.map = tex; mW.needsUpdate = true; }
+  if (mE.map !== tex) { mE.map = tex; mE.needsUpdate = true; }
+  const e = [Math.cos(lon0 * D2R), 0, -Math.sin(lon0 * D2R)];
+  const s = Math.max(0, Math.min(1, slide));
+  mE.opacity = Math.max(whole, 1 - s);
+  mF.opacity = 0.94 * Math.min(1, s * 3) * (1 - whole);
+  return (
+    <group>
+      <mesh geometry={west} material={mW} />
+      {mE.opacity > 0.01 ? <mesh geometry={east} material={mE} position={[e[0] * 0.6 * s, 0, e[2] * 0.6 * s]} renderOrder={3} /> : null}
+      {mF.opacity > 0.01 ? <mesh geometry={disc} material={mF} position={[e[0] * 0.002, 0, e[2] * 0.002]} renderOrder={2} /> : null}
+    </group>
+  );
+};

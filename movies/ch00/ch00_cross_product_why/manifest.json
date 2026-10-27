@@ -4,14 +4,14 @@
  "builder": "movies/data/build_ch00_cross_product_why.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "9176882a4fd465716e77d97088aa71bb60de2d04",
-  "dirty_tracked": false,
+  "commit": "e4489573315d98535436c1f51bcc1097eea608c6",
+  "dirty_tracked": true,
   "vectors_py_tracked": true,
   "vectors_py_sha256": "e090585bf718740e7465d811cada6c6c2b3ce5dee1c46d955a978176b0312abf",
   "frames_py_tracked": true,
-  "frames_py_sha256": "3351c8473ea8857d4b9505da78ae7555573232f16cd1b660e92193e2b39f2b52",
+  "frames_py_sha256": "68762b6c77037f03be391d0f4cc655daae2153d94105788a3e9b8cc6a3176159",
   "atmos_py_tracked": true,
-  "atmos_py_sha256": "4605b690cb1975916afb066226163d8303aaab5c32290efbcb767a649e707273",
+  "atmos_py_sha256": "2512b27cdac4874c3444a038b792d49481ed984ad0d7ef179d832fa37958659d",
   "gfd_py_tracked": true,
   "gfd_py_sha256": "4935a5b82144ee9579b322c5b3fe3118d338cd4e784157780a3ff69a0c451bed",
   "operators_py_tracked": true,
@@ -123,19 +123,21 @@
  "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
  "pending": [],
  "data_files": {
-  "pair.json": "8143b9f05028920b390b2d25d6aafe18bf59970848f97cd0dd5159661d114869",
+  "pair.json": "b951fa160b8cfef686f43198cafae08c337a19ba7fc38b3af91d627d95e269e3",
   "sweep.json": "7872753235e6369324cc5f4d31fb2297ca432da5b7efae92c9e80afed97fc70f",
   "door.json": "aba14bfcd2256dfe090ccac965d62dc78c37c429c9e8388d606f544199d34622",
   "rhr.json": "f27e3fa7c7d5eaaec077dbdf0e821da44014dade2c63fe6432f722935b573f2e",
   "cases.json": "7b673d26922606a549ff2553d61e34ec5179c0f3a16d86009aa8ab3ba2c724a7",
-  "torque.json": "37471f2d2ceeea8d46dce0c5d2532840535c03e55831f50677596923e3ef7951",
-  "turning.json": "af45b984eed0a196aa6ee157ce866bd3d8c09bcc3af19cebf8154b51de79cba8",
-  "earth.json": "f72cb19a02e3fac201bc24d137b2adbc577276f9793a23fed4145599794ee7fb",
+  "torque.json": "10152ecbefcb84b501b33919fd4bf6d23405f87fdf9ae43f9549d135a702ea0a",
+  "turning.json": "71d83c62b4de245bfc2e5009ae2fa89e30cf03e450b651f4827f3e1dfc0c60c2",
+  "earth.json": "0da301286662c564304d6f03c6dd2a55bfd20215fd13d368f1b474353464bb8e",
   "inertial30.json": "f6bc9ef296f2a76321404c52fe6489d21dfb6939ff4ea7a5afa030e905ec21a6",
-  "coriolis.json": "eb21c0fac60470d114327e28076033f55108dce8c858da79dd5b63836290ddfa",
-  "paths.json": "a7cd3fcfd006ee4de165546b0d8352e689b220383f995d8c17f7386bb5e99732",
-  "geo.json": "4dd03fadb28277c260e22b03ec3a8ce2e386235fbecd6fb741b16ac3e938b24c",
-  "winds_mean.json": "a1edea64a211162078123ee69de96f2865277ce21b98f8728f6758406a5d4c1b",
+  "coriolis.json": "93a542ab5dcccce1c7367d019f86e1c6fa4aa219145c2c7c5f03e97d86c64a52",
+  "paths.json": "370d9d9dc82d8b3bbfb083865b122c106ca3043c7bc5eb7cfa7178e934513ae3",
+  "geo.json": "0ec228022c75e75adb2bda742f10f04e3f63a33206d2080c94a8838b3c705cf6",
+  "examples.json": "9b797a54c8a0057d87d3291463a37744e14f1c46225462ae6306d0c7d8b3deee",
+  "merry.json": "b40f29a5d646fb219a22b5f45ed2958dec6e195f02be4525ed1186a940a70e1e",
+  "winds_mean.json": "ee7b31df383c66dd0efbc584dc0d9073794d00042f3149d4db6cba4bfdfa04f1",
   "ian_ring.json": "136a7c1ed0584765f3313b9565ac2119cf82bc79aeeea6084af0ac72e2b312ac",
   "ian.json": "55bf5cdb6f59aa3709ea4c676e46f266c196297fa697ab6176476726b49377d3",
   "idai_ring.json": "b449735c117568465454733870d90ec650407e832ee52c0f4c115cff20afb64b",
@@ -143,7 +145,8 @@
   "trails_global.json": "11a7fa23697b09a8e540f9e7cbf9e4f108c22299dc77349e76b321abc7471558",
   "trails_ian.json": "f043f65dfc65e81bb91df5c91e122cf9793a65a868dcf5c6001e5e98e45cfd43",
   "trails_idai.json": "26a8be26e53b37f76e8aad679536fa29d013e69c7d7d23a49d41926e4d863103",
-  "storm.json": "c6ec53683593d92167c9fad01cbebf48dba68a57beb2ea8cc1c7d60affaa0f8f",
+  "ciaran_lines.json": "4f6cdc79024c05586091de5d3ada2af67f766548ea4cae61bb2bf00f03fac34e",
+  "storm.json": "7e4ff9726fdf0bb739d757f5d1dd3627c498ae62500acecabbb5db3b611b9482",
   "trails_global.bin": "9a8c92dc05076c8a79a81a35c1dcb4d69a8d1f03857e8dc333b0bc1098a4a748",
   "trails_ian.bin": "9b0c850285abf40578d9bccb2d3a9aa96aa254468510640afbd829ae69211eed",
   "trails_idai.bin": "feade087cb6bf7b67e533bdd0efd297cef5f2ab08aa2baea9f9a1a0489e4aafd"
@@ -1151,6 +1154,40 @@
    "pass": true
   },
   {
+   "name": "N16 first-hour Δlat −0.0603° (N) / +0.0603° (S)",
+   "value": [
+    -0.060273,
+    0.060273
+   ],
+   "ref": [
+    -0.0603,
+    0.0603
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "N16 every 17-h track point over land (NE 50m land polygons)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N16 s31 view N: first 2 h turn clockwise on screen (signed +1.73)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N16 s31 view S: first 2 h turn anticlockwise on screen (signed -1.73)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
    "name": "loop diameter (north-south extent) ≈ 193.9 km within 5 %",
    "value": [
     1.0,
@@ -1285,6 +1322,718 @@
    "pass": true
   },
   {
+   "name": "N8 pieces: a-triangles 5, b-triangles 3, squares 2",
+   "value": [
+    5.0,
+    3.0,
+    2.0
+   ],
+   "ref": [
+    5.0,
+    3.0,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N8 shoelace sum of the six pieces = 10; 24 − 10 = parallelogram_area = 14",
+   "value": [
+    10.0,
+    14.0
+   ],
+   "ref": [
+    10.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N8 sympy: (a1+b1)(a2+b2) − a1a2 − b1b2 − 2a2b1 − (a1b2 − a2b1) = 0",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N9 along = 1.5689, across = 2.7456",
+   "value": [
+    1.568929,
+    2.745626
+   ],
+   "ref": [
+    1.5689,
+    2.7456
+   ],
+   "tol": 5e-05,
+   "pass": true
+  },
+  {
+   "name": "N9 along² + across² = |b|² = 10",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N9 |a| × across = 14",
+   "value": [
+    14.0
+   ],
+   "ref": [
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N9 across = |b| sin θ (display 3.162 × 0.868 ≈ 2.75)",
+   "value": [
+    2.745626,
+    2.74
+   ],
+   "ref": [
+    2.745626,
+    2.74
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "name": "N9 display 5.099 × 2.75 ≈ 14 (14.02)",
+   "value": [
+    14.02
+   ],
+   "ref": [
+    14.02
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N9 slide: cross z = 14 for every s (max |z − 14|)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N9 slide: s = 1 gives b = (6, 4); 5×4 − 1×6 = 14",
+   "value": [
+    6.0,
+    4.0,
+    14.0
+   ],
+   "ref": [
+    6.0,
+    4.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N22 tilted cross = (−2, −2, 4); shadow areas (yz, zx, xy) = |components| = 2, 2, 4",
+   "value": [
+    -2.0,
+    -2.0,
+    4.0,
+    2.0
+   ],
+   "ref": [
+    -2.0,
+    -2.0,
+    4.0,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N22 ours: wall shadows 0, 0; floor 14",
+   "value": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N10 F components (0, 50), (43.30, 25), (50, 0)",
+   "value": [
+    0.0,
+    50.0,
+    43.30127,
+    25.0
+   ],
+   "ref": [
+    0.0,
+    50.0,
+    43.30127,
+    25.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N10 along 0, 43.3, 50; across 50, 25, 0",
+   "value": [
+    0.0,
+    43.30127,
+    50.0,
+    50.0
+   ],
+   "ref": [
+    0.0,
+    43.30127,
+    50.0,
+    50.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N10 0.3 × across = |τ| = 15, 7.5, 0",
+   "value": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "ref": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N11 L = (0, 0, 3); string torque 0",
+   "value": [
+    0.0,
+    0.0,
+    3.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    3.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N11 v × B = (0, −1, 0) (south)",
+   "value": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N11 charge circle speed constant (1)",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N12 speeds 10.0499, 10.0050, 10.0005",
+   "value": [
+    10.049876,
+    10.004999,
+    10.0005
+   ],
+   "ref": [
+    10.0499,
+    10.005,
+    10.0005
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N12 turn 5.711°, 5.728°, 5.729°",
+   "value": [
+    5.7106,
+    5.7281,
+    5.7294
+   ],
+   "ref": [
+    5.711,
+    5.728,
+    5.729
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "N12 every kick ⟂ the current velocity (dot = 0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N12 circle speed 10 (1e-12)",
+   "value": [
+    10.0,
+    10.0,
+    10.0,
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N13 along part = sin 30° = 0.5 of the push; ⟂ push · u = 0",
+   "value": [
+    0.5,
+    0.0
+   ],
+   "ref": [
+    0.5,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N15 r45 = (4504.98, 0, 4504.98) km, |r| = 6371 km",
+   "value": [
+    4504.977303,
+    0.0,
+    4504.977303,
+    6371.0
+   ],
+   "ref": [
+    4504.98,
+    0.0,
+    4504.98,
+    6371.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N15 θ = 45°, radius 4504.98 km",
+   "value": [
+    45.0,
+    4504.977303
+   ],
+   "ref": [
+    45.0,
+    4504.98
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N15 Ω × r = (0, 328.51, 0) m/s = Ω |r| sin θ ŷ",
+   "value": [
+    0.0,
+    328.508126,
+    0.0,
+    328.508126
+   ],
+   "ref": [
+    0.0,
+    328.51,
+    0.0,
+    328.51
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N15 display 7.29e-5 × 4 505 000 = 328.4, exact 328.51 → ≈ 329",
+   "value": [
+    329.0
+   ],
+   "ref": [
+    329.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N15 display 6371 × sin 45° ≈ 4505",
+   "value": [
+    4505.0
+   ],
+   "ref": [
+    4505.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N14 texture poles vs axis–sphere intersections: max screen gap (px) ≤ 2",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 2.0,
+   "pass": true
+  },
+  {
+   "name": "N14 axis samples inside the sphere that a depth-tested render would draw",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N17 launch in the rider's frame (−1.4, 1.5) m/s",
+   "value": [
+    -1.4,
+    1.5
+   ],
+   "ref": [
+    -1.4,
+    1.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 rotating_frame_path vs turntable_puck: max gap < 1e-6 m",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "N17 rider's path right of its launch heading for t > 0 (k·(u0 × Δr) < 0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N17 outside path straight: x_inertial = 0",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 u + Ω × r (turned back to the outside axes) = turntable U, V",
+   "value": [
+    -0.0,
+    1.5
+   ],
+   "ref": [
+    0.0,
+    1.5
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N17 carried arrow: tip velocity (finite difference) = Ω × u",
+   "value": [
+    -0.5,
+    -1.2e-05,
+    0.0
+   ],
+   "ref": [
+    -0.5,
+    0.0,
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N17 floor 0.5 → 0.75 m/s; change per second = Ω × u = (0, 0.25, 0)",
+   "value": [
+    0.5,
+    0.75,
+    0.0,
+    0.25
+   ],
+   "ref": [
+    0.5,
+    0.75,
+    0.0,
+    0.25
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 Ω × u equals the floor change",
+   "value": [
+    0.0,
+    0.25,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.25,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 2Ω × u = (−1, 0, 0); Ω × (Ω × r) = (0, 0.625, 0)",
+   "value": [
+    -1.0,
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "ref": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N18 Ω local (east, north, up) = (0, 5.156e-5, 5.156e-5)",
+   "value": [
+    0.0,
+    5.2e-05,
+    5.2e-05
+   ],
+   "ref": [
+    0.0,
+    5.2e-05,
+    5.2e-05
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N18 display 7.29e-5 × cos 45° ≈ 5.16e-5",
+   "value": [
+    5.2e-05
+   ],
+   "ref": [
+    5.2e-05
+   ],
+   "tol": 1.1e-07,
+   "pass": true
+  },
+  {
+   "name": "N18 sympy Ω × u = (−Ω sin φ v, Ω sin φ u, −Ω cos φ u)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N18 Ω × u = (0, 5.156e-4, −5.156e-4)",
+   "value": [
+    0.0,
+    0.000516,
+    -0.000516
+   ],
+   "ref": [
+    0.0,
+    0.000516,
+    -0.000516
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N18 coriolis_horizontal = flat part of −2Ω × u",
+   "value": [
+    0.0,
+    -0.001031
+   ],
+   "ref": [
+    -0.0,
+    -0.001031
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N18 vertical part 1.03e-3 m/s²; g / vertical ≈ 9.5e3 (≈ 10 000 ×)",
+   "value": [
+    0.001031,
+    9500.0
+   ],
+   "ref": [
+    0.001031,
+    9500.0
+   ],
+   "tol": [
+    2e-07,
+    100
+   ],
+   "pass": true
+  },
+  {
+   "name": "N18 k × u = (−v, u)",
+   "value": [
+    -4.0,
+    3.0
+   ],
+   "ref": [
+    -4.0,
+    3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N18 f(90, 45, 0, −45) = 1.4584e-4, 1.0313e-4, 0, −1.0313e-4",
+   "value": [
+    0.000146,
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "ref": [
+    0.000146,
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N20 isobars 1000/1004/1008/1012 hPa at r = 400/800/1200/1600 km",
+   "value": [
+    400.0,
+    800.0,
+    1200.0,
+    1600.0
+   ],
+   "ref": [
+    400.0,
+    800.0,
+    1200.0,
+    1600.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 ∇p at the pin (0, −1000 km) = (0, −1e-3) Pa/m",
+   "value": [
+    0.0,
+    -0.001
+   ],
+   "ref": [
+    0.0,
+    -0.001
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 k × ∇p = (1e-3, 0) (east), ⟂ ∇p",
+   "value": [
+    0.001,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.001,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 k × ∇p along the isobar tangent (|sin| of the angle)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 Coriolis push = −(pressure push) (0, ∓8.333e-4)",
+   "value": [
+    0.0,
+    -0.000833,
+    -0.0,
+    0.000833
+   ],
+   "ref": [
+    0.0,
+    -0.000833,
+    0.0,
+    0.000833
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N20 display −1.03e-4 × 8.1 ≈ −8.3e-4",
+   "value": [
+    0.00083
+   ],
+   "ref": [
+    0.00083
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
    "name": "P1: subtropical highs found over the ocean (N Atlantic, N Pacific, S Atlantic, S Pacific, S Indian)",
    "value": true,
    "ref": true,
@@ -1311,6 +2060,41 @@
   },
   {
    "name": "P1: westerlies blow east at 45°N/S (+2.5 … +8 m/s)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 15°N: u < 0 and v < 0 (Atlantic, central Pacific)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 15°S: u < 0 and v > 0 (Atlantic, east Pacific, Indian)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 turned-arrow headings: NH trade 250° in (180, 270), SH trade 290° in (270, 360)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 westerly arrows end east-ish: 70°, 110° in (45, 135)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 west is screen-left for the north-up s33 camera keyframes",
    "value": true,
    "ref": true,
    "tol": 0,
@@ -1447,29 +2231,46 @@
    "pass": true
   },
   {
-   "name": "Ciarán 2023-11-02T00 low (49.75°N, 5.75°W, 954.6 hPa)",
+   "name": "N21 Ciarán 12 UTC MSLP low (52.5°N, 1.75°E, 955.9 hPa)",
    "value": [
-    49.75,
-    -5.75,
-    954.581484
+    52.5,
+    1.75,
+    955.928672
    ],
    "ref": [
-    49.75,
-    -5.75,
-    954.6
+    52.5,
+    1.75,
+    955.93
    ],
    "tol": 0.06,
    "pass": true
   },
   {
-   "name": "Ciarán: every drawn arrow is over open sea (≥ 0.5° from land) and ≥ 400 km from the low",
-   "value": true,
-   "ref": true,
-   "tol": 0,
+   "name": "N21 850 hPa height low at the same grid point",
+   "value": [
+    52.5,
+    1.75
+   ],
+   "ref": [
+    52.5,
+    1.75
+   ],
+   "tol": 1e-09,
    "pass": true
   },
   {
-   "name": "Ciarán: geostrophic anticlockwise on the 300-500 km ring (≥ 90 % of sea points)",
+   "name": "N21 850 hPa vs geostrophic over sea 300-1500 km: median direction difference ≤ 10° (6.9°)",
+   "value": [
+    6.85144
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 10,
+   "pass": true
+  },
+  {
+   "name": "N21 ≥ 65 % of those points within 10° (69 %)",
    "value": [
     1.0
    ],
@@ -1480,74 +2281,90 @@
    "pass": true
   },
   {
-   "name": "Ciarán W flank: 850 hPa speed within 10 %",
+   "name": "N21 median speed ratio actual/geostrophic in 0.80-0.95 (0.858)",
    "value": [
-    0.059
+    0.858099
    ],
    "ref": [
-    0.0
+    0.875
    ],
-   "tol": 0.1,
+   "tol": 0.075,
    "pass": true
   },
   {
-   "name": "Ciarán W flank: 850 hPa direction within 5°",
-   "value": [
-    2.7
-   ],
-   "ref": [
-    0.0
-   ],
-   "tol": 5.0,
-   "pass": true
-  },
-  {
-   "name": "Ciarán W flank: 10 m wind turned towards the low (left of the isobar direction)",
+   "name": "N21 every drawn arrow over open sea (≥ 0.5° from land) and ≥ 300 km from the low",
    "value": true,
    "ref": true,
    "tol": 0,
    "pass": true
   },
   {
-   "name": "Ciarán S flank: 850 hPa speed within 10 %",
+   "name": "N21 geostrophic anticlockwise on the 300-600 km ring (≥ 90 % of sea points)",
    "value": [
-    0.052
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N21 W flank (typical point): 850 hPa direction within 10° (5.4°)",
+   "value": [
+    5.428557
    ],
    "ref": [
     0.0
    ],
-   "tol": 0.1,
+   "tol": 10,
    "pass": true
   },
   {
-   "name": "Ciarán S flank: 850 hPa direction within 5°",
+   "name": "N21 W flank: speed ratio near the median (0.860)",
    "value": [
-    4.1
+    0.860492
    ],
    "ref": [
-    0.0
+    0.858099
    ],
-   "tol": 5.0,
+   "tol": 0.06,
    "pass": true
   },
   {
-   "name": "Ciarán S flank: 10 m wind turned towards the low (left of the isobar direction)",
+   "name": "N21 W flank: 10 m wind turned towards the low (left of the isobar direction, 14°)",
    "value": true,
    "ref": true,
    "tol": 0,
    "pass": true
   },
   {
-   "name": "Ciarán friction angles ≈ 13° (W) and ≈ 21° (S)",
+   "name": "N21 North Sea (typical point): 850 hPa direction within 10° (5.5°)",
    "value": [
-    13.1,
-    20.8
+    5.48055
    ],
    "ref": [
-    13.0,
-    20.9
+    0.0
    ],
-   "tol": 1.0,
+   "tol": 10,
+   "pass": true
+  },
+  {
+   "name": "N21 North Sea: speed ratio near the median (0.847)",
+   "value": [
+    0.847384
+   ],
+   "ref": [
+    0.858099
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "N21 North Sea: 10 m wind turned towards the low (left of the isobar direction, 10°)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
    "pass": true
   }
  ],
@@ -5037,7 +5854,7 @@
    "eq": "Vallis (2.50a,b) with ∇p = 0 on the sphere (RK4, dt 60 s)",
    "params": {
     "lat0": 0.7853981633974483,
-    "lon0": -0.5235987755982988,
+    "lon0": 0.008726646259971648,
     "u0": 10.0,
     "v0": 0.0,
     "t": [
@@ -6065,7 +6882,7 @@
     ],
     "dt": 60.0
    },
-   "sha256": "7e769fc800c486c4d8171afd6692b461ca859fac4db35d40cca77fdf66ea1c10"
+   "sha256": "324ef2f639cfbfd87d9474d5323c696eae22230d7f5de2502c8247ed81150912"
   },
   {
    "fn": "fluidpy.geo.frames.inertial_oscillation_sphere",
@@ -6074,7 +6891,7 @@
    "eq": "Vallis (2.50a,b) with ∇p = 0 on the sphere (RK4, dt 60 s)",
    "params": {
     "lat0": -0.7853981633974483,
-    "lon0": -0.3490658503988659,
+    "lon0": -1.213003830136059,
     "u0": 10.0,
     "v0": 0.0,
     "t": [
@@ -7102,7 +7919,7 @@
     ],
     "dt": 60.0
    },
-   "sha256": "46ce29600479f3b8339f23d0f737eaccd1829cec72134caf58194cd3dad6b63f"
+   "sha256": "8b3f60a3c2d6b55a9aa9e457e486a37dcca07e92fccaa4d051d1151f20e457fe"
   },
   {
    "fn": "fluidpy.geo.frames.inertial_oscillation_sphere",
@@ -7110,8 +7927,8 @@
    "data": "data/paths.json",
    "eq": "Vallis (2.50a,b) with ∇p = 0 on the sphere (RK4, dt 60 s)",
    "params": {
-    "lat0": 0.6981317007977318,
-    "lon0": -0.5235987755982988,
+    "lat0": 0.7853981633974483,
+    "lon0": 0.008726646259971648,
     "u0": 10.0,
     "v0": 0.0,
     "t": [
@@ -7479,7 +8296,7 @@
     ],
     "dt": 60.0
    },
-   "sha256": "9125df776d38198535f34fb4cd68f35414ecf3831ccb40719812d1daf774ad74"
+   "sha256": "68cf9b240101c0de16ce5c846bb215c673ee109c4fb0671d44bb27a77dc0e1aa"
   },
   {
    "fn": "fluidpy.geo.frames.inertial_oscillation_sphere",
@@ -7487,8 +8304,8 @@
    "data": "data/paths.json",
    "eq": "Vallis (2.50a,b) with ∇p = 0 on the sphere (RK4, dt 60 s)",
    "params": {
-    "lat0": -0.6981317007977318,
-    "lon0": -0.3490658503988659,
+    "lat0": -0.7853981633974483,
+    "lon0": -1.213003830136059,
     "u0": 10.0,
     "v0": 0.0,
     "t": [
@@ -7856,7 +8673,7 @@
     ],
     "dt": 60.0
    },
-   "sha256": "5584d35dd592cfc768605997ea3b4fb513b9cefd8c351973a19871130be85a4e"
+   "sha256": "96454b8074418857d68203ad3ee888f38ab3e3298f799d6436d6a6b55faffe3b"
   },
   {
    "fn": "fluidpy.geo.frames.great_circle",
@@ -7864,8 +8681,8 @@
    "data": "data/paths.json",
    "eq": "f = 0 ghost (great circle)",
    "params": {
-    "lat0": 0.6981317007977318,
-    "lon0": -0.5235987755982988,
+    "lat0": 0.7853981633974483,
+    "lon0": 0.008726646259971648,
     "u0": 10.0,
     "v0": 0.0,
     "t": [
@@ -8232,7 +9049,7 @@
      21600.0
     ]
    },
-   "sha256": "f314fe0863bb3e35de2c81f73270d5f757c29525e06fa079ef93eb3c421b376a"
+   "sha256": "c5e86ff30c1bec673399cb2bb5b05c01177bc6b0afce2152700ae35b8bab9fbb"
   },
   {
    "fn": "fluidpy.geo.frames.great_circle",
@@ -8240,8 +9057,8 @@
    "data": "data/paths.json",
    "eq": "f = 0 ghost (great circle)",
    "params": {
-    "lat0": -0.6981317007977318,
-    "lon0": -0.3490658503988659,
+    "lat0": -0.7853981633974483,
+    "lon0": -1.213003830136059,
     "u0": 10.0,
     "v0": 0.0,
     "t": [
@@ -8608,7 +9425,7 @@
      21600.0
     ]
    },
-   "sha256": "17f8cbc3f6284ecd8c1904674425e90beaf2cbd7bef32459cd00028e53e021b1"
+   "sha256": "efc540220bb48156ea1b4cc7998bfae11a7dd7505a49733f4f658f8a457ba269"
   },
   {
    "fn": "fluidpy.core.operators.gradient",
@@ -38055,6 +38872,1793 @@
    "sha256": "de9d223dac0bff518e210e435a19a9eda21ecf3fde20b07a9a46a14a3924b3ed"
   },
   {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s09a",
+   "data": "data/pair.json",
+   "eq": "box minus corners = |a×b| (ours)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "145436cecd5bcfb3bab47b63066fb098caaafbb2f7a70a039194f4981dd41e20"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s18b",
+   "data": "data/pair.json",
+   "eq": "part of b along a",
+   "params": {
+    "a": [
+     1.0,
+     3.0
+    ],
+    "b": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "63c6dff3dc4227af4c62c015c79a6247b0002ffd8cb0ed616b8f345bb180cd0e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s18c",
+   "data": "data/pair.json",
+   "eq": "a×(b + s a) for s = 0..2",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     [
+      1.0,
+      3.0,
+      0.0
+     ],
+     [
+      1.1,
+      3.02,
+      0.0
+     ],
+     [
+      1.2,
+      3.04,
+      0.0
+     ],
+     [
+      1.3,
+      3.06,
+      0.0
+     ],
+     [
+      1.4,
+      3.08,
+      0.0
+     ],
+     [
+      1.5,
+      3.1,
+      0.0
+     ],
+     [
+      1.6,
+      3.12,
+      0.0
+     ],
+     [
+      1.7000000000000002,
+      3.14,
+      0.0
+     ],
+     [
+      1.8,
+      3.16,
+      0.0
+     ],
+     [
+      1.9,
+      3.18,
+      0.0
+     ],
+     [
+      2.0,
+      3.2,
+      0.0
+     ],
+     [
+      2.1,
+      3.22,
+      0.0
+     ],
+     [
+      2.2,
+      3.24,
+      0.0
+     ],
+     [
+      2.3,
+      3.26,
+      0.0
+     ],
+     [
+      2.4000000000000004,
+      3.2800000000000002,
+      0.0
+     ],
+     [
+      2.5,
+      3.3,
+      0.0
+     ],
+     [
+      2.6,
+      3.32,
+      0.0
+     ],
+     [
+      2.7,
+      3.34,
+      0.0
+     ],
+     [
+      2.8,
+      3.36,
+      0.0
+     ],
+     [
+      2.9,
+      3.38,
+      0.0
+     ],
+     [
+      3.0,
+      3.4,
+      0.0
+     ],
+     [
+      3.1,
+      3.42,
+      0.0
+     ],
+     [
+      3.2,
+      3.44,
+      0.0
+     ],
+     [
+      3.3000000000000003,
+      3.46,
+      0.0
+     ],
+     [
+      3.4,
+      3.48,
+      0.0
+     ],
+     [
+      3.5,
+      3.5,
+      0.0
+     ],
+     [
+      3.6,
+      3.52,
+      0.0
+     ],
+     [
+      3.7,
+      3.54,
+      0.0
+     ],
+     [
+      3.8000000000000003,
+      3.56,
+      0.0
+     ],
+     [
+      3.9,
+      3.58,
+      0.0
+     ],
+     [
+      4.0,
+      3.6,
+      0.0
+     ],
+     [
+      4.1,
+      3.62,
+      0.0
+     ],
+     [
+      4.2,
+      3.64,
+      0.0
+     ],
+     [
+      4.300000000000001,
+      3.66,
+      0.0
+     ],
+     [
+      4.4,
+      3.68,
+      0.0
+     ],
+     [
+      4.5,
+      3.7,
+      0.0
+     ],
+     [
+      4.6,
+      3.7199999999999998,
+      0.0
+     ],
+     [
+      4.7,
+      3.74,
+      0.0
+     ],
+     [
+      4.8,
+      3.76,
+      0.0
+     ],
+     [
+      4.9,
+      3.7800000000000002,
+      0.0
+     ],
+     [
+      5.0,
+      3.8,
+      0.0
+     ],
+     [
+      5.1,
+      3.82,
+      0.0
+     ],
+     [
+      5.2,
+      3.84,
+      0.0
+     ],
+     [
+      5.3,
+      3.86,
+      0.0
+     ],
+     [
+      5.4,
+      3.88,
+      0.0
+     ],
+     [
+      5.5,
+      3.9,
+      0.0
+     ],
+     [
+      5.6000000000000005,
+      3.92,
+      0.0
+     ],
+     [
+      5.699999999999999,
+      3.94,
+      0.0
+     ],
+     [
+      5.8,
+      3.96,
+      0.0
+     ],
+     [
+      5.9,
+      3.98,
+      0.0
+     ],
+     [
+      6.0,
+      4.0,
+      0.0
+     ],
+     [
+      6.1,
+      4.02,
+      0.0
+     ],
+     [
+      6.2,
+      4.04,
+      0.0
+     ],
+     [
+      6.300000000000001,
+      4.0600000000000005,
+      0.0
+     ],
+     [
+      6.4,
+      4.08,
+      0.0
+     ],
+     [
+      6.5,
+      4.1,
+      0.0
+     ],
+     [
+      6.6000000000000005,
+      4.12,
+      0.0
+     ],
+     [
+      6.699999999999999,
+      4.14,
+      0.0
+     ],
+     [
+      6.8,
+      4.16,
+      0.0
+     ],
+     [
+      6.8999999999999995,
+      4.18,
+      0.0
+     ],
+     [
+      7.0,
+      4.2,
+      0.0
+     ],
+     [
+      7.1,
+      4.22,
+      0.0
+     ],
+     [
+      7.2,
+      4.24,
+      0.0
+     ],
+     [
+      7.3,
+      4.26,
+      0.0
+     ],
+     [
+      7.4,
+      4.28,
+      0.0
+     ],
+     [
+      7.5,
+      4.3,
+      0.0
+     ],
+     [
+      7.6000000000000005,
+      4.32,
+      0.0
+     ],
+     [
+      7.7,
+      4.34,
+      0.0
+     ],
+     [
+      7.800000000000001,
+      4.36,
+      0.0
+     ],
+     [
+      7.8999999999999995,
+      4.38,
+      0.0
+     ],
+     [
+      8.0,
+      4.4,
+      0.0
+     ],
+     [
+      8.1,
+      4.42,
+      0.0
+     ],
+     [
+      8.2,
+      4.4399999999999995,
+      0.0
+     ],
+     [
+      8.3,
+      4.46,
+      0.0
+     ],
+     [
+      8.4,
+      4.48,
+      0.0
+     ],
+     [
+      8.5,
+      4.5,
+      0.0
+     ],
+     [
+      8.6,
+      4.52,
+      0.0
+     ],
+     [
+      8.7,
+      4.54,
+      0.0
+     ],
+     [
+      8.8,
+      4.5600000000000005,
+      0.0
+     ],
+     [
+      8.9,
+      4.58,
+      0.0
+     ],
+     [
+      9.0,
+      4.6,
+      0.0
+     ],
+     [
+      9.100000000000001,
+      4.62,
+      0.0
+     ],
+     [
+      9.2,
+      4.64,
+      0.0
+     ],
+     [
+      9.299999999999999,
+      4.66,
+      0.0
+     ],
+     [
+      9.4,
+      4.68,
+      0.0
+     ],
+     [
+      9.5,
+      4.7,
+      0.0
+     ],
+     [
+      9.6,
+      4.72,
+      0.0
+     ],
+     [
+      9.7,
+      4.74,
+      0.0
+     ],
+     [
+      9.8,
+      4.76,
+      0.0
+     ],
+     [
+      9.9,
+      4.78,
+      0.0
+     ],
+     [
+      10.0,
+      4.8,
+      0.0
+     ],
+     [
+      10.1,
+      4.82,
+      0.0
+     ],
+     [
+      10.200000000000001,
+      4.84,
+      0.0
+     ],
+     [
+      10.3,
+      4.86,
+      0.0
+     ],
+     [
+      10.399999999999999,
+      4.88,
+      0.0
+     ],
+     [
+      10.5,
+      4.9,
+      0.0
+     ],
+     [
+      10.6,
+      4.92,
+      0.0
+     ],
+     [
+      10.7,
+      4.9399999999999995,
+      0.0
+     ],
+     [
+      10.8,
+      4.96,
+      0.0
+     ],
+     [
+      10.9,
+      4.98,
+      0.0
+     ],
+     [
+      11.0,
+      5.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "afc535c2bc826eb020d7dca0a1667e2816e84f137f5c36e1a50f3c22a4a57a25"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "tilted a × b (illustrative pair)",
+   "params": {
+    "a": [
+     2.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     2.0,
+     1.0
+    ]
+   },
+   "sha256": "f6642151762428c498b8b038354a287337f7653fd9bcd4b302ce8e3bac69dacc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "shadow on the yz wall",
+   "params": {
+    "a": [
+     0.0,
+     1.0
+    ],
+    "b": [
+     2.0,
+     1.0
+    ]
+   },
+   "sha256": "3f710ac088db33363087de2b9a657541fe5447821debaa9fe5cbd538eb1a5f29"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "shadow on the zx wall",
+   "params": {
+    "a": [
+     1.0,
+     2.0
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "3f710ac088db33363087de2b9a657541fe5447821debaa9fe5cbd538eb1a5f29"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "shadow on the xy wall",
+   "params": {
+    "a": [
+     2.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     2.0
+    ]
+   },
+   "sha256": "400c52dd5bd0047d64c0582af027b387a7938a64283d0d4f727331140cb6462c"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s20",
+   "data": "data/torque.json",
+   "eq": "part of F along the spanner",
+   "params": {
+    "a": [
+     [
+      0.0,
+      50.0,
+      0.0
+     ],
+     [
+      43.30127,
+      25.0,
+      0.0
+     ],
+     [
+      50.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "b": [
+     0.3,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "324e9d868018c1a93a0907bfe19e8e8a9ddef84a7961d4e9367979c730f42561"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s20",
+   "data": "data/torque.json",
+   "eq": "|r||F_across| (area) / |r| = part across",
+   "params": {
+    "a": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      0.0,
+      50.0,
+      0.0
+     ],
+     [
+      43.30127,
+      25.0,
+      0.0
+     ],
+     [
+      50.0,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "57d50eea6389f59e82c62533dcdeafdaf7038585efda590ea279bd1efe4cf617"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22c",
+   "data": "data/examples.json",
+   "eq": "L = r × p (angular momentum)",
+   "params": {
+    "a": [
+     0.5,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     6.0,
+     0.0
+    ]
+   },
+   "sha256": "19cf58ce85377ea420aa7e53cc829dc8fb1c41fd1ee1b04e9e68f0cdf7c086f3"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22c",
+   "data": "data/examples.json",
+   "eq": "string torque r × (−T r̂) = 0",
+   "params": {
+    "a": [
+     0.5,
+     0.0,
+     0.0
+    ],
+    "b": [
+     -5.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "a6a9623a6c6857122c921e87d62eedb7e880f0d9862f8fb6b0304bf5be1e9d8a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22d",
+   "data": "data/examples.json",
+   "eq": "x̂ × ẑ = −ŷ: v (east) × B (up) points south",
+   "params": {
+    "a": [
+     1.0,
+     0,
+     0
+    ],
+    "b": [
+     0,
+     0,
+     1.0
+    ]
+   },
+   "sha256": "0e00910e27c43f706a62d0dac6695c67003ed72876c4d25af8df6950a92578f8"
+  },
+  {
+   "fn": "fluidpy.geo.frames.inertial_oscillation",
+   "scene": "s22d",
+   "data": "data/examples.json",
+   "eq": "charge circle: dv/dt = −f k × v, f = +1 (same equation; clockwise)",
+   "params": {
+    "t": [
+     0.0,
+     0.05235987755982988,
+     0.10471975511965977,
+     0.15707963267948966,
+     0.20943951023931953,
+     0.2617993877991494,
+     0.3141592653589793,
+     0.36651914291880916,
+     0.41887902047863906,
+     0.47123889803846897,
+     0.5235987755982988,
+     0.5759586531581287,
+     0.6283185307179586,
+     0.6806784082777885,
+     0.7330382858376183,
+     0.7853981633974483,
+     0.8377580409572781,
+     0.890117918517108,
+     0.9424777960769379,
+     0.9948376736367678,
+     1.0471975511965976,
+     1.0995574287564276,
+     1.1519173063162573,
+     1.2042771838760873,
+     1.2566370614359172,
+     1.308996938995747,
+     1.361356816555577,
+     1.413716694115407,
+     1.4660765716752366,
+     1.5184364492350666,
+     1.5707963267948966,
+     1.6231562043547263,
+     1.6755160819145563,
+     1.7278759594743862,
+     1.780235837034216,
+     1.832595714594046,
+     1.8849555921538759,
+     1.9373154697137056,
+     1.9896753472735356,
+     2.0420352248333655,
+     2.0943951023931953,
+     2.146754979953025,
+     2.199114857512855,
+     2.251474735072685,
+     2.3038346126325147,
+     2.356194490192345,
+     2.4085543677521746,
+     2.4609142453120043,
+     2.5132741228718345,
+     2.5656340004316642,
+     2.617993877991494,
+     2.670353755551324,
+     2.722713633111154,
+     2.7750735106709836,
+     2.827433388230814,
+     2.8797932657906435,
+     2.9321531433504733,
+     2.9845130209103035,
+     3.036872898470133,
+     3.089232776029963,
+     3.141592653589793,
+     3.193952531149623,
+     3.2463124087094526,
+     3.2986722862692828,
+     3.3510321638291125,
+     3.4033920413889422,
+     3.4557519189487724,
+     3.508111796508602,
+     3.560471674068432,
+     3.612831551628262,
+     3.665191429188092,
+     3.7175513067479216,
+     3.7699111843077517,
+     3.8222710618675815,
+     3.874630939427411,
+     3.9269908169872414,
+     3.979350694547071,
+     4.031710572106901,
+     4.084070449666731,
+     4.13643032722656,
+     4.1887902047863905,
+     4.241150082346221,
+     4.29350995990605,
+     4.34586983746588,
+     4.39822971502571,
+     4.45058959258554,
+     4.50294947014537,
+     4.5553093477052,
+     4.607669225265029,
+     4.6600291028248595,
+     4.71238898038469,
+     4.764748857944519,
+     4.817108735504349,
+     4.869468613064179,
+     4.921828490624009,
+     4.974188368183839,
+     5.026548245743669,
+     5.078908123303498,
+     5.1312680008633285,
+     5.183627878423159,
+     5.235987755982988,
+     5.288347633542818,
+     5.340707511102648,
+     5.393067388662478,
+     5.445427266222308,
+     5.497787143782138,
+     5.550147021341967,
+     5.602506898901797,
+     5.654866776461628,
+     5.707226654021457,
+     5.759586531581287,
+     5.811946409141117,
+     5.864306286700947,
+     5.916666164260777,
+     5.969026041820607,
+     6.021385919380436,
+     6.073745796940266,
+     6.126105674500097,
+     6.178465552059926,
+     6.230825429619756,
+     6.283185307179586
+    ],
+    "u0": 1.0,
+    "v0": 0.0,
+    "f": 1.0
+   },
+   "sha256": "6fb33943e7a81e07a43cedd38e9394ce70e327e911f233aebd8d0ebf1abdd5ef"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "speed after 1 perpendicular kick(s)",
+   "params": {
+    "a": [
+     10.0,
+     1.0
+    ]
+   },
+   "sha256": "f890682a2bd72ad269def1d635382d125d9ce12e482cfbca90b21eb26f0e72dc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "speed after 10 perpendicular kick(s)",
+   "params": {
+    "a": [
+     9.955041217231898,
+     0.9985761679581873
+    ]
+   },
+   "sha256": "da9d184b7ddce57c10f4d665a93c13e82f2c502586251afc8c5ba25115cb4aeb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "speed after 100 perpendicular kick(s)",
+   "params": {
+    "a": [
+     9.950541646549325,
+     0.9983591239065646
+    ]
+   },
+   "sha256": "590106fdaa784db3240c961e579d36a9a7e443b068c7475c713e43fd1737f1af"
+  },
+  {
+   "fn": "fluidpy.geo.frames.inertial_oscillation",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "continuous ⟂ push: circle (f = −1e-4, anticlockwise, the kicks' sense)",
+   "params": {
+    "t": [
+     0.0,
+     261.79938779914943,
+     523.5987755982989,
+     785.3981633974483,
+     1047.1975511965977,
+     1308.996938995747,
+     1570.7963267948967,
+     1832.595714594046,
+     2094.3951023931954,
+     2356.194490192345,
+     2617.993877991494,
+     2879.7932657906435,
+     3141.5926535897934,
+     3403.3920413889427,
+     3665.191429188092,
+     3926.9908169872415,
+     4188.790204786391,
+     4450.58959258554,
+     4712.38898038469,
+     4974.188368183839,
+     5235.987755982988,
+     5497.787143782138,
+     5759.586531581287,
+     6021.3859193804365,
+     6283.185307179587,
+     6544.984694978736,
+     6806.7840827778855,
+     7068.583470577035,
+     7330.382858376184,
+     7592.182246175334,
+     7853.981633974483,
+     8115.781021773632,
+     8377.580409572782,
+     8639.379797371932,
+     8901.17918517108,
+     9162.97857297023,
+     9424.77796076938,
+     9686.57734856853,
+     9948.376736367678,
+     10210.176124166828,
+     10471.975511965977,
+     10733.774899765127,
+     10995.574287564275,
+     11257.373675363426,
+     11519.173063162574,
+     11780.972450961724,
+     12042.771838760873,
+     12304.571226560023,
+     12566.370614359173,
+     12828.170002158322,
+     13089.969389957472,
+     13351.76877775662,
+     13613.568165555771,
+     13875.36755335492,
+     14137.16694115407,
+     14398.966328953218,
+     14660.765716752368,
+     14922.565104551517,
+     15184.364492350667,
+     15446.163880149816,
+     15707.963267948966,
+     15969.762655748114,
+     16231.562043547265,
+     16493.361431346413,
+     16755.160819145563,
+     17016.960206944714,
+     17278.759594743864,
+     17540.55898254301,
+     17802.35837034216,
+     18064.15775814131,
+     18325.95714594046,
+     18587.756533739608,
+     18849.55592153876,
+     19111.35530933791,
+     19373.15469713706,
+     19634.954084936206,
+     19896.753472735356,
+     20158.552860534506,
+     20420.352248333656,
+     20682.151636132803,
+     20943.951023931953,
+     21205.750411731104,
+     21467.549799530254,
+     21729.349187329404,
+     21991.14857512855,
+     22252.9479629277,
+     22514.74735072685,
+     22776.546738526,
+     23038.34612632515,
+     23300.1455141243,
+     23561.94490192345,
+     23823.7442897226,
+     24085.543677521746,
+     24347.343065320896,
+     24609.142453120046,
+     24870.941840919197,
+     25132.741228718347,
+     25394.540616517494,
+     25656.340004316644,
+     25918.139392115794,
+     26179.938779914944,
+     26441.73816771409,
+     26703.53755551324,
+     26965.33694331239,
+     27227.136331111542,
+     27488.93571891069,
+     27750.73510670984,
+     28012.53449450899,
+     28274.33388230814,
+     28536.133270107286,
+     28797.932657906436,
+     29059.732045705587,
+     29321.531433504737,
+     29583.330821303887,
+     29845.130209103034,
+     30106.929596902184,
+     30368.728984701334,
+     30630.528372500485,
+     30892.32776029963,
+     31154.12714809878,
+     31415.926535897932,
+     31677.725923697082,
+     31939.52531149623,
+     32201.32469929538,
+     32463.12408709453,
+     32724.92347489368,
+     32986.722862692826,
+     33248.52225049198,
+     33510.32163829113,
+     33772.12102609027,
+     34033.92041388943,
+     34295.719801688574,
+     34557.51918948773,
+     34819.318577286875,
+     35081.11796508602,
+     35342.917352885175,
+     35604.71674068432,
+     35866.51612848347,
+     36128.31551628262,
+     36390.11490408177,
+     36651.91429188092,
+     36913.71367968007,
+     37175.513067479216,
+     37437.31245527837,
+     37699.11184307752,
+     37960.91123087667,
+     38222.71061867582,
+     38484.510006474964,
+     38746.30939427412,
+     39008.108782073265,
+     39269.90816987241,
+     39531.707557671565,
+     39793.50694547071,
+     40055.306333269866,
+     40317.10572106901,
+     40578.90510886816,
+     40840.70449666731,
+     41102.50388446646,
+     41364.303272265606,
+     41626.10266006476,
+     41887.90204786391,
+     42149.70143566306,
+     42411.50082346221,
+     42673.300211261354,
+     42935.09959906051,
+     43196.898986859655,
+     43458.69837465881,
+     43720.497762457955,
+     43982.2971502571,
+     44244.096538056256,
+     44505.8959258554,
+     44767.69531365455,
+     45029.4947014537,
+     45291.29408925285,
+     45553.093477052,
+     45814.89286485115,
+     46076.6922526503,
+     46338.49164044945,
+     46600.2910282486,
+     46862.09041604775,
+     47123.8898038469,
+     47385.689191646044,
+     47647.4885794452,
+     47909.287967244345,
+     48171.08735504349,
+     48432.886742842646,
+     48694.68613064179,
+     48956.485518440946,
+     49218.28490624009,
+     49480.08429403924,
+     49741.88368183839,
+     50003.68306963754,
+     50265.482457436694,
+     50527.28184523584,
+     50789.08123303499,
+     51050.88062083414,
+     51312.68000863329,
+     51574.479396432434,
+     51836.27878423159,
+     52098.078172030735,
+     52359.87755982989,
+     52621.676947629036,
+     52883.47633542818,
+     53145.275723227336,
+     53407.07511102648,
+     53668.87449882563,
+     53930.67388662478,
+     54192.47327442393,
+     54454.272662223084,
+     54716.07205002223,
+     54977.87143782138,
+     55239.67082562053,
+     55501.47021341968,
+     55763.26960121883,
+     56025.06898901798,
+     56286.868376817125,
+     56548.66776461628,
+     56810.467152415426,
+     57072.26654021457,
+     57334.065928013726,
+     57595.86531581287,
+     57857.66470361203,
+     58119.46409141117,
+     58381.26347921032,
+     58643.062867009474,
+     58904.86225480862,
+     59166.661642607774,
+     59428.46103040692,
+     59690.26041820607,
+     59952.05980600522,
+     60213.85919380437,
+     60475.658581603515,
+     60737.45796940267,
+     60999.257357201815,
+     61261.05674500097,
+     61522.856132800116,
+     61784.65552059926,
+     62046.45490839842,
+     62308.25429619756,
+     62570.05368399671,
+     62831.85307179586
+    ],
+    "u0": 10.0,
+    "v0": 0.0,
+    "f": -0.0001
+   },
+   "sha256": "8ae23008428ab76d680731173548188e6bd090d0dfb0d33eea4521d478b01558"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s23a",
+   "data": "data/turning.json",
+   "eq": "along part of a push 30° off the perpendicular",
+   "params": {
+    "a": [
+     0.5000000000000001,
+     0.8660254037844386
+    ],
+    "b": [
+     5.0,
+     0.0
+    ]
+   },
+   "sha256": "f8395c73cb5f912ecc33dda31f880e94f067905816666008d63616d7a75ff1b6"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s23a",
+   "data": "data/turning.json",
+   "eq": "⟂ push · u = 0",
+   "params": {
+    "a": [
+     -0.0,
+     1.0
+    ],
+    "b": [
+     5.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s25",
+   "data": "data/earth.json",
+   "eq": "θ between Ω and r",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     7.292115e-05
+    ],
+    "b": [
+     4504977.302939494,
+     0.0,
+     4504977.302939494
+    ],
+    "degrees": true
+   },
+   "sha256": "e1af35bc6627c2dd9fd1fcdd5b07e61514ac0f2019cec604a120d591a54744de"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s25b",
+   "data": "data/earth.json",
+   "eq": "v = Ω × r at 45°N",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     7.292115e-05
+    ],
+    "b": [
+     4504977.302939494,
+     0.0,
+     4504977.302939494
+    ]
+   },
+   "sha256": "e831ccfcd30c3d6ed563029f7ec4c749d4f65eb95b7e2ddfc805b98989165978"
+  },
+  {
+   "fn": "fluidpy.geo.frames.turntable_puck",
+   "scene": "s26a",
+   "data": "data/merry.json",
+   "eq": "ball launched across a turning disc (outside: straight)",
+   "params": {
+    "t": [
+     0.0,
+     0.033333,
+     0.066667,
+     0.1,
+     0.133333,
+     0.166667,
+     0.2,
+     0.233333,
+     0.266667,
+     0.3,
+     0.333333,
+     0.366667,
+     0.4,
+     0.433333,
+     0.466667,
+     0.5,
+     0.533333,
+     0.566667,
+     0.6,
+     0.633333,
+     0.666667,
+     0.7,
+     0.733333,
+     0.766667,
+     0.8,
+     0.833333,
+     0.866667,
+     0.9,
+     0.933333,
+     0.966667,
+     1.0,
+     1.033333,
+     1.066667,
+     1.1,
+     1.133333,
+     1.166667,
+     1.2,
+     1.233333,
+     1.266667,
+     1.3,
+     1.333333,
+     1.366667,
+     1.4,
+     1.433333,
+     1.466667,
+     1.5,
+     1.533333,
+     1.566667,
+     1.6,
+     1.633333,
+     1.666667,
+     1.7,
+     1.733333,
+     1.766667,
+     1.8,
+     1.833333,
+     1.866667,
+     1.9,
+     1.933333,
+     1.966667,
+     2.0,
+     2.033333,
+     2.066667,
+     2.1,
+     2.133333,
+     2.166667,
+     2.2,
+     2.233333,
+     2.266667,
+     2.3,
+     2.333333,
+     2.366667,
+     2.4,
+     2.433333,
+     2.466667,
+     2.5,
+     2.533333,
+     2.566667,
+     2.6,
+     2.633333,
+     2.666667,
+     2.7,
+     2.733333,
+     2.766667,
+     2.8,
+     2.833333,
+     2.866667,
+     2.9,
+     2.933333,
+     2.966667,
+     3.0,
+     3.033333,
+     3.066667,
+     3.1,
+     3.133333,
+     3.166667,
+     3.2,
+     3.233333,
+     3.266667,
+     3.3,
+     3.333333,
+     3.366667,
+     3.4,
+     3.433333,
+     3.466667,
+     3.5,
+     3.533333,
+     3.566667,
+     3.6,
+     3.633333,
+     3.666667,
+     3.7,
+     3.733333
+    ],
+    "x0": 0.0,
+    "y0": -2.8,
+    "u0": 0.0,
+    "v0": 1.5,
+    "Omega": 0.5,
+    "launch": "inertial"
+   },
+   "sha256": "19ad1f4447e733198651495626ef6d61d79d295d7a6f000a7725bee3f2906638"
+  },
+  {
+   "fn": "fluidpy.geo.frames.rotating_frame_path",
+   "scene": "s27a",
+   "data": "data/merry.json",
+   "eq": "the rider's equation integrated (Vallis (2.12) on a flat table)",
+   "params": {
+    "t": [
+     0.0,
+     0.033333,
+     0.066667,
+     0.1,
+     0.133333,
+     0.166667,
+     0.2,
+     0.233333,
+     0.266667,
+     0.3,
+     0.333333,
+     0.366667,
+     0.4,
+     0.433333,
+     0.466667,
+     0.5,
+     0.533333,
+     0.566667,
+     0.6,
+     0.633333,
+     0.666667,
+     0.7,
+     0.733333,
+     0.766667,
+     0.8,
+     0.833333,
+     0.866667,
+     0.9,
+     0.933333,
+     0.966667,
+     1.0,
+     1.033333,
+     1.066667,
+     1.1,
+     1.133333,
+     1.166667,
+     1.2,
+     1.233333,
+     1.266667,
+     1.3,
+     1.333333,
+     1.366667,
+     1.4,
+     1.433333,
+     1.466667,
+     1.5,
+     1.533333,
+     1.566667,
+     1.6,
+     1.633333,
+     1.666667,
+     1.7,
+     1.733333,
+     1.766667,
+     1.8,
+     1.833333,
+     1.866667,
+     1.9,
+     1.933333,
+     1.966667,
+     2.0,
+     2.033333,
+     2.066667,
+     2.1,
+     2.133333,
+     2.166667,
+     2.2,
+     2.233333,
+     2.266667,
+     2.3,
+     2.333333,
+     2.366667,
+     2.4,
+     2.433333,
+     2.466667,
+     2.5,
+     2.533333,
+     2.566667,
+     2.6,
+     2.633333,
+     2.666667,
+     2.7,
+     2.733333,
+     2.766667,
+     2.8,
+     2.833333,
+     2.866667,
+     2.9,
+     2.933333,
+     2.966667,
+     3.0,
+     3.033333,
+     3.066667,
+     3.1,
+     3.133333,
+     3.166667,
+     3.2,
+     3.233333,
+     3.266667,
+     3.3,
+     3.333333,
+     3.366667,
+     3.4,
+     3.433333,
+     3.466667,
+     3.5,
+     3.533333,
+     3.566667,
+     3.6,
+     3.633333,
+     3.666667,
+     3.7,
+     3.733333
+    ],
+    "x0": 0.0,
+    "y0": -2.8,
+    "u0": -1.4,
+    "v0": 1.5,
+    "Omega": 0.5,
+    "centrifugal": true
+   },
+   "sha256": "342a1474fadf3822c444e912c5e17adea6510c842eed27c8b53bf7ee621aced1"
+  },
+  {
+   "fn": "fluidpy.core.rotating.inertial_velocity",
+   "scene": "s26b",
+   "data": "data/merry.json",
+   "eq": "v_outside = u + Ω × r (rotating axes)",
+   "params": {
+    "U": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "u_prime": [
+     0.4342959026398359,
+     1.5203246590661217,
+     0.0
+    ],
+    "Omega": [
+     0,
+     0,
+     0.5
+    ],
+    "x_prime": [
+     -0.5646424733950354,
+     -0.8253356149096783,
+     0.0
+    ]
+   },
+   "sha256": "24e9e25be969a1114f9068ecae97672545ab30f3c48f567ad006f6755f5984be"
+  },
+  {
+   "fn": "fluidpy.core.rotating.rotating_basis",
+   "scene": "s26c",
+   "data": "data/merry.json",
+   "eq": "floor axes carried round",
+   "params": {
+    "Omega": [
+     0,
+     0,
+     0.5
+    ],
+    "t": 0.0
+   },
+   "sha256": "1332df685c45a61a0ac008a6a653295b8c5655361c1d34b6304b22ec40235fb8"
+  },
+  {
+   "fn": "fluidpy.core.rotating.rotating_basis",
+   "scene": "s26c",
+   "data": "data/merry.json",
+   "eq": "floor axes carried round",
+   "params": {
+    "Omega": [
+     0,
+     0,
+     0.5
+    ],
+    "t": 0.0001
+   },
+   "sha256": "f91155eafa67244d65223f4fd1d84b995929e28057a33282a2fec6195cce7da0"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s26d",
+   "data": "data/merry.json",
+   "eq": "floor velocity Ω × r at r = 1 and 1.5 m",
+   "params": {
+    "a": [
+     0,
+     0,
+     0.5
+    ],
+    "b": [
+     [
+      1.0,
+      0,
+      0
+     ],
+     [
+      1.5,
+      0,
+      0
+     ]
+    ]
+   },
+   "sha256": "a8f59a1691c0cdaf9cc3cef8bd8637836c039ae38d5219b3ade7ac4951991ff5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s26d",
+   "data": "data/merry.json",
+   "eq": "Ω × u for u = 0.5 m/s outward",
+   "params": {
+    "a": [
+     0,
+     0,
+     0.5
+    ],
+    "b": [
+     0.5,
+     0,
+     0
+    ]
+   },
+   "sha256": "c2c1d1c755b6323ba7b8c59889bd86992fd6e237cacf131b59baeea7033610eb"
+  },
+  {
+   "fn": "fluidpy.core.rotating.frame_acceleration_terms",
+   "scene": "s27",
+   "data": "data/merry.json",
+   "eq": "frame terms (kinematic: 2Ω × u, Ω × (Ω × r))",
+   "params": {
+    "a_prime": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "u_prime": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "x_prime": [
+     0.0,
+     -2.5,
+     0.0
+    ],
+    "Omega": [
+     0.0,
+     0.0,
+     0.5
+    ]
+   },
+   "sha256": "a2071e6a3d725a32fa2cfd8032637d5486324403cf653060dc789f596ccf2775"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s28a",
+   "data": "data/coriolis.json",
+   "eq": "Ω · east at 45°N 0.5°E",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     7.292115e-05
+    ],
+    "b": [
+     -0.008726535498373935,
+     0.9999619230641713,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s28a",
+   "data": "data/coriolis.json",
+   "eq": "Ω · north at 45°N 0.5°E",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     7.292115e-05
+    ],
+    "b": [
+     -0.7070798567270163,
+     -0.006170592427165338,
+     0.7071067811865476
+    ]
+   },
+   "sha256": "e9ff9e1537eb73483a07de8add1f195a83671dc9d73e352e924b74cb2f9d2eda"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s28a",
+   "data": "data/coriolis.json",
+   "eq": "Ω · up at 45°N 0.5°E",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     7.292115e-05
+    ],
+    "b": [
+     0.7070798567270163,
+     0.006170592427165338,
+     0.7071067811865476
+    ]
+   },
+   "sha256": "e9ff9e1537eb73483a07de8add1f195a83671dc9d73e352e924b74cb2f9d2eda"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s28b",
+   "data": "data/coriolis.json",
+   "eq": "Ω × u at 45°N, u = (10, 0, 0)",
+   "params": {
+    "a": [
+     0.0,
+     5.156303965692141e-05,
+     5.156303965692141e-05
+    ],
+    "b": [
+     10.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "08de087eb1bcb6b6a32d84df937e8fc141a5817a15b8394d72f903ca6d839275"
+  },
+  {
+   "fn": "fluidpy.core.rotating.coriolis_acceleration",
+   "scene": "s28c",
+   "data": "data/coriolis.json",
+   "eq": "−2Ω × u, 3-D",
+   "params": {
+    "Omega": [
+     0.0,
+     5.156303965692141e-05,
+     5.156303965692141e-05
+    ],
+    "u": [
+     10.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "8a54fb7f40a83a469e93dd843da8d56ee7c48a5265210bdd83f5dc6e4f833629"
+  },
+  {
+   "fn": "fluidpy.geo.frames.coriolis_horizontal",
+   "scene": "s28c",
+   "data": "data/coriolis.json",
+   "eq": "−f k × u (flat part)",
+   "params": {
+    "u": 10.0,
+    "v": 0.0,
+    "lat": 0.7853981633974483
+   },
+   "sha256": "16a0b5574dd472b3d11235f56d7884a4f052cc695ffeed9182156219065e1868"
+  },
+  {
+   "fn": "fluidpy.geo.frames.coriolis_parameter",
+   "scene": "s28_f",
+   "data": "data/coriolis.json",
+   "eq": "f at 90°, 45°, 0°, −45°",
+   "params": {
+    "lat": [
+     1.5707963267948966,
+     0.7853981633974483,
+     0.0,
+     -0.7853981633974483
+    ]
+   },
+   "sha256": "846f72a9d2c22d0abf03b7a7c72124de36ac0c938b4026380028c99c23c8b9ee"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.k_cross",
+   "scene": "s40a",
+   "data": "data/geo.json",
+   "eq": "k × ∇p at the pin",
+   "params": {
+    "u": [
+     0.0,
+     -0.001
+    ]
+   },
+   "sha256": "95af5d7a7481b38b39c8e2806573085e570fb2aa1c2c81e142ea5dfb159885ff"
+  },
+  {
+   "fn": "fluidpy.core.gfd.geostrophic_velocity",
+   "scene": "s41a",
+   "data": "data/geo.json",
+   "eq": "balanced wind at the pin",
+   "params": {
+    "dpdx": 0.0,
+    "dpdy": -0.001,
+    "f": 0.00010312607931384282,
+    "rho0": 1.2
+   },
+   "sha256": "346ef28702f28074565e70c4e3de4795b141208b54c01afa72925aeb3069b63d"
+  },
+  {
    "fn": "fluidpy.geo.frames.coriolis_horizontal",
    "scene": "s36",
    "data": "data/ian.json",
@@ -38703,189 +41307,122 @@
    "params": {
     "a": [
      [
-      -161652.84416930188,
-      -472578.4382393746
+      -152305.16049598824,
+      -277987.31661139685
      ],
      [
-      -53884.2813897673,
-      -472578.4382393746
+      -558452.2551519569,
+      -111194.92664455874
      ],
      [
-      53884.2813897673,
-      -472578.4382393746
+      253841.93415998042,
+      222389.85328911748
      ],
      [
-      161652.84416930188,
-      -472578.4382393746
+      355378.7078239726,
+      222389.85328911748
      ],
      [
-      -377189.96972837107,
-      -305786.04827253654
+      -152305.16049598824,
+      389182.2432559556
      ],
      [
-      -269421.40694883646,
-      -305786.04827253654
+      -50768.38683199608,
+      389182.2432559556
      ],
      [
-      -161652.84416930188,
-      -305786.04827253654
+      50768.38683199608,
+      389182.2432559556
      ],
      [
-      -53884.2813897673,
-      -305786.04827253654
+      152305.16049598824,
+      389182.2432559556
      ],
      [
-      53884.2813897673,
-      -305786.04827253654
+      253841.93415998042,
+      389182.2432559556
      ],
      [
-      161652.84416930188,
-      -305786.04827253654
+      355378.7078239726,
+      389182.2432559556
      ],
      [
-      -377189.96972837107,
-      -138993.65830569842
+      -152305.16049598824,
+      555974.6332227937
      ],
      [
-      -269421.40694883646,
-      -138993.65830569842
+      -50768.38683199608,
+      555974.6332227937
      ],
      [
-      -484958.5325079057,
-      27798.731661139685
+      50768.38683199608,
+      555974.6332227937
      ],
      [
-      -377189.96972837107,
-      27798.731661139685
-     ],
-     [
-      377189.96972837107,
-      27798.731661139685
-     ],
-     [
-      484958.5325079057,
-      27798.731661139685
-     ],
-     [
-      -377189.96972837107,
-      194591.1216279778
-     ],
-     [
-      -269421.40694883646,
-      194591.1216279778
-     ],
-     [
-      -269421.40694883646,
-      361383.5115948159
-     ],
-     [
-      53884.2813897673,
-      361383.5115948159
+      152305.16049598824,
+      555974.6332227937
      ]
     ],
     "b": [
      [
-      40.21,
-      -11.25
+      55.03,
+      -6.52
      ],
      [
-      37.93,
-      -4.31
+      13.74,
+      -12.54
      ],
      [
-      38.68,
-      5.11
+      -7.31,
+      28.61
      ],
      [
-      44.85,
-      13.91
+      -0.3,
+      28.25
      ],
      [
-      26.14,
-      -16.22
+      -24.2,
+      -4.99
      ],
      [
-      34.0,
-      -17.92
+      -27.26,
+      -1.3
      ],
      [
-      43.58,
-      -20.41
+      -25.04,
+      8.52
      ],
      [
-      67.36,
-      -14.08
+      -21.65,
+      17.42
      ],
      [
-      73.37,
-      10.38
+      -16.11,
+      21.77
      ],
      [
-      54.81,
-      19.96
+      -15.32,
+      23.63
      ],
      [
-      22.83,
-      -17.7
+      -21.05,
+      -0.8
      ],
      [
-      27.6,
-      -33.48
+      -22.79,
+      2.74
      ],
      [
-      15.79,
-      -14.3
+      -24.71,
+      9.75
      ],
      [
-      11.51,
-      -15.87
-     ],
-     [
-      6.73,
-      35.67
-     ],
-     [
-      3.47,
-      31.05
-     ],
-     [
-      7.5,
-      -11.65
-     ],
-     [
-      2.38,
-      -20.08
-     ],
-     [
-      3.18,
-      -3.45
-     ],
-     [
-      -23.7,
-      1.72
+      -23.36,
+      12.83
      ]
     ]
    },
-   "sha256": "540ef497397743fab4cb1c704f5c24ea97d285e74c69adc99bc7773291c94357",
-   "real": true
-  },
-  {
-   "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s46",
-   "data": "data/storm.json",
-   "eq": "angle real vs geostrophic (850 hPa, 1° box means)",
-   "params": {
-    "a": [
-     19.291653213500975,
-     -9.452902507781982
-    ],
-    "b": [
-     20.00645305890357,
-     -10.997366774630708
-    ],
-    "degrees": true
-   },
-   "sha256": "d12a946ca550cd37e777fca06e6ade116ff840f51a33511227cff2172cec2f72",
+   "sha256": "ff1e249938bcbef6f5426ca2ba12e069aae089559d00fab6cadd091f7ed8a5fb",
    "real": true
   },
   {
@@ -38895,35 +41432,16 @@
    "eq": "10 m wind vs the isobar direction (friction turning)",
    "params": {
     "a": [
-     14.456130065917968,
-     -5.48036039352417
+     14.643819808959961,
+     -4.560534820556641
     ],
     "b": [
-     20.263378655165685,
-     -13.602079500380317
+     18.090977502623744,
+     -11.067377943478396
     ],
     "degrees": true
    },
-   "sha256": "1ded40d6572e3fbb8df4639ac9ea8c293e1af03f12a457002c0b6cdef0ff0084",
-   "real": true
-  },
-  {
-   "fn": "fluidpy.geo.vectors.angle_between",
-   "scene": "s46",
-   "data": "data/storm.json",
-   "eq": "angle real vs geostrophic (850 hPa, 1° box means)",
-   "params": {
-    "a": [
-     28.091554718017576,
-     -0.552288875579834
-    ],
-    "b": [
-     26.607129866129462,
-     -2.4539175375952413
-    ],
-    "degrees": true
-   },
-   "sha256": "61d9391ebc36795ccc07fdc3b095ef0d43baa3f188eb3a3c00edcd4425779caa",
+   "sha256": "a1e6ae744f785463333e8fc75ced9a63e373d5751dab95997153ce75352e80a1",
    "real": true
   },
   {
@@ -38933,16 +41451,16 @@
    "eq": "10 m wind vs the isobar direction (friction turning)",
    "params": {
     "a": [
-     13.114789113998413,
-     1.1920795297622682
+     -11.659043350219726,
+     4.292548789978027
     ],
     "b": [
-     24.53192494230915,
-     -6.857697640621685
+     -16.6473005495774,
+     9.609724605256414
     ],
     "degrees": true
    },
-   "sha256": "d51fd1b1e1f5404e137ea95224491941e202dac53c3996fe93f97943535aae7b",
+   "sha256": "36c6abcdcf569549006ff545f292ce54f3e2b22182ceda2ae8a4c96714980cb0",
    "real": true
   }
  ],
@@ -39074,23 +41592,34 @@
    "fn": "fluidpy.geo.atmos.geostrophic_wind_from_height",
    "scene": "s46",
    "eq": "I3 fallback: Z = msl/(ρ₀ g₀), ρ₀ = 1.2",
-   "input_sha256": "71be3ae6c9029cb2faecd657e7c6089621dee272e7b67816f1e39a8a065f4dc6",
-   "output_sha256": "4c679bda520412aa6eee3309710084464a9e6898d0fa8571e68f3143d16c991e"
+   "input_sha256": "e419c2848ee3ca8143c8c19b84b5790e7d8094dd7bb622db04f7ff7aa4be3792",
+   "output_sha256": "7757941344e951bbae9c8d58aff58ae8d6c6ff66d03da511d37284a57e895d39"
   },
   {
-   "fn": "builder: skimage.measure.find_contours (msl every 4 hPa) + NE 50m land mask + thinning",
+   "fn": "builder: skimage.measure.find_contours (msl every 4 hPa, 12 UTC) + NE 50m land + ERA5 lsm + thinning",
    "scene": "s45,s46",
-   "input_sha256": "71be3ae6c9029cb2faecd657e7c6089621dee272e7b67816f1e39a8a065f4dc6",
-   "upper_sha256": "701641602c4eaa3f0165738898dcc0d30a7ccfae2e45b78e418a5059480cde01"
+   "input_sha256": "e419c2848ee3ca8143c8c19b84b5790e7d8094dd7bb622db04f7ff7aa4be3792",
+   "upper_sha256": "e09e37de7b4d9d0f986e90f5de35b95c69e7c42c5e4f104e044f78103b30304b"
   },
   {
    "fn": "fluidpy.geo.atmos.geostrophic_wind_from_height",
    "scene": "s45,s46",
    "data": "data/storm.json",
-   "eq": "Vallis (2.215)/(2.198) geostrophic wind from 850 hPa heights",
-   "sha256": "8580d25dac12ab4b00a83a7c97ea19d05506601654db1ba31a1f15c9c49ddb79",
-   "params": "Z = ERA5 850 hPa z at 2023-11-02T00 (ciaran_2023_upper.bin), lat/lon of the box, lat_min 20",
-   "input_sha256": "701641602c4eaa3f0165738898dcc0d30a7ccfae2e45b78e418a5059480cde01"
+   "eq": "Vallis (2.215)/(2.198) geostrophic wind from 850 hPa heights (12 UTC)",
+   "sha256": "4692c4fed669a36a07c3253ab785842b0e976cf103d2bdb3d082850456ebe3e2",
+   "params": "Z = ERA5 850 hPa z at 2023-11-02T12 (ciaran_2023_upper_1102.bin), lat/lon of the box, lat_min 20",
+   "input_sha256": "e09e37de7b4d9d0f986e90f5de35b95c69e7c42c5e4f104e044f78103b30304b"
+  },
+  {
+   "fn": "fluidpy.core.operators.gradient",
+   "scene": "s40",
+   "data": "data/geo.json",
+   "eq": "∇p of the round low (5-km grid)",
+   "params": {
+    "phi": "array (721, 721), sha256 445b0e9b031a3f3e63e5a856d0d616c5f927dda3937526e3e6075b68bc11ce64",
+    "h": 5000.0
+   },
+   "output_sha256": "d1945634d30bc9cb3c7fa7ec1bc2d475dd3db44eb6864646f11066ec614f1e95"
   }
  ]
 }

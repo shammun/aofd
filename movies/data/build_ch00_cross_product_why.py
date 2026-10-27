@@ -122,6 +122,291 @@ def dest_point(clat, clon, east_km, north_km, a=EARTH_RADIUS):
     return clat + north_km * 1e3 / a / DEG, clon + east_km * 1e3 / (a * np.cos(clat * DEG)) / DEG
 
 
+def _ll(lat, lon, r=1.0):
+    """kit_cp/globe.tsx ll(): Y-up globe coordinates of (lat, lon) [deg]."""
+    la, lo = np.radians(lat), np.radians(lon)
+    return np.array([r * np.cos(la) * np.sin(lo), r * np.sin(la), r * np.cos(la) * np.cos(lo)])
+
+
+def _cam_basis(cam):
+    """kit_cp globeCam (no tilt/yaw): eye above (lat, lon) at `dist` Earth radii, looking at the surface point, north up."""
+    lat, lon, dist = cam
+    la, lo = np.radians(lat), np.radians(lon)
+    n = np.array([-np.sin(la) * np.sin(lo), np.cos(la), -np.sin(la) * np.cos(lo)])
+    surf = _ll(lat, lon)
+    pos = surf + surf * (dist - 1.0)
+    f = (surf - pos) / np.linalg.norm(surf - pos)
+    right = np.cross(f, n); right /= np.linalg.norm(right)
+    up = np.cross(right, f)
+    return pos, f, right, up
+
+
+def globe_screen(cam, lat, lon, r=1.0, M=None, W=1920, H=1080, fov=35.0, world=None):
+    """Screen px of a globe point through the same pinhole camera as kit_cp (cam.ts projector, principal point at the
+    canvas centre; a principal-point shift only translates and does not change any CHECK below)."""
+    pos, f, right, up = _cam_basis(cam)
+    q = np.asarray(world if world is not None else _ll(lat, lon, r), float)
+    if M is not None:
+        q = M @ q
+    d = q - pos
+    z = d @ f
+    k = (H / 2) / np.tan(np.radians(fov) / 2) / z
+    return np.array([W / 2 + k * (d @ right), H / 2 - k * (d @ up)])
+
+
+def globe_matrix(spin, tilt_deg):
+    """kit_cp globeMatrix: rotation about z by tilt, after a spin about Y."""
+    c, s = np.cos(np.radians(tilt_deg)), np.sin(np.radians(tilt_deg))
+    Rz = np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
+    cs, ss = np.cos(spin), np.sin(spin)
+    Ry = np.array([[cs, 0, ss], [0, 1, 0], [-ss, 0, cs]])
+    return Rz @ Ry
+
+
+def v4_parts(row, truth, call, files, pending, f45) -> None:
+    """Items N8-N20, N22 of the v4 storyboard (the 'why' section, Ω × r, the merry-go-round, Ω split, the round low)."""
+    import sympy as sp
+    pair = files["pair.json"]
+    a2, b2 = np.array(A2), np.array(B2)
+    # ---------------------------------------------------------------- N8 box proof (s09a)
+    polys = {"a_tri_1": [[0, 0], [5, 0], [5, 1]], "a_tri_2": [[6, 4], [1, 4], [1, 3]],
+             "b_tri_1": [[5, 1], [6, 1], [6, 4]], "b_tri_2": [[0, 0], [0, 3], [1, 3]],
+             "sq_1": [[5, 0], [6, 0], [6, 1], [5, 1]], "sq_2": [[0, 3], [1, 3], [1, 4], [0, 4]]}
+    shoe = {k: 0.5 * abs(sum(p[i][0] * p[(i + 1) % len(p)][1] - p[(i + 1) % len(p)][0] * p[i][1] for i in range(len(p)))) for k, p in polys.items()}
+    area = call(VEC + "parallelogram_area", "s09a", "pair.json", "box minus corners = |a×b| (ours)", a=A2, b=B2)
+    row("N8 pieces: a-triangles 5, b-triangles 3, squares 2", [shoe["a_tri_1"] + shoe["a_tri_2"], shoe["b_tri_1"] + shoe["b_tri_2"], shoe["sq_1"] + shoe["sq_2"]], [5, 3, 2], 1e-12)
+    row("N8 shoelace sum of the six pieces = 10; 24 − 10 = parallelogram_area = 14", [sum(shoe.values()), 24 - sum(shoe.values())], [10, area], 1e-12)
+    a1, a2s, b1, b2s = sp.symbols("a1 a2 b1 b2")
+    ident = sp.expand((a1 + b1) * (a2s + b2s) - a1 * a2s - b1 * b2s - 2 * a2s * b1 - (a1 * b2s - a2s * b1))
+    truth("N8 sympy: (a1+b1)(a2+b2) − a1a2 − b1b2 − 2a2b1 − (a1b2 − a2b1) = 0", ident == 0)
+    pair["box_proof"] = {"box": [[0, 0], [6, 0], [6, 4], [0, 4]], "box_area": 24, "polygons": polys, "areas": {k: r6(v) for k, v in shoe.items()},
+                         "sums": {"a": 5, "b": 3, "squares": 2}, "area": r6(area)}
+    # ---------------------------------------------------------------- N9 along / across (s18b) and the slide (s18c)
+    along_b = np.asarray(call(VEC + "projection", "s18b", "pair.json", "part of b along a", a=B2, b=A2))
+    across_b = b2 - along_b
+    al, ac = float(np.linalg.norm(along_b)), float(np.linalg.norm(across_b))
+    row("N9 along = 1.5689, across = 2.7456", [al, ac], [1.5689, 2.7456], 5e-5)
+    row("N9 along² + across² = |b|² = 10", al ** 2 + ac ** 2, 10.0, 1e-12)
+    row("N9 |a| × across = 14", np.linalg.norm(a2) * ac, 14.0, 1e-12)
+    row("N9 across = |b| sin θ (display 3.162 × 0.868 ≈ 2.75)", [ac, round(3.162 * 0.868, 2)], [pair["norm_b"] * pair["sin_theta"], 2.74], 2e-2)
+    row("N9 display 5.099 × 2.75 ≈ 14 (14.02)", round(5.099 * 2.75, 2), 14.02, 1e-9)
+    ss = np.round(np.arange(0, 2.0 + 1e-9, 0.02), 4)
+    bs = np.stack([b2[0] + ss * a2[0], b2[1] + ss * a2[1], 0 * ss], -1)
+    cz = np.asarray(call(VEC + "cross", "s18c", "pair.json", "a×(b + s a) for s = 0..2", a=A3, b=bs.tolist()))[:, 2]
+    row("N9 slide: cross z = 14 for every s (max |z − 14|)", float(np.max(np.abs(cz - 14))), 0.0, 1e-12)
+    row("N9 slide: s = 1 gives b = (6, 4); 5×4 − 1×6 = 14", [*bs[50, :2], 5 * 4 - 1 * 6], [6, 4, 14], 1e-12)
+    pair["split_b"] = {"along": r6(along_b), "across": r6(across_b), "along_len": r6(al), "across_len": r6(ac),
+                       "display": {"along": 1.57, "across": 2.75}}
+    pair["slide"] = {"s": ss.tolist(), "b": r6(bs[:, :2], 4), "cross_z": r6(cz)}
+    # ---------------------------------------------------------------- N22 shadows on the walls (s22b)
+    ta, tb = [2.0, 0.0, 1.0], [0.0, 2.0, 1.0]
+    tc = np.asarray(call(VEC + "cross", "s22b", "pair.json", "tilted a × b (illustrative pair)", a=ta, b=tb))
+    proj = {"yz": ([ta[1], ta[2]], [tb[1], tb[2]]), "zx": ([ta[2], ta[0]], [tb[2], tb[0]]), "xy": ([ta[0], ta[1]], [tb[0], tb[1]])}
+    sh = [float(call(VEC + "parallelogram_area", "s22b", "pair.json", f"shadow on the {k} wall", a=p, b=q)) for k, (p, q) in proj.items()]
+    row("N22 tilted cross = (−2, −2, 4); shadow areas (yz, zx, xy) = |components| = 2, 2, 4", [*tc, *sh], [-2, -2, 4, 2, 2, 4], 1e-12)
+    ours = [float(V.parallelogram_area([A3[1], A3[2]], [B3[1], B3[2]])), float(V.parallelogram_area([A3[2], A3[0]], [B3[2], B3[0]])),
+            float(V.parallelogram_area([A3[0], A3[1]], [B3[0], B3[1]]))]
+    row("N22 ours: wall shadows 0, 0; floor 14", ours, [0, 0, 14], 1e-12)
+    pair["shadows"] = {"a": ta, "b": tb, "cross": r6(tc), "areas_yz_zx_xy": r6(sh), "ours": ours}
+    # ---------------------------------------------------------------- N10 torque along / across (s20)
+    tq = files["torque.json"]
+    rt = np.array(tq["r"])
+    Fs = np.array(tq["F"])
+    alongF = np.asarray(call(VEC + "scalar_projection", "s20", "torque.json", "part of F along the spanner", a=Fs.tolist(), b=rt.tolist()))
+    acrossF = np.asarray(call(VEC + "parallelogram_area", "s20", "torque.json", "|r||F_across| (area) / |r| = part across", a=rt.tolist(), b=Fs.tolist())) / np.linalg.norm(rt)
+    row("N10 F components (0, 50), (43.30, 25), (50, 0)", Fs[:, :2].ravel(), [0, 50, 43.30127, 25, 50, 0], 1e-4)
+    row("N10 along 0, 43.3, 50; across 50, 25, 0", [*alongF, *acrossF], [0, 43.30127, 50, 50, 25, 0], 1e-4)
+    row("N10 0.3 × across = |τ| = 15, 7.5, 0", 0.3 * acrossF, tq["tau_mag"], 1e-9)
+    tq.update({"along_N": r6(alongF, 4), "across_N": r6(acrossF, 4), "F_display": [[0, 50, 0], [43.3, 25, 0], [50, 0, 0]]})
+    # ---------------------------------------------------------------- N11 angular momentum and the moving charge (s22c, s22d)
+    ex = {}
+    rL, pL = [0.5, 0.0, 0.0], [0.0, 2.0 * 3.0, 0.0]
+    L = np.asarray(call(VEC + "cross", "s22c", "examples.json", "L = r × p (angular momentum)", a=rL, b=pL))
+    tens = np.asarray(call(VEC + "cross", "s22c", "examples.json", "string torque r × (−T r̂) = 0", a=rL, b=[-5.0, 0.0, 0.0]))
+    row("N11 L = (0, 0, 3); string torque 0", [*L, *tens], [0, 0, 3, 0, 0, 0], 1e-12)
+    push = np.asarray(call(VEC + "cross", "s22d", "examples.json", "x̂ × ẑ = −ŷ: v (east) × B (up) points south", a=[1.0, 0, 0], b=[0, 0, 1.0]))
+    row("N11 v × B = (0, −1, 0) (south)", push, [0, -1, 0], 1e-12)
+    tc_ = np.linspace(0, 2 * np.pi, 121)
+    ch = call(FRM + "inertial_oscillation", "s22d", "examples.json", "charge circle: dv/dt = −f k × v, f = +1 (same equation; clockwise)",
+              t=tc_.tolist(), u0=1.0, v0=0.0, f=1.0)
+    row("N11 charge circle speed constant (1)", np.hypot(ch["u"], ch["v"]), 1.0, 1e-12)
+    ex["angular_momentum"] = {"r": rL, "p": pL, "m": 2, "speed": 3, "L": r6(L)}
+    ex["charge"] = {"v": [1, 0, 0], "B": [0, 0, 1], "push": r6(push), "circle_xy": r6(np.stack([ch["x"], ch["y"]], -1), 5),
+                    "circle_uv": r6(np.stack([ch["u"], ch["v"]], -1), 5), "centre": [r6(ch["xc"]), r6(ch["yc"])]}
+    # ---------------------------------------------------------------- N12 kicks (s22e)
+    kicks = {}
+    for n in (1, 10, 100):
+        u = np.array([10.0, 0.0])
+        pts = [u.copy()]
+        for _ in range(n):
+            kdir = np.asarray(V.k_cross(u)) / np.linalg.norm(u)
+            row_ok = abs(float(V.dot(kdir, u))) < 1e-12
+            if not row_ok:
+                truth(f"N12 kick ⟂ u (n={n})", False)
+            u = u + kdir * (1.0 / n)
+            pts.append(u.copy())
+        sp_ = float(call(VEC + "norm", "s22e", "examples.json", f"speed after {n} perpendicular kick(s)", a=u.tolist()))
+        ang = float(np.degrees(np.arctan2(u[1], u[0])))
+        kicks[str(n)] = {"speed": r6(sp_, 7), "turn_deg": r6(ang, 4), "tips": r6(np.array(pts), 6)}
+    row("N12 speeds 10.0499, 10.0050, 10.0005", [kicks[k]["speed"] for k in ("1", "10", "100")], [10.0499, 10.0050, 10.0005], 1e-4)
+    row("N12 turn 5.711°, 5.728°, 5.729°", [kicks[k]["turn_deg"] for k in ("1", "10", "100")], [5.711, 5.728, 5.729], 1e-3)
+    truth("N12 every kick ⟂ the current velocity (dot = 0)", True)
+    tk = np.linspace(0, 2 * np.pi / 1e-4, 241)
+    io = call(FRM + "inertial_oscillation", "s22e", "examples.json", "continuous ⟂ push: circle (f = −1e-4, anticlockwise, the kicks' sense)",
+              t=tk.tolist(), u0=10.0, v0=0.0, f=-1e-4)
+    row("N12 circle speed 10 (1e-12)", np.hypot(io["u"], io["v"]), 10.0, 1e-9)
+    kicks["circle_xy_km"] = r6(np.stack([io["x"], io["y"]], -1) / 1e3, 3)
+    kicks["circle_uv"] = r6(np.stack([io["u"], io["v"]], -1), 5)
+    ex["kicks"] = kicks
+    files["examples.json"] = ex
+    # ---------------------------------------------------------------- N13 why exactly 90° (s23a)
+    tu = files["turning.json"]
+    u5 = [5.0, 0.0]
+    p30 = [np.cos(60 * DEG), np.sin(60 * DEG)]
+    al30 = float(call(VEC + "scalar_projection", "s23a", "turning.json", "along part of a push 30° off the perpendicular", a=p30, b=u5))
+    pperp = np.asarray(V.k_cross(u5)) / 5.0
+    d90 = float(call(VEC + "dot", "s23a", "turning.json", "⟂ push · u = 0", a=pperp.tolist(), b=u5))
+    row("N13 along part = sin 30° = 0.5 of the push; ⟂ push · u = 0", [al30, d90], [0.5, 0.0], 1e-12)
+    tu["why90"] = {"push30": r6(p30), "along": r6(al30), "across": r6(float(np.sqrt(1 - al30 ** 2))), "perp": r6(pperp)}
+    # ---------------------------------------------------------------- N15 r at 45°N, the ground speed (s25a-s25b)
+    ea = files["earth.json"]
+    r45 = EARTH_RADIUS * np.array([np.cos(45 * DEG), 0.0, np.sin(45 * DEG)])
+    Om = [0.0, 0.0, OMEGA]
+    th = float(call(VEC + "angle_between", "s25", "earth.json", "θ between Ω and r", a=Om, b=r45.tolist(), degrees=True))
+    rad = float(np.linalg.norm(r45) * np.sin(th * DEG))
+    v45 = np.asarray(call(VEC + "cross", "s25b", "earth.json", "v = Ω × r at 45°N", a=Om, b=r45.tolist()))
+    row("N15 r45 = (4504.98, 0, 4504.98) km, |r| = 6371 km", [*(r45 / 1e3), np.linalg.norm(r45) / 1e3], [4504.98, 0, 4504.98, 6371.0], 0.01)
+    row("N15 θ = 45°, radius 4504.98 km", [th, rad / 1e3], [45, 4504.98], 0.01)
+    row("N15 Ω × r = (0, 328.51, 0) m/s = Ω |r| sin θ ŷ", [*v45, OMEGA * rad], [0, 328.51, 0, 328.51], 0.01)
+    row("N15 display 7.29e-5 × 4 505 000 = 328.4, exact 328.51 → ≈ 329", round(float(v45[1])), 329, 0)
+    row("N15 display 6371 × sin 45° ≈ 4505", round(6371 * np.sin(45 * DEG)), 4505, 0)
+    ea.update({"r45_km": r6(r45 / 1e3, 2), "theta_deg": r6(th, 4), "radius_km": r6(rad / 1e3, 2), "v45": r6(v45, 3),
+               "period_s": SIDEREAL_DAY})
+    # ---------------------------------------------------------------- N14 the globe axis meets the texture's poles (s24 + globes)
+    worst, leak = 0.0, 0
+    for spin in np.linspace(0, 2 * np.pi, 13):
+        M = globe_matrix(spin, 23.4)
+        for cam in ((25.0, -40.0, 3.6), (18.0, -40.0, 4.2), (25.0, -10.0, 3.6)):
+            pos = _cam_basis(cam)[0]
+            for sgn in (1, -1):
+                tex_pole = [globe_screen(cam, sgn * 90.0, lo, M=M) for lo in (-180, -90, 0, 90)]
+                ax_hit = globe_screen(cam, 0, 0, M=M, world=[0, sgn, 0])
+                worst = max(worst, max(float(np.hypot(*(p - ax_hit))) for p in tex_pole))
+            # occlusion: sample the axis from −1.35 to 1.35; a sample is drawn iff no sphere hit lies between the eye and it
+            for y in np.linspace(-1.35, 1.35, 109):
+                q = M @ np.array([0.0, y, 0.0])
+                d = q - pos; Lq = np.linalg.norm(d); d /= Lq
+                bq = d @ pos; cq = pos @ pos - 1.0; disc = bq * bq - cq
+                t_hit = -bq - np.sqrt(disc) if disc > 0 else np.inf
+                drawn = t_hit >= Lq - 1e-9
+                if drawn and abs(y) < 1.0:
+                    leak += 1
+    row("N14 texture poles vs axis–sphere intersections: max screen gap (px) ≤ 2", worst, 0.0, 2.0)
+    row("N14 axis samples inside the sphere that a depth-tested render would draw", leak, 0, 0)
+    # ---------------------------------------------------------------- N17 the merry-go-round (s26a-s27a)
+    Wm = 0.5
+    tm = np.round(np.arange(0, 3.7334, 1 / 30), 6)
+    tp = call(FRM + "turntable_puck", "s26a", "merry.json", "ball launched across a turning disc (outside: straight)",
+              t=tm.tolist(), x0=0.0, y0=-2.8, u0=0.0, v0=1.5, Omega=Wm, launch="inertial")
+    xi, yi, xr, yr = (np.asarray(tp[k]) for k in ("x_inertial", "y_inertial", "x_rotating", "y_rotating"))
+    u0R = np.array([0.0, 1.5]) - np.array([-Wm * -2.8, Wm * 0.0])        # v_I − Ω × r at the launch = (−1.4, 1.5)
+    rp = call(FRM + "rotating_frame_path", "s27a", "merry.json", "the rider's equation integrated (Vallis (2.12) on a flat table)",
+              t=tm.tolist(), x0=0.0, y0=-2.8, u0=float(u0R[0]), v0=float(u0R[1]), Omega=Wm, centrifugal=True)
+    gap = float(np.max(np.hypot(np.asarray(rp["x"]) - xr, np.asarray(rp["y"]) - yr)))
+    row("N17 launch in the rider's frame (−1.4, 1.5) m/s", u0R, [-1.4, 1.5], 1e-12)
+    row("N17 rotating_frame_path vs turntable_puck: max gap < 1e-6 m", gap, 0.0, 1e-6)
+    side = u0R[0] * (yr - (-2.8 + u0R[1] * tm)) - u0R[1] * (xr - (0.0 + u0R[0] * tm))
+    truth("N17 rider's path right of its launch heading for t > 0 (k·(u0 × Δr) < 0)", bool(np.all(side[1:] < 0)))
+    row("N17 outside path straight: x_inertial = 0", float(np.max(np.abs(xi))), 0.0, 1e-12)
+    j = int(np.argmin(np.abs(tm - 1.2)))
+    uR = np.array([rp["u"][j], rp["v"][j], 0.0]); rR = np.array([xr[j], yr[j], 0.0])
+    vout = np.asarray(call("fluidpy.core.rotating.inertial_velocity", "s26b", "merry.json", "v_outside = u + Ω × r (rotating axes)",
+                           U=[0.0, 0.0, 0.0], u_prime=uR.tolist(), Omega=[0, 0, Wm], x_prime=rR.tolist()))
+    ang = Wm * tm[j]
+    vin = np.array([vout[0] * np.cos(ang) - vout[1] * np.sin(ang), vout[0] * np.sin(ang) + vout[1] * np.cos(ang)])
+    row("N17 u + Ω × r (turned back to the outside axes) = turntable U, V", vin, [tp["U"], tp["V"]], 1e-9)
+    # carried arrow: an arrow fixed to the floor turns with it; its tip velocity = Ω × arrow
+    ua = np.array([0.0, 1.0, 0.0]); base = np.array([1.2, -1.6, 0.0])
+    tcarr = np.linspace(0, (np.pi / 3) / Wm, 61)
+    E = [np.asarray(call("fluidpy.core.rotating.rotating_basis", "s26c", "merry.json", "floor axes carried round", Omega=[0, 0, Wm], t=float(t_))) for t_ in (0.0, 1e-4)]
+    tipv = ((E[1].T @ ua) - (E[0].T @ ua)) / 1e-4
+    row("N17 carried arrow: tip velocity (finite difference) = Ω × u", tipv, np.cross([0, 0, Wm], ua), 1e-4)
+    ghosts = []
+    for t_ in tcarr:
+        Rb = np.asarray(R_basis([0, 0, Wm], float(t_)))
+        ghosts.append([*(Rb.T @ base)[:2], *(Rb.T @ ua)[:2]])
+    fo = np.asarray(call(VEC + "cross", "s26d", "merry.json", "floor velocity Ω × r at r = 1 and 1.5 m", a=[0, 0, Wm], b=[[1.0, 0, 0], [1.5, 0, 0]]))
+    du = np.asarray(call(VEC + "cross", "s26d", "merry.json", "Ω × u for u = 0.5 m/s outward", a=[0, 0, Wm], b=[0.5, 0, 0]))
+    row("N17 floor 0.5 → 0.75 m/s; change per second = Ω × u = (0, 0.25, 0)", [fo[0, 1], fo[1, 1], *(fo[1] - fo[0])], [0.5, 0.75, 0, 0.25, 0], 1e-12)
+    row("N17 Ω × u equals the floor change", du, fo[1] - fo[0], 1e-12)
+    ft = call("fluidpy.core.rotating.frame_acceleration_terms", "s27", "merry.json", "frame terms (kinematic: 2Ω × u, Ω × (Ω × r))",
+              a_prime=[0.0, 0.0, 0.0], u_prime=[0.0, 1.0, 0.0], x_prime=[0.0, -2.5, 0.0], Omega=[0.0, 0.0, Wm])
+    row("N17 2Ω × u = (−1, 0, 0); Ω × (Ω × r) = (0, 0.625, 0)", [*np.asarray(ft["coriolis"]), *np.asarray(ft["centripetal"])], [-1, 0, 0, 0, 0.625, 0], 1e-12)
+    floor_rings = {str(rr_): r6(rr_ * Wm, 3) for rr_ in (1.0, 2.8)}
+    files["merry.json"] = {"Omega": Wm, "radius": 3.0, "t": tm.tolist(), "inertial": r6(np.stack([xi, yi], -1), 5),
+                           "rotating": r6(np.stack([xr, yr], -1), 5), "check_path": r6(np.stack([rp["x"], rp["y"]], -1), 5),
+                           "max_gap_m": float(f"{gap:.3g}"), "u0_rider": r6(u0R), "two_views": {"j": j, "t": float(tm[j]), "u": r6(uR), "r": r6(rR),
+                           "omega_x_r": r6(np.cross([0, 0, Wm], rR)), "v_outside": r6(vout)}, "carried": {"base": base.tolist(), "u": ua.tolist(),
+                           "t": r6(tcarr, 4), "ghosts": r6(np.array(ghosts), 5), "tip_velocity": r6(tipv, 6)},
+                           "new_ground": {"r_old": 1.0, "r_new": 1.5, "u": 0.5, "floor_old": r6(fo[0]), "floor_new": r6(fo[1]), "change": r6(du)},
+                           "rings": floor_rings, "terms": {"coriolis_kin": r6(np.asarray(ft["coriolis"])), "centripetal": r6(np.asarray(ft["centripetal"]))}}
+    # ---------------------------------------------------------------- N18 Ω split at 45°N; Ω × u; the flat part (s28a-s28c, s28_f)
+    co = files["coriolis.json"]
+    phi, lam = 45 * DEG, 0.5 * DEG
+    e_ = [-np.sin(lam), np.cos(lam), 0.0]
+    n_ = [-np.sin(phi) * np.cos(lam), -np.sin(phi) * np.sin(lam), np.cos(phi)]
+    u_ = [np.cos(phi) * np.cos(lam), np.cos(phi) * np.sin(lam), np.sin(phi)]
+    OmL = [float(call(VEC + "dot", "s28a", "coriolis.json", f"Ω · {nm} at 45°N 0.5°E", a=Om, b=v)) for nm, v in (("east", e_), ("north", n_), ("up", u_))]
+    row("N18 Ω local (east, north, up) = (0, 5.156e-5, 5.156e-5)", OmL, [0, 5.1563e-5, 5.1563e-5], 1e-8)
+    row("N18 display 7.29e-5 × cos 45° ≈ 5.16e-5", round(7.29e-5 * np.cos(phi), 7), 5.15e-5, 1.1e-7)
+    Wsym, ph, uu, vv = sp.symbols("Omega phi u v")
+    cs = sp.Matrix([0, Wsym * sp.cos(ph), Wsym * sp.sin(ph)]).cross(sp.Matrix([uu, vv, 0]))
+    truth("N18 sympy Ω × u = (−Ω sin φ v, Ω sin φ u, −Ω cos φ u)",
+          sp.simplify(cs - sp.Matrix([-Wsym * sp.sin(ph) * vv, Wsym * sp.sin(ph) * uu, -Wsym * sp.cos(ph) * uu])) == sp.zeros(3, 1))
+    oxu = np.asarray(call(VEC + "cross", "s28b", "coriolis.json", "Ω × u at 45°N, u = (10, 0, 0)", a=OmL, b=[10.0, 0.0, 0.0]))
+    row("N18 Ω × u = (0, 5.156e-4, −5.156e-4)", oxu, [0, 5.1563e-4, -5.1563e-4], 1e-8)
+    full = np.asarray(call("fluidpy.core.rotating.coriolis_acceleration", "s28c", "coriolis.json", "−2Ω × u, 3-D", Omega=OmL, u=[10.0, 0.0, 0.0]))
+    hor = np.asarray(call(FRM + "coriolis_horizontal", "s28c", "coriolis.json", "−f k × u (flat part)", u=10.0, v=0.0, lat=float(phi)))
+    row("N18 coriolis_horizontal = flat part of −2Ω × u", hor, full[:2], 1e-12)
+    ratio = G0 / abs(float(full[2]))
+    row("N18 vertical part 1.03e-3 m/s²; g / vertical ≈ 9.5e3 (≈ 10 000 ×)", [abs(full[2]), round(ratio, -2)], [1.0313e-3, 9500], [2e-7, 100])
+    kxu_s = np.asarray(V.k_cross([3.0, 4.0]))
+    row("N18 k × u = (−v, u)", kxu_s, [-4.0, 3.0], 1e-12)
+    flat = call(FRM + "coriolis_parameter", "s28_f", "coriolis.json", "f at 90°, 45°, 0°, −45°", lat=(np.array([90.0, 45.0, 0.0, -45.0]) * DEG).tolist())
+    row("N18 f(90, 45, 0, −45) = 1.4584e-4, 1.0313e-4, 0, −1.0313e-4", flat, [1.4584e-4, 1.0313e-4, 0, -1.0313e-4], 1e-8)
+    co.update({"omega_local": r6(OmL, 10), "omega_x_u_45N": r6(oxu, 10), "coriolis_3d_45N": r6(full, 10), "vertical_ratio": round(ratio),
+               "f_by_lat": {"lat": [90, 45, 0, -45], "f": r6(flat, 10)}})
+    # ---------------------------------------------------------------- N20 the round low (s39-s44)
+    ge = files["geo.json"]
+    hh = 5000.0
+    xs = np.arange(-1800e3, 1800e3 + 1, hh)
+    X, Y = np.meshgrid(xs, xs)
+    prl = 99600.0 + 1e-3 * np.hypot(X, Y)                                  # Pa: 996 hPa + 1 hPa per 100 km
+    g = call("fluidpy.core.operators.gradient", "s40", "geo.json", "∇p of the round low (5-km grid)", phi=prl.tolist(), h=hh)
+    gx, gy = np.asarray(g)[0], np.asarray(g)[1]
+    jp, ip = int(np.argmin(np.abs(xs + 1000e3))), int(np.argmin(np.abs(xs)))
+    gp = np.array([gx[jp, ip], gy[jp, ip]])
+    row("N20 isobars 1000/1004/1008/1012 hPa at r = 400/800/1200/1600 km", [(p - 99600) / 1e-3 / 1e3 for p in (100000, 100400, 100800, 101200)], [400, 800, 1200, 1600], 1e-9)
+    row("N20 ∇p at the pin (0, −1000 km) = (0, −1e-3) Pa/m", gp, [0, -1e-3], 1e-9)
+    kg = np.asarray(call(VEC + "k_cross", "s40a", "geo.json", "k × ∇p at the pin", u=gp.tolist()))
+    row("N20 k × ∇p = (1e-3, 0) (east), ⟂ ∇p", [*kg, float(kg @ gp)], [1e-3, 0, 0], 1e-9)
+    tang = np.array([1.0, 0.0])          # isobar tangent at a point due south of the centre
+    row("N20 k × ∇p along the isobar tangent (|sin| of the angle)", abs(float((kg[0] * tang[1] - kg[1] * tang[0]) / np.linalg.norm(kg))), 0.0, 1e-9)
+    ugeo = np.asarray(call("fluidpy.core.gfd.geostrophic_velocity", "s41a", "geo.json", "balanced wind at the pin", dpdx=0.0, dpdy=-1e-3, f=f45, rho0=1.2))
+    cpush = np.array([f45 * ugeo[1], -f45 * ugeo[0]])                      # −f k × u
+    ppush = -gp / 1.2
+    row("N20 Coriolis push = −(pressure push) (0, ∓8.333e-4)", [*cpush, *ppush], [0, -8.3333e-4, 0, 8.3333e-4], 1e-8)
+    row("N20 display −1.03e-4 × 8.1 ≈ −8.3e-4", round(1.03e-4 * 8.1, 5), 8.3e-4, 1e-6)
+    ge["round_low"] = {"p0_hPa": 996, "hPa_per_100km": 1, "isobars_hPa": [1000, 1004, 1008, 1012], "isobar_r_km": [400, 800, 1200, 1600],
+                       "window_km": 3600, "pin_km": [0, -1000], "gradp": r6(gp, 9), "k_cross_gradp": r6(kg, 9), "u_geo": r6(ugeo, 4),
+                       "coriolis_push": r6(cpush, 9), "pressure_push": r6(ppush, 9)}
+
+
+def R_basis(Om, t):
+    from fluidpy.core.rotating import rotating_basis
+    return rotating_basis(Omega=Om, t=t)
+
+
 # ---------------------------------------------------------------------------------------------------------- main
 
 
@@ -133,6 +418,7 @@ def main() -> int:
     rows: list[dict] = []
     entries: list[dict] = []
     heavy: list[dict] = []
+    big_entries: list[dict] = []   # calls whose inputs are too big to replay from JSON (go to physics_heavy)
     files: dict[str, dict] = {}
     bins: dict[str, bytes] = {}
     pending: list[str] = []
@@ -150,6 +436,12 @@ def main() -> int:
         mod, name = fn.rsplit(".", 1)
         out = getattr(importlib.import_module(mod), name)(**params)
         jp = {k: (np.asarray(v).tolist() if isinstance(v, np.ndarray) else v) for k, v in params.items()}
+        if len(json.dumps(jp)) > 1_000_000:   # big input grid: keep the manifest < 10 MB; record hashes, not the grid
+            big_entries.append({"fn": fn, "scene": scene, "data": f"data/{data}", "eq": eq,
+                                "params": {k: (f"array {np.shape(v)}, sha256 {parity_hash(v)}" if np.ndim(v) else v)
+                                           for k, v in params.items()},
+                                "output_sha256": parity_hash(out)})
+            return out
         entries.append({"fn": fn, "scene": scene, "data": f"data/{data}", "eq": eq, "params": jp, "sha256": parity_hash(out)})
         return out
 
@@ -369,24 +661,39 @@ def main() -> int:
                             lat0=lat0 * DEG, lon0=lon0 * DEG, u0=10.0, v0=0.0, t=t.tolist(), dt=60.0)
         return t, np.degrees(la), np.degrees(lo), np.asarray(u), np.asarray(v)
 
-    t17, nla, nlo, nu, nv = track(45.0, -30.0, 17, "s00,s31")
-    _, sla, slo, su, sv = track(-45.0, -20.0, 17, "s31")
-    t6, n6la, n6lo, *_ = track(40.0, -30.0, 6, "s26")
-    _, s6la, s6lo, *_ = track(-40.0, -20.0, 6, "s26")
-    gn = call(FRM + "great_circle", "s26", fpth, "f = 0 ghost (great circle)", lat0=40 * DEG, lon0=-30 * DEG, u0=10.0, v0=0.0, t=t6.tolist())
-    gs = call(FRM + "great_circle", "s26", fpth, "f = 0 ghost (great circle)", lat0=-40 * DEG, lon0=-20 * DEG, u0=10.0, v0=0.0, t=t6.tolist())
+    # v4 (UV2-25, N16): the starts move over land: SW France (Dordogne) and Patagonia (Chubut)
+    NS0, SS0 = (45.0, 0.5), (-45.0, -69.5)
+    t17, nla, nlo, nu, nv = track(*NS0, 17, "s00,s31")
+    _, sla, slo, su, sv = track(*SS0, 17, "s31")
+    t6, n6la, n6lo, *_ = track(*NS0, 6, "s26")
+    _, s6la, s6lo, *_ = track(*SS0, 6, "s26")
+    gn = call(FRM + "great_circle", "s26", fpth, "f = 0 ghost (great circle)", lat0=NS0[0] * DEG, lon0=NS0[1] * DEG, u0=10.0, v0=0.0, t=t6.tolist())
+    gs = call(FRM + "great_circle", "s26", fpth, "f = 0 ghost (great circle)", lat0=SS0[0] * DEG, lon0=SS0[1] * DEG, u0=10.0, v0=0.0, t=t6.tolist())
     # loop diameters (km) on the local plane
-    ex_n, ny_n = enu_offsets_km(nla, nlo, 45.0, -30.0)
-    ex_s, ny_s = enu_offsets_km(sla, slo, -45.0, -20.0)
+    ex_n, ny_n = enu_offsets_km(nla, nlo, *NS0)
+    ex_s, ny_s = enu_offsets_km(sla, slo, *SS0)
     dn, ds_ = float(np.ptp(ny_n)), float(np.ptp(ny_s))
     row("NH track turns right first (v < 0 after 1 h)", nv[60] < 0, 1, 0)
     row("SH track turns left first (v > 0 after 1 h)", sv[60] > 0, 1, 0)
+    row("N16 first-hour Δlat −0.0603° (N) / +0.0603° (S)", [nla[60] - NS0[0], sla[60] - SS0[0]], [-0.0603, 0.0603], 5e-4)
+    try:
+        lm = land_mask(np.concatenate([nlo, slo]), np.concatenate([nla, sla]))
+        truth("N16 every 17-h track point over land (NE 50m land polygons)", bool(np.all(lm)))
+    except Exception as e:  # noqa: BLE001
+        pending.append(f"N16 land check not run ({e})")
+    # screen-space turning sense through the s31 cameras (globe camera above the loop centre, north up)
+    for nm, la_, lo_, want in (("N", nla, nlo, "clockwise"), ("S", sla, slo, "anticlockwise")):
+        cam = (0.5 * (la_.max() + la_.min()), 0.5 * (lo_.max() + lo_.min()), 1.105)
+        P2 = np.array([globe_screen(cam, a, b) for a, b in zip(la_[:121], lo_[:121])])
+        d = np.diff(P2, axis=0)
+        turn = float(np.sum(d[:-1, 0] * d[1:, 1] - d[:-1, 1] * d[1:, 0]))   # screen y down: > 0 = clockwise on screen
+        truth(f"N16 s31 view {nm}: first 2 h turn {want} on screen (signed {turn:+.3g})", (turn > 0) == (want == "clockwise"))
     row("loop diameter (north-south extent) ≈ 193.9 km within 5 %", [abs(dn / 193.9 - 1) < 0.05, abs(ds_ / 193.9 - 1) < 0.05], [1, 1], 0)
     row("speed conserved 10 m/s", np.hypot(nu, nv), 10.0, 1e-6)
     sub = slice(None, None, 2)  # 2-min samples for the composition
     files[fpth] = {"t_h": r6(t17[sub] / 3600, 4), "nh_track": r6(np.stack([nla[sub], nlo[sub]], -1), 5),
                    "sh_track": r6(np.stack([sla[sub], slo[sub]], -1), 5),
-                   "nh_start": [45.0, -30.0], "sh_start": [-45.0, -20.0],
+                   "nh_start": list(NS0), "sh_start": list(SS0),
                    "t6_h": r6(t6[sub] / 3600, 4), "nh_track_6h": r6(np.stack([n6la[sub], n6lo[sub]], -1), 5),
                    "sh_track_6h": r6(np.stack([s6la[sub], s6lo[sub]], -1), 5),
                    "ghost_nh": r6(np.stack([np.degrees(gn[1])[sub], np.degrees(gn[0])[sub]], -1), 5),
@@ -442,6 +749,8 @@ def main() -> int:
                  "loop_radius_km": r6(ugs[0] / f45 / 1e3, 2), "pieces_u": r6(ugs, 4), "kxkxu_check": r6(kk),
                  "worked": {"gradp": 1.0e-3, "f": r6(f45, 9), "rho": rho, "f_rho": r6(frho, 9), "u": r6(ugs[0], 4),
                             "display_quotient": round(1e-3 / 1.24e-4, 2)}}
+
+    v4_parts(row, truth, call, files, pending, f45)
 
     if args.part == "all":
         real_parts(row, truth, call, entries, heavy, files, bins, pending)
@@ -508,7 +817,9 @@ def main() -> int:
         "credits": sb_credits,
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
         "pending": pending,
-        "data_files": data_hashes, "checks": rows, "physics": entries, "physics_heavy": heavy,
+        "data_files": data_hashes, "checks": rows, "physics": entries,
+        "physics_heavy": [h for h in heavy if (h.get("fn"), h.get("scene"), h.get("eq")) not in
+                          {(b["fn"], b["scene"], b["eq"]) for b in big_entries}] + big_entries,
     }
     mpath.write_text(json.dumps(manifest, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"build_ch00_cross_product_why: {len(files)} json + {len(bins)} bin + manifest.json ({len(entries)} parity entries, "
@@ -578,7 +889,31 @@ def real_parts(row, truth, call, entries, heavy, files, bins, pending) -> None:
            "45N Pacific": sector(45, 160, 220), "45S Indian": sector(-45, 40, 100)}
     truth("P1: trades blow west at 15°N/S over the oceans (−4 … −8 m/s)", all(-8 < sec[k] < -4 for k in sec if k.startswith("15")))
     truth("P1: westerlies blow east at 45°N/S (+2.5 … +8 m/s)", all(2.5 < sec[k] < 8 for k in sec if k.startswith("45")))
-    files["winds_mean.json"] = {"product": "NCEP/NCAR Reanalysis 1, 10 m wind and sea-level pressure, annual long-term mean 1991-2020, T62 Gaussian 94 x 192",
+    # N19 (UV2-27): the trades lean towards the equator (v) as well as west (u) over the Atlantic and the Pacific
+    def sector_v(la, lo0, lo1):
+        j = int(np.argmin(np.abs(lat - la)))
+        sel = (lon >= lo0) & (lon <= lo1)
+        return float(np.nanmean(v[j, sel][~land[j, sel]]))
+    secv = {"15N Atlantic": sector_v(15, 320, 340), "15N central Pacific": sector_v(15, 180, 220), "15S Atlantic": sector_v(-15, 340, 355),
+            "15S east Pacific": sector_v(-15, 230, 260), "15S Indian": sector_v(-15, 60, 90)}
+    truth("N19 15°N: u < 0 and v < 0 (Atlantic, central Pacific)", all(sec[kk] < 0 and secv[kk] < 0 for kk in ("15N Atlantic", "15N central Pacific")))
+    truth("N19 15°S: u < 0 and v > 0 (Atlantic, east Pacific, Indian)", all(sec[kk] < 0 and secv[kk] > 0 for kk in ("15S Atlantic", "15S east Pacific", "15S Indian")))
+    hdg = {}
+    for nm, (la0, v0) in {"NH trade": (28.0, -1.0), "SH trade": (-28.0, 1.0), "NH westerly": (38.0, 1.0), "SH westerly": (-38.0, -1.0)}.items():
+        ax_, ay_ = FR.coriolis_horizontal(0.0, v0, la0 * DEG)
+        bend = np.radians(70.0)
+        push = np.array([ax_, ay_]) / np.hypot(ax_, ay_)
+        d0 = np.array([0.0, v0])
+        fin_ = np.cos(bend) * d0 + np.sin(bend) * push            # the drawn arrow turns 70° towards the push
+        hdg[nm] = float((np.degrees(np.arctan2(fin_[0], fin_[1])) + 360) % 360)   # heading from north, clockwise
+    truth(f"N19 turned-arrow headings: NH trade {hdg['NH trade']:.0f}° in (180, 270), SH trade {hdg['SH trade']:.0f}° in (270, 360)",
+          180 < hdg["NH trade"] < 270 and 270 < hdg["SH trade"] < 360)
+    truth(f"N19 westerly arrows end east-ish: {hdg['NH westerly']:.0f}°, {hdg['SH westerly']:.0f}° in (45, 135)",
+          45 < hdg["NH westerly"] < 135 and 45 < hdg["SH westerly"] < 135)
+    west_left = all(globe_screen((la_, lo_, 2.4), la_, lo_ - 2)[0] < globe_screen((la_, lo_, 2.4), la_, lo_)[0]
+                    for la_, lo_ in ((15, -40), (-15, -20), (15, -150), (-15, -120)))
+    truth("N19 west is screen-left for the north-up s33 camera keyframes", west_left)
+    files["winds_mean.json"] = {"sectors_v_m_s": {kk: round(x, 2) for kk, x in secv.items()}, "turn_headings_deg": {kk: round(x, 1) for kk, x in hdg.items()}, "product":"NCEP/NCAR Reanalysis 1, 10 m wind and sea-level pressure, annual long-term mean 1991-2020, T62 Gaussian 94 x 192",
                                 "highs": highs, "sectors_u_m_s": {k: round(x, 2) for k, x in sec.items()},
                                 "spoken": {"trades": "about five to seven m/s towards the west at 15°N/S",
                                            "westerlies": "about three to seven and a half m/s towards the east at 45°N/S"}}
@@ -712,27 +1047,29 @@ def real_parts(row, truth, call, entries, heavy, files, bins, pending) -> None:
     if adv is not None:
         particles(adv, row, truth, heavy, files, bins, lat, lon, u, v, land, rlat, rlon, gu, gv, hc, ilat_s, ilon, iu_s, iv_s, ic_)
 
-    # ---------------------------------------------------------------- P4: Storm Ciarán (s45, s46)
-    sh_, S = read_bin("ciaran_2023_sfc")
-    uh, U = read_bin("ciaran_2023_upper")
+    # ---------------------------------------------------------------- P4b: Storm Ciarán at 12 UTC (s45, s46; N21, v4)
+    TSTR = "2023-11-02T12:00"
+    sh_, S = read_bin("ciaran_2023_sfc_1102")
+    uh, U = read_bin("ciaran_2023_upper_1102")
     slat = np.asarray(sh_["coords"]["lat"], float)
     slon = np.asarray(sh_["coords"]["lon"], float)
-    st = sh_["coords"]["time"].index("2023-11-02T00:00")
-    ut = uh["coords"]["time"].index("2023-11-02T00:00")
+    st = sh_["coords"]["time"].index(TSTR)
+    ut = uh["coords"]["time"].index(TSTR)
+    k850 = uh["coords"]["level"].index(850)
     mslp = S["msl"][st] / 100.0
     u10, v10 = S["u10"][st], S["v10"][st]
-    z850 = U["z"][ut, 0]
-    u850, v850 = U["u"][ut, 0], U["v"][ut, 0]
-    SLON, SLAT = np.meshgrid(slon, slat)
-    sland = land_mask(SLON, SLAT)
+    z850 = U["z"][ut, k850]
+    u850, v850 = U["u"][ut, k850], U["v"][ut, k850]
+    lsm = S["land"] >= 0.5
     ug8, vg8 = call("fluidpy.geo.atmos.geostrophic_wind_from_height", "s45,s46", "storm.json",
-                    "Vallis (2.215)/(2.198) geostrophic wind from 850 hPa heights", Z=z850.tolist(), lat=slat.tolist(),
+                    "Vallis (2.215)/(2.198) geostrophic wind from 850 hPa heights (12 UTC)", Z=z850.tolist(), lat=slat.tolist(),
                     lon=slon.tolist(), lat_min=20.0)
     ug8, vg8 = np.asarray(ug8), np.asarray(vg8)
     jm = np.unravel_index(np.nanargmin(mslp), mslp.shape)
     low = [float(slat[jm[0]]), float(slon[jm[1]]), float(mslp[jm])]
-    row("Ciarán 2023-11-02T00 low (49.75°N, 5.75°W, 954.6 hPa)", low, [49.75, -5.75, 954.6], 0.06)
-    # isobars every 4 hPa (msl), lon/lat polylines, simplified
+    row("N21 Ciarán 12 UTC MSLP low (52.5°N, 1.75°E, 955.9 hPa)", low, [52.5, 1.75, 955.93], 0.06)
+    jz = np.unravel_index(np.nanargmin(z850), z850.shape)
+    row("N21 850 hPa height low at the same grid point", [slat[jz[0]], slon[jz[1]]], low[:2], 1e-9)
     levels = np.arange(np.ceil(mslp.min() / 4) * 4, mslp.max(), 4.0)
     iso = []
     for lev in levels:
@@ -743,90 +1080,122 @@ def real_parts(row, truth, call, entries, heavy, files, bins, pending) -> None:
             la = np.interp(c[:, 0], np.arange(slat.size), slat)
             lo = np.interp(c[:, 1], np.arange(slon.size), slon)
             iso.append({"hPa": float(lev), "pts": [[round(a, 3), round(b, 3)] for a, b in zip(la, lo)]})
-    # distance of every grid point to the nearest Natural Earth 50m land (degrees): arrows are drawn only over open sea
-    # (≥ 0.5° from any coast) and ≥ 400 km from the low (where curvature makes the real wind sub-geostrophic)
-    from shapely.geometry import Point
+    from shapely.geometry import Point, shape
+    from shapely.geometry import box as sbox
     from shapely.ops import unary_union
-    from fluidpy.data import naturalearth as NE
-    LANDU = unary_union([g for g in NE.read_polygons(NE.land_50m()) if g.bounds[0] < slon[-1] + 5 and g.bounds[2] > slon[0] - 5
-                         and g.bounds[3] > slat[0] - 5 and g.bounds[1] < slat[-1] + 5])
-    # thinned sea points every 1.5° for the arrows (|lat| ≥ 20 is guaranteed by the box)
-    js = np.arange(0, slat.size, 6)
-    is_ = np.arange(0, slon.size, 6)
+    gj = json.loads((ROOT / "data" / "derived" / "ch00" / "ciaran_land_50m.geojson").read_text(encoding="utf-8"))
+    LANDU = unary_union([shape(ft["geometry"]) for ft in gj["features"]])
+    SLON, SLAT = np.meshgrid(slon, slat)
+    E_, N_ = enu_offsets_km(SLAT, SLON, low[0], low[1])
+    RKM = np.hypot(E_, N_)
+    # the orchestrator's CHECK (2026-10-27): sea points 300-1500 km from the centre at 12 UTC
+    sea = (~lsm) & (RKM >= 300) & (RKM <= 1500) & np.isfinite(ug8) & (np.abs(SLAT) >= 20)
+    sg = np.hypot(ug8, vg8)
+    angd = np.degrees(np.abs(np.angle((u850 + 1j * v850) / (ug8 + 1j * vg8))))
+    ratio = np.hypot(u850, v850) / np.where(sg > 0, sg, np.nan)
+    med_a, frac10, med_r = float(np.nanmedian(angd[sea])), float(np.nanmean(angd[sea] <= 10)), float(np.nanmedian(ratio[sea]))
+    row(f"N21 850 hPa vs geostrophic over sea 300-1500 km: median direction difference ≤ 10° ({med_a:.1f}°)", med_a, 0, 10)
+    row(f"N21 ≥ 65 % of those points within 10° ({100 * frac10:.0f} %)", frac10 >= 0.65, 1, 0)
+    row(f"N21 median speed ratio actual/geostrophic in 0.80-0.95 ({med_r:.3f})", med_r, 0.875, 0.075)
+    # thinned sea points every 1.5° for the arrows, ≥ 0.5° from any coast, ≥ 300 km from the low
     arrows = []
-    for j in js:
-        for i in is_:
-            if sland[j, i] or not np.isfinite(ug8[j, i]):
+    for j in np.arange(0, slat.size, 6):
+        for i in np.arange(0, slon.size, 6):
+            if lsm[j, i] or not np.isfinite(ug8[j, i]) or RKM[j, i] < 300:
                 continue
-            d_km = np.hypot(*enu_offsets_km(slat[j], slon[i], low[0], low[1]))
+            cd = float(LANDU.distance(Point(float(slon[i]), float(slat[j]))))
+            if cd < 0.5:
+                continue
             arrows.append({"lat": float(slat[j]), "lon": float(slon[i]), "geo": [round(float(ug8[j, i]), 2), round(float(vg8[j, i]), 2)],
                            "act": [round(float(u850[j, i]), 2), round(float(v850[j, i]), 2)],
-                           "w10": [round(float(u10[j, i]), 2), round(float(v10[j, i]), 2)], "r_km": round(float(d_km), 0),
-                           "coast_deg": round(float(LANDU.distance(Point(float(slon[i]), float(slat[j])))), 2)})
-    shown = [a for a in arrows if a["coast_deg"] >= 0.5 and a["r_km"] >= 400]
-    truth("Ciarán: every drawn arrow is over open sea (≥ 0.5° from land) and ≥ 400 km from the low", len(shown) > 50)
-    # anticlockwise round the low: k·(r × u_g) > 0 on a 400-km ring (sea points near the ring)
-    ring_pts = [a for a in arrows if 300 <= a["r_km"] <= 500]
+                           "w10": [round(float(u10[j, i]), 2), round(float(v10[j, i]), 2)], "r_km": round(float(RKM[j, i]), 0),
+                           "coast_deg": round(cd, 2)})
+    truth("N21 every drawn arrow over open sea (≥ 0.5° from land) and ≥ 300 km from the low", len(arrows) > 40)
+    ring_pts = [a for a in arrows if 300 <= a["r_km"] <= 600]
     rv = np.array([enu_offsets_km(a["lat"], a["lon"], low[0], low[1]) for a in ring_pts]) * 1e3
     gvv = np.array([a["geo"] for a in ring_pts])
-    kzr = np.asarray(call(VEC + "cross", "s45", "storm.json", "k·(r×u_g) > 0: anticlockwise round the low",
-                          a=rv.tolist(), b=gvv.tolist()))[:, 2]
-    row("Ciarán: geostrophic anticlockwise on the 300-500 km ring (≥ 90 % of sea points)", np.mean(kzr > 0) >= 0.9, 1, 0)
-    # comparison points (W flank, S flank) at 850 hPa and 10 m
-    cmp = {}
-    # geostrophic wind from msl (the I3 fallback: Z = msl / (ρ₀ g₀)); only its direction is used (the isobar direction)
+    kzr = np.asarray(call(VEC + "cross", "s45", "storm.json", "k·(r×u_g) > 0: anticlockwise round the low", a=rv.tolist(), b=gvv.tolist()))[:, 2]
+    row("N21 geostrophic anticlockwise on the 300-600 km ring (≥ 90 % of sea points)", np.mean(kzr > 0) >= 0.9, 1, 0)
+    # geostrophic wind from msl (I3 fallback: Z = msl/(ρ₀ g₀)): only its direction is used (the isobar direction)
     ugs_, vgs_ = geostrophic_wind_from_height((mslp * 100.0) / (1.2 * G0), slat, slon, lat_min=20.0)
     heavy.append({"fn": "fluidpy.geo.atmos.geostrophic_wind_from_height", "scene": "s46", "eq": "I3 fallback: Z = msl/(ρ₀ g₀), ρ₀ = 1.2",
-                  "input_sha256": sha_file(REAL / "ciaran_2023_sfc.bin"), "output_sha256": parity_hash(np.nan_to_num(ugs_))})
-    for name, (la, lo) in {"W flank": (49.75, -15.75), "S flank": (43.75, -5.75)}.items():
-        j, i = int(np.argmin(np.abs(slat - la))), int(np.argmin(np.abs(slon - lo)))
-        sl = (slice(j - 2, j + 3), slice(i - 2, i + 3))       # 1° × 1° box mean (5 × 5 points), as the data-scout's check
-        bm = lambda F: float(np.nanmean(F[sl]))  # noqa: E731
-        g, a_, w = [bm(ug8), bm(vg8)], [bm(u850), bm(v850)], [bm(u10), bm(v10)]
-        gs = [bm(ugs_), bm(vgs_)]
-        ang = call(VEC + "angle_between", "s46", "storm.json", "angle real vs geostrophic (850 hPa, 1° box means)", a=a_, b=g, degrees=True)
-        a10 = call(VEC + "angle_between", "s46", "storm.json", "10 m wind vs the isobar direction (friction turning)", a=w, b=gs, degrees=True)
-        # towards the low: the 10 m wind turned anticlockwise (to the left of the isobar direction) in the NH
+                  "input_sha256": sha_file(REAL / "ciaran_2023_sfc_1102.bin"), "output_sha256": parity_hash(np.nan_to_num(ugs_))})
+
+    def bm(F, j, i):
+        return float(np.nanmean(F[j - 2:j + 3, i - 2:i + 3]))
+    # the two zoom points: TYPICAL sea points (1° box means closest to the medians), one west of the low, one in the North Sea
+    regions = {"W flank": lambda a: a["lon"] < -4 and 46 <= a["lat"] <= 54, "North Sea": lambda a: a["lon"] > 1 and a["lat"] > 53.5}
+    cmp = {}
+    for name, sel in regions.items():
+        best = None
+        for a in arrows:
+            if not sel(a) or not (300 <= a["r_km"] <= 1500):
+                continue
+            j, i = int(np.argmin(np.abs(slat - a["lat"]))), int(np.argmin(np.abs(slon - a["lon"])))
+            if lsm[j - 2:j + 3, i - 2:i + 3].any():
+                continue
+            g = [bm(ug8, j, i), bm(vg8, j, i)]
+            ac = [bm(u850, j, i), bm(v850, j, i)]
+            an = float(np.degrees(abs(np.angle(complex(*ac) / complex(*g)))))
+            rt_ = float(np.hypot(*ac) / np.hypot(*g))
+            score = abs(an - med_a) / 10 + abs(rt_ - med_r) / 0.1
+            if best is None or score < best[0]:
+                best = (score, j, i, g, ac, an, rt_)
+        _, j, i, g, ac, an, rt_ = best
+        w = [bm(u10, j, i), bm(v10, j, i)]
+        gs = [bm(ugs_, j, i), bm(vgs_, j, i)]
+        ang10 = float(call(VEC + "angle_between", "s46", "storm.json", "10 m wind vs the isobar direction (friction turning)", a=w, b=gs, degrees=True))
         side = float(np.asarray(V.cross(gs, w))[2])
-        cmp[name] = {"lat": float(slat[j]), "lon": float(slon[i]), "geo": r6(g, 2), "act": r6(a_, 2), "w10": r6(w, 2), "msl_geo": r6(gs, 2),
-                     "speed_ratio": round(float(np.hypot(*a_) / np.hypot(*g)), 3), "angle_850": round(float(ang), 1),
-                     "angle_10m": round(float(a10), 1), "k_dot_iso_cross_w10": round(side, 3)}
-        row(f"Ciarán {name}: 850 hPa speed within 10 %", abs(cmp[name]["speed_ratio"] - 1), 0, 0.10)
-        row(f"Ciarán {name}: 850 hPa direction within 5°", cmp[name]["angle_850"], 0, 5.0)
-        truth(f"Ciarán {name}: 10 m wind turned towards the low (left of the isobar direction)", side > 0)
+        cmp[name] = {"lat": float(slat[j]), "lon": float(slon[i]), "geo": r6(g, 2), "act": r6(ac, 2), "w10": r6(w, 2), "msl_geo": r6(gs, 2),
+                     "speed_ratio": round(rt_, 3), "angle_850": round(an, 1), "angle_10m": round(ang10, 1), "k_dot_iso_cross_w10": round(side, 3),
+                     "r_km": round(float(RKM[j, i]))}
+        row(f"N21 {name} (typical point): 850 hPa direction within 10° ({an:.1f}°)", an, 0, 10)
+        row(f"N21 {name}: speed ratio near the median ({rt_:.3f})", rt_, med_r, 0.06)
+        truth(f"N21 {name}: 10 m wind turned towards the low (left of the isobar direction, {ang10:.0f}°)", side > 0)
     print("  compare", cmp)
-    row("Ciarán friction angles ≈ 13° (W) and ≈ 21° (S)", [cmp["W flank"]["angle_10m"], cmp["S flank"]["angle_10m"]], [13.0, 20.9], 1.0)
-    # largest |∇msl| over sea (two places)
-    gpy, gpx = np.gradient(mslp, axis=0), np.gradient(mslp, axis=1)
-    gmag = np.where(sland, 0, np.hypot(gpx, gpy * 1.0))
-    order = np.argsort(gmag.ravel())[::-1]
     crowd = []
-    for o in order:
+    gmag = np.where(lsm, 0, np.hypot(*np.gradient(mslp)))
+    for o in np.argsort(gmag.ravel())[::-1]:
         j, i = np.unravel_index(o, gmag.shape)
+        if slon[i] > 9 or slon[i] < -28 or slat[j] < 43 or slat[j] > 61:
+            continue
         if all(np.hypot(*enu_offsets_km(slat[j], slon[i], c[0], c[1])) > 600 for c in crowd):
             crowd.append([float(slat[j]), float(slon[i])])
         if len(crowd) == 2:
             break
-    # coastlines inside the box (Natural Earth 50m)
-    ne = json.loads((REAL / "ne_lines_50m.json").read_text(encoding="utf-8"))
-    coast = []
-    for ln in ne["coastline"]:
-        arr = np.asarray(ln).reshape(-1, 2)
-        m = (arr[:, 0] >= slon[0] - 2) & (arr[:, 0] <= slon[-1] + 2) & (arr[:, 1] >= slat[0] - 2) & (arr[:, 1] <= slat[-1] + 2)
-        if m.sum() >= 2:
-            coast.append(arr[m].round(2).tolist())
-    files["storm.json"] = {"time": "2023-11-02T00:00", "box": {"lat": [float(slat[0]), float(slat[-1])], "lon": [float(slon[0]), float(slon[-1])]},
-                           "low": low, "isobars": iso, "arrows": arrows, "compare": cmp, "crowd": crowd, "coast": coast,
-                           "spoken": {"friction_deg": [13, 21]}}
-    heavy.append({"fn": "builder: skimage.measure.find_contours (msl every 4 hPa) + NE 50m land mask + thinning", "scene": "s45,s46",
-                  "input_sha256": sha_file(REAL / "ciaran_2023_sfc.bin"), "upper_sha256": sha_file(REAL / "ciaran_2023_upper.bin")})
-    # the geostrophic call above has a 141 x 241 field: keep it out of QA's re-run list (recorded as heavy)
+    # Natural Earth 10m coast / country borders / region borders for the map panel (data-scout e20037e), simplified
+    lines = {}
+    clip = sbox(-31.0, 42.0, 12.0, 62.5)
+    for key, nm, tol in (("coast", "ciaran_coast_10m", 0.008), ("borders", "ciaran_borders_10m", 0.008), ("admin1", "ciaran_admin1_lines_10m", 0.01)):
+        gj2 = json.loads((ROOT / "data" / "derived" / "ch00" / f"{nm}.geojson").read_text(encoding="utf-8"))
+        out = []
+        for ft in gj2["features"]:
+            gm = shape(ft["geometry"]).intersection(clip).simplify(tol)
+            for pp in getattr(gm, "geoms", [gm]):
+                if pp.is_empty or not hasattr(pp, "coords"):
+                    continue
+                cs = np.round(np.asarray(pp.coords), 3)
+                if len(cs) >= 2:
+                    out.append(cs.ravel().tolist())
+        lines[key] = out
+    img = json.loads((ROOT / "data" / "derived" / "ch00" / "ciaran_modis_aqua_truecolour_2023-11-02.json").read_text(encoding="utf-8"))
+    files["ciaran_lines.json"] = {"source": "Natural Earth 10m (public domain), via data/derived/ch00 (e20037e), clipped 31W-12E, 42-62.5N, simplified",
+                                  **lines}
+    files["storm.json"] = {"time": TSTR, "box": {"lat": [float(slat[0]), float(slat[-1])], "lon": [float(slon[0]), float(slon[-1])]},
+                           "low": low, "second_low_note": "a weaker closed low (~972 hPa) near 55N 11W is not labelled",
+                           "isobars": iso, "arrows": arrows, "compare": cmp, "crowd": crowd,
+                           "stats_850": {"median_angle_deg": round(med_a, 2), "frac_within_10deg": round(frac10, 3), "median_speed_ratio": round(med_r, 3),
+                                         "n_points": int(sea.sum()), "window_km": [300, 1500]},
+                           "image": {"file": "ciaran_modis_aqua_truecolour_2023-11-02.jpg", "lat_edges": img["lat_edges"], "lon_edges": img["lon_edges"],
+                                     "shape": img["shape"], "sha256": sha_file(ROOT / "data" / "derived" / "ch00" / "ciaran_modis_aqua_truecolour_2023-11-02.jpg")}}
+    heavy.append({"fn": "builder: skimage.measure.find_contours (msl every 4 hPa, 12 UTC) + NE 50m land + ERA5 lsm + thinning", "scene": "s45,s46",
+                  "input_sha256": sha_file(REAL / "ciaran_2023_sfc_1102.bin"), "upper_sha256": sha_file(REAL / "ciaran_2023_upper_1102.bin")})
     for e in list(entries):
         if e["fn"].endswith("geostrophic_wind_from_height"):
             entries.remove(e)
             heavy.append({**{k: e[k] for k in ("fn", "scene", "data", "eq", "sha256")},
-                          "params": "Z = ERA5 850 hPa z at 2023-11-02T00 (ciaran_2023_upper.bin), lat/lon of the box, lat_min 20",
-                          "input_sha256": sha_file(REAL / "ciaran_2023_upper.bin")})
+                          "params": "Z = ERA5 850 hPa z at 2023-11-02T12 (ciaran_2023_upper_1102.bin), lat/lon of the box, lat_min 20",
+                          "input_sha256": sha_file(REAL / "ciaran_2023_upper_1102.bin")})
     mark_real(n0, None)
 
 
