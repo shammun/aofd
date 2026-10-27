@@ -87,3 +87,11 @@ belts · W49–W52 Brest numbers in the table above.
 
 **Rule.** If a CHECK fails, the narration changes to the data (never the reverse); the director re-runs the TTS dry
 run for the changed sentences.
+
+## E. Orchestrator decisions after the data fetch (2026-10-27)
+- Q3: the e_s formula (18.28) stays off screen; the curve and its numbers are shown.
+- Q5: the real cumulus field (24 Jun 2024, northern France, MODIS 250 m) is used in s31; its ERA5 numbers give a cloud base of 1.4 km.
+- IGRA has no Trappes 12 UTC launch on 1 Nov 2023: both soundings are the 00 UTC 1 Nov ones ("around midnight on the first of November").
+- W24: Trappes tropopause 10.88 km at −62.7 °C. The narration says "about minus sixty"; the CHECK range widens to −65 °C because it follows the data (not a loosened tolerance on a computed value).
+- W25: the ERA5 column stops at 1 hPa (~47 km). The real column is drawn to 47 km, and the stratopause comes from the standard atmosphere, with the narration saying so in plain words.
+- D11 latest map (GFS 00 UTC 27 Oct 2026): it is called "a weather-service analysis". The deepest low (934.9 hPa, 14.5°N 162.5°E) is described as "a typhoon over the western Pacific", unnamed unless confirmed. The Siberian high (1040.1 hPa) and the North Atlantic low (954.6 hPa, about as deep as Ciarán) are used for the comparison.
