@@ -19,7 +19,7 @@ What is weather made of? Let's see what air pressure, temperature, humidity and 
 > Screen: Globe3D from frame 0 (true colour 2023-11-02 12 UTC, Ciarán spiral visible); keywords appear on their words: 'pressure', 'temperature', 'humidity', 'wind' (54 px) round the globe with tiny icons (barometer, thermometer, droplet, wind arrow)
 
 ## s02_thin_shell
-Let's start with the air itself. The atmosphere is the layer of air that wraps around the Earth, held down by gravity. It's much thinner than most pictures suggest. The layer where our weather happens is only about twelve kilometres deep, while the Earth's radius is six thousand three hundred and seventy-one kilometres. On a globe thirty centimetres across, that layer would be about a third of a millimetre thick, like three sheets of paper. So from now on, we'll draw the air fifty times thicker than it really is, just so we can see it.
+Let's start with the air itself. The atmosphere is the layer of air that wraps around the Earth, held down by gravity. It's much thinner than most pictures suggest. The layer where our weather happens is only about twelve kilometres deep, while the Earth's radius is six thousand three hundred and seventy-one kilometres. On a globe thirty centimetres across, that layer would be about three tenths of a millimetre thick, like three sheets of paper. So from now on, we'll draw the air fifty times thicker than it really is, just so we can see it.
 
 > 96 words · 6 sentences · 23.275–61.875 s (38.6 s; speech 36.0 s) · 0:23.27–1:01.88 (measured) · beat: building blocks · the atmosphere.
 > Screen: Globe with true-scale shell (hair-thin) -> gold bracket '12 km' vs radius '6371 km'; calc '12 ÷ 6371 × 150 mm ≈ 0.28 mm'; shell swells to 50x on 'fifty times thicker' with keyword '× 50'
@@ -133,7 +133,7 @@ What does this curve tell us? Every time we climb one scale height, eight point 
 > Screen: on the curve: steps of H with '÷ e' marks (1013 → 373 → 137 hPa); '−11 % per km'; mattress stack (Like) with crossed-out note (Unlike); halving marks 5.8 km → 507 hPa, 11.7 km → 253 hPa
 
 ## s21_balloon_pressure
-Does the real atmosphere follow this curve? Let's check it against a real weather balloon. Twice a day, at hundreds of places around the world, meteorologists launch a balloon carrying a small instrument package called a radiosonde. As it rises, it radios back the pressure, the temperature and the humidity, and from its drift we get the wind. This one was launched near Paris at midday on the first of November, twenty twenty-three. Near the ground, its pressure follows our curve closely. Higher up, the real pressure falls a little faster, because the real air up there is colder, and colder air has a smaller scale height. So our curve is a good first guess, and the measurements tell us where it needs correcting.
+Does the real atmosphere follow this curve? Let's check it against a real weather balloon. Twice a day, at hundreds of places around the world, meteorologists launch a balloon carrying a small instrument package called a radiosonde. As it rises, it radios back the pressure, the temperature and the humidity, and from its drift we get the wind. This one was launched near Paris around midnight, at the start of the first of November, twenty twenty-three. Near the ground, its pressure follows our curve closely. Higher up, the real pressure falls a little faster, because the real air up there is colder, and colder air has a smaller scale height. So our curve is a good first guess, and the measurements tell us where it needs correcting.
 
 > 124 words · 8 sentences · 772.600–822.575 s (50.0 s; speech 46.7 s) · 12:52.60–13:42.58 (measured) · beat: intuition · check against a real balloon.
 > Screen: balloon rising from Trappes on a small true-colour map of France; graph: measured p(z) teal dots vs slate curve H = 8.4 km; gap highlighted aloft 'colder → smaller H'; Everest tick at 8.8 km with both values
@@ -151,13 +151,13 @@ Now let's look at the temperature that the same balloon measured. Here, height g
 > Screen: graph T(z) from the Trappes sounding (orange line, height 0-35 km up, T −80 … +20 °C across); slope triangle '−6.5 °C per km'; band 0-11 km shaded 'troposphere'; cloud icons in the band
 
 ## s24_stratosphere
-At about eleven kilometres, near minus fifty-five degrees, the fall stops. This boundary is called the tropopause. Above it, the temperature stops falling, and higher up it rises again. That's the stratosphere, a calm, layered region, where ozone absorbs the sun's ultraviolet light and warms the air. Balloons usually burst at around thirty kilometres, but the warming goes on up to about fifty kilometres. Above that come the mesosphere and the thermosphere, where the air is extremely thin.
+At about eleven kilometres, at about minus sixty-three degrees, the fall stops. This boundary is called the tropopause. Above it, the temperature stops falling, and higher up it rises again. That's the stratosphere, a calm, layered region, where ozone absorbs the sun's ultraviolet light and warms the air. Balloons usually burst at around thirty kilometres, but other measurements show the warming going on above that, up to about fifty kilometres on average. Above that come the mesosphere and the thermosphere, where the air is extremely thin.
 
 > 78 words · 6 sentences · 888.550–925.925 s (37.4 s; speech 34.8 s) · 14:48.55–15:25.92 (measured) · beat: building blocks · tropopause and stratosphere.
 > Screen: tropopause line at ≈ 11 km '≈ −55 °C'; stratosphere band; balloon bursts ~30 km; dashed slate extension to 48 km (reanalysis, same place and time); ozone keyword with sun rays; 'mesosphere', 'thermosphere' above
 
 ## s25_tropics
-Now let's keep the time the same and change only the place. Here is a balloon launched at the same moment at Singapore, near the equator. Its tropopause is much higher, at about sixteen or seventeen kilometres, and much colder, below minus seventy-five degrees. Strong rising currents in the warm tropics stir the air much higher, so the troposphere is deeper there. Near the poles, it's shallower, about eight or nine kilometres.
+Now let's keep the time the same and change only the place. Here is a balloon launched at the same moment at Singapore, near the equator. Its tropopause is much higher, at about sixteen or seventeen kilometres, and much colder, below minus seventy-five degrees. Strong rising currents in the warm tropics stir the air much higher, so the troposphere is deeper there. Near the poles, it's shallower, about eight to ten kilometres.
 
 > 72 words · 5 sentences · 925.925–957.525 s (31.6 s; speech 29.4 s) · 15:25.92–15:57.52 (measured) · beat: contrast · change only the place.
 > Screen: second profile (teal) from Singapore on the same axes; two tropopause marks 'Paris ≈ 11 km', 'Singapore ≈ 16-17 km'; mini globe with tropopause depth band thicker at the equator than at the poles
@@ -259,7 +259,7 @@ Here is the same moment again, now as sea-level pressure. The mountains are gone
 > Screen: cross-fade surface pressure → ERA5 MSLP on the globe; isobars draw outward every 4 hPa; keyword 'isobars = equal weight'; gold bracket where they crowd near Ciarán
 
 ## s42_highs_lows
-The map shows round patches where the pressure is higher than all around, called highs, and patches where it's lower than all around, called lows. A low is also called a depression, or a cyclone, and a high is also called an anticyclone. Over the southern North Sea, just off England, is a deep low, Storm Ciarán, at about nine hundred and fifty-six hectopascals. Far to the south-west, near the Azores islands, is a high at about one thousand and thirty.
+The map shows round patches where the pressure is higher than all around, called highs, and patches where it's lower than all around, called lows. A low is also called a depression, or a cyclone, and a high is also called an anticyclone. Over the east coast of England, at the edge of the North Sea, is a deep low, Storm Ciarán, at about nine hundred and fifty-six hectopascals. Far to the south-west, near the Azores islands, is a high at about one thousand and thirty.
 
 > 81 words · 4 sentences · 1638.150–1672.200 s (34.0 s; speech 32.2 s) · 27:18.15–27:52.20 (measured) · beat: building blocks · highs and lows.
 > Screen: 'H' and 'L' letters (68 px) at the analysed centres; 'L 956 hPa' Ciarán; 'H ≈ 1030 hPa' near the Azores; keywords 'low = depression = cyclone', 'high = anticyclone'
@@ -301,7 +301,7 @@ At a warm front, the warm air is advancing, but it's lighter, so it can't push t
 > Screen: side view: orange warm air gliding up a gentle slate slope; layered cloud sheet far ahead with long rain; '1 km per 100-200 km'; wind 'SE → S/SW'; keyword '× 50 taller'
 
 ## s49_real_fronts
-Here are real fronts, around Ciarán at midnight at the start of the second of November. The colours show the temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical air reaches up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing edge, curving away to the south, is the cold front. The arrows show the wind turning sharply where it crosses each front.
+Here are real fronts, around Ciarán at six in the evening on the first of November. The colours show the temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical air reaches up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing edge, curving away to the south-west, is the cold front. The arrows show the wind turning as it crosses the fronts, most sharply at the warm front.
 
 > 84 words · 6 sentences · 1912.900–1946.075 s (33.2 s; speech 30.6 s) · 31:52.90–32:26.08 (measured) · beat: application · real fronts round Ciarán.
 > Screen: map 40-60N 25W-10E: ERA5 850-hPa T at 00 UTC 2 Nov over a night-free base (BMNG relief, labelled 'base map'), coast/borders; front lines from the thermal front parameter: warm front (red half circles) and cold front (blue triangles) drawn as gold lines first; wind arrows 850 hPa turning across them
@@ -373,9 +373,9 @@ To sum up, the atmosphere is a thin shell of air, and almost all our weather hap
 > Screen: one beat per sentence, mini pictures: thin-shell globe · '1013 hPa' column · p = p₀e^(−z/H), H ≈ 8 km · p = ρRT with two cubes · RH curve + dew point ring · compass '233° south-westerly', '19 kt' · MSLP map with H/L and front symbols · Brest TimeGraph + ERA5 globe
 
 ## s61_end
-This video is one of a series of related tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for these weather basics, and the notebooks for the other concepts, are on the website that goes with this video.
+This video is one of a series of related tutorials, so watch out for the others. They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too. The notebook for these weather basics, and the notebooks for the other concepts, are on the website that goes with this video.
 
 > 56 words · 3 sentences · 2317.550–2340.150 s (22.6 s; speech 21.6 s) · 38:37.55–39:00.15 (measured) · beat: end card.
-> Screen: house end card: four faint topic thumbnails (globe with shell, pressure column, humidity curve, Ciarán map); 'a series of tutorials' (68 px); 'atmospheric science · meteorology · fluid dynamics' (54 px); notebook icon 'weather-basics notebook'; stacked icons 'notebooks for the other concepts'; 2.5-s silent hold
+> Screen: house end card: four faint topic thumbnails (globe with shell, pressure column, humidity curve, Ciarán map); 'a series of tutorials' (68 px); 'meteorology · atmospheric science · climate' (54 px); 'the ideas, and the maths behind them' (54 px, gold); notebook icon 'weather-basics notebook'; stacked icons 'notebooks for the other concepts'; 2.5-s silent hold
 
 > Total: 5696 words · 363 sentences · 2340.150 s narration · 2342.650 s movie (39:02.65) · 146.0 words per minute.

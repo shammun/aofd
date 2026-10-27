@@ -1,0 +1,4129 @@
+{
+ "id": "ch00_weather_basics",
+ "storyboard": "movies/ch00/ch00_weather_basics/storyboard.yaml",
+ "builder": "movies/data/build_ch00_weather_basics.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "b2857bcc26e3296716de52452e7e844f2ab04df5",
+  "dirty_tracked": false,
+  "moist_py_tracked": true,
+  "moist_py_sha256": "12828309d2ed9357e2406a8e057a4a40835a0b869f68a0ef14749e3e61d99e27",
+  "atmos_py_tracked": true,
+  "atmos_py_sha256": "2512b27cdac4874c3444a038b792d49481ed984ad0d7ef179d832fa37958659d",
+  "constants_py_tracked": true,
+  "constants_py_sha256": "59e337db0c37f96411a646fc76ccdbf0c79d1cf7ecfc594edb7b2937a12e293c",
+  "statics_py_tracked": true,
+  "statics_py_sha256": "d15571649df3ae2512fe37916d7181f0cbb67bd851b66d67bbe41c3ec49218bf",
+  "thermo_py_tracked": true,
+  "thermo_py_sha256": "07377b5484140e01495af4af6e97f1ea81d64b572064e023ca12c995f452891c",
+  "stratification_py_tracked": true,
+  "stratification_py_sha256": "0d1e696a43c4243093328117f56fe1bf78e51e1d241091f59552dc098695b174",
+  "vectors_py_tracked": true,
+  "vectors_py_sha256": "e090585bf718740e7465d811cada6c6c2b3ce5dee1c46d955a978176b0312abf",
+  "fronts_py_tracked": true,
+  "fronts_py_sha256": "b91b41de2d6c1aa722d766f94f3fc3378eb631404b4cd719b7f85ffcccfaa2f2",
+  "climatology_py_tracked": true,
+  "climatology_py_sha256": "ddcb7763a78380fbe640e4450b98200920835b55b3ffc93b1474b874935f6bd6",
+  "cyclone_py_tracked": true,
+  "cyclone_py_sha256": "632c32637a0c2014dd7806cdd14ba5722e6c316281451daaaf16d3a15c03b835",
+  "trajectories_py_tracked": true,
+  "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "hydrostatic": "Vallis (1.51) ∂p/∂z = −ρg (s13-s16)",
+  "gas_law": "Vallis (1.53) p = ρRT (s10-s12)",
+  "scale_height": "Vallis text after (1.186) H = RT/g; isothermal p = p0 e^{−z/H} (s17-s20)",
+  "hypsometric": "Vallis (2.166) (general form of the s40 reduction)",
+  "dry_adiabat": "Vallis (2.246) Γd = g/cp (s26, s31)",
+  "vapour": "Vallis (18.12) e ≈ 1.61 q p (s27)",
+  "es": "Vallis (18.28) with the Fig. 18.1 constants (s28-s31; formula not on screen, §E Q3)",
+  "rh": "Vallis §18.1.2 ℋ = e/e_s (s29)",
+  "tropopause": "WMO (1957) lapse-rate definition (s24, s25)",
+  "fronts": "Hewson (1998) / Renard & Clarke (1965) thermal front parameter (s46, s49, s50)"
+ },
+ "parameters": {
+  "p0_Pa": 101325.0,
+  "T_C": 15,
+  "R": 287.0579959589441,
+  "g": 9.80665,
+  "brest_grid_point": [
+   48.5,
+   -4.5
+  ],
+  "soundings": "IGRA2 Trappes FRM00007145 and Singapore SNM00048698, 00 UTC 1 Nov 2023 (no 12 UTC Trappes launch; §E)",
+  "fronts_time": "2023-11-01T18 UTC (motion 18 → 21 UTC), locate='centre'",
+  "time_compression": {
+   "s00": "15 h of storm motion in about 5 s",
+   "s44": "1.5 h of streaklines in about 3 s",
+   "s53": "2 days of mean-wind streaklines",
+   "s55": "24 h of isobars in about 20 s"
+  },
+  "exaggerations": [
+   "atmosphere shell drawn 50x thicker (s02 on, said)",
+   "front side views 50x taller (s47-s48, said)",
+   "troposphere 50x in the s25 inset",
+   "model grid drawn every 2° (s38)"
+  ]
+ },
+ "credits": [
+  "Contains modified Copernicus Climate Change Service information 2026 (ERA5: global hour, columns, 850 hPa, Brest series, Ciarán hourly).",
+  "Durre, I., et al.: Integrated Global Radiosonde Archive (IGRA) v2, NOAA NCEI (Trappes, Singapore, 2023 station list).",
+  "NCEP/NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA (1991-2020 means).",
+  "NOAA NCEP GFS 0.25° analysis (public domain), via Unidata THREDDS.",
+  "Imagery from the NASA Worldview application, part of NASA ESDIS (MODIS Aqua/Terra and VIIRS Corrected Reflectance, NASA LANCE).",
+  "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli, NASA GSFC).",
+  "Made with Natural Earth (public domain).",
+  "U.S. Standard Atmosphere 1976 (composition, Table 3); NOAA GML global-mean CO2 2023."
+ ],
+ "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
+ "narration_changes_from_data": [
+  "s42 S3: 'Over the southern North Sea, just off England, is a deep low' -> 'Over the east coast of England, at the edge of the North Sea, is a deep low' (ERA5 centre 52.58N 1.56E, 13 km from the NE 10-m coastline)",
+  "s49 S1: 'at midnight at the start of the second of November' -> 'at six in the evening on the first of November' (front_lines at 00 UTC give a hooked, occluding pattern; at 18 UTC the textbook warm and cold fronts, the same hour as the s45 map)",
+  "s49 S6: 'The arrows show the wind turning sharply where it crosses each front.' -> 'The arrows show the wind turning as it crosses the fronts, most sharply at the warm front.' (850-hPa median direction change across the lines inside the map: warm 55°, cold 11°)",
+  "s49 S5: 'curving away to the south' -> 'curving away to the south-west' (the 18 UTC cold front runs from 48N 6.7W to 42.5N 34.5W)"
+ ],
+ "inputs_sha256": {
+  "data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc": "4f6e4f9fcb290eb0afa0616c583f9e274b15f832078e20e585e4ceadcb52ad21",
+  "data/derived/ch00/era5_columns_trappes_singapore_2023-11-01.nc": "9fbd4aa954356444f837f556f03ae3ff20bf3730db6e359bf71017f7fba3e12b",
+  "data/derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc": "5c6f5cef0e2c3ac7b65dbb49aa7b50683aa4d540a660d948fce7941b98736616",
+  "data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc": "4d90d9a7e2b36dcc7f2e372eba050743ee4a2e47c491512afa17ce72c2647914",
+  "data/derived/ch00/era5_brest_t2m_daily_1991-2023.nc": "c71625a5bce9e94f52105c4aaea0eeb5763e72bc2cc0a89538d71cca5ec46547",
+  "data/derived/ch00/era5_brest_2023-11-01_02_t2m_d2m_msl_1h.nc": "6d761c2e13ba86632912f385c60e83100d3ef26c62ddcb7307af0dcf99b3da40",
+  "data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc": "a4c25d6e6895c7cea1b8ffb97d384962f93b1486d5512a83df755a3bca2ed9c3",
+  "data/derived/ch00/era5_cumulus_france_2024-06-24_t2m_d2m_msl.nc": "25cd6777c075a52e718ed7f18bcbad5a41396d58003fb599a52fb257d8f28422",
+  "data/derived/ch00/ncep_r1_t2m_ltm_1991-2020.nc": "97dd3d6550c1d23467b93f9d2826b6039d6cbf34b2738c2038d946ac40c3a96e",
+  "data/derived/ch00/gfs_mslp_latest.nc": "fc3ce9f76f002756905159931cd9b29888c423d1d13f7e066bd3ce86a4e4e543",
+  "data/derived/ch00/igra2_stations_2023.json": "e76785d30a061072c2f681fe8a560fe96883aa8a98d033e812ddb3bba1c4a415",
+  "data/derived/ch00/ciaran_2023_sfc_1102.json": "ebf5b2ce560037a864a5903b9494350e96e853624afa437d6742b27fca1d45d8",
+  "data/derived/ch00/ciaran_2023_sfc_1102.bin": "e419c2848ee3ca8143c8c19b84b5790e7d8094dd7bb622db04f7ff7aa4be3792",
+  "data/derived/ch00/ciaran_coast_10m.geojson": "41013c98acdb9dd04c4223a8e00ca5cd99e78f4c72cbbd2004c60528cfe04ba3",
+  "data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg": "6af7d78fac14c9c06a620d8707bcaa190284e791d75fc90725d52795edf08559",
+  "movies/ch00/ch00_cross_product_why/data/real/wind_climatology.json": "c54157e735e439a6dd1445fe19679428ad59cbc87b29242649c2eb49d98aa8e9",
+  "movies/ch00/ch00_cross_product_why/data/real/wind_climatology.bin": "092a3ee70e80d0aa3517ded7ca1410dd343505c5601db6545fe20dd832f97962",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_ciaran_2023_u10-v10-msl-t2m_2023-11-01T00_2023-11-02T23_1h.nc": "57ba6a3d405726ae7c9ed5c178b31b512dbb7cdcd55d13135835d86a0ccc0572"
+ },
+ "assets": {
+  "data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg": "524f0506f6cdefc2c151d7d320a3cfc0cb5fc7f3c96c1d1a13c6c180ec278c19",
+  "data/derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.jpg": "6cb521e7033e6d89903fe6974b794bba6c59e8f83249f3bb3d0801b8edd03382",
+  "data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg": "6af7d78fac14c9c06a620d8707bcaa190284e791d75fc90725d52795edf08559",
+  "data/derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.jpg": "09c2aa3646d9c91acf8e1736fdd3a20c0b7a9fd7dbb28b7662632ddc0b2b1124",
+  "data/derived/ch00/ciaran_coast_10m.geojson": "41013c98acdb9dd04c4223a8e00ca5cd99e78f4c72cbbd2004c60528cfe04ba3",
+  "data/derived/ch00/ciaran_admin0_10m.geojson": "06f2a6b17b0769f5fdaca66fbe4b33759e897f3b9c250f22fafb145e312e8895",
+  "data/derived/ch00/ciaran_borders_10m.geojson": "037fec5398ff8ddaf13505a9fbe6b85452d4aa509b6eecef94a7fcc745154ee8",
+  "data/derived/ch00/ciaran_admin1_lines_10m.geojson": "ea967e6a79c9ea5efd842522155f9c80948e896e9ed89daaffec80485db4f012",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_50m.json": "a2d35492649ce4a57679a297b32dbcbe9728abd8dcd9408cee79ab15fca21ae5"
+ },
+ "data_files": {
+  "basics.json": "a3a48154a09ddad5678e2321ae187d0340bc4f16e1fd55eb9539c84c2c7f358e",
+  "atmos.json": "57f94dc775a627ae2c471789159f6fd500c9753979ca7285a6671d1fa4cf9050",
+  "soundings.json": "65992144cd3e031128fc949b003589e320d4939272452131e6f58f2d9348f8dc",
+  "moist.json": "647cc21eb41984bce74f94a4a76359b7aaeb19c352accf9e8a598bc2cee19f8f",
+  "highs_lows.json": "0598c5856be1ce33a7b465c26d0a898966a22e7e78e2e5c7063241ad6524aa37",
+  "global_20231102T12.json": "f8a55fc057d4b91a753a1b474bb6a39d040a54b7af04740c386fc8e0208049ab",
+  "isobars_20231102T12.json": "aa0ad3f16a1d5e2ab6f78b342ef64a28d252c86157bf561b63702b6f509358d7",
+  "brest_climate.json": "a3c4b9948d1e0f1adb8ea2fcef4b0b74e6adbe6adcb783cfb6d681293611be71",
+  "igra_stations_2023.json": "bcecbc6ea3cda88a18142556f19cfad735f93d1c5a22072243f09e622f2ee9df",
+  "ciaran_hourly.json": "b7a32b0850197045a0aa157e9078c034577e27690909e27e55290a316b6bfa6f",
+  "brest_hourly.json": "96282cb556558161027f12557588c48e581bc5831659f7efd74c7e2a11459e4b",
+  "fronts.json": "9b4ec91407a9bf3980b8c26cbeb449e5326fbf9738137744a7240ffca1dd3d58",
+  "ciaran_850.json": "4bc7a8b0c9d26b3dcd5a5733910b1ffb2bada6465ffd71b31bbfb2dfc30e5111",
+  "climatology.json": "0f616347aec4d7c70ba78902d3b40bff150309a0b01c3a076619e7b1822d3f62",
+  "latest_map.json": "933c3821f6bce581a36dc6716d04158b28731a65301d89a948bcf23340214c60",
+  "lines.json": "c5ad556b70fe48ef3ac815145953055a917ed89e79c92712507542e0cabb60e1",
+  "title.json": "04121568f55b9cced4d5d87bd1e44f03d24ca091d2fef03d7ffcbd1935e4a8ea",
+  "global_20231102T12.bin": "7dc32374e0bace11dff550556b7e540f1bd1ec39f7d8b4b2d7b634671518b12b",
+  "ciaran_hourly.bin": "3fdad96e5663c43b92767d3b701cfed3217cac0e583eb6814350a0a6cd308f59",
+  "ciaran_850.bin": "b90bf0cc0b20d5a64e61a74b9d0bcea3cddc6ba5d5c9d07f0944241fb2323251",
+  "climatology.bin": "c1f2517613513582262db79d4b2c8791d9fdce99d70dfc1a6834a5b36a2bb051"
+ },
+ "checks": [
+  {
+   "id": "W04",
+   "name": "s02 shell on a 30-cm globe: 12/6371 × 150 mm ≈ 0.28 mm",
+   "value": [
+    0.28253
+   ],
+   "ref": [
+    0.2825
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "W04",
+   "name": "s02 said 'about three tenths of a millimetre', 'like three sheets of paper' (0.1 mm each): 2.5-3.5 sheets",
+   "value": [
+    2.825302
+   ],
+   "ref": "[2.5, 3.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W05",
+   "name": "s03 N2 + O2 + Ar = 99.964 % (USSA-1976 dry air)",
+   "value": [
+    99.964
+   ],
+   "ref": [
+    99.964
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "W05",
+   "name": "s03 CO2 419 ppm = 0.0419 % ≈ four hundredths of one percent",
+   "value": [
+    0.0419
+   ],
+   "ref": [
+    0.04
+   ],
+   "tol": 0.0025,
+   "pass": true
+  },
+  {
+   "id": "W06",
+   "name": "s05 p0/g = 10 332 kg (g = 9.80665)",
+   "value": [
+    10332.274528
+   ],
+   "ref": [
+    10332.3
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "W06",
+   "name": "s05 display 101 325/9.81 ≈ 10 300 kg (10 329)",
+   "value": [
+    10300.0
+   ],
+   "ref": [
+    10300.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W06",
+   "name": "s05 'as heavy as seven cars' (1.5 t each): 6.5-7.5 cars",
+   "value": [
+    6.888183
+   ],
+   "ref": "[6.5, 7.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W06",
+   "name": "s05 inverse: uniform column holding m kg over 1 m² weighs p0 (hydrostatic_pressure_uniform)",
+   "value": [
+    0.0,
+    101325.0
+   ],
+   "ref": [
+    0.0,
+    101325.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "W07",
+   "name": "s07 101 325 Pa = 1013.25 hPa",
+   "value": [
+    1013.25
+   ],
+   "ref": [
+    1013.25
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "W08",
+   "name": "s08 room 5 × 4 × 2.5 = 50 m³; 50 × 1.2 = 60 kg",
+   "value": [
+    50.0,
+    60.0
+   ],
+   "ref": [
+    50.0,
+    60.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "W08",
+   "name": "s08 with ρ = 1.225: 61.2 kg ('about sixty')",
+   "value": [
+    61.248907
+   ],
+   "ref": "[58, 62]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W09",
+   "name": "s09 15 °C = 288.15 K",
+   "value": [
+    288.15
+   ],
+   "ref": [
+    288.15
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "W10",
+   "name": "s10 R (dry air) = 287.06 J/(kg K) (fluidpy constant), said 287",
+   "value": [
+    287.057996
+   ],
+   "ref": [
+    287.06
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W11",
+   "name": "s11 ρ(101 325 Pa, 288.15 K) = 1.2250 kg/m³",
+   "value": [
+    1.224978
+   ],
+   "ref": [
+    1.225
+   ],
+   "tol": 5e-05,
+   "pass": true
+  },
+  {
+   "id": "W11",
+   "name": "s11 display 101 325/(287 × 288.15) ≈ 1.225",
+   "value": [
+    1.225226
+   ],
+   "ref": [
+    1.225
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "W12",
+   "name": "s12 ρ(0 °C) = 1.292, ρ(30 °C) = 1.164 kg/m³",
+   "value": [
+    1.292248,
+    1.164366
+   ],
+   "ref": [
+    1.2922,
+    1.1644
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "W12",
+   "name": "s12 (1.29 − 1.16)/1.29 ≈ 10 %; exact (ρ0 − ρ30)/ρ0 = 30/303.15 = 9.9 %",
+   "value": [
+    0.100775,
+    0.098961
+   ],
+   "ref": [
+    0.1008,
+    0.099
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "W13",
+   "name": "s14-s15 sympy: (p(z) − p(z+Δz))/Δz → −∂p/∂z as Δz → 0 (test profile), so the slab balance gives ∂p/∂z = −ρg",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W17",
+   "name": "s19 sympy: d/dz(p0 e^{−z/H}) = −p/H and p(0) = p0",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W14",
+   "name": "s16 ρg = 12.01 Pa/m",
+   "value": [
+    12.012932
+   ],
+   "ref": [
+    12.01
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W14",
+   "name": "s16 display 1.225 × 9.81 ≈ 12",
+   "value": [
+    12.01725
+   ],
+   "ref": [
+    12.017
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "W15",
+   "name": "s16 100 Pa ÷ 12.01 Pa/m = 8.32 m per hPa ('about every eight metres')",
+   "value": [
+    8.324363
+   ],
+   "ref": [
+    8.32
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W16",
+   "name": "s16 300 m × 12.01 Pa/m = 36.0 hPa (said 'about thirty-six'; screen 1013 → 977)",
+   "value": [
+    36.038796,
+    977.21
+   ],
+   "ref": [
+    36.04,
+    977.21
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "W16",
+   "name": "s16 the isothermal curve gives 35.4 hPa: linear estimate within 2 %",
+   "value": [
+    0.982425
+   ],
+   "ref": "[0.98, 1.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W18",
+   "name": "s18 H(288.15 K) = 8434.7 m; uniform-density height p0/(ρ0 g) the same",
+   "value": [
+    8434.660311,
+    8434.660311
+   ],
+   "ref": [
+    8434.7,
+    8434.7
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "W18",
+   "name": "s18 display 287 × 288.15/9.81 ≈ 8.4 km",
+   "value": [
+    8.430076
+   ],
+   "ref": [
+    8.43
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "W18",
+   "name": "s20 p(H) = 372.8 hPa, p(2H) = 137.1 hPa (÷ e each)",
+   "value": [
+    372.753844,
+    137.128476
+   ],
+   "ref": [
+    372.76,
+    137.13
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "W19",
+   "name": "s20 halving height H ln 2 = 5.85 km → 506.6 hPa; 11.69 km → 253.3 hPa",
+   "value": [
+    5.846461,
+    506.625,
+    11.692922,
+    253.3125
+   ],
+   "ref": [
+    5.846,
+    506.6,
+    11.693,
+    253.3
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "W19",
+   "name": "s20 display 8.43 × ln 2 ≈ 5.8 km",
+   "value": [
+    5.843231
+   ],
+   "ref": [
+    5.843
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "W20",
+   "name": "s20 fraction lost per km 1 − e^{−1/8.43} = 11.2 %",
+   "value": [
+    0.1118
+   ],
+   "ref": [
+    0.1118
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "s26",
+   "name": "s26 dry adiabatic cooling 9.76 K/km ('almost ten degrees'); screen '≈ 9.8 °C per km'",
+   "value": [
+    9.760745
+   ],
+   "ref": [
+    9.76
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "s32",
+   "name": "s32 |(8, 6)| = 10 m/s",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "W33",
+   "name": "s33 wind_direction_from(8, 6) = 233.13° (south-westerly)",
+   "value": [
+    233.130102
+   ],
+   "ref": [
+    233.13
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W33",
+   "name": "s33 westerly 270°, southerly 180°, northerly 0°, easterly 90°",
+   "value": [
+    270.0,
+    180.0,
+    0.0,
+    90.0
+   ],
+   "ref": [
+    270.0,
+    180.0,
+    0.0,
+    90.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "W34",
+   "name": "s34 KNOT = 0.5144 m/s; NAUTICAL_MILE = 1852 m; 2πa/21600 = 1853.2 m (1′ of latitude)",
+   "value": [
+    0.514444,
+    1852.0,
+    1853.248777
+   ],
+   "ref": [
+    0.51444,
+    1852.0,
+    1853.2
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "W34",
+   "name": "s34 10 m/s = 36 km/h = 19.44 kt; display 10 ÷ 0.514 ≈ 19",
+   "value": [
+    36.0,
+    19.438445,
+    19.455253
+   ],
+   "ref": [
+    36.0,
+    19.438,
+    19.455
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W38",
+   "name": "s40 835 hPa at 1609 m, 15 °C → 1010.5 hPa",
+   "value": [
+    1010.491599
+   ],
+   "ref": [
+    1010.5
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "W38",
+   "name": "s40 display 835 × e^{1.609/8.43} ≈ 1010",
+   "value": [
+    1010.598168
+   ],
+   "ref": [
+    1010.5
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "W38",
+   "name": "s40 'a slightly more careful version' changes it by < 0.5 %",
+   "value": [
+    0.003554
+   ],
+   "ref": "[0, 0.005]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W47",
+   "name": "s51 cos 0° = 1, cos 60° = 0.5 → a 1-m beam covers 1 m and 2 m",
+   "value": [
+    1.0,
+    0.5,
+    2.0
+   ],
+   "ref": [
+    1.0,
+    0.5,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "W22",
+   "name": "s22 mass below 5.5/16/31 km = 0.501/0.898/0.990 (USSA-1976, 1 − p/p0)",
+   "value": [
+    0.50121,
+    0.897821,
+    0.989821
+   ],
+   "ref": [
+    0.501,
+    0.898,
+    0.99
+   ],
+   "tol": 0.0015,
+   "pass": true
+  },
+  {
+   "id": "W25",
+   "name": "s24 stratopause (USSA-1976 warmest layer, base-top km)",
+   "value": [
+    47.5,
+    51.25
+   ],
+   "ref": "[45, 52]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W21",
+   "name": "s21/s25 trappes sounding is the 00 UTC 1 Nov 2023 launch ('around midnight')",
+   "value": "2023-11-01T00:00",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W24",
+   "name": "s24 Trappes WMO tropopause on z_hyps = 10.88 km, −62.70 °C (fluidpy F11)",
+   "value": [
+    10.882776,
+    -62.700003
+   ],
+   "ref": [
+    10.883,
+    -62.7
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W24",
+   "name": "s24 Trappes tropopause height in 9.5-12.5 km ('about eleven kilometres')",
+   "value": [
+    10.882776
+   ],
+   "ref": "[9.5, 12.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W24",
+   "name": "s24 Trappes tropopause T in −65…−50 °C (orchestrator §E: follows the data); said 'about minus sixty-three'",
+   "value": [
+    -62.700003
+   ],
+   "ref": "[-65, -50]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W24",
+   "name": "s24 spoken 'about minus sixty-three' = −62.7 rounded",
+   "value": [
+    -63.0
+   ],
+   "ref": [
+    -63.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W25",
+   "name": "s24 balloon burst (top of the sounding) 'around thirty kilometres': 28-36 km",
+   "value": [
+    33.942031
+   ],
+   "ref": "[28, 36]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W21",
+   "name": "s21 near the ground (< 2 km) the balloon's p is within 2 % of the curve",
+   "value": [
+    0.009418
+   ],
+   "ref": "[0, 0.02]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W21",
+   "name": "s21 above 6 km every balloon pressure is below the curve ('falls a little faster')",
+   "value": -0.0639,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W21",
+   "name": "s21 the air aloft (2-10 km) is colder than the curve's 15 °C, so its H is smaller",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W23",
+   "name": "s23 mean lapse rate 0-10 km (least squares, Trappes) in 5.5-7.5 K/km",
+   "value": [
+    6.678185
+   ],
+   "ref": "[5.5, 7.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W01",
+   "name": "s00 title readout: ground T 10-15 °C (Trappes 00 UTC)",
+   "value": [
+    12.399988
+   ],
+   "ref": "[10, 15]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W01",
+   "name": "s00 title readout: T at 12 km −65…−50 °C",
+   "value": [
+    -59.533331
+   ],
+   "ref": "[-65, -50]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W01",
+   "name": "s00 title readout: ground p 980-1000 hPa",
+   "value": [
+    987.0
+   ],
+   "ref": "[980, 1000]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W01",
+   "name": "s00 title readout: p at 12 km 180-210 hPa",
+   "value": [
+    190.636859
+   ],
+   "ref": "[180, 210]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W24",
+   "name": "trappes: equals the IGRA product's wmo_trop_z/T",
+   "value": [
+    10882.776367,
+    210.449997
+   ],
+   "ref": [
+    10882.776367,
+    210.449997
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "W21",
+   "name": "s21/s25 singapore sounding is the 00 UTC 1 Nov 2023 launch ('around midnight')",
+   "value": "2023-11-01T00:00",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W26",
+   "name": "s25 Singapore tropopause 15.5-17.5 km ('sixteen or seventeen')",
+   "value": [
+    16.163
+   ],
+   "ref": "[15.5, 17.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W26",
+   "name": "s25 Singapore tropopause T < −72 °C ('below minus seventy-five')",
+   "value": [
+    -81.299994
+   ],
+   "ref": "[-90, -75]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W26",
+   "name": "s25 Singapore tropopause = 16.16 km, −81.30 °C (fluidpy F11)",
+   "value": [
+    16.163,
+    -81.299994
+   ],
+   "ref": [
+    16.163,
+    -81.3
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "W26",
+   "name": "singapore: equals the IGRA product's wmo_trop_z/T",
+   "value": [
+    16163.0,
+    191.850006
+   ],
+   "ref": [
+    16163.0,
+    191.850006
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "W25",
+   "name": "s24 ERA5 column over Trappes: the warming continues up to its top (1 hPa, ~46 km): T rises over the top 10 km",
+   "value": [
+    46.33,
+    -35.45,
+    -25.06
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W25",
+   "name": "s24 ERA5 column min T near the balloon's tropopause (−62.3 °C at ~11 km)",
+   "value": [
+    -62.337607
+   ],
+   "ref": [
+    -62.7
+   ],
+   "tol": 1.5,
+   "pass": true
+  },
+  {
+   "id": "W27",
+   "name": "s25 polar tropopause (Nov 2023 zonal mean, cos-weighted ≥ 70°N and ≤ 70°S) in 7-10.5 km",
+   "value": [
+    9.475365,
+    9.907622
+   ],
+   "ref": "[7, 10.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W27",
+   "name": "s25 'about eight to ten kilometres': every zonal mean poleward of 70° in 8-10.5 km",
+   "value": [
+    10.079634,
+    10.08015,
+    10.08076,
+    10.081713,
+    10.082986,
+    10.084333
+   ],
+   "ref": "[8.0, 10.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W26",
+   "name": "s25 equatorial zonal-mean tropopause (|lat| ≤ 10) 15.5-17.5 km",
+   "value": [
+    16.641297,
+    16.641986,
+    16.642486,
+    16.642883,
+    16.64317,
+    16.643418
+   ],
+   "ref": "[15.5, 17.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W28",
+   "name": "s27 q = 20 g/kg at 1000 hPa → e ≈ 32.2 hPa (18.12)",
+   "value": [
+    32.154341
+   ],
+   "ref": [
+    32.15
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "W28",
+   "name": "s27 display 1.61 × 0.020 × 1000 ≈ 32",
+   "value": [
+    32.2
+   ],
+   "ref": [
+    32.2
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "W29",
+   "name": "s28 e_s at 0/10/20/30 °C = 6.19/12.24/23.13/41.91 hPa ('six, twelve, twenty-three, forty-two')",
+   "value": [
+    6.185364,
+    12.244089,
+    23.134227,
+    41.913412
+   ],
+   "ref": [
+    6.19,
+    12.24,
+    23.13,
+    41.91
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "W29",
+   "name": "s28 'roughly doubles for every ten degrees': ratios per 10 °C in 1.7-2.1",
+   "value": [
+    1.979526,
+    1.88942,
+    1.811749
+   ],
+   "ref": "[1.7, 2.1]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W30",
+   "name": "s29 e_s(25 °C) = 31.29 hPa ('thirty-one point three'); RH = 15/31.29 = 0.479",
+   "value": [
+    31.29451,
+    0.479317
+   ],
+   "ref": [
+    31.29,
+    0.4794
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "W30",
+   "name": "s29 display 15 ÷ 31.3 ≈ 0.48 → 48 %",
+   "value": [
+    0.479233
+   ],
+   "ref": [
+    0.479
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "W31",
+   "name": "s30 dew point of 15 hPa = 286.27 K = 13.1 °C ('about thirteen')",
+   "value": [
+    286.265651,
+    13.115651
+   ],
+   "ref": [
+    286.27,
+    13.12
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "W32",
+   "name": "s31 LCL in 1.35-1.65 km ('about one and a half kilometres')",
+   "value": [
+    1.493933
+   ],
+   "ref": "[1.35, 1.65]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W32",
+   "name": "s31 dew point falls 'about two degrees per kilometre' (1.5-2.2 K/km)",
+   "value": [
+    1.805673
+   ],
+   "ref": "[1.5, 2.2]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W32",
+   "name": "s31 gap at the ground 11.9 ≈ 12 °C; closes at ≈ 8 °C/km; 12 ÷ 8 = 1.5",
+   "value": [
+    11.884349,
+    7.955073,
+    1.5
+   ],
+   "ref": [
+    11.88,
+    7.96,
+    1.5
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "W32",
+   "name": "s31 the T and T_d lines meet at the LCL (|T − T_d| there)",
+   "value": [
+    5e-06
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "Q5",
+   "name": "s31 real cumulus field: median ERA5 LCL over the box 1.2-1.6 km (§E: 1.4 km)",
+   "value": [
+    1.413994
+   ],
+   "ref": "[1.2, 1.6]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s27",
+   "name": "s27 tropical 2-m q, 99th percentile 17-24 g/kg ('about twenty')",
+   "value": [
+    19.478141
+   ],
+   "ref": "[17, 24]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s27",
+   "name": "s27 polar 2-m q (|lat| ≥ 70), median < 2 g/kg ('almost zero')",
+   "value": [
+    0.650271
+   ],
+   "ref": "[0, 2]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W37",
+   "name": "s39 minimum surface pressure over Tibet (28-38N 78-100E) < 600 hPa",
+   "value": [
+    507.939922
+   ],
+   "ref": "[400, 600]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W37",
+   "name": "s39 the Andes and the Rockies show up too (min sp < 800 hPa)",
+   "value": [
+    547.665469,
+    677.823359
+   ],
+   "ref": "[500, 800]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W39",
+   "name": "s41 isobar levels are multiples of 4 hPa (and include 1012)",
+   "value": "25 levels, 588 lines",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W40",
+   "name": "s42 Ciarán 956 hPa at 52.6N 1.6E (12 UTC 2 Nov)",
+   "value": [
+    956.036048,
+    52.578886,
+    1.564933
+   ],
+   "ref": [
+    956.0,
+    52.58,
+    1.56
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W40",
+   "name": "s42 Azores high 1027-1034 hPa ('about one thousand and thirty')",
+   "value": [
+    1029.780535
+   ],
+   "ref": "[1027, 1034]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W40",
+   "name": "s42 the high is 'near the Azores islands': < 600 km from the archipelago's centre",
+   "value": [
+    577.271469
+   ],
+   "ref": "[0, 600]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W40",
+   "name": "s42 the high is 'far to the south-west' of Ciarán: bearing 200-250°",
+   "value": [
+    229.46647
+   ],
+   "ref": "[200, 250]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s42",
+   "name": "s42 the low's centre lies on the east coast of England (< 30 km from the coastline): said 'over the east coast of England, at the edge of the North Sea'",
+   "value": [
+    13.322078
+   ],
+   "ref": "[0, 30]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W42",
+   "name": "s44 the wind circles Ciarán anticlockwise seen from above (ring-mean v_t > 0 at 200/400/600 km)",
+   "value": [
+    10.08,
+    10.52,
+    7.29
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W42",
+   "name": "s44 crossing the isobars only slightly towards the centre (ring-mean v_r < 0, median inflow 0-45°)",
+   "value": [
+    -2.83,
+    -3.85,
+    -3.48,
+    28.47,
+    27.98,
+    23.85
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W42",
+   "name": "s44 around the high it turns clockwise (ring-mean v_t < 0)",
+   "value": [
+    -4.67,
+    -6.57,
+    -8.47
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W42",
+   "name": "s44 southern hemisphere reversed: the deepest SH low turns clockwise (v_t < 0)",
+   "value": [
+    -62.48,
+    -34.7,
+    952.94,
+    -11.71,
+    -7.48
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W41",
+   "name": "s43 cloud fraction in the low's 500-km disc > the high's (MODIS Aqua, bright & grey pixels)",
+   "value": [
+    0.861,
+    0.139,
+    1.0,
+    0.471
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W35",
+   "name": "s36 Brest 2023: 287/365 = 0.786 of days inside the 10-90 % band (pooled window)",
+   "value": [
+    0.786301
+   ],
+   "ref": [
+    0.786301
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "W35",
+   "name": "s36 'most of the time it stays inside the band' (60-90 %)",
+   "value": [
+    0.786301
+   ],
+   "ref": "[0.6, 0.9]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W35",
+   "name": "s36 'a band that holds eight days out of ten': base-period mean share 0.78-0.82",
+   "value": [
+    0.803779
+   ],
+   "ref": "[0.78, 0.82]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W36",
+   "name": "s37 IGRA2 stations with a sounding in 2023 (count reported; not spoken)",
+   "value": [
+    941.0
+   ],
+   "ref": "[500, 1500]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W36",
+   "name": "s37 station list consistent (count = rows)",
+   "value": 941,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W03",
+   "name": "s00/s55 A1 longitudes wrapped across Greenwich and ascending (−30 … 10)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 low 965.3 hPa at 12 UTC 1 Nov → lowest 953.7 hPa at 03 UTC 2 Nov ('965 to 954')",
+   "value": [
+    965.314211,
+    953.646673
+   ],
+   "ref": [
+    965.3,
+    953.7
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 the lowest hourly centre is at 03 UTC 2 Nov",
+   "value": "2023-11-02T03",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 at 12 UTC 2 Nov: 955.9 hPa",
+   "value": [
+    955.894038
+   ],
+   "ref": [
+    955.9
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 the centre crosses Brest's longitude 'just north of Brest' (48.5-51.5N)",
+   "value": [
+    49.955288
+   ],
+   "ref": "[48.5, 51.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 ... 'during the night' (between 18 and 06 UTC)",
+   "value": "2023-11-02T01–2023-11-02T02, 49.96N",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 ... over the English Channel (track latitude at 4.5W) in 48.6-50.3N",
+   "value": [
+    49.955288
+   ],
+   "ref": "[48.6, 50.3]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s59",
+   "name": "s59 'now over the North Sea' at image time: the 13 UTC centre is east of the English coast (lon > 1.75E)",
+   "value": [
+    52.9,
+    1.87,
+    20.89
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s56",
+   "name": "Brest A1 point equals the separate Brest product (msl, t2m)",
+   "value": [
+    0.000793,
+    0.000732
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "W50",
+   "name": "s56 Brest msl 12 UTC 997.4, minimum 962.1 at 01 UTC, 976.2 at 06 UTC",
+   "value": [
+    997.403564,
+    962.057007,
+    976.193604
+   ],
+   "ref": [
+    997.4,
+    962.1,
+    976.2
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "W50",
+   "name": "s56 the minimum (12 UTC 1 Nov → 12 UTC 2 Nov) is at 01 UTC 2 Nov",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W50",
+   "name": "s56 fall 35.3 hPa in 13 h ('thirty-five'), rise 14.1 hPa in 5 h ('fourteen')",
+   "value": [
+    35.346558,
+    14.136597
+   ],
+   "ref": [
+    35.3,
+    14.1
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "W50",
+   "name": "s56 'faster and faster': hourly fall in the last 3 h before the minimum > in the first 3 h",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W02",
+   "name": "s00 title Part B readout 'Brest 997 → 962 hPa'",
+   "value": [
+    997.0,
+    962.0
+   ],
+   "ref": [
+    997.0,
+    962.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W51",
+   "name": "s57 18 UTC: T 12.0 °C, from 155° (SSE), 13.1 m/s",
+   "value": [
+    12.026031,
+    154.758811,
+    13.147321
+   ],
+   "ref": [
+    12.0,
+    155.0,
+    13.1
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W51",
+   "name": "s57 20 UTC: T 14.4 °C, from 204° (SSW), 17.9 m/s ('about eighteen', 'fourteen and a half')",
+   "value": [
+    14.350952,
+    203.845673,
+    17.85329
+   ],
+   "ref": [
+    14.4,
+    204.0,
+    17.9
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W51",
+   "name": "s57 SSE = 146-169°, SSW = 191-214°",
+   "value": [
+    199.758811,
+    203.845673
+   ],
+   "ref": "[191, 214]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W52",
+   "name": "s58 00 UTC: T 12.6 °C, from 221° (SW), 18.6 m/s",
+   "value": [
+    12.626129,
+    220.717134,
+    18.611033
+   ],
+   "ref": [
+    12.6,
+    221.0,
+    18.6
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W52",
+   "name": "s58 03 UTC: T 10.5 °C, from 271° (W), 23.2 m/s = 45.1 kt",
+   "value": [
+    10.452057,
+    270.942683,
+    23.213919,
+    45.124249
+   ],
+   "ref": [
+    10.5,
+    271.0,
+    23.2,
+    45.1
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "W52",
+   "name": "s58 drop 'about two degrees, to ten and a half' (12.6 → 10.5)",
+   "value": [
+    2.174072
+   ],
+   "ref": [
+    2.1
+   ],
+   "tol": 0.15,
+   "pass": true
+  },
+  {
+   "id": "W52",
+   "name": "s58 display 23.2 ÷ 0.514 ≈ 45 kt",
+   "value": [
+    45.136187
+   ],
+   "ref": [
+    45.1
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "s49",
+   "name": "s49 a warm front east of the 18 UTC low and a long cold front trailing south-west are found (and at 21 UTC)",
+   "value": [
+    861.0,
+    2626.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W45",
+   "name": "s49 wind direction jump across the warm front inside the s49 map (40-60N 25W-10E; median, ±150 km at 850 hPa) > 30°",
+   "value": [
+    55.25341
+   ],
+   "ref": "[30, 180]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W45",
+   "name": "s49 the wind turns across the cold front too, more gently (median jump 5-30° at 850 hPa): narration 'most sharply at the warm front'",
+   "value": [
+    10.82214
+   ],
+   "ref": "[5, 30]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W45",
+   "name": "s49 the warm-front turn is the sharper one",
+   "value": [
+    55.3,
+    10.8
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W46",
+   "name": "s50 the warm front moves towards the cold air in 3 h (median normal displacement < 0): half circles on the cold side",
+   "value": [
+    -66.1,
+    54.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W46",
+   "name": "s50 the cold front moves towards the warm air in 3 h (> 0): triangles on the warm side",
+   "value": [
+    108.0,
+    145.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W43",
+   "name": "s45 warm tongue: T850 south-west of Brittany (45-48N 10-5W) ≥ 5 K above the air west of the low",
+   "value": [
+    8.153142
+   ],
+   "ref": "[5, 30]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W44",
+   "name": "s46 cold-front transect: 10-90 % width of the T850 step (ERA5, ~30 km grid) in 50-200 km",
+   "value": [
+    100.0
+   ],
+   "ref": "[50, 200]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W44",
+   "name": "s46 the step is a front by the library's own definition: mean gradient over the 10-90 % span ≥ 1.5 K per 100 km (Hewson K2)",
+   "value": [
+    3.0318
+   ],
+   "ref": "[1.5, 20]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s55",
+   "name": "s55 hourly fronts: the picking rule finds the warm and the cold front in most hours (≥ 15 of 25)",
+   "value": [
+    18,
+    17
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W48",
+   "name": "s52 zonal-mean annual MSLP maxima ('around thirty degrees north and south') at 25-40°",
+   "value": [
+    35.2375,
+    31.4281
+   ],
+   "ref": "[25, 40]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W48",
+   "name": "s52 those maxima exceed 1015 hPa",
+   "value": [
+    1017.432058,
+    1018.608719
+   ],
+   "ref": "[1015, 1030]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W48",
+   "name": "s52 equatorial (|lat| ≤ 15) zonal-mean minimum below 1012 hPa (the ITCZ trough)",
+   "value": [
+    1010.866361
+   ],
+   "ref": "[990, 1012]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W48",
+   "name": "s52 the five subtropical highs: centres between 20 and 40° latitude",
+   "value": [
+    33.45,
+    33.59,
+    29.91,
+    31.11,
+    31.31
+   ],
+   "ref": "[20, 40]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W48",
+   "name": "s52 the five subtropical highs: ≥ 1017 hPa",
+   "value": [
+    1022.1,
+    1021.9,
+    1022.0,
+    1021.7,
+    1022.1
+   ],
+   "ref": "[1017, 1035]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s53",
+   "name": "s53 trades: zonal-mean u at 15N and 15S from the east (u < −2 m/s)",
+   "value": [
+    -3.128699,
+    -3.950425
+   ],
+   "ref": "[-10, -2]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s53",
+   "name": "s53 'in the middle latitudes, the winds come mostly from the west': share of 35-65° grid points with u > 0, each hemisphere",
+   "value": [
+    0.819336,
+    0.979492
+   ],
+   "ref": "[0.7, 1.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s53",
+   "name": "s53 zonal-mean u at 45N and 45S is westerly (> 0)",
+   "value": [
+    1.673884,
+    5.621351
+   ],
+   "ref": "[0, 12]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s53",
+   "name": "s53 north of the equator the trades come from the north-east (v < 0), south of it from the south-east (v > 0)",
+   "value": [
+    -1.08,
+    1.76
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W47",
+   "name": "s51 NCEP annual mean 2-m T: tropics (|lat| < 20) warmer than 60-90N by > 20 K",
+   "value": [
+    37.100006
+   ],
+   "ref": "[20, 60]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "D11",
+   "name": "GFS 00 UTC 27 Oct 2026: deepest low 934.9 hPa at 14.5N 162.5E ('a typhoon over the western Pacific', unnamed)",
+   "value": [
+    934.9,
+    14.5,
+    162.5
+   ],
+   "ref": [
+    934.9,
+    14.5,
+    162.5
+   ],
+   "tol": 0.3,
+   "pass": true
+  },
+  {
+   "id": "D11",
+   "name": "GFS highest (|lat| ≤ 70, orography ≤ 500 m) = the Siberian high 1040.1 hPa near 56N 57E",
+   "value": [
+    1040.13125,
+    56.0,
+    57.25
+   ],
+   "ref": [
+    1040.1,
+    56.0,
+    57.25
+   ],
+   "tol": 0.3,
+   "pass": true
+  },
+  {
+   "id": "D11",
+   "name": "GFS North Atlantic low about as deep as Ciarán (950-960 hPa)",
+   "value": [
+    954.525899
+   ],
+   "ref": "[950, 960]",
+   "tol": null,
+   "pass": true
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.core.statics.hydrostatic_pressure_uniform",
+   "scene": "s05",
+   "data": "data/basics.json",
+   "eq": "inverse check: a uniform column of that mass gives p0 at the ground (Vallis (1.51))",
+   "params": {
+    "z": 0.0,
+    "p0": 0.0,
+    "rho": 10.332274527998859,
+    "g": 9.80665
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.statics.hydrostatic_pressure_uniform",
+   "scene": "s05",
+   "data": "data/basics.json",
+   "eq": "same column: pressure at its base (z = −1000 m below its top)",
+   "params": {
+    "z": -1000.0,
+    "p0": 0.0,
+    "rho": 10.332274527998859,
+    "g": 9.80665
+   },
+   "sha256": "baf41290b3afca735365ad7dd467ae335b1e9096fbce4423813fc2d1a78b0df7"
+  },
+  {
+   "fn": "fluidpy.core.thermo.perfect_gas_density",
+   "scene": "s08,s11,s16",
+   "data": "data/basics.json",
+   "eq": "Vallis (1.53) p = ρRT → ρ = p/(RT)",
+   "params": {
+    "p": 101325.0,
+    "T": 288.15
+   },
+   "sha256": "43205a52c440c6f357b04e356369534304969ff573240f1d71098e017f4bccaa"
+  },
+  {
+   "fn": "fluidpy.core.thermo.perfect_gas_density",
+   "scene": "s12",
+   "data": "data/basics.json",
+   "eq": "Vallis (1.53) at 0 °C and 30 °C, same pressure",
+   "params": {
+    "p": 101325.0,
+    "T": [
+     273.15,
+     303.15
+    ]
+   },
+   "sha256": "770e19fae81d9e8cbb6c9872ff632d22985e08715ecf0f8dbb2d2472845d4c4f"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s16",
+   "data": "data/basics.json",
+   "eq": "Vallis (1.51)+(1.53) isothermal: lift ride 0-300 m",
+   "params": {
+    "z": [
+     0.0,
+     300.0
+    ],
+    "p0": 101325.0,
+    "T": 288.15
+   },
+   "sha256": "7f97fb3301e242183aeb30b268d0260ca950dcc023c0cec6ec6dd07e4ba3e054"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.scale_height",
+   "scene": "s18,s19,s20",
+   "data": "data/basics.json",
+   "eq": "H = RT/g (Vallis text after (1.186))",
+   "params": {
+    "T": 288.15
+   },
+   "sha256": "e8988ebaea7b01223b7751d61e7c14b525dd7c8c977ee16b87f5a315d51575fd"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s20",
+   "data": "data/basics.json",
+   "eq": "p = p0 e^{−z/H} at H, 2H, H ln 2, 2H ln 2",
+   "params": {
+    "z": [
+     8434.660310663656,
+     16869.32062132731,
+     5846.461013317386,
+     11692.922026634771
+    ],
+    "p0": 101325.0,
+    "T": 288.15
+   },
+   "sha256": "ec006a53c7e6da98bc530b0bc3282c6c89b74027a370acb5ba803e3e51e4a30a"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s19-s22",
+   "data": "data/atmos.json",
+   "eq": "isothermal curve 0-50 km (H = 8.43 km)",
+   "params": {
+    "z": [
+     0.0,
+     250.0,
+     500.0,
+     750.0,
+     1000.0,
+     1250.0,
+     1500.0,
+     1750.0,
+     2000.0,
+     2250.0,
+     2500.0,
+     2750.0,
+     3000.0,
+     3250.0,
+     3500.0,
+     3750.0,
+     4000.0,
+     4250.0,
+     4500.0,
+     4750.0,
+     5000.0,
+     5250.0,
+     5500.0,
+     5750.0,
+     6000.0,
+     6250.0,
+     6500.0,
+     6750.0,
+     7000.0,
+     7250.0,
+     7500.0,
+     7750.0,
+     8000.0,
+     8250.0,
+     8500.0,
+     8750.0,
+     9000.0,
+     9250.0,
+     9500.0,
+     9750.0,
+     10000.0,
+     10250.0,
+     10500.0,
+     10750.0,
+     11000.0,
+     11250.0,
+     11500.0,
+     11750.0,
+     12000.0,
+     12250.0,
+     12500.0,
+     12750.0,
+     13000.0,
+     13250.0,
+     13500.0,
+     13750.0,
+     14000.0,
+     14250.0,
+     14500.0,
+     14750.0,
+     15000.0,
+     15250.0,
+     15500.0,
+     15750.0,
+     16000.0,
+     16250.0,
+     16500.0,
+     16750.0,
+     17000.0,
+     17250.0,
+     17500.0,
+     17750.0,
+     18000.0,
+     18250.0,
+     18500.0,
+     18750.0,
+     19000.0,
+     19250.0,
+     19500.0,
+     19750.0,
+     20000.0,
+     20250.0,
+     20500.0,
+     20750.0,
+     21000.0,
+     21250.0,
+     21500.0,
+     21750.0,
+     22000.0,
+     22250.0,
+     22500.0,
+     22750.0,
+     23000.0,
+     23250.0,
+     23500.0,
+     23750.0,
+     24000.0,
+     24250.0,
+     24500.0,
+     24750.0,
+     25000.0,
+     25250.0,
+     25500.0,
+     25750.0,
+     26000.0,
+     26250.0,
+     26500.0,
+     26750.0,
+     27000.0,
+     27250.0,
+     27500.0,
+     27750.0,
+     28000.0,
+     28250.0,
+     28500.0,
+     28750.0,
+     29000.0,
+     29250.0,
+     29500.0,
+     29750.0,
+     30000.0,
+     30250.0,
+     30500.0,
+     30750.0,
+     31000.0,
+     31250.0,
+     31500.0,
+     31750.0,
+     32000.0,
+     32250.0,
+     32500.0,
+     32750.0,
+     33000.0,
+     33250.0,
+     33500.0,
+     33750.0,
+     34000.0,
+     34250.0,
+     34500.0,
+     34750.0,
+     35000.0,
+     35250.0,
+     35500.0,
+     35750.0,
+     36000.0,
+     36250.0,
+     36500.0,
+     36750.0,
+     37000.0,
+     37250.0,
+     37500.0,
+     37750.0,
+     38000.0,
+     38250.0,
+     38500.0,
+     38750.0,
+     39000.0,
+     39250.0,
+     39500.0,
+     39750.0,
+     40000.0,
+     40250.0,
+     40500.0,
+     40750.0,
+     41000.0,
+     41250.0,
+     41500.0,
+     41750.0,
+     42000.0,
+     42250.0,
+     42500.0,
+     42750.0,
+     43000.0,
+     43250.0,
+     43500.0,
+     43750.0,
+     44000.0,
+     44250.0,
+     44500.0,
+     44750.0,
+     45000.0,
+     45250.0,
+     45500.0,
+     45750.0,
+     46000.0,
+     46250.0,
+     46500.0,
+     46750.0,
+     47000.0,
+     47250.0,
+     47500.0,
+     47750.0,
+     48000.0,
+     48250.0,
+     48500.0,
+     48750.0,
+     49000.0,
+     49250.0,
+     49500.0,
+     49750.0,
+     50000.0
+    ],
+    "p0": 101325.0,
+    "T": 288.15
+   },
+   "sha256": "cb3382c40ed457e9283606e326ed90622b70087fab6478b8ca455127ffb8e0ca"
+  },
+  {
+   "fn": "fluidpy.core.stratification.adiabatic_lapse_rate",
+   "scene": "s26,s31",
+   "data": "data/basics.json",
+   "eq": "Vallis (2.246) Γd = g/cp (Kundu sign dT/dz)",
+   "params": {},
+   "sha256": "006d2153fb35850a40b738d7a1fbb6b23a3627f61e3036b14df7ad60d136290e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s32",
+   "data": "data/basics.json",
+   "eq": "speed = |(8, 6)| by Pythagoras",
+   "params": {
+    "a": [
+     8.0,
+     6.0
+    ]
+   },
+   "sha256": "24b1f4ef66b650ff816e519b01742ff1753733d36e1b4c3e3b52743168915b1f"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_direction_from",
+   "scene": "s33",
+   "data": "data/basics.json",
+   "eq": "meteorological direction (from), clockwise from north",
+   "params": {
+    "u": 8.0,
+    "v": 6.0
+   },
+   "sha256": "b2d127efdfca59297065bc8968333417fd5cd9793a9a43ae89a024b3c261e8b2"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_direction_from",
+   "scene": "s33",
+   "data": "data/basics.json",
+   "eq": "compass check: westerly, southerly, northerly, easterly",
+   "params": {
+    "u": [
+     5.0,
+     0.0,
+     0.0,
+     -5.0
+    ],
+    "v": [
+     0.0,
+     5.0,
+     -5.0,
+     0.0
+    ]
+   },
+   "sha256": "937f397070b55d90d5ab2a7b25eb15b005da37744a507f7c222c0dfbbd2cd462"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.sea_level_pressure",
+   "scene": "s40",
+   "data": "data/basics.json",
+   "eq": "isothermal reduction p_s e^{z_s/H} (Vallis (1.51)+(1.53); (2.166) general)",
+   "params": {
+    "p_s": 83500.0,
+    "z_s": 1609.0,
+    "T_s": 288.15
+   },
+   "sha256": "ca7c53a6491598e01d345185fbbb82eb3a21a373656114ea3ba53aaba7921acc"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.sea_level_pressure",
+   "scene": "s40",
+   "data": "data/basics.json",
+   "eq": "the more careful version (lapse 6.5 K/km), for the narration's last sentence",
+   "params": {
+    "p_s": 83500.0,
+    "z_s": 1609.0,
+    "T_s": 288.15,
+    "lapse": 0.0065
+   },
+   "sha256": "26e17d80c64180ed6e3c0f8bede712332f6e6bcd31dee19bfb805260bb8f1aec"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s51",
+   "data": "data/basics.json",
+   "eq": "sun direction · local up at equinox noon = cos latitude",
+   "params": {
+    "a": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "b": [
+     [
+      1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.5000000000000001,
+      0.0,
+      0.8660254037844386
+     ]
+    ]
+   },
+   "sha256": "0d494f58aad50ff0b9270cf0791c0c3fde1842fb8ceffbbeb3f3622ec6a1de65"
+  },
+  {
+   "fn": "fluidpy.core.statics.standard_atmosphere",
+   "scene": "s22,s24",
+   "data": "data/atmos.json",
+   "eq": "USSA-1976 (geometric heights)",
+   "params": {
+    "z": [
+     0.0,
+     250.0,
+     500.0,
+     750.0,
+     1000.0,
+     1250.0,
+     1500.0,
+     1750.0,
+     2000.0,
+     2250.0,
+     2500.0,
+     2750.0,
+     3000.0,
+     3250.0,
+     3500.0,
+     3750.0,
+     4000.0,
+     4250.0,
+     4500.0,
+     4750.0,
+     5000.0,
+     5250.0,
+     5500.0,
+     5750.0,
+     6000.0,
+     6250.0,
+     6500.0,
+     6750.0,
+     7000.0,
+     7250.0,
+     7500.0,
+     7750.0,
+     8000.0,
+     8250.0,
+     8500.0,
+     8750.0,
+     9000.0,
+     9250.0,
+     9500.0,
+     9750.0,
+     10000.0,
+     10250.0,
+     10500.0,
+     10750.0,
+     11000.0,
+     11250.0,
+     11500.0,
+     11750.0,
+     12000.0,
+     12250.0,
+     12500.0,
+     12750.0,
+     13000.0,
+     13250.0,
+     13500.0,
+     13750.0,
+     14000.0,
+     14250.0,
+     14500.0,
+     14750.0,
+     15000.0,
+     15250.0,
+     15500.0,
+     15750.0,
+     16000.0,
+     16250.0,
+     16500.0,
+     16750.0,
+     17000.0,
+     17250.0,
+     17500.0,
+     17750.0,
+     18000.0,
+     18250.0,
+     18500.0,
+     18750.0,
+     19000.0,
+     19250.0,
+     19500.0,
+     19750.0,
+     20000.0,
+     20250.0,
+     20500.0,
+     20750.0,
+     21000.0,
+     21250.0,
+     21500.0,
+     21750.0,
+     22000.0,
+     22250.0,
+     22500.0,
+     22750.0,
+     23000.0,
+     23250.0,
+     23500.0,
+     23750.0,
+     24000.0,
+     24250.0,
+     24500.0,
+     24750.0,
+     25000.0,
+     25250.0,
+     25500.0,
+     25750.0,
+     26000.0,
+     26250.0,
+     26500.0,
+     26750.0,
+     27000.0,
+     27250.0,
+     27500.0,
+     27750.0,
+     28000.0,
+     28250.0,
+     28500.0,
+     28750.0,
+     29000.0,
+     29250.0,
+     29500.0,
+     29750.0,
+     30000.0,
+     30250.0,
+     30500.0,
+     30750.0,
+     31000.0,
+     31250.0,
+     31500.0,
+     31750.0,
+     32000.0,
+     32250.0,
+     32500.0,
+     32750.0,
+     33000.0,
+     33250.0,
+     33500.0,
+     33750.0,
+     34000.0,
+     34250.0,
+     34500.0,
+     34750.0,
+     35000.0,
+     35250.0,
+     35500.0,
+     35750.0,
+     36000.0,
+     36250.0,
+     36500.0,
+     36750.0,
+     37000.0,
+     37250.0,
+     37500.0,
+     37750.0,
+     38000.0,
+     38250.0,
+     38500.0,
+     38750.0,
+     39000.0,
+     39250.0,
+     39500.0,
+     39750.0,
+     40000.0,
+     40250.0,
+     40500.0,
+     40750.0,
+     41000.0,
+     41250.0,
+     41500.0,
+     41750.0,
+     42000.0,
+     42250.0,
+     42500.0,
+     42750.0,
+     43000.0,
+     43250.0,
+     43500.0,
+     43750.0,
+     44000.0,
+     44250.0,
+     44500.0,
+     44750.0,
+     45000.0,
+     45250.0,
+     45500.0,
+     45750.0,
+     46000.0,
+     46250.0,
+     46500.0,
+     46750.0,
+     47000.0,
+     47250.0,
+     47500.0,
+     47750.0,
+     48000.0,
+     48250.0,
+     48500.0,
+     48750.0,
+     49000.0,
+     49250.0,
+     49500.0,
+     49750.0,
+     50000.0,
+     50250.0,
+     50500.0,
+     50750.0,
+     51000.0,
+     51250.0,
+     51500.0,
+     51750.0,
+     52000.0,
+     52250.0,
+     52500.0,
+     52750.0,
+     53000.0,
+     53250.0,
+     53500.0,
+     53750.0,
+     54000.0,
+     54250.0,
+     54500.0,
+     54750.0,
+     55000.0,
+     55250.0,
+     55500.0,
+     55750.0,
+     56000.0,
+     56250.0,
+     56500.0,
+     56750.0,
+     57000.0,
+     57250.0,
+     57500.0,
+     57750.0,
+     58000.0,
+     58250.0,
+     58500.0,
+     58750.0,
+     59000.0,
+     59250.0,
+     59500.0,
+     59750.0,
+     60000.0,
+     60250.0,
+     60500.0,
+     60750.0,
+     61000.0,
+     61250.0,
+     61500.0,
+     61750.0,
+     62000.0,
+     62250.0,
+     62500.0,
+     62750.0,
+     63000.0,
+     63250.0,
+     63500.0,
+     63750.0,
+     64000.0,
+     64250.0,
+     64500.0,
+     64750.0,
+     65000.0,
+     65250.0,
+     65500.0,
+     65750.0,
+     66000.0,
+     66250.0,
+     66500.0,
+     66750.0,
+     67000.0,
+     67250.0,
+     67500.0,
+     67750.0,
+     68000.0,
+     68250.0,
+     68500.0,
+     68750.0,
+     69000.0,
+     69250.0,
+     69500.0,
+     69750.0,
+     70000.0,
+     70250.0,
+     70500.0,
+     70750.0,
+     71000.0,
+     71250.0,
+     71500.0,
+     71750.0,
+     72000.0,
+     72250.0,
+     72500.0,
+     72750.0,
+     73000.0,
+     73250.0,
+     73500.0,
+     73750.0,
+     74000.0,
+     74250.0,
+     74500.0,
+     74750.0,
+     75000.0,
+     75250.0,
+     75500.0,
+     75750.0,
+     76000.0,
+     76250.0,
+     76500.0,
+     76750.0,
+     77000.0,
+     77250.0,
+     77500.0,
+     77750.0,
+     78000.0,
+     78250.0,
+     78500.0,
+     78750.0,
+     79000.0,
+     79250.0,
+     79500.0,
+     79750.0,
+     80000.0,
+     80250.0,
+     80500.0,
+     80750.0,
+     81000.0,
+     81250.0,
+     81500.0,
+     81750.0,
+     82000.0,
+     82250.0,
+     82500.0,
+     82750.0,
+     83000.0,
+     83250.0,
+     83500.0,
+     83750.0,
+     84000.0,
+     84250.0,
+     84500.0,
+     84750.0,
+     85000.0,
+     85250.0,
+     85500.0,
+     85750.0,
+     86000.0
+    ],
+    "geometric": true
+   },
+   "sha256": "2276b486b87b734e64e834741be8219dc0b3aa0ea3a0a0ce14885111ee7e7bd1"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.lapse_rate_tropopause",
+   "scene": "s24,s25",
+   "data": "data/soundings.json",
+   "eq": "WMO (1957) lapse-rate tropopause on trappes (z_hyps, IGRA2 00 UTC 1 Nov 2023)",
+   "params": {
+    "T": [
+     285.54998779296875,
+     284.75,
+     282.1499938964844,
+     280.1499938964844,
+     278.75,
+     275.95001220703125,
+     273.54998779296875,
+     272.6499938964844,
+     271.45001220703125,
+     256.25,
+     255.85000610351562,
+     254.25,
+     253.64999389648438,
+     245.85000610351562,
+     245.4499969482422,
+     241.25,
+     231.4499969482422,
+     226.0500030517578,
+     218.85000610351562,
+     216.0500030517578,
+     214.85000610351562,
+     212.4499969482422,
+     211.25,
+     210.4499969482422,
+     212.25,
+     212.64999389648438,
+     213.0500030517578,
+     216.4499969482422,
+     217.0500030517578,
+     220.0500030517578,
+     219.64999389648438,
+     217.25,
+     217.85000610351562,
+     217.0500030517578,
+     215.0500030517578,
+     213.0500030517578,
+     212.4499969482422,
+     216.0500030517578,
+     214.4499969482422,
+     214.0500030517578,
+     213.4499969482422,
+     221.85000610351562
+    ],
+    "z": [
+     165.90264892578125,
+     302.3199157714844,
+     705.0,
+     1003.9674072265625,
+     1402.0,
+     2099.725830078125,
+     2577.6337890625,
+     2787.00244140625,
+     2970.0,
+     5031.72021484375,
+     5101.96484375,
+     5550.0,
+     5669.89892578125,
+     6536.54052734375,
+     6635.95166015625,
+     7170.0,
+     8521.8994140625,
+     9140.0,
+     9874.46875,
+     10166.052734375,
+     10310.0,
+     10539.29296875,
+     10802.0966796875,
+     10882.7763671875,
+     11075.6923828125,
+     11543.0517578125,
+     11700.0,
+     13500.0,
+     14606.2119140625,
+     15533.4052734375,
+     16090.0,
+     16763.71875,
+     18360.0,
+     20047.287109375,
+     20500.0,
+     20861.08203125,
+     23690.0,
+     24235.689453125,
+     26230.0,
+     30590.0,
+     31111.705078125,
+     33942.03125
+    ],
+    "p": [
+     98700.0,
+     97100.0,
+     92500.0,
+     89200.0,
+     85000.0,
+     78000.0,
+     73500.0,
+     71600.0,
+     70000.0,
+     53600.0,
+     53100.0,
+     50000.0,
+     49200.0,
+     43700.0,
+     43100.0,
+     40000.0,
+     32900.0,
+     30000.0,
+     26800.0,
+     25600.0,
+     25000.0,
+     24100.0,
+     23100.0,
+     22800.0,
+     22100.0,
+     20500.0,
+     20000.0,
+     15000.0,
+     12600.0,
+     10900.0,
+     10000.0,
+     9000.0,
+     7000.0,
+     5370.0,
+     5000.0,
+     4720.0,
+     3000.0,
+     2750.0,
+     2000.0,
+     1000.0,
+     920.0,
+     590.0
+    ]
+   },
+   "sha256": "0fe9816dd254e92e9d59bf7f006801b271724daf31a827227b1c1d69cf48321d"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s21",
+   "data": "data/soundings.json",
+   "eq": "the isothermal curve at the balloon's heights",
+   "params": {
+    "z": [
+     165.90264892578125,
+     302.3199157714844,
+     705.0,
+     1003.9674072265625,
+     1402.0,
+     2099.725830078125,
+     2577.6337890625,
+     2787.00244140625,
+     2970.0,
+     5031.72021484375,
+     5101.96484375,
+     5550.0,
+     5669.89892578125,
+     6536.54052734375,
+     6635.95166015625,
+     7170.0,
+     8521.8994140625,
+     9140.0,
+     9874.46875,
+     10166.052734375,
+     10310.0,
+     10539.29296875,
+     10802.0966796875,
+     10882.7763671875,
+     11075.6923828125,
+     11543.0517578125,
+     11700.0,
+     13500.0,
+     14606.2119140625,
+     15533.4052734375,
+     16090.0,
+     16763.71875,
+     18360.0,
+     20047.287109375,
+     20500.0,
+     20861.08203125,
+     23690.0,
+     24235.689453125,
+     26230.0,
+     30590.0,
+     31111.705078125,
+     33942.03125
+    ],
+    "p0": 101325.0,
+    "T": 288.15
+   },
+   "sha256": "d2e163b5f85f1d4bc9752ba9411186c60061868ec21eb6f6de701f485af90d17"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s21",
+   "data": "data/soundings.json",
+   "eq": "Everest height on the curve",
+   "params": {
+    "z": 8849.0,
+    "p0": 101325.0,
+    "T": 288.15
+   },
+   "sha256": "052dfabaeaf2bd0f9e9c159e4a731a6477ae1cae95b7b1d83fec09e94ba5fd82"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.lapse_rate_tropopause",
+   "scene": "s24,s25",
+   "data": "data/soundings.json",
+   "eq": "WMO (1957) lapse-rate tropopause on singapore (z_hyps, IGRA2 00 UTC 1 Nov 2023)",
+   "params": {
+    "T": [
+     300.8500061035156,
+     300.3500061035156,
+     300.1499938964844,
+     298.95001220703125,
+     297.1499938964844,
+     296.75,
+     295.1499938964844,
+     292.45001220703125,
+     291.3500061035156,
+     290.3500061035156,
+     288.8500061035156,
+     288.54998779296875,
+     282.95001220703125,
+     282.95001220703125,
+     282.95001220703125,
+     282.45001220703125,
+     276.95001220703125,
+     275.6499938964844,
+     274.25,
+     270.1499938964844,
+     270.04998779296875,
+     268.75,
+     268.75,
+     268.6499938964844,
+     267.95001220703125,
+     267.45001220703125,
+     267.1499938964844,
+     267.1499938964844,
+     266.6499938964844,
+     265.25,
+     265.04998779296875,
+     265.25,
+     263.6499938964844,
+     263.25,
+     263.25,
+     258.45001220703125,
+     258.3500061035156,
+     258.3500061035156,
+     258.1499938964844,
+     254.35000610351562,
+     253.14999389648438,
+     253.14999389648438,
+     251.5500030517578,
+     251.0500030517578,
+     249.85000610351562,
+     249.75,
+     249.75,
+     243.14999389648438,
+     242.14999389648438,
+     240.35000610351562,
+     239.25,
+     236.64999389648438,
+     233.64999389648438,
+     230.4499969482422,
+     227.35000610351562,
+     223.75,
+     220.85000610351562,
+     213.85000610351562,
+     213.25,
+     210.85000610351562,
+     205.4499969482422,
+     203.5500030517578,
+     199.9499969482422,
+     196.35000610351562,
+     196.35000610351562,
+     193.14999389648438,
+     191.85000610351562,
+     191.35000610351562,
+     191.75,
+     195.14999389648438,
+     194.9499969482422,
+     194.64999389648438,
+     196.4499969482422,
+     199.25,
+     199.14999389648438,
+     197.64999389648438,
+     198.14999389648438,
+     197.0500030517578,
+     196.85000610351562,
+     196.64999389648438,
+     196.4499969482422,
+     197.4499969482422,
+     200.75,
+     199.9499969482422,
+     200.5500030517578,
+     202.35000610351562,
+     203.5500030517578,
+     203.64999389648438,
+     203.5500030517578,
+     206.85000610351562,
+     207.25,
+     206.14999389648438,
+     205.85000610351562,
+     206.0500030517578,
+     209.85000610351562,
+     209.85000610351562,
+     211.64999389648438,
+     211.5500030517578,
+     211.14999389648438,
+     213.25,
+     213.85000610351562,
+     213.75,
+     213.64999389648438,
+     216.64999389648438,
+     217.75,
+     217.85000610351562,
+     222.9499969482422,
+     222.4499969482422,
+     222.64999389648438,
+     223.0500030517578,
+     228.14999389648438,
+     229.75,
+     231.5500030517578,
+     231.5500030517578,
+     236.35000610351562,
+     236.64999389648438,
+     243.0500030517578,
+     246.4499969482422,
+     246.75,
+     246.75,
+     243.35000610351562
+    ],
+    "z": [
+     33.0,
+     44.0,
+     109.0,
+     348.0,
+     692.0,
+     798.0,
+     1038.0,
+     1394.0,
+     1532.0,
+     1742.0,
+     2054.0,
+     2094.0,
+     3090.0,
+     3114.0,
+     3182.0,
+     3299.0,
+     4246.0,
+     4452.0,
+     4646.0,
+     5374.0,
+     5400.0,
+     5733.0,
+     5752.0,
+     5792.0,
+     5866.0,
+     5913.0,
+     6038.0,
+     6143.0,
+     6242.0,
+     6401.0,
+     6489.0,
+     6590.0,
+     6814.0,
+     6909.0,
+     6923.0,
+     7493.0,
+     7641.0,
+     7645.0,
+     7691.0,
+     8220.0,
+     8389.0,
+     8437.0,
+     8642.0,
+     8732.0,
+     8973.0,
+     8979.0,
+     8985.0,
+     9768.0,
+     9912.0,
+     10211.0,
+     10320.0,
+     10687.0,
+     11050.0,
+     11389.0,
+     11760.0,
+     12210.0,
+     12541.0,
+     13325.0,
+     13393.0,
+     13724.0,
+     14348.0,
+     14552.0,
+     14984.0,
+     15407.0,
+     15427.0,
+     15837.0,
+     16163.0,
+     16604.0,
+     16693.0,
+     16816.0,
+     16875.0,
+     16934.0,
+     17182.0,
+     17354.0,
+     17383.0,
+     17671.0,
+     17972.0,
+     18387.0,
+     18409.0,
+     18768.0,
+     18852.0,
+     18969.0,
+     19285.0,
+     19439.0,
+     19898.0,
+     20480.0,
+     20757.0,
+     20772.0,
+     20852.0,
+     21075.0,
+     21152.0,
+     21710.0,
+     22071.0,
+     22114.0,
+     22529.0,
+     22548.0,
+     22747.0,
+     23635.0,
+     23716.0,
+     23905.0,
+     24069.0,
+     24303.0,
+     25448.0,
+     25716.0,
+     26473.0,
+     26713.0,
+     27390.0,
+     28342.0,
+     28482.0,
+     29428.0,
+     30358.0,
+     31039.0,
+     31725.0,
+     31757.0,
+     33042.0,
+     33069.0,
+     33374.0,
+     33596.0,
+     33739.0,
+     34119.0,
+     35433.0
+    ],
+    "p": [
+     100854.0,
+     100737.0,
+     100000.0,
+     97347.0,
+     93629.0,
+     92502.0,
+     89991.0,
+     86369.0,
+     85000.0,
+     82959.0,
+     80000.0,
+     79623.0,
+     70775.0,
+     70576.0,
+     70000.0,
+     69028.0,
+     61538.0,
+     60000.0,
+     58591.0,
+     53505.0,
+     53334.0,
+     51153.0,
+     51026.0,
+     50772.0,
+     50296.0,
+     49995.0,
+     49203.0,
+     48549.0,
+     47936.0,
+     46965.0,
+     46443.0,
+     45849.0,
+     44552.0,
+     44006.0,
+     43927.0,
+     40786.0,
+     40000.0,
+     39979.0,
+     39739.0,
+     37048.0,
+     36211.0,
+     35980.0,
+     34997.0,
+     34577.0,
+     33469.0,
+     33442.0,
+     33414.0,
+     30000.0,
+     29401.0,
+     28189.0,
+     27758.0,
+     26344.0,
+     24997.0,
+     23786.0,
+     22514.0,
+     21039.0,
+     20000.0,
+     17695.0,
+     17504.0,
+     16604.0,
+     15000.0,
+     14502.0,
+     13485.0,
+     12544.0,
+     12499.0,
+     11638.0,
+     10987.0,
+     10165.0,
+     10005.0,
+     9792.0,
+     9692.0,
+     9594.0,
+     9191.0,
+     8926.0,
+     8883.0,
+     8456.0,
+     8030.0,
+     7479.0,
+     7451.0,
+     7003.0,
+     6903.0,
+     6765.0,
+     6411.0,
+     6246.0,
+     5779.0,
+     5241.0,
+     5004.0,
+     4992.0,
+     4925.0,
+     4746.0,
+     4686.0,
+     4276.0,
+     4029.0,
+     4002.0,
+     3742.0,
+     3729.0,
+     3613.0,
+     3135.0,
+     3095.0,
+     3003.0,
+     2926.0,
+     2820.0,
+     2353.0,
+     2255.0,
+     2004.0,
+     1930.0,
+     1739.0,
+     1505.0,
+     1473.0,
+     1277.0,
+     1111.0,
+     1005.0,
+     909.0,
+     905.0,
+     751.0,
+     748.0,
+     717.0,
+     695.0,
+     682.0,
+     648.0,
+     541.0
+    ]
+   },
+   "sha256": "0a93ac66e83b61b5e81e676bb42079fb4e085f53547585f35687857547a3dd2e"
+  },
+  {
+   "fn": "fluidpy.geo.moist.vapour_pressure_from_q",
+   "scene": "s27",
+   "data": "data/moist.json",
+   "eq": "Vallis (18.12) e ≈ q p/ε = 1.61 q p",
+   "params": {
+    "q": 0.02,
+    "p": 100000.0
+   },
+   "sha256": "378d04fa2237b95f971adb32b242be912b55e636791d14f604722c810350bc79"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s28",
+   "data": "data/moist.json",
+   "eq": "Vallis (18.28), constants of Fig. 18.1 (T0 = 273 K, e0 = 6.12 hPa, L = 2.44e6, Rv = 462)",
+   "params": {
+    "T": [
+     273.15,
+     283.15,
+     293.15,
+     303.15
+    ]
+   },
+   "sha256": "47a252ddfb47e3f07f8a93500d8fb37400158a822ce8630687dafb9beccda671"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s28-s30",
+   "data": "data/moist.json",
+   "eq": "e_s curve −10…35 °C",
+   "params": {
+    "T": [
+     263.15,
+     263.65,
+     264.15,
+     264.65,
+     265.15,
+     265.65,
+     266.15,
+     266.65,
+     267.15,
+     267.65,
+     268.15,
+     268.65,
+     269.15,
+     269.65,
+     270.15,
+     270.65,
+     271.15,
+     271.65,
+     272.15,
+     272.65,
+     273.15,
+     273.65,
+     274.15,
+     274.65,
+     275.15,
+     275.65,
+     276.15,
+     276.65,
+     277.15,
+     277.65,
+     278.15,
+     278.65,
+     279.15,
+     279.65,
+     280.15,
+     280.65,
+     281.15,
+     281.65,
+     282.15,
+     282.65,
+     283.15,
+     283.65,
+     284.15,
+     284.65,
+     285.15,
+     285.65,
+     286.15,
+     286.65,
+     287.15,
+     287.65,
+     288.15,
+     288.65,
+     289.15,
+     289.65,
+     290.15,
+     290.65,
+     291.15,
+     291.65,
+     292.15,
+     292.65,
+     293.15,
+     293.65,
+     294.15,
+     294.65,
+     295.15,
+     295.65,
+     296.15,
+     296.65,
+     297.15,
+     297.65,
+     298.15,
+     298.65,
+     299.15,
+     299.65,
+     300.15,
+     300.65,
+     301.15,
+     301.65,
+     302.15,
+     302.65,
+     303.15,
+     303.65,
+     304.15,
+     304.65,
+     305.15,
+     305.65,
+     306.15,
+     306.65,
+     307.15,
+     307.65,
+     308.15
+    ]
+   },
+   "sha256": "9941f2177e5968e7ccd459e5c8acf24bd560cb45e163e4e091494f1e46ea61af"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s29",
+   "data": "data/moist.json",
+   "eq": "e_s at 25 °C",
+   "params": {
+    "T": 298.15
+   },
+   "sha256": "98f6a48722ffa14657f21d594787967ffc391ab6e3b32b1456757cb83a33dbcd"
+  },
+  {
+   "fn": "fluidpy.geo.moist.relative_humidity",
+   "scene": "s29",
+   "data": "data/moist.json",
+   "eq": "ℋ = e/e_s (Vallis §18.1.2)",
+   "params": {
+    "e": 1500.0,
+    "T": 298.15
+   },
+   "sha256": "2cb35c4fa3ff481d5ba3617aed2224d77387b1c3693031e2f6dd7a5ac36c3d34"
+  },
+  {
+   "fn": "fluidpy.geo.moist.dew_point",
+   "scene": "s30",
+   "data": "data/moist.json",
+   "eq": "inverse of (18.28): T_d where e_s(T_d) = 15 hPa",
+   "params": {
+    "e": 1500.0
+   },
+   "sha256": "4b89a1d2db6686dd315f3b5ff743f0a750d3dd633f4ec3a175a8277125d7937a"
+  },
+  {
+   "fn": "fluidpy.geo.moist.lifting_condensation_level",
+   "scene": "s31",
+   "data": "data/moist.json",
+   "eq": "parcel lifted dry-adiabatically from 25 °C / T_d / 1013 hPa (Vallis (2.246), (18.12), (18.28))",
+   "params": {
+    "T": 298.15,
+    "Td": 286.26565100959493,
+    "p": 101300.0
+   },
+   "sha256": "98a7f87baf930b38ee141a8fe478e96b08fb2a3765ccb20c3f3846935782acd5"
+  },
+  {
+   "fn": "fluidpy.core.statics.linear_lapse_pressure",
+   "scene": "s31",
+   "data": "data/moist.json",
+   "eq": "parcel pressure on the dry adiabat (closed form)",
+   "params": {
+    "z": [
+     0.0,
+     50.0,
+     100.0,
+     150.0,
+     200.0,
+     250.0,
+     300.0,
+     350.0,
+     400.0,
+     450.0,
+     500.0,
+     550.0,
+     600.0,
+     650.0,
+     700.0,
+     750.0,
+     800.0,
+     850.0,
+     900.0,
+     950.0,
+     1000.0,
+     1050.0,
+     1100.0,
+     1150.0,
+     1200.0,
+     1250.0,
+     1300.0,
+     1350.0,
+     1400.0,
+     1450.0,
+     1500.0,
+     1550.0,
+     1600.0,
+     1650.0,
+     1700.0,
+     1750.0,
+     1800.0,
+     1850.0,
+     1900.0,
+     1950.0,
+     2000.0,
+     2050.0,
+     2100.0,
+     2150.0,
+     2200.0,
+     2250.0,
+     2300.0,
+     2350.0,
+     2400.0,
+     2450.0,
+     2500.0,
+     2550.0,
+     2600.0,
+     2650.0,
+     2700.0,
+     2750.0,
+     2800.0,
+     2850.0,
+     2900.0,
+     2950.0,
+     3000.0
+    ],
+    "p0": 101300.0,
+    "T0": 298.15,
+    "dT_dz": -0.009760745352659451
+   },
+   "sha256": "df79517e3801bb3bfabccd41c2772e74306e09bd368c1a87e58d69dbdcecef9a"
+  },
+  {
+   "fn": "fluidpy.geo.moist.dew_point",
+   "scene": "s31",
+   "data": "data/moist.json",
+   "eq": "parcel dew point as it rises (q conserved)",
+   "params": {
+    "e": [
+     1500.0,
+     1491.4239227895218,
+     1482.8829263010211,
+     1474.3769242940039,
+     1465.9058305987628,
+     1457.469559116435,
+     1449.0680238190578,
+     1440.7011387496316,
+     1432.3688180221743,
+     1424.070975821785,
+     1415.807526404694,
+     1407.5783840983336,
+     1399.3834633013898,
+     1391.2226784838597,
+     1383.0959441871191,
+     1375.0031750239777,
+     1366.9442856787339,
+     1358.9191909072445,
+     1350.9278055369787,
+     1342.9700444670802,
+     1335.045822668425,
+     1327.1550551836863,
+     1319.2976571273925,
+     1311.4735436859874,
+     1303.682630117894,
+     1295.9248317535742,
+     1288.2000639955875,
+     1280.5082423186577,
+     1272.8492822697317,
+     1265.223099468042,
+     1257.6296096051638,
+     1250.0687284450873,
+     1242.5403718242724,
+     1235.0444556517098,
+     1227.5808959089914,
+     1220.1496086503666,
+     1212.750510002806,
+     1205.3835161660677,
+     1198.0485434127575,
+     1190.7455080883929,
+     1183.4743266114676,
+     1176.2349154735157,
+     1169.0271912391738,
+     1161.851070546246,
+     1154.7064701057682,
+     1147.5933067020753,
+     1140.511497192858,
+     1133.4609585092362,
+     1126.4416076558218,
+     1119.4533617107782,
+     1112.4961378258924,
+     1105.5698532266401,
+     1098.6744252122444,
+     1091.8097711557498,
+     1084.9758085040849,
+     1078.172454778128,
+     1071.3996275727725,
+     1064.657244556997,
+     1057.9452234739301,
+     1051.2634821409156,
+     1044.6119384495814
+    ]
+   },
+   "sha256": "1a23022cc347b9b674f3224842564718e517b9f37746eea694c56bc865654334"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s57,s58",
+   "data": "data/brest_hourly.json",
+   "eq": "hourly wind speed at Brest",
+   "params": {
+    "a": [
+     [
+      2.1688661575317383,
+      12.748053550720215
+     ],
+     [
+      5.830985069274902,
+      10.938471794128418
+     ],
+     [
+      6.844268798828125,
+      6.481080055236816
+     ],
+     [
+      6.938712120056152,
+      7.417604446411133
+     ],
+     [
+      5.956321716308594,
+      7.342528343200684
+     ],
+     [
+      6.314678192138672,
+      7.566984176635742
+     ],
+     [
+      8.380964279174805,
+      5.892850399017334
+     ],
+     [
+      9.468390464782715,
+      2.697831630706787
+     ],
+     [
+      10.890340805053711,
+      0.7853094339370728
+     ],
+     [
+      9.977680206298828,
+      0.8735439777374268
+     ],
+     [
+      9.26273250579834,
+      1.9965993165969849
+     ],
+     [
+      8.771978378295898,
+      3.309281349182129
+     ],
+     [
+      9.051778793334961,
+      4.4826459884643555
+     ],
+     [
+      7.763108253479004,
+      5.286818504333496
+     ],
+     [
+      6.882223129272461,
+      6.986494064331055
+     ],
+     [
+      4.657941818237305,
+      8.69003963470459
+     ],
+     [
+      3.116833448410034,
+      10.521292686462402
+     ],
+     [
+      -0.9009942412376404,
+      11.222525596618652
+     ],
+     [
+      -5.606407165527344,
+      11.892024040222168
+     ],
+     [
+      -0.9451267719268799,
+      15.028220176696777
+     ],
+     [
+      7.217630386352539,
+      16.32929229736328
+     ],
+     [
+      9.710236549377441,
+      12.613380432128906
+     ],
+     [
+      9.748190879821777,
+      13.780552864074707
+     ],
+     [
+      9.886767387390137,
+      16.32232666015625
+     ],
+     [
+      12.140443801879883,
+      14.106033325195312
+     ],
+     [
+      15.56437873840332,
+      7.536551475524902
+     ],
+     [
+      21.768753051757812,
+      2.808971881866455
+     ],
+     [
+      23.210777282714844,
+      -0.3819195032119751
+     ],
+     [
+      19.541440963745117,
+      -1.5954375267028809
+     ],
+     [
+      16.29902458190918,
+      -2.162616491317749
+     ],
+     [
+      14.97541618347168,
+      -2.2793166637420654
+     ],
+     [
+      14.558622360229492,
+      -1.4444618225097656
+     ],
+     [
+      13.691537857055664,
+      -1.539943814277649
+     ],
+     [
+      13.20930290222168,
+      -1.1482231616973877
+     ],
+     [
+      11.961261749267578,
+      -0.05466949939727783
+     ],
+     [
+      11.863880157470703,
+      0.07835233211517334
+     ],
+     [
+      11.216487884521484,
+      -0.2529780864715576
+     ],
+     [
+      11.20713996887207,
+      -1.1123154163360596
+     ],
+     [
+      10.978877067565918,
+      -1.9447219371795654
+     ],
+     [
+      11.23752212524414,
+      -2.7901856899261475
+     ],
+     [
+      10.167104721069336,
+      -2.7991626262664795
+     ],
+     [
+      9.053838729858398,
+      -1.8663777112960815
+     ],
+     [
+      8.171951293945312,
+      -0.7165142297744751
+     ],
+     [
+      8.061326026916504,
+      -0.05466949939727783
+     ],
+     [
+      7.895387649536133,
+      0.7638635635375977
+     ],
+     [
+      7.242542266845703,
+      1.1335500478744507
+     ],
+     [
+      7.51287317276001,
+      2.999119758605957
+     ],
+     [
+      6.531267166137695,
+      2.189563751220703
+     ]
+    ]
+   },
+   "sha256": "93029b2b1a9d58d57c85f0aaed702f4a4c92d4f13c3f1127b169c61c23344303"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_direction_from",
+   "scene": "s57,s58",
+   "data": "data/brest_hourly.json",
+   "eq": "hourly wind direction (from) at Brest",
+   "params": {
+    "u": [
+     2.1688661575317383,
+     5.830985069274902,
+     6.844268798828125,
+     6.938712120056152,
+     5.956321716308594,
+     6.314678192138672,
+     8.380964279174805,
+     9.468390464782715,
+     10.890340805053711,
+     9.977680206298828,
+     9.26273250579834,
+     8.771978378295898,
+     9.051778793334961,
+     7.763108253479004,
+     6.882223129272461,
+     4.657941818237305,
+     3.116833448410034,
+     -0.9009942412376404,
+     -5.606407165527344,
+     -0.9451267719268799,
+     7.217630386352539,
+     9.710236549377441,
+     9.748190879821777,
+     9.886767387390137,
+     12.140443801879883,
+     15.56437873840332,
+     21.768753051757812,
+     23.210777282714844,
+     19.541440963745117,
+     16.29902458190918,
+     14.97541618347168,
+     14.558622360229492,
+     13.691537857055664,
+     13.20930290222168,
+     11.961261749267578,
+     11.863880157470703,
+     11.216487884521484,
+     11.20713996887207,
+     10.978877067565918,
+     11.23752212524414,
+     10.167104721069336,
+     9.053838729858398,
+     8.171951293945312,
+     8.061326026916504,
+     7.895387649536133,
+     7.242542266845703,
+     7.51287317276001,
+     6.531267166137695
+    ],
+    "v": [
+     12.748053550720215,
+     10.938471794128418,
+     6.481080055236816,
+     7.417604446411133,
+     7.342528343200684,
+     7.566984176635742,
+     5.892850399017334,
+     2.697831630706787,
+     0.7853094339370728,
+     0.8735439777374268,
+     1.9965993165969849,
+     3.309281349182129,
+     4.4826459884643555,
+     5.286818504333496,
+     6.986494064331055,
+     8.69003963470459,
+     10.521292686462402,
+     11.222525596618652,
+     11.892024040222168,
+     15.028220176696777,
+     16.32929229736328,
+     12.613380432128906,
+     13.780552864074707,
+     16.32232666015625,
+     14.106033325195312,
+     7.536551475524902,
+     2.808971881866455,
+     -0.3819195032119751,
+     -1.5954375267028809,
+     -2.162616491317749,
+     -2.2793166637420654,
+     -1.4444618225097656,
+     -1.539943814277649,
+     -1.1482231616973877,
+     -0.05466949939727783,
+     0.07835233211517334,
+     -0.2529780864715576,
+     -1.1123154163360596,
+     -1.9447219371795654,
+     -2.7901856899261475,
+     -2.7991626262664795,
+     -1.8663777112960815,
+     -0.7165142297744751,
+     -0.05466949939727783,
+     0.7638635635375977,
+     1.1335500478744507,
+     2.999119758605957,
+     2.189563751220703
+    ]
+   },
+   "sha256": "b83d4ecab0ab9a51964327e2f34b8ca14f0f3f5d27b314076ba329cf90d4b082"
+  }
+ ],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.geo.moist.lifting_condensation_level",
+   "scene": "s31",
+   "data": "data/moist.json",
+   "eq": "real cumulus day: LCL from ERA5 t2m, d2m, msl (24 Jun 2024 13 UTC, 46-50N 1W-5E)",
+   "params": {
+    "T": "array (17, 25), sha256 6a076dea59f38f24d743e56d1743e8f1e153eafa7ce252631716dc659699a1a0",
+    "Td": "array (17, 25), sha256 1f3c55ff5e4415cd1be8c3ac0e555f9ff4918a222f607e584a1508a838a91dde",
+    "p": "array (17, 25), sha256 473c00316f1944bee5a2abe9bba2ceb3f52a58740f34d4463ffeb6de8cce73ea"
+   },
+   "output_sha256": "991ad8896f49ced01f449fdc336455c887ef9ab0f87ef54cbdf514b57b755a77"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s27",
+   "data": "data/global_20231102T12.bin",
+   "eq": "vapour pressure = e_s(dew point) (18.28)",
+   "params": {
+    "T": "array (361, 720), sha256 1c8a41efdf32fa1e6ea7c1ba5c16d1852c3f1f34bec32028fcc5ef6b9f65498c"
+   },
+   "output_sha256": "b7cc50b0c929f0a32e4fc8ec5f327cfb9ce3b9f057417f24437be8dca2236d57"
+  },
+  {
+   "fn": "fluidpy.geo.moist.specific_humidity",
+   "scene": "s27",
+   "data": "data/global_20231102T12.bin",
+   "eq": "Vallis (18.12) q ≈ ε e/p",
+   "params": {
+    "e": "array (361, 720), sha256 b7cc50b0c929f0a32e4fc8ec5f327cfb9ce3b9f057417f24437be8dca2236d57",
+    "p": "array (361, 720), sha256 64ffc64c174e8644758414b23b94a8d7a8dfa797bcdc0eeb638e7f8e4d3990e7"
+   },
+   "output_sha256": "2760855341b3d2673fc33da9d104dac6aba9cb039785d8f3b66cc550790f320e"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s42",
+   "data": "data/highs_lows.json",
+   "eq": "Ciarán: MSLP minimum (quadratic refinement)",
+   "params": {
+    "msl": "array (361, 720), sha256 1d00573b5f35398ac1d918974f41d60ed500959d79c81f9da13eca69bfa50fe4",
+    "lat": "array (361,), sha256 ab087c8bf34394757612b4e637c6843fe4875a1c093e6282a1ad54a9f11ded28",
+    "lon": "array (720,), sha256 e8eec859c9f53ddeda19ea1bf73514c49797835692b4e9b8eab886d56052a1e5",
+    "box": [
+     45,
+     60,
+     -15,
+     10
+    ]
+   },
+   "output_sha256": "30ea71b49214f7b955efa4331a7c9d8555a946eecd1ddabe1610ca4eca1895b1"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s42",
+   "data": "data/highs_lows.json",
+   "eq": "Azores high: minimum of −MSLP",
+   "params": {
+    "msl": "array (361, 720), sha256 ae4663893643eed61832c9a216fe0ae5f6714e6a6c5859b2f9c1f4561d1ceba9",
+    "lat": "array (361,), sha256 ab087c8bf34394757612b4e637c6843fe4875a1c093e6282a1ad54a9f11ded28",
+    "lon": "array (720,), sha256 e8eec859c9f53ddeda19ea1bf73514c49797835692b4e9b8eab886d56052a1e5",
+    "box": [
+     25,
+     45,
+     -45,
+     -10
+    ]
+   },
+   "output_sha256": "b448f18f422a6297f1616806a1411a7ea74b322b1e010dad3a957b50436f0d5e"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s44",
+   "data": "data/highs_lows.json",
+   "eq": "rings 200-600 km round Ciarán: v_t = k·(r̂×u) (Vallis (2.7))",
+   "params": {
+    "u": "array (361, 720), sha256 ba9fb41e3f9e176284e87b80d12c2c774324051640b53cf1bc6e100095f4363c",
+    "v": "array (361, 720), sha256 57ff0739356fb8d0be3360b69f672f80977f24e9f704d784aba0b58466d2f67d",
+    "lat": "array (361,), sha256 ab087c8bf34394757612b4e637c6843fe4875a1c093e6282a1ad54a9f11ded28",
+    "lon": "array (720,), sha256 e8eec859c9f53ddeda19ea1bf73514c49797835692b4e9b8eab886d56052a1e5",
+    "centre": [
+     52.57888641019349,
+     1.5649326549558396
+    ],
+    "radii_km": "array (3,), sha256 6e4133db64e17acca5948c207eb66e7ae22208018a39aa50e8c0d7067e3520a1",
+    "n_az": 36
+   },
+   "output_sha256": "23f61137360a9125b6c37c1d3645bbc55d216db6548630d2b4e4907e5b13e287"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s44",
+   "data": "data/highs_lows.json",
+   "eq": "rings 600-1200 km round the Azores high",
+   "params": {
+    "u": "array (361, 720), sha256 ba9fb41e3f9e176284e87b80d12c2c774324051640b53cf1bc6e100095f4363c",
+    "v": "array (361, 720), sha256 57ff0739356fb8d0be3360b69f672f80977f24e9f704d784aba0b58466d2f67d",
+    "lat": "array (361,), sha256 ab087c8bf34394757612b4e637c6843fe4875a1c093e6282a1ad54a9f11ded28",
+    "lon": "array (720,), sha256 e8eec859c9f53ddeda19ea1bf73514c49797835692b4e9b8eab886d56052a1e5",
+    "centre": [
+     34.83398937121406,
+     -32.5852658229463
+    ],
+    "radii_km": "array (3,), sha256 2dbd7c3dc92c3e42eb062cea78e29c559afcd6a1179df6813226fa16e4689831",
+    "n_az": 36
+   },
+   "output_sha256": "47e5b87cc100574abcea4aaa972a9e46bcac4d759e48c6a0f7613eaa55a178e3"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s44",
+   "data": "data/highs_lows.json",
+   "eq": "deepest southern-hemisphere low (40-62S), refined in a ±8° box",
+   "params": {
+    "msl": "array (361, 720), sha256 1d00573b5f35398ac1d918974f41d60ed500959d79c81f9da13eca69bfa50fe4",
+    "lat": "array (361,), sha256 ab087c8bf34394757612b4e637c6843fe4875a1c093e6282a1ad54a9f11ded28",
+    "lon": "array (720,), sha256 e8eec859c9f53ddeda19ea1bf73514c49797835692b4e9b8eab886d56052a1e5",
+    "box": [
+     -70.0,
+     -54.0,
+     -43.5,
+     -27.5
+    ]
+   },
+   "output_sha256": "dedd7ea348fec43bc16c273dd77bb817b8e90f94e7184fb0701f51f9afaa1a21"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s44",
+   "data": "data/highs_lows.json",
+   "eq": "rings round the deepest SH low",
+   "params": {
+    "u": "array (361, 720), sha256 ba9fb41e3f9e176284e87b80d12c2c774324051640b53cf1bc6e100095f4363c",
+    "v": "array (361, 720), sha256 57ff0739356fb8d0be3360b69f672f80977f24e9f704d784aba0b58466d2f67d",
+    "lat": "array (361,), sha256 ab087c8bf34394757612b4e637c6843fe4875a1c093e6282a1ad54a9f11ded28",
+    "lon": "array (720,), sha256 e8eec859c9f53ddeda19ea1bf73514c49797835692b4e9b8eab886d56052a1e5",
+    "centre": [
+     -62.48214794290634,
+     -34.698651362137724
+    ],
+    "radii_km": "array (2,), sha256 316913e2e76a5798d1c0e1c28a77f98fa8d78dc2fcc3948b24c874b0e789e850",
+    "n_az": 36
+   },
+   "output_sha256": "77c5a3b42a8467945763a7a9cf6f638fed1d4793aba3d670a394ff2b0166093c"
+  },
+  {
+   "fn": "fluidpy.diag.trajectories.advect_on_sphere",
+   "scene": "s44",
+   "data": "data/highs_lows.json",
+   "eq": "streaklines: 1.5 h of the 12 UTC 10-m wind (RK4)",
+   "params": {
+    "u": "array (141, 261), sha256 fc958e4e76ee1af943bc09b0db92bbc263c0041bba4d3e85955d4f5b9114ef96",
+    "v": "array (141, 261), sha256 a80752da69009bb3fca3eac27fe5631c250c33f88131ffbeed1004ff8ef61878",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (261,), sha256 8fddb03475dbb5f77944bad6e988e8fa116619c3dc4aaa93df7ee920002aba87",
+    "seeds_lat": "array (897,), sha256 023b70b324066255957902d213a7e7997a4313aa0ec3c30b66011212e8e8797c",
+    "seeds_lon": "array (897,), sha256 64f124d9a318b968530943b44662bb11e872b7a62d96898937c6b60cff947b92",
+    "dt": 300.0,
+    "nsteps": 18
+   },
+   "output_sha256": "360d4570ef5fa2582dce01626dda096538d7c641339d3b4355e27b9ad3fadcdd"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.daily_climatology",
+   "scene": "s36",
+   "data": "data/brest_climate.json",
+   "eq": "pooled ±7-day window, 1991-2020, q10/q90 (Vallis (11.1) context)",
+   "params": {
+    "series": "array (12053,), sha256 c275b164f29b5ff0825d95f86e0ecb8392659aab69d8e2676c512cb6b9805d20",
+    "base": [
+     1991,
+     2020
+    ],
+    "quantiles": [
+     0.1,
+     0.9
+    ],
+    "smooth_days": 15
+   },
+   "output_sha256": "d795bf787e6e5e2a5ace40ec48f22db9d6d9387a0d2f8ce6c58fb41e63b20a72"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.band_share",
+   "scene": "s36",
+   "data": "data/brest_climate.json",
+   "eq": "share of 2023 days inside the band",
+   "params": {
+    "series": "array (12053,), sha256 c275b164f29b5ff0825d95f86e0ecb8392659aab69d8e2676c512cb6b9805d20",
+    "clim": "xarray.Dataset vars ['mean', 'q10', 'q90', 'count'], sha256 04e1ad9adb5208c914f0d40ac54a5e9df5e7609dba3c34d46553eee0baf873a6",
+    "year": 2023
+   },
+   "output_sha256": "f786744a18376abc69dcdcfda135d4a5a59924aeae23418ab2b68f2721c15813"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s55",
+   "data": "data/ciaran_hourly.json",
+   "eq": "hourly MSLP minimum 12 UTC 1 Nov → 12 UTC 2 Nov",
+   "params": {
+    "msl": "array (25, 101, 161), sha256 b8c7297a451678a06f600f5b8ba0a10d7365d40d22506de45064dc25a80d886b",
+    "lat": "array (101,), sha256 9961ab66e8f95a9157ea194b53393dbc162206b3a86d33a80c0e2844b9d2aa2e",
+    "lon": "array (161,), sha256 a04b3cdb77a389bb25d0421b81bdc7e3ecd84118c874eb379ed0004049108054",
+    "box": [
+     40,
+     60,
+     -30,
+     10
+    ]
+   },
+   "output_sha256": "f1e8ae69513f0de360e08f10b58c63aa9da4576d56638fe450c620c810dafa5e"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s46,s49,s50",
+   "data": "data/fronts.json",
+   "eq": "Hewson (1998) TFP front lines, locate='centre' (steepest T change)",
+   "params": {
+    "T": "array (141, 221), sha256 a0a26b1a03faaa526bd91a4c12a52490b6798fa11fdae325daf2a30908cfbb69",
+    "u": "array (141, 221), sha256 7408cdc83865dc918f43c4303c09b68649f73c03944c146a0bd87ed8a597fe4e",
+    "v": "array (141, 221), sha256 79a8eb890690e5c26c176d788fd5d43043e29b29db3637d8a3d56cf1d90f9b0f",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c",
+    "locate": "centre"
+   },
+   "output_sha256": "1494282a365a98ca3b814fe3082081cfee62573d64194f0eb7273fb2be886c03"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s50",
+   "data": "data/fronts.json",
+   "eq": "same at 21 UTC (motion)",
+   "params": {
+    "T": "array (141, 221), sha256 e7cceab1e039c8dc1503cc3c69e89d61a053439f031d64a72e22b26a34b53077",
+    "u": "array (141, 221), sha256 e08bbd1e5752c26cf4cd5a18636fd5f54e54570263564bf03be8c783ce40a2b7",
+    "v": "array (141, 221), sha256 f7178cb11d27262710e76f09c3bfd03a9a9d65192d681c35caf3cdee2bd5ff94",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c",
+    "locate": "centre"
+   },
+   "output_sha256": "ee6d9e573dfee25b1388dadb74aace3bf381a823ee01f1c7816bebfa9e26e704"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_fields",
+   "scene": "s46,s49",
+   "data": "data/fronts.json",
+   "eq": "smoothed τ and ∇τ (100 km)",
+   "params": {
+    "T": "array (141, 221), sha256 a0a26b1a03faaa526bd91a4c12a52490b6798fa11fdae325daf2a30908cfbb69",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c"
+   },
+   "output_sha256": "63320790b3afde465333d9d651131dbca764654113c19b49f4657954e9c3121c"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s55",
+   "data": "data/fronts.json",
+   "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre', same picking rule",
+   "params": {
+    "T": "ERA5 850 hPa t (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc)",
+    "locate": "centre"
+   },
+   "output_sha256": "f980dab0e670857947a34dc40a91ce2630b9fe235a3cad3e64c2158fd494da3f"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s52",
+   "data": "data/climatology.json",
+   "eq": "Azores high (1991-2020 annual mean MSLP)",
+   "params": {
+    "msl": "array (94, 192), sha256 aae2baa50620377aa08f6d877a3f52797e60064615ea786282de76ae0f1bd367",
+    "lat": "array (94,), sha256 867d96495de0d7bd64dc4740ba3e78e5902da62f1c7e385c1a7bd1bcd8933be0",
+    "lon": "array (192,), sha256 02a7bc0447c842d63ab37c8c02b11349f3cccf40f05011a6c7e924fb41992c82",
+    "box": [
+     20,
+     45,
+     -60,
+     -10
+    ]
+   },
+   "output_sha256": "76f48d0138a77556eeb54aa617b6ac32cd69e1b1fe632603b251eff1d245e3fb"
+  },
+  {
+   "fn": "fluidpy.diag.trajectories.advect_on_sphere",
+   "scene": "s53",
+   "data": "data/climatology.json",
+   "eq": "streaklines on the 1991-2020 mean 10-m wind (2 days, RK4)",
+   "params": {
+    "u": "array (94, 192), sha256 9cc8c2e0580f98015b1598e2d0213ec8bbfe5e4c2cefac9401b390d0a84df535",
+    "v": "array (94, 192), sha256 95eb1e9dd33b1b1ceb2c64a41f4f176eaf5a5852146867732d53ecb0056e9c67",
+    "lat": "array (94,), sha256 867d96495de0d7bd64dc4740ba3e78e5902da62f1c7e385c1a7bd1bcd8933be0",
+    "lon": "array (192,), sha256 02a7bc0447c842d63ab37c8c02b11349f3cccf40f05011a6c7e924fb41992c82",
+    "seeds_lat": "array (1800,), sha256 1f1c30e42017d6090f88557f36681e50dd64f248888eb26c9f3e285c83d4af3f",
+    "seeds_lon": "array (1800,), sha256 d693eb89077379400595b1869d31a21450ad0ad36adfaaad1366214ade547b8a",
+    "dt": 3600.0,
+    "nsteps": 48
+   },
+   "output_sha256": "455de77197377c77d6b0e8b3f0079814128afded83385a4dd5f663369d14e8d6"
+  }
+ ]
+}

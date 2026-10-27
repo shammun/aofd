@@ -40,6 +40,16 @@ respell:
   # ch00_cross_product_why (2026-10-25): storm names
   Idai: "Ee-dye"
   Ciarán: "Keer-awn"
+  # ch00_weather_basics (2026-10-27): misaki IPA overrides, checked with Kokoro G2P (KPipeline lang 'a').
+  # Without them: ERA5 -> ˈɛɹə fˈIv ("era five"), Azores -> ˈAzˌɔɹz ("AY-zors"), Trappes -> tɹˈæps.
+  ERA5: "[ERA5](/ˌiˌɑɹˈA fˈIv/)"
+  Azores: "[Azores](/əzˈɔɹz/)"
+  Trappes: "[Trappes](/tɹˈæp/)"
+  # pinned to the default G2P (already right) so a later misaki update cannot change them
+  hectopascal: "[hectopascal](/hˈɛktəpˌæskᵊl/)"
+  hectopascals: "[hectopascals](/hˈɛktəpˌæskᵊlz/)"
+  radiosonde: "[radiosonde](/ɹˈAdiOsˌɑnd/)"
+  # Brest (bɹˈɛst), Singapore (sˈɪŋəpˌɔɹ), Brittany (bɹˈɪtəni) and the ITCZ entry above read correctly: no override
 # Spoken maths: the script should already say maths in words; these catch common symbols if they slip through.
 symbols:
   "Ω": "Omega"

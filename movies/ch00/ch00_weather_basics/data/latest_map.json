@@ -1,0 +1,1 @@
+{"source":"NOAA NCEP GFS 0.25° analysis 2026-10-27T00 UTC ('a weather-service analysis')","deepest_low":{"lat":14.5,"lon":162.5,"hPa":934.9,"label":"typhoon, western Pacific (unnamed)"},"siberian_high":{"lat":56.0,"lon":57.25,"hPa":1040.1},"north_atlantic_low":{"lat":59.38,"lon":-15.41,"hPa":954.5},"note":"not used by the v1 script (no scene); kept for a later pass"}

@@ -12,7 +12,7 @@ concepts:
 - 0B-G13 preview (subtropical highs, ITCZ, trades, westerlies)
 - 0B-G16 units (hPa, K and °C, g/kg, m/s, knots)
 - 0B-G17 data words (observation, reanalysis, climatology)
-target_duration_s: 2342.65
+target_duration_s: 2352.667
 fps: 30
 size:
 - 1920
@@ -34,9 +34,9 @@ audio:
     source: tools/music.py (procedural, our own, CC0)
     level: bed about -28 LUFS, ducked 5 dB under speech
     notes: seed 7, 5-s fade in, 2.5-s silent end-card hold with the music fading
-measured_narration_s: 2340.15
-measured_frames: 70280
-words: 5696
+measured_narration_s: 2350.167
+measured_frames: 70580
+words: 5728
 sentences: 363
 dry_run:
   tool: tools/tts.py
@@ -105,6 +105,14 @@ scenes:
   screen_summary: '''Weather'' / ''basics'' 150 px TitleGradient; ''made easy'' 96 px (pulse on ''the easy way''); ''and how
     meteorology uses them'' 68 px, ''meteorology'' teal. Right: TitleAtmos3D Part A (globe + rising balloon, live T and p)
     -> Part B on ''meteorology'' (Ciarán true colour, isobars, Brest pressure ticking 997 -> 962 hPa)'
+  kind: globe + map, data animation
+  visual_v1_built: 'Part A: GIBS 2 Nov globe with the air shell ×50 and the balloon rising through the real Trappes sounding
+    (height, T, p counting); Part B: 1 Nov true colour with hourly ERA5 isobars 12→03 UTC and Brest''s pressure ticking'
+  data: GIBS VIIRS/MODIS 2023-11-02 mosaic; IGRA2 Trappes 00 UTC 1 Nov; ERA5 hourly MSLP (A1)
+  tool: 'three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera; Part
+    B flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: 'real Earth and real numbers from the first frame; runner-up: d3-geo orthographic SVG globe (no image drape)'
 - id: s01_hook
   t:
   - 11.15
@@ -144,10 +152,15 @@ scenes:
   screen_summary: 'Globe3D from frame 0 (true colour 2023-11-02 12 UTC, Ciarán spiral visible); keywords appear on their words:
     ''pressure'', ''temperature'', ''humidity'', ''wind'' (54 px) round the globe with tiny icons (barometer, thermometer,
     droplet, wind arrow)'
+  kind: globe
+  visual_v1_built: true-colour globe turning to the North Atlantic, Ciarán ringed on 'real storm', four keyword icons
+  data: GIBS 2023-11-02
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: 'the hook shows the real storm; runner-up: Blue Marble (cloud-free, no storm)'
 - id: s02_thin_shell
   t:
   - 23.275
-  - 61.875
+  - 62.175
   sentence_times:
   - - 23.275
     - 25.7
@@ -158,9 +171,9 @@ scenes:
   - - 35.675
     - 45.75
   - - 46.1
-    - 54.225
-  - - 54.575
-    - 61.075
+    - 54.525
+  - - 54.875
+    - 61.375
   beat: building blocks · the atmosphere
   visual: 'Globe3D (same as s01) at left, x 80-1000. S2-S3: the shell is drawn at TRUE scale (12 km on a 380-px radius =
 
@@ -180,8 +193,8 @@ scenes:
   voiceover: Let's start with the air itself. The atmosphere is the layer of air that wraps around the Earth, held down by
     gravity. It's much thinner than most pictures suggest. The layer where our weather happens is only about twelve kilometres
     deep, while the Earth's radius is six thousand three hundred and seventy-one kilometres. On a globe thirty centimetres
-    across, that layer would be about a third of a millimetre thick, like three sheets of paper. So from now on, we'll draw
-    the air fifty times thicker than it really is, just so we can see it.
+    across, that layer would be about three tenths of a millimetre thick, like three sheets of paper. So from now on, we'll
+    draw the air fifty times thicker than it really is, just so we can see it.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.constants.EARTH_RADIUS (6371 km) + builder arithmetic
@@ -196,23 +209,29 @@ scenes:
   - 12 km is a round mid-latitude troposphere depth (tropics about 16, poles about 8; s27)
   screen_summary: Globe with true-scale shell (hair-thin) -> gold bracket '12 km' vs radius '6371 km'; calc '12 ÷ 6371 × 150
     mm ≈ 0.28 mm'; shell swells to 50x on 'fifty times thicker' with keyword '× 50'
+  kind: globe
+  visual_v1_built: true-colour globe with the air shell at true scale (hair line), then ×50 on 'fifty times thicker'; 12 km
+    / 6371 km labels; 0.3 mm calc
+  data: GIBS 2023-11-02; EARTH_RADIUS
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: 'the shell must sit on the real Earth; runner-up: SVG circle diagram'
 - id: s03_air_parcel
   t:
-  - 61.875
-  - 108.725
+  - 62.175
+  - 109.025
   sentence_times:
-  - - 61.875
-    - 64.225
-  - - 64.575
-    - 73.3
-  - - 73.65
-    - 82.725
-  - - 83.075
-    - 91.75
-  - - 92.1
-    - 97.625
-  - - 97.975
-    - 107.925
+  - - 62.175
+    - 64.525
+  - - 64.875
+    - 73.6
+  - - 73.95
+    - 83.025
+  - - 83.375
+    - 92.05
+  - - 92.4
+    - 97.925
+  - - 98.275
+    - 108.225
   beat: building blocks · what air is
   visual: 'Picture zone: a horizontal stacked bar 900 px wide (one segment per gas, colours from the house palette, labels
     at
@@ -250,23 +269,30 @@ scenes:
   - CO2 sliver shown in a x100 inset
   screen_summary: Bar of composition N₂ 78 % · O₂ 21 % · Ar 0.9 % · CO₂ 0.04 % · H₂O 0-4 %; a molecule box (code-drawn dots
     bouncing); 'air parcel' keyword with a dashed teal blob drifting on a streamline
+  kind: globe + diagram
+  visual_v1_built: globe turns to Europe with the ×50 shell; composition bar; molecule box (illustrative); an air parcel drifts
+    over the Atlantic towards Europe
+  data: USSA-1976 composition; GIBS
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera; SVG
+    bar
+  why: composition is a bar (one number each); the parcel is shown on the real map
 - id: s04_pressure_what
   t:
-  - 108.725
-  - 141.25
+  - 109.025
+  - 141.55
   sentence_times:
-  - - 108.725
-    - 111.075
-  - - 111.425
-    - 119.325
-  - - 119.675
-    - 124.625
-  - - 124.975
-    - 129.125
-  - - 129.475
-    - 135.35
-  - - 135.7
-    - 140.45
+  - - 109.025
+    - 111.375
+  - - 111.725
+    - 119.625
+  - - 119.975
+    - 124.925
+  - - 125.275
+    - 129.425
+  - - 129.775
+    - 135.65
+  - - 136.0
+    - 140.75
   beat: building blocks · pressure
   visual: 'Picture zone: the molecule box of s03 with its right wall highlighted; each bounce leaves a tiny orange tick on
     the
@@ -299,27 +325,32 @@ scenes:
   - molecule box illustrative
   screen_summary: molecule box against a wall -> orange push arrows on a small square; 'p = force ÷ area'; arrows on a cube
     in 6 directions 'equal'; '1 Pa = 1 N/m²'
+  kind: diagram
+  visual_v1_built: molecule box with wall hits merging into a force arrow; isometric cube with six equal arrows
+  data: none (definition)
+  tool: SVG
+  why: the idea is a shape (a wall, a cube); no map carries it
 - id: s05_weight_column
   t:
-  - 141.25
-  - 193.325
+  - 141.55
+  - 193.625
   sentence_times:
-  - - 141.25
-    - 145.55
-  - - 145.9
-    - 153.4
-  - - 153.75
-    - 158.85
-  - - 159.2
-    - 166.325
-  - - 166.675
-    - 174.05
-  - - 174.4
-    - 178.675
-  - - 179.025
-    - 186.075
-  - - 186.425
-    - 192.525
+  - - 141.55
+    - 145.85
+  - - 146.2
+    - 153.7
+  - - 154.05
+    - 159.15
+  - - 159.5
+    - 166.625
+  - - 166.975
+    - 174.35
+  - - 174.7
+    - 178.975
+  - - 179.325
+    - 186.375
+  - - 186.725
+    - 192.825
   beat: building blocks · pressure is weight
   visual: 'Picture zone: ThreeCanvas: a square 1 m x 1 m patch of ground (gold outline, label ''1 m²'' 54 px) with a sky-blue
 
@@ -361,19 +392,24 @@ scenes:
   - column drawn short (its top fades out; the atmosphere has no sharp top)
   screen_summary: 3-D column on a 1 m² square (sky-blue, fading upward); 'p₀ = 101 325 Pa'; 'weight = m g', 'g = 9.81 m/s²';
     CalcStack m = p₀/g = 101325/9.81 ≈ 10 300 kg; seven car icons on a scale
+  kind: diagram
+  visual_v1_built: column on 1 m² fading upward, weight arrow, CalcStack, seven cars
+  data: p0, g (CHECK W06)
+  tool: SVG
+  why: 'a column is a shape; runner-up: 3-D column on the France map (kept for s21)'
 - id: s06_not_crushed
   t:
-  - 193.325
-  - 219.15
+  - 193.625
+  - 219.45
   sentence_times:
-  - - 193.325
-    - 195.375
-  - - 195.725
-    - 203.625
-  - - 203.975
-    - 207.0
-  - - 207.35
-    - 218.35
+  - - 193.625
+    - 195.675
+  - - 196.025
+    - 203.925
+  - - 204.275
+    - 207.3
+  - - 207.65
+    - 218.65
   beat: building blocks · why we don't feel it
   visual: 'Picture zone: code-drawn person outline (illustrative) with 12 orange inward arrows on the outline and 12 matching
 
@@ -396,23 +432,28 @@ scenes:
   - illustrative
   screen_summary: simple person silhouette with equal orange arrows in and teal arrows out; 'balance'; a lift icon with an
     ear and a small '−' gap pulsing
+  kind: diagram
+  visual_v1_built: person with balanced arrows; lift with ear pop
+  data: none
+  tool: SVG
+  why: illustrative
 - id: s07_hpa
   t:
-  - 219.15
-  - 255.225
+  - 219.45
+  - 255.525
   sentence_times:
-  - - 219.15
-    - 223.9
-  - - 224.25
-    - 233.025
-  - - 233.375
-    - 239.675
-  - - 240.025
-    - 244.1
-  - - 244.45
-    - 249.775
-  - - 250.125
-    - 254.425
+  - - 219.45
+    - 224.2
+  - - 224.55
+    - 233.325
+  - - 233.675
+    - 239.975
+  - - 240.325
+    - 244.4
+  - - 244.75
+    - 250.075
+  - - 250.425
+    - 254.725
   beat: building blocks · hectopascals
   visual: 'Maths zone: CalcStack ''1\ \mathrm{hPa} = 100\ \mathrm{Pa}'' -> ''101\,325\ \mathrm{Pa} = 1013.25\ \mathrm{hPa}
 
@@ -443,19 +484,24 @@ scenes:
   exaggeration: []
   screen_summary: '''1 hPa = 100 Pa''; ''101 325 Pa = 1013.25 hPa ≈ 1013 hPa''; ''1 hPa = 1 mb''; barometer dial 950-1050
     with needle at 1013; ''± a few %'''
+  kind: diagram + data animation
+  visual_v1_built: barometer dial; on 'a few percent' the needle follows the real hourly Brest MSLP of 1-2 Nov 2023
+  data: ERA5 Brest point (A1)
+  tool: SVG
+  why: a real pressure trace makes 'a few percent' concrete
 - id: s08_density
   t:
-  - 255.225
-  - 282.7
+  - 255.525
+  - 283.0
   sentence_times:
-  - - 255.225
-    - 257.075
-  - - 257.425
-    - 264.425
-  - - 264.775
-    - 270.3
-  - - 270.65
-    - 281.9
+  - - 255.525
+    - 257.375
+  - - 257.725
+    - 264.725
+  - - 265.075
+    - 270.6
+  - - 270.95
+    - 282.2
   beat: building blocks · density
   visual: 'Maths zone: TeX ''\rho'' (96 px) with keyword ''density'' and unit ''kg/m³''; ''\rho \approx 1.2\ \mathrm{kg/m^3}''.
 
@@ -486,23 +532,28 @@ scenes:
   exaggeration: []
   screen_summary: '''ρ'' (rho) ''density, kg/m³''; ''≈ 1.2 kg/m³''; room box 5 m × 4 m × 2.5 m with labelled edges; CalcStack
     5 × 4 × 2.5 = 50 m³; 50 × 1.2 = 60 kg; person icon'
+  kind: diagram
+  visual_v1_built: isometric room 5 × 4 × 2.5 m filling with air, person, CalcStack
+  data: CHECK W08
+  tool: SVG
+  why: shape idea
 - id: s09_temperature
   t:
-  - 282.7
-  - 325.975
+  - 283.0
+  - 326.275
   sentence_times:
-  - - 282.7
-    - 289.95
-  - - 290.3
-    - 295.125
-  - - 295.475
-    - 307.025
-  - - 307.375
-    - 313.825
-  - - 314.175
-    - 320.65
-  - - 321.0
-    - 325.175
+  - - 283.0
+    - 290.25
+  - - 290.6
+    - 295.425
+  - - 295.775
+    - 307.325
+  - - 307.675
+    - 314.125
+  - - 314.475
+    - 320.95
+  - - 321.3
+    - 325.475
   beat: building blocks · temperature and kelvin
   visual: 'Picture zone: two small molecule boxes (illustrative), left slow slate dots ''colder'', right fast orange dots
 
@@ -533,25 +584,30 @@ scenes:
   - molecule boxes illustrative
   screen_summary: two molecule boxes side by side (slow / fast dots) 'colder' / 'warmer'; two aligned thermometer scales °C
     and K with ticks 0/273.15, 15/288.15, −273.15/0; 'T(K) = T(°C) + 273.15'
+  kind: diagram
+  visual_v1_built: slow/fast molecule boxes; °C and K scales linked
+  data: CHECK W09
+  tool: SVG
+  why: unit idea
 - id: s10_gas_law
   t:
-  - 325.975
-  - 375.95
+  - 326.275
+  - 376.25
   sentence_times:
-  - - 325.975
-    - 329.8
-  - - 330.15
-    - 333.95
-  - - 334.3
-    - 342.45
-  - - 342.8
-    - 350.05
-  - - 350.4
-    - 357.1
-  - - 357.45
-    - 360.15
-  - - 360.5
-    - 375.15
+  - - 326.275
+    - 330.1
+  - - 330.45
+    - 334.25
+  - - 334.6
+    - 342.75
+  - - 343.1
+    - 350.35
+  - - 350.7
+    - 357.4
+  - - 357.75
+    - 360.45
+  - - 360.8
+    - 375.45
   beat: building blocks · the ideal gas law, built
   visual: 'Picture zone: case 1 (S2): two boxes, the right with twice the dots, wall-hit counters ''12 hits'' vs ''24 hits''
     per
@@ -586,21 +642,26 @@ scenes:
   screen_summary: 'two contrast boxes: ''more molecules → more hits'' (ρ ×2 → p ×2), ''faster → harder, more often'' (T ↑
     → p ↑); Layered TeX p = ρ R T with underbraces ''pressure (Pa)'', ''density'', ''gas constant'', ''temperature (K)'';
     ''R = 287 J kg⁻¹ K⁻¹'''
+  kind: diagram
+  visual_v1_built: two contrast pairs (more molecules / faster molecules); layered p = ρRT with underbraces
+  data: CHECK W10
+  tool: SVG + KaTeX
+  why: the law is built from molecules
 - id: s11_gas_law_numbers
   t:
-  - 375.95
-  - 409.0
+  - 376.25
+  - 409.3
   sentence_times:
-  - - 375.95
-    - 377.65
-  - - 378.0
-    - 385.35
-  - - 385.7
-    - 390.3
-  - - 390.65
-    - 401.15
-  - - 401.5
-    - 408.2
+  - - 376.25
+    - 377.95
+  - - 378.3
+    - 385.65
+  - - 386.0
+    - 390.6
+  - - 390.95
+    - 401.45
+  - - 401.8
+    - 408.5
   beat: building blocks · worked number
   visual: 'Maths zone CalcStack (68 px, aligned at ''=''): ''\rho = \dfrac{p}{R T}'' -> ''= \dfrac{101\,325}{287 \times 288.15}''
     ->
@@ -630,23 +691,28 @@ scenes:
     test: CHECK W11 (1.2250 kg/m3)
   exaggeration: []
   screen_summary: CalcStack ρ = p/(RT) = 101 325 / (287 × 288.15) ≈ 1.225 kg/m³; gold link to the s08 room thumbnail '1.2'
+  kind: diagram
+  visual_v1_built: 1 m³ cube at 1013 hPa, 15 °C filling to 1.225 kg; CalcStack
+  data: CHECK W11
+  tool: SVG + KaTeX
+  why: worked number
 - id: s12_warm_air_light
   t:
-  - 409.0
-  - 440.975
+  - 409.3
+  - 441.275
   sentence_times:
-  - - 409.0
-    - 413.425
-  - - 413.775
-    - 420.225
-  - - 420.575
-    - 424.275
-  - - 424.625
-    - 430.0
-  - - 430.35
-    - 437.075
-  - - 437.425
-    - 440.175
+  - - 409.3
+    - 413.725
+  - - 414.075
+    - 420.525
+  - - 420.875
+    - 424.575
+  - - 424.925
+    - 430.3
+  - - 430.65
+    - 437.375
+  - - 437.725
+    - 440.475
   beat: intuition · warm air is lighter
   visual: 'Picture zone: two 1-m³ cubes on a shared baseline ''p = 1013 hPa''; left slate ''0 °C'', right orange ''30 °C'';
     dot
@@ -684,27 +750,32 @@ scenes:
   exaggeration: []
   screen_summary: 'two cubes side by side at 1013 hPa: ''0 °C → 1.29 kg/m³'' (slate) and ''30 °C → 1.16 kg/m³'' (orange);
     ''≈ 10 % lighter''; hot-air balloon icon rising'
+  kind: diagram
+  visual_v1_built: two cubes 0 °C / 30 °C with dot density ∝ ρ, hot-air balloon
+  data: CHECK W12
+  tool: SVG
+  why: contrast case
 - id: s13_slab
   t:
-  - 440.975
-  - 481.95
+  - 441.275
+  - 482.25
   sentence_times:
-  - - 440.975
-    - 445.025
-  - - 445.375
-    - 448.95
-  - - 449.3
-    - 456.825
-  - - 457.175
-    - 461.475
-  - - 461.825
-    - 465.775
-  - - 466.125
-    - 473.725
-  - - 474.075
-    - 478.025
-  - - 478.375
-    - 481.15
+  - - 441.275
+    - 445.325
+  - - 445.675
+    - 449.25
+  - - 449.6
+    - 457.125
+  - - 457.475
+    - 461.775
+  - - 462.125
+    - 466.075
+  - - 466.425
+    - 474.025
+  - - 474.375
+    - 478.325
+  - - 478.675
+    - 481.45
   beat: why · pressure with height (setup)
   visual: 'Picture zone: the s05 ThreeCanvas column, camera closer; a thin slab (gold outline, sky-blue fill 40 %) at mid-height;
 
@@ -731,25 +802,30 @@ scenes:
   - illustrative (no computed visual)
   screen_summary: 'the s05 column with a thin slab highlighted; ''z'' axis up; bracket ''Δz''; three arrows on the slab: orange
     up ''p(z)'', orange down ''p(z + Δz)'', brown down ''weight'''
+  kind: diagram
+  visual_v1_built: column with a slab, z axis, Δz bracket, three forces
+  data: none
+  tool: SVG
+  why: derivation shape
 - id: s14_slab_weight
   t:
-  - 481.95
-  - 512.375
+  - 482.25
+  - 512.675
   sentence_times:
-  - - 481.95
-    - 484.0
-  - - 484.35
-    - 490.8
-  - - 491.15
-    - 495.125
-  - - 495.475
-    - 497.175
-  - - 497.525
-    - 501.2
-  - - 501.55
-    - 506.625
-  - - 506.975
-    - 511.575
+  - - 482.25
+    - 484.3
+  - - 484.65
+    - 491.1
+  - - 491.45
+    - 495.425
+  - - 495.775
+    - 497.475
+  - - 497.825
+    - 501.5
+  - - 501.85
+    - 506.925
+  - - 507.275
+    - 511.875
   beat: why · the slab balance
   visual: 'Maths zone CalcStack (3 lines max, older dim to 60 %): ''V = 1\ \mathrm{m^2} \times \Delta z'' -> ''m = \rho\,\Delta
     z''
@@ -778,29 +854,34 @@ scenes:
   - illustrative (no computed visual)
   screen_summary: CalcStack volume = 1 × Δz; mass = ρ Δz; weight = ρ g Δz; then p(z) − p(z+Δz) = ρ g Δz with the three arrows
     colour-matched
+  kind: diagram
+  visual_v1_built: volume → mass → weight; layered balance with underbraces; band = weight
+  data: none (sympy W13)
+  tool: SVG + KaTeX
+  why: derivation
 - id: s15_hydrostatic
   t:
-  - 512.375
-  - 562.675
+  - 512.675
+  - 562.975
   sentence_times:
-  - - 512.375
-    - 514.25
-  - - 514.6
-    - 521.975
-  - - 522.325
-    - 526.3
-  - - 526.65
-    - 530.475
-  - - 530.825
-    - 536.0
-  - - 536.35
-    - 544.95
-  - - 545.3
-    - 550.175
-  - - 550.525
-    - 554.75
-  - - 555.1
-    - 561.875
+  - - 512.675
+    - 514.55
+  - - 514.9
+    - 522.275
+  - - 522.625
+    - 526.6
+  - - 526.95
+    - 530.775
+  - - 531.125
+    - 536.3
+  - - 536.65
+    - 545.25
+  - - 545.6
+    - 550.475
+  - - 550.825
+    - 555.05
+  - - 555.4
+    - 562.175
   beat: why · hydrostatic balance
   visual: 'Maths zone CalcStack: ''\Delta p = p(z+\Delta z) - p(z) = -\rho\, g\, \Delta z'' -> ''\dfrac{\Delta p}{\Delta z}
     = -\rho\, g''
@@ -831,23 +912,28 @@ scenes:
   exaggeration: []
   screen_summary: CalcStack Δp = −ρ g Δz → Δp/Δz = −ρ g → ∂p/∂z = −ρ g (main eq 96 px) with underbraces 'how fast p changes
     with height', 'weight per m³'; keyword 'hydrostatic balance'
+  kind: diagram
+  visual_v1_built: slab thins (Δz → 0), CalcStack to ∂p/∂z = −ρg with underbraces
+  data: sympy W13
+  tool: SVG + KaTeX
+  why: derivation
 - id: s16_hydrostatic_numbers
   t:
-  - 562.675
-  - 601.15
+  - 562.975
+  - 601.45
   sentence_times:
-  - - 562.675
-    - 565.225
-  - - 565.575
-    - 575.425
-  - - 575.775
-    - 579.825
-  - - 580.175
-    - 587.825
-  - - 588.175
-    - 590.675
-  - - 591.025
-    - 600.35
+  - - 562.975
+    - 565.525
+  - - 565.875
+    - 575.725
+  - - 576.075
+    - 580.125
+  - - 580.475
+    - 588.125
+  - - 588.475
+    - 590.975
+  - - 591.325
+    - 600.65
   beat: why · how fast near the ground
   visual: 'Maths zone CalcStack: ''\rho g = 1.225 \times 9.81 \approx 12\ \mathrm{Pa/m}'' -> ''100\ \mathrm{Pa} \div 12\
 
@@ -885,27 +971,32 @@ scenes:
   exaggeration: []
   screen_summary: CalcStack ρ g = 1.225 × 9.81 ≈ 12 Pa/m; 100 Pa ÷ 12 Pa/m ≈ 8 m per hPa; 300 m × 12 Pa/m ≈ 3600 Pa = 36 hPa;
     tower with a lift icon and readout 1013 → 977 hPa
+  kind: diagram + counting
+  visual_v1_built: 300-m tower with a lift; readout 1013 → 977 hPa counting; CalcStack
+  data: CHECK W14-W16
+  tool: SVG
+  why: worked number
 - id: s17_combine
   t:
-  - 601.15
-  - 636.475
+  - 601.45
+  - 636.775
   sentence_times:
-  - - 601.15
-    - 605.25
-  - - 605.6
-    - 607.925
-  - - 608.275
-    - 611.3
-  - - 611.65
-    - 615.925
-  - - 616.275
-    - 621.725
-  - - 622.075
-    - 627.175
-  - - 627.525
-    - 631.375
-  - - 631.725
-    - 635.675
+  - - 601.45
+    - 605.55
+  - - 605.9
+    - 608.225
+  - - 608.575
+    - 611.6
+  - - 611.95
+    - 616.225
+  - - 616.575
+    - 622.025
+  - - 622.375
+    - 627.475
+  - - 627.825
+    - 631.675
+  - - 632.025
+    - 635.975
   beat: why · bring in the gas law
   visual: 'Maths zone: ''\dfrac{\partial p}{\partial z} = -\rho\, g'' with ''\rho'' boxed by a brown highlight band (no box
     border);
@@ -936,25 +1027,30 @@ scenes:
   exaggeration: []
   screen_summary: '∂p/∂z = −ρ g with ρ highlighted; ρ = p/(RT) slides in; result ∂p/∂z = −p g/(RT); two small slope arrows
     on a p(z) sketch: steep low down, gentle higher up'
+  kind: chart
+  visual_v1_built: the isothermal p(z) curve with tangents (fast near the ground, slow aloft); ρ replaced by p/RT
+  data: isothermal_pressure
+  tool: SVG chart
+  why: the slope picture is the message
 - id: s18_scale_height
   t:
-  - 636.475
-  - 686.9
+  - 636.775
+  - 687.2
   sentence_times:
-  - - 636.475
-    - 643.35
-  - - 643.7
-    - 645.75
-  - - 646.1
-    - 653.1
-  - - 653.45
-    - 661.375
-  - - 661.725
-    - 673.775
-  - - 674.125
-    - 676.2
-  - - 676.55
-    - 686.1
+  - - 636.775
+    - 643.65
+  - - 644.0
+    - 646.05
+  - - 646.4
+    - 653.4
+  - - 653.75
+    - 661.675
+  - - 662.025
+    - 674.075
+  - - 674.425
+    - 676.5
+  - - 676.85
+    - 686.4
   beat: why · the scale height
   visual: 'Maths zone: ''H = \dfrac{R T}{g}'' (96 px) keyword ''scale height''. Units line with Strike on cancelled units:
 
@@ -995,23 +1091,28 @@ scenes:
   exaggeration: []
   screen_summary: 'H = RT/g (96 px) ''scale height''; units line J/(kg K) × K ÷ m/s² = m with strikes; CalcStack 287 × 288.15
     / 9.81 ≈ 8.4 km; contrast: uniform-density column 8.4 km tall beside it'
+  kind: chart + diagram
+  visual_v1_built: H = RT/g, units cancelled, 8.4 km; real-fading vs uniform column
+  data: scale_height
+  tool: SVG + KaTeX
+  why: derivation
 - id: s19_exponential
   t:
-  - 686.9
-  - 725.8
+  - 687.2
+  - 726.1
   sentence_times:
-  - - 686.9
-    - 692.55
-  - - 692.9
-    - 697.825
-  - - 698.175
-    - 700.65
-  - - 701.0
-    - 709.625
-  - - 709.975
-    - 719.1
-  - - 719.45
-    - 725.0
+  - - 687.2
+    - 692.85
+  - - 693.2
+    - 698.125
+  - - 698.475
+    - 700.95
+  - - 701.3
+    - 709.925
+  - - 710.275
+    - 719.4
+  - - 719.75
+    - 725.3
   beat: why · solving for p(z)
   visual: 'Maths zone (one move per line, CalcStack keeps 3 lines, older dim): ''\dfrac{\partial p}{\partial z} = -\dfrac{p}{H}''
 
@@ -1051,23 +1152,28 @@ scenes:
   exaggeration: []
   screen_summary: CalcStack ∂p/∂z = −p/H → (1/p) ∂p/∂z = −1/H → ∂(ln p)/∂z = −1/H → ln(p/p₀) = −z/H → p = p₀ e^(−z/H) (96
     px); keyword 'assume T the same at every height'
+  kind: chart, data animation
+  visual_v1_built: CalcStack one move per line; the curve p0 e^{-z/H} draws upward
+  data: isothermal_pressure 0-50 km
+  tool: SVG chart
+  why: curve drawing on 'p equals'
 - id: s20_exponential_meaning
   t:
-  - 725.8
-  - 772.6
+  - 726.1
+  - 772.9
   sentence_times:
-  - - 725.8
-    - 727.95
-  - - 728.3
-    - 737.375
-  - - 737.725
-    - 743.5
-  - - 743.85
-    - 751.525
-  - - 751.875
-    - 759.675
-  - - 760.025
-    - 771.8
+  - - 726.1
+    - 728.25
+  - - 728.6
+    - 737.675
+  - - 738.025
+    - 743.8
+  - - 744.15
+    - 751.825
+  - - 752.175
+    - 759.975
+  - - 760.325
+    - 772.1
   beat: intuition · what the curve says
   visual: 'Picture zone: the s19 graph (height 0-30 km up, pressure across); S1-S2 gold step markers at z = 8.4 and 16.9 km
 
@@ -1114,27 +1220,32 @@ scenes:
   - mattress analogy illustrative
   screen_summary: 'on the curve: steps of H with ''÷ e'' marks (1013 → 373 → 137 hPa); ''−11 % per km''; mattress stack (Like)
     with crossed-out note (Unlike); halving marks 5.8 km → 507 hPa, 11.7 km → 253 hPa'
+  kind: chart
+  visual_v1_built: ÷ e steps, −11 % per km, mattresses like/unlike, halving marks
+  data: W18-W20
+  tool: SVG chart
+  why: reading the curve
 - id: s21_balloon_pressure
   t:
-  - 772.6
-  - 822.575
+  - 772.9
+  - 823.9
   sentence_times:
-  - - 772.6
-    - 775.55
-  - - 775.9
-    - 778.95
-  - - 779.3
-    - 788.7
-  - - 789.05
-    - 796.4
-  - - 796.75
-    - 802.675
-  - - 803.025
-    - 807.05
-  - - 807.4
-    - 815.875
-  - - 816.225
-    - 821.775
+  - - 772.9
+    - 775.85
+  - - 776.2
+    - 779.25
+  - - 779.6
+    - 789.0
+  - - 789.35
+    - 796.7
+  - - 797.05
+    - 804.0
+  - - 804.35
+    - 808.375
+  - - 808.725
+    - 817.2
+  - - 817.55
+    - 823.1
   beat: intuition · check against a real balloon
   visual: 'Picture zone S1-S3: a small Globe3D zoom to northern France (true colour 2023-11-01, NE borders), a gold dot
 
@@ -1158,35 +1269,43 @@ scenes:
   voiceover: Does the real atmosphere follow this curve? Let's check it against a real weather balloon. Twice a day, at hundreds
     of places around the world, meteorologists launch a balloon carrying a small instrument package called a radiosonde. As
     it rises, it radios back the pressure, the temperature and the humidity, and from its drift we get the wind. This one
-    was launched near Paris at midday on the first of November, twenty twenty-three. Near the ground, its pressure follows
-    our curve closely. Higher up, the real pressure falls a little faster, because the real air up there is colder, and colder
-    air has a smaller scale height. So our curve is a good first guess, and the measurements tell us where it needs correcting.
+    was launched near Paris around midnight, at the start of the first of November, twenty twenty-three. Near the ground,
+    its pressure follows our curve closely. Higher up, the real pressure falls a little faster, because the real air up there
+    is colder, and colder air has a smaller scale height. So our curve is a good first guess, and the measurements tell us
+    where it needs correcting.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.statics.isothermal_pressure (curve) + IGRA2 sounding (data)
     params:
       station: FRM00007145 Trappes
-      time: 2023-11-01T12 UTC
+      time: 2023-11-01T00 UTC (IGRA has no 12 UTC Trappes launch; data_needs §E)
     data: data/soundings.json -> trappes
     test: CHECK W21 (sounding p below the curve above 6 km; agreement within 2 % below 2 km)
   exaggeration: []
   screen_summary: 'balloon rising from Trappes on a small true-colour map of France; graph: measured p(z) teal dots vs slate
     curve H = 8.4 km; gap highlighted aloft ''colder → smaller H''; Everest tick at 8.8 km with both values'
+  kind: 3-D map + data animation
+  visual_v1_built: 3-D tilted map of western Europe (1 Nov true colour) with the Trappes column lifted out; the balloon rises
+    through the real IGRA sounding with height and pressure counting; then p(z) points vs the curve
+  data: IGRA2 Trappes 00 UTC 1 Nov 2023 (z_hyps); GIBS MODIS 1 Nov
+  tool: three.js MapPlane + Rod3D (kit_wb) + SVG overlays; chart in SVG
+  why: 'the column ''lifted out of the map'' answers ''where''; runner-up: MapLibre terrain frame (not trialled; adds a dependency).
+    NOTE: the column is drawn ×13 taller than the map scale and the narration does not say so (reported)'
 - id: s22_mass_below
   t:
-  - 822.575
-  - 853.875
+  - 823.9
+  - 855.2
   sentence_times:
-  - - 822.575
-    - 829.725
-  - - 830.075
-    - 837.325
-  - - 837.675
-    - 843.75
-  - - 844.1
-    - 849.475
-  - - 849.825
-    - 853.075
+  - - 823.9
+    - 831.05
+  - - 831.4
+    - 838.65
+  - - 839.0
+    - 845.075
+  - - 845.425
+    - 850.8
+  - - 851.15
+    - 854.4
   beat: intuition · how much air is below
   visual: 'Picture zone: the 1-m² column again, with a height axis 0-35 km (52-px ticks); it fills from the ground with teal
     as
@@ -1224,21 +1343,26 @@ scenes:
   - globe shell 50x (as s02)
   screen_summary: 'column with fill bars: 5.5 km ''½ below''; 16 km ''9/10 below''; 31 km ''99 % below''; mini globe with
     the 50x shell, the 31-km line marked'
+  kind: diagram → globe
+  visual_v1_built: column filling to 50 / 90 / 99 %; then the ×50 shell globe
+  data: USSA-1976 (W22)
+  tool: SVG + globe
+  why: fractions on a column; the globe recalls 'thin shell'
 - id: s23_troposphere
   t:
-  - 853.875
-  - 888.55
+  - 855.2
+  - 889.875
   sentence_times:
-  - - 853.875
-    - 858.075
-  - - 858.425
-    - 861.925
-  - - 862.275
-    - 871.825
-  - - 872.175
-    - 882.3
-  - - 882.65
-    - 887.75
+  - - 855.2
+    - 859.4
+  - - 859.75
+    - 863.25
+  - - 863.6
+    - 873.15
+  - - 873.5
+    - 883.625
+  - - 883.975
+    - 889.075
   beat: building blocks · the layers (temperature)
   visual: 'Full-width graph x 80-1840 (keeps right half for keywords): height 0-50 km up (ticks every 10 km, 52 px),
 
@@ -1262,30 +1386,35 @@ scenes:
   physics_source:
     fn: fluidpy.core.stratification.lapse_rate
     params:
-      profile: Trappes 2023-11-01T12
+      profile: Trappes 2023-11-01T00 (lapse fit 0-10 km = 6.68 K/km)
       layer: 0-10 km
     data: data/soundings.json -> trappes
     test: CHECK W23 (mean lapse 0-10 km in 5.5-7.5 K/km; else narration changes 'six and a half' to the measured value)
   exaggeration: []
   screen_summary: graph T(z) from the Trappes sounding (orange line, height 0-35 km up, T −80 … +20 °C across); slope triangle
     '−6.5 °C per km'; band 0-11 km shaded 'troposphere'; cloud icons in the band
+  kind: chart, data animation
+  visual_v1_built: the real Trappes T(z) draws upward with the balloon; lapse triangle; troposphere band
+  data: IGRA2 Trappes (lapse fit 6.68 K/km)
+  tool: SVG chart
+  why: 'a sounding is a profile: a chart is clearest'
 - id: s24_stratosphere
   t:
-  - 888.55
-  - 925.925
+  - 889.875
+  - 930.425
   sentence_times:
-  - - 888.55
-    - 894.175
-  - - 894.525
-    - 897.575
-  - - 897.925
-    - 902.875
-  - - 903.225
-    - 911.65
-  - - 912.0
-    - 919.175
-  - - 919.525
-    - 925.125
+  - - 889.875
+    - 895.775
+  - - 896.125
+    - 899.175
+  - - 899.525
+    - 904.475
+  - - 904.825
+    - 913.25
+  - - 913.6
+    - 923.675
+  - - 924.025
+    - 929.625
   beat: building blocks · tropopause and stratosphere
   visual: 'Same graph. S1: gold dashed horizontal line at the sounding''s lapse-rate tropopause (WMO definition, computed
     by the
@@ -1301,38 +1430,43 @@ scenes:
     near 50 km. S5: keywords ''mesosphere'' and ''thermosphere'' stacked above the graph top with an up-arrow (no data).
 
     '
-  voiceover: At about eleven kilometres, near minus fifty-five degrees, the fall stops. This boundary is called the tropopause.
+  voiceover: At about eleven kilometres, at about minus sixty-three degrees, the fall stops. This boundary is called the tropopause.
     Above it, the temperature stops falling, and higher up it rises again. That's the stratosphere, a calm, layered region,
     where ozone absorbs the sun's ultraviolet light and warms the air. Balloons usually burst at around thirty kilometres,
-    but the warming goes on up to about fifty kilometres. Above that come the mesosphere and the thermosphere, where the air
-    is extremely thin.
+    but other measurements show the warming going on above that, up to about fifty kilometres on average. Above that come
+    the mesosphere and the thermosphere, where the air is extremely thin.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.stratification.lapse_rate (WMO lapse-rate tropopause in the builder) + ERA5 column
     params:
       station: Trappes
-      era5: temperature, geopotential, 37 levels, 2023-11-01T12, 49.0N 2.0E
+      era5: temperature, geopotential, 37 levels, 2023-11-01T00, 48.75N 2.0E
     data: data/soundings.json -> trappes, era5_column_trappes
-    test: CHECK W24 (tropopause 9.5-12.5 km and −50…−62 °C, else words follow data); CHECK W25 (ERA5 column max T above 40
-      km near 45-52 km)
+    test: CHECK W24 (10.88 km, −62.70 °C on z_hyps; range −65…−50 °C, follows the data; spoken 'about minus sixty-three');
+      CHECK W25 (ERA5 column warms to its 1-hPa top at 46 km; USSA-1976 stratopause 47.5-51.25 km)
   exaggeration: []
   screen_summary: tropopause line at ≈ 11 km '≈ −55 °C'; stratosphere band; balloon bursts ~30 km; dashed slate extension
     to 48 km (reanalysis, same place and time); ozone keyword with sun rays; 'mesosphere', 'thermosphere' above
+  kind: chart, data animation
+  visual_v1_built: WMO tropopause (10.9 km, −62.7 °C); stratosphere; burst at 33.9 km; ERA5 column continues to 46 km (dashed)
+  data: IGRA2 + ERA5 column over Trappes 00 UTC
+  tool: SVG chart
+  why: 'data first; runner-up: 3-D column (less readable)'
 - id: s25_tropics
   t:
-  - 925.925
-  - 957.525
+  - 930.425
+  - 961.975
   sentence_times:
-  - - 925.925
-    - 930.025
-  - - 930.375
-    - 935.375
-  - - 935.725
-    - 944.7
-  - - 945.05
-    - 951.925
-  - - 952.275
-    - 956.725
+  - - 930.425
+    - 934.525
+  - - 934.875
+    - 939.875
+  - - 940.225
+    - 949.2
+  - - 949.55
+    - 956.425
+  - - 956.775
+    - 961.175
   beat: contrast · change only the place
   visual: 'Same graph; the Trappes line dims to 60 %; S2 the Singapore sounding (teal, data/soundings.json -> singapore,
 
@@ -1348,12 +1482,12 @@ scenes:
   voiceover: Now let's keep the time the same and change only the place. Here is a balloon launched at the same moment at
     Singapore, near the equator. Its tropopause is much higher, at about sixteen or seventeen kilometres, and much colder,
     below minus seventy-five degrees. Strong rising currents in the warm tropics stir the air much higher, so the troposphere
-    is deeper there. Near the poles, it's shallower, about eight or nine kilometres.
+    is deeper there. Near the poles, it's shallower, about eight to ten kilometres.
   on_screen_eq: null
   physics_source:
     fn: lapse-rate tropopause (builder, same routine as s24) on the Singapore sounding and on ERA5 zonal means
     params:
-      station: SNM00048698 Singapore
+      station: SNM00048698 Singapore, 2023-11-01T00 UTC (16.16 km, −81.3 °C)
       era5: November-mean temperature on pressure levels
     data: data/soundings.json -> singapore; data/tropopause_zonal.json
     test: CHECK W26 (Singapore tropopause 15.5-17.5 km, T < −72 °C), W27 (polar 7-10 km)
@@ -1361,25 +1495,32 @@ scenes:
   - troposphere drawn 50x thick in the inset
   screen_summary: second profile (teal) from Singapore on the same axes; two tropopause marks 'Paris ≈ 11 km', 'Singapore
     ≈ 16-17 km'; mini globe with tropopause depth band thicker at the equator than at the poles
+  kind: chart + 3-D globe section
+  visual_v1_built: 'Singapore sounding on the same axes; inset: the November 2023 ERA5 zonal-mean temperature as a cross-section
+    standing on the globe''s limb (heights ×50), tropopause line 16 → 8 km'
+  data: IGRA2 Singapore 00 UTC; ERA5 Nov 2023 zonal means
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera + a
+    custom fan mesh
+  why: 'the tropopause depth is a pole-to-equator idea: the globe section shows it; runner-up: flat lat-height section'
 - id: s26_why_cold_aloft
   t:
-  - 957.525
-  - 1000.875
+  - 961.975
+  - 1005.325
   sentence_times:
-  - - 957.525
-    - 962.75
-  - - 963.1
-    - 968.475
-  - - 968.825
-    - 976.55
-  - - 976.9
-    - 979.425
-  - - 979.775
-    - 984.15
-  - - 984.5
-    - 996.675
-  - - 997.025
-    - 1000.075
+  - - 961.975
+    - 967.2
+  - - 967.55
+    - 972.925
+  - - 973.275
+    - 981.0
+  - - 981.35
+    - 983.875
+  - - 984.225
+    - 988.6
+  - - 988.95
+    - 1001.125
+  - - 1001.475
+    - 1004.525
   beat: why · heated from below
   visual: 'Picture zone (illustrative side view, ground at y 760): gold sun rays crossing a faint air layer and warming a
     brown
@@ -1412,25 +1553,30 @@ scenes:
   - illustrative side view
   screen_summary: 'side view: sun rays through the air to the ground (gold), ground glows, warm parcel (orange blob) rises,
     grows, turns slate; labels ''p lower → expands → cools''; ''≈ 9.8 °C per km'''
+  kind: diagram
+  visual_v1_built: sun rays heat the ground; a parcel rises, grows and cools
+  data: adiabatic_lapse_rate
+  tool: SVG
+  why: process idea
 - id: s27_vapour
   t:
-  - 1000.875
-  - 1043.825
+  - 1005.325
+  - 1048.275
   sentence_times:
-  - - 1000.875
-    - 1002.85
-  - - 1003.2
+  - - 1005.325
     - 1007.3
   - - 1007.65
-    - 1012.5
-  - - 1012.85
-    - 1020.35
-  - - 1020.7
-    - 1028.7
-  - - 1029.05
-    - 1034.7
-  - - 1035.05
-    - 1043.025
+    - 1011.75
+  - - 1012.1
+    - 1016.95
+  - - 1017.3
+    - 1024.8
+  - - 1025.15
+    - 1033.15
+  - - 1033.5
+    - 1039.15
+  - - 1039.5
+    - 1047.475
   beat: building blocks · humidity
   visual: 'Picture zone: Globe3D with the ERA5 2-m specific humidity (from d2m and sp) at 2023-11-02T12 UTC as a perceptual
 
@@ -1470,25 +1616,31 @@ scenes:
   screen_summary: 'kettle-free icon: invisible vapour dots (faint) vs a cloud of drops (white); ''specific humidity q = g
     of vapour per kg of air''; real ERA5 2-m specific humidity globe (2 Nov 2023 12 UTC) 0 → 20 g/kg; ''vapour pressure ≈
     1.61 × q × p'' → 32 hPa'
+  kind: globe, data
+  visual_v1_built: ERA5 2-m specific humidity (cmocean haline 0-20 g/kg) over the true-colour globe, camera Arctic → tropical
+    Atlantic
+  data: ERA5 2023-11-02T12 (q from d2m, sp)
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: 'global contrast needs the globe; runner-up: flat map'
 - id: s28_saturation
   t:
-  - 1043.825
-  - 1094.65
+  - 1048.275
+  - 1099.1
   sentence_times:
-  - - 1043.825
-    - 1050.075
-  - - 1050.425
-    - 1055.5
-  - - 1055.85
-    - 1063.825
-  - - 1064.175
-    - 1075.2
-  - - 1075.55
-    - 1079.275
-  - - 1079.625
-    - 1084.625
-  - - 1084.975
-    - 1093.85
+  - - 1048.275
+    - 1054.525
+  - - 1054.875
+    - 1059.95
+  - - 1060.3
+    - 1068.275
+  - - 1068.625
+    - 1079.65
+  - - 1080.0
+    - 1083.725
+  - - 1084.075
+    - 1089.075
+  - - 1089.425
+    - 1098.3
   beat: intuition · saturation
   visual: 'Picture zone S1-S3: water surface strip, seeded dots leaving (up arrows) and landing (down arrows), two counters
 
@@ -1535,25 +1687,30 @@ scenes:
   - molecule exchange illustrative
   screen_summary: water surface with molecules leaving/landing (counters equal → 'saturated'); curve e_s(T) −10…35 °C with
     points 6, 12, 23, 42 hPa; '× 2 per 10 °C' steps; sponge icon with 'Like' / 'Unlike'
+  kind: diagram → chart
+  visual_v1_built: water surface exchange (illustrative) → e_s curve with 6/12/23/42 hPa
+  data: moist.saturation_vapour_pressure
+  tool: SVG chart
+  why: a curve is the message
 - id: s29_relative_humidity
   t:
-  - 1094.65
-  - 1136.775
+  - 1099.1
+  - 1141.225
   sentence_times:
-  - - 1094.65
-    - 1097.475
-  - - 1097.825
-    - 1103.5
-  - - 1103.85
-    - 1109.775
-  - - 1110.125
-    - 1116.025
-  - - 1116.375
-    - 1124.525
-  - - 1124.875
-    - 1129.35
-  - - 1129.7
-    - 1135.975
+  - - 1099.1
+    - 1101.925
+  - - 1102.275
+    - 1107.95
+  - - 1108.3
+    - 1114.225
+  - - 1114.575
+    - 1120.475
+  - - 1120.825
+    - 1128.975
+  - - 1129.325
+    - 1133.8
+  - - 1134.15
+    - 1140.425
   beat: building blocks · relative humidity
   visual: 'Maths zone: ''RH = \dfrac{\text{vapour pressure}}{\text{saturation vapour pressure}} \times 100\,\%'' (68 px).
     Picture
@@ -1588,25 +1745,30 @@ scenes:
   exaggeration: []
   screen_summary: 'RH = vapour pressure ÷ saturation vapour pressure × 100 %; on the e_s curve: point at 25 °C, 15 hPa (teal)
     under the curve at 31.3 (gold); CalcStack 15 ÷ 31.3 ≈ 0.48 → 48 %; point slides left (cooling) and RH readout climbs'
+  kind: chart, data animation
+  visual_v1_built: our air on the curve, RH 48 %, cooling slide with RH counting
+  data: moist.relative_humidity
+  tool: SVG chart
+  why: same chart persists
 - id: s30_dew_point
   t:
-  - 1136.775
-  - 1175.375
+  - 1141.225
+  - 1179.825
   sentence_times:
-  - - 1136.775
-    - 1140.775
-  - - 1141.125
-    - 1147.8
-  - - 1148.15
-    - 1150.525
-  - - 1150.875
-    - 1158.15
-  - - 1158.5
-    - 1164.575
-  - - 1164.925
-    - 1170.0
-  - - 1170.35
-    - 1174.575
+  - - 1141.225
+    - 1145.225
+  - - 1145.575
+    - 1152.25
+  - - 1152.6
+    - 1154.975
+  - - 1155.325
+    - 1162.6
+  - - 1162.95
+    - 1169.025
+  - - 1169.375
+    - 1174.45
+  - - 1174.8
+    - 1179.025
   beat: building blocks · dew point
   visual: 'Picture zone: the s28-s29 graph; the teal dot continues left along the 15-hPa line until it meets the gold curve
 
@@ -1634,25 +1796,30 @@ scenes:
   exaggeration: []
   screen_summary: 'teal dot slides left at 15 hPa until it touches the curve: ''13 °C = dew point''; three small icons: dew
     on grass, fog layer, cloud'
+  kind: chart
+  visual_v1_built: slide to the dew point 13 °C; dew, fog, cloud icons
+  data: moist.dew_point
+  tool: SVG chart
+  why: same chart
 - id: s31_cloud_base
   t:
-  - 1175.375
-  - 1219.525
+  - 1179.825
+  - 1223.975
   sentence_times:
-  - - 1175.375
-    - 1179.3
-  - - 1179.65
-    - 1183.525
-  - - 1183.875
-    - 1193.45
-  - - 1193.8
-    - 1201.925
-  - - 1202.275
-    - 1205.9
-  - - 1206.25
-    - 1209.925
-  - - 1210.275
-    - 1218.725
+  - - 1179.825
+    - 1183.75
+  - - 1184.1
+    - 1187.975
+  - - 1188.325
+    - 1197.9
+  - - 1198.25
+    - 1206.375
+  - - 1206.725
+    - 1210.35
+  - - 1210.7
+    - 1214.375
+  - - 1214.725
+    - 1223.175
   beat: why · where clouds begin
   visual: 'Maths zone graph (height 0-3 km up, temperature 0-30 °C across, 52-px ticks): orange parcel temperature line from
 
@@ -1691,23 +1858,29 @@ scenes:
   - illustrative side view of the rising parcels
   screen_summary: 'side view: parcel rises; two lines on a height-temperature graph: T (orange, −9.8/km) and Td (teal, −1.8/km)
     meeting at ≈ 1.5 km; gap bracket ''12 °C'' at the ground; flat-based cumulus row at 1.5 km'
+  kind: chart + real image
+  visual_v1_built: T and dew-point lines meeting at 1.5 km; side view of rising parcels; then the real MODIS 250 m cumulus
+    field (24 Jun 2024, northern France)
+  data: moist.lifting_condensation_level; GIBS MODIS Aqua 250 m; ERA5 LCL median 1.41 km
+  tool: SVG chart + image
+  why: 'the real flat-based field; runner-up: 3-D tilted image with a cloud-base plane (needs an unsaid vertical exaggeration)'
 - id: s32_wind_vector
   t:
-  - 1219.525
-  - 1255.3
+  - 1223.975
+  - 1259.75
   sentence_times:
-  - - 1219.525
-    - 1221.525
-  - - 1221.875
-    - 1229.875
-  - - 1230.225
-    - 1234.175
-  - - 1234.525
-    - 1239.2
-  - - 1239.55
-    - 1246.7
-  - - 1247.05
-    - 1254.5
+  - - 1223.975
+    - 1225.975
+  - - 1226.325
+    - 1234.325
+  - - 1234.675
+    - 1238.625
+  - - 1238.975
+    - 1243.65
+  - - 1244.0
+    - 1251.15
+  - - 1251.5
+    - 1258.95
   beat: building blocks · wind is a vector
   visual: 'Picture zone: a flat map patch (true-colour Brittany coast, faint) with N/E axes (warm white) and a compass rose;
 
@@ -1742,23 +1915,29 @@ scenes:
   exaggeration: []
   screen_summary: 'compass rose map patch; teal wind arrow with components: ''u = 8 m/s'' along east, ''v = 6 m/s'' along
     north; ''v = (8, 6) m/s''; CalcStack √(8² + 6²) = √100 = 10 m/s'
+  kind: map + data
+  visual_v1_built: Brittany true colour with the real 10-m wind arrows (ERA5 12 UTC 1 Nov), then the (8, 6) vector and components
+  data: ERA5 hourly (A1); MODIS 1 Nov
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: wind as real arrows on a real map before the abstract vector
 - id: s33_wind_direction
   t:
-  - 1255.3
-  - 1298.225
+  - 1259.75
+  - 1302.675
   sentence_times:
-  - - 1255.3
-    - 1260.25
-  - - 1260.6
-    - 1264.65
-  - - 1265.0
-    - 1276.825
-  - - 1277.175
-    - 1281.9
-  - - 1282.25
-    - 1288.25
-  - - 1288.6
-    - 1297.425
+  - - 1259.75
+    - 1264.7
+  - - 1265.05
+    - 1269.1
+  - - 1269.45
+    - 1281.275
+  - - 1281.625
+    - 1286.35
+  - - 1286.7
+    - 1292.7
+  - - 1293.05
+    - 1301.875
   beat: building blocks · the direction convention
   visual: 'Picture zone: compass dial (ticks 52 px: ''0° N'', ''90° E'', ''180° S'', ''270° W''); S2 a teal arrow entering
     from the west
@@ -1793,23 +1972,28 @@ scenes:
   screen_summary: 'compass dial 0/90/180/270 ''clockwise from north, seen from above''; westerly arrow entering from the west;
     our wind with a gold arc from north clockwise to its tail: ''233°'' ''from the south-west''; ''south-westerly''; contrast:
     ''eastward current →'''
+  kind: diagram
+  visual_v1_built: compass dial, westerly, 233° arc, ocean-current contrast
+  data: W33
+  tool: SVG
+  why: 'a convention: a dial is clearest'
 - id: s34_wind_units
   t:
-  - 1298.225
-  - 1337.75
+  - 1302.675
+  - 1342.2
   sentence_times:
-  - - 1298.225
-    - 1301.05
-  - - 1301.4
-    - 1304.95
-  - - 1305.3
-    - 1313.95
-  - - 1314.3
-    - 1316.875
-  - - 1317.225
-    - 1328.775
-  - - 1329.125
-    - 1336.95
+  - - 1302.675
+    - 1305.5
+  - - 1305.85
+    - 1309.4
+  - - 1309.75
+    - 1318.4
+  - - 1318.75
+    - 1321.325
+  - - 1321.675
+    - 1333.225
+  - - 1333.575
+    - 1341.4
   beat: building blocks · units and knots
   visual: 'Maths zone CalcStack: ''10\ \mathrm{m/s} \times 3.6 = 36\ \mathrm{km/h}'' (with ''× 3600 s/h ÷ 1000 m/km'' shown
     under 3.6).
@@ -1843,21 +2027,26 @@ scenes:
   exaggeration: []
   screen_summary: 'CalcStack 10 m/s × 3.6 = 36 km/h; globe meridian with a 1° arc split into 60 parts: ''1 nautical mile =
     1852 m''; ''1 kt = 1852 m ÷ 3600 s ≈ 0.51 m/s''; ''10 ÷ 0.514 ≈ 19 kt'''
+  kind: globe + diagram
+  visual_v1_built: globe meridian with a 1° arc split into 60 nautical miles; CalcStack
+  data: W34
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: the nautical mile is a piece of the Earth
 - id: s35_why_wind
   t:
-  - 1337.75
-  - 1372.675
+  - 1342.2
+  - 1377.125
   sentence_times:
-  - - 1337.75
-    - 1339.825
-  - - 1340.175
-    - 1342.65
-  - - 1343.0
-    - 1352.65
-  - - 1353.0
-    - 1364.975
-  - - 1365.325
-    - 1371.875
+  - - 1342.2
+    - 1344.275
+  - - 1344.625
+    - 1347.1
+  - - 1347.45
+    - 1357.1
+  - - 1357.45
+    - 1369.425
+  - - 1369.775
+    - 1376.325
   beat: why · what pushes the wind
   visual: 'Picture zone: two dials from s07 at x 200 and 800, ''H 1020 hPa'' and ''L 1000 hPa''; an orange push arrow between
     them
@@ -1882,25 +2071,31 @@ scenes:
   - illustrative
   screen_summary: two barometer dials 'high' / 'low' with an orange push arrow high → low; tyre icon; then a curved arrow
     bending round an 'L' on a small sketch 'turned aside'
+  kind: diagram → map, data animation
+  visual_v1_built: two dials and a push; then the real ERA5 10-m streaklines circling Ciarán on the MODIS image
+  data: ERA5 2 Nov 12 UTC (A2) streaklines (advect_on_sphere)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: '''turned aside'' shown on the real storm'
 - id: s36_weather_climate
   t:
-  - 1372.675
-  - 1426.375
+  - 1377.125
+  - 1430.825
   sentence_times:
-  - - 1372.675
-    - 1376.65
-  - - 1377.0
-    - 1388.05
-  - - 1388.4
-    - 1397.35
-  - - 1397.7
-    - 1404.55
-  - - 1404.9
-    - 1414.775
-  - - 1415.125
-    - 1421.425
-  - - 1421.775
-    - 1425.575
+  - - 1377.125
+    - 1381.1
+  - - 1381.45
+    - 1392.5
+  - - 1392.85
+    - 1401.8
+  - - 1402.15
+    - 1409.0
+  - - 1409.35
+    - 1419.225
+  - - 1419.575
+    - 1425.875
+  - - 1426.225
+    - 1430.025
   beat: building blocks · weather vs climate
   visual: 'S1-S3 maths zone keywords ''weather = now · a few days'', ''climate = statistics over 30 years''; picture zone
     a small
@@ -1933,29 +2128,35 @@ scenes:
       - 0.1
       - 0.9
       smooth_days: 15
+      method: pooled-window percentiles ±7 calendar days (fluidpy 0a6f0da); 2023 share 287/365 = 0.786, base 0.804
     data: data/brest_t2m_daily.json
     test: NEW tests/diag/test_climatology.py (see data_needs.md F5); CHECK W35 (share of 2023 days inside the band 60-90 %,
       else wording 'most of the time' is revisited)
   exaggeration: []
   screen_summary: 'keywords ''weather: now, a few days'' / ''climate: 30-year statistics''; TimeGraph Jan-Dec 2023: daily
     mean T at Brest (orange) over the 1991-2020 daily mean (warm white) and 10-90 % band (slate fill)'
+  kind: map → chart, data animation
+  visual_v1_built: Brest on the map; the 1991-2020 band and mean draw themselves, 2023 traced day by day
+  data: ERA5 Brest daily 1991-2023; daily_climatology (pooled ±7 d)
+  tool: SVG chart
+  why: a time series is the message
 - id: s37_observations
   t:
-  - 1426.375
-  - 1458.35
+  - 1430.825
+  - 1462.8
   sentence_times:
-  - - 1426.375
-    - 1428.85
-  - - 1429.2
-    - 1437.275
-  - - 1437.625
-    - 1439.425
-  - - 1439.775
-    - 1444.375
-  - - 1444.725
-    - 1452.875
-  - - 1453.225
-    - 1457.55
+  - - 1430.825
+    - 1433.3
+  - - 1433.65
+    - 1441.725
+  - - 1442.075
+    - 1443.875
+  - - 1444.225
+    - 1448.825
+  - - 1449.175
+    - 1457.325
+  - - 1457.675
+    - 1462.0
   beat: building blocks · observations
   visual: 'Picture zone: Globe3D rotating slowly (Europe -> Atlantic -> Africa -> Pacific), gold dots (6 px) at every IGRA2
 
@@ -1981,27 +2182,32 @@ scenes:
   - illustrative (no computed visual)
   screen_summary: Globe3D (daytime mosaic) with gold dots at IGRA2 stations active in 2023; slow rotation Europe → Pacific
     → Africa; small icons station/balloon/ship/buoy/plane/satellite
+  kind: globe, data
+  visual_v1_built: turning true-colour globe with the 941 IGRA stations active in 2023
+  data: IGRA2 station list 2023
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: unevenness is geographic
 - id: s38_reanalysis
   t:
-  - 1458.35
-  - 1519.625
+  - 1462.8
+  - 1524.3
   sentence_times:
-  - - 1458.35
-    - 1461.0
-  - - 1461.35
-    - 1472.925
-  - - 1473.275
-    - 1481.6
-  - - 1481.95
-    - 1488.85
-  - - 1489.2
-    - 1496.95
-  - - 1497.3
-    - 1503.65
-  - - 1504.0
-    - 1510.925
-  - - 1511.275
-    - 1518.825
+  - - 1462.8
+    - 1465.45
+  - - 1465.8
+    - 1477.375
+  - - 1477.725
+    - 1486.05
+  - - 1486.4
+    - 1493.3
+  - - 1493.65
+    - 1501.625
+  - - 1501.975
+    - 1508.325
+  - - 1508.675
+    - 1515.6
+  - - 1515.95
+    - 1523.5
   beat: building blocks · reanalysis
   visual: 'Picture zone: the s37 globe; S1-S2 a faint lat-lon grid (0.25°, drawn every 2° for legibility) appears; a small
     loop
@@ -2038,23 +2244,28 @@ scenes:
   - model grid drawn every 2° (the real grid is 0.25°)
   screen_summary: station dots → a coarse model grid lights up → the full ERA5 field (2-m temperature, 2 Nov 2023 12 UTC)
     fills the globe; keywords 'model + observations', 'every hour since 1940', '≈ 30 km grid'; jigsaw icon Like / Unlike
+  kind: globe, data animation
+  visual_v1_built: stations → graticule → ERA5 2-m temperature fills the globe; sparse Southern Ocean dimmed
+  data: ERA5 2023-11-02T12 t2m
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: shows 'filling the gaps' on the real Earth
 - id: s39_surface_pressure
   t:
-  - 1519.625
-  - 1553.975
+  - 1524.3
+  - 1558.65
   sentence_times:
-  - - 1519.625
-    - 1522.0
-  - - 1522.35
-    - 1531.325
-  - - 1531.675
-    - 1534.1
-  - - 1534.45
-    - 1543.675
-  - - 1544.025
-    - 1548.825
-  - - 1549.175
-    - 1553.175
+  - - 1524.3
+    - 1526.675
+  - - 1527.025
+    - 1536.0
+  - - 1536.35
+    - 1538.775
+  - - 1539.125
+    - 1548.35
+  - - 1548.7
+    - 1553.5
+  - - 1553.85
+    - 1557.85
   beat: intuition · a pressure map, and the mountain problem
   visual: 'Picture zone: Globe3D with ERA5 surface pressure at 2023-11-02T12 UTC (cmocean ''deep_r'' or ''dense'', never rainbow;
 
@@ -2085,27 +2296,35 @@ scenes:
   exaggeration: []
   screen_summary: 'Globe3D: ERA5 surface pressure (sequential map 500-1040 hPa) over shaded relief; camera to Tibet: ''< 600
     hPa''; Andes, Rockies pointers; keyword ''less air above high ground'''
+  kind: globe + 3-D relief
+  visual_v1_built: 'ERA5 surface pressure on the globe, camera to Tibet; inset: Tibet in 3-D relief (ERA5 orography 0.5°)
+    coloured by surface pressure'
+  data: ERA5 sp, zs 2023-11-02T12
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera; three.js
+    Terrain (kit_wb)
+  why: 'relief + pressure in one picture; runner-up: ETOPO/PyGMT hillshade texture (sharper relief; not trialled, D10 data
+    not fetched)'
 - id: s40_sea_level
   t:
-  - 1553.975
-  - 1611.15
+  - 1558.65
+  - 1615.825
   sentence_times:
-  - - 1553.975
-    - 1557.925
-  - - 1558.275
-    - 1562.675
-  - - 1563.025
-    - 1576.9
-  - - 1577.25
-    - 1583.475
-  - - 1583.825
-    - 1594.575
-  - - 1594.925
-    - 1601.5
-  - - 1601.85
-    - 1604.55
-  - - 1604.9
-    - 1610.35
+  - - 1558.65
+    - 1562.6
+  - - 1562.95
+    - 1567.35
+  - - 1567.7
+    - 1581.575
+  - - 1581.925
+    - 1588.15
+  - - 1588.5
+    - 1599.25
+  - - 1599.6
+    - 1606.175
+  - - 1606.525
+    - 1609.225
+  - - 1609.575
+    - 1615.025
   beat: why · reducing to sea level
   visual: 'Picture zone: side view, a mountain (brown) with a station icon at its top, height axis ''0 m'', ''1609 m'' (52
     px);
@@ -2146,21 +2365,26 @@ scenes:
   - thought example ('Suppose a weather station…'); the station values are illustrative round numbers
   screen_summary: 'side view: station on a mountain at 1609 m, ''p = 835 hPa'', ''T = 15 °C''; dashed imaginary column down
     to sea level; CalcStack p_sea = p_s e^(z/H) = 835 × e^(1.609/8.43) ≈ 1010 hPa; keyword ''sea-level pressure'''
+  kind: diagram
+  visual_v1_built: mountain station 1609 m, imaginary column, layered equation, CalcStack
+  data: W38
+  tool: SVG + KaTeX
+  why: thought example
 - id: s41_msl_isobars
   t:
-  - 1611.15
-  - 1638.15
+  - 1615.825
+  - 1642.825
   sentence_times:
-  - - 1611.15
-    - 1615.2
-  - - 1615.55
-    - 1618.875
-  - - 1619.225
-    - 1625.025
-  - - 1625.375
-    - 1630.025
-  - - 1630.375
-    - 1637.35
+  - - 1615.825
+    - 1619.875
+  - - 1620.225
+    - 1623.55
+  - - 1623.9
+    - 1629.7
+  - - 1630.05
+    - 1634.7
+  - - 1635.05
+    - 1642.025
   beat: intuition · sea-level pressure and isobars
   visual: 'Picture zone: Globe3D, the s39 colours cross-fade to the ERA5 mean sea-level pressure (diverging map centred at
 
@@ -2190,19 +2414,25 @@ scenes:
   exaggeration: []
   screen_summary: cross-fade surface pressure → ERA5 MSLP on the globe; isobars draw outward every 4 hPa; keyword 'isobars
     = equal weight'; gold bracket where they crowd near Ciarán
+  kind: globe, data animation
+  visual_v1_built: ERA5 MSLP (cmocean balance centred 1013) with isobars drawing outward every 4 hPa; camera to the crowded
+    isobars
+  data: ERA5 2023-11-02T12 msl
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: the global map with isolines on the globe
 - id: s42_highs_lows
   t:
-  - 1638.15
-  - 1672.2
+  - 1642.825
+  - 1677.525
   sentence_times:
-  - - 1638.15
-    - 1647.875
-  - - 1648.225
-    - 1654.975
-  - - 1655.325
-    - 1664.525
-  - - 1664.875
-    - 1671.4
+  - - 1642.825
+    - 1652.55
+  - - 1652.9
+    - 1659.65
+  - - 1660.0
+    - 1669.9
+  - - 1670.25
+    - 1676.725
   beat: building blocks · highs and lows
   visual: 'Picture zone: the s41 globe tilted to the North Atlantic; ''L'' (68 px, warm white letters with a 3-px dark outline)
     at the ERA5 MSLP minimum (52.5N 1.75E) and ''H'' at the maximum of the Azores high
@@ -2214,8 +2444,8 @@ scenes:
     '
   voiceover: The map shows round patches where the pressure is higher than all around, called highs, and patches where it's
     lower than all around, called lows. A low is also called a depression, or a cyclone, and a high is also called an anticyclone.
-    Over the southern North Sea, just off England, is a deep low, Storm Ciarán, at about nine hundred and fifty-six hectopascals.
-    Far to the south-west, near the Azores islands, is a high at about one thousand and thirty.
+    Over the east coast of England, at the edge of the North Sea, is a deep low, Storm Ciarán, at about nine hundred and fifty-six
+    hectopascals. Far to the south-west, near the Azores islands, is a high at about one thousand and thirty.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.cyclone.storm_centre
@@ -2231,27 +2461,32 @@ scenes:
   exaggeration: []
   screen_summary: '''H'' and ''L'' letters (68 px) at the analysed centres; ''L 956 hPa'' Ciarán; ''H ≈ 1030 hPa'' near the
     Azores; keywords ''low = depression = cyclone'', ''high = anticyclone'''
+  kind: globe, data
+  visual_v1_built: H/L at the ERA5 Azores high and Ciarán low
+  data: storm_centre on ERA5 msl
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: same globe
 - id: s43_lows_cloudy
   t:
-  - 1672.2
-  - 1711.75
+  - 1677.525
+  - 1717.075
   sentence_times:
-  - - 1672.2
-    - 1676.575
-  - - 1676.925
-    - 1681.15
-  - - 1681.5
-    - 1684.35
-  - - 1684.7
-    - 1690.975
-  - - 1691.325
-    - 1695.05
-  - - 1695.4
-    - 1700.0
-  - - 1700.35
-    - 1706.8
-  - - 1707.15
-    - 1710.95
+  - - 1677.525
+    - 1681.9
+  - - 1682.25
+    - 1686.475
+  - - 1686.825
+    - 1689.675
+  - - 1690.025
+    - 1696.3
+  - - 1696.65
+    - 1700.375
+  - - 1700.725
+    - 1705.325
+  - - 1705.675
+    - 1712.125
+  - - 1712.475
+    - 1716.275
   beat: why · lows are cloudy, highs are clear
   visual: 'Picture zone: the MODIS Aqua true colour of 2023-11-02 (data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg,
 
@@ -2282,23 +2517,29 @@ scenes:
   - side-view insets illustrative
   screen_summary: 'split: satellite true colour of Ciarán''s cloud spiral (left) vs clear skies under the Azores high (right),
     same image 2 Nov 2023; side-view inset arrows: low = in + up (cloud), high = down + out (clear)'
+  kind: map + diagram
+  visual_v1_built: MODIS 2 Nov true colour pans from Ciarán's spiral to the clear high; ERA5 isobars; side-view arrows
+  data: GIBS MODIS Aqua 2023-11-02; ERA5 12 UTC isobars
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: real clouds vs clear skies
 - id: s44_round_lows
   t:
-  - 1711.75
-  - 1746.225
+  - 1717.075
+  - 1751.55
   sentence_times:
-  - - 1711.75
-    - 1716.675
-  - - 1717.025
-    - 1720.9
-  - - 1721.25
-    - 1729.0
-  - - 1729.35
-    - 1734.25
-  - - 1734.6
-    - 1737.8
-  - - 1738.15
-    - 1745.425
+  - - 1717.075
+    - 1722.0
+  - - 1722.35
+    - 1726.225
+  - - 1726.575
+    - 1734.325
+  - - 1734.675
+    - 1739.575
+  - - 1739.925
+    - 1743.125
+  - - 1743.475
+    - 1750.75
   beat: intuition · winds circle the lows
   visual: 'Picture zone: the s43 panel; ERA5 10-m wind arrows at 12 UTC on a 1.5° grid (teal, length ∝ speed, legend arrow
 
@@ -2332,21 +2573,27 @@ scenes:
   - streaklines time compressed (1.5 h in about 3 s)
   screen_summary: 10-m wind arrows (teal, thinned 1.5°) with streaklines on the image + isobars; gold anticlockwise arc round
     the L 'anticlockwise, seen from above'; clockwise arc round the H; small SH globe thumbnail with arcs reversed
+  kind: map, data animation
+  visual_v1_built: ERA5 10-m arrows + animated streaklines; anticlockwise/clockwise arcs; SH globe thumbnail
+  data: ERA5 12 UTC (A2); storm_relative_wind (W42)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders; small globe'
+  why: the real swirl
 - id: s45_air_masses
   t:
-  - 1746.225
-  - 1791.9
+  - 1751.55
+  - 1797.225
   sentence_times:
-  - - 1746.225
-    - 1749.825
-  - - 1750.175
-    - 1760.2
-  - - 1760.55
-    - 1770.3
-  - - 1770.65
-    - 1779.65
-  - - 1780.0
-    - 1791.1
+  - - 1751.55
+    - 1755.15
+  - - 1755.5
+    - 1765.525
+  - - 1765.875
+    - 1775.625
+  - - 1775.975
+    - 1784.975
+  - - 1785.325
+    - 1796.425
   beat: building blocks · air masses
   visual: 'S1-S4: maths zone 2 x 2 keyword grid (no boxes): rows ''polar'' (slate) / ''tropical'' (orange), columns ''maritime''
     /
@@ -2379,23 +2626,30 @@ scenes:
   screen_summary: 'four labels in a 2 × 2 grid without boxes: polar / tropical × maritime / continental; real ERA5 850-hPa
     temperature + 2-m dew point map 1 Nov 2023 18 UTC over the true-colour image: warm tongue ''tropical maritime'', cool
     air ''polar maritime'''
+  kind: globe → map, data
+  visual_v1_built: ERA5 2-m temperature globe (air-mass sources), then the 850-hPa temperature map at 18 UTC 1 Nov over the
+    true colour
+  data: ERA5 850 hPa 18 UTC 1 Nov
+  tool: 'three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera; flat
+    plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and borders'
+  why: warm tongue on the real map
 - id: s46_fronts
   t:
-  - 1791.9
-  - 1823.675
+  - 1797.225
+  - 1829.0
   sentence_times:
-  - - 1791.9
-    - 1795.75
-  - - 1796.1
-    - 1804.075
-  - - 1804.425
-    - 1810.85
-  - - 1811.2
-    - 1814.95
-  - - 1815.3
-    - 1818.975
-  - - 1819.325
-    - 1822.875
+  - - 1797.225
+    - 1801.075
+  - - 1801.425
+    - 1809.4
+  - - 1809.75
+    - 1816.175
+  - - 1816.525
+    - 1820.275
+  - - 1820.625
+    - 1824.3
+  - - 1824.65
+    - 1828.2
   beat: building blocks · fronts
   visual: 'Picture zone: the s45 map; a gold transect line crossing the cold edge of the warm tongue; maths zone: a small
     graph
@@ -2416,30 +2670,37 @@ scenes:
     fn: fluidpy.diag.fronts.thermal_front_parameter (NEW) for the transect choice; temperature along the transect by bilinear
       interpolation
     params:
-      time: 2023-11-02T00
+      time: 2023-11-01T18
       level: 850
+      locate: centre
     data: data/ciaran_850_hourly
     test: NEW tests/diag/test_fronts.py; CHECK W44
   exaggeration: []
   screen_summary: 'the s45 map: a gold transect across the warm tongue''s edge; graph of T850 along it with a steep step ''front'';
     arrows ''cold advancing → cold front'', ''warm advancing → warm front'''
+  kind: map + chart
+  visual_v1_built: transect across the cold front (locate='centre') and the T850 step, width ≈ 100 km
+  data: front_lines(locate='centre'); ERA5 850 hPa
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders + SVG chart'
+  why: 'runner-up: 3-D wall lifted out of the map (not built: one level only)'
 - id: s47_cold_front
   t:
-  - 1823.675
-  - 1867.675
+  - 1829.0
+  - 1873.0
   sentence_times:
-  - - 1823.675
-    - 1826.525
-  - - 1826.875
-    - 1832.5
-  - - 1832.85
-    - 1838.775
-  - - 1839.125
-    - 1848.6
-  - - 1848.95
-    - 1854.65
-  - - 1855.0
-    - 1866.875
+  - - 1829.0
+    - 1831.85
+  - - 1832.2
+    - 1837.825
+  - - 1838.175
+    - 1844.1
+  - - 1844.45
+    - 1853.925
+  - - 1854.275
+    - 1859.975
+  - - 1860.325
+    - 1872.2
   beat: why · a cold front from the side
   visual: 'Full-width cross-section (illustrative, schematic; vertical exaggeration x50, said in s48): ground line y 760;
 
@@ -2471,21 +2732,26 @@ scenes:
   - illustrative (no computed visual)
   screen_summary: 'side-view cross-section (height ×50): slate cold wedge advancing right under orange warm air; warm air
     lifted (orange arrows up) → tall cumulonimbus and rain band; ''1 km per 50-100 km''; wind arrows before/after ''SW → W/NW'''
+  kind: diagram
+  visual_v1_built: side view, cold wedge ×50 (said in s48), cumulonimbus and showers
+  data: none (typical slopes)
+  tool: SVG
+  why: shape idea
 - id: s48_warm_front
   t:
-  - 1867.675
-  - 1912.9
+  - 1873.0
+  - 1918.225
   sentence_times:
-  - - 1867.675
-    - 1875.375
-  - - 1875.725
-    - 1884.2
-  - - 1884.55
-    - 1893.625
-  - - 1893.975
-    - 1904.65
-  - - 1905.0
-    - 1912.1
+  - - 1873.0
+    - 1880.7
+  - - 1881.05
+    - 1889.525
+  - - 1889.875
+    - 1898.95
+  - - 1899.3
+    - 1909.975
+  - - 1910.325
+    - 1917.425
   beat: why · a warm front from the side
   visual: 'Full-width cross-section like s47, warm air moving right over a long thin cold wedge; S2 orange arrows gliding
     up the
@@ -2513,23 +2779,28 @@ scenes:
   - illustrative (no computed visual)
   screen_summary: 'side view: orange warm air gliding up a gentle slate slope; layered cloud sheet far ahead with long rain;
     ''1 km per 100-200 km''; wind ''SE → S/SW''; keyword ''× 50 taller'''
+  kind: diagram
+  visual_v1_built: side view, warm air gliding up, layered cloud and rain, '× 50 taller'
+  data: none
+  tool: SVG
+  why: shape idea
 - id: s49_real_fronts
   t:
-  - 1912.9
-  - 1946.075
+  - 1918.225
+  - 1953.25
   sentence_times:
-  - - 1912.9
-    - 1918.425
-  - - 1918.775
-    - 1926.325
-  - - 1926.675
-    - 1931.05
-  - - 1931.4
-    - 1935.35
-  - - 1935.7
-    - 1940.4
-  - - 1940.75
-    - 1945.275
+  - - 1918.225
+    - 1923.775
+  - - 1924.125
+    - 1931.675
+  - - 1932.025
+    - 1936.4
+  - - 1936.75
+    - 1940.7
+  - - 1941.05
+    - 1946.25
+  - - 1946.6
+    - 1952.45
   beat: application · real fronts round Ciarán
   visual: 'Map panel (Lambert, 40-60N 25W-10E, x 80-1580): ERA5 850-hPa temperature at 2023-11-02T00 UTC (cmocean ''thermal'',
 
@@ -2544,16 +2815,18 @@ scenes:
     ''20 m/s'') with a gold arc showing the turn across each line. Brest dot visible.
 
     '
-  voiceover: Here are real fronts, around Ciarán at midnight at the start of the second of November. The colours show the
-    temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical
-    air reaches up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing
-    edge, curving away to the south, is the cold front. The arrows show the wind turning sharply where it crosses each front.
+  voiceover: Here are real fronts, around Ciarán at six in the evening on the first of November. The colours show the temperature
+    about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical air reaches
+    up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing edge, curving
+    away to the south-west, is the cold front. The arrows show the wind turning as it crosses the fronts, most sharply at
+    the warm front.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.fronts.thermal_front_parameter (NEW) + fluidpy.diag.fronts.front_lines (NEW)
     params:
-      field: T850 2023-11-02T00 smoothed 100 km
-      threshold: from tests
+      field: T850 2023-11-01T18 smoothed 100 km
+      locate: centre
+      threshold: 1.5e-5 K/m (library default)
     data: data/ciaran_850_hourly; data/fronts_20231102T00.json
     test: 'NEW tests/diag/test_fronts.py (V1 tanh front located to < 1 grid length; V7 sign: warm vs cold by the advection
       of T); CHECK W45 (wind direction jump > 30° across each line)'
@@ -2562,17 +2835,23 @@ scenes:
   screen_summary: 'map 40-60N 25W-10E: ERA5 850-hPa T at 00 UTC 2 Nov over a night-free base (BMNG relief, labelled ''base
     map''), coast/borders; front lines from the thermal front parameter: warm front (red half circles) and cold front (blue
     triangles) drawn as gold lines first; wind arrows 850 hPa turning across them'
+  kind: map, data
+  visual_v1_built: ERA5 850-hPa T at 18 UTC 1 Nov, objective warm and cold fronts (front_lines, centre), 850-hPa wind arrows
+  data: ERA5 850 hPa; front_lines
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: real fronts; 18 UTC chosen by the data (00 UTC occluding)
 - id: s50_front_symbols
   t:
-  - 1946.075
-  - 1962.775
+  - 1953.25
+  - 1969.95
   sentence_times:
-  - - 1946.075
-    - 1952.0
-  - - 1952.35
-    - 1957.775
-  - - 1958.125
-    - 1961.975
+  - - 1953.25
+    - 1959.175
+  - - 1959.525
+    - 1964.95
+  - - 1965.3
+    - 1969.15
   beat: application · map symbols (pointer forward)
   visual: 'Same map; the front lines turn into the standard symbols on their words (cold: blue line + filled triangles on
     the
@@ -2589,30 +2868,36 @@ scenes:
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.fronts.front_lines (NEW) at 00 and 03 UTC (direction of motion)
-    data: data/fronts_20231102T00.json, data/fronts_20231102T03.json
+    data: data/fronts.json (18 and 21 UTC lines; hourly lines for s55)
     test: CHECK W46 (symbol side = side the line moves towards)
   exaggeration: []
   screen_summary: 'the gold lines of s49 gain their symbols: blue triangles on the cold front''s leading side, red half circles
     on the warm front''s; keyword ''symbols point where the front moves'''
+  kind: map
+  visual_v1_built: the same lines get triangles / half circles on the side they move to (18 → 21 UTC displacement)
+  data: front_lines 18 and 21 UTC (W46)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: symbol side from data
 - id: s51_heating
   t:
-  - 1962.775
-  - 2007.0
+  - 1969.95
+  - 2014.175
   sentence_times:
-  - - 1962.775
-    - 1967.825
-  - - 1968.175
-    - 1970.175
-  - - 1970.525
-    - 1979.5
-  - - 1979.85
-    - 1983.625
-  - - 1983.975
-    - 1993.325
-  - - 1993.675
-    - 2001.4
-  - - 2001.75
-    - 2006.2
+  - - 1969.95
+    - 1975.0
+  - - 1975.35
+    - 1977.35
+  - - 1977.7
+    - 1986.675
+  - - 1987.025
+    - 1990.8
+  - - 1991.15
+    - 2000.5
+  - - 2000.85
+    - 2008.575
+  - - 2008.925
+    - 2013.375
   beat: application · the global picture (heating)
   visual: 'Picture zone: Globe3D (BMNG, equinox lighting) with two gold beams of equal width hitting at 0° and 60°N; patches
 
@@ -2653,23 +2938,29 @@ scenes:
   - transport arrows illustrative (no amounts)
   screen_summary: globe at equinox, sun beam (gold band 1 m wide) hitting the equator (1 m patch) and 60°N (2 m patch); CalcStack
     1 ÷ cos 60° = 2; 'half as much'; then poleward orange arrows over a mean 2-m temperature globe
+  kind: globe + data
+  visual_v1_built: Blue Marble globe with two equal beams at 0° and 60°N (1 m vs 2 m); then NCEP 1991-2020 mean 2-m temperature
+    and poleward arrows
+  data: NCEP R1 LTM t2m
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: geometry on the real globe
 - id: s52_pressure_belts
   t:
-  - 2007.0
-  - 2043.25
+  - 2014.175
+  - 2050.25
   sentence_times:
-  - - 2007.0
-    - 2011.475
-  - - 2011.825
-    - 2020.55
-  - - 2020.9
-    - 2023.525
-  - - 2023.875
-    - 2032.325
-  - - 2032.675
-    - 2036.075
-  - - 2036.425
-    - 2042.45
+  - - 2014.175
+    - 2018.65
+  - - 2019.0
+    - 2027.55
+  - - 2027.9
+    - 2030.525
+  - - 2030.875
+    - 2039.325
+  - - 2039.675
+    - 2043.075
+  - - 2043.425
+    - 2049.45
   beat: application · high and low pressure belts (preview)
   visual: 'Picture zone: Globe3D tilted to show both hemispheres, annual mean MSLP 1991-2020 (data/real/wind_climatology.json
 
@@ -2701,25 +2992,31 @@ scenes:
   screen_summary: 'Globe3D: 1991-2020 mean MSLP (NCEP R1 LTM, diverging map centred 1013 hPa) with isobars every 4 hPa; labels
     ''subtropical highs'' at the Azores, North Pacific, South Atlantic, South Pacific, Indian Ocean highs; equatorial band
     ''intertropical convergence zone (ITCZ)'''
+  kind: globe, data
+  visual_v1_built: NCEP 1991-2020 mean MSLP with isobars, the five subtropical highs found in the data, 30° circles, the ITCZ
+    trough band
+  data: NCEP R1 LTM mslp (W48)
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: belts are global
 - id: s53_trades_westerlies
   t:
-  - 2043.25
-  - 2083.9
+  - 2050.25
+  - 2090.9
   sentence_times:
-  - - 2043.25
-    - 2046.425
-  - - 2046.775
-    - 2056.725
-  - - 2057.075
-    - 2060.525
-  - - 2060.875
+  - - 2050.25
+    - 2053.425
+  - - 2053.775
     - 2063.725
   - - 2064.075
-    - 2071.75
-  - - 2072.1
-    - 2076.725
-  - - 2077.075
-    - 2083.1
+    - 2067.525
+  - - 2067.875
+    - 2070.725
+  - - 2071.075
+    - 2078.75
+  - - 2079.1
+    - 2083.725
+  - - 2084.075
+    - 2090.1
   beat: application · trade winds and westerlies (preview)
   visual: 'Picture zone: the s52 globe; 1991-2020 mean 10-m winds (teal arrows on a 5° grid, legend ''5 m/s''; streaklines
     from
@@ -2746,23 +3043,28 @@ scenes:
   - streaklines time compressed
   screen_summary: 'same globe: mean 10-m wind arrows (teal) with streaklines; labels ''north-east trades'', ''south-east trades'',
     ''westerlies'' with gold brackets; Ciarán track arrow west → east'
+  kind: globe, data animation
+  visual_v1_built: streaklines on the 1991-2020 mean 10-m wind; Ciarán's track west → east
+  data: NCEP R1 LTM u10, v10; advect_on_sphere; ERA5 track
+  tool: three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera
+  why: real mean winds moving
 - id: s54_ciaran_intro
   t:
-  - 2083.9
-  - 2120.375
+  - 2090.9
+  - 2127.375
   sentence_times:
-  - - 2083.9
-    - 2089.525
-  - - 2089.875
-    - 2097.025
-  - - 2097.375
-    - 2102.875
-  - - 2103.225
-    - 2107.7
-  - - 2108.05
-    - 2113.675
-  - - 2114.025
-    - 2119.575
+  - - 2090.9
+    - 2096.525
+  - - 2096.875
+    - 2104.025
+  - - 2104.375
+    - 2109.875
+  - - 2110.225
+    - 2114.7
+  - - 2115.05
+    - 2120.675
+  - - 2121.025
+    - 2126.575
   beat: application · one storm over one town
   visual: 'Map panel (Lambert 40-58N 25W-8E, x 80-1580, full brightness): GIBS MODIS Terra/Aqua true colour 2023-11-01
 
@@ -2791,15 +3093,21 @@ scenes:
   exaggeration: []
   screen_summary: true colour 1 Nov 2023 afternoon (MODIS), 35-60N 30W-10E, coast + admin borders; 'Storm Ciarán · 1 Nov 2023';
     gold dot 'Brest'; keyword 'UTC = universal time'
+  kind: globe → map
+  visual_v1_built: camera from space down to western Europe, cross-fade to the 1 Nov true colour; Brest
+  data: GIBS 2 Nov globe; MODIS Terra/Aqua 1 Nov
+  tool: 'three.js globe (kit_wb, copied from kit_cp) with an ERA5 field texture + SVG overlays through the same camera; flat
+    plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and borders'
+  why: space-to-town zoom
 - id: s55_ciaran_maps
   t:
-  - 2120.375
-  - 2141.525
+  - 2127.375
+  - 2148.525
   sentence_times:
-  - - 2120.375
-    - 2127.775
-  - - 2128.125
-    - 2140.725
+  - - 2127.375
+    - 2134.775
+  - - 2135.125
+    - 2147.725
   beat: application · the low moves in
   visual: 'Same panel; ERA5 MSLP isobars every 4 hPa animate hour by hour (24 frames per hour of data, interpolated only in
 
@@ -2830,21 +3138,28 @@ scenes:
   - 24 hours shown in about 12 s (time compressed)
   screen_summary: same panel; hourly ERA5 isobars animate 12 UTC 1 Nov → 12 UTC 2 Nov with the clock; 'L' tracking the minimum
     with its value ticking 965 → 954 hPa; gold track line; Brest dot
+  kind: map, data animation
+  visual_v1_built: 'hourly loop 12 UTC 1 Nov → 12 UTC 2 Nov: ERA5 isobars, the objective fronts each hour, 10-m wind arrows,
+    the low and its track, clock'
+  data: ERA5 hourly msl/u10/v10 (A1), 850 hPa (fronts)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: the storm moving with the clock
 - id: s56_brest_pressure
   t:
-  - 2141.525
-  - 2171.2
+  - 2148.525
+  - 2178.2
   sentence_times:
-  - - 2141.525
-    - 2143.975
-  - - 2144.325
-    - 2150.15
-  - - 2150.5
-    - 2159.525
-  - - 2159.875
-    - 2165.025
-  - - 2165.375
-    - 2170.4
+  - - 2148.525
+    - 2150.975
+  - - 2151.325
+    - 2157.15
+  - - 2157.5
+    - 2166.525
+  - - 2166.875
+    - 2172.025
+  - - 2172.375
+    - 2177.4
   beat: application · the pressure at Brest
   visual: 'Maths zone: TimeGraph (hours across 12 -> 12 UTC, 52-px ticks every 3 h; pressure 955-1000 hPa up) drawing the
 
@@ -2877,21 +3192,27 @@ scenes:
   - time compressed (24 h in about 25 s)
   screen_summary: 'TimeGraph (12 UTC 1 Nov → 12 UTC 2 Nov): Brest MSLP (orange line, hour dots) 997 → 962 → 976 hPa; brackets
     ''−35 hPa in 13 h'', ''+14 hPa in 5 h''; barometer icon needle following; small map thumbnail with the L passing'
+  kind: map + chart, data animation
+  visual_v1_built: the hourly map at the graph's hour beside the Brest MSLP graph drawing itself
+  data: ERA5 Brest point (W50)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders + SVG chart'
+  why: map and trace share one clock
 - id: s57_brest_warm_front
   t:
-  - 2171.2
-  - 2203.525
+  - 2178.2
+  - 2210.525
   sentence_times:
-  - - 2171.2
-    - 2173.575
-  - - 2173.925
-    - 2182.775
-  - - 2183.125
-    - 2193.975
-  - - 2194.325
-    - 2196.7
-  - - 2197.05
-    - 2202.725
+  - - 2178.2
+    - 2180.575
+  - - 2180.925
+    - 2189.775
+  - - 2190.125
+    - 2200.975
+  - - 2201.325
+    - 2203.7
+  - - 2204.05
+    - 2209.725
   beat: application · the warm front passes
   visual: 'Same TimeGraph: a second panel below (temperature 9-15 °C, orange line, hour dots); a row of hourly wind arrows
     above
@@ -2924,19 +3245,25 @@ scenes:
   exaggeration: []
   screen_summary: TimeGraph gains temperature (orange, °C axis right) and a row of wind arrows (teal, pointing where the wind
     goes, with 'from' labels 155° SSE, 204° SSW and speeds); gold band 18-20 UTC 'warm front'; keyword 'warm sector'
+  kind: map + chart
+  visual_v1_built: temperature panel, the Brest wind arrow on the map (18 → 20 UTC), warm-front band
+  data: ERA5 Brest point (W51)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders + SVG chart'
+  why: ''
 - id: s58_brest_cold_front
   t:
-  - 2203.525
-  - 2231.775
+  - 2210.525
+  - 2238.775
   sentence_times:
-  - - 2203.525
-    - 2206.5
-  - - 2206.85
-    - 2218.4
-  - - 2218.75
-    - 2225.35
-  - - 2225.7
-    - 2230.975
+  - - 2210.525
+    - 2213.5
+  - - 2213.85
+    - 2225.4
+  - - 2225.75
+    - 2232.35
+  - - 2232.7
+    - 2237.975
   beat: application · the cold front passes
   visual: 'Same TimeGraph; arrows at 00 and 03 UTC with labels ''19 m/s from 221° (SW)'', ''23 m/s from 271° (W)''; maths
     zone
@@ -2975,17 +3302,23 @@ scenes:
   screen_summary: 'same TimeGraph: wind arrows at 00 UTC ''19 m/s from 221° (SW)'' and 03 UTC ''23 m/s from 271° (W)''; CalcStack
     23.2 ÷ 0.514 ≈ 45 kt; temperature 12.6 → 10.5 °C bracket ''−2 °C''; gold band 00-03 UTC ''cold front''; thumbnail of the
     s47 side view'
+  kind: map + chart
+  visual_v1_built: '00 → 03 UTC: wind swing, 45 kt calc, −2 °C, cold-front band'
+  data: ERA5 Brest point (W52)
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders + SVG chart'
+  why: ''
 - id: s59_ciaran_after
   t:
-  - 2231.775
-  - 2253.1
+  - 2238.775
+  - 2260.1
   sentence_times:
-  - - 2231.775
-    - 2240.4
-  - - 2240.75
-    - 2245.85
-  - - 2246.2
-    - 2252.3
+  - - 2238.775
+    - 2247.4
+  - - 2247.75
+    - 2252.85
+  - - 2253.2
+    - 2259.3
   beat: application · the storm the next afternoon, and what comes next
   visual: 'Map panel: the existing MODIS Aqua true colour of 2023-11-02 (re-used) with ERA5 12 UTC isobars and the ''L'' 956
     hPa
@@ -3006,27 +3339,33 @@ scenes:
   exaggeration: []
   screen_summary: MODIS Aqua true colour 2 Nov 2023 with isobars at 12 UTC and the L; Brest dot; keywords 'reading weather
     maps ->', 'why the wind circles ->'
+  kind: map
+  visual_v1_built: MODIS Aqua 2 Nov with ERA5 12 UTC isobars and the low at image time
+  data: GIBS MODIS Aqua 2023-11-02; ERA5
+  tool: 'flat plate-carrée SVG map (kit_wb MapBox): GIBS/MODIS true colour under ERA5 isolines, Natural Earth 10 m coast and
+    borders'
+  why: the storm next afternoon
 - id: s60_recap
   t:
-  - 2253.1
-  - 2317.55
+  - 2260.1
+  - 2324.55
   sentence_times:
-  - - 2253.1
-    - 2261.325
-  - - 2261.675
-    - 2269.6
-  - - 2269.95
-    - 2277.85
-  - - 2278.2
-    - 2287.2
-  - - 2287.55
-    - 2294.875
-  - - 2295.225
-    - 2301.025
-  - - 2301.375
-    - 2307.925
-  - - 2308.275
-    - 2316.75
+  - - 2260.1
+    - 2268.325
+  - - 2268.675
+    - 2276.6
+  - - 2276.95
+    - 2284.85
+  - - 2285.2
+    - 2294.2
+  - - 2294.55
+    - 2301.875
+  - - 2302.225
+    - 2308.025
+  - - 2308.375
+    - 2314.925
+  - - 2315.275
+    - 2323.75
   beat: recap
   visual: 'No heading. One beat per sentence, each a mini picture from its scene (thumbnail re-renders, 60 % size) with its
 
@@ -3060,17 +3399,22 @@ scenes:
   screen_summary: 'one beat per sentence, mini pictures: thin-shell globe · ''1013 hPa'' column · p = p₀e^(−z/H), H ≈ 8 km
     · p = ρRT with two cubes · RH curve + dew point ring · compass ''233° south-westerly'', ''19 kt'' · MSLP map with H/L
     and front symbols · Brest TimeGraph + ERA5 globe'
+  kind: mixed
+  visual_v1_built: one beat per sentence with the scenes' own pictures
+  data: as the scenes
+  tool: as the scenes
+  why: ''
 - id: s61_end
   t:
-  - 2317.55
-  - 2342.65
+  - 2324.55
+  - 2350.15
   sentence_times:
-  - - 2317.55
-    - 2323.425
-  - - 2323.775
-    - 2331.825
-  - - 2332.175
-    - 2339.85
+  - - 2324.55
+    - 2330.425
+  - - 2330.775
+    - 2341.825
+  - - 2342.175
+    - 2349.85
   beat: end card
   visual: 'House end card (HOUSE_STYLE §3), word for word as the reference with ''maths tutorials'' -> ''tutorials'' (physics
 
@@ -3084,9 +3428,10 @@ scenes:
     path, no book name, no lab. 2.5-s silent hold while the music fades.
 
     '
-  voiceover: This video is one of a series of related tutorials, so watch out for the others. They're made for students of
-    atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for these weather
-    basics, and the notebooks for the other concepts, are on the website that goes with this video.
+  voiceover: This video is one of a series of related tutorials, so watch out for the others. They're made to help students
+    of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but
+    the maths behind them too. The notebook for these weather basics, and the notebooks for the other concepts, are on the
+    website that goes with this video.
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -3094,6 +3439,11 @@ scenes:
   screen_summary: 'house end card: four faint topic thumbnails (globe with shell, pressure column, humidity curve, Ciarán
     map); ''a series of tutorials'' (68 px); ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon
     ''weather-basics notebook''; stacked icons ''notebooks for the other concepts''; 2.5-s silent hold'
+  kind: end card
+  visual_v1_built: house ending for weather movies (HOUSE_STYLE §3, 2026-10-27)
+  data: none
+  tool: SVG
+  why: ''
 honesty_notes:
 - The atmosphere is drawn 50x thicker on globes from s02 S5 on and the frontal side views 50x taller (s48 says so); both listed
   as exaggerations, no badges.
@@ -3123,9 +3473,9 @@ honesty_notes:
 quiz_hook: 'A mountain station 3 km up reads 700 hPa at 0 °C. Is its sea-level pressure high or low? (H = 287 x 273 / 9.81
   ≈ 8.0 km; 700 x e^(3/8.0) ≈ 1018 hPa: a slightly high reading.)'
 qa_expectations:
-  duration_s: 2342.65
+  duration_s: 2352.667
   captions:
-    cues: 585
+    cues: 588
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 17.0
@@ -3133,9 +3483,26 @@ qa_expectations:
     count: 29
     rule: every latex string of this file present verbatim in WeatherBasics.tsx; no katex-error
   size:
-    budget_mb: 60
-    hard_mb: 80
+    budget_mb: 120
+    hard_mb: 160
   three_d: ANGLE; Globe3D shell 50x; determinism check on s02, s27, s41 ranges
   legibility: no text below 44 px at 1080p (graph ticks and colour bars 52 px), no heading except s00, no box, no URL
   render: 'scratch on G: (aofd-data/scratch/movies/ch00_weather_basics), tools/render_chunks.py, concurrency 3'
 headings_exception: s00_title only
+tts_v1:
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/v1
+  audio_s: 2350.167
+  cues: 588
+  warnings: []
+  self_check:
+    expected_s: 2350.15
+    audio_s: 2350.15
+    diff_ms: 0.0
+    len_ok: true
+    cues_ok: true
+  lexicon: movies/lexicon.yaml with the ch00_weather_basics IPA entries (ERA5, Azores, Trappes, hectopascal(s), radiosonde)
+sound:
+  cue_sheet: movies/ch00/ch00_weather_basics/sound_cues.yaml
+  music_styles:
+  - air-flowing
+  - storm-tense (s54-s59)
