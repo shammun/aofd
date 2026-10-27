@@ -42,7 +42,7 @@ Lengths are targets set by the teaching, not quotas (most 25–40 min).
 | V2 | Ch 1 | `ch00_air_and_seawater` | Equations of state: ideal gas; seawater density from T and S; hydrostatic balance with height and depth (Argo, WOA, radiosondes) | queued |
 | V3 | Ch 1–2 | `ch00_stability_buoyancy` | Potential temperature, lapse rates, buoyancy, stable vs unstable, N, convection; real soundings | queued |
 | V4 | Ch 2 | `ch00_scaling_taylor` | Taylor series, linearisation, scale analysis, the Rossby number (weather vs bathtub) | queued |
-| V5 | Ch 2 | `ch00_coriolis` | Coriolis from scratch (30–40 min): real maps first, real-wind examples, then the derivations (rotating frame, the 2, the minus, f, β, inertial circles; real drifter loops) | queued |
+| V5 | Ch 2 | `ch00_coriolis` | Coriolis from scratch (30–40 min). **Order (user, 2026-10-27): easy everyday examples and animation FIRST, not maps** (a ball rolled across a merry-go-round seen from outside and by a rider, throwing a ball to a friend on a turntable, a rotating tank, a pendulum). **Then** the spinning Earth in 3-D. **Only then** real maps and real winds. After that the derivations (rotating frame, the 2, the minus, f, β, inertial circles; real drifter loops) | queued |
 | V6 | Ch 2, 5 | `ch00_geostrophic_wind` | Geostrophic and ageostrophic wind (30–40 min): balance, k × ∇p, real analyses, where it fails (friction, curvature, equator) | queued |
 | V7 | Ch 2 | `ch00_thermal_wind` | Thermal wind (30–40 min): thickness, shear from temperature gradients, jets on real cross-sections and maps | queued |
 | V8 | Ch 3 | `ch00_adjustment_rossby_radius` | Shallow-water picture, geostrophic adjustment, the Rossby radius (storms ~1000 km, ocean eddies ~50 km) | queued |
