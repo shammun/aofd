@@ -95,10 +95,17 @@ possible … appropriate animation and also data animation."
   camera moves from space down to a town. Vertical exaggeration is said in the narration.
 - **Appropriate, not decorative.** Every motion carries meaning the voice is talking about at that moment; no busy
   backgrounds; legibility and the label-collision check still win; the size cap (160 MB) still holds.
-- **Visual research first** (user, 2026-10-27): before each weather/climate/ocean movie is storyboarded, a research
-  pass looks online for the best way to show that topic's maps, animated maps and 3-D maps (toolkit survey:
-  `research/movie_maps_toolkit.md`, covering Google Earth Engine, leafmap/leaflet, MapLibre, deck.gl, Cesium,
-  GeoVista/PyGMT and others, combined with three.js where that helps); the director uses its findings.
+- **Best tool per visual, not one tool per movie** (user, 2026-10-27: "don't be rigid … for each different
+  rendering or visualization … select the best tool or tools or the combination of tools … Don't just do this one
+  time"). For **every** map, data animation, 3-D view or chart in a movie, separately:
+  1. list the candidate tools and combinations (e.g. PyGMT relief → texture → three.js globe; GEE or GIBS imagery
+     under our own isobars; MapLibre/deck.gl terrain frames composited with Remotion overlays; GeoVista, RustGIS,
+     GeoLibre, leafmap, Cesium, cartopy, d3-geo…);
+  2. try the promising ones on that visual (a still or a short clip), not just the first that works;
+  3. pick the best by clarity of the message, looks, honesty (data traceable), determinism, licence, render time and
+     size; record the choice and the runner-up in the storyboard scene (`tool:` and `why:` lines).
+  This happens at planning, again while building each scene, and again at review whenever a visual is weak; it is
+  never a one-off survey. The general toolkit survey (`research/movie_maps_toolkit.md`) is only the starting list.
 - The director plans it in the storyboard (per scene: map / globe / 3-D / data animation), and the reviewer checks
   "could this static picture be a real map or a data animation?" as a SHOULD item.
 
