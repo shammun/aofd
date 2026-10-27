@@ -3624,7 +3624,7 @@ scenes:
       t: 0 .. 3.73 s (crosses the 3-m disc), 1/30-s samples
     outputs:
       inertial_path: straight chord
-      rotating_path: curves right (x_R > 0 after launch, CHECK)
+      rotating_path: curves right of its launch heading (k·(u0 × (r_R − r_straight)) < 0 for t > 0, CHECK; x_R dips to −0.63 m first)
       deflection_sense: right for Omega > 0
     data: data/merry.json (NEW, N17)
     test: ../Fluid Dynamics/tests/geo/test_frames.py::test_turntable_puck_V7_limits_and_deflection_sense, ::test_turntable_puck_V1_matches_rotating_frame_ode
@@ -4037,7 +4037,7 @@ scenes:
       t: 0 .. 3.73 s
       centrifugal: true
     outputs:
-      max_gap_m: '≈ 3e-11 (planning run 2026-10-27: 3.1e-11 m for x0 = 0, y0 = −2.5, v0 = 1, Ω = 0.5); CHECK < 1e-6'
+      max_gap_m: '≈ 3e-11 (implementer run 2026-10-27: 1.38e-11 m for this launch, rotating_frame_path vs turntable_puck); CHECK < 1e-6'
       sense: right of the motion for Ω > 0 (CHECK)
     also:
     - fluidpy.geo.frames.turntable_puck
@@ -4045,7 +4045,7 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_frames.py::test_turntable_puck_V1_matches_rotating_frame_ode (existing); new tests/geo/test_frames.py::test_rotating_frame_path_V1_equals_turntable_puck
       (I4)
   exaggeration: []
-  honesty: the readout shows the measured gap from the builder (the planning value is 3.1e-11 m); if the builder's number
+  honesty: the readout shows the measured gap from the builder (the implementer measured 1.38e-11 m); if the builder's number
     differs the label shows its value, rounded up
 - id: s28a_local_axes
   t:
@@ -5838,13 +5838,15 @@ scenes:
 
     keyword ''friction: across the isobars, towards the low''.
 
-    S6: the 850 hPa pair returns; keywords ''direction ✓'', ''speed ✓''.
+    S6: the 850 hPa pair returns; keywords ''direction ✓'', ''speed ≈ 15 % less · curved flow''.
 
     '
-  voiceover: Now let's add the real winds at the same height, from the reanalysis. They're drawn in a second colour. Over
-    the sea, they match the geostrophic arrows closely, in both speed and direction. Down near the ground, it's different.
-    Friction slows the air and turns it partly across the isobars, towards the low. So from nothing more than a pressure map
-    and a cross product, we get the wind above the ground, both its direction and its speed.
+  voiceover: Now let's add the real winds at the same height, from the reanalysis. They're drawn in a second colour.
+    Over the sea, they point almost exactly the same way as the geostrophic arrows. They're a little slower, though,
+    about fifteen percent near this tight low. That's because the air is racing round a sharp curve, which our simple
+    balance leaves out. Down near the ground, it's different. Friction slows the air and turns it partly across the
+    isobars, towards the low. So from nothing more than a pressure map and a cross product, we get the direction of
+    the wind above the ground almost exactly, and its speed to within about a sixth.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.atmos.geostrophic_wind_from_height
@@ -6431,7 +6433,7 @@ new_builder_data:
     scene: s26a-s27a
     what: 'merry.json: turntable paths, two views, carried arrow, new ground, terms, check paths'
     check: rotating path right of the motion; v_outside = turntable U, V; tip velocity = Ω × u; floor change = Ω × u; rotating_frame_path
-      vs turntable_puck max gap < 1e-6 m (planning 3.1e-11)
+      vs turntable_puck max gap < 1e-6 m (measured 1.38e-11)
   - id: N18
     scene: s28a-s28c
     what: Ω local, Ω × u components, flat part
@@ -6478,7 +6480,7 @@ new_builder_data:
     scene: s45-s46
     what: Ciarán at 12 UTC on the P6 image
     check: msl minimum location falls on the image's storm centre within 1° (visual sanity, reported); anticlockwise ring;
-      850 hPa speed within 10 % and 10° at the two shown sea points; u10 crosses towards the low
+      850 hPa over sea 300–1500 km from the centre at 12 UTC, median direction difference ≤ 10° and ≥ 65 % of points within 10°; median actual/geostrophic speed in 0.80–0.95 (data-scout 2026-10-27 gave 0.857 at 12 UTC, 0.852 at 13 UTC; subgeostrophic round a tight low, gradient-wind check at 46°N 5°W); u10 crosses towards the low
 implementer_needs:
 - id: I1
   fn: fluidpy.diag.trajectories.advect_on_sphere(u, v, lat, lon, seeds_lat, seeds_lon, dt, nsteps, a=EARTH_RADIUS)

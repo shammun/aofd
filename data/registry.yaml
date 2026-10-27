@@ -47,8 +47,10 @@ datasets:
     redistributable: yes
     redownloadable: true
     raw_files: [raw/NE-50m-land/ne_50m_land.zip]
-    derived_on_root: [derived/ch21/fig_21_23_bathy3000_mask.nc]
-    derived_in_repo: [data/derived/ch21/fig_21_23_bathy3000_mask.nc]
+    derived_on_root: [derived/ch21/fig_21_23_bathy3000_mask.nc, derived/ch00/ciaran_admin/ciaran_land_50m.geojson, derived/ch00/era5_ciaran_2023_sfc_1102.nc]
+    derived_in_repo: [data/derived/ch21/fig_21_23_bathy3000_mask.nc, data/derived/ch00/ciaran_land_50m.geojson, data/derived/ch00/ciaran_2023_sfc_1102.bin]
+    derived_note: "ch00 (2026-10-27, P7): land clipped to 35-70N 50W-15E, simplified 0.02 deg, rounded 0.001 deg, 98 polygons, 51,804 B (fluidpy.data.naturalearth.land_box_geojson); the 0.25 deg land mask (cell centres, fluidpy.data.naturalearth.land_mask_grid) is the variable 'land' of the ERA5 Ciaran 11-02 surface product"
+    used_by: [Vallis Fig. 21.23 mask, movie ch00_cross_product_why v4 s45/s46 (sea mask, sea points only) and s31 (land test for tracks)]
   NE-10m-bathy-3000:
     catalogue: NE
     title: Natural Earth 1:10m bathymetry band H_3000 (sea floor deeper than 3000 m)
@@ -479,3 +481,33 @@ datasets:
     derived_on_root: [derived/ch00/bmng_patch_s23_biscay_45N_0p5E.jpg, derived/ch00/bmng_patch_s31_dordogne_45N_0p5E.jpg, derived/ch00/bmng_patch_s31_chubut_45S_69p5W.jpg]
     derived_in_repo: [data/derived/ch00/bmng_patch_s23_biscay_45N_0p5E.jpg, data/derived/ch00/bmng_patch_s23_biscay_45N_0p5E.json, data/derived/ch00/bmng_patch_s31_dordogne_45N_0p5E.jpg, data/derived/ch00/bmng_patch_s31_dordogne_45N_0p5E.json, data/derived/ch00/bmng_patch_s31_chubut_45S_69p5W.jpg, data/derived/ch00/bmng_patch_s31_chubut_45S_69p5W.json]
     used_by: [movie ch00_cross_product_why v4 scene s23 (local k x u map, UV2-14) and s31 (parcel close-ups on land, UV2-25)]
+  ERA5-ARCO-ciaran2023-1102:
+    catalogue: ARCO
+    title: ERA5 0.25 deg, Storm Ciaran on 2023-11-02 at 09, 12, 13, 15 UTC - 850 and 500 hPa geopotential height and wind; MSLP, 10 m wind, 2 m temperature (+ NE 50m land mask); 35-70N 50W-15E
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous gcsfs, lazy selection through fluidpy.data.fetch (disk guard); sibling of ERA5-ARCO-ciaran2023 on a box extended east to 15E (store longitudes 310..359.75 and 0..15 as one array); surface guard size 2.36 MB, upper guard size 3.54 MB (transfer ~1.2 GB, because one pressure-level chunk holds all 37 levels)
+    fetcher: fluidpy.data.era5_arco.fetch_box / box_product; fluidpy.data.naturalearth.land_mask_grid
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=overview
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on single levels / on pressure levels, C3S CDS, doi:10.24381/cds.adbb2d47 / doi:10.24381/cds.bd0915c6; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 3932749  # 1533200 surface + 2399549 upper (raw subsets)
+    sha256_raw_subset: {sfc: 20bf1f8166e8a8aa65f4e21d6ef0da2f5e23952b64b673429c3dc3833909536c, upper: 4fa1a6a7f6560438bb523843e74973144ef3c7e6e0b4858c24e937299f6ec42a}  # informational
+    sha256_derived:
+      era5_ciaran_2023_sfc_1102.nc: 68007a39a03a8f2c6057cfab83f6d90b1e8af96bfe1a11e978226891601755c7
+      era5_ciaran_2023_upper_1102.nc: fd14d55aa97b8c6d2709fac2539af611de37a84a68110b447cdae3761c947596
+      ciaran_2023_sfc_1102.bin: e419c2848ee3ca8143c8c19b84b5790e7d8094dd7bb622db04f7ff7aa4be3792
+      ciaran_2023_upper_1102.bin: e09e37de7b4d9d0f986e90f5de35b95c69e7c42c5e4f104e044f78103b30304b
+    variables: {z: "geopotential height [m] = ERA5 geopotential / 9.80665", u: "[m s-1]", v: "[m s-1]", level: "[hPa] 850, 500", msl: "[Pa]", u10: "[m s-1]", v10: "[m s-1]", t2m: "[K] (near-surface density only)", land: "NE 50m land at the grid point, 1 land / 0 sea [1]"}
+    coordinates: store lat N->S, lon 0..359.75; derived lat S->N (35..70), lon -50..15 (negative = west); times UTC instantaneous; .bin float32 little-endian C order, dims (time, level, lat, lon) upper and (time, lat, lon) / (lat, lon) surface
+    subset: lat 35..70, lon -50..15 (141 x 261); times 2023-11-02T09, T12, T13, T15; levels 850, 500 hPa
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_ciaran_2023_1102_u10-v10-msl-t2m_4t_2023-11-02T09.nc, raw/ERA5-ARCO/era5_ciaran_2023_1102_z-u-v_850-500_4t_2023-11-02T09.nc, raw/ERA5-ARCO/era5_ciaran_2023_1102_u10-v10-msl-t2m_3t_2023-11-02T09.nc, raw/ERA5-ARCO/era5_ciaran_2023_1102_z-u-v_850-500_3t_2023-11-02T09.nc]
+    raw_note: the two _3t_ files (09/12/15 only, first pass before 13 UTC was added) are superseded by the _4t_ files and evictable
+    derived_on_root: [derived/ch00/era5_ciaran_2023_sfc_1102.nc, derived/ch00/era5_ciaran_2023_upper_1102.nc]
+    derived_in_repo: [data/derived/ch00/ciaran_2023_sfc_1102.bin, data/derived/ch00/ciaran_2023_sfc_1102.json, data/derived/ch00/ciaran_2023_upper_1102.bin, data/derived/ch00/ciaran_2023_upper_1102.json]
+    checks: "MSLP min 12 UTC 955.93 hPa at 52.5N 1.75E (13 UTC 956.12 hPa at 53.0N 1.75E); z850 min 12 UTC 973.4 m at 52.5N 1.75E (same grid point); msl at 12 and 13 UTC identical (0.0 Pa) to ERA5-ARCO-ciaran2023 on the shared box"
+    used_by: [movie ch00_cross_product_why v4 s45_storm_map (isobars, 850 hPa geostrophic arrows) and s46_real_winds (850 hPa and 10 m winds vs geostrophic), P4b]

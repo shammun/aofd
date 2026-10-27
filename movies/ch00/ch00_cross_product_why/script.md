@@ -473,7 +473,7 @@ Now let's test it on a real storm. This is Storm Ciarán, seen from a satellite 
 > CHANGED (UV2-31: MODIS Aqua true colour of 2 Nov 2023, ≈ 13:20 UTC at the storm, with country and region borders; ERA5 isobars at 12 UTC; the narration says image and isobars are from the same time, early in the afternoon).
 
 ## s46_real_winds
-Now let's add the real winds at the same height, from the reanalysis. They're drawn in a second colour. Over the sea, they match the geostrophic arrows closely, in both speed and direction. Down near the ground, it's different. Friction slows the air and turns it partly across the isobars, towards the low. So from nothing more than a pressure map and a cross product, we get the wind above the ground, both its direction and its speed.
+Now let's add the real winds at the same height, from the reanalysis. They're drawn in a second colour. Over the sea, they point almost exactly the same way as the geostrophic arrows. They're a little slower, though, about fifteen percent near this tight low. That's because the air is racing round a sharp curve, which our simple balance leaves out. Down near the ground, it's different. Friction slows the air and turns it partly across the isobars, towards the low. So from nothing more than a pressure map and a cross product, we get the direction of the wind above the ground almost exactly, and its speed to within about a sixth.
 
 > 78 words · 6 sentences · 2762.350–2794.475 s (32.1 s; speech 29.6 s) · 46:02.35–46:34.47 (measured, dry run).
 
