@@ -1366,7 +1366,7 @@ const S18: React.FC = () => {
   const q2 = (big > 0 ? idx(sweep.q_xyz as number[][], th2 / 360) : cases.q[1]) as V3;
   const pz2 = big > 0 ? interp(th2, sweep.theta_deg, sweep.pxq_z) : cases.p_cross_q[1][2] * fin(f, t9, 20);
   const oth = 1 - big;
-  const pTop = fin(f, 10) * fout(f, t14);
+  const pTop = fin(f, 10) * fout(f, t13 - 8);
   const under = (i: number, lines: { t: string; o: number; c?: string; tex?: boolean }[]) => lines.map((l, j) =>
     l.tex ? <TeX key={j} s={l.t} x={PANELS[i].x + 280} y={720 + 66 * j} size={T.key} ax={0.5} o={l.o * oth} c={l.c ?? C.ink} />
       : <Svg key={j}><Lbl x={PANELS[i].x + 280} y={720 + 66 * j} t={l.t} c={l.c ?? C.key} s={T.key} a="middle" o={l.o * oth} /></Svg>);
@@ -1399,7 +1399,8 @@ const S18: React.FC = () => {
           <Arrow p={[1650, 300]} q={[1750, 300]} color={C.first} w={7} head={24} halo={false} />
           <Arrow p={[1650, 300]} q={[1650 + 70 * Math.cos(th2 * D2R), 300 - 70 * Math.sin(th2 * D2R)]} color={C.second} w={7} head={24} halo={false} />
           <path d={`M ${1650 + 48} 300 A 48 48 0 0 1 ${1650 + 48 * Math.cos(th2 * D2R)} ${300 - 48 * Math.sin(th2 * D2R)}`} fill="none" stroke={C.gold} strokeWidth={5} />
-          <Lbl x={1650} y={470} t="clockwise · from above" c={C.key} s={T.floor} a="middle" />
+          <Lbl x={1650} y={470} t="clockwise" c={C.key} s={T.floor} a="middle" />
+          <Lbl x={1650} y={520} t="from above" c={C.key} s={T.floor} a="middle" />
         </g>
       </Svg>
       <TeX s={EQ_PQM6} x={1390} y={640} size={T.key} ax={0} o={fin(f, t15 + 10) * big} c={C.neg} />
@@ -1639,7 +1640,7 @@ const S23: React.FC = () => {
         <Arrow3D from={[0, 0, 0]} to={mul3(kxu, -1)} color={ROT} grow={neg} px={12} head={44} dash />
       </View3D>
       <Svg>
-        <L3 pr={pr} at={[3.3, -1.5, 0]} t="east" c={C.muted} s={T.key} />
+        <L3 pr={pr} at={[2.6, -2.0, 0]} t="east" c={C.muted} s={T.key} />
         <L3 pr={pr} at={[1.0, 3.5, 0]} t="north" c={C.muted} s={T.key} />
         <TipL3 pr={pr} from={[0, 0, 0]} to={[0, 0, 1.6]} t="k" c={ROT} s={T.calc} o={gK} />
         <TipL3 pr={pr} from={[0, 0, 0]} to={u} t="u" c={C.first} s={T.calc} o={gU} />
@@ -1955,13 +1956,13 @@ const S28: React.FC = () => {
             <line x1={ot[0]} y1={ot[1]} x2={ft[0]} y2={ft[1]} stroke={C.ink} strokeWidth={4} strokeDasharray="10 8" opacity={fin(f, t1 + 20)} />
             <line x1={s0[0]} y1={s0[1]} x2={ft[0]} y2={ft[1]} stroke={neg ? C.neg : ROT} strokeWidth={20} strokeOpacity={0.7} strokeDasharray={neg ? "14 8" : undefined} opacity={fin(f, t1 + 24)} />
             <Lbl x={G.pw(add3(site, kk, 0.55))[0] + 10} y={G.pw(add3(site, kk, 0.55))[1] - 44} t="k · up" c={ROT} s={T.key} a="middle" o={fin(f, t1)} />
-            <Lbl x={ot[0] + 34} y={ot[1] + 4} t="Ω" c={ROT} s={T.calc} a="start" o={fin(f, t1 + 10)} />
+            <Lbl x={ot[0] + 34 - 114 * clamp(-lat / 20, 0, 1)} y={ot[1] + 4} t="Ω" c={ROT} s={T.calc} a="start" o={fin(f, t1 + 10)} />
             <Lbl x={(s0[0] + ft[0]) / 2 + 44} y={(s0[1] + ft[1]) / 2 + (lat < 0 ? -10 : 34)} t="shadow" c={ROT} s={T.key} o={fin(f, t1 + 30) * (Math.abs(sh) > 0.05 ? 1 : 0)} />
             <polyline points={latArc.map((p) => p.join(",")).join(" ")} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, t2)} />
             <line x1={c0[0]} y1={c0[1]} x2={eqP[0]} y2={eqP[1]} stroke={C.gold} strokeWidth={3} strokeDasharray="8 8" opacity={fin(f, t2)} />
             {lat >= -1 ? <Lbl x={G.pw(ll(lat / 2, 0, 0.62))[0] - 10} y={G.pw(ll(lat / 2, 0, 0.62))[1] + (lat > 1 ? 0 : 40)} t={lat > 44 ? "φ = 45°" : "φ = 0°"} c={C.gold} s={T.key} a="end"
               o={fin(f, t2) * (lat > 44 || Math.abs(lat) < 0.5 ? 1 : 0)} />
-              : <Lbl x={G.pw(ll(lat / 2, 0, 0.45))[0] - 16} y={G.pw(ll(lat / 2, 0, 0.45))[1] + 10} t="φ < 0" c={C.neg} s={T.key} a="end" o={lat < -44 ? 1 : 0} />}
+              : <Lbl x={G.pw(ll(lat / 2, 0, 0.45))[0] + 22} y={G.pw(ll(lat / 2, 0, 0.45))[1] + 4} t="φ < 0" c={C.neg} s={T.key} a="start" o={lat < -44 ? 1 : 0} />}
             <Lbl x={s0[0] - 70} y={s0[1] - 20} t="90° − φ" c={C.gold} s={T.key} a="end" o={fin(f, t3) * fout(f, t7)} />
           </>;
         }}
@@ -2952,7 +2953,9 @@ const S46: React.FC = () => {
             <g opacity={sw10 * fin(f, AT(k, 4, "turns it across"))}>
               <path d={`M ${cx} ${cy} L ${arc.split(" ").join(" L ")} Z`} fill={C.gold} fillOpacity={0.35} stroke="none" />
               <polyline points={arc} fill="none" stroke={C.gold} strokeWidth={7} />
-              <Lbl x={Math.min(1815, cx + (Z / 2 + 30) * Math.cos(am))} y={cy - (Z / 2 + 30) * Math.sin(am)} t={`${Math.round(c.angle_10m)}°`} c={C.gold} s={T.key} a="middle" />
+              {cx + (Z / 2 + 30) * Math.cos(am) > 1815
+                ? <Lbl x={cx + 95 * Math.cos(am)} y={cy - 95 * Math.sin(am) + 62} t={`${Math.round(c.angle_10m)}°`} c={C.gold} s={T.key} a="middle" />
+                : <Lbl x={cx + (Z / 2 + 30) * Math.cos(am)} y={cy - (Z / 2 + 30) * Math.sin(am)} t={`${Math.round(c.angle_10m)}°`} c={C.gold} s={T.key} a="middle" />}
             </g>
             <Arrow p={[cx, cy]} q={vec(c.w10)} color={C.first} w={4} head={22} halo={false} o={sw10} />
             <Lbl x={(cx + vec(c.w10)[0]) / 2 - 40 * Math.sin(Math.atan2(c.w10[1], c.w10[0]))} y={(cy + vec(c.w10)[1]) / 2 - 40 * Math.cos(Math.atan2(c.w10[1], c.w10[0]))} t="10 m" c={C.first} s={T.floor} a="middle" o={sw10} />
