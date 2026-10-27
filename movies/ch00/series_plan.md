@@ -134,7 +134,7 @@ conda/micromamba env for GMT if pip cannot supply it, an npm tree under `tools/m
 (`tools/maptools/render.py <recipe>`), a side-by-side compare command, a `map-toolkit` skill and self-tests. Big
 environments and package caches live on G: wherever the tool allows. **Disk:** the user allows C: to go down to a
 little over 10 GB free for these installs (floor for installs 12 GB; the 40 GB floor still applies to data downloads).
-Google Earth Engine needs the user's account (steps given to the user 2026-10-27).
+**ArcGIS Pro is not used for now** (user, 2026-10-27; the adapter stays but agents skip it). Google Earth Engine needs the user's account (steps given to the user 2026-10-27).
 
 ## Real data in every movie (user, 2026-10-27: "not only for ENSO but for all the things")
 Wherever a topic has observations, every movie gets the treatment first asked for ENSO:
