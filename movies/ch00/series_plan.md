@@ -32,7 +32,7 @@ Lengths are targets set by the teaching, not quotas (most 25–40 min).
 | # | Slug | What | Status |
 |---|---|---|---|
 | F1 | `ch00_dot_product_why` | The dot product, and advection (17:40) | done (v6); publish awaits M10 |
-| F2 | `ch00_cross_product_why` | The full cross-product movie, v4 from the user's v2 review (≤ 50 min) | **in progress** |
+| F2 | `ch00_cross_product_why` | The full cross-product movie, v4 from the user's v2 review (≤ 50 min) | **done** (v4 fix 2, 48:28, 128.8 MB, review 3 PASS, 2026-10-27); Drive `cross_product_v4_fix2.mp4` |
 | F2a | `ch00_cross_product` | Split 1: the cross product only | queued |
 | F2b | `ch00_cross_product_uses` | Split 2: the cross product across physics (torque, L, qv × B, Ω × r, Coriolis/geostrophic previews) | queued |
 | F3 | `ch00_weather_basics` | Atmosphere layers, pressure, temperature, density, p = ρRT, humidity, wind conventions, highs/lows, air masses, fronts, weather vs climate, reanalysis | **planning** |
@@ -189,3 +189,4 @@ the MOC and ACC in Ch 21; ENSO in Ch 22.
 | Date | Movie | Version | Length | Size | Reviews | Final path |
 |---|---|---|---|---|---|---|
 | 2026-10-25 | ch00_dot_product_why | v6 fix 1 | 17:40.6 | 51.27 MB | 6b PASS | movies/out/ch00/ch00_dot_product_why.html |
+- 2026-10-27: **F2 ch00_cross_product_why final** — v4 → fix 1 → fix 2; reviews 1 FIX, 2 FIX, 3 PASS (4 SHOULD to fold into the F2a/F2b splits: R3-S1 empty halves, R3-S2 s25b label, R3-S3 s03 door tick, R3-S4 s08 link). 48:28, 128.8 MB, own score rotation-turning. Scratch cleaned (10.8 GB freed; narration/pieces archived to archive/movies/ch00_cross_product_why_v4_final).
