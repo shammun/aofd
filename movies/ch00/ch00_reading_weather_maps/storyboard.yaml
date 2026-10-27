@@ -1,0 +1,2841 @@
+# ch00_reading_weather_maps storyboard v1 (movie-director, 2026-10-27). Generated from the director's scene spec and the
+# measured tools/tts.py dry run named in dry_run. S<k> = sentence k of the scene; AT(k, "words") a phrase inside it.
+# House style movies/HOUSE_STYLE.md binding; cartography skill for every map. Data, new functions F1-F12 and CHECK ids
+# RM01-RM45: data_needs.md. Per scene: kind / data / tool / runner_up / why (series_plan 'Best tool per visual').
+id: ch00_reading_weather_maps
+title: 'Reading weather maps: from the globe to a forecaster''s chart'
+version: 1
+concepts:
+- 0A B.5 spherical coordinates (latitude, longitude, arc length δx = a cos φ δλ, δy = a δφ)
+- '0C map projections (E26 sphere_to_map: plate carrée, Mercator, Equal Earth, polar stereographic, Lambert conformal conic;
+  Tissot)'
+- '0C contours and contour intervals (E25: isobars every 4 hPa, labels, spacing)'
+- '0B geopotential height and the 500 hPa surface (E27 height_map_reader: troughs and ridges)'
+- 0C reading a synoptic chart (H/L, fronts incl. occluded and stationary, troughs, wind barbs, station models, METAR/SYNOP)
+- 0C satellite imagery (visible, infrared, water vapour; geostationary vs polar orbit)
+- '0B Buys Ballot''s rule observed (why: Coriolis and geostrophic movies)'
+target_duration_s: 2089.275
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: Chapter 0 series
+  position: F4
+  previous: ch00_weather_basics
+  next: ch00_climate_machine
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    seed: 4
+    level: bed about -28 LUFS, ducked 5 dB under speech; 2.5-s tail fading on the silent end-card hold
+    sections:
+    - style: data-curious
+      key: A Dorian, 92 bpm, syncopated marimba
+      scenes: s00-s08
+      why: 'maps and data: coordinates and distances'
+    - style: planet-wide
+      key: C major / A minor, no pulse, 10-s chords
+      scenes: s09-s20
+      why: 'the whole Earth unrolled: projections on the globe'
+    - style: data-curious
+      scenes: s21-s60
+      why: reading lines, symbols, stations, satellites and the real chart
+    crossfade: 4-s cosine ramps at the s09 and s21 boundaries (as in the capability-test showcase)
+    distinct_from: maths-calm (dot product), rotation-turning (cross product), air-flowing + storm-tense (weather basics)
+  effects_candidates:
+  - scene: s00_title
+    kind: whoosh
+    intensity: 0.15
+    shows: globe unrolling into the Mercator map (Part A)
+  - scene: s04_longitude
+    kind: whoosh
+    intensity: 0.15
+    shows: camera rising above the North Pole
+  - scene: s09_orange_peel
+    kind: whoosh
+    intensity: 0.2
+    shows: the globe's skin falling open into gores
+  - scene: s05_signs
+    kind: tick
+    intensity: 0.12
+    shows: longitude ticks counting 0 -> 360
+  - scene: s31_barb_map
+    kind: wind_gusty
+    intensity: 0.3
+    shows: real 10-m barbs crowding south of Ciarán
+  - scene: s34_station_model
+    kind: rain_light
+    intensity: 0.15
+    shows: the rain symbol drawn into the model (only under the S7 sentence's tail, never over a word)
+  - scene: s47_three_views
+    kind: storm_bed
+    intensity: 0.2
+    shows: 12-h infrared loop of the North-Atlantic storm
+  - scene: s48_bb_rule
+    kind: wind_gentle
+    intensity: 0.2
+    shows: streaklines round the low
+  - scene: s57_chart_context
+    kind: wind_howling
+    intensity: 0.25
+    shows: the Brest gust readout (84 kt) - after the sentence, in the 0.8-s gap only
+  effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a
+    word; one at a time; no caption tags (none carries meaning the voice does not say)'
+measured_narration_s: 2086.775
+measured_frames: 62678
+words: 5074
+sentences: 330
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_reading_weather_maps/dryrun/v1_merged
+  audio_s: 2086.775
+  speech_s: 1944.0
+  cues: 523
+  self_check:
+    full_run:
+      expected_s: 2084.825
+      audio_s: 2084.825
+      diff_ms: 0.0
+      len_ok: true
+      cues_ok: true
+    patch_run:
+      expected_s: 76.3
+      audio_s: 76.3
+      diff_ms: 0.0
+      len_ok: true
+      cues_ok: true
+    splice_shift_s: 1.95
+    diff_ms: 0.0
+  render_s: 762.3
+  warnings: []
+  words_per_minute_overall: 145.7
+  words_per_minute_speaking: 156.6
+  lexicon: movies/lexicon.yaml as of HEAD; proposed new entries (Buys Ballot, Tissot, Himawari, METAR, decametres) not applied
+    in this run
+latest_data_policy: 'the ''latest'' analysis is the one current at planning: WPC/GFS/GOES 18 UTC 27 Oct 2026 and GFS/Himawari
+  00 UTC 27 Oct 2026; frozen unless the orchestrator asks for a refresh (then s51, s53-s57 are re-written to the new numbers
+  and re-measured)'
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 12.325
+  sentence_times:
+  - - 0.3
+    - 11.525
+  beat: opening title
+  visual: 'TITLE FRAME (HOUSE_STYLE §3, house/kit/title.tsx). Left column x 100-1075: RiseText ''Reading'' / ''weather maps''
+    (150 px, weight 800, TitleGradient teal -> gold); ''made easy'' (96 px, warm white) pulses x1.06 on AT(1, "the easy way");
+    ''and how forecasters use them'' (68 px, ''forecasters'' teal). Right column x 1130-1840 (>= 50 px clear of the subtitle),
+    y 180-636: Part A (frame 0 -> AT(1, "forecasters")): three.js ProjectionMorph: the Blue Marble globe with nine gold Tissot
+    circles turns 20 deg and unrolls into a Mercator map (morph t 0 -> 1); the circles swell towards the poles. Part B (12-frame
+    cross-fade): the 18 UTC 27 Oct 2026 North-Atlantic chart builds itself in 4 beats (GOES-East IR underlay, isobars, H/L
+    letters with values, WPC fronts with symbols). Poster = frame 200.'
+  voiceover: In this video, we'll learn to read weather maps the easy way, and see how forecasters use them to follow real
+    storms, from a satellite picture to a forecaster's chart.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.forward (NEW F2) for the morph targets; fluidpy.data.wpc.bulletin (NEW F7) for the fronts
+    params:
+      projection: mercator
+      tissot_radius_km: 500
+      chart: 2026-10-27T18Z
+    test: ../Fluid Dynamics/tests/geo/test_mapproj.py::test_mercator_scale_sec (V1) + JS selftest rows (ProjectionMorph vs
+      mapproj.forward)
+  exaggeration:
+  - Tissot circles 1000 km across (drawn size is the true size of a 500-km-radius circle)
+  screen_summary: '''Reading'' / ''weather maps'' 150 px TitleGradient; ''made easy'' 96 px (pulse on ''the easy way''); ''and
+    how forecasters use them'' 68 px, ''forecasters'' teal. Right: Part A globe unwrapping to a map with Tissot circles; Part
+    B on ''forecasters'': a chart building itself (isobars, H/L, fronts) over infrared'
+  kind: globe + map, data animation
+  data: BMNG 2004 topo (exists, cross-product data/real/globe_bmng_*.jpg); WPC CODSUS 18Z 27 Oct 2026 (NEW D7); GFS 18Z 27
+    Oct 2026 MSLP (NEW D6); GOES-East ABI band 13 (NEW D9)
+  tool: three.js vertex-shader morph sphere -> projected plane (kit ProjectionMorph, new) for Part A; Remotion SVG map (d3-geo
+    LCC) over a cartopy-rendered IR plate for Part B
+  runner_up: d3-geo SVG projection interpolation with a cartopy raster cross-fade (raster cannot morph)
+  why: the title promise (flatten the globe; read the chart) shown by the movie's own data from frame 0
+  music: data-curious
+- id: s01_hook
+  t:
+  - 12.325
+  - 32.025
+  sentence_times:
+  - - 12.325
+    - 14.45
+  - - 14.8
+    - 22.45
+  - - 22.8
+    - 31.225
+  beat: hook question
+  visual: 'Full width x 80-1840, y 40-860. The finished North-Atlantic chart (18 UTC 27 Oct 2026; LCC lon0 -55, parallels
+    30/60) is on screen from frame 0 (the core picture on the first frame): GOES-East IR in grey (cold white), GFS isobars
+    every 4 hPa (white 80 %, 2.6 px), WPC H/L letters (blue H #7fb2ff, red L #ff7a8a, 120 px) with central pressures under
+    them, WPC fronts with MetPy symbols, ~15 x 8 muted barbs, 6 station models near the US east coast. S1: a slow 3 % push-in.
+    S3: on AT(3, "where every point") the graticule fades in; on AT(3, "stretched") the map briefly morphs 15 % towards plate
+    carree and back; on AT(3, "line") / "arrow" / "symbol" gold rings pulse on an isobar, a barb and a front symbol. No words
+    on screen (the question is spoken).'
+  voiceover: 'How do you read a weather map? Here''s a real one, drawn by forecasters on the day this video was made, and
+    at first it looks like a secret code. Let''s crack it together: where every point on the map is, why the Earth looks stretched,
+    and what each line, arrow and symbol tells us.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.wpc.bulletin (NEW F7) + fluidpy.data.gfs.fetch_analysis (vars msl, u10, v10; NEW option F12)
+    params:
+      valid: 2026-10-27T18Z
+      isobar_interval_hPa: 4
+    test: CHECK RM40-RM41 (H/L values from the bulletin, isobar levels multiples of 4)
+  exaggeration: []
+  screen_summary: 'Full-width real chart from frame 0: WPC 18 UTC 27 Oct 2026 analysis on LCC (IR underlay, isobars, H/L,
+    fronts, barbs, a few station plots); on S3 three gold rings pulse in turn on a station plot, a front, a barb'
+  kind: map
+  data: WPC CODSUS 18Z 27 Oct 2026 (D7); GFS 0.25 analysis 18Z 27 Oct 2026 msl, u10, v10 (D6); GOES-East band 13 18:00Z (D9);
+    IEM METARs 18Z (D8)
+  tool: cartopy + MetPy + cartostyle movie preset rendered as layers (PNG per layer, transparent) -> Remotion stack
+  runner_up: d3-geo SVG in Remotion built layer by layer (capability test CTS1Build)
+  why: capability tests rank cartostyle first for a forecaster-grade synoptic chart; layers let later scenes reveal them one
+    at a time
+  music: data-curious
+- id: s02_two_angles
+  t:
+  - 32.025
+  - 48.95
+  sentence_times:
+  - - 32.025
+    - 36.925
+  - - 37.275
+    - 43.3
+  - - 43.65
+    - 48.15
+  beat: building blocks · where is a place
+  visual: 'Picture zone x 80-1000 (globe radius 380 px), maths zone keywords only. Globe3D (Blue Marble NG, Natural Earth
+    coast 2 px warm white 60 %) turns from the Atlantic to Brest (gold dot). S2 keyword ''two angles'' (54 px). S3: the near
+    hemisphere becomes translucent (opacity 0.35) and a teal 10-px line grows from the centre out through Brest; a small centre
+    dot labelled ''centre'' (44 px).'
+  voiceover: 'Let''s start with the most basic question on any map: where is this place? The Earth is very nearly a ball,
+    so we can pin down any place on it with just two angles. Picture a straight line from the centre of the Earth, out through
+    the place.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector (NEW F1) for the line through Brest
+    params:
+      lat_deg: 48.39
+      lon_deg: -4.49
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_axes (V1)
+  exaggeration: []
+  screen_summary: '3-D globe (Blue Marble) turning to Brest; on S3 a cut-away: teal line from the centre out through Brest'
+  kind: globe, 3-D
+  data: BMNG topo 5400x2700 (exists); Natural Earth 110m coast (exists)
+  tool: three.js globe (kit Globe3D from kit_cp/kit_wb) with a translucent near side
+  runner_up: CesiumJS SingleTile globe (heavier, harder to cut away)
+  why: the angles live inside the sphere, so the viewer must see the centre
+  music: data-curious
+- id: s03_latitude
+  t:
+  - 48.95
+  - 80.975
+  sentence_times:
+  - - 48.95
+    - 51.7
+  - - 52.05
+    - 57.425
+  - - 57.775
+    - 65.1
+  - - 65.45
+    - 71.225
+  - - 71.575
+    - 80.175
+  beat: building blocks · latitude
+  visual: 'Same globe, tilted so the equatorial plane is seen edge-on from slightly above. S1 keyword ''latitude'' (54 px).
+    S2: a slate line from the centre to the equator below Brest, and a gold Arc between it and the teal Brest line (the angle,
+    at the centre). S3: labels ''0°'' on the equator, ''90° N'', ''90° S'' at the poles (54 px), each on its word. S4: the
+    parallel through Brest draws itself as a teal ring all round the globe; keyword ''parallel''. S5: readout ''Brest 48.4°
+    N'' (68 px) with a gold link from the arc.'
+  voiceover: The first angle is the latitude. It's the angle between our line and the equator, measured at the centre of the
+    Earth. The equator has a latitude of zero, the North Pole ninety degrees north, and the South Pole ninety degrees south.
+    All the places with the same latitude form a circle around the Earth, called a parallel. Brest, the port in north-western
+    France that we watched Storm Ciarán pass over, is at about forty-eight point four degrees north.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.parallel_points (NEW F1)
+    params:
+      lat_deg: 48.39
+      n: 361
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_radius (V1, radius a cos lat)
+  exaggeration: []
+  screen_summary: 'cut-away globe: gold arc at the centre from the equator to the Brest line ''48.4° N''; equator ''0°'',
+    poles ''90° N'', ''90° S''; the Brest parallel drawn as a teal ring; keyword ''latitude'', ''parallel'''
+  kind: globe, 3-D
+  data: BMNG; Brest 48.39 N 4.49 W (Natural Earth populated places)
+  tool: three.js globe + billboard labels (kit Billboards, per capability test C1)
+  runner_up: 2-D cross-section diagram (loses the "circle round the Earth" picture)
+  why: latitude is an angle at the centre and a circle on the surface at once; only 3-D shows both
+  music: data-curious
+- id: s04_longitude
+  t:
+  - 80.975
+  - 122.825
+  sentence_times:
+  - - 80.975
+    - 85.475
+  - - 85.825
+    - 91.7
+  - - 92.05
+    - 96.275
+  - - 96.625
+    - 104.525
+  - - 104.875
+    - 111.775
+  - - 112.125
+    - 118.15
+  - - 118.5
+    - 122.025
+  beat: building blocks · longitude
+  visual: 'S1: teal dots slide along the Brest parallel (many places, same latitude). S2 keyword ''longitude''. S3: 12 meridians
+    draw pole to pole (slate 3 px); keyword ''meridian''. S4: the Greenwich meridian turns gold, label ''Greenwich'' and ''0°'';
+    keyword ''prime meridian''. S5: camera rises to look down on the North Pole; the axis is a dot; a gold Arc round the axis
+    from Greenwich to the Brest meridian. S6: ''180° E'' / ''180° W'' at the date line. S7: readout ''Brest 4.5° W'' (68 px).'
+  voiceover: Latitude alone isn't enough, because a whole parallel shares it. So we need a second angle, the longitude, which
+    says how far east or west we are. The lines that run from pole to pole are called meridians. The one through Greenwich,
+    in London, was chosen as the starting line, the prime meridian, with a longitude of zero. Longitude is the angle around
+    the Earth's axis, from the prime meridian to the meridian through our place. It runs up to one hundred and eighty degrees
+    east, and one hundred and eighty degrees west. Brest is at about four point five degrees west.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.meridian_points (NEW F1)
+    params:
+      lon_deg:
+      - 0
+      - -4.49
+      step_deg: 30
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_meridian_is_great_circle (V1)
+  exaggeration: []
+  screen_summary: 'globe seen from above the North Pole: meridians as spokes; ''Greenwich 0°'' gold; arc round the axis from
+    Greenwich to Brest ''4.5° W''; ''180° E'', ''180° W''; keyword ''longitude'', ''meridian'', ''prime meridian'''
+  kind: globe, 3-D
+  data: BMNG; Natural Earth places (Greenwich, Brest)
+  tool: three.js globe with a slerped camera (kit flights.tsx flight())
+  runner_up: d3-geo orthographic SVG (no image drape at polar view)
+  why: longitude is an angle round the axis, clearest from above the pole
+  music: data-curious
+- id: s05_signs
+  t:
+  - 122.825
+  - 163.9
+  sentence_times:
+  - - 122.825
+    - 127.95
+  - - 128.3
+    - 133.425
+  - - 133.775
+    - 138.675
+  - - 139.025
+    - 143.525
+  - - 143.875
+    - 151.275
+  - - 151.625
+    - 157.575
+  - - 157.925
+    - 163.1
+  beat: building blocks · signs and the graticule
+  visual: 'S2: northern hemisphere tinted teal 15 % with ''+'', southern rose 15 % with a hatch and ''−'' (never hue alone).
+    S3: same for east/west of Greenwich. S4: Brest dot with ''(48.4, −4.5)'' (68 px). S5: a ring of longitude ticks 0 -> 360
+    °E round the equator; S6: the Brest meridian reads ''355.5° E'' and a gold ''='' joins it to ''−4.5°''. S7: the full graticule
+    every 15 deg draws in (slate 1.2 px); keyword ''graticule''.'
+  voiceover: Data files and computer code don't write north or west; they use signs. Latitudes north of the equator are positive,
+    and south of it they're negative. Longitudes east of Greenwich are positive, and west of it they're negative. So Brest
+    becomes forty-eight point four, minus four point five. Some data sets count longitude all the way round instead, from
+    zero to three hundred and sixty degrees east. There, Brest is at three hundred and fifty-five point five, which is the
+    same meridian. The net of parallels and meridians drawn on a map is called the graticule.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.wrap_lon (NEW F1)
+    params:
+      lon_deg: -4.49
+      to: 0-360
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_wrap_lon_roundtrip (V1)
+  exaggeration: []
+  screen_summary: 'globe front view: ''+'' teal half above the equator, ''−'' rose half below (hatched); ''+'' east / ''−''
+    west of Greenwich; ''Brest (48.4, −4.5)''; ''0 … 360° E'' ring: ''355.5° E'' = ''−4.5°''; full graticule every 15°, keyword
+    ''graticule'''
+  kind: globe
+  data: BMNG; GFS longitude axis 0 ... 359.75 (D6 metadata, the real example of a 0-360 data set)
+  tool: three.js globe + billboard labels
+  runner_up: 2-D plate carree strip (the sign halves read less clearly)
+  why: the sign convention is a property of the whole sphere
+  music: data-curious
+- id: s06_north_distance
+  t:
+  - 163.9
+  - 219.6
+  sentence_times:
+  - - 163.9
+    - 166.8
+  - - 167.15
+    - 173.775
+  - - 174.125
+    - 177.6
+  - - 177.95
+    - 183.8
+  - - 184.15
+    - 191.075
+  - - 191.425
+    - 200.3
+  - - 200.65
+    - 208.325
+  - - 208.675
+    - 218.8
+  beat: building blocks · distance along a meridian
+  visual: 'Picture: the globe cut along the Brest meridian (a half-disc, BMNG on the rim). S1 keywords ''φ latitude'', ''λ
+    longitude'' (54 px). S3 a teal walker arrow climbs the meridian. S4 radius ''a'' (orange 6 px). S5 a radian wedge: an
+    arc exactly one radius long pulses gold. S6 ''1° = π/180 rad''. S7 the small step: gold arc ''δφ'' at the centre and the
+    matching surface arc ''δy'' (teal bracket), the equation δy = a δφ appears in the maths zone. S8 CalcStack: 6371 km ×
+    π/180 ≈ 111.2 km; gold link from ''111'' to a 1-degree bracket on the meridian.'
+  voiceover: 'Now, how far apart are two places? Let''s give our angles symbols: phi, a Greek letter, for latitude, and lambda
+    for longitude. First, let''s walk due north, along a meridian. A meridian is part of a circle centred on the middle of
+    the Earth, with the Earth''s radius, a. On any circle, an arc is as long as the radius times the angle, when the angle
+    is in radians. One radian is the angle whose arc is exactly one radius long, and one degree is pi over one hundred and
+    eighty radians. So a small step in latitude, delta phi, carries us a distance delta y, equal to a times delta phi. With
+    a equal to six thousand three hundred and seventy-one kilometres, one degree of latitude is about one hundred and eleven
+    kilometres, everywhere on Earth.'
+  on_screen_eq:
+    latex: \delta y = a\,\delta\varphi
+    vallis_eq: 'unnumbered, §2.2.2 (text before (2.27)): Cartesian increments (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr), here
+      at r = a, latitude written φ (series symbol; Vallis ϑ)'
+    page_png: chapters/pages/ch02/p081.png
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths (NEW F1)
+    params:
+      lat_deg: 48.39
+      dlat_deg: 1.0
+      dlon_deg: 0.0
+      a: 6371000.0
+    test: CHECK RM01 (111.19 km); ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_degree (V1)
+  exaggeration: []
+  screen_summary: '''φ latitude'', ''λ longitude''; cut-away meridian circle radius ''a''; radian wedge (arc = radius); ''1°
+    = π/180 rad''; δy = a δφ (84 px); CalcStack 6371 km × π/180 ≈ 111 km'
+  kind: 3-D, diagram on the real globe
+  data: a = 6371 km (fluidpy.geo.constants.EARTH_RADIUS)
+  tool: three.js half-globe cut + Remotion KaTeX (kit tex.tsx CalcStack)
+  runner_up: flat SVG circle diagram (loses the link to the real Earth)
+  why: the arc-length rule is about the Earth's centre; the cut makes it visible
+  music: data-curious
+- id: s07_east_distance
+  t:
+  - 219.6
+  - 268.075
+  sentence_times:
+  - - 219.6
+    - 222.95
+  - - 223.3
+    - 229.325
+  - - 229.675
+    - 235.6
+  - - 235.95
+    - 244.575
+  - - 244.925
+    - 252.5
+  - - 252.85
+    - 256.475
+  - - 256.825
+    - 262.525
+  - - 262.875
+    - 267.275
+  beat: building blocks · distance along a parallel
+  visual: 'Globe from the side, axis drawn (slate). S2 the Brest parallel ring and its centre on the axis (dot). S3 radius
+    from the axis to Brest, orange, label ''a cos φ'' with a gold right-angle tick and the angle φ at the centre. S4 the equation
+    pair (δx = a cos φ δλ above δy = a δφ, aligned at ''=''). S5-S7 a 1-degree east step (teal bracket) slides from the equator
+    to Brest to 60° N, its length readout ''111 km'' -> ''74 km'' -> ''56 km'' on the words; S8 the meridians converge on
+    the pole: ''0''.'
+  voiceover: Now let's walk due east, along a parallel. A parallel is a circle too, but its centre lies on the Earth's axis,
+    so it's smaller. Its radius is our place's distance from the axis, which is a times cosine phi. So a small step in longitude,
+    delta lambda, is a distance delta x, equal to a cosine phi times delta lambda. At the equator, cosine phi is one, so a
+    degree of longitude is again about one hundred and eleven kilometres. At Brest, it's about seventy-four kilometres. At
+    sixty degrees north, cosine phi is one half, so it's about fifty-six. And at the poles it's zero, because all the meridians
+    meet there.
+  on_screen_eq:
+    latex: \delta x = a\cos\varphi\,\delta\lambda
+    vallis_eq: 'unnumbered, §2.2.2 (text before (2.27)): δx = r cos ϑ δλ at r = a'
+    page_png: chapters/pages/ch02/p081.png
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths (NEW F1)
+    params:
+      lat_deg:
+      - 0
+      - 48.39
+      - 60
+      - 90
+      dlon_deg: 1.0
+    test: CHECK RM02 (111.19, 73.84, 55.60, 0.00 km)
+  exaggeration: []
+  screen_summary: globe with the Brest parallel; its radius 'a cos φ' from the axis; δx = a cos φ δλ beside δy = a δφ; table
+    0° → 111 km, 48.4° → 74 km, 60° → 56 km, 90° → 0
+  kind: globe, 3-D
+  data: a; latitudes 0, 48.39, 60, 90
+  tool: three.js globe + KaTeX Layered (underbrace 'radius of the parallel' under a cos φ)
+  runner_up: 2-D side-view diagram
+  why: shows that the shrinking is the parallel getting closer to the axis
+  music: data-curious
+- id: s08_great_circle
+  t:
+  - 268.075
+  - 301.35
+  sentence_times:
+  - - 268.075
+    - 271.375
+  - - 271.725
+    - 280.35
+  - - 280.7
+    - 284.9
+  - - 285.25
+    - 288.85
+  - - 289.2
+    - 295.725
+  - - 296.075
+    - 300.55
+  beat: building blocks · shortest path
+  visual: 'S1-S2: a translucent plane through the Earth''s centre cuts the globe in a great circle (gold), then the equator
+    and a meridian light up as examples. S3: camera turns to the North Pacific; New York and Tokyo dots with names (50 px,
+    halos). S4: a dashed slate path along their latitude (the "straight west" guess). S5: the gold great-circle arc draws
+    from New York over Canada and Alaska to Tokyo, its highest point marked ''≈ 70° N''. S6 readout ''10 850 km'' (68 px).'
+  voiceover: So what's the shortest path between two places? On a sphere, it runs along a great circle, a circle whose centre
+    is the centre of the Earth, like the equator or any meridian. Take New York and Tokyo, at roughly the same latitude. You
+    might expect the shortest route to head straight west. Instead, the great circle swings far to the north, up to almost
+    seventy degrees, near Alaska. It's about ten thousand eight hundred and fifty kilometres long.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.great_circle_points and great_circle_distance (NEW F1)
+    params:
+      from:
+      - 40.71
+      - -74.01
+      to:
+      - 35.68
+      - 139.69
+      a: 6371000.0
+    test: CHECK RM03 (10 850 km, max latitude 69.8 N); V5 vs pyproj.Geod on a sphere
+  exaggeration: []
+  screen_summary: 'globe: great circle through the centre (plane disc); New York and Tokyo dots; gold great-circle arc up
+    to ''≈ 70° N''; ''10 850 km'''
+  kind: globe, 3-D
+  data: New York 40.71 N 74.01 W, Tokyo 35.68 N 139.69 E (Natural Earth places)
+  tool: three.js globe + line geometry slightly above the surface (radius ×1.002)
+  runner_up: CesiumJS polyline on the globe
+  why: a great circle is only obviously shortest on the sphere
+  music: data-curious
+- id: s09_orange_peel
+  t:
+  - 301.35
+  - 335.525
+  sentence_times:
+  - - 301.35
+    - 304.1
+  - - 304.45
+    - 309.75
+  - - 310.1
+    - 317.5
+  - - 317.85
+    - 321.625
+  - - 321.975
+    - 329.125
+  - - 329.475
+    - 334.725
+  beat: intuition · why every flat map distorts
+  visual: 'Full-width 3-D. The Blue Marble globe splits along 12 meridians into gores which fall open onto a flat plane, leaving
+    gaps between them (the ''tear''); a gold arrow on the words ''splits or stretches''. S3: two curvature arcs (north-south
+    and east-west) glow at one point (two directions at once). S5 keyword ''map projection'' with the mapping ''(φ, λ) → (x,
+    y)'' (68 px). S6 keywords ''shapes · areas · distances'' with ''choose'' underlined gold.'
+  voiceover: Now let's flatten the globe into a map. If you've ever tried to flatten the peel of an orange, you know it splits
+    or stretches. A sphere curves in two directions at once, so no flat sheet can cover it without stretching or tearing somewhere.
+    That's a mathematical fact, not a lack of skill. A rule that turns each latitude and longitude into a point on a flat
+    map is called a map projection. Every projection distorts something, so each one has to choose what to keep right.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.forward (NEW F2, projection 'gores' = interrupted sinusoidal, 12 lobes)
+    params:
+      lobes: 12
+    test: ../Fluid Dynamics/tests/geo/test_mapproj.py::test_gores_equal_area (V1, areal scale 1)
+  exaggeration:
+  - illustrative peel animation (the gores are the real interrupted sinusoidal projection)
+  screen_summary: 'the globe''s skin peels into 12 gores that open flat with gaps; then a flat sheet tries to wrap the ball
+    and creases; keyword ''map projection: (φ, λ) → (x, y)'''
+  kind: 3-D
+  data: BMNG topo
+  tool: three.js (12 gore meshes with interpolated sphere -> plane positions in a vertex shader; interrupted sinusoidal layout)
+  runner_up: an animated SVG of gores (d3-geo interrupted projection, raster cannot morph)
+  why: the gores show the tearing honestly on the real Earth; this is the one place a diagram-like move is earned
+  music: planet-wide
+- id: s10_plate_carree
+  t:
+  - 335.525
+  - 378.975
+  sentence_times:
+  - - 335.525
+    - 343.725
+  - - 344.075
+    - 349.9
+  - - 350.25
+    - 355.9
+  - - 356.25
+    - 360.075
+  - - 360.425
+    - 367.875
+  - - 368.225
+    - 378.175
+  beat: intuition · the simplest projection
+  visual: 'ProjectionMorph globe -> plate carree (t over 4 s on S1). S1 labels ''x = λ'', ''y = φ'' on the axes (54 px). S3
+    zoom on a 2 x 2 deg patch of the Bay of Biscay: the real ERA5 grid points as dots every 0.25 deg. S4 a north-south teal
+    bracket of 1 deg matches 111 km on both the equator and 60 N. S5-S6 an east-west bracket: at 60 N the true 56 km (slate)
+    vs drawn 111 km (orange), readout ''stretch 1/cos φ''; ''× 2 at 60°''; ''× ∞ at the poles'' at the top edge (gold).'
+  voiceover: 'The simplest projection uses longitude straight as x and latitude straight as y, with every degree the same
+    size. It''s called the equirectangular projection, or plate carrée, French for flat square. Data sets like the reanalysis
+    store their numbers on exactly this kind of grid. Distances north to south come out right everywhere. But a degree of
+    longitude, which really shrinks with cosine phi, is drawn just as wide as at the equator. So the map is stretched east
+    to west, by one over cosine phi: twice as wide as it should be at sixty degrees, and infinitely wide at the poles.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      projection: platecarree
+      lat_deg:
+      - 0
+      - 60
+      - 89.9
+    test: CHECK RM04 (k_east = 1, 2.000, 573; h = 1); V5 vs pyproj get_factors
+  exaggeration: []
+  screen_summary: 'globe morphs into the plate carrée world (Blue Marble); ''x = λ'', ''y = φ''; the reanalysis grid dots
+    every 0.25° zoom; stretch readout ''1/cos φ'': ''× 2 at 60°'', ''× ∞ at the poles'''
+  kind: globe -> map, 3-D morph
+  data: BMNG topo; ERA5 0.25 deg grid (coordinates of era5_global_2023-11-02T12_sfc_0p5.nc / ciaran grid)
+  tool: three.js ProjectionMorph (new kit component; sphere and target plane per vertex, UV = (λ, φ) so the raster follows
+    exactly)
+  runner_up: cartopy plate carree still + d3 overlay
+  why: the morph shows where each place goes; the real data grid ties the projection to how data is stored
+  music: planet-wide
+- id: s11_tissot
+  t:
+  - 378.975
+  - 416.075
+  sentence_times:
+  - - 378.975
+    - 387.025
+  - - 387.375
+    - 390.775
+  - - 391.125
+    - 394.4
+  - - 394.75
+    - 398.1
+  - - 398.45
+    - 401.925
+  - - 402.275
+    - 409.2
+  - - 409.55
+    - 415.275
+  beat: intuition · seeing distortion (Tissot's indicatrix)
+  visual: 'Back to the globe (reverse morph, 1.5 s); S1 gold circles of radius 500 km appear at every 30 deg of latitude and
+    longitude (on the surface, not draped text); one has a teal diameter bar ''1000 km''. S2 morph to plate carree with the
+    circles carried along. S3-S5 the three keyword pairs, each with a pointer to an example circle (equator, 60 N, 75 N).
+    S6 ''Tissot''s indicatrix'' (54 px). S7 the 60 N and 75 N circles pulse and widen (no numbers: s10 already gave × 2).'
+  voiceover: To see what a projection does, let's place identical circles all over the globe, each one thousand kilometres
+    across. Then we project the circles along with the map. Where a circle stays round, shapes are kept. Where it grows or
+    shrinks, sizes are wrong. Where it's squashed into an oval, angles are bent. These test circles are called Tissot's indicatrix,
+    after the French mathematician who invented them. On the plate carrée, the circles near the poles are pulled sideways
+    into wide ovals.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.tissot_ellipses (NEW F2)
+    params:
+      radius_km: 500
+      lat_step: 30
+      lon_step: 30
+      projection: platecarree
+    test: CHECK RM05 (width ratio 2.00 at 60 N, 3.86 at 75 N); V1 analytic small-circle limit
+  exaggeration: []
+  screen_summary: globe with gold circles every 30° (each '1000 km'); morph to plate carrée; three keyword pairs 'round →
+    shapes kept', 'bigger → sizes wrong', 'oval → angles bent'; 'Tissot's indicatrix'
+  kind: globe -> map, 3-D morph
+  data: BMNG; Tissot circles computed in Python
+  tool: three.js ProjectionMorph + Tissot line geometry (same morph uniform)
+  runner_up: cartopy `ax.tissot` stills cross-faded (no continuous morph)
+  why: circles that travel with the morph make distortion visible, and they are reused for every projection
+  music: planet-wide
+- id: s12_mercator
+  t:
+  - 416.075
+  - 455.15
+  sentence_times:
+  - - 416.075
+    - 421.85
+  - - 422.2
+    - 432.025
+  - - 432.375
+    - 436.35
+  - - 436.7
+    - 439.675
+  - - 440.025
+    - 443.85
+  - - 444.2
+    - 454.35
+  beat: intuition · Mercator's idea (conformal)
+  visual: 'S1 ''1569'' (68 px). S2 two orange stretch arrows: east-west ''× 1/cos φ'' (already), north-south ''× 1/cos φ''
+    (new, on the words ''north to south''). S3 morph plate carree -> Mercator (rows pull apart towards the poles); the 60
+    N circle turns from oval to round. S5 keyword ''conformal''. S6 the 60 N circle shows ''× 2'' across and a shaded square
+    ''× 4 area''.'
+  voiceover: 'In fifteen sixty-nine, the mapmaker Gerardus Mercator had a clever idea. If the map is stretched east to west
+    by one over cosine phi, why not stretch it north to south by exactly the same amount, at every latitude? Then a small
+    circle gets bigger, but it stays a circle. Shapes and angles are kept at every point. A projection that keeps angles is
+    called conformal. On Mercator''s map, every test circle is round, but they grow towards the poles: twice as wide at sixty
+    degrees, and so four times the area.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      projection: mercator
+      lat_deg: 60
+    test: CHECK RM06 (h = k = 2.000, areal 4.000); ../Fluid Dynamics/tests/geo/test_mapproj.py::test_mercator_conformal (V1)
+  exaggeration: []
+  screen_summary: plate carrée → Mercator morph (north-south stretch); one circle at 60° turns from oval to round; 'east-west
+    × 1/cos φ', 'north-south × 1/cos φ'; keyword 'conformal = angles kept'; '× 2 wide, × 4 area at 60°'
+  kind: map morph
+  data: BMNG; Tissot set
+  tool: three.js ProjectionMorph (platecarree -> mercator, clipped at ±85°)
+  runner_up: d3-geo SVG interpolation with raster cross-fade
+  why: Mercator is the plate carree plus one extra stretch; the morph shows exactly that move
+  music: planet-wide
+- id: s13_mercator_y
+  t:
+  - 455.15
+  - 488.725
+  sentence_times:
+  - - 455.15
+    - 458.325
+  - - 458.675
+    - 462.175
+  - - 462.525
+    - 467.7
+  - - 468.05
+    - 475.575
+  - - 475.925
+    - 480.325
+  - - 480.675
+    - 487.925
+  beat: why · where each parallel goes
+  visual: 'Picture zone: the Mercator map with a vertical ruler; small gold steps stack upward from the equator, each taller
+    than the last (the stretch). Maths zone CalcStack (aligned at ''=''): S3 δy = a δφ; S4 δy_map = a δφ / cos φ with an underbrace
+    ''Mercator''s stretch'' under 1/cos φ; S5 the integral from 0 to φ; S6 the result y = a ln tan(π/4 + φ/2) (main equation
+    96 px).'
+  voiceover: Where must each parallel go on a Mercator map? Our goal is its height, y, above the equator. A small step in
+    latitude, delta phi, is really a delta phi long. Mercator stretches it by one over cosine phi, so on the map it becomes
+    a delta phi over cosine phi. Adding up all these little steps from the equator is an integral. Its answer is y equals
+    a, times the natural log of the tan of pi over four plus phi over two.
+  on_screen_eq:
+    latex: y = a\,\ln\tan\!\left(\frac{\pi}{4} + \frac{\varphi}{2}\right)
+    vallis_eq: none (not in Vallis); standard result (Snyder 1987, USGS PP 1395, eq. 7-2), derived on screen from δy = a δφ
+      (Vallis §2.2.2 text)
+    page_png: chapters/pages/ch02/p081.png
+  on_screen_eq_extra:
+  - latex: \delta y_{\text{map}} = \frac{a\,\delta\varphi}{\cos\varphi}
+    vallis_eq: derived from δy = a δϑ (Vallis §2.2.2 text) times the Mercator stretch
+    page_png: chapters/pages/ch02/p081.png
+  - latex: y = \int_0^{\varphi} \frac{a\,d\varphi^\prime}{\cos\varphi^\prime}
+    vallis_eq: integral of the line above (no number)
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.forward (NEW F2)
+    params:
+      projection: mercator
+      lat_deg:
+      - 0
+      - 30
+      - 60
+      - 85
+    test: ../Fluid Dynamics/tests/geo/test_mapproj.py::test_mercator_y_integral (V2 sympy dy/dφ = a sec φ; V3 numerical quadrature)
+  exaggeration: []
+  screen_summary: 'Mercator map left with a ruler on the y axis; maths: δy_map = a δφ / cos φ → y = ∫₀^φ a dφ′/cos φ′ → y
+    = a ln tan(π/4 + φ/2) (96 px)'
+  kind: map + maths
+  data: none beyond a
+  tool: Remotion KaTeX (CalcStack, Layered underbraces) beside a still Mercator plate (three.js frame or cartopy)
+  runner_up: same with an SVG ruler only
+  why: first-year calculus earns the shape of the map; the ruler ties each line to the picture
+  music: planet-wide
+- id: s14_mercator_check
+  t:
+  - 488.725
+  - 533.975
+  sentence_times:
+  - - 488.725
+    - 492.075
+  - - 492.425
+    - 497.6
+  - - 497.95
+    - 504.525
+  - - 504.875
+    - 510.175
+  - - 510.525
+    - 515.225
+  - - 515.575
+    - 520.675
+  - - 521.025
+    - 528.85
+  - - 529.2
+    - 533.175
+  beat: why · check by differentiating; why no poles
+  visual: 'Maths zone CalcStack, three lines at a time (older lines dim to 60 %), each line on its sentence: S1 ''u = π/4
+    + φ/2''; S2 chain-rule product with the three factors coloured; S3 ''= 1/(2 sin u cos u) = 1/sin 2u''; S4 ''2u = π/2 +
+    φ'', ''sin(π/2 + φ) = cos φ''; S5 ''= 1/cos φ'' with a gold check and a gold link back to the stretch underbrace. Picture
+    zone: the Mercator ruler extends upward; S6 tick ''85° → y ≈ 3.1 a'' (gold); the ruler runs off the top: ''90° → ∞'';
+    the map''s top edge highlighted ''stops at 85°''.'
+  voiceover: 'Let''s check that answer by differentiating it. Call the inside angle u, which is pi over four plus phi over
+    two. The chain rule gives one over the tan of u, times one over cos squared u, times one half. That''s one over two sine
+    u cos u, which is one over the sine of two u. Two u is pi over two plus phi, and its sine is cosine phi. So the slope
+    is one over cosine phi: exactly the stretch we wanted. At eighty-five degrees, y is already about three point one times
+    the Earth''s radius, and at the pole it''s infinite. That''s why a Mercator map always stops short of the poles.'
+  on_screen_eq:
+    latex: \frac{d}{d\varphi}\ln\tan u = \frac{1}{\tan u}\cdot\frac{1}{\cos^2 u}\cdot\frac{1}{2} = \frac{1}{\sin 2u} = \frac{1}{\cos\varphi}
+    vallis_eq: none (chain-rule check of the Mercator result; not in Vallis)
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.forward (NEW F2)
+    params:
+      projection: mercator
+      lat_deg: 85
+    test: CHECK RM07 (y/a = 3.1313 at 85°); sympy check in test_mapproj.py::test_mercator_y_integral (V2)
+  exaggeration: []
+  screen_summary: 'CalcStack: u = π/4 + φ/2; d/dφ ln tan u = (1/tan u)(1/cos²u)(1/2) = 1/(2 sin u cos u) = 1/sin 2u = 1/sin(π/2
+    + φ) = 1/cos φ ✓; map: ''85° → y ≈ 3.1 a'', ''90° → ∞''; map edge at 85°'
+  kind: map + maths
+  data: none
+  tool: Remotion KaTeX CalcStack
+  runner_up: none needed
+  why: every move shown (house §6); the check doubles as the explanation of the pole problem
+  music: planet-wide
+- id: s15_greenland
+  t:
+  - 533.975
+  - 563.325
+  sentence_times:
+  - - 533.975
+    - 536.875
+  - - 537.225
+    - 543.2
+  - - 543.55
+    - 547.475
+  - - 547.825
+    - 552.725
+  - - 553.075
+    - 562.525
+  beat: intuition · the price (area)
+  visual: 'Mercator map; S2 Greenland outline (teal) with ''× 10 area'' at its centre; S3 Africa outline (orange) with ''×
+    1''. S4 both outlines lift off the map and move side by side, at Mercator size: nearly equal. S5 cross-fade to the globe:
+    the same two outlines at true size (Greenland shrinks while it travels); readouts ''30.4 million km²'' and ''2.2 million
+    km²'', ''≈ 14 ×'' (68 px).'
+  voiceover: 'The price of Mercator''s idea is size. Greenland lies around seventy degrees north, where areas are blown up
+    about ten times. Africa straddles the equator, where they hardly change. So on a Mercator map, Greenland looks almost
+    as big as Africa. In reality, Africa is about fourteen times bigger: about thirty point four million square kilometres,
+    against about two point two million.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.polygon_area (NEW F1) + fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      polygons:
+      - Greenland
+      - Africa
+      projection: mercator
+    test: CHECK RM08 (true ratio 13.5-14.5; Mercator-drawn ratio Africa/Greenland 0.8-1.5; sec²(70°) ≈ 8.5-10.5 said as "about
+      ten")
+  exaggeration: []
+  screen_summary: Mercator world with Greenland and Africa outlined gold; '× 10 area at 70° N'; Greenland outline slides onto
+    the globe and shrinks to its true size beside Africa; '30.4 vs 2.2 million km²', '≈ 14 ×'
+  kind: map + globe, 3-D
+  data: Natural Earth 50m admin-0 (Greenland, Africa = union of African countries); areas computed on the sphere
+  tool: three.js ProjectionMorph with outlines as line geometry; outline areas from Python
+  runner_up: d3-geo SVG outlines with geoArea
+  why: the size illusion and its correction in one continuous move
+  music: planet-wide
+- id: s16_rhumb
+  t:
+  - 563.325
+  - 603.725
+  sentence_times:
+  - - 563.325
+    - 565.65
+  - - 566.0
+    - 571.75
+  - - 572.1
+    - 576.075
+  - - 576.425
+    - 579.025
+  - - 579.375
+    - 581.675
+  - - 582.025
+    - 589.35
+  - - 589.7
+    - 596.6
+  - - 596.95
+    - 602.925
+  beat: why · why use Mercator (rhumb line)
+  visual: Mercator map centred on 180 deg; S1 a compass rose at New York with a fixed heading needle. S3 keyword 'rhumb line'.
+    S4 the straight teal line draws New York -> Tokyo with readout '12 800 km'. S5 the gold great circle (from s08) draws,
+    bending to 70 N, readout '10 850 km'; '≈ 1900 km shorter' between them. S6 the band 25 S-25 N brightens slightly with
+    the keyword 'tropics' (no number).
+  voiceover: So why use Mercator at all? Because angles are true, a course with a fixed compass heading is a straight line
+    on the map. A sailor could rule a line and simply hold that heading. Such a line is called a rhumb line. But it isn't
+    the shortest route. From New York to Tokyo, the straight line on the Mercator map is about twelve thousand eight hundred
+    kilometres long. The great circle is nearly two thousand kilometres shorter, and on this map it bends up towards the Arctic.
+    Near the equator the stretch is small, so weather charts of the tropics often use Mercator.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.rhumb_line and great_circle_distance (NEW F1)
+    params:
+      from:
+      - 40.71
+      - -74.01
+      to:
+      - 35.68
+      - 139.69
+    test: CHECK RM09 (rhumb 12 788 km, great circle 10 850 km, difference 1 938 km; sec 25° = 1.103)
+  exaggeration: []
+  screen_summary: 'Mercator Pacific map: straight teal rhumb line New York → Tokyo ''12 800 km''; gold great circle bending
+    north ''10 850 km''; ''≈ 1900 km shorter''; compass rose with a constant heading; tropics band highlighted'
+  kind: map
+  data: same two cities; Mercator clipped at ±80°
+  tool: three.js ProjectionMorph still (same component) + line geometry
+  runner_up: cartopy Mercator still with geodesic lines
+  why: shows both the strength (straight compass course) and the cost (not shortest)
+  music: planet-wide
+- id: s17_equal_earth
+  t:
+  - 603.725
+  - 634.225
+  sentence_times:
+  - - 603.725
+    - 611.05
+  - - 611.4
+    - 617.025
+  - - 617.375
+    - 622.35
+  - - 622.7
+    - 628.7
+  - - 629.05
+    - 633.425
+  beat: contrast · keeping areas instead (Equal Earth)
+  visual: S2 keyword 'equal-area' (54 px). S3 morph Mercator -> Equal Earth (2018 shown as '2018', 68 px, on its word). S4
+    the Tissot ovals each get a translucent fill of identical area (a small '= area' pointer); the 60 N 150 E oval tilts.
+    Greenland and Africa outlines are visible in their true ratio.
+  voiceover: 'Sometimes we care about amounts, not shapes: how much of the world is desert, or where most of the rain falls.
+    Then we want an equal-area projection, in which every region keeps its true area. The Equal Earth projection, published
+    in twenty eighteen, is one of them. All the test circles cover the same area, but towards the edges they''re squashed
+    and tilted. We''ll use it for the climate maps of the whole world later in this series.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      projection: equalearth
+      points:
+      - - 0
+        - 0
+      - - 60
+        - 0
+      - - 60
+        - 150
+    test: CHECK RM10 (areal scale 1.000 ± 1e-6 at every Tissot centre; max angular distortion 17°, 30°, 58°); V5 vs pyproj
+  exaggeration: []
+  screen_summary: morph Mercator → Equal Earth; Tissot ovals all the same area, tilted near the edges; Greenland and Africa
+    outlines back to their true ratio; keyword 'equal-area'
+  kind: map morph
+  data: BMNG; Tissot set
+  tool: three.js ProjectionMorph (mercator -> equalearth, Šavrič et al. 2019 polynomial in GLSL)
+  runner_up: cartopy EqualEarth still
+  why: the same circles make the trade-off (area vs shape) visible
+  music: planet-wide
+- id: s18_polar
+  t:
+  - 634.225
+  - 671.4
+  sentence_times:
+  - - 634.225
+    - 640.65
+  - - 641.0
+    - 645.45
+  - - 645.8
+    - 653.65
+  - - 654.0
+    - 657.875
+  - - 658.225
+    - 663.0
+  - - 663.35
+    - 670.6
+  beat: contrast · polar charts (polar stereographic)
+  visual: 'S2 camera rises above the pole (flight). S3 morph globe -> polar stereographic plane (lat_ts 60, hemisphere to
+    the equator): parallels as rings, meridians as spokes. S4 the Tissot circles stay round and grow outward. S5 the 60 N
+    ring turns gold: ''true scale''. S6 ''−7 %'' at the pole, ''+87 %'' at the equator (68 px).'
+  voiceover: Near the poles, Mercator breaks down completely, so polar charts use another projection. Imagine looking down
+    on the Earth from high above the North Pole. In the polar stereographic projection, the parallels become circles around
+    the pole, and the meridians become spokes. It's conformal too, so the test circles stay round. Weather services usually
+    make it true to scale at sixty degrees. Then the scale is about seven percent too small at the pole, and about eighty-seven
+    percent too big at the equator.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      projection: polar_stereographic
+      lat_ts: 60
+      lat_deg:
+      - 90
+      - 60
+      - 0
+    test: CHECK RM11 (k = 0.933, 1.000, 1.866); V5 vs pyproj
+  exaggeration: []
+  screen_summary: camera above the North Pole; morph to polar stereographic (northern hemisphere disc); round Tissot circles
+    growing outward; ring '60° true scale' gold; '−7 % at the pole', '+87 % at the equator'
+  kind: globe -> map, 3-D morph
+  data: BMNG; Tissot set (northern hemisphere)
+  tool: three.js ProjectionMorph (polar stereographic)
+  runner_up: cartopy NorthPolarStereo still
+  why: the view from above the pole is the projection's own geometry
+  music: planet-wide
+- id: s19_lambert
+  t:
+  - 671.4
+  - 708.725
+  sentence_times:
+  - - 671.4
+    - 677.525
+  - - 677.875
+    - 683.775
+  - - 684.125
+    - 688.725
+  - - 689.075
+    - 693.525
+  - - 693.875
+    - 700.675
+  - - 701.025
+    - 707.925
+  beat: contrast · mid-latitude charts (Lambert conformal conic)
+  visual: S2 a translucent orange cone lowers onto the globe, cutting it in two gold rings (40 N, 60 N). S3 keyword 'standard
+    parallels'. S4 the cone (carrying the Blue Marble) slits along 180 deg and unrolls into the Lambert fan, then crops to
+    Europe (35-65 N, 25 W-35 E). S5 a band 35-65 N with one readout 'scale within ≈ 2 %' (54 px; the CHECK values 1.8 / 1.5
+    / 2.3 % stay in the manifest, only "about two percent" is spoken). S6 a wind arrow and an isobar crossing at a marked
+    angle, unchanged when the cone unrolls (gold angle arc).
+  voiceover: In the middle latitudes, most weather charts use the Lambert conformal conic projection. Picture a cone set over
+    the globe like a lampshade, cutting into it along two parallels. Along those two standard parallels, the scale is exactly
+    right. For a map of Europe, we might choose forty and sixty degrees north. Then everywhere from thirty-five to sixty-five
+    degrees, the scale is never more than about two percent off. And because it's conformal, the angles between winds, isobars
+    and coastlines are drawn correctly.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      projection: lcc
+      lat_1: 40
+      lat_2: 60
+      lat_deg:
+      - 35
+      - 40
+      - 45
+      - 50
+      - 55
+      - 60
+      - 65
+    test: CHECK RM12 (k = 1.018, 1.000, 0.989, 0.985, 0.988, 1.000, 1.023; max |k − 1| = 2.3 %); V5 vs pyproj
+  exaggeration: []
+  screen_summary: '3-D: translucent cone over the globe cutting at 40° N and 60° N (gold rings); the cone unrolls into a fan-shaped
+    Europe map; band 35°-65° ''scale within ≈ 2 %''; keyword ''standard parallels'''
+  kind: 3-D, globe -> map
+  data: BMNG; Natural Earth 50m coast
+  tool: three.js cone mesh (projected UVs) + ProjectionMorph to LCC
+  runner_up: cartopy LambertConformal still
+  why: the lampshade picture is the projection; unrolling it shows why the scale is right near the two rings
+  music: planet-wide
+- id: s20_which
+  t:
+  - 708.725
+  - 740.475
+  sentence_times:
+  - - 708.725
+    - 711.775
+  - - 712.125
+    - 723.25
+  - - 723.6
+    - 727.925
+  - - 728.275
+    - 739.675
+  beat: why · the forecasters' rule
+  visual: 'Full width: three small conformal maps arranged by latitude band (tropics bottom, mid-latitudes middle, polar top)
+    with keywords ''tropics · Mercator'', ''middle latitudes · Lambert'', ''poles · polar stereographic''; S2 an Equal Earth
+    thumbnail with ''amounts · equal-area''. S3 a scale bar on the Lambert map ''1000 km (at 50° N)'' that visibly lengthens
+    when slid to 65 N (no number on screen).'
+  voiceover: 'So here''s the rule that forecasters follow. Weather charts need true angles, so they use conformal projections:
+    Mercator in the tropics, Lambert in the middle latitudes, and polar stereographic near the poles. Maps that compare amounts
+    use an equal-area projection. And since the scale changes across any map, a scale bar, like this one for a thousand kilometres,
+    is only right near the latitude it''s drawn for, here fifty degrees north.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.mapproj.scale_factors (NEW F2)
+    params:
+      projection: lcc
+      lat_1: 40
+      lat_2: 60
+      lat_deg:
+      - 50
+      - 65
+    test: CHECK RM12 (scale-bar stretch 3.8 % between 50 and 65 N, manifest only)
+  exaggeration: []
+  screen_summary: 'three mini maps side by side (Mercator tropics band, Lambert Europe, polar cap) under ''conformal: angles
+    true''; a fourth Equal Earth ''equal-area: amounts''; scale bar ''1000 km (at 50° N)'''
+  kind: map (summary)
+  data: BMNG; Natural Earth
+  tool: cartopy + cartostyle thumbnails (4 stills) composited in Remotion
+  runner_up: the three.js morph frames reused as stills
+  why: a summary beat; stills are crisp and cheap
+  music: planet-wide
+- id: s21_isobars
+  t:
+  - 740.475
+  - 775.9
+  sentence_times:
+  - - 740.475
+    - 743.45
+  - - 743.8
+    - 750.825
+  - - 751.175
+    - 756.375
+  - - 756.725
+    - 762.375
+  - - 762.725
+    - 769.7
+  - - 770.05
+    - 775.1
+  beat: building blocks · reading isobars
+  visual: 'Full-width map x 80-1840, y 40-860; LCC lon0 -10, parallels 40/60, region 35-62 N, 35 W-15 E. Layers revealed on
+    their words: S1 base (MODIS Aqua true colour 2 Nov 2023, 8 % land veil, Natural Earth 50m coast 3 px, borders 1.8 px dashed);
+    S2 date chip none (the date is spoken; ''2 Nov 2023 · 12 UTC'' as a 44-px keyword top-left); S3 isobars draw (white 80
+    %, 2.6 px; 1000 hPa line 4.2 px); S4 <= 10 in-line labels (44 px, full values, upright, halos) appear; S5 ''L'' (red #ff7a8a,
+    120 px) at the ERA5 minimum with ''956'' under it, ''H'' (blue #7fb2ff) at the box maximum with ''1030'' (54 px); S6 a
+    gold pulse on L then a gold bracket across the packed isobars over the Channel.'
+  voiceover: Now let's read the lines on a weather map. Here's Storm Ciarán again, at midday on the second of November, twenty
+    twenty-three, on a Lambert map. The lines are isobars, joining places with the same sea-level pressure. They're drawn
+    every four hectopascals, and each one is labelled with its full value. A low is marked with an L, and a high with an H,
+    with the central pressure written just below the letter. So your eye goes first to the letters, and then to how tightly
+    the lines are packed.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_centre (L position and value); isobars by cartopy contour of ERA5 msl
+    params:
+      time: 2023-11-02T12
+      interval_hPa: 4
+    test: CHECK RM13 (L 955.9 hPa at 52.5 N 1.75 E; H label = box max 1029.8 -> '1030'; all labels multiples of 4)
+  exaggeration: []
+  screen_summary: 'cartostyle Ciarán chart 12 UTC 2 Nov 2023 (LCC 40/60): isobars every 4 hPa with in-line full labels (''972'',
+    ''996'' …); L ''956'' over the North Sea, H ''1030'' south-west; Brest dot'
+  kind: map (satellite + analysis)
+  data: ERA5 msl 12 UTC 2 Nov 2023 (data/derived/ch00/ciaran_2023_sfc_1102.{bin,json}); MODIS Aqua true colour 2 Nov 2023
+    (exists); Natural Earth 10m/50m (exists)
+  tool: 'cartopy + cartostyle movie preset (layered transparent PNGs: base, isobars, labels, H/L) -> Remotion fades'
+  runner_up: d3-geo SVG over the MODIS jpg (capability S2 runner-up)
+  why: capability test S2 winner (imagery + white isobars with dark halos); layered PNGs allow one reveal per phrase
+  music: data-curious
+- id: s22_spacing
+  t:
+  - 775.9
+  - 818.725
+  sentence_times:
+  - - 775.9
+    - 777.9
+  - - 778.25
+    - 780.475
+  - - 780.825
+    - 783.425
+  - - 783.775
+    - 792.775
+  - - 793.125
+    - 797.875
+  - - 798.225
+    - 808.625
+  - - 808.975
+    - 812.75
+  - - 813.1
+    - 817.925
+  beat: building blocks · spacing means wind
+  visual: 'Same map. S2 keyword ''spacing''. S3 a gold 100-km ruler laid across the isobars at 50.25 N 1.75 W (perpendicular
+    to them); the two isobars it crosses brighten; readout ''7.5 hPa per 100 km'' (54 px) with a gold link from the ruler.
+    S4 a teal wind arrow at the point and ''22 m/s''. S5 camera (MapCamera) pans to the Azores high: the second ruler crosses
+    no isobar; ''< 0.5 hPa per 100 km'', ''3–4 m/s'' (short teal arrow). S6 keyword ''closer isobars → stronger wind''.'
+  voiceover: 'How strong is the wind? We can tell from the spacing. Let''s measure it in two places. Over the English Channel,
+    the pressure changes by about seven and a half hectopascals every hundred kilometres: nearly two isobars. There, the wind
+    near the ground is about twenty-two metres per second. Near the Azores high, the pressure changes by less than half a
+    hectopascal per hundred kilometres, and the wind is only about three or four metres per second. So the closer the isobars,
+    the stronger the wind. Why that''s so is the subject of the video on the geostrophic wind.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.gradient (NEW F1, centred differences with δx = a cos φ δλ) on ERA5 msl; wind speed via fluidpy.geo.vectors.norm
+    params:
+      points:
+      - - 50.25
+        - -1.75
+      - - 35.5
+        - -34.75
+    test: CHECK RM14 (|∇p| 7.48 and 0.01-0.5 hPa/100 km; speed 21.7 and 2.9-3.7 m/s)
+  exaggeration: []
+  screen_summary: 'two gold 100-km rulers across the isobars: Channel ''7.5 hPa per 100 km'' · ''22 m/s''; near the Azores
+    ''< 0.5 hPa per 100 km'' · ''3–4 m/s''; keyword ''closer isobars → stronger wind'''
+  kind: map
+  data: ERA5 msl, u10, v10 12 UTC 2 Nov 2023 (exists)
+  tool: cartopy layers + Remotion MapCamera and SVG rulers
+  runner_up: d3-geo SVG
+  why: picture-to-number gold links on the real map (house §6)
+  music: data-curious
+- id: s23_troughs_ridges
+  t:
+  - 818.725
+  - 847.775
+  sentence_times:
+  - - 818.725
+    - 822.0
+  - - 822.35
+    - 829.9
+  - - 830.25
+    - 834.75
+  - - 835.1
+    - 841.1
+  - - 841.45
+    - 846.975
+  beat: building blocks · troughs and ridges at the ground
+  visual: 'The 18 UTC 27 Oct 2026 chart, zoomed (MapCamera) on the Quebec high and the low off Labrador. S1-S2 one tongue
+    of isobars glows; a pressure profile across it (small inline chart, 52-px ticks) shows the dip. S3 the forecaster''s trough
+    line from the bulletin draws as a dashed orange line; keyword ''trough''. S4 the ridge axis computed from the GFS pressure
+    draws (slate dash-dot); keyword ''ridge''. S5 two small icons: cloud with showers by the trough, sun by the ridge.'
+  voiceover: Isobars also make two shapes worth naming. Where they bulge outwards from a low in a long, narrow tongue, the
+    pressure along a line is lower than on either side. That line is called a trough, and charts draw it as a dashed line.
+    Where they bulge outwards from a high, the higher pressure reaches out along a line called a ridge. Troughs often bring
+    cloud and showers, while ridges usually bring a quieter spell.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.axes.trough_ridge_axes (NEW F10) on GFS msl; fluidpy.data.wpc.bulletin (NEW F7) for TROF
+    params:
+      valid: 2026-10-27T18Z
+      smooth_km: 300
+    test: ../Fluid Dynamics/tests/diag/test_axes.py::test_sine_wave_axes (V1); CHECK RM15 (the shown TROF lies within 150
+      km of a computed trough axis)
+  exaggeration: []
+  screen_summary: 'latest North-Atlantic chart crop: a WPC trough (orange dashed) inside a tongue of isobars; a ridge axis
+    (slate dash-dot) from the high over Quebec; keywords ''trough'', ''ridge'''
+  kind: map
+  data: WPC CODSUS 18Z 27 Oct 2026 TROF lines (D7); GFS msl 18Z (D6)
+  tool: cartopy + MetPy (dashed trough style) layers + Remotion MapCamera
+  runner_up: d3-geo SVG
+  why: the forecaster's own trough lines are the real thing; ridges are not drawn by WPC, so ours are computed and drawn differently
+  music: data-curious
+- id: s24_upper_air
+  t:
+  - 847.775
+  - 881.75
+  sentence_times:
+  - - 847.775
+    - 854.8
+  - - 855.15
+    - 857.8
+  - - 858.15
+    - 863.1
+  - - 863.45
+    - 867.525
+  - - 867.875
+    - 873.35
+  - - 873.7
+    - 880.95
+  beat: building blocks · maps of the air aloft
+  visual: '3-D: the s21 Ciarán map tilts back into a ground plate (three.js tilted plate, C1 pattern). S3 two objects rise:
+    a flat translucent slab at a fixed height (slate, ''pressure at one height'') and a gently curved sheet (''height of one
+    pressure'', teal), the sheet wins (slab fades). S4 keyword ''500 hPa''. S5 a side bracket from the ground to the sheet:
+    ''≈ 5.5 km'', with a fill gauge ''½ of the air below''.'
+  voiceover: Weather near the ground is steered by the air higher up, so forecasters also draw maps of the air aloft. But
+    they do it in a surprising way. Instead of showing the pressure at one height, they show the height of one pressure. The
+    most famous is the five hundred hectopascal map. Remember that about half of all the air lies below five and a half kilometres.
+    So the five hundred hectopascal surface floats at about that height, with half the air below it and half above.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure (half-pressure height, recap of the weather-basics movie)
+    params:
+      T: 288.15
+      p0_hPa: 1013.25
+    test: CHECK RM16 (p(5.8 km) ≈ 507 hPa, as in weather basics; z500 mean in the box 5.4-5.6 km)
+  exaggeration:
+  - 500-hPa sheet height variations drawn ×500 (said in s25)
+  screen_summary: '3-D column over the map: a horizontal plate at 5.5 km ''height fixed'' vs a bumpy sheet ''500 hPa''; ''½
+    of the air below'''
+  kind: 3-D
+  data: ERA5 z500 12 UTC 2 Nov 2023 (exists, ciaran_2023_upper_1102)
+  tool: three.js tilted map plate + heightfield sheet (the s25 component)
+  runner_up: 2-D schematic cross-section
+  why: the height of a pressure is a surface; only 3-D shows a surface floating above a map
+  music: data-curious
+- id: s25_500_3d
+  t:
+  - 881.75
+  - 929.25
+  sentence_times:
+  - - 881.75
+    - 887.575
+  - - 887.925
+    - 894.4
+  - - 894.75
+    - 899.875
+  - - 900.225
+    - 906.25
+  - - 906.6
+    - 914.95
+  - - 915.3
+    - 922.075
+  - - 922.425
+    - 928.45
+  beat: intuition · the 500 hPa surface over Ciarán
+  visual: 'three.js: the ERA5 z500 field (0.25 deg, 35-70 N, 50 W-15 E) as a displaced sheet over the tilted map plate, height
+    deviation ×500, colour cmocean ''deep_r''-type sequential (low = bright on house-dark, perceptual), contour lines draped
+    on the sheet every 60 m (line geometry from Python contours). S2 keyword ''× 500 taller''. S3 billboard ''≈ 5100 m'' at
+    the dip over the North Sea; S4 ''≈ 6000 m'' at the south-west corner. S5 keyword ''geopotential height''. S6 the contours
+    drop vertically onto the flat map (camera returns to top-down): the 500-hPa chart. S7 labels in dam (''516'', ''540'',
+    ''564'', ''588'', 44 px); the ''516'' label pulses with ''= 5160 m''.'
+  voiceover: Here's that surface over Storm Ciarán, at the same moment, lifted out of the map. We've drawn its hills and valleys
+    five hundred times taller than they really are, so we can see them. Over the storm, the surface dips to about five thousand
+    one hundred metres. Far to the south-west, over the warm subtropics, it rises to nearly six thousand. Forecasters call
+    this height the geopotential height; for us, it's the height above sea level, to within a fraction of a percent. Lines
+    of equal height are drawn every sixty metres and labelled in decametres, tens of metres. So the label five hundred and
+    sixteen means five thousand one hundred and sixty metres.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco (z / 9.80665 = geopotential height; product exists) + matplotlib contour paths at 60-m levels
+      (builder, CHECK RM17)
+    params:
+      level_hPa: 500
+      interval_m: 60
+      exaggeration: 500
+    test: CHECK RM17 (min 5114 m at 52.5 N 1.25 E -> "about 5100"; max 5968 m -> "nearly 6000"; contour levels multiples of
+      60 m)
+  exaggeration:
+  - 500-hPa surface height variations ×500 (said)
+  screen_summary: 3-D heightfield of z500 (×500) over the tilted map, coloured by height; '≈ 5100 m' at the dip, '≈ 6000 m'
+    south-west; contours every 60 m on the sheet project down onto the map; label '516' → '5160 m'
+  kind: 3-D, data
+  data: ERA5 z 500 hPa 12 UTC 2 Nov 2023 (exists)
+  tool: three.js PlaneGeometry displaced from a float32 .bin (capability T1/C1 pattern) + draped contour lines + billboards
+  runner_up: CesiumJS custom heightmap drape
+  why: a surface with hills and valleys is the idea; 3-D then flattening to contours teaches what a contour chart is
+  music: data-curious
+- id: s26_why_dips
+  t:
+  - 929.25
+  - 982.95
+  sentence_times:
+  - - 929.25
+    - 932.175
+  - - 932.525
+    - 940.275
+  - - 940.625
+    - 945.825
+  - - 946.175
+    - 950.0
+  - - 950.35
+    - 957.025
+  - - 957.375
+    - 964.0
+  - - 964.35
+    - 970.625
+  - - 970.975
+    - 977.775
+  - - 978.125
+    - 982.15
+  beat: why · cold columns are shorter
+  visual: 'Picture zone: two code-drawn translucent air columns on the ground plate, slate (250 K) and orange (270 K), each
+    with a ring at its 500-hPa height; maths zone: S2 ''H = RT/g'' recalled (68 px); S4 z₅₀₀ = (R T̄/g) ln(p₀/p) with underbraces
+    ''scale height'', ''ln 2 for 1000 → 500''; S5-S6 CalcStack with each column''s number appearing on its ring (gold links);
+    S7 gold bracket ''≈ 400 m lower'' between the rings; S8 a third, shorter column from ''956 hPa'' marked ''Ciarán''.'
+  voiceover: 'Why does the surface dip over the storm? Remember the scale height, R T over g: in colder air it''s smaller,
+    so the pressure falls faster as we go up. Let''s compare two columns, both with a thousand hectopascals at the ground.
+    Let''s pretend the temperature is the same all the way up. Then the pressure halves to five hundred at a height of the
+    scale height times the natural log of two. If the column averages two hundred and fifty kelvin, that''s about five thousand
+    and seventy metres. If it averages two hundred and seventy kelvin, it''s about five thousand four hundred and eighty.
+    So under a cold column, the five hundred hectopascal surface sits about four hundred metres lower. And a low at the ground,
+    like Ciarán, starts lower still.'
+  on_screen_eq:
+    latex: z_{500} = \frac{R\,\bar T}{g}\,\ln\frac{p_0}{500\ \mathrm{hPa}}
+    vallis_eq: (2.166) z(p2) − z(p1) = −(R/g) ∫ T d ln p, with T constant (the layer mean T̄), p1 = p0, p2 = 500 hPa
+    page_png: chapters/pages/ch02/p103.png
+  physics_source:
+    fn: fluidpy.geo.atmos.hypsometric_thickness
+    params:
+      p1: 100000.0
+      p2: 50000.0
+      T:
+      - 250.0
+      - 270.0
+    test: CHECK RM18 (5071 m, 5477 m, difference 406 m); existing tests ../Fluid Dynamics/tests/geo/test_atmos.py (hypsometric)
+  exaggeration:
+  - columns schematic (not to scale horizontally)
+  screen_summary: two 3-D columns (slate cold, orange warm) from 1000 hPa; z₅₀₀ = (R T̄/g) ln(1000/500); CalcStack 287 × 250
+    / 9.81 × ln 2 ≈ 5070 m; 287 × 270 / 9.81 × ln 2 ≈ 5480 m; bracket '≈ 400 m'
+  kind: 3-D + maths
+  data: thought example (T̄ = 250 K and 270 K, p₀ = 1000 hPa); Ciarán central pressure 956 hPa
+  tool: three.js columns (kit_wb column) + Remotion KaTeX CalcStack
+  runner_up: 2-D side-by-side bars
+  why: reuses the weather-basics scale height; the columns make 'shorter' literal
+  music: data-curious
+- id: s27_upper_shapes
+  t:
+  - 982.95
+  - 1018.05
+  sentence_times:
+  - - 982.95
+    - 988.625
+  - - 988.975
+    - 994.175
+  - - 994.525
+    - 998.9
+  - - 999.25
+    - 1005.975
+  - - 1006.325
+    - 1011.825
+  - - 1012.175
+    - 1017.25
+  beat: intuition · troughs, ridges and winds aloft
+  visual: S1 a small polar-stereographic inset (top-right, 420 px) of the northern-hemisphere 500-hPa heights, the waves highlighted
+    (needs the global z500 hour, D3). S2 on the main chart the computed trough axis (orange dashed) and a ridge axis (slate
+    dash-dot). S3 the trough axis lengthens to Spain (gold pointer 'Spain'). S4 teal streaklines from the ERA5 500-hPa wind
+    flow along the contours (particles, RK2). S5 gold ring west of Portugal '69 m/s'.
+  voiceover: On the five hundred hectopascal map, the lines make long waves around the planet. A dip towards the equator is
+    a trough, and a bulge towards the pole is a ridge. Ciarán sits under a deep trough that reaches down towards Spain. And
+    the winds up here blow almost exactly along the height lines, fastest where the lines are packed. West of Portugal, the
+    wind at this height is about sixty-nine metres per second. These waves and their winds get their own videos later in the
+    series.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.axes.trough_ridge_axes (NEW F10); fluidpy.diag.trajectories (RK2 tracks)
+    params:
+      level_hPa: 500
+      time: 2023-11-02T12
+    test: CHECK RM19 (trough axis from 55 N 1.75 E to 40 N 5.5 W; max |v500| 68.65 m/s at 40.5 N 8.5 W; mean angle wind vs
+      contour < 15° where |v| > 20 m/s)
+  exaggeration:
+  - streakline particles time-compressed (one hour of flow in about 3 s)
+  screen_summary: 500-hPa chart (contours every 60 m) with the trough axis (orange dashed) from the North Sea to Spain and
+    a ridge axis to the west; ERA5 500-hPa streaklines along the contours; '69 m/s' west of Portugal; inset hemispheric polar-stereographic
+    500-hPa map showing the waves
+  kind: map + data animation
+  data: ERA5 z, u, v 500 hPa 12 UTC 2 Nov 2023 (exists); ERA5 global z500 same hour (NEW D3, for the inset)
+  tool: cartopy contours (layer PNG) + three.js particles (Python RK2 tracks, capability A2) composited in Remotion
+  runner_up: d3-geo streamlines in SVG
+  why: the moving streaklines show "blow along the lines" without arrows everywhere
+  music: data-curious
+- id: s28_three_ways
+  t:
+  - 1018.05
+  - 1040.775
+  sentence_times:
+  - - 1018.05
+    - 1020.825
+  - - 1021.175
+    - 1026.675
+  - - 1027.025
+    - 1031.1
+  - - 1031.45
+    - 1039.975
+  beat: building blocks · drawing the wind
+  visual: 'Three panels across the full width (x 80-1840), the same 6 x 6 deg patch south of Ciarán (12 UTC 2 Nov 2023): S2
+    arrows; S3 streamlines drawing themselves; S4 barbs (58-px shafts). Each keyword (54 px) under its panel on its word.'
+  voiceover: Now let's look at how maps show the wind. One way is arrows, pointing where the wind goes, with their length
+    showing its speed. Another is streamlines, which follow the flow like threads. Forecasters mostly use a third way, the
+    wind barb, because it packs an exact speed and direction into one small symbol.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco (u10, v10); barb parts via fluidpy.diag.station.barb_parts (NEW F4)
+    params:
+      box:
+      - 46
+      - 52
+      - -10
+      - -4
+    test: ../Fluid Dynamics/tests/diag/test_station.py::test_barb_parts (V1)
+  exaggeration: []
+  screen_summary: 'same patch of Ciarán''s 10-m wind three ways side by side: arrows (teal), streamlines (teal threads), barbs
+    (warm white); keywords ''arrows'', ''streamlines'', ''barbs'''
+  kind: map (three small multiples)
+  data: ERA5 u10, v10 12 UTC 2 Nov 2023 (exists)
+  tool: matplotlib/cartopy (quiver, streamplot, barbs via cartostyle.wind_barbs) layer PNGs
+  runner_up: Remotion SVG arrows and barbs from JSON
+  why: 'same data, three encodings: the comparison is the lesson'
+  music: data-curious
+- id: s29_barb_rules
+  t:
+  - 1040.775
+  - 1070.575
+  sentence_times:
+  - - 1040.775
+    - 1044.725
+  - - 1045.075
+    - 1051.275
+  - - 1051.625
+    - 1055.25
+  - - 1055.6
+    - 1062.5
+  - - 1062.85
+    - 1069.775
+  beat: building blocks · how a barb works
+  visual: 'Picture zone: a large barb (staff 300 px) built piece by piece; a faint wind arrow (teal) shows where the air goes,
+    opposite to the staff (S2); feathers appear one per word: short ''5 kt'', long ''10 kt'', pennant ''50 kt'' (54 px). S5
+    a calm station: a double circle, ''calm''. Maths zone: ''round to the nearest 5 kt''.'
+  voiceover: A barb has a staff, a short line from the station. The staff points towards where the wind comes from, just as
+    winds are named by where they come from. Feathers on the far end give the speed, in knots. A short feather means five
+    knots, a long feather ten, and a filled triangle, called a pennant, fifty. The speed is rounded to the nearest five knots,
+    and a calm wind is drawn as a circle around the station.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative (convention: WMO GDPFS App. II-4 / NOAA WPC station plot guide)
+  screen_summary: 'one big barb (station circle, staff to the west): labels ''staff → from'', ''short = 5 kt'', ''long = 10
+    kt'', ''pennant = 50 kt'', ''calm'' (circle)'
+  kind: diagram
+  data: none (convention)
+  tool: Remotion SVG (new kit component WindBarb, shared with the station model)
+  runner_up: matplotlib barbs rendered large
+  why: a convention is taught best by building the symbol
+  music: data-curious
+- id: s30_barb_examples
+  t:
+  - 1070.575
+  - 1103.575
+  sentence_times:
+  - - 1070.575
+    - 1072.3
+  - - 1072.65
+    - 1079.775
+  - - 1080.125
+    - 1086.65
+  - - 1087.0
+    - 1098.1
+  - - 1098.45
+    - 1102.775
+  beat: building blocks · reading barbs
+  visual: S1 barb A appears (staff to the south-west) with 'from the south-west · 15 kt'. S2 a gold link from the s27 jet
+    ring to the maths zone '69 m/s'. S3 CalcStack '68.7 ÷ 0.514 ≈ 134 kt'; S3 '→ 135 kt'; S4 '= 50 + 50 + 10 + 10 + 10 + 5',
+    each term lighting its feather as barb B grows (staff from the west-south-west, the real 500-hPa direction).
+  voiceover: 'Let''s read some. A staff pointing south-west, with one long and one short feather, is a south-westerly of fifteen
+    knots. Now the strongest wind on our five hundred hectopascal map: sixty-nine metres per second. To turn it into knots,
+    we divide by point five one four metres per second per knot, and get about one hundred and thirty-four, which rounds to
+    one hundred and thirty-five. So we draw two pennants, three long feathers and one short one.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.constants.KNOT; fluidpy.diag.station.barb_parts (NEW F4); fluidpy.geo.atmos.wind_direction_from
+    params:
+      speed_ms: 68.65
+    test: CHECK RM20 (133.5 kt -> 135; parts (2, 3, 1)); RM21 (15 kt -> (0, 1, 1))
+  exaggeration: []
+  screen_summary: 'barb A: SW staff, 1 long + 1 short ''15 kt''; CalcStack 68.7 ÷ 0.514 ≈ 134 kt → 135 kt = 50 + 50 + 10 +
+    10 + 10 + 5; barb B drawn feather by feather'
+  kind: diagram with real numbers
+  data: ERA5 500-hPa max wind 68.65 m/s at 40.5 N 8.5 W (exists)
+  tool: Remotion SVG WindBarb + CalcStack
+  runner_up: matplotlib barb stills
+  why: goal first, then the calculation, then the symbol
+  music: data-curious
+- id: s31_barb_map
+  t:
+  - 1103.575
+  - 1125.75
+  sentence_times:
+  - - 1103.575
+    - 1109.0
+  - - 1109.35
+    - 1112.875
+  - - 1113.225
+    - 1121.3
+  - - 1121.65
+    - 1124.95
+  beat: intuition · barbs on the real map
+  visual: The s21 map; S1 barbs fade in (cartostyle.wind_barbs, regridded in the projected plane, 2.6 px, 58-px shafts) under
+    the isobars. S3 a gold ring over the Channel/Biscay feathers and a pulse on the packed isobars (link to s22). S4 ring
+    on the short barbs near the Azores high.
+  voiceover: Here are barbs for the winds near the ground around Ciarán, from the reanalysis. Each barb stands for the wind
+    at one grid point. The most feathers crowd together south of the low, over the Channel and the Bay of Biscay, exactly
+    where the isobars are packed. Around the high, the barbs are short and few.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.barb_parts (NEW F4) on ERA5 10-m winds
+    params:
+      time: 2023-11-02T12
+    test: CHECK RM22 (barbs with >= 4 long feathers lie where |∇p| > 3 hPa/100 km)
+  exaggeration: []
+  screen_summary: Ciarán chart (s21) with regridded 10-m barbs (15 × 8 across the frame, muted warm white); gold ring where
+    feathers crowd south of the low; ring at the Azores high
+  kind: map
+  data: ERA5 u10, v10, msl 12 UTC 2 Nov 2023 (exists)
+  tool: cartopy + cartostyle.wind_barbs layer
+  runner_up: Remotion SVG barbs from JSON
+  why: cartostyle regrids barbs in the projected plane (equal spacing on the map)
+  music: data-curious
+  sfx:
+    kind: wind_gusty
+    at: S1
+    intensity: 0.3
+    note: real 10-m winds on screen
+- id: s32_metar
+  t:
+  - 1125.75
+  - 1173.175
+  sentence_times:
+  - - 1125.75
+    - 1128.75
+  - - 1129.1
+    - 1134.325
+  - - 1134.675
+    - 1140.8
+  - - 1141.15
+    - 1145.175
+  - - 1145.525
+    - 1148.875
+  - - 1149.225
+    - 1157.45
+  - - 1157.8
+    - 1161.15
+  - - 1161.5
+    - 1172.375
+  beat: building blocks · a station's coded report (METAR)
+  visual: 'Full width: a small locator (Brest airport dot on the MODIS map, top-left 600 px). The METAR line typed out (mono
+    54 px, warm white) along y 300; groups decoded on their words with gold underlines and keyword translations below (54
+    px). On ''220'' a small compass with a staff from 220 deg; on ''gusting'' a gust readout ''61 kt''.'
+  voiceover: Where do the numbers on a weather map start? At weather stations, which report every hour in short coded messages.
+    Here's a real one, from Brest airport, at midnight universal time as Ciarán arrived. It's called a METAR, the code used
+    at airports. LFRB is the airport's name in code. Zero two, zero zero zero zero Z means the second of the month at midnight,
+    and Z stands for universal time. AUTO means the report was made automatically. Two two zero, four two, G six one, K T,
+    says the wind blew from two hundred and twenty degrees, at forty-two knots, gusting to sixty-one knots.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.decode_metar (NEW F3; MetPy metpy.io.parse_metar as V5 benchmark)
+    params:
+      report: LFRB 020000Z AUTO 22042G61KT 2400 RA BR BKN014/// OVC022/// //////TCU 11/10 Q0963
+    test: CHECK RM23 (dir 220, 42 kt, gust 61 kt, vis 2400 m, T 11, Td 10, QNH 963)
+  exaggeration:
+  - the '///' and TCU and TEMPO groups are cut from the on-screen line (said nowhere; noted in the manifest)
+  screen_summary: 'the real report in monospace 54 px: ''LFRB 020000Z AUTO 22042G61KT 2400 RA BR BKN014 OVC022 11/10 Q0963'';
+    groups underlined gold as decoded: ''Brest airport'', ''2nd, 00:00 UTC'', ''automatic'', ''from 220°, 42 kt, gusts 61
+    kt'' (the later groups are decoded in s33)'
+  kind: chart (text decode) + locator map
+  data: METAR LFRB 2023-11-02T00:00Z from NOAA ISD (07110099999, REM field 'MET… METAR LFRB 020000Z …'; NEW D1)
+  tool: Remotion text + SVG
+  runner_up: none
+  why: the raw message is the real data; decoding it is the skill
+  music: data-curious
+- id: s33_metar_rest
+  t:
+  - 1173.175
+  - 1221.475
+  sentence_times:
+  - - 1173.175
+    - 1180.75
+  - - 1181.1
+    - 1189.275
+  - - 1189.625
+    - 1196.95
+  - - 1197.3
+    - 1202.675
+  - - 1203.025
+    - 1212.45
+  - - 1212.8
+    - 1220.675
+  beat: building blocks · the rest of the report
+  visual: Same line; each group decoded in turn, gold underline + keyword ('BKN014' -> 'broken · 1400 ft', 'OVC022' -> 'overcast
+    · 2200 ft', both heights spoken). S6 six icons (wind, rain drop, cloud, thermometer, droplet, barometer) line up under
+    the message.
+  voiceover: Then comes the visibility, two thousand four hundred metres, and R A and B R, short for rain and mist. B K N,
+    zero one four, means broken cloud, covering more than half the sky, at one thousand four hundred feet. O V C, zero two
+    two, means overcast, a fully covered sky, at two thousand two hundred feet. Eleven slash ten is the temperature and the
+    dew point, in degrees Celsius. And Q zero nine six three is the pressure, nine hundred and sixty-three hectopascals, reduced
+    to sea level the way pilots use it. In one short line, the station has told us the wind, the weather, the clouds, the
+    temperature, the humidity and the pressure.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.decode_metar (NEW F3)
+    params: {}
+    test: CHECK RM23
+  exaggeration: []
+  screen_summary: 'rest of the METAR decoded: ''2400 m'', ''rain · mist'', ''broken 1400 ft'', ''overcast 2200 ft'', ''T 11
+    °C · Td 10 °C'', ''963 hPa''; six small icons in a row'
+  kind: chart (text decode)
+  data: same METAR (D1)
+  tool: Remotion text + SVG icons (house icons)
+  runner_up: none
+  why: the same skill, finished
+  music: data-curious
+- id: s34_station_model
+  t:
+  - 1221.475
+  - 1265.975
+  sentence_times:
+  - - 1221.475
+    - 1227.1
+  - - 1227.45
+    - 1232.225
+  - - 1232.575
+    - 1234.75
+  - - 1235.1
+    - 1244.5
+  - - 1244.85
+    - 1251.875
+  - - 1252.225
+    - 1260.15
+  - - 1260.5
+    - 1265.175
+  beat: building blocks · the station model
+  visual: 'Maths zone shows the decoded groups of the real SYNOP from ISD in mono 44 px (''82739 10092 20075 … 763//''; the
+    station, time and station-pressure groups are left out because they are not spoken), each group lighting as its piece
+    is built; ''49696'' and ''53055'' join in s35. Picture zone: the station model at 3x size (circle 120 px): S3 circle;
+    S4 fill in eighths with an okta scale (0/8 … 8/8 mini circles) ; S5 barb grows feather by feather; S6 temperature and
+    dew point; S7 present-weather symbol (WMO ww 63). Each number on its spoken word.'
+  voiceover: 'Weather maps turn messages like this into a small picture called a station model. Let''s build one for Brest,
+    three hours later, at three in the morning. The circle is the station. How much of it is filled shows how much of the
+    sky is covered by cloud, in eighths, called oktas; here it''s eight oktas, fully overcast. The barb shows the wind: thirty-
+    nine knots from the west, rounded to forty, so four long feathers. The temperature, nine point two degrees, goes at the
+    upper left, and the dew point, seven point five, at the lower left. The three dots on the left mean moderate rain that
+    keeps on falling.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.decode_synop (NEW F3) + barb_parts (NEW F4)
+    params:
+      report: 07110 24421 82739 10092 20075 39582 49696 53055 763// 333 4/000 6///7 91084 90710 91184 555 6///5
+    test: CHECK RM24 (N 8, dd 270, ff 39 kt, T 9.2, Td 7.5, SLP 969.6, a 3, ppp 5.5, ww 63)
+  exaggeration: []
+  screen_summary: 'big station model built piece by piece (SVG, 3× size): filled circle ''8 oktas'', barb from 270° with 4
+    long feathers ''39 kt → 40'', ''9.2'' upper-left (orange), ''7.5'' lower-left (teal), rain symbol (3 dots) left; the decoded
+    groups of the real synop above in mono 44 px'
+  kind: diagram with real data
+  data: SYNOP Brest-Guipavas 07110, 2023-11-02T03Z from NOAA ISD (D1)
+  tool: Remotion SVG StationModel (new kit component; WMO symbol glyphs code-drawn)
+  runner_up: MetPy StationPlot rendered large (fonts less controllable)
+  why: building the model from the coded groups shows where every mark comes from
+  music: data-curious
+- id: s35_pressure_code
+  t:
+  - 1265.975
+  - 1310.475
+  sentence_times:
+  - - 1265.975
+    - 1271.3
+  - - 1271.65
+    - 1277.975
+  - - 1278.325
+    - 1286.825
+  - - 1287.175
+    - 1293.075
+  - - 1293.425
+    - 1303.575
+  - - 1303.925
+    - 1309.675
+  beat: building blocks · decoding the pressure
+  visual: 'Same model. S1 ''696'' (orange) pulses. S3 two candidates shown side by side: ''969.6'' and ''1069.6'', the first
+    ticked gold (''nearer 1000''). S4 ''= 969.6 hPa'' with a gold link to the synop group ''49696''. S5 ''+55'' appears at
+    the lower right; ''= +5.5 hPa in 3 h''. S6 the tendency glyph (WMO a = 3) draws itself.'
+  voiceover: 'At the upper right is the pressure, written in a squeezed way: six nine six. To save space, the station model
+    drops the leading nine or ten and the decimal point. To decode it, put a nine or a ten in front, whichever gives a value
+    nearer one thousand, and put the point before the last digit. So six nine six is nine hundred and sixty-nine point six
+    hectopascals. At the lower right is how much the pressure changed in the last three hours: plus fifty-five, in tenths,
+    so it rose five point five hectopascals. The little symbol beside it shows the pressure had been steady or falling, and
+    then rose.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.plot_pressure_code and decode_plot_pressure (NEW F4)
+    params:
+      slp_hPa: 969.6
+      tendency:
+        a: 3
+        ppp: 5.5
+    test: CHECK RM25 (code '696' <-> 969.6; '012' <-> 1001.2; '+55')
+  exaggeration: []
+  screen_summary: '''696'' upper right; decode: ''9|69.6'' vs ''10|69.6'' → 969.6 hPa (nearer 1000) ✓; ''+55'' lower right
+    → ''+5.5 hPa in 3 h''; tendency glyph ''_/'''
+  kind: diagram with real data
+  data: same SYNOP (D1)
+  tool: Remotion SVG StationModel + CalcStack
+  runner_up: none
+  why: the one non-obvious code on the model, decoded step by step
+  music: data-curious
+- id: s36_two_plots
+  t:
+  - 1310.475
+  - 1351.675
+  sentence_times:
+  - - 1310.475
+    - 1314.725
+  - - 1315.075
+    - 1322.825
+  - - 1323.175
+    - 1328.75
+  - - 1329.1
+    - 1339.725
+  - - 1340.075
+    - 1350.875
+  beat: contrast · same station, nine hours apart
+  visual: 'The s34 model slides right; the 18 UTC model builds on the left (same layout). Each spoken number appears on its
+    words: ''18 kt'' (rounded ''20'', two long feathers), ''833'' with ''= 983.3 hPa'', ''103'' with the falling glyph ''=
+    −10.3 hPa in 3 h'', heavy-rain symbol (WMO ww 65). S5 under each model a keyword line: ''ahead: falling · south-easterly''
+    (rose tick with a ''−'' glyph) and ''behind: rising · westerly'' (teal ''+'').'
+  voiceover: 'Now let''s keep the station the same and change only the time. Here''s Brest nine hours earlier, at six in the
+    evening on the first of November, before the storm''s fronts arrived. The wind came from the south-east, at eighteen knots,
+    drawn as two long feathers. The pressure, nine hundred and eighty-three point three hectopascals, had fallen ten point
+    three hectopascals in three hours, and the four dots mean heavy rain. Side by side, the two plots tell the story of the
+    storm passing: falling pressure and a south-easterly ahead of it, then rising pressure and a westerly behind it.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.decode_synop (NEW F3)
+    params:
+      report: 07110 04326 81518 10103 20098 39718 49833 58103 60072 765//
+    test: CHECK RM26 (dd 150, ff 18 kt -> 20, T 10.3, Td 9.8, SLP 983.3, a 8, ppp 10.3, ww 65)
+  exaggeration: []
+  screen_summary: 'two station models side by side: ''18 UTC 1 Nov'' (wind 150° 18 kt → 20, ''103'', ''833'', 10.3/9.8, heavy
+    rain 4 dots, falling glyph) and ''03 UTC 2 Nov'' (s34 model); keywords ''ahead: falling · south-easterly'', ''behind:
+    rising · westerly'''
+  kind: diagram with real data (contrast)
+  data: 'SYNOP Brest-Guipavas 2023-11-01T18Z from ISD (D1): 81518 10103 20098 39718 49833 58103 765//'
+  tool: Remotion SVG StationModel
+  runner_up: none
+  why: 'house contrast move: one thing changes (time), the rule is stated after'
+  music: data-curious
+- id: s37_station_map
+  t:
+  - 1351.675
+  - 1391.575
+  sentence_times:
+  - - 1351.675
+    - 1355.275
+  - - 1355.625
+    - 1362.375
+  - - 1362.725
+    - 1369.2
+  - - 1369.55
+    - 1379.85
+  - - 1380.2
+    - 1384.0
+  - - 1384.35
+    - 1390.775
+  beat: intuition · drawing isobars from stations
+  visual: 'Map (cartostyle base, Natural Earth 10m coast, no imagery: it is night). S2 station models pop in by priority (thinned
+    to one per 160 x 120 px cell). S4 a gold segment between the chosen pair with a midpoint ''970''. S5 a teal ''hand'' isobar
+    line draws through midpoints (linear interpolation on a Delaunay mesh of the stations), then 966 and 974 likewise. S6
+    the ERA5 isobars (slate, dashed) cross-fade on top; readout ''≈ 1 hPa'' with a gold link to one place where they match.'
+  voiceover: A forecaster sees hundreds of these at once. Here are the real station reports around the English Channel at
+    three in the morning on the second of November. Before computers, forecasters drew the isobars by hand, from exactly these
+    numbers. Between a station at nine hundred and sixty-six and one at nine hundred and seventy-four, the nine hundred and
+    seventy isobar must pass about halfway. Join up all such points, and the isobars appear. Laid over the reanalysis isobars,
+    the hand-drawn lines agree to within about a hectopascal.
+  on_screen_eq: null
+  physics_source:
+    fn: 'fluidpy.diag.station.interpolate_isobars (NEW F5: Delaunay linear interpolation of station SLP, contour at 4 hPa)'
+    params:
+      time: 2023-11-02T03
+      interval_hPa: 4
+    test: CHECK RM27 (the station pair is real and its values are spoken; RMS station SLP − ERA5 msl at stations <= 1.5 hPa
+      -> "about a hectopascal"; else the sentence follows the data)
+  exaggeration: []
+  screen_summary: 'LCC map 45-55 N, 10 W-5 E: ~20 real station models (thinned for legibility); a gold segment between two
+    stations ''966'' and ''974'' with a midpoint dot ''970''; isobars drawing through the midpoints; ERA5 isobars fade in
+    (slate) on top; ''≈ 1 hPa'''
+  kind: map + data animation
+  data: ISD synops at 03 UTC 2 Nov 2023 for stations in 45-55 N, 10 W-5 E (NEW D1, ~60 stations; isd-history.csv for positions);
+    ERA5 msl 03 UTC (exists, hourly A1)
+  tool: cartopy base + Remotion SVG station models (StationModel kit) projected by d3-geo with the same LCC parameters
+  runner_up: MetPy StationPlot layer PNG
+  why: SVG models stay crisp and can pop in one by one; the projection is shared with the base
+  music: data-curious
+- id: s38_front_clues
+  t:
+  - 1391.575
+  - 1424.675
+  sentence_times:
+  - - 1391.575
+    - 1394.75
+  - - 1395.1
+    - 1405.575
+  - - 1405.925
+    - 1409.925
+  - - 1410.275
+    - 1415.95
+  - - 1416.3
+    - 1421.125
+  - - 1421.475
+    - 1423.875
+  beat: intuition · finding a front in station plots
+  visual: S3 a gold transect; S4-S5 the stations behind (west) and ahead (east) light up in turn with keywords 'westerly ·
+    cooler · drier', 'south-westerly · warmer · moister'; a small profile chart (52-px ticks) of T and Td along the transect
+    shows the step. S6 the cold-front line (blue, with triangles on the east side) draws between them.
+  voiceover: Station plots also show where the fronts are. Crossing a front, the temperature, the dew point and the wind direction
+    jump between neighbouring stations, and the pressure tendency flips from falling to rising. Let's look along this line
+    of stations, from west to east. Behind the cold front, the winds are westerly, and the air is cooler and drier. Ahead
+    of it, they're south-westerly, and the air is warmer and moister. The front lies between them.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.decode_synop (NEW F3); front position cross-checked with fluidpy.diag.fronts.front_lines on ERA5
+      850 hPa T at 03 UTC
+    params:
+      time: 2023-11-02T03
+      transect: chosen by the builder across the analysed cold front
+    test: CHECK RM28 (wind veers >= 30° and T drops >= 1.5 °C across the chosen pair; the pair brackets the TFP cold front
+      within 100 km). If no clean transect exists at 03 UTC, use 00 UTC and say "at midnight".
+  exaggeration: []
+  screen_summary: same station map; a gold transect of 5 stations west → east; their T, Td and barbs brighten; a mini profile
+    chart below (T orange, Td teal) with a step; a blue cold-front line drawn between the two stations where it jumps
+  kind: map + chart
+  data: ISD synops 03 UTC 2 Nov 2023 (D1)
+  tool: Remotion SVG on the s37 map + house TimeGraph-style profile chart
+  runner_up: matplotlib profile still
+  why: the forecaster's actual clue-reading, on real reports
+  music: data-curious
+- id: s39_front_symbols
+  t:
+  - 1424.675
+  - 1440.5
+  sentence_times:
+  - - 1424.675
+    - 1430.025
+  - - 1430.375
+    - 1433.45
+  - - 1433.8
+    - 1436.85
+  - - 1437.2
+    - 1439.7
+  beat: building blocks · front symbols (recap)
+  visual: 'Picture zone: a short animated cold front moving right with its triangles on the leading side (blue), then a warm
+    front moving right with its half circles leading (red); an arrow shows the motion. Maths zone keywords ''cold front'',
+    ''warm front''. S3 two faint slots for the next scenes.'
+  voiceover: On the finished chart, fronts are drawn with symbols on the side they're moving towards. A cold front is blue,
+    with triangles. A warm front is red, with half circles. Weather charts use two more kinds.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative (WMO / NWS front symbols)
+  screen_summary: 'four front lines stacked as a legend built by the voice (no box): cold (blue triangles), warm (red half
+    circles); then two greyed placeholders for the next two'
+  kind: diagram
+  data: none (convention)
+  tool: Remotion SVG (MetPy-matching front glyphs, kit FrontLine new)
+  runner_up: matplotlib MetPy path effects stills
+  why: the convention, animated in its direction of motion
+  music: data-curious
+- id: s40_occluded
+  t:
+  - 1440.5
+  - 1480.25
+  sentence_times:
+  - - 1440.5
+    - 1443.25
+  - - 1443.6
+    - 1447.5
+  - - 1447.85
+    - 1456.55
+  - - 1456.9
+    - 1460.3
+  - - 1460.65
+    - 1465.9
+  - - 1466.25
+    - 1472.225
+  - - 1472.575
+    - 1479.45
+  beat: building blocks · occluded fronts
+  visual: 'S2-S3 three.js side-view block (the weather-basics front wedges reused): slate cold air, orange warm sector, a
+    second cold mass ahead; the trailing cold wedge slides under and the warm wedge lifts. Above the block a plan-view strip
+    shows the cold front (blue) catching the warm front (red) and the joined line turning purple. S4 keyword ''occluded front''.
+    S5 keyword ''× 50 taller''. S6 purple line with alternating triangles and half circles on one side. S7 cut to the latest
+    chart: the real occluded front of the 972-hPa low off Labrador, gold ring.'
+  voiceover: The first is the occluded front. Cold fronts usually move faster than warm fronts. When a cold front catches
+    up with the warm front ahead of it, the warm air between them is lifted off the ground, and the two fronts join. That
+    joined front is called an occluded front. In this side view, the heights are drawn about fifty times taller than in nature.
+    An occluded front is drawn in purple, with triangles and half circles on the same side. Occluded fronts curl around the
+    centre of mature lows, like the one off Labrador on the latest chart.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.wpc.bulletin (NEW F7) for the real occluded front; side view illustrative
+    params:
+      valid: 2026-10-27T18Z
+    test: CHECK RM29 (an OCFNT segment starts at the 972-hPa low, 58 N 53 W)
+  exaggeration:
+  - side view heights ×50 (said); schematic
+  screen_summary: '3-D side view (×50): cold wedge catching the warm front, the warm wedge lifted off the ground; map strip
+    above with the two fronts merging into a purple occluded front; real WPC occluded front off Labrador'
+  kind: 3-D diagram + real map
+  data: WPC CODSUS 18Z 27 Oct 2026 OCFNT (D7); GFS msl 18Z (D6)
+  tool: three.js side-view block (kit_wb FrontBlock) + cartopy/MetPy chart layer
+  runner_up: 2-D animated cross-section SVG
+  why: occlusion is about shapes in the vertical; then it is cut back to a real chart (series rule)
+  music: data-curious
+- id: s41_stationary_trough
+  t:
+  - 1480.25
+  - 1502.5
+  sentence_times:
+  - - 1480.25
+    - 1485.7
+  - - 1486.05
+    - 1493.025
+  - - 1493.375
+    - 1501.7
+  beat: building blocks · stationary fronts and troughs
+  visual: S1-S2 a stationary-front glyph line builds; S3 a dashed trough line; then a quick MapCamera pan on the latest chart
+    to a real stationary front (across the central US) and a real trough, gold rings.
+  voiceover: The second is the stationary front, where neither air mass is pushing the other back. It's drawn with red half
+    circles and blue triangles, alternating, on opposite sides of the line. And a trough at the ground, with no clear change
+    of air mass across it, is drawn as a dashed line with no symbols at all.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.wpc.bulletin (NEW F7)
+    params:
+      valid: 2026-10-27T18Z
+    test: CHECK RM30 (the ringed STNRY and TROF segments exist in the bulletin)
+  exaggeration: []
+  screen_summary: stationary front glyph (alternating red half circles / blue triangles on opposite sides); trough as orange
+    dashed line; both then ringed on the real chart over the US
+  kind: diagram + real map
+  data: WPC CODSUS 18Z 27 Oct 2026 STNRY, TROF (D7)
+  tool: Remotion SVG FrontLine + cartopy/MetPy chart layer
+  runner_up: MetPy stills
+  why: the last two symbols, then shown where forecasters really drew them
+  music: data-curious
+- id: s42_analysis_build
+  t:
+  - 1502.5
+  - 1534.15
+  sentence_times:
+  - - 1502.5
+    - 1509.275
+  - - 1509.625
+    - 1519.35
+  - - 1519.7
+    - 1529.525
+  - - 1529.875
+    - 1533.35
+  beat: application (part 1) · a surface analysis, layer by layer
+  visual: Full-width LCC map (40-60 N, 25 W-10 E). S2 layer 1 station models (s37 set, wider area); layer 2 ERA5 isobars;
+    layer 3 'L' with '954' (from storm_centre at 03 UTC); layer 4 the objective fronts (TFP on ERA5 850-hPa T, 03 UTC) with
+    MetPy symbols on the side of motion. S3 keyword 'computer method · 850 hPa' (no 'not to scale' badge). S4 a slow push-in
+    to Brest.
+  voiceover: 'Put it all together, and you have a surface analysis, the forecaster''s map of the weather at one moment. Here''s
+    Ciarán''s, built up layer by layer at three in the morning: the station plots, the isobars, the low and its central pressure,
+    and the fronts. The fronts here come from a computer method that finds the sharpest temperature changes, about one and
+    a half kilometres up, not from a forecaster''s pen. Every mark on it is something we can now read.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.fronts.front_lines (existing) + fluidpy.diag.cyclone.storm_centre (existing)
+    params:
+      time: 2023-11-02T03
+      level_hPa: 850
+      smooth_km: 100
+    test: CHECK RM31 (L 953.7 hPa at 50.0 N 3.75 W -> '954'; >= 1 cold and >= 1 warm segment found)
+  exaggeration: []
+  screen_summary: 'Ciarán 03 UTC 2 Nov 2023 analysis builds in four layers on an LCC map: station models → isobars (4 hPa)
+    → L ''954'' → objective fronts with symbols; keyword ''surface analysis'''
+  kind: map (layer build)
+  data: ISD synops 03 UTC (D1); ERA5 msl hourly (exists A1); ERA5 850 hPa T, u, v hourly (exists era5_ciaran_2023_850hPa_1h.nc)
+  tool: cartopy + MetPy + cartostyle layers -> Remotion (capability S1 layer build)
+  runner_up: d3-geo SVG layer build (CTS1Build)
+  why: the capability test found the layer build teaches best
+  music: data-curious
+- id: s43_visible
+  t:
+  - 1534.15
+  - 1565.95
+  sentence_times:
+  - - 1534.15
+    - 1540.375
+  - - 1540.725
+    - 1543.825
+  - - 1544.175
+    - 1548.25
+  - - 1548.6
+    - 1552.7
+  - - 1553.05
+    - 1560.875
+  - - 1561.225
+    - 1565.15
+  beat: building blocks · visible images
+  visual: 'Full-width satellite map (cartostyle 2b: imagery is the subject, lines only: coast 2-3 px light grey, no field).
+    S2 a sun glyph with gold rays bouncing off a cloud (small, top-left, 300 px). S3 pointers on a bright cloud band, the
+    Alps'' snow, and the dark Atlantic. S4 date keyword ''2 Nov 2023'' (44 px). S5 a small globe inset with the terminator;
+    its night side turns black (no full-screen darkening: WCAG).'
+  voiceover: Fronts and lows also show up from space, and satellites see them in different kinds of light. A visible image
+    is like a photograph. It shows sunlight bounced back by the clouds and the ground. Thick clouds, snow and ice are bright,
+    and the sea is dark. Here's Ciarán on the second of November, twenty twenty-three, from a satellite passing overhead early
+    in the afternoon. Visible images need sunlight, so at night they're black.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs.fetch_wms (product exists)
+    params:
+      layer: MODIS_Aqua_CorrectedReflectance_TrueColor
+      date: 2023-11-02
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_gibs_bbox_order
+  exaggeration: []
+  screen_summary: 'MODIS Aqua true colour of Ciarán, 2 Nov 2023 (LCC, white coast lines, dark halo); keywords ''visible =
+    reflected sunlight'', ''bright: thick cloud, snow, ice'', ''dark: sea''; a day/night terminator sweeping over a small
+    globe inset'
+  kind: map (satellite)
+  data: MODIS Aqua CorrectedReflectance TrueColor 2023-11-02 (exists, data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg)
+  tool: cartopy LCC warp of the GIBS 4326 image + cartostyle lines (capability S2 winner)
+  runner_up: GIBS image + d3-geo overlay in Remotion
+  why: the real picture of the same storm the movie has followed
+  music: data-curious
+- id: s44_infrared
+  t:
+  - 1565.95
+  - 1597.4
+  sentence_times:
+  - - 1565.95
+    - 1568.85
+  - - 1569.2
+    - 1574.725
+  - - 1575.075
+    - 1581.15
+  - - 1581.5
+    - 1588.475
+  - - 1588.825
+    - 1591.4
+  - - 1591.75
+    - 1596.6
+  beat: building blocks · infrared images
+  visual: A vertical swipe (Remotion slider, eased glide-pause-settle, capability A5) from the visible image to the infrared
+    image of the same Aqua pass; colour bar appears with the unit only ('°C', 52-px ticks −60, −30, 0, +15; each tick are
+    scale furniture at 52 px, as in the reference movie's colour bar). S4 gold rings on the frontal cloud bands.
+  voiceover: An infrared image shows something else. Everything gives off infrared light, and the warmer it is, the more it
+    gives off. So the satellite can measure how warm the top of whatever it sees is, by day and by night. By custom, cold
+    is drawn white and warm is drawn dark, so high, cold cloud tops stand out. Here's the same pass in infrared. The thick
+    cloud bands of Ciarán's fronts are the brightest, coldest parts.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs.colormap_values (NEW F9)
+    params:
+      layer: MODIS_Aqua_Brightness_Temp_Band31_Day
+      date: 2023-11-02
+    test: ../Fluid Dynamics/tests/data/test_gibs.py::test_colormap_roundtrip (V1, every palette colour maps back to its class
+      value); CHECK RM32 (sea surface pixels 280-290 K)
+  exaggeration: []
+  screen_summary: wipe from visible to infrared (same pass, MODIS Aqua band 31, 11 µm) in grey, cold = white; grey colour
+    bar '−60 … +15 °C' (52 px); keywords 'infrared = emitted heat', 'cold → white', 'day and night'
+  kind: map (satellite), before/after swipe
+  data: MODIS_Aqua_Brightness_Temp_Band31_Day 2023-11-02 from GIBS (NEW D10), values recovered from the GIBS colormap (NEW
+    F9) and re-coloured grey
+  tool: GIBS PNG -> palette inversion to brightness temperature (Python) -> our grey ramp -> cartopy LCC warp; Remotion swipe
+  runner_up: MODIS MYD021KM L1B band 31 via NASA Earthdata (account exists) -> our own calibration (heavier)
+  why: the same pass as s43 gives an honest one-change comparison; the GIBS palette is rainbow-like, so we take the values,
+    not the picture
+  music: data-curious
+- id: s45_cloud_top
+  t:
+  - 1597.4
+  - 1630.6
+  sentence_times:
+  - - 1597.4
+    - 1599.675
+  - - 1600.025
+    - 1602.95
+  - - 1603.3
+    - 1609.05
+  - - 1609.4
+    - 1615.6
+  - - 1615.95
+    - 1623.325
+  - - 1623.675
+    - 1629.8
+  beat: why · how high are the cloud tops
+  visual: 'Picture zone: the IR map with two probe dots and readouts on their words. Maths zone CalcStack: ''12 − (−50) =
+    62 °C''; ''62 °C ÷ 6.5 °C/km ≈ 9.5 km'' (the °C struck through: unit cancellation, house §6). S5 a slim vertical height
+    bar (0-12 km) with a cloud icon at 9.5 km just under a slate tropopause line.'
+  voiceover: How high are those cloud tops? Our goal is a height, from a temperature. The coldest tops here are about minus
+    fifty degrees, and the sea below is about twelve. In the troposphere, the temperature falls by about six and a half degrees
+    for every kilometre. Sixty-two degrees, divided by six and a half degrees per kilometre, is about nine and a half kilometres.
+    So these cloud tops are about nine and a half kilometres up, near the top of the troposphere.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs.colormap_values (NEW F9); lapse rate 6.5 K/km from fluidpy.core standard atmosphere (weather-basics
+      recap)
+    params:
+      probe_cloud: coldest 1st percentile in the frontal band
+      probe_sea: clear-sky pixel west of Brittany
+    test: CHECK RM33 (cloud −60…−40 °C, sea 10…15 °C; height = ΔT/6.5 within 8-11 km; the narration follows the data)
+  exaggeration:
+  - a single 6.5 K/km lapse rate is a rough rule (said as 'about')
+  screen_summary: 'IR image with two probes: cloud top ''−50 °C'' (gold), sea ''+12 °C''; CalcStack (12 − (−50)) ÷ 6.5 °C/km
+    ≈ 9.5 km; side bar: height scale with the tropopause line'
+  kind: map + maths
+  data: MODIS band 31 brightness temperature (D10); ERA5 SST or 2-m T under the probe (exists A1/D2)
+  tool: Remotion CalcStack over the s44 layer
+  runner_up: none
+  why: goal first, then the calculation, then the meaning (house §4)
+  music: data-curious
+- id: s46_water_vapour
+  t:
+  - 1630.6
+  - 1670.975
+  sentence_times:
+  - - 1630.6
+    - 1637.4
+  - - 1637.75
+    - 1640.3
+  - - 1640.65
+    - 1646.425
+  - - 1646.775
+    - 1653.725
+  - - 1654.075
+    - 1665.375
+  - - 1665.725
+    - 1670.175
+  beat: building blocks · water-vapour images
+  visual: 'Full-width LCC map of the North Atlantic (25-65 N, 85-10 W) in the water-vapour channel. S6 an orbit thumbnail
+    (top right, 380 px): a satellite dot circling with the turning Earth, keyword ''geostationary''. S7 gold pointer along
+    the dark dry tongue into the 982-hPa low at 43 N 43 W.'
+  voiceover: A third kind of image uses infrared light that water vapour itself absorbs and gives off. It's called a water
+    vapour image. It sees the moisture in the middle and upper troposphere, even where there's no cloud at all. Moist air
+    aloft is drawn bright, and dry air, which has usually sunk from high up, is drawn dark. Here's a storm over the North
+    Atlantic on the day this video was made, seen from a satellite that circles the Earth once a day above the equator, so
+    it stays over the same spot. The dark band curling into the storm is a tongue of dry air.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.goes.cmi_grid (NEW F8; Earth Engine or AWS route, archived on G:)
+    params:
+      satellite: GOES-19
+      band: 8
+      time: 2026-10-27T18:00Z
+      box:
+      - 25
+      - 65
+      - -85
+      - -10
+    test: CHECK RM34 (brightness temperature 200-260 K in band 8; a dry tongue (BT > 245 K) within 800 km south-west of the
+      982-hPa low). If the dry tongue is not clear, the last sentence is dropped.
+  exaggeration: []
+  screen_summary: 'GOES-East water-vapour image (6.2 µm, band 8), 18 UTC 27 Oct 2026, North Atlantic, grey (moist bright,
+    dry dark); keywords ''water vapour'', ''moist → bright'', ''dry → dark''; a small orbit sketch ''geostationary: one turn
+    a day above the equator'''
+  kind: map (satellite)
+  data: GOES-19 (GOES-East) ABI band 8, 2026-10-27T18:00Z full disk (NEW D9; via Earth Engine NOAA/GOES/19/MCMIPF CMI_C08)
+  tool: GEE ee.data.computePixels grid -> our grey ramp (cmocean gray, reversed) -> cartopy LCC warp
+  runner_up: NOAA AWS noaa-goes19 ABI-L2-CMIPF band 8 via fluidpy.data.goes (needs a satellite option, NEW F8); GIBS has no
+    water-vapour band
+  why: GIBS offers GOES visible and IR but no water-vapour band; Earth Engine gives all bands of the same scan as values
+  music: data-curious
+- id: s47_three_views
+  t:
+  - 1670.975
+  - 1696.65
+  sentence_times:
+  - - 1670.975
+    - 1674.175
+  - - 1674.525
+    - 1678.575
+  - - 1678.925
+    - 1682.625
+  - - 1682.975
+    - 1688.025
+  - - 1688.375
+    - 1695.85
+  beat: intuition · three views of one moment
+  visual: 'One map, three layers: S2-S4 the divider glides across (visible -> IR -> WV), keyword under each. S5 a 12-hour
+    loop (18 UTC 27 Oct -> 06 UTC 28 Oct, hourly frames, cross-faded) runs twice: visible on the left half goes dark with
+    the night while the IR half keeps the storm visible.'
+  voiceover: Let's compare the three views of the same moment. The visible image shows how thick and bright the clouds are.
+    The infrared shows how high and cold their tops are. And the water vapour image shows where the air aloft is moist or
+    dry. Forecasters flick between all three, and only the infrared and the water vapour images keep working through the night.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.goes.cmi_grid (NEW F8)
+    params:
+      bands:
+      - 2
+      - 8
+      - 13
+      times: 2026-10-27T18Z/2026-10-28T06Z/PT1H
+    test: CHECK RM35 (frames complete; band-2 reflectance > 0.3 on the frontal cloud at 18Z; night frames have band-2 mean
+      < 0.02)
+  exaggeration:
+  - loop time compressed (12 h in about 8 s)
+  - hours cross-faded
+  screen_summary: 'GOES-East 18 UTC 27 Oct 2026: visible (band 2) | infrared (band 13) | water vapour (band 8) as a three-way
+    swipe; keywords ''thick'', ''high · cold'', ''moist · dry''; then a 12-h IR loop as day turns to night'
+  kind: map (satellite), data animation
+  data: GOES-19 ABI bands 2, 8, 13, 2026-10-27T18Z and hourly to 28 Oct 06Z (D9)
+  tool: GEE computePixels grids -> our ramps -> cartopy LCC PNG sequence -> Remotion slider and sequence
+  runner_up: GIBS GOES-East Band2 and Band13 layers (rolling archive, fetch at once) + AWS band 8
+  why: one region, one time, three channels; then the loop shows why IR matters at night
+  music: data-curious
+  sfx:
+    kind: storm_bed
+    at: S5
+    intensity: 0.2
+    note: loop of a real storm
+- id: s48_bb_rule
+  t:
+  - 1696.65
+  - 1721.975
+  sentence_times:
+  - - 1696.65
+    - 1700.325
+  - - 1700.675
+    - 1707.8
+  - - 1708.15
+    - 1714.65
+  - - 1715.0
+    - 1721.175
+  beat: building blocks · Buys Ballot's rule
+  visual: The s31 map with 10-m streaklines (three.js particles, 3 s loop) running round the low. S3 '1857' (68 px). S4 a
+    code-drawn person seen from above (house icon, new) placed south of the low, back to the wind (teal arrow behind it),
+    and a gold arc from its left hand to the 'L'. Keyword line (54 px).
+  voiceover: Now let's look again at the winds on all these maps. Near the ground and higher up, the wind blows nearly along
+    the isobars, around the lows and the highs. In eighteen fifty-seven, the Dutch meteorologist Buys Ballot turned this into
+    a simple rule. In the northern hemisphere, stand with your back to the wind, and the low pressure is on your left.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.trajectories (RK2 tracks on ERA5 10-m wind)
+    params:
+      time: 2023-11-02T12
+      seeds: 400
+      seed: 7
+    test: CHECK RM36 (fraction of grid points within 1500 km of the low where the low lies 45-135° to the left of the downwind
+      direction >= 0.8)
+  exaggeration:
+  - streaklines time-compressed
+  screen_summary: Ciarán chart with streaklines along the isobars; a small person icon with its back to a teal wind arrow,
+    'L' on its left; '1857'; keyword 'back to the wind → low on the left (north)'
+  kind: map + data animation
+  data: ERA5 10-m winds and msl 12 UTC 2 Nov 2023 (exists)
+  tool: cartopy base layer + three.js particles (Python RK2 tracks) + Remotion SVG icon
+  runner_up: d3-geo streamlines
+  why: the rule is about a person on the map; the moving air makes "back to the wind" literal
+  music: data-curious
+  sfx:
+    kind: wind_gentle
+    at: S1
+    intensity: 0.2
+    note: moving streaklines
+- id: s49_bb_brest
+  t:
+  - 1721.975
+  - 1759.6
+  sentence_times:
+  - - 1721.975
+    - 1726.275
+  - - 1726.625
+    - 1733.45
+  - - 1733.8
+    - 1740.125
+  - - 1740.475
+    - 1749.675
+  - - 1750.025
+    - 1758.8
+  beat: application · testing the rule at Brest
+  visual: 'MapCamera zoom to Brittany on the s42 analysis. S2 the person icon at Brest, wind arrow from the west, facing east.
+    S3 a gold line to the L with ''180 km'' at its middle. S4 an angle arc from ''straight ahead'' to the line: ''≈ 75°'',
+    with a dashed slate ray at 90° for comparison. S5 a small teal arrow showing the wind turned slightly towards the low
+    from the isobar direction; keyword ''friction''.'
+  voiceover: 'Let''s test it at Brest, at three in the morning during Ciarán. The wind came from the west, at two hundred
+    and seventy degrees, so with your back to it, you face east. The centre of the low was about one hundred and eighty kilometres
+    away, to the north-north-east. That''s on your left, as the rule says, and a little in front of you: about seventy-five
+    degrees to the left of straight ahead, rather than ninety. Near the ground, friction slows the wind and turns it partly
+    towards the low, so the low ends up a little in front of your left shoulder.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.initial_bearing and great_circle_distance (NEW F1); fluidpy.diag.cyclone.storm_centre
+    params:
+      station:
+      - 48.448
+      - -4.419
+      low:
+      - 50.0
+      - -3.75
+      wind_from_deg: 270
+    test: CHECK RM37 (distance 179 km; bearing 15.5°; angle left of facing 74.5° -> "about seventy-five")
+  exaggeration: []
+  screen_summary: 'zoom on Brittany 03 UTC: Brest station model; person icon facing east; gold arrow to ''L 954'' at 50.0°
+    N 3.75° W ''180 km''; angle arc ''≈ 75°'' vs dashed ''90°''; keyword ''friction turns the wind towards the low'''
+  kind: map
+  data: ISD synop Brest 03 UTC (D1); ERA5 storm centre 03 UTC (exists A1)
+  tool: cartopy base + Remotion SVG geometry
+  runner_up: none
+  why: a real test of the rule on a real station, with the friction effect visible in the numbers
+  music: data-curious
+- id: s50_bb_aloft
+  t:
+  - 1759.6
+  - 1777.5
+  sentence_times:
+  - - 1759.6
+    - 1762.35
+  - - 1762.7
+    - 1771.55
+  - - 1771.9
+    - 1776.7
+  beat: contrast · the rule aloft
+  visual: The s27 chart; the person icon reappears at a jet point; the angle arc to the low-height side reads '≈ 90°' (spoken
+    as "almost straight to your left"; the arc is drawn, the number shown is the CHECK value rounded to 5°).
+  voiceover: Higher up, there's almost no friction. At five hundred hectopascals over Ciarán, the winds run almost exactly
+    along the height lines, with the low heights on their left. So with your back to the wind up there, the low is almost
+    straight to your left.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.angle_between (wind vs contour tangent) on ERA5 500 hPa
+    params:
+      level_hPa: 500
+      mask: '|v| > 20 m/s'
+    test: CHECK RM38 (median angle between the wind and the contour direction < 10°)
+  exaggeration: []
+  screen_summary: the s27 500-hPa chart with streaklines; the person icon at 500 hPa south of the trough, the low heights
+    at a right angle to its left '≈ 90°'
+  kind: map + data animation
+  data: ERA5 z, u, v 500 hPa 12 UTC 2 Nov 2023 (exists)
+  tool: same as s27
+  runner_up: none
+  why: contrast case (friction removed) right after the ground case
+  music: data-curious
+- id: s51_bb_south
+  t:
+  - 1777.5
+  - 1816.9
+  sentence_times:
+  - - 1777.5
+    - 1781.225
+  - - 1781.575
+    - 1789.65
+  - - 1790.0
+    - 1795.575
+  - - 1795.925
+    - 1802.15
+  - - 1802.5
+    - 1810.0
+  - - 1810.35
+    - 1816.1
+  beat: contrast · the southern hemisphere
+  visual: three.js globe textured with the Himawari IR full disk (grey, cold white) and GFS isobars as draped lines. S3 gold
+    anticlockwise arrow arc around the typhoon with '(seen from above)'; S4 clockwise arc around the southern low. S5 billboards
+    'L 935' and 'L 945'. S6 the person icon beside the southern low, back to the wind, gold arc from its right hand to the
+    L.
+  voiceover: South of the equator, everything turns the other way. Here's a full view of the Earth in infrared, from a satellite
+    above the western Pacific, on the day this video was made. North of the equator, a typhoon spins anticlockwise, as seen
+    from above. Far to the south, a deep low south of Tasmania spins clockwise, as seen from above. Their central pressures
+    were about nine hundred and thirty-five and nine hundred and forty-five hectopascals. So in the southern hemisphere, with
+    your back to the wind, the low pressure is on your right.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gfs.extrema (existing) + fluidpy.data.gibs.fetch_wms (time option, NEW F8)
+    params:
+      cycle: 2026-10-27T00Z
+      typhoon:
+      - 14.5
+      - 162.5
+      south_low:
+      - -60.25
+      - 148.0
+    test: 'CHECK RM39 (934.9 and 944.7 hPa -> "about 935 / 945"; circulation sense from GFS 10-m vorticity sign: positive
+      NH, negative SH)'
+  exaggeration: []
+  screen_summary: 'Himawari full-disk IR 00 UTC 27 Oct 2026 on a three.js globe; GFS isobars around the typhoon (14.5° N 162.5°
+    E) and the southern low (60.3° S 148° E); gold arcs ''anticlockwise'' / ''clockwise'' (seen from above); ''L 935'', ''L
+    945''; person icon south: low on the right'
+  kind: globe, 3-D
+  data: Himawari-9 AHI band 13 full disk 2026-10-27T00:00Z (GIBS Himawari_AHI_Band13_Clean_Infrared, rolling archive, NEW
+    D11); GFS msl 00 UTC 27 Oct 2026 (exists, data/derived/ch00/gfs_mslp_latest.nc); GFS 10-m winds (D6)
+  tool: three.js globe with an IR texture (GIBS 4326 mosaic) + isobar line geometry + billboards
+  runner_up: cartopy orthographic still centred on 140 E
+  why: 'both hemispheres in one real picture: the reversal is seen, not told'
+  music: data-curious
+- id: s52_bb_equator
+  t:
+  - 1816.9
+  - 1841.875
+  sentence_times:
+  - - 1816.9
+    - 1819.425
+  - - 1819.775
+    - 1826.825
+  - - 1827.175
+    - 1841.075
+  beat: why (pointer) · where the rule fails
+  visual: Same globe, camera to 0 deg, 150 W. S2 trade-wind arrows (GFS 10 m) cross the faint isobars into the equatorial
+    trough (gold band). S3 two keyword pointers along the bottom of the content area.
+  voiceover: Near the equator the rule fails. There, the winds blow across the isobars, straight into the belt of low pressure
+    where the trade winds meet. Why the wind circles lows at all, why the rule flips between the hemispheres, and why it fails
+    at the equator, is the story of the Coriolis effect and the geostrophic wind, in later videos of this series.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.angle_between (wind vs isobar tangent)
+    params:
+      band:
+      - -8
+      - 8
+      lon:
+      - -180
+      - -110
+    test: CHECK RM40 (median cross-isobar angle > 45° within 8° of the equator; < 30° poleward of 30°)
+  exaggeration: []
+  screen_summary: 'globe turns to the tropical Pacific: GFS isobars nearly flat; teal 10-m wind arrows crossing them into
+    the low-pressure belt; keywords ''trade winds'', ''across the isobars''; two forward pointers ''Coriolis'', ''geostrophic
+    wind'''
+  kind: globe
+  data: GFS 10-m wind and msl 00 UTC 27 Oct 2026 (D6)
+  tool: three.js globe + arrow instancing
+  runner_up: cartopy Mercator tropics still
+  why: the failure case on real data closes the rule honestly
+  music: data-curious
+- id: s53_chart_intro
+  t:
+  - 1841.875
+  - 1870.775
+  sentence_times:
+  - - 1841.875
+    - 1846.175
+  - - 1846.525
+    - 1858.85
+  - - 1859.2
+    - 1869.975
+  beat: application · a real forecaster's chart
+  visual: 'The s01 chart, full width; S2 keyword ''27 Oct 2026 · 18 UTC'' (44 px, top-left). S3 the layers flash in order
+    once, gently (IR, isobars, H/L, fronts; no full-screen flash: each is a 12-frame fade).'
+  voiceover: Now let's read a real forecaster's chart, step by step. This is the surface analysis drawn by the forecasters
+    of the United States Weather Prediction Center, for eighteen hundred universal time on the twenty-seventh of October,
+    twenty twenty-six. Their lows, highs and fronts are drawn on a Lambert map, over the infrared image from the same hour,
+    with isobars from the weather service's computer analysis.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.wpc.bulletin (NEW F7); fluidpy.data.gfs.fetch_analysis (NEW option F12)
+    params:
+      valid: 2026-10-27T18Z
+    test: CHECK RM41 (bulletin valid time 18Z; GFS cycle 18Z)
+  exaggeration: []
+  screen_summary: 'the s01 chart again (now readable): WPC H/L and fronts, GFS isobars, GOES-East IR; keyword ''27 Oct 2026
+    · 18 UTC''; one-line credit nowhere on screen (manifest only)'
+  kind: map
+  data: WPC CODSUS 18Z 27 Oct 2026 (D7); GFS msl, u10, v10 18Z (D6); GOES-19 band 13 18Z (D9); IEM METARs 18Z (D8)
+  tool: cartopy + MetPy + cartostyle layers (as s01)
+  runner_up: d3-geo SVG layer build
+  why: the hook picture returns, now readable
+  music: data-curious
+- id: s54_chart_letters
+  t:
+  - 1870.775
+  - 1893.575
+  sentence_times:
+  - - 1870.775
+    - 1873.375
+  - - 1873.725
+    - 1880.05
+  - - 1880.4
+    - 1885.075
+  - - 1885.425
+    - 1892.775
+  beat: application · step one, the letters
+  visual: 'MapCamera on the chart; rings pulse on each letter on its words; the values under the letters brighten (WPC''s
+    own numbers). No step headings on screen (house §5): only the keyword ''letters'' (54 px).'
+  voiceover: 'Step one: find the letters. Over the middle of the North Atlantic is a low of nine hundred and eighty-two hectopascals.
+    Over western Quebec is a high of one thousand and thirty-three. Further north are deeper lows, the deepest at nine hundred
+    and sixty-one hectopascals, near Iceland.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.wpc.bulletin (NEW F7)
+    params:
+      valid: 2026-10-27T18Z
+    test: CHECK RM42 (L 982 at 43 N 43 W; H 1033 at 48 N 79 W; deepest L 961 at 66 N 11 W)
+  exaggeration: []
+  screen_summary: 'gold rings on ''L 982'' (43° N 43° W), ''H 1033'' (48° N 79° W), ''L 961'' (66° N 11° W); keywords ''step
+    1: letters'''
+  kind: map
+  data: WPC CODSUS 18Z (D7)
+  tool: cartopy layers + Remotion MapCamera
+  runner_up: none
+  why: the first reading move, on the real chart
+  music: data-curious
+- id: s55_chart_spacing
+  t:
+  - 1893.575
+  - 1911.6
+  sentence_times:
+  - - 1893.575
+    - 1896.25
+  - - 1896.6
+    - 1905.1
+  - - 1905.45
+    - 1910.8
+  beat: application · step two, spacing and wind
+  visual: The builder places the bracket where the GFS |∇p| is largest within 1000 km of the 982-hPa low; the barbs there
+    brighten; the person icon from s48 appears once more.
+  voiceover: 'Step two: look at the spacing. The isobars are packed tightest on the cold side of the Atlantic low, so that''s
+    where the strongest winds are, and the barbs agree. And with your back to the wind, the low is on your left, just as Buys
+    Ballot said.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.gradient (NEW F1) on GFS msl
+    params:
+      within_km: 1000
+      of:
+      - 43
+      - -43
+    test: CHECK RM43 (the tightest-gradient point lies west/north-west of the low, behind the cold front; else the phrase
+      becomes the data's direction, e.g. 'on the north side')
+  exaggeration: []
+  screen_summary: gold bracket on the tightest isobars (from the GFS gradient); barbs brighten there; person icon with the
+    low on its left
+  kind: map
+  data: GFS msl, u10, v10 18Z 27 Oct 2026 (D6)
+  tool: cartopy layers + Remotion
+  runner_up: none
+  why: the second reading move; the narration's "cold side" is checked against the data
+  music: data-curious
+- id: s56_chart_fronts
+  t:
+  - 1911.6
+  - 1943.575
+  sentence_times:
+  - - 1911.6
+    - 1914.025
+  - - 1914.375
+    - 1921.525
+  - - 1921.875
+    - 1927.125
+  - - 1927.475
+    - 1933.175
+  - - 1933.525
+    - 1942.775
+  beat: application · step three, fronts and clouds
+  visual: S2 the fronts of the 982-hPa low brighten in order (warm, cold, occluded) on their words. S4 the IR layer brightens
+    under the cold front; gold ring on the cloud band. S5 MapCamera pans to Virginia-New Jersey; 5 METAR station models (°C,
+    hPa) on either side of the cold front from the 54 N 41 W system; the barbs' turn is highlighted.
+  voiceover: 'Step three: read the fronts. From the Atlantic low, a warm front runs east, and a cold front trails a long way
+    to the south-west. Where they meet, near the centre, a short occluded front curls round the low. In the infrared, a long
+    band of cold, high cloud lies along the cold front. Another cold front stretches all the way to the east coast of the
+    United States, and the stations near it show the wind turning as it passes.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.wpc.bulletin (NEW F7) + fluidpy.data.metar.fetch (NEW F6) + fluidpy.diag.station.decode_metar (NEW F3)
+    params:
+      valid: 2026-10-27T18Z
+      box:
+      - 36
+      - 42
+      - -80
+      - -72
+    test: CHECK RM44 (warm front east of the 982 low; cold front to 31 N 56 W; OCFNT at the centre; IR BT < 240 K along >=
+      60 % of the cold front; METAR wind directions differ by >= 40° across the coastal cold front). If the METAR check fails,
+      the last sentence is cut.
+  exaggeration: []
+  screen_summary: 'the WPC warm (red), cold (blue) and occluded (purple) fronts of the 982 low glow in turn; the IR cloud
+    band along the cold front ringed; zoom to the US east coast: 5 METAR station models either side of the second cold front,
+    barbs turning from south-west to north-west'
+  kind: map
+  data: WPC CODSUS 18Z (D7); GOES-19 band 13 (D9); IEM METARs 18Z 27 Oct 2026 (D8)
+  tool: cartopy layers + Remotion SVG station models (shared StationModel)
+  runner_up: MetPy StationPlot layer
+  why: the third reading move, with real clues on both sides of a real front
+  music: data-curious
+- id: s57_chart_context
+  t:
+  - 1943.575
+  - 1971.2
+  sentence_times:
+  - - 1943.575
+    - 1946.3
+  - - 1946.65
+    - 1957.075
+  - - 1957.425
+    - 1970.4
+  beat: application · step four, context (latest vs Ciarán, impacts)
+  visual: 'Split: left the latest chart''s deepest L, right Ciarán''s L from s42; S3 the Brest model reappears with a gust
+    readout (CalcStack 84 × 1.852 ≈ 156 km/h); S3 end keyword ''≈ 1.2 million homes without power'' with a small house icon.'
+  voiceover: 'Step four: put it in context. The deepest low on this chart, at nine hundred and sixty-one hectopascals, isn''t
+    quite as deep as Ciarán, which reached about nine hundred and fifty-four. During Ciarán, the weather station at Brest
+    measured a gust of eighty-four knots, about one hundred and fifty-six kilometres per hour, and about one point two million
+    homes in France lost power.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.station.decode_synop (NEW F3, group 911ff) + fluidpy.geo.constants.KNOT
+    params:
+      report: Brest 2023-11-02T03Z
+    test: CHECK RM45 (84 kt × 1.852 = 155.6 km/h); C1 citation check by the research scout (Enedis press release, 2 Nov 2023;
+      else the sentence is cut)
+  exaggeration: []
+  screen_summary: 'two letters side by side: ''L 961'' (27 Oct 2026) and ''L 954'' (Ciarán, 2 Nov 2023); Brest station model
+    with a gust glyph ''84 kt ≈ 156 km/h''; ''≈ 1.2 million homes without power'''
+  kind: map + chart
+  data: WPC (D7); ERA5 storm centre (exists); ISD synop group 911ff at Brest 03Z (D1); power-cut figure from Enedis (cited,
+    NEW C1)
+  tool: Remotion composition of existing layers
+  runner_up: none
+  why: real data in context (latest vs a remembered storm; a cited impact)
+  music: data-curious
+- id: s58_history
+  t:
+  - 1971.2
+  - 1994.125
+  sentence_times:
+  - - 1971.2
+    - 1974.325
+  - - 1974.675
+    - 1982.975
+  - - 1983.325
+    - 1993.325
+  beat: application · how old weather maps are
+  visual: 'Picture: the s37 hand-analysis lines (our own drawing, not a scan) over sparse station dots, then a cross-fade
+    to the dense 18 UTC 27 Oct 2026 chart with thousands of METAR dots (IEM station list). Keywords ''1850s'', ''2026''.'
+  voiceover: Charts like these are younger than you might think. The first ones could only be drawn once the telegraph let
+    reports from many places arrive within hours, in the eighteen fifties. Today they're drawn from millions of observations
+    and computer analyses, every few hours, but they're still read with exactly the marks we've learned.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative "then" picture drawn by us (no historical chart reproduced); history facts cited in the manifest (C2)
+  screen_summary: a hand-drawn-style isobar sketch over a few station dots fading into today's chart; '1850s' → '2026'
+  kind: map (then/now)
+  data: IEM station list (D8); our s37 hand-analysis lines
+  tool: Remotion cross-fade of existing layers
+  runner_up: none
+  why: a short history beat without any archive images (no scans)
+  music: data-curious
+- id: s59_recap
+  t:
+  - 1994.125
+  - 2061.125
+  sentence_times:
+  - - 1994.125
+    - 2000.1
+  - - 2000.45
+    - 2008.15
+  - - 2008.5
+    - 2021.625
+  - - 2021.975
+    - 2027.275
+  - - 2027.625
+    - 2034.925
+  - - 2035.275
+    - 2042.0
+  - - 2042.35
+    - 2053.0
+  - - 2053.35
+    - 2060.325
+  beat: recap
+  visual: 'House recap (s21 of the reference): one mini picture per sentence, arranged on a 4 x 2 grid that fills the content
+    area, each appearing on its sentence; no headings.'
+  voiceover: 'To sum up, latitude and longitude are two angles that pin down any place on the Earth. A degree of latitude
+    is about one hundred and eleven kilometres, while a degree of longitude shrinks with cosine phi. No flat map can keep
+    everything, so weather charts use conformal projections, which keep angles: Mercator in the tropics, Lambert in the middle
+    latitudes, and polar stereographic near the poles. Isobars show the pressure, and the closer they are, the stronger the
+    wind. Upper-air maps show the height of the five hundred hectopascal surface, which dips where the air below is cold.
+    Barbs show the wind in knots, and station models pack a whole weather report into a tiny picture. Fronts are drawn with
+    symbols on the side they move towards, and visible, infrared and water vapour images show the clouds, their heights, and
+    the moisture aloft. And with your back to the wind, the low is on your left in the northern hemisphere, and on your right
+    in the southern.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration: []
+  screen_summary: 'one beat per sentence, mini pictures: globe with φ, λ · ''111 km'' and ''111 cos φ'' · three conformal
+    mini maps · packed isobars + wind · 500-hPa sheet · barb + station model · front symbols + the three satellite thumbnails
+    · person icon with L left (N) / right (S)'
+  kind: recap
+  data: thumbnails of the movie's own scenes
+  tool: Remotion composition
+  runner_up: none
+  why: house arc
+  music: data-curious
+- id: s60_end
+  t:
+  - 2061.125
+  - 2086.775
+  sentence_times:
+  - - 2061.125
+    - 2067.0
+  - - 2067.35
+    - 2078.4
+  - - 2078.75
+    - 2086.475
+  beat: end card
+  visual: House end card, HOUSE_STYLE §3 weather/climate ending, word for word.
+  voiceover: This video is one of a series of related tutorials, so watch out for the others. They're made to help students
+    of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but
+    the maths behind them too. The notebook for reading weather maps, and the notebooks for the other concepts, are on the
+    website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration: []
+  screen_summary: 'house end card (weather/climate version): four faint thumbnails (Tissot globe, Mercator, station model,
+    the chart); ''a series of tutorials'' (68 px); ''meteorology · atmospheric science · climate'' (54 px); ''the ideas, and
+    the maths behind them'' (54 px, gold); notebook icon ''reading-weather-maps notebook''; stacked icons ''notebooks for
+    the other concepts''; 2.5-s silent hold'
+  kind: end card
+  data: none
+  tool: house EndCard
+  runner_up: none
+  why: house rule
+  music: data-curious
+honesty_notes:
+- Latitude is written φ (series convention, as in the cross-product movie); Vallis writes ϑ. The arc-length increments δx
+  = a cos φ δλ and δy = a δφ are Vallis's §2.2.2 increments at r = a (provenance only, never on screen).
+- The Earth is treated as a sphere of radius 6371 km throughout (a mean radius); the real Earth is slightly flattened, which
+  changes the distances by less than 0.5 %.
+- The Mercator formula y = a ln tan(π/4 + φ/2) is not in Vallis; it is derived on screen from the stretch and checked by the
+  chain rule (sympy check in fluidpy tests).
+- Tissot circles are 500-km-radius circles on the sphere, projected exactly (not a small-circle approximation); their drawn
+  size is their true size on each map.
+- 'The Greenland/Africa size claim: true areas from cited sources and from spherical polygon areas of Natural Earth outlines;
+  ''almost as big'' is the Mercator-drawn area ratio checked by RM08.'
+- Polar stereographic true at 60° and Lambert with standard parallels 40/60° are stated as common choices ('usually', 'we
+  might choose'), not universal rules.
+- Isobars on the Ciarán maps are ERA5 reanalysis, called 'the reanalysis'; on the 27 Oct 2026 chart the isobars are the GFS
+  analysis while lows, highs and fronts are the WPC forecasters' own (said in s53).
+- The Ciarán fronts in s42 come from an objective thermal-front method on smoothed 850-hPa temperature, said in the narration;
+  not a forecaster's analysis.
+- 'Geopotential height is described as height above sea level ''to within a fraction of a percent'' (true in the troposphere:
+  g varies by < 0.3 % up to 10 km).'
+- 's26 is a thought example: isothermal columns at 250 K and 270 K with 1000 hPa at the ground (Vallis (2.166) with T constant);
+  real columns are not isothermal.'
+- The 500-hPa surface heights are exaggerated ×500 in s24-s25 (said); front side views ×50 in s40 (said); streakline motion
+  is time-compressed (manifest).
+- 'Wind barbs: staff towards the source, feathers 5/10/50 kt (WMO/NOAA); rounding to the nearest 5 kt is shown in every example.'
+- Station models use °C and hPa (WMO practice); the METAR pressure Q0963 is QNH, described as 'reduced to sea level the way
+  pilots use it'; the SYNOP pressure 969.6 hPa is the sea-level pressure.
+- The METAR line on screen drops the '///' (missing cloud-type) and TCU/TEMPO groups; recorded in the manifest.
+- 'Satellite images: visible = reflected sunlight; infrared = brightness temperature of the emitting surface (cold = white
+  by convention); water vapour (6.2 µm) senses the middle/upper troposphere; the GIBS band-31 palette is inverted to values
+  and re-coloured grey (no rainbow palette shown).'
+- 'The cloud-top height in s45 uses a single 6.5 °C/km lapse rate: a rough estimate, said with ''about''.'
+- 'Buys Ballot''s rule is stated as an observation (NH: low on the left with your back to the wind; SH: on the right; fails
+  near the equator); rotation senses always carry ''as seen from above''; the why is left to the Coriolis and geostrophic
+  movies.'
+- At Brest the low is 74.5° to the left, not 90°, which the narration attributes to friction near the ground; the 500-hPa
+  contrast (≈ 90°) is checked (RM38).
+- The typhoon in s51 is unnamed (not confirmed); its pressure is the GFS analysis minimum.
+- Impacts and history (s57, s58) are said only if the cited sources check out (C1-C3, C6); otherwise the sentences are cut.
+- 'Maps follow the cartography skill: conformal projections for weather charts, no rainbow colour maps, labels never draped
+  on 3-D surfaces, no scale bar on continental maps, no titles or credits on screen.'
+quiz_hook: 'You stand in Sydney with a strong wind at your back blowing from the south-west, so you face north-east. Where
+  is the low? (Southern hemisphere: on your right, which is south-east; friction near the ground puts it a little in front
+  of your right shoulder, so roughly east-south-east.)'
+qa_expectations:
+  duration_s: 2089.275
+  captions:
+    cues: 523
+    max_lines: 2
+    max_chars_per_line: 42
+    max_cps: 17.0
+  equations:
+    count: 7
+    rule: every latex string of this file present verbatim in ReadingWeatherMaps.tsx; no katex-error
+  size:
+    budget_mb: 120
+    hard_mb: 160
+  three_d: ANGLE on the RTX A1000; ProjectionMorph selftest rows (JS vs fluidpy.geo.mapproj); determinism check on s10-s19
+    and s25
+  legibility: no text below 44 px at 1080p (ticks and colour bars 52 px); cartography §1 checklist on every map frame; no
+    heading except s00; no box; no URL
+  render: 'scratch on G: (aofd-data/scratch/movies/ch00_reading_weather_maps), tools/render_chunks.py, concurrency 3'
+headings_exception: s00_title only
+lexicon_proposed:
+  Buys Ballot: '[Buys Ballot](/bˈYs bəlˈɑt/)  (default G2P gives bˈIz bˈælət)'
+  Tissot: '[Tissot](/tisˈO/)  (default tˈɪsɑt)'
+  Himawari: '[Himawari](/hˌiməwˈɑɹi/)  (default hˈɪməwˌɛɹi)'
+  METAR: '[METAR](/mˈitɑɹ/)  (default spells it out)'
+  decametres: '[decametres](/dˈɛkəmˌiTəɹz/)  (default dᵻkˈæmiTəɹz)'
