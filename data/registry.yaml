@@ -401,3 +401,81 @@ datasets:
     derived_on_root: [derived/ch00/idai_viirs_truecolour_2019-03-13.jpg, derived/ch00/idai_viirs_truecolour_2019-03-14.jpg]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/idai_viirs_truecolour_2019-03-13.jpg, movies/ch00/ch00_cross_product_why/data/real/idai_viirs_truecolour_2019-03-14.jpg]
     used_by: [movie ch00_cross_product_why scene 10 (real image of Idai)]
+  NASA-GIBS-ciaran2023:
+    catalogue: GIBS
+    title: NASA GIBS MODIS Aqua Corrected Reflectance true colour, Storm Ciaran, 2023-11-02, 35-70N 50W-10E
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=MODIS_Aqua_CorrectedReflectance_TrueColor&STYLES=&CRS=EPSG:4326&BBOX=35,-50,70,10&WIDTH=3000&HEIGHT=1750&FORMAT=image/jpeg&TIME=2023-11-02
+    route: WMS GetMap (anonymous), 3000 x 1750 px (0.02 deg); no Content-Length, guard estimate 6 MB per image. Four layers tried for the day; MODIS Aqua kept unchanged (complete). VIIRS SNPP 68 % empty (no data east of ~32W), VIIRS NOAA-20 14 % empty (north of ~66N), MODIS Terra complete but 3 h earlier with a bluish seam
+    fetcher: fluidpy.data.gibs.fetch_wms (+ gibs.write_drape for the sidecar)
+    login: none
+    licence: "NASA EOSDIS: NASA-led mission data CC0, no use restrictions; credit NASA; no endorsement implied"
+    licence_url: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+    citation: NASA EOSDIS GIBS / Worldview, layer MODIS_Aqua_CorrectedReflectance_TrueColor (NASA LANCE)
+    attribution: Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS). MODIS Aqua Corrected Reflectance, NASA LANCE
+    size_bytes: 1447772
+    sha256_files:  # server-rendered images, informational
+      gibs_ciaran_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02.jpg: 6af7d78fac14c9c06a620d8707bcaa190284e791d75fc90725d52795edf08559
+      gibs_ciaran_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02.jpg: 7c8112c050407a9b116087d0fe2c21b23ffdf9781ea3c1651c80e98fb01798a7
+      gibs_ciaran_MODIS_Terra_CorrectedReflectance_TrueColor_2023-11-02.jpg: 7ce0d1488c0fc08f41d96f02e8a081aa2e40bb036bb0632b098fc0c17eeb3299
+      gibs_ciaran_VIIRS_SNPP_CorrectedReflectance_TrueColor_2023-11-02.jpg: 9b6657077dd0e12a10d0ab79c7c6f1573f4c2b560a0282f80735533663bcf0dd
+    variables: {rgb: "8-bit sRGB"}
+    coordinates: EPSG:4326, 3000 x 1750 px over 35-70N 50W-10E (0.02 deg), row 0 = 70N edge, col 0 = 50W edge
+    subset: one day (daily mosaic of daytime orbits; Aqua ~13:30 local solar time, ~13:20 UTC at the storm centre)
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NASA-GIBS/gibs_ciaran_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02.jpg, raw/NASA-GIBS/gibs_ciaran_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02.jpg, raw/NASA-GIBS/gibs_ciaran_MODIS_Terra_CorrectedReflectance_TrueColor_2023-11-02.jpg, raw/NASA-GIBS/gibs_ciaran_VIIRS_SNPP_CorrectedReflectance_TrueColor_2023-11-02.jpg]
+    derived_on_root: [derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg, derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.json]
+    derived_in_repo: [data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg, data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.json]
+    used_by: [movie ch00_cross_product_why scene s45_storm_map (v4, UV2-31)]
+  NE-10m-admin:
+    catalogue: NE
+    title: Natural Earth 1:10m admin-0 countries, admin-0 land boundaries, admin-1 states/provinces and coastline, clipped to the Storm Ciaran box 35-70N 50W-10E
+    url: https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_1_states_provinces.zip
+    raw_url: https://naturalearth.s3.amazonaws.com/
+    route: HTTPS (pooch), four zips; clipped, dissolved (UK nations, French regions, Spanish autonomous communities, Belgian regions; IRL counties, NLD provinces, LUX districts, PRT districts + Azores as NE stores them), simplified 0.01 deg (topology preserved), rounded to 0.001 deg, written as GeoJSON. NE 50m admin-1 has no European units, hence 10m
+    fetcher: fluidpy.data.naturalearth.fetch_10m / admin_box_geojson
+    login: none
+    licence: Public domain
+    licence_url: https://www.naturalearthdata.com/about/terms-of-use/
+    citation: Natural Earth, free vector and raster map data, naturalearthdata.com (v5.1)
+    attribution: Made with Natural Earth (public domain)
+    size_bytes: 23945669
+    sha256_files:
+      ne_10m_admin_0_countries.zip: ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6
+      ne_10m_admin_0_boundary_lines_land.zip: 16ead035f539c8b6c23650c5845d86ad3556553e7456bdf9b4730210f26aacbe
+      ne_10m_admin_1_states_provinces.zip: efc59726337323058f9446210adc96673179cd344e053666ee3d28cb58ba2b05
+      ne_10m_coastline.zip: bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017
+    variables: {polygons: "WGS84 lon/lat [deg] with name, iso_a3 (admin-1 also country)", lines: "WGS84 lon/lat [deg]"}
+    coordinates: lon -180..180 (box -50..10), lat 35..70; GeoJSON (lon, lat) order. The admin-1 DBF mixes UTF-8 and cp1252 text; read_records decodes each field
+    subset: box 35-70N 50W-10E
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NE-10m-admin/ne_10m_admin_0_countries.zip, raw/NE-10m-admin/ne_10m_admin_0_boundary_lines_land.zip, raw/NE-10m-admin/ne_10m_admin_1_states_provinces.zip, raw/NE-10m-admin/ne_10m_coastline.zip]
+    derived_on_root: [derived/ch00/ciaran_admin/ciaran_admin0_10m.geojson, derived/ch00/ciaran_admin/ciaran_borders_10m.geojson, derived/ch00/ciaran_admin/ciaran_admin1_10m.geojson, derived/ch00/ciaran_admin/ciaran_admin1_lines_10m.geojson, derived/ch00/ciaran_admin/ciaran_coast_10m.geojson]
+    derived_in_repo: [data/derived/ch00/ciaran_admin0_10m.geojson, data/derived/ch00/ciaran_borders_10m.geojson, data/derived/ch00/ciaran_admin1_10m.geojson, data/derived/ch00/ciaran_admin1_lines_10m.geojson, data/derived/ch00/ciaran_coast_10m.geojson]
+    used_by: [movie ch00_cross_product_why scene s45_storm_map (v4, UV2-31 administrative boundaries)]
+  BMNG-2004-21600:
+    catalogue: BMNG
+    title: NASA Blue Marble Next Generation, September 2004, topography + bathymetry, 21600 x 10800 (2 km) equirectangular JPEG; local patches for the movie
+    url: https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/september/world.topo.bathy.200409.3x21600x10800.jpg
+    route: HTTPS (pooch) through the guard (Content-Length 28,335,770 B, 3.4 s); local square patches cut with nasa_bmng.local_patch (lon half-width = lat half-width / cos(lat0)), Lanczos resampling
+    fetcher: fluidpy.data.nasa_bmng.fetch_image(size="21600x10800") / local_patch
+    login: none
+    licence: NASA imagery, not copyrighted in the US (treated as public domain); acknowledge NASA; no endorsement implied; no NASA insignia
+    licence_url: https://www.nasa.gov/nasa-brand-center/images-and-media/
+    citation: "Stockli, R., Vermote, E., Saleous, N., Simmon, R., Herring, D., 2005: The Blue Marble Next Generation - a true color Earth dataset including seasonal dynamics from MODIS. NASA Earth Observatory"
+    attribution: "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stockli, NASA GSFC)"
+    size_bytes: 28335770
+    sha256: 863036b622ba3dab4eb4ffb7149730b02cfa433ce49672e9b7267022051e04a2
+    variables: {rgb: "8-bit sRGB, cloud-free monthly composite"}
+    coordinates: column 0 = 180 W, row 0 = 90 N; equirectangular, 1/60 deg pixels. Patches - s23 37-53N 10.81W-11.81E (1536 px), s31 NH 41-49N 5.16W-6.16E, s31 SH 49-41S 75.16W-63.84W (1024 px); sidecar JSON gives the exact edges
+    subset: whole file
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/BMNG-2004/world.topo.bathy.200409.3x21600x10800.jpg]
+    derived_on_root: [derived/ch00/bmng_patch_s23_biscay_45N_0p5E.jpg, derived/ch00/bmng_patch_s31_dordogne_45N_0p5E.jpg, derived/ch00/bmng_patch_s31_chubut_45S_69p5W.jpg]
+    derived_in_repo: [data/derived/ch00/bmng_patch_s23_biscay_45N_0p5E.jpg, data/derived/ch00/bmng_patch_s23_biscay_45N_0p5E.json, data/derived/ch00/bmng_patch_s31_dordogne_45N_0p5E.jpg, data/derived/ch00/bmng_patch_s31_dordogne_45N_0p5E.json, data/derived/ch00/bmng_patch_s31_chubut_45S_69p5W.jpg, data/derived/ch00/bmng_patch_s31_chubut_45S_69p5W.json]
+    used_by: [movie ch00_cross_product_why v4 scene s23 (local k x u map, UV2-14) and s31 (parcel close-ups on land, UV2-25)]

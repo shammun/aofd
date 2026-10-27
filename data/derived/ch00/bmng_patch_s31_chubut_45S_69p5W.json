@@ -1,0 +1,30 @@
+{
+ "files": {
+  "bmng_patch_s31_chubut_45S_69p5W.jpg": "s31 parcel close-up, SH start 45.0S 69.5W (Chubut, Patagonia); BMNG Sept 2004 topography+bathymetry, 2 km source (60 px/deg), resampled (Lanczos) to 1024 x 1024; square = equal km east-west and north-south at the centre latitude (889.6 km per side)"
+ },
+ "grid": "regular lat/lon (EPSG:4326, plate carree), 0.0078125 x 0.0110486 deg, row 0 = -41.0 N edge, col 0 = -75.1569 E edge",
+ "lat_edges": [
+  -49.0,
+  -41.0
+ ],
+ "lon_edges": [
+  -75.1569,
+  -63.8431
+ ],
+ "shape": [
+  1024,
+  1024
+ ],
+ "centre": [
+  -45.0,
+  -69.5
+ ],
+ "km_per_side": 889.6,
+ "source_url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/september/world.topo.bathy.200409.3x21600x10800.jpg",
+ "licence": "NASA imagery, not copyrighted (NASA Images and Media Usage Guidelines, https://www.nasa.gov/nasa-brand-center/images-and-media/); acknowledge NASA; no endorsement implied",
+ "credit": "NASA Earth Observatory, Blue Marble: Next Generation (Reto Stöckli, NASA GSFC)",
+ "citation": "Stöckli, R., Vermote, E., Saleous, N., Simmon, R., Herring, D., 2005: The Blue Marble Next Generation - a true color Earth dataset including seasonal dynamics from MODIS. NASA Earth Observatory",
+ "dataset_key": "BMNG-2004",
+ "fluidpy_commit": "9176882+dirty",
+ "redistributable": true
+}
