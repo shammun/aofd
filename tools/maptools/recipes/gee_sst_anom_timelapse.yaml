@@ -1,0 +1,15 @@
+# Timelapse: monthly-mean OISST v2.1 SST anomaly, tropical Pacific, Jun 2023 - Jan 2024 (El Nino onset). GEE.
+name: gee_sst_anom_timelapse
+tool: gee
+kind: timelapse
+gee:
+  asset: NOAA/CDR/OISST/V2_1
+  band: anom
+  scale: 0.01
+  units: degC
+  composite: mean
+  dates: {start: 2023-06-01, stop: 2024-01-01, step: "1 month"}
+region: [-180.0, -70.0, -30.0, 30.0]
+style: {cmap: cmocean.balance, vmin: -3, vmax: 3, mp4: true, fps: 2}
+overlays: [coast_110m]
+size: [1100, 440]

@@ -1,0 +1,13 @@
+{
+  "name": "aofd-maptools-js",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local JS map libraries for headless renders (MapLibre GL JS, deck.gl, CesiumJS, three.js). Served from disk by tools/maptools/adapters/web.py; never loaded from a CDN in final frames.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "maplibre-gl": "6.16.0",
+    "deck.gl": "9.4.0",
+    "cesium": "1.146.0",
+    "three": "0.186.1"
+  }
+}

@@ -1,0 +1,19 @@
+# Globe view of ERA5 MSLP 12 UTC 2 Nov 2023 centred on Storm Ciaran (orthographic / 3-D globe tools).
+name: globe_mslp
+tool: geovista
+kind: png
+data:
+  - path: data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc
+    var: msl
+    scale: 0.01
+    units: hPa
+region: global
+projection: {name: orthographic, lon0: -10, lat0: 45}
+style:
+  cmap: cmocean.balance
+  center: 1013
+  vmin: 960
+  vmax: 1050
+  contours: {interval: 8, color: "#202020", width: 0.6}
+overlays: [coast_110m]
+size: [800, 800]

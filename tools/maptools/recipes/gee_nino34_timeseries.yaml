@@ -1,0 +1,15 @@
+# Time series: monthly mean OISST SST anomaly over Nino 3.4 (5S-5N, 170W-120W), 2020-2024 -> CSV + Parquet + chart.
+name: gee_nino34_anom
+tool: gee
+kind: timeseries
+gee:
+  asset: NOAA/CDR/OISST/V2_1
+  band: anom
+  scale: 0.01
+  units: degC
+  composite: mean
+  reducer: mean
+  scale_m: 27750
+  geometry: {bbox: [-170, -5, -120, 5]}
+  dates: {start: 2020-01-01, stop: 2024-12-01, step: "1 month"}
+size: [1280, 720]

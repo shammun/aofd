@@ -1,0 +1,16 @@
+# PNG sequence: ERA5 850 hPa temperature during Ciaran, every 3 h (data animation for Remotion via staticFile).
+name: ciaran_t850
+tool: mpl
+kind: png_sequence
+data:
+  - path: data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc
+    var: t
+    offset: -273.15
+    units: degC
+    time: {start: "2023-11-01T12", stop: "2023-11-02T12", step: 3}
+region: [-40.0, 15.0, 30.0, 65.0]
+projection: {name: lambert_conformal, lon0: -10, lat0: 48}
+style: {cmap: cmocean.thermal, vmin: -15, vmax: 20}
+overlays:
+  - {geojson: data/derived/ch00/ciaran_coast_10m.geojson, kind: coast}
+size: [960, 640]

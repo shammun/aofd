@@ -1,0 +1,21 @@
+# Self-test 3: Storm Ciaran isobars (ERA5 msl, 12 UTC 2 Nov 2023), 4 hPa interval, 10 m Natural Earth coast + borders.
+name: ciaran_isobars
+tool: mpl
+kind: png
+data:
+  - path: data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc
+    var: msl
+    scale: 0.01
+    units: hPa
+    time: first
+region: [-30.0, 20.0, 35.0, 65.0]
+projection: {name: lambert_conformal, lon0: -5, lat0: 50}
+style:
+  cmap: cmocean.dense_r
+  vmin: 950
+  vmax: 1030
+  contours: {interval: 4, color: "#111111", width: 0.9}
+overlays:
+  - {geojson: data/derived/ch00/ciaran_coast_10m.geojson, kind: coast}
+  - {geojson: data/derived/ch00/ciaran_borders_10m.geojson, kind: borders}
+size: [960, 640]

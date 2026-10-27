@@ -1,0 +1,15 @@
+# Before/after from STAC (Element 84 Earth Search, Sentinel-2 L2A "visual" COG): Derna, Libya, flood of 10-11 Sep 2023.
+name: stac_derna_2023
+tool: stac
+kind: before_after
+stac:
+  api: https://earth-search.aws.element84.com/v1
+  catalog: earth-search
+  collection: sentinel-2-l2a
+  asset: visual
+  max_cloud: 10
+  before: {start: 2023-08-15, stop: 2023-09-09}
+  after: {start: 2023-09-12, stop: 2023-10-05}
+region: [22.58, 22.70, 32.70, 32.79]
+style: {}
+size: [900, 680]

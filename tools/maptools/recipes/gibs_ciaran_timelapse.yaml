@@ -1,0 +1,13 @@
+# Timelapse from NASA GIBS: VIIRS NOAA-20 true colour, daily, Storm Ciaran 31 Oct - 3 Nov 2023, our 10 m coasts on top.
+name: gibs_ciaran_viirs
+tool: gibs
+kind: timelapse
+gibs:
+  layer: VIIRS_NOAA20_CorrectedReflectance_TrueColor
+  format: image/jpeg
+  dates: {start: 2023-10-31, stop: 2023-11-03, step: "1 day"}
+region: [-30.0, 20.0, 35.0, 65.0]
+style: {overlay_color: "#f2d04a", mp4: true, fps: 1}
+overlays:
+  - {geojson: data/derived/ch00/ciaran_coast_10m.geojson, kind: coast}
+size: [1000, 600]

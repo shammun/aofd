@@ -1,0 +1,10 @@
+# Heightmap for three.js / deck.gl terrain: 16-bit grey + Terrarium RGB, bounds and zmin/zmax in the sidecar.
+name: alps
+tool: mpl
+kind: heightmap
+data:
+  - path: ${DATA}/raw/ETOPO2022-60s/etopo2022_60s_alps_43-49N_4-17E.nc
+    var: z
+    units: m
+region: [5.0, 16.0, 43.5, 48.5]
+style: {cmap: cmocean.topo}

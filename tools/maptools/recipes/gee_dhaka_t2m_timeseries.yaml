@@ -1,0 +1,15 @@
+# Time series at a city: ERA5-Land monthly 2 m temperature at Dhaka (23.81N, 90.41E), 2015-2024. GEE.
+name: gee_dhaka_t2m
+tool: gee
+kind: timeseries
+gee:
+  asset: ECMWF/ERA5_LAND/MONTHLY_AGGR
+  band: temperature_2m
+  offset: -273.15
+  units: degC
+  composite: first
+  reducer: mean
+  scale_m: 11132
+  geometry: {point: [90.41, 23.81]}
+  dates: {start: 2015-01-01, stop: 2024-12-01, step: "1 month"}
+size: [1280, 720]

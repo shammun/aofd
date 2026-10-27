@@ -1,0 +1,15 @@
+# Before/after: 2022 Pakistan floods, lower Indus (Manchar Lake), MODIS 8-day surface reflectance, false colour
+# (SWIR2, NIR, red: open water near-black/dark blue, vegetation green). Same region, size and stretch for both. GEE.
+name: gee_indus_flood_2022
+tool: gee
+kind: before_after
+gee:
+  asset: MODIS/061/MOD09A1
+  rgb: [sur_refl_b07, sur_refl_b02, sur_refl_b01]
+  composite: median
+  before: {start: 2021-08-25, stop: 2021-09-10}
+  after: {start: 2022-08-25, stop: 2022-09-10}
+region: [66.5, 70.5, 25.0, 29.0]
+style: {vmin: 0, vmax: 4000}
+overlays: [borders]
+size: [800, 800]

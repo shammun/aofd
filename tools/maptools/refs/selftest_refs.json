@@ -1,0 +1,349 @@
+{
+ "mpl:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "e4cac42a2e77d9ad71992dacdd4c5643ab15dd6741b322aca3f095cf8cac259a",
+  "mean_rgb": [
+   178.246,
+   185.966,
+   222.058
+  ],
+  "std": 67.773,
+  "nonwhite": 0.5936,
+  "tool_version": "matplotlib 3.11.2, cartopy 0.26.0"
+ },
+ "mpl:global_mslp": {
+  "size": [
+   960,
+   480
+  ],
+  "pixel_sha256": "1cfe11af3c5c82c42ec476f30c7610e12a8abedc4214fdec6cc0b3f56a2cdcc1",
+  "mean_rgb": [
+   199.367,
+   195.481,
+   198.858
+  ],
+  "std": 61.743,
+  "nonwhite": 0.79753,
+  "tool_version": "matplotlib 3.11.2, cartopy 0.26.0"
+ },
+ "mpl:global_texture": {
+  "size": [
+   2048,
+   1024
+  ],
+  "pixel_sha256": "1b3035fb462906bf2ede66dbd02c2f10916fb1815208c426cb44812b5324b0a9",
+  "mean_rgb": [
+   184.706,
+   118.426,
+   97.269
+  ],
+  "std": 67.662,
+  "nonwhite": 1.0,
+  "tool_version": "matplotlib 3.11.2, cartopy 0.26.0"
+ },
+ "mpl:alps_heightmap": {
+  "size": [
+   660,
+   300
+  ],
+  "pixel_sha256": "e5cbcb765b36627249699b672b9d0ca1e19808708f3fe829fe5428865c9dbbdf",
+  "mean_rgb": [
+   254.938,
+   254.938,
+   254.938
+  ],
+  "std": 2.886,
+  "nonwhite": 0.0007,
+  "tool_version": "matplotlib 3.11.2, cartopy 0.26.0"
+ },
+ "pygmt:alps_relief": {
+  "size": [
+   960,
+   540
+  ],
+  "pixel_sha256": "b0b8ef0377a12010a4dd52e356a673cefede343cd96ee76a37cc62f040c68302",
+  "mean_rgb": [
+   149.628,
+   165.083,
+   139.736
+  ],
+  "std": 102.112,
+  "nonwhite": 0.57227,
+  "tool_version": "pygmt v0.19.0, GMT 6.7.0"
+ },
+ "pygmt:global_mslp": {
+  "size": [
+   960,
+   480
+  ],
+  "pixel_sha256": "146de588b8f5807b2134459f26f485f15dfa7581d6ebb86d52d42695a1e1790b",
+  "mean_rgb": [
+   185.358,
+   181.142,
+   183.962
+  ],
+  "std": 74.088,
+  "nonwhite": 0.85027,
+  "tool_version": "pygmt v0.19.0, GMT 6.7.0"
+ },
+ "geovista:globe_mslp": {
+  "size": [
+   800,
+   800
+  ],
+  "pixel_sha256": "3130c7b7bc6ef3d315268c9f4385c128366a1d3825abd5af139edcf9d36e5edc",
+  "mean_rgb": [
+   218.916,
+   215.315,
+   216.153
+  ],
+  "std": 46.941,
+  "nonwhite": 0.66675,
+  "tool_version": "geovista 0.5.3, pyvista 0.49.1, vtk (9, 7, 1)"
+ },
+ "maplibre:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "85be520b21cb92b330c42b84797b31e87912ce2af07656c86097cbd71ed9f034",
+  "mean_rgb": [
+   168.72,
+   176.119,
+   219.57
+  ],
+  "std": 66.511,
+  "nonwhite": 0.65936,
+  "tool_version": "maplibre-gl 6.16.0; chrome-headless-shell 157.0.8080.0; GL gpu: ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)"
+ },
+ "deckgl:alps_relief": {
+  "size": [
+   960,
+   540
+  ],
+  "pixel_sha256": "aa9bbae38fbc7e8fc6a1cc5c67c26f8d6c90213a5366c2b4ce16180e8f2a1276",
+  "mean_rgb": [
+   153.309,
+   162.015,
+   145.591
+  ],
+  "std": 99.84,
+  "nonwhite": 0.55736,
+  "tool_version": "deck.gl 9.4.0; chrome-headless-shell 157.0.8080.0; GL gpu: ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)"
+ },
+ "cesium:globe_mslp": {
+  "size": [
+   800,
+   800
+  ],
+  "pixel_sha256": "7e90fd9217567eac750c8c612786021056476b6f081ecab71a853ccf466457e6",
+  "mean_rgb": [
+   234.777,
+   233.424,
+   233.837
+  ],
+  "std": 48.508,
+  "nonwhite": 0.3036,
+  "tool_version": "cesium 1.146.0; chrome-headless-shell 157.0.8080.0; GL gpu: ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)"
+ },
+ "leafmap:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "e2f16553d14c0c0faa29e98c017e14d5d076dc6a01ae2584fb1f3770e6fd5d22",
+  "mean_rgb": [
+   175.829,
+   177.611,
+   216.264
+  ],
+  "std": 52.524,
+  "nonwhite": 0.99341,
+  "tool_version": "leafmap 0.63.1, folium 0.20.0; GL gpu: ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)"
+ },
+ "rustgis:alps_relief": {
+  "size": [
+   960,
+   540
+  ],
+  "pixel_sha256": "3eb178bd496e7335905784313d5976caf608724de32ae379fd46952c401c9c1d",
+  "mean_rgb": [
+   179.952,
+   190.484,
+   172.553
+  ],
+  "std": 97.002,
+  "nonwhite": 0.45362,
+  "tool_version": "rustgis 0.4.0"
+ },
+ "rustgis:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "e94e22f1ed0f8e2b4717d3b71e358d12c7b2e96d2cdf32a73f3cd15cafed88a6",
+  "mean_rgb": [
+   210.876,
+   215.684,
+   237.062
+  ],
+  "std": 56.985,
+  "nonwhite": 0.34436,
+  "tool_version": "rustgis 0.4.0"
+ },
+ "qgis:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "846cc39a867732e4eb19793805ed8bfb392b931220810b16f2a1915ced7e1a89",
+  "mean_rgb": [
+   175.582,
+   184.363,
+   223.854
+  ],
+  "std": 63.892,
+  "nonwhite": 0.62601,
+  "tool_version": "QGIS 3.34.1-Prizren"
+ },
+ "qgis:alps_relief": {
+  "size": [
+   960,
+   540
+  ],
+  "pixel_sha256": "cf11dbfd98538c9d58c36358d90e9e611799f7f739e3d755d4b1e1559b7ca386",
+  "mean_rgb": [
+   87.074,
+   105.824,
+   75.983
+  ],
+  "std": 83.612,
+  "nonwhite": 0.86042,
+  "tool_version": "QGIS 3.34.1-Prizren"
+ },
+ "arcgis:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "b4107883e1e8c70389c0ce20723c48ec558c919df48693669dfd277f2bc2604b",
+  "mean_rgb": [
+   173.751,
+   182.563,
+   221.348
+  ],
+  "std": 66.378,
+  "nonwhite": 0.63104,
+  "tool_version": "ArcGIS Pro 3.7 (ArcInfo, Named User); Spatial=Available"
+ },
+ "gee:gee_era5_mslp": {
+  "size": [
+   1000,
+   600
+  ],
+  "pixel_sha256": "c83ffa02f22469c34a8a7c4aeb1d4b8d6e69c7dc7eafea5ba2aa15e15f9035da",
+  "mean_rgb": [
+   128.129,
+   139.158,
+   208.215
+  ],
+  "std": 54.068,
+  "nonwhite": 1.0,
+  "tool_version": "earthengine-api 1.7.50 (project uhiphd)"
+ },
+ "gee:gee_sst_anom_timelapse": {
+  "size": [
+   1100,
+   440
+  ],
+  "pixel_sha256": "c605e89771782ba5e35d8d808d82387ea28142dcd2802bd0f5290942221a14d5",
+  "mean_rgb": [
+   207.445,
+   170.077,
+   161.009
+  ],
+  "std": 52.442,
+  "nonwhite": 1.0,
+  "tool_version": "earthengine-api 1.7.50 (project uhiphd)"
+ },
+ "gee:gee_flood_before_after": {
+  "size": [
+   800,
+   800
+  ],
+  "pixel_sha256": "d06c3cb4abe6353e692784ce376761e8e6d9ec0b372f3344e444d5566192e2ad",
+  "mean_rgb": [
+   164.789,
+   191.734,
+   123.335
+  ],
+  "std": 57.838,
+  "nonwhite": 0.9975,
+  "tool_version": "earthengine-api 1.7.50 (project uhiphd)"
+ },
+ "gee:gee_nino34_timeseries": {
+  "size": [
+   1280,
+   720
+  ],
+  "pixel_sha256": "d4ac9f4f90b85a270e1802cdd102fcea5b868aa9f509a543e67ca787147a37cd",
+  "mean_rgb": [
+   251.127,
+   250.528,
+   251.268
+  ],
+  "std": 26.782,
+  "nonwhite": 0.04377,
+  "csv_rows": 60,
+  "tool_version": "earthengine-api 1.7.50 (project uhiphd)"
+ },
+ "gee:gee_dhaka_t2m_timeseries": {
+  "size": [
+   1280,
+   720
+  ],
+  "pixel_sha256": "0c214fc6e8935036f4b995d21d8246bd5ee0d9cb2d63f5b3fed4fcdac0782b50",
+  "mean_rgb": [
+   246.492,
+   244.421,
+   246.984
+  ],
+  "std": 39.716,
+  "nonwhite": 0.07868,
+  "csv_rows": 120,
+  "tool_version": "earthengine-api 1.7.50 (project uhiphd)"
+ },
+ "gibs:gibs_ciaran_timelapse": {
+  "size": [
+   1000,
+   600
+  ],
+  "pixel_sha256": "aa69810cbc9c73b8cbfebf6e1158dda118a93c435f44d3e3fd120e14b1911b18",
+  "mean_rgb": [
+   150.897,
+   150.048,
+   151.558
+  ],
+  "std": 79.755,
+  "nonwhite": 0.9886,
+  "tool_version": "NASA GIBS WMS 1.3.0 (epsg4326/best)"
+ },
+ "stac:stac_derna_before_after": {
+  "size": [
+   900,
+   680
+  ],
+  "pixel_sha256": "a386887a6dc1ce5d69844891696813ab60d4a31d11ac420dcb1c865b45488e63",
+  "mean_rgb": [
+   178.047,
+   144.116,
+   108.978
+  ],
+  "std": 78.473,
+  "nonwhite": 0.98858,
+  "tool_version": "pystac-client 0.9.1, rasterio 1.5.2"
+ }
+}

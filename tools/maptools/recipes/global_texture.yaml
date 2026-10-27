@@ -1,0 +1,13 @@
+# Equirectangular 2:1 texture for a three.js globe: ERA5 2 m temperature 12 UTC 2 Nov 2023, coasts burnt in.
+name: t2m_globe
+tool: mpl
+kind: texture
+data:
+  - path: data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc
+    var: t2m
+    offset: -273.15
+    units: degC
+region: global
+style: {cmap: cmocean.thermal, vmin: -40, vmax: 40}
+overlays: [coast_110m]
+size: [2048, 1024]

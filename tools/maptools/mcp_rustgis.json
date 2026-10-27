@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "rustgis": {
+      "command": "G:\\Geophysical Fluid Dynamics\\aofd-data\\envs\\rustgis-0.4.0\\RustGIS-0.4.0-windows-x86_64\\rustgis-cli.exe",
+      "args": [
+        "mcp",
+        "--data", "C:\\Users\\sislam27\\Work\\Climate Dynamics PHD\\AOFD Vallis\\data\\derived\\ch00\\ciaran_coast_10m.geojson",
+        "--data", "C:\\Users\\sislam27\\Work\\Climate Dynamics PHD\\AOFD Vallis\\data\\derived\\ch00\\ciaran_borders_10m.geojson"
+      ]
+    },
+    "geolibre": {
+      "command": "C:\\Users\\sislam27\\Work\\Climate Dynamics PHD\\AOFD Vallis\\.venv-maps\\Scripts\\geolibre-mcp.exe",
+      "args": ["--root", "G:\\Geophysical Fluid Dynamics\\aofd-data\\scratch\\geolibre_mcp"]
+    }
+  }
+}

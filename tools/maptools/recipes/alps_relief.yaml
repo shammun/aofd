@@ -1,0 +1,20 @@
+# Self-test 1: Alps relief with hillshade (2-D) and a 3-D perspective camera for tools that use it.
+name: alps_relief
+tool: pygmt
+kind: png
+data:
+  - path: ${DATA}/raw/ETOPO2022-60s/etopo2022_60s_alps_43-49N_4-17E.nc
+    var: z
+    units: m
+region: [5.0, 16.0, 43.5, 48.5]          # lon0, lon1, lat0, lat1
+projection: {name: mercator}
+camera: {azimuth: 170, elevation: 35, zsize_cm: 1.0, exaggeration: 6}   # used by pygmt grdview / deckgl / geovista / cesium
+style:
+  cmap: cmocean.topo
+  vmin: -4500
+  vmax: 4500
+  hillshade: true
+  shade_alpha: 0.4
+overlays: [coast, borders]
+labels: false
+size: [960, 540]

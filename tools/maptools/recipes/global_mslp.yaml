@@ -1,0 +1,20 @@
+# Self-test 2: global mean sea-level pressure, ERA5 12 UTC 2 Nov 2023, isobars every 8 hPa.
+name: global_mslp
+tool: mpl
+kind: png
+data:
+  - path: data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc
+    var: msl
+    scale: 0.01
+    units: hPa
+    time: first
+region: global
+projection: {name: robinson, lon0: 0}
+style:
+  cmap: cmocean.balance
+  center: 1013
+  vmin: 960
+  vmax: 1050
+  contours: {interval: 8, color: "#202020", width: 0.6}
+overlays: [coast_110m]
+size: [960, 480]
