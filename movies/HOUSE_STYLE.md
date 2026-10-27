@@ -80,6 +80,21 @@ The words change only for the topic: "maths tutorials" may become "tutorials" fo
 
 Then a **2.5-s silent hold** while the music fades.
 
+### The ending for weather, climate and ocean movies (user, 2026-10-27)
+Every movie whose topic is weather, climate, the atmosphere or the ocean (Chapter 0 from `ch00_weather_basics` on, and
+all chapter movies of that kind) says, and writes on the end card, who the series is for and that it shows the maths:
+> "This video is one of a series of related tutorials, so watch out for the others. They're made to help students of
+> meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but
+> the maths behind them too. The notebook for <these weather basics>, and the notebooks for the other concepts, are on
+> the website that goes with this video."
+
+- Ocean topics add oceanography to the list: "students of meteorology, oceanography, atmospheric and climate science".
+- **The screen** is the same as above, but with three keyword lines:
+  - "a series of tutorials" (68 px);
+  - "meteorology · atmospheric science · climate" (54 px; ocean movies use "· oceanography");
+  - "the ideas, and the maths behind them" (54 px, gold).
+- The pure maths movies (dot product, cross product, grad/div/curl…) keep the maths-tutorial ending above.
+
 ## 4. Voice and narration
 - **Voice:** Kokoro `af_bella`, speed **1.0**. Every movie sounds the same.
   - The narration is the measured audio (`tools/tts.py`); timing is never estimated.
@@ -260,3 +275,4 @@ Then a **2.5-s silent hold** while the music fades.
 
 ## 12. Change log
 - 2026-10-25: created from the approved reference movie ch00_dot_product_why v6 fix 1 (user: "I love it… make sure next time … these design choices … are automatically passed to all the next videos").
+- 2026-10-27: §3 adds the ending for weather, climate and ocean movies (user: say and write that the videos are made for students of meteorology, atmospheric science and climate, and anyone who wants to see the maths behind the ideas).
