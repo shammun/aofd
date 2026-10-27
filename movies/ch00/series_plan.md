@@ -116,6 +116,14 @@ possible … appropriate animation and also data animation."
 - The director plans it in the storyboard (per scene: map / globe / 3-D / data animation), and the reviewer checks
   "could this static picture be a real map or a data animation?" as a SHOULD item.
 
+## Map toolkit set-up (user, 2026-10-27: "go ahead")
+The map and 3-D tools are installed so agents can run them on their own: separate environments (`.venv-maps`, a
+conda/micromamba env for GMT if pip cannot supply it, an npm tree under `tools/maptools/js/`), one render command
+(`tools/maptools/render.py <recipe>`), a side-by-side compare command, a `map-toolkit` skill and self-tests. Big
+environments and package caches live on G: wherever the tool allows. **Disk:** the user allows C: to go down to a
+little over 10 GB free for these installs (floor for installs 12 GB; the 40 GB floor still applies to data downloads).
+Google Earth Engine needs the user's account (steps given to the user 2026-10-27).
+
 ## Real data in every movie (user, 2026-10-27: "not only for ENSO but for all the things")
 Wherever a topic has observations, every movie gets the treatment first asked for ENSO:
 - **The latest data**, fetched when the movie is made: the newest reanalysis, SST, sea level, Argo, AMOC (RAPID),
