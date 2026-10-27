@@ -12,6 +12,10 @@ Run with the main venv::
 ``score`` = compose a bed exactly as long as the narration (+ tail) and mix it: it writes ``music.wav`` and
 ``narration_music.wav`` (44.1 kHz stereo, −16 LUFS integrated, true peak ≤ −1.5 dBTP) into ``--out-dir``.
 
+``--style NAME`` (compose and score) picks one of the music styles in ``tools/sound/styles.py`` (one score per movie,
+HOUSE_STYLE §8; ``tools/sound/styles.py list``). Without ``--style`` the output is byte-identical to the original
+pad described below (style ``maths-calm``). Sound effects and cue sheets: ``tools/sound/mix.py``.
+
 The music: four slow chords (Dmaj9 · Bm11 · Gmaj9 · Asus2, 9 s each, 3-s raised-cosine crossfades), each note three
 gently detuned voices with a slow swell, a quiet sub-bass, sparse soft bell notes from the D-major pentatonic, a
 low-pass at 2.4 kHz and a synthetic 3.5-s reverb. Ducking: the music drops by ``--duck-db`` (default 5 dB) while
@@ -208,6 +212,7 @@ def main() -> int:
     c.add_argument("--out", type=Path, required=True)
     c.add_argument("--seed", type=int, default=7)
     c.add_argument("--lufs", type=float, default=-28.0, help="loudness of the music bed on its own")
+    c.add_argument("--style", default=None, help="a tools/sound/styles.py style (default: the original pad)")
     mx = sub.add_parser("mix")
     mx.add_argument("--narration", type=Path, required=True)
     mx.add_argument("--music", type=Path, required=True)
@@ -220,26 +225,34 @@ def main() -> int:
     s.add_argument("--seed", type=int, default=7)
     s.add_argument("--lufs", type=float, default=-28.0)
     s.add_argument("--duck-db", type=float, default=5.0)
+    s.add_argument("--style", default=None, help="a tools/sound/styles.py style (default: the original pad)")
     a = ap.parse_args()
 
-    def make_bed(duration: float, out: Path, seed: int, lufs: float) -> None:
+    def make_bed(duration: float, out: Path, seed: int, lufs: float, style: str | None = None) -> None:
         raw = out.with_name(out.stem + "_raw.wav")
-        write_wav(raw, compose(duration, seed))
+        if style is None:
+            write_wav(raw, compose(duration, seed))
+        else:                                           # delegate to the style composer (tools/sound/styles.py)
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from sound import styles
+            write_wav(raw, styles.compose(style, duration, seed))
         loudnorm(raw, out, lufs, tp=-6.0)
         raw.unlink()
-        print(f"music: {out}  ({duration:.2f} s, {lufs} LUFS, seed {seed})")
+        print(f"music: {out}  ({duration:.2f} s, {lufs} LUFS, seed {seed}" + (f", style {style})" if style else ")"))
 
     if a.cmd == "compose":
-        make_bed(a.duration, a.out, a.seed, a.lufs)
+        make_bed(a.duration, a.out, a.seed, a.lufs, a.style)
     elif a.cmd == "mix":
         print(json.dumps(mix(a.narration, a.music, a.out, a.duck_db), indent=1))
     else:
         a.out_dir.mkdir(parents=True, exist_ok=True)
         sr, x = wavfile.read(a.narration)
         bed = a.out_dir / "music.wav"
-        make_bed(len(x) / sr + a.tail, bed, a.seed, a.lufs)
+        make_bed(len(x) / sr + a.tail, bed, a.seed, a.lufs, a.style)
         info = mix(a.narration, bed, a.out_dir / "narration_music.wav", a.duck_db)
         info.update(seed=a.seed, bed_lufs=a.lufs, tail_s=a.tail)
+        if a.style is not None:
+            info.update(style=a.style)
         (a.out_dir / "music.json").write_text(json.dumps(info, indent=1), encoding="utf-8")
         print(json.dumps(info, indent=1))
     return 0

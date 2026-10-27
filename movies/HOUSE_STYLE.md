@@ -220,7 +220,7 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - **Music:** `tools/music.py score` (procedural, our own, CC0), seed 7.
   - The bed sits at −28 LUFS on its own, ducked 5 dB under speech.
   - A 2.5-s tail with the music fading.
-  - The mix is normalised to −16 LUFS, true peak ≤ −1 dBTP (the reference: −16.0 / −3.6).
+  - The mix is normalised to −16 LUFS, true peak ≤ −1.5 dBTP (the reference: −16.0 / −3.6).
 - **A different score for each movie** (user, 2026-10-27): no two movies share the same music. Each movie gets its
   own style matched to its content (e.g. calm ambient for the maths, airy/flowing for weather, deep and slow for the
   ocean, tense for storms, warm for the tropics), its own key, tempo and instrument palette. Same mixing rules as

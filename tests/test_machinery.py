@@ -159,3 +159,44 @@ def test_movie_qa_frozen_gate_counts_only_silence():
     assert movie_qa.longest_silence(11.0, 20.0, speech) == pytest.approx(8.8)    # silent hold: 11.2 → 20.0
     assert movie_qa.longest_silence(21.0, 30.0, speech) == pytest.approx(8.0)    # silence to the end
     assert movie_qa.narration_spans(None) is None
+
+
+def test_movie_qa_sound_captions_gate():
+    """--sound-cues: bracketed sound captions pass only where the sidecar lists them; spoken words stay exact."""
+    import movie_qa
+
+    script = "The wave breaks on the shore. Then it washes back."
+    cues = [{"start": 0.0, "end": 3.0, "lines": ["The wave breaks on the shore."]},
+            {"start": 3.0, "end": 5.0, "lines": ["[waves breaking]"]},
+            {"start": 5.0, "end": 7.5, "lines": ["Then it washes back."]}]
+    side = [{"start": 3.2, "end": 5.5, "text": "[waves breaking]"}]
+    assert movie_qa.captions_gate_with_sounds(cues, script, side, 10.0)[0] == "PASS"
+    # a sound caption the sidecar does not list fails
+    assert movie_qa.captions_gate_with_sounds(cues, script, [], 10.0)[0] == "FAIL"
+    # a listed sound with no caption fails
+    assert movie_qa.captions_gate_with_sounds([cues[0], cues[2]], script, side, 10.0)[0] == "FAIL"
+    # spoken words are still checked exactly
+    bad = [dict(cues[0], lines=["The wave breaks on the beach."]), cues[1], cues[2]]
+    assert movie_qa.captions_gate_with_sounds(bad, script, side, 10.0)[0] == "FAIL"
+    # words and brackets mixed on one line fail
+    mixed = [cues[0], dict(cues[1], lines=["[waves breaking] loudly"]), cues[2]]
+    assert movie_qa.captions_gate_with_sounds(mixed, script, side, 10.0)[0] == "FAIL"
+    # the default gate (no sidecar) still rejects any bracketed caption: its text differs from the script
+    assert movie_qa.norm_words(" ".join(" ".join(c["lines"]) for c in cues)) != movie_qa.norm_words(script)
+
+
+def test_sound_toolkit_basics():
+    """tools/sound: effects are deterministic, finite and peak 0.5; the bed composer honours maths-calm."""
+    import numpy as np
+    from sound import sfx, styles
+    from sound.common import SR, integrated_lufs
+
+    a = sfx.render("splash", 1.5, 0.6, seed=3)
+    b = sfx.render("splash", 1.5, 0.6, seed=3)
+    assert a.shape == (int(1.5 * SR), 2) and np.array_equal(a, b)
+    assert np.all(np.isfinite(a)) and abs(float(np.max(np.abs(a))) - 0.5) < 1e-3
+    assert not np.array_equal(a, sfx.render("splash", 1.5, 0.6, seed=4))
+    assert set(sfx.CAPTIONS) == set(sfx.EFFECTS)
+    assert "maths-calm" in styles.STYLES and len(styles.STYLES) >= 8
+    x = np.stack([np.sin(2 * np.pi * 1000 * np.arange(SR * 4) / SR)] * 2, axis=1) * 0.1
+    assert integrated_lufs(x) == pytest.approx(-20.0, abs=0.2)   # EBU Tech 3341: stereo 1 kHz sine at −20 dBFS = −20 LUFS

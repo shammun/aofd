@@ -19,7 +19,7 @@ Gates (each PASS / FAIL / SKIP with a reason; exit 0 only when no gate FAILs):
 | frozen | a frozen stretch > 4 s (freezedetect) holding > 4 s of silence (narration from timing.json; without one, any) |
 | loudness | integrated outside −18…−14 LUFS or true peak > −1 dBTP (ebur128) |
 | flashes | > 3 large luminance flashes in any 1 s window (WCAG 2.3.1), from frames sampled at the video fps |
-| captions | VTT cues out of order, outside the audio, > 2 lines, > 42 chars/line, > 17 cps, or text ≠ script text |
+| captions | VTT cues out of order, outside the audio, > 2 lines, > 42 chars/line, > 17 cps, or text ≠ script text; with --sound-cues SIDECAR, bracketed sound lines ("[waves breaking]") are allowed only where the sidecar lists them (and every listed sound must be captioned), the spoken words still exact |
 | physics | manifest functions re-run and their output hashes differ from the manifest |
 | equations | an on_screen_eq.latex of the storyboard is not in the composition source |
 
@@ -141,6 +141,77 @@ def script_text(script: Path | None, storyboard: dict | None) -> str | None:
     return None
 
 
+SOUND_LINE = re.compile(r"^\[[^\[\]]+\]$")
+
+
+def load_sound_cues(path: Path) -> list[dict]:
+    """The sound-captions sidecar: ``{"sound_cues": [{start, end, text}, …]}`` (JSON, as written by
+    ``tools/sound/mix.py``) or the same as YAML, or a bare list."""
+    txt = path.read_text(encoding="utf-8")
+    if path.suffix.lower() in (".yaml", ".yml"):
+        import yaml
+
+        data = yaml.safe_load(txt)
+    else:
+        data = json.loads(txt)
+    items = data.get("sound_cues", []) if isinstance(data, dict) else (data or [])
+    return [{"start": float(s["start"]), "end": float(s["end"]), "text": str(s["text"]).strip()} for s in items]
+
+
+def captions_gate_with_sounds(cues: list[dict], ref: str | None, sound_cues: list[dict], dur: float,
+                              tol: float = 0.5) -> tuple[str, str]:
+    """Captions gate that also allows bracketed sound captions ("[waves breaking]", HOUSE_STYLE §8), used only with
+    ``--sound-cues``; the default gate is unchanged.
+
+    * A caption line that is wholly ``[ … ]`` is a sound line. It must match a sidecar entry: same text (case and
+      surrounding space ignored) and a cue time overlapping the sidecar's [start − tol, end + tol]. Every sidecar
+      entry must be captioned. A line mixing words and brackets fails.
+    * Sound lines are removed before the spoken-word check, which stays exact: the remaining caption text must equal
+      the script text word for word (``norm_words``), as in the default gate.
+    * Order, ≤ 2 lines, ≤ 42 characters, ≤ 17 cps (WARN) and ≤ 7 s apply to every cue, sound cues included.
+    """
+    issues: list[str] = []
+    prev = 0.0
+    spoken: list[str] = []
+    matched = [False] * len(sound_cues)
+    for k, c in enumerate(cues, 1):
+        d = c["end"] - c["start"]
+        txt = " ".join(c["lines"])
+        if c["start"] < prev - 1e-6:
+            issues.append(f"cue {k} out of order")
+        if c["end"] > dur + 0.05:
+            issues.append(f"cue {k} ends after the video")
+        if len(c["lines"]) > 2 or any(len(ln) > 42 for ln in c["lines"]):
+            issues.append(f"cue {k} > 2 lines or > 42 chars")
+        if d > 0 and len(txt) / d > 17:
+            issues.append(f"cue {k} {len(txt) / d:.1f} cps")
+        if d > 7.0 + 1e-6:
+            issues.append(f"cue {k} {d:.1f} s > 7 s")
+        prev = c["start"]
+        for ln in c["lines"]:
+            s = ln.strip()
+            if SOUND_LINE.match(s):
+                hit = [i for i, sc in enumerate(sound_cues)
+                       if sc["text"].lower() == s.lower() and c["start"] < sc["end"] + tol and c["end"] > sc["start"] - tol]
+                if not hit:
+                    issues.append(f"cue {k} sound caption {s} not in the sound-cues sidecar at {c['start']:.2f} s")
+                for i in hit:
+                    matched[i] = True
+            elif "[" in s or "]" in s:
+                issues.append(f"cue {k} mixes words and a bracketed sound: {s!r}")
+            else:
+                spoken.append(s)
+    for i, sc in enumerate(sound_cues):
+        if not matched[i]:
+            issues.append(f"sidecar sound {sc['text']} at {sc['start']:.2f} s has no caption")
+    if ref is not None and norm_words(" ".join(spoken)) != norm_words(ref):
+        issues.append("caption text differs from the script text")
+    hard = [i for i in issues if "cps" not in i]
+    n_sound = sum(matched)
+    return (("FAIL" if hard else ("WARN" if issues else "PASS")),
+            "; ".join(issues) or f"{len(cues)} cues match the script; {n_sound} sound caption(s) match the sidecar")
+
+
 def physics_parity(manifest: Path) -> tuple[str, str]:
     """Re-run every manifest entry {fn: 'pkg.mod.func', params: {...}, sha256: '…'} and compare output hashes."""
     m = json.loads(manifest.read_text(encoding="utf-8"))
@@ -241,10 +312,12 @@ def main() -> int:
     ap.add_argument("--timing", help="tools/tts.py timing.json (default: next to --storyboard); makes the frozen "
                                      "gate fail only on > 4 s of silence inside a frozen stretch")
     ap.add_argument("--id", help="report folder name (default: the movie's file stem)")
-    ap.add_argument("--duration", type=float, help="target seconds (±3 %); overrides the storyboard target")
+    ap.add_argument("--duration", type=float, help="target seconds (±3 %%); overrides the storyboard target")
     ap.add_argument("--duration-window", default="120,180")
     ap.add_argument("--budget-mb", type=float, default=25.0)
     ap.add_argument("--hard-mb", type=float, default=40.0)
+    ap.add_argument("--sound-cues", help="sound-captions sidecar (tools/sound/mix.py sound_captions.json): allow "
+                                         "bracketed sound captions listed there; spoken words still checked exactly")
     ap.add_argument("--no-audio-ok", action="store_true", help="silent test clip: skip codec-audio and loudness")
     ap.add_argument("--frames-only", action="store_true", help="only write the review frames")
     a = ap.parse_args()
@@ -356,7 +429,13 @@ def main() -> int:
     fl = flashes(path, fps)
     gate("flashes", "PASS" if fl["max_per_s"] <= 3 else "FAIL", f"max {fl['max_per_s']} flashes/s (WCAG ≤ 3)")
     # captions
-    if a.captions and Path(a.captions).exists():
+    if a.captions and Path(a.captions).exists() and a.sound_cues:
+        # opt-in variant: bracketed sound captions allowed when listed in the sidecar; spoken words still exact
+        st, det = captions_gate_with_sounds(parse_vtt(Path(a.captions)),
+                                            script_text(Path(a.script) if a.script else None, sb),
+                                            load_sound_cues(Path(a.sound_cues)), dur)
+        gate("captions", st, det)
+    elif a.captions and Path(a.captions).exists():
         cues = parse_vtt(Path(a.captions))
         issues = []
         prev = 0.0
