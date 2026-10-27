@@ -95,6 +95,10 @@ possible … appropriate animation and also data animation."
   camera moves from space down to a town. Vertical exaggeration is said in the narration.
 - **Appropriate, not decorative.** Every motion carries meaning the voice is talking about at that moment; no busy
   backgrounds; legibility and the label-collision check still win; the size cap (160 MB) still holds.
+- **Visual research first** (user, 2026-10-27): before each weather/climate/ocean movie is storyboarded, a research
+  pass looks online for the best way to show that topic's maps, animated maps and 3-D maps (toolkit survey:
+  `research/movie_maps_toolkit.md`, covering Google Earth Engine, leafmap/leaflet, MapLibre, deck.gl, Cesium,
+  GeoVista/PyGMT and others, combined with three.js where that helps); the director uses its findings.
 - The director plans it in the storyboard (per scene: map / globe / 3-D / data animation), and the reviewer checks
   "could this static picture be a real map or a data animation?" as a SHOULD item.
 
