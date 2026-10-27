@@ -95,3 +95,10 @@ run for the changed sentences.
 - W24: Trappes tropopause 10.88 km at −62.7 °C. The narration says "about minus sixty"; the CHECK range widens to −65 °C because it follows the data (not a loosened tolerance on a computed value).
 - W25: the ERA5 column stops at 1 hPa (~47 km). The real column is drawn to 47 km, and the stratopause comes from the standard atmosphere, with the narration saying so in plain words.
 - D11 latest map (GFS 00 UTC 27 Oct 2026): it is called "a weather-service analysis". The deepest low (934.9 hPa, 14.5°N 162.5°E) is described as "a typhoon over the western Pacific", unnamed unless confirmed. The Siberian high (1040.1 hPa) and the North Atlantic low (954.6 hPa, about as deep as Ciarán) are used for the comparison.
+
+## F. Open after stage 1 (orchestrator, 2026-10-27), to settle when stage 2 resumes after the capability tests
+- s21 column (×13) and s39 relief (×120) exaggerations: one narration sentence each, or redesign with the winning 3-D tool.
+- The GFS "latest map" (00 UTC 27 Oct 2026) is in the data but not in the script: add a short "today's map vs Ciarán" beat (user's latest-data rule).
+- D10 ETOPO 2022 (or a DEM via Earth Engine) for sharp Tibet/Alps relief: fetch if the capability tests pick a DEM-based terrain.
+- CalcStack auto-height for fraction rows: house-kit change for the orchestrator.
+- The four CHECK rows re-defined in stage 1 (W44, W45, s53, D11) were reviewed by the orchestrator: claims about the data, narration follows the data; accepted.
