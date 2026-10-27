@@ -39,6 +39,17 @@ Lengths are targets set by the teaching, not quotas.
 Order reasoning: 2a/2b reuse v4 material, so they come cheaply right after it; weather basics and map reading come
 before Coriolis, geostrophic and thermal wind because those movies read real weather maps.
 
+## Boundary with the chapter movies (2026-10-27)
+Vallis treats these topics in depth: Coriolis, geostrophic and thermal wind in Ch 2 and Ch 5; adjustment in Ch 3;
+ageostrophic, QG and Ekman in Ch 5, 10 and 21; Hadley cells and subtropical highs in Ch 14–15; gyres in Ch 19;
+the MOC and ACC in Ch 21; ENSO in Ch 22.
+- **A Chapter 0 movie is the first meeting.** It covers what the thing is, real data and maps, plain-physics why,
+  and derivations at first-year-calculus level.
+- **The chapter movie gives Vallis's own treatment.** That means the numbered equations, scaling (Ro, Boussinesq,
+  pressure coordinates), QG, Ekman, the Hadley models, Sverdrup and Stommel, and the delayed oscillator. It opens with
+  a short recap that links back to the Chapter 0 movie.
+- Planners must not take chapter-level material into Chapter 0, and chapter movies must not re-teach Chapter 0 at length.
+
 ## Extra requirements for #10 ENSO and #11 climate modes (user, 2026-10-27)
 - **Latest data, fetched at production time** (not frozen): the newest sea-surface temperature (NOAA OISST v2.1 daily and
   ERSST v5 monthly), the latest SST-anomaly world map and the current ENSO state (NOAA CPC ONI / Niño 3.4, the
