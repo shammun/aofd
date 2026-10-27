@@ -221,6 +221,17 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   - The bed sits at −28 LUFS on its own, ducked 5 dB under speech.
   - A 2.5-s tail with the music fading.
   - The mix is normalised to −16 LUFS, true peak ≤ −1 dBTP (the reference: −16.0 / −3.6).
+- **A different score for each movie** (user, 2026-10-27): no two movies share the same music. Each movie gets its
+  own style matched to its content (e.g. calm ambient for the maths, airy/flowing for weather, deep and slow for the
+  ocean, tense for storms, warm for the tropics), its own key, tempo and instrument palette. Same mixing rules as
+  above (bed −28 LUFS, ducked under speech, −16 LUFS mix). The style, key and seed are recorded in the storyboard.
+- **Sound effects where they fit** (user, 2026-10-27): water, a splash, waves breaking, rain, wind, a storm, thunder
+  and the like, timed to the picture (a wave breaks on the frame it breaks; wind rises as the isobars tighten).
+  - Only where the picture shows that thing, short and quiet: under the voice (about −30 to −24 LUFS short-term,
+    ducked like the music), never covering a word, never more than one at a time.
+  - Sources: our own synthesis (CC0) or CC0 / licence-checked libraries; every sound and its licence is listed in the
+    manifest credits; no sound that needs on-screen attribution.
+  - Captions name meaningful sounds for deaf viewers ("[waves breaking]") only where the sound carries meaning.
 - **Captions:** `en.vtt` / `en.srt` written from the script, never transcribed.
   - ≤ 2 lines × 42 characters, ≤ 17 characters per second, cues 1–7 s.
   - No `line:` positioning; they sit in the empty caption band.
@@ -276,3 +287,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 ## 12. Change log
 - 2026-10-25: created from the approved reference movie ch00_dot_product_why v6 fix 1 (user: "I love it… make sure next time … these design choices … are automatically passed to all the next videos").
 - 2026-10-27: §3 adds the ending for weather, climate and ocean movies (user: say and write that the videos are made for students of meteorology, atmospheric science and climate, and anyone who wants to see the maths behind the ideas).
+- 2026-10-27: §8 a different score per movie, matched to its content; sound effects (water, waves, rain, wind, storm…) where the picture shows them (user).
