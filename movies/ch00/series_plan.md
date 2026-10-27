@@ -81,6 +81,23 @@ every later movie uses; Part V follows Vallis's order, so each movie only needs 
   **User (2026-10-27): not now.** Use the best open alternatives, and ask the user again later, together with any other
   accounts a movie needs.
 
+## Maps and animation in every weather, climate and ocean movie (user, 2026-10-27)
+"Use real maps or as much maps as possible and show as much animation, 3d animation, 3d maps, 3d animation of maps as
+possible … appropriate animation and also data animation."
+- **Real maps first.** Wherever a picture can sit on the real Earth, it does: a real-data map or a 3-D globe (Blue
+  Marble / GIBS true colour, Natural Earth coasts and borders, shaded relief), not an abstract diagram. Diagrams stay
+  only where the idea is about a shape (a slab, a parcel, a wedge) and then cut back to the real map.
+- **Data animation by default.** Every real-data field moves when time exists in the data: hourly ERA5 fields
+  played as a loop with a clock, isobars and fronts sweeping, streaklines of the real wind, sounding balloons rising
+  through the real profile, time series drawing themselves, values counting up.
+- **3-D wherever the third dimension teaches:** the globe turning to the region; vertical columns and cross-sections
+  lifted out of the map (soundings, fronts, the tropopause), terrain in relief (Tibet, Alps), stacked pressure levels,
+  camera moves from space down to a town. Vertical exaggeration is said in the narration.
+- **Appropriate, not decorative.** Every motion carries meaning the voice is talking about at that moment; no busy
+  backgrounds; legibility and the label-collision check still win; the size cap (160 MB) still holds.
+- The director plans it in the storyboard (per scene: map / globe / 3-D / data animation), and the reviewer checks
+  "could this static picture be a real map or a data animation?" as a SHOULD item.
+
 ## Real data in every movie (user, 2026-10-27: "not only for ENSO but for all the things")
 Wherever a topic has observations, every movie gets the treatment first asked for ENSO:
 - **The latest data**, fetched when the movie is made: the newest reanalysis, SST, sea level, Argo, AMOC (RAPID),
