@@ -67,6 +67,24 @@ def draw_overlays(ax, path, transform, style):
                     ls="-" if k != "borders" else (0, (3, 2)), transform=transform, zorder=4)
 
 
+def _cartostyle(job, W, H, dpi):
+    """Opt-in house cartography (tools/maptools/cartostyle.py) when the recipe sets ``style.cartostyle``.
+
+    Returns (module, CartoStyle sized to this render) or None. Without the flag nothing changes, so the
+    self-test references stay byte-identical."""
+    flag = job.get("style", {}).get("cartostyle")
+    if not flag:
+        return None
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    import cartostyle
+
+    st = cartostyle.style(flag if isinstance(flag, str) else "movie")
+    st.size_px, st.dpi = (W, H), float(dpi)
+    st.content_box = None if st.medium != "movie" or (W, H) != (1920, 1080) else st.content_box
+    st.caption_band = st.caption_band if (W, H) == (1920, 1080) else None
+    return cartostyle, st
+
+
 def render_map(job, fr, out: Path, texture: bool = False):
     import cartopy.crs as ccrs
 
@@ -107,7 +125,13 @@ def render_map(job, fr, out: Path, texture: bool = False):
         c = style["contours"]
         cs = ax.contour(f.lon, f.lat, f.values, levels=fr["contour_levels"], colors=c.get("color", "#222222"),
                         linewidths=c.get("width", 0.8), transform=pc, zorder=3)
-        if c.get("labels") or job.get("labels"):
+        carto = _cartostyle(job, W, H, dpi)
+        if carto is not None and (c.get("labels") or job.get("labels")):
+            # opt-in (style.cartostyle: movie|notebook|print|true): collision-free in-line labels with halos
+            cmod, st = carto
+            st.colors = dict(st.colors, contour=c.get("color", "#222222"))
+            cmod.isobar_labels(ax, cs, st, fmt="{:g}")
+        elif c.get("labels") or job.get("labels"):
             ax.clabel(cs, fmt="%g", fontsize=9)
     draw_overlays(ax, job.get("overlays"), pc, style)
     if job.get("labels") and not texture:

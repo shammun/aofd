@@ -826,3 +826,21 @@ datasets:
     derived_in_repo: [data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc]
     checks: "Brest grid point T850: 2.5 C (01T12) -> 6.0 C (01T21, warm sector) -> 0.8 C (02T12); along 48.5N at 01T18 T850 jumps 1.0 C (14W) -> 7.8 C (12W), +6.8 K across the cold front (W43 >= 5 K); warm-sector max in 42-56N 20W-10E 11.2 C (01T18), 14.8 C (02T00); box q max 11.4 g/kg (02T00)"
     used_by: [movie ch00_weather_basics s45, s46, s49, s50, s57 (D3: air masses, objective fronts F9, warm tongue)]
+  NE-10m-places:
+    catalogue: Natural Earth
+    title: Natural Earth 1:10m cultural vectors, populated places (simple)
+    url: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/
+    raw_url: https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places_simple.zip
+    route: HTTPS whole file via fluidpy.data.fetch
+    login: none
+    licence: public domain (Natural Earth terms of use)
+    licence_url: https://www.naturalearthdata.com/about/terms-of-use/
+    attribution: Made with Natural Earth.
+    size_bytes: 652000
+    sha256: 2963ee08f7743f13f37d5243acd77a2f7a510e26a36c7e04b920f1b381f2b251
+    variables: {name_en: "English place name", scalerank: "importance rank", pop_max: "population"}
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NE-10m-places/ne_10m_populated_places_simple.zip]
+    used_by: [tools/maptools/cartostyle.py load_places (map labels)]
