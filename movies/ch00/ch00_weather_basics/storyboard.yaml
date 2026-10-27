@@ -1,0 +1,3141 @@
+# ch00_weather_basics storyboard v1 (movie-director, 2026-10-27). Generated from the director's scene spec and the measured
+# tools/tts.py dry run named in dry_run. S<k> = sentence k of the scene; AT(k, "words") a phrase inside it. House style
+# movies/HOUSE_STYLE.md binding. Data and new functions: data_needs.md. CHECK ids W01-W52 are defined there.
+id: ch00_weather_basics
+title: 'Weather basics: pressure, temperature, humidity and wind, from scratch'
+version: 1
+concepts:
+- 0B-G1 planet and its fluids (thin shell, layers, weather vs climate)
+- 0B-G3 state of air (pressure, hPa, temperature, density, ideal gas, hydrostatic, scale height)
+- 0B-G4 water in the air (specific humidity, saturation, relative humidity, dew point, clouds)
+- 0B-G8 highs and lows (observed; balance left to later movies)
+- 0B-G13 preview (subtropical highs, ITCZ, trades, westerlies)
+- 0B-G16 units (hPa, K and °C, g/kg, m/s, knots)
+- 0B-G17 data words (observation, reanalysis, climatology)
+target_duration_s: 2342.65
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: Chapter 0 series
+  position: 3
+  previous: ch00_cross_product_uses (2b)
+  next: ch00_reading_weather_maps
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  music:
+    source: tools/music.py (procedural, our own, CC0)
+    level: bed about -28 LUFS, ducked 5 dB under speech
+    notes: seed 7, 5-s fade in, 2.5-s silent end-card hold with the music fading
+measured_narration_s: 2340.15
+measured_frames: 70280
+words: 5696
+sentences: 363
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/dryrun/v1_merged
+  audio_s: 2340.15
+  speech_s: 2185.4
+  cues: 585
+  self_check:
+    expected_s: 2338.625
+    audio_s: 2338.625
+    diff_ms: 0.0
+    len_ok: true
+    cues_ok: true
+  render_s: 2552.0
+  warnings: []
+  words_per_minute_overall: 146.0
+  words_per_minute_speaking: 156.4
+  lexicon: movies/lexicon.yaml as of HEAD; proposed new entries (hectopascal(s), radiosonde, ERA5, Azores, Trappes) not applied
+    in this run
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 11.15
+  sentence_times:
+  - - 0.3
+    - 10.35
+  beat: opening title
+  visual: 'TITLE FRAME (the one heading; HOUSE_STYLE §3, house/kit/title.tsx). Left column x 100-1075: RiseText ''Weather''
+    /
+
+    ''basics'' 150 px weight 800, TitleGradient teal -> gold, 24-px rise, 8-frame fade, 2-frame stagger; ''made easy''
+
+    (96 px, warm white) at 0.6 s, pulse x1.06 on AT(1, "the easy way"); ''and how meteorology uses them'' (68 px, warm
+
+    white, ''meteorology'' teal) at 1.2 s. Right column x 1080-1840, y 180-636 (>= 50 px clear of the subtitle):
+
+    Part A (frame 0 -> AT(1, "meteorology")): ThreeCanvas 760 x 456: Globe3D with the daytime true-colour mosaic of
+
+    2023-11-02 (data/globe_truecolour_20231102.jpg, BMNG fill in gaps), a translucent sky-blue shell drawn 50x thick,
+
+    a small balloon rising from western France along a gold thread; live readout under the canvas (54 px):
+
+    ''height 0 -> 12 km'', ''T 13 -> −55 °C'', ''p 1013 -> 200 hPa'' from data/soundings.json (Trappes 2023-11-01T12).
+
+    Part B (12-frame cross-fade): flat panel of the 2023-11-01 afternoon true colour (Ciarán approaching), white
+
+    coast/borders, ERA5 isobars every 4 hPa sliding hour by hour 12 UTC 1 Nov -> 03 UTC 2 Nov, a gold Brest dot with
+
+    the readout ''Brest 997 -> 962 hPa'' ticking with the frames. Poster = frame 200.
+
+    '
+  voiceover: In this video, we'll learn the basics of weather the easy way, and see how meteorology uses them to follow a
+    real storm as it passes over one town.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.open_box (ERA5 msl hourly) + fluidpy.data.gibs.write_drape (true colour); sounding from IGRA2
+    params:
+      time: 2023-11-01T12..2023-11-02T03 hourly
+      point: Brest 48.45N 4.42W
+    data: data/ciaran_hourly.{bin,json}; data/ciaran_tc_20231101.{jpg,json}; data/soundings.json
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_box_longitudes_cross_greenwich; CHECK rows W01-W03 (builder)
+  exaggeration:
+  - atmosphere shell drawn 50x thicker
+  - storm motion time compressed (15 h in about 5 s)
+  screen_summary: '''Weather'' / ''basics'' 150 px TitleGradient; ''made easy'' 96 px (pulse on ''the easy way''); ''and how
+    meteorology uses them'' 68 px, ''meteorology'' teal. Right: TitleAtmos3D Part A (globe + rising balloon, live T and p)
+    -> Part B on ''meteorology'' (Ciarán true colour, isobars, Brest pressure ticking 997 -> 962 hPa)'
+- id: s01_hook
+  t:
+  - 11.15
+  - 23.275
+  sentence_times:
+  - - 11.15
+    - 13.1
+  - - 13.45
+    - 22.475
+  beat: hook question
+  visual: 'No heading. Full-width picture: Globe3D (radius 380 px, centre (700, 450)), camera on 50°N 15°W, slow turn
+
+    west -> east (10°), daytime mosaic 2023-11-02, Natural Earth coastlines warm white 60 % 2 px. The Ciarán cloud spiral
+
+    over the North Sea is visible from frame 0 (hook in the first second). S1 ''What is weather made of?'' - the
+
+    question mark pulses beside the globe (no text sentence on screen). S2: the four keywords fly in on AT(2,
+
+    "pressure"), AT(2, "temperature"), AT(2, "humidity"), AT(2, "wind") at x 1250-1800 with code-drawn icons
+
+    (house/kit/icons: barometer dial (new icon), thermometer, droplet, arrow); on AT(2, "real storm") a gold ring
+
+    circles the spiral and the label ''Storm Ciarán · 2 Nov 2023'' (54 px) appears; the date is spoken in s46.
+
+    '
+  voiceover: What is weather made of? Let's see what air pressure, temperature, humidity and wind are, why they behave the
+    way they do, and how they come together in a real storm.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs.mosaic_fill (daytime mosaic with BMNG fill)
+    params:
+      date: 2023-11-02
+      layer: VIIRS_NOAA20_CorrectedReflectance_TrueColor
+    data: data/globe_truecolour_20231102.{jpg,json}
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_gibs_bbox_order
+  exaggeration: []
+  screen_summary: 'Globe3D from frame 0 (true colour 2023-11-02 12 UTC, Ciarán spiral visible); keywords appear on their words:
+    ''pressure'', ''temperature'', ''humidity'', ''wind'' (54 px) round the globe with tiny icons (barometer, thermometer,
+    droplet, wind arrow)'
+- id: s02_thin_shell
+  t:
+  - 23.275
+  - 61.875
+  sentence_times:
+  - - 23.275
+    - 25.7
+  - - 26.05
+    - 31.9
+  - - 32.25
+    - 35.325
+  - - 35.675
+    - 45.75
+  - - 46.1
+    - 54.225
+  - - 54.575
+    - 61.075
+  beat: building blocks · the atmosphere
+  visual: 'Globe3D (same as s01) at left, x 80-1000. S2-S3: the shell is drawn at TRUE scale (12 km on a 380-px radius =
+
+    0.7 px, a hair-line of sky blue on the limb); a gold zoom circle magnifies the limb x40 so the hair-line is visible.
+
+    S4: gold Bracket on the limb ''12 km'' (teal) and a radius line from the centre labelled ''a = 6371 km'' (warm white,
+
+    TipLabel). Maths zone x 1060-1840: CalcStack: ''30 cm globe: radius 150 mm''; ''12 ÷ 6371 × 150 mm ≈ 0.28 mm'';
+
+    keyword ''three sheets of paper'' with three thin code-drawn sheets. S5: the shell grows to 50x thickness over 1.5 s on
+
+    AT(5, "fifty times thicker"), keyword ''× 50'' (54 px) beside it; the shell stays 50x for the rest of the movie
+
+    whenever the globe shows air.
+
+    '
+  voiceover: Let's start with the air itself. The atmosphere is the layer of air that wraps around the Earth, held down by
+    gravity. It's much thinner than most pictures suggest. The layer where our weather happens is only about twelve kilometres
+    deep, while the Earth's radius is six thousand three hundred and seventy-one kilometres. On a globe thirty centimetres
+    across, that layer would be about a third of a millimetre thick, like three sheets of paper. So from now on, we'll draw
+    the air fifty times thicker than it really is, just so we can see it.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.constants.EARTH_RADIUS (6371 km) + builder arithmetic
+    params:
+      troposphere_depth_m: 12000
+      globe_diameter_m: 0.3
+    outputs:
+      shell_mm: 0.28
+    test: ../Fluid Dynamics/tests/geo/test_atmos.py::test_constants_V1_gas_constants_one_home; CHECK W04 (0.28 mm)
+  exaggeration:
+  - atmosphere drawn 50x thicker from S5 on (said in the narration)
+  - 12 km is a round mid-latitude troposphere depth (tropics about 16, poles about 8; s27)
+  screen_summary: Globe with true-scale shell (hair-thin) -> gold bracket '12 km' vs radius '6371 km'; calc '12 ÷ 6371 × 150
+    mm ≈ 0.28 mm'; shell swells to 50x on 'fifty times thicker' with keyword '× 50'
+- id: s03_air_parcel
+  t:
+  - 61.875
+  - 108.725
+  sentence_times:
+  - - 61.875
+    - 64.225
+  - - 64.575
+    - 73.3
+  - - 73.65
+    - 82.725
+  - - 83.075
+    - 91.75
+  - - 92.1
+    - 97.625
+  - - 97.975
+    - 107.925
+  beat: building blocks · what air is
+  visual: 'Picture zone: a horizontal stacked bar 900 px wide (one segment per gas, colours from the house palette, labels
+    at
+
+    tips 54 px: ''nitrogen 78 %'', ''oxygen 21 %'', ''argon 0.9 %''); CO2 ''0.04 %'' is a 0.4-px sliver, so a gold pointer
+    and a
+
+    x100 inset show it (inset keyword ''carbon dioxide 0.04 %''); water vapour a dashed segment labelled ''water vapour 0-4
+    %''
+
+    that breathes in width. S4: a square ''molecule box'' (maths zone) with 120 code-drawn dots in seeded straight-line
+
+    motion with elastic wall bounces (illustrative), keyword ''hundreds of m/s''. S5-S6: the box shrinks into a dashed
+
+    teal blob that drifts along a curved streamline over a faint map; keyword ''air parcel'' (54 px) with gold pointer
+
+    on AT(6, "An air parcel").
+
+    '
+  voiceover: 'Air is a mixture of gases. By volume, about seventy-eight percent is nitrogen, twenty-one percent is oxygen,
+    and almost one percent is argon. Carbon dioxide is only about four hundredths of one percent, and water vapour comes and
+    goes, from almost nothing to a few percent. All of it is made of molecules that zip around at hundreds of metres per second,
+    bumping into each other billions of times every second. We can''t follow single molecules, so meteorologists talk about
+    air parcels. An air parcel is a small volume of air that moves with the flow: big enough to hold countless molecules,
+    but small compared with the weather around it.'
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: composition is a cited benchmark (U.S. Standard Atmosphere 1976 Table 3 for N2, O2, Ar; NOAA GML global-mean CO2
+      2023 = 419 ppm); molecule box decorative
+    params: {}
+    test: reference/ch00/SOURCES.md rows (to add by the data-scout); CHECK W05 (sum of fractions 99.96 %)
+  exaggeration:
+  - molecule box illustrative (speeds and spacing not to scale)
+  - CO2 sliver shown in a x100 inset
+  screen_summary: Bar of composition N₂ 78 % · O₂ 21 % · Ar 0.9 % · CO₂ 0.04 % · H₂O 0-4 %; a molecule box (code-drawn dots
+    bouncing); 'air parcel' keyword with a dashed teal blob drifting on a streamline
+- id: s04_pressure_what
+  t:
+  - 108.725
+  - 141.25
+  sentence_times:
+  - - 108.725
+    - 111.075
+  - - 111.425
+    - 119.325
+  - - 119.675
+    - 124.625
+  - - 124.975
+    - 129.125
+  - - 129.475
+    - 135.35
+  - - 135.7
+    - 140.45
+  beat: building blocks · pressure
+  visual: 'Picture zone: the molecule box of s03 with its right wall highlighted; each bounce leaves a tiny orange tick on
+    the
+
+    wall; the ticks merge into one steady orange arrow (6 px) on a 1-m square patch outlined on the wall. Maths zone:
+
+    TeX ''p = \dfrac{\text{force}}{\text{area}}'' (84 px) on AT(3, "force divided by"). S4: a small 3-D cube (ThreeCanvas,
+
+    az 35°, el 25°) in still air with six equal orange arrows pushing on its faces, keyword ''equal in every direction''.
+
+    S5: ''1\ \mathrm{Pa} = 1\ \mathrm{N/m^2}'' (68 px).
+
+    '
+  voiceover: 'Now let''s look at air pressure. Those fast molecules keep hitting every surface they meet: your skin, the walls
+    of a room, the surface of the sea. Each hit is a tiny push, and billions of them add up to a steady force. Pressure is
+    that force divided by the area it pushes on. In air at rest, it pushes equally in every direction: up, down and sideways.
+    Its unit is the pascal, one newton of force on each square metre.'
+  on_screen_eq:
+    latex: p = \dfrac{\text{force}}{\text{area}}
+    vallis_eq: definition (our words; pressure introduced in Vallis §1.3 text)
+    page_png: chapters/pages/ch01/p032.png
+  on_screen_eq_extra:
+  - latex: 1\ \mathrm{Pa} = 1\ \mathrm{N/m^2}
+    vallis_eq: unit definition (SI), no equation number
+    page_png: null
+  physics_source:
+    fn: null
+    note: definitions only; cube arrows equal by construction (isotropic pressure at rest)
+  exaggeration:
+  - molecule box illustrative
+  screen_summary: molecule box against a wall -> orange push arrows on a small square; 'p = force ÷ area'; arrows on a cube
+    in 6 directions 'equal'; '1 Pa = 1 N/m²'
+- id: s05_weight_column
+  t:
+  - 141.25
+  - 193.325
+  sentence_times:
+  - - 141.25
+    - 145.55
+  - - 145.9
+    - 153.4
+  - - 153.75
+    - 158.85
+  - - 159.2
+    - 166.325
+  - - 166.675
+    - 174.05
+  - - 174.4
+    - 178.675
+  - - 179.025
+    - 186.075
+  - - 186.425
+    - 192.525
+  beat: building blocks · pressure is weight
+  visual: 'Picture zone: ThreeCanvas: a square 1 m x 1 m patch of ground (gold outline, label ''1 m²'' 54 px) with a sky-blue
+
+    column rising out of frame and fading with height (density from data/atmos.json -> ussa_rho); a brown weight arrow
+
+    at its foot (gravity colour, TipLabel ''weight''); camera tilts up the column on S2. S4: ''101\,325\ \mathrm{Pa}''
+
+    (68 px) on the patch. Maths zone: S5 ''weight = m\,g'' and ''g = 9.81\ \mathrm{m/s^2}''; S6-S7 CalcStack:
+
+    ''m = p_0 / g'' -> ''= 101\,325 / 9.81'' -> ''\approx 10\,300\ \mathrm{kg}'' with the unit cancellation shown
+
+    (Pa = N/m² = kg m⁻¹ s⁻², ''÷ m/s²'' -> kg/m², the ''/m²'' read as ''per square metre''); gold CurvedLink from ''10 300
+    kg''
+
+    to a row of seven code-drawn car icons (''≈ 7 cars'', each 1.5 t). S8: keyword ''pressure = weight of the air above''.
+
+    '
+  voiceover: So how big is the pressure at the ground, and where does it come from? Picture a tall column of air standing
+    on one square metre of ground, reaching all the way to the top of the atmosphere. Gravity pulls all that air down, and
+    the ground has to hold up its weight. At sea level, the average pressure is one hundred and one thousand three hundred
+    and twenty-five pascals. Weight is mass times g, where g is the pull of gravity, nine point eight one metres per second
+    squared. So the mass in our column is the pressure divided by g. That's about ten thousand three hundred kilograms of
+    air above every square metre, as heavy as seven cars. So the pressure at the ground is the weight of all the air above
+    it, spread over each square metre.
+  on_screen_eq:
+    latex: m = \dfrac{p_0}{g} = \dfrac{101\,325}{9.81} \approx 10\,300\ \mathrm{kg}
+    vallis_eq: 'worked number (hydrostatic: pressure = weight of the fluid above, Vallis §1.3.3 text after (1.51))'
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.core.statics.hydrostatic_pressure_uniform (inverse used as CHECK) + builder arithmetic p0/g
+    params:
+      p0: 101325
+      g: 9.80665
+    outputs:
+      column_mass_kg: 10332
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_hydrostatics_V1_integrator_matches_closed_forms; CHECK W06 (10332 kg,
+      6.9 cars at 1.5 t)
+  exaggeration:
+  - column drawn short (its top fades out; the atmosphere has no sharp top)
+  screen_summary: 3-D column on a 1 m² square (sky-blue, fading upward); 'p₀ = 101 325 Pa'; 'weight = m g', 'g = 9.81 m/s²';
+    CalcStack m = p₀/g = 101325/9.81 ≈ 10 300 kg; seven car icons on a scale
+- id: s06_not_crushed
+  t:
+  - 193.325
+  - 219.15
+  sentence_times:
+  - - 193.325
+    - 195.375
+  - - 195.725
+    - 203.625
+  - - 203.975
+    - 207.0
+  - - 207.35
+    - 218.35
+  beat: building blocks · why we don't feel it
+  visual: 'Picture zone: code-drawn person outline (illustrative) with 12 orange inward arrows on the outline and 12 matching
+
+    teal outward arrows inside; keyword ''balance'' (54 px). S3-S4: a lift shaft icon; the lift rises; the outside arrows
+
+    shrink slightly first (the ear''s eardrum drawn as a small disc that bulges outward), keyword ''ears pop''. Maths zone
+
+    keeps ''≈ 10 300 kg per m²'' small (44 px) from s05.
+
+    '
+  voiceover: 'Why doesn''t this crush us? Because the air pushes from every side at once, and the air and fluids inside our
+    bodies push back out just as hard. The pushes balance, so we don''t feel them. We only notice when the balance breaks
+    for a moment: your ears pop in a fast lift or a climbing plane, because the outside pressure changes before the inside
+    catches up.'
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: illustrative (balance of pushes); no numbers
+  exaggeration:
+  - illustrative
+  screen_summary: simple person silhouette with equal orange arrows in and teal arrows out; 'balance'; a lift icon with an
+    ear and a small '−' gap pulsing
+- id: s07_hpa
+  t:
+  - 219.15
+  - 255.225
+  sentence_times:
+  - - 219.15
+    - 223.9
+  - - 224.25
+    - 233.025
+  - - 233.375
+    - 239.675
+  - - 240.025
+    - 244.1
+  - - 244.45
+    - 249.775
+  - - 250.125
+    - 254.425
+  beat: building blocks · hectopascals
+  visual: 'Maths zone: CalcStack ''1\ \mathrm{hPa} = 100\ \mathrm{Pa}'' -> ''101\,325\ \mathrm{Pa} = 1013.25\ \mathrm{hPa}
+
+    \approx 1013\ \mathrm{hPa}''; S3 ''1\ \mathrm{hPa} = 1\ \mathrm{mb}'' (68 px). Picture zone: a code-drawn barometer dial
+
+    (new house icon `Barometer`, scale 950-1050 hPa, ticks 52 px every 25 hPa, labels ''950'', ''1000'', ''1050''), needle
+    at
+
+    1013 on S2; on S5 the needle wanders 1000 <-> 1025 and a gold arc ''a few %'' marks the range; S6 keyword ''drive the
+    winds''
+
+    with a small arrow from a high-reading dial to a low-reading dial.
+
+    '
+  voiceover: Pascals give big numbers, so weather maps use hectopascals. One hectopascal is one hundred pascals, so the average
+    pressure at sea level is one thousand and thirteen hectopascals. Older maps use millibars, which are exactly the same
+    size, so the numbers don't change. The instrument that measures pressure is called a barometer. Day to day, the reading
+    at sea level moves up or down by only a few percent. Yet those few percent are what drive the winds, as we'll see.
+  on_screen_eq:
+    latex: 1\ \mathrm{hPa} = 100\ \mathrm{Pa}
+    vallis_eq: unit (no equation number)
+    page_png: null
+  physics_source:
+    fn: builder arithmetic (unit conversion), CHECK W07
+    params:
+      p0_Pa: 101325
+    test: CHECK W07 (1013.25 hPa)
+  exaggeration: []
+  screen_summary: '''1 hPa = 100 Pa''; ''101 325 Pa = 1013.25 hPa ≈ 1013 hPa''; ''1 hPa = 1 mb''; barometer dial 950-1050
+    with needle at 1013; ''± a few %'''
+- id: s08_density
+  t:
+  - 255.225
+  - 282.7
+  sentence_times:
+  - - 255.225
+    - 257.075
+  - - 257.425
+    - 264.425
+  - - 264.775
+    - 270.3
+  - - 270.65
+    - 281.9
+  beat: building blocks · density
+  visual: 'Maths zone: TeX ''\rho'' (96 px) with keyword ''density'' and unit ''kg/m³''; ''\rho \approx 1.2\ \mathrm{kg/m^3}''.
+
+    Picture zone: a 3-D room (wireframe box, ThreeCanvas az 30°, el 20°) with edge labels ''5 m'', ''4 m'', ''2.5 m'' (54
+    px,
+
+    TipLabel at the middle of each edge); it fills with faint sky-blue on S3. CalcStack: ''5 \times 4 \times 2.5 = 50\
+
+    \mathrm{m^3}'' -> ''50 \times 1.2 = 60\ \mathrm{kg}''; gold CurvedLink from ''60 kg'' to a person icon inside the room.
+
+    '
+  voiceover: 'Next, density. Density tells us how much mass is packed into each cubic metre, and we write it with the Greek
+    letter rho. Air near the ground has a density of about one point two kilograms per cubic metre. So a room five metres
+    long, four metres wide and two and a half metres high holds fifty cubic metres of air, which is about sixty kilograms:
+    as much as a person.'
+  on_screen_eq:
+    latex: 50\ \mathrm{m^3} \times 1.2\ \mathrm{kg/m^3} = 60\ \mathrm{kg}
+    vallis_eq: worked number (ρ for air near the surface)
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.thermo.perfect_gas_density
+    params:
+      p: 101325
+      T: 288.15
+    outputs:
+      rho: 1.225
+    test: ../Fluid Dynamics/tests/test_ch01.py (perfect gas state tests); CHECK W08 (61 kg with 1.225, said 'about sixty')
+  exaggeration: []
+  screen_summary: '''ρ'' (rho) ''density, kg/m³''; ''≈ 1.2 kg/m³''; room box 5 m × 4 m × 2.5 m with labelled edges; CalcStack
+    5 × 4 × 2.5 = 50 m³; 50 × 1.2 = 60 kg; person icon'
+- id: s09_temperature
+  t:
+  - 282.7
+  - 325.975
+  sentence_times:
+  - - 282.7
+    - 289.95
+  - - 290.3
+    - 295.125
+  - - 295.475
+    - 307.025
+  - - 307.375
+    - 313.825
+  - - 314.175
+    - 320.65
+  - - 321.0
+    - 325.175
+  beat: building blocks · temperature and kelvin
+  visual: 'Picture zone: two small molecule boxes (illustrative), left slow slate dots ''colder'', right fast orange dots
+
+    ''warmer''. Maths zone: two vertical scales side by side (52-px ticks): °C (−273.15, 0, 15, 100) and K (0, 273.15,
+
+    288.15, 373.15); gold links join matching ticks; TeX ''T\,[\mathrm{K}] = T\,[^\circ\mathrm{C}] + 273.15'';
+
+    CalcStack ''15 + 273.15 = 288.15\ \mathrm{K}''. S4: a bracket ''1 K = 1 °C step''. S5: the bottom tick ''0 K''
+
+    pulses, keyword ''coldest possible''.
+
+    '
+  voiceover: 'Temperature measures how fast the molecules jiggle on average: the warmer the air, the faster they move. Weather
+    reports use degrees Celsius, but physics uses kelvin. To get kelvin, add two hundred and seventy-three point one five
+    to the Celsius number, so fifteen degrees Celsius is two hundred and eighty-eight point one five kelvin. A kelvin step
+    is the same size as a degree Celsius step; only the starting point moves. Zero kelvin is the coldest anything can be,
+    so a temperature in kelvin is never negative. That''s why the gas law, which comes next, uses kelvin.'
+  on_screen_eq:
+    latex: T\,[\mathrm{K}] = T\,[^\circ\mathrm{C}] + 273.15
+    vallis_eq: unit conversion (no equation number)
+    page_png: null
+  physics_source:
+    fn: builder arithmetic, CHECK W09
+    params:
+      T_C: 15
+    test: CHECK W09 (288.15 K)
+  exaggeration:
+  - molecule boxes illustrative
+  screen_summary: two molecule boxes side by side (slow / fast dots) 'colder' / 'warmer'; two aligned thermometer scales °C
+    and K with ticks 0/273.15, 15/288.15, −273.15/0; 'T(K) = T(°C) + 273.15'
+- id: s10_gas_law
+  t:
+  - 325.975
+  - 375.95
+  sentence_times:
+  - - 325.975
+    - 329.8
+  - - 330.15
+    - 333.95
+  - - 334.3
+    - 342.45
+  - - 342.8
+    - 350.05
+  - - 350.4
+    - 357.1
+  - - 357.45
+    - 360.15
+  - - 360.5
+    - 375.15
+  beat: building blocks · the ideal gas law, built
+  visual: 'Picture zone: case 1 (S2): two boxes, the right with twice the dots, wall-hit counters ''12 hits'' vs ''24 hits''
+    per
+
+    second-of-animation (seeded, illustrative) and orange arrows 1x vs 2x; keyword ''p ∝ ρ''. Case 2 (S3): same dot
+
+    count, faster dots, arrows grow; keyword ''p ∝ T''. Maths zone: S4 Layered TeX ''p = \rho R T'' (96 px) built term by
+
+    term: ''p'' orange, ''\rho'' brown, ''R'' warm white, ''T'' gold; S5-S6 gold underbraces ''pressure (Pa)'', ''density
+    (kg/m³)'',
+
+    ''gas constant'', ''temperature (K)''; ''R = 287\ \mathrm{J\,kg^{-1}\,K^{-1}}'' (68 px).
+
+    '
+  voiceover: 'Now let''s connect pressure, density and temperature. Think about what makes the molecules push harder on a
+    wall. If we pack more molecules into each cubic metre, more of them hit the wall each second, so the pressure goes up
+    with the density. If the molecules move faster, each one hits harder and more often, so the pressure goes up with the
+    temperature. Put together, the pressure is proportional to density times temperature: p equals rho R T. This is called
+    the ideal gas law. Here p is the pressure in pascals, rho is the density, T is the temperature in kelvin, and R is a fixed
+    number for dry air, called the gas constant: two hundred and eighty-seven joules per kilogram per kelvin.'
+  on_screen_eq:
+    latex: p = \rho R T
+    vallis_eq: (1.53)
+    page_png: chapters/pages/ch01/p033.png
+  physics_source:
+    fn: fluidpy.core.thermo.perfect_gas_pressure
+    params:
+      R: 287.06
+    test: ../Fluid Dynamics/tests/test_ch01.py (perfect gas state); CHECK W10 (R = 287.06 J/(kg K), said 287)
+  exaggeration:
+  - molecule boxes illustrative (counts not to scale)
+  screen_summary: 'two contrast boxes: ''more molecules → more hits'' (ρ ×2 → p ×2), ''faster → harder, more often'' (T ↑
+    → p ↑); Layered TeX p = ρ R T with underbraces ''pressure (Pa)'', ''density'', ''gas constant'', ''temperature (K)'';
+    ''R = 287 J kg⁻¹ K⁻¹'''
+- id: s11_gas_law_numbers
+  t:
+  - 375.95
+  - 409.0
+  sentence_times:
+  - - 375.95
+    - 377.65
+  - - 378.0
+    - 385.35
+  - - 385.7
+    - 390.3
+  - - 390.65
+    - 401.15
+  - - 401.5
+    - 408.2
+  beat: building blocks · worked number
+  visual: 'Maths zone CalcStack (68 px, aligned at ''=''): ''\rho = \dfrac{p}{R T}'' -> ''= \dfrac{101\,325}{287 \times 288.15}''
+    ->
+
+    ''\approx 1.225\ \mathrm{kg/m^3}''. Picture zone: a sea-level patch with the 1-m³ cube outlined, labels ''p = 1013 hPa'',
+
+    ''T = 15 °C = 288.15 K'' (54 px); the cube fills to ''1.225 kg''. Gold CurvedLink from the result to a small thumbnail
+
+    of the s08 room ''≈ 1.2 kg/m³''.
+
+    '
+  voiceover: 'Let''s use it. What is the density of air at sea level, at one thousand and thirteen hectopascals and fifteen
+    degrees? We turn the law around: rho equals p divided by R T. That''s one hundred and one thousand three hundred and twenty-five
+    pascals, divided by two hundred and eighty-seven times two hundred and eighty-eight point one five. The answer is about
+    one point two two five kilograms per cubic metre, the number we used for the room.'
+  on_screen_eq:
+    latex: \rho = \dfrac{p}{R T} = \dfrac{101\,325}{287 \times 288.15} \approx 1.225\ \mathrm{kg/m^3}
+    vallis_eq: (1.53) rearranged, our numbers
+    page_png: chapters/pages/ch01/p033.png
+  physics_source:
+    fn: fluidpy.core.thermo.perfect_gas_density
+    params:
+      p: 101325
+      T: 288.15
+    outputs:
+      rho: 1.225
+    test: CHECK W11 (1.2250 kg/m3)
+  exaggeration: []
+  screen_summary: CalcStack ρ = p/(RT) = 101 325 / (287 × 288.15) ≈ 1.225 kg/m³; gold link to the s08 room thumbnail '1.2'
+- id: s12_warm_air_light
+  t:
+  - 409.0
+  - 440.975
+  sentence_times:
+  - - 409.0
+    - 413.425
+  - - 413.775
+    - 420.225
+  - - 420.575
+    - 424.275
+  - - 424.625
+    - 430.0
+  - - 430.35
+    - 437.075
+  - - 437.425
+    - 440.175
+  beat: intuition · warm air is lighter
+  visual: 'Picture zone: two 1-m³ cubes on a shared baseline ''p = 1013 hPa''; left slate ''0 °C'', right orange ''30 °C'';
+    dot
+
+    densities in the cubes proportional to rho (seeded); labels under each: ''1.29 kg/m³'', ''1.16 kg/m³''. Maths zone:
+
+    CalcStack ''\dfrac{101\,325}{287 \times 273.15} \approx 1.29'' and ''\dfrac{101\,325}{287 \times 303.15} \approx 1.16'';
+
+    ''\dfrac{1.29 - 1.16}{1.29} \approx 10\,\%''. S4: a code-drawn hot-air balloon rises beside the right cube; small up
+
+    arrow on the warm cube, down arrow on the cold one, keyword ''warm rises · cold sinks''.
+
+    '
+  voiceover: Now let's keep the pressure fixed and change only the temperature. At zero degrees, the density comes out at
+    about one point two nine kilograms per cubic metre. At thirty degrees, it's about one point one six. So at the same pressure,
+    warm air is about ten percent lighter than cold air. That's why a hot-air balloon floats, and why warm air tends to rise
+    while cold air tends to sink. We'll meet this again with weather fronts.
+  on_screen_eq:
+    latex: \dfrac{1.29 - 1.16}{1.29} \approx 10\,\%
+    vallis_eq: (1.53) evaluated twice, our numbers
+    page_png: chapters/pages/ch01/p033.png
+  physics_source:
+    fn: fluidpy.core.thermo.perfect_gas_density
+    params:
+      p: 101325
+      T:
+      - 273.15
+      - 303.15
+    outputs:
+      rho:
+      - 1.2922
+      - 1.1644
+      ratio: 0.099
+    test: CHECK W12
+  exaggeration: []
+  screen_summary: 'two cubes side by side at 1013 hPa: ''0 °C → 1.29 kg/m³'' (slate) and ''30 °C → 1.16 kg/m³'' (orange);
+    ''≈ 10 % lighter''; hot-air balloon icon rising'
+- id: s13_slab
+  t:
+  - 440.975
+  - 481.95
+  sentence_times:
+  - - 440.975
+    - 445.025
+  - - 445.375
+    - 448.95
+  - - 449.3
+    - 456.825
+  - - 457.175
+    - 461.475
+  - - 461.825
+    - 465.775
+  - - 466.125
+    - 473.725
+  - - 474.075
+    - 478.025
+  - - 478.375
+    - 481.15
+  beat: why · pressure with height (setup)
+  visual: 'Picture zone: the s05 ThreeCanvas column, camera closer; a thin slab (gold outline, sky-blue fill 40 %) at mid-height;
+
+    a vertical ''z'' axis (teal, arrow up) at left; S3 bracket ''Δz'' (54 px) on the slab''s side; S4 keyword ''at rest ->
+
+    forces balance''; S5 orange up-arrow under the slab, TipLabel ''p(z)''; S6 orange down-arrow above, ''p(z + Δz)'',
+
+    shorter than the up-arrow; S7 brown down-arrow ''weight''. Maths zone: symbols listed as they are spoken: ''z height'',
+
+    ''Δz small step in height'' (54 px).
+
+    '
+  voiceover: Now let's work out how the pressure changes as we go up. Our goal is a rule for how fast it falls with height.
+    Take a thin slab of air inside our column, standing on one square metre, with a small thickness, delta z. Here z is height,
+    and delta z means a small step in height. The slab is at rest, so the forces on it must balance. The air below pushes
+    it up, with a force equal to the pressure at its bottom, because the area is one square metre. The air above pushes it
+    down, with the pressure at its top. And gravity pulls it down with its weight.
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: setup of the derivation (no numbers yet); arrow lengths set from s14's numbers on a display scale
+  exaggeration:
+  - slab thickness drawn large (the derivation takes Δz -> 0)
+  - illustrative (no computed visual)
+  screen_summary: 'the s05 column with a thin slab highlighted; ''z'' axis up; bracket ''Δz''; three arrows on the slab: orange
+    up ''p(z)'', orange down ''p(z + Δz)'', brown down ''weight'''
+- id: s14_slab_weight
+  t:
+  - 481.95
+  - 512.375
+  sentence_times:
+  - - 481.95
+    - 484.0
+  - - 484.35
+    - 490.8
+  - - 491.15
+    - 495.125
+  - - 495.475
+    - 497.175
+  - - 497.525
+    - 501.2
+  - - 501.55
+    - 506.625
+  - - 506.975
+    - 511.575
+  beat: why · the slab balance
+  visual: 'Maths zone CalcStack (3 lines max, older dim to 60 %): ''V = 1\ \mathrm{m^2} \times \Delta z'' -> ''m = \rho\,\Delta
+    z''
+
+    -> ''W = \rho\, g\, \Delta z'' (brown). S4-S5: new block, Layered TeX ''p(z) - p(z+\Delta z) = \rho\, g\, \Delta z''
+
+    with ''p(z)'' orange underbrace ''push up'', ''p(z+\Delta z)'' orange underbrace ''push down'', ''\rho g \Delta z'' brown
+
+    underbrace ''weight''; gold links from each arrow in the picture to its term (non-crossing). S6: the gap between the
+
+    two orange arrows is highlighted with a brown band = the weight arrow length.
+
+    '
+  voiceover: 'What does the slab weigh? Its volume is one square metre times delta z, so its mass is rho times delta z. Its
+    weight is that mass times g: rho g delta z. Now the balance. The push up, minus the push down, equals the weight. So p
+    at the bottom, minus p at the top, equals rho g delta z. The pressure at the bottom is bigger, by exactly the weight of
+    the slab.'
+  on_screen_eq:
+    latex: p(z) - p(z+\Delta z) = \rho\, g\, \Delta z
+    vallis_eq: derivation step towards (1.51) (our construction)
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: null
+    note: 'symbolic step; checked by sympy in the builder (CHECK W13: limit of the slab balance gives dp/dz = −ρg)'
+  exaggeration:
+  - illustrative (no computed visual)
+  screen_summary: CalcStack volume = 1 × Δz; mass = ρ Δz; weight = ρ g Δz; then p(z) − p(z+Δz) = ρ g Δz with the three arrows
+    colour-matched
+- id: s15_hydrostatic
+  t:
+  - 512.375
+  - 562.675
+  sentence_times:
+  - - 512.375
+    - 514.25
+  - - 514.6
+    - 521.975
+  - - 522.325
+    - 526.3
+  - - 526.65
+    - 530.475
+  - - 530.825
+    - 536.0
+  - - 536.35
+    - 544.95
+  - - 545.3
+    - 550.175
+  - - 550.525
+    - 554.75
+  - - 555.1
+    - 561.875
+  beat: why · hydrostatic balance
+  visual: 'Maths zone CalcStack: ''\Delta p = p(z+\Delta z) - p(z) = -\rho\, g\, \Delta z'' -> ''\dfrac{\Delta p}{\Delta z}
+    = -\rho\, g''
+
+    (the slab in the picture thins on AT(4, "thinner and thinner"), ''Δz -> 0'' keyword) -> main equation
+
+    ''\dfrac{\partial p}{\partial z} = -\rho\, g'' at 96 px; gold underbraces ''\partial p/\partial z'' ''how fast p changes
+
+    with height'', ''-\rho g'' ''weight of each m³''; S6 keyword ''partial: only height changes'' (54 px); S7 keyword
+
+    ''hydrostatic balance'' with gold pointer on AT(7, "hydrostatic balance").
+
+    '
+  voiceover: 'Let''s tidy this up. The pressure at the top minus the pressure at the bottom is the change in pressure across
+    the slab, delta p. It''s negative, because the pressure falls as we go up. So delta p equals minus rho g delta z. Divide
+    both sides by delta z, and let the slab get thinner and thinner. Delta p over delta z becomes the derivative, partial
+    p by partial z: how fast the pressure changes with height. Partial means only the height changes; the place and the time
+    stay fixed. So partial p by partial z equals minus rho g. This is called hydrostatic balance: at every height, the pressure
+    holds up the weight of the air above.'
+  on_screen_eq:
+    latex: \dfrac{\partial p}{\partial z} = -\rho\, g
+    vallis_eq: (1.51)
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.core.statics.integrate_hydrostatic
+    params: {}
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_hydrostatics_V2_uniform_solution_residual_and_units
+  exaggeration: []
+  screen_summary: CalcStack Δp = −ρ g Δz → Δp/Δz = −ρ g → ∂p/∂z = −ρ g (main eq 96 px) with underbraces 'how fast p changes
+    with height', 'weight per m³'; keyword 'hydrostatic balance'
+- id: s16_hydrostatic_numbers
+  t:
+  - 562.675
+  - 601.15
+  sentence_times:
+  - - 562.675
+    - 565.225
+  - - 565.575
+    - 575.425
+  - - 575.775
+    - 579.825
+  - - 580.175
+    - 587.825
+  - - 588.175
+    - 590.675
+  - - 591.025
+    - 600.35
+  beat: why · how fast near the ground
+  visual: 'Maths zone CalcStack: ''\rho g = 1.225 \times 9.81 \approx 12\ \mathrm{Pa/m}'' -> ''100\ \mathrm{Pa} \div 12\
+
+    \mathrm{Pa/m} \approx 8\ \mathrm{m}'' (keyword ''1 hPa per 8 m'') -> ''300\ \mathrm{m} \times 12\ \mathrm{Pa/m} \approx
+
+    3600\ \mathrm{Pa} = 36\ \mathrm{hPa}''. Picture zone: a code-drawn 300-m tower with height ticks every 100 m (52 px)
+
+    and a lift car climbing; readout beside the car ''p = 1013 -> 977 hPa'' ticking (data/atmos.json -> tower_p, from
+
+    the isothermal law at 288.15 K, which differs from the linear 12 Pa/m by < 2 %); the s06 ear icon pops at the top.
+
+    S5 keyword ''big weather: vertical accelerations ≪ g''.
+
+    '
+  voiceover: How fast is that near the ground? Rho is about one point two two five, and g is nine point eight one, so the
+    pressure falls by about twelve pascals for every metre we climb. That's one hectopascal for about every eight metres.
+    Ride a lift to the top of a three-hundred-metre tower, and the pressure drops by about thirty-six hectopascals. That's
+    the change your ears notice. Hydrostatic balance holds very well for large weather systems, because their up and down
+    accelerations are tiny compared with gravity.
+  on_screen_eq:
+    latex: \rho g = 1.225 \times 9.81 \approx 12\ \mathrm{Pa/m}
+    vallis_eq: (1.51) evaluated, our numbers
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure
+    params:
+      z: 0..300 m
+      p0: 101325
+      T: 288.15
+    outputs:
+      dpdz_Pa_per_m: -12.01
+      m_per_hPa: 8.32
+      drop_300m_hPa: 35.7
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_isothermal_atmosphere_V1_scale_height; CHECK W14-W16
+  exaggeration: []
+  screen_summary: CalcStack ρ g = 1.225 × 9.81 ≈ 12 Pa/m; 100 Pa ÷ 12 Pa/m ≈ 8 m per hPa; 300 m × 12 Pa/m ≈ 3600 Pa = 36 hPa;
+    tower with a lift icon and readout 1013 → 977 hPa
+- id: s17_combine
+  t:
+  - 601.15
+  - 636.475
+  sentence_times:
+  - - 601.15
+    - 605.25
+  - - 605.6
+    - 607.925
+  - - 608.275
+    - 611.3
+  - - 611.65
+    - 615.925
+  - - 616.275
+    - 621.725
+  - - 622.075
+    - 627.175
+  - - 627.525
+    - 631.375
+  - - 631.725
+    - 635.675
+  beat: why · bring in the gas law
+  visual: 'Maths zone: ''\dfrac{\partial p}{\partial z} = -\rho\, g'' with ''\rho'' boxed by a brown highlight band (no box
+    border);
+
+    ''\rho = \dfrac{p}{R T}'' (from s10/s11) slides into the band on AT(4, "in place of rho") -> ''\dfrac{\partial p}{\partial
+
+    z} = -\dfrac{p\, g}{R T}'' (96 px), ''p'' on the right pulses orange with keyword ''proportional to p itself''. Picture
+    zone:
+
+    a small graph (height up 0-30 km, pressure across 0-1013 hPa, ticks 52 px) with the s19 curve faint and two gold
+
+    tangent marks: steep fall at the ground (S5), gentle at 20 km (S6).
+
+    '
+  voiceover: 'But rho isn''t fixed: the higher we go, the thinner the air. So let''s bring in the gas law. It says rho equals
+    p over R T. Let''s put that into hydrostatic balance, in place of rho. We get partial p by partial z equals minus p g
+    over R T. Now the fall in pressure per metre is proportional to the pressure itself. Where the pressure is high, near
+    the ground, it falls fast. Higher up, where there''s less pressure, it falls more slowly.'
+  on_screen_eq:
+    latex: \dfrac{\partial p}{\partial z} = -\dfrac{p\, g}{R T}
+    vallis_eq: (1.51) with (1.53) substituted (Vallis does this for the isothermal case before (1.185)-(1.186))
+    page_png: chapters/pages/ch01/p062.png
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure
+    params:
+      T: 288.15
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_isothermal_atmosphere_V1_scale_height
+  exaggeration: []
+  screen_summary: '∂p/∂z = −ρ g with ρ highlighted; ρ = p/(RT) slides in; result ∂p/∂z = −p g/(RT); two small slope arrows
+    on a p(z) sketch: steep low down, gentle higher up'
+- id: s18_scale_height
+  t:
+  - 636.475
+  - 686.9
+  sentence_times:
+  - - 636.475
+    - 643.35
+  - - 643.7
+    - 645.75
+  - - 646.1
+    - 653.1
+  - - 653.45
+    - 661.375
+  - - 661.725
+    - 673.775
+  - - 674.125
+    - 676.2
+  - - 676.55
+    - 686.1
+  beat: why · the scale height
+  visual: 'Maths zone: ''H = \dfrac{R T}{g}'' (96 px) keyword ''scale height''. Units line with Strike on cancelled units:
+
+    ''\dfrac{\mathrm{J}}{\mathrm{kg\,K}} \times \mathrm{K} \div \dfrac{\mathrm{m}}{\mathrm{s^2}} = \dfrac{\mathrm{m^2}}{\mathrm{s^2}}
+
+    \times \dfrac{\mathrm{s^2}}{\mathrm{m}} = \mathrm{m}''. CalcStack ''H = \dfrac{287 \times 288.15}{9.81} \approx 8.4\
+
+    \mathrm{km}''. Picture zone (S6-S7): two columns on 1 m²: the real fading column and a uniform sky-blue column of
+
+    density 1.225 that stops sharply at 8.4 km (height axis ticks 0, 4, 8.4 km); ''\dfrac{p_0}{\rho_0 g} =
+
+    \dfrac{101\,325}{1.225 \times 9.81} \approx 8.4\ \mathrm{km}''; a gold link from that number to ''H ≈ 8.4 km''.
+
+    '
+  voiceover: 'The group R T over g appears so often that it gets its own name: the scale height, capital H. Let''s check its
+    units. R is in joules per kilogram per kelvin, and a joule per kilogram is a metre squared per second squared. Multiply
+    by T in kelvin, divide by g in metres per second squared, and we''re left with metres: a height. At fifteen degrees, H
+    is two hundred and eighty-seven times two hundred and eighty-eight point one five, divided by nine point eight one, which
+    is about eight point four kilometres. Here''s a nice surprise. If the air kept its ground-level density all the way up,
+    the column would end at p over rho g, and that''s the same eight point four kilometres.'
+  on_screen_eq:
+    latex: H = \dfrac{R T}{g}
+    vallis_eq: 'text after (1.186): H_ρ = R T_0 / g (pressure scale height too); §2.6 text after (2.166)'
+    page_png: chapters/pages/ch01/p062.png
+  on_screen_eq_extra:
+  - latex: \dfrac{p_0}{\rho_0 g} = \dfrac{101\,325}{1.225 \times 9.81} \approx 8.4\ \mathrm{km}
+    vallis_eq: our identity (p0/(ρ0 g) = R T/g by (1.53))
+    page_png: chapters/pages/ch01/p033.png
+  physics_source:
+    fn: fluidpy.geo.atmos.scale_height
+    params:
+      T: 288.15
+    outputs:
+      H_m: 8434.7
+      homogeneous_height_m: 8434.5
+    test: ../Fluid Dynamics/tests/geo/test_atmos.py::test_scale_height_V1_closed_form_and_isothermal_efolding, ::test_scale_height_V5_us_standard_atmosphere_1976,
+      ::test_scale_height_V2_dimensions
+  exaggeration: []
+  screen_summary: 'H = RT/g (96 px) ''scale height''; units line J/(kg K) × K ÷ m/s² = m with strikes; CalcStack 287 × 288.15
+    / 9.81 ≈ 8.4 km; contrast: uniform-density column 8.4 km tall beside it'
+- id: s19_exponential
+  t:
+  - 686.9
+  - 725.8
+  sentence_times:
+  - - 686.9
+    - 692.55
+  - - 692.9
+    - 697.825
+  - - 698.175
+    - 700.65
+  - - 701.0
+    - 709.625
+  - - 709.975
+    - 719.1
+  - - 719.45
+    - 725.0
+  beat: why · solving for p(z)
+  visual: 'Maths zone (one move per line, CalcStack keeps 3 lines, older dim): ''\dfrac{\partial p}{\partial z} = -\dfrac{p}{H}''
+
+    -> ''\dfrac{1}{p}\dfrac{\partial p}{\partial z} = -\dfrac{1}{H}'' (keyword ''divide by p'') -> ''\dfrac{\partial \ln
+
+    p}{\partial z} = -\dfrac{1}{H}'' (keyword ''chain rule: d ln p = dp / p'') -> ''\ln\dfrac{p}{p_0} = -\dfrac{z}{H}''
+
+    (keyword ''add up from 0 to z'') -> ''p = p_0\, e^{-z/H}'' (96 px). Picture zone: the s17 graph; on the last line the
+
+    slate curve p0 e^{-z/H} (H = 8.43 km) draws upward from the ground; ''p₀ = 1013 hPa'' at its foot. Keyword under the
+
+    graph ''assume T = 15 °C everywhere'' on S2.
+
+    '
+  voiceover: 'So now our rule reads: partial p by partial z equals minus p over H. Let''s assume the temperature, and so H,
+    is the same at every height. Divide both sides by p. The left side is now the rate of change of the natural log of p,
+    so log p falls by one over H for every metre we climb. Add that up from the ground, where the pressure is p zero, to height
+    z: the log of p over p zero equals minus z over H. Undo the log, and we get p equals p zero times e to the minus z over
+    H.'
+  on_screen_eq:
+    latex: \ln\dfrac{p}{p_0} = -\dfrac{z}{H}
+    vallis_eq: derivation step (our construction; integral of (1.51)+(1.53) at constant T)
+    page_png: chapters/pages/ch01/p062.png
+  on_screen_eq_extra:
+  - latex: p = p_0\, e^{-z/H}
+    vallis_eq: (1.186) is the density form ρ = ρ0 exp(−z/H_ρ); the text after it says H is also the pressure scale height
+    page_png: chapters/pages/ch01/p062.png
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure
+    params:
+      z: 0..40 km
+      p0: 101325
+      T: 288.15
+    data: data/atmos.json -> iso_p
+    test: '../Fluid Dynamics/tests/test_ch01.py::test_isothermal_atmosphere_V1_scale_height (V2 residual, V1 p(H)/p0 = 1/e);
+      CHECK W17 sympy: d/dz(p0 e^{-z/H}) = −p/H'
+  exaggeration: []
+  screen_summary: CalcStack ∂p/∂z = −p/H → (1/p) ∂p/∂z = −1/H → ∂(ln p)/∂z = −1/H → ln(p/p₀) = −z/H → p = p₀ e^(−z/H) (96
+    px); keyword 'assume T the same at every height'
+- id: s20_exponential_meaning
+  t:
+  - 725.8
+  - 772.6
+  sentence_times:
+  - - 725.8
+    - 727.95
+  - - 728.3
+    - 737.375
+  - - 737.725
+    - 743.5
+  - - 743.85
+    - 751.525
+  - - 751.875
+    - 759.675
+  - - 760.025
+    - 771.8
+  beat: intuition · what the curve says
+  visual: 'Picture zone: the s19 graph (height 0-30 km up, pressure across); S1-S2 gold step markers at z = 8.4 and 16.9 km
+
+    with labels ''373 hPa'', ''137 hPa'' and ''÷ e ≈ 2.72''; S3 keyword ''−11 % per km'' with a small CalcStack
+
+    ''1 - e^{-1/8.43} \approx 0.11''. Maths zone S4: a code-drawn stack of 6 foam mattresses, the bottom ones most
+
+    compressed (Like); S5 keyword ''unlike: no separate layers · depends on T''. S6: halving marks ''H ln 2 ≈ 5.8 km'':
+
+    ''5.8 km -> 507 hPa'', ''11.7 km -> 253 hPa'' (54 px, TipLabels on the curve) with CalcStack ''8.43 \times \ln 2 \approx
+
+    5.8\ \mathrm{km}''.
+
+    '
+  voiceover: 'What does this curve tell us? Every time we climb one scale height, eight point four kilometres, the pressure
+    is divided by e, which is about two point seven two. And every kilometre takes away the same fraction, about eleven percent
+    of what''s left. It''s like a stack of foam mattresses: the bottom ones are squeezed the most, because they carry everything
+    above them. Unlike mattresses, though, the air''s layers aren''t separate, and how much they squeeze also depends on their
+    temperature. So the pressure halves about every five point eight kilometres: to about five hundred hectopascals at five
+    point eight kilometres, and about two hundred and fifty at eleven point seven.'
+  on_screen_eq:
+    latex: 8.43 \times \ln 2 \approx 5.8\ \mathrm{km}
+    vallis_eq: our number from p = p0 e^{-z/H}
+    page_png: chapters/pages/ch01/p062.png
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure
+    params:
+      z:
+      - 8434.7
+      - 16869.3
+      - 5846
+      - 11692
+      p0: 101325
+      T: 288.15
+    outputs:
+      p_hPa:
+      - 372.8
+      - 137.1
+      - 506.6
+      - 253.3
+      frac_per_km: 0.112
+    test: CHECK W18-W20
+  exaggeration:
+  - mattress analogy illustrative
+  screen_summary: 'on the curve: steps of H with ''÷ e'' marks (1013 → 373 → 137 hPa); ''−11 % per km''; mattress stack (Like)
+    with crossed-out note (Unlike); halving marks 5.8 km → 507 hPa, 11.7 km → 253 hPa'
+- id: s21_balloon_pressure
+  t:
+  - 772.6
+  - 822.575
+  sentence_times:
+  - - 772.6
+    - 775.55
+  - - 775.9
+    - 778.95
+  - - 779.3
+    - 788.7
+  - - 789.05
+    - 796.4
+  - - 796.75
+    - 802.675
+  - - 803.025
+    - 807.05
+  - - 807.4
+    - 815.875
+  - - 816.225
+    - 821.775
+  beat: intuition · check against a real balloon
+  visual: 'Picture zone S1-S3: a small Globe3D zoom to northern France (true colour 2023-11-01, NE borders), a gold dot
+
+    ''Trappes, near Paris'' and a balloon icon rising with a radiosonde box hanging below (new house icon `Radiosonde`);
+
+    keyword ''radiosonde'' on AT(2, "radiosonde"); S3 small readout chips beside the balloon text-only ''p · T · humidity
+
+    · wind'' (54 px, no boxes). S4: label ''Trappes · 1 Nov 2023 · 12 UTC'' (54 px). Maths zone becomes a graph (height
+
+    0-30 km up, pressure 0-1013 hPa across, ticks 52 px): measured points teal (data/soundings.json -> trappes.p, z,
+
+    every reported level), slate curve p0 e^{-z/H}; S5 both agree below 3 km (gold band ''close''); S6 the teal points
+
+    fall left of the curve above 6 km, gold band ''colder air -> smaller H''; a tick at 8.85 km labelled ''Everest'' with
+
+    the two values beside it (curve ''354 hPa'', balloon ''<value from data> hPa'', spoken nowhere - the builder writes it;
+
+    if shown it must be spoken: DEFAULT = do not show the balloon number, show only the gap band).
+
+    '
+  voiceover: Does the real atmosphere follow this curve? Let's check it against a real weather balloon. Twice a day, at hundreds
+    of places around the world, meteorologists launch a balloon carrying a small instrument package called a radiosonde. As
+    it rises, it radios back the pressure, the temperature and the humidity, and from its drift we get the wind. This one
+    was launched near Paris at midday on the first of November, twenty twenty-three. Near the ground, its pressure follows
+    our curve closely. Higher up, the real pressure falls a little faster, because the real air up there is colder, and colder
+    air has a smaller scale height. So our curve is a good first guess, and the measurements tell us where it needs correcting.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure (curve) + IGRA2 sounding (data)
+    params:
+      station: FRM00007145 Trappes
+      time: 2023-11-01T12 UTC
+    data: data/soundings.json -> trappes
+    test: CHECK W21 (sounding p below the curve above 6 km; agreement within 2 % below 2 km)
+  exaggeration: []
+  screen_summary: 'balloon rising from Trappes on a small true-colour map of France; graph: measured p(z) teal dots vs slate
+    curve H = 8.4 km; gap highlighted aloft ''colder → smaller H''; Everest tick at 8.8 km with both values'
+- id: s22_mass_below
+  t:
+  - 822.575
+  - 853.875
+  sentence_times:
+  - - 822.575
+    - 829.725
+  - - 830.075
+    - 837.325
+  - - 837.675
+    - 843.75
+  - - 844.1
+    - 849.475
+  - - 849.825
+    - 853.075
+  beat: intuition · how much air is below
+  visual: 'Picture zone: the 1-m² column again, with a height axis 0-35 km (52-px ticks); it fills from the ground with teal
+    as
+
+    the narration names each level: 5.5 km ''50 %'', 16 km ''90 %'', 31 km ''99 %'' (54 px TipLabels on the axis); the
+
+    remaining air above is a thin slate cap. Maths zone: ''below = 1 - \dfrac{p(z)}{p_0}'' with values ''0.50'', ''0.90'',
+
+    ''0.99'' as CalcStack lines; S5 cross-fade to the globe (50x shell) with a gold line at 31 km, keyword ''thin shell''.
+
+    '
+  voiceover: Since pressure is the weight of the air above, the pressure at any height also tells us how much air is left
+    above it. At about five and a half kilometres, the pressure is half its ground value, so half of all the air is below
+    us. At sixteen kilometres, it's about one tenth, so nine tenths of the air is below. And by about thirty-one kilometres,
+    ninety-nine percent of the air is below. That's why the atmosphere is such a thin shell.
+  on_screen_eq:
+    latex: \text{fraction below} = 1 - \dfrac{p(z)}{p_0}
+    vallis_eq: our construction from (1.51) (pressure = weight above)
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.core.statics.standard_atmosphere
+    params:
+      z_geometric_m:
+      - 5500
+      - 16000
+      - 31000
+      geometric: true
+    outputs:
+      fraction_below:
+      - 0.501
+      - 0.898
+      - 0.99
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_standard_atmosphere_V5_geometric_height_option; CHECK W22
+  exaggeration:
+  - globe shell 50x (as s02)
+  screen_summary: 'column with fill bars: 5.5 km ''½ below''; 16 km ''9/10 below''; 31 km ''99 % below''; mini globe with
+    the 50x shell, the 31-km line marked'
+- id: s23_troposphere
+  t:
+  - 853.875
+  - 888.55
+  sentence_times:
+  - - 853.875
+    - 858.075
+  - - 858.425
+    - 861.925
+  - - 862.275
+    - 871.825
+  - - 872.175
+    - 882.3
+  - - 882.65
+    - 887.75
+  beat: building blocks · the layers (temperature)
+  visual: 'Full-width graph x 80-1840 (keeps right half for keywords): height 0-50 km up (ticks every 10 km, 52 px),
+
+    temperature −90 … +20 °C across (ticks every 20 °C). S1: the teal pressure points fade; the measured temperature
+
+    (orange line, data/soundings.json -> trappes.T) draws upward following the rising balloon icon. S3: gold slope
+
+    triangle on the lower part ''1 km'', ''−6.5 °C'' (average lapse fitted 0-10 km, CHECK W23 within ±1 K/km). S4: band
+
+    0 -> tropopause height shaded faint teal, keyword ''troposphere'' with ''tropos = turning'' (44 px). S5 small code-drawn
+
+    cloud and rain icons inside the band.
+
+    '
+  voiceover: 'Now let''s look at the temperature that the same balloon measured. Here, height goes up and temperature goes
+    across. Near the ground it''s mild, and as the balloon climbs, the temperature falls, by about six and a half degrees
+    for every kilometre on average. This lowest layer, where the temperature falls with height, is called the troposphere,
+    from a Greek word for turning, because its air keeps overturning and mixing. Almost all our weather happens here: the
+    clouds, the rain and the storms.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.stratification.lapse_rate
+    params:
+      profile: Trappes 2023-11-01T12
+      layer: 0-10 km
+    data: data/soundings.json -> trappes
+    test: CHECK W23 (mean lapse 0-10 km in 5.5-7.5 K/km; else narration changes 'six and a half' to the measured value)
+  exaggeration: []
+  screen_summary: graph T(z) from the Trappes sounding (orange line, height 0-35 km up, T −80 … +20 °C across); slope triangle
+    '−6.5 °C per km'; band 0-11 km shaded 'troposphere'; cloud icons in the band
+- id: s24_stratosphere
+  t:
+  - 888.55
+  - 925.925
+  sentence_times:
+  - - 888.55
+    - 894.175
+  - - 894.525
+    - 897.575
+  - - 897.925
+    - 902.875
+  - - 903.225
+    - 911.65
+  - - 912.0
+    - 919.175
+  - - 919.525
+    - 925.125
+  beat: building blocks · tropopause and stratosphere
+  visual: 'Same graph. S1: gold dashed horizontal line at the sounding''s lapse-rate tropopause (WMO definition, computed
+    by the
+
+    builder) labelled ''tropopause ≈ 11 km, ≈ −55 °C'' (54 px). S3: band above shaded faint indigo ''stratosphere''; small
+
+    sun icon with rays absorbed by a dotted ''ozone'' layer near 20-30 km (keyword ''ozone absorbs UV''). S4: the balloon
+
+    icon pops at the top of the sounding (its real burst height), then a dashed slate line continues to 48 km from the
+
+    ERA5 column above Trappes at 12 UTC (levels 1-1000 hPa, heights from geopotential), reaching the warm stratopause
+
+    near 50 km. S5: keywords ''mesosphere'' and ''thermosphere'' stacked above the graph top with an up-arrow (no data).
+
+    '
+  voiceover: At about eleven kilometres, near minus fifty-five degrees, the fall stops. This boundary is called the tropopause.
+    Above it, the temperature stops falling, and higher up it rises again. That's the stratosphere, a calm, layered region,
+    where ozone absorbs the sun's ultraviolet light and warms the air. Balloons usually burst at around thirty kilometres,
+    but the warming goes on up to about fifty kilometres. Above that come the mesosphere and the thermosphere, where the air
+    is extremely thin.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.stratification.lapse_rate (WMO lapse-rate tropopause in the builder) + ERA5 column
+    params:
+      station: Trappes
+      era5: temperature, geopotential, 37 levels, 2023-11-01T12, 49.0N 2.0E
+    data: data/soundings.json -> trappes, era5_column_trappes
+    test: CHECK W24 (tropopause 9.5-12.5 km and −50…−62 °C, else words follow data); CHECK W25 (ERA5 column max T above 40
+      km near 45-52 km)
+  exaggeration: []
+  screen_summary: tropopause line at ≈ 11 km '≈ −55 °C'; stratosphere band; balloon bursts ~30 km; dashed slate extension
+    to 48 km (reanalysis, same place and time); ozone keyword with sun rays; 'mesosphere', 'thermosphere' above
+- id: s25_tropics
+  t:
+  - 925.925
+  - 957.525
+  sentence_times:
+  - - 925.925
+    - 930.025
+  - - 930.375
+    - 935.375
+  - - 935.725
+    - 944.7
+  - - 945.05
+    - 951.925
+  - - 952.275
+    - 956.725
+  beat: contrast · change only the place
+  visual: 'Same graph; the Trappes line dims to 60 %; S2 the Singapore sounding (teal, data/soundings.json -> singapore,
+
+    WSSS 48698, 2023-11-01T12 UTC) draws up; S3 its tropopause mark ''≈ 16-17 km, ≈ −80 °C'' (values from the data,
+
+    words follow CHECK W26); gold double-arrow between the two tropopause marks. S4-S5: picture inset (x 1300-1800):
+
+    a half-globe slice with the troposphere drawn 50x thick, deeper at the equator (''≈ 16 km'') than at the poles
+
+    (''≈ 8 km''), from the ERA5 zonal-mean lapse-rate tropopause (2023 November mean or 1991-2020 climatology).
+
+    '
+  voiceover: Now let's keep the time the same and change only the place. Here is a balloon launched at the same moment at
+    Singapore, near the equator. Its tropopause is much higher, at about sixteen or seventeen kilometres, and much colder,
+    below minus seventy-five degrees. Strong rising currents in the warm tropics stir the air much higher, so the troposphere
+    is deeper there. Near the poles, it's shallower, about eight or nine kilometres.
+  on_screen_eq: null
+  physics_source:
+    fn: lapse-rate tropopause (builder, same routine as s24) on the Singapore sounding and on ERA5 zonal means
+    params:
+      station: SNM00048698 Singapore
+      era5: November-mean temperature on pressure levels
+    data: data/soundings.json -> singapore; data/tropopause_zonal.json
+    test: CHECK W26 (Singapore tropopause 15.5-17.5 km, T < −72 °C), W27 (polar 7-10 km)
+  exaggeration:
+  - troposphere drawn 50x thick in the inset
+  screen_summary: second profile (teal) from Singapore on the same axes; two tropopause marks 'Paris ≈ 11 km', 'Singapore
+    ≈ 16-17 km'; mini globe with tropopause depth band thicker at the equator than at the poles
+- id: s26_why_cold_aloft
+  t:
+  - 957.525
+  - 1000.875
+  sentence_times:
+  - - 957.525
+    - 962.75
+  - - 963.1
+    - 968.475
+  - - 968.825
+    - 976.55
+  - - 976.9
+    - 979.425
+  - - 979.775
+    - 984.15
+  - - 984.5
+    - 996.675
+  - - 997.025
+    - 1000.075
+  beat: why · heated from below
+  visual: 'Picture zone (illustrative side view, ground at y 760): gold sun rays crossing a faint air layer and warming a
+    brown
+
+    ground strip that glows orange; S3 keyword ''heated from below'' + a small pan-on-stove icon (Like); S4-S6 an orange
+
+    dashed air-parcel blob lifts off and grows in size with height (area ∝ 1/p from data/atmos.json -> ussa_p) while its
+
+    colour shifts orange -> slate; pressure labels on the left axis ''1013 hPa'', ''900 hPa'', ''800 hPa''. Maths zone: keyword
+
+    ''lower pressure -> expands -> does work -> cools''; ''\Gamma_d = \dfrac{g}{c_p} \approx 9.8\ ^\circ\mathrm{C}\ \text{per
+
+    km}'' is NOT shown (c_p not taught); instead ''≈ 9.8 °C per km'' (68 px) with keyword ''no cloud''.
+
+    '
+  voiceover: 'Why does the air get colder as we go up, when that brings us closer to the sun? Because sunlight mostly passes
+    straight through the air and warms the ground first. The ground then warms the air touching it, so the troposphere is
+    heated from below, like a pan of water on a stove. Warm air near the ground rises. As it rises, it moves into lower pressure,
+    so it expands. Expanding air pushes its surroundings away, and that work costs it energy, so it cools: by almost ten degrees
+    for every kilometre it rises, as long as no cloud forms. We''ll use this cooling for clouds in a moment.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.stratification.adiabatic_lapse_rate
+    params: {}
+    outputs:
+      Gamma_d_K_per_km: 9.76
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_adiabatic_lapse_rate_V5_ams_glossary_value
+  exaggeration:
+  - parcel growth exaggerated for visibility
+  - illustrative side view
+  screen_summary: 'side view: sun rays through the air to the ground (gold), ground glows, warm parcel (orange blob) rises,
+    grows, turns slate; labels ''p lower → expands → cools''; ''≈ 9.8 °C per km'''
+- id: s27_vapour
+  t:
+  - 1000.875
+  - 1043.825
+  sentence_times:
+  - - 1000.875
+    - 1002.85
+  - - 1003.2
+    - 1007.3
+  - - 1007.65
+    - 1012.5
+  - - 1012.85
+    - 1020.35
+  - - 1020.7
+    - 1028.7
+  - - 1029.05
+    - 1034.7
+  - - 1035.05
+    - 1043.025
+  beat: building blocks · humidity
+  visual: 'Picture zone: Globe3D with the ERA5 2-m specific humidity (from d2m and sp) at 2023-11-02T12 UTC as a perceptual
+
+    sequential colour map (cmocean ''rain'' or ''haline'', never rainbow) over the daytime mosaic at 70 % opacity; colour
+    bar
+
+    0-20 g/kg (52-px labels, hidden when zooming); camera swings from the Arctic (almost 0) to the tropical Atlantic
+
+    (≈ 20). S1-S2: a small icon pair ''vapour (invisible)'' faint dots vs ''cloud = liquid drops'' white circles. Maths zone:
+
+    ''q = \dfrac{\text{g of vapour}}{\text{kg of air}}'' keyword ''specific humidity''; S5-S6 CalcStack
+
+    ''e \approx 1.61\, q\, p = 1.61 \times 0.020 \times 1000 \approx 32\ \mathrm{hPa}'' with keyword ''vapour pressure''
+
+    (the symbol e is shown only inside this line and named ''vapour pressure'' beside it).
+
+    '
+  voiceover: 'Now let''s add water. Water vapour is water as a gas, and it''s invisible. Clouds and fog are not vapour: they''re
+    tiny drops of liquid water. The amount of vapour is often measured by the specific humidity: the grams of vapour in each
+    kilogram of air. It goes from almost zero in cold polar air to about twenty grams per kilogram in warm, steamy tropical
+    air. Vapour also adds its own small share to the air pressure, called the vapour pressure. Twenty grams per kilogram at
+    sea level is a vapour pressure of about thirty-two hectopascals, out of about a thousand.'
+  on_screen_eq:
+    latex: e \approx 1.61\, q\, p = 1.61 \times 0.020 \times 1000 \approx 32\ \mathrm{hPa}
+    vallis_eq: (18.12) e ≈ w p/ε = 1.61 w p with q ≈ w
+    page_png: chapters/pages/ch18/p696.png
+  physics_source:
+    fn: fluidpy.geo.moist.vapour_pressure_from_q (NEW, Vallis (18.12)) and fluidpy.geo.moist.specific_humidity (NEW)
+    params:
+      q: 0.02
+      p_hPa: 1000
+    outputs:
+      e_hPa: 32.2
+    data: data/global_20231102T12.{bin,json} -> q2m
+    test: NEW tests/geo/test_moist.py (see data_needs.md F1); CHECK W28
+  exaggeration: []
+  screen_summary: 'kettle-free icon: invisible vapour dots (faint) vs a cloud of drops (white); ''specific humidity q = g
+    of vapour per kg of air''; real ERA5 2-m specific humidity globe (2 Nov 2023 12 UTC) 0 → 20 g/kg; ''vapour pressure ≈
+    1.61 × q × p'' → 32 hPa'
+- id: s28_saturation
+  t:
+  - 1043.825
+  - 1094.65
+  sentence_times:
+  - - 1043.825
+    - 1050.075
+  - - 1050.425
+    - 1055.5
+  - - 1055.85
+    - 1063.825
+  - - 1064.175
+    - 1075.2
+  - - 1075.55
+    - 1079.275
+  - - 1079.625
+    - 1084.625
+  - - 1084.975
+    - 1093.85
+  beat: intuition · saturation
+  visual: 'Picture zone S1-S3: water surface strip, seeded dots leaving (up arrows) and landing (down arrows), two counters
+
+    ''leaving'' / ''landing'' converge to equal -> keyword ''saturated''. Maths zone S4-S5: graph (temperature −10…35 °C
+
+    across, vapour pressure 0-50 hPa up, ticks 52 px), curve e_s(T) from Vallis (18.28) with T0 = 273 K, e0 = 6.12 hPa,
+
+    L = 2.44e6 J/kg, Rv = 462 J/(kg K) (gold); four dots with TipLabels ''6.2 hPa'', ''12 hPa'', ''23 hPa'', ''42 hPa'' on
+    the
+
+    spoken words; S5 doubling steps ''× 2'' between 0->10 and 10->20 °C. S6-S7 small sponge icon ''like a sponge'' then a
+
+    slate strike and ''set by temperature, not by the air''.
+
+    '
+  voiceover: 'Over a water surface, molecules leave the water and others land back in it, all the time. The fastest ones escape,
+    and warmer water has more fast molecules. When as many land as leave, the air above is saturated, and its vapour pressure
+    is called the saturation vapour pressure. It depends only on temperature, and it climbs steeply: about six hectopascals
+    at zero degrees, twelve at ten, twenty-three at twenty, and forty-two at thirty. It roughly doubles for every ten degrees
+    of warming. People often say warm air can hold more water, like a bigger sponge. Unlike a sponge, though, the air isn''t
+    doing the holding: the limit is set by the temperature, and it would be the same with no air at all.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.moist.saturation_vapour_pressure (NEW, Vallis (18.28))
+    params:
+      T_C:
+      - 0
+      - 10
+      - 20
+      - 30
+      e0_hPa: 6.12
+      T0: 273.0
+      L: 2.44e6
+      Rv: 462.0
+    outputs:
+      es_hPa:
+      - 6.19
+      - 12.24
+      - 23.13
+      - 41.91
+    test: NEW tests/geo/test_moist.py::test_saturation_vapour_pressure_V1_reference_point, ::test_..._V2_clausius_clapeyron_ode,
+      ::test_..._V5_bolton_within_2pct; CHECK W29
+  exaggeration:
+  - molecule exchange illustrative
+  screen_summary: water surface with molecules leaving/landing (counters equal → 'saturated'); curve e_s(T) −10…35 °C with
+    points 6, 12, 23, 42 hPa; '× 2 per 10 °C' steps; sponge icon with 'Like' / 'Unlike'
+- id: s29_relative_humidity
+  t:
+  - 1094.65
+  - 1136.775
+  sentence_times:
+  - - 1094.65
+    - 1097.475
+  - - 1097.825
+    - 1103.5
+  - - 1103.85
+    - 1109.775
+  - - 1110.125
+    - 1116.025
+  - - 1116.375
+    - 1124.525
+  - - 1124.875
+    - 1129.35
+  - - 1129.7
+    - 1135.975
+  beat: building blocks · relative humidity
+  visual: 'Maths zone: ''RH = \dfrac{\text{vapour pressure}}{\text{saturation vapour pressure}} \times 100\,\%'' (68 px).
+    Picture
+
+    zone: the s28 graph; a teal dot at (25 °C, 15 hPa) labelled ''our air''; a gold dot on the curve above it ''31.3 hPa'';
+
+    a gold vertical bracket between them; CalcStack ''15 \div 31.3 \approx 0.48'' -> ''RH \approx 48\,\%'' with a gold
+
+    CurvedLink from the bracket. S5-S6: the teal dot slides left at constant 15 hPa from 25 to 18 °C while a readout
+
+    ''RH 48 % -> 73 %'' ticks (data/humidity.json -> cooling_path).
+
+    '
+  voiceover: Relative humidity compares the two. It's the vapour pressure divided by the saturation vapour pressure, as a
+    percentage. Let's try air at twenty-five degrees with a vapour pressure of fifteen hectopascals. At twenty-five degrees,
+    the saturation vapour pressure is about thirty-one point three. Fifteen divided by thirty-one point three is about point
+    four eight, so the relative humidity is about forty-eight percent. Notice that it depends on the temperature as well as
+    on the water. Cool the same air, and its relative humidity rises, even though no water is added.
+  on_screen_eq:
+    latex: RH = \dfrac{\text{vapour pressure}}{\text{saturation vapour pressure}} \times 100\,\%
+    vallis_eq: ℋ = e/e_s (Vallis §18.1.2 text before 18.1.3, unnumbered)
+    page_png: chapters/pages/ch18/p696.png
+  physics_source:
+    fn: fluidpy.geo.moist.relative_humidity (NEW)
+    params:
+      e_hPa: 15
+      T_C: 25
+    outputs:
+      RH: 0.479
+      es_hPa: 31.29
+    test: NEW tests/geo/test_moist.py::test_relative_humidity_V1; CHECK W30
+  exaggeration: []
+  screen_summary: 'RH = vapour pressure ÷ saturation vapour pressure × 100 %; on the e_s curve: point at 25 °C, 15 hPa (teal)
+    under the curve at 31.3 (gold); CalcStack 15 ÷ 31.3 ≈ 0.48 → 48 %; point slides left (cooling) and RH readout climbs'
+- id: s30_dew_point
+  t:
+  - 1136.775
+  - 1175.375
+  sentence_times:
+  - - 1136.775
+    - 1140.775
+  - - 1141.125
+    - 1147.8
+  - - 1148.15
+    - 1150.525
+  - - 1150.875
+    - 1158.15
+  - - 1158.5
+    - 1164.575
+  - - 1164.925
+    - 1170.0
+  - - 1170.35
+    - 1174.575
+  beat: building blocks · dew point
+  visual: 'Picture zone: the s28-s29 graph; the teal dot continues left along the 15-hPa line until it meets the gold curve
+
+    at 13.1 °C (gold ring, TipLabel ''dew point ≈ 13 °C''); a dashed horizontal guide ''15 hPa''. Maths zone: keyword
+
+    ''dew point'' (54 px) on AT(3, "This is the dew point"); S4-S6 three code-drawn icons appearing on their words: drops
+    on
+
+    grass blades, a flat fog layer over a field, a cumulus cloud.
+
+    '
+  voiceover: 'So how far must we cool this air before it''s saturated? We need the temperature at which the saturation vapour
+    pressure has fallen to fifteen hectopascals. That''s about thirteen degrees. This is the dew point: the temperature to
+    which air must be cooled, keeping its water, to become saturated. On a clear night, grass cools below the dew point of
+    the air touching it, and dew forms. When a whole layer of air near the ground cools to its dew point, we get fog. And
+    when rising air cools to its dew point, we get a cloud.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.moist.dew_point (NEW, analytic inverse of (18.28))
+    params:
+      e_hPa: 15
+    outputs:
+      Td_C: 13.1
+    test: NEW tests/geo/test_moist.py::test_dew_point_V1_inverse_roundtrip; CHECK W31
+  exaggeration: []
+  screen_summary: 'teal dot slides left at 15 hPa until it touches the curve: ''13 °C = dew point''; three small icons: dew
+    on grass, fog layer, cloud'
+- id: s31_cloud_base
+  t:
+  - 1175.375
+  - 1219.525
+  sentence_times:
+  - - 1175.375
+    - 1179.3
+  - - 1179.65
+    - 1183.525
+  - - 1183.875
+    - 1193.45
+  - - 1193.8
+    - 1201.925
+  - - 1202.275
+    - 1205.9
+  - - 1206.25
+    - 1209.925
+  - - 1210.275
+    - 1218.725
+  beat: why · where clouds begin
+  visual: 'Maths zone graph (height 0-3 km up, temperature 0-30 °C across, 52-px ticks): orange parcel temperature line from
+
+    25 °C, teal dew-point line from 13.1 °C (both computed by fluidpy.geo.moist.lifting_condensation_level, NEW, dry
+
+    adiabatic ascent conserving q); S4 gold bracket at the ground ''12 °C'' and CalcStack ''12 \div 8 \approx 1.5\
+
+    \mathrm{km}''; the lines meet at the computed LCL (gold ring, TipLabel ''cloud base ≈ 1.5 km''). Picture zone: side view
+
+    with several orange parcels rising from a sunlit field; each turns into a white cloud puff at the same height;
+
+    S6 a row of flat-based cumulus with a gold dashed line ''same height''.
+
+    '
+  voiceover: 'Let''s follow that air parcel as it rises from the ground. It cools by almost ten degrees for every kilometre.
+    Its dew point falls too, but slowly, by about two degrees per kilometre, because as the parcel expands, its vapour is
+    spread more thinly. So the gap between the temperature and the dew point, twelve degrees at the ground, shrinks by about
+    eight degrees for every kilometre. It closes after about one and a half kilometres. There the vapour condenses, and the
+    cloud begins. That''s why fair-weather clouds have flat bases: parcels rising from the same ground reach their dew point
+    at about the same height.'
+  on_screen_eq:
+    latex: 12 \div 8 \approx 1.5\ \mathrm{km}
+    vallis_eq: our estimate (dry adiabat 9.8 K/km minus dew-point fall about 1.8 K/km); the exact LCL comes from the NEW function
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.moist.lifting_condensation_level (NEW)
+    params:
+      T_C: 25
+      Td_C: 13.1
+      p_hPa: 1013
+    outputs:
+      z_lcl_m: ≈ 1500 (CHECK W32 1.35-1.65 km; narration follows)
+      dTd_dz_K_per_km: ≈ 1.8
+    test: NEW tests/geo/test_moist.py::test_lcl_V1_espy_rule_within_5pct, ::test_lcl_V3_step_convergence
+  exaggeration:
+  - illustrative side view of the rising parcels
+  screen_summary: 'side view: parcel rises; two lines on a height-temperature graph: T (orange, −9.8/km) and Td (teal, −1.8/km)
+    meeting at ≈ 1.5 km; gap bracket ''12 °C'' at the ground; flat-based cumulus row at 1.5 km'
+- id: s32_wind_vector
+  t:
+  - 1219.525
+  - 1255.3
+  sentence_times:
+  - - 1219.525
+    - 1221.525
+  - - 1221.875
+    - 1229.875
+  - - 1230.225
+    - 1234.175
+  - - 1234.525
+    - 1239.2
+  - - 1239.55
+    - 1246.7
+  - - 1247.05
+    - 1254.5
+  beat: building blocks · wind is a vector
+  visual: 'Picture zone: a flat map patch (true-colour Brittany coast, faint) with N/E axes (warm white) and a compass rose;
+
+    teal wind arrow (10 px, 40-px head) from the origin to (8, 6) on a display scale; component legs dashed: orange along
+
+    east ''u = 8 m/s'', slate along north ''v = 6 m/s'' (TipLabels 54 px at the leg midpoints, UV2-08);
+
+    under the picture ''wind = (8, 6) m/s''. Maths zone CalcStack: ''|\mathbf v| = \sqrt{8^2 + 6^2}'' -> ''= \sqrt{100}''
+    ->
+
+    ''= 10\ \mathrm{m/s}''.
+
+    '
+  voiceover: 'Now let''s look at wind. Wind is air moving across the Earth''s surface, and it has both a speed and a direction,
+    so it''s a vector: an arrow. We can split the arrow into two parts, called components. The eastward part is written u,
+    and the northward part is written v. Take a wind blowing towards the north-east, with u equal to eight and v equal to
+    six metres per second. By Pythagoras, its speed is the square root of eight squared plus six squared, which is ten metres
+    per second.'
+  on_screen_eq:
+    latex: '|\mathbf v| = \sqrt{8^2 + 6^2} = 10\ \mathrm{m/s}'
+    vallis_eq: speed of a horizontal wind (vector length; no equation number)
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.norm
+    params:
+      v:
+      - 8
+      - 6
+    outputs:
+      speed: 10.0
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_norm_V1_and_V7_scaling
+  exaggeration: []
+  screen_summary: 'compass rose map patch; teal wind arrow with components: ''u = 8 m/s'' along east, ''v = 6 m/s'' along
+    north; ''v = (8, 6) m/s''; CalcStack √(8² + 6²) = √100 = 10 m/s'
+- id: s33_wind_direction
+  t:
+  - 1255.3
+  - 1298.225
+  sentence_times:
+  - - 1255.3
+    - 1260.25
+  - - 1260.6
+    - 1264.65
+  - - 1265.0
+    - 1276.825
+  - - 1277.175
+    - 1281.9
+  - - 1282.25
+    - 1288.25
+  - - 1288.6
+    - 1297.425
+  beat: building blocks · the direction convention
+  visual: 'Picture zone: compass dial (ticks 52 px: ''0° N'', ''90° E'', ''180° S'', ''270° W''); S2 a teal arrow entering
+    from the west
+
+    edge pointing east, keyword ''westerly = from the west''. S4-S5: our (8, 6) arrow; its tail extended backwards as a
+
+    dashed line to the dial edge at 233°; a gold arc from 0° clockwise to 233° with TipLabel ''233°'' and keyword ''from
+
+    the south-west''; ''south-westerly'' (54 px). Maths zone (small, 54 px): ''direction from = 233°'' computed with
+
+    ''atan2(−u, −v)'' NOT shown (not taught); instead the geometric reading only. S6: a contrast strip at the
+
+    bottom: an ocean-current arrow ''eastward current -> towards the east'' (slate).
+
+    '
+  voiceover: 'Meteorologists name a wind by where it comes from, not where it''s going. A westerly wind blows from the west,
+    towards the east. The direction is given in degrees, measured clockwise from north as seen from above: north is zero,
+    east ninety, south one hundred and eighty, and west two hundred and seventy. Our wind blows towards the north-east, so
+    it comes from the south-west. Its direction is about two hundred and thirty-three degrees, and we call it a south-westerly.
+    Careful: ocean currents use the opposite habit, and are named by where they go, so an eastward current flows towards the
+    east.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.atmos.wind_direction_from (NEW)
+    params:
+      u: 8
+      v: 6
+    outputs:
+      dir_from_deg: 233.13
+    test: NEW tests/geo/test_atmos.py::test_wind_direction_V1_compass_points, ::test_wind_direction_V7_roundtrip; CHECK W33
+  exaggeration: []
+  screen_summary: 'compass dial 0/90/180/270 ''clockwise from north, seen from above''; westerly arrow entering from the west;
+    our wind with a gold arc from north clockwise to its tail: ''233°'' ''from the south-west''; ''south-westerly''; contrast:
+    ''eastward current →'''
+- id: s34_wind_units
+  t:
+  - 1298.225
+  - 1337.75
+  sentence_times:
+  - - 1298.225
+    - 1301.05
+  - - 1301.4
+    - 1304.95
+  - - 1305.3
+    - 1313.95
+  - - 1314.3
+    - 1316.875
+  - - 1317.225
+    - 1328.775
+  - - 1329.125
+    - 1336.95
+  beat: building blocks · units and knots
+  visual: 'Maths zone CalcStack: ''10\ \mathrm{m/s} \times 3.6 = 36\ \mathrm{km/h}'' (with ''× 3600 s/h ÷ 1000 m/km'' shown
+    under 3.6).
+
+    Picture zone S3-S4: Globe3D with one meridian highlighted, a gold 1° arc zoomed and split into 60 ticks, one tick
+
+    labelled ''1 nautical mile = 1852 m'' and the side calc ''2\pi \times 6371\ \mathrm{km} \div 21\,600 \approx 1853\
+
+    \mathrm{m}''. S5 CalcStack: ''1\ \mathrm{kt} = 1852\ \mathrm{m} \div 3600\ \mathrm{s} \approx 0.51\ \mathrm{m/s}'' ->
+
+    ''10 \div 0.514 \approx 19\ \mathrm{kt}''.
+
+    '
+  voiceover: Wind speed comes in several units. Metres per second is the scientific one. Multiply by three point six to get
+    kilometres per hour, so ten metres per second is thirty-six kilometres per hour. Sailors and pilots use knots. A knot
+    is one nautical mile per hour, and a nautical mile, one thousand eight hundred and fifty-two metres, is about one sixtieth
+    of a degree of latitude along the Earth's surface. So one knot is about point five one metres per second, and our ten
+    metres per second wind is about nineteen knots.
+  on_screen_eq:
+    latex: 1\ \mathrm{kt} = 1852\ \mathrm{m} \div 3600\ \mathrm{s} \approx 0.51\ \mathrm{m/s}
+    vallis_eq: unit definition (no equation number)
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.constants.KNOT (NEW constant 1852/3600 m/s) + fluidpy.geo.constants.EARTH_RADIUS
+    params: {}
+    outputs:
+      knot_ms: 0.5144
+      nm_from_radius_m: 1853.2
+      ten_ms_kt: 19.44
+    test: CHECK W34
+  exaggeration: []
+  screen_summary: 'CalcStack 10 m/s × 3.6 = 36 km/h; globe meridian with a 1° arc split into 60 parts: ''1 nautical mile =
+    1852 m''; ''1 kt = 1852 m ÷ 3600 s ≈ 0.51 m/s''; ''10 ÷ 0.514 ≈ 19 kt'''
+- id: s35_why_wind
+  t:
+  - 1337.75
+  - 1372.675
+  sentence_times:
+  - - 1337.75
+    - 1339.825
+  - - 1340.175
+    - 1342.65
+  - - 1343.0
+    - 1352.65
+  - - 1353.0
+    - 1364.975
+  - - 1365.325
+    - 1371.875
+  beat: why · what pushes the wind
+  visual: 'Picture zone: two dials from s07 at x 200 and 800, ''H 1020 hPa'' and ''L 1000 hPa''; an orange push arrow between
+    them
+
+    ''pushed from high to low''; S2 code-drawn tyre with air escaping. S3: sketch map with an ''L'' and isobar circles
+
+    (illustrative) and a teal arrow that starts towards the L and bends to circle it (anticlockwise, NH, seen from
+
+    above); keyword ''turned aside''; S4 keywords ''Coriolis effect'', ''geostrophic wind'' as forward pointers (no titles).
+
+    '
+  voiceover: Why does air move at all? The simplest reason is pressure. Where the pressure is higher on one side than on the
+    other, the air is pushed from high pressure towards low pressure, just as air rushes out of a punctured tyre. But on our
+    spinning Earth, moving air is gradually turned aside, so over large distances the wind ends up blowing around areas of
+    high and low pressure, rather than straight into them. We'll see how that turning works in later videos on the Coriolis
+    effect and the geostrophic wind.
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: illustrative sketch; real wind circulation shown with data in s44
+  exaggeration:
+  - illustrative
+  screen_summary: two barometer dials 'high' / 'low' with an orange push arrow high → low; tyre icon; then a curved arrow
+    bending round an 'L' on a small sketch 'turned aside'
+- id: s36_weather_climate
+  t:
+  - 1372.675
+  - 1426.375
+  sentence_times:
+  - - 1372.675
+    - 1376.65
+  - - 1377.0
+    - 1388.05
+  - - 1388.4
+    - 1397.35
+  - - 1397.7
+    - 1404.55
+  - - 1404.9
+    - 1414.775
+  - - 1415.125
+    - 1421.425
+  - - 1421.775
+    - 1425.575
+  beat: building blocks · weather vs climate
+  visual: 'S1-S3 maths zone keywords ''weather = now · a few days'', ''climate = statistics over 30 years''; picture zone
+    a small
+
+    true-colour map of Brittany with a gold dot ''Brest''. S4-S6 full-width TimeGraph (x 80-1840, y 120-820): months
+
+    across (52-px ticks ''Jan'' … ''Dec''), temperature 0-25 °C up; the slate band (10th-90th percentile of each calendar
+
+    day over 1991-2020, 15-day smoothed) and the warm white mean draw first, then the orange 2023 daily line draws left
+
+    to right on AT(4, "for every day"); S7 a gold count ''inside the band: <n> days of 365'' only if spoken - DEFAULT not
+
+    shown; keyword ''expect / get'' on the last sentence. Source ERA5 2-m temperature at the Brest grid point.
+
+    '
+  voiceover: 'Before we look at real maps, let''s pin down two words. Weather is the state of the atmosphere at one place
+    and time: its temperature, pressure, humidity, wind, clouds and rain, right now or over the next few days. Climate is
+    the statistics of the weather over many years, usually thirty: what''s normal, and how far the weather usually strays
+    from it. Here is the daily temperature at Brest, in north-western France, for every day of twenty twenty-three. Behind
+    it is Brest''s climate for each day of the year, the average over nineteen ninety-one to twenty twenty, with a band that
+    holds eight days out of ten. The weather line jumps around from day to day, but most of the time it stays inside the band.
+    Climate is what you expect; weather is what you get.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.climatology.daily_climatology (NEW)
+    params:
+      point: 48.45N 4.42W
+      base: 1991-2020
+      quantiles:
+      - 0.1
+      - 0.9
+      smooth_days: 15
+    data: data/brest_t2m_daily.json
+    test: NEW tests/diag/test_climatology.py (see data_needs.md F5); CHECK W35 (share of 2023 days inside the band 60-90 %,
+      else wording 'most of the time' is revisited)
+  exaggeration: []
+  screen_summary: 'keywords ''weather: now, a few days'' / ''climate: 30-year statistics''; TimeGraph Jan-Dec 2023: daily
+    mean T at Brest (orange) over the 1991-2020 daily mean (warm white) and 10-90 % band (slate fill)'
+- id: s37_observations
+  t:
+  - 1426.375
+  - 1458.35
+  sentence_times:
+  - - 1426.375
+    - 1428.85
+  - - 1429.2
+    - 1437.275
+  - - 1437.625
+    - 1439.425
+  - - 1439.775
+    - 1444.375
+  - - 1444.725
+    - 1452.875
+  - - 1453.225
+    - 1457.55
+  beat: building blocks · observations
+  visual: 'Picture zone: Globe3D rotating slowly (Europe -> Atlantic -> Africa -> Pacific), gold dots (6 px) at every IGRA2
+
+    station with at least one sounding in 2023 (data/igra_stations_2023.json); S1 a row of code-drawn icons on their
+
+    words (station, balloon, ship, buoy, plane, satellite); S3 keywords ''crowded'' (Europe) and ''sparse'' (Pacific) with
+    gold
+
+    pointers; S4 keyword ''different things, different times''.
+
+    '
+  voiceover: 'How do we know the weather everywhere? From observations: thousands of weather stations, weather balloons, ships,
+    buoys and aircraft, and many satellites. But they''re uneven. Here are the places that launched weather balloons in twenty
+    twenty-three. They''re crowded over Europe, North America and East Asia, but sparse over the oceans, much of Africa, and
+    the poles. And each instrument measures different things, at different times.'
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: station positions are data (IGRA2 station list, NOAA NCEI, public domain); no computation beyond a filter
+    data: data/igra_stations_2023.json
+    test: CHECK W36 (count of 2023-active stations reported; narration has no count)
+  exaggeration:
+  - illustrative (no computed visual)
+  screen_summary: Globe3D (daytime mosaic) with gold dots at IGRA2 stations active in 2023; slow rotation Europe → Pacific
+    → Africa; small icons station/balloon/ship/buoy/plane/satellite
+- id: s38_reanalysis
+  t:
+  - 1458.35
+  - 1519.625
+  sentence_times:
+  - - 1458.35
+    - 1461.0
+  - - 1461.35
+    - 1472.925
+  - - 1473.275
+    - 1481.6
+  - - 1481.95
+    - 1488.85
+  - - 1489.2
+    - 1496.95
+  - - 1497.3
+    - 1503.65
+  - - 1504.0
+    - 1510.925
+  - - 1511.275
+    - 1518.825
+  beat: building blocks · reanalysis
+  visual: 'Picture zone: the s37 globe; S1-S2 a faint lat-lon grid (0.25°, drawn every 2° for legibility) appears; a small
+    loop
+
+    icon ''model step'' -> ''nudge to observations'' (gold arrows from the dots onto the grid); S3 the ERA5 2-m temperature
+
+    field at 2023-11-02T12 UTC fills the globe (perceptual diverging-free sequential map, cmocean ''thermal''; colour bar
+
+    −30 … +35 °C, 52-px labels); S4 keyword ''every place · every height · every hour''; S5-S6 keywords ''ERA5'', ''1940 ->
+
+    today'', ''≈ 30 km''; S7 a jigsaw icon (Like); S8 over the Southern Ocean (sparse dots) a soft slate haze ''least
+
+    certain'' (Unlike).
+
+    '
+  voiceover: A reanalysis fills in the gaps. It starts from a weather forecast model, a computer program that steps the laws
+    of physics forward in time, including the hydrostatic balance and the gas law we just met. Every few hours, it nudges
+    the model towards all the observations made at that time, trusting the more reliable ones more. The result is a complete
+    picture of the atmosphere, at every place and height, every hour, for decades. The one we use in this video is called
+    ERA5, made by the European Centre for Medium-Range Weather Forecasts. It runs from nineteen forty to today, on a grid
+    with points about thirty kilometres apart. It's like a jigsaw with missing pieces, filled in using the pieces around them
+    and the rules of physics. Unlike a photograph, though, where observations are sparse the result leans more on the model,
+    so it's least certain there.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.fetch_box (global hour) / fluidpy.data.reduce.write_bin_json
+    params:
+      time: 2023-11-02T12
+      vars:
+      - 2m_temperature
+    data: data/global_20231102T12.{bin,json} -> t2m
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_write_bin_json_roundtrip
+  exaggeration:
+  - model grid drawn every 2° (the real grid is 0.25°)
+  screen_summary: station dots → a coarse model grid lights up → the full ERA5 field (2-m temperature, 2 Nov 2023 12 UTC)
+    fills the globe; keywords 'model + observations', 'every hour since 1940', '≈ 30 km grid'; jigsaw icon Like / Unlike
+- id: s39_surface_pressure
+  t:
+  - 1519.625
+  - 1553.975
+  sentence_times:
+  - - 1519.625
+    - 1522.0
+  - - 1522.35
+    - 1531.325
+  - - 1531.675
+    - 1534.1
+  - - 1534.45
+    - 1543.675
+  - - 1544.025
+    - 1548.825
+  - - 1549.175
+    - 1553.175
+  beat: intuition · a pressure map, and the mountain problem
+  visual: 'Picture zone: Globe3D with ERA5 surface pressure at 2023-11-02T12 UTC (cmocean ''deep_r'' or ''dense'', never rainbow;
+
+    colour bar 500-1040 hPa, 52-px labels, hidden when the camera zooms), 70 % over the daytime mosaic, NE coastlines.
+
+    S3 camera flies to Tibet; gold pointer ''Tibet < 600 hPa'' (value from data, CHECK W37); S3 pointers ''Andes'',
+
+    ''Rockies'' as the globe turns; S4 a small side-view inset: a mountain with a shorter air column above it than a
+
+    coastal column, keyword ''less air above''. S5 keyword ''weather hidden''.
+
+    '
+  voiceover: 'Now let''s make a pressure map. Here is the real air pressure at the ground all over the world, at midday on
+    the second of November, twenty twenty-three, from the reanalysis. What stands out are the mountains. Over Tibet and the
+    Himalayas, the pressure at the ground is less than six hundred hectopascals, and the Andes and the Rockies show up too.
+    That''s just hydrostatic balance: high ground has less air above it. The weather is in there, but these mountain patterns
+    swamp it.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.fetch_box (global hour)
+    params:
+      time: 2023-11-02T12
+      vars:
+      - surface_pressure
+      - geopotential_at_surface
+    data: data/global_20231102T12.{bin,json} -> sp, zs
+    test: CHECK W37 (minimum sp over the Tibetan Plateau box 28-38N 78-100E < 600 hPa)
+  exaggeration: []
+  screen_summary: 'Globe3D: ERA5 surface pressure (sequential map 500-1040 hPa) over shaded relief; camera to Tibet: ''< 600
+    hPa''; Andes, Rockies pointers; keyword ''less air above high ground'''
+- id: s40_sea_level
+  t:
+  - 1553.975
+  - 1611.15
+  sentence_times:
+  - - 1553.975
+    - 1557.925
+  - - 1558.275
+    - 1562.675
+  - - 1563.025
+    - 1576.9
+  - - 1577.25
+    - 1583.475
+  - - 1583.825
+    - 1594.575
+  - - 1594.925
+    - 1601.5
+  - - 1601.85
+    - 1604.55
+  - - 1604.9
+    - 1610.35
+  beat: why · reducing to sea level
+  visual: 'Picture zone: side view, a mountain (brown) with a station icon at its top, height axis ''0 m'', ''1609 m'' (52
+    px);
+
+    TipLabels ''p = 835 hPa'', ''T = 15 °C''; a seaside station at 0 m ''p ≈ 1013 hPa'' for comparison; S4 a dashed sky-blue
+
+    imaginary column grows down from the mountain station to sea level, keyword ''imaginary column''. Maths zone:
+
+    ''p_{\text{sea}} = p_s\, e^{z_s/H}'' with ''p_s'' ''station pressure'', ''z_s'' ''station height'' underbraces; CalcStack
+
+    ''= 835 \times e^{1.609/8.43}'' -> ''\approx 835 \times 1.21'' -> ''\approx 1010\ \mathrm{hPa}''; S6 keyword ''sea-level
+
+    pressure''. S7 keyword ''real services: more careful version'' (44 px).
+
+    '
+  voiceover: 'So how do we compare a mountain town with a seaside town? We imagine what the pressure would be if each place
+    were at sea level. Suppose a weather station sits one thousand six hundred and nine metres up, about the height of Denver
+    in the United States, and reads eight hundred and thirty-five hectopascals, with an air temperature of fifteen degrees.
+    We add the weight of an imaginary column of air, reaching from the station down to sea level. With our exponential rule
+    run downwards, that''s eight hundred and thirty-five times e to the power of one point six oh nine divided by eight point
+    four three. That''s about one thousand and ten hectopascals: a perfectly ordinary sea-level reading. This is called the
+    sea-level pressure. Real weather services use a slightly more careful version of the same idea.'
+  on_screen_eq:
+    latex: p_{\text{sea}} = p_s\, e^{z_s/H} = 835 \times e^{1.609/8.43} \approx 1010\ \mathrm{hPa}
+    vallis_eq: p = p0 e^{−z/H} (from (1.51)+(1.53) at constant T, as s19) run downward; Vallis (2.166) is the general (any
+      T) version
+    page_png: chapters/pages/ch02/p103.png
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure (z = −1609 m) or NEW wrapper fluidpy.geo.atmos.sea_level_pressure
+    params:
+      p_s: 83500
+      z_s: 1609
+      T: 288.15
+    outputs:
+      p_sea_hPa: 1010.5
+    test: ../Fluid Dynamics/tests/test_ch01.py::test_isothermal_atmosphere_V1_scale_height; CHECK W38
+  exaggeration:
+  - thought example ('Suppose a weather station…'); the station values are illustrative round numbers
+  screen_summary: 'side view: station on a mountain at 1609 m, ''p = 835 hPa'', ''T = 15 °C''; dashed imaginary column down
+    to sea level; CalcStack p_sea = p_s e^(z/H) = 835 × e^(1.609/8.43) ≈ 1010 hPa; keyword ''sea-level pressure'''
+- id: s41_msl_isobars
+  t:
+  - 1611.15
+  - 1638.15
+  sentence_times:
+  - - 1611.15
+    - 1615.2
+  - - 1615.55
+    - 1618.875
+  - - 1619.225
+    - 1625.025
+  - - 1625.375
+    - 1630.025
+  - - 1630.375
+    - 1637.35
+  beat: intuition · sea-level pressure and isobars
+  visual: 'Picture zone: Globe3D, the s39 colours cross-fade to the ERA5 mean sea-level pressure (diverging map centred at
+
+    1013 hPa, colour-blind safe, cmocean ''balance'' with labels ''960'', ''1013'', ''1040''; 52 px) over the daytime mosaic;
+
+    S2 isobars every 4 hPa (warm white 80 %, 3 px; skimage contours) draw outward from the lows and highs; S3 keyword
+
+    ''isobars'' (54 px) with ''iso = equal · baros = weight'' (44 px); S4 camera to the North Atlantic: a gold bracket across
+
+    the crowded isobars south of Ciarán, keyword ''crowded -> strong wind''.
+
+    '
+  voiceover: Here is the same moment again, now as sea-level pressure. The mountains are gone, and the weather appears. Let's
+    join the places that have the same sea-level pressure, every four hectopascals. These lines are called isobars, from Greek
+    words for equal weight. Where the isobars crowd together, the pressure changes quickly over a short distance, and the
+    winds are strong.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.fetch_box (global hour) + skimage.measure.find_contours
+    params:
+      time: 2023-11-02T12
+      vars:
+      - mean_sea_level_pressure
+      interval_hPa: 4
+    data: data/global_20231102T12.{bin,json} -> msl; data/isobars_20231102T12.json
+    test: CHECK W39 (isobar levels are multiples of 4 hPa; contour count reported)
+  exaggeration: []
+  screen_summary: cross-fade surface pressure → ERA5 MSLP on the globe; isobars draw outward every 4 hPa; keyword 'isobars
+    = equal weight'; gold bracket where they crowd near Ciarán
+- id: s42_highs_lows
+  t:
+  - 1638.15
+  - 1672.2
+  sentence_times:
+  - - 1638.15
+    - 1647.875
+  - - 1648.225
+    - 1654.975
+  - - 1655.325
+    - 1664.525
+  - - 1664.875
+    - 1671.4
+  beat: building blocks · highs and lows
+  visual: 'Picture zone: the s41 globe tilted to the North Atlantic; ''L'' (68 px, warm white letters with a 3-px dark outline)
+    at the ERA5 MSLP minimum (52.5N 1.75E) and ''H'' at the maximum of the Azores high
+
+    (from data); TipLabels ''Ciarán 956 hPa'' and ''≈ 1030 hPa'' (54 px). Maths zone keywords: ''low = depression = cyclone'',
+
+    ''high = anticyclone'' on their words.
+
+    '
+  voiceover: The map shows round patches where the pressure is higher than all around, called highs, and patches where it's
+    lower than all around, called lows. A low is also called a depression, or a cyclone, and a high is also called an anticyclone.
+    Over the southern North Sea, just off England, is a deep low, Storm Ciarán, at about nine hundred and fifty-six hectopascals.
+    Far to the south-west, near the Azores islands, is a high at about one thousand and thirty.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_centre
+    params:
+      field: msl 2023-11-02T12
+      box_low: 45-60N 15W-10E
+      box_high: 25-45N 45-10W (max of −msl)
+    outputs:
+      low_hPa: 955.9
+      low_at: 52.5N 1.75E
+      high_hPa: ≈ 1030 (CHECK W40 1027-1034, else the spoken number follows the data)
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py (centre recovery tests)
+  exaggeration: []
+  screen_summary: '''H'' and ''L'' letters (68 px) at the analysed centres; ''L 956 hPa'' Ciarán; ''H ≈ 1030 hPa'' near the
+    Azores; keywords ''low = depression = cyclone'', ''high = anticyclone'''
+- id: s43_lows_cloudy
+  t:
+  - 1672.2
+  - 1711.75
+  sentence_times:
+  - - 1672.2
+    - 1676.575
+  - - 1676.925
+    - 1681.15
+  - - 1681.5
+    - 1684.35
+  - - 1684.7
+    - 1690.975
+  - - 1691.325
+    - 1695.05
+  - - 1695.4
+    - 1700.0
+  - - 1700.35
+    - 1706.8
+  - - 1707.15
+    - 1710.95
+  beat: why · lows are cloudy, highs are clear
+  visual: 'Picture zone: the MODIS Aqua true colour of 2023-11-02 (data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg,
+
+    35-70N 50W-10E, re-used) with the MSLP isobars, panned from the Ciarán spiral to the high near the Azores (clearer
+
+    area; CHECK W41 cloud fraction in the high''s 500-km disc < cloud fraction in the low''s disc). Maths zone: two
+
+    side-view insets (illustrative): ''low'' teal arrows converging at the bottom, rising in the middle, a cloud on top;
+
+    ''high'' arrows sinking and spreading, clear sky; keywords ''rises -> cools -> dew point -> cloud'', ''sinks -> warms
+    ->
+
+    clear''.
+
+    '
+  voiceover: Lows and highs bring different weather, and now we can see why. Near the ground, air drifts in towards the centre
+    of a low. It can't pile up there, so it rises. Rising air expands and cools, it reaches its dew point, and clouds and
+    rain form. That's why lows bring cloudy, wet and windy weather. Around a high, air sinks from above and spreads out near
+    the ground. Sinking air is squeezed and warms, so it moves away from its dew point, and clouds evaporate. That's why highs
+    usually bring settled, dry weather.
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: imagery is data (NASA GIBS, MODIS Aqua); the side views are illustrative; cloudiness contrast CHECKed
+    data: data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.{jpg,json} (exists)
+    test: CHECK W41
+  exaggeration:
+  - side-view insets illustrative
+  screen_summary: 'split: satellite true colour of Ciarán''s cloud spiral (left) vs clear skies under the Azores high (right),
+    same image 2 Nov 2023; side-view inset arrows: low = in + up (cloud), high = down + out (clear)'
+- id: s44_round_lows
+  t:
+  - 1711.75
+  - 1746.225
+  sentence_times:
+  - - 1711.75
+    - 1716.675
+  - - 1717.025
+    - 1720.9
+  - - 1721.25
+    - 1729.0
+  - - 1729.35
+    - 1734.25
+  - - 1734.6
+    - 1737.8
+  - - 1738.15
+    - 1745.425
+  beat: intuition · winds circle the lows
+  visual: 'Picture zone: the s43 panel; ERA5 10-m wind arrows at 12 UTC on a 1.5° grid (teal, length ∝ speed, legend arrow
+
+    ''20 m/s'' with its label, UV2-08) and short streaklines advected by fluidpy.diag.trajectories (1.5 h of motion, time
+
+    compressed); S3 gold anticlockwise arc round the L ''anticlockwise · seen from above''; a gold bracket on a few arrows
+
+    crossing the isobars inward ''slightly inward''; S4 clockwise arc round the H; S5 a small southern-hemisphere globe
+
+    thumbnail (Idai 2019 or a mean SH low) with arcs reversed, keyword ''southern hemisphere: reversed''; S6 keyword
+
+    ''Coriolis effect ->''.
+
+    '
+  voiceover: Now let's add the real winds near the ground, from the same reanalysis. Near Ciarán, the air doesn't blow straight
+    into the low. It swirls around it, anticlockwise as seen from above, crossing the isobars only slightly towards the centre.
+    Around the high, it turns the other way, clockwise as seen from above. In the southern hemisphere, both are reversed.
+    Why the wind circles instead of rushing in is the story of the Coriolis effect, and it has its own video.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.annulus_winds + fluidpy.diag.trajectories (streaklines)
+    params:
+      centre: 52.5N 1.75E
+      r_in_km: 200
+      r_out_km: 600
+      time: 2023-11-02T12
+    data: data/derived/ch00/ciaran_2023_sfc_1102.{bin,json} (exists)
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_annulus_winds_sense_and_inflow, ::test_storm_sense; CHECK
+      W42 (anticlockwise, inflow angle > 0)
+  exaggeration:
+  - streaklines time compressed (1.5 h in about 3 s)
+  screen_summary: 10-m wind arrows (teal, thinned 1.5°) with streaklines on the image + isobars; gold anticlockwise arc round
+    the L 'anticlockwise, seen from above'; clockwise arc round the H; small SH globe thumbnail with arcs reversed
+- id: s45_air_masses
+  t:
+  - 1746.225
+  - 1791.9
+  sentence_times:
+  - - 1746.225
+    - 1749.825
+  - - 1750.175
+    - 1760.2
+  - - 1760.55
+    - 1770.3
+  - - 1770.65
+    - 1779.65
+  - - 1780.0
+    - 1791.1
+  beat: building blocks · air masses
+  visual: 'S1-S4: maths zone 2 x 2 keyword grid (no boxes): rows ''polar'' (slate) / ''tropical'' (orange), columns ''maritime''
+    /
+
+    ''continental'', each with a tiny icon (snow, sea, desert); picture zone a small globe with source regions shaded
+
+    (illustrative). S5: map panel 30-65N 40W-15E (Lambert) of ERA5 850-hPa temperature at 2023-11-01T18 UTC
+
+    (cmocean ''thermal'', colour bar −5 … +15 °C, 52-px labels) at 75 % over the 1 Nov true colour, NE coast/borders;
+
+    labels ''tropical maritime'' on the warm tongue and ''polar maritime'' on the cool air behind the low; isobars faint.
+
+    '
+  voiceover: 'Now let''s look at temperature and moisture together. Air that sits for days over one region takes on its character:
+    cold and dry over snowy land in the far north, warm and moist over tropical seas. A huge body of air like this, often
+    more than a thousand kilometres across, with fairly even temperature and humidity, is called an air mass. Air masses are
+    named after where they come from: polar or tropical, and maritime, from over the sea, or continental, from over land.
+    On the first of November, twenty twenty-three, warm, moist tropical air was flowing north-east towards France, ahead of
+    Ciarán, while cooler polar air followed behind it.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.fetch_box (850 hPa temperature, specific humidity; 2-m dew point)
+    params:
+      time: 2023-11-01T18
+      box: 30-65N 40W-15E
+    data: data/ciaran_850_hourly.{bin,json} (NEW FETCH D3)
+    test: 'CHECK W43 (warm tongue: T850 south-west of Brittany ≥ 5 K above the air west of the low)'
+  exaggeration:
+  - source-region globe illustrative
+  screen_summary: 'four labels in a 2 × 2 grid without boxes: polar / tropical × maritime / continental; real ERA5 850-hPa
+    temperature + 2-m dew point map 1 Nov 2023 18 UTC over the true-colour image: warm tongue ''tropical maritime'', cool
+    air ''polar maritime'''
+- id: s46_fronts
+  t:
+  - 1791.9
+  - 1823.675
+  sentence_times:
+  - - 1791.9
+    - 1795.75
+  - - 1796.1
+    - 1804.075
+  - - 1804.425
+    - 1810.85
+  - - 1811.2
+    - 1814.95
+  - - 1815.3
+    - 1818.975
+  - - 1819.325
+    - 1822.875
+  beat: building blocks · fronts
+  visual: 'Picture zone: the s45 map; a gold transect line crossing the cold edge of the warm tongue; maths zone: a small
+    graph
+
+    of 850-hPa temperature along the transect (distance 0-800 km across, °C up) with a steep step highlighted ''front'';
+
+    width bracket ''≈ 100 km'' (from data, CHECK W44); S3 two small wind arrows either side of the step turning;
+
+    S4-S5 keywords ''cold air advancing -> cold front'', ''warm air advancing -> warm front''.
+
+    '
+  voiceover: Where two air masses meet, they don't mix right away. The change from one to the other is squeezed into a narrow
+    zone, often a hundred kilometres wide or less, called a front. Crossing a front, the temperature and the humidity change
+    quickly, and the wind changes direction. A front is named after the air that's advancing. If cold air is pushing forward,
+    it's a cold front. If warm air is advancing, it's a warm front.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.fronts.thermal_front_parameter (NEW) for the transect choice; temperature along the transect by bilinear
+      interpolation
+    params:
+      time: 2023-11-02T00
+      level: 850
+    data: data/ciaran_850_hourly
+    test: NEW tests/diag/test_fronts.py; CHECK W44
+  exaggeration: []
+  screen_summary: 'the s45 map: a gold transect across the warm tongue''s edge; graph of T850 along it with a steep step ''front'';
+    arrows ''cold advancing → cold front'', ''warm advancing → warm front'''
+- id: s47_cold_front
+  t:
+  - 1823.675
+  - 1867.675
+  sentence_times:
+  - - 1823.675
+    - 1826.525
+  - - 1826.875
+    - 1832.5
+  - - 1832.85
+    - 1838.775
+  - - 1839.125
+    - 1848.6
+  - - 1848.95
+    - 1854.65
+  - - 1855.0
+    - 1866.875
+  beat: why · a cold front from the side
+  visual: 'Full-width cross-section (illustrative, schematic; vertical exaggeration x50, said in s48): ground line y 760;
+
+    cold air (slate fill) as a blunt wedge moving right; warm air (orange fill 30 %); S2 mini callback ''cold: 1.29 ·
+
+    warm: 1.16 kg/m³'' from s12; S3 the wedge slides under; S4 orange arrows lifting up the steep frontal surface, a tall
+
+    cumulonimbus with a narrow rain band; slope label ''1 km per 50-100 km''; S5-S6 behind the front: ''colder · drier'',
+
+    ''pressure rising'' small barometer needle turning up, wind barbs not used - two teal arrows ''before: from SW'',
+
+    ''after: from W/NW''.
+
+    '
+  voiceover: 'Let''s look at a cold front from the side. Remember the gas law: at the same pressure, cold air is denser than
+    warm air. So the advancing cold air stays low and pushes in under the warm air like a wedge. Its slope is steep for a
+    front, about one kilometre up for every fifty to a hundred kilometres along, and the warm air is lifted quickly. It cools
+    to its dew point, and tall clouds and heavy showers form in a narrow band. After the front passes, the air is colder and
+    drier, the pressure starts to rise, and the wind turns, in the northern hemisphere usually from the south-west to the
+    west or north-west.'
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: schematic cross-section (illustrative); the slope range is a textbook typical value (cited in data_needs.md), the
+      before/after claims are CHECKed at Brest in s58
+  exaggeration:
+  - vertical scale ×50 (said in s48)
+  - schematic
+  - illustrative (no computed visual)
+  screen_summary: 'side-view cross-section (height ×50): slate cold wedge advancing right under orange warm air; warm air
+    lifted (orange arrows up) → tall cumulonimbus and rain band; ''1 km per 50-100 km''; wind arrows before/after ''SW → W/NW'''
+- id: s48_warm_front
+  t:
+  - 1867.675
+  - 1912.9
+  sentence_times:
+  - - 1867.675
+    - 1875.375
+  - - 1875.725
+    - 1884.2
+  - - 1884.55
+    - 1893.625
+  - - 1893.975
+    - 1904.65
+  - - 1905.0
+    - 1912.1
+  beat: why · a warm front from the side
+  visual: 'Full-width cross-section like s47, warm air moving right over a long thin cold wedge; S2 orange arrows gliding
+    up the
+
+    gentle slope, label ''1 km per 100-200 km''; S3 a long layered cloud sheet (stratus/nimbostratus drawn as flat bands)
+
+    with steady rain far ahead; S4 behind: ''milder · moister''; wind arrows ''before: from SE'', ''after: from S/SW''.
+
+    S5 keyword ''× 50 taller'' on the height axis.
+
+    '
+  voiceover: At a warm front, the warm air is advancing, but it's lighter, so it can't push the cold air away from below.
+    Instead, it glides up over the cold air on a gentle slope, rising about one kilometre for every one or two hundred kilometres.
+    As it slides upwards it cools, and a broad sheet of layered cloud forms far ahead of the front, bringing long spells of
+    steady rain. When the warm front passes, the air turns milder and moister, and the wind turns, in the northern hemisphere
+    usually from the south-east to the south or south-west. We've drawn these side views fifty times taller than they really
+    are, so the slopes look much steeper than in nature.
+  on_screen_eq: null
+  physics_source:
+    fn: null
+    note: schematic cross-section (illustrative); slope range cited in data_needs.md
+  exaggeration:
+  - vertical scale ×50 (said)
+  - schematic
+  - illustrative (no computed visual)
+  screen_summary: 'side view: orange warm air gliding up a gentle slate slope; layered cloud sheet far ahead with long rain;
+    ''1 km per 100-200 km''; wind ''SE → S/SW''; keyword ''× 50 taller'''
+- id: s49_real_fronts
+  t:
+  - 1912.9
+  - 1946.075
+  sentence_times:
+  - - 1912.9
+    - 1918.425
+  - - 1918.775
+    - 1926.325
+  - - 1926.675
+    - 1931.05
+  - - 1931.4
+    - 1935.35
+  - - 1935.7
+    - 1940.4
+  - - 1940.75
+    - 1945.275
+  beat: application · real fronts round Ciarán
+  visual: 'Map panel (Lambert, 40-60N 25W-10E, x 80-1580): ERA5 850-hPa temperature at 2023-11-02T00 UTC (cmocean ''thermal'',
+
+    colour bar −5…+15 °C) at 75 % over BMNG shaded relief (night time: no true colour exists at 00 UTC; the base is the
+
+    land/sea picture, never a dark map); NE coast and admin-0 borders; isobars faint; S3 label ''warm tongue'' with gold
+
+    pointer; S4-S5 the front lines from fluidpy.diag.fronts (thermal front parameter on 850-hPa T, warm-air edge) draw
+
+    as gold lines, labelled ''warm front'' and ''cold front'' (54 px); S6 850-hPa wind arrows (teal, 1° grid, legend
+
+    ''20 m/s'') with a gold arc showing the turn across each line. Brest dot visible.
+
+    '
+  voiceover: Here are real fronts, around Ciarán at midnight at the start of the second of November. The colours show the
+    temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical
+    air reaches up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing
+    edge, curving away to the south, is the cold front. The arrows show the wind turning sharply where it crosses each front.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.fronts.thermal_front_parameter (NEW) + fluidpy.diag.fronts.front_lines (NEW)
+    params:
+      field: T850 2023-11-02T00 smoothed 100 km
+      threshold: from tests
+    data: data/ciaran_850_hourly; data/fronts_20231102T00.json
+    test: 'NEW tests/diag/test_fronts.py (V1 tanh front located to < 1 grid length; V7 sign: warm vs cold by the advection
+      of T); CHECK W45 (wind direction jump > 30° across each line)'
+  exaggeration:
+  - T850 smoothed over about 100 km before the front search
+  screen_summary: 'map 40-60N 25W-10E: ERA5 850-hPa T at 00 UTC 2 Nov over a night-free base (BMNG relief, labelled ''base
+    map''), coast/borders; front lines from the thermal front parameter: warm front (red half circles) and cold front (blue
+    triangles) drawn as gold lines first; wind arrows 850 hPa turning across them'
+- id: s50_front_symbols
+  t:
+  - 1946.075
+  - 1962.775
+  sentence_times:
+  - - 1946.075
+    - 1952.0
+  - - 1952.35
+    - 1957.775
+  - - 1958.125
+    - 1961.975
+  beat: application · map symbols (pointer forward)
+  visual: 'Same map; the front lines turn into the standard symbols on their words (cold: blue line + filled triangles on
+    the
+
+    advancing side; warm: red line + filled half circles; the shapes carry the meaning for colour-blind viewers, both
+
+    with a 2-px warm white outline); motion direction from the 3-hour displacement of each line (00 -> 03 UTC);
+
+    keyword ''symbols on the side it moves towards''.
+
+    '
+  voiceover: On weather maps, fronts are drawn as lines with symbols on the side they're moving towards. A cold front has
+    blue triangles, and a warm front has red half circles. You'll learn to read these maps in detail in the next video.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.fronts.front_lines (NEW) at 00 and 03 UTC (direction of motion)
+    data: data/fronts_20231102T00.json, data/fronts_20231102T03.json
+    test: CHECK W46 (symbol side = side the line moves towards)
+  exaggeration: []
+  screen_summary: 'the gold lines of s49 gain their symbols: blue triangles on the cold front''s leading side, red half circles
+    on the warm front''s; keyword ''symbols point where the front moves'''
+- id: s51_heating
+  t:
+  - 1962.775
+  - 2007.0
+  sentence_times:
+  - - 1962.775
+    - 1967.825
+  - - 1968.175
+    - 1970.175
+  - - 1970.525
+    - 1979.5
+  - - 1979.85
+    - 1983.625
+  - - 1983.975
+    - 1993.325
+  - - 1993.675
+    - 2001.4
+  - - 2001.75
+    - 2006.2
+  beat: application · the global picture (heating)
+  visual: 'Picture zone: Globe3D (BMNG, equinox lighting) with two gold beams of equal width hitting at 0° and 60°N; patches
+
+    on the ground outlined with labels ''1 m'' and ''2 m'' (54 px); the angle at 60°N labelled ''60°''. Maths zone: CalcStack
+
+    ''\text{patch} = \dfrac{1\ \mathrm{m}}{\cos 60^\circ} = 2\ \mathrm{m}'' -> ''half the sunlight per m²''. S5-S6: the
+
+    globe colours change to the 1991-2020 mean 2-m temperature (NCEP R1 LTM; colour bar −40 … +30 °C, 52-px labels) and
+
+    broad orange arrows sweep from the tropics towards both poles (illustrative transport arrows), keyword ''heat
+
+    carried poleward''; on ''Ciarán'' a small spiral icon over the North Atlantic.
+
+    '
+  voiceover: Now let's zoom out to the whole planet, and ask why the weather moves at all. It starts with sunlight. Picture
+    a beam of sunlight one metre wide, at noon at an equinox, in March or September, when the sun is overhead at the equator.
+    At the equator, it lands on one metre of ground. At sixty degrees north, the ground is tilted to the beam, and the same
+    beam is spread over two metres, so each square metre gets half as much. So the tropics are heated much more than the poles,
+    and the atmosphere and the ocean carry heat from the tropics towards the poles. Storms like Ciarán are one of the ways
+    the atmosphere does it.
+  on_screen_eq:
+    latex: \dfrac{1\ \mathrm{m}}{\cos 60^\circ} = 2\ \mathrm{m}
+    vallis_eq: our geometry (sunlight per unit area ∝ cos latitude at equinox noon)
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot (sun direction · local up = cos latitude at equinox noon)
+    params:
+      lat_deg:
+      - 0
+      - 60
+    outputs:
+      share:
+      - 1.0
+      - 0.5
+    data: data/t2m_ltm_1991_2020.json (NCEP R1 LTM air.2m, NEW small fetch D7)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_cosine_form_on_field_of_angles; CHECK W47
+  exaggeration:
+  - transport arrows illustrative (no amounts)
+  screen_summary: globe at equinox, sun beam (gold band 1 m wide) hitting the equator (1 m patch) and 60°N (2 m patch); CalcStack
+    1 ÷ cos 60° = 2; 'half as much'; then poleward orange arrows over a mean 2-m temperature globe
+- id: s52_pressure_belts
+  t:
+  - 2007.0
+  - 2043.25
+  sentence_times:
+  - - 2007.0
+    - 2011.475
+  - - 2011.825
+    - 2020.55
+  - - 2020.9
+    - 2023.525
+  - - 2023.875
+    - 2032.325
+  - - 2032.675
+    - 2036.075
+  - - 2036.425
+    - 2042.45
+  beat: application · high and low pressure belts (preview)
+  visual: 'Picture zone: Globe3D tilted to show both hemispheres, annual mean MSLP 1991-2020 (data/real/wind_climatology.json
+
+    msl, re-used; cmocean ''balance'' centred at 1013 hPa, colour bar 990-1030 hPa) over BMNG, isobars every 4 hPa; S1-S3
+
+    ''H'' letters at the five subtropical highs (Azores 1022 hPa, North Pacific 1021 hPa, others from data) and a gold
+
+    latitude ring at 30°N and 30°S, keyword ''subtropical highs''; S4-S5 a gold band along the equatorial pressure trough
+
+    (zonal-mean minimum between 15S and 15N) labelled ''intertropical convergence zone'' and ''ITCZ'' (44 px); S6 keyword
+
+    ''general circulation ->''.
+
+    '
+  voiceover: Averaged over many years, sea-level pressure falls into belts. Around thirty degrees north and south, air sinks
+    from high up, and large highs sit over the oceans, like the Azores high we saw. These are the subtropical highs. Near
+    the equator is a belt of low pressure where the winds from both hemispheres meet and rise, building tall thunderclouds.
+    It's called the intertropical convergence zone. How these belts are made is the subject of a later video on the general
+    circulation.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.psl.surface_wind_climatology
+    params:
+      period: 1991-2020
+    data: movies/ch00/ch00_cross_product_why/data/real/wind_climatology.{bin,json} (exists)
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_climatology_trades_and_westerlies; CHECK W48 (zonal-mean maxima
+      25-40N/S above 1015 hPa; equatorial minimum below 1012 hPa)
+  exaggeration: []
+  screen_summary: 'Globe3D: 1991-2020 mean MSLP (NCEP R1 LTM, diverging map centred 1013 hPa) with isobars every 4 hPa; labels
+    ''subtropical highs'' at the Azores, North Pacific, South Atlantic, South Pacific, Indian Ocean highs; equatorial band
+    ''intertropical convergence zone (ITCZ)'''
+- id: s53_trades_westerlies
+  t:
+  - 2043.25
+  - 2083.9
+  sentence_times:
+  - - 2043.25
+    - 2046.425
+  - - 2046.775
+    - 2056.725
+  - - 2057.075
+    - 2060.525
+  - - 2060.875
+    - 2063.725
+  - - 2064.075
+    - 2071.75
+  - - 2072.1
+    - 2076.725
+  - - 2077.075
+    - 2083.1
+  beat: application · trade winds and westerlies (preview)
+  visual: 'Picture zone: the s52 globe; 1991-2020 mean 10-m winds (teal arrows on a 5° grid, legend ''5 m/s''; streaklines
+    from
+
+    fluidpy.diag.trajectories, time compressed); S2-S3 labels ''north-east trades'' (15N), ''south-east trades'' (15S); S4
+
+    ''westerlies'' (45N, 45S); S5 the Ciarán track (ERA5 MSLP minima 1-2 Nov) as a gold arrow west -> east; S6 keyword
+
+    ''Coriolis ->''.
+
+    '
+  voiceover: 'The winds near the ground follow these belts. Between the subtropical highs and the equator, steady winds blow
+    from the east, called the trade winds; sailing ships relied on them to cross the oceans. North of the equator, they come
+    from the north-east. South of it, they come from the south-east. Poleward of the subtropical highs, in the middle latitudes,
+    the winds come mostly from the west: the westerlies. That''s why storms like Ciarán usually travel from west to east.
+    Why the winds bend like this is part of the Coriolis story, coming in a later video.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.psl.surface_wind_climatology + fluidpy.diag.trajectories
+    data: movies/ch00/ch00_cross_product_why/data/real/wind_climatology.{bin,json} (exists)
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_climatology_trades_and_westerlies (trades −4.9 to −6.9 m/s
+      at 15°N/S; westerlies +3.2 to +7.5 m/s at 45°N/S)
+  exaggeration:
+  - streaklines time compressed
+  screen_summary: 'same globe: mean 10-m wind arrows (teal) with streaklines; labels ''north-east trades'', ''south-east trades'',
+    ''westerlies'' with gold brackets; Ciarán track arrow west → east'
+- id: s54_ciaran_intro
+  t:
+  - 2083.9
+  - 2120.375
+  sentence_times:
+  - - 2083.9
+    - 2089.525
+  - - 2089.875
+    - 2097.025
+  - - 2097.375
+    - 2102.875
+  - - 2103.225
+    - 2107.7
+  - - 2108.05
+    - 2113.675
+  - - 2114.025
+    - 2119.575
+  beat: application · one storm over one town
+  visual: 'Map panel (Lambert 40-58N 25W-8E, x 80-1580, full brightness): GIBS MODIS Terra/Aqua true colour 2023-11-01
+
+    (NEW FETCH D5a; seams outside the storm area), NE 10m coast (warm white 70 %) and admin-0/admin-1 borders (55 % /
+
+    30 %); S2 keyword ''Storm Ciarán · 1 Nov 2023'' (54 px); S3 gold ring on the frontal cloud band and the comma head; S4
+
+    gold dot ''Brest'' with a place label; S6 keyword ''UTC = universal time'' and a small clock glyph showing ''12 UTC''.
+
+    '
+  voiceover: Now let's put all of this together on one real storm, and watch it from one town. On the first of November, twenty
+    twenty-three, Storm Ciarán was racing across the Atlantic towards Europe. Here it is from a satellite that afternoon,
+    with coastlines and borders drawn in. And here is Brest, a port city at the western tip of France. Let's watch the storm
+    pass over Brest, hour by hour, using the reanalysis. Times are in universal time, the clock that meteorologists everywhere
+    share.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs.fetch_wms + mosaic_fill + write_drape
+    params:
+      date: 2023-11-01
+      layers:
+      - MODIS_Terra_CorrectedReflectance_TrueColor
+      - MODIS_Aqua_CorrectedReflectance_TrueColor
+    data: data/ciaran_tc_20231101.{jpg,json} (NEW); data/derived/ch00/ciaran_{coast,admin0,admin1_lines}_10m.geojson (exist)
+    test: ../Fluid Dynamics/tests/data/test_movie_data.py::test_gibs_bbox_order
+  exaggeration: []
+  screen_summary: true colour 1 Nov 2023 afternoon (MODIS), 35-60N 30W-10E, coast + admin borders; 'Storm Ciarán · 1 Nov 2023';
+    gold dot 'Brest'; keyword 'UTC = universal time'
+- id: s55_ciaran_maps
+  t:
+  - 2120.375
+  - 2141.525
+  sentence_times:
+  - - 2120.375
+    - 2127.775
+  - - 2128.125
+    - 2140.725
+  beat: application · the low moves in
+  visual: 'Same panel; ERA5 MSLP isobars every 4 hPa animate hour by hour (24 frames per hour of data, interpolated only in
+
+    the display) with the clock glyph ''12 UTC 1 Nov'' -> ''12 UTC 2 Nov'' at one constant rate; the ''L'' follows the hourly
+
+    minimum (fluidpy.diag.cyclone.storm_centre) with a readout ''965 -> 954 hPa'' ticking with the data; a gold track
+
+    line grows behind it; the 1 Nov image stays as the base, dimmed to 60 % (the night hours have no true colour).
+
+    '
+  voiceover: Here are the isobars every four hectopascals, from midday on the first of November to midday on the second. The
+    low deepens as it comes, from about nine hundred and sixty-five to about nine hundred and fifty-four hectopascals, and
+    its centre crosses the English Channel just north of Brest during the night.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_centre
+    params:
+      times: 2023-11-01T12 .. 2023-11-02T12 hourly
+      box: 40-60N 30W-10E
+    outputs:
+      min_hPa_start: 965.3
+      min_hPa_lowest: 953.7
+      lowest_at: 2023-11-02T03 50.0N 3.75W
+    data: data/ciaran_hourly.{bin,json} (from the existing raw ERA5 file era5_ciaran_2023_u10-v10-msl-t2m_2023-11-01T00_2023-11-02T23_1h.nc)
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py; CHECK W49 (965 ± 1 and 954 ± 1 hPa; track crosses 4W within 50.5N
+      ± 1)
+  exaggeration:
+  - 24 hours shown in about 12 s (time compressed)
+  screen_summary: same panel; hourly ERA5 isobars animate 12 UTC 1 Nov → 12 UTC 2 Nov with the clock; 'L' tracking the minimum
+    with its value ticking 965 → 954 hPa; gold track line; Brest dot
+- id: s56_brest_pressure
+  t:
+  - 2141.525
+  - 2171.2
+  sentence_times:
+  - - 2141.525
+    - 2143.975
+  - - 2144.325
+    - 2150.15
+  - - 2150.5
+    - 2159.525
+  - - 2159.875
+    - 2165.025
+  - - 2165.375
+    - 2170.4
+  beat: application · the pressure at Brest
+  visual: 'Maths zone: TimeGraph (hours across 12 -> 12 UTC, 52-px ticks every 3 h; pressure 955-1000 hPa up) drawing the
+
+    hourly ERA5 MSLP at Brest (orange line, hour dots) as the clock runs; S1 dot and label ''997 hPa · 12 UTC''; S2 the
+
+    line falls to ''962 hPa · 01 UTC''; S3 gold bracket ''−35 hPa in 13 h''; S4 bracket ''+14 hPa in 5 h'' (01 -> 06 UTC).
+
+    Picture zone: the s55 map thumbnail with the moving L and the Brest dot; the barometer icon beside it follows the
+
+    readout.
+
+    '
+  voiceover: First, the pressure at Brest. At midday on the first, it reads about nine hundred and ninety-seven hectopascals.
+    Then it falls, faster and faster, to about nine hundred and sixty-two at one o'clock in the morning, as the low passes
+    close by. That's thirty-five hectopascals in thirteen hours, a very fast fall. Then it climbs again, by about fourteen
+    hectopascals in five hours.
+  on_screen_eq: null
+  physics_source:
+    fn: builder extraction of the Brest grid point (48.5N 4.5W) from the hourly ERA5 file; numbers via CHECK rows
+    params:
+      point: 48.5N 4.5W (nearest 0.25° point to Brest 48.39N 4.49W)
+    outputs:
+      p12: 997.4
+      p01: 962.1
+      fall_13h: 35.3
+      rise_01_06: 14.1
+    data: data/brest_hourly.json
+    test: CHECK W50
+  exaggeration:
+  - time compressed (24 h in about 25 s)
+  screen_summary: 'TimeGraph (12 UTC 1 Nov → 12 UTC 2 Nov): Brest MSLP (orange line, hour dots) 997 → 962 → 976 hPa; brackets
+    ''−35 hPa in 13 h'', ''+14 hPa in 5 h''; barometer icon needle following; small map thumbnail with the L passing'
+- id: s57_brest_warm_front
+  t:
+  - 2171.2
+  - 2203.525
+  sentence_times:
+  - - 2171.2
+    - 2173.575
+  - - 2173.925
+    - 2182.775
+  - - 2183.125
+    - 2193.975
+  - - 2194.325
+    - 2196.7
+  - - 2197.05
+    - 2202.725
+  beat: application · the warm front passes
+  visual: 'Same TimeGraph: a second panel below (temperature 9-15 °C, orange line, hour dots); a row of hourly wind arrows
+    above
+
+    the graph (teal, pointing downwind, length ∝ speed, each with its label at 18 and 20 UTC: ''13 m/s from 155° (SSE)'',
+
+    ''18 m/s from 204° (SSW)'', UV2-08); S1 values ''12.0 °C'' at 18 UTC; S2 ''14.4 °C'' at 20 UTC; gold band 18-20 UTC
+
+    ''warm front''; S3 the map thumbnail shows Brest inside the warm tongue (850-hPa T, s49 colours); keyword ''warm sector''.
+
+    '
+  voiceover: Now the temperature and the wind. At six in the evening, the wind blows from the south-south-east at about thirteen
+    metres per second, and the temperature is twelve degrees. By eight, the wind has turned to come from the south-south-west,
+    it has strengthened to about eighteen metres per second, and the temperature has risen to about fourteen and a half. That's
+    the warm front passing. Brest is now in the warm air behind it, which is called the storm's warm sector.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.atmos.wind_direction_from (NEW) + fluidpy.geo.vectors.norm on the hourly ERA5 Brest point
+    outputs:
+      t18:
+        T: 12.0
+        dir: 155
+        speed: 13.1
+      t20:
+        T: 14.4
+        dir: 204
+        speed: 17.9
+    data: data/brest_hourly.json
+    test: CHECK W51
+  exaggeration: []
+  screen_summary: TimeGraph gains temperature (orange, °C axis right) and a row of wind arrows (teal, pointing where the wind
+    goes, with 'from' labels 155° SSE, 204° SSW and speeds); gold band 18-20 UTC 'warm front'; keyword 'warm sector'
+- id: s58_brest_cold_front
+  t:
+  - 2203.525
+  - 2231.775
+  sentence_times:
+  - - 2203.525
+    - 2206.5
+  - - 2206.85
+    - 2218.4
+  - - 2218.75
+    - 2225.35
+  - - 2225.7
+    - 2230.975
+  beat: application · the cold front passes
+  visual: 'Same TimeGraph; arrows at 00 and 03 UTC with labels ''19 m/s from 221° (SW)'', ''23 m/s from 271° (W)''; maths
+    zone
+
+    CalcStack ''23.2 \div 0.514 \approx 45\ \mathrm{kt}''; temperature bracket ''12.6 -> 10.5 °C, −2.1 °C''; the pressure
+    line
+
+    turning upward is pulsed; gold band 00-03 UTC ''cold front''; S4 a thumbnail of the s47 cold-front side view with a
+
+    gold link to the band.
+
+    '
+  voiceover: 'A few hours later comes the cold front. Between midnight and three in the morning, the wind swings from the
+    south-west to the west and strengthens: by three, it''s about twenty-three metres per second, or forty-five knots. The
+    temperature drops by about two degrees, to ten and a half, and the pressure starts its fast climb. Cooler polar air has
+    arrived behind the front, just as our side view said.'
+  on_screen_eq:
+    latex: 23.2 \div 0.514 \approx 45\ \mathrm{kt}
+    vallis_eq: unit conversion (s34)
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.atmos.wind_direction_from (NEW) + fluidpy.geo.constants.KNOT (NEW)
+    outputs:
+      t00:
+        T: 12.6
+        dir: 221
+        speed: 18.6
+      t03:
+        T: 10.5
+        dir: 271
+        speed: 23.2
+        kt: 45.1
+    data: data/brest_hourly.json
+    test: CHECK W52
+  exaggeration: []
+  screen_summary: 'same TimeGraph: wind arrows at 00 UTC ''19 m/s from 221° (SW)'' and 03 UTC ''23 m/s from 271° (W)''; CalcStack
+    23.2 ÷ 0.514 ≈ 45 kt; temperature 12.6 → 10.5 °C bracket ''−2 °C''; gold band 00-03 UTC ''cold front''; thumbnail of the
+    s47 side view'
+- id: s59_ciaran_after
+  t:
+  - 2231.775
+  - 2253.1
+  sentence_times:
+  - - 2231.775
+    - 2240.4
+  - - 2240.75
+    - 2245.85
+  - - 2246.2
+    - 2252.3
+  beat: application · the storm the next afternoon, and what comes next
+  visual: 'Map panel: the existing MODIS Aqua true colour of 2023-11-02 (re-used) with ERA5 12 UTC isobars and the ''L'' 956
+    hPa
+
+    (no number shown unless spoken: DEFAULT the L only), NE borders, Brest dot; keywords as forward pointers (54 px,
+
+    no headings): ''reading weather maps'', ''why the wind circles''.
+
+    '
+  voiceover: Here is the storm the next afternoon, seen from space, now over the North Sea, with its clouds wrapped in a spiral
+    around the low. In the next video, we'll learn to read weather maps like this one in detail. And later videos will explain
+    why the wind circles the low instead of rushing into it.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs (existing product)
+    data: data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.{jpg,json}; data/derived/ch00/ciaran_2023_sfc_1102.{bin,json}
+    test: CHECK N21 of the cross-product storyboard (msl minimum under the image's spiral within 1°)
+  exaggeration: []
+  screen_summary: MODIS Aqua true colour 2 Nov 2023 with isobars at 12 UTC and the L; Brest dot; keywords 'reading weather
+    maps ->', 'why the wind circles ->'
+- id: s60_recap
+  t:
+  - 2253.1
+  - 2317.55
+  sentence_times:
+  - - 2253.1
+    - 2261.325
+  - - 2261.675
+    - 2269.6
+  - - 2269.95
+    - 2277.85
+  - - 2278.2
+    - 2287.2
+  - - 2287.55
+    - 2294.875
+  - - 2295.225
+    - 2301.025
+  - - 2301.375
+    - 2307.925
+  - - 2308.275
+    - 2316.75
+  beat: recap
+  visual: 'No heading. One beat per sentence, each a mini picture from its scene (thumbnail re-renders, 60 % size) with its
+
+    keyword: s02 globe; s05 column ''1013 hPa''; s19 curve ''p = p_0 e^{-z/H}'', ''H ≈ 8 km''; s12 cubes ''p = \rho R T'';
+
+    s30 curve + dew-point ring; s33 dial ''233°'' + ''19 kt''; s42/s50 map ''H'', ''L'' + front symbols; s36 band graph +
+
+    s38 globe ''reanalysis''.
+
+    '
+  voiceover: To sum up, the atmosphere is a thin shell of air, and almost all our weather happens in its lowest layer, the
+    troposphere. Air pressure is the weight of the air above each square metre, about one thousand and thirteen hectopascals
+    at sea level. By hydrostatic balance, it falls with height, roughly exponentially, with a scale height of about eight
+    kilometres. The gas law, p equals rho R T, ties pressure, density and temperature together, so warm air is lighter than
+    cold air. Relative humidity compares the vapour with its saturation value, and cooling air to its dew point makes clouds.
+    Winds are named by where they come from, and are measured in metres per second or knots. Sea-level pressure maps show
+    highs and lows, and fronts are the boundaries between air masses. Weather is what happens now, climate is its long-term
+    statistics, and a reanalysis gives us both, everywhere, every hour.
+  on_screen_eq:
+    latex: p = p_0\, e^{-z/H}
+    vallis_eq: as s19
+    page_png: chapters/pages/ch01/p062.png
+  on_screen_eq_extra:
+  - latex: p = \rho R T
+    vallis_eq: (1.53)
+    page_png: chapters/pages/ch01/p033.png
+  physics_source:
+    fn: re-uses the data of the scenes it recaps
+    test: as the scenes
+  exaggeration: []
+  screen_summary: 'one beat per sentence, mini pictures: thin-shell globe · ''1013 hPa'' column · p = p₀e^(−z/H), H ≈ 8 km
+    · p = ρRT with two cubes · RH curve + dew point ring · compass ''233° south-westerly'', ''19 kt'' · MSLP map with H/L
+    and front symbols · Brest TimeGraph + ERA5 globe'
+- id: s61_end
+  t:
+  - 2317.55
+  - 2342.65
+  sentence_times:
+  - - 2317.55
+    - 2323.425
+  - - 2323.775
+    - 2331.825
+  - - 2332.175
+    - 2339.85
+  beat: end card
+  visual: 'House end card (HOUSE_STYLE §3), word for word as the reference with ''maths tutorials'' -> ''tutorials'' (physics
+
+    movie, allowed) and the concept ''these weather basics''. S1: four faint topic thumbnails along the top and ''a series
+    of
+
+    tutorials'' (68 px). S2: ''atmospheric science · meteorology · fluid dynamics'' (54 px). S3: notebook icon
+
+    ''weather-basics notebook'' (68 px) and stacked notebook icons ''notebooks for the other concepts'' (54 px). No URL, no
+
+    path, no book name, no lab. 2.5-s silent hold while the music fades.
+
+    '
+  voiceover: This video is one of a series of related tutorials, so watch out for the others. They're made for students of
+    atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for these weather
+    basics, and the notebooks for the other concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - 'end card: illustrative icons only'
+  screen_summary: 'house end card: four faint topic thumbnails (globe with shell, pressure column, humidity curve, Ciarán
+    map); ''a series of tutorials'' (68 px); ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon
+    ''weather-basics notebook''; stacked icons ''notebooks for the other concepts''; 2.5-s silent hold'
+honesty_notes:
+- The atmosphere is drawn 50x thicker on globes from s02 S5 on and the frontal side views 50x taller (s48 says so); both listed
+  as exaggerations, no badges.
+- 'Pressure falls exponentially only for constant temperature: s19 states the assumption, s21 shows the real sounding falling
+  faster aloft because the air is colder (smaller H).'
+- H = RT/g is evaluated at 288.15 K (8.43 km); the recap says 'about eight kilometres'; Vallis quotes 7 km at 240 K and 8.2
+  km at 280 K (text after (2.166)).
+- The ideal gas law is built from molecules qualitatively (more molecules / faster molecules); R = 287 J/(kg K) is dry air;
+  humidity changes it by < 1 % (not said).
+- Saturation vapour pressure from Vallis (18.28) with L constant (Vallis's constants); it depends on temperature only, not
+  on the presence of air (the sponge Unlike).
+- The 9.8 °C per km cooling of rising unsaturated air is quoted with a plain-words reason (expansion work) and derived in
+  a later movie; the dew-point fall of about 1.8 °C per km is computed by the new LCL function.
+- The sea-level reduction in s40 is a thought example with the isothermal rule; the narration says real services use a more
+  careful version.
+- Wind direction is where the wind comes FROM, clockwise from north seen from above; ocean currents are named the opposite
+  way (said).
+- 'Rotation sense: winds circle Ciarán anticlockwise as seen from above (NH), the high clockwise seen from above; reversed
+  in the SH (said); why is left to the Coriolis movie.'
+- Brest numbers are the ERA5 grid point nearest to Brest (48.5N 4.5W), called 'the reanalysis', never 'the station'; times
+  in UTC (said in s54).
+- Fronts on the real map come from an objective thermal-front method on smoothed 850-hPa temperature, not from a forecaster's
+  chart; the side views are schematic.
+- Satellite images are NASA GIBS daytime true colour; night-time hours use the Blue Marble/relief base, never a black map.
+- No references, book or author names, equation numbers, URLs or badges on screen; provenance (vallis_eq, page_png) lives
+  only in this file.
+quiz_hook: 'A mountain station 3 km up reads 700 hPa at 0 °C. Is its sea-level pressure high or low? (H = 287 x 273 / 9.81
+  ≈ 8.0 km; 700 x e^(3/8.0) ≈ 1018 hPa: a slightly high reading.)'
+qa_expectations:
+  duration_s: 2342.65
+  captions:
+    cues: 585
+    max_lines: 2
+    max_chars_per_line: 42
+    max_cps: 17.0
+  equations:
+    count: 29
+    rule: every latex string of this file present verbatim in WeatherBasics.tsx; no katex-error
+  size:
+    budget_mb: 60
+    hard_mb: 80
+  three_d: ANGLE; Globe3D shell 50x; determinism check on s02, s27, s41 ranges
+  legibility: no text below 44 px at 1080p (graph ticks and colour bars 52 px), no heading except s00, no box, no URL
+  render: 'scratch on G: (aofd-data/scratch/movies/ch00_weather_basics), tools/render_chunks.py, concurrency 3'
+headings_exception: s00_title only
