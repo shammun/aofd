@@ -144,16 +144,18 @@ datasets:
       uwnd.10m.mon.ltm.1991-2020.nc: 45b9eadc8181b29cb9ebcbcc21503867bc69ec1272ac925d9dcf7f3b1cc18875
       vwnd.10m.mon.ltm.1991-2020.nc: 78130fd7e5c6f5dcec0ce0009d93639afd9645d77ace60d14c13581ac763fd0b
       slp.mon.ltm.1991-2020.nc: ed706bfc61acccef796e333980685f1afc92ba46c627afac1eb41f6b7c817df5
-    variables: {uwnd: "10 m eastward wind [m s-1]", vwnd: "10 m northward wind [m s-1]", slp: "sea-level pressure [hPa] (converted to Pa in the derived product)"}
+      air.2m.mon.ltm.1991-2020.nc: c86a3c575010ca2c9414b24022361c43be6966dcdc62c821c1918e9c44ca9be9  # 964084 B, added 2026-10-27 (ch00_weather_basics D7)
+    variables: {uwnd: "10 m eastward wind [m s-1]", vwnd: "10 m northward wind [m s-1]", slp: "sea-level pressure [hPa] (converted to Pa in the derived product)", air: "2 m air temperature [K] (surface_gauss/air.2m.mon.ltm.1991-2020.nc)"}
     coordinates: lat runs N->S in the files (sorted S->N in the derived product); lon 0..358.125 E (winds, 192 Gaussian columns) and 0..357.5 E (slp); time = 12 climatological months (year 0001, decode_times=False)
     subset: whole files; derived = annual / DJF / JJA day-weighted means, SLP interpolated to the wind grid (94 x 192)
     fetch_date: "2026-10-25"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/NCEP1-sfc-ltm/uwnd.10m.mon.ltm.1991-2020.nc, raw/NCEP1-sfc-ltm/vwnd.10m.mon.ltm.1991-2020.nc, raw/NCEP1-sfc-ltm/slp.mon.ltm.1991-2020.nc]
-    derived_on_root: [derived/ch00/ncep_r1_sfc_wind_mslp_ltm_1991-2020.nc]
-    derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/wind_climatology.bin, movies/ch00/ch00_cross_product_why/data/real/wind_climatology.json]
-    used_by: [movie ch00_cross_product_why scene 9 (trade winds and westerlies on the globe)]
+    raw_files: [raw/NCEP1-sfc-ltm/uwnd.10m.mon.ltm.1991-2020.nc, raw/NCEP1-sfc-ltm/vwnd.10m.mon.ltm.1991-2020.nc, raw/NCEP1-sfc-ltm/slp.mon.ltm.1991-2020.nc, raw/NCEP1-sfc-ltm/air.2m.mon.ltm.1991-2020.nc]
+    derived_on_root: [derived/ch00/ncep_r1_sfc_wind_mslp_ltm_1991-2020.nc, derived/ch00/ncep_r1_t2m_ltm_1991-2020.nc]
+    derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/wind_climatology.bin, movies/ch00/ch00_cross_product_why/data/real/wind_climatology.json, data/derived/ch00/ncep_r1_t2m_ltm_1991-2020.nc]
+    derived_note: "ncep_r1_t2m_ltm_1991-2020.nc (143,408 B, sha256 97dd3d65...a96e, fluidpy.data.psl.t2m_climatology): t2m [K] (season ann/djf/jja, lat 94 S->N, lon 192) + t2m_zonal; annual global area-weighted mean 14.2 C; annual zonal means 26.0 C (equator), 19.5 (30N), -0.6 (60N), -16.5 (88.5N), -45.6 (88.5S)"
+    used_by: [movie ch00_cross_product_why scene 9 (trade winds and westerlies on the globe), movie ch00_weather_basics s51 (mean temperature globe), s52-s53 (A5)]
   ERA5-ARCO-ian2022:
     catalogue: ARCO
     title: ERA5 hourly 0.25 deg 10 m wind and MSLP, Hurricane Ian, 2022-09-26T00 to 2022-09-29T23 UTC, 15-35N 95-70W
@@ -245,7 +247,8 @@ datasets:
     fetch_date: "2026-10-25"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/BMNG-2004/world.topo.200409.3x5400x2700.jpg, raw/BMNG-2004/world.topo.bathy.200409.3x5400x2700.jpg]
+    raw_files: [raw/BMNG-2004/world.topo.200409.3x5400x2700.jpg, raw/BMNG-2004/world.topo.bathy.200409.3x5400x2700.jpg, raw/BMNG-2004/world.topo.bathy.200410.3x5400x2700.jpg, raw/BMNG-2004/world.topo.bathy.200411.3x5400x2700.jpg]
+    raw_note_2026_10_27: "October (2,459,484 B, sha256 f9ad745c...4a7c) and November topo-bathy 5400 fetched as gap-fill bases for the GIBS global daily mosaics (NASA-GIBS-global-2026-10-26, NASA-GIBS-global-2023-11-02)"
     derived_on_root: [derived/ch00/globe_bmng_topo_200409_5400x2700.jpg, derived/ch00/globe_bmng_topo_bathy_200409_5400x2700.jpg]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_200409_5400x2700.jpg, movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg]
     used_by: [movie ch00_cross_product_why scenes 9-10 (globe texture)]
@@ -322,7 +325,8 @@ datasets:
     fetch_date: "2026-10-25"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/IBTrACS-v04r01/IBTrACS.NA.v04r01.nc, raw/IBTrACS-v04r01/IBTrACS.SI.v04r01.nc]
+    raw_files: [raw/IBTrACS-v04r01/IBTrACS.NA.v04r01.nc, raw/IBTrACS-v04r01/IBTrACS.SI.v04r01.nc, raw/IBTrACS-v04r01/ibtracs.ACTIVE.list.v04r01_2026-10-27.csv]
+    raw_note_2026_10_27: "ACTIVE list (csv, 146,478 B, sha256 a1e72723...e0, Last-Modified 2026-10-25 09:05 GMT) fetched to identify the deepest low of the latest GFS analysis (GFS-ANL); last fixes 2026-10-25 00 UTC; growing file, not hash-pinned"
     derived_on_root: [derived/ch00/ibtracs_ian_2022.json, derived/ch00/ibtracs_idai_2019.json]
     derived_in_repo: [movies/ch00/ch00_cross_product_why/data/real/ibtracs_ian_2022.json, movies/ch00/ch00_cross_product_why/data/real/ibtracs_idai_2019.json]
     used_by: [movie ch00_cross_product_why scene 10 (observed intensity, track, wind radii)]
@@ -511,3 +515,314 @@ datasets:
     derived_in_repo: [data/derived/ch00/ciaran_2023_sfc_1102.bin, data/derived/ch00/ciaran_2023_sfc_1102.json, data/derived/ch00/ciaran_2023_upper_1102.bin, data/derived/ch00/ciaran_2023_upper_1102.json]
     checks: "MSLP min 12 UTC 955.93 hPa at 52.5N 1.75E (13 UTC 956.12 hPa at 53.0N 1.75E); z850 min 12 UTC 973.4 m at 52.5N 1.75E (same grid point); msl at 12 and 13 UTC identical (0.0 Pa) to ERA5-ARCO-ciaran2023 on the shared box"
     used_by: [movie ch00_cross_product_why v4 s45_storm_map (isobars, 850 hPa geostrophic arrows) and s46_real_winds (850 hPa and 10 m winds vs geostrophic), P4b]
+  IGRA2:
+    catalogue: IGRA
+    title: NOAA NCEI Integrated Global Radiosonde Archive v2 - Trappes (FRM00007145) and Singapore (SNM00048698) soundings of 2023-11-01 00 UTC; station list (stations whose record spans 2023)
+    url: https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-por/
+    raw_url: https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-por/FRM00007145-data.txt.zip
+    route: HTTPS (pooch) whole period-of-record station zips (re-made daily; no per-year file for past years) + doc/igra2-station-list.txt; parsed with fluidpy.data.igra (fixed columns of doc/igra2-data-format.txt)
+    fetcher: fluidpy.data.igra.fetch_station / find_sounding / soundings_product / stations_product
+    login: none
+    licence: NOAA NCEI distribution without restriction; use governed by the WMO data policy (free and unrestricted exchange); no warranty; cite the dataset
+    licence_url: https://ecds.ecmwf.int/licences/igra-data-policy
+    citation: "Durre, I., X. Yin, R. S. Vose, S. Applequist, and J. Arnfield, 2016: Integrated Global Radiosonde Archive (IGRA), Version 2. NOAA NCEI, doi:10.7289/V5X63K0Q; Durre, I., et al., 2018: Enhancing the data coverage in the Integrated Global Radiosonde Archive. J. Atmos. Oceanic Technol., 35, 1753-1770, doi:10.1175/JTECH-D-17-0223.1"
+    attribution: Radiosonde data from the Integrated Global Radiosonde Archive (IGRA v2), NOAA National Centers for Environmental Information
+    size_bytes: 86917800  # 31,665,518 Trappes + 54,991,332 Singapore + 260,950 station list (fetched 2026-10-27)
+    sha256_files:  # growing files (re-made daily), informational only
+      FRM00007145-data.txt.zip: a3933a938e038db05820114e534ece07234017e51c87d269ab316b56f6767efe
+      SNM00048698-data.txt.zip: b0b0e37dd9b1b8487e3f2f27654fd857543a842c8c68b9cdb526b95c0de8576a
+      igra2-station-list.txt: 087bf0aaadf6d76e904904ce3d5ddd4206a27bb5245fb38a78330dc559a10138
+    sha256_derived:
+      igra2_trappes_singapore_2023-11-01T00.nc: 4f6e4f9fcb290eb0afa0616c583f9e274b15f832078e20e585e4ceadcb52ad21
+      igra2_stations_2023.json: e76785d30a061072c2f681fe8a560fe96883aa8a98d033e812ddb3bba1c4a415
+    variables: {p: "[Pa]", z: "reported geopotential height [m]", z_hyps: "z where reported, else filled hypsometrically (Vallis 2.166) [m]", T: "[K]", dpd: "dew-point depression [K]", rh: "[1] (not reported by these two stations)", wdir: "[deg, FROM, clockwise from N]", wspd: "[m s-1]", etime: "[s]", lvltyp2: "2 = station-reported tropopause", wmo_trop_z: "[m]", wmo_trop_T: "[K]"}
+    coordinates: padded (station, level) grid in launch order (pressure decreasing), NaN beyond each sounding; header lat/lon degrees x 1e4 -> degrees; times nominal UTC
+    subset: "2023-11-01T00 nominal (release 23:31 UTC 31 Oct) for both stations: Trappes has no 12 UTC sounding on 1 Nov 2023 in IGRA (next: 00 UTC 2 Nov stops at 18 hPa); Singapore 00 UTC chosen to match (its 10 UTC sounding lacks heights above 300 hPa)"
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/IGRA2/FRM00007145-data.txt.zip, raw/IGRA2/SNM00048698-data.txt.zip, raw/IGRA2/igra2-station-list.txt]
+    derived_on_root: [derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc, derived/ch00/igra2_stations_2023.json]
+    derived_in_repo: [data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc, data/derived/ch00/igra2_stations_2023.json]
+    checks: "Trappes: 64 levels, top 5.9 hPa at 33.9 km (z_hyps), surface 987 hPa 12.4 C at z_hyps 166 m (station 168 m); WMO tropopause 10.88 km, -62.7 C at 228 hPa = station-reported; 2nd reported 47.2 hPa. Singapore: 121 levels, top 5.41 hPa at 35.4 km; WMO tropopause 16.16 km, -81.3 C at 109.9 hPa = station-reported. Hypsometric refill of removed standard-level heights within 13 m up to 10 hPa. 941 stations span 2023 (of 2931)"
+    used_by: [movie ch00_weather_basics s00, s21, s23-s25, s37 (D1)]
+  ERA5-ARCO-global-20231102T12:
+    catalogue: ARCO
+    title: ERA5 0.25 deg global single hour 2023-11-02 12 UTC - MSLP, surface pressure, orography, 2 m temperature and dew point, 10 m wind
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous gcsfs, lazy selection through fluidpy.data.fetch (disk guard); 7 single-level chunks (~3 MB each transferred)
+    fetcher: fluidpy.data.era5_arco.fetch_box (variables msl, sp, zs, t2m, d2m, u10, v10) / box_product
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on single levels, C3S CDS, doi:10.24381/cds.adbb2d47; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 16589614  # raw subset (guard size 29.1 MB uncompressed)
+    sha256_raw_subset: f733c42ce1ebde2d75b43723a34aa3bf1c5f13d13fee1bffa361b8d1cbccf2d1  # informational
+    sha256_derived:
+      era5_global_2023-11-02T12_sfc.nc: 32047690c0583af17d48d215c321cbf83531fe4bce0e5f3c2f4aa702778c5a0f
+      era5_global_2023-11-02T12_sfc_0p5.nc: 4d90d9a7e2b36dcc7f2e372eba050743ee4a2e47c491512afa17ce72c2647914
+    variables: {msl: "[Pa]", sp: "surface pressure [Pa]", zs: "orography height = surface geopotential / 9.80665 [m]", t2m: "[K]", d2m: "[K]", u10: "[m s-1]", v10: "[m s-1]"}
+    coordinates: store lat N->S, lon 0..359.75; derived lat S->N (-90..90), lon -180..179.75 (0.25 deg) / -180..179.5 (0.5 deg copy = every second grid point, values unchanged); valid time 2023-11-02T12 UTC (instantaneous)
+    subset: global, one hour
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_global_msl-sp-zs-t2m-d2m-u10-v10_2023-11-02T12_2023-11-02T12_1h.nc]
+    derived_on_root: [derived/ch00/era5_global_2023-11-02T12_sfc.nc, derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc]
+    derived_in_repo: [data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc]
+    checks: "Azores high (max MSLP 20-50N, 60W-0) 1029.77 hPa at 35.0N 32.75W; Ciaran 955.93 hPa at 52.5N 1.75E (= ERA5-ARCO-ciaran2023-1102); Tibet min surface pressure 494.0 hPa at 35.25N 81.0E (orography 5859 m), 35 % of 25-40N 75-105E below 600 hPa; Brest grid point 48.5N 4.5W: msl 983.0 hPa, t2m 9.8 C, d2m 6.4 C; global msl 941.6 (74.5S 145W, Antarctic coast) to 1041.3 hPa (44.75S 158.5W)"
+    used_by: [movie ch00_weather_basics s01, s27, s38, s39, s41, s42 (D2)]
+  ERA5-ARCO-columns-20231101:
+    catalogue: ARCO
+    title: ERA5 37-level temperature and geopotential columns over Trappes and Singapore, 2023-11-01 00 and 12 UTC
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous; 4 pressure-level chunks transferred (~0.4 GB network, 22 kB on disk, 41 s)
+    fetcher: fluidpy.data.fetch (zarr subset) + fluidpy.data.era5_arco.open_box
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels, C3S CDS, doi:10.24381/cds.bd0915c6; via ARCO-ERA5 (Carver and Merose 2023)"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 21942
+    sha256_derived: {era5_columns_trappes_singapore_2023-11-01.nc: 9fbd4aa954356444f837f556f03ae3ff20bf3730db6e359bf71017f7fba3e12b}
+    variables: {t: "[K]", z: "geopotential height [m]", level: "[hPa] 1000..1 (37)"}
+    coordinates: site = Trappes (48.75N 2.0E), Singapore (1.25N 104.0E); time 2023-11-01T00, T12 UTC; level descending
+    subset: two grid columns, two hours, all 37 levels
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_columns_trappes_singapore_t-z_37lev_2023-11-01T00-12.nc]
+    derived_on_root: [derived/ch00/era5_columns_trappes_singapore_2023-11-01.nc]
+    derived_in_repo: [data/derived/ch00/era5_columns_trappes_singapore_2023-11-01.nc]
+    checks: "WMO tropopause: Trappes 00 UTC 10.98 km -62.3 C (balloon 10.88 km -62.7 C), 12 UTC 10.18 km -54.1 C; Singapore 00 UTC 15.34 km -76.4 C (balloon 16.16 km -81.3 C: the 37 levels smooth the sharp cold point). Top level 1 hPa at 46.3 km (Trappes) / 47.9 km (Singapore); temperature still rising there (-25.1 C / -11.7 C at 00 UTC), so the stratopause is at or above the top level - not resolved"
+    used_by: [movie ch00_weather_basics s24 (D4)]
+  ERA5-ARCO-cumulus-france-20240624:
+    catalogue: ARCO
+    title: ERA5 2 m temperature, 2 m dew point and MSLP over northern France on 2024-06-24 at 10 and 13 UTC (fair-weather cumulus day of NASA-GIBS-cumulus-france-2024-06-24)
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous (6 single-level chunks)
+    fetcher: fluidpy.data.era5_arco.fetch_box / box_product
+    login: none
+    licence: Copernicus licence / CC-BY 4.0; attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on single levels, doi:10.24381/cds.adbb2d47; via ARCO-ERA5"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 27244
+    sha256_derived: {era5_cumulus_france_2024-06-24_t2m_d2m_msl.nc: 25cd6777c075a52e718ed7f18bcbad5a41396d58003fb599a52fb257d8f28422}
+    variables: {t2m: "[K]", d2m: "[K]", msl: "[Pa]"}
+    coordinates: lat 46..50 S->N, lon -1..5, 0.25 deg; times 2024-06-24T10, T13 UTC
+    subset: box 46-50N 1W-5E, two hours
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_cumulus_france_t2m-d2m-msl_2024-06-24T10_2024-06-24T13_3h.nc]
+    derived_on_root: [derived/ch00/era5_cumulus_france_2024-06-24_t2m_d2m_msl.nc]
+    derived_in_repo: [data/derived/ch00/era5_cumulus_france_2024-06-24_t2m_d2m_msl.nc]
+    checks: "image box 47-49.5N 0-4E at 13 UTC: T2m 26.1 C, Td 14.8 C, T-Td 11.3 K (5.2-12.7) -> Espy cloud base 125 m x 11.3 = 1.4 km; 10 UTC T-Td 9.1 K -> 1.1 km (base rises through the day); MSLP 1014.6-1019.1 hPa (weak high)"
+    used_by: [movie ch00_weather_basics s31 (D9 support, cloud-base check)]
+  NASA-GIBS-global-2023-11-02:
+    catalogue: GIBS
+    title: Daytime true-colour globe 2023-11-02 (VIIRS NOAA-20, gaps from VIIRS NOAA-21, MODIS Aqua, then BMNG November), 0.05 deg, 7200 x 3600
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi
+    route: GIBS WMS 1.3.0 GetMap, anonymous, 2 x 2 tiles of 3600 x 1800 per layer through fluidpy.data.fetch (guard estimate 6 MB per tile, no Content-Length); 12 tiles + BMNG 5400
+    fetcher: fluidpy.data.gibs.global_daily_mosaic (fetch_wms_tiled, resample_equirect, mosaic_fill, write_drape)
+    login: none
+    licence: NASA EOSDIS imagery, NASA-led mission data CC0 (no use restrictions); credit NASA, imply no endorsement; BMNG not copyrighted (NASA media guidelines)
+    licence_url: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+    citation: "NASA Worldview / GIBS (ESDIS); VIIRS and MODIS Corrected Reflectance (NASA LANCE); Stöckli, R., et al., 2005: The Blue Marble Next Generation, NASA Earth Observatory"
+    attribution: Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS); gaps filled with NASA Blue Marble Next Generation (Reto Stöckli, NASA GSFC)
+    size_bytes: 7685821  # derived JPEG
+    sha256_derived: {gibs_truecolour_global_2023-11-02_0p05.jpg: 524f0506f6cdefc2c151d7d320a3cfc0cb5fc7f3c96c1d1a13c6c180ec278c19}
+    variables: {rgb: "8-bit sRGB, equirectangular EPSG:4326, row 0 = 90N, col 0 = 180W"}
+    coordinates: lat_edges [-90, 90], lon_edges [-180, 180], 0.05 deg pixels; sidecar JSON with fractions per source and overpass note
+    subset: global, one day; fractions NOAA-20 85.6 %, NOAA-21 0.4 %, Aqua 3.8 %, BMNG 10.2 % (polar night + swath gaps)
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg]
+    raw_note: 12 tiles gibs_global_<layer>_2023-11-02_0.05deg_t{00,01,10,11}.jpg (3 layers); evictable
+    derived_on_root: [derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg]
+    derived_in_repo: [data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg, data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.json]
+    used_by: [movie ch00_weather_basics s01, s27, s37-s39, s41 (D5b)]
+  NASA-GIBS-global-2026-10-26:
+    catalogue: GIBS
+    title: Daytime true-colour globe 2026-10-26 (latest complete day at fetch time; VIIRS NOAA-20, gaps from NOAA-21, MODIS Aqua, then BMNG October), 0.05 deg, 7200 x 3600
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi
+    route: GIBS WMS 1.3.0, anonymous, 2 x 2 tiles per layer through fluidpy.data.fetch
+    fetcher: fluidpy.data.gibs.global_daily_mosaic
+    login: none
+    licence: NASA EOSDIS imagery CC0; BMNG not copyrighted; credit NASA
+    licence_url: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+    citation: "NASA Worldview / GIBS (ESDIS); VIIRS and MODIS Corrected Reflectance (NASA LANCE NRT); Stöckli et al. 2005 (BMNG)"
+    attribution: Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS); gaps filled with NASA Blue Marble Next Generation
+    size_bytes: 7454044
+    sha256_derived: {gibs_truecolour_global_2026-10-26_0p05.jpg: 7f9f0531b6eeb10c4287b1d66da36b94b5bff5f816f0fa775d21a49503e744c4}
+    variables: {rgb: "8-bit sRGB, equirectangular EPSG:4326, row 0 = 90N, col 0 = 180W"}
+    coordinates: lat_edges [-90, 90], lon_edges [-180, 180], 0.05 deg
+    subset: global, one day; fractions NOAA-20 84.8 %, NOAA-21 1.1 %, Aqua 4.5 %, BMNG 9.7 %; matches GFS-ANL cycle 2026-10-26T12
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NASA-GIBS/gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-10-26_0.05deg_t00.jpg]
+    raw_note: 12 tiles + 3 probe images (gibs_probe_*_2026-10-26_0.1deg_t00.jpg); evictable
+    derived_on_root: [derived/ch00/gibs_truecolour_global_2026-10-26_0p05.jpg]
+    derived_in_repo: [data/derived/ch00/gibs_truecolour_global_2026-10-26_0p05.jpg, data/derived/ch00/gibs_truecolour_global_2026-10-26_0p05.json]
+    used_by: [movie ch00_weather_basics D11 (today's highs and lows vs Ciaran)]
+  NASA-GIBS-ciaran2023-1101:
+    catalogue: GIBS
+    title: MODIS Aqua true colour 2023-11-01 (Storm Ciaran approaching), 35-65N 40W-10E, 0.02 deg, dark pixels from MODIS Terra then VIIRS NOAA-20
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi
+    route: GIBS WMS 1.3.0, anonymous, one 2500 x 1500 image per layer
+    fetcher: fluidpy.data.gibs.fetch_wms_tiled / mosaic_fill / write_drape
+    login: none
+    licence: NASA EOSDIS imagery CC0; credit NASA
+    licence_url: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+    citation: "NASA Worldview / GIBS (ESDIS); MODIS Aqua/Terra Corrected Reflectance (NASA LANCE)"
+    attribution: Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS)
+    size_bytes: 1444043
+    sha256_derived: {ciaran_truecolour_2023-11-01_aqua_terra.jpg: 6cb521e7033e6d89903fe6974b794bba6c59e8f83249f3bb3d0801b8edd03382}
+    variables: {rgb: "8-bit sRGB, EPSG:4326, row 0 = 65N, col 0 = 40W"}
+    coordinates: lat_edges [35, 65], lon_edges [-40, 10]
+    subset: Aqua 99.77 %, Terra 0.23 % (isolated dark-ocean pixels), NOAA-20 0.002 %
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NASA-GIBS/gibs_ciaran_1101_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-01_0.02deg_t00.jpg, raw/NASA-GIBS/gibs_ciaran_1101_MODIS_Terra_CorrectedReflectance_TrueColor_2023-11-01_0.02deg_t00.jpg, raw/NASA-GIBS/gibs_ciaran_1101_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-01_0.02deg_t00.jpg]
+    derived_on_root: [derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.jpg]
+    derived_in_repo: [data/derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.jpg, data/derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.json]
+    used_by: [movie ch00_weather_basics s00, s45, s54-s55 (D5a)]
+  NASA-GIBS-cumulus-france-2024-06-24:
+    catalogue: GIBS
+    title: MODIS Aqua and Terra true colour at 250 m (0.0025 deg), 2024-06-24, fair-weather cumulus field over the Paris basin, 47-49.5N 0-4E
+    url: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi
+    route: GIBS WMS 1.3.0, anonymous, one 1600 x 1000 image per layer; chosen from a 12-panel contact sheet (SE US and N France, 6 summer days 2023-2024, outputs/ch00/data/d9_candidates.png)
+    fetcher: fluidpy.data.gibs.fetch_wms_tiled / write_drape
+    login: none
+    licence: NASA EOSDIS imagery CC0; credit NASA
+    licence_url: https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance
+    citation: "NASA Worldview / GIBS (ESDIS); MODIS Aqua/Terra Corrected Reflectance"
+    attribution: Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS)
+    size_bytes: 857708  # 447,678 Aqua + 410,030 Terra
+    sha256_derived:
+      cumulus_france_2024-06-24_modis_aqua_250m.jpg: 09c2aa3646d9c91acf8e1736fdd3a20c0b7a9fd7dbb28b7662632ddc0b2b1124
+      cumulus_france_2024-06-24_modis_terra_250m.jpg: c29b55f248aef1f38331537ed3212184882e5943a53d547efddf55cae7852296
+    variables: {rgb: "8-bit sRGB, EPSG:4326, row 0 = 49.5N, col 0 = 0E"}
+    coordinates: lat_edges [47, 49.5], lon_edges [0, 4], 0.0025 deg
+    subset: Aqua ~13:20 UTC, Terra ~10:20 UTC at 2E; empty 0.02 % / 0.13 %
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NASA-GIBS/gibs_cumulus_france_MODIS_Aqua_CorrectedReflectance_TrueColor_2024-06-24_0.0025deg_t00.jpg, raw/NASA-GIBS/gibs_cumulus_france_MODIS_Terra_CorrectedReflectance_TrueColor_2024-06-24_0.0025deg_t00.jpg]
+    raw_note: 12 contact-sheet probes gibs_cu_probe_*_0.01deg_t00.jpg (evictable)
+    derived_on_root: [derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.jpg, derived/ch00/cumulus_france_2024-06-24_modis_terra_250m.jpg]
+    derived_in_repo: [data/derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.jpg, data/derived/ch00/cumulus_france_2024-06-24_modis_aqua_250m.json, data/derived/ch00/cumulus_france_2024-06-24_modis_terra_250m.jpg, data/derived/ch00/cumulus_france_2024-06-24_modis_terra_250m.json]
+    used_by: [movie ch00_weather_basics s31 (D9)]
+  ERA5-CDS-timeseries:
+    catalogue: ERA5-CDS
+    title: ERA5 hourly 2 m temperature at Brest (grid point 48.5N 4.5W), 1991-2023, reduced to daily mean/min/max
+    url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-timeseries
+    route: CDS API (cdsapi, ~/.cdsapirc) through fluidpy.data.fetch(retrieve=...); request location 48.45N 4.42W, date 1991-01-01/2023-12-31, netcdf; 62 s incl. queue
+    fetcher: fluidpy.data.cds.retrieve / point_daily_product
+    login: CDS (free)
+    licence: CC-BY 4.0 (Copernicus licence); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; C3S Climate Data Store, ERA5 single-level time series"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 3486810
+    sha256: d9ffe613767f997f208f56d01dca22193710bb39dc8cb6a1cc8834b00595e199  # fixed period
+    sha256_derived: {era5_brest_t2m_daily_1991-2023.nc: c71625a5bce9e94f52105c4aaea0eeb5763e72bc2cc0a89538d71cca5ec46547}
+    variables: {t2m: "2 m temperature [K], hourly (raw); t2m_mean/min/max daily [K] (derived)"}
+    coordinates: valid_time hourly UTC 1991-01-01T00..2023-12-31T23 (289,272 values, none missing); grid point 48.5N 4.5W (same as A1's Brest point)
+    subset: one point, 33 years
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-CDS-timeseries/era5_timeseries_t2m_brest_48.45N_4.42W_1991-2023.nc, raw/ERA5-CDS-timeseries/era5_timeseries_d2m-t2m-msl_brest_48.45N_4.42W_2023-11-01_02.nc]
+    raw_note: second request 2023-11-01/02 hourly d2m, t2m, msl at the same point (27,239 B, 85 s, sha256 2b8d8dec74d912c0a930c5c72b6ee52ab3e72a481a9fd6a149dc926c3cf663d7) -> era5_brest_2023-11-01_02_t2m_d2m_msl_1h.nc (19,242 B, sha256 6d761c2e13ba86632912f385c60e83100d3ef26c62ddcb7307af0dcf99b3da40); msl/t2m reproduce the A1 Brest table exactly (997.4/982.1/975.3/963.1/962.1/968.0/976.2 hPa); 2 m dew point 7.6 (01T12), 10.6 (01T18), 13.0 (01T20, warm sector), 10.1 (02T00), 11.0 (02T01), 7.5 (02T03), 6.6 C (02T06)
+    derived_on_root: [derived/ch00/era5_brest_t2m_daily_1991-2023.nc, derived/ch00/era5_brest_2023-11-01_02_t2m_d2m_msl_1h.nc]
+    derived_in_repo: [data/derived/ch00/era5_brest_t2m_daily_1991-2023.nc, data/derived/ch00/era5_brest_2023-11-01_02_t2m_d2m_msl_1h.nc]
+    checks: "12,053 complete days; 1991-2020 mean 12.01 C, 2023 mean 12.93 C; daily means 1 Nov 2023 12.97 C, 2 Nov 10.34 C; indicative (+-7-day window, unsmoothed 10-90 % band): 78.6 % of 2023 days inside, 20.0 % above, 1.4 % below - F10 daily_climatology gives the official W35 number"
+    used_by: [movie ch00_weather_basics s36 (D6), s57 (Brest hourly dew point, D3 point part)]
+  ERA5-CDS-monthly-pl:
+    catalogue: ERA5-CDS
+    title: ERA5 monthly-mean temperature and geopotential on 37 pressure levels, November 2023, 1 deg; reduced to zonal means and the WMO tropopause by latitude
+    url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels-monthly-means
+    route: CDS API through fluidpy.data.fetch(retrieve=...); product_type monthly_averaged_reanalysis, grid 1x1 (server-side), netcdf unarchived; 112 s incl. queue
+    fetcher: fluidpy.data.cds.retrieve / zonal_tz_product
+    login: CDS (free)
+    licence: CC-BY 4.0 (Copernicus licence); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 monthly averaged data on pressure levels from 1940 to present, C3S CDS, doi:10.24381/cds.6860a573"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 6690545
+    sha256: aa23ba2a0a1223e75b10ee7b44035567b2e8277a1beaa90ac163fa52fd87315e
+    sha256_derived: {era5_zonal_t_z_tropopause_2023-11.nc: 5c6f5cef0e2c3ac7b65dbb49aa7b50683aa4d540a660d948fce7941b98736616}
+    variables: {t: "[K]", z: "geopotential [m2 s-2] (derived: /9.80665 -> m)", t_zm: "[K]", z_zm: "[m]", trop_z_mean: "[m]", trop_z_of_mean: "[m]"}
+    coordinates: raw lat S->N as delivered (-90..90), lon 0..359, pressure_level 1000..1; derived (level, lat)
+    subset: Nov 2023, global, 37 levels, 1 deg
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-CDS-monthly-pl/era5_monthly_t-z_37lev_2023-11_1deg.nc]
+    derived_on_root: [derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc]
+    derived_in_repo: [data/derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc]
+    checks: "WMO tropopause (mean of columns): 16.6 km, -79 C at 15S-15N; 15.5 km at 30N/S; 11.4 km 45N; 9.9 km 60-70N; 8.9 km 85N (8.5 km of the zonal-mean profile); 10.1 km, -68 C at 85S (Antarctic spring); heights quantised by the 37 levels (100 hPa ~ 16.6 km); 1 hPa ~ 47.2 km is the top"
+    used_by: [movie ch00_weather_basics s25 inset (D8)]
+  GFS-ANL:
+    catalogue: GFS
+    title: NOAA NCEP GFS 0.25 deg analyses of sea-level pressure (PRMSL) and orography, 2026-10-26 12 UTC and 2026-10-27 00 UTC (latest cycle at fetch time)
+    url: https://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_0p25deg_ana/catalog.xml
+    raw_url: https://thredds.ucar.edu/thredds/ncss/grid/grib/NCEP/GFS/Global_0p25deg_ana/GFS_Global_0p25deg_ana_20261027_0000.grib2?var=Pressure_reduced_to_MSL_msl&var=Geopotential_height_surface&accept=netcdf4
+    route: Unidata THREDDS NetCDF Subset Service (anonymous HTTPS, server-side variable cut, netCDF-4 - no GRIB decoder needed); catalogue keeps ~7 days (2026-10-20 00Z .. 2026-10-27 00Z at fetch); no Content-Length (guard estimate 6 MB per variable)
+    fetcher: fluidpy.data.gfs.list_cycles / fetch_analysis / mslp_product
+    login: none
+    licence: US Government work (NOAA/NCEP), public domain; redistributed unchanged by UCAR/Unidata
+    licence_url: https://www.weather.gov/disclaimer
+    citation: "NOAA NCEP Global Forecast System 0.25 deg analysis via the Unidata THREDDS Data Server (UCAR); archive: NCEP GFS 0.25 Degree Global Forecast Grids Historical Archive, NCAR RDA, doi:10.5065/D65D8PWK"
+    attribution: NOAA NCEP GFS analysis (public domain), via Unidata THREDDS (UCAR)
+    size_bytes: 5195926  # 2,597,165 + 2,598,761 (mslp+orog files); the two mslp-only first fetches (1.53 MB each) are superseded
+    sha256_files:
+      gfs_anl_20261026_1200_mslp-orog.nc: 8ea6b3729e34597f11644501cbe5dfdf6a4bea581c72bdc81f7497edf18c8b78
+      gfs_anl_20261027_0000_mslp-orog.nc: 1c4ead71677db1bd43b9902b1e4df304ca499432c85f79db0199da961a4d1c11
+    sha256_derived: {gfs_mslp_latest.nc: fc3ce9f76f002756905159931cd9b29888c423d1d13f7e066bd3ce86a4e4e543}
+    variables: {msl: "PRMSL [Pa] (NCEP reduction; differs from ERA5 msl over high ground)", zs: "model orography [m]", low_high: "low_value/lat/lon and high_value/lat/lon per time: extrema within 70S-70N where zs <= 500 m"}
+    coordinates: server lat 90..-90, lon 0..359.75; derived lat S->N, lon -180..179.75; valid times 2026-10-26T12Z, 2026-10-27T00Z (analysis, forecast hour 0)
+    subset: global, 2 cycles, 2 variables
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: false  # the THREDDS window rolls (~7 days); older cycles via NCAR RDA ds084.1 or AWS noaa-gfs-bdp-pds (GRIB-2)
+    raw_files: [raw/GFS-ANL/gfs_anl_20261026_1200_mslp-orog.nc, raw/GFS-ANL/gfs_anl_20261027_0000_mslp-orog.nc, raw/GFS-ANL/gfs_anl_20261026_1200_mslp.nc, raw/GFS-ANL/gfs_anl_20261027_0000_mslp.nc]
+    derived_on_root: [derived/ch00/gfs_mslp_latest.nc]
+    derived_in_repo: [data/derived/ch00/gfs_mslp_latest.nc]
+    checks: "00Z 27 Oct 2026: deepest low 934.9 hPa at 14.5N 162.5E (W Pacific tropical cyclone; consistent with IBTrACS ACTIVE storm IN-FA, 991 hPa at 11.5N 165.3E at 00Z 25 Oct - name to be confirmed with JTWC/JMA); highest high on ground <= 500 m 1040.1 hPa at 56.0N 57.25E (Siberian high); N Atlantic low 954.6 hPa at 59.25N 15.5W (south of Iceland). 12Z 26 Oct: low 937.3 hPa at 14.25N 162.75E, high 1039.1 hPa at 55.5N 56.25E, N Atlantic low 961.4 hPa at 55.5N 20.75W. Unmasked maxima (1057.8 hPa at 36.25N 76.5E, Karakoram) are reduction artefacts"
+    used_by: [movie ch00_weather_basics D11 (today's highs and lows vs Ciaran)]
+  ERA5-CDS-ciaran2023-850:
+    catalogue: ERA5-CDS
+    title: ERA5 850 hPa temperature, specific humidity and wind round Storm Ciaran, hourly 2023-11-01T00 to 2023-11-02T23, 30-65N 40W-15E, 0.25 deg
+    url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels
+    route: CDS API through fluidpy.data.fetch(retrieve=...) (fluidpy.data.cds.retrieve), server-side area [65, -40, 30, 15], level 850, 48 hours; 11,155,301 B in 115 s incl. queue. Cross-check route ARCO-ERA5 (anonymous, same box 01T12-02T12, 100 whole 37-level chunks, ~10 GB network, 3887 s) gave identical values to GRIB packing precision (max |diff| T 0.0008 K, u/v 0.0007 m/s, q 1.6e-7 kg/kg)
+    fetcher: fluidpy.data.cds.retrieve / grid_product (cross-check fluidpy.data.era5_arco.fetch_box)
+    login: CDS (free) for the primary route; none for the ARCO cross-check
+    licence: CC-BY 4.0 (Copernicus licence); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels from 1940 to present, C3S CDS, doi:10.24381/cds.bd0915c6"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 11155301
+    sha256: 660bc962fd7e448def756d78a4d1585efd94a4fbd73c693d088836519311ddf7
+    sha256_raw_arco_crosscheck: 28e242b5be66edb0f9f55828262eea99a572d0a53e2c6fe1dee8a153ee755daf  # raw/ERA5-ARCO/era5_ciaran_850_t-q-u-v_850_2023-11-01T12_2023-11-02T12_1h.nc, 8,541,419 B
+    sha256_derived:
+      era5_ciaran_2023_850hPa_1h.nc: a4c25d6e6895c7cea1b8ffb97d384962f93b1486d5512a83df755a3bca2ed9c3
+      era5_ciaran_2023_850hPa_1h_48h.nc: 06f2c64d200f0dac8c236db35b84d5174e2dd50a492cbe6e5319e91a93069bf2
+    variables: {t: "[K]", q: "[kg kg-1]", u: "[m s-1]", v: "[m s-1]", level: "850 hPa (scalar coordinate)"}
+    coordinates: CDS delivers lat N->S, lon -40..15; derived lat S->N (30..65, 141), lon -40..15 (221), time hourly UTC
+    subset: "850 hPa only; repo copy 2023-11-01T12..2023-11-02T12 (25 h, 5.6 MB); 48 h version (10.7 MB) on the G drive only"
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-CDS-ciaran2023-850/era5_ciaran_850hPa_t-q-u-v_2023-11-01_02_1h.nc, raw/ERA5-ARCO/era5_ciaran_850_t-q-u-v_850_2023-11-01T12_2023-11-02T12_1h.nc, raw/ERA5-ARCO/era5_brest_d2m-t2m_2023-11-01T00_2023-11-02T23_1h.nc]
+    raw_note: the two ERA5-ARCO files are the cross-check route (850 hPa box; Brest 2 m dew point/temperature 5x5 box = derived/ch00/era5_brest_2023-11-01_02_d2m_t2m_1h.nc, kept on the G drive only) and are evictable
+    derived_on_root: [derived/ch00/era5_ciaran_2023_850hPa_1h.nc, derived/ch00/era5_ciaran_2023_850hPa_1h_48h.nc]
+    derived_in_repo: [data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc]
+    checks: "Brest grid point T850: 2.5 C (01T12) -> 6.0 C (01T21, warm sector) -> 0.8 C (02T12); along 48.5N at 01T18 T850 jumps 1.0 C (14W) -> 7.8 C (12W), +6.8 K across the cold front (W43 >= 5 K); warm-sector max in 42-56N 20W-10E 11.2 C (01T18), 14.8 C (02T00); box q max 11.4 g/kg (02T00)"
+    used_by: [movie ch00_weather_basics s45, s46, s49, s50, s57 (D3: air masses, objective fronts F9, warm tongue)]

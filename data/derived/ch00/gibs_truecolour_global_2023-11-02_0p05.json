@@ -1,0 +1,46 @@
+{
+ "files": {
+  "gibs_truecolour_global_2023-11-02_0p05.jpg": "daytime true-colour globe 2023-11-02"
+ },
+ "grid": "regular lat/lon (EPSG:4326, plate carree), 0.05 x 0.05 deg, row 0 = 90.0 N edge, col 0 = -180.0 E edge",
+ "lat_edges": [
+  -90.0,
+  90.0
+ ],
+ "lon_edges": [
+  -180.0,
+  180.0
+ ],
+ "shape": [
+  3600,
+  7200
+ ],
+ "date": "2023-11-02",
+ "res_deg": 0.05,
+ "fractions": {
+  "VIIRS_NOAA20_CorrectedReflectance_TrueColor": 0.8561216820987654,
+  "VIIRS_NOAA21_CorrectedReflectance_TrueColor": 0.0037104166666666666,
+  "MODIS_Aqua_CorrectedReflectance_TrueColor": 0.037513966049382716,
+  "BMNG 2004-11 topography-bathymetry (5400x2700, resampled)": 0.10265216049382717
+ },
+ "still_empty": 1.7746913580246913e-06,
+ "tiles": [
+  "gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg",
+  "gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg",
+  "gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg",
+  "gibs_global_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg",
+  "gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg",
+  "gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg",
+  "gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg",
+  "gibs_global_VIIRS_NOAA21_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg",
+  "gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t00.jpg",
+  "gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t01.jpg",
+  "gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t10.jpg",
+  "gibs_global_MODIS_Aqua_CorrectedReflectance_TrueColor_2023-11-02_0.05deg_t11.jpg"
+ ],
+ "overpass": "VIIRS (NOAA-20, NOAA-21) and MODIS Aqua cross the equator at about 13:30 local solar time on the day side: each longitude is seen near its own early afternoon, so the image is not one instant (UTC time grows westward, about 1 h per 15 deg of longitude); polar night and swath gaps are filled with the Blue Marble (a cloud-free 2004 composite)",
+ "licence": "NASA EOSDIS imagery: NASA-led mission data are CC0, no use restrictions; credit NASA, imply no endorsement (https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance); BMNG: NASA imagery, not copyrighted (NASA Images and Media Usage Guidelines, https://www.nasa.gov/nasa-brand-center/images-and-media/); acknowledge NASA; no endorsement implied",
+ "credit": "Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS); NASA Earth Observatory, Blue Marble: Next Generation (Reto Stöckli, NASA GSFC)",
+ "citation": "Stöckli, R., Vermote, E., Saleous, N., Simmon, R., Herring, D., 2005: The Blue Marble Next Generation - a true color Earth dataset including seasonal dynamics from MODIS. NASA Earth Observatory",
+ "dataset_key": "NASA-GIBS"
+}

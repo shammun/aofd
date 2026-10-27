@@ -35,3 +35,19 @@
 - **Credit line**: "NCEP/NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA, from their website
   at https://psl.noaa.gov (public domain)."
 - **Disk**: C: 84.2 GB and G: 583.3 GB free, both before and after. Project data went from 6.27 to 6.28 GB.
+
+## Addition 2026-10-27: 2 m air temperature (movie ch00_weather_basics, D7)
+
+- **Raw file**: `surface_gauss/air.2m.mon.ltm.1991-2020.nc`, 964,084 B, fetched in 6.7 s.
+  - sha256 `c86a3c57…a9be9`. It is a fixed file (Last-Modified 2021-07-27).
+- **Product**: `ncep_r1_t2m_ltm_1991-2020.nc` (143,408 B; `fluidpy.data.psl.t2m_climatology`). Repo copy in
+  `data/derived/ch00/`.
+  - `t2m` [K] by season (ann, djf, jja; month-length weighted), on the T62 grid with latitude S→N.
+  - `t2m_zonal` [K].
+- **Key numbers**:
+  - Annual global area-weighted mean 14.2 °C.
+  - Annual zonal means: 26.0 °C at the equator, 19.5 °C at 30°N, −0.6 °C at 60°N, −16.5 °C at 88.5°N, −45.6 °C at
+    88.5°S.
+  - Grid-point range −57.9 to 30.5 °C.
+- **Licence**: public domain. **Redistributable: yes.**
+- **Disk**: C: 74.2 GB and G: 577.5 GB free, before and after (project data 12.1 GB).

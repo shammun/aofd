@@ -1,0 +1,29 @@
+{
+ "files": {
+  "ciaran_truecolour_2023-11-01_aqua_terra.jpg": "MODIS Aqua true colour 2023-11-01, empty pixels from MODIS Terra then VIIRS NOAA-20"
+ },
+ "grid": "regular lat/lon (EPSG:4326, plate carree), 0.02 x 0.02 deg, row 0 = 65.0 N edge, col 0 = -40.0 E edge",
+ "lat_edges": [
+  35.0,
+  65.0
+ ],
+ "lon_edges": [
+  -40.0,
+  10.0
+ ],
+ "shape": [
+  1500,
+  2500
+ ],
+ "date": "2023-11-01",
+ "fractions": {
+  "MODIS Aqua (~13:30 local)": 0.9977165333333333,
+  "MODIS Terra (~10:30 local)": 0.002266133333333333,
+  "VIIRS NOAA-20 (~13:30 local)": 1.6533333333333333e-05
+ },
+ "still_empty": 8e-07,
+ "overpass": "Aqua daytime mosaic ~13:30 local solar time: about 13:20 UTC at 0 deg, 14:00 UTC at 10W, 16:10 UTC at 40W (orbit seams ~99 min apart)",
+ "licence": "NASA EOSDIS imagery: NASA-led mission data are CC0, no use restrictions; credit NASA, imply no endorsement (https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance)",
+ "credit": "Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS). MODIS Aqua/Terra Corrected Reflectance, NASA LANCE",
+ "dataset_key": "NASA-GIBS"
+}
