@@ -20,11 +20,12 @@ if (bundleArg === "--bundle") {
 }
 fs.mkdirSync(outDir, { recursive: true });
 const scale = Number(opt("--scale", "0.5"));
+let port = opt("--port") ? Number(opt("--port")) : null; // a failed still can leave its server port bound: move on by 3
 const inputProps = { audio: "narration_music.wav", bbox: true };
 const chromiumOptions = { gl: "angle" };
 const browser = await openBrowser("chrome", { chromiumOptions });
 const comp = await selectComposition({ serveUrl, id: "Ch00CrossProductWhy", inputProps, puppeteerInstance: browser, chromiumOptions,
-  timeoutInMilliseconds: 240000 });
+  timeoutInMilliseconds: 240000, port });
 const frames = fs.readFileSync(framesFile, "utf8").split(/[,\s]+/).filter(Boolean).map(Number);
 for (const f of frames) {
   const jf = path.join(outDir, `b${String(f).padStart(5, "0")}.json`);
@@ -33,10 +34,10 @@ for (const f of frames) {
   let got = null;
   try {
     await renderStill({ composition: comp, serveUrl, inputProps, output: path.join(outDir, `f${String(f).padStart(5, "0")}.jpg`), frame: f,
-      puppeteerInstance: browser, imageFormat: "jpeg", jpegQuality: 85, scale, chromiumOptions, timeoutInMilliseconds: 240000, logLevel: "error",
+      puppeteerInstance: browser, imageFormat: "jpeg", jpegQuality: 85, scale, chromiumOptions, timeoutInMilliseconds: 240000, logLevel: "error", port,
       onBrowserLog: (l) => { const s = l.text || ""; if (s.startsWith("BBOX ")) { const j = JSON.parse(s.slice(5)); if (j.frame === f) got = j; } else if (s.startsWith("BBOXERR")) console.log(s); } });
     if (got) fs.writeFileSync(jf, JSON.stringify(got));
     console.log(`frame ${f} ${((Date.now() - t0) / 1000).toFixed(1)} s ${got ? got.boxes.length + " boxes" : "NO BOXES"}`);
-  } catch (e) { console.log(`frame ${f} ERROR ${String(e).slice(0, 600)}`); }
+  } catch (e) { console.log(`frame ${f} ERROR ${String(e).slice(0, 600)}`); if (port) port += 3; }
 }
 await browser.close({ silent: true });

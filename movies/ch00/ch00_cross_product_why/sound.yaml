@@ -1,0 +1,10 @@
+# ch00_cross_product_why: sound cue sheet for tools/sound/mix.py (fix loop 2, 2026-10-27).
+# House rule (HOUSE_STYLE §8, user 2026-10-27): a different score for each movie. The dot-product movie keeps
+# maths-calm (seed 7); this movie gets rotation-turning (B-flat major, 6/8: an electric-piano arpeggio cycling up and down
+# and circling the stereo field), the style made for rotating frames, Coriolis and turning, for the WHOLE movie.
+# No sound effects: this is a maths movie, and its big camera moves (s23 to the top view, s28a in to the place) all
+# happen while the voice is speaking, so a whoosh would cover words (house rule: never over a word).
+music: {style: rotation-turning, seed: 3, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects: []

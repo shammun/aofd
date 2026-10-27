@@ -789,6 +789,7 @@ def main() -> int:
         "Imagery from the NASA Worldview application, part of NASA ESDIS (VIIRS Corrected Reflectance, NASA LANCE).",
         "Derived from NOAA HRRR analyses (public domain), via the University of Utah HRRR-zarr archive on AWS.",
         "IBTrACS v04r01 best tracks (Knapp et al. 2010), NOAA NCEI (public domain).",
+        "Music: 'rotation-turning' (B-flat major, 6/8), seed 3, tools/sound/styles.py, our own procedural score (CC0-1.0); no sound effects (movies/ch00/ch00_cross_product_why/sound.yaml).",
     ]
     manifest = {
         "id": "ch00_cross_product_why", "storyboard": "movies/ch00/ch00_cross_product_why/storyboard.yaml",

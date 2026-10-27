@@ -34,9 +34,13 @@ audio:
   speed: 1.0
   loudness_lufs: -16
   music:
-    source: tools/music.py (procedural, our own, CC0)
-    level: bed about -28 LUFS, ducked a further 5 dB under speech (as the reference)
-    notes: seed 7, 5-s fade in, 2.5-s silent end-card hold with the music fading
+    source: tools/sound/mix.py + tools/sound/styles.py (procedural, our own, CC0); cue sheet sound.yaml
+    style: rotation-turning
+    key: B-flat major, 6/8 (eighth = 1/3 s)
+    seed: 3
+    level: bed -28 LUFS, ducked a further 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP
+    notes: fix loop 2 (2026-10-27) - a different score from the dot-product movie (maths-calm, seed 7), one style for the
+      whole movie; no sound effects (the big camera moves happen while the voice speaks); 2.5-s tail
 decision_changes:
 - 'U-CP.4 ''no rotating-frame derivation'' OVERRIDDEN by the user (2026-10-27): v = Ω × r (s25a-s25b), −2Ω × u (s26a-s27a)
   and −2Ω × u → −f k × u (s28a-s28_f) are derived here'
@@ -3068,7 +3072,7 @@ scenes:
 
     S1-S2: u east (''u = (5, 0, 0) m/s''); k × u north, keyword ''a direction: left of the wind''.
 
-    S3: a small proton-in-a-field thumbnail (s22d) top right; an orange push arrow at the wind''s tip at a right angle,
+    S3: a small proton-in-a-field thumbnail (s22d) top right; a violet push arrow (the Coriolis colour, as the magnet''s push it is compared with) at the wind''s tip at a right angle,
 
     keyword ''push ⟂ wind''.
 
@@ -4000,7 +4004,7 @@ scenes:
 
     S2: at the ball, teal u (heading), violet dashed ''Ω × u'' to its LEFT (label), right-angle tick.
 
-    S3: orange ''−2Ω × u'' to its RIGHT (label), keyword ''right, against the turning''; the rider''s curve (violet) pulses.
+    S3: violet ''−2Ω × u'' to its RIGHT (label), keyword ''right, against the turning''; the rider''s curve (violet) pulses.
 
     S4: keyword ''computer check''.
 
@@ -4415,7 +4419,7 @@ scenes:
 
     S1: ''−f k × u'' (84 px) at (960, 140) (no repeated derivation, UV2-24).
 
-    S2: violet dim k × u (left, ''(0, 10)'') in each patch; on "flips it to the right" the orange −f k × u arrow appears
+    S2: violet dim k × u (left, ''(0, 10)'') in each patch; on "flips it to the right" the violet −f k × u arrow appears
 
     on u''s right in the NH patch.
 
@@ -4735,7 +4739,7 @@ scenes:
 
     S2: the NH arrow bends to its RIGHT = towards the WEST over 30 frames, ending as an arrow moving south-west; an
 
-    orange −f k × u mini arrow at its middle points to the right of the motion; on "from the north east" a small wind
+    violet −f k × u mini arrow at its middle points to the right of the motion; on "from the north east" a small wind
 
     vane at the arrow''s start labelled ''north-east trades'' (the vane''s tail points north-east = where the wind comes
 

@@ -2,11 +2,12 @@
 // Rod3D, Plane3D, Quad3D. Everything is a pure function of props (no useFrame, no rAF, no Math.random). Sizes of
 // arrows are given in screen px and converted with the camera, so a zoom keeps the house strokes (10-px shafts,
 // 40-px heads; results 14 px).
-import React, { createContext, useContext, useLayoutEffect, useMemo } from "react";
+import React, { createContext, useContext, useId, useLayoutEffect, useMemo } from "react";
 import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { CamState, Projector, V3, add3, applyCam, len3, norm3, projector, sub3 } from "./cam";
+import { PROBE, probe3, probeOff } from "./probe";
 
 type Ctx = { st: CamState; W: number; H: number; pr: Projector };
 const View3DCtx = createContext<Ctx | null>(null);
@@ -67,20 +68,27 @@ export const useMat = (color: string, o = 1, emiss = 0.42, rough = 0.55) => {
 /** A solid rod (cylinder) between two points, width in screen px at its midpoint. */
 export const Rod3D: React.FC<{ a: V3; b: V3; px?: number; color: string; o?: number; r?: number }> = ({ a, b, px = 6, color, o = 1, r }) => {
   const { pr } = useView3D();
+  const id = useId();
   const mat = useMat(color, o);
   const d = sub3(b, a), L = len3(d);
-  if (L < 1e-6 || o <= 0) return null;
+  if (L < 1e-6 || o <= 0) { probeOff(id); return null; }
   const mid = add3(a, d, 0.5);
   const rad = r ?? (px / 2) * pr.wpp(mid);
+  if (PROBE.on) probe3(id, { k: "rod3d", c: color, w: (2 * rad) / pr.wpp(mid), o, pts: [pr.p(a), pr.p(b)], closed: false });
   return <mesh geometry={GEO.cyl} material={mat} position={mid} quaternion={quatTo(d)} scale={[rad, L, rad]} />;
 };
 
 /** A ball (e.g. an air parcel) of diameter px. */
 export const Ball3D: React.FC<{ at: V3; px?: number; color: string; o?: number; r?: number }> = ({ at, px = 16, color, o = 1, r }) => {
   const { pr } = useView3D();
+  const id = useId();
   const mat = useMat(color, o, 0.3);
-  if (o <= 0) return null;
+  if (o <= 0) { probeOff(id); return null; }
   const rad = r ?? (px / 2) * pr.wpp(at);
+  if (PROBE.on) {
+    const c0 = pr.p(at), rp = rad / pr.wpp(at);
+    probe3(id, { k: "ball3d", c: color, w: 0, o, closed: true, pts: Array.from({ length: 24 }, (_, i) => [c0[0] + rp * Math.cos((i * Math.PI) / 12), c0[1] + rp * Math.sin((i * Math.PI) / 12)]) });
+  }
   return <mesh geometry={GEO.sph} material={mat} position={at} scale={[rad, rad, rad]} />;
 };
 
@@ -92,11 +100,12 @@ export const Ball3D: React.FC<{ at: V3; px?: number; color: string; o?: number; 
 export const Arrow3D: React.FC<{ from: V3; to: V3; color: string; px?: number; head?: number; o?: number; grow?: number; dash?: boolean;
   scaleAt?: V3; onTop?: boolean }> = ({ from, to, color, px = 10, head = 40, o = 1, grow = 1, dash = false, scaleAt, onTop = false }) => {
   const { pr } = useView3D();
+  const id = useId();
   const mat = useMat(color, o);
   mat.depthTest = !onTop;
   const tip = add3(from, sub3(to, from), Math.max(0, Math.min(1, grow)));
   const d = sub3(tip, from), L = len3(d);
-  if (L < 1e-5 || o <= 0 || grow <= 0) return null;
+  if (L < 1e-5 || o <= 0 || grow <= 0) { probeOff(id); return null; }
   const u = norm3(d);
   const w = pr.wpp(scaleAt ?? add3(from, d, 0.5));
   const h = Math.min(head * w, 0.6 * L), hr = 0.42 * (h / w) * w;
@@ -105,6 +114,13 @@ export const Arrow3D: React.FC<{ from: V3; to: V3; color: string; px?: number; h
   const conePos = add3(tip, u, -h / 2);
   const shafts: React.ReactNode[] = [];
   const SL = len3(sub3(shaftEnd, from));
+  if (PROBE.on) {
+    const T = pr.p(tip), Bc = pr.p(add3(tip, u, -h)), S0 = pr.p(from), S1 = pr.p(shaftEnd);
+    const hx = Bc[0] - T[0], hy = Bc[1] - T[1], hl = Math.hypot(hx, hy) || 1, hp = (hr / pr.wpp(add3(tip, u, -h)));
+    const nx = -hy / hl, ny = hx / hl;
+    probe3(id, { k: "arrow3d", c: color, w: px, o, closed: false, pts: [S0, S1],
+      head: [T, [Bc[0] + nx * hp, Bc[1] + ny * hp], [Bc[0] - nx * hp, Bc[1] - ny * hp]] });
+  }
   if (!dash) {
     shafts.push(<mesh key="s" geometry={GEO.cyl} material={mat} position={add3(from, u, SL / 2)} quaternion={q} scale={[rs, SL, rs]} />);
   } else {
@@ -126,6 +142,9 @@ export const Arrow3D: React.FC<{ from: V3; to: V3; color: string; px?: number; h
 
 /** A flat filled polygon (convex quad or triangle fan) in 3-D, e.g. the violet parallelogram at 18 %. */
 export const Quad3D: React.FC<{ pts: V3[]; color: string; o?: number; side?: THREE.Side }> = ({ pts, color, o = 0.18, side = THREE.DoubleSide }) => {
+  const { pr } = useView3D();
+  const id = useId();
+  if (PROBE.on) { if (o > 0) probe3(id, { k: "quad3d", c: color, w: 0, o, closed: true, pts: pts.map((v) => pr.p(v)) }); else probeOff(id); }
   const geo = useMemo(() => new THREE.BufferGeometry(), []);
   const mat = useMemo(() => new THREE.MeshBasicMaterial({ color, transparent: true, side, depthWrite: false }), [color, side]);
   mat.opacity = o;
