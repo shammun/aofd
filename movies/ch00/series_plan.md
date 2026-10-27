@@ -14,7 +14,12 @@ cartopy/geopandas for pre-rendered layers, Natural Earth, NASA GIBS imagery).
 **Disk housekeeping, pre-authorised by the user.** After each movie is finalized: delete junk on C: (render pieces,
 frame dumps, review frames, caches) without asking. Anything that might be reused is first copied to
 `G:/Geophysical Fluid Dynamics/aofd-data/archive/movies/<slug>/`. Never touch a file the user is watching
-(`preview_*.mp4`) until that movie is finalized. Floors still hold (C: 40 GB, G: 50 GB).
+(`preview_*.mp4`) until that movie is finalized. Floors still hold (C: 40 GB, G: 50 GB). The tool for this is
+`tools/clean_scratch.py --yes [--archive SLUG] PATH…`. It deletes only inside scratch/, archive/, reports/movies/ and
+outputs/, never a preview_* or final 1080.mp4, and logs to `logs/cleanup.log`. The project settings keep a raw `rm -rf` denied.
+
+**File size (user, 2026-10-27):** the cap is **160 MB** per movie (budget about 120 MB). Choose the bitrate for picture
+quality; long movies may use the whole cap.
 
 ## The list (in order) — rewritten 2026-10-27 to follow Vallis chapter by chapter
 User (2026-10-27): Chapter 0 gets a first-meeting movie for **every major topic of Vallis Ch 1–22, in book order**.
@@ -73,6 +78,22 @@ every later movie uses; Part V follows Vallis's order, so each movie only needs 
 - **Missing: Copernicus Marine (CMEMS).** It has the best gridded sea level, currents and ocean reanalysis (DUACS, GLORYS).
   Open substitutes meanwhile: PO.DAAC altimetry, OSCAR, ECCO. To add it, register free at
   https://data.marine.copernicus.eu/register, then run `! .venv\Scripts\python.exe tools/setup_credentials.py marine`.
+  **User (2026-10-27): not now.** Use the best open alternatives, and ask the user again later, together with any other
+  accounts a movie needs.
+
+## Real data in every movie (user, 2026-10-27: "not only for ENSO but for all the things")
+Wherever a topic has observations, every movie gets the treatment first asked for ENSO:
+- **The latest data**, fetched when the movie is made: the newest reanalysis, SST, sea level, Argo, AMOC (RAPID),
+  sea-ice and index values that fit the topic.
+- **The recent state vs history**: how the latest season or event compares with the record (anomalies, ranks,
+  trends), with time-series and index animations.
+- **Real impacts, from cited sources only**: e.g. heat waves under subtropical highs, monsoon floods, cyclone landfalls,
+  sudden-stratospheric-warming cold outbreaks, AMOC-slowdown studies, marine heat waves. Uncertainty is stated, and
+  every number's source goes in the storyboard and manifest.
+- **Maps and charts:** animated three.js globes, static maps with coastlines and borders on daytime satellite
+  imagery, and charts (time series, ranks, composites, cross-sections). Each is computed by tested fluidpy code.
+- A **research-scout** pass before the director for every Part V movie gathers the current state, impact studies and
+  data sources.
 
 ## Boundary with the chapter movies (2026-10-27)
 Vallis treats these topics in depth: Coriolis, geostrophic and thermal wind in Ch 2 and Ch 5; adjustment in Ch 3;
