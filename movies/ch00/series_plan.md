@@ -106,6 +106,13 @@ possible … appropriate animation and also data animation."
      size; record the choice and the runner-up in the storyboard scene (`tool:` and `why:` lines).
   This happens at planning, again while building each scene, and again at review whenever a visual is weak; it is
   never a one-off survey. The general toolkit survey (`research/movie_maps_toolkit.md`) is only the starting list.
+- **Data and tool together, for static maps too** (user, 2026-10-27). The same per-visual choice covers **static
+  maps** and every other kind of visual in every movie (globes, 3-D terrain, sections, soundings, time series, charts,
+  satellite images): for each one, also choose the **best dataset** for that message (e.g. ERA5 vs GFS vs MERRA-2 vs
+  station data vs satellite product; resolution, period, variable, base period, licence) and the best **combination
+  of data and tools** (e.g. GIBS true colour + ERA5 isobars + Natural Earth borders, cartopy vs PyGMT vs d3-geo vs
+  MapLibre for the base, projection and colour map chosen for the reader). Record `data:`, `tool:` and `why:` (with
+  the runner-up) per scene.
 - The director plans it in the storyboard (per scene: map / globe / 3-D / data animation), and the reviewer checks
   "could this static picture be a real map or a data animation?" as a SHOULD item.
 
