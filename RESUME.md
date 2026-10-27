@@ -1,5 +1,13 @@
 # RESUME — where the work stopped (2026-10-26, ≈ 11:00)
 
+> **UPDATE 2026-10-27 — read first.** The user gave a standing order: make the Chapter 0 movies one after another
+> without waiting (`movies/ch00/series_plan.md`, the list + cleanup + cumulative-report rules; never push). Current
+> movie: `ch00_cross_product_why` **v4**, a re-plan from the user's review of v2 (`reports/ch00_cross_product_user_notes_v2.md`,
+> UV2-01…31). State on 2026-10-27: v3 render running (the steps below); the v4 storyboard/script are drafted in
+> `movies/ch00/ch00_cross_product_why/v4_draft/` (movie-director); the Ciarán satellite image + admin boundaries + the
+> dark-globe check are with the data-scout. Next: promote the v4 draft → implement new physics/data → motion-builder
+> v4 → QA → ≥ 2 reviews → cumulative report → movie 2a in series_plan.md. Review 3 of v3 is skipped (folded into v4).
+
 The SessionStart hook prints a pointer to this file. **On session start: read this file, give the user the short status
 in "Tell the user" below, then start the steps in "Do automatically" without waiting** (the user asked for this on
 2026-10-26: "start doing those automatically when I start a new session"). The older PoC questions in
