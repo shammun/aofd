@@ -5976,18 +5976,18 @@ scenes:
 
     thumbnails along the top (two arrows; a cross product with its parallelogram; a gradient map; a globe) and
 
-    ''a series of maths tutorials'' (68 px). S2: ''atmospheric science · meteorology · fluid dynamics'' (54 px). S3: a large
+    ''a series of tutorials'' (68 px). S2: ''meteorology · atmospheric science · climate'' (54 px) and ''the ideas, and the
 
-    notebook icon with ''cross-product notebook'' (68 px) and stacked notebook icons with ''notebooks for the other maths
+    maths behind them'' (54 px, gold) — the weather/climate/ocean ending (HOUSE_STYLE §3, user 2026-10-27). S3: a large
+
+    notebook icon with ''cross-product notebook'' (68 px) and stacked notebook icons with ''notebooks for the other
 
     concepts'' (54 px); the voice says ''on the website'' (no address, no URL, no book name, no lab). 2.5-s silent hold
 
     after the last word while the music fades; nothing autoplays.
 
     '
-  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students
-    of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for this cross
-    product, and the notebooks for the other maths concepts, are on the website that goes with this video.
+  voiceover: "This video is one of a series of related tutorials, so watch out for the others. They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too. The notebook for the cross product, and the notebooks for the other concepts, are on the website that goes with this video."
   on_screen_eq: null
   physics_source: null
   physics_source_note: 'end card: text and icons only'

@@ -5100,40 +5100,40 @@
    "start": 2879.925,
    "sentences": [
     {
-     "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
+     "text": "This video is one of a series of related tutorials, so watch out for the others.",
      "audio_text": null,
      "start": 2879.925,
-     "end": 2886.125,
-     "dur": 6.2,
+     "end": 2885.8,
+     "dur": 5.875,
      "start_frame": 86398,
-     "end_frame": 86584
+     "end_frame": 86574
     },
     {
-     "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
+     "text": "They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too.",
      "audio_text": null,
-     "start": 2886.475,
-     "end": 2894.525,
-     "dur": 8.05,
-     "start_frame": 86594,
-     "end_frame": 86836
+     "start": 2886.15,
+     "end": 2897.2,
+     "dur": 11.05,
+     "start_frame": 86584,
+     "end_frame": 86916
     },
     {
-     "text": "The notebook for this cross product, and the notebooks for the other maths concepts, are on the website that goes with this video.",
+     "text": "The notebook for the cross product, and the notebooks for the other concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2894.875,
-     "end": 2902.875,
-     "dur": 8.0,
-     "start_frame": 86846,
-     "end_frame": 87086
+     "start": 2897.55,
+     "end": 2905.0,
+     "dur": 7.45,
+     "start_frame": 86926,
+     "end_frame": 87150
     }
    ],
-   "end": 2903.175,
+   "end": 2905.3,
    "start_frame": 86398,
-   "end_frame": 87095
+   "end_frame": 87159
   }
  ],
- "total_s": 2903.175,
- "total_frames": 87096,
+ "total_s": 2905.3,
+ "total_frames": 87159,
  "render_s": 2723.0,
  "loudnorm_input": {
   "input_i": "-24.80",
@@ -5150,10 +5150,15 @@
  "cues": 719,
  "warnings": [],
  "self_check": {
-  "expected_s": 2903.175,
-  "audio_s": 2903.175,
-  "diff_ms": -0.0,
+  "expected_s": 2905.3,
+  "audio_s": 2905.3,
+  "diff_ms": 0.0,
   "len_ok": true,
-  "cues_ok": true
+  "cues_ok": true,
+  "spliced_end": {
+   "gain": 0.99593,
+   "corr_old_resynth": 0.9865,
+   "new_peak": 0.8479
+  }
  }
 }

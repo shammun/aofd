@@ -487,10 +487,10 @@ To sum up, the cross product of two arrows is another arrow, at right angles to 
 > CHANGED (new items in one sentence each).
 
 ## s48_end
-This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for this cross product, and the notebooks for the other maths concepts, are on the website that goes with this video.
+This video is one of a series of related tutorials, so watch out for the others. They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too. The notebook for the cross product, and the notebooks for the other concepts, are on the website that goes with this video.
 
 > 58 words · 3 sentences · 2869.500–2892.750 s (23.2 s; speech 22.2 s) · 47:49.50–48:12.75 (measured, dry run).
 
-> House end card, word for word.
+> House end card for weather/climate/ocean movies (HOUSE_STYLE §3, user decision 2026-10-27); 2879.925–2905.000 s spoken (measured, spliced in fix loop 1), movie 2905.300 s + 2.5-s hold = 2907.80 s.
 
 > Total: 7218 words · 496 sentences · 2892.750 s narration · 2895.250 s movie (48:15.25) · 149.6 words per minute.
