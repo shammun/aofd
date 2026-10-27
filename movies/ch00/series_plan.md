@@ -116,6 +116,12 @@ possible … appropriate animation and also data animation."
 - The director plans it in the storyboard (per scene: map / globe / 3-D / data animation), and the reviewer checks
   "could this static picture be a real map or a data animation?" as a SHOULD item.
 
+- **Earth Engine and leafmap as a source of animation and numbers** (user, 2026-10-27: "the opportunity is
+  limitless"): timelapses of image collections (change over time), before/after pairs shown as a wipe or swipe (an
+  event's impact: floods, fires, sea ice, drought, SST), and values or time series reduced over a point, region or
+  band (CSV) that our own code turns into charts and animated charts (e.g. "how unusual is this compared with
+  history"). All via `tools/maptools` recipes, frames archived on G: so renders never hit the network.
+
 ## Map toolkit set-up (user, 2026-10-27: "go ahead")
 The map and 3-D tools are installed so agents can run them on their own: separate environments (`.venv-maps`, a
 conda/micromamba env for GMT if pip cannot supply it, an npm tree under `tools/maptools/js/`), one render command
