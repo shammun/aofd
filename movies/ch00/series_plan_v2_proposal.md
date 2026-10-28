@@ -127,6 +127,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 | 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen) |
 
 ## Notes
+- User (2026-10-27): the divergence (#7), curl (#8) and vorticity (#34) movies are long ones, about 30 min each (not shortened).
 - User (2026-10-27): every maths movie is tied to meteorology, atmospheric science or climate science (real fields, real maps); every movie shows enough worked examples and maps; skew-T, Coriolis, ENSO and map-reading movies may run longer (45–60 min).
 - The old V1–V24 list is absorbed: V1 → 10, V2 → 23, V3 → 24–25, V4 → 12, V5 → 29, V6 → 30, V7 → 32, V8 → 36, V9 → 34,
   V10 → 31, V11 → 37, V12 → 38, V13 → 39, V14 → 41, V15 → 47/59, V16 → 48, V17 → 43, V18 → 49, V19 → 50, V20 → 52,
