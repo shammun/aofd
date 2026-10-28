@@ -1,0 +1,2248 @@
+{
+ "id": "ch00_vectors_index_notation",
+ "storyboard": "movies/ch00/ch00_vectors_index_notation/storyboard.yaml",
+ "builder": "movies/data/build_ch00_vectors_index_notation.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "109ac9a6e5adfcbaa70988b5ad03161cd048f6b2",
+  "dirty_tracked": false,
+  "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
+  "atmos_py_sha256": "0701685569802a29a910c5e799408c4a04b6c8eaffe60fc9bf1eb10929bd1221",
+  "sphere_py_sha256": "a1db6737f5256b5706c866838381b6e5d639e7c091a84b8fb89d49c9619298f1",
+  "advection_py_sha256": "653ac1d74b90b946bb5fef8d253f271a9b33fa2c512d979e115d7384791db91c",
+  "cyclone_py_sha256": "632c32637a0c2014dd7806cdd14ba5722e6c316281451daaaf16d3a15c03b835",
+  "climatology_py_sha256": "f047ee01a44620d2ed01891eb522541e0d4086583014408ee6acd7c7643c5d6d",
+  "tensors_py_sha256": "373d3c3384f3699fc93847616eefa8f0b19f9445899a2c3f0103e1eebd9247a6",
+  "index_notation_py_sha256": "36301f9946a1112c021f2c7cf6a2f1354a7da54d0e1ad2877f8ca4c680b7c454",
+  "isd_py_sha256": "c00d9eb58a0f2b82d386ea733d054c98e8404539eb87a21949706669c09ed73a"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "basis/position": "Kundu (2.1) x = x_i e_i (p067)",
+  "summation": "Kundu (2.2) (p068)",
+  "kronecker": "Kundu (2.16), (2.17) (p077-p078); App. B (B.3.1), (B.3.4)",
+  "cross_teaser": "Kundu (2.21) (p079), s34 only",
+  "omega": "Vallis §2.6.2 ω ≡ Dp/Dt (p099) with ∂p/∂z = -ρg",
+  "geostrophic": "Vallis §2.8 geostrophic balance"
+ },
+ "parameters": {
+  "brest_station": [
+   48.45,
+   -4.42
+  ],
+  "brest_grid_point": [
+   48.5,
+   -4.5
+  ],
+  "sea_point_s12d": [
+   48.0,
+   -6.0
+  ],
+  "rho0_geostrophic": 1.25,
+  "coast_axis_bearing_deg": 80,
+  "storm_track": "msl minimum tracked by continuity from 16 UTC (box 44-54N 16-8W)",
+  "time_compression": {
+   "s01": "streaklines ×20 (15-min RK2 steps, frozen 18 UTC field)",
+   "s12f": "1 h of wind change in ~4 s",
+   "s12i": "6 h of storm motion in ~6 s",
+   "s31": "balloon 1 h in ~6 s",
+   "s00": "17 -> 19 UTC in a few seconds"
+  },
+  "exaggerations": [
+   "s06/s12 relief floor ×6 hillshade (a floor only)",
+   "s09 column: height ×10, w arrow ×50",
+   "s12g column ×10 vertical",
+   "arrow scales per scene (speeds and accelerations share no scale)"
+  ]
+ },
+ "credits": [
+  "Contains modified Copernicus Climate Change Service information 2026 (ERA5 hourly 850 hPa, pressure levels, global hour, Ciarán surface, monthly means).",
+  "NOAA NCEP GFS 0.25° analysis 2026-10-28T18 (public domain), via Unidata THREDDS.",
+  "Durre, I., et al.: Integrated Global Radiosonde Archive (IGRA) v2, NOAA NCEI (Trappes 00 UTC 1 Nov 2023).",
+  "NOAA NCEI Integrated Surface Database (ISD): Brest-Guipavas 07110 SYNOP.",
+  "Imagery from the NASA Worldview application, part of NASA ESDIS (MODIS Aqua/Terra Corrected Reflectance, NASA LANCE / GIBS).",
+  "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli, NASA GSFC).",
+  "ETOPO 2022 Global Relief Model, NOAA NCEI (public domain), doi:10.25921/fd45-gt74.",
+  "Made with Natural Earth (public domain).",
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0), style index-lattice seed 11."
+ ],
+ "js_selftest": "none — the composition has no JS physics; every number is read from data/vi.json (TSX CHECK rows re-assert the screen strings)",
+ "narration_changes_from_data": [
+  "s09: 'around three hundred times slower' -> 'more than three hundred times slower' (VI16: 34.0 / 0.095 = 358)",
+  "s12a: jet maximum 'about seventy' -> 'about sixty-five' (VI41: GFS 2026-10-28T18 250 hPa max 66.1 m/s)",
+  "s12h: 'about six ... only about three and a half ... about two and a half' -> 'about five ... only about three point seven ... about one point three' (VI49: ERA5 Nov clim -5.04, Nov 2023 -3.72, anomaly +1.32 m/s)"
+ ],
+ "inputs_sha256": {
+  "data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc": "a4c25d6e6895c7cea1b8ffb97d384962f93b1486d5512a83df755a3bca2ed9c3",
+  "data/derived/ch00/era5_ciaran_2023_pl_925-850-700_17-19UTC.nc": "cfd5708e1bdf9ab707c702d8b839d76a448ec39a1e6670d9f35d21dc42c4947c",
+  "data/derived/ch00/era5_global_2023-11-01T18_sfc_0p5.nc": "3ca4cef73a89e04b52881487d3c06bd76b726c15140292a37672bb51ad40d79e",
+  "data/derived/ch00/era5_monthly_u10-v10-sst_nov_1991-2023_30S-30N_1deg.nc": "6fced88037144d843c8ba5f2293eaedab7367ba6378e6638883d6ec1ad34db27",
+  "data/derived/ch00/gfs_jet_250-300hPa_2026-10-28T18_natl.nc": "208f348146c0a6a1de4bd6a5c9a3ecc9408a3f84e60e1897fade55617949b0c6",
+  "data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc": "4f6e4f9fcb290eb0afa0616c583f9e274b15f832078e20e585e4ceadcb52ad21",
+  "data/derived/ch00/gibs_truecolour_global_2023-11-01_0p05.jpg": "76b7efd953a48c78571fdb5e0c304974ff53c050d00cb07e58387deead520033",
+  "data/derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.jpg": "6cb521e7033e6d89903fe6974b794bba6c59e8f83249f3bb3d0801b8edd03382",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_ciaran_2023_u10-v10-msl-t2m_2023-11-01T00_2023-11-02T23_1h.nc": "57ba6a3d405726ae7c9ed5c178b31b512dbb7cdcd55d13135835d86a0ccc0572",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ISD\\isd_07110099999_2023-11-01_2023-11-02.csv": "1f48454d2f8b6ef71915bc94ca850bda12751ea4d602d44a781a5dcc57bc0919",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ETOPO2022-60s\\etopo2022_60s_brittany_46.5-49.5N_-6.5--1E.nc": "9171ce38b02608f5a711e187048c30d8b0709edc422cf52c77535ad708658c65",
+  "data/derived/ch00/ciaran_coast_10m.geojson": "41013c98acdb9dd04c4223a8e00ca5cd99e78f4c72cbbd2004c60528cfe04ba3",
+  "data/derived/ch00/ciaran_borders_10m.geojson": "037fec5398ff8ddaf13505a9fbe6b85452d4aa509b6eecef94a7fcc745154ee8",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b"
+ },
+ "render_assets": {
+  "vi_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "vi_gfs250_speed.png": "b64b8e21eee774cc1daf6e92cc3972c3fb2df650879c0990d3cc8fe73b2754da",
+  "vi_globe_tc_20231101.jpg": "ffcde252a5cd2bc5668eccab1482b1a577843586f291f0ca30ee53b8baa7ceb3",
+  "vi_relief_brittany.png": "970fa254088586ece3fa074816cf1b6a0ec3471f7981ca49112d17ee01eb9736",
+  "vi_t2m_global.png": "85f73a71078acdf4a31c95022597ef803dab39c16dfe97c4b568ca2b414b2421",
+  "vi_t850_17.png": "36c95232f61b2dafb0df5374accfaa22008c273a5f0000f2b5a92d43e8713cb9",
+  "vi_t850_18.png": "ada1e3aa632d15f0c3c71e5b8375ab1d29d42ef496521c61d0cce22037281cbf",
+  "vi_t850_19.png": "177a3443d89b7365d8a079ebbf3b854f1d02dc2aeef67146c0d1fccf11fb367e",
+  "vi_tc_20231101.jpg": "16d4a438f09e5f467a5553af16b1f1a8cb68cd906e2bf24487a2b2e942b7008a"
+ },
+ "data_files": {
+  "vi.json": "276b21140d9e7d266aeb5579a7b013fce08abb27a576a4f93e2828252c3ae523",
+  "img/gfs250_speed.png": "b64b8e21eee774cc1daf6e92cc3972c3fb2df650879c0990d3cc8fe73b2754da",
+  "img/relief_brittany.png": "970fa254088586ece3fa074816cf1b6a0ec3471f7981ca49112d17ee01eb9736",
+  "img/t2m_global.png": "85f73a71078acdf4a31c95022597ef803dab39c16dfe97c4b568ca2b414b2421",
+  "img/t850_17.png": "36c95232f61b2dafb0df5374accfaa22008c273a5f0000f2b5a92d43e8713cb9",
+  "img/t850_18.png": "ada1e3aa632d15f0c3c71e5b8375ab1d29d42ef496521c61d0cce22037281cbf",
+  "img/t850_19.png": "177a3443d89b7365d8a079ebbf3b854f1d02dc2aeef67146c0d1fccf11fb367e"
+ },
+ "checks": [
+  {
+   "id": "VI01",
+   "name": "ISD Brest 18 UTC 1 Nov 2023: from 150°, 9.3 m/s, 10.3 °C",
+   "value": [
+    150.0,
+    9.3,
+    10.3
+   ],
+   "ref": [
+    150.0,
+    9.3,
+    10.3
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI15",
+   "name": "ISD Brest 20 UTC: from 210°, 13.4 m/s, 14.9 °C",
+   "value": [
+    210.0,
+    13.4,
+    14.9
+   ],
+   "ref": [
+    210.0,
+    13.4,
+    14.9
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI40",
+   "name": "Brest 10.3 -> 14.9 °C (+4.6 °C, 18-20 UTC)",
+   "value": [
+    4.6
+   ],
+   "ref": [
+    4.6
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI02",
+   "name": "wind_components(9.3, from 150°) = (-4.65, 8.054)",
+   "value": [
+    -4.65,
+    8.054036
+   ],
+   "ref": [
+    -4.65,
+    8.054
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "VI03",
+   "name": "sin 330° = -1/2, cos 330° = 0.8660",
+   "value": [
+    -0.5,
+    0.866025
+   ],
+   "ref": [
+    -0.5,
+    0.866
+   ],
+   "tol": 5e-05,
+   "pass": true
+  },
+  {
+   "id": "VI04",
+   "name": "norm(-4.65, 8.054, 0) = 9.30",
+   "value": [
+    9.299969
+   ],
+   "ref": [
+    9.3
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "VI04b",
+   "name": "s10 screen √86.4: 4.65² + 8.05² = 86.425 ≈ 86.4 (rounded inputs); √ ≈ 9.30",
+   "value": [
+    86.425,
+    9.296505
+   ],
+   "ref": [
+    86.4,
+    9.3
+   ],
+   "tol": [
+    0.05,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI05",
+   "name": "norm(6, 8, 0) = 10",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "VI06",
+   "name": "ERA5 850 hPa (48.5N 4.5W) 18 UTC u ∈ [5.7, 6.0]",
+   "value": [
+    5.848526
+   ],
+   "ref": "[5.7, 6.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI06",
+   "name": "… v ∈ [33.3, 33.7]",
+   "value": [
+    33.494247
+   ],
+   "ref": "[33.3, 33.7]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI06",
+   "name": "… T ∈ [5.0, 5.3] °C",
+   "value": [
+    5.122217
+   ],
+   "ref": "[5.0, 5.3]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI07",
+   "name": "|u_850| = 34.0",
+   "value": [
+    34.001027
+   ],
+   "ref": [
+    34.0
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "VI07",
+   "name": "u_i u_i = 5.8² + 33.5² = 1155.89 ≈ 1156 (screen)",
+   "value": [
+    1155.89
+   ],
+   "ref": [
+    1155.89
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI07",
+   "name": "√1155.89 ≈ 34.0",
+   "value": [
+    33.998382
+   ],
+   "ref": [
+    34.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI08",
+   "name": "ERA5 850 hPa wind 17 UTC = (7.6, 23.3)",
+   "value": [
+    7.637146,
+    23.333206
+   ],
+   "ref": [
+    7.6,
+    23.3
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "VI08",
+   "name": "change 18 - 17 UTC (screen inputs) = (-1.8, +10.2)",
+   "value": [
+    -1.8,
+    10.2
+   ],
+   "ref": [
+    -1.8,
+    10.2
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI08",
+   "name": "change at full precision rounds to (-1.8, +10.2)",
+   "value": [
+    -1.78862,
+    10.161041
+   ],
+   "ref": [
+    -1.8,
+    10.2
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "VI09",
+   "name": "along/across from (5.8, 33.5) at 80° = (11.5, 32.0)",
+   "value": [
+    11.529099,
+    31.9839
+   ],
+   "ref": [
+    11.5,
+    32.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI09",
+   "name": "along at full precision = 11.6",
+   "value": [
+    11.575889
+   ],
+   "ref": [
+    11.6
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI09",
+   "name": "√(11.5² + 32.0²) ≈ 34.0 (screen)",
+   "value": [
+    34.003676
+   ],
+   "ref": [
+    34.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI09",
+   "name": "√(5.8² + 33.5²) ≈ 34.0 (screen)",
+   "value": [
+    33.998382
+   ],
+   "ref": [
+    34.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI09",
+   "name": "core.tensors.transform_vector agrees with components_in_axes (|diff| < 1e-9, either sign convention)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI10",
+   "name": "e_along = (0.985, 0.174, 0)",
+   "value": [
+    0.984808,
+    0.173648
+   ],
+   "ref": [
+    0.985,
+    0.174
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "VI10",
+   "name": "5.8×0.985 = 5.71, 33.5×0.174 = 5.83, sum ≈ 11.5",
+   "value": [
+    5.713,
+    5.829,
+    11.542
+   ],
+   "ref": [
+    5.713,
+    5.829,
+    11.542
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "VI11",
+   "name": "∂T/∂x = -3.20, ∂T/∂y = -2.49 K per 100 km (0.25°)",
+   "value": [
+    -3.202192,
+    -2.494212
+   ],
+   "ref": [
+    -3.2,
+    -2.49
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "VI11",
+   "name": "1° centred difference within 0.1 of the 0.25° value",
+   "value": [
+    -3.167732,
+    -2.502995
+   ],
+   "ref": [
+    -3.202192,
+    -2.494212
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "VI12",
+   "name": "east term ≈ -1.86e-4, north ≈ -8.37e-4, sum ≈ -1.02e-3 K/s",
+   "value": [
+    -0.000187,
+    -0.000835,
+    -0.001023
+   ],
+   "ref": [
+    -0.000186,
+    -0.000837,
+    -0.00102
+   ],
+   "tol": [
+    1e-05,
+    2e-05,
+    2e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI12",
+   "name": "advection = -3.68 K/h (spoken -3.7)",
+   "value": [
+    -3.681715
+   ],
+   "ref": [
+    -3.68
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI12",
+   "name": "screen terms: 5.8×(-3.2e-5) = -1.86e-4 ≈ -1.9e-4; 33.5×(-2.5e-5) = -8.375e-4 ≈ -8.4e-4",
+   "value": [
+    -0.000186,
+    -0.000838
+   ],
+   "ref": [
+    -0.00019,
+    -0.00084
+   ],
+   "tol": [
+    5e-06,
+    5e-06
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI12",
+   "name": "screen sum ≈ -1.0e-3 K/s and ×3600 ≈ -3.7 K/h",
+   "value": [
+    -0.001023,
+    -3.68316
+   ],
+   "ref": [
+    -0.001,
+    -3.7
+   ],
+   "tol": [
+    3e-05,
+    0.06
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI12",
+   "name": "north term ≈ 4× the east term (bar ratio drawn)",
+   "value": 4.46,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI12",
+   "name": "dot(u, ∇T) equals advection() at the grid point",
+   "value": [
+    -0.001023
+   ],
+   "ref": [
+    -0.001023
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "VI13",
+   "name": "easy advection = -9e-4 K/s, -3.24 K/h",
+   "value": [
+    -0.0009,
+    -3.24
+   ],
+   "ref": [
+    -0.0009,
+    -3.24
+   ],
+   "tol": [
+    1e-12,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI14",
+   "name": "ERA5 850 T 17/19 UTC = 2.4 / 8.2 °C",
+   "value": [
+    2.379785,
+    8.228662
+   ],
+   "ref": [
+    2.4,
+    8.2
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI14",
+   "name": "rate (8.2 - 2.4)/2 = 2.9 K/h",
+   "value": [
+    2.924438
+   ],
+   "ref": [
+    2.9
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI53",
+   "name": "drift (5.8, 33.5) m/s × 3600 s = (20.9, 120.6) km",
+   "value": [
+    20.88,
+    120.6
+   ],
+   "ref": [
+    20.88,
+    120.6
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "s05",
+   "name": "850 hPa stream west of France: max of the arrow grid 35-48N 15-5W > 30 m/s",
+   "value": [
+    46.084776
+   ],
+   "ref": "[30.0, 60.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI16",
+   "name": "w over Brest 850 hPa 18 UTC ∈ [0.05, 0.3] m/s ('about ten centimetres per second')",
+   "value": [
+    0.094902
+   ],
+   "ref": "[0.05, 0.3]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI16",
+   "name": "w ≈ 0.10 m/s (spoken 'about ten centimetres')",
+   "value": [
+    0.094902
+   ],
+   "ref": [
+    0.1
+   ],
+   "tol": 0.015,
+   "pass": true
+  },
+  {
+   "id": "VI16",
+   "name": "|u_850| / w > 300 ('more than three hundred times slower')",
+   "value": [
+    358.273574
+   ],
+   "ref": "[300, 400]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI17",
+   "name": "z_850 over Brest ∈ [1.0, 1.4] km ('a little more than a kilometre')",
+   "value": [
+    1.195252
+   ],
+   "ref": "[1.0, 1.4]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI41",
+   "name": "GFS 2026-10-28T18 250 hPa jet maximum = 66.1 m/s (spoken 'about sixty-five')",
+   "value": [
+    66.074806
+   ],
+   "ref": [
+    66.1
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "VI41",
+   "name": "jet max at 40.0 N 51.75 W",
+   "value": [
+    40.0,
+    -51.75
+   ],
+   "ref": [
+    40.0,
+    -51.75
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "VI42",
+   "name": "250 + 50 = 300, 250 - 50 = 200",
+   "value": [
+    300.0,
+    200.0
+   ],
+   "ref": [
+    300.0,
+    200.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI43",
+   "name": "√(50² + 250²) = 254.95 ≈ 255",
+   "value": [
+    254.950976
+   ],
+   "ref": [
+    254.95
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "VI44",
+   "name": "force sum (0, 12.5) + (6, -8) + (-6, -4.5) = (0, 0)",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "VI44",
+   "name": "C ⟂ u (dot = 0)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "VI44",
+   "name": "friction antiparallel to the wind: (-6, -4.5) = -0.75 (8, 6)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI44",
+   "name": "|C| = 10e-4 m/s² = f|u| -> |u| = 1e-3 / f(48.45°) ≈ 9.2 m/s (consistent with Brest 9.3)",
+   "value": [
+    9.16212
+   ],
+   "ref": [
+    9.2
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "s12c",
+   "name": "wind (8, 6) crosses the east-west isobars at about 37°",
+   "value": [
+    36.869898
+   ],
+   "ref": "[36.5, 37.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI46",
+   "name": "(5, 1) - (1, 3) = (4, -2)",
+   "value": [
+    4.0,
+    -2.0
+   ],
+   "ref": [
+    4.0,
+    -2.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T17 step from previous hour ≤ 150 km",
+   "value": [
+    60.554555
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T18 step from previous hour ≤ 150 km",
+   "value": [
+    65.954159
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T19 step from previous hour ≤ 150 km",
+   "value": [
+    74.354044
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T20 step from previous hour ≤ 150 km",
+   "value": [
+    108.306061
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T21 step from previous hour ≤ 150 km",
+   "value": [
+    84.544665
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T22 step from previous hour ≤ 150 km",
+   "value": [
+    76.668647
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-01T23 step from previous hour ≤ 150 km",
+   "value": [
+    58.522787
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm continuity: 2023-11-02T00 step from previous hour ≤ 150 km",
+   "value": [
+    48.337438
+   ],
+   "ref": "[0.0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "storm displacement 449 ± 30 km in 6 h ('about four hundred and fifty')",
+   "value": [
+    444.426063
+   ],
+   "ref": [
+    449.0
+   ],
+   "tol": 30.0,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "c ≈ (20.1, 5.1) ± 1 m/s (spoken (20, 5))",
+   "value": [
+    19.888036,
+    5.273349
+   ],
+   "ref": [
+    20.1,
+    5.1
+   ],
+   "tol": 1.0,
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "screen u - c = (5.8 - 20, 33.5 - 5) = (-14.2, 28.5) ≈ (-14, 28)",
+   "value": [
+    -14.2,
+    28.5
+   ],
+   "ref": [
+    -14.0,
+    28.5
+   ],
+   "tol": [
+    0.25,
+    0.51
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI50",
+   "name": "full precision u - c ≈ (-14.3, 28.4)",
+   "value": [
+    -14.03951,
+    28.220898
+   ],
+   "ref": [
+    -14.3,
+    28.4
+   ],
+   "tol": 1.0,
+   "pass": true
+  },
+  {
+   "id": "s05",
+   "name": "Ciarán's central pressure 18 UTC ≈ 961 hPa (L label)",
+   "value": [
+    960.69
+   ],
+   "ref": [
+    961.0
+   ],
+   "tol": 0.6,
+   "pass": true
+  },
+  {
+   "id": "VI45",
+   "name": "u_g at 48N 6W = (30.9, 24.9) ± 1",
+   "value": [
+    30.857096,
+    24.88516
+   ],
+   "ref": [
+    30.9,
+    24.9
+   ],
+   "tol": 1.0,
+   "pass": true
+  },
+  {
+   "id": "VI45",
+   "name": "real 10-m wind = (10.0, 18.0) ± 0.2",
+   "value": [
+    10.0174,
+    17.974789
+   ],
+   "ref": [
+    10.0,
+    18.0
+   ],
+   "tol": 0.2,
+   "pass": true
+  },
+  {
+   "id": "VI45",
+   "name": "u_ag = u - u_g = (-20.9, -6.9) (screen)",
+   "value": [
+    -20.9,
+    -6.9
+   ],
+   "ref": [
+    -20.9,
+    -6.9
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI45",
+   "name": "u_ag at full precision ≈ (-20.8, -6.9)",
+   "value": [
+    -20.839696,
+    -6.910372
+   ],
+   "ref": [
+    -20.9,
+    -6.9
+   ],
+   "tol": 0.3,
+   "pass": true
+  },
+  {
+   "id": "VI47",
+   "name": "Trappes 850 hPa: 235°, 17 m/s -> (13.9, 9.8), z 1402 m",
+   "value": [
+    235.0,
+    17.0,
+    13.93,
+    9.75,
+    1402.0
+   ],
+   "ref": [
+    235.0,
+    17.0,
+    13.93,
+    9.75,
+    1402.0
+   ],
+   "tol": [
+    0,
+    0,
+    0.01,
+    0.01,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI47",
+   "name": "Trappes 500 hPa: 255°, 17 m/s -> (16.4, 4.4), z 5550 m",
+   "value": [
+    255.0,
+    17.0,
+    16.42,
+    4.4,
+    5550.0
+   ],
+   "ref": [
+    255.0,
+    17.0,
+    16.42,
+    4.4,
+    5550.0
+   ],
+   "tol": [
+    0,
+    0,
+    0.01,
+    0.01,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "VI48",
+   "name": "shear (16.4, 4.4) - (13.9, 9.8) = (2.5, -5.4)",
+   "value": [
+    2.5,
+    -5.4
+   ],
+   "ref": [
+    2.5,
+    -5.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "VI48",
+   "name": "|shear| ≈ 5.95 ('about six')",
+   "value": [
+    5.95063
+   ],
+   "ref": [
+    5.95
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "VI48",
+   "name": "veering: direction 235° (850) -> 255° (500), clockwise going up",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI49",
+   "name": "builder anomaly = stored u10_anom_2023 (data-scout product)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "VI49",
+   "name": "box 5S-5N 170-150W cos-lat mean: clim -5.04, Nov 2023 -3.72, anomaly +1.32 m/s",
+   "value": [
+    -5.042642,
+    -3.718891,
+    1.32375
+   ],
+   "ref": [
+    -5.04,
+    -3.72,
+    1.32
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "VI49",
+   "name": "anomaly sign > 0 (trades weakened)",
+   "value": 1.324,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI49",
+   "name": "screen (-3.7) - (-5.0) = +1.3",
+   "value": [
+    1.3
+   ],
+   "ref": [
+    1.3
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "s17",
+   "name": "p_i q_i order 0 (scalar), u_i order 1 (vector)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s28",
+   "name": "u_j u_i,j: one free (i), one dummy (j) -> 3 equations × 3 terms = 9",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s17",
+   "name": "rename_dummy(p_i q_i, i -> j) = p_j q_j",
+   "value": "p_j q_j",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s17",
+   "name": "p_i q_i s_i is rejected (index three times)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI18",
+   "name": "δ = eye(3) = table of e_i · e_j",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI18",
+   "name": "δ_ii = 3",
+   "value": [
+    3.0
+   ],
+   "ref": [
+    3.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s30",
+   "name": "δ_ij u_j = u_i written out",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s32",
+   "name": "δ_ij p_i q_j = p_i q_i",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI19",
+   "name": "six non-zero ε cells (+1 cyclic, -1 reversed)",
+   "value": [
+    [
+     1,
+     2,
+     3,
+     1
+    ],
+    [
+     1,
+     3,
+     2,
+     -1
+    ],
+    [
+     2,
+     1,
+     3,
+     -1
+    ],
+    [
+     2,
+     3,
+     1,
+     1
+    ],
+    [
+     3,
+     1,
+     2,
+     1
+    ],
+    [
+     3,
+     2,
+     1,
+     -1
+    ]
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "VI25",
+   "name": "s34 teaser: the horizontal Coriolis push is ⟂ to the wind and to its right (NH)",
+   "value": [
+    0.00365573,
+    -0.00063834,
+    0.00056575
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s02",
+   "name": "Sahara probe warm (> 15 °C at 18 UTC)",
+   "value": [
+    24.71
+   ],
+   "ref": "[15, 40]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s02",
+   "name": "Siberia probe cold (< -10 °C)",
+   "value": [
+    -21.44
+   ],
+   "ref": "[-45, -10]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s02",
+   "name": "ERA5 2-m T at Brest within 2 K of the station's 10.3 °C",
+   "value": [
+    11.94
+   ],
+   "ref": "[8.3, 12.3]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s01",
+   "name": "RK2 track integrator V1: 10 m/s east for 1 h = 36 km",
+   "value": [
+    36.0
+   ],
+   "ref": [
+    36.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "s04",
+   "name": "ETOPO Brittany: highest point < 400 m (Monts d'Arrée)",
+   "value": [
+    328.481476
+   ],
+   "ref": "[300, 400]",
+   "tol": null,
+   "pass": true
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s08",
+   "data": "data/vi.json",
+   "eq": "u = |u| sin(dir+180), v = |u| cos(dir+180) (from-convention)",
+   "params": {
+    "speed": 9.3,
+    "dir_from_deg": 150.0
+   },
+   "sha256": "c146b35c384f79f26508acee12bd8e653ac7027609e79780c218991316f89d0a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s10",
+   "data": "data/vi.json",
+   "eq": "|u| = sqrt(u_i u_i)",
+   "params": {
+    "a": [
+     -4.65,
+     8.054,
+     0.0
+    ]
+   },
+   "sha256": "e53900a6e4e90cc0402e41510222df8d2212c4aa26838c65cf76b711b14727a6"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s10",
+   "data": "data/vi.json",
+   "eq": "Pythagoras on the floor",
+   "params": {
+    "a": [
+     6.0,
+     8.0,
+     0.0
+    ]
+   },
+   "sha256": "24b1f4ef66b650ff816e519b01742ff1753733d36e1b4c3e3b52743168915b1f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s10",
+   "data": "data/vi.json",
+   "eq": "Pythagoras twice (generic 3-D arrow drawn, not spoken)",
+   "params": {
+    "a": [
+     6.0,
+     8.0,
+     3.0
+    ]
+   },
+   "sha256": "bb2ad8731c15f730a4244e519718eef5e0e2c3ca6e291c6a345ba774a5bd4e20"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s11",
+   "data": "data/vi.json",
+   "eq": "|u| at 850 hPa",
+   "params": {
+    "a": [
+     5.8485260009765625,
+     33.49424743652344,
+     0.0
+    ]
+   },
+   "sha256": "103b74870071fb2998d1def6967d5e9558613b1f836bc08d2f49df4e662a32eb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s18",
+   "data": "data/vi.json",
+   "eq": "u_i u_i (rounded screen inputs 5.8, 33.5)",
+   "params": {
+    "a": [
+     5.8,
+     33.5,
+     0.0
+    ],
+    "b": [
+     5.8,
+     33.5,
+     0.0
+    ]
+   },
+   "sha256": "c01cc1ab7fd555ad33c26c1edcd45a29a769a97f6caebfb7d8fc5535b1ed7298"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.components_in_axes",
+   "scene": "s11",
+   "data": "data/vi.json",
+   "eq": "(u·e_along, u·e_across), bearing 80° (dot products with the rotated basis)",
+   "params": {
+    "u": [
+     5.8,
+     33.5
+    ],
+    "bearing_deg": 80.0
+   },
+   "sha256": "77e2ccbc20425391c0b82840a5bccd0af91780a590ff5b51443eeef4bd88f568"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.components_in_axes",
+   "scene": "s11",
+   "data": "data/vi.json",
+   "eq": "same at full precision",
+   "params": {
+    "u": [
+     5.8485260009765625,
+     33.49424743652344
+    ],
+    "bearing_deg": 80.0
+   },
+   "sha256": "7d00a3c80836db3ed12e0536c29d351ab57f1268d4872ed596ba79d1af0bacd4"
+  },
+  {
+   "fn": "fluidpy.core.tensors.rotation_matrix_2d",
+   "scene": "s11",
+   "data": "data/vi.json",
+   "eq": "rotation by 10° (east -> along-coast axis, bearing 80°)",
+   "params": {
+    "theta": 0.17453292519943295
+   },
+   "sha256": "9e82d39e54acede1914a364bdc0b967a7cbd59f8b5933dbcd305d5fb92cd4362"
+  },
+  {
+   "fn": "fluidpy.core.tensors.transform_vector",
+   "scene": "s11",
+   "data": "data/vi.json",
+   "eq": "u'_i = C_ji u_j (Kundu 2.5); same numbers as components_in_axes",
+   "params": {
+    "u": [
+     5.8,
+     33.5
+    ],
+    "C": [
+     [
+      0.984807753012208,
+      -0.17364817766693033
+     ],
+     [
+      0.17364817766693033,
+      0.984807753012208
+     ]
+    ]
+   },
+   "sha256": "77e2ccbc20425391c0b82840a5bccd0af91780a590ff5b51443eeef4bd88f568"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s15",
+   "data": "data/vi.json",
+   "eq": "u · e_along = 5.8×0.985 + 33.5×0.174 (screen)",
+   "params": {
+    "a": [
+     5.8,
+     33.5,
+     0.0
+    ],
+    "b": [
+     0.985,
+     0.174,
+     0.0
+    ]
+   },
+   "sha256": "4d83148a988f7610d6ba1c71ff6c559d441167ce4c95dbf083dd4cc8958da896"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s26",
+   "data": "data/vi.json",
+   "eq": "u·∇T at the grid point = sum of the two terms",
+   "params": {
+    "a": [
+     5.8485260009765625,
+     33.49424743652344
+    ],
+    "b": [
+     -3.202192447509133e-05,
+     -2.4942122664151165e-05
+    ]
+   },
+   "sha256": "9938b12675d03e0f97d758b2015c60eed28722bd7fdbb172edf25366851033a2"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.omega_to_w",
+   "scene": "s09",
+   "data": "data/vi.json",
+   "eq": "w ≈ -ω/(ρg), ρ = p/(R T_v) (Vallis §2.6.2 ω ≡ Dp/Dt, hydrostatic)",
+   "params": {
+    "omega": -0.9864387512207031,
+    "p": 85000.0,
+    "T": 278.272216796875,
+    "q": 0.006481329910457134
+   },
+   "sha256": "3d128dd0e4b98dbd9acf18fc276fdf25416341124bf22d51f70e14e38ad5abf4"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s12b",
+   "data": "data/vi.json",
+   "eq": "|(50, 250)|",
+   "params": {
+    "a": [
+     50.0,
+     250.0
+    ]
+   },
+   "sha256": "832387a58801d54889a21f64e23cced896fa5e7beca3f49ef540098fa26804c0"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s12c",
+   "data": "data/vi.json",
+   "eq": "Coriolis push ⟂ wind: (6, -8)·(8, 6) = 0",
+   "params": {
+    "a": [
+     6.0,
+     -8.0
+    ],
+    "b": [
+     8.0,
+     6.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s12i",
+   "data": "data/vi.json",
+   "eq": "Ciarán's centre 18 UTC -> 00 UTC",
+   "params": {
+    "lat1": 48.795,
+    "lon1": -11.692,
+    "lat2": 49.667,
+    "lon2": -5.717
+   },
+   "sha256": "fb91b412030502f5bcaf8012a0dbfcdb4661839552e1d756cae317dd6f8581d7"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.initial_bearing",
+   "scene": "s12i",
+   "data": "data/vi.json",
+   "eq": "direction of motion",
+   "params": {
+    "lat1": 48.795,
+    "lon1": -11.692,
+    "lat2": 49.667,
+    "lon2": -5.717
+   },
+   "sha256": "ed5680dbd52a21bc37bbff0e6c83ee3e60d4964fa5236d68aec47b31b173775c"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 6.0,
+    "dir_from_deg": 210.0
+   },
+   "sha256": "5a025a9697da03d82a1d8a903f946632055244ad543a404866ff4a63667d5eeb"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 18.0,
+    "dir_from_deg": 230.0
+   },
+   "sha256": "afe100200941a8fb019fe5f04dd05769d6333f5fd99549b2791ca15219766696"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 19.0,
+    "dir_from_deg": 230.0
+   },
+   "sha256": "af1436945a363359ea6403ea837b73ef697a557cf04a83356de42b101b98b713"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 17.0,
+    "dir_from_deg": 235.0
+   },
+   "sha256": "bce0cde267e98c55ea01dca00ff88b61aac91352be1c7c031dc6226c42e4c5dc"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 15.0,
+    "dir_from_deg": 235.0
+   },
+   "sha256": "8828b7adf81bc893f36b898eb7c1c7c993d6881e20610897f813e440ca346019"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 14.0,
+    "dir_from_deg": 260.0
+   },
+   "sha256": "d7d6ef285043980ef8b0c85cc847b888651662ed1281b0cf03b0029f8f443806"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "IGRA from-direction -> (u, v)",
+   "params": {
+    "speed": 17.0,
+    "dir_from_deg": 255.0
+   },
+   "sha256": "cc422421907fd99a4bfb4492c0bd276bcdc14680884bd74cb17c03e446621068"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s12g",
+   "data": "data/vi.json",
+   "eq": "|shear|",
+   "params": {
+    "a": [
+     2.4999999999999982,
+     -5.4
+    ]
+   },
+   "sha256": "c1bbc2508decd99a598bba7ad3deaa3a3e4fcbe81cc780596fd52fab03787545"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of u_i",
+   "params": {
+    "term": "u_i"
+   },
+   "sha256": "bfee97c2e111f8dc9c43ef28d3c530652d447f549bc17a913c4e006208cd24ba"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of u_i",
+   "params": {
+    "term": "u_i"
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: u_i",
+   "params": {
+    "term": "u_i"
+   },
+   "sha256": "1170b19d41885de51981258189f5c9b0a01905f9481c01d4ae6e24907f1a6812"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of p_i q_i",
+   "params": {
+    "term": "p_i q_i"
+   },
+   "sha256": "f4bf4bd81a3ff9673d5eb01ab5e402e65d909a214ffc12c01bc84dbcee7b33b3"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of p_i q_i",
+   "params": {
+    "term": "p_i q_i"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: p_i q_i",
+   "params": {
+    "term": "p_i q_i"
+   },
+   "sha256": "31f18dfc0a3eeb705adb175324b8910da8c0d765e321e487275a6a284ab92d58"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of p_j q_j",
+   "params": {
+    "term": "p_j q_j"
+   },
+   "sha256": "64be15f04537ac8880e54780474318407a73623e5c8afc376968f0d47d6d3c13"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of p_j q_j",
+   "params": {
+    "term": "p_j q_j"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: p_j q_j",
+   "params": {
+    "term": "p_j q_j"
+   },
+   "sha256": "31f18dfc0a3eeb705adb175324b8910da8c0d765e321e487275a6a284ab92d58"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of u_i u_i",
+   "params": {
+    "term": "u_i u_i"
+   },
+   "sha256": "f4bf4bd81a3ff9673d5eb01ab5e402e65d909a214ffc12c01bc84dbcee7b33b3"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of u_i u_i",
+   "params": {
+    "term": "u_i u_i"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: u_i u_i",
+   "params": {
+    "term": "u_i u_i"
+   },
+   "sha256": "fdb90a23e0fe34079b866cc51cb24ef69e24c271fff7abf3b427430c50f86532"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of u_j T,j",
+   "params": {
+    "term": "u_j T,j"
+   },
+   "sha256": "64be15f04537ac8880e54780474318407a73623e5c8afc376968f0d47d6d3c13"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of u_j T,j",
+   "params": {
+    "term": "u_j T,j"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: u_j T,j",
+   "params": {
+    "term": "u_j T,j"
+   },
+   "sha256": "6dd33a62fc53bba4dca309dcb42bfb82bd981959370c219343b841f987db6b28"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of u_j u_i,j",
+   "params": {
+    "term": "u_j u_i,j"
+   },
+   "sha256": "d7a7552ac65e0f5d15731d3d7cae26153c04c03ecdf36785111b664eb7855cf8"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of u_j u_i,j",
+   "params": {
+    "term": "u_j u_i,j"
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: u_j u_i,j",
+   "params": {
+    "term": "u_j u_i,j"
+   },
+   "sha256": "1c151b610b70ee3a4d90fb84fc13b85066d91ca3db3be6b55f9c3049451083be"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of delta_ij u_j",
+   "params": {
+    "term": "delta_ij u_j"
+   },
+   "sha256": "d7a7552ac65e0f5d15731d3d7cae26153c04c03ecdf36785111b664eb7855cf8"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of delta_ij u_j",
+   "params": {
+    "term": "delta_ij u_j"
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: delta_ij u_j",
+   "params": {
+    "term": "delta_ij u_j"
+   },
+   "sha256": "1170b19d41885de51981258189f5c9b0a01905f9481c01d4ae6e24907f1a6812"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of delta_ii",
+   "params": {
+    "term": "delta_ii"
+   },
+   "sha256": "f4bf4bd81a3ff9673d5eb01ab5e402e65d909a214ffc12c01bc84dbcee7b33b3"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of delta_ii",
+   "params": {
+    "term": "delta_ii"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: delta_ii",
+   "params": {
+    "term": "delta_ii"
+   },
+   "sha256": "161f4c0b1a18a0501127332c387e782b5acc10c6c7a9f7e494c1e3394c49bad5"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of delta_ij p_i q_j",
+   "params": {
+    "term": "delta_ij p_i q_j"
+   },
+   "sha256": "48b2a3dbe400950e150f0f47d47d2e2e41e2dd3b454995f43290cd3fe35bb7e0"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of delta_ij p_i q_j",
+   "params": {
+    "term": "delta_ij p_i q_j"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: delta_ij p_i q_j",
+   "params": {
+    "term": "delta_ij p_i q_j"
+   },
+   "sha256": "31f18dfc0a3eeb705adb175324b8910da8c0d765e321e487275a6a284ab92d58"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of u_j x_i,j",
+   "params": {
+    "term": "u_j x_i,j"
+   },
+   "sha256": "d7a7552ac65e0f5d15731d3d7cae26153c04c03ecdf36785111b664eb7855cf8"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of u_j x_i,j",
+   "params": {
+    "term": "u_j x_i,j"
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: u_j x_i,j",
+   "params": {
+    "term": "u_j x_i,j"
+   },
+   "sha256": "d13d76b973be99e268ab6057713b7705561ab5a11e263c96c5e9ef7fef21fdb9"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.classify_indices",
+   "scene": "s13-s32",
+   "data": "data/vi.json",
+   "eq": "free / dummy indices of x_i,j",
+   "params": {
+    "term": "x_i,j"
+   },
+   "sha256": "e194f9530252d9c330f8f3213cfa7128add3eab57268971b3377315d312715bf"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.tensor_order",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "order of x_i,j",
+   "params": {
+    "term": "x_i,j"
+   },
+   "sha256": "3f710ac088db33363087de2b9a657541fe5447821debaa9fe5cbd538eb1a5f29"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.expand_indices_str",
+   "scene": "s28",
+   "data": "data/vi.json",
+   "eq": "written out: x_i,j",
+   "params": {
+    "term": "x_i,j"
+   },
+   "sha256": "407578708a5df8696efab2ec6fb1642fc34f6ea20b137aad26b44c9fa03071b1"
+  },
+  {
+   "fn": "fluidpy.core.index_notation.rename_dummy",
+   "scene": "s17",
+   "data": "data/vi.json",
+   "eq": "dummy letters do not matter",
+   "params": {
+    "term": "p_i q_i",
+    "old": "i",
+    "new": "j"
+   },
+   "sha256": "ecd6f78504407a45543347b5fc4b7ea427c6d1592fd6e5ec334a3a2c581b4df7"
+  },
+  {
+   "fn": "fluidpy.core.tensors.kronecker_delta",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "δ_ij = e_i · e_j",
+   "params": {
+    "n": 3
+   },
+   "sha256": "1332df685c45a61a0ac008a6a653295b8c5655361c1d34b6304b22ec40235fb8"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_1 · e_1",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_1 · e_2",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_1 · e_3",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_2 · e_1",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_2 · e_2",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_2 · e_3",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_3 · e_1",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_3 · e_2",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s29",
+   "data": "data/vi.json",
+   "eq": "e_3 · e_3",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.core.tensors.levi_civita",
+   "scene": "s34",
+   "data": "data/vi.json",
+   "eq": "ε_ijk (teaser cube)",
+   "params": {},
+   "sha256": "5f794cfc30b8683937c1e30e1dc18abc271d5e01c2995b1774400c515a4d0392"
+  }
+ ],
+ "physics_recorded": [
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s12i",
+   "data": "data/vi.json",
+   "eq": "minimum of msl, tracked by continuity (box ±2° lat, ±3° lon round the previous hour)",
+   "params": null,
+   "sha256": null,
+   "note": "grid input; recorded with its outputs in vi.json -> storm.track"
+  }
+ ],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s25",
+   "eq": "∂T/∂x_i on the sphere (centred differences)",
+   "params": {
+    "F": "array (141, 221), sha256 a0a26b1a03faaa526bd91a4c12a52490b6798fa11fdae325daf2a30908cfbb69",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c"
+   },
+   "output_sha256": "2b0eb0845f371007d0aa39b2708e0fea1099fb6e649f866c338a023de1683122"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s25",
+   "eq": "1° centred-difference robustness check",
+   "params": {
+    "F": "array (71, 111), sha256 b3cd56001548d13008b6fea7d0759182068adb3d1414661751c6a4cbb95aa19a",
+    "lat": "array (71,), sha256 9dcaa1d2e2468aa4987e53634a7812a2e931f471a649606b10ee8fb7bec44a94",
+    "lon": "array (111,), sha256 61dc580986264421f7a51902a977e9b398d1970a4ad29db9b0440bd022cc0071"
+   },
+   "output_sha256": "9277b978804eb65480519f51a8ed4ec320581aae844c18860878830e70fe5e92"
+  },
+  {
+   "fn": "fluidpy.diag.advection.advection",
+   "scene": "s26",
+   "eq": "u_j ∂T/∂x_j on the sphere (F2)",
+   "params": {
+    "F": "array (141, 221), sha256 a0a26b1a03faaa526bd91a4c12a52490b6798fa11fdae325daf2a30908cfbb69",
+    "u": "array (141, 221), sha256 7408cdc83865dc918f43c4303c09b68649f73c03944c146a0bd87ed8a597fe4e",
+    "v": "array (141, 221), sha256 79a8eb890690e5c26c176d788fd5d43043e29b29db3637d8a3d56cf1d90f9b0f",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c"
+   },
+   "output_sha256": "5af0ae6ed15c14a9741cd1ad2eacf3cac3877389f8041c952e8ac5165dd5329d"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.geostrophic_wind_from_msl",
+   "scene": "s12d",
+   "eq": "u_g = -(1/ρ0 f) ∂p/∂y, v_g = (1/ρ0 f) ∂p/∂x (Vallis §2.8)",
+   "params": {
+    "msl": "array (141, 241), sha256 3edd3849086348c16fde3ba526ade7b59ad15c7d49c7592d6f3a95022ef9d8d4",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6"
+   },
+   "output_sha256": "f74d734548c41b5ef802848bc6ff57faf35903f9482c44a5d5d1122d17886e9d"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.monthly_anomaly",
+   "scene": "s12h",
+   "eq": "u' = u_2023 - mean(Nov 1991-2020)",
+   "params": {
+    "field": "array (33, 61, 360), sha256 9dc757ba1c53cba9e3a07db940fe9bfa370e0c9ff9b08c476cca29f60346446e",
+    "month": 11,
+    "year": 2023,
+    "return_parts": true
+   },
+   "output_sha256": "e71e3d61ca0a0e2181903bcca3be075cbd517b4fc2787dc6b13ddddc76076275"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.monthly_anomaly",
+   "scene": "s12h",
+   "eq": "v' (component-wise vector anomaly)",
+   "params": {
+    "field": "array (33, 61, 360), sha256 c745e9a3377a2be0060d9f173ed279dff5b58991757a2279d422734f77f28e42",
+    "month": 11,
+    "year": 2023,
+    "return_parts": true
+   },
+   "output_sha256": "97eaf439de0c99924d58184236897cea03dd2c0ab6a65f89e612bd13e0fba846"
+  }
+ ]
+}

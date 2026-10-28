@@ -338,6 +338,23 @@ _add(Style(
      {"kind": "sparse", "inst": "bell", "notes": [76, 80, 83, 85, 88], "gap": [5.0, 9.0], "gain": 0.12}],
     lp_hz=4200, reverb={"seconds": 4.0, "decay": 1.0, "wet": 0.38, "tone_hz": 3800}))
 
+# ch00_vectors_index_notation (#1a, 2026-10-28; storyboard audio.music.spec): E-flat major, 9/8 at 66 dotted-quarter
+# (eighth = 60/66/3 s; three groups of three eighths, nine per bar like the nine terms u_j du_i/dx_j). Each chord holds
+# only root-third-fifth above the bass, so a three-note "up" cell is always root → third → fifth. The celesta plays a
+# cell on the first group of every bar; a soft marimba answers one octave lower on the last group of every second bar.
+E9_8 = 60.0 / 66.0 / 3.0
+_add(Style(
+    "index-lattice", "Calm and countable: E-flat major in 9/8, celesta root-third-fifth cells answered every second bar "
+    "by a soft marimba an octave lower, over a quiet glass pad (no drums).",
+    "index notation, vectors and components, counting and lattices (Chapter 0 notation movies)", "E-flat major",
+    [[39, 51, 55, 58], [36, 48, 51, 55], [32, 44, 48, 51], [34, 46, 50, 53]], 10.0, 3.0,
+    "9/8 at 66 dotted-quarter (eighth ≈ 0.303 s)", [{"timbre": "glass", "gain": 0.5 * 0.36, "octave": 12, "detune": 5.0}], 0.28,
+    [{"kind": "arp", "inst": "celesta", "steps": "xxx......", "step_s": E9_8, "octave": 24, "order": "up",
+      "gain": 0.22, "pan": "spread", "vel": [0.55, 0.8], "breath": 26.0},
+     {"kind": "arp", "inst": "marimba", "steps": "...............xxx", "step_s": E9_8, "octave": 12, "order": "up",
+      "gain": 0.30, "pan": "centre", "vel": [0.45, 0.65], "breath": 30.0}],
+    lp_hz=6000, reverb={"seconds": 4.2, "decay": 1.05, "wet": 0.28, "tone_hz": 3800}, fade_in=5.0, fade_out=8.0))
+
 
 # ===================================================================================================== composer
 def _chord_env(t: np.ndarray, k: int, cs: float, xf: float) -> np.ndarray:

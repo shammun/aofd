@@ -49,6 +49,8 @@ respell:
   hectopascal: "[hectopascal](/hˈɛktəpˌæskᵊl/)"
   hectopascals: "[hectopascals](/hˈɛktəpˌæskᵊlz/)"
   radiosonde: "[radiosonde](/ɹˈAdiOsˌɑnd/)"
+  # ch00_vectors_index_notation (2026-10-28): default G2P reads Kronecker as kɹˈOŋkəɹ ("KRONG-ker")
+  Kronecker: "[Kronecker](/kɹˈOnɛkəɹ/)"
   # Brest (bɹˈɛst), Singapore (sˈɪŋəpˌɔɹ), Brittany (bɹˈɪtəni) and the ITCZ entry above read correctly: no override
 # Spoken maths: the script should already say maths in words; these catch common symbols if they slip through.
 symbols:

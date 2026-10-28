@@ -1,0 +1,3458 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "scenes": [
+  {
+   "id": "s00_title",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "In this video, we'll learn vectors and index notation the easy way, and see how meteorology uses them to write the wind, how it changes, and the warmth it carries, in a few short symbols.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 12.85,
+     "dur": 12.55,
+     "start_frame": 9,
+     "end_frame": 386
+    }
+   ],
+   "end": 13.65,
+   "start_frame": 9,
+   "end_frame": 410
+  },
+  {
+   "id": "s01_hook",
+   "start": 13.65,
+   "sentences": [
+    {
+     "text": "What are vectors and index notation?",
+     "audio_text": null,
+     "start": 13.65,
+     "end": 16.675,
+     "dur": 3.025,
+     "start_frame": 410,
+     "end_frame": 500
+    },
+    {
+     "text": "Let's see what they are, why they're built this way, and what they tell us about the wind.",
+     "audio_text": null,
+     "start": 17.025,
+     "end": 22.35,
+     "dur": 5.325,
+     "start_frame": 511,
+     "end_frame": 670
+    }
+   ],
+   "end": 23.15,
+   "start_frame": 410,
+   "end_frame": 694
+  },
+  {
+   "id": "s02_scalar_globe",
+   "start": 23.15,
+   "sentences": [
+    {
+     "text": "Let's start with temperature.",
+     "audio_text": null,
+     "start": 23.15,
+     "end": 25.375,
+     "dur": 2.225,
+     "start_frame": 695,
+     "end_frame": 761
+    },
+    {
+     "text": "This globe shows the air temperature two metres above the ground all over the Earth, at six in the evening, universal time, on the first of November twenty twenty-three.",
+     "audio_text": null,
+     "start": 25.725,
+     "end": 36.825,
+     "dur": 11.1,
+     "start_frame": 772,
+     "end_frame": 1105
+    },
+    {
+     "text": "Universal time is the one clock that weather services share around the world.",
+     "audio_text": null,
+     "start": 37.175,
+     "end": 42.65,
+     "dur": 5.475,
+     "start_frame": 1115,
+     "end_frame": 1280
+    },
+    {
+     "text": "The map comes from a reanalysis, called ERA5: a best estimate of the whole atmosphere, made by blending millions of observations into a weather model.",
+     "audio_text": "The map comes from a reanalysis, called [ERA5](/ˌiˌɑɹˈA fˈIv/): a best estimate of the whole atmosphere, made by blending millions of observations into a weather model.",
+     "start": 43.0,
+     "end": 53.8,
+     "dur": 10.8,
+     "start_frame": 1290,
+     "end_frame": 1614
+    },
+    {
+     "text": "At every place, the temperature is a single number.",
+     "audio_text": null,
+     "start": 54.15,
+     "end": 58.0,
+     "dur": 3.85,
+     "start_frame": 1625,
+     "end_frame": 1740
+    },
+    {
+     "text": "At Brest, a port at the western tip of France, the weather station read ten point three degrees Celsius.",
+     "audio_text": null,
+     "start": 58.35,
+     "end": 65.6,
+     "dur": 7.25,
+     "start_frame": 1751,
+     "end_frame": 1968
+    }
+   ],
+   "end": 66.4,
+   "start_frame": 694,
+   "end_frame": 1992
+  },
+  {
+   "id": "s03_scalar_word",
+   "start": 66.4,
+   "sentences": [
+    {
+     "text": "A quantity like this, one number with a unit and nothing more, is called a scalar.",
+     "audio_text": null,
+     "start": 66.4,
+     "end": 72.2,
+     "dur": 5.8,
+     "start_frame": 1992,
+     "end_frame": 2166
+    },
+    {
+     "text": "Pressure, density and humidity are scalars too.",
+     "audio_text": null,
+     "start": 72.55,
+     "end": 76.175,
+     "dur": 3.625,
+     "start_frame": 2177,
+     "end_frame": 2285
+    },
+    {
+     "text": "Because the temperature has a value at every place, the whole map is called a scalar field.",
+     "audio_text": null,
+     "start": 76.525,
+     "end": 82.425,
+     "dur": 5.9,
+     "start_frame": 2296,
+     "end_frame": 2473
+    },
+    {
+     "text": "And a scalar doesn't care which way you face.",
+     "audio_text": null,
+     "start": 82.775,
+     "end": 85.875,
+     "dur": 3.1,
+     "start_frame": 2483,
+     "end_frame": 2576
+    },
+    {
+     "text": "Turn around on the same spot, and the thermometer still reads ten point three.",
+     "audio_text": null,
+     "start": 86.225,
+     "end": 91.475,
+     "dur": 5.25,
+     "start_frame": 2587,
+     "end_frame": 2744
+    }
+   ],
+   "end": 92.275,
+   "start_frame": 1992,
+   "end_frame": 2768
+  },
+  {
+   "id": "s04_vector_wind",
+   "start": 92.275,
+   "sentences": [
+    {
+     "text": "Now let's look at the wind, at the same place and the same moment.",
+     "audio_text": null,
+     "start": 92.275,
+     "end": 96.725,
+     "dur": 4.45,
+     "start_frame": 2768,
+     "end_frame": 2902
+    },
+    {
+     "text": "The station at Brest reported a wind of nine point three metres per second, from the south-south-east.",
+     "audio_text": null,
+     "start": 97.075,
+     "end": 103.9,
+     "dur": 6.825,
+     "start_frame": 2912,
+     "end_frame": 3117
+    },
+    {
+     "text": "A single number can't describe this.",
+     "audio_text": null,
+     "start": 104.25,
+     "end": 106.925,
+     "dur": 2.675,
+     "start_frame": 3127,
+     "end_frame": 3208
+    },
+    {
+     "text": "We need to know how fast the air moves, and which way it goes.",
+     "audio_text": null,
+     "start": 107.275,
+     "end": 111.45,
+     "dur": 4.175,
+     "start_frame": 3218,
+     "end_frame": 3343
+    },
+    {
+     "text": "A quantity with a size and a direction is called a vector, and we draw it as an arrow.",
+     "audio_text": null,
+     "start": 111.8,
+     "end": 117.875,
+     "dur": 6.075,
+     "start_frame": 3354,
+     "end_frame": 3536
+    },
+    {
+     "text": "The arrow's length shows the speed, and the arrow points the way the air is moving.",
+     "audio_text": null,
+     "start": 118.225,
+     "end": 123.55,
+     "dur": 5.325,
+     "start_frame": 3547,
+     "end_frame": 3706
+    },
+    {
+     "text": "Careful, though: weather reports give the direction the wind comes from.",
+     "audio_text": null,
+     "start": 123.9,
+     "end": 128.65,
+     "dur": 4.75,
+     "start_frame": 3717,
+     "end_frame": 3859
+    },
+    {
+     "text": "This wind comes from the south-south-east, so the air moves towards the north-north-west.",
+     "audio_text": null,
+     "start": 129.0,
+     "end": 134.825,
+     "dur": 5.825,
+     "start_frame": 3870,
+     "end_frame": 4045
+    }
+   ],
+   "end": 135.625,
+   "start_frame": 2768,
+   "end_frame": 4069
+  },
+  {
+   "id": "s05_vector_field",
+   "start": 135.625,
+   "sentences": [
+    {
+     "text": "Draw an arrow at every place, and you get a vector field.",
+     "audio_text": null,
+     "start": 135.625,
+     "end": 139.725,
+     "dur": 4.1,
+     "start_frame": 4069,
+     "end_frame": 4192
+    },
+    {
+     "text": "Here are the winds a little more than a kilometre above western Europe at that moment, as Storm Ciarán, a deep area of low pressure, was approaching.",
+     "audio_text": "Here are the winds a little more than a kilometre above western Europe at that moment, as Storm Keer-awn, a deep area of low pressure, was approaching.",
+     "start": 140.075,
+     "end": 150.0,
+     "dur": 9.925,
+     "start_frame": 4202,
+     "end_frame": 4500
+    },
+    {
+     "text": "Over the sea west of France, the air was streaming north at more than thirty metres per second.",
+     "audio_text": null,
+     "start": 150.35,
+     "end": 156.375,
+     "dur": 6.025,
+     "start_frame": 4510,
+     "end_frame": 4691
+    },
+    {
+     "text": "Arrows show the wind at a glance.",
+     "audio_text": null,
+     "start": 156.725,
+     "end": 159.325,
+     "dur": 2.6,
+     "start_frame": 4702,
+     "end_frame": 4780
+    },
+    {
+     "text": "But to calculate with them, we need numbers.",
+     "audio_text": null,
+     "start": 159.675,
+     "end": 163.0,
+     "dur": 3.325,
+     "start_frame": 4790,
+     "end_frame": 4890
+    }
+   ],
+   "end": 163.8,
+   "start_frame": 4069,
+   "end_frame": 4914
+  },
+  {
+   "id": "s06_basis",
+   "start": 163.8,
+   "sentences": [
+    {
+     "text": "So let's set up three directions at Brest.",
+     "audio_text": null,
+     "start": 163.8,
+     "end": 166.675,
+     "dur": 2.875,
+     "start_frame": 4914,
+     "end_frame": 5000
+    },
+    {
+     "text": "One axis points east, one points north, and one points straight up, away from the ground.",
+     "audio_text": null,
+     "start": 167.025,
+     "end": 173.225,
+     "dur": 6.2,
+     "start_frame": 5011,
+     "end_frame": 5197
+    },
+    {
+     "text": "Along each axis we put a unit vector: an arrow exactly one unit long.",
+     "audio_text": null,
+     "start": 173.575,
+     "end": 179.325,
+     "dur": 5.75,
+     "start_frame": 5207,
+     "end_frame": 5380
+    },
+    {
+     "text": "We'll call them e one, e two and e three, for east, north and up.",
+     "audio_text": null,
+     "start": 179.675,
+     "end": 184.425,
+     "dur": 4.75,
+     "start_frame": 5390,
+     "end_frame": 5533
+    },
+    {
+     "text": "Here the small numbers one, two and three don't take part in any calculation.",
+     "audio_text": null,
+     "start": 184.775,
+     "end": 190.1,
+     "dur": 5.325,
+     "start_frame": 5543,
+     "end_frame": 5703
+    },
+    {
+     "text": "They just label the three directions.",
+     "audio_text": null,
+     "start": 190.45,
+     "end": 193.2,
+     "dur": 2.75,
+     "start_frame": 5713,
+     "end_frame": 5796
+    },
+    {
+     "text": "The three unit vectors are at right angles to each other, and together they're called a basis.",
+     "audio_text": null,
+     "start": 193.55,
+     "end": 199.725,
+     "dur": 6.175,
+     "start_frame": 5806,
+     "end_frame": 5992
+    }
+   ],
+   "end": 200.525,
+   "start_frame": 4914,
+   "end_frame": 6016
+  },
+  {
+   "id": "s07_components_easy",
+   "start": 200.525,
+   "sentences": [
+    {
+     "text": "Any arrow can be built from these three.",
+     "audio_text": null,
+     "start": 200.525,
+     "end": 203.325,
+     "dur": 2.8,
+     "start_frame": 6016,
+     "end_frame": 6100
+    },
+    {
+     "text": "Let's try an easy one first: a wind that blows six metres per second towards the east and eight towards the north.",
+     "audio_text": null,
+     "start": 203.675,
+     "end": 211.2,
+     "dur": 7.525,
+     "start_frame": 6110,
+     "end_frame": 6336
+    },
+    {
+     "text": "Walk six steps along e one, then eight along e two, and you arrive at the arrow's tip.",
+     "audio_text": null,
+     "start": 211.55,
+     "end": 217.75,
+     "dur": 6.2,
+     "start_frame": 6346,
+     "end_frame": 6532
+    },
+    {
+     "text": "These two numbers, six and eight, are the wind's components.",
+     "audio_text": null,
+     "start": 218.1,
+     "end": 222.2,
+     "dur": 4.1,
+     "start_frame": 6543,
+     "end_frame": 6666
+    },
+    {
+     "text": "This wind doesn't rise or sink, so its third component is zero.",
+     "audio_text": null,
+     "start": 222.55,
+     "end": 227.35,
+     "dur": 4.8,
+     "start_frame": 6676,
+     "end_frame": 6820
+    },
+    {
+     "text": "So the wind is six times e one, plus eight times e two, plus zero times e three.",
+     "audio_text": null,
+     "start": 227.7,
+     "end": 233.7,
+     "dur": 6.0,
+     "start_frame": 6831,
+     "end_frame": 7011
+    }
+   ],
+   "end": 234.5,
+   "start_frame": 6016,
+   "end_frame": 7035
+  },
+  {
+   "id": "s08_components_real",
+   "start": 234.5,
+   "sentences": [
+    {
+     "text": "Now the real wind at Brest.",
+     "audio_text": null,
+     "start": 234.5,
+     "end": 236.8,
+     "dur": 2.3,
+     "start_frame": 7035,
+     "end_frame": 7104
+    },
+    {
+     "text": "It comes from one hundred and fifty degrees, measured clockwise from north, as seen from above.",
+     "audio_text": null,
+     "start": 237.15,
+     "end": 243.625,
+     "dur": 6.475,
+     "start_frame": 7114,
+     "end_frame": 7309
+    },
+    {
+     "text": "So the air moves the opposite way, towards three hundred and thirty degrees.",
+     "audio_text": null,
+     "start": 243.975,
+     "end": 249.025,
+     "dur": 5.05,
+     "start_frame": 7319,
+     "end_frame": 7471
+    },
+    {
+     "text": "How much of it moves east, and how much north?",
+     "audio_text": null,
+     "start": 249.375,
+     "end": 252.675,
+     "dur": 3.3,
+     "start_frame": 7481,
+     "end_frame": 7580
+    },
+    {
+     "text": "The east part is the speed times the sine of three hundred and thirty degrees, which is minus a half.",
+     "audio_text": null,
+     "start": 253.025,
+     "end": 259.9,
+     "dur": 6.875,
+     "start_frame": 7591,
+     "end_frame": 7797
+    },
+    {
+     "text": "So it's nine point three times minus a half: minus four point six five metres per second.",
+     "audio_text": null,
+     "start": 260.25,
+     "end": 266.55,
+     "dur": 6.3,
+     "start_frame": 7807,
+     "end_frame": 7996
+    },
+    {
+     "text": "The minus means the air moves partly towards the west.",
+     "audio_text": null,
+     "start": 266.9,
+     "end": 270.75,
+     "dur": 3.85,
+     "start_frame": 8007,
+     "end_frame": 8122
+    },
+    {
+     "text": "The north part is the speed times the cosine of three hundred and thirty degrees, about point eight six six.",
+     "audio_text": null,
+     "start": 271.1,
+     "end": 278.3,
+     "dur": 7.2,
+     "start_frame": 8133,
+     "end_frame": 8349
+    },
+    {
+     "text": "That gives eight point zero five metres per second.",
+     "audio_text": null,
+     "start": 278.65,
+     "end": 282.525,
+     "dur": 3.875,
+     "start_frame": 8360,
+     "end_frame": 8476
+    },
+    {
+     "text": "Meteorologists call the three components u, v and w: u towards the east, v towards the north, and w upwards.",
+     "audio_text": null,
+     "start": 282.875,
+     "end": 291.6,
+     "dur": 8.725,
+     "start_frame": 8486,
+     "end_frame": 8748
+    },
+    {
+     "text": "Near the ground, w is almost zero.",
+     "audio_text": null,
+     "start": 291.95,
+     "end": 295.325,
+     "dur": 3.375,
+     "start_frame": 8759,
+     "end_frame": 8860
+    }
+   ],
+   "end": 296.125,
+   "start_frame": 7035,
+   "end_frame": 8884
+  },
+  {
+   "id": "s09_up_component",
+   "start": 296.125,
+   "sentences": [
+    {
+     "text": "A little more than a kilometre up, the reanalysis gives the up component too.",
+     "audio_text": null,
+     "start": 296.125,
+     "end": 301.45,
+     "dur": 5.325,
+     "start_frame": 8884,
+     "end_frame": 9044
+    },
+    {
+     "text": "Over Brest at this hour, the air was rising at about ten centimetres per second.",
+     "audio_text": null,
+     "start": 301.8,
+     "end": 307.5,
+     "dur": 5.7,
+     "start_frame": 9054,
+     "end_frame": 9225
+    },
+    {
+     "text": "That's around three hundred times slower than the wind across the map, and it's why weather maps usually draw only the flat part of the wind.",
+     "audio_text": null,
+     "start": 307.85,
+     "end": 316.425,
+     "dur": 8.575,
+     "start_frame": 9236,
+     "end_frame": 9493
+    },
+    {
+     "text": "Still, this slow rising is what builds the clouds.",
+     "audio_text": null,
+     "start": 316.775,
+     "end": 320.275,
+     "dur": 3.5,
+     "start_frame": 9503,
+     "end_frame": 9608
+    }
+   ],
+   "end": 321.075,
+   "start_frame": 8884,
+   "end_frame": 9632
+  },
+  {
+   "id": "s10_magnitude",
+   "start": 321.075,
+   "sentences": [
+    {
+     "text": "How long is the arrow?",
+     "audio_text": null,
+     "start": 321.075,
+     "end": 323.025,
+     "dur": 1.95,
+     "start_frame": 9632,
+     "end_frame": 9691
+    },
+    {
+     "text": "On a flat map, Pythagoras' theorem gives the length from two components: the square root of six squared plus eight squared, which is ten.",
+     "audio_text": null,
+     "start": 323.375,
+     "end": 332.525,
+     "dur": 9.15,
+     "start_frame": 9701,
+     "end_frame": 9976
+    },
+    {
+     "text": "In three dimensions, we use Pythagoras twice.",
+     "audio_text": null,
+     "start": 332.875,
+     "end": 336.4,
+     "dur": 3.525,
+     "start_frame": 9986,
+     "end_frame": 10092
+    },
+    {
+     "text": "First across the floor, to the point straight below the tip, and then up to the tip.",
+     "audio_text": null,
+     "start": 336.75,
+     "end": 342.05,
+     "dur": 5.3,
+     "start_frame": 10103,
+     "end_frame": 10262
+    },
+    {
+     "text": "So the length is the square root of the sum of all three components squared.",
+     "audio_text": null,
+     "start": 342.4,
+     "end": 347.275,
+     "dur": 4.875,
+     "start_frame": 10272,
+     "end_frame": 10418
+    },
+    {
+     "text": "The length is also called the magnitude, and we write it with two straight bars.",
+     "audio_text": null,
+     "start": 347.625,
+     "end": 352.575,
+     "dur": 4.95,
+     "start_frame": 10429,
+     "end_frame": 10577
+    },
+    {
+     "text": "For the real wind at Brest, it's the square root of four point six five squared, plus eight point zero five squared, plus zero squared.",
+     "audio_text": null,
+     "start": 352.925,
+     "end": 362.05,
+     "dur": 9.125,
+     "start_frame": 10588,
+     "end_frame": 10862
+    },
+    {
+     "text": "That's nine point three, the speed the station reported.",
+     "audio_text": null,
+     "start": 362.4,
+     "end": 366.5,
+     "dur": 4.1,
+     "start_frame": 10872,
+     "end_frame": 10995
+    },
+    {
+     "text": "So the magnitude of the wind vector is the wind speed.",
+     "audio_text": null,
+     "start": 366.85,
+     "end": 370.875,
+     "dur": 4.025,
+     "start_frame": 11006,
+     "end_frame": 11126
+    }
+   ],
+   "end": 371.675,
+   "start_frame": 9632,
+   "end_frame": 11150
+  },
+  {
+   "id": "s11_other_axes",
+   "start": 371.675,
+   "sentences": [
+    {
+     "text": "Now let's turn the axes and keep the arrow.",
+     "audio_text": null,
+     "start": 371.675,
+     "end": 374.75,
+     "dur": 3.075,
+     "start_frame": 11150,
+     "end_frame": 11243
+    },
+    {
+     "text": "Along Brittany's north coast, a forecaster might prefer one axis along the coast and one across it.",
+     "audio_text": null,
+     "start": 375.1,
+     "end": 382.275,
+     "dur": 7.175,
+     "start_frame": 11253,
+     "end_frame": 11468
+    },
+    {
+     "text": "Take the wind a kilometre up, which blew at thirty four metres per second.",
+     "audio_text": null,
+     "start": 382.625,
+     "end": 387.65,
+     "dur": 5.025,
+     "start_frame": 11479,
+     "end_frame": 11630
+    },
+    {
+     "text": "Measured along the east and north axes, its components are five point eight and thirty three point five.",
+     "audio_text": null,
+     "start": 388.0,
+     "end": 395.25,
+     "dur": 7.25,
+     "start_frame": 11640,
+     "end_frame": 11858
+    },
+    {
+     "text": "Measured along the coast and across it, they're eleven point five and thirty two.",
+     "audio_text": null,
+     "start": 395.6,
+     "end": 400.975,
+     "dur": 5.375,
+     "start_frame": 11868,
+     "end_frame": 12029
+    },
+    {
+     "text": "The components changed, because they depend on the axes we choose.",
+     "audio_text": null,
+     "start": 401.325,
+     "end": 406.025,
+     "dur": 4.7,
+     "start_frame": 12040,
+     "end_frame": 12181
+    },
+    {
+     "text": "But the arrow didn't move, and its length is thirty four either way.",
+     "audio_text": null,
+     "start": 406.375,
+     "end": 411.025,
+     "dur": 4.65,
+     "start_frame": 12191,
+     "end_frame": 12331
+    },
+    {
+     "text": "So a vector is the arrow itself, and its components describe it in one choice of axes.",
+     "audio_text": null,
+     "start": 411.375,
+     "end": 417.575,
+     "dur": 6.2,
+     "start_frame": 12341,
+     "end_frame": 12527
+    },
+    {
+     "text": "Its length is a scalar: it's the same in any axes.",
+     "audio_text": null,
+     "start": 417.925,
+     "end": 421.85,
+     "dur": 3.925,
+     "start_frame": 12538,
+     "end_frame": 12656
+    },
+    {
+     "text": "Turning axes, and the other coordinates we use on a round Earth, get their own movie later in the series.",
+     "audio_text": null,
+     "start": 422.2,
+     "end": 429.325,
+     "dur": 7.125,
+     "start_frame": 12666,
+     "end_frame": 12880
+    }
+   ],
+   "end": 430.125,
+   "start_frame": 11150,
+   "end_frame": 12904
+  },
+  {
+   "id": "s12_position",
+   "start": 430.125,
+   "sentences": [
+    {
+     "text": "Places are vectors too.",
+     "audio_text": null,
+     "start": 430.125,
+     "end": 432.3,
+     "dur": 2.175,
+     "start_frame": 12904,
+     "end_frame": 12969
+    },
+    {
+     "text": "Put the origin of our axes at Brest airport.",
+     "audio_text": null,
+     "start": 432.65,
+     "end": 436.15,
+     "dur": 3.5,
+     "start_frame": 12980,
+     "end_frame": 13085
+    },
+    {
+     "text": "A weather balloon drifting above the town then has a position vector, x.",
+     "audio_text": null,
+     "start": 436.5,
+     "end": 441.7,
+     "dur": 5.2,
+     "start_frame": 13095,
+     "end_frame": 13251
+    },
+    {
+     "text": "Its components, x one, x two and x three, say how far east, how far north and how high the balloon is.",
+     "audio_text": null,
+     "start": 442.05,
+     "end": 449.75,
+     "dur": 7.7,
+     "start_frame": 13262,
+     "end_frame": 13493
+    },
+    {
+     "text": "So x is x one times e one, plus x two times e two, plus x three times e three.",
+     "audio_text": null,
+     "start": 450.1,
+     "end": 457.0,
+     "dur": 6.9,
+     "start_frame": 13503,
+     "end_frame": 13710
+    },
+    {
+     "text": "Say the balloon is three kilometres east, four kilometres north and one point two kilometres up.",
+     "audio_text": null,
+     "start": 457.35,
+     "end": 463.85,
+     "dur": 6.5,
+     "start_frame": 13721,
+     "end_frame": 13916
+    },
+    {
+     "text": "Then its components are three, four and one point two kilometres.",
+     "audio_text": null,
+     "start": 464.2,
+     "end": 468.8,
+     "dur": 4.6,
+     "start_frame": 13926,
+     "end_frame": 14064
+    }
+   ],
+   "end": 469.6,
+   "start_frame": 12904,
+   "end_frame": 14088
+  },
+  {
+   "id": "s12a_add_tip_to_tail",
+   "start": 469.6,
+   "sentences": [
+    {
+     "text": "Now let's add vectors.",
+     "audio_text": null,
+     "start": 469.6,
+     "end": 471.725,
+     "dur": 2.125,
+     "start_frame": 14088,
+     "end_frame": 14152
+    },
+    {
+     "text": "Picture an airliner flying east at two hundred and fifty metres per second through the air.",
+     "audio_text": null,
+     "start": 472.075,
+     "end": 478.125,
+     "dur": 6.05,
+     "start_frame": 14162,
+     "end_frame": 14344
+    },
+    {
+     "text": "That's its airspeed: an arrow pointing east.",
+     "audio_text": null,
+     "start": 478.475,
+     "end": 481.85,
+     "dur": 3.375,
+     "start_frame": 14354,
+     "end_frame": 14456
+    },
+    {
+     "text": "But the air itself is moving.",
+     "audio_text": null,
+     "start": 482.2,
+     "end": 484.6,
+     "dur": 2.4,
+     "start_frame": 14466,
+     "end_frame": 14538
+    },
+    {
+     "text": "High up, a fast band of wind called the jet stream blows from the west.",
+     "audio_text": null,
+     "start": 484.95,
+     "end": 489.95,
+     "dur": 5.0,
+     "start_frame": 14549,
+     "end_frame": 14699
+    },
+    {
+     "text": "Say the jet blows at fifty metres per second, towards the east.",
+     "audio_text": null,
+     "start": 490.3,
+     "end": 494.675,
+     "dur": 4.375,
+     "start_frame": 14709,
+     "end_frame": 14840
+    },
+    {
+     "text": "How fast does the plane move over the ground?",
+     "audio_text": null,
+     "start": 495.025,
+     "end": 498.1,
+     "dur": 3.075,
+     "start_frame": 14851,
+     "end_frame": 14943
+    },
+    {
+     "text": "To find out, we put the wind's arrow with its tail at the tip of the plane's arrow.",
+     "audio_text": null,
+     "start": 498.45,
+     "end": 503.625,
+     "dur": 5.175,
+     "start_frame": 14954,
+     "end_frame": 15109
+    },
+    {
+     "text": "The arrow from the first tail to the last tip is the sum: three hundred metres per second, towards the east.",
+     "audio_text": null,
+     "start": 503.975,
+     "end": 510.975,
+     "dur": 7.0,
+     "start_frame": 15119,
+     "end_frame": 15329
+    },
+    {
+     "text": "This is called adding vectors tip to tail.",
+     "audio_text": null,
+     "start": 511.325,
+     "end": 514.45,
+     "dur": 3.125,
+     "start_frame": 15340,
+     "end_frame": 15434
+    },
+    {
+     "text": "Flying the other way, against the jet, the sum is only two hundred metres per second.",
+     "audio_text": null,
+     "start": 514.8,
+     "end": 520.725,
+     "dur": 5.925,
+     "start_frame": 15444,
+     "end_frame": 15622
+    },
+    {
+     "text": "That's why flights from North America to Europe are usually shorter than the flights back.",
+     "audio_text": null,
+     "start": 521.075,
+     "end": 526.725,
+     "dur": 5.65,
+     "start_frame": 15632,
+     "end_frame": 15802
+    },
+    {
+     "text": "On the day this video was made, the jet over the North Atlantic reached about seventy metres per second.",
+     "audio_text": null,
+     "start": 527.075,
+     "end": 533.875,
+     "dur": 6.8,
+     "start_frame": 15812,
+     "end_frame": 16016
+    }
+   ],
+   "end": 534.675,
+   "start_frame": 14088,
+   "end_frame": 16040
+  },
+  {
+   "id": "s12b_add_parallelogram",
+   "start": 534.675,
+   "sentences": [
+    {
+     "text": "What if the wind blows across the plane's path?",
+     "audio_text": null,
+     "start": 534.675,
+     "end": 537.875,
+     "dur": 3.2,
+     "start_frame": 16040,
+     "end_frame": 16136
+    },
+    {
+     "text": "Let the plane head north at two hundred and fifty metres per second, while the jet blows east at fifty.",
+     "audio_text": null,
+     "start": 538.225,
+     "end": 544.9,
+     "dur": 6.675,
+     "start_frame": 16147,
+     "end_frame": 16347
+    },
+    {
+     "text": "Tip to tail, the sum points a little east of north.",
+     "audio_text": null,
+     "start": 545.25,
+     "end": 549.0,
+     "dur": 3.75,
+     "start_frame": 16358,
+     "end_frame": 16470
+    },
+    {
+     "text": "Now add them the other way round: the wind first, then the plane.",
+     "audio_text": null,
+     "start": 549.35,
+     "end": 553.925,
+     "dur": 4.575,
+     "start_frame": 16481,
+     "end_frame": 16618
+    },
+    {
+     "text": "We reach the same tip.",
+     "audio_text": null,
+     "start": 554.275,
+     "end": 556.25,
+     "dur": 1.975,
+     "start_frame": 16628,
+     "end_frame": 16688
+    },
+    {
+     "text": "The two routes make the sides of a parallelogram, and the sum is its diagonal.",
+     "audio_text": null,
+     "start": 556.6,
+     "end": 561.9,
+     "dur": 5.3,
+     "start_frame": 16698,
+     "end_frame": 16857
+    },
+    {
+     "text": "So the order of adding doesn't matter.",
+     "audio_text": null,
+     "start": 562.25,
+     "end": 564.975,
+     "dur": 2.725,
+     "start_frame": 16868,
+     "end_frame": 16949
+    },
+    {
+     "text": "In components, adding is easy: we add the east parts, and we add the north parts.",
+     "audio_text": null,
+     "start": 565.325,
+     "end": 570.95,
+     "dur": 5.625,
+     "start_frame": 16960,
+     "end_frame": 17129
+    },
+    {
+     "text": "Zero plus fifty is fifty towards the east, and two hundred and fifty plus zero is two hundred and fifty towards the north.",
+     "audio_text": null,
+     "start": 571.3,
+     "end": 579.375,
+     "dur": 8.075,
+     "start_frame": 17139,
+     "end_frame": 17381
+    },
+    {
+     "text": "By Pythagoras, the ground speed is about two hundred and fifty five metres per second.",
+     "audio_text": null,
+     "start": 579.725,
+     "end": 585.575,
+     "dur": 5.85,
+     "start_frame": 17392,
+     "end_frame": 17567
+    },
+    {
+     "text": "The ocean works the same way.",
+     "audio_text": null,
+     "start": 585.925,
+     "end": 588.35,
+     "dur": 2.425,
+     "start_frame": 17578,
+     "end_frame": 17651
+    },
+    {
+     "text": "A drifting buoy is carried by the current and pushed by the wind, so its velocity is the current's arrow plus the wind drift's arrow.",
+     "audio_text": null,
+     "start": 588.7,
+     "end": 597.65,
+     "dur": 8.95,
+     "start_frame": 17661,
+     "end_frame": 17930
+    }
+   ],
+   "end": 598.45,
+   "start_frame": 16040,
+   "end_frame": 17954
+  },
+  {
+   "id": "s12c_add_forces",
+   "start": 598.45,
+   "sentences": [
+    {
+     "text": "Forces add like this too.",
+     "audio_text": null,
+     "start": 598.45,
+     "end": 600.725,
+     "dur": 2.275,
+     "start_frame": 17954,
+     "end_frame": 18022
+    },
+    {
+     "text": "Picture an air parcel near the ground, where three pushes act on each kilogram.",
+     "audio_text": null,
+     "start": 601.075,
+     "end": 606.45,
+     "dur": 5.375,
+     "start_frame": 18032,
+     "end_frame": 18194
+    },
+    {
+     "text": "The pressure push points towards low pressure, here straight north, with a size of twelve point five, in units of ten to the minus four metres per second squared.",
+     "audio_text": null,
+     "start": 606.8,
+     "end": 617.325,
+     "dur": 10.525,
+     "start_frame": 18204,
+     "end_frame": 18520
+    },
+    {
+     "text": "The Coriolis push, from Earth's spin, has components six and minus eight.",
+     "audio_text": "The [Coriolis](/kˌɔɹiˈOlɪs/) push, from Earth's spin, has components six and minus eight.",
+     "start": 617.675,
+     "end": 622.7,
+     "dur": 5.025,
+     "start_frame": 18530,
+     "end_frame": 18681
+    },
+    {
+     "text": "Friction with the ground pulls back against the wind: minus six and minus four point five.",
+     "audio_text": null,
+     "start": 623.05,
+     "end": 629.225,
+     "dur": 6.175,
+     "start_frame": 18692,
+     "end_frame": 18877
+    },
+    {
+     "text": "Let's add them tip to tail.",
+     "audio_text": null,
+     "start": 629.575,
+     "end": 631.85,
+     "dur": 2.275,
+     "start_frame": 18887,
+     "end_frame": 18956
+    },
+    {
+     "text": "The east parts give zero plus six minus six, which is zero.",
+     "audio_text": null,
+     "start": 632.2,
+     "end": 636.725,
+     "dur": 4.525,
+     "start_frame": 18966,
+     "end_frame": 19102
+    },
+    {
+     "text": "The north parts give twelve point five minus eight minus four point five, also zero.",
+     "audio_text": null,
+     "start": 637.075,
+     "end": 643.0,
+     "dur": 5.925,
+     "start_frame": 19112,
+     "end_frame": 19290
+    },
+    {
+     "text": "The three arrows close into a triangle, so the total push is zero.",
+     "audio_text": null,
+     "start": 643.35,
+     "end": 648.2,
+     "dur": 4.85,
+     "start_frame": 19301,
+     "end_frame": 19446
+    },
+    {
+     "text": "That means the parcel's wind doesn't change: the three pushes balance.",
+     "audio_text": null,
+     "start": 648.55,
+     "end": 653.475,
+     "dur": 4.925,
+     "start_frame": 19457,
+     "end_frame": 19604
+    },
+    {
+     "text": "Here the wind blows towards the east-north-east, partly across the lines of equal pressure, towards the low.",
+     "audio_text": null,
+     "start": 653.825,
+     "end": 661.125,
+     "dur": 7.3,
+     "start_frame": 19615,
+     "end_frame": 19834
+    },
+    {
+     "text": "How each of these pushes arises gets its own movies later in the series.",
+     "audio_text": null,
+     "start": 661.475,
+     "end": 666.7,
+     "dur": 5.225,
+     "start_frame": 19844,
+     "end_frame": 20001
+    }
+   ],
+   "end": 667.5,
+   "start_frame": 17954,
+   "end_frame": 20025
+  },
+  {
+   "id": "s12d_add_geostrophic",
+   "start": 667.5,
+   "sentences": [
+    {
+     "text": "Now a real map.",
+     "audio_text": null,
+     "start": 667.5,
+     "end": 669.2,
+     "dur": 1.7,
+     "start_frame": 20025,
+     "end_frame": 20076
+    },
+    {
+     "text": "Here's Ciarán at the same moment, with lines of equal pressure, called isobars, drawn every four hectopascals.",
+     "audio_text": "Here's Keer-awn at the same moment, with lines of equal pressure, called isobars, drawn every four [hectopascals](/hˈɛktəpˌæskᵊlz/).",
+     "start": 669.55,
+     "end": 677.55,
+     "dur": 8.0,
+     "start_frame": 20087,
+     "end_frame": 20327
+    },
+    {
+     "text": "A hectopascal is the unit weather maps use for pressure.",
+     "audio_text": "A [hectopascal](/hˈɛktəpˌæskᵊl/) is the unit weather maps use for pressure.",
+     "start": 677.9,
+     "end": 682.275,
+     "dur": 4.375,
+     "start_frame": 20337,
+     "end_frame": 20468
+    },
+    {
+     "text": "If the pressure push and the Coriolis push balanced exactly, the wind would blow along the isobars.",
+     "audio_text": "If the pressure push and the [Coriolis](/kˌɔɹiˈOlɪs/) push balanced exactly, the wind would blow along the isobars.",
+     "start": 682.625,
+     "end": 689.725,
+     "dur": 7.1,
+     "start_frame": 20479,
+     "end_frame": 20692
+    },
+    {
+     "text": "That imagined wind is called the geostrophic wind, and the geostrophic wind movie explains it in full.",
+     "audio_text": "That imagined wind is called the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind, and the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind movie explains it in full.",
+     "start": 690.075,
+     "end": 697.6,
+     "dur": 7.525,
+     "start_frame": 20702,
+     "end_frame": 20928
+    },
+    {
+     "text": "Over the sea just west of Brest, it would blow thirty point nine metres per second towards the east and twenty four point nine towards the north.",
+     "audio_text": null,
+     "start": 697.95,
+     "end": 706.9,
+     "dur": 8.95,
+     "start_frame": 20939,
+     "end_frame": 21207
+    },
+    {
+     "text": "The real wind, ten metres above the sea, blew ten towards the east and eighteen towards the north.",
+     "audio_text": null,
+     "start": 707.25,
+     "end": 713.85,
+     "dur": 6.6,
+     "start_frame": 21218,
+     "end_frame": 21416
+    },
+    {
+     "text": "The arrow we must add to the geostrophic wind to reach the real wind is called the ageostrophic wind.",
+     "audio_text": "The arrow we must add to the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind to reach the real wind is called the [ageostrophic](/ˌAʤiOstɹˈɑfɪk/) wind.",
+     "start": 714.2,
+     "end": 721.4,
+     "dur": 7.2,
+     "start_frame": 21426,
+     "end_frame": 21642
+    },
+    {
+     "text": "So the real wind is the geostrophic wind plus the ageostrophic wind.",
+     "audio_text": "So the real wind is the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind plus the [ageostrophic](/ˌAʤiOstɹˈɑfɪk/) wind.",
+     "start": 721.75,
+     "end": 727.35,
+     "dur": 5.6,
+     "start_frame": 21653,
+     "end_frame": 21821
+    },
+    {
+     "text": "Here the ageostrophic part is large, about minus twenty one and minus seven.",
+     "audio_text": "Here the [ageostrophic](/ˌAʤiOstɹˈɑfɪk/) part is large, about minus twenty one and minus seven.",
+     "start": 727.7,
+     "end": 733.25,
+     "dur": 5.55,
+     "start_frame": 21831,
+     "end_frame": 21998
+    },
+    {
+     "text": "Friction with the sea slows the air and turns it across the isobars, and the air is racing round a tight curve.",
+     "audio_text": null,
+     "start": 733.6,
+     "end": 741.125,
+     "dur": 7.525,
+     "start_frame": 22008,
+     "end_frame": 22234
+    }
+   ],
+   "end": 741.925,
+   "start_frame": 20025,
+   "end_frame": 22258
+  },
+  {
+   "id": "s12e_subtract_def",
+   "start": 741.925,
+   "sentences": [
+    {
+     "text": "Now subtraction.",
+     "audio_text": null,
+     "start": 741.925,
+     "end": 743.85,
+     "dur": 1.925,
+     "start_frame": 22258,
+     "end_frame": 22316
+    },
+    {
+     "text": "First, the negative of a vector is the same arrow, turned to point the opposite way: minus q has every component of q with its sign flipped.",
+     "audio_text": null,
+     "start": 744.2,
+     "end": 753.95,
+     "dur": 9.75,
+     "start_frame": 22326,
+     "end_frame": 22619
+    },
+    {
+     "text": "To subtract q from p, we add minus q: p minus q equals p plus minus q.",
+     "audio_text": null,
+     "start": 754.3,
+     "end": 760.9,
+     "dur": 6.6,
+     "start_frame": 22629,
+     "end_frame": 22827
+    },
+    {
+     "text": "There's a handy picture too.",
+     "audio_text": null,
+     "start": 761.25,
+     "end": 763.525,
+     "dur": 2.275,
+     "start_frame": 22838,
+     "end_frame": 22906
+    },
+    {
+     "text": "Draw p and q from the same point.",
+     "audio_text": null,
+     "start": 763.875,
+     "end": 766.6,
+     "dur": 2.725,
+     "start_frame": 22916,
+     "end_frame": 22998
+    },
+    {
+     "text": "Then p minus q is the arrow from the tip of q to the tip of p.",
+     "audio_text": null,
+     "start": 766.95,
+     "end": 771.9,
+     "dur": 4.95,
+     "start_frame": 23009,
+     "end_frame": 23157
+    },
+    {
+     "text": "Let's check it: q plus that arrow lands on the tip of p, so q plus, p minus q, is p.",
+     "audio_text": null,
+     "start": 772.25,
+     "end": 779.125,
+     "dur": 6.875,
+     "start_frame": 23168,
+     "end_frame": 23374
+    },
+    {
+     "text": "With easy numbers, if p is five, one, and q is one, three, then p minus q is four, minus two.",
+     "audio_text": null,
+     "start": 779.475,
+     "end": 786.875,
+     "dur": 7.4,
+     "start_frame": 23384,
+     "end_frame": 23606
+    }
+   ],
+   "end": 787.675,
+   "start_frame": 22258,
+   "end_frame": 23630
+  },
+  {
+   "id": "s12f_subtract_hour",
+   "start": 787.675,
+   "sentences": [
+    {
+     "text": "Here's subtraction on a real map.",
+     "audio_text": null,
+     "start": 787.675,
+     "end": 790.375,
+     "dur": 2.7,
+     "start_frame": 23630,
+     "end_frame": 23711
+    },
+    {
+     "text": "A kilometre above Brest, at five o'clock universal time, the wind blew seven point six metres per second towards the east and twenty three point three towards the north.",
+     "audio_text": null,
+     "start": 790.725,
+     "end": 802.025,
+     "dur": 11.3,
+     "start_frame": 23722,
+     "end_frame": 24061
+    },
+    {
+     "text": "An hour later, at six, it blew five point eight towards the east and thirty three point five towards the north.",
+     "audio_text": null,
+     "start": 802.375,
+     "end": 809.65,
+     "dur": 7.275,
+     "start_frame": 24071,
+     "end_frame": 24290
+    },
+    {
+     "text": "How did the wind change in that hour?",
+     "audio_text": null,
+     "start": 810.0,
+     "end": 812.6,
+     "dur": 2.6,
+     "start_frame": 24300,
+     "end_frame": 24378
+    },
+    {
+     "text": "We subtract the old wind from the new one.",
+     "audio_text": null,
+     "start": 812.95,
+     "end": 816.025,
+     "dur": 3.075,
+     "start_frame": 24389,
+     "end_frame": 24481
+    },
+    {
+     "text": "East: five point eight minus seven point six is minus one point eight.",
+     "audio_text": null,
+     "start": 816.375,
+     "end": 821.4,
+     "dur": 5.025,
+     "start_frame": 24491,
+     "end_frame": 24642
+    },
+    {
+     "text": "North: thirty three point five minus twenty three point three is ten point two.",
+     "audio_text": null,
+     "start": 821.75,
+     "end": 827.45,
+     "dur": 5.7,
+     "start_frame": 24653,
+     "end_frame": 24824
+    },
+    {
+     "text": "On the map, the change is the arrow from the tip of the old wind to the tip of the new one, pointing a little west of north.",
+     "audio_text": null,
+     "start": 827.8,
+     "end": 835.675,
+     "dur": 7.875,
+     "start_frame": 24834,
+     "end_frame": 25070
+    },
+    {
+     "text": "In one hour, the wind grew stronger and swung towards the north, as Ciarán approached.",
+     "audio_text": "In one hour, the wind grew stronger and swung towards the north, as Keer-awn approached.",
+     "start": 836.025,
+     "end": 841.875,
+     "dur": 5.85,
+     "start_frame": 25081,
+     "end_frame": 25256
+    }
+   ],
+   "end": 842.675,
+   "start_frame": 23630,
+   "end_frame": 25280
+  },
+  {
+   "id": "s12g_shear_hodograph",
+   "start": 842.675,
+   "sentences": [
+    {
+     "text": "Subtraction also measures wind shear: how the wind changes with height.",
+     "audio_text": null,
+     "start": 842.675,
+     "end": 847.65,
+     "dur": 4.975,
+     "start_frame": 25280,
+     "end_frame": 25430
+    },
+    {
+     "text": "This is a real weather balloon sounding from Trappes, near Paris, launched at midnight universal time on the first of November.",
+     "audio_text": "This is a real weather balloon sounding from [Trappes](/tɹˈæp/), near Paris, launched at midnight universal time on the first of November.",
+     "start": 848.0,
+     "end": 856.425,
+     "dur": 8.425,
+     "start_frame": 25440,
+     "end_frame": 25693
+    },
+    {
+     "text": "Let's draw the wind at each height as an arrow from one shared point.",
+     "audio_text": null,
+     "start": 856.775,
+     "end": 861.425,
+     "dur": 4.65,
+     "start_frame": 25703,
+     "end_frame": 25843
+    },
+    {
+     "text": "Joining the arrow tips gives a curve called a hodograph.",
+     "audio_text": null,
+     "start": 861.775,
+     "end": 865.575,
+     "dur": 3.8,
+     "start_frame": 25853,
+     "end_frame": 25967
+    },
+    {
+     "text": "At eight hundred and fifty hectopascals, about one point four kilometres up, the wind blew thirteen point nine towards the east and nine point eight towards the north.",
+     "audio_text": "At eight hundred and fifty [hectopascals](/hˈɛktəpˌæskᵊlz/), about one point four kilometres up, the wind blew thirteen point nine towards the east and nine point eight towards the north.",
+     "start": 865.925,
+     "end": 876.65,
+     "dur": 10.725,
+     "start_frame": 25978,
+     "end_frame": 26300
+    },
+    {
+     "text": "At five hundred hectopascals, about five and a half kilometres up, it blew sixteen point four towards the east and four point four towards the north.",
+     "audio_text": "At five hundred [hectopascals](/hˈɛktəpˌæskᵊlz/), about five and a half kilometres up, it blew sixteen point four towards the east and four point four towards the north.",
+     "start": 877.0,
+     "end": 886.725,
+     "dur": 9.725,
+     "start_frame": 26310,
+     "end_frame": 26602
+    },
+    {
+     "text": "The shear between them is the upper wind minus the lower wind: two point five towards the east and minus five point four towards the north, about six metres per second.",
+     "audio_text": null,
+     "start": 887.075,
+     "end": 898.175,
+     "dur": 11.1,
+     "start_frame": 26612,
+     "end_frame": 26945
+    },
+    {
+     "text": "On the hodograph, it's simply the arrow from the lower tip to the upper tip.",
+     "audio_text": null,
+     "start": 898.525,
+     "end": 903.45,
+     "dur": 4.925,
+     "start_frame": 26956,
+     "end_frame": 27104
+    },
+    {
+     "text": "Here the wind turns clockwise as we go up, seen from above.",
+     "audio_text": null,
+     "start": 903.8,
+     "end": 908.075,
+     "dur": 4.275,
+     "start_frame": 27114,
+     "end_frame": 27242
+    },
+    {
+     "text": "Forecasters read that as a sign of warm air being carried in, a link the thermal wind movie explains.",
+     "audio_text": null,
+     "start": 908.425,
+     "end": 915.725,
+     "dur": 7.3,
+     "start_frame": 27253,
+     "end_frame": 27472
+    }
+   ],
+   "end": 916.525,
+   "start_frame": 25280,
+   "end_frame": 27496
+  },
+  {
+   "id": "s12h_anomaly",
+   "start": 916.525,
+   "sentences": [
+    {
+     "text": "Climate scientists subtract vectors all the time.",
+     "audio_text": null,
+     "start": 916.525,
+     "end": 920.3,
+     "dur": 3.775,
+     "start_frame": 27496,
+     "end_frame": 27609
+    },
+    {
+     "text": "An anomaly is the difference between what happened and what's normal for that time of year.",
+     "audio_text": null,
+     "start": 920.65,
+     "end": 926.625,
+     "dur": 5.975,
+     "start_frame": 27620,
+     "end_frame": 27799
+    },
+    {
+     "text": "Normal here means the average over the thirty years from nineteen ninety one to twenty twenty, called the climatology.",
+     "audio_text": null,
+     "start": 926.975,
+     "end": 934.925,
+     "dur": 7.95,
+     "start_frame": 27809,
+     "end_frame": 28048
+    },
+    {
+     "text": "Over the equatorial Pacific Ocean, the trade winds normally blow from the east, towards Asia.",
+     "audio_text": null,
+     "start": 935.275,
+     "end": 942.0,
+     "dur": 6.725,
+     "start_frame": 28058,
+     "end_frame": 28260
+    },
+    {
+     "text": "This map shows the average wind for November in those thirty years.",
+     "audio_text": null,
+     "start": 942.35,
+     "end": 947.075,
+     "dur": 4.725,
+     "start_frame": 28271,
+     "end_frame": 28412
+    },
+    {
+     "text": "Next to it is November twenty twenty-three, during an El Niño, a warming of the tropical Pacific that shifts weather around the world.",
+     "audio_text": null,
+     "start": 947.425,
+     "end": 956.275,
+     "dur": 8.85,
+     "start_frame": 28423,
+     "end_frame": 28688
+    },
+    {
+     "text": "Subtract the climatology from November twenty twenty-three, arrow by arrow, and the anomaly arrows point east.",
+     "audio_text": null,
+     "start": 956.625,
+     "end": 964.225,
+     "dur": 7.6,
+     "start_frame": 28699,
+     "end_frame": 28927
+    },
+    {
+     "text": "In the central Pacific, the normal wind blew about six metres per second towards the west, but in twenty twenty-three only about three and a half.",
+     "audio_text": null,
+     "start": 964.575,
+     "end": 973.975,
+     "dur": 9.4,
+     "start_frame": 28937,
+     "end_frame": 29219
+    },
+    {
+     "text": "So the anomaly is about two and a half metres per second towards the east: the trade winds had weakened, as they do in an El Niño.",
+     "audio_text": null,
+     "start": 974.325,
+     "end": 982.975,
+     "dur": 8.65,
+     "start_frame": 29230,
+     "end_frame": 29489
+    },
+    {
+     "text": "El Niño gets its own long movie later in the series.",
+     "audio_text": null,
+     "start": 983.325,
+     "end": 987.4,
+     "dur": 4.075,
+     "start_frame": 29500,
+     "end_frame": 29622
+    }
+   ],
+   "end": 988.2,
+   "start_frame": 27496,
+   "end_frame": 29646
+  },
+  {
+   "id": "s12i_relative",
+   "start": 988.2,
+   "sentences": [
+    {
+     "text": "One more use: relative velocity.",
+     "audio_text": null,
+     "start": 988.2,
+     "end": 991.4,
+     "dur": 3.2,
+     "start_frame": 29646,
+     "end_frame": 29742
+    },
+    {
+     "text": "Storms move, and forecasters often want the wind as the storm itself feels it.",
+     "audio_text": null,
+     "start": 991.75,
+     "end": 997.45,
+     "dur": 5.7,
+     "start_frame": 29753,
+     "end_frame": 29924
+    },
+    {
+     "text": "Between six in the evening and midnight, Ciarán's centre moved about four hundred and fifty kilometres, mostly towards the east.",
+     "audio_text": "Between six in the evening and midnight, Keer-awn's centre moved about four hundred and fifty kilometres, mostly towards the east.",
+     "start": 997.8,
+     "end": 1006.15,
+     "dur": 8.35,
+     "start_frame": 29934,
+     "end_frame": 30185
+    },
+    {
+     "text": "That's a velocity of about twenty metres per second towards the east and five towards the north.",
+     "audio_text": null,
+     "start": 1006.5,
+     "end": 1012.725,
+     "dur": 6.225,
+     "start_frame": 30195,
+     "end_frame": 30382
+    },
+    {
+     "text": "The wind relative to the storm is the wind minus the storm's velocity.",
+     "audio_text": null,
+     "start": 1013.075,
+     "end": 1018.725,
+     "dur": 5.65,
+     "start_frame": 30392,
+     "end_frame": 30562
+    },
+    {
+     "text": "A kilometre above Brest, that's five point eight minus twenty, about minus fourteen, towards the east, and thirty three point five minus five, about twenty eight, towards the north.",
+     "audio_text": null,
+     "start": 1019.075,
+     "end": 1030.75,
+     "dur": 11.675,
+     "start_frame": 30572,
+     "end_frame": 30923
+    },
+    {
+     "text": "So, seen from the moving storm, the air above Brest flows towards the north-north-west, round the storm's eastern side.",
+     "audio_text": null,
+     "start": 1031.1,
+     "end": 1039.175,
+     "dur": 8.075,
+     "start_frame": 30933,
+     "end_frame": 31175
+    }
+   ],
+   "end": 1039.975,
+   "start_frame": 29646,
+   "end_frame": 31199
+  },
+  {
+   "id": "s13_naming",
+   "start": 1039.975,
+   "sentences": [
+    {
+     "text": "Now we have a naming problem.",
+     "audio_text": null,
+     "start": 1039.975,
+     "end": 1042.35,
+     "dur": 2.375,
+     "start_frame": 31199,
+     "end_frame": 31271
+    },
+    {
+     "text": "The wind's components are u, v and w, the position's are x, y and z, and the unit vectors have names of their own.",
+     "audio_text": null,
+     "start": 1042.7,
+     "end": 1051.6,
+     "dur": 8.9,
+     "start_frame": 31281,
+     "end_frame": 31548
+    },
+    {
+     "text": "With many vectors we'd run out of letters, and every equation would have to be written out three times.",
+     "audio_text": null,
+     "start": 1051.95,
+     "end": 1058.5,
+     "dur": 6.55,
+     "start_frame": 31559,
+     "end_frame": 31755
+    },
+    {
+     "text": "So let's number the directions instead: one for east, two for north and three for up.",
+     "audio_text": null,
+     "start": 1058.85,
+     "end": 1064.65,
+     "dur": 5.8,
+     "start_frame": 31766,
+     "end_frame": 31940
+    },
+    {
+     "text": "The wind's components become u one, u two and u three.",
+     "audio_text": null,
+     "start": 1065.0,
+     "end": 1069.375,
+     "dur": 4.375,
+     "start_frame": 31950,
+     "end_frame": 32081
+    },
+    {
+     "text": "Then we write u sub i.",
+     "audio_text": null,
+     "start": 1069.725,
+     "end": 1071.9,
+     "dur": 2.175,
+     "start_frame": 32092,
+     "end_frame": 32157
+    },
+    {
+     "text": "Sub means the small letter written below, and i stands for any of the numbers one, two or three.",
+     "audio_text": null,
+     "start": 1072.25,
+     "end": 1078.975,
+     "dur": 6.725,
+     "start_frame": 32168,
+     "end_frame": 32369
+    },
+    {
+     "text": "So u sub i is the whole list of the wind's components, in just two symbols.",
+     "audio_text": null,
+     "start": 1079.325,
+     "end": 1084.7,
+     "dur": 5.375,
+     "start_frame": 32380,
+     "end_frame": 32541
+    },
+    {
+     "text": "This way of writing is called index notation, and i is called an index.",
+     "audio_text": null,
+     "start": 1085.05,
+     "end": 1090.3,
+     "dur": 5.25,
+     "start_frame": 32552,
+     "end_frame": 32709
+    }
+   ],
+   "end": 1091.1,
+   "start_frame": 31199,
+   "end_frame": 32733
+  },
+  {
+   "id": "s14_free_index",
+   "start": 1091.1,
+   "sentences": [
+    {
+     "text": "An index that appears once in a term is called a free index.",
+     "audio_text": null,
+     "start": 1091.1,
+     "end": 1095.475,
+     "dur": 4.375,
+     "start_frame": 32733,
+     "end_frame": 32864
+    },
+    {
+     "text": "An equation with a free index is really three equations, one for each value.",
+     "audio_text": null,
+     "start": 1095.825,
+     "end": 1101.25,
+     "dur": 5.425,
+     "start_frame": 32875,
+     "end_frame": 33038
+    },
+    {
+     "text": "Remember the wind's change over an hour above Brest?",
+     "audio_text": null,
+     "start": 1101.6,
+     "end": 1105.375,
+     "dur": 3.775,
+     "start_frame": 33048,
+     "end_frame": 33161
+    },
+    {
+     "text": "In index notation, it's one line: c sub i equals u sub i at six, minus u sub i at five.",
+     "audio_text": null,
+     "start": 1105.725,
+     "end": 1113.675,
+     "dur": 7.95,
+     "start_frame": 33172,
+     "end_frame": 33410
+    },
+    {
+     "text": "For i equal to one, it says minus one point eight equals five point eight minus seven point six.",
+     "audio_text": null,
+     "start": 1114.025,
+     "end": 1120.675,
+     "dur": 6.65,
+     "start_frame": 33421,
+     "end_frame": 33620
+    },
+    {
+     "text": "For i equal to two, it says ten point two equals thirty three point five minus twenty three point three.",
+     "audio_text": null,
+     "start": 1121.025,
+     "end": 1128.275,
+     "dur": 7.25,
+     "start_frame": 33631,
+     "end_frame": 33848
+    },
+    {
+     "text": "And for i equal to three, it does the same for the up component.",
+     "audio_text": null,
+     "start": 1128.625,
+     "end": 1133.3,
+     "dur": 4.675,
+     "start_frame": 33859,
+     "end_frame": 33999
+    },
+    {
+     "text": "So one line holds three equations, and adding or subtracting vectors means adding or subtracting their components.",
+     "audio_text": null,
+     "start": 1133.65,
+     "end": 1141.4,
+     "dur": 7.75,
+     "start_frame": 34010,
+     "end_frame": 34242
+    },
+    {
+     "text": "The rule is that a free index must appear in every term, on both sides, so that every term has the same number of components.",
+     "audio_text": null,
+     "start": 1141.75,
+     "end": 1150.175,
+     "dur": 8.425,
+     "start_frame": 34253,
+     "end_frame": 34505
+    }
+   ],
+   "end": 1150.975,
+   "start_frame": 32733,
+   "end_frame": 34529
+  },
+  {
+   "id": "s15_dot_product",
+   "start": 1150.975,
+   "sentences": [
+    {
+     "text": "Now let's meet a product of two vectors.",
+     "audio_text": null,
+     "start": 1150.975,
+     "end": 1154.15,
+     "dur": 3.175,
+     "start_frame": 34529,
+     "end_frame": 34625
+    },
+    {
+     "text": "The dot product of two vectors, p and q, multiplies their matching components and adds the results: p one q one, plus p two q two, plus p three q three.",
+     "audio_text": null,
+     "start": 1154.5,
+     "end": 1166.4,
+     "dur": 11.9,
+     "start_frame": 34635,
+     "end_frame": 34992
+    },
+    {
+     "text": "The answer is a single number, a scalar.",
+     "audio_text": null,
+     "start": 1166.75,
+     "end": 1169.9,
+     "dur": 3.15,
+     "start_frame": 35003,
+     "end_frame": 35097
+    },
+    {
+     "text": "It measures how much two arrows point the same way: it's the shadow of one arrow on the other, times the other's length.",
+     "audio_text": null,
+     "start": 1170.25,
+     "end": 1177.825,
+     "dur": 7.575,
+     "start_frame": 35108,
+     "end_frame": 35335
+    },
+    {
+     "text": "Here's a weather example.",
+     "audio_text": null,
+     "start": 1178.175,
+     "end": 1180.3,
+     "dur": 2.125,
+     "start_frame": 35345,
+     "end_frame": 35409
+    },
+    {
+     "text": "How much of the wind blows along Brittany's coast?",
+     "audio_text": null,
+     "start": 1180.65,
+     "end": 1184.175,
+     "dur": 3.525,
+     "start_frame": 35420,
+     "end_frame": 35525
+    },
+    {
+     "text": "The unit vector along the coast has components zero point nine eight five, zero point one seven four, and zero.",
+     "audio_text": null,
+     "start": 1184.525,
+     "end": 1192.6,
+     "dur": 8.075,
+     "start_frame": 35536,
+     "end_frame": 35778
+    },
+    {
+     "text": "Its dot product with the wind is five point eight times zero point nine eight five, plus thirty three point five times zero point one seven four, plus zero.",
+     "audio_text": null,
+     "start": 1192.95,
+     "end": 1203.7,
+     "dur": 10.75,
+     "start_frame": 35788,
+     "end_frame": 36111
+    },
+    {
+     "text": "That's about eleven point five metres per second: the part along the coast that we measured a moment ago.",
+     "audio_text": null,
+     "start": 1204.05,
+     "end": 1211.0,
+     "dur": 6.95,
+     "start_frame": 36122,
+     "end_frame": 36330
+    },
+    {
+     "text": "So a dot product with a unit vector picks out the part of the wind along it.",
+     "audio_text": null,
+     "start": 1211.35,
+     "end": 1216.45,
+     "dur": 5.1,
+     "start_frame": 36340,
+     "end_frame": 36493
+    },
+    {
+     "text": "The dot product has a whole movie of its own in this series, where we take it apart fully.",
+     "audio_text": null,
+     "start": 1216.8,
+     "end": 1222.275,
+     "dur": 5.475,
+     "start_frame": 36504,
+     "end_frame": 36668
+    }
+   ],
+   "end": 1223.075,
+   "start_frame": 34529,
+   "end_frame": 36692
+  },
+  {
+   "id": "s16_summation",
+   "start": 1223.075,
+   "sentences": [
+    {
+     "text": "The dot product is a sum of three terms.",
+     "audio_text": null,
+     "start": 1223.075,
+     "end": 1226.1,
+     "dur": 3.025,
+     "start_frame": 36692,
+     "end_frame": 36783
+    },
+    {
+     "text": "With a sigma, the Greek capital letter for sum, we write it as the sum of p sub i times q sub i, for i from one to three.",
+     "audio_text": null,
+     "start": 1226.45,
+     "end": 1235.425,
+     "dur": 8.975,
+     "start_frame": 36793,
+     "end_frame": 37063
+    },
+    {
+     "text": "Look at the index i: it appears twice in the same term.",
+     "audio_text": null,
+     "start": 1235.775,
+     "end": 1239.8,
+     "dur": 4.025,
+     "start_frame": 37073,
+     "end_frame": 37194
+    },
+    {
+     "text": "Albert Einstein noticed that whenever an index appears twice like this, it's always summed.",
+     "audio_text": null,
+     "start": 1240.15,
+     "end": 1246.1,
+     "dur": 5.95,
+     "start_frame": 37204,
+     "end_frame": 37383
+    },
+    {
+     "text": "So he simply stopped writing the sigma.",
+     "audio_text": null,
+     "start": 1246.45,
+     "end": 1249.25,
+     "dur": 2.8,
+     "start_frame": 37393,
+     "end_frame": 37477
+    },
+    {
+     "text": "This is the Einstein summation convention.",
+     "audio_text": null,
+     "start": 1249.6,
+     "end": 1252.825,
+     "dur": 3.225,
+     "start_frame": 37488,
+     "end_frame": 37585
+    },
+    {
+     "text": "When an index is repeated in a term, we add up the terms for one, two and three, even though no sum sign is written.",
+     "audio_text": null,
+     "start": 1253.175,
+     "end": 1260.9,
+     "dur": 7.725,
+     "start_frame": 37595,
+     "end_frame": 37827
+    },
+    {
+     "text": "So p dot q is just p sub i q sub i.",
+     "audio_text": null,
+     "start": 1261.25,
+     "end": 1264.7,
+     "dur": 3.45,
+     "start_frame": 37837,
+     "end_frame": 37941
+    }
+   ],
+   "end": 1265.5,
+   "start_frame": 36692,
+   "end_frame": 37965
+  },
+  {
+   "id": "s17_dummy",
+   "start": 1265.5,
+   "sentences": [
+    {
+     "text": "A repeated index is called a dummy index, because its letter doesn't matter. p sub i q sub i and p sub j q sub j are exactly the same sum, just as a loop counter in a program can have any name.",
+     "audio_text": null,
+     "start": 1265.5,
+     "end": 1280.325,
+     "dur": 14.825,
+     "start_frame": 37965,
+     "end_frame": 38410
+    },
+    {
+     "text": "A term with no free index is a single number, a scalar.",
+     "audio_text": null,
+     "start": 1280.675,
+     "end": 1285.075,
+     "dur": 4.4,
+     "start_frame": 38420,
+     "end_frame": 38552
+    },
+    {
+     "text": "A term with one free index is a vector, three numbers.",
+     "audio_text": null,
+     "start": 1285.425,
+     "end": 1289.55,
+     "dur": 4.125,
+     "start_frame": 38563,
+     "end_frame": 38686
+    },
+    {
+     "text": "And one rule keeps everything safe: an index may appear at most twice in a term.",
+     "audio_text": null,
+     "start": 1289.9,
+     "end": 1295.575,
+     "dur": 5.675,
+     "start_frame": 38697,
+     "end_frame": 38867
+    },
+    {
+     "text": "Something like p sub i q sub i s sub i has no meaning, because we can't tell which pair to add up.",
+     "audio_text": null,
+     "start": 1295.925,
+     "end": 1303.225,
+     "dur": 7.3,
+     "start_frame": 38878,
+     "end_frame": 39097
+    }
+   ],
+   "end": 1304.025,
+   "start_frame": 37965,
+   "end_frame": 39121
+  },
+  {
+   "id": "s18_length_index",
+   "start": 1304.025,
+   "sentences": [
+    {
+     "text": "Here's a quick use.",
+     "audio_text": null,
+     "start": 1304.025,
+     "end": 1305.9,
+     "dur": 1.875,
+     "start_frame": 39121,
+     "end_frame": 39177
+    },
+    {
+     "text": "The wind's length squared is u sub i times u sub i, the sum of its three components squared.",
+     "audio_text": null,
+     "start": 1306.25,
+     "end": 1312.9,
+     "dur": 6.65,
+     "start_frame": 39187,
+     "end_frame": 39387
+    },
+    {
+     "text": "For the wind a kilometre above Brest, that's five point eight squared, plus thirty three point five squared, plus about zero.",
+     "audio_text": null,
+     "start": 1313.25,
+     "end": 1321.825,
+     "dur": 8.575,
+     "start_frame": 39397,
+     "end_frame": 39655
+    },
+    {
+     "text": "That's about one thousand one hundred and fifty six.",
+     "audio_text": null,
+     "start": 1322.175,
+     "end": 1325.9,
+     "dur": 3.725,
+     "start_frame": 39665,
+     "end_frame": 39777
+    },
+    {
+     "text": "Its square root is thirty four metres per second, the length we saw before.",
+     "audio_text": null,
+     "start": 1326.25,
+     "end": 1331.625,
+     "dur": 5.375,
+     "start_frame": 39787,
+     "end_frame": 39949
+    }
+   ],
+   "end": 1332.425,
+   "start_frame": 39121,
+   "end_frame": 39973
+  },
+  {
+   "id": "s19_three_reasons",
+   "start": 1332.425,
+   "sentences": [
+    {
+     "text": "So why write maths like this?",
+     "audio_text": null,
+     "start": 1332.425,
+     "end": 1334.75,
+     "dur": 2.325,
+     "start_frame": 39973,
+     "end_frame": 40042
+    },
+    {
+     "text": "There are three good reasons.",
+     "audio_text": null,
+     "start": 1335.1,
+     "end": 1337.275,
+     "dur": 2.175,
+     "start_frame": 40053,
+     "end_frame": 40118
+    },
+    {
+     "text": "The first is that it's short: one line can hold three equations, or even nine terms, as we'll see in a moment.",
+     "audio_text": null,
+     "start": 1337.625,
+     "end": 1345.025,
+     "dur": 7.4,
+     "start_frame": 40129,
+     "end_frame": 40351
+    },
+    {
+     "text": "The second is that it's safe: the rules for free and dummy indices catch mistakes, like adding an arrow to a single number, before we compute anything.",
+     "audio_text": null,
+     "start": 1345.375,
+     "end": 1355.45,
+     "dur": 10.075,
+     "start_frame": 40361,
+     "end_frame": 40663
+    },
+    {
+     "text": "The third is that it turns algebra into counting.",
+     "audio_text": null,
+     "start": 1355.8,
+     "end": 1359.6,
+     "dur": 3.8,
+     "start_frame": 40674,
+     "end_frame": 40788
+    },
+    {
+     "text": "With a special symbol that we'll meet soon, and a second one in the next movie, we can prove rules about vectors by checking indices, instead of drawing pictures.",
+     "audio_text": null,
+     "start": 1359.95,
+     "end": 1370.075,
+     "dur": 10.125,
+     "start_frame": 40798,
+     "end_frame": 41102
+    }
+   ],
+   "end": 1370.875,
+   "start_frame": 39973,
+   "end_frame": 41126
+  },
+  {
+   "id": "s20_gradient",
+   "start": 1370.875,
+   "sentences": [
+    {
+     "text": "Now let's see how index notation is used in weather.",
+     "audio_text": null,
+     "start": 1370.875,
+     "end": 1374.875,
+     "dur": 4.0,
+     "start_frame": 41126,
+     "end_frame": 41246
+    },
+    {
+     "text": "Our question: how fast was the wind bringing warmer air to Brest?",
+     "audio_text": null,
+     "start": 1375.225,
+     "end": 1380.05,
+     "dur": 4.825,
+     "start_frame": 41257,
+     "end_frame": 41401
+    },
+    {
+     "text": "First, we need to know how the temperature changes from place to place.",
+     "audio_text": null,
+     "start": 1380.4,
+     "end": 1385.2,
+     "dur": 4.8,
+     "start_frame": 41412,
+     "end_frame": 41556
+    },
+    {
+     "text": "Going east, it changes by some amount for every metre: that's partial capital T by partial x one.",
+     "audio_text": null,
+     "start": 1385.55,
+     "end": 1392.925,
+     "dur": 7.375,
+     "start_frame": 41566,
+     "end_frame": 41788
+    },
+    {
+     "text": "Here capital T stands for temperature, and partial means we move only east, while north and up stay fixed.",
+     "audio_text": null,
+     "start": 1393.275,
+     "end": 1400.575,
+     "dur": 7.3,
+     "start_frame": 41798,
+     "end_frame": 42017
+    },
+    {
+     "text": "Going north, it's partial T by partial x two, and going up, partial T by partial x three.",
+     "audio_text": null,
+     "start": 1400.925,
+     "end": 1408.025,
+     "dur": 7.1,
+     "start_frame": 42028,
+     "end_frame": 42241
+    },
+    {
+     "text": "In index notation, all three are partial T by partial x sub i.",
+     "audio_text": null,
+     "start": 1408.375,
+     "end": 1413.525,
+     "dur": 5.15,
+     "start_frame": 42251,
+     "end_frame": 42406
+    },
+    {
+     "text": "Together they make an arrow called the temperature gradient, read grad T.",
+     "audio_text": null,
+     "start": 1413.875,
+     "end": 1418.775,
+     "dur": 4.9,
+     "start_frame": 42416,
+     "end_frame": 42563
+    },
+    {
+     "text": "It points the way the temperature increases fastest.",
+     "audio_text": null,
+     "start": 1419.125,
+     "end": 1422.675,
+     "dur": 3.55,
+     "start_frame": 42574,
+     "end_frame": 42680
+    },
+    {
+     "text": "Partial derivatives and the gradient each get their own movie later in the series.",
+     "audio_text": null,
+     "start": 1423.025,
+     "end": 1428.5,
+     "dur": 5.475,
+     "start_frame": 42691,
+     "end_frame": 42855
+    }
+   ],
+   "end": 1429.3,
+   "start_frame": 41126,
+   "end_frame": 42879
+  },
+  {
+   "id": "s21_advection_built",
+   "start": 1429.3,
+   "sentences": [
+    {
+     "text": "Now picture an air parcel: a small volume of air that moves with the wind.",
+     "audio_text": null,
+     "start": 1429.3,
+     "end": 1434.6,
+     "dur": 5.3,
+     "start_frame": 42879,
+     "end_frame": 43038
+    },
+    {
+     "text": "In one second, the wind carries it u one metres east, so the temperature around it changes by u one times partial T by partial x one.",
+     "audio_text": null,
+     "start": 1434.95,
+     "end": 1445.125,
+     "dur": 10.175,
+     "start_frame": 43048,
+     "end_frame": 43354
+    },
+    {
+     "text": "Moving north adds u two times partial T by partial x two, and rising adds u three times partial T by partial x three.",
+     "audio_text": null,
+     "start": 1445.475,
+     "end": 1454.825,
+     "dur": 9.35,
+     "start_frame": 43364,
+     "end_frame": 43645
+    },
+    {
+     "text": "Adding the three, we get u sub j times partial T by partial x sub j, with the repeated index j summed.",
+     "audio_text": null,
+     "start": 1455.175,
+     "end": 1463.325,
+     "dur": 8.15,
+     "start_frame": 43655,
+     "end_frame": 43900
+    },
+    {
+     "text": "This is the dot product of the wind with grad T, and it's called the advection of temperature.",
+     "audio_text": null,
+     "start": 1463.675,
+     "end": 1469.775,
+     "dur": 6.1,
+     "start_frame": 43910,
+     "end_frame": 44093
+    },
+    {
+     "text": "Advection means being carried along by the flow.",
+     "audio_text": null,
+     "start": 1470.125,
+     "end": 1473.8,
+     "dur": 3.675,
+     "start_frame": 44104,
+     "end_frame": 44214
+    },
+    {
+     "text": "It tells us how fast the wind carries the parcel into warmer or colder places, in degrees per second.",
+     "audio_text": null,
+     "start": 1474.15,
+     "end": 1481.425,
+     "dur": 7.275,
+     "start_frame": 44224,
+     "end_frame": 44443
+    }
+   ],
+   "end": 1482.225,
+   "start_frame": 42879,
+   "end_frame": 44467
+  },
+  {
+   "id": "s22_advection_easy",
+   "start": 1482.225,
+   "sentences": [
+    {
+     "text": "Let's try easy numbers first.",
+     "audio_text": null,
+     "start": 1482.225,
+     "end": 1484.75,
+     "dur": 2.525,
+     "start_frame": 44467,
+     "end_frame": 44542
+    },
+    {
+     "text": "Suppose the wind blows ten metres per second towards the east and thirty towards the north.",
+     "audio_text": null,
+     "start": 1485.1,
+     "end": 1491.275,
+     "dur": 6.175,
+     "start_frame": 44553,
+     "end_frame": 44738
+    },
+    {
+     "text": "And suppose the temperature drops three degrees for every hundred kilometres east, and two degrees for every hundred kilometres north.",
+     "audio_text": null,
+     "start": 1491.625,
+     "end": 1499.975,
+     "dur": 8.35,
+     "start_frame": 44749,
+     "end_frame": 44999
+    },
+    {
+     "text": "A hundred kilometres is ten to the five metres, so the slopes are minus three and minus two, times ten to the minus five kelvin per metre.",
+     "audio_text": null,
+     "start": 1500.325,
+     "end": 1509.65,
+     "dur": 9.325,
+     "start_frame": 45010,
+     "end_frame": 45289
+    },
+    {
+     "text": "A kelvin step is the same size as a degree Celsius step.",
+     "audio_text": null,
+     "start": 1510.0,
+     "end": 1514.55,
+     "dur": 4.55,
+     "start_frame": 45300,
+     "end_frame": 45436
+    },
+    {
+     "text": "Leaving the up part aside for now, the sum is ten times minus three, plus thirty times minus two.",
+     "audio_text": null,
+     "start": 1514.9,
+     "end": 1521.975,
+     "dur": 7.075,
+     "start_frame": 45447,
+     "end_frame": 45659
+    },
+    {
+     "text": "That's minus ninety times ten to the minus five, or minus nine times ten to the minus four kelvin per second.",
+     "audio_text": null,
+     "start": 1522.325,
+     "end": 1530.05,
+     "dur": 7.725,
+     "start_frame": 45670,
+     "end_frame": 45901
+    },
+    {
+     "text": "Times three thousand six hundred seconds in an hour, it's about minus three point two kelvin per hour.",
+     "audio_text": null,
+     "start": 1530.4,
+     "end": 1537.2,
+     "dur": 6.8,
+     "start_frame": 45912,
+     "end_frame": 46116
+    }
+   ],
+   "end": 1538.0,
+   "start_frame": 44467,
+   "end_frame": 46140
+  },
+  {
+   "id": "s23_advection_sign",
+   "start": 1538.0,
+   "sentences": [
+    {
+     "text": "What does the minus sign mean?",
+     "audio_text": null,
+     "start": 1538.0,
+     "end": 1540.25,
+     "dur": 2.25,
+     "start_frame": 46140,
+     "end_frame": 46207
+    },
+    {
+     "text": "The wind blows towards colder places, so each parcel is carried from warmer air into colder air.",
+     "audio_text": null,
+     "start": 1540.6,
+     "end": 1547.3,
+     "dur": 6.7,
+     "start_frame": 46218,
+     "end_frame": 46419
+    },
+    {
+     "text": "Now turn it around, and stand still.",
+     "audio_text": null,
+     "start": 1547.65,
+     "end": 1550.45,
+     "dur": 2.8,
+     "start_frame": 46429,
+     "end_frame": 46513
+    },
+    {
+     "text": "The air arriving at a fixed place comes from the warmer side.",
+     "audio_text": null,
+     "start": 1550.8,
+     "end": 1555.0,
+     "dur": 4.2,
+     "start_frame": 46524,
+     "end_frame": 46650
+    },
+    {
+     "text": "So if each parcel keeps its own temperature, a thermometer fixed at that place warms by plus three point two kelvin per hour.",
+     "audio_text": null,
+     "start": 1555.35,
+     "end": 1563.775,
+     "dur": 8.425,
+     "start_frame": 46660,
+     "end_frame": 46913
+    },
+    {
+     "text": "This is called warm advection.",
+     "audio_text": null,
+     "start": 1564.125,
+     "end": 1566.55,
+     "dur": 2.425,
+     "start_frame": 46924,
+     "end_frame": 46996
+    },
+    {
+     "text": "In symbols, the fixed thermometer's rate is minus u sub j times partial T by partial x sub j.",
+     "audio_text": null,
+     "start": 1566.9,
+     "end": 1574.55,
+     "dur": 7.65,
+     "start_frame": 47007,
+     "end_frame": 47236
+    },
+    {
+     "text": "Following a parcel like this is the subject of the material derivative movie, later in the series.",
+     "audio_text": null,
+     "start": 1574.9,
+     "end": 1581.575,
+     "dur": 6.675,
+     "start_frame": 47247,
+     "end_frame": 47447
+    }
+   ],
+   "end": 1582.375,
+   "start_frame": 46140,
+   "end_frame": 47471
+  },
+  {
+   "id": "s24_real_map",
+   "start": 1582.375,
+   "sentences": [
+    {
+     "text": "Now the real numbers.",
+     "audio_text": null,
+     "start": 1582.375,
+     "end": 1584.4,
+     "dur": 2.025,
+     "start_frame": 47471,
+     "end_frame": 47532
+    },
+    {
+     "text": "Here's the reanalysis temperature a little more than a kilometre up, at that same moment.",
+     "audio_text": null,
+     "start": 1584.75,
+     "end": 1590.575,
+     "dur": 5.825,
+     "start_frame": 47542,
+     "end_frame": 47717
+    },
+    {
+     "text": "Lines that join places with the same temperature are called isotherms, and here they're drawn every two degrees.",
+     "audio_text": null,
+     "start": 1590.925,
+     "end": 1598.175,
+     "dur": 7.25,
+     "start_frame": 47728,
+     "end_frame": 47945
+    },
+    {
+     "text": "They crowd together just south-west of Brest.",
+     "audio_text": null,
+     "start": 1598.525,
+     "end": 1601.6,
+     "dur": 3.075,
+     "start_frame": 47956,
+     "end_frame": 48048
+    },
+    {
+     "text": "That's where Ciarán's warm air is pushing north into the colder air ahead of it.",
+     "audio_text": "That's where Keer-awn's warm air is pushing north into the colder air ahead of it.",
+     "start": 1601.95,
+     "end": 1606.975,
+     "dur": 5.025,
+     "start_frame": 48058,
+     "end_frame": 48209
+    },
+    {
+     "text": "Let's zoom in on Brest and read the map.",
+     "audio_text": null,
+     "start": 1607.325,
+     "end": 1610.4,
+     "dur": 3.075,
+     "start_frame": 48220,
+     "end_frame": 48312
+    }
+   ],
+   "end": 1611.2,
+   "start_frame": 47471,
+   "end_frame": 48336
+  },
+  {
+   "id": "s25_real_gradient",
+   "start": 1611.2,
+   "sentences": [
+    {
+     "text": "Going east from Brest, the temperature falls by three point two degrees in a hundred kilometres.",
+     "audio_text": null,
+     "start": 1611.2,
+     "end": 1617.55,
+     "dur": 6.35,
+     "start_frame": 48336,
+     "end_frame": 48526
+    },
+    {
+     "text": "Going north, it falls by two point five.",
+     "audio_text": null,
+     "start": 1617.9,
+     "end": 1621.225,
+     "dur": 3.325,
+     "start_frame": 48537,
+     "end_frame": 48637
+    },
+    {
+     "text": "So partial T by partial x one is minus three point two times ten to the minus five kelvin per metre.",
+     "audio_text": null,
+     "start": 1621.575,
+     "end": 1629.05,
+     "dur": 7.475,
+     "start_frame": 48647,
+     "end_frame": 48871
+    },
+    {
+     "text": "And partial T by partial x two is minus two point five times ten to the minus five.",
+     "audio_text": null,
+     "start": 1629.4,
+     "end": 1635.875,
+     "dur": 6.475,
+     "start_frame": 48882,
+     "end_frame": 49076
+    },
+    {
+     "text": "The grad T arrow points south-west, towards the warm air.",
+     "audio_text": null,
+     "start": 1636.225,
+     "end": 1640.4,
+     "dur": 4.175,
+     "start_frame": 49087,
+     "end_frame": 49212
+    }
+   ],
+   "end": 1641.2,
+   "start_frame": 48336,
+   "end_frame": 49236
+  },
+  {
+   "id": "s26_real_sum",
+   "start": 1641.2,
+   "sentences": [
+    {
+     "text": "The wind there blows five point eight metres per second towards the east and thirty three point five towards the north.",
+     "audio_text": null,
+     "start": 1641.2,
+     "end": 1648.7,
+     "dur": 7.5,
+     "start_frame": 49236,
+     "end_frame": 49461
+    },
+    {
+     "text": "Now the sum, term by term.",
+     "audio_text": null,
+     "start": 1649.05,
+     "end": 1651.65,
+     "dur": 2.6,
+     "start_frame": 49471,
+     "end_frame": 49549
+    },
+    {
+     "text": "The east term is five point eight times minus three point two times ten to the minus five.",
+     "audio_text": null,
+     "start": 1652.0,
+     "end": 1658.2,
+     "dur": 6.2,
+     "start_frame": 49560,
+     "end_frame": 49746
+    },
+    {
+     "text": "That's about minus one point nine times ten to the minus four kelvin per second.",
+     "audio_text": null,
+     "start": 1658.55,
+     "end": 1664.45,
+     "dur": 5.9,
+     "start_frame": 49756,
+     "end_frame": 49933
+    },
+    {
+     "text": "The north term is thirty three point five times minus two point five times ten to the minus five, about minus eight point four times ten to the minus four.",
+     "audio_text": null,
+     "start": 1664.8,
+     "end": 1675.3,
+     "dur": 10.5,
+     "start_frame": 49944,
+     "end_frame": 50259
+    },
+    {
+     "text": "Most of the effect comes from the strong wind from the south.",
+     "audio_text": null,
+     "start": 1675.65,
+     "end": 1679.5,
+     "dur": 3.85,
+     "start_frame": 50269,
+     "end_frame": 50385
+    },
+    {
+     "text": "Together, they make about minus one point zero times ten to the minus three kelvin per second, or minus three point seven kelvin per hour.",
+     "audio_text": null,
+     "start": 1679.85,
+     "end": 1689.025,
+     "dur": 9.175,
+     "start_frame": 50395,
+     "end_frame": 50671
+    },
+    {
+     "text": "So the air arriving over Brest was warmer, by about three point seven degrees for every hour.",
+     "audio_text": null,
+     "start": 1689.375,
+     "end": 1695.875,
+     "dur": 6.5,
+     "start_frame": 50681,
+     "end_frame": 50876
+    }
+   ],
+   "end": 1696.675,
+   "start_frame": 49236,
+   "end_frame": 50900
+  },
+  {
+   "id": "s27_real_check",
+   "start": 1696.675,
+   "sentences": [
+    {
+     "text": "Did Brest really warm up?",
+     "audio_text": null,
+     "start": 1696.675,
+     "end": 1698.825,
+     "dur": 2.15,
+     "start_frame": 50900,
+     "end_frame": 50965
+    },
+    {
+     "text": "In the reanalysis, the temperature at this height over Brest rose from two point four degrees at five o'clock to eight point two at seven.",
+     "audio_text": null,
+     "start": 1699.175,
+     "end": 1708.2,
+     "dur": 9.025,
+     "start_frame": 50975,
+     "end_frame": 51246
+    },
+    {
+     "text": "That's about two point nine degrees per hour, close to our estimate, but a little smaller.",
+     "audio_text": null,
+     "start": 1708.55,
+     "end": 1714.4,
+     "dur": 5.85,
+     "start_frame": 51256,
+     "end_frame": 51432
+    },
+    {
+     "text": "Most of the gap comes from the rising air, which cools as it expands, and our sum alone doesn't include that.",
+     "audio_text": null,
+     "start": 1714.75,
+     "end": 1721.975,
+     "dur": 7.225,
+     "start_frame": 51442,
+     "end_frame": 51659
+    },
+    {
+     "text": "Why rising air cools gets its own movie, on the thermodynamics of the atmosphere.",
+     "audio_text": null,
+     "start": 1722.325,
+     "end": 1728.275,
+     "dur": 5.95,
+     "start_frame": 51670,
+     "end_frame": 51848
+    },
+    {
+     "text": "Down at the ground, the station's thermometer climbed from ten point three to fourteen point nine degrees between six and eight o'clock.",
+     "audio_text": null,
+     "start": 1728.625,
+     "end": 1737.3,
+     "dur": 8.675,
+     "start_frame": 51859,
+     "end_frame": 52119
+    },
+    {
+     "text": "The edge of the warm air had arrived: forecasters call it a warm front.",
+     "audio_text": null,
+     "start": 1737.65,
+     "end": 1742.625,
+     "dur": 4.975,
+     "start_frame": 52129,
+     "end_frame": 52279
+    }
+   ],
+   "end": 1743.425,
+   "start_frame": 50900,
+   "end_frame": 52303
+  },
+  {
+   "id": "s28_nine_terms",
+   "start": 1743.425,
+   "sentences": [
+    {
+     "text": "Index notation really shines when we follow the wind itself, because the wind carries its own motion along too.",
+     "audio_text": null,
+     "start": 1743.425,
+     "end": 1751.525,
+     "dur": 8.1,
+     "start_frame": 52303,
+     "end_frame": 52546
+    },
+    {
+     "text": "The advection of the wind is u sub j times partial u sub i by partial x sub j.",
+     "audio_text": null,
+     "start": 1751.875,
+     "end": 1758.525,
+     "dur": 6.65,
+     "start_frame": 52556,
+     "end_frame": 52756
+    },
+    {
+     "text": "It has one free index, i, so it's three equations.",
+     "audio_text": null,
+     "start": 1758.875,
+     "end": 1762.825,
+     "dur": 3.95,
+     "start_frame": 52766,
+     "end_frame": 52885
+    },
+    {
+     "text": "And it has one dummy index, j, so each equation has three terms.",
+     "audio_text": null,
+     "start": 1763.175,
+     "end": 1768.2,
+     "dur": 5.025,
+     "start_frame": 52895,
+     "end_frame": 53046
+    },
+    {
+     "text": "That's nine terms in one short line.",
+     "audio_text": null,
+     "start": 1768.55,
+     "end": 1771.4,
+     "dur": 2.85,
+     "start_frame": 53056,
+     "end_frame": 53142
+    },
+    {
+     "text": "For i equal to one, they read: u one times partial u one by partial x one, plus u two times partial u one by partial x two, plus u three times partial u one by partial x three.",
+     "audio_text": null,
+     "start": 1771.75,
+     "end": 1785.725,
+     "dur": 13.975,
+     "start_frame": 53152,
+     "end_frame": 53572
+    },
+    {
+     "text": "Weather forecast models work out all nine of these at millions of points, every few minutes.",
+     "audio_text": null,
+     "start": 1786.075,
+     "end": 1792.125,
+     "dur": 6.05,
+     "start_frame": 53582,
+     "end_frame": 53764
+    },
+    {
+     "text": "We'll read this term piece by piece in the second movie on vector identities.",
+     "audio_text": null,
+     "start": 1792.475,
+     "end": 1797.85,
+     "dur": 5.375,
+     "start_frame": 53774,
+     "end_frame": 53935
+    }
+   ],
+   "end": 1798.65,
+   "start_frame": 52303,
+   "end_frame": 53960
+  },
+  {
+   "id": "s29_kronecker",
+   "start": 1798.65,
+   "sentences": [
+    {
+     "text": "Now for the first special symbol.",
+     "audio_text": null,
+     "start": 1798.65,
+     "end": 1801.2,
+     "dur": 2.55,
+     "start_frame": 53959,
+     "end_frame": 54036
+    },
+    {
+     "text": "Let's take dot products of our unit vectors with each other.",
+     "audio_text": null,
+     "start": 1801.55,
+     "end": 1805.525,
+     "dur": 3.975,
+     "start_frame": 54046,
+     "end_frame": 54166
+    },
+    {
+     "text": "East with east gives one, because a unit vector has length one.",
+     "audio_text": null,
+     "start": 1805.875,
+     "end": 1810.5,
+     "dur": 4.625,
+     "start_frame": 54176,
+     "end_frame": 54315
+    },
+    {
+     "text": "East with north gives zero, because they're at right angles.",
+     "audio_text": null,
+     "start": 1810.85,
+     "end": 1815.05,
+     "dur": 4.2,
+     "start_frame": 54325,
+     "end_frame": 54451
+    },
+    {
+     "text": "Doing all nine pairs, we get one whenever the two are the same, and zero whenever they're different.",
+     "audio_text": null,
+     "start": 1815.4,
+     "end": 1821.95,
+     "dur": 6.55,
+     "start_frame": 54462,
+     "end_frame": 54658
+    },
+    {
+     "text": "This pattern has its own name: the Kronecker delta, written delta i j.",
+     "audio_text": null,
+     "start": 1822.3,
+     "end": 1827.5,
+     "dur": 5.2,
+     "start_frame": 54669,
+     "end_frame": 54825
+    },
+    {
+     "text": "It's one if i equals j, and zero if i is not equal to j.",
+     "audio_text": null,
+     "start": 1827.85,
+     "end": 1832.7,
+     "dur": 4.85,
+     "start_frame": 54835,
+     "end_frame": 54981
+    },
+    {
+     "text": "As a table, it has ones along the diagonal and zeros everywhere else.",
+     "audio_text": null,
+     "start": 1833.05,
+     "end": 1838.15,
+     "dur": 5.1,
+     "start_frame": 54991,
+     "end_frame": 55144
+    }
+   ],
+   "end": 1838.95,
+   "start_frame": 53960,
+   "end_frame": 55168
+  },
+  {
+   "id": "s30_substitution",
+   "start": 1838.95,
+   "sentences": [
+    {
+     "text": "The Kronecker delta has one very useful trick.",
+     "audio_text": null,
+     "start": 1838.95,
+     "end": 1842.65,
+     "dur": 3.7,
+     "start_frame": 55168,
+     "end_frame": 55279
+    },
+    {
+     "text": "Look at delta i j times u sub j, with j summed.",
+     "audio_text": null,
+     "start": 1843.0,
+     "end": 1847.25,
+     "dur": 4.25,
+     "start_frame": 55290,
+     "end_frame": 55417
+    },
+    {
+     "text": "Written out, it's delta i one times u one, plus delta i two times u two, plus delta i three times u three.",
+     "audio_text": null,
+     "start": 1847.6,
+     "end": 1855.725,
+     "dur": 8.125,
+     "start_frame": 55428,
+     "end_frame": 55672
+    },
+    {
+     "text": "For i equal to two, only delta two two is one, and the other two deltas are zero.",
+     "audio_text": null,
+     "start": 1856.075,
+     "end": 1862.225,
+     "dur": 6.15,
+     "start_frame": 55682,
+     "end_frame": 55867
+    },
+    {
+     "text": "So all that's left is u two.",
+     "audio_text": null,
+     "start": 1862.575,
+     "end": 1865.0,
+     "dur": 2.425,
+     "start_frame": 55877,
+     "end_frame": 55950
+    },
+    {
+     "text": "The same happens for every i.",
+     "audio_text": null,
+     "start": 1865.35,
+     "end": 1867.75,
+     "dur": 2.4,
+     "start_frame": 55960,
+     "end_frame": 56032
+    },
+    {
+     "text": "So delta i j times u sub j equals u sub i.",
+     "audio_text": null,
+     "start": 1868.1,
+     "end": 1872.1,
+     "dur": 4.0,
+     "start_frame": 56043,
+     "end_frame": 56163
+    },
+    {
+     "text": "The delta swaps the summed index j for its other index, i, and then it disappears.",
+     "audio_text": null,
+     "start": 1872.45,
+     "end": 1878.675,
+     "dur": 6.225,
+     "start_frame": 56173,
+     "end_frame": 56360
+    }
+   ],
+   "end": 1879.475,
+   "start_frame": 55168,
+   "end_frame": 56384
+  },
+  {
+   "id": "s31_balloon_delta",
+   "start": 1879.475,
+   "sentences": [
+    {
+     "text": "Here's what that means for a weather balloon.",
+     "audio_text": null,
+     "start": 1879.475,
+     "end": 1882.375,
+     "dur": 2.9,
+     "start_frame": 56384,
+     "end_frame": 56471
+    },
+    {
+     "text": "Think of the east distance from Brest, x one, as a map: at each place, its value is how far east that place is.",
+     "audio_text": null,
+     "start": 1882.725,
+     "end": 1890.85,
+     "dur": 8.125,
+     "start_frame": 56482,
+     "end_frame": 56725
+    },
+    {
+     "text": "It grows by one metre for every metre east, and it doesn't change at all going north or up.",
+     "audio_text": null,
+     "start": 1891.2,
+     "end": 1897.225,
+     "dur": 6.025,
+     "start_frame": 56736,
+     "end_frame": 56917
+    },
+    {
+     "text": "So partial x sub i by partial x sub j is just delta i j.",
+     "audio_text": null,
+     "start": 1897.575,
+     "end": 1902.95,
+     "dur": 5.375,
+     "start_frame": 56927,
+     "end_frame": 57088
+    },
+    {
+     "text": "Now let the wind carry this map, exactly as it carried temperature.",
+     "audio_text": null,
+     "start": 1903.3,
+     "end": 1908.025,
+     "dur": 4.725,
+     "start_frame": 57099,
+     "end_frame": 57241
+    },
+    {
+     "text": "We get u sub j times partial x sub i by partial x sub j, which is u sub j times delta i j, which is u sub i.",
+     "audio_text": null,
+     "start": 1908.375,
+     "end": 1917.975,
+     "dur": 9.6,
+     "start_frame": 57251,
+     "end_frame": 57539
+    },
+    {
+     "text": "In words: as the balloon is carried along, its position changes at the wind's velocity.",
+     "audio_text": null,
+     "start": 1918.325,
+     "end": 1924.625,
+     "dur": 6.3,
+     "start_frame": 57550,
+     "end_frame": 57739
+    },
+    {
+     "text": "A kilometre above Brest, it would drift five point eight metres east and thirty three point five metres north every second, about one hundred and twenty kilometres north in an hour.",
+     "audio_text": null,
+     "start": 1924.975,
+     "end": 1936.85,
+     "dur": 11.875,
+     "start_frame": 57749,
+     "end_frame": 58105
+    }
+   ],
+   "end": 1937.65,
+   "start_frame": 56384,
+   "end_frame": 58130
+  },
+  {
+   "id": "s32_delta_facts",
+   "start": 1937.65,
+   "sentences": [
+    {
+     "text": "Two more quick facts.",
+     "audio_text": null,
+     "start": 1937.65,
+     "end": 1939.6,
+     "dur": 1.95,
+     "start_frame": 58129,
+     "end_frame": 58188
+    },
+    {
+     "text": "Delta i i, with i summed, is one plus one plus one, which is three: the number of dimensions of space.",
+     "audio_text": null,
+     "start": 1939.95,
+     "end": 1947.6,
+     "dur": 7.65,
+     "start_frame": 58198,
+     "end_frame": 58428
+    },
+    {
+     "text": "And delta i j times p sub i q sub j turns a sum of nine terms into a sum of three, because it's just p dot q.",
+     "audio_text": null,
+     "start": 1947.95,
+     "end": 1956.725,
+     "dur": 8.775,
+     "start_frame": 58438,
+     "end_frame": 58702
+    },
+    {
+     "text": "The Kronecker delta comes back in the tensors movie, as the simplest tensor of all.",
+     "audio_text": null,
+     "start": 1957.075,
+     "end": 1962.9,
+     "dur": 5.825,
+     "start_frame": 58712,
+     "end_frame": 58887
+    }
+   ],
+   "end": 1963.7,
+   "start_frame": 58130,
+   "end_frame": 58911
+  },
+  {
+   "id": "s33_recap",
+   "start": 1963.7,
+   "sentences": [
+    {
+     "text": "To sum up, a scalar is one number, like the temperature, and a vector is an arrow, like the wind.",
+     "audio_text": null,
+     "start": 1963.7,
+     "end": 1970.4,
+     "dur": 6.7,
+     "start_frame": 58911,
+     "end_frame": 59112
+    },
+    {
+     "text": "Its components are its steps along the unit vectors east, north and up, and its length, by Pythagoras, is the wind speed.",
+     "audio_text": null,
+     "start": 1970.75,
+     "end": 1979.3,
+     "dur": 8.55,
+     "start_frame": 59122,
+     "end_frame": 59379
+    },
+    {
+     "text": "The components change when we turn the axes, but the arrow and its length don't.",
+     "audio_text": null,
+     "start": 1979.65,
+     "end": 1985.0,
+     "dur": 5.35,
+     "start_frame": 59389,
+     "end_frame": 59550
+    },
+    {
+     "text": "Vectors add tip to tail, or component by component, and p minus q is the arrow from the tip of q to the tip of p: a wind change, a wind shear, or an anomaly.",
+     "audio_text": null,
+     "start": 1985.35,
+     "end": 1997.15,
+     "dur": 11.8,
+     "start_frame": 59560,
+     "end_frame": 59914
+    },
+    {
+     "text": "In index notation, u sub i stands for all three components, and a free index means three equations.",
+     "audio_text": null,
+     "start": 1997.5,
+     "end": 2005.125,
+     "dur": 7.625,
+     "start_frame": 59925,
+     "end_frame": 60154
+    },
+    {
+     "text": "A repeated index is summed: that's the Einstein convention, so u sub j times partial T by partial x sub j is the advection of temperature.",
+     "audio_text": null,
+     "start": 2005.475,
+     "end": 2016.15,
+     "dur": 10.675,
+     "start_frame": 60164,
+     "end_frame": 60484
+    },
+    {
+     "text": "Over Brest, it brought warmer air at about three point seven degrees per hour.",
+     "audio_text": null,
+     "start": 2016.5,
+     "end": 2021.65,
+     "dur": 5.15,
+     "start_frame": 60495,
+     "end_frame": 60649
+    },
+    {
+     "text": "The Kronecker delta is one for equal indices and zero otherwise, and it swaps one index for another.",
+     "audio_text": null,
+     "start": 2022.0,
+     "end": 2029.15,
+     "dur": 7.15,
+     "start_frame": 60660,
+     "end_frame": 60874
+    }
+   ],
+   "end": 2029.95,
+   "start_frame": 58911,
+   "end_frame": 60898
+  },
+  {
+   "id": "s34_next",
+   "start": 2029.95,
+   "sentences": [
+    {
+     "text": "There's one more special symbol, called the alternating tensor, and written epsilon i j k.",
+     "audio_text": null,
+     "start": 2029.95,
+     "end": 2036.55,
+     "dur": 6.6,
+     "start_frame": 60898,
+     "end_frame": 61096
+    },
+    {
+     "text": "With it, the cross product fits in one line, and so does the push that Earth's spin gives the wind.",
+     "audio_text": null,
+     "start": 2036.9,
+     "end": 2043.6,
+     "dur": 6.7,
+     "start_frame": 61107,
+     "end_frame": 61308
+    },
+    {
+     "text": "That's the next movie in this series, which starts exactly where this one stops.",
+     "audio_text": null,
+     "start": 2043.95,
+     "end": 2049.025,
+     "dur": 5.075,
+     "start_frame": 61318,
+     "end_frame": 61471
+    }
+   ],
+   "end": 2049.825,
+   "start_frame": 60898,
+   "end_frame": 61495
+  },
+  {
+   "id": "s35_end",
+   "start": 2049.825,
+   "sentences": [
+    {
+     "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
+     "audio_text": null,
+     "start": 2049.825,
+     "end": 2056.025,
+     "dur": 6.2,
+     "start_frame": 61495,
+     "end_frame": 61681
+    },
+    {
+     "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
+     "audio_text": null,
+     "start": 2056.375,
+     "end": 2064.425,
+     "dur": 8.05,
+     "start_frame": 61691,
+     "end_frame": 61933
+    },
+    {
+     "text": "The notebook for vectors and index notation, and the notebooks for the other maths concepts, are on the website that goes with this video.",
+     "audio_text": null,
+     "start": 2064.775,
+     "end": 2073.675,
+     "dur": 8.9,
+     "start_frame": 61943,
+     "end_frame": 62210
+    }
+   ],
+   "end": 2073.975,
+   "start_frame": 61495,
+   "end_frame": 62219
+  }
+ ],
+ "total_s": 2073.975,
+ "total_frames": 62220,
+ "render_s": 2060.9,
+ "loudnorm_input": {
+  "input_i": "-24.80",
+  "input_tp": "-1.36",
+  "input_lra": "4.70",
+  "input_thresh": "-35.28",
+  "output_i": "-16.51",
+  "output_tp": "-1.50",
+  "output_lra": "4.40",
+  "output_thresh": "-26.99",
+  "normalization_type": "dynamic",
+  "target_offset": "0.51"
+ },
+ "cues": 521,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 2073.975,
+  "audio_s": 2073.975,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true
+ }
+}
