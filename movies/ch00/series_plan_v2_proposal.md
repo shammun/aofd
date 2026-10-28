@@ -16,6 +16,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 | # | Movie | State |
 |---|---|---|
 | 0.1 | Dot product | done |
+| 0.1b | Dot product, new version (intuition + use cases from the reference video; replaces 0.1 as the one to publish once reviewed — user 2026-10-28) | planned (25:04) |
 | 0.2 | Cross product (full, 48 min) | done |
 | 0.3 | Weather basics (pressure, temperature, humidity, wind, highs/lows, fronts intro, reanalysis) | building |
 

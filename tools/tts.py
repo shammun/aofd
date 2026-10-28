@@ -19,6 +19,10 @@ Writes into ``--out`` (default: the input's folder ``audio/``, git-ignored; real
 
 Self-check (exit 1 if it fails): sum(clip durations) + gaps == audio length within one frame, and every cue lies
 inside the audio. Gaps: 0.35 s between sentences, 0.8 s between scenes, 0.3 s lead-in and tail.
+
+Beats (user decision 2026-10-28): a sentence ending in ``[beat]`` is followed by a 1.5-s hold instead of the normal gap
+(at least 1.5 s at a scene end too) — a moment to take in a worked calculation. The marker is not spoken or captioned;
+``timing.json`` marks the sentence ``"beat": true``. House rule: use it after worked numbers, not as filler.
 """
 from __future__ import annotations
 
@@ -37,6 +41,8 @@ import soundfile as sf
 ROOT = Path(__file__).resolve().parents[1]
 SR = 24_000
 GAP_SENT, GAP_SCENE, LEAD, TAIL = 0.35, 0.8, 0.3, 0.3
+GAP_BEAT = 1.5
+BEAT = re.compile(r"\s*\[beat\]\s*", re.I)
 MAX_LINE, MAX_LINES, MAX_CPS, CUE_MIN, CUE_MAX = 42, 2, 17.0, 1.0, 7.0
 
 
@@ -78,7 +84,7 @@ def sentences(par: str) -> list[str]:
     par = re.sub(r"\s+", " ", par.strip())
     if not par:
         return []
-    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"'(])", par)
+    parts = re.split(r"(?<=[.!?])\s+(?=[A-Z0-9\"'(])|(?<=\[beat\])\s+", par, flags=re.I)  # "[beat]" ends a sentence
     return [s.strip() for s in parts if s.strip()]
 
 
@@ -248,6 +254,8 @@ def main() -> int:
     for si, sc in enumerate(scenes):
         srec = {"id": sc["id"], "start": round(t, 4), "sentences": []}
         for k, sent in enumerate(sc["sentences"]):
+            beat = bool(BEAT.search(sent))  # "[beat]": hold 1.5 s after this sentence; never spoken or captioned
+            sent = BEAT.sub(" ", sent).strip()
             spoken = respell(sent, lex)
             wav = np.concatenate([np.asarray(c, dtype=np.float32) for _, _, c in pipe(spoken, voice=voice, speed=speed)])
             dur = len(wav) / SR
@@ -256,7 +264,8 @@ def main() -> int:
             start, end = t, t + dur
             srec["sentences"].append({"text": sent, "audio_text": spoken if spoken != sent else None,
                                       "start": round(start, 4), "end": round(end, 4), "dur": round(dur, 4),
-                                      "start_frame": round(start * a.fps), "end_frame": round(end * a.fps)})
+                                      "start_frame": round(start * a.fps), "end_frame": round(end * a.fps),
+                                      **({"beat": True} if beat else {})})
             parts = split_for_cues(sent, dur)
             n = sum(len(p) for p in parts)
             c0 = start
@@ -270,6 +279,8 @@ def main() -> int:
             t = end
             last_sent = k == len(sc["sentences"]) - 1
             gap = (GAP_SCENE if si < len(scenes) - 1 else TAIL) if last_sent else GAP_SENT
+            if beat:
+                gap = max(gap, GAP_BEAT)
             pieces.append(np.zeros(int(round(gap * SR)), dtype=np.float32))
             n_gaps += round(gap * SR) / SR
             t += round(gap * SR) / SR

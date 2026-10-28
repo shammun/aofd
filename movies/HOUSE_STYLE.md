@@ -105,6 +105,7 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   - Full, easy, natural sentences (U-M3.G3).
   - No fragment chains such as "two arrows in, one number out" or "reason one: order".
 - **Pace:** ≤ 150 words per minute overall (the reference: 149). One idea per sentence; dense ideas get more sentences, not denser ones (U-M2.G5).
+  **Beats** (user decision 2026-10-28): end a sentence with `[beat]` to hold 1.5 s after a worked calculation (`tools/tts.py`; not spoken, not captioned). Use beats to give the viewer a moment with the numbers, which also keeps the overall pace ≤ 150; never as filler.
 - **Goal first.** Each scene says what we want to find **before** computing it, and names the answer only **after** the calculation (U-M4.1):
   - "How much of this wind blows towards the east? To find out, we take the dot product… which is six. So six metres per second is the eastward part."
   - Never give the answer away inside the question (U-M4.1a).
