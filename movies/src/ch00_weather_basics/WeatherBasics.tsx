@@ -449,7 +449,7 @@ const S02: React.FC = () => {
 // ================================================================ s03 air: composition, molecules, the air parcel over Europe
 const S03: React.FC = () => {
   const f = useCurrentFrame(), k = K("s03_air_parcel");
-  const cam = globePath([{ f: 0, lat: 25, lon: -15, dist: 3.8 }, { f: Math.round(LEN(k) * 0.55), lat: 45, lon: 0, dist: 3.3 }], f);
+  const cam = globePath([{ f: 0, lat: 25, lon: -15, dist: 3.8 }, { f: Math.round(LEN(k) * 0.55), lat: 45, lon: 0, dist: 3.8 }], f);
   const tN = AT(k, 1, "seventy-eight"), tO = AT(k, 1, "twenty-one"), tAr = AT(k, 1, "argon"), tCO = AT(k, 2, "Carbon dioxide"), tW = AT(k, 2, "water vapour");
   const tMol = SS(k, 3), tPar = AT(k, 5, "An air parcel");
   const X0 = 1080, W = 760, y = 120, comp = BA.composition_percent;
@@ -1659,7 +1659,7 @@ const S39: React.FC = () => {
   const g = useGlobal();
   const spTex = useFieldTex(g?.sp, GNY, GNX, LUT_DENSE.slice().reverse(), 500, 1040, 1, true);
   const t1 = SS(k, 1), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
-  const cam = globePath([{ f: 0, lat: 20, lon: 0, dist: 3.8 }, { f: t3, lat: 32, lon: 85, dist: 3.0 }, { f: t5 + 60, lat: 20, lon: 40, dist: 3.8 }, { f: LEN(k), lat: 10, lon: -80, dist: 3.8 }], f);
+  const cam = globePath([{ f: 0, lat: 20, lon: 0, dist: 3.8 }, { f: t3, lat: 32, lon: 85, dist: 3.4 }, { f: t5 + 60, lat: 20, lon: 40, dist: 3.8 }, { f: LEN(k), lat: 10, lon: -80, dist: 3.8 }], f);
   // the close-up: ETOPO 2022 relief (4′ means) under the Blue Marble, vertical ×30 (said in the narration, S4)
   const tv = useVars(staticFile("wb_tibet_etopo.bin"), TE);
   const btex = useTex(staticFile("wb_bmng_tibet.jpg"));
@@ -1745,7 +1745,7 @@ const S41: React.FC = () => {
   const g = useGlobal();
   const mTex = useFieldTex(g?.msl, GNY, GNX, LUT_BAL, 970, 1056, 1, true);
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4);
-  const cam = globePath([{ f: 0, lat: 10, lon: -80, dist: 3.8 }, { f: t3, lat: 30, lon: -30, dist: 3.8 }, { f: t4 + 40, lat: 48, lon: -12, dist: 2.6 }], f);
+  const cam = globePath([{ f: 0, lat: 10, lon: -80, dist: 3.8 }, { f: t3, lat: 30, lon: -30, dist: 3.8 }, { f: t4 + 40, lat: 48, lon: -12, dist: 3.4 }], f);
   const upto = 60 * clamp((f - t2) / 90, 0, 1);
   return (
     <Scene>
@@ -1775,8 +1775,8 @@ const S42: React.FC = () => {
   const t4 = SS(k, 4), tTy = AT(k, 5, "typhoon"), tNA = AT(k, 5, "North Atlantic");
   const L = HL.low, Hh = HL.high, ty = LM.deepest_low, na = LM.north_atlantic_low;
   const xg = fin(f, t4, 20);   // ERA5 2 Nov 2023 → GFS 27 Oct 2026
-  const cam = globePath([{ f: 0, lat: 45, lon: -14, dist: 2.6 }, { f: t4, lat: 45, lon: -14, dist: 2.6 },
-    { f: tTy, lat: 25, lon: 150, dist: 3.4, hop: 0.8 }, { f: tNA - 10, lat: 25, lon: 150, dist: 3.4 }, { f: tNA + 50, lat: 50, lon: -25, dist: 3.0, hop: 0.8 }], f);
+  const cam = globePath([{ f: 0, lat: 45, lon: -14, dist: 3.4 }, { f: t4, lat: 45, lon: -14, dist: 3.4 },
+    { f: tTy, lat: 25, lon: 150, dist: 3.4, hop: 0.8 }, { f: tNA - 10, lat: 25, lon: 150, dist: 3.4 }, { f: tNA + 50, lat: 50, lon: -25, dist: 3.4, hop: 0.8 }], f);
   return (
     <Scene>
       <Globe cam={cam} field={mTex} fieldO={0.8 * (1 - xg)} field2={gTex} field2O={0.8 * xg} over={(G) => <g>

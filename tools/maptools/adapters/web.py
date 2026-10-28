@@ -6,9 +6,14 @@ Pattern ("wait until idle, then screenshot"):
    into a frame; the sidecar lists any blocked URL);
 3. Remotion's chrome-headless-shell on the GPU (``--use-angle=d3d11``, RTX A1000; ``_browser.py``) at device scale
    1; the WebGL renderer string goes in the sidecar; a software renderer fails loudly (no silent SwiftShader);
-4. the page sets ``window.__ready = true`` when the library says it is idle (MapLibre ``idle``; deck.gl
-   ``onAfterRender`` with all layers loaded; Cesium ``globe.tilesLoaded`` for 10 consecutive frames), then two more
-   animation frames pass and ``#map`` is screenshotted.
+4. the page sets ``window.__ready = true`` when the library says it is idle (MapLibre ``idle``; Cesium
+   ``globe.tilesLoaded && dataSourceDisplay.ready`` for 30 consecutive frames; deck.gl: every image is fetched and
+   decoded to an ImageBitmap and every GeoJSON parsed BEFORE the Deck is built, then every layer and sub-layer must
+   be loaded (a composite without sub-layers is not) AND a 160x90 probe of the canvas must stay unchanged
+   (< 0.2 % of samples moving > 2/255) for 30 consecutive frames), then two more animation frames pass and
+   ``#map`` is screenshotted. A timeout reports ``window.__state`` (stable frames, loaded flag, unloaded layers).
+5. recipe ``layers:``: deck.gl draws arrows, front lines with side dots, H/L + values and point labels (TextLayer,
+   canvas font atlas); MapLibre draws them without text (its text needs a glyph server); Cesium ignores them.
 Only our prepared data are drawn: the coloured field (``rgba_*.png``), hillshade, contour and overlay GeoJSON, and for
 3-D the Terrarium heightmap (deck.gl TerrainLayer) or a custom heightmap provider (Cesium, no Ion token).
 """

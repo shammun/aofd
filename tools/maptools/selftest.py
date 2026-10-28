@@ -5,10 +5,12 @@
     .venv/Scripts/python.exe tools/maptools/selftest.py --quick         # skip the slow ones (arcgis, cesium, leafmap)
     .venv/Scripts/python.exe tools/maptools/selftest.py --update        # (re)write references after a deliberate change
     .venv/Scripts/python.exe tools/maptools/selftest.py --determinism   # render each case twice, report byte/pixel equality
+    .venv/Scripts/python.exe tools/maptools/selftest.py --only mpl:ciaran_synoptic --update-missing   # new case refs
 
 Test maps (recipes in ``tools/maptools/recipes/``): Alps relief (ETOPO 2022, hillshade, 3-D camera), global MSLP
 (ERA5 12 UTC 2 Nov 2023, Robinson, isobars), Storm Ciaran isobars (same field, Lambert, 10 m coasts/borders), MSLP
-globe (orthographic), plus a three.js texture and a heightmap (mpl). References in
+globe (orthographic), plus a three.js texture and a heightmap (mpl), the PyGMT texture, the GeoVista RGB-mesh
+texture globe (GIBS true colour) and the full synoptic chart with symbol layers (mpl, pygmt, deckgl). References in
 ``tools/maptools/refs/selftest_refs.json``: decoded-pixel sha256 + mean RGB, std and non-white fraction.
 
 Verdict per case: PASS-exact (same pixels), PASS-approx (|mean RGB| <= 2.0 per channel, |std| <= 3.0,
@@ -31,9 +33,11 @@ REFS = TOOLDIR / "refs" / "selftest_refs.json"
 R = TOOLDIR / "recipes"
 CASES: list[tuple[str, str]] = [
     ("mpl", "ciaran_isobars"), ("mpl", "global_mslp"), ("mpl", "global_texture"), ("mpl", "alps_heightmap"),
-    ("pygmt", "alps_relief"), ("pygmt", "global_mslp"),
-    ("geovista", "globe_mslp"),
-    ("maplibre", "ciaran_isobars"), ("deckgl", "alps_relief"), ("cesium", "globe_mslp"),
+    ("mpl", "ciaran_synoptic"),
+    ("pygmt", "alps_relief"), ("pygmt", "global_mslp"), ("pygmt", "global_texture"), ("pygmt", "ciaran_synoptic"),
+    ("geovista", "globe_mslp"), ("geovista", "globe_texture"),
+    ("maplibre", "ciaran_isobars"), ("deckgl", "alps_relief"), ("deckgl", "ciaran_isobars"),
+    ("deckgl", "ciaran_synoptic"), ("cesium", "globe_mslp"),
     ("leafmap", "ciaran_isobars"),
     ("rustgis", "alps_relief"), ("rustgis", "ciaran_isobars"),
     ("qgis", "ciaran_isobars"), ("qgis", "alps_relief"),
@@ -73,14 +77,20 @@ def main():
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--update", action="store_true")
     ap.add_argument("--determinism", action="store_true")
+    ap.add_argument("--only", default=None, help="comma list of cases tool:recipe (e.g. mpl:ciaran_synoptic)")
+    ap.add_argument("--update-missing", action="store_true",
+                    help="write references only for cases that have none (new cases); never overwrite")
     a = ap.parse_args()
     want = set(a.tools.split(",")) if a.tools else None
+    only = set(a.only.split(",")) if a.only else None
     refs = json.loads(REFS.read_text(encoding="utf-8")) if REFS.exists() else {}
     rows, fails = [], 0
     d0 = disk()
     t_all = time.time()
     for tool, rec in CASES:
         if want and tool not in want:
+            continue
+        if only and f"{tool}:{rec}" not in only:
             continue
         if a.quick and tool in SLOW:
             continue
@@ -122,7 +132,7 @@ def main():
             import pandas as pd
 
             stats["csv_rows"] = len(pd.read_csv(csvs[0]))
-        if a.update:
+        if a.update or (a.update_missing and key not in refs):
             refs[key] = stats | {"tool_version": s["tool_version"]}
             verdict = "UPDATED"
         else:
@@ -147,7 +157,7 @@ def main():
             finally:
                 keep.unlink(missing_ok=True)
         rows.append((key, verdict, f"{s['tool_version'][:70]}{extra}", dt_))
-    if a.update:
+    if a.update or a.update_missing:
         write_json(REFS, refs)
     w = max(len(k) for k, *_ in rows) if rows else 10
     print(f"{'case':{w}s}  {'verdict':44s} {'time':>7s}  detail")

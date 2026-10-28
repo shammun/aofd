@@ -36,7 +36,7 @@ The general survey is only the starting list, never the decision.
 | `.venv/Scripts/python.exe tools/maptools/render.py RECIPE.yaml --tool T --check` | render twice; bytes/pixels equal? |
 | `.venv/Scripts/python.exe tools/maptools/render.py --list` | tools, environments, availability |
 | `.venv/Scripts/python.exe tools/maptools/compare.py RECIPE.yaml --tools mpl,pygmt,qgis[,…|all] [--data a.nc,b.nc] [--var v]` | contact sheet in `outputs/maptools/compare/` |
-| `.venv/Scripts/python.exe tools/maptools/selftest.py [--quick] [--tools …] [--determinism] [--update]` | adapter self-test |
+| `.venv/Scripts/python.exe tools/maptools/selftest.py [--quick] [--tools …] [--only tool:recipe,…] [--determinism] [--update \| --update-missing]` | adapter self-test (`--update-missing` writes references for new cases only) |
 | `.venv/Scripts/python.exe tools/maptools/qgis_process.py list --grep hill` / `run gdal:hillshade INPUT=… OUTPUT=…` | QGIS processing (GDAL/GRASS/native) for prep |
 | `.venv/Scripts/python.exe tools/maptools/install.py --step report` | versions, sizes, disk |
 | `.venv/Scripts/python.exe tools/maptools/mcp_test.py --server rustgis|geolibre [--data f]` | MCP smoke test |
@@ -73,6 +73,14 @@ Notes per tool:
   `style.contours.engine: arcgis` (`arcpy.sa.Contour`), `style.hillshade: arcgis` (`arcpy.sa.Hillshade`), and for
   multidimensional netCDF/zarr in a prep script: `arcpy.md.MakeMultidimensionalRasterLayer`,
   `arcpy.ia.AggregateMultidimensionalRaster`, `arcpy.ia.GenerateTrendRaster`, `arcpy.md.SubsetMultidimensionalRaster`.
+- **PyGMT `kind: texture`**: the map is always cropped (`savefig(crop=True)`) and rasterised at the dpi that maps the
+  map width to exactly `size[0]` pixels; the height follows the region's lon:lat aspect (2:1 global) and the size is
+  capped at `MAX_TEXTURE` = 16384 x 8192 (sidecar `notes` say when it was changed). The old crash: GMT modern mode
+  draws on an 11.6-m page, so an uncropped save was a ~4.6-gigapixel raster.
+- **GeoVista texture route**: `add_base_layer(texture=)` crashes with geovista 0.5.3 + pyvista 0.49 (`core.combine`).
+  The adapter's `add_texture()` makes each image pixel one cell of `gv.Transform.from_1d(lon_edges, lat_edges,
+  data=rgb, rgb=True)` (rows north to south), drawn unlit, reduced (Lanczos) to at most 1.5 M cells
+  (`MAX_TEXTURE_CELLS`; 7200x3600 GIBS -> 1732x866, 31 s at 800x800).
 - **GeoVista**: never give a mesh a translucent NaN colour (`nan_opacity=0`): VTK then depth-sorts the whole globe
   wrongly and the far hemisphere shows through. Always `ResetCameraClippingRange()` after moving the camera.
 - **Web tools** (MapLibre, deck.gl, Cesium, leafmap, any three.js page): one browser, `adapters/_browser.py`: Remotion's
@@ -106,10 +114,60 @@ style:
   shade_alpha: 0.35
   contours: {interval: 4, color: "#111111", width: 0.9, labels: false, engine: prep}   # engine: prep|qgis|arcgis
 overlays: [coast, borders]      # coast|coast_110m|borders|land (Natural Earth from G: raw) or {geojson: path, kind: coast}
+layers: []                      # symbol layers: points + labels, H/L centres, vectors, fronts (section 5a)
 labels: false
 size: [1920, 1080]
 per_tool: {pygmt: {size: [1280, 720]}}   # optional per-tool overrides
 ```
+A second `data:` item with `role: texture` (or `underlay`) is an equirectangular image (bounds from `bounds:
+[w, s, e, n]`, else its sidecar JSON `bounds_wsen` / `lon_edges`+`lat_edges`, else global). GeoVista drapes it as an
+RGB cell mesh (`recipes/globe_texture.yaml`); `style.show_field: false` hides the scalar field under it (the default
+when a texture is given) and `style.texture: field` drapes the LUT-coloured (+ hillshaded) field image instead.
+
+## 5a. Symbol layers: full synoptic charts (`layers:`; example `recipes/ciaran_synoptic.yaml`)
+Overlays are lines only (any GeoJSON overlay draws as a thin coast line). Points, labels, wind and fronts go in
+`layers:`, prepared once by `prep.prepare_layers` into tool-neutral files in the work dir:
+```yaml
+layers:
+  - type: vectors                # u/v from data[0].path unless given; same time spec as data[0]
+    u: {var: u10}                # or {path, var, time, level, scale}
+    v: {var: v10}
+    scale: 1.94384               # m/s -> kt (barbs are in knots)
+    units: kt
+    style: barbs                 # barbs (WMO) | arrows
+    density: [14, 9]             # barbs across x down, regridded in the map plane
+    margin_deg: 0                # widen the cut (degrees) if barbs must reach the frame edge
+  - type: fronts                 # GeoJSON LineStrings with properties.kind: cold|warm|occluded|stationary|trough
+    path: tools/maptools/recipes/layers/fronts_era5_2023-11-02T12.geojson
+    temperature: {path: data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, var: t, time: "2023-11-02T12"}
+                                 # orients the symbols: cold triangles into the warm air, warm scallops into the cold
+  - type: extrema                # H / L letter + central value under it
+    auto: {window_deg: 10, min_prominence: 4, max: 4}   # found in the recipe field per frame (cartostyle.find_extrema)
+    # path: hl.geojson           # or fixed centres: Points with properties kind (low|high) and value (or hPa)
+    # letters: {low: T, high: H} # e.g. German charts
+  - type: points                 # Natural Earth places and/or a GeoJSON and/or inline items
+    places: {max_scalerank: 7, keep: [London, Paris, Brest], rename: {"København": Copenhagen}}  # zip default: NE 10m simple
+    # path: stations.geojson     # Points with properties name, rank (lower = more important), kind
+    # items: [{name: Brest, lon: -4.49, lat: 48.39, rank: 0}]
+    promote: [Brest]             # the story place: labelled first, leader line allowed
+    max_labels: 7
+    label: true                  # false = markers only
+    marker: true
+```
+Prepared files: `points_<k>.geojson`, `extrema_<k>_<t>.geojson`, `vectors_<k>_<t>.nc` (u, v in the layer units),
+`fronts_<k>.geojson` (each front gets `warm_left`, the warm side relative to its drawing direction, from the
+temperature) + `fronts_<k>_t.nc`. Every layer source is in the sidecar `data[]` with licence and credit (our GeoJSON
+layers carry top-level `licence` / `attribution`). Labels never drape on textures, globes or terrain.
+
+| tool | vectors | fronts | H / L | points + labels |
+|---|---|---|---|---|
+| `mpl` (`cartostyle`) | WMO barbs (`wind_barbs`) or arrows | WMO/NWS symbols, MetPy, oriented by temperature (`draw_fronts`) | `mark_extrema` | `label_points`: Imhof positions, halos, collision-free; order H/L → promoted places → isobar values (`style.contours.labels`) → other places; drops reported in `notes` |
+| `pygmt` | arrows (length ~ speed) | GMT `-Sf` triangles / semicircles on the `warm_left` side | letters + value (halo) | dot + label (halo), **no collision avoidance** |
+| `deckgl` | arrows | coloured line + side dots | TextLayer letters + value | dots + TextLayer labels, no collision avoidance |
+| `maplibre` | arrows | coloured lines | circles (no text: needs a glyph server) | circles, no text |
+| `geovista`, `cesium`, others | not drawn (sidecar `notes` say so) | | | |
+Style preset for mpl: `style.cartostyle: movie | notebook | print` (default notebook, sized to the render).
+**Final synoptic charts: mpl + cartostyle.** The others are for comparison or a quick look.
 Google Earth Engine recipes replace `data:` with a `gee:` block (`recipes/gee_era5_mslp.yaml`; see §8).
 
 Recipe per visual kind (start from these files):
@@ -120,6 +178,8 @@ Recipe per visual kind (start from these files):
 | relief / 3-D terrain still | `alps_relief.yaml` (camera) | pygmt, deckgl, rustgis, geovista, cesium |
 | globe still | `globe_mslp.yaml` | geovista, cesium, mpl (orthographic) |
 | three.js globe texture | `global_texture.yaml` (kind texture) | mpl, pygmt |
+| full synoptic chart (barbs, fronts, H/L, places) | `ciaran_synoptic.yaml` (`layers:`) | mpl (cartostyle); pygmt, deckgl for comparison |
+| image draped on a globe (GeoVista) | `globe_texture.yaml` (data item `role: texture`) | geovista, cesium, three.js |
 | heightmap for three.js / deck.gl | `alps_heightmap.yaml` (kind heightmap) | mpl |
 | data animation frames | `ciaran_850_loop.yaml` (png_sequence) | mpl, pygmt, qgis |
 | satellite + analysis | add a second `data:` item `{path: …gibs….jpg, role: underlay}`; mpl draws it with `imshow(extent)` in a figure script | mpl |
@@ -217,7 +277,11 @@ Avoid `JAXA/GPM_L3/GSMaP` and other assets whose page restricts use, unless chec
 - **Byte-identical**: mpl (Agg, PNG metadata stripped). **Pixel-identical on this machine**: PyGMT, GeoVista, QGIS,
   RustGIS (verify with `--check`). **Pixel-identical on this machine and GPU**: web tools (Remotion chrome-headless-shell, ANGLE D3D11, RTX A1000,
   device scale 1, `window.__ready` only after the library's idle event + extra frames; Cesium waits for
-  `globe.tilesLoaded && dataSourceDisplay.ready` for 30 frames). Another GPU/driver changes pixels slightly.
+  `globe.tilesLoaded && dataSourceDisplay.ready` for 30 frames; deck.gl decodes every image (ImageBitmap) and parses
+  every GeoJSON before building the Deck, then waits until every layer and sub-layer is loaded and a canvas probe is
+  unchanged for 30 frames). Measured 2026-10-28, two fresh-page renders each: deck.gl BitmapLayer maps (Ciarán
+  isobars, the same with an 8192-px image, the synoptic chart with layers) byte-identical; TerrainLayer (Alps) and
+  `_GlobeView` differ by 1/255 in 2-25 pixels (also before the fix: GPU rasterisation, not loading). Another GPU/driver changes pixels slightly.
   **Tolerance** (mean |Δ| ≤ 0.5/255): ArcGIS export. GEE thumbnails change if the catalogue is reprocessed.
 - Never mix frames of one shot from two tools, GPUs or machines; record the tool version from the sidecar.
 - No wall-clock anything: camera and time are recipe values (or a function of the frame number in Remotion).
@@ -296,14 +360,13 @@ Recipes and patterns that worked:
 
 Drop list:
 - **ArcGIS**: not tested (user decision).
-- **PyGMT `kind: texture`**: an adapter bug produces a 4.6-gigapixel raster.
 - **PyGMT `grdview` drapes and animation.**
 - **MapLibre and deck.gl data globes**: polar holes.
 - **MapLibre at steep pitch in final frames.**
 - **leafmap split map** (CDN, tile server) and **geemap timelapse** in the pipeline.
 - **Draped text.**
 - **RustGIS globe**: ignores lon0/lat0.
-- **GeoVista `add_base_layer(texture=)`**: crashes with pyvista 0.49; use `Transform.from_1d(..., rgb=True)`.
+- **GeoVista `add_base_layer(texture=)`**: crashes with pyvista 0.49; the adapter uses its RGB-mesh `add_texture()`.
 - **datashader**: not installed.
 - **GeoLibre MCP for frames.**
 

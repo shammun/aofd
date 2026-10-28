@@ -130,15 +130,23 @@ def draw_layers(fig, job, i: int, notes: list) -> None:
         ii = np.linspace(0, lo.size - 1, int(nx)).round().astype(int)
         jj = np.linspace(0, la.size - 1, int(ny)).round().astype(int)
         u, v = g.u.values[np.ix_(jj, ii)], g.v.values[np.ix_(jj, ii)]
-        X, Y = np.meshgrid(lo[ii], la[jj])
         sp = np.hypot(u, v)
-        ok = np.isfinite(sp) & (sp > 0)
-        cell_km = (lo[-1] - lo[0]) / nx * 111.2 * np.cos(np.radians(np.mean(la)))
-        k = 0.8 * cell_km / max(float(np.nanpercentile(sp[ok], 95)), 1e-9)
-        az = (np.degrees(np.arctan2(u, v)) + 360) % 360          # azimuth the wind blows TO, clockwise from north
-        fig.plot(x=X[ok], y=Y[ok], style="=0.18c+e+h0.5", direction=[az[ok], (sp[ok] * k)],
-                 pen=f"0.9p,{lay.get('color', SYM['barb'])}", fill=lay.get("color", SYM["barb"]))
-        notes.append("pygmt vectors: arrows (geovectors), not WMO barbs")
+        k = 0.6 * (lo[-1] - lo[0]) / nx / max(float(np.nanpercentile(sp, 95)), 1e-9)   # 95th pct -> 0.6 cell
+        lines = [">"]
+        for a, y in enumerate(la[jj]):
+            for c, x in enumerate(lo[ii]):
+                if not np.isfinite(sp[a, c]) or sp[a, c] == 0:
+                    continue
+                dx, dy = k * u[a, c] / max(np.cos(np.radians(y)), 0.2), k * v[a, c]
+                x1, y1 = x + dx, y + dy
+                ang, hl = np.arctan2(dy, dx), 0.3 * np.hypot(dx, dy)
+                pts = [(x, y), (x1, y1), (x1 - hl * np.cos(ang - 0.45), y1 - hl * np.sin(ang - 0.45)), (x1, y1),
+                       (x1 - hl * np.cos(ang + 0.45), y1 - hl * np.sin(ang + 0.45))]
+                lines += [f"{px:.4f} {py:.4f}" for px, py in pts] + [">"]
+        vf = Path(job["workdir"]) / "pygmt" / f"vectors_{lay['index']}_{i:04d}.gmt"
+        vf.write_text("\n".join(lines[:-1]) + "\n", encoding="ascii")
+        fig.plot(data=str(vf), pen=f"0.9p,{lay.get('color', SYM['barb'])}")
+        notes.append("pygmt vectors: arrows (length ~ speed; 95th percentile = 0.6 grid cell), not WMO barbs")
     for lay in by.get("fronts", []):
         gj = json.loads(Path(lay["file"]).read_text(encoding="utf-8"))
         for ft in gj["features"]:

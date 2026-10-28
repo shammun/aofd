@@ -7,6 +7,10 @@ import time
 from pathlib import Path
 
 
+# adapters that draw (or explicitly report on) recipe ``layers:`` (points, extrema, vectors, fronts)
+LAYER_TOOLS = ("mpl", "pygmt", "deckgl", "maplibre", "geovista", "cesium")
+
+
 def load() -> tuple[dict, str]:
     """``python adapter.py JOB.json TOOL`` -> (job dict, tool name)."""
     job = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
@@ -17,7 +21,11 @@ def load() -> tuple[dict, str]:
 
 def done(job: dict, tool: str, version: str, outputs: list[str], notes: list[str] | None = None,
          licence_flags: list[str] | None = None) -> None:
-    res = {"tool": tool, "tool_version": version, "outputs": outputs, "notes": notes or [],
+    notes = list(notes or [])
+    if job.get("layers") and tool not in LAYER_TOOLS:
+        notes.append(f"symbol layers ({', '.join(sorted({l['type'] for l in job['layers']}))}) are not drawn by "
+                     f"{tool}; tools that draw them: {', '.join(LAYER_TOOLS)}")
+    res = {"tool": tool, "tool_version": version, "outputs": outputs, "notes": notes,
            "licence_flags": licence_flags or [], "seconds": round(time.time() - job["_t0"], 2)}
     Path(job["workdir"], f"result_{tool}.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
     print(json.dumps(res))

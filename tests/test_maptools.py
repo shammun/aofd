@@ -36,6 +36,53 @@ def test_recipes_parse_and_name_known_tools():
         assert all(t in TOOLS for t in tools), p.name
         assert r.get("kind", "png") in ("png", "png_sequence", "texture", "heightmap", "timelapse", "before_after",
                                         "timeseries"), p.name
+        for lay in r.get("layers") or []:
+            assert lay["type"] in ("points", "extrema", "vectors", "fronts"), p.name
+
+
+def test_symbol_layers_prepared_for_synoptic_chart(tmp_path):
+    """recipe layers -> prepared files: H/L found in the field, fronts oriented, wind in knots, story place promoted."""
+    import json
+
+    import xarray as xr
+
+    import prep
+    from render import load_recipe
+
+    r = load_recipe(ROOT / "tools" / "maptools" / "recipes" / "ciaran_synoptic.yaml")
+    job = prep.prepare(r, tmp_path / "work")
+    lay = {x["type"]: x for x in job["layers"]}
+    assert set(lay) == {"points", "extrema", "vectors", "fronts"}
+    ex = json.loads(Path(lay["extrema"]["files"][0]).read_text())["features"]
+    low = min((f for f in ex if f["properties"]["kind"] == "low"), key=lambda f: f["properties"]["value"])
+    assert low["properties"]["value"] == pytest.approx(956.0, abs=1.0)          # Ciaran's centre, ERA5 0.5 deg
+    assert low["geometry"]["coordinates"][0] == pytest.approx(1.5, abs=1.0)
+    assert low["geometry"]["coordinates"][1] == pytest.approx(52.5, abs=1.0)
+    fr = {f["properties"]["kind"]: f["properties"]["warm_left"]
+          for f in json.loads(Path(lay["fronts"]["file"]).read_text())["features"]}
+    # both fronts are drawn westward; the warm sector lies to the south = on the left of the drawing direction
+    assert fr == {"cold": True, "warm": True}
+    g = xr.open_dataset(lay["vectors"]["files"][0])
+    assert set(g.data_vars) == {"u", "v"}
+    assert 40 < float(abs(g.u).max()) < 160                 # knots (ERA5 10-m wind x 1.94384)
+    pts = json.loads(Path(lay["points"]["file"]).read_text())["features"]
+    assert pts[0]["properties"]["name"] == "Brest" and pts[0]["properties"]["promoted"]
+    assert {f["properties"]["name"] for f in pts} <= {"London", "Paris", "Madrid", "Lisbon", "Dublin", "Amsterdam",
+                                                     "Brest", "Oslo", "Edinburgh"}
+    assert any(d.get("role") == "fronts" and "CC-BY" in d["licence"] for d in job["provenance"])
+
+
+def test_deckgl_ready_check_waits_for_decoded_images_and_stable_frames():
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("web_adapter", ROOT / "tools" / "maptools" / "adapters" / "web.py")
+    web = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, str(ROOT / "tools" / "maptools" / "adapters"))
+    spec.loader.exec_module(web)
+    page = web.DECKGL
+    assert "createImageBitmap" in page and "await Promise.all" in page       # images decoded before deck.gl
+    assert "STABLE = 30" in page and "getSubLayers().length > 0" in page     # loaded + 30 unchanged frames
+    assert "image: J.rgba" not in page                                       # no URL image props left
 
 
 @pytest.mark.maptools

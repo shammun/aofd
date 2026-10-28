@@ -1,4 +1,31 @@
-# RESUME — where the work stopped (2026-10-28, after the weekly usage limit hit at ~01:00)
+# RESUME — where the work stopped (2026-10-28, user exit; ALL agents stopped cleanly and checkpoint-committed)
+
+> **UPDATE 2026-10-28 (latest; read first).** Restart these streams (fresh agents, briefs below and in the table):
+> 1. **Weather basics**: label check done; the render (`r2`) was in progress in `G:/…/scratch/movies/ch00_weather_basics/v2/`
+>    (pieces in `r2/`, `r2_render.log`; `tools/movie_wb/join.py` new). Restart the motion-builder: resume the render
+>    (re-render missing/partial pieces only), join, mix sound, QA, frame check → commit → Drive → reviews.
+> 2. **#1 Vectors & index notation**: plan DONE and committed (56:32). Decision: **split into #1a / #1b** (see
+>    `movies/ch00/ch00_vectors_index_notation/data_needs.md` "Orchestrator decisions"). Next: movie-director splits the
+>    storyboard/script into `ch00_vectors_index_notation` (1a) and `ch00_alternating_tensor_triple_products` (1b) with own
+>    title/hook/recap for 1b, re-measure; then data-scout D1/D2/D4/D5 + implementer F1–F6 + new music style `index-lattice`.
+> 3. **#2/#3 cross-product splits**: planning was mid-way (files committed). Restart the movie-director; ALSO fold in
+>    the user's new request: more intuition behind each part of the maths + more "when is it used" cases with
+>    animation, inspired by https://www.youtube.com/watch?v=w4x7RLUizJ0 (ideas only, our own words/visuals).
+> 4. **NEW — research the user's YouTube video** (research-scout): write `research/xprod_video_intuitions.md`
+>    (intuitions for cross AND dot product, use cases, visual devices; map each onto our movies; no copying). Its
+>    first attempt was stopped before writing anything. Feeds #2/#3 and a **new dot-product version 0.1b**.
+> 5. **#69 reading-maps data** (data-scout): nearly done; finish registry/reports + s57 impact verification.
+> 6. **Library tests** (math-verifier): `tests/geo/test_sphere.py`, `test_mapproj.py`, `tests/diag/test_station.py`,
+>    `test_axes.py` written (committed as WIP); mutation check + figures + `reports/ch00_rwm_verification.md` remain.
+> 7. **Map-toolkit fixes** (general-purpose): edits done (committed as WIP); run `tools/maptools/selftest.py` +
+>    `tests/test_maptools.py`, fix anything red, report.
+> Archives on G: (use from there): old cross-product previews `G:/…/archive/movies/ch00_cross_product_why_previews/`;
+> local outputs (sound demos, maptools samples, release_check) `G:/…/archive/movies/local_outputs_2026-10-28/`;
+> v4 narration/pieces `G:/…/archive/movies/ch00_cross_product_why_v4_final/`. C: watch: keep ≥ 40 GB free; Remotion
+> temp bundles in %TEMP% are cleared with `tools/clean_scratch.py` (it accepts `%TEMP%/remotion-*`).
+> Run at most 3–4 agents at once (the weekly limit was hit with 6).
+
+## (previous snapshot, 2026-10-28 ~01:00, kept for detail)
 
 The SessionStart hook points here. **On session start (or when the user says "resume"): read this file, give the user a
 5-line status, then restart every stream below immediately, without waiting.** Each stream says exactly what to do.
