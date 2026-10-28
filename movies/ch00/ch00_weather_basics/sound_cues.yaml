@@ -13,9 +13,9 @@ music:
     to_s: 2130.6
   - style: storm-tense
     from_s: 2130.6
-    to_s: 2302.925
+    to_s: 2313.075
   - style: air-flowing
-    from_s: 2302.925
+    from_s: 2313.075
     to_s: end
   note: two styles cross-faded with 4-s raised-cosine ramps by tools/movie_wb/sound_mix.py (tools/sound/mix.py takes one style)
 timing: timing.json
@@ -144,7 +144,7 @@ effects:
 - effect: wind_gusty
   scene: s55_ciaran_maps
   offset: 0.0
-  duration: 23.4
+  duration: 24.48
   intensity: 0.55
   lufs: -28
   fade_in: 1.0
@@ -163,7 +163,7 @@ effects:
   shows: waves on the Brest coast while the pressure falls fastest
 - effect: wind_gusty
   scene: s58_brest_cold_front
-  offset: 3.32
+  offset: 12.4
   duration: 11.55
   intensity: 0.55
   lufs: -28

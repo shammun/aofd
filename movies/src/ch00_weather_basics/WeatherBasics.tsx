@@ -1118,8 +1118,8 @@ const S21: React.FC = () => {
           <Lbl x={at[0] + 40} y={at[1] + 20} t={`${fmt(v.p, 0)} hPa`} c={C.first} s={T.key} />
         </g>
         {/* fix loop 1 (S8): the picture under the launch is the 1 Nov afternoon true colour, so it is labelled as such (inside the view) */}
-        <Lbl x={120} y={835} t="satellite: 1 Nov, afternoon" c={C.key} s={T.key} o={fin(f, tThis)} />
-        <Keyword f={f} text="heights × 10" at={[120, 760]} appear={tX10} out={tLow} s={T.key} />
+        <Lbl x={120} y={821} t="satellite: 1 Nov, afternoon" c={C.key} s={T.key} o={fin(f, tThis)} />
+        <Keyword f={f} text="heights × 10" at={[120, 746]} appear={tX10} out={tLow} s={T.key} />
         {/* fix loop 1 (M2): "Does the real atmosphere follow this curve?" — the curve is on screen from frame 0, the balloon's dots join it */}
         <g>
           <Axes A={PGR} xt={[0, 500, 1000]} yt={[0, 10, 20, 30]} xl="hPa" yl="km" />
@@ -1294,7 +1294,7 @@ const S25: React.FC = () => {
             <g opacity={fin(f, tTr)}><line x1={TG.x} x2={TG.x + TG.w} y1={Y(sg.tropopause.z_km)} y2={Y(sg.tropopause.z_km)} stroke={C.first} strokeWidth={4} strokeDasharray="14 10" />
               <Lbl x={X(-68)} y={Y(sg.tropopause.z_km) - 36} t="Singapore ≈ 16 km, below −75 °C" c={C.first} s={T.floor} /></g>
             <line x1={TG.x} x2={TG.x + TG.w} y1={Y(tr.z_km)} y2={Y(tr.z_km)} stroke={C.second} strokeWidth={3} strokeDasharray="10 10" opacity={0.7} />
-            <Lbl x={X(-40)} y={Y(tr.z_km) + 40} t="Paris 11 km" c={C.second} s={T.key} />
+            <Lbl x={X(-86)} y={Y(tr.z_km) + 64} t="Paris 11 km" c={C.second} s={T.key} />
             <Arrow p={[X(10), Y(tr.z_km)]} q={[X(10), Y(sg.tropopause.z_km)]} color={C.gold} w={6} head={24} o={fin(f, tTr + 20)} />
           </g>} />
       </Svg>
@@ -1925,18 +1925,18 @@ const S42: React.FC = () => {
         <g opacity={1 - xg}>{isoGlobe(G, ISO_G, 60)}</g>
         <g opacity={xg}>{isoGlobe(G, LM.isobars as IsoLevel[], 60)}</g>
         <g opacity={(1 - xg) * limb(G, L.lat, L.lon)}>
-          <g opacity={fin(f, AT(k, 0, "called lows"))}><Lbl x={G.p(L.lat, L.lon)[0]} y={G.p(L.lat, L.lon)[1]} t="L" c={LOW_C} s={68} a="middle" /></g>
+          <g opacity={fin(f, AT(k, 0, "called lows"))}><Lbl x={G.p(L.lat, L.lon)[0]} y={G.p(L.lat, L.lon)[1]} t="L" c={C.key} s={68} a="middle" /></g>
           {/* fix loop 2 (review 2 N-M1): centred UNDER the L (as the H's value), clamped inside the globe's box (the label right of
               the L ran past the picture zone's clip at x ≈ 1000 and lost "hPa") */}
           <Lbl x={clamp(G.p(L.lat, L.lon)[0], GBOX.x + 200, GBOX.x + GBOX.w - 200)} y={G.p(L.lat, L.lon)[1] + 72} t="Ciarán 956 hPa" c={C.key} s={T.key} a="middle" o={fin(f, t2)} />
         </g>
         <g opacity={(1 - xg) * limb(G, Hh.lat, Hh.lon)}>
-          <g opacity={fin(f, AT(k, 0, "called highs"))}><Lbl x={G.p(Hh.lat, Hh.lon)[0]} y={G.p(Hh.lat, Hh.lon)[1]} t="H" c={HIGH_C} s={68} a="middle" /></g>
+          <g opacity={fin(f, AT(k, 0, "called highs"))}><Lbl x={G.p(Hh.lat, Hh.lon)[0]} y={G.p(Hh.lat, Hh.lon)[1]} t="H" c={C.key} s={68} a="middle" /></g>
           <Lbl x={G.p(Hh.lat, Hh.lon)[0]} y={G.p(Hh.lat, Hh.lon)[1] + 70} t="≈ 1030 hPa" c={C.key} s={T.key} a="middle" o={fin(f, t3)} />
         </g>
-        {G.vis(ty.lat, ty.lon) ? <g opacity={fin(f, tTy) * limb(G, ty.lat, ty.lon)}><Lbl x={G.p(ty.lat, ty.lon)[0]} y={G.p(ty.lat, ty.lon)[1]} t="L" c={LOW_C} s={68} a="middle" />
+        {G.vis(ty.lat, ty.lon) ? <g opacity={fin(f, tTy) * limb(G, ty.lat, ty.lon)}><Lbl x={G.p(ty.lat, ty.lon)[0]} y={G.p(ty.lat, ty.lon)[1]} t="L" c={C.key} s={68} a="middle" />
           <Lbl x={G.p(ty.lat, ty.lon)[0]} y={G.p(ty.lat, ty.lon)[1] + 70} t="typhoon ≈ 935 hPa" c={C.key} s={T.key} a="middle" /></g> : null}
-        {G.vis(na.lat, na.lon) ? <g opacity={fin(f, tNA) * limb(G, na.lat, na.lon)}><Lbl x={G.p(na.lat, na.lon)[0]} y={G.p(na.lat, na.lon)[1]} t="L" c={LOW_C} s={68} a="middle" />
+        {G.vis(na.lat, na.lon) ? <g opacity={fin(f, tNA) * limb(G, na.lat, na.lon)}><Lbl x={G.p(na.lat, na.lon)[0]} y={G.p(na.lat, na.lon)[1]} t="L" c={C.key} s={68} a="middle" />
           <Lbl x={G.p(na.lat, na.lon)[0]} y={G.p(na.lat, na.lon)[1] + 70} t="≈ 955 hPa" c={C.key} s={T.key} a="middle" /></g> : null}
       </g>} />
       <Svg>
@@ -1944,8 +1944,8 @@ const S42: React.FC = () => {
             not a lone "H" for 3.5 s; the H / L column moves down under it */}
         <ColourBar x={1120} y={120} w={560} lut={LUT_BAL} lo={970} hi={1056} ticks={[{ v: 970, t: "970" }, { v: 1013, t: "1013" }, { v: 1050, t: "1050" }]} unit="hPa" />
         {/* fix loop 1 (M2): the H / L names in the maths zone on their words in S0 */}
-        <g opacity={win(f, AT(k, 0, "higher than all"), t4)}><Lbl x={1100} y={300} t="H" c={HIGH_C} s={68} /><Lbl x={1160} y={300} t="high" c={C.key} s={T.key} o={fin(f, AT(k, 0, "called highs"))} /></g>
-        <g opacity={win(f, AT(k, 0, "lower"), t4)}><Lbl x={1100} y={380} t="L" c={LOW_C} s={68} /><Lbl x={1160} y={380} t="low" c={C.key} s={T.key} o={fin(f, AT(k, 0, "called lows"))} /></g>
+        <g opacity={win(f, AT(k, 0, "higher than all"), t4)}><Lbl x={1100} y={300} t="H" c={C.key} s={68} /><Lbl x={1160} y={300} t="high" c={C.key} s={T.key} o={fin(f, AT(k, 0, "called highs"))} /></g>
+        <g opacity={win(f, AT(k, 0, "lower"), t4)}><Lbl x={1100} y={380} t="L" c={C.key} s={68} /><Lbl x={1160} y={380} t="low" c={C.key} s={T.key} o={fin(f, AT(k, 0, "called lows"))} /></g>
         <Keyword f={f} text="low = depression = cyclone" at={[1100, 470]} appear={AT(k, 1, "depression")} out={t4} s={T.key} />
         <Keyword f={f} text="high = anticyclone" at={[1100, 590]} appear={AT(k, 1, "anticyclone")} out={t4} s={T.key} />
         <Lbl x={1100} y={420} t="weather-service analysis" c={C.key} s={T.key} o={fin(f, t4)} />
@@ -2299,7 +2299,7 @@ const S52: React.FC = () => {
       <Globe cam={cam} img={IMG.bmng} field={tex} fieldO={0.85} coast={0.4} over={(G) => <g>
         {(CL.isobars as IsoLevel[]).map((L) => <path key={L.level} d={coastPath(G, L.lines, undefined, 1.002)} fill="none" stroke={C.key} strokeOpacity={0.7} strokeWidth={2} />)}
         <LatCircle G={G} lat={30} c={C.gold} o={fin(f, t1)} w={4} dash="12 10" /><LatCircle G={G} lat={-30} c={C.gold} o={fin(f, t1)} w={4} dash="12 10" />
-        {highs.map(([nm, h]) => G.vis(h.lat, h.lon) ? <Lbl key={nm} x={G.p(h.lat, h.lon)[0]} y={G.p(h.lat, h.lon)[1]} t="H" c={HIGH_C} s={T.calc} a="middle" o={fin(f, t2)} /> : null)}
+        {highs.map(([nm, h]) => G.vis(h.lat, h.lon) ? <Lbl key={nm} x={G.p(h.lat, h.lon)[0]} y={G.p(h.lat, h.lon)[1]} t="H" c={C.key} s={T.calc} a="middle" o={fin(f, t2)} /> : null)}
         {/* fix loop 1 (S7): the ITCZ draped on the sphere along the annual-mean MSLP trough (builder: climatology.json itcz_trough) */}
         <path d={llPath(G, (CL.itcz_trough.lon as number[]).map((lo, i) => [CL.itcz_trough.lat[i], lo] as [number, number]), 1.003)} fill="none" stroke={C.first}
           strokeWidth={16} strokeOpacity={0.85 * fin(f, t3)} strokeLinecap="round" />
@@ -2394,7 +2394,8 @@ const HMB: MapBox = { lat0: 39, lat1: 60, lon0: -30, lon1: 10, x: 80, y: 40, w: 
 const FR_LAST = (FR.hourly as any[]).reduce((m: number, r: any, i: number) => (r.shown ? i : m), -1);
 const frontFade = (h: number) => clamp(FR_LAST + 1 - h, 0, 1);
 const HourMap: React.FC<{ h: number; B?: MapBox; id: string; fronts?: number; fw?: number; fc?: number; wind?: number; track?: number; children?: React.ReactNode;
-  brestArrow?: number; brestLabel?: number }> = ({ h, B = MAPB, id, fronts = 1, fw, fc, wind = 0.8, track = 1, children, brestArrow = 0, brestLabel = 0 }) => {
+  brestArrow?: number; brestLabel?: number; frontO?: number }> = ({ h, B = MAPB, id, fronts = 1, fw, fc, wind = 0.8, track = 1, children, brestArrow = 0, brestLabel = 0,
+  frontO }) => {
   const P = mapP(B), i = Math.max(0, Math.min(24, Math.round(h)));
   const tr = HR.track, n = Math.min(25, Math.floor(h) + 1);
   const lat = interp(h, tr.lat.map((_: number, q: number) => q), tr.lat), lon = interp(h, tr.lon.map((_: number, q: number) => q), tr.lon);
@@ -2402,7 +2403,10 @@ const HourMap: React.FC<{ h: number; B?: MapBox; id: string; fronts?: number; fw
   // fix loop 1 (M3/M4): the track is Ciarán's own centre (continuity tracker) and ends at the current centre; the fronts are the
   // frontal zone attached to it (builder fronts.json hourly); the L gets a dark halo so the track does not run under it
   const trackLa = [...tr.lat.slice(0, n), lat], trackLo = [...tr.lon.slice(0, n), lon];
-  const W = HR.wind_1p5, fh = FR.hourly[Math.max(0, Math.min(i, FR_LAST))], ff = frontFade(h);
+  const W = HR.wind_1p5, fh = FR.hourly[Math.max(0, Math.min(i, FR_LAST))], ff = frontO ?? frontFade(h);
+  // fix loop 3 (review 3 cosmetic): within ~75 px of Brest's ring the L glyph slides up to 30 px up-left (smoothly), so it is not half
+  // hidden under the ring at 00-03 UTC; the track still ends at the real centre
+  const pL = P(lat, lon), pB = P(BREST[0], BREST[1]), dLB = Math.hypot(pL[0] - pB[0], pL[1] - pB[1]), offL = 30 * clamp((75 - dLB) / 25, 0, 1) / Math.SQRT2;
   const bi = 12 + i; // brest_hourly index (starts 00 UTC 1 Nov)
   return (
     <CiaranMap id={id} B={B} img={IMG.tc1101} imgBox={BOX_TC1101} dim={0.6} iso={HR.isobars[i].levels}>
@@ -2413,7 +2417,7 @@ const HourMap: React.FC<{ h: number; B?: MapBox; id: string; fronts?: number; fw
       {/* fix loop 2 (review 2 cosmetic): one H/L style (pink letter + dark halo, as the map layers); the track stops 34 px short of
           the letter instead of a dark disc, and Brest's ring is drawn OVER the L with a dark outline, so the L never hides the dot */}
       {track > 0 ? <path d={poly(trimEnd(trackLa.map((la, q) => P(la, trackLo[q])), 34))} fill="none" stroke={C.gold} strokeWidth={5} opacity={track} /> : null}
-      <Lbl x={P(lat, lon)[0]} y={P(lat, lon)[1]} t="L" c={LOW_C} s={T.calc} a="middle" />
+      <Lbl x={pL[0] - offL} y={pL[1] - offL} t="L" c={LOW_C} s={T.calc} a="middle" />
       <circle cx={P(BREST[0], BREST[1])[0]} cy={P(BREST[0], BREST[1])[1]} r={19} fill="none" stroke={C.bg} strokeWidth={11} />
       <circle cx={P(BREST[0], BREST[1])[0]} cy={P(BREST[0], BREST[1])[1]} r={19} fill="none" stroke={C.key} strokeWidth={4} />
       <Place p={P(BREST[0], BREST[1])} t={brestLabel > 0 ? "Brest" : undefined} o={1} dx={26} dy={48} a="start" />
@@ -2440,11 +2444,17 @@ const S55: React.FC = () => {
   // fix loop 1 (M3/M4): S0 holds 12 UTC 1 Nov while the isobars and the two fronts are named; the hours run in S1: 12 → 03 UTC
   // (the deepest hour) between "from about nine hundred and seventy" and "fifty-four", then on to 12 UTC 2 Nov
   const tA = AT(k, 1, "from about nine hundred"), tB = AT(k, 1, "fifty-four") + 10, tE = LEN(k) - 15;
-  const h = f < tA ? 0 : f < tB ? 15 * easeIO(clamp((f - tA) / (tB - tA), 0, 1)) : 15 + 9 * clamp((f - tB) / (tE - tB), 0, 1);
+  // fix loop 3 (review 3 S-c): same frame budget, but 01-03 UTC (the Channel crossing, closest to Brest at about 01:50) is spread over
+  // "crosses the English Channel just north of Brest"; 954 hPa (01 UTC) is on "fifty-four"; the rest of the night and the morning run
+  // from "during the night" to the scene's end
+  const tX = AT(k, 1, "crosses"), tN = AT(k, 1, "during the night");
+  const h = f < tA ? 0 : f < tB ? 13 * easeIO(clamp((f - tA) / (tB - tA), 0, 1)) : f < tX ? 13 + 0.4 * clamp((f - tB) / (tX - tB), 0, 1)
+    : f < tN ? 13.4 + 1.6 * clamp((f - tX) / (tN - tX), 0, 1) : 15 + 9 * clamp((f - tN) / (tE - tN), 0, 1);
   const hp = Math.min(24, Math.round(h));
   if (Math.abs(HR.track.hPa[0] - 970) > 1 || HR.track.time_utc[0] !== "2023-11-01T12") throw new Error(`CHECK s55: Ciarán at 12 UTC 1 Nov is ${HR.track.hPa[0]} hPa, said 970`);
   if (FR.hourly[FR_LAST]?.time_utc !== "2023-11-01T21" || FR.hourly_shown_until_utc !== "2023-11-01T21") throw new Error(`CHECK s55: fronts drawn to ${FR.hourly_shown_until_utc}, built for 21 UTC`);
   if (Math.round(HR.track.hPa[15]) !== 954 || HR.track.time_utc[15] !== "2023-11-02T03") throw new Error(`CHECK s55: 03 UTC 2 Nov ${HR.track.hPa[15]} hPa, said 954`);
+  if (Math.round(HR.track.hPa[13]) !== 954 || HR.track.time_utc[13] !== "2023-11-02T01") throw new Error(`CHECK s55: 01 UTC 2 Nov ${HR.track.hPa[13]} hPa, shown on "fifty-four"`);
   const tW = AT(k, 0, "warm front"), tC = AT(k, 0, "cold front");
   return (
     <Scene>
@@ -2526,7 +2536,7 @@ const S57: React.FC = () => {
           <Lbl x={Xt(7)} y={BTG.y + BTG.h + 92} t="warm front" c={C.gold} s={T.floor} a="middle" o={fin(f, t3)} />
           {/* right of the minimum, under the curve: end-anchored it sat on the y axis over the 10/12 ticks (stage-2 frame check) */}
           <Lbl x={Xt(6) + 20} y={Yt(ts[6]) + 50} t="12.0 °C" c={TEMP} s={T.key} o={fin(f, AT(k, 1, "twelve degrees"))} />
-          <Lbl x={Xt(8) + 20} y={Yt(ts[8]) - 40} t="14.4 °C" c={TEMP} s={T.key} o={fin(f, AT(k, 2, "fourteen"))} />
+          <Lbl x={Xt(8) + 20} y={Yt(ts[8]) - 40} t="≈ 14.5 °C" c={TEMP} s={T.key} o={fin(f, AT(k, 2, "fourteen"))} />
         </BrestGraphs>
         <Lbl x={100} y={790} t="13 m/s from 155° (SSE)" c={C.first} s={T.key} o={win(f, AT(k, 1, "south-south-east"), t2)} />
         <Lbl x={100} y={790} t="18 m/s from 204° (SSW)" c={C.first} s={T.key} o={fin(f, AT(k, 2, "south-south-west"))} />
@@ -2538,22 +2548,25 @@ const S57: React.FC = () => {
 };
 const S58: React.FC = () => {
   const f = useCurrentFrame(), k = K("s58_brest_cold_front");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3);
-  const h = f < t1 ? 12 : 12 + 3 * clamp((f - t1) / (SE(k, 1) - t1), 0, 1);
+  // fix loop 3 (review 3 N3-M1): S1 "A few hours later…" runs the map on from s57's 20 UTC to 00 UTC while the last drawn fronts fade over
+  // the first 0.5 s (no hard cut); the new S2 says the map can no longer trace them and points to Brest's measurements (the graph band
+  // 'cold front' appears on "Brest's own measurements"); the wind / temperature reveals moved one sentence on (S3-S5)
+  const tB = AT(k, 1, "Brest's own measurements"), t1 = SS(k, 2), t2 = SS(k, 3), t3 = SS(k, 4);
+  const h = f < SE(k, 0) ? 8 + 4 * easeIO(clamp(f / SE(k, 0), 0, 1)) : f < t1 ? 12 : 12 + 3 * clamp((f - t1) / (SE(k, 2) - t1), 0, 1);
   const Xt = axX(BTG), Yt = axY(BTG), ts = brestSeries("t2m_C");
-  const rows: CalcRow[] = [{ rhs: EQ_S58, at: AT(k, 1, "forty-five"), ul: AT(k, 1, "forty-five") + 10 }];
+  const rows: CalcRow[] = [{ rhs: EQ_S58, at: AT(k, 2, "forty-five"), ul: AT(k, 2, "forty-five") + 10 }];
   return (
     <Scene>
       <Svg>
-        <HourMap h={h} id="s58m" wind={0.35} brestArrow={fin(f, t1)} B={HMB} brestLabel={1} />
+        <HourMap h={h} id="s58m" wind={0.35} brestArrow={fin(f, t1)} B={HMB} brestLabel={1} frontO={1 - ramp(f, 0, 15)} />
         <BrestGraphs f={f} h={h} showT={1}>
-          <rect x={Xt(12)} y={BRG.y} width={Xt(15) - Xt(12)} height={BTG.y + BTG.h - BRG.y} fill={C.gold} opacity={0.18 * fin(f, t1)} />
-          <Lbl x={Xt(13.5)} y={BTG.y + BTG.h + 92} t="cold front" c={C.gold} s={T.floor} a="middle" o={fin(f, t1)} />
+          <rect x={Xt(12)} y={BRG.y} width={Xt(15) - Xt(12)} height={BTG.y + BTG.h - BRG.y} fill={C.gold} opacity={0.18 * fin(f, tB)} />
+          <Lbl x={Xt(13.5)} y={BTG.y + BTG.h + 92} t="cold front" c={C.gold} s={T.floor} a="middle" o={fin(f, tB)} />
           {/* fix loop 1 (S3): beside the drop, at about 11 °C (it sat on the x axis) */}
           <Lbl x={Xt(15) + 24} y={Yt(11.2)} t="−2 °C" c={TEMP} s={T.key} o={fin(f, t2)} />
         </BrestGraphs>
-        <Lbl x={100} y={790} t="19 m/s from 221° (SW)" c={C.first} s={T.key} o={win(f, t1, AT(k, 1, "by three"))} />
-        <Lbl x={100} y={790} t="23 m/s from 271° (W)" c={C.first} s={T.key} o={fin(f, AT(k, 1, "by three"))} />
+        <Lbl x={100} y={790} t="19 m/s from 221° (SW)" c={C.first} s={T.key} o={win(f, t1, AT(k, 2, "by three"))} />
+        <Lbl x={100} y={790} t="23 m/s from 271° (W)" c={C.first} s={T.key} o={fin(f, AT(k, 2, "by three"))} />
         <Keyword f={f} text="cooler polar air" at={[100, 845]} appear={t3} s={T.key} />
       </Svg>
       <CalcStack f={f} x={1200} y={400} rows={tall(rows, 60)} size={60} />

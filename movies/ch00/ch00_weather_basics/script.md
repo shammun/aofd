@@ -1,8 +1,8 @@
 # ch00_weather_basics — "Weather basics: pressure, temperature, humidity and wind, from scratch" (Chapter 0B, version 1)
 
-Version 2, fix loop 1 (2026-10-28). House style `movies/HOUSE_STYLE.md` (reference `ch00_dot_product_why` v6). Voice Kokoro `af_bella`, speed 1.0; music: our own procedural score (seed 11, 'air-flowing' + 'storm-tense' under s54-s59, G major Lydian, 84 bpm). Brief: `brief.md`; data: `data_needs.md`; storyboard: `storyboard.yaml`.
+Version 3, fix loop 3 (2026-10-28). House style `movies/HOUSE_STYLE.md` (reference `ch00_dot_product_why` v6). Voice Kokoro `af_bella`, speed 1.0; music: our own procedural score (seed 11, 'air-flowing' + 'storm-tense' under s54-s59, G major Lydian, 84 bpm). Brief: `brief.md`; data: `data_needs.md`; storyboard: `storyboard.yaml`.
 
-**Measured (timing.json):** 62 scenes, 367 sentences, 5839 words, narration 2392.975 s + 2.5-s end hold = 2395.475 s; 601 caption cues; self-check diff 0.0 ms. The v1 TTS run was extended by tools/movie_wb/splice_insert.py (v2: 4 sentences inserted) and tools/movie_wb/splice_replace.py (fix loop 1: 4 sentences replaced).
+**Measured (timing.json):** 62 scenes, 368 sentences, 5868 words, narration 2403.125 s + 2.5-s end hold = 2405.625 s; 604 caption cues; self-check diff 0.0 ms. The v1 TTS run was extended by tools/movie_wb/splice_insert.py (v2: 4 sentences inserted), tools/movie_wb/splice_replace.py (fix loop 1: 4 sentences replaced) and tools/movie_wb/splice_fix3.py (fix loop 3: s55 S1 replaced, one sentence inserted in s58).
 
 Conventions: S<k> in the storyboard = sentence k of the scene; numbers are spoken in words and every number on screen is spoken. The per-scene lines below the narration were written for v1; their measured times are superseded by timing.json.
 
@@ -337,9 +337,9 @@ Now let's put all of this together on one real storm, and watch it from one town
 > Screen: true colour 1 Nov 2023 afternoon (MODIS), 35-60N 30W-10E, coast + admin borders; 'Storm Ciarán · 1 Nov 2023'; gold dot 'Brest'; keyword 'UTC = universal time'
 
 ## s55_ciaran_maps
-Here are the isobars every four hectopascals, with the warm front in red and the cold front in blue, from midday on the first of November to midday on the second. The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.
+Here are the isobars every four hectopascals from midday on the first of November to midday on the second, with the warm front in red and the cold front in blue until that evening. The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.
 
-> 64 words · 2 sentences · 2120.375–2141.525 s (21.2 s; speech 20.0 s) · 35:20.38–35:41.53 (measured) · beat: application · the low moves in.
+> 67 words · 2 sentences · 2120.375–2141.525 s (21.2 s; speech 20.0 s) · 35:20.38–35:41.53 (measured) · beat: application · the low moves in.
 > Screen: same panel; hourly ERA5 isobars animate 12 UTC 1 Nov → 12 UTC 2 Nov with the clock; 'L' tracking the minimum with its value ticking 965 → 954 hPa; gold track line; Brest dot
 
 ## s56_brest_pressure
@@ -355,9 +355,9 @@ Now the temperature and the wind. At six in the evening, the wind blows from the
 > Screen: TimeGraph gains temperature (orange, °C axis right) and a row of wind arrows (teal, pointing where the wind goes, with 'from' labels 155° SSE, 204° SSW and speeds); gold band 18-20 UTC 'warm front'; keyword 'warm sector'
 
 ## s58_brest_cold_front
-A few hours later comes the cold front. Between midnight and three in the morning, the wind swings from the south-west to the west and strengthens: by three, it's about twenty-three metres per second, or forty-five knots. The temperature drops by about two degrees, to ten and a half, and the pressure starts its fast climb. Cooler polar air has arrived behind the front, just as our side view said.
+A few hours later comes the cold front. By now the storm has broken and bent its fronts so much that the map can't trace them cleanly, but Brest's own measurements show it clearly. Between midnight and three in the morning, the wind swings from the south-west to the west and strengthens: by three, it's about twenty-three metres per second, or forty-five knots. The temperature drops by about two degrees, to ten and a half, and the pressure starts its fast climb. Cooler polar air has arrived behind the front, just as our side view said.
 
-> 70 words · 4 sentences · 2203.525–2231.775 s (28.2 s; speech 26.4 s) · 36:43.53–37:11.78 (measured) · beat: application · the cold front passes.
+> 96 words · 5 sentences · 2203.525–2231.775 s (28.2 s; speech 26.4 s) · 36:43.53–37:11.78 (measured) · beat: application · the cold front passes.
 > Screen: same TimeGraph: wind arrows at 00 UTC '19 m/s from 221° (SW)' and 03 UTC '23 m/s from 271° (W)'; CalcStack 23.2 ÷ 0.514 ≈ 45 kt; temperature 12.6 → 10.5 °C bracket '−2 °C'; gold band 00-03 UTC 'cold front'; thumbnail of the s47 side view
 
 ## s59_ciaran_after
