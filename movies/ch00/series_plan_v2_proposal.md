@@ -18,7 +18,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 | 0.1 | Dot product | done |
 | 0.1b | Dot product, new version = EVERYTHING in v6 kept (no v6 scene, example or explanation lost; v6 music) + all the 0.1b additions (video insights, matching parts, perpendicular push, runway, sunlight/flux, wind work, similarity) + title fix; becomes the dot-product movie to publish once reviewed (user 2026-10-28, final) | re-planning |
 | 0.2 | Cross product (full, 48 min) | done |
-| 0.3 | Weather basics (pressure, temperature, humidity, wind, highs/lows, fronts intro, reanalysis) | building |
+| 0.3 | Weather basics (pressure, temperature, humidity, wind, highs/lows, fronts intro, reanalysis) | done (40:05, 2026-10-28) |
 
 ### Stage 1 · The maths toolkit (Kundu's index, in dependency order)
 | # | Movie | Kundu index terms covered |
