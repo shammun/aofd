@@ -157,3 +157,10 @@ and keep it), Planck (`[Planck](/plˈɑŋk/)`), Stefan–Boltzmann (`[Boltzmann]
 factorial, nought (`[nought](/nˈɔt/)`), tropopause (`[tropopause](/tɹˈOpəpˌɔz/)`), linearisation, radiosonde (exists),
 Trappes (exists), Ciarán (exists), ERA5 (exists). Spoken letters to listen for: "d x", "d T by d t", "e s", "R v", "c v"
 (Kokoro must say the letter names, not "dee-ex" run together or "es"), "rho", "alpha", "sigma".
+
+## Data-scout results (orchestrator, 2026-10-28; reports/data/*.md, registry keys IGRA2, ERA5-CDS-trappes-20260930-pl, ERA5-CDS-monthly-tcwv, CERES-EBAF, NASA-GIBS-trappes-2026-09-30)
+- IGRA2 has no October 2026 soundings yet: keep the 30 Sep 2026 12 UTC Trappes sounding (DT01, DT20, DT45, DT46 PASS; tropopause 13 072 m; T(15 km) warmer than the tropopause).
+- DT26 (s19 sentence 8) is borderline: the sideways term is about 3.6 × 10⁻⁵ K/s. Say "a few hundred-thousandths of a degree per second", not the 0.3–3 × 10⁻⁴ range.
+- DT53: ERA5 global TCWV trend +0.84 ± 0.14 %/decade (1979–2025) and +1.67 ± 0.18 %/decade (1993–2025); both in the product attrs. Narration must stay consistent with the 4–5 %/°C observed-rise sentence.
+- DT61: CERES EBAF Ed4.2.1 global-mean OLR 2001-01 to 2026-08 = 240.6 W/m² → T_e = 255.2 K (PASS).
+- D5 (s09): France is almost fully cloud-covered on 30 Sep 2026; the true-colour close-up shows cloud, not ground — word or frame it that way.
