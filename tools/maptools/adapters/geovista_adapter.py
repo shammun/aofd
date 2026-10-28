@@ -80,7 +80,9 @@ def texture_bounds(layer: dict) -> list[float]:
         if "bounds_wsen" in m:
             return [float(v) for v in m["bounds_wsen"]]
         if "lon_edges" in m and "lat_edges" in m:
-            return [m["lon_edges"][0], m["lat_edges"][0], m["lon_edges"][-1], m["lat_edges"][-1]]
+            lo, la = m["lon_edges"], m["lat_edges"]        # either order (north-first sidecars too)
+            return [float(min(lo[0], lo[-1])), float(min(la[0], la[-1])), float(max(lo[0], lo[-1])),
+                    float(max(la[0], la[-1]))]
     return [-180.0, -90.0, 180.0, 90.0]
 
 

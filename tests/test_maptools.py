@@ -85,6 +85,70 @@ def test_deckgl_ready_check_waits_for_decoded_images_and_stable_frames():
     assert "image: J.rgba" not in page                                       # no URL image props left
 
 
+def _adapter_funcs(fname: str, names: tuple[str, ...], consts: tuple[str, ...] = ()) -> dict:
+    """Pull plain functions/constants out of an adapter without importing its environment (pygmt, geovista)."""
+    import ast
+    import json
+    import math
+
+    src = (ROOT / "tools" / "maptools" / "adapters" / fname).read_text(encoding="utf-8")
+    tree = ast.parse(src)
+    keep = [n for n in tree.body if (isinstance(n, ast.FunctionDef) and n.name in names)
+            or (isinstance(n, ast.Assign) and any(getattr(t, "id", None) in consts for t in n.targets))]
+    ns: dict = {"Path": Path, "json": json, "math": math}
+    exec(compile(ast.Module(body=keep, type_ignores=[]), fname, "exec"), ns)  # noqa: S102
+    return ns
+
+
+def test_pygmt_texture_is_cropped_aspect_true_and_capped():
+    """Capability-test crash: an uncropped GMT modern-mode page at 150 dpi was a ~4.6-gigapixel raster."""
+    src = (ROOT / "tools" / "maptools" / "adapters" / "pygmt_adapter.py").read_text(encoding="utf-8")
+    assert "crop=True)" in src and "crop=True if not texture else False" not in src
+    ns = _adapter_funcs("pygmt_adapter.py", ("texture_size",), ("MAX_TEXTURE",))
+    ts = ns["texture_size"]
+    notes: list = []
+    glob = {"size": [4096, 1024], "bounds": [-180, -90, 180, 90], "recipe": {"region": "global"}}
+    assert ts(glob, notes) == (4096, 2048) and notes                 # 2:1 kept, change reported
+    notes = []
+    assert ts(dict(glob, size=[2048, 1024]), notes) == (2048, 1024) and not notes
+    big = ts(dict(glob, size=[65536, 32768]), notes)
+    assert big == ns["MAX_TEXTURE"] and big[0] * big[1] < 2e8         # far below the 4.6-Gpx crash
+    reg = {"size": [1000, 1000], "bounds": [-30, 35, 20, 65], "recipe": {"region": [-30, 20, 35, 65]}}
+    assert ts(reg, []) == (1000, 600)                                 # 50 x 30 deg
+
+
+def test_geovista_texture_route_avoids_add_base_layer():
+    src = (ROOT / "tools" / "maptools" / "adapters" / "geovista_adapter.py").read_text(encoding="utf-8")
+    import ast
+
+    calls = {n.func.attr for n in ast.walk(ast.parse(src))
+             if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)}
+    assert "add_base_layer" not in calls              # crashes with geovista 0.5.3 + pyvista 0.49 (core.combine)
+    assert "gv.Transform.from_1d(lon, lat, data=a.reshape(-1, 3)" in src and "rgb=True" in src
+    ns = _adapter_funcs("geovista_adapter.py", ("texture_bounds",))
+    tb = ns["texture_bounds"]
+    assert tb({"bounds": [-10, 40, 10, 60], "path": "x.jpg"}) == [-10.0, 40.0, 10.0, 60.0]
+    gibs = ROOT / "data" / "derived" / "ch00" / "gibs_truecolour_global_2023-11-02_0p05.jpg"
+    if gibs.with_suffix(".json").exists():
+        b = tb({"path": str(gibs)})
+        assert b[0] == pytest.approx(-180) and b[2] == pytest.approx(180) and b[1] == pytest.approx(-90)
+
+
+def test_layer_note_for_tools_that_ignore_layers(tmp_path):
+    sys.path.insert(0, str(ROOT / "tools" / "maptools" / "adapters"))
+    import json
+    import time
+
+    import _job
+
+    job = {"workdir": str(tmp_path), "_t0": time.time(), "layers": [{"type": "fronts"}, {"type": "points"}]}
+    _job.done(job, "rustgis", "x", [])
+    res = json.loads((tmp_path / "result_rustgis.json").read_text())
+    assert any("not drawn by rustgis" in n and "fronts" in n for n in res["notes"])
+    _job.done(job, "mpl", "x", [])
+    assert not json.loads((tmp_path / "result_mpl.json").read_text())["notes"]
+
+
 @pytest.mark.maptools
 @pytest.mark.skipif(os.environ.get("AOFD_MAPTOOLS") != "1", reason="slow: set AOFD_MAPTOOLS=1")
 def test_selftest_all_adapters():

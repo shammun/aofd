@@ -345,5 +345,95 @@
   "std": 78.473,
   "nonwhite": 0.98858,
   "tool_version": "pystac-client 0.9.1, rasterio 1.5.2"
+ },
+ "mpl:ciaran_synoptic": {
+  "size": [
+   1280,
+   800
+  ],
+  "pixel_sha256": "411e9de193c1a3fd89a09e29eacbcd131fa749121c2e2006834e8d01f96feca8",
+  "mean_rgb": [
+   185.202,
+   191.918,
+   224.06
+  ],
+  "std": 66.937,
+  "nonwhite": 0.55383,
+  "tool_version": "matplotlib 3.11.2, cartopy 0.26.0"
+ },
+ "pygmt:global_texture": {
+  "size": [
+   2048,
+   1024
+  ],
+  "pixel_sha256": "158e3e481fccf910e3e05dd270065dbfe15f3ac25468c97bbec026185af7ca2a",
+  "mean_rgb": [
+   183.003,
+   117.629,
+   96.601
+  ],
+  "std": 68.409,
+  "nonwhite": 0.99854,
+  "tool_version": "pygmt v0.19.0, GMT 6.7.0"
+ },
+ "pygmt:ciaran_synoptic": {
+  "size": [
+   1280,
+   800
+  ],
+  "pixel_sha256": "84b2ae4c7dcb434d32b20fe2792c27de12077b4c8614d29dc6f03c6fb512766e",
+  "mean_rgb": [
+   178.897,
+   186.484,
+   220.328
+  ],
+  "std": 69.873,
+  "nonwhite": 0.57716,
+  "tool_version": "pygmt v0.19.0, GMT 6.7.0"
+ },
+ "geovista:globe_texture": {
+  "size": [
+   800,
+   800
+  ],
+  "pixel_sha256": "5f5125cb9fe42ce5786db30695836480263161cc8c80611c25c9a3d9915bf56e",
+  "mean_rgb": [
+   177.584,
+   176.538,
+   177.394
+  ],
+  "std": 79.385,
+  "nonwhite": 0.65333,
+  "tool_version": "geovista 0.5.3, pyvista 0.49.1, vtk (9, 7, 1)"
+ },
+ "deckgl:ciaran_isobars": {
+  "size": [
+   960,
+   640
+  ],
+  "pixel_sha256": "17395ed871e1be3247959bfe27b4082fc730ad1560998c3e704a608d30d73799",
+  "mean_rgb": [
+   168.477,
+   175.843,
+   219.122
+  ],
+  "std": 66.964,
+  "nonwhite": 0.66039,
+  "tool_version": "deck.gl 9.4.0; chrome-headless-shell 157.0.8080.0; GL gpu: ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)"
+ },
+ "deckgl:ciaran_synoptic": {
+  "size": [
+   1280,
+   800
+  ],
+  "pixel_sha256": "2472d9e5de4ca76622f23eab5f5c2f99dc120768f3bbd1174eb1120c74f983a1",
+  "mean_rgb": [
+   174.088,
+   180.894,
+   221.52
+  ],
+  "std": 66.377,
+  "nonwhite": 0.62218,
+  "tool_version": "deck.gl 9.4.0; chrome-headless-shell 157.0.8080.0; GL gpu: ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)"
  }
 }

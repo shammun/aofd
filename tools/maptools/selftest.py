@@ -26,10 +26,12 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import OUT, TOOLDIR, disk, pixel_diff, write_json  # noqa: E402
+from common import DATA, TOOLDIR, disk, pixel_diff, write_json  # noqa: E402
 from render import load_recipe, render, tool_available  # noqa: E402
 
 REFS = TOOLDIR / "refs" / "selftest_refs.json"
+# self-test renders are scratch: on G:, never C: (remote tools land on G: in any case)
+SELFTEST_OUT = DATA / "scratch" / "maptools_selftest"
 R = TOOLDIR / "recipes"
 CASES: list[tuple[str, str]] = [
     ("mpl", "ciaran_isobars"), ("mpl", "global_mslp"), ("mpl", "global_texture"), ("mpl", "alps_heightmap"),
@@ -78,9 +80,12 @@ def main():
     ap.add_argument("--update", action="store_true")
     ap.add_argument("--determinism", action="store_true")
     ap.add_argument("--only", default=None, help="comma list of cases tool:recipe (e.g. mpl:ciaran_synoptic)")
+    ap.add_argument("--out", default=str(SELFTEST_OUT),
+                    help=f"root for the rendered cases and last_run.json (default {SELFTEST_OUT})")
     ap.add_argument("--update-missing", action="store_true",
                     help="write references only for cases that have none (new cases); never overwrite")
     a = ap.parse_args()
+    out_root = Path(a.out)
     want = set(a.tools.split(",")) if a.tools else None
     only = set(a.only.split(",")) if a.only else None
     refs = json.loads(REFS.read_text(encoding="utf-8")) if REFS.exists() else {}
@@ -100,7 +105,7 @@ def main():
             rows.append((key, "SKIP", why, 0.0))
             continue
         r = load_recipe(R / f"{rec}.yaml")
-        out_dir = OUT / "selftest" / tool
+        out_dir = out_root / tool
         t0 = time.time()
         try:
             s = render(r, tool, out_dir, quiet=True)
@@ -166,7 +171,7 @@ def main():
     d1 = disk()
     print(f"\ntotal {time.time() - t_all:.0f} s | FAIL {fails} | disk C: {d0['C_free_gb']} -> {d1['C_free_gb']} GB, "
           f"G: {d0['G_free_gb']} -> {d1['G_free_gb']} GB")
-    write_json(OUT / "selftest" / "last_run.json", {"rows": rows, "fails": fails})
+    write_json(out_root / "last_run.json", {"rows": rows, "fails": fails})
     sys.exit(1 if fails else 0)
 
 
