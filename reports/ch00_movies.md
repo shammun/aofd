@@ -2980,3 +2980,163 @@ empty-screen scan of the whole movie, and dense crops at transitions. All under
 - **Suggested QA addition:** a content-area-empty gate (M1), so this class of defect cannot pass 10/10 again.
 
 Disk at review: C: 57 GB free, G: 558 GB free. Review frames: 298 MB on G: (scratch, not committed).
+
+
+---
+
+# ch00_weather_basics — review 2 (v3 fix loop 1, commit 94cab64, fresh eyes)                2026-10-28
+
+Movie: `movies/out/ch00/ch00_weather_basics/1080.mp4`. Frames: 1101 sentence frames (start + 0.4 s, middle and end of
+every one of the 429 sentences), 116 per-scene tiles at 640 px, s55 every 0.5 s and every 0.25 s through the hours
+14 UTC 1 Nov – 07 UTC 2 Nov, plus crops. All under
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review2/` (655 MB, local only).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics v3 fix 1 | 39:55.5 (2395.5 s) | 139.97 MB | 11 PASS + halves WARN | FIX (front shapes in s55–s58) | PASS | FIX (clipped "Ciarán 956 hPa") | PASS (2 × 3.5-s empty half) | PASS (601 cues, 0 violations) | PASS | n/a (retired); none on screen | **FIX** |
+
+## qa.json
+- `pass: true`. 11 gates PASS. **halves: WARN**: right half empty 219.5–223.0 s (03:39.5–03:43, s07 S1) and 1658.5–1662.0 s (27:38.5–27:42, s42 S1), 3.5 s each.
+- I re-measured: −16.0 LUFS integrated, true peak −2.4 dBFS, LRA 4.4 LU (ebur128).
+- Captions: I re-checked the 601 cues. None has more than 2 lines or more than 42 characters per line. The highest rate is 16.8 cps. All cues are in order, none uses `line:`, and the last cue ends at 2392.68 s. The `out/` VTT is byte-identical to the storyboard folder's VTT.
+- **But `movies/out/ch00/ch00_weather_basics/en.srt` is stale.** It is the 27 Oct v2 file, 56 259 bytes, and differs from `movies/ch00/ch00_weather_basics/en.srt` from line 1348 on (see S3).
+
+## Ciarán's centre, checked on my own against `data/ciaran_hourly.json`
+- I re-derived the local minima of the hourly ERA5 MSLP (9-point minimum filter).
+- **The builder is right, and review 1 was wrong on M3.**
+  - At 12 UTC on 1 Nov there are three lows: 965.3 hPa at 56.25 N 25.5 W (the north-western low), **970.7 hPa at 48.0 N 17.5 W (Ciarán)**, and 972.2 hPa at 55.5 N 12 W.
+  - The track follows Ciarán continuously. It is 970.7 → 964.3 (15 UTC) → 958.6 (21 UTC) → **953.65 hPa at 03 UTC 2 Nov, 50.1 N 3.7 W** (the deepest) → 955.9 at 12 UTC 2 Nov.
+  - The hour-to-hour steps are 60–110 km, with no jumps.
+  - The centre crosses Brest's longitude (4.49 W) at 49.96 N between 01 and 02 UTC. That is about 175 km north of Brest, over the western Channel, which matches "just north of Brest during the night".
+- Spoken "about nine hundred and seventy … to about nine hundred and fifty-four": correct.
+- On screen:
+  - At 36:12 the "L" sits on Ciarán, and the NW low (top left) has no label.
+  - "low: 971 hPa" fades in at 36:19–36:20, on its words.
+  - The readout shows 954 at 03 UTC (36:24) and 956 at 12 UTC 2 Nov. s42's "956" is the same 12 UTC value.
+- The Brest point (48.5 N 4.5 W) matches every spoken number:
+  - pressure 997.4 → 962.06 hPa (01 UTC): −35.3 hPa in 13 h, then +14.1 hPa by 06 UTC;
+  - 18 UTC: 13.2 m/s from 155° (SSE), 12.0 °C;
+  - 20 UTC: 17.9 m/s from 204° (SSW), 14.35 °C. "About fourteen and a half" rounds up from 14.4; acceptable.
+  - 00 UTC: 221° (SW), 12.6 °C;
+  - 03 UTC: 271° (W), 23.2 m/s, 45.1 kt, 10.45 °C.
+- RH at 18 °C on the movie's own e_s curve (e₀ 6.12 hPa, L 2.44 MJ/kg) is 15/20.44 = 73 %. That is right, and it is now spoken. On this curve e_s(25 °C) = 31.3 (Bolton would give 31.7), so the curve is internally consistent.
+
+## Review-1 items, verified on the new frames
+
+| item | verdict | evidence (new timestamps) |
+|---|---|---|
+| M1 blank screens | **fixed** | The picture is present on the first frame of s05 (02:21.9, column), s08 (04:16, room box), s10 (05:26.7, molecule box), s11 (06:16.7, box + p = ρRT), s12 (06:49.7, two boxes) and s34 (21:53, globe). The content gate passes (4791 samples). |
+| M2 empty halves | **fixed, two 3.5-s remnants** | s18 shows the faint column from 10:37 with H = RT/g, s28 shows molecules + keywords, and s40 shows mountain + "?". What remains is the QA WARN above: s07 03:39.5–03:43 (dial only) and s42 27:38.5–27:42 (only a lone "H" in the right half). |
+| M3 low label and start value | **fixed** (the data was right; see above) | 36:12 L on Ciarán; 36:20 "low: 971 hPa" (spoken "about 970"). |
+| M4 map vs Brest graph | **fixed at Brest; new shape problem** | 18 UTC (37:01–37:12): the red line passes through the Brest dot. 20 UTC (37:23): Brest sits just behind it, with the "warm sector" keyword. 00–03 UTC (37:37–37:55): the blue line reaches the Brest dot. Fronts are now named in s55 S1. **But see N-M2:** after 16 UTC the blue line is no longer the trailing cold front. |
+| S1 builder cosmetics | mostly fixed | The s24 slope label moved to s23 at about 3–4 km with a gold link (14:40). s31 lines are clipped, and "dew point" and "12 °C" are placed clear (20:16). The s00 readouts no longer overlap (05.5–06.1 s). **Not fixed:** the balloon glyph still floats at about 37 km in s23 (14:51), above the last data point (33.9 km). |
+| S2 sub-44-px maths | fixed where checked | s27 e ≈ 1.61 q p (17:30), s29 RH fraction (18:52), s41 "iso = equal" (27:30), s52 ITCZ (34:41), s23 "tropos = turning", and the s38/s40 keywords all read at 640 px. The s40 underbrace labels and exponent are still about 40 px (cosmetic). |
+| S3 clipped / detached labels | partly | Fixed: s43 Brest/L inside the frame (28:36); s59 H whole (38:02); s56 "Brest" at its dot; s58 "−2 °C" beside the drop (37:51); s25 "Paris 11 km" clear; s44 SH globe enlarged to about 330 px, arrows correct. **New:** s42 "Ciarán 956 hPa" is clipped (N-M1). The s44 high's arc is still mostly off the map (29:30). |
+| S4 reveals ahead of words | fixed | The s49 cold front now appears on S5 (33:01). "RH 73 %" is spoken. |
+| S5 colour roles | fixed | Pressure is teal in s56 (graph and readouts) and in the title. Temperature is orange in s57/s58. Gold is used only for links, brackets and bands. |
+| S6 s53 winds | fixed | Teal arrow glyphs, with gold links from "north-east trades", "south-east trades" and "westerlies" to their belts (35:04–35:20). |
+| S7 ITCZ | fixed | A teal line draped on the sphere along the trough, north of the equator over Africa and the Atlantic (34:39). |
+| S8 imagery time | fixed | s21: "satellite: 1 Nov, afternoon" (13:20). s54: "satellite, afternoon". |
+| S9 s46 ticks | fixed | 5 / 10 °C ticks (30:41). |
+| S10 records | fixed | The `script.md` header now has v2/fix 1 with 5839 words / 367 sentences and the seed-11 score. |
+| S11 "10-m wind" | fixed | "measured ten metres up" is spoken (29:15), and the screen says "wind 10 m up". |
+
+## Full fresh pass (every scene, at least one frame per sentence)
+- **Arc and house style:**
+  - The title s00 is right.
+  - The arc runs hook → blocks → intuition → why → application (Ciarán) → "To sum up" (s60, keyword + picture per sentence) → weather end card (s61, three keyword lines, notebook icons, everything above y 860).
+  - No headings, boxes, references, equation numbers or URLs appear anywhere.
+- **Physics honesty:**
+  - Wind is named by where it comes from.
+  - The compass runs clockwise from north.
+  - s44: NH low anticlockwise, high clockwise, SH reversed, with correct arrowheads (29:46).
+  - s53: NE/SE trades and westerlies in the right belts.
+  - Fronts: geometry ×50 spoken; symbols on the side the front moves towards (33:27).
+  - Hydrostatic numbers (12 Pa/m, 36 hPa per 300 m), H = 8.4 km, halving at 5.8 km, sea-level reduction 835·e^(1.609/8.43) ≈ 1010: all unchanged and correct.
+  - The Coriolis turning is deferred to its own video, and nothing on screen claims otherwise.
+- **Equation fidelity:** p = ρRT, H = RT/g with its unit line, p = p₀e^(−z/H), p_sea = p_s e^(z_s/H) and 23.2 ÷ 0.514 ≈ 45 kt are all as in the storyboard, with no KaTeX errors. There is no equation label on screen.
+- **Colour-blind safety:**
+  - Warm and cold fronts are coded by shape (half circles and triangles) as well as red/blue.
+  - H/L are letters.
+  - The pressure maps use a centred diverging map.
+  - The temperature map is perceptual (purple → yellow, no jet).
+- **Flashes:** 0 per second. There is no full-screen noise.
+- **Sound:** −16.0 LUFS, peak −2.4 dBTP. No clicks stand out at the four replaced-sentence splices (19:01, 29:15, 36:07, 36:18): the largest sample steps there sit at sibilants, at the same level as unspliced speech.
+
+## MUST fix
+1. **N-M1: 27:55.9–28:12 (s42 S3–S4). "Ciarán 956 hPa" is clipped to "Ciarán 956 h".**
+   - The label was moved right of the L (review-1 S3). It now runs past the picture zone's clip at x ≈ 1000, so the spoken number's unit is cut mid-letter.
+   - Fix (either is fine):
+     - Put the label under the L (centre x of the L, y + 60) and clamp it inside the globe's bounding box.
+     - Or shorten it to "Ciarán 956" and put "hPa" in the keyword column.
+2. **N-M2: 36:15–36:31 and 37:01–37:58 (s55–s58). From 17 UTC on, the line drawn as the "cold front" is not Ciarán's trailing cold front, so the map contradicts s49–s50.**
+   - In s49–s50, at 33:00–33:27, the viewer has just been shown a long cold front trailing south-west across Biscay.
+   - From `fronts.json` (hourly):
+     - up to 16 UTC the blue line is the long trailing front (n = 61 points, 42.9–47.5 N, 9–20 W);
+     - at 17 UTC it jumps to a 250–450-km arc hugging the west and south side of the centre (n = 21, 47.0–49.3 N). The continuity rule ("nearest to the previous hour") latched onto it after the 800-km clip;
+     - from 00 UTC the red "warm front" lies north of the centre (51–52 N, south Wales to England). That is the bent-back occluded zone, not the warm front;
+     - at 08–10 UTC one or both lines vanish;
+     - at 11–12 UTC 2 Nov the blue line lies **east** of the red one (2–5 E). That frame is held at the end of s55 (36:30.4).
+   - In s58 (37:37–37:58) the "cold front" is an arc round the low that **ends at the Brest dot**. Brest agrees with the graph, but the front visibly stops at the town instead of sweeping south across Biscay. The narration says "just as our side view said", and the map shows something else.
+   - Fix:
+     - Choose the cold-front candidate by shape as well as nearness:
+       - length ≥ 800 km;
+       - extending south or south-west of the centre;
+       - clip only its northern end at the low;
+       - continuity by line-to-line mean distance plus orientation, not nearest point.
+     - Choose the warm front as the line east or south-east of the centre.
+     - Hold the last valid line, or fade the fronts out, after about 07 UTC 2 Nov, when the storm occludes.
+     - Add CHECK rows for every hour shown:
+       - cold front south/west of the warm front relative to the centre;
+       - cold length ≥ 800 km;
+       - Brest within 50 km of the warm front at 18–20 UTC and of the cold front at 00–03 UTC (both already true).
+     - Re-run the data build and the manifest hashes.
+   - If the objective lines cannot satisfy this, show only the warm front up to 21 UTC plus the low and its track, and let the Brest graph carry the cold-front story. Review 1 offered the same alternative.
+
+## SHOULD fix
+1. **S1: two 3.5-s empty halves (QA WARN).**
+   - 03:39.5–03:43 (s07 S1): only the barometer dial, with the right half empty. Bring "hPa" or "1 hPa = 100 Pa" in on S1's "hectopascals".
+   - 27:38.5–27:42 (s42 S1): only a lone "H" sits in the right half. Show "H high" and "L low" together on "called highs … called lows", or keep s41's keyword column for 1 s.
+2. **S2: 15:56–16:09 (s25 S4–S5), the inset globe.**
+   - "Singapore ≈ 16 km, ≈ −81 °C" runs into the inset globe's shell.
+   - The globe's atmosphere shell is cut by a hard vertical edge at x ≈ 1570.
+   - The top label "≈ 8 km" is clipped at the inset's top edge.
+   - −81 °C is shown but never spoken: the voice says "below minus seventy-five".
+   - Fix:
+     - Move the inset 80 px right and 40 px down, and draw the full shell or mask it with a soft edge.
+     - Put "≈ 8 km" inside the frame.
+     - Either say "about minus eighty-one degrees" or write "< −75 °C".
+3. **S3: `movies/out/ch00/ch00_weather_basics/en.srt` is the stale v2 file.** Copy the current `movies/ch00/ch00_weather_basics/en.srt` before publishing, and have `movie_qa.py` compare the SRT too.
+4. **S4: 14:22–15:37 (s23 vs s24), the profile top is inconsistent.**
+   - In s23 the Trappes profile includes the two top points with filled heights (31.1 and 33.9 km, warming to −51 °C), and the balloon glyph sits at about 37 km.
+   - In s24 the same line ends at 31 km.
+   - Fix: draw the same points in both scenes. Either drop the `z_filled` points in both, or keep them and park the balloon at the last point. Also make it consistent with "balloons usually burst at around thirty kilometres".
+5. **S5: 36:20 (s55), "low: 971 hPa" against the spoken "about nine hundred and seventy".**
+   - The house rule is that the number on screen is the number spoken.
+   - Fix: show "≈ 970 hPa" until the hours start to run, or say "nine hundred and seventy-one".
+
+## COSMETIC
+- 36:47–37:00 (s56 S3–S4): the L glyph sits on the Brest dot. Give the dot a 6-px ring, or offset the track end to the halo edge (review-1 S1, still open).
+- 29:30 (s44): the high's clockwise arc is still mostly outside the map at the bottom left.
+- The H/L styles still differ between scenes: s42 is cream, s45/s49/s59 are pink/blue, and s55–s58 use a dark disc with a cream letter. Pick one.
+- s40 (26:20): the underbrace labels "station p" and "z_s: height" and the exponent are about 40 px.
+
+## House-style conformance
+- Opening title, voice, arc, recap, weather end card, colour roles and the no-references rule: conform.
+- Departures:
+  - one clipped label (N-M1);
+  - two 3.5-s empty halves (S1);
+  - one number on screen that is not spoken (S2, S5).
+
+## Overall: FIX (ch00_weather_basics v3 fix 1 review 2 — N-M1, N-M2; S1–S5 recommended)
+- **Review-1 status:**
+  - M1 and M2 are fixed; only two 3.5-s remnants are left.
+  - M3 was a review-1 error. The builder's 970.7 hPa is right, confirmed independently, and the map now labels Ciarán.
+  - M4 is fixed at Brest: map and graph agree at 18–20 and 00–03 UTC.
+  - S1–S11 are fixed, except the s23 balloon glyph and the s44 arc.
+- **What blocks `qa_pass`:**
+  - N-M1, a clipped spoken number (layout only).
+  - N-M2, the front lines after 16 UTC. These need the front selection in `build_ch00_weather_basics.py` re-run with shape/orientation rules and new CHECK rows, then a re-render of s55–s58 only, about 1 min 51 s.
+- Neither needs new narration, except optionally S2 or S5.
+
+Disk at review: C: 74 GB free, G: 555 GB free. Review frames: 655 MB on G: (scratch, not committed).
