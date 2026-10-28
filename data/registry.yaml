@@ -955,6 +955,7 @@ datasets:
     derived_on_root: [derived/ch00/rwm_isd_brest_2023-11-01T12_2023-11-02T09.json, derived/ch00/rwm_isd_synop_2023-11-02T03_45-55N_10W-5E.json]
     derived_in_repo: [data/derived/ch00/rwm_isd_brest_2023-11-01T12_2023-11-02T09.json, data/derived/ch00/rwm_isd_synop_2023-11-02T03_45-55N_10W-5E.json]
     checks: "Brest re-read = the plan table: 18Z 1 Nov SYNOP 81518 10103 20098 39718 49833 58103 765// (150 deg 18 kt, 10.3/9.8 C, 983.3 hPa, a=8 -10.3 hPa, ww 65); 00Z METAR 22042G61KT ... 11/10 Q0963; 01Z METAR 24044G66KT ... Q0962 (lowest QNH); 03Z SYNOP 82739 10092 20075 39582 49696 53055 763// 333 ... 91084 90710 91184 (270 deg 39 kt, 9.2/7.5 C, 969.6 hPa, +5.5 hPa, ww 63, 911 group 84 kt over the past hour per 907tt=10). Max METAR gust 75 kt. Box: RMS(station SLP - ERA5 msl at 03Z) 0.86 hPa over 206 stations (median -0.04), 0.60 hPa without Scilly St Mary's (03800099999: 955.6 hPa vs ERA5 964.4, 181 km from the ERA5 centre 953.7 hPa at 50.0N 3.75W - suspect, keep out of the hand analysis)"
+    external_checks: "s57 (checked 2026-10-28): 84 kt x 1.852 = 155.6 km/h = Meteo-France 'Brest (29) Vent maxi 156 km/h 2/11' (Bulletin climatologique mensuel regional Bretagne, novembre 2023, p. 5, https://donneespubliques.meteofrance.fr/donnees_libres/bulletins/BCMR/BCMR_03_202311.pdf); 1.2 million households without power: Enedis press release 7 Nov 2023 ('privaient d'electricite 1,2 million de foyers en France')"
     used_by: [movie ch00_reading_weather_maps s32-s38, s42, s49, s57 (D1)]
   IEM-METAR:
     catalogue: Iowa Environmental Mesonet
