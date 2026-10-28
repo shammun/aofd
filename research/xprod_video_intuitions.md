@@ -25,6 +25,56 @@ Wikipedia's dot/cross product articles, physics-education research on vector mis
 plus our own devices. So none of it can be a copy of the video. If the user can paste the transcript or list the
 video's chapter titles, a follow-up pass can check what we missed.
 
+**UPDATE (orchestrator, 2026-10-28): transcript obtained** (auto-captions, 390 lines, 16:35, via `youtube-transcript-api`
+in a scratch venv; not committed). The user wants the video's explanations of *why each part of the formula makes sense*
+and *when each product is used* added to the movies. §1b is the video's teaching arc, paraphrased in our words (no
+verbatim lines, none of its jokes); §1c says what each idea becomes in our movies. **§1b/§1c take priority over §2–§5
+where they overlap.**
+
+## 1b. The video's teaching arc (paraphrased)
+
+The idea running through the whole video: each product was *made* to describe one physical observation. Anchor each
+product to that observation and every part of its formula follows. If you forget a formula, go back to the observation.
+
+**Dot product, anchored to work**
+| # | Idea | How the video shows it |
+|---|---|---|
+| V-D1 | Work = force × distance, but only the part of the force *along* the motion counts | A train that can only move along its track; a strong wind blows at an angle. Split the wind force into an along-track part (moves the train) and an across-track part (does nothing, the rails take it). Work = F d cos θ |
+| V-D2 | Why the answer is a scalar | Work is "how much motion/energy was delivered", with no direction attached |
+| V-D3 | General meaning | Length of the first vector × the component of the second vector *along* the first. The polar form needs the angle |
+| V-D4 | **Why the component formula a_x b_x + a_y b_y + a_z b_z is the same thing** | Think of **a** as three arrows laid end to end (its x, y, z parts). Each part may be multiplied only by the part of **b** that points the same way: a_x only "sees" b_x, a_y only b_y, a_z only b_z. Add the three: the component formula falls out of the meaning |
+| V-D5 | Uses named | Work and "similar concepts" across physics; also AI (similarity between vectors) |
+
+**Cross product, anchored to torque**
+| # | Idea | How the video shows it |
+|---|---|---|
+| V-X1 | Torque = how much a force changes rotation = force × distance from the pivot | Lever; a door: we push far from the hinges because a long lever arm needs less force, near the hinge it needs much more |
+| V-X2 | Only the *perpendicular* part of the force turns | A wrench pushed at a slant: split F into a part along the handle (does nothing) and a part across it (turns). τ = r F sin θ: **the magnitude of the cross product = length of the first × component of the second perpendicular to it** |
+| V-X3 | The neat pairing | Dot = first × the *parallel* part of the second → scalar; cross = first × the *perpendicular* part → vector |
+| V-X4 | Direction: right-hand rule | Index finger along **r** (first), middle finger along **F** (second), thumb gives τ. Out-of-screen ⊙ and into-screen ⊗ symbols, practised on two cases (a nut turned one way gives τ into the screen) |
+| V-X5 | **What the direction means** | The torque vector is the **axis** about which the force increases the rotation. Pointing at you = counter-clockwise as you see it; pointing away = clockwise. Second rule: curl your fingers the way the rotation grows, thumb = vector |
+| V-X6 | Reading the "monstrosity" (component formula) | The x component uses only y and z parts; y uses only z and x; z uses only x and y |
+| V-X7 | Plane case first | Wrench and force both in the xy-plane → all z parts are zero → only the z component survives. Matches reality: turning *in* the xy-plane is turning *about* the z-axis |
+| V-X8 | **Why z = r_x F_y − r_y F_x, term by term** | Split F into F_x and F_y. F_y alone pushes across the lever arm r_x → a mini-torque about z. F_x alone pushes across the lever arm r_y → a mini-torque turning the *opposite* way for same-signed parts. That is why one term has a minus sign. Signs checked on a picture against the formula |
+| V-X9 | Full 3-D | A floating sphere spun by brushing a finger past it: lever arm from the centre to the touch point, both **r** and **F** have x, y, z parts. The (x,y) parts give a z-torque, (y,z) parts an x-torque, (z,x) parts a y-torque; the three add to a torque about a **tilted (diagonal) axis** |
+| V-X10 | Uses named | Torque "and other similar things" |
+| V-S | Closing summary | Dot: scalar from the parallel part; cross: vector from the perpendicular part; if confused, think of work and rotation |
+
+## 1c. What we take into our movies (our own pictures, weather settings where possible)
+
+| Video idea | Our version | Movie |
+|---|---|---|
+| V-D1/D2 | Keep the train-on-a-track device but make the force a real wind: an air-driven push on a rail car, or better **a sailboat or a ship held to a course** and wind at an angle; add the runway case (headwind = dot part). Energy bar fills for the along part only | 0.1b |
+| V-D3/V-X3 | A "parallel part / perpendicular part" pair: the same two arrows, the shadow of **b** along **a** feeds the dot, the part across **a** feeds the cross; Lagrange triangle (§2 X2) as the payoff | 0.1b intro + #2 opening |
+| V-D4 | **New key scene:** **a** splits into three coloured arrows; each grabs only its matching part of **b**; three products stack into the sum. Then a weather case: wind · temperature-gradient (advection) term by term | 0.1b (before the advection block) |
+| V-D5 | One short line + picture: comparing two weather patterns by their dot product (pattern correlation/analogue forecasting), the root of "similarity" in AI | 0.1b uses |
+| V-X1 | Door/lever arm at the start of torque: push near vs far from the hinge, needed force bar shrinks with arm | #2 (torque anchor) and #3 |
+| V-X2 | Slanted wrench: split F along/across the handle, the across part turns; τ = r F sin θ grows and shrinks as the angle sweeps | #2 |
+| V-X4/X5 | Right-hand rule as fingers + the meaning: the vector **is the axis**, sign = sense of turning, said with viewpoint ("seen from above"). Weather tie: Earth's rotation vector Ω points out of the North Pole, so the Earth turns counter-clockwise **as seen from above the North Pole** | #2 (meaning), #3 (Ω, vorticity) |
+| V-X6/X7/X8 | **New key scene:** the component formula built from physics: plane case first (only z survives), then F_y with arm r_x and F_x with arm r_y as two mini-torques fighting, explaining the minus sign; then the cyclic pattern x←(y,z), y←(z,x), z←(x,y) | #2 (after the determinant/area scenes, or replacing their less physical version) |
+| V-X9 | Spinning sphere brushed off-centre → torque on a tilted axis, three component torques adding as arrows. Tie to a weather/ocean case where possible (wind stress spinning an eddy; a tilted spin axis like Earth's Ω at a mid-latitude split into local vertical and northward parts) | #2 end of maths / #3 |
+| V-S | Closing line in each movie: "dot = along part, a number; cross = across part, an axis" | 0.1b, #2 |
+
 ---
 
 ## 2. Cross product: one intuition per part of the maths
