@@ -217,6 +217,9 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   - The TSX only indexes and interpolates.
 - KaTeX strings are `String.raw` constants, copied verbatim from the storyboard so the equations QA gate can find them.
 - Equations are transcribed from the rendered page images (provenance `vallis_eq` / `page_png` lives in the storyboard for QA only, **never on screen**).
+- **Storm trackers:** never label "the low" with the minimum of a search box (it can pick a different low). Seed on the
+  storm and track it by continuity from the previous hour, with a CHECK row on the step length; front lines shown on a
+  storm map are only the ones attached to the tracked low (weather basics review 1, 2026-10-28).
 - Time compression is recorded in the manifest and is not badged on screen. Thought experiments are said as such ("imagine the map stays frozen").
 
 ## 8. Sound and captions
@@ -270,7 +273,9 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
    - Kill orphan `remotion render` node, chrome-headless-shell and ffmpeg processes first.
    - Join with the ffmpeg **concat filter** (one re-encode, crf 20, bt709, yuv420p, AAC 320k, faststart). `-c copy` concat drops frames.
    - The tool is `tools/render_chunks.py --scratch <G: folder> --comp <Id> --frames <total>`.
-3. **`tools/movie_qa.py` with `--storyboard`:** 10 gates.
+3. **`tools/movie_qa.py` with `--storyboard`:** 12 gates (since 2026-10-28 incl. `content`: no empty content area
+   > 1.5 s on the navy background, which the black gate cannot see; and `halves`: picture or maths zone empty, WARN > 3 s,
+   FAIL > 10 s).
    - The duration gate checks against timing.json's narration end (+0…5 s hold).
    - Size budget 60 MB (hard 80) for long movies.
 4. **The builder looks at its own frames for every changed scene before the full render,** checking for:
@@ -292,3 +297,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-27: §3 adds the ending for weather, climate and ocean movies (user: say and write that the videos are made for students of meteorology, atmospheric science and climate, and anyone who wants to see the maths behind the ideas).
 - 2026-10-27: §8 a different score per movie, matched to its content; sound effects (water, waves, rain, wind, storm…) where the picture shows them (user).
 - 2026-10-27: §3 the cross-product movie takes the weather/climate ending (user).
+- 2026-10-28: §10 QA has 12 gates (content, halves); §7 storm-tracker rule; §4 `[beat]` pauses (user).
