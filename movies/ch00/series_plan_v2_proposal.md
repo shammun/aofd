@@ -127,6 +127,8 @@ where the picture shows them; latest data + history + cited impacts; house style
 | 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen) |
 
 ## Notes
+- User (2026-10-27), 10A/10B: for every identity, say exactly WHERE it is used (which equation: continuity, momentum, vorticity, energy/Bernoulli, thermodynamic/advection, Coriolis and centrifugal terms, Ekman, QG/PV), what each term MEANS physically and what it REPRESENTS, with enough worked examples on real fields and maps.
+- User (2026-10-27), cross-references in every movie: whenever a movie uses an operator or group of operators that another movie explains in depth (earlier OR later in the series), it points to that movie in a short spoken line ("we built this step by step in the divergence movie" / "we'll take this apart fully in the vector-identities movie") and lists it among the related movies on the end card. The movie still explains enough to stand on its own (the Coriolis movie still derives everything from scratch, now also pointing to the related movies). Pointers are spoken and on the end card only: no on-screen citations or equation labels (house style). Each storyboard gets a `related:` list per scene (movie #, slug, what it covers).
 - User (2026-10-27): the divergence (#7), curl (#8) and vorticity (#34) movies are long ones, about 30 min each (not shortened).
 - User (2026-10-27): every maths movie is tied to meteorology, atmospheric science or climate science (real fields, real maps); every movie shows enough worked examples and maps; skew-T, Coriolis, ENSO and map-reading movies may run longer (45–60 min).
 - The old V1–V24 list is absorbed: V1 → 10, V2 → 23, V3 → 24–25, V4 → 12, V5 → 29, V6 → 30, V7 → 32, V8 → 36, V9 → 34,
