@@ -47,3 +47,24 @@ coast floods, a whoosh on the Alps flight).
 
 ## Length
 Measured: see `script.md` header (v4 clips + dry run of every new sentence).
+
+
+## Update 2026-10-28 (movie-director): this supersedes the sections above where they differ
+The plan is now in `storyboard.yaml` and `script.md` (46 scenes, measured 35:43.7).
+
+**What changed:**
+- **Torque moved in** (orchestrator, from the user's reference video): the "Not here" line no longer holds for torque.
+  - v4 s20_torque (the slanted spanner) and s21_torque_axis are in the why section.
+  - They are followed by the new scenes s21a_minus_sign (two mini-torques fight → the minus sign) and
+    s22d_tilted_axis (a ball brushed off centre → a torque about a tilted axis).
+  - s03_door gains the lever-arm (near vs far from the hinge) anchor.
+- **New intuition scenes:**
+  - s15a ε sign cube;
+  - s18d along/across right triangle (Lagrange);
+  - s22x glass sheet (why perpendicular);
+  - s53a runway crosswind (cross half).
+- **Upgraded scenes:** s02, s04 (sign dial), s07 (plane case first), s14/s15 (cycle + recipe pattern), s17 (two-faced
+  card), s18 (continuous sweep + contrast with the dot product), s18c (live area), s19 (closing pair).
+- **Review-3 fixes:** in the `visual` "CHANGES FOR THIS MOVIE" lines (R3-S1 s03/s08/s09/s20, R3-S3 s03/s22, R3-S4 s08,
+  C1/C4/C5/C6).
+- **Ending:** the maths ending, word for word.

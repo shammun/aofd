@@ -44,3 +44,23 @@ wind_gusty under Ciarán, wind_gentle under the trades/westerlies and today's ma
 
 ## Length
 Measured: see `script.md` header.
+
+
+## Update 2026-10-28 (movie-director): this supersedes the sections above where they differ
+The plan is now in `storyboard.yaml` and `script.md` (55 scenes, measured 40:23.2).
+
+**What changed:**
+- **Torque and door moved to #2.** This movie opens with three recaps (s01a–c) and s04_torque_recap. That scene adds the
+  torque-vs-joule misconception: the same unit, but a different quantity (cross vs dot).
+- **New scenes:**
+  - s46b_ekman: the same quarter turn in the ocean, M_E = −(1/f) k × τ; 90° for the whole layer, 45° only at the
+    surface.
+  - s46c_upwelling: California, a real OISST day; cross then dot.
+- **Upgraded scenes:**
+  - s22e: flat energy bar, plus the pointer to the dot product's "a push across does no work".
+  - s23: compass rose.
+  - s24: Earth anticlockwise seen from above the North Pole.
+  - s30: "only steers"; the inertial circle is named; 17 h is now a CHECK row.
+- **Review-3 fixes:** R3-S1, R3-S2 (s25b), C1/C3/C5/C6, in the `visual` lines.
+- **Ending:** the weather/climate ending in its **ocean** wording (meteorology, oceanography, atmospheric and climate
+  science), because the movie now ends with an ocean application.

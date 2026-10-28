@@ -53,3 +53,22 @@ flat 0.343–0.348 / sunny 0.55–0.62 / shady 0.00–0.10, ratio 1.6–1.8, hil
   order returned is clockwise (sign −).
 - Rhône at 7.36°E, 21 Dec noon (sun elevation 20.3°): sunny slope 46.275°N tilt 18°, ŝ·n̂ = 0.58; shady slope 46.208°N
   tilt 19°, 0.05; flat 0.343. ETOPO 60″ slopes: median 1.4°, 99th percentile 19.7°.
+
+
+## E. Additions 2026-10-28 (research/xprod_video_intuitions.md §1b/§1c, orchestrator update)
+New scenes and their numbers. All are builder CHECK rows via `fluidpy.geo.vectors`; no new download.
+
+| CHECK | Scene | What is asserted | Function | Planning value (director run 2026-10-28) |
+|---|---|---|---|---|
+| X4 | s18d_two_parts | (a·b)² + \|a×b\|² = \|a\|²\|b\|²: 64 + 196 = 260 = 26 × 10 | `vectors.dot`, `cross`, `norm` | 260 = 260 |
+| X5 | s21a_minus_sign | r = (0.2, 0.1, 0) m, F = (10, 30, 0) N: mini-torques +6 (r_x F_y) and −1 (−r_y F_x); cross z = 5 N m; each term's sign = its turn sense | `vectors.cross` | 6, −1, 5 |
+| X6 | s22x_glass_sheet | (s a + t b)·(a × b) = 0 for the 12 drawn mixtures (≤ 1e-12) | `vectors.dot`, `cross` | 0 |
+| X7 | s22d_tilted_axis | r = (0.1, 0, 0.1) m, F = (0, 2, 0) N → τ = (−0.2, 0, 0.2) N m; axis 45° from up towards −x | `vectors.cross`, `angle_between` | (−0.2, 0, 0.2) |
+| R1 | s53a_runway | ê = (0, 1, 0), v = 10 (sin 30°, cos 30°, 0) m/s: (ê × v)_z = −5 (wind from the left); along part 8.66 (named only) | `vectors.cross`, `dot` | −5.000, 8.660 |
+| T0 | s00_title | sweep of \|a × b\| for θ 0..360° (new `data/title_sweep.json`) | `vectors.cross`, `parallelogram_area` | 14.0 at the drawn θ |
+
+- **Unverified values:** none in this movie (the 17 h and 465 m/s values are in #3 and are now computed there).
+- The NHC 3.0–4.6 m inundation (D1b), the UK area, the Valais vineyards and the right-front-quadrant rule stay "cite
+  before final TTS", as in §B.
+- **Moved here from #3** (orchestrator 2026-10-28, torque anchor): v4 s20_torque and s21_torque_axis. Their data is
+  `cross_product_why/data/torque.json`, and the v4 manifest rows are unchanged.

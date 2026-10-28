@@ -1,0 +1,3340 @@
+id: ch00_cross_product
+title: 'The cross product: the part across, as an arrow'
+version: 1-plan
+series_position: '#2 (plan v2)'
+split_of: ch00_cross_product_why v4 fix 2 (commit 45406d0)
+concepts:
+- C0A-PoC2
+target_duration_s: 2143.675
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+ending: 'maths ending (HOUSE_STYLE §3 first variant), concept ''this cross product'' — the user''s 2026-10-27 ''cross product
+  uses the weather ending'' applied to the full movie; #2 ends on the maths (task brief 2026-10-28)'
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  music:
+    style: geometry-crystal
+    key: E-flat major
+    metre: 3/4 at 76 bpm
+    palette: glass pad + celesta + marimba
+    seed: 21
+    source: tools/sound/styles.py (style to be added) + tools/sound/mix.py
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, TP <= -1.5 dBTP
+  effects:
+  - storm_bed under Ian (s51-s53, quiet)
+  - waves_breaking as the Fort Myers gauge peaks (s53)
+  - whoosh on the Alps flight (s57)
+reuse_audio: 'unchanged sentences: archived v4 clips in G:/Geophysical Fluid Dynamics/aofd-data/archive/movies/ch00_cross_product_why_v4_final/audio/
+  (narration.wav + timing.json); the final TTS re-renders every sentence anyway (Kokoro is deterministic for identical text,
+  so spliced and fresh clips match)'
+review3_fixes:
+  R3-S1: s03, s08, s09, s20 (visual_add lines)
+  R3-S2: 'not in this movie (s25b is in #3)'
+  R3-S3: s03, s22
+  R3-S4: s08
+  C1: s17, s22a
+  C4: s12
+  C5: s02, s08
+  C6: s19
+research_rows: research/xprod_video_intuitions.md §1b/§1c (priority) and §5a
+cross_references: 'related: per scene; spoken pointers in s15a, s19, s53, s53a, s55, s58, s59, s60; end-card thumbnails'
+measured_narration_s: 2141.175
+measured_frames: 64310
+words: 5527
+sentences: 353
+dry_run:
+  tool: tools/tts.py
+  run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\v2_20261028\ch00_cross_product
+  audio_s: 2141.175
+  speech_s: 1997.1
+  cues: 533
+  self_check:
+    expected_s: 2141.175
+    audio_s: 2141.175
+    diff_ms: 0.0
+    len_ok: true
+    cues_ok: true
+  render_s: 5859.5
+  warnings: []
+  lexicon: movies/lexicon.yaml as of 2026-10-28 (no new entries)
+qa_expectations:
+  duration_s: 2143.675
+  duration_window_s:
+  - 2079.4
+  - 2208.0
+  captions:
+    cues: 533
+    max_lines: 2
+    max_chars_per_line: 42
+    max_cps: 17
+  equations: every on_screen_eq latex verbatim in the TSX; no katex-error
+  size:
+    budget_mb: 120
+    hard_mb: 160
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 12.65
+  status: new
+  changes: []
+  related: []
+  visual: 'TITLE FRAME (house §3; the only heading). Left column x 100-1075: ''The cross'' / ''product'' RiseText 150 px
+    w800 TitleGradient teal -> gold; ''made easy'' 96 px warm white (pulse x1.06 on ''the easy way''); subtitle on TWO lines
+    (phone-review rule from 0.1: never closer than 50 px to the animation): ''and how meteorology'' / ''uses it'' 68 px,
+    ''meteorology'' in teal. Right column x 1130-1840, y 180-636 (starts 55 px right of the longest subtitle line). Part
+    A: the s22a parallelogram card in 3-D — b sweeps round a, the parallelogram''s area and the violet a x b arrow grow
+    and shrink (live ''|a × b| = 14.0 … 0 …'', 84 px, inside the column) and the arrow flips down past 180 deg. Part B (cross-fade
+    on ''meteorology''): a mini Hurricane Ian GOES-16 tile with the track arrow d and a town arrow r, the d x r arrow pointing
+    down (''right''), then the Ciarán 968-hPa loop filling with triangles.'
+  voiceover: In this video, we'll learn the cross product the easy way, and see how meteorology uses it to tell left from
+    right, to measure a storm, and to find the sunny side of a valley.
+  on_screen_eq:
+    latex: '|\mathbf a\times\mathbf b|'
+    vallis_eq: 'provenance only: live readout label (our numbers)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b: '|b| (cos θ, sin θ, 0), θ 0..360°'
+    also:
+    - fluidpy.geo.vectors.parallelogram_area
+    data: data/title_sweep.json (new)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field, ::test_parallelogram_area_V1_base_times_height
+  exaggeration:
+  - 'title animation: time compressed; Ian and Ciarán tiles are real data in miniature'
+  music_cue: geometry-crystal enters
+  sentence_times:
+  - - 0.3
+    - 11.85
+- id: s01_hook
+  t:
+  - 12.65
+  - 21.425
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s01_hook
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - application is the weather map, not the wind
+  related: []
+  visual: |
+    No heading. Picture zone: a 3-D floor (pair-plane grid x -1..6, y -1..4 lying flat; camera az 250°, el 32°, dist 11,
+    target (2.5, 1.5, 1.5)); teal a = (5, 1, 0) and orange b = (1, 3, 0) grow from O over 1.0 s from frame 0 (hook in
+    the first 2 s), tip labels 'a', 'b' (68 px). S1 ('What is the cross product?'): 'a × b' at T.hero 128 px, maths zone
+    centre (1450, 330). S2 on AT(2, "why it's built this way"): the violet a × b rises from O to height 14 × 0.25 = 3.5
+    world units (display scale 0.25 for the result, said nowhere, the same in s05-s10) with tip label 'a × b'. On
+    AT(2, "about the wind"): a faint Globe3D thumbnail (420 x 250 px at (1240, 560), 50 %) with one wind arrow curving
+    right fades in and out.
+    UV2-02: the a × b rise is tied to AT(2, "why it's built the way it is"). UV2-08 global rule: from frame 0 the floor shows 'a = (5, 1, 0)' and 'b = (1, 3, 0)' (54 px) under the picture.
+  voiceover: What is the cross product? Let's see what it is, why it's built the way it is, and what it tells us on a weather
+    map.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    outputs:
+      a_cross_b:
+      - 0
+      - 0
+      - 14
+    data: data/pair.json -> a_cross_b
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+  exaggeration:
+  - the a × b arrow is drawn at 0.25 of its length (14 -> 3.5 grid units) so it fits beside a and b; its value is written
+    at its tip from s07 on
+  sentence_times:
+  - - 12.65
+    - 14.75
+  - - 15.1
+    - 20.625
+- id: s02_dot_recall
+  t:
+  - 21.425
+  - 64.05
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s02_dot_recall
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - 'V-D3/V-X3 pairing: along vs across (research §1c)'
+  - R3-C5 merge 'In weather,' cue
+  related:
+  - 0.1 dot product
+  visual: |-
+    THE LINK TO THE LAST VIDEO (U-CP.2). Camera tilts to straight above over 1.5 s; the 3-D floor hands over to the SVG
+    pair plane P = mkP(240, 620, 135) (the reference's grid and colours).
+    COMPONENT LEGS (UV2-03, from the first frame of S2 and kept to the end of the scene): for a, a dashed teal leg from O
+    along x to (5, 0) labelled '5' under its middle and a dashed teal leg up to the tip (5, 1) labelled '1' to its right;
+    for b, a dashed orange leg along x to (1, 0) labelled '1' and up to (1, 3) labelled '3' to its left (54 px; labels
+    placed with placeLabels so they never touch the arrows or each other). Under the picture 'a = (5, 1)' and
+    'b = (1, 3)' (54 px, teal / orange).
+    S1: keyword 'dot product' (54 px) at (1100, 150).
+    S2: legs and component labels draw on AT(2, "five and one") and AT(2, "one and three"); maths zone
+    'a·b = 5×1 + 1×3 = 8' (68 px) on AT(2, "equals eight"), the 8 bold.
+    S3: the dashed drop line from a's tip to the foot (0.8, 2.4), the teal shadow band labelled 'shadow' and '2.530'
+    (the legs dim to 40 % so the shadow reads); 'a·b = (|a| cos θ) |b|' (68 px) with underbraces 'shadow',
+    'length of b'.
+    S4: the pair plane slides left and shrinks to 55 %; the mini isotherm map (reference GM map at 0.6 scale) with
+    isotherms '11 … 15 °C', teal v and orange ∇T at the pin, 'v·∇T' (68 px); keyword 'isotherms' on AT(4, "isotherms").
+    S5: the 8 and 'v·∇T' pulse together; keyword 'a number' (54 px).
+
+    CHANGES FOR THIS MOVIE: on 'the part across instead': b splits into a teal along-a band (labelled 'along · dot') and an orange across-a band ('across · ?'); the '?' stays until s18b. Thumbnail of the 0.1 isotherm map on 'In weather' (C5: cue merged with the next words).
+  voiceover: In an earlier video, we met the dot product. We took vector a with components five and one, and vector b with
+    components one and three, and found that a dot b equals eight. In pictures, it was the shadow of one arrow on the other,
+    times the other arrow's length. In weather, v dot grad T told us how fast the wind carries air into warmer or colder
+    places, on a map of isotherms, the lines of equal temperature. The dot product is a number, and it uses only the part
+    of one arrow that lies along the other. Today we meet its partner, which uses the part across instead.
+  on_screen_eq:
+    latex: \mathbf a\cdot\mathbf b = 5\times1 + 1\times3 = 8
+    vallis_eq: 'provenance only: the last video''s definition (Kundu §2.8, unnumbered) with our numbers'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
+  on_screen_eq_extra:
+  - latex: \mathbf a\cdot\mathbf b = (|\mathbf a|\cos\theta)\,|\mathbf b|
+    vallis_eq: 'provenance only: the last video''s regrouped cosine form'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  - latex: \mathbf v\cdot\nabla T
+    vallis_eq: 'provenance only: the advection term of the last video'
+    page_png: chapters/pages/ch01/p025.png
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      a:
+      - 5
+      - 1
+      b:
+      - 1
+      - 3
+    outputs:
+      a_dot_b: 8.0
+      shadow_a_on_b: 2.53
+      foot:
+      - 0.8
+      - 2.4
+      legs_a:
+      - - 5
+        - 0
+      - - 0
+        - 1
+      legs_b:
+      - - 1
+        - 0
+      - - 0
+        - 3
+    also:
+    - fluidpy.geo.vectors.scalar_projection
+    data: data/pair.json -> a_dot_b, shadow_a_on_b, foot, legs (NEW field legs, CHECK legs sum to the vector)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_scalar_projection_V1_and_V7
+  exaggeration:
+  - 'mini map: the last video''s idealised map, reused as a reminder'
+  sentence_times:
+  - - 21.425
+    - 24.925
+  - - 25.275
+    - 33.95
+  - - 34.3
+    - 40.275
+  - - 40.625
+    - 51.7
+  - - 52.05
+    - 58.425
+  - - 58.775
+    - 63.25
+- id: s03_door
+  t:
+  - 64.05
+  - 117.1
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s03_door
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - V-X1 lever-arm anchor (research §1b)
+  - R3-S3 door tick + snap
+  - R3-S1 cosmetic 01:09
+  related: []
+  visual: |-
+    Picture zone ThreeCanvas (920 x 760 px): Door3D seen from above at an angle (az 210°, el 55°, dist 6, target
+    (0.5, 0.4, 0)). Door: a 1.0 x 0.05 x 2.0 slab (muted ink #9aa6bd 60 %, warm-white edge lines) hinged at O on a
+    vertical gold-dashed hinge line; floor quarter-circle swing guide (muted, 6 px). No numbers in this scene.
+    S1-S2: the door and hinge appear. S3-S4 ('Draw one arrow from the hinge…'): teal r from the hinge along the door's bottom
+    edge to the hand point (0.9 along), tip label 'r' ('hinge to hand' keyword 54 px under the picture); then orange F
+    at the hand, tip label 'F' ('push').
+    S5-S6 (right-angle push): F ⟂ door; right-angle tick; maths zone 'r·F = 0' (84 px) on "is zero"; on "the door turns
+    the most" the door swings 50° (20 frames, eased) - door rotation driven by the frame, return over 12 frames.
+    S7-S8 (push along the door): F turns to lie along r pointing at the hinge; 'r·F' with keyword 'largest' (orange 54 px)
+    on "as large as it can be"; the door stays put with a small gold 'no turn' strike glyph at the hand.
+    S9: keyword 'backwards' (68 px) between the two lines; both lines pulse.
+    UV2-04: the door scene is re-framed so every label sits inside x 80-1000 with a 40-px margin: camera target moves to (0.45, 0.35, 0) and dist 6 -> 6.6; the 'r' tip label is placed by placeLabels against the PROJECTED door edge and the canvas edge (forbidden zone = 40 px from the canvas border; if the tip is within 120 px of the edge the label goes above the arrow's middle instead). Builder self-check: a frame at every sentence start, label bbox inside the canvas.
+
+    CHANGES FOR THIS MOVIE: NEW S2-S4: the hand slides from the handle (r = 0.9 m) to near the hinge (0.2 m) while a 'push needed' bar (orange, picture zone bottom) grows ×4.5; keywords 'far · easy' / 'near · hard' on their words. R3-S3: the right-angle tick between r and F is a child of the door group (it swings with the door) and fades with the swing; the door swings 50° over 20 frames and eases back over 18 frames (0.6 s) only after S7 starts — no snap. R3-S1 (01:09-01:14.5): the maths zone shows 'r', 'F' keywords from S3 so the right half is never empty.
+  voiceover: But a number can't describe everything. Imagine pushing a door open. Push near the handle, far from the hinge,
+    and it swings open easily. Push close to the hinge, and you need a much bigger push to turn it just as fast. So turning
+    depends on how far from the hinge you push, and on which way you push. Draw one arrow from the hinge to your hand, along
+    the door. Then draw a second arrow for your push. When you push at a right angle to the door, the dot product of these
+    two arrows is zero. Yet the door turns the most. When you push along the door, straight towards the hinge, the dot product
+    is as large as it can be. Yet the door doesn't turn at all. So for turning, the dot product gets things backwards.
+  on_screen_eq:
+    latex: \mathbf r\cdot\mathbf F = 0
+    vallis_eq: 'provenance only: dot product of perpendicular arrows (the last video''s rule)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      r:
+      - 0.9
+      - 0
+      - 0
+      F_perp:
+      - 0
+      - 1
+      - 0
+      F_along:
+      - -1
+      - 0
+      - 0
+    outputs:
+      dot_perp: 0.0
+      dot_along: -0.9
+      cross_perp_z: 0.9
+      cross_along_z: 0.0
+    also:
+    - fluidpy.geo.vectors.cross (the same two cases, used again in s22)
+    data: data/door.json
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_cross_V1_components_on_field
+  exaggeration:
+  - door, hinge and swing are illustrative (no mass or friction); the push arrow has no stated size here
+  honesty: 'the screen writes "largest" without a number and without a sign: the along-the-door push towards the hinge gives
+    r·F = −|r||F| (largest in size); the narration says "as large as it can be" - true for the size. No number is shown,
+    so no sign is shown.'
+  sentence_times:
+  - - 64.05
+    - 67.025
+  - - 67.375
+    - 69.85
+  - - 70.2
+    - 75.225
+  - - 75.575
+    - 80.8
+  - - 81.15
+    - 86.475
+  - - 86.825
+    - 90.8
+  - - 91.15
+    - 93.85
+  - - 94.2
+    - 99.95
+  - - 100.3
+    - 102.55
+  - - 102.9
+    - 109.25
+  - - 109.6
+    - 111.925
+  - - 112.275
+    - 116.3
+- id: s04_left_right
+  t:
+  - 117.1
+  - 166.55
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s04_left_right
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - X4/D4 sign dial side by side (research §5a row 1)
+  related: []
+  visual: |-
+    Picture zone: a top-view map plane (faint grid, axis words 'east', 'north' 54 px muted). The arrows here are unitless
+    sketches (no numbers), so no component labels.
+    S1: the door slides to a 30 % thumbnail at (1500, 180).
+    S2: teal u north (3 grid units, tip label 'wind'); on AT(2, "to the east") an orange push east, on AT(2, "to the
+    west") an orange push west, tip labels 'push east', 'push west' (54 px).
+    S3: right-angle ticks; under each push '= 0' (68 px): 'u·east = 0', 'u·west = 0'.
+    S4: the two '= 0' pulse; keyword 'left or right?' (68 px) with a gold '?'.
+    S5: the door thumbnail grows back and its hinge line glows gold; keyword 'axis'.
+    S6: keywords 'largest at right angles' and 'an arrow along an axis' (54 px) on their words.
+    S7: 'a × b' (T.hero 128 px) replaces them, the × violet.
+
+    CHANGES FOR THIS MOVIE: sign dial: the push arrow sweeps 360° round the wind (3 s, on 'sweep … all the way round'); the background half-planes are tinted (front teal 15 %, behind rose 15 % with hatch, the across line slate 'zero'); live 'u·F' readout with its sign glyph; the left and right halves of the dial get mirror 'L' / 'R' tags that light together on 'exactly the same'.
+  voiceover: 'There''s a second problem. Suppose the wind blows north, and something pushes it sideways, to the east or
+    to the west. Both pushes are at right angles to the wind, so both dot products are zero. Let''s sweep the push all the
+    way round the wind. The dot product is positive in the whole front half, zero on the line straight across, and negative
+    behind, but it''s exactly the same on the left as on the right. The dot product can''t tell a push to the right from
+    a push to the left. A turning also has an axis: the door swings around the line of its hinge. So we need a new product,
+    one that''s largest at right angles, and that gives an arrow along an axis. That''s the cross product.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      u:
+      - 0
+      - 3
+      push_east:
+      - 1
+      - 0
+      push_west:
+      - -1
+      - 0
+    outputs:
+      dots:
+      - 0.0
+      - 0.0
+    also:
+    - fluidpy.geo.vectors.cross
+    data: data/door.json -> left_right
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field
+  exaggeration:
+  - the wind and push arrows are unitless sketches (no speeds given)
+  sentence_times:
+  - - 117.1
+    - 119.125
+  - - 119.475
+    - 125.75
+  - - 126.1
+    - 131.5
+  - - 131.85
+    - 135.075
+  - - 135.425
+    - 145.8
+  - - 146.15
+    - 150.5
+  - - 150.85
+    - 156.15
+  - - 156.5
+    - 163.275
+  - - 163.625
+    - 165.75
+- id: s05_axes
+  t:
+  - 166.55
+  - 196.75
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s05_axes
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    3-D begins for real. The 2-D pair plane (as s02) becomes the 3-D floor: camera tilts from el 90° (straight above) to
+    el 32°, az 250°, dist 11, target (2.5, 1.5, 1.2) over S1 (eased 45 frames).
+    Axes3D: x (towards the viewer-right), y, z axes as muted 4-px lines from -1 to 6 (x), -1 to 4 (y), 0 to 4 (z); axis
+    letters 'x', 'y', 'z' (54 px) at the ends; on S2 the words 'east', 'north', 'up' (54 px muted) appear beside the
+    letters as the voice says them.
+    S3-S4 ('The unit vectors…'): three unit arrows x̂, ŷ, ẑ (ink, 8-px shafts) with tip labels 'x̂', 'ŷ', 'ẑ' (54 px) and
+    a small '1' bracket on ẑ.
+    S5-S6: teal a and orange b lie on the floor (they never move); under the picture 'a = (5, 1, 0)' and 'b = (1, 3, 0)'
+    (54 px), the added ', 0' glowing gold once on "third components are zero".
+    UV2-05: from the FIRST frame of the scene (before the camera tilt starts) a and b carry their component legs and labels (teal '5' along x and '1' up for a; orange '1' along x and '3' up for b, 54 px, as s02) and 'a = (5, 1)', 'b = (1, 3)' under the picture; on S6 the triples become 'a = (5, 1, 0)' and 'b = (1, 3, 0)' (the ', 0' glows gold) and, in 3-D, each leg set gains a '0' tag at the tip for z. The 3-component display the user liked (2:35 in v2) is kept unchanged.
+  voiceover: The cross product lives in three dimensions, so let's add a third axis. Here x points east, y points north,
+    and z points straight up. The unit vectors along them are called x hat, y hat and z hat. Each one is one unit long.
+    Our two arrows lie flat on the floor, so their third components are zero. Vector a becomes five, one, zero, and vector
+    b becomes one, three, zero.
+  on_screen_eq:
+    latex: \mathbf a = (5,\ 1,\ 0),\qquad \mathbf b = (1,\ 3,\ 0)
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.norm
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+      unit:
+      - - 1
+        - 0
+        - 0
+      - - 0
+        - 1
+        - 0
+      - - 0
+        - 0
+        - 1
+    outputs:
+      norm_a: 5.099
+      norm_b: 3.162
+      norm_unit:
+      - 1
+      - 1
+      - 1
+    data: data/pair.json -> a3, b3, norm_a, norm_b
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_norm_V1_and_V7_scaling
+  exaggeration: []
+  camera:
+  - at: S1
+    az: 250
+    el: 90
+    dist: 11
+    target:
+    - 2.5
+    - 1.5
+    - 0
+  - at: S1+45f
+    az: 250
+    el: 32
+    dist: 11
+    target:
+    - 2.5
+    - 1.5
+    - 1.2
+  sentence_times:
+  - - 166.55
+    - 171.725
+  - - 172.075
+    - 176.55
+  - - 176.9
+    - 181.725
+  - - 182.075
+    - 184.575
+  - - 184.925
+    - 190.0
+  - - 190.35
+    - 195.95
+- id: s06_recipe
+  t:
+  - 196.75
+  - 243.9
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s06_recipe
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    Picture zone: the 3-D floor with a and b (camera still, az 250°, el 32°), 'a = (5, 1, 0)' and 'b = (1, 3, 0)'
+    under the picture (54 px) throughout (UV2-08).
+    S1: a and b pulse once.
+    S2: 'a × b = ( _ , _ , _ )' (84 px) at (1080, 140) with the slot words 'along x', 'along y', 'along z' (44 px muted)
+    under the slots, each on its words; on AT(2, "three components") the keyword 'components' (54 px) with three gold
+    pointers to the slots.
+    S3-S4: the two-row component table (no box), 68 px, at (1100, 330): row 'a₁ a₂ a₃' (teal), row 'b₁ b₂ b₃' (orange),
+    column words 'x y z' (44 px muted) above. On "leave out the x parts" the x column greys to 30 % with a rose strike;
+    on AT(4, "the y part of vector a times the z part of b") a gold diagonal a₂ → b₃; on AT(4, "subtract") a gold
+    diagonal a₃ → b₂ with a rose '−'; slot 1 fills 'a₂b₃ − a₃b₂'.
+    S5: the y column greys instead, links a₃ → b₁ and a₁ → b₃, slot 2 fills. S6: the z column greys, links a₁ → b₂,
+    a₂ → b₁, slot 3 fills; the full main line appears at T.eq.
+    S7: the cycle wheel (x → y → z → x, 120 px, gold) at (1700, 640); the index pairs 2-3, 3-1, 1-2 glow in turn; the
+    three '−' pulse on "a minus sign".
+    S8: a small gold '?' beside the main line (answered in s09a).
+  voiceover: 'So how do we find the cross product? Since the answer is an arrow, we need to know how far it reaches along
+    x, along y and along z: its three components. For the x component, we leave out the x parts and use only the y and z
+    parts. We take the y part of vector a times the z part of b, and subtract the z part of vector a times the y part of
+    b. The y component leaves out the y parts and uses z and x. The z component leaves out the z parts and uses x and y.
+    Each pair follows the cycle x, y, z, and back to x, with a minus sign between the two products. We''ll soon see why
+    it''s built like this.'
+  on_screen_eq:
+    latex: \mathbf a\times\mathbf b = (a_2b_3 - a_3b_2,\ a_3b_1 - a_1b_3,\ a_1b_2 - a_2b_1)
+    vallis_eq: 'provenance only, not drawn: Kundu (2.20) (page image checked: (u2v3 − u3v2)e1 + (u3v1 − u1v3)e2 + (u1v2
+      − u2v1)e3), written as a component triple'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      symbolic: a, b with components (a1, a2, a3), (b1, b2, b3)
+    outputs:
+      components: (a2 b3 − a3 b2, a3 b1 − a1 b3, a1 b2 − a2 b1)
+    data: none (symbolic)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V2_symbolic_epsilon_and_lagrange
+  exaggeration: []
+  sentence_times:
+  - - 196.75
+    - 199.4
+  - - 199.75
+    - 207.9
+  - - 208.25
+    - 213.9
+  - - 214.25
+    - 222.675
+  - - 223.025
+    - 227.35
+  - - 227.7
+    - 232.2
+  - - 232.55
+    - 240.075
+  - - 240.425
+    - 243.1
+- id: s07_worked
+  t:
+  - 243.9
+  - 293.525
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s07_worked
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - V-X7 plane case first
+  related: []
+  visual: |-
+    Picture zone: 3-D floor with a, b; their component legs and labels (as s05) stay on; camera az 250° → 225°,
+    el 32° → 24°, dist 11 → 12 over the scene so the rising arrow stays in view.
+    UV2-07: top left of the maths zone, from frame 0, 'a = (5, 1, 0)' (teal) and 'b = (1, 3, 0)' (orange) at 68 px,
+    x 1080, y 60 and 140 - the numbers the calculation uses are always in view.
+    CalcStack (68 px, aligned at '=', ≤ 3 lines, older lines dim to 60 %) from y 260, the s06 component table small
+    (44 px) beside it with its links redrawn for the line in work:
+    S2: 'x:  1×0 − 0×3 = 0'   S3: 'y:  0×1 − 5×0 = 0'   S4: 'z:  5×3 − 1×1 = 15 − 1 = 14' (14 bold).
+    S5: 'a × b = (0, 0, 14)' (84 px) at (1080, 640) on AT(5, "zero, zero and fourteen"); the violet arrow rises from O
+    (display scale 0.25) with tip label 'a × b = (0, 0, 14)'; its component legs: '0', '0' shown as gold dots at O and
+    a vertical gold bracket '14'.
+    S6: keyword 'vector product' with a gold pointer to the violet arrow.
+
+    CHANGES FOR THIS MOVIE: on 'turning within the floor': a faint curved arrow sweeps a -> b on the floor and a gold up-axis line through O lights; the two zero components dim to 60 %, the 14 pulses.
+  voiceover: 'Let''s try it on our two arrows. The x component is one times zero, minus zero times three, which is zero.
+    The y component is zero times one, minus five times zero, also zero. The z component is five times three, minus one
+    times one: fifteen minus one, which is fourteen. So a cross b has components zero, zero and fourteen: an arrow fourteen
+    units long, pointing straight up, out of the floor where the two arrows lie. That makes sense: both arrows lie flat
+    on the floor, and turning within the floor is turning about the up direction, so only the z component survives. Because
+    the answer is a vector, the cross product is also called the vector product.'
+  on_screen_eq:
+    latex: \mathbf a\times\mathbf b = (0,\ 0,\ 14)
+    vallis_eq: 'provenance only: Kundu (2.20) with our numbers'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: 1\times0 - 0\times3 = 0
+    vallis_eq: 'provenance only: x component'
+    page_png: null
+  - latex: 0\times1 - 5\times0 = 0
+    vallis_eq: 'provenance only: y component'
+    page_png: null
+  - latex: 5\times3 - 1\times1 = 15 - 1 = 14
+    vallis_eq: 'provenance only: z component'
+    page_png: null
+  - latex: \mathbf a = (5,\ 1,\ 0),\quad \mathbf b = (1,\ 3,\ 0)
+    vallis_eq: 'provenance only: our numbers (UV2-07 top-left reminder)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    outputs:
+      a_cross_b:
+      - 0
+      - 0
+      - 14
+      component_terms:
+      - - 0
+        - 0
+      - - 0
+        - 0
+      - - 15
+        - 1
+    data: data/pair.json -> a_cross_b, component_terms
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+  exaggeration:
+  - a × b drawn at 0.25 of its length (14 -> 3.5 grid units); the bracket and label say 14
+  sentence_times:
+  - - 243.9
+    - 246.35
+  - - 246.7
+    - 252.4
+  - - 252.75
+    - 258.325
+  - - 258.675
+    - 265.95
+  - - 266.3
+    - 276.675
+  - - 277.025
+    - 286.8
+  - - 287.15
+    - 292.725
+- id: s08_sine
+  t:
+  - 293.525
+  - 350.075
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s08_sine
+    narration: word-identical (archived clip may be spliced)
+  changes:
+  - R3-S4 link knot
+  - R3-S1 cosmetic 04:04
+  - C5 merge 'By Pythagoras,' cue
+  related: []
+  visual: |-
+    Picture zone: 3-D floor, camera eases to az 250°, el 40°; a and b keep their component legs and labels (UV2-08);
+    gold θ arc between them, label 'θ' (68 px).
+    S2: slate (60 %) 'a·b = |a| |b| cos θ' at (1080, 140), 68 px.
+    S3: main line '|a × b| = |a| |b| sin θ' (T.eq 84) under it; the cos → sin swap animated (cross-fade, gold
+    underline).
+    S5: CalcStack (68 px): '|a| = √(5² + 1²) = √26 ≈ 5.099' (teal), a gold length bracket along a with a CurvedLink to
+    the 5.099 (UV2-09: computed here, no reference back).
+    S6: '|b| = √(1² + 3²) = √10 ≈ 3.162' (orange), bracket on b, link.
+    S7: 'cos θ = 8 / (5.099 × 3.162) ≈ 0.496' (the 8 slate, keyword 'a·b' under it).
+    S8: 'θ ≈ 60.3°,  sin θ ≈ 0.868'; the θ arc pulses.
+    S9: '|a × b| = 5.099 × 3.162 × 0.868 ≈ 14' (68 px), 14 bold; a gold link from the 14 to the violet arrow's '14'
+    bracket.
+
+    CHANGES FOR THIS MOVIE: R3-S4: the |b| gold link starts at the TOP of the |b| band and runs right, above the picture, to '|b| = √10'; it runs parallel to the |a| link and crosses no arrow, band or label (check the frames 04:42-04:59 equivalent). R3-S1: keyword 'cos → sin' in the maths zone from S1.
+  voiceover: 'Now let''s look at how the angle between the two arrows plays a role. The dot product used the two lengths
+    times the cosine of theta. The length of the cross product uses the sine instead: the length of vector a times the length
+    of b, times sine theta. Let''s check it. By Pythagoras, the length of vector a is the square root of five squared plus
+    one squared, the square root of twenty six, about five point one. The length of b is the square root of one squared
+    plus three squared, the square root of ten, about three point one six. Dividing the dot product, eight, by the two lengths
+    gives a cosine of about point five. So theta is about sixty degrees, with a sine of about point eight seven. Multiplied
+    out, that''s about fourteen, the length we found from the components.'
+  on_screen_eq:
+    latex: '|\mathbf a\times\mathbf b| = |\mathbf a|\,|\mathbf b|\sin\theta'
+    vallis_eq: 'provenance only, not drawn: Kundu §2.8 text ("magnitude is uv sin θ", unnumbered; page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: '|\mathbf a| = \sqrt{5^2 + 1^2} = \sqrt{26} \approx 5.099'
+    vallis_eq: 'provenance only: Pythagoras, our numbers'
+    page_png: null
+  - latex: '|\mathbf b| = \sqrt{1^2 + 3^2} = \sqrt{10} \approx 3.162'
+    vallis_eq: 'provenance only: Pythagoras, our numbers'
+    page_png: null
+  - latex: \cos\theta = \frac{8}{5.099\times3.162} \approx 0.496
+    vallis_eq: 'provenance only: angle from the dot product'
+    page_png: null
+  - latex: \theta \approx 60.3^\circ,\quad \sin\theta \approx 0.868
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: '|\mathbf a\times\mathbf b| = 5.099\times3.162\times0.868 \approx 14'
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: \mathbf a\cdot\mathbf b = |\mathbf a|\,|\mathbf b|\cos\theta
+    vallis_eq: 'provenance only: drawn dim'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.geo.vectors.parallelogram_area
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    outputs:
+      area: 14.0
+      norm_a: 5.099
+      norm_b: 3.1623
+      cos_theta: 0.49614
+      theta_deg: 60.255
+      sin_theta: 0.86824
+      display_product: 5.099 x 3.162 x 0.868 = 13.995 (≈ 14)
+    also:
+    - fluidpy.geo.vectors.norm
+    - fluidpy.geo.vectors.angle_between
+    - fluidpy.geo.vectors.dot
+    data: data/pair.json -> norm_a, norm_b, cos_theta (NEW), theta_deg, sin_theta, display_sin_product
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_parallelogram_area_V1_base_times_height, ::test_norm_V1_and_V7_scaling,
+      ::test_angle_between_V1_known_angles_and_field
+  exaggeration: []
+  sentence_times:
+  - - 293.525
+    - 298.125
+  - - 298.475
+    - 302.75
+  - - 303.1
+    - 311.4
+  - - 311.75
+    - 313.4
+  - - 313.75
+    - 323.675
+  - - 324.025
+    - 332.025
+  - - 332.375
+    - 338.05
+  - - 338.4
+    - 343.5
+  - - 343.85
+    - 349.275
+- id: s09_area
+  t:
+  - 350.075
+  - 402.675
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s09_area
+    narration: word-identical (archived clip may be spliced)
+  changes:
+  - R3-S1 empty half 05:00-05:10
+  related: []
+  visual: |-
+    Camera eases to straight above and hands over to the SVG pair plane P; 'a = (5, 1)' and 'b = (1, 3)' under the
+    picture (UV2-08).
+    S2: b's line extends faintly; the dashed drop line from (5, 1) to the foot (0.8, 2.4) with its right-angle mark.
+    S3: the teal shadow band O → foot at 40 % labelled 'shadow' (slate) - a reminder only.
+    S4: the shadow fades to 20 %; the drop line thickens to a 10-px violet band; gold bracket 'height' (54 px).
+    S5: CalcStack 'height = |a| sin θ = 5.099 × 0.868 ≈ 4.43' (68 px).
+    S6: a copy of b slides from O to a's tip (orange dashed, 30 frames), a copy of a to b's tip (teal dashed).
+    S7: the parallelogram O, (5, 1), (6, 4), (1, 3) fills violet 18 %; keyword 'parallelogram'; corner labels
+    '(6, 4)' at the far corner (44 px).
+    S8: b's side gets a gold bracket 'base 3.162'; 'area = 3.162 × 4.43 ≈ 14', the 14 bold; CurvedLink from the area's
+    centroid (3, 2) to the 14.
+    S9: '|a × b| = area' (84 px).
+
+    CHANGES FOR THIS MOVIE: R3-S1: maths zone shows 'a picture for |a × b|' (54 px) on S1, then '⊥ onto b's line' on S2, each lit on its words, until the height formula arrives.
+  voiceover: 'Now let''s find a picture for this number. Drop a line from the tip of vector a straight onto b''s line, at
+    a right angle. For the dot product, the piece it marked off along b was the shadow. This time, look at the dropped line
+    itself: it''s the height of vector a above b''s line. Its length is the length of vector a times sine theta, about four
+    point four three. Now slide a copy of b to the tip of vector a and a copy of vector a to the tip of b. Together they
+    make a slanted box called a parallelogram. Its area is the base times the height: three point one six times four point
+    four three, about fourteen. So the length of a cross b is the area of the parallelogram the two arrows make.'
+  on_screen_eq:
+    latex: \text{area} = 3.162\times4.43 \approx 14
+    vallis_eq: 'provenance only: base × height, our numbers'
+    page_png: null
+  on_screen_eq_extra:
+  - latex: \text{height} = |\mathbf a|\sin\theta = 5.099\times0.868 \approx 4.43
+    vallis_eq: 'provenance only: our numbers (exact 4.4272)'
+    page_png: null
+  - latex: '|\mathbf a\times\mathbf b| = \text{area}'
+    vallis_eq: 'provenance only: the magnitude read as an area'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.geo.vectors.parallelogram_area
+    params:
+      a:
+      - 5
+      - 1
+      b:
+      - 1
+      - 3
+    outputs:
+      area: 14.0
+      height: 4.4272
+      base: 3.1623
+      foot:
+      - 0.8
+      - 2.4
+      corners:
+      - - 0
+        - 0
+      - - 5
+        - 1
+      - - 6
+        - 4
+      - - 1
+        - 3
+    also:
+    - fluidpy.geo.vectors.projection
+    - fluidpy.geo.vectors.norm
+    data: data/pair.json -> height, corners, display_height_product, display_area_product
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_parallelogram_area_V1_base_times_height
+  exaggeration: []
+  sentence_times:
+  - - 350.075
+    - 353.2
+  - - 353.55
+    - 359.125
+  - - 359.475
+    - 364.075
+  - - 364.425
+    - 370.7
+  - - 371.05
+    - 376.7
+  - - 377.05
+    - 383.4
+  - - 383.75
+    - 387.825
+  - - 388.175
+    - 395.3
+  - - 395.65
+    - 401.875
+- id: s09a_box_proof
+  t:
+  - 402.675
+  - 462.975
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s09a_box_proof
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    NEW. WHY THE RECIPE IS AN AREA (box minus corners). Picture zone: the SVG pair plane as s09 with the violet
+    parallelogram O, (5, 1), (6, 4), (1, 3) and 'a = (5, 1)', 'b = (1, 3)' under the picture.
+    S1: the main line 'a₁b₂ − a₂b₁ = 5×3 − 1×1 = 14' (68 px) at (1080, 140), the recipe's z slot from s06 in small
+    type above it; a gold '?' between it and the parallelogram.
+    S2: a warm-white 6-px rectangle (0, 0) → (6, 4) draws round the parallelogram; brackets '6' along the bottom and
+    '4' up the right side (54 px).
+    S3: 'box = 6 × 4 = 24' (68 px, CalcStack line 1).
+    S4: the six leftover pieces tint slate 30 % (each its own polygon).
+    S5: the two triangles along a (O, (5, 0), (5, 1) and (6, 4), (1, 4), (1, 3)) tint teal 35 %, each labelled '2.5'
+    (54 px); line '2 × ½ × 5 × 1 = 5'.
+    S6: the two triangles along b ((5, 1), (6, 1), (6, 4) and O, (0, 3), (1, 3)) tint orange 35 %, '1.5' each; line
+    '2 × ½ × 1 × 3 = 3'.
+    S7: the two corner squares ((5, 0)-(6, 1) and (0, 3)-(1, 4)) tint gold 35 %, '1' each; line '2 × 1 × 1 = 2'.
+    S8: 'area = 24 − 5 − 3 − 2 = 14' (68 px), 14 bold; CurvedLink from the violet parallelogram to the 14.
+    S9-S10: the numbers in the lines morph into letters (gold cross-fade per symbol):
+    '(a₁ + b₁)(a₂ + b₂) − a₁a₂ − b₁b₂ − 2a₂b₁ = a₁b₂ − a₂b₁' (68 px), the cancelling pairs struck in rose one by one on
+    "almost everything cancels"; on S10 the surviving 'a₁b₂ − a₂b₁' gets a gold underline.
+    S11: a gold link from 'a₁b₂ − a₂b₁' to the z slot of the recipe line; keyword 'area formula' (54 px).
+  voiceover: 'But why does the recipe, five times three minus one times one, give this area too? Draw a box around the parallelogram,
+    six along and four up. Its area is twenty four. The box has six pieces left over. Two triangles sit along vector a and
+    each is half of five times one, so together they make five. Two triangles along b, each half of one times three, make
+    three. And two small corner squares, each one by one, make two. So the parallelogram is twenty four, minus five, minus
+    three, minus two, which is fourteen. Do the same steps with letters, and almost everything cancels. What''s left is
+    the x part of vector a times the y part of b, minus the y part of vector a times the x part of b. That''s exactly the
+    z recipe: an area formula in disguise.'
+  on_screen_eq:
+    latex: (a_1+b_1)(a_2+b_2) - a_1a_2 - b_1b_2 - 2a_2b_1 = a_1b_2 - a_2b_1
+    vallis_eq: 'provenance only: ours (the box-minus-corners proof that the z recipe is the signed area; valid as drawn
+      for a₁ > b₁, b₂ > a₂)'
+    page_png: null
+  on_screen_eq_extra:
+  - latex: 6\times4 = 24
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: 2\times\tfrac12\times5\times1 = 5
+    vallis_eq: provenance only
+    page_png: null
+  - latex: 2\times\tfrac12\times1\times3 = 3
+    vallis_eq: provenance only
+    page_png: null
+  - latex: 2\times1\times1 = 2
+    vallis_eq: provenance only
+    page_png: null
+  - latex: 24 - 5 - 3 - 2 = 14
+    vallis_eq: provenance only
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.parallelogram_area
+    params:
+      a:
+      - 5
+      - 1
+      b:
+      - 1
+      - 3
+    outputs:
+      box: 24
+      a_triangles: 5
+      b_triangles: 3
+      corner_squares: 2
+      area: 14
+      polygons: six leftover polygons (builder), CHECK sum of their shoelace areas = 10 and box − 10 = parallelogram_area
+    also:
+    - fluidpy.geo.vectors.cross
+    data: data/pair.json -> box_proof (NEW, N8)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_parallelogram_area_V1_base_times_height; sympy CHECK row in
+      the builder for the letter identity
+  exaggeration: []
+  sentence_times:
+  - - 402.675
+    - 408.775
+  - - 409.125
+    - 413.625
+  - - 413.975
+    - 416.325
+  - - 416.675
+    - 419.575
+  - - 419.925
+    - 426.925
+  - - 427.275
+    - 432.1
+  - - 432.45
+    - 436.55
+  - - 436.9
+    - 443.625
+  - - 443.975
+    - 448.425
+  - - 448.775
+    - 457.15
+  - - 457.5
+    - 462.175
+- id: s10_right_angles
+  t:
+  - 462.975
+  - 498.125
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s10_right_angles
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    Back to 3-D (camera el 90° -> 30°, az 250° -> 205°, 40 frames). The violet a × b (0.25 scale) stands at O.
+    S2 ('The cross product a cross b is at a right angle to both…'): two right-angle ticks (gold, 6 px) in the vertical
+    planes between a × b and a, and between a × b and b.
+    S3-S6 ('We can check it with the dot product…'): CalcStack '(a × b)·a = 0×5 + 0×1 + 14×0 = 0' and on "the same
+    happens with b" '(a × b)·b = 0×1 + 0×3 + 14×0 = 0' (68 px); keyword 'dot product = 0 → right angle' (54 px slate).
+    S7 ('But there are two directions…'): a ghost violet arrow pointing DOWN from O (dashed, 40 %) appears beside the
+    real one; keywords 'up?' 'down?' at their tips.
+    S8 ('Which one…'): a gold '?' between them. S9 ('…the right-hand rule'): keyword 'right-hand rule' (68 px).
+    UV2-08: a = (5, 1, 0), b = (1, 3, 0) and a × b = (0, 0, 14) labels stay on screen through the scene.
+  voiceover: 'The direction is just as neat. The cross product a cross b is at a right angle to both arrows. We can check
+    it with the dot product. A right angle gives a dot product of zero. Zero times five, plus zero times one, plus fourteen
+    times zero, is zero. The same happens with b. But there are two directions at right angles to the floor: up and down.
+    Which one does the cross product choose? That''s what the right-hand rule tells us.'
+  on_screen_eq:
+    latex: (\mathbf a\times\mathbf b)\cdot\mathbf a = 0\times5 + 0\times1 + 14\times0 = 0
+    vallis_eq: 'provenance only: perpendicularity check, our numbers'
+    page_png: null
+  on_screen_eq_extra:
+  - latex: (\mathbf a\times\mathbf b)\cdot\mathbf b = 0\times1 + 0\times3 + 14\times0 = 0
+    vallis_eq: provenance only
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      axb:
+      - 0
+      - 0
+      - 14
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    outputs:
+      axb_dot_a: 0.0
+      axb_dot_b: 0.0
+    also:
+    - fluidpy.geo.vectors.cross
+    data: data/pair.json -> axb_dot_a, axb_dot_b
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
+  exaggeration: []
+  sentence_times:
+  - - 462.975
+    - 465.425
+  - - 465.775
+    - 470.675
+  - - 471.025
+    - 473.6
+  - - 473.95
+    - 477.35
+  - - 477.7
+    - 483.425
+  - - 483.775
+    - 485.95
+  - - 486.3
+    - 491.15
+  - - 491.5
+    - 494.2
+  - - 494.55
+    - 497.325
+- id: s11_rhr_curl
+  t:
+  - 498.125
+  - 522.4
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s11_rhr_curl
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    RIGHT-HAND RULE 1/7 - THE CURL GRIP (U-CP.5). Full-width ThreeCanvas (1760 x 820 px at (80, 40)); keywords in the
+    maths zone float over the canvas's right third (no panel). Objects: floor grid, teal a, orange b, violet a × b
+    (0.25 scale), Hand3D (RIGHT hand, warm-white skin material, 2-px muted outline) with its wrist at (-0.6, -0.4, 0.3).
+    Hand pose keyframes (Hand3D.pose = {grip: 'curl', curl: 0..1, frame: basis from (a, b)}):
+    S1 ('Hold out your right hand.'): the hand slides in from the lower left, open and flat, palm facing b's side;
+    keyword 'right hand' (54 px).
+    S2 ('Point your fingers along vector a…'): fingers align with a (straight, curl 0); a pulses.
+    S3 ('Now curl your fingers towards b…'): curl 0 -> 1 over the sentence; a gold curl arc sweeps on the floor from a to
+    b through θ = 60.3° (the short way; the long way shown as a faint dashed arc with a rose strike on "the short way
+    round"); fingertips follow the arc.
+    S4 ('Your thumb now points along a cross b…'): the thumb (already up) glows and the violet arrow grows along it; keyword
+    'thumb → a × b'.
+    S5-S6 ('Let's walk around it…'): ORBIT: camera az 250° -> 250° + 360° (orbit: +360, linear in the sentence), el 26°,
+    dist 10, target (2, 1.2, 1.4); hand, arrows, arc rigid; keywords hidden during the orbit, back at the end.
+    Chirality guard: Hand3D is built in a right-handed basis and is never mirrored (no negative scale).
+  voiceover: 'Hold out your right hand. Point your fingers along vector a so they follow the first arrow. Now curl your
+    fingers towards b, the second arrow, the short way round. Your thumb now points along a cross b: straight up. Let''s
+    walk around it. From every side, the curl, the thumb and the arrow agree.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    outputs:
+      axb_unit:
+      - 0
+      - 0
+      - 1
+      hand_basis: fingers = â, thumb = (a × b)/|a × b|, palm normal = thumb × fingers; det = +1
+    also:
+    - fluidpy.geo.vectors.angle_between (curl arc 60.3°)
+    - fluidpy.geo.vectors.triple_scalar (det of the hand basis = +1, CHECK row)
+    data: data/rhr.json -> beats.s11 (axes, arc, hand basis)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field, ::test_triple_scalar_V1_determinant_and_V7_cyclic
+  exaggeration:
+  - the hand is a code-drawn stylised right hand; a × b drawn at 0.25 scale
+  camera:
+  - at: S1
+    az: 250
+    el: 30
+    dist: 10
+    target:
+    - 2
+    - 1.2
+    - 1.2
+  - at: S5
+    az: 250
+    el: 26
+    dist: 10
+    target:
+    - 2
+    - 1.2
+    - 1.4
+    orbit: 360
+  sentence_times:
+  - - 498.125
+    - 500.225
+  - - 500.575
+    - 505.2
+  - - 505.55
+    - 510.65
+  - - 511.0
+    - 514.725
+  - - 515.075
+    - 517.025
+  - - 517.375
+    - 521.6
+- id: s12_rhr_flat
+  t:
+  - 522.4
+  - 549.175
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s12_rhr_flat
+    narration: word-identical (archived clip may be spliced)
+  changes:
+  - C4 spacing 'index × middle = thumb'
+  related: []
+  visual: |-
+    RIGHT-HAND RULE 2/7 - THE FLAT (THREE-FINGER) GRIP. Same canvas and arrows; the hand re-poses over 20 frames to
+    Hand3D.pose {grip: 'flat'}: index straight along a, middle finger bent at its knuckle to lie along b (60.3° from the
+    index, the true angle), ring and little fingers folded into the palm, thumb straight up.
+    S2-S3 ('Point your index finger along vector a and your middle finger along b…'): on "index finger" the index glows teal
+    and a keyword 'index · a' (54 px) appears; on "middle finger" the middle finger glows orange, 'middle · b'.
+    S4 ('Then stick your thumb straight up.'): the thumb glows violet, 'thumb · a × b'.
+    S5: the violet arrow pulses along the thumb.
+    S6-S7 ('So the index finger is the first arrow…'): the three keywords re-order into one line 'index × middle = thumb'
+    (54 px); camera orbit az 205° -> 295° (+90°) over S2-S7, el 24°.
+
+    CHANGES FOR THIS MOVIE: C4: even spacing around '×' and '=' in the keyword line.
+  voiceover: There's a second way to use the same hand. Point your index finger along vector a and your middle finger along
+    b. Bend the middle finger away from your palm. Then stick your thumb straight up. Your thumb again points along a cross
+    b. So the index finger is the first arrow, and the middle finger is the second. The thumb is the answer.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      index: a / |a| = [0.981, 0.196, 0]
+      middle: b / |b| = [0.316, 0.949, 0]
+    outputs:
+      thumb:
+      - 0
+      - 0
+      - 1
+    also:
+    - fluidpy.geo.vectors.triple_scalar
+    data: data/rhr.json -> beats.s12
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field, ::test_triple_scalar_V1_determinant_and_V7_cyclic
+  exaggeration:
+  - stylised hand
+  camera:
+  - at: S2
+    az: 205
+    el: 24
+    dist: 10
+    target:
+    - 2
+    - 1.2
+    - 1.2
+  - at: S6
+    az: 295
+    el: 24
+    dist: 10
+    target:
+    - 2
+    - 1.2
+    - 1.2
+  sentence_times:
+  - - 522.4
+    - 525.3
+  - - 525.65
+    - 530.775
+  - - 531.125
+    - 534.25
+  - - 534.6
+    - 536.85
+  - - 537.2
+    - 540.5
+  - - 540.85
+    - 545.95
+  - - 546.3
+    - 548.375
+- id: s13_rhr_screw
+  t:
+  - 549.175
+  - 578.175
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s13_rhr_screw
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    RIGHT-HAND RULE 3/7 - BOTTLE CAP AND SCREW, as v2 (BottleCap3D at O with rim marks 'a' teal and 'b' orange; Screw3D
+    at +7 world units; camera az 250°, el 38°, dist 14). Beats re-tied to the shorter narration:
+    S2: the cap turns +60.3° (anticlockwise from above) and keeps turning; gold turn arc.
+    S3: top-view inset with an anticlockwise arc and 'anticlockwise · from above' (44 px); on AT(3, "the cap rises")
+    the cap rises with a violet arrow 'a × b'.
+    S4: the cap turns clockwise and sinks; violet arrow down (dashed, rose '−'); keyword 'closes'.
+    S5: the screw backs out when turned anticlockwise from its head, then drives in; keyword 'turn first → second:
+    moves along first × second' (54 px).
+  voiceover: 'A third way uses a bottle cap. Turn the cap from vector a towards b, the short way round. Seen from above,
+    that''s anticlockwise, the way you open a bottle, and the cap rises, up along a cross b. Turn it back, from b towards
+    the first arrow, and the cap screws down. A screw works the same way: turned from the first arrow towards the second,
+    it moves along their cross product.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      turn_from: a / |a|
+      turn_to: b / |b|
+      helix: right-handed, z = pitch × angle / 2π
+    outputs:
+      advance_dir: +z for a -> b (anticlockwise from above), −z for b -> a
+    also:
+    - fluidpy.geo.vectors.triple_scalar (helix handedness CHECK)
+    data: data/rhr.json -> beats.s13
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
+  exaggeration:
+  - cap lift per turn drawn four times a real thread
+  - cap, bottle and screw illustrative
+  sentence_times:
+  - - 549.175
+    - 551.925
+  - - 552.275
+    - 556.625
+  - - 556.975
+    - 564.65
+  - - 565.0
+    - 569.7
+  - - 570.05
+    - 577.375
+- id: s14_rhr_cycle
+  t:
+  - 578.175
+  - 630.525
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s14_rhr_cycle
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - X6 forward cycle
+  - V-X6 cyclic pattern of the recipe
+  related: []
+  visual: |-
+    RIGHT-HAND RULE 4/7 - THE CYCLE, as v2 (Axes3D, Hand3D curl grip re-oriented per beat; first axis teal, second
+    orange, result violet). Beat A S2-S3: fingers x → y, thumb +z, 'x̂ × ŷ = ẑ' on AT(3, "is z hat"); camera az 225°,
+    el 35°. Beat B S4-S5: fingers y → z, thumb +x, 'ŷ × ẑ = x̂'; camera az 20°, el 25°. Beat C S6-S7: fingers z → x,
+    thumb +y, 'ẑ × x̂ = ŷ'; camera az 110°, el 20°. S8: the cycle wheel builds its three arcs; the three lines stack.
+    Each unit vector carries its component label at the tip when it is the result: '(0, 0, 1)', '(1, 0, 0)',
+    '(0, 1, 0)' (44 px, UV2-08).
+
+    CHANGES FOR THIS MOVIE: clock-face triangle x -> y -> z (forward arrows, '+'); on the new sentence the three recipe rows x ← (y, z), y ← (z, x), z ← (x, y) appear in the maths zone, each pair lit on its words.
+  voiceover: 'Now let''s use the rule on the three axes themselves. Point your fingers along x hat and curl them towards
+    y hat. Your thumb points up, so x hat cross y hat is z hat. Turn your hand so your fingers point along y hat, and curl
+    them towards z hat. Your thumb points along x hat, so y hat cross z hat is x hat. Turn it once more, fingers along z
+    hat, curling towards x hat. Your thumb points along y hat, so z hat cross x hat is y hat. The three results follow a
+    cycle: x, y, z, and back to x. It''s the same cycle as in the recipe: the x component is built from y and z, the y component
+    from z and x, and the z component from x and y.'
+  on_screen_eq:
+    latex: \hat{\mathbf x}\times\hat{\mathbf y} = \hat{\mathbf z}
+    vallis_eq: 'provenance only, not drawn: Kundu §2.8 cyclic rule (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: \hat{\mathbf y}\times\hat{\mathbf z} = \hat{\mathbf x}
+    vallis_eq: 'provenance only: cyclic rule'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  - latex: \hat{\mathbf z}\times\hat{\mathbf x} = \hat{\mathbf y}
+    vallis_eq: 'provenance only: cyclic rule'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      pairs:
+      - - x
+        - y
+      - - y
+        - z
+      - - z
+        - x
+    outputs:
+      results:
+      - - 0
+        - 0
+        - 1
+      - - 1
+        - 0
+        - 0
+      - - 0
+        - 1
+        - 0
+    data: data/rhr.json -> axes_pairs
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_triple_scalar_V1_determinant_and_V7_cyclic
+  exaggeration:
+  - unit arrows drawn 2.5 units long; stylised hand
+  camera:
+  - at: S2
+    az: 225
+    el: 35
+    dist: 9
+    target:
+    - 0
+    - 0
+    - 0.6
+  - at: S4
+    az: 20
+    el: 25
+    dist: 9
+    target:
+    - 0.6
+    - 0
+    - 0.3
+  - at: S6
+    az: 110
+    el: 20
+    dist: 9
+    target:
+    - 0
+    - 0.6
+    - 0.3
+  sentence_times:
+  - - 578.175
+    - 581.975
+  - - 582.325
+    - 586.75
+  - - 587.1
+    - 591.35
+  - - 591.7
+    - 597.225
+  - - 597.575
+    - 602.55
+  - - 602.9
+    - 607.75
+  - - 608.1
+    - 613.225
+  - - 613.575
+    - 618.625
+  - - 618.975
+    - 629.725
+- id: s15_rhr_swap
+  t:
+  - 630.525
+  - 677.3
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s15_rhr_swap
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - X6 backward arrows
+  - X4 card flip
+  related: []
+  visual: |-
+    RIGHT-HAND RULE 5/7 - SWAPPING THE ORDER, as v2. S2-S3: y teal (first), x orange (second); the hand rotates 180°
+    about its finger axis; on AT(3, "your thumb points down") a violet DASHED arrow grows down with a rose '−'.
+    S4: 'ŷ × x̂ = −ẑ' beside the dim 'x̂ × ŷ = ẑ'. S5: two quick beats 'ẑ × ŷ = −x̂' and 'x̂ × ẑ = −ŷ' (each on its clause).
+    S6: cross-fade to the a, b floor, b teal (first), a orange (second), keyword 'first: b'; 'b × a = (0, 0, −14)'
+    (68 px) and the violet dashed arrow hanging down with tip label '(0, 0, −14)'; 'a = (5, 1, 0)', 'b = (1, 3, 0)'
+    under the picture. S7: 'a × b = −b × a' (T.eq) with a gold flip glyph. S8: slate 'a·b = b·a'.
+
+    CHANGES FOR THIS MOVIE: the clock triangle gains backward arrows labelled '−'; the s17 two-faced card is previewed: for b × a the card flips (faces swap) and the arrow drops through to the other side.
+  voiceover: 'What if we swap the order? Point your fingers along y hat first, and curl them towards x hat. To curl that
+    way, you have to turn your hand over, and your thumb points down. So y hat cross x hat is minus z hat. In the same way,
+    z hat cross y hat is minus x hat, and x hat cross z hat is minus y hat. And b cross a has components zero, zero and
+    minus fourteen: the same length, pointing straight down. Swapping the order of a cross product flips its arrow. Going
+    round the cycle backwards always gives a minus sign. That''s different from the dot product, where a dot b equals b
+    dot a.'
+  on_screen_eq:
+    latex: \mathbf a\times\mathbf b = -\,\mathbf b\times\mathbf a
+    vallis_eq: 'provenance only, not drawn: Kundu §2.8 text "u × v = −v × u" (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: \hat{\mathbf y}\times\hat{\mathbf x} = -\hat{\mathbf z}
+    vallis_eq: provenance only
+    page_png: null
+  - latex: \hat{\mathbf z}\times\hat{\mathbf y} = -\hat{\mathbf x}
+    vallis_eq: provenance only
+    page_png: null
+  - latex: \hat{\mathbf x}\times\hat{\mathbf z} = -\hat{\mathbf y}
+    vallis_eq: provenance only
+    page_png: null
+  - latex: \mathbf b\times\mathbf a = (0,\ 0,\ -14)
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: \mathbf a\cdot\mathbf b = \mathbf b\cdot\mathbf a
+    vallis_eq: 'provenance only: the last video'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      pairs:
+      - - y
+        - x
+      - - z
+        - y
+      - - x
+        - z
+      - - b
+        - a
+    outputs:
+      results:
+      - - 0
+        - 0
+        - -1
+      - - -1
+        - 0
+        - 0
+      - - 0
+        - -1
+        - 0
+      - - 0
+        - 0
+        - -14
+    data: data/rhr.json -> axes_pairs; data/pair.json -> b_cross_a
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
+  exaggeration:
+  - stylised hand; arrows at display scale
+  sentence_times:
+  - - 630.525
+    - 632.7
+  - - 633.05
+    - 637.875
+  - - 638.225
+    - 643.375
+  - - 643.725
+    - 647.3
+  - - 647.65
+    - 655.05
+  - - 655.4
+    - 662.65
+  - - 663.0
+    - 666.675
+  - - 667.025
+    - 671.225
+  - - 671.575
+    - 676.5
+- id: s15a_index_form
+  t:
+  - 677.3
+  - 751.25
+  status: new
+  changes:
+  - X3c sign cube (research §2)
+  - from the 2026-10-27 split draft (m2)
+  related:
+  - '#1b alternating tensor and triple products'
+  visual: 'Maths zone: (a × b)_i = ε_ijk a_j b_k (96 px) built term by term; under ''Epsilon i j k'' a 3 × 3 × 3 cube of
+    cells in the picture zone, mostly empty: the three cycle cells (xyz, yzx, zxy) lit teal ''+1'', the three anti-cycle
+    cells rose ''−1'' with a hatch, a repeated-letter cell flashes nothing (slate ''0''). For the z component two cells
+    stay lit: ε_zxy = +1 -> 5 × 3, ε_zyx = −1 -> 1 × 1; CalcStack 15 − 1 = 14. On ''swapping two letters'' two lit cells
+    trade colour (no flash: 12-frame cross-fade).'
+  voiceover: 'Here''s a short way to write the whole recipe, in index notation, which the video on the alternating tensor
+    builds step by step. Let the letters i, j and k each stand for x, y or z. The i component of a cross b is epsilon i
+    j k, times the j component of vector a times the k component of b, added up over every j and every k. Epsilon i j k
+    is a table of signs: plus one when i, j and k follow the cycle x, y, z, minus one when they run the other way round,
+    and zero when any two letters are the same. A repeated letter means a direction crossed with itself, which makes no
+    area, so it gives zero. So for the z component, only two terms are left. Epsilon z x y is plus one, times five times
+    three, and epsilon z y x is minus one, times one times one. That''s fifteen minus one, fourteen again. And swapping
+    two letters flips the sign of epsilon, which is exactly why b cross a is minus a cross b.'
+  on_screen_eq:
+    latex: (\mathbf a\times\mathbf b)_i=\varepsilon_{ijk}\,a_j\,b_k
+    vallis_eq: 'provenance only: Kundu (K 2.21) form; Vallis notation pages (pdf 19-20) use the same epsilon'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.tensors.levi_civita
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    also:
+    - fluidpy.geo.vectors.cross
+    outputs:
+      a_cross_b:
+      - 0
+      - 0
+      - 14
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V2_symbolic_epsilon_and_lagrange
+    check: X1 (eps sum = cross)
+  exaggeration: []
+  sentence_times:
+  - - 677.3
+    - 686.075
+  - - 686.425
+    - 691.175
+  - - 691.525
+    - 703.35
+  - - 703.7
+    - 717.6
+  - - 717.95
+    - 724.625
+  - - 724.975
+    - 728.725
+  - - 729.075
+    - 738.725
+  - - 739.075
+    - 742.475
+  - - 742.825
+    - 750.45
+- id: s16_rhr_screen
+  t:
+  - 751.25
+  - 797.825
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s16_rhr_screen
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    RIGHT-HAND RULE 6/7 - ALL SIX DIRECTIONS ON A FLAT SCREEN, as v2 (orthographic front view, x right, y up, z out).
+    S1-S2: axis letters 'x', 'y'; ⊙ at the origin with 'z'; keywords 'right', 'up', 'out of the screen'.
+    S3: ⊙ (96 px) with the arrow-tip sketch flying at the viewer; keyword 'dot in a circle'.
+    S4: ⊗ (96 px) with the tail-feathers sketch; keyword 'cross in a circle'.
+    S5: 'x̂ × ŷ = ẑ' → ⊙ and 'ŷ × x̂ = −ẑ' → ⊗ (each on its clause). S6: 'ŷ × ẑ = x̂' → arrow right, 'ẑ × ŷ = −x̂' →
+    dashed arrow left. S7: 'ẑ × x̂ = ŷ' → up, 'x̂ × ẑ = −ŷ' → dashed down. Each with its 120-px hand silhouette.
+    S8: the six results in a compass layout; keywords 'up · down · left · right · into · out of'.
+  voiceover: Let's see all six results on a flat screen, with x pointing right and y pointing up. Then z points straight
+    out of the screen, towards you. An arrow coming out of the screen is drawn as a dot in a circle, like the tip of an
+    arrow flying at you. An arrow going into the screen is drawn as a cross in a circle, like the tail feathers of an arrow
+    flying away. So x hat cross y hat comes out of the screen, and y hat cross x hat goes into it. Y hat cross z hat points
+    right, and z hat cross y hat points left. Z hat cross x hat points up, and x hat cross z hat points down. The right
+    hand always tells us which way.
+  on_screen_eq: null
+  on_screen_eq_extra:
+  - latex: \hat{\mathbf x}\times\hat{\mathbf y} = \hat{\mathbf z}
+    vallis_eq: 'provenance only: cyclic rule (s14)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      pairs:
+      - - x
+        - y
+      - - y
+        - x
+      - - y
+        - z
+      - - z
+        - y
+      - - z
+        - x
+      - - x
+        - z
+    outputs:
+      screen_directions:
+      - out
+      - in
+      - right
+      - left
+      - up
+      - down
+    data: data/rhr.json -> screen_map
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+  exaggeration:
+  - stylised hands; ⊙/⊗ are the standard symbols for an arrow out of / into the page
+  camera:
+  - at: S1
+    projection: orthographic
+    eye:
+    - 0
+    - 0
+    - 10
+    up:
+    - 0
+    - 1
+    - 0
+    target:
+    - 0
+    - 0
+    - 0
+  sentence_times:
+  - - 751.25
+    - 757.025
+  - - 757.375
+    - 760.8
+  - - 761.15
+    - 768.0
+  - - 768.35
+    - 775.85
+  - - 776.2
+    - 782.425
+  - - 782.775
+    - 788.0
+  - - 788.35
+    - 793.525
+  - - 793.875
+    - 797.025
+- id: s17_rhr_views
+  t:
+  - 797.825
+  - 846.35
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s17_rhr_views
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - X2 two-faced card
+  - C1 s17 label hold
+  related: []
+  visual: |-
+    RIGHT-HAND RULE 7/7 - FROM ABOVE AND FROM BELOW, as v2 minus the side view (its sentence was cut). The a, b floor
+    translucent (25 %), violet a × b at O with its label '(0, 0, 14)'; gold turn arc a → b.
+    S2-S3 'from above' (el 88°, az 270°): arc anticlockwise; ⊙ at O; keywords 'from above · anticlockwise · towards you'.
+    S4-S5 'from below' (el −88°, az 270°, up = +y): the same arc reads clockwise; ⊗; 'from below · clockwise · away'.
+    S6-S8: camera back to el 30°; 'anticlockwise → towards you' and 'clockwise → away from you', each with its mini
+    top-view icon, on S7 and S8.
+
+    CHANGES FOR THIS MOVIE: the parallelogram becomes a thin card, top face teal-tinted, bottom face orange-tinted; the camera flies under and back; a curved sweep arrow a -> b on each face reads anticlockwise only on the teal face; the violet arrow stands on the teal face. C1: hold 'a × b = (0, 0, 14)' hidden until the camera settles.
+  voiceover: The direction also depends on where you look from. Look down at the floor from above. Turning from vector a
+    to b is anticlockwise, and a cross b points up, straight at you. Now look up from below the floor. The same turn looks
+    clockwise, and the same arrow points away from you. Think of the parallelogram as a thin card with two coloured faces.
+    The cross product sticks out of the face from which the turn from the first arrow to the second looks anticlockwise.
+    So here's a handy rule. If, from where you stand, the turn from the first arrow to the second is anticlockwise, the
+    cross product points towards you. If it's clockwise, it points away.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+      view_dirs:
+      - - 0
+        - 0
+        - -1
+      - - 0
+        - 0
+        - 1
+    outputs:
+      sign_towards_viewer: +14 from above, −14 from below
+    also:
+    - fluidpy.geo.vectors.dot
+    data: data/rhr.json -> views
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_rotation_covariance_and_reflection_pseudovector
+  exaggeration:
+  - a × b at 0.25 scale
+  camera:
+  - at: S2
+    az: 270
+    el: 88
+    dist: 12
+    target:
+    - 2.5
+    - 1.5
+    - 0
+  - at: S4
+    az: 270
+    el: -88
+    dist: 12
+    target:
+    - 2.5
+    - 1.5
+    - 0
+    up:
+    - 0
+    - 1
+    - 0
+  - at: S6
+    az: 230
+    el: 30
+    dist: 12
+    target:
+    - 2.5
+    - 1.5
+    - 1.0
+  sentence_times:
+  - - 797.825
+    - 801.4
+  - - 801.75
+    - 804.15
+  - - 804.5
+    - 810.8
+  - - 811.15
+    - 813.6
+  - - 813.95
+    - 818.7
+  - - 819.05
+    - 823.95
+  - - 824.3
+    - 831.5
+  - - 831.85
+    - 833.95
+  - - 834.3
+    - 842.5
+  - - 842.85
+    - 845.55
+- id: s18_cases
+  t:
+  - 846.35
+  - 916.975
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s18_cases
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - X5 side by side with the dot zero
+  - continuous sweep between the stops
+  related: []
+  visual: |-
+    Three 3-D panels side by side as v2 (each 560 x 420 px, same camera az 240°, el 30°). UV2-11: EVERY p carries its
+    value: the big teal p at the top centre has 'p = (3, 0, 0)' (68 px) and each of the three copies keeps a tip label
+    '(3, 0, 0)' (44 px, teal) after landing in its panel.
+    S2: big p and its label; the three copies fly into the panels.
+    S3: orange q = (2, 0, 0) along p's shaft, tip label 'q = (2, 0, 0)' above the tip; keyword 'same direction'.
+    S4: violet sliver flattens; 'p × q = (0, 0, 0)', 'area 0'.
+    S5: q = (0, 2, 0); right-angle tick; label 'q = (0, 2, 0)'.
+    S6: the 3 × 2 rectangle fills violet 18 % with brackets '3', '2'; p × q rises (0.25 scale) with label
+    'p × q = (0, 0, 6)'; 'area 6'.
+    S7: q = (−2, 0, 0), label left of its tip; S8: 'p × q = (0, 0, 0)', 'area 0', keyword 'opposite'.
+    S9: keywords 'same way or opposite → 0' across panels 1 and 3 and 'right angle → longest' under panel 2.
+    S10: panel 2 enlarges; q sweeps on from 90° to 270° (sweep.json), the arrow shrinks to 0 at 180° and grows DOWN
+    (dashed, rose '−') to '(0, 0, −6)'; the gold turn arc reads clockwise in a top-view inset on "becomes clockwise".
+
+    CHANGES FOR THIS MOVIE: between the three stops q turns continuously and a height bar (orange, the part of q across p) rises and falls with the live '|p × q|'; on the new sentence a small dot-product dial (slate) beside it shows 'p·q' zero at 90° while '|p × q|' is largest, and the reverse at 0° / 180°.
+  voiceover: Now let's keep one arrow fixed and change only the other. The fixed arrow, p, has components three, zero and
+    zero. First, q points the same way, with components two, zero and zero. The parallelogram is squashed flat, so p cross
+    q is zero. Next, q is at a right angle to p, with components zero, two and zero. The parallelogram is a three by two
+    rectangle, and p cross q points straight up, six units long. Last, q points the opposite way, with components minus
+    two, zero and zero. The parallelogram is flat again, so the cross product is zero. So the cross product is zero when
+    two vectors point the same way or in opposite directions, and as long as it can be at right angles. That's the opposite
+    of the dot product, which is zero at a right angle, and largest when the arrows lie along one line. And if q keeps turning
+    past the opposite direction, the turn from p to q becomes clockwise, and the arrow flips to point down.
+  on_screen_eq: null
+  on_screen_eq_extra:
+  - latex: \mathbf p\times\mathbf q = (0,\ 0,\ 0)
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: \mathbf p\times\mathbf q = (0,\ 0,\ 6)
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: \mathbf p\times\mathbf q = (0,\ 0,\ -6)
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      p:
+      - 3
+      - 0
+      - 0
+      q:
+      - - 2
+        - 0
+        - 0
+      - - 0
+        - 2
+        - 0
+      - - -2
+        - 0
+        - 0
+      - - 0
+        - -2
+        - 0
+    outputs:
+      p_cross_q:
+      - - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - 6
+      - - 0
+        - 0
+        - 0
+      - - 0
+        - 0
+        - -6
+      area:
+      - 0
+      - 6
+      - 0
+      - 6
+    also:
+    - fluidpy.geo.vectors.parallelogram_area
+    data: data/cases.json; sweep.json
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_parallelogram_area_V7_shear_invariance_and_parallel_limit
+  exaggeration:
+  - p × q drawn at 0.25 scale
+  sentence_times:
+  - - 846.35
+    - 850.5
+  - - 850.85
+    - 855.225
+  - - 855.575
+    - 860.35
+  - - 860.7
+    - 865.325
+  - - 865.675
+    - 871.125
+  - - 871.475
+    - 878.475
+  - - 878.825
+    - 884.575
+  - - 884.925
+    - 889.5
+  - - 889.85
+    - 898.9
+  - - 899.25
+    - 907.075
+  - - 907.425
+    - 916.175
+- id: s18a_why_question
+  t:
+  - 916.975
+  - 939.1
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s18a_why_question
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - announces the minus-sign scene s21a
+  related: []
+  visual: |
+    NEW. The a, b floor in 3-D (camera az 235°, el 30°) with the violet parallelogram, the violet a × b (0.25 scale,
+    label '(0, 0, 14)') and 'a = (5, 1, 0)', 'b = (1, 3, 0)' under the picture. No heading.
+    S1: everything pulses once. S2: a gold '?' (96 px) in the maths zone.
+    S3: two keywords appear on their words: 'sin θ ?' (pointer to a θ arc) and 'area ?' (pointer to the parallelogram).
+    S4: keyword 'area … but an arrow, up or down ?' with two gold pointers: one to the flat parallelogram, one to the
+    upright arrow; the arrow's ghost pointing down appears for 1 s (dashed) and fades.
+    S5: the three keywords line up as a short list (54 px) that the next scenes tick off (house Check icon each time
+    one is answered: s18b, s18c, s22a).
+  voiceover: So now we know how to calculate the cross product and which way it points. But why is it built like this? Why
+    the sine, and why an area? And if its length is an area, why is it an arrow that points up or down? And why the minus
+    sign in the recipe? Let's take these one at a time.
+  on_screen_eq: null
+  physics_source: null
+  physics_source_note: questions only; the picture reuses data/pair.json (no new computation)
+  exaggeration:
+  - a × b at 0.25 scale
+  sentence_times:
+  - - 916.975
+    - 921.775
+  - - 922.125
+    - 924.325
+  - - 924.675
+    - 927.225
+  - - 927.575
+    - 932.425
+  - - 932.775
+    - 935.575
+  - - 935.925
+    - 938.3
+- id: s18b_across_part
+  t:
+  - 939.1
+  - 988.275
+  status: reused
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s18b_across_part
+    narration: word-identical (archived clip may be spliced)
+  changes: []
+  related: []
+  visual: |
+    NEW. THE SINE IS THE PART ACROSS. SVG pair plane P (camera straight above, as s09), 'a = (5, 1)', 'b = (1, 3)' under
+    the picture, a's line extended faintly both ways.
+    S2: the slate shadow band of b on a (O → (1.538, 0.308)), labelled 'along' (54 px); keyword 'dot product: along'.
+    S3-S4: b SPLITS: a teal band along a's line O → (1.538, 0.308) labelled 'along' and a violet band from that foot to
+    b's tip, at a right angle to a (right-angle mark), labelled 'across' (54 px). b itself dims to 50 %.
+    S5: the two bands flash once in sequence and b's arrow re-brightens: 'along + across = b' (54 px).
+    S6: length labels on the bands, on their words: 'along ≈ 1.57' and 'across ≈ 2.75' (54 px), each with a gold
+    bracket. (The bands are labelled by length - the spoken quantity - like the shadow band of the last video.)
+    S7: 'across = |b| sin θ = 3.162 × 0.868 ≈ 2.75' (68 px); θ arc at O.
+    S8: '|a × b| = |a| × across = 5.099 × 2.75 ≈ 14' (68 px) with a CurvedLink from the violet band to '2.75' and from
+    a's length bracket to '5.099'.
+    S9: two keyword lines, aligned: 'a·b  →  along  (cos θ)' (slate) and 'a × b  →  across  (sin θ)' (violet); the
+    s18a list ticks 'sin θ ?'.
+  voiceover: 'Let''s start with the sine. The dot product used the shadow, the part of b that lies along the first arrow.
+    Now let''s split b into two pieces. One piece lies along vector a and the other goes straight across it, at a right
+    angle. Together they make b. Here, the part along is about one point five seven, and the part across is about two point
+    seven five. The part across is the length of b times sine theta. So the length of a cross b is the length of vector
+    a times the part of b across it: five point one times two point seven five, about fourteen. The dot product uses the
+    part along, and the cross product uses the part across.'
+  on_screen_eq:
+    latex: '|\mathbf a\times\mathbf b| = |\mathbf a|\times\text{across} = 5.099\times2.75 \approx 14'
+    vallis_eq: 'provenance only: ours (|a × b| = |a| |b| sin θ regrouped as |a| times the component of b perpendicular to
+      a)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: \text{across} = |\mathbf b|\sin\theta = 3.162\times0.868 \approx 2.75
+    vallis_eq: 'provenance only: our numbers (exact 2.7456)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.projection
+    params:
+      b:
+      - 1
+      - 3
+      onto:
+      - 5
+      - 1
+    outputs:
+      along_vec:
+      - 1.5385
+      - 0.3077
+      along_len: 1.5689
+      across_vec:
+      - -0.5385
+      - 2.6923
+      across_len: 2.7456
+      check: along² + across² = |b|² = 10 (tol 1e-12); |a| × across = 14.000
+    also:
+    - fluidpy.geo.vectors.scalar_projection
+    - fluidpy.geo.vectors.parallelogram_area
+    - fluidpy.geo.vectors.norm
+    data: data/pair.json -> split_b (NEW, N9)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_projection_V1_remainder_perpendicular_and_idempotent, ::test_parallelogram_area_V1_base_times_height
+  exaggeration: []
+  sentence_times:
+  - - 939.1
+    - 941.125
+  - - 941.475
+    - 947.05
+  - - 947.4
+    - 950.15
+  - - 950.5
+    - 956.625
+  - - 956.975
+    - 958.975
+  - - 959.325
+    - 966.325
+  - - 966.675
+    - 970.55
+  - - 970.9
+    - 981.475
+  - - 981.825
+    - 987.475
+- id: s18d_two_parts
+  t:
+  - 988.275
+  - 1041.325
+  status: new
+  changes:
+  - X1b Lagrange triangle; V-X3 pairing (research §1b/§2)
+  related:
+  - 0.1 dot product
+  visual: 'Picture zone: the s18b split of b kept; it becomes a right triangle: along leg teal (labelled ''along · dot'',
+    ''|b| cos θ''), across leg orange (''across · cross'', ''|b| sin θ''), hypotenuse b (''|b|''). Both legs scale by |a|
+    into two bars: teal ''a · b = 8'', violet ''|a × b| = 14''. A sin² + cos² bar under the triangle stays full while θ
+    sweeps (S4). Maths zone CalcStack: (a · b)² + |a × b|² = |a|² |b|²; 8² + 14² = 64 + 196 = 260; 26 × 10 = 260.'
+  voiceover: 'The two products share b between them. The part along is the length of b times cos theta, and the part across
+    is the length of b times sine theta. They are the two short sides of a right triangle, whose long side is b itself.
+    Multiply both sides by the length of vector a too. Then Pythagoras gives a neat rule: a dot b squared, plus the length
+    of a cross b squared, equals the two lengths squared, multiplied. With our numbers, eight squared is sixty four, and
+    fourteen squared is one hundred and ninety six, which add up to two hundred and sixty. That''s twenty six times ten,
+    the two lengths squared. So the dot product uses the part along, the cross product uses the part across, and together
+    they use all of b.'
+  on_screen_eq:
+    latex: (\mathbf a\cdot\mathbf b)^2+|\mathbf a\times\mathbf b|^2=|\mathbf a|^2\,|\mathbf b|^2
+    vallis_eq: 'provenance only: Lagrange''s identity (Kundu App. B vector identities); not on a Vallis page'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    also:
+    - fluidpy.geo.vectors.cross
+    - fluidpy.geo.vectors.norm
+    outputs:
+      dot: 8
+      cross_z: 14
+      norm_a_sq: 26
+      norm_b_sq: 10
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V2_symbolic_epsilon_and_lagrange
+    check: X4 (64 + 196 = 260 = 26 × 10)
+  exaggeration: []
+  sentence_times:
+  - - 988.275
+    - 991.1
+  - - 991.45
+    - 998.875
+  - - 999.225
+    - 1004.725
+  - - 1005.075
+    - 1008.9
+  - - 1009.25
+    - 1018.825
+  - - 1019.175
+    - 1028.15
+  - - 1028.5
+    - 1032.35
+  - - 1032.7
+    - 1040.525
+- id: s18c_slide
+  t:
+  - 1041.325
+  - 1082.15
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s18c_slide
+    narration: word-identical (archived clip may be spliced)
+  changes:
+  - 'X1 shear slider: live area readout stays 14.0 while the tip slides'
+  related: []
+  visual: |-
+    NEW. SLIDING b ALONG a CHANGES NOTHING. SVG pair plane P widened to x −1..8 (MapCamera zoom out 15 %), a = (5, 1)
+    fixed, the parallelogram on a and b, a's line extended; a dashed gold guide line through b's tip parallel to a.
+    S2: b's tip slides along the guide from (1, 3) to (6, 4) over the sentence (eased, 2.5 s); the live tip label
+    shows its components 'b = (1, 3)' → 'b = (6, 4)' (one decimal while moving, e.g. '(3.5, 3.5)', integers at rest).
+    S3: the parallelogram leans with it (corners O, a, a + b, b recomputed per frame).
+    S4: a gold bracket 'base' along a stays fixed; the violet 'height' band (the across part) slides with the tip and
+    keeps its length; labels 'base 5.099' and 'height 2.75'.
+    S5: the area label inside the parallelogram stays '14' throughout (computed per frame, shown to 0 dp).
+    S6: CalcStack '5×4 − 1×6 = 20 − 6 = 14' (68 px) with 'a = (5, 1)' and 'b = (6, 4)' beside it.
+    S7: the tip slides on beyond (6, 4) to (11, 5) and back (2 s), the '14' never changes; 'a × b = (0, 0, 14)'
+    (54 px) pinned.
+    S8-S9: keywords 'ignores: along' (slate) and 'measures: across' (violet). The s18a list ticks 'area ?'.
+
+    CHANGES FOR THIS MOVIE: live 'area 14.0' readout under the parallelogram while b's tip slides (shear slider, X1).
+  voiceover: 'What if we change only the part along? Let''s slide the tip of b along the direction of vector a until it
+    reaches six, four. The parallelogram leans over. But its base stays the same, and so does its height. So its area is
+    still fourteen. Let''s check with the recipe: five times four, minus one times six, is twenty minus six, which is fourteen
+    again. However far we slide, a cross b doesn''t change. So the cross product ignores how much two arrows agree. It measures
+    only how much one arrow reaches across the other.'
+  on_screen_eq:
+    latex: 5\times4 - 1\times6 = 20 - 6 = 14
+    vallis_eq: 'provenance only: the z recipe with b = (6, 4)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b_path: b + s a for s = 0 .. 2 (b = (1, 3)); s = 1 gives (6, 4)
+    outputs:
+      z: exactly 14 for every s (CHECK max |z − 14| < 1e-12)
+      area: 14
+    also:
+    - fluidpy.geo.vectors.parallelogram_area
+    data: data/pair.json -> slide (NEW, N9)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_parallelogram_area_V7_shear_invariance_and_parallel_limit
+  exaggeration: []
+  sentence_times:
+  - - 1041.325
+    - 1044.1
+  - - 1044.45
+    - 1050.375
+  - - 1050.725
+    - 1053.425
+  - - 1053.775
+    - 1057.325
+  - - 1057.675
+    - 1060.125
+  - - 1060.475
+    - 1068.5
+  - - 1068.85
+    - 1072.575
+  - - 1072.925
+    - 1076.75
+  - - 1077.1
+    - 1081.35
+- id: s20_torque
+  t:
+  - 1082.15
+  - 1142.375
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s20_torque
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - 'moved into #2 as the torque anchor (V-X1, V-X2; orchestrator 2026-10-28)'
+  - R3-S1 empty half 14:33-14:52
+  related: []
+  visual: |-
+    Moved into the why section (after s18c). Picture zone ThreeCanvas: Spanner3D on a hex bolt (camera az 235°, el 45°,
+    dist 3.2); 1 world unit = 1 m.
+    S1-S2: keyword 'only the part across turns' (54 px) builds on S2.
+    S3: spanner and bolt appear.
+    S4: teal r from the bolt centre to the grip with tip label 'r = (0.3, 0, 0) m'; orange F at the grip ⟂ the spanner,
+    tip label 'F = (0, 50, 0) N'; gloss 'N = newton' (44 px) once.
+    S5: F at 30° first as a ghost; its along part (slate band on the spanner's line) labelled 'pulls' and its across part
+    (violet band ⟂) labelled 'turns' - the s18b picture on the spanner.
+    S6: keyword 'torque'; main line 'τ = r × F' (T.eq) at (1080, 140); gold pointer to τ on "written tau".
+    S7: CalcStack '|τ| = 0.3 × 50 = 15 N·m' (68 px); the violet τ arrow along the bolt's axis with tip label
+    'τ = (0, 0, 15) N·m'; gloss 'N·m = newton metre' (44 px) once.
+    S8: F swings to 30° (arc '30°'), tip label 'F = (43.3, 25, 0) N'; slate band 'along ≈ 43.3 N' on the spanner line,
+    violet band 'across = 50 × sin 30° = 25 N'.
+    S9: '|τ| = 0.3 × 25 = 7.5 N·m'; τ shrinks, its label 'τ = (0, 0, 7.5) N·m'.
+    S10: F swings to lie along r ('F = (50, 0, 0) N'); '|τ| = 0'; τ shrinks to nothing; keyword 'no turn'.
+
+    CHANGES FOR THIS MOVIE: R3-S1: keep 'only the part across turns' in the maths zone from S3 to S6, and add 'along → pulls · across → turns' on AT(5, 'only the part across'). Live τ readout follows sin θ while the push angle sweeps 90° -> 30° (slanted spanner, V-X2); one torque on screen at a time (N-M3 kept).
+  voiceover: 'Why would anyone want the part across? Because only that part can turn things, as the door already told us.
+    Imagine turning a bolt with a spanner. Draw an arrow, r, from the bolt to your hand, zero point three metres long, and
+    an arrow, F, for your push of fifty newtons. The part of the push along the spanner just pulls on the bolt, and only
+    the part across turns it. This turning effect is called torque, written tau, and tau equals r cross F. Push at a right
+    angle, and all fifty newtons are across: zero point three times fifty is fifteen newton metres. Push at thirty degrees,
+    and the part along is about forty three newtons, while the part across is fifty times sine thirty, twenty five newtons.
+    The torque drops to seven point five newton metres. Push along the spanner, and nothing is across, so the bolt doesn''t
+    turn.'
+  on_screen_eq:
+    latex: \boldsymbol\tau = \mathbf r\times\mathbf F
+    vallis_eq: 'provenance only: the school definition of torque (no book number)'
+    page_png: null
+  on_screen_eq_extra:
+  - latex: '|\boldsymbol\tau| = 0.3\times50 = 15\ \mathrm{N\,m}'
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: \text{across} = 50\times\sin30^\circ = 25\ \mathrm N
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: '|\boldsymbol\tau| = 0.3\times25 = 7.5\ \mathrm{N\,m}'
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      r:
+      - 0.3
+      - 0
+      - 0
+      F: 50 N x (cos α, sin α, 0) for α = 90°, 30°, 0°
+    outputs:
+      F_components_N:
+      - - 0
+        - 50
+        - 0
+      - - 43.3
+        - 25.0
+        - 0
+      - - 50
+        - 0
+        - 0
+      tau_z_Nm:
+      - 15.0
+      - 7.5
+      - 0.0
+      along_N:
+      - 0
+      - 43.3
+      - 50
+      across_N:
+      - 50
+      - 25
+      - 0
+    also:
+    - fluidpy.geo.vectors.scalar_projection
+    - fluidpy.geo.vectors.parallelogram_area
+    data: data/torque.json (+ along/across fields, N10)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field, ::test_scalar_projection_V1_and_V7
+  exaggeration:
+  - spanner illustrative; τ arrow on its own display scale, its value written beside it
+  sentence_times:
+  - - 1082.15
+    - 1084.825
+  - - 1085.175
+    - 1090.05
+  - - 1090.4
+    - 1093.325
+  - - 1093.675
+    - 1101.925
+  - - 1102.275
+    - 1108.15
+  - - 1108.5
+    - 1114.2
+  - - 1114.55
+    - 1122.3
+  - - 1122.65
+    - 1132.25
+  - - 1132.6
+    - 1136.15
+  - - 1136.5
+    - 1141.575
+- id: s21_torque_axis
+  t:
+  - 1142.375
+  - 1178.125
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s21_torque_axis
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - V-X5 the vector is the axis; sign = sense, with viewpoint
+  related: []
+  visual: |-
+    Spanner3D as s20 (F back at a right angle, labels 'r = (0.3, 0, 0) m', 'F = (0, −50, 0) N' for the tightening push).
+    S1: the violet τ arrow pulses along the bolt's axis; keyword 'along the axis'.
+    S2: Hand3D curl grip, fingers on r curling to F.
+    S3: the spanner turns clockwise seen from above, the bolt sinks; τ points DOWN, label 'τ = (0, 0, −15) N·m';
+    keyword 'tightens'; top-view inset: clockwise arc, ⊗.
+    S4: push reversed ('F = (0, 50, 0) N'): τ up, '(0, 0, 15) N·m', bolt rises, keyword 'loosens'; inset ⊙.
+    S5: keywords 'how strongly' (|τ|) and 'which way' (up/down) with pointers.
+
+    CHANGES FOR THIS MOVIE: camera moves to look down the τ arrow from its tip; a curved arrow round the bolt reads anticlockwise; keyword 'axis' (54 px) on the arrow, 'seen from the tip' under the picture.
+  voiceover: 'The torque arrow points along the bolt''s axis, and the right-hand rule tells us which way the bolt turns.
+    Curl your fingers from r towards F. If your thumb points down into the nut, the bolt tightens. If it points up, the
+    bolt loosens. So the torque arrow is the axis of the turning, and its direction says which way round: seen from its
+    tip, looking back down the arrow, the turn is always anticlockwise. So the cross product tells us both how strongly
+    a force turns something, and which way.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      r:
+      - 0.3
+      - 0
+      - 0
+      F_tighten:
+      - 0
+      - -50
+      - 0
+      F_loosen:
+      - 0
+      - 50
+      - 0
+    outputs:
+      tau_tighten:
+      - 0
+      - 0
+      - -15
+      tau_loosen:
+      - 0
+      - 0
+      - 15
+    data: data/torque.json -> tighten, loosen
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
+  exaggeration:
+  - bolt travel per turn exaggerated x3; stylised hand
+  sentence_times:
+  - - 1142.375
+    - 1149.025
+  - - 1149.375
+    - 1152.2
+  - - 1152.55
+    - 1156.5
+  - - 1156.85
+    - 1159.55
+  - - 1159.9
+    - 1171.275
+  - - 1171.625
+    - 1177.325
+- id: s21a_minus_sign
+  t:
+  - 1178.125
+  - 1251.425
+  status: new
+  changes:
+  - V-X8 two mini-torques fighting (research §1b; user priority)
+  related: []
+  visual: 'Picture zone (2-D, from above, x east y north, 0.1 m grid): bolt at O; spanner arm r = (0.2, 0.1) m teal; push
+    F = (10, 30) N orange at the hand. S3: F splits into F_y (orange, 30 N, up) and F_x (orange dashed, 10 N, right) at
+    the hand; r splits into its x part (0.2 m, along the floor axis) and y part (0.1 m). S4: F_y alone with the x arm bracketed
+    -> curved violet arrow anticlockwise + ''+0.2 × 30 = +6''. S5: F_x alone with the y arm bracketed -> curved rose (hatched)
+    arrow clockwise + ''−0.1 × 10 = −1''. S6: the two curved arrows meet, the smaller cancels part of the larger. Maths
+    zone CalcStack: τ_z = r_x F_y − r_y F_x; = 0.2 × 30 − 0.1 × 10; = 6 − 1 = 5 N m. Gold links from each bracketed arm
+    to its term. Every number spoken as it appears.'
+  voiceover: 'Torque also explains the minus sign in the recipe. Let''s lay a spanner flat on the floor, with the bolt at
+    the centre. Its arm, r, reaches point two metres along x and point one along y, and the push, F, has ten newtons along
+    x and thirty along y. Split the push into its two parts. The thirty newtons along y push across the x part of the arm,
+    point two metres. On their own, they turn the spanner anticlockwise, seen from above, with a torque of point two times
+    thirty, which is six newton metres. The ten newtons along x push across the y part of the arm, point one metres. On
+    their own, they turn the spanner the other way, clockwise, with a torque of point one times ten, which is one. The two
+    little torques fight each other, so we subtract: six minus one is five newton metres. That''s the z recipe: the x part
+    of r times the y part of F, minus the y part of r times the x part of F. The minus sign is there because the two parts
+    turn the spanner in opposite directions.'
+  on_screen_eq:
+    latex: \tau_z=r_x F_y-r_y F_x
+    vallis_eq: 'provenance only: z component of the cross product (our numbers)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      r:
+      - 0.2
+      - 0.1
+      - 0
+      F:
+      - 10
+      - 30
+      - 0
+    outputs:
+      tau:
+      - 0
+      - 0
+      - 5.0
+      mini_torques:
+      - 6.0
+      - -1.0
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+    check: X5 (6 − 1 = 5 = cross z; each term's sign = turn sense)
+  exaggeration:
+  - spanner and push sizes chosen for easy numbers
+  sentence_times:
+  - - 1178.125
+    - 1182.0
+  - - 1182.35
+    - 1186.875
+  - - 1187.225
+    - 1197.4
+  - - 1197.75
+    - 1200.325
+  - - 1200.675
+    - 1206.475
+  - - 1206.825
+    - 1215.825
+  - - 1216.175
+    - 1221.7
+  - - 1222.05
+    - 1229.325
+  - - 1229.675
+    - 1236.125
+  - - 1236.475
+    - 1244.65
+  - - 1245.0
+    - 1250.625
+- id: s22_door_again
+  t:
+  - 1251.425
+  - 1283.1
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s22_door_again
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - 2026-10-27 split draft wording
+  - R3-S3 door
+  related: []
+  visual: |-
+    Door3D as s03 with the UV2-04 re-framing (target (0.45, 0.35, 0), dist 6.6; every label ≥ 40 px inside the canvas,
+    the 'r' label placed against the projected door edge and the canvas border - UV2-12).
+    S2: F ⟂ door → violet τ = r × F along the hinge, UP, labelled 'largest'; the door swings open (anticlockwise from
+    above); on AT(2, "a push along the door gives none") F along r → τ shrinks to 0, 'r × F = 0'.
+    S3: push from the other side: τ DOWN along the hinge (dashed, rose '−'), the door swings shut; keywords
+    'up · opens', 'down · closes'.
+    S4: keywords 'largest at right angles ✓' and 'left or right ✓'.
+
+    CHANGES FOR THIS MOVIE: R3-S3 door rules as in s03.
+  voiceover: 'Now back to the door. Only the part of your push across the door can turn it, and that''s the part the cross
+    product uses. Push at a right angle to the door, and all of the push is across, so the torque is as large as it can
+    be. Push along the door, straight towards the hinge, and nothing is across, so the torque is zero, just as our hands
+    tell us. Its arrow points along the hinge: up when the door swings one way, and down when it swings the other.'
+  on_screen_eq:
+    latex: \boldsymbol\tau = \mathbf r\times\mathbf F
+    vallis_eq: 'provenance only: torque (s20)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      r:
+      - 0.9
+      - 0
+      - 0
+      F:
+      - - 0
+        - 1
+        - 0
+      - - -1
+        - 0
+        - 0
+      - - 0
+        - -1
+        - 0
+    outputs:
+      tau_z:
+      - 0.9
+      - 0.0
+      - -0.9
+    data: data/door.json
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+  exaggeration:
+  - door illustrative; no forces stated in numbers (unitless sketch, so no component labels)
+  sentence_times:
+  - - 1251.425
+    - 1253.4
+  - - 1253.75
+    - 1259.925
+  - - 1260.275
+    - 1267.2
+  - - 1267.55
+    - 1275.4
+  - - 1275.75
+    - 1282.3
+- id: s22x_glass_sheet
+  t:
+  - 1283.1
+  - 1314.6
+  status: new
+  changes:
+  - X2b glass sheet (research §2)
+  related: []
+  visual: 'Picture zone 3-D: the plane of a and b drawn as a faint glass sheet (ink 12 %, edge lines); a dozen grey arrows
+    built as s a + t b (s, t from a fixed list) appear one by one, all lying in the sheet; the violet a × b pokes out of
+    it. Maths zone: live ''(a × b)·a = 0'', ''(a × b)·b = 0'' (slate zeros). Keyword ''in the sheet'' / ''out of it''.'
+  voiceover: But why does the answer point at right angles to both arrows, and not somewhere in between? Picture the plane
+    of the two arrows as a sheet of glass. Any arrow we can build by stretching and adding vector a and b stays inside the
+    glass. So the only direction that belongs to neither of them is the one sticking straight out of the sheet. That's where
+    the answer goes, and that's why its dot products with vector a and with b are both zero.
+  on_screen_eq:
+    latex: (\mathbf a\times\mathbf b)\cdot\mathbf a=0
+    vallis_eq: 'provenance only: perpendicularity (our numbers)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+      mixtures: s a + t b, 12 pairs
+    also:
+    - fluidpy.geo.vectors.cross
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
+    check: X6 (every mixture · (a × b) = 0 to 1e-12)
+  exaggeration: []
+  sentence_times:
+  - - 1283.1
+    - 1289.1
+  - - 1289.45
+    - 1293.325
+  - - 1293.675
+    - 1300.0
+  - - 1300.35
+    - 1306.525
+  - - 1306.875
+    - 1313.8
+- id: s22a_plane_normal
+  t:
+  - 1314.6
+  - 1366.225
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s22a_plane_normal
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - opening question moved to s22x
+  - C1 'area 14' / 'normal' label placement
+  related: []
+  visual: |-
+    NEW. WHY AT RIGHT ANGLES: THE PLANE AND ITS NORMAL. Full-width ThreeCanvas.
+    S1: the spanner of s20 returns (r, F labels as s20 at a right angle).
+    S2: a translucent warm-white plane (20 %) appears through r and F, edged in gold; the bolt's axis line (gold
+    dashed) stands out of it; on "sticking straight out" a right-angle tick between the axis and the plane.
+    S3: the spanner fades; the plane stays; the s18 parallelogram (a, b) drawn in the plane and a sweeping ghost of a
+    across b (a copy of a sliding to b's tip) on "sweep".
+    S4: the camera orbits 60° so the plane is seen tilted; a single violet arrow grows straight out of the plane;
+    keyword 'normal' (54 px) with a pointer.
+    S5: two keywords, side by side: 'length → how much' and 'direction → which plane, which way round'.
+    S6: a gold bracket along the violet arrow, linked by a CurvedLink to the parallelogram's area label '14'
+    (the length IS the area, written '|a × b| = 14 = area').
+    S7: the plane's turn arc a → b (gold) reads anticlockwise from above; arrow up; then the plane flips (b → a): arc
+    clockwise, arrow down (dashed, rose '−'); keyword 'up = anticlockwise from above'.
+    S8: the area is shaded flat in the plane (violet 25 %), the arrow drawn as a thin flagpole standing on the
+    patch's centre with a small flag reading '14'; keyword 'a label for the patch'. The s18a list ticks the last item.
+
+    CHANGES FOR THIS MOVIE: C1: 'area 14' above the a arrow, 'normal' beside (not on) the violet arrow.
+  voiceover: 'The spanner turns in one flat plane, the plane of r and F, and the bolt turns about an axis sticking straight
+    out of that plane. Any turning, or sweep of one arrow across another, happens in a plane. In three dimensions, the simplest
+    way to say which plane is to give the one direction straight out of it: the normal to the plane. So the cross product
+    packs two things into one arrow. Its length says how much: the area, or how strongly something turns. Its direction
+    says which plane, and which way round: up means the turn from the first arrow to the second is anticlockwise, seen from
+    above. The area lies flat in the plane, and the arrow stands on it like a label, telling us how big the patch is and
+    which way it faces.'
+  on_screen_eq:
+    latex: '|\mathbf a\times\mathbf b| = 14 = \text{area}'
+    vallis_eq: 'provenance only: ours'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+      tilted_view: camera only (the plane is the floor)
+    outputs:
+      normal_unit:
+      - 0
+      - 0
+      - 1
+      area: 14
+      flipped:
+      - 0
+      - 0
+      - -14
+    also:
+    - fluidpy.geo.vectors.parallelogram_area
+    - 'fluidpy.geo.vectors.dot: (a × b)·a = (a × b)·b = 0, the normal CHECK'
+    data: data/pair.json -> a_cross_b, axb_dot_a, axb_dot_b
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
+  exaggeration:
+  - a × b at 0.25 scale; the flag-pole picture is illustrative
+  honesty: 'the narration says the arrow "stands on it like a label": the cross product is a vector whose length equals
+    the area and whose direction is the normal; the analogy is drawn as a picture, not a claim that the area is located
+    on the arrow'
+  sentence_times:
+  - - 1314.6
+    - 1323.325
+  - - 1323.675
+    - 1328.8
+  - - 1329.15
+    - 1337.275
+  - - 1337.625
+    - 1341.25
+  - - 1341.6
+    - 1346.475
+  - - 1346.825
+    - 1356.475
+  - - 1356.825
+    - 1365.425
+- id: s22b_component_shadows
+  t:
+  - 1366.225
+  - 1398.35
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s22b_component_shadows
+    narration: word-identical (archived clip may be spliced)
+  changes:
+  - X3 three lights
+  - C2 brace text 44 px
+  related: []
+  visual: |-
+    RESTORED. EACH COMPONENT IS A SHADOW AREA. Full-width ThreeCanvas with three faint walls: the floor (x-y), the back
+    wall facing along x (the y-z plane) and the side wall facing along y (the z-x plane), each a 25 % slate plane with
+    its axis letters; camera az 225°, el 28°.
+    S1: the s06 recipe line in small type at the top right; a gold '?' beside it fades.
+    S2: an ILLUSTRATIVE tilted parallelogram (no numbers spoken, so none written: two unlabelled arrows teal/orange
+    lifted off the floor) with its violet normal arrow; on "shadows" three parallel-light projections draw its shadow on
+    each wall (violet 35 %, outlined).
+    S3: the floor shadow pulses; keyword 'x and y parts → z component' (54 px) with a gold link from the floor shadow to
+    the third slot of the recipe line, which glows.
+    S4: the two wall shadows pulse in turn, gold links to the first and second slots: 'y and z → x', 'z and x → y'.
+    S5: the tilted pair lowers onto the floor and becomes our a = (5, 1, 0), b = (1, 3, 0) (labels under the picture);
+    the two wall shadows flatten into lines (edge on) and vanish; keyword 'edge on → 0'.
+    S6: 'a × b = (0, 0, 14)' (68 px) with the two zeros pulsing and the 14 linked to the floor shadow (= the
+    parallelogram itself).
+
+    CHANGES FOR THIS MOVIE: three lights in turn (straight down, from the side, from the front); each shadow parallelogram is filled and its signed area flies into the matching slot of '(_, _, _)'.
+  voiceover: This also explains the recipe. Tilt a parallelogram, and look at its shadows on three walls. Its shadow on
+    the floor uses only x and y parts, and its area is the z component. Its shadows on the other two walls give the x and
+    y components. Our parallelogram lies flat on the floor, so seen from the walls it's edge on, with no area. That's why
+    only the z component of a cross b, fourteen, is left.
+  on_screen_eq:
+    latex: \mathbf a\times\mathbf b = (0,\ 0,\ 14)
+    vallis_eq: 'provenance only: as s07 (each component = signed area of the parallelogram''s projection on the coordinate
+      plane that leaves that direction out)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      tilted_a:
+      - 2
+      - 0
+      - 1
+      tilted_b:
+      - 0
+      - 2
+      - 1
+      a:
+      - 5
+      - 1
+      - 0
+      b:
+      - 1
+      - 3
+      - 0
+    outputs:
+      tilted_cross:
+      - -2
+      - -2
+      - 4
+      shadow_areas: '[2, 2, 4] = |components| (CHECK: parallelogram_area of the projections on the y-z, z-x and x-y planes)'
+      ours:
+      - 0
+      - 0
+      - 14
+    also:
+    - fluidpy.geo.vectors.parallelogram_area
+    data: data/pair.json -> shadows (NEW, N22)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field, ::test_parallelogram_area_V1_base_times_height
+  exaggeration:
+  - the tilted parallelogram is an illustrative example (its numbers are not shown); parallel light for the shadows
+  sentence_times:
+  - - 1366.225
+    - 1368.975
+  - - 1369.325
+    - 1373.625
+  - - 1373.975
+    - 1380.075
+  - - 1380.425
+    - 1385.075
+  - - 1385.425
+    - 1392.05
+  - - 1392.4
+    - 1397.55
+- id: s22d_tilted_axis
+  t:
+  - 1398.35
+  - 1450.075
+  status: new
+  changes:
+  - V-X9 sphere brushed off centre (research §1b)
+  related:
+  - '#3 cross product in physics'
+  visual: 'Picture zone 3-D: a matte ball (radius 0.1 m) floating; a finger arrow brushes past it off centre: r = (0.1,
+    0, 0.1) m from the centre to the touch point (teal), F = (0, 2, 0) N (orange). Three faint component torques appear
+    one by one as violet arrows on the axes: about x ''−0.2'', about y ''0'', about z ''+0.2''; they add tip to tail into
+    one violet τ on a tilted axis (45° between up and −x); the ball spins about that axis (spin driven by frame, illustrative).
+    Maths zone: τ = r × F = (−0.2, 0, 0.2) N m; pairs (y, z) -> x, (z, x) -> y, (x, y) -> z lit on their words.'
+  voiceover: In full three dimensions, all three components work together. Imagine a ball floating in space, and brush your
+    finger past it, off centre. The arrow from the centre to your finger, r, and your push, F, can both have x, y and z
+    parts. The x and y parts turn the ball about z, just like the spanner on the floor. The y and z parts turn it about
+    x, and the z and x parts turn it about y. Here r reaches point one metres along x and point one up, and the push is
+    two newtons along y. The recipe gives a torque with components minus point two, zero and point two newton metres. The
+    little torques add up like any arrows, to one torque about a tilted axis, and the ball starts to spin about that axis.
+  on_screen_eq:
+    latex: \boldsymbol\tau=\mathbf r\times\mathbf F=(-0.2,\;0,\;0.2)\ \mathrm{N\,m}
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      r:
+      - 0.1
+      - 0
+      - 0.1
+      F:
+      - 0
+      - 2
+      - 0
+    outputs:
+      tau:
+      - -0.2
+      - 0.0
+      - 0.2
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+    check: X7 (components; axis angle 45° from up)
+  exaggeration:
+  - the ball's spin-up is illustrative (no moment of inertia is computed)
+  sentence_times:
+  - - 1398.35
+    - 1402.775
+  - - 1403.125
+    - 1408.675
+  - - 1409.025
+    - 1416.0
+  - - 1416.35
+    - 1421.55
+  - - 1421.9
+    - 1427.025
+  - - 1427.375
+    - 1434.075
+  - - 1434.425
+    - 1440.85
+  - - 1441.2
+    - 1449.275
+- id: s19_grid
+  t:
+  - 1450.075
+  - 1502.375
+  status: changed
+  reuse:
+    from: ch00_cross_product_why(v4fix2)/s19_grid
+    narration: changed (new sentences marked in script.md)
+  changes:
+  - V-S closing pair
+  - C6 grid rows appear with their sentences
+  related:
+  - 0.1 dot product
+  - '#6 gradient'
+  - '#10 material derivative'
+  visual: |-
+    Moved after the why section. Full width, no boxes, no rules: two keyword columns 'a·b' (x 980) and 'a × b' (x 1500),
+    mini pictures in the left margin (each 160 x 90 px). One row per sentence (54 px; pitch 100 px from y 150):
+      S2/S3: 'number · along · cos θ' | 'arrow · across · sin θ'   (mini: the s18b along/across split)
+      S4/S5: 'shadow × length' | 'area · normal'   (mini: shadow band; parallelogram with its normal)
+      S6: 'same way' | 'right angle', then on "flips" a swap glyph row 'order: same | flips'
+      S7: 'work' | 'torque'   (sled + spanner)
+      S8: 'v·∇T: advection' | 'turns the wind'   (isotherm map + turned arrow)
+    The dot cell lands first on its clause, then the cross cell; gold underline under the cross cell.
+
+    CHANGES FOR THIS MOVIE: C6: every row of the grid appears on its sentence, not only the heads.
+  voiceover: Let's put the two products side by side. The dot product gives a number, using the part along and the cosine.
+    The cross product gives an arrow, using the part across and the sine. The dot product is a shadow times a length. The
+    cross product's length is an area, and its direction is the normal to the plane. The dot product is largest when the
+    arrows point the same way, the cross product at right angles, and only the cross product flips when we swap the order.
+    So the dot product is the part along, a number, and the cross product is the part across, an axis. On weather maps,
+    the dot product tells us how fast the wind carries air into warmer or colder places. So what can the cross product do
+    on a weather map?
+  on_screen_eq: null
+  on_screen_eq_extra:
+  - latex: \mathbf v\cdot\nabla T
+    vallis_eq: 'provenance only: the last video'
+    page_png: null
+  physics_source: null
+  physics_source_note: 'summary grid: words and symbols only, every entry taught in s02-s22e'
+  exaggeration:
+  - mini pictures illustrative
+  sentence_times:
+  - - 1450.075
+    - 1453.05
+  - - 1453.4
+    - 1458.2
+  - - 1458.55
+    - 1463.375
+  - - 1463.725
+    - 1466.925
+  - - 1467.275
+    - 1472.95
+  - - 1473.3
+    - 1483.1
+  - - 1483.45
+    - 1490.325
+  - - 1490.675
+    - 1497.825
+  - - 1498.175
+    - 1501.575
+- id: s50_three_jobs
+  t:
+  - 1502.375
+  - 1530.025
+  status: new
+  changes:
+  - application (brief §Application)
+  related: []
+  visual: 'Full width: three small pictures appear one per sentence — the sign (a ⊙ / ⊗ pair with ''left · right''), the
+    length (a parallelogram with ''area''), the direction (a tilted card with its normal, ''facing''). They shrink to a
+    strip along the top that stays through s51-s59 with the current one lit gold.'
+  voiceover: The cross product gives us three things at once. Its sign, up or down, tells us which way round the turn from
+    the first arrow to the second goes, and so whether something lies to our left or to our right. Its length gives an area.
+    And its direction tells us which way a flat surface faces. Weather maps use all three, so let's take them one at a time,
+    starting with left and right.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative summary glyphs
+  sentence_times:
+  - - 1502.375
+    - 1505.8
+  - - 1506.15
+    - 1515.925
+  - - 1516.275
+    - 1518.45
+  - - 1518.8
+    - 1522.975
+  - - 1523.325
+    - 1529.225
+- id: s51_track_side
+  t:
+  - 1530.025
+  - 1584.9
+  status: new
+  changes: []
+  related:
+  - '#45 tropical cyclones'
+  visual: 'Full-width real map: GOES-16 true colour 18:01 UTC 28 Sep 2022 (A2) with Natural Earth coast; IBTrACS track of
+    Ian 15:00 -> 19:05 UTC drawn as the gold track; the arrow d (teal) along it; Fort Myers Beach and Sarasota dots with
+    names (44 px, dark halo). S5-S6: r (orange) from the landfall point to a town; the d × r arrow drawn as a ⊙ (up, ''left'')
+    or ⊗ (down, ''right'') glyph at the town, with a curved arrow d -> r anticlockwise / clockwise seen from above.'
+  voiceover: This is Hurricane Ian, seen from a weather satellite on the twenty eighth of September, twenty twenty two.
+    That afternoon, its centre crossed the coast of Florida, moving towards the north east. Forecasters always ask which
+    towns lie to the right of a storm's track and which lie to the left, because the right side is usually hit hardest.
+    Let's draw an arrow, d, along the track, the way the storm moves. Then draw a second arrow, r, from the storm's centre
+    to a town. The dot product can't tell us which side the town is on, but the cross product can. If the turn from d to
+    r is anticlockwise, seen from above, then d cross r points up, and the town is on the left. If the turn is clockwise,
+    d cross r points down, and the town is on the right.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      track: IBTrACS 2022 Ian, 15:00-19:05 UTC 28 Sep
+      projection: fluidpy.geo.mapproj.forward('laea', ...)
+    data: cross_product_why/data/real/ibtracs_ian_2022.json, ian_goes16_truecolour_20220928T1801.jpg
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_horizontal_vectors_give_vertical
+    check: M1-M2
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration:
+  - the track arrow covers four hours
+  tool: 'Remotion SVG over the GOES-16 JPEG (runner-up: Cesium drape; the 2-D map reads the sign more clearly)'
+  data_note: GOES-16 ABI true colour (NOAA, public domain); IBTrACS v04 (NOAA NCEI)
+  sentence_times:
+  - - 1530.025
+    - 1537.025
+  - - 1537.375
+    - 1543.25
+  - - 1543.6
+    - 1552.975
+  - - 1553.325
+    - 1557.925
+  - - 1558.275
+    - 1563.25
+  - - 1563.6
+    - 1569.2
+  - - 1569.55
+    - 1578.125
+  - - 1578.475
+    - 1584.1
+- id: s52_side_numbers
+  t:
+  - 1584.9
+  - 1656.3
+  status: new
+  changes: []
+  related: []
+  visual: 'Zoom (MapCamera) to 150 km around landfall, km ticks east / north (44 px). d = (50, 45, 0) km, r_FMB = (25, −28,
+    0), r_Sar = (−33, 71, 0) at the arrow tips. Maths zone CalcStack per town: z = 50 × (−28) − 45 × 25 ≈ −2500 -> ''right''
+    (⊗, rose hatched); z = 50 × 71 − 45 × (−33) ≈ +5000 -> ''left'' (⊙, teal). Gold links from each town''s r to its line.'
+  voiceover: 'Let''s put in numbers, in kilometres, with x pointing east and y pointing north. In the four hours before
+    landfall, the centre moved about fifty kilometres east and forty five north, so d has components fifty, forty five and
+    zero. Fort Myers Beach lies about twenty five kilometres east of where the centre crossed the coast, and twenty eight
+    south, so r has components twenty five, minus twenty eight and zero. Only the z component of d cross r is left: fifty
+    times minus twenty eight, minus forty five times twenty five, which is about minus two thousand five hundred. It''s
+    negative, so d cross r points down, and Fort Myers Beach is on the right of the track. For Sarasota, to the north west,
+    r has components minus thirty three, seventy one and zero. Now the z component is fifty times seventy one, minus forty
+    five times minus thirty three, about plus five thousand, so Sarasota is on the left. We only need the sign, and the
+    cross product gives it in one line.'
+  on_screen_eq:
+    latex: (\mathbf d\times\mathbf r)_z=d_x r_y-d_y r_x
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      d_km:
+      - 49.8
+      - 44.5
+      - 0
+      r_FMB_km:
+      - 24.9
+      - -27.8
+      - 0
+      r_Sarasota_km:
+      - -32.9
+      - 71.2
+      - 0
+    outputs:
+      z_FMB: -2500.0
+      z_Sarasota: 5000.0
+    also:
+    - fluidpy.geo.mapproj.forward
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+    check: M1-M3
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration:
+  - components rounded to whole km for speech; signs computed from the unrounded values
+  sentence_times:
+  - - 1584.9
+    - 1590.775
+  - - 1591.125
+    - 1601.7
+  - - 1602.05
+    - 1613.45
+  - - 1613.8
+    - 1625.1
+  - - 1625.45
+    - 1631.975
+  - - 1632.325
+    - 1639.375
+  - - 1639.725
+    - 1650.475
+  - - 1650.825
+    - 1655.5
+- id: s53_right_side
+  t:
+  - 1656.3
+  - 1718.125
+  status: new
+  changes: []
+  related:
+  - '#3 cross product in physics'
+  - '#29 Coriolis'
+  - '#45 tropical cyclones'
+  visual: 'Back to the satellite map: Ian''s mean HRRR 10-m winds as anticlockwise streaks (A2); the storm-motion arrow
+    adds on the right (teal ''+'') and subtracts on the left (rose ''−'', hatched). S4-S6: tide-gauge TimeGraph (NOAA CO-OPS,
+    D1): Fort Myers residual rising (teal), St. Petersburg falling (rose), MHHW datum line; ''about 3 to 4.5 m above ground''
+    keyword at Fort Myers Beach on its words (NHC report, cited in manifest). Sound: storm_bed low, waves_breaking as the
+    gauge peaks.'
+  voiceover: Why is the right side usually hit hardest? In the Northern Hemisphere, a hurricane's winds circle its centre
+    anticlockwise, seen from above. On the right of the track, those winds blow the same way the storm is moving, so the
+    two speeds add up. On the left, they blow against the storm's motion, and partly cancel. For Ian, the right side also
+    had winds blowing from the sea onto the land, piling the water up against the coast. At Fort Myers Beach, the sea rose
+    about three to four and a half metres above the ground. On the left side, the winds blew from the land out to sea, and
+    they pushed water out of Tampa Bay, so its level dropped far below normal. The left side still gets strong winds and
+    heavy rain, so it's only safer, never safe. We'll see why storms spin this way in the next video, and much more about
+    storms like Ian in the video on tropical cyclones.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.coops.fetch_water_level (new, F5)
+    params:
+      stations:
+      - 8725520
+      - 8726520
+      datum: MHHW
+      window: 2022-09-27..30
+    also:
+    - fluidpy.diag.cyclone.storm_relative_wind
+    test: tests/data/test_coops.py (new)
+    check: M4-M7
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration: []
+  honesty: Inundation 3.0-4.6 m above ground is the NHC report (Bucci et al. 2023), cited, not our measurement.
+  sentence_times:
+  - - 1656.3
+    - 1659.425
+  - - 1659.775
+    - 1666.7
+  - - 1667.05
+    - 1673.85
+  - - 1674.2
+    - 1679.1
+  - - 1679.45
+    - 1687.0
+  - - 1687.35
+    - 1693.225
+  - - 1693.575
+    - 1702.45
+  - - 1702.8
+    - 1708.9
+  - - 1709.25
+    - 1717.325
+- id: s53a_runway
+  t:
+  - 1718.125
+  - 1760.025
+  status: new
+  changes:
+  - W12 runway crosswind (research §4)
+  related:
+  - 0.1b dot product (runway, along part)
+  visual: 'Picture zone: a runway from above (grey strip, centre-line dashes) pointing north, unit arrow ê (orange) along
+    it; wind v (teal) 10 m/s at 30° to the runway towards the north east. Its across part (orange band) and along part (teal
+    band, greyed, labelled ''along · dot product video''). The ê × v glyph ⊗ (''down'') at the runway; a gold arrow shows
+    the wind arriving from the left side. Maths zone: (ê × v)_z = 0 × 8.66 − 1 × 5 = −5 -> ''from the left'', ''5 m/s across''.'
+  voiceover: The same sign test helps pilots. Draw a unit arrow along the runway, e hat, and an arrow for the wind. If e
+    hat cross the wind points down, the wind blows towards the right of the runway, so it comes from the left. If it points
+    up, the wind comes from the right. Here the runway points north, and the wind blows at ten metres per second towards
+    the north east, thirty degrees off the runway. The z component is minus five, so the wind comes from the left, with
+    five metres per second straight across. The dot product video measures the other part, along the runway.
+  on_screen_eq:
+    latex: (\hat{\mathbf e}\times\mathbf v)_z=-5\ \mathrm{m\,s^{-1}}
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.cross
+    params:
+      e:
+      - 0
+      - 1
+      - 0
+      v:
+      - 5.0
+      - 8.66
+      - 0
+    outputs:
+      z: -5.0
+    also:
+    - fluidpy.geo.vectors.dot (8.66 along, named only)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
+    check: R1 (z = −5; along 8.66)
+  exaggeration:
+  - schematic runway
+  sentence_times:
+  - - 1718.125
+    - 1720.85
+  - - 1721.2
+    - 1726.325
+  - - 1726.675
+    - 1734.025
+  - - 1734.375
+    - 1737.725
+  - - 1738.075
+    - 1746.475
+  - - 1746.825
+    - 1754.3
+  - - 1754.65
+    - 1759.225
+- id: s54_storm_size
+  t:
+  - 1760.025
+  - 1791.85
+  status: new
+  changes: []
+  related:
+  - '#42 extratropical cyclones'
+  visual: MODIS Aqua true colour 2 Nov 2023 (A3) with NE coasts; ERA5 MSLP isobars every 4 hPa (thin, warm white 50 %);
+    the centre '956 hPa' at the L; the 968-hPa isobar thickened gold on its words.
+  voiceover: 'Next, the length of the cross product, and a question about size: how big is a storm? This is Storm Ciarán,
+    seen from a satellite on the second of November, twenty twenty three. At the centre of this low, the pressure is about
+    nine hundred and fifty six hectopascals. Let''s pick the isobar for nine hundred and sixty eight hectopascals, and ask
+    how much area it encloses. It''s a wobbly loop, so there''s no simple formula for its area.'
+  on_screen_eq: null
+  physics_source:
+    fn: skimage.measure.find_contours (builder)
+    params:
+      field: ERA5 msl 12 UTC 2023-11-02
+      level_hPa: 968
+    data: data/derived/ch00/ciaran_2023_sfc_1102.*
+    test: CHECK A1-A2 (centre 955.9 hPa; closed contour)
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration: []
+  sentence_times:
+  - - 1760.025
+    - 1765.9
+  - - 1766.25
+    - 1772.425
+  - - 1772.775
+    - 1778.875
+  - - 1779.225
+    - 1786.225
+  - - 1786.575
+    - 1791.05
+- id: s55_triangle_fan
+  t:
+  - 1791.85
+  - 1871.4
+  status: new
+  changes: []
+  related:
+  - '#8 curl and Stokes'
+  visual: 'Equal-area map (LAEA centred on the low, F2); 110 points on the 968 loop; arrows from the centre to each point
+    appear in a sweep; each thin triangle fills violet (+, anticlockwise) or rose hatched (−, where the loop bends back);
+    running total ''≈ 270 000 km²'' counts up; the UK outline (same scale) slides beside it. S9: the order reverses and
+    the total reads ''−270 000 km²''. Shoelace sum in the maths zone.'
+  voiceover: Here's the trick. Put points all the way round the isobar, and draw an arrow from the centre of the low to
+    each one. Two neighbouring arrows make a thin triangle. A triangle is half of the parallelogram the two arrows make,
+    so its area is half the length of their cross product. Going round the loop anticlockwise, each cross product points
+    up, so we can simply add up their z components. Where the loop bends back on itself, a cross product points down, and
+    it takes away the area we counted twice. We do this on a map that keeps areas true, with distances in kilometres. Adding
+    up a hundred and ten triangles gives about two hundred and seventy thousand square kilometres. That's a little more
+    than the whole area of the United Kingdom, inside just one isobar. Going round clockwise instead flips every cross product,
+    and the sum comes out negative, with the same size. This sum is called the shoelace formula, and computers use it to
+    measure the area of any shape on a map. A sum like this, taken all the way round a loop, comes back in the curl video,
+    where it measures how strongly the wind circulates.
+  on_screen_eq:
+    latex: A=\tfrac12\sum_k(\mathbf r_k\times\mathbf r_{k+1})_z
+    vallis_eq: 'provenance only: shoelace formula'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.polygon_signed_area (new, F1)
+    params:
+      n_points: 110
+      projection: laea
+    also:
+    - fluidpy.geo.mapproj.forward('laea') (new, F2)
+    - fluidpy.geo.sphere.polygon_area
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_polygon_signed_area_* (new)
+    check: A3-A5 (shoelace = sphere < 0.1 %; sign by orientation; UK ratio 1.05-1.25)
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration: []
+  sentence_times:
+  - - 1791.85
+    - 1793.525
+  - - 1793.875
+    - 1800.3
+  - - 1800.65
+    - 1803.825
+  - - 1804.175
+    - 1811.875
+  - - 1812.225
+    - 1819.725
+  - - 1820.075
+    - 1827.55
+  - - 1827.9
+    - 1833.175
+  - - 1833.525
+    - 1840.3
+  - - 1840.65
+    - 1846.45
+  - - 1846.8
+    - 1854.525
+  - - 1854.875
+    - 1861.775
+  - - 1862.125
+    - 1870.6
+- id: s57_slope_normal
+  t:
+  - 1871.4
+  - 1931.55
+  status: new
+  changes: []
+  related: []
+  visual: 'Three.js terrain of the Alps from ETOPO 2022 60″ (A4), vertical ×3 (said), shaded; camera flight to the Rhône
+    at Sion (7.36°E, 46.23°N); a hillside patch on each bank: east edge (teal) and north edge (orange) arrows rising with
+    the slope; their cross product n (violet) stands out of the patch; ''normal'' keyword; on the north bank n leans south
+    (''faces south''), on the south bank north. Sound: soft whoosh on the flight.'
+  voiceover: 'Now the direction of the cross product, and a question about sunshine: which side of a valley gets more sun
+    in winter? Here are the Alps in three dimensions, built from a map of ground heights, with the heights drawn three times
+    taller so the slopes are easier to see. Let''s fly to the Rhône valley near the town of Sion, in Switzerland, which
+    runs almost exactly from east to west. To describe how a patch of hillside is tilted, take two short arrows along the
+    ground, one heading east and one heading north, each rising or dropping with the slope. Both arrows lie in the hillside,
+    so their cross product sticks straight out of it. This arrow is called the normal to the slope, and it tells us which
+    way the ground faces. On the north side of the valley, the normal leans towards the south, so that slope faces south.
+    On the south side of the valley, it leans towards the north.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.terrain.surface_normals (new, F3)
+    params:
+      dem: ETOPO 2022 60s Alps
+      vertical: 3
+    test: ../Fluid Dynamics/tests/geo/test_terrain.py (new)
+    check: T1
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration:
+  - vertical ×3 (said in the narration)
+  tool: 'three.js terrain (runner-up: Cesium drape, liked by the user — try both at build time)'
+  sentence_times:
+  - - 1871.4
+    - 1879.075
+  - - 1879.425
+    - 1888.65
+  - - 1889.0
+    - 1897.125
+  - - 1897.475
+    - 1908.475
+  - - 1908.825
+    - 1913.925
+  - - 1914.275
+    - 1920.025
+  - - 1920.375
+    - 1926.55
+  - - 1926.9
+    - 1930.75
+- id: s58_slope_sunshine
+  t:
+  - 1931.55
+  - 2003.325
+  status: new
+  changes: []
+  related:
+  - '#22 climate machine'
+  visual: Same terrain; a sun glyph 20° above the southern horizon with ŝ (gold); n̂ on three patches (flat, sunny, shady)
+    with live 'ŝ · n̂' values 0.34 / 0.58 / 0.05 (bars, teal / teal / slate); '+70 %' keyword; vineyard rows drawn on the
+    sunny bank (illustrative glyph).
+  voiceover: Now let's bring in the sun. At noon in late December, the sun stands only about twenty degrees above the southern
+    horizon. Draw a unit arrow, s hat, pointing towards the sun, and make the normal one unit long too. The sunshine falling
+    on each square metre of ground is the sun's strength times s hat dot n hat. On flat ground, s hat dot n hat is about
+    zero point three four. On the south facing slope, tilted about eighteen degrees towards the sun, it's about zero point
+    five eight, so it gets about seventy percent more sunshine than flat ground. On the north facing slope, it's only about
+    zero point zero five, so it gets almost no direct sun at all. That's why the vineyards near Sion grow on the sunny north
+    side of the valley, and why snow lasts much longer on the shady side. This leaves out the shadows that the mountains
+    cast on each other, but it captures the main effect. The climate machine video uses the same dot product to show why
+    the poles get less sunshine than the tropics.
+  on_screen_eq:
+    latex: \hat{\mathbf s}\cdot\hat{\mathbf n}
+    vallis_eq: 'provenance only: Lambert cosine law'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.terrain.insolation_factor (new, F4)
+    params:
+      sun_elev_deg: 20.3
+      sun_az_deg: 180
+    test: ../Fluid Dynamics/tests/geo/test_terrain.py (new)
+    check: T2 (0.343-0.348 / 0.55-0.62 / 0.00-0.10)
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration:
+  - vineyard rows are an illustrative glyph
+  sentence_times:
+  - - 1931.55
+    - 1933.7
+  - - 1934.05
+    - 1940.75
+  - - 1941.1
+    - 1947.475
+  - - 1947.825
+    - 1954.9
+  - - 1955.25
+    - 1960.275
+  - - 1960.625
+    - 1971.875
+  - - 1972.225
+    - 1979.675
+  - - 1980.025
+    - 1988.425
+  - - 1988.775
+    - 1994.9
+  - - 1995.25
+    - 2002.525
+- id: s59_shaded_relief
+  t:
+  - 2003.325
+  - 2043.275
+  status: new
+  changes: []
+  related:
+  - '#6 gradient'
+  visual: The Alps patch repaints cell by cell into a hillshade (grey ramp) lit from the north-west, then cross-fades to
+    the 21 Dec noon-sun shading where the north-facing slopes go dark.
+  voiceover: Do this for every patch of ground, and paint each one by how much sun it gets. The result is a shaded relief
+    map, where the mountains seem to stand up off the page. Mapmakers make them exactly this way, with a cross product for
+    the normal and a dot product with the light, usually shining from the north west, because our eyes read the hills best
+    that way. With the real December noon sun instead, the shady north facing slopes stand out at once. The slopes of the
+    ground east and north together make one arrow, the gradient of the height, which the gradient video builds step by step.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.terrain.hillshade (new, F4)
+    params:
+      azimuth: 315
+      altitude: 45
+    test: ../Fluid Dynamics/tests/geo/test_terrain.py (new)
+    check: T3
+    builder: movies/data/build_ch00_cross_product.py
+  exaggeration:
+  - vertical ×3 as in s57
+  sentence_times:
+  - - 2003.325
+    - 2008.55
+  - - 2008.9
+    - 2014.6
+  - - 2014.95
+    - 2027.0
+  - - 2027.35
+    - 2033.525
+  - - 2033.875
+    - 2042.475
+- id: s60_recap
+  t:
+  - 2043.275
+  - 2117.925
+  status: new
+  changes: []
+  related:
+  - '#3 cross product in physics'
+  visual: '''To sum up'' beat (house §2 row 6): one mini picture per sentence across the full width — the violet arrow on
+    the floor, the recipe pairs x ← (y, z), the parallelogram with its across bar, the along / across triangle, the right
+    hand + ''anticlockwise from the tip'', the zero / largest pair, the flip, Ian''s ⊗ / ⊙ towns, Ciarán''s triangle fan,
+    the Alps normal and sun. No headings.'
+  voiceover: 'To sum up, the cross product of two arrows is another arrow, at right angles to both. Each component leaves
+    out its own direction and uses the other two, following the cycle x, y, z, with a minus sign because the two parts turn
+    opposite ways. Its length is the first arrow''s length times the part of the second arrow across it: the area of their
+    parallelogram, and the size of a torque. The dot product uses the part along, and the cross product uses the part across.
+    Its direction is the axis of the turn, and seen from its tip, the turn is anticlockwise. It''s zero when the two arrows
+    lie along one line, and largest at right angles. Swapping the order flips the arrow. On weather maps, its sign tells
+    which side of a storm''s track a town is on. Adding up its triangles measures the area inside an isobar. And the normal
+    of a hillside, dotted with the sun''s direction, tells how much sunshine it gets. The next video shows how physics uses
+    the cross product, from a spinning wheel to the push that makes storms spin.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - recap glyphs reuse the movie's own data
+  sentence_times:
+  - - 2043.275
+    - 2049.425
+  - - 2049.775
+    - 2061.1
+  - - 2061.45
+    - 2070.75
+  - - 2071.1
+    - 2076.75
+  - - 2077.1
+    - 2083.575
+  - - 2083.925
+    - 2089.35
+  - - 2089.7
+    - 2092.3
+  - - 2092.65
+    - 2097.8
+  - - 2098.15
+    - 2102.925
+  - - 2103.275
+    - 2109.5
+  - - 2109.85
+    - 2117.125
+- id: s61_end
+  t:
+  - 2117.925
+  - 2141.175
+  status: new
+  changes: []
+  related:
+  - '#1b'
+  - '#3'
+  - '#6'
+  - '#8'
+  - '#22'
+  - '#45'
+  visual: 'Series end card (house §3, maths ending): six faint related thumbnails along the top (#1b alternating tensor,
+    #3 uses, #6 gradient, #8 curl, #22 climate machine, #45 tropical cyclones) — pictures only, no slugs or URLs; ''a series
+    of maths tutorials'' 68 px, ''atmospheric science · meteorology · fluid dynamics'' 54 px; notebook icon ''cross product
+    notebook''; stacked icons ''notebooks for the other maths concepts''; 2.5-s silent hold, music fades.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students
+    of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for this
+    cross product, and the notebooks for the other maths concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative end card
+  sentence_times:
+  - - 2117.925
+    - 2124.125
+  - - 2124.475
+    - 2132.525
+  - - 2132.875
+    - 2140.875
+honesty_notes:
+- Every cross product is drawn as a violet arrow at right angles to both inputs; the right hand is always a RIGHT hand;
+  directions checked by rhr.json (v4) and new CHECK rows X1-X7.
+- Clockwise / anticlockwise is always said with its viewpoint ('seen from above', 'seen from its tip').
+- 's21a: the two mini-torques are exact components (6 and −1 N m); their signs are the turn senses, checked in CHECK X5.'
+- 's22d: the ball''s spin-up is illustrative; only the torque vector is computed.'
+- Application numbers (Ian side signs, Ciarán area, Alps sunshine) come from the builder's CHECK rows M1-M7, A1-A5, T1-T3;
+  if a CHECK fails the narration follows the data and the dry run is repeated.
+- Alps heights drawn ×3, said in the narration; the inundation figure is the NHC report's, cited.
+- Hurricane right-side rule stated as 'usually', and the left side as 'safer, never safe'.
+quiz_hook: 'A storm moves north (d = (0, 50, 0) km). A town is at r = (30, 10, 0) km from the centre. Which side is it on?
+  ((d × r)_z = 0·10 − 50·30 = −1500 < 0: points down, so the town is on the right.)'
+data_needs: data_needs.md in this folder

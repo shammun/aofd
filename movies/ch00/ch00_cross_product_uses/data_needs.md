@@ -40,3 +40,43 @@ hashed calls in the v4 manifest). If a CHECK fails, the narration follows the da
   then loses one sentence; re-measure).
 - s46a's "evening of the twenty seventh of October" = 18 UTC over the North Atlantic (evening in western Europe,
   afternoon in North America); the scout confirms the wording against the GOES-19 terminator in the frame.
+
+
+## F. Additions 2026-10-28 (research §1b/§1c, §4–§7)
+
+### F1. Values flagged unverified in research §7, now computed (CHECK rows; the builder re-asserts them)
+| CHECK | Value on screen / spoken | fluidpy call | Result (director run 2026-10-28) | Scene |
+|---|---|---|---|---|
+| E1 | ≈ 465 m/s ground speed at the equator | `fluidpy.geo.vectors.cross([0, 0, frames.OMEGA], [constants.EARTH_RADIUS, 0, 0])`, Ω = 7.292115e-5 s⁻¹, a = 6 371 000 m | (0, 464.58, 0) m/s → "about 465" | s25b |
+| E1b | ≈ 329 m/s at 45°N | same with r = a (cos 45°, 0, sin 45°) | 328.51 m/s → "about 329" (v4 wording kept) | s25b |
+| E2 | inertial period ≈ 17 h at 45° | `fluidpy.core.gfd.inertial_period(fluidpy.geo.frames.coriolis_parameter(radians(45)))` | 60 927 s = 16.92 h → "about seventeen hours" (f = 1.0313e-4 s⁻¹) | s30 |
+| E2b | (not spoken) half a pendulum day | 2π / (Ω sin 45°) / 2 | 33.85 h / 2 = 16.92 h, consistent | — |
+| E3 | Ekman transport 90° right of τ at 45°N, 90° left at 45°S | `fluidpy.core.gfd.ekman_transport(0.1, 0.0, 1025, ±f45)` | (0, −0.946) m²/s at 45°N, (0, +0.946) at 45°S for τ = 0.1 N/m² east (magnitude not spoken) | s46b |
+| E3b | surface current 45° to the right of τ (ideal constant K) | `fluidpy.core.gfd.ekman_surface(0, 0.1, 0, 1025, 0.05, f45)` | −45.0° (45° to the right), asserted 2026-10-28 | s46b |
+| E4 | upwelling: Ekman transport · offshore normal > 0 on the D2 day; the coastal SST is colder than 100 km offshore | `ekman_transport` + `fluidpy.geo.vectors.dot` on the D2/D3 fields | to compute | s46c |
+
+The 1 TW wind-work figure is not in this movie (it is in 0.1b).
+
+### F2. New downloads (through `fluidpy.data.fetch()` and the disk guard; G: only)
+| Id | Dataset | Subset | Size | Licence | Scene |
+|---|---|---|---|---|---|
+| D2 | NOAA OISST v2.1 daily (NCEI THREDDS/OPeNDAP, `engine="pydap"`), new registry key `OISST-V21-DAILY` | one clear summer upwelling day off California (the scout picks it from Jun–Aug 2024 by the coastal-minus-offshore SST difference), 30–44°N, 130–115°W, 0.25° | < 2 MB | NOAA, public domain (cite Huang et al. 2021, J. Climate 34, 2923) | s46c |
+| D3 | ERA5 (ARCO-ERA5, open) 10-m wind or the mean surface stress (`metss`, `mntss`), same day and box | daily mean | < 2 MB | Copernicus licence (credit line as v4) | s46c |
+| D4 (optional) | NOAA CUTI daily index, 31–47°N (Jacox et al. 2018) | same day | < 1 MB | NOAA ERD, open | s46c (cross-check of the sign) |
+
+**Cited facts (the data-scout confirms the wording):**
+- The CUTI method, "cross-shore Ekman transport": Jacox, Edwards, Hazen & Bograd (2018), JGR Oceans 123, 7332–7350,
+  doi:10.1029/2018JC014187.
+- Northerly winds off California in spring and summer.
+- Upwelling supports high productivity ("rich in fish"): a NOAA or peer-reviewed source.
+
+### F3. Moved to #2 (orchestrator 2026-10-28)
+- v4 s03 door, s20 torque and s21 torque axis are now in #2 (the torque anchor).
+- This movie keeps a short `s04_torque_recap`, which reuses `torque.json` (no new data) and adds the torque-vs-joule
+  misconception from research §6.
+
+### F4. Vallis page used on screen
+- (5.191a) M_E = −(1/f) k × τ_T, rendered as `chapters/pages/ch05/p224.png` (printed p. 204) and read from the image
+  on 2026-10-28.
+- It is shown on screen without its number (house §5).
+- The fluidpy function returns the volume transport (M_E / ρ₀). Only the direction is used on screen.
