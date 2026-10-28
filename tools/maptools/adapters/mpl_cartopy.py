@@ -85,6 +85,104 @@ def _cartostyle(job, W, H, dpi):
     return cartostyle, st
 
 
+def _layer_file(lay, fr):
+    """The prepared file of a layer for this frame (per-frame ``files`` or one static ``file``)."""
+    if "files" in lay:
+        return lay["files"][min(fr.get("_i", 0), len(lay["files"]) - 1)]
+    return lay.get("file")
+
+
+def draw_layers(job, fr, ax, cs, W, H, dpi):
+    """Symbol layers through tools/maptools/cartostyle.py, in the cartography priority order.
+
+    Drawing: vectors (barbs/arrows) -> fronts (WMO/NWS symbols, oriented by temperature). Labels: H/L centres ->
+    promoted (story) places -> isobar values -> other places; every label class avoids the ones placed before it
+    and front symbols; nothing is forced (dropped labels go to the notes). The style preset is
+    ``style.cartostyle`` (movie | notebook | print), default notebook, sized to this render."""
+    import cartopy.crs as ccrs
+
+    carto = _cartostyle(job, W, H, dpi)
+    if carto is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import cartostyle
+
+        st = cartostyle.style("notebook")
+        st.size_px, st.dpi, st.content_box, st.caption_band = (W, H), float(dpi), None, None
+        carto = (cartostyle, st)
+    cmod, st = carto
+    notes = job.setdefault("_notes", [])
+    pc = ccrs.PlateCarree()
+    front_boxes, obstacles = [], []
+    by_type = {}
+    for lay in job["layers"]:
+        by_type.setdefault(lay["type"], []).append(lay)
+    for lay in by_type.get("vectors", []):
+        g = xr.open_dataset(_layer_file(lay, fr))
+        kw = {}
+        if lay.get("density"):
+            kw["regrid"] = tuple(lay["density"])
+        if lay.get("color"):
+            kw["color"] = lay["color"]
+        if lay.get("style", "barbs") == "arrows":
+            ax.quiver(g.lon.values, g.lat.values, g.u.values, g.v.values, transform=pc,
+                      regrid_shape=kw.get("regrid", (20, 12)), color=kw.get("color", st.colors["barb"]),
+                      width=0.0022, zorder=5, pivot="middle")
+        else:
+            cmod.wind_barbs(ax, g.lon.values, g.lat.values, g.u.values, g.v.values, st,
+                            regrid=kw.get("regrid"), **({"color": kw["color"]} if "color" in kw else {}))
+    for lay in by_type.get("fronts", []):
+        temp = None
+        if lay.get("temperature"):
+            t = xr.open_dataset(lay["temperature"])["t"]
+            temp = (t.lon.values, t.lat.values, t.values)
+        used, boxes = cmod.draw_fronts(ax, lay["file"], st, temperature=temp)
+        front_boxes += boxes
+        notes.append(f"fronts drawn (kind, flip): {used}")
+    for lay in by_type.get("extrema", []):
+        gj = json.loads(Path(_layer_file(lay, fr)).read_text(encoding="utf-8"))
+        centres = [{"kind": q["properties"]["kind"], "lon": q["geometry"]["coordinates"][0],
+                    "lat": q["geometry"]["coordinates"][1], "value": q["properties"]["value"]} for q in gj["features"]]
+        rep = cmod.mark_extrema(ax, centres, st, obstacles=obstacles, letters=lay.get("letters"))
+        obstacles = rep.boxes
+        if rep.dropped:
+            notes.append(f"H/L dropped: {rep.dropped}")
+    pts = []
+    for lay in by_type.get("points", []):
+        gj = json.loads(Path(lay["file"]).read_text(encoding="utf-8"))
+        for q in gj["features"]:
+            pl = cmod.Place(q["properties"]["name"], *q["geometry"]["coordinates"][:2],
+                            rank=float(q["properties"]["rank"]), kind=q["properties"]["kind"])
+            pl.promoted = bool(q["properties"].get("promoted"))
+            pts.append((lay, pl))
+
+    def place(group, budget, leader):
+        nonlocal obstacles
+        for lay in {id(l): l for l, _ in group}.values():
+            pl = [p for l2, p in group if l2 is lay]
+            if lay.get("label", True) is False:
+                for p in pl:
+                    ax.plot(p.lon, p.lat, "o", ms=st.px(st.line_px["marker"]), mfc=st.colors.get("marker", st.ink),
+                            mec=st.halo_color, transform=pc, zorder=9)
+                continue
+            rep = cmod.label_points(ax, pl, st, obstacles=obstacles, label_obstacles=front_boxes,
+                                    marker=lay.get("marker", True), size_key=lay.get("size_key"), leader=leader,
+                                    max_labels=min(budget, int(lay.get("max_labels", st.max_place_labels))))
+            budget -= len(rep.placed)
+            obstacles = rep.boxes
+            if rep.dropped:
+                notes.append(f"places dropped: {rep.dropped[:12]}")
+        return budget
+
+    budget = st.max_place_labels
+    budget = place([x for x in pts if x[1].promoted], budget, True)
+    c = job["style"].get("contours") or {}
+    if cs is not None and (c.get("labels") or job.get("labels")):
+        st.colors = dict(st.colors, contour=c.get("color", "#222222"))
+        rep = cmod.isobar_labels(ax, cs, st, obstacles=obstacles + front_boxes, fmt="{:g}")
+        obstacles = [b for b in rep.boxes if b not in front_boxes]
+    place([x for x in pts if not x[1].promoted], budget, False)
+
+
 def render_map(job, fr, out: Path, texture: bool = False):
     import cartopy.crs as ccrs
 
@@ -121,12 +219,16 @@ def render_map(job, fr, out: Path, texture: bool = False):
                   origin="lower", cmap="gray", alpha=float(style.get("shade_alpha", 0.35)), transform=pc, zorder=2,
                   interpolation="bilinear")
         del sh
+    layers = job.get("layers") or []
+    cs = None
     if fr.get("contours"):
         c = style["contours"]
         cs = ax.contour(f.lon, f.lat, f.values, levels=fr["contour_levels"], colors=c.get("color", "#222222"),
                         linewidths=c.get("width", 0.8), transform=pc, zorder=3)
         carto = _cartostyle(job, W, H, dpi)
-        if carto is not None and (c.get("labels") or job.get("labels")):
+        if layers and not texture:
+            pass                                    # labelled after the symbol layers (priority order), below
+        elif carto is not None and (c.get("labels") or job.get("labels")):
             # opt-in (style.cartostyle: movie|notebook|print|true): collision-free in-line labels with halos
             cmod, st = carto
             st.colors = dict(st.colors, contour=c.get("color", "#222222"))
@@ -134,6 +236,8 @@ def render_map(job, fr, out: Path, texture: bool = False):
         elif c.get("labels") or job.get("labels"):
             ax.clabel(cs, fmt="%g", fontsize=9)
     draw_overlays(ax, job.get("overlays"), pc, style)
+    if layers and not texture:
+        draw_layers(job, fr, ax, cs, W, H, dpi)
     if job.get("labels") and not texture:
         ax.set_title(f"{job['long_name']} [{job['units']}]  {fr['label']}", fontsize=11)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -155,9 +259,13 @@ def main():
             shutil.copyfile(fr["terrarium_png"], out.with_name(out.stem + "_terrarium.png"))
             outs += [str(out), str(out.with_name(out.stem + "_terrarium.png"))]
             continue
+        fr["_i"] = len(outs)
         render_map(job, fr, out, texture=(kind == "texture"))
         outs.append(str(out))
-    _job.done(job, tool, f"matplotlib {matplotlib.__version__}, cartopy {cartopy.__version__}", outs)
+    notes = job.get("_notes", [])
+    if kind == "texture" and job.get("layers"):
+        notes.append("symbol layers are not drawn on textures (labels never drape; draw them as billboards)")
+    _job.done(job, tool, f"matplotlib {matplotlib.__version__}, cartopy {cartopy.__version__}", outs, notes)
 
 
 if __name__ == "__main__":

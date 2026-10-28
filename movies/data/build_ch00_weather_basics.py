@@ -967,11 +967,38 @@ def main() -> int:
         [round(float(gl_low.msl_min) / 100, 1), float(gl_low.lat), float(gl_low.lon)], [934.9, 14.5, 162.5], 0.3)
     row("D11", "GFS highest (|lat| ≤ 70, orography ≤ 500 m) = the Siberian high 1040.1 hPa near 56N 57E", [-float(gl_hi.msl_min) / 100, float(gl_hi.lat), float(gl_hi.lon)], [1040.1, 56.0, 57.25], 0.3)
     rng("D11", "GFS North Atlantic low about as deep as Ciarán (950-960 hPa)", float(gl_na.msl_min) / 100, 950, 960)
-    files["latest_map.json"] = {"source": "NOAA NCEP GFS 0.25° analysis 2026-10-27T00 UTC ('a weather-service analysis')",
+    row("D11", "s42 spoken 'about nine hundred and thirty-five' and 'about nine hundred and fifty-five' = the rounded GFS lows",
+        [round(float(gl_low.msl_min) / 100), round(float(gl_na.msl_min) / 100)], [935, 955], 0)
+    g1 = gm[::4, ::4] / 100                                     # 1° view of the 0.25° analysis (every 4th point)
+    g1lat, g1lon = glat2[::4], glon2[::4]
+    truth("D11", "GFS 1° display grid: lat −90…90 ascending, lon −180…179", bool(g1lat[0] == -90 and g1lat[-1] == 90 and g1lon[0] == -180), [float(g1lat[0]), float(g1lon[-1])])
+    lh, lb = bin_pack("latest_gfs", [("msl", ["lat", "lon"], g1, "hPa", "GFS 0.25° analysis MSLP 2026-10-27T00 UTC, every 4th point (1°)")],
+                      {"lat": r6(g1lat, 2), "lon": r6(g1lon, 2)}, {"grid": "1° (every 4th 0.25° point), lat ascending, lon −180…179"})
+    bins["latest_gfs.bin"] = lb
+    gfs_iso = contours(g1, g1lat, g1lon, np.arange(936.0, 1061.0, 4.0), periodic=True, nd=1)
+    # ETOPO 2022 60″ Tibet subset (captests fetch via fluidpy.data.fetch): 4′ block means for the s39 relief
+    et = xr.open_dataset(Path("G:/Geophysical Fluid Dynamics/aofd-data/raw/ETOPO2022-60s/etopo2022_60s_tibet_25-42N_72-105E.nc"))
+    ez = et.z.values.astype(float)
+    ny4, nx4 = ez.shape[0] // 4, ez.shape[1] // 4
+    ez4 = ez[:ny4 * 4, :nx4 * 4].reshape(ny4, 4, nx4, 4).mean(axis=(1, 3))
+    elat = et.lat.values[:ny4 * 4].reshape(ny4, 4).mean(1)
+    elon = et.lon.values[:nx4 * 4].reshape(nx4, 4).mean(1)
+    rng("s39", "s39 ETOPO 2022 Tibet subset: highest 1′ cell > 8000 m (Himalaya)", float(np.nanmax(ez)), 8000, 8900)
+    rng("s39", "s39 ETOPO 2022: plateau median height (31-35N 80-95E) 4000-5500 m",
+        float(np.nanmedian(ez[(et.lat.values[:, None] > 31) & (et.lat.values[:, None] < 35) & (et.lon.values[None, :] > 80) & (et.lon.values[None, :] < 95)])), 4000, 5500)
+    th, tb = bin_pack("tibet_etopo", [("z", ["lat", "lon"], ez4, "m", "ETOPO 2022 60″ surface height, 4′ block means (Tibet 25-42N 72-105E)")],
+                      {"lat": r6(elat, 4), "lon": r6(elon, 4)}, {"grid": "4′ block means, lat ascending", "source": "NOAA NCEI ETOPO 2022 (public domain)",
+                                                                 "vertical_exaggeration_in_movie": 30})
+    files["tibet_etopo.json"] = th
+    bins["tibet_etopo.bin"] = tb
+    heavy.append({"fn": "builder: 4×4 block mean of ETOPO 2022 60″ (Tibet subset)", "scene": "s39", "data": "data/tibet_etopo.bin",
+                  "eq": "relief for the s39 close-up (vertical ×30, said in the narration)", "params": {"input_sha256": sha_file(Path("G:/Geophysical Fluid Dynamics/aofd-data/raw/ETOPO2022-60s/etopo2022_60s_tibet_25-42N_72-105E.nc"))},
+                  "output_sha256": parity_hash(ez4)})
+    files["latest_map.json"] = {**lh, "isobars": gfs_iso,"source": "NOAA NCEP GFS 0.25° analysis 2026-10-27T00 UTC ('a weather-service analysis')",
                                 "deepest_low": {"lat": r6(float(gl_low.lat), 2), "lon": r6(float(gl_low.lon), 2), "hPa": r6(float(gl_low.msl_min) / 100, 1), "label": "typhoon, western Pacific (unnamed)"},
                                 "siberian_high": {"lat": r6(float(gl_hi.lat), 2), "lon": r6(float(gl_hi.lon), 2), "hPa": r6(-float(gl_hi.msl_min) / 100, 1)},
                                 "north_atlantic_low": {"lat": r6(float(gl_na.lat), 2), "lon": r6(float(gl_na.lon), 2), "hPa": r6(float(gl_na.msl_min) / 100, 1)},
-                                "note": "not used by the v1 script (no scene); kept for a later pass"}
+                                "note": "s42 beat (two sentences added in stage 2): GFS analysis on the globe; bin latest_gfs.bin (1°)"}
 
     files["climatology.json"]["isobars"] = contours(mp180, wlat, lon180, np.arange(996.0, 1033.0, 4.0), periodic=True, nd=1)
 
@@ -1056,10 +1083,13 @@ def main() -> int:
             "Imagery from the NASA Worldview application, part of NASA ESDIS (MODIS Aqua/Terra and VIIRS Corrected Reflectance, NASA LANCE).",
             "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli, NASA GSFC).",
             "Made with Natural Earth (public domain).",
-            "U.S. Standard Atmosphere 1976 (composition, Table 3); NOAA GML global-mean CO2 2023."],
+            "U.S. Standard Atmosphere 1976 (composition, Table 3); NOAA GML global-mean CO2 2023.",
+            "ETOPO 2022 Global Relief Model, NOAA NCEI (public domain), doi:10.25921/fd45-gt74.",
+            "CesiumJS (Apache-2.0), no Cesium ion data.",
+            "Music and sound effects: tools/sound (procedural synthesis, our own code, CC0-1.0)."],
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
         "narration_changes_from_data": narration_changes,
-        "inputs_sha256": inputs, "assets": assets,
+        "inputs_sha256": inputs, "assets": assets, "render_assets": render_assets(data_hashes),
         "data_files": data_hashes, "checks": rows, "physics": entries, "physics_heavy": heavy,
     }
     mpath = OUT / "manifest.json"
@@ -1069,6 +1099,35 @@ def main() -> int:
     for k, val in data_hashes.items():
         print(f"  {k}  sha256 {val[:16]}…  {(DATA / k).stat().st_size / 1e3:.1f} kB")
     return 0
+
+
+def render_assets(data_hashes: dict) -> dict:
+    """Stage-2 render products made outside this builder (recorded by hash; the composition reads them):
+    cartostyle map layers (tools/movie_wb/make_maps.py), the CesiumJS Tibet shot (tools/movie_wb/cesium_shots.py) and the
+    soundtrack (tools/movie_wb/sound_mix.py → tools/sound/mix.py)."""
+    pub = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/v2/public")
+    out = {}
+    anc = DATA / "cesium_tibet_anchors.json"
+    if anc.exists():
+        data_hashes["cesium_tibet_anchors.json"] = sha_file(anc)
+    mj = pub / "wb_maps.json"
+    if mj.exists():
+        m = json.loads(mj.read_text(encoding="utf-8"))
+        out["maps"] = {"tool": "cartopy + MetPy + tools/maptools/cartostyle.py (movie preset), tools/movie_wb/make_maps.py",
+                       "files_sha256": m.get("files"), "audit": {k: (v.get("audit") if isinstance(v, dict) else None) for k, v in m.items() if k in ("sat", "brest")},
+                       "t850_layer_audits": {k: v.get("audit") for k, v in (m.get("t850", {}).get("layers") or {}).items()}}
+    cr = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/v2/cesium/report.json")
+    if cr.exists():
+        out["cesium"] = {"tool": "CesiumJS (no Ion), tools/movie_wb/cesium_shots.py", "report": json.loads(cr.read_text(encoding="utf-8")),
+                         "tibet": "ETOPO 2022 4′ ×30 + Blue Marble NG crop; frames public/cesium_tibet/*.jpg"}
+    for d in ("sound2", "sound"):
+        sj = Path(f"G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/v2/{d}/sound.json")
+        if sj.exists():
+            sd = json.loads(sj.read_text(encoding="utf-8"))
+            out["sound"] = {"run": str(sj.parent), "music": sd.get("music"), "mix": sd.get("mix"), "warnings": sd.get("warnings"),
+                            "effects": [{k: e.get(k) for k in ("name", "scene", "start_s", "duration_s", "final_level_lufs", "voice_margin_lu", "licence")} for e in sd.get("effects", [])]}
+            break
+    return out
 
 
 if __name__ == "__main__":

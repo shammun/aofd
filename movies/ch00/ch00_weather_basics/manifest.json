@@ -5,7 +5,7 @@
  "fluidpy": {
   "repo": "../Fluid Dynamics",
   "commit": "b2857bcc26e3296716de52452e7e844f2ab04df5",
-  "dirty_tracked": false,
+  "dirty_tracked": true,
   "moist_py_tracked": true,
   "moist_py_sha256": "12828309d2ed9357e2406a8e057a4a40835a0b869f68a0ef14749e3e61d99e27",
   "atmos_py_tracked": true,
@@ -74,7 +74,10 @@
   "Imagery from the NASA Worldview application, part of NASA ESDIS (MODIS Aqua/Terra and VIIRS Corrected Reflectance, NASA LANCE).",
   "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli, NASA GSFC).",
   "Made with Natural Earth (public domain).",
-  "U.S. Standard Atmosphere 1976 (composition, Table 3); NOAA GML global-mean CO2 2023."
+  "U.S. Standard Atmosphere 1976 (composition, Table 3); NOAA GML global-mean CO2 2023.",
+  "ETOPO 2022 Global Relief Model, NOAA NCEI (public domain), doi:10.25921/fd45-gt74.",
+  "CesiumJS (Apache-2.0), no Cesium ion data.",
+  "Music and sound effects: tools/sound (procedural synthesis, our own code, CC0-1.0)."
  ],
  "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
  "narration_changes_from_data": [
@@ -115,6 +118,213 @@
   "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
   "movies/ch00/ch00_cross_product_why/data/real/ne_lines_50m.json": "a2d35492649ce4a57679a297b32dbcbe9728abd8dcd9408cee79ab15fca21ae5"
  },
+ "render_assets": {
+  "maps": {
+   "tool": "cartopy + MetPy + tools/maptools/cartostyle.py (movie preset), tools/movie_wb/make_maps.py",
+   "files_sha256": {
+    "wb_map_brest.png": "5f471e40e2e4160a35c918d2d129b871f958a9bd64ebe88a7f878d3cbff2cbe6",
+    "wb_map_sat_base.png": "c1b1d84a0f5da98072df44256af99be1e7391859b35420afe4c0dd29cc3f38e5",
+    "wb_map_sat_iso.png": "320628d881a1d837348988f24df24ec968431450ac77c4bd2f97a4d23e5b35e4",
+    "wb_map_sat_marks.png": "bc064bcfb9ca153aea5967906f3d38162c0c1218f4b3d657acc692a9ac8a1571",
+    "wb_map_t850_base.png": "e83517a85d2df889ff20589117582db9a1f2bbb752aeb91a5feed58de3ea27ef",
+    "wb_map_t850_lines.png": "c7e8690a15062fdd1097d4d5b4f8fd502d9e351b2f73a68613dccd17d259b0af",
+    "wb_map_t850_masses.png": "b18148e2f1561ebd64c04e6fb7fe84cfae8c4d631187beda6eaf2b28e633dff8",
+    "wb_map_t850_places.png": "e888800e8a2003125eaf3992b5550bed4bda05640dc8fc35fbf6852147bcc7bf",
+    "wb_map_t850_symbols.png": "67c4d2a46149b8b29d0421894328a4a3aa03254a3580a761ce00d86e8cf4c929",
+    "wb_map_t850_transect.png": "a2259705114e15db94af7d23154011a51355ec7b4458abd93269231c1be9f02a",
+    "wb_map_t850_wind.png": "52fd06ba15fa4e73b2a78b3a49358f2843157e4b2ba968d4f2b407da5ba10d57"
+   },
+   "audit": {
+    "sat": [],
+    "brest": []
+   },
+   "t850_layer_audits": {
+    "lines": [],
+    "symbols": [],
+    "wind": [],
+    "transect": [],
+    "masses": [],
+    "places": []
+   }
+  },
+  "cesium": {
+   "tool": "CesiumJS (no Ion), tools/movie_wb/cesium_shots.py",
+   "report": {
+    "tibet": {
+     "frames": 471,
+     "s_per_frame": 0.248,
+     "renderer": "ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11) | Google Inc. (NVIDIA)",
+     "errors": []
+    }
+   },
+   "tibet": "ETOPO 2022 4′ ×30 + Blue Marble NG crop; frames public/cesium_tibet/*.jpg"
+  },
+  "sound": {
+   "run": "G:\\Geophysical Fluid Dynamics\\aofd-data\\scratch\\movies\\ch00_weather_basics\\v2\\sound2",
+   "music": {
+    "style": "air-flowing + storm-tense (cross-faded)",
+    "key": "G major (Lydian colour)",
+    "tempo": "84 bpm, eighth-note arpeggio",
+    "description": "storm-tense during [(2126.05, 2295.25)] s (s54-s59), air-flowing elsewhere",
+    "suits": "weather basics, winds, the atmosphere in motion, fronts, jets",
+    "source": "tools/sound/styles.py (procedural synthesis, our own code)",
+    "licence": "CC0-1.0",
+    "seed": 11,
+    "bed_lufs": -28.0,
+    "duck_db": 5.0,
+    "tail_s": 2.5
+   },
+   "mix": {
+    "target_lufs": -16.0,
+    "true_peak_limit_dbtp": -1.5,
+    "premix_lufs_ffmpeg": -13.15,
+    "integrated_lufs": -16.01,
+    "true_peak_dbtp": -2.75,
+    "ffmpeg_ebur128": {
+     "integrated_lufs": -16.0,
+     "true_peak_dbtp": -2.7
+    }
+   },
+   "warnings": [],
+   "effects": [
+    {
+     "name": "whoosh",
+     "scene": "s01_hook",
+     "start_s": 11.15,
+     "duration_s": 1.6,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 15.5,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "whoosh",
+     "scene": "s21_balloon_pressure",
+     "start_s": 772.9,
+     "duration_s": 2.2,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 14.5,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "stream",
+     "scene": "s28_saturation",
+     "start_s": 1055.55,
+     "duration_s": 20.0,
+     "final_level_lufs": -29.0,
+     "voice_margin_lu": 13.7,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "wind_gentle",
+     "scene": "s35_why_wind",
+     "start_s": 1364.725,
+     "duration_s": 18.88,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 14.2,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "whoosh",
+     "scene": "s41_msl_isobars",
+     "start_s": 1647.745,
+     "duration_s": 1.6,
+     "final_level_lufs": -29.0,
+     "voice_margin_lu": 17.8,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "whoosh",
+     "scene": "s42_highs_lows",
+     "start_s": 1698.235,
+     "duration_s": 1.6,
+     "final_level_lufs": -29.0,
+     "voice_margin_lu": 18.0,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "rain_light",
+     "scene": "s43_lows_cloudy",
+     "start_s": 1729.825,
+     "duration_s": 5.7,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 11.3,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "wind_gentle",
+     "scene": "s44_round_lows",
+     "start_s": 1752.225,
+     "duration_s": 22.5,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 13.9,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "thunder_far",
+     "scene": "s47_cold_front",
+     "start_s": 1892.05,
+     "duration_s": 2.5,
+     "final_level_lufs": -27.0,
+     "voice_margin_lu": 16.1,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "rain_heavy",
+     "scene": "s47_cold_front",
+     "start_s": 1893.06,
+     "duration_s": 3.06,
+     "final_level_lufs": -29.0,
+     "voice_margin_lu": 11.3,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "rain_light",
+     "scene": "s48_warm_front",
+     "start_s": 1933.27,
+     "duration_s": 2.83,
+     "final_level_lufs": -29.0,
+     "voice_margin_lu": 16.8,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "whoosh",
+     "scene": "s54_ciaran_intro",
+     "start_s": 2126.05,
+     "duration_s": 2.4,
+     "final_level_lufs": -27.0,
+     "voice_margin_lu": 15.1,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "wind_gusty",
+     "scene": "s55_ciaran_maps",
+     "start_s": 2162.525,
+     "duration_s": 20.35,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 11.2,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "surf",
+     "scene": "s56_brest_pressure",
+     "start_s": 2192.645,
+     "duration_s": 9.03,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 12.1,
+     "licence": "CC0-1.0"
+    },
+    {
+     "name": "wind_gusty",
+     "scene": "s58_brest_cold_front",
+     "start_s": 2248.995,
+     "duration_s": 11.55,
+     "final_level_lufs": -28.0,
+     "voice_margin_lu": 12.1,
+     "licence": "CC0-1.0"
+    }
+   ]
+  }
+ },
  "data_files": {
   "basics.json": "a3a48154a09ddad5678e2321ae187d0340bc4f16e1fd55eb9539c84c2c7f358e",
   "atmos.json": "57f94dc775a627ae2c471789159f6fd500c9753979ca7285a6671d1fa4cf9050",
@@ -130,13 +340,17 @@
   "fronts.json": "9b4ec91407a9bf3980b8c26cbeb449e5326fbf9738137744a7240ffca1dd3d58",
   "ciaran_850.json": "4bc7a8b0c9d26b3dcd5a5733910b1ffb2bada6465ffd71b31bbfb2dfc30e5111",
   "climatology.json": "0f616347aec4d7c70ba78902d3b40bff150309a0b01c3a076619e7b1822d3f62",
-  "latest_map.json": "933c3821f6bce581a36dc6716d04158b28731a65301d89a948bcf23340214c60",
+  "tibet_etopo.json": "fc88da2643e139c1b0f978f560be3b8e61015243749f93a9400c95171c863d73",
+  "latest_map.json": "aa107cd250e8f27159b48c6815a5b81de7e759a26655e38b879410adae4ec80c",
   "lines.json": "c5ad556b70fe48ef3ac815145953055a917ed89e79c92712507542e0cabb60e1",
   "title.json": "04121568f55b9cced4d5d87bd1e44f03d24ca091d2fef03d7ffcbd1935e4a8ea",
   "global_20231102T12.bin": "7dc32374e0bace11dff550556b7e540f1bd1ec39f7d8b4b2d7b634671518b12b",
   "ciaran_hourly.bin": "3fdad96e5663c43b92767d3b701cfed3217cac0e583eb6814350a0a6cd308f59",
   "ciaran_850.bin": "b90bf0cc0b20d5a64e61a74b9d0bcea3cddc6ba5d5c9d07f0944241fb2323251",
-  "climatology.bin": "c1f2517613513582262db79d4b2c8791d9fdce99d70dfc1a6834a5b36a2bb051"
+  "climatology.bin": "c1f2517613513582262db79d4b2c8791d9fdce99d70dfc1a6834a5b36a2bb051",
+  "latest_gfs.bin": "c250db3b4d72d0ad51c8242edc282fd1b9be2d2494c7261b2c50add1a8f0da7a",
+  "tibet_etopo.bin": "dfd09a6279375a1c8f300c5123d3a94dca28d1226c0180a6b78f38e50de1d997",
+  "cesium_tibet_anchors.json": "e3a99fe65a6580548797d377efa6341a4831b54dfc48612153e02a8aba2ca54a"
  },
  "checks": [
   {
@@ -1829,6 +2043,51 @@
     954.525899
    ],
    "ref": "[950, 960]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "D11",
+   "name": "s42 spoken 'about nine hundred and thirty-five' and 'about nine hundred and fifty-five' = the rounded GFS lows",
+   "value": [
+    935.0,
+    955.0
+   ],
+   "ref": [
+    935.0,
+    955.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "D11",
+   "name": "GFS 1° display grid: lat −90…90 ascending, lon −180…179",
+   "value": [
+    -90.0,
+    179.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "s39",
+   "name": "s39 ETOPO 2022 Tibet subset: highest 1′ cell > 8000 m (Himalaya)",
+   "value": [
+    8157.356445
+   ],
+   "ref": "[8000, 8900]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "s39",
+   "name": "s39 ETOPO 2022: plateau median height (31-35N 80-95E) 4000-5500 m",
+   "value": [
+    4950.075439
+   ],
+   "ref": "[4000, 5500]",
    "tol": null,
    "pass": true
   }
@@ -4124,6 +4383,16 @@
     "nsteps": 48
    },
    "output_sha256": "455de77197377c77d6b0e8b3f0079814128afded83385a4dd5f663369d14e8d6"
+  },
+  {
+   "fn": "builder: 4×4 block mean of ETOPO 2022 60″ (Tibet subset)",
+   "scene": "s39",
+   "data": "data/tibet_etopo.bin",
+   "eq": "relief for the s39 close-up (vertical ×30, said in the narration)",
+   "params": {
+    "input_sha256": "73b1ce33cef86077ecf1b6d75be84e1a067ed945f2300bdb3b14885688e21934"
+   },
+   "output_sha256": "075937b1134e4cce4e9871cb18fd96e2cb041cc1f4a34e5f5bb71239e5ccb44b"
   }
  ]
 }

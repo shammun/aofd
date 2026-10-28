@@ -6,6 +6,9 @@
 * Regional with ``camera``: a pyvista surface warped by the field (metres x ``camera.exaggeration``), lon/lat scaled to
   km, coloured with the LUT and lit; camera azimuth/elevation as in the recipe.
 * Regional without camera: GeoVista planar projection (``crs`` from the recipe, e.g. ``+proj=robin``).
+* Texture route (``style.texture: field``, or a data item with ``role: texture``/``underlay`` such as a GIBS
+  true-colour equirectangular JPEG): an RGB cell mesh via ``add_texture`` (``add_base_layer(texture=)`` crashes with
+  pyvista 0.49). ``style.show_field: false`` hides the scalar field under a texture (default when a texture is given).
 GeoVista's own Natural Earth downloader and texture fetchers are NOT used (no network): coasts come from the prepared
 overlays. Offscreen rendering with a fixed window size; anti-aliasing off for repeatable pixels.
 """
@@ -63,9 +66,56 @@ def lines_poly(geojson: str, to_xyz, kinds=None):
     return pv.PolyData(np.vstack(pts), lines=np.concatenate(cells))
 
 
-def globe(job, fr, out, W, H):
+MAX_TEXTURE_CELLS = 1_500_000      # RGB cells on the sphere (VTK stays fast and deterministic; ~1730 x 865 global)
+
+
+def texture_bounds(layer: dict) -> list[float]:
+    """[w, s, e, n] of an image layer: the layer's ``bounds``, else its sidecar JSON (``bounds_wsen`` or
+    ``lon_edges``/``lat_edges``, as our GIBS/BMNG products write), else the whole globe."""
+    if layer.get("bounds"):
+        return [float(v) for v in layer["bounds"]]
+    side = Path(layer["path"]).with_suffix(".json")
+    if side.exists():
+        m = json.loads(side.read_text(encoding="utf-8"))
+        if "bounds_wsen" in m:
+            return [float(v) for v in m["bounds_wsen"]]
+        if "lon_edges" in m and "lat_edges" in m:
+            return [m["lon_edges"][0], m["lat_edges"][0], m["lon_edges"][-1], m["lat_edges"][-1]]
+    return [-180.0, -90.0, 180.0, 90.0]
+
+
+def add_texture(p, image, bounds, radius: float = 1.0, max_cells: int = MAX_TEXTURE_CELLS, notes=None):
+    """Drape an equirectangular RGB image on the globe as an **RGB cell mesh** (the adapter's texture route).
+
+    ``GeoPlotter.add_base_layer(texture=...)`` crashes with geovista 0.5.3 + pyvista 0.49 (``core.combine``
+    AttributeError; capability tests 2026-10-27), so each image pixel becomes one cell of a
+    ``gv.Transform.from_1d`` lon/lat mesh carrying its colour (``rgb=True``), drawn unlit. The image is reduced
+    (Lanczos, deterministic) to at most ``max_cells`` cells; row 0 is the north edge. ``image``: path or PIL image.
+    """
+    import geovista as gv
+    from PIL import Image
+
+    Image.MAX_IMAGE_PIXELS = 400_000_000
+    im = image.convert("RGB") if isinstance(image, Image.Image) else Image.open(image).convert("RGB")
+    w0, h0 = im.size
+    s = min(1.0, math.sqrt(max_cells / float(w0 * h0)))
+    if s < 1.0:
+        im = im.resize((max(2, round(w0 * s)), max(2, round(h0 * s))), Image.Resampling.LANCZOS)
+        if notes is not None:
+            notes.append(f"texture {w0}x{h0} reduced to {im.size[0]}x{im.size[1]} cells (MAX_TEXTURE_CELLS)")
+    a = np.asarray(im, dtype=np.uint8)
+    h, w = a.shape[:2]
+    lon = np.linspace(bounds[0], bounds[2], w + 1)
+    lat = np.linspace(bounds[3], bounds[1], h + 1)          # north -> south: matches image rows
+    mesh = gv.Transform.from_1d(lon, lat, data=a.reshape(-1, 3), name="rgb", rgb=True, radius=radius)
+    p.add_mesh(mesh, rgb=True, lighting=False)
+    return mesh
+
+
+def globe(job, fr, out, W, H, notes=None):
     import geovista as gv
 
+    notes = [] if notes is None else notes
     f = xr.open_dataset(fr["nc"])["field"]
     lon, lat, val = f.lon.values.astype(float), f.lat.values.astype(float), np.asarray(f.values, dtype=float)
     dlon = lon[1] - lon[0]
@@ -75,11 +125,32 @@ def globe(job, fr, out, W, H):
         edges_lon = np.r_[lon - dlon / 2, lon[-1] + dlon / 2]
     dlat = lat[1] - lat[0]
     edges_lat = np.clip(np.r_[lat - dlat / 2, lat[-1] + dlat / 2], -90, 90)
-    mesh = gv.Transform.from_1d(edges_lon, edges_lat, data=val, name="field")
     p = gv.GeoPlotter(off_screen=True, window_size=(W, H))
     p.set_background("white")
-    p.add_mesh(mesh, cmap=lut_cmap(job), clim=(job["vmin"], job["vmax"]), show_scalar_bar=False, nan_color="#d9d9d9",  # opaque: a translucent NaN colour breaks depth order
-               lighting=bool(job["style"].get("lighting", False)))
+    st = job["style"]
+    # texture route: image layers (data items with role texture/underlay) as RGB cell meshes, underneath
+    texs = [e for e in job.get("extra_layers", []) if e.get("role") in ("texture", "underlay")]
+    for e in texs:
+        add_texture(p, e["path"], texture_bounds(e), radius=1.0, notes=notes)
+    if st.get("texture") == "field":               # drape the prepared LUT-coloured (+ hillshaded) field image
+        from PIL import Image
+
+        im = Image.open(fr["rgba_png"]).convert("RGBA")
+        if fr.get("shade_png"):
+            sh = np.asarray(Image.open(fr["shade_png"]).convert("L").resize(im.size), float) / 255
+            a = np.asarray(im, float)
+            k = float(st.get("shade_alpha", 0.35))
+            a[..., :3] *= (1 - k) + k * sh[..., None]
+            im = Image.fromarray(a.clip(0, 255).astype(np.uint8), "RGBA")
+        bg = Image.new("RGBA", im.size, (217, 217, 217, 255))      # NaN cells opaque grey (depth order)
+        b = job["bounds"]
+        add_texture(p, Image.alpha_composite(bg, im), [b[0], max(b[1], -90), b[2], min(b[3], 90)],
+                    radius=1.0 + 0.0005 * bool(texs), notes=notes)
+    elif st.get("show_field", not texs):
+        mesh = gv.Transform.from_1d(edges_lon, edges_lat, data=val, name="field")
+        p.add_mesh(mesh, cmap=lut_cmap(job), clim=(job["vmin"], job["vmax"]), show_scalar_bar=False,
+                   nan_color="#d9d9d9",  # opaque: a translucent NaN colour breaks depth order
+                   lighting=bool(st.get("lighting", False)))
     lift = 1.004
     if fr.get("contours"):
         c = job["style"]["contours"]
@@ -152,17 +223,21 @@ def main():
 
     W, H = job["size"]
     pr = _job.proj(job)
-    outs = []
+    outs, notes = [], []
     is_globe = pr["name"].lower() in ("orthographic", "ortho", "globe") or job["recipe"].get("region") == "global"
     for fr, out in zip(job["frames"], job["outputs"]):
         if is_globe:
-            globe(job, fr, out, W, H)
+            globe(job, fr, out, W, H, notes)
         elif job.get("camera"):
             terrain(job, fr, out, W, H)
         else:
-            globe(job, fr, out, W, H)          # regional field on the globe, camera on its centre
+            globe(job, fr, out, W, H, notes)   # regional field on the globe, camera on its centre
         outs.append(out)
-    _job.done(job, tool, f"geovista {gv.__version__}, pyvista {pv.__version__}, vtk {pv.vtk_version_info}", outs)
+    if job.get("layers"):
+        notes.append("symbol layers (points/extrema/vectors/fronts) are not drawn by the geovista adapter; "
+                     "draw labels as billboards (three.js/Remotion) or use mpl/pygmt")
+    _job.done(job, tool, f"geovista {gv.__version__}, pyvista {pv.__version__}, vtk {pv.vtk_version_info}", outs,
+              list(dict.fromkeys(notes)))
 
 
 if __name__ == "__main__":

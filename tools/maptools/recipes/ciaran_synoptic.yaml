@@ -1,0 +1,41 @@
+# Full synoptic chart: Storm Ciaran 12 UTC 2 Nov 2023 (ERA5 MSLP + 10-m wind), isobars every 4 hPa with in-line
+# labels, H/L centres with central pressure, WMO wind barbs, cold/warm fronts oriented by 850-hPa temperature,
+# Natural Earth places with the story town (Brest) promoted. Self-test case for the symbol layers.
+name: ciaran_synoptic
+tool: mpl
+kind: png
+data:
+  - path: data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc
+    var: msl
+    scale: 0.01
+    units: hPa
+    time: first
+region: [-30.0, 20.0, 35.0, 65.0]
+projection: {name: lambert_conformal, lon0: -5, lat0: 50}
+style:
+  cmap: cmocean.dense_r
+  vmin: 950
+  vmax: 1030
+  contours: {interval: 4, color: "#111111", width: 0.9, labels: true}
+  cartostyle: notebook          # house labels (halos, collision-free); movie | notebook | print
+overlays:
+  - {geojson: data/derived/ch00/ciaran_coast_10m.geojson, kind: coast}
+  - {geojson: data/derived/ch00/ciaran_borders_10m.geojson, kind: borders}
+layers:
+  - type: vectors               # WMO barbs in knots (m/s x 1.94384); arrows: style: arrows
+    u: {var: u10}
+    v: {var: v10}
+    scale: 1.94384
+    units: kt
+    style: barbs
+    density: [14, 9]            # barbs across x down (regridded in the map plane)
+  - type: fronts
+    path: tools/maptools/recipes/layers/fronts_era5_2023-11-02T12.geojson
+    temperature: {path: data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, var: t, time: "2023-11-02T12"}
+  - type: extrema               # H / L with the central pressure; auto = found in the field (or path: hl.geojson)
+    auto: {window_deg: 10, min_prominence: 4, max: 4}
+  - type: points
+    places: {max_scalerank: 7, keep: [London, Paris, Madrid, Lisbon, Dublin, Amsterdam, Brest, Oslo, Edinburgh]}
+    promote: [Brest]            # the story's town: labelled first, leader line allowed
+    max_labels: 7
+size: [1280, 800]

@@ -255,6 +255,217 @@ def overlays(spec, region, workdir: Path) -> tuple[Path | None, list[dict]]:
     return out, prov
 
 
+# ------------------------------------------------------------------------------------------------------------------
+# Symbol layers (points + labels, H/L centres, wind vectors, fronts): recipe ``layers:`` -> tool-neutral files
+# ------------------------------------------------------------------------------------------------------------------
+
+LAYER_TYPES = ("points", "extrema", "vectors", "fronts")
+NE_PLACES = "${DATA}/raw/NE-10m-places/ne_10m_populated_places_simple.zip"
+
+
+def _grow(region, margin: float):
+    """Region widened by ``margin`` degrees (vectors regrid and front probes need data just outside the frame)."""
+    if region in (None, "global"):
+        return region
+    lo0, lo1, la0, la1 = region
+    return [max(lo0 - margin, -180.0), min(lo1 + margin, 180.0), max(la0 - margin, -90.0), min(la1 + margin, 90.0)]
+
+
+def _gj_meta(gj: dict) -> dict:
+    """Top-level ``licence`` / ``attribution`` of a GeoJSON FeatureCollection (our derived layers carry them)."""
+    return {k: gj[k] for k in ("licence", "license", "attribution") if gj.get(k)}
+
+
+def _write_grid(fields: dict, p: Path) -> None:
+    import xarray as xr
+
+    ds = xr.Dataset({k: v.drop_vars([c for c in v.coords if c not in ("lat", "lon")]) for k, v in fields.items()})
+    ds.to_netcdf(p)
+
+
+def _point_features(spec: dict, region, prov: list) -> list[dict]:
+    """Points from Natural Earth places, a GeoJSON file and/or inline items -> GeoJSON Point features."""
+    import sys
+
+    feats = []
+    pl = spec.get("places")
+    pl = {} if pl in (None, False) else {} if pl is True else dict(pl)
+    keep = spec.get("keep", pl.get("keep"))                  # accepted on the layer or inside places:
+    rename = spec.get("rename", pl.get("rename")) or {}
+    promote = set(spec.get("promote") or [])
+    bbox = (-180, 180, -90, 90) if region in (None, "global") else tuple(region)
+    if spec.get("places"):
+        zp = resolve(pl.get("zip", NE_PLACES))
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import cartostyle
+
+        places = cartostyle.load_places(zp, bbox, max_scalerank=int(pl.get("max_scalerank", 3)),
+                                        min_pop=float(pl.get("min_pop", 0)), exclude=pl.get("exclude", ()))
+        for p in places:
+            if keep and p.name not in keep and rename.get(p.name) not in keep:
+                continue
+            feats.append({"name": rename.get(p.name, p.name), "lon": p.lon, "lat": p.lat, "rank": p.rank,
+                          "kind": p.kind})
+        if keep:                                             # keep the listed names only, in any order
+            feats = [f for f in feats if f["name"] in keep]
+        prov.append({"path": str(zp), "sha256": sha256_file(zp), "licence": "public domain",
+                     "credit": "Made with Natural Earth", "role": "places"})
+    if spec.get("path"):
+        p = resolve(spec["path"])
+        gj = json.loads(p.read_text(encoding="utf-8"))
+        for ft in gj["features"]:
+            lo, la = ft["geometry"]["coordinates"][:2]
+            q = ft.get("properties") or {}
+            feats.append({"name": q.get("name", ""), "lon": float(lo), "lat": float(la),
+                          "rank": float(q.get("rank", 5)), "kind": q.get("kind", "feature")})
+        prov.append({"path": str(p), "sha256": sha256_file(p), "role": "points", **licence_of(p, _gj_meta(gj))})
+    for it in spec.get("items") or []:
+        feats.append({"name": it.get("name", ""), "lon": float(it["lon"]), "lat": float(it["lat"]),
+                      "rank": float(it.get("rank", 5)), "kind": it.get("kind", "feature")})
+    out = []
+    for f in feats:
+        pro = f["name"] in promote                           # story place: labelled first, leader line allowed
+        if pro:
+            f["rank"] = min(f["rank"], -1.0) - 10.0
+        if not (bbox[0] <= f["lon"] <= bbox[1] and bbox[2] <= f["lat"] <= bbox[3]):
+            continue
+        out.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": [f["lon"], f["lat"]]},
+                    "properties": {"name": f["name"], "rank": f["rank"], "kind": f["kind"], "promoted": pro}})
+    out.sort(key=lambda g: (g["properties"]["rank"], g["properties"]["name"]))
+    return out
+
+
+def _warm_left(xy: np.ndarray, temp) -> bool | None:
+    """Is the warm air on the LEFT of the front's drawing direction (geographic, lon scaled by cos lat)?
+
+    Same probe idea as ``cartostyle.front_flip`` but in lon/lat, so tools without matplotlib axes (GMT, deck.gl)
+    can put the symbols on the right side. None when no temperature was given."""
+    if temp is None or len(xy) < 2:
+        return None
+    from scipy.ndimage import map_coordinates
+
+    lon, lat, T = temp.lon.values.astype(float), temp.lat.values.astype(float), np.asarray(temp.values, float)
+    c = np.cos(np.radians(xy[:, 1]))
+    t = np.gradient(xy, axis=0) * np.c_[c, np.ones_like(c)]
+    n = np.c_[-t[:, 1], t[:, 0]]
+    n /= np.hypot(*n.T)[:, None] + 1e-12
+    probe = 1.5                                         # degrees: sample the air masses, not the frontal zone
+    left = xy + probe * n / np.c_[np.maximum(c, 0.2), np.ones_like(c)]
+    right = xy - probe * n / np.c_[np.maximum(c, 0.2), np.ones_like(c)]
+
+    def samp(q):
+        fi = (q[:, 0] - lon[0]) / (lon[1] - lon[0])
+        fj = (q[:, 1] - lat[0]) / (lat[1] - lat[0])
+        return map_coordinates(T, [fj, fi], order=1, mode="nearest")
+
+    return bool(np.nanmean(samp(left) - samp(right)) > 0)
+
+
+def prepare_layers(recipe: dict, fields: list, region, workdir: Path, d0: dict) -> tuple[list[dict], list[dict]]:
+    """Recipe ``layers:`` -> prepared files every adapter reads (returns (job layers, provenance)).
+
+    points  -> ``points_<k>.geojson``   Point features {name, rank, kind}; ``label``/``marker`` flags kept on the layer
+    extrema -> ``extrema_<k>_<t>.geojson`` per frame, Point features {kind: low|high, value}
+    vectors -> ``vectors_<k>_<t>.nc``   u, v on the (widened) region in the layer's units (e.g. kt)
+    fronts  -> ``fronts_<k>.geojson``   LineStrings {kind, warm_left}; optional ``fronts_<k>_t.nc`` (temperature)
+    """
+    specs = recipe.get("layers") or []
+    out, prov = [], []
+    nfr = len(fields)
+    for k, spec in enumerate(specs):
+        typ = spec.get("type")
+        if typ not in LAYER_TYPES:
+            raise ValueError(f"layer {k}: type {typ!r} unknown; use one of {LAYER_TYPES}")
+        lay = {"type": typ, "index": k, **{x: spec[x] for x in ("label", "marker", "style", "color", "density",
+                                                                 "units", "letters", "size_key", "max_labels")
+                                           if x in spec}}
+        if typ == "points":
+            feats = _point_features(spec, region, prov)
+            p = workdir / f"points_{k}.geojson"
+            p.write_text(json.dumps({"type": "FeatureCollection", "features": feats}), encoding="utf-8")
+            lay.update(file=str(p), n=len(feats))
+        elif typ == "extrema":
+            files = []
+            fixed = None
+            if spec.get("path"):
+                p = resolve(spec["path"])
+                gj = json.loads(p.read_text(encoding="utf-8"))
+                fixed = [{"kind": f["properties"]["kind"], "lon": f["geometry"]["coordinates"][0],
+                          "lat": f["geometry"]["coordinates"][1],
+                          "value": float(f["properties"].get("value", f["properties"].get("hPa", float("nan"))))}
+                         for f in gj["features"]]
+                prov.append({"path": str(p), "sha256": sha256_file(p), "role": "extrema", **licence_of(p, _gj_meta(gj))})
+            auto = spec.get("auto")
+            for i, (_, f) in enumerate(fields):
+                if fixed is not None:
+                    cs = fixed
+                else:
+                    import sys
+
+                    sys.path.insert(0, str(Path(__file__).resolve().parent))
+                    import cartostyle
+
+                    a = {} if auto in (None, True) else dict(auto)
+                    bb = None if region in (None, "global") else tuple(region)
+                    cs = cartostyle.find_extrema(f.lon.values, f.lat.values, f.values, bbox=bb,
+                                                 window_deg=float(a.get("window_deg", 10.0)),
+                                                 min_prominence=float(a.get("min_prominence", 4.0)))
+                    cs = cs[: int(a.get("max", 6))]
+                p = workdir / f"extrema_{k}_{i:04d}.geojson"
+                p.write_text(json.dumps({"type": "FeatureCollection", "features": [
+                    {"type": "Feature", "geometry": {"type": "Point", "coordinates": [c["lon"], c["lat"]]},
+                     "properties": {"kind": c["kind"], "value": c["value"]}} for c in cs]}), encoding="utf-8")
+                files.append(str(p))
+            lay.update(files=files)
+        elif typ == "vectors":
+            files = []
+            grids = {}
+            for comp in ("u", "v"):
+                c = dict(spec[comp]) if isinstance(spec[comp], dict) else {"var": spec[comp]}
+                c.setdefault("path", d0["path"])
+                c.setdefault("time", d0.get("time"))
+                c.setdefault("scale", spec.get("scale", 1.0))
+                c.setdefault("units", spec.get("units", ""))
+                path, fl, attrs = load_fields(c, _grow(region, float(spec.get("margin_deg", 0.0))))
+                grids[comp] = fl
+                if not any(q["path"] == str(path) for q in prov):
+                    prov.append({"path": str(path), "sha256": sha256_file(path), "var": c["var"], "role": "vectors",
+                                 **licence_of(path, attrs)})
+            for i in range(nfr):
+                j = min(i, len(grids["u"]) - 1)
+                p = workdir / f"vectors_{k}_{i:04d}.nc"
+                _write_grid({"u": grids["u"][j][1], "v": grids["v"][j][1]}, p)
+                files.append(str(p))
+            lay.update(files=files, units=spec.get("units", ""), style=spec.get("style", "barbs"))
+        else:   # fronts
+            p = resolve(spec["path"])
+            gj = json.loads(p.read_text(encoding="utf-8"))
+            prov.append({"path": str(p), "sha256": sha256_file(p), "role": "fronts", **licence_of(p, _gj_meta(gj))})
+            temp = None
+            if spec.get("temperature"):
+                c = dict(spec["temperature"])
+                path, fl, attrs = load_fields(c, _grow(region, 5.0))
+                temp = fl[0][1]
+                tp = workdir / f"fronts_{k}_t.nc"
+                _write_grid({"t": temp}, tp)
+                lay["temperature"] = str(tp)
+                prov.append({"path": str(path), "sha256": sha256_file(path), "var": c["var"], "role": "front orientation",
+                             **licence_of(path, attrs)})
+            feats = []
+            for ft in gj["features"]:
+                if ft["geometry"]["type"] != "LineString":
+                    continue
+                xy = np.asarray(ft["geometry"]["coordinates"], float)[:, :2]
+                kind = ft["properties"].get("kind", "cold")
+                feats.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": xy.tolist()},
+                              "properties": {"kind": kind, "warm_left": _warm_left(xy, temp)}})
+            fp = workdir / f"fronts_{k}.geojson"
+            fp.write_text(json.dumps({"type": "FeatureCollection", "features": feats}), encoding="utf-8")
+            lay.update(file=str(fp), n=len(feats))
+        out.append(lay)
+    return out, prov
+
+
 def prepare(recipe: dict, workdir: Path) -> dict:
     """Read the recipe's data, write the prepared files into ``workdir`` and return the job dict."""
     import xarray as xr
@@ -304,6 +515,8 @@ def prepare(recipe: dict, workdir: Path) -> dict:
             fr.update(heightmaps(f, workdir / stem))
         frames.append(fr)
     ov, ov_prov = overlays(recipe.get("overlays", []), region, workdir)
+    layers, lay_prov = prepare_layers(recipe, fields, region, workdir, d0)
+    ov_prov = ov_prov + lay_prov
     f0 = fields[0][1]
     lon, lat = f0.lon.values, f0.lat.values
     dx, dy = float(lon[1] - lon[0]), float(lat[1] - lat[0])
@@ -327,7 +540,7 @@ def prepare(recipe: dict, workdir: Path) -> dict:
         "extra_layers": [dict(e, path=str(resolve(e["path"]))) for e in data[1:]],
         "size": recipe.get("size", [1280, 720]), "projection": recipe.get("projection", {"name": "platecarree"}),
         "camera": recipe.get("camera"), "kind": recipe.get("kind", "png"), "style": style,
-        "labels": recipe.get("labels", False), "provenance": prov,
+        "labels": recipe.get("labels", False), "provenance": prov, "layers": layers,
     }
     write_json(workdir / "job.json", job)
     return job

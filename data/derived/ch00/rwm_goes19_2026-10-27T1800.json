@@ -1,0 +1,76 @@
+{
+ "dataset_key": "GOES19-ABI-GEE",
+ "collection": "NOAA/GOES/19/MCMIPF (Earth Engine)",
+ "licence": "NOAA GOES-R data, US Government work, public domain (Earth Engine noncommercial access)",
+ "credit": "NOAA GOES-19 ABI (public domain), via Google Earth Engine",
+ "citation": "GOES-R Calibration Working Group and GOES-R Series Program, 2017: NOAA GOES-R Series ABI Level 2+ Cloud and Moisture Imagery Products. NOAA NCEI, doi:10.7289/V5736P36",
+ "redistributable": "yes",
+ "grid": "regular lat/lon EPSG:4326, row 0 = north edge, nearest-neighbour from the ABI fixed grid (Earth Engine computePixels)",
+ "lat_edges": [
+  25.0,
+  65.0
+ ],
+ "lon_edges": [
+  -85.0,
+  -10.0
+ ],
+ "units": {
+  "C02": "reflectance factor (0.64 um red visible)",
+  "C08": "K (6.2 um upper-level water vapour)",
+  "C13": "K (10.3 um clean longwave IR window)"
+ },
+ "fluidpy_commit": "b2857bc+dirty",
+ "frames": [
+  {
+   "file": "rwm_goes19_2026-10-27T1800_C02.png",
+   "encoding": "8-bit grey PNG; k=0 missing; value = lo + (k-1)*(hi-lo)/254",
+   "lo": 0.0,
+   "hi": 1.0,
+   "step": 0.003937007874015748,
+   "shape": [
+    2000,
+    3750
+   ],
+   "missing_fraction": 0.0,
+   "clipped_fraction": 0.0,
+   "band": "C02",
+   "res_deg": 0.02,
+   "time_start": "2026-10-27T18:00:20+00:00",
+   "time_end": "2026-10-27T18:09:51+00:00"
+  },
+  {
+   "file": "rwm_goes19_2026-10-27T1800_C08.png",
+   "encoding": "8-bit grey PNG; k=0 missing; value = lo + (k-1)*(hi-lo)/254",
+   "lo": 180.0,
+   "hi": 280.0,
+   "step": 0.3937007874015748,
+   "shape": [
+    1000,
+    1875
+   ],
+   "missing_fraction": 0.0,
+   "clipped_fraction": 0.0,
+   "band": "C08",
+   "res_deg": 0.04,
+   "time_start": "2026-10-27T18:00:20+00:00",
+   "time_end": "2026-10-27T18:09:51+00:00"
+  },
+  {
+   "file": "rwm_goes19_2026-10-27T1800_C13.png",
+   "encoding": "8-bit grey PNG; k=0 missing; value = lo + (k-1)*(hi-lo)/254",
+   "lo": 180.0,
+   "hi": 320.0,
+   "step": 0.5511811023622047,
+   "shape": [
+    1000,
+    1875
+   ],
+   "missing_fraction": 0.0,
+   "clipped_fraction": 0.0,
+   "band": "C13",
+   "res_deg": 0.04,
+   "time_start": "2026-10-27T18:00:20+00:00",
+   "time_end": "2026-10-27T18:09:51+00:00"
+  }
+ ]
+}

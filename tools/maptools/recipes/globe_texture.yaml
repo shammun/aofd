@@ -1,0 +1,23 @@
+# GeoVista texture route: NASA GIBS true-colour mosaic (2 Nov 2023, 0.05 deg) draped on the globe as an RGB cell
+# mesh, ERA5 MSLP isobars (8 hPa) and coasts on top, centred on Storm Ciaran. The scalar field is hidden under a
+# texture by default (style.show_field); style.texture: field drapes the LUT-coloured field image instead.
+name: globe_texture
+tool: geovista
+kind: png
+data:
+  - path: data/derived/ch00/era5_global_2023-11-02T12_sfc_0p5.nc
+    var: msl
+    scale: 0.01
+    units: hPa
+  - path: data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg
+    role: texture               # bounds from the sidecar JSON (lon_edges/lat_edges) or bounds: [w, s, e, n]
+region: global
+projection: {name: orthographic, lon0: -10, lat0: 45}
+style:
+  cmap: cmocean.balance
+  center: 1013
+  vmin: 960
+  vmax: 1050
+  contours: {interval: 8, color: "#ffffff", width: 0.6}
+overlays: [coast_110m]
+size: [800, 800]

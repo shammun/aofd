@@ -1,78 +1,41 @@
-# RESUME — where the work stopped (2026-10-26, ≈ 11:00)
+# RESUME — where the work stopped (2026-10-28, after the weekly usage limit hit at ~01:00)
 
-> **UPDATE 2026-10-27 — read first.** The user gave a standing order: make the Chapter 0 movies one after another
-> without waiting (`movies/ch00/series_plan.md`, the list + cleanup + cumulative-report rules; never push). Current
-> movie: `ch00_cross_product_why` **v4**, a re-plan from the user's review of v2 (`reports/ch00_cross_product_user_notes_v2.md`,
-> UV2-01…31). State on 2026-10-27: v3 render running (the steps below); the v4 storyboard/script are drafted in
-> `movies/ch00/ch00_cross_product_why/v4_draft/` (movie-director); the Ciarán satellite image + admin boundaries + the
-> dark-globe check are with the data-scout. Next: promote the v4 draft → implement new physics/data → motion-builder
-> v4 → QA → ≥ 2 reviews → cumulative report → movie 2a in series_plan.md. Review 3 of v3 is skipped (folded into v4).
+The SessionStart hook points here. **On session start (or when the user says "resume"): read this file, give the user a
+5-line status, then restart every stream below immediately, without waiting.** Each stream says exactly what to do.
+Agents from the old session cannot be resumed by id in a new session: start a fresh agent of the named type with the
+brief given here (all inputs are in files; nothing lives only in the old chat).
 
-The SessionStart hook prints a pointer to this file. **On session start: read this file, give the user the short status
-in "Tell the user" below, then start the steps in "Do automatically" without waiting** (the user asked for this on
-2026-10-26: "start doing those automatically when I start a new session"). The older PoC questions in
-`progress.json → setup.awaiting_user` are still open — list them in the status, but they do not block this movie work
-(movie work on ch00_cross_product_why was requested and approved by the user, U-CP.1–7).
+## Standing rules (unchanged; details in the files)
+- Order of the series: **`movies/ch00/series_plan_v2_proposal.md` (APPROVED plan v2, 79 movies)**; rules in
+  `movies/ch00/series_plan.md` (real data/maps, best data+tool per visual, cartography + map-toolkit skills, sound,
+  latest data + history + impacts, Cesium liked, cross-references spoken + end card, never push, cleanup with
+  `tools/clean_scratch.py`, Drive upload with `tools/drive_upload.py` + links in `outputs/drive_links.md`,
+  ≥ 2 reviews, cumulative report after each final movie). House style `movies/HOUSE_STYLE.md`. Memory file
+  `ch00-movie-series-loop` has the same rules.
+- Never push. Agents never commit; the orchestrator commits. Two builders only with separate folders + Remotion entries.
 
-## Where we are
-- **Movie `ch00_cross_product_why`** (Chapter 0 maths series, video 2 after the dot product; brief
-  `reports/ch00_cross_product_brief.md`; house style `movies/HOUSE_STYLE.md`).
-  - v1 rendered → review 1 FIX (18 MUST) → fix loop 1 → **v2 rendered** (33:26, 77.49 MB, QA 9 PASS + size WARN in the
-    accepted 60–80 MB band), commit 414c736 → **review 2 FIX** (5 new MUST incl. s30 physics: inertial trace rotated
-    90°), commit 565e589 → **fix loop 2 done in source only**, commit **19628fa** (all 5 MUST + M8 + 15 SHOULD, checked
-    on stills; s30 trace, u and push now from one `inertial_oscillation` integration with tangent/centre CHECK rows).
-  - **Render of fix loop 2 STOPPED because drive G: disconnected** (rule: never fall back to C:).
-  - User preview: `movies/out/ch00/ch00_cross_product_why/preview_v2.mp4` (= v2; the user may be watching it — never
-    overwrite or delete it; the user may send timestamped notes → fold them into the next fix loop).
-  - `movies/out/.../1080.mp4` is still v2.
-- **fluidpy**: `fluidpy.diag.trajectories` / `cyclone` / `_grid` + 43 tests committed (9176882, local, not pushed);
-  full suite 2334 passed. (8 collection errors come from a stray `outputs/ch14/_resume_scratch/` in ../Fluid Dynamics —
-  not ours, not deleted. A stray `ll.docx` there is not ours either.)
-- **Not pushed**: aofd ≈ 51 commits, fluidpy 3 — push only on the user's go (question M8).
-- Review-1 and review-2 reports: `reports/ch00_movies.md` (from line 1619 and 1897). Review frames in
-  `reports/movies/ch00_cross_product_why/review{1,2}/` (local, ignored).
+## Streams (restart all)
+| # | Stream | State at stop | Restart with |
+|---|---|---|---|
+| 1 | **0.3 Weather basics (stage 2 build)** — `movies/src/ch00_weather_basics/` (own entry), `movies/ch00/ch00_weather_basics/`, `tools/movie_wb/`, scratch `G:/…/scratch/movies/ch00_weather_basics/v2/` | Composition built with the capability-test winners (Cesium Tibet drape, ETOPO, latest-GFS beat, narration inserts spliced, sound mix tool); was fixing label-check issues; **no final render yet**. WIP committed (see git log "WIP"). | **motion-builder**: "Continue stage 2 of ch00_weather_basics from the WIP: read `movies/ch00/ch00_weather_basics/{data_needs.md §E–F, storyboard.yaml}`, `research/capability_tests.md`, map-toolkit + cartography skills; finish the shape-aware label check (`tools/movie_wb/label_check.py`), render on the RTX (ports 4600+, conc 3), mix sound (`tools/sound/mix.py`, `sound_cues.yaml`), QA `--hard-mb 160`, vscan, frame check; output `movies/out/ch00/ch00_weather_basics/1080.mp4`; don't commit." Then: commit → Drive upload → review 1 (movie-reviewer) → fixes → review 2 → final → cumulative report → cleanup. Title subtitle must stay ≥ 50 px clear of the animation. |
+| 2 | **#1 Vectors & index notation — plan** (`movies/ch00/ch00_vectors_index_notation/`) | Planning, mid-dry-run (v3 TTS); vector addition/subtraction block with weather examples being added. | **movie-director**: finish the plan per the brief in the folder + user additions: vector addition & subtraction from scratch with real weather examples (geostrophic+ageostrophic=real wind, airspeed+jet, drifter=current+wind drift, forces on a parcel; shear hodograph from a real sounding, hourly wind change, El Niño trade-wind anomaly, storm-relative wind), cross-reference rule (`related:` per scene, spoken pointers + end card). TTS dry run; report length. |
+| 3 | **#2/#3 Cross-product splits — plan** (`movies/ch00/ch00_cross_product/`, `ch00_cross_product_uses/`) | Planning, mid-dry-run. | **movie-director**: finish both plans (reuse v4 scenes + archived narration `G:/…/archive/movies/ch00_cross_product_why_v4_final/audio/`; fix review-3 R3-S1..S4; #2 maths ending, #3 weather ending; own music each; cross-references). |
+| 4 | **#69 Reading weather maps — data + data-side library** | Data-scout had fetched the time-limited items (GFS 18 UTC/00 UTC 27 Oct, GOES-19 via Earth Engine, z500) and written `fluidpy/data/{isd,metar,wpc,movie_rwm}.py` + `goes/gibs/gfs` options + `tests/data/test_isd_metar_wpc.py` (78 data tests passed); was finishing D1/D7/D8/D10/D11, registry, reports, and the s57 impact verification. WIP committed. | **data-scout**: "Finish `movies/ch00/ch00_reading_weather_maps/data_needs.md` items not yet in `data/registry.yaml`; verify s57 impacts (Enedis ~1.2 M homes; 84-kt Brest gust) with cited sources; run the full fluidpy suite from `../Fluid Dynamics`; report." |
+| 5 | **Library tests for sphere/mapproj/station/axes** (`../Fluid Dynamics/fluidpy/{geo/sphere,geo/mapproj,diag/station,diag/axes}.py`) | Verifier had just started (page images). Code WIP-committed. | **math-verifier** with the brief: V-ladder tests (pyproj parity, sympy Mercator, real METAR/SYNOP decode, barb edge cases, isobar exactness, axes on synthetic waves, mutation check), full suite from `../Fluid Dynamics`, write `reports/ch00_rwm_verification.md`. |
+| 6 | **Map-toolkit bug fixes** (`tools/maptools/**`) | Mid-way (PyGMT texture size, deck.gl ready, GeoVista texture, recipe point/label/front layers). WIP committed. | **general-purpose**: finish the 4 fixes listed in `research/capability_tests.md` §"Toolkit issues found", run `tools/maptools/selftest.py` + `tests/test_maptools.py`. |
 
-## Do automatically (in order)
-1. **Check G:**: `.venv/Scripts/python.exe tools/disk_guard.py --report`. If G: is MISSING → tell the user and stop.
-2. **Check the G: files are intact** (all under `G:/Geophysical Fluid Dynamics/aofd-data/`):
-   - `scratch/movies/ch00_cross_product_why/v2/bundle/` (rebuilt 10:19 with all fix-loop-2 changes) and
-     `v2/bundle/public/narration_music.wav` + `music.json`;
-   - `scratch/movies/ch00_cross_product_why/v1/public/` (narration + music WAVs);
-   - `derived/ch00/` and `movies/ch00/ch00_cross_product_why/data/real/` binaries (git-ignored, regenerable by
-     `data/real/fetch_real_data.py`).
-   - Then re-run `.venv/Scripts/python.exe movies/data/build_ch00_cross_product_why.py`: all CHECK rows must pass and
-     the trail hashes stay 9a8c92dc… / 9b0c8502… / feade087…, inertial30.json f6bc9ef2….
-   - If the bundle is gone or older than commit 19628fa: re-bundle from `movies/`:
-     `npx remotion bundle src/index.ts --out-dir "<G:…>/v2/bundle" --public-dir "<G:…>/v1/public"`.
-     If the WAVs are gone: regenerate with `tools/tts.py` (script.md, af_bella 1.0, the dry-run settings) and
-     `tools/music.py score` (seed 7), as in the dot movie.
-3. **Hand the render to the motion-builder** (a fresh `motion-builder` agent; give it this file and the review-2
-   section of `reports/ch00_movies.md`). The render recipe that works on this machine:
-   - kill orphan `remotion`/`chrome-headless-shell`/`ffmpeg` processes first;
-   - **foreground** pieces (background shells get killed by the idle-memory reaper):
-     `.venv/Scripts/python.exe tools/movie_cp/render_pieces.py "<G:…>/v2" 330 1000 2`, repeated until it prints DONE
-     (pieces in `v2/pieces/`, ports 4400+; port 3311 is in a Windows excluded range);
-   - join: `.venv/Scripts/python.exe tools/movie_cp/join2pass.py "<G:…>/v2" 172` → `v2/render/1080_2pass.mp4` (≤ 79 MB);
-   - QA: `tools/movie_qa.py` with `--budget-mb 60 --hard-mb 80` (10 gates; size WARN in 60–80 is accepted);
-   - scan: `.venv/Scripts/python.exe tools/movie_cp/vscan.py <mp4> <outdir> 1` (caption band y 880–1040 and 20-px edges);
-   - copy to `movies/out/ch00/ch00_cross_product_why/1080.mp4` + poster + `index.html` (leave `preview_v2.mp4` alone);
-   - builder checks frames of every touched scene itself: s04, s11 (5 orbit angles), s12, s15, s18, s23, s24, s26–s28,
-     s30 (4 times), s32, s36, s39–s41, s44–s47.
-4. **Commit** (orchestrator): `ch00: cross_product_why v3 render …`.
-5. **Review 3** — a fresh `movie-reviewer` on the changed scenes plus a quick full-movie scan; verify review-2 items
-   N-M1…N-M5, M8 and the SHOULD list; re-check the s11 "a" label near "a × b" at ≈ 06:51 (builder skipped S8) and the
-   skipped s25 cut-away shape (S10, cosmetic). Fix loops ≤ 3, then report.
-6. On PASS: tell the user the movie is ready (`movies/out/ch00/ch00_cross_product_why.html` / `1080.mp4`), ask for their
-   notes, and mention `/approve-movie 0 ch00_cross_product_why` only after they approve.
+## After those, in order (plan v2)
+#4 Derivatives & Taylor, #5 Coordinates (uses `fluidpy.geo.sphere/mapproj`), #6 Gradient, #6A Contour maps, #6B How
+contour maps are made, #7 Divergence (~30 min), #8 Curl (~30 min), #9 Laplacian, #10 Material derivative, #10A/10B vector
+identities (say where each is used + what it means), #11 Tensors … through #29 Coriolis, #29A F = ma → equation of motion
+(long), … #69 Reading weather maps LAST. Plan 2–4 movies at a time.
 
-## Tell the user (first reply, short)
-- Where things stand (as above, in plain words), whether G: is back, and what is starting now.
-- Open questions still waiting (from `progress.json → setup.awaiting_user`): M10 publish the dot movie
-  (`! gh repo create shammun/aofd-media --public` then go for `/approve-movie 0 ch00_dot_product_why`), M8 push,
-  M11 T1–T8 cosmetics, PoC A–G feedback, PoC E Colab run.
-- Disk on C:/G:. Scratch can be cleaned after approval: `scratch/movies/ch00_cross_product_why/v1` (bundle ≈ 390 MB) and
-  older pieces.
+## Open with the user (not blocking)
+M10 publish dot product (needs `! gh repo create shammun/aofd-media --public`), M8 push (user: don't push), dot-product
+phone-review title fix (stopped by user), PoC A–G feedback, PoC E Colab, restart Claude Code to load the RustGIS/GeoLibre
+MCP servers, Copernicus Marine later, rclone own client id when the shared one retires.
 
-## When this movie is approved
-Delete this file's "Do automatically" block (or the file) and the `resume` key in `progress.json`, so later sessions
-don't redo it.
+## Useful paths
+- Final movies on Drive: `outputs/drive_links.md` (folder https://drive.google.com/drive/folders/1u6SWg5e2o0diQtTs15m8hp6GcVQaYyJ6).
+- Phone reviews: `/video-review_2` (rclone `gdrive_reviews:`), done list `outputs/reviews_done.md`.
+- Capability tests (user's local review): `G:/Geophysical Fluid Dynamics/aofd-data/captests/` (INDEX.html, showcase.mp4).

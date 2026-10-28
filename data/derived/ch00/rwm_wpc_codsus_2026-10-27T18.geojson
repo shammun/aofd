@@ -1,0 +1,6239 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -115.0,
+     42.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1017,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -98.0,
+     41.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1021,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.0,
+     48.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1033,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -80.0,
+     38.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1027,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.0,
+     44.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1019,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -107.0,
+     38.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1023,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -86.0,
+     37.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1025,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -75.0,
+     44.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1031,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -116.0,
+     45.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1018,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -112.0,
+     36.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1019,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -123.0,
+     69.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1025,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -145.0,
+     68.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1033,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -156.0,
+     60.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1033,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -146.0,
+     63.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1038,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -92.0,
+     32.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1023,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -16.0,
+     43.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1028,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -34.0,
+     74.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1026,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -151.0,
+     53.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1036,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -145.0,
+     47.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": false,
+    "strength": 1035,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.0,
+     44.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1012,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -107.0,
+     44.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1010,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -118.0,
+     39.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1013,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.0,
+     50.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1007,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -114.0,
+     61.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1014,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -122.0,
+     50.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1011,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -102.0,
+     38.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1013,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -94.0,
+     44.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1019,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -115.0,
+     35.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1013,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -94.0,
+     64.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1011,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -164.0,
+     14.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1009,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -155.0,
+     17.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1010,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -43.0,
+     43.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 982,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -41.0,
+     54.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 990,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -53.0,
+     58.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 972,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -3.0,
+     64.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 964,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -11.0,
+     66.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 961,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -86.0,
+     78.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1002,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -174.0,
+     50.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1010,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -128.0,
+     52.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": false,
+    "strength": 1012,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -100.0,
+      39.0
+     ],
+     [
+      -99.0,
+      39.0
+     ],
+     [
+      -99.0,
+      39.0
+     ],
+     [
+      -99.0,
+      39.0
+     ],
+     [
+      -98.0,
+      39.0
+     ],
+     [
+      -98.0,
+      39.0
+     ],
+     [
+      -97.0,
+      39.0
+     ],
+     [
+      -97.0,
+      40.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -104.0,
+      44.0
+     ],
+     [
+      -105.0,
+      44.0
+     ],
+     [
+      -106.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -106.0,
+      44.0
+     ],
+     [
+      -107.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -107.0,
+      44.0
+     ],
+     [
+      -108.0,
+      43.0
+     ],
+     [
+      -110.0,
+      42.0
+     ],
+     [
+      -112.0,
+      41.0
+     ],
+     [
+      -113.0,
+      41.0
+     ],
+     [
+      -115.0,
+      40.0
+     ],
+     [
+      -117.0,
+      40.0
+     ],
+     [
+      -118.0,
+      39.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -94.0,
+      44.0
+     ],
+     [
+      -94.0,
+      43.0
+     ],
+     [
+      -95.0,
+      41.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -95.0,
+      41.0
+     ],
+     [
+      -96.0,
+      40.0
+     ],
+     [
+      -97.0,
+      40.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -111.0,
+      50.0
+     ],
+     [
+      -108.0,
+      48.0
+     ],
+     [
+      -106.0,
+      47.0
+     ],
+     [
+      -104.0,
+      46.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -107.0,
+      44.0
+     ],
+     [
+      -106.0,
+      43.0
+     ],
+     [
+      -105.0,
+      41.0
+     ],
+     [
+      -105.0,
+      40.0
+     ],
+     [
+      -104.0,
+      39.0
+     ],
+     [
+      -102.0,
+      38.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -99.0,
+      44.0
+     ],
+     [
+      -101.0,
+      44.0
+     ],
+     [
+      -103.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -100.0,
+      39.0
+     ],
+     [
+      -101.0,
+      39.0
+     ],
+     [
+      -103.0,
+      40.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -111.0,
+      50.0
+     ],
+     [
+      -112.0,
+      49.0
+     ],
+     [
+      -115.0,
+      49.0
+     ],
+     [
+      -116.0,
+      47.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -114.0,
+      60.0
+     ],
+     [
+      -112.0,
+      53.0
+     ],
+     [
+      -112.0,
+      52.0
+     ],
+     [
+      -111.0,
+      50.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -103.0,
+      44.0
+     ],
+     [
+      -103.0,
+      43.0
+     ],
+     [
+      -103.0,
+      41.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -104.0,
+      47.0
+     ],
+     [
+      -102.0,
+      48.0
+     ],
+     [
+      -100.0,
+      48.0
+     ],
+     [
+      -96.0,
+      47.0
+     ],
+     [
+      -94.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -85.0,
+      41.0
+     ],
+     [
+      -86.0,
+      41.0
+     ],
+     [
+      -88.0,
+      42.0
+     ],
+     [
+      -90.0,
+      42.0
+     ],
+     [
+      -92.0,
+      43.0
+     ],
+     [
+      -94.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -92.0,
+      46.0
+     ],
+     [
+      -90.0,
+      47.0
+     ],
+     [
+      -87.0,
+      47.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -71.0,
+      41.0
+     ],
+     [
+      -71.0,
+      42.0
+     ],
+     [
+      -71.0,
+      42.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -79.0,
+      40.0
+     ],
+     [
+      -79.0,
+      41.0
+     ],
+     [
+      -79.0,
+      42.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -75.0,
+      41.0
+     ],
+     [
+      -76.0,
+      40.0
+     ],
+     [
+      -76.0,
+      38.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -90.0,
+      34.0
+     ],
+     [
+      -90.0,
+      35.0
+     ],
+     [
+      -90.0,
+      37.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -69.0,
+      48.0
+     ],
+     [
+      -71.0,
+      47.0
+     ],
+     [
+      -73.0,
+      47.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -122.0,
+      50.0
+     ],
+     [
+      -121.0,
+      47.0
+     ],
+     [
+      -121.0,
+      45.0
+     ],
+     [
+      -123.0,
+      43.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -115.0,
+      44.0
+     ],
+     [
+      -114.0,
+      45.0
+     ],
+     [
+      -113.0,
+      47.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -123.0,
+      55.0
+     ],
+     [
+      -122.0,
+      53.0
+     ],
+     [
+      -121.0,
+      50.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -106.0,
+      32.0
+     ],
+     [
+      -104.0,
+      35.0
+     ],
+     [
+      -102.0,
+      38.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -118.0,
+      39.0
+     ],
+     [
+      -117.0,
+      38.0
+     ],
+     [
+      -116.0,
+      36.0
+     ],
+     [
+      -115.0,
+      35.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -116.0,
+      63.0
+     ],
+     [
+      -114.0,
+      62.0
+     ],
+     [
+      -114.0,
+      60.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -87.0,
+      63.0
+     ],
+     [
+      -94.0,
+      64.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -94.0,
+      63.0
+     ],
+     [
+      -99.0,
+      63.0
+     ],
+     [
+      -107.0,
+      63.0
+     ],
+     [
+      -112.0,
+      63.0
+     ],
+     [
+      -118.0,
+      64.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -72.0,
+      68.0
+     ],
+     [
+      -77.0,
+      65.0
+     ],
+     [
+      -84.0,
+      63.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -165.0,
+      67.0
+     ],
+     [
+      -160.0,
+      65.0
+     ],
+     [
+      -158.0,
+      64.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -118.0,
+      39.0
+     ],
+     [
+      -119.0,
+      39.0
+     ],
+     [
+      -120.0,
+      39.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -118.0,
+      41.0
+     ],
+     [
+      -118.0,
+      41.0
+     ],
+     [
+      -118.0,
+      40.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -115.0,
+      35.0
+     ],
+     [
+      -115.0,
+      34.0
+     ],
+     [
+      -115.0,
+      33.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -117.0,
+      36.0
+     ],
+     [
+      -119.0,
+      35.0
+     ],
+     [
+      -120.0,
+      34.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -90.0,
+      44.0
+     ],
+     [
+      -88.0,
+      44.0
+     ],
+     [
+      -87.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -13.0,
+      25.0
+     ],
+     [
+      -15.0,
+      19.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -54.0,
+      23.0
+     ],
+     [
+      -56.0,
+      20.0
+     ],
+     [
+      -56.0,
+      16.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -58.0,
+      31.0
+     ],
+     [
+      -63.0,
+      29.0
+     ],
+     [
+      -68.0,
+      28.0
+     ],
+     [
+      -72.0,
+      27.0
+     ],
+     [
+      -76.0,
+      27.0
+     ],
+     [
+      -78.0,
+      26.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -31.0,
+      31.0
+     ],
+     [
+      -34.0,
+      30.0
+     ],
+     [
+      -38.0,
+      29.0
+     ],
+     [
+      -42.0,
+      29.0
+     ],
+     [
+      -44.0,
+      31.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -78.0,
+      24.0
+     ],
+     [
+      -78.0,
+      23.0
+     ],
+     [
+      -80.0,
+      22.0
+     ],
+     [
+      -81.0,
+      20.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -81.0,
+      19.0
+     ],
+     [
+      -80.0,
+      16.0
+     ],
+     [
+      -81.0,
+      13.0
+     ],
+     [
+      -83.0,
+      11.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -113.0,
+      32.0
+     ],
+     [
+      -112.0,
+      29.0
+     ],
+     [
+      -109.0,
+      25.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -98.0,
+      26.0
+     ],
+     [
+      -98.0,
+      28.0
+     ],
+     [
+      -96.0,
+      29.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -178.0,
+      29.0
+     ],
+     [
+      -179.0,
+      26.0
+     ],
+     [
+      -179.0,
+      23.0
+     ],
+     [
+      -177.0,
+      20.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -164.0,
+      14.0
+     ],
+     [
+      -162.0,
+      14.0
+     ],
+     [
+      -157.0,
+      15.0
+     ],
+     [
+      -155.0,
+      17.0
+     ],
+     [
+      -149.0,
+      19.0
+     ],
+     [
+      -145.0,
+      22.0
+     ],
+     [
+      -142.0,
+      24.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -139.0,
+      31.0
+     ],
+     [
+      -139.0,
+      30.0
+     ],
+     [
+      -139.0,
+      28.0
+     ],
+     [
+      -140.0,
+      25.0
+     ],
+     [
+      -142.0,
+      24.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -147.0,
+      30.0
+     ],
+     [
+      -145.0,
+      32.0
+     ],
+     [
+      -144.0,
+      33.0
+     ],
+     [
+      -142.0,
+      33.0
+     ],
+     [
+      -140.0,
+      32.0
+     ],
+     [
+      -139.0,
+      31.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -139.0,
+      31.0
+     ],
+     [
+      -137.0,
+      31.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -147.0,
+      30.0
+     ],
+     [
+      -148.0,
+      28.0
+     ],
+     [
+      -150.0,
+      27.0
+     ],
+     [
+      -155.0,
+      25.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -43.0,
+      43.0
+     ],
+     [
+      -43.0,
+      43.0
+     ],
+     [
+      -42.0,
+      43.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -42.0,
+      43.0
+     ],
+     [
+      -41.0,
+      43.0
+     ],
+     [
+      -40.0,
+      43.0
+     ],
+     [
+      -40.0,
+      43.0
+     ],
+     [
+      -37.0,
+      43.0
+     ],
+     [
+      -36.0,
+      43.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -42.0,
+      43.0
+     ],
+     [
+      -42.0,
+      42.0
+     ],
+     [
+      -42.0,
+      41.0
+     ],
+     [
+      -42.0,
+      40.0
+     ],
+     [
+      -43.0,
+      39.0
+     ],
+     [
+      -43.0,
+      37.0
+     ],
+     [
+      -44.0,
+      36.0
+     ],
+     [
+      -45.0,
+      36.0
+     ],
+     [
+      -45.0,
+      35.0
+     ],
+     [
+      -47.0,
+      34.0
+     ],
+     [
+      -50.0,
+      33.0
+     ],
+     [
+      -52.0,
+      32.0
+     ],
+     [
+      -53.0,
+      32.0
+     ],
+     [
+      -55.0,
+      31.0
+     ],
+     [
+      -56.0,
+      31.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -43.0,
+      42.0
+     ],
+     [
+      -43.0,
+      41.0
+     ],
+     [
+      -44.0,
+      39.0
+     ],
+     [
+      -45.0,
+      38.0
+     ],
+     [
+      -46.0,
+      37.0
+     ],
+     [
+      -47.0,
+      37.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -41.0,
+      54.0
+     ],
+     [
+      -42.0,
+      51.0
+     ],
+     [
+      -45.0,
+      47.0
+     ],
+     [
+      -48.0,
+      45.0
+     ],
+     [
+      -52.0,
+      41.0
+     ],
+     [
+      -59.0,
+      39.0
+     ],
+     [
+      -64.0,
+      38.0
+     ],
+     [
+      -70.0,
+      37.0
+     ],
+     [
+      -76.0,
+      38.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -51.0,
+      58.0
+     ],
+     [
+      -51.0,
+      56.0
+     ],
+     [
+      -53.0,
+      54.0
+     ],
+     [
+      -57.0,
+      51.0
+     ],
+     [
+      -62.0,
+      50.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -11.0,
+      65.0
+     ],
+     [
+      -11.0,
+      64.0
+     ],
+     [
+      -13.0,
+      64.0
+     ],
+     [
+      -16.0,
+      64.0
+     ],
+     [
+      -20.0,
+      64.0
+     ],
+     [
+      -26.0,
+      64.0
+     ],
+     [
+      -30.0,
+      63.0
+     ],
+     [
+      -36.0,
+      63.0
+     ],
+     [
+      -42.0,
+      64.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -69.0,
+      81.0
+     ],
+     [
+      -60.0,
+      75.0
+     ],
+     [
+      -53.0,
+      67.0
+     ],
+     [
+      -52.0,
+      61.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -10.0,
+      39.0
+     ],
+     [
+      -17.0,
+      36.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -40.0,
+      29.0
+     ],
+     [
+      -33.0,
+      31.0
+     ],
+     [
+      -25.0,
+      33.0
+     ],
+     [
+      -17.0,
+      37.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -53.0,
+      58.0
+     ],
+     [
+      -55.0,
+      59.0
+     ],
+     [
+      -54.0,
+      60.0
+     ],
+     [
+      -49.0,
+      60.0
+     ],
+     [
+      -45.0,
+      59.0
+     ],
+     [
+      -42.0,
+      59.0
+     ],
+     [
+      -37.0,
+      60.0
+     ],
+     [
+      -34.0,
+      60.0
+     ],
+     [
+      -33.0,
+      60.0
+     ],
+     [
+      -28.0,
+      59.0
+     ],
+     [
+      -23.0,
+      58.0
+     ],
+     [
+      -18.0,
+      56.0
+     ],
+     [
+      -16.0,
+      55.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -16.0,
+      55.0
+     ],
+     [
+      -17.0,
+      54.0
+     ],
+     [
+      -20.0,
+      52.0
+     ],
+     [
+      -24.0,
+      51.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -16.0,
+      55.0
+     ],
+     [
+      -14.0,
+      54.0
+     ],
+     [
+      -13.0,
+      51.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -41.0,
+      49.0
+     ],
+     [
+      -42.0,
+      47.0
+     ],
+     [
+      -43.0,
+      46.0
+     ],
+     [
+      -44.0,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -37.0,
+      56.0
+     ],
+     [
+      -38.0,
+      55.0
+     ],
+     [
+      -40.0,
+      54.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -102.0,
+      78.0
+     ],
+     [
+      -83.0,
+      77.0
+     ],
+     [
+      -71.0,
+      74.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -176.0,
+      69.0
+     ],
+     [
+      -170.0,
+      67.0
+     ],
+     [
+      -169.0,
+      63.0
+     ],
+     [
+      -170.0,
+      60.0
+     ],
+     [
+      -171.0,
+      55.0
+     ],
+     [
+      -173.0,
+      52.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -174.0,
+      50.0
+     ],
+     [
+      -172.0,
+      52.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -176.0,
+      70.0
+     ],
+     [
+      -170.0,
+      70.0
+     ],
+     [
+      -162.0,
+      70.0
+     ],
+     [
+      -157.0,
+      70.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -173.0,
+      50.0
+     ],
+     [
+      -172.0,
+      50.0
+     ],
+     [
+      -168.0,
+      49.0
+     ],
+     [
+      -162.0,
+      48.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -150.0,
+      48.0
+     ],
+     [
+      -150.0,
+      48.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -127.0,
+      49.0
+     ],
+     [
+      -128.0,
+      48.0
+     ],
+     [
+      -130.0,
+      46.0
+     ],
+     [
+      -132.0,
+      45.0
+     ],
+     [
+      -135.0,
+      45.0
+     ],
+     [
+      -137.0,
+      45.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -128.0,
+      52.0
+     ],
+     [
+      -127.0,
+      51.0
+     ],
+     [
+      -127.0,
+      51.0
+     ],
+     [
+      -127.0,
+      49.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -148.0,
+      61.0
+     ],
+     [
+      -139.0,
+      58.0
+     ],
+     [
+      -134.0,
+      55.0
+     ],
+     [
+      -128.0,
+      52.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ],
+     [
+      -172.0,
+      47.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -174.0,
+      39.0
+     ],
+     [
+      -174.0,
+      39.0
+     ],
+     [
+      -174.0,
+      39.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -172.0,
+      46.0
+     ],
+     [
+      -172.0,
+      46.0
+     ],
+     [
+      -172.0,
+      46.0
+     ],
+     [
+      -172.0,
+      46.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -175.0,
+      49.0
+     ],
+     [
+      -176.0,
+      46.0
+     ],
+     [
+      -178.0,
+      42.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -168.0,
+      79.0
+     ],
+     [
+      -148.0,
+      77.0
+     ],
+     [
+      -139.0,
+      74.0
+     ],
+     [
+      -133.0,
+      71.0
+     ],
+     [
+      -123.0,
+      66.0
+     ],
+     [
+      -118.0,
+      64.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": false,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -114.6,
+     42.3
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1017,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -97.5,
+     41.2
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1021,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.3,
+     47.8
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1033,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.7,
+     38.3
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1027,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.3,
+     43.8
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1019,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.8,
+     37.9
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1023,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -85.6,
+     36.6
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1025,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.6,
+     44.0
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1031,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -116.3,
+     45.3
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1018,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.7,
+     35.6
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1019,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -123.3,
+     69.4
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1025,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -145.0,
+     67.9
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1033,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -156.3,
+     59.9
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1033,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -145.6,
+     62.6
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1038,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -92.3,
+     31.9
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1023,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -16.5,
+     43.2
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1028,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -33.5,
+     74.4
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1026,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -151.1,
+     52.6
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1036,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -145.2,
+     47.2
+    ]
+   },
+   "properties": {
+    "feature": "HIGH",
+    "hires": true,
+    "strength": 1035,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -103.4,
+     44.3
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1012,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -107.1,
+     44.1
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1010,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -117.7,
+     39.4
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1013,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -111.3,
+     50.3
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1007,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -113.7,
+     60.5
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1014,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -121.5,
+     50.4
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1011,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -102.4,
+     37.7
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1013,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -93.6,
+     44.3
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1019,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -114.8,
+     35.1
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1013,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -94.1,
+     63.7
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1011,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -164.0,
+     13.6
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1009,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -154.5,
+     17.3
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1010,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -43.0,
+     43.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 982,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -40.7,
+     53.6
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 990,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -52.6,
+     58.4
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 972,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -3.0,
+     64.4
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 964,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -11.4,
+     66.5
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 961,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -85.6,
+     77.6
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1002,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -174.0,
+     50.0
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1010,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -128.4,
+     52.1
+    ]
+   },
+   "properties": {
+    "feature": "LOW",
+    "hires": true,
+    "strength": 1012,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -99.8,
+      38.5
+     ],
+     [
+      -99.3,
+      38.6
+     ],
+     [
+      -98.9,
+      38.7
+     ],
+     [
+      -98.6,
+      38.7
+     ],
+     [
+      -98.2,
+      38.8
+     ],
+     [
+      -97.7,
+      39.0
+     ],
+     [
+      -97.2,
+      39.2
+     ],
+     [
+      -96.6,
+      39.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -103.6,
+      44.3
+     ],
+     [
+      -105.0,
+      44.1
+     ],
+     [
+      -106.0,
+      44.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -106.0,
+      44.0
+     ],
+     [
+      -107.1,
+      44.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -107.2,
+      43.9
+     ],
+     [
+      -108.3,
+      42.9
+     ],
+     [
+      -109.9,
+      41.9
+     ],
+     [
+      -111.9,
+      41.1
+     ],
+     [
+      -113.3,
+      40.6
+     ],
+     [
+      -115.1,
+      40.0
+     ],
+     [
+      -116.9,
+      39.6
+     ],
+     [
+      -117.6,
+      39.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -93.6,
+      44.1
+     ],
+     [
+      -94.0,
+      43.1
+     ],
+     [
+      -95.1,
+      41.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -95.1,
+      41.1
+     ],
+     [
+      -95.8,
+      40.2
+     ],
+     [
+      -96.6,
+      39.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -111.2,
+      50.2
+     ],
+     [
+      -108.2,
+      48.3
+     ],
+     [
+      -106.2,
+      47.3
+     ],
+     [
+      -103.5,
+      46.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -107.1,
+      44.0
+     ],
+     [
+      -106.1,
+      42.6
+     ],
+     [
+      -105.4,
+      40.9
+     ],
+     [
+      -104.8,
+      39.8
+     ],
+     [
+      -103.6,
+      38.7
+     ],
+     [
+      -102.5,
+      37.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -99.4,
+      43.8
+     ],
+     [
+      -101.2,
+      44.3
+     ],
+     [
+      -103.4,
+      44.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -99.8,
+      38.5
+     ],
+     [
+      -101.4,
+      38.8
+     ],
+     [
+      -102.7,
+      40.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -111.3,
+      50.2
+     ],
+     [
+      -112.1,
+      49.0
+     ],
+     [
+      -114.8,
+      48.6
+     ],
+     [
+      -115.8,
+      47.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -113.8,
+      60.0
+     ],
+     [
+      -112.2,
+      53.4
+     ],
+     [
+      -112.1,
+      52.0
+     ],
+     [
+      -111.5,
+      50.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -103.4,
+      44.2
+     ],
+     [
+      -102.8,
+      42.9
+     ],
+     [
+      -102.5,
+      41.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -104.1,
+      47.4
+     ],
+     [
+      -102.2,
+      47.7
+     ],
+     [
+      -100.4,
+      47.7
+     ],
+     [
+      -96.2,
+      46.8
+     ],
+     [
+      -93.7,
+      44.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -85.2,
+      40.5
+     ],
+     [
+      -86.4,
+      40.9
+     ],
+     [
+      -87.9,
+      41.6
+     ],
+     [
+      -89.8,
+      42.3
+     ],
+     [
+      -91.5,
+      42.9
+     ],
+     [
+      -93.6,
+      44.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -91.9,
+      46.2
+     ],
+     [
+      -90.0,
+      46.6
+     ],
+     [
+      -87.4,
+      46.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -70.6,
+      41.3
+     ],
+     [
+      -71.1,
+      42.0
+     ],
+     [
+      -71.4,
+      42.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -78.6,
+      39.9
+     ],
+     [
+      -78.7,
+      41.0
+     ],
+     [
+      -78.8,
+      42.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -74.6,
+      41.2
+     ],
+     [
+      -75.6,
+      39.7
+     ],
+     [
+      -75.7,
+      38.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -90.2,
+      33.8
+     ],
+     [
+      -89.6,
+      35.4
+     ],
+     [
+      -89.5,
+      36.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -68.6,
+      47.8
+     ],
+     [
+      -70.6,
+      47.3
+     ],
+     [
+      -72.7,
+      47.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -121.6,
+      50.3
+     ],
+     [
+      -120.8,
+      47.5
+     ],
+     [
+      -121.4,
+      44.8
+     ],
+     [
+      -123.4,
+      42.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -115.1,
+      43.7
+     ],
+     [
+      -113.6,
+      45.2
+     ],
+     [
+      -112.7,
+      46.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -122.6,
+      54.8
+     ],
+     [
+      -121.6,
+      52.5
+     ],
+     [
+      -121.5,
+      50.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -106.2,
+      31.7
+     ],
+     [
+      -103.7,
+      35.4
+     ],
+     [
+      -102.5,
+      37.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -117.7,
+      39.4
+     ],
+     [
+      -117.1,
+      37.7
+     ],
+     [
+      -115.6,
+      36.4
+     ],
+     [
+      -114.8,
+      35.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -115.7,
+      62.6
+     ],
+     [
+      -114.2,
+      61.5
+     ],
+     [
+      -113.7,
+      60.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -87.0,
+      63.0
+     ],
+     [
+      -94.3,
+      63.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -94.4,
+      63.3
+     ],
+     [
+      -99.2,
+      62.8
+     ],
+     [
+      -107.1,
+      62.7
+     ],
+     [
+      -112.3,
+      62.9
+     ],
+     [
+      -117.6,
+      64.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -72.3,
+      68.2
+     ],
+     [
+      -76.8,
+      64.7
+     ],
+     [
+      -84.3,
+      62.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -165.4,
+      66.6
+     ],
+     [
+      -159.7,
+      65.3
+     ],
+     [
+      -158.1,
+      63.8
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -117.9,
+      39.4
+     ],
+     [
+      -119.3,
+      39.1
+     ],
+     [
+      -120.4,
+      39.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -118.2,
+      41.3
+     ],
+     [
+      -118.1,
+      40.6
+     ],
+     [
+      -117.7,
+      39.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -114.8,
+      35.0
+     ],
+     [
+      -114.9,
+      33.8
+     ],
+     [
+      -114.7,
+      32.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -117.3,
+      36.0
+     ],
+     [
+      -118.6,
+      34.9
+     ],
+     [
+      -120.4,
+      34.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -89.5,
+      44.1
+     ],
+     [
+      -88.3,
+      44.1
+     ],
+     [
+      -87.0,
+      44.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -9.5,
+      29.4
+     ],
+     [
+      -13.0,
+      25.0
+     ],
+     [
+      -14.6,
+      19.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -54.2,
+      23.3
+     ],
+     [
+      -55.7,
+      19.9
+     ],
+     [
+      -56.2,
+      16.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -58.0,
+      30.7
+     ],
+     [
+      -62.9,
+      28.7
+     ],
+     [
+      -67.8,
+      27.7
+     ],
+     [
+      -72.1,
+      27.5
+     ],
+     [
+      -75.5,
+      26.8
+     ],
+     [
+      -77.6,
+      25.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -30.7,
+      31.3
+     ],
+     [
+      -34.0,
+      30.4
+     ],
+     [
+      -38.3,
+      28.9
+     ],
+     [
+      -42.0,
+      29.2
+     ],
+     [
+      -44.4,
+      30.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -77.7,
+      24.4
+     ],
+     [
+      -78.3,
+      23.0
+     ],
+     [
+      -80.0,
+      21.5
+     ],
+     [
+      -80.9,
+      19.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -80.8,
+      19.1
+     ],
+     [
+      -80.2,
+      16.4
+     ],
+     [
+      -80.7,
+      13.0
+     ],
+     [
+      -82.8,
+      10.5
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -113.3,
+      32.0
+     ],
+     [
+      -112.5,
+      28.7
+     ],
+     [
+      -109.4,
+      24.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -98.4,
+      26.1
+     ],
+     [
+      -97.6,
+      27.9
+     ],
+     [
+      -95.8,
+      29.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -178.0,
+      28.7
+     ],
+     [
+      -178.9,
+      26.0
+     ],
+     [
+      -178.7,
+      22.6
+     ],
+     [
+      -177.5,
+      20.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -164.0,
+      13.5
+     ],
+     [
+      -161.8,
+      13.7
+     ],
+     [
+      -157.3,
+      15.1
+     ],
+     [
+      -154.6,
+      17.3
+     ],
+     [
+      -148.6,
+      19.0
+     ],
+     [
+      -144.6,
+      22.0
+     ],
+     [
+      -141.8,
+      24.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -139.0,
+      31.2
+     ],
+     [
+      -138.8,
+      29.7
+     ],
+     [
+      -139.1,
+      28.0
+     ],
+     [
+      -140.4,
+      25.4
+     ],
+     [
+      -141.9,
+      24.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -146.8,
+      29.8
+     ],
+     [
+      -145.5,
+      32.0
+     ],
+     [
+      -143.6,
+      32.6
+     ],
+     [
+      -141.6,
+      32.6
+     ],
+     [
+      -140.3,
+      32.2
+     ],
+     [
+      -139.0,
+      31.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -139.0,
+      31.2
+     ],
+     [
+      -136.8,
+      30.8
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -146.7,
+      30.0
+     ],
+     [
+      -148.2,
+      28.1
+     ],
+     [
+      -150.3,
+      26.8
+     ],
+     [
+      -154.5,
+      25.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -43.0,
+      43.1
+     ],
+     [
+      -42.5,
+      43.1
+     ],
+     [
+      -42.1,
+      43.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -42.0,
+      43.0
+     ],
+     [
+      -41.2,
+      43.1
+     ],
+     [
+      -40.2,
+      43.2
+     ],
+     [
+      -39.8,
+      43.3
+     ],
+     [
+      -37.4,
+      43.1
+     ],
+     [
+      -36.2,
+      43.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -42.0,
+      43.0
+     ],
+     [
+      -41.8,
+      42.4
+     ],
+     [
+      -42.0,
+      41.2
+     ],
+     [
+      -42.4,
+      39.7
+     ],
+     [
+      -42.6,
+      39.1
+     ],
+     [
+      -43.1,
+      37.4
+     ],
+     [
+      -44.0,
+      36.2
+     ],
+     [
+      -44.7,
+      35.5
+     ],
+     [
+      -45.1,
+      35.2
+     ],
+     [
+      -47.4,
+      33.6
+     ],
+     [
+      -50.0,
+      32.8
+     ],
+     [
+      -51.6,
+      32.3
+     ],
+     [
+      -53.3,
+      31.8
+     ],
+     [
+      -55.5,
+      31.2
+     ],
+     [
+      -56.4,
+      30.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -43.1,
+      42.4
+     ],
+     [
+      -43.3,
+      41.1
+     ],
+     [
+      -43.9,
+      39.5
+     ],
+     [
+      -44.6,
+      38.3
+     ],
+     [
+      -45.6,
+      37.3
+     ],
+     [
+      -46.9,
+      36.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -40.7,
+      53.6
+     ],
+     [
+      -42.2,
+      51.3
+     ],
+     [
+      -45.3,
+      47.5
+     ],
+     [
+      -48.1,
+      44.6
+     ],
+     [
+      -52.2,
+      41.4
+     ],
+     [
+      -59.5,
+      38.5
+     ],
+     [
+      -63.7,
+      37.5
+     ],
+     [
+      -70.1,
+      37.3
+     ],
+     [
+      -75.6,
+      37.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -51.0,
+      57.7
+     ],
+     [
+      -51.0,
+      56.1
+     ],
+     [
+      -52.6,
+      54.0
+     ],
+     [
+      -57.2,
+      51.4
+     ],
+     [
+      -62.1,
+      50.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -10.5,
+      64.6
+     ],
+     [
+      -11.5,
+      64.1
+     ],
+     [
+      -13.2,
+      63.8
+     ],
+     [
+      -15.5,
+      63.7
+     ],
+     [
+      -19.8,
+      64.0
+     ],
+     [
+      -26.2,
+      63.9
+     ],
+     [
+      -30.2,
+      63.3
+     ],
+     [
+      -36.2,
+      63.0
+     ],
+     [
+      -42.4,
+      63.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -68.8,
+      80.7
+     ],
+     [
+      -60.2,
+      75.0
+     ],
+     [
+      -53.0,
+      66.6
+     ],
+     [
+      -51.7,
+      60.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -2.5,
+      42.7
+     ],
+     [
+      -9.6,
+      39.5
+     ],
+     [
+      -16.9,
+      36.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -40.0,
+      28.7
+     ],
+     [
+      -33.1,
+      31.4
+     ],
+     [
+      -24.8,
+      33.2
+     ],
+     [
+      -16.7,
+      36.7
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -53.5,
+      58.2
+     ],
+     [
+      -54.8,
+      59.1
+     ],
+     [
+      -53.7,
+      60.3
+     ],
+     [
+      -48.9,
+      60.3
+     ],
+     [
+      -44.7,
+      59.4
+     ],
+     [
+      -41.8,
+      59.2
+     ],
+     [
+      -37.1,
+      59.8
+     ],
+     [
+      -34.2,
+      59.7
+     ],
+     [
+      -33.3,
+      59.7
+     ],
+     [
+      -28.1,
+      59.0
+     ],
+     [
+      -22.7,
+      57.9
+     ],
+     [
+      -18.5,
+      56.3
+     ],
+     [
+      -16.5,
+      54.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -16.1,
+      55.2
+     ],
+     [
+      -17.1,
+      53.6
+     ],
+     [
+      -20.3,
+      51.8
+     ],
+     [
+      -23.7,
+      51.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -16.3,
+      55.4
+     ],
+     [
+      -14.3,
+      54.0
+     ],
+     [
+      -12.9,
+      50.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -40.6,
+      49.5
+     ],
+     [
+      -42.2,
+      47.3
+     ],
+     [
+      -43.2,
+      45.6
+     ],
+     [
+      -44.0,
+      44.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -12.0,
+      66.7
+     ],
+     [
+      -7.2,
+      68.0
+     ],
+     [
+      -3.3,
+      68.4
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -37.3,
+      56.2
+     ],
+     [
+      -38.3,
+      55.0
+     ],
+     [
+      -40.5,
+      53.8
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -101.8,
+      77.8
+     ],
+     [
+      -82.7,
+      77.3
+     ],
+     [
+      -71.1,
+      74.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -175.6,
+      69.5
+     ],
+     [
+      -169.7,
+      66.6
+     ],
+     [
+      -168.9,
+      62.6
+     ],
+     [
+      -169.5,
+      60.4
+     ],
+     [
+      -171.4,
+      55.1
+     ],
+     [
+      -172.9,
+      52.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -173.8,
+      50.0
+     ],
+     [
+      -172.5,
+      52.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -175.8,
+      69.5
+     ],
+     [
+      -169.8,
+      70.0
+     ],
+     [
+      -161.8,
+      70.1
+     ],
+     [
+      -157.3,
+      69.8
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -173.0,
+      50.0
+     ],
+     [
+      -172.1,
+      50.0
+     ],
+     [
+      -167.9,
+      49.4
+     ],
+     [
+      -162.4,
+      48.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -149.9,
+      48.2
+     ],
+     [
+      -149.9,
+      48.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "WARM",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -127.2,
+      48.9
+     ],
+     [
+      -127.7,
+      48.0
+     ],
+     [
+      -129.8,
+      46.0
+     ],
+     [
+      -131.7,
+      45.0
+     ],
+     [
+      -134.7,
+      44.8
+     ],
+     [
+      -137.0,
+      44.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -128.3,
+      52.1
+     ],
+     [
+      -127.4,
+      51.5
+     ],
+     [
+      -127.0,
+      50.7
+     ],
+     [
+      -127.2,
+      49.0
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "OCFNT",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -148.1,
+      60.6
+     ],
+     [
+      -138.7,
+      57.7
+     ],
+     [
+      -133.6,
+      55.0
+     ],
+     [
+      -128.4,
+      52.1
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "TROF",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ],
+     [
+      -172.1,
+      46.6
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -174.4,
+      39.2
+     ],
+     [
+      -174.4,
+      39.2
+     ],
+     [
+      -174.4,
+      39.2
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -172.4,
+      46.3
+     ],
+     [
+      -172.4,
+      46.3
+     ],
+     [
+      -172.4,
+      46.3
+     ],
+     [
+      -172.4,
+      46.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -175.1,
+      49.4
+     ],
+     [
+      -176.1,
+      46.4
+     ],
+     [
+      -178.3,
+      41.9
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "COLD",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -168.2,
+      78.8
+     ],
+     [
+      -148.0,
+      77.1
+     ],
+     [
+      -139.3,
+      74.4
+     ],
+     [
+      -133.0,
+      71.4
+     ],
+     [
+      -122.5,
+      66.1
+     ],
+     [
+      -117.5,
+      64.3
+     ]
+    ]
+   },
+   "properties": {
+    "feature": "STNRY",
+    "hires": true,
+    "strength": null,
+    "valid": "2026-10-27T18:00Z"
+   }
+  }
+ ],
+ "properties": {
+  "title": "NOAA NWS WPC coded surface bulletin (CODSUS), valid 2026-10-27T18:00Z",
+  "headers": {
+   "regular": "ASUS01 KWBC 271935",
+   "hires": "ASUS02 KWBC 271800"
+  },
+  "counts": {
+   "regular": {
+    "HIGH": 19,
+    "LOW": 20,
+    "WARM": 9,
+    "COLD": 16,
+    "STNRY": 12,
+    "OCFNT": 4,
+    "TROF": 38
+   },
+   "hires": {
+    "HIGH": 19,
+    "LOW": 20,
+    "WARM": 9,
+    "COLD": 16,
+    "STNRY": 12,
+    "OCFNT": 5,
+    "TROF": 38
+   }
+  },
+  "conventions": "lon < 0 = west, lat > 0 = north (EPSG:4326); strength = central pressure [hPa] for HIGH/LOW, WK/MDT/STG or null for fronts; front polylines run in the bulletin's order (WPC draws the symbols on the left of the direction of travel along the line)",
+  "dataset_key": "WPC-CODSUS",
+  "source_url": "https://mesonet.agron.iastate.edu/cgi-bin/afos/retrieve.py?pil=CODSUS&sdate=2026-10-27T17:00Z&edate=2026-10-27T23:59Z&fmt=text&limit=20",
+  "licence": "NOAA NWS Weather Prediction Center product, US Government work, public domain; archived by the Iowa Environmental Mesonet (https://www.weather.gov/disclaimer; https://mesonet.agron.iastate.edu/info/disclaimer.php)",
+  "citation": "NOAA NWS Weather Prediction Center, Coded Surface Bulletin (CODSUS), via the Iowa Environmental Mesonet NWS text product archive (https://mesonet.agron.iastate.edu/wx/afos/)",
+  "credit": "NOAA NWS Weather Prediction Center (coded surface bulletin), via the Iowa Environmental Mesonet",
+  "redistributable": "yes",
+  "fluidpy_commit": "b2857bc+dirty",
+  "created": "2026-10-27T20:19:01"
+ }
+}

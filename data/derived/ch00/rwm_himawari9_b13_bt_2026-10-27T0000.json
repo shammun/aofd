@@ -1,0 +1,46 @@
+{
+ "licence": "NASA EOSDIS imagery: NASA-led mission data are CC0, no use restrictions; credit NASA, imply no endorsement (https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance)",
+ "credit": "Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS); JMA Himawari-9 AHI",
+ "dataset_key": "NASA-GIBS",
+ "redistributable": "yes",
+ "fluidpy_commit": "b2857bc+dirty",
+ "method": "native-resolution WMTS tiles (no resampling by the server), palette colours mapped back to the class value of the layer's GIBS colormap v1.3 (exact match, else within 2/255, else - for blends GIBS made while reprojecting a coloured image - interpolated along the palette ramp within 3 grey levels); colours with candidate values > 2 K apart (the clean-IR palette has two grey ramps) take the candidate nearest the mean of unambiguous pixels in a 9 x 9 window",
+ "file": "rwm_himawari9_b13_bt_2026-10-27T0000.png",
+ "encoding": "8-bit grey PNG; k=0 missing; value = lo + (k-1)*(hi-lo)/254",
+ "lo": 180.0,
+ "hi": 320.0,
+ "step": 0.5511811023622047,
+ "shape": [
+  4552,
+  4552
+ ],
+ "missing_fraction": 0.11889,
+ "clipped_fraction": 2e-05,
+ "layer": "Himawari_AHI_Band13_Clean_Infrared",
+ "time": "2026-10-27T00:00:00Z",
+ "units": "K",
+ "fill_note": "pixels on the Earth disk whose colour could not be inverted (blends across sharp edges, 623881 px) take the value of the nearest recovered pixel; off-disk stays missing",
+ "lat_edges": [
+  -80.015625,
+  80.015625
+ ],
+ "lon_edges": [
+  59.9765625,
+  220.0078125
+ ],
+ "grid": "regular lat/lon EPSG:4326 0.03515625 deg (native GIBS level 4), row 0 = north edge; longitudes run eastward from 60 E across the antimeridian (lon_edges in 0-360 style)",
+ "match": {
+  "units": "K",
+  "matched_exact": 14143052,
+  "matched_near": 1974772,
+  "matched_blend": 1515435,
+  "unmatched": 623881,
+  "nodata": 2463564,
+  "ambiguous": 13953273,
+  "ambiguous_changed_by_context": 302971,
+  "value_resolution": 0.5,
+  "filled_from_nearest": 623881
+ },
+ "source_zip": "wmts_d11_Himawari_AHI_Band13_Clean_Infrared_2026-10-27T0000Z_L4.zip",
+ "colormap_url": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/Clean_Longwave_Infrared_Window_Band.xml"
+}

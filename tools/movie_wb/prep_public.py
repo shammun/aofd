@@ -29,7 +29,10 @@ IMAGES = {  # out name: (source, max width)
     "wb_modis_20231102.jpg": (DER / "ciaran_modis_aqua_truecolour_2023-11-02.jpg", 2100),
     "wb_cumulus_20240624.jpg": (DER / "cumulus_france_2024-06-24_modis_aqua_250m.jpg", 1600),
 }
-BINS = ["global_20231102T12.bin", "ciaran_hourly.bin", "ciaran_850.bin", "climatology.bin"]
+BINS = ["global_20231102T12.bin", "ciaran_hourly.bin", "ciaran_850.bin", "climatology.bin", "latest_gfs.bin", "tibet_etopo.bin"]
+CROPS = {  # out name: (source, lat0, lat1, lon0, lon1) on an equirectangular image (-180..180, 90..-90)
+    "wb_bmng_tibet.jpg": (CP / "globe_bmng_topo_200409_5400x2700.jpg", 25.0, 42.0, 72.0, 105.0),
+}
 
 
 def main() -> int:
@@ -47,6 +50,12 @@ def main() -> int:
             im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         im.save(dst, quality=90)
         print(f"{name}: {im.size}")
+    for name, (src, la0, la1, lo0, lo1) in CROPS.items():
+        im = Image.open(src).convert("RGB")
+        W_, H_ = im.size
+        box = (round((lo0 + 180) / 360 * W_), round((90 - la1) / 180 * H_), round((lo1 + 180) / 360 * W_), round((90 - la0) / 180 * H_))
+        im.crop(box).save(a.out / name, quality=92)
+        print(name, box)
     for b in BINS:
         shutil.copy2(DATA / b, a.out / f"wb_{b}")
     if a.audio:

@@ -22,6 +22,12 @@ import xarray as xr  # noqa: E402
 from PIL import Image  # noqa: E402
 
 DPI = 150
+# kind: texture. GMT modern mode draws on a 32767-pt (11.6 m) page; saving that page uncropped at 150 dpi is a
+# ~4.6-gigapixel raster (the 2026-10-27 capability-test crash). Textures are therefore always cropped to the map and
+# rasterised at the dpi that gives exactly the requested pixel width; the request itself is capped.
+MAX_TEXTURE = (16384, 8192)          # largest texture we render (w, h); larger requests are scaled down + noted
+MAX_TEXTURE_PIXELS = MAX_TEXTURE[0] * MAX_TEXTURE[1]
+Image.MAX_IMAGE_PIXELS = int(MAX_TEXTURE_PIXELS * 1.25)     # PIL refuses anything beyond (never a 4.6-Gpx file)
 
 
 def write_cpt(job, path: Path) -> str:
@@ -102,12 +108,114 @@ def fit_canvas(src: Path, dst: Path, W: int, H: int, exact: bool = False) -> Non
     can.save(dst)
 
 
-def render_frame(job, fr, out: Path, work: Path):
+SYM = {"low": "#c1121f", "high": "#1d4ed8", "cold": "#1f4fd6", "warm": "#d62728", "occluded": "#7b2cbf",
+       "stationary": "#b5651d", "trough": "#b5651d", "barb": "#3d4a63", "place": "#1d2433"}   # cartostyle notebook
+
+
+def _lfile(lay, i):
+    return lay["files"][min(i, len(lay["files"]) - 1)] if "files" in lay else lay.get("file")
+
+
+def draw_layers(fig, job, i: int, notes: list) -> None:
+    """Recipe ``layers:`` with GMT symbols: geovectors (arrows, true azimuth, length ~ speed), WMO front symbols
+    (``-Sf``: cold triangles / warm semicircles on the side prep found with the temperature), H/L letters with the
+    central pressure, places (dot + label with a halo). No collision avoidance: GMT places what it is given."""
+    by = {}
+    for lay in job["layers"]:
+        by.setdefault(lay["type"], []).append(lay)
+    for lay in by.get("vectors", []):
+        g = xr.open_dataset(_lfile(lay, i))
+        nx, ny = lay.get("density") or (20, 12)
+        lo, la = g.lon.values, g.lat.values
+        ii = np.linspace(0, lo.size - 1, int(nx)).round().astype(int)
+        jj = np.linspace(0, la.size - 1, int(ny)).round().astype(int)
+        u, v = g.u.values[np.ix_(jj, ii)], g.v.values[np.ix_(jj, ii)]
+        X, Y = np.meshgrid(lo[ii], la[jj])
+        sp = np.hypot(u, v)
+        ok = np.isfinite(sp) & (sp > 0)
+        cell_km = (lo[-1] - lo[0]) / nx * 111.2 * np.cos(np.radians(np.mean(la)))
+        k = 0.8 * cell_km / max(float(np.nanpercentile(sp[ok], 95)), 1e-9)
+        az = (np.degrees(np.arctan2(u, v)) + 360) % 360          # azimuth the wind blows TO, clockwise from north
+        fig.plot(x=X[ok], y=Y[ok], style="=0.18c+e+h0.5", direction=[az[ok], (sp[ok] * k)],
+                 pen=f"0.9p,{lay.get('color', SYM['barb'])}", fill=lay.get("color", SYM["barb"]))
+        notes.append("pygmt vectors: arrows (geovectors), not WMO barbs")
+    for lay in by.get("fronts", []):
+        gj = json.loads(Path(lay["file"]).read_text(encoding="utf-8"))
+        for ft in gj["features"]:
+            kind = ft["properties"]["kind"]
+            xy = np.asarray(ft["geometry"]["coordinates"], float)
+            col = SYM.get(kind, SYM["cold"])
+            wl = ft["properties"].get("warm_left")
+            if kind == "trough":
+                fig.plot(x=xy[:, 0], y=xy[:, 1], pen=f"1.8p,{col},-")
+                continue
+            left = True if wl is None else (wl if kind == "cold" else not wl)
+            sym = "+t" if kind in ("cold", "occluded") else "+c"
+            fig.plot(x=xy[:, 0], y=xy[:, 1], pen="4p,white")
+            fig.plot(x=xy[:, 0], y=xy[:, 1], pen=f"1.6p,{col}", fill=col,
+                     style=f"f0.9c/0.28c{'+l' if left else '+r'}{sym}")
+            if wl is None:
+                notes.append("front without temperature: symbols drawn on the left (check the side)")
+    for lay in by.get("extrema", []):
+        gj = json.loads(Path(_lfile(lay, i)).read_text(encoding="utf-8"))
+        letters = lay.get("letters") or {"low": "L", "high": "H"}
+        for ft in gj["features"]:
+            x, y = ft["geometry"]["coordinates"][:2]
+            kd = ft["properties"]["kind"]
+            col = SYM[kd]
+            fig.text(x=x, y=y, text=letters[kd], font=f"26p,Helvetica-Bold,{col}=~2p,white", justify="CM",
+                     no_clip=False)
+            fig.text(x=x, y=y, text=f"{ft['properties']['value']:.0f}", font=f"11p,Helvetica-Bold,{col}=~1.5p,white",
+                     justify="TC", offset="0c/-0.5c", no_clip=False)
+    for lay in by.get("points", []):
+        gj = json.loads(Path(lay["file"]).read_text(encoding="utf-8"))
+        fs = gj["features"][: int(lay.get("max_labels", 8))]
+        if not fs:
+            continue
+        x = [f["geometry"]["coordinates"][0] for f in fs]
+        y = [f["geometry"]["coordinates"][1] for f in fs]
+        if lay.get("marker", True):
+            fig.plot(x=x, y=y, style="c0.16c", fill=SYM["place"], pen="0.8p,white")
+        if lay.get("label", True):
+            for xx, yy, f in zip(x, y, fs):
+                fig.text(x=xx, y=yy, text=f["properties"]["name"], font=f"9p,Helvetica,{SYM['place']}=~1.2p,white",
+                         justify="BL", offset="0.12c/0.1c")
+    if by.get("points") or by.get("extrema"):
+        notes.append("pygmt labels: no collision avoidance (use mpl + cartostyle for final synoptic charts)")
+
+
+def texture_size(job, notes: list) -> tuple[int, int]:
+    """Pixel size of a texture: the recipe ``size``, kept at the region's lon:lat aspect, capped at MAX_TEXTURE."""
+    W, H = (int(v) for v in job["size"])
+    b = job["bounds"]
+    if job["recipe"].get("region", "global") == "global":
+        span_x, span_y = 360.0, 180.0
+    else:
+        span_x, span_y = b[2] - b[0], b[3] - b[1]
+    want_h = max(1, round(W * span_y / span_x))
+    if abs(want_h - H) > 1:
+        notes.append(f"texture height {H} -> {want_h} px to keep the equirectangular lon:lat aspect "
+                     f"({span_x:g} x {span_y:g} deg)")
+        H = want_h
+    s = min(1.0, MAX_TEXTURE[0] / W, MAX_TEXTURE[1] / H)
+    if s < 1.0:
+        notes.append(f"texture {W}x{H} capped to {round(W * s)}x{round(H * s)} (MAX_TEXTURE {MAX_TEXTURE})")
+        W, H = round(W * s), round(H * s)
+    return W, H
+
+
+def render_frame(job, fr, out: Path, work: Path, notes: list | None = None):
+    notes = [] if notes is None else notes
     W, H = job["size"]
     style = job["style"]
     b = job["bounds"]
     texture = job["kind"] == "texture"
-    region = "d" if (texture or job["recipe"].get("region", "global") == "global") else [b[0], b[2], b[1], b[3]]
+    if texture:
+        W, H = texture_size(job, notes)
+        gl = job["recipe"].get("region", "global") == "global"
+        region = [-180, 180, -90, 90] if gl else [b[0], b[2], b[1], b[3]]
+    else:
+        region = "d" if job["recipe"].get("region", "global") == "global" else [b[0], b[2], b[1], b[3]]
     cpt = write_cpt(job, work / "lut.cpt")
     grid = xr.open_dataset(fr["nc"])["field"]
     width_in = W / DPI
@@ -119,6 +227,8 @@ def render_frame(job, fr, out: Path, work: Path):
     pygmt.config(MAP_FRAME_TYPE="plain", FONT_ANNOT_PRIMARY="8p", PS_PAGE_COLOR="white")
     cam = job.get("camera")
     if cam and not texture and job["kind"] in ("png", "png_sequence"):
+        if job.get("layers"):
+            notes.append("symbol layers are not drawn on grdview 3-D stills (draped text/symbols shear)")
         zmin, zmax = float(grid.min()), float(grid.max())
         fig.grdview(grid=grid, region=region + [zmin, zmax] if isinstance(region, list) else region,
                     projection=proj, perspective=[cam.get("azimuth", 170), cam.get("elevation", 35)],
@@ -138,8 +248,16 @@ def render_frame(job, fr, out: Path, work: Path):
                     continue
                 pen = "0.5p,#1a1a1a" if k != "borders" else "0.35p,#4d4d4d,4_2:0p"
                 fig.plot(data=f, pen=pen)
+        if job.get("layers") and not texture:
+            draw_layers(fig, job, job["frames"].index(fr), notes)
     tmp = work / f"_gmt_{out.stem}.png"
-    fig.savefig(tmp, dpi=DPI, crop=True if not texture else False)
+    # always crop to the drawn map (an uncropped modern-mode page is gigapixels); a texture is rasterised at the
+    # dpi that maps width_in inches to exactly W pixels, then snapped to W x H (sub-pixel crop rounding only)
+    fig.savefig(tmp, dpi=DPI, crop=True)
+    with Image.open(tmp) as im:
+        got = im.size
+    if texture and (abs(got[0] - W) > 4 or abs(got[1] - H) > 4):
+        raise RuntimeError(f"GMT texture raster {got} far from the requested {W}x{H}: refusing to resample")
     fit_canvas(tmp, out, W, H, exact=texture)
 
 
@@ -147,13 +265,13 @@ def main():
     job, tool = _job.load()
     work = Path(job["workdir"]) / "pygmt"
     work.mkdir(exist_ok=True)
-    outs = []
+    outs, notes = [], []
     for fr, out in zip(job["frames"], job["outputs"]):
-        render_frame(job, fr, Path(out), work)
+        render_frame(job, fr, Path(out), work, notes)
         outs.append(out)
     with pygmt.clib.Session() as lib:
         gv = lib.info["version"]
-    _job.done(job, tool, f"pygmt {pygmt.__version__}, GMT {gv}", outs)
+    _job.done(job, tool, f"pygmt {pygmt.__version__}, GMT {gv}", outs, list(dict.fromkeys(notes)))
 
 
 if __name__ == "__main__":

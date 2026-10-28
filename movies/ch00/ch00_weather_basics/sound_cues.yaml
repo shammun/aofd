@@ -1,28 +1,173 @@
-# ch00_weather_basics sound cue sheet (motion-builder, 2026-10-27) for tools/sound (HOUSE_STYLE §8).
-# Times are absolute seconds in the narration (timing.json, v1 TTS 2350.15 s); offset = seconds after the scene's first sentence starts.
-# Effects only where the picture shows the thing, under the voice (−30…−24 LUFS short-term, ducked), never two at once.
-# intensity 0..1 (relative loudness inside that range). No caption tags: none of these sounds carries meaning the voice does not say.
-movie: ch00_weather_basics
+# ch00_weather_basics sound cue sheet v2 (tools/sound/mix.py format; scene + offset from timing.json, so the stage-2 narration inserts keep cues on their pictures).
+# Effects only where the picture shows the thing, quiet (-29 … -26 LUFS short-term before ducking), faded, at most one non-bed at a time.
+# v2 mix check: the two count ticks sat 1.8 and 5.4 LU under the voice, so they were dropped; rain_heavy and wind_gusty lowered 2 LU.
 music:
+  style: weather-basics-blend
+  seed: 11
+  bed_lufs: -28
+  duck_db: 5
+  tail_s: 2.5
   sections:
-    - {style: air-flowing, from_s: 0.0, to_s: 2090.90, note: 'basics, maps and the global preview'}
-    - {style: storm-tense, from_s: 2090.90, to_s: 2260.10, note: 'Storm Ciarán over Brest (s54-s59)'}
-    - {style: air-flowing, from_s: 2260.10, to_s: end, note: 'recap and end card; 2.5-s fade on the silent hold'}
-  fallback_if_one_style: air-flowing
+  - style: air-flowing
+    from_s: 0.0
+    to_s: 2126.05
+  - style: storm-tense
+    from_s: 2126.05
+    to_s: 2295.25
+  - style: air-flowing
+    from_s: 2295.25
+    to_s: end
+  note: two styles cross-faded with 4-s raised-cosine ramps by tools/movie_wb/sound_mix.py (tools/sound/mix.py takes one style)
+timing: timing.json
+sfx_duck_db: 5
 effects:
-  - {scene: s00_title, kind: tick, start_s: 0.60, offset_s: 0.30, duration_s: 4.00, intensity: 0.15, shows: "Part A readouts counting (height, T, p)"}
-  - {scene: s01_hook, kind: whoosh, start_s: 11.15, offset_s: 0.00, duration_s: 2.00, intensity: 0.2, shows: "globe turns to the North Atlantic"}
-  - {scene: s16_hydrostatic_numbers, kind: tick, start_s: 580.48, offset_s: 17.50, duration_s: 4.00, intensity: 0.15, shows: "lift readout 1013 -> 977 hPa counting"}
-  - {scene: s21_balloon_pressure, kind: whoosh, start_s: 772.90, offset_s: 0.00, duration_s: 3.00, intensity: 0.25, shows: "camera swoops from above France to the Trappes column"}
-  - {scene: s28_saturation, kind: water, start_s: 1048.28, offset_s: 0.00, duration_s: 20.00, intensity: 0.25, shows: "water surface with molecules leaving and landing (lapping, no splash)"}
-  - {scene: s35_why_wind, kind: wind, start_s: 1357.45, offset_s: 15.25, duration_s: 18.88, intensity: 0.3, shows: "real 10-m streaklines circling Ciarán"}
-  - {scene: s41_msl_isobars, kind: whoosh, start_s: 1635.05, offset_s: 19.22, duration_s: 2.00, intensity: 0.2, shows: "camera flies to the North Atlantic"}
-  - {scene: s43_lows_cloudy, kind: rain, start_s: 1694.67, offset_s: 17.15, duration_s: 5.70, intensity: 0.3, shows: "clouds and rain form in the low (map on Ciarán's spiral)"}
-  - {scene: s44_round_lows, kind: wind, start_s: 1717.08, offset_s: 0.00, duration_s: 22.50, intensity: 0.3, shows: "10-m wind arrows and streaklines swirling round the low"}
-  - {scene: s47_cold_front, kind: thunder, start_s: 1856.90, offset_s: 27.90, duration_s: 1.00, intensity: 0.35, shows: "distant thunder from the tall cumulonimbus"}
-  - {scene: s47_cold_front, kind: rain, start_s: 1857.91, offset_s: 28.91, duration_s: 3.06, intensity: 0.35, shows: "heavy showers in a narrow band"}
-  - {scene: s48_warm_front, kind: rain, start_s: 1898.12, offset_s: 25.12, duration_s: 2.83, intensity: 0.2, shows: "steady light rain under the layered cloud sheet"}
-  - {scene: s54_ciaran_intro, kind: whoosh, start_s: 2090.90, offset_s: 0.00, duration_s: 2.50, intensity: 0.25, shows: "camera zooms from space to the Ciarán map"}
-  - {scene: s55_ciaran_maps, kind: wind, start_s: 2127.38, offset_s: 0.00, duration_s: 20.35, intensity: 0.45, shows: "wind rising as the hourly isobars tighten (ramp to the 03 UTC peak, then easing)"}
-  - {scene: s56_brest_pressure, kind: waves, start_s: 2157.50, offset_s: 8.97, duration_s: 9.03, intensity: 0.25, shows: "waves on the Brest coast while the pressure falls fastest"}
-  - {scene: s58_brest_cold_front, kind: storm, start_s: 2213.85, offset_s: 3.32, duration_s: 11.55, intensity: 0.4, shows: "gusts at Brest as the wind swings west at 23 m/s"}
+- effect: whoosh
+  scene: s01_hook
+  offset: 0.0
+  duration: 1.6
+  intensity: 0.4
+  lufs: -28
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 12
+  shows: globe turns to the North Atlantic
+- effect: whoosh
+  scene: s21_balloon_pressure
+  offset: 0.0
+  duration: 2.2
+  intensity: 0.4
+  lufs: -28
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 14
+  shows: camera swoops from above France to the Trappes column
+- effect: stream
+  scene: s28_saturation
+  offset: 0.0
+  duration: 20.0
+  intensity: 0.3
+  lufs: -29
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 15
+  shows: 'water surface: molecules leaving and landing'
+- effect: wind_gentle
+  scene: s35_why_wind
+  offset: 15.25
+  duration: 18.88
+  intensity: 0.4
+  lufs: -28
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 16
+  shows: real 10-m streaklines circling Ciarán
+- effect: whoosh
+  scene: s41_msl_isobars
+  offset: 19.22
+  duration: 1.6
+  intensity: 0.35
+  lufs: -29
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 17
+  shows: camera flies to the North Atlantic
+- effect: whoosh
+  scene: s42_highs_lows
+  offset: 42.71
+  duration: 1.6
+  intensity: 0.35
+  lufs: -29
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 18
+  shows: globe flight to the western Pacific (GFS map)
+- effect: rain_light
+  scene: s43_lows_cloudy
+  offset: 17.15
+  duration: 5.7
+  intensity: 0.4
+  lufs: -28
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 19
+  shows: clouds and rain form in the low
+- effect: wind_gentle
+  scene: s44_round_lows
+  offset: 0.0
+  duration: 22.5
+  intensity: 0.4
+  lufs: -28
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 20
+  shows: 10-m wind swirling round the low
+- effect: rain_heavy
+  scene: s47_cold_front
+  offset: 28.91
+  duration: 3.06
+  intensity: 0.45
+  lufs: -29
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 21
+  shows: heavy showers in a narrow band
+- effect: thunder_far
+  scene: s47_cold_front
+  offset: 27.9
+  duration: 2.5
+  intensity: 0.5
+  lufs: -27
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 22
+  shows: distant thunder from the cumulonimbus
+- effect: rain_light
+  scene: s48_warm_front
+  offset: 25.12
+  duration: 2.83
+  intensity: 0.3
+  lufs: -29
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 23
+  shows: steady rain under the layered cloud
+- effect: whoosh
+  scene: s54_ciaran_intro
+  offset: 0.0
+  duration: 2.4
+  intensity: 0.45
+  lufs: -27
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 24
+  shows: flight from space to Europe
+- effect: wind_gusty
+  scene: s55_ciaran_maps
+  offset: 0.0
+  duration: 20.35
+  intensity: 0.55
+  lufs: -28
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 25
+  shows: wind rising as the hourly isobars tighten
+- effect: surf
+  scene: s56_brest_pressure
+  offset: 8.97
+  duration: 9.03
+  intensity: 0.4
+  lufs: -28
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 26
+  shows: waves on the Brest coast while the pressure falls fastest
+- effect: wind_gusty
+  scene: s58_brest_cold_front
+  offset: 3.32
+  duration: 11.55
+  intensity: 0.55
+  lufs: -28
+  fade_in: 1.0
+  fade_out: 2.0
+  seed: 27
+  shows: gusts at Brest as the wind swings west at 23 m/s
