@@ -72,3 +72,7 @@ New scenes and their numbers. All are builder CHECK rows via `fluidpy.geo.vector
   before final TTS", as in §B.
 - **Moved here from #3** (orchestrator 2026-10-28, torque anchor): v4 s20_torque and s21_torque_axis. Their data is
   `cross_product_why/data/torque.json`, and the v4 manifest rows are unchanged.
+
+## Verifier notes (orchestrator, 2026-10-28; reports/ch00_rwm_verification.md)
+- F2 LAEA: "h·k = 1" holds only for the polar aspect. For the oblique map centred at 52.5° N the tested invariant is the areal scale a_max·b_min = 1. Narration and screen say "equal area", never "h times k is one".
+- T2: an exactly south-facing 18° slope gives sin(20.33° + 18°) = 0.6202, just above the 0.55–0.62 band. Use the real ETOPO aspect and quote the computed value; don't force it into the band.

@@ -137,3 +137,7 @@ Lexicon entries (Buys Ballot, Tissot, Himawari, METAR, decametres) are applied a
 - RM10 "ω = 58°": name the point (60° N 150° E gives 57.7°). RM05 drawn 500-km circles are ×2.005 / ×3.919 wide (local k 2.00 / 3.86).
 - RM23: MetPy parse_metar fails on the real Brest `//////TCU` METAR; use it as a benchmark only on reports without such groups.
 - This movie is now #69 (last) in the approved plan v2; the library (sphere, mapproj) also serves #5 (coordinates).
+
+## Verifier notes (orchestrator, 2026-10-28; reports/ch00_rwm_verification.md)
+- RM19: on the 12 UTC 2 Nov z500 map the trough axis is at 4.9–6.8° W only south of 48.5° N; north of 49° N it bends east to ≈ 0° (the cut-off low). Draw the axis from `diag.axes`, never a straight 5.5° W line to 55° N.
+- ISD SYNOPs carry no iw: for Irish, Dutch and Belgian stations call `decode_synop(..., wind_unit="m/s")` (or use ISD's decoded speed), otherwise speeds are 1.94× too small.
