@@ -3140,3 +3140,122 @@ every one of the 429 sentences), 116 per-scene tiles at 640 px, s55 every 0.5 s 
 - Neither needs new narration, except optionally S2 or S5.
 
 Disk at review: C: 74 GB free, G: 555 GB free. Review frames: 655 MB on G: (scratch, not committed).
+
+# ch00_weather_basics — review 3 (v3 fix loop 2, commit 8ed38fc, fresh eyes)                2026-10-28
+
+Movie: `movies/out/ch00/ch00_weather_basics/1080.mp4`. Frames I looked at:
+- 367 sentence-midpoint frames (one per sentence, every scene);
+- s55 every 0.5 s (36:06–36:32); s56–s59 every 1 s (36:32–38:23);
+- full-resolution stills at every review-2 item, plus crops;
+- a frame-difference scan across all 17 chunk seams.
+
+All are under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review3/` (127 MB, local only). I also checked `data/fronts.json` hour by hour myself.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics v3 fix 2 | 39:55.5 (2395.5 s) | 139.99 MB | 13/13 PASS | PASS (fronts honest) | PASS | PASS (1 small clip, S) | FIX (fronts vanish unexplained, N3-M1) | PASS (601 cues; VTT and SRT = source) | PASS (one colour-sense clash, S) | n/a (retired); none on screen | **FIX** |
+
+## qa.json
+- `pass: true`, with all 13 gates PASS: duration, size, codec, black, frozen, content, halves, loudness (−16.0 LUFS, −2.4 dBTP), flashes (0/s), captions (601 cues), subtitles, physics (31 functions reproduce their hashes) and equations (29 present).
+- `halves` is now PASS, where review 2 had a WARN.
+- `out/en.srt` and `out/en.vtt` are byte-identical to the storyboard folder's files (review-2 S3 fixed).
+- Chunk seams: the mean frame-to-frame difference across every seam is ≤ 0.6 grey levels. That matches neighbouring frames, and there are no jumps.
+
+## fronts.json, checked hour by hour (Brest 48.45 N 4.42 W)
+| UTC | warm line | cold line (NE end) | nearest to Brest |
+|---|---|---|---|
+| 12 | 510 km, starts at the low and runs E-SE | 2190 km, trailing WSW, 260 km from the low | warm 561 km, cold 797 km |
+| 15 | 936 km | 2677 km | warm 328 km, cold 456 km |
+| 18 | 861 km, (49.8 N 11.4 W) → (46.7 N 1.8 W) | 2626 km, NE end 48.0 N 6.7 W | **warm 15 km**, cold 175 km |
+| 19 | 622 km | NE end 48.5 N 5.7 W | warm 61 km, cold 91 km |
+| 20 | 660 km, NE of Brest | NE end 46.5 N 5.7 W | warm 143 km, cold 236 km |
+| 21 | 1019 km | 3051 km, NE end pulled back to 44.9 N 6.0 W, 491 km from the low (axis turn 13°) | warm 218 km, cold 413 km |
+| 22 → 12 (2 Nov) | none (`shown: false`) | none | – |
+
+- **Honest: yes.**
+  - Every hour shown passes the new shape rules: warm E–SE of the centre; cold ≥ 800 km and trailing S–SW; gaps 34–118 km; axis turns ≤ 36°. The 13 UTC warm turn of 36° is the only one above 30°, and the 30° gate applies to the cold line only.
+  - The cold line is the same trailing front as in s49/s50 at 18 UTC.
+  - The geometry at Brest is textbook. At 18 UTC the warm front passes 15 km from the town (37:05). At 20 UTC the warm front lies NE of Brest and the cold front's end is in Biscay to the SW, so Brest sits in the warm sector (37:20), just as narrated.
+  - After 21 UTC the cold line's NE end retreats south, 413 → 491 km from the low. The builder's note says the only S–SW cold line after 21 UTC lies SE of Brest, before the station's 00–03 UTC wind shift. Drawing it would contradict the Brest graph, and drawing nothing is the honest choice.
+  - In s58 no front line is drawn, so nothing on the map contradicts the station.
+- **Clear for a learner: not yet.** The fronts vanish twice with no word, and the second time it happens exactly as the voice says "cold front" (N3-M1 below).
+
+## Review-2 items, checked at their timestamps
+| item | verdict | evidence |
+|---|---|---|
+| N-M1 s42 "Ciarán 956 hPa" clipped | **fixed** | 28:08: the label sits whole under the L (x ≈ 440–815); "≈ 1030 hPa" sits under the H. Both read at 640 px. |
+| N-M2 s55–s58 fronts | **fixed (data and drawing)** | 36:10–36:18: the 12 UTC fronts are named on their words ("warm front" 36:11, "cold front" 36:12.5–36:13). 36:21–36:22.4: they move with the low to 20 UTC and fade 36:22.4–36:22.7. 37:05 and 37:20: correct 18/20 UTC geometry at Brest. 12 UTC 2 Nov (36:30): no stray lines east of the low. **Narration and clarity are still open:** see N3-M1. |
+| S1 empty halves | **fixed** | s07: "101 325 Pa: a big number" at 03:40.5, then "1 hPa = 100 Pa" and "hectopascals (hPa)" by 03:43.5. s42: "H high" at 27:42, then "L low". QA halves PASS. |
+| S2 s25 inset globe | **fixed** | 16:00–16:07: the full ring with a soft edge is clear of the plot. "≈ 8 km" and "≈ 16 km" are inside it. The key reads "Singapore ≈ 16 km, below −75 °C", which matches the voice. |
+| S3 stale `out/en.srt` | **fixed** | Byte-identical, and the new subtitles gate checks it. |
+| S4 s23/s24 profile top | **fixed** | 14:45.8: the balloon is a dot on the 33.9-km point. s24 (15:00–15:34) draws the same line to the same point. |
+| S5 "971" vs "about 970" | **fixed** | 36:20.5: "low: ≈ 970 hPa" appears on "about nine hundred and seventy", then the running values. 954 shows at 36:23 on "fifty-four". |
+| Cosmetic: L on the Brest dot | partly | The Brest ring is now drawn over the L (37:33–37:58), so the dot reads, but the L is half hidden at 00–03 UTC. |
+| Cosmetic: s44 high arc | fixed | The arc is inside the map (29:36–29:47). |
+| Cosmetic: H/L styles | fixed (one style everywhere) | Pink L and blue H in s35/s42/s44/s52/s55–s59. This creates S-a below. |
+| Cosmetic: s40 underbrace labels ≈ 40 px | still open | 26:49 "station p", "z_s: height". |
+
+## Spot check of the re-rendered chunks (1, 6, 7, 10, 12, 13, 15, 16, 17), ≥ 1 frame per sentence
+- **s05–s08:** column, stick figure, dial and room box are present from each scene's first frame, and the maths appears on its words.
+- **s21–s27:** radiosonde map; s22 shell bars; s23/s24 profile (thermosphere above mesosphere, ≈ 50 km dashed) are all as in review 2.
+- **s34–s37:** knots scale bar and Brest map at 100 km (47 N); the climate band "8 days in 10"; observing-system dots on the globe.
+- **s40–s46:** sea-level reduction 835 × e^(1.609/8.43) ≈ 1010; isobar keywords; NH low anticlockwise and high clockwise with the SH inset reversed (29:41); air masses at 850 hPa.
+- **s50–s54:** front symbols on the side they move towards; equinox geometry; ITCZ; trades and westerlies with gold links; Ciarán satellite with Brest.
+- **s59–s61:** 2 Nov afternoon map; recap keyword + picture per sentence; series end card with every element above y 860.
+- No regression found in these chunks apart from S-a, S-b and the cosmetics below.
+
+## MUST fix
+1. **N3-M1: 36:22.4–36:30 and 37:33.4–37:37 (s55 S1–S2, s58 S1). The fronts disappear with no word, and in s58 the blue line is removed exactly as the voice says "comes the cold front".**
+   - s55 S1 (36:07–36:18) says "…with the warm front in red and the cold front in blue, from midday on the first of November to midday on the second". The fronts are shown only to 21 UTC, which is about 2 s of the 12-s run, and then fade. A viewer reasonably hears that the fronts run until midday on the 2nd.
+   - Then s57 brings them back (37:01–37:33), and s58 drops them at the cut (37:33.8) during "A few hours later comes the cold front" (37:33.4–37:36.3).
+   - For 3 s nothing on screen is a cold front, until the graph band "cold front" appears at 37:37. The viewer sees the front go away at the moment it is said to arrive.
+   - **Exact sentence fixes (narration only; no new data):**
+     - s55 S1, replace with:
+       > "Here are the isobars every four hectopascals from midday on the first of November to midday on the second, with the warm front in red and the cold front in blue until that evening."
+     - s58 S1, keep "A few hours later comes the cold front." and add one new sentence after it:
+       > "By now the storm has broken and bent its fronts so much that the map can't trace them cleanly, but Brest's own measurements show it clearly."
+   - The s58 addition makes the "cold front" band on the graph the thing the voice points to. Fade the map's fronts out over the first 0.5 s of s58, instead of a hard cut, so the change is seen while it is spoken.
+   - Cost:
+     - two Kokoro clips; s55 gets about +1 s and s58 about +7 s;
+     - re-time the s58 graph reveals (band, readouts, "−2 °C", "cooler polar air") to the shifted sentences;
+     - re-render chunks 16–17 and re-run QA.
+   - Captions: both sentences split into ≤ 2 × 42-character cues at about 15 cps.
+
+## SHOULD fix
+1. **S-a: 27:41–28:35 (s42) and 34:28–34:50 (s52). On the coloured pressure maps, the letter colours contradict the colour bar.**
+   - The bar is blue = low and red = high. The blue "H" sits on red shading and the pink "L" sits on blue shading.
+   - It reads correctly as letters, but a learner who has just been taught the bar sees a "blue high".
+   - Fix: on the diverging MSLP globes (s41/s42/s52), draw H/L in cream with the 3-px dark outline. Keep pink L / blue H on the satellite and grey maps (s35, s43, s44, s55–s59).
+2. **S-b: 13:20–13:51 (s21). The bottom of "satellite: 1 Nov, afternoon" is cut by the picture's lower edge (y ≈ 860).**
+   - The comma's tail and the outline under the baseline are cut.
+   - It is readable, but it is a clipped label. Move the two keywords up about 14 px, or inside the image's safe box.
+3. **S-c: 36:26–36:30 (s55 S2). "its centre crosses the English Channel just north of Brest during the night" is spoken while the clock shows 07–11 UTC.**
+   - The crossing itself (01–02 UTC) went past at 36:23.
+   - Fix: spend more of the run on 22–04 UTC so the crossing lands on "during the night". Use the same frame budget and slow only those hours.
+   - This can be done in the same chunk-16 re-render as N3-M1.
+
+## COSMETIC
+- 15:56–16:09 (s25): the teal Singapore profile runs through the "Paris 11 km" label. Nudge the label 30 px down or left.
+- 37:23–37:33 (s57): "14.4 °C" on screen against the spoken "about fourteen and a half". Review 2 accepted it. Either say "fourteen point four" or show "≈ 14.5 °C".
+- 37:33–37:58 (s58): the L is half under the Brest ring at 00–03 UTC. Offset the L glyph 30 px up-left when it is within 40 px of the ring.
+- 26:49 (s40): the underbrace labels are still about 40 px.
+
+## House-style conformance
+- These all conform:
+  - the opening title, the arc and the "To sum up" recap;
+  - the weather end card;
+  - voice, colours (pressure teal, temperature orange, gold only for links, bands and the track);
+  - keywords only, no headings, boxes, equation labels, references or badges;
+  - every number on screen spoken (S5 fixed).
+- Departures:
+  - one visual-narration mismatch (N3-M1);
+  - one colour-sense clash (S-a);
+  - one clipped keyword (S-b).
+
+## Overall: FIX (ch00_weather_basics v3 fix 2 review 3 — N3-M1; S-a…S-c recommended)
+- N-M1 and N-M2 are fixed in data and drawing. The front choice by shape is honest, I confirmed it hour by hour in `fronts.json`, and the 18/20 UTC geometry at Brest is now textbook.
+- Review-2 S1–S5 are all fixed.
+- The one block is narration: the fronts' disappearance after 21 UTC, and again at the start of s58, is never said. Two sentences (above) and a re-render of chunks 16–17 close it.
+- After that fix I expect `qa_pass` with no further visual work. S-c is best done in the same re-render.
+
+Disk at review: C: 73 GB free, G: 553 GB free. Review frames: 127 MB on G: (scratch, not committed).
