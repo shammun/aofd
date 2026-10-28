@@ -23,3 +23,21 @@ Used by `../Fluid Dynamics/tests/geo/test_moist.py`, `tests/geo/test_atmos_weath
 | Tropopause in USSA-1976 | 11.000 km geopotential, 216.65 K | U.S. Standard Atmosphere 1976, NASA-TM-X-74335 (as above) | https://ntrs.nasa.gov/citations/19770009539 | `fluidpy.core.statics.standard_atmosphere` layer table | 2026-10-27 |
 | Espy cloud-base rule | ≈ 125 m per K of dew-point depression | rule of thumb; re-derived in the test from (18.27), (18.11), (2.246): 1/(g/c_p − g R^v T/(L R)) = 126.6 m/K at 288 K | — | V2 derivation (sympy) | 2026-10-27 |
 | Thermal front parameter, front lines | TFP = −∇\|∇τ\|·∇τ/\|∇τ\|; front at TFP max; K1 = 0.33 K/(100 km)², K2 = 1.49 K/100 km | Renard & Clarke 1965, *Mon. Wea. Rev.* 93, 547–556; Hewson 1998, *Meteorol. Appl.* 5, 37–65 | (papers) | analytic tanh-front truth in the tests (TFP max at tanh = 1/√3) | 2026-10-27 |
+
+## ch00 reading weather maps (#69), vectors 1a/1b, cross product #2, dot product 0.1b — library batches (verified 2026-10-28)
+
+Used by `../Fluid Dynamics/tests/geo/{test_sphere,test_mapproj,test_atmos_1a,test_vectors_1a1b,test_polygon_laea,test_terrain}.py`
+and `tests/diag/{test_station,test_axes,test_advection,test_monthly_anomaly,test_pattern_correlation}.py`. Independent
+implementations are run at test time (no table digitised); real report strings come from AOFD `data/derived/ch00/rwm_*`.
+
+| Benchmark | Value | Source | URL | How obtained | Verified |
+|---|---|---|---|---|---|
+| Geodesics on a sphere (distance, azimuth, forward, npts, polygon area) | `pyproj.Geod(a=b=6 371 000 m)` | Karney, C. F. F., 2013: Algorithms for geodesics. *J. Geodesy* 87, 43–55, doi:10.1007/s00190-012-0578-z; pyproj 3.8.0 / PROJ 9.8.1 | https://pyproj4.github.io/pyproj/ | run in the tests | 2026-10-28 |
+| Map projections (eqc, merc, eqearth, stere, lcc, sinu, laea; sphere `+R=`) and `get_factors` | PROJ forward equations and scale factors | PROJ 9.8.1 through pyproj 3.8.0; Snyder 1987 USGS PP 1395; Šavrič et al. 2019 doi:10.1080/13658816.2018.1504949 | https://proj.org | run in the tests | 2026-10-28 |
+| METAR decoding | 41 LFRB + 669 US/Canadian reports vs IEM decoded columns | Iowa Environmental Mesonet ASOS/METAR archive (python-metar decoder) | https://mesonet.agron.iastate.edu/request/download.phtml | stored derived product (data-scout, 2026-10-27) | 2026-10-28 |
+| SYNOP decoding | 263 reports vs NCEI ISD decoded mandatory fields | Smith, Lott & Vose 2011, *BAMS* 92, 704–708, doi:10.1175/2011BAMS3015.1 (ISD) | https://www.ncei.noaa.gov/access/services/data/v1 | stored derived product | 2026-10-28 |
+| METAR decoding (second decoder) | MetPy 1.7.1 `metpy.io.metar.parse_metar` | May et al., MetPy, doi:10.5065/D6WW7G29 | https://unidata.github.io/MetPy/ | run in the tests | 2026-10-28 |
+| ω → w | MetPy 1.7.1 `metpy.calc.vertical_velocity` (mixing-ratio route to T_v) | MetPy (as above) | https://unidata.github.io/MetPy/latest/api/generated/metpy.calc.vertical_velocity.html | run in the tests (rtol 1e-12 with MetPy's constants) | 2026-10-28 |
+| Station SLP vs reanalysis | RMS(decoded SYNOP SLP − ERA5 msl) = 0.87 hPa (214 stations, 03 UTC 2 Nov 2023) | ERA5 (Hersbach et al. 2020, doi:10.1002/qj.3803), ARCO-ERA5, CC-BY 4.0 | gs://gcp-public-data-arco-era5 | stored derived product | 2026-10-28 |
+| Hillshade algorithm | Hillshade = cos Zen cos Slope + sin Zen sin Slope cos(Az − Aspect); Az_math = 360 − Az + 90; Aspect = atan2(dz/dy, −dz/dx); Horn a…i stencil | Esri ArcGIS Pro, "How Hillshade works" (Burrough & McDonnell 1998); Horn 1981, *Proc. IEEE* 69, 14–47 | https://doc.esri.com/en/arcgis-pro/latest/tool-reference/3d-analyst/how-hillshade-works.html | WebFetch, transcribed into the test | 2026-10-28 |
+| Pattern correlation | centred R = Pearson over space | Taylor, K. E., 2001, *JGR* 106(D7), 7183–7192, Eq. (1); numpy `corrcoef` | — | run in the tests | 2026-10-28 |
