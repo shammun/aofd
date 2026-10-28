@@ -1,0 +1,23 @@
+{
+  "stefan_boltzmann_W_m2_K4": {
+    "value": 5.670374419e-08,
+    "exact": true,
+    "source": "CODATA 2022 (NIST CUU)"
+  },
+  "santer_ne_formula": {
+    "value": "n_e = n (1 - r1)/(1 + r1); r1 of residuals; n_e - 2 replaces n - 2",
+    "source": "Santer et al. 2008 IJoC 28, Eqs. (4)-(6)"
+  },
+  "latent_heat_T_coeffs": {
+    "value": [
+      2501000.0,
+      -2370.0
+    ],
+    "unit": "J/kg, J/kg/degC",
+    "source": "Stull 1988 (bigleaf docs)"
+  },
+  "c3s_gmst_2023_11_degC": {
+    "value": 14.22,
+    "source": "C3S monthly bulletin Nov 2023 (ERA5)"
+  }
+}
