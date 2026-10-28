@@ -28,6 +28,8 @@ where the picture shows them; latest data + history + cited impacts; house style
 | 4 | Derivatives and Taylor series | partial derivatives, chain rule, perfect differential, Taylor series, linearisation |
 | 5 | Coordinates: on a plane, a cylinder and a sphere | polar, cylindrical, spherical, curvilinear coordinates, rotation of axes, Galilean transformation, lat/lon geometry |
 | 6 | The gradient | gradient operator, directional derivative, pressure and temperature gradients |
+| 6A | **Contour maps and isolines** | what an isoline is; isobars, isotherms, isohyets, isotachs, isohypses, terrain contours, ocean isobaths and isopycnals on real maps; contour interval; why crowded lines mean a strong gradient; highs, lows, ridges, troughs, saddles (cols) read from contours |
+| 6B | **How contour maps are made** | from stations to a grid (interpolation: nearest, inverse distance, objective analysis, data assimilation/reanalysis in plain words); contouring (marching squares), smoothing, labelling; artefacts and how to spot them; real station data vs ERA5 |
 | 7 | Divergence, flux and Gauss's theorem | divergence, flux divergence, solenoidal vector, Gauss theorem |
 | 8 | Curl, circulation and Stokes's theorem | curl, circulation, Stokes theorem, irrotational vector, solid-body rotation, rotation |
 | 9 | The Laplacian, Laplace and Poisson equations | Laplacian, Laplace equation, harmonic function, Poisson equation |
@@ -51,8 +53,12 @@ where the picture shows them; latest data + history + cited impacts; house style
 |---|---|
 | 22 | The climate machine: energy balance, albedo, greenhouse effect, equator-to-pole surplus (CERES) |
 | 23 | Air and seawater: equations of state, hydrostatic balance with height and depth |
-| 23A | **Contour maps, geopotential and geopotential height** (user, 2026-10-27): isolines of every kind on real data (isobars, isotherms, isohyets, isotachs, isohypses, terrain contours, ocean isobaths and isopycnals); contour interval and how spacing shows the gradient; how contours are drawn from gridded and station data (interpolation, marching squares, smoothing, labelling); height vs pressure coordinates; constant-pressure charts; geopotential Φ and geopotential height Z = Φ/g₀ (why not plain height), units (m, dam), standard levels (850/700/500/250 hPa) and their typical heights; real ERA5 z500 globe in 3-D, ridges and troughs as heights; thickness preview (full treatment in #32). All on real data. |
+| 23A | **Pressure as a vertical coordinate; constant-pressure charts** | why meteorologists use pressure instead of height; isobaric surfaces in 3-D on real data; how a constant-pressure chart differs from a constant-height chart |
+| 23B | **Geopotential and geopotential height** | geopotential Φ, Z = Φ/g₀, why not plain height, units (m, dam), the real ERA5 500 hPa surface as a 3-D sheet; ridges and troughs as hills and valleys |
+| 23C | **The standard pressure levels and what each shows** | 1000/925/850/700/500/300/250/200 hPa: typical heights, what forecasters read on each (fronts at 850, waves at 500, jets at 250), real charts for each |
+| 23D | **Cross-sections and Hovmöller diagrams** | vertical cross-sections through real fronts and jets; time–longitude (Hovmöller) diagrams of real waves; how to read them |
 | 24 | Atmospheric thermodynamics: first law, potential temperature, dry and moist lapse rates |
+| 24A | **Isentropic surfaces and isentropic maps** | surfaces of constant potential temperature on real data, why air moves along them, isentropic charts |
 | 25 | Stability, buoyancy and convection: Brunt–Väisälä frequency, stable/unstable/neutral |
 | 26 | Water in the air: humidity measures, Clausius–Clapeyron, LCL, CAPE and CIN, how clouds and rain form |
 | 27 | **The skew-T log-P diagram, in full detail** (every line, parcel theory, LCL/LFC/EL, CAPE/CIN, inversions, real soundings) |
