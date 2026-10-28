@@ -3259,3 +3259,101 @@ All are under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weath
 - After that fix I expect `qa_pass` with no further visual work. S-c is best done in the same re-render.
 
 Disk at review: C: 73 GB free, G: 553 GB free. Review frames: 127 MB on G: (scratch, not committed).
+
+---
+
+# ch00_weather_basics — review 4 (v3 fix loop 3, commit 866f82f, targeted confirmation)                2026-10-28
+
+Movie: `movies/out/ch00/ch00_weather_basics/1080.mp4` (mtime 28 Oct 13:55). The builder's report was lost, so I checked everything below from the file itself, `timing.json`, `en.vtt` and the audio. Frames I looked at:
+- 368 sentence-midpoint frames (one per sentence, every scene s00–s61);
+- s55–s59 every 0.5 s (36:06–38:13, 254 frames);
+- full-resolution stills for S-a (s42, s52), S-b (s21), s25, and crops of the Brest ring;
+- frames at the s59/s60/s61 boundaries and the last second.
+
+All are under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review4/` (120 MB, local only).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics v3 fix 3 | 40:05.6 (2405.63 s) | 140.19 MB | 13/13 PASS | PASS | PASS | PASS | PASS (N3-M1 closed) | PASS (604 cues; VTT and SRT = source) | PASS (S-a closed) | n/a (retired); none on screen | **PASS** |
+
+## qa.json
+- All 13 gates PASS:
+  - duration 2405.63 s against a narration end of 2403.12 s;
+  - size 140.19 MB, under the 160 MB budget;
+  - codec h264 High, yuv420p, AAC, faststart;
+  - black: 0; frozen: 205 stretches, all narrated;
+  - content and halves: PASS;
+  - loudness −16.0 LUFS, −2.5 dBTP; flashes 0/s;
+  - captions: 604 cues match the script; subtitles: SRT = VTT = source;
+  - physics: 31 functions reproduce their hashes; equations: 29 present.
+- `out/en.vtt` and `out/en.srt` are byte-identical to the storyboard folder's files (`cmp`).
+- `timing.json → self_check`: audio length = expected length (diff 0 ms). `spliced_fix3` lists exactly two edits: the s55 S1 replacement (+1.075 s) and the s58 insert after S1 (+9.075 s). The movie is 10.15 s longer than v3 fix 2, as expected.
+
+## N3-M1 — fronts and narration (closed)
+| check | verdict | evidence |
+|---|---|---|
+| s55 S1 text | **as specified** | `script.md`, storyboard and VTT all read "…from midday on the first of November to midday on the second, with the warm front in red and the cold front in blue until that evening." Cues 36:07.1–36:18.9, 15.1 cps. |
+| s55 fronts on their words | **yes** | Red line from 36:14.5 on "warm front" (about 36:14.6); blue line from 36:16.5 on "cold front" (about 36:16.4). The legend adds each line as it appears. |
+| s55 fronts gone after the evening | **said and shown** | The clock runs 12 → 19 UTC with both fronts (36:21.5–36:23.0). At 22 UTC (36:23.5) the lines and legend are gone. The voice has already said "until that evening". |
+| s58 inserted sentence | **as specified** | "By now the storm has broken and bent its fronts so much that the map can't trace them cleanly, but Brest's own measurements show it clearly." 37:37.75–37:46.47, in 3 cues of ≤ 28 characters per line, 15.8 cps. |
+| s58 fade, not a cut | **yes** | The fronts and "warm sector" are full at 37:34.0, half-faded at 37:34.5–37:34.6 (crop), and gone at 37:35.0. That is about 0.5 s from the scene start at 37:34.43, with no hard cut. |
+| s58 graph reveals on their words | **yes** | "cold front" band at 37:44.0, on "Brest's own measurements show it clearly" (37:43.6–37:46.5). "19 m/s from 221° (SW)" at 37:47.0, on "Between midnight…" (37:46.8). "23 m/s from 271° (W)" at about 37:54, on "by three, it's about twenty-three". "23.2 ÷ 0.514 ≈ 45 kt" at 37:57.5, on "forty-five knots". "−2 °C" at 37:59.0, on "drops by about two degrees". "cooler polar air" fades in at 38:05.5, on S5 (38:05.7). |
+- The viewer now hears why the map stops drawing fronts before they vanish. Then the voice points at the graph band, and the band appears as it is named. Nothing on screen contradicts "comes the cold front".
+
+## Recommended items from review 3
+| item | verdict | evidence |
+|---|---|---|
+| S-a cream H/L on the coloured pressure globes | **fixed** | s42 (28:05, 28:25): the H, the L, "Ciarán 956 hPa" and "typhoon ≈ 935 hPa" are cream with a dark outline. s52 (34:32): both subtropical H are cream and outlined. Pink L and blue H are kept on the satellite and grey maps: s35 (22:53), s43/s44 (28:37–29:47), s55–s59, s60 recap. They are also kept on the s45/s46/s49 temperature maps, which is consistent with the rule (they are not pressure shading). |
+| S-b s21 "satellite: 1 Nov, afternoon" | **fixed** | 13:32 full frame: the baseline and comma tail sit inside the image (text bottom y ≈ 848, image edge y ≈ 858). Nothing is cut. |
+| S-c Channel crossing while the clock shows it | **fixed** | "and its centre crosses the English Channel just north of Brest during the night" is spoken 36:26.5–36:31.6. Clock: 01 UTC 36:24.5–36:27.0, 02 UTC 36:27.5–36:29.0, 03 UTC 36:29.5–36:30.0. The L sits just north of the Brest ring through these hours, and the run reaches 07–12 UTC only after the sentence ends. |
+| Cosmetic s25 Paris label | **fixed** | 16:02: "Paris 11 km" sits below the curves, clear of the teal line. |
+| Cosmetic s57 14.4 vs "fourteen and a half" | **fixed** | "≈ 14.5 °C" appears at 37:24.0, on "about fourteen and a half". |
+| Cosmetic s58 L under the Brest ring | **fixed** | 37:52 crop: the L is offset up-left and fully readable, and the ring is drawn whole. |
+| Cosmetic s40 underbrace labels ≈ 40 px | still open (cosmetic) | 26:49 "station p", "z_s: height". These are unchanged and were accepted in reviews 2 and 3. |
+
+## Splice quality (audio)
+- **No clicks.**
+  - Around every replaced or inserted boundary (36:07.07, 36:18.90, 36:19.25, 37:37.40, 37:37.75, 37:46.47, 37:46.82), the largest sample-to-sample step within ±0.2 s is 0.002–0.004 of full scale.
+  - Speech peaks are around 0.29.
+  - The 10-ms RMS on each side of each boundary matches within 3 dB, at the −34…−43 dBFS music-bed floor.
+- **Level matches.** Active-speech RMS:
+
+  | sentence | active-speech RMS |
+  |---|---|
+  | new s55 S1 | −16.5 dBFS |
+  | neighbouring s55 S2 | −16.4 dBFS |
+  | new s58 S2 | −16.6 dBFS |
+  | neighbouring s58 S3 | −16.4 dBFS |
+  | neighbouring s58 S4 | −17.0 dBFS |
+
+  Integrated loudness over the s55 and s58 windows is −15.6 to −15.9 LUFS, against −16.2 LUFS for s54 and s56. These are ordinary sentence-to-sentence differences. `corr_resynth` 0.9895 shows the untouched sentences were re-used.
+- **Timing.** The silences found in the audio (−28 dBFS gate) line up with `timing.json` through s59: for example 37:36.8–37:38.2, 37:45.7–37:47.2 and 38:10.2–38:12.2. Every cue in s55–s59 falls inside its sentence's audio.
+
+## Regression spot-check (every scene, ≥ 1 frame per sentence)
+- **s00–s54 (unchanged chunks):** the title, globe, column, gas law, hydrostatic derivation, scale height, exponential, radiosonde, layers, humidity, wind, units, climate band, observations, reanalysis, sea-level reduction, isobars, H/L, air masses, fronts, sunlight, belts, trades and Ciarán intro are as in review 3. The only differences are the S-a/S-b/s25 fixes above.
+- **s55–s59 (re-rendered, shifted by +1.075 s, s58 on by +10.15 s):** every reveal was checked at 0.5 s. The cut to s59 is at 38:11.75, and the "2 Nov, afternoon" map is on screen from 38:12.0.
+- **s60 recap (38:33.1–39:36.7) and s61 end card (39:37.5–40:02.8):**
+  - Each recap keyword appears with its picture on its sentence.
+  - The end card's "a series of tutorials" appears at about 39:37. It adds "meteorology · atmospheric science · climate", then "the ideas, and the maths behind them", "weather-basics notebook" and "notebooks for the other concepts" on their sentences.
+  - The end card fades to black in the 2.8-s tail.
+- **Nothing new was found.** No clipped text, overlaps or empty halves turned up in any of the 368 midpoint frames.
+
+## House-style conformance
+- Conforms in full. Specifically:
+  - opening title and series end card as specified;
+  - keywords only;
+  - no headings, boxes, equation labels, references or badges;
+  - gold only for links, bands and the track;
+  - every number on screen is spoken;
+  - reveals land on their words;
+  - the H/L colours no longer clash with the colour bar.
+- The one departure in review 3 (N3-M1, narration and visual mismatch) is closed.
+
+## Overall: PASS (ch00_weather_basics v3 fix 3 review 4 — `qa_pass`)
+- N3-M1 is fixed as specified: the text, a 0.5-s fade, and graph reveals on their words.
+- S-a, S-b and S-c are fixed, along with three of the four cosmetics.
+- The splices are clean and level-matched, and the captions equal the source.
+- No regression in any scene. The only open item is the s40 underbrace label size (cosmetic, optional).
+- This is final: the movie may go to `drafts/` for the user to watch before `/approve-movie 0 ch00_weather_basics`.
+
+Disk at review: C: 69 GB free, G: 543 GB free. Review frames: 120 MB on G: (scratch, not committed).
