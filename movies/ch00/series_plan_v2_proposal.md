@@ -68,6 +68,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 | # | Movie |
 |---|---|
 | 29 | The Coriolis effect (easy examples → 3-D Earth → maps; every equation from scratch) |
+| 29A | **From F = ma to the atmosphere's equation of motion** (user, 2026-10-27; long, 45–60 min) | Newton's second law per unit mass; the forces one by one with real fields: pressure-gradient force −(1/ρ)∇p, gravity, friction/viscosity; the material derivative Du/Dt; moving into the rotating frame → Coriolis −2Ω×u and centrifugal (absorbed into effective gravity g); the full vector equation Du/Dt = −(1/ρ)∇p − 2Ω×u + g + F; its u, v, w components in local east/north/up coordinates, including the spherical curvature (metric) terms (uv tanφ/a, uw/a …) and the 2Ω cos φ terms; scale analysis on real data showing which terms matter (hydrostatic vertical balance, nearly geostrophic horizontal balance), leading to the primitive equations; every term sized with real ERA5 numbers and drawn on real maps. Uses #4, #5, #6, #10, #10A/B, #12, #23, #29; points forward to #30 geostrophic, #31 Ekman, #34 vorticity. |
 | 30 | Geostrophic and ageostrophic wind; gradient, cyclostrophic and inertial flow |
 | 31 | Friction and Ekman layers (air and ocean) |
 | 32 | Thickness, the hypsometric equation and the thermal wind |
