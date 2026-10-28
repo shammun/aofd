@@ -1,22 +1,16 @@
-# ch00_vectors_index_notation storyboard v1 (movie-director, 2026-10-27). Generated from the director's scene spec
-# and the measured tools/tts.py dry run named in dry_run. S<k> = sentence k of the scene; AT(k, "words") a phrase inside it.
-# House style movies/HOUSE_STYLE.md binding; cartography + map-toolkit skills for every map. Data, functions F1-F4 and CHECK
-# ids VI01-VI40: data_needs.md. Per scene: kind / data / tool / runner_up / why / related. Equation provenance (vallis_eq,
-# page_png) is for QA only and is never drawn (Kundu pages: ../Fluid Dynamics/chapters/pages/ch02, printed page + 27).
+# ch00_vectors_index_notation storyboard v2 (movie-director, 2026-10-28; split of ch00_vectors_index_notation v1). S<k> = sentence k of the scene;
+# AT(k, "words") a phrase inside it. House style movies/HOUSE_STYLE.md binding. Data, functions and CHECK ids: data_needs.md.
+# Per scene: kind / data / tool / runner_up / why / related. Equation provenance (vallis_eq, page_png) is for QA only and never drawn.
 id: ch00_vectors_index_notation
-title: 'Vectors, components and index notation: writing the wind, its warmth and Earth''s spin'
-version: 1
+title: 'Vectors and index notation: writing the wind, how it changes and the warmth it carries'
+version: 2
 concepts:
 - 'Kundu index: scalars, vectors, components, basis vectors, magnitude (K 2.1, 2.2)'
 - vector addition (tip to tail, parallelogram, components) and subtraction (p - q = p + (-q), from q to p) (user addition
   2026-10-27)
 - Einstein summation convention, free and dummy indices (K 2.2)
 - Kronecker delta (K 2.16, 2.17; App. B B.3.1, B.3.4)
-- alternating tensor epsilon_ijk (K 2.18)
-- epsilon-delta relation (K 2.19)
-- cross product in index form (K 2.20, 2.21)
-- scalar and vector triple products (K Ex. 2.5; Vallis 2.13)
-target_duration_s: 3391.8
+target_duration_s: 2076.475
 fps: 30
 size:
 - 1920
@@ -27,9 +21,9 @@ footnote_strip: false
 scale_badges: false
 series:
   name: Chapter 0 series (plan v2)
-  position: 'Stage 1 #1'
+  position: 'Stage 1 #1a'
   previous: (first maths movie in viewing order; made after ch00_dot_product_why and ch00_cross_product_why)
-  next: ch00_cross_product (#2)
+  next: ch00_alternating_tensor_triple_products (#1b)
 audio:
   voice: af_bella
   speed: 1.0
@@ -47,10 +41,10 @@ audio:
     runner_up: ice-polar (E Lydian, glassy, unused by any movie so far) with seed 11, if the new style is not added
     sections:
     - style: index-lattice
-      scenes: s00-s61 (all 71 scenes)
+      scenes: all scenes (s00-s35)
       why: one calm, countable, crystalline texture for a notation movie; the lattice of three echoes the indices 1, 2, 3
     distinct_from: maths-calm (dot product), rotation-turning (cross product), air-flowing + storm-tense (weather basics),
-      data-curious + planet-wide (reading weather maps)
+      data-curious + planet-wide (reading weather maps), index-lattice-cycle (1b, the sister movie)
   effects_candidates:
   - scene: s05_vector_field
     kind: wind_gentle
@@ -72,70 +66,77 @@ audio:
     kind: tick
     intensity: 0.1
     shows: the nine-term grid filling cell by cell
-  - scene: s35_epsilon_def
-    kind: tick
-    intensity: 0.1
-    shows: the six non-zero epsilon cells lighting
-  - scene: s39_omega
-    kind: whoosh
-    intensity: 0.15
-    shows: camera flight from the pole to Brest
-  - scene: s45_eps_delta_check
-    kind: tick
-    intensity: 0.08
-    shows: the 81-case grid filling
-  - scene: s53_flux_slanted
-    kind: wind_gentle
-    intensity: 0.15
-    shows: streaks crossing the coastal curtain
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a
     word (sentence gaps only); one at a time; no caption tags (no sound carries meaning the voice does not say)'
-measured_narration_s: 3389.3
-measured_frames: 101754
-words: 8434
-sentences: 538
+measured_narration_s: 2073.975
+measured_frames: 62294
+words: 5172
+sentences: 335
 dry_run:
   tool: tools/tts.py
-  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/dryrun/v3
-  audio_s: 3389.3
-  speech_s: 3169.2
-  cues: 836
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/dryrun/v4_split_1a
+  audio_s: 2073.975
+  speech_s: 1936.7
+  cues: 521
   self_check:
-    expected_s: 3389.3
-    audio_s: 3389.3
-    diff_ms: -0.0
+    expected_s: 2073.975
+    audio_s: 2073.975
+    diff_ms: 0.0
     len_ok: true
     cues_ok: true
-  warnings: &id001
-  - 'cue 761: 7.5 s / 2 lines out of house limits'
-  words_per_minute_overall: 149.2
-  words_per_minute_speaking: 159.7
+  warnings: []
+  words_per_minute_overall: 149.4
+  words_per_minute_speaking: 160.2
   lexicon: movies/lexicon.yaml as of HEAD (not edited; proposed entries listed in script.md)
-  post_run_edits:
-  - s56 sentence 2 split in two (cue 761 was 7.5 s > 7 s); not re-measured, expected < +0.6 s
-  warnings_resolved: *id001
 moment: 18 UTC 1 Nov 2023, Brest (48.45 N, 4.42 W), Storm Ciaran's warm air arriving; ERA5 850 hPa + Brest SYNOP
 cross_reference_rule: 'user 2026-10-27 (series_plan_v2_proposal.md Notes): spoken pointer + end-card listing for every operator
   another movie explains in depth; related: per scene; no on-screen citations'
+honesty_notes:
+- 's12c: the Coriolis push is named and given easy numbers only (direction and balance); where it comes from is the Coriolis
+  movie, and its direction is computed with epsilon in 1b.'
+- 's23: ''the fixed thermometer''s rate is minus u_j dT/dx_j'' holds only if each parcel keeps its temperature; the narration
+  says so.'
+- 's27: the advection estimate (+3.7 K/h) is compared with ERA5 (+2.9 K/h); the gap is attributed in words to ascent/adiabatic
+  cooling, which the sum does not contain; the station (2 m) and the 850 hPa level are named as different heights.'
+- s22 and s26 leave out the vertical term u_3 dT/dx_3 explicitly ('leaving the up part aside'); it is not claimed to be zero.
+- Vertical exaggerations (columns x10) and time compression (streaklines x20, balloon 1 h in ~6 s, one hour of wind change
+  in ~4 s, storm track 6 h in ~6 s) are recorded here and in the manifest, not badged (HOUSE_STYLE §5).
+- 'Arrow scales: accelerations (s12c, violet/orange/rose) and speeds (teal) share no physical scale; the factor is recorded
+  per scene.'
+- 'Local east-north-up axes are a tangent plane at Brest: over a few hundred km the basis is treated as fixed (the coordinates
+  movie treats the curved case).'
+- 's12a: the 250/50 m/s airliner numbers are a thought example; only the jet maximum (about 70 m/s) is real (D4, latest GFS);
+  s12c forces are easy numbers chosen to be consistent with Brest (|u| = 9.2 m/s).'
+- 's12d: near a deep, sharply curved low the surface geostrophic wind overestimates the real wind; the narration names friction
+  and the tight curve.'
+- 's12h: the anomaly numbers wait for D5 (planning values); El Nino 2023-24 status per NOAA CPC (cited in the manifest).'
+- Every spoken number is a planning value from the tested library on the files on disk (2026-10-27) and is re-asserted by
+  CHECK rows (data_needs.md); s09's w waits for D1, the s12a jet for D4, s12h for D5.
+- s34_next only previews the alternating tensor and the Coriolis push; nothing in 1a depends on them.
+quiz_hook: A wind blows six metres per second towards the east and eight towards the north, and the temperature drops two
+  degrees for every hundred kilometres east. Does a fixed thermometer warm or cool, and by how much per hour?
+headings_exception: 's00_title only: the one title frame'
+split_from: 'v1 (71 scenes, 56:32) split 2026-10-28 by orchestrator decision (data_needs.md): 1a = v1 s00-s32 + new recap,
+  forward pointer and end card; 1b = ch00_alternating_tensor_triple_products'
 scenes:
 - id: s00_title
   t:
   - 0.3
-  - 14.125
+  - 13.65
   sentence_times:
   - - 0.3
-    - 13.325
+    - 12.85
   beat: opening title
   visual: 'TITLE FRAME (HOUSE_STYLE §3, house/kit/title.tsx). Left x 100-1075: RiseText ''Vectors and'' / ''index notation''
     (150 px, weight 800, TitleGradient teal -> gold); ''made easy'' (96 px, warm white) pulses x1.06 on AT(1, "the easy way");
     ''and how meteorology uses them'' (68 px, ''meteorology'' teal). Right x 1130-1840, y 180-636 (>= 50 px clear): Part A
     (frame 0 -> AT(1, "meteorology")): a 3-D teal wind arrow at Brest (the real 850 hPa wind, |u| 34 m/s scaled) slowly orbited;
-    its three component legs drop onto e1, e2, e3 one by one with u1, u2, u3 labels at the tips; the 27-cell epsilon cube
-    flickers into place behind it (cells fade 8 frames each, no flash). Part B (12-frame cross-fade on ''meteorology''): the
-    s24 ERA5 850 hPa temperature map of Brittany, isotherms sliding gently (3 hours 17->19 UTC, cross-faded hours), teal wind
-    arrows, and the line u_j dT/dx_j building term by term under it. Poster = frame 200.'
+    its three component legs drop onto e1, e2, e3 one by one with u1, u2, u3 labels at the tips; then the 17 UTC wind appears
+    from the same tail (slate) and the gold change arrow grows from its tip to the 18 UTC tip. Part B (12-frame cross-fade
+    on ''meteorology''): the s24 ERA5 850 hPa temperature map of Brittany, isotherms sliding gently (3 hours 17->19 UTC, cross-faded
+    hours), teal wind arrows, and the line u_j dT/dx_j building term by term under it. Poster = frame 200.'
   voiceover: In this video, we'll learn vectors and index notation the easy way, and see how meteorology uses them to write
-    the wind, the warmth it carries, and the push of Earth's spin in a few short symbols.
+    the wind, how it changes, and the warmth it carries, in a few short symbols.
   on_screen_eq:
     latex: u_j\,\frac{\partial T}{\partial x_j}
     vallis_eq: 'provenance only, not drawn as a reference: the advection sum, Kundu (2.2) summation convention applied to
@@ -153,25 +154,25 @@ scenes:
   kind: 3-D diagram + map, data animation
   data: ERA5 850 hPa t/q/u/v hourly, 2023-11-01T18 (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, A1); Natural Earth 10
     m coast/borders (A6)
-  tool: three.js arrow + epsilon cube (Part A); cartostyle layers + Remotion SVG arrows (Part B)
+  tool: three.js arrow + change arrow (Part A); cartostyle layers + Remotion SVG arrows (Part B)
   runner_up: Remotion SVG only (flat Part A)
   why: 'the title promise shown by the movie''s own data from frame 0: a real wind split into components, then the real map
     the sum is computed on'
   related: []
 - id: s01_hook
   t:
-  - 14.125
-  - 23.625
+  - 13.65
+  - 23.15
   sentence_times:
-  - - 14.125
-    - 17.15
-  - - 17.5
-    - 22.825
+  - - 13.65
+    - 16.675
+  - - 17.025
+    - 22.35
   beat: hook question
   visual: 'Full width x 80-1840, y 40-860. From frame 0 the core picture: a globe (BMNG + GIBS true colour 1 Nov 2023) turned
     to western Europe, Brest marked (gold dot, billboard ''Brest'' 54 px), with the real 850 hPa wind field as teal streaklines
     (Python RK2 tracks) over Brittany. S1 (question spoken): a slow 3 % push-in. S2 on AT(2, "what they are"): one teal arrow
-    lifts out of the field at Brest with its three component legs; on "why": the symbols u_i, delta_ij, epsilon_ijk appear
+    lifts out of the field at Brest with its three component legs; on "why": the symbols u_i, delta_ij, u_j dT/dx_j appear
     one by one as keywords (84 px KaTeX) in the right third; on "about the wind": the arrow brightens. No narrated sentence
     on screen.'
   voiceover: What are vectors and index notation? Let's see what they are, why they're built this way, and what they tell
@@ -195,21 +196,21 @@ scenes:
   related: []
 - id: s02_scalar_globe
   t:
-  - 23.625
-  - 66.875
+  - 23.15
+  - 66.4
   sentence_times:
-  - - 23.625
-    - 25.85
-  - - 26.2
-    - 37.3
-  - - 37.65
-    - 43.125
-  - - 43.475
-    - 54.275
-  - - 54.625
-    - 58.475
-  - - 58.825
-    - 66.075
+  - - 23.15
+    - 25.375
+  - - 25.725
+    - 36.825
+  - - 37.175
+    - 42.65
+  - - 43.0
+    - 53.8
+  - - 54.15
+    - 58.0
+  - - 58.35
+    - 65.6
   beat: 'building blocks: scalar'
   visual: 'Picture zone x 80-1000: the globe (radius 380 px) slowly turning to Europe, ERA5 2-m temperature as a translucent
     cmocean ''thermal'' texture over the daytime GIBS/BMNG base; vertical colour bar at x 1010 with ticks -30 ... +30 (52
@@ -243,19 +244,19 @@ scenes:
   related: []
 - id: s03_scalar_word
   t:
-  - 66.875
-  - 92.75
+  - 66.4
+  - 92.275
   sentence_times:
-  - - 66.875
-    - 72.675
-  - - 73.025
-    - 76.65
-  - - 77.0
-    - 82.9
-  - - 83.25
-    - 86.35
-  - - 86.7
-    - 91.95
+  - - 66.4
+    - 72.2
+  - - 72.55
+    - 76.175
+  - - 76.525
+    - 82.425
+  - - 82.775
+    - 85.875
+  - - 86.225
+    - 91.475
   beat: 'building blocks: scalar defined'
   visual: 'Same globe, dimmed to 60 %, zoomed on Brest. Maths zone: S1 keyword ''scalar'' (128 px hero) with ''one number
     + unit'' under it (54 px). S2: ''pressure · density · humidity'' (54 px) appear on their words. S3: keyword ''scalar field''
@@ -277,25 +278,25 @@ scenes:
   related: []
 - id: s04_vector_wind
   t:
-  - 92.75
-  - 136.1
+  - 92.275
+  - 135.625
   sentence_times:
-  - - 92.75
-    - 97.2
-  - - 97.55
-    - 104.375
-  - - 104.725
-    - 107.4
-  - - 107.75
-    - 111.925
-  - - 112.275
-    - 118.35
-  - - 118.7
-    - 124.025
-  - - 124.375
-    - 129.125
-  - - 129.475
-    - 135.3
+  - - 92.275
+    - 96.725
+  - - 97.075
+    - 103.9
+  - - 104.25
+    - 106.925
+  - - 107.275
+    - 111.45
+  - - 111.8
+    - 117.875
+  - - 118.225
+    - 123.55
+  - - 123.9
+    - 128.65
+  - - 129.0
+    - 134.825
   beat: 'building blocks: vector'
   visual: 'Picture zone: a cartostyle relief locator of west Brittany (hillshade tint, Natural Earth coast, ''Brest'' and
     ''Brest-Guipavas'' airport dot, scale bar ''10 km (at 48° N)''), a station glyph at the airport. S2: the SYNOP readout
@@ -329,19 +330,19 @@ scenes:
   related: []
 - id: s05_vector_field
   t:
-  - 136.1
-  - 164.275
+  - 135.625
+  - 163.8
   sentence_times:
-  - - 136.1
-    - 140.2
-  - - 140.55
-    - 150.475
-  - - 150.825
-    - 156.85
-  - - 157.2
-    - 159.8
-  - - 160.15
-    - 163.475
+  - - 135.625
+    - 139.725
+  - - 140.075
+    - 150.0
+  - - 150.35
+    - 156.375
+  - - 156.725
+    - 159.325
+  - - 159.675
+    - 163.0
   beat: 'building blocks: vector field'
   visual: 'Full width map (LCC, 40-56 N, 15 W-5 E) on the GIBS true colour image of 1 Nov 2023 (the clouds of Ciarán; lines
     white with dark halo), ERA5 850 hPa winds as ~15 x 9 teal arrows on a projected grid (arrow length 6 px per m/s, scale
@@ -373,23 +374,23 @@ scenes:
   sfx: wind_gentle 0.2 under S3 (the stream is shown); never over a word peak
 - id: s06_basis
   t:
-  - 164.275
-  - 201.0
+  - 163.8
+  - 200.525
   sentence_times:
-  - - 164.275
-    - 167.15
-  - - 167.5
-    - 173.7
-  - - 174.05
-    - 179.8
-  - - 180.15
-    - 184.9
-  - - 185.25
-    - 190.575
-  - - 190.925
-    - 193.675
-  - - 194.025
-    - 200.2
+  - - 163.8
+    - 166.675
+  - - 167.025
+    - 173.225
+  - - 173.575
+    - 179.325
+  - - 179.675
+    - 184.425
+  - - 184.775
+    - 190.1
+  - - 190.45
+    - 193.2
+  - - 193.55
+    - 199.725
   beat: 'building blocks: basis'
   visual: 'Picture zone: three.js 3-D scene - a small patch of the Brittany relief (ETOPO, x5 vertical, said nowhere because
     the patch is only a floor) as the floor, Brest dot at the origin; the camera at az 220, el 25. S1: three axes grow from
@@ -427,21 +428,21 @@ scenes:
     spoken_pointer: false
 - id: s07_components_easy
   t:
-  - 201.0
-  - 234.975
+  - 200.525
+  - 234.5
   sentence_times:
-  - - 201.0
-    - 203.8
-  - - 204.15
-    - 211.675
-  - - 212.025
-    - 218.225
-  - - 218.575
-    - 222.675
-  - - 223.025
-    - 227.825
-  - - 228.175
-    - 234.175
+  - - 200.525
+    - 203.325
+  - - 203.675
+    - 211.2
+  - - 211.55
+    - 217.75
+  - - 218.1
+    - 222.2
+  - - 222.55
+    - 227.35
+  - - 227.7
+    - 233.7
   beat: 'building blocks: components (easy numbers)'
   visual: 'Same 3-D scene, camera eases to a near top view (el 70). S2: teal arrow (6, 8, 0) grows from Brest; ''u = (6, 8,
     0) m/s'' appears only on AT(2, "eight towards the north") under the picture. S3: a walker dot steps 6 unit ticks along
@@ -473,31 +474,31 @@ scenes:
   related: []
 - id: s08_components_real
   t:
-  - 234.975
-  - 296.6
+  - 234.5
+  - 296.125
   sentence_times:
-  - - 234.975
-    - 237.275
-  - - 237.625
-    - 244.1
-  - - 244.45
-    - 249.5
-  - - 249.85
-    - 253.15
-  - - 253.5
-    - 260.375
-  - - 260.725
-    - 267.025
-  - - 267.375
-    - 271.225
-  - - 271.575
-    - 278.775
-  - - 279.125
-    - 283.0
-  - - 283.35
-    - 292.075
-  - - 292.425
-    - 295.8
+  - - 234.5
+    - 236.8
+  - - 237.15
+    - 243.625
+  - - 243.975
+    - 249.025
+  - - 249.375
+    - 252.675
+  - - 253.025
+    - 259.9
+  - - 260.25
+    - 266.55
+  - - 266.9
+    - 270.75
+  - - 271.1
+    - 278.3
+  - - 278.65
+    - 282.525
+  - - 282.875
+    - 291.6
+  - - 291.95
+    - 295.325
   beat: 'building blocks: components (real wind)'
   visual: 'Picture zone: top view of the Brest axes (flat now, SVG pair plane mkP with the station glyph at O). S1: the teal
     real wind arrow (from s04) at its true direction; a compass rose arc from north clockwise to 150 deg (slate, ''from 150°'').
@@ -537,17 +538,17 @@ scenes:
     spoken_pointer: false
 - id: s09_up_component
   t:
-  - 296.6
-  - 321.55
+  - 296.125
+  - 321.075
   sentence_times:
-  - - 296.6
-    - 301.925
-  - - 302.275
-    - 307.975
-  - - 308.325
-    - 316.9
-  - - 317.25
-    - 320.75
+  - - 296.125
+    - 301.45
+  - - 301.8
+    - 307.5
+  - - 307.85
+    - 316.425
+  - - 316.775
+    - 320.275
   beat: 'building blocks: the up component'
   visual: 'Picture zone: three.js side view of a column above Brest: the floor (relief patch), the 850 hPa level as a translucent
     slate plane at its real height (z850 from D1, drawn x10 vertical; the column is a sketch, the exaggeration is recorded
@@ -578,27 +579,27 @@ scenes:
   related: []
 - id: s10_magnitude
   t:
-  - 321.55
-  - 372.15
+  - 321.075
+  - 371.675
   sentence_times:
-  - - 321.55
-    - 323.5
-  - - 323.85
-    - 333.0
-  - - 333.35
-    - 336.875
-  - - 337.225
-    - 342.525
-  - - 342.875
-    - 347.75
-  - - 348.1
-    - 353.05
-  - - 353.4
-    - 362.525
-  - - 362.875
-    - 366.975
-  - - 367.325
-    - 371.35
+  - - 321.075
+    - 323.025
+  - - 323.375
+    - 332.525
+  - - 332.875
+    - 336.4
+  - - 336.75
+    - 342.05
+  - - 342.4
+    - 347.275
+  - - 347.625
+    - 352.575
+  - - 352.925
+    - 362.05
+  - - 362.4
+    - 366.5
+  - - 366.85
+    - 370.875
   beat: 'building blocks: magnitude'
   visual: 'Picture zone: three.js box diagonal. S1-S2: flat (6, 8) arrow with its legs; CalcStack (maths zone): |u| = √(6²
     + 8²) = √100 = 10. S3-S4: the camera tilts to 3-D; a generic arrow (6, 8, 3) with its floor shadow (dashed) and the vertical
@@ -635,29 +636,29 @@ scenes:
   related: []
 - id: s11_other_axes
   t:
-  - 372.15
-  - 430.6
+  - 371.675
+  - 430.125
   sentence_times:
-  - - 372.15
-    - 375.225
-  - - 375.575
-    - 382.75
-  - - 383.1
-    - 388.125
-  - - 388.475
-    - 395.725
-  - - 396.075
-    - 401.45
-  - - 401.8
-    - 406.5
-  - - 406.85
-    - 411.5
-  - - 411.85
-    - 418.05
-  - - 418.4
-    - 422.325
-  - - 422.675
-    - 429.8
+  - - 371.675
+    - 374.75
+  - - 375.1
+    - 382.275
+  - - 382.625
+    - 387.65
+  - - 388.0
+    - 395.25
+  - - 395.6
+    - 400.975
+  - - 401.325
+    - 406.025
+  - - 406.375
+    - 411.025
+  - - 411.375
+    - 417.575
+  - - 417.925
+    - 421.85
+  - - 422.2
+    - 429.325
   beat: 'intuition: same arrow, other axes'
   visual: 'Picture zone: map of north Brittany (cartostyle, coast highlighted gold from Brest to Saint-Malo), the 850 hPa
     wind arrow at Brest (teal, 34 m/s at 8 px per m/s). S1: the east/north axes (slate) at Brest. S2: a second pair of axes
@@ -703,23 +704,23 @@ scenes:
     spoken_pointer: true
 - id: s12_position
   t:
-  - 430.6
-  - 470.075
+  - 430.125
+  - 469.6
   sentence_times:
-  - - 430.6
-    - 432.775
-  - - 433.125
-    - 436.625
-  - - 436.975
-    - 442.175
-  - - 442.525
-    - 450.225
-  - - 450.575
-    - 457.475
-  - - 457.825
-    - 464.325
-  - - 464.675
-    - 469.275
+  - - 430.125
+    - 432.3
+  - - 432.65
+    - 436.15
+  - - 436.5
+    - 441.7
+  - - 442.05
+    - 449.75
+  - - 450.1
+    - 457.0
+  - - 457.35
+    - 463.85
+  - - 464.2
+    - 468.8
   beat: 'building blocks: position vector'
   visual: 'Picture zone: three.js scene over the relief floor, origin at the Brest airport dot; a balloon icon (BalloonThermometer)
     at (3, 4, 1.2) km, its teal position arrow x from the origin with dashed legs 3 (east), 4 (north), 1.2 (up, x2 vertical).
@@ -754,35 +755,35 @@ scenes:
   related: []
 - id: s12a_add_tip_to_tail
   t:
-  - 470.075
-  - 535.15
+  - 469.6
+  - 534.675
   sentence_times:
-  - - 470.075
-    - 472.2
-  - - 472.55
-    - 478.6
-  - - 478.95
-    - 482.325
-  - - 482.675
-    - 485.075
-  - - 485.425
-    - 490.425
-  - - 490.775
-    - 495.15
-  - - 495.5
-    - 498.575
-  - - 498.925
-    - 504.1
-  - - 504.45
-    - 511.45
-  - - 511.8
-    - 514.925
-  - - 515.275
-    - 521.2
-  - - 521.55
-    - 527.2
-  - - 527.55
-    - 534.35
+  - - 469.6
+    - 471.725
+  - - 472.075
+    - 478.125
+  - - 478.475
+    - 481.85
+  - - 482.2
+    - 484.6
+  - - 484.95
+    - 489.95
+  - - 490.3
+    - 494.675
+  - - 495.025
+    - 498.1
+  - - 498.45
+    - 503.625
+  - - 503.975
+    - 510.975
+  - - 511.325
+    - 514.45
+  - - 514.8
+    - 520.725
+  - - 521.075
+    - 526.725
+  - - 527.075
+    - 533.875
   beat: 'addition: tip to tail (aircraft in the jet stream)'
   visual: 'Full width: the latest GFS 250 hPa wind map over the North Atlantic (NEW D4, day of production; cmocean ''speed''-family
     sequential shading 0-80 m/s, colour bar ''m/s'' 52 px, streamlines white 1.5 px, coasts), a great-circle route New York
@@ -822,33 +823,33 @@ scenes:
   related: []
 - id: s12b_add_parallelogram
   t:
-  - 535.15
-  - 598.925
+  - 534.675
+  - 598.45
   sentence_times:
-  - - 535.15
-    - 538.35
-  - - 538.7
-    - 545.375
-  - - 545.725
-    - 549.475
-  - - 549.825
-    - 554.4
-  - - 554.75
-    - 556.725
-  - - 557.075
-    - 562.375
-  - - 562.725
-    - 565.45
-  - - 565.8
-    - 571.425
-  - - 571.775
-    - 579.85
-  - - 580.2
-    - 586.05
-  - - 586.4
-    - 588.825
-  - - 589.175
-    - 598.125
+  - - 534.675
+    - 537.875
+  - - 538.225
+    - 544.9
+  - - 545.25
+    - 549.0
+  - - 549.35
+    - 553.925
+  - - 554.275
+    - 556.25
+  - - 556.6
+    - 561.9
+  - - 562.25
+    - 564.975
+  - - 565.325
+    - 570.95
+  - - 571.3
+    - 579.375
+  - - 579.725
+    - 585.575
+  - - 585.925
+    - 588.35
+  - - 588.7
+    - 597.65
   beat: 'addition: parallelogram and components'
   visual: 'Picture zone: house pair plane (mkP) with the plane''s teal arrow (0, 250) north and the orange jet (50, 0), drawn
     1.4 px per m/s. S2: tip to tail -> warm-white sum. S4: second route (orange first, then teal) dashed; S5 both reach the
@@ -892,33 +893,33 @@ scenes:
     spoken_pointer: false
 - id: s12c_add_forces
   t:
-  - 598.925
-  - 667.975
+  - 598.45
+  - 667.5
   sentence_times:
-  - - 598.925
-    - 601.2
-  - - 601.55
-    - 606.925
-  - - 607.275
-    - 617.8
-  - - 618.15
-    - 623.175
-  - - 623.525
-    - 629.7
-  - - 630.05
-    - 632.325
-  - - 632.675
-    - 637.2
-  - - 637.55
-    - 643.475
-  - - 643.825
-    - 648.675
-  - - 649.025
-    - 653.95
-  - - 654.3
-    - 661.6
-  - - 661.95
-    - 667.175
+  - - 598.45
+    - 600.725
+  - - 601.075
+    - 606.45
+  - - 606.8
+    - 617.325
+  - - 617.675
+    - 622.7
+  - - 623.05
+    - 629.225
+  - - 629.575
+    - 631.85
+  - - 632.2
+    - 636.725
+  - - 637.075
+    - 643.0
+  - - 643.35
+    - 648.2
+  - - 648.55
+    - 653.475
+  - - 653.825
+    - 661.125
+  - - 661.475
+    - 666.7
   beat: 'addition: forces on a parcel balance'
   visual: 'Picture zone: a near-ground air parcel (translucent cube) on a schematic map with east-west isobars (low ''L''
     to the north, house red), the teal wind arrow towards ENE (8, 6) direction. S3: orange pressure push (0, 12.5) north.
@@ -976,31 +977,31 @@ scenes:
     spoken_pointer: true
 - id: s12d_add_geostrophic
   t:
-  - 667.975
-  - 742.4
+  - 667.5
+  - 741.925
   sentence_times:
-  - - 667.975
-    - 669.675
-  - - 670.025
-    - 678.025
-  - - 678.375
-    - 682.75
-  - - 683.1
-    - 690.2
-  - - 690.55
-    - 698.075
-  - - 698.425
-    - 707.375
-  - - 707.725
-    - 714.325
-  - - 714.675
-    - 721.875
-  - - 722.225
-    - 727.825
-  - - 728.175
-    - 733.725
-  - - 734.075
-    - 741.6
+  - - 667.5
+    - 669.2
+  - - 669.55
+    - 677.55
+  - - 677.9
+    - 682.275
+  - - 682.625
+    - 689.725
+  - - 690.075
+    - 697.6
+  - - 697.95
+    - 706.9
+  - - 707.25
+    - 713.85
+  - - 714.2
+    - 721.4
+  - - 721.75
+    - 727.35
+  - - 727.7
+    - 733.25
+  - - 733.6
+    - 741.125
   beat: 'addition: real = geostrophic + ageostrophic (Ciarán)'
   visual: 'Full width: ERA5 MSLP 18 UTC 1 Nov 2023 isobars every 4 hPa (white on the GIBS true-colour plate, labels in-line,
     ''L'' with central pressure 961 hPa read from A4), Brest gold dot, a sea point 48.0 N 6.0 W marked. S2 keyword ''isobars'',
@@ -1048,25 +1049,25 @@ scenes:
     spoken_pointer: false
 - id: s12e_subtract_def
   t:
-  - 742.4
-  - 788.15
+  - 741.925
+  - 787.675
   sentence_times:
-  - - 742.4
-    - 744.325
-  - - 744.675
-    - 754.425
-  - - 754.775
-    - 761.375
-  - - 761.725
-    - 764.0
-  - - 764.35
-    - 767.075
-  - - 767.425
-    - 772.375
-  - - 772.725
-    - 779.6
-  - - 779.95
-    - 787.35
+  - - 741.925
+    - 743.85
+  - - 744.2
+    - 753.95
+  - - 754.3
+    - 760.9
+  - - 761.25
+    - 763.525
+  - - 763.875
+    - 766.6
+  - - 766.95
+    - 771.9
+  - - 772.25
+    - 779.125
+  - - 779.475
+    - 786.875
   beat: 'subtraction: definition'
   visual: 'House pair plane: p = (5, 1) teal, q = (1, 3) orange. S1: -q appears as a rose dashed copy of q pointing the other
     way (with ''-'' glyph). S2: p + (-q) tip to tail -> (4, -2). S3-S4: both from one point; the arrow from q''s tip to p''s
@@ -1099,27 +1100,27 @@ scenes:
   related: []
 - id: s12f_subtract_hour
   t:
-  - 788.15
-  - 843.15
+  - 787.675
+  - 842.675
   sentence_times:
-  - - 788.15
-    - 790.85
-  - - 791.2
-    - 802.5
-  - - 802.85
-    - 810.125
-  - - 810.475
-    - 813.075
-  - - 813.425
-    - 816.5
-  - - 816.85
-    - 821.875
-  - - 822.225
-    - 827.925
-  - - 828.275
-    - 836.15
-  - - 836.5
-    - 842.35
+  - - 787.675
+    - 790.375
+  - - 790.725
+    - 802.025
+  - - 802.375
+    - 809.65
+  - - 810.0
+    - 812.6
+  - - 812.95
+    - 816.025
+  - - 816.375
+    - 821.4
+  - - 821.75
+    - 827.45
+  - - 827.8
+    - 835.675
+  - - 836.025
+    - 841.875
   beat: 'subtraction: the wind''s change in one hour (map animation)'
   visual: 'Picture zone: ERA5 850 hPa map of Brittany animating 17 -> 18 UTC (fields cross-faded, isotherms sliding; clock
     glyph). Teal 17 UTC arrow at Brest (ghosted after the clock passes), teal 18 UTC arrow; both drawn from Brest. S6-S7:
@@ -1159,29 +1160,29 @@ scenes:
     spoken_pointer: false
 - id: s12g_shear_hodograph
   t:
-  - 843.15
-  - 917.0
+  - 842.675
+  - 916.525
   sentence_times:
-  - - 843.15
-    - 848.125
-  - - 848.475
-    - 856.9
-  - - 857.25
-    - 861.9
-  - - 862.25
-    - 866.05
-  - - 866.4
-    - 877.125
-  - - 877.475
-    - 887.2
-  - - 887.55
-    - 898.65
-  - - 899.0
-    - 903.925
-  - - 904.275
-    - 908.55
-  - - 908.9
-    - 916.2
+  - - 842.675
+    - 847.65
+  - - 848.0
+    - 856.425
+  - - 856.775
+    - 861.425
+  - - 861.775
+    - 865.575
+  - - 865.925
+    - 876.65
+  - - 877.0
+    - 886.725
+  - - 887.075
+    - 898.175
+  - - 898.525
+    - 903.45
+  - - 903.8
+    - 908.075
+  - - 908.425
+    - 915.725
   beat: 'subtraction: wind shear and the hodograph (real sounding)'
   visual: 'Left: three.js column above Trappes (relief floor, balloon rising along the IGRA profile, x10 vertical recorded)
     with wind arrows at each reported level (teal, length 6 px per m/s), 850 and 500 hPa highlighted. Right: hodograph (house
@@ -1224,29 +1225,29 @@ scenes:
     spoken_pointer: true
 - id: s12h_anomaly
   t:
-  - 917.0
-  - 988.675
+  - 916.525
+  - 988.2
   sentence_times:
-  - - 917.0
-    - 920.775
-  - - 921.125
-    - 927.1
-  - - 927.45
-    - 935.4
-  - - 935.75
-    - 942.475
-  - - 942.825
-    - 947.55
-  - - 947.9
-    - 956.75
-  - - 957.1
-    - 964.7
-  - - 965.05
-    - 974.45
-  - - 974.8
-    - 983.45
-  - - 983.8
-    - 987.875
+  - - 916.525
+    - 920.3
+  - - 920.65
+    - 926.625
+  - - 926.975
+    - 934.925
+  - - 935.275
+    - 942.0
+  - - 942.35
+    - 947.075
+  - - 947.425
+    - 956.275
+  - - 956.625
+    - 964.225
+  - - 964.575
+    - 973.975
+  - - 974.325
+    - 982.975
+  - - 983.325
+    - 987.4
   beat: 'subtraction: El Niño trade-wind anomaly (climate)'
   visual: 'Three stacked tropical-Pacific maps (Equal Earth crop 30 S-30 N, 120 E-80 W; land grey, coasts): S5 November 1991-2020
     mean 10-m wind arrows (slate); S6 November 2023 arrows (teal) with an SST-anomaly tint under them (optional D6); S7 the
@@ -1295,23 +1296,23 @@ scenes:
     spoken_pointer: false
 - id: s12i_relative
   t:
-  - 988.675
-  - 1040.45
+  - 988.2
+  - 1039.975
   sentence_times:
-  - - 988.675
-    - 991.875
-  - - 992.225
-    - 997.925
-  - - 998.275
-    - 1006.625
-  - - 1006.975
-    - 1013.2
-  - - 1013.55
-    - 1019.2
-  - - 1019.55
-    - 1031.225
-  - - 1031.575
-    - 1039.65
+  - - 988.2
+    - 991.4
+  - - 991.75
+    - 997.45
+  - - 997.8
+    - 1006.15
+  - - 1006.5
+    - 1012.725
+  - - 1013.075
+    - 1018.725
+  - - 1019.075
+    - 1030.75
+  - - 1031.1
+    - 1039.175
   beat: 'subtraction: storm-relative wind'
   visual: 'Map: ERA5 MSLP animation 18 UTC 1 Nov -> 00 UTC 2 Nov (isobars, the ''L'' moving; track dots every hour, gold).
     S2-S3: storm velocity arrow (orange) at the L ''(20, 5) m/s'', ''about 450 km in 6 h''. S5: at Brest, teal wind (5.8,
@@ -1350,27 +1351,27 @@ scenes:
     spoken_pointer: false
 - id: s13_naming
   t:
-  - 1040.45
-  - 1091.575
+  - 1039.975
+  - 1091.1
   sentence_times:
-  - - 1040.45
-    - 1042.825
-  - - 1043.175
-    - 1052.075
-  - - 1052.425
-    - 1058.975
-  - - 1059.325
-    - 1065.125
-  - - 1065.475
-    - 1069.85
-  - - 1070.2
-    - 1072.375
-  - - 1072.725
-    - 1079.45
-  - - 1079.8
-    - 1085.175
-  - - 1085.525
-    - 1090.775
+  - - 1039.975
+    - 1042.35
+  - - 1042.7
+    - 1051.6
+  - - 1051.95
+    - 1058.5
+  - - 1058.85
+    - 1064.65
+  - - 1065.0
+    - 1069.375
+  - - 1069.725
+    - 1071.9
+  - - 1072.25
+    - 1078.975
+  - - 1079.325
+    - 1084.7
+  - - 1085.05
+    - 1090.3
   beat: 'index notation: subscripts'
   visual: 'Maths-only full-width scene with a small persistent 3-D axes glyph (top left, 300 px). S1: a crowd of letters appears:
     u, v, w / x, y, z / e_x, e_y, e_z ... overflowing (54-84 px), then dims. S2: the overflow hits the right edge (no clipping:
@@ -1402,27 +1403,27 @@ scenes:
   related: []
 - id: s14_free_index
   t:
-  - 1091.575
-  - 1151.45
+  - 1091.1
+  - 1150.975
   sentence_times:
-  - - 1091.575
-    - 1095.95
-  - - 1096.3
-    - 1101.725
-  - - 1102.075
-    - 1105.85
-  - - 1106.2
-    - 1114.15
-  - - 1114.5
-    - 1121.15
-  - - 1121.5
-    - 1128.75
-  - - 1129.1
-    - 1133.775
-  - - 1134.125
-    - 1141.875
-  - - 1142.225
-    - 1150.65
+  - - 1091.1
+    - 1095.475
+  - - 1095.825
+    - 1101.25
+  - - 1101.6
+    - 1105.375
+  - - 1105.725
+    - 1113.675
+  - - 1114.025
+    - 1120.675
+  - - 1121.025
+    - 1128.275
+  - - 1128.625
+    - 1133.3
+  - - 1133.65
+    - 1141.4
+  - - 1141.75
+    - 1150.175
   beat: 'index notation: free index'
   visual: 'Left: the s12f picture kept small (old and new wind at Brest, the change arrow). Right: S1 keyword ''free index''.
     S3 the line ''c_i = u_i(18 h) - u_i(17 h)'' (84 px) with the i''s gold. S4: three rows unfold below it, one per value
@@ -1456,31 +1457,31 @@ scenes:
   related: []
 - id: s15_dot_product
   t:
-  - 1151.45
-  - 1223.55
+  - 1150.975
+  - 1223.075
   sentence_times:
-  - - 1151.45
-    - 1154.625
-  - - 1154.975
-    - 1166.875
-  - - 1167.225
-    - 1170.375
-  - - 1170.725
-    - 1178.3
-  - - 1178.65
-    - 1180.775
-  - - 1181.125
-    - 1184.65
-  - - 1185.0
-    - 1193.075
-  - - 1193.425
-    - 1204.175
-  - - 1204.525
-    - 1211.475
-  - - 1211.825
-    - 1216.925
-  - - 1217.275
-    - 1222.75
+  - - 1150.975
+    - 1154.15
+  - - 1154.5
+    - 1166.4
+  - - 1166.75
+    - 1169.9
+  - - 1170.25
+    - 1177.825
+  - - 1178.175
+    - 1180.3
+  - - 1180.65
+    - 1184.175
+  - - 1184.525
+    - 1192.6
+  - - 1192.95
+    - 1203.7
+  - - 1204.05
+    - 1211.0
+  - - 1211.35
+    - 1216.45
+  - - 1216.8
+    - 1222.275
   beat: 'index notation: dot product (defined here, stand-alone)'
   visual: 'Picture zone: house pair plane with p (teal) and q (orange) generic arrows; maths zone: S1-S2 p·q = p1q1 + p2q2
     + p3q3 (84 px), matching components linked by gold arcs. S3 keyword ''scalar''. S4: shadow band of q on p, ''shadow'',
@@ -1528,25 +1529,25 @@ scenes:
     spoken_pointer: true
 - id: s16_summation
   t:
-  - 1223.55
-  - 1265.975
+  - 1223.075
+  - 1265.5
   sentence_times:
-  - - 1223.55
-    - 1226.575
-  - - 1226.925
-    - 1235.9
-  - - 1236.25
-    - 1240.275
-  - - 1240.625
-    - 1246.575
-  - - 1246.925
-    - 1249.725
-  - - 1250.075
-    - 1253.3
-  - - 1253.65
-    - 1261.375
-  - - 1261.725
-    - 1265.175
+  - - 1223.075
+    - 1226.1
+  - - 1226.45
+    - 1235.425
+  - - 1235.775
+    - 1239.8
+  - - 1240.15
+    - 1246.1
+  - - 1246.45
+    - 1249.25
+  - - 1249.6
+    - 1252.825
+  - - 1253.175
+    - 1260.9
+  - - 1261.25
+    - 1264.7
   beat: 'index notation: summation convention'
   visual: 'Maths full width. S1: p1q1 + p2q2 + p3q3 (84 px). S2: it folds into Σ_{i=1}^{3} p_i q_i (96 px); the three terms
     slide under the sigma. S3: the two i''s pulse gold, linked by a gold arc ''twice''. S4: keyword ''Albert Einstein'' (54
@@ -1583,19 +1584,19 @@ scenes:
     spoken_pointer: false
 - id: s17_dummy
   t:
-  - 1265.975
-  - 1304.5
+  - 1265.5
+  - 1304.025
   sentence_times:
-  - - 1265.975
-    - 1280.8
-  - - 1281.15
-    - 1285.55
-  - - 1285.9
-    - 1290.025
-  - - 1290.375
-    - 1296.05
-  - - 1296.4
-    - 1303.7
+  - - 1265.5
+    - 1280.325
+  - - 1280.675
+    - 1285.075
+  - - 1285.425
+    - 1289.55
+  - - 1289.9
+    - 1295.575
+  - - 1295.925
+    - 1303.225
   beat: 'index notation: dummy index and rules'
   visual: 'Maths full width. S1 keyword ''dummy index''. S2: p_i q_i = p_j q_j with the letters cross-fading i -> j; a tiny
     code glyph ''for i in range(3)'' -> ''for j in range(3)'' (54 px, monospace) beside it. S3: ''no free index -> scalar''
@@ -1624,19 +1625,19 @@ scenes:
   related: []
 - id: s18_length_index
   t:
-  - 1304.5
-  - 1332.9
+  - 1304.025
+  - 1332.425
   sentence_times:
-  - - 1304.5
-    - 1306.375
-  - - 1306.725
-    - 1313.375
-  - - 1313.725
-    - 1322.3
-  - - 1322.65
-    - 1326.375
-  - - 1326.725
-    - 1332.1
+  - - 1304.025
+    - 1305.9
+  - - 1306.25
+    - 1312.9
+  - - 1313.25
+    - 1321.825
+  - - 1322.175
+    - 1325.9
+  - - 1326.25
+    - 1331.625
   beat: 'index notation: length with indices'
   visual: 'Picture zone: the 850 hPa wind arrow at Brest (from s11, east/north axes). Maths: S1 |u|² = u_i u_i (84 px). S2:
     CalcStack 5.8² + 33.5² + 0² ; S3: ≈ 1156 ; S4: √1156 ≈ 34.0 m/s with a gold CurvedLink to the ''34 m/s'' tip label.'
@@ -1665,30 +1666,30 @@ scenes:
   related: []
 - id: s19_three_reasons
   t:
-  - 1332.9
-  - 1369.825
+  - 1332.425
+  - 1370.875
   sentence_times:
-  - - 1332.9
-    - 1335.225
-  - - 1335.575
-    - 1337.75
-  - - 1338.1
-    - 1345.5
-  - - 1345.85
-    - 1355.925
-  - - 1356.275
-    - 1360.075
-  - - 1360.425
-    - 1369.025
+  - - 1332.425
+    - 1334.75
+  - - 1335.1
+    - 1337.275
+  - - 1337.625
+    - 1345.025
+  - - 1345.375
+    - 1355.45
+  - - 1355.8
+    - 1359.6
+  - - 1359.95
+    - 1370.075
   beat: 'why: three good reasons'
   visual: 'Three columns appear one per reason (no boxes): S2 ''short'' with a mini glyph of one line expanding to 3 lines
     / 9 terms; S3 ''safe'' with u_i + p_i q_i struck in rose (''vector + number''); S4-S5 ''algebra -> counting'' with small
-    delta_ij and epsilon_ijk glyphs (grey, ''soon'').'
+    a delta_ij glyph (grey, ''soon'') and a fainter epsilon_ijk glyph on AT(6, "next movie").'
   voiceover: 'So why write maths like this? There are three good reasons. The first is that it''s short: one line can hold
     three equations, or even nine terms, as we''ll see in a moment. The second is that it''s safe: the rules for free and
     dummy indices catch mistakes, like adding an arrow to a single number, before we compute anything. The third is that it
-    turns algebra into counting. With two special symbols, which we''ll meet soon, we can prove rules about vectors by checking
-    indices, instead of drawing pictures.'
+    turns algebra into counting. With a special symbol that we''ll meet soon, and a second one in the next movie, we can prove
+    rules about vectors by checking indices, instead of drawing pictures.'
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -1701,29 +1702,29 @@ scenes:
   related: []
 - id: s20_gradient
   t:
-  - 1369.825
-  - 1428.25
+  - 1370.875
+  - 1429.3
   sentence_times:
-  - - 1369.825
-    - 1373.825
-  - - 1374.175
-    - 1379.0
-  - - 1379.35
-    - 1384.15
-  - - 1384.5
-    - 1391.875
-  - - 1392.225
-    - 1399.525
-  - - 1399.875
-    - 1406.975
-  - - 1407.325
-    - 1412.475
-  - - 1412.825
-    - 1417.725
-  - - 1418.075
-    - 1421.625
-  - - 1421.975
-    - 1427.45
+  - - 1370.875
+    - 1374.875
+  - - 1375.225
+    - 1380.05
+  - - 1380.4
+    - 1385.2
+  - - 1385.55
+    - 1392.925
+  - - 1393.275
+    - 1400.575
+  - - 1400.925
+    - 1408.025
+  - - 1408.375
+    - 1413.525
+  - - 1413.875
+    - 1418.775
+  - - 1419.125
+    - 1422.675
+  - - 1423.025
+    - 1428.5
   beat: 'application 1: temperature gradient'
   visual: 'Picture zone: the 850 hPa temperature map around Brest (cartostyle, cmocean thermal, colour bar ''°C'' 52 px),
     no isotherm labels yet. S2 keyword ''?'' at Brest. S3: a walker glyph steps east from Brest; ''-3.2 °C per 100 km'' NOT
@@ -1768,23 +1769,23 @@ scenes:
     spoken_pointer: true
 - id: s21_advection_built
   t:
-  - 1428.25
-  - 1481.175
+  - 1429.3
+  - 1482.225
   sentence_times:
-  - - 1428.25
-    - 1433.55
-  - - 1433.9
-    - 1444.075
-  - - 1444.425
-    - 1453.775
-  - - 1454.125
-    - 1462.275
-  - - 1462.625
-    - 1468.725
-  - - 1469.075
-    - 1472.75
-  - - 1473.1
-    - 1480.375
+  - - 1429.3
+    - 1434.6
+  - - 1434.95
+    - 1445.125
+  - - 1445.475
+    - 1454.825
+  - - 1455.175
+    - 1463.325
+  - - 1463.675
+    - 1469.775
+  - - 1470.125
+    - 1473.8
+  - - 1474.15
+    - 1481.425
   beat: 'application 1: advection built term by term'
   visual: 'Picture zone: an air-parcel cube (translucent, 60 px) at Brest on the same map, the teal wind arrow; the parcel
     moves along the arrow in three hops (east hop, north hop, up hop as a small lift), each hop leaving a coloured trail.
@@ -1828,25 +1829,25 @@ scenes:
     spoken_pointer: false
 - id: s22_advection_easy
   t:
-  - 1481.175
-  - 1536.95
+  - 1482.225
+  - 1538.0
   sentence_times:
-  - - 1481.175
-    - 1483.7
-  - - 1484.05
-    - 1490.225
-  - - 1490.575
-    - 1498.925
-  - - 1499.275
-    - 1508.6
-  - - 1508.95
-    - 1513.5
-  - - 1513.85
-    - 1520.925
-  - - 1521.275
-    - 1529.0
-  - - 1529.35
-    - 1536.15
+  - - 1482.225
+    - 1484.75
+  - - 1485.1
+    - 1491.275
+  - - 1491.625
+    - 1499.975
+  - - 1500.325
+    - 1509.65
+  - - 1510.0
+    - 1514.55
+  - - 1514.9
+    - 1521.975
+  - - 1522.325
+    - 1530.05
+  - - 1530.4
+    - 1537.2
   beat: 'application 1: easy numbers'
   visual: 'Picture zone: an idealised square map (no coast), isotherms straight and tilted (3 °C per 100 km east falling,
     2 per 100 km north falling), teal wind (10, 30). Maths CalcStack (S4-S8): ∂T/∂x1 = -3 °C/100 km = -3 x 10⁻⁵ K/m ; ∂T/∂x2
@@ -1887,25 +1888,25 @@ scenes:
     spoken_pointer: false
 - id: s23_advection_sign
   t:
-  - 1536.95
-  - 1581.325
+  - 1538.0
+  - 1582.375
   sentence_times:
-  - - 1536.95
-    - 1539.2
-  - - 1539.55
-    - 1546.25
-  - - 1546.6
-    - 1549.4
-  - - 1549.75
-    - 1553.95
-  - - 1554.3
-    - 1562.725
-  - - 1563.075
-    - 1565.5
-  - - 1565.85
-    - 1573.5
-  - - 1573.85
-    - 1580.525
+  - - 1538.0
+    - 1540.25
+  - - 1540.6
+    - 1547.3
+  - - 1547.65
+    - 1550.45
+  - - 1550.8
+    - 1555.0
+  - - 1555.35
+    - 1563.775
+  - - 1564.125
+    - 1566.55
+  - - 1566.9
+    - 1574.55
+  - - 1574.9
+    - 1581.575
   beat: 'application 1: what the sign means'
   visual: 'Same idealised map. S1-S2: the parcel travels downwind into colder colours (teal path). S3-S4: a fixed thermometer
     (PoleThermometer, slate) appears; upwind parcels queue on the warmer side, labelled ''warmer''. S5: ''+3.2 K per hour''
@@ -1940,21 +1941,21 @@ scenes:
     spoken_pointer: true
 - id: s24_real_map
   t:
-  - 1581.325
-  - 1610.15
+  - 1582.375
+  - 1611.2
   sentence_times:
-  - - 1581.325
-    - 1583.35
-  - - 1583.7
-    - 1589.525
-  - - 1589.875
-    - 1597.125
-  - - 1597.475
-    - 1600.55
-  - - 1600.9
-    - 1605.925
-  - - 1606.275
-    - 1609.35
+  - - 1582.375
+    - 1584.4
+  - - 1584.75
+    - 1590.575
+  - - 1590.925
+    - 1598.175
+  - - 1598.525
+    - 1601.6
+  - - 1601.95
+    - 1606.975
+  - - 1607.325
+    - 1610.4
   beat: 'application 1: the real map'
   visual: 'Full width: ERA5 850 hPa temperature 18 UTC 1 Nov 2023 over the Bay of Biscay / Brittany / Channel (LCC), cmocean
     thermal shading, isotherms every 2 °C (white 2.5 px, in-line labels, <= 10), teal wind arrows (sparser than s05), coast
@@ -1985,19 +1986,19 @@ scenes:
   sfx: wind_gentle 0.15 under S4 only
 - id: s25_real_gradient
   t:
-  - 1610.15
-  - 1640.15
+  - 1611.2
+  - 1641.2
   sentence_times:
-  - - 1610.15
-    - 1616.5
-  - - 1616.85
-    - 1620.175
-  - - 1620.525
-    - 1628.0
-  - - 1628.35
-    - 1634.825
-  - - 1635.175
-    - 1639.35
+  - - 1611.2
+    - 1617.55
+  - - 1617.9
+    - 1621.225
+  - - 1621.575
+    - 1629.05
+  - - 1629.4
+    - 1635.875
+  - - 1636.225
+    - 1640.4
   beat: 'application 1: reading the real gradient'
   visual: 'Zoomed map (100-km grid ticks). S1: a gold east transect from Brest 100 km long, the colour strip under it, ''-3.2
     °C'' at its end; S2: north transect, ''-2.5 °C''. S3: ∂T/∂x1 = -3.2 x 10⁻⁵ K/m (68 px) with gold link from the east transect.
@@ -2033,25 +2034,25 @@ scenes:
   related: []
 - id: s26_real_sum
   t:
-  - 1640.15
-  - 1695.625
+  - 1641.2
+  - 1696.675
   sentence_times:
-  - - 1640.15
-    - 1647.65
-  - - 1648.0
-    - 1650.6
-  - - 1650.95
-    - 1657.15
-  - - 1657.5
-    - 1663.4
-  - - 1663.75
-    - 1674.25
-  - - 1674.6
-    - 1678.45
-  - - 1678.8
-    - 1687.975
-  - - 1688.325
-    - 1694.825
+  - - 1641.2
+    - 1648.7
+  - - 1649.05
+    - 1651.65
+  - - 1652.0
+    - 1658.2
+  - - 1658.55
+    - 1664.45
+  - - 1664.8
+    - 1675.3
+  - - 1675.65
+    - 1679.5
+  - - 1679.85
+    - 1689.025
+  - - 1689.375
+    - 1695.875
   beat: 'application 1: the real sum'
   visual: 'Zoomed map left (wind arrow 5.8/33.5 tip labels), maths right CalcStack: S2 u_j ∂T/∂x_j = u1 ∂T/∂x1 + u2 ∂T/∂x2
     ; S3 5.8 x (-3.2 x 10⁻⁵) ≈ -1.9 x 10⁻⁴ ; S5 33.5 x (-2.5 x 10⁻⁵) ≈ -8.4 x 10⁻⁴ ; S6 the north term''s Balance bar is 4x
@@ -2091,23 +2092,23 @@ scenes:
     spoken_pointer: false
 - id: s27_real_check
   t:
-  - 1695.625
-  - 1742.375
+  - 1696.675
+  - 1743.425
   sentence_times:
-  - - 1695.625
-    - 1697.775
-  - - 1698.125
-    - 1707.15
-  - - 1707.5
-    - 1713.35
-  - - 1713.7
-    - 1720.925
-  - - 1721.275
-    - 1727.225
-  - - 1727.575
-    - 1736.25
-  - - 1736.6
-    - 1741.575
+  - - 1696.675
+    - 1698.825
+  - - 1699.175
+    - 1708.2
+  - - 1708.55
+    - 1714.4
+  - - 1714.75
+    - 1721.975
+  - - 1722.325
+    - 1728.275
+  - - 1728.625
+    - 1737.3
+  - - 1737.65
+    - 1742.625
   beat: 'application 1: check against what happened'
   visual: 'Left: TimeGraph (house TimeGraph) 17-20 UTC: ERA5 850 hPa T over Brest (teal line, hour dots 2.4, 5.1, 8.2) with
     a dashed slate line of slope +3.7 K/h through 18 UTC (the advection estimate); right: TimeGraph of the Brest station 2-m
@@ -2142,25 +2143,25 @@ scenes:
     spoken_pointer: true
 - id: s28_nine_terms
   t:
-  - 1742.375
-  - 1797.6
+  - 1743.425
+  - 1798.65
   sentence_times:
-  - - 1742.375
-    - 1750.475
-  - - 1750.825
-    - 1757.475
-  - - 1757.825
-    - 1761.775
-  - - 1762.125
-    - 1767.15
-  - - 1767.5
-    - 1770.35
-  - - 1770.7
-    - 1784.675
-  - - 1785.025
-    - 1791.075
-  - - 1791.425
-    - 1796.8
+  - - 1743.425
+    - 1751.525
+  - - 1751.875
+    - 1758.525
+  - - 1758.875
+    - 1762.825
+  - - 1763.175
+    - 1768.2
+  - - 1768.55
+    - 1771.4
+  - - 1771.75
+    - 1785.725
+  - - 1786.075
+    - 1792.125
+  - - 1792.475
+    - 1797.85
   beat: 'application 1: nine terms in one line'
   visual: 'Maths full width. S2: u_j ∂u_i/∂x_j (96 px), i gold (''free''), j teal (''summed''). S3: brace ''i: 3 equations''.
     S4: brace ''j: 3 terms each''. S5: a 3 x 3 grid of the nine terms fills cell by cell (68 px; rows i = 1, 2, 3; columns
@@ -2196,25 +2197,25 @@ scenes:
   sfx: tick 0.10, one per grid cell, only while the voice pauses (S5 ends before S6)
 - id: s29_kronecker
   t:
-  - 1797.6
-  - 1837.9
+  - 1798.65
+  - 1838.95
   sentence_times:
-  - - 1797.6
-    - 1800.15
-  - - 1800.5
-    - 1804.475
-  - - 1804.825
-    - 1809.45
-  - - 1809.8
-    - 1814.0
-  - - 1814.35
-    - 1820.9
-  - - 1821.25
-    - 1826.45
-  - - 1826.8
-    - 1831.65
-  - - 1832.0
-    - 1837.1
+  - - 1798.65
+    - 1801.2
+  - - 1801.55
+    - 1805.525
+  - - 1805.875
+    - 1810.5
+  - - 1810.85
+    - 1815.05
+  - - 1815.4
+    - 1821.95
+  - - 1822.3
+    - 1827.5
+  - - 1827.85
+    - 1832.7
+  - - 1833.05
+    - 1838.15
   beat: 'Kronecker delta: from the basis'
   visual: 'Picture zone: the Brest 3-D axes with e1, e2, e3 (from s06). Maths: a 3 x 3 table (no boxes, aligned numbers 68
     px, row/column headers e1 e2 e3). S2: e1 with itself: shadow band of length 1 -> ''1'' in the table. S3: e1 with e2: right-angle
@@ -2249,25 +2250,25 @@ scenes:
     spoken_pointer: false
 - id: s30_substitution
   t:
-  - 1837.9
-  - 1878.425
+  - 1838.95
+  - 1879.475
   sentence_times:
-  - - 1837.9
-    - 1841.6
-  - - 1841.95
-    - 1846.2
-  - - 1846.55
-    - 1854.675
-  - - 1855.025
-    - 1861.175
-  - - 1861.525
-    - 1863.95
-  - - 1864.3
-    - 1866.7
-  - - 1867.05
-    - 1871.05
-  - - 1871.4
-    - 1877.625
+  - - 1838.95
+    - 1842.65
+  - - 1843.0
+    - 1847.25
+  - - 1847.6
+    - 1855.725
+  - - 1856.075
+    - 1862.225
+  - - 1862.575
+    - 1865.0
+  - - 1865.35
+    - 1867.75
+  - - 1868.1
+    - 1872.1
+  - - 1872.45
+    - 1878.675
   beat: 'Kronecker delta: substitution'
   visual: 'Maths full width. S1-S2: delta_ij u_j (96 px) unfolds to delta_i1 u1 + delta_i2 u2 + delta_i3 u3. S3: i = 2 set
     (gold): delta_21 -> 0 and delta_23 -> 0 struck (Strike), delta_22 -> 1. S4: u2 remains. S6: delta_ij u_j = u_i (96 px);
@@ -2294,25 +2295,25 @@ scenes:
   related: []
 - id: s31_balloon_delta
   t:
-  - 1878.425
-  - 1936.6
+  - 1879.475
+  - 1937.65
   sentence_times:
-  - - 1878.425
-    - 1881.325
-  - - 1881.675
-    - 1889.8
-  - - 1890.15
-    - 1896.175
-  - - 1896.525
-    - 1901.9
-  - - 1902.25
-    - 1906.975
-  - - 1907.325
-    - 1916.925
-  - - 1917.275
-    - 1923.575
-  - - 1923.925
-    - 1935.8
+  - - 1879.475
+    - 1882.375
+  - - 1882.725
+    - 1890.85
+  - - 1891.2
+    - 1897.225
+  - - 1897.575
+    - 1902.95
+  - - 1903.3
+    - 1908.025
+  - - 1908.375
+    - 1917.975
+  - - 1918.325
+    - 1924.625
+  - - 1924.975
+    - 1936.85
   beat: 'Kronecker delta: the balloon drifts with the wind'
   visual: 'Picture zone: map of Brittany with a field shading of x1 (east distance from Brest, a sequential ramp with 50-km
     contour lines running north-south, labelled ''0'', ''50'', ''100 km''). S2: keyword ''a map of x1''. S3: walker east:
@@ -2362,17 +2363,17 @@ scenes:
     spoken_pointer: false
 - id: s32_delta_facts
   t:
-  - 1936.6
-  - 1962.65
+  - 1937.65
+  - 1963.7
   sentence_times:
-  - - 1936.6
-    - 1938.55
-  - - 1938.9
-    - 1946.55
-  - - 1946.9
-    - 1955.675
-  - - 1956.025
-    - 1961.85
+  - - 1937.65
+    - 1939.6
+  - - 1939.95
+    - 1947.6
+  - - 1947.95
+    - 1956.725
+  - - 1957.075
+    - 1962.9
   beat: 'Kronecker delta: two facts'
   visual: 'Maths full width. S2: delta_ii = 1 + 1 + 1 = 3 (84 px) with a small 3-D axes glyph ''3 directions''. S3: delta_ij
     p_i q_j : a 3 x 3 grid of nine products collapses to its diagonal (three cells stay, six fade), = p_i q_i = p·q.'
@@ -2399,1524 +2400,44 @@ scenes:
     slug: ch00_tensors (proposed slug)
     covers: second-order tensors, isotropic tensors (delta), stress and strain-rate tensors
     spoken_pointer: true
-- id: s33_coriolis_why
+- id: s33_recap
   t:
-  - 1962.65
-  - 2003.025
+  - 1963.7
+  - 2029.95
   sentence_times:
-  - - 1962.65
-    - 1967.5
-  - - 1967.85
-    - 1969.75
-  - - 1970.1
-    - 1975.525
-  - - 1975.875
-    - 1980.65
-  - - 1981.0
-    - 1986.9
-  - - 1987.25
-    - 1993.675
-  - - 1994.025
-    - 1997.625
-  - - 1997.975
-    - 2002.225
-  beat: 'cross product: why weather needs it'
-  visual: 'Picture zone: the globe (BMNG) spinning slowly (Omega arrow violet along the axis); a real ERA5 low (Ciarán 18
-    UTC, A4 msl isobars) seen from above with surface winds spiralling (teal streaklines). S2: keyword ''push to one side''
-    with a teal wind arrow and a violet sideways arrow at its middle. S3 keyword ''Coriolis effect''. S4: ''its own video''
-    (54 px, slate). S5: -2 Ω x u (96 px) with gold BraceNote ''push per kilogram''. S6: Ω ''Earth''s spin'', u ''wind'' pointers.
-    S7: ''?'' on the direction.'
-  voiceover: 'Now let''s meet the second special symbol, which builds the cross product. Why does weather need it? Earth spins,
-    and on a spinning planet, moving air feels a push to one side. This is called the Coriolis effect, and it''s why large
-    storms spin. Where it comes from is derived step by step in the Coriolis movie, later in this series. Here we''ll use
-    one fact: for each kilogram of air, the push is minus two Omega cross u. Omega is Earth''s spin, and u is the wind. To
-    find which way this push points, we need the cross product.'
-  on_screen_eq:
-    latex: -2\,\boldsymbol\Omega\times\mathbf u
-    vallis_eq: 'provenance only, not drawn as a reference: the Coriolis term of Vallis (2.12) -2Ω x v_R (page p077 checked);
-      stated, derived in the Coriolis movie'
-    page_png: chapters/pages/ch02/p077.png
-  physics_source:
-    fn: fluidpy.core.rotating.coriolis_acceleration
-    params: {}
-    test: core rotating projectile test
-  exaggeration:
-  - globe spin rate x 2000 (said nowhere; recorded)
-  - streaklines advanced 20x
-  kind: globe + map
-  data: A4 (msl, u10, v10 18 UTC); BMNG
-  tool: three.js globe in Remotion (SphereGeometry + cartopy kind:texture of the field over BMNG, translucent) with billboard
-    labels + Remotion SVG isobars
-  runner_up: CesiumJS SingleTile drape (no Ion), frames composited in Remotion (user likes the Cesium drape; ~0.5 s/frame)
-  why: motivates the cross product with the real spinning Earth before the algebra
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: true
-- id: s34_cross_basics
-  t:
-  - 2003.025
-  - 2058.15
-  sentence_times:
-  - - 2003.025
-    - 2009.675
-  - - 2010.025
-    - 2016.725
-  - - 2017.075
-    - 2021.3
-  - - 2021.65
-    - 2030.95
-  - - 2031.3
-    - 2037.1
-  - - 2037.45
-    - 2044.45
-  - - 2044.8
-    - 2049.8
-  - - 2050.15
-    - 2057.35
-  beat: 'cross product: definition (stand-alone)'
-  visual: 'Picture zone: three.js floor with p (teal) and q (orange) from one point, the parallelogram (ink 18 % fill) and
-    the violet p x q rising. S2: ''|p||q| sin θ'' with the angle arc. S3: ''area'' with the parallelogram pulsing. S4: a right-hand
-    glyph (code-drawn, as in the cross-product movie) curls from p to q; thumb along p x q. S5: e1 x e2 = e3, ''east x north
-    = up'' on the Brest axes. S6-S7: (p x q)_1 = p2q3 - p3q2 (84 px), then the other two rows faded in as a cycle 1 -> 2 ->
-    3 -> 1 glyph.'
-  voiceover: 'The cross product of two vectors, p and q, is another vector, at right angles to both. Its length is the length
-    of p, times the length of q, times the sine of the angle between them. That''s the area of the parallelogram the two arrows
-    make. Its direction comes from the right-hand rule: point your fingers along p, curl them towards q, and your thumb points
-    along p cross q. For our unit vectors, e one cross e two is e three: east cross north is up. In components, the first
-    component of p cross q is p two q three, minus p three q two. The other two follow the same pattern, cycling through one,
-    two and three. We take the cross product apart fully, and see its uses across physics, in the two cross product movies.'
-  on_screen_eq:
-    latex: \mathbf p\times\mathbf q = (p_2q_3 - p_3q_2,\ p_3q_1 - p_1q_3,\ p_1q_2 - p_2q_1)
-    vallis_eq: 'provenance only, not drawn as a reference: Kundu (2.20) (page image checked) as a component triple'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
-  physics_source:
-    fn: fluidpy.geo.vectors.cross
-    params:
-      symbolic: true
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V2_symbolic_epsilon_and_lagrange
-  exaggeration: []
-  kind: 3-D diagram + equation
-  data: none
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays;
-    Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: reuses the cross-product movie's visual language (violet result, parallelogram, hand) so the series is consistent
-  related:
-  - n: '2'
-    slug: ch00_cross_product
-    covers: 'the cross product in depth: recipe, area proof, the three right-hand rules, k x u'
-    spoken_pointer: true
-  - n: '3'
-    slug: ch00_cross_product_uses
-    covers: torque, angular momentum, q v x B, Omega x r
-    spoken_pointer: true
-- id: s35_epsilon_def
-  t:
-  - 2058.15
-  - 2102.95
-  sentence_times:
-  - - 2058.15
-    - 2064.575
-  - - 2064.925
-    - 2071.575
-  - - 2071.925
-    - 2076.05
-  - - 2076.4
-    - 2086.15
-  - - 2086.5
-    - 2093.525
-  - - 2093.875
-    - 2097.95
-  - - 2098.3
-    - 2102.15
-  beat: 'alternating tensor: definition'
-  visual: 'Picture zone: three.js 3 x 3 x 3 cube of 27 cells (i, j, k axes labelled 1-3), slowly orbiting. S2 keyword ''alternating
-    tensor'', ''permutation symbol''; epsilon_ijk (96 px). S3: ''27 values'' counter. S4: cells (1,2,3), (2,3,1), (3,1,2)
-    light teal ''+1'' (glyph ''+''). S5: (3,2,1), (2,1,3), (1,3,2) light rose ''-1'' (glyph ''-'', hatched). S6: the 21 others
-    grey ''0'' (one 8-frame wave). S7: ''6 of 27''. Maths zone: the definition (Kundu 2.18) as three rows.'
-  voiceover: 'To write this pattern with indices, we need a symbol that knows the order of one, two and three. It''s called
-    the alternating tensor, or permutation symbol, and it''s written epsilon i j k. It has three indices, so it has twenty
-    seven values. Epsilon i j k is plus one when i, j, k are one, two, three, or that order shifted round: two, three, one,
-    or three, one, two. It''s minus one when the order is reversed: three, two, one, or two, one, three, or one, three, two.
-    And it''s zero whenever two of the indices are equal. So only six of the twenty seven values aren''t zero.'
-  on_screen_eq:
-    latex: \varepsilon_{ijk} = \begin{cases}+1 & ijk = 123,\ 231,\ 312\\ 0 & \text{two indices equal}\\ -1 & ijk = 321,\ 213,\
-      132\end{cases}
-    vallis_eq: 'provenance only, not drawn as a reference: Kundu (2.18) (page image checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.core.tensors.levi_civita / permutation_sign
-    params: {}
-    test: CHECK VI19; ../Fluid Dynamics/tests/core/ (Kundu ch02 V-ladder, F12 rows)
-  exaggeration: []
-  kind: 3-D data cube
-  data: none (exact table)
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays
-    (instanced cubes)'
-  runner_up: flat 3 x 9 table in SVG (loses the 3-index picture)
-  why: a 3-index object is literally a cube; 6 lit cells of 27 is the definition at a glance
-  related:
-  - n: '2'
-    slug: ch00_cross_product
-    covers: 'the cross product in depth: recipe, area proof, the three right-hand rules, k x u'
-    spoken_pointer: false
-  - n: '11'
-    slug: ch00_tensors (proposed slug)
-    covers: second-order tensors, isotropic tensors (delta), stress and strain-rate tensors
-    spoken_pointer: false
-  sfx: tick 0.10 as the six non-zero cells light (picture shows counting), in the gap after S5 only
-- id: s36_epsilon_moves
-  t:
-  - 2102.95
-  - 2122.325
-  sentence_times:
-  - - 2102.95
-    - 2105.1
-  - - 2105.45
-    - 2113.775
-  - - 2114.125
-    - 2121.525
-  beat: 'alternating tensor: two moves'
-  visual: 'Maths: S2 epsilon_ijk = epsilon_jki with the three letters rotating one step round a small circle glyph (gold).
-    S3 epsilon_ijk = -epsilon_jik with two letters swapping (orange arc) and a ''-'' popping in. The cube in the corner lights
-    the matching cell pairs.'
-  voiceover: 'Two moves follow from this. Shifting all three indices one step round the cycle keeps the value: epsilon i j
-    k equals epsilon j k i. But swapping any two indices flips the sign: epsilon i j k equals minus epsilon j i k.'
-  on_screen_eq:
-    latex: \varepsilon_{ijk} = \varepsilon_{jki} = -\varepsilon_{jik}
-    vallis_eq: 'provenance only: Kundu §2.7 text after (2.18) (index moved two places keeps the value, one place flips it;
-      page image checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.core.tensors.levi_civita
-    params: {}
-    test: levi_civita V1 two-place/one-place rows
-  exaggeration: []
-  kind: equation animation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: the moves are motions of letters; animating them is the explanation
-  related: []
-- id: s37_cross_index
-  t:
-  - 2122.325
-  - 2166.55
-  sentence_times:
-  - - 2122.325
-    - 2134.15
-  - - 2134.5
-    - 2136.95
-  - - 2137.3
-    - 2140.25
-  - - 2140.6
-    - 2147.25
-  - - 2147.6
-    - 2149.625
-  - - 2149.975
-    - 2155.325
-  - - 2155.675
-    - 2161.35
-  - - 2161.7
-    - 2165.75
-  beat: cross product in index form
-  visual: 'Maths full width. S1: (p x q)_i = epsilon_ijk p_j q_k (96 px), j, k teal ''summed'', i gold ''free''. S2: ''9 terms
-    for each i''. S3: i = 1: a 3 x 3 grid (j rows, k columns) of epsilon_1jk p_j q_k. S4: every cell with j = 1 or k = 1 or
-    j = k strikes out (7 cells, rose dash). S5: epsilon_123 p2 q3 -> + p2q3 (teal). S6: epsilon_132 p3 q2 -> - p3q2 (rose
-    with ''-''). S7: = p2q3 - p3q2 with a gold link to the s34 component row.'
-  voiceover: 'Now the cross product fits in one line: the i component of p cross q is epsilon i j k times p sub j times q
-    sub k, with j and k both summed. That''s nine terms for each i. Let''s write them out for i equal to one. Every term with
-    j or k equal to one is zero, because then epsilon repeats an index. That leaves two terms. Epsilon one two three times
-    p two q three is plus p two q three. And epsilon one three two times p three q two is minus p three q two. That''s exactly
-    the first component of the cross product.'
-  on_screen_eq:
-    latex: (\mathbf p\times\mathbf q)_i = \varepsilon_{ijk}\,p_j\,q_k
-    vallis_eq: 'provenance only, not drawn as a reference: Kundu (2.21) third form (u x v)_k = epsilon_kij u_i v_j with the
-      indices renamed k->i, i->j, j->k (page image checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
-  physics_source:
-    fn: fluidpy.core.tensors.cross_einsum
-    params: {}
-    test: cross_einsum V1 = cross = np.cross; CHECK VI21
-  exaggeration: []
-  kind: equation animation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: seven struck cells make 'only two terms survive' visible
-  related:
-  - n: '2'
-    slug: ch00_cross_product
-    covers: 'the cross product in depth: recipe, area proof, the three right-hand rules, k x u'
-    spoken_pointer: false
-- id: s38_cross_check
-  t:
-  - 2166.55
-  - 2215.125
-  sentence_times:
-  - - 2166.55
-    - 2168.825
-  - - 2169.175
-    - 2175.5
-  - - 2175.85
-    - 2178.925
-  - - 2179.275
-    - 2188.925
-  - - 2189.275
-    - 2193.85
-  - - 2194.2
-    - 2200.4
-  - - 2200.75
-    - 2202.675
-  - - 2203.025
-    - 2210.775
-  - - 2211.125
-    - 2214.325
-  beat: 'cross product: easy numbers and order'
-  visual: 'Picture zone: three.js floor with p = (5, 1, 0) teal, q = (1, 3, 0) orange, their parallelogram, the violet arrow
-    rising to 14. Maths CalcStack: S3 (p x q)_3 = epsilon_312 p1 q2 + epsilon_321 p2 q1 ; = 5 x 3 - 1 x 1 = 14 ; S5 p x q
-    = (0, 0, 14). S6-S8: q x p: the violet arrow flips down (slow 1-s ease), (0, 0, -14), ''q x p = -p x q''.'
-  voiceover: Let's try easy numbers. Take p with components five, one and zero, and q with components one, three and zero.
-    What's the third component of p cross q? For i equal to three, epsilon three one two gives plus five times three, and
-    epsilon three two one gives minus one times one. So the third component is fifteen minus one, which is fourteen. The first
-    two components are zero, so p cross q points straight up, fourteen units long. And the order matters. In q cross p, the
-    same two terms appear with their signs flipped, so q cross p is minus p cross q. Turning the order round reverses the
-    arrow.
-  on_screen_eq:
-    latex: (\mathbf p\times\mathbf q)_3 = 5\times3 - 1\times1 = 14
-    vallis_eq: 'provenance only: our numbers in Kundu (2.21); same pair as the cross-product movie'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
-  physics_source:
-    fn: fluidpy.core.tensors.cross_einsum + fluidpy.geo.vectors.cross
-    params:
-      p:
-      - 5
-      - 1
-      - 0
-      q:
-      - 1
-      - 3
-      - 0
-    test: CHECK VI21
-  exaggeration: []
-  kind: 3-D diagram + calculation
-  data: none (easy numbers)
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays;
-    Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: the familiar 14 from the cross-product movie, now produced by epsilon
-  related:
-  - n: '2'
-    slug: ch00_cross_product
-    covers: 'the cross product in depth: recipe, area proof, the three right-hand rules, k x u'
-    spoken_pointer: false
-- id: s39_omega
-  t:
-  - 2215.125
-  - 2263.3
-  sentence_times:
-  - - 2215.125
-    - 2217.025
-  - - 2217.375
-    - 2222.25
-  - - 2222.6
-    - 2230.75
-  - - 2231.1
-    - 2235.65
-  - - 2236.0
-    - 2243.475
-  - - 2243.825
-    - 2255.2
-  - - 2255.55
-    - 2262.5
-  beat: Earth's spin vector at Brest
-  visual: 'Picture zone: three.js globe (BMNG), Earth''s axis as a thin line through both poles (occluded behind the globe),
-    the violet Omega arrow out of the North Pole. S2: ''7.29 x 10⁻⁵ rad/s'' (68 px). S3 keyword ''radian'', ''2π = one turn''.
-    S4: camera flies to Brest (capability F1 slerp), the local east/north/up axes appear at Brest; a copy of Omega is slid
-    to Brest (parallel), leaning north. S5: the copy splits into a north part (Omega cos phi) and an up part (Omega sin phi)
-    as dashed legs, with phi marked at Earth''s centre in a half-Earth slice (as in the cross-product movie). S6: Ω = (0,
-    Ω cos φ, Ω sin φ) (84 px). S7: = (0, 4.84, 5.46) x 10⁻⁵ s⁻¹.'
-  voiceover: 'Now Earth''s spin. Omega is an arrow along Earth''s axis, pointing out of the North Pole. Its length is seven
-    point two nine times ten to the minus five radians per second, one turn in just under a day. Radians measure angle, and
-    a full turn is two pi radians. At Brest, at forty eight point four five degrees north, the axis isn''t straight up: it
-    leans towards the north. So in our east, north, up basis, Omega has components zero, Omega times the cosine of phi, and
-    Omega times the sine of phi, where phi is the latitude. At Brest, that''s zero, four point eight four, and five point
-    four six, times ten to the minus five.'
-  on_screen_eq:
-    latex: \boldsymbol\Omega = (0,\ \Omega\cos\varphi,\ \Omega\sin\varphi)
-    vallis_eq: 'provenance only, not drawn as a reference: under Vallis (2.77): Omega^x = 0, Omega^y = Omega cos theta_0,
-      Omega^z = Omega sin theta_0 (page image p089 checked; theta_0 written phi)'
-    page_png: chapters/pages/ch02/p089.png
-  physics_source:
-    fn: fluidpy.core.gfd.earth_rotation_local
-    params:
-      lat_deg: 48.45
-    test: CHECK VI23; earth_rotation_local V1 rows
-  exaggeration:
-  - globe and axis arrow not to scale (said nowhere; recorded)
-  kind: globe + 3-D vectors
-  data: BMNG (A7)
-  tool: three.js globe in Remotion (SphereGeometry + cartopy kind:texture of the field over BMNG, translucent) with billboard
-    labels + flight (capability F1)
-  runner_up: CesiumJS SingleTile drape (no Ion), frames composited in Remotion (user likes the Cesium drape; ~0.5 s/frame)
-  why: the tilt of Omega at Brest is a 3-D fact best seen on the globe
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: false
-  - n: '5'
-    slug: ch00_coordinates (proposed slug)
-    covers: rotation of axes, polar/cylindrical/spherical coordinates, lat/lon geometry, local east-north-up axes
-    spoken_pointer: false
-  sfx: whoosh 0.15 during the camera flight, in the 0.8-s scene gap before S4 if the flight starts there
-- id: s40_coriolis_easy
-  t:
-  - 2263.3
-  - 2326.925
-  sentence_times:
-  - - 2263.3
-    - 2267.275
-  - - 2267.625
-    - 2276.175
-  - - 2276.525
-    - 2283.05
-  - - 2283.4
-    - 2290.05
-  - - 2290.4
-    - 2298.2
-  - - 2298.55
-    - 2304.825
-  - - 2305.175
-    - 2311.1
-  - - 2311.45
-    - 2319.675
-  - - 2320.025
-    - 2326.125
-  beat: 'Coriolis direction: easy numbers'
-  visual: 'Picture zone: top view of the local east/north axes at ''45° N''; teal wind (0, 10, 0) pointing north. Maths CalcStack
-    (68 px), one row per component with epsilon: S4 (Ω x u)_1 = Ω2u3 - Ω3u2 = 0 - 5 x 10⁻⁵ x 10 = -5 x 10⁻⁴ ; S5 (Ω x u)_2
-    = Ω3u1 - Ω1u3 = 0 ; S6 (Ω x u)_3 = Ω1u2 - Ω2u1 = 0 ; S7 x (-2): -2Ω x u = (+1 x 10⁻³, 0, 0). S8: violet push arrow grows
-    to the EAST of the wind, a RightTick between them, keyword ''to the right''.'
-  voiceover: 'Let''s find the push''s direction with easy numbers first. Take a place at forty five degrees north, where Omega''s
-    north and up components are both about five times ten to the minus five. Take a wind of ten metres per second blowing
-    due north, with components zero, ten and zero. The first component of Omega cross u is Omega two u three minus Omega three
-    u two. That''s zero, minus five times ten to the minus five times ten, so minus five times ten to the minus four. The
-    second component is Omega three u one minus Omega one u three, which is zero. The third is Omega one u two minus Omega
-    two u one, which is also zero. Multiplying by minus two, the push is plus one times ten to the minus three metres per
-    second squared, towards the east. The wind blows north, and the push points east: a right angle to the right of the wind.'
-  on_screen_eq:
-    latex: -2\,\boldsymbol\Omega\times\mathbf u = (+1\times10^{-3},\ 0,\ 0)\ \mathrm{m\,s^{-2}}
-    vallis_eq: 'provenance only: our easy numbers; Omega components under Vallis (2.77) (p089 checked)'
-    page_png: chapters/pages/ch02/p089.png
-  physics_source:
-    fn: fluidpy.core.rotating.coriolis_acceleration + fluidpy.core.gfd.earth_rotation_local
-    params:
-      lat_deg: 45
-      u:
-      - 0
-      - 10
-      - 0
-    test: CHECK VI24
-  exaggeration:
-  - push arrow drawn x 10⁴ relative to the wind arrow (accelerations and speeds share no scale)
-  kind: diagram + calculation
-  data: none (easy numbers)
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers) + house pair plane'
-  runner_up: —
-  why: 'easy numbers: only one product is non-zero, so the direction is obvious'
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: false
-- id: s41_coriolis_real
-  t:
-  - 2326.925
-  - 2365.175
-  sentence_times:
-  - - 2326.925
-    - 2331.725
-  - - 2332.075
-    - 2336.85
-  - - 2337.2
-    - 2347.7
-  - - 2348.05
-    - 2350.775
-  - - 2351.125
-    - 2356.9
-  - - 2357.25
-    - 2364.375
-  beat: 'Coriolis direction: the real wind'
-  visual: 'Picture zone: the zoomed Brest 850 hPa map (s25 frame) with the teal real wind arrow; maths CalcStack: S3 -2Ω x
-    u = (3.66, -0.63, 0.56) x 10⁻³ m s⁻². S4: the violet flat push arrow at Brest pointing just south of east (bearing 99.8).
-    S5: RightTick between wind and push, keyword ''right angle, to the right''. S6: a small side-view inset: the up part as
-    a tiny violet arrow next to a long brown ''g = 9.81'' arrow, ''x 1/17 500'' (54 px).'
-  voiceover: Now the real wind a kilometre above Brest, with Brest's Omega. With epsilon, minus two Omega cross u has three
-    components. They're plus three point six six, minus zero point six three, and plus zero point five six, all times ten
-    to the minus three metres per second squared. The flat part points just south of east. That's exactly a right angle to
-    the right of the wind, which blows a little east of north. The third part points up, and it's nearly twenty thousand times
-    weaker than gravity, so it hardly matters.
-  on_screen_eq:
-    latex: -2\,\boldsymbol\Omega\times\mathbf u = (3.66,\ -0.63,\ 0.56)\times10^{-3}\ \mathrm{m\,s^{-2}}
-    vallis_eq: 'provenance only: our real numbers (ERA5 wind, Brest Omega)'
-    page_png: null
-  physics_source:
-    fn: fluidpy.core.rotating.coriolis_acceleration
-    params:
-      lat_deg: 48.45
-      u:
-      - 5.85
-      - 33.49
-      - 0.0
-    test: CHECK VI25, VI26
-  exaggeration:
-  - push arrow x 10⁴ relative to the wind arrow
-  kind: map + calculation
-  data: ERA5 850 hPa t/q/u/v hourly, 2023-11-01T18 (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, A1)
-  tool: 'cartopy + cartostyle movie preset (LCC lon0 -4, parallels 44/52) rendered as transparent PNG layers (shading, isotherms,
-    coast/borders) -> Remotion stack; wind arrows and labels drawn by Remotion SVG from the same projected coordinates (d3-geo
-    LCC with identical parameters); Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: 'd3-geo SVG map in Remotion end to end (capability test CTS1Build): crisper vectors, but contour shading from
-    JSON polygons is heavier'
-  why: the real wind and the real push on the real map
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: false
-- id: s42_coriolis_meaning
-  t:
-  - 2365.175
-  - 2408.575
-  sentence_times:
-  - - 2365.175
-    - 2367.2
-  - - 2367.55
-    - 2373.5
-  - - 2373.85
-    - 2375.75
-  - - 2376.1
-    - 2381.8
-  - - 2382.15
-    - 2392.275
-  - - 2392.625
-    - 2401.325
-  - - 2401.675
-    - 2407.775
-  beat: 'Coriolis: what the number means'
-  visual: 'Left: a small ERA5 MSLP inset of Ciarán at 18 UTC (isobars every 4 hPa, ''L'', a high to the south), a teal parcel
-    arrow starting from high towards low and visibly bending right (precomputed with fluidpy.geo.frames.inertial_oscillation
-    over 1 h - honest: a picture of the push turning the motion, not a forecast). Right: ''3.7 x 10⁻³ m s⁻²'' x 3600 s ≈ 13
-    m/s (CalcStack). S5: keyword ''turns right (north)''. S6: the inset mirrors to a SH low (clockwise isobar flow seen from
-    above) with ''turns left (south)''.'
-  voiceover: 'How big is this push? Three point seven times ten to the minus three metres per second squared sounds tiny.
-    But it never stops. Acting for one hour, it could change the wind by about thirteen metres per second. That''s why the
-    wind can''t blow straight from high pressure to low pressure for long: in the Northern Hemisphere, the Coriolis push keeps
-    turning it to the right. South of the equator, the latitude counts as negative, so Omega''s up part is negative, and the
-    push turns the wind to the left. How this push balances the push from pressure is the story of the geostrophic wind movie.'
-  on_screen_eq:
-    latex: 3.7\times10^{-3}\ \mathrm{m\,s^{-2}}\times3600\ \mathrm s\approx13\ \mathrm{m\,s^{-1}}
-    vallis_eq: 'provenance only: our numbers'
-    page_png: null
-  physics_source:
-    fn: fluidpy.geo.frames.inertial_oscillation (path picture) + fluidpy.core.rotating.coriolis_acceleration
-    params:
-      f: 0.0001091
-      u0: 0.0
-      v0: 20.0
-    test: CHECK VI27; tests/geo/test_frames.py
-  exaggeration:
-  - the bending path is an illustration of a push turning a motion over 1 h (time compressed to ~5 s)
-  - SH mirror is a mirrored drawing, labelled by the narration
-  kind: map inset + calculation
-  data: A4 msl 18 UTC
-  tool: 'Remotion SVG (d3-geo LCC) inset + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: cartostyle inset PNG
-  why: answers 'what does the number mean, for whom' with a turning path on the real chart
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: false
-  - n: '30'
-    slug: ch00_geostrophic_wind (slug from series plan V6)
-    covers: Coriolis push balancing the pressure push; geostrophic and ageostrophic wind
-    spoken_pointer: true
-- id: s43_coriolis_globe
-  t:
-  - 2408.575
-  - 2436.95
-  sentence_times:
-  - - 2408.575
-    - 2411.25
-  - - 2411.6
-    - 2420.75
-  - - 2421.1
-    - 2425.65
-  - - 2426.0
-    - 2429.2
-  - - 2429.55
-    - 2436.15
-  beat: Coriolis on the whole planet
-  visual: 'Full width: three.js globe slowly turning (BMNG/GIBS base, coasts), ERA5 10-m winds as teal arrows on an equal-area
-    set of ~400 points; the violet horizontal push -f k x u (same scale factor for all, x 2000 relative) at each arrow''s
-    middle. S2: teal arrows appear; S2 end violet arrows appear. S3: camera tilts to the NH: gold RightTicks on a few arrows,
-    keyword ''right''. S4: tilts to the SH: ''left''. S5: camera to the equator: violet arrows shrink to nothing, keyword
-    ''no up part''. Hemisphere labels ''north'' / ''south'' as billboards.'
-  voiceover: Here's the whole planet at one moment. The wind near the ground is drawn in teal, and the push from Earth's spin,
-    worked out with epsilon at every place, is drawn in violet. In the north, every violet arrow points to the right of its
-    wind. In the south, every one points to the left. Near the equator, the flat part of the push shrinks to nothing, because
-    Earth's spin has no up part there.
-  on_screen_eq: null
-  physics_source:
-    fn: fluidpy.geo.vectors.k_cross + fluidpy.geo.frames.coriolis_parameter on D2 u10, v10
-    params:
-      time: 2023-11-01T18 (fallback 2023-11-02T12)
-    test: CHECK VI28
-  exaggeration:
-  - push arrows x 2000 relative to wind arrows (shared factor)
-  - ~400 sample points (equal-area)
-  kind: globe (data)
-  data: NEW D2 ERA5 10-m wind 2023-11-01T18 global (fallback A3); BMNG/GIBS
-  tool: three.js globe in Remotion (SphereGeometry + cartopy kind:texture of the field over BMNG, translucent) with billboard
-    labels (instanced arrow glyphs)
-  runner_up: CesiumJS SingleTile drape (no Ion), frames composited in Remotion (user likes the Cesium drape; ~0.5 s/frame)
-    with arrow billboards (heavier)
-  why: right in the north, left in the south, zero at the equator is a global pattern; only a globe shows all three at once
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: false
-- id: s44_eps_delta
-  t:
-  - 2436.95
-  - 2484.5
-  sentence_times:
-  - - 2436.95
-    - 2439.975
-  - - 2440.325
-    - 2445.725
-  - - 2446.075
-    - 2458.525
-  - - 2458.875
-    - 2466.075
-  - - 2466.425
-    - 2468.675
-  - - 2469.025
-    - 2473.0
-  - - 2473.35
-    - 2479.325
-  - - 2479.675
-    - 2483.7
-  beat: 'epsilon-delta relation: statement'
-  visual: 'Maths full width. S1: two epsilon glyphs next to each other with a shared k (gold link). S2: epsilon_ijk epsilon_klm
-    = delta_il delta_jm - delta_im delta_jl (96 px, built term by term). S3: BraceNotes ''2 cross products'' (left) / ''dot
-    products'' (right). S4-S7: the mnemonic: the two k''s pulse ''next to each other''; gold arcs i-l, j-m on the first term
-    (''first with first, second with second''); crossed arcs i-m, j-l on the second term with the ''-''.'
-  voiceover: 'Now let''s connect the two special symbols. When two epsilons share one summed index, they can be replaced by
-    deltas. This is the epsilon delta relation: epsilon i j k times epsilon k l m equals delta i l times delta j m, minus
-    delta i m times delta j l. It''s useful because two epsilons mean two cross products, and the deltas turn them into dot
-    products. Here''s a way to remember it. The summed index k sits in the middle, next to itself. On the right, the first
-    indices, i and l, pair up, then the second ones, j and m. Then come the same pairs crossed over, with a minus sign.'
-  on_screen_eq:
-    latex: \varepsilon_{ijk}\varepsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}
-    vallis_eq: 'provenance only, not drawn as a reference: Kundu (2.19) and the remembering rule after it (page image checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.core.tensors.epsilon_delta_residual
-    params: {}
-    test: CHECK VI20
-  exaggeration: []
-  kind: equation animation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: arcs make the index pairing a picture
-  related:
-  - n: 10A
-    slug: ch00_vector_identities_1 (proposed slug)
-    covers: product rules with grad, div, curl; div curl = 0, curl grad = 0
-    spoken_pointer: false
-- id: s45_eps_delta_check
-  t:
-  - 2484.5
-  - 2539.15
-  sentence_times:
-  - - 2484.5
-    - 2486.75
-  - - 2487.1
-    - 2493.125
-  - - 2493.475
-    - 2503.35
-  - - 2503.7
-    - 2513.6
-  - - 2513.95
-    - 2518.025
-  - - 2518.375
-    - 2526.225
-  - - 2526.575
-    - 2530.175
-  - - 2530.525
-    - 2536.325
-  - - 2536.675
-    - 2538.35
-  beat: 'epsilon-delta: two cases and 81'
-  visual: 'Maths. S2-S3: case (i, j, l, m) = (1, 2, 1, 2): left epsilon_123 epsilon_312 = 1 x 1 = 1; right delta_11 delta_22
-    - delta_12 delta_21 = 1 - 0 = 1, check glyph. S4-S5: case (1, 2, 2, 1): -1 = -1, check glyph. S6: a 9 x 9 grid of the
-    81 cases (i j rows, l m columns) fills with ticks in 1.5 s (teal check marks; values +1 teal, -1 rose with ''-'', 0 grey)
-    with counter ''81 / 81''. S7 keyword ''all agree''.'
-  voiceover: 'Let''s check it with numbers. Take i equal to one, j equal to two, l equal to one and m equal to two. On the
-    left, only k equal to three survives: epsilon one two three times epsilon three one two, which is one times one, so one.
-    On the right, it''s delta one one times delta two two, minus delta one two times delta two one: one minus zero, which
-    is also one. Now swap l and m, so l is two and m is one. The left is epsilon one two three times epsilon three two one:
-    one times minus one, so minus one. The right is zero minus one, minus one again. There are eighty one combinations in
-    all, and a computer checks every one of them in a moment. They all agree.'
-  on_screen_eq:
-    latex: \varepsilon_{123}\varepsilon_{312} = 1 = \delta_{11}\delta_{22} - \delta_{12}\delta_{21}
-    vallis_eq: 'provenance only: our cases in Kundu (2.19)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.core.tensors.epsilon_delta_residual + levi_civita + kronecker_delta (81-case table in the build script)
-    params: {}
-    test: CHECK VI20
-  exaggeration: []
-  kind: equation + grid animation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: two by hand, then all 81 by the computer, shown as a filling grid
-  related: []
-  sfx: tick 0.08 as the 81 grid fills (rate-limited, in the gap after S6)
-- id: s46_eps_delta_why
-  t:
-  - 2539.15
-  - 2574.8
-  sentence_times:
-  - - 2539.15
-    - 2541.6
-  - - 2541.95
-    - 2548.65
-  - - 2549.0
-    - 2555.875
-  - - 2556.225
-    - 2562.375
-  - - 2562.725
-    - 2569.825
-  - - 2570.175
-    - 2574.0
-  beat: 'epsilon-delta: why it is true'
-  visual: 'Maths with the epsilon cube small at left. S2: i ≠ j highlighted, ''k = the third number'' (e.g. i = 1, j = 2 ->
-    k = 3 cell lights). S3: ''{l, m} = {i, j}''. S4: same order -> (+1)(+1) = +1; S5: swapped -> (+1)(-1) = -1. S6: the deltas''
-    two terms light under each case.'
-  voiceover: But why must it always be true? For the left side not to be zero, i and j must be different, and k must be the
-    third number. Then epsilon k l m isn't zero only if l and m are the same two numbers as i and j. If they come in the same
-    order, the two epsilons are equal, so their product is plus one. If they come in the swapped order, the two epsilons have
-    opposite signs, so their product is minus one. And that's exactly what the deltas on the right side say.
-  on_screen_eq: null
-  physics_source:
-    fn: fluidpy.core.tensors.levi_civita
-    params: {}
-    test: CHECK VI20
-  exaggeration: []
-  kind: equation animation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: a counting argument, so the viewer sees why and not only that
-  related: []
-- id: s47_lagrange_steps
-  t:
-  - 2574.8
-  - 2629.65
-  sentence_times:
-  - - 2574.8
-    - 2576.7
-  - - 2577.05
-    - 2582.325
-  - - 2582.675
-    - 2590.9
-  - - 2591.25
-    - 2600.025
-  - - 2600.375
-    - 2604.925
-  - - 2605.275
-    - 2609.45
-  - - 2609.8
-    - 2618.825
-  - - 2619.175
-    - 2628.85
-  beat: 'derivation: |p x q|² (steps 1-3)'
-  visual: 'Maths DerivationStrip (one move per line, CalcStack, older lines dim): S1 goal ''|p x q|² = ?'' (goal first). S2:
-    (p x q)_k = epsilon_kij p_i q_j ; S3: = epsilon_ijk p_i q_j (''k moved two places'' BraceNote). S4: |p x q|² = (p x q)_k
-    (p x q)_k. S5: new letters l, m. S6: = epsilon_ijk epsilon_klm p_i q_j p_l q_m. S7: = (delta_il delta_jm - delta_im delta_jl)
-    p_i q_j p_l q_m with ''epsilon-delta'' pointer.'
-  voiceover: Here's a first use. Let's find the length of p cross q, squared, without drawing anything. From our one-line
-    formula, the k component of p cross q is epsilon k i j times p sub i q sub j. Moving k two places to the end doesn't change
-    epsilon, so it's also epsilon i j k times p sub i q sub j. The length squared is this component times itself, summed over
-    k. For the second copy we use new dummy letters, l and m. That gives epsilon i j k times epsilon k l m, times p sub i,
-    q sub j, p sub l and q sub m. Now the epsilon delta relation replaces the two epsilons with delta i l delta j m, minus
-    delta i m delta j l.
-  on_screen_eq:
-    latex: '|\mathbf p\times\mathbf q|^2 = \varepsilon_{ijk}\varepsilon_{klm}\,p_iq_jp_lq_m = (\delta_{il}\delta_{jm} - \delta_{im}\delta_{jl})\,p_iq_jp_lq_m'
-    vallis_eq: 'provenance only: our derivation with Kundu (2.21) and (2.19) (page images checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.geo.vectors.cross + dot (Lagrange identity row)
-    params: {}
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V2_symbolic_epsilon_and_lagrange
-  exaggeration: []
-  kind: derivation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: one move per line, each with its reason as a BraceNote
-  related: []
-- id: s48_lagrange_result
-  t:
-  - 2629.65
-  - 2696.0
-  sentence_times:
-  - - 2629.65
-    - 2637.1
-  - - 2637.45
-    - 2644.625
-  - - 2644.975
-    - 2651.9
-  - - 2652.25
-    - 2658.225
-  - - 2658.575
-    - 2667.675
-  - - 2668.025
-    - 2673.225
-  - - 2673.575
-    - 2677.875
-  - - 2678.225
-    - 2686.275
-  - - 2686.625
-    - 2689.95
-  - - 2690.3
-    - 2695.2
-  beat: 'derivation: |p x q|² (result and check)'
-  visual: 'Maths: S1 first part -> p_i p_i q_j q_j = |p|²|q|² ; S3 second part -> p_i q_i p_j q_j = (p·q)² ; S5 |p x q|² =
-    |p|²|q|² - (p·q)² (96 px). S6-S8: numbers CalcStack: 14² = 196 ; 26 x 10 - 8² = 260 - 64 = 196, check glyph. S9: sin²
-    θ + cos² θ = 1 (68 px) with the parallelogram (sin) and shadow (cos) mini pictures.'
-  voiceover: 'In the first part, the deltas turn p sub l into p sub i, and q sub m into q sub j. That''s p sub i p sub i times
-    q sub j q sub j: the two lengths squared, multiplied. In the second part, they turn p sub l into p sub j, and q sub m
-    into q sub i. That''s p sub i q sub i times p sub j q sub j: p dot q, squared. So the length of p cross q squared equals
-    the length of p squared times the length of q squared, minus p dot q squared. Let''s check it with p as five, one, zero
-    and q as one, three, zero. On the left, fourteen squared is one hundred and ninety six. On the right, twenty six times
-    ten is two hundred and sixty, and p dot q is eight, so we subtract sixty four. That''s one hundred and ninety six again.
-    In pictures, this is sine squared plus cosine squared equals one.'
-  on_screen_eq:
-    latex: '|\mathbf p\times\mathbf q|^2 = |\mathbf p|^2|\mathbf q|^2 - (\mathbf p\cdot\mathbf q)^2'
-    vallis_eq: 'provenance only: Lagrange identity (fluidpy.core.tensors.cross docstring validation row); derived here from
-      Kundu (2.19)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.geo.vectors.{cross, dot, norm}
-    params:
-      p:
-      - 5
-      - 1
-      - 0
-      q:
-      - 1
-      - 3
-      - 0
-    test: CHECK VI22
-  exaggeration: []
-  kind: derivation + calculation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: check with the series' familiar numbers (14 and 8)
-  related: []
-- id: s49_scalar_triple
-  t:
-  - 2696.0
-  - 2750.925
-  sentence_times:
-  - - 2696.0
-    - 2698.325
-  - - 2698.675
-    - 2704.025
-  - - 2704.375
-    - 2713.1
-  - - 2713.45
-    - 2721.975
-  - - 2722.325
-    - 2728.6
-  - - 2728.95
-    - 2732.175
-  - - 2732.525
-    - 2741.0
-  - - 2741.35
-    - 2750.125
-  beat: 'scalar triple product: volume'
-  visual: 'Picture zone: three.js parallelepiped on edges p (teal), q (orange), s (ink #e8ecf4), the violet q x s rising from
-    the q-s face, p''s height above it as a gold dashed drop. S1: p·(q x s) (96 px). S2: = epsilon_ijk p_i q_j s_k. S3-S4:
-    violet arrow with ''area'' label. S5: gold height band. S6: ''area x height = volume''. S7: keyword ''parallelepiped''.
-    S8: mirror copy flips: ''+'' for east-north-up order, ''-'' for its mirror.'
-  voiceover: 'Now three vectors at once. The scalar triple product is p dot, open bracket, q cross s. In index notation it''s
-    epsilon i j k times p sub i, q sub j and s sub k, and it''s a single number. Here''s its picture. q cross s is an arrow
-    at right angles to q and s, as long as the area of their parallelogram. Its dot product with p multiplies that area by
-    p''s height above the parallelogram. A base area times a height is a volume. So the scalar triple product is the volume
-    of the slanted box whose edges are p, q and s, called a parallelepiped. Its sign tells us whether the three edges are
-    arranged like east, north and up: plus for that order, and minus for its mirror image.'
-  on_screen_eq:
-    latex: \mathbf p\cdot(\mathbf q\times\mathbf s) = \varepsilon_{ijk}\,p_i\,q_j\,s_k
-    vallis_eq: 'provenance only: Kundu (2.21) dotted with p (fluidpy.geo.vectors.triple_scalar docstring: (K 2.21) epsilon_ijk
-      a_i b_j c_k); page image checked'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
-  physics_source:
-    fn: fluidpy.geo.vectors.triple_scalar
-    params: {}
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_triple_scalar_V1_determinant_and_V7_cyclic
-  exaggeration: []
-  kind: 3-D diagram
-  data: none
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays'
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: volume is a 3-D picture
-  related:
-  - n: '2'
-    slug: ch00_cross_product
-    covers: 'the cross product in depth: recipe, area proof, the three right-hand rules, k x u'
-    spoken_pointer: false
-  - n: '7'
-    slug: ch00_divergence_gauss (proposed slug)
-    covers: flux, flux divergence, Gauss's theorem
-    spoken_pointer: false
-- id: s50_parcel_volume
-  t:
-  - 2750.925
-  - 2794.525
-  sentence_times:
-  - - 2750.925
-    - 2753.4
-  - - 2753.75
-    - 2762.65
-  - - 2763.0
-    - 2771.025
-  - - 2771.375
-    - 2779.175
-  - - 2779.525
-    - 2782.3
-  - - 2782.65
-    - 2788.925
-  - - 2789.275
-    - 2793.725
-  beat: 'scalar triple: an air parcel'
-  visual: 'Picture zone: three.js translucent box of air (1 km x 1 km x 100 m, vertical x5 - recorded) floating above the
-    Brest relief patch at the 850 hPa plane height; edges 1000 e1, 1000 e2, 100 e3 labelled. Maths CalcStack: S3 V = epsilon_123
-    x 1000 x 1000 x 100 = 10⁸ m³ ; S5 ρ ≈ 1.06 kg/m³ ; S6 M ≈ 1.06 x 10⁸ kg ≈ 100 000 t.'
-  voiceover: Let's use it on an air parcel. Take a box of air above Brest, one kilometre from west to east, one kilometre
-    from south to north, and one hundred metres tall. Its edges are one thousand times e one, one thousand times e two, and
-    one hundred times e three, in metres. Only epsilon one two three survives, so the volume is one thousand times one thousand
-    times one hundred. That's ten to the eight cubic metres. At this height, each cubic metre of air has a mass of about one
-    point zero six kilograms. So the whole parcel holds about one hundred thousand tonnes of air.
-  on_screen_eq:
-    latex: V = \varepsilon_{123}\times1000\times1000\times100 = 10^{8}\ \mathrm{m^3}
-    vallis_eq: 'provenance only: our numbers'
-    page_png: null
-  physics_source:
-    fn: fluidpy.geo.vectors.triple_scalar + D1 density p/(R T)
-    params:
-      edges_m:
-      - - 1000
-        - 0
-        - 0
-      - - 0
-        - 1000
-        - 0
-      - - 0
-        - 0
-        - 100
-    test: CHECK VI29
-  exaggeration:
-  - box drawn with vertical x5
-  kind: 3-D diagram + calculation
-  data: ETOPO floor (A7); D1 T850 for density
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays'
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: the abstract volume becomes a parcel over the real town
-  related: []
-- id: s51_parcel_shear
-  t:
-  - 2794.525
-  - 2859.0
-  sentence_times:
-  - - 2794.525
-    - 2797.45
-  - - 2797.8
-    - 2804.525
-  - - 2804.875
-    - 2811.1
-  - - 2811.45
-    - 2817.175
-  - - 2817.525
-    - 2819.6
-  - - 2819.95
-    - 2824.325
-  - - 2824.675
-    - 2831.3
-  - - 2831.65
-    - 2840.825
-  - - 2841.175
-    - 2847.55
-  - - 2847.9
-    - 2858.2
-  beat: 'scalar triple: shear leans the parcel, volume unchanged'
-  visual: 'Same box. S1-S3: the top face slides north 600 m over a clock 0 -> 10 min (one constant rate), the box leans; upright
-    edge label (0, 600, 100). S5-S6: the edge splits into the old edge (slate) + a piece along e2 (orange) ; the second box
-    (edges along e2 twice) flattens to a sheet, ''volume 0''. S7: epsilon swap rule: x = -x -> x = 0 (68 px). S8: V still
-    10⁸ m³, check glyph. S9: inset bars: surface wind 9.3 m/s vs 34 m/s aloft, ''> 3x''.'
-  voiceover: 'Now let the wind lean the parcel over. Imagine the top of the parcel moving one metre per second faster towards
-    the north than its bottom. After ten minutes, the top has slid six hundred metres further north, and the box leans. Its
-    upright edge now reaches six hundred metres north and one hundred metres up. Did the volume change? The new edge is the
-    old one plus a piece along the north edge. That piece makes a box with two edges in the same direction: a flat box, with
-    zero volume. With epsilon, it''s zero because swapping two equal edges must flip the sign, and the only number equal to
-    its own negative is zero. So leaning the parcel like this doesn''t change its volume: it''s still ten to the eight cubic
-    metres. Above Brest that evening, the wind a kilometre up was more than three times as strong as at the ground, so real
-    parcels were being leaned like this all the time.'
-  on_screen_eq:
-    latex: \varepsilon_{ijk}\,p_i\,q_j\,q_k = 0
-    vallis_eq: 'provenance only: antisymmetry of Kundu (2.18) (swap one place flips sign; page image checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.geo.vectors.triple_scalar (shear invariance)
-    params:
-      shift_m: 600
-    test: CHECK VI30, VI39; tests/geo/test_vectors.py::test_parallelogram_area_V7_shear_invariance_and_parallel_limit
-  exaggeration:
-  - 10 min compressed to ~4 s (clock shown)
-  - 1 m/s faster top is a thought example (said)
-  - vertical x5
-  kind: 3-D animation + calculation
-  data: ISD/SYNOP Brest-Guipavas 07110, 18 UTC 1 Nov 2023 (A2); ERA5 850 hPa t/q/u/v hourly, 2023-11-01T18 (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc,
-    A1)
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays'
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: shear is motion; the volume number staying put while the box leans is the point
-  related: []
-- id: s52_flux_easy
-  t:
-  - 2859.0
-  - 2906.825
-  sentence_times:
-  - - 2859.0
-    - 2863.85
-  - - 2864.2
-    - 2872.45
-  - - 2872.8
-    - 2877.65
-  - - 2878.0
-    - 2886.725
-  - - 2887.075
-    - 2890.575
-  - - 2890.925
-    - 2897.5
-  - - 2897.85
-    - 2906.025
-  beat: 'scalar triple: air through a window (easy)'
-  visual: 'Picture zone: three.js curtain (translucent orange, 100 km x 1 km, vertical x20 - recorded) standing west-east;
-    teal wind arrows pass through it; in 1 s of (slowed) time a teal box 10 m deep extrudes out the north side. S4-S5: CalcStack
-    100 000 m x 1000 m x 10 m = 10⁹ m³. S6: edge labels p (along), q (up), u x 1 s. S7: u·(q x p) (96 px), q x p as a violet
-    arrow pointing north out of the curtain.'
-  voiceover: 'The triple product also tells us how much air crosses a surface. Picture a window standing on the ground: a
-    curtain one hundred kilometres long from west to east, and one kilometre tall. A wind of ten metres per second blows straight
-    through it, towards the north. In one second, the air that passes through fills a box one hundred kilometres long, one
-    kilometre tall and ten metres deep. Its volume is ten to the nine cubic metres. The box''s edges are p along the curtain,
-    q up the curtain, and the wind times one second. So the volume of air crossing each second is the scalar triple product:
-    u dot, open bracket, q cross p.'
-  on_screen_eq:
-    latex: \mathbf u\cdot(\mathbf q\times\mathbf p)
-    vallis_eq: 'provenance only: our use of the scalar triple product (Kundu (2.21) dotted)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
-  physics_source:
-    fn: NEW F4 volume_flux_parallelogram (= fluidpy.geo.vectors.triple_scalar)
-    params:
-      u:
-      - 0
-      - 10
-      - 0
-      p_m:
-      - 100000
-      - 0
-      - 0
-      q_m:
-      - 0
-      - 0
-      - 1000
-    test: CHECK VI31
-  exaggeration:
-  - curtain drawn with vertical x20
-  - 1 s slowed to ~2 s
-  kind: 3-D diagram
-  data: none (easy numbers)
-  tool: 'three.js (@remotion/three) 3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays'
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: the swept box is the triple product made visible
-  related:
-  - n: '7'
-    slug: ch00_divergence_gauss (proposed slug)
-    covers: flux, flux divergence, Gauss's theorem
-    spoken_pointer: false
-- id: s53_flux_slanted
-  t:
-  - 2906.825
-  - 2978.075
-  sentence_times:
-  - - 2906.825
-    - 2909.75
-  - - 2910.1
-    - 2915.925
-  - - 2916.275
-    - 2925.5
-  - - 2925.85
-    - 2934.475
-  - - 2934.825
-    - 2943.375
-  - - 2943.725
-    - 2950.275
-  - - 2950.625
-    - 2957.65
-  - - 2958.0
-    - 2965.35
-  - - 2965.7
-    - 2977.275
-  beat: 'scalar triple: a slanted curtain on Brittany''s coast'
-  visual: 'Picture zone: map/3-D: the cartostyle Brittany map as a tilted three.js plate (capability C1, el 35), a translucent
-    orange curtain standing along the Brest -> Saint-Malo line (vertical x20 - recorded), Brest and Saint-Malo billboards
-    (54 px). S2: ''186 km'', ''bearing 80°''. S3: p = (183, 32, 0) km, q = (0, 0, 1) km. S4: violet q x p = (-32, 183, 0)
-    km² arrow out to sea (north), at right angles to the curtain. S6-S7: CalcStack (-32) x 5.8 + 183 x 33.5 + 0 ≈ 5945 km²·m/s
-    ; S8 = 5.9 x 10⁹ m³/s, with the teal 850 hPa wind arrow at Brest and teal streaks crossing the curtain.'
-  voiceover: Now let's make it real, and slanted. Imagine the curtain standing along Brittany's north coast, from Brest towards
-    Saint-Malo. It's one hundred and eighty six kilometres long, pointing ten degrees north of east, and one kilometre tall,
-    around the height of our map. Its edges are p, with components one hundred and eighty three and thirty two kilometres,
-    and q, one kilometre straight up. The cross product q cross p has components minus thirty two, one hundred and eighty
-    three, and zero square kilometres. It's an arrow at right angles to the curtain, pointing out to sea, and as long as the
-    curtain's area. Now we dot it with the wind above Brest, five point eight and thirty three point five metres per second.
-    That's minus thirty two times five point eight, plus one hundred and eighty three times thirty three point five. The result
-    is about five thousand nine hundred and forty square kilometres times metres per second, or about six times ten to the
-    nine cubic metres of air every second.
-  on_screen_eq:
-    latex: \mathbf u\cdot(\mathbf q\times\mathbf p) = -32\times5.8 + 183\times33.5 \approx 5.9\times10^{9}\ \mathrm{m^3\,s^{-1}}
-    vallis_eq: 'provenance only: our real numbers'
-    page_png: null
-  physics_source:
-    fn: fluidpy.geo.sphere.great_circle_distance + initial_bearing; fluidpy.geo.vectors.cross + triple_scalar
-    params:
-      from:
-      - 48.39
-      - -4.49
-      to:
-      - 48.65
-      - -2.0
-    test: CHECK VI32, VI33, VI34
-  exaggeration:
-  - curtain vertical x20
-  - 'thought experiment: the Brest wind used along the whole curtain (said in s54)'
-  kind: map on a tilted 3-D plate + 3-D curtain
-  data: ERA5 850 hPa t/q/u/v hourly, 2023-11-01T18 (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, A1); Natural Earth 10
-    m coast/borders (A6); ETOPO (A7)
-  tool: three.js tilted plate with the cartostyle texture + curtain mesh, billboard labels (capability C1)
-  runner_up: CesiumJS imagery drape with a wall entity (frames composited)
-  why: the slanted surface only reads as slanted in 3-D on the real coast
-  related: []
-  sfx: wind_gentle 0.15 while the streaks cross the curtain, only in sentence gaps
-- id: s54_flux_meaning
-  t:
-  - 2978.075
-  - 3021.15
-  sentence_times:
-  - - 2978.075
-    - 2979.85
-  - - 2980.2
-    - 2984.1
-  - - 2984.45
-    - 2993.975
-  - - 2994.325
-    - 3000.55
-  - - 3000.9
-    - 3005.6
-  - - 3005.95
-    - 3014.875
-  - - 3015.225
-    - 3020.35
-  beat: 'scalar triple: what the flux means'
-  visual: 'Same plate, camera pulls back. CalcStack: S2 5.9 x 10⁹ m³/s x 1.06 kg/m³ ≈ 6.3 x 10⁹ kg/s (''6 million t/s'').
-    S3 q ≈ 6.5 g/kg (ERA5 850 hPa specific humidity; a small inset map of q in cmocean ''dense''). S4 6.3 x 10⁹ x 0.0065 ≈
-    4 x 10⁷ kg/s (''40 000 t of water per second''). S5 keyword ''atmospheric river'' with a gold band along the moist tongue
-    on the q inset.'
-  voiceover: What does that mean? Imagine the wind is the same all along the curtain. Each cubic metre has a mass of about
-    one point zero six kilograms, so more than six million tonnes of air would cross the coast every second. And this air
-    was moist, with about six and a half grams of water vapour in every kilogram. So about forty thousand tonnes of water
-    would cross the coast each second. Long, narrow streams of very moist air are called atmospheric rivers, and measuring
-    them starts with exactly this triple product. Flow through surfaces is built up step by step in the divergence movie.
-  on_screen_eq:
-    latex: 6.3\times10^{9}\ \mathrm{kg\,s^{-1}}\times0.0065\approx4\times10^{7}\ \mathrm{kg\,s^{-1}}
-    vallis_eq: 'provenance only: our real numbers'
-    page_png: null
-  physics_source:
-    fn: 'build script: D1 density, A1 q at the Brest point'
-    params: {}
-    test: CHECK VI34
-  exaggeration:
-  - 'thought experiment: uniform wind along the curtain (said)'
-  kind: map inset + calculation
-  data: ERA5 850 hPa t/q/u/v hourly, 2023-11-01T18 (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, A1) (q); D1 (T for density)
-  tool: 'cartopy + cartostyle movie preset (LCC lon0 -4, parallels 44/52) rendered as transparent PNG layers (shading, isotherms,
-    coast/borders) -> Remotion stack; wind arrows and labels drawn by Remotion SVG from the same projected coordinates (d3-geo
-    LCC with identical parameters) (q inset); Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword
-    pointers)'
-  runner_up: 'd3-geo SVG map in Remotion end to end (capability test CTS1Build): crisper vectors, but contour shading from
-    JSON polygons is heavier'
-  why: answers 'what does the number mean' with water, the quantity people care about
-  related:
-  - n: '7'
-    slug: ch00_divergence_gauss (proposed slug)
-    covers: flux, flux divergence, Gauss's theorem
-    spoken_pointer: true
-- id: s55_vector_triple_plan
-  t:
-  - 3021.15
-  - 3044.6
-  sentence_times:
-  - - 3021.15
-    - 3026.925
-  - - 3027.275
-    - 3030.575
-  - - 3030.925
-    - 3034.325
-  - - 3034.675
-    - 3043.8
-  beat: 'vector triple product: goal and plan'
-  visual: 'Maths: S1 p x (q x s) (96 px) with a picture: q x s (violet) then p x that (second violet) on a three.js mini scene.
-    S2: ''turned twice''. S3 goal: ''= only dot products?'' S4 plan, three short items appearing on their words (keywords,
-    no box): ''epsilon twice'', ''epsilon-delta'', ''delta substitutes''.'
-  voiceover: 'Last, the vector triple product: p cross, open bracket, q cross s. It appears whenever an arrow is turned twice.
-    Our goal is to write it with dot products only. The plan is to write both cross products with epsilon, use the epsilon
-    delta relation, and then let the deltas do the substituting.'
-  on_screen_eq:
-    latex: \mathbf p\times(\mathbf q\times\mathbf s)
-    vallis_eq: 'provenance only: Kundu Exercise 2.5 (vector triple product), fluidpy.core.tensors.triple_product'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.core.tensors.triple_product
-    params: {}
-    test: triple_product V1 = (a·c)b - (a·b)c
-  exaggeration: []
-  kind: equation + 3-D mini
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers) + three.js (@remotion/three)
-    3-D axes and arrows (kit Arrow3D: shaft 10 px equivalent, 40-px heads), KaTeX overlays'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: goal and plan before the steps (teaching-style §1c)
-  related:
-  - n: 10A
-    slug: ch00_vector_identities_1 (proposed slug)
-    covers: product rules with grad, div, curl; div curl = 0, curl grad = 0
-    spoken_pointer: false
-- id: s56_vector_triple_steps
-  t:
-  - 3044.6
-  - 3085.8
-  sentence_times:
-  - - 3044.6
-    - 3053.075
-  - - 3053.425
-    - 3060.925
-  - - 3061.275
-    - 3070.0
-  - - 3070.35
-    - 3075.3
-  - - 3075.65
-    - 3085.0
-  beat: 'vector triple product: steps 1-3'
-  visual: 'DerivationStrip: S1 [p x (...)]_i = epsilon_ijk p_j (...)_k ; S2 (q x s)_k = epsilon_klm q_l s_m ; S3 = epsilon_ijk
-    epsilon_klm p_j q_l s_m ; S4-S5 = (delta_il delta_jm - delta_im delta_jl) p_j q_l s_m, the shared k linked gold.'
-  voiceover: First, the i component of p cross anything is epsilon i j k times p sub j, times that thing's k component. Second,
-    take the k component of q cross s. It's epsilon k l m times q sub l times s sub m. Putting them together gives epsilon
-    i j k times epsilon k l m, times p sub j, q sub l and s sub m. The two epsilons share the summed index k, sitting next
-    to each other. So the epsilon delta relation applies, and we replace them with delta i l delta j m, minus delta i m delta
-    j l.
-  on_screen_eq:
-    latex: '[\mathbf p\times(\mathbf q\times\mathbf s)]_i = \varepsilon_{ijk}\varepsilon_{klm}\,p_jq_ls_m = (\delta_{il}\delta_{jm}
-      - \delta_{im}\delta_{jl})\,p_jq_ls_m'
-    vallis_eq: 'provenance only: our derivation with Kundu (2.21) twice and (2.19) (page images checked)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
-  physics_source:
-    fn: fluidpy.core.tensors.triple_product
-    params: {}
-    test: triple_product V1 row
-  exaggeration: []
-  kind: derivation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: one move per line
-  related: []
-  timing_note: sentence 2 split after the dry run (cue limit 7 s); sentence_times are the run's 5 sentences, the builder's
-    final TTS gives 6
-- id: s57_vector_triple_result
-  t:
-  - 3085.8
-  - 3150.25
-  sentence_times:
-  - - 3085.8
-    - 3094.775
-  - - 3095.125
-    - 3101.1
-  - - 3101.45
-    - 3110.725
-  - - 3111.075
-    - 3114.15
-  - - 3114.5
-    - 3121.375
-  - - 3121.725
-    - 3129.625
-  - - 3129.975
-    - 3134.525
-  - - 3134.875
-    - 3141.425
-  - - 3141.775
-    - 3149.45
-  beat: 'vector triple product: result and check'
-  visual: 'DerivationStrip continues: S1 first part -> q_i p_j s_j ; S2 = q_i (p·s) ; S3 second part -> s_i p_j q_j ; S4 =
-    s_i (p·q) ; S5 p x (q x s) = q (p·s) - s (p·q) (96 px). S6-S8 check CalcStack with p = (1,0,0), q = (0,1,0), s = (1,1,0):
-    q x s = (0,0,-1), p x (q x s) = (0,1,0) ; q(1) - s(0) = (0,1,0), check glyph; mini 3-D picture of the three arrows.'
-  voiceover: 'In the first part, delta i l turns q sub l into q sub i, and delta j m turns s sub m into s sub j. That leaves
-    q sub i times p sub j s sub j, which is q times p dot s. In the second part, delta i m turns s sub m into s sub i, and
-    delta j l turns q sub l into q sub j. That leaves s sub i times p dot q. So p cross, q cross s, equals q times p dot s,
-    minus s times p dot q. Let''s check with easy numbers: p is one, zero, zero, q is zero, one, zero, and s is one, one,
-    zero. Straight from the cross products, the answer is zero, one, zero. From our rule, it''s q times one, minus s times
-    zero, which is zero, one, zero as well. Identities like this one, with grad, div and curl inside them, fill the two movies
-    on vector identities.'
-  on_screen_eq:
-    latex: \mathbf p\times(\mathbf q\times\mathbf s) = \mathbf q\,(\mathbf p\cdot\mathbf s) - \mathbf s\,(\mathbf p\cdot\mathbf
-      q)
-    vallis_eq: 'provenance only: Kundu Exercise 2.5 result (not shown in the book; derived here with (2.19)); Vallis uses
-      the same identity before (2.13) (p077 checked)'
-    page_png: chapters/pages/ch02/p077.png
-  physics_source:
-    fn: fluidpy.core.tensors.triple_product
-    params:
-      p:
-      - 1
-      - 0
-      - 0
-      q:
-      - 0
-      - 1
-      - 0
-      s:
-      - 1
-      - 1
-      - 0
-    test: CHECK VI35
-  exaggeration: []
-  kind: derivation + calculation
-  data: none
-  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: Manim CE insert (only if KaTeX sequences look weak; not needed so far)
-  why: result then an easy-number check
-  related:
-  - n: 10A
-    slug: ch00_vector_identities_1 (proposed slug)
-    covers: product rules with grad, div, curl; div curl = 0, curl grad = 0
-    spoken_pointer: true
-  - n: 10B
-    slug: ch00_vector_identities_2 (proposed slug)
-    covers: (u·grad)u term by term, Lamb vector, Omega x (Omega x r)
-    spoken_pointer: true
-- id: s58_double_turn
-  t:
-  - 3150.25
-  - 3212.375
-  sentence_times:
-  - - 3150.25
-    - 3152.15
-  - - 3152.5
-    - 3157.7
-  - - 3158.05
-    - 3169.15
-  - - 3169.5
-    - 3171.55
-  - - 3171.9
-    - 3180.725
-  - - 3181.075
-    - 3188.8
-  - - 3189.15
-    - 3193.9
-  - - 3194.25
-    - 3196.975
-  - - 3197.325
-    - 3205.75
-  - - 3206.1
-    - 3211.575
-  beat: 'vector triple: two quarter turns'
-  visual: 'Picture zone: the zoomed Brest map, teal real wind; k̂ shown as a small up-arrow glyph at Brest. S2: k̂ x u = (-u2,
-    u1) (84 px); the wind turns a quarter turn left (violet copy, anticlockwise arc, ''seen from above''). S3-S5: k̂ x (k̂
-    x u) = k̂(k̂·u) - u(k̂·k̂) ; k̂·u = 0 struck to 0, k̂·k̂ = 1 ; = -u. S6-S8: numbers: (5.8, 33.5) -> (-33.5, 5.8) -> (-5.8,
-    -33.5): two violet turns end pointing opposite the wind (rose dashed with ''-'').'
-  voiceover: 'Here''s a weather use. Let k hat be the unit vector pointing straight up, the same as e three. With epsilon,
-    k hat cross u has components minus u two and u one: it turns a flat wind a quarter turn to the left, anticlockwise seen
-    from above. What if we turn it twice? By our rule, k hat cross, k hat cross u, is k hat times k hat dot u, minus u times
-    k hat dot k hat. A flat wind is at right angles to k hat, so k hat dot u is zero, and k hat dot k hat is one. So two quarter
-    turns give minus u: the wind turned right round. Let''s check with the wind above Brest. One quarter turn makes five point
-    eight and thirty three point five into minus thirty three point five and five point eight. A second turn makes it minus
-    five point eight and minus thirty three point five.'
-  on_screen_eq:
-    latex: \hat{\mathbf k}\times(\hat{\mathbf k}\times\mathbf u) = \hat{\mathbf k}(\hat{\mathbf k}\cdot\mathbf u) - \mathbf
-      u(\hat{\mathbf k}\cdot\hat{\mathbf k}) = -\mathbf u
-    vallis_eq: 'provenance only: k x u of Vallis (2.79) (p089 checked) turned twice with the identity derived in s57'
-    page_png: chapters/pages/ch02/p089.png
-  physics_source:
-    fn: fluidpy.geo.vectors.k_cross
-    params:
-      u:
-      - 5.8
-      - 33.5
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_k_cross_V7_quarter_turn_properties; CHECK VI36
-  exaggeration: []
-  kind: map + equation
-  data: ERA5 850 hPa t/q/u/v hourly, 2023-11-01T18 (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc, A1)
-  tool: 'cartopy + cartostyle movie preset (LCC lon0 -4, parallels 44/52) rendered as transparent PNG layers (shading, isotherms,
-    coast/borders) -> Remotion stack; wind arrows and labels drawn by Remotion SVG from the same projected coordinates (d3-geo
-    LCC with identical parameters); Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; Keyword pointers)'
-  runner_up: pure SVG diagram
-  why: the k x turning tool used in every later weather movie, checked on the real wind
-  related:
-  - n: '2'
-    slug: ch00_cross_product
-    covers: 'the cross product in depth: recipe, area proof, the three right-hand rules, k x u'
-    spoken_pointer: false
-  - n: '30'
-    slug: ch00_geostrophic_wind (slug from series plan V6)
-    covers: Coriolis push balancing the pressure push; geostrophic and ageostrophic wind
-    spoken_pointer: false
-- id: s59_centrifugal
-  t:
-  - 3212.375
-  - 3289.025
-  sentence_times:
-  - - 3212.375
-    - 3213.9
-  - - 3214.25
-    - 3223.825
-  - - 3224.175
-    - 3233.4
-  - - 3233.75
-    - 3239.3
-  - - 3239.65
-    - 3244.85
-  - - 3245.2
-    - 3252.475
-  - - 3252.825
-    - 3263.875
-  - - 3264.225
-    - 3273.2
-  - - 3273.55
-    - 3277.675
-  - - 3278.025
-    - 3283.2
-  - - 3283.55
-    - 3288.225
-  beat: 'vector triple: the centrifugal pull'
-  visual: 'Picture zone: three.js half-Earth slice through the axis and Brest (as in the cross-product movie), Omega violet
-    along the axis, r (teal) from the centre to Brest, r split into r_parallel (along the axis, slate dashed) and r_perp (from
-    the axis to Brest, gold). Maths: S2 -Ω x (Ω x r) (84 px). S3 = Ω² r - Ω(Ω·r). S4-S5: r = r_par + r_perp; Ω(Ω·r) = Ω² r_par
-    cancels (Strike) ; = Ω² r_perp. S6: r_perp = 6371 km x cos 48.45° ≈ 4226 km. S7: Ω² r_perp ≈ 0.0225 m s⁻² ; ''≈ 0.23 %
-    of g''. S8-S9: the globe silhouette morphs slightly to an exaggerated oblate shape (x50, the narration says ''bulges'';
-    exaggeration recorded) with ''+21 km'' at the equator.'
-  voiceover: One more. As Earth spins, it carries the air round in circles, and that gives a pull outwards, away from the
-    axis, called the centrifugal effect. For each kilogram, it's minus Omega cross, open bracket, Omega cross r, where r is
-    the arrow from Earth's centre to the place. Our rule turns this into Omega squared times r, minus Omega times Omega dot
-    r. Split r into a part along the axis and a part straight out from the axis. The part along the axis cancels, and what's
-    left is Omega squared times the part straight out from the axis. At Brest, that part is six thousand three hundred and
-    seventy one kilometres times the cosine of the latitude, about four thousand two hundred and twenty six kilometres. Times
-    Omega squared, the pull is about zero point zero two two metres per second squared, a quarter of one percent of gravity.
-    Small as it is, it's why Earth bulges at the equator. Its radius there is about twenty one kilometres larger than at the
-    poles. The Coriolis movie shows how this pull is folded into gravity.
-  on_screen_eq:
-    latex: -\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \Omega^2\,\mathbf r_\perp
-    vallis_eq: 'provenance only, not drawn as a reference: Vallis (2.13) F_ce = -Omega x (Omega x r) = Omega^2 r_perp, with
-      the identity Omega x (Omega x r_perp) = (Omega·r_perp)Omega - (Omega·Omega)r_perp stated before it (page image p077
-      checked)'
-    page_png: chapters/pages/ch02/p077.png
-  physics_source:
-    fn: fluidpy.core.rotating.centrifugal_acceleration
-    params:
-      lat_deg: 48.45
-    test: CHECK VI37, VI38; core V2 sympy potential row
-  exaggeration:
-  - equatorial bulge drawn x50 in the silhouette morph
-  - half-Earth slice not to scale with the arrows
-  kind: 3-D globe slice + calculation
-  data: BMNG (A7); WGS-84 radii (cited)
-  tool: three.js globe in Remotion (SphereGeometry + cartopy kind:texture of the field over BMNG, translucent) with billboard
-    labels (slice geometry from the cross-product movie)
-  runner_up: 'SVG isometric projection in Remotion (house kit draw.tsx): sharper text, but no camera orbit'
-  why: 'r_perp is a distance from the axis: a 3-D slice is the only clear picture'
-  related:
-  - n: '29'
-    slug: ch00_coriolis (slug from series plan V5)
-    covers: -2 Omega x u and f = 2 Omega sin phi derived from scratch; centrifugal folded into gravity
-    spoken_pointer: true
-  - n: 10B
-    slug: ch00_vector_identities_2 (proposed slug)
-    covers: (u·grad)u term by term, Lamb vector, Omega x (Omega x r)
-    spoken_pointer: false
-  - n: '3'
-    slug: ch00_cross_product_uses
-    covers: torque, angular momentum, q v x B, Omega x r
-    spoken_pointer: false
-- id: s60_recap
-  t:
-  - 3289.025
-  - 3365.15
-  sentence_times:
-  - - 3289.025
-    - 3295.725
-  - - 3296.075
-    - 3304.625
-  - - 3304.975
-    - 3316.775
-  - - 3317.125
-    - 3324.75
-  - - 3325.1
-    - 3335.775
-  - - 3336.125
-    - 3343.275
-  - - 3343.625
-    - 3352.425
-  - - 3352.775
-    - 3358.1
-  - - 3358.45
-    - 3364.35
+  - - 1963.7
+    - 1970.4
+  - - 1970.75
+    - 1979.3
+  - - 1979.65
+    - 1985.0
+  - - 1985.35
+    - 1997.15
+  - - 1997.5
+    - 2005.125
+  - - 2005.475
+    - 2016.15
+  - - 2016.5
+    - 2021.65
+  - - 2022.0
+    - 2029.15
   beat: recap
-  visual: 'One beat per sentence, mini pictures left, symbols right (no boxes): S1 globe thumbnail ''10.3 °C'' + wind arrow;
-    S2 e1 e2 e3 + legs, √ ; S3 tip-to-tail sum, the parallelogram, and the ''from q to p'' difference with hodograph and anomaly
-    thumbnails ; S4 u_i, ''three equations'' ; S5 u_j ∂T/∂x_j with the Brest map thumbnail ''+3.7 K/h'' ; S6 delta_ij table
-    thumbnail ; S7 epsilon cube + violet push to the right of the wind ; S8 epsilon-delta line ; S9 parallelepiped + curtain
-    thumbnail.'
+  visual: 'One beat per sentence, mini pictures left, symbols right (no boxes): S1 globe thumbnail ''10.3 °C'' + the Brest
+    wind arrow; S2 e1 e2 e3 with the wind''s legs and the √ line ''9.3''; S3 the same arrow with the axes turning, ''34''
+    unchanged; S4 tip-to-tail sum, the parallelogram, and the ''from q to p'' difference with hodograph and anomaly thumbnails;
+    S5 u_i with ''three equations''; S6 u_j ∂T/∂x_j with the summed j gold; S7 the Brest map thumbnail ''+3.7 K/h'' (rose
+    fixed thermometer glyph); S8 the delta_ij table thumbnail and delta_ij u_j = u_i.'
   voiceover: 'To sum up, a scalar is one number, like the temperature, and a vector is an arrow, like the wind. Its components
-    are its steps along the unit vectors east, north and up, and its length, by Pythagoras, is the wind speed. Vectors add
-    tip to tail, or component by component, and p minus q is the arrow from the tip of q to the tip of p: a wind change, a
-    wind shear, or an anomaly. In index notation, u sub i stands for all three components, and a free index means three equations.
-    A repeated index is summed: that''s the Einstein convention, so u sub j times partial T by partial x sub j is the advection
-    of temperature. The Kronecker delta is one for equal indices and zero otherwise, and it swaps one index for another. Epsilon
-    i j k builds the cross product, which gives the Coriolis push, at right angles to the right of the wind in the north.
-    The epsilon delta relation turns two cross products into dot products. And the scalar triple product is a volume, or the
-    air crossing a surface each second.'
+    are its steps along the unit vectors east, north and up, and its length, by Pythagoras, is the wind speed. The components
+    change when we turn the axes, but the arrow and its length don''t. Vectors add tip to tail, or component by component,
+    and p minus q is the arrow from the tip of q to the tip of p: a wind change, a wind shear, or an anomaly. In index notation,
+    u sub i stands for all three components, and a free index means three equations. A repeated index is summed: that''s the
+    Einstein convention, so u sub j times partial T by partial x sub j is the advection of temperature. Over Brest, it brought
+    warmer air at about three point seven degrees per hour. The Kronecker delta is one for equal indices and zero otherwise,
+    and it swaps one index for another.'
   on_screen_eq:
-    latex: u_j\frac{\partial T}{\partial x_j},\quad \delta_{ij},\quad \varepsilon_{ijk}
-    vallis_eq: 'provenance only: recap of Kundu (2.2), (2.16), (2.18)'
+    latex: u_i,\quad u_j\frac{\partial T}{\partial x_j},\quad \delta_{ij}u_j = u_i
+    vallis_eq: 'provenance only: recap of Kundu (2.2) and (2.17) (page images checked)'
     page_png: ../Fluid Dynamics/chapters/pages/ch02/p078.png
   physics_source: null
   exaggeration:
@@ -3928,26 +2449,72 @@ scenes:
   runner_up: —
   why: 'house recap: one idea per sentence, one beat per sentence'
   related: []
-- id: s61_end
+- id: s34_next
   t:
-  - 3365.15
-  - 3389.3
+  - 2029.95
+  - 2049.825
   sentence_times:
-  - - 3365.15
-    - 3371.35
-  - - 3371.7
-    - 3379.75
-  - - 3380.1
-    - 3389.0
+  - - 2029.95
+    - 2036.55
+  - - 2036.9
+    - 2043.6
+  - - 2043.95
+    - 2049.025
+  beat: forward pointer to 1b (spoken bridge, no card)
+  visual: 'Left (picture zone): the 27-cell epsilon cube fades in cell by cell (8 frames each, no flash) and turns slowly;
+    on AT(1, "epsilon i j k") the six non-zero cells light (teal +1 for the cyclic orders; rose -1 with a ''−'' glyph for
+    the reversed ones), the 21 zero cells stay faint. Right (maths zone): epsilon_ijk (96 px); on AT(2, "cross product") the
+    line (p x q)_i = epsilon_ijk p_j q_k (68 px) writes itself; on AT(2, "Earth''s spin gives the wind") a small zoomed Brest
+    map with the teal real wind and a violet push arrow swinging in at a right angle to its right. S3: keyword ''next movie''
+    (54 px, warm white) under the cube. No narrated sentence on screen.'
+  voiceover: There's one more special symbol, called the alternating tensor, and written epsilon i j k. With it, the cross
+    product fits in one line, and so does the push that Earth's spin gives the wind. That's the next movie in this series,
+    which starts exactly where this one stops.
+  on_screen_eq:
+    latex: (\mathbf p\times\mathbf q)_i = \varepsilon_{ijk}\,p_j\,q_k
+    vallis_eq: 'provenance only, not drawn as a reference: Kundu (2.21) (page image checked); taught in 1b'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.core.tensors.levi_civita + fluidpy.core.rotating.coriolis_acceleration
+    params:
+      lat_deg: 48.45
+      u:
+      - 5.85
+      - 33.49
+      - 0.0
+    test: CHECK VI19, VI25 (shared with 1b)
+  exaggeration:
+  - violet push arrow and teal wind arrow share no physical scale (factor recorded)
+  kind: 3-D data cube + map inset
+  data: ERA5 850 hPa 2023-11-01T18 (A1); A6 coast
+  tool: three.js epsilon cube (as in 1b s07) + cartostyle Brest map layer + Remotion SVG arrows
+  runner_up: flat SVG 3x3x3 grid
+  why: a teaser that uses 1b's own pictures, so the hand-over feels like one series
+  related:
+  - n: 1b
+    slug: ch00_alternating_tensor_triple_products
+    covers: alternating tensor, cross product in index form, Coriolis direction, epsilon-delta, triple products
+    spoken_pointer: true
+- id: s35_end
+  t:
+  - 2049.825
+  - 2073.975
+  sentence_times:
+  - - 2049.825
+    - 2056.025
+  - - 2056.375
+    - 2064.425
+  - - 2064.775
+    - 2073.675
   beat: series end card (maths ending)
   visual: 'HOUSE_STYLE §3 maths end card: four faint topic thumbnails along the top (dot product, cross product, this movie''s
-    epsilon cube, a grad/div/curl teaser); ''a series of maths tutorials'' (68 px); ''atmospheric science · meteorology ·
-    fluid dynamics'' (54 px); notebook icon + ''vectors and index notation notebook''; stacked notebook icons + ''notebooks
-    for the other maths concepts''. No URL, path, book or author. 2.5-s silent hold while the music fades. RELATED MOVIES
-    ROW (user rule 2026-10-27): under the notebook icons, a row of small faint thumbnails with short titles (44 px): ''dot
-    product'' · ''cross product'' · ''cross product in physics'' · ''gradient'' · ''divergence'' · ''material derivative''
-    · ''vector identities I · II'' · ''tensors'' · ''Coriolis'' · ''geostrophic wind'' · ''thermal wind'' · ''El Niño''. Titles
-    only: no numbers, links or citations.'
+    arrow with its three component legs, a grad/div/curl teaser); ''a series of maths tutorials'' (68 px); ''atmospheric science
+    · meteorology · fluid dynamics'' (54 px); notebook icon + ''vectors and index notation notebook''; stacked notebook icons
+    + ''notebooks for the other maths concepts''. No URL, path, book or author. 2.5-s silent hold while the music fades. RELATED
+    MOVIES ROW (user rule 2026-10-27): under the notebook icons, a row of small faint thumbnails with short titles (44 px):
+    ''epsilon and triple products'' (first, slightly brighter: the next movie) · ''dot product'' · ''cross product'' · ''cross
+    product in physics'' · ''gradient'' · ''divergence'' · ''material derivative'' · ''vector identities I · II'' · ''tensors''
+    · ''Coriolis'' · ''geostrophic wind'' · ''thermal wind'' · ''El Niño''. Titles only: no numbers, links or citations.'
   voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students
     of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for vectors
     and index notation, and the notebooks for the other maths concepts, are on the website that goes with this video.
@@ -3962,6 +2529,8 @@ scenes:
   why: series ending, word for word
   related: []
   related_on_end_card:
+  - n: 1b
+    slug: ch00_alternating_tensor_triple_products
   - n: '0.1'
     slug: ch00_dot_product_why
   - n: '2'
@@ -3988,31 +2557,5 @@ scenes:
     slug: ch00_thermal_wind (slug from series plan V7)
   - n: '62'
     slug: ch00_enso (slug from series plan V23)
-honesty_notes:
-- The Coriolis push -2 Omega x u is stated, not derived (s33 says so and points to the Coriolis movie); only its direction
-  and size are computed here.
-- 'Hemisphere sign: the flat Coriolis push is to the right of the wind in the NH and to the left in the SH (s42, s43; CHECK
-  VI28); it vanishes at the equator.'
-- 's23: ''the fixed thermometer''s rate is minus u_j dT/dx_j'' holds only if each parcel keeps its temperature; the narration
-  says so.'
-- 's27: the advection estimate (+3.7 K/h) is compared with ERA5 (+2.9 K/h); the gap is attributed in words to ascent/adiabatic
-  cooling, which the sum does not contain; the station (2 m) and the 850 hPa level are named as different heights.'
-- s22 and s26 leave out the vertical term u_3 dT/dx_3 explicitly ('leaving the up part aside'); it is not claimed to be zero.
-- 's53-s54: the flux uses the Brest 850 hPa wind for the whole 186-km curtain (thought experiment, said); the curtain is 1
-  km tall around the 850 hPa level.'
-- 's54: atmospheric rivers are defined generically; no claim that this stream was a catalogued atmospheric river.'
-- Vertical exaggerations (columns x10, parcel x5, curtain x20, bulge x50) and time compression (streaklines x20, balloon 1
-  h in ~6 s, shear 10 min in ~4 s) are recorded here and in the manifest, not badged (HOUSE_STYLE §5).
-- 'Arrow scales: accelerations (violet) and speeds (teal) share no physical scale; the factor is recorded per scene.'
-- 'Local east-north-up axes are a tangent plane at Brest: over a few hundred km the basis is treated as fixed (the coordinates
-  movie treats the curved case).'
-- 's12a: the 250/50 m/s airliner numbers are a thought example; only the jet maximum (about 70 m/s) is real (D4, latest GFS);
-  s12c forces are easy numbers chosen to be consistent with Brest (|u| = 9.2 m/s).'
-- 's12d: near a deep, sharply curved low the surface geostrophic wind overestimates the real wind; the narration names friction
-  and the tight curve.'
-- 's12h: the anomaly numbers wait for D5 (planning values); El Nino 2023-24 status per NOAA CPC (cited in the manifest).'
-- Every spoken number is a planning value from the tested library on the files on disk (2026-10-27) and is re-asserted by
-  CHECK rows VI01-VI40 (data_needs.md); s09's w and s50/s54 density wait for D1.
-quiz_hook: Below the equator, at 45 S, the same wind of ten metres per second blows due north. Using epsilon, which way does
-  the Coriolis push point, and how big is it?
-headings_exception: 's00_title only: the one title frame'
+quiz_answer: u_j dT/dx_j = 6 x (-2e-5) + 8 x 0 = -1.2e-4 K/s, so a fixed thermometer warms by +1.2e-4 K/s = +0.43 K/h (warm
+  advection, if each parcel keeps its temperature)

@@ -1,5 +1,7 @@
 # ch00_vectors_index_notation — brief (movie-director, 2026-10-27)
 
+> **Split 2026-10-28.** This brief describes v1 (71 scenes). The movie is now **#1a** = v1 s00–s32 + a new recap, a spoken pointer to 1b and the end card; the ε, cross-product, ε–δ and triple-product blocks (v1 s33–s59) are **#1b `ch00_alternating_tensor_triple_products`** (own folder, own title, hook, recap of 1a and end card). Current lengths: `script.md` in each folder (measured).
+
 Series plan v2 (APPROVED, `movies/ch00/series_plan_v2_proposal.md`), **Stage 1 · #1 "Vectors, components and index
 notation"**. It comes after the dot-product and cross-product movies in production, but it is the first maths movie in
 the viewing order, so it **stands on its own**: the dot and cross products it needs are defined inside it (briefly,

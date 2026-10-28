@@ -22,7 +22,8 @@ where the picture shows them; latest data + history + cited impacts; house style
 ### Stage 1 · The maths toolkit (Kundu's index, in dependency order)
 | # | Movie | Kundu index terms covered |
 |---|---|---|
-| 1 | Vectors, components and index notation | scalars, vectors, components, Einstein summation, Kronecker delta, alternating tensor, epsilon–delta relation, triple products |
+| 1a | Vectors and index notation (`ch00_vectors_index_notation`) | scalars, vectors, components, vector addition and subtraction (real weather examples), Einstein summation, free and dummy indices, Kronecker delta; temperature advection |
+| 1b | The alternating tensor and triple products (`ch00_alternating_tensor_triple_products`) | alternating tensor, cross product in index form (Coriolis direction), epsilon–delta relation, scalar and vector triple products (volume, flux, centrifugal); opens with a short recap of 1a |
 | 2 | The cross product (split 1, standalone) | cross product (from the final movie, review-3 fixes) |
 | 3 | The cross product in physics (split 2) | torque, angular momentum, qv × B, Ω × r |
 | 4 | Derivatives and Taylor series | partial derivatives, chain rule, perfect differential, Taylor series, linearisation |
@@ -136,7 +137,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 
 ## Notes
 - User (2026-10-28): enhance the dot-product and especially the cross-product movies with more intuition behind each part of the maths and more 'when is it used' cases with animation, inspired by https://www.youtube.com/watch?v=w4x7RLUizJ0 (ideas only, our own words and visuals; research in `research/xprod_video_intuitions.md`). Applied to #2/#3 (cross-product splits) and a new dot-product version 0.1b.
-- #1 is split into #1a (vectors, adding/subtracting, index notation, Kronecker delta) and #1b (ε, cross product in index form, ε–δ, triple products) (2026-10-28, length 56 min).
+- #1 is split into #1a (vectors, adding/subtracting, index notation, Kronecker delta) and #1b (ε, cross product in index form, ε–δ, triple products) (2026-10-28, length 56 min); 1b lives in `movies/ch00/ch00_alternating_tensor_triple_products/`, 1a keeps the old folder and ends with a spoken pointer to 1b. Movies that said "may use only the movies above it" now read #1 as 1a + 1b.
 - User (2026-10-27), 10A/10B: for every identity, say exactly WHERE it is used (which equation: continuity, momentum, vorticity, energy/Bernoulli, thermodynamic/advection, Coriolis and centrifugal terms, Ekman, QG/PV), what each term MEANS physically and what it REPRESENTS, with enough worked examples on real fields and maps.
 - User (2026-10-27), cross-references in every movie: whenever a movie uses an operator or group of operators that another movie explains in depth (earlier OR later in the series), it points to that movie in a short spoken line ("we built this step by step in the divergence movie" / "we'll take this apart fully in the vector-identities movie") and lists it among the related movies on the end card. The movie still explains enough to stand on its own (the Coriolis movie still derives everything from scratch, now also pointing to the related movies). Pointers are spoken and on the end card only: no on-screen citations or equation labels (house style). Each storyboard gets a `related:` list per scene (movie #, slug, what it covers).
 - User (2026-10-27): the divergence (#7), curl (#8) and vorticity (#34) movies are long ones, about 30 min each (not shortened).
