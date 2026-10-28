@@ -3493,3 +3493,117 @@ Disk at review: C: 69 GB free, G: 553 GB free.
   - Do M1 and M2 and re-render the s06 and s20e chunks.
   - Ideally fold in S1, S6, S7, S8 and S9 (layout only, same chunks plus s05a, s11a, s20b, s20d).
   - S2–S5 need about 4 new Kokoro sentences (s11b, s20b, s20d, s20e) and a re-time of those scenes. They are worth doing in the same loop, because no v6 sentence is touched.
+
+---
+
+# ch00_dot_product_v01b — review 2 (fresh eyes, fix loop 1)                         2026-10-28
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_v01b | 25:52.8 (1552.83 s) | 77.83 MB | 12 PASS, halves WARN (inherited) | PASS | PASS (72/72) | PASS | PASS | PASS (379 cues) | PASS | n/a (retired) | **PASS** |
+
+Inputs: `movies/out/ch00/ch00_dot_product_v01b/1080.mp4`, storyboard (fix_loop_1 block), script, data_needs, timing, manifest, TSX. Compared against the review-1 build (`G:/…/ch00_dot_product_v01b/r1/render/1080.mp4`, narration and timing in `…/public/`) and v6 (`movies/out/ch00/ch00_dot_product_why/1080.mp4`, narration `G:/…/ch00_dot_product_why/v6/public3/narration.wav`).
+
+Frames: 772 PNGs on G:, `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_v01b/review2/` (174 MB).
+- Two frames per sentence (50 % and 92 %) for all 233 sentences, and a third at 15 % used only for the pixel diff.
+- Every 1 s through s05a S3–S9, s06 S4–S5, s11a, s11b, s20b, s20d S7–S9 and s20e. Extra frames at s20d's globe hand-over and the s20b link. Side-by-side diff images are in `pairs/`.
+
+Disk: C: 68 GB free, G: 551 GB free (unchanged by the review).
+
+## qa.json (re-run by me with the requested flags)
+- PASS on duration (1552.83 s against a narration end of 1550.33 s), size, codec, black and frozen.
+  - Frozen: 154 stretches, all narrated. The longest silence is 2.81 s, which is the end-card tail (1550.03 → 1552.83 s).
+- PASS on content, loudness (−16.0 LUFS, −2.7 dBTP), flashes (0/s), captions and subtitles (379 cues = script; VTT = SRT), physics (75 functions reproduce their hashes) and equations (72).
+- Halves WARN: 23.0–29.5, 47.0–53.5, 87.5–92.5, 326.0–330.5 and 1480.5–1487.0 s.
+  - These are the five inherited v6 spots. The last one is review 1's 1467.0–1473.5 s moved by the +13.38 s of new narration.
+  - They were accepted as v6 design and are not flagged again.
+
+## v6 kept? (scripted checks)
+- **Words:** all 155 v6 sentences appear verbatim and in v6 order (0 missing).
+- **Audio against the review-1 build:** I compared 227 untouched sentences sample by sample. The maximum |Δ| is **0**, so they are bit-identical. The only sentences without a match are the 6 new or changed ones, all non-v6.
+- **Audio against v6:** the 155 v6 sentences are the same takes as in v6 (correlation ≥ 0.9942, level 0.992–1.013). This is the same as at review 1; fix 1 did not change it.
+- **Screens against the review-1 build:** I diffed 699 frames, at 15/50/92 % of every sentence, aligned by sentence.
+  - These scenes show **0.00 %** changed pixels: s00–s05, s08, s10, s11, s12–s18, s19b–s20 and s22.
+  - s19a (one frame, 0.14 %) and s20c (one frame, 0.25 %) differ by sub-frame sampling or anti-aliasing only. s20c's new start falls on a half frame (+1.45 s); I looked at the diff images.
+  - The changes sit only where fix 1 put them: s05a S4–S9, s06 S5, s07 S7, s09 S4–S6, s11a, s11b, s20b S7, s20d S8–S9, s20e and s21 S11.
+  - s06 S5 now matches **v6** within 0.01 % (the M2 fade puts back v6's own screen). s06 S1 differs from v6 by 0.28 %, which is only the accepted dim reminder.
+- **Title, recap and end card:** the title and end card are pixel-identical to review 1. The recap's only change is the intended whirl hold.
+
+## Review-1 items, checked at their new timestamps
+| item | new time | state |
+|---|---|---|
+| M1 s20e link | 24:12.9–24:21.5 (1452.9–1461.5 s) | **Closed.** The "past days like today" link now runs up the gap between the stack (ends x ≈ 700) and the gauge (starts x ≈ 1150). It clears the ≈ 0.89 underline and the gauge line, and ends on the gold-framed past-day panel. |
+| M2 s06 reminder | 05:14.7 (314.7 s) | **Closed.** The dim "a·b = \|a\|\|b\| cos θ (1)" fades by 315 s, as "(1) ÷ \|b\|" opens. The final gold underline (from 322 s) has nothing under it. |
+| S1 s11a streaks | 08:26–09:06 | **Closed.** The streaks now start at y ≈ 40, not 0. One faint streak still passes behind "F = 20 N" (cosmetic, below). |
+| S2 A/B, hPa | 23:31.6–23:49.1 | **Closed.** "…hectopascals, the unit weather maps use for pressure" comes with the keyword "hPa: a unit of pressure" (from 23:37). The new "Let's call today's arrow capital A, and the past day's capital B." brings in the A and B column heads on their words (23:47, 23:49). |
+| S3 watt | 22:57.3–23:00.7 | **Closed.** The new sentence "A watt is one joule of energy every second." brings in "1 W = 1 J every second" on "joule" (≈ 22:59). It sits under "W = watt". |
+| S4 s11b | 09:06–09:22 | **Closed.** "always across" is a keyword now. "…at a right angle to the ball's velocity, which points the way it is moving" brings in a slate "→ velocity" legend that matches the ball's arrow (from 09:19). |
+| S5 runway wording | 20:39.7–20:47.7 | **Closed.** The sentence now reads "…ten metres per second, thirty degrees east of the runway's direction", which agrees with the 30° on screen and with 10 cos 30° ≈ 8.7. |
+| S6 cross-product link | 21:01–21:08 | **Closed.** The arrowhead now lands on the middle of the dashed "across" part, clear of the **v** label. |
+| S7 s20d links | 23:08.5–23:14.2 | **Mostly closed.** "Antarctica" sits lower (y ≈ 640) and the two paths no longer cross over the ring. The current link's arrowhead (≈ 700, 478) still sits on the Antarctica path where it passes through the ring, so the pair reads as a fork (cosmetic, below). |
+| S8 "opposites" | 24:12.0–24:13.6 | **Closed.** It now stays ≈ 1.6 s, about 1 s past the end of S7 (24:12.5). |
+| S9 s05a | 04:12–04:54 | **Closed.** The question line, a = … and b = … dim to about 40 % once the expansion starts. "x̂·ŷ = 0" is slate. Only the strike-through lines stay rose, and they mean "drops out", not "negative". At 640 px the stack reads top-down. |
+| S10 docs | — | **Closed.** The storyboard s20d honesty note, honesty_notes, data_needs §C W2 ("VERIFIED 2026-10-28") and manifest credits now agree. |
+
+**The softened sentence** (24:12.9, "Weather maps can be compared this way to look for past days like today, and computers use the same idea…") is honest. It claims a possibility, not a practice. The anomaly cosine *can* rank past maps, and it is the standard anomaly-correlation score. The credit note is right on both points:
+- Lorenz (1969, *J. Atmos. Sci.* 26, 636–646) chose analogues by RMS difference of height fields, not by the cosine.
+- The anomaly correlation coefficient is the WMO verification score (Manual on the GDPFS, WMO-No. 485).
+
+The note says the movie names neither. The screen shows only "past days like today", with no source text.
+
+## Splice quality (6 new sentences)
+- **Edges:** no clicks. All 12 splice edges sit in digital silence (the gaps are exactly 0 on both sides). In the final AAC, the largest sample-to-sample step within ±50 ms of each edge is 0.0016–0.0030, the same as ordinary speech.
+- **Level:** the new clips' RMS is −15.5 to −17.6 dBFS in the final mix, against −15.3 to −19.1 dBFS (median −16.5) for the untouched sentences. Each one matches its neighbours within about 1.5 dB, so no step is audible.
+- **Peaks:** whole-file true peak −2.7 dBTP; segments −2.7 to −2.8 dBTP.
+- **Clipping:** in `fix1/narration.wav` all six new clips are hard-clipped at full scale. That is 23–188 samples per clip, with runs of at most 16 samples (0.67 ms). The local gain of ×2.59–2.80 pushed the loudest peaks just past 0 dBFS. No untouched sentence clips.
+  - In the final mix this does not show. The 9 kHz high-pass energy of the new clips (p99 −0.9 to −1.3 dB of full band) is inside the range of the untouched sentences (median −1.4, 95th percentile −1.1).
+  - Recorded as cosmetic, plus a tooling lesson.
+
+## Fresh review — new and changed scenes
+- **Physics and maths:** unchanged from review 1 and still right.
+  - 10 cos 30° ≈ 8.7 m/s.
+  - τ·u = 0.01 W/m², and the watt is defined straight after its first use.
+  - 16/18 ≈ 0.89.
+  - The whirled ball runs anticlockwise on screen, with v tangent and F inward, and the energy bar stays flat.
+  - The south-polar winds circle clockwise seen from above the South Pole, which is eastward.
+- **Reveals on their words:** checked at 1 s through s20e, s20d S7–S9, s11b and s20b S3 ("north" at 20:41, v at 20:42 and 30° at 20:45, on their words).
+- **House style:** conforms.
+  - No headings beyond the title, no boxes or references.
+  - Keywords only. "how much along?" is a short keyword, not the narrated sentence.
+  - Teal/orange/slate roles; gold only for links, underlines and the panel highlight. The s20d total is now warm white.
+  - Text ≥ 44 px.
+  - No new empty half over 3 s: the s20d globe hand-over leaves the right side empty for about 2.5 s (23:01.5–23:04), under the limit.
+
+## MUST fix
+- None.
+
+## SHOULD fix
+- None.
+
+## COSMETIC (optional; none blocks `qa_pass`)
+- 23:08.5–23:14.2 (s20d S9): the "circumpolar current" arrowhead (≈ 700, 478) touches the "Antarctica" path where it crosses the ring.
+  - Fix: end the current link on the ring's upper right (≈ 700, 380), or bring the Antarctica path in through the lower-right gap.
+- 23:35–23:44 (s20e S4): "A = (3, 1, −2, −2)" (and B at 23:43) is written about 9 s before "capital A" is said.
+  - Write "today = (…)" until the naming sentence, or bring in the "A =" letter at 23:47 with the column head.
+- 23:45 onward (s20e): "an arrow in 4-D" leaves its keyword row, which leaves a blank line between "departures from usual" and "can't draw it · same recipe".
+- 23:35–24:21 (s20e): the "−2" (today) and "−3" (past day) values reach past their panels' right edges. Under the gold highlight (24:17–24:21) the "3" sits on the gold frame. Move both 10–15 px left. This was already there at review 1.
+- 23:46 (s20e S6): |A| = √(3² + 1² + 2² + 2²) still drops the minus signs (review-1 cosmetic, not taken). (−2)² is what a novice expects.
+- 08:34–08:56 (s11a): one faint wind streak passes behind "F = 20 N".
+- 04:06–04:54 (s05a): the x̂/ŷ unit arrows are drawn orange, the colour of b. A neutral (warm white or slate) would avoid "these belong to b".
+- 23:31.6 caption: "Today reads three, one, minus two and" breaks the list before its last item. Splitting after "minus two," would read better.
+- Narration splice tool: cap the local gain at the clip's peak headroom, or soft-limit it, so new clips never hard-clip. See the splice section above; not audible here.
+- data_needs §C: R2 ("pilots use the along-runway part": "cite before the final TTS") and W3 ("cite") are still open as notes. Close them, or mark them as general knowledge.
+
+## House-style conformance
+- The opening title, arc, voice, end card and score are as v6.
+- The new sentences follow the house voice:
+  - goal first ("How much of the wind blows along the runway?");
+  - every new term defined (velocity, watt, hectopascal, A and B);
+  - no references on screen.
+- The "Weather maps can be compared…" line makes no unverified claim.
+
+## Overall: PASS (ch00_dot_product_v01b review 2 — `qa_pass`; final)
+- Both Musts (M1, M2) and S1–S6 and S8–S10 are closed. S7 is closed except a cosmetic touch.
+- No v6 sentence, audio sample or v6 screen changed beyond what was intended. The 227 untouched sentences are bit-identical to review 1, and 0.00 % of pixels changed in every untouched v6 scene.
+- The splices are clean and level-matched.
+- The cosmetic items above are optional polish for a later pass. The user should watch the movie before `/approve-movie 0 ch00_dot_product_v01b`.

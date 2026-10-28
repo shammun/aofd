@@ -192,4 +192,5 @@ the MOC and ACC in Ch 21; ENSO in Ch 22.
 |---|---|---|---|---|---|---|
 | 2026-10-25 | ch00_dot_product_why | v6 fix 1 | 17:40.6 | 51.27 MB | 6b PASS | movies/out/ch00/ch00_dot_product_why.html |
 | 2026-10-28 | ch00_weather_basics | v3 fix 3 | 40:05.6 | 140.19 MB | 1 FIX, 2 FIX, 3 FIX, 4 PASS | movies/out/ch00/ch00_weather_basics/1080.mp4 |
+| 2026-10-28 | ch00_dot_product_v01b | fix 1 | 25:52.8 | 77.83 MB | 1 FIX, 2 PASS | movies/out/ch00/ch00_dot_product_v01b/1080.mp4 |
 - 2026-10-27: **F2 ch00_cross_product_why final** — v4 → fix 1 → fix 2; reviews 1 FIX, 2 FIX, 3 PASS (4 SHOULD to fold into the F2a/F2b splits: R3-S1 empty halves, R3-S2 s25b label, R3-S3 s03 door tick, R3-S4 s08 link). 48:28, 128.8 MB, own score rotation-turning. Scratch cleaned (10.8 GB freed; narration/pieces archived to archive/movies/ch00_cross_product_why_v4_final).
