@@ -71,7 +71,7 @@ re-asserts every spoken number in CHECK rows (data_needs.md §D).
 - **Tensors** (#11): s17 states only "no free index = scalar, one free index = vector"; two free indices (u_i v_j, nine numbers) and the stress −p δ_ij are left to the tensors movie.
 
 ## Length
-Set by the teaching; target band 25–45 min. **Measured**: see `script.md` header and `storyboard.yaml → dry_run`.
+Set by the teaching; target band 25–45 min. **Measured (dry run v3, 2026-10-28): 3389.3 s narration + 2.5 s hold = 3391.8 s (56:32), 8434 words, 538 sentences, 836 cues, 149.2 words per minute overall — about 11.5 min OVER the 45-min ceiling** after the addition/subtraction block (+570 s) and the cross-reference pointers (+80 s). See the open question on length (keep as one movie, trim, or split after s32 at 32:43).
 
 ## Cross-references (user rule 2026-10-27)
 Short spoken pointers wherever an operator is treated in depth elsewhere: coordinates #5 (s11), dot product #0.1 (s15), partial derivatives #4 and gradient #6 (s20), material derivative #10 (s23), thermodynamics #24 (s27), vector identities #10A/#10B (s28, s57), tensors #11 (s32), Coriolis #29 (s12c, s33, s59), cross product #2/#3 (s34), geostrophic wind #30 (s12c, s12d, s42), Ekman/friction #31 (s12c), thermal wind #32 (s12g), ENSO #62 (s12h), divergence #7 (s54). End card lists: dot product, cross product, cross product in physics, gradient, divergence, material derivative, vector identities I and II, tensors, Coriolis, geostrophic wind, thermal wind, El Niño (titles only). `related:` per scene in the storyboard. The movie still stands on its own.

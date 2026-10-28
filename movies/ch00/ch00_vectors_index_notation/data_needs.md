@@ -5,7 +5,7 @@ Every download goes through `fluidpy.data.fetch()` / `fluidpy.data.era5_arco.fet
 movie products to `movies/ch00/ch00_vectors_index_notation/data/` (small JSON/bin) or `data/derived/ch00/` (re-usable,
 ≤ 10 MB each). Credits go to `manifest.json` and the registry, never on screen.
 
-**Disk at planning time (2026-10-27, `df`): C: 27 GB free — BELOW the 40 GB download floor; G: 562 GB free.** The
+**Disk (2026-10-28, `df`): C: 41 GB free (was 27 GB on 2026-10-27, below the 40 GB floor; just above it now); G: 561 GB free.** If C: drops below 40 GB again the
 disk guard will refuse D1–D3 until C: is back above 40 GB (run `tools/clean_scratch.py` / the cross-product archive
 step) or the orchestrator confirms the guard only checks C: for C:-bound writes. Everything else in this movie is on disk.
 
@@ -116,3 +116,10 @@ VI31 easy flux 10⁹ m³/s · VI32 Brest→Saint-Malo 185.6 km, bearing 80.1°, 
 triple check (1,0,0),(0,1,0),(1,1,0) → (0,1,0) both ways · VI36 k̂ × u, k̂ × (k̂ × u) with the real wind · VI37
 centrifugal 0.0225 m/s², 0.229 % of g; r⊥ = 4226 km · VI38 WGS-84 a − b = 21.385 km · VI41 D4 jet maximum over the North Atlantic (spoken "about seventy"; reworded to the data) · VI42 250 ± 50 · VI43 √(50² + 250²) = 254.95 · VI44 force sum (0, 0), C ⟂ u, F ∥ −u, \|u\| ≈ 9.2 · VI45 u_g = (30.9, 24.9) ± 1, u = (10.0, 18.0) ± 0.2, u_ag = u − u_g · VI46 (5,1) − (1,3) = (4, −2) · VI47 IGRA 850/500 hPa winds and heights as tabled · VI48 shear (2.5, −5.4), 5.9 m/s, veering · VI49 D5 Nov clim and 2023 u at the box; anomaly sign > 0 (else s12h is reworded) · VI50 storm displacement 449 ± 30 km, c = (20.1, 5.1) ± 1, u − c ≈ (−14.3, 28.4) · VI39 surface/850 wind ratio
 34.0 / 9.3 = 3.7 ("more than three times") · VI40 Brest 10.3 °C → 14.9 °C (+4.6 °C between 18 and 20 UTC).
+
+## Orchestrator decisions (2026-10-28)
+1. Length 56:32 → split after s32 into **#1a "Vectors, adding and subtracting, index notation and the Kronecker delta"** (~33 min) and **#1b "The alternating tensor, the cross product in index form, ε–δ and triple products"** (~24 min + own title, hook and recap), per the user's preference for separate movies on distinct concepts.
+2. Maths ending + related-movies row.
+3. Globes at the movie's own moment (D2, ERA5 18 UTC 1 Nov); latest GFS only for the s12a jet.
+4. Sentences that wait for D1/D4/D5 are reworded to the data and re-measured by the builder.
+5. Add the music style `index-lattice` to `tools/sound/styles.py` (1a), and give 1b its own variant.
