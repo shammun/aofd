@@ -355,9 +355,11 @@ const S00: React.FC = () => {
         </g>
         <RiseText f={f} t="and how meteorology uses them" x={106} y={660} s={68} at={38} fill={C.key} colors={(i) => (i >= 8 && i < 19 ? C.first : undefined)} />
         <g opacity={oA}>
-          <Lbl x={1360} y={620} t={`${fmt(z, 1)} km`} c={C.key} s={T.key} />
-          <Lbl x={1520} y={620} t={`${fmt(v.T, 0)} °C`} c={C.second} s={T.key} />
-          <Lbl x={1670} y={620} t={`${fmt(v.p, 0)} hPa`} c={C.first} s={T.key} />
+          {/* floor size + wider slots: at T.key "12.0 km" ran into "−60 °C" (stage-2 frame check); x 1260 keeps the
+              readout ≥ 50 px clear of the subtitle (ends ≈ 1198) and the widest "1003 hPa" inside x 1840 */}
+          <Lbl x={1260} y={620} t={`${fmt(z, 1)} km`} c={C.key} s={T.floor} />
+          <Lbl x={1475} y={620} t={`${fmt(v.T, 0)} °C`} c={C.second} s={T.floor} />
+          <Lbl x={1645} y={620} t={`${fmt(v.p, 0)} hPa`} c={C.first} s={T.floor} />
         </g>
         <g opacity={oB} clipPath="url(#s00m)">
           <GeoImage P={P} href={IMG.tc1101} box={BOX_TC1101} />
@@ -2311,7 +2313,8 @@ const S57: React.FC = () => {
         <BrestGraphs f={f} h={Math.max(h, 24 * 0 + h)} showT={fin(f, SS(k, 0))}>
           <rect x={Xt(6)} y={BRG.y} width={Xt(8) - Xt(6)} height={BTG.y + BTG.h - BRG.y} fill={C.gold} opacity={0.18 * fin(f, t3)} />
           <Lbl x={Xt(7)} y={BTG.y + BTG.h + 92} t="warm front" c={C.gold} s={T.floor} a="middle" o={fin(f, t3)} />
-          <Lbl x={Xt(6) + 14} y={Yt(ts[6]) + 44} t="12.0 °C" c={C.gold} s={T.key} a="end" o={fin(f, AT(k, 1, "twelve degrees"))} />
+          {/* right of the minimum, under the curve: end-anchored it sat on the y axis over the 10/12 ticks (stage-2 frame check) */}
+          <Lbl x={Xt(6) + 20} y={Yt(ts[6]) + 50} t="12.0 °C" c={C.gold} s={T.key} o={fin(f, AT(k, 1, "twelve degrees"))} />
           <Lbl x={Xt(8) + 20} y={Yt(ts[8]) - 40} t="14.4 °C" c={C.gold} s={T.key} o={fin(f, AT(k, 2, "fourteen"))} />
         </BrestGraphs>
         <Lbl x={100} y={790} t="13 m/s from 155° (SSE)" c={C.first} s={T.key} o={win(f, AT(k, 1, "south-south-east"), t2)} />
