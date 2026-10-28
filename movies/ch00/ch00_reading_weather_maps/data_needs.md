@@ -130,3 +130,10 @@ domain) · music and effects: tools/sound (our own, CC0).
 7. Length 34:49 kept.
 8. Library order: implementer F1, F2, F3–F5, F10 (geo/diag); data-scout F6, F7, F8, F9, F11, F12 (data) with the fetches.
 Lexicon entries (Buys Ballot, Tissot, Himawari, METAR, decametres) are applied at build time (the weather-basics builder owns the lexicon file now).
+
+## Library results vs plan (implementer, 2026-10-27) — narration follows the data
+- RM12 LCC k at 65° N = 1.022 (not 1.023). RM18 z500 = 5072 / 5478 m (R_D 287.05; difference 406 m unchanged).
+- RM19 trough axis endpoints depend on smoothing (±50–90 km): do not quote them to 0.1°. RM20 68.65 m/s = 133.4 kt (barb still 135).
+- RM10 "ω = 58°": name the point (60° N 150° E gives 57.7°). RM05 drawn 500-km circles are ×2.005 / ×3.919 wide (local k 2.00 / 3.86).
+- RM23: MetPy parse_metar fails on the real Brest `//////TCU` METAR; use it as a benchmark only on reports without such groups.
+- This movie is now #69 (last) in the approved plan v2; the library (sphere, mapproj) also serves #5 (coordinates).
