@@ -2786,3 +2786,197 @@ None.
      - link-versus-arrow and link-versus-band crossings (R3-S4).
 
 Disk at review: C: 62 GB free, G: 557 GB free. Review-3 frames: 61 MB (520 frames, 83 tiles, 29 crops) under `reports/movies/ch00/ch00_cross_product_why/review/r3/` (local, not committed).
+
+
+---
+
+# ch00_weather_basics — review 1 (v2 r4, fresh eyes)                                2026-10-28
+
+Movie: `movies/out/ch00/ch00_weather_basics/1080.mp4`. Frames: 429 sentence-end frames, 62 per-scene tiles, a 2-fps
+empty-screen scan of the whole movie, and dense crops at transitions. All under
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review1/` (298 MB, local only).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics v2 r4 | 39:48 (2387.8 s) | 133.95 MB | 10/10 PASS | FIX (s55–s58 map vs graph) | PASS | FIX (sub-44 px maths, clipped labels) | **FIX (6 blank screens, 38.5 s; empty halves)** | PASS (598 cues, 0 violations) | PASS | n/a (retired); PASS (none on screen) | **FIX** |
+
+## What passes
+- **qa.json:** all 10 gates PASS.
+  - Loudness −16.0 LUFS, true peak −2.3 dBTP (re-measured with ebur128).
+  - Flashes max 1/s.
+  - 31 physics functions reproduce their hashes.
+  - 29 equations present.
+- **Captions:** I re-checked all 598 cues against the house rules.
+  - None has more than 2 lines or more than 42 characters per line.
+  - None runs faster than 17 cps or falls outside the 1–7 s length.
+  - None is out of order, and none uses `line:` positioning.
+  - The VTT in `out/` is identical to the one in the storyboard folder.
+- **Physics numbers (spot-recomputed):**
+  - ρ = 101325/(287·288.15) = 1.225, and 1.29 / 1.16 at 0 / 30 °C (about 10 % apart).
+  - ρg ≈ 12 Pa/m, and 36 hPa over 300 m.
+  - H = 8.43 km, and p₀/(ρ₀g) = 8.43 km.
+  - Pressure falls 11 % per km and halves every 5.8 km (≈ 507 and 253 hPa).
+  - e_s = 6 / 12 / 23 / 42 hPa.
+  - Relative humidity 15 ÷ 31.3 = 48 %, and dew point 13 °C.
+  - Cloud base 12 ÷ 8 ≈ 1.5 km.
+  - The wind (8, 6) gives 10 m/s from 233° (south-westerly), 19 kt; and 23.2 ÷ 0.514 ≈ 45 kt.
+  - Sea-level reduction: 835·e^(1.609/8.43) ≈ 1010 hPa.
+  - The 35 hPa in 13 h and +14 hPa in 5 h match the s56 graph.
+- **Conventions:**
+  - Wind is named by where it comes from; the compass arc runs clockwise from north to the tail (s33).
+  - s44 says "anticlockwise, seen from above" round the low and clockwise round the high, both slightly inward, with "south: reversed".
+  - Cold-front and warm-front geometry, slopes and "×50 taller" are spoken (s47, s48).
+  - Front symbols sit on the side the front moves towards (s50).
+  - Brest sits in the warm sector, behind the warm front, in s57.
+- **House style:**
+  - The opening title is right: gradient title, "made easy", "and how meteorology uses them" in teal, and one sentence. The subtitle is about 60 px clear of the readout, which meets the 50-px rule.
+  - No headings, references, badges or URLs appear anywhere.
+  - The end card uses the weather/climate wording and its three keyword lines, with the notebook icons.
+  - Maps sit on real daytime imagery or relief.
+- **Data and credits:**
+  - The manifest credits cover ERA5 (C3S), IGRA2, NCEP R1, GFS, NASA Worldview/GIBS, BMNG, Natural Earth, ETOPO 2022, CesiumJS and our own CC0 sound.
+  - The 27 Oct 2026 GFS "latest map" (typhoon 935 hPa, North Atlantic low about 955 hPa) is recorded with its CHECK rows.
+- **Accessibility:** the colour maps are perceptual or diverging and centred, with no jet. H/L and fronts are coded by shape as well as colour. There is no full-screen noise.
+
+## MUST fix
+1. **M1: six blank screens (nothing on screen while the voice talks), 38.5 s in total.**
+   - Found by the empty-screen scan, then checked by eye: the frames are pure background `#171f33`. The black gate cannot see this because the background is navy.
+   - Each stretch, with what the voice is saying:
+
+     | Time | Scene | Length | What the voice is saying |
+     |---|---|---|---|
+     | 02:22.0–02:26.5 | s05 S1 | 4.5 s | "So how big is the pressure at the ground…" |
+     | 04:16.0–04:24.5 | s08 S1–S2 | 8.5 s | "Density tells us… the Greek letter rho". The ρ symbol is defined with nothing on screen. |
+     | 05:26.5–05:34.5 | s10 S1–S2 | 8.0 s | |
+     | 06:16.5–06:18.5 | s11 S1 | 2.0 s | |
+     | 06:49.5–06:54.0 | s12 S1 | 4.5 s | |
+     | 21:50.5–22:01.5 | s34 S1–S3 | 11 s | "ten metres per second is thirty-six kilometres per hour" is spoken on an empty screen. |
+
+   - Fix:
+     - Each of these scenes must open with its picture on frame 0, as the house style requires.
+     - Carry the previous scene's persistent object across the cut: the column into s05, the room box into s08, the molecule boxes into s10.
+     - Put the first reveal on its quoted words with `AT(k, j, "rho")` and similar.
+     - Then add a "content-area not empty" gate to `movie_qa.py`. For example, fail when fewer than 0.2 % of the pixels in y 40–860 differ from the background for more than 1.5 s.
+2. **M2: half of the screen is empty for more than 10 s (house rule ≤ 3 s, U-M4.2).**
+   - Stretches over 10 s:
+
+     | Time | Scene | Empty half | Length |
+     |---|---|---|---|
+     | 00:23.5–00:47 | s02 | right | 23.5 s |
+     | 01:49.5–02:06.5 | s04 | right | 17 s |
+     | 02:22–02:47 | s05 | right | 25 s |
+     | 03:14–03:24.5 | s06 | right | 10.5 s |
+     | 05:26.5–06:01 | s10 | right | 34.5 s |
+     | 06:16.5–06:31 | s11 | right | 14.5 s |
+     | 07:21.5–07:39 | s13 | right | 17.5 s |
+     | 10:37–11:17 | s18 | **left** | **40 s**: H = RT/g sits alone in the right half until the uniform-density bars arrive on S7 |
+     | 12:06.5–12:18 | s20 | right | 11.5 s |
+     | 12:53–13:05.5 | s21 | right | 12.5 s |
+     | 16:09.5–16:20.5 | s26 | right | 11 s |
+     | 17:36–18:07.5 | s28 | right | 31.5 s: molecules over the water on the left, the curve arrives late |
+     | 19:09–19:22.5 | s30 | right | 13.5 s |
+     | 21:50.5–22:06 | s34 | left | 15.5 s |
+     | 22:30–22:45 | s35 | right | 15 s |
+     | 26:11.5–26:35 | s40 | right | 23.5 s |
+     | 27:36–27:47.5 | s42 | right | 11.5 s |
+     | 29:47–30:01 | s45 | right | 14 s |
+
+   - Fix:
+     - Bring the maths-zone object in on S1: for example the CalcStack skeleton, the empty e_s axes in s28, the equation "skeleton" in s10, or the uniform column drawn faint in s18 from S1.
+     - Or centre a full-width picture until the second object arrives.
+     - The stretches of 3–10 s (s07, s08, s09, s12, s16, s31, s33, s37, s51, s54) can share the same fix (SHOULD).
+3. **M3: s55 (35:20–35:43). The "L" marks the wrong low, and the spoken start value is never shown.**
+   - From 12 to 14 UTC on 1 Nov, the L sits on the north-western low at the top-left of the map. Ciarán's closed centre, mid-left, has no label.
+   - At 15 UTC the L jumps onto Ciarán, while the voice says "the low deepens as it comes".
+   - The "low:" readout first appears at 21 UTC showing 959 hPa (35:31). The narration says "from about nine hundred and sixty-five", but 965 is never on screen.
+   - Fix:
+     - Track Ciarán's minimum from 12 UTC, using a tracker seeded on Ciarán (nearest-neighbour from the previous hour), not the global minimum of the box.
+     - Show "low: 965 hPa" from 35:30.3 ("from about nine hundred and sixty-five").
+4. **M4: s55–s58 (35:20–37:54). The map's cold front contradicts the Brest graph.**
+   - The objective front lines jump between hours.
+   - At 15 UTC the cold front lies close to Brest. By 00–03 UTC on 2 Nov it has moved south to northern Spain and Biscay, about 500–700 km from Brest.
+   - At 37:50 the graph's gold band says "cold front" passes Brest 00–03 UTC (wind SW → W, −2 °C). A viewer sees the blue line nowhere near the town.
+   - Fix (either is fine):
+     - Restrict the front diagnostic to the frontal zone attached to Ciarán (mask more than about 800 km from the low centre, add a TFP-magnitude threshold, apply temporal continuity).
+     - Or hide the map fronts in s56–s58 and show only the low, the track and the Brest dot.
+   - Also mention the front lines in the s55 narration, or remove them from s55. They are on screen and never spoken, so their legend is a keyword without a voice.
+
+## SHOULD fix
+1. **S1: the builder's known cosmetic items, all confirmed.**
+   - **14:57 (s24 start, 897 s):** the "−6.5 °C / 1 km" slope label sits on the "20" tick and runs past the right end of the axis.
+     - Fix: move the slope triangle to about 3–5 km height on the line at about −10 °C, with its label left of the line.
+     - Also, the balloon glyph floats at about 38 km, above where the data ends (31 km), while S5 says balloons burst at about 30 km. Park it at the last data point.
+   - **20:09 (s31, 1209 s):**
+     - "12 °C" overlaps the "30" tick.
+     - "dew point" sits on the y-axis at x = 0.
+     - The orange T line is not clipped and runs past the left axis above about 2.6 km (it reaches −5 °C at 3 km, outside the 0–30 °C frame).
+     - Fix: clip both lines to the plot rectangle, put "12 °C" above the gap bracket, and put "dew point" right of the teal line at about 2 km.
+   - **00:05.7 (s00 title):** the two readouts cross-fade on top of each other. "12.0 km −60 °C 191 hPa" and "Brest 997 hPa" overlap for about 0.3 s.
+     - Fix: fade Part A's readout fully out over 6 frames before Part B's fades in, or offset Part B's readout down 60 px.
+   - **s56–s58 (36:23–37:54), the "L" on the gold line: intended.** The gold line is the track of the low, so its end belongs at the current centre, and the voice says "as the low passes close by".
+     - Polish: stop the track at the L's halo edge so the line does not run under the glyph.
+     - At 36:47 (s56 S3) the L also touches the Brest dot. Give the dot a 6-px ring so it stays visible.
+2. **S2: maths below the 44-px floor.**
+   - Affected places:
+     - The RH fraction at 18:29–19:07 (s29): "saturation vapour pressure" at about 36 px;
+     - s27 "e ≈ 1.61 q p = …" at 17:20;
+     - the s40 underbrace labels "station p" and "z_s: height" at 26:20;
+     - the small keyword lines "tropos = turning" (s23), "every place, height and hour" (s38), "mountains × 30 taller" (s39), "iso = equal · baros = weight" (s41) and "intertropical convergence zone" (s52), which measure about 30–38 px.
+   - These are hard to read at 640 px.
+   - Fix: raise them to 44 px, or use `\dfrac` with a larger KaTeX size. The kit's `floor()` guard is evidently not applied to KaTeX inner text.
+3. **S3: clipped or detached labels.**
+   - **28:35–28:39 (s43):** "Brest" is cut to "Bres", and the "L" is clipped at the map's right edge after the pan to the high. Fix: keep both labels inside the frame by clamping them, or pan less.
+   - **37:30–37:33 (s59):** the "H" is clipped at the bottom-left corner. Fix: the same clamp.
+   - **29:30 (s44):** the high's clockwise arc is mostly outside the map at the bottom-left. The southern-hemisphere thumbnail (about 110 px) is too small to read the reversed arrow at 640 px. Fix: enlarge it to about 220 px with a clear arrowhead.
+   - **36:23–37:12 (s56):** "Brest" is written under the map at bottom-left, about 600 px from its dot. That breaks the cartography rule that a label sits at its point. Fix: label the dot.
+   - **13:49 (s21):** "1 Nov 2023 · around midnight" straddles the bottom-right edge of the map, half on the image and half on the background. Fix: move it inside or below.
+   - **15:58–16:09 (s25):** "Paris ≈ 11 km" runs into the inset globe. Fix: move the globe 60 px right, or shorten the label to "Paris 11 km".
+   - **37:44–37:54 (s58):** "−2 °C" sits on the x-axis line. Fix: place it beside the drop, at about 11 °C.
+   - **27:39 (s42):** "Ciarán 956 hPa" sits between the L and the H, directly above the H, so the pairing is ambiguous. Fix: put it under or right of the L.
+4. **S4: reveals ahead of their words.**
+   - In s49 the cold-front line is drawn with the warm front at 32:52 (S4). "cold front" is not said until S5, at 32:56.2. Fix: draw the trailing-edge line on S5.
+   - In s29 "RH 73 %" appears at 19:01–19:07 but is never spoken. Fix: say it ("…rises to about seventy-three percent") or drop the number.
+   - In s40 "≈ 1013 hPa" at the sea-level end of the mountain diagram (26:3x) is never spoken. It also sits beside the result "≈ 1010", which invites confusion. Fix: remove it, or say "an ordinary seaside reading, about one thousand and thirteen".
+5. **S5: a quantity changes colour (house: "a quantity keeps its colour through the whole movie").**
+   - Pressure is teal in the title readout and in s21 ("6 hPa"), but orange in s56.
+   - Temperature is orange in the title and s23, but **gold** in s57–s58. Gold is the pointer and link colour.
+   - Argon is gold in s03.
+   - Fix: pick one colour per quantity (temperature orange; pressure, for example, slate or teal) and keep gold for links.
+6. **S6: the s53 winds (34:45–35:25) are white streak segments with no head or taper.**
+   - The direction can be read only while they move, and not in a still or poster.
+   - The storyboard asked for teal arrows with gold brackets for "north-east trades", "south-east trades" and "westerlies". The labels sit only in the right column, with no link to the globe.
+   - Fix: use teal, tapered streaks with a bright head, and add gold brackets or links from each label to its belt.
+7. **S7: s52 (34:09–34:45). The ITCZ band is a flat 2-D ring that overhangs the globe's limb on both sides, and it is drawn exactly on the equator.**
+   - Fix: drape it on the sphere along the mean MSLP trough, about 5–8° N over the Atlantic and Africa.
+8. **S8: honest imagery time.** s21 labels the map "around midnight" but shows a daytime true-colour scene from the afternoon of 1 Nov.
+   - The series rule says night hours use the BMNG/relief base, or the imagery time must be labelled.
+   - Fix: use the relief base, or label it "satellite: 1 Nov afternoon".
+9. **S9: s46 (29:52–30:24). The temperature transect graph has a single y-tick ("11"), so the size of the step cannot be read.**
+   - Fix: add ticks at 0 / 5 / 10 °C.
+10. **S10: records.**
+    - The storyboard's music block still says "seed 7". The real score is seed 11, "air-flowing + storm-tense", G major Lydian, 84 bpm (`v2/sound2.log`). Write that into the storyboard (HOUSE_STYLE §8: style, key and seed recorded, and a different score per movie).
+    - The `script.md` header still describes v1 (5696 words and 363 sentences; the storyboard says 5816 and 367). s42's header says 4 sentences while its text has 6. Refresh it.
+11. **S11: "10-m wind" (s44, 29:12) is a new term that is not spoken.** The voice says "real winds near the ground".
+    - Fix: label it "wind near the ground", or add "measured ten metres above the ground" to S1.
+
+## COSMETIC
+- s50 at 32:50: the warm-front semicircles vary a lot in size; one near the L is about 3× the others. Make them uniform.
+- s54 at 35:30: the coastlines and borders that S3 mentions are faint at 640 px. Raise them to 2-px warm white at 70 %.
+- s43: the L and H are pink and blue, while s42, s44 and s49 use cream or pink. Choose one H/L style for the whole movie.
+
+## House-style conformance
+- Opening title, voice, arc, recap and weather end card: conform.
+- The deviations are the empty screens and empty halves (M1, M2), the sub-44-px text (S2) and the colour roles (S5).
+
+## Overall: FIX (ch00_weather_basics v2 r4 review 1 — M1–M4; S1–S11 recommended)
+- **What blocks `qa_pass`:**
+  - M1, the blank screens: a viewer would certainly notice them.
+  - M2, the long empty halves.
+  - M3 and M4, the s55–s58 map labels and fronts that contradict the narration and the Brest graph.
+- **Everything else is local to the composition, apart from two items:**
+  - M3 and M4 need the data build (the low tracker and the front masking) re-run, with new CHECK rows and manifest hashes.
+  - M3 may add one readout.
+- No new narration is needed except the optional S4 and S11 wording.
+- **Suggested QA addition:** a content-area-empty gate (M1), so this class of defect cannot pass 10/10 again.
+
+Disk at review: C: 57 GB free, G: 558 GB free. Review frames: 298 MB on G: (scratch, not committed).
