@@ -21,6 +21,8 @@ outputs/, never a preview_* or final 1080.mp4, and logs to `logs/cleanup.log`. T
 **File size (user, 2026-10-27):** the cap is **160 MB** per movie (budget about 120 MB). Choose the bitrate for picture
 quality; long movies may use the whole cap.
 
+## ⇒ The approved order is now `series_plan_v2_proposal.md` (plan v2, 71 movies, user 2026-10-27). The list below is kept for history; the rules sections still apply.
+
 ## The list (in order) — rewritten 2026-10-27 to follow Vallis chapter by chapter
 User (2026-10-27): Chapter 0 gets a first-meeting movie for **every major topic of Vallis Ch 1–22, in book order**.
 Bridge movies may be added where they help. When a chapter meets the topic again, its own movie links back to the

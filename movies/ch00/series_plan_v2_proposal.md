@@ -1,4 +1,4 @@
-# Chapter 0 movie series — proposal v2 (2026-10-27, awaiting the user's approval)
+# Chapter 0 movie series — plan v2 (APPROVED by the user, 2026-10-27: "I will go with your suggestions")
 
 User request (2026-10-27): separate, very detailed from-scratch movies for every major maths term (Kundu's index),
 every major atmospheric-science, meteorology, climate and ocean concept (cyclones, ocean currents, baroclinic vs
@@ -32,6 +32,8 @@ where the picture shows them; latest data + history + cited impacts; house style
 | 8 | Curl, circulation and Stokes's theorem | curl, circulation, Stokes theorem, irrotational vector, solid-body rotation, rotation |
 | 9 | The Laplacian, Laplace and Poisson equations | Laplacian, Laplace equation, harmonic function, Poisson equation |
 | 10 | Riding with the flow: the material derivative | material / advective / particle / substantial derivative, Leibniz theorem, time derivatives of volume integrals (Reynolds transport), continuity |
+| 10A | Vector identities I: ∇ with dot and cross | product rules ∇(fg), ∇·(fA), ∇×(fA), ∇·(A×B), ∇×(A×B), ∇(A·B); div curl = 0, curl grad = 0; every one tied to a weather/climate field |
+| 10B | Vector identities II: the advection term and its relatives | (u·∇)u, u·∇T, ∇(|u|²/2) − u×ω (Lamb vector), ∇×(∇×u) = ∇(∇·u) − ∇²u, ∇·(ρu), Ω×(Ω×r); reading these 'scary' expressions term by term on real fields |
 | 11 | Tensors made easy | second-order tensors, symmetric and antisymmetric, isotropic tensors, eigenvalues and eigenvectors, velocity-gradient, strain-rate and rotation tensors, stress tensor |
 | 12 | Dimensional analysis, scaling and similarity | dimensional homogeneity, Buckingham Π, dimensional matrix, nondimensional parameters, dynamic similarity, order of magnitude (Rossby number preview) |
 | 13 | Ordinary differential equations | growth/decay, the oscillator, phase space, matrix equations |
@@ -125,6 +127,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 | 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen) |
 
 ## Notes
+- User (2026-10-27): every maths movie is tied to meteorology, atmospheric science or climate science (real fields, real maps); every movie shows enough worked examples and maps; skew-T, Coriolis, ENSO and map-reading movies may run longer (45–60 min).
 - The old V1–V24 list is absorbed: V1 → 10, V2 → 23, V3 → 24–25, V4 → 12, V5 → 29, V6 → 30, V7 → 32, V8 → 36, V9 → 34,
   V10 → 31, V11 → 37, V12 → 38, V13 → 39, V14 → 41, V15 → 47/59, V16 → 48, V17 → 43, V18 → 49, V19 → 50, V20 → 52,
   V21 → 51, V22 → 57–58, V23 → 62, V24 → 63–66.
