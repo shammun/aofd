@@ -51,6 +51,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 |---|---|
 | 22 | The climate machine: energy balance, albedo, greenhouse effect, equator-to-pole surplus (CERES) |
 | 23 | Air and seawater: equations of state, hydrostatic balance with height and depth |
+| 23A | **Contour maps, geopotential and geopotential height** (user, 2026-10-27): isolines of every kind on real data (isobars, isotherms, isohyets, isotachs, isohypses, terrain contours, ocean isobaths and isopycnals); contour interval and how spacing shows the gradient; how contours are drawn from gridded and station data (interpolation, marching squares, smoothing, labelling); height vs pressure coordinates; constant-pressure charts; geopotential Φ and geopotential height Z = Φ/g₀ (why not plain height), units (m, dam), standard levels (850/700/500/250 hPa) and their typical heights; real ERA5 z500 globe in 3-D, ridges and troughs as heights; thickness preview (full treatment in #32). All on real data. |
 | 24 | Atmospheric thermodynamics: first law, potential temperature, dry and moist lapse rates |
 | 25 | Stability, buoyancy and convection: Brunt–Väisälä frequency, stable/unstable/neutral |
 | 26 | Water in the air: humidity measures, Clausius–Clapeyron, LCL, CAPE and CIN, how clouds and rain form |
