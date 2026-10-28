@@ -16,7 +16,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 | # | Movie | State |
 |---|---|---|
 | 0.1 | Dot product | done |
-| 0.1b | Dot product, new version (intuition + use cases from the reference video; replaces 0.1 as the one to publish once reviewed — user 2026-10-28) | planned (25:04) |
+| 0.1b | Dot product v7 = the loved v6 kept as it is, plus ONLY insights/examples from the user's reference video that v6 lacks (user 2026-10-28: v6 is not replaced by a new movie; the full 48-min cross product 0.2 stays as it is too) | re-planning |
 | 0.2 | Cross product (full, 48 min) | done |
 | 0.3 | Weather basics (pressure, temperature, humidity, wind, highs/lows, fronts intro, reanalysis) | building |
 
