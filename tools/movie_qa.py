@@ -23,6 +23,7 @@ Gates (each PASS / FAIL / SKIP with a reason; exit 0 only when no gate FAILs):
 | loudness | integrated outside −18…−14 LUFS or true peak > −1 dBTP (ebur128) |
 | flashes | > 3 large luminance flashes in any 1 s window (WCAG 2.3.1), from frames sampled at the video fps |
 | captions | VTT cues out of order, outside the audio, > 2 lines, > 42 chars/line, > 17 cps, or text ≠ script text; with --sound-cues SIDECAR, bracketed sound lines ("[waves breaking]") are allowed only where the sidecar lists them (and every listed sound must be captioned), the spoken words still exact |
+| subtitles | the SRT twin of the VTT (--srt, default beside it) has other cues, times (> 2 ms) or text, or the en.vtt / en.srt copies beside the movie are not byte-identical to them (stale) |
 | physics | manifest functions re-run and their output hashes differ from the manifest |
 | equations | an on_screen_eq.latex of the storyboard is not in the composition source |
 
@@ -364,6 +365,8 @@ def main() -> int:
     ap.add_argument("--framemd5", nargs=2, metavar=("A", "B"))
     ap.add_argument("--storyboard")
     ap.add_argument("--captions")
+    ap.add_argument("--srt", help="SRT twin of --captions (default: the .srt beside --captions): gate 'subtitles' checks the same "
+                                  "cues, times (±2 ms) and text, and that en.vtt / en.srt beside the movie are byte-identical copies")
     ap.add_argument("--script")
     ap.add_argument("--manifest")
     ap.add_argument("--composition", help="the .tsx source to grep for on-screen equations")
@@ -561,6 +564,38 @@ def main() -> int:
              "; ".join(issues) or f"{len(cues)} cues match the script")
     else:
         gate("captions", "SKIP", "no --captions given")
+    # subtitles: the SRT is the VTT's twin, and the copies published beside the movie are not stale (added 2026-10-28,
+    # ch00_weather_basics review 2 S3: out/…/en.srt was the v2 file while en.vtt was current)
+    if a.captions and Path(a.captions).exists():
+        vtt = Path(a.captions)
+        srt = Path(a.srt) if a.srt else vtt.with_suffix(".srt")
+        issues, notes = [], []
+        if srt.exists():
+            cv, cs = parse_vtt(vtt), parse_vtt(srt)
+            if len(cv) != len(cs):
+                issues.append(f"{len(cs)} SRT cues vs {len(cv)} VTT cues")
+            for k, (x, y) in enumerate(zip(cv, cs), 1):
+                if abs(x["start"] - y["start"]) > 0.002 or abs(x["end"] - y["end"]) > 0.002:
+                    issues.append(f"cue {k} time differs (VTT {x['start']:.3f}–{x['end']:.3f}, SRT {y['start']:.3f}–{y['end']:.3f})")
+                    break
+                if [ln.strip() for ln in x["lines"]] != [ln.strip() for ln in y["lines"]]:
+                    issues.append(f"cue {k} text differs")
+                    break
+            notes.append(f"SRT {srt.name}: {len(cs)} cues = VTT" if not issues else "")
+        else:
+            notes.append("no SRT beside the VTT")
+        for src, name in ((vtt, "en.vtt"), (srt, "en.srt")):
+            cp = path.parent / name
+            if cp.exists() and src.exists() and cp.resolve() != src.resolve():
+                if cp.read_bytes() != src.read_bytes():
+                    issues.append(f"{cp} is not a copy of {src} (stale)")
+                else:
+                    notes.append(f"{name} beside the movie = source")
+            elif not cp.exists() and src.exists():
+                notes.append(f"no {name} beside the movie")
+        gate("subtitles", "FAIL" if issues else "PASS", "; ".join(issues) if issues else "; ".join(n for n in notes if n))
+    else:
+        gate("subtitles", "SKIP", "no --captions given")
     # physics parity
     if a.manifest and Path(a.manifest).exists():
         st, det = physics_parity(Path(a.manifest))

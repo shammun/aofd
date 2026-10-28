@@ -4,8 +4,8 @@
  "builder": "movies/data/build_ch00_weather_basics.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "a2898e9637bbd7539fd2345f68b2e126735b28c6",
-  "dirty_tracked": true,
+  "commit": "034a23e8b0b1d3f81affde9b75a9ce20e4e65c2d",
+  "dirty_tracked": false,
   "moist_py_tracked": true,
   "moist_py_sha256": "12828309d2ed9357e2406a8e057a4a40835a0b869f68a0ef14749e3e61d99e27",
   "atmos_py_tracked": true,
@@ -337,7 +337,7 @@
   "igra_stations_2023.json": "bcecbc6ea3cda88a18142556f19cfad735f93d1c5a22072243f09e622f2ee9df",
   "ciaran_hourly.json": "9dbe14f051560164dbcfc913c0aabdf2c110b50fb91ff1132cd9531a71a430ad",
   "brest_hourly.json": "96282cb556558161027f12557588c48e581bc5831659f7efd74c7e2a11459e4b",
-  "fronts.json": "5519a9f280f3513e76ff9c547e7d8b2eb1c3b81098f6fcfc8385087a35d09ad8",
+  "fronts.json": "0f366888f2d717e3d568ce50ec69943b847613b9e6fc5ff537f1e8f5066ae82b",
   "ciaran_850.json": "4bc7a8b0c9d26b3dcd5a5733910b1ffb2bada6465ffd71b31bbfb2dfc30e5111",
   "climatology.json": "d8fa84dcb8bce32471318e958d9130aed53f750f5c41b045915fe3767861ab85",
   "tibet_etopo.json": "fc88da2643e139c1b0f978f560be3b8e61015243749f93a9400c95171c863d73",
@@ -1954,54 +1954,498 @@
    "pass": true
   },
   {
-   "id": "M4",
-   "name": "s55 hourly fronts attached to Ciarán: a warm and a cold line in most hours (≥ 15 of 25)",
+   "id": "N-M2",
+   "name": "s55 the warm + cold pair is drawn contiguously from 12 UTC 1 Nov up to 21 UTC 1 Nov (10 hours), none after",
    "value": [
-    23,
-    23
+    10,
+    "2023-11-01T21"
    ],
    "ref": true,
    "tol": 0,
    "pass": true
   },
   {
-   "id": "M4",
-   "name": "s57 the map's warm front passes Brest (≤ 100 km) during 18-20 UTC, as the Brest graph's gold band says",
+   "id": "N-M2",
+   "name": "s55 12 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    90.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 12 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    234.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 12 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    90.0,
+    234.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 12 UTC: cold front length ≥ 800 km",
+   "value": [
+    2190.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 13 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    118.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 13 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    233.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 13 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    118.0,
+    233.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 13 UTC: cold front length ≥ 800 km",
+   "value": [
+    2358.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 14 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    112.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 14 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    232.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 14 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    112.0,
+    232.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 14 UTC: cold front length ≥ 800 km",
+   "value": [
+    2498.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 15 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    113.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 15 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    231.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 15 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    113.0,
+    231.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 15 UTC: cold front length ≥ 800 km",
+   "value": [
+    2677.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 16 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    104.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 16 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    231.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 16 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    104.0,
+    231.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 16 UTC: cold front length ≥ 800 km",
+   "value": [
+    2832.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 17 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    101.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 17 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    229.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 17 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    101.0,
+    229.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 17 UTC: cold front length ≥ 800 km",
+   "value": [
+    2921.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 18 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    90.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 18 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    222.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 18 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    90.0,
+    222.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 18 UTC: cold front length ≥ 800 km",
+   "value": [
+    2626.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 19 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    74.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 19 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    221.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 19 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    74.0,
+    221.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 19 UTC: cold front length ≥ 800 km",
+   "value": [
+    2708.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 20 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    69.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 20 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    224.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 20 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    69.0,
+    224.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 20 UTC: cold front length ≥ 800 km",
+   "value": [
+    2511.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 21 UTC: warm front centroid east to south-east of the low (bearing 45-160°)",
+   "value": [
+    84.0
+   ],
+   "ref": "[45, 160]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 21 UTC: cold front centroid south-west of the low (bearing 180-270°)",
+   "value": [
+    237.0
+   ],
+   "ref": "[180, 270]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 21 UTC: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+   "value": [
+    84.0,
+    237.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 21 UTC: cold front length ≥ 800 km",
+   "value": [
+    3051.0
+   ],
+   "ref": "[800, 100000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 18 UTC: the hourly cold front IS the s49 cold front (same line, mean point gap ≤ 1 km)",
+   "value": [
+    0.264088
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 hour-to-hour continuity of the drawn lines: mean line-to-line gap ≤ 150 km every hour (max shown)",
+   "value": [
+    118.0
+   ],
+   "ref": "[0, 150.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s55 hour-to-hour continuity of the drawn cold front: axis turns ≤ 30° per hour (max shown)",
+   "value": [
+    13.0
+   ],
+   "ref": "[0, 30.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "N-M2",
+   "name": "s57 the map's warm front passes Brest (≤ 50 km) during 18-20 UTC, as the Brest graph's gold band says",
    "value": [
     14.592491
    ],
-   "ref": "[0, 100]",
+   "ref": "[0, 50]",
    "tol": null,
    "pass": true
   },
   {
-   "id": "M4",
-   "name": "s58 the map's cold front passes Brest (≤ 100 km) during 00-03 UTC 2 Nov, as the Brest graph's gold band says",
+   "id": "N-M2",
+   "name": "s55-s57 the drawn cold front has not passed Brest 12-21 UTC: Brest on its WARM side (T850 ±150 km), or beyond its north-eastern tip (nearest point = end point)",
    "value": [
-    5.900211
+    "beyond the tip",
+    "beyond the tip",
+    "beyond the tip",
+    "beyond the tip",
+    "beyond the tip",
+    "beyond the tip",
+    "beyond the tip",
+    1.0,
+    "beyond the tip",
+    "beyond the tip"
    ],
-   "ref": "[0, 100]",
-   "tol": null,
+   "ref": true,
+   "tol": 0,
    "pass": true
   },
   {
-   "id": "M4",
-   "name": "s55-s57 the cold front has not reached Brest before 21 UTC 1 Nov (> 150 km away)",
+   "id": "N-M2",
+   "name": "fallback reason: no ≥ 800-km trailing (south-west) cold line comes within 50 km of Brest at 00-03 UTC 2 Nov (nearest, km per hour; inf = none exists), so s58 draws no front and the Brest graph carries the cold front",
    "value": [
-    326.790077
+    175.0,
+    238.0,
+    291.0,
+    "none"
    ],
-   "ref": "[150, 1000000000.0]",
-   "tol": null,
-   "pass": true
-  },
-  {
-   "id": "M4",
-   "name": "s55-s58 hour-to-hour continuity: median mean gap between consecutive lines ≤ 100 km",
-   "value": [
-    45.829171
-   ],
-   "ref": "[0, 100]",
-   "tol": null,
+   "ref": true,
+   "tol": 0,
    "pass": true
   },
   {
@@ -4478,15 +4922,38 @@
    "fn": "fluidpy.diag.fronts.front_lines",
    "scene": "s55-s58",
    "data": "data/fronts.json",
-   "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre'; lines attached to the tracked Ciarán centre (≤ 350 km), ≥ 300 km long, clipped to 800 km from it, nearest to the previous hour's line",
+   "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre'; chosen by shape (fix loop 2): warm E-SE of the tracked centre (≤ 350 km, clipped to 800 km), cold ≥ 800 km trailing S-SW (≤ 500 km, not clipped), continuity = gap + orientation; drawn while both exist from 12 UTC",
    "params": {
     "T": "ERA5 850 hPa t (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc)",
     "locate": "centre",
-    "attach_km": 350.0,
-    "clip_km": 800.0,
-    "min_length_km": 300.0
+    "attach_km": [
+     350.0,
+     500.0
+    ],
+    "clip_km_warm": 800.0,
+    "min_length_km": [
+     300.0,
+     800.0
+    ],
+    "bearing_warm": [
+     45.0,
+     160.0
+    ],
+    "bearing_cold": [
+     180.0,
+     270.0
+    ],
+    "bearing_cold_far_end": [
+     180.0,
+     280.0
+    ],
+    "orientation_weight_km_per_deg": 10.0,
+    "continuity_gate": {
+     "mean_gap_km": 150.0,
+     "axis_turn_deg": 30.0
+    }
    },
-   "output_sha256": "05a284659683936881e68daee26d16f73546ea678cf0c2a234b6c195f5682b58"
+   "output_sha256": "50511cdfd1d615c8fa2fef847ec787048e760401fd156a1838da0d805c0d335d"
   },
   {
    "fn": "fluidpy.diag.cyclone.storm_centre",

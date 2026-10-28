@@ -273,7 +273,7 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
    - Kill orphan `remotion render` node, chrome-headless-shell and ffmpeg processes first.
    - Join with the ffmpeg **concat filter** (one re-encode, crf 20, bt709, yuv420p, AAC 320k, faststart). `-c copy` concat drops frames.
    - The tool is `tools/render_chunks.py --scratch <G: folder> --comp <Id> --frames <total>`.
-3. **`tools/movie_qa.py` with `--storyboard`:** 12 gates (since 2026-10-28 incl. `content`: no empty content area
+3. **`tools/movie_qa.py` with `--storyboard`:** 13 gates (since 2026-10-28 incl. `subtitles`: SRT twin = VTT and the copies beside the movie = source; `content`: no empty content area
    > 1.5 s on the navy background, which the black gate cannot see; and `halves`: picture or maths zone empty, WARN > 3 s,
    FAIL > 10 s).
    - The duration gate checks against timing.json's narration end (+0…5 s hold).

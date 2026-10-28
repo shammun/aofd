@@ -2457,7 +2457,7 @@ scenes:
   visual: 'Picture zone: the s41 globe tilted to the North Atlantic; ''L'' (68 px, warm white letters with a 3-px dark outline)
     at the ERA5 MSLP minimum (52.5N 1.75E) and ''H'' at the maximum of the Azores high
 
-    (from data); TipLabels ''Ciarán 956 hPa'' and ''≈ 1030 hPa'' (54 px). Maths zone keywords: ''low = depression = cyclone'',
+    (from data); TipLabels ''Ciarán 956 hPa'' (under the L) and ''≈ 1030 hPa'' (54 px). Maths zone keywords: ''low = depression = cyclone'',
 
     ''high = anticyclone'' on their words.
 
@@ -3162,19 +3162,23 @@ scenes:
       times: 2023-11-01T12 .. 2023-11-02T12 hourly
       tracker: seed = box (40-60N 30W-10E) minimum at its deepest hour (03 UTC 2 Nov); then storm_centre in ±2.5° lat × ±4°
         lon round the previous hour
-      fronts: front_lines(T850, locate='centre') lines ≥ 300 km within 350 km of the tracked centre, clipped to 800 km, nearest
-        to the previous hour's line
+      fronts: 'front_lines(T850, locate=''centre''), chosen by shape (fix loop 2): warm = line E-SE of the tracked centre (≤ 350
+        km, ≥ 300 km, clipped to 800 km); cold = ≥ 800-km line trailing S-SW (≤ 500 km, not clipped: the s49 line); continuity
+        = mean gap ≤ 150 km (+ cold axis turn ≤ 30°); drawn 12-21 UTC 1 Nov while both exist, faded out 21-22 UTC; none after
+        (the trailing front breaks off the low, and the only S-SW cold line lies 92-290 km SE of Brest before the station''s
+        00-03 UTC cold-front passage): the Brest graph carries the cold front'
     outputs:
       min_hPa_start: 970.7
       min_hPa_lowest: 953.7
       lowest_at: 2023-11-02T03 50.1N 3.73W
       old_rule_note: the box minimum at 12-14 UTC 1 Nov was another low ≥ 1060 km away (965 hPa); fixed in fix loop 1
     data: data/ciaran_hourly.{bin,json}, data/fronts.json (hourly)
-    test: ../Fluid Dynamics/tests/diag/test_cyclone.py, test_fronts.py; CHECK M3, M4, W49
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py, test_fronts.py; CHECK M3, N-M2, W49
   exaggeration:
   - 24 hours shown in about 12 s (time compressed)
   screen_summary: 'same panel; 12 UTC 1 Nov held while the isobars and the warm (red) / cold (blue) fronts are named; then
-    the hours run with the clock, ''L'' on Ciarán''s own centre with ''low: 971 → 954 hPa''; gold track; Brest dot'
+    the hours run with the clock, ''L'' on Ciarán''s own centre with ''low: ≈ 970 hPa'' then the running value to
+    954; the fronts and their key fade out after 21 UTC; gold track; Brest dot'
   kind: map, data animation
   visual_v1_built: 'hourly loop 12 UTC 1 Nov → 12 UTC 2 Nov: ERA5 isobars, the objective fronts each hour, 10-m wind arrows,
     the low and its track, clock'
@@ -3564,3 +3568,13 @@ fix_loop_1:
     seventy'')'
   data: Ciarán tracked by continuity (M3); hourly fronts attached to the tracked low with continuity (M4); ITCZ trough line
     (S7) — CHECK rows M3, M4, S7, W49 in manifest.json
+fix_loop_2:
+  date: '2026-10-28'
+  review: reports/ch00_movies.md 'ch00_weather_basics — review 2'
+  narration: unchanged (no sentence replaced; timing.json, captions and the sound mix are the fix-1 files)
+  data: 'fronts.json hourly re-chosen by shape (N-M2): warm E-SE, cold ≥ 800 km trailing S-SW = the s49 front, continuity gate;
+    drawn 12-21 UTC 1 Nov only — CHECK rows N-M2 in manifest.json (per hour: sides, length; continuity; Brest; fallback reason)'
+  screen: 's07 big number on S0 + 1 hPa row on ''hectopascals''; s23 balloon parked as a dot on the 33.9-km point, s24/s25
+    line to the same point; s25 inset moved/smaller, full ring, ''below −75 °C'', ''≈ 8 km'' inside; s35/s42/s44/s52/s55-s58
+    H/L in the map layers'' style (pink L, blue H); s42 ''Ciarán 956 hPa'' under the L and the colour bar kept; s44 high arc
+    inside the map; s55 ''≈ 970'' then the hours; Brest ring drawn over the L'

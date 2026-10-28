@@ -872,19 +872,33 @@ def main() -> int:
                         "T850_C": r6(tT, 2), "cold_plateau_C": r6(cold_pl, 2), "warm_plateau_C": r6(warm_pl, 2), "width_10_90_km": r6(width, 0),
                         "s10_s90_km": [r6(a10, 0), r6(a90, 0)], "wind_warm_side_uv": r6(jt[:2], 2), "wind_cold_side_uv": r6(jt[2:], 2)},
            "warm_tongue": {"box_sw_brittany_C": r6(tw - 273.15, 2), "box_west_of_low_C": r6(tc - 273.15, 2), "difference_K": r6(tw - tc, 2)}}
-    # hourly front lines for the s55 loop (same method and the same picking rule, hourly storm centre from A1)
-    # fix loop 1 (review 1, M4): the s49 rule (longest cold line ≥ 1000 km within 900 km of the low) picks, hour by hour, a
-    # separate long baroclinic band 450-570 km south of Brest at 00-03 UTC 2 Nov, while the Brest series shows the cold
-    # front passing 00-03 UTC; the lines also jumped between hours because the low itself was the wrong one before
-    # 15 UTC. The hourly s55-s58 lines are now the frontal zone ATTACHED to Ciarán: the same library lines
-    # (front_lines, locate='centre'), only those of length ≥ 300 km that come within 350 km of the tracked centre,
-    # clipped to 800 km from it (the longest contiguous piece), and, from the second hour on, the candidate nearest to
-    # the previous hour's line (hour-to-hour continuity). An hour with no attached line of a kind shows none.
+    # hourly front lines for the s55-s58 panel (same library lines as s49, hourly storm centre from A1)
+    # fix loop 2 (review 2, N-M2). Fix 1 kept, from the second hour on, the candidate nearest to the previous hour's line;
+    # after the 800-km clip that latched at 17 UTC onto a 300-450-km arc hugging the west and south side of the low (the
+    # bent-back zone), so the "cold front" of s55-s58 was no longer the long trailing front of s49-s50, and from 00 UTC the
+    # "warm front" was the bent-back zone north of the low. The lines are now chosen BY SHAPE:
+    #   warm: kind 'warm', ≥ 300 km, comes within 350 km of the centre, its centroid lies east to south-east of the centre
+    #         (bearing 45-160°), clipped to 800 km from the centre (the longest contiguous piece);
+    #   cold: kind 'cold', ≥ 800 km, comes within 500 km of the centre, centroid south-west of it (bearing 180-270°), and its
+    #         far end lies away to the south/west (bearing 180-280°): a front TRAILING from the low; not clipped (only the map
+    #         edge cuts it), so it is the s49 line itself;
+    #   continuity: from the second hour a line must be the same front as the previous hour's (mean line-to-line gap
+    #         ≤ 150 km; for the straight cold front also its principal axis turned ≤ 30°: the curved, clipped warm arc's
+    #         axis swings 35-40° in an hour as it wraps); among those, score = gap [km] + 10 km per degree of turn;
+    #   the fronts are drawn only while BOTH exist and are attached, contiguously from 12 UTC 1 Nov (the textbook pair).
+    # Result: the pair exists 12-21 UTC 1 Nov; at 22 UTC the trailing front has broken off the low (≥ 630 km away, the
+    # frontal fracture of a Shapiro-Keyser storm), and the 900-km Biscay cold line that appears then is 250 km (mean) from
+    # the 21 UTC front, so it is not the same line. The only ≥ 800-km south-west
+    # cold line after 21 UTC (over Biscay, 22-02 UTC) lies 92-290 km SOUTH-EAST of Brest, i.e. Brest is already behind it
+    # before the station's 00-03 UTC cold-front passage, so it cannot honestly be drawn as "the cold front reaching Brest".
+    # So the map shows the fronts up to 21 UTC, fades them out over 21-22 UTC, and from then on only the isobars, the low
+    # and its track: the Brest graph carries the cold-front story (review 2's fallback, review 1 offered the same).
     FL = __import__("fluidpy.diag.fronts", fromlist=["front_lines"]).front_lines
-    ATT_KM, CLIP_KM, MINLEN = 350.0, 800.0, 300.0
+    ATT_W, ATT_C, CLIP_KM, MINLEN_W, MINLEN_C = 350.0, 500.0, 800.0, 300.0, 800.0
+    BEAR_W, BEAR_C, BEAR_FAR = (45.0, 160.0), (180.0, 270.0), (180.0, 280.0)
+    CONT_KM, CONT_DEG = 150.0, 30.0
 
-    def clip_near(f, la0, lo0):
-        la_, lo_ = np.asarray(f.lat, float), np.asarray(f.lon, float)
+    def clip_near(la_, lo_, la0, lo0):
         inside = gc_km(la0, lo0, la_, lo_) <= CLIP_KM
         best, cur = (0, 0), None
         for i_, v_ in enumerate(np.append(inside, False)):
@@ -903,56 +917,161 @@ def main() -> int:
         d = gc_km(np.asarray(a_la)[:, None], np.asarray(a_lo)[:, None], np.asarray(b_la)[None, :], np.asarray(b_lo)[None, :])
         return float(np.mean(d.min(axis=1)))
 
-    hourly, prev = [], {"warm": None, "cold": None}
+    def bearing(la_, lo_, la0, lo0):
+        """compass bearing [deg, clockwise from north] of the mean east/north offset of points from (la0, lo0)"""
+        e_, n_ = enu_km(la_, lo_, la0, lo0)
+        return float(np.degrees(np.arctan2(np.mean(e_), np.mean(n_))) % 360.0)
+
+    def axis_deg(la_, lo_):
+        """orientation of the line's principal axis [deg from north, 0-180)"""
+        e_, n_ = enu_km(la_, lo_, float(np.mean(la_)), float(np.mean(lo_)))
+        w_, v_ = np.linalg.eigh(np.cov(np.vstack([e_, n_])))
+        return float(np.degrees(np.arctan2(v_[0, 1], v_[1, 1])) % 180.0)
+
+    def axis_diff(a_, b_):
+        d_ = abs(a_ - b_) % 180.0
+        return min(d_, 180.0 - d_)
+
+    def cands_of(Lh, kind, la0, lo0):
+        out = []
+        for f_ in Lh:
+            if f_.kind != kind:
+                continue
+            la_, lo_ = np.asarray(f_.lat, float), np.asarray(f_.lon, float)
+            dmin = float(np.min(gc_km(la0, lo0, la_, lo_)))
+            if kind == "warm":
+                if f_.length_km < MINLEN_W or dmin > ATT_W:
+                    continue
+                la_, lo_ = clip_near(la_, lo_, la0, lo0)
+                if len(la_) < 3 or not (BEAR_W[0] <= bearing(la_, lo_, la0, lo0) <= BEAR_W[1]):
+                    continue
+            else:
+                if f_.length_km < MINLEN_C or dmin > ATT_C:
+                    continue
+                dd = gc_km(la0, lo0, la_, lo_)
+                far = int(np.argmax(dd))
+                if not (BEAR_C[0] <= bearing(la_, lo_, la0, lo0) <= BEAR_C[1]):
+                    continue
+                if not (BEAR_FAR[0] <= bearing(la_[far:far + 1], lo_[far:far + 1], la0, lo0) <= BEAR_FAR[1]):
+                    continue
+            out.append({"lat": la_, "lon": lo_, "length_km": float(f_.length_km), "dmin_km": dmin,
+                        "bearing": bearing(la_, lo_, la0, lo0), "axis": axis_deg(la_, lo_)})
+        return out
+
+    hourly, prev, alive, cands_log = [], {"warm": None, "cold": None}, True, []
+    T850h = {}
     for t_ in f8.time.values:
         ts = str(t_)[:13]
         kk = hrs.index(ts)
         Th, Uh, Vh = (f8[v].sel(time=t_).values.astype(float) for v in ("t", "u", "v"))
+        T850h[ts] = Th
         Lh = FL(Th, Uh, Vh, flat, flon, locate="centre")
         rec = {"time_utc": ts, "low": [r6(clat[kk], 3), r6(clon[kk], 3)]}
+        pick_ = {}
         for kind in ("warm", "cold"):
-            cands = []
-            for f_ in Lh:
-                if f_.kind != kind or f_.length_km < MINLEN or np.min(gc_km(clat[kk], clon[kk], f_.lat, f_.lon)) > ATT_KM:
-                    continue
-                la_, lo_ = clip_near(f_, clat[kk], clon[kk])
-                if len(la_) >= 3:
-                    cands.append((la_, lo_, f_.length_km))
-            if not cands:
-                rec[kind] = None
-                prev[kind] = None
+            cs = cands_of(Lh, kind, clat[kk], clon[kk])
+            cands_log.append({"time_utc": ts, "kind": kind, "n": len(cs),
+                              "candidates": [{k_: r6(c_[k_], 0) for k_ in ("length_km", "dmin_km", "bearing", "axis")} for c_ in cs]})
+            if not cs:
+                pick_[kind] = None
                 continue
             if prev[kind] is None:
-                ch = max(cands, key=lambda c_: c_[2])
+                pick_[kind] = max(cs, key=lambda c_: c_["length_km"])
             else:
-                ch = min(cands, key=lambda c_: mean_gap_km(c_[0], c_[1], *prev[kind]))
-            rec[kind] = [r6(ch[0], 2), r6(ch[1], 2)]
-            prev[kind] = (ch[0], ch[1])
+                # the same front as the previous hour: mean gap ≤ 150 km and axis turn ≤ 30° (gate), best score wins
+                cs = [c_ for c_ in cs if mean_gap_km(c_["lat"], c_["lon"], prev[kind]["lat"], prev[kind]["lon"]) <= CONT_KM
+                      and (kind == "warm" or axis_diff(c_["axis"], prev[kind]["axis"]) <= CONT_DEG)]
+                pick_[kind] = min(cs, key=lambda c_: mean_gap_km(c_["lat"], c_["lon"], prev[kind]["lat"], prev[kind]["lon"])
+                                  + 10.0 * axis_diff(c_["axis"], prev[kind]["axis"])) if cs else None
+        alive = alive and pick_["warm"] is not None and pick_["cold"] is not None
+        for kind in ("warm", "cold"):
+            c_ = pick_[kind] if alive else None
+            rec[kind] = None if c_ is None else [r6(c_["lat"], 2), r6(c_["lon"], 2)]
+            if c_ is not None:
+                rec[kind + "_shape"] = {"length_km": r6(c_["length_km"], 0), "nearest_km": r6(c_["dmin_km"], 0),
+                                        "bearing_deg": r6(c_["bearing"], 0), "axis_deg": r6(c_["axis"], 0)}
+                if prev[kind] is not None:
+                    rec[kind + "_shape"]["gap_prev_km"] = r6(mean_gap_km(c_["lat"], c_["lon"], prev[kind]["lat"], prev[kind]["lon"]), 0)
+                    rec[kind + "_shape"]["axis_change_deg"] = r6(axis_diff(c_["axis"], prev[kind]["axis"]), 0)
+            prev[kind] = c_
+        rec["shown"] = alive
         hourly.append(rec)
+    shown = [h for h in hourly if h["shown"]]
+    last_shown = shown[-1]["time_utc"]
     heavy.append({"fn": "fluidpy.diag.fronts.front_lines", "scene": "s55-s58", "data": "data/fronts.json",
-                  "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre'; lines attached to the tracked Ciarán centre (≤ 350 km), "
-                        "≥ 300 km long, clipped to 800 km from it, nearest to the previous hour's line",
+                  "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre'; chosen by shape (fix loop 2): warm E-SE of the tracked centre "
+                        "(≤ 350 km, clipped to 800 km), cold ≥ 800 km trailing S-SW (≤ 500 km, not clipped), continuity = gap + orientation; "
+                        "drawn while both exist from 12 UTC",
                   "params": {"T": "ERA5 850 hPa t (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc)", "locate": "centre",
-                             "attach_km": ATT_KM, "clip_km": CLIP_KM, "min_length_km": MINLEN},
+                             "attach_km": [ATT_W, ATT_C], "clip_km_warm": CLIP_KM, "min_length_km": [MINLEN_W, MINLEN_C],
+                             "bearing_warm": BEAR_W, "bearing_cold": BEAR_C, "bearing_cold_far_end": BEAR_FAR, "orientation_weight_km_per_deg": 10.0,
+                             "continuity_gate": {"mean_gap_km": CONT_KM, "axis_turn_deg": CONT_DEG}},
                   "output_sha256": parity_hash(json.dumps(hourly, sort_keys=True))})
-    found = sum(h["warm"] is not None for h in hourly), sum(h["cold"] is not None for h in hourly)
-    truth("M4", "s55 hourly fronts attached to Ciarán: a warm and a cold line in most hours (≥ 15 of 25)", min(found) >= 15, list(found))
     hidx = {h["time_utc"]: i_ for i_, h in enumerate(hourly)}
+    truth("N-M2", "s55 the warm + cold pair is drawn contiguously from 12 UTC 1 Nov up to 21 UTC 1 Nov (10 hours), none after",
+          [h["time_utc"] for h in shown] == hrs[:10] and last_shown == "2023-11-01T21", [len(shown), last_shown])
+    # CHECK rows for every hour shown
+    for h in shown:
+        ws, cs_ = h["warm_shape"], h["cold_shape"]
+        tt = h["time_utc"][11:13] + " UTC"
+        rng("N-M2", f"s55 {tt}: warm front centroid east to south-east of the low (bearing 45-160°)", ws["bearing_deg"], 45, 160)
+        rng("N-M2", f"s55 {tt}: cold front centroid south-west of the low (bearing 180-270°)", cs_["bearing_deg"], 180, 270)
+        truth("N-M2", f"s55 {tt}: the cold front lies south/west of the warm front relative to the low (bearing cold > warm)",
+              cs_["bearing_deg"] > ws["bearing_deg"], [ws["bearing_deg"], cs_["bearing_deg"]])
+        rng("N-M2", f"s55 {tt}: cold front length ≥ 800 km", cs_["length_km"], 800, 1e5)
+    k18 = hidx["2023-11-01T18"]
+    row("N-M2", "s55 18 UTC: the hourly cold front IS the s49 cold front (same line, mean point gap ≤ 1 km)",
+        mean_gap_km(hourly[k18]["cold"][0], hourly[k18]["cold"][1], cf18.lat, cf18.lon), 0, 1)
+    gaps = [h["cold_shape"]["gap_prev_km"] for h in shown[1:]] + [h["warm_shape"]["gap_prev_km"] for h in shown[1:]]
+    rot = [h["cold_shape"]["axis_change_deg"] for h in shown[1:]]
+    rng("N-M2", "s55 hour-to-hour continuity of the drawn lines: mean line-to-line gap ≤ 150 km every hour (max shown)", max(gaps), 0, CONT_KM)
+    rng("N-M2", "s55 hour-to-hour continuity of the drawn cold front: axis turns ≤ 30° per hour (max shown)", max(rot), 0, CONT_DEG)
 
     def brest_km(h, kind):
         return np.inf if h[kind] is None else float(np.min(gc_km(BREST[0], BREST[1], np.asarray(h[kind][0]), np.asarray(h[kind][1]))))
+
+    def warm_side(h, la_p, lo_p, off_km=150.0):
+        """sign of (point − nearest point of the cold line)·(unit normal towards the warmer T850, from ±150 km samples) [+1 warm side]"""
+        la_, lo_ = np.asarray(h["cold"][0]), np.asarray(h["cold"][1])
+        j = int(np.argmin(gc_km(la_p, lo_p, la_, lo_)))
+        j0, j1 = max(0, j - 2), min(len(la_) - 1, j + 2)
+        te, tn = enu_km(la_[j1], lo_[j1], la_[j0], lo_[j0])
+        nrm = np.hypot(te, tn)
+        ne, nn = tn / nrm, -te / nrm                                     # a normal (right of the tangent)
+        Th = T850h[h["time_utc"]]
+        Ta = bilin(Th, flat, flon, *dest(la_[j], lo_[j], ne * off_km, nn * off_km))
+        Tb = bilin(Th, flat, flon, *dest(la_[j], lo_[j], -ne * off_km, -nn * off_km))
+        if Tb > Ta:
+            ne, nn = -ne, -nn
+        pe, pn = enu_km(la_p, lo_p, la_[j], lo_[j])
+        return float(np.sign(pe * ne + pn * nn)), float(abs(Ta - Tb))
     dw = [brest_km(hourly[hidx[t]], "warm") for t in ("2023-11-01T18", "2023-11-01T19", "2023-11-01T20")]
-    dc = [brest_km(hourly[hidx[t]], "cold") for t in ("2023-11-02T00", "2023-11-02T01", "2023-11-02T02", "2023-11-02T03")]
-    rng("M4", "s57 the map's warm front passes Brest (≤ 100 km) during 18-20 UTC, as the Brest graph's gold band says", min(dw), 0, 100)
-    rng("M4", "s58 the map's cold front passes Brest (≤ 100 km) during 00-03 UTC 2 Nov, as the Brest graph's gold band says", min(dc), 0, 100)
-    dc_early = [brest_km(h, "cold") for h in hourly if h["time_utc"] <= "2023-11-01T20"]
-    rng("M4", "s55-s57 the cold front has not reached Brest before 21 UTC 1 Nov (> 150 km away)", min(dc_early), 150, 1e9)
-    jumps = [mean_gap_km(*hourly[i_][kd], *hourly[i_ - 1][kd]) for kd in ("warm", "cold") for i_ in range(1, len(hourly))
-             if hourly[i_][kd] is not None and hourly[i_ - 1][kd] is not None]
-    rng("M4", "s55-s58 hour-to-hour continuity: median mean gap between consecutive lines ≤ 100 km", float(np.median(jumps)), 0, 100)
+    rng("N-M2", "s57 the map's warm front passes Brest (≤ 50 km) during 18-20 UTC, as the Brest graph's gold band says", min(dw), 0, 50)
+    def tip(h):
+        la_, lo_ = np.asarray(h["cold"][0]), np.asarray(h["cold"][1])
+        j = int(np.argmin(gc_km(BREST[0], BREST[1], la_, lo_)))
+        return j in (0, len(la_) - 1)
+    sides = [("beyond the tip" if tip(h) else warm_side(h, BREST[0], BREST[1])[0]) for h in shown]
+    truth("N-M2", "s55-s57 the drawn cold front has not passed Brest 12-21 UTC: Brest on its WARM side (T850 ±150 km), or beyond its "
+                  "north-eastern tip (nearest point = end point)", all(s_ == "beyond the tip" or s_ > 0 for s_ in sides), sides)
+    # the fallback's reason, measured: after 21 UTC, any shape-valid cold line passes Brest within 50 km at 00-03 UTC?
+    after = []
+    for t in ("2023-11-02T00", "2023-11-02T01", "2023-11-02T02", "2023-11-02T03"):
+        Th, Uh, Vh = (f8[v].sel(time=t).values.astype(float) for v in ("t", "u", "v"))
+        kk = hrs.index(t)
+        cs = cands_of(FL(Th, Uh, Vh, flat, flon, locate="centre"), "cold", clat[kk], clon[kk])
+        after.append(min([float(np.min(gc_km(BREST[0], BREST[1], c_["lat"], c_["lon"]))) for c_ in cs], default=np.inf))
+    truth("N-M2", "fallback reason: no ≥ 800-km trailing (south-west) cold line comes within 50 km of Brest at 00-03 UTC 2 Nov "
+                  "(nearest, km per hour; inf = none exists), so s58 draws no front and the Brest graph carries the cold front",
+          all(a_ > 50 for a_ in after), [r6(a_, 0) if np.isfinite(a_) else "none" for a_ in after])
     fr8["hourly"] = hourly
-    fr8["hourly_method"] = ("front_lines(T850, u, v, locate='centre') each hour; shown: lines ≥ 300 km long that come within 350 km of the tracked "
-                            "Ciarán centre, clipped to 800 km from it, the candidate nearest to the previous hour's line (fix loop 1, M4)")
+    fr8["hourly_shown_until_utc"] = last_shown
+    fr8["hourly_candidates"] = cands_log
+    fr8["hourly_method"] = ("front_lines(T850, u, v, locate='centre') each hour, chosen by shape (fix loop 2, review 2 N-M2): warm = line E-SE of the "
+                            "tracked Ciarán centre (≤ 350 km, ≥ 300 km long, clipped to 800 km); cold = ≥ 800-km line trailing S-SW (≤ 500 km, not clipped); "
+                            "continuity = mean gap + 10 km/° orientation change; drawn while both exist from 12 UTC 1 Nov (to 21 UTC), then faded; "
+                            "after 21 UTC the trailing front has broken off the low and the only S-SW cold line lies 92-290 km SE of Brest before "
+                            "the station's 00-03 UTC cold-front passage, so the map shows no fronts after 21 UTC")
     files["fronts.json"] = fr8
     # hourly 10-m wind arrows (1.5°) on the s54-s56 panel
     wl, wo = np.arange(36.0, 60.1, 1.5), np.arange(-30.0, 10.1, 1.5)
