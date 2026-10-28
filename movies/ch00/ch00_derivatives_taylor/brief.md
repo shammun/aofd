@@ -21,12 +21,12 @@ pressure as a vertical coordinate, state function, perfect (exact) differential,
 volume, hydrostatic balance, scale height, exponential, heat and work as non-state quantities, internal energy, entropy,
 potential temperature (named), Taylor series, factorial, tropopause, weather front, linearisation, water vapour, vapour
 pressure, saturation, saturation vapour pressure, latent heat, Clausius–Clapeyron, black body, Stefan–Boltzmann constant,
-emission temperature, Planck response, radiative forcing (in words: "traps extra watts"), feedback, grid point, forward /
+emission temperature, Planck response, radiative forcing (in words: "adds watts per square metre of heating"), feedback, grid point, forward /
 backward / centred difference, first- and second-order accurate.
 
 ## The promise (s00)
 "In this video, we'll learn partial derivatives, the chain rule and Taylor series the easy way, and see how meteorology uses
-them to follow a weather balloon's temperature, and to find how much more water vapour warmer air can hold."
+them to follow a weather balloon's temperature, and to find how much more water vapour it takes to saturate warmer air."
 
 ## Two real moments carry the movie
 1. **The map: 18 UTC, 1 November 2023, Brest, Storm Ciarán's warm air arriving** (the series world of 0.3, 1a and 1b).
@@ -52,8 +52,8 @@ spoken number in CHECK rows (`data_needs.md` §D).
 | Perfect differential | s22–s29 | state function (Like/Unlike a hill's height vs the distance walked, real ETOPO hill); the exactness test from equal mixed partials (y dx ± x dy; loop −2); p = ρRT exact, dp/p = dρ/ρ + dT/T (warm air 3.4 % vs 3.3 % lighter); hydrostatic balance → dp/p = −dz/H, H 8570 m → p₀e^(−z/H) vs the balloon; heat on three routes 27/33/40 kJ/kg, ΔI = 0; đQ fails, đQ/T passes → entropy (116 J kg⁻¹ K⁻¹ on all routes), potential temperature named | `core.thermo.path_heat_work_totals`, `perfect_gas_entropy_change`, `core.statics.*`; NEW F1 `exactness_residual`, `loop_integral` |
 | Taylor series | s30–s36 | zoom until it's a line (real profile); first order 7.4 vs 6.9 and −8.4 vs −11.8; why h²/2 and 3!; e^h sums; pressure: the first term is hydrostatic balance (8.6 m per hPa; 880.4 / 887.3 / 887.0), the far step and the model error (517 vs 499 vs 500); where it fails (tropopause kink, fronts) | NEW F1 `taylor_polynomial`; `core.fd.taylor_table_sympy`; `igra.wmo_tropopause` |
 | Why | s37 | three good reasons | — |
-| Linearisation (applications) | s38–s43 | basic state + small disturbance; Clausius–Clapeyron (18.27) → 7.1 %/K at 0 °C (6.4, 5.7 at 15, 30), line vs exact (7.1/7.3, 28/32 %); climate: +1.1 °C → ~8 %, ERA5 water vapour rising since 1979, heavy rain ~7 %/°C (AR6); σT⁴ → T_e 255 K, Planck response 3.8 W m⁻² K⁻¹, 2×CO₂ 3.9 W m⁻² → ~1 °C (AR6 3.2 → 1.2 °C), feedbacks, line vs exact (3.79/3.76; 40/38) | `geo.moist.saturation_vapour_pressure`, NEW F3 `cc_fractional_rate`, NEW F2 `geo.radiation`, NEW F5 `global_mean`, `linear_trend`; D3 ERA5 TCWV, D4 CERES |
-| Finite differences (application) | s44–s46 | forward error (h/2) f″ and centred (h²/6) f‴ from Taylor; sin check −0.043 / −0.0009; ERA5 at Brest: −3.32/−3.09/−3.20 at 18 km, then −3.17, −3.14, −2.24, −0.98 as the grid coarsens; 9-km forecast models vs early climate models | `core.fd.stencil_error`, `stencil_taylor_coefficients`, `fd_derivative` |
+| Linearisation (applications) | s38–s43 | basic state + small disturbance; saturation in plain words (escaping and returning molecules balance; e_s set by temperature alone, not by the air); Clausius–Clapeyron (18.27) with L(0 °C) = 2.5 × 10⁶ J/kg → 7.3 %/K at 0 °C (6.4, 5.7 at 15, 30), line vs exact (7.3/7.5, 29/33 %); climate: +1.26 °C (2016–2025, Forster et al. 2026) → e_s ~9 % higher, observed near-surface vapour only ~4–5 % per °C (Allan et al. 2022), ERA5 water vapour rising since 1979 (checked from 1993 too), heavy rain projected ~7 %/°C (AR6 SPM B.2.4); σT⁴ → T_e 255 K, Planck response 3.8 W m⁻² K⁻¹, 2×CO₂ 3.9 W m⁻² → ~1 °C (AR6 3.2 → 1.2 °C), feedbacks, line vs exact (3.79/3.76; 40/38) | `geo.moist.saturation_vapour_pressure`, NEW F3 `cc_fractional_rate`, NEW F2 `geo.radiation`, NEW F5 `global_mean`, `linear_trend`; D3 ERA5 TCWV, D4 CERES |
+| Finite differences (application) | s44–s46 | forward error (h/2) f″ and centred (h²/6) f‴ from Taylor; sin check −0.043 / −0.0009; ERA5 at Brest: −3.32/−3.09/−3.20 at 18 km, then −3.17, −3.14, −2.24, −0.98 as the grid coarsens; grid history: the 1950 first computer forecast 736 km, early climate models a few hundred km, the leading global forecast models today ~9 km (ERA5's 0.25° data grid is interpolated from its ~31 km model grid, said as "the data") | `core.fd.stencil_error`, `stencil_taylor_coefficients`, `fd_derivative` |
 | Recap, end | s47–s48 | "To sum up, …" one beat per sentence; maths-tutorial end card with the related-movies row | — |
 
 ## Ending
@@ -90,3 +90,21 @@ air, climate machine, climate change (titles only). `related:` per scene in the 
 4. s28 uses a 50 % expansion so the three heat routes separate (27/33/40 kJ/kg); a realistic 5 % expansion gives routes within
    1 % of each other (planning check: 12.07/12.05/12.20 kJ/kg for 280 → 290 K, 0.80 → 0.85 m³/kg). Keep the large one, said as
    a thought experiment.
+
+## Source check applied (2026-10-28, `research/ch00_derivatives_taylor_sources.md`)
+| # | Scene | Change |
+|---|---|---|
+| 1, 2 | s41 | warming "about one and a quarter degrees" (1.26 °C, 2016–2025, Forster et al. 2026); "about nine percent" (DT54) |
+| 3 | s00, s39, s40, s41, s43, s47, title | no "air holds water vapour": saturation = escaping and returning molecules balance; e_s depends only on temperature, "not on the air"; the rule is said as the saturation vapour pressure rising ~7 % per degree |
+| 5 | s41 | heavy rain as a projection ("is expected to become … worldwide") |
+| 8 | s43 | "adds about three point nine watts per square metre of heating" |
+| 10, 11 | s46 | "the leading global forecast models today"; new line: the 1950 first computer forecast, grid points 736 km apart |
+| 12 | s07, s46 | "the ERA5 data come on a grid every quarter of a degree … going east"; "the data points … going east" |
+| 13 | s21 | balloons "have long reported pressure, and many of the equations become simpler that way" |
+| 14 | s09 | "once or twice a day, at about eight hundred stations around the world" |
+| 15 | s34 | "Pilots use this rule of thumb near the ground: about thirty feet for each hectopascal" (no altimeter claim) |
+| 19 | s39, s40 | L = 2.5 × 10⁶ J/kg at 0 °C ("a little less for warmer water") → 0.073 per K; line vs exact 7.3/7.5 %, 29/33 % |
+| 21 | s41 | new sentence: the rule is about saturated air; measured near-surface vapour rose ~4–5 % per degree (no claim that the observed rise equals the rule) |
+| 4 | data | DT53 from 1979 and from 1993 |
+| 7 | data | σ cited to CODATA 2022 |
+

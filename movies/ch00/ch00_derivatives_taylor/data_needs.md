@@ -1,5 +1,10 @@
 # ch00_derivatives_taylor (#4) — data needs, functions and CHECK rows (movie-director, 2026-10-28)
 
+**Source-check update (2026-10-28, `research/ch00_derivatives_taylor_sources.md`).** Applied: warming 1.26 °C (2016–2025,
+Forster et al. 2026) → DT54 ≈ 9 %; latent heat at 0 °C 2.501 × 10⁶ J/kg for the 7 % rule (DT40, DT51, DT52 re-based); ERA5
+0.25° is the delivered grid, its model grid is ~31 km (s07, s46 say "the data"); DT53 runs from 1979 and from 1993; σ cited
+to CODATA 2022; new DT46 (s36 warming above the tropopause), DT55 (s41 observed-vapour wording), DT73 (s46 history line).
+
 Every download goes through `fluidpy.data.fetch()` (or the dataset fetcher that wraps it: `fluidpy.data.cds.retrieve`,
 `fluidpy.data.igra.fetch_station`, `fluidpy.data.gibs.fetch_wms`) and `tools/disk_guard.py` (G: floor 50 GB, project cap
 150 GB, C: floor 40 GB). Raw files go to `G:/Geophysical Fluid Dynamics/aofd-data/raw/<KEY>/`; movie products go to
@@ -26,7 +31,7 @@ in `manifest.json` and the registry, never on screen. Build script: `movies/data
 | ISD Brest 18 / 20 UTC 1 Nov 2023 | 10.3 / 14.9 °C → 2.3 °C/h | s02 |
 | ISD Brest slp 17 / 18 UTC | 988.3 / 983.3 hPa → −5.0 hPa/h | s08 |
 | ERA5 850 hPa T at 48.5° N 4.5° W, 16–20 UTC | 2.11, 2.38, 5.12, 8.23, 6.82 °C; ∂T/∂t (17→19) = +2.92 K/h | s08, s16, s20 |
-| ∂T/∂x at 0.25° (Δx = 18.4 km): forward / backward / centred | −3.319 / −3.086 / −3.202 K per 100 km | s07, s46 |
+| ∂T/∂x at 0.25° (Δx = 18.4 km east–west at 48.5° N; 27.8 km north–south; this is ERA5's delivered latitude–longitude grid, interpolated from its ~31 km model grid, Hersbach et al. 2020): forward / backward / centred | −3.319 / −3.086 / −3.202 K per 100 km | s07, s46 |
 | ∂T/∂y centred 0.25° (forward −2.824) | −2.494 K per 100 km | s07 |
 | centred ∂T/∂x at 0.5°, 1°, 2°, 3° (36.8, 73.7, 147.4, 221.0 km) | −3.168, −3.140, −2.238, −0.984 K per 100 km | s46 |
 | mixed partials (0.25°, 17/19 UTC), both orders | 1.4285 × 10⁻⁹ K m⁻¹ s⁻¹ (identical) | s10 |
@@ -46,9 +51,10 @@ in `manifest.json` and the registry, never on screen. Build script: `movies/data
 | p at the 500 hPa level (5627 m above): line / +bend / +cubic / exp; layer-mean T̄ and its exponential | 342.6 / 557.6 / 510.5 / 517.3 hPa; T̄ = 277.4 K → 498.7 hPa | s35 |
 | WMO tropopause (`igra.wmo_tropopause`) | 13 072 m, 206.85 K (−66.3 °C) | s36 |
 | three routes A (0.80 m³/kg, 280 K, 1004.5 hPa) → B (1.20 m³/kg, 280 K) | q = 26.79 (isochoric then isobaric) / 32.59 (isothermal) / 40.19 (isobaric then isochoric) kJ/kg; Δe = 0; Δη = 116.39 J kg⁻¹ K⁻¹ on all | s28, s29 |
-| e_s(0, 15, 30 °C) (`moist.saturation_vapour_pressure`, L 2.44e6, R_v 462) | 6.19, 16.92, 41.91 hPa | s39 |
-| L/(R_v T²) at 0, 15, 30 °C | 7.08, 6.36, 5.75 % per K | s40 |
-| +1 K / +4 K at 0 °C: exact vs linear | 7.31 vs 7.08 %; 32.19 vs 28.31 % | s40 |
+| e_s(0, 15, 30 °C) (`moist.saturation_vapour_pressure`, library defaults L 2.44e6, R_v 462, e0 6.12 hPa at 273 K; the drawn s39–s40 curve) | 6.19, 16.92, 41.91 hPa (standard tables 6.11, 17.04, 42.4; spoken "about six, seventeen, forty two" covers both) | s39 |
+| L/(R_v T²) at 0, 15, 30 °C with L(T) = 2.501 × 10⁶ − 2370 T[°C] J/kg (2.501, 2.465, 2.430 × 10⁶; `moist.cc_fractional_rate(T, L=L(T))`) | 7.26, 6.43, 5.72 % per K (spoken 0.073 with the rounded 2.5 × 10⁶ and 273 K: 7.26 %; library default L 2.44 × 10⁶ would give 7.08, 6.36, 5.75) | s40 |
+| +1 K / +4 K at 0 °C: exact vs linear (exact = `moist.saturation_vapour_pressure(T, e0=611.2, T0=273.15, L=2.501e6)`, constant L over 0–4 °C; Bolton 1980 agrees to 0.06 %) | 7.50 vs 7.26 %; 33.11 vs 29.02 % (spoken 7.5 vs 7.3; 33 vs 29) | s40 |
+| s41: 1.26 K × 7.26 %/K (linear); compounded (1.0726)^1.26 − 1 | 9.14 %; 9.23 % (spoken "about nine percent") | s41 |
 | T_e = (240/σ)^¼, 4σT_e³ | 255.06 K; 3.764 W m⁻² K⁻¹ | s42 |
 | σ[(T_e + ΔT)⁴ − T_e⁴] vs 4σT_e³ ΔT | ΔT 1: 3.786 vs 3.764; ΔT 10: 39.91 vs 37.64 W m⁻² | s43 |
 | no-feedback warming 3.93/3.764 and 3.93/3.22 | 1.04 K; 1.22 K | s43 |
@@ -59,18 +65,25 @@ in `manifest.json` and the registry, never on screen. Build script: `movies/data
 |---|---|---|---|---|---|---|
 | D1 | **IGRA2** Trappes period-of-record refresh (`IGRA2`, `fluidpy.data.igra.fetch_station("FRM00007145")`) | the newest 00 and 12 UTC soundings at production (keep 2026-09-30 if the newest lacks elapsed time on > 90 % of levels) | ~32 MB zip (overwrites A3) | NOAA NCEI, no restriction | s09, s18, s19, s30–s36 | series rule: latest data. If the date changes, every s09/s18/s19/s21/s26/s31/s34/s35 number is re-derived by the build script and the sentences are reworded and re-measured. Runner-up: keep A3 (on disk) |
 | D2 | **ERA5 pressure levels** (`ERA5-CDS`, CDS `reanalysis-era5-pressure-levels`, account set up; `fluidpy.data.cds.retrieve`) | 2026-09-30 T00, T12 (and the sounding's day at production); `temperature`, `u/v_component_of_wind` at 850, 700, 500 hPa; box 45–52° N, 3° W–7° E, 0.25° | ~2 MB | CC BY 4.0 (Copernicus) | s19 (sideways term along the drift), s09 inset map | the horizontal ∂T/∂x, ∂T/∂y the balloon drifted through (CHECK DT26). Runner-up: GFS 0.25° analysis from the AWS archive `noaa-gfs-bdp-pds` (public domain; needs NEW F7: NOMADS keeps only ~10 days, so `gfs.fetch_analysis` cannot reach 30 Sep) |
-| D3 | **ERA5 monthly single levels** (`ERA5-CDS-monthly`, CDS `reanalysis-era5-single-levels-monthly-means`) | `total_column_water_vapour`, 1979-01 → latest complete month, global, 1° (product: global-mean annual series + per-cell trend at 2°) | ~70 MB raw → < 2 MB product | CC BY 4.0 | s41 | latest + history of the water vapour the 7 % rule predicts. Runner-up: NCEP/NCAR R1 monthly `pr_wtr.eatm.mon.mean.nc` (PSL OPeNDAP, open, public domain; coarser, older physics) |
+| D3 | **ERA5 monthly single levels** (`ERA5-CDS-monthly`, CDS `reanalysis-era5-single-levels-monthly-means`) | `total_column_water_vapour`, 1979-01 → latest complete month, global, 1° (product: global-mean annual series + per-cell trend at 2°; global-mean trend from 1979 **and from 1993**, both in the manifest, because ERA5's low-level tropical vapour falls before about 1993, Allan et al. 2022) | ~70 MB raw → < 2 MB product | CC BY 4.0 | s41 | latest + history of the water vapour the 7 % rule predicts. Runner-up: NCEP/NCAR R1 monthly `pr_wtr.eatm.mon.mean.nc` (PSL OPeNDAP, open, public domain; coarser, older physics) |
 | D4 | **CERES EBAF-TOA Ed4.2** monthly (`CERES-EBAF`, NASA Earthdata via `earthaccess`, account set up) | `toa_lw_all_mon`, 2001-03 → latest month, global 1° | ~60 MB | NASA open data | s42, s43 | the measured ≈ 240 W/m² and an infrared globe. Runner-up: NOAA Interpolated OLR monthly (`NOAA-OLR`, PSL OPeNDAP, open; Liebmann & Smith 1996; not absolutely calibrated, so CERES is preferred for the global mean) |
 | D5 (optional) | NASA GIBS true colour 2026-09-30 (`NASA-GIBS`, `gibs.fetch_wms`, Paris region 45–52° N, 3° W–7° E) | one day, 0.01° | ~6 MB | NASA open | s09 globe close-up | the Trappes launch day seen from space. Runner-up: BMNG (A7) |
 
 Cited numbers (research-scout confirms wording and values before the build; they go to `reference/ch00/SOURCES.md` and the
 manifest, never on screen):
-- IPCC AR6 WG1 SPM A.1.2: global surface temperature 2011–2020 was 1.09 [0.95–1.20] °C above 1850–1900 (spoken "about one point one degrees since the late eighteen hundreds").
-- IPCC AR6 WG1 SPM B.2.4 / Ch. 11 executive summary: heavy precipitation intensifies by about 7 % per °C of global warming (spoken "the heaviest daily rainfall becomes about seven percent more intense for each degree").
-- IPCC AR6 WG1 Ch. 7 §7.3.2.1: effective radiative forcing of 2 × CO₂ = 3.93 ± 0.47 W m⁻²; Table 7.10: Planck response −3.22 W m⁻² K⁻¹.
-- ECMWF IFS: high-resolution (HRES/ENS) grid about 9 km since 2016/2023 (spoken "about nine kilometres"; reworded if ECMWF has moved finer by production).
-- Early climate models: a few hundred km grids (IPCC AR4 WG1 Ch. 1, Fig. 1.4 resolution history: ~500 km FAR, ~250 km SAR).
-- Stefan–Boltzmann σ = 5.670374419 × 10⁻⁸ W m⁻² K⁻⁴ (CODATA 2018; Vallis quotes 5.67 × 10⁻⁸).
+- Forster et al. 2026, *Indicators of Global Climate Change 2025*, ESSD 18, 3889–3933 (doi:10.5194/essd-18-3889-2026): observed warming 2016–2025 vs 1850–1900 = 1.26 [1.13–1.36] °C (spoken "about one and a quarter degrees since the late eighteen hundreds"; keyword "+1.26 °C (2016–2025)"). Replaces AR6 SPM A.1.2 (1.09 °C, 2011–2020), which is out of date.
+- IPCC AR6 WG1 SPM B.2.4: "At the global scale, extreme daily precipitation events are projected to intensify by about 7% for each 1°C of global warming" (spoken as a projection: "is expected to become about seven percent more intense").
+- IPCC AR6 WG1 Technical Summary: near-surface moisture capacity about 7 % per °C (the rule, s40). Allan, Willett, John & Trent 2022, JGR Atmos. 127, e2022JD036728 (doi:10.1029/2022JD036728): observed near-surface water vapour rises only about 4–5 % per °C of global warming; ERA5 low-level tropical vapour inconsistent before about 1993 (spoken in s41 sentence 4; the narration never says the observed rise equals the rule).
+- AR6 WG1 Ch. 2 §2.3.1.3.3: global TCWV trends positive, very likely, since 1979 (s41 sentence 5, with our ERA5 DT53).
+- Latent heat of vaporisation 2.501 × 10⁶ J/kg at 0 °C, 2.442 × 10⁶ at 25 °C (standard tables; e.g. U. Alberta EAS327). The library default 2.44 × 10⁶ (Vallis Fig. 18.1 caption) is L near 25 °C; the movie uses L(0 °C) for the 0 °C rate (7.26 %/K) and says "a little less for warmer water".
+- IPCC AR6 WG1 Ch. 7 §7.3.2.1: effective radiative forcing of 2 × CO₂ = 3.93 ± 0.47 W m⁻² (spoken "adds about three point nine watts per square metre of heating"); Table 7.10: Planck response −3.22 [−3.4 to −3.0] W m⁻² K⁻¹ (re-check Table 7.10 in the PDF before release; seen only in secondary citations).
+- ECMWF IFS: about 9 km (TCo1279) since 2016 (HRES) / 2023 (ENS); unchanged by IFS Cy50r1 (12 May 2026). Spoken "the leading global forecast models today … about nine kilometres" (not "best"; km-scale research runs are finer).
+- Early climate models: a few hundred km grids (IPCC AR4 WG1 Ch. 1, Fig. 1.4 resolution history: ~500 km FAR 1990, ~110 km by 2007; via CSIRO/BoM *Climate Change in Australia*).
+- First computer forecast (ENIAC, 1950; Charney, Fjørtoft & von Neumann 1950, Tellus 2, 237–254): 19 × 16 grid, interval 736 km (Lynch, *Forecasts by PHONIAC*). Spoken in s46.
+- ERA5 (Hersbach et al. 2020, QJRMS 146, 1999–2049, doi:10.1002/qj.3803): model grid ~31 km; the 0.25° product is an interpolation (s07, s46 say "the data come on a grid" / "the data points").
+- Radiosondes: launches at 00 and 12 UTC, some stations once a day; about 800 IGRA stations report in near real time (NOAA NCEI IGRA page; Durre et al. 2018, JTECH 35, 1753–1770). Spoken "once or twice a day, at about eight hundred stations". Many GPS sondes compute pressure from GNSS height (Meteomodem M10), so s21 no longer says a balloon "measures pressure directly".
+- Pilots' rule of thumb about 27–30 ft per hPa near the ground (SKYbrary); altimeters themselves use the full standard-atmosphere formula, so s34 names pilots only.
+- Stefan–Boltzmann σ = 5.670374419 × 10⁻⁸ W m⁻² K⁻⁴, exact (NIST CODATA 2022, unchanged from 2018; Vallis quotes 5.67 × 10⁻⁸).
 
 ## C. Library functions
 ### Existing, tested (fluidpy; re-run by QA)
@@ -93,7 +106,7 @@ manifest, never on screen):
 |---|---|---|---|---|
 | F1 | `secant_slopes(f, x0, steps)`; `taylor_polynomial(derivs, h, order=None)` (returns all partial sums); `total_differential(slopes, steps)` (returns terms + sum); `chain_rule_rate(dFdt, grad, velocity)` (terms + total); `mixed_partials(F, x, t)` (both orders by centred differences); `exactness_residual(M, N, x, y)` (sympy ∂M/∂y − ∂N/∂x); `loop_integral(M, N, path)` (trapezoid along a closed path) | Kundu App. B §B.1 (p. 857–858: partials, order of partials, the total-derivative display before (B.1.1)); Kundu (10.4) Taylor rows; Vallis §1.5.2 (1.69) equal mixed partials of an exact differential | `fluidpy/geo/calculus.py` (new module) | V1 x² at 3: secants 7, 6.1, 6.01; V1 e^h partial sums at 0.1 (1, 1.1, 1.105, 1.1051667) and V7 order 20 → e within 1e-12; V2 sympy `series` equals the partial sums; V1 x²t mixed partials = 2x both orders, and V7 finite-difference orders agree to round-off on random smooth fields; V7 chain_rule_rate equals the centred time-difference of a field sampled along a straight path (rel 1e-4 at small dt); V2 y dx + x dy → residual 0, y dx − x dy → 2; V1 unit-square loop −2 (anticlockwise) and 0 for the exact form |
 | F2 | `SIGMA_SB`; `blackbody_flux(T)`; `emission_temperature(F)`; `planck_response(T)` = 4σT³ | Stefan's law as in Vallis §14.1, (14.1) σT⁴_rad = S(1 − α) | `fluidpy/geo/radiation.py` (new module) | V1 F = 240 → 255.06 K and back; V2 sympy d(σT⁴)/dT; V7 planck_response equals the centred numerical derivative of blackbody_flux (rel 1e-8); V1 4F/T identity |
-| F3 | `cc_fractional_rate(T, L=L_V, Rv=R_V)` = L/(R_v T²) | Vallis §18.1.4, (18.27) divided by e_s | `fluidpy/geo/moist.py` | V1 273.15 K → 0.0708 K⁻¹; V7 equals d ln e_s/dT of `saturation_vapour_pressure` by centred differences (rel 1e-7); V7 decreases with T |
+| F3 | `cc_fractional_rate(T, L=L_V, Rv=R_V)` = L/(R_v T²) (the movie passes L(T) = 2.501 × 10⁶ − 2370 T[°C], see §A) | Vallis §18.1.4, (18.27) divided by e_s | `fluidpy/geo/moist.py` | V1 273.15 K → 0.0708 K⁻¹ (default L), 0.0726 K⁻¹ (L = 2.501 × 10⁶); V7 equals d ln e_s/dT of `saturation_vapour_pressure` by centred differences (rel 1e-7); V7 decreases with T |
 | F4 | `ascent_rates(z, T, etime, p=None)` → per-layer w, dT/dt, dT/dz (and dT/dp); `layer_lapse_rate(z, T, z1, z2)`; `drift(wspd, wdir, etime, top=None)` → (east, north) km | layer differences of a sounding; drift = ∫(u, v) dt along etime (trapezoid) with `atmos.wind_components`; Vallis §2.10 context for the lapse rate (both sign conventions, `knowledge/notation.md`) | `fluidpy/diag/sounding.py` (new) | V1 synthetic linear profile (T = 15 − 6.5z, z = 5t) → w 5 m/s, dT/dz −6.5 K/km, dT/dt −0.0325 K/s; V7 w·dT/dz = dT/dt identity per layer; V1 constant wind 10 m/s from the west for 600 s → 6 km east; V7 dT/dp = (dT/dz)(dz/dp) |
 | F5 | `global_mean(field, lat)` (cos-latitude weights, NaN-aware); `linear_trend(series, per="decade")` (least squares, returns slope and its standard error) | area weighting on the sphere (Vallis §2.2 geometry; the weight cos ϑ of the area element) | `fluidpy/diag/climatology.py` (extend) | V1 constant field → that constant; V7 a field ∝ sin(lat) → 0; V1 trend of an exact line; V7 trend of white noise ≈ 0 within 3 SE |
 | F6 | `fetch_ebaf_toa(start, end, var="toa_lw_all_mon")` | CERES EBAF-TOA Ed4.2 via `earthaccess` → `fluidpy.data.fetch()` + disk guard; licence and citation (Loeb et al. 2018, J. Climate 31, 895) in the attrs | `fluidpy/data/ceres.py` (new) | V1 a tiny recorded file parses; V7 global mean of the 2001–latest climatology within 235–245 W/m² |
@@ -122,15 +135,21 @@ sentence 10 reworded) · DT28 ∂z/∂p −12.18 m/hPa, ∂T/∂p +0.0689 K/hPa 
 DT35 the measured p(z) lies below the isothermal exponential above 3 km at every level · DT36 heat 26.79/32.59/40.19 kJ/kg
 (spoken 27/33/40), Δe = 0 on all · DT37 Δη 116.39 J kg⁻¹ K⁻¹ on all three routes · DT38 residuals R/α and 0 (sympy) · DT39
 slope −4.86 K/km; 7.44 vs 6.87 (off 0.57: "half a degree"); −8.41 vs −11.8 (off 3.39) · DT40 title e_s tangent at 0 °C =
-7.1 %/K · DT41 Taylor table rows s^p/p! for s = ±1 (sympy) · DT42 e^0.1 sums 1, 1.1, 1.105, 1.1051667 vs 1.1051709; e^1 sums
+7.26 %/K (L 2.501 × 10⁶; label "7 % per °C") · DT41 Taylor table rows s^p/p! for s = ±1 (sympy) · DT42 e^0.1 sums 1, 1.1, 1.105, 1.1051667 vs 1.1051709; e^1 sums
 1, 2, 2.5, 2.6667, 2.7083 → 2.7183 · DT43 ρ₀ 1.186, 11.64 Pa/m, 8.59 m/hPa; 880.4, 887.3, 887.0; measured 887.0 at 1006 m ·
-DT44 342.6, 557.6, 510.5, 517.3; T̄ 277.4 K → 498.7 hPa; measured 500.0 · DT45 tropopause 13 072 m, 206.85 K · DT50 e_s 6.19,
-16.92, 41.91 hPa · DT51 7.08, 6.36, 5.75 %/K · DT52 +1 K 7.31 vs 7.08 %; +4 K 32.19 vs 28.31 % · DT53 D3 global-mean TCWV
-1979→latest trend > 0 at 3 SE (the s41 sentence names no number; if the builder adds one, it is measured and re-timed) ·
-DT54 1.09 × 7.08 % = 7.7 % ("about eight percent") · DT60 T_e 255.06 K; 4σT³ 3.764 · DT61 D4 global mean OLR 2001→latest in
+DT44 342.6, 557.6, 510.5, 517.3; T̄ 277.4 K → 498.7 hPa; measured 500.0 · DT45 tropopause 13 072 m, 206.85 K · DT46 the profile above 13.07 km warms (T at 15 km > T at the tropopause); if it is only
+near-isothermal, s36 sentence 2 becomes "the cooling stops" without "gets a little warmer" and is re-measured · DT50 e_s 6.19,
+16.92, 41.91 hPa · DT51 with L(T): 7.26, 6.43, 5.72 %/K (spoken 7, 6.4, 5.7; with 2.5 × 10⁶ and 273 K: 0.073) · DT52 +1 K exact 7.50 vs line
+7.26 %; +4 K exact 33.11 vs line 29.02 % (exact: `saturation_vapour_pressure(T, e0=611.2, T0=273.15, L=2.501e6)`; Bolton 1980
+within 0.1 %) · DT53 D3 global-mean TCWV trend > 0 at 3 SE **from 1979 and from 1993** to the latest year, both slopes (% per
+decade ± SE) in the manifest (Allan et al. 2022 ERA5 caveat); if either fails, s41 sentence 5 becomes "rising over the last
+few decades" (or names the period that passes) and is re-measured; the sentence names no number ·
+DT54 1.26 × 7.26 % = 9.1 % linear, 9.2 % compounded ("about nine percent"; keyword "+1.26 °C (2016–2025)", CalcStack
+"1.26 × 7 % ≈ 9 %") · DT55 s41 sentence 4 ("about four to five percent for each degree of global warming") is the cited
+Allan et al. 2022 value, not ours; no on-screen number · DT60 T_e 255.06 K; 4σT³ 3.764 · DT61 D4 global mean OLR 2001→latest in
 235–245 W/m² (else s42 sentence 3 reworded) · DT62 3.93/3.764 = 1.04 K; 3.93/3.22 = 1.22 K · DT63 3.786 vs 3.764; 39.91 vs
 37.64 W/m² · DT70 forward order 1, leading 1/2; central order 2, leading 1/6 · DT71 sin errors −4.294e-2, −9.001e-4 · DT72
-s46 list ± 0.01 K/100 km.
+s46 list ± 0.01 K/100 km · DT73 s46 history line: 736 km (ENIAC 1950), "a few hundred" (FAR ~500 km), 9 km (IFS TCo1279) as cited.
 
 ## E. Pronunciations to check in the render (lexicon not edited; proposed entries)
 Clausius–Clapeyron (`[Clausius](/klˈWziəs/)`, `[Clapeyron](/klæpˈAɹən/)` — the French "kla-pay-RON" is also heard; pick one
