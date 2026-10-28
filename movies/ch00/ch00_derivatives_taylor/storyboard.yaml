@@ -1,0 +1,2767 @@
+# ch00_derivatives_taylor storyboard v1 (movie-director, 2026-10-28). S<k> = sentence k of the scene; AT(k, "words") a phrase inside it.
+# House style movies/HOUSE_STYLE.md binding (no headings except s00, keywords only, no boxes, no references or badges, 44-px floor,
+# caption band empty). Per scene: kind / data / tool / runner_up / why / related. Equation provenance (vallis_eq, page_png) is for QA only
+# and never drawn. Data, functions and CHECK ids (DTnn): data_needs.md. Times: MEASURED (tools/tts.py dry run, af_bella x 1.0).
+# Colour contract (house-dark-v1): d/dt and the fixed thermometer slate; travellers and advection teal; steps, unit axes and
+# gradients orange; negative rose + '−' glyph; gravity brown (s26); keywords warm white; pointers gold.
+id: ch00_derivatives_taylor
+title: 'Derivatives and Taylor series: the rate a balloon feels, and why warm air holds 7 % more water per degree'
+version: 1
+concepts:
+- derivative as a limit and as the tangent's slope (standard)
+- partial derivatives; mixed partials commute (Kundu App. B §B.1, p. 857; Vallis (1.69))
+- total differential and the chain rule along a path (Kundu p. 858 display before (B.1.1); (B.1.4) named only)
+- changing variables by the chain rule, z -> p (Kundu (B.2.1), one-variable case)
+- 'perfect (exact) vs inexact differentials: p = rho R T, heat and work, entropy (Vallis (1.53), (1.61)-(1.63), (1.65), (1.69))'
+- hydrostatic balance and the scale height as differentials (Vallis (1.51), (1.53))
+- Taylor series and linearisation (Kundu (10.4)-(10.5))
+- 'Clausius-Clapeyron linearised: the 7 % rule (Vallis (18.27))'
+- 'Stefan-Boltzmann linearised: the Planck response (Vallis (14.1) form)'
+- finite differences and truncation error (Kundu (10.6))
+target_duration_s: 2755.125
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: Chapter 0 series (plan v2)
+  position: 'Stage 1 #4'
+  previous: ch00_cross_product_uses (#3)
+  next: ch00_coordinates (#5, planned)
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py, user 2026-10-28)'
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    style: tangent-glide (NEW style to add to tools/sound/styles.py; spec below)
+    spec: B-flat major with a Lydian E natural, 4/4 at 72 bpm; a soft FM electric-piano phrase that is played first as one note, then
+      two, three and four notes on successive bars (the Taylor partial sums), over a warm triangle pad (chords Bb - Gm7 - Ebmaj7 - F,
+      8 s each); a quiet pizzicato pluck walking up a scale every eight bars like a balloon rising; no drums; reverb medium, wet 0.25;
+      low-pass 6 kHz
+    seed: 17
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent end-card hold
+    runner_up: sun-radiant (E major) seed 17, if the new style is not added
+    distinct_from: maths-calm (dot product), rotation-turning (cross product), index-lattice / index-lattice-cycle (1a / 1b), air-flowing
+      + storm-tense (weather basics), data-curious + planet-wide (reading weather maps)
+  effects_candidates:
+  - scene: s09_partial_height
+    kind: wind_gentle
+    intensity: 0.12
+    shows: the balloon released and rising
+  - scene: s16_flight_east
+    kind: engine_hum_far
+    intensity: 0.08
+    shows: the small plane flying east (thought experiment)
+  - scene: s17_flight_west
+    kind: engine_hum_far
+    intensity: 0.08
+    shows: the plane turning and flying west
+  - scene: s18_balloon_rate
+    kind: wind_gentle
+    intensity: 0.1
+    shows: the balloon climbing
+  effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word (sentence
+    gaps only); one at a time; no caption tags (no sound carries meaning the voice does not say)'
+measured_narration_s: 2752.625
+measured_frames: 82654
+words: 6587
+sentences: 409
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_derivatives_taylor/dryrun/v2
+  audio_s: 2752.625
+  speech_s: 2515.1
+  cues: 679
+  self_check:
+    expected_s: 2752.625
+    audio_s: 2752.625
+    diff_ms: -0.0
+    len_ok: true
+    cues_ok: true
+  warnings: []
+  words_per_minute_overall: 143.6
+  words_per_minute_speaking: 157.1
+  beats: 65
+  lexicon: movies/lexicon.yaml as of HEAD (not edited; proposed entries listed in script.md)
+moments:
+  map: 18 UTC 1 Nov 2023, Brest (48.45 N, 4.42 W), Storm Ciaran's warm air arriving; ERA5 850 hPa + Brest SYNOP (series world of 0.3,
+    1a, 1b)
+  sounding: 12 UTC 30 Sep 2026, Trappes (48.77 N, 2.01 E), the newest IGRA2 sounding on disk (elapsed time on every level); refreshed
+    to the newest at production (D1)
+cross_reference_rule: 'user 2026-10-27 (series_plan_v2_proposal.md Notes): spoken pointer + end-card listing for every operator another
+  movie explains in depth; related: per scene; no on-screen citations'
+honesty_notes:
+- The flights (s16, s17) are thought experiments on a real field and are said as such; the car (s15) is on a made-up frozen map, said.
+- 's18-s19: the balloon''s rate is measured (IGRA2 elapsed time); the lapse rate of s09 comes from the same balloon, so s19 does not
+  claim an independent check: it sizes the other two kinds of term (fixed-place change from the 00 and 12 UTC soundings; sideways from
+  D2) and says the rising term makes about 99 %.'
+- s19's sideways number (about 1e-4 K/s) is a planning estimate until D2 is fetched; the sentence is reworded to the data and re-measured
+  by the builder (CHECK DT26).
+- 's20: DT/Dt is named and computed but not derived; it is handed to the material-derivative movie (#10). The leftover -0.8 K/h is not
+  attributed to any cause on screen or in the voice.'
+- 'Lapse-rate convention: s09 says both signs; the computed quantity is dT/dz (negative), the meteorological lapse rate is its negative
+  (knowledge/notation.md).'
+- 's22: the hill and trails are a real ETOPO place; trail lengths are of our drawn trails (illustrative), the height gain is real.'
+- 's28: a 50 % expansion is used so the three routes separate clearly; it is a thought experiment on an ideal-gas parcel (dry air, reversible
+  routes).'
+- 's35: the remaining 17 hPa is attributed to the isothermal model (assumption said), and checked with the layer-mean temperature (498.7
+  hPa).'
+- 's39-s40: constants follow fluidpy.geo.moist (L = 2.44e6 J/kg, R_v = 462 J/kg/K, saturation over liquid water at all temperatures);
+  the 7 % rule is the fractional slope at 0 °C (7.1 %), 6.4 % at 15 °C, said.'
+- 's41: ''1.1 degrees'' is IPCC AR6 WG1 SPM A.1.2 (2011-2020 vs 1850-1900: 1.09 K); ''heaviest daily rainfall about 7 % per degree''
+  is IPCC AR6 WG1 SPM B.2.4 / Ch. 11 (research-scout confirms the exact wording before the build); the TCWV rise is our ERA5 computation
+  (D3).'
+- 's42-s43: 240 W/m2 is the CERES EBAF global mean (D4; the builder asserts 235-245 W/m2); the doubling forcing 3.93 W/m2 and the Planck
+  feedback -3.22 W/m2/K are IPCC AR6 WG1 Ch. 7 (§7.3.2.1; Table 7.10), in the manifest, never on screen as citations.'
+- 's46: ''9 km'' is the ECMWF IFS high-resolution grid at production time (research-scout confirms; reworded if ECMWF has moved to a
+  finer grid); ''a few hundred kilometres'' for early climate models follows IPCC AR4 WG1 Ch. 1 (FAR-era T21-T42 grids).'
+- Exaggerations (temperature as relief in s05/s11/s13; relief x5 in s22; column x20 in s26; zooms) and time compression (s04, s08, s09,
+  s16-s18) are recorded here and in the manifest, not badged (HOUSE_STYLE §5).
+- Every spoken number is a planning value from the tested library on the files on disk (2026-10-28) and is re-asserted by CHECK rows
+  (data_needs.md §D); s19, s41 and s42 wait for D2-D4.
+quiz_hook: A balloon rises at 5 m/s through air that cools by 6.5 degrees per kilometre, while the air at every height warms by 1 degree
+  per hour. Which term of the chain rule dominates its thermometer, and what does it read per minute?
+headings_exception: 's00_title only: the one title frame'
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 16.15
+  sentence_times:
+  - - 0.3
+    - 15.35
+  beat: opening title
+  visual: 'TITLE FRAME (HOUSE_STYLE §3, house/kit/title.tsx). Left x 100-1075: RiseText ''Derivatives'' / ''and Taylor series'' (150
+    px / 120 px if ''and Taylor series'' needs it to fit 975 px; weight 800, TitleGradient teal -> gold); ''made easy'' (96 px, warm
+    white) pulses x1.06 on AT(1, ''the easy way''); ''and how meteorology uses them'' (68 px, ''meteorology'' teal). Right x 1130-1840,
+    y 180-636 (>= 50 px clear). Part A (frame 0 -> AT(1, ''meteorology'')): the real Trappes temperature profile (2026-09-30 12 UTC,
+    0-14 km) drawn as a slate curve; a gold tangent line glides up it while a zoom window around the tangent point magnifies until the
+    curve and the tangent coincide (the ''zoom until it is a line'' idea). Part B (12-frame cross-fade on ''meteorology''): a small
+    balloon glyph rises along the same profile with its thermometer readout ticking 12.3 -> -11.8 °C (the s18 numbers), then on AT(1,
+    ''water vapour'') the saturation curve e_s(T) fades in with its gold tangent at 0 °C and the keyword ''7 % per °C''. No other text.
+    Poster = frame 200.'
+  voiceover: In this video, we'll learn partial derivatives, the chain rule and Taylor series the easy way, and see how meteorology
+    uses them to follow a weather balloon's temperature, and to find how much more water vapour warmer air can hold.
+  on_screen_eq:
+    latex: T(z_0+h)\approx T(z_0)+h\,\frac{dT}{dz}
+    vallis_eq: 'provenance only: first two terms of the Taylor row Kundu (10.4) (page image checked); our variables'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source:
+    fn: fluidpy.data.igra.find_sounding + fill_heights; fluidpy.geo.calculus.taylor_polynomial (NEW F1); fluidpy.geo.moist.saturation_vapour_pressure
+      + cc_fractional_rate (NEW F3)
+    params:
+      station: FRM00007145
+      time: 2026-09-30T12
+      T0_C: 0.0
+    test: CHECK DT01, DT40, DT60
+  exaggeration:
+  - zoom window magnification x8 (title animation only)
+  - 'balloon rise compressed: 15 min in about 4 s'
+  kind: data chart animation
+  data: A3 IGRA2 Trappes 2026-09-30T12 (latest on disk; D1 refresh)
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom)
+  runner_up: three.js profile ribbon in 3-D (heavier, adds nothing for a 1-D curve)
+  why: 'the movie''s two central pictures from its own data on frame 0: a real curve becoming its tangent, and a linearised climate
+    curve'
+  related: []
+- id: s01_hook
+  t:
+  - 16.15
+  - 28.55
+  sentence_times:
+  - - 16.15
+    - 20.35
+  - - 20.7
+    - 24.175
+  - - 24.525
+    - 27.75
+  beat: hook question
+  visual: 'Full width x 80-1840, y 40-860. From frame 0 the core picture: left half the ERA5 850 hPa temperature map over Brittany and
+    the Channel at 18 UTC 1 Nov 2023 (MAP850), Brest a gold dot with billboard ''Brest'' (54 px); right half the Trappes profile (from
+    s00, slate). S1: a slow 3 % push-in on the map. S2 on AT(2, ''what they are''): the symbols ∂T/∂x, dT/dt and f(x₀+h) appear one
+    by one as keywords (84 px KaTeX) along the top of the right half; on ''about the weather'' the map and the profile brighten together.
+    No narrated sentence on screen.'
+  voiceover: What are partial derivatives, the chain rule and Taylor series? Let's see what they are, and why they're built this way.
+    Then let's see what they tell us about the weather.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.open_box (A1 product) + fluidpy.data.igra.find_sounding
+    params:
+      time: 2023-11-01T18
+      sounding: 2026-09-30T12
+    test: CHECK DT10, DT01
+  exaggeration: []
+  kind: map + profile
+  data: A1 ERA5 850 hPa 18 UTC; A5 GIBS; A6 Natural Earth; A3 IGRA2
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay
+  runner_up: three.js globe turned to Brittany (used in 1a/1b; a flat map reads better for gradients)
+  why: 'the core pictures on the first frame: the real field we differentiate and the real curve we expand'
+  related: []
+- id: s02_average_rate
+  t:
+  - 28.55
+  - 73.1
+  sentence_times:
+  - - 28.55
+    - 32.575
+  - - 32.925
+    - 48.9
+  - - 49.25
+    - 52.7
+  - - 53.05
+    - 55.175
+  - - 55.525
+    - 61.25
+  - - 61.6
+    - 64.35
+  - - 65.85
+    - 68.6
+  - - 68.95
+    - 72.3
+  beat: 'building blocks: rate of change from real station data'
+  visual: 'Picture zone: the Brest station thermometer (house PoleThermometer, ''Brest'' label) above a TimeGraph of the ISD Brest hourly
+    temperature 12 UTC 1 Nov -> 09 UTC 2 Nov (rose dots, hours on the x axis, °C 52 px ticks). S2: clock glyph ''18:00 UTC'' and ''1
+    Nov 2023'' on AT(2, ''six in the evening''); the 18 UTC dot lights, readout ''10.3 °C''. S3: the 20 UTC dot lights, ''14.9 °C''.
+    S4-S5: maths zone CalcStack ''(14.9 − 10.3) °C ÷ 2 h = 4.6 °C ÷ 2 h = 2.3 °C/h'' with gold CurvedLinks from the two dots to the
+    numbers; a gold secant line joins the two dots. S6: keyword ''average rate'' under the secant. S7: keyword ''derivative = rate at
+    one instant''; a tiny gold tangent at 18 UTC appears faintly.'
+  voiceover: Let's start with a quantity that changes with just one thing. At Brest, a port at the western tip of France, the weather
+    station's thermometer read ten point three degrees Celsius at six in the evening, universal time, on the first of November twenty
+    twenty-three, as Storm Ciarán's warm air arrived. Two hours later, it read fourteen point nine. How fast did it warm? We take the
+    change, four point six degrees, and divide it by the time, two hours. That's two point three degrees per hour. [beat] But that's
+    an average over two hours. The derivative is the rate at one instant.
+  on_screen_eq:
+    latex: \frac{14.9-10.3}{2}=\frac{4.6}{2}=2.3\ ^{\circ}\mathrm{C/h}
+    vallis_eq: 'provenance only: arithmetic on station data (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.data.isd.decode (A2 product rows)
+    params:
+      station: '07110'
+      times:
+      - 2023-11-01T18
+      - 2023-11-01T20
+    test: CHECK DT02
+  exaggeration: []
+  kind: station time series
+  data: A2 ISD Brest-Guipavas 07110
+  tool: Remotion SVG TimeGraph (house kit extras.tsx) + PoleThermometer
+  runner_up: map with the station dot only (the curve is what this scene needs)
+  why: start from a real one-variable rate the viewer can check on the screen
+  related: []
+- id: s03_derivative_limit
+  t:
+  - 73.1
+  - 128.75
+  sentence_times:
+  - - 73.1
+    - 76.925
+  - - 77.275
+    - 83.45
+  - - 83.8
+    - 91.275
+  - - 92.775
+    - 99.475
+  - - 100.975
+    - 104.525
+  - - 104.875
+    - 109.1
+  - - 109.45
+    - 113.95
+  - - 114.3
+    - 121.575
+  - - 121.925
+    - 127.95
+  beat: 'building blocks: the derivative as a limit and as the tangent''s slope'
+  visual: 'Picture zone: f(x) = x² on a house Grid (x 0-5, f 0-25; ticks 52 px), point (3, 9) gold. S2: secant to (4, 16) drawn teal
+    with rise/run brackets ''7'' and ''1''; maths zone CalcStack ''(16 − 9) ÷ 1 = 7''. S3: secants for h = 0.1 and 0.01 swing in (MapCamera
+    zoom ×10, ticks re-label so lengths stay true), CalcStack lines ''(9.61 − 9) ÷ 0.1 = 6.1'', ''(9.0601 − 9) ÷ 0.01 = 6.01''. S4:
+    the secant settles on the tangent (gold), readout ''→ 6''. S5: df/dx (96 px) with BraceNote ''limit of rise ÷ run''. S6: ''d(x²)/dx
+    = 2x = 6 at x = 3''. S7: keyword ''tangent'' at the gold line. S8: keyword ''slope = rate''. Zoom out at the end so the whole parabola
+    shows again.'
+  voiceover: 'To get the rate at one instant, we shrink the time step. Let''s see how, on an easy curve: f of x equals x squared, at
+    x equals three. A step from three to four raises f from nine to sixteen, so the rate is seven over one, which is seven. [beat] A
+    step of one tenth gives six point one, and a step of one hundredth gives six point zero one. [beat] As the step shrinks, the rate
+    settles on six. That limit is the derivative, written d f by d x. For x squared it''s two x, which is six at x equals three. In
+    the picture, the line through two points of the curve turns into the tangent, the line that just touches the curve. So the derivative
+    is the slope of the tangent: how much f changes for each unit of x.'
+  on_screen_eq:
+    latex: \frac{df}{dx}=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h},\qquad \frac{d}{dx}x^2=2x
+    vallis_eq: 'provenance only: standard definition of the derivative (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.secant_slopes (NEW F1)
+    params:
+      f: x**2
+      x0: 3
+      h:
+      - 1
+      - 0.1
+      - 0.01
+    test: CHECK DT03
+  exaggeration:
+  - zoomed x10 for the small secants (ticks re-label, lengths true)
+  kind: equation animation + curve
+  data: none
+  tool: 'Remotion SVG curve (house kit draw.tsx Grid/Arrow) + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx
+    Keyword pointers)'
+  runner_up: Manim CE insert (only if KaTeX sequences look weak)
+  why: the derivative is defined from scratch with easy numbers before any partial derivative
+  related: []
+- id: s04_fields
+  t:
+  - 128.75
+  - 173.75
+  sentence_times:
+  - - 128.75
+    - 133.7
+  - - 134.05
+    - 137.35
+  - - 137.7
+    - 144.175
+  - - 144.525
+    - 151.075
+  - - 151.425
+    - 156.75
+  - - 157.1
+    - 163.525
+  - - 163.875
+    - 172.95
+  beat: 'building blocks: a field depends on place and time'
+  visual: 'Full width. S1-S2: the Brest thermometer from s02 shrinks to the left edge; the map MAP850 fills x 80-1000. S3: axes arrows
+    on the map: orange ''x east'', ''y north'' at the lower left; a small 3-D inset (three.js column, 0-3 km) with ''z up''; a clock
+    glyph ''small t''. S4: maths zone ''T(x, y, z, t)'' (96 px) with each letter pulsing as named. S5: keyword ''field''. S6: the map''s
+    850 hPa field cycles 12 -> 24 UTC (hourly frames, clock glyph running, the warm tongue sliding in from the south-west), settling
+    at 18 UTC; label ''about 1.3 km up'' (54 px). S7: keywords ''ERA5'', ''reanalysis''.'
+  voiceover: 'In the weather, though, a quantity rarely depends on just one thing. The temperature depends on where you are, and when.
+    Let''s call the distance east x, the distance north y, the height z, and the time small t. Then the temperature, capital T, is a
+    function of all four: T of x, y, z and small t. A quantity that has a value at every place and every time is called a field. Here''s
+    the temperature field a little more than a kilometre above western France, at six in the evening. It comes from ERA5, a reanalysis:
+    a best estimate of the whole atmosphere, built from observations and a weather model.'
+  on_screen_eq:
+    latex: T(x,\,y,\,z,\,t)
+    vallis_eq: 'provenance only: Kundu §B.1 (p. 857) f(x1, x2, x3, t) (page image checked)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=1
+  physics_source:
+    fn: fluidpy.data.era5_arco.open_box (A1 product)
+    params:
+      level_hPa: 850
+      times: 2023-11-01T12..2023-11-02T00 hourly
+    test: CHECK DT10
+  exaggeration:
+  - 'time compressed: 12 h of hourly frames in about 5 s (manifest)'
+  kind: real-data map animation
+  data: A1 ERA5 850 hPa t hourly; A5 GIBS true colour; A6 Natural Earth
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay + three.js column inset
+  runner_up: three.js globe with the field draped (Cesium drape as second runner-up)
+  why: the reader meets a field as a real, moving map before any symbol
+  related:
+  - n: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, temperature, the ideal gas law, hydrostatic balance, scale height, reanalysis
+    spoken_pointer: false
+- id: s05_partial_idea
+  t:
+  - 173.75
+  - 220.35
+  sentence_times:
+  - - 173.75
+    - 177.525
+  - - 177.875
+    - 180.5
+  - - 180.85
+    - 185.275
+  - - 185.625
+    - 191.35
+  - - 191.7
+    - 195.275
+  - - 195.625
+    - 201.3
+  - - 201.65
+    - 208.975
+  - - 209.325
+    - 214.5
+  - - 214.85
+    - 219.55
+  beat: 'partial derivative: slice the landscape'
+  visual: 'Full width 3-D (three.js in Remotion): the 850 hPa T field of s04 lifted into a surface (height = temperature, warm colours
+    on top, thermal LUT), Natural Earth coast draped as lines; Brest a gold pin. S3: keyword ''hold the others fixed''. S4: the surface
+    rises on AT(4, ''landscape''). S5: a translucent slate wall slides in along 48.5° N through Brest (east-west). S6: x arrow pulses;
+    ''y, z, t fixed'' (54 px slate). S7: the cut edge lifts out as a 2-D curve (teal) into the maths zone, the local tangent at Brest
+    in gold. S8: ∂T/∂x (96 px) with the curly ∂ highlighted gold. S9: keyword ''partial: only x changes''.'
+  voiceover: So how fast does the temperature change as we go east? Now four things could change at once. The trick is to change only
+    one of them, and hold the others fixed. Let's lift the map into a landscape, where the height of the ground stands for the temperature.
+    Now cut it with a wall that runs due east through Brest. Along that cut, only x changes, while y, the height and the time stay fixed.
+    The edge of the cut is an ordinary curve, and its slope is the partial derivative of T with respect to x. We write it with a curly
+    d, and say partial capital T by partial x. Partial means that only x changes, and everything else stays put.
+  on_screen_eq:
+    latex: \frac{\partial T}{\partial x}
+    vallis_eq: 'provenance only: Kundu §B.1 ''Partial Differentiation'' (p. 857) (page image checked)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=1
+  physics_source:
+    fn: fluidpy.data.era5_arco.open_box (A1) sampled along 48.5 N
+    params:
+      lat: 48.5
+      time: 2023-11-01T18
+    test: CHECK DT10
+  exaggeration:
+  - 'temperature drawn as height: 1 °C = 8 km of relief on a 600-km map (a picture of the field, said as a landscape)'
+  kind: 3-D surface of a real field
+  data: A1 ERA5 850 hPa t 18 UTC; A6 coast
+  tool: three.js surface (PlaneGeometry displaced by T) in Remotion + SVG cut curve
+  runner_up: PyGMT grdview frames composited (static, no camera move)
+  why: 'the slice makes ''hold the rest fixed'' a picture: a partial derivative is the slope of a cut'
+  related: []
+- id: s06_partial_rule
+  t:
+  - 220.35
+  - 281.875
+  sentence_times:
+  - - 220.35
+    - 228.3
+  - - 228.65
+    - 240.575
+  - - 240.925
+    - 249.45
+  - - 249.8
+    - 254.85
+  - - 256.35
+    - 263.9
+  - - 265.4
+    - 269.825
+  - - 270.175
+    - 275.65
+  - - 276.0
+    - 281.075
+  beat: 'partial derivative: the rule, easy numbers'
+  visual: 'Maths full width with a small 3-D plane of T = 10 − 0.03x + 3t at the left (x 0-100 km, t 0-3 h; a tilted flat sheet). S2:
+    ''T = 10 − 0.03x + 3t'' (96 px); units ''x in km, t in h'' (54 px slate). S3: the ''+3t'' term greys with a BraceNote ''constant:
+    no slope in x''. S4: ''∂T/∂x = −0.03 °C/km''. S5: ''∂T/∂t = +3 °C/h'' (slate, the ∂/∂t colour). On the 3-D sheet: the x-cut and
+    the t-cut light in turn with their slopes. S6: ''T = x t''. S7: ''∂T/∂x = t''. S8: ''∂T/∂t = x''.'
+  voiceover: 'Working out a partial derivative is easy: treat every other variable as a constant, and take the ordinary derivative.
+    Let''s try an easy, made-up temperature field: T equals ten, minus zero point zero three x, plus three small t, with x in kilometres
+    and small t in hours. For partial capital T by partial x, small t is a constant, so the three small t term has no slope in x. What''s
+    left is minus zero point zero three degrees per kilometre. [beat] For partial capital T by partial small t, x is the constant, and
+    we get plus three degrees per hour. [beat] Now a field with a product, T equals x times small t. Holding small t fixed, partial
+    capital T by partial x is small t. Holding x fixed, partial capital T by partial small t is x.'
+  on_screen_eq:
+    latex: T=10-0.03\,x+3\,t:\quad \frac{\partial T}{\partial x}=-0.03,\quad \frac{\partial T}{\partial t}=3
+    vallis_eq: 'provenance only: our easy example (rule of Kundu §B.1, p. 857)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=1
+  physics_source:
+    fn: fluidpy.core.thermo.partial_derivative (numerical partial with the other variables held) + sympy check
+    params:
+      f: 10 - 0.03x + 3t; x t
+      at:
+        x: 50
+        t: 1
+    test: CHECK DT04
+  exaggeration: []
+  kind: equation animation + 3-D sheet
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + three.js tilted plane'
+  runner_up: 2-D contour of the easy field
+  why: the rule 'treat the others as constants' with numbers the viewer can check
+  related: []
+- id: s07_partial_real
+  t:
+  - 281.875
+  - 342.3
+  sentence_times:
+  - - 281.875
+    - 283.825
+  - - 284.175
+    - 293.7
+  - - 294.05
+    - 303.35
+  - - 303.7
+    - 308.425
+  - - 308.775
+    - 318.275
+  - - 319.775
+    - 328.15
+  - - 329.65
+    - 334.775
+  - - 335.125
+    - 341.5
+  beat: partial derivatives on the real map (centred difference)
+  visual: 'Picture zone: MAP850 zoomed (MapCamera) to 150 km around Brest; the 0.25° grid points appear as small ink dots; S2: the points
+    one step east and west of Brest light (teal), bracket ''18.4 km'' each side. S3: maths zone CalcStack ''(T_east − T_west) ÷ 36.8
+    km''. S4: keyword ''centred difference''. S5: the two temperatures read off with CurvedLinks, result ''∂T/∂x ≈ −3.2 °C per 100 km''
+    (rose, with ''−''). S6: the north/south points light, ''∂T/∂y ≈ −2.5 °C per 100 km''. S7: two short rose arrows ''colder'' pointing
+    east and north. S8: keyword ''gradient'' with a faint orange arrow (∇T) built from the two; colour bar hidden while zoomed.'
+  voiceover: 'Now the real field. A computer knows the temperature only at grid points, here every quarter of a degree of longitude,
+    about eighteen kilometres apart going east. So to find the slope at Brest, we take the point one step east and the point one step
+    west, and divide their difference by the distance between them. That''s called a centred difference, and we''ll see later why it''s
+    a good choice. East of Brest it was colder, so partial capital T by partial x is negative: minus three point two degrees per hundred
+    kilometres. [beat] Cutting north instead gives partial capital T by partial y: minus two point five degrees per hundred kilometres.
+    [beat] So at that moment, the air got colder towards the east, and towards the north. Together, these two partial derivatives make
+    the gradient, which has its own movie in this series.'
+  on_screen_eq:
+    latex: \frac{\partial T}{\partial x}\approx\frac{T_{i+1}-T_{i-1}}{2\,\Delta x}
+    vallis_eq: 'provenance only: centred difference, Kundu (10.6) (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source:
+    fn: fluidpy.geo.sphere.gradient (centred 0.25 deg) + fluidpy.core.fd.fd_derivative
+    params:
+      lat: 48.5
+      lon: -4.5
+      time: 2023-11-01T18
+      dlon_deg: 0.25
+    test: CHECK DT11 (−3.20, −2.49 K/100 km)
+  exaggeration:
+  - map zoomed x4 (km ticks re-label, distances true)
+  kind: real-data map, zoom
+  data: A1 ERA5 850 hPa t 18 UTC
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay + house MapCamera
+  runner_up: three.js surface of s05 with tangent arrows
+  why: the partial derivative from real grid points, the way every weather model does it
+  related:
+  - n: '6'
+    slug: ch00_gradient (planned)
+    covers: the gradient as the arrow built from the partial derivatives; directional derivative
+    spoken_pointer: true
+- id: s08_partial_time
+  t:
+  - 342.3
+  - 403.525
+  sentence_times:
+  - - 342.3
+    - 346.175
+  - - 346.525
+    - 350.725
+  - - 351.075
+    - 356.85
+  - - 357.2
+    - 366.475
+  - - 366.825
+    - 374.425
+  - - 375.925
+    - 381.7
+  - - 382.05
+    - 391.8
+  - - 392.15
+    - 396.05
+  - - 396.4
+    - 402.025
+  beat: 'partial derivative in time: the fixed thermometer'
+  visual: 'Picture zone: the Brest PoleThermometer (slate, ''fixed thermometer'' keyword on its first mention) on MAP850; the map plays
+    17 -> 19 UTC (clock glyph) while the thermometer readout counts 2.4 -> 8.2 °C; TimeGraph beside it with the three hourly dots (2.4,
+    5.1, 8.2). S3-S4: CalcStack ''(8.2 − 2.4) °C ÷ 2 h ≈ +2.9 °C/h'' (slate). S5: cut to the ground: ISD barometer glyph and a pressure
+    TimeGraph 12 -> 20 UTC (falling line). S6: dots 17 UTC ''988.3 hPa'' and 18 UTC ''983.3 hPa'' light; S7 keyword ''hectopascal (hPa)''.
+    S8: ''∂p/∂t ≈ −5 hPa/h'' (rose, ''−''); Ciarán''s low (A4 msl isobars, slate) slides in at the left edge on ''deep storm''.'
+  voiceover: What about partial capital T by partial small t? Now we hold the place fixed, and let only the time change. That's what
+    a thermometer fixed at one place measures, so let's call it the fixed thermometer. At that height over Brest, the reanalysis temperature
+    rose from two point four degrees at five o'clock to eight point two at seven o'clock. Over those two hours, partial capital T by
+    partial small t was about plus two point nine degrees per hour. [beat] At the ground, the station's barometer shows another partial
+    derivative in time. The pressure fell from nine hundred and eighty eight point three hectopascals at five o'clock to nine hundred
+    and eighty three point three at six. Hectopascals are the pressure unit of weather maps. That's a fall of five hectopascals in one
+    hour, a sign of a deep storm coming. [beat]
+  on_screen_eq:
+    latex: \frac{\partial T}{\partial t}\approx+2.9\ ^{\circ}\mathrm{C/h},\qquad \frac{\partial p}{\partial t}\approx-5\ \mathrm{hPa/h}
+    vallis_eq: 'provenance only: Kundu §B.1 (p. 857); our numbers'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=1
+  physics_source:
+    fn: fluidpy.data.era5_arco.open_box (A1) at the Brest grid point; fluidpy.data.isd.decode (A2)
+    params:
+      times:
+      - '17'
+      - '18'
+      - '19'
+      station: '07110'
+    test: CHECK DT12, DT13
+  exaggeration:
+  - 'time compressed: 2 h in about 6 s'
+  kind: map animation + time series
+  data: A1 ERA5 850 hPa t; A2 ISD Brest slp; A4 ERA5 msl
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay + TimeGraph
+  runner_up: TimeGraph alone (the moving map shows why the place warms)
+  why: ∂/∂t gets its observer (the fixed thermometer) and a second real example (pressure tendency)
+  related: []
+- id: s09_partial_height
+  t:
+  - 403.525
+  - 472.875
+  sentence_times:
+  - - 403.525
+    - 408.0
+  - - 408.35
+    - 410.75
+  - - 411.1
+    - 420.425
+  - - 420.775
+    - 429.875
+  - - 430.225
+    - 434.925
+  - - 435.275
+    - 440.125
+  - - 440.475
+    - 452.3
+  - - 453.8
+    - 461.825
+  - - 462.175
+    - 472.075
+  beat: 'partial derivative with height: the latest radiosonde'
+  visual: 'Full width 3-D: the globe (BMNG + GIBS true colour 2026-09-30) eases to Trappes (gold pin, ''Trappes'' 54 px), then a balloon
+    glyph is released and rises (wind_gentle effect, quiet); on the right the Trappes profile T(z) 0-6 km draws itself as the balloon
+    climbs (slate curve, °C ticks 52 px, km ticks). S3 keyword ''radiosonde''. S4: ''30 Sep 2026, 12 UTC'' (54 px) with the clock glyph.
+    S5: 1.53 km dot ''12.3 °C''. S6: 5.80 km dot ''−11.8 °C''. S7: CalcStack ''−24.1 °C ÷ 4.26 km ≈ −5.7 °C/km'' with CurvedLinks from
+    the two dots; rise/run brackets on the curve. S8: keyword ''15 min'' between the dots (slate). S9: keyword ''lapse rate'', ''+5.7
+    °C/km'' (warm white) beside ''∂T/∂z = −5.7'' (two rows: the meteorology sign flipped).'
+  voiceover: 'And partial capital T by partial z, the change with height? For that we need a weather balloon. Twice a day, at stations
+    all over the world, a balloon carries a small instrument package, called a radiosonde, up through the atmosphere. Let''s take the
+    latest one we have from Trappes, near Paris: noon, universal time, on the thirtieth of September twenty twenty-six. At one and a
+    half kilometres up, it measured twelve point three degrees. At five point eight kilometres, it measured minus eleven point eight.
+    So partial capital T by partial z was minus twenty four point one degrees over four point two six kilometres, which is minus five
+    point seven degrees per kilometre. [beat] The balloon took fifteen minutes to climb between those heights, and we''ll check later
+    that the air itself hardly changed in that time. Meteorologists call this cooling with height the lapse rate, and they flip its
+    sign, so here the lapse rate is plus five point seven degrees per kilometre.'
+  on_screen_eq:
+    latex: \frac{\partial T}{\partial z}\approx\frac{-24.1}{4.26}\approx-5.7\ ^{\circ}\mathrm{C/km},\qquad \Gamma=-\frac{\partial T}{\partial
+      z}
+    vallis_eq: 'provenance only: lapse-rate convention (knowledge/notation.md; meteorological Γ = −dT/dz)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.data.igra.find_sounding + fill_heights; fluidpy.core.stratification.lapse_rate_convention
+    params:
+      station: FRM00007145
+      time: 2026-09-30T12
+      levels_hPa:
+      - 850
+      - 500
+    test: CHECK DT20, DT21
+  exaggeration:
+  - 'balloon rise compressed: 15 min in about 8 s'
+  - balloon glyph not to scale (said nowhere; recorded)
+  kind: globe flight + sounding chart
+  data: A3 IGRA2 Trappes 2026-09-30T12 (D1 refresh to the newest at production); A7 BMNG; D5 GIBS 2026-09-30
+  tool: three.js globe in Remotion (cross-product module) -> Remotion SVG profile chart
+  runner_up: CesiumJS SingleTile drape of the Paris region (no Ion) composited in Remotion
+  why: the third partial derivative from the newest real observation, with the lapse-rate sign convention said
+  related: []
+- id: s10_mixed_partials
+  t:
+  - 472.875
+  - 548.35
+  sentence_times:
+  - - 472.875
+    - 477.225
+  - - 477.575
+    - 485.075
+  - - 485.425
+    - 494.125
+  - - 494.475
+    - 500.325
+  - - 500.675
+    - 505.675
+  - - 506.025
+    - 511.0
+  - - 512.5
+    - 517.325
+  - - 518.825
+    - 526.875
+  - - 528.375
+    - 530.625
+  - - 530.975
+    - 542.575
+  - - 542.925
+    - 547.55
+  beat: mixed partial derivatives commute
+  visual: 'Maths zone: two rows built in turn: ''∂/∂t (∂T/∂x)'' and ''∂/∂x (∂T/∂t)'' (84 px), a gold ''='' between them on AT(4, ''the
+    same answer''). S5-S7: easy field ''T = x² t'': row 1 ''∂T/∂x = 2xt → ∂/∂t: 2x'', row 2 ''∂T/∂t = x² → ∂/∂x: 2x''. S8: real ''1.4
+    × 10⁻⁹ °C m⁻¹ s⁻¹'' under both rows. S9-S11: picture zone: an x-t grid (x across, small t up), a small rectangle with its four corner
+    values from ERA5 (Brest ±1 grid point, 17 and 19 UTC) as dots: ''+'' top right, ''−'' top left, ''−'' bottom right, ''+'' bottom
+    left (signs written, teal/rose with glyphs); two gold paths show the two orders of subtraction reaching the same four-corner sum.'
+  voiceover: 'We can also take a partial derivative of a partial derivative. Let''s take the eastward slope, partial capital T by partial
+    x, and ask how fast it changes in time. Or, the other way round, take the warming rate, partial capital T by partial small t, and
+    ask how it changes going east. These sound like different questions, but for any smooth field they give the same answer. Let''s
+    check with an easy field, T equals x squared times small t. The slope in x is two x small t, and its rate in time is two x. [beat]
+    The rate in time is x squared, and its slope in x is also two x. [beat] Over Brest, the reanalysis gives both as one point four
+    times ten to the minus nine degrees per metre per second. [beat] Here''s why they must agree. Both are built from the same four
+    values, at the corners of a small rectangle in x and small t: top right, minus top left, minus bottom right, plus bottom left. Only
+    the order of the subtractions differs, so the answer can''t.'
+  on_screen_eq:
+    latex: \frac{\partial}{\partial t}\!\left(\frac{\partial T}{\partial x}\right)=\frac{\partial}{\partial x}\!\left(\frac{\partial
+      T}{\partial t}\right)
+    vallis_eq: 'provenance only: Kundu §B.1 (p. 857) order of partials; Vallis (1.69) uses it (page images checked)'
+    page_png: chapters/pages/ch01/p037.png
+  physics_source:
+    fn: fluidpy.geo.calculus.mixed_partials (NEW F1) on A1; sympy for x**2*t
+    params:
+      lat: 48.5
+      lon: -4.5
+      dlon_deg: 0.25
+      times:
+      - '17'
+      - '19'
+    test: CHECK DT14 (both 1.43e-9 K m-1 s-1, equal to 1e-12 relative)
+  exaggeration: []
+  kind: equation animation + x-t diagram
+  data: A1 ERA5 850 hPa t (four corner values)
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG x-t grid'
+  runner_up: 3-D surface T(x, t) with the rectangle on it
+  why: 'the order of partials does not matter, shown by the four-corner picture: the key to the exactness test later'
+  related: []
+- id: s11_total_differential
+  t:
+  - 548.35
+  - 614.775
+  sentence_times:
+  - - 548.35
+    - 552.45
+  - - 552.8
+    - 561.675
+  - - 562.025
+    - 564.625
+  - - 564.975
+    - 571.425
+  - - 571.775
+    - 575.925
+  - - 576.275
+    - 594.225
+  - - 594.575
+    - 597.3
+  - - 597.65
+    - 606.575
+  - - 606.925
+    - 613.975
+  beat: the total differential
+  visual: 'Picture zone: the s05 landscape (three.js) with a small gold step arrow from Brest: east leg (orange), north leg (orange),
+    up leg (faint), and a clock tick; each leg''s rise drawn as a vertical bar on the surface. S5: maths zone dT = ∂T/∂x dx + ∂T/∂y
+    dy + ∂T/∂z dz + ∂T/∂t dt (84 px, ∂T/∂t term slate) built term by term in sync with the legs. S6: keyword ''total differential''.
+    S7: a hillside icon with two legs (Like). S8: the landscape gently morphs (time) on AT(8, ''also changes'') (Unlike).'
+  voiceover: 'Now let''s change everything at once, but only by a little. Suppose we take a small step east, d x, a small step north,
+    d y, a small step up, d z, and wait a short time, d t. How much does the temperature change? Each partial derivative says how much
+    T changes for each unit of step in its own direction. So we multiply each one by its own step, and add them up. The small change,
+    d T, equals partial capital T by partial x times d x, plus partial capital T by partial y times d y, plus partial capital T by partial
+    z times d z, plus partial capital T by partial small t times d t. This is called the total differential. It''s like walking on a
+    hillside: your rise is the slope going east times your step east, plus the slope going north times your step north. Unlike a real
+    hillside, our landscape also changes while we walk, so the time gets a term too.'
+  on_screen_eq:
+    latex: dT=\frac{\partial T}{\partial x}dx+\frac{\partial T}{\partial y}dy+\frac{\partial T}{\partial z}dz+\frac{\partial T}{\partial
+      t}dt
+    vallis_eq: 'provenance only: total differential, the step before Kundu p. 858 display (page image checked)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
+  physics_source:
+    fn: fluidpy.geo.calculus.total_differential (NEW F1)
+    params: {}
+    test: CHECK DT15
+  exaggeration:
+  - step legs drawn x20 for visibility
+  kind: 3-D surface + equation
+  data: A1 (surface only)
+  tool: 'three.js surface (s05) + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: flat map with step arrows
+  why: small changes add up slope × step, one direction at a time
+  related: []
+- id: s12_total_example
+  t:
+  - 614.775
+  - 669.3
+  sentence_times:
+  - - 614.775
+    - 616.925
+  - - 617.275
+    - 624.05
+  - - 624.4
+    - 633.6
+  - - 633.95
+    - 641.925
+  - - 642.275
+    - 649.15
+  - - 650.65
+    - 656.175
+  - - 657.675
+    - 662.175
+  - - 662.525
+    - 668.5
+  beat: total differential with numbers near Brest
+  visual: 'Picture zone: MAP850 zoom (s07 camera); the step: 10 km east, 20 km north (gold legs with ''10 km'', ''20 km''); clock ''+30
+    min''. Maths zone CalcStack (aligned at ''=''): ''−3.2/100 × 10 = −0.32'', ''−2.5/100 × 20 = −0.50'', ''+2.9 × 0.5 = +1.45'', then
+    the sum line ''dT ≈ +0.63 °C'' (the first three dim to 60 %); each term linked by a gold CurvedLink from its leg. S6: keyword ''small
+    steps only'' with the landscape flattening icon.'
+  voiceover: 'Let''s try it near Brest. We go ten kilometres east and twenty kilometres north, keep the same height, and wait half an
+    hour. The east step gives minus three point two degrees per hundred kilometres, times ten kilometres: minus zero point three two
+    degrees. The north step gives minus two point five per hundred kilometres, times twenty kilometres: minus zero point five. And the
+    wait gives plus two point nine degrees per hour, times half an hour: plus one point four five. [beat] Adding them up, the temperature
+    changes by about plus zero point six three degrees. [beat] This works only for small steps, where the landscape looks flat. We''ll
+    see exactly why, and what goes wrong for big steps, when we get to Taylor series.'
+  on_screen_eq:
+    latex: dT\approx(-0.032)(10)+(-0.025)(20)+(2.9)(0.5)\approx+0.63\ ^{\circ}\mathrm{C}
+    vallis_eq: 'provenance only: our numbers in the total differential'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.total_differential (NEW F1) with CHECK DT11/DT12 values
+    params:
+      dx_km: 10
+      dy_km: 20
+      dt_h: 0.5
+    test: CHECK DT15
+  exaggeration: []
+  kind: map + calculation
+  data: A1
+  tool: 'Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword
+    pointers)'
+  runner_up: landscape with bars
+  why: the formula with real slopes and a step the viewer can redo
+  related: []
+- id: s13_chain_rule
+  t:
+  - 669.3
+  - 745.9
+  sentence_times:
+  - - 669.3
+    - 672.05
+  - - 672.4
+    - 677.25
+  - - 677.6
+    - 688.625
+  - - 688.975
+    - 697.55
+  - - 697.9
+    - 700.375
+  - - 700.725
+    - 706.375
+  - - 706.725
+    - 710.725
+  - - 711.075
+    - 730.775
+  - - 731.125
+    - 733.175
+  - - 733.525
+    - 745.1
+  beat: the chain rule along a path
+  visual: 'Picture zone: the landscape (s05) with a small plane glyph moving along a teal path; its position readout X(t), Y(t), Z(t)
+    under it. S4: the step dX = (dX/dt) dt drawn as a teal leg along the path. S6: maths zone: the total differential from s11, then
+    each dx, dy, dz replaced by (dX/dt) dt …; the dt''s divide out (Strike on each dt). S7-S8: the result dT/dt = ∂T/∂t + dX/dt ∂T/∂x
+    + dY/dt ∂T/∂y + dZ/dt ∂T/∂z (96 px), ∂T/∂t slate, the three moving terms teal. S9 keyword ''chain rule''. S10: the index form ''dX_j/dt
+    ∂T/∂x_j'' (68 px) under the moving terms with a gold brace ''j summed''.'
+  voiceover: 'So far we chose the steps ourselves. Now let''s ride along with something that moves, like a plane or a balloon. Its position
+    changes with time, so its x, y and z are themselves functions of time: capital X of t, capital Y of t, and capital Z of t. In a
+    short time d t, it moves east by d X, which is d X by d t, its eastward speed, times d t. The same goes for north and up. Let''s
+    put these steps into the total differential, and divide everything by d t. That gives the rate the traveller''s own thermometer
+    reads. d T by d t equals partial capital T by partial small t, plus d X by d t times partial capital T by partial x, plus d Y by
+    d t times partial capital T by partial y, plus d Z by d t times partial capital T by partial z. This is the chain rule. In the index
+    notation of the vectors movie, the three moving terms are d X sub j by d t times partial capital T by partial x sub j, with j summed.'
+  on_screen_eq:
+    latex: \frac{dT}{dt}=\frac{\partial T}{\partial t}+\frac{dX}{dt}\frac{\partial T}{\partial x}+\frac{dY}{dt}\frac{\partial T}{\partial
+      y}+\frac{dZ}{dt}\frac{\partial T}{\partial z}
+    vallis_eq: 'provenance only: Kundu App. B p. 858, the unnumbered display before (B.1.1) (page image checked), written with T and
+      (x, y, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
+  physics_source:
+    fn: fluidpy.geo.calculus.chain_rule_rate (NEW F1)
+    params: {}
+    test: CHECK DT16 (chain-rule sum equals the direct difference along a sampled path, V7)
+  exaggeration:
+  - plane glyph not to scale
+  kind: 3-D surface + equation derivation
+  data: A1 (surface)
+  tool: 'three.js surface + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: flat map with a path
+  why: derived in two moves from the total differential, no new idea needed
+  related:
+  - n: 1a
+    slug: ch00_vectors_index_notation
+    covers: vectors, components, index notation, summation convention, u_j dT/dx_j
+    spoken_pointer: true
+- id: s14_chain_meaning
+  t:
+  - 745.9
+  - 787.65
+  sentence_times:
+  - - 745.9
+    - 748.325
+  - - 748.675
+    - 753.8
+  - - 754.15
+    - 764.725
+  - - 765.075
+    - 772.4
+  - - 772.75
+    - 779.25
+  - - 779.6
+    - 786.85
+  beat: reading the chain rule term by term
+  visual: 'Maths zone: the s13 equation; gold underbraces on each term in turn: ''fixed place'' (slate), then ''speed × slope'' under
+    each moving term. S3: units line ''m/s × °C/m = °C/s'' with the m struck (Strike). S4: picture zone: the frozen landscape, a traveller
+    sliding into a colder valley, its thermometer falling. S5: three icons at one place: car, plane, balloon (house icons; plane and
+    balloon new code-drawn glyphs), each with its own arrow length.'
+  voiceover: 'Let''s read it term by term. The first term is the change at a fixed place: the fixed thermometer''s rate. Each of the
+    other terms is a speed times a slope: how fast the traveller moves in one direction, times how much the temperature changes per
+    metre in that direction. Metres per second times degrees per metre gives degrees per second, so every term is a rate in time. Moving
+    into colder places cools the traveller, even if nothing changes at any fixed place. And the speeds are the traveller''s own, so
+    a car, a plane and a balloon at the same place feel different rates.'
+  on_screen_eq:
+    latex: \underbrace{\frac{\partial T}{\partial t}}_{\text{fixed place}}+\underbrace{\frac{dX_j}{dt}\frac{\partial T}{\partial x_j}}_{\text{speed}\times\text{slope}}
+    vallis_eq: 'provenance only: reading of Kundu p. 858 display'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
+  physics_source: null
+  exaggeration:
+  - illustrative
+  kind: equation anatomy + icons
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + house icons'
+  runner_up: —
+  why: meaning and units before the numbers
+  related: []
+- id: s15_chain_easy
+  t:
+  - 787.65
+  - 833.975
+  sentence_times:
+  - - 787.65
+    - 792.125
+  - - 792.475
+    - 801.125
+  - - 801.475
+    - 810.75
+  - - 811.1
+    - 819.025
+  - - 819.375
+    - 823.675
+  - - 825.175
+    - 833.175
+  beat: chain rule, easy numbers (frozen map, a car)
+  visual: 'Picture zone: a straight road on a frozen schematic map with isotherms every 1 °C 33 km apart (illustrative); a car glyph
+    drives east, its dashboard readout counting down; clock glyph runs. S3: ''100 km/h'' at the car, ''−0.03 °C/km'' between isotherms.
+    S4-S5: CalcStack ''100 km/h × (−0.03 °C/km)'' then ''km'' struck, ''= −3 °C/h''. S6: keyword ''∂T/∂t = 0'' (slate) at a fixed pole
+    on the roadside that stays flat.'
+  voiceover: Let's try the simplest case first, on an easy, made-up road. Imagine a frozen map, where nothing changes at any fixed place,
+    so partial capital T by partial small t is zero. A car drives east at one hundred kilometres per hour, and the air gets colder by
+    zero point zero three degrees for every kilometre east. The chain rule gives one hundred kilometres per hour, times minus zero point
+    zero three degrees per kilometre. The kilometres cancel, leaving minus three degrees per hour. [beat] So the car's dashboard thermometer
+    falls by three degrees every hour, though the air at every fixed place keeps its temperature.
+  on_screen_eq:
+    latex: \frac{dT}{dt}=0+100\ \tfrac{\mathrm{km}}{\mathrm{h}}\times\left(-0.03\ \tfrac{^{\circ}\mathrm C}{\mathrm{km}}\right)=-3\
+      ^{\circ}\mathrm{C/h}
+    vallis_eq: 'provenance only: our easy example'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.chain_rule_rate (NEW F1)
+    params:
+      speed_kmh: 100
+      dTdx: -0.03
+    test: CHECK DT17
+  exaggeration:
+  - illustrative frozen road map (thought example, said)
+  kind: schematic animation + calculation
+  data: none
+  tool: 'Remotion SVG + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: real ERA5 2-m field along the Brest-Rennes road (busier, adds nothing)
+  why: the chain rule in its simplest case before the real ones
+  related: []
+- id: s16_flight_east
+  t:
+  - 833.975
+  - 891.6
+  sentence_times:
+  - - 833.975
+    - 836.925
+  - - 837.275
+    - 848.525
+  - - 848.875
+    - 851.175
+  - - 851.525
+    - 856.3
+  - - 856.65
+    - 859.45
+  - - 859.8
+    - 870.35
+  - - 870.7
+    - 877.475
+  - - 878.975
+    - 884.7
+  - - 886.2
+    - 890.8
+  beat: 'chain rule on the real map: plane flying east'
+  visual: 'Picture zone: MAP850 at 18 UTC (17-19 UTC playing slowly so the place visibly warms), a small plane glyph leaving Brest due
+    east (teal arrow ''100 m/s'', ''360 km/h''); quiet engine hum while it moves (effect). Plane''s readout falling, a PoleThermometer
+    at Brest rising. Maths zone CalcStack: ''∂T/∂t = +2.9 °C/h'' (slate); ''100 × (−3.2 × 10⁻⁵) = −0.0032 °C/s''; ''× 3600 s/h = −11.5
+    °C/h''; sum ''dT/dt ≈ −8.6 °C/h'' (rose, ''−''). TimeGraph inset: pole line rising (slate), plane line falling (teal).'
+  voiceover: Now a thought experiment on the real map. Imagine a small plane at that height over Brest at six in the evening, flying
+    due east at one hundred metres per second, about three hundred and sixty kilometres per hour. What does its thermometer read? The
+    place itself is warming, at plus two point nine degrees per hour. But the plane flies into colder air. One hundred metres per second,
+    times minus three point two degrees per hundred kilometres, is minus zero point zero zero three two degrees per second. Times three
+    thousand six hundred seconds in an hour, that's minus eleven point five degrees per hour. [beat] Adding the two, the plane's thermometer
+    falls at about eight point six degrees per hour. [beat] So the plane cools, even though every place it passes is warming.
+  on_screen_eq:
+    latex: \frac{dT}{dt}=+2.9+(100)(-3.2\times10^{-5})(3600)\approx+2.9-11.5=-8.6\ ^{\circ}\mathrm{C/h}
+    vallis_eq: 'provenance only: our numbers in the chain rule'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.chain_rule_rate (NEW F1) with fluidpy.geo.sphere.gradient (A1) and the ERA5 tendency
+    params:
+      U_ms: 100
+      V_ms: 0
+      lat: 48.5
+      lon: -4.5
+    test: CHECK DT18 (−11.53, −8.60 full precision; screen shows one-decimal terms)
+  exaggeration:
+  - thought experiment on a real field (said)
+  - plane glyph not to scale
+  - 'time compressed: 1 h in about 8 s'
+  kind: real-data map animation + calculation
+  data: A1 ERA5 850 hPa t 17-19 UTC
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay + TimeGraph
+  runner_up: three.js landscape with the plane on it
+  why: 'same place, two observers: the chain rule''s two kinds of terms with opposite signs'
+  related: []
+- id: s17_flight_west
+  t:
+  - 891.6
+  - 930.15
+  sentence_times:
+  - - 891.6
+    - 896.35
+  - - 896.7
+    - 904.525
+  - - 904.875
+    - 911.5
+  - - 913.0
+    - 919.3
+  - - 919.65
+    - 929.35
+  beat: 'plane flying west: the rate belongs to the traveller'
+  visual: 'Same map; the plane turns (gentle arc) and flies due west; its readout now rises. CalcStack: ''+2.9 + 11.5 ≈ +14.4 °C/h''
+    (teal). S3: side-by-side summary (no box): two plane icons, ''→ −8.6 °C/h'' and ''← +14.4 °C/h'', with the pole ''+2.9 °C/h'' between
+    them. S4: keywords ''dT/dt: the traveller'', ''∂T/∂t: the place'' (slate).'
+  voiceover: 'Now let''s turn the plane round, and fly due west at the same speed. It now flies into warmer air, so the moving term
+    flips its sign, to plus eleven point five degrees per hour. Adding the warming of the place, its thermometer rises at about fourteen
+    point four degrees per hour. [beat] Same place, same moment, same temperature field, but a different traveller, so a different rate.
+    That''s the heart of the chain rule: d T by d t belongs to the traveller, while partial capital T by partial small t belongs to
+    the place.'
+  on_screen_eq:
+    latex: \frac{dT}{dt}=+2.9+11.5\approx+14.4\ ^{\circ}\mathrm{C/h}
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.chain_rule_rate (NEW F1)
+    params:
+      U_ms: -100
+    test: CHECK DT18
+  exaggeration:
+  - thought experiment (said)
+  kind: map animation + summary
+  data: A1
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay
+  runner_up: —
+  why: the contrast case makes the moving term visible
+  related: []
+- id: s18_balloon_rate
+  t:
+  - 930.15
+  - 972.375
+  sentence_times:
+  - - 930.15
+    - 933.425
+  - - 933.775
+    - 941.575
+  - - 941.925
+    - 952.325
+  - - 953.825
+    - 959.6
+  - - 959.95
+    - 967.4
+  - - 968.9
+    - 971.575
+  beat: 'the real balloon: its own rate'
+  visual: 'Picture zone: the Trappes profile chart (s09) with the balloon glyph climbing from 1.53 to 5.80 km; a clock ''etime'' counting
+    312 -> 1212 s (15 min); its thermometer readout 12.3 -> −11.8 °C. Maths zone CalcStack: ''4.26 km ÷ 900 s ≈ 4.7 m/s'' (dZ/dt, teal);
+    ''−24.1 °C ÷ 900 s ≈ −0.027 °C/s''; ''≈ −1.6 °C/min''. S6: three ''?'' bars appear (empty) for the three kinds of term.'
+  voiceover: 'Now a real traveller: the Trappes balloon. It rose from one and a half kilometres to five point eight kilometres in nine
+    hundred seconds, which is fifteen minutes. So its upward speed, d Z by d t, was four point two six kilometres divided by nine hundred
+    seconds: four point seven metres per second. [beat] Over the same fifteen minutes, its thermometer fell by twenty four point one
+    degrees. That''s minus zero point zero two seven degrees per second, or about one point six degrees every minute. [beat] Which terms
+    of the chain rule make this?'
+  on_screen_eq:
+    latex: \frac{dZ}{dt}\approx\frac{4260\ \mathrm m}{900\ \mathrm s}\approx4.7\ \mathrm{m/s},\qquad \frac{dT}{dt}\approx\frac{-24.1}{900}\approx-0.027\
+      ^{\circ}\mathrm{C/s}
+    vallis_eq: 'provenance only: our numbers from the sounding'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.sounding.ascent_rates (NEW F4) on fluidpy.data.igra.find_sounding
+    params:
+      time: 2026-09-30T12
+      levels_hPa:
+      - 850
+      - 500
+    test: CHECK DT22, DT23
+  exaggeration:
+  - 15 min in about 6 s
+  kind: sounding animation + calculation
+  data: A3 IGRA2 Trappes 2026-09-30T12 (etime on every level)
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + TimeGraph
+  runner_up: three.js balloon rising on the globe (s09 view)
+  why: a measured traveller's rate, from the radiosonde's own clock
+  related: []
+- id: s19_balloon_terms
+  t:
+  - 972.375
+  - 1042.025
+  sentence_times:
+  - - 972.375
+    - 974.4
+  - - 974.75
+    - 977.0
+  - - 977.35
+    - 987.25
+  - - 987.6
+    - 992.575
+  - - 992.925
+    - 995.3
+  - - 995.65
+    - 1007.3
+  - - 1007.65
+    - 1012.175
+  - - 1012.525
+    - 1024.8
+  - - 1026.3
+    - 1031.875
+  - - 1032.225
+    - 1041.225
+  beat: sizing the chain-rule terms for the balloon
+  visual: 'Picture zone: two profiles 00 UTC (faint) and 12 UTC (slate) with the 5.80 km gap bracketed ''−2.6 °C in 12 h''; a small
+    map (ERA5 or GFS 500 hPa T, France box, 12 UTC 30 Sep 2026) with the balloon''s drift track (teal, 17 km to the NNE, from the IGRA
+    winds and etime). Maths zone: house Balance-style log bars (one per term, labelled, numbers written): ''fixed place ≈ 6 × 10⁻⁵ °C/s''
+    (slate), ''sideways ≈ 1 × 10⁻⁴ °C/s'' (teal faint), ''rising ≈ −0.027 °C/s'' (teal); S9 keyword ''≈ 99 %'' on the rising bar; S10
+    ''∂T/∂z'' keyword returning to the profile.'
+  voiceover: 'Let''s size each term. First, the fixed place. Comparing this balloon with the one launched twelve hours earlier, the
+    air at five point eight kilometres cooled by about two and a half degrees in twelve hours. That''s only about six times ten to the
+    minus five degrees per second. Next, the sideways terms. The balloon drifted with the wind, about seventeen kilometres to the north-north-east,
+    through air whose temperature changed by only about one degree per hundred kilometres sideways. That''s around one times ten to
+    the minus four degrees per second. Last, the rising term: four point seven metres per second, times minus five point seven degrees
+    per kilometre, is minus zero point zero two seven degrees per second. [beat] So the rising term makes about ninety nine percent
+    of what the thermometer saw. That''s why we can read a balloon''s record as the temperature profile, partial capital T by partial
+    z, even though the balloon is moving.'
+  on_screen_eq:
+    latex: \frac{dT}{dt}=\underbrace{\frac{\partial T}{\partial t}}_{6\times10^{-5}}+\underbrace{u\frac{\partial T}{\partial x}+v\frac{\partial
+      T}{\partial y}}_{\sim10^{-4}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}
+    vallis_eq: 'provenance only: Kundu p. 858 display with our magnitudes'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
+  physics_source:
+    fn: fluidpy.diag.sounding.ascent_rates + drift (NEW F4); fluidpy.geo.sphere.gradient on D2; two soundings for ∂T/∂t
+    params:
+      times:
+      - 2026-09-30T00
+      - 2026-09-30T12
+      z_m: 5795
+    test: CHECK DT24 (∂T/∂t −6.0e-5 K/s), DT25 (drift 7.8 E, 14.6 N km), DT26 (sideways term from D2; sentence reworded to the data),
+      DT27 (share >= 98 %)
+  exaggeration:
+  - 'log-scale bars (said: ''about'', the sizes differ by hundreds)'
+  kind: profiles + drift map + magnitude bars
+  data: A3 IGRA2 Trappes 00 and 12 UTC 30 Sep 2026; D2 ERA5 (CDS) 500/700/850 hPa T 2026-09-30T12 (runner-up GFS analysis, AWS archive)
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + MAP (d3-geo) + house Balance
+    bars
+  runner_up: table of three numbers (less visible)
+  why: 'the dominant-term habit: size every term before believing a reading'
+  related: []
+- id: s20_parcel_pointer
+  t:
+  - 1042.025
+  - 1090.725
+  sentence_times:
+  - - 1042.025
+    - 1049.075
+  - - 1049.425
+    - 1060.45
+  - - 1060.8
+    - 1068.025
+  - - 1068.375
+    - 1077.55
+  - - 1077.9
+    - 1083.05
+  - - 1084.55
+    - 1089.925
+  beat: 'the special traveller: an air parcel (pointer to the material derivative)'
+  visual: 'Picture zone: MAP850 at Brest with teal 850 hPa streaklines (A1 u, v; RK2 tracks in the build script); one parcel glyph rides
+    a streak, its readout nearly flat. Maths zone: dT/dt becomes DT/Dt = ∂T/∂t + u·∇T (84 px, the DT/Dt row warm white, ∂T/∂t slate,
+    u·∇T teal); keyword ''material derivative''. S4: BraceNote ''dot product'' under u·∇T. S5-S6: CalcStack ''+2.9 − 3.7 ≈ −0.8 °C/h''
+    with the house Balance bars (local +2.9 slate, advection −3.7 teal with ''−'' glyph).'
+  voiceover: 'There''s one very special traveller: an air parcel, a small volume of air that moves with the wind. For an air parcel,
+    the speeds in the chain rule are the wind itself, and its rate gets its own name and symbol: capital D T by D t, the material derivative.
+    Its moving terms together are the wind dotted with the gradient, the dot product from the dot product movie. Over Brest, the place
+    warmed by two point nine degrees per hour, while the wind brought in warmer air at three point seven degrees per hour. So the air
+    parcel itself cooled by about zero point eight degrees per hour. [beat] We take this apart fully in the material derivative movie,
+    later in this series.'
+  on_screen_eq:
+    latex: \frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf u\cdot\nabla T\approx2.9-3.7\approx-0.8\ ^{\circ}\mathrm{C/h}
+    vallis_eq: 'provenance only: Kundu (B.1.4) (page image checked)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
+  physics_source:
+    fn: fluidpy.diag.advection.advection (A1) + ERA5 tendency
+    params:
+      lat: 48.5
+      lon: -4.5
+      time: 2023-11-01T18
+    test: CHECK DT19 (u·∇T −3.68 K/h; DT/Dt −0.76 K/h)
+  exaggeration:
+  - streaklines advanced 20x faster than real time (manifest)
+  kind: map + wind particles + equation
+  data: A1 ERA5 850 hPa t, u, v
+  tool: 'Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay + SVG streaklines + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote;
+    notes.tsx Keyword pointers)'
+  runner_up: three.js globe streaks (1a module)
+  why: names the special case and hands it to its own movie without depending on it
+  related:
+  - n: '10'
+    slug: ch00_material_derivative (planned)
+    covers: DT/Dt = dT/dt + u . grad T for an air parcel, Leibniz, continuity
+    spoken_pointer: true
+  - n: 0.1 / 0.1b
+    slug: ch00_dot_product_why / ch00_dot_product_v01b
+    covers: the dot product; u . grad T as the advection rate
+    spoken_pointer: true
+- id: s21_change_variables
+  t:
+  - 1090.725
+  - 1159.225
+  sentence_times:
+  - - 1090.725
+    - 1095.025
+  - - 1095.375
+    - 1103.625
+  - - 1103.975
+    - 1108.775
+  - - 1109.125
+    - 1121.25
+  - - 1121.6
+    - 1130.875
+  - - 1131.225
+    - 1137.375
+  - - 1138.875
+    - 1147.35
+  - - 1148.85
+    - 1153.125
+  - - 1153.475
+    - 1158.425
+  beat: 'chain rule to change variables: per km -> per hPa'
+  visual: 'Picture zone: the Trappes profile with a second vertical axis in hPa on the right (1000-400, 52 px ticks; mapping from the
+    sounding''s own p(z)). S4: maths zone ''∂T/∂p = ∂T/∂z · ∂z/∂p'' (84 px), gold brace ''chain rule''. S5: brackets on the axes ''4262
+    m'', ''−350 hPa''. S6: ''∂z/∂p ≈ −12.2 m/hPa''. S7: ''(−5.7 °C/km)(−12.2 m/hPa) ≈ +0.069 °C/hPa'' with the ''km'' and ''m'' units
+    converted on screen (÷ 1000). S8: a downward arrow ''p rises, T rises''.'
+  voiceover: The chain rule also lets us swap one variable for another. Meteorologists often use pressure instead of height to say how
+    high something is, because a balloon measures pressure directly. So how do we turn a rate per kilometre into a rate per hectopascal?
+    Along the balloon's climb, height is a function of pressure, so partial capital T by partial p equals partial capital T by partial
+    z, times partial z by partial p. Between our two levels, the height rose four thousand two hundred and sixty two metres, while the
+    pressure fell three hundred and fifty hectopascals. So partial z by partial p is minus twelve point two metres per hectopascal.
+    [beat] Times minus five point seven degrees per kilometre, that gives plus zero point zero six nine degrees per hectopascal. [beat]
+    So the air gets warmer as the pressure rises, going down. Pressure as a vertical coordinate has its own movie in this series.
+  on_screen_eq:
+    latex: \frac{\partial T}{\partial p}=\frac{\partial T}{\partial z}\,\frac{\partial z}{\partial p}\approx(-5.7\times10^{-3})(-12.2)\approx+0.069\
+      ^{\circ}\mathrm{C/hPa}
+    vallis_eq: 'provenance only: chain rule for a change of variable, the one-variable case of Kundu (B.2.1) (page image checked)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=4
+  physics_source:
+    fn: fluidpy.diag.sounding.layer_lapse_rate (NEW F4) in z and in p
+    params:
+      levels_hPa:
+      - 850
+      - 500
+    test: CHECK DT28 (direct −24.1/−350 = 0.0689 equals the chain product)
+  exaggeration: []
+  kind: sounding chart + equation
+  data: A3
+  tool: 'Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + Remotion + KaTeX (house kit
+    tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: 'skew-T chart (taught later, #27)'
+  why: the chain rule as a tool to change coordinates, the move behind pressure coordinates
+  related:
+  - n: 23A
+    slug: ch00_pressure_coordinates (planned)
+    covers: pressure as a vertical coordinate; constant-pressure charts
+    spoken_pointer: true
+  - n: '5'
+    slug: ch00_coordinates (planned)
+    covers: polar, cylindrical, spherical coordinates; changing coordinates by the chain rule
+    spoken_pointer: true
+- id: s22_state_functions
+  t:
+  - 1159.225
+  - 1210.4
+  sentence_times:
+  - - 1159.225
+    - 1163.25
+  - - 1163.6
+    - 1168.475
+  - - 1168.825
+    - 1170.8
+  - - 1171.15
+    - 1180.1
+  - - 1180.45
+    - 1186.2
+  - - 1186.55
+    - 1192.675
+  - - 1193.025
+    - 1198.225
+  - - 1198.575
+    - 1203.15
+  - - 1203.5
+    - 1209.6
+  beat: 'perfect differentials: state functions (Like/Unlike)'
+  visual: 'Full width 3-D: a real hill (ETOPO 2022 relief of the Monts d''Arrée near Brest, x5 vertical, BMNG texture) with a car park
+    (gold dot) and the summit (gold dot); two trails, straight (teal) and winding (orange). S2-S3: a height readout rises to the same
+    ''+200 m'' on both trails (from ETOPO); S4: distance readouts differ (''2.1 km'' vs ''4.8 km'', from the drawn trails). S5: keyword
+    ''state function''. S6: keywords ''perfect differential'', ''exact differential''. S7: three small icons T, p, ρ. S8: the distance
+    readouts pulse.'
+  voiceover: 'Now a question that matters a lot in the physics of air. When is a small change, d of something, really the change of
+    a quantity? Think of climbing a hill. The height you gain from the car park to the summit is the same whichever trail you take:
+    it depends only on where you start and where you end. The distance you walk is different, because a winding trail is longer than
+    a straight one. A quantity like the height, which depends only on where you are, is called a state function. Its small change is
+    called a perfect differential, or an exact differential. The temperature, pressure and density of air are all state functions. But
+    the distance walked is not: its small steps add up to a total that depends on the route.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.terrain (ETOPO subset) + trail lengths by fluidpy.geo.sphere.great_circle_distance summed
+    params:
+      region: Monts d'Arree 48.4 N 3.9 W
+    test: CHECK DT29 (height gain equal on both trails; lengths)
+  exaggeration:
+  - 'relief x5 vertical (said: ''drawn taller'')'
+  kind: 3-D terrain
+  data: A7 ETOPO 2022 60 arc-s Brittany subset; A7 BMNG
+  tool: three.js terrain in Remotion (1a s06 module)
+  runner_up: Cesium drape on the heightmap (user likes it; ~0.5 s/frame)
+  why: the path-independence idea as a real place before any formula
+  related: []
+- id: s23_exact_test
+  t:
+  - 1210.4
+  - 1282.1
+  sentence_times:
+  - - 1210.4
+    - 1213.4
+  - - 1213.75
+    - 1219.0
+  - - 1219.35
+    - 1227.6
+  - - 1227.95
+    - 1232.875
+  - - 1233.225
+    - 1239.325
+  - - 1239.675
+    - 1242.875
+  - - 1243.225
+    - 1248.8
+  - - 1249.15
+    - 1253.675
+  - - 1255.175
+    - 1258.325
+  - - 1258.675
+    - 1261.125
+  - - 1261.475
+    - 1264.925
+  - - 1266.425
+    - 1274.675
+  - - 1276.175
+    - 1281.3
+  beat: the exactness test, easy examples
+  visual: 'Maths zone: ''M dx + N dy'' (84 px); S2 ''M = ∂f/∂x, N = ∂f/∂y''; S3 the s10 ''='' of mixed partials returns (thumbnail);
+    S4 ''∂M/∂y = ∂N/∂x'' (96 px, gold). S5-S6: ''y dx + x dy'': ''1 = 1'' (check glyph) ''= d(xy)''. S7-S8: ''y dx − x dy'': ''1 ≠ −1''
+    (rose cross with ''≠''). Picture zone: a unit square in the x-y plane; S9 a gold dot walks round it anticlockwise, side by side
+    the running sum readout 0 → −0.5 … → −2 (CHECK); S10 for ''y dx + x dy'' the same walk returns to 0.'
+  voiceover: 'How can we tell, just from the formula? Take a small change of the form M times d x, plus N times d y. If it''s the change
+    of some function f, then M is partial f by partial x, and N is partial f by partial y. And we just saw that mixed partial derivatives
+    come out the same in either order. So the test is: partial M by partial y must equal partial N by partial x. Let''s try y d x plus
+    x d y. Partial y by partial y is one, and partial x by partial x is one. They match, so it''s exact: it''s the change of x times
+    y. [beat] Now try y d x minus x d y. We get one against minus one. They don''t match, so it''s not the change of anything. [beat]
+    Add it up going once round a square of side one, anticlockwise, and you come back to the start with minus two, not zero. [beat]
+    For a perfect differential, every round trip adds up to exactly zero.'
+  on_screen_eq:
+    latex: \frac{\partial M}{\partial y}=\frac{\partial N}{\partial x};\qquad \oint (y\,dx-x\,dy)=-2
+    vallis_eq: 'provenance only: exactness test from equal mixed partials (Vallis (1.69) uses it; page image checked); our examples'
+    page_png: chapters/pages/ch01/p037.png
+  physics_source:
+    fn: fluidpy.geo.calculus.exactness_residual + loop_integral (NEW F1)
+    params:
+      examples:
+      - y dx + x dy
+      - y dx - x dy
+      loop: unit square, anticlockwise
+    test: CHECK DT30, DT31
+  exaggeration: []
+  kind: equation animation + loop
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG loop'
+  runner_up: sympy-rendered table
+  why: the test follows in one line from the mixed-partials scene
+  related: []
+- id: s24_ideal_gas
+  t:
+  - 1282.1
+  - 1351.45
+  sentence_times:
+  - - 1282.1
+    - 1283.825
+  - - 1284.175
+    - 1291.475
+  - - 1291.825
+    - 1300.2
+  - - 1300.55
+    - 1307.025
+  - - 1307.375
+    - 1316.475
+  - - 1316.825
+    - 1318.625
+  - - 1318.975
+    - 1325.675
+  - - 1326.025
+    - 1330.775
+  - - 1332.275
+    - 1336.45
+  - - 1336.8
+    - 1342.125
+  - - 1342.475
+    - 1350.65
+  beat: the ideal gas law as a perfect differential
+  visual: 'Picture zone: a cube of air (three.js, 1 m), molecules as faint dots; readouts p, ρ, T beside it. Maths zone: ''p = ρRT''
+    (96 px) with BraceNotes ''pressure'', ''density: kg per m³'', ''temperature (K)'', ''R = 287 J kg⁻¹ K⁻¹''. S5: ''dp = RT dρ + ρR
+    dT''. S6-S7: ''∂(RT)/∂T = R = ∂(ρR)/∂ρ'' (check glyph). S8: divide by ρRT (Strike on the cancelled factors). S9: ''dp/p = dρ/ρ +
+    dT/T'' (84 px). S10: keywords ''fractional changes add''.'
+  voiceover: 'Now real air. Its pressure, density and temperature are tied together by the ideal gas law: p equals rho R T. Here p is
+    the pressure, rho the density, which is the mass of air in each cubic metre, and T the temperature in kelvin. R is a constant for
+    dry air: two hundred and eighty seven joules per kilogram per kelvin. So pressure is a function of density and temperature, and
+    its total differential is d p equals R T d rho, plus rho R d T. Let''s test it. Partial of R T by partial T is R, and partial of
+    rho R by partial rho is also R. They match, so pressure passes the test, as a state function must. [beat] Now divide both sides
+    by p, which is rho R T. We get d p over p equals d rho over rho, plus d T over T. In words, the fractional change in pressure is
+    the fractional change in density, plus the fractional change in temperature.'
+  on_screen_eq:
+    latex: p=\rho RT,\qquad dp=RT\,d\rho+\rho R\,dT,\qquad \frac{dp}{p}=\frac{d\rho}{\rho}+\frac{dT}{T}
+    vallis_eq: 'provenance only: Vallis (1.53) p = ρRT (page image checked); the differential is ours'
+    page_png: chapters/pages/ch01/p033.png
+  physics_source:
+    fn: fluidpy.core.thermo.perfect_gas_pressure + sympy differential
+    params:
+      R: 287.0
+    test: CHECK DT32
+  exaggeration:
+  - molecules illustrative
+  kind: 3-D cube + equation
+  data: none
+  tool: 'three.js cube + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: SVG cube
+  why: a real state function passes the test
+  related:
+  - n: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, temperature, the ideal gas law, hydrostatic balance, scale height, reanalysis
+    spoken_pointer: false
+- id: s25_ideal_gas_example
+  t:
+  - 1351.45
+  - 1400.05
+  sentence_times:
+  - - 1351.45
+    - 1353.15
+  - - 1353.5
+    - 1363.05
+  - - 1363.4
+    - 1374.05
+  - - 1375.55
+    - 1381.7
+  - - 1382.05
+    - 1384.15
+  - - 1384.5
+    - 1392.025
+  - - 1393.525
+    - 1399.25
+  beat: 'fractional changes: warmed air is lighter'
+  visual: 'Picture zone: a sunny field (code-drawn sun glyph, house SunGlyph) with two air cubes side by side, the warmed one rising
+    slowly; readouts ''290 K'' -> ''300 K'', ''p fixed''. Maths zone CalcStack: ''dρ/ρ = −dT/T = −10/290 ≈ −3.4 %''; then ''exact: 290/300
+    − 1 ≈ −3.3 %''. Keyword ''lighter -> rises''.'
+  voiceover: 'Let''s use it. On a sunny afternoon, suppose the air near the ground warms from two hundred and ninety to three hundred
+    kelvin, while the pressure stays the same. The pressure term is zero, so d rho over rho equals minus d T over T: minus ten over
+    two hundred and ninety, about minus three and a half percent. [beat] So the warmed air is about three and a half percent lighter
+    than the air around it, which didn''t warm. That''s what makes it rise. The exact answer is two hundred and ninety over three hundred,
+    minus one: minus three point three percent. [beat] That''s close, because ten kelvin is a small step compared with two hundred and
+    ninety.'
+  on_screen_eq:
+    latex: \frac{d\rho}{\rho}=-\frac{dT}{T}=-\frac{10}{290}\approx-3.4\,\%
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.thermo.perfect_gas_density
+    params:
+      T:
+      - 290
+      - 300
+      p: 100000
+    test: CHECK DT33 (−3.45 % linear, −3.33 % exact)
+  exaggeration:
+  - illustrative scene (thought example)
+  kind: schematic + calculation
+  data: none
+  tool: 'Remotion SVG + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: real ERA5 afternoon heating at Trappes (adds data, not clarity)
+  why: the fractional form with numbers, and the first 'linear vs exact' comparison
+  related: []
+- id: s26_hydrostatic
+  t:
+  - 1400.05
+  - 1461.5
+  sentence_times:
+  - - 1400.05
+    - 1402.525
+  - - 1402.875
+    - 1411.0
+  - - 1411.35
+    - 1420.1
+  - - 1420.45
+    - 1425.95
+  - - 1426.3
+    - 1432.2
+  - - 1432.55
+    - 1442.1
+  - - 1443.6
+    - 1455.575
+  - - 1455.925
+    - 1460.0
+  beat: hydrostatic balance and the scale height
+  visual: 'Picture zone: a tall air column (three.js, the 1a/weather-basics column module) over Trappes with a thin slab dz highlighted;
+    its weight arrow (brown, gravity colour) and the pressure arrows below/above (orange). Maths zone: ''dp = −ρ g dz'' (96 px, Vallis
+    (1.51) form ∂p/∂z = −ρg written as the differential); S5 divide by p, ''ρ/p = 1/RT'' substitution flies in; S6 ''dp/p = −dz/H, H
+    = RT/g'' with BraceNote ''scale height''. S7: CalcStack ''287 × 293 ÷ 9.81 ≈ 8570 m'' with the units line struck (J/(kg K) × K ÷
+    m/s² = m).'
+  voiceover: 'Pressure also changes with height. In the weather basics movie, we met hydrostatic balance: at every height, the pressure
+    holds up the weight of the air above. As a differential, d p equals minus rho g d z, where g is gravity, nine point eight one metres
+    per second squared. Going up a small step d z, the pressure drops by the weight of that thin layer. Now divide by p, and use the
+    gas law: rho over p is one over R T. We get d p over p equals minus d z over capital H, where capital H, which is R T over g, is
+    called the scale height. [beat] At the ground at Trappes, at nineteen point eight degrees Celsius, capital H is two hundred and
+    eighty seven, times two hundred and ninety three, divided by nine point eight one. That''s about eight thousand five hundred and
+    seventy metres. [beat]'
+  on_screen_eq:
+    latex: \frac{\partial p}{\partial z}=-\rho g\ \Rightarrow\ \frac{dp}{p}=-\frac{dz}{H},\quad H=\frac{RT}{g}\approx\frac{287\times293}{9.81}\approx8570\
+      \mathrm m
+    vallis_eq: 'provenance only: Vallis (1.51) hydrostatic balance (page image checked); H from (1.53)'
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.core.statics.scale_height (and fluidpy.geo.atmos.scale_height)
+    params:
+      T: 292.95
+    test: CHECK DT34
+  exaggeration:
+  - column drawn x20 taller than wide
+  kind: 3-D column + equation
+  data: A3 (ground T at Trappes)
+  tool: 'three.js column + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: SVG slab
+  why: the second real differential the Taylor block needs
+  related:
+  - n: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, temperature, the ideal gas law, hydrostatic balance, scale height, reanalysis
+    spoken_pointer: true
+- id: s27_exponential
+  t:
+  - 1461.5
+  - 1517.15
+  sentence_times:
+  - - 1461.5
+    - 1466.625
+  - - 1466.975
+    - 1476.375
+  - - 1476.725
+    - 1483.7
+  - - 1484.05
+    - 1487.425
+  - - 1487.775
+    - 1495.3
+  - - 1495.65
+    - 1498.05
+  - - 1498.4
+    - 1504.85
+  - - 1505.2
+    - 1511.85
+  - - 1512.2
+    - 1516.35
+  beat: the exponential pressure curve vs the real balloon
+  visual: 'Picture zone: p (hPa, 1000-0, log-free linear axis) against height (0-30 km); the isothermal exponential p₀e^(−z/H) (slate)
+    draws itself; then the balloon''s measured p(z) (teal dots, every IGRA level) rises along it, drifting below above ~3 km; the gap
+    shaded faintly. Maths zone: ''p = p₀ e^(−z/H)'' (96 px), ''e ≈ 2.718''. S5 keyword ''differential equation''. S7: small keyword
+    ''colder → denser → faster fall''.'
+  voiceover: 'If the temperature were the same all the way up, capital H would be a constant. Then d p over p equals minus d z over
+    capital H says that the pressure falls by the same fraction for every metre we climb. That makes an exponential: p equals the ground
+    pressure, times e to the minus z over capital H. Here e is the number two point seven one eight. This is the solution of a differential
+    equation, and the ordinary differential equations movie solves many like it. Now let''s compare with the balloon. The real pressure
+    follows the exponential closely near the ground, then falls below it higher up. That''s because the real air gets colder, and colder
+    air is denser, so the pressure falls faster. We''ll use this curve in a minute to see how Taylor series work.'
+  on_screen_eq:
+    latex: p=p_0\,e^{-z/H}
+    vallis_eq: 'provenance only: integral of dp/p = −dz/H at constant T (weather basics movie; Vallis (1.51) + (1.53))'
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.core.statics.isothermal_pressure + fluidpy.data.igra.find_sounding
+    params:
+      p0_hPa: 997.5
+      T: 292.95
+    test: CHECK DT35
+  exaggeration: []
+  kind: data chart
+  data: A3
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom)
+  runner_up: log-p axis (taught later; linear reads easier here)
+  why: a real curve to expand next
+  related:
+  - n: '13'
+    slug: ch00_odes (planned)
+    covers: growth and decay ODEs such as dp/dz = -p/H
+    spoken_pointer: true
+- id: s28_heat_routes
+  t:
+  - 1517.15
+  - 1584.45
+  sentence_times:
+  - - 1517.15
+    - 1522.425
+  - - 1522.775
+    - 1531.725
+  - - 1532.075
+    - 1538.35
+  - - 1538.7
+    - 1542.725
+  - - 1543.075
+    - 1549.0
+  - - 1549.35
+    - 1555.875
+  - - 1557.375
+    - 1562.25
+  - - 1562.6
+    - 1569.775
+  - - 1570.125
+    - 1572.2
+  - - 1572.55
+    - 1583.65
+  beat: heat and work depend on the route
+  visual: 'Picture zone: a p-α diagram (α = specific volume on x, 0.7-1.3 m³/kg; p on y, hPa); start A (0.80 m³/kg, 280 K, 1005 hPa)
+    and end B (1.20 m³/kg, 280 K, 670 hPa) as gold dots, the 280 K isotherm faint. S3-S5: the three routes draw in turn (orange, teal,
+    rose with dash), each with a small parcel cube shrinking/expanding along it. S6: heat readouts ''27 kJ/kg'', ''33 kJ/kg'', ''40
+    kJ/kg'' at the route labels. S7 keyword ''heat: not a state function''. S9 keyword ''internal energy: ΔI = 0'' (warm white) at B
+    for all three. đQ, đW glyphs (84 px) with the bar on the d highlighted gold.'
+  voiceover: 'Now the most important small changes that are not perfect: heat and work. Take an air parcel at two hundred and eighty
+    kelvin, and let it expand to one and a half times its volume, ending at the same temperature. Route one: first cool it at a fixed
+    volume, then heat it as it expands at a fixed pressure. Route two: expand it slowly at a fixed temperature. Route three: heat it
+    as it expands at a fixed pressure, then cool it at a fixed volume. The heat we must add is twenty seven, thirty three and forty
+    kilojoules for each kilogram of air. [beat] Three routes, three different amounts of heat, between the same two states. So heat
+    is not a state function: there''s no amount of heat stored in the air, only heat flowing in or out. The same is true of work. But
+    the internal energy, the energy of the molecules'' motion, changes by exactly zero on all three routes, because the parcel ends
+    at the temperature it started with.'
+  on_screen_eq:
+    latex: dI=đQ+đW
+    vallis_eq: 'provenance only: Vallis (1.61) inexact differentials đQ, đW (page image checked); chemical term omitted (dry air)'
+    page_png: chapters/pages/ch01/p036.png
+  physics_source:
+    fn: fluidpy.core.thermo.path_heat_work_totals + process_path
+    params:
+      A:
+      - 0.8
+      - 280.0
+      B:
+      - 1.2
+      - 280.0
+      kinds:
+      - isochoric-isobaric
+      - isothermal
+      - isobaric-isochoric
+    test: CHECK DT36 (26.79, 32.59, 40.19 kJ/kg; Δe = 0)
+  exaggeration:
+  - 'a 50 % expansion: a large, clean change chosen so the three routes separate (thought experiment, said)'
+  kind: state diagram + routes
+  data: none
+  tool: 'Remotion SVG p-α diagram + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: three.js piston animation (slower to read)
+  why: the path dependence of heat seen as three numbers between the same two states
+  related: []
+- id: s29_entropy
+  t:
+  - 1584.45
+  - 1671.525
+  sentence_times:
+  - - 1584.45
+    - 1586.475
+  - - 1586.825
+    - 1594.15
+  - - 1594.5
+    - 1601.1
+  - - 1601.45
+    - 1608.1
+  - - 1608.45
+    - 1612.025
+  - - 1612.375
+    - 1614.175
+  - - 1614.525
+    - 1624.175
+  - - 1624.525
+    - 1628.475
+  - - 1629.975
+    - 1632.85
+  - - 1633.2
+    - 1637.975
+  - - 1638.325
+    - 1641.25
+  - - 1641.6
+    - 1643.15
+  - - 1644.65
+    - 1652.125
+  - - 1652.475
+    - 1660.525
+  - - 1662.025
+    - 1670.725
+  beat: dividing heat by temperature gives a perfect differential (entropy)
+  visual: 'Maths zone: ''đQ = c_v dT + p dα'' (84 px) with BraceNotes ''c_v: heat per kg per K'', ''α = 1/ρ: specific volume''; ''p
+    = RT/α'' substitutes in. S5: test row ''∂c_v/∂α = 0'' vs ''∂(RT/α)/∂T = R/α'' with ''≠'' (rose). S6: ''÷ T'' (gold); S7 ''c_v dT/T
+    + R dα/α'', test ''0 = 0'' (check). S8 ''dη = đQ/T'' keyword ''entropy''. Picture zone: the s28 routes, each now labelled ''Δη =
+    116 J kg⁻¹ K⁻¹'' on S9. S10: keyword ''potential temperature'' (pointer).'
+  voiceover: 'Here''s the test at work. For each kilogram of air, the heat added in a small, slow step is c v d T, plus p d alpha. Here
+    c v is the heat needed to warm one kilogram by one kelvin at a fixed volume. Alpha, which is one over rho, is the volume of one
+    kilogram, called the specific volume. With the gas law, p is R T over alpha. Let''s test it. Partial of c v by partial alpha is
+    zero, but partial of R T over alpha by partial T is R over alpha, which is not zero. They don''t match, so heat is not a perfect
+    differential. [beat] Now divide the heat by the temperature. We get c v d T over T, plus R d alpha over alpha. Test again: zero,
+    and zero. They match! [beat] So heat divided by temperature is a perfect differential, the small change of a state function called
+    entropy. On all three of our routes, the entropy rose by the same amount: one hundred and sixteen joules per kilogram per kelvin.
+    [beat] Its close cousin, the potential temperature, follows air parcels through the whole atmosphere, and it has its own movie in
+    this series.'
+  on_screen_eq:
+    latex: đQ=c_v\,dT+p\,d\alpha,\qquad d\eta=\frac{đQ}{T}=c_v\frac{dT}{T}+R\frac{d\alpha}{\alpha}
+    vallis_eq: 'provenance only: Vallis (1.62) T dη = đQ and (1.63) đW = −p dα (page image checked); ideal-gas form ours'
+    page_png: chapters/pages/ch01/p036.png
+  physics_source:
+    fn: fluidpy.core.thermo.path_heat_work_totals (int_dq_over_T) + perfect_gas_entropy_change; sympy exactness
+    params:
+      A:
+      - 0.8
+      - 280.0
+      B:
+      - 1.2
+      - 280.0
+    test: CHECK DT37 (116.39 J/kg/K on all three routes), DT38 (exactness residuals R/alpha and 0)
+  exaggeration: []
+  kind: equation derivation + state diagram
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG p-α'
+  runner_up: —
+  why: 'the integrating factor 1/T: the move behind entropy and potential temperature'
+  related:
+  - n: '24'
+    slug: ch00_thermodynamics (planned)
+    covers: first law, entropy, potential temperature, lapse rates, Maxwell relations
+    spoken_pointer: true
+- id: s30_zoom
+  t:
+  - 1671.525
+  - 1709.675
+  sentence_times:
+  - - 1671.525
+    - 1673.45
+  - - 1673.8
+    - 1679.775
+  - - 1680.125
+    - 1683.575
+  - - 1683.925
+    - 1687.4
+  - - 1687.75
+    - 1689.225
+  - - 1689.575
+    - 1691.05
+  - - 1691.4
+    - 1695.5
+  - - 1695.85
+    - 1700.375
+  - - 1700.725
+    - 1705.55
+  - - 1705.9
+    - 1708.875
+  beat: 'Taylor series: zoom until it is a line'
+  visual: 'Picture zone: the full Trappes profile 0-32 km (slate, °C ticks, km ticks), tropopause kink visible at ~13 km. S3-S5: MapCamera
+    zooms on 1.53 km three times (×4 each, ticks re-label so values stay true); the gold tangent through the point stays drawn; at the
+    last zoom the data points and the tangent coincide. S6: keyword ''tangent''. S8: keyword ''locally a line''.'
+  voiceover: Now let's zoom in. Here's the temperature profile from the Trappes balloon, all the way up to thirty two kilometres. From
+    afar, it bends, and it even has kinks. Let's zoom in around one and a half kilometres. And again. And again. The closer we look,
+    the straighter it gets, until it's a line. That line is the tangent, and its slope is the derivative there. So close to any one
+    point, a smooth curve is almost a straight line. That's the idea behind Taylor series.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.igra.find_sounding + fill_heights
+    params:
+      time: 2026-09-30T12
+    test: CHECK DT20
+  exaggeration:
+  - zoom x4, x16, x64 (ticks re-label, values true)
+  kind: data chart zoom
+  data: A3
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + house MapCamera
+  runner_up: —
+  why: the user's 'zoom in until it's a line' with a real curve
+  related: []
+- id: s31_linear_approx
+  t:
+  - 1709.675
+  - 1774.6
+  sentence_times:
+  - - 1709.675
+    - 1712.375
+  - - 1712.725
+    - 1721.325
+  - - 1721.675
+    - 1726.55
+  - - 1726.9
+    - 1733.8
+  - - 1734.15
+    - 1737.65
+  - - 1738.0
+    - 1745.075
+  - - 1746.575
+    - 1752.025
+  - - 1753.525
+    - 1757.1
+  - - 1757.45
+    - 1763.35
+  - - 1763.7
+    - 1766.35
+  - - 1767.85
+    - 1773.8
+  beat: first-order Taylor on the temperature profile
+  visual: 'Picture zone: profile 0-7 km with the tangent at 1.53 km extended (gold); markers at +1 km (2.53 km) and +4.26 km (5.80 km):
+    predicted (gold ring) vs measured (slate dot) with the gap bracketed. Maths zone: ''T(z₀ + h) ≈ T(z₀) + h dT/dz'' (96 px); CalcStack
+    ''12.3 + (1)(−4.9) = 7.4'' -> ''measured 6.9, off 0.5''; ''12.3 + (4.26)(−4.9) ≈ −8.4'' -> ''measured −11.8, off 3.4''. Slope from
+    the neighbouring levels (1.17 and 2.10 km) shown as a small bracket.'
+  voiceover: Let's write that line as a formula. Starting at a height z nought, the temperature a small step h higher is about the temperature
+    at z nought, plus h times the slope there. At one and a half kilometres, the temperature was twelve point three degrees. The slope,
+    from the readings just below and just above, was minus four point nine degrees per kilometre. Let's predict the temperature one
+    kilometre higher. Twelve point three, plus one kilometre times minus four point nine, is seven point four degrees. [beat] The balloon
+    measured six point nine, so the line is off by only half a degree. [beat] Now let's predict four point three kilometres higher.
+    The line gives minus eight point four, but the balloon measured minus eleven point eight. That's off by more than three degrees.
+    [beat] The farther we go from the starting point, the worse the line gets, because the curve bends.
+  on_screen_eq:
+    latex: T(z_0+h)\approx T(z_0)+h\,\frac{dT}{dz}
+    vallis_eq: 'provenance only: first two terms of Kundu (10.4) (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source:
+    fn: fluidpy.geo.calculus.taylor_polynomial (NEW F1) order 1 on the sounding; slope by fluidpy.diag.sounding.layer_lapse_rate (NEW
+      F4)
+    params:
+      z0_m: 1533
+      h_m:
+      - 1000
+      - 4262
+    test: CHECK DT39 (slope −4.86 K/km; 7.44 vs 6.87; −8.41 vs −11.8)
+  exaggeration: []
+  kind: data chart + calculation
+  data: A3
+  tool: 'Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + Remotion + KaTeX (house kit
+    tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: —
+  why: the line's error grows with the step, measured on real data
+  related: []
+- id: s32_add_bend
+  t:
+  - 1774.6
+  - 1842.7
+  sentence_times:
+  - - 1774.6
+    - 1777.775
+  - - 1778.125
+    - 1783.875
+  - - 1784.225
+    - 1788.95
+  - - 1789.3
+    - 1791.425
+  - - 1791.775
+    - 1795.45
+  - - 1795.8
+    - 1800.25
+  - - 1800.6
+    - 1805.975
+  - - 1807.475
+    - 1818.075
+  - - 1818.425
+    - 1823.15
+  - - 1823.5
+    - 1826.975
+  - - 1827.325
+    - 1841.9
+  beat: why each Taylor term has its factorial
+  visual: 'Picture zone: a parabola c h² beside its slope 2ch (line) and second derivative 2c (flat), stacked (house Grid). Maths zone:
+    ''h²/2 · d²f/dx²'' with BraceNote ''the bend''; CalcStack ''d/dh (c h²) = 2ch'', ''d²/dh² (c h²) = 2c'', ''c = f″/2''. S5: ''h³/3!
+    · f‴'', ''3! = 3 × 2 × 1 = 6''. S7: the full series (96 px): f(x₀+h) = f + h f′ + h²/2! f″ + h³/3! f‴ + …, each term in its own
+    colour, building left to right. No primes are spoken: the screen pairs ′, ″ with the words ''slope'', ''second derivative''.'
+  voiceover: 'To do better, we add a term for the bend. The bend is measured by the second derivative: how fast the slope itself changes.
+    We add h squared, times the second derivative, divided by two. Why divided by two? Take the simplest bend, c times h squared. Its
+    slope is two c h, and its second derivative is two c. So to make the bend''s second derivative come out right, c must be half of
+    it. [beat] The same idea gives the next term: h cubed, times the third derivative, divided by three times two times one, which is
+    written three factorial. Each term makes one more derivative come out right at the starting point. Added up for ever, this is the
+    Taylor series. f at x nought plus h equals f, plus h times the slope, plus h squared over two factorial times the second derivative,
+    plus h cubed over three factorial times the third derivative, and so on.'
+  on_screen_eq:
+    latex: f(x_0+h)=f(x_0)+h\,f'(x_0)+\frac{h^2}{2!}f''(x_0)+\frac{h^3}{3!}f'''(x_0)+\cdots
+    vallis_eq: 'provenance only: Taylor series, the rows of Kundu (10.4)-(10.5) (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source:
+    fn: fluidpy.core.fd.taylor_table_sympy + sympy series
+    params: {}
+    test: CHECK DT41
+  exaggeration: []
+  kind: equation derivation
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG curves'
+  runner_up: Manim CE insert
+  why: the factorials explained, not quoted
+  related: []
+- id: s33_series_example
+  t:
+  - 1842.7
+  - 1900.8
+  sentence_times:
+  - - 1842.7
+    - 1847.525
+  - - 1847.875
+    - 1852.725
+  - - 1853.075
+    - 1860.475
+  - - 1860.825
+    - 1871.375
+  - - 1872.875
+    - 1881.475
+  - - 1882.975
+    - 1894.125
+  - - 1895.625
+    - 1900.0
+  beat: Taylor series of e^x with easy numbers
+  visual: 'Picture zone: e^x on 0-1.2 (slate) with the partial sums for h = 0.1 and h = 1 drawn as curves of order 0, 1, 2, 3, 4 (faint
+    family + bold current, 3B1B ladder). Maths zone: ''e^h = 1 + h + h²/2 + h³/6 + …''; CalcStack for h = 0.1: ''1'', ''1.1'', ''1.105'',
+    ''1.10517'' with ''calculator 1.10517'' and a check glyph; then for h = 1: ''1, 2, 2.5, 2.667, 2.708 → 2.718''.'
+  voiceover: 'Let''s watch a Taylor series at work on an easy function, e to the x. All its derivatives are e to the x too, so at zero
+    they''re all one. Then e to the h is one, plus h, plus h squared over two, plus h cubed over six, and so on. For h equals zero point
+    one, the sums are one, then one point one, then one point one zero five, then one point one zero five one seven. [beat] The calculator
+    also says one point one zero five one seven, so just three terms already give four correct figures. [beat] For h equals one, we
+    need more terms: one, two, two point five, two point six six seven, two point seven zero eight, and on towards two point seven one
+    eight. [beat] So a small step needs few terms, and a big step needs many.'
+  on_screen_eq:
+    latex: e^{h}=1+h+\frac{h^2}{2}+\frac{h^3}{6}+\cdots
+    vallis_eq: 'provenance only: standard series (our example)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.taylor_polynomial (NEW F1); fluidpy.core.fd.test_function('exp')
+    params:
+      h:
+      - 0.1
+      - 1.0
+      orders:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+    test: CHECK DT42
+  exaggeration: []
+  kind: curve family + calculation
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG curves'
+  runner_up: —
+  why: convergence with numbers the viewer can check
+  related: []
+- id: s34_pressure_line
+  t:
+  - 1900.8
+  - 1963.225
+  sentence_times:
+  - - 1900.8
+    - 1902.525
+  - - 1902.875
+    - 1911.475
+  - - 1911.825
+    - 1917.425
+  - - 1917.775
+    - 1926.85
+  - - 1928.35
+    - 1937.325
+  - - 1938.825
+    - 1944.025
+  - - 1944.375
+    - 1947.9
+  - - 1948.25
+    - 1952.825
+  - - 1953.175
+    - 1961.725
+  beat: first-order Taylor of the pressure curve is hydrostatic balance
+  visual: 'Picture zone: the s27 chart zoomed to 0-1.5 km above Trappes (168 m station height) with the exponential (slate), the line
+    (gold), the line + bend (orange) and the balloon''s dots (teal). Maths zone: ''p ≈ p₀(1 − z/H)'', BraceNote under ''p₀/H'' -> ''ρ₀
+    g'' (hydrostatic, gold link back to s26). CalcStack ''1.186 × 9.81 ≈ 11.6 Pa/m'' -> ''1 hPa per 8.6 m''. S7: a small altimeter glyph.
+    S8-S9: at 1006 m above the station: ''line 880.4'', ''+ bend 887.3'', ''balloon 887.0'' (hPa) with CurvedLinks to the three markers.'
+  voiceover: 'Now the pressure. Let''s expand p equals the ground pressure times e to the minus z over capital H, for a height step
+    z above the ground. The first two terms are the ground pressure, times one minus z over capital H. Look at the slope of that line:
+    the ground pressure over capital H is rho g, so this line is just hydrostatic balance at the ground. [beat] At Trappes, that''s
+    a fall of eleven point six pascals for every metre, or one hectopascal for every eight point six metres you climb. [beat] Pilots
+    and aircraft altimeters use this rule of thumb near the ground. Let''s test it one kilometre above the station. The line gives eight
+    hundred and eighty point four hectopascals. Adding the bend gives eight hundred and eighty seven point three, and the balloon measured
+    eight hundred and eighty seven point zero. [beat]'
+  on_screen_eq:
+    latex: p\approx p_0\Big(1-\frac{z}{H}+\frac{z^2}{2H^2}\Big),\qquad \frac{p_0}{H}=\rho_0 g
+    vallis_eq: 'provenance only: Taylor of p0 e^(−z/H); slope = Vallis (1.51) at the ground'
+    page_png: chapters/pages/ch01/p032.png
+  physics_source:
+    fn: fluidpy.geo.calculus.taylor_polynomial (NEW F1) on fluidpy.core.statics.isothermal_pressure; fluidpy.core.thermo.perfect_gas_density
+    params:
+      p0_hPa: 997.5
+      T0: 292.95
+      dz_m: 1006
+    test: CHECK DT43 (ρ0 1.186; 11.64 Pa/m; 8.59 m/hPa; 880.4, 887.3, 887.0)
+  exaggeration: []
+  kind: data chart + calculation
+  data: A3
+  tool: 'Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + Remotion + KaTeX (house kit
+    tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: —
+  why: 'the first Taylor term is a law the viewer already knows: hydrostatic balance'
+  related: []
+- id: s35_pressure_far
+  t:
+  - 1963.225
+  - 2020.025
+  sentence_times:
+  - - 1963.225
+    - 1970.675
+  - - 1971.025
+    - 1975.475
+  - - 1976.975
+    - 1983.8
+  - - 1985.3
+    - 1992.2
+  - - 1993.7
+    - 2002.0
+  - - 2002.35
+    - 2013.15
+  - - 2014.65
+    - 2019.225
+  beat: 'big step: more terms, and the right curve'
+  visual: 'Same chart zoomed out to 0-6 km: line (gold) 343, + bend 558, + cubic 511, full exponential 517 (slate), balloon 500 (teal)
+    at 5.63 km above the station; readouts beside each marker (hPa). S5: a second slate curve, the exponential with the layer-mean temperature
+    277 K, passes through ''499'' next to the balloon''s ''500'' (gold link).'
+  voiceover: 'Now let''s go five point six kilometres above the station, where the balloon measured five hundred hectopascals. The line
+    gives only three hundred and forty three, far too low. [beat] Adding the bend gives five hundred and fifty eight, and the next term
+    gives five hundred and eleven. [beat] With all the terms, the series lands on five hundred and seventeen, the exponential''s own
+    value. [beat] The last seventeen hectopascals are not the series'' fault: our exponential assumed the ground''s temperature all
+    the way up. With the layer''s average temperature, two hundred and seventy seven kelvin, the exponential gives four hundred and
+    ninety nine, right next to the balloon''s five hundred. [beat] So a Taylor series can only be as good as the curve it expands.'
+  on_screen_eq:
+    latex: p_0e^{-z/H}:\ 343\to558\to511\to\cdots\to517;\qquad \bar T=277\ \mathrm K:\ 499
+    vallis_eq: 'provenance only: our numbers (hypsometric idea, Vallis §2.6 pointer for the builder only)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.calculus.taylor_polynomial (NEW F1); fluidpy.geo.atmos.hypsometric_thickness for the layer-mean T
+    params:
+      dz_m: 5627
+      Tbar: 277.4
+    test: CHECK DT44 (342.6, 557.6, 510.5, 517.3, 498.7)
+  exaggeration: []
+  kind: data chart
+  data: A3
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom)
+  runner_up: —
+  why: separates the series' error from the model's error
+  related: []
+- id: s36_where_fails
+  t:
+  - 2020.025
+  - 2059.075
+  sentence_times:
+  - - 2020.025
+    - 2022.65
+  - - 2023.0
+    - 2032.2
+  - - 2032.55
+    - 2036.225
+  - - 2036.575
+    - 2043.45
+  - - 2043.8
+    - 2050.175
+  - - 2050.525
+    - 2058.275
+  beat: 'where Taylor fails: kinks (tropopause, fronts)'
+  visual: 'Picture zone: the profile 8-20 km; the tropopause kink at 13.07 km (−66.3 °C) marked (gold), keyword ''tropopause''; the
+    line and the quadratic fitted just below it run on into ever colder air above (rose dashed), the real curve turns warmer. S5: inset
+    MAP850 cross-section along 48.5° N through the warm front (T against x), the sharp step highlighted. S6: keyword ''step ≪ bending
+    distance''.'
+  voiceover: 'Taylor series need a smooth curve. At about thirteen kilometres, the balloon''s temperature profile has a kink: the cooling
+    stops, and above it the air gets a little warmer. That''s the tropopause, the lid on the weather layer. A line or a series built
+    just below the kink predicts ever colder air above it, and gets it wrong. The same happens across a weather front, where the temperature
+    changes sharply over a short distance. So the rule is: use a Taylor series only for steps that are small compared with the distance
+    over which the curve bends.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.igra.wmo_tropopause + fluidpy.geo.calculus.taylor_polynomial (NEW F1)
+    params:
+      time: 2026-09-30T12
+    test: CHECK DT45 (tropopause 13072 m, 206.85 K)
+  exaggeration: []
+  kind: data chart + map section
+  data: A3; A1
+  tool: Remotion SVG profile chart (house TimeGraph axes re-used as a T-z chart; MapCamera-style zoom) + SVG section
+  runner_up: —
+  why: every tool ends with its failure case
+  related: []
+- id: s37_three_reasons
+  t:
+  - 2059.075
+  - 2106.25
+  sentence_times:
+  - - 2059.075
+    - 2061.925
+  - - 2062.275
+    - 2064.45
+  - - 2064.8
+    - 2075.875
+  - - 2076.225
+    - 2086.9
+  - - 2087.25
+    - 2090.725
+  - - 2091.075
+    - 2093.5
+  - - 2093.85
+    - 2105.45
+  beat: 'why the tools are built this way: three good reasons'
+  visual: 'Three beats, one picture each (no cards): S2-S3 the s05 slice wall returning on the landscape (''one at a time''); S4-S5
+    the s11 step legs adding on a flattened patch (''slope × step''); S6-S7 the s31 line with its error bracket growing, then a tiny
+    model grid laid on the Brest map (''how small a step'').'
+  voiceover: So why are these tools built the way they are? There are three good reasons. The first is that the weather depends on many
+    things at once, the place and the time, and partial derivatives let us ask about one of them at a time, by holding the rest fixed.
+    The second is that, when we zoom in close enough, every smooth field looks flat, so small changes simply add up, slope times step,
+    one direction at a time. That's the total differential, and the chain rule. The third reason is practical. The Taylor series tells
+    us how big our error is when we stop at the straight line, and so how small a step must be, whether it's a degree of warming or
+    the spacing of a weather model's grid.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative recap of earlier pictures
+  kind: montage of earlier scenes
+  data: earlier scenes' data
+  tool: Remotion re-use of s05/s11/s31 layers
+  runner_up: —
+  why: HOUSE_STYLE arc beat 4 (why)
+  related: []
+- id: s38_linearisation
+  t:
+  - 2106.25
+  - 2139.95
+  sentence_times:
+  - - 2106.25
+    - 2113.15
+  - - 2113.5
+    - 2119.5
+  - - 2119.85
+    - 2127.45
+  - - 2127.8
+    - 2135.375
+  - - 2135.725
+    - 2139.15
+  beat: 'linearisation: basic state + small disturbance'
+  visual: 'Maths zone: ''f(x₀ + δ) ≈ f(x₀) + f′(x₀) δ'' (96 px), keyword ''linearisation''; picture zone: a curve with its tangent;
+    a small wave riding on a flat line labelled ''quiet state + small disturbance'' (two keywords, 54 px); S4 two tiny thumbnails (a
+    wave train; a storm swirl from the Ciarán GIBS image) as pointers.'
+  voiceover: 'Keeping only the first two terms of a Taylor series, the value and the slope, is called linearisation. It turns a curve
+    into a straight line around a chosen starting state, for small changes. Meteorologists and oceanographers do this all the time:
+    a quiet starting state, plus a small disturbance. That''s how waves, and the growth of storms, are first understood, in the waves
+    and stability movies of this series. Now let''s linearise two famous climate curves.'
+  on_screen_eq:
+    latex: f(x_0+\delta)\approx f(x_0)+f'(x_0)\,\delta
+    vallis_eq: 'provenance only: first-order truncation of Kundu (10.4) (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source: null
+  exaggeration:
+  - illustrative
+  kind: equation + icons
+  data: A5 GIBS thumbnail
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: —
+  why: names the move the next two applications use
+  related:
+  - n: '16'
+    slug: ch00_waves (planned)
+    covers: 'linear waves: phase, dispersion, group velocity'
+    spoken_pointer: true
+  - n: '20'
+    slug: ch00_stability (planned)
+    covers: linear stability, normal modes
+    spoken_pointer: true
+- id: s39_cc_curve
+  t:
+  - 2139.95
+  - 2210.375
+  sentence_times:
+  - - 2139.95
+    - 2142.225
+  - - 2142.575
+    - 2149.95
+  - - 2150.3
+    - 2159.3
+  - - 2159.65
+    - 2165.325
+  - - 2165.675
+    - 2172.1
+  - - 2172.45
+    - 2181.75
+  - - 2182.1
+    - 2189.4
+  - - 2189.75
+    - 2192.775
+  - - 2193.125
+    - 2205.625
+  - - 2205.975
+    - 2209.575
+  beat: 'Clausius-Clapeyron: the saturation curve'
+  visual: 'Picture zone: a sealed jar over water (code-drawn), vapour dots; then the saturation curve e_s(T) from −10 to 35 °C (teal,
+    hPa 0-60, 52 px ticks) drawing itself. S4: ''(18.27)''-form equation in the maths zone ''de_s/dT = L e_s/(R_v T²)'' (96 px) with
+    BraceNotes ''latent heat 2.44 × 10⁶ J/kg'', ''R_v = 462 J kg⁻¹ K⁻¹'', ''T in K''. S8: dots on the curve ''0 °C: 6 hPa'', ''15 °C:
+    17 hPa'', ''30 °C: 42 hPa'' with CurvedLinks. Keyword ''saturated''.'
+  voiceover: 'First, water vapour. Air over water holds water vapour, a gas, and the vapour''s share of the air pressure is called the
+    vapour pressure. When the air holds as much vapour as it can, we say it''s saturated, and the vapour pressure takes its saturation
+    value, written e s. That limit depends only on the temperature, through the Clausius–Clapeyron equation. d e s by d T equals L times
+    e s, divided by R v times T squared. Here L is the latent heat, the energy needed to turn one kilogram of liquid water into vapour,
+    about two point four four million joules. R v is the gas constant for water vapour, four hundred and sixty two joules per kilogram
+    per kelvin. And T is the temperature in kelvin. The curve climbs faster and faster: at zero degrees Celsius, e s is about six hectopascals,
+    at fifteen degrees it''s seventeen, and at thirty degrees it''s forty two. Water in the air has its own movie in this series.'
+  on_screen_eq:
+    latex: \frac{de_s}{dT}=\frac{L\,e_s}{R_v\,T^2}
+    vallis_eq: 'provenance only: Vallis (18.27) (page image checked; written R^v in the book)'
+    page_png: chapters/pages/ch18/p699.png
+  physics_source:
+    fn: fluidpy.geo.moist.saturation_vapour_pressure
+    params:
+      T_C:
+      - 0
+      - 15
+      - 30
+      L: 2440000.0
+      Rv: 462.0
+    test: CHECK DT50 (6.19, 16.92, 41.91 hPa)
+  exaggeration:
+  - jar illustrative
+  kind: curve + equation
+  data: none (equation constants)
+  tool: 'Remotion SVG curve + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: 'ERA5 2-m dew point vs temperature scatter (later movie #26)'
+  why: the curve to linearise, with every symbol named
+  related:
+  - n: '26'
+    slug: ch00_water_in_air (planned)
+    covers: humidity, Clausius-Clapeyron, saturation, clouds and rain
+    spoken_pointer: true
+- id: s40_cc_linear
+  t:
+  - 2210.375
+  - 2277.925
+  sentence_times:
+  - - 2210.375
+    - 2213.675
+  - - 2214.025
+    - 2216.875
+  - - 2217.225
+    - 2221.975
+  - - 2222.325
+    - 2236.3
+  - - 2237.8
+    - 2244.075
+  - - 2245.575
+    - 2253.275
+  - - 2253.625
+    - 2255.575
+  - - 2255.925
+    - 2262.5
+  - - 2262.85
+    - 2269.075
+  - - 2270.575
+    - 2277.125
+  beat: 'linearising Clausius-Clapeyron: the 7 % rule'
+  visual: 'Same curve with gold tangents at 0, 15, 30 °C (fractional slope labels ''7.1 %/°C'', ''6.4 %/°C'', ''5.7 %/°C''). Maths zone:
+    ''(1/e_s) de_s/dT = L/(R_v T²)''; CalcStack ''2.44 × 10⁶ ÷ (462 × 273²) ≈ 0.071''. S5: keyword ''7 % rule''. S6-S7: a small two-row
+    comparison (no box): ''+1 °C: line 7.1 %, exact 7.3 %'', ''+4 °C: line 28 %, exact 32 %''; the gap between the tangent and the curve
+    at +4 °C shaded rose.'
+  voiceover: 'How much does e s grow for each extra degree? Let''s divide both sides by e s. The fractional growth per kelvin is L over
+    R v T squared. At zero degrees Celsius, that''s two point four four million, divided by four hundred and sixty two times two hundred
+    and seventy three squared: zero point zero seven one, or about seven percent per degree. [beat] At fifteen degrees, it''s six point
+    four percent, and at thirty degrees, five point seven. [beat] That''s the famous seven percent rule: for each degree of warming,
+    air can hold about seven percent more water vapour. How good is the line? For one degree, it gives seven point one percent, and
+    the exact curve gives seven point three. For four degrees, the line gives twenty eight percent, and the exact curve gives thirty
+    two. [beat] The gap grows with the step, just as the Taylor series told us, because the bend term is missing.'
+  on_screen_eq:
+    latex: \frac{1}{e_s}\frac{de_s}{dT}=\frac{L}{R_vT^2}\approx\frac{2.44\times10^{6}}{462\times273^2}\approx0.071\ \mathrm{K^{-1}}
+    vallis_eq: 'provenance only: Vallis (18.27) divided by e_s (page image checked)'
+    page_png: chapters/pages/ch18/p699.png
+  physics_source:
+    fn: fluidpy.geo.moist.cc_fractional_rate (NEW F3) + saturation_vapour_pressure
+    params:
+      T:
+      - 273.15
+      - 288.15
+      - 303.15
+      dT:
+      - 1
+      - 4
+    test: CHECK DT51 (7.08, 6.36, 5.75 %/K), DT52 (7.31 vs 7.08 %; 32.19 vs 28.31 %)
+  exaggeration: []
+  kind: curve + tangents + calculation
+  data: none
+  tool: 'Remotion SVG + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: —
+  why: a famous climate rule derived as a linearisation, and its error
+  related: []
+- id: s41_cc_climate
+  t:
+  - 2277.925
+  - 2314.525
+  sentence_times:
+  - - 2277.925
+    - 2279.825
+  - - 2280.175
+    - 2285.975
+  - - 2286.325
+    - 2298.125
+  - - 2298.475
+    - 2302.6
+  - - 2302.95
+    - 2313.725
+  beat: 'the 7 % rule in the climate: latest data and history'
+  visual: 'Picture zone: global-mean total column water vapour from ERA5, 1979 -> latest year, drawing itself as a TimeGraph (annual
+    means, teal; the latest year highlighted gold) with the linear trend; S2 keyword ''+1.1 °C since 1850-1900''. S3: CalcStack ''1.1
+    × 7 % ≈ 8 %''. S4-S5: a world map of the ERA5 TCWV trend (% per decade, cmocean balance diverging, centred on 0) with coastlines;
+    keyword ''heaviest downpours: about 7 % per °C'' (54 px) with a small rain glyph.'
+  voiceover: Why does this matter? The world has warmed by about one point one degrees since the late eighteen hundreds. By the seven
+    percent rule, the air can now hold about eight percent more water vapour, and the reanalysis shows the water vapour in the whole
+    atmosphere rising since nineteen seventy nine. More vapour means more water for the heaviest downpours. The Intergovernmental Panel
+    on Climate Change assesses that the heaviest daily rainfall becomes about seven percent more intense for each degree of global warming.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.climatology.global_mean (NEW F6) + linear trend (NEW F6) on D3; fluidpy.geo.moist.cc_fractional_rate
+    params:
+      period: 1979-latest
+      dT_global: 1.09
+    test: CHECK DT53 (TCWV trend sign > 0; the spoken sentence names no number until the builder adds the measured one), DT54 (1.09
+      x 7.1 % ~ 7.7 %)
+  exaggeration: []
+  kind: time series + world map
+  data: D3 ERA5 monthly single levels total_column_water_vapour 1979-latest (CDS); runner-up NCEP/NCAR R1 monthly pr_wtr (PSL, open)
+  tool: Remotion TimeGraph + cartopy (Robinson) pre-rendered trend map with Natural Earth coasts
+  runner_up: three.js globe of the trend (slower; a map reads better)
+  why: 'series rule: latest data + history + a cited impact; IPCC AR6 numbers in the manifest'
+  related:
+  - n: '67'
+    slug: ch00_climate_change (planned)
+    covers: forcing, feedbacks, observed warming
+    spoken_pointer: true
+- id: s42_planck
+  t:
+  - 2314.525
+  - 2383.6
+  sentence_times:
+  - - 2314.525
+    - 2317.6
+  - - 2317.95
+    - 2327.375
+  - - 2327.725
+    - 2334.85
+  - - 2335.2
+    - 2341.725
+  - - 2342.075
+    - 2352.275
+  - - 2352.625
+    - 2355.2
+  - - 2356.7
+    - 2361.825
+  - - 2362.175
+    - 2366.825
+  - - 2367.175
+    - 2372.1
+  - - 2372.45
+    - 2382.1
+  beat: Stefan-Boltzmann and the Planck response
+  visual: 'Full width: a three.js globe glowing in infrared: the latest-month CERES EBAF (or NOAA interpolated) outgoing longwave map
+    draped on the globe (inferno-like perceptual LUT, W/m² colour bar 52 px), rotating slowly; global mean readout ''≈ 240 W/m²''. Maths
+    zone: ''F = σT⁴'' (96 px), BraceNote ''σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴''; CalcStack ''T = (240/σ)^(1/4) ≈ 255 K ≈ −18 °C''. S7-S10: ''dF/dT
+    = 4σT³ = 4F/T ≈ 4 × 240/255 ≈ 3.8 W m⁻² K⁻¹'' with a tangent on a small σT⁴ curve.'
+  voiceover: 'Second, the heat that Earth sends to space. Every warm body glows in infrared light, and a perfect emitter, called a black
+    body, gives off sigma T to the fourth watts per square metre. Here sigma is the Stefan–Boltzmann constant, five point six seven
+    times ten to the minus eight. Satellites measure Earth giving off about two hundred and forty watts per square metre, on average.
+    Solving sigma T to the fourth equals two hundred and forty gives T equals two hundred and fifty five kelvin, about minus eighteen
+    degrees Celsius. That''s Earth''s emission temperature. [beat] Now let''s linearise: how much more does Earth give off for each
+    degree warmer? The derivative of sigma T to the fourth is four sigma T cubed. And sigma T cubed is just sigma T to the fourth, divided
+    by T. So the slope is four times two hundred and forty, divided by two hundred and fifty five: about three point eight watts per
+    square metre for each degree. [beat]'
+  on_screen_eq:
+    latex: F=\sigma T^4,\qquad \frac{dF}{dT}=4\sigma T^3=\frac{4F}{T}\approx\frac{4\times240}{255}\approx3.8\ \mathrm{W\,m^{-2}\,K^{-1}}
+    vallis_eq: 'provenance only: Stefan''s law as in Vallis (14.1) σT⁴ (page image checked); derivative ours'
+    page_png: chapters/pages/ch14/p532.png
+  physics_source:
+    fn: fluidpy.geo.radiation.blackbody_flux, emission_temperature, planck_response (NEW F2); global mean by fluidpy.diag.climatology.global_mean
+      (NEW F6) on D4
+    params:
+      OLR: 240.0
+    test: CHECK DT60 (255.06 K; 3.764 W/m2/K), DT61 (D4 global mean within 235-245)
+  exaggeration:
+  - globe rotation 1 turn in about 20 s
+  kind: 3-D data globe + equation
+  data: D4 CERES EBAF-TOA Ed4.2 monthly (NASA Earthdata, account set up), latest month + 2001-latest mean; runner-up NOAA Interpolated
+    OLR (PSL, open)
+  tool: three.js globe in Remotion (cross-product globe module) with a cartopy kind:texture of OLR
+  runner_up: CesiumJS drape (no Ion)
+  why: the planet glowing in real infrared data before the formula
+  related:
+  - n: '22'
+    slug: ch00_climate_machine
+    covers: energy balance, emission temperature, greenhouse effect
+    spoken_pointer: true
+- id: s43_planck_meaning
+  t:
+  - 2383.6
+  - 2453.25
+  sentence_times:
+  - - 2383.6
+    - 2391.65
+  - - 2392.0
+    - 2398.575
+  - - 2398.925
+    - 2408.15
+  - - 2409.65
+    - 2419.925
+  - - 2420.275
+    - 2431.2
+  - - 2431.55
+    - 2434.225
+  - - 2434.575
+    - 2441.75
+  - - 2442.1
+    - 2445.625
+  - - 2447.125
+    - 2452.45
+  beat: the Planck response as the planet's thermostat; linear vs exact
+  visual: 'Picture zone: a house Balance with two bars: ''CO₂ doubling: +3.9 W/m²'' (gold, forcing) and ''Planck: −3.8 W/m² per °C''
+    (teal); a thermometer glyph rises until the bars balance at ''≈ 1 °C''. S3-S4: second row ''AR6 Planck 3.2 -> ≈ 1.2 °C'' (no citation
+    on screen; ''3.2'' only). S5: keyword ''feedbacks'' with a water-vapour droplet icon (house droplet) and the 7 % rule thumbnail.
+    S6-S7: σT⁴ curve with its tangent at 255 K; markers ''+1 °C: 3.79 vs 3.76'', ''+10 °C: 39.9 vs 37.6''.'
+  voiceover: 'This is called the Planck response, and it''s the planet''s thermostat: warm up, and you lose heat faster, which pulls
+    you back. Doubling the carbon dioxide in the air traps about three point nine extra watts per square metre. To shed that, a planet
+    with only the Planck response would warm by about three point nine divided by three point eight: about one degree. [beat] The Intergovernmental
+    Panel''s careful estimate of the real Planck response is a little lower, about three point two, which gives about one point two
+    degrees. The full warming is larger, because of feedbacks: for example, warmer air holds more water vapour, by our seven percent
+    rule, and water vapour traps heat too. Is the linear Planck rule good enough? For one degree, the exact curve gives three point
+    seven nine, against the line''s three point seven six. For ten degrees, it''s forty against thirty eight. [beat] For the changes
+    that climate scientists worry about, the line does very well.'
+  on_screen_eq:
+    latex: \Delta T\approx\frac{3.9}{3.8}\approx1\ ^{\circ}\mathrm C
+    vallis_eq: 'provenance only: our numbers with IPCC AR6 values (manifest)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.radiation.planck_response + blackbody_flux (NEW F2)
+    params:
+      T: 255.06
+      dT:
+      - 1
+      - 10
+      ERF_2xCO2: 3.93
+      lambda_P_AR6: -3.22
+    test: CHECK DT62 (1.04 K; 1.22 K), DT63 (3.786 vs 3.764; 39.91 vs 37.64)
+  exaggeration: []
+  kind: balance bars + curve
+  data: cited constants (IPCC AR6 WG1 Ch 7)
+  tool: 'house Balance + SVG curve + Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers)'
+  runner_up: —
+  why: what the linear number means, for whom (the planet), why that sign; and its accuracy
+  related:
+  - n: '67'
+    slug: ch00_climate_change (planned)
+    covers: forcing, feedbacks, observed warming
+    spoken_pointer: false
+  - n: '22'
+    slug: ch00_climate_machine
+    covers: energy balance, emission temperature, greenhouse effect
+    spoken_pointer: false
+- id: s44_fd_forward
+  t:
+  - 2453.25
+  - 2507.775
+  sentence_times:
+  - - 2453.25
+    - 2456.9
+  - - 2457.25
+    - 2462.0
+  - - 2462.35
+    - 2471.15
+  - - 2471.5
+    - 2473.225
+  - - 2473.575
+    - 2475.8
+  - - 2476.15
+    - 2484.875
+  - - 2485.225
+    - 2488.5
+  - - 2488.85
+    - 2494.725
+  - - 2495.075
+    - 2499.725
+  - - 2500.075
+    - 2502.925
+  - - 2504.425
+    - 2506.975
+  beat: 'finite differences: forward difference error from Taylor'
+  visual: 'Picture zone: a smooth curve with grid points h apart (ink dots), the forward secant (teal) vs the tangent (gold), the gap
+    bracketed ''error''. Maths zone derivation, one move per line (CalcStack, aligned at ''=''): ''f(x+h) = f + h f′ + h²/2 f″ + …'';
+    ''− f''; ''÷ h''; ''(f(x+h) − f)/h = f′ + (h/2) f″ + …'' with BraceNote ''error ≈ (h/2) f″''. S8: the step halves on the picture
+    and the error bracket halves. Keyword ''first-order accurate''.'
+  voiceover: 'Last, how does a weather model take a derivative? It knows the temperature only at grid points, a distance h apart. The
+    simplest estimate of the slope is the forward difference: the value one step ahead, minus the value here, divided by h. How wrong
+    is it? The Taylor series tells us. The value one step ahead is f, plus h times the slope, plus h squared over two times the second
+    derivative, and so on. Let''s subtract f, and divide by h. We get the slope, plus h over two times the second derivative, plus smaller
+    terms. So the forward difference is off by about h over two times the bend. Halve the step, and you halve the error. [beat] That''s
+    called first-order accurate.'
+  on_screen_eq:
+    latex: \frac{f(x+h)-f(x)}{h}=f'(x)+\frac{h}{2}f''(x)+\cdots
+    vallis_eq: 'provenance only: Kundu (10.4) and (10.6) forward difference O(Δx) (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source:
+    fn: fluidpy.core.fd.stencil_taylor_coefficients('forward') + fd_leading_error((0, 1))
+    params: {}
+    test: CHECK DT70 (order 1, leading 1/2)
+  exaggeration: []
+  kind: equation derivation + curve
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG curve'
+  runner_up: —
+  why: the error of a model's derivative derived from Taylor
+  related: []
+- id: s45_fd_centred
+  t:
+  - 2507.775
+  - 2572.8
+  sentence_times:
+  - - 2507.775
+    - 2516.825
+  - - 2517.175
+    - 2519.875
+  - - 2520.225
+    - 2529.775
+  - - 2530.125
+    - 2534.825
+  - - 2535.175
+    - 2539.775
+  - - 2540.125
+    - 2547.175
+  - - 2548.675
+    - 2552.175
+  - - 2552.525
+    - 2554.825
+  - - 2556.325
+    - 2561.75
+  - - 2562.1
+    - 2571.3
+  beat: 'centred difference: second-order accurate'
+  visual: 'Same picture with the centred secant through the points behind and ahead (orange), nearly parallel to the tangent. Maths
+    zone: rows ''ahead: f + h f′ + h²/2 f″ + h³/6 f‴'', ''behind: f − h f′ + h²/2 f″ − h³/6 f‴'' (the odd terms rose with ''−'' glyphs);
+    subtract: f and f″ terms struck (Strike); ''÷ 2h'': ''f′ + (h²/6) f‴''. S6 keyword ''second-order accurate''. S7-S8: sine check:
+    ''forward −0.043'', ''centred −0.0009'' (CalcStack) with the two secants on sin x at x = 1.'
+  voiceover: 'Now the centred difference we used on the map: the value one step ahead, minus the value one step behind, divided by two
+    h. Let''s write both with the Taylor series. Ahead is f, plus h times the slope, plus h squared over two times the bend, plus h
+    cubed over six times the third derivative. Behind is the same, but every odd power of h flips its sign. Subtract, and the f terms
+    cancel, and so do the bend terms. Divide by two h, and we''re left with the slope, plus h squared over six times the third derivative.
+    [beat] Halve the step, and the error drops to a quarter. That''s second-order accurate. [beat] Let''s check on the sine curve at
+    x equals one, with a step of zero point one. The forward difference is off by minus zero point zero four three, the centred one
+    by only minus zero point zero zero zero nine. [beat]'
+  on_screen_eq:
+    latex: \frac{f(x+h)-f(x-h)}{2h}=f'(x)+\frac{h^2}{6}f'''(x)+\cdots
+    vallis_eq: 'provenance only: Kundu (10.4)-(10.6) centred difference O(Δx²) (page image checked)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch10/p451.png
+  physics_source:
+    fn: fluidpy.core.fd.stencil_error('sin', 1.0, 0.1, kind) + stencil_taylor_coefficients('central')
+    params:
+      x0: 1.0
+      h: 0.1
+    test: CHECK DT71 (−4.294e-2, −9.001e-4; order 2, leading 1/6)
+  exaggeration: []
+  kind: equation derivation + curve
+  data: none
+  tool: 'Remotion + KaTeX (house kit tex.tsx: Layered, CalcStack, BraceNote; notes.tsx Keyword pointers) + SVG curve'
+  runner_up: —
+  why: why the map scene used centred differences
+  related: []
+- id: s46_fd_grid
+  t:
+  - 2572.8
+  - 2648.325
+  sentence_times:
+  - - 2572.8
+    - 2575.05
+  - - 2575.4
+    - 2592.325
+  - - 2593.825
+    - 2596.625
+  - - 2596.975
+    - 2607.875
+  - - 2609.375
+    - 2619.925
+  - - 2621.425
+    - 2628.1
+  - - 2628.45
+    - 2631.55
+  - - 2631.9
+    - 2642.575
+  - - 2642.925
+    - 2647.525
+  beat: 'finite differences on the real model grid: resolution and fronts'
+  visual: 'Picture zone: MAP850 at Brest with grid dots for spacing 18 km; then the dots thin out to 37, 74, 147, 221 km (each time
+    the coarse field re-drawn from the subsampled points, bilinear, so the front visibly smears). Maths zone: a growing list (no box)
+    ''spacing → ∂T/∂x (°C/100 km)'': ''18 km: forward −3.32, backward −3.09, centred −3.20'', ''37: −3.17'', ''74: −3.14'', ''147: −2.24'',
+    ''221: −0.98'' (the last two rose). S5: keyword ''steps over the front''. S6-S7: three small grid icons ''9 km'' (today''s best
+    global forecast models) and ''a few hundred km'' (early climate models).'
+  voiceover: Now the real map at Brest. With ERA5's grid points eighteen kilometres apart, the forward difference gives minus three
+    point three two degrees per hundred kilometres, the backward difference minus three point zero nine, and the centred one minus three
+    point two zero, in between. [beat] Now let's pretend the grid is coarser. With points thirty seven kilometres apart, the centred
+    difference gives minus three point one seven, and seventy four kilometres apart, minus three point one four. [beat] But at one hundred
+    and forty seven kilometres, it drops to minus two point two four, and at two hundred and twenty one kilometres, to minus zero point
+    nine eight. [beat] The coarse grid steps right over the warm front, so it sees a temperature change three times too gentle. That's
+    why weather models use fine grids. Today's best global forecast models have grid points about nine kilometres apart, while early
+    climate models had points a few hundred kilometres apart. Solving whole equations on grids has its own movie in this series.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.fd.fd_derivative (forward/backward/central) on A1 subsampled; fluidpy.geo.sphere.gradient
+    params:
+      lat: 48.5
+      lon: -4.5
+      spacing_deg:
+      - 0.25
+      - 0.5
+      - 1
+      - 2
+      - 3
+    test: CHECK DT72 (values as listed ± 0.01)
+  exaggeration: []
+  kind: real-data map at several resolutions
+  data: A1 ERA5 850 hPa t 18 UTC
+  tool: Remotion SVG map (d3-geo, Lambert conformal on Brittany) of ERA5 850 hPa T (cmocean thermal LUT) + Natural Earth 10 m coast/borders;
+    GIBS true colour 2023-11-01 faint underlay
+  runner_up: three.js landscape coarsened
+  why: the Taylor error made visible on the real front; the resolution story
+  related:
+  - n: '14'
+    slug: ch00_pdes (planned)
+    covers: PDEs on grids, finite differences, numerical error
+    spoken_pointer: true
+- id: s47_recap
+  t:
+  - 2648.325
+  - 2728.75
+  sentence_times:
+  - - 2648.325
+    - 2653.95
+  - - 2654.3
+    - 2659.275
+  - - 2659.625
+    - 2670.35
+  - - 2670.7
+    - 2679.725
+  - - 2680.075
+    - 2686.975
+  - - 2687.325
+    - 2693.575
+  - - 2693.925
+    - 2699.8
+  - - 2700.15
+    - 2705.975
+  - - 2706.325
+    - 2711.55
+  - - 2711.9
+    - 2722.075
+  - - 2722.425
+    - 2727.95
+  beat: recap ('To sum up')
+  visual: 'One screen beat per sentence, each a mini picture from its scene (no cards, no headings): tangent (s03); slice wall (s05)
+    with ''−3.2 per 100 km'' and the fixed thermometer ''+2.9 °C/h''; step legs (s11) -> chain rule row; the plane ''−8.6 °C/h''; the
+    balloon ''−1.6 °C/min''; the four-corner rectangle (s10) -> ''∂M/∂y = ∂N/∂x''; p ✓, heat ✗, heat/T ✓ (three glyphs); the Taylor
+    ladder (s33); ''7 %/°C'' tangent and ''3.8 W/m² per °C'' tangent; the centred secant (s45).'
+  voiceover: 'To sum up, a derivative is the slope of the tangent, the rate at one instant. A partial derivative changes one variable
+    and holds the others fixed. Over Brest, the air got colder by three point two degrees per hundred kilometres towards the east, while
+    a fixed thermometer warmed by two point nine degrees per hour. The total differential adds slope times step for each variable, and
+    dividing by time gives the chain rule, the rate a traveller feels. The plane flying east cooled at eight point six degrees per hour,
+    while every place it passed was warming. The Trappes balloon cooled by one point six degrees every minute, almost all of it from
+    rising. Mixed partials don''t depend on the order, and that gives the test for a perfect differential. Pressure passes it, heat
+    fails it, and heat divided by temperature passes again. A Taylor series builds a curve from its value, slope, bend and more. Keeping
+    the first two terms is linearisation: about seven percent more water vapour per degree, and three point eight more watts per square
+    metre sent to space. And the same Taylor series tells us how accurate a weather model''s derivatives are.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative recap of earlier pictures (numbers as asserted in their scenes)
+  kind: recap montage
+  data: earlier scenes
+  tool: Remotion re-use of earlier layers
+  runner_up: —
+  why: HOUSE_STYLE recap, one idea per sentence
+  related: []
+- id: s48_end
+  t:
+  - 2728.75
+  - 2752.625
+  sentence_times:
+  - - 2728.75
+    - 2734.95
+  - - 2735.3
+    - 2743.35
+  - - 2743.7
+    - 2752.325
+  beat: series end card (maths ending)
+  visual: 'HOUSE_STYLE §3 maths end card: four faint topic thumbnails along the top (dot product, vectors and index notation, this movie''s
+    tangent on the Trappes profile, a gradient teaser); ''a series of maths tutorials'' (68 px); ''atmospheric science · meteorology
+    · fluid dynamics'' (54 px); notebook icon + ''derivatives and Taylor series notebook''; stacked notebook icons + ''notebooks for
+    the other maths concepts''. RELATED MOVIES ROW (user rule 2026-10-27), small faint thumbnails with short titles (44 px): ''coordinates''
+    (first, slightly brighter: the next movie) · ''gradient'' · ''material derivative'' · ''vectors and index notation'' · ''dot product''
+    · ''weather basics'' · ''pressure coordinates'' · ''ODEs'' · ''thermodynamics'' · ''water in the air'' · ''climate machine'' · ''climate
+    change''. Titles only. No URL, path, book or author. 2.5-s silent hold while the music fades.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric
+    science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for derivatives and Taylor series,
+    and the notebooks for the other maths concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - decorative end card (illustrative)
+  kind: end card
+  data: none
+  tool: house end card (Remotion)
+  runner_up: —
+  why: series ending, word for word
+  related: []
+  related_on_end_card:
+  - n: '5'
+    slug: ch00_coordinates (planned)
+  - n: '6'
+    slug: ch00_gradient (planned)
+  - n: '10'
+    slug: ch00_material_derivative (planned)
+  - n: 1a
+    slug: ch00_vectors_index_notation
+  - n: 0.1 / 0.1b
+    slug: ch00_dot_product_why / ch00_dot_product_v01b
+  - n: '0.3'
+    slug: ch00_weather_basics
+  - n: 23A
+    slug: ch00_pressure_coordinates (planned)
+  - n: '13'
+    slug: ch00_odes (planned)
+  - n: '24'
+    slug: ch00_thermodynamics (planned)
+  - n: '26'
+    slug: ch00_water_in_air (planned)
+  - n: '22'
+    slug: ch00_climate_machine
+  - n: '67'
+    slug: ch00_climate_change (planned)
