@@ -3357,3 +3357,139 @@ All are under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weath
 - This is final: the movie may go to `drafts/` for the user to watch before `/approve-movie 0 ch00_weather_basics`.
 
 Disk at review: C: 69 GB free, G: 543 GB free. Review frames: 120 MB on G: (scratch, not committed).
+
+
+---
+
+# ch00_dot_product_v01b — review 1 (fresh eyes, build 7faa7d5)                         2026-10-28
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_dot_product_v01b | 25:39.5 (1539.47 s) | 77.44 MB | 12 PASS, halves WARN | PASS | PASS (72/72) | FIX (2 collisions) | PASS | PASS (376 cues) | PASS | n/a (retired) | **FIX** |
+
+Inputs: `movies/out/ch00/ch00_dot_product_v01b/1080.mp4`, storyboard, script, data_needs, manifest, timing, TSX, and the v6 reference (`movies/out/ch00/ch00_dot_product_why/1080.mp4`, v6 script and timing).
+
+Frames: 1580 PNGs on G:, in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_dot_product_v01b/review1/`, 129 MB.
+- One frame at the midpoint and one at the end of every sentence (231 sentences), plus the first frame of every scene.
+- Matched v6 / v01b pairs: three per v6 sentence, 465 pairs.
+- Frames every 1–2.5 s through s00, s04, s05a, s07, s11a, s11b, s20c, s20d, s20e and s21.
+- Full-resolution crops of every suspect spot.
+
+Disk at review: C: 69 GB free, G: 553 GB free.
+
+## qa.json (re-run by me with the requested flags)
+- PASS: duration (1539.47 s vs narration end 1536.95 s), size, codec, black, frozen (146 stretches, all narrated, longest silence 1.50 s = a beat), content, loudness (−16.0 LUFS, −3.4 dBTP), flashes (0/s), captions, subtitles, physics (75 functions), equations.
+- WARN halves: right side empty at 23.0–29.5, 47.0–53.5, 87.5–92.5, 326.0–330.5 and 1467.0–1473.5 s.
+  - All five are inherited from v6. At the matched sentence points the v01b frames differ from v6 in ≤ 0.6 % of pixels (s02, s03, s04, s07, s21).
+  - Fixing them changes no words, but it changes v6's approved screen. **My decision: leave them**, and record them as accepted v6 design.
+  - The builder already filled two other v6 halves (s06 and s11, see below). One of those fills causes M2, which argues for leaving the rest alone.
+- My own scan of the caption band (y 870–1040, 2 fps) found only two spots, both identical in v6 and so inherited. Leave both:
+  - 85.5–87.0 s: the descenders of the s03 "scalar product" keyword reach y ≈ 880.
+  - 829–861 s: the s17 "18 km × 1 °C / 100 km" fraction reaches y ≈ 877.
+  - The builder's "s13" spot does not show at this threshold.
+
+## v6 kept? (the user's key requirement), checked against the v6 script, timing and movie
+- **Words:**
+  - all 28 v6 scenes are present;
+  - all 155 v6 sentences appear verbatim and in v6 order (scripted comparison);
+  - the added sentences sit only where data_needs §0 says (s04 S4–S7, s05 S9–S13, s07 S5–S7, s09 S4–S6, s21 S2/S8/S10–S12).
+- **Devices and numbers:** every v6 sentence's frames (at 15/50/90 % of the sentence) match v6 within ≤ 0.32 % changed pixels.
+  - The only exceptions are s00 (the intended title fix), s21 (extended layout, ≤ 1 %, all v6 mini-pictures present) and s22 (six thumbnails).
+  - Two small additions sit inside "unchanged" v6 scenes, both halves fills:
+    - s06 shows a dim "a·b = |a||b| cos θ (1)" from the scene start;
+    - s11 S2 keeps "both sizes" on screen.
+  - Neither removes anything, but the s06 one collides (M2).
+- **Music:** v6's score (tools/music.py seed 7, the same bed and duck). Loudness is −16 LUFS throughout (−15.7 to −16.2 per section).
+- **Beats:** the 10 `[beat]` holds sit after a result each time ("≈ 8", "= 8", "same area: eight", "fifty joules", 0.18 K/h ×2, 8.7 m/s, "one half", 0.01 W/m², ≈ 0.89).
+  - On screen, each one lands on the gold underline of that result, so it feels natural.
+  - Inside v6 scenes (s04, s16b, s17b) they add only a pause.
+- **Title fix:** the subtitle sits on two lines and ends at x ≈ 843. The animation starts at x ≈ 1164 (part B map) or 1245 (part A grid), so the clearance is about 320 px against the 50 px required (1.1, 2.2–9.9 s). The readout is in one face. PASS.
+
+## Physics and maths honesty (new and changed scenes)
+- s04 unit arrow: it marks off cos θ, and the three stops light v6's three ticks with gold links on the words (126–134 s).
+- s05 sweep: + front half, 0 on the line across, − back half (hatch plus "−" glyph). Readouts +6.00 → 0.00 → −5.95, all consistent with |p||q| = 6.
+- s05a: the expansion is correct (5·1 x̂·x̂ + 5·3 x̂·ŷ + 1·1 ŷ·x̂ + 1·3 ŷ·ŷ; the mixed terms are struck; x̂·x̂ = 1·1·cos 0°).
+- s09 rectangles: aspect ratios 0.80 and 0.30 against 0.80 and 0.31, equal areas within 5 %.
+- s11a and s11b:
+  - the rails take the across part; W = 50 J;
+  - the whirled ball runs anticlockwise on screen with v tangent and F inward, so F·d = 0 and the energy bar stays flat.
+- s20b: v·ê = 10 cos 30° ≈ 8.7 m/s.
+- s20c (equinox):
+  - the terminator is a vertical meridian with the sun on the left;
+  - at 60°N on the noon limb, n̂ points 60° above the sunward horizontal;
+  - ŝ·n̂ = 0.5, "× 2 ground".
+- s20d:
+  - τ·u has the right sign on both tiles;
+  - the NCEP winds on the south-polar globe circulate **clockwise seen from above the South Pole = eastward** (westerlies);
+  - the geography is not mirrored (Africa top, Australia lower right, the Peninsula toward South America);
+  - ≈ 1 TW (Wunsch 1998) is verified in manifest.json, with Hughes & Wilson's 0.76 TW as the cross-check.
+- s20e: 6 + 2 + 2 + 6 = 16, |A| = |B| = √18, 16/18 ≈ 0.89. This is the uncentred anomaly cosine, which is what the words describe.
+
+## MUST fix
+1. **M1: 24:02.4–24:08.9 (s20e S8, 1442.4–1448.9 s). The gold link from "past days like today" to the past-day panel cuts through the "≈ 0.89" underline and crosses the −1…+1 gauge line between −1 and 0.**
+   - This breaks the house rule that links must not cross text or ticks, and it is plainly visible at full screen.
+   - Fix (pick one):
+     - put the label above the panel pair (about x 1100, y 330) with a short straight link to the panel;
+     - or keep it under the gauge and bend the path out to the left of x 1060, so it clears the stack and the gauge.
+   - Re-render the s20e chunk.
+2. **M2: 05:19.8–05:25.6 (s06 S5, 319.8–325.6 s). The CalcStack's final gold underline (y ≈ 756) runs into the top of the dim "a·b = |a||b| cos θ (1)" reminder (y ≈ 790).**
+   - The underline touches the bars of |a| and |b| and the θ.
+   - The reminder is a v01b addition to an "unchanged" v6 scene. v6 had no collision here.
+   - Fix: fade the reminder out at S5 start ("Divide both sides of equation one", where the stack itself opens with "(1) ÷ |b|"). The reminder keeps its job of filling the empty side during S1–S4. Or move it to y 840.
+
+## SHOULD fix
+1. **S1: 08:30–09:06 (s11a, 510–546 s). The decorative wind streaks run to the top frame edge (y 0), outside the content area.**
+   - They also pass behind the F label.
+   - Clip the streak layer to the picture zone (x 80–1000, y 40–860). This is builder-known and confirmed.
+2. **S2: s20e S2–S8 (23:12–24:09). Capital A and B are on screen throughout but are never named.**
+   - Fix: add "Let's call today's arrow capital A, and the past day's capital B." after S3, about 3 s.
+   - **Hectopascals** are spoken but never defined. Add "the unit weather maps use for pressure" to S4.
+3. **S3: 22:44–22:56 (s20d S8). "watts" and "W = watt" are not explained.**
+   - Add "a watt is one joule every second" to S8.
+   - Optionally show N/m² × m/s = W/m² with the unit story, as v6 does for K/h.
+4. **S4: 09:06–09:24 (s11b S1–S3).**
+   - "always across the motion?" writes the narrated question on screen. Keep a keyword such as "always across" instead.
+   - The ball's arrow **v** is never said; in this movie v is the wind. Say "its velocity, v" in S3, or label the arrow "motion".
+5. **S5: 20:46–20:50 (s20b S4).** "towards the north east, thirty degrees off the runway": north-east is 45°, while the picture and the numbers use 30°.
+   - v6's own "north-east" for (6, 8) at 37° set a loose precedent, so this is Should, not Must.
+   - Suggested: "…blows at ten metres per second, thirty degrees east of the runway's direction."
+6. **S6: 21:00–21:06 (s20b S7).** The "cross product" link's arrowhead sits on the **v** label at the wind arrow's tip. Point it at the midpoint of the dashed "across" part instead.
+7. **S7: 23:07.5–23:09 (s20d S9).** The "Antarctica" and "circumpolar current" links cross each other over the current ring. Offset the Antarctica keyword down (y ≈ 640) so the two paths do not meet.
+8. **S8: 23:58.6–23:59.6 (s20e S7).** "opposites" is on screen for under 1 s, while "alike" and "nothing in common" get 2–3 s each. Keep all three labels once shown, or hold "opposites" to the end of S7 + 1 s.
+9. **S9: 04:12–04:50 (s05a S5–S9).**
+   - The maths column grows to 8 lines (house CalcStack ≤ 3, older lines at 60 %) and reads as a wall of text at 640 px.
+   - Dim a = …, b = … and the question line to 40 % once the expansion starts.
+   - x̂·ŷ = 0 and the right-angle marks are drawn in **rose**, the negative colour. Use warm white or slate for a zero (as v6 s05 does for "0 right angle").
+10. **S10: docs (not on screen).**
+    - storyboard.yaml lines 2560, 2773 and 2777, and data_needs.md §C W2, still say the 1 TW figure "must be confirmed / stays OFF the screen". The manifest records it as verified, so update the notes.
+    - S2 (s20e S8, "Forecasters have used this"): the cited Lorenz (1969) chose analogues by RMS difference, not the cosine. Cite a source that used anomaly correlation for analogue selection (e.g. Toth 1989/1991, or van den Dool's analogue work), or soften to "compared weather maps like this".
+
+## COSMETIC
+- 06:36.5–06:38.5 (s09 S4): about 2 s with only "a·b = b·a" on screen between the panels and the rectangles. The second rectangle's fill is a mauve-rose that can read as "negative"; use a neutral orange tint.
+- 24:57–24:59.5 (s21 S11): about 2.5 s with only the thumbnail row before "sunlight" appears. Hold the S10 whirl until the sunlight icon arrives.
+- 06:02–06:07 (s07 S7): "a · ruler" mixes a word into a dot product, and "b̂ = b/|b|" stays while the ruler turns away from b. Fade b̂'s stack during the turn.
+- 23:46 (s20e S6): |A| = √(3² + 1² + 2² + 2²) drops the minus signs. Write (−2)², which a novice expects.
+- Gold is used as a fill for the work, energy and light bars and for "≈ 1 000 000 000 000 W". The house reserves gold for pointers. Consider warm white for the bars and the number.
+- 25:13–25:37 (s22): six thumbnails against HOUSE_STYLE's four. Accept (they name related movies) or trim to four.
+- Inherited from v6, leave as approved: the s17 gold link crosses the "350" km tick (13:49–14:21); the caption-band touches at 85.5–87 s and 829–861 s; the five halves WARNs.
+
+## House-style conformance
+- These all conform:
+  - the opening title (with the fix) and the arc, with the new examples after v6's application and before the recap;
+  - spoken bridges ("First, a runway.", "Second…", "Third…", "Fourth…");
+  - keywords only;
+  - no headings, boxes, equation labels (beyond the plain "(1)"), references or badges;
+  - teal/orange/rose/slate roles;
+  - reveals on their words (checked ±0.5 s at every sentence in the new scenes);
+  - the maths ending word for word as v6.
+- Sound effects (wind under s11a, surf under s20d) are listed in the storyboard and credited in the manifest. I did not judge them by ear.
+- Departures: M1 and M2 (collisions), the undefined A/B/hPa/W/v (S2–S4), the narrated question on screen (S4) and the zero-in-rose colour (S9).
+
+## Overall: FIX (ch00_dot_product_v01b review 1 — M1, M2; S1–S10 recommended)
+- The user's key requirement holds: every v6 scene, sentence (155/155), number, device and the v6 score are kept.
+- The additions are correct physics with honest data, and the title fix clears 50 px by a wide margin.
+- Two visible collisions block `qa_pass`: the s20e link through the result and gauge, and the s06 underline touching the added reminder. Both are layout-only.
+- The fix loop:
+  - Do M1 and M2 and re-render the s06 and s20e chunks.
+  - Ideally fold in S1, S6, S7, S8 and S9 (layout only, same chunks plus s05a, s11a, s20b, s20d).
+  - S2–S5 need about 4 new Kokoro sentences (s11b, s20b, s20d, s20e) and a re-time of those scenes. They are worth doing in the same loop, because no v6 sentence is touched.
