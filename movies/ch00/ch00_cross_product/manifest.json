@@ -1,0 +1,8556 @@
+{
+ "builder": "movies/data/build_ch00_cross_product_why.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "034a23e8b0b1d3f81affde9b75a9ce20e4e65c2d",
+  "dirty_tracked": false,
+  "vectors_py_tracked": true,
+  "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
+  "frames_py_tracked": true,
+  "frames_py_sha256": "68762b6c77037f03be391d0f4cc655daae2153d94105788a3e9b8cc6a3176159",
+  "atmos_py_tracked": true,
+  "atmos_py_sha256": "0701685569802a29a910c5e799408c4a04b6c8eaffe60fc9bf1eb10929bd1221",
+  "gfd_py_tracked": true,
+  "gfd_py_sha256": "4935a5b82144ee9579b322c5b3fe3118d338cd4e784157780a3ff69a0c451bed",
+  "operators_py_tracked": true,
+  "operators_py_sha256": "1886f90dd8ad24f25d831658796b4da111330c25bb8ece87f682e260828ce26e",
+  "rotating_py_tracked": true,
+  "rotating_py_sha256": "00ea8fb99f612c6c64974ff41292005dbcc40ca11e5ee252c6ab35497cc96447",
+  "trajectories_py_tracked": true,
+  "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e",
+  "cyclone_py_tracked": true,
+  "cyclone_py_sha256": "632c32637a0c2014dd7806cdd14ba5722e6c316281451daaaf16d3a15c03b835"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "cross_components": "Kundu (2.20): (u2v3 − u3v2, u3v1 − u1v3, u1v2 − u2v1) (s06, s07)",
+  "cross_magnitude": "|a×b| = |a||b| sin θ, Kundu §2.8 unnumbered (s08, s09)",
+  "antisymmetry": "a×b = −b×a, Kundu §2.8 text (s15)",
+  "omega_cross_r": "Vallis (2.7) v_I = v_R + Ω×r (s25)",
+  "coriolis": "Vallis (2.12) −2Ω×v_R (s27)",
+  "f": "Vallis (2.80) f = 2Ω sin ϑ (s28; the movie writes φ)",
+  "f_k_cross_u": "Vallis (2.79) f₀×u = f₀ k×u (s23, s29)",
+  "geostrophic": "Vallis (2.195) f×u ≈ −∇p/ρ; components (2.197) (s42-s46)",
+  "inertial": "Vallis §2.9.2 after (2.234), §3.8.2 (3.126) (s30, s31)"
+ },
+ "parameters": {
+  "a": [
+   5.0,
+   1.0,
+   0.0
+  ],
+  "b": [
+   1.0,
+   3.0,
+   0.0
+  ],
+  "p": [
+   3.0,
+   0.0,
+   0.0
+  ],
+  "q_cases": [
+   [
+    2.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    2.0,
+    0.0
+   ],
+   [
+    -2.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    -2.0,
+    0.0
+   ]
+  ],
+  "door_r": [
+   0.9,
+   0.0,
+   0.0
+  ],
+  "torque_r_m": [
+   0.3,
+   0.0,
+   0.0
+  ],
+  "torque_F_N": 50,
+  "wind_s23_m_s": 5,
+  "wind_s30_m_s": 10,
+  "lat_s28_deg": [
+   45.0,
+   0.0,
+   -45.0
+  ],
+  "rho_kg_m3": 1.2,
+  "strip_map": "p = 1010 hPa − 1 hPa per 100 km northwards, 1200 × 600 km, 5-km grid",
+  "display_scale_cross": 0.25,
+  "time_compression": {
+   "s00": "17 h of turning in ≈ 4 s",
+   "s24": "one globe turn in 20 s of film",
+   "s30": "17 h in a few seconds",
+   "s31": "17 h in ≈ 8 s",
+   "s41": "34 h in ≈ 20 s",
+   "s32-s37": "streaklines ≈ 2 h of flow per frame (global), ≈ 2 min per frame (storms)"
+  },
+  "exaggerations": [
+   "a×b and p×q drawn at 0.25 of their length",
+   "cap lift per turn ×4",
+   "bolt travel ×3",
+   "s26 tracks drawn 5× wider",
+   "storm columns, Ω, k, τ and Coriolis arrows on display scales"
+  ]
+ },
+ "credits": [
+  "Contains modified Copernicus Climate Change Service information 2026 (ERA5 via ARCO-ERA5; Ian, Idai, Ciarán).",
+  "NCEP/NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA (long-term mean 1991-2020).",
+  "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli, NASA GSFC).",
+  "Made with Natural Earth (public domain).",
+  "NOAA GOES-16 ABI imagery (public domain), NOAA Open Data Dissemination on AWS.",
+  "Imagery from the NASA Worldview application, part of NASA ESDIS (VIIRS Corrected Reflectance, NASA LANCE).",
+  "Derived from NOAA HRRR analyses (public domain), via the University of Utah HRRR-zarr archive on AWS.",
+  "IBTrACS v04r01 best tracks (Knapp et al. 2010), NOAA NCEI (public domain).",
+  "Music: 'rotation-turning' (B-flat major, 6/8), seed 3, tools/sound/styles.py, our own procedural score (CC0-1.0); no sound effects (movies/ch00/ch00_cross_product_why/sound.yaml)."
+ ],
+ "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
+ "id": "ch00_cross_product",
+ "storyboard": "movies/ch00/ch00_cross_product/storyboard.yaml",
+ "split_of": "ch00_cross_product_why v5",
+ "shared_data": "movies/ch00/ch00_cross_product_why/data/ (data_files below: shared + own data/)",
+ "data_files": {
+  "pair.json": "b951fa160b8cfef686f43198cafae08c337a19ba7fc38b3af91d627d95e269e3",
+  "sweep.json": "7872753235e6369324cc5f4d31fb2297ca432da5b7efae92c9e80afed97fc70f",
+  "door.json": "aba14bfcd2256dfe090ccac965d62dc78c37c429c9e8388d606f544199d34622",
+  "rhr.json": "f27e3fa7c7d5eaaec077dbdf0e821da44014dade2c63fe6432f722935b573f2e",
+  "cases.json": "7b673d26922606a549ff2553d61e34ec5179c0f3a16d86009aa8ab3ba2c724a7",
+  "torque.json": "10152ecbefcb84b501b33919fd4bf6d23405f87fdf9ae43f9549d135a702ea0a",
+  "turning.json": "71d83c62b4de245bfc2e5009ae2fa89e30cf03e450b651f4827f3e1dfc0c60c2",
+  "earth.json": "0da301286662c564304d6f03c6dd2a55bfd20215fd13d368f1b474353464bb8e",
+  "inertial30.json": "f6bc9ef296f2a76321404c52fe6489d21dfb6939ff4ea7a5afa030e905ec21a6",
+  "coriolis.json": "93a542ab5dcccce1c7367d019f86e1c6fa4aa219145c2c7c5f03e97d86c64a52",
+  "paths.json": "370d9d9dc82d8b3bbfb083865b122c106ca3043c7bc5eb7cfa7178e934513ae3",
+  "geo.json": "0ec228022c75e75adb2bda742f10f04e3f63a33206d2080c94a8838b3c705cf6",
+  "examples.json": "9b797a54c8a0057d87d3291463a37744e14f1c46225462ae6306d0c7d8b3deee",
+  "merry.json": "b40f29a5d646fb219a22b5f45ed2958dec6e195f02be4525ed1186a940a70e1e",
+  "v5.json": "809694d866d69213e46e2f7d49d1b45b782ae27223f8a535a74362d64be3fa26",
+  "winds_mean.json": "ee7b31df383c66dd0efbc584dc0d9073794d00042f3149d4db6cba4bfdfa04f1",
+  "ian_ring.json": "136a7c1ed0584765f3313b9565ac2119cf82bc79aeeea6084af0ac72e2b312ac",
+  "ian.json": "55bf5cdb6f59aa3709ea4c676e46f266c196297fa697ab6176476726b49377d3",
+  "idai_ring.json": "b449735c117568465454733870d90ec650407e832ee52c0f4c115cff20afb64b",
+  "idai.json": "c4e2facc727acbbe58fb245599b2d6dead6b5e88647bcf4727a68c199290d876",
+  "trails_global.json": "11a7fa23697b09a8e540f9e7cbf9e4f108c22299dc77349e76b321abc7471558",
+  "trails_ian.json": "f043f65dfc65e81bb91df5c91e122cf9793a65a868dcf5c6001e5e98e45cfd43",
+  "trails_idai.json": "26a8be26e53b37f76e8aad679536fa29d013e69c7d7d23a49d41926e4d863103",
+  "ciaran_lines.json": "4f6cdc79024c05586091de5d3ada2af67f766548ea4cae61bb2bf00f03fac34e",
+  "storm.json": "7e4ff9726fdf0bb739d757f5d1dd3627c498ae62500acecabbb5db3b611b9482",
+  "trails_global.bin": "9a8c92dc05076c8a79a81a35c1dcb4d69a8d1f03857e8dc333b0bc1098a4a748",
+  "trails_ian.bin": "9b0c850285abf40578d9bccb2d3a9aa96aa254468510640afbd829ae69211eed",
+  "trails_idai.bin": "feade087cb6bf7b67e533bdd0efd297cef5f2ab08aa2baea9f9a1a0489e4aafd",
+  "own/title_sweep.json": "a24f64746e723a9ef90ed112e08ae077936ef20d9e3af4d1940392b89acdbeeb"
+ },
+ "checks": [
+  {
+   "name": "N1 a×b = (0, 0, 14)",
+   "value": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N1 a×b equals np.cross",
+   "value": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N1 component terms 0−0, 0−0, 15−1",
+   "value": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "b×a = (0, 0, −14)",
+   "value": [
+    0.0,
+    0.0,
+    -14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    -14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "a·b = 8 (last video)",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "|a| = √26 ≈ 5.099",
+   "value": [
+    5.09902
+   ],
+   "ref": [
+    5.099
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "|b| = √10 ≈ 3.162",
+   "value": [
+    3.162278
+   ],
+   "ref": [
+    3.162
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "θ ≈ 60.3°",
+   "value": [
+    60.255119
+   ],
+   "ref": [
+    60.3
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "name": "sin θ ≈ 0.868",
+   "value": [
+    0.868243
+   ],
+   "ref": [
+    0.868
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "area = |a×b| = 14",
+   "value": [
+    14.0
+   ],
+   "ref": [
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N2 display 5.099×3.162×0.868 ≈ 13.995 (≈ 14, not = 14.000)",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N3 height = 14/|b| ≈ 4.4272",
+   "value": [
+    4.427189
+   ],
+   "ref": [
+    4.427189
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N3 display 5.099×0.868 ≈ 4.43",
+   "value": [
+    4.43
+   ],
+   "ref": [
+    4.43
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N3 display 3.162×4.43 ≈ 14",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "shadow of a on b = 2.530",
+   "value": [
+    2.529822
+   ],
+   "ref": [
+    2.53
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "foot (0.8, 2.4)",
+   "value": [
+    0.8,
+    2.4
+   ],
+   "ref": [
+    0.8,
+    2.4
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "(a×b)·a = 0, (a×b)·b = 0",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "sweep p×q z = 6 sin θ",
+   "value": [
+    0.0,
+    0.209397,
+    0.418539,
+    0.627171
+   ],
+   "ref": [
+    0.0,
+    0.209397,
+    0.418539,
+    0.627171
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "sweep p×q z at 0°, 90°, 180°, 270°",
+   "value": [
+    0.0,
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "ref": [
+    0.0,
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "sweep area = |p×q|",
+   "value": [
+    0.0,
+    0.209397,
+    0.418539,
+    0.627171
+   ],
+   "ref": [
+    0.0,
+    0.209397,
+    0.418539,
+    0.627171
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "door r·F: 0 (right angle), −0.9 (along), 0",
+   "value": [
+    0.0,
+    -0.9,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    -0.9,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "door τ_z: +0.9, 0, −0.9",
+   "value": [
+    0.9,
+    0.0,
+    -0.9
+   ],
+   "ref": [
+    0.9,
+    0.0,
+    -0.9
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "left/right: both dot products 0",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "left/right: cross products −3 (east), +3 (west)",
+   "value": [
+    -3.0,
+    3.0
+   ],
+   "ref": [
+    -3.0,
+    3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis s11: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis s11: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis s12: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis s12: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis s21: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis s21: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis s24: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis s24: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis xy: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis xy: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis yz: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis yz: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis zx: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis zx: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis yx: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis yx: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis zy: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis zy: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "hand basis xz: det = +1 (right hand, never mirrored)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "hand basis xz: palm turns towards the second arrow",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "x̂×ŷ = ẑ, ŷ×ẑ = x̂, ẑ×x̂ = ŷ",
+   "value": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "ŷ×x̂ = −ẑ, ẑ×ŷ = −x̂, x̂×ẑ = −ŷ",
+   "value": [
+    0.0,
+    0.0,
+    -1.0,
+    -1.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    -1.0,
+    -1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "s16 screen map out, in, right, left, up, down",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "s17 view signs +14 / −14 / 0",
+   "value": [
+    14.0,
+    -14.0,
+    0.0
+   ],
+   "ref": [
+    14.0,
+    -14.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "s13 helix right-handed at every sample ((r×r')·z = R² > 0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "s18 p×q z: 0, 6, 0, −6",
+   "value": [
+    0.0,
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "ref": [
+    0.0,
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "s18 areas 0, 6, 0, 6",
+   "value": [
+    0.0,
+    6.0,
+    0.0,
+    6.0
+   ],
+   "ref": [
+    0.0,
+    6.0,
+    0.0,
+    6.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "τ_z = 15, 7.5, 0 N m",
+   "value": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "ref": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "|τ| = 15, 7.5, 0",
+   "value": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "ref": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "tighten τ = (0,0,−15), loosen (0,0,+15)",
+   "value": [
+    -15.0,
+    15.0
+   ],
+   "ref": [
+    -15.0,
+    15.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "k×(5,0) = (0,5); k×(0,5) = (−5,0)",
+   "value": [
+    -0.0,
+    5.0,
+    -5.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    5.0,
+    -5.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "k_cross equals cross((0,0,1), u)",
+   "value": [
+    -0.0,
+    5.0,
+    -5.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    5.0,
+    -5.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "|k×u| = |u| = 5",
+   "value": [
+    5.0,
+    5.0
+   ],
+   "ref": [
+    5.0,
+    5.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "Ω = 2π / 86 164.1 s = 7.2921e-5 rad/s",
+   "value": [
+    7.3e-05,
+    7.3e-05
+   ],
+   "ref": [
+    7.3e-05,
+    7.3e-05
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "|Ω×r| = 464.58, 328.51, 0 m/s",
+   "value": [
+    464.580647,
+    328.508126,
+    0.0
+   ],
+   "ref": [
+    464.58,
+    328.51,
+    0.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "465 × cos 45° ≈ 329 m/s (display)",
+   "value": [
+    329.0
+   ],
+   "ref": [
+    329.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "(−2Ω×u)·u = 0 (no work)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "f(45°, 0°, −45°) = 1.0313e-4, 0, −1.0313e-4",
+   "value": [
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "ref": [
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "Ω·k = Ω sin φ",
+   "value": [
+    5.2e-05,
+    0.0,
+    -5.2e-05
+   ],
+   "ref": [
+    5.2e-05,
+    0.0,
+    -5.2e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "f = 2 Ω·k",
+   "value": [
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "ref": [
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "turn rule: (0, −1.031e-3) right, 0, (0, +1.031e-3) left",
+   "value": [
+    0.0,
+    -0.001031,
+    0.0,
+    -0.0
+   ],
+   "ref": [
+    0.0,
+    -0.001031,
+    0.0,
+    0.0
+   ],
+   "tol": 2e-07,
+   "pass": true
+  },
+  {
+   "name": "inertial period 16.92 h",
+   "value": [
+    16.924228
+   ],
+   "ref": [
+    16.92
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "radius 96.97 km; diameter ≈ 193.9 km",
+   "value": [
+    96.968682
+   ],
+   "ref": [
+    96.97
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "|−f k×u| = 1.0313e-3 m/s²",
+   "value": [
+    0.001031
+   ],
+   "ref": [
+    0.001031
+   ],
+   "tol": 2e-07,
+   "pass": true
+  },
+  {
+   "name": "s30 circle centre = start + (0, −U/f)",
+   "value": [
+    0.0,
+    -96968.682088
+   ],
+   "ref": [
+    0.0,
+    -96968.682088
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "s30 t=0.0 h: u tangent to the trace (u·t̂ = |u|)",
+   "value": [
+    9.999143
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "s30 t=0.0 h: push points to the centre (cos = 1)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "s30 t=4.2 h: u tangent to the trace (u·t̂ = |u|)",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "s30 t=4.2 h: push points to the centre (cos = 1)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "s30 t=8.5 h: u tangent to the trace (u·t̂ = |u|)",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "s30 t=8.5 h: push points to the centre (cos = 1)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "s30 t=12.7 h: u tangent to the trace (u·t̂ = |u|)",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "s30 t=12.7 h: push points to the centre (cos = 1)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "NH track turns right first (v < 0 after 1 h)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "SH track turns left first (v > 0 after 1 h)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N16 first-hour Δlat −0.0603° (N) / +0.0603° (S)",
+   "value": [
+    -0.060273,
+    0.060273
+   ],
+   "ref": [
+    -0.0603,
+    0.0603
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "N16 every 17-h track point over land (NE 50m land polygons)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N16 s31 view N: first 2 h turn clockwise on screen (signed +1.73)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N16 s31 view S: first 2 h turn anticlockwise on screen (signed -1.73)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "loop diameter (north-south extent) ≈ 193.9 km within 5 %",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "speed conserved 10 m/s",
+   "value": [
+    10.0,
+    10.0,
+    10.0,
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "∇p = (0, −1.00e-3) Pa/m everywhere",
+   "value": [
+    0.0,
+    -0.001
+   ],
+   "ref": [
+    0.0,
+    -0.001
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "parcel_adjust mean u over 2 periods = 8.08 m/s (1 %)",
+   "value": [
+    1.00045
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "geostrophic u = 8.08, 16.16 m/s",
+   "value": [
+    8.080724,
+    16.161447
+   ],
+   "ref": [
+    8.0807,
+    16.161
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "loop radius 8.08/f = 78.3 km",
+   "value": [
+    78.357711
+   ],
+   "ref": [
+    78.35
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "name": "adjust: speed max ≈ 2 × geostrophic",
+   "value": [
+    2.0
+   ],
+   "ref": [
+    2.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "k×(k×u) = −u for u = (3, 4)",
+   "value": [
+    -3.0,
+    -4.0
+   ],
+   "ref": [
+    -3.0,
+    -4.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "(1/(fρ)) k×∇p = geostrophic_velocity",
+   "value": [
+    8.080724,
+    0.0
+   ],
+   "ref": [
+    8.080724,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "fρ = 1.2375e-4",
+   "value": [
+    0.000124
+   ],
+   "ref": [
+    0.000124
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "display 1.00e-3/1.24e-4 = 8.06 (≈ 8.1)",
+   "value": [
+    8.06
+   ],
+   "ref": [
+    8.06
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 pieces: a-triangles 5, b-triangles 3, squares 2",
+   "value": [
+    5.0,
+    3.0,
+    2.0
+   ],
+   "ref": [
+    5.0,
+    3.0,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N8 shoelace sum of the six pieces = 10; 24 − 10 = parallelogram_area = 14",
+   "value": [
+    10.0,
+    14.0
+   ],
+   "ref": [
+    10.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N8 sympy: (a1+b1)(a2+b2) − a1a2 − b1b2 − 2a2b1 − (a1b2 − a2b1) = 0",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N9 along = 1.5689, across = 2.7456",
+   "value": [
+    1.568929,
+    2.745626
+   ],
+   "ref": [
+    1.5689,
+    2.7456
+   ],
+   "tol": 5e-05,
+   "pass": true
+  },
+  {
+   "name": "N9 along² + across² = |b|² = 10",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N9 |a| × across = 14",
+   "value": [
+    14.0
+   ],
+   "ref": [
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N9 across = |b| sin θ (display 3.162 × 0.868 ≈ 2.75)",
+   "value": [
+    2.745626,
+    2.74
+   ],
+   "ref": [
+    2.745626,
+    2.74
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "name": "N9 display 5.099 × 2.75 ≈ 14 (14.02)",
+   "value": [
+    14.02
+   ],
+   "ref": [
+    14.02
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N9 slide: cross z = 14 for every s (max |z − 14|)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N9 slide: s = 1 gives b = (6, 4); 5×4 − 1×6 = 14",
+   "value": [
+    6.0,
+    4.0,
+    14.0
+   ],
+   "ref": [
+    6.0,
+    4.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N22 tilted cross = (−2, −2, 4); shadow areas (yz, zx, xy) = |components| = 2, 2, 4",
+   "value": [
+    -2.0,
+    -2.0,
+    4.0,
+    2.0
+   ],
+   "ref": [
+    -2.0,
+    -2.0,
+    4.0,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N22 ours: wall shadows 0, 0; floor 14",
+   "value": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N10 F components (0, 50), (43.30, 25), (50, 0)",
+   "value": [
+    0.0,
+    50.0,
+    43.30127,
+    25.0
+   ],
+   "ref": [
+    0.0,
+    50.0,
+    43.30127,
+    25.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N10 along 0, 43.3, 50; across 50, 25, 0",
+   "value": [
+    0.0,
+    43.30127,
+    50.0,
+    50.0
+   ],
+   "ref": [
+    0.0,
+    43.30127,
+    50.0,
+    50.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N10 0.3 × across = |τ| = 15, 7.5, 0",
+   "value": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "ref": [
+    15.0,
+    7.5,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N11 L = (0, 0, 3); string torque 0",
+   "value": [
+    0.0,
+    0.0,
+    3.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    3.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N11 v × B = (0, −1, 0) (south)",
+   "value": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N11 charge circle speed constant (1)",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N12 speeds 10.0499, 10.0050, 10.0005",
+   "value": [
+    10.049876,
+    10.004999,
+    10.0005
+   ],
+   "ref": [
+    10.0499,
+    10.005,
+    10.0005
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N12 turn 5.711°, 5.728°, 5.729°",
+   "value": [
+    5.7106,
+    5.7281,
+    5.7294
+   ],
+   "ref": [
+    5.711,
+    5.728,
+    5.729
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "N12 every kick ⟂ the current velocity (dot = 0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N12 circle speed 10 (1e-12)",
+   "value": [
+    10.0,
+    10.0,
+    10.0,
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N13 along part = sin 30° = 0.5 of the push; ⟂ push · u = 0",
+   "value": [
+    0.5,
+    0.0
+   ],
+   "ref": [
+    0.5,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N15 r45 = (4504.98, 0, 4504.98) km, |r| = 6371 km",
+   "value": [
+    4504.977303,
+    0.0,
+    4504.977303,
+    6371.0
+   ],
+   "ref": [
+    4504.98,
+    0.0,
+    4504.98,
+    6371.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N15 θ = 45°, radius 4504.98 km",
+   "value": [
+    45.0,
+    4504.977303
+   ],
+   "ref": [
+    45.0,
+    4504.98
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N15 Ω × r = (0, 328.51, 0) m/s = Ω |r| sin θ ŷ",
+   "value": [
+    0.0,
+    328.508126,
+    0.0,
+    328.508126
+   ],
+   "ref": [
+    0.0,
+    328.51,
+    0.0,
+    328.51
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N15 display 7.29e-5 × 4 505 000 = 328.4, exact 328.51 → ≈ 329",
+   "value": [
+    329.0
+   ],
+   "ref": [
+    329.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N15 display 6371 × sin 45° ≈ 4505",
+   "value": [
+    4505.0
+   ],
+   "ref": [
+    4505.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N14 texture poles vs axis–sphere intersections: max screen gap (px) ≤ 2",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 2.0,
+   "pass": true
+  },
+  {
+   "name": "N14 axis samples inside the sphere that a depth-tested render would draw",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N17 launch in the rider's frame (−1.4, 1.5) m/s",
+   "value": [
+    -1.4,
+    1.5
+   ],
+   "ref": [
+    -1.4,
+    1.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 rotating_frame_path vs turntable_puck: max gap < 1e-6 m",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "N17 rider's path right of its launch heading for t > 0 (k·(u0 × Δr) < 0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N17 outside path straight: x_inertial = 0",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 u + Ω × r (turned back to the outside axes) = turntable U, V",
+   "value": [
+    -0.0,
+    1.5
+   ],
+   "ref": [
+    0.0,
+    1.5
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N17 carried arrow: tip velocity (finite difference) = Ω × u",
+   "value": [
+    -0.5,
+    -1.2e-05,
+    0.0
+   ],
+   "ref": [
+    -0.5,
+    0.0,
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N17 floor 0.5 → 0.75 m/s; change per second = Ω × u = (0, 0.25, 0)",
+   "value": [
+    0.5,
+    0.75,
+    0.0,
+    0.25
+   ],
+   "ref": [
+    0.5,
+    0.75,
+    0.0,
+    0.25
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 Ω × u equals the floor change",
+   "value": [
+    0.0,
+    0.25,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.25,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N17 2Ω × u = (−1, 0, 0); Ω × (Ω × r) = (0, 0.625, 0)",
+   "value": [
+    -1.0,
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "ref": [
+    -1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N18 Ω local (east, north, up) = (0, 5.156e-5, 5.156e-5)",
+   "value": [
+    0.0,
+    5.2e-05,
+    5.2e-05
+   ],
+   "ref": [
+    0.0,
+    5.2e-05,
+    5.2e-05
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N18 display 7.29e-5 × cos 45° ≈ 5.16e-5",
+   "value": [
+    5.2e-05
+   ],
+   "ref": [
+    5.2e-05
+   ],
+   "tol": 1.1e-07,
+   "pass": true
+  },
+  {
+   "name": "N18 sympy Ω × u = (−Ω sin φ v, Ω sin φ u, −Ω cos φ u)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N18 Ω × u = (0, 5.156e-4, −5.156e-4)",
+   "value": [
+    0.0,
+    0.000516,
+    -0.000516
+   ],
+   "ref": [
+    0.0,
+    0.000516,
+    -0.000516
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N18 coriolis_horizontal = flat part of −2Ω × u",
+   "value": [
+    0.0,
+    -0.001031
+   ],
+   "ref": [
+    -0.0,
+    -0.001031
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N18 vertical part 1.03e-3 m/s²; g / vertical ≈ 9.5e3 (≈ 10 000 ×)",
+   "value": [
+    0.001031,
+    9500.0
+   ],
+   "ref": [
+    0.001031,
+    9500.0
+   ],
+   "tol": [
+    2e-07,
+    100
+   ],
+   "pass": true
+  },
+  {
+   "name": "N18 k × u = (−v, u)",
+   "value": [
+    -4.0,
+    3.0
+   ],
+   "ref": [
+    -4.0,
+    3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N18 f(90, 45, 0, −45) = 1.4584e-4, 1.0313e-4, 0, −1.0313e-4",
+   "value": [
+    0.000146,
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "ref": [
+    0.000146,
+    0.000103,
+    0.0,
+    -0.000103
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N20 isobars 1000/1004/1008/1012 hPa at r = 400/800/1200/1600 km",
+   "value": [
+    400.0,
+    800.0,
+    1200.0,
+    1600.0
+   ],
+   "ref": [
+    400.0,
+    800.0,
+    1200.0,
+    1600.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 ∇p at the pin (0, −1000 km) = (0, −1e-3) Pa/m",
+   "value": [
+    0.0,
+    -0.001
+   ],
+   "ref": [
+    0.0,
+    -0.001
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 k × ∇p = (1e-3, 0) (east), ⟂ ∇p",
+   "value": [
+    0.001,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.001,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 k × ∇p along the isobar tangent (|sin| of the angle)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N20 Coriolis push = −(pressure push) (0, ∓8.333e-4)",
+   "value": [
+    0.0,
+    -0.000833,
+    -0.0,
+    0.000833
+   ],
+   "ref": [
+    0.0,
+    -0.000833,
+    0.0,
+    0.000833
+   ],
+   "tol": 1e-08,
+   "pass": true
+  },
+  {
+   "name": "N20 display −1.03e-4 × 8.1 ≈ −8.3e-4",
+   "value": [
+    0.00083
+   ],
+   "ref": [
+    0.00083
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "X1 ε = +1 on the cycle (xyz, yzx, zxy), −1 against it",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    -1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0,
+    -1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "X1 ε has 21 zeros (a repeated letter)",
+   "value": [
+    21.0
+   ],
+   "ref": [
+    21.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "X2 (a×b)_i = Σ ε_ijk a_j b_k = cross(a, b)",
+   "value": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X3 z: ε_zxy·5·3 + ε_zyx·1·1 = 15 − 1 = 14",
+   "value": [
+    15.0,
+    -1.0,
+    14.0
+   ],
+   "ref": [
+    15.0,
+    -1.0,
+    14.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X3 swapping two letters flips ε (ε_ijk = −ε_jik for all i, j, k)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "X3 ε from fluidpy.core.tensors.levi_civita equals the module function",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "X4 (a·b)² + |a×b|² = 64 + 196 = 260 = 26 × 10",
+   "value": [
+    64.0,
+    196.0,
+    260.0,
+    260.0
+   ],
+   "ref": [
+    64.0,
+    196.0,
+    260.0,
+    260.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "X4b p·q = 6, 0, −6 (same way, right angle, opposite)",
+   "value": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "ref": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5 r = [0.2, 0.1, 0.0] m, F = [10.0, 30.0, 0.0] N: +6, −1, (r × F)_z = 5 N m",
+   "value": [
+    6.0,
+    1.0,
+    5.0,
+    5.0
+   ],
+   "ref": [
+    6.0,
+    1.0,
+    5.0,
+    5.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5 the other two components are 0",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5x r = [0.0, 0.2, 0.1] m, F = [0.0, 10.0, 30.0] N: +6, −1, (r × F)_x = 5 N m",
+   "value": [
+    6.0,
+    1.0,
+    5.0,
+    5.0
+   ],
+   "ref": [
+    6.0,
+    1.0,
+    5.0,
+    5.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5x the other two components are 0",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5y r = [0.1, 0.0, 0.2] m, F = [30.0, 0.0, 10.0] N: +6, −1, (r × F)_y = 5 N m",
+   "value": [
+    6.0,
+    1.0,
+    5.0,
+    5.0
+   ],
+   "ref": [
+    6.0,
+    1.0,
+    5.0,
+    5.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5y the other two components are 0",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X5d determinant middle term: −(r_x F_z − r_z F_x) = (r × F)_y for 1000 random pairs (max error)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "X7 τ = (−0.2, 0, 0.2) N m; axis 45° from up, towards −x",
+   "value": [
+    -0.2,
+    0.0,
+    0.2,
+    45.0
+   ],
+   "ref": [
+    -0.2,
+    0.0,
+    0.2,
+    45.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "T0 |a×b| at the drawn θ (60.26°) = 14.0",
+   "value": [
+    13.999046
+   ],
+   "ref": [
+    14.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "name": "P2 title |ω × r| = 2 × 0.3 = 0.6 m/s all round; ⟂ r",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s01,s07,s10,s11",
+   "data": "data/pair.json",
+   "eq": "Kundu (2.20) a×b (provenance only)",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "f5aecb8bee3e2ebee9c0821ef88ae199d33f73440cd9aef58e082ec9f9b9e014"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s15",
+   "data": "data/pair.json",
+   "eq": "b×a = −a×b (Kundu §2.8 text)",
+   "params": {
+    "a": [
+     1.0,
+     3.0,
+     0.0
+    ],
+    "b": [
+     5.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "db8e0fe32c652966fdf0452a394d50f8d4281f610a7dbc699161be74b7ebebef"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s02",
+   "data": "data/pair.json",
+   "eq": "the last video: a·b",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "2d311251337c35e4d3628720f349d4133233ed476372432e57314e0ab316bc35"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s05,s08",
+   "data": "data/pair.json",
+   "eq": "|a|",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "1abe241f733f5089e0eaf3c99bca02628eab2c78aa1cf1b3e434adfc94ec8d25"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s05,s08",
+   "data": "data/pair.json",
+   "eq": "|b|",
+   "params": {
+    "a": [
+     1.0,
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "239999bd8719d7c3c4f67440bb8bbb33f7c1cd337d29a7cc76347f414f4082c1"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s08,s11",
+   "data": "data/pair.json",
+   "eq": "θ between a and b",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     3.0,
+     0.0
+    ],
+    "degrees": true
+   },
+   "sha256": "b0acfb37dabf856d943c8fab137c6b1e50da17f5301bfff4ffbc3f5a03db22a8"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s08,s09",
+   "data": "data/pair.json",
+   "eq": "|a×b| = |a||b| sin θ = area",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "145436cecd5bcfb3bab47b63066fb098caaafbb2f7a70a039194f4981dd41e20"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s02,s09",
+   "data": "data/pair.json",
+   "eq": "shadow of a on b (the last video)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "45656ba31bb96a41ab43b818cdea4b5d9557fd9a8d08f8229c07653b57c0c4c7"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s02,s09",
+   "data": "data/pair.json",
+   "eq": "foot of the drop line",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "5c858211439f3c8ee412bbbcebba9f4c50db499b210bc1a73c434d2bd44fbbeb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s10",
+   "data": "data/pair.json",
+   "eq": "(a×b)·a = 0",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     14.0
+    ],
+    "b": [
+     5.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s10",
+   "data": "data/pair.json",
+   "eq": "(a×b)·b = 0",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     14.0
+    ],
+    "b": [
+     1.0,
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s00,s18",
+   "data": "data/sweep.json",
+   "eq": "p×q along the sweep",
+   "params": {
+    "a": [
+     3.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0,
+      0.0
+     ],
+     [
+      1.9987816540381915,
+      0.06979899340500194,
+      0.0
+     ],
+     [
+      1.9951281005196484,
+      0.1395129474882506,
+      0.0
+     ],
+     [
+      1.9890437907365466,
+      0.20905692653530694,
+      0.0
+     ],
+     [
+      1.9805361374831407,
+      0.2783462019201309,
+      0.0
+     ],
+     [
+      1.969615506024416,
+      0.34729635533386066,
+      0.0
+     ],
+     [
+      1.9562952014676114,
+      0.4158233816355187,
+      0.0
+     ],
+     [
+      1.940591452551993,
+      0.48384379119933546,
+      0.0
+     ],
+     [
+      1.9225233918766378,
+      0.5512747116339983,
+      0.0
+     ],
+     [
+      1.902113032590307,
+      0.6180339887498948,
+      0.0
+     ],
+     [
+      1.8793852415718169,
+      0.6840402866513374,
+      0.0
+     ],
+     [
+      1.8543677091335748,
+      0.749213186831824,
+      0.0
+     ],
+     [
+      1.8270909152852017,
+      0.8134732861516004,
+      0.0
+     ],
+     [
+      1.797588092598334,
+      0.8767422935781548,
+      0.0
+     ],
+     [
+      1.765895185717854,
+      0.9389431255717816,
+      0.0
+     ],
+     [
+      1.7320508075688774,
+      0.9999999999999999,
+      0.0
+     ],
+     [
+      1.696096192312852,
+      1.0598385284664098,
+      0.0
+     ],
+     [
+      1.6580751451100835,
+      1.1183858069414938,
+      0.0
+     ],
+     [
+      1.618033988749895,
+      1.1755705045849463,
+      0.0
+     ],
+     [
+      1.5760215072134438,
+      1.2313229506513166,
+      0.0
+     ],
+     [
+      1.532088886237956,
+      1.2855752193730785,
+      0.0
+     ],
+     [
+      1.4862896509547885,
+      1.3382612127177165,
+      0.0
+     ],
+     [
+      1.4386796006773024,
+      1.3893167409179945,
+      0.0
+     ],
+     [
+      1.3893167409179945,
+      1.4386796006773024,
+      0.0
+     ],
+     [
+      1.3382612127177165,
+      1.4862896509547885,
+      0.0
+     ],
+     [
+      1.2855752193730787,
+      1.532088886237956,
+      0.0
+     ],
+     [
+      1.2313229506513166,
+      1.576021507213444,
+      0.0
+     ],
+     [
+      1.1755705045849463,
+      1.618033988749895,
+      0.0
+     ],
+     [
+      1.1183858069414936,
+      1.6580751451100835,
+      0.0
+     ],
+     [
+      1.0598385284664098,
+      1.6960961923128521,
+      0.0
+     ],
+     [
+      1.0000000000000002,
+      1.7320508075688772,
+      0.0
+     ],
+     [
+      0.9389431255717817,
+      1.7658951857178538,
+      0.0
+     ],
+     [
+      0.8767422935781549,
+      1.797588092598334,
+      0.0
+     ],
+     [
+      0.8134732861516004,
+      1.8270909152852017,
+      0.0
+     ],
+     [
+      0.7492131868318239,
+      1.8543677091335748,
+      0.0
+     ],
+     [
+      0.6840402866513376,
+      1.8793852415718166,
+      0.0
+     ],
+     [
+      0.6180339887498949,
+      1.902113032590307,
+      0.0
+     ],
+     [
+      0.5512747116339983,
+      1.9225233918766378,
+      0.0
+     ],
+     [
+      0.48384379119933535,
+      1.940591452551993,
+      0.0
+     ],
+     [
+      0.4158233816355189,
+      1.9562952014676112,
+      0.0
+     ],
+     [
+      0.34729635533386083,
+      1.969615506024416,
+      0.0
+     ],
+     [
+      0.27834620192013093,
+      1.9805361374831407,
+      0.0
+     ],
+     [
+      0.20905692653530691,
+      1.9890437907365466,
+      0.0
+     ],
+     [
+      0.13951294748825047,
+      1.9951281005196484,
+      0.0
+     ],
+     [
+      0.06979899340500216,
+      1.9987816540381915,
+      0.0
+     ],
+     [
+      1.2246467991473532e-16,
+      2.0,
+      0.0
+     ],
+     [
+      -0.06979899340500191,
+      1.9987816540381915,
+      0.0
+     ],
+     [
+      -0.13951294748825066,
+      1.9951281005196484,
+      0.0
+     ],
+     [
+      -0.2090569265353071,
+      1.9890437907365466,
+      0.0
+     ],
+     [
+      -0.2783462019201307,
+      1.9805361374831407,
+      0.0
+     ],
+     [
+      -0.3472963553338606,
+      1.969615506024416,
+      0.0
+     ],
+     [
+      -0.4158233816355187,
+      1.9562952014676114,
+      0.0
+     ],
+     [
+      -0.48384379119933557,
+      1.940591452551993,
+      0.0
+     ],
+     [
+      -0.5512747116339981,
+      1.9225233918766378,
+      0.0
+     ],
+     [
+      -0.6180339887498947,
+      1.9021130325903073,
+      0.0
+     ],
+     [
+      -0.6840402866513374,
+      1.8793852415718169,
+      0.0
+     ],
+     [
+      -0.7492131868318241,
+      1.8543677091335748,
+      0.0
+     ],
+     [
+      -0.8134732861516005,
+      1.8270909152852017,
+      0.0
+     ],
+     [
+      -0.876742293578155,
+      1.7975880925983339,
+      0.0
+     ],
+     [
+      -0.9389431255717818,
+      1.7658951857178538,
+      0.0
+     ],
+     [
+      -0.9999999999999996,
+      1.7320508075688774,
+      0.0
+     ],
+     [
+      -1.0598385284664096,
+      1.6960961923128521,
+      0.0
+     ],
+     [
+      -1.1183858069414934,
+      1.6580751451100835,
+      0.0
+     ],
+     [
+      -1.175570504584946,
+      1.618033988749895,
+      0.0
+     ],
+     [
+      -1.2313229506513166,
+      1.576021507213444,
+      0.0
+     ],
+     [
+      -1.2855752193730787,
+      1.532088886237956,
+      0.0
+     ],
+     [
+      -1.3382612127177165,
+      1.4862896509547885,
+      0.0
+     ],
+     [
+      -1.3893167409179947,
+      1.4386796006773022,
+      0.0
+     ],
+     [
+      -1.4386796006773026,
+      1.3893167409179943,
+      0.0
+     ],
+     [
+      -1.4862896509547883,
+      1.3382612127177167,
+      0.0
+     ],
+     [
+      -1.5320888862379558,
+      1.285575219373079,
+      0.0
+     ],
+     [
+      -1.5760215072134438,
+      1.2313229506513168,
+      0.0
+     ],
+     [
+      -1.6180339887498947,
+      1.1755705045849465,
+      0.0
+     ],
+     [
+      -1.6580751451100832,
+      1.1183858069414938,
+      0.0
+     ],
+     [
+      -1.696096192312852,
+      1.0598385284664098,
+      0.0
+     ],
+     [
+      -1.7320508075688774,
+      0.9999999999999999,
+      0.0
+     ],
+     [
+      -1.765895185717854,
+      0.9389431255717814,
+      0.0
+     ],
+     [
+      -1.797588092598334,
+      0.8767422935781546,
+      0.0
+     ],
+     [
+      -1.8270909152852015,
+      0.8134732861516009,
+      0.0
+     ],
+     [
+      -1.8543677091335746,
+      0.7492131868318245,
+      0.0
+     ],
+     [
+      -1.8793852415718166,
+      0.6840402866513378,
+      0.0
+     ],
+     [
+      -1.902113032590307,
+      0.618033988749895,
+      0.0
+     ],
+     [
+      -1.9225233918766378,
+      0.5512747116339984,
+      0.0
+     ],
+     [
+      -1.940591452551993,
+      0.48384379119933546,
+      0.0
+     ],
+     [
+      -1.9562952014676114,
+      0.41582338163551863,
+      0.0
+     ],
+     [
+      -1.969615506024416,
+      0.34729635533386055,
+      0.0
+     ],
+     [
+      -1.9805361374831407,
+      0.27834620192013065,
+      0.0
+     ],
+     [
+      -1.9890437907365466,
+      0.20905692653530747,
+      0.0
+     ],
+     [
+      -1.9951281005196484,
+      0.13951294748825105,
+      0.0
+     ],
+     [
+      -1.9987816540381915,
+      0.06979899340500229,
+      0.0
+     ],
+     [
+      -2.0,
+      2.4492935982947064e-16,
+      0.0
+     ],
+     [
+      -1.9987816540381915,
+      -0.0697989934050018,
+      0.0
+     ],
+     [
+      -1.9951281005196484,
+      -0.13951294748825055,
+      0.0
+     ],
+     [
+      -1.9890437907365466,
+      -0.209056926535307,
+      0.0
+     ],
+     [
+      -1.9805361374831405,
+      -0.27834620192013104,
+      0.0
+     ],
+     [
+      -1.969615506024416,
+      -0.34729635533386094,
+      0.0
+     ],
+     [
+      -1.9562952014676112,
+      -0.415823381635519,
+      0.0
+     ],
+     [
+      -1.940591452551993,
+      -0.483843791199335,
+      0.0
+     ],
+     [
+      -1.9225233918766378,
+      -0.551274711633998,
+      0.0
+     ],
+     [
+      -1.9021130325903073,
+      -0.6180339887498946,
+      0.0
+     ],
+     [
+      -1.8793852415718169,
+      -0.6840402866513373,
+      0.0
+     ],
+     [
+      -1.8543677091335748,
+      -0.749213186831824,
+      0.0
+     ],
+     [
+      -1.8270909152852017,
+      -0.8134732861516004,
+      0.0
+     ],
+     [
+      -1.7975880925983339,
+      -0.8767422935781549,
+      0.0
+     ],
+     [
+      -1.7658951857178538,
+      -0.9389431255717817,
+      0.0
+     ],
+     [
+      -1.7320508075688772,
+      -1.0000000000000002,
+      0.0
+     ],
+     [
+      -1.6960961923128521,
+      -1.0598385284664096,
+      0.0
+     ],
+     [
+      -1.6580751451100835,
+      -1.1183858069414934,
+      0.0
+     ],
+     [
+      -1.618033988749895,
+      -1.175570504584946,
+      0.0
+     ],
+     [
+      -1.576021507213444,
+      -1.2313229506513164,
+      0.0
+     ],
+     [
+      -1.532088886237956,
+      -1.2855752193730785,
+      0.0
+     ],
+     [
+      -1.4862896509547885,
+      -1.3382612127177165,
+      0.0
+     ],
+     [
+      -1.4386796006773022,
+      -1.3893167409179945,
+      0.0
+     ],
+     [
+      -1.3893167409179945,
+      -1.4386796006773024,
+      0.0
+     ],
+     [
+      -1.3382612127177163,
+      -1.4862896509547887,
+      0.0
+     ],
+     [
+      -1.285575219373079,
+      -1.5320888862379558,
+      0.0
+     ],
+     [
+      -1.2313229506513161,
+      -1.5760215072134443,
+      0.0
+     ],
+     [
+      -1.1755705045849465,
+      -1.6180339887498947,
+      0.0
+     ],
+     [
+      -1.1183858069414931,
+      -1.6580751451100837,
+      0.0
+     ],
+     [
+      -1.05983852846641,
+      -1.696096192312852,
+      0.0
+     ],
+     [
+      -1.0000000000000009,
+      -1.732050807568877,
+      0.0
+     ],
+     [
+      -0.9389431255717815,
+      -1.765895185717854,
+      0.0
+     ],
+     [
+      -0.8767422935781555,
+      -1.7975880925983336,
+      0.0
+     ],
+     [
+      -0.8134732861516002,
+      -1.827090915285202,
+      0.0
+     ],
+     [
+      -0.7492131868318246,
+      -1.8543677091335746,
+      0.0
+     ],
+     [
+      -0.6840402866513371,
+      -1.8793852415718169,
+      0.0
+     ],
+     [
+      -0.6180339887498951,
+      -1.902113032590307,
+      0.0
+     ],
+     [
+      -0.5512747116339978,
+      -1.922523391876638,
+      0.0
+     ],
+     [
+      -0.48384379119933557,
+      -1.940591452551993,
+      0.0
+     ],
+     [
+      -0.4158233816355196,
+      -1.9562952014676112,
+      0.0
+     ],
+     [
+      -0.34729635533386066,
+      -1.969615506024416,
+      0.0
+     ],
+     [
+      -0.27834620192013165,
+      -1.9805361374831405,
+      0.0
+     ],
+     [
+      -0.20905692653530672,
+      -1.9890437907365468,
+      0.0
+     ],
+     [
+      -0.13951294748825116,
+      -1.9951281005196484,
+      0.0
+     ],
+     [
+      -0.06979899340500152,
+      -1.9987816540381915,
+      0.0
+     ],
+     [
+      -3.6739403974420594e-16,
+      -2.0,
+      0.0
+     ],
+     [
+      0.06979899340500256,
+      -1.9987816540381915,
+      0.0
+     ],
+     [
+      0.13951294748825044,
+      -1.9951281005196486,
+      0.0
+     ],
+     [
+      0.20905692653530597,
+      -1.9890437907365468,
+      0.0
+     ],
+     [
+      0.27834620192013093,
+      -1.9805361374831407,
+      0.0
+     ],
+     [
+      0.34729635533385994,
+      -1.9696155060244163,
+      0.0
+     ],
+     [
+      0.41582338163551885,
+      -1.9562952014676112,
+      0.0
+     ],
+     [
+      0.48384379119933485,
+      -1.9405914525519932,
+      0.0
+     ],
+     [
+      0.5512747116339988,
+      -1.9225233918766376,
+      0.0
+     ],
+     [
+      0.6180339887498945,
+      -1.9021130325903073,
+      0.0
+     ],
+     [
+      0.684040286651338,
+      -1.8793852415718166,
+      0.0
+     ],
+     [
+      0.7492131868318239,
+      -1.8543677091335748,
+      0.0
+     ],
+     [
+      0.8134732861515995,
+      -1.8270909152852022,
+      0.0
+     ],
+     [
+      0.8767422935781548,
+      -1.797588092598334,
+      0.0
+     ],
+     [
+      0.9389431255717808,
+      -1.7658951857178542,
+      0.0
+     ],
+     [
+      1.0000000000000002,
+      -1.7320508075688772,
+      0.0
+     ],
+     [
+      1.0598385284664094,
+      -1.6960961923128521,
+      0.0
+     ],
+     [
+      1.118385806941494,
+      -1.6580751451100832,
+      0.0
+     ],
+     [
+      1.1755705045849458,
+      -1.6180339887498951,
+      0.0
+     ],
+     [
+      1.231322950651317,
+      -1.5760215072134436,
+      0.0
+     ],
+     [
+      1.2855752193730785,
+      -1.5320888862379562,
+      0.0
+     ],
+     [
+      1.3382612127177156,
+      -1.4862896509547892,
+      0.0
+     ],
+     [
+      1.3893167409179945,
+      -1.4386796006773022,
+      0.0
+     ],
+     [
+      1.4386796006773017,
+      -1.3893167409179952,
+      0.0
+     ],
+     [
+      1.4862896509547885,
+      -1.3382612127177163,
+      0.0
+     ],
+     [
+      1.5320888862379556,
+      -1.2855752193730792,
+      0.0
+     ],
+     [
+      1.576021507213444,
+      -1.2313229506513164,
+      0.0
+     ],
+     [
+      1.6180339887498947,
+      -1.1755705045849467,
+      0.0
+     ],
+     [
+      1.6580751451100837,
+      -1.1183858069414931,
+      0.0
+     ],
+     [
+      1.6960961923128517,
+      -1.05983852846641,
+      0.0
+     ],
+     [
+      1.7320508075688767,
+      -1.0000000000000009,
+      0.0
+     ],
+     [
+      1.765895185717854,
+      -0.9389431255717816,
+      0.0
+     ],
+     [
+      1.7975880925983336,
+      -0.8767422935781556,
+      0.0
+     ],
+     [
+      1.827090915285202,
+      -0.8134732861516003,
+      0.0
+     ],
+     [
+      1.8543677091335746,
+      -0.7492131868318247,
+      0.0
+     ],
+     [
+      1.8793852415718169,
+      -0.6840402866513372,
+      0.0
+     ],
+     [
+      1.902113032590307,
+      -0.6180339887498953,
+      0.0
+     ],
+     [
+      1.9225233918766378,
+      -0.5512747116339979,
+      0.0
+     ],
+     [
+      1.940591452551993,
+      -0.48384379119933574,
+      0.0
+     ],
+     [
+      1.9562952014676112,
+      -0.41582338163551974,
+      0.0
+     ],
+     [
+      1.969615506024416,
+      -0.3472963553338608,
+      0.0
+     ],
+     [
+      1.9805361374831405,
+      -0.27834620192013176,
+      0.0
+     ],
+     [
+      1.9890437907365466,
+      -0.20905692653530683,
+      0.0
+     ],
+     [
+      1.9951281005196484,
+      -0.13951294748825127,
+      0.0
+     ],
+     [
+      1.9987816540381915,
+      -0.06979899340500165,
+      0.0
+     ],
+     [
+      2.0,
+      -4.898587196589413e-16,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "25cdc527c6af28b05ac83a52bc92aaaeaead325e8f39df9533bcc018f3a50b31"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s00,s18",
+   "data": "data/sweep.json",
+   "eq": "|p×q| = parallelogram area",
+   "params": {
+    "a": [
+     3.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0,
+      0.0
+     ],
+     [
+      1.9987816540381915,
+      0.06979899340500194,
+      0.0
+     ],
+     [
+      1.9951281005196484,
+      0.1395129474882506,
+      0.0
+     ],
+     [
+      1.9890437907365466,
+      0.20905692653530694,
+      0.0
+     ],
+     [
+      1.9805361374831407,
+      0.2783462019201309,
+      0.0
+     ],
+     [
+      1.969615506024416,
+      0.34729635533386066,
+      0.0
+     ],
+     [
+      1.9562952014676114,
+      0.4158233816355187,
+      0.0
+     ],
+     [
+      1.940591452551993,
+      0.48384379119933546,
+      0.0
+     ],
+     [
+      1.9225233918766378,
+      0.5512747116339983,
+      0.0
+     ],
+     [
+      1.902113032590307,
+      0.6180339887498948,
+      0.0
+     ],
+     [
+      1.8793852415718169,
+      0.6840402866513374,
+      0.0
+     ],
+     [
+      1.8543677091335748,
+      0.749213186831824,
+      0.0
+     ],
+     [
+      1.8270909152852017,
+      0.8134732861516004,
+      0.0
+     ],
+     [
+      1.797588092598334,
+      0.8767422935781548,
+      0.0
+     ],
+     [
+      1.765895185717854,
+      0.9389431255717816,
+      0.0
+     ],
+     [
+      1.7320508075688774,
+      0.9999999999999999,
+      0.0
+     ],
+     [
+      1.696096192312852,
+      1.0598385284664098,
+      0.0
+     ],
+     [
+      1.6580751451100835,
+      1.1183858069414938,
+      0.0
+     ],
+     [
+      1.618033988749895,
+      1.1755705045849463,
+      0.0
+     ],
+     [
+      1.5760215072134438,
+      1.2313229506513166,
+      0.0
+     ],
+     [
+      1.532088886237956,
+      1.2855752193730785,
+      0.0
+     ],
+     [
+      1.4862896509547885,
+      1.3382612127177165,
+      0.0
+     ],
+     [
+      1.4386796006773024,
+      1.3893167409179945,
+      0.0
+     ],
+     [
+      1.3893167409179945,
+      1.4386796006773024,
+      0.0
+     ],
+     [
+      1.3382612127177165,
+      1.4862896509547885,
+      0.0
+     ],
+     [
+      1.2855752193730787,
+      1.532088886237956,
+      0.0
+     ],
+     [
+      1.2313229506513166,
+      1.576021507213444,
+      0.0
+     ],
+     [
+      1.1755705045849463,
+      1.618033988749895,
+      0.0
+     ],
+     [
+      1.1183858069414936,
+      1.6580751451100835,
+      0.0
+     ],
+     [
+      1.0598385284664098,
+      1.6960961923128521,
+      0.0
+     ],
+     [
+      1.0000000000000002,
+      1.7320508075688772,
+      0.0
+     ],
+     [
+      0.9389431255717817,
+      1.7658951857178538,
+      0.0
+     ],
+     [
+      0.8767422935781549,
+      1.797588092598334,
+      0.0
+     ],
+     [
+      0.8134732861516004,
+      1.8270909152852017,
+      0.0
+     ],
+     [
+      0.7492131868318239,
+      1.8543677091335748,
+      0.0
+     ],
+     [
+      0.6840402866513376,
+      1.8793852415718166,
+      0.0
+     ],
+     [
+      0.6180339887498949,
+      1.902113032590307,
+      0.0
+     ],
+     [
+      0.5512747116339983,
+      1.9225233918766378,
+      0.0
+     ],
+     [
+      0.48384379119933535,
+      1.940591452551993,
+      0.0
+     ],
+     [
+      0.4158233816355189,
+      1.9562952014676112,
+      0.0
+     ],
+     [
+      0.34729635533386083,
+      1.969615506024416,
+      0.0
+     ],
+     [
+      0.27834620192013093,
+      1.9805361374831407,
+      0.0
+     ],
+     [
+      0.20905692653530691,
+      1.9890437907365466,
+      0.0
+     ],
+     [
+      0.13951294748825047,
+      1.9951281005196484,
+      0.0
+     ],
+     [
+      0.06979899340500216,
+      1.9987816540381915,
+      0.0
+     ],
+     [
+      1.2246467991473532e-16,
+      2.0,
+      0.0
+     ],
+     [
+      -0.06979899340500191,
+      1.9987816540381915,
+      0.0
+     ],
+     [
+      -0.13951294748825066,
+      1.9951281005196484,
+      0.0
+     ],
+     [
+      -0.2090569265353071,
+      1.9890437907365466,
+      0.0
+     ],
+     [
+      -0.2783462019201307,
+      1.9805361374831407,
+      0.0
+     ],
+     [
+      -0.3472963553338606,
+      1.969615506024416,
+      0.0
+     ],
+     [
+      -0.4158233816355187,
+      1.9562952014676114,
+      0.0
+     ],
+     [
+      -0.48384379119933557,
+      1.940591452551993,
+      0.0
+     ],
+     [
+      -0.5512747116339981,
+      1.9225233918766378,
+      0.0
+     ],
+     [
+      -0.6180339887498947,
+      1.9021130325903073,
+      0.0
+     ],
+     [
+      -0.6840402866513374,
+      1.8793852415718169,
+      0.0
+     ],
+     [
+      -0.7492131868318241,
+      1.8543677091335748,
+      0.0
+     ],
+     [
+      -0.8134732861516005,
+      1.8270909152852017,
+      0.0
+     ],
+     [
+      -0.876742293578155,
+      1.7975880925983339,
+      0.0
+     ],
+     [
+      -0.9389431255717818,
+      1.7658951857178538,
+      0.0
+     ],
+     [
+      -0.9999999999999996,
+      1.7320508075688774,
+      0.0
+     ],
+     [
+      -1.0598385284664096,
+      1.6960961923128521,
+      0.0
+     ],
+     [
+      -1.1183858069414934,
+      1.6580751451100835,
+      0.0
+     ],
+     [
+      -1.175570504584946,
+      1.618033988749895,
+      0.0
+     ],
+     [
+      -1.2313229506513166,
+      1.576021507213444,
+      0.0
+     ],
+     [
+      -1.2855752193730787,
+      1.532088886237956,
+      0.0
+     ],
+     [
+      -1.3382612127177165,
+      1.4862896509547885,
+      0.0
+     ],
+     [
+      -1.3893167409179947,
+      1.4386796006773022,
+      0.0
+     ],
+     [
+      -1.4386796006773026,
+      1.3893167409179943,
+      0.0
+     ],
+     [
+      -1.4862896509547883,
+      1.3382612127177167,
+      0.0
+     ],
+     [
+      -1.5320888862379558,
+      1.285575219373079,
+      0.0
+     ],
+     [
+      -1.5760215072134438,
+      1.2313229506513168,
+      0.0
+     ],
+     [
+      -1.6180339887498947,
+      1.1755705045849465,
+      0.0
+     ],
+     [
+      -1.6580751451100832,
+      1.1183858069414938,
+      0.0
+     ],
+     [
+      -1.696096192312852,
+      1.0598385284664098,
+      0.0
+     ],
+     [
+      -1.7320508075688774,
+      0.9999999999999999,
+      0.0
+     ],
+     [
+      -1.765895185717854,
+      0.9389431255717814,
+      0.0
+     ],
+     [
+      -1.797588092598334,
+      0.8767422935781546,
+      0.0
+     ],
+     [
+      -1.8270909152852015,
+      0.8134732861516009,
+      0.0
+     ],
+     [
+      -1.8543677091335746,
+      0.7492131868318245,
+      0.0
+     ],
+     [
+      -1.8793852415718166,
+      0.6840402866513378,
+      0.0
+     ],
+     [
+      -1.902113032590307,
+      0.618033988749895,
+      0.0
+     ],
+     [
+      -1.9225233918766378,
+      0.5512747116339984,
+      0.0
+     ],
+     [
+      -1.940591452551993,
+      0.48384379119933546,
+      0.0
+     ],
+     [
+      -1.9562952014676114,
+      0.41582338163551863,
+      0.0
+     ],
+     [
+      -1.969615506024416,
+      0.34729635533386055,
+      0.0
+     ],
+     [
+      -1.9805361374831407,
+      0.27834620192013065,
+      0.0
+     ],
+     [
+      -1.9890437907365466,
+      0.20905692653530747,
+      0.0
+     ],
+     [
+      -1.9951281005196484,
+      0.13951294748825105,
+      0.0
+     ],
+     [
+      -1.9987816540381915,
+      0.06979899340500229,
+      0.0
+     ],
+     [
+      -2.0,
+      2.4492935982947064e-16,
+      0.0
+     ],
+     [
+      -1.9987816540381915,
+      -0.0697989934050018,
+      0.0
+     ],
+     [
+      -1.9951281005196484,
+      -0.13951294748825055,
+      0.0
+     ],
+     [
+      -1.9890437907365466,
+      -0.209056926535307,
+      0.0
+     ],
+     [
+      -1.9805361374831405,
+      -0.27834620192013104,
+      0.0
+     ],
+     [
+      -1.969615506024416,
+      -0.34729635533386094,
+      0.0
+     ],
+     [
+      -1.9562952014676112,
+      -0.415823381635519,
+      0.0
+     ],
+     [
+      -1.940591452551993,
+      -0.483843791199335,
+      0.0
+     ],
+     [
+      -1.9225233918766378,
+      -0.551274711633998,
+      0.0
+     ],
+     [
+      -1.9021130325903073,
+      -0.6180339887498946,
+      0.0
+     ],
+     [
+      -1.8793852415718169,
+      -0.6840402866513373,
+      0.0
+     ],
+     [
+      -1.8543677091335748,
+      -0.749213186831824,
+      0.0
+     ],
+     [
+      -1.8270909152852017,
+      -0.8134732861516004,
+      0.0
+     ],
+     [
+      -1.7975880925983339,
+      -0.8767422935781549,
+      0.0
+     ],
+     [
+      -1.7658951857178538,
+      -0.9389431255717817,
+      0.0
+     ],
+     [
+      -1.7320508075688772,
+      -1.0000000000000002,
+      0.0
+     ],
+     [
+      -1.6960961923128521,
+      -1.0598385284664096,
+      0.0
+     ],
+     [
+      -1.6580751451100835,
+      -1.1183858069414934,
+      0.0
+     ],
+     [
+      -1.618033988749895,
+      -1.175570504584946,
+      0.0
+     ],
+     [
+      -1.576021507213444,
+      -1.2313229506513164,
+      0.0
+     ],
+     [
+      -1.532088886237956,
+      -1.2855752193730785,
+      0.0
+     ],
+     [
+      -1.4862896509547885,
+      -1.3382612127177165,
+      0.0
+     ],
+     [
+      -1.4386796006773022,
+      -1.3893167409179945,
+      0.0
+     ],
+     [
+      -1.3893167409179945,
+      -1.4386796006773024,
+      0.0
+     ],
+     [
+      -1.3382612127177163,
+      -1.4862896509547887,
+      0.0
+     ],
+     [
+      -1.285575219373079,
+      -1.5320888862379558,
+      0.0
+     ],
+     [
+      -1.2313229506513161,
+      -1.5760215072134443,
+      0.0
+     ],
+     [
+      -1.1755705045849465,
+      -1.6180339887498947,
+      0.0
+     ],
+     [
+      -1.1183858069414931,
+      -1.6580751451100837,
+      0.0
+     ],
+     [
+      -1.05983852846641,
+      -1.696096192312852,
+      0.0
+     ],
+     [
+      -1.0000000000000009,
+      -1.732050807568877,
+      0.0
+     ],
+     [
+      -0.9389431255717815,
+      -1.765895185717854,
+      0.0
+     ],
+     [
+      -0.8767422935781555,
+      -1.7975880925983336,
+      0.0
+     ],
+     [
+      -0.8134732861516002,
+      -1.827090915285202,
+      0.0
+     ],
+     [
+      -0.7492131868318246,
+      -1.8543677091335746,
+      0.0
+     ],
+     [
+      -0.6840402866513371,
+      -1.8793852415718169,
+      0.0
+     ],
+     [
+      -0.6180339887498951,
+      -1.902113032590307,
+      0.0
+     ],
+     [
+      -0.5512747116339978,
+      -1.922523391876638,
+      0.0
+     ],
+     [
+      -0.48384379119933557,
+      -1.940591452551993,
+      0.0
+     ],
+     [
+      -0.4158233816355196,
+      -1.9562952014676112,
+      0.0
+     ],
+     [
+      -0.34729635533386066,
+      -1.969615506024416,
+      0.0
+     ],
+     [
+      -0.27834620192013165,
+      -1.9805361374831405,
+      0.0
+     ],
+     [
+      -0.20905692653530672,
+      -1.9890437907365468,
+      0.0
+     ],
+     [
+      -0.13951294748825116,
+      -1.9951281005196484,
+      0.0
+     ],
+     [
+      -0.06979899340500152,
+      -1.9987816540381915,
+      0.0
+     ],
+     [
+      -3.6739403974420594e-16,
+      -2.0,
+      0.0
+     ],
+     [
+      0.06979899340500256,
+      -1.9987816540381915,
+      0.0
+     ],
+     [
+      0.13951294748825044,
+      -1.9951281005196486,
+      0.0
+     ],
+     [
+      0.20905692653530597,
+      -1.9890437907365468,
+      0.0
+     ],
+     [
+      0.27834620192013093,
+      -1.9805361374831407,
+      0.0
+     ],
+     [
+      0.34729635533385994,
+      -1.9696155060244163,
+      0.0
+     ],
+     [
+      0.41582338163551885,
+      -1.9562952014676112,
+      0.0
+     ],
+     [
+      0.48384379119933485,
+      -1.9405914525519932,
+      0.0
+     ],
+     [
+      0.5512747116339988,
+      -1.9225233918766376,
+      0.0
+     ],
+     [
+      0.6180339887498945,
+      -1.9021130325903073,
+      0.0
+     ],
+     [
+      0.684040286651338,
+      -1.8793852415718166,
+      0.0
+     ],
+     [
+      0.7492131868318239,
+      -1.8543677091335748,
+      0.0
+     ],
+     [
+      0.8134732861515995,
+      -1.8270909152852022,
+      0.0
+     ],
+     [
+      0.8767422935781548,
+      -1.797588092598334,
+      0.0
+     ],
+     [
+      0.9389431255717808,
+      -1.7658951857178542,
+      0.0
+     ],
+     [
+      1.0000000000000002,
+      -1.7320508075688772,
+      0.0
+     ],
+     [
+      1.0598385284664094,
+      -1.6960961923128521,
+      0.0
+     ],
+     [
+      1.118385806941494,
+      -1.6580751451100832,
+      0.0
+     ],
+     [
+      1.1755705045849458,
+      -1.6180339887498951,
+      0.0
+     ],
+     [
+      1.231322950651317,
+      -1.5760215072134436,
+      0.0
+     ],
+     [
+      1.2855752193730785,
+      -1.5320888862379562,
+      0.0
+     ],
+     [
+      1.3382612127177156,
+      -1.4862896509547892,
+      0.0
+     ],
+     [
+      1.3893167409179945,
+      -1.4386796006773022,
+      0.0
+     ],
+     [
+      1.4386796006773017,
+      -1.3893167409179952,
+      0.0
+     ],
+     [
+      1.4862896509547885,
+      -1.3382612127177163,
+      0.0
+     ],
+     [
+      1.5320888862379556,
+      -1.2855752193730792,
+      0.0
+     ],
+     [
+      1.576021507213444,
+      -1.2313229506513164,
+      0.0
+     ],
+     [
+      1.6180339887498947,
+      -1.1755705045849467,
+      0.0
+     ],
+     [
+      1.6580751451100837,
+      -1.1183858069414931,
+      0.0
+     ],
+     [
+      1.6960961923128517,
+      -1.05983852846641,
+      0.0
+     ],
+     [
+      1.7320508075688767,
+      -1.0000000000000009,
+      0.0
+     ],
+     [
+      1.765895185717854,
+      -0.9389431255717816,
+      0.0
+     ],
+     [
+      1.7975880925983336,
+      -0.8767422935781556,
+      0.0
+     ],
+     [
+      1.827090915285202,
+      -0.8134732861516003,
+      0.0
+     ],
+     [
+      1.8543677091335746,
+      -0.7492131868318247,
+      0.0
+     ],
+     [
+      1.8793852415718169,
+      -0.6840402866513372,
+      0.0
+     ],
+     [
+      1.902113032590307,
+      -0.6180339887498953,
+      0.0
+     ],
+     [
+      1.9225233918766378,
+      -0.5512747116339979,
+      0.0
+     ],
+     [
+      1.940591452551993,
+      -0.48384379119933574,
+      0.0
+     ],
+     [
+      1.9562952014676112,
+      -0.41582338163551974,
+      0.0
+     ],
+     [
+      1.969615506024416,
+      -0.3472963553338608,
+      0.0
+     ],
+     [
+      1.9805361374831405,
+      -0.27834620192013176,
+      0.0
+     ],
+     [
+      1.9890437907365466,
+      -0.20905692653530683,
+      0.0
+     ],
+     [
+      1.9951281005196484,
+      -0.13951294748825127,
+      0.0
+     ],
+     [
+      1.9987816540381915,
+      -0.06979899340500165,
+      0.0
+     ],
+     [
+      2.0,
+      -4.898587196589413e-16,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "22253dfb50ab94a105c883337b10c90765688b6dfabb3fac2861b8ad332cf9ea"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s03",
+   "data": "data/door.json",
+   "eq": "r·F (perpendicular, along, other side)",
+   "params": {
+    "a": [
+     0.9,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -1.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "1f895394a1c25610b47995ab5c04c807ac34e73951c0828bcfbb302a847f8b88"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22",
+   "data": "data/door.json",
+   "eq": "τ = r×F along the hinge",
+   "params": {
+    "a": [
+     0.9,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      0.0,
+      1.0,
+      0.0
+     ],
+     [
+      -1.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -1.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "91c75a6363101b50e7ba485c171d20cc65d3d160d0fd289790f62c06f7178db5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s04",
+   "data": "data/door.json",
+   "eq": "u·push (east, west) = 0, 0",
+   "params": {
+    "a": [
+     0.0,
+     3.0
+    ],
+    "b": [
+     [
+      1.0,
+      0.0
+     ],
+     [
+      -1.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s04",
+   "data": "data/door.json",
+   "eq": "u×push tells east from west",
+   "params": {
+    "a": [
+     0.0,
+     3.0
+    ],
+    "b": [
+     [
+      1.0,
+      0.0
+     ],
+     [
+      -1.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "e9ddb64f38d4d6eeb5fe42149800544c1a78dea2791ff785a6533a353c82b8f5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s11",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     0.9805806756909202,
+     0.19611613513818404,
+     0.0
+    ],
+    "b": [
+     0.31622776601683794,
+     0.9486832980505138,
+     0.0
+    ]
+   },
+   "sha256": "67384d43b6e2f9031edecad2296c04d99230182510a989164c4cfe11a89c3ba9"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s11",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     0.9805806756909202,
+     0.19611613513818404,
+     0.0
+    ],
+    "b": [
+     -0.19611613513818404,
+     0.9805806756909202,
+     0.0
+    ],
+    "c": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "2d31d3f7f40aba7f4cb61cf48fefe0081142a3a2e94773a4fcf45d7fa41a471e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s12",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     0.9805806756909202,
+     0.19611613513818404,
+     0.0
+    ],
+    "b": [
+     0.31622776601683794,
+     0.9486832980505138,
+     0.0
+    ]
+   },
+   "sha256": "67384d43b6e2f9031edecad2296c04d99230182510a989164c4cfe11a89c3ba9"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s12",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     0.9805806756909202,
+     0.19611613513818404,
+     0.0
+    ],
+    "b": [
+     -0.19611613513818404,
+     0.9805806756909202,
+     0.0
+    ],
+    "c": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "2d31d3f7f40aba7f4cb61cf48fefe0081142a3a2e94773a4fcf45d7fa41a471e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s21",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     -1.0,
+     0.0
+    ]
+   },
+   "sha256": "cf639d4868a9dbde979b7c29a0fcf077ac8aabf5daf99e48dcfbcc1faae0cd9e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s21",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     -1.0,
+     0.0
+    ],
+    "c": [
+     0.0,
+     0.0,
+     -1.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15,s16",
+   "data": "data/rhr.json",
+   "eq": "x̂×ŷ",
+   "params": {
+    "a": [
+     1.0,
+     0,
+     0
+    ],
+    "b": [
+     0,
+     1.0,
+     0
+    ]
+   },
+   "sha256": "04ae04134c8318578c932394683055fea108f3f586ff5b055613752c5f03e6f5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "04ae04134c8318578c932394683055fea108f3f586ff5b055613752c5f03e6f5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "c": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15,s16",
+   "data": "data/rhr.json",
+   "eq": "ŷ×ẑ",
+   "params": {
+    "a": [
+     0,
+     1.0,
+     0
+    ],
+    "b": [
+     0,
+     0,
+     1.0
+    ]
+   },
+   "sha256": "725c4777db328932b197731b1c986c84913a069a2090deb3667b697624551c8b"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "725c4777db328932b197731b1c986c84913a069a2090deb3667b697624551c8b"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "c": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15,s16",
+   "data": "data/rhr.json",
+   "eq": "ẑ×x̂",
+   "params": {
+    "a": [
+     0,
+     0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     0,
+     0
+    ]
+   },
+   "sha256": "17550ce418055ff4cd54b803e704300eac4212c3edcef00f92f1e6e506a5b069"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "17550ce418055ff4cd54b803e704300eac4212c3edcef00f92f1e6e506a5b069"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "c": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15,s16",
+   "data": "data/rhr.json",
+   "eq": "ŷ×x̂",
+   "params": {
+    "a": [
+     0,
+     1.0,
+     0
+    ],
+    "b": [
+     1.0,
+     0,
+     0
+    ]
+   },
+   "sha256": "cf639d4868a9dbde979b7c29a0fcf077ac8aabf5daf99e48dcfbcc1faae0cd9e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "cf639d4868a9dbde979b7c29a0fcf077ac8aabf5daf99e48dcfbcc1faae0cd9e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     -0.0,
+     0.0
+    ],
+    "c": [
+     0.0,
+     0.0,
+     -1.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15,s16",
+   "data": "data/rhr.json",
+   "eq": "ẑ×ŷ",
+   "params": {
+    "a": [
+     0,
+     0,
+     1.0
+    ],
+    "b": [
+     0,
+     1.0,
+     0
+    ]
+   },
+   "sha256": "17979bbb7ebf261bfbdd534310401c5c0a6eaebd955c413fbaa338d384ee006d"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "17979bbb7ebf261bfbdd534310401c5c0a6eaebd955c413fbaa338d384ee006d"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     1.0,
+     -0.0
+    ],
+    "c": [
+     -1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15,s16",
+   "data": "data/rhr.json",
+   "eq": "x̂×ẑ",
+   "params": {
+    "a": [
+     1.0,
+     0,
+     0
+    ],
+    "b": [
+     0,
+     0,
+     1.0
+    ]
+   },
+   "sha256": "0e00910e27c43f706a62d0dac6695c67003ed72876c4d25af8df6950a92578f8"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "thumb = first × second (direction)",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "0e00910e27c43f706a62d0dac6695c67003ed72876c4d25af8df6950a92578f8"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s14,s15",
+   "data": "data/rhr.json",
+   "eq": "det[fingers, palm, thumb] = +1 (right hand)",
+   "params": {
+    "a": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     -0.0,
+     0.0,
+     1.0
+    ],
+    "c": [
+     0.0,
+     -1.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s17",
+   "data": "data/rhr.json",
+   "eq": "(a×b)·(−view dir): towards (+) or away (−)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     14.0
+    ],
+    "b": [
+     -0.0,
+     -0.0,
+     1.0
+    ]
+   },
+   "sha256": "145436cecd5bcfb3bab47b63066fb098caaafbb2f7a70a039194f4981dd41e20"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s17",
+   "data": "data/rhr.json",
+   "eq": "(a×b)·(−view dir): towards (+) or away (−)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     14.0
+    ],
+    "b": [
+     -0.0,
+     -0.0,
+     -1.0
+    ]
+   },
+   "sha256": "119df52b17bd14d66cf9868f5b35aa5230c2e8bead5bc52b02b66a62b2e26676"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s17",
+   "data": "data/rhr.json",
+   "eq": "(a×b)·(−view dir): towards (+) or away (−)",
+   "params": {
+    "a": [
+     0.0,
+     0.0,
+     14.0
+    ],
+    "b": [
+     0.94,
+     0.34,
+     -0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.triple_scalar",
+   "scene": "s13",
+   "data": "data/rhr.json",
+   "eq": "(r×r')·z > 0: right-handed thread",
+   "params": {
+    "a": [
+     [
+      0.5,
+      0.0,
+      0.0
+     ],
+     [
+      0.3535533905932738,
+      0.3535533905932738,
+      0.0
+     ],
+     [
+      3.061616997868383e-17,
+      0.5,
+      0.0
+     ],
+     [
+      -0.35355339059327373,
+      0.3535533905932738,
+      0.0
+     ],
+     [
+      -0.5,
+      6.123233995736766e-17,
+      0.0
+     ],
+     [
+      -0.35355339059327384,
+      -0.35355339059327373,
+      0.0
+     ],
+     [
+      -9.184850993605148e-17,
+      -0.5,
+      0.0
+     ],
+     [
+      0.3535533905932737,
+      -0.35355339059327384,
+      0.0
+     ],
+     [
+      0.5,
+      -1.2246467991473532e-16,
+      0.0
+     ]
+    ],
+    "b": [
+     [
+      -0.0,
+      0.5,
+      0.0
+     ],
+     [
+      -0.3535533905932738,
+      0.3535533905932738,
+      0.0
+     ],
+     [
+      -0.5,
+      3.061616997868383e-17,
+      0.0
+     ],
+     [
+      -0.3535533905932738,
+      -0.35355339059327373,
+      0.0
+     ],
+     [
+      -6.123233995736766e-17,
+      -0.5,
+      0.0
+     ],
+     [
+      0.35355339059327373,
+      -0.35355339059327384,
+      0.0
+     ],
+     [
+      0.5,
+      -9.184850993605148e-17,
+      0.0
+     ],
+     [
+      0.35355339059327384,
+      0.3535533905932737,
+      0.0
+     ],
+     [
+      1.2246467991473532e-16,
+      0.5,
+      0.0
+     ]
+    ],
+    "c": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "7e1b70acdf779b237b79c9bd8a273fe08db23f26b84ae4940c3b17bb95634d8d"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s18",
+   "data": "data/cases.json",
+   "eq": "p×q, four cases",
+   "params": {
+    "a": [
+     3.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      2.0,
+      0.0
+     ],
+     [
+      -2.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -2.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "62e14383843724e5a0998cdf345c19d7b4e56139859c0b897840336576a3262a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s18",
+   "data": "data/cases.json",
+   "eq": "area of p, q",
+   "params": {
+    "a": [
+     3.0,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      2.0,
+      0.0
+     ],
+     [
+      -2.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      -2.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "1a0ee8a836a47acd32f6967a4f33abacb5c0aa2c4bc7de0a598d26ab529d11cd"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s20",
+   "data": "data/torque.json",
+   "eq": "τ = r×F (school definition of torque)",
+   "params": {
+    "a": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      3.061616997868383e-15,
+      50.0,
+      0.0
+     ],
+     [
+      43.30127018922194,
+      24.999999999999996,
+      0.0
+     ],
+     [
+      50.0,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "3c4f9a2d5e4fc10afbe0f3a19fc9c88279e62fb22c9ff16d3988f4ba90b54cfe"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s20",
+   "data": "data/torque.json",
+   "eq": "|τ| = |r||F| sin α",
+   "params": {
+    "a": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      3.061616997868383e-15,
+      50.0,
+      0.0
+     ],
+     [
+      43.30127018922194,
+      24.999999999999996,
+      0.0
+     ],
+     [
+      50.0,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "0e3365d5fb12c94511fa4e423d1891053a3045796cf9e16a88a9d16fcb5a5601"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s21",
+   "data": "data/torque.json",
+   "eq": "tighten / loosen",
+   "params": {
+    "a": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      0.0,
+      -50.0,
+      0.0
+     ],
+     [
+      0.0,
+      50.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "015f81b9f9104f29311d76e1d5f312820baf3b6451ad03d396c99c0640ef7c7f"
+  },
+  {
+   "fn": "fluidpy.geo.frames.inertial_oscillation_sphere",
+   "scene": "s00,s31",
+   "data": "data/paths.json",
+   "eq": "Vallis (2.50a,b) with ∇p = 0 on the sphere (RK4, dt 60 s)",
+   "params": {
+    "lat0": 0.7853981633974483,
+    "lon0": 0.008726646259971648,
+    "u0": 10.0,
+    "v0": 0.0,
+    "t": [
+     0.0,
+     60.0,
+     120.0,
+     180.0,
+     240.0,
+     300.0,
+     360.0,
+     420.0,
+     480.0,
+     540.0,
+     600.0,
+     660.0,
+     720.0,
+     780.0,
+     840.0,
+     900.0,
+     960.0,
+     1020.0,
+     1080.0,
+     1140.0,
+     1200.0,
+     1260.0,
+     1320.0,
+     1380.0,
+     1440.0,
+     1500.0,
+     1560.0,
+     1620.0,
+     1680.0,
+     1740.0,
+     1800.0,
+     1860.0,
+     1920.0,
+     1980.0,
+     2040.0,
+     2100.0,
+     2160.0,
+     2220.0,
+     2280.0,
+     2340.0,
+     2400.0,
+     2460.0,
+     2520.0,
+     2580.0,
+     2640.0,
+     2700.0,
+     2760.0,
+     2820.0,
+     2880.0,
+     2940.0,
+     3000.0,
+     3060.0,
+     3120.0,
+     3180.0,
+     3240.0,
+     3300.0,
+     3360.0,
+     3420.0,
+     3480.0,
+     3540.0,
+     3600.0,
+     3660.0,
+     3720.0,
+     3780.0,
+     3840.0,
+     3900.0,
+     3960.0,
+     4020.0,
+     4080.0,
+     4140.0,
+     4200.0,
+     4260.0,
+     4320.0,
+     4380.0,
+     4440.0,
+     4500.0,
+     4560.0,
+     4620.0,
+     4680.0,
+     4740.0,
+     4800.0,
+     4860.0,
+     4920.0,
+     4980.0,
+     5040.0,
+     5100.0,
+     5160.0,
+     5220.0,
+     5280.0,
+     5340.0,
+     5400.0,
+     5460.0,
+     5520.0,
+     5580.0,
+     5640.0,
+     5700.0,
+     5760.0,
+     5820.0,
+     5880.0,
+     5940.0,
+     6000.0,
+     6060.0,
+     6120.0,
+     6180.0,
+     6240.0,
+     6300.0,
+     6360.0,
+     6420.0,
+     6480.0,
+     6540.0,
+     6600.0,
+     6660.0,
+     6720.0,
+     6780.0,
+     6840.0,
+     6900.0,
+     6960.0,
+     7020.0,
+     7080.0,
+     7140.0,
+     7200.0,
+     7260.0,
+     7320.0,
+     7380.0,
+     7440.0,
+     7500.0,
+     7560.0,
+     7620.0,
+     7680.0,
+     7740.0,
+     7800.0,
+     7860.0,
+     7920.0,
+     7980.0,
+     8040.0,
+     8100.0,
+     8160.0,
+     8220.0,
+     8280.0,
+     8340.0,
+     8400.0,
+     8460.0,
+     8520.0,
+     8580.0,
+     8640.0,
+     8700.0,
+     8760.0,
+     8820.0,
+     8880.0,
+     8940.0,
+     9000.0,
+     9060.0,
+     9120.0,
+     9180.0,
+     9240.0,
+     9300.0,
+     9360.0,
+     9420.0,
+     9480.0,
+     9540.0,
+     9600.0,
+     9660.0,
+     9720.0,
+     9780.0,
+     9840.0,
+     9900.0,
+     9960.0,
+     10020.0,
+     10080.0,
+     10140.0,
+     10200.0,
+     10260.0,
+     10320.0,
+     10380.0,
+     10440.0,
+     10500.0,
+     10560.0,
+     10620.0,
+     10680.0,
+     10740.0,
+     10800.0,
+     10860.0,
+     10920.0,
+     10980.0,
+     11040.0,
+     11100.0,
+     11160.0,
+     11220.0,
+     11280.0,
+     11340.0,
+     11400.0,
+     11460.0,
+     11520.0,
+     11580.0,
+     11640.0,
+     11700.0,
+     11760.0,
+     11820.0,
+     11880.0,
+     11940.0,
+     12000.0,
+     12060.0,
+     12120.0,
+     12180.0,
+     12240.0,
+     12300.0,
+     12360.0,
+     12420.0,
+     12480.0,
+     12540.0,
+     12600.0,
+     12660.0,
+     12720.0,
+     12780.0,
+     12840.0,
+     12900.0,
+     12960.0,
+     13020.0,
+     13080.0,
+     13140.0,
+     13200.0,
+     13260.0,
+     13320.0,
+     13380.0,
+     13440.0,
+     13500.0,
+     13560.0,
+     13620.0,
+     13680.0,
+     13740.0,
+     13800.0,
+     13860.0,
+     13920.0,
+     13980.0,
+     14040.0,
+     14100.0,
+     14160.0,
+     14220.0,
+     14280.0,
+     14340.0,
+     14400.0,
+     14460.0,
+     14520.0,
+     14580.0,
+     14640.0,
+     14700.0,
+     14760.0,
+     14820.0,
+     14880.0,
+     14940.0,
+     15000.0,
+     15060.0,
+     15120.0,
+     15180.0,
+     15240.0,
+     15300.0,
+     15360.0,
+     15420.0,
+     15480.0,
+     15540.0,
+     15600.0,
+     15660.0,
+     15720.0,
+     15780.0,
+     15840.0,
+     15900.0,
+     15960.0,
+     16020.0,
+     16080.0,
+     16140.0,
+     16200.0,
+     16260.0,
+     16320.0,
+     16380.0,
+     16440.0,
+     16500.0,
+     16560.0,
+     16620.0,
+     16680.0,
+     16740.0,
+     16800.0,
+     16860.0,
+     16920.0,
+     16980.0,
+     17040.0,
+     17100.0,
+     17160.0,
+     17220.0,
+     17280.0,
+     17340.0,
+     17400.0,
+     17460.0,
+     17520.0,
+     17580.0,
+     17640.0,
+     17700.0,
+     17760.0,
+     17820.0,
+     17880.0,
+     17940.0,
+     18000.0,
+     18060.0,
+     18120.0,
+     18180.0,
+     18240.0,
+     18300.0,
+     18360.0,
+     18420.0,
+     18480.0,
+     18540.0,
+     18600.0,
+     18660.0,
+     18720.0,
+     18780.0,
+     18840.0,
+     18900.0,
+     18960.0,
+     19020.0,
+     19080.0,
+     19140.0,
+     19200.0,
+     19260.0,
+     19320.0,
+     19380.0,
+     19440.0,
+     19500.0,
+     19560.0,
+     19620.0,
+     19680.0,
+     19740.0,
+     19800.0,
+     19860.0,
+     19920.0,
+     19980.0,
+     20040.0,
+     20100.0,
+     20160.0,
+     20220.0,
+     20280.0,
+     20340.0,
+     20400.0,
+     20460.0,
+     20520.0,
+     20580.0,
+     20640.0,
+     20700.0,
+     20760.0,
+     20820.0,
+     20880.0,
+     20940.0,
+     21000.0,
+     21060.0,
+     21120.0,
+     21180.0,
+     21240.0,
+     21300.0,
+     21360.0,
+     21420.0,
+     21480.0,
+     21540.0,
+     21600.0,
+     21660.0,
+     21720.0,
+     21780.0,
+     21840.0,
+     21900.0,
+     21960.0,
+     22020.0,
+     22080.0,
+     22140.0,
+     22200.0,
+     22260.0,
+     22320.0,
+     22380.0,
+     22440.0,
+     22500.0,
+     22560.0,
+     22620.0,
+     22680.0,
+     22740.0,
+     22800.0,
+     22860.0,
+     22920.0,
+     22980.0,
+     23040.0,
+     23100.0,
+     23160.0,
+     23220.0,
+     23280.0,
+     23340.0,
+     23400.0,
+     23460.0,
+     23520.0,
+     23580.0,
+     23640.0,
+     23700.0,
+     23760.0,
+     23820.0,
+     23880.0,
+     23940.0,
+     24000.0,
+     24060.0,
+     24120.0,
+     24180.0,
+     24240.0,
+     24300.0,
+     24360.0,
+     24420.0,
+     24480.0,
+     24540.0,
+     24600.0,
+     24660.0,
+     24720.0,
+     24780.0,
+     24840.0,
+     24900.0,
+     24960.0,
+     25020.0,
+     25080.0,
+     25140.0,
+     25200.0,
+     25260.0,
+     25320.0,
+     25380.0,
+     25440.0,
+     25500.0,
+     25560.0,
+     25620.0,
+     25680.0,
+     25740.0,
+     25800.0,
+     25860.0,
+     25920.0,
+     25980.0,
+     26040.0,
+     26100.0,
+     26160.0,
+     26220.0,
+     26280.0,
+     26340.0,
+     26400.0,
+     26460.0,
+     26520.0,
+     26580.0,
+     26640.0,
+     26700.0,
+     26760.0,
+     26820.0,
+     26880.0,
+     26940.0,
+     27000.0,
+     27060.0,
+     27120.0,
+     27180.0,
+     27240.0,
+     27300.0,
+     27360.0,
+     27420.0,
+     27480.0,
+     27540.0,
+     27600.0,
+     27660.0,
+     27720.0,
+     27780.0,
+     27840.0,
+     27900.0,
+     27960.0,
+     28020.0,
+     28080.0,
+     28140.0,
+     28200.0,
+     28260.0,
+     28320.0,
+     28380.0,
+     28440.0,
+     28500.0,
+     28560.0,
+     28620.0,
+     28680.0,
+     28740.0,
+     28800.0,
+     28860.0,
+     28920.0,
+     28980.0,
+     29040.0,
+     29100.0,
+     29160.0,
+     29220.0,
+     29280.0,
+     29340.0,
+     29400.0,
+     29460.0,
+     29520.0,
+     29580.0,
+     29640.0,
+     29700.0,
+     29760.0,
+     29820.0,
+     29880.0,
+     29940.0,
+     30000.0,
+     30060.0,
+     30120.0,
+     30180.0,
+     30240.0,
+     30300.0,
+     30360.0,
+     30420.0,
+     30480.0,
+     30540.0,
+     30600.0,
+     30660.0,
+     30720.0,
+     30780.0,
+     30840.0,
+     30900.0,
+     30960.0,
+     31020.0,
+     31080.0,
+     31140.0,
+     31200.0,
+     31260.0,
+     31320.0,
+     31380.0,
+     31440.0,
+     31500.0,
+     31560.0,
+     31620.0,
+     31680.0,
+     31740.0,
+     31800.0,
+     31860.0,
+     31920.0,
+     31980.0,
+     32040.0,
+     32100.0,
+     32160.0,
+     32220.0,
+     32280.0,
+     32340.0,
+     32400.0,
+     32460.0,
+     32520.0,
+     32580.0,
+     32640.0,
+     32700.0,
+     32760.0,
+     32820.0,
+     32880.0,
+     32940.0,
+     33000.0,
+     33060.0,
+     33120.0,
+     33180.0,
+     33240.0,
+     33300.0,
+     33360.0,
+     33420.0,
+     33480.0,
+     33540.0,
+     33600.0,
+     33660.0,
+     33720.0,
+     33780.0,
+     33840.0,
+     33900.0,
+     33960.0,
+     34020.0,
+     34080.0,
+     34140.0,
+     34200.0,
+     34260.0,
+     34320.0,
+     34380.0,
+     34440.0,
+     34500.0,
+     34560.0,
+     34620.0,
+     34680.0,
+     34740.0,
+     34800.0,
+     34860.0,
+     34920.0,
+     34980.0,
+     35040.0,
+     35100.0,
+     35160.0,
+     35220.0,
+     35280.0,
+     35340.0,
+     35400.0,
+     35460.0,
+     35520.0,
+     35580.0,
+     35640.0,
+     35700.0,
+     35760.0,
+     35820.0,
+     35880.0,
+     35940.0,
+     36000.0,
+     36060.0,
+     36120.0,
+     36180.0,
+     36240.0,
+     36300.0,
+     36360.0,
+     36420.0,
+     36480.0,
+     36540.0,
+     36600.0,
+     36660.0,
+     36720.0,
+     36780.0,
+     36840.0,
+     36900.0,
+     36960.0,
+     37020.0,
+     37080.0,
+     37140.0,
+     37200.0,
+     37260.0,
+     37320.0,
+     37380.0,
+     37440.0,
+     37500.0,
+     37560.0,
+     37620.0,
+     37680.0,
+     37740.0,
+     37800.0,
+     37860.0,
+     37920.0,
+     37980.0,
+     38040.0,
+     38100.0,
+     38160.0,
+     38220.0,
+     38280.0,
+     38340.0,
+     38400.0,
+     38460.0,
+     38520.0,
+     38580.0,
+     38640.0,
+     38700.0,
+     38760.0,
+     38820.0,
+     38880.0,
+     38940.0,
+     39000.0,
+     39060.0,
+     39120.0,
+     39180.0,
+     39240.0,
+     39300.0,
+     39360.0,
+     39420.0,
+     39480.0,
+     39540.0,
+     39600.0,
+     39660.0,
+     39720.0,
+     39780.0,
+     39840.0,
+     39900.0,
+     39960.0,
+     40020.0,
+     40080.0,
+     40140.0,
+     40200.0,
+     40260.0,
+     40320.0,
+     40380.0,
+     40440.0,
+     40500.0,
+     40560.0,
+     40620.0,
+     40680.0,
+     40740.0,
+     40800.0,
+     40860.0,
+     40920.0,
+     40980.0,
+     41040.0,
+     41100.0,
+     41160.0,
+     41220.0,
+     41280.0,
+     41340.0,
+     41400.0,
+     41460.0,
+     41520.0,
+     41580.0,
+     41640.0,
+     41700.0,
+     41760.0,
+     41820.0,
+     41880.0,
+     41940.0,
+     42000.0,
+     42060.0,
+     42120.0,
+     42180.0,
+     42240.0,
+     42300.0,
+     42360.0,
+     42420.0,
+     42480.0,
+     42540.0,
+     42600.0,
+     42660.0,
+     42720.0,
+     42780.0,
+     42840.0,
+     42900.0,
+     42960.0,
+     43020.0,
+     43080.0,
+     43140.0,
+     43200.0,
+     43260.0,
+     43320.0,
+     43380.0,
+     43440.0,
+     43500.0,
+     43560.0,
+     43620.0,
+     43680.0,
+     43740.0,
+     43800.0,
+     43860.0,
+     43920.0,
+     43980.0,
+     44040.0,
+     44100.0,
+     44160.0,
+     44220.0,
+     44280.0,
+     44340.0,
+     44400.0,
+     44460.0,
+     44520.0,
+     44580.0,
+     44640.0,
+     44700.0,
+     44760.0,
+     44820.0,
+     44880.0,
+     44940.0,
+     45000.0,
+     45060.0,
+     45120.0,
+     45180.0,
+     45240.0,
+     45300.0,
+     45360.0,
+     45420.0,
+     45480.0,
+     45540.0,
+     45600.0,
+     45660.0,
+     45720.0,
+     45780.0,
+     45840.0,
+     45900.0,
+     45960.0,
+     46020.0,
+     46080.0,
+     46140.0,
+     46200.0,
+     46260.0,
+     46320.0,
+     46380.0,
+     46440.0,
+     46500.0,
+     46560.0,
+     46620.0,
+     46680.0,
+     46740.0,
+     46800.0,
+     46860.0,
+     46920.0,
+     46980.0,
+     47040.0,
+     47100.0,
+     47160.0,
+     47220.0,
+     47280.0,
+     47340.0,
+     47400.0,
+     47460.0,
+     47520.0,
+     47580.0,
+     47640.0,
+     47700.0,
+     47760.0,
+     47820.0,
+     47880.0,
+     47940.0,
+     48000.0,
+     48060.0,
+     48120.0,
+     48180.0,
+     48240.0,
+     48300.0,
+     48360.0,
+     48420.0,
+     48480.0,
+     48540.0,
+     48600.0,
+     48660.0,
+     48720.0,
+     48780.0,
+     48840.0,
+     48900.0,
+     48960.0,
+     49020.0,
+     49080.0,
+     49140.0,
+     49200.0,
+     49260.0,
+     49320.0,
+     49380.0,
+     49440.0,
+     49500.0,
+     49560.0,
+     49620.0,
+     49680.0,
+     49740.0,
+     49800.0,
+     49860.0,
+     49920.0,
+     49980.0,
+     50040.0,
+     50100.0,
+     50160.0,
+     50220.0,
+     50280.0,
+     50340.0,
+     50400.0,
+     50460.0,
+     50520.0,
+     50580.0,
+     50640.0,
+     50700.0,
+     50760.0,
+     50820.0,
+     50880.0,
+     50940.0,
+     51000.0,
+     51060.0,
+     51120.0,
+     51180.0,
+     51240.0,
+     51300.0,
+     51360.0,
+     51420.0,
+     51480.0,
+     51540.0,
+     51600.0,
+     51660.0,
+     51720.0,
+     51780.0,
+     51840.0,
+     51900.0,
+     51960.0,
+     52020.0,
+     52080.0,
+     52140.0,
+     52200.0,
+     52260.0,
+     52320.0,
+     52380.0,
+     52440.0,
+     52500.0,
+     52560.0,
+     52620.0,
+     52680.0,
+     52740.0,
+     52800.0,
+     52860.0,
+     52920.0,
+     52980.0,
+     53040.0,
+     53100.0,
+     53160.0,
+     53220.0,
+     53280.0,
+     53340.0,
+     53400.0,
+     53460.0,
+     53520.0,
+     53580.0,
+     53640.0,
+     53700.0,
+     53760.0,
+     53820.0,
+     53880.0,
+     53940.0,
+     54000.0,
+     54060.0,
+     54120.0,
+     54180.0,
+     54240.0,
+     54300.0,
+     54360.0,
+     54420.0,
+     54480.0,
+     54540.0,
+     54600.0,
+     54660.0,
+     54720.0,
+     54780.0,
+     54840.0,
+     54900.0,
+     54960.0,
+     55020.0,
+     55080.0,
+     55140.0,
+     55200.0,
+     55260.0,
+     55320.0,
+     55380.0,
+     55440.0,
+     55500.0,
+     55560.0,
+     55620.0,
+     55680.0,
+     55740.0,
+     55800.0,
+     55860.0,
+     55920.0,
+     55980.0,
+     56040.0,
+     56100.0,
+     56160.0,
+     56220.0,
+     56280.0,
+     56340.0,
+     56400.0,
+     56460.0,
+     56520.0,
+     56580.0,
+     56640.0,
+     56700.0,
+     56760.0,
+     56820.0,
+     56880.0,
+     56940.0,
+     57000.0,
+     57060.0,
+     57120.0,
+     57180.0,
+     57240.0,
+     57300.0,
+     57360.0,
+     57420.0,
+     57480.0,
+     57540.0,
+     57600.0,
+     57660.0,
+     57720.0,
+     57780.0,
+     57840.0,
+     57900.0,
+     57960.0,
+     58020.0,
+     58080.0,
+     58140.0,
+     58200.0,
+     58260.0,
+     58320.0,
+     58380.0,
+     58440.0,
+     58500.0,
+     58560.0,
+     58620.0,
+     58680.0,
+     58740.0,
+     58800.0,
+     58860.0,
+     58920.0,
+     58980.0,
+     59040.0,
+     59100.0,
+     59160.0,
+     59220.0,
+     59280.0,
+     59340.0,
+     59400.0,
+     59460.0,
+     59520.0,
+     59580.0,
+     59640.0,
+     59700.0,
+     59760.0,
+     59820.0,
+     59880.0,
+     59940.0,
+     60000.0,
+     60060.0,
+     60120.0,
+     60180.0,
+     60240.0,
+     60300.0,
+     60360.0,
+     60420.0,
+     60480.0,
+     60540.0,
+     60600.0,
+     60660.0,
+     60720.0,
+     60780.0,
+     60840.0,
+     60900.0,
+     60960.0,
+     61020.0,
+     61080.0,
+     61140.0,
+     61200.0
+    ],
+    "dt": 60.0
+   },
+   "sha256": "324ef2f639cfbfd87d9474d5323c696eae22230d7f5de2502c8247ed81150912"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s09a",
+   "data": "data/pair.json",
+   "eq": "box minus corners = |a×b| (ours)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "145436cecd5bcfb3bab47b63066fb098caaafbb2f7a70a039194f4981dd41e20"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s18b",
+   "data": "data/pair.json",
+   "eq": "part of b along a",
+   "params": {
+    "a": [
+     1.0,
+     3.0
+    ],
+    "b": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "63c6dff3dc4227af4c62c015c79a6247b0002ffd8cb0ed616b8f345bb180cd0e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s18c",
+   "data": "data/pair.json",
+   "eq": "a×(b + s a) for s = 0..2",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     [
+      1.0,
+      3.0,
+      0.0
+     ],
+     [
+      1.1,
+      3.02,
+      0.0
+     ],
+     [
+      1.2,
+      3.04,
+      0.0
+     ],
+     [
+      1.3,
+      3.06,
+      0.0
+     ],
+     [
+      1.4,
+      3.08,
+      0.0
+     ],
+     [
+      1.5,
+      3.1,
+      0.0
+     ],
+     [
+      1.6,
+      3.12,
+      0.0
+     ],
+     [
+      1.7000000000000002,
+      3.14,
+      0.0
+     ],
+     [
+      1.8,
+      3.16,
+      0.0
+     ],
+     [
+      1.9,
+      3.18,
+      0.0
+     ],
+     [
+      2.0,
+      3.2,
+      0.0
+     ],
+     [
+      2.1,
+      3.22,
+      0.0
+     ],
+     [
+      2.2,
+      3.24,
+      0.0
+     ],
+     [
+      2.3,
+      3.26,
+      0.0
+     ],
+     [
+      2.4000000000000004,
+      3.2800000000000002,
+      0.0
+     ],
+     [
+      2.5,
+      3.3,
+      0.0
+     ],
+     [
+      2.6,
+      3.32,
+      0.0
+     ],
+     [
+      2.7,
+      3.34,
+      0.0
+     ],
+     [
+      2.8,
+      3.36,
+      0.0
+     ],
+     [
+      2.9,
+      3.38,
+      0.0
+     ],
+     [
+      3.0,
+      3.4,
+      0.0
+     ],
+     [
+      3.1,
+      3.42,
+      0.0
+     ],
+     [
+      3.2,
+      3.44,
+      0.0
+     ],
+     [
+      3.3000000000000003,
+      3.46,
+      0.0
+     ],
+     [
+      3.4,
+      3.48,
+      0.0
+     ],
+     [
+      3.5,
+      3.5,
+      0.0
+     ],
+     [
+      3.6,
+      3.52,
+      0.0
+     ],
+     [
+      3.7,
+      3.54,
+      0.0
+     ],
+     [
+      3.8000000000000003,
+      3.56,
+      0.0
+     ],
+     [
+      3.9,
+      3.58,
+      0.0
+     ],
+     [
+      4.0,
+      3.6,
+      0.0
+     ],
+     [
+      4.1,
+      3.62,
+      0.0
+     ],
+     [
+      4.2,
+      3.64,
+      0.0
+     ],
+     [
+      4.300000000000001,
+      3.66,
+      0.0
+     ],
+     [
+      4.4,
+      3.68,
+      0.0
+     ],
+     [
+      4.5,
+      3.7,
+      0.0
+     ],
+     [
+      4.6,
+      3.7199999999999998,
+      0.0
+     ],
+     [
+      4.7,
+      3.74,
+      0.0
+     ],
+     [
+      4.8,
+      3.76,
+      0.0
+     ],
+     [
+      4.9,
+      3.7800000000000002,
+      0.0
+     ],
+     [
+      5.0,
+      3.8,
+      0.0
+     ],
+     [
+      5.1,
+      3.82,
+      0.0
+     ],
+     [
+      5.2,
+      3.84,
+      0.0
+     ],
+     [
+      5.3,
+      3.86,
+      0.0
+     ],
+     [
+      5.4,
+      3.88,
+      0.0
+     ],
+     [
+      5.5,
+      3.9,
+      0.0
+     ],
+     [
+      5.6000000000000005,
+      3.92,
+      0.0
+     ],
+     [
+      5.699999999999999,
+      3.94,
+      0.0
+     ],
+     [
+      5.8,
+      3.96,
+      0.0
+     ],
+     [
+      5.9,
+      3.98,
+      0.0
+     ],
+     [
+      6.0,
+      4.0,
+      0.0
+     ],
+     [
+      6.1,
+      4.02,
+      0.0
+     ],
+     [
+      6.2,
+      4.04,
+      0.0
+     ],
+     [
+      6.300000000000001,
+      4.0600000000000005,
+      0.0
+     ],
+     [
+      6.4,
+      4.08,
+      0.0
+     ],
+     [
+      6.5,
+      4.1,
+      0.0
+     ],
+     [
+      6.6000000000000005,
+      4.12,
+      0.0
+     ],
+     [
+      6.699999999999999,
+      4.14,
+      0.0
+     ],
+     [
+      6.8,
+      4.16,
+      0.0
+     ],
+     [
+      6.8999999999999995,
+      4.18,
+      0.0
+     ],
+     [
+      7.0,
+      4.2,
+      0.0
+     ],
+     [
+      7.1,
+      4.22,
+      0.0
+     ],
+     [
+      7.2,
+      4.24,
+      0.0
+     ],
+     [
+      7.3,
+      4.26,
+      0.0
+     ],
+     [
+      7.4,
+      4.28,
+      0.0
+     ],
+     [
+      7.5,
+      4.3,
+      0.0
+     ],
+     [
+      7.6000000000000005,
+      4.32,
+      0.0
+     ],
+     [
+      7.7,
+      4.34,
+      0.0
+     ],
+     [
+      7.800000000000001,
+      4.36,
+      0.0
+     ],
+     [
+      7.8999999999999995,
+      4.38,
+      0.0
+     ],
+     [
+      8.0,
+      4.4,
+      0.0
+     ],
+     [
+      8.1,
+      4.42,
+      0.0
+     ],
+     [
+      8.2,
+      4.4399999999999995,
+      0.0
+     ],
+     [
+      8.3,
+      4.46,
+      0.0
+     ],
+     [
+      8.4,
+      4.48,
+      0.0
+     ],
+     [
+      8.5,
+      4.5,
+      0.0
+     ],
+     [
+      8.6,
+      4.52,
+      0.0
+     ],
+     [
+      8.7,
+      4.54,
+      0.0
+     ],
+     [
+      8.8,
+      4.5600000000000005,
+      0.0
+     ],
+     [
+      8.9,
+      4.58,
+      0.0
+     ],
+     [
+      9.0,
+      4.6,
+      0.0
+     ],
+     [
+      9.100000000000001,
+      4.62,
+      0.0
+     ],
+     [
+      9.2,
+      4.64,
+      0.0
+     ],
+     [
+      9.299999999999999,
+      4.66,
+      0.0
+     ],
+     [
+      9.4,
+      4.68,
+      0.0
+     ],
+     [
+      9.5,
+      4.7,
+      0.0
+     ],
+     [
+      9.6,
+      4.72,
+      0.0
+     ],
+     [
+      9.7,
+      4.74,
+      0.0
+     ],
+     [
+      9.8,
+      4.76,
+      0.0
+     ],
+     [
+      9.9,
+      4.78,
+      0.0
+     ],
+     [
+      10.0,
+      4.8,
+      0.0
+     ],
+     [
+      10.1,
+      4.82,
+      0.0
+     ],
+     [
+      10.200000000000001,
+      4.84,
+      0.0
+     ],
+     [
+      10.3,
+      4.86,
+      0.0
+     ],
+     [
+      10.399999999999999,
+      4.88,
+      0.0
+     ],
+     [
+      10.5,
+      4.9,
+      0.0
+     ],
+     [
+      10.6,
+      4.92,
+      0.0
+     ],
+     [
+      10.7,
+      4.9399999999999995,
+      0.0
+     ],
+     [
+      10.8,
+      4.96,
+      0.0
+     ],
+     [
+      10.9,
+      4.98,
+      0.0
+     ],
+     [
+      11.0,
+      5.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "afc535c2bc826eb020d7dca0a1667e2816e84f137f5c36e1a50f3c22a4a57a25"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "tilted a × b (illustrative pair)",
+   "params": {
+    "a": [
+     2.0,
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     2.0,
+     1.0
+    ]
+   },
+   "sha256": "f6642151762428c498b8b038354a287337f7653fd9bcd4b302ce8e3bac69dacc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "shadow on the yz wall",
+   "params": {
+    "a": [
+     0.0,
+     1.0
+    ],
+    "b": [
+     2.0,
+     1.0
+    ]
+   },
+   "sha256": "3f710ac088db33363087de2b9a657541fe5447821debaa9fe5cbd538eb1a5f29"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "shadow on the zx wall",
+   "params": {
+    "a": [
+     1.0,
+     2.0
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "3f710ac088db33363087de2b9a657541fe5447821debaa9fe5cbd538eb1a5f29"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s22b",
+   "data": "data/pair.json",
+   "eq": "shadow on the xy wall",
+   "params": {
+    "a": [
+     2.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     2.0
+    ]
+   },
+   "sha256": "400c52dd5bd0047d64c0582af027b387a7938a64283d0d4f727331140cb6462c"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s20",
+   "data": "data/torque.json",
+   "eq": "part of F along the spanner",
+   "params": {
+    "a": [
+     [
+      0.0,
+      50.0,
+      0.0
+     ],
+     [
+      43.30127,
+      25.0,
+      0.0
+     ],
+     [
+      50.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "b": [
+     0.3,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "324e9d868018c1a93a0907bfe19e8e8a9ddef84a7961d4e9367979c730f42561"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.parallelogram_area",
+   "scene": "s20",
+   "data": "data/torque.json",
+   "eq": "|r||F_across| (area) / |r| = part across",
+   "params": {
+    "a": [
+     0.3,
+     0.0,
+     0.0
+    ],
+    "b": [
+     [
+      0.0,
+      50.0,
+      0.0
+     ],
+     [
+      43.30127,
+      25.0,
+      0.0
+     ],
+     [
+      50.0,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "57d50eea6389f59e82c62533dcdeafdaf7038585efda590ea279bd1efe4cf617"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22c",
+   "data": "data/examples.json",
+   "eq": "L = r × p (angular momentum)",
+   "params": {
+    "a": [
+     0.5,
+     0.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     6.0,
+     0.0
+    ]
+   },
+   "sha256": "19cf58ce85377ea420aa7e53cc829dc8fb1c41fd1ee1b04e9e68f0cdf7c086f3"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22c",
+   "data": "data/examples.json",
+   "eq": "string torque r × (−T r̂) = 0",
+   "params": {
+    "a": [
+     0.5,
+     0.0,
+     0.0
+    ],
+    "b": [
+     -5.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "a6a9623a6c6857122c921e87d62eedb7e880f0d9862f8fb6b0304bf5be1e9d8a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s22d",
+   "data": "data/examples.json",
+   "eq": "x̂ × ẑ = −ŷ: v (east) × B (up) points south",
+   "params": {
+    "a": [
+     1.0,
+     0,
+     0
+    ],
+    "b": [
+     0,
+     0,
+     1.0
+    ]
+   },
+   "sha256": "0e00910e27c43f706a62d0dac6695c67003ed72876c4d25af8df6950a92578f8"
+  },
+  {
+   "fn": "fluidpy.geo.frames.inertial_oscillation",
+   "scene": "s22d",
+   "data": "data/examples.json",
+   "eq": "charge circle: dv/dt = −f k × v, f = +1 (same equation; clockwise)",
+   "params": {
+    "t": [
+     0.0,
+     0.05235987755982988,
+     0.10471975511965977,
+     0.15707963267948966,
+     0.20943951023931953,
+     0.2617993877991494,
+     0.3141592653589793,
+     0.36651914291880916,
+     0.41887902047863906,
+     0.47123889803846897,
+     0.5235987755982988,
+     0.5759586531581287,
+     0.6283185307179586,
+     0.6806784082777885,
+     0.7330382858376183,
+     0.7853981633974483,
+     0.8377580409572781,
+     0.890117918517108,
+     0.9424777960769379,
+     0.9948376736367678,
+     1.0471975511965976,
+     1.0995574287564276,
+     1.1519173063162573,
+     1.2042771838760873,
+     1.2566370614359172,
+     1.308996938995747,
+     1.361356816555577,
+     1.413716694115407,
+     1.4660765716752366,
+     1.5184364492350666,
+     1.5707963267948966,
+     1.6231562043547263,
+     1.6755160819145563,
+     1.7278759594743862,
+     1.780235837034216,
+     1.832595714594046,
+     1.8849555921538759,
+     1.9373154697137056,
+     1.9896753472735356,
+     2.0420352248333655,
+     2.0943951023931953,
+     2.146754979953025,
+     2.199114857512855,
+     2.251474735072685,
+     2.3038346126325147,
+     2.356194490192345,
+     2.4085543677521746,
+     2.4609142453120043,
+     2.5132741228718345,
+     2.5656340004316642,
+     2.617993877991494,
+     2.670353755551324,
+     2.722713633111154,
+     2.7750735106709836,
+     2.827433388230814,
+     2.8797932657906435,
+     2.9321531433504733,
+     2.9845130209103035,
+     3.036872898470133,
+     3.089232776029963,
+     3.141592653589793,
+     3.193952531149623,
+     3.2463124087094526,
+     3.2986722862692828,
+     3.3510321638291125,
+     3.4033920413889422,
+     3.4557519189487724,
+     3.508111796508602,
+     3.560471674068432,
+     3.612831551628262,
+     3.665191429188092,
+     3.7175513067479216,
+     3.7699111843077517,
+     3.8222710618675815,
+     3.874630939427411,
+     3.9269908169872414,
+     3.979350694547071,
+     4.031710572106901,
+     4.084070449666731,
+     4.13643032722656,
+     4.1887902047863905,
+     4.241150082346221,
+     4.29350995990605,
+     4.34586983746588,
+     4.39822971502571,
+     4.45058959258554,
+     4.50294947014537,
+     4.5553093477052,
+     4.607669225265029,
+     4.6600291028248595,
+     4.71238898038469,
+     4.764748857944519,
+     4.817108735504349,
+     4.869468613064179,
+     4.921828490624009,
+     4.974188368183839,
+     5.026548245743669,
+     5.078908123303498,
+     5.1312680008633285,
+     5.183627878423159,
+     5.235987755982988,
+     5.288347633542818,
+     5.340707511102648,
+     5.393067388662478,
+     5.445427266222308,
+     5.497787143782138,
+     5.550147021341967,
+     5.602506898901797,
+     5.654866776461628,
+     5.707226654021457,
+     5.759586531581287,
+     5.811946409141117,
+     5.864306286700947,
+     5.916666164260777,
+     5.969026041820607,
+     6.021385919380436,
+     6.073745796940266,
+     6.126105674500097,
+     6.178465552059926,
+     6.230825429619756,
+     6.283185307179586
+    ],
+    "u0": 1.0,
+    "v0": 0.0,
+    "f": 1.0
+   },
+   "sha256": "6fb33943e7a81e07a43cedd38e9394ce70e327e911f233aebd8d0ebf1abdd5ef"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "speed after 1 perpendicular kick(s)",
+   "params": {
+    "a": [
+     10.0,
+     1.0
+    ]
+   },
+   "sha256": "f890682a2bd72ad269def1d635382d125d9ce12e482cfbca90b21eb26f0e72dc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "speed after 10 perpendicular kick(s)",
+   "params": {
+    "a": [
+     9.955041217231898,
+     0.9985761679581873
+    ]
+   },
+   "sha256": "da9d184b7ddce57c10f4d665a93c13e82f2c502586251afc8c5ba25115cb4aeb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "speed after 100 perpendicular kick(s)",
+   "params": {
+    "a": [
+     9.950541646549325,
+     0.9983591239065646
+    ]
+   },
+   "sha256": "590106fdaa784db3240c961e579d36a9a7e443b068c7475c713e43fd1737f1af"
+  },
+  {
+   "fn": "fluidpy.geo.frames.inertial_oscillation",
+   "scene": "s22e",
+   "data": "data/examples.json",
+   "eq": "continuous ⟂ push: circle (f = −1e-4, anticlockwise, the kicks' sense)",
+   "params": {
+    "t": [
+     0.0,
+     261.79938779914943,
+     523.5987755982989,
+     785.3981633974483,
+     1047.1975511965977,
+     1308.996938995747,
+     1570.7963267948967,
+     1832.595714594046,
+     2094.3951023931954,
+     2356.194490192345,
+     2617.993877991494,
+     2879.7932657906435,
+     3141.5926535897934,
+     3403.3920413889427,
+     3665.191429188092,
+     3926.9908169872415,
+     4188.790204786391,
+     4450.58959258554,
+     4712.38898038469,
+     4974.188368183839,
+     5235.987755982988,
+     5497.787143782138,
+     5759.586531581287,
+     6021.3859193804365,
+     6283.185307179587,
+     6544.984694978736,
+     6806.7840827778855,
+     7068.583470577035,
+     7330.382858376184,
+     7592.182246175334,
+     7853.981633974483,
+     8115.781021773632,
+     8377.580409572782,
+     8639.379797371932,
+     8901.17918517108,
+     9162.97857297023,
+     9424.77796076938,
+     9686.57734856853,
+     9948.376736367678,
+     10210.176124166828,
+     10471.975511965977,
+     10733.774899765127,
+     10995.574287564275,
+     11257.373675363426,
+     11519.173063162574,
+     11780.972450961724,
+     12042.771838760873,
+     12304.571226560023,
+     12566.370614359173,
+     12828.170002158322,
+     13089.969389957472,
+     13351.76877775662,
+     13613.568165555771,
+     13875.36755335492,
+     14137.16694115407,
+     14398.966328953218,
+     14660.765716752368,
+     14922.565104551517,
+     15184.364492350667,
+     15446.163880149816,
+     15707.963267948966,
+     15969.762655748114,
+     16231.562043547265,
+     16493.361431346413,
+     16755.160819145563,
+     17016.960206944714,
+     17278.759594743864,
+     17540.55898254301,
+     17802.35837034216,
+     18064.15775814131,
+     18325.95714594046,
+     18587.756533739608,
+     18849.55592153876,
+     19111.35530933791,
+     19373.15469713706,
+     19634.954084936206,
+     19896.753472735356,
+     20158.552860534506,
+     20420.352248333656,
+     20682.151636132803,
+     20943.951023931953,
+     21205.750411731104,
+     21467.549799530254,
+     21729.349187329404,
+     21991.14857512855,
+     22252.9479629277,
+     22514.74735072685,
+     22776.546738526,
+     23038.34612632515,
+     23300.1455141243,
+     23561.94490192345,
+     23823.7442897226,
+     24085.543677521746,
+     24347.343065320896,
+     24609.142453120046,
+     24870.941840919197,
+     25132.741228718347,
+     25394.540616517494,
+     25656.340004316644,
+     25918.139392115794,
+     26179.938779914944,
+     26441.73816771409,
+     26703.53755551324,
+     26965.33694331239,
+     27227.136331111542,
+     27488.93571891069,
+     27750.73510670984,
+     28012.53449450899,
+     28274.33388230814,
+     28536.133270107286,
+     28797.932657906436,
+     29059.732045705587,
+     29321.531433504737,
+     29583.330821303887,
+     29845.130209103034,
+     30106.929596902184,
+     30368.728984701334,
+     30630.528372500485,
+     30892.32776029963,
+     31154.12714809878,
+     31415.926535897932,
+     31677.725923697082,
+     31939.52531149623,
+     32201.32469929538,
+     32463.12408709453,
+     32724.92347489368,
+     32986.722862692826,
+     33248.52225049198,
+     33510.32163829113,
+     33772.12102609027,
+     34033.92041388943,
+     34295.719801688574,
+     34557.51918948773,
+     34819.318577286875,
+     35081.11796508602,
+     35342.917352885175,
+     35604.71674068432,
+     35866.51612848347,
+     36128.31551628262,
+     36390.11490408177,
+     36651.91429188092,
+     36913.71367968007,
+     37175.513067479216,
+     37437.31245527837,
+     37699.11184307752,
+     37960.91123087667,
+     38222.71061867582,
+     38484.510006474964,
+     38746.30939427412,
+     39008.108782073265,
+     39269.90816987241,
+     39531.707557671565,
+     39793.50694547071,
+     40055.306333269866,
+     40317.10572106901,
+     40578.90510886816,
+     40840.70449666731,
+     41102.50388446646,
+     41364.303272265606,
+     41626.10266006476,
+     41887.90204786391,
+     42149.70143566306,
+     42411.50082346221,
+     42673.300211261354,
+     42935.09959906051,
+     43196.898986859655,
+     43458.69837465881,
+     43720.497762457955,
+     43982.2971502571,
+     44244.096538056256,
+     44505.8959258554,
+     44767.69531365455,
+     45029.4947014537,
+     45291.29408925285,
+     45553.093477052,
+     45814.89286485115,
+     46076.6922526503,
+     46338.49164044945,
+     46600.2910282486,
+     46862.09041604775,
+     47123.8898038469,
+     47385.689191646044,
+     47647.4885794452,
+     47909.287967244345,
+     48171.08735504349,
+     48432.886742842646,
+     48694.68613064179,
+     48956.485518440946,
+     49218.28490624009,
+     49480.08429403924,
+     49741.88368183839,
+     50003.68306963754,
+     50265.482457436694,
+     50527.28184523584,
+     50789.08123303499,
+     51050.88062083414,
+     51312.68000863329,
+     51574.479396432434,
+     51836.27878423159,
+     52098.078172030735,
+     52359.87755982989,
+     52621.676947629036,
+     52883.47633542818,
+     53145.275723227336,
+     53407.07511102648,
+     53668.87449882563,
+     53930.67388662478,
+     54192.47327442393,
+     54454.272662223084,
+     54716.07205002223,
+     54977.87143782138,
+     55239.67082562053,
+     55501.47021341968,
+     55763.26960121883,
+     56025.06898901798,
+     56286.868376817125,
+     56548.66776461628,
+     56810.467152415426,
+     57072.26654021457,
+     57334.065928013726,
+     57595.86531581287,
+     57857.66470361203,
+     58119.46409141117,
+     58381.26347921032,
+     58643.062867009474,
+     58904.86225480862,
+     59166.661642607774,
+     59428.46103040692,
+     59690.26041820607,
+     59952.05980600522,
+     60213.85919380437,
+     60475.658581603515,
+     60737.45796940267,
+     60999.257357201815,
+     61261.05674500097,
+     61522.856132800116,
+     61784.65552059926,
+     62046.45490839842,
+     62308.25429619756,
+     62570.05368399671,
+     62831.85307179586
+    ],
+    "u0": 10.0,
+    "v0": 0.0,
+    "f": -0.0001
+   },
+   "sha256": "8ae23008428ab76d680731173548188e6bd090d0dfb0d33eea4521d478b01558"
+  },
+  {
+   "fn": "fluidpy.core.tensors.levi_civita",
+   "scene": "s15a",
+   "data": "data/v5.json",
+   "eq": "Kundu (K 2.18) ε_ijk (provenance only)",
+   "params": {},
+   "sha256": "5f794cfc30b8683937c1e30e1dc18abc271d5e01c2995b1774400c515a4d0392"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s18d",
+   "data": "data/v5.json",
+   "eq": "a·b (the along part × |a|)",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "2d311251337c35e4d3628720f349d4133233ed476372432e57314e0ab316bc35"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s18d",
+   "data": "data/v5.json",
+   "eq": "a×b (the across part × |a|)",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "f5aecb8bee3e2ebee9c0821ef88ae199d33f73440cd9aef58e082ec9f9b9e014"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s18",
+   "data": "data/v5.json",
+   "eq": "p·q for the three s18 cases (the opposite of p × q)",
+   "params": {
+    "a": [
+     [
+      3.0,
+      0.0,
+      0.0
+     ],
+     [
+      3.0,
+      0.0,
+      0.0
+     ],
+     [
+      3.0,
+      0.0,
+      0.0
+     ]
+    ],
+    "b": [
+     [
+      2.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      2.0,
+      0.0
+     ],
+     [
+      -2.0,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "76fce237958d71ca4445eceed245fb224a23340aefd99afcd62df6c6be1622ce"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s21a",
+   "data": "data/v5.json",
+   "eq": "(r × F)_z: two opposing mini-torques",
+   "params": {
+    "a": [
+     0.2,
+     0.1,
+     0.0
+    ],
+    "b": [
+     10.0,
+     30.0,
+     0.0
+    ]
+   },
+   "sha256": "b59a0dd6781be83f06f9d6f924e40c36588b320ce1876ccb62ac32ea8ebf9e8c"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s21b",
+   "data": "data/v5.json",
+   "eq": "(r × F)_x: two opposing mini-torques",
+   "params": {
+    "a": [
+     0.0,
+     0.2,
+     0.1
+    ],
+    "b": [
+     0.0,
+     10.0,
+     30.0
+    ]
+   },
+   "sha256": "3a94e39c3929edcf89a89fa54a4bae57e81bfc61047fc14eeeaa7eea5a52a322"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s21c",
+   "data": "data/v5.json",
+   "eq": "(r × F)_y: two opposing mini-torques",
+   "params": {
+    "a": [
+     0.1,
+     0.0,
+     0.2
+    ],
+    "b": [
+     30.0,
+     0.0,
+     10.0
+    ]
+   },
+   "sha256": "7931967d97a43a5151d50bfe304bb39ff9048b88259dcfb690369ec044f6abcb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s21d",
+   "data": "data/v5.json",
+   "eq": "ball brushed off centre: τ = r × F",
+   "params": {
+    "a": [
+     0.1,
+     0.0,
+     0.1
+    ],
+    "b": [
+     0.0,
+     2.0,
+     0.0
+    ]
+   },
+   "sha256": "cb7563d8818b7ca6c8519f400eb6f1efb8e89b185b35e08bd4a2b0fef1898ebf"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "P1:s00",
+   "data": "data/../../ch00_cross_product/data/title_sweep.json",
+   "eq": "a×b as b turns round a",
+   "params": {
+    "a": [
+     5.0,
+     1.0,
+     0.0
+    ],
+    "b": [
+     [
+      3.1008683647302115,
+      0.6201736729460423,
+      0.0
+     ],
+     [
+      3.077335650451119,
+      0.728014625170807,
+      0.0
+     ],
+     [
+      3.0500536767091693,
+      0.8349686037168573,
+      0.0
+     ],
+     [
+      3.019055682386902,
+      0.9409053016363321,
+      0.0
+     ],
+     [
+      2.984379433765524,
+      1.0456956513811142,
+      0.0
+     ],
+     [
+      2.9460671785125125,
+      1.1492119820517555,
+      0.0
+     ],
+     [
+      2.904165594209344,
+      1.251328174944802,
+      0.0
+     ],
+     [
+      2.858725731482047,
+      1.3519198172090072,
+      0.0
+     ],
+     [
+      2.8098029518038814,
+      1.4508643534232264,
+      0.0
+     ],
+     [
+      2.757456860045907,
+      1.5480412349113213,
+      0.0
+     ],
+     [
+      2.701751231857635,
+      1.6433320666121483,
+      0.0
+     ],
+     [
+      2.6427539359662173,
+      1.736620751325708,
+      0.0
+     ],
+     [
+      2.580536851488862,
+      1.8277936311596974,
+      0.0
+     ],
+     [
+      2.515175780359197,
+      1.9167396260041436,
+      0.0
+     ],
+     [
+      2.446750354974293,
+      2.0033503688654095,
+      0.0
+     ],
+     [
+      2.3753439411748523,
+      2.0875203378946803,
+      0.0
+     ],
+     [
+      2.301043536676775,
+      2.169146984950084,
+      0.0
+     ],
+     [
+      2.2239396650778414,
+      2.248130860535805,
+      0.0
+     ],
+     [
+      2.1441262655686546,
+      2.3243757349659746,
+      0.0
+     ],
+     [
+      2.061700578482205,
+      2.397788715605723,
+      0.0
+     ],
+     [
+      1.9767630268215028,
+      2.468280360046543,
+      0.0
+     ],
+     [
+      1.8894170939096202,
+      2.5357647850780887,
+      0.0
+     ],
+     [
+      1.7997691973112013,
+      2.6001597713236384,
+      0.0
+     ],
+     [
+      1.7079285591790505,
+      2.661386863411739,
+      0.0
+     ],
+     [
+      1.6140070731837666,
+      2.7193714655619914,
+      0.0
+     ],
+     [
+      1.5181191681885386,
+      2.774042932468519,
+      0.0
+     ],
+     [
+      1.4203816688352038,
+      2.8253346553703906,
+      0.0
+     ],
+     [
+      1.3209136532114174,
+      2.873184143204133,
+      0.0
+     ],
+     [
+      1.2198363077723429,
+      2.917533098739471,
+      0.0
+     ],
+     [
+      1.1172727796936262,
+      2.9583274896055167,
+      0.0
+     ],
+     [
+      1.0133480268355317,
+      2.9955176141208946,
+      0.0
+     ],
+     [
+      0.908188665501035,
+      3.0290581618475816,
+      0.0
+     ],
+     [
+      0.8019228161733648,
+      3.058908268794699,
+      0.0
+     ],
+     [
+      0.6946799474209276,
+      3.0850315672049873,
+      0.0
+     ],
+     [
+      0.5865907181598008,
+      3.1073962298633195,
+      0.0
+     ],
+     [
+      0.47778681846597026,
+      3.1259750088732585,
+      0.0
+     ],
+     [
+      0.3684008091312557,
+      3.140745268854422,
+      0.0
+     ],
+     [
+      0.2585659601584091,
+      3.1516890145202083,
+      0.0
+     ],
+     [
+      0.14841608839214232,
+      3.158792912602277,
+      0.0
+     ],
+     [
+      0.038085394483916284,
+      3.1620483080950876,
+      0.0
+     ],
+     [
+      -0.07229170061088383,
+      3.161451234800687,
+      0.0
+     ],
+     [
+      -0.1825807194041724,
+      3.157002420160912,
+      0.0
+     ],
+     [
+      -0.2926472917152708,
+      3.1487072843711146,
+      0.0
+     ],
+     [
+      -0.40235731838027367,
+      3.136575933776486,
+      0.0
+     ],
+     [
+      -0.5115771346312232,
+      3.1206231485590354,
+      0.0
+     ],
+     [
+      -0.6201736729460419,
+      3.100868364730212,
+      0.0
+     ],
+     [
+      -0.7280146251708067,
+      3.077335650451119,
+      0.0
+     ],
+     [
+      -0.8349686037168571,
+      3.0500536767091697,
+      0.0
+     ],
+     [
+      -0.9409053016363321,
+      3.019055682386902,
+      0.0
+     ],
+     [
+      -1.0456956513811138,
+      2.984379433765524,
+      0.0
+     ],
+     [
+      -1.1492119820517552,
+      2.9460671785125125,
+      0.0
+     ],
+     [
+      -1.2513281749448018,
+      2.9041655942093443,
+      0.0
+     ],
+     [
+      -1.351919817209007,
+      2.858725731482047,
+      0.0
+     ],
+     [
+      -1.4508643534232266,
+      2.8098029518038814,
+      0.0
+     ],
+     [
+      -1.5480412349113213,
+      2.757456860045907,
+      0.0
+     ],
+     [
+      -1.6433320666121487,
+      2.7017512318576347,
+      0.0
+     ],
+     [
+      -1.7366207513257084,
+      2.642753935966217,
+      0.0
+     ],
+     [
+      -1.8277936311596978,
+      2.580536851488862,
+      0.0
+     ],
+     [
+      -1.9167396260041443,
+      2.515175780359197,
+      0.0
+     ],
+     [
+      -2.0033503688654104,
+      2.4467503549742924,
+      0.0
+     ],
+     [
+      -2.0875203378946803,
+      2.3753439411748527,
+      0.0
+     ],
+     [
+      -2.169146984950084,
+      2.301043536676775,
+      0.0
+     ],
+     [
+      -2.248130860535805,
+      2.223939665077842,
+      0.0
+     ],
+     [
+      -2.3243757349659746,
+      2.1441262655686546,
+      0.0
+     ],
+     [
+      -2.397788715605723,
+      2.0617005784822044,
+      0.0
+     ],
+     [
+      -2.4682803600465433,
+      1.9767630268215026,
+      0.0
+     ],
+     [
+      -2.535764785078089,
+      1.88941709390962,
+      0.0
+     ],
+     [
+      -2.600159771323639,
+      1.7997691973112007,
+      0.0
+     ],
+     [
+      -2.6613868634117397,
+      1.7079285591790496,
+      0.0
+     ],
+     [
+      -2.7193714655619914,
+      1.6140070731837668,
+      0.0
+     ],
+     [
+      -2.774042932468519,
+      1.5181191681885389,
+      0.0
+     ],
+     [
+      -2.82533465537039,
+      1.420381668835204,
+      0.0
+     ],
+     [
+      -2.873184143204133,
+      1.3209136532114172,
+      0.0
+     ],
+     [
+      -2.917533098739471,
+      1.2198363077723422,
+      0.0
+     ],
+     [
+      -2.958327489605517,
+      1.1172727796936257,
+      0.0
+     ],
+     [
+      -2.995517614120895,
+      1.0133480268355306,
+      0.0
+     ],
+     [
+      -3.029058161847582,
+      0.9081886655010338,
+      0.0
+     ],
+     [
+      -3.058908268794699,
+      0.8019228161733636,
+      0.0
+     ],
+     [
+      -3.0850315672049873,
+      0.6946799474209279,
+      0.0
+     ],
+     [
+      -3.107396229863319,
+      0.5865907181598009,
+      0.0
+     ],
+     [
+      -3.1259750088732585,
+      0.47778681846596976,
+      0.0
+     ],
+     [
+      -3.1407452688544226,
+      0.3684008091312552,
+      0.0
+     ],
+     [
+      -3.1516890145202083,
+      0.2585659601584086,
+      0.0
+     ],
+     [
+      -3.158792912602277,
+      0.14841608839214182,
+      0.0
+     ],
+     [
+      -3.1620483080950876,
+      0.038085394483915076,
+      0.0
+     ],
+     [
+      -3.161451234800687,
+      -0.07229170061088505,
+      0.0
+     ],
+     [
+      -3.1570024201609117,
+      -0.1825807194041736,
+      0.0
+     ],
+     [
+      -3.1487072843711146,
+      -0.2926472917152706,
+      0.0
+     ],
+     [
+      -3.136575933776486,
+      -0.4023573183802735,
+      0.0
+     ],
+     [
+      -3.1206231485590354,
+      -0.5115771346312238,
+      0.0
+     ],
+     [
+      -3.1008683647302115,
+      -0.6201736729460423,
+      0.0
+     ],
+     [
+      -3.077335650451119,
+      -0.7280146251708072,
+      0.0
+     ],
+     [
+      -3.0500536767091693,
+      -0.8349686037168577,
+      0.0
+     ],
+     [
+      -3.019055682386902,
+      -0.9409053016363327,
+      0.0
+     ],
+     [
+      -2.9843794337655236,
+      -1.0456956513811149,
+      0.0
+     ],
+     [
+      -2.9460671785125125,
+      -1.1492119820517561,
+      0.0
+     ],
+     [
+      -2.904165594209344,
+      -1.2513281749448029,
+      0.0
+     ],
+     [
+      -2.858725731482047,
+      -1.3519198172090068,
+      0.0
+     ],
+     [
+      -2.8098029518038814,
+      -1.4508643534232264,
+      0.0
+     ],
+     [
+      -2.757456860045907,
+      -1.5480412349113213,
+      0.0
+     ],
+     [
+      -2.7017512318576347,
+      -1.6433320666121483,
+      0.0
+     ],
+     [
+      -2.6427539359662173,
+      -1.7366207513257084,
+      0.0
+     ],
+     [
+      -2.580536851488862,
+      -1.8277936311596974,
+      0.0
+     ],
+     [
+      -2.515175780359197,
+      -1.9167396260041443,
+      0.0
+     ],
+     [
+      -2.446750354974293,
+      -2.00335036886541,
+      0.0
+     ],
+     [
+      -2.375343941174852,
+      -2.087520337894681,
+      0.0
+     ],
+     [
+      -2.301043536676775,
+      -2.169146984950084,
+      0.0
+     ],
+     [
+      -2.223939665077842,
+      -2.248130860535805,
+      0.0
+     ],
+     [
+      -2.1441262655686546,
+      -2.3243757349659746,
+      0.0
+     ],
+     [
+      -2.061700578482205,
+      -2.397788715605723,
+      0.0
+     ],
+     [
+      -1.976763026821504,
+      -2.4682803600465424,
+      0.0
+     ],
+     [
+      -1.8894170939096202,
+      -2.535764785078089,
+      0.0
+     ],
+     [
+      -1.799769197311202,
+      -2.600159771323638,
+      0.0
+     ],
+     [
+      -1.7079285591790498,
+      -2.6613868634117397,
+      0.0
+     ],
+     [
+      -1.6140070731837668,
+      -2.719371465561991,
+      0.0
+     ],
+     [
+      -1.5181191681885402,
+      -2.7740429324685185,
+      0.0
+     ],
+     [
+      -1.4203816688352042,
+      -2.82533465537039,
+      0.0
+     ],
+     [
+      -1.3209136532114185,
+      -2.8731841432041327,
+      0.0
+     ],
+     [
+      -1.2198363077723424,
+      -2.917533098739471,
+      0.0
+     ],
+     [
+      -1.117272779693627,
+      -2.9583274896055163,
+      0.0
+     ],
+     [
+      -1.0133480268355335,
+      -2.9955176141208937,
+      0.0
+     ],
+     [
+      -0.9081886655010354,
+      -3.0290581618475816,
+      0.0
+     ],
+     [
+      -0.8019228161733666,
+      -3.0589082687946982,
+      0.0
+     ],
+     [
+      -0.694679947420928,
+      -3.085031567204987,
+      0.0
+     ],
+     [
+      -0.5865907181598025,
+      -3.107396229863319,
+      0.0
+     ],
+     [
+      -0.47778681846596993,
+      -3.1259750088732585,
+      0.0
+     ],
+     [
+      -0.36840080913125683,
+      -3.140745268854422,
+      0.0
+     ],
+     [
+      -0.2585659601584088,
+      -3.1516890145202083,
+      0.0
+     ],
+     [
+      -0.14841608839214343,
+      -3.158792912602277,
+      0.0
+     ],
+     [
+      -0.038085394483918074,
+      -3.1620483080950876,
+      0.0
+     ],
+     [
+      0.07229170061088344,
+      -3.161451234800687,
+      0.0
+     ],
+     [
+      0.18258071940417062,
+      -3.157002420160912,
+      0.0
+     ],
+     [
+      0.29264729171527043,
+      -3.1487072843711146,
+      0.0
+     ],
+     [
+      0.40235731838027194,
+      -3.1365759337764865,
+      0.0
+     ],
+     [
+      0.5115771346312235,
+      -3.1206231485590354,
+      0.0
+     ],
+     [
+      0.6201736729460408,
+      -3.100868364730212,
+      0.0
+     ],
+     [
+      0.728014625170807,
+      -3.077335650451119,
+      0.0
+     ],
+     [
+      0.8349686037168561,
+      -3.0500536767091697,
+      0.0
+     ],
+     [
+      0.9409053016363299,
+      -3.0190556823869032,
+      0.0
+     ],
+     [
+      1.0456956513811133,
+      -2.984379433765524,
+      0.0
+     ],
+     [
+      1.1492119820517535,
+      -2.9460671785125134,
+      0.0
+     ],
+     [
+      1.2513281749448013,
+      -2.9041655942093443,
+      0.0
+     ],
+     [
+      1.3519198172090054,
+      -2.858725731482048,
+      0.0
+     ],
+     [
+      1.4508643534232264,
+      -2.8098029518038814,
+      0.0
+     ],
+     [
+      1.5480412349113197,
+      -2.7574568600459077,
+      0.0
+     ],
+     [
+      1.6433320666121483,
+      -2.7017512318576347,
+      0.0
+     ],
+     [
+      1.736620751325707,
+      -2.642753935966218,
+      0.0
+     ],
+     [
+      1.827793631159695,
+      -2.580536851488864,
+      0.0
+     ],
+     [
+      1.916739626004143,
+      -2.515175780359198,
+      0.0
+     ],
+     [
+      2.0033503688654077,
+      -2.4467503549742946,
+      0.0
+     ],
+     [
+      2.08752033789468,
+      -2.3753439411748527,
+      0.0
+     ],
+     [
+      2.169146984950083,
+      -2.3010435366767763,
+      0.0
+     ],
+     [
+      2.248130860535805,
+      -2.223939665077842,
+      0.0
+     ],
+     [
+      2.3243757349659737,
+      -2.1441262655686564,
+      0.0
+     ],
+     [
+      2.397788715605723,
+      -2.061700578482205,
+      0.0
+     ],
+     [
+      2.4682803600465424,
+      -1.976763026821504,
+      0.0
+     ],
+     [
+      2.5357647850780873,
+      -1.8894170939096226,
+      0.0
+     ],
+     [
+      2.600159771323638,
+      -1.799769197311202,
+      0.0
+     ],
+     [
+      2.661386863411738,
+      -1.7079285591790523,
+      0.0
+     ],
+     [
+      2.719371465561991,
+      -1.6140070731837668,
+      0.0
+     ],
+     [
+      2.774042932468518,
+      -1.5181191681885404,
+      0.0
+     ],
+     [
+      2.82533465537039,
+      -1.4203816688352044,
+      0.0
+     ],
+     [
+      2.8731841432041323,
+      -1.3209136532114187,
+      0.0
+     ],
+     [
+      2.917533098739471,
+      -1.2198363077723426,
+      0.0
+     ],
+     [
+      2.9583274896055163,
+      -1.1172727796936273,
+      0.0
+     ],
+     [
+      2.9955176141208937,
+      -1.0133480268355337,
+      0.0
+     ],
+     [
+      3.0290581618475816,
+      -0.9081886655010356,
+      0.0
+     ],
+     [
+      3.0589082687946982,
+      -0.8019228161733667,
+      0.0
+     ],
+     [
+      3.085031567204987,
+      -0.6946799474209282,
+      0.0
+     ],
+     [
+      3.1073962298633186,
+      -0.5865907181598027,
+      0.0
+     ],
+     [
+      3.1259750088732585,
+      -0.4777868184659702,
+      0.0
+     ],
+     [
+      3.140745268854422,
+      -0.368400809131257,
+      0.0
+     ],
+     [
+      3.1516890145202083,
+      -0.258565960158409,
+      0.0
+     ],
+     [
+      3.158792912602277,
+      -0.14841608839214362,
+      0.0
+     ],
+     [
+      3.162048308095087,
+      -0.03808539448391827,
+      0.0
+     ],
+     [
+      3.161451234800687,
+      0.07229170061088325,
+      0.0
+     ],
+     [
+      3.157002420160912,
+      0.18258071940417042,
+      0.0
+     ],
+     [
+      3.1487072843711146,
+      0.2926472917152702,
+      0.0
+     ],
+     [
+      3.1365759337764865,
+      0.4023573183802718,
+      0.0
+     ],
+     [
+      3.1206231485590354,
+      0.5115771346312233,
+      0.0
+     ],
+     [
+      3.100868364730212,
+      0.6201736729460406,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "e5376260b954a591f8104d2351a3d5af033845f3345e0235b39fcf07d7eb9274"
+  }
+ ],
+ "physics_heavy": []
+}

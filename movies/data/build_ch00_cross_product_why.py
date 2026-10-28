@@ -410,6 +410,121 @@ def R_basis(Om, t):
 # ---------------------------------------------------------------------------------------------------------- main
 
 
+PARTS = {"ch00_cross_product": ROOT / "movies" / "ch00" / "ch00_cross_product",
+         "ch00_cross_product_uses": ROOT / "movies" / "ch00" / "ch00_cross_product_uses"}
+
+
+def v5_parts(row, truth, call, files) -> dict:
+    """v5 CHECK rows X1-X7, T0 (movies/ch00/ch00_cross_product_why/changes_v5.md) and the two split movies' title data.
+
+    Returns {part slug: {file name: object}} for the files that live in the split movies' own data folders."""
+    from fluidpy.core.tensors import levi_civita
+    v5 = {}
+    # ---------------------------------------------------------------- X1-X3 the sign table ε_ijk (s15a)
+    eps = np.asarray(call("fluidpy.core.tensors.levi_civita", "s15a", "v5.json", "Kundu (K 2.18) ε_ijk (provenance only)"))
+    cyc = [[0, 1, 2], [1, 2, 0], [2, 0, 1]]
+    anti = [[2, 1, 0], [1, 0, 2], [0, 2, 1]]
+    row("X1 ε = +1 on the cycle (xyz, yzx, zxy), −1 against it", [*(eps[tuple(c)] for c in cyc), *(eps[tuple(c)] for c in anti)], [1, 1, 1, -1, -1, -1], 0)
+    row("X1 ε has 21 zeros (a repeated letter)", int(np.sum(eps == 0)), 21, 0)
+    a, b = np.array(A3), np.array(B3)
+    terms = np.einsum("ijk,j,k->ijk", eps, a, b)
+    row("X2 (a×b)_i = Σ ε_ijk a_j b_k = cross(a, b)", terms.sum(axis=(1, 2)), V.cross(A3, B3), 1e-12)
+    row("X3 z: ε_zxy·5·3 + ε_zyx·1·1 = 15 − 1 = 14", [terms[2, 0, 1], terms[2, 1, 0], terms[2, 0, 1] + terms[2, 1, 0]], [15, -1, 14], 1e-12)
+    truth("X3 swapping two letters flips ε (ε_ijk = −ε_jik for all i, j, k)", bool(np.all(eps == -np.transpose(eps, (1, 0, 2)))))
+    truth("X3 ε from fluidpy.core.tensors.levi_civita equals the module function", bool(np.all(eps == levi_civita())))
+    v5["eps"] = {"cycle": cyc, "anti": anti, "z_terms": [r6(terms[2, 0, 1]), r6(terms[2, 1, 0])], "z": r6(terms[2, 0, 1] + terms[2, 1, 0])}
+    # ---------------------------------------------------------------- X4 along² + across² (s18d, Lagrange's identity)
+    d = float(call(VEC + "dot", "s18d", "v5.json", "a·b (the along part × |a|)", a=A3, b=B3))
+    cz = np.asarray(call(VEC + "cross", "s18d", "v5.json", "a×b (the across part × |a|)", a=A3, b=B3))
+    na2, nb2 = float(V.norm(A3)) ** 2, float(V.norm(B3)) ** 2
+    row("X4 (a·b)² + |a×b|² = 64 + 196 = 260 = 26 × 10", [d ** 2, float(cz @ cz), d ** 2 + float(cz @ cz), na2 * nb2], [64, 196, 260, 260], 1e-9)
+    pq = np.asarray(call(VEC + "dot", "s18", "v5.json", "p·q for the three s18 cases (the opposite of p × q)", a=[P3] * 3, b=Q_CASES[:3]))
+    row("X4b p·q = 6, 0, −6 (same way, right angle, opposite)", pq, [6, 0, -6], 1e-12)
+    v5["cases_dot"] = r6(pq)
+    v5["two_parts"] = {"dot": r6(d), "cross": r6(float(np.linalg.norm(cz))), "dot2": r6(d ** 2), "cross2": r6(float(cz @ cz)),
+                       "na2": r6(na2), "nb2": r6(nb2)}
+
+    # ---------------------------------------------------------------- X5, X5x, X5y the components as two mini-torques
+    def mini(name, r, F, i, j, k, want, scene):
+        tau = np.asarray(call(VEC + "cross", scene, "v5.json", f"(r × F)_{name}: two opposing mini-torques", a=r, b=F))
+        plus, minus = r[j] * F[k], r[k] * F[j]
+        row(f"X5{name if name != 'z' else ''} r = {r} m, F = {F} N: +{plus:g}, −{minus:g}, (r × F)_{name} = {want} N m",
+            [plus, minus, plus - minus, tau[i]], [6, 1, 5, want], 1e-12)
+        row(f"X5{name if name != 'z' else ''} the other two components are 0", np.delete(tau, i), [0, 0], 1e-12)
+        return {"r": r, "F": F, "tau": r6(tau), "plus": r6(plus), "minus": r6(minus)}
+    v5["z"] = mini("z", [0.2, 0.1, 0.0], [10.0, 30.0, 0.0], 2, 0, 1, 5, "s21a")
+    v5["x"] = mini("x", [0.0, 0.2, 0.1], [0.0, 10.0, 30.0], 0, 1, 2, 5, "s21b")
+    v5["y"] = mini("y", [0.1, 0.0, 0.2], [30.0, 0.0, 10.0], 1, 2, 0, 5, "s21c")
+    rng = np.random.default_rng(5)
+    R, Fr = rng.normal(size=(1000, 3)), rng.normal(size=(1000, 3))
+    cy = np.asarray(V.cross(R, Fr))[:, 1]
+    row("X5d determinant middle term: −(r_x F_z − r_z F_x) = (r × F)_y for 1000 random pairs (max error)",
+        float(np.max(np.abs(-(R[:, 0] * Fr[:, 2] - R[:, 2] * Fr[:, 0]) - cy))), 0.0, 1e-12)
+    # ---------------------------------------------------------------- X7 the tilted axis (s21d)
+    rb, Fb = [0.1, 0.0, 0.1], [0.0, 2.0, 0.0]
+    tb = np.asarray(call(VEC + "cross", "s21d", "v5.json", "ball brushed off centre: τ = r × F", a=rb, b=Fb))
+    ang_up = float(V.angle_between(tb, [0, 0, 1], degrees=True))
+    row("X7 τ = (−0.2, 0, 0.2) N m; axis 45° from up, towards −x", [*tb, ang_up], [-0.2, 0, 0.2, 45], 1e-9)
+    v5["ball"] = {"r": rb, "F": Fb, "tau": r6(tb), "axis": r6(tb / np.linalg.norm(tb)), "angle_from_up_deg": r6(ang_up),
+                  "radius_m": r6(float(np.linalg.norm(rb))), "spin_note": "spin rate illustrative (no moment of inertia is used)"}
+    files["v5.json"] = v5
+    # ---------------------------------------------------------------- T0 Part 1 title: |a × b| as b turns (fixed |b|)
+    th = np.arange(0.0, 360.0 + 1e-9, 2.0)
+    base = np.arctan2(B3[1], B3[0]) - np.arctan2(A3[1], A3[0])
+    nb = float(V.norm(B3))
+    bs = np.stack([nb * np.cos(np.arctan2(A3[1], A3[0]) + th * DEG), nb * np.sin(np.arctan2(A3[1], A3[0]) + th * DEG), 0 * th], -1)
+    sw = np.asarray(call(VEC + "cross", "P1:s00", "../../ch00_cross_product/data/title_sweep.json", "a×b as b turns round a", a=A3, b=bs.tolist()))[:, 2]
+    th0 = base / DEG
+    row("T0 |a×b| at the drawn θ (60.26°) = 14.0", float(np.interp(th0, th, sw)), 14.0, 0.05)
+    p1 = {"title_sweep.json": {"a": A3, "theta_deg": r6(th), "b_xyz": r6(bs, 4), "axb_z": r6(sw, 4), "theta_drawn_deg": r6(th0, 3)}}
+    # ---------------------------------------------------------------- Part 2 title: ω × r on a small spinning disc
+    om, rr = [0.0, 0.0, 2.0], 0.3
+    ts = np.linspace(0, 2 * np.pi, 73)
+    rs = np.stack([rr * np.cos(ts), rr * np.sin(ts), 0 * ts], -1)
+    vs = np.asarray(call(VEC + "cross", "P2:s00", "../../ch00_cross_product_uses/data/title_spin.json", "ω × r on a spinning disc", a=om, b=rs.tolist()))
+    row("P2 title |ω × r| = 2 × 0.3 = 0.6 m/s all round; ⟂ r", [float(np.max(np.abs(np.linalg.norm(vs, axis=1) - 0.6))),
+                                                               float(np.max(np.abs(np.sum(vs * rs, axis=1))))], [0, 0], 1e-12)
+    p2 = {"title_spin.json": {"omega": om, "r_m": rr, "phase": r6(ts), "r": r6(rs, 5), "v": r6(vs, 5)}}
+    return {"ch00_cross_product": p1, "ch00_cross_product_uses": p2}
+
+
+def write_part_manifests(manifest: dict, part_files: dict) -> None:
+    """The split movies' manifests: the v5 entries of their scenes, their own title data, the shared data hashes."""
+    import yaml
+    for slug, folder in PARTS.items():
+        sb = yaml.safe_load((folder / "storyboard.yaml").read_text(encoding="utf-8"))
+        short = {s["id"].split("_")[0] for s in sb["scenes"]}
+        tag = "P1" if slug == "ch00_cross_product" else "P2"
+
+        def mine(scn: str) -> bool:
+            toks = [t.strip() for t in str(scn).replace(" ", "").split(",")]
+            for t in toks:
+                if t.startswith(tag + ":"):
+                    return True
+                if t.startswith("P1:") or t.startswith("P2:"):
+                    continue
+                ends = t.split("-")
+                if any(e.split("_")[0] in short for e in ends):
+                    return True
+            return False
+        pdata = folder / "data"
+        pdata.mkdir(parents=True, exist_ok=True)
+        own = {}
+        for name, obj in part_files.get(slug, {}).items():
+            blob = json.dumps(obj, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+            (pdata / name).write_bytes(blob)
+            own[name] = hashlib.sha256(blob).hexdigest()
+        m = {**{k: manifest[k] for k in ("builder", "fluidpy", "equations_note", "equations", "parameters", "credits", "js_selftest")},
+             "id": slug, "storyboard": f"movies/ch00/{slug}/storyboard.yaml", "split_of": "ch00_cross_product_why v5",
+             "shared_data": "movies/ch00/ch00_cross_product_why/data/ (data_files below: shared + own data/)",
+             "data_files": {**manifest["data_files"], **{f"own/{k}": v for k, v in own.items()}},
+             "checks": manifest["checks"],
+             "physics": [e for e in manifest["physics"] if mine(e.get("scene", ""))],
+             "physics_heavy": [h for h in manifest["physics_heavy"] if mine(h.get("scene", ""))]}
+        (folder / "manifest.json").write_text(json.dumps(m, indent=1, ensure_ascii=False), encoding="utf-8")
+        print(f"  part manifest {slug}: {len(m['physics'])} parity entries, {len(m['physics_heavy'])} heavy, own data {list(own)}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--part", choices=["all", "core"], default="all")
@@ -751,6 +866,7 @@ def main() -> int:
                             "display_quotient": round(1e-3 / 1.24e-4, 2)}}
 
     v4_parts(row, truth, call, files, pending, f45)
+    part_files = v5_parts(row, truth, call, files)
 
     if args.part == "all":
         real_parts(row, truth, call, entries, heavy, files, bins, pending)
@@ -823,6 +939,7 @@ def main() -> int:
                           {(b["fn"], b["scene"], b["eq"]) for b in big_entries}] + big_entries,
     }
     mpath.write_text(json.dumps(manifest, indent=1, ensure_ascii=False), encoding="utf-8")
+    write_part_manifests(manifest, part_files)
     print(f"build_ch00_cross_product_why: {len(files)} json + {len(bins)} bin + manifest.json ({len(entries)} parity entries, "
           f"{len(heavy)} heavy, {len(rows)} checks) -> {OUT}")
     for k, val in data_hashes.items():

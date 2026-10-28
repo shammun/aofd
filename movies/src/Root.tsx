@@ -3,7 +3,7 @@ import { Composition } from "remotion";
 import { Empty } from "./Empty";
 import { POC_FPS, POC_FRAMES, PocCoriolis } from "./poc/PocCoriolis";
 import { DPW_FPS, DPW_FRAMES, DotProductWhy } from "./ch00/DotProductWhy";
-import { CPW_FPS, CPW_FRAMES, CrossProductWhy } from "./ch00/CrossProductWhy";
+import { CP1_FRAMES, CP2_FRAMES, CPW_FPS, CPW_FRAMES, CrossProductPart1, CrossProductPart2, CrossProductWhy } from "./ch00/CrossProductWhy";
 
 // Every movie is one <Composition>. Ids: Empty (toolchain test), PocCoriolis (PoC D, movies/src/poc/), and per chapter
 // ChNN<Slug> (movies/src/chNN/<Slug>.tsx). Durations of real movies come from timing.json via calculateMetadata,
@@ -18,5 +18,10 @@ export const Root: React.FC = () => (
       height={1080} defaultProps={{ audio: "narration_music.wav" }} />
     <Composition id="Ch00CrossProductWhy" component={CrossProductWhy} durationInFrames={CPW_FRAMES} fps={CPW_FPS} width={1920}
       height={1080} defaultProps={{ audio: "narration_music.wav" }} />
+    {/* cross product v5 split (2026-10-28): Part 1 movies/ch00/ch00_cross_product, Part 2 movies/ch00/ch00_cross_product_uses */}
+    <Composition id="Ch00CrossProductPart1" component={CrossProductPart1} durationInFrames={CP1_FRAMES} fps={CPW_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_p1.wav" }} />
+    <Composition id="Ch00CrossProductPart2" component={CrossProductPart2} durationInFrames={CP2_FRAMES} fps={CPW_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_p2.wav" }} />
   </>
 );
