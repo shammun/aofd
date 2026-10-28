@@ -6,7 +6,7 @@ based_on: 'movies/ch00/ch00_dot_product_why v6 fix 1 (commit b8c6859): EVERY v6 
   committed 0.1b additions (1aa590f) sit beside them'
 concepts:
 - C0A-PoC1
-target_duration_s: 1539.45
+target_duration_s: 1552.825
 fps: 30
 size:
 - 1920
@@ -32,10 +32,10 @@ reuse_audio: every v6 sentence is word-identical, so its clip may be spliced fro
   run re-measures everything
 research_rows: research/xprod_video_intuitions.md §1b/§1c (priority), §3, §5c
 cross_references: 'related: per scene; spoken pointers in s11b, s20b, s20c, s21; end-card thumbnails'
-measured_narration_s: 1536.95
-measured_frames: 46184
-words: 3844
-sentences: 231
+measured_narration_s: 1550.325
+measured_frames: 46585
+words: 3876
+sentences: 233
 dry_run:
   tool: tools/tts.py
   run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\v3_20261028\ch00_dot_product_v01b_run2
@@ -54,12 +54,12 @@ dry_run:
   warnings: []
   lexicon: movies/lexicon.yaml as of 2026-10-28 (no new entries)
 qa_expectations:
-  duration_s: 1539.45
+  duration_s: 1552.825
   duration_window_s:
-  - 1493.3
-  - 1585.6
+  - 1506.2
+  - 1599.4
   captions:
-    cues: 376
+    cues: 379
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 17
@@ -1122,7 +1122,7 @@ scenes:
 - id: s11b_perp_push
   t:
   - 546.8
-  - 579.6
+  - 581.4
   status: new
   changes:
   - D5 / W17 perpendicular push does no work (research §3)
@@ -1130,12 +1130,12 @@ scenes:
   - '#3 cross product at work (s22e: the Coriolis push only steers)'
   - '#29 Coriolis'
   visual: 'Picture zone from above: a ball whirled on a string round a centre pin (radius 1 unit); the string pull (orange) always towards the centre, the
-    velocity (teal) along the circle, a right-angle tick between them; tiny steps d along the path with ''F · d = 0'' ticking for each; an energy-of-motion
-    bar (gold) beside it stays flat while the path curves. Maths zone: ''F · d = 0'' and ''work = 0''.'
+    velocity (slate, not the wind''s teal v) along the circle, a right-angle tick between them; tiny steps d along the path with ''F · d = 0'' ticking for
+    each; an energy-of-motion bar (gold) beside it stays flat while the path curves. Maths zone: ''F · d = 0'' and ''work = 0''.'
   voiceover: 'What about a push that''s always across the motion? Imagine a ball whirled round on a string. The string pulls towards the centre, always
-    at a right angle to the way the ball is moving. So its dot product with every small step is zero, and it does no work. The ball''s energy of motion
-    stays the same: the pull only changes its direction, bending its path into a circle. We''ll meet pushes like this again, when Earth''s spin turns the
-    wind.'
+    at a right angle to the ball''s velocity, which points the way it is moving. So its dot product with every small step is zero, and it does no work.
+    The ball''s energy of motion stays the same: the pull only changes its direction, bending its path into a circle. We''ll meet pushes like this again,
+    when Earth''s spin turns the wind.'
   on_screen_eq:
     latex: \mathbf F\cdot\mathbf d=0
     vallis_eq: 'provenance only: perpendicular push (our picture)'
@@ -1158,17 +1158,17 @@ scenes:
   - - 550.5
     - 553.575
   - - 553.925
-    - 559.975
-  - - 560.325
-    - 565.4
-  - - 565.75
-    - 573.9
-  - - 574.25
-    - 578.8
+    - 561.775
+  - - 562.125
+    - 567.2
+  - - 567.55
+    - 575.7
+  - - 576.05
+    - 580.6
 - id: s12_parcel
   t:
-  - 579.6
-  - 624.625
+  - 581.4
+  - 626.425
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s12_parcel
@@ -1233,24 +1233,24 @@ scenes:
   - 'idealised field, not data (said once on screen: ''idealised map'')'
   - 'pole and balloon icons illustrative; badge: none'
   sentence_times:
-  - - 579.6
-    - 583.575
-  - - 583.925
-    - 590.65
-  - - 591.0
-    - 599.175
-  - - 599.525
-    - 604.15
-  - - 604.5
-    - 608.775
-  - - 609.125
-    - 618.35
-  - - 618.7
-    - 623.825
+  - - 581.4
+    - 585.375
+  - - 585.725
+    - 592.45
+  - - 592.8
+    - 600.975
+  - - 601.325
+    - 605.95
+  - - 606.3
+    - 610.575
+  - - 610.925
+    - 620.15
+  - - 620.5
+    - 625.625
 - id: s13_equation
   t:
-  - 624.625
-  - 682.125
+  - 626.425
+  - 683.925
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s13_equation
@@ -1319,28 +1319,28 @@ scenes:
   exaggeration:
   - 'equation scene: illustrative icons only (balloon, pole, thermometer, droplet); badge: none'
   sentence_times:
-  - - 624.625
-    - 628.425
-  - - 628.775
-    - 636.775
-  - - 637.125
-    - 640.525
-  - - 640.875
-    - 648.225
-  - - 648.575
-    - 652.25
-  - - 652.6
-    - 662.9
-  - - 663.25
-    - 666.75
-  - - 667.1
-    - 675.05
-  - - 675.4
-    - 681.325
+  - - 626.425
+    - 630.225
+  - - 630.575
+    - 638.575
+  - - 638.925
+    - 642.325
+  - - 642.675
+    - 650.025
+  - - 650.375
+    - 654.05
+  - - 654.4
+    - 664.7
+  - - 665.05
+    - 668.55
+  - - 668.9
+    - 676.85
+  - - 677.2
+    - 683.125
 - id: s14_isotherms
   t:
-  - 682.125
-  - 718.675
+  - 683.925
+  - 720.475
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s14_isotherms
@@ -1394,20 +1394,20 @@ scenes:
   exaggeration:
   - 'idealised field, not data (T rises uniformly eastward); badge: none'
   sentence_times:
-  - - 682.125
-    - 691.175
-  - - 691.525
-    - 699.425
-  - - 699.775
-    - 702.05
-  - - 702.4
-    - 711.4
-  - - 711.75
-    - 717.875
+  - - 683.925
+    - 692.975
+  - - 693.325
+    - 701.225
+  - - 701.575
+    - 703.85
+  - - 704.2
+    - 713.2
+  - - 713.55
+    - 719.675
 - id: s15_grad_t
   t:
-  - 718.675
-  - 742.875
+  - 720.475
+  - 744.675
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s15_grad_t
@@ -1455,16 +1455,16 @@ scenes:
   exaggeration:
   - '∇T arrow drawn on its own scale (K/m), not the map''s km; its value is written beside it; badge: none'
   sentence_times:
-  - - 718.675
-    - 723.875
-  - - 724.225
-    - 734.7
-  - - 735.05
-    - 742.075
+  - - 720.475
+    - 725.675
+  - - 726.025
+    - 736.5
+  - - 736.85
+    - 743.875
 - id: s16a_wind_parts
   t:
-  - 742.875
-  - 767.225
+  - 744.675
+  - 769.025
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s16a_wind_parts
@@ -1516,16 +1516,16 @@ scenes:
   exaggeration:
   - 'wind and gradient arrows drawn on their own scales (m/s, K/m), not the map''s km; badge: none'
   sentence_times:
-  - - 742.875
-    - 751.45
-  - - 751.8
-    - 759.45
-  - - 759.8
-    - 766.425
+  - - 744.675
+    - 753.25
+  - - 753.6
+    - 761.25
+  - - 761.6
+    - 768.225
 - id: s16b_advection_number
   t:
-  - 767.225
-  - 798.55
+  - 769.025
+  - 800.35
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s16b_advection_number
@@ -1585,16 +1585,16 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V2_dimensions_pint_advection_unit, ::test_dot_V1_component_sum_on_field
   exaggeration: []
   sentence_times:
-  - - 767.225
-    - 777.975
-  - - 778.325
-    - 788.775
-  - - 789.125
-    - 797.05
+  - - 769.025
+    - 779.775
+  - - 780.125
+    - 790.575
+  - - 790.925
+    - 798.85
 - id: s17_meaning
   t:
-  - 798.55
-  - 884.125
+  - 800.35
+  - 885.925
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s17_meaning
@@ -1721,36 +1721,36 @@ scenes:
   - 'camera zoom 1.47 -> 4.0 px/km; the km ticks re-label, so every distance stays true; badge: none'
   - 'idealised field, not data; badge: none'
   sentence_times:
-  - - 798.55
-    - 801.65
-  - - 802.0
-    - 807.25
-  - - 807.6
-    - 813.9
-  - - 814.25
-    - 823.075
-  - - 823.425
-    - 832.7
-  - - 833.05
-    - 839.675
-  - - 840.025
-    - 846.7
-  - - 847.05
-    - 853.85
-  - - 854.2
-    - 861.075
-  - - 861.425
-    - 865.0
-  - - 865.35
-    - 875.55
-  - - 875.9
-    - 878.7
-  - - 879.05
-    - 883.325
+  - - 800.35
+    - 803.45
+  - - 803.8
+    - 809.05
+  - - 809.4
+    - 815.7
+  - - 816.05
+    - 824.875
+  - - 825.225
+    - 834.5
+  - - 834.85
+    - 841.475
+  - - 841.825
+    - 848.5
+  - - 848.85
+    - 855.65
+  - - 856.0
+    - 862.875
+  - - 863.225
+    - 866.8
+  - - 867.15
+    - 877.35
+  - - 877.7
+    - 880.5
+  - - 880.85
+    - 885.125
 - id: s17b_frozen
   t:
-  - 884.125
-  - 943.125
+  - 885.925
+  - 944.925
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s17b_frozen
@@ -1854,24 +1854,24 @@ scenes:
   - time compressed (the clock shows model hours)
   - 'camera zoom as s17 (km ticks true); sun glyph illustrative; badge: none'
   sentence_times:
-  - - 884.125
-    - 891.975
-  - - 892.325
-    - 900.375
-  - - 900.725
-    - 912.925
-  - - 913.275
-    - 920.55
-  - - 920.9
-    - 929.05
-  - - 930.55
-    - 936.475
-  - - 936.825
-    - 942.325
+  - - 885.925
+    - 893.775
+  - - 894.125
+    - 902.175
+  - - 902.525
+    - 914.725
+  - - 915.075
+    - 922.35
+  - - 922.7
+    - 930.85
+  - - 932.35
+    - 938.275
+  - - 938.625
+    - 944.125
 - id: s18_keeps_temperature
   t:
-  - 943.125
-  - 980.2
+  - 944.925
+  - 982.0
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s18_keeps_temperature
@@ -1938,22 +1938,22 @@ scenes:
   - 'idealised: parcels keep their temperature exactly (no heating, radiation or mixing), said in the narration'
   - 'time compressed (the clock shows model hours); badge: none'
   sentence_times:
-  - - 943.125
-    - 947.0
-  - - 947.35
-    - 956.325
-  - - 956.675
-    - 961.975
-  - - 962.325
-    - 965.875
-  - - 966.225
-    - 972.7
-  - - 973.05
-    - 979.4
+  - - 944.925
+    - 948.8
+  - - 949.15
+    - 958.125
+  - - 958.475
+    - 963.775
+  - - 964.125
+    - 967.675
+  - - 968.025
+    - 974.5
+  - - 974.85
+    - 981.2
 - id: s19a_pole_cools
   t:
-  - 980.2
-  - 1044.25
+  - 982.0
+  - 1046.05
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19a_pole_cools
@@ -2067,26 +2067,26 @@ scenes:
   - time compressed (the clock shows model hours)
   - 'idealised: parcels keep their temperature; uniform steady wind and gradient; badge: none'
   sentence_times:
-  - - 980.2
-    - 984.9
-  - - 985.25
-    - 991.575
-  - - 991.925
-    - 1002.375
-  - - 1002.725
-    - 1011.35
-  - - 1011.7
-    - 1013.75
-  - - 1014.1
-    - 1027.925
-  - - 1028.275
-    - 1036.2
-  - - 1036.55
-    - 1043.45
+  - - 982.0
+    - 986.7
+  - - 987.05
+    - 993.375
+  - - 993.725
+    - 1004.175
+  - - 1004.525
+    - 1013.15
+  - - 1013.5
+    - 1015.55
+  - - 1015.9
+    - 1029.725
+  - - 1030.075
+    - 1038.0
+  - - 1038.35
+    - 1045.25
 - id: s19b_equation
   t:
-  - 1044.25
-  - 1072.825
+  - 1046.05
+  - 1074.625
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19b_equation
@@ -2140,18 +2140,18 @@ scenes:
     test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline, ::test_material_derivative_V7_local_and_advective_vanish
   exaggeration: []
   sentence_times:
-  - - 1044.25
-    - 1046.575
-  - - 1046.925
-    - 1057.725
-  - - 1058.075
-    - 1065.1
-  - - 1065.45
-    - 1072.025
+  - - 1046.05
+    - 1048.375
+  - - 1048.725
+    - 1059.525
+  - - 1059.875
+    - 1066.9
+  - - 1067.25
+    - 1073.825
 - id: s19c_balance
   t:
-  - 1072.825
-  - 1118.975
+  - 1074.625
+  - 1120.775
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19c_balance
@@ -2238,24 +2238,24 @@ scenes:
   exaggeration:
   - 'the bars are bookkeeping of one cause (the moving pattern, or in Case 1 the heating that holds the map), not separate processes; badge: none'
   sentence_times:
-  - - 1072.825
-    - 1075.65
-  - - 1076.0
-    - 1084.175
-  - - 1084.525
-    - 1090.575
-  - - 1090.925
-    - 1098.275
-  - - 1098.625
-    - 1108.1
-  - - 1108.45
-    - 1112.025
-  - - 1112.375
-    - 1118.175
+  - - 1074.625
+    - 1077.45
+  - - 1077.8
+    - 1085.975
+  - - 1086.325
+    - 1092.375
+  - - 1092.725
+    - 1100.075
+  - - 1100.425
+    - 1109.9
+  - - 1110.25
+    - 1113.825
+  - - 1114.175
+    - 1119.975
 - id: s19d_three_rates
   t:
-  - 1118.975
-  - 1179.55
+  - 1120.775
+  - 1181.35
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19d_three_rates
@@ -2312,22 +2312,22 @@ scenes:
     test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline
   exaggeration: []
   sentence_times:
-  - - 1118.975
-    - 1123.525
-  - - 1123.875
-    - 1132.425
-  - - 1132.775
-    - 1140.9
-  - - 1141.25
-    - 1155.1
-  - - 1155.45
-    - 1169.425
-  - - 1169.775
-    - 1178.75
+  - - 1120.775
+    - 1125.325
+  - - 1125.675
+    - 1134.225
+  - - 1134.575
+    - 1142.7
+  - - 1143.05
+    - 1156.9
+  - - 1157.25
+    - 1171.225
+  - - 1171.575
+    - 1180.55
 - id: s20_twice_steep
   t:
-  - 1179.55
-  - 1225.45
+  - 1181.35
+  - 1227.25
   status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s20_twice_steep
@@ -2392,36 +2392,36 @@ scenes:
   - time compressed (clock)
   - 'idealised field, not data; badge: none'
   sentence_times:
-  - - 1179.55
-    - 1187.4
-  - - 1187.75
-    - 1195.5
-  - - 1195.85
-    - 1202.525
-  - - 1202.875
-    - 1206.45
-  - - 1206.8
-    - 1214.425
-  - - 1214.775
-    - 1220.725
-  - - 1221.075
-    - 1224.65
+  - - 1181.35
+    - 1189.2
+  - - 1189.55
+    - 1197.3
+  - - 1197.65
+    - 1204.325
+  - - 1204.675
+    - 1208.25
+  - - 1208.6
+    - 1216.225
+  - - 1216.575
+    - 1222.525
+  - - 1222.875
+    - 1226.45
 - id: s20b_runway
   t:
-  - 1225.45
-  - 1267.025
+  - 1227.25
+  - 1268.475
   status: new
   changes:
   - W12 runway (research §4); 'along', not 'headwind' (a wind blowing towards the runway's heading is a tailwind for that heading)
   related:
   - '#3 cross product at work (s53a: the part across the runway)'
   visual: 'Picture zone: a runway from above (grey strip, centre-line dashes) pointing north, the unit arrow ê (orange) along it; wind v (teal, 10 m/s)
-    at 30° towards the north east; its shadow on the runway line as a teal band ''along''; the across part greyed and labelled ''across: cross product video''.
-    Maths zone CalcStack: v · ê = |v| cos 30°; = 10 × 0.866; ≈ 8.7 m/s. Gold link band -> 8.7.'
+    30° east of the runway''s direction; its shadow on the runway line as a teal band ''along''; the across part greyed and labelled ''across: cross product
+    video''. Maths zone CalcStack: v · ê = |v| cos 30°; = 10 × 0.866; ≈ 8.7 m/s. Gold link band -> 8.7.'
   voiceover: The dot product turns up in many more places, so let's look at a few. First, a runway. Pilots need to know how much of the wind blows along
-    the runway. Say the runway points north, and the wind blows at ten metres per second towards the north east, thirty degrees off the runway. Let e hat
-    be a unit arrow along the runway. Then the wind dot e hat is ten times cos thirty, about eight point seven metres per second along the runway. [beat]
-    The part straight across it is a job for the cross product, which a later video in this series takes on.
+    the runway. Say the runway points north, and the wind blows at ten metres per second, thirty degrees east of the runway's direction. Let e hat be a
+    unit arrow along the runway. Then the wind dot e hat is ten times cos thirty, about eight point seven metres per second along the runway. [beat] The
+    part straight across it is a job for the cross product, which a later video in this series takes on.
   on_screen_eq:
     latex: \mathbf v\cdot\hat{\mathbf e}=10\cos30^\circ\approx8.7\ \mathrm{m\,s^{-1}}
     vallis_eq: 'provenance only: our numbers'
@@ -2443,24 +2443,24 @@ scenes:
   exaggeration:
   - schematic runway
   sentence_times:
-  - - 1225.45
-    - 1230.3
-  - - 1230.65
-    - 1232.675
-  - - 1233.025
-    - 1237.525
-  - - 1237.875
-    - 1246.25
-  - - 1246.6
-    - 1249.925
-  - - 1250.275
-    - 1257.9
-  - - 1259.4
-    - 1266.225
+  - - 1227.25
+    - 1232.1
+  - - 1232.45
+    - 1234.475
+  - - 1234.825
+    - 1239.325
+  - - 1239.675
+    - 1247.7
+  - - 1248.05
+    - 1251.375
+  - - 1251.725
+    - 1259.35
+  - - 1260.85
+    - 1267.675
 - id: s20c_flux
   t:
-  - 1267.025
-  - 1327.775
+  - 1268.475
+  - 1329.225
   status: new
   changes:
   - D6 / W16 / W14 flux (research §3-§4)
@@ -2494,30 +2494,30 @@ scenes:
   exaggeration:
   - the window is illustrative; the globe beams ignore the atmosphere
   sentence_times:
-  - - 1267.025
-    - 1270.15
-  - - 1270.5
-    - 1274.0
-  - - 1274.35
-    - 1278.525
-  - - 1278.875
-    - 1282.925
-  - - 1283.275
-    - 1292.4
-  - - 1292.75
-    - 1295.075
-  - - 1295.425
-    - 1308.225
-  - - 1309.725
-    - 1317.275
-  - - 1317.625
-    - 1322.8
-  - - 1323.15
-    - 1326.975
+  - - 1268.475
+    - 1271.6
+  - - 1271.95
+    - 1275.45
+  - - 1275.8
+    - 1279.975
+  - - 1280.325
+    - 1284.375
+  - - 1284.725
+    - 1293.85
+  - - 1294.2
+    - 1296.525
+  - - 1296.875
+    - 1309.675
+  - - 1311.175
+    - 1318.725
+  - - 1319.075
+    - 1324.25
+  - - 1324.6
+    - 1328.425
 - id: s20d_wind_work
   t:
-  - 1327.775
-  - 1388.975
+  - 1329.225
+  - 1394.225
   status: new
   changes:
   - W13 wind work and its sign (research §4)
@@ -2532,8 +2532,8 @@ scenes:
     stress, tau. The power it gives the water is tau dot u, where u is the water's velocity. Where the wind blows along with a current, the dot product
     is positive, and the wind feeds the current with energy. Where it blows against the current, the dot product is negative, and the wind takes energy
     away. Say the wind stress is point one newtons per square metre, and the current flows the same way at point one metres per second. Then the wind gives
-    the current point zero one watts on every square metre. [beat] Added up over the world ocean, this comes to about a million million watts, most of it
-    over the Southern Ocean, where strong westerly winds blow along with the current that circles Antarctica.
+    the current point zero one watts on every square metre. [beat] A watt is one joule of energy every second. Added up over the world ocean, this comes
+    to about a million million watts, most of it over the Southern Ocean, where strong westerly winds blow along with the current that circles Antarctica.
   on_screen_eq:
     latex: \boldsymbol\tau\cdot\mathbf u
     vallis_eq: 'provenance only: wind work (power per unit area)'
@@ -2557,30 +2557,33 @@ scenes:
     builder: movies/data/build_ch00_dot_product_v01b.py
   exaggeration:
   - tiles are illustrative easy numbers; the circumpolar current band is schematic
-  honesty: The 1 TW global figure must be confirmed against the paper before the final TTS (data_needs §D W2).
+  honesty: 'The ≈ 1 TW global figure is verified (manifest.json credits.W2_wind_work: Wunsch 1998, J. Phys. Oceanogr. 28, 2332–2340, DOI resolved; cross-check
+    Hughes & Wilson 2008, 0.76 TW); it is spoken and shown as ''≈ 1 000 000 000 000 W''. Fix 1 adds ''A watt is one joule of energy every second.'''
   sentence_times:
-  - - 1327.775
-    - 1330.825
-  - - 1331.175
-    - 1334.775
-  - - 1335.125
-    - 1339.9
-  - - 1340.25
-    - 1345.775
-  - - 1346.125
-    - 1353.575
-  - - 1353.925
-    - 1360.425
-  - - 1360.775
-    - 1368.8
-  - - 1369.15
-    - 1374.325
-  - - 1375.825
-    - 1388.175
+  - - 1329.225
+    - 1332.275
+  - - 1332.625
+    - 1336.225
+  - - 1336.575
+    - 1341.35
+  - - 1341.7
+    - 1347.225
+  - - 1347.575
+    - 1355.025
+  - - 1355.375
+    - 1361.875
+  - - 1362.225
+    - 1370.25
+  - - 1370.6
+    - 1375.775
+  - - 1377.275
+    - 1380.725
+  - - 1381.075
+    - 1393.425
 - id: s20e_similarity
   t:
-  - 1388.975
-  - 1448.975
+  - 1394.225
+  - 1462.35
   status: new
   changes:
   - V-D5 similarity / pattern correlation (research §1b-§1c)
@@ -2591,11 +2594,12 @@ scenes:
     Maths zone CalcStack: A · B = 6 + 2 + 2 + 6 = 16; |A| = |B| = √18; cos = 16 / 18 ≈ 0.89. A gauge from −1 (opposite) through 0 to +1 (alike) with the
     needle at 0.89. S8: grid of small picture icons (faces/words) lights faintly on ''pictures and words''.'
   voiceover: 'Fourth, comparing patterns. Write today''s pressure at four weather stations, as departures from their usual values, as one list of four numbers:
-    an arrow in four dimensions. We can''t draw it, but the recipe works just the same. Today reads three, one, minus two and minus two hectopascals, and
-    a day in the past reads two, two, minus one and minus three. Their dot product is six plus two plus two plus six, which is sixteen. Both lengths are
-    the square root of eighteen, so the cosine of the angle between them is sixteen over eighteen, about point eight nine. [beat] Near one, two days look
-    alike; near zero, they have nothing in common; and near minus one, they''re opposites. Forecasters have used this to find past days that looked like
-    today, and computers use the same idea to compare pictures and words.'
+    an arrow in four dimensions. We can''t draw it, but the recipe works just the same. Today reads three, one, minus two and minus two hectopascals, the
+    unit weather maps use for pressure, and a day in the past reads two, two, minus one and minus three. Let''s call today''s arrow capital A, and the past
+    day''s capital B. Their dot product is six plus two plus two plus six, which is sixteen. Both lengths are the square root of eighteen, so the cosine
+    of the angle between them is sixteen over eighteen, about point eight nine. [beat] Near one, two days look alike; near zero, they have nothing in common;
+    and near minus one, they''re opposites. Weather maps can be compared this way to look for past days like today, and computers use the same idea to compare
+    pictures and words.'
   on_screen_eq:
     latex: \cos\theta=\frac{\mathbf A\cdot\mathbf B}{|\mathbf A|\,|\mathbf B|}=\frac{16}{18}\approx0.89
     vallis_eq: 'provenance only: pattern similarity (uncentred pattern correlation), our numbers'
@@ -2622,28 +2626,32 @@ scenes:
     builder: movies/data/build_ch00_dot_product_v01b.py
   exaggeration:
   - four stations and the numbers are illustrative (said as 'say')
-  honesty: Analogue forecasting is a historical method (Lorenz 1969 analogues); cited in data_needs, no claim it is used today.
+  honesty: 'Fix 1 (review 1 S10): the last sentence only says weather maps CAN be compared this way to look for past days like today; Lorenz (1969) searched
+    for analogues by RMS difference, not the cosine. The cosine of anomaly patterns is the anomaly correlation coefficient of forecast verification (WMO-No.
+    485), not named in the movie. Capital A and B are named in a new sentence; hectopascals are defined as ''the unit weather maps use for pressure''.'
   sentence_times:
-  - - 1388.975
-    - 1391.4
-  - - 1391.75
-    - 1401.85
-  - - 1402.2
-    - 1406.025
-  - - 1406.375
-    - 1415.775
-  - - 1416.125
-    - 1421.4
-  - - 1421.75
-    - 1430.325
-  - - 1431.825
-    - 1439.15
-  - - 1439.5
-    - 1448.175
+  - - 1394.225
+    - 1396.65
+  - - 1397.0
+    - 1407.1
+  - - 1407.45
+    - 1411.275
+  - - 1411.625
+    - 1423.825
+  - - 1424.175
+    - 1429.125
+  - - 1429.475
+    - 1434.75
+  - - 1435.1
+    - 1443.675
+  - - 1445.175
+    - 1452.5
+  - - 1452.85
+    - 1461.55
 - id: s21_recap
   t:
-  - 1448.975
-  - 1513.725
+  - 1462.35
+  - 1527.1
   status: kept + extended
   reuse:
     from: ch00_dot_product_why(v6fix1)/s21_recap
@@ -2698,34 +2706,34 @@ scenes:
   exaggeration:
   - 'recap icons illustrative; badge: none'
   sentence_times:
-  - - 1448.975
-    - 1456.0
-  - - 1456.35
-    - 1460.775
-  - - 1461.125
-    - 1466.525
-  - - 1466.875
-    - 1470.375
-  - - 1470.725
-    - 1473.1
-  - - 1473.45
-    - 1476.575
-  - - 1476.925
-    - 1480.9
-  - - 1481.25
-    - 1485.225
-  - - 1485.575
-    - 1492.85
-  - - 1493.2
-    - 1496.55
-  - - 1496.9
-    - 1507.475
-  - - 1507.825
-    - 1512.925
+  - - 1462.35
+    - 1469.375
+  - - 1469.725
+    - 1474.15
+  - - 1474.5
+    - 1479.9
+  - - 1480.25
+    - 1483.75
+  - - 1484.1
+    - 1486.475
+  - - 1486.825
+    - 1489.95
+  - - 1490.3
+    - 1494.275
+  - - 1494.625
+    - 1498.6
+  - - 1498.95
+    - 1506.225
+  - - 1506.575
+    - 1509.925
+  - - 1510.275
+    - 1520.85
+  - - 1521.2
+    - 1526.3
 - id: s22_end
   t:
-  - 1513.725
-  - 1536.95
+  - 1527.1
+  - 1550.325
   status: changed
   reuse:
     from: ch00_dot_product_why(v6fix1)/s22_end
@@ -2759,24 +2767,107 @@ scenes:
   links:
     notebook: notebooks/poc_ch00a_dot.html (P1; never drawn, only for the site embed; the lab is not mentioned, user correction 2026-10-24)
   sentence_times:
-  - - 1513.725
-    - 1519.925
-  - - 1520.275
-    - 1528.325
-  - - 1528.675
-    - 1536.65
+  - - 1527.1
+    - 1533.3
+  - - 1533.65
+    - 1541.7
+  - - 1542.05
+    - 1550.025
 honesty_notes:
 - s12-s20 (advection) are word-identical to the approved v6; their physics and CHECK rows are reused.
 - 's05a: the mixed terms vanish because x̂·ŷ = 0 (right angle) and x̂·x̂ = 1, both from equation one; the screen shows both.'
 - 's20b says ''along the runway'', not ''headwind'': a wind blowing towards the runway heading is a tailwind for that heading.'
 - 's20c: the equinox-noon zenith angle equals the latitude (declination ≈ 0); the atmosphere is ignored and said as ''a big part of why''.'
-- 's20d: the tile numbers are illustrative; the ≈ 1 TW global total is a cited published estimate (Wunsch 1998), to be confirmed before the final TTS.'
-- 's20e: the station values are illustrative (''say''); the cosine is an uncentred pattern correlation; analogue forecasting named as a past practice.'
+- 's20d: the tile numbers are illustrative; the ≈ 1 TW global total is a cited published estimate (Wunsch 1998), verified 2026-10-28 (manifest.json credits.W2_wind_work).'
+- 's20e: the station values are illustrative (''say''); the cosine is an uncentred pattern correlation; the movie only says maps can be compared this way
+  to look for past days like today (fix 1).'
 - 'Sign is never shown by colour alone: ''+'', ''0'', ''−'' glyphs and the rose hatch.'
 - Every v6 scene, sentence, example, number and device is present (data_needs.md §0 maps each v6 scene to 0.1b); v6's 121 CHECK rows are reused unchanged.
-- 's20d: the ≈ 1 TW total stays OFF the screen and out of the final narration until the data-scout confirms the citation (data_needs.md §C W2); if it is
-  not confirmed, the sentence is cut and the dry run repeated.'
+- 's20d: the ≈ 1 TW total was confirmed by the motion-builder (DOIs on Crossref, Wunsch abstract ''about 1 TW … Southern Ocean''; Hughes & Wilson 0.76 TW),
+  so it is spoken and shown (data_needs.md §C W2: verified).'
 quiz_hook: 'A runway points east. The wind blows at 8 m/s towards the north. How much of it blows along the runway? (v · ê = 8 cos 90° = 0: all of it is
   across.)'
 data_needs: data_needs.md in this folder
 beats: 10
+fix_loop_1:
+  date: '2026-10-28'
+  review: reports/ch00_movies.md 'ch00_dot_product_v01b — review 1'
+  v6_sentences: 'unchanged: all 155 verbatim, and every untouched sentence''s audio is bit-identical (splice check max |Δ| = 0)'
+  narration: 'tools/movie_wb/splice_dpv_fix1.py: 4 replaced + 2 inserted NEW sentences (none from v6), local gain per edit'
+  edits:
+  - scene: s11b_perp_push
+    sentence: 3
+    kind: rep
+    old: The string pulls towards the centre, always at a right angle to the way the ball is moving.
+    new: The string pulls towards the centre, always at a right angle to the ball's velocity, which points the way it is moving.
+    added_s: 1.8
+    clip_s: 7.85
+    gain: 2.59006
+    corr_resynth:
+    - 0.9826
+    - 0.9929
+  - scene: s20b_runway
+    sentence: 4
+    kind: rep
+    old: Say the runway points north, and the wind blows at ten metres per second towards the north east, thirty degrees off the runway.
+    new: Say the runway points north, and the wind blows at ten metres per second, thirty degrees east of the runway's direction.
+    added_s: -0.35
+    clip_s: 8.025
+    gain: 2.80205
+    corr_resynth:
+    - 0.9945
+    - 0.9973
+  - scene: s20d_wind_work
+    after_sentence: 8
+    kind: ins
+    old: null
+    new: A watt is one joule of energy every second.
+    added_s: 3.8
+    clip_s: 3.45
+    gain: 2.77624
+    corr_resynth:
+    - 0.9962
+    - 0.9928
+  - scene: s20e_similarity
+    sentence: 4
+    kind: rep
+    old: Today reads three, one, minus two and minus two hectopascals, and a day in the past reads two, two, minus one and minus three.
+    new: Today reads three, one, minus two and minus two hectopascals, the unit weather maps use for pressure, and a day in the past reads two, two, minus
+      one and minus three.
+    added_s: 2.8
+    clip_s: 12.2
+    gain: 2.64687
+    corr_resynth:
+    - 0.9925
+    - 0.9894
+  - scene: s20e_similarity
+    after_sentence: 4
+    kind: ins
+    old: null
+    new: Let's call today's arrow capital A, and the past day's capital B.
+    added_s: 5.3
+    clip_s: 4.95
+    gain: 2.64687
+    corr_resynth:
+    - 0.9925
+    - 0.9894
+  - scene: s20e_similarity
+    sentence: 8
+    kind: rep
+    old: Forecasters have used this to find past days that looked like today, and computers use the same idea to compare pictures and words.
+    new: Weather maps can be compared this way to look for past days like today, and computers use the same idea to compare pictures and words.
+    added_s: 0.025
+    clip_s: 8.7
+    gain: 2.71466
+    corr_resynth:
+    - 0.9907
+  layout:
+  - M1 s20e link left of the stack and gauge
+  - M2 s06 (1) reminder fades at S5
+  - S1 s11a streaks clipped
+  - S4 s11b 'always across', slate velocity arrow
+  - S6 s20b link to the dashed across part
+  - S7 s20d Antarctica keyword at y 640
+  - S8 s20e 'opposites' held 1 s past its sentence
+  - S9 s05a older lines dimmed, zero in warm white/slate
+  - 'cosmetic: s07 b̂ definition leaves on the turn, s09 neutral orange tint, s20d big number warm white, s21 whirl held to ''sunlight'''

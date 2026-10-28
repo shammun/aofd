@@ -791,8 +791,8 @@ const S05A: React.FC = () => {
         </g>
         {/* the mixed pairs meet at right angles */}
         <g opacity={oMixed}>
-          <RightTick at={Bx} u1={[1, 0]} u2={[0, -1]} s={30} c={C.neg} />
-          <RightTick at={Ax} u1={[-1, 0]} u2={[0, -1]} s={30} c={C.neg} />
+          <RightTick at={Bx} u1={[1, 0]} u2={[0, -1]} s={30} c={C.local} />
+          <RightTick at={Ax} u1={[-1, 0]} u2={[0, -1]} s={30} c={C.local} />
         </g>
         {/* x̂ and ŷ, one unit long */}
         <g opacity={fin(f, tUnits, 12)}>
@@ -805,15 +805,15 @@ const S05A: React.FC = () => {
         <CurvedLink f={f} from={P(3.0, -0.55)} to={[1104, 520]} start={AT(k, 4, "only sees") + 6} end={t5} ctl={[1010, 720]} />
         <CurvedLink f={f} from={add(Ax, [10, -60])} to={[1600, 628]} start={AT(k, 5, "only sees") + 6} end={t6} ctl={[1250, 720]} />
       </Svg>
-      <TeX s={String.raw`5\times1 + 1\times3\ \overset{?}{=}\ |\mathbf a|\,|\mathbf b|\cos\theta`} x={1080} y={90} size={62} o={fin(f, 4) * (1 - 0.45 * fin(f, t1, 10)) } />
-      <TeX s={String.raw`\mathbf a = 5${XH} + ${YH}`} x={1080} y={200} size={T.calc} c={C.first} o={fin(f, AT(k, 2, "pointing along x"), 10) * (1 - 0.4 * fadeAll)} />
-      <TeX s={String.raw`\mathbf b = ${XH} + 3${YH}`} x={1080} y={295} size={T.calc} c={C.second} o={fin(f, tSplitB, 10) * (1 - 0.4 * fadeAll)} />
-      <TeX s={String.raw`\mathbf a\cdot\mathbf b = ${MATCH_L}`} x={1080} y={405} size={62} o={fin(f, t3, 10)} />
+      <TeX s={String.raw`5\times1 + 1\times3\ \overset{?}{=}\ |\mathbf a|\,|\mathbf b|\cos\theta`} x={1080} y={90} size={62} o={fin(f, 4) * (1 - 0.45 * fin(f, t1, 10) - 0.15 * fin(f, tFxO, 10))} />
+      <TeX s={String.raw`\mathbf a = 5${XH} + ${YH}`} x={1080} y={200} size={T.calc} c={C.first} o={fin(f, AT(k, 2, "pointing along x"), 10) * (1 - 0.6 * fin(f, tFxO, 10))} />
+      <TeX s={String.raw`\mathbf b = ${XH} + 3${YH}`} x={1080} y={295} size={T.calc} c={C.second} o={fin(f, tSplitB, 10) * (1 - 0.6 * fin(f, tFxO, 10))} />
+      <TeX s={String.raw`\mathbf a\cdot\mathbf b = ${MATCH_L}`} x={1080} y={405} size={62} o={fin(f, t3, 10) * (1 - 0.4 * fin(f, tRight, 10))} />
       <Layered parts={TERM_A} layers={[{ t: [0, 1], o: fin(f, tFxO, 10) * (1 - 0.6 * fadeAll) }, { t: [2, 3], o: fin(f, tRight, 10) * (1 - 0.6 * fadeAll) },
         { x: [3], o: fin(f, tDrop, 10) }]} x={1080} y={500} size={56} />
       <Layered parts={TERM_B} layers={[{ t: [2, 3], o: fin(f, tOxT, 10) * (1 - 0.6 * fadeAll) }, { t: [0, 1], o: fin(f, tRight + 8, 10) * (1 - 0.6 * fadeAll) },
         { x: [1], o: fin(f, tDrop, 10) }]} x={1114} y={590} size={56} />
-      <TeX s={String.raw`${XH}\cdot${YH} = 0`} x={1120} y={690} size={56} c={C.neg} o={fin(f, tRight, 10) * fout(f, t8, 10)} />
+      <TeX s={String.raw`${XH}\cdot${YH} = 0`} x={1120} y={690} size={56} c={C.key} o={fin(f, tRight, 10) * (1 - 0.4 * fin(f, AT(k, 7, "one times one"), 10)) * fout(f, t8, 10)} />
       <TeX s={String.raw`${XH}\cdot${XH} = 1\times1\times\cos 0^\circ = 1`} x={1120} y={775} size={56} o={fin(f, AT(k, 7, "one times one"), 10) * fout(f, t8, 10)} glow={pulse(f, tSelf, 20)} />
       <InlineTeX x={1150} y={720} size={T.calc} pieces={[{ s: rep(MATCH_RX, "=8", String.raw`=\mathbf{8}`), o: fin(f, t8, 10) }]} ul={clamp((f - tEight - 6) / 10, 0, 1)} />
     </Scene>
@@ -863,8 +863,8 @@ const S06: React.FC = () => {
       </Svg>
       <CalcStack f={f} x={1330} y={140} rows={rows} maxLines={3} />
       {/* 0.1b (halves gate): equation one, named in s04, stays at the foot of the maths zone */}
-      <TeX s={EQ_COS} x={1080} y={790} size={60} c={C.muted} o={fin(f, 4, 12)} />
-      <TeX s={String.raw`(1)`} x={1640} y={790} size={T.key} c={C.muted} o={fin(f, 4, 12)} />
+      <TeX s={EQ_COS} x={1080} y={790} size={60} c={C.muted} o={fin(f, 4, 12) * fout(f, t4, 12)} />
+      <TeX s={String.raw`(1)`} x={1640} y={790} size={T.key} c={C.muted} o={fin(f, 4, 12) * fout(f, t4, 12)} />
     </Scene>
   );
 };
@@ -950,7 +950,7 @@ const S07: React.FC = () => {
         <Keyword f={f} text="a stays the same" at={[560, 800]} appear={tSame} targets={[lerp(O, ATIP, 0.7)]} />
         <SmallPairs o={fout(f, tSame - 10, 10)} />
       </Svg>
-      <TeX s={`${BH_L} ${BHP[0]}`} x={1080} y={110} size={T.eq} c={C.second} o={fin(f, tShrink + 40)} />
+      <TeX s={`${BH_L} ${BHP[0]}`} x={1080} y={110} size={T.eq} c={C.second} o={fin(f, tShrink + 40) * fout(f, tTurn, 10)} />
       <CalcStack f={f} x={1240} y={220} rows={rows} maxLines={3} o={fout(f, tReading - 8, 12)} />
       <TeX s={String.raw`\mathbf a\cdot\text{ruler} = ${rdLbl}`} x={1080} y={330} size={T.calc} o={fin(f, tReading + 4, 10)} c={C.ink} />
     </Scene>
@@ -1031,7 +1031,8 @@ const S09: React.FC = () => {
     const x0 = cx - wPx / 2;
     return (
       <g opacity={o}>
-        <rect x={x0} y={FLOOR - hPx} width={wPx} height={hPx} fill={fillC} fillOpacity={0.2} stroke="none" />
+        {/* fix 1 (cosmetic): the orange tint a little stronger so it reads orange, not a rose-like mauve */}
+        <rect x={x0} y={FLOOR - hPx} width={wPx} height={hPx} fill={fillC} fillOpacity={fillC === C.second ? 0.32 : 0.2} stroke="none" />
         <line x1={x0} y1={FLOOR} x2={x0 + wPx} y2={FLOOR} stroke={wc} strokeWidth={20} strokeOpacity={0.85} />
         <line x1={x0} y1={FLOOR} x2={x0} y2={FLOOR - hPx} stroke={hc} strokeWidth={8} />
         <line x1={x0 + wPx} y1={FLOOR} x2={x0 + wPx} y2={FLOOR - hPx} stroke={hc} strokeWidth={3} strokeOpacity={0.6} />
@@ -1224,7 +1225,8 @@ const S11A: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={fin(f, 0, 14) * oF}>{streaks}</g>
+        <defs><clipPath id="s11aPic"><rect x={80} y={40} width={920} height={820} /></clipPath></defs>
+        <g opacity={fin(f, 0, 14) * oF} clipPath="url(#s11aPic)">{streaks}</g>
         {/* the track from above: sleepers and two rails */}
         {Array.from({ length: 21 }, (_, i) => <rect key={i} x={95 + i * 44} y={TY - 62} width={16} height={124} fill="#2f3a55" />)}
         <line x1={90} y1={TY - 40} x2={1000} y2={TY - 40} stroke="#aab4c8" strokeWidth={8} />
@@ -1275,7 +1277,7 @@ const WC: Pt = [480, 450], WR = 270;
 const EQ_FD0 = String.raw`\mathbf F\cdot\mathbf d=0`;
 const S11B: React.FC = () => {
   const f = useCurrentFrame(), k = K("s11b_perp_push");
-  const t1 = SS(k, 1), t2 = SS(k, 2), tPull = AT(k, 2, "pulls towards"), tRight = AT(k, 2, "at a right angle");
+  const t1 = SS(k, 1), t2 = SS(k, 2), tPull = AT(k, 2, "pulls towards"), tRight = AT(k, 2, "at a right angle"), tVel = AT(k, 2, "velocity");
   const t3 = SS(k, 3), tDot = AT(k, 3, "its dot product"), tNoW = AT(k, 3, "no work"), t4 = SS(k, 4), tEn = AT(k, 4, "energy of motion"),
     tDirn = AT(k, 4, "changes its direction"), tCirc = AT(k, 4, "into a circle"), t5 = SS(k, 5), tEarth = AT(k, 5, "Earth's spin");
   const PER = 5 * FPS;
@@ -1301,15 +1303,18 @@ const S11B: React.FC = () => {
         <line x1={WC[0]} y1={WC[1]} x2={ball[0]} y2={ball[1]} stroke="#c9d2e3" strokeWidth={4} opacity={fin(f, t1, 10)} />
         <circle cx={WC[0]} cy={WC[1]} r={12} fill="#c9d2e3" opacity={fin(f, 0, 12)} />
         <Arrow p={ball} q={add(ball, rIn, 130)} color={C.second} o={oF} w={9} head={34} />
-        <Arrow p={ball} q={add(ball, tg, 140)} color={C.first} o={oV} w={9} head={34} />
+        {/* fix 1 (S4): the ball's velocity in slate, never the teal v that is the wind in this movie */}
+        <Arrow p={ball} q={add(ball, tg, 140)} color={C.local} o={oV} w={9} head={34} />
         {oV > 0 ? <RightTick at={ball} u1={rIn} u2={tg} s={30} o={oV} /> : null}
         <circle cx={ball[0]} cy={ball[1]} r={24} fill="#d7dde8" stroke={C.bg} strokeWidth={4} opacity={fin(f, 0, 12)} />
         <Lbl x={add(ball, rIn, 150)[0]} y={add(ball, rIn, 150)[1]} t="F" c={C.second} s={T.calc} a="middle" o={oF} />
-        <Lbl x={add(ball, tg, 175)[0]} y={add(ball, tg, 175)[1]} t="v" c={C.first} s={T.calc} a="middle" o={oV} />
         <Keyword f={f} text="string" at={[120, 110]} appear={t1 + 10} out={t2 + 20} targets={[lerp(WC, ball, 0.5)]} />
-        <Lbl x={1100} y={190} t="always across the motion?" c={C.key} s={T.key} o={fin(f, 8, 10) * fout(f, tDot - 8, 10)} />
+        <Lbl x={1100} y={190} t="always across" c={C.key} s={T.key} o={fin(f, 8, 10) * fout(f, tDot - 8, 10)} />
         <Lbl x={1100} y={300} t="pull: towards the centre" c={C.second} s={T.key} o={fin(f, tPull, 10) * fout(f, tDot - 8, 10)} />
-        <Lbl x={1100} y={380} t="at a right angle to v" c={C.key} s={T.key} o={fin(f, tRight, 10) * fout(f, tDot - 8, 10)} />
+        <g opacity={fin(f, tVel, 10) * fout(f, tDot - 8, 10)}>
+          <Arrow p={[1100, 380]} q={[1200, 380]} color={C.local} w={8} head={28} />
+          <Lbl x={1225} y={380} t="velocity" c={C.local} s={T.key} />
+        </g>
         <Keyword f={f} text="circle" at={[120, 110]} appear={tCirc} out={t5} targets={[[WC[0] - WR * 0.72, WC[1] - WR * 0.69]]} />
         {/* the energy of motion: a flat bar that never changes */}
         <g opacity={fin(f, tEn, 10)}>
@@ -2467,10 +2472,10 @@ const S20B: React.FC = () => {
         <Arrow p={RP} q={eT} color={C.second} w={10} head={36} o={oE} />
         <Lbl x={RP[0] - 30} y={(RP[1] + eT[1]) / 2} t="ê" c={C.second} s={T.calc} a="end" o={oE} />
         <Lbl x={foot[0] - 30} y={foot[1] + 50} t="8.7 m/s" c={C.first} s={T.key} a="end" o={fin(f, t87, 10)} />
-        <Lbl x={(foot[0] + vT[0]) / 2 - 30} y={foot[1] - 40} t="across" c={C.muted} s={T.key} a="middle" o={fin(f, tAcross, 10)} />
+        <Lbl x={foot[0] + 68} y={foot[1] - 40} t="across" c={C.muted} s={T.key} a="end" o={fin(f, tAcross, 10)} />
         <Keyword f={f} text="how much along?" at={[1100, 250]} appear={tAlong} out={t5} targets={[[560, 470]]} bend={0.1} />
         <Keyword f={f} text="unit arrow" at={[1100, 360]} appear={tUnit} out={t5} targets={[[RP[0] + 14, RP[1] - 70]]} bend={0.1} />
-        <Keyword f={f} text="cross product" at={[1100, 760]} appear={tCross} targets={[[(foot[0] + vT[0]) / 2 + 40, foot[1] - 8]]} />
+        <Keyword f={f} text="cross product" at={[740, 170]} appear={tCross} targets={[[foot[0] + 0.68 * (vT[0] - foot[0]), foot[1] - 6]]} bend={0.1} />
         <CurvedLink f={f} from={[RP[0] + 20, RP[1] - 70]} to={[1330, 662]} start={t87 + 14} end={t6} ctl={[900, 800]} />
       </Svg>
       <CalcStack f={f} x={1300} y={460} rows={rows} maxLines={2} />
@@ -2609,8 +2614,9 @@ const S20D: React.FC = () => {
   const t4 = SS(k, 4), tPos = AT(k, 4, "is positive"), tFeeds = AT(k, 4, "feeds the current"), t5 = SS(k, 5), tNeg = AT(k, 5, "is negative"),
     tAway = AT(k, 5, "takes energy away");
   const t6 = SS(k, 6), tT01 = AT(k, 6, "point one newtons"), tU01 = AT(k, 6, "point one metres"), t7 = SS(k, 7), tW = AT(k, 7, "point zero one watts");
-  const t8 = SS(k, 8), tMM = AT(k, 8, "a million million watts"), tSO = AT(k, 8, "the Southern Ocean"), tWest = AT(k, 8, "strong westerly winds"),
-    tCirc = AT(k, 8, "the current that circles"), tAnt = AT(k, 8, "Antarctica");
+  const tWatt = SS(k, 8), tJ = AT(k, 8, "one joule"); // fix 1 (S3): "A watt is one joule of energy every second."
+  const t8 = SS(k, 9), tMM = AT(k, 9, "a million million watts"), tSO = AT(k, 9, "the Southern Ocean"), tWest = AT(k, 9, "strong westerly winds"),
+    tCirc = AT(k, 9, "the current that circles"), tAnt = AT(k, 9, "Antarctica");
   const oTiles = fout(f, t8, 14), oGlobe = fin(f, t8 + 4, 14);
   const fillL = 0.15 + 0.7 * ramp(f, tFeeds, tFeeds + 60), fillR = 0.85 - 0.7 * ramp(f, tAway, tAway + 60);
   // wind streaks over the tiles (decorative, seeded)
@@ -2664,7 +2670,8 @@ const S20D: React.FC = () => {
         <Keyword f={f} text="drag" at={[1100, 300]} appear={tDrag} out={tTau - 6} targets={[[480, TY0 + 30]]} bend={0.12} />
         <Lbl x={1180} y={300} t="wind stress" c={C.key} s={T.key} o={fin(f, tTau, 10) * oTiles} />
         <Lbl x={1180} y={390} t="the water's velocity" c={C.key} s={T.key} o={fin(f, tU, 10) * oTiles * fout(f, t6, 10)} />
-        <Lbl x={1100} y={760} t="W = watt" c={C.muted} s={T.key} o={fin(f, tW, 10) * oTiles} />
+        <Lbl x={1100} y={720} t="W = watt" c={C.muted} s={T.key} o={fin(f, tW, 10) * oTiles} />
+        <Lbl x={1100} y={805} t="1 W = 1 J every second" c={C.key} s={T.key} o={fin(f, tJ, 10) * oTiles} />
         <Keyword f={f} text="feeds" at={[1100, 520]} appear={tFeeds} out={t5} targets={[[TILE[0].x + 240, TY0 + TS + 120]]} bend={0.1} />
         <Keyword f={f} text="drains" at={[1100, 520]} appear={tAway} out={t6} targets={[[TILE[1].x + 240, TY0 + TS + 120]]} bend={0.1} />
       </Svg>
@@ -2684,9 +2691,9 @@ const S20D: React.FC = () => {
         <Keyword f={f} text="Southern Ocean" at={[1100, 420]} appear={tSO} out={tWest} targets={[[GC2[0] + GS * 0.6, GC2[1] + GS * 0.25]]} bend={0.1} />
         <Keyword f={f} text="westerly winds" at={[1100, 420]} appear={tWest} out={tCirc} targets={[[GC2[0] + GS * 0.62, GC2[1] - GS * 0.42]]} bend={0.1} />
         <Keyword f={f} text="circumpolar current" at={[1100, 420]} appear={tCirc} targets={[[GC2[0] + GS * 0.57 * 0.95, GC2[1] + 30]]} bend={0.12} />
-        <Keyword f={f} text="Antarctica" at={[1100, 560]} appear={tAnt} targets={[[GC2[0] + 30, GC2[1] + 10]]} bend={0.1} />
+        <Keyword f={f} text="Antarctica" at={[1100, 640]} appear={tAnt} targets={[[GC2[0] + 30, GC2[1] + 20]]} bend={0.1} />
       </Svg>
-      <TeX s={String.raw`\approx 1\,000\,000\,000\,000\ \mathrm W`} x={1100} y={250} size={T.calc} c={C.gold} o={fin(f, tMM, 10) * oGlobe} />
+      <TeX s={String.raw`\approx 1\,000\,000\,000\,000\ \mathrm W`} x={1100} y={250} size={T.calc} c={C.key} o={fin(f, tMM, 10) * oGlobe} />
     </Scene>
   );
 };
@@ -2705,10 +2712,12 @@ const S20E: React.FC = () => {
   const t3 = SS(k, 3);
   const tA = [AT(k, 3, "three, one"), AT(k, 3, "one, minus"), AT(k, 3, "minus two and"), AT(k, 3, "minus two hecto")];
   const tB = [AT(k, 3, "two, two, minus"), AT(k, 3, "two, minus one"), AT(k, 3, "minus one and"), AT(k, 3, "minus three")];
-  const t4 = SS(k, 4), tSum = AT(k, 4, "which is sixteen"), t5 = SS(k, 5), tSq = AT(k, 5, "square root of eighteen"), tCosW = AT(k, 5, "so the cosine"),
-    tFrac = AT(k, 5, "sixteen over"), t089 = AT(k, 5, "about point eight nine");
-  const t6 = SS(k, 6), tAlike = AT(k, 6, "look alike"), tNothing = AT(k, 6, "nothing in common"), tOpp = AT(k, 6, "opposites");
-  const t7 = SS(k, 7), tPast = AT(k, 7, "past days"), tPics = AT(k, 7, "pictures and words");
+  // fix 1: sentence 4 defines hectopascals; NEW sentence 5 names the arrows ("capital A", "capital B"); the rest moved by one
+  const tUnitP = AT(k, 3, "the unit weather maps"), tCapA = AT(k, 4, "capital A"), tCapB = AT(k, 4, "capital B");
+  const t4 = SS(k, 5), tSum = AT(k, 5, "which is sixteen"), t5 = SS(k, 6), tSq = AT(k, 6, "square root of eighteen"), tCosW = AT(k, 6, "so the cosine"),
+    tFrac = AT(k, 6, "sixteen over"), t089 = AT(k, 6, "about point eight nine");
+  const t6 = SS(k, 7), tAlike = AT(k, 7, "look alike"), tNothing = AT(k, 7, "nothing in common"), tOpp = AT(k, 7, "opposites"), e6 = SE(k, 7);
+  const t7 = SS(k, 8), tPast = AT(k, 8, "past days"), tPics = AT(k, 8, "pictures and words");
   const PA = X20E.A_hPa as number[], PB = X20E.B_hPa as number[], PR = X20E.products as number[];
   const prodAt = (i: number) => t4 + 12 + i * 22;
   const maps = [{ x: 110, c: C.first, vals: PA, at: tA, name: "today" }, { x: 560, c: C.second, vals: PB, at: tB, name: "a past day" }];
@@ -2717,7 +2726,7 @@ const S20E: React.FC = () => {
   const rows: CalcRow[] = [
     { lhs: String.raw`\mathbf A\cdot\mathbf B`, rhs: String.raw`= 6+2+2+6`, at: prodAt(0), },
     { rhs: String.raw`= \mathbf{16}`, at: tSum, cont: true },
-    { lhs: String.raw`|\mathbf A|`, rhs: String.raw`= \sqrt{3^2+1^2+2^2+2^2} = \sqrt{18}`, at: AT(k, 5, "Both lengths"), c: C.first },
+    { lhs: String.raw`|\mathbf A|`, rhs: String.raw`= \sqrt{3^2+1^2+2^2+2^2} = \sqrt{18}`, at: AT(k, 6, "Both lengths"), c: C.first },
     { lhs: String.raw`|\mathbf B|`, rhs: String.raw`= \sqrt{2^2+2^2+1^2+3^2} = \sqrt{18}`, at: tSq, c: C.second },
     { lhs: SIM_L, rhs: SIM_R1, at: tCosW, h: 150 },
     { rhs: rep(SIM_R2, "0.89", String.raw`\mathbf{0.89}`), at: t089, cont: true, ul: t089 + 14 },
@@ -2751,7 +2760,8 @@ const S20E: React.FC = () => {
             <g key={j}>
               <path d={`M ${colX[j] - 44} ${rowsY[0] - 30} q -26 ${(rowsY[3] - rowsY[0] + 60) / 2} 0 ${rowsY[3] - rowsY[0] + 60}`} fill="none" stroke={maps[j].c} strokeWidth={4} />
               <path d={`M ${colX[j] + 44} ${rowsY[0] - 30} q 26 ${(rowsY[3] - rowsY[0] + 60) / 2} 0 ${rowsY[3] - rowsY[0] + 60}`} fill="none" stroke={maps[j].c} strokeWidth={4} />
-              <Lbl x={colX[j]} y={rowsY[0] - 70} t={j === 0 ? "A" : "B"} c={maps[j].c} s={T.calc} a="middle" />
+              <Lbl x={colX[j]} y={rowsY[0] - 70} t={j === 0 ? "A" : "B"} c={maps[j].c} s={T.calc + 20 * pulse(f, (j === 0 ? tCapA : tCapB) + 4, 24)} a="middle"
+                o={fin(f, j === 0 ? tCapA : tCapB, 8)} />
               {rowsY.map((y, i) => <Lbl key={i} x={colX[j]} y={y} t={minus(String(maps[j].vals[i]))} c={maps[j].c} s={T.key} a="middle" o={fin(f, maps[j].at[i], 8)} />)}
             </g>
           ))}
@@ -2764,8 +2774,9 @@ const S20E: React.FC = () => {
           ))}
         </g>
         <Lbl x={1100} y={160} t="comparing patterns" c={C.key} s={T.key} o={fin(f, 8, 10) * fout(f, t4 - 8, 10)} />
+        <Lbl x={1100} y={740} t="hPa: a unit of pressure" c={C.key} s={T.key} o={fin(f, tUnitP, 10) * fout(f, t4 - 8, 10)} />
         <Lbl x={1100} y={250} t="departures from usual" c={C.key} s={T.key} o={fin(f, tDep, 10) * fout(f, t4 - 8, 10)} />
-        <Keyword f={f} text="an arrow in 4-D" at={[1100, 340]} appear={tArrow4} out={t4 - 8} targets={[[colX[1] + 70, rowsY[0] - 20]]} bend={0.1} />
+        <Keyword f={f} text="an arrow in 4-D" at={[1100, 340]} appear={tArrow4} out={SS(k, 4) - 8} targets={[[colX[1] + 70, rowsY[0] - 20]]} bend={0.1} />
         <Lbl x={1100} y={430} t="can't draw it · same recipe" c={C.key} s={T.key} o={fin(f, tSame, 10) * fout(f, t4 - 8, 10)} />
         {/* the gauge */}
         <g opacity={fin(f, t089 - 6, 12)}>
@@ -2780,8 +2791,10 @@ const S20E: React.FC = () => {
         </g>
         <Lbl x={GX(1)} y={GYl + 120} t="alike" c={C.key} s={T.key} a="end" o={fin(f, tAlike - 6, 8) * fout(f, tNothing - 6, 8)} />
         <Lbl x={GX(0)} y={GYl + 120} t="nothing in common" c={C.key} s={T.key} a="middle" o={fin(f, tNothing - 6, 8) * fout(f, tOpp - 6, 8)} />
-        <Lbl x={GX(-1)} y={GYl + 120} t="opposites" c={C.neg} s={T.key} a="start" o={fin(f, tOpp - 6, 8) * fout(f, t7, 8)} />
-        <Keyword f={f} text="past days like today" at={[1120, GYl + 120]} appear={tPast} out={tPics} targets={[[560 + MWd - 30, MY + 20]]} bend={0.1} />
+        <Lbl x={GX(-1)} y={GYl + 120} t="opposites" c={C.neg} s={T.key} a="start" o={fin(f, tOpp - 6, 8) * fout(f, e6 + 30, 8)} />
+        {/* M1: the link leaves the keyword on its left and stays left of x 1060 (clear of the stack and the gauge) */}
+        <Keyword f={f} text="past days like today" at={[1120, GYl + 120]} appear={tPast} out={tPics} targets={[]} />
+        <CurvedLink f={f} from={[1106, GYl + 106]} to={[830, MY + MHt + 16]} ctl={[1000, 520]} start={tPast + 8} end={tPics - 6} />
         <g opacity={fin(f, tPics, 10)}>
           <rect x={830} y={520} width={130} height={96} rx={8} fill="#22304d" stroke={C.ink} strokeWidth={3} />
           <polygon points="840,606 880,560 905,585 925,565 950,606" fill={C.first} fillOpacity={0.7} />
@@ -2949,7 +2962,7 @@ const S21: React.FC = () => {
           <Lbl x={1050} y={630} t={`−${Math.abs(W.dTdt_K_h).toFixed(2)} K per hour`} c={C.neg} s={T.key} />
         </g>
         {/* S10 NEW: a push across does no work */}
-        <g opacity={beat(9, 10)}>
+        <g opacity={fin(f, t[9], 10) * fout(f, tSun - 8, 10)}>
           <MiniWhirl x={420} y={400} r={200} />
           <Lbl x={1100} y={460} t="energy of motion" c={C.key} s={T.key} />
           <rect x={1100} y={510} width={500} height={40} rx={8} fill={C.gold} fillOpacity={0.85} />
@@ -2980,7 +2993,7 @@ const S21: React.FC = () => {
       <TeX s={rep(RWY_R2, String.raw`\approx`, String.raw`\mathbf v\cdot\hat{\mathbf e} \approx `)} x={1100} y={360} size={T.calc} o={beat(7, 8)} />
       <TeX s={EQ_R4} x={1050} y={250} size={T.calc} o={beat(8, 9)} />
       <TeX s={EQ_R5} x={1050} y={420} size={T.calc} o={beat(8, 9)} />
-      <TeX s={EQ_FD0} x={1100} y={340} size={T.calc} o={beat(9, 10)} />
+      <TeX s={EQ_FD0} x={1100} y={340} size={T.calc} o={fin(f, t[9], 10) * fout(f, tSun - 8, 10)} />
     </Scene>
   );
 };

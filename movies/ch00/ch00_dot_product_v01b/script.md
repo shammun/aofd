@@ -17,8 +17,8 @@ follows it. Music: v6's own score (`tools/music.py`, seed 7). Title fix from the
 | s11_work | v6 sled restored word for word (the committed 0.1b had replaced it) |
 | s05a, s11a, s11b, s20b, s20c, s20d, s20e | 0.1b additions (s11a = the committed cart, now beside the sled; s11b = the committed perpendicular push, renamed) |
 
-The ≈ 1 TW sentence in s20d is measured here but must not go on screen or into the final narration until its citation
-is confirmed (`data_needs.md` §C W2).
+The ≈ 1 TW sentence in s20d was confirmed before the final TTS (`data_needs.md` §C W2, verified; manifest.json
+credits.W2_wind_work). Fix 1 (review 1): six NEW sentences replaced or added in s11b, s20b, s20d, s20e; no v6 sentence touched.
 
 ## s00_title
 In this video, we'll learn the dot product the easy way, and see how meteorology uses it to tell how fast the wind changes the temperature.
@@ -114,9 +114,9 @@ Here's another way to see why only the part along counts. Picture a small cart o
 > reference video V-D1/V-D2: a push held to a track, the rails take the across part; work has no direction (the committed 0.1b cart, now beside v6's sled instead of replacing it)
 
 ## s11b_perp_push
-What about a push that's always across the motion? Imagine a ball whirled round on a string. The string pulls towards the centre, always at a right angle to the way the ball is moving. So its dot product with every small step is zero, and it does no work. The ball's energy of motion stays the same: the pull only changes its direction, bending its path into a circle. We'll meet pushes like this again, when Earth's spin turns the wind.
+What about a push that's always across the motion? Imagine a ball whirled round on a string. The string pulls towards the centre, always at a right angle to the ball's velocity, which points the way it is moving. So its dot product with every small step is zero, and it does no work. The ball's energy of motion stays the same: the pull only changes its direction, bending its path into a circle. We'll meet pushes like this again, when Earth's spin turns the wind.
 
-> 82 words · 6 sentences · 0 beats · 546.800–579.600 s (32.8 s; speech 30.2 s) · 9:06.80–9:39.60 (measured, dry run 2026-10-28)
+> 86 words · 6 sentences · 0 beats · 546.800–581.400 s (34.6 s; speech 32.0 s) · 9:06.80–9:41.40 (measured, fix 1 splice 2026-10-28)
 > new
 > D5 / W17 perpendicular push does no work (research §3)
 > Related: #3 cross product at work (s22e: the Coriolis push only steers), #29 Coriolis
@@ -209,9 +209,9 @@ Now let's change only the map: the temperature rises one degree every fifty kilo
 > reused (v6 word-identical)
 
 ## s20b_runway
-The dot product turns up in many more places, so let's look at a few. First, a runway. Pilots need to know how much of the wind blows along the runway. Say the runway points north, and the wind blows at ten metres per second towards the north east, thirty degrees off the runway. Let e hat be a unit arrow along the runway. Then the wind dot e hat is ten times cos thirty, about eight point seven metres per second along the runway. [beat] The part straight across it is a job for the cross product, which a later video in this series takes on.
+The dot product turns up in many more places, so let's look at a few. First, a runway. Pilots need to know how much of the wind blows along the runway. Say the runway points north, and the wind blows at ten metres per second, thirty degrees east of the runway's direction. Let e hat be a unit arrow along the runway. Then the wind dot e hat is ten times cos thirty, about eight point seven metres per second along the runway. [beat] The part straight across it is a job for the cross product, which a later video in this series takes on.
 
-> 106 words · 7 sentences · 1 beats · 1225.450–1267.025 s (41.6 s; speech 37.5 s) · 20:25.45–21:07.03 (measured, dry run 2026-10-28)
+> 104 words · 7 sentences · 1 beats · 1227.250–1268.475 s (41.2 s; speech 37.2 s) · 20:27.25–21:08.47 (measured, fix 1 splice 2026-10-28)
 > new
 > W12 runway (research §4); 'along', not 'headwind' (a wind blowing towards the runway's heading is a tailwind for that heading)
 > Related: #3 cross product at work (s53a: the part across the runway)
@@ -225,17 +225,17 @@ Second, how much passes through a surface. Hold a window frame in a steady strea
 > Related: #22 climate machine, #7 divergence and flux
 
 ## s20d_wind_work
-Third, the wind's work on the ocean. Wind blowing over the sea drags on the water. The drag on each square metre is an arrow called the wind stress, tau. The power it gives the water is tau dot u, where u is the water's velocity. Where the wind blows along with a current, the dot product is positive, and the wind feeds the current with energy. Where it blows against the current, the dot product is negative, and the wind takes energy away. Say the wind stress is point one newtons per square metre, and the current flows the same way at point one metres per second. Then the wind gives the current point zero one watts on every square metre. [beat] Added up over the world ocean, this comes to about a million million watts, most of it over the Southern Ocean, where strong westerly winds blow along with the current that circles Antarctica.
+Third, the wind's work on the ocean. Wind blowing over the sea drags on the water. The drag on each square metre is an arrow called the wind stress, tau. The power it gives the water is tau dot u, where u is the water's velocity. Where the wind blows along with a current, the dot product is positive, and the wind feeds the current with energy. Where it blows against the current, the dot product is negative, and the wind takes energy away. Say the wind stress is point one newtons per square metre, and the current flows the same way at point one metres per second. Then the wind gives the current point zero one watts on every square metre. [beat] A watt is one joule of energy every second. Added up over the world ocean, this comes to about a million million watts, most of it over the Southern Ocean, where strong westerly winds blow along with the current that circles Antarctica.
 
-> 155 words · 9 sentences · 1 beats · 1327.775–1388.975 s (61.2 s; speech 56.5 s) · 22:07.78–23:08.97 (measured, dry run 2026-10-28)
+> 164 words · 10 sentences · 1 beats · 1329.225–1394.225 s (65.0 s; speech 59.9 s) · 22:09.22–23:14.22 (measured, fix 1 splice 2026-10-28)
 > new
 > W13 wind work and its sign (research §4)
 > Related: #52 wind-driven gyres, #57 Antarctic Circumpolar Current
 
 ## s20e_similarity
-Fourth, comparing patterns. Write today's pressure at four weather stations, as departures from their usual values, as one list of four numbers: an arrow in four dimensions. We can't draw it, but the recipe works just the same. Today reads three, one, minus two and minus two hectopascals, and a day in the past reads two, two, minus one and minus three. Their dot product is six plus two plus two plus six, which is sixteen. Both lengths are the square root of eighteen, so the cosine of the angle between them is sixteen over eighteen, about point eight nine. [beat] Near one, two days look alike; near zero, they have nothing in common; and near minus one, they're opposites. Forecasters have used this to find past days that looked like today, and computers use the same idea to compare pictures and words.
+Fourth, comparing patterns. Write today's pressure at four weather stations, as departures from their usual values, as one list of four numbers: an arrow in four dimensions. We can't draw it, but the recipe works just the same. Today reads three, one, minus two and minus two hectopascals, the unit weather maps use for pressure, and a day in the past reads two, two, minus one and minus three. Let's call today's arrow capital A, and the past day's capital B. Their dot product is six plus two plus two plus six, which is sixteen. Both lengths are the square root of eighteen, so the cosine of the angle between them is sixteen over eighteen, about point eight nine. [beat] Near one, two days look alike; near zero, they have nothing in common; and near minus one, they're opposites. Weather maps can be compared this way to look for past days like today, and computers use the same idea to compare pictures and words.
 
-> 142 words · 8 sentences · 1 beats · 1388.975–1448.975 s (60.0 s; speech 55.6 s) · 23:08.97–24:08.97 (measured, dry run 2026-10-28)
+> 163 words · 9 sentences · 1 beats · 1394.225–1462.350 s (68.1 s; speech 63.4 s) · 23:14.22–24:22.35 (measured, fix 1 splice 2026-10-28)
 > new
 > V-D5 similarity / pattern correlation (research §1b-§1c)
 > Related: #21 statistics of fields
@@ -254,4 +254,4 @@ This video is one of a series of related maths tutorials, so watch out for the o
 > changed
 > Related: #1a vectors, #2 cross product, #3 cross product at work, #6 gradient, #10 material derivative, #22 climate machine
 
-> Total: 3844 words · 231 sentences · 10 beats · 1536.950 s narration · 1539.450 s movie (25:39.45) · 149.8 words per minute.
+> Total: 3876 words · 233 sentences · 10 beats · 1550.325 s narration · 1552.825 s movie (25:52.83) · 149.8 words per minute (fix 1, 2026-10-28).

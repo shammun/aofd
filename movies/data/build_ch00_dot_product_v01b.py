@@ -393,8 +393,12 @@ def main() -> int:
                         "'about a million million watts, most of it over the Southern Ocean'."},
         "W3_ACC": "the Southern Ocean westerlies blow along the Antarctic Circumpolar Current (standard; winds on the globe: "
                   "NCEP/NCAR Reanalysis 1, 1991-2020 annual-mean 10-m wind, NOAA PSL, public domain)",
-        "S2_analogues": "Lorenz, E. N. (1969): Atmospheric predictability as revealed by naturally occurring analogues. "
-                        "J. Atmos. Sci., 26, 636-646 (analogue forecasting as a past method)",
+        "S2_analogues": "fix 1 (review 1, S10): the narration was softened to 'Weather maps can be compared this way to look "
+                        "for past days like today' (a possibility, not a claim about who used the cosine). Background: "
+                        "Lorenz, E. N. (1969), Atmospheric predictability as revealed by naturally occurring analogues, "
+                        "J. Atmos. Sci., 26, 636-646, searched past maps for analogues but ranked them by RMS difference, "
+                        "not by the cosine; the cosine of anomaly patterns is the anomaly correlation coefficient, a standard "
+                        "forecast-verification score (WMO Manual on the GDPFS, WMO-No. 485), which the movie does not name",
         "R2_runway": "pilots resolve the wind into along-runway and crosswind parts (FAA Airplane Flying Handbook, "
                      "FAA-H-8083-3; crosswind chapter)",
         "imagery": "NASA Blue Marble Next Generation, topography + bathymetry, September 2004 (NASA Earth Observatory, public "
