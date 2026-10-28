@@ -135,13 +135,16 @@ def norm_words(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+BEAT = re.compile(r"\s*\[beat\]\s*", re.I)  # tools/tts.py pause marker: never spoken, never captioned
+
+
 def script_text(script: Path | None, storyboard: dict | None) -> str | None:
     if storyboard:
-        return " ".join((sc.get("voiceover") or "") for sc in storyboard.get("scenes", []))
+        return BEAT.sub(" ", " ".join((sc.get("voiceover") or "") for sc in storyboard.get("scenes", [])))
     if script and script.exists():
         lines = [ln for ln in script.read_text(encoding="utf-8").splitlines() if not ln.startswith("#")
                  and not ln.strip().startswith(">")]
-        return " ".join(lines)
+        return BEAT.sub(" ", " ".join(lines))
     return None
 
 

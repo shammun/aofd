@@ -1,0 +1,9391 @@
+{
+ "id": "ch00_dot_product_v01b",
+ "storyboard": "movies/ch00/ch00_dot_product_v01b/storyboard.yaml",
+ "builder": "movies/data/build_ch00_dot_product_v01b.py (runs movies/data/build_ch00_dot_product_why.py for the v6 data)",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "034a23e8b0b1d3f81affde9b75a9ce20e4e65c2d",
+  "dirty_tracked": false,
+  "vectors_py_tracked": true,
+  "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
+  "kinematics_py_tracked": true,
+  "kinematics_py_sha256": "dfd7e1abea38775a2469a329fd9724232a87c53fb3f01e765d5acffe5fa6b1ea",
+  "operators_py_tracked": true,
+  "operators_py_sha256": "1886f90dd8ad24f25d831658796b4da111330c25bb8ece87f682e260828ce26e",
+  "terrain_py_sha256": "718df6bec13a2e967852cf62b7f81ff2bbc97875981618488d85df4ff5a6f477",
+  "climatology_py_sha256": "7675d9fbdb7d93c0995bbdcb3826f5c7d86c980b6990a9d838e1ff821af5a097"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels except a plain (1) (rule G1)",
+ "equations": {
+  "dot_components": "Kundu §2.1 p. 41 (2.2): a·b = a1b1 + a2b2 + a3b3 (s03)",
+  "dot_cosine": "a·b = |a||b| cos θ, Kundu §2.8 p. 52 unnumbered; on screen a plain (1) (s04, s06)",
+  "shadow": "|a| cos θ = a·b̂ = a·b/|b| (ours; derived on screen in s06, s07)",
+  "material_derivative": "Vallis §1.1.2 p. 5 (1.7) Dφ/Dt = ∂φ/∂t + (v·∇)φ, shown as v·∇φ (s13)",
+  "gradient": "Kundu §2.9 p. 52: ∇φ = e_i ∂φ/∂x_i (2-D here, s14, s15)",
+  "local_tendency": "∂T/∂t = −v·∇T: material derivative with φ = T and DT/Dt = 0 (derived on screen in s18)",
+  "matching_parts": "(5x̂ + ŷ)·(x̂ + 3ŷ) = 5·1 + 1·3 = 8 with x̂·ŷ = 0, x̂·x̂ = 1 (expansion of Kundu (2.2), ours; s05a)",
+  "lambert": "ŝ·n̂ = cos(zenith angle), Lambert's cosine law (fluidpy.geo.terrain.insolation_factor; s20c)",
+  "wind_work": "power per unit area τ·u [W m⁻²] (s20d)",
+  "pattern_correlation": "cos θ = A·B/(|A||B|), uncentred pattern correlation (fluidpy.diag.climatology; s20e)"
+ },
+ "parameters": {
+  "a": [
+   5.0,
+   1.0
+  ],
+  "b": [
+   1.0,
+   3.0
+  ],
+  "p_s07": [
+   3.0,
+   0.0
+  ],
+  "q_s07": [
+   [
+    2.0,
+    0.0
+   ],
+   [
+    0.0,
+    2.0
+   ],
+   [
+    -2.0,
+    0.0
+   ]
+  ],
+  "v_wind_s11_m_s": [
+   6.0,
+   8.0
+  ],
+  "F_N": 20.0,
+  "F_angle_deg": 60.0,
+  "d_m": [
+   5,
+   10
+  ],
+  "v_speed_m_s": 10.0,
+  "v_angle_from_gradT_deg": 60.0,
+  "gradT_K_m": [
+   1e-05,
+   2e-05
+  ],
+  "grid_h_m": 5000.0,
+  "T_west_C": 10.0,
+  "T_pin_C": 13.0,
+  "steep_map": "T = 13 °C + 2e-5 K/m (x − x_pin)",
+  "map_km": [
+   600.0,
+   360.0
+  ],
+  "pin_km": [
+   300.0,
+   180.0
+  ],
+  "time_compression": {
+   "s19a (also s12, s18, s20)": "1 h in 2.575 s (x 1398); s19a's first hour runs from the end of 'Now let's start the clock' to 'twelve point eight two after' (review 6 S7)",
+   "s17b": "1 h in 2.730 s (x 1319)",
+   "s00": "1 h in 4.000 s (x 900), title"
+  },
+  "parcel_seed": 20261022,
+  "s11a_F_N": 20.0,
+  "s11a_angle_to_track_deg": 60.0,
+  "s11a_roll_m": 5.0,
+  "s11b_steps": 120,
+  "s20b_wind_m_s": 10.0,
+  "s20b_angle_off_runway_deg": 30.0,
+  "s20c_declination_deg": 0.0,
+  "s20c_noon_meridian_lon": 20.0,
+  "s20d_tau_N_m2": [
+   0.1,
+   0.0
+  ],
+  "s20d_u_m_s": [
+   [
+    0.1,
+    0.0
+   ],
+   [
+    -0.1,
+    0.0
+   ]
+  ],
+  "s20e_A_hPa": [
+   3.0,
+   1.0,
+   -2.0,
+   -2.0
+  ],
+  "s20e_B_hPa": [
+   2.0,
+   2.0,
+   -1.0,
+   -3.0
+  ]
+ },
+ "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
+ "data_files": {
+  "pair.json": "7bbc6400120019670f95d433f961c2a2845b45824d1c4c90875baf7ccb973f76",
+  "same_way.json": "7ce05570c0317941c5ee1f02fea9d4a3c595553c505c54132c25803ded35b7f6",
+  "cheap.json": "433ed377a8912c9209899b6b6910083f91f0f61f2c43d36fbf809be0b0cae815",
+  "work.json": "bd2cf9107a88824e82d626427d12d59c7cb29373dc4a4e434937e166cbd355d4",
+  "weather.json": "41fe00dbafbd82df3a79fae9071d788f115e98363441981ccf0a5d392067bf54",
+  "sweep.json": "0d80b10e966ba57a6d08a880bd0c1af2c491561248169ed726540e8c19750e22",
+  "extra.json": "97bb142ca1c7600781006e43c1ffe18c666c28e173485ceeb95d7c2fbe4aef29",
+  "globe_side.png": "45d25680e9a2f5011d289f689a0b0d461c2f7cd9a836b051a4055c67330b1504",
+  "globe_south.png": "4e2d8b524ac3addcfa8bae1bbecb5f37a96a29fd66c9dd12ef620bfaa541b543"
+ },
+ "checks": [
+  {
+   "name": "a·b = 5·1 + 1·3 = 8",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "terms 5, 3, 0 sum to a·b",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "|a| = √26 = 5.099",
+   "value": [
+    5.09902
+   ],
+   "ref": [
+    5.09902
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "|b| = √10 = 3.162",
+   "value": [
+    3.162278
+   ],
+   "ref": [
+    3.162278
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "|a|² = 26, |b|² = 10 (Pythagoras)",
+   "value": [
+    26.0,
+    10.0
+   ],
+   "ref": [
+    26.0,
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "θ = 60.255°",
+   "value": [
+    60.255119
+   ],
+   "ref": [
+    60.255119
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "(1) |a||b|cos θ = a·b",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "cos θ = 0.496",
+   "value": [
+    0.496139
+   ],
+   "ref": [
+    0.496139
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "cos reminder: 0°, 90°, 180° → cos 1, 0, −1",
+   "value": [
+    1.0,
+    0.0,
+    -1.0
+   ],
+   "ref": [
+    1.0,
+    0.0,
+    -1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shadow a on b = 8/√10 = 2.530",
+   "value": [
+    2.529822
+   ],
+   "ref": [
+    2.529822
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shadow b on a = 8/√26 = 1.569",
+   "value": [
+    1.568929
+   ],
+   "ref": [
+    1.568929
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shadow = |a| cos θ (s06 row 2)",
+   "value": [
+    2.529822
+   ],
+   "ref": [
+    2.529822
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "projection a on b = (0.8, 2.4) (foot of the drop-line)",
+   "value": [
+    0.8,
+    2.4
+   ],
+   "ref": [
+    0.8,
+    2.4
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "projection b on a = (1.538, 0.308)",
+   "value": [
+    1.538462,
+    0.307692
+   ],
+   "ref": [
+    1.538462,
+    0.307692
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "(a − proj)·b = 0 (drop-line at right angles)",
+   "value": [
+    -0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "b̂ = (0.316, 0.949), |b̂| = 1",
+   "value": [
+    0.316228,
+    0.948683,
+    1.0
+   ],
+   "ref": [
+    0.316228,
+    0.948683,
+    1.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "a·b̂ = 1.581 + 0.949 = 2.530 = shadow",
+   "value": [
+    1.581139,
+    0.948683,
+    2.529822
+   ],
+   "ref": [
+    1.581139,
+    0.948683,
+    2.529822
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "symmetry a·b = b·a",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "name": "left rectangle area = shadow_ab × |b| = 8",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "right rectangle area = shadow_ba × |a| = 8",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "k×b = (−3, 1), length |b|",
+   "value": [
+    -3.0,
+    1.0,
+    3.162278
+   ],
+   "ref": [
+    -3.0,
+    1.0,
+    3.162278
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "s08 rectangle corners (0,0), (0.8,2.4), (−2.2,3.4), (−3,1)",
+   "value": [
+    0.0,
+    0.0,
+    0.8,
+    2.4
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.8,
+    2.4
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "right rectangle corner (2.538, −4.692)",
+   "value": [
+    2.538462,
+    -4.692308
+   ],
+   "ref": [
+    2.538462,
+    -4.692308
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "p·q = 6, 0, −6",
+   "value": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "ref": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "angles 0°, 90°, 180°",
+   "value": [
+    0.0,
+    90.0,
+    180.0
+   ],
+   "ref": [
+    0.0,
+    90.0,
+    180.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shadow of p on q = 3, 0, −3",
+   "value": [
+    3.0,
+    0.0,
+    -3.0
+   ],
+   "ref": [
+    3.0,
+    0.0,
+    -3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "b shrinks to b̂, |b̂| = 1",
+   "value": [
+    0.316228,
+    0.948683,
+    1.0
+   ],
+   "ref": [
+    0.316228,
+    0.948683,
+    1.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "a·b̂ = shadow = 2.530",
+   "value": [
+    2.529822
+   ],
+   "ref": [
+    2.529822
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shadow unchanged while b shrinks",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "a·(s b) = s · 8",
+   "value": [
+    8.0,
+    7.90883,
+    7.817661,
+    7.726491
+   ],
+   "ref": [
+    8.0,
+    7.90883,
+    7.817661,
+    7.726491
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "v·x̂ = 6 × 1 + 8 × 0 = 6, |v| = 10",
+   "value": [
+    6.0,
+    10.0
+   ],
+   "ref": [
+    6.0,
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "F = (10.000, 17.321) N",
+   "value": [
+    10.0,
+    17.320508
+   ],
+   "ref": [
+    10.0,
+    17.320508
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "shadow of F on d = 20 cos 60° = 10 N",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "W(5 m) = 50 J, W(10 m) = 100 J",
+   "value": [
+    50.0,
+    100.0
+   ],
+   "ref": [
+    50.0,
+    100.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "shadow unchanged when d doubles",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "∇T on the full 5-km grid: ∂T/∂x = 1e-5 K/m everywhere",
+   "value": [
+    1e-05,
+    1e-05,
+    1e-05,
+    1e-05
+   ],
+   "ref": [
+    1e-05
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "∇T on the full 5-km grid: ∂T/∂y = 0 everywhere",
+   "value": [
+    0.0,
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "∇T at the pin = (1.00e-5 K/m, 0)",
+   "value": [
+    1e-05,
+    0.0
+   ],
+   "ref": [
+    1e-05,
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "|∇T| = 1.00e-5 K/m",
+   "value": [
+    1e-05
+   ],
+   "ref": [
+    1e-05
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "U-M4.3 |∇T| = sqrt((1.00e-5)² + 0²) = 1.00e-5 K/m",
+   "value": [
+    1e-05,
+    1e-05
+   ],
+   "ref": [
+    1e-05,
+    1e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "U-M4.3 |∇T| steep = sqrt((2.00e-5)² + 0²) = 2.00e-5 K/m",
+   "value": [
+    2e-05,
+    2e-05
+   ],
+   "ref": [
+    2e-05,
+    2e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "v = (5.000, 8.660) m/s, |v| = 10, 60° from ∇T",
+   "value": [
+    5.0,
+    8.660254,
+    10.0,
+    60.0
+   ],
+   "ref": [
+    5.0,
+    8.660254,
+    10.0,
+    60.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "shadow of v on ∇T = 10 cos 60° = 5.00 m/s",
+   "value": [
+    5.0
+   ],
+   "ref": [
+    5.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "v·∇T = shadow × |∇T| = 5.00e-5 K/s",
+   "value": [
+    5e-05,
+    5e-05
+   ],
+   "ref": [
+    5e-05,
+    5e-05
+   ],
+   "tol": 1e-17,
+   "pass": true
+  },
+  {
+   "name": "v·∇T by components: 5.00 × 1e-5 + 8.66 × 0",
+   "value": [
+    5e-05
+   ],
+   "ref": [
+    5e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "v·∇T = 0.180 K/h",
+   "value": [
+    0.18
+   ],
+   "ref": [
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "steep: shadow still 5.00, v·∇T doubles",
+   "value": [
+    5.0,
+    2.0
+   ],
+   "ref": [
+    5.0,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "v − proj(v, ∇T) = (0, 8.660) m/s along the isotherm",
+   "value": [
+    0.0,
+    8.660254
+   ],
+   "ref": [
+    0.0,
+    8.660254
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "along-isotherm part ⟂ ∇T (dot = 0)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "isotherms 11..15 °C at x = 100..500 km",
+   "value": [
+    100.0,
+    200.0,
+    300.0,
+    400.0
+   ],
+   "ref": [
+    100.0,
+    200.0,
+    300.0,
+    400.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "tested gradient across the isotherms: 1 °C per 100 km",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "18.0 km per hour towards warmer air, 36.0 km along the wind",
+   "value": [
+    18.0,
+    36.0
+   ],
+   "ref": [
+    18.0,
+    36.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "18.0 km × 1 K per 100 km = 0.180 K",
+   "value": [
+    0.18
+   ],
+   "ref": [
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "map under the balloon 13.00 → 13.18 °C after 1 h",
+   "value": [
+    13.0,
+    13.18
+   ],
+   "ref": [
+    13.0,
+    13.18
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "balloon after 1 h at (318.0, 211.18) km; after 3 h (354.0, 273.53)",
+   "value": [
+    318.0,
+    211.176915,
+    354.0,
+    273.530744
+   ],
+   "ref": [
+    318.0,
+    211.176915,
+    354.0,
+    273.530744
+   ],
+   "tol": 1e-05,
+   "pass": true
+  },
+  {
+   "name": "material_derivative_terms G1: local = −v·∇T, advective = v·∇T, total DT/Dt = 0",
+   "value": [
+    -5e-05,
+    5e-05,
+    -0.0
+   ],
+   "ref": [
+    -5e-05,
+    5e-05,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "material_derivative_terms G2: local = −v·∇T, advective = v·∇T, total DT/Dt = 0",
+   "value": [
+    -0.0001,
+    0.0001,
+    -0.0
+   ],
+   "ref": [
+    -0.0001,
+    0.0001,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "T(pole) 13.00 → 12.82 after 1 h → 11.92 after 6 h",
+   "value": [
+    13.0,
+    12.82,
+    11.92
+   ],
+   "ref": [
+    13.0,
+    12.82,
+    11.92
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "upwind dots: dT = −0.18, −0.36, −0.54 K",
+   "value": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "ref": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "upwind dots' temperature now = T(pole) at 1, 2, 3 h (t_h indices 20, 40, 60)",
+   "value": [
+    12.82,
+    12.64,
+    12.46
+   ],
+   "ref": [
+    12.82,
+    12.64,
+    12.46
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "upwind positions = balloon path run backwards (pin − v t)",
+   "value": [
+    282.0,
+    264.0,
+    246.0,
+    148.823085
+   ],
+   "ref": [
+    282.0,
+    264.0,
+    246.0,
+    148.823085
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "upwind dots inside the map",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "t_h samples at 1, 2, 3 h",
+   "value": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "ref": [
+    1.0,
+    2.0,
+    3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "balloon 6-h path matches the 3-h path at 1 h",
+   "value": [
+    318.0,
+    211.176915
+   ],
+   "ref": [
+    318.0,
+    211.176915
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "steep map: T(pole) 13.00 → 12.64 after 1 h → 10.84 after 6 h",
+   "value": [
+    13.0,
+    12.64,
+    10.84
+   ],
+   "ref": [
+    13.0,
+    12.64,
+    10.84
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "steep map: 7 °C at x = 0, 19 °C at x = 600 km",
+   "value": [
+    7.0,
+    19.0
+   ],
+   "ref": [
+    7.0,
+    19.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "−4.32 K per day, −8.64 K per day (steep)",
+   "value": [
+    -4.32,
+    -8.64
+   ],
+   "ref": [
+    -4.32,
+    -8.64
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "tagged parcels stay inside the map for 1 h",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N1 display product 5.099 × 3.162 × 0.496 within 0.005 of 8",
+   "value": [
+    0.002973
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "name": "N1 display product is NOT 8.000 to 3 dp (so the screen says ≈ 8)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N1 display factors (5.099, 3.162, 0.496)",
+   "value": [
+    5.099,
+    3.162,
+    0.496
+   ],
+   "ref": [
+    5.099,
+    3.162,
+    0.496
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N2 display b̂ = (0.316, 0.949); terms 1.580, 0.949; sum 2.529",
+   "value": [
+    0.316,
+    0.949,
+    1.58,
+    0.949
+   ],
+   "ref": [
+    0.316,
+    0.949,
+    1.58,
+    0.949
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N2 |display sum − a·b̂| < 0.005",
+   "value": [
+    0.000822
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "name": "N3 v_along·∇T = 0",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "N3 v_along[1] = 10 sin 60° = 8.660254",
+   "value": [
+    8.660254
+   ],
+   "ref": [
+    8.660254
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "N4 chain G1 = [5.00, 1.00e-5, 5.00e-5, 0.18]",
+   "value": [
+    5.0,
+    1e-05,
+    5e-05,
+    0.18
+   ],
+   "ref": [
+    5.0,
+    1e-05,
+    5e-05,
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N4 chain G2 = [5.00, 2.00e-5, 1.00e-4, 0.36]",
+   "value": [
+    5.0,
+    2e-05,
+    0.0001,
+    0.36
+   ],
+   "ref": [
+    5.0,
+    2e-05,
+    0.0001,
+    0.36
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N4 1 °C/100 km = 1 K/1e5 m = 1e-5 K/m; 1 °C/50 km = 2e-5 K/m",
+   "value": [
+    1e-05,
+    2e-05
+   ],
+   "ref": [
+    1e-05,
+    2e-05
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "name": "N5 isotherm shift after 1 h = 18.0 km (t index 60)",
+   "value": [
+    18.0
+   ],
+   "ref": [
+    18.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N5 shift after 3 h = 54.0 km",
+   "value": [
+    54.0
+   ],
+   "ref": [
+    54.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "profile: 13.00 °C at the pin (300 km), both maps",
+   "value": [
+    13.0,
+    13.0
+   ],
+   "ref": [
+    13.0,
+    13.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N6 T_pole_field = 13 − 0.18 t",
+   "value": [
+    13.0,
+    12.997,
+    12.994,
+    12.991
+   ],
+   "ref": [
+    13.0,
+    12.997,
+    12.994,
+    12.991
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N6 T_pole_field at 0, 1, 2, 3 h = 13.00, 12.82, 12.64, 12.46",
+   "value": [
+    13.0,
+    12.82,
+    12.64,
+    12.46
+   ],
+   "ref": [
+    13.0,
+    12.82,
+    12.64,
+    12.46
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N6 material_derivative_terms local at the pin = −5.00e-5 K/s",
+   "value": [
+    -5e-05
+   ],
+   "ref": [
+    -5e-05
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "N7 T_balloon_field = 13.00 all along",
+   "value": [
+    13.0,
+    13.0,
+    13.0,
+    13.0
+   ],
+   "ref": [
+    13.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N7 material_derivative_terms total at the balloon after 1, 2, 3 h = 0",
+   "value": [
+    -0.0,
+    -0.0,
+    -0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N7 balloon inside the map up to 3 h",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N8 moved = +0.18, +0.36, +0.54 K",
+   "value": [
+    0.18,
+    0.36,
+    0.54
+   ],
+   "ref": [
+    0.18,
+    0.36,
+    0.54
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N8 local = −0.18, −0.36, −0.54 K",
+   "value": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "ref": [
+    -0.18,
+    -0.36,
+    -0.54
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 sums = 0",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 T_under_balloon[1] = 13.18 °C (t = 0 map)",
+   "value": [
+    13.18
+   ],
+   "ref": [
+    13.18
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N8 the 13.18 °C line of the t = 0 map lies under the 1-h balloon (x = 318 km)",
+   "value": [
+    318.0
+   ],
+   "ref": [
+    318.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N9 upwind far point (228.0, 55.29) km inside the map",
+   "value": [
+    228.0,
+    55.292342,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    228.0,
+    55.292342,
+    1.0,
+    1.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "upwind dot tracks reach the pole at 1, 2, 3 h",
+   "value": [
+    300.0,
+    300.0,
+    300.0
+   ],
+   "ref": [
+    300.0,
+    300.0,
+    300.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N10 across 18.0 km, along 36.0 km",
+   "value": [
+    18.0,
+    36.0
+   ],
+   "ref": [
+    18.0,
+    36.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N11 steep isotherms at 50..550 km, spacing 50 km",
+   "value": [
+    50.0,
+    550.0,
+    0.0,
+    50.0
+   ],
+   "ref": [
+    50.0,
+    550.0,
+    0.0,
+    50.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N11 steep pole 13.00 → 12.64 after 1 h (field)",
+   "value": [
+    13.0,
+    12.64
+   ],
+   "ref": [
+    13.0,
+    12.64
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N12 10.000 × 5 + 17.321 × 0 = 50 J = W(5 m)",
+   "value": [
+    50.0,
+    0.0,
+    50.0
+   ],
+   "ref": [
+    50.0,
+    0.0,
+    50.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "0.18 °C per 18 km: 18 km × 1 °C/100 km = v·∇T × 1 h",
+   "value": [
+    0.18
+   ],
+   "ref": [
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "V1 p·q = 6 cos θ on 181 samples",
+   "value": [
+    6.0,
+    5.996345,
+    5.985384,
+    5.967131
+   ],
+   "ref": [
+    6.0,
+    5.996345,
+    5.985384,
+    5.967131
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "V1 p·q at 0°, 90°, 180° = same_way.json (6, 0, −6)",
+   "value": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "ref": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "V1 shadow of q on p = 2 cos θ",
+   "value": [
+    2.0,
+    1.998782,
+    1.995128,
+    1.989044
+   ],
+   "ref": [
+    2.0,
+    1.998782,
+    1.995128,
+    1.989044
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "V1 sign series runs + → 0 → − (first sign change at 90°)",
+   "value": [
+    1.0,
+    0.0,
+    -1.0
+   ],
+   "ref": [
+    1.0,
+    0.0,
+    -1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "V2 across 18.0 km, along 36.0 km",
+   "value": [
+    18.0,
+    36.0
+   ],
+   "ref": [
+    18.0,
+    36.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V2 span = [300.0, 318.0] km; span end = balloon_x_km[60]",
+   "value": [
+    300.0,
+    318.0,
+    0.0
+   ],
+   "ref": [
+    300.0,
+    318.0,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V2 strip = [13.00, 13.18] °C = T_under_balloon",
+   "value": [
+    13.0,
+    13.18
+   ],
+   "ref": [
+    13.0,
+    13.18
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V2 18 km × 1 °C/100 km = 0.18 = K_per_h",
+   "value": [
+    0.18
+   ],
+   "ref": [
+    0.18
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "V3 frozen material_derivative_terms: local 0, advective +5e-5, total +5e-5 K/s (pin and 1, 2, 3 h)",
+   "value": [
+    0.0,
+    5e-05,
+    5e-05,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    5e-05,
+    5e-05,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "V3 13 + ∇T·(v t) = frozen_balloon_T_C at samples 60, 120, 180 = 13.18, 13.36, 13.54",
+   "value": [
+    13.18,
+    13.36,
+    13.54,
+    13.18
+   ],
+   "ref": [
+    13.18,
+    13.36,
+    13.54,
+    13.18
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V3 frozen pole = 13.00 at every sample",
+   "value": [
+    13.0,
+    13.0,
+    13.0,
+    13.0
+   ],
+   "ref": [
+    13.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "V3 mirror of Case 2: frozen_balloon − 13 = −(T_pole_field − 13)",
+   "value": [
+    0.0,
+    0.003,
+    0.006,
+    0.009
+   ],
+   "ref": [
+    -0.0,
+    0.003,
+    0.006,
+    0.009
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V3 frozen marks at 318, 336, 354 km",
+   "value": [
+    318.0,
+    336.0,
+    354.0
+   ],
+   "ref": [
+    318.0,
+    336.0,
+    354.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V4 queued parcels 18, 36, 54 km across the isotherms",
+   "value": [
+    18.0,
+    36.0,
+    54.0
+   ],
+   "ref": [
+    18.0,
+    36.0,
+    54.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V4 upwind_T_C[n] = T_pole_field_C at 60 (n+1)",
+   "value": [
+    12.82,
+    12.64,
+    12.46
+   ],
+   "ref": [
+    12.82,
+    12.64,
+    12.46
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V4 every graph value inside 12.4-13.6 °C",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "V5 pin, 1-h ghost, 3-h balloon, 13 and 14 °C isotherms, frozen marks inside the zoom window",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "V5 window 220 km x 4 px/km = 880 px wide, 132 km = 528 px high",
+   "value": [
+    880.0,
+    528.0
+   ],
+   "ref": [
+    880.0,
+    528.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V7 three rates: advection +0.18 | +0.18, local 0 | −0.18, material +0.18 | 0 K/h",
+   "value": [
+    0.18,
+    0.18,
+    0.0,
+    -0.18
+   ],
+   "ref": [
+    0.18,
+    0.18,
+    0.0,
+    -0.18
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "V7 row 3 = row 1 + row 2 in each column",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "s08 rectangle on b, right side: corners (0.8, 2.4), (3.8, 1.4), (3, −1); area 8",
+   "value": [
+    0.8,
+    2.4,
+    3.8,
+    1.4
+   ],
+   "ref": [
+    0.8,
+    2.4,
+    3.8,
+    1.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "s09 rectangle on a, upper side: corner (0.538, 5.308); area 8",
+   "value": [
+    0.538462,
+    5.307692,
+    8.0
+   ],
+   "ref": [
+    0.538462,
+    5.307692,
+    8.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "D1b unit arrow piece = cos θ on 0..180° (181 samples)",
+   "value": [
+    1.0,
+    0.999848,
+    0.999391,
+    0.99863
+   ],
+   "ref": [
+    1.0,
+    0.999848,
+    0.999391,
+    0.99863
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "D1b stops 0°, 60.3°, 90°, 180° → 1, 0.496, 0, −1",
+   "value": [
+    1.0,
+    0.496139,
+    0.0,
+    -1.0
+   ],
+   "ref": [
+    1.0,
+    0.496139,
+    0.0,
+    -1.0
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "D1b piece at θ = 60.3° shown as 0.496",
+   "value": [
+    0.496
+   ],
+   "ref": [
+    0.496
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "D1 x̂·x̂, x̂·ŷ, ŷ·x̂, ŷ·ŷ = 1, 0, 0, 1",
+   "value": [
+    1.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "D1 four terms 5·1(x̂·x̂), 5·3(x̂·ŷ), 1·1(ŷ·x̂), 1·3(ŷ·ŷ) = 5, 0, 0, 3",
+   "value": [
+    5.0,
+    0.0,
+    0.0,
+    3.0
+   ],
+   "ref": [
+    5.0,
+    0.0,
+    0.0,
+    3.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "D1 sum of terms = a·b = 8 = |a||b| cos θ",
+   "value": [
+    8.0,
+    8.0,
+    8.0
+   ],
+   "ref": [
+    8.0,
+    8.0,
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "D1 x̂·x̂ = 1·1·cos 0",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "D1 pieces of a: 5x̂ + 1ŷ = a; parts of b: 1x̂ + 3ŷ = b",
+   "value": [
+    5.0,
+    1.0,
+    1.0,
+    3.0
+   ],
+   "ref": [
+    5.0,
+    1.0,
+    1.0,
+    3.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "D1c reading = 5 cos α + sin α on 0..90°",
+   "value": [
+    5.0,
+    5.008536,
+    5.016691,
+    5.024464
+   ],
+   "ref": [
+    5.0,
+    5.008536,
+    5.016691,
+    5.024464
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "D1c 2.53 at b's angle (71.57°), 5.00 at 0°, 1.00 at 90°",
+   "value": [
+    2.529822,
+    5.0,
+    1.0
+   ],
+   "ref": [
+    2.529822,
+    5.0,
+    1.0
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "D1c b's angle = 71.565°",
+   "value": [
+    71.565051
+   ],
+   "ref": [
+    71.565051
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "D1d rectangles 2.530 × 3.162 and 1.569 × 5.099",
+   "value": [
+    2.529822,
+    3.162278,
+    1.568929,
+    5.09902
+   ],
+   "ref": [
+    2.529822,
+    3.162278,
+    1.568929,
+    5.09902
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "D1d both areas = 8.000",
+   "value": [
+    8.0,
+    8.0
+   ],
+   "ref": [
+    8.0,
+    8.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "D1d shown sides 2.53 × 3.16 and 1.57 × 5.1 (rounded, areas ≈ 8)",
+   "value": [
+    2.53,
+    3.16,
+    1.57,
+    5.1
+   ],
+   "ref": [
+    2.53,
+    3.16,
+    1.57,
+    5.1
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "C1 along part = 20 cos 60° = 10 N",
+   "value": [
+    10.0
+   ],
+   "ref": [
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "C1 across part (0, 17.3) N is at right angles to the track",
+   "value": [
+    0.0,
+    17.320508
+   ],
+   "ref": [
+    0.0,
+    17.320508
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "C1 W over 5 m = 50 J (0 at the start)",
+   "value": [
+    0.0,
+    50.0
+   ],
+   "ref": [
+    0.0,
+    50.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "C1 the across part does no work over 5 m",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "D2 F·d = 0 for all 120 steps (≤ 1e-12)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "D2 total work over one turn = 0",
+   "value": [
+    -0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "D2 energy of motion constant (½|v|²)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "name": "R1 v = (5.000, 8.660) m/s, 30° off the runway",
+   "value": [
+    5.0,
+    8.660254,
+    30.0
+   ],
+   "ref": [
+    5.0,
+    8.660254,
+    30.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "R1 v·ê = 10 cos 30° = 8.660 m/s (shown ≈ 8.7)",
+   "value": [
+    8.660254,
+    8.7
+   ],
+   "ref": [
+    8.660254,
+    8.7
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "name": "R1 cos 30° = 0.866",
+   "value": [
+    0.866
+   ],
+   "ref": [
+    0.866
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "F1 window ŝ·n̂ = 1, 0.5, 0 at tilt 0°, 60°, 90°",
+   "value": [
+    1.0,
+    0.5,
+    0.0
+   ],
+   "ref": [
+    1.0,
+    0.5,
+    0.0
+   ],
+   "tol": 1e-11,
+   "pass": true
+  },
+  {
+   "name": "F1 ground ŝ·n̂ = 1.000 at the equator, 0.500 at 60°N (insolation_factor)",
+   "value": [
+    1.0,
+    0.5
+   ],
+   "ref": [
+    1.0,
+    0.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "F1 same by vectors.dot(sun_vector, up)",
+   "value": [
+    1.0,
+    0.5
+   ],
+   "ref": [
+    1.0,
+    0.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "F1 spread factor 1/(ŝ·n̂) = 2 at 60°N",
+   "value": [
+    2.0
+   ],
+   "ref": [
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "F1 declination set to 0: on the equinox day |δ| ≤ 0.4° changes cos 60° by ≤ 1 %",
+   "value": [
+    0.012116
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.0125,
+   "pass": true
+  },
+  {
+   "name": "F1 60°N and the equator on the noon meridian sit on the left limb (Z = 0)",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "F1 limb points at 180° and 120° (60° above the leftward horizontal)",
+   "value": [
+    180.0,
+    120.0
+   ],
+   "ref": [
+    180.0,
+    120.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "W1 τ·u = +0.0100 and −0.0100 W/m²",
+   "value": [
+    0.01,
+    -0.01
+   ],
+   "ref": [
+    0.01,
+    -0.01
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "W1 units: N m⁻² × m s⁻¹ = N m s⁻¹ m⁻² = W m⁻² (exponents of kg, m, s: 1, 0, −3)",
+   "value": [
+    1.0,
+    0.0,
+    -3.0
+   ],
+   "ref": [
+    1.0,
+    0.0,
+    -3.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "W3 NCEP R1 annual-mean 10-m wind, 45–60°S: westerly (zonal mean u10 > 5 m/s)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "W3 seen from above the South Pole, eastward is clockwise (cross product z < 0)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "S1 products 6, 2, 2, 6; A·B = 16",
+   "value": [
+    6.0,
+    2.0,
+    2.0,
+    6.0
+   ],
+   "ref": [
+    6.0,
+    2.0,
+    2.0,
+    6.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "S1 A·B = 16, |A|² = |B|² = 18",
+   "value": [
+    16.0,
+    18.0,
+    18.0
+   ],
+   "ref": [
+    16.0,
+    18.0,
+    18.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "S1 cos θ = 16/18 = 0.889 (pattern_correlation)",
+   "value": [
+    0.888889,
+    0.888889
+   ],
+   "ref": [
+    0.888889,
+    0.888889
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "S1 shown ≈ 0.89; |A| = √18 = 4.243",
+   "value": [
+    0.89,
+    4.242641
+   ],
+   "ref": [
+    0.89,
+    4.242641
+   ],
+   "tol": 1e-06,
+   "pass": true
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s01,s03,s08,s09",
+   "data": "data/pair.json",
+   "eq": "Kundu (2.2) definition (provenance)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "2d311251337c35e4d3628720f349d4133233ed476372432e57314e0ab316bc35"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s02,s04",
+   "data": "data/pair.json",
+   "eq": "|a| (Pythagoras)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "1abe241f733f5089e0eaf3c99bca02628eab2c78aa1cf1b3e434adfc94ec8d25"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s02,s04",
+   "data": "data/pair.json",
+   "eq": "|b| (Pythagoras)",
+   "params": {
+    "a": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "239999bd8719d7c3c4f67440bb8bbb33f7c1cd337d29a7cc76347f414f4082c1"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s04",
+   "data": "data/pair.json",
+   "eq": "cosine form (1), Kundu §2.8 unnumbered (provenance)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ],
+    "degrees": true
+   },
+   "sha256": "b0acfb37dabf856d943c8fab137c6b1e50da17f5301bfff4ffbc3f5a03db22a8"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s06-s09",
+   "data": "data/pair.json",
+   "eq": "shadow = a·b/|b| (ours)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "45656ba31bb96a41ab43b818cdea4b5d9557fd9a8d08f8229c07653b57c0c4c7"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s09",
+   "data": "data/pair.json",
+   "eq": "shadow of b on a (ours)",
+   "params": {
+    "a": [
+     1.0,
+     3.0
+    ],
+    "b": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "1c5c693937dca9f610443cfebaff9c730e0965011e62c4b4e7c32a3ec2770de2"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s06-s09",
+   "data": "data/pair.json",
+   "eq": "shadow times b-hat: foot of the drop-line",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "5c858211439f3c8ee412bbbcebba9f4c50db499b210bc1a73c434d2bd44fbbeb"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s09",
+   "data": "data/pair.json",
+   "eq": "shadow of b on a times a-hat",
+   "params": {
+    "a": [
+     1.0,
+     3.0
+    ],
+    "b": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "63c6dff3dc4227af4c62c015c79a6247b0002ffd8cb0ed616b8f345bb180cd0e"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.k_cross",
+   "scene": "s08,s09",
+   "data": "data/pair.json",
+   "eq": "rectangle side perpendicular to b",
+   "params": {
+    "u": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "137bce701ce434bc1cc6bd459ca8215de05787a4d2473ef3f896414386f7ce92"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.k_cross",
+   "scene": "s09",
+   "data": "data/pair.json",
+   "eq": "rectangle side perpendicular to a",
+   "params": {
+    "u": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "2662f6f93052e1688d5a1b141436b03d1e80c99c4e6b8c08ccc9fecdb6ae7188"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s07",
+   "data": "data/pair.json",
+   "eq": "a·b-hat (ours)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     0.31622776601683794,
+     0.9486832980505138
+    ]
+   },
+   "sha256": "45656ba31bb96a41ab43b818cdea4b5d9557fd9a8d08f8229c07653b57c0c4c7"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s07",
+   "data": "data/pair.json",
+   "eq": "|b-hat| = 1",
+   "params": {
+    "a": [
+     0.31622776601683794,
+     0.9486832980505138
+    ]
+   },
+   "sha256": "115829fef8d1a44b5e194bc1a769d6261a3f4ae52117a9f9be4ed39065df1a2f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s04",
+   "data": "data/pair.json",
+   "eq": "cos reminder 0°",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     2.0,
+     0.0
+    ],
+    "degrees": true
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s04",
+   "data": "data/pair.json",
+   "eq": "cos reminder 90°",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     2.0
+    ],
+    "degrees": true
+   },
+   "sha256": "e365dd675c967195edf26f225ed0bac4034a40f6a5e644f599d2252bf78beac2"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s04",
+   "data": "data/pair.json",
+   "eq": "cos reminder 180°",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     -2.0,
+     0.0
+    ],
+    "degrees": true
+   },
+   "sha256": "fab4c4415b50601e97f6b89f2f92021b61bf2dd3bdb9d1f5ffb6e8de92046e01"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s05",
+   "data": "data/same_way.json",
+   "eq": "definition 1, p·q",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0
+     ],
+     [
+      0.0,
+      2.0
+     ],
+     [
+      -2.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "76fce237958d71ca4445eceed245fb224a23340aefd99afcd62df6c6be1622ce"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s05",
+   "data": "data/same_way.json",
+   "eq": "angle p, q",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0
+     ],
+     [
+      0.0,
+      2.0
+     ],
+     [
+      -2.0,
+      0.0
+     ]
+    ],
+    "degrees": true
+   },
+   "sha256": "567e65debcab47e1fba7181b89a079da6dff6ba4e76be18c1b3a735362756765"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s05",
+   "data": "data/same_way.json",
+   "eq": "shadow of p on q (signed)",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0
+     ],
+     [
+      0.0,
+      2.0
+     ],
+     [
+      -2.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "8471680949c8386308ae7e69c789cc7853542bf1e0315031217c3b45e895c52f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s07",
+   "data": "data/cheap.json",
+   "eq": "definition 1, a·(s b)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     [
+      1.0,
+      3.0
+     ],
+     [
+      0.9886037961002806,
+      2.9658113883008417
+     ],
+     [
+      0.9772075922005613,
+      2.931622776601684
+     ],
+     [
+      0.9658113883008419,
+      2.897434164902526
+     ],
+     [
+      0.9544151844011225,
+      2.8632455532033676
+     ],
+     [
+      0.9430189805014032,
+      2.8290569415042097
+     ],
+     [
+      0.9316227766016838,
+      2.7948683298050514
+     ],
+     [
+      0.9202265727019644,
+      2.760679718105893
+     ],
+     [
+      0.9088303688022451,
+      2.726491106406735
+     ],
+     [
+      0.8974341649025257,
+      2.692302494707577
+     ],
+     [
+      0.8860379610028063,
+      2.658113883008419
+     ],
+     [
+      0.8746417571030869,
+      2.6239252713092607
+     ],
+     [
+      0.8632455532033676,
+      2.589736659610103
+     ],
+     [
+      0.8518493493036482,
+      2.5555480479109445
+     ],
+     [
+      0.8404531454039288,
+      2.521359436211786
+     ],
+     [
+      0.8290569415042095,
+      2.4871708245126287
+     ],
+     [
+      0.8176607376044901,
+      2.4529822128134704
+     ],
+     [
+      0.8062645337047707,
+      2.418793601114312
+     ],
+     [
+      0.7948683298050514,
+      2.384604989415154
+     ],
+     [
+      0.783472125905332,
+      2.350416377715996
+     ],
+     [
+      0.7720759220056126,
+      2.316227766016838
+     ],
+     [
+      0.7606797181058933,
+      2.2820391543176797
+     ],
+     [
+      0.7492835142061739,
+      2.247850542618522
+     ],
+     [
+      0.7378873103064545,
+      2.2136619309193635
+     ],
+     [
+      0.7264911064067352,
+      2.1794733192202056
+     ],
+     [
+      0.7150949025070158,
+      2.1452847075210473
+     ],
+     [
+      0.7036986986072964,
+      2.111096095821889
+     ],
+     [
+      0.6923024947075771,
+      2.0769074841227315
+     ],
+     [
+      0.6809062908078577,
+      2.042718872423573
+     ],
+     [
+      0.6695100869081383,
+      2.008530260724415
+     ],
+     [
+      0.658113883008419,
+      1.974341649025257
+     ],
+     [
+      0.6467176791086996,
+      1.9401530373260987
+     ],
+     [
+      0.6353214752089802,
+      1.9059644256269406
+     ],
+     [
+      0.6239252713092609,
+      1.8717758139277827
+     ],
+     [
+      0.6125290674095415,
+      1.8375872022286246
+     ],
+     [
+      0.6011328635098221,
+      1.8033985905294663
+     ],
+     [
+      0.5897366596101028,
+      1.7692099788303084
+     ],
+     [
+      0.5783404557103834,
+      1.73502136713115
+     ],
+     [
+      0.566944251810664,
+      1.700832755431992
+     ],
+     [
+      0.5555480479109447,
+      1.666644143732834
+     ],
+     [
+      0.5441518440112253,
+      1.632455532033676
+     ],
+     [
+      0.5327556401115059,
+      1.5982669203345177
+     ],
+     [
+      0.5213594362117866,
+      1.5640783086353598
+     ],
+     [
+      0.5099632323120672,
+      1.5298896969362015
+     ],
+     [
+      0.4985670284123478,
+      1.4957010852370434
+     ],
+     [
+      0.4871708245126285,
+      1.4615124735378855
+     ],
+     [
+      0.4757746206129091,
+      1.4273238618387274
+     ],
+     [
+      0.4643784167131897,
+      1.393135250139569
+     ],
+     [
+      0.4529822128134704,
+      1.3589466384404112
+     ],
+     [
+      0.441586008913751,
+      1.3247580267412529
+     ],
+     [
+      0.4301898050140316,
+      1.2905694150420948
+     ],
+     [
+      0.4187936011143123,
+      1.256380803342937
+     ],
+     [
+      0.4073973972145929,
+      1.2221921916437788
+     ],
+     [
+      0.3960011933148735,
+      1.1880035799446205
+     ],
+     [
+      0.3846049894151542,
+      1.1538149682454626
+     ],
+     [
+      0.3732087855154348,
+      1.1196263565463043
+     ],
+     [
+      0.3618125816157154,
+      1.0854377448471462
+     ],
+     [
+      0.3504163777159961,
+      1.0512491331479883
+     ],
+     [
+      0.3390201738162767,
+      1.0170605214488302
+     ],
+     [
+      0.3276239699165573,
+      0.9828719097496719
+     ],
+     [
+      0.31622776601683794,
+      0.9486832980505138
+     ]
+    ]
+   },
+   "sha256": "bf9d8505f5094de00a62004269d2b0295f752756ce455b83333ee777e456b597"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s07",
+   "data": "data/cheap.json",
+   "eq": "shadow independent of |b|",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     [
+      1.0,
+      3.0
+     ],
+     [
+      0.9886037961002806,
+      2.9658113883008417
+     ],
+     [
+      0.9772075922005613,
+      2.931622776601684
+     ],
+     [
+      0.9658113883008419,
+      2.897434164902526
+     ],
+     [
+      0.9544151844011225,
+      2.8632455532033676
+     ],
+     [
+      0.9430189805014032,
+      2.8290569415042097
+     ],
+     [
+      0.9316227766016838,
+      2.7948683298050514
+     ],
+     [
+      0.9202265727019644,
+      2.760679718105893
+     ],
+     [
+      0.9088303688022451,
+      2.726491106406735
+     ],
+     [
+      0.8974341649025257,
+      2.692302494707577
+     ],
+     [
+      0.8860379610028063,
+      2.658113883008419
+     ],
+     [
+      0.8746417571030869,
+      2.6239252713092607
+     ],
+     [
+      0.8632455532033676,
+      2.589736659610103
+     ],
+     [
+      0.8518493493036482,
+      2.5555480479109445
+     ],
+     [
+      0.8404531454039288,
+      2.521359436211786
+     ],
+     [
+      0.8290569415042095,
+      2.4871708245126287
+     ],
+     [
+      0.8176607376044901,
+      2.4529822128134704
+     ],
+     [
+      0.8062645337047707,
+      2.418793601114312
+     ],
+     [
+      0.7948683298050514,
+      2.384604989415154
+     ],
+     [
+      0.783472125905332,
+      2.350416377715996
+     ],
+     [
+      0.7720759220056126,
+      2.316227766016838
+     ],
+     [
+      0.7606797181058933,
+      2.2820391543176797
+     ],
+     [
+      0.7492835142061739,
+      2.247850542618522
+     ],
+     [
+      0.7378873103064545,
+      2.2136619309193635
+     ],
+     [
+      0.7264911064067352,
+      2.1794733192202056
+     ],
+     [
+      0.7150949025070158,
+      2.1452847075210473
+     ],
+     [
+      0.7036986986072964,
+      2.111096095821889
+     ],
+     [
+      0.6923024947075771,
+      2.0769074841227315
+     ],
+     [
+      0.6809062908078577,
+      2.042718872423573
+     ],
+     [
+      0.6695100869081383,
+      2.008530260724415
+     ],
+     [
+      0.658113883008419,
+      1.974341649025257
+     ],
+     [
+      0.6467176791086996,
+      1.9401530373260987
+     ],
+     [
+      0.6353214752089802,
+      1.9059644256269406
+     ],
+     [
+      0.6239252713092609,
+      1.8717758139277827
+     ],
+     [
+      0.6125290674095415,
+      1.8375872022286246
+     ],
+     [
+      0.6011328635098221,
+      1.8033985905294663
+     ],
+     [
+      0.5897366596101028,
+      1.7692099788303084
+     ],
+     [
+      0.5783404557103834,
+      1.73502136713115
+     ],
+     [
+      0.566944251810664,
+      1.700832755431992
+     ],
+     [
+      0.5555480479109447,
+      1.666644143732834
+     ],
+     [
+      0.5441518440112253,
+      1.632455532033676
+     ],
+     [
+      0.5327556401115059,
+      1.5982669203345177
+     ],
+     [
+      0.5213594362117866,
+      1.5640783086353598
+     ],
+     [
+      0.5099632323120672,
+      1.5298896969362015
+     ],
+     [
+      0.4985670284123478,
+      1.4957010852370434
+     ],
+     [
+      0.4871708245126285,
+      1.4615124735378855
+     ],
+     [
+      0.4757746206129091,
+      1.4273238618387274
+     ],
+     [
+      0.4643784167131897,
+      1.393135250139569
+     ],
+     [
+      0.4529822128134704,
+      1.3589466384404112
+     ],
+     [
+      0.441586008913751,
+      1.3247580267412529
+     ],
+     [
+      0.4301898050140316,
+      1.2905694150420948
+     ],
+     [
+      0.4187936011143123,
+      1.256380803342937
+     ],
+     [
+      0.4073973972145929,
+      1.2221921916437788
+     ],
+     [
+      0.3960011933148735,
+      1.1880035799446205
+     ],
+     [
+      0.3846049894151542,
+      1.1538149682454626
+     ],
+     [
+      0.3732087855154348,
+      1.1196263565463043
+     ],
+     [
+      0.3618125816157154,
+      1.0854377448471462
+     ],
+     [
+      0.3504163777159961,
+      1.0512491331479883
+     ],
+     [
+      0.3390201738162767,
+      1.0170605214488302
+     ],
+     [
+      0.3276239699165573,
+      0.9828719097496719
+     ],
+     [
+      0.31622776601683794,
+      0.9486832980505138
+     ]
+    ]
+   },
+   "sha256": "b4ceb1e36a4a6bfc9e9bb5ddbf73969ef4889b5926e3d1fd632948e25ff682e4"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s10",
+   "data": "data/cheap.json",
+   "eq": "v·x̂ (eastward part)",
+   "params": {
+    "a": [
+     6.0,
+     8.0
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "3e6357a56fbae74413051d518261f4b70e5b3758172a70e7f101e996e00a9ee0"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s10",
+   "data": "data/cheap.json",
+   "eq": "|v|",
+   "params": {
+    "a": [
+     6.0,
+     8.0
+    ]
+   },
+   "sha256": "24b1f4ef66b650ff816e519b01742ff1753733d36e1b4c3e3b52743168915b1f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s11",
+   "data": "data/work.json",
+   "eq": "W = F·d",
+   "params": {
+    "a": [
+     10.000000000000002,
+     17.32050807568877
+    ],
+    "b": [
+     [
+      5.0,
+      0.0
+     ],
+     [
+      5.1,
+      0.0
+     ],
+     [
+      5.2,
+      0.0
+     ],
+     [
+      5.3,
+      0.0
+     ],
+     [
+      5.4,
+      0.0
+     ],
+     [
+      5.5,
+      0.0
+     ],
+     [
+      5.6,
+      0.0
+     ],
+     [
+      5.7,
+      0.0
+     ],
+     [
+      5.8,
+      0.0
+     ],
+     [
+      5.9,
+      0.0
+     ],
+     [
+      6.0,
+      0.0
+     ],
+     [
+      6.1,
+      0.0
+     ],
+     [
+      6.2,
+      0.0
+     ],
+     [
+      6.3,
+      0.0
+     ],
+     [
+      6.4,
+      0.0
+     ],
+     [
+      6.5,
+      0.0
+     ],
+     [
+      6.6,
+      0.0
+     ],
+     [
+      6.7,
+      0.0
+     ],
+     [
+      6.8,
+      0.0
+     ],
+     [
+      6.9,
+      0.0
+     ],
+     [
+      7.0,
+      0.0
+     ],
+     [
+      7.1,
+      0.0
+     ],
+     [
+      7.2,
+      0.0
+     ],
+     [
+      7.300000000000001,
+      0.0
+     ],
+     [
+      7.4,
+      0.0
+     ],
+     [
+      7.5,
+      0.0
+     ],
+     [
+      7.6,
+      0.0
+     ],
+     [
+      7.7,
+      0.0
+     ],
+     [
+      7.800000000000001,
+      0.0
+     ],
+     [
+      7.9,
+      0.0
+     ],
+     [
+      8.0,
+      0.0
+     ],
+     [
+      8.1,
+      0.0
+     ],
+     [
+      8.2,
+      0.0
+     ],
+     [
+      8.3,
+      0.0
+     ],
+     [
+      8.4,
+      0.0
+     ],
+     [
+      8.5,
+      0.0
+     ],
+     [
+      8.6,
+      0.0
+     ],
+     [
+      8.7,
+      0.0
+     ],
+     [
+      8.8,
+      0.0
+     ],
+     [
+      8.9,
+      0.0
+     ],
+     [
+      9.0,
+      0.0
+     ],
+     [
+      9.100000000000001,
+      0.0
+     ],
+     [
+      9.2,
+      0.0
+     ],
+     [
+      9.3,
+      0.0
+     ],
+     [
+      9.4,
+      0.0
+     ],
+     [
+      9.5,
+      0.0
+     ],
+     [
+      9.600000000000001,
+      0.0
+     ],
+     [
+      9.7,
+      0.0
+     ],
+     [
+      9.8,
+      0.0
+     ],
+     [
+      9.9,
+      0.0
+     ],
+     [
+      10.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "ce7c8bd3a38cc5dc78e3435776e2843f1c46822c9b8a7b9323388bc86316988f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s11",
+   "data": "data/work.json",
+   "eq": "shadow of F on d",
+   "params": {
+    "a": [
+     10.000000000000002,
+     17.32050807568877
+    ],
+    "b": [
+     5.0,
+     0.0
+    ]
+   },
+   "sha256": "d8914b0509542258563faf133d949ff9c3bf62058e651d25aff819572da297ce"
+  },
+  {
+   "fn": "fluidpy.core.operators.gradient",
+   "scene": "s14,s15",
+   "data": "data/weather.json",
+   "eq": "∇T = (∂T/∂x, ∂T/∂y), Kundu §2.9 (2-D, provenance)",
+   "params": {
+    "phi": [
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ],
+     [
+      12.4,
+      12.45,
+      12.5,
+      12.55,
+      12.6,
+      12.65,
+      12.7,
+      12.75,
+      12.8,
+      12.85,
+      12.9,
+      12.95,
+      13.0,
+      13.05,
+      13.1,
+      13.15,
+      13.2,
+      13.25,
+      13.3,
+      13.35,
+      13.4,
+      13.45,
+      13.5,
+      13.55,
+      13.6
+     ]
+    ],
+    "h": 5000.0
+   },
+   "sha256": "68904964ac80baac328b3618f29a638babe30cead0f2e27651cf2d501fe15e1c"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s15",
+   "data": "data/weather.json",
+   "eq": "|∇T|",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "b2ebd391cc72085c8940fca62d8330d7e2872a457632b9a404e8237b7ce5bf59"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s20",
+   "data": "data/weather.json",
+   "eq": "|∇T| on the steep map (Pythagoras, U-M4.3)",
+   "params": {
+    "a": [
+     2e-05,
+     0.0
+    ]
+   },
+   "sha256": "28254df338356ca6c3ef7355fbea20a5633ad87964d917ed9bdb9b7d8a6c358f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s16",
+   "data": "data/weather.json",
+   "eq": "v·∇T, advection term of the material derivative, Vallis (1.7) (provenance)",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "f445b533dd5a773cb5aa3596534f1efddf9bf9904ed7ebec199eb49a0daded82"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s16,s17",
+   "data": "data/weather.json",
+   "eq": "shadow of v on ∇T",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "0bf19ea2196f4741047bdb908aa93b702a228a01c6a0bf5709c028ec0d4eb464"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s16,s17",
+   "data": "data/weather.json",
+   "eq": "|v|",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ]
+   },
+   "sha256": "24b1f4ef66b650ff816e519b01742ff1753733d36e1b4c3e3b52743168915b1f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s16",
+   "data": "data/weather.json",
+   "eq": "angle between v and ∇T",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "degrees": true
+   },
+   "sha256": "ad500de847021d21122fcbec116c36aad2e7a82a77c410a0921b15c18cbfee4a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s20",
+   "data": "data/weather.json",
+   "eq": "v·∇T, map twice as steep",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     2e-05,
+     0.0
+    ]
+   },
+   "sha256": "687a978df364814e8cb92b262c7a7ab75c55e0fb3705e75f041bb356d4ced350"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s20",
+   "data": "data/weather.json",
+   "eq": "shadow of v on ∇T, steep map",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     2e-05,
+     0.0
+    ]
+   },
+   "sha256": "0bf19ea2196f4741047bdb908aa93b702a228a01c6a0bf5709c028ec0d4eb464"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.projection",
+   "scene": "s16",
+   "data": "data/weather.json",
+   "eq": "projection of v on ∇T (the part towards warmer air)",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "1cee94368510ac075569ee51da842a19c90aff03300bcbc756ff5cfc9beadb2a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19",
+   "data": "data/weather.json",
+   "eq": "∇T·(−v t), upwind dot 1 h (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     -18000.000000000004,
+     -31176.914536239787
+    ]
+   },
+   "sha256": "f4f66a7376a6151fce59f25238218d031529ff330c2343f5cd81bb66f2bd88b0"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19",
+   "data": "data/weather.json",
+   "eq": "∇T·(−v t), upwind dot 2 h (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     -36000.00000000001,
+     -62353.82907247957
+    ]
+   },
+   "sha256": "8269dda281ec6e0c1f6a03ecb8b971ca6f66bd2066e8b12bc6ef50677ccd54df"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19",
+   "data": "data/weather.json",
+   "eq": "∇T·(−v t), upwind dot 3 h (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     -54000.000000000015,
+     -93530.74360871936
+    ]
+   },
+   "sha256": "cef251bc7556e4ff781aacc7e4145690a4fdea17fb6ebacf0cac4d9e4844b921"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s16a",
+   "data": "data/weather.json",
+   "eq": "v_along·∇T = 0: moving along an isotherm brings no change (ours)",
+   "params": {
+    "a": [
+     0.0,
+     8.660254037844
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s18,s19a",
+   "data": "data/weather.json",
+   "eq": "eastward speed of the pattern v·x̂ (ours)",
+   "params": {
+    "a": [
+     5.000000000000001,
+     8.660254037844386
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "0bf19ea2196f4741047bdb908aa93b702a228a01c6a0bf5709c028ec0d4eb464"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19c",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 1 h: moved to a spot that was warmer (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     18000.000000000004,
+     31176.914536239787
+    ]
+   },
+   "sha256": "00beeaba34073f4125606af21f0010aba49a5f56e2aa67d947337f22961d5411"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19c",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 2 h: moved to a spot that was warmer (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     36000.00000000001,
+     62353.82907247957
+    ]
+   },
+   "sha256": "59f4a8fde7b17e35f3f833d7329a0817f2f93cb97f1028eb5668bae0779deebe"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s19c",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 3 h: moved to a spot that was warmer (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     54000.000000000015,
+     93530.74360871936
+    ]
+   },
+   "sha256": "5b2c561dfb0f5e580bc560865c47a51d669570c9a5ae1d198631ecc66deec1ec"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s17",
+   "data": "data/weather.json",
+   "eq": "across-isotherm distance of the 1-h upwind dot (m, ours)",
+   "params": {
+    "a": [
+     18000.0,
+     31176.914536239783
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "2fa4675962505918931205bbcff81f831fcc59cb369f26539d05b290d1a6fa95"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s17",
+   "data": "data/weather.json",
+   "eq": "along-wind distance of the 1-h upwind dot (m)",
+   "params": {
+    "a": [
+     18000.0,
+     31176.914536239783
+    ]
+   },
+   "sha256": "08f0be3545f518a1803e712788ab65f1fc96ebebd79d01365ebfb52063b8b12c"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s00",
+   "data": "data/sweep.json",
+   "eq": "p·q(θ) for the title sweep (definition, ours)",
+   "params": {
+    "a": [
+     3.0,
+     0.0
+    ],
+    "b": [
+     [
+      2.0,
+      0.0
+     ],
+     [
+      1.998781654038,
+      0.069798993405
+     ],
+     [
+      1.99512810052,
+      0.139512947488
+     ],
+     [
+      1.989043790737,
+      0.209056926535
+     ],
+     [
+      1.980536137483,
+      0.27834620192
+     ],
+     [
+      1.969615506024,
+      0.347296355334
+     ],
+     [
+      1.956295201468,
+      0.415823381636
+     ],
+     [
+      1.940591452552,
+      0.483843791199
+     ],
+     [
+      1.922523391877,
+      0.551274711634
+     ],
+     [
+      1.90211303259,
+      0.61803398875
+     ],
+     [
+      1.879385241572,
+      0.684040286651
+     ],
+     [
+      1.854367709134,
+      0.749213186832
+     ],
+     [
+      1.827090915285,
+      0.813473286152
+     ],
+     [
+      1.797588092598,
+      0.876742293578
+     ],
+     [
+      1.765895185718,
+      0.938943125572
+     ],
+     [
+      1.732050807569,
+      1.0
+     ],
+     [
+      1.696096192313,
+      1.059838528466
+     ],
+     [
+      1.65807514511,
+      1.118385806941
+     ],
+     [
+      1.61803398875,
+      1.175570504585
+     ],
+     [
+      1.576021507213,
+      1.231322950651
+     ],
+     [
+      1.532088886238,
+      1.285575219373
+     ],
+     [
+      1.486289650955,
+      1.338261212718
+     ],
+     [
+      1.438679600677,
+      1.389316740918
+     ],
+     [
+      1.389316740918,
+      1.438679600677
+     ],
+     [
+      1.338261212718,
+      1.486289650955
+     ],
+     [
+      1.285575219373,
+      1.532088886238
+     ],
+     [
+      1.231322950651,
+      1.576021507213
+     ],
+     [
+      1.175570504585,
+      1.61803398875
+     ],
+     [
+      1.118385806941,
+      1.65807514511
+     ],
+     [
+      1.059838528466,
+      1.696096192313
+     ],
+     [
+      1.0,
+      1.732050807569
+     ],
+     [
+      0.938943125572,
+      1.765895185718
+     ],
+     [
+      0.876742293578,
+      1.797588092598
+     ],
+     [
+      0.813473286152,
+      1.827090915285
+     ],
+     [
+      0.749213186832,
+      1.854367709134
+     ],
+     [
+      0.684040286651,
+      1.879385241572
+     ],
+     [
+      0.61803398875,
+      1.90211303259
+     ],
+     [
+      0.551274711634,
+      1.922523391877
+     ],
+     [
+      0.483843791199,
+      1.940591452552
+     ],
+     [
+      0.415823381636,
+      1.956295201468
+     ],
+     [
+      0.347296355334,
+      1.969615506024
+     ],
+     [
+      0.27834620192,
+      1.980536137483
+     ],
+     [
+      0.209056926535,
+      1.989043790737
+     ],
+     [
+      0.139512947488,
+      1.99512810052
+     ],
+     [
+      0.069798993405,
+      1.998781654038
+     ],
+     [
+      0.0,
+      2.0
+     ],
+     [
+      -0.069798993405,
+      1.998781654038
+     ],
+     [
+      -0.139512947488,
+      1.99512810052
+     ],
+     [
+      -0.209056926535,
+      1.989043790737
+     ],
+     [
+      -0.27834620192,
+      1.980536137483
+     ],
+     [
+      -0.347296355334,
+      1.969615506024
+     ],
+     [
+      -0.415823381636,
+      1.956295201468
+     ],
+     [
+      -0.483843791199,
+      1.940591452552
+     ],
+     [
+      -0.551274711634,
+      1.922523391877
+     ],
+     [
+      -0.61803398875,
+      1.90211303259
+     ],
+     [
+      -0.684040286651,
+      1.879385241572
+     ],
+     [
+      -0.749213186832,
+      1.854367709134
+     ],
+     [
+      -0.813473286152,
+      1.827090915285
+     ],
+     [
+      -0.876742293578,
+      1.797588092598
+     ],
+     [
+      -0.938943125572,
+      1.765895185718
+     ],
+     [
+      -1.0,
+      1.732050807569
+     ],
+     [
+      -1.059838528466,
+      1.696096192313
+     ],
+     [
+      -1.118385806941,
+      1.65807514511
+     ],
+     [
+      -1.175570504585,
+      1.61803398875
+     ],
+     [
+      -1.231322950651,
+      1.576021507213
+     ],
+     [
+      -1.285575219373,
+      1.532088886238
+     ],
+     [
+      -1.338261212718,
+      1.486289650955
+     ],
+     [
+      -1.389316740918,
+      1.438679600677
+     ],
+     [
+      -1.438679600677,
+      1.389316740918
+     ],
+     [
+      -1.486289650955,
+      1.338261212718
+     ],
+     [
+      -1.532088886238,
+      1.285575219373
+     ],
+     [
+      -1.576021507213,
+      1.231322950651
+     ],
+     [
+      -1.61803398875,
+      1.175570504585
+     ],
+     [
+      -1.65807514511,
+      1.118385806941
+     ],
+     [
+      -1.696096192313,
+      1.059838528466
+     ],
+     [
+      -1.732050807569,
+      1.0
+     ],
+     [
+      -1.765895185718,
+      0.938943125572
+     ],
+     [
+      -1.797588092598,
+      0.876742293578
+     ],
+     [
+      -1.827090915285,
+      0.813473286152
+     ],
+     [
+      -1.854367709134,
+      0.749213186832
+     ],
+     [
+      -1.879385241572,
+      0.684040286651
+     ],
+     [
+      -1.90211303259,
+      0.61803398875
+     ],
+     [
+      -1.922523391877,
+      0.551274711634
+     ],
+     [
+      -1.940591452552,
+      0.483843791199
+     ],
+     [
+      -1.956295201468,
+      0.415823381636
+     ],
+     [
+      -1.969615506024,
+      0.347296355334
+     ],
+     [
+      -1.980536137483,
+      0.27834620192
+     ],
+     [
+      -1.989043790737,
+      0.209056926535
+     ],
+     [
+      -1.99512810052,
+      0.139512947488
+     ],
+     [
+      -1.998781654038,
+      0.069798993405
+     ],
+     [
+      -2.0,
+      0.0
+     ],
+     [
+      -1.998781654038,
+      -0.069798993405
+     ],
+     [
+      -1.99512810052,
+      -0.139512947488
+     ],
+     [
+      -1.989043790737,
+      -0.209056926535
+     ],
+     [
+      -1.980536137483,
+      -0.27834620192
+     ],
+     [
+      -1.969615506024,
+      -0.347296355334
+     ],
+     [
+      -1.956295201468,
+      -0.415823381636
+     ],
+     [
+      -1.940591452552,
+      -0.483843791199
+     ],
+     [
+      -1.922523391877,
+      -0.551274711634
+     ],
+     [
+      -1.90211303259,
+      -0.61803398875
+     ],
+     [
+      -1.879385241572,
+      -0.684040286651
+     ],
+     [
+      -1.854367709134,
+      -0.749213186832
+     ],
+     [
+      -1.827090915285,
+      -0.813473286152
+     ],
+     [
+      -1.797588092598,
+      -0.876742293578
+     ],
+     [
+      -1.765895185718,
+      -0.938943125572
+     ],
+     [
+      -1.732050807569,
+      -1.0
+     ],
+     [
+      -1.696096192313,
+      -1.059838528466
+     ],
+     [
+      -1.65807514511,
+      -1.118385806941
+     ],
+     [
+      -1.61803398875,
+      -1.175570504585
+     ],
+     [
+      -1.576021507213,
+      -1.231322950651
+     ],
+     [
+      -1.532088886238,
+      -1.285575219373
+     ],
+     [
+      -1.486289650955,
+      -1.338261212718
+     ],
+     [
+      -1.438679600677,
+      -1.389316740918
+     ],
+     [
+      -1.389316740918,
+      -1.438679600677
+     ],
+     [
+      -1.338261212718,
+      -1.486289650955
+     ],
+     [
+      -1.285575219373,
+      -1.532088886238
+     ],
+     [
+      -1.231322950651,
+      -1.576021507213
+     ],
+     [
+      -1.175570504585,
+      -1.61803398875
+     ],
+     [
+      -1.118385806941,
+      -1.65807514511
+     ],
+     [
+      -1.059838528466,
+      -1.696096192313
+     ],
+     [
+      -1.0,
+      -1.732050807569
+     ],
+     [
+      -0.938943125572,
+      -1.765895185718
+     ],
+     [
+      -0.876742293578,
+      -1.797588092598
+     ],
+     [
+      -0.813473286152,
+      -1.827090915285
+     ],
+     [
+      -0.749213186832,
+      -1.854367709134
+     ],
+     [
+      -0.684040286651,
+      -1.879385241572
+     ],
+     [
+      -0.61803398875,
+      -1.90211303259
+     ],
+     [
+      -0.551274711634,
+      -1.922523391877
+     ],
+     [
+      -0.483843791199,
+      -1.940591452552
+     ],
+     [
+      -0.415823381636,
+      -1.956295201468
+     ],
+     [
+      -0.347296355334,
+      -1.969615506024
+     ],
+     [
+      -0.27834620192,
+      -1.980536137483
+     ],
+     [
+      -0.209056926535,
+      -1.989043790737
+     ],
+     [
+      -0.139512947488,
+      -1.99512810052
+     ],
+     [
+      -0.069798993405,
+      -1.998781654038
+     ],
+     [
+      -0.0,
+      -2.0
+     ],
+     [
+      0.069798993405,
+      -1.998781654038
+     ],
+     [
+      0.139512947488,
+      -1.99512810052
+     ],
+     [
+      0.209056926535,
+      -1.989043790737
+     ],
+     [
+      0.27834620192,
+      -1.980536137483
+     ],
+     [
+      0.347296355334,
+      -1.969615506024
+     ],
+     [
+      0.415823381636,
+      -1.956295201468
+     ],
+     [
+      0.483843791199,
+      -1.940591452552
+     ],
+     [
+      0.551274711634,
+      -1.922523391877
+     ],
+     [
+      0.61803398875,
+      -1.90211303259
+     ],
+     [
+      0.684040286651,
+      -1.879385241572
+     ],
+     [
+      0.749213186832,
+      -1.854367709134
+     ],
+     [
+      0.813473286152,
+      -1.827090915285
+     ],
+     [
+      0.876742293578,
+      -1.797588092598
+     ],
+     [
+      0.938943125572,
+      -1.765895185718
+     ],
+     [
+      1.0,
+      -1.732050807569
+     ],
+     [
+      1.059838528466,
+      -1.696096192313
+     ],
+     [
+      1.118385806941,
+      -1.65807514511
+     ],
+     [
+      1.175570504585,
+      -1.61803398875
+     ],
+     [
+      1.231322950651,
+      -1.576021507213
+     ],
+     [
+      1.285575219373,
+      -1.532088886238
+     ],
+     [
+      1.338261212718,
+      -1.486289650955
+     ],
+     [
+      1.389316740918,
+      -1.438679600677
+     ],
+     [
+      1.438679600677,
+      -1.389316740918
+     ],
+     [
+      1.486289650955,
+      -1.338261212718
+     ],
+     [
+      1.532088886238,
+      -1.285575219373
+     ],
+     [
+      1.576021507213,
+      -1.231322950651
+     ],
+     [
+      1.61803398875,
+      -1.175570504585
+     ],
+     [
+      1.65807514511,
+      -1.118385806941
+     ],
+     [
+      1.696096192313,
+      -1.059838528466
+     ],
+     [
+      1.732050807569,
+      -1.0
+     ],
+     [
+      1.765895185718,
+      -0.938943125572
+     ],
+     [
+      1.797588092598,
+      -0.876742293578
+     ],
+     [
+      1.827090915285,
+      -0.813473286152
+     ],
+     [
+      1.854367709134,
+      -0.749213186832
+     ],
+     [
+      1.879385241572,
+      -0.684040286651
+     ],
+     [
+      1.90211303259,
+      -0.61803398875
+     ],
+     [
+      1.922523391877,
+      -0.551274711634
+     ],
+     [
+      1.940591452552,
+      -0.483843791199
+     ],
+     [
+      1.956295201468,
+      -0.415823381636
+     ],
+     [
+      1.969615506024,
+      -0.347296355334
+     ],
+     [
+      1.980536137483,
+      -0.27834620192
+     ],
+     [
+      1.989043790737,
+      -0.209056926535
+     ],
+     [
+      1.99512810052,
+      -0.139512947488
+     ],
+     [
+      1.998781654038,
+      -0.069798993405
+     ],
+     [
+      2.0,
+      -0.0
+     ]
+    ]
+   },
+   "sha256": "b4235eabae760bde5476d8d9bb23569d8984fed8158569aff2a8dd3881b9c423"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s00",
+   "data": "data/sweep.json",
+   "eq": "shadow of q on p (signed, ours)",
+   "params": {
+    "a": [
+     [
+      2.0,
+      0.0
+     ],
+     [
+      1.998781654038,
+      0.069798993405
+     ],
+     [
+      1.99512810052,
+      0.139512947488
+     ],
+     [
+      1.989043790737,
+      0.209056926535
+     ],
+     [
+      1.980536137483,
+      0.27834620192
+     ],
+     [
+      1.969615506024,
+      0.347296355334
+     ],
+     [
+      1.956295201468,
+      0.415823381636
+     ],
+     [
+      1.940591452552,
+      0.483843791199
+     ],
+     [
+      1.922523391877,
+      0.551274711634
+     ],
+     [
+      1.90211303259,
+      0.61803398875
+     ],
+     [
+      1.879385241572,
+      0.684040286651
+     ],
+     [
+      1.854367709134,
+      0.749213186832
+     ],
+     [
+      1.827090915285,
+      0.813473286152
+     ],
+     [
+      1.797588092598,
+      0.876742293578
+     ],
+     [
+      1.765895185718,
+      0.938943125572
+     ],
+     [
+      1.732050807569,
+      1.0
+     ],
+     [
+      1.696096192313,
+      1.059838528466
+     ],
+     [
+      1.65807514511,
+      1.118385806941
+     ],
+     [
+      1.61803398875,
+      1.175570504585
+     ],
+     [
+      1.576021507213,
+      1.231322950651
+     ],
+     [
+      1.532088886238,
+      1.285575219373
+     ],
+     [
+      1.486289650955,
+      1.338261212718
+     ],
+     [
+      1.438679600677,
+      1.389316740918
+     ],
+     [
+      1.389316740918,
+      1.438679600677
+     ],
+     [
+      1.338261212718,
+      1.486289650955
+     ],
+     [
+      1.285575219373,
+      1.532088886238
+     ],
+     [
+      1.231322950651,
+      1.576021507213
+     ],
+     [
+      1.175570504585,
+      1.61803398875
+     ],
+     [
+      1.118385806941,
+      1.65807514511
+     ],
+     [
+      1.059838528466,
+      1.696096192313
+     ],
+     [
+      1.0,
+      1.732050807569
+     ],
+     [
+      0.938943125572,
+      1.765895185718
+     ],
+     [
+      0.876742293578,
+      1.797588092598
+     ],
+     [
+      0.813473286152,
+      1.827090915285
+     ],
+     [
+      0.749213186832,
+      1.854367709134
+     ],
+     [
+      0.684040286651,
+      1.879385241572
+     ],
+     [
+      0.61803398875,
+      1.90211303259
+     ],
+     [
+      0.551274711634,
+      1.922523391877
+     ],
+     [
+      0.483843791199,
+      1.940591452552
+     ],
+     [
+      0.415823381636,
+      1.956295201468
+     ],
+     [
+      0.347296355334,
+      1.969615506024
+     ],
+     [
+      0.27834620192,
+      1.980536137483
+     ],
+     [
+      0.209056926535,
+      1.989043790737
+     ],
+     [
+      0.139512947488,
+      1.99512810052
+     ],
+     [
+      0.069798993405,
+      1.998781654038
+     ],
+     [
+      0.0,
+      2.0
+     ],
+     [
+      -0.069798993405,
+      1.998781654038
+     ],
+     [
+      -0.139512947488,
+      1.99512810052
+     ],
+     [
+      -0.209056926535,
+      1.989043790737
+     ],
+     [
+      -0.27834620192,
+      1.980536137483
+     ],
+     [
+      -0.347296355334,
+      1.969615506024
+     ],
+     [
+      -0.415823381636,
+      1.956295201468
+     ],
+     [
+      -0.483843791199,
+      1.940591452552
+     ],
+     [
+      -0.551274711634,
+      1.922523391877
+     ],
+     [
+      -0.61803398875,
+      1.90211303259
+     ],
+     [
+      -0.684040286651,
+      1.879385241572
+     ],
+     [
+      -0.749213186832,
+      1.854367709134
+     ],
+     [
+      -0.813473286152,
+      1.827090915285
+     ],
+     [
+      -0.876742293578,
+      1.797588092598
+     ],
+     [
+      -0.938943125572,
+      1.765895185718
+     ],
+     [
+      -1.0,
+      1.732050807569
+     ],
+     [
+      -1.059838528466,
+      1.696096192313
+     ],
+     [
+      -1.118385806941,
+      1.65807514511
+     ],
+     [
+      -1.175570504585,
+      1.61803398875
+     ],
+     [
+      -1.231322950651,
+      1.576021507213
+     ],
+     [
+      -1.285575219373,
+      1.532088886238
+     ],
+     [
+      -1.338261212718,
+      1.486289650955
+     ],
+     [
+      -1.389316740918,
+      1.438679600677
+     ],
+     [
+      -1.438679600677,
+      1.389316740918
+     ],
+     [
+      -1.486289650955,
+      1.338261212718
+     ],
+     [
+      -1.532088886238,
+      1.285575219373
+     ],
+     [
+      -1.576021507213,
+      1.231322950651
+     ],
+     [
+      -1.61803398875,
+      1.175570504585
+     ],
+     [
+      -1.65807514511,
+      1.118385806941
+     ],
+     [
+      -1.696096192313,
+      1.059838528466
+     ],
+     [
+      -1.732050807569,
+      1.0
+     ],
+     [
+      -1.765895185718,
+      0.938943125572
+     ],
+     [
+      -1.797588092598,
+      0.876742293578
+     ],
+     [
+      -1.827090915285,
+      0.813473286152
+     ],
+     [
+      -1.854367709134,
+      0.749213186832
+     ],
+     [
+      -1.879385241572,
+      0.684040286651
+     ],
+     [
+      -1.90211303259,
+      0.61803398875
+     ],
+     [
+      -1.922523391877,
+      0.551274711634
+     ],
+     [
+      -1.940591452552,
+      0.483843791199
+     ],
+     [
+      -1.956295201468,
+      0.415823381636
+     ],
+     [
+      -1.969615506024,
+      0.347296355334
+     ],
+     [
+      -1.980536137483,
+      0.27834620192
+     ],
+     [
+      -1.989043790737,
+      0.209056926535
+     ],
+     [
+      -1.99512810052,
+      0.139512947488
+     ],
+     [
+      -1.998781654038,
+      0.069798993405
+     ],
+     [
+      -2.0,
+      0.0
+     ],
+     [
+      -1.998781654038,
+      -0.069798993405
+     ],
+     [
+      -1.99512810052,
+      -0.139512947488
+     ],
+     [
+      -1.989043790737,
+      -0.209056926535
+     ],
+     [
+      -1.980536137483,
+      -0.27834620192
+     ],
+     [
+      -1.969615506024,
+      -0.347296355334
+     ],
+     [
+      -1.956295201468,
+      -0.415823381636
+     ],
+     [
+      -1.940591452552,
+      -0.483843791199
+     ],
+     [
+      -1.922523391877,
+      -0.551274711634
+     ],
+     [
+      -1.90211303259,
+      -0.61803398875
+     ],
+     [
+      -1.879385241572,
+      -0.684040286651
+     ],
+     [
+      -1.854367709134,
+      -0.749213186832
+     ],
+     [
+      -1.827090915285,
+      -0.813473286152
+     ],
+     [
+      -1.797588092598,
+      -0.876742293578
+     ],
+     [
+      -1.765895185718,
+      -0.938943125572
+     ],
+     [
+      -1.732050807569,
+      -1.0
+     ],
+     [
+      -1.696096192313,
+      -1.059838528466
+     ],
+     [
+      -1.65807514511,
+      -1.118385806941
+     ],
+     [
+      -1.61803398875,
+      -1.175570504585
+     ],
+     [
+      -1.576021507213,
+      -1.231322950651
+     ],
+     [
+      -1.532088886238,
+      -1.285575219373
+     ],
+     [
+      -1.486289650955,
+      -1.338261212718
+     ],
+     [
+      -1.438679600677,
+      -1.389316740918
+     ],
+     [
+      -1.389316740918,
+      -1.438679600677
+     ],
+     [
+      -1.338261212718,
+      -1.486289650955
+     ],
+     [
+      -1.285575219373,
+      -1.532088886238
+     ],
+     [
+      -1.231322950651,
+      -1.576021507213
+     ],
+     [
+      -1.175570504585,
+      -1.61803398875
+     ],
+     [
+      -1.118385806941,
+      -1.65807514511
+     ],
+     [
+      -1.059838528466,
+      -1.696096192313
+     ],
+     [
+      -1.0,
+      -1.732050807569
+     ],
+     [
+      -0.938943125572,
+      -1.765895185718
+     ],
+     [
+      -0.876742293578,
+      -1.797588092598
+     ],
+     [
+      -0.813473286152,
+      -1.827090915285
+     ],
+     [
+      -0.749213186832,
+      -1.854367709134
+     ],
+     [
+      -0.684040286651,
+      -1.879385241572
+     ],
+     [
+      -0.61803398875,
+      -1.90211303259
+     ],
+     [
+      -0.551274711634,
+      -1.922523391877
+     ],
+     [
+      -0.483843791199,
+      -1.940591452552
+     ],
+     [
+      -0.415823381636,
+      -1.956295201468
+     ],
+     [
+      -0.347296355334,
+      -1.969615506024
+     ],
+     [
+      -0.27834620192,
+      -1.980536137483
+     ],
+     [
+      -0.209056926535,
+      -1.989043790737
+     ],
+     [
+      -0.139512947488,
+      -1.99512810052
+     ],
+     [
+      -0.069798993405,
+      -1.998781654038
+     ],
+     [
+      -0.0,
+      -2.0
+     ],
+     [
+      0.069798993405,
+      -1.998781654038
+     ],
+     [
+      0.139512947488,
+      -1.99512810052
+     ],
+     [
+      0.209056926535,
+      -1.989043790737
+     ],
+     [
+      0.27834620192,
+      -1.980536137483
+     ],
+     [
+      0.347296355334,
+      -1.969615506024
+     ],
+     [
+      0.415823381636,
+      -1.956295201468
+     ],
+     [
+      0.483843791199,
+      -1.940591452552
+     ],
+     [
+      0.551274711634,
+      -1.922523391877
+     ],
+     [
+      0.61803398875,
+      -1.90211303259
+     ],
+     [
+      0.684040286651,
+      -1.879385241572
+     ],
+     [
+      0.749213186832,
+      -1.854367709134
+     ],
+     [
+      0.813473286152,
+      -1.827090915285
+     ],
+     [
+      0.876742293578,
+      -1.797588092598
+     ],
+     [
+      0.938943125572,
+      -1.765895185718
+     ],
+     [
+      1.0,
+      -1.732050807569
+     ],
+     [
+      1.059838528466,
+      -1.696096192313
+     ],
+     [
+      1.118385806941,
+      -1.65807514511
+     ],
+     [
+      1.175570504585,
+      -1.61803398875
+     ],
+     [
+      1.231322950651,
+      -1.576021507213
+     ],
+     [
+      1.285575219373,
+      -1.532088886238
+     ],
+     [
+      1.338261212718,
+      -1.486289650955
+     ],
+     [
+      1.389316740918,
+      -1.438679600677
+     ],
+     [
+      1.438679600677,
+      -1.389316740918
+     ],
+     [
+      1.486289650955,
+      -1.338261212718
+     ],
+     [
+      1.532088886238,
+      -1.285575219373
+     ],
+     [
+      1.576021507213,
+      -1.231322950651
+     ],
+     [
+      1.61803398875,
+      -1.175570504585
+     ],
+     [
+      1.65807514511,
+      -1.118385806941
+     ],
+     [
+      1.696096192313,
+      -1.059838528466
+     ],
+     [
+      1.732050807569,
+      -1.0
+     ],
+     [
+      1.765895185718,
+      -0.938943125572
+     ],
+     [
+      1.797588092598,
+      -0.876742293578
+     ],
+     [
+      1.827090915285,
+      -0.813473286152
+     ],
+     [
+      1.854367709134,
+      -0.749213186832
+     ],
+     [
+      1.879385241572,
+      -0.684040286651
+     ],
+     [
+      1.90211303259,
+      -0.61803398875
+     ],
+     [
+      1.922523391877,
+      -0.551274711634
+     ],
+     [
+      1.940591452552,
+      -0.483843791199
+     ],
+     [
+      1.956295201468,
+      -0.415823381636
+     ],
+     [
+      1.969615506024,
+      -0.347296355334
+     ],
+     [
+      1.980536137483,
+      -0.27834620192
+     ],
+     [
+      1.989043790737,
+      -0.209056926535
+     ],
+     [
+      1.99512810052,
+      -0.139512947488
+     ],
+     [
+      1.998781654038,
+      -0.069798993405
+     ],
+     [
+      2.0,
+      -0.0
+     ]
+    ],
+    "b": [
+     3.0,
+     0.0
+    ]
+   },
+   "sha256": "d8aa9ae6642168dded28a8274eb6d292667d6c14ab04ec9e3cf62d47b6358614"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s17",
+   "data": "data/weather.json",
+   "eq": "1-h displacement across the isotherms (m, ours)",
+   "params": {
+    "a": [
+     18000.000000000004,
+     31176.914536239787
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "f2c06c08f91f57cff62b9a4f8d6d676393a69a2977cb46c8ab21d4087f073926"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.norm",
+   "scene": "s17",
+   "data": "data/weather.json",
+   "eq": "1-h displacement along the wind (m)",
+   "params": {
+    "a": [
+     18000.000000000004,
+     31176.914536239787
+    ]
+   },
+   "sha256": "fcc95f31549d38c5f1ae999a8665dd1c3c8fc6d8fd0cd5c0eaa4b0ead291da52"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s17b",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 1 h on the frozen map (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     18000.000000000004,
+     31176.914536239787
+    ]
+   },
+   "sha256": "00beeaba34073f4125606af21f0010aba49a5f56e2aa67d947337f22961d5411"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s17b",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 2 h on the frozen map (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     36000.00000000001,
+     62353.82907247957
+    ]
+   },
+   "sha256": "59f4a8fde7b17e35f3f833d7329a0817f2f93cb97f1028eb5668bae0779deebe"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s17b",
+   "data": "data/weather.json",
+   "eq": "∇T·(v t), t = 3 h on the frozen map (ours)",
+   "params": {
+    "a": [
+     1.0000000000000141e-05,
+     0.0
+    ],
+    "b": [
+     54000.000000000015,
+     93530.74360871936
+    ]
+   },
+   "sha256": "5b2c561dfb0f5e580bc560865c47a51d669570c9a5ae1d198631ecc66deec1ec"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s19a",
+   "data": "data/weather.json",
+   "eq": "across-isotherm distance of the 1-h parcel (m, ours)",
+   "params": {
+    "a": [
+     18000.0,
+     31176.914536239783
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "2fa4675962505918931205bbcff81f831fcc59cb369f26539d05b290d1a6fa95"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s19a",
+   "data": "data/weather.json",
+   "eq": "across-isotherm distance of the 2-h parcel (m, ours)",
+   "params": {
+    "a": [
+     36000.0,
+     62353.829072479566
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "fcc95f31549d38c5f1ae999a8665dd1c3c8fc6d8fd0cd5c0eaa4b0ead291da52"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s19a",
+   "data": "data/weather.json",
+   "eq": "across-isotherm distance of the 3-h parcel (m, ours)",
+   "params": {
+    "a": [
+     54000.0,
+     93530.74360871936
+    ],
+    "b": [
+     1.0000000000000141e-05,
+     0.0
+    ]
+   },
+   "sha256": "d0715582ed0e7e3b21755b005e7f77b664a24eabb8a5f98f9de6cc22202efdf3"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s04",
+   "data": "data/extra.json",
+   "eq": "piece a unit arrow marks off on a line = cos θ (ours)",
+   "params": {
+    "a": [
+     [
+      1.0,
+      0.0
+     ],
+     [
+      0.999847695156,
+      0.017452406437
+     ],
+     [
+      0.999390827019,
+      0.034899496703
+     ],
+     [
+      0.998629534755,
+      0.052335956243
+     ],
+     [
+      0.99756405026,
+      0.069756473744
+     ],
+     [
+      0.996194698092,
+      0.087155742748
+     ],
+     [
+      0.994521895368,
+      0.104528463268
+     ],
+     [
+      0.992546151641,
+      0.121869343405
+     ],
+     [
+      0.990268068742,
+      0.13917310096
+     ],
+     [
+      0.987688340595,
+      0.15643446504
+     ],
+     [
+      0.984807753012,
+      0.173648177667
+     ],
+     [
+      0.981627183448,
+      0.190808995377
+     ],
+     [
+      0.978147600734,
+      0.207911690818
+     ],
+     [
+      0.974370064785,
+      0.224951054344
+     ],
+     [
+      0.970295726276,
+      0.2419218956
+     ],
+     [
+      0.965925826289,
+      0.258819045103
+     ],
+     [
+      0.961261695938,
+      0.275637355817
+     ],
+     [
+      0.956304755963,
+      0.292371704723
+     ],
+     [
+      0.951056516295,
+      0.309016994375
+     ],
+     [
+      0.945518575599,
+      0.325568154457
+     ],
+     [
+      0.939692620786,
+      0.342020143326
+     ],
+     [
+      0.933580426497,
+      0.358367949545
+     ],
+     [
+      0.927183854567,
+      0.374606593416
+     ],
+     [
+      0.920504853452,
+      0.390731128489
+     ],
+     [
+      0.913545457643,
+      0.406736643076
+     ],
+     [
+      0.906307787037,
+      0.422618261741
+     ],
+     [
+      0.898794046299,
+      0.438371146789
+     ],
+     [
+      0.891006524188,
+      0.45399049974
+     ],
+     [
+      0.882947592859,
+      0.469471562786
+     ],
+     [
+      0.874619707139,
+      0.484809620246
+     ],
+     [
+      0.866025403784,
+      0.5
+     ],
+     [
+      0.857167300702,
+      0.51503807491
+     ],
+     [
+      0.848048096156,
+      0.529919264233
+     ],
+     [
+      0.838670567945,
+      0.544639035015
+     ],
+     [
+      0.829037572555,
+      0.559192903471
+     ],
+     [
+      0.819152044289,
+      0.573576436351
+     ],
+     [
+      0.809016994375,
+      0.587785252292
+     ],
+     [
+      0.798635510047,
+      0.601815023152
+     ],
+     [
+      0.788010753607,
+      0.615661475326
+     ],
+     [
+      0.777145961457,
+      0.62932039105
+     ],
+     [
+      0.766044443119,
+      0.642787609687
+     ],
+     [
+      0.754709580223,
+      0.656059028991
+     ],
+     [
+      0.743144825477,
+      0.669130606359
+     ],
+     [
+      0.731353701619,
+      0.681998360062
+     ],
+     [
+      0.719339800339,
+      0.694658370459
+     ],
+     [
+      0.707106781187,
+      0.707106781187
+     ],
+     [
+      0.694658370459,
+      0.719339800339
+     ],
+     [
+      0.681998360062,
+      0.731353701619
+     ],
+     [
+      0.669130606359,
+      0.743144825477
+     ],
+     [
+      0.656059028991,
+      0.754709580223
+     ],
+     [
+      0.642787609687,
+      0.766044443119
+     ],
+     [
+      0.62932039105,
+      0.777145961457
+     ],
+     [
+      0.615661475326,
+      0.788010753607
+     ],
+     [
+      0.601815023152,
+      0.798635510047
+     ],
+     [
+      0.587785252292,
+      0.809016994375
+     ],
+     [
+      0.573576436351,
+      0.819152044289
+     ],
+     [
+      0.559192903471,
+      0.829037572555
+     ],
+     [
+      0.544639035015,
+      0.838670567945
+     ],
+     [
+      0.529919264233,
+      0.848048096156
+     ],
+     [
+      0.51503807491,
+      0.857167300702
+     ],
+     [
+      0.5,
+      0.866025403784
+     ],
+     [
+      0.484809620246,
+      0.874619707139
+     ],
+     [
+      0.469471562786,
+      0.882947592859
+     ],
+     [
+      0.45399049974,
+      0.891006524188
+     ],
+     [
+      0.438371146789,
+      0.898794046299
+     ],
+     [
+      0.422618261741,
+      0.906307787037
+     ],
+     [
+      0.406736643076,
+      0.913545457643
+     ],
+     [
+      0.390731128489,
+      0.920504853452
+     ],
+     [
+      0.374606593416,
+      0.927183854567
+     ],
+     [
+      0.358367949545,
+      0.933580426497
+     ],
+     [
+      0.342020143326,
+      0.939692620786
+     ],
+     [
+      0.325568154457,
+      0.945518575599
+     ],
+     [
+      0.309016994375,
+      0.951056516295
+     ],
+     [
+      0.292371704723,
+      0.956304755963
+     ],
+     [
+      0.275637355817,
+      0.961261695938
+     ],
+     [
+      0.258819045103,
+      0.965925826289
+     ],
+     [
+      0.2419218956,
+      0.970295726276
+     ],
+     [
+      0.224951054344,
+      0.974370064785
+     ],
+     [
+      0.207911690818,
+      0.978147600734
+     ],
+     [
+      0.190808995377,
+      0.981627183448
+     ],
+     [
+      0.173648177667,
+      0.984807753012
+     ],
+     [
+      0.15643446504,
+      0.987688340595
+     ],
+     [
+      0.13917310096,
+      0.990268068742
+     ],
+     [
+      0.121869343405,
+      0.992546151641
+     ],
+     [
+      0.104528463268,
+      0.994521895368
+     ],
+     [
+      0.087155742748,
+      0.996194698092
+     ],
+     [
+      0.069756473744,
+      0.99756405026
+     ],
+     [
+      0.052335956243,
+      0.998629534755
+     ],
+     [
+      0.034899496703,
+      0.999390827019
+     ],
+     [
+      0.017452406437,
+      0.999847695156
+     ],
+     [
+      0.0,
+      1.0
+     ],
+     [
+      -0.017452406437,
+      0.999847695156
+     ],
+     [
+      -0.034899496703,
+      0.999390827019
+     ],
+     [
+      -0.052335956243,
+      0.998629534755
+     ],
+     [
+      -0.069756473744,
+      0.99756405026
+     ],
+     [
+      -0.087155742748,
+      0.996194698092
+     ],
+     [
+      -0.104528463268,
+      0.994521895368
+     ],
+     [
+      -0.121869343405,
+      0.992546151641
+     ],
+     [
+      -0.13917310096,
+      0.990268068742
+     ],
+     [
+      -0.15643446504,
+      0.987688340595
+     ],
+     [
+      -0.173648177667,
+      0.984807753012
+     ],
+     [
+      -0.190808995377,
+      0.981627183448
+     ],
+     [
+      -0.207911690818,
+      0.978147600734
+     ],
+     [
+      -0.224951054344,
+      0.974370064785
+     ],
+     [
+      -0.2419218956,
+      0.970295726276
+     ],
+     [
+      -0.258819045103,
+      0.965925826289
+     ],
+     [
+      -0.275637355817,
+      0.961261695938
+     ],
+     [
+      -0.292371704723,
+      0.956304755963
+     ],
+     [
+      -0.309016994375,
+      0.951056516295
+     ],
+     [
+      -0.325568154457,
+      0.945518575599
+     ],
+     [
+      -0.342020143326,
+      0.939692620786
+     ],
+     [
+      -0.358367949545,
+      0.933580426497
+     ],
+     [
+      -0.374606593416,
+      0.927183854567
+     ],
+     [
+      -0.390731128489,
+      0.920504853452
+     ],
+     [
+      -0.406736643076,
+      0.913545457643
+     ],
+     [
+      -0.422618261741,
+      0.906307787037
+     ],
+     [
+      -0.438371146789,
+      0.898794046299
+     ],
+     [
+      -0.45399049974,
+      0.891006524188
+     ],
+     [
+      -0.469471562786,
+      0.882947592859
+     ],
+     [
+      -0.484809620246,
+      0.874619707139
+     ],
+     [
+      -0.5,
+      0.866025403784
+     ],
+     [
+      -0.51503807491,
+      0.857167300702
+     ],
+     [
+      -0.529919264233,
+      0.848048096156
+     ],
+     [
+      -0.544639035015,
+      0.838670567945
+     ],
+     [
+      -0.559192903471,
+      0.829037572555
+     ],
+     [
+      -0.573576436351,
+      0.819152044289
+     ],
+     [
+      -0.587785252292,
+      0.809016994375
+     ],
+     [
+      -0.601815023152,
+      0.798635510047
+     ],
+     [
+      -0.615661475326,
+      0.788010753607
+     ],
+     [
+      -0.62932039105,
+      0.777145961457
+     ],
+     [
+      -0.642787609687,
+      0.766044443119
+     ],
+     [
+      -0.656059028991,
+      0.754709580223
+     ],
+     [
+      -0.669130606359,
+      0.743144825477
+     ],
+     [
+      -0.681998360062,
+      0.731353701619
+     ],
+     [
+      -0.694658370459,
+      0.719339800339
+     ],
+     [
+      -0.707106781187,
+      0.707106781187
+     ],
+     [
+      -0.719339800339,
+      0.694658370459
+     ],
+     [
+      -0.731353701619,
+      0.681998360062
+     ],
+     [
+      -0.743144825477,
+      0.669130606359
+     ],
+     [
+      -0.754709580223,
+      0.656059028991
+     ],
+     [
+      -0.766044443119,
+      0.642787609687
+     ],
+     [
+      -0.777145961457,
+      0.62932039105
+     ],
+     [
+      -0.788010753607,
+      0.615661475326
+     ],
+     [
+      -0.798635510047,
+      0.601815023152
+     ],
+     [
+      -0.809016994375,
+      0.587785252292
+     ],
+     [
+      -0.819152044289,
+      0.573576436351
+     ],
+     [
+      -0.829037572555,
+      0.559192903471
+     ],
+     [
+      -0.838670567945,
+      0.544639035015
+     ],
+     [
+      -0.848048096156,
+      0.529919264233
+     ],
+     [
+      -0.857167300702,
+      0.51503807491
+     ],
+     [
+      -0.866025403784,
+      0.5
+     ],
+     [
+      -0.874619707139,
+      0.484809620246
+     ],
+     [
+      -0.882947592859,
+      0.469471562786
+     ],
+     [
+      -0.891006524188,
+      0.45399049974
+     ],
+     [
+      -0.898794046299,
+      0.438371146789
+     ],
+     [
+      -0.906307787037,
+      0.422618261741
+     ],
+     [
+      -0.913545457643,
+      0.406736643076
+     ],
+     [
+      -0.920504853452,
+      0.390731128489
+     ],
+     [
+      -0.927183854567,
+      0.374606593416
+     ],
+     [
+      -0.933580426497,
+      0.358367949545
+     ],
+     [
+      -0.939692620786,
+      0.342020143326
+     ],
+     [
+      -0.945518575599,
+      0.325568154457
+     ],
+     [
+      -0.951056516295,
+      0.309016994375
+     ],
+     [
+      -0.956304755963,
+      0.292371704723
+     ],
+     [
+      -0.961261695938,
+      0.275637355817
+     ],
+     [
+      -0.965925826289,
+      0.258819045103
+     ],
+     [
+      -0.970295726276,
+      0.2419218956
+     ],
+     [
+      -0.974370064785,
+      0.224951054344
+     ],
+     [
+      -0.978147600734,
+      0.207911690818
+     ],
+     [
+      -0.981627183448,
+      0.190808995377
+     ],
+     [
+      -0.984807753012,
+      0.173648177667
+     ],
+     [
+      -0.987688340595,
+      0.15643446504
+     ],
+     [
+      -0.990268068742,
+      0.13917310096
+     ],
+     [
+      -0.992546151641,
+      0.121869343405
+     ],
+     [
+      -0.994521895368,
+      0.104528463268
+     ],
+     [
+      -0.996194698092,
+      0.087155742748
+     ],
+     [
+      -0.99756405026,
+      0.069756473744
+     ],
+     [
+      -0.998629534755,
+      0.052335956243
+     ],
+     [
+      -0.999390827019,
+      0.034899496703
+     ],
+     [
+      -0.999847695156,
+      0.017452406437
+     ],
+     [
+      -1.0,
+      0.0
+     ]
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "233864ce8676f3e78d985650dfef856196433ab2700ea8f164397ebd78de57a3"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s05a",
+   "data": "data/extra.json",
+   "eq": "unit-arrow dot x̂·x̂ (ours)",
+   "params": {
+    "a": [
+     1.0,
+     0.0
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s05a",
+   "data": "data/extra.json",
+   "eq": "unit-arrow dot x̂·ŷ (ours)",
+   "params": {
+    "a": [
+     1.0,
+     0.0
+    ],
+    "b": [
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s05a",
+   "data": "data/extra.json",
+   "eq": "unit-arrow dot ŷ·x̂ (ours)",
+   "params": {
+    "a": [
+     0.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s05a",
+   "data": "data/extra.json",
+   "eq": "unit-arrow dot ŷ·ŷ (ours)",
+   "params": {
+    "a": [
+     0.0,
+     1.0
+    ],
+    "b": [
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s05a",
+   "data": "data/extra.json",
+   "eq": "a·b by components (Kundu (2.2), provenance)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "2d311251337c35e4d3628720f349d4133233ed476372432e57314e0ab316bc35"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s07",
+   "data": "data/extra.json",
+   "eq": "ruler reading a·(cos α, sin α) = 5 cos α + sin α (ours)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     [
+      1.0,
+      0.0
+     ],
+     [
+      0.999961923064,
+      0.008726535498
+     ],
+     [
+      0.999847695156,
+      0.017452406437
+     ],
+     [
+      0.999657324976,
+      0.026176948308
+     ],
+     [
+      0.999390827019,
+      0.034899496703
+     ],
+     [
+      0.999048221582,
+      0.043619387365
+     ],
+     [
+      0.998629534755,
+      0.052335956243
+     ],
+     [
+      0.998134798422,
+      0.061048539535
+     ],
+     [
+      0.99756405026,
+      0.069756473744
+     ],
+     [
+      0.996917333733,
+      0.078459095728
+     ],
+     [
+      0.996194698092,
+      0.087155742748
+     ],
+     [
+      0.995396198367,
+      0.09584575252
+     ],
+     [
+      0.994521895368,
+      0.104528463268
+     ],
+     [
+      0.993571855677,
+      0.113203213768
+     ],
+     [
+      0.992546151641,
+      0.121869343405
+     ],
+     [
+      0.991444861374,
+      0.13052619222
+     ],
+     [
+      0.990268068742,
+      0.13917310096
+     ],
+     [
+      0.989015863362,
+      0.14780941113
+     ],
+     [
+      0.987688340595,
+      0.15643446504
+     ],
+     [
+      0.986285601537,
+      0.165047605861
+     ],
+     [
+      0.984807753012,
+      0.173648177667
+     ],
+     [
+      0.983254907564,
+      0.182235525492
+     ],
+     [
+      0.981627183448,
+      0.190808995377
+     ],
+     [
+      0.979924704621,
+      0.199367934417
+     ],
+     [
+      0.978147600734,
+      0.207911690818
+     ],
+     [
+      0.97629600712,
+      0.216439613938
+     ],
+     [
+      0.974370064785,
+      0.224951054344
+     ],
+     [
+      0.972369920398,
+      0.233445363856
+     ],
+     [
+      0.970295726276,
+      0.2419218956
+     ],
+     [
+      0.968147640378,
+      0.250380004054
+     ],
+     [
+      0.965925826289,
+      0.258819045103
+     ],
+     [
+      0.963630453209,
+      0.267238376078
+     ],
+     [
+      0.961261695938,
+      0.275637355817
+     ],
+     [
+      0.958819734868,
+      0.284015344704
+     ],
+     [
+      0.956304755963,
+      0.292371704723
+     ],
+     [
+      0.953716950748,
+      0.300705799504
+     ],
+     [
+      0.951056516295,
+      0.309016994375
+     ],
+     [
+      0.948323655206,
+      0.317304656405
+     ],
+     [
+      0.945518575599,
+      0.325568154457
+     ],
+     [
+      0.942641491092,
+      0.333806859234
+     ],
+     [
+      0.939692620786,
+      0.342020143326
+     ],
+     [
+      0.936672189248,
+      0.350207381259
+     ],
+     [
+      0.933580426497,
+      0.358367949545
+     ],
+     [
+      0.930417567982,
+      0.366501226724
+     ],
+     [
+      0.927183854567,
+      0.374606593416
+     ],
+     [
+      0.923879532511,
+      0.382683432365
+     ],
+     [
+      0.920504853452,
+      0.390731128489
+     ],
+     [
+      0.917060074385,
+      0.398749068925
+     ],
+     [
+      0.913545457643,
+      0.406736643076
+     ],
+     [
+      0.909961270877,
+      0.414693242656
+     ],
+     [
+      0.906307787037,
+      0.422618261741
+     ],
+     [
+      0.90258528435,
+      0.430511096808
+     ],
+     [
+      0.898794046299,
+      0.438371146789
+     ],
+     [
+      0.894934361602,
+      0.44619781311
+     ],
+     [
+      0.891006524188,
+      0.45399049974
+     ],
+     [
+      0.887010833178,
+      0.461748613235
+     ],
+     [
+      0.882947592859,
+      0.469471562786
+     ],
+     [
+      0.878817112662,
+      0.47715876026
+     ],
+     [
+      0.874619707139,
+      0.484809620246
+     ],
+     [
+      0.87035569594,
+      0.492423560103
+     ],
+     [
+      0.866025403784,
+      0.5
+     ],
+     [
+      0.861629160442,
+      0.507538362961
+     ],
+     [
+      0.857167300702,
+      0.51503807491
+     ],
+     [
+      0.852640164354,
+      0.522498564716
+     ],
+     [
+      0.848048096156,
+      0.529919264233
+     ],
+     [
+      0.843391445813,
+      0.537299608347
+     ],
+     [
+      0.838670567945,
+      0.544639035015
+     ],
+     [
+      0.833885822067,
+      0.551936985312
+     ],
+     [
+      0.829037572555,
+      0.559192903471
+     ],
+     [
+      0.824126188622,
+      0.566406236925
+     ],
+     [
+      0.819152044289,
+      0.573576436351
+     ],
+     [
+      0.814115518356,
+      0.580702955711
+     ],
+     [
+      0.809016994375,
+      0.587785252292
+     ],
+     [
+      0.803856860617,
+      0.594822786751
+     ],
+     [
+      0.798635510047,
+      0.601815023152
+     ],
+     [
+      0.793353340291,
+      0.608761429009
+     ],
+     [
+      0.788010753607,
+      0.615661475326
+     ],
+     [
+      0.782608156852,
+      0.622514636638
+     ],
+     [
+      0.777145961457,
+      0.62932039105
+     ],
+     [
+      0.771624583388,
+      0.636078220278
+     ],
+     [
+      0.766044443119,
+      0.642787609687
+     ],
+     [
+      0.7604059656,
+      0.64944804833
+     ],
+     [
+      0.754709580223,
+      0.656059028991
+     ],
+     [
+      0.748955720789,
+      0.662620048216
+     ],
+     [
+      0.743144825477,
+      0.669130606359
+     ],
+     [
+      0.73727733681,
+      0.675590207616
+     ],
+     [
+      0.731353701619,
+      0.681998360062
+     ],
+     [
+      0.725374371012,
+      0.688354575694
+     ],
+     [
+      0.719339800339,
+      0.694658370459
+     ],
+     [
+      0.713250449154,
+      0.7009092643
+     ],
+     [
+      0.707106781187,
+      0.707106781187
+     ],
+     [
+      0.7009092643,
+      0.713250449154
+     ],
+     [
+      0.694658370459,
+      0.719339800339
+     ],
+     [
+      0.688354575694,
+      0.725374371012
+     ],
+     [
+      0.681998360062,
+      0.731353701619
+     ],
+     [
+      0.675590207616,
+      0.73727733681
+     ],
+     [
+      0.669130606359,
+      0.743144825477
+     ],
+     [
+      0.662620048216,
+      0.748955720789
+     ],
+     [
+      0.656059028991,
+      0.754709580223
+     ],
+     [
+      0.64944804833,
+      0.7604059656
+     ],
+     [
+      0.642787609687,
+      0.766044443119
+     ],
+     [
+      0.636078220278,
+      0.771624583388
+     ],
+     [
+      0.62932039105,
+      0.777145961457
+     ],
+     [
+      0.622514636638,
+      0.782608156852
+     ],
+     [
+      0.615661475326,
+      0.788010753607
+     ],
+     [
+      0.608761429009,
+      0.793353340291
+     ],
+     [
+      0.601815023152,
+      0.798635510047
+     ],
+     [
+      0.594822786751,
+      0.803856860617
+     ],
+     [
+      0.587785252292,
+      0.809016994375
+     ],
+     [
+      0.580702955711,
+      0.814115518356
+     ],
+     [
+      0.573576436351,
+      0.819152044289
+     ],
+     [
+      0.566406236925,
+      0.824126188622
+     ],
+     [
+      0.559192903471,
+      0.829037572555
+     ],
+     [
+      0.551936985312,
+      0.833885822067
+     ],
+     [
+      0.544639035015,
+      0.838670567945
+     ],
+     [
+      0.537299608347,
+      0.843391445813
+     ],
+     [
+      0.529919264233,
+      0.848048096156
+     ],
+     [
+      0.522498564716,
+      0.852640164354
+     ],
+     [
+      0.51503807491,
+      0.857167300702
+     ],
+     [
+      0.507538362961,
+      0.861629160442
+     ],
+     [
+      0.5,
+      0.866025403784
+     ],
+     [
+      0.492423560103,
+      0.87035569594
+     ],
+     [
+      0.484809620246,
+      0.874619707139
+     ],
+     [
+      0.47715876026,
+      0.878817112662
+     ],
+     [
+      0.469471562786,
+      0.882947592859
+     ],
+     [
+      0.461748613235,
+      0.887010833178
+     ],
+     [
+      0.45399049974,
+      0.891006524188
+     ],
+     [
+      0.44619781311,
+      0.894934361602
+     ],
+     [
+      0.438371146789,
+      0.898794046299
+     ],
+     [
+      0.430511096808,
+      0.90258528435
+     ],
+     [
+      0.422618261741,
+      0.906307787037
+     ],
+     [
+      0.414693242656,
+      0.909961270877
+     ],
+     [
+      0.406736643076,
+      0.913545457643
+     ],
+     [
+      0.398749068925,
+      0.917060074385
+     ],
+     [
+      0.390731128489,
+      0.920504853452
+     ],
+     [
+      0.382683432365,
+      0.923879532511
+     ],
+     [
+      0.374606593416,
+      0.927183854567
+     ],
+     [
+      0.366501226724,
+      0.930417567982
+     ],
+     [
+      0.358367949545,
+      0.933580426497
+     ],
+     [
+      0.350207381259,
+      0.936672189248
+     ],
+     [
+      0.342020143326,
+      0.939692620786
+     ],
+     [
+      0.333806859234,
+      0.942641491092
+     ],
+     [
+      0.325568154457,
+      0.945518575599
+     ],
+     [
+      0.317304656405,
+      0.948323655206
+     ],
+     [
+      0.309016994375,
+      0.951056516295
+     ],
+     [
+      0.300705799504,
+      0.953716950748
+     ],
+     [
+      0.292371704723,
+      0.956304755963
+     ],
+     [
+      0.284015344704,
+      0.958819734868
+     ],
+     [
+      0.275637355817,
+      0.961261695938
+     ],
+     [
+      0.267238376078,
+      0.963630453209
+     ],
+     [
+      0.258819045103,
+      0.965925826289
+     ],
+     [
+      0.250380004054,
+      0.968147640378
+     ],
+     [
+      0.2419218956,
+      0.970295726276
+     ],
+     [
+      0.233445363856,
+      0.972369920398
+     ],
+     [
+      0.224951054344,
+      0.974370064785
+     ],
+     [
+      0.216439613938,
+      0.97629600712
+     ],
+     [
+      0.207911690818,
+      0.978147600734
+     ],
+     [
+      0.199367934417,
+      0.979924704621
+     ],
+     [
+      0.190808995377,
+      0.981627183448
+     ],
+     [
+      0.182235525492,
+      0.983254907564
+     ],
+     [
+      0.173648177667,
+      0.984807753012
+     ],
+     [
+      0.165047605861,
+      0.986285601537
+     ],
+     [
+      0.15643446504,
+      0.987688340595
+     ],
+     [
+      0.14780941113,
+      0.989015863362
+     ],
+     [
+      0.13917310096,
+      0.990268068742
+     ],
+     [
+      0.13052619222,
+      0.991444861374
+     ],
+     [
+      0.121869343405,
+      0.992546151641
+     ],
+     [
+      0.113203213768,
+      0.993571855677
+     ],
+     [
+      0.104528463268,
+      0.994521895368
+     ],
+     [
+      0.09584575252,
+      0.995396198367
+     ],
+     [
+      0.087155742748,
+      0.996194698092
+     ],
+     [
+      0.078459095728,
+      0.996917333733
+     ],
+     [
+      0.069756473744,
+      0.99756405026
+     ],
+     [
+      0.061048539535,
+      0.998134798422
+     ],
+     [
+      0.052335956243,
+      0.998629534755
+     ],
+     [
+      0.043619387365,
+      0.999048221582
+     ],
+     [
+      0.034899496703,
+      0.999390827019
+     ],
+     [
+      0.026176948308,
+      0.999657324976
+     ],
+     [
+      0.017452406437,
+      0.999847695156
+     ],
+     [
+      0.008726535498,
+      0.999961923064
+     ],
+     [
+      0.0,
+      1.0
+     ]
+    ]
+   },
+   "sha256": "dfd0522685198a88b564f727fcafe59c6d82b2955c11bfb078e906a4f72161d7"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s09",
+   "data": "data/extra.json",
+   "eq": "shadow of a on b (rectangle width)",
+   "params": {
+    "a": [
+     5.0,
+     1.0
+    ],
+    "b": [
+     1.0,
+     3.0
+    ]
+   },
+   "sha256": "45656ba31bb96a41ab43b818cdea4b5d9557fd9a8d08f8229c07653b57c0c4c7"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s09",
+   "data": "data/extra.json",
+   "eq": "shadow of b on a (rectangle width)",
+   "params": {
+    "a": [
+     1.0,
+     3.0
+    ],
+    "b": [
+     5.0,
+     1.0
+    ]
+   },
+   "sha256": "1c5c693937dca9f610443cfebaff9c730e0965011e62c4b4e7c32a3ec2770de2"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.scalar_projection",
+   "scene": "s11a",
+   "data": "data/extra.json",
+   "eq": "part of the push along the track (ours)",
+   "params": {
+    "a": [
+     10.000000000000002,
+     17.32050807568877
+    ],
+    "b": [
+     1.0,
+     0.0
+    ]
+   },
+   "sha256": "d8914b0509542258563faf133d949ff9c3bf62058e651d25aff819572da297ce"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s11a",
+   "data": "data/extra.json",
+   "eq": "work so far W(s) = F·(s, 0) (ours)",
+   "params": {
+    "a": [
+     10.000000000000002,
+     17.32050807568877
+    ],
+    "b": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.1,
+      0.0
+     ],
+     [
+      0.2,
+      0.0
+     ],
+     [
+      0.30000000000000004,
+      0.0
+     ],
+     [
+      0.4,
+      0.0
+     ],
+     [
+      0.5,
+      0.0
+     ],
+     [
+      0.6000000000000001,
+      0.0
+     ],
+     [
+      0.7000000000000001,
+      0.0
+     ],
+     [
+      0.8,
+      0.0
+     ],
+     [
+      0.9,
+      0.0
+     ],
+     [
+      1.0,
+      0.0
+     ],
+     [
+      1.1,
+      0.0
+     ],
+     [
+      1.2000000000000002,
+      0.0
+     ],
+     [
+      1.3,
+      0.0
+     ],
+     [
+      1.4000000000000001,
+      0.0
+     ],
+     [
+      1.5,
+      0.0
+     ],
+     [
+      1.6,
+      0.0
+     ],
+     [
+      1.7000000000000002,
+      0.0
+     ],
+     [
+      1.8,
+      0.0
+     ],
+     [
+      1.9000000000000001,
+      0.0
+     ],
+     [
+      2.0,
+      0.0
+     ],
+     [
+      2.1,
+      0.0
+     ],
+     [
+      2.2,
+      0.0
+     ],
+     [
+      2.3000000000000003,
+      0.0
+     ],
+     [
+      2.4000000000000004,
+      0.0
+     ],
+     [
+      2.5,
+      0.0
+     ],
+     [
+      2.6,
+      0.0
+     ],
+     [
+      2.7,
+      0.0
+     ],
+     [
+      2.8000000000000003,
+      0.0
+     ],
+     [
+      2.9000000000000004,
+      0.0
+     ],
+     [
+      3.0,
+      0.0
+     ],
+     [
+      3.1,
+      0.0
+     ],
+     [
+      3.2,
+      0.0
+     ],
+     [
+      3.3000000000000003,
+      0.0
+     ],
+     [
+      3.4000000000000004,
+      0.0
+     ],
+     [
+      3.5,
+      0.0
+     ],
+     [
+      3.6,
+      0.0
+     ],
+     [
+      3.7,
+      0.0
+     ],
+     [
+      3.8000000000000003,
+      0.0
+     ],
+     [
+      3.9000000000000004,
+      0.0
+     ],
+     [
+      4.0,
+      0.0
+     ],
+     [
+      4.1000000000000005,
+      0.0
+     ],
+     [
+      4.2,
+      0.0
+     ],
+     [
+      4.3,
+      0.0
+     ],
+     [
+      4.4,
+      0.0
+     ],
+     [
+      4.5,
+      0.0
+     ],
+     [
+      4.6000000000000005,
+      0.0
+     ],
+     [
+      4.7,
+      0.0
+     ],
+     [
+      4.800000000000001,
+      0.0
+     ],
+     [
+      4.9,
+      0.0
+     ],
+     [
+      5.0,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "80928d9b0730f611b8695ec853a3a6419a0e85afe43020b0c663e83a195b1e6f"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s11b",
+   "data": "data/extra.json",
+   "eq": "F·d for every small step of the whirl (ours)",
+   "params": {
+    "a": [
+     [
+      -1.0,
+      -0.0
+     ],
+     [
+      -0.9986295347545738,
+      -0.05233595624294383
+     ],
+     [
+      -0.9945218953682733,
+      -0.10452846326765346
+     ],
+     [
+      -0.9876883405951378,
+      -0.15643446504023087
+     ],
+     [
+      -0.9781476007338057,
+      -0.20791169081775931
+     ],
+     [
+      -0.9659258262890683,
+      -0.25881904510252074
+     ],
+     [
+      -0.9510565162951535,
+      -0.3090169943749474
+     ],
+     [
+      -0.9335804264972017,
+      -0.3583679495453002
+     ],
+     [
+      -0.9135454576426009,
+      -0.40673664307580015
+     ],
+     [
+      -0.8910065241883679,
+      -0.45399049973954675
+     ],
+     [
+      -0.8660254037844387,
+      -0.49999999999999994
+     ],
+     [
+      -0.838670567945424,
+      -0.544639035015027
+     ],
+     [
+      -0.8090169943749475,
+      -0.5877852522924731
+     ],
+     [
+      -0.7771459614569709,
+      -0.6293203910498374
+     ],
+     [
+      -0.7431448254773944,
+      -0.6691306063588581
+     ],
+     [
+      -0.7071067811865476,
+      -0.7071067811865476
+     ],
+     [
+      -0.6691306063588582,
+      -0.7431448254773941
+     ],
+     [
+      -0.6293203910498375,
+      -0.7771459614569708
+     ],
+     [
+      -0.5877852522924731,
+      -0.8090169943749475
+     ],
+     [
+      -0.5446390350150272,
+      -0.8386705679454239
+     ],
+     [
+      -0.5000000000000001,
+      -0.8660254037844386
+     ],
+     [
+      -0.4539904997395468,
+      -0.8910065241883678
+     ],
+     [
+      -0.4067366430758004,
+      -0.9135454576426009
+     ],
+     [
+      -0.3583679495453004,
+      -0.9335804264972017
+     ],
+     [
+      -0.30901699437494745,
+      -0.9510565162951535
+     ],
+     [
+      -0.25881904510252096,
+      -0.9659258262890682
+     ],
+     [
+      -0.20791169081775945,
+      -0.9781476007338056
+     ],
+     [
+      -0.15643446504023092,
+      -0.9876883405951378
+     ],
+     [
+      -0.10452846326765368,
+      -0.9945218953682733
+     ],
+     [
+      -0.052335956242943966,
+      -0.9986295347545738
+     ],
+     [
+      -6.123233995736766e-17,
+      -1.0
+     ],
+     [
+      0.05233595624294362,
+      -0.9986295347545738
+     ],
+     [
+      0.10452846326765333,
+      -0.9945218953682734
+     ],
+     [
+      0.1564344650402308,
+      -0.9876883405951378
+     ],
+     [
+      0.20791169081775912,
+      -0.9781476007338057
+     ],
+     [
+      0.25881904510252063,
+      -0.9659258262890683
+     ],
+     [
+      0.30901699437494734,
+      -0.9510565162951536
+     ],
+     [
+      0.35836794954530005,
+      -0.9335804264972019
+     ],
+     [
+      0.4067366430758001,
+      -0.913545457642601
+     ],
+     [
+      0.45399049973954675,
+      -0.8910065241883679
+     ],
+     [
+      0.4999999999999998,
+      -0.8660254037844387
+     ],
+     [
+      0.5446390350150268,
+      -0.8386705679454243
+     ],
+     [
+      0.587785252292473,
+      -0.8090169943749475
+     ],
+     [
+      0.6293203910498373,
+      -0.777145961456971
+     ],
+     [
+      0.6691306063588579,
+      -0.7431448254773945
+     ],
+     [
+      0.7071067811865475,
+      -0.7071067811865476
+     ],
+     [
+      0.7431448254773941,
+      -0.6691306063588583
+     ],
+     [
+      0.7771459614569707,
+      -0.6293203910498377
+     ],
+     [
+      0.8090169943749473,
+      -0.5877852522924732
+     ],
+     [
+      0.8386705679454239,
+      -0.5446390350150273
+     ],
+     [
+      0.8660254037844385,
+      -0.5000000000000003
+     ],
+     [
+      0.8910065241883678,
+      -0.45399049973954686
+     ],
+     [
+      0.9135454576426008,
+      -0.40673664307580043
+     ],
+     [
+      0.9335804264972016,
+      -0.35836794954530066
+     ],
+     [
+      0.9510565162951535,
+      -0.3090169943749475
+     ],
+     [
+      0.9659258262890682,
+      -0.258819045102521
+     ],
+     [
+      0.9781476007338056,
+      -0.20791169081775973
+     ],
+     [
+      0.9876883405951377,
+      -0.15643446504023098
+     ],
+     [
+      0.9945218953682733,
+      -0.10452846326765373
+     ],
+     [
+      0.9986295347545738,
+      -0.05233595624294425
+     ],
+     [
+      1.0,
+      -1.2246467991473532e-16
+     ],
+     [
+      0.9986295347545738,
+      0.052335956242943564
+     ],
+     [
+      0.9945218953682734,
+      0.10452846326765305
+     ],
+     [
+      0.9876883405951378,
+      0.15643446504023073
+     ],
+     [
+      0.9781476007338057,
+      0.20791169081775907
+     ],
+     [
+      0.9659258262890684,
+      0.25881904510252035
+     ],
+     [
+      0.9510565162951536,
+      0.3090169943749473
+     ],
+     [
+      0.9335804264972019,
+      0.3583679495453
+     ],
+     [
+      0.9135454576426011,
+      0.4067366430757998
+     ],
+     [
+      0.8910065241883679,
+      0.45399049973954664
+     ],
+     [
+      0.8660254037844388,
+      0.4999999999999997
+     ],
+     [
+      0.8386705679454243,
+      0.5446390350150268
+     ],
+     [
+      0.8090169943749475,
+      0.587785252292473
+     ],
+     [
+      0.7771459614569711,
+      0.6293203910498373
+     ],
+     [
+      0.7431448254773945,
+      0.6691306063588579
+     ],
+     [
+      0.7071067811865477,
+      0.7071067811865475
+     ],
+     [
+      0.6691306063588585,
+      0.743144825477394
+     ],
+     [
+      0.6293203910498378,
+      0.7771459614569706
+     ],
+     [
+      0.5877852522924732,
+      0.8090169943749473
+     ],
+     [
+      0.5446390350150278,
+      0.8386705679454236
+     ],
+     [
+      0.5000000000000004,
+      0.8660254037844385
+     ],
+     [
+      0.4539904997395469,
+      0.8910065241883678
+     ],
+     [
+      0.40673664307580093,
+      0.9135454576426005
+     ],
+     [
+      0.3583679495453007,
+      0.9335804264972016
+     ],
+     [
+      0.30901699437494756,
+      0.9510565162951535
+     ],
+     [
+      0.2588190451025215,
+      0.9659258262890681
+     ],
+     [
+      0.2079116908177598,
+      0.9781476007338056
+     ],
+     [
+      0.15643446504023104,
+      0.9876883405951377
+     ],
+     [
+      0.10452846326765423,
+      0.9945218953682733
+     ],
+     [
+      0.052335956242944306,
+      0.9986295347545738
+     ],
+     [
+      1.8369701987210297e-16,
+      1.0
+     ],
+     [
+      -0.05233595624294306,
+      0.9986295347545739
+     ],
+     [
+      -0.10452846326765299,
+      0.9945218953682734
+     ],
+     [
+      -0.15643446504023067,
+      0.9876883405951378
+     ],
+     [
+      -0.20791169081775857,
+      0.9781476007338058
+     ],
+     [
+      -0.2588190451025203,
+      0.9659258262890684
+     ],
+     [
+      -0.30901699437494723,
+      0.9510565162951536
+     ],
+     [
+      -0.35836794954529955,
+      0.9335804264972021
+     ],
+     [
+      -0.40673664307579976,
+      0.9135454576426011
+     ],
+     [
+      -0.45399049973954664,
+      0.891006524188368
+     ],
+     [
+      -0.49999999999999933,
+      0.866025403784439
+     ],
+     [
+      -0.5446390350150266,
+      0.8386705679454243
+     ],
+     [
+      -0.5877852522924729,
+      0.8090169943749476
+     ],
+     [
+      -0.6293203910498368,
+      0.7771459614569713
+     ],
+     [
+      -0.6691306063588578,
+      0.7431448254773946
+     ],
+     [
+      -0.7071067811865474,
+      0.7071067811865477
+     ],
+     [
+      -0.7431448254773937,
+      0.6691306063588588
+     ],
+     [
+      -0.7771459614569706,
+      0.6293203910498378
+     ],
+     [
+      -0.8090169943749473,
+      0.5877852522924734
+     ],
+     [
+      -0.8386705679454236,
+      0.5446390350150278
+     ],
+     [
+      -0.8660254037844384,
+      0.5000000000000004
+     ],
+     [
+      -0.8910065241883678,
+      0.45399049973954697
+     ],
+     [
+      -0.9135454576426005,
+      0.40673664307580093
+     ],
+     [
+      -0.9335804264972015,
+      0.35836794954530077
+     ],
+     [
+      -0.9510565162951535,
+      0.3090169943749477
+     ],
+     [
+      -0.9659258262890681,
+      0.25881904510252157
+     ],
+     [
+      -0.9781476007338056,
+      0.20791169081775987
+     ],
+     [
+      -0.9876883405951377,
+      0.1564344650402311
+     ],
+     [
+      -0.9945218953682733,
+      0.1045284632676543
+     ],
+     [
+      -0.9986295347545738,
+      0.05233595624294437
+     ]
+    ],
+    "b": [
+     [
+      -0.0,
+      0.05235987755982988
+     ],
+     [
+      -0.002740304260857153,
+      0.05228812016737937
+     ],
+     [
+      -0.005473097538211511,
+      0.05207304467205274
+     ],
+     [
+      -0.008190889435643977,
+      0.05171524058083297
+     ],
+     [
+      -0.010886230674475085,
+      0.05121568860986343
+     ],
+     [
+      -0.013551733511720074,
+      0.05057575799637313
+     ],
+     [
+      -0.016180091989378885,
+      0.04979720274569259
+     ],
+     [
+      -0.01876410195955921,
+      0.048882156823647244
+     ],
+     [
+      -0.021296680830545124,
+      0.047833128307505336
+     ],
+     [
+      -0.023770886979688648,
+      0.046652992511512545
+     ],
+     [
+      -0.026179938779914938,
+      0.04534498410585545
+     ],
+     [
+      -0.028517233187690713,
+      0.04391268825065539
+     ],
+     [
+      -0.03077636384150761,
+      0.04236003076929383
+     ],
+     [
+      -0.032951138621273746,
+      0.04069126738800327
+     ],
+     [
+      -0.03503559662048454,
+      0.03891097207121751
+     ],
+     [
+      -0.03702402448465305,
+      0.03702402448465305
+     ],
+     [
+      -0.038910972071217506,
+      0.03503559662048454
+     ],
+     [
+      -0.040691267388003265,
+      0.03295113862127375
+     ],
+     [
+      -0.04236003076929383,
+      0.03077636384150761
+     ],
+     [
+      -0.043912688250655384,
+      0.028517233187690724
+     ],
+     [
+      -0.04534498410585544,
+      0.02617993877991495
+     ],
+     [
+      -0.04665299251151254,
+      0.02377088697968865
+     ],
+     [
+      -0.047833128307505336,
+      0.021296680830545138
+     ],
+     [
+      -0.048882156823647244,
+      0.018764101959559222
+     ],
+     [
+      -0.04979720274569259,
+      0.01618009198937889
+     ],
+     [
+      -0.05057575799637312,
+      0.013551733511720086
+     ],
+     [
+      -0.051215688609863426,
+      0.010886230674475092
+     ],
+     [
+      -0.05171524058083297,
+      0.008190889435643979
+     ],
+     [
+      -0.05207304467205274,
+      0.005473097538211522
+     ],
+     [
+      -0.05228812016737937,
+      0.0027403042608571604
+     ],
+     [
+      -0.05235987755982988,
+      3.2061178228696495e-18
+     ],
+     [
+      -0.05228812016737937,
+      -0.002740304260857142
+     ],
+     [
+      -0.05207304467205274,
+      -0.005473097538211504
+     ],
+     [
+      -0.05171524058083297,
+      -0.008190889435643974
+     ],
+     [
+      -0.05121568860986343,
+      -0.010886230674475075
+     ],
+     [
+      -0.05057575799637313,
+      -0.013551733511720069
+     ],
+     [
+      -0.0497972027456926,
+      -0.01618009198937888
+     ],
+     [
+      -0.04888215682364725,
+      -0.018764101959559205
+     ],
+     [
+      -0.04783312830750534,
+      -0.02129668083054512
+     ],
+     [
+      -0.046652992511512545,
+      -0.023770886979688648
+     ],
+     [
+      -0.04534498410585545,
+      -0.02617993877991493
+     ],
+     [
+      -0.043912688250655404,
+      -0.028517233187690703
+     ],
+     [
+      -0.04236003076929383,
+      -0.030776363841507604
+     ],
+     [
+      -0.04069126738800328,
+      -0.03295113862127374
+     ],
+     [
+      -0.03891097207121752,
+      -0.03503559662048453
+     ],
+     [
+      -0.03702402448465305,
+      -0.03702402448465304
+     ],
+     [
+      -0.03503559662048455,
+      -0.038910972071217506
+     ],
+     [
+      -0.032951138621273766,
+      -0.04069126738800326
+     ],
+     [
+      -0.030776363841507615,
+      -0.04236003076929382
+     ],
+     [
+      -0.02851723318769073,
+      -0.043912688250655384
+     ],
+     [
+      -0.02617993877991496,
+      -0.04534498410585543
+     ],
+     [
+      -0.023770886979688655,
+      -0.04665299251151254
+     ],
+     [
+      -0.021296680830545138,
+      -0.04783312830750533
+     ],
+     [
+      -0.018764101959559236,
+      -0.04888215682364724
+     ],
+     [
+      -0.016180091989378892,
+      -0.04979720274569259
+     ],
+     [
+      -0.013551733511720088,
+      -0.05057575799637312
+     ],
+     [
+      -0.010886230674475106,
+      -0.051215688609863426
+     ],
+     [
+      -0.008190889435643983,
+      -0.05171524058083296
+     ],
+     [
+      -0.005473097538211525,
+      -0.05207304467205274
+     ],
+     [
+      -0.0027403042608571755,
+      -0.05228812016737937
+     ],
+     [
+      -6.412235645739299e-18,
+      -0.05235987755982988
+     ],
+     [
+      0.0027403042608571395,
+      -0.05228812016737937
+     ],
+     [
+      0.005473097538211489,
+      -0.05207304467205274
+     ],
+     [
+      0.008190889435643969,
+      -0.05171524058083297
+     ],
+     [
+      0.010886230674475071,
+      -0.05121568860986343
+     ],
+     [
+      0.013551733511720053,
+      -0.05057575799637313
+     ],
+     [
+      0.016180091989378878,
+      -0.0497972027456926
+     ],
+     [
+      0.0187641019595592,
+      -0.04888215682364725
+     ],
+     [
+      0.021296680830545107,
+      -0.04783312830750535
+     ],
+     [
+      0.02377088697968864,
+      -0.046652992511512545
+     ],
+     [
+      0.026179938779914928,
+      -0.045344984105855454
+     ],
+     [
+      0.028517233187690703,
+      -0.043912688250655404
+     ],
+     [
+      0.030776363841507604,
+      -0.04236003076929383
+     ],
+     [
+      0.03295113862127374,
+      -0.04069126738800328
+     ],
+     [
+      0.03503559662048453,
+      -0.03891097207121752
+     ],
+     [
+      0.03702402448465304,
+      -0.037024024484653056
+     ],
+     [
+      0.0389109720712175,
+      -0.035035596620484555
+     ],
+     [
+      0.04069126738800325,
+      -0.03295113862127377
+     ],
+     [
+      0.04236003076929382,
+      -0.030776363841507615
+     ],
+     [
+      0.04391268825065537,
+      -0.028517233187690755
+     ],
+     [
+      0.04534498410585543,
+      -0.026179938779914966
+     ],
+     [
+      0.04665299251151254,
+      -0.023770886979688658
+     ],
+     [
+      0.04783312830750532,
+      -0.021296680830545166
+     ],
+     [
+      0.04888215682364724,
+      -0.01876410195955924
+     ],
+     [
+      0.04979720274569259,
+      -0.016180091989378895
+     ],
+     [
+      0.050575757996373115,
+      -0.013551733511720114
+     ],
+     [
+      0.051215688609863426,
+      -0.01088623067447511
+     ],
+     [
+      0.05171524058083296,
+      -0.008190889435643986
+     ],
+     [
+      0.05207304467205274,
+      -0.005473097538211551
+     ],
+     [
+      0.05228812016737937,
+      -0.002740304260857178
+     ],
+     [
+      0.05235987755982988,
+      -9.618353468608949e-18
+     ],
+     [
+      0.052288120167379375,
+      0.0027403042608571127
+     ],
+     [
+      0.05207304467205274,
+      0.0054730975382114855
+     ],
+     [
+      0.05171524058083297,
+      0.008190889435643967
+     ],
+     [
+      0.05121568860986344,
+      0.010886230674475045
+     ],
+     [
+      0.05057575799637313,
+      0.013551733511720052
+     ],
+     [
+      0.0497972027456926,
+      0.016180091989378878
+     ],
+     [
+      0.048882156823647264,
+      0.018764101959559177
+     ],
+     [
+      0.04783312830750535,
+      0.021296680830545103
+     ],
+     [
+      0.04665299251151255,
+      0.02377088697968864
+     ],
+     [
+      0.04534498410585546,
+      0.026179938779914907
+     ],
+     [
+      0.043912688250655404,
+      0.028517233187690696
+     ],
+     [
+      0.04236003076929384,
+      0.030776363841507597
+     ],
+     [
+      0.04069126738800329,
+      0.03295113862127372
+     ],
+     [
+      0.03891097207121753,
+      0.03503559662048452
+     ],
+     [
+      0.037024024484653056,
+      0.03702402448465304
+     ],
+     [
+      0.035035596620484576,
+      0.03891097207121748
+     ],
+     [
+      0.03295113862127377,
+      0.04069126738800325
+     ],
+     [
+      0.03077636384150762,
+      0.04236003076929382
+     ],
+     [
+      0.028517233187690755,
+      0.04391268825065537
+     ],
+     [
+      0.026179938779914966,
+      0.045344984105855426
+     ],
+     [
+      0.023770886979688658,
+      0.04665299251151254
+     ],
+     [
+      0.021296680830545166,
+      0.04783312830750532
+     ],
+     [
+      0.018764101959559243,
+      0.04888215682364724
+     ],
+     [
+      0.0161800919893789,
+      0.04979720274569259
+     ],
+     [
+      0.013551733511720118,
+      0.050575757996373115
+     ],
+     [
+      0.010886230674475113,
+      0.051215688609863426
+     ],
+     [
+      0.008190889435643988,
+      0.05171524058083296
+     ],
+     [
+      0.005473097538211555,
+      0.05207304467205274
+     ],
+     [
+      0.0027403042608571816,
+      0.05228812016737937
+     ]
+    ]
+   },
+   "sha256": "698f4688240b5f891d1e82fe4d3b7a30dd01e489835e3f2d80af4172f5f784db"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s20b",
+   "data": "data/extra.json",
+   "eq": "v·ê, the wind along the runway (ours)",
+   "params": {
+    "a": [
+     4.999999999999999,
+     8.660254037844387
+    ],
+    "b": [
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "2114f51cd72be1246f3466a77b55943d0242895905633abfab4166065c0f2c8d"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.angle_between",
+   "scene": "s20b",
+   "data": "data/extra.json",
+   "eq": "angle between the wind and the runway",
+   "params": {
+    "a": [
+     4.999999999999999,
+     8.660254037844387
+    ],
+    "b": [
+     0.0,
+     1.0
+    ],
+    "degrees": true
+   },
+   "sha256": "12b2d45e39d8e3887f5ae1e0fa2b239064a321ba24df17a593549489612833ad"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s20c",
+   "data": "data/extra.json",
+   "eq": "ŝ·n̂ for the window tilted 0..90° (Lambert's cosine law)",
+   "params": {
+    "a": [
+     -1.0,
+     0.0
+    ],
+    "b": [
+     [
+      -1.0,
+      0.0
+     ],
+     [
+      -0.999847695156,
+      0.017452406437
+     ],
+     [
+      -0.999390827019,
+      0.034899496703
+     ],
+     [
+      -0.998629534755,
+      0.052335956243
+     ],
+     [
+      -0.99756405026,
+      0.069756473744
+     ],
+     [
+      -0.996194698092,
+      0.087155742748
+     ],
+     [
+      -0.994521895368,
+      0.104528463268
+     ],
+     [
+      -0.992546151641,
+      0.121869343405
+     ],
+     [
+      -0.990268068742,
+      0.13917310096
+     ],
+     [
+      -0.987688340595,
+      0.15643446504
+     ],
+     [
+      -0.984807753012,
+      0.173648177667
+     ],
+     [
+      -0.981627183448,
+      0.190808995377
+     ],
+     [
+      -0.978147600734,
+      0.207911690818
+     ],
+     [
+      -0.974370064785,
+      0.224951054344
+     ],
+     [
+      -0.970295726276,
+      0.2419218956
+     ],
+     [
+      -0.965925826289,
+      0.258819045103
+     ],
+     [
+      -0.961261695938,
+      0.275637355817
+     ],
+     [
+      -0.956304755963,
+      0.292371704723
+     ],
+     [
+      -0.951056516295,
+      0.309016994375
+     ],
+     [
+      -0.945518575599,
+      0.325568154457
+     ],
+     [
+      -0.939692620786,
+      0.342020143326
+     ],
+     [
+      -0.933580426497,
+      0.358367949545
+     ],
+     [
+      -0.927183854567,
+      0.374606593416
+     ],
+     [
+      -0.920504853452,
+      0.390731128489
+     ],
+     [
+      -0.913545457643,
+      0.406736643076
+     ],
+     [
+      -0.906307787037,
+      0.422618261741
+     ],
+     [
+      -0.898794046299,
+      0.438371146789
+     ],
+     [
+      -0.891006524188,
+      0.45399049974
+     ],
+     [
+      -0.882947592859,
+      0.469471562786
+     ],
+     [
+      -0.874619707139,
+      0.484809620246
+     ],
+     [
+      -0.866025403784,
+      0.5
+     ],
+     [
+      -0.857167300702,
+      0.51503807491
+     ],
+     [
+      -0.848048096156,
+      0.529919264233
+     ],
+     [
+      -0.838670567945,
+      0.544639035015
+     ],
+     [
+      -0.829037572555,
+      0.559192903471
+     ],
+     [
+      -0.819152044289,
+      0.573576436351
+     ],
+     [
+      -0.809016994375,
+      0.587785252292
+     ],
+     [
+      -0.798635510047,
+      0.601815023152
+     ],
+     [
+      -0.788010753607,
+      0.615661475326
+     ],
+     [
+      -0.777145961457,
+      0.62932039105
+     ],
+     [
+      -0.766044443119,
+      0.642787609687
+     ],
+     [
+      -0.754709580223,
+      0.656059028991
+     ],
+     [
+      -0.743144825477,
+      0.669130606359
+     ],
+     [
+      -0.731353701619,
+      0.681998360062
+     ],
+     [
+      -0.719339800339,
+      0.694658370459
+     ],
+     [
+      -0.707106781187,
+      0.707106781187
+     ],
+     [
+      -0.694658370459,
+      0.719339800339
+     ],
+     [
+      -0.681998360062,
+      0.731353701619
+     ],
+     [
+      -0.669130606359,
+      0.743144825477
+     ],
+     [
+      -0.656059028991,
+      0.754709580223
+     ],
+     [
+      -0.642787609687,
+      0.766044443119
+     ],
+     [
+      -0.62932039105,
+      0.777145961457
+     ],
+     [
+      -0.615661475326,
+      0.788010753607
+     ],
+     [
+      -0.601815023152,
+      0.798635510047
+     ],
+     [
+      -0.587785252292,
+      0.809016994375
+     ],
+     [
+      -0.573576436351,
+      0.819152044289
+     ],
+     [
+      -0.559192903471,
+      0.829037572555
+     ],
+     [
+      -0.544639035015,
+      0.838670567945
+     ],
+     [
+      -0.529919264233,
+      0.848048096156
+     ],
+     [
+      -0.51503807491,
+      0.857167300702
+     ],
+     [
+      -0.5,
+      0.866025403784
+     ],
+     [
+      -0.484809620246,
+      0.874619707139
+     ],
+     [
+      -0.469471562786,
+      0.882947592859
+     ],
+     [
+      -0.45399049974,
+      0.891006524188
+     ],
+     [
+      -0.438371146789,
+      0.898794046299
+     ],
+     [
+      -0.422618261741,
+      0.906307787037
+     ],
+     [
+      -0.406736643076,
+      0.913545457643
+     ],
+     [
+      -0.390731128489,
+      0.920504853452
+     ],
+     [
+      -0.374606593416,
+      0.927183854567
+     ],
+     [
+      -0.358367949545,
+      0.933580426497
+     ],
+     [
+      -0.342020143326,
+      0.939692620786
+     ],
+     [
+      -0.325568154457,
+      0.945518575599
+     ],
+     [
+      -0.309016994375,
+      0.951056516295
+     ],
+     [
+      -0.292371704723,
+      0.956304755963
+     ],
+     [
+      -0.275637355817,
+      0.961261695938
+     ],
+     [
+      -0.258819045103,
+      0.965925826289
+     ],
+     [
+      -0.2419218956,
+      0.970295726276
+     ],
+     [
+      -0.224951054344,
+      0.974370064785
+     ],
+     [
+      -0.207911690818,
+      0.978147600734
+     ],
+     [
+      -0.190808995377,
+      0.981627183448
+     ],
+     [
+      -0.173648177667,
+      0.984807753012
+     ],
+     [
+      -0.15643446504,
+      0.987688340595
+     ],
+     [
+      -0.13917310096,
+      0.990268068742
+     ],
+     [
+      -0.121869343405,
+      0.992546151641
+     ],
+     [
+      -0.104528463268,
+      0.994521895368
+     ],
+     [
+      -0.087155742748,
+      0.996194698092
+     ],
+     [
+      -0.069756473744,
+      0.99756405026
+     ],
+     [
+      -0.052335956243,
+      0.998629534755
+     ],
+     [
+      -0.034899496703,
+      0.999390827019
+     ],
+     [
+      -0.017452406437,
+      0.999847695156
+     ],
+     [
+      -0.0,
+      1.0
+     ]
+    ]
+   },
+   "sha256": "f7fe141d6b670b5451318c083937d185b58684225dffc19a4939053e59fcea35"
+  },
+  {
+   "fn": "fluidpy.geo.terrain.sun_vector",
+   "scene": "s20c",
+   "data": "data/extra.json",
+   "eq": "ŝ at equinox noon (elevation 90° − latitude, due south)",
+   "params": {
+    "elevation_deg": [
+     90.0,
+     30.0
+    ],
+    "azimuth_deg": [
+     180.0,
+     180.0
+    ]
+   },
+   "sha256": "19c778d2f13a51f78ea9b111d964b4ef36da7d5eeae667105d55c1013688f376"
+  },
+  {
+   "fn": "fluidpy.geo.terrain.insolation_factor",
+   "scene": "s20c",
+   "data": "data/extra.json",
+   "eq": "ŝ·n̂ on flat ground at 0°N, equinox noon",
+   "params": {
+    "normals": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "sun_elev_deg": 90.0,
+    "sun_az_deg": 180.0
+   },
+   "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+  },
+  {
+   "fn": "fluidpy.geo.terrain.insolation_factor",
+   "scene": "s20c",
+   "data": "data/extra.json",
+   "eq": "ŝ·n̂ on flat ground at 60°N, equinox noon",
+   "params": {
+    "normals": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "sun_elev_deg": 30.0,
+    "sun_az_deg": 180.0
+   },
+   "sha256": "657d1e826c160357065d249dcc1e4728f113ba30b8a5ee7ba0fcfbc5a182244a"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s20c",
+   "data": "data/extra.json",
+   "eq": "ŝ·n̂ with n̂ = local up (0, 0, 1)",
+   "params": {
+    "a": [
+     [
+      7.498798913309288e-33,
+      -6.123233995736766e-17,
+      1.0
+     ],
+     [
+      1.0605752387249069e-16,
+      -0.8660254037844387,
+      0.49999999999999994
+     ]
+    ],
+    "b": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "sha256": "957bc64cb9ccd2509ef43049e577daf300e3e81dc7cb9f5b5b1ea8088bd54e41"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s20d",
+   "data": "data/extra.json",
+   "eq": "τ·u, power per square metre (with / against the current)",
+   "params": {
+    "a": [
+     0.1,
+     0.0
+    ],
+    "b": [
+     [
+      0.1,
+      0.0
+     ],
+     [
+      -0.1,
+      0.0
+     ]
+    ]
+   },
+   "sha256": "6571948675ac315b7b669a359c4f0b3bdf3988d786415e8291bc2473c91f0b7e"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.pattern_correlation",
+   "scene": "s20e",
+   "data": "data/extra.json",
+   "eq": "uncentred pattern correlation = cos θ = A·B/(|A||B|)",
+   "params": {
+    "a": [
+     3.0,
+     1.0,
+     -2.0,
+     -2.0
+    ],
+    "b": [
+     2.0,
+     2.0,
+     -1.0,
+     -3.0
+    ]
+   },
+   "sha256": "35f72d9494a1976afee6437729bf9c832ab7c6c72a630b93725c7a2bee772fd9"
+  }
+ ],
+ "checks_v6": 121,
+ "exaggeration": [
+  "s11a cart and rails, s11b whirl, s20b runway, s20c window: illustrative glyphs with the stated numbers",
+  "s20c globe: the sun's rays ignore the atmosphere; declination 0 (equinox day |δ| ≤ 0.4°)",
+  "s20d tiles: illustrative easy numbers; the circumpolar current band (50–60°S) is schematic; the winds are data"
+ ],
+ "credits": {
+  "W2_wind_work": {
+   "value": "about 1 TW (10^12 W) of wind work on the oceanic general circulation, dominated by the mean zonal wind over the Southern Ocean",
+   "primary": "Wunsch, C. (1998): The work done by the wind on the oceanic general circulation. J. Phys. Oceanogr., 28(11), 2332-2340. doi:10.1175/1520-0485(1998)028<2332:TWDBTW>2.0.CO;2",
+   "later": "Hughes, C. W. and C. Wilson (2008): Wind work on the geostrophic ocean circulation: an observational study of the effect of small scales in the wind stress. J. Geophys. Res., 113, C02016. doi:10.1029/2007JC004371 (0.76 TW with the current-relative stress)",
+   "verified": "2026-10-28 by the motion-builder: DOIs resolved on api.crossref.org (title, authors, volume, pages); the Wunsch abstract (OpenAlex) states 'The value of about 1 TW … is dominated by the work done by the mean zonal wind in the Southern Ocean'; the Hughes & Wilson abstract gives 0.76 TW. Narration says 'about a million million watts, most of it over the Southern Ocean'."
+  },
+  "W3_ACC": "the Southern Ocean westerlies blow along the Antarctic Circumpolar Current (standard; winds on the globe: NCEP/NCAR Reanalysis 1, 1991-2020 annual-mean 10-m wind, NOAA PSL, public domain)",
+  "S2_analogues": "Lorenz, E. N. (1969): Atmospheric predictability as revealed by naturally occurring analogues. J. Atmos. Sci., 26, 636-646 (analogue forecasting as a past method)",
+  "R2_runway": "pilots resolve the wind into along-runway and crosswind parts (FAA Airplane Flying Handbook, FAA-H-8083-3; crosswind chapter)",
+  "imagery": "NASA Blue Marble Next Generation, topography + bathymetry, September 2004 (NASA Earth Observatory, public domain), via movies/ch00/ch00_cross_product_why/data/real/",
+  "wind_source_sha256": "092a3ee70e80d0aa3517ded7ca1410dd343505c5601db6545fe20dd832f97962",
+  "bmng_source_sha256": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
+  "sound": "music tools/sound/styles.py 'maths-calm' (= v6's pad), seed 7; effects synthesised by tools/sound/sfx.py (wind_gentle under s11a, surf under s20d); all our own, CC0-1.0"
+ }
+}

@@ -1,0 +1,2442 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "scenes": [
+  {
+   "id": "s00_title",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "In this video, we'll learn the dot product the easy way, and see how meteorology uses it to tell how fast the wind changes the temperature.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 9.625,
+     "dur": 9.325,
+     "start_frame": 9,
+     "end_frame": 289
+    }
+   ],
+   "end": 10.425,
+   "start_frame": 9,
+   "end_frame": 313
+  },
+  {
+   "id": "s01_hook",
+   "start": 10.425,
+   "sentences": [
+    {
+     "text": "What is the dot product?",
+     "audio_text": null,
+     "start": 10.425,
+     "end": 12.5,
+     "dur": 2.075,
+     "start_frame": 313,
+     "end_frame": 375
+    },
+    {
+     "text": "Let's see what it is, why it's built this way, and what it tells us about the wind.",
+     "audio_text": null,
+     "start": 12.85,
+     "end": 18.075,
+     "dur": 5.225,
+     "start_frame": 386,
+     "end_frame": 542
+    }
+   ],
+   "end": 18.875,
+   "start_frame": 313,
+   "end_frame": 566
+  },
+  {
+   "id": "s02_arrows",
+   "start": 18.875,
+   "sentences": [
+    {
+     "text": "A vector is an arrow, with a length and a direction.",
+     "audio_text": null,
+     "start": 18.875,
+     "end": 22.625,
+     "dur": 3.75,
+     "start_frame": 566,
+     "end_frame": 679
+    },
+    {
+     "text": "Vector a goes five steps right and one up, and vector b goes one right and three up.",
+     "audio_text": "Vector [A](/ˈA/) goes five steps right and one up, and vector b goes one right and three up.",
+     "start": 22.975,
+     "end": 29.025,
+     "dur": 6.05,
+     "start_frame": 689,
+     "end_frame": 871
+    },
+    {
+     "text": "These numbers are called components: five and one are the components of vector a and one and three are those of vector b.",
+     "audio_text": "These numbers are called components: five and one are the components of vector [A](/ˈA/) and one and three are those of vector b.",
+     "start": 29.375,
+     "end": 37.7,
+     "dur": 8.325,
+     "start_frame": 881,
+     "end_frame": 1131
+    },
+    {
+     "text": "Pythagoras' theorem gives their lengths, written with two straight bars: about five point one and three point one six.",
+     "audio_text": null,
+     "start": 38.05,
+     "end": 45.8,
+     "dur": 7.75,
+     "start_frame": 1142,
+     "end_frame": 1374
+    }
+   ],
+   "end": 46.6,
+   "start_frame": 566,
+   "end_frame": 1398
+  },
+  {
+   "id": "s03_definition",
+   "start": 46.6,
+   "sentences": [
+    {
+     "text": "So how do we find the dot product?",
+     "audio_text": null,
+     "start": 46.6,
+     "end": 49.2,
+     "dur": 2.6,
+     "start_frame": 1398,
+     "end_frame": 1476
+    },
+    {
+     "text": "We multiply the matching components, and then add.",
+     "audio_text": null,
+     "start": 49.55,
+     "end": 53.25,
+     "dur": 3.7,
+     "start_frame": 1487,
+     "end_frame": 1598
+    },
+    {
+     "text": "Arrows in three-dimensional space have three components, along x, y and z, so we'd add three products.",
+     "audio_text": null,
+     "start": 53.6,
+     "end": 61.35,
+     "dur": 7.75,
+     "start_frame": 1608,
+     "end_frame": 1841
+    },
+    {
+     "text": "Ours lie flat, in two dimensions, so the third term drops out.",
+     "audio_text": null,
+     "start": 61.7,
+     "end": 66.55,
+     "dur": 4.85,
+     "start_frame": 1851,
+     "end_frame": 1997
+    },
+    {
+     "text": "The first components give five times one, which is five, and the second give one times three, which is three.",
+     "audio_text": null,
+     "start": 66.9,
+     "end": 74.65,
+     "dur": 7.75,
+     "start_frame": 2007,
+     "end_frame": 2240
+    },
+    {
+     "text": "Adding them, a dot b equals eight: a single number, not an arrow.",
+     "audio_text": "Adding them, [A](/ˈA/) dot b equals eight: a single number, not an arrow.",
+     "start": 75.0,
+     "end": 80.0,
+     "dur": 5.0,
+     "start_frame": 2250,
+     "end_frame": 2400
+    },
+    {
+     "text": "A number like this is called a scalar, so the dot product is also called the scalar product.",
+     "audio_text": null,
+     "start": 80.35,
+     "end": 86.45,
+     "dur": 6.1,
+     "start_frame": 2410,
+     "end_frame": 2593
+    }
+   ],
+   "end": 87.25,
+   "start_frame": 1398,
+   "end_frame": 2618
+  },
+  {
+   "id": "s04_cosine",
+   "start": 87.25,
+   "sentences": [
+    {
+     "text": "Now let's look at how the angle between the two arrows plays a role.",
+     "audio_text": null,
+     "start": 87.25,
+     "end": 91.85,
+     "dur": 4.6,
+     "start_frame": 2617,
+     "end_frame": 2755
+    },
+    {
+     "text": "The dot product can also be written as the two lengths times the cosine of theta, the angle between them.",
+     "audio_text": null,
+     "start": 92.2,
+     "end": 99.2,
+     "dur": 7.0,
+     "start_frame": 2766,
+     "end_frame": 2976
+    },
+    {
+     "text": "The cosine is one when two arrows point the same way, zero at a right angle, and minus one when they point in opposite directions.",
+     "audio_text": null,
+     "start": 99.55,
+     "end": 108.45,
+     "dur": 8.9,
+     "start_frame": 2986,
+     "end_frame": 3253
+    },
+    {
+     "text": "Here's another way to see the cosine.",
+     "audio_text": null,
+     "start": 108.8,
+     "end": 111.575,
+     "dur": 2.775,
+     "start_frame": 3264,
+     "end_frame": 3347
+    },
+    {
+     "text": "Draw an arrow one unit long, at an angle theta to a flat line, and drop a line from its tip straight down onto that line.",
+     "audio_text": null,
+     "start": 111.925,
+     "end": 120.275,
+     "dur": 8.35,
+     "start_frame": 3358,
+     "end_frame": 3608
+    },
+    {
+     "text": "The piece it marks off along the line is the cosine of theta.",
+     "audio_text": null,
+     "start": 120.625,
+     "end": 124.975,
+     "dur": 4.35,
+     "start_frame": 3619,
+     "end_frame": 3749
+    },
+    {
+     "text": "So the piece is the whole arrow when it lies along the line, nothing when it stands at a right angle, and a whole unit backwards when it points the other way.",
+     "audio_text": null,
+     "start": 125.325,
+     "end": 134.925,
+     "dur": 9.6,
+     "start_frame": 3760,
+     "end_frame": 4048
+    },
+    {
+     "text": "Here theta is about sixty degrees, with a cosine of about point five.",
+     "audio_text": null,
+     "start": 135.275,
+     "end": 140.25,
+     "dur": 4.975,
+     "start_frame": 4058,
+     "end_frame": 4207
+    },
+    {
+     "text": "Multiplied out, that's eight again, and we'll call this equation one.",
+     "audio_text": null,
+     "start": 140.6,
+     "end": 145.275,
+     "dur": 4.675,
+     "start_frame": 4218,
+     "end_frame": 4358,
+     "beat": true
+    }
+   ],
+   "end": 146.775,
+   "start_frame": 2618,
+   "end_frame": 4403
+  },
+  {
+   "id": "s05_angle_cases",
+   "start": 146.775,
+   "sentences": [
+    {
+     "text": "Let's keep one arrow fixed in all three pictures, and change only the other one.",
+     "audio_text": null,
+     "start": 146.775,
+     "end": 152.2,
+     "dur": 5.425,
+     "start_frame": 4403,
+     "end_frame": 4566
+    },
+    {
+     "text": "The fixed arrow, p, has components three and zero.",
+     "audio_text": null,
+     "start": 152.55,
+     "end": 156.575,
+     "dur": 4.025,
+     "start_frame": 4576,
+     "end_frame": 4697
+    },
+    {
+     "text": "First, the other vector, q, points in the same direction as p and has components two and zero.",
+     "audio_text": null,
+     "start": 156.925,
+     "end": 163.85,
+     "dur": 6.925,
+     "start_frame": 4708,
+     "end_frame": 4915
+    },
+    {
+     "text": "Three times two plus zero times zero is six, a positive number.",
+     "audio_text": null,
+     "start": 164.2,
+     "end": 169.15,
+     "dur": 4.95,
+     "start_frame": 4926,
+     "end_frame": 5074
+    },
+    {
+     "text": "In the next case, vector q is at a right angle to p, with components zero and two, and the dot product is zero.",
+     "audio_text": null,
+     "start": 169.5,
+     "end": 177.925,
+     "dur": 8.425,
+     "start_frame": 5085,
+     "end_frame": 5338
+    },
+    {
+     "text": "In general, whenever two vectors are at right angles, their dot product is zero.",
+     "audio_text": null,
+     "start": 178.275,
+     "end": 184.175,
+     "dur": 5.9,
+     "start_frame": 5348,
+     "end_frame": 5525
+    },
+    {
+     "text": "Last, q has components minus two and zero, pointing in the opposite direction: three times minus two is minus six, a negative number.",
+     "audio_text": null,
+     "start": 184.525,
+     "end": 194.3,
+     "dur": 9.775,
+     "start_frame": 5536,
+     "end_frame": 5829
+    },
+    {
+     "text": "When two vectors point in opposite directions, their dot product is negative.",
+     "audio_text": null,
+     "start": 194.65,
+     "end": 200.0,
+     "dur": 5.35,
+     "start_frame": 5839,
+     "end_frame": 6000
+    },
+    {
+     "text": "In fact, q doesn't have to point exactly along p.",
+     "audio_text": null,
+     "start": 200.35,
+     "end": 204.35,
+     "dur": 4.0,
+     "start_frame": 6010,
+     "end_frame": 6130
+    },
+    {
+     "text": "Let's sweep it all the way round.",
+     "audio_text": null,
+     "start": 204.7,
+     "end": 207.075,
+     "dur": 2.375,
+     "start_frame": 6141,
+     "end_frame": 6212
+    },
+    {
+     "text": "Anywhere in the half in front of p, the dot product is positive.",
+     "audio_text": null,
+     "start": 207.425,
+     "end": 211.975,
+     "dur": 4.55,
+     "start_frame": 6223,
+     "end_frame": 6359
+    },
+    {
+     "text": "On the line straight across, it's zero.",
+     "audio_text": null,
+     "start": 212.325,
+     "end": 215.275,
+     "dur": 2.95,
+     "start_frame": 6370,
+     "end_frame": 6458
+    },
+    {
+     "text": "And anywhere in the half behind, it's negative.",
+     "audio_text": null,
+     "start": 215.625,
+     "end": 219.075,
+     "dur": 3.45,
+     "start_frame": 6469,
+     "end_frame": 6572
+    },
+    {
+     "text": "So the dot product measures how much two arrows point the same way.",
+     "audio_text": null,
+     "start": 219.425,
+     "end": 223.725,
+     "dur": 4.3,
+     "start_frame": 6583,
+     "end_frame": 6712
+    }
+   ],
+   "end": 224.525,
+   "start_frame": 4403,
+   "end_frame": 6736
+  },
+  {
+   "id": "s05a_matching_parts",
+   "start": 224.525,
+   "sentences": [
+    {
+     "text": "But why does multiplying matching components give the same answer as the lengths and the cosine?",
+     "audio_text": null,
+     "start": 224.525,
+     "end": 231.1,
+     "dur": 6.575,
+     "start_frame": 6736,
+     "end_frame": 6933
+    },
+    {
+     "text": "Let's split vector a into two arrows laid end to end: five steps along x, and one step along y.",
+     "audio_text": "Let's split vector [A](/ˈA/) into two arrows laid end to end: five steps along x, and one step along y.",
+     "start": 231.45,
+     "end": 239.05,
+     "dur": 7.6,
+     "start_frame": 6943,
+     "end_frame": 7171
+    },
+    {
+     "text": "To write them, let x hat and y hat be arrows one unit long, pointing along x and along y.",
+     "audio_text": null,
+     "start": 239.4,
+     "end": 246.225,
+     "dur": 6.825,
+     "start_frame": 7182,
+     "end_frame": 7387
+    },
+    {
+     "text": "Now take the dot product of each piece with b, which we can split the same way.",
+     "audio_text": null,
+     "start": 246.575,
+     "end": 252.0,
+     "dur": 5.425,
+     "start_frame": 7397,
+     "end_frame": 7560
+    },
+    {
+     "text": "The x piece of vector a points along x, so it only sees the x part of b: five times one.",
+     "audio_text": "The x piece of vector [A](/ˈA/) points along x, so it only sees the x part of b: five times one.",
+     "start": 252.35,
+     "end": 259.425,
+     "dur": 7.075,
+     "start_frame": 7570,
+     "end_frame": 7783
+    },
+    {
+     "text": "The y piece only sees the y part of b: one times three.",
+     "audio_text": null,
+     "start": 259.775,
+     "end": 264.225,
+     "dur": 4.45,
+     "start_frame": 7793,
+     "end_frame": 7927
+    },
+    {
+     "text": "A piece along x and a part along y are at right angles, and arrows at right angles give zero, so these mixed terms drop out.",
+     "audio_text": null,
+     "start": 264.575,
+     "end": 273.65,
+     "dur": 9.075,
+     "start_frame": 7937,
+     "end_frame": 8209
+    },
+    {
+     "text": "And a unit arrow dotted with itself is one times one times cos zero, which is one.",
+     "audio_text": null,
+     "start": 274.0,
+     "end": 280.2,
+     "dur": 6.2,
+     "start_frame": 8220,
+     "end_frame": 8406
+    },
+    {
+     "text": "What's left is five times one plus one times three, eight: exactly the component recipe.",
+     "audio_text": null,
+     "start": 280.55,
+     "end": 287.475,
+     "dur": 6.925,
+     "start_frame": 8416,
+     "end_frame": 8624,
+     "beat": true
+    },
+    {
+     "text": "So each axis does its own multiplication, and we add up the results.",
+     "audio_text": null,
+     "start": 288.975,
+     "end": 293.975,
+     "dur": 5.0,
+     "start_frame": 8669,
+     "end_frame": 8819
+    }
+   ],
+   "end": 294.775,
+   "start_frame": 6736,
+   "end_frame": 8843
+  },
+  {
+   "id": "s06_shadow",
+   "start": 294.775,
+   "sentences": [
+    {
+     "text": "Now let's find a picture for the dot product.",
+     "audio_text": null,
+     "start": 294.775,
+     "end": 298.0,
+     "dur": 3.225,
+     "start_frame": 8843,
+     "end_frame": 8940
+    },
+    {
+     "text": "From the tip of vector a we drop a line onto b's line, at a right angle.",
+     "audio_text": "From the tip of vector [A](/ˈA/) we drop a line onto b's line, at a right angle.",
+     "start": 298.35,
+     "end": 303.9,
+     "dur": 5.55,
+     "start_frame": 8950,
+     "end_frame": 9117
+    },
+    {
+     "text": "The piece it marks off is called the shadow of vector a on b.",
+     "audio_text": "The piece it marks off is called the shadow of vector [A](/ˈA/) on b.",
+     "start": 304.25,
+     "end": 308.625,
+     "dur": 4.375,
+     "start_frame": 9128,
+     "end_frame": 9259
+    },
+    {
+     "text": "In this right triangle, the shadow is the length of vector a times cos theta.",
+     "audio_text": "In this right triangle, the shadow is the length of vector [A](/ˈA/) times cos theta.",
+     "start": 308.975,
+     "end": 314.3,
+     "dur": 5.325,
+     "start_frame": 9269,
+     "end_frame": 9429
+    },
+    {
+     "text": "Divide both sides of equation one by the length of b, and only the shadow is left on the right: eight over three point one six, or two point five three.",
+     "audio_text": null,
+     "start": 314.65,
+     "end": 324.875,
+     "dur": 10.225,
+     "start_frame": 9440,
+     "end_frame": 9746
+    }
+   ],
+   "end": 325.675,
+   "start_frame": 8843,
+   "end_frame": 9770
+  },
+  {
+   "id": "s07_unit_vector",
+   "start": 325.675,
+   "sentences": [
+    {
+     "text": "There's another way to reach the same shadow.",
+     "audio_text": null,
+     "start": 325.675,
+     "end": 328.525,
+     "dur": 2.85,
+     "start_frame": 9770,
+     "end_frame": 9856
+    },
+    {
+     "text": "Divide b by its own length to get b hat, the unit vector along b: length one, same direction.",
+     "audio_text": null,
+     "start": 328.875,
+     "end": 336.0,
+     "dur": 7.125,
+     "start_frame": 9866,
+     "end_frame": 10080
+    },
+    {
+     "text": "Its components are one and three, each divided by three point one six.",
+     "audio_text": null,
+     "start": 336.35,
+     "end": 341.425,
+     "dur": 5.075,
+     "start_frame": 10091,
+     "end_frame": 10243
+    },
+    {
+     "text": "Dividing b by its length divides the dot product by it too, so a dot b hat is the shadow itself: two point five three again.",
+     "audio_text": "Dividing b by its length divides the dot product by it too, so [A](/ˈA/) dot b hat is the shadow itself: two point five three again.",
+     "start": 341.775,
+     "end": 351.025,
+     "dur": 9.25,
+     "start_frame": 10253,
+     "end_frame": 10531
+    },
+    {
+     "text": "Think of b hat as a ruler laid along b's line.",
+     "audio_text": null,
+     "start": 351.375,
+     "end": 355.1,
+     "dur": 3.725,
+     "start_frame": 10541,
+     "end_frame": 10653
+    },
+    {
+     "text": "The dot product of vector a with the ruler is the reading where the shadow of vector a ends.",
+     "audio_text": "The dot product of vector [A](/ˈA/) with the ruler is the reading where the shadow of vector [A](/ˈA/) ends.",
+     "start": 355.45,
+     "end": 361.825,
+     "dur": 6.375,
+     "start_frame": 10664,
+     "end_frame": 10855
+    },
+    {
+     "text": "Turn the ruler, and the reading changes, even though vector a stays the same.",
+     "audio_text": "Turn the ruler, and the reading changes, even though vector [A](/ˈA/) stays the same.",
+     "start": 362.175,
+     "end": 367.625,
+     "dur": 5.45,
+     "start_frame": 10865,
+     "end_frame": 11029
+    }
+   ],
+   "end": 368.425,
+   "start_frame": 9770,
+   "end_frame": 11053
+  },
+  {
+   "id": "s08_question",
+   "start": 368.425,
+   "sentences": [
+    {
+     "text": "So the dot product is the shadow times the length of b.",
+     "audio_text": null,
+     "start": 368.425,
+     "end": 372.4,
+     "dur": 3.975,
+     "start_frame": 11053,
+     "end_frame": 11172
+    },
+    {
+     "text": "But why not stop at the shadow?",
+     "audio_text": null,
+     "start": 372.75,
+     "end": 375.1,
+     "dur": 2.35,
+     "start_frame": 11183,
+     "end_frame": 11253
+    },
+    {
+     "text": "There are three good reasons.",
+     "audio_text": null,
+     "start": 375.45,
+     "end": 377.625,
+     "dur": 2.175,
+     "start_frame": 11264,
+     "end_frame": 11329
+    }
+   ],
+   "end": 378.425,
+   "start_frame": 11053,
+   "end_frame": 11353
+  },
+  {
+   "id": "s09_reason1_order",
+   "start": 378.425,
+   "sentences": [
+    {
+     "text": "The first is that the order shouldn't matter.",
+     "audio_text": null,
+     "start": 378.425,
+     "end": 381.675,
+     "dur": 3.25,
+     "start_frame": 11353,
+     "end_frame": 11450
+    },
+    {
+     "text": "The shadow of vector a on b is two point five three, but the shadow of b on vector a is one point five seven.",
+     "audio_text": "The shadow of vector [A](/ˈA/) on b is two point five three, but the shadow of b on vector [A](/ˈA/) is one point five seven.",
+     "start": 382.025,
+     "end": 390.3,
+     "dur": 8.275,
+     "start_frame": 11461,
+     "end_frame": 11709
+    },
+    {
+     "text": "Multiply each by the length of the arrow it falls on, and both give eight.",
+     "audio_text": null,
+     "start": 390.65,
+     "end": 395.825,
+     "dur": 5.175,
+     "start_frame": 11720,
+     "end_frame": 11875
+    },
+    {
+     "text": "Let's draw both products as rectangles.",
+     "audio_text": null,
+     "start": 396.175,
+     "end": 399.325,
+     "dur": 3.15,
+     "start_frame": 11885,
+     "end_frame": 11980
+    },
+    {
+     "text": "One is two point five three wide and three point one six tall, and the other is one point five seven wide and five point one tall.",
+     "audio_text": null,
+     "start": 399.675,
+     "end": 408.925,
+     "dur": 9.25,
+     "start_frame": 11990,
+     "end_frame": 12268
+    },
+    {
+     "text": "They have different shapes, but the same area: eight.",
+     "audio_text": null,
+     "start": 409.275,
+     "end": 412.8,
+     "dur": 3.525,
+     "start_frame": 12278,
+     "end_frame": 12384,
+     "beat": true
+    }
+   ],
+   "end": 414.3,
+   "start_frame": 11353,
+   "end_frame": 12429
+  },
+  {
+   "id": "s10_reason2_cheap",
+   "start": 414.3,
+   "sentences": [
+    {
+     "text": "The second reason is practical: it's quick to calculate, with no angle and no square root.",
+     "audio_text": null,
+     "start": 414.3,
+     "end": 420.575,
+     "dur": 6.275,
+     "start_frame": 12429,
+     "end_frame": 12617
+    },
+    {
+     "text": "Suppose the wind blows towards the north-east at ten metres per second.",
+     "audio_text": null,
+     "start": 420.925,
+     "end": 425.9,
+     "dur": 4.975,
+     "start_frame": 12628,
+     "end_frame": 12777
+    },
+    {
+     "text": "Written as a vector, v has components six and eight.",
+     "audio_text": null,
+     "start": 426.25,
+     "end": 430.15,
+     "dur": 3.9,
+     "start_frame": 12788,
+     "end_frame": 12905
+    },
+    {
+     "text": "How much of this wind blows towards the east?",
+     "audio_text": null,
+     "start": 430.5,
+     "end": 433.6,
+     "dur": 3.1,
+     "start_frame": 12915,
+     "end_frame": 13008
+    },
+    {
+     "text": "To find out, we take the dot product of v with the unit vector pointing east, x hat, whose components are one and zero.",
+     "audio_text": null,
+     "start": 433.95,
+     "end": 442.65,
+     "dur": 8.7,
+     "start_frame": 13019,
+     "end_frame": 13280
+    },
+    {
+     "text": "Then v dot x hat is six times one, plus eight times zero, which is six.",
+     "audio_text": null,
+     "start": 443.0,
+     "end": 448.45,
+     "dur": 5.45,
+     "start_frame": 13290,
+     "end_frame": 13454
+    },
+    {
+     "text": "So six metres per second is the eastward part of the wind.",
+     "audio_text": null,
+     "start": 448.8,
+     "end": 453.25,
+     "dur": 4.45,
+     "start_frame": 13464,
+     "end_frame": 13598
+    },
+    {
+     "text": "It's simply the first component: a dot product with a unit vector picks out the part of v along it.",
+     "audio_text": null,
+     "start": 453.6,
+     "end": 460.375,
+     "dur": 6.775,
+     "start_frame": 13608,
+     "end_frame": 13811
+    }
+   ],
+   "end": 461.175,
+   "start_frame": 12429,
+   "end_frame": 13835
+  },
+  {
+   "id": "s11_work",
+   "start": 461.175,
+   "sentences": [
+    {
+     "text": "The third reason is that physics often needs both sizes.",
+     "audio_text": null,
+     "start": 461.175,
+     "end": 465.275,
+     "dur": 4.1,
+     "start_frame": 13835,
+     "end_frame": 13958
+    },
+    {
+     "text": "Pull a sled with a force vector, F, of twenty newtons, tilted sixty degrees up, while it moves along a displacement vector, d.",
+     "audio_text": null,
+     "start": 465.625,
+     "end": 474.375,
+     "dur": 8.75,
+     "start_frame": 13969,
+     "end_frame": 14231
+    },
+    {
+     "text": "The upward part of the pull does no work; the part along the ground, the shadow of F on d, is ten newtons.",
+     "audio_text": null,
+     "start": 474.725,
+     "end": 482.25,
+     "dur": 7.525,
+     "start_frame": 14242,
+     "end_frame": 14468
+    },
+    {
+     "text": "Work, in joules, is that force times the distance: fifty joules if d is five metres.",
+     "audio_text": null,
+     "start": 482.6,
+     "end": 489.05,
+     "dur": 6.45,
+     "start_frame": 14478,
+     "end_frame": 14672
+    },
+    {
+     "text": "If d doubles to ten metres, the work doubles to one hundred joules, but the shadow is still ten newtons.",
+     "audio_text": null,
+     "start": 489.4,
+     "end": 496.8,
+     "dur": 7.4,
+     "start_frame": 14682,
+     "end_frame": 14904
+    },
+    {
+     "text": "So the shadow alone can't give the work: we must multiply by the length of d, and the dot product does exactly that.",
+     "audio_text": null,
+     "start": 497.15,
+     "end": 505.225,
+     "dur": 8.075,
+     "start_frame": 14915,
+     "end_frame": 15157
+    }
+   ],
+   "end": 506.025,
+   "start_frame": 13835,
+   "end_frame": 15181
+  },
+  {
+   "id": "s11a_cart",
+   "start": 506.025,
+   "sentences": [
+    {
+     "text": "Here's another way to see why only the part along counts.",
+     "audio_text": null,
+     "start": 506.025,
+     "end": 509.675,
+     "dur": 3.65,
+     "start_frame": 15181,
+     "end_frame": 15290
+    },
+    {
+     "text": "Picture a small cart on a straight railway track, with a strong wind pushing on it, again with twenty newtons, at sixty degrees to the track.",
+     "audio_text": null,
+     "start": 510.025,
+     "end": 519.65,
+     "dur": 9.625,
+     "start_frame": 15301,
+     "end_frame": 15590
+    },
+    {
+     "text": "The cart can only move along the track.",
+     "audio_text": null,
+     "start": 520.0,
+     "end": 522.925,
+     "dur": 2.925,
+     "start_frame": 15600,
+     "end_frame": 15688
+    },
+    {
+     "text": "The rails hold back the part of the push across the track, so that part does nothing to move the cart.",
+     "audio_text": null,
+     "start": 523.275,
+     "end": 529.675,
+     "dur": 6.4,
+     "start_frame": 15698,
+     "end_frame": 15890
+    },
+    {
+     "text": "Only the part along the track, ten newtons again, does work: fifty joules over five metres.",
+     "audio_text": null,
+     "start": 530.025,
+     "end": 536.575,
+     "dur": 6.55,
+     "start_frame": 15901,
+     "end_frame": 16097,
+     "beat": true
+    },
+    {
+     "text": "Work is an amount of energy given to the cart, with no direction of its own, which is why the dot product gives a number.",
+     "audio_text": null,
+     "start": 538.075,
+     "end": 546.0,
+     "dur": 7.925,
+     "start_frame": 16142,
+     "end_frame": 16380
+    }
+   ],
+   "end": 546.8,
+   "start_frame": 15181,
+   "end_frame": 16404
+  },
+  {
+   "id": "s11b_perp_push",
+   "start": 546.8,
+   "sentences": [
+    {
+     "text": "What about a push that's always across the motion?",
+     "audio_text": null,
+     "start": 546.8,
+     "end": 550.15,
+     "dur": 3.35,
+     "start_frame": 16404,
+     "end_frame": 16505
+    },
+    {
+     "text": "Imagine a ball whirled round on a string.",
+     "audio_text": null,
+     "start": 550.5,
+     "end": 553.575,
+     "dur": 3.075,
+     "start_frame": 16515,
+     "end_frame": 16607
+    },
+    {
+     "text": "The string pulls towards the centre, always at a right angle to the way the ball is moving.",
+     "audio_text": null,
+     "start": 553.925,
+     "end": 559.975,
+     "dur": 6.05,
+     "start_frame": 16618,
+     "end_frame": 16799
+    },
+    {
+     "text": "So its dot product with every small step is zero, and it does no work.",
+     "audio_text": null,
+     "start": 560.325,
+     "end": 565.4,
+     "dur": 5.075,
+     "start_frame": 16810,
+     "end_frame": 16962
+    },
+    {
+     "text": "The ball's energy of motion stays the same: the pull only changes its direction, bending its path into a circle.",
+     "audio_text": null,
+     "start": 565.75,
+     "end": 573.9,
+     "dur": 8.15,
+     "start_frame": 16973,
+     "end_frame": 17217
+    },
+    {
+     "text": "We'll meet pushes like this again, when Earth's spin turns the wind.",
+     "audio_text": null,
+     "start": 574.25,
+     "end": 578.8,
+     "dur": 4.55,
+     "start_frame": 17228,
+     "end_frame": 17364
+    }
+   ],
+   "end": 579.6,
+   "start_frame": 16404,
+   "end_frame": 17388
+  },
+  {
+   "id": "s12_parcel",
+   "start": 579.6,
+   "sentences": [
+    {
+     "text": "Now let's look at how the dot product is used in weather.",
+     "audio_text": null,
+     "start": 579.6,
+     "end": 583.575,
+     "dur": 3.975,
+     "start_frame": 17388,
+     "end_frame": 17507
+    },
+    {
+     "text": "Imagine one thermometer fixed at one place, so it never moves: we'll call it the fixed thermometer.",
+     "audio_text": null,
+     "start": 583.925,
+     "end": 590.65,
+     "dur": 6.725,
+     "start_frame": 17518,
+     "end_frame": 17720
+    },
+    {
+     "text": "How fast its temperature changes over time is called the local rate, written partial capital T by partial small t.",
+     "audio_text": null,
+     "start": 591.0,
+     "end": 599.175,
+     "dur": 8.175,
+     "start_frame": 17730,
+     "end_frame": 17975
+    },
+    {
+     "text": "Here capital T stands for temperature, and small t for time.",
+     "audio_text": null,
+     "start": 599.525,
+     "end": 604.15,
+     "dur": 4.625,
+     "start_frame": 17986,
+     "end_frame": 18125
+    },
+    {
+     "text": "Partial means only time changes; the place stays fixed.",
+     "audio_text": null,
+     "start": 604.5,
+     "end": 608.775,
+     "dur": 4.275,
+     "start_frame": 18135,
+     "end_frame": 18263
+    },
+    {
+     "text": "A second thermometer rides a balloon drifting with the wind, inside one air parcel: a small volume of air that moves with the flow.",
+     "audio_text": null,
+     "start": 609.125,
+     "end": 618.35,
+     "dur": 9.225,
+     "start_frame": 18274,
+     "end_frame": 18551
+    },
+    {
+     "text": "Its rate, following the air parcel, is written capital D T by D t.",
+     "audio_text": null,
+     "start": 618.7,
+     "end": 623.825,
+     "dur": 5.125,
+     "start_frame": 18561,
+     "end_frame": 18715
+    }
+   ],
+   "end": 624.625,
+   "start_frame": 17388,
+   "end_frame": 18739
+  },
+  {
+   "id": "s13_equation",
+   "start": 624.625,
+   "sentences": [
+    {
+     "text": "Here is the equation the balloon's thermometer obeys.",
+     "audio_text": null,
+     "start": 624.625,
+     "end": 628.425,
+     "dur": 3.8,
+     "start_frame": 18739,
+     "end_frame": 18853
+    },
+    {
+     "text": "It tells us how anything the air carries, called phi, like temperature or moisture, changes as we follow an air parcel.",
+     "audio_text": null,
+     "start": 628.775,
+     "end": 636.775,
+     "dur": 8.0,
+     "start_frame": 18863,
+     "end_frame": 19103
+    },
+    {
+     "text": "On the left is the change following the parcel.",
+     "audio_text": null,
+     "start": 637.125,
+     "end": 640.525,
+     "dur": 3.4,
+     "start_frame": 19114,
+     "end_frame": 19216
+    },
+    {
+     "text": "On the right is the change at one fixed place, plus a term with v, the wind, and grad, which we'll meet soon.",
+     "audio_text": null,
+     "start": 640.875,
+     "end": 648.225,
+     "dur": 7.35,
+     "start_frame": 19226,
+     "end_frame": 19447
+    },
+    {
+     "text": "Advection means being carried along by the flow.",
+     "audio_text": null,
+     "start": 648.575,
+     "end": 652.25,
+     "dur": 3.675,
+     "start_frame": 19457,
+     "end_frame": 19568
+    },
+    {
+     "text": "So the advection term is the change that comes from being carried into warmer or colder air, or moister or drier air, depending on what phi stands for.",
+     "audio_text": null,
+     "start": 652.6,
+     "end": 662.9,
+     "dur": 10.3,
+     "start_frame": 19578,
+     "end_frame": 19887
+    },
+    {
+     "text": "The left side is called the material derivative.",
+     "audio_text": null,
+     "start": 663.25,
+     "end": 666.75,
+     "dur": 3.5,
+     "start_frame": 19898,
+     "end_frame": 20003
+    },
+    {
+     "text": "It isn't a partial derivative, because the place moves with the parcel: it's the partial derivative plus the advection term.",
+     "audio_text": null,
+     "start": 667.1,
+     "end": 675.05,
+     "dur": 7.95,
+     "start_frame": 20013,
+     "end_frame": 20252
+    },
+    {
+     "text": "For temperature, that term is v dot grad T, and its dot is our dot product.",
+     "audio_text": null,
+     "start": 675.4,
+     "end": 681.325,
+     "dur": 5.925,
+     "start_frame": 20262,
+     "end_frame": 20440
+    }
+   ],
+   "end": 682.125,
+   "start_frame": 18739,
+   "end_frame": 20464
+  },
+  {
+   "id": "s14_isotherms",
+   "start": 682.125,
+   "sentences": [
+    {
+     "text": "To see it at work, picture a map where the temperature rises one degree for every hundred kilometres east, and doesn't change as you walk north.",
+     "audio_text": null,
+     "start": 682.125,
+     "end": 691.175,
+     "dur": 9.05,
+     "start_frame": 20464,
+     "end_frame": 20735
+    },
+    {
+     "text": "Join the places with the same temperature right now, and you get straight north to south lines, one every hundred kilometres.",
+     "audio_text": null,
+     "start": 691.525,
+     "end": 699.425,
+     "dur": 7.9,
+     "start_frame": 20746,
+     "end_frame": 20983
+    },
+    {
+     "text": "These are called isotherms.",
+     "audio_text": null,
+     "start": 699.775,
+     "end": 702.05,
+     "dur": 2.275,
+     "start_frame": 20993,
+     "end_frame": 21062
+    },
+    {
+     "text": "Walk east, and each isotherm you cross is one degree warmer: that's partial T by partial x, the change going east only.",
+     "audio_text": null,
+     "start": 702.4,
+     "end": 711.4,
+     "dur": 9.0,
+     "start_frame": 21072,
+     "end_frame": 21342
+    },
+    {
+     "text": "Walk north, and you stay on one isotherm, so partial T by partial y is zero.",
+     "audio_text": null,
+     "start": 711.75,
+     "end": 717.875,
+     "dur": 6.125,
+     "start_frame": 21353,
+     "end_frame": 21536
+    }
+   ],
+   "end": 718.675,
+   "start_frame": 20464,
+   "end_frame": 21560
+  },
+  {
+   "id": "s15_grad_t",
+   "start": 718.675,
+   "sentences": [
+    {
+     "text": "These two rates form one arrow: the temperature gradient, read grad T.",
+     "audio_text": null,
+     "start": 718.675,
+     "end": 723.875,
+     "dur": 5.2,
+     "start_frame": 21560,
+     "end_frame": 21716
+    },
+    {
+     "text": "A kelvin step is the same size as a degree Celsius step, so grad T is ten to the minus five kelvin per metre going east, and zero going north.",
+     "audio_text": null,
+     "start": 724.225,
+     "end": 734.7,
+     "dur": 10.475,
+     "start_frame": 21727,
+     "end_frame": 22041
+    },
+    {
+     "text": "It points the way the temperature increases fastest: straight across the isotherms, towards warmer air.",
+     "audio_text": null,
+     "start": 735.05,
+     "end": 742.075,
+     "dur": 7.025,
+     "start_frame": 22052,
+     "end_frame": 22262
+    }
+   ],
+   "end": 742.875,
+   "start_frame": 21560,
+   "end_frame": 22286
+  },
+  {
+   "id": "s16a_wind_parts",
+   "start": 742.875,
+   "sentences": [
+    {
+     "text": "Now a wind blows across the map, the one carrying our balloon: ten metres per second, at sixty degrees to grad T.",
+     "audio_text": null,
+     "start": 742.875,
+     "end": 751.45,
+     "dur": 8.575,
+     "start_frame": 22286,
+     "end_frame": 22544
+    },
+    {
+     "text": "Its shadow on grad T, ten times cos sixty, is five metres per second, straight across the isotherms.",
+     "audio_text": null,
+     "start": 751.8,
+     "end": 759.45,
+     "dur": 7.65,
+     "start_frame": 22554,
+     "end_frame": 22784
+    },
+    {
+     "text": "This shadow is the part of the wind that carries air across the isotherms, towards the warmer side.",
+     "audio_text": null,
+     "start": 759.8,
+     "end": 766.425,
+     "dur": 6.625,
+     "start_frame": 22794,
+     "end_frame": 22993
+    }
+   ],
+   "end": 767.225,
+   "start_frame": 22286,
+   "end_frame": 23017
+  },
+  {
+   "id": "s16b_advection_number",
+   "start": 767.225,
+   "sentences": [
+    {
+     "text": "The length of grad T, by Pythagoras, is the square root of ten to the minus five squared, plus zero squared: just ten to the minus five kelvin per metre.",
+     "audio_text": null,
+     "start": 767.225,
+     "end": 777.975,
+     "dur": 10.75,
+     "start_frame": 23017,
+     "end_frame": 23339
+    },
+    {
+     "text": "So v dot grad T is the wind's shadow times the length of grad T: five metres per second times ten to the minus five kelvin per metre.",
+     "audio_text": null,
+     "start": 778.325,
+     "end": 788.775,
+     "dur": 10.45,
+     "start_frame": 23350,
+     "end_frame": 23663
+    },
+    {
+     "text": "The metres cancel, leaving five times ten to the minus five kelvin per second, or point one eight kelvin per hour.",
+     "audio_text": null,
+     "start": 789.125,
+     "end": 797.05,
+     "dur": 7.925,
+     "start_frame": 23674,
+     "end_frame": 23912,
+     "beat": true
+    }
+   ],
+   "end": 798.55,
+   "start_frame": 23017,
+   "end_frame": 23956
+  },
+  {
+   "id": "s17_meaning",
+   "start": 798.55,
+   "sentences": [
+    {
+     "text": "What does point one eight kelvin per hour mean?",
+     "audio_text": null,
+     "start": 798.55,
+     "end": 801.65,
+     "dur": 3.1,
+     "start_frame": 23957,
+     "end_frame": 24050
+    },
+    {
+     "text": "Let's follow the balloon's air parcel, which is at the fixed thermometer right now.",
+     "audio_text": null,
+     "start": 802.0,
+     "end": 807.25,
+     "dur": 5.25,
+     "start_frame": 24060,
+     "end_frame": 24218
+    },
+    {
+     "text": "The wind carries it straight across the isotherms at five metres per second, the wind's shadow.",
+     "audio_text": null,
+     "start": 807.6,
+     "end": 813.9,
+     "dur": 6.3,
+     "start_frame": 24228,
+     "end_frame": 24417
+    },
+    {
+     "text": "Distance is speed times time, so in one hour, three thousand six hundred seconds, it moves eighteen kilometres across them.",
+     "audio_text": null,
+     "start": 814.25,
+     "end": 823.075,
+     "dur": 8.825,
+     "start_frame": 24428,
+     "end_frame": 24692
+    },
+    {
+     "text": "On the map as it is right now, each hundred kilometres east is one degree warmer, so eighteen kilometres is worth point one eight degrees.",
+     "audio_text": null,
+     "start": 823.425,
+     "end": 832.7,
+     "dur": 9.275,
+     "start_frame": 24703,
+     "end_frame": 24981
+    },
+    {
+     "text": "So in one hour, the wind carries the parcel to a place where the map reads thirteen point one eight.",
+     "audio_text": null,
+     "start": 833.05,
+     "end": 839.675,
+     "dur": 6.625,
+     "start_frame": 24992,
+     "end_frame": 25190
+    },
+    {
+     "text": "One degree per hundred kilometres is a rate in space: how the temperature changes with distance.",
+     "audio_text": null,
+     "start": 840.025,
+     "end": 846.7,
+     "dur": 6.675,
+     "start_frame": 25201,
+     "end_frame": 25401
+    },
+    {
+     "text": "Multiply it by a speed in kilometres per hour, and you get degrees per hour: a rate in time.",
+     "audio_text": null,
+     "start": 847.05,
+     "end": 853.85,
+     "dur": 6.8,
+     "start_frame": 25412,
+     "end_frame": 25616
+    },
+    {
+     "text": "So point one eight kelvin per hour is how fast the wind carries the parcel into warmer places.",
+     "audio_text": null,
+     "start": 854.2,
+     "end": 861.075,
+     "dur": 6.875,
+     "start_frame": 25626,
+     "end_frame": 25832
+    },
+    {
+     "text": "That's v dot grad T, the advection term.",
+     "audio_text": null,
+     "start": 861.425,
+     "end": 865.0,
+     "dur": 3.575,
+     "start_frame": 25843,
+     "end_frame": 25950
+    },
+    {
+     "text": "It's positive because the wind blows partly towards warmer air, and it's the same for every air parcel here, because the wind and the map are the same everywhere.",
+     "audio_text": null,
+     "start": 865.35,
+     "end": 875.55,
+     "dur": 10.2,
+     "start_frame": 25961,
+     "end_frame": 26267
+    },
+    {
+     "text": "But does the parcel itself get warmer?",
+     "audio_text": null,
+     "start": 875.9,
+     "end": 878.7,
+     "dur": 2.8,
+     "start_frame": 26277,
+     "end_frame": 26361
+    },
+    {
+     "text": "That depends on what the map does, so let's look at two cases.",
+     "audio_text": null,
+     "start": 879.05,
+     "end": 883.325,
+     "dur": 4.275,
+     "start_frame": 26372,
+     "end_frame": 26500
+    }
+   ],
+   "end": 884.125,
+   "start_frame": 23956,
+   "end_frame": 26524
+  },
+  {
+   "id": "s17b_frozen",
+   "start": 884.125,
+   "sentences": [
+    {
+     "text": "In the first case, imagine the map stays frozen, because the sun keeps every place at exactly its temperature.",
+     "audio_text": null,
+     "start": 884.125,
+     "end": 891.975,
+     "dur": 7.85,
+     "start_frame": 26524,
+     "end_frame": 26759
+    },
+    {
+     "text": "Then the fixed thermometer always reads thirteen degrees, so its local rate, partial T by partial t, is zero.",
+     "audio_text": null,
+     "start": 892.325,
+     "end": 900.375,
+     "dur": 8.05,
+     "start_frame": 26770,
+     "end_frame": 27011
+    },
+    {
+     "text": "The balloon, though, reads the map wherever the wind takes it: thirteen point one eight after one hour, thirteen point three six after two, and thirteen point five four after three.",
+     "audio_text": null,
+     "start": 900.725,
+     "end": 912.925,
+     "dur": 12.2,
+     "start_frame": 27022,
+     "end_frame": 27388
+    },
+    {
+     "text": "Its reading climbs by point one eight degrees every hour, because the wind keeps carrying it into warmer places.",
+     "audio_text": null,
+     "start": 913.275,
+     "end": 920.55,
+     "dur": 7.275,
+     "start_frame": 27398,
+     "end_frame": 27617
+    },
+    {
+     "text": "In our equation, capital D T by D t is zero plus v dot grad T: plus point one eight kelvin per hour.",
+     "audio_text": null,
+     "start": 920.9,
+     "end": 929.05,
+     "dur": 8.15,
+     "start_frame": 27627,
+     "end_frame": 27872,
+     "beat": true
+    },
+    {
+     "text": "On the graph, the fixed thermometer's line stays flat, while the balloon's line climbs.",
+     "audio_text": null,
+     "start": 930.55,
+     "end": 936.475,
+     "dur": 5.925,
+     "start_frame": 27917,
+     "end_frame": 28094
+    },
+    {
+     "text": "So when the map is frozen, the parcel warms by exactly the advection term.",
+     "audio_text": null,
+     "start": 936.825,
+     "end": 942.325,
+     "dur": 5.5,
+     "start_frame": 28105,
+     "end_frame": 28270
+    }
+   ],
+   "end": 943.125,
+   "start_frame": 26524,
+   "end_frame": 28294
+  },
+  {
+   "id": "s18_keeps_temperature",
+   "start": 943.125,
+   "sentences": [
+    {
+     "text": "Now for the second case, which we'll follow from now on.",
+     "audio_text": null,
+     "start": 943.125,
+     "end": 947.0,
+     "dur": 3.875,
+     "start_frame": 28294,
+     "end_frame": 28410
+    },
+    {
+     "text": "We assume the air parcel inside the balloon doesn't change its temperature as it moves with the wind: no sunshine and no mixing.",
+     "audio_text": null,
+     "start": 947.35,
+     "end": 956.325,
+     "dur": 8.975,
+     "start_frame": 28421,
+     "end_frame": 28690
+    },
+    {
+     "text": "That means the material derivative, capital D T by D t, is zero.",
+     "audio_text": null,
+     "start": 956.675,
+     "end": 961.975,
+     "dur": 5.3,
+     "start_frame": 28700,
+     "end_frame": 28859
+    },
+    {
+     "text": "Every other air parcel keeps its temperature too.",
+     "audio_text": null,
+     "start": 962.325,
+     "end": 965.875,
+     "dur": 3.55,
+     "start_frame": 28870,
+     "end_frame": 28976
+    },
+    {
+     "text": "And since the air carries its temperature along, the whole pattern of isotherms slides with the wind.",
+     "audio_text": null,
+     "start": 966.225,
+     "end": 972.7,
+     "dur": 6.475,
+     "start_frame": 28987,
+     "end_frame": 29181
+    },
+    {
+     "text": "Our wind is the same everywhere, so the lines move east, eighteen kilometres every hour.",
+     "audio_text": null,
+     "start": 973.05,
+     "end": 979.4,
+     "dur": 6.35,
+     "start_frame": 29192,
+     "end_frame": 29382
+    }
+   ],
+   "end": 980.2,
+   "start_frame": 28294,
+   "end_frame": 29406
+  },
+  {
+   "id": "s19a_pole_cools",
+   "start": 980.2,
+   "sentences": [
+    {
+     "text": "Now let's set the clock back to zero and watch the fixed thermometer.",
+     "audio_text": null,
+     "start": 980.2,
+     "end": 984.9,
+     "dur": 4.7,
+     "start_frame": 29406,
+     "end_frame": 29547
+    },
+    {
+     "text": "Ahead of the wind it's warmer, so behind it, upwind, where the wind comes from, it's colder.",
+     "audio_text": null,
+     "start": 985.25,
+     "end": 991.575,
+     "dur": 6.325,
+     "start_frame": 29558,
+     "end_frame": 29747
+    },
+    {
+     "text": "The air that will reach the fixed thermometer in one hour is now eighteen kilometres across the isotherms on the colder side, at twelve point eight two degrees.",
+     "audio_text": null,
+     "start": 991.925,
+     "end": 1002.375,
+     "dur": 10.45,
+     "start_frame": 29758,
+     "end_frame": 30071
+    },
+    {
+     "text": "Behind it waits the air that will arrive in two hours, at twelve point six four, and in three hours, at twelve point four six.",
+     "audio_text": null,
+     "start": 1002.725,
+     "end": 1011.35,
+     "dur": 8.625,
+     "start_frame": 30082,
+     "end_frame": 30341
+    },
+    {
+     "text": "Now let's start the clock.",
+     "audio_text": null,
+     "start": 1011.7,
+     "end": 1013.75,
+     "dur": 2.05,
+     "start_frame": 30351,
+     "end_frame": 30413
+    },
+    {
+     "text": "One by one, each air parcel reaches the fixed thermometer and brings its temperature with it: twelve point eight two after one hour, twelve point six four after two, and twelve point four six after three.",
+     "audio_text": null,
+     "start": 1014.1,
+     "end": 1027.925,
+     "dur": 13.825,
+     "start_frame": 30423,
+     "end_frame": 30838
+    },
+    {
+     "text": "Colder and colder air keeps arriving, so the fixed thermometer's reading falls by point one eight degrees every hour.",
+     "audio_text": null,
+     "start": 1028.275,
+     "end": 1036.2,
+     "dur": 7.925,
+     "start_frame": 30848,
+     "end_frame": 31086
+    },
+    {
+     "text": "Meanwhile, the balloon moves with its parcel, so its line on the graph stays flat at thirteen degrees.",
+     "audio_text": null,
+     "start": 1036.55,
+     "end": 1043.45,
+     "dur": 6.9,
+     "start_frame": 31097,
+     "end_frame": 31304
+    }
+   ],
+   "end": 1044.25,
+   "start_frame": 29406,
+   "end_frame": 31328
+  },
+  {
+   "id": "s19b_equation",
+   "start": 1044.25,
+   "sentences": [
+    {
+     "text": "Our equation says the same.",
+     "audio_text": null,
+     "start": 1044.25,
+     "end": 1046.575,
+     "dur": 2.325,
+     "start_frame": 31328,
+     "end_frame": 31397
+    },
+    {
+     "text": "Put zero for capital D T by D t, and subtract v dot grad T from both sides: partial T by partial t equals minus v dot grad T.",
+     "audio_text": null,
+     "start": 1046.925,
+     "end": 1057.725,
+     "dur": 10.8,
+     "start_frame": 31408,
+     "end_frame": 31732
+    },
+    {
+     "text": "The wind has a part towards warmer air, so v dot grad T is plus point one eight kelvin per hour.",
+     "audio_text": null,
+     "start": 1058.075,
+     "end": 1065.1,
+     "dur": 7.025,
+     "start_frame": 31742,
+     "end_frame": 31953
+    },
+    {
+     "text": "The minus sign makes it a fall of point one eight at the fixed thermometer, as colder air is carried in.",
+     "audio_text": null,
+     "start": 1065.45,
+     "end": 1072.025,
+     "dur": 6.575,
+     "start_frame": 31964,
+     "end_frame": 32161
+    }
+   ],
+   "end": 1072.825,
+   "start_frame": 31328,
+   "end_frame": 32185
+  },
+  {
+   "id": "s19c_balance",
+   "start": 1072.825,
+   "sentences": [
+    {
+     "text": "So why does the balloon stay at thirteen?",
+     "audio_text": null,
+     "start": 1072.825,
+     "end": 1075.65,
+     "dur": 2.825,
+     "start_frame": 32185,
+     "end_frame": 32270
+    },
+    {
+     "text": "In one hour it moves eighteen kilometres across the isotherms, to where the map read thirteen point one eight an hour ago.",
+     "audio_text": null,
+     "start": 1076.0,
+     "end": 1084.175,
+     "dur": 8.175,
+     "start_frame": 32280,
+     "end_frame": 32525
+    },
+    {
+     "text": "Crossing the isotherms like that is worth plus point one eight: that's the advection term.",
+     "audio_text": null,
+     "start": 1084.525,
+     "end": 1090.575,
+     "dur": 6.05,
+     "start_frame": 32536,
+     "end_frame": 32717
+    },
+    {
+     "text": "In the first case, the map stood still, so the local rate was zero, and the parcel warmed by point one eight.",
+     "audio_text": null,
+     "start": 1090.925,
+     "end": 1098.275,
+     "dur": 7.35,
+     "start_frame": 32728,
+     "end_frame": 32948
+    },
+    {
+     "text": "In our second case, every place has cooled by point one eight degrees in that hour, and that fall, minus point one eight, is the local rate.",
+     "audio_text": null,
+     "start": 1098.625,
+     "end": 1108.1,
+     "dur": 9.475,
+     "start_frame": 32959,
+     "end_frame": 33243
+    },
+    {
+     "text": "They cancel, so the balloon still reads thirteen.",
+     "audio_text": null,
+     "start": 1108.45,
+     "end": 1112.025,
+     "dur": 3.575,
+     "start_frame": 33254,
+     "end_frame": 33361
+    },
+    {
+     "text": "So the advection term is the same in both cases; only the local rate is different.",
+     "audio_text": null,
+     "start": 1112.375,
+     "end": 1118.175,
+     "dur": 5.8,
+     "start_frame": 33371,
+     "end_frame": 33545
+    }
+   ],
+   "end": 1118.975,
+   "start_frame": 32185,
+   "end_frame": 33569
+  },
+  {
+   "id": "s19d_three_rates",
+   "start": 1118.975,
+   "sentences": [
+    {
+     "text": "Let's put the three rates side by side, and say what each one means.",
+     "audio_text": null,
+     "start": 1118.975,
+     "end": 1123.525,
+     "dur": 4.55,
+     "start_frame": 33569,
+     "end_frame": 33706
+    },
+    {
+     "text": "The advection term, v dot grad T, tells us how fast the wind carries an air parcel into warmer or colder places.",
+     "audio_text": null,
+     "start": 1123.875,
+     "end": 1132.425,
+     "dur": 8.55,
+     "start_frame": 33716,
+     "end_frame": 33973
+    },
+    {
+     "text": "Here it's plus point one eight kelvin per hour in both cases, because the wind and the spacing of the isotherms are the same.",
+     "audio_text": null,
+     "start": 1132.775,
+     "end": 1140.9,
+     "dur": 8.125,
+     "start_frame": 33983,
+     "end_frame": 34227
+    },
+    {
+     "text": "The local rate, partial T by partial t, is what the fixed thermometer sees, at one place that never moves: zero when the map is frozen, and minus point one eight in our story, as colder air arrives.",
+     "audio_text": null,
+     "start": 1141.25,
+     "end": 1155.1,
+     "dur": 13.85,
+     "start_frame": 34237,
+     "end_frame": 34653
+    },
+    {
+     "text": "The material derivative, capital D T by D t, is what the balloon's thermometer sees, and it's the local rate plus the advection term: plus point one eight when the map is frozen, and zero in our story.",
+     "audio_text": null,
+     "start": 1155.45,
+     "end": 1169.425,
+     "dur": 13.975,
+     "start_frame": 34663,
+     "end_frame": 35083
+    },
+    {
+     "text": "So whenever you meet v dot grad T, think of how fast the wind carries air across the isotherms, measured in degrees per hour.",
+     "audio_text": null,
+     "start": 1169.775,
+     "end": 1178.75,
+     "dur": 8.975,
+     "start_frame": 35093,
+     "end_frame": 35362
+    }
+   ],
+   "end": 1179.55,
+   "start_frame": 33569,
+   "end_frame": 35386
+  },
+  {
+   "id": "s20_twice_steep",
+   "start": 1179.55,
+   "sentences": [
+    {
+     "text": "Now let's change only the map: the temperature rises one degree every fifty kilometres, instead of every hundred.",
+     "audio_text": null,
+     "start": 1179.55,
+     "end": 1187.4,
+     "dur": 7.85,
+     "start_frame": 35386,
+     "end_frame": 35622
+    },
+    {
+     "text": "The isotherms are twice as close, so grad T doubles, to two times ten to the minus five kelvin per metre.",
+     "audio_text": null,
+     "start": 1187.75,
+     "end": 1195.5,
+     "dur": 7.75,
+     "start_frame": 35632,
+     "end_frame": 35865
+    },
+    {
+     "text": "Its length, by Pythagoras again, is that same number, because the northward part is still zero.",
+     "audio_text": null,
+     "start": 1195.85,
+     "end": 1202.525,
+     "dur": 6.675,
+     "start_frame": 35875,
+     "end_frame": 36076
+    },
+    {
+     "text": "The wind's shadow is still five metres per second.",
+     "audio_text": null,
+     "start": 1202.875,
+     "end": 1206.45,
+     "dur": 3.575,
+     "start_frame": 36086,
+     "end_frame": 36193
+    },
+    {
+     "text": "But the dot product doubles, to point three six kelvin per hour, so the fixed thermometer cools twice as fast.",
+     "audio_text": null,
+     "start": 1206.8,
+     "end": 1214.425,
+     "dur": 7.625,
+     "start_frame": 36204,
+     "end_frame": 36433
+    },
+    {
+     "text": "Just as with the sled, the shadow stayed the same, so on its own it would miss this change.",
+     "audio_text": null,
+     "start": 1214.775,
+     "end": 1220.725,
+     "dur": 5.95,
+     "start_frame": 36443,
+     "end_frame": 36622
+    },
+    {
+     "text": "Multiplying by the length of grad T catches it.",
+     "audio_text": null,
+     "start": 1221.075,
+     "end": 1224.65,
+     "dur": 3.575,
+     "start_frame": 36632,
+     "end_frame": 36739
+    }
+   ],
+   "end": 1225.45,
+   "start_frame": 35386,
+   "end_frame": 36764
+  },
+  {
+   "id": "s20b_runway",
+   "start": 1225.45,
+   "sentences": [
+    {
+     "text": "The dot product turns up in many more places, so let's look at a few.",
+     "audio_text": null,
+     "start": 1225.45,
+     "end": 1230.3,
+     "dur": 4.85,
+     "start_frame": 36763,
+     "end_frame": 36909
+    },
+    {
+     "text": "First, a runway.",
+     "audio_text": null,
+     "start": 1230.65,
+     "end": 1232.675,
+     "dur": 2.025,
+     "start_frame": 36919,
+     "end_frame": 36980
+    },
+    {
+     "text": "Pilots need to know how much of the wind blows along the runway.",
+     "audio_text": null,
+     "start": 1233.025,
+     "end": 1237.525,
+     "dur": 4.5,
+     "start_frame": 36991,
+     "end_frame": 37126
+    },
+    {
+     "text": "Say the runway points north, and the wind blows at ten metres per second towards the north east, thirty degrees off the runway.",
+     "audio_text": null,
+     "start": 1237.875,
+     "end": 1246.25,
+     "dur": 8.375,
+     "start_frame": 37136,
+     "end_frame": 37387
+    },
+    {
+     "text": "Let e hat be a unit arrow along the runway.",
+     "audio_text": null,
+     "start": 1246.6,
+     "end": 1249.925,
+     "dur": 3.325,
+     "start_frame": 37398,
+     "end_frame": 37498
+    },
+    {
+     "text": "Then the wind dot e hat is ten times cos thirty, about eight point seven metres per second along the runway.",
+     "audio_text": null,
+     "start": 1250.275,
+     "end": 1257.9,
+     "dur": 7.625,
+     "start_frame": 37508,
+     "end_frame": 37737,
+     "beat": true
+    },
+    {
+     "text": "The part straight across it is a job for the cross product, which a later video in this series takes on.",
+     "audio_text": null,
+     "start": 1259.4,
+     "end": 1266.225,
+     "dur": 6.825,
+     "start_frame": 37782,
+     "end_frame": 37987
+    }
+   ],
+   "end": 1267.025,
+   "start_frame": 36764,
+   "end_frame": 38011
+  },
+  {
+   "id": "s20c_flux",
+   "start": 1267.025,
+   "sentences": [
+    {
+     "text": "Second, how much passes through a surface.",
+     "audio_text": null,
+     "start": 1267.025,
+     "end": 1270.15,
+     "dur": 3.125,
+     "start_frame": 38011,
+     "end_frame": 38104
+    },
+    {
+     "text": "Hold a window frame in a steady stream of sunlight.",
+     "audio_text": null,
+     "start": 1270.5,
+     "end": 1274.0,
+     "dur": 3.5,
+     "start_frame": 38115,
+     "end_frame": 38220
+    },
+    {
+     "text": "When it faces the sun square on, it catches the most light.",
+     "audio_text": null,
+     "start": 1274.35,
+     "end": 1278.525,
+     "dur": 4.175,
+     "start_frame": 38230,
+     "end_frame": 38356
+    },
+    {
+     "text": "Tilt it, and less light gets through, and edge on, none at all.",
+     "audio_text": null,
+     "start": 1278.875,
+     "end": 1282.925,
+     "dur": 4.05,
+     "start_frame": 38366,
+     "end_frame": 38488
+    },
+    {
+     "text": "The amount is the sunlight's strength times s hat dot n hat, where s hat points towards the sun and n hat points straight out of the window.",
+     "audio_text": null,
+     "start": 1283.275,
+     "end": 1292.4,
+     "dur": 9.125,
+     "start_frame": 38498,
+     "end_frame": 38772
+    },
+    {
+     "text": "The ground works the same way.",
+     "audio_text": null,
+     "start": 1292.75,
+     "end": 1295.075,
+     "dur": 2.325,
+     "start_frame": 38782,
+     "end_frame": 38852
+    },
+    {
+     "text": "At noon on the March equinox, the sun is straight overhead at the equator, but at sixty degrees north it's sixty degrees away from overhead, so s hat dot n hat is cos sixty, one half.",
+     "audio_text": null,
+     "start": 1295.425,
+     "end": 1308.225,
+     "dur": 12.8,
+     "start_frame": 38863,
+     "end_frame": 39247,
+     "beat": true
+    },
+    {
+     "text": "The same sunlight is spread over twice as much ground, which is a big part of why places near the poles are colder.",
+     "audio_text": null,
+     "start": 1309.725,
+     "end": 1317.275,
+     "dur": 7.55,
+     "start_frame": 39292,
+     "end_frame": 39518
+    },
+    {
+     "text": "The same dot product measures heat or water flowing through any surface.",
+     "audio_text": null,
+     "start": 1317.625,
+     "end": 1322.8,
+     "dur": 5.175,
+     "start_frame": 39529,
+     "end_frame": 39684
+    },
+    {
+     "text": "The climate machine video builds on exactly this.",
+     "audio_text": null,
+     "start": 1323.15,
+     "end": 1326.975,
+     "dur": 3.825,
+     "start_frame": 39694,
+     "end_frame": 39809
+    }
+   ],
+   "end": 1327.775,
+   "start_frame": 38011,
+   "end_frame": 39833
+  },
+  {
+   "id": "s20d_wind_work",
+   "start": 1327.775,
+   "sentences": [
+    {
+     "text": "Third, the wind's work on the ocean.",
+     "audio_text": null,
+     "start": 1327.775,
+     "end": 1330.825,
+     "dur": 3.05,
+     "start_frame": 39833,
+     "end_frame": 39925
+    },
+    {
+     "text": "Wind blowing over the sea drags on the water.",
+     "audio_text": null,
+     "start": 1331.175,
+     "end": 1334.775,
+     "dur": 3.6,
+     "start_frame": 39935,
+     "end_frame": 40043
+    },
+    {
+     "text": "The drag on each square metre is an arrow called the wind stress, tau.",
+     "audio_text": null,
+     "start": 1335.125,
+     "end": 1339.9,
+     "dur": 4.775,
+     "start_frame": 40054,
+     "end_frame": 40197
+    },
+    {
+     "text": "The power it gives the water is tau dot u, where u is the water's velocity.",
+     "audio_text": null,
+     "start": 1340.25,
+     "end": 1345.775,
+     "dur": 5.525,
+     "start_frame": 40207,
+     "end_frame": 40373
+    },
+    {
+     "text": "Where the wind blows along with a current, the dot product is positive, and the wind feeds the current with energy.",
+     "audio_text": null,
+     "start": 1346.125,
+     "end": 1353.575,
+     "dur": 7.45,
+     "start_frame": 40384,
+     "end_frame": 40607
+    },
+    {
+     "text": "Where it blows against the current, the dot product is negative, and the wind takes energy away.",
+     "audio_text": null,
+     "start": 1353.925,
+     "end": 1360.425,
+     "dur": 6.5,
+     "start_frame": 40618,
+     "end_frame": 40813
+    },
+    {
+     "text": "Say the wind stress is point one newtons per square metre, and the current flows the same way at point one metres per second.",
+     "audio_text": null,
+     "start": 1360.775,
+     "end": 1368.8,
+     "dur": 8.025,
+     "start_frame": 40823,
+     "end_frame": 41064
+    },
+    {
+     "text": "Then the wind gives the current point zero one watts on every square metre.",
+     "audio_text": null,
+     "start": 1369.15,
+     "end": 1374.325,
+     "dur": 5.175,
+     "start_frame": 41074,
+     "end_frame": 41230,
+     "beat": true
+    },
+    {
+     "text": "Added up over the world ocean, this comes to about a million million watts, most of it over the Southern Ocean, where strong westerly winds blow along with the current that circles Antarctica.",
+     "audio_text": null,
+     "start": 1375.825,
+     "end": 1388.175,
+     "dur": 12.35,
+     "start_frame": 41275,
+     "end_frame": 41645
+    }
+   ],
+   "end": 1388.975,
+   "start_frame": 39833,
+   "end_frame": 41669
+  },
+  {
+   "id": "s20e_similarity",
+   "start": 1388.975,
+   "sentences": [
+    {
+     "text": "Fourth, comparing patterns.",
+     "audio_text": null,
+     "start": 1388.975,
+     "end": 1391.4,
+     "dur": 2.425,
+     "start_frame": 41669,
+     "end_frame": 41742
+    },
+    {
+     "text": "Write today's pressure at four weather stations, as departures from their usual values, as one list of four numbers: an arrow in four dimensions.",
+     "audio_text": null,
+     "start": 1391.75,
+     "end": 1401.85,
+     "dur": 10.1,
+     "start_frame": 41752,
+     "end_frame": 42055
+    },
+    {
+     "text": "We can't draw it, but the recipe works just the same.",
+     "audio_text": null,
+     "start": 1402.2,
+     "end": 1406.025,
+     "dur": 3.825,
+     "start_frame": 42066,
+     "end_frame": 42181
+    },
+    {
+     "text": "Today reads three, one, minus two and minus two hectopascals, and a day in the past reads two, two, minus one and minus three.",
+     "audio_text": "Today reads three, one, minus two and minus two [hectopascals](/hˈɛktəpˌæskᵊlz/), and a day in the past reads two, two, minus one and minus three.",
+     "start": 1406.375,
+     "end": 1415.775,
+     "dur": 9.4,
+     "start_frame": 42191,
+     "end_frame": 42473
+    },
+    {
+     "text": "Their dot product is six plus two plus two plus six, which is sixteen.",
+     "audio_text": null,
+     "start": 1416.125,
+     "end": 1421.4,
+     "dur": 5.275,
+     "start_frame": 42484,
+     "end_frame": 42642
+    },
+    {
+     "text": "Both lengths are the square root of eighteen, so the cosine of the angle between them is sixteen over eighteen, about point eight nine.",
+     "audio_text": null,
+     "start": 1421.75,
+     "end": 1430.325,
+     "dur": 8.575,
+     "start_frame": 42652,
+     "end_frame": 42910,
+     "beat": true
+    },
+    {
+     "text": "Near one, two days look alike; near zero, they have nothing in common; and near minus one, they're opposites.",
+     "audio_text": null,
+     "start": 1431.825,
+     "end": 1439.15,
+     "dur": 7.325,
+     "start_frame": 42955,
+     "end_frame": 43174
+    },
+    {
+     "text": "Forecasters have used this to find past days that looked like today, and computers use the same idea to compare pictures and words.",
+     "audio_text": null,
+     "start": 1439.5,
+     "end": 1448.175,
+     "dur": 8.675,
+     "start_frame": 43185,
+     "end_frame": 43445
+    }
+   ],
+   "end": 1448.975,
+   "start_frame": 41669,
+   "end_frame": 43469
+  },
+  {
+   "id": "s21_recap",
+   "start": 1448.975,
+   "sentences": [
+    {
+     "text": "To sum up, the dot product multiplies matching components and adds, giving a number, not an arrow.",
+     "audio_text": null,
+     "start": 1448.975,
+     "end": 1456.0,
+     "dur": 7.025,
+     "start_frame": 43469,
+     "end_frame": 43680
+    },
+    {
+     "text": "That works because each axis only multiplies its own parts.",
+     "audio_text": null,
+     "start": 1456.35,
+     "end": 1460.775,
+     "dur": 4.425,
+     "start_frame": 43690,
+     "end_frame": 43823
+    },
+    {
+     "text": "In pictures, it's the shadow of one arrow on the other, times the other's length.",
+     "audio_text": null,
+     "start": 1461.125,
+     "end": 1466.525,
+     "dur": 5.4,
+     "start_frame": 43834,
+     "end_frame": 43996
+    },
+    {
+     "text": "When the arrows point the same way, it's positive.",
+     "audio_text": null,
+     "start": 1466.875,
+     "end": 1470.375,
+     "dur": 3.5,
+     "start_frame": 44006,
+     "end_frame": 44111
+    },
+    {
+     "text": "At right angles, it's zero.",
+     "audio_text": null,
+     "start": 1470.725,
+     "end": 1473.1,
+     "dur": 2.375,
+     "start_frame": 44122,
+     "end_frame": 44193
+    },
+    {
+     "text": "In opposite directions, it's negative.",
+     "audio_text": null,
+     "start": 1473.45,
+     "end": 1476.575,
+     "dur": 3.125,
+     "start_frame": 44203,
+     "end_frame": 44297
+    },
+    {
+     "text": "With a unit vector, it picks out one part of an arrow.",
+     "audio_text": null,
+     "start": 1476.925,
+     "end": 1480.9,
+     "dur": 3.975,
+     "start_frame": 44308,
+     "end_frame": 44427
+    },
+    {
+     "text": "A pilot uses this to find the wind along a runway.",
+     "audio_text": null,
+     "start": 1481.25,
+     "end": 1485.225,
+     "dur": 3.975,
+     "start_frame": 44437,
+     "end_frame": 44557
+    },
+    {
+     "text": "And in physics, it gives the work a force does, and how fast the wind changes the temperature at a fixed place.",
+     "audio_text": null,
+     "start": 1485.575,
+     "end": 1492.85,
+     "dur": 7.275,
+     "start_frame": 44567,
+     "end_frame": 44785
+    },
+    {
+     "text": "A push across the motion does no work at all.",
+     "audio_text": null,
+     "start": 1493.2,
+     "end": 1496.55,
+     "dur": 3.35,
+     "start_frame": 44796,
+     "end_frame": 44896
+    },
+    {
+     "text": "The dot product also measures how much sunlight passes through the ground, whether the wind feeds an ocean current or drains it, and how alike two weather patterns are.",
+     "audio_text": null,
+     "start": 1496.9,
+     "end": 1507.475,
+     "dur": 10.575,
+     "start_frame": 44907,
+     "end_frame": 45224
+    },
+    {
+     "text": "The cross product, in the next video, uses the part across instead.",
+     "audio_text": null,
+     "start": 1507.825,
+     "end": 1512.925,
+     "dur": 5.1,
+     "start_frame": 45235,
+     "end_frame": 45388
+    }
+   ],
+   "end": 1513.725,
+   "start_frame": 43469,
+   "end_frame": 45412
+  },
+  {
+   "id": "s22_end",
+   "start": 1513.725,
+   "sentences": [
+    {
+     "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
+     "audio_text": null,
+     "start": 1513.725,
+     "end": 1519.925,
+     "dur": 6.2,
+     "start_frame": 45412,
+     "end_frame": 45598
+    },
+    {
+     "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
+     "audio_text": null,
+     "start": 1520.275,
+     "end": 1528.325,
+     "dur": 8.05,
+     "start_frame": 45608,
+     "end_frame": 45850
+    },
+    {
+     "text": "The notebook for this dot product, and the notebooks for the other maths concepts, are on the website that goes with this video.",
+     "audio_text": null,
+     "start": 1528.675,
+     "end": 1536.65,
+     "dur": 7.975,
+     "start_frame": 45860,
+     "end_frame": 46099
+    }
+   ],
+   "end": 1536.95,
+   "start_frame": 45412,
+   "end_frame": 46108
+  }
+ ],
+ "total_s": 1536.95,
+ "total_frames": 46109,
+ "render_s": 495.8,
+ "loudnorm_input": {
+  "input_i": "-24.71",
+  "input_tp": "-4.01",
+  "input_lra": "4.60",
+  "input_thresh": "-35.18",
+  "output_i": "-16.45",
+  "output_tp": "-1.50",
+  "output_lra": "4.40",
+  "output_thresh": "-26.93",
+  "normalization_type": "dynamic",
+  "target_offset": "0.45"
+ },
+ "cues": 376,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 1536.95,
+  "audio_s": 1536.95,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true
+ }
+}
