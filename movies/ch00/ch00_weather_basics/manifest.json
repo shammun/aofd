@@ -4,12 +4,12 @@
  "builder": "movies/data/build_ch00_weather_basics.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "b2857bcc26e3296716de52452e7e844f2ab04df5",
+  "commit": "a2898e9637bbd7539fd2345f68b2e126735b28c6",
   "dirty_tracked": true,
   "moist_py_tracked": true,
   "moist_py_sha256": "12828309d2ed9357e2406a8e057a4a40835a0b869f68a0ef14749e3e61d99e27",
   "atmos_py_tracked": true,
-  "atmos_py_sha256": "2512b27cdac4874c3444a038b792d49481ed984ad0d7ef179d832fa37958659d",
+  "atmos_py_sha256": "0701685569802a29a910c5e799408c4a04b6c8eaffe60fc9bf1eb10929bd1221",
   "constants_py_tracked": true,
   "constants_py_sha256": "59e337db0c37f96411a646fc76ccdbf0c79d1cf7ecfc594edb7b2937a12e293c",
   "statics_py_tracked": true,
@@ -19,11 +19,11 @@
   "stratification_py_tracked": true,
   "stratification_py_sha256": "0d1e696a43c4243093328117f56fe1bf78e51e1d241091f59552dc098695b174",
   "vectors_py_tracked": true,
-  "vectors_py_sha256": "e090585bf718740e7465d811cada6c6c2b3ce5dee1c46d955a978176b0312abf",
+  "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
   "fronts_py_tracked": true,
   "fronts_py_sha256": "b91b41de2d6c1aa722d766f94f3fc3378eb631404b4cd719b7f85ffcccfaa2f2",
   "climatology_py_tracked": true,
-  "climatology_py_sha256": "ddcb7763a78380fbe640e4450b98200920835b55b3ffc93b1474b874935f6bd6",
+  "climatology_py_sha256": "7675d9fbdb7d93c0995bbdcb3826f5c7d86c980b6990a9d838e1ff821af5a097",
   "cyclone_py_tracked": true,
   "cyclone_py_sha256": "632c32637a0c2014dd7806cdd14ba5722e6c316281451daaaf16d3a15c03b835",
   "trajectories_py_tracked": true,
@@ -335,11 +335,11 @@
   "isobars_20231102T12.json": "aa0ad3f16a1d5e2ab6f78b342ef64a28d252c86157bf561b63702b6f509358d7",
   "brest_climate.json": "a3c4b9948d1e0f1adb8ea2fcef4b0b74e6adbe6adcb783cfb6d681293611be71",
   "igra_stations_2023.json": "bcecbc6ea3cda88a18142556f19cfad735f93d1c5a22072243f09e622f2ee9df",
-  "ciaran_hourly.json": "b7a32b0850197045a0aa157e9078c034577e27690909e27e55290a316b6bfa6f",
+  "ciaran_hourly.json": "9dbe14f051560164dbcfc913c0aabdf2c110b50fb91ff1132cd9531a71a430ad",
   "brest_hourly.json": "96282cb556558161027f12557588c48e581bc5831659f7efd74c7e2a11459e4b",
-  "fronts.json": "9b4ec91407a9bf3980b8c26cbeb449e5326fbf9738137744a7240ffca1dd3d58",
+  "fronts.json": "5519a9f280f3513e76ff9c547e7d8b2eb1c3b81098f6fcfc8385087a35d09ad8",
   "ciaran_850.json": "4bc7a8b0c9d26b3dcd5a5733910b1ffb2bada6465ffd71b31bbfb2dfc30e5111",
-  "climatology.json": "0f616347aec4d7c70ba78902d3b40bff150309a0b01c3a076619e7b1822d3f62",
+  "climatology.json": "d8fa84dcb8bce32471318e958d9130aed53f750f5c41b045915fe3767861ab85",
   "tibet_etopo.json": "fc88da2643e139c1b0f978f560be3b8e61015243749f93a9400c95171c863d73",
   "latest_map.json": "aa107cd250e8f27159b48c6815a5b81de7e759a26655e38b879410adae4ec80c",
   "lines.json": "c5ad556b70fe48ef3ac815145953055a917ed89e79c92712507542e0cabb60e1",
@@ -1537,14 +1537,61 @@
    "pass": true
   },
   {
-   "id": "W49",
-   "name": "s55 low 965.3 hPa at 12 UTC 1 Nov → lowest 953.7 hPa at 03 UTC 2 Nov ('965 to 954')",
+   "id": "M3",
+   "name": "s55 tracker: Ciarán moves ≤ 150 km per hour everywhere (continuity, no jumps)",
    "value": [
-    965.314211,
+    98.604448,
+    63.465018,
+    73.840648,
+    60.678035,
+    60.554555,
+    65.954159
+   ],
+   "ref": "[0, 150]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "M3",
+   "name": "s55 tracker seed: the deepest hour of the box is 03 UTC 2 Nov",
+   "value": "2023-11-02T03",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "M3",
+   "name": "s55 the old box-minimum rule picked another low at 12-14 UTC 1 Nov (≥ 800 km from Ciarán)",
+   "value": [
+    1062.192821,
+    1085.390871,
+    1110.347825
+   ],
+   "ref": "[800, 3000]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "M3",
+   "name": "s55 from 15 UTC 1 Nov the tracked centre is the box minimum (same low)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 Ciarán 970.7 hPa at 12 UTC 1 Nov → lowest 953.7 hPa at 03 UTC 2 Nov ('nine hundred and seventy to nine hundred and fifty-four')",
+   "value": [
+    970.715555,
     953.646673
    ],
    "ref": [
-    965.3,
+    970.7,
     953.7
    ],
    "tol": 0.6,
@@ -1552,8 +1599,35 @@
   },
   {
    "id": "W49",
+   "name": "s55 spoken 'about nine hundred and seventy' = round(12 UTC centre, -1)",
+   "value": [
+    970.0
+   ],
+   "ref": [
+    970.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W49",
    "name": "s55 the lowest hourly centre is at 03 UTC 2 Nov",
    "value": "2023-11-02T03",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W49",
+   "name": "s55 'the low deepens as it comes': 12 UTC 1 Nov → 03 UTC 2 Nov falls every 3 h",
+   "value": [
+    970.7,
+    964.3,
+    960.7,
+    958.5,
+    954.5,
+    953.6
+   ],
    "ref": true,
    "tol": 0,
    "pass": true
@@ -1880,14 +1954,54 @@
    "pass": true
   },
   {
-   "id": "s55",
-   "name": "s55 hourly fronts: the picking rule finds the warm and the cold front in most hours (≥ 15 of 25)",
+   "id": "M4",
+   "name": "s55 hourly fronts attached to Ciarán: a warm and a cold line in most hours (≥ 15 of 25)",
    "value": [
-    18,
-    17
+    23,
+    23
    ],
    "ref": true,
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "M4",
+   "name": "s57 the map's warm front passes Brest (≤ 100 km) during 18-20 UTC, as the Brest graph's gold band says",
+   "value": [
+    14.592491
+   ],
+   "ref": "[0, 100]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "M4",
+   "name": "s58 the map's cold front passes Brest (≤ 100 km) during 00-03 UTC 2 Nov, as the Brest graph's gold band says",
+   "value": [
+    5.900211
+   ],
+   "ref": "[0, 100]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "M4",
+   "name": "s55-s57 the cold front has not reached Brest before 21 UTC 1 Nov (> 150 km away)",
+   "value": [
+    326.790077
+   ],
+   "ref": "[150, 1000000000.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "M4",
+   "name": "s55-s58 hour-to-hour continuity: median mean gap between consecutive lines ≤ 100 km",
+   "value": [
+    45.829171
+   ],
+   "ref": "[0, 100]",
+   "tol": null,
    "pass": true
   },
   {
@@ -1992,6 +2106,31 @@
    ],
    "ref": true,
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "S7",
+   "name": "s52 ITCZ trough over the Atlantic and Africa (40W-30E): mean latitude of the annual-mean MSLP minimum 3-10N",
+   "value": [
+    8.983442
+   ],
+   "ref": "[3, 10]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "S7",
+   "name": "s52 ITCZ trough: every smoothed latitude within 10S-15N",
+   "value": [
+    -3.703633,
+    -3.915267,
+    -4.1269,
+    -4.338533,
+    -4.550167,
+    -4.7618
+   ],
+   "ref": "[-10, 15]",
+   "tol": null,
    "pass": true
   },
   {
@@ -4280,21 +4419,18 @@
   },
   {
    "fn": "fluidpy.diag.cyclone.storm_centre",
-   "scene": "s55",
+   "scene": "s55-s58",
    "data": "data/ciaran_hourly.json",
-   "eq": "hourly MSLP minimum 12 UTC 1 Nov → 12 UTC 2 Nov",
+   "eq": "Ciarán tracked by continuity: seed = box minimum at its deepest hour, then a ±2.5° × ±4° box round the previous hour",
    "params": {
-    "msl": "array (25, 101, 161), sha256 b8c7297a451678a06f600f5b8ba0a10d7365d40d22506de45064dc25a80d886b",
-    "lat": "array (101,), sha256 9961ab66e8f95a9157ea194b53393dbc162206b3a86d33a80c0e2844b9d2aa2e",
-    "lon": "array (161,), sha256 a04b3cdb77a389bb25d0421b81bdc7e3ecd84118c874eb379ed0004049108054",
-    "box": [
-     40,
-     60,
-     -30,
-     10
+    "msl": "ERA5 A1 hourly MSLP 12 UTC 1 Nov → 12 UTC 2 Nov, array (25, 101, 161), sha256 b8c7297a451678a06f600f5b8ba0a10d7365d40d22506de45064dc25a80d886b",
+    "seed_utc": "2023-11-02T03",
+    "search_box_deg": [
+     2.5,
+     4.0
     ]
    },
-   "output_sha256": "f1e8ae69513f0de360e08f10b58c63aa9da4576d56638fe450c620c810dafa5e"
+   "output_sha256": "46182a225b98725f71fafb3dad5ceaf93cdec5c79ff6a3f1c94631d7d9fd7574"
   },
   {
    "fn": "fluidpy.diag.fronts.front_lines",
@@ -4340,14 +4476,17 @@
   },
   {
    "fn": "fluidpy.diag.fronts.front_lines",
-   "scene": "s55",
+   "scene": "s55-s58",
    "data": "data/fronts.json",
-   "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre', same picking rule",
+   "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre'; lines attached to the tracked Ciarán centre (≤ 350 km), ≥ 300 km long, clipped to 800 km from it, nearest to the previous hour's line",
    "params": {
     "T": "ERA5 850 hPa t (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc)",
-    "locate": "centre"
+    "locate": "centre",
+    "attach_km": 350.0,
+    "clip_km": 800.0,
+    "min_length_km": 300.0
    },
-   "output_sha256": "f980dab0e670857947a34dc40a91ce2630b9fe235a3cad3e64c2158fd494da3f"
+   "output_sha256": "05a284659683936881e68daee26d16f73546ea678cf0c2a234b6c195f5682b58"
   },
   {
    "fn": "fluidpy.diag.cyclone.storm_centre",

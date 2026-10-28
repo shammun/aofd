@@ -121,6 +121,7 @@ const EQ_S20 = String.raw`8.43 \times \ln 2 \approx 5.8\ \mathrm{km}`;
 const EQ_S22 = String.raw`\text{fraction below} = 1 - \dfrac{p(z)}{p_0}`;
 const EQ_S27 = String.raw`e \approx 1.61\, q\, p = 1.61 \times 0.020 \times 1000 \approx 32\ \mathrm{hPa}`;
 const EQ_S29 = String.raw`RH = \dfrac{\text{vapour pressure}}{\text{saturation vapour pressure}} \times 100\,\%`;
+const EQ_S29_SHOWN = String.raw`RH = \dfrac{\text{vapour pressure}}{\begin{array}{c}\text{saturation}\\ \text{vapour pressure}\end{array}} \times 100\,\%`;
 const EQ_S31 = String.raw`12 \div 8 \approx 1.5\ \mathrm{km}`;
 const EQ_S32 = String.raw`|\mathbf v| = \sqrt{8^2 + 6^2} = 10\ \mathrm{m/s}`;
 const EQ_S34 = String.raw`1\ \mathrm{kt} = 1852\ \mathrm{m} \div 3600\ \mathrm{s} \approx 0.51\ \mathrm{m/s}`;
@@ -313,6 +314,9 @@ const SondeBalloon: React.FC<{ x: number; y: number; s?: number; o?: number }> =
     <rect x={x - 9 * s} y={y + 22 * s} width={18 * s} height={14 * s} fill={C.second} stroke={C.bg} strokeWidth={2} />
   </g>
 );
+/** fix loop 1 (review S5): one colour per quantity through the whole movie — pressure teal (as the title readout),
+ * temperature orange; gold only for pointers and links; argon gets its own violet in the s03 bar */
+const PRES = C.first, TEMP = C.second, ARGON = "#8e6fd8";
 const PRAD = 380; // globe radius on screen at dist 3.8 in the picture zone (approx.)
 void PRAD;
 
@@ -354,7 +358,8 @@ const S00: React.FC = () => {
           <RiseText f={f} t="made easy" x={104} y={550} s={96} at={20} fill={C.key} />
         </g>
         <RiseText f={f} t="and how meteorology uses them" x={106} y={660} s={68} at={38} fill={C.key} colors={(i) => (i >= 8 && i < 19 ? C.first : undefined)} />
-        <g opacity={oA}>
+        {/* fix loop 1 (S1): Part A's readout is fully gone (6 frames) before Part B's fades in, so the two never overlap */}
+        <g opacity={fin(f, 4, 10) * fout(f, tMet - 8, 6)}>
           {/* floor size + wider slots: at T.key "12.0 km" ran into "−60 °C" (stage-2 frame check); x 1260 keeps the
               readout ≥ 50 px clear of the subtitle (ends ≈ 1198) and the widest "1003 hPa" inside x 1840 */}
           <Lbl x={1260} y={620} t={`${fmt(z, 1)} km`} c={C.key} s={T.floor} />
@@ -369,8 +374,10 @@ const S00: React.FC = () => {
         </g>
         <g opacity={oB}>
           <rect x={BXA.x} y={BXA.y} width={BXA.w} height={BXA.h} fill="none" stroke={C.grid} strokeWidth={3} />
+        </g>
+        <g opacity={fin(f, tMet, 10)}>
           <Lbl x={1360} y={620} t="Brest" c={C.key} s={T.key} />
-          <Lbl x={1520} y={620} t={`${fmt(brest, 0)} hPa`} c={C.second} s={T.key} />
+          <Lbl x={1520} y={620} t={`${fmt(brest, 0)} hPa`} c={C.first} s={T.key} />
           <ClockGlyph x={1790} y={620} r={28} h={(12 + hB) % 12} />
         </g>
       </Svg>
@@ -442,7 +449,15 @@ const S02: React.FC = () => {
           <Lbl x={1180} y={710} t="3 sheets of paper" c={C.key} s={T.key} />
         </g>
         <Keyword f={f} text="× 50" at={[1180, 800]} appear={t50} s={T.calc} />
+        {/* fix loop 1 (M2): the maths zone carries the words from S1 on, until the globe calculation takes the top */}
+        <Keyword f={f} text="atmosphere" at={[1100, 150]} appear={AT(k, 1, "atmosphere")} out={tGl - 12} s={T.calc} />
+        <g opacity={win(f, AT(k, 1, "gravity"), tGl - 12)}>
+          <Arrow p={[1130, 220]} q={[1130, 330]} color={C.ink} w={8} head={28} />
+          <Lbl x={1180} y={280} t="held down by gravity" c={C.key} s={T.key} />
+        </g>
+        <Lbl x={1100} y={410} t="much thinner than pictures" c={C.key} s={T.key} o={win(f, SS(k, 2), tGl - 12)} />
       </Svg>
+      <TeX s={String.raw`12\ \mathrm{km} \ll 6371\ \mathrm{km}`} x={1100} y={560} size={T.calc} o={fin(f, tR) * fout(f, tGl - 12)} />
       <CalcStack f={f} x={1080} y={120} rows={tall(rows, 54)} maxLines={2} size={54} />
     </Scene>
   );
@@ -455,7 +470,7 @@ const S03: React.FC = () => {
   const tN = AT(k, 1, "seventy-eight"), tO = AT(k, 1, "twenty-one"), tAr = AT(k, 1, "argon"), tCO = AT(k, 2, "Carbon dioxide"), tW = AT(k, 2, "water vapour");
   const tMol = SS(k, 3), tPar = AT(k, 5, "An air parcel");
   const X0 = 1080, W = 760, y = 120, comp = BA.composition_percent;
-  const segs = [{ n: "nitrogen", v: comp.N2, c: "#5b6fd8", t: tN, l: "78 %" }, { n: "oxygen", v: comp.O2, c: C.first, t: tO, l: "21 %" }, { n: "argon", v: comp.Ar, c: C.gold, t: tAr, l: "0.9 %" }];
+  const segs = [{ n: "nitrogen", v: comp.N2, c: "#5b6fd8", t: tN, l: "78 %" }, { n: "oxygen", v: comp.O2, c: C.first, t: tO, l: "21 %" }, { n: "argon", v: comp.Ar, c: ARGON, t: tAr, l: "0.9 %" }];
   let acc = 0;
   const molO = win(f, tMol, SS(k, 4) + 20);
   const drift = clamp((f - tPar) / (LEN(k) - tPar), 0, 1);
@@ -475,14 +490,17 @@ const S03: React.FC = () => {
           <g key={s.n} opacity={fin(f, s.t)}>
             <rect x={x} y={y} width={Math.max(w, 4)} height={70} fill={s.c} />
           </g>); })}
+        {/* fix loop 1 (M2 3-10 s, r5 scan): the bar's frame is there on "a mixture of gases"; its parts fill on their words */}
+        <rect x={X0} y={y} width={W} height={70} fill="none" stroke={C.muted} strokeWidth={3} opacity={fin(f, AT(k, 0, "mixture"))} />
         <g opacity={fin(f, tN)}><Lbl x={X0} y={y + 110} t="nitrogen 78 %" c={C.key} s={T.key} /></g>
         <g opacity={fin(f, tO)}><Lbl x={X0} y={y + 180} t="oxygen 21 %" c={C.first} s={T.key} /></g>
-        <g opacity={fin(f, tAr)}><Lbl x={X0 + 420} y={y + 180} t="argon 0.9 %" c={C.gold} s={T.key} /></g>
+        <g opacity={fin(f, tAr)}><Lbl x={X0 + 420} y={y + 180} t="argon 0.9 %" c={ARGON} s={T.key} /></g>
         <g opacity={fin(f, tCO) * fout(f, tMol)}><Lbl x={X0} y={y + 250} t="carbon dioxide 0.04 %" c={C.key} s={T.key} /></g>
         <g opacity={fin(f, tW) * fout(f, tMol)}><rect x={X0} y={y + 300} width={60 + 40 * Math.sin(f / 12) ** 2} height={40} fill="none" stroke="#7cc4ff" strokeWidth={4} strokeDasharray="10 8" />
           <Lbl x={X0 + 130} y={y + 320} t="water vapour 0–4 %" c="#7cc4ff" s={T.key} /></g>
         <MolBox x={1200} y={340} s={440} n={70} f={f - tMol} speed={0.012} o={molO} />
         <Lbl x={1420} y={830} t="hundreds of m/s" c={C.key} s={T.key} a="middle" o={molO} />
+        {void PRES}{void TEMP}
         <Keyword f={f} text="air parcel" at={[1200, 560]} appear={tPar} s={T.calc} />
       </Svg>
     </Scene>
@@ -515,8 +533,13 @@ const S04: React.FC = () => {
           <Lbl x={520} y={830} t="equal in every direction" c={C.key} s={T.key} a="middle" />
         </g>
       </Svg>
-      <TeX s={EQ_S04} x={1120} y={380} size={T.eq} o={fin(f, tEq)} />
-      <TeX s={String.raw`1\ \mathrm{Pa} = 1\ \mathrm{N/m^2}`} x={1120} y={600} size={T.calc} o={fin(f, tPa)} />
+      <Svg>
+        {/* fix loop 1 (M2): the maths zone is not empty while the hits build the force */}
+        <Keyword f={f} text="air pressure" at={[1120, 150]} appear={AT(k, 0, "air pressure")} s={T.calc} />
+        <Lbl x={1120} y={250} t="billions of tiny pushes" c={C.second} s={T.key} o={fin(f, AT(k, 2, "billions"))} />
+      </Svg>
+      <TeX s={EQ_S04} x={1120} y={420} size={T.eq} o={fin(f, tEq)} />
+      <TeX s={String.raw`1\ \mathrm{Pa} = 1\ \mathrm{N/m^2}`} x={1120} y={640} size={T.calc} o={fin(f, tPa)} />
     </Scene>
   );
 };
@@ -547,14 +570,18 @@ const S05: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <Column x={480} y0={760} y1={60} o={fin(f, tCol)} />
+        {/* fix loop 1 (M1): the column stands from frame 0 (the question is about the ground under it); its labels come on their words */}
+        <Column x={480} y0={760} y1={60} o={1} />
         <Lbl x={480} y={820} t="1 m²" c={C.gold} s={T.key} a="middle" o={fin(f, tCol)} />
         <Arrow p={[480, 560]} q={[480, 740]} color="#a8743f" o={fin(f, tW)} />
         <Lbl x={530} y={640} t="weight" c="#a8743f" s={T.key} o={fin(f, tW)} />
-        <Lbl x={640} y={740} t="101 325 Pa" c={C.second} s={T.key} o={fin(f, tP)} />
+        <Lbl x={640} y={740} t="101 325 Pa" c={PRES} s={T.key} o={fin(f, tP)} />
         {Array.from({ length: 7 }, (_, i) => <Car key={i} x={1130 + i * 100} y={740} o={fin(f, tCars + i * 3)} />)}
         <Keyword f={f} text="pressure = weight above" at={[1080, 830]} appear={tEnd} s={T.key} />
       </Svg>
+      {/* fix loop 1 (M2): the goal first, in the maths zone from the first words; answered on "one hundred…", gone when the weight row arrives */}
+      <TeX s={String.raw`p_0 = \ ?`} x={1100} y={500} size={T.eq} c={PRES} o={fin(f, AT(k, 0, "pressure at the ground")) * fout(f, tP - 6, 6)} />
+      <TeX s={String.raw`p_0 = 101\,325\ \mathrm{Pa}`} x={1100} y={500} size={T.eq} c={PRES} o={fin(f, tP) * fout(f, tWt - 10)} />
       <TeX s={String.raw`\text{weight} = m\,g`} x={1100} y={100} size={T.calc} o={fin(f, tWt)} />
       <TeX s={String.raw`g = 9.81\ \mathrm{m/s^2}`} x={1100} y={190} size={T.calc} o={fin(f, AT(k, 4, "nine point"))} />
       <CalcStack f={f} x={1180} y={270} rows={tall(rows, T.calc)} size={T.calc} maxLines={1} />
@@ -574,7 +601,10 @@ const S06: React.FC = () => {
         <Person x={480} y={600} s={2} />
         {angs.map((a, i) => { const cx = 480, cy = 420, R1 = 330, R2 = 250; const p: Pt = [cx + Math.cos(a) * R1, cy + Math.sin(a) * R1 * 1.05], q: Pt = [cx + Math.cos(a) * R2, cy + Math.sin(a) * R2 * 1.05];
           return <g key={i}><Arrow p={p} q={q} color={C.second} w={8} head={28} o={fin(f, tIn + i * 2)} /><Arrow p={lerp(q, [cx, cy], 0.55)} q={lerp(q, [cx, cy], 0.15)} color={C.first} w={6} head={22} o={fin(f, tOut + i * 2)} /></g>; })}
-        <Keyword f={f} text="balance" at={[1100, 300]} appear={tBal} s={T.calc} />
+        {/* fix loop 1 (M2): the arrow legend in the maths zone, on the words, gone before the lift arrives */}
+        <g opacity={win(f, tIn, tLift - 10)}><Arrow p={[1100, 150]} q={[1200, 150]} color={C.second} w={8} head={28} /><Lbl x={1230} y={150} t="air pushes in" c={C.second} s={T.key} /></g>
+        <g opacity={win(f, tOut, tLift - 10)}><Arrow p={[1200, 220]} q={[1100, 220]} color={C.first} w={6} head={22} /><Lbl x={1230} y={220} t="body pushes out" c={C.first} s={T.key} /></g>
+        <Keyword f={f} text="balance" at={[1100, 330]} appear={tBal} s={T.calc} />
         <g opacity={fin(f, tLift)}>
           <rect x={1450} y={120} width={200} height={700} fill="none" stroke={C.muted} strokeWidth={4} />
           <rect x={1470} y={700 - 520 * easeIO(lift)} width={160} height={110} fill="#3a4766" stroke={C.ink} strokeWidth={4} />
@@ -604,6 +634,8 @@ const S07: React.FC = () => {
         <Barometer x={520} y={430} r={300} v={needle} o={fin(f, 0)} />
         <Keyword f={f} text="barometer" at={[520, 820]} a="middle" appear={tBaro} s={T.key} />
         <Lbl x={1100} y={720} t="a few %" c={C.gold} s={T.key} o={fin(f, tFew)} />
+        {/* fix loop 1 (M2 3-10 s, r5 scan): the new unit is named in the maths zone on S0 */}
+        <Keyword f={f} text="hectopascals (hPa)" at={[1100, 600]} appear={AT(k, 0, "hectopascals")} s={T.key} />
         <Keyword f={f} text="drive the winds" at={[1100, 810]} appear={tWind} s={T.key} />
       </Svg>
       <TeX s={EQ_S07} x={-999} y={-999} size={T.calc} o={0} />
@@ -625,12 +657,15 @@ const S08: React.FC = () => {
   return (
     <Scene>
       <Svg>
+        {/* fix loop 1 (M1): the (empty) room stands from frame 0 — air you cannot see; it fills on "fifty cubic metres" */}
+        <IsoBox o={o} a={5 * s} b={4 * s} c={2.5 * s} fill="#7cc4ff" fo={0.3 * fin(f, tFill, 30)} />
         <g opacity={fin(f, tRoom)}>
-          <IsoBox o={o} a={5 * s} b={4 * s} c={2.5 * s} fill="#7cc4ff" fo={0.3 * fin(f, tFill, 30)} />
           <Lbl x={460} y={830} t="5 m × 4 m × 2.5 m" c={C.key} s={T.key} a="middle" />
-          <Person x={P(2.5, 2, 0)[0]} y={P(2.5, 2, 0)[1] - 10} s={0.75} o={fin(f, t60)} />
         </g>
+        <Person x={P(2.5, 2, 0)[0]} y={P(2.5, 2, 0)[1] - 10} s={0.75} o={fin(f, t60)} />
+        <Keyword f={f} text="density" at={[1230, 140]} appear={AT(k, 0, "density")} out={tRho - 8} s={T.calc} />
       </Svg>
+      <TeX s={String.raw`\mathrm{kg}\ \text{per}\ \mathrm{m^3}`} x={1120} y={240} size={T.calc} o={fin(f, AT(k, 1, "how much mass")) * fout(f, t12 - 10)} />
       <TeX s={String.raw`\rho`} x={1120} y={140} size={96} c="#a8743f" o={fin(f, tRho)} />
       <TeX s={String.raw`\text{density},\ \mathrm{kg/m^3}`} x={1230} y={140} size={T.key} c={C.key} o={fin(f, tRho)} />
       <TeX s={String.raw`\rho \approx 1.2\ \mathrm{kg/m^3}`} x={1120} y={280} size={T.calc} o={fin(f, t12)} />
@@ -653,10 +688,15 @@ const S09: React.FC = () => {
         <MolBox x={560} y={260} s={360} n={36} f={f} speed={0.02} c={C.second} seed={3} />
         <Lbl x={300} y={680} t="colder" c={C.local} s={T.key} a="middle" />
         <Lbl x={740} y={680} t="warmer" c={C.second} s={T.key} a="middle" />
-        <g opacity={fin(f, tK)}>
+        {/* fix loop 1 (M2 3-10 s): the two scale bars stand faint from frame 0; their names come on "Celsius" / "kelvin" */}
+        <g opacity={0.45 + 0.55 * fin(f, tK)}>
           <line x1={1250} y1={Y(40)} x2={1250} y2={Y(-273.15)} stroke={C.muted} strokeWidth={6} />
           <line x1={1560} y1={Y(40)} x2={1560} y2={Y(-273.15)} stroke={C.muted} strokeWidth={6} />
-          <Lbl x={1250} y={90} t="°C" c={C.key} s={T.key} a="middle" /><Lbl x={1560} y={90} t="K" c={C.key} s={T.key} a="middle" />
+        </g>
+        <Lbl x={1250} y={90} t="°C" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "Celsius"))} />
+        <Lbl x={1560} y={90} t="K" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "kelvin"))} />
+        <Lbl x={1405} y={300} t="faster = warmer" c={TEMP} s={T.key} a="middle" o={fin(f, AT(k, 0, "the warmer")) * fout(f, tK)} />
+        <g opacity={fin(f, tK)}>
           {pairs.map(([c, kk]) => <g key={c}>
             <line x1={1235} x2={1265} y1={Y(c)} y2={Y(c)} stroke={C.ink} strokeWidth={4} /><line x1={1545} x2={1575} y1={Y(c)} y2={Y(c)} stroke={C.ink} strokeWidth={4} />
             <Lbl x={1220} y={Y(c) + (c === 15 ? -22 : c === 0 ? 22 : 0)} t={String(c)} c={C.ink} s={52} a="end" b={false} />
@@ -678,15 +718,22 @@ const S10: React.FC = () => {
   const f = useCurrentFrame(), k = K("s10_gas_law");
   const t2 = SS(k, 2), t3 = SS(k, 3), t4 = AT(k, 4, "p equals"), t6 = SS(k, 6), tR = AT(k, 6, "two hundred");
   const parts: Part[] = [
-    { t: "p", c: C.second, u: { w: String.raw`\text{pressure (Pa)}`, c: C.gold } }, { t: "=" },
+    { t: "p", c: PRES, u: { w: String.raw`\text{pressure (Pa)}`, c: C.gold } }, { t: "=" },
     { t: String.raw`\rho`, c: "#a8743f", u: { w: String.raw`\text{density}`, c: C.gold } },
     { t: "R", c: C.key, u: { w: String.raw`\text{gas constant}`, c: C.gold } },
-    { t: "T", c: C.gold, u: { w: String.raw`\text{temperature (K)}`, c: C.gold } },
+    { t: "T", c: TEMP, u: { w: String.raw`\text{temperature (K)}`, c: C.gold } },
   ];
   const c1 = win(f, t2, t3 + 10), c2 = fin(f, t3);
+  // fix loop 1 (M1/M2): one molecule box from frame 0 (the wall the molecules push on), and the three quantities waiting in
+  // the maths zone on their words in S0, until the law gathers them on "p equals"
+  const box0 = fout(f, t2, 8);
+  const qs: [string, string, string][] = [["p", PRES, "pressure"], [String.raw`\rho`, "#a8743f", "density"], ["T", TEMP, "temperature"]];
   return (
     <Scene>
       <Svg>
+        <g opacity={box0}>
+          <MolBox x={120} y={200} s={300} n={20} f={f} speed={0.01} seed={4} wallHi={fin(f, AT(k, 1, "push harder"))} />
+        </g>
         <g opacity={c1}>
           <MolBox x={120} y={200} s={300} n={20} f={f} speed={0.01} seed={4} />
           <MolBox x={540} y={200} s={300} n={40} f={f} speed={0.01} seed={5} />
@@ -700,6 +747,8 @@ const S10: React.FC = () => {
           <Lbl x={480} y={620} t="p ∝ T" c={C.key} s={T.calc} a="middle" />
         </g>
       </Svg>
+      {qs.map(([s, c, w], i) => <TeX key={w} s={s} x={1220 + i * 220} y={300} size={96} c={c} ax={0.5} o={fin(f, AT(k, 0, w)) * fout(f, t4 - 8, 8)} />)}
+      <Svg>{qs.map(([, c, w], i) => <Lbl key={w} x={1220 + i * 220} y={420} t={w} c={c} s={T.floor} a="middle" o={fin(f, AT(k, 0, w)) * fout(f, t4 - 8, 8)} />)}</Svg>
       <Layered parts={parts} layers={[base(fin(f, t4)), { u: [0, 2, 3, 4], o: fin(f, t6) }]} x={960} y={380} size={96} ax={0.5} />
       <TeX s={EQ_S10} x={-999} y={-999} o={0} />
       <TeX s={String.raw`R = 287\ \mathrm{J\,kg^{-1}\,K^{-1}}`} x={960} y={720} size={T.calc} ax={0.5} o={fin(f, tR)} />
@@ -719,14 +768,17 @@ const S11: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <IsoBox o={[420, 420]} a={220} b={220} c={220} fill="#7cc4ff" fo={0.4 * fin(f, t4, 30)} op={fin(f, t1)} />
-        <Lbl x={140} y={720} t="p = 1013 hPa" c={C.second} s={T.key} o={fin(f, t1)} />
-        <Lbl x={140} y={800} t="T = 15 °C = 288.15 K" c={C.gold} s={T.key} o={fin(f, AT(k, 1, "fifteen"))} />
-        <Lbl x={420} y={140} t="1 m³" c={C.key} s={T.key} a="middle" o={fin(f, t1)} />
+        {/* fix loop 1 (M1): the cubic metre stands from frame 0; its values come on their words */}
+        <IsoBox o={[420, 420]} a={220} b={220} c={220} fill="#7cc4ff" fo={0.4 * fin(f, t4, 30)} op={1} />
+        <Lbl x={140} y={720} t="p = 1013 hPa" c={PRES} s={T.key} o={fin(f, AT(k, 1, "one thousand"))} />
+        <Lbl x={140} y={800} t="T = 15 °C = 288.15 K" c={TEMP} s={T.key} o={fin(f, AT(k, 1, "fifteen"))} />
+        <Lbl x={420} y={140} t="1 m³" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "density"))} />
         <Lbl x={760} y={330} t="1.225 kg" c={C.key} s={T.key} o={fin(f, t4 + 15)} />
       </Svg>
       <TeX s={EQ_S11} x={-999} y={-999} o={0} />
-      <CalcStack f={f} x={1180} y={180} rows={tall(rows, T.calc)} size={T.calc} />
+      {/* fix loop 1 (M2): the law from the last scene opens the maths zone ("Let's use it") */}
+      <TeX s={EQ_S10} x={1180} y={110} size={T.calc} o={1} />
+      <CalcStack f={f} x={1180} y={260} rows={tall(rows, T.calc)} size={T.calc} />
     </Scene>
   );
 };
@@ -745,17 +797,21 @@ const S12: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={fin(f, t1)}><rect x={100} y={320} width={240} height={220} fill="#22304d" stroke={C.local} strokeWidth={5} />{dots(100, 52, 1)}
+        {/* fix loop 1 (M1): the two boxes stand from frame 0 (same pressure, "change only the temperature"); dots and values on their words */}
+        <rect x={100} y={320} width={240} height={220} fill="#22304d" stroke={C.local} strokeWidth={5} />
+        <rect x={440} y={320} width={240} height={220} fill="#3a2c22" stroke={C.second} strokeWidth={5} />
+        <g opacity={fin(f, t1)}>{dots(100, 52, 1)}
           <Lbl x={220} y={600} t="0 °C" c={C.local} s={T.key} a="middle" /><Lbl x={220} y={670} t="1.29 kg/m³" c={C.local} s={T.key} a="middle" />
           <Arrow p={[220, 230]} q={[220, 300]} color={C.local} w={8} head={26} o={fin(f, t4)} /></g>
-        <g opacity={fin(f, t2)}><rect x={440} y={320} width={240} height={220} fill="#3a2c22" stroke={C.second} strokeWidth={5} />{dots(440, 47, 9)}
+        <g opacity={fin(f, t2)}>{dots(440, 47, 9)}
           <Lbl x={560} y={600} t="30 °C" c={C.second} s={T.key} a="middle" /><Lbl x={560} y={670} t="1.16 kg/m³" c={C.second} s={T.key} a="middle" />
           <Arrow p={[560, 300]} q={[560, 230]} color={C.second} w={8} head={26} o={fin(f, t4)} /></g>
-        <Lbl x={390} y={770} t="p = 1013 hPa" c={C.muted} s={T.key} a="middle" o={fin(f, t1)} />
+        <Lbl x={390} y={770} t="p = 1013 hPa" c={PRES} s={T.key} a="middle" o={fin(f, AT(k, 0, "pressure fixed"))} />
         <HotBalloon x={850} y={560 - 360 * easeIO(rise)} s={0.9} o={fin(f, t4)} />
         <Lbl x={1100} y={780} t="warm rises · cold sinks" c={C.key} s={T.key} o={fin(f, AT(k, 4, "warm air tends"))} />
       </Svg>
       <CalcStack f={f} x={1100} y={120} rows={tall(rows, 62)} size={62} maxLines={3} />
+      <TeX s={String.raw`\rho = \dfrac{p}{R\,T}`} x={1100} y={640} size={62} o={fin(f, AT(k, 0, "change only"))} />
     </Scene>
   );
 };
@@ -789,6 +845,9 @@ const S13: React.FC = () => {
         <Lbl x={1100} y={200} t="z = height" c={C.first} s={T.key} o={fin(f, SS(k, 3))} />
         <Lbl x={1100} y={290} t="Δz = small step in height" c={C.gold} s={T.key} o={fin(f, AT(k, 3, "delta z means"))} />
         <Keyword f={f} text="at rest → forces balance" at={[1100, 420]} appear={SS(k, 4)} s={T.key} />
+        {/* fix loop 1 (M2): the question and the goal open the maths zone (house: the goal before the calculation) */}
+        <Lbl x={1100} y={600} t="going up: p falls" c={PRES} s={T.key} o={fin(f, AT(k, 0, "pressure changes"))} />
+        <Keyword f={f} text="goal: how fast?" at={[1100, 700]} appear={AT(k, 1, "Our goal")} s={T.key} />
       </Svg>
     </Scene>
   );
@@ -875,6 +934,8 @@ const S16: React.FC = () => {
         <Keyword f={f} text="vertical accelerations ≪ g" at={[1080, 780]} appear={t5} s={T.floor} />
       </Svg>
       <CalcStack f={f} x={1068} y={120} rows={tall(rows, 56)} size={56} />
+      {/* fix loop 1 (M2 3-10 s, r5 scan): the balance from s15 stands in the maths zone from frame 0 ("How fast is that?") */}
+      <TeX s={EQ_S15} x={1080} y={600} size={T.calc} o={1} />
       {void t1}
     </Scene>
   );
@@ -927,15 +988,21 @@ const S18: React.FC = () => {
   return (
     <Scene>
       <Svg>
+        {/* fix loop 1 (M2): the real column (thinning upwards) and its height axis from frame 0; H is marked on "eight point
+            four"; the uniform-density column of the same weight joins on S6 */}
+        <Axes A={A} xt={[]} yt={[0, 4, 8, 12]} yl="height (km)" grid={false} />
+        <Column x={380} y0={Y(0)} y1={Y(12)} w={140} />
+        <g opacity={fin(f, AT(k, 4, "eight point four"))}>
+          <line x1={A.x} x2={760} y1={Y(8.43)} y2={Y(8.43)} stroke={C.gold} strokeWidth={4} strokeDasharray="12 10" />
+          <Lbl x={770} y={Y(8.43)} t="8.4 km" c={C.gold} s={T.key} />
+        </g>
         <g opacity={fin(f, t6)}>
-          <Axes A={A} xt={[]} yt={[0, 4, 8.4]} yl="height (km)" grid={false} />
-          <Column x={380} y0={Y(0)} y1={Y(12)} w={140} />
           <rect x={570} y={Y(8.43)} width={140} height={Y(0) - Y(8.43)} fill="#7cc4ff" fillOpacity={0.55} stroke="#7cc4ff" strokeWidth={3} />
-          <Lbl x={720} y={Y(8.43)} t="8.4 km" c={C.key} s={T.key} />
+          <Lbl x={640} y={Y(0) + 75} t="same weight" c="#7cc4ff" s={T.key} a="middle" />
         </g>
       </Svg>
       <TeX s={EQ_S18} x={1100} y={130} size={96} o={fin(f, SS(k, 0))} />
-      <Svg><Keyword f={f} text="scale height" at={[1460, 130]} appear={AT(k, 0, "scale height")} s={T.key} /></Svg>
+      <Svg><Keyword f={f} text="scale height" at={[1530, 130]} appear={AT(k, 0, "scale height")} s={T.key} /></Svg>
       <TeX s={String.raw`\dfrac{\mathrm{J}}{\mathrm{kg\,K}} \times \mathrm{K} \div \dfrac{\mathrm{m}}{\mathrm{s^2}} = \dfrac{\mathrm{m^2}}{\mathrm{s^2}} \times \dfrac{\mathrm{s^2}}{\mathrm{m}} = \mathrm{m}`}
         x={1080} y={330} size={52} o={fin(f, t1) * fin(f, t3 - 20)} />
       <CalcStack f={f} x={1180} y={460} rows={tall(rows, 58)} size={58} />
@@ -991,8 +1058,8 @@ const S20: React.FC = () => {
         {steps.map(([z, p], i) => <g key={i} opacity={fin(f, tE + i * 20)}><circle cx={X(p)} cy={Y(z)} r={10} fill={C.gold} />
           <line x1={X(0)} x2={X(p)} y1={Y(z)} y2={Y(z)} stroke={C.gold} strokeDasharray="8 8" strokeWidth={3} /><Lbl x={X(p) + 24} y={Y(z) - 36} t="÷ e" c={C.gold} s={T.key} /></g>)}
         <Lbl x={X(0) + 14} y={Y(H) - 30} t="8.4 km" c={C.key} s={T.key} o={fin(f, AT(k, 1, "eight point four"))} />
-        <Lbl x={1100} y={150} t="e ≈ 2.72" c={C.gold} s={T.calc} o={win(f, AT(k, 1, "two point seven"), tLike)} />
-        <Lbl x={1100} y={260} t="−11 % per km" c={C.key} s={T.calc} o={win(f, t11, tLike)} />
+        <Lbl x={1100} y={270} t="e ≈ 2.72" c={C.gold} s={T.calc} o={win(f, AT(k, 1, "two point seven"), tLike)} />
+        <Lbl x={1100} y={360} t="−11 % per km" c={C.key} s={T.calc} o={win(f, t11, tLike)} />
         <Mattresses x={1300} y={720} o={win(f, tLike, tHalf)} strike={fin(f, tUn)} />
         <Lbl x={1150} y={800} t="like" c={C.key} s={T.key} o={win(f, tLike, tUn)} />
         <Lbl x={1080} y={800} t="unlike: layers mix · T matters" c={C.key} s={T.floor} o={win(f, tUn, tHalf)} />
@@ -1002,6 +1069,8 @@ const S20: React.FC = () => {
         </g>)}
       </Svg>
       <TeX s={EQ_S20} x={1100} y={420} size={T.calc} o={fin(f, tHalf)} />
+      {/* fix loop 1 (M2): the curve's formula from s19 opens the maths zone */}
+      <TeX s={EQ_S60} x={1100} y={150} size={T.calc} o={1} />
     </Scene>
   );
 };
@@ -1043,13 +1112,16 @@ const S21: React.FC = () => {
           <Lbl x={at[0] + 40} y={at[1] - 40} t={`${fmt(z, 1)} km`} c={C.key} s={T.key} />
           <Lbl x={at[0] + 40} y={at[1] + 20} t={`${fmt(v.p, 0)} hPa`} c={C.first} s={T.key} />
         </g>
-        <Lbl x={480} y={830} t="1 Nov 2023 · around midnight" c={C.key} s={T.key} o={fin(f, tThis)} />
+        {/* fix loop 1 (S8): the picture under the launch is the 1 Nov afternoon true colour, so it is labelled as such (inside the view) */}
+        <Lbl x={120} y={835} t="satellite: 1 Nov, afternoon" c={C.key} s={T.key} o={fin(f, tThis)} />
         <Keyword f={f} text="heights × 10" at={[120, 760]} appear={tX10} out={tLow} s={T.key} />
-        <g opacity={fin(f, tLow)}>
+        {/* fix loop 1 (M2): "Does the real atmosphere follow this curve?" — the curve is on screen from frame 0, the balloon's dots join it */}
+        <g>
           <Axes A={PGR} xt={[0, 500, 1000]} yt={[0, 10, 20, 30]} xl="hPa" yl="km" />
           <path d={poly((AM.iso.z_km as number[]).map((zz, i) => [zz, AM.iso.p_hPa[i]] as [number, number]).filter(([zz]) => zz <= 30).map(([zz, p]) => [X(p), Y(zz)] as Pt))}
             fill="none" stroke={C.local} strokeWidth={5} />
-          {pts.map(([zz, p], i) => zz <= z ? <circle key={i} cx={X(p)} cy={Y(zz)} r={7} fill={C.first} /> : null)}
+          <Lbl x={X(330)} y={Y(12)} t="our curve" c={C.local} s={T.key} />
+          {pts.map(([zz, p], i) => zz <= z && f >= tThis ? <circle key={i} cx={X(p)} cy={Y(zz)} r={7} fill={C.first} /> : null)}
           <rect x={X(780)} y={Y(3)} width={X(1020) - X(780)} height={Y(0) - Y(3)} fill={C.gold} opacity={0.18 * fin(f, tLow)} />
           <Lbl x={X(400)} y={Y(1.5)} t="close" c={C.gold} s={T.key} o={fin(f, tLow)} />
           <Lbl x={X(250)} y={Y(26)} t="colder → smaller H" c={C.gold} s={T.key} o={fin(f, tHigh)} />
@@ -1106,21 +1178,26 @@ const TGraph: React.FC<{ f: number; trappesUpto: number; trappesO?: number; extr
 const S23: React.FC = () => {
   const f = useCurrentFrame(), k = K("s23_troposphere");
   const X = axX(TG), Y = axY(TG);
-  const up = SD.trappes.top_km * clamp((f - 10) / (SE(k, 2) - 10), 0, 1);
+  // fix loop 1 (S1): the balloon stops at the last temperature point of the sounding (the line ends there)
+  const zT = Math.max(...(SD.trappes.z_km as number[]).filter((_z, i) => Number.isFinite(SD.trappes.T_C[i])));
+  const up = zT * clamp((f - 10) / (SE(k, 2) - 10), 0, 1);
   const v = sndAt(SD.trappes, Math.max(SD.trappes.z_km[0], up));
   const fit = SD.trappes, tr = SD.trappes.tropopause;
-  const a: Pt = [X(fit.lapse_fit_intercept_C - fit.lapse_fit_K_per_km * 2) + 90, Y(2)], b: Pt = [X(fit.lapse_fit_intercept_C - fit.lapse_fit_K_per_km * 3) + 90, Y(3)];
+  // fix loop 1 (S1): the slope triangle sits ON the fitted line between 3 and 4 km (about −10 °C), its "−6.5 °C" label left of the line
+  const a: Pt = [X(fit.lapse_fit_intercept_C - fit.lapse_fit_K_per_km * 3), Y(3)], b: Pt = [X(fit.lapse_fit_intercept_C - fit.lapse_fit_K_per_km * 4), Y(4)];
   const tTri = AT(k, 2, "six and a half"), tBand = AT(k, 3, "troposphere"), tWx = SS(k, 4);
   return (
     <Scene>
       <Svg>
         <rect x={TG.x} y={Y(tr.z_km)} width={TG.w} height={Y(0) - Y(tr.z_km)} fill={C.first} opacity={0.14 * fin(f, tBand)} />
         <TGraph f={f} trappesUpto={up} />
-        <SondeBalloon x={X(v.T)} y={Y(Math.max(0.2, up)) - 30} s={1} />
-        <g opacity={fin(f, tTri)}><path d={`M${a[0]} ${a[1]} L${a[0]} ${b[1]} L${b[0]} ${b[1]}`} fill="none" stroke={C.gold} strokeWidth={5} />
-          <Lbl x={a[0] + 20} y={(a[1] + b[1]) / 2} t="1 km" c={C.gold} s={T.key} /><Lbl x={(a[0] + b[0]) / 2} y={b[1] - 40} t="−6.5 °C" c={C.gold} s={T.key} a="middle" /></g>
+        {/* fix loop 1 (S1): the instrument box sits on the data point (the balloon a little above it), parked at the last data point */}
+        <SondeBalloon x={X(v.T)} y={Y(Math.max(0.2, up)) - 16} s={0.6} />
+        {/* fix loop 1 (S1): on a 0-50 km axis a 1-km slope triangle is 13 px tall and its labels sat on the line and the "20" tick;
+            the rate is now a keyword in the right column with a gold pointer to the fitted line at 3-4 km */}
+        <Keyword f={f} text="−6.5 °C per km" at={[1320, Y(21)]} appear={tTri} s={T.key} targets={[[(a[0] + b[0]) / 2 + 8, (a[1] + b[1]) / 2]]} />
         <Keyword f={f} text="troposphere" at={[1320, Y(11.5)]} appear={tBand} s={T.calc} />
-        <Lbl x={1320} y={Y(11.5) + 80} t="tropos = turning" c={C.key} s={T.floor} o={fin(f, tBand + 15)} />
+        <Lbl x={1320} y={Y(11.5) + 85} t="tropos = turning" c={C.key} s={T.key} o={fin(f, tBand + 15)} />
         <g opacity={fin(f, tWx)}><Cloud x={X(-20)} y={Y(4)} s={0.7} /><Cloud x={X(-45)} y={Y(7)} s={0.55} /></g>
       </Svg>
     </Scene>
@@ -1208,7 +1285,7 @@ const S25: React.FC = () => {
             <g opacity={fin(f, tTr)}><line x1={TG.x} x2={TG.x + TG.w} y1={Y(sg.tropopause.z_km)} y2={Y(sg.tropopause.z_km)} stroke={C.first} strokeWidth={4} strokeDasharray="14 10" />
               <Lbl x={X(-40)} y={Y(sg.tropopause.z_km) - 36} t={`Singapore ≈ 16 km, ≈ ${fmt(sg.tropopause.T_C, 0)} °C`} c={C.first} s={T.floor} /></g>
             <line x1={TG.x} x2={TG.x + TG.w} y1={Y(tr.z_km)} y2={Y(tr.z_km)} stroke={C.second} strokeWidth={3} strokeDasharray="10 10" opacity={0.7} />
-            <Lbl x={X(-4)} y={Y(tr.z_km) + 36} t="Paris ≈ 11 km" c={C.second} s={T.floor} />
+            <Lbl x={X(-40)} y={Y(tr.z_km) + 40} t="Paris 11 km" c={C.second} s={T.key} />
             <Arrow p={[X(10), Y(tr.z_km)]} q={[X(10), Y(sg.tropopause.z_km)]} color={C.gold} w={6} head={24} o={fin(f, tTr + 20)} />
           </g>} />
       </Svg>
@@ -1242,7 +1319,10 @@ const S26: React.FC = () => {
         {[0, 1, 2, 3].map((i) => <line key={i} x1={150 + i * 220} y1={60} x2={250 + i * 220} y2={740} stroke={C.gold} strokeWidth={5} opacity={fin(f, tSun + i * 5)} />)}
         <SunGlyph x={120} y={70} />
         <circle cx={560} cy={y} r={r} fill={col} fillOpacity={0.35} stroke={col} strokeWidth={5} strokeDasharray="10 8" opacity={fin(f, tRise)} />
-        <Keyword f={f} text="heated from below" at={[1080, 200]} appear={tPan} s={T.key} />
+        {/* fix loop 1 (M2): the maths zone carries the question and the first answer before "heated from below" */}
+        <Lbl x={1080} y={110} t="higher, yet colder?" c={C.key} s={T.key} o={win(f, AT(k, 0, "colder"), AT(k, 1, "warms the ground") - 8, 8)} />
+        <Lbl x={1080} y={110} t="sun warms the ground first" c={C.key} s={T.key} o={fin(f, AT(k, 1, "warms the ground"))} />
+        <Keyword f={f} text="heated from below" at={[1080, 210]} appear={tPan} s={T.key} />
         <Keyword f={f} text="lower pressure → expands" at={[1080, 330]} appear={tExp} s={T.key} />
         <Keyword f={f} text="does work → cools" at={[1080, 440]} appear={AT(k, 5, "that work")} s={T.key} />
         <Lbl x={1080} y={600} t="almost 10 °C per km" c={C.local} s={T.calc} o={fin(f, AT(k, 5, "almost ten"))} />
@@ -1266,18 +1346,24 @@ const S27: React.FC = () => {
       <Svg>
         <g opacity={fin(f, SS(k, 1)) * fout(f, tQ)}>
           {Array.from({ length: 24 }, (_, i) => <circle key={i} cx={1120 + rnd(i) * 300} cy={150 + rnd(i * 5) * 250} r={6} fill="#7cc4ff" opacity={0.35} />)}
-          <Lbl x={1270} y={460} t="vapour: invisible" c={C.key} s={T.key} a="middle" />
+          <Lbl x={1250} y={460} t="vapour: invisible" c={C.key} s={T.key} a="middle" />
         </g>
         <g opacity={fin(f, SS(k, 2)) * fout(f, tQ)}>
-          <Cloud x={1640} y={300} s={1.3} />
-          <Lbl x={1640} y={460} t="cloud: drops" c={C.key} s={T.key} a="middle" />
+          <Cloud x={1660} y={300} s={1.3} />
+          <Lbl x={1660} y={530} t="cloud: drops" c={C.key} s={T.key} a="middle" />
         </g>
-        <Keyword f={f} text="specific humidity" at={[1080, 330]} appear={tQ} s={T.key} />
+        <Keyword f={f} text="specific humidity" at={[1080, 330]} appear={tQ} out={tE - 8} s={T.key} />
         <ColourBar x={1100} y={560} w={600} lut={LUT_HALINE} lo={0} hi={20} ticks={[{ v: 0, t: "0" }, { v: 20, t: "20" }]} unit="g/kg" o={fin(f, tQ)} />
-        <Keyword f={f} text="vapour pressure" at={[1080, 700]} appear={tE} s={T.key} />
+        {/* fix loop 1 (S2): the vapour-pressure calculation is a 60-px CalcStack in the maths zone (it was one 44-px line at the bottom) */}
+        <Keyword f={f} text="vapour pressure" at={[1080, 150]} appear={tE} s={T.key} />
       </Svg>
-      <TeX s={String.raw`q = \dfrac{\text{g of vapour}}{\text{kg of air}}`} x={1100} y={200} size={T.calc} o={fin(f, tQ)} />
-      <TeX s={EQ_S27} x={990} y={810} size={44} o={fin(f, tN)} />
+      <TeX s={String.raw`q = \dfrac{\text{g of vapour}}{\text{kg of air}}`} x={1100} y={200} size={T.calc} o={fin(f, tQ) * fout(f, tE - 8)} />
+      <TeX s={EQ_S27} x={-999} y={-999} o={0} />
+      <CalcStack f={f} x={1100} y={250} size={60} rows={[
+        { lhs: "e", rhs: String.raw`\approx 1.61\, q\, p`, at: tN },
+        { rhs: String.raw`= 1.61 \times 0.020 \times 1000`, at: tN + 25, cont: true },
+        { rhs: String.raw`\approx 32\ \mathrm{hPa}`, at: AT(k, 6, "thirty-two"), cont: true, ul: AT(k, 6, "thirty-two") + 10 },
+      ]} />
     </Scene>
   );
 };
@@ -1287,6 +1373,8 @@ const EG: Ax = { x: 230, y: 90, w: 700, h: 620, xr: [-10, 35], yr: [0, 50] };
 const ES = MO.es_curve;
 const esAt = (Tc: number) => interp(Tc, ES.T_C, ES.es_hPa);
 const TdAt = (e: number) => interp(e, ES.es_hPa, ES.T_C);
+// fix loop 1 (S4): s29 now says "cools to eighteen degrees … about seventy-three percent" — the data must agree
+if (Math.round((15 / esAt(18)) * 100) !== 73) throw new Error(`CHECK s29: RH at 18 °C is ${(15 / esAt(18)) * 100} %, not ≈ 73 %`);
 const EGraph: React.FC<{ o?: number; draw?: number }> = ({ o = 1, draw = 1 }) => {
   const X = axX(EG), Y = axY(EG);
   const n = Math.max(2, Math.round(ES.T_C.length * draw));
@@ -1313,6 +1401,13 @@ const S28: React.FC = () => {
           <Lbl x={540} y={140} t="leaving = landing" c={C.key} s={T.key} a="middle" o={sat} />
           <Keyword f={f} text="saturated" at={[540, 820]} a="middle" appear={SS(k, 2)} s={T.key} />
         </g>
+        {/* fix loop 1 (M2): the maths zone carries the arrow legend and the name from S0 on, before the graph's numbers */}
+        <g opacity={win(f, AT(k, 0, "leave the water"), t3)}>
+          <Arrow p={[1110, 330]} q={[1110, 250]} color={C.second} w={6} head={22} /><Lbl x={1150} y={290} t="leaving" c={C.second} s={T.key} />
+          <Arrow p={[1440, 250]} q={[1440, 330]} color={C.first} w={6} head={22} /><Lbl x={1480} y={290} t="landing" c={C.first} s={T.key} />
+        </g>
+        <Lbl x={1100} y={420} t="warmer water: more escape" c={C.key} s={T.key} o={win(f, SS(k, 1), t3)} />
+        <Keyword f={f} text="saturation vapour pressure" at={[1080, 150]} appear={AT(k, 2, "saturation vapour")} s={T.key} />
         <EGraph o={fin(f, t3)} draw={clamp((f - t3) / 40, 0, 1)} />
         {(MO.es_points.T_C as number[]).map((t, i) => <g key={i} opacity={fin(f, AT(k, 3, words[i]))}><circle cx={X(t)} cy={Y(MO.es_points.es_hPa[i])} r={10} fill={C.gold} />
           <Lbl x={X(t) - 18} y={Y(MO.es_points.es_hPa[i]) - 36} t={labs[i]} c={C.key} s={T.key} a="end" /></g>)}
@@ -1328,7 +1423,8 @@ const S29: React.FC = () => {
   const f = useCurrentFrame(), k = K("s29_relative_humidity");
   const X = axX(EG), Y = axY(EG);
   const t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t6 = SS(k, 6);
-  const Tn = mix(25, 18, easeIO(clamp((f - t6) / 70, 0, 1))), rh = (15 / esAt(Tn)) * 100;
+  // fix loop 1 (S4): the cooling to 18 °C runs on "eighteen degrees" and the RH readout comes on "rises", landing on 73 % as said
+  const tCool = AT(k, 6, "eighteen"), Tn = mix(25, 18, easeIO(clamp((f - tCool) / 70, 0, 1))), rh = (15 / esAt(Tn)) * 100;
   const rows: CalcRow[] = [
     { rhs: String.raw`15 \div 31.3 \approx 0.48`, at: t4 },
     { lhs: "RH", rhs: String.raw`\approx 48\,\%`, at: AT(k, 4, "so the relative"), ul: AT(k, 4, "forty-eight") },
@@ -1340,9 +1436,12 @@ const S29: React.FC = () => {
         <g opacity={fin(f, t2)}><circle cx={X(Tn)} cy={Y(15)} r={13} fill={C.first} /><Lbl x={X(Tn) + 24} y={Y(15) + 36} t="our air" c={C.first} s={T.key} /></g>
         <g opacity={fin(f, t3) * fout(f, t6)}><circle cx={X(25)} cy={Y(esAt(25))} r={11} fill={C.gold} /><Lbl x={X(25) - 20} y={Y(esAt(25)) - 36} t="31.3 hPa" c={C.gold} s={T.key} a="end" />
           <line x1={X(25) + 26} x2={X(25) + 26} y1={Y(15)} y2={Y(esAt(25))} stroke={C.gold} strokeWidth={5} /></g>
-        <Lbl x={1100} y={720} t={`RH ${fmt(rh, 0)} %`} c={C.first} s={T.calc} o={fin(f, t6)} />
+        <Lbl x={1100} y={720} t={`RH ${fmt(rh, 0)} %`} c={C.first} s={T.calc} o={fin(f, AT(k, 6, "rises"))} />
       </Svg>
-      <TeX s={EQ_S29} x={1000} y={180} size={44} o={fin(f, SS(k, 1))} />
+      {/* fix loop 1 (S2): the definition at 58 px with the denominator on two lines (it was 44 px on one line) */}
+      <TeX s={EQ_S29} x={-999} y={-999} o={0} />
+      <TeX s={EQ_S29_SHOWN} x={1000} y={190} size={58} o={fin(f, SS(k, 1))} />
+      <Svg><Keyword f={f} text="relative humidity" at={[1000, 190]} appear={AT(k, 0, "Relative humidity")} out={SS(k, 1) - 10} s={T.calc} /></Svg>
       <CalcStack f={f} x={1300} y={360} rows={tall(rows, T.calc)} size={T.calc} />
     </Scene>
   );
@@ -1362,6 +1461,8 @@ const S30: React.FC = () => {
         <circle cx={X(td)} cy={Y(15)} r={26} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, t2)} />
         <Lbl x={X(td) + 36} y={Y(15) + 46} t="≈ 13 °C" c={C.gold} s={T.key} o={fin(f, t2)} />
         <Keyword f={f} text="dew point" at={[1100, 160]} appear={t3} s={T.calc} />
+        {/* fix loop 1 (M2): the goal in the maths zone from the first words */}
+        <Lbl x={1100} y={260} t="cool until saturated" c={C.first} s={T.key} o={fin(f, AT(k, 0, "cool this air"))} />
         <g opacity={fin(f, SS(k, 4))}>{[0, 1, 2, 3, 4].map((i) => <path key={i} d={`M${1120 + i * 30} 420 q 6 -60 18 -80`} stroke="#5aa05a" strokeWidth={6} fill="none" />)}
           <Droplet x={1150} y={360} s={0.5} /><Droplet x={1220} y={350} s={0.5} /><Lbl x={1320} y={390} t="dew" c={C.key} s={T.key} /></g>
         <g opacity={fin(f, SS(k, 5))}><rect x={1100} y={520} width={300} height={60} fill="#eef2f8" opacity={0.5} /><Lbl x={1440} y={550} t="fog" c={C.key} s={T.key} /></g>
@@ -1395,11 +1496,17 @@ const S31: React.FC = () => {
           <GeoImage P={mapP(MB)} href={IMG.cumulus} box={BOX_CU} />
           <Lbl x={120} y={80} t="real cumulus, northern France" c={C.key} s={T.key} />
         </g>
-        <Axes A={A} xt={[0, 10, 20, 30]} yt={[0, 1, 2, 3]} xl="°C" yl="height (km)" o={fin(f, t1)} />
-        <path d={line(L.T_profile_C, up(t1))} fill="none" stroke={C.second} strokeWidth={6} opacity={fin(f, t1)} />
-        <path d={line(L.Td_profile_C, up(t2))} fill="none" stroke={C.first} strokeWidth={6} opacity={fin(f, t2)} />
-        <Lbl x={X(28)} y={Y(0.4)} t="T" c={C.second} s={T.key} o={fin(f, t1)} /><Lbl x={X(12)} y={Y(0.3)} t="dew point" c={C.first} s={T.key} a="end" o={fin(f, t2)} />
-        <g opacity={fin(f, t3)}><line x1={X(L.Td0_C)} x2={X(25)} y1={Y(0) - 18} y2={Y(0) - 18} stroke={C.gold} strokeWidth={5} /><Lbl x={X(25) + 20} y={Y(0) - 18} t="12 °C" c={C.gold} s={T.key} /></g>
+        {/* fix loop 1 (M2 3-10 s): the graph frame is there from frame 0; the lines are drawn on their words */}
+        <Axes A={A} xt={[0, 10, 20, 30]} yt={[0, 1, 2, 3]} xl="°C" yl="height (km)" o={1} />
+        <defs><clipPath id="s31g"><rect x={A.x} y={A.y} width={A.w} height={A.h} /></clipPath></defs>
+        <g clipPath="url(#s31g)">
+          <path d={line(L.T_profile_C, up(t1))} fill="none" stroke={C.second} strokeWidth={6} opacity={fin(f, t1)} />
+          <path d={line(L.Td_profile_C, up(t2))} fill="none" stroke={C.first} strokeWidth={6} opacity={fin(f, t2)} />
+        </g>
+        {/* fix loop 1 (S1): labels beside their lines, "12 °C" above its gap bracket */}
+        <Lbl x={X(28)} y={Y(0.4)} t="T" c={C.second} s={T.key} o={fin(f, t1)} />
+        <Lbl x={X(interp(2500, L.z_profile_m, L.Td_profile_C)) + 24} y={Y(2.5)} t="dew point" c={C.first} s={T.key} o={fin(f, t2)} />
+        <g opacity={fin(f, t3)}><line x1={X(L.Td0_C)} x2={X(25)} y1={Y(0) - 18} y2={Y(0) - 18} stroke={C.gold} strokeWidth={5} /><Lbl x={X(L.Td0_C) - 16} y={Y(0) - 24} t="12 °C" c={C.gold} s={T.key} a="end" /></g>
         <circle cx={X(L.T_C)} cy={Y(L.z_m / 1000)} r={22} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, t4)} />
         <Lbl x={X(L.T_C) + 30} y={Y(L.z_m / 1000) - 40} t="base ≈ 1.5 km" c={C.gold} s={T.key} o={fin(f, t4)} />
         <Keyword f={f} text="flat bases" at={[1180, 820]} appear={AT(k, 6, "flat bases")} s={T.key} />
@@ -1442,6 +1549,10 @@ const S32: React.FC = () => {
         <Arrow p={O} q={tip} color={C.first} o={fin(f, t4)} />
         <Lbl x={(O[0] + tip[0]) / 2} y={O[1] + 50} t="u = 8 m/s" c={C.second} s={T.key} a="middle" o={fin(f, AT(k, 4, "u equal"))} />
         <Lbl x={tip[0] + 24} y={(O[1] + tip[1]) / 2} t="v = 6 m/s" c={C.local} s={T.key} o={fin(f, AT(k, 4, "v equal"))} />
+        {/* fix loop 1 (M2, r5 scan: 14.5 s): the maths zone names wind as a vector from S0/S1, before its components */}
+        <Keyword f={f} text="wind" at={[1080, 180]} appear={AT(k, 0, "wind")} out={t3 - 10} s={T.calc} />
+        <Lbl x={1080} y={270} t="speed + direction" c={C.key} s={T.key} o={win(f, AT(k, 1, "speed"), t3 - 10)} />
+        <Lbl x={1080} y={350} t="→ a vector" c={C.first} s={T.key} o={win(f, AT(k, 1, "vector"), t3 - 10)} />
         <Lbl x={1080} y={180} t="u: eastward part" c={C.second} s={T.key} o={fin(f, t3)} />
         <Lbl x={1080} y={260} t="v: northward part" c={C.local} s={T.key} o={fin(f, AT(k, 3, "northward"))} />
       </Svg>
@@ -1467,6 +1578,8 @@ const S33: React.FC = () => {
           <Lbl x={at(d as number, R + 110)[0]} y={at(d as number, R + 50)[1]} t={t as string} c={C.ink} s={52} a="middle" b={false} /></g>)}
         <Arrow p={[c[0] - R + 20, c[1] + 140]} q={[c[0] - 60, c[1] + 140]} color={C.first} o={win(f, t1, t3)} />
         <Lbl x={1100} y={150} t="westerly = from the west" c={C.key} s={T.key} o={fin(f, t1)} />
+        {/* fix loop 1 (M2 3-10 s, r5 scan) */}
+        <Keyword f={f} text="named by where it comes from" at={[1100, 820]} appear={AT(k, 0, "where it comes from")} s={T.floor} />
         <Lbl x={1100} y={240} t="clockwise from north," c={C.key} s={T.key} o={fin(f, t2)} /><Lbl x={1100} y={300} t="seen from above" c={C.key} s={T.key} o={fin(f, t2)} />
         <g opacity={fin(f, t3)}>
           <Dash p={c} q={at(dir, R)} c={C.first} w={4} />
@@ -1492,7 +1605,8 @@ const S34: React.FC = () => {
   const gArc = fin(f, t4);
   return (
     <Scene>
-      <Globe cam={{ lat: 30, lon: -20, dist: 3.4 }} o={fin(f, t3)} over={(G) => {
+      {/* fix loop 1 (M1): the globe is there from frame 0 (its meridian arc comes on the knot sentence) */}
+      <Globe cam={{ lat: 30, lon: -20, dist: 3.4 }} o={1} over={(G) => {
         const pts: [number, number][] = []; for (let la = -85; la <= 85; la += 2) pts.push([la, -20]);
         const a = G.p(45, -20), b = G.p(55, -20);
         return <g opacity={gArc}><path d={llPath(G, pts)} fill="none" stroke={C.gold} strokeWidth={4} />
@@ -1505,12 +1619,13 @@ const S34: React.FC = () => {
           
           <line x1={1100} x2={1480} y1={540} y2={540} stroke={C.second} strokeWidth={8} />
           {Array.from({ length: 61 }, (_, i) => <line key={i} x1={1100 + i * (380 / 60)} x2={1100 + i * (380 / 60)} y1={i % 10 === 0 ? 510 : 524} y2={556} stroke={C.ink} strokeWidth={2} />)}
-          <Lbl x={1100} y={470} t="1° = 60 nautical miles" c={C.key} s={T.floor} />
+          <Lbl x={1100} y={468} t="1° = 60 nautical miles" c={C.key} s={T.key} />
           <Lbl x={1100} y={620} t="1 nautical mile = 1852 m" c={C.key} s={T.key} />
         </g>
         <Lbl x={1080} y={720} t="knot = nautical mile per hour" c={C.key} s={T.key} o={fin(f, t3)} />
       </Svg>
-      <CalcStack f={f} x={1100} y={110} rows={tall(rows, 60)} size={60} />
+      <Svg><Lbl x={1100} y={90} t="m/s · km/h · knots" c={C.key} s={T.key} o={fin(f, AT(k, 0, "several units"))} /></Svg>
+      <CalcStack f={f} x={1100} y={180} rows={tall(rows, 60)} size={60} />
       {void t1}
     </Scene>
   );
@@ -1533,7 +1648,7 @@ const CiaranMap: React.FC<{ B?: MapBox; img?: string; imgBox?: [number, number, 
       <defs><clipPath id={id}><rect x={B.x} y={B.y} width={B.w} height={B.h} /></clipPath></defs>
       <g clipPath={`url(#${id})`}>
         <GeoImage P={P} href={img} box={imgBox} o={dim} />
-        <path d={linesPath(P, LN.ciaran_coast_10m)} fill="none" stroke={C.key} strokeOpacity={0.7} strokeWidth={1.6} />
+        <path d={linesPath(P, LN.ciaran_coast_10m)} fill="none" stroke={C.key} strokeOpacity={0.8} strokeWidth={2.2} />
         <path d={linesPath(P, LN.ciaran_borders_10m)} fill="none" stroke={C.key} strokeOpacity={0.4} strokeWidth={1.2} />
         {iso ? <IsoPaths P={P} levels={iso} o={0.85} w={2.5} /> : null}
         {children}
@@ -1561,6 +1676,10 @@ const S35: React.FC = () => {
           <Streak2D P={P} tracks={HL.streaklines_10m_12utc.tracks} f={f} o={fin(f, t3)} />
           <Lbl x={P(L.lat, L.lon)[0]} y={P(L.lat, L.lon)[1]} t="L" c={C.key} s={T.calc} a="middle" />
         </CiaranMap>
+        {/* fix loop 1 (M2): the cause is named in the maths zone on its words */}
+        <Lbl x={1440} y={200} t="?" c={C.gold} s={T.hero} a="middle" o={win(f, 0, AT(k, 1, "pressure") - 8)} />
+        <Keyword f={f} text="pressure difference" at={[1100, 200]} appear={AT(k, 1, "pressure")} s={T.key} />
+        <Lbl x={1100} y={290} t="high → low" c={C.second} s={T.key} o={fin(f, t2)} />
         <Keyword f={f} text="turned aside" at={[1100, 400]} appear={AT(k, 3, "turned aside")} s={T.key} />
         <Keyword f={f} text="Coriolis effect →" at={[1100, 600]} appear={AT(k, 4, "Coriolis")} s={T.key} />
         <Keyword f={f} text="geostrophic wind →" at={[1100, 700]} appear={AT(k, 4, "geostrophic")} s={T.key} />
@@ -1585,6 +1704,8 @@ const S36: React.FC = () => {
       <MapImg o={fout(f, t3)} layers={[{ n: "brest", o: 1 }]} box={{ x: 100, y: 60, w: 900, h: 800 }} />
       <Svg>
         {void MB}
+        {/* fix loop 1 (M2 3-10 s, r5 scan) */}
+        <Lbl x={1080} y={180} t="two words" c={C.gold} s={T.key} o={win(f, AT(k, 0, "two words"), t3)} />
         <Keyword f={f} text="weather: now, a few days" at={[1080, 300]} appear={t1} out={t3} s={T.key} />
         <Keyword f={f} text="climate: 30-year statistics" at={[1080, 420]} appear={t2} out={t3} s={T.key} />
         <g opacity={fin(f, t3)}>
@@ -1613,6 +1734,8 @@ const S37: React.FC = () => {
     <Scene>
       <Globe cam={cam} over={(G) => <g opacity={fin(f, t3)}>{(ST.latlon as number[][]).map(([la, lo], i) => G.vis(la, lo) ? <circle key={i} cx={G.p(la, lo)[0]} cy={G.p(la, lo)[1]} r={5} fill={C.gold} /> : null)}</g>} />
       <Svg>
+        {/* fix loop 1 (M2 3-10 s, r5 scan) */}
+        <Lbl x={1440} y={420} t="?" c={C.gold} s={T.hero} a="middle" o={win(f, 0, AT(k, 1, "weather stations") - 8)} />
         {kinds.map((w, i) => <Lbl key={w} x={1100 + (i % 2) * 360} y={150 + Math.floor(i / 2) * 80} t={w} c={C.key} s={T.key} o={fin(f, AT(k, 1, w === "stations" ? "weather stations" : w === "balloons" ? "weather balloons" : w))} />)}
         <Keyword f={f} text="crowded" at={[1100, 470]} appear={AT(k, 4, "crowded")} s={T.key} /><Lbl x={1100} y={530} t="Europe · N America · E Asia" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "crowded"))} />
         <Keyword f={f} text="sparse" at={[1100, 620]} appear={AT(k, 4, "sparse")} s={T.key} /><Lbl x={1100} y={680} t="oceans · Africa · poles" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "sparse"))} />
@@ -1639,7 +1762,7 @@ const S38: React.FC = () => {
       <Svg>
         <Keyword f={f} text="model + observations" at={[1100, 140]} appear={t1} s={T.key} />
         <Keyword f={f} text="nudged every few hours" at={[1100, 230]} appear={t2} s={T.key} />
-        <Keyword f={f} text="every place, height and hour" at={[1100, 320]} appear={t3} s={T.floor} />
+        <Keyword f={f} text="every place, height, hour" at={[1100, 320]} appear={t3} s={T.key} />
         <Keyword f={f} text="ERA5" at={[1100, 430]} appear={AT(k, 4, "ERA5")} s={T.calc} />
         <Lbl x={1100} y={520} t="1940 → today · ≈ 30 km grid" c={C.key} s={T.key} o={fin(f, t5)} />
         <Lbl x={1100} y={610} t="like a jigsaw" c={C.key} s={T.key} o={win(f, t6, t7)} />
@@ -1694,7 +1817,7 @@ const S39: React.FC = () => {
         <g opacity={oT}>
           {an ? <Lbl x={VB.x + an[0][0]} y={VB.y + an[0][1] - 40} t="Tibetan Plateau" c={C.key} s={T.key} a="middle" /> : null}
           {an ? <Lbl x={VB.x + an[1][0]} y={Math.min(VB.y + VB.h - 40, VB.y + an[1][1] + 40)} t="Himalayas" c={C.key} s={T.floor} a="middle" /> : null}
-          <Lbl x={1080} y={300} t="mountains × 30 taller" c={C.key} s={T.floor} />
+          <Lbl x={1080} y={300} t="mountains × 30 taller" c={C.key} s={T.key} />
         </g>
         <Keyword f={f} text="less air above high ground" at={[1080, 140]} appear={t5} out={t6} s={T.key} />
         <Keyword f={f} text="weather hidden" at={[1080, 220]} appear={t6} s={T.key} />
@@ -1709,7 +1832,7 @@ const S40: React.FC = () => {
   const t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7);
   const sea = 760, top = 360;
   const col = clamp((f - t3) / 50, 0, 1);
-  const parts: Part[] = [{ t: String.raw`p_{\text{sea}}` }, { t: "=" }, { t: "p_s", c: C.second, u: { w: String.raw`\text{station } p`, c: C.gold } },
+  const parts: Part[] = [{ t: String.raw`p_{\text{sea}}` }, { t: "=" }, { t: "p_s", c: PRES, u: { w: String.raw`\text{station } p`, c: C.gold } },
     { t: String.raw`\, e^{z_s/H}`, c: C.first, u: { w: String.raw`z_s:\ \text{height}`, c: C.gold } }];
   const rows: CalcRow[] = [
     { rhs: String.raw`= 835 \times e^{1.609/8.43}`, at: t4 },
@@ -1725,14 +1848,21 @@ const S40: React.FC = () => {
         <Lbl x={600} y={top - 160} t="p = 835 hPa" c={C.key} s={T.key} o={fin(f, AT(k, 2, "eight hundred"))} /><Lbl x={600} y={top - 95} t="T = 15 °C" c={C.key} s={T.key} o={fin(f, AT(k, 2, "fifteen"))} />
         <Lbl x={240} y={top} t="1609 m" c={C.key} s={T.key} a="end" o={fin(f, t2)} />
         <Lbl x={240} y={sea - 70} t="0 m" c={C.key} s={T.key} a="end" o={fin(f, t2)} />
+        {/* fix loop 1 (S4): the unspoken "≈ 1013 hPa" beside the result is gone; the two towns are named as said */}
         <rect x={130} y={sea - 40} width={40} height={40} fill={C.key} opacity={fin(f, SS(k, 0))} />
-        <Lbl x={100} y={580} t="≈ 1013 hPa" c={C.key} s={T.key} o={fin(f, SS(k, 0))} />
+        <Lbl x={100} y={sea - 150} t="seaside town" c={C.key} s={T.key} o={fin(f, AT(k, 0, "seaside"))} />
+        <Lbl x={600} y={top - 225} t="mountain town" c={C.key} s={T.key} o={fin(f, AT(k, 0, "mountain town"))} />
+        {/* fix loop 1 (M2): the maths zone carries the idea before the formula arrives */}
+        <Lbl x={1440} y={300} t="?" c={C.gold} s={T.hero} a="middle" o={win(f, 0, SS(k, 1) - 8)} />
+        <Keyword f={f} text="as if at sea level" at={[1100, 300]} appear={SS(k, 1)} out={t4 - 30} s={T.key} />
+        <Lbl x={1100} y={420} t="+ weight of column below" c="#7cc4ff" s={T.key} o={win(f, t3, t4 - 30)} />
         <rect x={880} y={top} width={70} height={(sea - top) * col} fill="#7cc4ff" fillOpacity={0.3} stroke="#7cc4ff" strokeWidth={4} strokeDasharray="12 8" opacity={fin(f, t3)} />
         <Lbl x={995} y={(top + sea) / 2} t="imaginary column" c="#7cc4ff" s={T.floor} a="middle" rot={-90} o={fin(f, t3)} />
         <Keyword f={f} text="sea-level pressure" at={[1100, 830]} appear={t6} s={T.key} />
         <Lbl x={1100} y={760} t="real services: more careful" c={C.key} s={T.floor} o={fin(f, t7)} />
       </Svg>
-      <Layered parts={parts} layers={[base(fin(f, t4 - 30)), { u: [2, 3], o: fin(f, t4 - 10) }]} x={1070} y={180} size={T.calc} />
+      {/* fix loop 1 (S2): 84 px, so the underbrace notes are ≥ 58 px */}
+      <Layered parts={parts} layers={[base(fin(f, t4 - 30)), { u: [2, 3], o: fin(f, t4 - 10) }]} x={1070} y={170} size={84} />
       <CalcStack f={f} x={1240} y={380} rows={tall(rows, T.calc)} size={T.calc} />
       <TeX s={EQ_S40} x={-999} y={-999} o={0} />
     </Scene>
@@ -1760,7 +1890,8 @@ const S41: React.FC = () => {
         <Keyword f={f} text="the weather appears" at={[1100, 300]} appear={t1} s={T.key} />
         <Lbl x={1100} y={400} t="every 4 hPa" c={C.key} s={T.key} o={fin(f, t2)} />
         <Keyword f={f} text="isobars" at={[1100, 520]} appear={AT(k, 3, "isobars")} s={T.calc} />
-        <Lbl x={1100} y={600} t="iso = equal · baros = weight" c={C.key} s={T.floor} o={fin(f, AT(k, 3, "equal weight"))} />
+        <Lbl x={1100} y={605} t="iso = equal" c={C.key} s={T.key} o={fin(f, AT(k, 3, "equal weight"))} />
+        <Lbl x={1100} y={670} t="baros = weight" c={C.key} s={T.key} o={fin(f, AT(k, 3, "equal weight"))} />
         <Keyword f={f} text="crowded → strong wind" at={[1100, 760]} appear={t4} s={T.key} />
       </Svg>
     </Scene>
@@ -1786,7 +1917,8 @@ const S42: React.FC = () => {
         <g opacity={xg}>{isoGlobe(G, LM.isobars as IsoLevel[], 60)}</g>
         <g opacity={(1 - xg) * limb(G, L.lat, L.lon)}>
           <g opacity={fin(f, AT(k, 0, "called lows"))}><Lbl x={G.p(L.lat, L.lon)[0]} y={G.p(L.lat, L.lon)[1]} t="L" c={C.key} s={68} a="middle" /></g>
-          <Lbl x={G.p(L.lat, L.lon)[0] - 60} y={G.p(L.lat, L.lon)[1] + 70} t="Ciarán 956 hPa" c={C.key} s={T.key} a="end" o={fin(f, t2)} />
+          {/* fix loop 1 (S3): right of and under the L (it sat above the H) */}
+          <Lbl x={G.p(L.lat, L.lon)[0] + 50} y={G.p(L.lat, L.lon)[1] + 60} t="Ciarán 956 hPa" c={C.key} s={T.key} a="start" o={fin(f, t2)} />
         </g>
         <g opacity={(1 - xg) * limb(G, Hh.lat, Hh.lon)}>
           <g opacity={fin(f, AT(k, 0, "called highs"))}><Lbl x={G.p(Hh.lat, Hh.lon)[0]} y={G.p(Hh.lat, Hh.lon)[1]} t="H" c={C.key} s={68} a="middle" /></g>
@@ -1798,6 +1930,9 @@ const S42: React.FC = () => {
           <Lbl x={G.p(na.lat, na.lon)[0]} y={G.p(na.lat, na.lon)[1] + 70} t="≈ 955 hPa" c={C.key} s={T.key} a="middle" /></g> : null}
       </g>} />
       <Svg>
+        {/* fix loop 1 (M2): the H / L names in the maths zone on their words in S0 */}
+        <g opacity={win(f, AT(k, 0, "higher than all"), t4)}><Lbl x={1100} y={150} t="H" c={C.key} s={68} /><Lbl x={1160} y={150} t="high" c={C.key} s={T.key} o={fin(f, AT(k, 0, "called highs"))} /></g>
+        <g opacity={win(f, AT(k, 0, "lower"), t4)}><Lbl x={1100} y={220} t="L" c={C.key} s={68} /><Lbl x={1160} y={220} t="low" c={C.key} s={T.key} o={fin(f, AT(k, 0, "called lows"))} /></g>
         <Keyword f={f} text="low = depression = cyclone" at={[1100, 300]} appear={AT(k, 1, "depression")} out={t4} s={T.key} />
         <Keyword f={f} text="high = anticyclone" at={[1100, 420]} appear={AT(k, 1, "anticyclone")} out={t4} s={T.key} />
         <Lbl x={1100} y={300} t="weather-service analysis" c={C.key} s={T.key} o={fin(f, t4)} />
@@ -1824,7 +1959,8 @@ const S43: React.FC = () => {
   const f = useCurrentFrame(), k = K("s43_lows_cloudy");
   const t1 = SS(k, 1), t4 = SS(k, 4), t5 = SS(k, 5), t7 = SS(k, 7);
   const pan = easeIO(clamp((f - t5) / 70, 0, 1));
-  const kb = { s: 1.45, cx: mix(0.68, 0.1, pan), cy: mix(0.35, 0.85, pan) };
+  // fix loop 1 (S3): the pan stops at cx 0.3 (was 0.1), so the L and "Brest" stay inside the frame with the H
+  const kb = { s: 1.45, cx: mix(0.68, 0.3, pan), cy: mix(0.35, 0.85, pan) };
   const lowArrows = (x: number, y: number, o: number) => <g opacity={o}>
     <Arrow p={[x - 160, y + 120]} q={[x - 40, y + 120]} color={C.first} w={7} head={24} /><Arrow p={[x + 160, y + 120]} q={[x + 40, y + 120]} color={C.first} w={7} head={24} />
     <Arrow p={[x, y + 100]} q={[x, y - 20]} color={C.first} w={7} head={24} o={fin(f, SS(k, 2))} /><Cloud x={x} y={y - 70} s={0.9} o={fin(f, SS(k, 3))} /></g>;
@@ -1852,11 +1988,12 @@ const S44: React.FC = () => {
   const f = useCurrentFrame(), k = K("s44_round_lows");
   const t0 = SS(k, 0), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5);
   const P = mapP(MAPB), L = HL.low, Hh = HL.high, ar = HL.arrows_10m_12utc.rows as number[][];
-  const arc = (c: Pt, r: number, cw: boolean, o: number) => {
-    const pts: Pt[] = Array.from({ length: 31 }, (_, i) => { const a = (cw ? -1 : 1) * (i / 30) * 1.6 * Math.PI + 0.3; return [c[0] + r * Math.cos(a), c[1] - r * Math.sin(a)]; });
+  // fix loop 1 (S3): a0 / sweep let the high's arc stay inside the map (the high sits near the bottom-left corner)
+  const arc = (c: Pt, r: number, cw: boolean, o: number, a0 = 0.3, sweep = 1.6 * Math.PI) => {
+    const pts: Pt[] = Array.from({ length: 31 }, (_, i) => { const a = (cw ? -1 : 1) * (i / 30) * sweep + a0; return [c[0] + r * Math.cos(a), c[1] - r * Math.sin(a)]; });
     return <g opacity={o}><path d={poly(pts.slice(0, 30))} fill="none" stroke={C.gold} strokeWidth={6} /><Arrow p={pts[28]} q={pts[30]} color={C.gold} w={6} head={26} /></g>;
   };
-  const lp = P(L.lat, L.lon), hp = P(Math.max(36.8, Hh.lat), Math.max(-28, Hh.lon));
+  const lp = P(L.lat, L.lon), hp = P(Math.max(38.0, Hh.lat), Math.max(-28, Hh.lon)); // H at the map edge (the high is just off it), arc room inside
   return (
     <Scene>
       <Svg>
@@ -1866,21 +2003,23 @@ const S44: React.FC = () => {
           <Lbl x={lp[0]} y={lp[1]} t="L" c={C.key} s={T.calc} a="middle" />
           <Lbl x={hp[0]} y={hp[1]} t="H" c={C.key} s={T.calc} a="middle" />
           {arc(lp, 130, false, fin(f, AT(k, 2, "anticlockwise")))}
-          {arc(hp, 110, true, fin(f, t3))}
+          {arc(hp, 100, true, fin(f, t3), 110 * D2R, 150 * D2R)}
         </CiaranMap>
         <Arrow p={[1100, 120]} q={[1220, 120]} color={C.first} w={4} head={14} halo={false} o={fin(f, t0)} />
-        <Lbl x={1240} y={120} t="10-m wind" c={C.first} s={T.key} o={fin(f, t0)} />
+        <Lbl x={1240} y={120} t="wind" c={C.first} s={T.key} o={fin(f, t0) * fout(f, AT(k, 0, "ten metres") - 6, 6)} />
+        <Lbl x={1240} y={120} t="wind 10 m up" c={C.first} s={T.key} o={fin(f, AT(k, 0, "ten metres"))} />
         <Lbl x={1100} y={250} t="anticlockwise," c={C.key} s={T.key} o={fin(f, AT(k, 2, "anticlockwise"))} /><Lbl x={1100} y={305} t="seen from above" c={C.key} s={T.key} o={fin(f, AT(k, 2, "anticlockwise"))} />
         <Lbl x={1100} y={370} t="slightly inward" c={C.key} s={T.key} o={fin(f, AT(k, 2, "only slightly"))} />
         <Lbl x={1100} y={430} t="around the high: clockwise" c={C.key} s={T.key} o={fin(f, t3)} />
         <Keyword f={f} text="Coriolis effect →" at={[1100, 820]} appear={t5} s={T.key} />
       </Svg>
-      <Globe cam={{ lat: -45, lon: HL.rings.sh_low.lon, dist: 3.6 }} box={{ x: 1520, y: 540, w: 320, h: 260 }} o={fin(f, t4)} coast={0.4} over={(G) => {
+      {/* fix loop 1 (S3): the southern-hemisphere globe twice as large, the reversed (clockwise) arc with a big head */}
+      <Globe cam={{ lat: -45, lon: HL.rings.sh_low.lon, dist: 3.4 }} box={{ x: 1440, y: 500, w: 400, h: 340 }} o={fin(f, t4)} coast={0.4} over={(G) => {
         if (!G.vis(HL.rings.sh_low.lat, HL.rings.sh_low.lon)) return null;
         const c = G.p(HL.rings.sh_low.lat, HL.rings.sh_low.lon);
-        return <g>{arc(c, 50, true, 1)}<Lbl x={c[0]} y={c[1]} t="L" c={C.key} s={T.floor} a="middle" /></g>;
+        return <g>{arc(c, 85, true, 1)}<Lbl x={c[0]} y={c[1]} t="L" c={C.key} s={T.key} a="middle" /></g>;
       }} />
-      <Svg><Lbl x={1100} y={530} t="south: reversed" c={C.key} s={T.key} o={fin(f, t4)} /></Svg>
+      <Svg><Lbl x={1100} y={560} t="south: reversed" c={C.key} s={T.key} o={fin(f, t4)} /></Svg>
     </Scene>
   );
 };
@@ -1919,6 +2058,10 @@ const S45: React.FC = () => {
       <MapImg o={fin(f, t4, 20)} layers={[{ n: "t850_base", o: 1 }, { n: "t850_places", o: 1 }, { n: "t850_masses", o: fin(f, AT(k, 4, "tropical air")) }]} />
       <Svg>
         {void url}{void P}
+        {/* fix loop 1 (M2): the two kinds of air are named in the maths zone in S0-S1, before "air mass" */}
+        <Lbl x={1100} y={140} t="temperature + moisture" c={C.key} s={T.key} o={win(f, AT(k, 0, "temperature"), AT(k, 2, "air mass") - 10)} />
+        <Lbl x={1100} y={230} t="far north: cold, dry" c={C.local} s={T.key} o={win(f, AT(k, 1, "cold and dry"), t2)} />
+        <Lbl x={1100} y={300} t="tropical seas: warm, moist" c={C.second} s={T.key} o={win(f, AT(k, 1, "warm and moist"), t2)} />
         <Keyword f={f} text="air mass" at={[1100, 140]} appear={AT(k, 2, "air mass")} out={t4} s={T.calc} />
         <Lbl x={1100} y={230} t="> 1000 km across" c={C.key} s={T.key} o={win(f, t2, t4)} />
         {grid.map(([a, b], i) => <g key={i} opacity={win(f, AT(k, 3, i < 2 ? (i === 0 ? "polar" : "continental") : (i === 2 ? "tropical" : "from over land")), t4)}>
@@ -1947,7 +2090,8 @@ const S46: React.FC = () => {
       <MapImg layers={[{ n: "t850_base", o: 1 }, { n: "t850_places", o: 1 }, { n: "t850_transect", o: fin(f, 10) }]} />
       <Svg>
         {void url}{void P}
-        <Axes A={A} xt={[-400, 0, 400]} yt={[A.yr[1]]} xl="km" yl="°C" grid={false} />
+        {/* fix loop 1 (S9): y ticks every 5 °C so the size of the step can be read */}
+        <Axes A={A} xt={[-400, 0, 400]} yt={[0, 5, 10, 15].filter((v) => v >= A.yr[0] && v <= A.yr[1])} xl="km" yl="°C" grid={false} />
         <path d={poly((TR.s_km as number[]).slice(0, n).map((s, i) => [X(s), Y(TR.T850_C[i])] as Pt))} fill="none" stroke={C.second} strokeWidth={6} />
         <g opacity={fin(f, t1)}>
           <rect x={X(s10 ?? -50)} y={A.y} width={X(s90 ?? 50) - X(s10 ?? -50)} height={A.h} fill={C.gold} opacity={0.18} />
@@ -2057,7 +2201,7 @@ const S49: React.FC = () => {
   const t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5);
   return (
     <Scene>
-      <MapImg layers={[{ n: "t850_base", o: 1 }, { n: "t850_wind", o: fin(f, t5) }, { n: "t850_lines", o: fin(f, t3) }, { n: "t850_places", o: 1 }]} />
+      <MapImg layers={[{ n: "t850_base", o: 1 }, { n: "t850_wind", o: fin(f, t5) }, { n: "t850_lines_warm", o: fin(f, t3) }, { n: "t850_lines_cold", o: fin(f, t4) }, { n: "t850_places", o: 1 }]} />
       <Svg>
         <ColourBar x={1360} y={120} w={380} lut={LUT_THERMAL} lo={-6} hi={16} ticks={[{ v: -5, t: "−5" }, { v: 15, t: "15" }]} unit="°C" />
         <Lbl x={1340} y={300} t="≈ 1.5 km up" c={C.key} s={T.key} o={fin(f, SS(k, 1))} />
@@ -2110,6 +2254,9 @@ const S51: React.FC = () => {
       <Svg>
         {beam(0, win(f, t3, t5), "1 m")}
         {beam(60, win(f, t4, t5), "2 m")}
+        {/* fix loop 1 (M2 3-10 s, r5 scan) */}
+        <Lbl x={1100} y={140} t="the whole planet" c={C.key} s={T.key} o={win(f, AT(k, 0, "whole planet"), t2 - 8)} />
+        <Lbl x={1100} y={240} t="why does weather move?" c={C.gold} s={T.key} o={win(f, AT(k, 0, "why the weather"), t2 - 8)} />
         <Lbl x={1100} y={140} t="equinox noon" c={C.key} s={T.key} o={fin(f, t2)} />
         <Lbl x={1100} y={440} t="half the sunlight per m²" c={C.gold} s={T.key} o={fin(f, AT(k, 4, "half as much"))} />
         <g opacity={fin(f, t5)}>
@@ -2137,15 +2284,18 @@ const S52: React.FC = () => {
         {(CL.isobars as IsoLevel[]).map((L) => <path key={L.level} d={coastPath(G, L.lines, undefined, 1.002)} fill="none" stroke={C.key} strokeOpacity={0.7} strokeWidth={2} />)}
         <LatCircle G={G} lat={30} c={C.gold} o={fin(f, t1)} w={4} dash="12 10" /><LatCircle G={G} lat={-30} c={C.gold} o={fin(f, t1)} w={4} dash="12 10" />
         {highs.map(([nm, h]) => G.vis(h.lat, h.lon) ? <Lbl key={nm} x={G.p(h.lat, h.lon)[0]} y={G.p(h.lat, h.lon)[1]} t="H" c={C.key} s={T.calc} a="middle" o={fin(f, t2)} /> : null)}
-        <LatCircle G={G} lat={CL.belts.eq_min_lat} c={C.first} o={fin(f, t3)} w={26} />
+        {/* fix loop 1 (S7): the ITCZ draped on the sphere along the annual-mean MSLP trough (builder: climatology.json itcz_trough) */}
+        <path d={llPath(G, (CL.itcz_trough.lon as number[]).map((lo, i) => [CL.itcz_trough.lat[i], lo] as [number, number]), 1.003)} fill="none" stroke={C.first}
+          strokeWidth={16} strokeOpacity={0.85 * fin(f, t3)} strokeLinecap="round" />
       </g>} />
       <Svg>
         <ColourBar x={1120} y={120} w={560} lut={LUT_BAL} lo={990} hi={1036} ticks={[{ v: 990, t: "990" }, { v: 1013, t: "1013" }, { v: 1036, t: "1036" }]} unit="hPa" />
         <Lbl x={1100} y={260} t="1991–2020 average" c={C.key} s={T.key} o={fin(f, SS(k, 0))} />
         <Keyword f={f} text="subtropical highs" at={[1100, 380]} appear={AT(k, 2, "subtropical highs")} s={T.calc} />
         <Lbl x={1100} y={470} t="≈ 30° N and S" c={C.gold} s={T.key} o={fin(f, t1)} />
-        <Keyword f={f} text="intertropical convergence zone" at={[1080, 600]} appear={t4} s={T.floor} />
-        <Lbl x={1100} y={680} t="ITCZ" c={C.first} s={T.calc} o={fin(f, t4 + 15)} />
+        <Keyword f={f} text="intertropical" at={[1100, 580]} appear={t4} s={T.key} />
+        <Lbl x={1100} y={645} t="convergence zone" c={C.key} s={T.key} o={fin(f, t4)} />
+        <Lbl x={1100} y={725} t="ITCZ" c={C.first} s={T.calc} o={fin(f, t4 + 15)} />
         <Keyword f={f} text="general circulation →" at={[1100, 800]} appear={t5} s={T.key} />
       </Svg>
     </Scene>
@@ -2157,22 +2307,32 @@ const S53: React.FC = () => {
   const tracks = CL.streaklines.tracks as number[][][];
   const cam = globePath([{ f: 0, lat: 15, lon: -30, dist: 3.8 }, { f: t5, lat: 30, lon: -30, dist: 3.8 }, { f: LEN(k), lat: 40, lon: -20, dist: 3.4 }], f);
   const tr = HR.track;
+  const Gs = globeProj(globeCam({ ...cam, pp: [GBOX.w / 2, GBOX.h / 2] }, [GBOX.w / 2, GBOX.h / 2]), GBOX.w, GBOX.h, GBOX.x, GBOX.y);
+  const beltPt = (la: number, lo: number): Pt[] => (Gs.vis(la, lo) ? [Gs.p(la, lo, 1.003)] : []);
   return (
     <Scene>
       <Globe cam={cam} img={IMG.bmng} coast={0.4} over={(G) => <g>
-        <g fill="none" stroke={C.key} strokeLinecap="round">
+        {/* fix loop 1 (S6): teal streaks that taper from tail to a bright arrowhead, so the direction reads in a still */}
+        <g fill="none" strokeLinecap="round">
           {tracks.map((t, i) => { const n = t.length, ph = ((f + i * 13) % 60) / 60, h = Math.floor(ph * (n - 1));
-            const seg = t.slice(Math.max(0, h - 4), h + 1) as [number, number][];
-            const d = llPath(G, seg, 1.003); return d ? <path key={i} d={d} strokeWidth={2.5} strokeOpacity={0.85 * Math.sin(Math.PI * ph)} /> : null; })}
+            const seg = (t.slice(Math.max(0, h - 5), h + 1) as [number, number][]).filter(([la, lo]) => G.vis(la, lo, 1.003)).map(([la, lo]) => G.p(la, lo, 1.003));
+            if (seg.length < 2) return null;
+            const o = 0.95 * Math.sin(Math.PI * ph), a = seg[seg.length - 2], b = seg[seg.length - 1], L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+            const d: Pt = [(b[0] - a[0]) / L, (b[1] - a[1]) / L], nn: Pt = [-d[1], d[0]], hl = 13, hw = 7;
+            return <g key={i} opacity={o}>
+              {seg.slice(1).map((q, j) => <line key={j} x1={seg[j][0]} y1={seg[j][1]} x2={q[0]} y2={q[1]} stroke={C.first} strokeWidth={1.5 + (3.5 * (j + 1)) / seg.length} strokeOpacity={0.35 + (0.65 * (j + 1)) / seg.length} />)}
+              <polygon points={`${b[0] + d[0] * hl},${b[1] + d[1] * hl} ${b[0] + nn[0] * hw},${b[1] + nn[1] * hw} ${b[0] - nn[0] * hw},${b[1] - nn[1] * hw}`} fill="#9df0e6" />
+            </g>; })}
         </g>
         {f >= t5 ? <SurfArrow G={G} pts={(tr.lat as number[]).map((la, i) => [la, tr.lon[i]] as [number, number])} c={C.gold} w={10} head={36} o={fin(f, t5)} /> : null}
       </g>} />
       <Svg>
         <Lbl x={1100} y={140} t="1991–2020 average wind" c={C.key} s={T.key} />
         <Keyword f={f} text="trade winds" at={[1100, 260]} appear={AT(k, 1, "trade winds")} s={T.calc} />
-        <Lbl x={1100} y={350} t="north-east trades" c={C.key} s={T.key} o={fin(f, t2)} />
-        <Lbl x={1100} y={430} t="south-east trades" c={C.key} s={T.key} o={fin(f, t3)} />
-        <Keyword f={f} text="westerlies" at={[1100, 560]} appear={AT(k, 4, "westerlies")} s={T.calc} />
+        {/* fix loop 1 (S6): gold pointers from each name to its belt on the globe (same camera as the globe) */}
+        <Keyword f={f} text="north-east trades" at={[1100, 350]} appear={t2} s={T.key} targets={beltPt(15, -40)} />
+        <Keyword f={f} text="south-east trades" at={[1100, 430]} appear={t3} s={T.key} targets={beltPt(-12, -20)} />
+        <Keyword f={f} text="westerlies" at={[1100, 560]} appear={AT(k, 4, "westerlies")} s={T.calc} targets={beltPt(47, -30)} />
         <Lbl x={1100} y={660} t="storms travel west → east" c={C.gold} s={T.key} o={fin(f, t5)} />
         <Keyword f={f} text="Coriolis →" at={[1100, 800]} appear={t6} s={T.key} />
       </Svg>
@@ -2201,6 +2361,8 @@ const S54: React.FC = () => {
         <CiaranMap id="s54m" img={IMG.tc1101} imgBox={BOX_TC1101} o={fin(f, t2, 20)}>
           <Place p={P(BREST[0], BREST[1])} t="Brest" o={fin(f, t3)} />
         </CiaranMap>
+        {/* fix loop 1 (M2 3-10 s, r5 scan) */}
+        <Lbl x={1100} y={200} t="one storm · one town" c={C.key} s={T.key} o={win(f, AT(k, 0, "one real storm"), AT(k, 1, "Storm") - 8)} />
         <Keyword f={f} text="Storm Ciarán · 1 Nov 2023" at={[1100, 200]} appear={AT(k, 1, "Storm")} s={T.key} />
         <Lbl x={1100} y={320} t="satellite, afternoon" c={C.key} s={T.key} o={fin(f, t2)} />
         <Keyword f={f} text="UTC = universal time" at={[1100, 700]} appear={t5} s={T.key} />
@@ -2211,22 +2373,28 @@ const S54: React.FC = () => {
 };
 /** the hourly panel (s55-s58): isobars, fronts, 10-m wind and the low at fractional hour h (0 = 12 UTC 1 Nov) */
 const HMB: MapBox = { lat0: 39, lat1: 60, lon0: -30, lon1: 10, x: 80, y: 40, w: 920, h: 700 };
-const HourMap: React.FC<{ h: number; B?: MapBox; id: string; fronts?: number; wind?: number; track?: number; children?: React.ReactNode; brestArrow?: number }> = ({
-  h, B = MAPB, id, fronts = 1, wind = 0.8, track = 1, children, brestArrow = 0 }) => {
+const HourMap: React.FC<{ h: number; B?: MapBox; id: string; fronts?: number; fw?: number; fc?: number; wind?: number; track?: number; children?: React.ReactNode;
+  brestArrow?: number; brestLabel?: number }> = ({ h, B = MAPB, id, fronts = 1, fw, fc, wind = 0.8, track = 1, children, brestArrow = 0, brestLabel = 0 }) => {
   const P = mapP(B), i = Math.max(0, Math.min(24, Math.round(h)));
   const tr = HR.track, n = Math.min(25, Math.floor(h) + 1);
   const lat = interp(h, tr.lat.map((_: number, q: number) => q), tr.lat), lon = interp(h, tr.lon.map((_: number, q: number) => q), tr.lon);
+  const oW = fw ?? fronts, oC = fc ?? fronts;
+  // fix loop 1 (M3/M4): the track is Ciarán's own centre (continuity tracker) and ends at the current centre; the fronts are the
+  // frontal zone attached to it (builder fronts.json hourly); the L gets a dark halo so the track does not run under it
+  const trackLa = [...tr.lat.slice(0, n), lat], trackLo = [...tr.lon.slice(0, n), lon];
   const W = HR.wind_1p5, fh = FR.hourly[i];
   const bi = 12 + i; // brest_hourly index (starts 00 UTC 1 Nov)
   return (
     <CiaranMap id={id} B={B} img={IMG.tc1101} imgBox={BOX_TC1101} dim={0.6} iso={HR.isobars[i].levels}>
       <g opacity={wind}>{(W.lat as number[]).map((la, j) => (W.lon as number[]).map((lo, q) => { if ((j + q) % 2) return null; const u = W.u[i][j][q], v = W.v[i][j][q], p = P(la, lo);
         return <Arrow key={`${j}_${q}`} p={p} q={[p[0] + u * 2.5, p[1] - v * 2.5]} color={C.first} w={3.5} head={12} halo={false} />; }))}</g>
-      {fronts > 0 && fh.warm ? <path d={llLine(P, fh.warm[0], fh.warm[1])} fill="none" stroke="#d9464f" strokeWidth={6} opacity={fronts} /> : null}
-      {fronts > 0 && fh.cold ? <path d={llLine(P, fh.cold[0], fh.cold[1])} fill="none" stroke="#4f7fd8" strokeWidth={6} opacity={fronts} /> : null}
-      {track > 0 ? <path d={llLine(P, tr.lat.slice(0, n), tr.lon.slice(0, n))} fill="none" stroke={C.gold} strokeWidth={5} opacity={track} /> : null}
+      {oW > 0 && fh.warm ? <path d={llLine(P, fh.warm[0], fh.warm[1])} fill="none" stroke="#d9464f" strokeWidth={7} opacity={oW} /> : null}
+      {oC > 0 && fh.cold ? <path d={llLine(P, fh.cold[0], fh.cold[1])} fill="none" stroke="#4f7fd8" strokeWidth={7} opacity={oC} /> : null}
+      {track > 0 ? <path d={llLine(P, trackLa, trackLo)} fill="none" stroke={C.gold} strokeWidth={5} opacity={track} /> : null}
+      <circle cx={P(lat, lon)[0]} cy={P(lat, lon)[1]} r={34} fill={C.bg} opacity={0.7} />
       <Lbl x={P(lat, lon)[0]} y={P(lat, lon)[1]} t="L" c={C.key} s={T.calc} a="middle" />
-      <Place p={P(BREST[0], BREST[1])} />
+      <circle cx={P(BREST[0], BREST[1])[0]} cy={P(BREST[0], BREST[1])[1]} r={19} fill="none" stroke={C.key} strokeWidth={4} />
+      <Place p={P(BREST[0], BREST[1])} t={brestLabel > 0 ? "Brest" : undefined} o={1} dx={26} dy={48} a="start" />
       {brestArrow > 0 ? (() => { const p = P(BREST[0], BREST[1]), u = BH.u10[bi], v = BH.v10[bi]; return <Arrow p={p} q={[p[0] + u * 6, p[1] - v * 6]} color={C.first} o={brestArrow} />; })() : null}
       {children}
     </CiaranMap>
@@ -2235,19 +2403,25 @@ const HourMap: React.FC<{ h: number; B?: MapBox; id: string; fronts?: number; wi
 const hourLabel = (h: number) => { const hh = (12 + Math.floor(h)) % 24, d = 12 + Math.floor(h) >= 24 ? 2 : 1; return `${String(hh).padStart(2, "0")} UTC ${d} Nov`; };
 const S55: React.FC = () => {
   const f = useCurrentFrame(), k = K("s55_ciaran_maps");
-  const t0 = SS(k, 0) + 20, h = clamp((f - t0) / (LEN(k) - t0 - 20), 0, 1) * 24;
+  // fix loop 1 (M3/M4): S0 holds 12 UTC 1 Nov while the isobars and the two fronts are named; the hours run in S1: 12 → 03 UTC
+  // (the deepest hour) between "from about nine hundred and seventy" and "fifty-four", then on to 12 UTC 2 Nov
+  const tA = AT(k, 1, "from about nine hundred"), tB = AT(k, 1, "fifty-four") + 10, tE = LEN(k) - 15;
+  const h = f < tA ? 0 : f < tB ? 15 * easeIO(clamp((f - tA) / (tB - tA), 0, 1)) : 15 + 9 * clamp((f - tB) / (tE - tB), 0, 1);
   const hp = Math.min(24, Math.round(h));
+  if (Math.abs(HR.track.hPa[0] - 970) > 1 || HR.track.time_utc[0] !== "2023-11-01T12") throw new Error(`CHECK s55: Ciarán at 12 UTC 1 Nov is ${HR.track.hPa[0]} hPa, said 970`);
+  if (Math.round(HR.track.hPa[15]) !== 954 || HR.track.time_utc[15] !== "2023-11-02T03") throw new Error(`CHECK s55: 03 UTC 2 Nov ${HR.track.hPa[15]} hPa, said 954`);
+  const tW = AT(k, 0, "warm front"), tC = AT(k, 0, "cold front");
   return (
     <Scene>
       <Svg>
-        <HourMap h={h} id="s55m" />
+        <HourMap h={h} id="s55m" fw={fin(f, tW)} fc={fin(f, tC)} track={fin(f, tA)} brestLabel={1} />
         <Lbl x={1100} y={140} t="isobars every 4 hPa" c={C.key} s={T.key} />
-        <ClockGlyph x={1130} y={280} r={34} h={(12 + h) % 12} />
-        <Lbl x={1190} y={280} t={hourLabel(Math.round(h))} c={C.key} s={T.key} />
-        <Lbl x={1100} y={420} t={`low: ${fmt(HR.track.hPa[hp], 0)} hPa`} c={C.key} s={T.calc} o={fin(f, SS(k, 1))} />
-        <Lbl x={1100} y={560} t="warm front · cold front" c={C.key} s={T.floor} />
-        <line x1={1100} x2={1150} y1={630} y2={630} stroke="#d9464f" strokeWidth={6} /><line x1={1170} x2={1220} y1={630} y2={630} stroke="#4f7fd8" strokeWidth={6} />
-        <Lbl x={1100} y={720} t="track of the low" c={C.gold} s={T.key} o={fin(f, SS(k, 1))} />
+        <ClockGlyph x={1130} y={260} r={34} h={(12 + h) % 12} />
+        <Lbl x={1190} y={260} t={hourLabel(Math.round(h))} c={C.key} s={T.key} />
+        <g opacity={fin(f, tW)}><line x1={1100} x2={1170} y1={380} y2={380} stroke="#d9464f" strokeWidth={7} /><Lbl x={1190} y={380} t="warm front" c={C.key} s={T.key} /></g>
+        <g opacity={fin(f, tC)}><line x1={1100} x2={1170} y1={450} y2={450} stroke="#4f7fd8" strokeWidth={7} /><Lbl x={1190} y={450} t="cold front" c={C.key} s={T.key} /></g>
+        <Lbl x={1100} y={590} t={`low: ${fmt(HR.track.hPa[hp], 0)} hPa`} c={PRES} s={T.calc} o={fin(f, tA)} />
+        <Lbl x={1100} y={700} t="track of the low" c={C.gold} s={T.key} o={fin(f, tA)} />
       </Svg>
     </Scene>
   );
@@ -2268,12 +2442,13 @@ const BrestGraphs: React.FC<{ f: number; h: number; showT: number; children?: Re
   return (
     <g>
       <Axes A={BRG} xt={[0, 6, 12, 18, 24]} yt={[960, 980, 1000]} yl="hPa" xfmt={hourTicks} />
-      <path d={part(ps, Xp, Yp)} fill="none" stroke={C.second} strokeWidth={6} />
-      {ps.slice(0, n).map((v, i) => <circle key={i} cx={Xp(i)} cy={Yp(v)} r={5} fill={C.second} />)}
+      {/* fix loop 1 (S5): pressure teal and temperature orange, as everywhere else in the movie (gold stays for pointers) */}
+      <path d={part(ps, Xp, Yp)} fill="none" stroke={PRES} strokeWidth={6} />
+      {ps.slice(0, n).map((v, i) => <circle key={i} cx={Xp(i)} cy={Yp(v)} r={5} fill={PRES} />)}
       <g opacity={showT}>
         <Axes A={BTG} xt={[0, 6, 12, 18, 24]} yt={[10, 12, 14]} yl="°C" xfmt={hourTicks} />
-        <path d={part(ts, Xt, Yt)} fill="none" stroke={C.gold} strokeWidth={6} />
-        {ts.slice(0, n).map((v, i) => <circle key={i} cx={Xt(i)} cy={Yt(v)} r={5} fill={C.gold} />)}
+        <path d={part(ts, Xt, Yt)} fill="none" stroke={TEMP} strokeWidth={6} />
+        {ts.slice(0, n).map((v, i) => <circle key={i} cx={Xt(i)} cy={Yt(v)} r={5} fill={TEMP} />)}
       </g>
       {children}
     </g>
@@ -2287,16 +2462,15 @@ const S56: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <HourMap h={h} id="s56m" fronts={0} wind={0.4} B={HMB} />
+        <HourMap h={h} id="s56m" fronts={0} wind={0.4} B={HMB} brestLabel={1} />
         <BrestGraphs f={f} h={h} showT={0}>
           <circle cx={Xp(0)} cy={Yp(ps[0])} r={11} fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, t1)} />
           <circle cx={Xp(13)} cy={Yp(ps[13])} r={11} fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, AT(k, 2, "nine hundred"))} />
-          <Lbl x={1200} y={450} t="12 UTC: 997 hPa" c={C.second} s={T.key} o={fin(f, t1)} />
-          <Lbl x={1200} y={530} t="01 UTC: 962 hPa" c={C.second} s={T.key} o={fin(f, AT(k, 2, "nine hundred"))} />
+          <Lbl x={1200} y={450} t="12 UTC: 997 hPa" c={PRES} s={T.key} o={fin(f, t1)} />
+          <Lbl x={1200} y={530} t="01 UTC: 962 hPa" c={PRES} s={T.key} o={fin(f, AT(k, 2, "nine hundred"))} />
           <Lbl x={1200} y={650} t="−35 hPa in 13 h" c={C.gold} s={T.key} o={fin(f, t3)} />
           <Lbl x={1200} y={740} t="+14 hPa in 5 h" c={C.gold} s={T.key} o={fin(f, t4)} />
         </BrestGraphs>
-        <Lbl x={100} y={800} t="Brest" c={C.key} s={T.key} />
       </Svg>
     </Scene>
   );
@@ -2309,13 +2483,13 @@ const S57: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <HourMap h={h} id="s57m" wind={0.35} brestArrow={fin(f, t1)} B={HMB} />
+        <HourMap h={h} id="s57m" wind={0.35} brestArrow={fin(f, t1)} B={HMB} brestLabel={1} />
         <BrestGraphs f={f} h={Math.max(h, 24 * 0 + h)} showT={fin(f, SS(k, 0))}>
           <rect x={Xt(6)} y={BRG.y} width={Xt(8) - Xt(6)} height={BTG.y + BTG.h - BRG.y} fill={C.gold} opacity={0.18 * fin(f, t3)} />
           <Lbl x={Xt(7)} y={BTG.y + BTG.h + 92} t="warm front" c={C.gold} s={T.floor} a="middle" o={fin(f, t3)} />
           {/* right of the minimum, under the curve: end-anchored it sat on the y axis over the 10/12 ticks (stage-2 frame check) */}
-          <Lbl x={Xt(6) + 20} y={Yt(ts[6]) + 50} t="12.0 °C" c={C.gold} s={T.key} o={fin(f, AT(k, 1, "twelve degrees"))} />
-          <Lbl x={Xt(8) + 20} y={Yt(ts[8]) - 40} t="14.4 °C" c={C.gold} s={T.key} o={fin(f, AT(k, 2, "fourteen"))} />
+          <Lbl x={Xt(6) + 20} y={Yt(ts[6]) + 50} t="12.0 °C" c={TEMP} s={T.key} o={fin(f, AT(k, 1, "twelve degrees"))} />
+          <Lbl x={Xt(8) + 20} y={Yt(ts[8]) - 40} t="14.4 °C" c={TEMP} s={T.key} o={fin(f, AT(k, 2, "fourteen"))} />
         </BrestGraphs>
         <Lbl x={100} y={790} t="13 m/s from 155° (SSE)" c={C.first} s={T.key} o={win(f, AT(k, 1, "south-south-east"), t2)} />
         <Lbl x={100} y={790} t="18 m/s from 204° (SSW)" c={C.first} s={T.key} o={fin(f, AT(k, 2, "south-south-west"))} />
@@ -2334,11 +2508,12 @@ const S58: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <HourMap h={h} id="s58m" wind={0.35} brestArrow={fin(f, t1)} B={HMB} />
+        <HourMap h={h} id="s58m" wind={0.35} brestArrow={fin(f, t1)} B={HMB} brestLabel={1} />
         <BrestGraphs f={f} h={h} showT={1}>
           <rect x={Xt(12)} y={BRG.y} width={Xt(15) - Xt(12)} height={BTG.y + BTG.h - BRG.y} fill={C.gold} opacity={0.18 * fin(f, t1)} />
           <Lbl x={Xt(13.5)} y={BTG.y + BTG.h + 92} t="cold front" c={C.gold} s={T.floor} a="middle" o={fin(f, t1)} />
-          <Lbl x={Xt(15) + 20} y={Yt(ts[15]) + 30} t="−2 °C" c={C.gold} s={T.key} o={fin(f, t2)} />
+          {/* fix loop 1 (S3): beside the drop, at about 11 °C (it sat on the x axis) */}
+          <Lbl x={Xt(15) + 24} y={Yt(11.2)} t="−2 °C" c={TEMP} s={T.key} o={fin(f, t2)} />
         </BrestGraphs>
         <Lbl x={100} y={790} t="19 m/s from 221° (SW)" c={C.first} s={T.key} o={win(f, t1, AT(k, 1, "by three"))} />
         <Lbl x={100} y={790} t="23 m/s from 271° (W)" c={C.first} s={T.key} o={fin(f, AT(k, 1, "by three"))} />
@@ -2353,7 +2528,8 @@ const S59: React.FC = () => {
   const z = easeIO(clamp(f / LEN(k), 0, 1));
   return (
     <Scene>
-      <MapImg layers={[{ n: "sat_base", o: 1 }, { n: "sat_iso", o: 1 }, { n: "sat_marks", o: 1 }]} kb={{ s: mix(1.0, 1.25, z), cx: 0.66, cy: 0.38 }} />
+      {/* fix loop 1 (S3): a gentler zoom anchored near the bottom-left, so the H stays inside the frame */}
+      <MapImg layers={[{ n: "sat_base", o: 1 }, { n: "sat_iso", o: 1 }, { n: "sat_marks", o: 1 }]} kb={{ s: mix(1.0, 1.12, z), cx: 0.12, cy: 0.88 }} />
       <Svg>
         <Lbl x={1340} y={160} t="2 Nov, afternoon" c={C.key} s={T.key} />
         <Keyword f={f} text="weather maps →" at={[1340, 420]} appear={SS(k, 1)} s={T.floor} />

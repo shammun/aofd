@@ -1905,1975 +1905,1975 @@
      "end_frame": 34232
     },
     {
-     "text": "Cool the same air, and its relative humidity rises, even though no water is added.",
+     "text": "Cool the same air to eighteen degrees, and its relative humidity rises to about seventy-three percent, even though no water is added.",
      "audio_text": null,
      "start": 1141.425,
-     "end": 1147.7,
-     "dur": 6.275,
+     "end": 1150.525,
+     "dur": 9.1,
      "start_frame": 34243,
-     "end_frame": 34431
+     "end_frame": 34516
     }
    ],
-   "end": 1148.5,
+   "end": 1151.325,
    "start_frame": 33191,
-   "end_frame": 34455
+   "end_frame": 34540
   },
   {
    "id": "s30_dew_point",
-   "start": 1148.5,
+   "start": 1151.325,
    "sentences": [
     {
      "text": "So how far must we cool this air before it's saturated?",
      "audio_text": null,
-     "start": 1148.5,
-     "end": 1152.5,
+     "start": 1151.325,
+     "end": 1155.325,
      "dur": 4.0,
-     "start_frame": 34455,
-     "end_frame": 34575
+     "start_frame": 34540,
+     "end_frame": 34660
     },
     {
      "text": "We need the temperature at which the saturation vapour pressure has fallen to fifteen hectopascals.",
      "audio_text": "We need the temperature at which the saturation vapour pressure has fallen to fifteen [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 1152.85,
-     "end": 1159.525,
+     "start": 1155.675,
+     "end": 1162.35,
      "dur": 6.675,
-     "start_frame": 34586,
-     "end_frame": 34786
+     "start_frame": 34670,
+     "end_frame": 34870
     },
     {
      "text": "That's about thirteen degrees.",
      "audio_text": null,
-     "start": 1159.875,
-     "end": 1162.25,
+     "start": 1162.7,
+     "end": 1165.075,
      "dur": 2.375,
-     "start_frame": 34796,
-     "end_frame": 34868
+     "start_frame": 34881,
+     "end_frame": 34952
     },
     {
      "text": "This is the dew point: the temperature to which air must be cooled, keeping its water, to become saturated.",
      "audio_text": null,
-     "start": 1162.6,
-     "end": 1169.875,
+     "start": 1165.425,
+     "end": 1172.7,
      "dur": 7.275,
-     "start_frame": 34878,
-     "end_frame": 35096
+     "start_frame": 34963,
+     "end_frame": 35181
     },
     {
      "text": "On a clear night, grass cools below the dew point of the air touching it, and dew forms.",
      "audio_text": null,
-     "start": 1170.225,
-     "end": 1176.3,
+     "start": 1173.05,
+     "end": 1179.125,
      "dur": 6.075,
-     "start_frame": 35107,
-     "end_frame": 35289
+     "start_frame": 35192,
+     "end_frame": 35374
     },
     {
      "text": "When a whole layer of air near the ground cools to its dew point, we get fog.",
      "audio_text": null,
-     "start": 1176.65,
-     "end": 1181.725,
+     "start": 1179.475,
+     "end": 1184.55,
      "dur": 5.075,
-     "start_frame": 35300,
-     "end_frame": 35452
+     "start_frame": 35384,
+     "end_frame": 35536
     },
     {
      "text": "And when rising air cools to its dew point, we get a cloud.",
      "audio_text": null,
-     "start": 1182.075,
-     "end": 1186.3,
+     "start": 1184.9,
+     "end": 1189.125,
      "dur": 4.225,
-     "start_frame": 35462,
-     "end_frame": 35589
+     "start_frame": 35547,
+     "end_frame": 35674
     }
    ],
-   "end": 1187.1,
-   "start_frame": 34455,
-   "end_frame": 35613
+   "end": 1189.925,
+   "start_frame": 34540,
+   "end_frame": 35698
   },
   {
    "id": "s31_cloud_base",
-   "start": 1187.1,
+   "start": 1189.925,
    "sentences": [
     {
      "text": "Let's follow that air parcel as it rises from the ground.",
      "audio_text": null,
-     "start": 1187.1,
-     "end": 1191.025,
+     "start": 1189.925,
+     "end": 1193.85,
      "dur": 3.925,
-     "start_frame": 35613,
-     "end_frame": 35731
+     "start_frame": 35698,
+     "end_frame": 35816
     },
     {
      "text": "It cools by almost ten degrees for every kilometre.",
      "audio_text": null,
-     "start": 1191.375,
-     "end": 1195.25,
+     "start": 1194.2,
+     "end": 1198.075,
      "dur": 3.875,
-     "start_frame": 35741,
-     "end_frame": 35858
+     "start_frame": 35826,
+     "end_frame": 35942
     },
     {
      "text": "Its dew point falls too, but slowly, by about two degrees per kilometre, because as the parcel expands, its vapour is spread more thinly.",
      "audio_text": null,
-     "start": 1195.6,
-     "end": 1205.175,
+     "start": 1198.425,
+     "end": 1208.0,
      "dur": 9.575,
-     "start_frame": 35868,
-     "end_frame": 36155
+     "start_frame": 35953,
+     "end_frame": 36240
     },
     {
      "text": "So the gap between the temperature and the dew point, twelve degrees at the ground, shrinks by about eight degrees for every kilometre.",
      "audio_text": null,
-     "start": 1205.525,
-     "end": 1213.65,
+     "start": 1208.35,
+     "end": 1216.475,
      "dur": 8.125,
-     "start_frame": 36166,
-     "end_frame": 36410
+     "start_frame": 36250,
+     "end_frame": 36494
     },
     {
      "text": "It closes after about one and a half kilometres.",
      "audio_text": null,
-     "start": 1214.0,
-     "end": 1217.625,
+     "start": 1216.825,
+     "end": 1220.45,
      "dur": 3.625,
-     "start_frame": 36420,
-     "end_frame": 36529
+     "start_frame": 36505,
+     "end_frame": 36614
     },
     {
      "text": "There the vapour condenses, and the cloud begins.",
      "audio_text": null,
-     "start": 1217.975,
-     "end": 1221.65,
+     "start": 1220.8,
+     "end": 1224.475,
      "dur": 3.675,
-     "start_frame": 36539,
-     "end_frame": 36650
+     "start_frame": 36624,
+     "end_frame": 36734
     },
     {
      "text": "That's why fair-weather clouds have flat bases: parcels rising from the same ground reach their dew point at about the same height.",
      "audio_text": null,
-     "start": 1222.0,
-     "end": 1230.45,
+     "start": 1224.825,
+     "end": 1233.275,
      "dur": 8.45,
-     "start_frame": 36660,
-     "end_frame": 36914
+     "start_frame": 36745,
+     "end_frame": 36998
     }
    ],
-   "end": 1231.25,
-   "start_frame": 35613,
-   "end_frame": 36938
+   "end": 1234.075,
+   "start_frame": 35698,
+   "end_frame": 37022
   },
   {
    "id": "s32_wind_vector",
-   "start": 1231.25,
+   "start": 1234.075,
    "sentences": [
     {
      "text": "Now let's look at wind.",
      "audio_text": null,
-     "start": 1231.25,
-     "end": 1233.25,
+     "start": 1234.075,
+     "end": 1236.075,
      "dur": 2.0,
-     "start_frame": 36938,
-     "end_frame": 36998
+     "start_frame": 37022,
+     "end_frame": 37082
     },
     {
      "text": "Wind is air moving across the Earth's surface, and it has both a speed and a direction, so it's a vector: an arrow.",
      "audio_text": null,
-     "start": 1233.6,
-     "end": 1241.6,
+     "start": 1236.425,
+     "end": 1244.425,
      "dur": 8.0,
-     "start_frame": 37008,
-     "end_frame": 37248
+     "start_frame": 37093,
+     "end_frame": 37333
     },
     {
      "text": "We can split the arrow into two parts, called components.",
      "audio_text": null,
-     "start": 1241.95,
-     "end": 1245.9,
+     "start": 1244.775,
+     "end": 1248.725,
      "dur": 3.95,
-     "start_frame": 37258,
-     "end_frame": 37377
+     "start_frame": 37343,
+     "end_frame": 37462
     },
     {
      "text": "The eastward part is written u, and the northward part is written v.",
      "audio_text": null,
-     "start": 1246.25,
-     "end": 1250.925,
+     "start": 1249.075,
+     "end": 1253.75,
      "dur": 4.675,
-     "start_frame": 37388,
-     "end_frame": 37528
+     "start_frame": 37472,
+     "end_frame": 37612
     },
     {
      "text": "Take a wind blowing towards the north-east, with u equal to eight and v equal to six metres per second.",
      "audio_text": null,
-     "start": 1251.275,
-     "end": 1258.425,
+     "start": 1254.1,
+     "end": 1261.25,
      "dur": 7.15,
-     "start_frame": 37538,
-     "end_frame": 37753
+     "start_frame": 37623,
+     "end_frame": 37838
     },
     {
      "text": "By Pythagoras, its speed is the square root of eight squared plus six squared, which is ten metres per second.",
      "audio_text": null,
-     "start": 1258.775,
-     "end": 1266.225,
+     "start": 1261.6,
+     "end": 1269.05,
      "dur": 7.45,
-     "start_frame": 37763,
-     "end_frame": 37987
+     "start_frame": 37848,
+     "end_frame": 38072
     }
    ],
-   "end": 1267.025,
-   "start_frame": 36938,
-   "end_frame": 38011
+   "end": 1269.85,
+   "start_frame": 37022,
+   "end_frame": 38096
   },
   {
    "id": "s33_wind_direction",
-   "start": 1267.025,
+   "start": 1269.85,
    "sentences": [
     {
      "text": "Meteorologists name a wind by where it comes from, not where it's going.",
      "audio_text": null,
-     "start": 1267.025,
-     "end": 1271.975,
+     "start": 1269.85,
+     "end": 1274.8,
      "dur": 4.95,
-     "start_frame": 38011,
-     "end_frame": 38159
+     "start_frame": 38096,
+     "end_frame": 38244
     },
     {
      "text": "A westerly wind blows from the west, towards the east.",
      "audio_text": null,
-     "start": 1272.325,
-     "end": 1276.375,
+     "start": 1275.15,
+     "end": 1279.2,
      "dur": 4.05,
-     "start_frame": 38170,
-     "end_frame": 38291
+     "start_frame": 38254,
+     "end_frame": 38376
     },
     {
      "text": "The direction is given in degrees, measured clockwise from north as seen from above: north is zero, east ninety, south one hundred and eighty, and west two hundred and seventy.",
      "audio_text": null,
-     "start": 1276.725,
-     "end": 1288.55,
+     "start": 1279.55,
+     "end": 1291.375,
      "dur": 11.825,
-     "start_frame": 38302,
-     "end_frame": 38656
+     "start_frame": 38386,
+     "end_frame": 38741
     },
     {
      "text": "Our wind blows towards the north-east, so it comes from the south-west.",
      "audio_text": null,
-     "start": 1288.9,
-     "end": 1293.625,
+     "start": 1291.725,
+     "end": 1296.45,
      "dur": 4.725,
-     "start_frame": 38667,
-     "end_frame": 38809
+     "start_frame": 38752,
+     "end_frame": 38894
     },
     {
      "text": "Its direction is about two hundred and thirty-three degrees, and we call it a south-westerly.",
      "audio_text": null,
-     "start": 1293.975,
-     "end": 1299.975,
+     "start": 1296.8,
+     "end": 1302.8,
      "dur": 6.0,
-     "start_frame": 38819,
-     "end_frame": 38999
+     "start_frame": 38904,
+     "end_frame": 39084
     },
     {
      "text": "Careful: ocean currents use the opposite habit, and are named by where they go, so an eastward current flows towards the east.",
      "audio_text": null,
-     "start": 1300.325,
-     "end": 1309.15,
+     "start": 1303.15,
+     "end": 1311.975,
      "dur": 8.825,
-     "start_frame": 39010,
-     "end_frame": 39274
+     "start_frame": 39094,
+     "end_frame": 39359
     }
    ],
-   "end": 1309.95,
-   "start_frame": 38011,
-   "end_frame": 39298
+   "end": 1312.775,
+   "start_frame": 38096,
+   "end_frame": 39383
   },
   {
    "id": "s34_wind_units",
-   "start": 1309.95,
+   "start": 1312.775,
    "sentences": [
     {
      "text": "Wind speed comes in several units.",
      "audio_text": null,
-     "start": 1309.95,
-     "end": 1312.775,
+     "start": 1312.775,
+     "end": 1315.6,
      "dur": 2.825,
-     "start_frame": 39298,
-     "end_frame": 39383
+     "start_frame": 39383,
+     "end_frame": 39468
     },
     {
      "text": "Metres per second is the scientific one.",
      "audio_text": null,
-     "start": 1313.125,
-     "end": 1316.675,
+     "start": 1315.95,
+     "end": 1319.5,
      "dur": 3.55,
-     "start_frame": 39394,
-     "end_frame": 39500
+     "start_frame": 39478,
+     "end_frame": 39585
     },
     {
      "text": "Multiply by three point six to get kilometres per hour, so ten metres per second is thirty-six kilometres per hour.",
      "audio_text": null,
-     "start": 1317.025,
-     "end": 1325.675,
+     "start": 1319.85,
+     "end": 1328.5,
      "dur": 8.65,
-     "start_frame": 39511,
-     "end_frame": 39770
+     "start_frame": 39596,
+     "end_frame": 39855
     },
     {
      "text": "Sailors and pilots use knots.",
      "audio_text": null,
-     "start": 1326.025,
-     "end": 1328.6,
+     "start": 1328.85,
+     "end": 1331.425,
      "dur": 2.575,
-     "start_frame": 39781,
-     "end_frame": 39858
+     "start_frame": 39866,
+     "end_frame": 39943
     },
     {
      "text": "A knot is one nautical mile per hour, and a nautical mile, one thousand eight hundred and fifty-two metres, is about one sixtieth of a degree of latitude along the Earth's surface.",
      "audio_text": null,
-     "start": 1328.95,
-     "end": 1340.5,
+     "start": 1331.775,
+     "end": 1343.325,
      "dur": 11.55,
-     "start_frame": 39868,
-     "end_frame": 40215
+     "start_frame": 39953,
+     "end_frame": 40300
     },
     {
      "text": "So one knot is about point five one metres per second, and our ten metres per second wind is about nineteen knots.",
      "audio_text": null,
-     "start": 1340.85,
-     "end": 1348.675,
+     "start": 1343.675,
+     "end": 1351.5,
      "dur": 7.825,
-     "start_frame": 40226,
-     "end_frame": 40460
+     "start_frame": 40310,
+     "end_frame": 40545
     }
    ],
-   "end": 1349.475,
-   "start_frame": 39298,
-   "end_frame": 40484
+   "end": 1352.3,
+   "start_frame": 39383,
+   "end_frame": 40569
   },
   {
    "id": "s35_why_wind",
-   "start": 1349.475,
+   "start": 1352.3,
    "sentences": [
     {
      "text": "Why does air move at all?",
      "audio_text": null,
-     "start": 1349.475,
-     "end": 1351.55,
+     "start": 1352.3,
+     "end": 1354.375,
      "dur": 2.075,
-     "start_frame": 40484,
-     "end_frame": 40546
+     "start_frame": 40569,
+     "end_frame": 40631
     },
     {
      "text": "The simplest reason is pressure.",
      "audio_text": null,
-     "start": 1351.9,
-     "end": 1354.375,
+     "start": 1354.725,
+     "end": 1357.2,
      "dur": 2.475,
-     "start_frame": 40557,
-     "end_frame": 40631
+     "start_frame": 40642,
+     "end_frame": 40716
     },
     {
      "text": "Where the pressure is higher on one side than on the other, the air is pushed from high pressure towards low pressure, just as air rushes out of a punctured tyre.",
      "audio_text": null,
-     "start": 1354.725,
-     "end": 1364.375,
+     "start": 1357.55,
+     "end": 1367.2,
      "dur": 9.65,
-     "start_frame": 40642,
-     "end_frame": 40931
+     "start_frame": 40726,
+     "end_frame": 41016
     },
     {
      "text": "But on our spinning Earth, moving air is gradually turned aside, so over large distances the wind ends up blowing around areas of high and low pressure, rather than straight into them.",
      "audio_text": null,
-     "start": 1364.725,
-     "end": 1376.7,
+     "start": 1367.55,
+     "end": 1379.525,
      "dur": 11.975,
-     "start_frame": 40942,
-     "end_frame": 41301
+     "start_frame": 41026,
+     "end_frame": 41386
     },
     {
      "text": "We'll see how that turning works in later videos on the Coriolis effect and the geostrophic wind.",
      "audio_text": "We'll see how that turning works in later videos on the [Coriolis](/kˌɔɹiˈOlɪs/) effect and the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind.",
-     "start": 1377.05,
-     "end": 1383.6,
+     "start": 1379.875,
+     "end": 1386.425,
      "dur": 6.55,
-     "start_frame": 41312,
-     "end_frame": 41508
+     "start_frame": 41396,
+     "end_frame": 41593
     }
    ],
-   "end": 1384.4,
-   "start_frame": 40484,
-   "end_frame": 41532
+   "end": 1387.225,
+   "start_frame": 40569,
+   "end_frame": 41617
   },
   {
    "id": "s36_weather_climate",
-   "start": 1384.4,
+   "start": 1387.225,
    "sentences": [
     {
      "text": "Before we look at real maps, let's pin down two words.",
      "audio_text": null,
-     "start": 1384.4,
-     "end": 1388.375,
+     "start": 1387.225,
+     "end": 1391.2,
      "dur": 3.975,
-     "start_frame": 41532,
-     "end_frame": 41651
+     "start_frame": 41617,
+     "end_frame": 41736
     },
     {
      "text": "Weather is the state of the atmosphere at one place and time: its temperature, pressure, humidity, wind, clouds and rain, right now or over the next few days.",
      "audio_text": null,
-     "start": 1388.725,
-     "end": 1399.775,
+     "start": 1391.55,
+     "end": 1402.6,
      "dur": 11.05,
-     "start_frame": 41662,
-     "end_frame": 41993
+     "start_frame": 41746,
+     "end_frame": 42078
     },
     {
      "text": "Climate is the statistics of the weather over many years, usually thirty: what's normal, and how far the weather usually strays from it.",
      "audio_text": null,
-     "start": 1400.125,
-     "end": 1409.075,
+     "start": 1402.95,
+     "end": 1411.9,
      "dur": 8.95,
-     "start_frame": 42004,
-     "end_frame": 42272
+     "start_frame": 42088,
+     "end_frame": 42357
     },
     {
      "text": "Here is the daily temperature at Brest, in north-western France, for every day of twenty twenty-three.",
      "audio_text": null,
-     "start": 1409.425,
-     "end": 1416.275,
+     "start": 1412.25,
+     "end": 1419.1,
      "dur": 6.85,
-     "start_frame": 42283,
-     "end_frame": 42488
+     "start_frame": 42368,
+     "end_frame": 42573
     },
     {
      "text": "Behind it is Brest's climate for each day of the year, the average over nineteen ninety-one to twenty twenty, with a band that holds eight days out of ten.",
      "audio_text": null,
-     "start": 1416.625,
-     "end": 1426.5,
+     "start": 1419.45,
+     "end": 1429.325,
      "dur": 9.875,
-     "start_frame": 42499,
-     "end_frame": 42795
+     "start_frame": 42584,
+     "end_frame": 42880
     },
     {
      "text": "The weather line jumps around from day to day, but most of the time it stays inside the band.",
      "audio_text": null,
-     "start": 1426.85,
-     "end": 1433.15,
+     "start": 1429.675,
+     "end": 1435.975,
      "dur": 6.3,
-     "start_frame": 42806,
-     "end_frame": 42994
+     "start_frame": 42890,
+     "end_frame": 43079
     },
     {
      "text": "Climate is what you expect; weather is what you get.",
      "audio_text": null,
-     "start": 1433.5,
-     "end": 1437.3,
+     "start": 1436.325,
+     "end": 1440.125,
      "dur": 3.8,
-     "start_frame": 43005,
-     "end_frame": 43119
+     "start_frame": 43090,
+     "end_frame": 43204
     }
    ],
-   "end": 1438.1,
-   "start_frame": 41532,
-   "end_frame": 43143
+   "end": 1440.925,
+   "start_frame": 41617,
+   "end_frame": 43228
   },
   {
    "id": "s37_observations",
-   "start": 1438.1,
+   "start": 1440.925,
    "sentences": [
     {
      "text": "How do we know the weather everywhere?",
      "audio_text": null,
-     "start": 1438.1,
-     "end": 1440.575,
+     "start": 1440.925,
+     "end": 1443.4,
      "dur": 2.475,
-     "start_frame": 43143,
-     "end_frame": 43217
+     "start_frame": 43228,
+     "end_frame": 43302
     },
     {
      "text": "From observations: thousands of weather stations, weather balloons, ships, buoys and aircraft, and many satellites.",
      "audio_text": null,
-     "start": 1440.925,
-     "end": 1449.0,
+     "start": 1443.75,
+     "end": 1451.825,
      "dur": 8.075,
-     "start_frame": 43228,
-     "end_frame": 43470
+     "start_frame": 43312,
+     "end_frame": 43555
     },
     {
      "text": "But they're uneven.",
      "audio_text": null,
-     "start": 1449.35,
-     "end": 1451.15,
+     "start": 1452.175,
+     "end": 1453.975,
      "dur": 1.8,
-     "start_frame": 43480,
-     "end_frame": 43534
+     "start_frame": 43565,
+     "end_frame": 43619
     },
     {
      "text": "Here are the places that launched weather balloons in twenty twenty-three.",
      "audio_text": null,
-     "start": 1451.5,
-     "end": 1456.1,
+     "start": 1454.325,
+     "end": 1458.925,
      "dur": 4.6,
-     "start_frame": 43545,
-     "end_frame": 43683
+     "start_frame": 43630,
+     "end_frame": 43768
     },
     {
      "text": "They're crowded over Europe, North America and East Asia, but sparse over the oceans, much of Africa, and the poles.",
      "audio_text": null,
-     "start": 1456.45,
-     "end": 1464.6,
+     "start": 1459.275,
+     "end": 1467.425,
      "dur": 8.15,
-     "start_frame": 43694,
-     "end_frame": 43938
+     "start_frame": 43778,
+     "end_frame": 44023
     },
     {
      "text": "And each instrument measures different things, at different times.",
      "audio_text": null,
-     "start": 1464.95,
-     "end": 1469.275,
+     "start": 1467.775,
+     "end": 1472.1,
      "dur": 4.325,
-     "start_frame": 43948,
-     "end_frame": 44078
+     "start_frame": 44033,
+     "end_frame": 44163
     }
    ],
-   "end": 1470.075,
-   "start_frame": 43143,
-   "end_frame": 44102
+   "end": 1472.9,
+   "start_frame": 43228,
+   "end_frame": 44187
   },
   {
    "id": "s38_reanalysis",
-   "start": 1470.075,
+   "start": 1472.9,
    "sentences": [
     {
      "text": "A reanalysis fills in the gaps.",
      "audio_text": null,
-     "start": 1470.075,
-     "end": 1472.725,
+     "start": 1472.9,
+     "end": 1475.55,
      "dur": 2.65,
-     "start_frame": 44102,
-     "end_frame": 44182
+     "start_frame": 44187,
+     "end_frame": 44266
     },
     {
      "text": "It starts from a weather forecast model, a computer program that steps the laws of physics forward in time, including the hydrostatic balance and the gas law we just met.",
      "audio_text": null,
-     "start": 1473.075,
-     "end": 1484.65,
+     "start": 1475.9,
+     "end": 1487.475,
      "dur": 11.575,
-     "start_frame": 44192,
-     "end_frame": 44540
+     "start_frame": 44277,
+     "end_frame": 44624
     },
     {
      "text": "Every few hours, it nudges the model towards all the observations made at that time, trusting the more reliable ones more.",
      "audio_text": null,
-     "start": 1485.0,
-     "end": 1493.325,
+     "start": 1487.825,
+     "end": 1496.15,
      "dur": 8.325,
-     "start_frame": 44550,
-     "end_frame": 44800
+     "start_frame": 44635,
+     "end_frame": 44884
     },
     {
      "text": "The result is a complete picture of the atmosphere, at every place and height, every hour, for decades.",
      "audio_text": null,
-     "start": 1493.675,
-     "end": 1500.575,
+     "start": 1496.5,
+     "end": 1503.4,
      "dur": 6.9,
-     "start_frame": 44810,
-     "end_frame": 45017
+     "start_frame": 44895,
+     "end_frame": 45102
     },
     {
      "text": "The one we use in this video is called ERA5, made by the European Centre for Medium-Range Weather Forecasts.",
      "audio_text": "The one we use in this video is called [ERA5](/ˌiˌɑɹˈA fˈIv/), made by the European Centre for Medium-Range Weather Forecasts.",
-     "start": 1500.925,
-     "end": 1508.9,
+     "start": 1503.75,
+     "end": 1511.725,
      "dur": 7.975,
-     "start_frame": 45028,
-     "end_frame": 45267
+     "start_frame": 45112,
+     "end_frame": 45352
     },
     {
      "text": "It runs from nineteen forty to today, on a grid with points about thirty kilometres apart.",
      "audio_text": null,
-     "start": 1509.25,
-     "end": 1515.6,
+     "start": 1512.075,
+     "end": 1518.425,
      "dur": 6.35,
-     "start_frame": 45278,
-     "end_frame": 45468
+     "start_frame": 45362,
+     "end_frame": 45553
     },
     {
      "text": "It's like a jigsaw with missing pieces, filled in using the pieces around them and the rules of physics.",
      "audio_text": null,
-     "start": 1515.95,
-     "end": 1522.875,
+     "start": 1518.775,
+     "end": 1525.7,
      "dur": 6.925,
-     "start_frame": 45478,
-     "end_frame": 45686
+     "start_frame": 45563,
+     "end_frame": 45771
     },
     {
      "text": "Unlike a photograph, though, where observations are sparse the result leans more on the model, so it's least certain there.",
      "audio_text": null,
-     "start": 1523.225,
-     "end": 1530.775,
+     "start": 1526.05,
+     "end": 1533.6,
      "dur": 7.55,
-     "start_frame": 45697,
-     "end_frame": 45923
+     "start_frame": 45782,
+     "end_frame": 46008
     }
    ],
-   "end": 1531.575,
-   "start_frame": 44102,
-   "end_frame": 45947
+   "end": 1534.4,
+   "start_frame": 44187,
+   "end_frame": 46032
   },
   {
    "id": "s39_surface_pressure",
-   "start": 1531.575,
+   "start": 1534.4,
    "sentences": [
     {
      "text": "Now let's make a pressure map.",
      "audio_text": null,
-     "start": 1531.575,
-     "end": 1533.95,
+     "start": 1534.4,
+     "end": 1536.775,
      "dur": 2.375,
-     "start_frame": 45947,
-     "end_frame": 46018
+     "start_frame": 46032,
+     "end_frame": 46103
     },
     {
      "text": "Here is the real air pressure at the ground all over the world, at midday on the second of November, twenty twenty-three, from the reanalysis.",
      "audio_text": null,
-     "start": 1534.3,
-     "end": 1543.275,
+     "start": 1537.125,
+     "end": 1546.1,
      "dur": 8.975,
-     "start_frame": 46029,
-     "end_frame": 46298
+     "start_frame": 46114,
+     "end_frame": 46383
     },
     {
      "text": "What stands out are the mountains.",
      "audio_text": null,
-     "start": 1543.625,
-     "end": 1546.05,
+     "start": 1546.45,
+     "end": 1548.875,
      "dur": 2.425,
-     "start_frame": 46309,
-     "end_frame": 46382
+     "start_frame": 46394,
+     "end_frame": 46466
     },
     {
      "text": "Over Tibet and the Himalayas, the pressure at the ground is less than six hundred hectopascals, and the Andes and the Rockies show up too.",
      "audio_text": "Over Tibet and the Himalayas, the pressure at the ground is less than six hundred [hectopascals](/hˈɛktəpˌæskᵊlz/), and the Andes and the Rockies show up too.",
-     "start": 1546.4,
-     "end": 1555.625,
+     "start": 1549.225,
+     "end": 1558.45,
      "dur": 9.225,
-     "start_frame": 46392,
-     "end_frame": 46669
+     "start_frame": 46477,
+     "end_frame": 46754
     },
     {
      "text": "In the close-up, the mountains are drawn thirty times taller than they really are.",
      "audio_text": null,
-     "start": 1555.975,
-     "end": 1561.05,
+     "start": 1558.8,
+     "end": 1563.875,
      "dur": 5.075,
-     "start_frame": 46679,
-     "end_frame": 46832
+     "start_frame": 46764,
+     "end_frame": 46916
     },
     {
      "text": "That's just hydrostatic balance: high ground has less air above it.",
      "audio_text": null,
-     "start": 1561.4,
-     "end": 1566.2,
+     "start": 1564.225,
+     "end": 1569.025,
      "dur": 4.8,
-     "start_frame": 46842,
-     "end_frame": 46986
+     "start_frame": 46927,
+     "end_frame": 47071
     },
     {
      "text": "The weather is in there, but these mountain patterns swamp it.",
      "audio_text": null,
-     "start": 1566.55,
-     "end": 1570.55,
+     "start": 1569.375,
+     "end": 1573.375,
      "dur": 4.0,
-     "start_frame": 46996,
-     "end_frame": 47116
+     "start_frame": 47081,
+     "end_frame": 47201
     }
    ],
-   "end": 1571.35,
-   "start_frame": 45947,
-   "end_frame": 47140
+   "end": 1574.175,
+   "start_frame": 46032,
+   "end_frame": 47225
   },
   {
    "id": "s40_sea_level",
-   "start": 1571.35,
+   "start": 1574.175,
    "sentences": [
     {
      "text": "So how do we compare a mountain town with a seaside town?",
      "audio_text": null,
-     "start": 1571.35,
-     "end": 1575.3,
+     "start": 1574.175,
+     "end": 1578.125,
      "dur": 3.95,
-     "start_frame": 47140,
-     "end_frame": 47259
+     "start_frame": 47225,
+     "end_frame": 47344
     },
     {
      "text": "We imagine what the pressure would be if each place were at sea level.",
      "audio_text": null,
-     "start": 1575.65,
-     "end": 1580.05,
+     "start": 1578.475,
+     "end": 1582.875,
      "dur": 4.4,
-     "start_frame": 47270,
-     "end_frame": 47402
+     "start_frame": 47354,
+     "end_frame": 47486
     },
     {
      "text": "Suppose a weather station sits one thousand six hundred and nine metres up, about the height of Denver in the United States, and reads eight hundred and thirty-five hectopascals, with an air temperature of fifteen degrees.",
      "audio_text": "Suppose a weather station sits one thousand six hundred and nine metres up, about the height of Denver in the United States, and reads eight hundred and thirty-five [hectopascals](/hˈɛktəpˌæskᵊlz/), with an air temperature of fifteen degrees.",
-     "start": 1580.4,
-     "end": 1594.275,
+     "start": 1583.225,
+     "end": 1597.1,
      "dur": 13.875,
-     "start_frame": 47412,
-     "end_frame": 47828
+     "start_frame": 47497,
+     "end_frame": 47913
     },
     {
      "text": "We add the weight of an imaginary column of air, reaching from the station down to sea level.",
      "audio_text": null,
-     "start": 1594.625,
-     "end": 1600.85,
+     "start": 1597.45,
+     "end": 1603.675,
      "dur": 6.225,
-     "start_frame": 47839,
-     "end_frame": 48026
+     "start_frame": 47924,
+     "end_frame": 48110
     },
     {
      "text": "With our exponential rule run downwards, that's eight hundred and thirty-five times e to the power of one point six oh nine divided by eight point four three.",
      "audio_text": null,
-     "start": 1601.2,
-     "end": 1611.95,
+     "start": 1604.025,
+     "end": 1614.775,
      "dur": 10.75,
-     "start_frame": 48036,
-     "end_frame": 48358
+     "start_frame": 48121,
+     "end_frame": 48443
     },
     {
      "text": "That's about one thousand and ten hectopascals: a perfectly ordinary sea-level reading.",
      "audio_text": "That's about one thousand and ten [hectopascals](/hˈɛktəpˌæskᵊlz/): a perfectly ordinary sea-level reading.",
-     "start": 1612.3,
-     "end": 1618.875,
+     "start": 1615.125,
+     "end": 1621.7,
      "dur": 6.575,
-     "start_frame": 48369,
-     "end_frame": 48566
+     "start_frame": 48454,
+     "end_frame": 48651
     },
     {
      "text": "This is called the sea-level pressure.",
      "audio_text": null,
-     "start": 1619.225,
-     "end": 1621.925,
+     "start": 1622.05,
+     "end": 1624.75,
      "dur": 2.7,
-     "start_frame": 48577,
-     "end_frame": 48658
+     "start_frame": 48662,
+     "end_frame": 48742
     },
     {
      "text": "Real weather services use a slightly more careful version of the same idea.",
      "audio_text": null,
-     "start": 1622.275,
-     "end": 1627.725,
+     "start": 1625.1,
+     "end": 1630.55,
      "dur": 5.45,
-     "start_frame": 48668,
-     "end_frame": 48832
+     "start_frame": 48753,
+     "end_frame": 48916
     }
    ],
-   "end": 1628.525,
-   "start_frame": 47140,
-   "end_frame": 48856
+   "end": 1631.35,
+   "start_frame": 47225,
+   "end_frame": 48940
   },
   {
    "id": "s41_msl_isobars",
-   "start": 1628.525,
+   "start": 1631.35,
    "sentences": [
     {
      "text": "Here is the same moment again, now as sea-level pressure.",
      "audio_text": null,
-     "start": 1628.525,
-     "end": 1632.575,
+     "start": 1631.35,
+     "end": 1635.4,
      "dur": 4.05,
-     "start_frame": 48856,
-     "end_frame": 48977
+     "start_frame": 48940,
+     "end_frame": 49062
     },
     {
      "text": "The mountains are gone, and the weather appears.",
      "audio_text": null,
-     "start": 1632.925,
-     "end": 1636.25,
+     "start": 1635.75,
+     "end": 1639.075,
      "dur": 3.325,
-     "start_frame": 48988,
-     "end_frame": 49088
+     "start_frame": 49072,
+     "end_frame": 49172
     },
     {
      "text": "Let's join the places that have the same sea-level pressure, every four hectopascals.",
      "audio_text": "Let's join the places that have the same sea-level pressure, every four [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 1636.6,
-     "end": 1642.4,
+     "start": 1639.425,
+     "end": 1645.225,
      "dur": 5.8,
-     "start_frame": 49098,
-     "end_frame": 49272
+     "start_frame": 49183,
+     "end_frame": 49357
     },
     {
      "text": "These lines are called isobars, from Greek words for equal weight.",
      "audio_text": null,
-     "start": 1642.75,
-     "end": 1647.4,
+     "start": 1645.575,
+     "end": 1650.225,
      "dur": 4.65,
-     "start_frame": 49282,
-     "end_frame": 49422
+     "start_frame": 49367,
+     "end_frame": 49507
     },
     {
      "text": "Where the isobars crowd together, the pressure changes quickly over a short distance, and the winds are strong.",
      "audio_text": null,
-     "start": 1647.75,
-     "end": 1654.725,
+     "start": 1650.575,
+     "end": 1657.55,
      "dur": 6.975,
-     "start_frame": 49432,
-     "end_frame": 49642
+     "start_frame": 49517,
+     "end_frame": 49726
     }
    ],
-   "end": 1655.525,
-   "start_frame": 48856,
-   "end_frame": 49666
+   "end": 1658.35,
+   "start_frame": 48940,
+   "end_frame": 49750
   },
   {
    "id": "s42_highs_lows",
-   "start": 1655.525,
+   "start": 1658.35,
    "sentences": [
     {
      "text": "The map shows round patches where the pressure is higher than all around, called highs, and patches where it's lower than all around, called lows.",
      "audio_text": null,
-     "start": 1655.525,
-     "end": 1665.25,
+     "start": 1658.35,
+     "end": 1668.075,
      "dur": 9.725,
-     "start_frame": 49666,
-     "end_frame": 49958
+     "start_frame": 49750,
+     "end_frame": 50042
     },
     {
      "text": "A low is also called a depression, or a cyclone, and a high is also called an anticyclone.",
      "audio_text": null,
-     "start": 1665.6,
-     "end": 1672.35,
+     "start": 1668.425,
+     "end": 1675.175,
      "dur": 6.75,
-     "start_frame": 49968,
-     "end_frame": 50170
+     "start_frame": 50053,
+     "end_frame": 50255
     },
     {
      "text": "Over the east coast of England, at the edge of the North Sea, is a deep low, Storm Ciarán, at about nine hundred and fifty-six hectopascals.",
      "audio_text": "Over the east coast of England, at the edge of the North Sea, is a deep low, Storm Keer-awn, at about nine hundred and fifty-six [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 1672.7,
-     "end": 1682.6,
+     "start": 1675.525,
+     "end": 1685.425,
      "dur": 9.9,
-     "start_frame": 50181,
-     "end_frame": 50478
+     "start_frame": 50266,
+     "end_frame": 50563
     },
     {
      "text": "Far to the south-west, near the Azores islands, is a high at about one thousand and thirty.",
      "audio_text": "Far to the south-west, near the [Azores](/əzˈɔɹz/) islands, is a high at about one thousand and thirty.",
-     "start": 1682.95,
-     "end": 1689.425,
+     "start": 1685.775,
+     "end": 1692.25,
      "dur": 6.475,
-     "start_frame": 50488,
-     "end_frame": 50683
+     "start_frame": 50573,
+     "end_frame": 50768
     },
     {
      "text": "Here is a much more recent map, a weather-service analysis from the twenty-seventh of October, twenty twenty-six.",
      "audio_text": null,
-     "start": 1689.775,
-     "end": 1697.25,
+     "start": 1692.6,
+     "end": 1700.075,
      "dur": 7.475,
-     "start_frame": 50693,
-     "end_frame": 50918
+     "start_frame": 50778,
+     "end_frame": 51002
     },
     {
      "text": "Its deepest low is a typhoon over the western Pacific, at about nine hundred and thirty-five hectopascals, while a low over the North Atlantic, at about nine hundred and fifty-five, is about as deep as Ciarán.",
      "audio_text": "Its deepest low is a typhoon over the western Pacific, at about nine hundred and thirty-five [hectopascals](/hˈɛktəpˌæskᵊlz/), while a low over the North Atlantic, at about nine hundred and fifty-five, is about as deep as Keer-awn.",
-     "start": 1697.6,
-     "end": 1711.875,
+     "start": 1700.425,
+     "end": 1714.7,
      "dur": 14.275,
-     "start_frame": 50928,
-     "end_frame": 51356
+     "start_frame": 51013,
+     "end_frame": 51441
     }
    ],
-   "end": 1712.675,
-   "start_frame": 49666,
-   "end_frame": 51380
+   "end": 1715.5,
+   "start_frame": 49750,
+   "end_frame": 51465
   },
   {
    "id": "s43_lows_cloudy",
-   "start": 1712.675,
+   "start": 1715.5,
    "sentences": [
     {
      "text": "Lows and highs bring different weather, and now we can see why.",
      "audio_text": null,
-     "start": 1712.675,
-     "end": 1717.05,
+     "start": 1715.5,
+     "end": 1719.875,
      "dur": 4.375,
-     "start_frame": 51380,
-     "end_frame": 51512
+     "start_frame": 51465,
+     "end_frame": 51596
     },
     {
      "text": "Near the ground, air drifts in towards the centre of a low.",
      "audio_text": null,
-     "start": 1717.4,
-     "end": 1721.625,
+     "start": 1720.225,
+     "end": 1724.45,
      "dur": 4.225,
-     "start_frame": 51522,
-     "end_frame": 51649
+     "start_frame": 51607,
+     "end_frame": 51734
     },
     {
      "text": "It can't pile up there, so it rises.",
      "audio_text": null,
-     "start": 1721.975,
-     "end": 1724.825,
+     "start": 1724.8,
+     "end": 1727.65,
      "dur": 2.85,
-     "start_frame": 51659,
-     "end_frame": 51745
+     "start_frame": 51744,
+     "end_frame": 51830
     },
     {
      "text": "Rising air expands and cools, it reaches its dew point, and clouds and rain form.",
      "audio_text": null,
-     "start": 1725.175,
-     "end": 1731.45,
+     "start": 1728.0,
+     "end": 1734.275,
      "dur": 6.275,
-     "start_frame": 51755,
-     "end_frame": 51944
+     "start_frame": 51840,
+     "end_frame": 52028
     },
     {
      "text": "That's why lows bring cloudy, wet and windy weather.",
      "audio_text": null,
-     "start": 1731.8,
-     "end": 1735.525,
+     "start": 1734.625,
+     "end": 1738.35,
      "dur": 3.725,
-     "start_frame": 51954,
-     "end_frame": 52066
+     "start_frame": 52039,
+     "end_frame": 52150
     },
     {
      "text": "Around a high, air sinks from above and spreads out near the ground.",
      "audio_text": null,
-     "start": 1735.875,
-     "end": 1740.475,
+     "start": 1738.7,
+     "end": 1743.3,
      "dur": 4.6,
-     "start_frame": 52076,
-     "end_frame": 52214
+     "start_frame": 52161,
+     "end_frame": 52299
     },
     {
      "text": "Sinking air is squeezed and warms, so it moves away from its dew point, and clouds evaporate.",
      "audio_text": null,
-     "start": 1740.825,
-     "end": 1747.275,
+     "start": 1743.65,
+     "end": 1750.1,
      "dur": 6.45,
-     "start_frame": 52225,
-     "end_frame": 52418
+     "start_frame": 52310,
+     "end_frame": 52503
     },
     {
      "text": "That's why highs usually bring settled, dry weather.",
      "audio_text": null,
-     "start": 1747.625,
-     "end": 1751.425,
+     "start": 1750.45,
+     "end": 1754.25,
      "dur": 3.8,
-     "start_frame": 52429,
-     "end_frame": 52543
+     "start_frame": 52514,
+     "end_frame": 52628
     }
    ],
-   "end": 1752.225,
-   "start_frame": 51380,
-   "end_frame": 52567
+   "end": 1755.05,
+   "start_frame": 51465,
+   "end_frame": 52652
   },
   {
    "id": "s44_round_lows",
-   "start": 1752.225,
+   "start": 1755.05,
    "sentences": [
     {
-     "text": "Now let's add the real winds near the ground, from the same reanalysis.",
+     "text": "Now let's add the real winds near the ground, measured ten metres up, from the same reanalysis.",
      "audio_text": null,
-     "start": 1752.225,
-     "end": 1757.15,
-     "dur": 4.925,
-     "start_frame": 52567,
-     "end_frame": 52714
+     "start": 1755.05,
+     "end": 1761.7,
+     "dur": 6.65,
+     "start_frame": 52652,
+     "end_frame": 52851
     },
     {
      "text": "Near Ciarán, the air doesn't blow straight into the low.",
      "audio_text": "Near Keer-awn, the air doesn't blow straight into the low.",
-     "start": 1757.5,
-     "end": 1761.375,
+     "start": 1762.05,
+     "end": 1765.925,
      "dur": 3.875,
-     "start_frame": 52725,
-     "end_frame": 52841
+     "start_frame": 52862,
+     "end_frame": 52978
     },
     {
      "text": "It swirls around it, anticlockwise as seen from above, crossing the isobars only slightly towards the centre.",
      "audio_text": null,
-     "start": 1761.725,
-     "end": 1769.475,
+     "start": 1766.275,
+     "end": 1774.025,
      "dur": 7.75,
-     "start_frame": 52852,
-     "end_frame": 53084
+     "start_frame": 52988,
+     "end_frame": 53221
     },
     {
      "text": "Around the high, it turns the other way, clockwise as seen from above.",
      "audio_text": null,
-     "start": 1769.825,
-     "end": 1774.725,
+     "start": 1774.375,
+     "end": 1779.275,
      "dur": 4.9,
-     "start_frame": 53095,
-     "end_frame": 53242
+     "start_frame": 53231,
+     "end_frame": 53378
     },
     {
      "text": "In the southern hemisphere, both are reversed.",
      "audio_text": null,
-     "start": 1775.075,
-     "end": 1778.275,
+     "start": 1779.625,
+     "end": 1782.825,
      "dur": 3.2,
-     "start_frame": 53252,
-     "end_frame": 53348
+     "start_frame": 53389,
+     "end_frame": 53485
     },
     {
      "text": "Why the wind circles instead of rushing in is the story of the Coriolis effect, and it has its own video.",
      "audio_text": "Why the wind circles instead of rushing in is the story of the [Coriolis](/kˌɔɹiˈOlɪs/) effect, and it has its own video.",
-     "start": 1778.625,
-     "end": 1785.9,
+     "start": 1783.175,
+     "end": 1790.45,
      "dur": 7.275,
-     "start_frame": 53359,
-     "end_frame": 53577
+     "start_frame": 53495,
+     "end_frame": 53714
     }
    ],
-   "end": 1786.7,
-   "start_frame": 52567,
-   "end_frame": 53601
+   "end": 1791.25,
+   "start_frame": 52652,
+   "end_frame": 53738
   },
   {
    "id": "s45_air_masses",
-   "start": 1786.7,
+   "start": 1791.25,
    "sentences": [
     {
      "text": "Now let's look at temperature and moisture together.",
      "audio_text": null,
-     "start": 1786.7,
-     "end": 1790.3,
+     "start": 1791.25,
+     "end": 1794.85,
      "dur": 3.6,
-     "start_frame": 53601,
-     "end_frame": 53709
+     "start_frame": 53738,
+     "end_frame": 53846
     },
     {
      "text": "Air that sits for days over one region takes on its character: cold and dry over snowy land in the far north, warm and moist over tropical seas.",
      "audio_text": null,
-     "start": 1790.65,
-     "end": 1800.675,
+     "start": 1795.2,
+     "end": 1805.225,
      "dur": 10.025,
-     "start_frame": 53720,
-     "end_frame": 54020
+     "start_frame": 53856,
+     "end_frame": 54157
     },
     {
      "text": "A huge body of air like this, often more than a thousand kilometres across, with fairly even temperature and humidity, is called an air mass.",
      "audio_text": null,
-     "start": 1801.025,
-     "end": 1810.775,
+     "start": 1805.575,
+     "end": 1815.325,
      "dur": 9.75,
-     "start_frame": 54031,
-     "end_frame": 54323
+     "start_frame": 54167,
+     "end_frame": 54460
     },
     {
      "text": "Air masses are named after where they come from: polar or tropical, and maritime, from over the sea, or continental, from over land.",
      "audio_text": null,
-     "start": 1811.125,
-     "end": 1820.125,
+     "start": 1815.675,
+     "end": 1824.675,
      "dur": 9.0,
-     "start_frame": 54334,
-     "end_frame": 54604
+     "start_frame": 54470,
+     "end_frame": 54740
     },
     {
      "text": "On the first of November, twenty twenty-three, warm, moist tropical air was flowing north-east towards France, ahead of Ciarán, while cooler polar air followed behind it.",
      "audio_text": "On the first of November, twenty twenty-three, warm, moist tropical air was flowing north-east towards France, ahead of Keer-awn, while cooler polar air followed behind it.",
-     "start": 1820.475,
-     "end": 1831.575,
+     "start": 1825.025,
+     "end": 1836.125,
      "dur": 11.1,
-     "start_frame": 54614,
-     "end_frame": 54947
+     "start_frame": 54751,
+     "end_frame": 55084
     }
    ],
-   "end": 1832.375,
-   "start_frame": 53601,
-   "end_frame": 54971
+   "end": 1836.925,
+   "start_frame": 53738,
+   "end_frame": 55108
   },
   {
    "id": "s46_fronts",
-   "start": 1832.375,
+   "start": 1836.925,
    "sentences": [
     {
      "text": "Where two air masses meet, they don't mix right away.",
      "audio_text": null,
-     "start": 1832.375,
-     "end": 1836.225,
+     "start": 1836.925,
+     "end": 1840.775,
      "dur": 3.85,
-     "start_frame": 54971,
-     "end_frame": 55087
+     "start_frame": 55108,
+     "end_frame": 55223
     },
     {
      "text": "The change from one to the other is squeezed into a narrow zone, often a hundred kilometres wide or less, called a front.",
      "audio_text": null,
-     "start": 1836.575,
-     "end": 1844.55,
+     "start": 1841.125,
+     "end": 1849.1,
      "dur": 7.975,
-     "start_frame": 55097,
-     "end_frame": 55336
+     "start_frame": 55234,
+     "end_frame": 55473
     },
     {
      "text": "Crossing a front, the temperature and the humidity change quickly, and the wind changes direction.",
      "audio_text": null,
-     "start": 1844.9,
-     "end": 1851.325,
+     "start": 1849.45,
+     "end": 1855.875,
      "dur": 6.425,
-     "start_frame": 55347,
-     "end_frame": 55540
+     "start_frame": 55484,
+     "end_frame": 55676
     },
     {
      "text": "A front is named after the air that's advancing.",
      "audio_text": null,
-     "start": 1851.675,
-     "end": 1855.425,
+     "start": 1856.225,
+     "end": 1859.975,
      "dur": 3.75,
-     "start_frame": 55550,
-     "end_frame": 55663
+     "start_frame": 55687,
+     "end_frame": 55799
     },
     {
      "text": "If cold air is pushing forward, it's a cold front.",
      "audio_text": null,
-     "start": 1855.775,
-     "end": 1859.45,
+     "start": 1860.325,
+     "end": 1864.0,
      "dur": 3.675,
-     "start_frame": 55673,
-     "end_frame": 55784
+     "start_frame": 55810,
+     "end_frame": 55920
     },
     {
      "text": "If warm air is advancing, it's a warm front.",
      "audio_text": null,
-     "start": 1859.8,
-     "end": 1863.35,
+     "start": 1864.35,
+     "end": 1867.9,
      "dur": 3.55,
-     "start_frame": 55794,
-     "end_frame": 55900
+     "start_frame": 55930,
+     "end_frame": 56037
     }
    ],
-   "end": 1864.15,
-   "start_frame": 54971,
-   "end_frame": 55924
+   "end": 1868.7,
+   "start_frame": 55108,
+   "end_frame": 56061
   },
   {
    "id": "s47_cold_front",
-   "start": 1864.15,
+   "start": 1868.7,
    "sentences": [
     {
      "text": "Let's look at a cold front from the side.",
      "audio_text": null,
-     "start": 1864.15,
-     "end": 1867.0,
+     "start": 1868.7,
+     "end": 1871.55,
      "dur": 2.85,
-     "start_frame": 55924,
-     "end_frame": 56010
+     "start_frame": 56061,
+     "end_frame": 56146
     },
     {
      "text": "Remember the gas law: at the same pressure, cold air is denser than warm air.",
      "audio_text": null,
-     "start": 1867.35,
-     "end": 1872.975,
+     "start": 1871.9,
+     "end": 1877.525,
      "dur": 5.625,
-     "start_frame": 56020,
-     "end_frame": 56189
+     "start_frame": 56157,
+     "end_frame": 56326
     },
     {
      "text": "So the advancing cold air stays low and pushes in under the warm air like a wedge.",
      "audio_text": null,
-     "start": 1873.325,
-     "end": 1879.25,
+     "start": 1877.875,
+     "end": 1883.8,
      "dur": 5.925,
-     "start_frame": 56200,
-     "end_frame": 56378
+     "start_frame": 56336,
+     "end_frame": 56514
     },
     {
      "text": "Its slope is steep for a front, about one kilometre up for every fifty to a hundred kilometres along, and the warm air is lifted quickly.",
      "audio_text": null,
-     "start": 1879.6,
-     "end": 1889.075,
+     "start": 1884.15,
+     "end": 1893.625,
      "dur": 9.475,
-     "start_frame": 56388,
-     "end_frame": 56672
+     "start_frame": 56524,
+     "end_frame": 56809
     },
     {
      "text": "It cools to its dew point, and tall clouds and heavy showers form in a narrow band.",
      "audio_text": null,
-     "start": 1889.425,
-     "end": 1895.125,
+     "start": 1893.975,
+     "end": 1899.675,
      "dur": 5.7,
-     "start_frame": 56683,
-     "end_frame": 56854
+     "start_frame": 56819,
+     "end_frame": 56990
     },
     {
      "text": "After the front passes, the air is colder and drier, the pressure starts to rise, and the wind turns, in the northern hemisphere usually from the south-west to the west or north-west.",
      "audio_text": null,
-     "start": 1895.475,
-     "end": 1907.35,
+     "start": 1900.025,
+     "end": 1911.9,
      "dur": 11.875,
-     "start_frame": 56864,
-     "end_frame": 57220
+     "start_frame": 57001,
+     "end_frame": 57357
     }
    ],
-   "end": 1908.15,
-   "start_frame": 55924,
-   "end_frame": 57244
+   "end": 1912.7,
+   "start_frame": 56061,
+   "end_frame": 57381
   },
   {
    "id": "s48_warm_front",
-   "start": 1908.15,
+   "start": 1912.7,
    "sentences": [
     {
      "text": "At a warm front, the warm air is advancing, but it's lighter, so it can't push the cold air away from below.",
      "audio_text": null,
-     "start": 1908.15,
-     "end": 1915.85,
+     "start": 1912.7,
+     "end": 1920.4,
      "dur": 7.7,
-     "start_frame": 57244,
-     "end_frame": 57476
+     "start_frame": 57381,
+     "end_frame": 57612
     },
     {
      "text": "Instead, it glides up over the cold air on a gentle slope, rising about one kilometre for every one or two hundred kilometres.",
      "audio_text": null,
-     "start": 1916.2,
-     "end": 1924.675,
+     "start": 1920.75,
+     "end": 1929.225,
      "dur": 8.475,
-     "start_frame": 57486,
-     "end_frame": 57740
+     "start_frame": 57622,
+     "end_frame": 57877
     },
     {
      "text": "As it slides upwards it cools, and a broad sheet of layered cloud forms far ahead of the front, bringing long spells of steady rain.",
      "audio_text": null,
-     "start": 1925.025,
-     "end": 1934.1,
+     "start": 1929.575,
+     "end": 1938.65,
      "dur": 9.075,
-     "start_frame": 57751,
-     "end_frame": 58023
+     "start_frame": 57887,
+     "end_frame": 58160
     },
     {
      "text": "When the warm front passes, the air turns milder and moister, and the wind turns, in the northern hemisphere usually from the south-east to the south or south-west.",
      "audio_text": null,
-     "start": 1934.45,
-     "end": 1945.125,
+     "start": 1939.0,
+     "end": 1949.675,
      "dur": 10.675,
-     "start_frame": 58034,
-     "end_frame": 58354
+     "start_frame": 58170,
+     "end_frame": 58490
     },
     {
      "text": "We've drawn these side views fifty times taller than they really are, so the slopes look much steeper than in nature.",
      "audio_text": null,
-     "start": 1945.475,
-     "end": 1952.575,
+     "start": 1950.025,
+     "end": 1957.125,
      "dur": 7.1,
-     "start_frame": 58364,
-     "end_frame": 58577
+     "start_frame": 58501,
+     "end_frame": 58714
     }
    ],
-   "end": 1953.375,
-   "start_frame": 57244,
-   "end_frame": 58601
+   "end": 1957.925,
+   "start_frame": 57381,
+   "end_frame": 58738
   },
   {
    "id": "s49_real_fronts",
-   "start": 1953.375,
+   "start": 1957.925,
    "sentences": [
     {
      "text": "Here are real fronts, around Ciarán at six in the evening on the first of November.",
      "audio_text": "Here are real fronts, around Keer-awn at six in the evening on the first of November.",
-     "start": 1953.375,
-     "end": 1958.925,
+     "start": 1957.925,
+     "end": 1963.475,
      "dur": 5.55,
-     "start_frame": 58601,
-     "end_frame": 58768
+     "start_frame": 58738,
+     "end_frame": 58904
     },
     {
      "text": "The colours show the temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less.",
      "audio_text": null,
-     "start": 1959.275,
-     "end": 1966.825,
+     "start": 1963.825,
+     "end": 1971.375,
      "dur": 7.55,
-     "start_frame": 58778,
-     "end_frame": 59005
+     "start_frame": 58915,
+     "end_frame": 59141
     },
     {
      "text": "The warm tropical air reaches up towards Brittany in a tongue.",
      "audio_text": null,
-     "start": 1967.175,
-     "end": 1971.55,
+     "start": 1971.725,
+     "end": 1976.1,
      "dur": 4.375,
-     "start_frame": 59015,
-     "end_frame": 59146
+     "start_frame": 59152,
+     "end_frame": 59283
     },
     {
      "text": "Along its leading edge, to the east, is the warm front.",
      "audio_text": null,
-     "start": 1971.9,
-     "end": 1975.85,
+     "start": 1976.45,
+     "end": 1980.4,
      "dur": 3.95,
-     "start_frame": 59157,
-     "end_frame": 59276
+     "start_frame": 59294,
+     "end_frame": 59412
     },
     {
      "text": "Along its trailing edge, curving away to the south-west, is the cold front.",
      "audio_text": null,
-     "start": 1976.2,
-     "end": 1981.4,
+     "start": 1980.75,
+     "end": 1985.95,
      "dur": 5.2,
-     "start_frame": 59286,
-     "end_frame": 59442
+     "start_frame": 59422,
+     "end_frame": 59578
     },
     {
      "text": "The arrows show the wind turning as it crosses the fronts, most sharply at the warm front.",
      "audio_text": null,
-     "start": 1981.75,
-     "end": 1987.6,
+     "start": 1986.3,
+     "end": 1992.15,
      "dur": 5.85,
-     "start_frame": 59452,
-     "end_frame": 59628
+     "start_frame": 59589,
+     "end_frame": 59764
     }
    ],
-   "end": 1988.4,
-   "start_frame": 58601,
-   "end_frame": 59652
+   "end": 1992.95,
+   "start_frame": 58738,
+   "end_frame": 59788
   },
   {
    "id": "s50_front_symbols",
-   "start": 1988.4,
+   "start": 1992.95,
    "sentences": [
     {
      "text": "On weather maps, fronts are drawn as lines with symbols on the side they're moving towards.",
      "audio_text": null,
-     "start": 1988.4,
-     "end": 1994.325,
+     "start": 1992.95,
+     "end": 1998.875,
      "dur": 5.925,
-     "start_frame": 59652,
-     "end_frame": 59830
+     "start_frame": 59788,
+     "end_frame": 59966
     },
     {
      "text": "A cold front has blue triangles, and a warm front has red half circles.",
      "audio_text": null,
-     "start": 1994.675,
-     "end": 2000.1,
+     "start": 1999.225,
+     "end": 2004.65,
      "dur": 5.425,
-     "start_frame": 59840,
-     "end_frame": 60003
+     "start_frame": 59977,
+     "end_frame": 60140
     },
     {
      "text": "You'll learn to read these maps in detail in the next video.",
      "audio_text": null,
-     "start": 2000.45,
-     "end": 2004.3,
+     "start": 2005.0,
+     "end": 2008.85,
      "dur": 3.85,
-     "start_frame": 60014,
-     "end_frame": 60129
+     "start_frame": 60150,
+     "end_frame": 60266
     }
    ],
-   "end": 2005.1,
-   "start_frame": 59652,
-   "end_frame": 60153
+   "end": 2009.65,
+   "start_frame": 59788,
+   "end_frame": 60290
   },
   {
    "id": "s51_heating",
-   "start": 2005.1,
+   "start": 2009.65,
    "sentences": [
     {
      "text": "Now let's zoom out to the whole planet, and ask why the weather moves at all.",
      "audio_text": null,
-     "start": 2005.1,
-     "end": 2010.15,
+     "start": 2009.65,
+     "end": 2014.7,
      "dur": 5.05,
-     "start_frame": 60153,
-     "end_frame": 60304
+     "start_frame": 60290,
+     "end_frame": 60441
     },
     {
      "text": "It starts with sunlight.",
      "audio_text": null,
-     "start": 2010.5,
-     "end": 2012.5,
+     "start": 2015.05,
+     "end": 2017.05,
      "dur": 2.0,
-     "start_frame": 60315,
-     "end_frame": 60375
+     "start_frame": 60452,
+     "end_frame": 60512
     },
     {
      "text": "Picture a beam of sunlight one metre wide, at noon at an equinox, in March or September, when the sun is overhead at the equator.",
      "audio_text": null,
-     "start": 2012.85,
-     "end": 2021.825,
+     "start": 2017.4,
+     "end": 2026.375,
      "dur": 8.975,
-     "start_frame": 60386,
-     "end_frame": 60655
+     "start_frame": 60522,
+     "end_frame": 60791
     },
     {
      "text": "At the equator, it lands on one metre of ground.",
      "audio_text": null,
-     "start": 2022.175,
-     "end": 2025.95,
+     "start": 2026.725,
+     "end": 2030.5,
      "dur": 3.775,
-     "start_frame": 60665,
-     "end_frame": 60778
+     "start_frame": 60802,
+     "end_frame": 60915
     },
     {
      "text": "At sixty degrees north, the ground is tilted to the beam, and the same beam is spread over two metres, so each square metre gets half as much.",
      "audio_text": null,
-     "start": 2026.3,
-     "end": 2035.65,
+     "start": 2030.85,
+     "end": 2040.2,
      "dur": 9.35,
-     "start_frame": 60789,
-     "end_frame": 61070
+     "start_frame": 60926,
+     "end_frame": 61206
     },
     {
      "text": "So the tropics are heated much more than the poles, and the atmosphere and the ocean carry heat from the tropics towards the poles.",
      "audio_text": null,
-     "start": 2036.0,
-     "end": 2043.725,
+     "start": 2040.55,
+     "end": 2048.275,
      "dur": 7.725,
-     "start_frame": 61080,
-     "end_frame": 61312
+     "start_frame": 61216,
+     "end_frame": 61448
     },
     {
      "text": "Storms like Ciarán are one of the ways the atmosphere does it.",
      "audio_text": "Storms like Keer-awn are one of the ways the atmosphere does it.",
-     "start": 2044.075,
-     "end": 2048.525,
+     "start": 2048.625,
+     "end": 2053.075,
      "dur": 4.45,
-     "start_frame": 61322,
-     "end_frame": 61456
+     "start_frame": 61459,
+     "end_frame": 61592
     }
    ],
-   "end": 2049.325,
-   "start_frame": 60153,
-   "end_frame": 61480
+   "end": 2053.875,
+   "start_frame": 60290,
+   "end_frame": 61616
   },
   {
    "id": "s52_pressure_belts",
-   "start": 2049.325,
+   "start": 2053.875,
    "sentences": [
     {
      "text": "Averaged over many years, sea-level pressure falls into belts.",
      "audio_text": null,
-     "start": 2049.325,
-     "end": 2053.8,
+     "start": 2053.875,
+     "end": 2058.35,
      "dur": 4.475,
-     "start_frame": 61480,
-     "end_frame": 61614
+     "start_frame": 61616,
+     "end_frame": 61750
     },
     {
      "text": "Around thirty degrees north and south, air sinks from high up, and large highs sit over the oceans, like the Azores high we saw.",
      "audio_text": "Around thirty degrees north and south, air sinks from high up, and large highs sit over the oceans, like the [Azores](/əzˈɔɹz/) high we saw.",
-     "start": 2054.15,
-     "end": 2062.7,
+     "start": 2058.7,
+     "end": 2067.25,
      "dur": 8.55,
-     "start_frame": 61624,
-     "end_frame": 61881
+     "start_frame": 61761,
+     "end_frame": 62018
     },
     {
      "text": "These are the subtropical highs.",
      "audio_text": null,
-     "start": 2063.05,
-     "end": 2065.675,
+     "start": 2067.6,
+     "end": 2070.225,
      "dur": 2.625,
-     "start_frame": 61892,
-     "end_frame": 61970
+     "start_frame": 62028,
+     "end_frame": 62107
     },
     {
      "text": "Near the equator is a belt of low pressure where the winds from both hemispheres meet and rise, building tall thunderclouds.",
      "audio_text": null,
-     "start": 2066.025,
-     "end": 2074.475,
+     "start": 2070.575,
+     "end": 2079.025,
      "dur": 8.45,
-     "start_frame": 61981,
-     "end_frame": 62234
+     "start_frame": 62117,
+     "end_frame": 62371
     },
     {
      "text": "It's called the intertropical convergence zone.",
      "audio_text": null,
-     "start": 2074.825,
-     "end": 2078.225,
+     "start": 2079.375,
+     "end": 2082.775,
      "dur": 3.4,
-     "start_frame": 62245,
-     "end_frame": 62347
+     "start_frame": 62381,
+     "end_frame": 62483
     },
     {
      "text": "How these belts are made is the subject of a later video on the general circulation.",
      "audio_text": null,
-     "start": 2078.575,
-     "end": 2084.6,
+     "start": 2083.125,
+     "end": 2089.15,
      "dur": 6.025,
-     "start_frame": 62357,
-     "end_frame": 62538
+     "start_frame": 62494,
+     "end_frame": 62674
     }
    ],
-   "end": 2085.4,
-   "start_frame": 61480,
-   "end_frame": 62562
+   "end": 2089.95,
+   "start_frame": 61616,
+   "end_frame": 62698
   },
   {
    "id": "s53_trades_westerlies",
-   "start": 2085.4,
+   "start": 2089.95,
    "sentences": [
     {
      "text": "The winds near the ground follow these belts.",
      "audio_text": null,
-     "start": 2085.4,
-     "end": 2088.575,
+     "start": 2089.95,
+     "end": 2093.125,
      "dur": 3.175,
-     "start_frame": 62562,
-     "end_frame": 62657
+     "start_frame": 62698,
+     "end_frame": 62794
     },
     {
      "text": "Between the subtropical highs and the equator, steady winds blow from the east, called the trade winds; sailing ships relied on them to cross the oceans.",
      "audio_text": null,
-     "start": 2088.925,
-     "end": 2098.875,
+     "start": 2093.475,
+     "end": 2103.425,
      "dur": 9.95,
-     "start_frame": 62668,
-     "end_frame": 62966
+     "start_frame": 62804,
+     "end_frame": 63103
     },
     {
      "text": "North of the equator, they come from the north-east.",
      "audio_text": null,
-     "start": 2099.225,
-     "end": 2102.675,
+     "start": 2103.775,
+     "end": 2107.225,
      "dur": 3.45,
-     "start_frame": 62977,
-     "end_frame": 63080
+     "start_frame": 63113,
+     "end_frame": 63217
     },
     {
      "text": "South of it, they come from the south-east.",
      "audio_text": null,
-     "start": 2103.025,
-     "end": 2105.875,
+     "start": 2107.575,
+     "end": 2110.425,
      "dur": 2.85,
-     "start_frame": 63091,
-     "end_frame": 63176
+     "start_frame": 63227,
+     "end_frame": 63313
     },
     {
      "text": "Poleward of the subtropical highs, in the middle latitudes, the winds come mostly from the west: the westerlies.",
      "audio_text": null,
-     "start": 2106.225,
-     "end": 2113.9,
+     "start": 2110.775,
+     "end": 2118.45,
      "dur": 7.675,
-     "start_frame": 63187,
-     "end_frame": 63417
+     "start_frame": 63323,
+     "end_frame": 63553
     },
     {
      "text": "That's why storms like Ciarán usually travel from west to east.",
      "audio_text": "That's why storms like Keer-awn usually travel from west to east.",
-     "start": 2114.25,
-     "end": 2118.875,
+     "start": 2118.8,
+     "end": 2123.425,
      "dur": 4.625,
-     "start_frame": 63428,
-     "end_frame": 63566
+     "start_frame": 63564,
+     "end_frame": 63703
     },
     {
      "text": "Why the winds bend like this is part of the Coriolis story, coming in a later video.",
      "audio_text": "Why the winds bend like this is part of the [Coriolis](/kˌɔɹiˈOlɪs/) story, coming in a later video.",
-     "start": 2119.225,
-     "end": 2125.25,
+     "start": 2123.775,
+     "end": 2129.8,
      "dur": 6.025,
-     "start_frame": 63577,
-     "end_frame": 63758
+     "start_frame": 63713,
+     "end_frame": 63894
     }
    ],
-   "end": 2126.05,
-   "start_frame": 62562,
-   "end_frame": 63782
+   "end": 2130.6,
+   "start_frame": 62698,
+   "end_frame": 63918
   },
   {
    "id": "s54_ciaran_intro",
-   "start": 2126.05,
+   "start": 2130.6,
    "sentences": [
     {
      "text": "Now let's put all of this together on one real storm, and watch it from one town.",
      "audio_text": null,
-     "start": 2126.05,
-     "end": 2131.675,
+     "start": 2130.6,
+     "end": 2136.225,
      "dur": 5.625,
-     "start_frame": 63782,
-     "end_frame": 63950
+     "start_frame": 63918,
+     "end_frame": 64087
     },
     {
      "text": "On the first of November, twenty twenty-three, Storm Ciarán was racing across the Atlantic towards Europe.",
      "audio_text": "On the first of November, twenty twenty-three, Storm Keer-awn was racing across the Atlantic towards Europe.",
-     "start": 2132.025,
-     "end": 2139.175,
+     "start": 2136.575,
+     "end": 2143.725,
      "dur": 7.15,
-     "start_frame": 63961,
-     "end_frame": 64175
+     "start_frame": 64097,
+     "end_frame": 64312
     },
     {
      "text": "Here it is from a satellite that afternoon, with coastlines and borders drawn in.",
      "audio_text": null,
-     "start": 2139.525,
-     "end": 2145.025,
+     "start": 2144.075,
+     "end": 2149.575,
      "dur": 5.5,
-     "start_frame": 64186,
-     "end_frame": 64351
+     "start_frame": 64322,
+     "end_frame": 64487
     },
     {
      "text": "And here is Brest, a port city at the western tip of France.",
      "audio_text": null,
-     "start": 2145.375,
-     "end": 2149.85,
+     "start": 2149.925,
+     "end": 2154.4,
      "dur": 4.475,
-     "start_frame": 64361,
-     "end_frame": 64496
+     "start_frame": 64498,
+     "end_frame": 64632
     },
     {
      "text": "Let's watch the storm pass over Brest, hour by hour, using the reanalysis.",
      "audio_text": null,
-     "start": 2150.2,
-     "end": 2155.825,
+     "start": 2154.75,
+     "end": 2160.375,
      "dur": 5.625,
-     "start_frame": 64506,
-     "end_frame": 64675
+     "start_frame": 64642,
+     "end_frame": 64811
     },
     {
      "text": "Times are in universal time, the clock that meteorologists everywhere share.",
      "audio_text": null,
-     "start": 2156.175,
-     "end": 2161.725,
+     "start": 2160.725,
+     "end": 2166.275,
      "dur": 5.55,
-     "start_frame": 64685,
-     "end_frame": 64852
+     "start_frame": 64822,
+     "end_frame": 64988
     }
    ],
-   "end": 2162.525,
-   "start_frame": 63782,
-   "end_frame": 64876
+   "end": 2167.075,
+   "start_frame": 63918,
+   "end_frame": 65012
   },
   {
    "id": "s55_ciaran_maps",
-   "start": 2162.525,
+   "start": 2167.075,
    "sentences": [
     {
-     "text": "Here are the isobars every four hectopascals, from midday on the first of November to midday on the second.",
-     "audio_text": "Here are the isobars every four [hectopascals](/hˈɛktəpˌæskᵊlz/), from midday on the first of November to midday on the second.",
-     "start": 2162.525,
-     "end": 2169.925,
-     "dur": 7.4,
-     "start_frame": 64876,
-     "end_frame": 65098
+     "text": "Here are the isobars every four hectopascals, with the warm front in red and the cold front in blue, from midday on the first of November to midday on the second.",
+     "audio_text": "Here are the isobars every four [hectopascals](/hˈɛktəpˌæskᵊlz/), with the warm front in red and the cold front in blue, from midday on the first of November to midday on the second.",
+     "start": 2167.075,
+     "end": 2177.825,
+     "dur": 10.75,
+     "start_frame": 65012,
+     "end_frame": 65335
     },
     {
-     "text": "The low deepens as it comes, from about nine hundred and sixty-five to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.",
-     "audio_text": "The low deepens as it comes, from about nine hundred and sixty-five to about nine hundred and fifty-four [hectopascals](/hˈɛktəpˌæskᵊlz/), and its centre crosses the English Channel just north of Brest during the night.",
-     "start": 2170.275,
-     "end": 2182.875,
-     "dur": 12.6,
-     "start_frame": 65108,
-     "end_frame": 65486
+     "text": "The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.",
+     "audio_text": "The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four [hectopascals](/hˈɛktəpˌæskᵊlz/), and its centre crosses the English Channel just north of Brest during the night.",
+     "start": 2178.175,
+     "end": 2190.55,
+     "dur": 12.375,
+     "start_frame": 65345,
+     "end_frame": 65716
     }
    ],
-   "end": 2183.675,
-   "start_frame": 64876,
-   "end_frame": 65510
+   "end": 2191.35,
+   "start_frame": 65012,
+   "end_frame": 65740
   },
   {
    "id": "s56_brest_pressure",
-   "start": 2183.675,
+   "start": 2191.35,
    "sentences": [
     {
      "text": "First, the pressure at Brest.",
      "audio_text": null,
-     "start": 2183.675,
-     "end": 2186.125,
+     "start": 2191.35,
+     "end": 2193.8,
      "dur": 2.45,
-     "start_frame": 65510,
-     "end_frame": 65584
+     "start_frame": 65740,
+     "end_frame": 65814
     },
     {
      "text": "At midday on the first, it reads about nine hundred and ninety-seven hectopascals.",
      "audio_text": "At midday on the first, it reads about nine hundred and ninety-seven [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 2186.475,
-     "end": 2192.3,
+     "start": 2194.15,
+     "end": 2199.975,
      "dur": 5.825,
-     "start_frame": 65594,
-     "end_frame": 65769
+     "start_frame": 65824,
+     "end_frame": 65999
     },
     {
      "text": "Then it falls, faster and faster, to about nine hundred and sixty-two at one o'clock in the morning, as the low passes close by.",
      "audio_text": null,
-     "start": 2192.65,
-     "end": 2201.675,
+     "start": 2200.325,
+     "end": 2209.35,
      "dur": 9.025,
-     "start_frame": 65780,
-     "end_frame": 66050
+     "start_frame": 66010,
+     "end_frame": 66280
     },
     {
      "text": "That's thirty-five hectopascals in thirteen hours, a very fast fall.",
      "audio_text": "That's thirty-five [hectopascals](/hˈɛktəpˌæskᵊlz/) in thirteen hours, a very fast fall.",
-     "start": 2202.025,
-     "end": 2207.175,
+     "start": 2209.7,
+     "end": 2214.85,
      "dur": 5.15,
-     "start_frame": 66061,
-     "end_frame": 66215
+     "start_frame": 66291,
+     "end_frame": 66446
     },
     {
      "text": "Then it climbs again, by about fourteen hectopascals in five hours.",
      "audio_text": "Then it climbs again, by about fourteen [hectopascals](/hˈɛktəpˌæskᵊlz/) in five hours.",
-     "start": 2207.525,
-     "end": 2212.55,
+     "start": 2215.2,
+     "end": 2220.225,
      "dur": 5.025,
-     "start_frame": 66226,
-     "end_frame": 66376
+     "start_frame": 66456,
+     "end_frame": 66607
     }
    ],
-   "end": 2213.35,
-   "start_frame": 65510,
-   "end_frame": 66400
+   "end": 2221.025,
+   "start_frame": 65740,
+   "end_frame": 66631
   },
   {
    "id": "s57_brest_warm_front",
-   "start": 2213.35,
+   "start": 2221.025,
    "sentences": [
     {
      "text": "Now the temperature and the wind.",
      "audio_text": null,
-     "start": 2213.35,
-     "end": 2215.725,
+     "start": 2221.025,
+     "end": 2223.4,
      "dur": 2.375,
-     "start_frame": 66400,
-     "end_frame": 66472
+     "start_frame": 66631,
+     "end_frame": 66702
     },
     {
      "text": "At six in the evening, the wind blows from the south-south-east at about thirteen metres per second, and the temperature is twelve degrees.",
      "audio_text": null,
-     "start": 2216.075,
-     "end": 2224.925,
+     "start": 2223.75,
+     "end": 2232.6,
      "dur": 8.85,
-     "start_frame": 66482,
-     "end_frame": 66748
+     "start_frame": 66712,
+     "end_frame": 66978
     },
     {
      "text": "By eight, the wind has turned to come from the south-south-west, it has strengthened to about eighteen metres per second, and the temperature has risen to about fourteen and a half.",
      "audio_text": null,
-     "start": 2225.275,
-     "end": 2236.125,
+     "start": 2232.95,
+     "end": 2243.8,
      "dur": 10.85,
-     "start_frame": 66758,
-     "end_frame": 67084
+     "start_frame": 66988,
+     "end_frame": 67314
     },
     {
      "text": "That's the warm front passing.",
      "audio_text": null,
-     "start": 2236.475,
-     "end": 2238.85,
+     "start": 2244.15,
+     "end": 2246.525,
      "dur": 2.375,
-     "start_frame": 67094,
-     "end_frame": 67166
+     "start_frame": 67324,
+     "end_frame": 67396
     },
     {
      "text": "Brest is now in the warm air behind it, which is called the storm's warm sector.",
      "audio_text": null,
-     "start": 2239.2,
-     "end": 2244.875,
+     "start": 2246.875,
+     "end": 2252.55,
      "dur": 5.675,
-     "start_frame": 67176,
-     "end_frame": 67346
+     "start_frame": 67406,
+     "end_frame": 67576
     }
    ],
-   "end": 2245.675,
-   "start_frame": 66400,
-   "end_frame": 67370
+   "end": 2253.35,
+   "start_frame": 66631,
+   "end_frame": 67600
   },
   {
    "id": "s58_brest_cold_front",
-   "start": 2245.675,
+   "start": 2253.35,
    "sentences": [
     {
      "text": "A few hours later comes the cold front.",
      "audio_text": null,
-     "start": 2245.675,
-     "end": 2248.65,
+     "start": 2253.35,
+     "end": 2256.325,
      "dur": 2.975,
-     "start_frame": 67370,
-     "end_frame": 67460
+     "start_frame": 67600,
+     "end_frame": 67690
     },
     {
      "text": "Between midnight and three in the morning, the wind swings from the south-west to the west and strengthens: by three, it's about twenty-three metres per second, or forty-five knots.",
      "audio_text": null,
-     "start": 2249.0,
-     "end": 2260.55,
+     "start": 2256.675,
+     "end": 2268.225,
      "dur": 11.55,
-     "start_frame": 67470,
-     "end_frame": 67816
+     "start_frame": 67700,
+     "end_frame": 68047
     },
     {
      "text": "The temperature drops by about two degrees, to ten and a half, and the pressure starts its fast climb.",
      "audio_text": null,
-     "start": 2260.9,
-     "end": 2267.5,
+     "start": 2268.575,
+     "end": 2275.175,
      "dur": 6.6,
-     "start_frame": 67827,
-     "end_frame": 68025
+     "start_frame": 68057,
+     "end_frame": 68255
     },
     {
      "text": "Cooler polar air has arrived behind the front, just as our side view said.",
      "audio_text": null,
-     "start": 2267.85,
-     "end": 2273.125,
+     "start": 2275.525,
+     "end": 2280.8,
      "dur": 5.275,
-     "start_frame": 68036,
-     "end_frame": 68194
+     "start_frame": 68266,
+     "end_frame": 68424
     }
    ],
-   "end": 2273.925,
-   "start_frame": 67370,
-   "end_frame": 68218
+   "end": 2281.6,
+   "start_frame": 67600,
+   "end_frame": 68448
   },
   {
    "id": "s59_ciaran_after",
-   "start": 2273.925,
+   "start": 2281.6,
    "sentences": [
     {
      "text": "Here is the storm the next afternoon, seen from space, now over the North Sea, with its clouds wrapped in a spiral around the low.",
      "audio_text": null,
-     "start": 2273.925,
-     "end": 2282.55,
+     "start": 2281.6,
+     "end": 2290.225,
      "dur": 8.625,
-     "start_frame": 68218,
-     "end_frame": 68476
+     "start_frame": 68448,
+     "end_frame": 68707
     },
     {
      "text": "In the next video, we'll learn to read weather maps like this one in detail.",
      "audio_text": null,
-     "start": 2282.9,
-     "end": 2288.0,
+     "start": 2290.575,
+     "end": 2295.675,
      "dur": 5.1,
-     "start_frame": 68487,
-     "end_frame": 68640
+     "start_frame": 68717,
+     "end_frame": 68870
     },
     {
      "text": "And later videos will explain why the wind circles the low instead of rushing into it.",
      "audio_text": null,
-     "start": 2288.35,
-     "end": 2294.45,
+     "start": 2296.025,
+     "end": 2302.125,
      "dur": 6.1,
-     "start_frame": 68650,
-     "end_frame": 68834
+     "start_frame": 68881,
+     "end_frame": 69064
     }
    ],
-   "end": 2295.25,
-   "start_frame": 68218,
-   "end_frame": 68858
+   "end": 2302.925,
+   "start_frame": 68448,
+   "end_frame": 69088
   },
   {
    "id": "s60_recap",
-   "start": 2295.25,
+   "start": 2302.925,
    "sentences": [
     {
      "text": "To sum up, the atmosphere is a thin shell of air, and almost all our weather happens in its lowest layer, the troposphere.",
      "audio_text": null,
-     "start": 2295.25,
-     "end": 2303.475,
+     "start": 2302.925,
+     "end": 2311.15,
      "dur": 8.225,
-     "start_frame": 68858,
-     "end_frame": 69104
+     "start_frame": 69088,
+     "end_frame": 69334
     },
     {
      "text": "Air pressure is the weight of the air above each square metre, about one thousand and thirteen hectopascals at sea level.",
      "audio_text": "Air pressure is the weight of the air above each square metre, about one thousand and thirteen [hectopascals](/hˈɛktəpˌæskᵊlz/) at sea level.",
-     "start": 2303.825,
-     "end": 2311.75,
+     "start": 2311.5,
+     "end": 2319.425,
      "dur": 7.925,
-     "start_frame": 69115,
-     "end_frame": 69352
+     "start_frame": 69345,
+     "end_frame": 69583
     },
     {
      "text": "By hydrostatic balance, it falls with height, roughly exponentially, with a scale height of about eight kilometres.",
      "audio_text": null,
-     "start": 2312.1,
-     "end": 2320.0,
+     "start": 2319.775,
+     "end": 2327.675,
      "dur": 7.9,
-     "start_frame": 69363,
-     "end_frame": 69600
+     "start_frame": 69593,
+     "end_frame": 69830
     },
     {
      "text": "The gas law, p equals rho R T, ties pressure, density and temperature together, so warm air is lighter than cold air.",
      "audio_text": null,
-     "start": 2320.35,
-     "end": 2329.35,
+     "start": 2328.025,
+     "end": 2337.025,
      "dur": 9.0,
-     "start_frame": 69610,
-     "end_frame": 69880
+     "start_frame": 69841,
+     "end_frame": 70111
     },
     {
      "text": "Relative humidity compares the vapour with its saturation value, and cooling air to its dew point makes clouds.",
      "audio_text": null,
-     "start": 2329.7,
-     "end": 2337.025,
+     "start": 2337.375,
+     "end": 2344.7,
      "dur": 7.325,
-     "start_frame": 69891,
-     "end_frame": 70111
+     "start_frame": 70121,
+     "end_frame": 70341
     },
     {
      "text": "Winds are named by where they come from, and are measured in metres per second or knots.",
      "audio_text": null,
-     "start": 2337.375,
-     "end": 2343.175,
+     "start": 2345.05,
+     "end": 2350.85,
      "dur": 5.8,
-     "start_frame": 70121,
-     "end_frame": 70295
+     "start_frame": 70352,
+     "end_frame": 70526
     },
     {
      "text": "Sea-level pressure maps show highs and lows, and fronts are the boundaries between air masses.",
      "audio_text": null,
-     "start": 2343.525,
-     "end": 2350.075,
+     "start": 2351.2,
+     "end": 2357.75,
      "dur": 6.55,
-     "start_frame": 70306,
-     "end_frame": 70502
+     "start_frame": 70536,
+     "end_frame": 70732
     },
     {
      "text": "Weather is what happens now, climate is its long-term statistics, and a reanalysis gives us both, everywhere, every hour.",
      "audio_text": null,
-     "start": 2350.425,
-     "end": 2358.9,
+     "start": 2358.1,
+     "end": 2366.575,
      "dur": 8.475,
-     "start_frame": 70513,
-     "end_frame": 70767
+     "start_frame": 70743,
+     "end_frame": 70997
     }
    ],
-   "end": 2359.7,
-   "start_frame": 68858,
-   "end_frame": 70791
+   "end": 2367.375,
+   "start_frame": 69088,
+   "end_frame": 71021
   },
   {
    "id": "s61_end",
-   "start": 2359.7,
+   "start": 2367.375,
    "sentences": [
     {
      "text": "This video is one of a series of related tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 2359.7,
-     "end": 2365.575,
+     "start": 2367.375,
+     "end": 2373.25,
      "dur": 5.875,
-     "start_frame": 70791,
-     "end_frame": 70967
+     "start_frame": 71021,
+     "end_frame": 71198
     },
     {
      "text": "They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too.",
      "audio_text": null,
-     "start": 2365.925,
-     "end": 2376.975,
+     "start": 2373.6,
+     "end": 2384.65,
      "dur": 11.05,
-     "start_frame": 70978,
-     "end_frame": 71309
+     "start_frame": 71208,
+     "end_frame": 71540
     },
     {
      "text": "The notebook for these weather basics, and the notebooks for the other concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2377.325,
-     "end": 2385.0,
+     "start": 2385.0,
+     "end": 2392.675,
      "dur": 7.675,
-     "start_frame": 71320,
-     "end_frame": 71550
+     "start_frame": 71550,
+     "end_frame": 71780
     }
    ],
-   "end": 2385.3,
-   "start_frame": 70791,
-   "end_frame": 71559
+   "end": 2392.975,
+   "start_frame": 71021,
+   "end_frame": 71789
   }
  ],
- "total_s": 2385.3,
- "total_frames": 71559,
+ "total_s": 2392.975,
+ "total_frames": 71790,
  "render_s": 841.6,
  "loudnorm_input": {
   "input_i": "-24.79",
@@ -3887,11 +3887,11 @@
   "normalization_type": "dynamic",
   "target_offset": "0.48"
  },
- "cues": 598,
+ "cues": 601,
  "warnings": [],
  "self_check": {
-  "expected_s": 2385.3,
-  "audio_s": 2385.3,
+  "expected_s": 2392.975,
+  "audio_s": 2392.975,
   "diff_ms": 0.0,
   "len_ok": true,
   "cues_ok": true,
@@ -3913,6 +3913,40 @@
      "scene": "s42_highs_lows",
      "after_sentence": 4,
      "added_s": 22.45
+    }
+   ]
+  },
+  "spliced_replacements": {
+   "gain": 2.72662,
+   "corr_resynth": 0.9892,
+   "replaced": [
+    {
+     "scene": "s29_relative_humidity",
+     "sentence": 7,
+     "old": "Cool the same air, and its relative humidity rises, even though no water is added.",
+     "new": "Cool the same air to eighteen degrees, and its relative humidity rises to about seventy-three percent, even though no water is added.",
+     "added_s": 2.825
+    },
+    {
+     "scene": "s44_round_lows",
+     "sentence": 1,
+     "old": "Now let's add the real winds near the ground, from the same reanalysis.",
+     "new": "Now let's add the real winds near the ground, measured ten metres up, from the same reanalysis.",
+     "added_s": 1.725
+    },
+    {
+     "scene": "s55_ciaran_maps",
+     "sentence": 1,
+     "old": "Here are the isobars every four hectopascals, from midday on the first of November to midday on the second.",
+     "new": "Here are the isobars every four hectopascals, with the warm front in red and the cold front in blue, from midday on the first of November to midday on the second.",
+     "added_s": 3.35
+    },
+    {
+     "scene": "s55_ciaran_maps",
+     "sentence": 2,
+     "old": "The low deepens as it comes, from about nine hundred and sixty-five to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.",
+     "new": "The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.",
+     "added_s": -0.225
     }
    ]
   }

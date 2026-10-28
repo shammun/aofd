@@ -670,12 +670,39 @@ def main() -> int:
     mslh = box.msl.values.astype(float)
     blat, blon = box.lat.values.astype(float), box.lon.values.astype(float)
     truth("W03", "s00/s55 A1 longitudes wrapped across Greenwich and ascending (−30 … 10)", bool(np.all(np.diff(blon) > 0) and blon[0] == -30 and blon[-1] == 10))
-    cen = call("fluidpy.diag.cyclone.storm_centre", "s55", "ciaran_hourly.json", "hourly MSLP minimum 12 UTC 1 Nov → 12 UTC 2 Nov", heavy_call=True,
-               msl=mslh, lat=blat, lon=blon, box=(40, 60, -30, 10))
-    clat, clon, cmin = np.asarray(cen.lat, float), np.asarray(cen.lon, float), np.asarray(cen.msl_min, float) / 100
+    # fix loop 1 (review 1, M3): the box-wide minimum is NOT Ciarán before 15 UTC 1 Nov (a deeper-looking old low near
+    # 56N 25W wins the box), so the L sat on the wrong low. Ciarán is tracked by continuity instead: seeded at the deepest
+    # hour of the box (03 UTC 2 Nov, unambiguously Ciarán), then storm_centre in a ±2.5° lat × ±4° lon box round the
+    # previous hour's centre, backwards to 12 UTC 1 Nov and forwards to 12 UTC 2 Nov (nearest-neighbour tracking).
+    sc_trk = __import__("fluidpy.diag.cyclone", fromlist=["storm_centre"]).storm_centre
+    glob = sc_trk(mslh, blat, blon, box=(40, 60, -30, 10))               # the old rule, kept for the CHECK rows
+    glat, glon, gmin = np.asarray(glob.lat, float), np.asarray(glob.lon, float), np.asarray(glob.msl_min, float) / 100
+    kseed = int(np.argmin(gmin))
+    clat, clon, cmin = np.full(len(hrs), np.nan), np.full(len(hrs), np.nan), np.full(len(hrs), np.nan)
+    clat[kseed], clon[kseed], cmin[kseed] = glat[kseed], glon[kseed], gmin[kseed]
+    for ks, stp in ((range(kseed - 1, -1, -1), +1), (range(kseed + 1, len(hrs)), -1)):
+        for kk in ks:
+            pla, plo = clat[kk + stp], clon[kk + stp]
+            c_ = sc_trk(mslh[kk], blat, blon, box=(pla - 2.5, pla + 2.5, plo - 4.0, plo + 4.0))
+            clat[kk], clon[kk], cmin[kk] = float(c_.lat), float(c_.lon), float(c_.msl_min) / 100
+    heavy.append({"fn": "fluidpy.diag.cyclone.storm_centre", "scene": "s55-s58", "data": "data/ciaran_hourly.json",
+                  "eq": "Ciarán tracked by continuity: seed = box minimum at its deepest hour, then a ±2.5° × ±4° box round the previous hour",
+                  "params": {"msl": f"ERA5 A1 hourly MSLP 12 UTC 1 Nov → 12 UTC 2 Nov, {_prm(mslh)}", "seed_utc": hrs[kseed],
+                             "search_box_deg": [2.5, 4.0]},
+                  "output_sha256": parity_hash(np.stack([clat, clon, cmin]))})
     k3 = hrs.index("2023-11-02T03")
-    row("W49", "s55 low 965.3 hPa at 12 UTC 1 Nov → lowest 953.7 hPa at 03 UTC 2 Nov ('965 to 954')", [cmin[0], cmin.min()], [965.3, 953.7], 0.6)
+    steps_km = gc_km(clat[:-1], clon[:-1], clat[1:], clon[1:])
+    rng("M3", "s55 tracker: Ciarán moves ≤ 150 km per hour everywhere (continuity, no jumps)", steps_km, 0, 150)
+    truth("M3", "s55 tracker seed: the deepest hour of the box is 03 UTC 2 Nov", hrs[kseed] == "2023-11-02T03", hrs[kseed])
+    k15 = hrs.index("2023-11-01T15")
+    rng("M3", "s55 the old box-minimum rule picked another low at 12-14 UTC 1 Nov (≥ 800 km from Ciarán)",
+        gc_km(glat[:k15], glon[:k15], clat[:k15], clon[:k15]), 800, 3000)
+    row("M3", "s55 from 15 UTC 1 Nov the tracked centre is the box minimum (same low)", np.max(gc_km(glat[k15:], glon[k15:], clat[k15:], clon[k15:])), 0, 1)
+    row("W49", "s55 Ciarán 970.7 hPa at 12 UTC 1 Nov → lowest 953.7 hPa at 03 UTC 2 Nov ('nine hundred and seventy to nine hundred and fifty-four')",
+        [cmin[0], cmin.min()], [970.7, 953.7], 0.6)
+    row("W49", "s55 spoken 'about nine hundred and seventy' = round(12 UTC centre, -1)", round(cmin[0], -1), 970, 0)
     truth("W49", "s55 the lowest hourly centre is at 03 UTC 2 Nov", int(np.argmin(cmin)) == k3, hrs[int(np.argmin(cmin))])
+    truth("W49", "s55 'the low deepens as it comes': 12 UTC 1 Nov → 03 UTC 2 Nov falls every 3 h", bool(np.all(np.diff(cmin[:k3 + 1:3]) < 0)), r6(cmin[:k3 + 1:3], 1))
     row("W49", "s55 at 12 UTC 2 Nov: 955.9 hPa", cmin[-1], 955.9, 0.6)
     # the track crosses Brest's longitude: latitude there, and the hour
     kx = int(np.where((clon[:-1] < BREST_GP[1]) & (clon[1:] >= BREST_GP[1]))[0][0])
@@ -846,22 +873,86 @@ def main() -> int:
                         "s10_s90_km": [r6(a10, 0), r6(a90, 0)], "wind_warm_side_uv": r6(jt[:2], 2), "wind_cold_side_uv": r6(jt[2:], 2)},
            "warm_tongue": {"box_sw_brittany_C": r6(tw - 273.15, 2), "box_west_of_low_C": r6(tc - 273.15, 2), "difference_K": r6(tw - tc, 2)}}
     # hourly front lines for the s55 loop (same method and the same picking rule, hourly storm centre from A1)
-    hourly = []
-    sc_ = __import__("fluidpy.diag.cyclone", fromlist=["storm_centre"]).storm_centre
+    # fix loop 1 (review 1, M4): the s49 rule (longest cold line ≥ 1000 km within 900 km of the low) picks, hour by hour, a
+    # separate long baroclinic band 450-570 km south of Brest at 00-03 UTC 2 Nov, while the Brest series shows the cold
+    # front passing 00-03 UTC; the lines also jumped between hours because the low itself was the wrong one before
+    # 15 UTC. The hourly s55-s58 lines are now the frontal zone ATTACHED to Ciarán: the same library lines
+    # (front_lines, locate='centre'), only those of length ≥ 300 km that come within 350 km of the tracked centre,
+    # clipped to 800 km from it (the longest contiguous piece), and, from the second hour on, the candidate nearest to
+    # the previous hour's line (hour-to-hour continuity). An hour with no attached line of a kind shows none.
     FL = __import__("fluidpy.diag.fronts", fromlist=["front_lines"]).front_lines
+    ATT_KM, CLIP_KM, MINLEN = 350.0, 800.0, 300.0
+
+    def clip_near(f, la0, lo0):
+        la_, lo_ = np.asarray(f.lat, float), np.asarray(f.lon, float)
+        inside = gc_km(la0, lo0, la_, lo_) <= CLIP_KM
+        best, cur = (0, 0), None
+        for i_, v_ in enumerate(np.append(inside, False)):
+            if v_ and cur is None:
+                cur = i_
+            if not v_ and cur is not None:
+                if i_ - cur > best[1] - best[0]:
+                    best = (cur, i_)
+                cur = None
+        return la_[best[0]:best[1]], lo_[best[0]:best[1]]
+
+    def mean_gap_km(a_la, a_lo, b_la, b_lo):
+        """mean distance from the points of line a to the nearest point of line b [km]"""
+        if len(a_la) == 0 or len(b_la) == 0:
+            return np.inf
+        d = gc_km(np.asarray(a_la)[:, None], np.asarray(a_lo)[:, None], np.asarray(b_la)[None, :], np.asarray(b_lo)[None, :])
+        return float(np.mean(d.min(axis=1)))
+
+    hourly, prev = [], {"warm": None, "cold": None}
     for t_ in f8.time.values:
         ts = str(t_)[:13]
+        kk = hrs.index(ts)
         Th, Uh, Vh = (f8[v].sel(time=t_).values.astype(float) for v in ("t", "u", "v"))
-        ch_ = sc_(a1.msl.sel(time=t_).values.astype(float), a1.lat.values.astype(float), a1.lon.values.astype(float), box=(40, 60, -30, 10))
-        wf_, cf_ = pick(FL(Th, Uh, Vh, flat, flon, locate="centre"), ch_)
-        hourly.append({"time_utc": ts, "warm": None if wf_ is None else [r6(wf_.lat, 2), r6(wf_.lon, 2)],
-                       "cold": None if cf_ is None else [r6(cf_.lat, 2), r6(cf_.lon, 2)]})
-    heavy.append({"fn": "fluidpy.diag.fronts.front_lines", "scene": "s55", "data": "data/fronts.json", "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre', same picking rule",
-                  "params": {"T": "ERA5 850 hPa t (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc)", "locate": "centre"},
+        Lh = FL(Th, Uh, Vh, flat, flon, locate="centre")
+        rec = {"time_utc": ts, "low": [r6(clat[kk], 3), r6(clon[kk], 3)]}
+        for kind in ("warm", "cold"):
+            cands = []
+            for f_ in Lh:
+                if f_.kind != kind or f_.length_km < MINLEN or np.min(gc_km(clat[kk], clon[kk], f_.lat, f_.lon)) > ATT_KM:
+                    continue
+                la_, lo_ = clip_near(f_, clat[kk], clon[kk])
+                if len(la_) >= 3:
+                    cands.append((la_, lo_, f_.length_km))
+            if not cands:
+                rec[kind] = None
+                prev[kind] = None
+                continue
+            if prev[kind] is None:
+                ch = max(cands, key=lambda c_: c_[2])
+            else:
+                ch = min(cands, key=lambda c_: mean_gap_km(c_[0], c_[1], *prev[kind]))
+            rec[kind] = [r6(ch[0], 2), r6(ch[1], 2)]
+            prev[kind] = (ch[0], ch[1])
+        hourly.append(rec)
+    heavy.append({"fn": "fluidpy.diag.fronts.front_lines", "scene": "s55-s58", "data": "data/fronts.json",
+                  "eq": "hourly 12 UTC 1 Nov → 12 UTC 2 Nov, locate='centre'; lines attached to the tracked Ciarán centre (≤ 350 km), "
+                        "≥ 300 km long, clipped to 800 km from it, nearest to the previous hour's line",
+                  "params": {"T": "ERA5 850 hPa t (data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc)", "locate": "centre",
+                             "attach_km": ATT_KM, "clip_km": CLIP_KM, "min_length_km": MINLEN},
                   "output_sha256": parity_hash(json.dumps(hourly, sort_keys=True))})
     found = sum(h["warm"] is not None for h in hourly), sum(h["cold"] is not None for h in hourly)
-    truth("s55", "s55 hourly fronts: the picking rule finds the warm and the cold front in most hours (≥ 15 of 25)", min(found) >= 15, list(found))
+    truth("M4", "s55 hourly fronts attached to Ciarán: a warm and a cold line in most hours (≥ 15 of 25)", min(found) >= 15, list(found))
+    hidx = {h["time_utc"]: i_ for i_, h in enumerate(hourly)}
+
+    def brest_km(h, kind):
+        return np.inf if h[kind] is None else float(np.min(gc_km(BREST[0], BREST[1], np.asarray(h[kind][0]), np.asarray(h[kind][1]))))
+    dw = [brest_km(hourly[hidx[t]], "warm") for t in ("2023-11-01T18", "2023-11-01T19", "2023-11-01T20")]
+    dc = [brest_km(hourly[hidx[t]], "cold") for t in ("2023-11-02T00", "2023-11-02T01", "2023-11-02T02", "2023-11-02T03")]
+    rng("M4", "s57 the map's warm front passes Brest (≤ 100 km) during 18-20 UTC, as the Brest graph's gold band says", min(dw), 0, 100)
+    rng("M4", "s58 the map's cold front passes Brest (≤ 100 km) during 00-03 UTC 2 Nov, as the Brest graph's gold band says", min(dc), 0, 100)
+    dc_early = [brest_km(h, "cold") for h in hourly if h["time_utc"] <= "2023-11-01T20"]
+    rng("M4", "s55-s57 the cold front has not reached Brest before 21 UTC 1 Nov (> 150 km away)", min(dc_early), 150, 1e9)
+    jumps = [mean_gap_km(*hourly[i_][kd], *hourly[i_ - 1][kd]) for kd in ("warm", "cold") for i_ in range(1, len(hourly))
+             if hourly[i_][kd] is not None and hourly[i_ - 1][kd] is not None]
+    rng("M4", "s55-s58 hour-to-hour continuity: median mean gap between consecutive lines ≤ 100 km", float(np.median(jumps)), 0, 100)
     fr8["hourly"] = hourly
+    fr8["hourly_method"] = ("front_lines(T850, u, v, locate='centre') each hour; shown: lines ≥ 300 km long that come within 350 km of the tracked "
+                            "Ciarán centre, clipped to 800 km from it, the candidate nearest to the previous hour's line (fix loop 1, M4)")
     files["fronts.json"] = fr8
     # hourly 10-m wind arrows (1.5°) on the s54-s56 panel
     wl, wo = np.arange(36.0, 60.1, 1.5), np.arange(-30.0, 10.1, 1.5)
@@ -929,6 +1020,16 @@ def main() -> int:
     vn = float(np.mean(v_ann[(wlat > 8) & (wlat < 22)]))
     vs = float(np.mean(v_ann[(wlat < -8) & (wlat > -22)]))
     truth("s53", "s53 north of the equator the trades come from the north-east (v < 0), south of it from the south-east (v > 0)", vn < 0 < vs, r6([vn, vs], 2))
+    # fix loop 1 (review 1, S7): the ITCZ is drawn on the sphere along the annual-mean MSLP trough, not on the equator:
+    # per longitude, the latitude of the minimum of the 1991-2020 mean MSLP within 10S-15N (grid latitudes), then a
+    # 15° circular running mean in longitude (the trough is broad and flat; this removes grid-point jitter)
+    band = (wlat >= -10) & (wlat <= 15)
+    tlat_raw = wlat[band][np.argmin(mp180[band], axis=0)]
+    kern = np.ones(9) / 9.0                                   # 9 × 1.875° ≈ 17° of longitude
+    tlat_s = np.convolve(np.concatenate([tlat_raw[-4:], tlat_raw, tlat_raw[:4]]), kern, mode="valid")
+    atl = (lon180 >= -40) & (lon180 <= 30)
+    rng("S7", "s52 ITCZ trough over the Atlantic and Africa (40W-30E): mean latitude of the annual-mean MSLP minimum 3-10N", float(np.mean(tlat_s[atl])), 3, 10)
+    rng("S7", "s52 ITCZ trough: every smoothed latitude within 10S-15N", tlat_s, -10, 15)
     # streaklines on the annual-mean wind (steady), 5° seeds 60S-60N
     sla, slo = np.meshgrid(np.arange(-60.0, 60.1, 5.0), np.arange(-177.5, 180.0, 5.0), indexing="ij")
     trc = call("fluidpy.diag.trajectories.advect_on_sphere", "s53", "climatology.json", "streaklines on the 1991-2020 mean 10-m wind (2 days, RK4)", heavy_call=True,
@@ -945,6 +1046,8 @@ def main() -> int:
     files["climatology.json"] = {**ch, "zonal_mslp_hPa": r6(zm, 2), "zonal_u_ms": r6(zu, 2), "highs": highs, "belts": {"nh_max_lat": r6(latn, 2), "sh_max_lat": r6(lats, 2),
                                  "nh_max_hPa": r6(nhmax, 2), "sh_max_hPa": r6(shmax, 2), "eq_min_hPa": r6(eqmin, 2), "eq_min_lat": r6(float(wlat[np.abs(wlat) <= 15][np.argmin(zm[np.abs(wlat) <= 15])]), 2)},
                                  "trades_u15": r6(tr15, 2), "westerlies_u45": r6(we45, 2),
+                                 "itcz_trough": {"lon": r6(lon180, 3), "lat": r6(tlat_s, 2),
+                                                 "method": "latitude of the min of the 1991-2020 mean MSLP within 10S-15N per longitude, 9-point (≈17°) circular running mean"},
                                  "streaklines": {"dt_s": 3600, "nsteps": 48, "note": "2 days of motion on the steady annual-mean wind, points every 4 h",
                                                  "tracks": [r6(t_[::4], 2) for t_ in trc if np.isfinite(t_).all()] if trc.ndim == 3 else []}}
     bins["climatology.bin"] = cb

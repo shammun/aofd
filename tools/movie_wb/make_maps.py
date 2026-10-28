@@ -160,6 +160,13 @@ def t850_maps(out: Path) -> dict:
                     path_effects=cs.line_halo(st, st.line_px["front"]))
         return {}
 
+    def line_one(xy):
+        def draw(fig, ax):
+            ax.plot(xy[:, 0], xy[:, 1], color=gold, lw=st.px(st.line_px["front"]), transform=pc, zorder=8,
+                    path_effects=cs.line_halo(st, st.line_px["front"]))
+            return {}
+        return draw
+
     def symbols(fig, ax):
         used, boxes = cs.draw_fronts(ax, [("warm", wf), ("cold", cf)], st,
                                      temperature=(f8.lon.values, f8.lat.values, f8.t.values))
@@ -188,7 +195,7 @@ def t850_maps(out: Path) -> dict:
         return {"places": [p[:2] for p in rep_pl.placed], "dropped": rep_pl.dropped}
 
     rep["t850"] = {"bbox": bbox, "projection": choice.name, "params": choice.params,
-                   "layers": {"lines": overlay("lines", lines), "symbols": overlay("symbols", symbols), "wind": overlay("wind", wind),
+                   "layers": {"lines": overlay("lines", lines), "lines_warm": overlay("lines_warm", line_one(wf)), "lines_cold": overlay("lines_cold", line_one(cf)), "symbols": overlay("symbols", symbols), "wind": overlay("wind", wind),
                               "transect": overlay("transect", transect), "masses": overlay("masses", masses), "places": overlay("places", places)},
                    "data": "ERA5 850 hPa t, u, v 2023-11-01T18 (C3S); fronts fluidpy.diag.fronts.front_lines(locate='centre') (data/fronts.json); Natural Earth 50m",
                    "colour": "cmocean thermal −6…16 °C (colour bar drawn by the composition)",

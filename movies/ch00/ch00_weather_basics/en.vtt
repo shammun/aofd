@@ -1062,1183 +1062,1193 @@ is about forty-eight percent.
 Notice that it depends on the temperature
 as well as on the water.
 
-00:19:01.425 --> 00:19:05.376
-Cool the same air, and its
-relative humidity rises,
+00:19:01.425 --> 00:19:04.065
+Cool the same air to eighteen degrees,
 
-00:19:05.376 --> 00:19:07.700
+00:19:04.065 --> 00:19:08.441
+and its relative humidity rises
+to about seventy-three percent,
+
+00:19:08.441 --> 00:19:10.525
 even though no water is added.
 
-00:19:08.500 --> 00:19:12.500
+00:19:11.325 --> 00:19:15.325
 So how far must we cool this
 air before it's saturated?
 
-00:19:12.850 --> 00:19:15.030
+00:19:15.675 --> 00:19:17.855
 We need the temperature at which
 
-00:19:15.030 --> 00:19:19.525
+00:19:17.855 --> 00:19:22.350
 the saturation vapour pressure has
 fallen to fifteen hectopascals.
 
-00:19:19.875 --> 00:19:22.250
+00:19:22.700 --> 00:19:25.075
 That's about thirteen degrees.
 
-00:19:22.600 --> 00:19:25.826
+00:19:25.425 --> 00:19:28.651
 This is the dew point:
 the temperature to which
 
-00:19:25.826 --> 00:19:29.875
+00:19:28.651 --> 00:19:32.700
 air must be cooled, keeping
 its water, to become saturated.
 
-00:19:30.225 --> 00:19:31.412
+00:19:33.050 --> 00:19:34.237
 On a clear night,
 
-00:19:31.412 --> 00:19:36.300
+00:19:34.237 --> 00:19:39.125
 grass cools below the dew point of the air
 touching it, and dew forms.
 
-00:19:36.650 --> 00:19:41.725
+00:19:39.475 --> 00:19:44.550
 When a whole layer of air near the ground
 cools to its dew point, we get fog.
 
-00:19:42.075 --> 00:19:46.300
+00:19:44.900 --> 00:19:49.125
 And when rising air cools
 to its dew point, we get a cloud.
 
-00:19:47.100 --> 00:19:51.025
+00:19:49.925 --> 00:19:53.850
 Let's follow that air parcel
 as it rises from the ground.
 
-00:19:51.375 --> 00:19:55.250
+00:19:54.200 --> 00:19:58.075
 It cools by almost ten
 degrees for every kilometre.
 
-00:19:55.600 --> 00:20:00.669
+00:19:58.425 --> 00:20:03.494
 Its dew point falls too, but slowly, by
 about two degrees per kilometre,
 
-00:20:00.669 --> 00:20:05.175
+00:20:03.494 --> 00:20:08.000
 because as the parcel expands,
 its vapour is spread more thinly.
 
-00:20:05.525 --> 00:20:08.739
+00:20:08.350 --> 00:20:11.564
 So the gap between
 the temperature and the dew point,
 
-00:20:08.739 --> 00:20:13.650
+00:20:11.564 --> 00:20:16.475
 twelve degrees at the ground, shrinks by
 about eight degrees for every kilometre.
 
-00:20:14.000 --> 00:20:17.625
+00:20:16.825 --> 00:20:20.450
 It closes after about one
 and a half kilometres.
 
-00:20:17.975 --> 00:20:21.650
+00:20:20.800 --> 00:20:24.475
 There the vapour condenses,
 and the cloud begins.
 
-00:20:22.000 --> 00:20:25.055
+00:20:24.825 --> 00:20:27.880
 That's why fair-weather
 clouds have flat bases:
 
-00:20:25.055 --> 00:20:30.450
+00:20:27.880 --> 00:20:33.275
 parcels rising from the same ground reach
 their dew point at about the same height.
 
-00:20:31.250 --> 00:20:33.250
+00:20:34.075 --> 00:20:36.075
 Now let's look at wind.
 
-00:20:33.600 --> 00:20:36.828
+00:20:36.425 --> 00:20:39.653
 Wind is air moving across
 the Earth's surface,
 
-00:20:36.828 --> 00:20:41.600
+00:20:39.653 --> 00:20:44.425
 and it has both a speed and a direction,
 so it's a vector: an arrow.
 
-00:20:41.950 --> 00:20:45.900
+00:20:44.775 --> 00:20:48.725
 We can split the arrow into
 two parts, called components.
 
-00:20:46.250 --> 00:20:50.925
+00:20:49.075 --> 00:20:53.750
 The eastward part is written u, and
 the northward part is written v.
 
-00:20:51.275 --> 00:20:54.289
+00:20:54.100 --> 00:20:57.114
 Take a wind blowing
 towards the north-east,
 
-00:20:54.289 --> 00:20:58.425
+00:20:57.114 --> 00:21:01.250
 with u equal to eight and v equal
 to six metres per second.
 
-00:20:58.775 --> 00:21:04.106
+00:21:01.600 --> 00:21:06.931
 By Pythagoras, its speed is the square
 root of eight squared plus six squared,
 
-00:21:04.106 --> 00:21:06.225
+00:21:06.931 --> 00:21:09.050
 which is ten metres per second.
 
-00:21:07.025 --> 00:21:11.975
+00:21:09.850 --> 00:21:14.800
 Meteorologists name a wind by where
 it comes from, not where it's going.
 
-00:21:12.325 --> 00:21:16.375
+00:21:15.150 --> 00:21:19.200
 A westerly wind blows from the west,
 towards the east.
 
-00:21:16.725 --> 00:21:19.049
+00:21:19.550 --> 00:21:21.874
 The direction is given in degrees,
 
-00:21:19.049 --> 00:21:22.398
+00:21:21.874 --> 00:21:25.223
 measured clockwise from north
 as seen from above:
 
-00:21:22.398 --> 00:21:25.748
+00:21:25.223 --> 00:21:28.573
 north is zero, east
 ninety, south one hundred and
 
-00:21:25.748 --> 00:21:28.550
+00:21:28.573 --> 00:21:31.375
 eighty, and west two hundred and seventy.
 
-00:21:28.900 --> 00:21:33.625
+00:21:31.725 --> 00:21:36.450
 Our wind blows towards the north-east,
 so it comes from the south-west.
 
-00:21:33.975 --> 00:21:36.453
+00:21:36.800 --> 00:21:39.278
 Its direction is about two hundred and
 
-00:21:36.453 --> 00:21:39.975
+00:21:39.278 --> 00:21:42.800
 thirty-three degrees,
 and we call it a south-westerly.
 
-00:21:40.325 --> 00:21:43.643
+00:21:43.150 --> 00:21:46.468
 Careful: ocean currents
 use the opposite habit,
 
-00:21:43.643 --> 00:21:49.150
+00:21:46.468 --> 00:21:51.975
 and are named by where they go, so an
 eastward current flows towards the east.
 
-00:21:49.950 --> 00:21:52.775
+00:21:52.775 --> 00:21:55.600
 Wind speed comes in several units.
 
-00:21:53.125 --> 00:21:56.675
+00:21:55.950 --> 00:21:59.500
 Metres per second is the scientific one.
 
-00:21:57.025 --> 00:22:01.198
+00:21:59.850 --> 00:22:04.023
 Multiply by three point six
 to get kilometres per hour,
 
-00:22:01.198 --> 00:22:05.675
+00:22:04.023 --> 00:22:08.500
 so ten metres per second
 is thirty-six kilometres per hour.
 
-00:22:06.025 --> 00:22:08.600
+00:22:08.850 --> 00:22:11.425
 Sailors and pilots use knots.
 
-00:22:08.950 --> 00:22:11.364
+00:22:11.775 --> 00:22:14.189
 A knot is one nautical mile per hour,
 
-00:22:11.364 --> 00:22:14.692
+00:22:14.189 --> 00:22:17.517
 and a nautical mile, one
 thousand eight hundred and
 
-00:22:14.692 --> 00:22:15.802
+00:22:17.517 --> 00:22:18.627
 fifty-two metres,
 
-00:22:15.802 --> 00:22:20.500
+00:22:18.627 --> 00:22:23.325
 is about one sixtieth of a degree
 of latitude along the Earth's surface.
 
-00:22:20.850 --> 00:22:24.589
+00:22:23.675 --> 00:22:27.414
 So one knot is about point five one
 metres per second,
 
-00:22:24.589 --> 00:22:28.675
+00:22:27.414 --> 00:22:31.500
 and our ten metres per second
 wind is about nineteen knots.
 
-00:22:29.475 --> 00:22:31.550
+00:22:32.300 --> 00:22:34.375
 Why does air move at all?
 
-00:22:31.900 --> 00:22:34.375
+00:22:34.725 --> 00:22:37.200
 The simplest reason is pressure.
 
-00:22:34.725 --> 00:22:38.283
+00:22:37.550 --> 00:22:41.108
 Where the pressure is higher
 on one side than on the other,
 
-00:22:38.283 --> 00:22:41.782
+00:22:41.108 --> 00:22:44.607
 the air is pushed from high
 pressure towards low pressure,
 
-00:22:41.782 --> 00:22:44.375
+00:22:44.607 --> 00:22:47.200
 just as air rushes out
 of a punctured tyre.
 
-00:22:44.725 --> 00:22:48.936
+00:22:47.550 --> 00:22:51.761
 But on our spinning Earth, moving
 air is gradually turned aside,
 
-00:22:48.936 --> 00:22:53.739
+00:22:51.761 --> 00:22:56.564
 so over large distances the wind ends
 up blowing around areas of high and
 
-00:22:53.739 --> 00:22:56.700
+00:22:56.564 --> 00:22:59.525
 low pressure, rather
 than straight into them.
 
-00:22:57.050 --> 00:23:02.167
+00:22:59.875 --> 00:23:04.992
 We'll see how that turning works in later
 videos on the Coriolis effect and
 
-00:23:02.167 --> 00:23:03.600
+00:23:04.992 --> 00:23:06.425
 the geostrophic wind.
 
-00:23:04.400 --> 00:23:08.375
+00:23:07.225 --> 00:23:11.200
 Before we look at real
 maps, let's pin down two words.
 
-00:23:08.725 --> 00:23:14.215
+00:23:11.550 --> 00:23:17.040
 Weather is the state of the atmosphere
 at one place and time: its temperature,
 
-00:23:14.215 --> 00:23:19.775
+00:23:17.040 --> 00:23:22.600
 pressure, humidity, wind, clouds and
 rain, right now or over the next few days.
 
-00:23:20.125 --> 00:23:24.965
+00:23:22.950 --> 00:23:27.790
 Climate is the statistics of the
 weather over many years, usually thirty:
 
-00:23:24.965 --> 00:23:29.075
+00:23:27.790 --> 00:23:31.900
 what's normal, and how far
 the weather usually strays from it.
 
-00:23:29.425 --> 00:23:32.070
+00:23:32.250 --> 00:23:34.895
 Here is the daily temperature at Brest,
 
-00:23:32.070 --> 00:23:36.275
+00:23:34.895 --> 00:23:39.100
 in north-western France, for every
 day of twenty twenty-three.
 
-00:23:36.625 --> 00:23:40.110
+00:23:39.450 --> 00:23:42.935
 Behind it is Brest's climate
 for each day of the year,
 
-00:23:40.110 --> 00:23:43.596
+00:23:42.935 --> 00:23:46.421
 the average over nineteen
 ninety-one to twenty twenty,
 
-00:23:43.596 --> 00:23:46.500
+00:23:46.421 --> 00:23:49.325
 with a band that holds
 eight days out of ten.
 
-00:23:46.850 --> 00:23:50.000
+00:23:49.675 --> 00:23:52.825
 The weather line jumps
 around from day to day,
 
-00:23:50.000 --> 00:23:53.150
+00:23:52.825 --> 00:23:55.975
 but most of the time it
 stays inside the band.
 
-00:23:53.500 --> 00:23:57.300
+00:23:56.325 --> 00:24:00.125
 Climate is what you expect;
 weather is what you get.
 
-00:23:58.100 --> 00:24:00.575
+00:24:00.925 --> 00:24:03.400
 How do we know the weather everywhere?
 
-00:24:00.925 --> 00:24:04.396
+00:24:03.750 --> 00:24:07.221
 From observations:
 thousands of weather stations,
 
-00:24:04.396 --> 00:24:09.000
+00:24:07.221 --> 00:24:11.825
 weather balloons, ships, buoys
 and aircraft, and many satellites.
 
-00:24:09.350 --> 00:24:11.150
+00:24:12.175 --> 00:24:13.975
 But they're uneven.
 
-00:24:11.500 --> 00:24:16.100
+00:24:14.325 --> 00:24:18.925
 Here are the places that launched
 weather balloons in twenty twenty-three.
 
-00:24:16.450 --> 00:24:20.490
+00:24:19.275 --> 00:24:23.315
 They're crowded over Europe, North
 America and East Asia,
 
-00:24:20.490 --> 00:24:24.600
+00:24:23.315 --> 00:24:27.425
 but sparse over the oceans, much
 of Africa, and the poles.
 
-00:24:24.950 --> 00:24:29.275
+00:24:27.775 --> 00:24:32.100
 And each instrument measures
 different things, at different times.
 
-00:24:30.075 --> 00:24:32.725
+00:24:32.900 --> 00:24:35.550
 A reanalysis fills in the gaps.
 
-00:24:33.075 --> 00:24:35.831
+00:24:35.900 --> 00:24:38.656
 It starts from a weather forecast model,
 
-00:24:35.831 --> 00:24:40.378
+00:24:38.656 --> 00:24:43.203
 a computer program that steps
 the laws of physics forward in time,
 
-00:24:40.378 --> 00:24:44.650
+00:24:43.203 --> 00:24:47.475
 including the hydrostatic balance
 and the gas law we just met.
 
-00:24:45.000 --> 00:24:46.110
+00:24:47.825 --> 00:24:48.935
 Every few hours,
 
-00:24:46.110 --> 00:24:50.758
+00:24:48.935 --> 00:24:53.583
 it nudges the model towards all
 the observations made at that time,
 
-00:24:50.758 --> 00:24:53.325
+00:24:53.583 --> 00:24:56.150
 trusting the more reliable ones more.
 
-00:24:53.675 --> 00:24:57.125
+00:24:56.500 --> 00:24:59.950
 The result is a complete
 picture of the atmosphere,
 
-00:24:57.125 --> 00:25:00.575
+00:24:59.950 --> 00:25:03.400
 at every place and height, every
 hour, for decades.
 
-00:25:00.925 --> 00:25:04.204
+00:25:03.750 --> 00:25:07.029
 The one we use in this
 video is called ERA5,
 
-00:25:04.204 --> 00:25:08.900
+00:25:07.029 --> 00:25:11.725
 made by the European Centre
 for Medium-Range Weather Forecasts.
 
-00:25:09.250 --> 00:25:11.890
+00:25:12.075 --> 00:25:14.715
 It runs from nineteen forty to today,
 
-00:25:11.890 --> 00:25:15.600
+00:25:14.715 --> 00:25:18.425
 on a grid with points about
 thirty kilometres apart.
 
-00:25:15.950 --> 00:25:18.572
+00:25:18.775 --> 00:25:21.397
 It's like a jigsaw with missing pieces,
 
-00:25:18.572 --> 00:25:22.875
+00:25:21.397 --> 00:25:25.700
 filled in using the pieces around
 them and the rules of physics.
 
-00:25:23.225 --> 00:25:24.972
+00:25:26.050 --> 00:25:27.797
 Unlike a photograph, though,
 
-00:25:24.972 --> 00:25:29.028
+00:25:27.797 --> 00:25:31.853
 where observations are sparse
 the result leans more on the model,
 
-00:25:29.028 --> 00:25:30.775
+00:25:31.853 --> 00:25:33.600
 so it's least certain there.
 
-00:25:31.575 --> 00:25:33.950
+00:25:34.400 --> 00:25:36.775
 Now let's make a pressure map.
 
-00:25:34.300 --> 00:25:38.310
+00:25:37.125 --> 00:25:41.135
 Here is the real air pressure
 at the ground all over the world,
 
-00:25:38.310 --> 00:25:43.275
+00:25:41.135 --> 00:25:46.100
 at midday on the second of November,
 twenty twenty-three, from the reanalysis.
 
-00:25:43.625 --> 00:25:46.050
+00:25:46.450 --> 00:25:48.875
 What stands out are the mountains.
 
-00:25:46.400 --> 00:25:48.367
+00:25:49.225 --> 00:25:51.192
 Over Tibet and the Himalayas,
 
-00:25:48.367 --> 00:25:52.776
+00:25:51.192 --> 00:25:55.601
 the pressure at the ground is less
 than six hundred hectopascals,
 
-00:25:52.776 --> 00:25:55.625
+00:25:55.601 --> 00:25:58.450
 and the Andes and the Rockies show up too.
 
-00:25:55.975 --> 00:26:01.050
+00:25:58.800 --> 00:26:03.875
 In the close-up, the mountains are drawn
 thirty times taller than they really are.
 
-00:26:01.400 --> 00:26:06.200
+00:26:04.225 --> 00:26:09.025
 That's just hydrostatic balance:
 high ground has less air above it.
 
-00:26:06.550 --> 00:26:10.550
+00:26:09.375 --> 00:26:13.375
 The weather is in there, but
 these mountain patterns swamp it.
 
-00:26:11.350 --> 00:26:15.300
+00:26:14.175 --> 00:26:18.125
 So how do we compare a mountain
 town with a seaside town?
 
-00:26:15.650 --> 00:26:20.050
+00:26:18.475 --> 00:26:22.875
 We imagine what the pressure would
 be if each place were at sea level.
 
-00:26:20.400 --> 00:26:24.138
+00:26:23.225 --> 00:26:26.963
 Suppose a weather station sits
 one thousand six hundred and
 
-00:26:24.138 --> 00:26:28.193
+00:26:26.963 --> 00:26:31.018
 nine metres up, about the height
 of Denver in the United States,
 
-00:26:28.193 --> 00:26:31.551
+00:26:31.018 --> 00:26:34.376
 and reads eight hundred
 and thirty-five hectopascals,
 
-00:26:31.551 --> 00:26:34.275
+00:26:34.376 --> 00:26:37.100
 with an air temperature
 of fifteen degrees.
 
-00:26:34.625 --> 00:26:37.873
+00:26:37.450 --> 00:26:40.698
 We add the weight
 of an imaginary column of air,
 
-00:26:37.873 --> 00:26:40.850
+00:26:40.698 --> 00:26:43.675
 reaching from the station
 down to sea level.
 
-00:26:41.200 --> 00:26:45.679
+00:26:44.025 --> 00:26:48.504
 With our exponential rule run
 downwards, that's eight hundred and
 
-00:26:45.679 --> 00:26:48.780
+00:26:48.504 --> 00:26:51.605
 thirty-five times e to
 the power of one point
 
-00:26:48.780 --> 00:26:51.950
+00:26:51.605 --> 00:26:54.775
 six oh nine divided by
 eight point four three.
 
-00:26:52.300 --> 00:26:55.893
+00:26:55.125 --> 00:26:58.718
 That's about one thousand
 and ten hectopascals:
 
-00:26:55.893 --> 00:26:58.875
+00:26:58.718 --> 00:27:01.700
 a perfectly ordinary sea-level reading.
 
-00:26:59.225 --> 00:27:01.925
+00:27:02.050 --> 00:27:04.750
 This is called the sea-level pressure.
 
-00:27:02.275 --> 00:27:07.725
+00:27:05.100 --> 00:27:10.550
 Real weather services use a slightly
 more careful version of the same idea.
 
-00:27:08.525 --> 00:27:12.575
+00:27:11.350 --> 00:27:15.400
 Here is the same moment
 again, now as sea-level pressure.
 
-00:27:12.925 --> 00:27:16.250
+00:27:15.750 --> 00:27:19.075
 The mountains are
 gone, and the weather appears.
 
-00:27:16.600 --> 00:27:20.743
+00:27:19.425 --> 00:27:23.568
 Let's join the places that have
 the same sea-level pressure,
 
-00:27:20.743 --> 00:27:22.400
+00:27:23.568 --> 00:27:25.225
 every four hectopascals.
 
-00:27:22.750 --> 00:27:27.400
+00:27:25.575 --> 00:27:30.225
 These lines are called isobars,
 from Greek words for equal weight.
 
-00:27:27.750 --> 00:27:29.842
+00:27:30.575 --> 00:27:32.668
 Where the isobars crowd together,
 
-00:27:29.842 --> 00:27:34.725
+00:27:32.668 --> 00:27:37.550
 the pressure changes quickly over a short
 distance, and the winds are strong.
 
-00:27:35.525 --> 00:27:40.421
+00:27:38.350 --> 00:27:43.246
 The map shows round patches where
 the pressure is higher than all around,
 
-00:27:40.421 --> 00:27:45.250
+00:27:43.246 --> 00:27:48.075
 called highs, and patches where
 it's lower than all around, called lows.
 
-00:27:45.600 --> 00:27:49.240
+00:27:48.425 --> 00:27:52.065
 A low is also called a depression,
 or a cyclone,
 
-00:27:49.240 --> 00:27:52.350
+00:27:52.065 --> 00:27:55.175
 and a high is also called an anticyclone.
 
-00:27:52.700 --> 00:27:58.113
+00:27:55.525 --> 00:28:00.938
 Over the east coast of England, at the
 edge of the North Sea, is a deep low,
 
-00:27:58.113 --> 00:28:02.600
+00:28:00.938 --> 00:28:05.425
 Storm Ciarán, at about nine
 hundred and fifty-six hectopascals.
 
-00:28:02.950 --> 00:28:06.331
+00:28:05.775 --> 00:28:09.156
 Far to the south-west,
 near the Azores islands,
 
-00:28:06.331 --> 00:28:09.425
+00:28:09.156 --> 00:28:12.250
 is a high at about one
 thousand and thirty.
 
-00:28:09.775 --> 00:28:11.863
+00:28:12.600 --> 00:28:14.688
 Here is a much more recent map,
 
-00:28:11.863 --> 00:28:16.038
+00:28:14.688 --> 00:28:18.863
 a weather-service analysis
 from the twenty-seventh of October,
 
-00:28:16.038 --> 00:28:17.250
+00:28:18.863 --> 00:28:20.075
 twenty twenty-six.
 
-00:28:17.600 --> 00:28:21.342
+00:28:20.425 --> 00:28:24.167
 Its deepest low is a typhoon
 over the western Pacific,
 
-00:28:21.342 --> 00:28:24.876
+00:28:24.167 --> 00:28:27.701
 at about nine hundred
 and thirty-five hectopascals,
 
-00:28:24.876 --> 00:28:29.172
+00:28:27.701 --> 00:28:31.997
 while a low over the North Atlantic,
 at about nine hundred and
 
-00:28:29.172 --> 00:28:31.875
+00:28:31.997 --> 00:28:34.700
 fifty-five, is about as deep as Ciarán.
 
-00:28:32.675 --> 00:28:37.050
+00:28:35.500 --> 00:28:39.875
 Lows and highs bring different
 weather, and now we can see why.
 
-00:28:37.400 --> 00:28:41.625
+00:28:40.225 --> 00:28:44.450
 Near the ground, air drifts
 in towards the centre of a low.
 
-00:28:41.975 --> 00:28:44.825
+00:28:44.800 --> 00:28:47.650
 It can't pile up there, so it rises.
 
-00:28:45.175 --> 00:28:51.450
+00:28:48.000 --> 00:28:54.275
 Rising air expands and cools, it reaches
 its dew point, and clouds and rain form.
 
-00:28:51.800 --> 00:28:55.525
+00:28:54.625 --> 00:28:58.350
 That's why lows bring
 cloudy, wet and windy weather.
 
-00:28:55.875 --> 00:29:00.475
+00:28:58.700 --> 00:29:03.300
 Around a high, air sinks from above
 and spreads out near the ground.
 
-00:29:00.825 --> 00:29:03.209
+00:29:03.650 --> 00:29:06.034
 Sinking air is squeezed and warms,
 
-00:29:03.209 --> 00:29:07.275
+00:29:06.034 --> 00:29:10.100
 so it moves away from its dew
 point, and clouds evaporate.
 
-00:29:07.625 --> 00:29:11.425
+00:29:10.450 --> 00:29:14.250
 That's why highs usually
 bring settled, dry weather.
 
-00:29:12.225 --> 00:29:17.150
-Now let's add the real winds near
-the ground, from the same reanalysis.
+00:29:15.050 --> 00:29:18.234
+Now let's add the real
+winds near the ground,
 
-00:29:17.500 --> 00:29:21.375
+00:29:18.234 --> 00:29:21.700
+measured ten metres
+up, from the same reanalysis.
+
+00:29:22.050 --> 00:29:25.925
 Near Ciarán, the air doesn't
 blow straight into the low.
 
-00:29:21.725 --> 00:29:25.600
+00:29:26.275 --> 00:29:30.150
 It swirls around it,
 anticlockwise as seen from above,
 
-00:29:25.600 --> 00:29:29.475
+00:29:30.150 --> 00:29:34.025
 crossing the isobars only
 slightly towards the centre.
 
-00:29:29.825 --> 00:29:34.725
+00:29:34.375 --> 00:29:39.275
 Around the high, it turns the other
 way, clockwise as seen from above.
 
-00:29:35.075 --> 00:29:38.275
+00:29:39.625 --> 00:29:42.825
 In the southern hemisphere,
 both are reversed.
 
-00:29:38.625 --> 00:29:44.151
+00:29:43.175 --> 00:29:48.701
 Why the wind circles instead of rushing
 in is the story of the Coriolis effect,
 
-00:29:44.151 --> 00:29:45.900
+00:29:48.701 --> 00:29:50.450
 and it has its own video.
 
-00:29:46.700 --> 00:29:50.300
+00:29:51.250 --> 00:29:54.850
 Now let's look at temperature
 and moisture together.
 
-00:29:50.650 --> 00:29:55.627
+00:29:55.200 --> 00:30:00.177
 Air that sits for days over one region
 takes on its character: cold and
 
-00:29:55.627 --> 00:30:00.675
+00:30:00.177 --> 00:30:05.225
 dry over snowy land in the far
 north, warm and moist over tropical seas.
 
-00:30:01.025 --> 00:30:06.248
+00:30:05.575 --> 00:30:10.798
 A huge body of air like this, often
 more than a thousand kilometres across,
 
-00:30:06.248 --> 00:30:10.775
+00:30:10.798 --> 00:30:15.325
 with fairly even temperature
 and humidity, is called an air mass.
 
-00:30:11.125 --> 00:30:15.728
+00:30:15.675 --> 00:30:20.278
 Air masses are named after where
 they come from: polar or tropical,
 
-00:30:15.728 --> 00:30:20.125
+00:30:20.278 --> 00:30:24.675
 and maritime, from over the sea, or
 continental, from over land.
 
-00:30:20.475 --> 00:30:23.911
+00:30:25.025 --> 00:30:28.461
 On the first of November,
 twenty twenty-three, warm,
 
-00:30:23.911 --> 00:30:27.677
+00:30:28.461 --> 00:30:32.227
 moist tropical air was flowing
 north-east towards France,
 
-00:30:27.677 --> 00:30:31.575
+00:30:32.227 --> 00:30:36.125
 ahead of Ciarán, while cooler
 polar air followed behind it.
 
-00:30:32.375 --> 00:30:36.225
+00:30:36.925 --> 00:30:40.775
 Where two air masses meet, they
 don't mix right away.
 
-00:30:36.575 --> 00:30:40.828
+00:30:41.125 --> 00:30:45.378
 The change from one to the other
 is squeezed into a narrow zone,
 
-00:30:40.828 --> 00:30:44.550
+00:30:45.378 --> 00:30:49.100
 often a hundred kilometres
 wide or less, called a front.
 
-00:30:44.900 --> 00:30:47.351
+00:30:49.450 --> 00:30:51.901
 Crossing a front, the temperature and
 
-00:30:47.351 --> 00:30:51.325
+00:30:51.901 --> 00:30:55.875
 the humidity change quickly,
 and the wind changes direction.
 
-00:30:51.675 --> 00:30:55.425
+00:30:56.225 --> 00:30:59.975
 A front is named after
 the air that's advancing.
 
-00:30:55.775 --> 00:30:59.450
+00:31:00.325 --> 00:31:04.000
 If cold air is pushing forward,
 it's a cold front.
 
-00:30:59.800 --> 00:31:03.350
+00:31:04.350 --> 00:31:07.900
 If warm air is advancing,
 it's a warm front.
 
-00:31:04.150 --> 00:31:07.000
+00:31:08.700 --> 00:31:11.550
 Let's look at a cold front from the side.
 
-00:31:07.350 --> 00:31:10.533
+00:31:11.900 --> 00:31:15.083
 Remember the gas law:
 at the same pressure,
 
-00:31:10.533 --> 00:31:12.975
+00:31:15.083 --> 00:31:17.525
 cold air is denser than warm air.
 
-00:31:13.325 --> 00:31:19.250
+00:31:17.875 --> 00:31:23.800
 So the advancing cold air stays low and
 pushes in under the warm air like a wedge.
 
-00:31:19.600 --> 00:31:21.776
+00:31:24.150 --> 00:31:26.326
 Its slope is steep for a front,
 
-00:31:21.776 --> 00:31:26.619
+00:31:26.326 --> 00:31:31.169
 about one kilometre up for every
 fifty to a hundred kilometres along,
 
-00:31:26.619 --> 00:31:29.075
+00:31:31.169 --> 00:31:33.625
 and the warm air is lifted quickly.
 
-00:31:29.425 --> 00:31:35.125
+00:31:33.975 --> 00:31:39.675
 It cools to its dew point, and tall clouds
 and heavy showers form in a narrow band.
 
-00:31:35.475 --> 00:31:40.789
+00:31:40.025 --> 00:31:45.339
 After the front passes, the air is colder
 and drier, the pressure starts to rise,
 
-00:31:40.789 --> 00:31:42.036
+00:31:45.339 --> 00:31:46.586
 and the wind turns,
 
-00:31:42.036 --> 00:31:47.350
+00:31:46.586 --> 00:31:51.900
 in the northern hemisphere usually from
 the south-west to the west or north-west.
 
-00:31:48.150 --> 00:31:52.540
+00:31:52.700 --> 00:31:57.090
 At a warm front, the warm air
 is advancing, but it's lighter,
 
-00:31:52.540 --> 00:31:55.850
+00:31:57.090 --> 00:32:00.400
 so it can't push the cold
 air away from below.
 
-00:31:56.200 --> 00:32:00.132
+00:32:00.750 --> 00:32:04.682
 Instead, it glides up over the cold
 air on a gentle slope,
 
-00:32:00.132 --> 00:32:04.675
+00:32:04.682 --> 00:32:09.225
 rising about one kilometre for every
 one or two hundred kilometres.
 
-00:32:05.025 --> 00:32:07.119
+00:32:09.575 --> 00:32:11.669
 As it slides upwards it cools,
 
-00:32:07.119 --> 00:32:11.587
+00:32:11.669 --> 00:32:16.137
 and a broad sheet of layered cloud
 forms far ahead of the front,
 
-00:32:11.587 --> 00:32:14.100
+00:32:16.137 --> 00:32:18.650
 bringing long spells of steady rain.
 
-00:32:14.450 --> 00:32:19.755
+00:32:19.000 --> 00:32:24.305
 When the warm front passes, the air turns
 milder and moister, and the wind turns,
 
-00:32:19.755 --> 00:32:25.125
+00:32:24.305 --> 00:32:29.675
 in the northern hemisphere usually from
 the south-east to the south or south-west.
 
-00:32:25.475 --> 00:32:29.698
+00:32:30.025 --> 00:32:34.248
 We've drawn these side views
 fifty times taller than they really are,
 
-00:32:29.698 --> 00:32:32.575
+00:32:34.248 --> 00:32:37.125
 so the slopes look much
 steeper than in nature.
 
-00:32:33.375 --> 00:32:38.925
+00:32:37.925 --> 00:32:43.475
 Here are real fronts, around Ciarán at six
 in the evening on the first of November.
 
-00:32:39.275 --> 00:32:43.382
+00:32:43.825 --> 00:32:47.932
 The colours show the temperature
 about one and a half kilometres up,
 
-00:32:43.382 --> 00:32:46.825
+00:32:47.932 --> 00:32:51.375
 where the ground's daily
 warming and cooling matter less.
 
-00:32:47.175 --> 00:32:51.550
+00:32:51.725 --> 00:32:56.100
 The warm tropical air reaches
 up towards Brittany in a tongue.
 
-00:32:51.900 --> 00:32:55.850
+00:32:56.450 --> 00:33:00.400
 Along its leading edge, to
 the east, is the warm front.
 
-00:32:56.200 --> 00:33:01.400
+00:33:00.750 --> 00:33:05.950
 Along its trailing edge, curving away
 to the south-west, is the cold front.
 
-00:33:01.750 --> 00:33:05.562
+00:33:06.300 --> 00:33:10.112
 The arrows show the wind turning
 as it crosses the fronts,
 
-00:33:05.562 --> 00:33:07.600
+00:33:10.112 --> 00:33:12.150
 most sharply at the warm front.
 
-00:33:08.400 --> 00:33:09.453
+00:33:12.950 --> 00:33:14.003
 On weather maps,
 
-00:33:09.453 --> 00:33:14.325
+00:33:14.003 --> 00:33:18.875
 fronts are drawn as lines with symbols
 on the side they're moving towards.
 
-00:33:14.675 --> 00:33:20.100
+00:33:19.225 --> 00:33:24.650
 A cold front has blue triangles,
 and a warm front has red half circles.
 
-00:33:20.450 --> 00:33:24.300
+00:33:25.000 --> 00:33:28.850
 You'll learn to read these maps
 in detail in the next video.
 
-00:33:25.100 --> 00:33:30.150
+00:33:29.650 --> 00:33:34.700
 Now let's zoom out to the whole planet,
 and ask why the weather moves at all.
 
-00:33:30.500 --> 00:33:32.500
+00:33:35.050 --> 00:33:37.050
 It starts with sunlight.
 
-00:33:32.850 --> 00:33:37.408
+00:33:37.400 --> 00:33:41.958
 Picture a beam of sunlight one
 metre wide, at noon at an equinox,
 
-00:33:37.408 --> 00:33:41.825
+00:33:41.958 --> 00:33:46.375
 in March or September,
 when the sun is overhead at the equator.
 
-00:33:42.175 --> 00:33:45.950
+00:33:46.725 --> 00:33:50.500
 At the equator, it lands
 on one metre of ground.
 
-00:33:46.300 --> 00:33:50.107
+00:33:50.850 --> 00:33:54.657
 At sixty degrees north, the ground
 is tilted to the beam,
 
-00:33:50.107 --> 00:33:53.045
+00:33:54.657 --> 00:33:57.595
 and the same beam
 is spread over two metres,
 
-00:33:53.045 --> 00:33:55.650
+00:33:57.595 --> 00:34:00.200
 so each square metre gets half as much.
 
-00:33:56.000 --> 00:34:00.397
+00:34:00.550 --> 00:34:04.947
 So the tropics are heated much more
 than the poles, and the atmosphere and
 
-00:34:00.397 --> 00:34:03.725
+00:34:04.947 --> 00:34:08.275
 the ocean carry heat
 from the tropics towards the poles.
 
-00:34:04.075 --> 00:34:08.525
+00:34:08.625 --> 00:34:13.075
 Storms like Ciarán are one
 of the ways the atmosphere does it.
 
-00:34:09.325 --> 00:34:13.800
+00:34:13.875 --> 00:34:18.350
 Averaged over many years,
 sea-level pressure falls into belts.
 
-00:34:14.150 --> 00:34:18.324
+00:34:18.700 --> 00:34:22.874
 Around thirty degrees north
 and south, air sinks from high up,
 
-00:34:18.324 --> 00:34:22.700
+00:34:22.874 --> 00:34:27.250
 and large highs sit over the oceans, like
 the Azores high we saw.
 
-00:34:23.050 --> 00:34:25.675
+00:34:27.600 --> 00:34:30.225
 These are the subtropical highs.
 
-00:34:26.025 --> 00:34:28.934
+00:34:30.575 --> 00:34:33.484
 Near the equator is a belt of low pressure
 
-00:34:28.934 --> 00:34:32.120
+00:34:33.484 --> 00:34:36.670
 where the winds from both
 hemispheres meet and
 
-00:34:32.120 --> 00:34:34.475
+00:34:36.670 --> 00:34:39.025
 rise, building tall thunderclouds.
 
-00:34:34.825 --> 00:34:38.225
+00:34:39.375 --> 00:34:42.775
 It's called the intertropical
 convergence zone.
 
-00:34:38.575 --> 00:34:44.600
+00:34:43.125 --> 00:34:49.150
 How these belts are made is the subject of
 a later video on the general circulation.
 
-00:34:45.400 --> 00:34:48.575
+00:34:49.950 --> 00:34:53.125
 The winds near the ground
 follow these belts.
 
-00:34:48.925 --> 00:34:54.096
+00:34:53.475 --> 00:34:58.646
 Between the subtropical highs and the
 equator, steady winds blow from the east,
 
-00:34:54.096 --> 00:34:58.875
+00:34:58.646 --> 00:35:03.425
 called the trade winds; sailing ships
 relied on them to cross the oceans.
 
-00:34:59.225 --> 00:35:02.675
+00:35:03.775 --> 00:35:07.225
 North of the equator,
 they come from the north-east.
 
-00:35:03.025 --> 00:35:05.875
+00:35:07.575 --> 00:35:10.425
 South of it, they come
 from the south-east.
 
-00:35:06.225 --> 00:35:10.305
+00:35:10.775 --> 00:35:14.855
 Poleward of the subtropical
 highs, in the middle latitudes,
 
-00:35:10.305 --> 00:35:13.900
+00:35:14.855 --> 00:35:18.450
 the winds come mostly
 from the west: the westerlies.
 
-00:35:14.250 --> 00:35:18.875
+00:35:18.800 --> 00:35:23.425
 That's why storms like Ciarán
 usually travel from west to east.
 
-00:35:19.225 --> 00:35:23.508
+00:35:23.775 --> 00:35:28.058
 Why the winds bend like this
 is part of the Coriolis story,
 
-00:35:23.508 --> 00:35:25.250
+00:35:28.058 --> 00:35:29.800
 coming in a later video.
 
-00:35:26.050 --> 00:35:31.675
+00:35:30.600 --> 00:35:36.225
 Now let's put all of this together on one
 real storm, and watch it from one town.
 
-00:35:32.025 --> 00:35:35.157
+00:35:36.575 --> 00:35:39.707
 On the first of November,
 twenty twenty-three,
 
-00:35:35.157 --> 00:35:39.175
+00:35:39.707 --> 00:35:43.725
 Storm Ciarán was racing across
 the Atlantic towards Europe.
 
-00:35:39.525 --> 00:35:42.481
+00:35:44.075 --> 00:35:47.031
 Here it is from a satellite
 that afternoon,
 
-00:35:42.481 --> 00:35:45.025
+00:35:47.031 --> 00:35:49.575
 with coastlines and borders drawn in.
 
-00:35:45.375 --> 00:35:49.850
+00:35:49.925 --> 00:35:54.400
 And here is Brest, a port city
 at the western tip of France.
 
-00:35:50.200 --> 00:35:55.825
+00:35:54.750 --> 00:36:00.375
 Let's watch the storm pass over
 Brest, hour by hour, using the reanalysis.
 
-00:35:56.175 --> 00:36:01.725
+00:36:00.725 --> 00:36:06.275
 Times are in universal time, the clock
 that meteorologists everywhere share.
 
-00:36:02.525 --> 00:36:05.667
+00:36:07.075 --> 00:36:10.098
 Here are the isobars
 every four hectopascals,
 
-00:36:05.667 --> 00:36:09.925
-from midday on the first
-of November to midday on the second.
+00:36:10.098 --> 00:36:12.114
+with the warm front in red and
 
-00:36:10.275 --> 00:36:13.875
+00:36:12.114 --> 00:36:17.825
+the cold front in blue, from midday on the
+first of November to midday on the second.
+
+00:36:18.175 --> 00:36:21.766
 The low deepens as it
 comes, from about nine hundred and
 
-00:36:13.875 --> 00:36:16.189
-sixty-five to about nine hundred and
+00:36:21.766 --> 00:36:23.882
+seventy to about nine hundred and
 
-00:36:16.189 --> 00:36:17.732
+00:36:23.882 --> 00:36:25.420
 fifty-four hectopascals,
 
-00:36:17.732 --> 00:36:22.875
+00:36:25.420 --> 00:36:30.550
 and its centre crosses the English Channel
 just north of Brest during the night.
 
-00:36:23.675 --> 00:36:26.125
+00:36:31.350 --> 00:36:33.800
 First, the pressure at Brest.
 
-00:36:26.475 --> 00:36:30.430
+00:36:34.150 --> 00:36:38.105
 At midday on the first, it
 reads about nine hundred and
 
-00:36:30.430 --> 00:36:32.300
+00:36:38.105 --> 00:36:39.975
 ninety-seven hectopascals.
 
-00:36:32.650 --> 00:36:36.843
+00:36:40.325 --> 00:36:44.518
 Then it falls, faster
 and faster, to about nine hundred and
 
-00:36:36.843 --> 00:36:41.675
+00:36:44.518 --> 00:36:49.350
 sixty-two at one o'clock in the morning,
 as the low passes close by.
 
-00:36:42.025 --> 00:36:47.175
+00:36:49.700 --> 00:36:54.850
 That's thirty-five hectopascals
 in thirteen hours, a very fast fall.
 
-00:36:47.525 --> 00:36:52.550
+00:36:55.200 --> 00:37:00.225
 Then it climbs again, by about
 fourteen hectopascals in five hours.
 
-00:36:53.350 --> 00:36:55.725
+00:37:01.025 --> 00:37:03.400
 Now the temperature and the wind.
 
-00:36:56.075 --> 00:36:57.496
+00:37:03.750 --> 00:37:05.171
 At six in the evening,
 
-00:36:57.496 --> 00:37:02.470
+00:37:05.171 --> 00:37:10.145
 the wind blows from the south-south-east
 at about thirteen metres per second,
 
-00:37:02.470 --> 00:37:04.925
+00:37:10.145 --> 00:37:12.600
 and the temperature is twelve degrees.
 
-00:37:05.275 --> 00:37:09.154
+00:37:12.950 --> 00:37:16.829
 By eight, the wind has turned
 to come from the south-south-west,
 
-00:37:09.154 --> 00:37:12.549
+00:37:16.829 --> 00:37:20.224
 it has strengthened to about
 eighteen metres per second,
 
-00:37:12.549 --> 00:37:16.125
+00:37:20.224 --> 00:37:23.800
 and the temperature has risen
 to about fourteen and a half.
 
-00:37:16.475 --> 00:37:18.850
+00:37:24.150 --> 00:37:26.525
 That's the warm front passing.
 
-00:37:19.200 --> 00:37:24.875
+00:37:26.875 --> 00:37:32.550
 Brest is now in the warm air behind it,
 which is called the storm's warm sector.
 
-00:37:25.675 --> 00:37:28.650
+00:37:33.350 --> 00:37:36.325
 A few hours later comes the cold front.
 
-00:37:29.000 --> 00:37:31.725
+00:37:36.675 --> 00:37:39.400
 Between midnight and three in the morning,
 
-00:37:31.725 --> 00:37:35.035
+00:37:39.400 --> 00:37:42.710
 the wind swings from the
 south-west to the west and
 
-00:37:35.035 --> 00:37:36.462
+00:37:42.710 --> 00:37:44.137
 strengthens: by three,
 
-00:37:36.462 --> 00:37:40.550
+00:37:44.137 --> 00:37:48.225
 it's about twenty-three metres
 per second, or forty-five knots.
 
-00:37:40.900 --> 00:37:44.429
+00:37:48.575 --> 00:37:52.104
 The temperature drops by about
 two degrees, to ten and
 
-00:37:44.429 --> 00:37:47.500
+00:37:52.104 --> 00:37:55.175
 a half, and the pressure
 starts its fast climb.
 
-00:37:47.850 --> 00:37:53.125
+00:37:55.525 --> 00:38:00.800
 Cooler polar air has arrived behind
 the front, just as our side view said.
 
-00:37:53.925 --> 00:37:57.535
+00:38:01.600 --> 00:38:05.210
 Here is the storm the next
 afternoon, seen from space,
 
-00:37:57.535 --> 00:38:02.550
+00:38:05.210 --> 00:38:10.225
 now over the North Sea, with its clouds
 wrapped in a spiral around the low.
 
-00:38:02.900 --> 00:38:08.000
+00:38:10.575 --> 00:38:15.675
 In the next video, we'll learn to read
 weather maps like this one in detail.
 
-00:38:08.350 --> 00:38:11.364
+00:38:16.025 --> 00:38:19.039
 And later videos will explain why the wind
 
-00:38:11.364 --> 00:38:14.450
+00:38:19.039 --> 00:38:22.125
 circles the low instead
 of rushing into it.
 
-00:38:15.250 --> 00:38:18.581
+00:38:22.925 --> 00:38:26.256
 To sum up, the atmosphere
 is a thin shell of air,
 
-00:38:18.581 --> 00:38:23.475
+00:38:26.256 --> 00:38:31.150
 and almost all our weather happens
 in its lowest layer, the troposphere.
 
-00:38:23.825 --> 00:38:27.920
+00:38:31.500 --> 00:38:35.595
 Air pressure is the weight
 of the air above each square metre,
 
-00:38:27.920 --> 00:38:31.750
+00:38:35.595 --> 00:38:39.425
 about one thousand and thirteen
 hectopascals at sea level.
 
-00:38:32.100 --> 00:38:35.218
+00:38:39.775 --> 00:38:42.893
 By hydrostatic balance,
 it falls with height,
 
-00:38:35.218 --> 00:38:40.000
+00:38:42.893 --> 00:38:47.675
 roughly exponentially, with a scale
 height of about eight kilometres.
 
-00:38:40.350 --> 00:38:44.772
+00:38:48.025 --> 00:38:52.447
 The gas law, p equals
 rho R T, ties pressure, density and
 
-00:38:44.772 --> 00:38:49.350
+00:38:52.447 --> 00:38:57.025
 temperature together, so warm
 air is lighter than cold air.
 
-00:38:49.700 --> 00:38:53.962
+00:38:57.375 --> 00:39:01.637
 Relative humidity compares
 the vapour with its saturation value,
 
-00:38:53.962 --> 00:38:57.025
+00:39:01.637 --> 00:39:04.700
 and cooling air
 to its dew point makes clouds.
 
-00:38:57.375 --> 00:39:00.042
+00:39:05.050 --> 00:39:07.717
 Winds are named by where they come from,
 
-00:39:00.042 --> 00:39:03.175
+00:39:07.717 --> 00:39:10.850
 and are measured in metres
 per second or knots.
 
-00:39:03.525 --> 00:39:06.624
+00:39:11.200 --> 00:39:14.299
 Sea-level pressure maps
 show highs and lows,
 
-00:39:06.624 --> 00:39:10.075
+00:39:14.299 --> 00:39:17.750
 and fronts are the boundaries
 between air masses.
 
-00:39:10.425 --> 00:39:15.016
+00:39:18.100 --> 00:39:22.691
 Weather is what happens now,
 climate is its long-term statistics,
 
-00:39:15.016 --> 00:39:18.900
+00:39:22.691 --> 00:39:26.575
 and a reanalysis gives us both,
 everywhere, every hour.
 
-00:39:19.700 --> 00:39:25.575
+00:39:27.375 --> 00:39:33.250
 This video is one of a series of related
 tutorials, so watch out for the others.
 
-00:39:25.925 --> 00:39:28.833
+00:39:33.600 --> 00:39:36.508
 They're made to help
 students of meteorology,
 
-00:39:28.833 --> 00:39:31.418
+00:39:36.508 --> 00:39:39.093
 atmospheric science and climate science,
 
-00:39:31.418 --> 00:39:35.036
+00:39:39.093 --> 00:39:42.711
 and anyone else who wants
 to learn not just these ideas,
 
-00:39:35.036 --> 00:39:36.975
+00:39:42.711 --> 00:39:44.650
 but the maths behind them too.
 
-00:39:37.325 --> 00:39:42.237
+00:39:45.000 --> 00:39:49.912
 The notebook for these weather basics, and
 the notebooks for the other concepts,
 
-00:39:42.237 --> 00:39:45.000
+00:39:49.912 --> 00:39:52.675
 are on the website that
 goes with this video.

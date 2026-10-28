@@ -1,10 +1,10 @@
 # ch00_weather_basics — "Weather basics: pressure, temperature, humidity and wind, from scratch" (Chapter 0B, version 1)
 
-Version 1 (2026-10-27), movie-director plan. House style `movies/HOUSE_STYLE.md` (reference `ch00_dot_product_why` v6): s00 title + one sentence → hook → building blocks → intuition → why → application → "To sum up" → series end card. Voice Kokoro `af_bella`, speed 1.0; informal Chapter-0 voice; music bed as the reference (`tools/music.py`, seed 7). Brief: `brief.md`; data and new functions: `data_needs.md`; storyboard: `storyboard.yaml`.
+Version 2, fix loop 1 (2026-10-28). House style `movies/HOUSE_STYLE.md` (reference `ch00_dot_product_why` v6). Voice Kokoro `af_bella`, speed 1.0; music: our own procedural score (seed 11, 'air-flowing' + 'storm-tense' under s54-s59, G major Lydian, 84 bpm). Brief: `brief.md`; data: `data_needs.md`; storyboard: `storyboard.yaml`.
 
-**Measured, not estimated.** `tools/tts.py` dry run on 2026-10-27 (G:, `scratch/movies/ch00_weather_basics/dryrun/v1_merged`; input = this narration, current `movies/lexicon.yaml`, no new entries applied): **62 scenes, 363 sentences, 5696 words, 2340.150 s narration + 2.5-s silent end-card hold = 2342.650 s (39:02.65)**; speech alone 2185.4 s = 156.4 words per minute while speaking, **146.0 words per minute overall** (limit 150); 585 caption cues; self-check diff 0.0 ms; Kokoro render 2552.0 s; warnings: none. Composition: full run `v1` (62 scenes, 2338.62 s, 585 cues, one warning: s53 sentence 3 at 17.2 characters per second) + patch run `v1_patch_s53` (s53 with that sentence split in two, measured on its own, same voice and gaps; 40.45 s, 10 cues, no warning) spliced in `v1_merged` (+1.525 s; later scenes shifted). Composition: full run  (62 scenes, 2338.62 s, 585 cues, one warning: s53 sentence 3 at 17.2 characters per second) + patch run  (s53 with that sentence split in two, measured on its own, same voice and gaps; 40.45 s, 10 cues, no warning) spliced in  (+1.525 s; later scenes shifted).
+**Measured (timing.json):** 62 scenes, 367 sentences, 5839 words, narration 2392.975 s + 2.5-s end hold = 2395.475 s; 601 caption cues; self-check diff 0.0 ms. The v1 TTS run was extended by tools/movie_wb/splice_insert.py (v2: 4 sentences inserted) and tools/movie_wb/splice_replace.py (fix loop 1: 4 sentences replaced).
 
-Conventions: S<k> in the storyboard = sentence k of the scene (the `tools/tts.py` splitter); numbers are spoken in words and every number on screen is spoken; times are measured (start–end of the scene's audio in the dry run).
+Conventions: S<k> in the storyboard = sentence k of the scene; numbers are spoken in words and every number on screen is spoken. The per-scene lines below the narration were written for v1; their measured times are superseded by timing.json.
 
 ## s00_title
 In this video, we'll learn the basics of weather the easy way, and see how meteorology uses them to follow a real storm as it passes over one town.
@@ -135,7 +135,7 @@ What does this curve tell us? Every time we climb one scale height, eight point 
 ## s21_balloon_pressure
 Does the real atmosphere follow this curve? Let's check it against a real weather balloon. Twice a day, at hundreds of places around the world, meteorologists launch a balloon carrying a small instrument package called a radiosonde. As it rises, it radios back the pressure, the temperature and the humidity, and from its drift we get the wind. This one was launched near Paris around midnight, at the start of the first of November, twenty twenty-three. In the picture, heights are drawn ten times taller than distances on the map, so that we can see the climb. Near the ground, its pressure follows our curve closely. Higher up, the real pressure falls a little faster, because the real air up there is colder, and colder air has a smaller scale height. So our curve is a good first guess, and the measurements tell us where it needs correcting.
 
-> 124 words · 8 sentences · 772.600–822.575 s (50.0 s; speech 46.7 s) · 12:52.60–13:42.58 (measured) · beat: intuition · check against a real balloon.
+> 148 words · 9 sentences · 772.600–822.575 s (50.0 s; speech 46.7 s) · 12:52.60–13:42.58 (measured) · beat: intuition · check against a real balloon.
 > Screen: balloon rising from Trappes on a small true-colour map of France; graph: measured p(z) teal dots vs slate curve H = 8.4 km; gap highlighted aloft 'colder → smaller H'; Everest tick at 8.8 km with both values
 
 ## s22_mass_below
@@ -153,7 +153,7 @@ Now let's look at the temperature that the same balloon measured. Here, height g
 ## s24_stratosphere
 At about eleven kilometres, at about minus sixty-three degrees, the fall stops. This boundary is called the tropopause. Above it, the temperature stops falling, and higher up it rises again. That's the stratosphere, a calm, layered region, where ozone absorbs the sun's ultraviolet light and warms the air. Balloons usually burst at around thirty kilometres, but other measurements show the warming going on above that, up to about fifty kilometres on average. Above that come the mesosphere and the thermosphere, where the air is extremely thin.
 
-> 78 words · 6 sentences · 888.550–925.925 s (37.4 s; speech 34.8 s) · 14:48.55–15:25.92 (measured) · beat: building blocks · tropopause and stratosphere.
+> 86 words · 6 sentences · 888.550–925.925 s (37.4 s; speech 34.8 s) · 14:48.55–15:25.92 (measured) · beat: building blocks · tropopause and stratosphere.
 > Screen: tropopause line at ≈ 11 km '≈ −55 °C'; stratosphere band; balloon bursts ~30 km; dashed slate extension to 48 km (reanalysis, same place and time); ozone keyword with sun rays; 'mesosphere', 'thermosphere' above
 
 ## s25_tropics
@@ -181,9 +181,9 @@ Over a water surface, molecules leave the water and others land back in it, all 
 > Screen: water surface with molecules leaving/landing (counters equal → 'saturated'); curve e_s(T) −10…35 °C with points 6, 12, 23, 42 hPa; '× 2 per 10 °C' steps; sponge icon with 'Like' / 'Unlike'
 
 ## s29_relative_humidity
-Relative humidity compares the two. It's the vapour pressure divided by the saturation vapour pressure, as a percentage. Let's try air at twenty-five degrees with a vapour pressure of fifteen hectopascals. At twenty-five degrees, the saturation vapour pressure is about thirty-one point three. Fifteen divided by thirty-one point three is about point four eight, so the relative humidity is about forty-eight percent. Notice that it depends on the temperature as well as on the water. Cool the same air, and its relative humidity rises, even though no water is added.
+Relative humidity compares the two. It's the vapour pressure divided by the saturation vapour pressure, as a percentage. Let's try air at twenty-five degrees with a vapour pressure of fifteen hectopascals. At twenty-five degrees, the saturation vapour pressure is about thirty-one point three. Fifteen divided by thirty-one point three is about point four eight, so the relative humidity is about forty-eight percent. Notice that it depends on the temperature as well as on the water. Cool the same air to eighteen degrees, and its relative humidity rises to about seventy-three percent, even though no water is added.
 
-> 90 words · 7 sentences · 1094.650–1136.775 s (42.1 s; speech 39.2 s) · 18:14.65–18:56.78 (measured) · beat: building blocks · relative humidity.
+> 97 words · 7 sentences · 1094.650–1136.775 s (42.1 s; speech 39.2 s) · 18:14.65–18:56.78 (measured) · beat: building blocks · relative humidity.
 > Screen: RH = vapour pressure ÷ saturation vapour pressure × 100 %; on the e_s curve: point at 25 °C, 15 hPa (teal) under the curve at 31.3 (gold); CalcStack 15 ÷ 31.3 ≈ 0.48 → 48 %; point slides left (cooling) and RH readout climbs
 
 ## s30_dew_point
@@ -243,7 +243,7 @@ A reanalysis fills in the gaps. It starts from a weather forecast model, a compu
 ## s39_surface_pressure
 Now let's make a pressure map. Here is the real air pressure at the ground all over the world, at midday on the second of November, twenty twenty-three, from the reanalysis. What stands out are the mountains. Over Tibet and the Himalayas, the pressure at the ground is less than six hundred hectopascals, and the Andes and the Rockies show up too. In the close-up, the mountains are drawn thirty times taller than they really are. That's just hydrostatic balance: high ground has less air above it. The weather is in there, but these mountain patterns swamp it.
 
-> 84 words · 6 sentences · 1519.625–1553.975 s (34.3 s; speech 31.8 s) · 25:19.62–25:53.97 (measured) · beat: intuition · a pressure map, and the mountain problem.
+> 98 words · 7 sentences · 1519.625–1553.975 s (34.3 s; speech 31.8 s) · 25:19.62–25:53.97 (measured) · beat: intuition · a pressure map, and the mountain problem.
 > Screen: Globe3D: ERA5 surface pressure (sequential map 500-1040 hPa) over shaded relief; camera to Tibet: '< 600 hPa'; Andes, Rockies pointers; keyword 'less air above high ground'
 
 ## s40_sea_level
@@ -261,7 +261,7 @@ Here is the same moment again, now as sea-level pressure. The mountains are gone
 ## s42_highs_lows
 The map shows round patches where the pressure is higher than all around, called highs, and patches where it's lower than all around, called lows. A low is also called a depression, or a cyclone, and a high is also called an anticyclone. Over the east coast of England, at the edge of the North Sea, is a deep low, Storm Ciarán, at about nine hundred and fifty-six hectopascals. Far to the south-west, near the Azores islands, is a high at about one thousand and thirty. Here is a much more recent map, a weather-service analysis from the twenty-seventh of October, twenty twenty-six. Its deepest low is a typhoon over the western Pacific, at about nine hundred and thirty-five hectopascals, while a low over the North Atlantic, at about nine hundred and fifty-five, is about as deep as Ciarán.
 
-> 81 words · 4 sentences · 1638.150–1672.200 s (34.0 s; speech 32.2 s) · 27:18.15–27:52.20 (measured) · beat: building blocks · highs and lows.
+> 139 words · 6 sentences · 1638.150–1672.200 s (34.0 s; speech 32.2 s) · 27:18.15–27:52.20 (measured) · beat: building blocks · highs and lows.
 > Screen: 'H' and 'L' letters (68 px) at the analysed centres; 'L 956 hPa' Ciarán; 'H ≈ 1030 hPa' near the Azores; keywords 'low = depression = cyclone', 'high = anticyclone'
 
 ## s43_lows_cloudy
@@ -271,9 +271,9 @@ Lows and highs bring different weather, and now we can see why. Near the ground,
 > Screen: split: satellite true colour of Ciarán's cloud spiral (left) vs clear skies under the Azores high (right), same image 2 Nov 2023; side-view inset arrows: low = in + up (cloud), high = down + out (clear)
 
 ## s44_round_lows
-Now let's add the real winds near the ground, from the same reanalysis. Near Ciarán, the air doesn't blow straight into the low. It swirls around it, anticlockwise as seen from above, crossing the isobars only slightly towards the centre. Around the high, it turns the other way, clockwise as seen from above. In the southern hemisphere, both are reversed. Why the wind circles instead of rushing in is the story of the Coriolis effect, and it has its own video.
+Now let's add the real winds near the ground, measured ten metres up, from the same reanalysis. Near Ciarán, the air doesn't blow straight into the low. It swirls around it, anticlockwise as seen from above, crossing the isobars only slightly towards the centre. Around the high, it turns the other way, clockwise as seen from above. In the southern hemisphere, both are reversed. Why the wind circles instead of rushing in is the story of the Coriolis effect, and it has its own video.
 
-> 81 words · 6 sentences · 1711.750–1746.225 s (34.5 s; speech 31.9 s) · 28:31.75–29:06.22 (measured) · beat: intuition · winds circle the lows.
+> 85 words · 6 sentences · 1711.750–1746.225 s (34.5 s; speech 31.9 s) · 28:31.75–29:06.22 (measured) · beat: intuition · winds circle the lows.
 > Screen: 10-m wind arrows (teal, thinned 1.5°) with streaklines on the image + isobars; gold anticlockwise arc round the L 'anticlockwise, seen from above'; clockwise arc round the H; small SH globe thumbnail with arcs reversed
 
 ## s45_air_masses
@@ -303,7 +303,7 @@ At a warm front, the warm air is advancing, but it's lighter, so it can't push t
 ## s49_real_fronts
 Here are real fronts, around Ciarán at six in the evening on the first of November. The colours show the temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical air reaches up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing edge, curving away to the south-west, is the cold front. The arrows show the wind turning as it crosses the fronts, most sharply at the warm front.
 
-> 84 words · 6 sentences · 1912.900–1946.075 s (33.2 s; speech 30.6 s) · 31:52.90–32:26.08 (measured) · beat: application · real fronts round Ciarán.
+> 89 words · 6 sentences · 1912.900–1946.075 s (33.2 s; speech 30.6 s) · 31:52.90–32:26.08 (measured) · beat: application · real fronts round Ciarán.
 > Screen: map 40-60N 25W-10E: ERA5 850-hPa T at 00 UTC 2 Nov over a night-free base (BMNG relief, labelled 'base map'), coast/borders; front lines from the thermal front parameter: warm front (red half circles) and cold front (blue triangles) drawn as gold lines first; wind arrows 850 hPa turning across them
 
 ## s50_front_symbols
@@ -337,9 +337,9 @@ Now let's put all of this together on one real storm, and watch it from one town
 > Screen: true colour 1 Nov 2023 afternoon (MODIS), 35-60N 30W-10E, coast + admin borders; 'Storm Ciarán · 1 Nov 2023'; gold dot 'Brest'; keyword 'UTC = universal time'
 
 ## s55_ciaran_maps
-Here are the isobars every four hectopascals, from midday on the first of November to midday on the second. The low deepens as it comes, from about nine hundred and sixty-five to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.
+Here are the isobars every four hectopascals, with the warm front in red and the cold front in blue, from midday on the first of November to midday on the second. The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.
 
-> 52 words · 2 sentences · 2120.375–2141.525 s (21.2 s; speech 20.0 s) · 35:20.38–35:41.53 (measured) · beat: application · the low moves in.
+> 64 words · 2 sentences · 2120.375–2141.525 s (21.2 s; speech 20.0 s) · 35:20.38–35:41.53 (measured) · beat: application · the low moves in.
 > Screen: same panel; hourly ERA5 isobars animate 12 UTC 1 Nov → 12 UTC 2 Nov with the clock; 'L' tracking the minimum with its value ticking 965 → 954 hPa; gold track line; Brest dot
 
 ## s56_brest_pressure
@@ -375,7 +375,7 @@ To sum up, the atmosphere is a thin shell of air, and almost all our weather hap
 ## s61_end
 This video is one of a series of related tutorials, so watch out for the others. They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too. The notebook for these weather basics, and the notebooks for the other concepts, are on the website that goes with this video.
 
-> 56 words · 3 sentences · 2317.550–2340.150 s (22.6 s; speech 21.6 s) · 38:37.55–39:00.15 (measured) · beat: end card.
+> 67 words · 3 sentences · 2317.550–2340.150 s (22.6 s; speech 21.6 s) · 38:37.55–39:00.15 (measured) · beat: end card.
 > Screen: house end card: four faint topic thumbnails (globe with shell, pressure column, humidity curve, Ciarán map); 'a series of tutorials' (68 px); 'meteorology · atmospheric science · climate' (54 px); 'the ideas, and the maths behind them' (54 px, gold); notebook icon 'weather-basics notebook'; stacked icons 'notebooks for the other concepts'; 2.5-s silent hold
 
 > Total: 5696 words · 363 sentences · 2340.150 s narration · 2342.650 s movie (39:02.65) · 146.0 words per minute.

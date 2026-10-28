@@ -5,7 +5,8 @@ Usage (main venv)::
     .venv/Scripts/python.exe tools/movie_qa.py <movie.mp4> [--storyboard movies/chNN/<slug>/storyboard.yaml]
         [--captions captions.vtt] [--script script.md] [--manifest manifest.json] [--composition movies/src/chNN/X.tsx]
         [--id chNN_slug] [--duration SECONDS] [--duration-window 120,180] [--budget-mb 25] [--hard-mb 40]
-        [--no-audio-ok] [--frames-only]
+        [--no-audio-ok] [--frames-only] [--no-content] [--content-only] [--content-frac 0.002] [--content-max 1.5]
+        [--half-warn 3] [--half-max 10]
     .venv/Scripts/python.exe tools/movie_qa.py --framemd5 a.mp4 b.mp4      # determinism: compare per-frame hashes
 
 Gates (each PASS / FAIL / SKIP with a reason; exit 0 only when no gate FAILs):
@@ -17,6 +18,8 @@ Gates (each PASS / FAIL / SKIP with a reason; exit 0 only when no gate FAILs):
 | codec | video not H.264 High (or Main for tiny clips) yuv420p, audio not AAC, or moov atom not before mdat (faststart) |
 | black | black > 0.5 s outside the first/last 0.5 s (blackdetect) |
 | frozen | a frozen stretch > 4 s (freezedetect) holding > 4 s of silence (narration from timing.json; without one, any) |
+| content | the content area (y 40–860) has < --content-frac (0.2 %) of its pixels off the house background #171f33 for > --content-max (1.5 s), sampled every 0.5 s at 480 px — a navy "blank screen" the black gate cannot see (added 2026-10-28, ch00_weather_basics review 1 M1) |
+| halves | the picture zone (x 80–1000) or the maths zone (x 1060–1840) is empty that way for > --half-max (10 s); WARN above --half-warn (3 s), HOUSE_STYLE §5 / U-M4.2 |
 | loudness | integrated outside −18…−14 LUFS or true peak > −1 dBTP (ebur128) |
 | flashes | > 3 large luminance flashes in any 1 s window (WCAG 2.3.1), from frames sampled at the video fps |
 | captions | VTT cues out of order, outside the audio, > 2 lines, > 42 chars/line, > 17 cps, or text ≠ script text; with --sound-cues SIDECAR, bracketed sound lines ("[waves breaking]") are allowed only where the sidecar lists them (and every listed sound must be captioned), the spoken words still exact |
@@ -265,6 +268,61 @@ def longest_silence(s: float, e: float, speech: list[tuple[float, float]]) -> fl
     return max(longest, e - cursor)
 
 
+CONTENT_BG = (23, 31, 51)         # house background #171f33 (HOUSE_STYLE §5)
+
+
+def content_scan(path: Path, dur: float, step: float = 0.5, thr: int = 28, w: int = 480,
+                 bg: tuple[int, int, int] = CONTENT_BG) -> list[dict]:
+    """Sample the movie every ``step`` s at ``w`` px wide and measure, for each sample, the fraction of pixels that
+    differ from the house background by more than ``thr`` (max over R, G, B) in three regions of the 1920×1080 layout
+    (HOUSE_STYLE §5): the whole content area (x 0–1920, y 40–860), the picture zone (x 80–1000) and the maths zone
+    (x 1060–1840), both y 40–860. Navy background counts as empty, which the black gate cannot see."""
+    import numpy as np
+
+    h = int(round(w * 1080 / 1920))
+    s = w / 1920
+    y0, y1 = int(40 * s), int(860 * s)
+    regions = {"content": (0, w), "left": (int(80 * s), int(1000 * s)), "right": (int(1060 * s), int(1840 * s))}
+    proc = subprocess.Popen([FF, "-v", "error", "-i", str(path), "-vf",
+                             f"fps=1/{step},scale={w}:{h}:flags=area,format=rgb24", "-f", "rawvideo", "-"],
+                            stdout=subprocess.PIPE)
+    frame_bytes = w * h * 3
+    ref = np.array(bg, dtype=np.int16)
+    rows, k = [], 0
+    assert proc.stdout is not None
+    while True:
+        buf = proc.stdout.read(frame_bytes)
+        if len(buf) < frame_bytes:
+            break
+        im = np.frombuffer(buf, dtype=np.uint8).reshape(h, w, 3)[y0:y1].astype(np.int16)
+        d = np.abs(im - ref).max(axis=2) > thr
+        row = {"t": round(k * step, 3)}
+        for name, (xa, xb) in regions.items():
+            row[name] = float(d[:, xa:xb].mean())
+        rows.append(row)
+        k += 1
+    proc.wait()
+    return rows
+
+
+def empty_spans(rows: list[dict], key: str, frac: float, step: float, dur: float,
+                edge: float = 0.5) -> list[tuple[float, float]]:
+    """Maximal [start, end) spans where region ``key`` has fewer than ``frac`` differing pixels, ignoring the first
+    and last ``edge`` seconds (fades)."""
+    spans, cur = [], None
+    for r in rows:
+        t = r["t"]
+        empty = r[key] < frac and edge <= t <= dur - edge
+        if empty and cur is None:
+            cur = t
+        if not empty and cur is not None:
+            spans.append((cur, t))
+            cur = None
+    if cur is not None:
+        spans.append((cur, rows[-1]["t"] + step))
+    return spans
+
+
 def review_frames(path: Path, outdir: Path, dur: float, storyboard: dict | None,
                   timing: dict | None = None) -> list[str]:
     outdir.mkdir(parents=True, exist_ok=True)
@@ -320,6 +378,13 @@ def main() -> int:
                                          "bracketed sound captions listed there; spoken words still checked exactly")
     ap.add_argument("--no-audio-ok", action="store_true", help="silent test clip: skip codec-audio and loudness")
     ap.add_argument("--frames-only", action="store_true", help="only write the review frames")
+    ap.add_argument("--no-content", action="store_true", help="skip the content-area and half-screen gates")
+    ap.add_argument("--content-frac", type=float, default=0.002,
+                    help="a region is empty below this fraction of pixels off the background (default 0.2 %%)")
+    ap.add_argument("--content-max", type=float, default=1.5, help="content area empty longer than this fails (s)")
+    ap.add_argument("--half-warn", type=float, default=3.0, help="picture/maths zone empty longer than this warns (s)")
+    ap.add_argument("--half-max", type=float, default=10.0, help="picture/maths zone empty longer than this fails (s)")
+    ap.add_argument("--content-only", action="store_true", help="run only the content/halves gates (calibration)")
     a = ap.parse_args()
     if a.framemd5:
         return framemd5(Path(a.framemd5[0]), Path(a.framemd5[1]))
@@ -348,9 +413,43 @@ def main() -> int:
     def gate(name: str, status: str, detail: str) -> None:
         gates[name] = {"status": status, "detail": detail}
 
+    def content_gates() -> None:
+        # content area empty (navy #171f33 counts as empty) and half-screen empty (HOUSE_STYLE §5, U-M4.2)
+        if a.no_content:
+            gate("content", "SKIP", "--no-content")
+            gate("halves", "SKIP", "--no-content")
+        else:
+            step = 0.5
+            rows = content_scan(path, dur, step=step)
+            outdir.mkdir(parents=True, exist_ok=True)
+            (outdir / "content_scan.json").write_text(json.dumps(rows), encoding="utf-8")
+            blank = [(s, e) for s, e in empty_spans(rows, "content", a.content_frac, step, dur) if e - s > a.content_max]
+            gate("content", "FAIL" if blank else "PASS",
+                 (f"content area (y 40–860) empty > {a.content_max:g} s: "
+                  + ", ".join(f"{s:.1f}–{e:.1f} s ({e - s:.1f} s)" for s, e in blank)) if blank else
+                 f"{len(rows)} samples every {step:g} s; no empty content area > {a.content_max:g} s "
+                 f"(< {a.content_frac * 100:g} % of pixels off the background)")
+            halves = []
+            for key in ("left", "right"):
+                for s, e in empty_spans(rows, key, a.content_frac, step, dur):
+                    if e - s > a.half_warn:
+                        halves.append((key, s, e))
+            halves.sort(key=lambda x: x[1])
+            hard = [x for x in halves if x[2] - x[1] > a.half_max]
+            gate("halves", "FAIL" if hard else ("WARN" if halves else "PASS"),
+                 ("; ".join(f"{k} {s:.1f}–{e:.1f} s ({e - s:.1f} s)" for k, s, e in (hard or halves))
+                  + (f" [FAIL > {a.half_max:g} s; {len(halves)} span(s) > {a.half_warn:g} s in all]" if hard else
+                     f" [WARN > {a.half_warn:g} s]")) if halves else
+                 f"no picture or maths zone empty > {a.half_warn:g} s")
+
     timing = None
     if timing_path and timing_path.exists():
         timing = json.loads(timing_path.read_text(encoding="utf-8"))
+    if a.content_only:
+        content_gates()
+        for k, g in gates.items():
+            print(f"  {g['status']:4s} {k:10s} {g['detail']}")
+        return 0 if all(g['status'] != 'FAIL' for g in gates.values()) else 1
     files = review_frames(path, outdir, dur, sb, timing)
     if a.frames_only:
         print(f"review frames -> {outdir}: {files}")
@@ -418,6 +517,7 @@ def main() -> int:
         gate("frozen", "FAIL" if bad else "PASS",
              f"{len(freezes)} frozen stretch(es) > 4 s; silent > 4 s inside: {bad}" if bad else
              f"{len(freezes)} frozen stretch(es) > 4 s, all narrated (longest silence inside {worst:.2f} s)")
+    content_gates()
     # loudness
     if au is None:
         gate("loudness", "SKIP" if a.no_audio_ok else "FAIL", "no audio stream")
