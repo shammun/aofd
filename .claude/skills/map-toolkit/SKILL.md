@@ -280,8 +280,9 @@ Avoid `JAXA/GPM_L3/GSMaP` and other assets whose page restricts use, unless chec
   `globe.tilesLoaded && dataSourceDisplay.ready` for 30 frames; deck.gl decodes every image (ImageBitmap) and parses
   every GeoJSON before building the Deck, then waits until every layer and sub-layer is loaded and a canvas probe is
   unchanged for 30 frames). Measured 2026-10-28, two fresh-page renders each: deck.gl BitmapLayer maps (Ciarán
-  isobars, the same with an 8192-px image, the synoptic chart with layers) byte-identical; TerrainLayer (Alps) and
-  `_GlobeView` differ by 1/255 in 2-25 pixels (also before the fix: GPU rasterisation, not loading). Another GPU/driver changes pixels slightly.
+  isobars, the same with an 8192-px image) byte-identical; the synoptic chart with point/label/front layers,
+  TerrainLayer (Alps) and `_GlobeView` are approx-stable — the synoptic chart differs in 3-13 of ~1 M pixels by ≤ 6/255
+  near fronts/labels (re-measured 2026-10-28, three renders), the others by 1/255 in 2-25 pixels (GPU rasterisation, not loading). Another GPU/driver changes pixels slightly.
   **Tolerance** (mean |Δ| ≤ 0.5/255): ArcGIS export. GEE thumbnails change if the catalogue is reprocessed.
 - Never mix frames of one shot from two tools, GPUs or machines; record the tool version from the sidecar.
 - No wall-clock anything: camera and time are recipe values (or a function of the frame number in Remotion).
