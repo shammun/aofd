@@ -1,11 +1,12 @@
 id: ch00_dot_product_v01b
 title: 'The dot product: the part along, and where it is used'
-version: 0.1b-plan
+version: '0.1b-plan-3 (2026-10-28: committed 0.1b + every v6 item kept)'
 series_position: 0.1b (new version of 0.1; built on ch00_dot_product_why v6 fix 1)
-based_on: movies/ch00/ch00_dot_product_why v6 fix 1 (commit b8c6859) — advection scenes s12-s20 word-identical
+based_on: 'movies/ch00/ch00_dot_product_why v6 fix 1 (commit b8c6859): EVERY v6 scene, sentence, example, number and device is kept (user 2026-10-28); the
+  committed 0.1b additions (1aa590f) sit beside them'
 concepts:
 - C0A-PoC1
-target_duration_s: 1503.9
+target_duration_s: 1539.45
 fps: 30
 size:
 - 1920
@@ -20,47 +21,45 @@ audio:
   speed: 1.0
   loudness_lufs: -16
   music:
-    style: shadow-and-light
-    key: D major
-    metre: 4/4 at 84 bpm
-    palette: felt piano + soft vibraphone + warm string pad; a brighter bell layer from s20b (the uses)
-    seed: 25
-    source: tools/sound/styles.py (style to be added) + tools/sound/mix.py
-    level: bed -28 LUFS, ducked 5 dB; mix -16 LUFS
-    note: 'not v6''s seed-7 tools/music.py bed (house §8: a different score per movie)'
+    source: tools/music.py (procedural, our own, CC0)
+    level: bed about -28 LUFS, ducked a further 5 dB under speech (unchanged since v3)
+    notes: seed 7, 5-s fade in, 8-s fade out at the end
+    note: 'v6''s own score, kept (user 2026-10-28: the user loved v6 as it is); not a new style'
   effects:
-  - light wind under the cart (s11)
+  - light wind under the cart (s11a)
   - low surf under the ocean tiles (s20d)
-reuse_audio: s12-s20 and the other word-identical v6 sentences can be spliced from the v6 narration (Kokoro is deterministic
-  for identical text); the dry run below re-measures everything
+reuse_audio: every v6 sentence is word-identical, so its clip may be spliced from the v6 narration (Kokoro is deterministic for identical text); the dry
+  run re-measures everything
 research_rows: research/xprod_video_intuitions.md §1b/§1c (priority), §3, §5c
-cross_references: 'related: per scene; spoken pointers in s11a, s20b, s20c, s21; end-card thumbnails'
-measured_narration_s: 1501.4
-measured_frames: 45117
-words: 3777
-sentences: 227
+cross_references: 'related: per scene; spoken pointers in s11b, s20b, s20c, s21; end-card thumbnails'
+measured_narration_s: 1536.95
+measured_frames: 46184
+words: 3844
+sentences: 231
 dry_run:
   tool: tools/tts.py
-  run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\v2_20261028\ch00_dot_product_v01b
-  audio_s: 1501.4
-  speech_s: 1406.9
-  cues: 369
+  run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\v3_20261028\ch00_dot_product_v01b_run2
+  date: '2026-10-28'
+  audio_s: 1536.95
+  speech_s: 1430.4
+  cues: 376
+  beats: 10
   self_check:
-    expected_s: 1501.4
-    audio_s: 1501.4
+    expected_s: 1536.95
+    audio_s: 1536.95
     diff_ms: 0.0
     len_ok: true
     cues_ok: true
-  render_s: 1067.5
+  render_s: 941.6
   warnings: []
   lexicon: movies/lexicon.yaml as of 2026-10-28 (no new entries)
 qa_expectations:
-  duration_s: 1503.9
+  duration_s: 1539.45
   duration_window_s:
-  - 1458.8
-  - 1549.0
+  - 1493.3
+  - 1585.6
   captions:
-    cues: 369
+    cues: 376
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 17
@@ -80,20 +79,40 @@ scenes:
   changes:
   - 'phone review 2026-10-27 (review_dot_product_v6_final, notes 1-3): title fix'
   related: []
-  visual: |-
-    TITLE FRAME: the one exception to 'no headings' (U-M6.3 overrides U-M3.G1 for this frame only). No box, no kicker, no counter, no URL, no book name. Type block left (x 100-1000, y 140-560); animation right (x 1060-1840, y 100-760); caption band empty.
+  visual: 'TITLE FRAME: the one exception to ''no headings'' (U-M6.3 overrides U-M3.G1 for this frame only). No box, no kicker, no counter, no URL, no book
+    name. Type block left (x 100-1000, y 140-560); animation right (x 1060-1840, y 100-760); caption band empty.
 
-    Type (from frame 0; letters rise 24 px and fade in with a 2-frame stagger, every opacity ramp >= 8 frames, no flash): 'The dot product' at 150 px bold with a left-to-right gradient teal #2aa198 -> gold #d8b23a; 'made easy' (96 px, warm white #f4ecd2) under it at 0.6 s; 'and how meteorology uses it' (68 px, warm white, the word 'meteorology' in teal) at 1.2 s. On 'the easy way' the words 'made easy' pulse once (scale 1.0 -> 1.06 -> 1.0, 12 frames).
 
-    Animation A, TitleSweep (frame 0 to the word 'meteorology'): the pair plane in miniature (origin (1330, 400), 70 px per unit, faint grid): teal p = (3, 0) fixed; orange q of length 2 sweeps once round, theta 0 -> 360 deg (ease-in-out), position read from data/sweep.json -> q_xy (181 samples, interpolated); the shadow of q on p's line as a 20-px band from sweep.json -> shadow_q_on_p, teal when positive, grey #9aa6bd at zero, rose #d9667f hatched when negative; live readout 'p·q = +6.00 ... 0.00 ... -6.00' (84 px, at (1330, 640)) from sweep.json -> p_dot_q with its sign glyph '+', '0' or '-' always written (colour never alone). The readout changes smoothly; nothing flashes.
+    Type (from frame 0; letters rise 24 px and fade in with a 2-frame stagger, every opacity ramp >= 8 frames, no flash): ''The dot product'' at 150 px
+    bold with a left-to-right gradient teal #2aa198 -> gold #d8b23a; ''made easy'' (96 px, warm white #f4ecd2) under it at 0.6 s; ''and how meteorology
+    uses it'' (68 px, warm white, the word ''meteorology'' in teal) at 1.2 s. On ''the easy way'' the words ''made easy'' pulse once (scale 1.0 -> 1.06
+    -> 1.0, 12 frames).
 
-    Animation B, from the word 'meteorology' to the end (12-frame cross-fade in the same rectangle): a mini weather map 640 x 384 px (the s12 map, cmocean thermal from weather.json -> lut_thermal) with its isotherms sliding east (weather.json -> iso_x_km, 0 -> 1 h, time compressed), a teal wind arrow v at the pin (weather.json -> v), and the pole thermometer icon with its readout ticking down 13.00 -> 12.82 °C (weather.json -> T_pole_field_C, samples 0-60). No other text on the map.
+
+    Animation A, TitleSweep (frame 0 to the word ''meteorology''): the pair plane in miniature (origin (1330, 400), 70 px per unit, faint grid): teal p
+    = (3, 0) fixed; orange q of length 2 sweeps once round, theta 0 -> 360 deg (ease-in-out), position read from data/sweep.json -> q_xy (181 samples, interpolated);
+    the shadow of q on p''s line as a 20-px band from sweep.json -> shadow_q_on_p, teal when positive, grey #9aa6bd at zero, rose #d9667f hatched when negative;
+    live readout ''p·q = +6.00 ... 0.00 ... -6.00'' (84 px, at (1330, 640)) from sweep.json -> p_dot_q with its sign glyph ''+'', ''0'' or ''-'' always
+    written (colour never alone). The readout changes smoothly; nothing flashes.
+
+
+    Animation B, from the word ''meteorology'' to the end (12-frame cross-fade in the same rectangle): a mini weather map 640 x 384 px (the s12 map, cmocean
+    thermal from weather.json -> lut_thermal) with its isotherms sliding east (weather.json -> iso_x_km, 0 -> 1 h, time compressed), a teal wind arrow v
+    at the pin (weather.json -> v), and the pole thermometer icon with its readout ticking down 13.00 -> 12.82 °C (weather.json -> T_pole_field_C, samples
+    0-60). No other text on the map.
+
 
     End: the title block and the mini map fade over 10 frames into s01, where a and b grow from O as before.
 
-    CHANGES FOR THIS MOVIE: TITLE FIX (user's phone review, notes at 00:01.1, 00:02.6, 00:08.1): in v6 the subtitle 'and how meteorology uses it' ran to x ≈ 1075 and touched the Part-B map (x 1080) — 'I think you need to stop' — and the live 'p·q = …' readout started at x ≈ 1045, outside the animation column, in a serif KaTeX 'p · q =' next to sans numbers. Fix: (1) the subtitle wraps onto two lines, 'and how meteorology' / 'uses it' (68 px), so the text block ends at x ≤ 960; (2) both animation parts sit in x 1130-1840 (Part B map 640 × 384 at x 1165-1805), ≥ 50 px clear of every title letter (house §3); (3) the readout is centred in the column (x ≥ 1160) and drawn in one face (KaTeX for 'p·q =' and the number, sign glyph kept); (4) letters still rise-in, but the subtitle finishes rising before Part B starts, so nothing moves under a half-built word. QA: frame at 1.1 s, 2.6 s, 8.1 s checked for ≥ 50 px clearance.
-  voiceover: In this video, we'll learn the dot product the easy way, and see how meteorology uses it to tell how fast the
-    wind changes the temperature.
+
+    CHANGES FOR THIS MOVIE: TITLE FIX (user''s phone review, notes at 00:01.1, 00:02.6, 00:08.1): in v6 the subtitle ''and how meteorology uses it'' ran
+    to x ≈ 1075 and touched the Part-B map (x 1080) — ''I think you need to stop'' — and the live ''p·q = …'' readout started at x ≈ 1045, outside the animation
+    column, in a serif KaTeX ''p · q ='' next to sans numbers. Fix: (1) the subtitle wraps onto two lines, ''and how meteorology'' / ''uses it'' (68 px),
+    so the text block ends at x ≤ 960; (2) both animation parts sit in x 1130-1840 (Part B map 640 × 384 at x 1165-1805), ≥ 50 px clear of every title letter
+    (house §3); (3) the readout is centred in the column (x ≥ 1160) and drawn in one face (KaTeX for ''p·q ='' and the number, sign glyph kept); (4) letters
+    still rise-in, but the subtitle finishes rising before Part B starts, so nothing moves under a half-built word. QA: frame at 1.1 s, 2.6 s, 8.1 s checked
+    for ≥ 50 px clearance.'
+  voiceover: In this video, we'll learn the dot product the easy way, and see how meteorology uses it to tell how fast the wind changes the temperature.
   on_screen_eq:
     latex: \mathbf p\cdot\mathbf q
     vallis_eq: 'provenance only: the live readout''s label (definition, our numbers)'
@@ -111,13 +130,10 @@ scenes:
     also:
     - fluidpy.geo.vectors.scalar_projection
     - fluidpy.core.kinematics.material_derivative_terms (map series reused from weather.json)
-    data: NEW data/sweep.json -> theta_deg, q_xy, p_dot_q, shadow_q_on_p (V1); weather.json -> iso_x_km, T_pole_field_C,
-      v, lut_thermal
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_scalar_projection_V1_and_V7;
-      ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline
+    data: NEW data/sweep.json -> theta_deg, q_xy, p_dot_q, shadow_q_on_p (V1); weather.json -> iso_x_km, T_pole_field_C, v, lut_thermal
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_scalar_projection_V1_and_V7; ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline
   exaggeration:
-  - 'title animation: the sweep and the mini map are the movie''s own data, time compressed (the map runs 1 model hour in
-    about 4 s); badge: none'
+  - 'title animation: the sweep and the mini map are the movie''s own data, time compressed (the map runs 1 model hour in about 4 s); badge: none'
   sentence_times:
   - - 0.3
     - 9.625
@@ -125,18 +141,17 @@ scenes:
   t:
   - 10.425
   - 18.875
-  status: reused
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s01_hook
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: 'No heading, no agenda box, no gauge, no funnel. Picture zone (pair plane P = mkP(240, 620, 135): faint grid x
-    -1..6, y -1..4 (x 105-1050, y 755-80), no grid note): teal a = (5, 1) and orange b = (1, 3) grow from O over 1.0 s from
-    frame 0 (hook in the first 2 s); names ''a'', ''b'' at the tips (TipLabel, 68 px). Sentence 1 (''What is the dot product?''):
-    ''a · b'' at T.hero 128 px, maths zone centre (1450, 330). Sentence 2, on ''why it''s built this way'': ''= 8'' slides
-    in beside it (T.hero). On ''about the wind'': a small faint weather-map thumbnail (the s12 map, 420 x 250 px at (1240,
-    560), 50 % opacity, no text) fades in and out.'
+  visual: 'No heading, no agenda box, no gauge, no funnel. Picture zone (pair plane P = mkP(240, 620, 135): faint grid x -1..6, y -1..4 (x 105-1050, y 755-80),
+    no grid note): teal a = (5, 1) and orange b = (1, 3) grow from O over 1.0 s from frame 0 (hook in the first 2 s); names ''a'', ''b'' at the tips (TipLabel,
+    68 px). Sentence 1 (''What is the dot product?''): ''a · b'' at T.hero 128 px, maths zone centre (1450, 330). Sentence 2, on ''why it''s built this
+    way'': ''= 8'' slides in beside it (T.hero). On ''about the wind'': a small faint weather-map thumbnail (the s12 map, 420 x 250 px at (1240, 560), 50
+    % opacity, no text) fades in and out.'
   voiceover: What is the dot product? Let's see what it is, why it's built this way, and what it tells us about the wind.
   on_screen_eq: null
   physics_source:
@@ -162,22 +177,32 @@ scenes:
   t:
   - 18.875
   - 46.6
-  status: reused
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s02_arrows
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Picture zone: the pair plane with a and b (no grid note). Maths zone x 1060-1840, no boxes anywhere.
-    S1 ('A vector is an arrow…'): keyword 'vector' at 96 px warm white (1100, 180); on 'a length' the keyword 'length' (54 px) appears with a gold pointer to a length bracket along a; on 'a direction' 'direction' with a pointer to a's arrowhead. Highlight only (colour + size), no box (U-M3.2).
-    S2 ('Vector a goes…'): dotted legs of a (5 along x, 1 up), leg labels '5', '1' (teal, 54 px); then b's legs '1', '3' (orange). The 'vector' block fades.
-    S3 ('These numbers are called components…'): 'a = (5, 1)' (68 px teal) at (1100, 330); under it the keyword 'components' (54 px) at (1180, 430) with two gold pointers fanning to the '5' and the '1' inside a = (5, 1); then 'b = (1, 3)' (68 px orange) at (1100, 560) with 'components' at (1180, 660) pointing to '1' and '3' (U-M3.3: no sentence on screen, the voice says it).
-    S4 ('Pythagoras' theorem…'): right-angle ticks at (5, 0) and (1, 0) on the picture; the a/b block slides up and a CalcStack takes the maths zone: line 1 BraceNote option A '|a| = √(5² + 1²) = √26 = 5.099' with an underbrace under |a| reading 'length of a' (teal, 54 px), the two bars of |a| flash gold once and the length bracket on a pulses; the underbrace words fade after 2.5 s leaving |a|; line 2 '|b| = √(1² + 3²) = √10 = 3.162' (orange). Keyword 'Pythagoras' (54 px, muted) beside line 1 for 2 s. a = (5, 1) and b = (1, 3) stay small (54 px) under the picture at (240, 790) and (620, 790) from here to s07 (U-M3.6).
-  voiceover: 'A vector is an arrow, with a length and a direction. Vector a goes five steps right and one up, and vector
-    b goes one right and three up. These numbers are called components: five and one are the components of vector a and
-    one and three are those of vector b. Pythagoras'' theorem gives their lengths, written with two straight bars: about
-    five point one and three point one six.'
+  visual: 'Picture zone: the pair plane with a and b (no grid note). Maths zone x 1060-1840, no boxes anywhere.
+
+    S1 (''A vector is an arrow…''): keyword ''vector'' at 96 px warm white (1100, 180); on ''a length'' the keyword ''length'' (54 px) appears with a gold
+    pointer to a length bracket along a; on ''a direction'' ''direction'' with a pointer to a''s arrowhead. Highlight only (colour + size), no box (U-M3.2).
+
+    S2 (''Vector a goes…''): dotted legs of a (5 along x, 1 up), leg labels ''5'', ''1'' (teal, 54 px); then b''s legs ''1'', ''3'' (orange). The ''vector''
+    block fades.
+
+    S3 (''These numbers are called components…''): ''a = (5, 1)'' (68 px teal) at (1100, 330); under it the keyword ''components'' (54 px) at (1180, 430)
+    with two gold pointers fanning to the ''5'' and the ''1'' inside a = (5, 1); then ''b = (1, 3)'' (68 px orange) at (1100, 560) with ''components'' at
+    (1180, 660) pointing to ''1'' and ''3'' (U-M3.3: no sentence on screen, the voice says it).
+
+    S4 (''Pythagoras'' theorem…''): right-angle ticks at (5, 0) and (1, 0) on the picture; the a/b block slides up and a CalcStack takes the maths zone:
+    line 1 BraceNote option A ''|a| = √(5² + 1²) = √26 = 5.099'' with an underbrace under |a| reading ''length of a'' (teal, 54 px), the two bars of |a|
+    flash gold once and the length bracket on a pulses; the underbrace words fade after 2.5 s leaving |a|; line 2 ''|b| = √(1² + 3²) = √10 = 3.162'' (orange).
+    Keyword ''Pythagoras'' (54 px, muted) beside line 1 for 2 s. a = (5, 1) and b = (1, 3) stay small (54 px) under the picture at (240, 790) and (620,
+    790) from here to s07 (U-M3.6).'
+  voiceover: 'A vector is an arrow, with a length and a direction. Vector a goes five steps right and one up, and vector b goes one right and three up.
+    These numbers are called components: five and one are the components of vector a and one and three are those of vector b. Pythagoras'' theorem gives
+    their lengths, written with two straight bars: about five point one and three point one six.'
   on_screen_eq:
     latex: '|\mathbf a| = \sqrt{5^2+1^2} = \sqrt{26} = 5.099'
     vallis_eq: 'provenance only, not drawn: length by Pythagoras (ours, our numbers)'
@@ -219,25 +244,36 @@ scenes:
   t:
   - 46.6
   - 87.25
-  status: reused
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s03_definition
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Picture: the pair plane with a, b and their legs; 'a = (5, 1)' and 'b = (1, 3)' (54 px, teal/orange) stay just below the picture at (240, 790) and (620, 790) (U-M3.6). No grid note.
-    S1-S2 ('…multiply the matching components, and then add'): nothing new in text; the leg labels 5|1 and 1|3 pulse in matching pairs (first: 5 with 1; second: 1 with 3).
-    S3 ('Arrows in three-dimensional space…'): main equation 'a·b = a₁b₁ + a₂b₂ + a₃b₃' at T.eq 84 px, (1080, 140); the keywords 'x', 'y', 'z' (54 px) appear under the three terms one by one as the voice says them.
-    S4 ('Ours lie flat…drops out'): on 'drops out' the a₃b₃ term greys to 30 % and a rose strike draws through it (10 frames); keyword '2-D' (54 px) under it replaces 'z'.
-    S5 ('The first components give…'): the second line 'a·b = a₁b₁ + a₂b₂' at (1080, 330) (68 px) with the gold boxed tags KEPT (U-M3.7, the one user-approved box): under a₁b₁ 'a₁ = 5, b₁ = 1' tagged 'first components', under a₂b₂ 'a₂ = 1, b₂ = 3' tagged 'second components'; each tag appears on its half of the sentence.
-    S6 ('Adding them, a dot b equals eight…'): CalcStack line '= 5 × 1 + 1 × 3 = 5 + 3 = 8' at (1080, 560); the 8 grows to T.hero at (1500, 720).
-    S7 ('A number like this is called a scalar…'): keyword 'scalar' (54 px) with a gold pointer to the big 8, and a small crossed-out arrow icon beside the 8 ('not an arrow' is said, not written); on 'scalar product' the word 'scalar product' appears under 'scalar' (54 px).
-  voiceover: 'So how do we find the dot product? We multiply the matching components, and then add. Arrows in three-dimensional
-    space have three components, along x, y and z, so we''d add three products. Ours lie flat, in two dimensions, so the
-    third term drops out. The first components give five times one, which is five, and the second give one times three,
-    which is three. Adding them, a dot b equals eight: a single number, not an arrow. A number like this is called a scalar,
-    so the dot product is also called the scalar product.'
+  visual: 'Picture: the pair plane with a, b and their legs; ''a = (5, 1)'' and ''b = (1, 3)'' (54 px, teal/orange) stay just below the picture at (240,
+    790) and (620, 790) (U-M3.6). No grid note.
+
+    S1-S2 (''…multiply the matching components, and then add''): nothing new in text; the leg labels 5|1 and 1|3 pulse in matching pairs (first: 5 with
+    1; second: 1 with 3).
+
+    S3 (''Arrows in three-dimensional space…''): main equation ''a·b = a₁b₁ + a₂b₂ + a₃b₃'' at T.eq 84 px, (1080, 140); the keywords ''x'', ''y'', ''z''
+    (54 px) appear under the three terms one by one as the voice says them.
+
+    S4 (''Ours lie flat…drops out''): on ''drops out'' the a₃b₃ term greys to 30 % and a rose strike draws through it (10 frames); keyword ''2-D'' (54 px)
+    under it replaces ''z''.
+
+    S5 (''The first components give…''): the second line ''a·b = a₁b₁ + a₂b₂'' at (1080, 330) (68 px) with the gold boxed tags KEPT (U-M3.7, the one user-approved
+    box): under a₁b₁ ''a₁ = 5, b₁ = 1'' tagged ''first components'', under a₂b₂ ''a₂ = 1, b₂ = 3'' tagged ''second components''; each tag appears on its
+    half of the sentence.
+
+    S6 (''Adding them, a dot b equals eight…''): CalcStack line ''= 5 × 1 + 1 × 3 = 5 + 3 = 8'' at (1080, 560); the 8 grows to T.hero at (1500, 720).
+
+    S7 (''A number like this is called a scalar…''): keyword ''scalar'' (54 px) with a gold pointer to the big 8, and a small crossed-out arrow icon beside
+    the 8 (''not an arrow'' is said, not written); on ''scalar product'' the word ''scalar product'' appears under ''scalar'' (54 px).'
+  voiceover: 'So how do we find the dot product? We multiply the matching components, and then add. Arrows in three-dimensional space have three components,
+    along x, y and z, so we''d add three products. Ours lie flat, in two dimensions, so the third term drops out. The first components give five times one,
+    which is five, and the second give one times three, which is three. Adding them, a dot b equals eight: a single number, not an arrow. A number like
+    this is called a scalar, so the dot product is also called the scalar product.'
   on_screen_eq:
     latex: \mathbf a\cdot\mathbf b = a_1b_1 + a_2b_2 + a_3b_3
     vallis_eq: 'provenance only, not drawn: Kundu (2.2), first two members (page image checked)'
@@ -282,30 +318,43 @@ scenes:
 - id: s04_cosine
   t:
   - 87.25
-  - 146.025
-  status: changed
+  - 146.775
+  status: kept + extended
   reuse:
     from: ch00_dot_product_why(v6fix1)/s04_cosine
     narration: changed (new sentences marked in script.md)
   changes:
-  - D1 cosine as a shadow on a unit circle, before it is named (research §3, §5c)
+  - 'v6 kept word for word; ADDED after v6''s ''The cosine is one…'': the cosine as the piece a unit arrow marks off on a line (research §3 D1)'
   related: []
-  visual: |-
-    Picture: pair plane; θ arc between a and b (label 'θ' 68 px), length brackets on a and b. No 'Definition 2' anywhere (U-M3.8), no CosDial panel, no gauge, no n/22.
-    S1 ('Now let's look at how the angle…'): the θ arc draws.
-    S2 ('The dot product can also be written…'): main equation 'a·b = |a| |b| cos θ' at T.eq 84 px (1080, 140); keyword 'angle' with a pointer from θ in the equation to the arc.
-    S3 ('The cosine is one…'): a bare horizontal line from −1 to +1 (no panel rect) at (1120-1800, 300) with three ticks revealed with the three clauses: 'cos 0° = 1', 'cos 90° = 0', 'cos 180° = −1' (54 px); tiny arrow-pair icons above each tick (same way, right angle, opposite).
-    S4 ('Here theta is about sixty degrees…'): the cos line fades; CalcStack (U-M3.9): '|a| = √(5² + 1²) = √26 = 5.099' (teal) and '|b| = √(1² + 3²) = √10 = 3.162' (orange) at y 300 and 390; then 'θ = 60.3°, cos θ = 0.496' at y 480.
-    S5 ('Multiplied out, that's eight again…'): 'a·b = 5.099 × 3.162 × 0.496 ≈ 8' at y 600 (R1: the rounded factors give 7.997, so ≈, never '= 8.000'); bold 8; on 'equation one' a plain '(1)' (54 px muted, no ring) at the right of the main equation.
+  visual: 'Picture: pair plane; θ arc between a and b (label ''θ'' 68 px), length brackets on a and b. No ''Definition 2'' anywhere (U-M3.8), no CosDial
+    panel, no gauge, no n/22.
 
-    CHANGES FOR THIS MOVIE: NEW S2-S6 before the v6 content: a unit circle in the picture zone (radius 220 px, faint), a slate unit arrow at θ, the drop line dashed, the marked piece as a 20-px teal band labelled 'cos θ' with a live value; the arrow turns 0° -> 90° -> 180° as each case is said, the band shrinking to 0 and growing backwards (rose, hatched, '−1'). Then a and b return and the v6 equation build follows.
-  voiceover: 'Now let''s look at how the angle between the two arrows plays a role. First, what is the cosine of an angle?
-    Draw an arrow one unit long, at an angle theta to a flat line, and drop a line from its tip straight down onto that
-    line. The piece it marks off along the line is the cosine of theta. When the arrow lies along the line, the piece is
-    the whole arrow, so the cosine is one. When the arrow stands at a right angle, the piece shrinks to nothing, so the
-    cosine is zero. And when the arrow points backwards, the piece is a whole unit backwards: minus one. The dot product
-    can also be written as the two lengths times the cosine of theta, the angle between them. Here theta is about sixty
-    degrees, with a cosine of about point five. Multiplied out, that''s eight again, and we''ll call this equation one.'
+    S1 (''Now let''s look at how the angle…''): the θ arc draws.
+
+    S2 (''The dot product can also be written…''): main equation ''a·b = |a| |b| cos θ'' at T.eq 84 px (1080, 140); keyword ''angle'' with a pointer from
+    θ in the equation to the arc.
+
+    S3 (''The cosine is one…''): a bare horizontal line from −1 to +1 (no panel rect) at (1120-1800, 300) with three ticks revealed with the three clauses:
+    ''cos 0° = 1'', ''cos 90° = 0'', ''cos 180° = −1'' (54 px); tiny arrow-pair icons above each tick (same way, right angle, opposite).
+
+    S8 (''Here theta is about sixty degrees…''): the cos line fades; CalcStack (U-M3.9): ''|a| = √(5² + 1²) = √26 = 5.099'' (teal) and ''|b| = √(1² + 3²)
+    = √10 = 3.162'' (orange) at y 300 and 390; then ''θ = 60.3°, cos θ = 0.496'' at y 480.
+
+    S9 (''Multiplied out, that''s eight again…''): ''a·b = 5.099 × 3.162 × 0.496 ≈ 8'' at y 600 (R1: the rounded factors give 7.997, so ≈, never ''= 8.000'');
+    bold 8; on ''equation one'' a plain ''(1)'' (54 px muted, no ring) at the right of the main equation.
+
+
+    KEPT + EXTENDED (0.1b, 2026-10-28): v6''s S1-S3 exactly as above (arc, main equation, the -1..+1 line with its three ticks). NEW S4-S7, the unit-arrow
+    picture, in the picture zone while the main equation and the tick line stay in the maths zone: a faint unit circle (radius 220 px), a slate unit arrow
+    at θ, the drop line dashed, the marked piece as a 20-px teal band labelled ''cos θ'' with a live value; on S7 the arrow turns 0° -> 90° -> 180° in step
+    with the three clauses, the band shrinking to 0 and growing backwards (rose, hatched, ''−1''), and each stop lights the matching v6 tick (''cos 0° =
+    1'', ''cos 90° = 0'', ''cos 180° = −1'') with a gold link. Then a and b return and v6''s S4-S5 follow as S8-S9.'
+  voiceover: Now let's look at how the angle between the two arrows plays a role. The dot product can also be written as the two lengths times the cosine
+    of theta, the angle between them. The cosine is one when two arrows point the same way, zero at a right angle, and minus one when they point in opposite
+    directions. Here's another way to see the cosine. Draw an arrow one unit long, at an angle theta to a flat line, and drop a line from its tip straight
+    down onto that line. The piece it marks off along the line is the cosine of theta. So the piece is the whole arrow when it lies along the line, nothing
+    when it stands at a right angle, and a whole unit backwards when it points the other way. Here theta is about sixty degrees, with a cosine of about
+    point five. Multiplied out, that's eight again, and we'll call this equation one. [beat]
   on_screen_eq:
     latex: \mathbf a\cdot\mathbf b = |\mathbf a|\,|\mathbf b|\cos\theta
     vallis_eq: 'provenance only, not drawn: Kundu §2.8 u·v = uv cos θ (unnumbered); shown with a plain (1)'
@@ -340,72 +389,85 @@ scenes:
     - fluidpy.geo.vectors.norm
     - fluidpy.geo.vectors.dot
     data: data/pair.json -> theta_deg, cos_theta, cos_reminder, norm_a, norm_b; NEW display_cos_product (N1)
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_angle_between_V1_known_angles_and_field, ::test_dot_V1_cosine_form_on_field_of_angles,
-      ::test_dot_V2_symbolic_cosine_law
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_angle_between_V1_known_angles_and_field, ::test_dot_V1_cosine_form_on_field_of_angles, ::test_dot_V2_symbolic_cosine_law
   exaggeration: []
   sentence_times:
   - - 87.25
     - 91.85
   - - 92.2
-    - 95.275
-  - - 95.625
-    - 103.975
-  - - 104.325
-    - 108.675
-  - - 109.025
-    - 115.025
-  - - 115.375
-    - 121.475
-  - - 121.825
-    - 127.525
-  - - 127.875
-    - 134.875
-  - - 135.225
-    - 140.2
-  - - 140.55
-    - 145.225
+    - 99.2
+  - - 99.55
+    - 108.45
+  - - 108.8
+    - 111.575
+  - - 111.925
+    - 120.275
+  - - 120.625
+    - 124.975
+  - - 125.325
+    - 134.925
+  - - 135.275
+    - 140.25
+  - - 140.6
+    - 145.275
 - id: s05_angle_cases
   t:
-  - 146.025
-  - 223.775
-  status: changed
+  - 146.775
+  - 224.525
+  status: kept + extended
   reuse:
     from: ch00_dot_product_why(v6fix1)/s05_angle_cases
     narration: changed (new sentences marked in script.md)
   changes:
-  - D4 half-plane tint sign dial
+  - 'v6 kept word for word and device for device; ADDED after it: the half-plane sweep (research §3 D4)'
   related: []
-  visual: |-
-    The a, b plane fades. No panel frames, no chips, no gauges. (v6: only the reveals of S3-S5 move to the new sentences; every drawn element is the v5 one.)
+  visual: 'The a, b plane fades. No panel frames, no chips, no gauges. (v6: only the reveals of S3-S5 move to the new sentences; every drawn element is
+    the v5 one.)
 
-    S1 ('Let's keep one arrow fixed…'): a large teal p (260 px long, 10-px shaft) at the top centre (800-1060, 140); three copies fly down into three panels (x 80-620, 690-1230, 1300-1840; y 300-700; faint grid only, 70 px per unit); p identical in each.
 
-    S2 ('The fixed arrow, p, has components three and zero'): 'p = (3, 0)' (68 px teal) beside the big p at (1100, 160).
+    S1 (''Let''s keep one arrow fixed…''): a large teal p (260 px long, 10-px shaft) at the top centre (800-1060, 140); three copies fly down into three
+    panels (x 80-620, 690-1230, 1300-1840; y 300-700; faint grid only, 70 px per unit); p identical in each.
 
-    S3 ('First, the other vector, q, points in the same direction as p…', U-M6.1): orange q = (2, 0) grows in panel 1 on 'the other vector, q'; arc '0°' and keyword 'same direction' (54 px, under the arrows) on 'same direction'; label 'q = (2, 0)' AT ITS TIP (TipLabel, above the tip because q lies on p's shaft) on 'components two and zero'.
 
-    S4 ('Three times two plus zero times zero is six…'): under the panel at y 740 (68 px) 'p·q = 3×2 + 0×0 = 6', the 6 bold; keyword 'positive' (54 px) at y 810; ink product rectangle on q's line.
+    S2 (''The fixed arrow, p, has components three and zero''): ''p = (3, 0)'' (68 px teal) beside the big p at (1100, 160).
 
-    S5 ('In the next case, vector q is at a right angle to p…', U-M6.2): q = (0, 2) grows in panel 2 on 'at a right angle'; right-angle tick '90°'; label 'q = (0, 2)' above its tip on 'components zero and two'; 'p·q = 3×0 + 0×2 = 0' on 'the dot product is zero'.
 
-    S6 ('When two vectors are at right angles…'): keyword 'right angle → 0' (54 px) under panel 2.
+    S3 (''First, the other vector, q, points in the same direction as p…'', U-M6.1): orange q = (2, 0) grows in panel 1 on ''the other vector, q''; arc
+    ''0°'' and keyword ''same direction'' (54 px, under the arrows) on ''same direction''; label ''q = (2, 0)'' AT ITS TIP (TipLabel, above the tip because
+    q lies on p''s shaft) on ''components two and zero''.
 
-    S7 (last): q = (−2, 0) in panel 3, label 'q = (−2, 0)' LEFT of its tip (end-anchored); arc '180°'; 'p·q = 3×(−2) + 0×0 = −6' with −6 in rose; rose hatched rectangle behind the start; keyword 'negative'; keyword 'opposite' under the arrows.
 
-    S8 ('When two vectors point in opposite directions, their dot product is negative.'): no new text; 'opposite' pulses on 'opposite directions' and 'negative' on 'is negative' (54 -> 68 px), mirroring the right-angle rule of S6.
+    S4 (''Three times two plus zero times zero is six…''): under the panel at y 740 (68 px) ''p·q = 3×2 + 0×0 = 6'', the 6 bold; keyword ''positive'' (54
+    px) at y 810; ink product rectangle on q''s line.
 
-    S9 ('So the dot product measures…'): the three results 6, 0, −6 pulse in turn; no sentence on screen.
 
-    CHANGES FOR THIS MOVIE: after the three panels: one large dial, p fixed, q sweeps 360° (4 s) with the half in front of p tinted teal 15 % ('+'), the half behind rose 15 % hatched ('−'), the across line slate ('0'); live 'p·q' with its sign glyph; each half lights on its words.
-  voiceover: 'Let''s keep one arrow fixed in all three pictures, and change only the other one. The fixed arrow, p, has
-    components three and zero. First, the other vector, q, points in the same direction as p and has components two and
-    zero. Three times two plus zero times zero is six, a positive number. In the next case, vector q is at a right angle
-    to p, with components zero and two, and the dot product is zero. In general, whenever two vectors are at right angles,
-    their dot product is zero. Last, q has components minus two and zero, pointing in the opposite direction: three times
-    minus two is minus six, a negative number. When two vectors point in opposite directions, their dot product is negative.
-    In fact, q doesn''t have to point exactly along p. Let''s sweep it all the way round. Anywhere in the half in front
-    of p, the dot product is positive. On the line straight across, it''s zero. And anywhere in the half behind, it''s negative.
-    So the dot product measures how much two arrows point the same way.'
+    S5 (''In the next case, vector q is at a right angle to p…'', U-M6.2): q = (0, 2) grows in panel 2 on ''at a right angle''; right-angle tick ''90°'';
+    label ''q = (0, 2)'' above its tip on ''components zero and two''; ''p·q = 3×0 + 0×2 = 0'' on ''the dot product is zero''.
+
+
+    S6 (''When two vectors are at right angles…''): keyword ''right angle → 0'' (54 px) under panel 2.
+
+
+    S7 (last): q = (−2, 0) in panel 3, label ''q = (−2, 0)'' LEFT of its tip (end-anchored); arc ''180°''; ''p·q = 3×(−2) + 0×0 = −6'' with −6 in rose;
+    rose hatched rectangle behind the start; keyword ''negative''; keyword ''opposite'' under the arrows.
+
+
+    S8 (''When two vectors point in opposite directions, their dot product is negative.''): no new text; ''opposite'' pulses on ''opposite directions''
+    and ''negative'' on ''is negative'' (54 -> 68 px), mirroring the right-angle rule of S6.
+
+
+    S9 (''So the dot product measures…''): the three results 6, 0, −6 pulse in turn; no sentence on screen.
+
+
+    CHANGES FOR THIS MOVIE: after the three panels: one large dial, p fixed, q sweeps 360° (4 s) with the half in front of p tinted teal 15 % (''+''), the
+    half behind rose 15 % hatched (''−''), the across line slate (''0''); live ''p·q'' with its sign glyph; each half lights on its words.'
+  voiceover: 'Let''s keep one arrow fixed in all three pictures, and change only the other one. The fixed arrow, p, has components three and zero. First,
+    the other vector, q, points in the same direction as p and has components two and zero. Three times two plus zero times zero is six, a positive number.
+    In the next case, vector q is at a right angle to p, with components zero and two, and the dot product is zero. In general, whenever two vectors are
+    at right angles, their dot product is zero. Last, q has components minus two and zero, pointing in the opposite direction: three times minus two is
+    minus six, a negative number. When two vectors point in opposite directions, their dot product is negative. In fact, q doesn''t have to point exactly
+    along p. Let''s sweep it all the way round. Anywhere in the half in front of p, the dot product is positive. On the line straight across, it''s zero.
+    And anywhere in the half behind, it''s negative. So the dot product measures how much two arrows point the same way.'
   on_screen_eq: null
   on_screen_eq_extra:
   - latex: \mathbf p\cdot\mathbf q = 3\times2 + 0\times0 = 6
@@ -447,62 +509,57 @@ scenes:
     - fluidpy.geo.vectors.angle_between
     - fluidpy.geo.vectors.scalar_projection
     data: data/same_way.json
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_angle_between_V1_known_angles_and_field,
-      ::test_scalar_projection_V1_and_V7
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_angle_between_V1_known_angles_and_field, ::test_scalar_projection_V1_and_V7
   exaggeration: []
   sentence_times:
-  - - 146.025
-    - 151.45
-  - - 151.8
-    - 155.825
-  - - 156.175
-    - 163.1
-  - - 163.45
-    - 168.4
-  - - 168.75
-    - 177.175
-  - - 177.525
-    - 183.425
-  - - 183.775
-    - 193.55
-  - - 193.9
-    - 199.25
-  - - 199.6
-    - 203.6
-  - - 203.95
-    - 206.325
-  - - 206.675
-    - 211.225
-  - - 211.575
-    - 214.525
-  - - 214.875
-    - 218.325
-  - - 218.675
-    - 222.975
+  - - 146.775
+    - 152.2
+  - - 152.55
+    - 156.575
+  - - 156.925
+    - 163.85
+  - - 164.2
+    - 169.15
+  - - 169.5
+    - 177.925
+  - - 178.275
+    - 184.175
+  - - 184.525
+    - 194.3
+  - - 194.65
+    - 200.0
+  - - 200.35
+    - 204.35
+  - - 204.7
+    - 207.075
+  - - 207.425
+    - 211.975
+  - - 212.325
+    - 215.275
+  - - 215.625
+    - 219.075
+  - - 219.425
+    - 223.725
 - id: s05a_matching_parts
   t:
-  - 223.775
-  - 292.875
+  - 224.525
+  - 294.775
   status: new
   changes:
   - V-D4 key 'why' scene (research §1b/§1c, user priority) + D3 expand the brackets
   related:
   - '#1a vectors and index notation'
-  visual: 'Picture zone: a = (5, 1) splits into two arrows end to end, the x piece (teal, 5 along x) and the y piece (teal
-    lighter, 1 along y); b = (1, 3) splits likewise into its x part (orange, 1) and y part (orange lighter, 3). S5: the
-    x piece and b''s x part glow together, ''5 × 1''; S6: the y pieces glow, ''1 × 3''. S7: the mixed pairs (x piece with
-    b''s y part, y piece with b''s x part) are drawn with right-angle ticks and struck in the maths zone with ''x̂ · ŷ =
-    0''. Maths zone, built with Layered: (5x̂ + ŷ)·(x̂ + 3ŷ) = 5·1 (x̂·x̂) + 5·3 (x̂·ŷ) + 1·1 (ŷ·x̂) + 1·3 (ŷ·ŷ); the two
-    middle terms struck; x̂·x̂ = ŷ·ŷ = 1 from equation one (cos 0 = 1); result 5 + 3 = 8. Gold link from each glowing pair
-    to its term.'
-  voiceover: 'But why does multiplying matching components give the same answer as the lengths and the cosine? Let''s split
-    vector a into two arrows laid end to end: five steps along x, and one step along y. To write them, let x hat and y hat
-    be arrows one unit long, pointing along x and along y. Now take the dot product of each piece with b, which we can split
-    the same way. The x piece of vector a points along x, so it only sees the x part of b: five times one. The y piece only
-    sees the y part of b: one times three. A piece along x and a part along y are at right angles, and arrows at right angles
-    give zero, so these mixed terms drop out. And a unit arrow dotted with itself is one times one times cos zero, which
-    is one. What''s left is five times one plus one times three, eight: exactly the component recipe. So each axis does
-    its own multiplication, and we add up the results.'
+  visual: 'Picture zone: a = (5, 1) splits into two arrows end to end, the x piece (teal, 5 along x) and the y piece (teal lighter, 1 along y); b = (1,
+    3) splits likewise into its x part (orange, 1) and y part (orange lighter, 3). S5: the x piece and b''s x part glow together, ''5 × 1''; S6: the y pieces
+    glow, ''1 × 3''. S7: the mixed pairs (x piece with b''s y part, y piece with b''s x part) are drawn with right-angle ticks and struck in the maths zone
+    with ''x̂ · ŷ = 0''. Maths zone, built with Layered: (5x̂ + ŷ)·(x̂ + 3ŷ) = 5·1 (x̂·x̂) + 5·3 (x̂·ŷ) + 1·1 (ŷ·x̂) + 1·3 (ŷ·ŷ); the two middle terms struck;
+    x̂·x̂ = ŷ·ŷ = 1 from equation one (cos 0 = 1); result 5 + 3 = 8. Gold link from each glowing pair to its term.'
+  voiceover: 'But why does multiplying matching components give the same answer as the lengths and the cosine? Let''s split vector a into two arrows laid
+    end to end: five steps along x, and one step along y. To write them, let x hat and y hat be arrows one unit long, pointing along x and along y. Now
+    take the dot product of each piece with b, which we can split the same way. The x piece of vector a points along x, so it only sees the x part of b:
+    five times one. The y piece only sees the y part of b: one times three. A piece along x and a part along y are at right angles, and arrows at right
+    angles give zero, so these mixed terms drop out. And a unit arrow dotted with itself is one times one times cos zero, which is one. What''s left is
+    five times one plus one times three, eight: exactly the component recipe. [beat] So each axis does its own multiplication, and we add up the results.'
   on_screen_eq:
     latex: (5\hat{\mathbf x}+\hat{\mathbf y})\cdot(\hat{\mathbf x}+3\hat{\mathbf y})=5\cdot1+1\cdot3=8
     vallis_eq: 'provenance only: expansion of the component form (Kundu App. B; our numbers)'
@@ -529,47 +586,53 @@ scenes:
     builder: movies/data/build_ch00_dot_product_v01b.py
   exaggeration: []
   sentence_times:
-  - - 223.775
-    - 230.35
-  - - 230.7
-    - 238.3
-  - - 238.65
-    - 245.475
-  - - 245.825
-    - 251.25
-  - - 251.6
-    - 258.675
-  - - 259.025
-    - 263.475
-  - - 263.825
-    - 272.9
-  - - 273.25
-    - 279.45
-  - - 279.8
-    - 286.725
-  - - 287.075
-    - 292.075
+  - - 224.525
+    - 231.1
+  - - 231.45
+    - 239.05
+  - - 239.4
+    - 246.225
+  - - 246.575
+    - 252.0
+  - - 252.35
+    - 259.425
+  - - 259.775
+    - 264.225
+  - - 264.575
+    - 273.65
+  - - 274.0
+    - 280.2
+  - - 280.55
+    - 287.475
+  - - 288.975
+    - 293.975
 - id: s06_shadow
   t:
-  - 292.875
-  - 323.775
-  status: reused
+  - 294.775
+  - 325.675
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s06_shadow
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Back to the a, b plane (a = (5, 1), b = (1, 3) under the picture). No heading strip, no 'why' sentences, no boxed row.
-    S1 ('Now let's find a picture…'): b's line extends faintly across the plane.
-    S2 ('From the tip of vector a we drop a line…'): dashed drop-line from a's tip to the foot (0.8, 2.4), right-angle mark.
-    S3 ('The piece it marks off…'): teal shadow band O → foot (20 px wide, 70 %); keyword 'shadow' (54 px) with a pointer to the band.
-    S4 ('In this right triangle…'): triangle O-foot-tip tinted 12 %; on the picture '|a| = 5.099' along a and 'θ' at O (54 px); CalcStack line 1 'cos θ = shadow / |a|', line 2 'shadow = |a| cos θ' (68 px).
-    S5 ('Divide both sides of equation one…'): line 3 '(1) ÷ |b|:  a·b / |b| = |a| |b| cos θ / |b|'; the two |b| on the right get a rose strike on 'only the shadow is left'; line 4 'a·b / |b| = |a| cos θ = shadow' (the stack slides up, ≤ 3 lines visible); then '8 / 3.162 = 2.530' bold teal with a gold underline; the band label becomes 'shadow = 2.530'.
-  voiceover: 'Now let''s find a picture for the dot product. From the tip of vector a we drop a line onto b''s line, at
-    a right angle. The piece it marks off is called the shadow of vector a on b. In this right triangle, the shadow is the
-    length of vector a times cos theta. Divide both sides of equation one by the length of b, and only the shadow is left
-    on the right: eight over three point one six, or two point five three.'
+  visual: 'Back to the a, b plane (a = (5, 1), b = (1, 3) under the picture). No heading strip, no ''why'' sentences, no boxed row.
+
+    S1 (''Now let''s find a picture…''): b''s line extends faintly across the plane.
+
+    S2 (''From the tip of vector a we drop a line…''): dashed drop-line from a''s tip to the foot (0.8, 2.4), right-angle mark.
+
+    S3 (''The piece it marks off…''): teal shadow band O → foot (20 px wide, 70 %); keyword ''shadow'' (54 px) with a pointer to the band.
+
+    S4 (''In this right triangle…''): triangle O-foot-tip tinted 12 %; on the picture ''|a| = 5.099'' along a and ''θ'' at O (54 px); CalcStack line 1 ''cos
+    θ = shadow / |a|'', line 2 ''shadow = |a| cos θ'' (68 px).
+
+    S5 (''Divide both sides of equation one…''): line 3 ''(1) ÷ |b|:  a·b / |b| = |a| |b| cos θ / |b|''; the two |b| on the right get a rose strike on ''only
+    the shadow is left''; line 4 ''a·b / |b| = |a| cos θ = shadow'' (the stack slides up, ≤ 3 lines visible); then ''8 / 3.162 = 2.530'' bold teal with
+    a gold underline; the band label becomes ''shadow = 2.530''.'
+  voiceover: 'Now let''s find a picture for the dot product. From the tip of vector a we drop a line onto b''s line, at a right angle. The piece it marks
+    off is called the shadow of vector a on b. In this right triangle, the shadow is the length of vector a times cos theta. Divide both sides of equation
+    one by the length of b, and only the shadow is left on the right: eight over three point one six, or two point five three.'
   on_screen_eq:
     latex: \text{shadow} = |\mathbf a|\cos\theta = \frac{\mathbf a\cdot\mathbf b}{|\mathbf b|} = \frac{8}{3.162} = 2.530
     vallis_eq: 'provenance only: ours (scalar projection), derived on screen from (1)'
@@ -603,40 +666,48 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_projection_V1_remainder_perpendicular_and_idempotent
   exaggeration: []
   sentence_times:
-  - - 292.875
-    - 296.1
-  - - 296.45
-    - 302.0
-  - - 302.35
-    - 306.725
-  - - 307.075
-    - 312.4
-  - - 312.75
-    - 322.975
+  - - 294.775
+    - 298.0
+  - - 298.35
+    - 303.9
+  - - 304.25
+    - 308.625
+  - - 308.975
+    - 314.3
+  - - 314.65
+    - 324.875
 - id: s07_unit_vector
   t:
-  - 323.775
-  - 366.525
-  status: changed
+  - 325.675
+  - 368.425
+  status: kept + extended
   reuse:
     from: ch00_dot_product_why(v6fix1)/s07_unit_vector
     narration: changed (new sentences marked in script.md)
   changes:
-  - D1/D7 turning ruler
+  - 'v6 kept word for word and device for device; ADDED after it: the turning ruler (research §3 D1/D7)'
   related: []
-  visual: |-
-    Restored scene (v5 style: keywords only, no strip header, no card). Plane with a, b and the 2.530 shadow band.
-    S1 ('There's another way…'): the shadow band pulses once.
-    S2 ('Divide b by its own length to get b hat…'): b shrinks smoothly along its own line to length 1 (1.5 s, the existing 61-sample b_series), leaving the orange unit arrow; label 'b̂' at its tip (68 px); keyword 'unit vector' (54 px) with a pointer to b̂ and a 1-unit bracket on b̂ labelled '1'; main line 'b̂ = b / |b|' (T.eq).
-    S3 ('Its components are…'): CalcStack 'b̂ = (1 / 3.162, 3 / 3.162) = (0.316, 0.949)' with the 1 and 3 in orange like b's legs; b̂'s own legs drawn faintly.
-    S4 ('Dividing b by its length…'): line 'a·b̂ = 5 × 0.316 + 1 × 0.949 ≈ 2.53' (R2: with the shown digits the sum is 2.529, so ≈); a gold check mark beside 2.53 next to the band label 2.530 (no text).
+  visual: 'Restored scene (v5 style: keywords only, no strip header, no card). Plane with a, b and the 2.530 shadow band.
 
-    CHANGES FOR THIS MOVIE: b̂ becomes a ruler (orange, tick marks every 0.5, numbers 44 px); the shadow end reads '2.53'; on 'Turn the ruler' it turns from b's angle to 0° (reading 5.00) and to 90° (reading 1.00) and back, the live reading following a · ruler (from data, 5 cos α + 1 sin α).
-  voiceover: 'There''s another way to reach the same shadow. Divide b by its own length to get b hat, the unit vector along
-    b: length one, same direction. Its components are one and three, each divided by three point one six. Dividing b by
-    its length divides the dot product by it too, so a dot b hat is the shadow itself: two point five three again. Think
-    of b hat as a ruler laid along b''s line. The dot product of vector a with the ruler is the reading where the shadow
-    of vector a ends. Turn the ruler, and the reading changes, even though vector a stays the same.'
+    S1 (''There''s another way…''): the shadow band pulses once.
+
+    S2 (''Divide b by its own length to get b hat…''): b shrinks smoothly along its own line to length 1 (1.5 s, the existing 61-sample b_series), leaving
+    the orange unit arrow; label ''b̂'' at its tip (68 px); keyword ''unit vector'' (54 px) with a pointer to b̂ and a 1-unit bracket on b̂ labelled ''1'';
+    main line ''b̂ = b / |b|'' (T.eq).
+
+    S3 (''Its components are…''): CalcStack ''b̂ = (1 / 3.162, 3 / 3.162) = (0.316, 0.949)'' with the 1 and 3 in orange like b''s legs; b̂''s own legs drawn
+    faintly.
+
+    S4 (''Dividing b by its length…''): line ''a·b̂ = 5 × 0.316 + 1 × 0.949 ≈ 2.53'' (R2: with the shown digits the sum is 2.529, so ≈); a gold check mark
+    beside 2.53 next to the band label 2.530 (no text).
+
+
+    CHANGES FOR THIS MOVIE: b̂ becomes a ruler (orange, tick marks every 0.5, numbers 44 px); the shadow end reads ''2.53''; on ''Turn the ruler'' it turns
+    from b''s angle to 0° (reading 5.00) and to 90° (reading 1.00) and back, the live reading following a · ruler (from data, 5 cos α + 1 sin α).'
+  voiceover: 'There''s another way to reach the same shadow. Divide b by its own length to get b hat, the unit vector along b: length one, same direction.
+    Its components are one and three, each divided by three point one six. Dividing b by its length divides the dot product by it too, so a dot b hat is
+    the shadow itself: two point five three again. Think of b hat as a ruler laid along b''s line. The dot product of vector a with the ruler is the reading
+    where the shadow of vector a ends. Turn the ruler, and the reading changes, even though vector a stays the same.'
   on_screen_eq:
     latex: \hat{\mathbf b} = \frac{\mathbf b}{|\mathbf b|} = \left(\frac{1}{3.162},\ \frac{3}{3.162}\right) = (0.316,\ 0.949)
     vallis_eq: 'provenance only: ours (unit vector)'
@@ -665,43 +736,44 @@ scenes:
     also:
     - fluidpy.geo.vectors.dot
     - fluidpy.geo.vectors.norm
-    data: data/pair.json -> b_hat, a_dot_bhat; data/cheap.json -> b_series, len_series, shadow_series; NEW display_bhat_sum
-      (N2)
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V1_component_sum_on_field,
-      ::test_norm_V1_and_V7_scaling
+    data: data/pair.json -> b_hat, a_dot_bhat; data/cheap.json -> b_series, len_series, shadow_series; NEW display_bhat_sum (N2)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V1_component_sum_on_field, ::test_norm_V1_and_V7_scaling
   exaggeration: []
   sentence_times:
-  - - 323.775
-    - 326.625
-  - - 326.975
-    - 334.1
-  - - 334.45
-    - 339.525
-  - - 339.875
-    - 349.125
-  - - 349.475
-    - 353.2
-  - - 353.55
-    - 359.925
-  - - 360.275
-    - 365.725
+  - - 325.675
+    - 328.525
+  - - 328.875
+    - 336.0
+  - - 336.35
+    - 341.425
+  - - 341.775
+    - 351.025
+  - - 351.375
+    - 355.1
+  - - 355.45
+    - 361.825
+  - - 362.175
+    - 367.625
 - id: s08_question
   t:
-  - 366.525
-  - 376.525
-  status: reused
+  - 368.425
+  - 378.425
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s08_question
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    No PartCard, no Slots, no boxed TeX. Picture: the product rectangle grows from the shadow (base 2.530 on b's line, height |b| = 3.162; corners (0, 0), (0.8, 2.4), (−2.2, 3.4), (−3, 1)), ink 18 % fill.
-    S1: maths zone 'a·b = (|a| cos θ) |b| = 2.530 × 3.162 ≈ 8' (68 px) with underbraces 'shadow' (teal) under (|a| cos θ) and 'length of b' (orange) under |b|.
-    S2 ('But why not stop at the shadow?'): '× |b| ?' at T.hero (1450, 620).
-    S3 ('There are three good reasons'): three small gold dots appear under it (no numbers, no headings).
-  voiceover: So the dot product is the shadow times the length of b. But why not stop at the shadow? There are three good
-    reasons.
+  visual: 'No PartCard, no Slots, no boxed TeX. Picture: the product rectangle grows from the shadow (base 2.530 on b''s line, height |b| = 3.162; corners
+    (0, 0), (0.8, 2.4), (−2.2, 3.4), (−3, 1)), ink 18 % fill.
+
+    S1: maths zone ''a·b = (|a| cos θ) |b| = 2.530 × 3.162 ≈ 8'' (68 px) with underbraces ''shadow'' (teal) under (|a| cos θ) and ''length of b'' (orange)
+    under |b|.
+
+    S2 (''But why not stop at the shadow?''): ''× |b| ?'' at T.hero (1450, 620).
+
+    S3 (''There are three good reasons''): three small gold dots appear under it (no numbers, no headings).'
+  voiceover: So the dot product is the shadow times the length of b. But why not stop at the shadow? There are three good reasons.
   on_screen_eq:
     latex: \mathbf a\cdot\mathbf b = (|\mathbf a|\cos\theta)\,|\mathbf b| = 2.530\times3.162 \approx 8
     vallis_eq: 'provenance only: (1) regrouped, with our numbers'
@@ -735,34 +807,40 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_k_cross_V7_quarter_turn_properties
   exaggeration: []
   sentence_times:
-  - - 366.525
-    - 370.5
-  - - 370.85
-    - 373.2
-  - - 373.55
-    - 375.725
+  - - 368.425
+    - 372.4
+  - - 372.75
+    - 375.1
+  - - 375.45
+    - 377.625
 - id: s09_reason1_order
   t:
-  - 376.525
-  - 411.7
-  status: changed
+  - 378.425
+  - 414.3
+  status: kept + extended
   reuse:
     from: ch00_dot_product_why(v6fix1)/s09_reason1_order
     narration: changed (new sentences marked in script.md)
   changes:
-  - D2 two equal rectangles
+  - 'v6 kept word for word and device for device; ADDED after it: the two equal rectangles (research §3 D2)'
   related: []
-  visual: |-
-    Two planes side by side, each 880 px wide (70 px per unit, y 120-600), no panel rects, no chips.
-    S1 ('The first is that the order shouldn't matter'): both planes draw a and b.
-    S2 (shadows): left, a's teal shadow on b's line; under it (68 px) '8 / 3.162 = 2.530'; right, b's orange shadow on a's line; under it '8 / 5.099 = 1.569'.
-    S3 ('Multiply each…both give eight'): each product rectangle grows; lines '2.530 × 3.162 ≈ 8' and '1.569 × 5.099 ≈ 8'; centre bottom 'a·b = b·a' (T.eq).
+  visual: 'Two planes side by side, each 880 px wide (70 px per unit, y 120-600), no panel rects, no chips.
 
-    CHANGES FOR THIS MOVIE: two rectangles grow from the two shadows: teal 2.53 × 3.16 and orange 1.57 × 5.10, side by side, each labelled with its sides; a live gold '=' between their areas '8.0 = 8.0'.
-  voiceover: 'The first is that the order shouldn''t matter. The shadow of vector a on b is two point five three, but the
-    shadow of b on vector a is one point five seven. Multiply each by the length of the arrow it falls on, and both give
-    eight. Let''s draw both products as rectangles. One is two point five three wide and three point one six tall, and the
-    other is one point five seven wide and five point one tall. They have different shapes, but the same area: eight.'
+    S1 (''The first is that the order shouldn''t matter''): both planes draw a and b.
+
+    S2 (shadows): left, a''s teal shadow on b''s line; under it (68 px) ''8 / 3.162 = 2.530''; right, b''s orange shadow on a''s line; under it ''8 / 5.099
+    = 1.569''.
+
+    S3 (''Multiply each…both give eight''): each product rectangle grows; lines ''2.530 × 3.162 ≈ 8'' and ''1.569 × 5.099 ≈ 8''; centre bottom ''a·b = b·a''
+    (T.eq).
+
+
+    CHANGES FOR THIS MOVIE: two rectangles grow from the two shadows: teal 2.53 × 3.16 and orange 1.57 × 5.10, side by side, each labelled with its sides;
+    a live gold ''='' between their areas ''8.0 = 8.0''.'
+  voiceover: 'The first is that the order shouldn''t matter. The shadow of vector a on b is two point five three, but the shadow of b on vector a is one
+    point five seven. Multiply each by the length of the arrow it falls on, and both give eight. Let''s draw both products as rectangles. One is two point
+    five three wide and three point one six tall, and the other is one point five seven wide and five point one tall. They have different shapes, but the
+    same area: eight. [beat]'
   on_screen_eq:
     latex: \mathbf a\cdot\mathbf b = \mathbf b\cdot\mathbf a
     vallis_eq: 'provenance only: symmetry, stated unnumbered in Kundu §2.8'
@@ -804,52 +882,61 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V7_rotation_invariance_symmetry_and_padding
   exaggeration: []
   sentence_times:
-  - - 376.525
-    - 379.775
-  - - 380.125
-    - 388.4
-  - - 388.75
-    - 393.925
-  - - 394.275
-    - 397.425
-  - - 397.775
-    - 407.025
-  - - 407.375
-    - 410.9
+  - - 378.425
+    - 381.675
+  - - 382.025
+    - 390.3
+  - - 390.65
+    - 395.825
+  - - 396.175
+    - 399.325
+  - - 399.675
+    - 408.925
+  - - 409.275
+    - 412.8
 - id: s10_reason2_cheap
   t:
-  - 411.7
-  - 458.575
-  status: reused
+  - 414.3
+  - 461.175
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s10_reason2_cheap
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    U-M4.2: the wind picture (grid, axis words 'east', 'north', teal arrow v) is in the picture zone from frame 4; the maths zone is never empty.
+  visual: 'U-M4.2: the wind picture (grid, axis words ''east'', ''north'', teal arrow v) is in the picture zone from frame 4; the maths zone is never empty.
 
-    S1 ('The second reason is practical…'): maths zone '5×1 + 1×3' (68 px) and '|a| |b| cos θ' (muted) with keywords 'no angle', 'no √' (62 px).
 
-    S2 ('Suppose the wind blows towards the north-east at ten metres per second.'): '10 m/s' beside the arrow, 'north-east' at its tip. No '6 m/s east' / '8 m/s north' leg labels here.
+    S1 (''The second reason is practical…''): maths zone ''5×1 + 1×3'' (68 px) and ''|a| |b| cos θ'' (muted) with keywords ''no angle'', ''no √'' (62 px).
 
-    S3 ('Written as a vector, v has components six and eight.'): dashed legs (no labels); 'v = (6, 8) m/s' at the tip and the TeX v = (6, 8) m/s top right.
 
-    S4 ('How much of this wind blows towards the east?'): keyword 'how much east?' with a gold pointer to the east axis.
+    S2 (''Suppose the wind blows towards the north-east at ten metres per second.''): ''10 m/s'' beside the arrow, ''north-east'' at its tip. No ''6 m/s
+    east'' / ''8 m/s north'' leg labels here.
 
-    S5 ('To find out, … x hat …'): orange x̂ along east, 'x̂ = (1, 0)' under it and in the maths zone.
 
-    S6 ('Then v dot x hat is …'): CalcStack 'v·x̂ = 6×1 + 8×0' then '= 6 m/s' (bold 6).
+    S3 (''Written as a vector, v has components six and eight.''): dashed legs (no labels); ''v = (6, 8) m/s'' at the tip and the TeX v = (6, 8) m/s top
+    right.
 
-    S7 ('So six metres per second is the eastward part of the wind.'): only now the teal shadow band on the east axis, the right-angle tick, '6 m/s east', keyword 'eastward part', gold underline under '= 6 m/s'.
 
-    S8 ('It's simply the first component…'): keyword 'the first component' pointing at the 6 in v = (6, 8).
-  voiceover: 'The second reason is practical: it''s quick to calculate, with no angle and no square root. Suppose the wind
-    blows towards the north-east at ten metres per second. Written as a vector, v has components six and eight. How much
-    of this wind blows towards the east? To find out, we take the dot product of v with the unit vector pointing east, x
-    hat, whose components are one and zero. Then v dot x hat is six times one, plus eight times zero, which is six. So six
-    metres per second is the eastward part of the wind. It''s simply the first component: a dot product with a unit vector
-    picks out the part of v along it.'
+    S4 (''How much of this wind blows towards the east?''): keyword ''how much east?'' with a gold pointer to the east axis.
+
+
+    S5 (''To find out, … x hat …''): orange x̂ along east, ''x̂ = (1, 0)'' under it and in the maths zone.
+
+
+    S6 (''Then v dot x hat is …''): CalcStack ''v·x̂ = 6×1 + 8×0'' then ''= 6 m/s'' (bold 6).
+
+
+    S7 (''So six metres per second is the eastward part of the wind.''): only now the teal shadow band on the east axis, the right-angle tick, ''6 m/s east'',
+    keyword ''eastward part'', gold underline under ''= 6 m/s''.
+
+
+    S8 (''It''s simply the first component…''): keyword ''the first component'' pointing at the 6 in v = (6, 8).'
+  voiceover: 'The second reason is practical: it''s quick to calculate, with no angle and no square root. Suppose the wind blows towards the north-east
+    at ten metres per second. Written as a vector, v has components six and eight. How much of this wind blows towards the east? To find out, we take the
+    dot product of v with the unit vector pointing east, x hat, whose components are one and zero. Then v dot x hat is six times one, plus eight times zero,
+    which is six. So six metres per second is the eastward part of the wind. It''s simply the first component: a dot product with a unit vector picks out
+    the part of v along it.'
   on_screen_eq:
     latex: \mathbf v\cdot\hat{\mathbf x} = 6\times1 + 8\times0 = 6\ \mathrm{m/s}
     vallis_eq: 'provenance only: definition with our numbers'
@@ -880,56 +967,59 @@ scenes:
     - fluidpy.geo.vectors.norm
     - fluidpy.geo.vectors.scalar_projection
     data: data/cheap.json -> v, x_hat, v_dot_xhat, norm_v, proj_v_on_xhat
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_scalar_projection_V1_and_V7,
-      ::test_norm_V1_and_V7_scaling
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_scalar_projection_V1_and_V7, ::test_norm_V1_and_V7_scaling
   exaggeration:
   - 'the wind map has its own scale (arrow length = speed in m/s), said by its axis words; badge: none'
   sentence_times:
-  - - 411.7
-    - 417.975
-  - - 418.325
-    - 423.3
-  - - 423.65
-    - 427.55
-  - - 427.9
-    - 431.0
-  - - 431.35
-    - 440.05
-  - - 440.4
-    - 445.85
-  - - 446.2
-    - 450.65
-  - - 451.0
-    - 457.775
+  - - 414.3
+    - 420.575
+  - - 420.925
+    - 425.9
+  - - 426.25
+    - 430.15
+  - - 430.5
+    - 433.6
+  - - 433.95
+    - 442.65
+  - - 443.0
+    - 448.45
+  - - 448.8
+    - 453.25
+  - - 453.6
+    - 460.375
 - id: s11_work
   t:
-  - 458.575
-  - 524.775
-  status: changed
+  - 461.175
+  - 506.025
+  status: reused (v6 restored)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s11_work
     narration: changed (new sentences marked in script.md)
   changes:
-  - 'V-D1/V-D2 work anchor: wind on a cart held to a track (research §1b/§1c); same numbers as v6''s sled'
+  - v6 sled restored word for word and device for device (the committed 0.1b had replaced it)
   related: []
-  visual: |-
-    Sled scene in the picture zone x 80-1000, ground y 560 (sled icon illustrative). No chips, no gauge, no rulers below 44 px.
-    S1 ('…physics often needs both sizes'): sled and rope appear.
-    S2 ('Pull a sled with a force vector, F…'): teal F along the rope at 60°, 'F = 20 N' at its tip (68 px); keyword 'force' with a pointer to F; small gloss 'N = newton' (44 px) once; then orange d along the ground, 'd = 5 m' at its tip; keyword 'displacement' with a pointer to d. Maths zone: 'W = F·d' (T.eq, 1080, 140).
-    S3 ('The upward part… ten newtons'): F splits into dashed legs; the upward leg '17.3 N' dims to 40 % with a small crossed 'W' glyph; the ground leg becomes the teal shadow band 'shadow 10 N'; CalcStack 'shadow = 20 × cos 60° = 10 N'.
-    S4 ('Work, in joules…'): product rectangle (10 N × 5 m) under the ground; line 'W = 10 N × 5 m = 50 J'; gloss 'J = joule' (44 px) once.
-    S5 ('If d doubles…'): d stretches 5 → 10 m (51-sample series) and the rectangle doubles; line 'W = 10 N × 10 m = 100 J'; keyword '× 2 → × 2' (54 px); the shadow label stays 'shadow 10 N' and pulses on 'still ten newtons'.
-    S6 ('So the shadow alone can't give the work…'): 'W = (|F| cos θ) |d|' with underbraces 'shadow' (teal) and 'length of d' (orange).
+  visual: 'Sled scene in the picture zone x 80-1000, ground y 560 (sled icon illustrative). No chips, no gauge, no rulers below 44 px.
 
-    CHANGES FOR THIS MOVIE: the sled becomes a cart on rails (seen from above, rails grey); the wind push F (teal) at 60° to the track; its across part (greyed, with small gold 'rails' tick marks resisting it) and along part (teal band 'shadow, 10 N'); d (orange) along the track; an energy bar (gold 'work') fills only from the along part: 50 J at 5 m, 100 J at 10 m. Keyword 'scalar: no direction' on the last sentence.
-  voiceover: 'The third reason is that physics often needs both sizes. Picture a small cart on a straight railway track,
-    with a strong wind pushing on it. The wind''s push is a force vector, F, of twenty newtons, at sixty degrees to the
-    track. The cart can only move along the track, along a displacement vector, d. The rails hold back the part of the push
-    across the track, so that part does nothing to move the cart. The part along the track, the shadow of F on d, is ten
-    newtons. Work, in joules, is that force times the distance: fifty joules if d is five metres. If d doubles to ten metres,
-    the work doubles to one hundred joules, but the shadow is still ten newtons. So the shadow alone can''t give the work:
-    we must multiply by the length of d, and the dot product does exactly that. Work is an amount of energy given to the
-    cart, with no direction of its own, which is why the dot product gives a number.'
+    S1 (''…physics often needs both sizes''): sled and rope appear.
+
+    S2 (''Pull a sled with a force vector, F…''): teal F along the rope at 60°, ''F = 20 N'' at its tip (68 px); keyword ''force'' with a pointer to F;
+    small gloss ''N = newton'' (44 px) once; then orange d along the ground, ''d = 5 m'' at its tip; keyword ''displacement'' with a pointer to d. Maths
+    zone: ''W = F·d'' (T.eq, 1080, 140).
+
+    S3 (''The upward part… ten newtons''): F splits into dashed legs; the upward leg ''17.3 N'' dims to 40 % with a small crossed ''W'' glyph; the ground
+    leg becomes the teal shadow band ''shadow 10 N''; CalcStack ''shadow = 20 × cos 60° = 10 N''.
+
+    S4 (''Work, in joules…''): product rectangle (10 N × 5 m) under the ground; line ''W = 10 N × 5 m = 50 J''; gloss ''J = joule'' (44 px) once.
+
+    S5 (''If d doubles…''): d stretches 5 → 10 m (51-sample series) and the rectangle doubles; line ''W = 10 N × 10 m = 100 J''; keyword ''× 2 → × 2'' (54
+    px); the shadow label stays ''shadow 10 N'' and pulses on ''still ten newtons''.
+
+    S6 (''So the shadow alone can''t give the work…''): ''W = (|F| cos θ) |d|'' with underbraces ''shadow'' (teal) and ''length of d'' (orange).'
+  voiceover: 'The third reason is that physics often needs both sizes. Pull a sled with a force vector, F, of twenty newtons, tilted sixty degrees up, while
+    it moves along a displacement vector, d. The upward part of the pull does no work; the part along the ground, the shadow of F on d, is ten newtons.
+    Work, in joules, is that force times the distance: fifty joules if d is five metres. If d doubles to ten metres, the work doubles to one hundred joules,
+    but the shadow is still ten newtons. So the shadow alone can''t give the work: we must multiply by the length of d, and the dot product does exactly
+    that.'
   on_screen_eq:
     latex: W = \mathbf F\cdot\mathbf d = (|\mathbf F|\cos\theta)\,|\mathbf d|
     vallis_eq: 'provenance only: the school definition of work (no book number)'
@@ -960,50 +1050,92 @@ scenes:
     also:
     - fluidpy.geo.vectors.scalar_projection
     data: data/work.json -> F, shadow_N, shadow_N_d10, W_J, d_m; NEW work_component_terms (N12)
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_dot_V1_cosine_form_on_field_of_angles,
-      ::test_scalar_projection_V1_and_V7
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_dot_V1_cosine_form_on_field_of_angles, ::test_scalar_projection_V1_and_V7
   exaggeration:
-  - 'sled icon illustrative (no friction, no mass); force (N) and path (m) arrows drawn on their own scales, each labelled
-    with its true value; badge: none'
+  - 'sled icon illustrative (no friction, no mass); force (N) and path (m) arrows drawn on their own scales, each labelled with its true value; badge: none'
   sentence_times:
-  - - 458.575
-    - 462.675
-  - - 463.025
-    - 468.65
-  - - 469.0
-    - 475.35
-  - - 475.7
-    - 480.85
-  - - 481.2
-    - 487.6
-  - - 487.95
-    - 492.725
-  - - 493.075
-    - 499.525
-  - - 499.875
-    - 507.275
-  - - 507.625
-    - 515.7
-  - - 516.05
-    - 523.975
-- id: s11a_perp_push
+  - - 461.175
+    - 465.275
+  - - 465.625
+    - 474.375
+  - - 474.725
+    - 482.25
+  - - 482.6
+    - 489.05
+  - - 489.4
+    - 496.8
+  - - 497.15
+    - 505.225
+- id: s11a_cart
   t:
-  - 524.775
-  - 557.575
+  - 506.025
+  - 546.8
+  status: new
+  changes:
+  - 'reference video V-D1/V-D2: a push held to a track, the rails take the across part; work has no direction (the committed 0.1b cart, now beside v6''s
+    sled instead of replacing it)'
+  related: []
+  visual: 'Picture zone, seen from above: a small cart on straight grey rails (illustrative glyph); the wind push F (teal, ''F = 20 N'') at 60° to the track;
+    S3: d (orange) along the track; S4: F splits into its across part (greyed, with small gold tick marks on the rails resisting it, keyword ''rails'')
+    and its along part (teal band ''shadow, 10 N''); S5: an energy bar (gold, ''work'') fills only from the along part to ''50 J'' as the cart rolls 5 m,
+    CalcStack ''W = 10 N × 5 m = 50 J''; S6: keyword ''scalar: no direction'' beside the bar. Maths zone keeps ''W = F·d''.'
+  voiceover: 'Here''s another way to see why only the part along counts. Picture a small cart on a straight railway track, with a strong wind pushing on
+    it, again with twenty newtons, at sixty degrees to the track. The cart can only move along the track. The rails hold back the part of the push across
+    the track, so that part does nothing to move the cart. Only the part along the track, ten newtons again, does work: fifty joules over five metres. [beat]
+    Work is an amount of energy given to the cart, with no direction of its own, which is why the dot product gives a number.'
+  on_screen_eq:
+    latex: W = \mathbf F\cdot\mathbf d = (|\mathbf F|\cos\theta)\,|\mathbf d|
+    vallis_eq: 'provenance only: the school definition of work (no book number)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.vectors.dot
+    params:
+      F: 20 N x (cos 60°, sin 60°) = (10.000, 17.321) N
+      d:
+      - 5
+      - 0
+      d_series: (5 -> 10 m, 0), 51 samples
+    outputs:
+      shadow_N: 10.0
+      up_part_N: 17.321
+      W_J: 50.0
+      W_doubled_J: 100.0
+    also:
+    - fluidpy.geo.vectors.scalar_projection
+    data: data/work.json -> F, shadow_N, shadow_N_d10, W_J, d_m; NEW work_component_terms (N12)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field, ::test_dot_V1_cosine_form_on_field_of_angles, ::test_scalar_projection_V1_and_V7
+  exaggeration:
+  - cart and rails are an illustrative glyph; same numbers as the sled (CHECK C1)
+  sentence_times:
+  - - 506.025
+    - 509.675
+  - - 510.025
+    - 519.65
+  - - 520.0
+    - 522.925
+  - - 523.275
+    - 529.675
+  - - 530.025
+    - 536.575
+  - - 538.075
+    - 546.0
+- id: s11b_perp_push
+  t:
+  - 546.8
+  - 579.6
   status: new
   changes:
   - D5 / W17 perpendicular push does no work (research §3)
   related:
-  - '#3 cross product in physics'
+  - '#3 cross product at work (s22e: the Coriolis push only steers)'
   - '#29 Coriolis'
-  visual: 'Picture zone from above: a ball whirled on a string round a centre pin (radius 1 unit); the string pull (orange)
-    always towards the centre, the velocity (teal) along the circle, a right-angle tick between them; tiny steps d along
-    the path with ''F · d = 0'' ticking for each; an energy-of-motion bar (gold) beside it stays flat while the path curves.
-    Maths zone: ''F · d = 0'' and ''work = 0''.'
-  voiceover: 'What about a push that''s always across the motion? Imagine a ball whirled round on a string. The string pulls
-    towards the centre, always at a right angle to the way the ball is moving. So its dot product with every small step
-    is zero, and it does no work. The ball''s energy of motion stays the same: the pull only changes its direction, bending
-    its path into a circle. We''ll meet pushes like this again, when Earth''s spin turns the wind.'
+  visual: 'Picture zone from above: a ball whirled on a string round a centre pin (radius 1 unit); the string pull (orange) always towards the centre, the
+    velocity (teal) along the circle, a right-angle tick between them; tiny steps d along the path with ''F · d = 0'' ticking for each; an energy-of-motion
+    bar (gold) beside it stays flat while the path curves. Maths zone: ''F · d = 0'' and ''work = 0''.'
+  voiceover: 'What about a push that''s always across the motion? Imagine a ball whirled round on a string. The string pulls towards the centre, always
+    at a right angle to the way the ball is moving. So its dot product with every small step is zero, and it does no work. The ball''s energy of motion
+    stays the same: the pull only changes its direction, bending its path into a circle. We''ll meet pushes like this again, when Earth''s spin turns the
+    wind.'
   on_screen_eq:
     latex: \mathbf F\cdot\mathbf d=0
     vallis_eq: 'provenance only: perpendicular push (our picture)'
@@ -1021,44 +1153,54 @@ scenes:
   exaggeration:
   - illustrative whirl (no mass or speed given)
   sentence_times:
-  - - 524.775
-    - 528.125
-  - - 528.475
-    - 531.55
-  - - 531.9
-    - 537.95
-  - - 538.3
-    - 543.375
-  - - 543.725
-    - 551.875
-  - - 552.225
-    - 556.775
+  - - 546.8
+    - 550.15
+  - - 550.5
+    - 553.575
+  - - 553.925
+    - 559.975
+  - - 560.325
+    - 565.4
+  - - 565.75
+    - 573.9
+  - - 574.25
+    - 578.8
 - id: s12_parcel
   t:
-  - 557.575
-  - 602.6
-  status: reused
+  - 579.6
+  - 624.625
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s12_parcel
     narration: word-identical (archived clip may be spliced)
   changes: []
   related:
   - '#10 material derivative'
-  visual: |-
-    No PartCard. Map GM larger: 600 x 360 km at 1.47 px/km, x 120-1002, y 140-669, cmocean thermal, NO isotherm lines yet; vertical colour bar x 1010-1030 with 'T (°C)' (44 px); muted 'idealised map' (44 px) under the map once. Maths zone x 1060-1840, no row panels.
-    S1 ('Now let's look at how the dot product is used in weather'): the map fades in.
-    S2 ('Imagine one thermometer fixed on a pole'): pole thermometer icon (x1.4) at the pin (300, 180 km); keyword 'fixed place' (54 px) under it.
-    S3 ('…the local rate, written partial capital T by partial small t'): '∂T/∂t' (T.eq, slate #aab4c8) at (1100, 160) with the pole icon beside it and keyword 'local rate'.
-    S4 ('Here capital T stands for temperature, and small t for time.', fix loop 4 / U-M5.1): keywords 'T = temperature' on 'capital T stands' and 't = time' on 'small t for time' (54 px, slate, no box) at (1150, 300 / 370) beside the fraction; as S5 starts they slide down to (1150, 770 / 835), under 'following the parcel', and stay for DT/Dt.
-    S5 ('Partial means only time changes…'): two keywords under ∂T/∂t: 'time changes' and 'place fixed' (54 px).
-    S6 ('A second thermometer rides a balloon…'): balloon icon starts at the pin and drifts with a teal wind arrow (clock 't = 0.0 h …' at 54 px beside the map; same clock rate as s18-s19); dashed ellipse round the balloon; keyword 'air parcel' with a pointer to the ellipse.
-    S7 ('Its rate, following the air parcel…'): 'DT/Dt' (T.eq, teal) at (1100, 460) with the balloon icon and keyword 'following the parcel'.
-  voiceover: 'Now let''s look at how the dot product is used in weather. Imagine one thermometer fixed at one place, so
-    it never moves: we''ll call it the fixed thermometer. How fast its temperature changes over time is called the local
-    rate, written partial capital T by partial small t. Here capital T stands for temperature, and small t for time. Partial
-    means only time changes; the place stays fixed. A second thermometer rides a balloon drifting with the wind, inside
-    one air parcel: a small volume of air that moves with the flow. Its rate, following the air parcel, is written capital
-    D T by D t.'
+  visual: 'No PartCard. Map GM larger: 600 x 360 km at 1.47 px/km, x 120-1002, y 140-669, cmocean thermal, NO isotherm lines yet; vertical colour bar x
+    1010-1030 with ''T (°C)'' (44 px); muted ''idealised map'' (44 px) under the map once. Maths zone x 1060-1840, no row panels.
+
+    S1 (''Now let''s look at how the dot product is used in weather''): the map fades in.
+
+    S2 (''Imagine one thermometer fixed on a pole''): pole thermometer icon (x1.4) at the pin (300, 180 km); keyword ''fixed place'' (54 px) under it.
+
+    S3 (''…the local rate, written partial capital T by partial small t''): ''∂T/∂t'' (T.eq, slate #aab4c8) at (1100, 160) with the pole icon beside it
+    and keyword ''local rate''.
+
+    S4 (''Here capital T stands for temperature, and small t for time.'', fix loop 4 / U-M5.1): keywords ''T = temperature'' on ''capital T stands'' and
+    ''t = time'' on ''small t for time'' (54 px, slate, no box) at (1150, 300 / 370) beside the fraction; as S5 starts they slide down to (1150, 770 / 835),
+    under ''following the parcel'', and stay for DT/Dt.
+
+    S5 (''Partial means only time changes…''): two keywords under ∂T/∂t: ''time changes'' and ''place fixed'' (54 px).
+
+    S6 (''A second thermometer rides a balloon…''): balloon icon starts at the pin and drifts with a teal wind arrow (clock ''t = 0.0 h …'' at 54 px beside
+    the map; same clock rate as s18-s19); dashed ellipse round the balloon; keyword ''air parcel'' with a pointer to the ellipse.
+
+    S7 (''Its rate, following the air parcel…''): ''DT/Dt'' (T.eq, teal) at (1100, 460) with the balloon icon and keyword ''following the parcel''.'
+  voiceover: 'Now let''s look at how the dot product is used in weather. Imagine one thermometer fixed at one place, so it never moves: we''ll call it the
+    fixed thermometer. How fast its temperature changes over time is called the local rate, written partial capital T by partial small t. Here capital T
+    stands for temperature, and small t for time. Partial means only time changes; the place stays fixed. A second thermometer rides a balloon drifting
+    with the wind, inside one air parcel: a small volume of air that moves with the flow. Its rate, following the air parcel, is written capital D T by
+    D t.'
   on_screen_eq:
     latex: \frac{\partial T}{\partial t}
     vallis_eq: 'provenance only: the local term of (1.7) (page image checked)'
@@ -1091,118 +1233,140 @@ scenes:
   - 'idealised field, not data (said once on screen: ''idealised map'')'
   - 'pole and balloon icons illustrative; badge: none'
   sentence_times:
-  - - 557.575
-    - 561.55
-  - - 561.9
-    - 568.625
-  - - 568.975
-    - 577.15
-  - - 577.5
-    - 582.125
-  - - 582.475
-    - 586.75
-  - - 587.1
-    - 596.325
-  - - 596.675
-    - 601.8
+  - - 579.6
+    - 583.575
+  - - 583.925
+    - 590.65
+  - - 591.0
+    - 599.175
+  - - 599.525
+    - 604.15
+  - - 604.5
+    - 608.775
+  - - 609.125
+    - 618.35
+  - - 618.7
+    - 623.825
 - id: s13_equation
   t:
-  - 602.6
-  - 660.1
-  status: reused
+  - 624.625
+  - 682.125
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s13_equation
     narration: word-identical (archived clip may be spliced)
   changes: []
   related:
   - '#10 material derivative'
-  visual: |-
-    NO MAP and no veil (U-M3.15). Plain background, full width.
+  visual: 'NO MAP and no veil (U-M3.15). Plain background, full width.
 
-    U-M6.4: NO balloon or thermometer icon at the top centre and NO icon of any kind on, over or touching ∂φ/∂t (in v5 the S1 balloon icon landed on ∂φ/∂t). The only icons in this scene are: the balloon above Dφ/Dt (S3), the pole icon beside the 'one fixed place' underbrace label BELOW the equation (S4), and the thermometer and droplet icons beside 'φ: T, moisture' (S2, S6). Keep >= 40 px clear space around every term of the main equation.
 
-    S1 ('Here is the equation the balloon's thermometer obeys'): the equation 'Dφ/Dt = ∂φ/∂t + v·∇φ' builds at 96 px centred at y 260 (D/Dt teal, ∂φ/∂t slate, v·∇φ teal); it is NOT read aloud.
+    U-M6.4: NO balloon or thermometer icon at the top centre and NO icon of any kind on, over or touching ∂φ/∂t (in v5 the S1 balloon icon landed on ∂φ/∂t).
+    The only icons in this scene are: the balloon above Dφ/Dt (S3), the pole icon beside the ''one fixed place'' underbrace label BELOW the equation (S4),
+    and the thermometer and droplet icons beside ''φ: T, moisture'' (S2, S6). Keep >= 40 px clear space around every term of the main equation.
 
-    S2 ('…called phi, like temperature or moisture…'): the three φ glow gold; under the equation 'φ: T, moisture' (54 px) with thermometer and droplet icons (left of the words, at y 380).
 
-    S3 ('On the left…'): underbrace under Dφ/Dt 'following the parcel' (54 px) + the balloon icon ABOVE Dφ/Dt (left of the equation's top edge, never over ∂φ/∂t).
+    S1 (''Here is the equation the balloon''s thermometer obeys''): the equation ''Dφ/Dt = ∂φ/∂t + v·∇φ'' builds at 96 px centred at y 260 (D/Dt teal, ∂φ/∂t
+    slate, v·∇φ teal); it is NOT read aloud.
 
-    S4 ('On the right…'): underbrace under ∂φ/∂t 'one fixed place' + the pole icon to the left of that label; then 'v' glows with keyword 'wind' and ∇ with keyword 'grad'.
 
-    S5 ('Advection means being carried along by the flow.'): underbrace under v·∇φ 'advection' (teal); keyword 'carried by the flow' (54 px) under it with a pointer.
+    S2 (''…called phi, like temperature or moisture…''): the three φ glow gold; under the equation ''φ: T, moisture'' (54 px) with thermometer and droplet
+    icons (left of the words, at y 380).
 
-    S6 ('So the advection term is the change…', U-M6.5): under 'carried by the flow' two keyword pairs appear on their words, 54 px: 'warmer · colder' with the small thermometer icon, then 'moister · drier' with the droplet icon; on 'depending on what phi stands for' the three φ glow gold once more and the 'φ: T, moisture' line pulses. No 'where φ is different' anywhere.
 
-    S7 ('The left side is called the material derivative'): keyword 'material derivative' (54 px) with a pointer to D/Dt (y 520).
+    S3 (''On the left…''): underbrace under Dφ/Dt ''following the parcel'' (54 px) + the balloon icon ABOVE Dφ/Dt (left of the equation''s top edge, never
+    over ∂φ/∂t).
 
-    S8 ('It isn't a partial derivative…'): a small line at y 600: 'D/Dt = ∂/∂t + advection' in words-and-symbols (68 px), the partial derivative plus the advection term.
 
-    S9 ('For temperature…'): line 'DT/Dt = ∂T/∂t + v·∇T' (68 px) at y 720; the dot in v·∇T grows gold once with keyword 'dot product' (no box, no ring panel).
-  voiceover: 'Here is the equation the balloon''s thermometer obeys. It tells us how anything the air carries, called phi,
-    like temperature or moisture, changes as we follow an air parcel. On the left is the change following the parcel. On
-    the right is the change at one fixed place, plus a term with v, the wind, and grad, which we''ll meet soon. Advection
-    means being carried along by the flow. So the advection term is the change that comes from being carried into warmer
-    or colder air, or moister or drier air, depending on what phi stands for. The left side is called the material derivative.
-    It isn''t a partial derivative, because the place moves with the parcel: it''s the partial derivative plus the advection
-    term. For temperature, that term is v dot grad T, and its dot is our dot product.'
+    S4 (''On the right…''): underbrace under ∂φ/∂t ''one fixed place'' + the pole icon to the left of that label; then ''v'' glows with keyword ''wind''
+    and ∇ with keyword ''grad''.
+
+
+    S5 (''Advection means being carried along by the flow.''): underbrace under v·∇φ ''advection'' (teal); keyword ''carried by the flow'' (54 px) under
+    it with a pointer.
+
+
+    S6 (''So the advection term is the change…'', U-M6.5): under ''carried by the flow'' two keyword pairs appear on their words, 54 px: ''warmer · colder''
+    with the small thermometer icon, then ''moister · drier'' with the droplet icon; on ''depending on what phi stands for'' the three φ glow gold once
+    more and the ''φ: T, moisture'' line pulses. No ''where φ is different'' anywhere.
+
+
+    S7 (''The left side is called the material derivative''): keyword ''material derivative'' (54 px) with a pointer to D/Dt (y 520).
+
+
+    S8 (''It isn''t a partial derivative…''): a small line at y 600: ''D/Dt = ∂/∂t + advection'' in words-and-symbols (68 px), the partial derivative plus
+    the advection term.
+
+
+    S9 (''For temperature…''): line ''DT/Dt = ∂T/∂t + v·∇T'' (68 px) at y 720; the dot in v·∇T grows gold once with keyword ''dot product'' (no box, no
+    ring panel).'
+  voiceover: 'Here is the equation the balloon''s thermometer obeys. It tells us how anything the air carries, called phi, like temperature or moisture,
+    changes as we follow an air parcel. On the left is the change following the parcel. On the right is the change at one fixed place, plus a term with
+    v, the wind, and grad, which we''ll meet soon. Advection means being carried along by the flow. So the advection term is the change that comes from
+    being carried into warmer or colder air, or moister or drier air, depending on what phi stands for. The left side is called the material derivative.
+    It isn''t a partial derivative, because the place moves with the parcel: it''s the partial derivative plus the advection term. For temperature, that
+    term is v dot grad T, and its dot is our dot product.'
   on_screen_eq:
     latex: \frac{\mathrm{D}\varphi}{\mathrm{D}t} = \frac{\partial\varphi}{\partial t} + \mathbf v\cdot\nabla\varphi
-    vallis_eq: 'provenance only, not drawn: Vallis (1.7) with (v·∇)φ written v·∇φ as in (1.6) on the same page (identical
-      for a scalar φ)'
+    vallis_eq: 'provenance only, not drawn: Vallis (1.7) with (v·∇)φ written v·∇φ as in (1.6) on the same page (identical for a scalar φ)'
     page_png: chapters/pages/ch01/p025.png
   on_screen_eq_extra:
   - latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T
     vallis_eq: 'provenance only: the same with φ = T'
     page_png: chapters/pages/ch01/p025.png
   physics_source: null
-  physics_source_note: 'the equation scene: no physics drawn; its terms are computed from s16 on (material_derivative_terms
-    in s18-s19c)'
+  physics_source_note: 'the equation scene: no physics drawn; its terms are computed from s16 on (material_derivative_terms in s18-s19c)'
   exaggeration:
   - 'equation scene: illustrative icons only (balloon, pole, thermometer, droplet); badge: none'
   sentence_times:
-  - - 602.6
-    - 606.4
-  - - 606.75
-    - 614.75
-  - - 615.1
-    - 618.5
-  - - 618.85
-    - 626.2
-  - - 626.55
-    - 630.225
-  - - 630.575
-    - 640.875
-  - - 641.225
-    - 644.725
-  - - 645.075
-    - 653.025
-  - - 653.375
-    - 659.3
+  - - 624.625
+    - 628.425
+  - - 628.775
+    - 636.775
+  - - 637.125
+    - 640.525
+  - - 640.875
+    - 648.225
+  - - 648.575
+    - 652.25
+  - - 652.6
+    - 662.9
+  - - 663.25
+    - 666.75
+  - - 667.1
+    - 675.05
+  - - 675.4
+    - 681.325
 - id: s14_isotherms
   t:
-  - 660.1
-  - 696.65
-  status: reused
+  - 682.125
+  - 718.675
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s14_isotherms
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Map GM as s12, km axes 0-600 east, 0-360 north (44 px ticks).
-    S1 ('…temperature rises one degree for every hundred kilometres east…'): colour map only; a walker dot moves east from 0 km and a '+1 °C' (54 px) pops above its path every 100 km (y ≥ map top + 60); on 'doesn't change as you walk north' a second walker goes north with keyword 'no change'.
-    S2 ('Join the places with the same temperature…'): ONLY NOW the isotherm lines draw one by one at x = 100…500 km, labels '11 °C … 15 °C' (54 px) above the map; '100 km' bracket between two lines (44 px).
-    S3 ('These are called isotherms'): keyword 'isotherm' with a pointer to the 13 °C line.
-    S4 ('Walk east…'): the walker crosses 13 → 14 → 15 °C with '+1 °C' ticks; '∂T/∂x = 1 °C / 100 km' (68 px orange) in the maths zone; keyword 'east only'.
-    S5 ('Walk north…'): the walker goes north along 13 °C, readout '13 °C' steady; '∂T/∂y = 0' (68 px).
-  voiceover: 'To see it at work, picture a map where the temperature rises one degree for every hundred kilometres east,
-    and doesn''t change as you walk north. Join the places with the same temperature right now, and you get straight north
-    to south lines, one every hundred kilometres. These are called isotherms. Walk east, and each isotherm you cross is
-    one degree warmer: that''s partial T by partial x, the change going east only. Walk north, and you stay on one isotherm,
-    so partial T by partial y is zero.'
+  visual: 'Map GM as s12, km axes 0-600 east, 0-360 north (44 px ticks).
+
+    S1 (''…temperature rises one degree for every hundred kilometres east…''): colour map only; a walker dot moves east from 0 km and a ''+1 °C'' (54 px)
+    pops above its path every 100 km (y ≥ map top + 60); on ''doesn''t change as you walk north'' a second walker goes north with keyword ''no change''.
+
+    S2 (''Join the places with the same temperature…''): ONLY NOW the isotherm lines draw one by one at x = 100…500 km, labels ''11 °C … 15 °C'' (54 px)
+    above the map; ''100 km'' bracket between two lines (44 px).
+
+    S3 (''These are called isotherms''): keyword ''isotherm'' with a pointer to the 13 °C line.
+
+    S4 (''Walk east…''): the walker crosses 13 → 14 → 15 °C with ''+1 °C'' ticks; ''∂T/∂x = 1 °C / 100 km'' (68 px orange) in the maths zone; keyword ''east
+    only''.
+
+    S5 (''Walk north…''): the walker goes north along 13 °C, readout ''13 °C'' steady; ''∂T/∂y = 0'' (68 px).'
+  voiceover: 'To see it at work, picture a map where the temperature rises one degree for every hundred kilometres east, and doesn''t change as you walk
+    north. Join the places with the same temperature right now, and you get straight north to south lines, one every hundred kilometres. These are called
+    isotherms. Walk east, and each isotherm you cross is one degree warmer: that''s partial T by partial x, the change going east only. Walk north, and
+    you stay on one isotherm, so partial T by partial y is zero.'
   on_screen_eq:
-    latex: \frac{\partial T}{\partial x} = \frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}},\qquad \frac{\partial T}{\partial
-      y} = 0
+    latex: \frac{\partial T}{\partial x} = \frac{1\ ^\circ\mathrm C}{100\ \mathrm{km}},\qquad \frac{\partial T}{\partial y} = 0
     vallis_eq: 'provenance only: the two components of the gradient (Kundu p079 image), our numbers'
     page_png: ../Fluid Dynamics/chapters/pages/ch02/p079.png
   physics_source:
@@ -1230,35 +1394,40 @@ scenes:
   exaggeration:
   - 'idealised field, not data (T rises uniformly eastward); badge: none'
   sentence_times:
-  - - 660.1
-    - 669.15
-  - - 669.5
-    - 677.4
-  - - 677.75
-    - 680.025
-  - - 680.375
-    - 689.375
-  - - 689.725
-    - 695.85
+  - - 682.125
+    - 691.175
+  - - 691.525
+    - 699.425
+  - - 699.775
+    - 702.05
+  - - 702.4
+    - 711.4
+  - - 711.75
+    - 717.875
 - id: s15_grad_t
   t:
-  - 696.65
-  - 720.85
-  status: reused
+  - 718.675
+  - 742.875
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s15_grad_t
     narration: word-identical (archived clip may be spliced)
   changes: []
   related:
   - '#6 gradient'
-  visual: |-
-    Map with isotherms as s14. No 'uphill' anywhere (U-M3.17; v4 L1273/L1282 deleted).
-    S1 ('These two rates form one arrow…'): ∂T/∂x and ∂T/∂y fly into '∇T = (∂T/∂x, ∂T/∂y)' (T.eq); the orange ∇T arrow grows at the pin pointing east; keyword 'grad' (54 px) with a pointer to ∇.
-    S2 ('A kelvin step…'): CalcStack (two lines, 68 px): '1 °C / 100 km = 1 K / 10⁵ m' then '∇T = (1.00 × 10⁻⁵ K/m, 0)'; keyword '1 K step = 1 °C step' (44 px).
-    S3 ('It points the way the temperature increases fastest…'): keyword 'towards warmer' with a pointer to the ∇T arrowhead; the arrow's right-angle mark with the 13 °C isotherm.
-  voiceover: 'These two rates form one arrow: the temperature gradient, read grad T. A kelvin step is the same size as a
-    degree Celsius step, so grad T is ten to the minus five kelvin per metre going east, and zero going north. It points
-    the way the temperature increases fastest: straight across the isotherms, towards warmer air.'
+  visual: 'Map with isotherms as s14. No ''uphill'' anywhere (U-M3.17; v4 L1273/L1282 deleted).
+
+    S1 (''These two rates form one arrow…''): ∂T/∂x and ∂T/∂y fly into ''∇T = (∂T/∂x, ∂T/∂y)'' (T.eq); the orange ∇T arrow grows at the pin pointing east;
+    keyword ''grad'' (54 px) with a pointer to ∇.
+
+    S2 (''A kelvin step…''): CalcStack (two lines, 68 px): ''1 °C / 100 km = 1 K / 10⁵ m'' then ''∇T = (1.00 × 10⁻⁵ K/m, 0)''; keyword ''1 K step = 1 °C
+    step'' (44 px).
+
+    S3 (''It points the way the temperature increases fastest…''): keyword ''towards warmer'' with a pointer to the ∇T arrowhead; the arrow''s right-angle
+    mark with the 13 °C isotherm.'
+  voiceover: 'These two rates form one arrow: the temperature gradient, read grad T. A kelvin step is the same size as a degree Celsius step, so grad T
+    is ten to the minus five kelvin per metre going east, and zero going north. It points the way the temperature increases fastest: straight across the
+    isotherms, towards warmer air.'
   on_screen_eq:
     latex: \nabla T = \left(\frac{\partial T}{\partial x},\ \frac{\partial T}{\partial y}\right)
     vallis_eq: 'provenance only: ∇φ = Σ e_i ∂φ/∂x_i (Kundu p079 image), 2-D'
@@ -1282,38 +1451,46 @@ scenes:
     also:
     - fluidpy.geo.vectors.norm
     data: data/weather.json -> gradT, norm_gradT
-    test: ../Fluid Dynamics/tests/test_ch02.py::test_gradient_V1_perpendicular_to_level_sets_and_directional_derivative,
-      ::test_gradient_V7_rotational_invariance
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_gradient_V1_perpendicular_to_level_sets_and_directional_derivative, ::test_gradient_V7_rotational_invariance
   exaggeration:
   - '∇T arrow drawn on its own scale (K/m), not the map''s km; its value is written beside it; badge: none'
   sentence_times:
-  - - 696.65
-    - 701.85
-  - - 702.2
-    - 712.675
-  - - 713.025
-    - 720.05
+  - - 718.675
+    - 723.875
+  - - 724.225
+    - 734.7
+  - - 735.05
+    - 742.075
 - id: s16a_wind_parts
   t:
-  - 720.85
-  - 745.2
-  status: reused
+  - 742.875
+  - 767.225
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s16a_wind_parts
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Map with isotherms and ∇T at the pin (full map, 1.47 px/km). U-M6.6: NO along-isotherm leg, NO '8.66', NO '10 × sin 60°', NO '8.66 × 0 = 0', NO 'along: no change' anywhere (deleted from v5 S3).
+  visual: 'Map with isotherms and ∇T at the pin (full map, 1.47 px/km). U-M6.6: NO along-isotherm leg, NO ''8.66'', NO ''10 × sin 60°'', NO ''8.66 × 0 =
+    0'', NO ''along: no change'' anywhere (deleted from v5 S3).
 
-    S1 ('Now a wind blows across the map…'): teal v grows at the pin, 60° from ∇T (towards north-north-east); 'v = 10 m/s' at its tip; arc '60°' (54 px). The balloon icon sits at the pin (same wind as s12). Data: weather.json -> v, speed, angle_deg.
 
-    S2 ('Its shadow on grad T…'): drop-line from v's tip to ∇T's line (right-angle mark); the teal shadow band (20 px) from the pin to the foot (weather.json -> proj_v_on_gradT_m_s, length shadow_m_s = 5.00 m/s on the arrow scale). ON THE PICTURE, just under the band's midpoint: the label 'shadow' (54 px warm white, U-M6.7). Maths zone CalcStack '10 × cos 60° = 5.00 m/s' (68 px) with keyword 'across' (54 px). Then a gold CurvedLink (see kit) draws from the 'shadow' label on the map to the '5.00 m/s' in the CalcStack (12 frames, on '…is five metres per second') and stays to the end of the scene.
+    S1 (''Now a wind blows across the map…''): teal v grows at the pin, 60° from ∇T (towards north-north-east); ''v = 10 m/s'' at its tip; arc ''60°'' (54
+    px). The balloon icon sits at the pin (same wind as s12). Data: weather.json -> v, speed, angle_deg.
 
-    S3 ('This shadow is the part of the wind…'): the shadow band pulses once; a small teal chevron at the band's east end with the keyword 'towards warmer' (54 px) on the warm side of the 13 °C isotherm; the isotherms brighten briefly on 'across the isotherms'.
-  voiceover: 'Now a wind blows across the map, the one carrying our balloon: ten metres per second, at sixty degrees to
-    grad T. Its shadow on grad T, ten times cos sixty, is five metres per second, straight across the isotherms. This shadow
-    is the part of the wind that carries air across the isotherms, towards the warmer side.'
+
+    S2 (''Its shadow on grad T…''): drop-line from v''s tip to ∇T''s line (right-angle mark); the teal shadow band (20 px) from the pin to the foot (weather.json
+    -> proj_v_on_gradT_m_s, length shadow_m_s = 5.00 m/s on the arrow scale). ON THE PICTURE, just under the band''s midpoint: the label ''shadow'' (54
+    px warm white, U-M6.7). Maths zone CalcStack ''10 × cos 60° = 5.00 m/s'' (68 px) with keyword ''across'' (54 px). Then a gold CurvedLink (see kit) draws
+    from the ''shadow'' label on the map to the ''5.00 m/s'' in the CalcStack (12 frames, on ''…is five metres per second'') and stays to the end of the
+    scene.
+
+
+    S3 (''This shadow is the part of the wind…''): the shadow band pulses once; a small teal chevron at the band''s east end with the keyword ''towards
+    warmer'' (54 px) on the warm side of the 13 °C isotherm; the isotherms brighten briefly on ''across the isotherms''.'
+  voiceover: 'Now a wind blows across the map, the one carrying our balloon: ten metres per second, at sixty degrees to grad T. Its shadow on grad T, ten
+    times cos sixty, is five metres per second, straight across the isotherms. This shadow is the part of the wind that carries air across the isotherms,
+    towards the warmer side.'
   on_screen_eq:
     latex: 10\times\cos 60^\circ = 5.00\ \mathrm{m/s}
     vallis_eq: 'provenance only: shadow of v on ∇T, our numbers'
@@ -1333,49 +1510,54 @@ scenes:
     also:
     - fluidpy.geo.vectors.projection
     - fluidpy.geo.vectors.angle_between
-    data: data/weather.json -> v, speed, angle_deg, shadow_m_s, proj_v_on_gradT_m_s (the v5 N3 fields along_dot_gradT /
-      v_along_check_10sin60 / v_along_isotherm_m_s are no longer drawn)
+    data: data/weather.json -> v, speed, angle_deg, shadow_m_s, proj_v_on_gradT_m_s (the v5 N3 fields along_dot_gradT / v_along_check_10sin60 / v_along_isotherm_m_s
+      are no longer drawn)
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_projection_V1_remainder_perpendicular_and_idempotent
   exaggeration:
   - 'wind and gradient arrows drawn on their own scales (m/s, K/m), not the map''s km; badge: none'
   sentence_times:
-  - - 720.85
-    - 729.425
-  - - 729.775
-    - 737.425
-  - - 737.775
-    - 744.4
+  - - 742.875
+    - 751.45
+  - - 751.8
+    - 759.45
+  - - 759.8
+    - 766.425
 - id: s16b_advection_number
   t:
-  - 745.2
-  - 775.825
-  status: reused
+  - 767.225
+  - 798.55
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s16b_advection_number
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Map as s16a (shadow band and ∇T kept). Maths zone:
+  visual: 'Map as s16a (shadow band and ∇T kept). Maths zone:
 
-    S1 ('The length of grad T, by Pythagoras, …') U-M4.3: '|∇T| = √((∂T/∂x)² + (∂T/∂y)²)' (56 px, orange), then '= √((1.00 × 10⁻⁵)² + 0²)' on 'the square root', then '= 1.00 × 10⁻⁵ K/m' (orange, gold underline) on 'just ten'. It is shown before it is used.
 
-    S2 ('So v dot grad T is the wind's shadow times…'): 'v·∇T = (|v| cos θ) |∇T|' with underbraces 'shadow' and 'length of ∇T'; then '= 5.00 m/s × 1.00 × 10⁻⁵ K/m'.
+    S1 (''The length of grad T, by Pythagoras, …'') U-M4.3: ''|∇T| = √((∂T/∂x)² + (∂T/∂y)²)'' (56 px, orange), then ''= √((1.00 × 10⁻⁵)² + 0²)'' on ''the
+    square root'', then ''= 1.00 × 10⁻⁵ K/m'' (orange, gold underline) on ''just ten''. It is shown before it is used.
 
-    S3 ('The metres cancel…'): unit line '(m/s) × (K/m) = K/s' with both m struck rose; '= 5.00 × 10⁻⁵ K/s'; '× 3600 s = 0.18 K per hour' bold teal, gold underline (the |∇T| line slides up out of the stack); the balloon icon with keyword 'advection term'.
 
-    v6 (U-M6.7): when '= 5.00 m/s × 1.00 × 10⁻⁵ K/m' appears (S2), a gold CurvedLink draws from the 'shadow' label on the map (kept from s16a) to that '5.00 m/s' (12 frames) and stays until S3 starts. The s16a link fades as the scene changes.
-  voiceover: 'The length of grad T, by Pythagoras, is the square root of ten to the minus five squared, plus zero squared:
-    just ten to the minus five kelvin per metre. So v dot grad T is the wind''s shadow times the length of grad T: five
-    metres per second times ten to the minus five kelvin per metre. The metres cancel, leaving five times ten to the minus
-    five kelvin per second, or point one eight kelvin per hour.'
+    S2 (''So v dot grad T is the wind''s shadow times…''): ''v·∇T = (|v| cos θ) |∇T|'' with underbraces ''shadow'' and ''length of ∇T''; then ''= 5.00 m/s
+    × 1.00 × 10⁻⁵ K/m''.
+
+
+    S3 (''The metres cancel…''): unit line ''(m/s) × (K/m) = K/s'' with both m struck rose; ''= 5.00 × 10⁻⁵ K/s''; ''× 3600 s = 0.18 K per hour'' bold teal,
+    gold underline (the |∇T| line slides up out of the stack); the balloon icon with keyword ''advection term''.
+
+
+    v6 (U-M6.7): when ''= 5.00 m/s × 1.00 × 10⁻⁵ K/m'' appears (S2), a gold CurvedLink draws from the ''shadow'' label on the map (kept from s16a) to that
+    ''5.00 m/s'' (12 frames) and stays until S3 starts. The s16a link fades as the scene changes.'
+  voiceover: 'The length of grad T, by Pythagoras, is the square root of ten to the minus five squared, plus zero squared: just ten to the minus five kelvin
+    per metre. So v dot grad T is the wind''s shadow times the length of grad T: five metres per second times ten to the minus five kelvin per metre. The
+    metres cancel, leaving five times ten to the minus five kelvin per second, or point one eight kelvin per hour. [beat]'
   on_screen_eq:
     latex: \mathbf v\cdot\nabla T = (|\mathbf v|\cos\theta)\,|\nabla T|
     vallis_eq: 'provenance only: (1) applied to v and ∇T'
     page_png: null
   on_screen_eq_extra:
-  - latex: '|\nabla T| = \sqrt{(\partial T/\partial x)^2 + (\partial T/\partial y)^2} = \sqrt{(1.00\times10^{-5})^2 + 0^2}
-      = 1.00\times10^{-5}\ \mathrm{K/m}'
+  - latex: '|\nabla T| = \sqrt{(\partial T/\partial x)^2 + (\partial T/\partial y)^2} = \sqrt{(1.00\times10^{-5})^2 + 0^2} = 1.00\times10^{-5}\ \mathrm{K/m}'
     vallis_eq: 'provenance only: Pythagoras on our numbers (U-M4.3)'
     page_png: null
   - latex: = 5.00\ \mathrm{m/s}\times1.00\times10^{-5}\ \mathrm{K/m} = 5.00\times10^{-5}\ \mathrm{K/s}
@@ -1403,63 +1585,93 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V2_dimensions_pint_advection_unit, ::test_dot_V1_component_sum_on_field
   exaggeration: []
   sentence_times:
-  - - 745.2
-    - 755.95
-  - - 756.3
-    - 766.75
-  - - 767.1
-    - 775.025
+  - - 767.225
+    - 777.975
+  - - 778.325
+    - 788.775
+  - - 789.125
+    - 797.05
 - id: s17_meaning
   t:
-  - 775.825
-  - 861.4
-  status: reused
+  - 798.55
+  - 884.125
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s17_meaning
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    FORWARD VIEW ONLY (v6): the scene follows the balloon's air parcel forward; nothing upwind, no '12.82', no 'colder' anywhere in this scene (the v5 upwind content moves to s19a). The map is FROZEN in this scene and marked as a snapshot: four white camera-frame corners + a small camera glyph + 't = 0 h' (54 px) at the map's top-right (Q3).
+  visual: 'FORWARD VIEW ONLY (v6): the scene follows the balloon''s air parcel forward; nothing upwind, no ''12.82'', no ''colder'' anywhere in this scene
+    (the v5 upwind content moves to s19a). The map is FROZEN in this scene and marked as a snapshot: four white camera-frame corners + a small camera glyph
+    + ''t = 0 h'' (54 px) at the map''s top-right (Q3).
 
-    MapCamera zoom (kit): on S2 the map scale eases from 1.47 px/km (full map) to 4.0 px/km over 45 frames, centred on (330, 226) km, so the picture zone x 120-1002 / y 140-669 shows x 220-440 km, y 160-292 km; the km ticks (44 px) re-label with the zoom so distances stay true. Visible: the 13 °C isotherm (x = 300 km) and the 14 °C isotherm (x = 400 km) with labels; the pin (300, 180) km with the pole icon just left of it and the balloon with its dashed air-parcel ellipse on it.
 
-    S1 ('What does point one eight kelvin per hour mean?'): '0.18 K per hour' (68 px teal) at the top of the maths zone (1100, 140).
+    MapCamera zoom (kit): on S2 the map scale eases from 1.47 px/km (full map) to 4.0 px/km over 45 frames, centred on (330, 226) km, so the picture zone
+    x 120-1002 / y 140-669 shows x 220-440 km, y 160-292 km; the km ticks (44 px) re-label with the zoom so distances stay true. Visible: the 13 °C isotherm
+    (x = 300 km) and the 14 °C isotherm (x = 400 km) with labels; the pin (300, 180) km with the pole icon just left of it and the balloon with its dashed
+    air-parcel ellipse on it.
 
-    S2 ('Let's follow the balloon's air parcel…'): the zoom runs; the balloon and its ellipse brighten; keyword 'right now' beside the 't = 0 h' glyph.
 
-    S3 ('The wind carries it straight across…'): v and its shadow band re-drawn at the zoomed scale from s16a (weather.json -> v, proj_v_on_gradT_m_s) with the 'shadow' label and '5.00 m/s across' (54 px).
+    S1 (''What does point one eight kelvin per hour mean?''): ''0.18 K per hour'' (68 px teal) at the top of the maths zone (1100, 140).
 
-    S4 ('Distance is speed times time…'): the balloon's 1-h path draws as a dashed teal line from the pin to (318.0, 211.18) km (weather.json -> balloon_x_km, balloon_y_km, samples 0-60) with a faint ghost balloon at its end; a dashed drop from the ghost straight down to y = 180 km; THE ACROSS SPAN is highlighted: a teal 20-px band along ∇T from x = 300 to 318 km at y = 180 km (NEW fwd_span_km). CalcStack line 1 '5.00 m/s × 3600 s = 18 km' (68 px); a gold CurvedLink from the span band to '18 km' (U-M6.8/9) on 'eighteen kilometres'.
 
-    S5 ('On the map as it is right now…'): the STRIP between x = 300 and 318 km over the whole window height is shaded gold at 25 %, bounded by the solid 13.00 °C isotherm and a dashed line at 318 km labelled '13.18 °C' (44 px, top) (NEW fwd_strip_T_C = [13.00, 13.18]); CalcStack line 2 '18 km × 1 °C / 100 km = 0.18 °C'; a second gold CurvedLink from the strip to '0.18 °C' on 'point one eight degrees' (U-M6.9). The first link fades to 40 %.
+    S2 (''Let''s follow the balloon''s air parcel…''): the zoom runs; the balloon and its ellipse brighten; keyword ''right now'' beside the ''t = 0 h''
+    glyph.
 
-    S6 ('So in one hour, the wind carries the parcel…'): the ghost balloon's readout '13.18 °C' (54 px teal) beside it; the pin readout '13.00 °C' (54 px slate) beside the pole icon (weather.json -> T_under_balloon).
 
-    S7 ('One degree per hundred kilometres is a rate in space…'): keyword '1 °C per 100 km' (54 px orange) with a small ruler bracket between the 13 °C and 14 °C isotherms → keyword 'space'.
+    S3 (''The wind carries it straight across…''): v and its shadow band re-drawn at the zoomed scale from s16a (weather.json -> v, proj_v_on_gradT_m_s)
+    with the ''shadow'' label and ''5.00 m/s across'' (54 px).
 
-    S8 ('Multiply it by a speed…'): unit line '(°C/km) × (km/h) = °C/h' (54 px) with both km struck rose; keyword 'time' with a small clock glyph beside '°C/h'.
 
-    S9 ('So point one eight kelvin per hour is how fast…'): the 1-h path, the span band and the strip pulse together (one 20-frame pulse, no flash); '0.18 K per hour' at the top grows to 84 px.
+    S4 (''Distance is speed times time…''): the balloon''s 1-h path draws as a dashed teal line from the pin to (318.0, 211.18) km (weather.json -> balloon_x_km,
+    balloon_y_km, samples 0-60) with a faint ghost balloon at its end; a dashed drop from the ghost straight down to y = 180 km; THE ACROSS SPAN is highlighted:
+    a teal 20-px band along ∇T from x = 300 to 318 km at y = 180 km (NEW fwd_span_km). CalcStack line 1 ''5.00 m/s × 3600 s = 18 km'' (68 px); a gold CurvedLink
+    from the span band to ''18 km'' (U-M6.8/9) on ''eighteen kilometres''.
 
-    S10 ('That's v dot grad T, the advection term'): 'v·∇T = +0.18 K per hour' (68 px teal) replaces it, keyword 'advection term' (54 px teal) under it.
 
-    S11 ('It's positive because…'): the '+' glows; keyword 'towards warmer air' with a pointer to the shadow band; faint copies of the wind arrow tile the window for 2 s ('the same everywhere' is said, not written).
+    S5 (''On the map as it is right now…''): the STRIP between x = 300 and 318 km over the whole window height is shaded gold at 25 %, bounded by the solid
+    13.00 °C isotherm and a dashed line at 318 km labelled ''13.18 °C'' (44 px, top) (NEW fwd_strip_T_C = [13.00, 13.18]); CalcStack line 2 ''18 km × 1
+    °C / 100 km = 0.18 °C''; a second gold CurvedLink from the strip to ''0.18 °C'' on ''point one eight degrees'' (U-M6.9). The first link fades to 40
+    %.
 
-    S12 ('But does the parcel itself get warmer?'): a '?' (84 px gold) beside the ghost balloon.
 
-    S13 ('That depends on what the map does…'): two keywords appear under the maths zone at y 800, side by side, 54 px, no boxes: 'map frozen' (left) and 'map slides' (right), with a small fork glyph from the '?'. The snapshot corners stay (they go in s17b, where the map is frozen on purpose).
-  voiceover: 'What does point one eight kelvin per hour mean? Let''s follow the balloon''s air parcel, which is at the fixed
-    thermometer right now. The wind carries it straight across the isotherms at five metres per second, the wind''s shadow.
-    Distance is speed times time, so in one hour, three thousand six hundred seconds, it moves eighteen kilometres across
-    them. On the map as it is right now, each hundred kilometres east is one degree warmer, so eighteen kilometres is worth
-    point one eight degrees. So in one hour, the wind carries the parcel to a place where the map reads thirteen point one
-    eight. One degree per hundred kilometres is a rate in space: how the temperature changes with distance. Multiply it
-    by a speed in kilometres per hour, and you get degrees per hour: a rate in time. So point one eight kelvin per hour
-    is how fast the wind carries the parcel into warmer places. That''s v dot grad T, the advection term. It''s positive
-    because the wind blows partly towards warmer air, and it''s the same for every air parcel here, because the wind and
-    the map are the same everywhere. But does the parcel itself get warmer? That depends on what the map does, so let''s
-    look at two cases.'
+    S6 (''So in one hour, the wind carries the parcel…''): the ghost balloon''s readout ''13.18 °C'' (54 px teal) beside it; the pin readout ''13.00 °C''
+    (54 px slate) beside the pole icon (weather.json -> T_under_balloon).
+
+
+    S7 (''One degree per hundred kilometres is a rate in space…''): keyword ''1 °C per 100 km'' (54 px orange) with a small ruler bracket between the 13
+    °C and 14 °C isotherms → keyword ''space''.
+
+
+    S8 (''Multiply it by a speed…''): unit line ''(°C/km) × (km/h) = °C/h'' (54 px) with both km struck rose; keyword ''time'' with a small clock glyph
+    beside ''°C/h''.
+
+
+    S9 (''So point one eight kelvin per hour is how fast…''): the 1-h path, the span band and the strip pulse together (one 20-frame pulse, no flash); ''0.18
+    K per hour'' at the top grows to 84 px.
+
+
+    S10 (''That''s v dot grad T, the advection term''): ''v·∇T = +0.18 K per hour'' (68 px teal) replaces it, keyword ''advection term'' (54 px teal) under
+    it.
+
+
+    S11 (''It''s positive because…''): the ''+'' glows; keyword ''towards warmer air'' with a pointer to the shadow band; faint copies of the wind arrow
+    tile the window for 2 s (''the same everywhere'' is said, not written).
+
+
+    S12 (''But does the parcel itself get warmer?''): a ''?'' (84 px gold) beside the ghost balloon.
+
+
+    S13 (''That depends on what the map does…''): two keywords appear under the maths zone at y 800, side by side, 54 px, no boxes: ''map frozen'' (left)
+    and ''map slides'' (right), with a small fork glyph from the ''?''. The snapshot corners stay (they go in s17b, where the map is frozen on purpose).'
+  voiceover: 'What does point one eight kelvin per hour mean? Let''s follow the balloon''s air parcel, which is at the fixed thermometer right now. The
+    wind carries it straight across the isotherms at five metres per second, the wind''s shadow. Distance is speed times time, so in one hour, three thousand
+    six hundred seconds, it moves eighteen kilometres across them. On the map as it is right now, each hundred kilometres east is one degree warmer, so
+    eighteen kilometres is worth point one eight degrees. So in one hour, the wind carries the parcel to a place where the map reads thirteen point one
+    eight. One degree per hundred kilometres is a rate in space: how the temperature changes with distance. Multiply it by a speed in kilometres per hour,
+    and you get degrees per hour: a rate in time. So point one eight kelvin per hour is how fast the wind carries the parcel into warmer places. That''s
+    v dot grad T, the advection term. It''s positive because the wind blows partly towards warmer air, and it''s the same for every air parcel here, because
+    the wind and the map are the same everywhere. But does the parcel itself get warmer? That depends on what the map does, so let''s look at two cases.'
   on_screen_eq:
     latex: 5.00\ \mathrm{m/s}\times3600\ \mathrm s = 18\ \mathrm{km}
     vallis_eq: 'provenance only: our numbers'
@@ -1501,78 +1713,92 @@ scenes:
     also:
     - fluidpy.geo.vectors.norm
     - fluidpy.geo.vectors.dot
-    data: data/weather.json -> balloon_x_km, balloon_y_km (samples 0-60), T_under_balloon, km_per_h_towards_warm, km_per_h_along_wind,
-      proj_v_on_gradT_m_s, K_per_h; NEW fwd_across_km_1h, fwd_along_km_1h, fwd_span_km, fwd_strip_T_C (V2), zoom_window_km
-      (V5)
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V1_component_sum_on_field,
-      ::test_norm_V1_and_V7_scaling
+    data: data/weather.json -> balloon_x_km, balloon_y_km (samples 0-60), T_under_balloon, km_per_h_towards_warm, km_per_h_along_wind, proj_v_on_gradT_m_s,
+      K_per_h; NEW fwd_across_km_1h, fwd_along_km_1h, fwd_span_km, fwd_strip_T_C (V2), zoom_window_km (V5)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V1_component_sum_on_field, ::test_norm_V1_and_V7_scaling
   exaggeration:
   - the map is held still on purpose in this scene and marked as a snapshot (camera corners)
   - 'camera zoom 1.47 -> 4.0 px/km; the km ticks re-label, so every distance stays true; badge: none'
   - 'idealised field, not data; badge: none'
   sentence_times:
-  - - 775.825
-    - 778.925
-  - - 779.275
-    - 784.525
-  - - 784.875
-    - 791.175
-  - - 791.525
-    - 800.35
-  - - 800.7
-    - 809.975
-  - - 810.325
-    - 816.95
-  - - 817.3
-    - 823.975
-  - - 824.325
-    - 831.125
-  - - 831.475
-    - 838.35
-  - - 838.7
-    - 842.275
-  - - 842.625
-    - 852.825
-  - - 853.175
-    - 855.975
-  - - 856.325
-    - 860.6
+  - - 798.55
+    - 801.65
+  - - 802.0
+    - 807.25
+  - - 807.6
+    - 813.9
+  - - 814.25
+    - 823.075
+  - - 823.425
+    - 832.7
+  - - 833.05
+    - 839.675
+  - - 840.025
+    - 846.7
+  - - 847.05
+    - 853.85
+  - - 854.2
+    - 861.075
+  - - 861.425
+    - 865.0
+  - - 865.35
+    - 875.55
+  - - 875.9
+    - 878.7
+  - - 879.05
+    - 883.325
 - id: s17b_frozen
   t:
-  - 861.4
-  - 919.25
-  status: reused
+  - 884.125
+  - 943.125
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s17b_frozen
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    CASE 1, a thought experiment. The zoomed map of s17 stays (window x 220-440 km, y 160-292 km, 4.0 px/km). The isotherms DO NOT MOVE in this scene. The snapshot corners fade out on S1 and the 'map frozen' keyword from s17's fork slides to the map's top-left with a small sun glyph (illustrative). Thin dashed lines mark where the map reads 13.18, 13.36 and 13.54 °C (x = 318, 336, 354 km; NEW frozen_marks_km / frozen_marks_T_C), labels 44 px at the window top.
+  visual: 'CASE 1, a thought experiment. The zoomed map of s17 stays (window x 220-440 km, y 160-292 km, 4.0 px/km). The isotherms DO NOT MOVE in this scene.
+    The snapshot corners fade out on S1 and the ''map frozen'' keyword from s17''s fork slides to the map''s top-left with a small sun glyph (illustrative).
+    Thin dashed lines mark where the map reads 13.18, 13.36 and 13.54 °C (x = 318, 336, 354 km; NEW frozen_marks_km / frozen_marks_T_C), labels 44 px at
+    the window top.
 
-    S1 ('In the first case, imagine the map stays frozen…'): sun glyph + 'map frozen' (54 px); a brief warm glow over the whole map (opacity ramp >= 12 frames, never a flash).
 
-    S2 ('Then the fixed thermometer always reads thirteen degrees…'): the pole readout '13.00 °C' (68 px slate) at (1150, 170) beside the pole icon; maths zone '∂T/∂t = 0' (T.eq 84 px, slate) with keyword 'local rate' (54 px).
+    S1 (''In the first case, imagine the map stays frozen…''): sun glyph + ''map frozen'' (54 px); a brief warm glow over the whole map (opacity ramp >=
+    12 frames, never a flash).
 
-    S3 ('The balloon, though, reads the map…'): the clock 't = 0 → 3 h' (54 px) runs; the balloon moves along weather.json -> balloon_x_km / balloon_y_km (samples 0-180) to (354.0, 273.53) km; its readout (68 px teal, at (1500, 170)) follows NEW frozen_balloon_T_C (181 samples) and lands on 13.18, 13.36, 13.54 on the spoken numbers (whole hours aligned to the words, clip-proportional). TimeGraph (kit) in the maths zone x 1100-1800, y 430-800: t 0-3 h, T 12.4-13.6 °C (the SAME axes as s19a so the two graphs compare); the teal 'balloon' line draws with the clock from frozen_balloon_T_C (points at 1, 2, 3 h), the slate 'pole' line draws flat from NEW frozen_pole_T_C (13.00).
 
-    S4 ('Its reading climbs by point one eight degrees every hour…'): three small teal '+0.18' labels (44 px) between consecutive balloon points on the graph; on the map the balloon's three hourly spans across the isotherms (300-318, 318-336, 336-354 km) light gold one after another.
+    S2 (''Then the fixed thermometer always reads thirteen degrees…''): the pole readout ''13.00 °C'' (68 px slate) at (1150, 170) beside the pole icon;
+    maths zone ''∂T/∂t = 0'' (T.eq 84 px, slate) with keyword ''local rate'' (54 px).
 
-    S5 ('In our equation…'): the '∂T/∂t = 0' line becomes 'DT/Dt = ∂T/∂t + v·∇T' then '= 0 + 0.18 K per hour' with underbraces 'local rate' (slate) under 0 and 'advection term' (teal) under 0.18, then '= +0.18 K per hour' (teal, bold).
 
-    S6 ('On the graph…'): keywords at the line ends (54 px, no boxes): 'pole: flat' (slate) and 'balloon: climbs' (teal); each line pulses on its words.
+    S3 (''The balloon, though, reads the map…''): the clock ''t = 0 → 3 h'' (54 px) runs; the balloon moves along weather.json -> balloon_x_km / balloon_y_km
+    (samples 0-180) to (354.0, 273.53) km; its readout (68 px teal, at (1500, 170)) follows NEW frozen_balloon_T_C (181 samples) and lands on 13.18, 13.36,
+    13.54 on the spoken numbers (whole hours aligned to the words, clip-proportional). TimeGraph (kit) in the maths zone x 1100-1800, y 430-800: t 0-3 h,
+    T 12.4-13.6 °C (the SAME axes as s19a so the two graphs compare); the teal ''balloon'' line draws with the clock from frozen_balloon_T_C (points at
+    1, 2, 3 h), the slate ''pole'' line draws flat from NEW frozen_pole_T_C (13.00).
 
-    S7 ('So when the map is frozen…'): '+0.18 K per hour' and 'advection term' glow; gold underline.
-  voiceover: 'In the first case, imagine the map stays frozen, because the sun keeps every place at exactly its temperature.
-    Then the fixed thermometer always reads thirteen degrees, so its local rate, partial T by partial t, is zero. The balloon,
-    though, reads the map wherever the wind takes it: thirteen point one eight after one hour, thirteen point three six
-    after two, and thirteen point five four after three. Its reading climbs by point one eight degrees every hour, because
-    the wind keeps carrying it into warmer places. In our equation, capital D T by D t is zero plus v dot grad T: plus point
-    one eight kelvin per hour. On the graph, the fixed thermometer''s line stays flat, while the balloon''s line climbs.
-    So when the map is frozen, the parcel warms by exactly the advection term.'
+
+    S4 (''Its reading climbs by point one eight degrees every hour…''): three small teal ''+0.18'' labels (44 px) between consecutive balloon points on
+    the graph; on the map the balloon''s three hourly spans across the isotherms (300-318, 318-336, 336-354 km) light gold one after another.
+
+
+    S5 (''In our equation…''): the ''∂T/∂t = 0'' line becomes ''DT/Dt = ∂T/∂t + v·∇T'' then ''= 0 + 0.18 K per hour'' with underbraces ''local rate'' (slate)
+    under 0 and ''advection term'' (teal) under 0.18, then ''= +0.18 K per hour'' (teal, bold).
+
+
+    S6 (''On the graph…''): keywords at the line ends (54 px, no boxes): ''pole: flat'' (slate) and ''balloon: climbs'' (teal); each line pulses on its
+    words.
+
+
+    S7 (''So when the map is frozen…''): ''+0.18 K per hour'' and ''advection term'' glow; gold underline.'
+  voiceover: 'In the first case, imagine the map stays frozen, because the sun keeps every place at exactly its temperature. Then the fixed thermometer
+    always reads thirteen degrees, so its local rate, partial T by partial t, is zero. The balloon, though, reads the map wherever the wind takes it: thirteen
+    point one eight after one hour, thirteen point three six after two, and thirteen point five four after three. Its reading climbs by point one eight
+    degrees every hour, because the wind keeps carrying it into warmer places. In our equation, capital D T by D t is zero plus v dot grad T: plus point
+    one eight kelvin per hour. [beat] On the graph, the fixed thermometer''s line stays flat, while the balloon''s line climbs. So when the map is frozen,
+    the parcel warms by exactly the advection term.'
   on_screen_eq:
-    latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T = 0 + 0.18\ \mathrm{K\
-      per\ hour}
+    latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T = 0 + 0.18\ \mathrm{K\ per\ hour}
     vallis_eq: 'provenance only: (1.7) with φ = T on a frozen map (∂T/∂t = 0); page image checked'
     page_png: chapters/pages/ch01/p025.png
   on_screen_eq_extra:
@@ -1618,59 +1844,71 @@ scenes:
         - 273.53
     also:
     - fluidpy.geo.vectors.dot (13 °C + ∇T·(v t) for t = 1, 2, 3 h)
-    data: data/weather.json -> balloon_x_km, balloon_y_km, iso_t_h; NEW frozen_t_h, frozen_balloon_T_C, frozen_pole_T_C,
-      frozen_marks_km, frozen_marks_T_C, frozen_mdt (V3), zoom_window_km (V5)
+    data: data/weather.json -> balloon_x_km, balloon_y_km, iso_t_h; NEW frozen_t_h, frozen_balloon_T_C, frozen_pole_T_C, frozen_marks_km, frozen_marks_T_C,
+      frozen_mdt (V3), zoom_window_km (V5)
     test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline, ::test_material_derivative_V7_local_and_advective_vanish;
       ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field
   exaggeration:
-  - 'thought experiment: a map held exactly still needs heating that matches the advection everywhere (said as ''the sun
-    keeps every place at exactly its temperature''); idealised'
+  - 'thought experiment: a map held exactly still needs heating that matches the advection everywhere (said as ''the sun keeps every place at exactly its
+    temperature''); idealised'
   - time compressed (the clock shows model hours)
   - 'camera zoom as s17 (km ticks true); sun glyph illustrative; badge: none'
   sentence_times:
-  - - 861.4
-    - 869.25
-  - - 869.6
-    - 877.65
-  - - 878.0
-    - 890.2
-  - - 890.55
-    - 897.825
-  - - 898.175
-    - 906.325
-  - - 906.675
-    - 912.6
-  - - 912.95
-    - 918.45
+  - - 884.125
+    - 891.975
+  - - 892.325
+    - 900.375
+  - - 900.725
+    - 912.925
+  - - 913.275
+    - 920.55
+  - - 920.9
+    - 929.05
+  - - 930.55
+    - 936.475
+  - - 936.825
+    - 942.325
 - id: s18_keeps_temperature
   t:
-  - 919.25
-  - 956.325
-  status: reused
+  - 943.125
+  - 980.2
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s18_keeps_temperature
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    CASE 2. On S1 the MapCamera eases back from the s17b zoom to the full map (1.47 px/km, 45 frames); the frozen marks, the sun glyph and the s17b graph fade; the 'map slides' keyword from the s17 fork moves to the map's top-left. Map GM with the isotherms at their t = 0 places; tagged air parcels (3 rows x 4, tags 44 px above their dots, each tag its own temperature, unchanging; weather.json -> tags_x_km, tags_y_km, tags_T); clock 't = … h' (54 px) beside the map.
+  visual: 'CASE 2. On S1 the MapCamera eases back from the s17b zoom to the full map (1.47 px/km, 45 frames); the frozen marks, the sun glyph and the s17b
+    graph fade; the ''map slides'' keyword from the s17 fork moves to the map''s top-left. Map GM with the isotherms at their t = 0 places; tagged air parcels
+    (3 rows x 4, tags 44 px above their dots, each tag its own temperature, unchanging; weather.json -> tags_x_km, tags_y_km, tags_T); clock ''t = … h''
+    (54 px) beside the map.
 
-    S1 ('Now for the second case, which we'll follow from now on.'): camera zoom-out; 'map slides' keyword.
 
-    S2 ('We assume the air parcel inside the balloon doesn't change its temperature…', U-M6.11): balloon at the pin with its dashed parcel ellipse and readout '13.00 °C' (68 px teal); keywords 'keeps its temperature' with a pointer to the ellipse, then 'no sun · no mixing' (44 px).
+    S1 (''Now for the second case, which we''ll follow from now on.''): camera zoom-out; ''map slides'' keyword.
 
-    S3 ('That means the material derivative, capital D T by D t, is zero.'): maths zone 'DT/Dt = 0' (T.eq) with keyword 'material derivative' (54 px) pointing at D/Dt.
 
-    S4 ('Every other air parcel keeps its temperature too.'): the tagged parcels fade in; keyword 'each parcel keeps its T' (54 px) with a pointer to one tag.
+    S2 (''We assume the air parcel inside the balloon doesn''t change its temperature…'', U-M6.11): balloon at the pin with its dashed parcel ellipse and
+    readout ''13.00 °C'' (68 px teal); keywords ''keeps its temperature'' with a pointer to the ellipse, then ''no sun · no mixing'' (44 px).
 
-    S5 ('And since the air carries…slides with the wind'): the clock starts at 0 h; parcels drift; the isotherms slide east using the PRECOMPUTED weather.json -> iso_x_km (N5); keyword 'the pattern slides' with a pointer to a moving isotherm.
 
-    S6 ('Our wind is the same everywhere…'): a bracket shows the 13 °C line's shift '18 km' after 1 h (weather.json -> iso_shift_km at sample 60); the clock stops at 1 h; keyword 'east, 18 km per hour'.
-  voiceover: 'Now for the second case, which we''ll follow from now on. We assume the air parcel inside the balloon doesn''t
-    change its temperature as it moves with the wind: no sunshine and no mixing. That means the material derivative, capital
-    D T by D t, is zero. Every other air parcel keeps its temperature too. And since the air carries its temperature along,
-    the whole pattern of isotherms slides with the wind. Our wind is the same everywhere, so the lines move east, eighteen
-    kilometres every hour.'
+    S3 (''That means the material derivative, capital D T by D t, is zero.''): maths zone ''DT/Dt = 0'' (T.eq) with keyword ''material derivative'' (54
+    px) pointing at D/Dt.
+
+
+    S4 (''Every other air parcel keeps its temperature too.''): the tagged parcels fade in; keyword ''each parcel keeps its T'' (54 px) with a pointer to
+    one tag.
+
+
+    S5 (''And since the air carries…slides with the wind''): the clock starts at 0 h; parcels drift; the isotherms slide east using the PRECOMPUTED weather.json
+    -> iso_x_km (N5); keyword ''the pattern slides'' with a pointer to a moving isotherm.
+
+
+    S6 (''Our wind is the same everywhere…''): a bracket shows the 13 °C line''s shift ''18 km'' after 1 h (weather.json -> iso_shift_km at sample 60);
+    the clock stops at 1 h; keyword ''east, 18 km per hour''.'
+  voiceover: 'Now for the second case, which we''ll follow from now on. We assume the air parcel inside the balloon doesn''t change its temperature as it
+    moves with the wind: no sunshine and no mixing. That means the material derivative, capital D T by D t, is zero. Every other air parcel keeps its temperature
+    too. And since the air carries its temperature along, the whole pattern of isotherms slides with the wind. Our wind is the same everywhere, so the lines
+    move east, eighteen kilometres every hour.'
   on_screen_eq:
     latex: \frac{\mathrm{D}T}{\mathrm{D}t} = 0
     vallis_eq: 'provenance only: the supposition (each parcel keeps its temperature)'
@@ -1700,56 +1938,79 @@ scenes:
   - 'idealised: parcels keep their temperature exactly (no heating, radiation or mixing), said in the narration'
   - 'time compressed (the clock shows model hours); badge: none'
   sentence_times:
-  - - 919.25
-    - 923.125
-  - - 923.475
-    - 932.45
-  - - 932.8
-    - 938.1
-  - - 938.45
-    - 942.0
-  - - 942.35
-    - 948.825
-  - - 949.175
-    - 955.525
+  - - 943.125
+    - 947.0
+  - - 947.35
+    - 956.325
+  - - 956.675
+    - 961.975
+  - - 962.325
+    - 965.875
+  - - 966.225
+    - 972.7
+  - - 973.05
+    - 979.4
 - id: s19a_pole_cools
   t:
-  - 956.325
-  - 1020.375
-  status: reused
+  - 980.2
+  - 1044.25
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19a_pole_cools
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    RE-SEQUENCED (U-M6.12). The v5 bottom row '13 → 12.82 → 12.64 → 12.46' is DELETED, and no row of falling numbers appears anywhere. Each upwind number belongs to an air parcel, labelled by WHEN it will arrive.
+  visual: 'RE-SEQUENCED (U-M6.12). The v5 bottom row ''13 → 12.82 → 12.64 → 12.46'' is DELETED, and no row of falling numbers appears anywhere. Each upwind
+    number belongs to an air parcel, labelled by WHEN it will arrive.
 
-    Layout: full map (1.47 px/km) in the picture zone; maths zone: pole readout '13.00 °C' (68 px slate, with the pole icon) at (1150, 170) and balloon readout '13.00 °C' (68 px teal, with the balloon icon) at (1500, 170); TimeGraph (kit) at x 1100-1800, y 430-800 with the SAME axes as s17b (t 0-3 h, T 12.4-13.6 °C), empty at first.
 
-    S1 ('Now let's set the clock back to zero and watch the fixed thermometer.'): 10-frame cross-fade of the map back to its t = 0 state (isotherms at weather.json -> iso_x_km sample 0), clock 't = 0 h'; the pole icon brightens.
+    Layout: full map (1.47 px/km) in the picture zone; maths zone: pole readout ''13.00 °C'' (68 px slate, with the pole icon) at (1150, 170) and balloon
+    readout ''13.00 °C'' (68 px teal, with the balloon icon) at (1500, 170); TimeGraph (kit) at x 1100-1800, y 430-800 with the SAME axes as s17b (t 0-3
+    h, T 12.4-13.6 °C), empty at first.
 
-    S2 ('Ahead of the wind it's warmer, so behind it, upwind…'): a faint dashed line along the wind through the pin, from the far upwind point (weather.json -> upwind_far_km) to the downwind side; keyword 'warmer' (54 px) near its downwind end (upper right of the pin), then 'colder' and 'upwind' near its upwind end (lower left).
 
-    S3 ('The air that will reach the fixed thermometer in one hour…'): the first queued parcel appears at (282.0, 148.82) km (weather.json -> upwind_x_km[0], upwind_y_km[0]) as a dot with its arrival tag 'in 1 h' (44 px) and its temperature '12.82 °C' (54 px, left of the dot; upwind_T_C[0]); the mirror of s17's span: a rose 20-px band along ∇T from x = 282 to 300 km labelled '18 km' (NEW upwind_across_km[0]) and the strip between x = 282 and 300 km shaded rose at 20 % (12.82 → 13.00 °C).
+    S1 (''Now let''s set the clock back to zero and watch the fixed thermometer.''): 10-frame cross-fade of the map back to its t = 0 state (isotherms at
+    weather.json -> iso_x_km sample 0), clock ''t = 0 h''; the pole icon brightens.
 
-    S4 ('Behind it waits the air…'): the second and third parcels appear behind it on the dashed line, on their words: 'in 2 h' 12.64 °C at (264.0, 117.65) km and 'in 3 h' 12.46 °C at (246.0, 86.47) km (upwind_*[1], [2]).
 
-    S5 ('Now let's start the clock.'): the clock begins to run (one constant rate, see clock_rate).
+    S2 (''Ahead of the wind it''s warmer, so behind it, upwind…''): a faint dashed line along the wind through the pin, from the far upwind point (weather.json
+    -> upwind_far_km) to the downwind side; keyword ''warmer'' (54 px) near its downwind end (upper right of the pin), then ''colder'' and ''upwind'' near
+    its upwind end (lower left).
 
-    S6 ('One by one, each air parcel reaches the fixed thermometer…'): the isotherms slide (iso_x_km) and the three parcels travel along the wind (weather.json -> upwind_track_x_km / upwind_track_y_km; each stops at the pole at 1, 2, 3 h); the balloon moves off along balloon_x_km / balloon_y_km. As each parcel reaches the pole, on its spoken number, its '12.82' / '12.64' / '12.46' lifts off the dot (its 'in … h' tag fades), flies into the pole readout, which then shows it, and a slate point drops onto the graph's pole line at that hour; the arrived dot merges into the pole icon. Between whole hours the pole readout and the pole line follow weather.json -> T_pole_field_C (181 samples). The teal balloon line draws at 40 % from T_balloon_field_C at the same time.
 
-    S7 ('Colder and colder air keeps arriving…'): a rose chevron '−0.18 °C per hour' (54 px) along the falling pole line; keyword 'colder air arriving' (54 px) with a pointer back along the dashed line.
+    S3 (''The air that will reach the fixed thermometer in one hour…''): the first queued parcel appears at (282.0, 148.82) km (weather.json -> upwind_x_km[0],
+    upwind_y_km[0]) as a dot with its arrival tag ''in 1 h'' (44 px) and its temperature ''12.82 °C'' (54 px, left of the dot; upwind_T_C[0]); the mirror
+    of s17''s span: a rose 20-px band along ∇T from x = 282 to 300 km labelled ''18 km'' (NEW upwind_across_km[0]) and the strip between x = 282 and 300
+    km shaded rose at 20 % (12.82 → 13.00 °C).
 
-    S8 ('Meanwhile, the balloon moves with its parcel…'): the balloon line brightens to 100 %, flat at 13.00 (T_balloon_field_C); keyword 'balloon: stays 13 °C' at its end; the balloon readout pulses (still 13.00; the balloon is 108 km along the wind by 3 h, inside the map).
-  voiceover: 'Now let''s set the clock back to zero and watch the fixed thermometer. Ahead of the wind it''s warmer, so
-    behind it, upwind, where the wind comes from, it''s colder. The air that will reach the fixed thermometer in one hour
-    is now eighteen kilometres across the isotherms on the colder side, at twelve point eight two degrees. Behind it waits
-    the air that will arrive in two hours, at twelve point six four, and in three hours, at twelve point four six. Now let''s
-    start the clock. One by one, each air parcel reaches the fixed thermometer and brings its temperature with it: twelve
-    point eight two after one hour, twelve point six four after two, and twelve point four six after three. Colder and colder
-    air keeps arriving, so the fixed thermometer''s reading falls by point one eight degrees every hour. Meanwhile, the
-    balloon moves with its parcel, so its line on the graph stays flat at thirteen degrees.'
+
+    S4 (''Behind it waits the air…''): the second and third parcels appear behind it on the dashed line, on their words: ''in 2 h'' 12.64 °C at (264.0,
+    117.65) km and ''in 3 h'' 12.46 °C at (246.0, 86.47) km (upwind_*[1], [2]).
+
+
+    S5 (''Now let''s start the clock.''): the clock begins to run (one constant rate, see clock_rate).
+
+
+    S6 (''One by one, each air parcel reaches the fixed thermometer…''): the isotherms slide (iso_x_km) and the three parcels travel along the wind (weather.json
+    -> upwind_track_x_km / upwind_track_y_km; each stops at the pole at 1, 2, 3 h); the balloon moves off along balloon_x_km / balloon_y_km. As each parcel
+    reaches the pole, on its spoken number, its ''12.82'' / ''12.64'' / ''12.46'' lifts off the dot (its ''in … h'' tag fades), flies into the pole readout,
+    which then shows it, and a slate point drops onto the graph''s pole line at that hour; the arrived dot merges into the pole icon. Between whole hours
+    the pole readout and the pole line follow weather.json -> T_pole_field_C (181 samples). The teal balloon line draws at 40 % from T_balloon_field_C at
+    the same time.
+
+
+    S7 (''Colder and colder air keeps arriving…''): a rose chevron ''−0.18 °C per hour'' (54 px) along the falling pole line; keyword ''colder air arriving''
+    (54 px) with a pointer back along the dashed line.
+
+
+    S8 (''Meanwhile, the balloon moves with its parcel…''): the balloon line brightens to 100 %, flat at 13.00 (T_balloon_field_C); keyword ''balloon: stays
+    13 °C'' at its end; the balloon readout pulses (still 13.00; the balloon is 108 km along the wind by 3 h, inside the map).'
+  voiceover: 'Now let''s set the clock back to zero and watch the fixed thermometer. Ahead of the wind it''s warmer, so behind it, upwind, where the wind
+    comes from, it''s colder. The air that will reach the fixed thermometer in one hour is now eighteen kilometres across the isotherms on the colder side,
+    at twelve point eight two degrees. Behind it waits the air that will arrive in two hours, at twelve point six four, and in three hours, at twelve point
+    four six. Now let''s start the clock. One by one, each air parcel reaches the fixed thermometer and brings its temperature with it: twelve point eight
+    two after one hour, twelve point six four after two, and twelve point four six after three. Colder and colder air keeps arriving, so the fixed thermometer''s
+    reading falls by point one eight degrees every hour. Meanwhile, the balloon moves with its parcel, so its line on the graph stays flat at thirteen degrees.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.kinematics.material_derivative_terms
@@ -1798,53 +2059,58 @@ scenes:
     also:
     - fluidpy.geo.vectors.dot
     - fluidpy.geo.vectors.scalar_projection
-    data: data/weather.json -> upwind_x_km, upwind_y_km, upwind_T_C, upwind_far_km, upwind_track_x_km, upwind_track_y_km,
-      iso_x_km, iso_t_h, T_pole_field_C, T_balloon_field_C, balloon_x_km, balloon_y_km; NEW upwind_across_km, arrival_t_h,
-      graph_T_range_C (V4)
+    data: data/weather.json -> upwind_x_km, upwind_y_km, upwind_T_C, upwind_far_km, upwind_track_x_km, upwind_track_y_km, iso_x_km, iso_t_h, T_pole_field_C,
+      T_balloon_field_C, balloon_x_km, balloon_y_km; NEW upwind_across_km, arrival_t_h, graph_T_range_C (V4)
     test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline; ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field,
       ::test_scalar_projection_V1_and_V7
   exaggeration:
   - time compressed (the clock shows model hours)
   - 'idealised: parcels keep their temperature; uniform steady wind and gradient; badge: none'
   sentence_times:
-  - - 956.325
-    - 961.025
-  - - 961.375
-    - 967.7
-  - - 968.05
-    - 978.5
-  - - 978.85
-    - 987.475
-  - - 987.825
-    - 989.875
-  - - 990.225
-    - 1004.05
-  - - 1004.4
-    - 1012.325
-  - - 1012.675
-    - 1019.575
+  - - 980.2
+    - 984.9
+  - - 985.25
+    - 991.575
+  - - 991.925
+    - 1002.375
+  - - 1002.725
+    - 1011.35
+  - - 1011.7
+    - 1013.75
+  - - 1014.1
+    - 1027.925
+  - - 1028.275
+    - 1036.2
+  - - 1036.55
+    - 1043.45
 - id: s19b_equation
   t:
-  - 1020.375
-  - 1048.95
-  status: reused
+  - 1044.25
+  - 1072.825
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19b_equation
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Map dims to 60 % (clock held at 3 h, readouts kept small at the map's right). Maths zone CalcStack, one move per line, revealed with the clauses:
-    S1 ('Our equation says the same'): 'DT/Dt = ∂T/∂t + v·∇T'.
-    S2 ('Put zero for capital D T by D t…'): '0 = ∂T/∂t + v·∇T' (on 'put zero'); then '∂T/∂t = −v·∇T' (on 'subtract…'), with the +v·∇T moving across and turning into −v·∇T (minus in rose).
-    S3 ('The wind has a part towards warmer air…'): under v·∇T the value '+0.18 K/h' (teal); a tiny copy of the s16 shadow arrow beside it pointing towards warmer.
-    S4 ('The minus sign makes it a fall…'): under ∂T/∂t '−0.18 K/h' (rose, 68 px) and a pointer to the pole readout; keyword 'colder air carried in'.
+  visual: 'Map dims to 60 % (clock held at 3 h, readouts kept small at the map''s right). Maths zone CalcStack, one move per line, revealed with the clauses:
 
-    v6: the s19a TimeGraph shrinks to a 300 x 150 px thumbnail at the map's lower right (pole line falling, balloon line flat) and stays; the pointer in S4 goes to the pole readout above it. Narration unchanged.
-  voiceover: 'Our equation says the same. Put zero for capital D T by D t, and subtract v dot grad T from both sides: partial
-    T by partial t equals minus v dot grad T. The wind has a part towards warmer air, so v dot grad T is plus point one
-    eight kelvin per hour. The minus sign makes it a fall of point one eight at the fixed thermometer, as colder air is
-    carried in.'
+    S1 (''Our equation says the same''): ''DT/Dt = ∂T/∂t + v·∇T''.
+
+    S2 (''Put zero for capital D T by D t…''): ''0 = ∂T/∂t + v·∇T'' (on ''put zero''); then ''∂T/∂t = −v·∇T'' (on ''subtract…''), with the +v·∇T moving
+    across and turning into −v·∇T (minus in rose).
+
+    S3 (''The wind has a part towards warmer air…''): under v·∇T the value ''+0.18 K/h'' (teal); a tiny copy of the s16 shadow arrow beside it pointing
+    towards warmer.
+
+    S4 (''The minus sign makes it a fall…''): under ∂T/∂t ''−0.18 K/h'' (rose, 68 px) and a pointer to the pole readout; keyword ''colder air carried in''.
+
+
+    v6: the s19a TimeGraph shrinks to a 300 x 150 px thumbnail at the map''s lower right (pole line falling, balloon line flat) and stays; the pointer in
+    S4 goes to the pole readout above it. Narration unchanged.'
+  voiceover: 'Our equation says the same. Put zero for capital D T by D t, and subtract v dot grad T from both sides: partial T by partial t equals minus
+    v dot grad T. The wind has a part towards warmer air, so v dot grad T is plus point one eight kelvin per hour. The minus sign makes it a fall of point
+    one eight at the fixed thermometer, as colder air is carried in.'
   on_screen_eq:
     latex: \frac{\partial T}{\partial t} = -\,\mathbf v\cdot\nabla T
     vallis_eq: 'provenance only: follows from (1.7) with φ = T and DT/Dt = 0; derived on screen'
@@ -1874,46 +2140,59 @@ scenes:
     test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline, ::test_material_derivative_V7_local_and_advective_vanish
   exaggeration: []
   sentence_times:
-  - - 1020.375
-    - 1022.7
-  - - 1023.05
-    - 1033.85
-  - - 1034.2
-    - 1041.225
-  - - 1041.575
-    - 1048.15
+  - - 1044.25
+    - 1046.575
+  - - 1046.925
+    - 1057.725
+  - - 1058.075
+    - 1065.1
+  - - 1065.45
+    - 1072.025
 - id: s19c_balance
   t:
-  - 1048.95
-  - 1095.1
-  status: reused
+  - 1072.825
+  - 1118.975
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19c_balance
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Balance scene (Balance component, no box). Left: the map at t = 1 h with the balloon 36 km along the wind from the pin; a faint GHOST of the t = 0 snapshot's 13.18 °C contour under the balloon (dashed, 44 px label '13.18 °C, an hour ago'; weather.json -> iso_1318_x0_km). Right, maths zone: TWO Balance rows on zero lines, the upper one smaller and labelled 'map frozen' (54 px), the lower one full size and labelled 'map slides' (54 px); bars in K per hour.
+  visual: 'Balance scene (Balance component, no box). Left: the map at t = 1 h with the balloon 36 km along the wind from the pin; a faint GHOST of the
+    t = 0 snapshot''s 13.18 °C contour under the balloon (dashed, 44 px label ''13.18 °C, an hour ago''; weather.json -> iso_1318_x0_km). Right, maths zone:
+    TWO Balance rows on zero lines, the upper one smaller and labelled ''map frozen'' (54 px), the lower one full size and labelled ''map slides'' (54 px);
+    bars in K per hour.
 
-    S1 ('So why does the balloon stay at thirteen?'): balloon readout '13.00 °C' pulses.
 
-    S2 ('In one hour it moves eighteen kilometres…'): bracket '18 km across' on the map; in the LOWER row the teal bar grows to the right, labelled '+0.18' and 'advection term' (54 px).
+    S1 (''So why does the balloon stay at thirteen?''): balloon readout ''13.00 °C'' pulses.
 
-    S3 ('Crossing the isotherms like that…'): the teal bar pulses.
 
-    S4 ('In the first case, the map stood still…'): the UPPER row ('map frozen') fills: a teal '+0.18' bar ('advection term'), a slate local bar of zero length with '0' ('local rate'), and '= +0.18' at its end; a 300 x 150 px thumbnail of the s17b graph (balloon line climbing) beside it.
+    S2 (''In one hour it moves eighteen kilometres…''): bracket ''18 km across'' on the map; in the LOWER row the teal bar grows to the right, labelled
+    ''+0.18'' and ''advection term'' (54 px).
 
-    S5 ('In our second case, every place has cooled…'): in the LOWER row the rose bar of equal length grows to the left, labelled '−0.18' and 'local rate'; the pole icon beside it.
 
-    S6 ('They cancel…'): the line 'DT/Dt = ∂T/∂t + v·∇T' above the rows; '+0.18 = 0 + 0.18' to the right of the upper row and '0 = −0.18 + 0.18' to the right of the lower row (54 px); balloon '13.00 °C' bold.
+    S3 (''Crossing the isotherms like that…''): the teal bar pulses.
 
-    S7 ('So the advection term is the same in both cases…'): the two teal bars pulse together with keyword 'same advection term'; then the two local bars (0 and −0.18) glow with keyword 'local rate differs'.
-  voiceover: 'So why does the balloon stay at thirteen? In one hour it moves eighteen kilometres across the isotherms, to
-    where the map read thirteen point one eight an hour ago. Crossing the isotherms like that is worth plus point one eight:
-    that''s the advection term. In the first case, the map stood still, so the local rate was zero, and the parcel warmed
-    by point one eight. In our second case, every place has cooled by point one eight degrees in that hour, and that fall,
-    minus point one eight, is the local rate. They cancel, so the balloon still reads thirteen. So the advection term is
-    the same in both cases; only the local rate is different.'
+
+    S4 (''In the first case, the map stood still…''): the UPPER row (''map frozen'') fills: a teal ''+0.18'' bar (''advection term''), a slate local bar
+    of zero length with ''0'' (''local rate''), and ''= +0.18'' at its end; a 300 x 150 px thumbnail of the s17b graph (balloon line climbing) beside it.
+
+
+    S5 (''In our second case, every place has cooled…''): in the LOWER row the rose bar of equal length grows to the left, labelled ''−0.18'' and ''local
+    rate''; the pole icon beside it.
+
+
+    S6 (''They cancel…''): the line ''DT/Dt = ∂T/∂t + v·∇T'' above the rows; ''+0.18 = 0 + 0.18'' to the right of the upper row and ''0 = −0.18 + 0.18''
+    to the right of the lower row (54 px); balloon ''13.00 °C'' bold.
+
+
+    S7 (''So the advection term is the same in both cases…''): the two teal bars pulse together with keyword ''same advection term''; then the two local
+    bars (0 and −0.18) glow with keyword ''local rate differs''.'
+  voiceover: 'So why does the balloon stay at thirteen? In one hour it moves eighteen kilometres across the isotherms, to where the map read thirteen point
+    one eight an hour ago. Crossing the isotherms like that is worth plus point one eight: that''s the advection term. In the first case, the map stood
+    still, so the local rate was zero, and the parcel warmed by point one eight. In our second case, every place has cooled by point one eight degrees in
+    that hour, and that fall, minus point one eight, is the local rate. They cancel, so the balloon still reads thirteen. So the advection term is the same
+    in both cases; only the local rate is different.'
   on_screen_eq:
     latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T
     vallis_eq: 'provenance only: (1.7) with φ = T'
@@ -1952,60 +2231,66 @@ scenes:
       map_under_balloon_t0_C: 13.18
     also:
     - fluidpy.core.kinematics.material_derivative_terms
-    data: data/weather.json -> T_under_balloon, iso_1318_x0_km, balance_moved_K, balance_local_K, balance_sum_K (N8); NEW
-      frozen_mdt (V3) for the upper row; frozen_balloon_T_C for the thumbnail
+    data: data/weather.json -> T_under_balloon, iso_1318_x0_km, balance_moved_K, balance_local_K, balance_sum_K (N8); NEW frozen_mdt (V3) for the upper
+      row; frozen_balloon_T_C for the thumbnail
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field; ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline,
       ::test_material_derivative_V7_local_and_advective_vanish
   exaggeration:
-  - 'the bars are bookkeeping of one cause (the moving pattern, or in Case 1 the heating that holds the map), not separate
-    processes; badge: none'
+  - 'the bars are bookkeeping of one cause (the moving pattern, or in Case 1 the heating that holds the map), not separate processes; badge: none'
   sentence_times:
-  - - 1048.95
-    - 1051.775
-  - - 1052.125
-    - 1060.3
-  - - 1060.65
-    - 1066.7
-  - - 1067.05
-    - 1074.4
-  - - 1074.75
-    - 1084.225
-  - - 1084.575
-    - 1088.15
-  - - 1088.5
-    - 1094.3
+  - - 1072.825
+    - 1075.65
+  - - 1076.0
+    - 1084.175
+  - - 1084.525
+    - 1090.575
+  - - 1090.925
+    - 1098.275
+  - - 1098.625
+    - 1108.1
+  - - 1108.45
+    - 1112.025
+  - - 1112.375
+    - 1118.175
 - id: s19d_three_rates
   t:
-  - 1095.1
-  - 1155.675
-  status: reused
+  - 1118.975
+  - 1179.55
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s19d_three_rates
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    Capstone of the advection stretch, no map, no boxes. A 3 x 2 grid of numbers on the full screen (row labels left, 68 px symbols + 54 px keywords; numbers 84 px, teal for +, slate for 0, rose with a "−" glyph for −). Columns, headed by 54-px keywords with small icons: 'map frozen' (SunGlyph) and 'our story' (sliding isotherm lines). Rows, in this order, each with its observer icon: v·∇T 'advection term' (wind arrow) = +0.18 | +0.18; ∂T/∂t 'local rate' (pole) = 0 | −0.18; DT/Dt 'material derivative' (balloon) = +0.18 | 0. Unit 'K per hour' once, top right (44 px).
+  visual: 'Capstone of the advection stretch, no map, no boxes. A 3 x 2 grid of numbers on the full screen (row labels left, 68 px symbols + 54 px keywords;
+    numbers 84 px, teal for +, slate for 0, rose with a "−" glyph for −). Columns, headed by 54-px keywords with small icons: ''map frozen'' (SunGlyph)
+    and ''our story'' (sliding isotherm lines). Rows, in this order, each with its observer icon: v·∇T ''advection term'' (wind arrow) = +0.18 | +0.18;
+    ∂T/∂t ''local rate'' (pole) = 0 | −0.18; DT/Dt ''material derivative'' (balloon) = +0.18 | 0. Unit ''K per hour'' once, top right (44 px).
 
-    S1 ('Let's put the three rates side by side…'): the grid frame (labels only) fades in; values hidden.
 
-    S2 ('The advection term…tells us how fast…'): row 1 label pulses with the wind icon; a tiny wind arrow crosses three isotherm ticks beside it.
+    S1 (''Let''s put the three rates side by side…''): the grid frame (labels only) fades in; values hidden.
 
-    S3 ('Here it's plus point one eight…in both cases'): both row-1 values appear on the spoken number; keyword 'same' between them.
 
-    S4 ('The local rate…what the thermometer on the pole sees…'): row 2 values appear on 'zero' and on 'minus point one eight'; the pole icon glows.
+    S2 (''The advection term…tells us how fast…''): row 1 label pulses with the wind icon; a tiny wind arrow crosses three isotherm ticks beside it.
 
-    S5 ('The material derivative…what the balloon's thermometer sees…'): row 3 values appear on the spoken numbers; a thin '+' brace shows row 3 = row 2 + row 1 in each column (the sum lines up under its column).
 
-    S6 ('So whenever you meet v dot grad T…'): the other rows dim; row 1 stays bright with keyword 'degrees per hour from crossing isotherms' (54 px).
-  voiceover: 'Let''s put the three rates side by side, and say what each one means. The advection term, v dot grad T, tells
-    us how fast the wind carries an air parcel into warmer or colder places. Here it''s plus point one eight kelvin per
-    hour in both cases, because the wind and the spacing of the isotherms are the same. The local rate, partial T by partial
-    t, is what the fixed thermometer sees, at one place that never moves: zero when the map is frozen, and minus point one
-    eight in our story, as colder air arrives. The material derivative, capital D T by D t, is what the balloon''s thermometer
-    sees, and it''s the local rate plus the advection term: plus point one eight when the map is frozen, and zero in our
-    story. So whenever you meet v dot grad T, think of how fast the wind carries air across the isotherms, measured in degrees
-    per hour.'
+    S3 (''Here it''s plus point one eight…in both cases''): both row-1 values appear on the spoken number; keyword ''same'' between them.
+
+
+    S4 (''The local rate…what the thermometer on the pole sees…''): row 2 values appear on ''zero'' and on ''minus point one eight''; the pole icon glows.
+
+
+    S5 (''The material derivative…what the balloon''s thermometer sees…''): row 3 values appear on the spoken numbers; a thin ''+'' brace shows row 3 =
+    row 2 + row 1 in each column (the sum lines up under its column).
+
+
+    S6 (''So whenever you meet v dot grad T…''): the other rows dim; row 1 stays bright with keyword ''degrees per hour from crossing isotherms'' (54 px).'
+  voiceover: 'Let''s put the three rates side by side, and say what each one means. The advection term, v dot grad T, tells us how fast the wind carries
+    an air parcel into warmer or colder places. Here it''s plus point one eight kelvin per hour in both cases, because the wind and the spacing of the isotherms
+    are the same. The local rate, partial T by partial t, is what the fixed thermometer sees, at one place that never moves: zero when the map is frozen,
+    and minus point one eight in our story, as colder air arrives. The material derivative, capital D T by D t, is what the balloon''s thermometer sees,
+    and it''s the local rate plus the advection term: plus point one eight when the map is frozen, and zero in our story. So whenever you meet v dot grad
+    T, think of how fast the wind carries air across the isotherms, measured in degrees per hour.'
   on_screen_eq:
     latex: \frac{\mathrm{D}T}{\mathrm{D}t} = \frac{\partial T}{\partial t} + \mathbf v\cdot\nabla T
     vallis_eq: 'provenance only: (1.7) with φ = T'
@@ -2023,46 +2308,51 @@ scenes:
       material_K_per_h:
       - 0.18
       - 0.0
-    data: data/weather.json -> NEW three_rates grid (V7), reusing frozen_mdt (V3) and balloon_mdt_total / T_pole_field (N6,
-      N7)
+    data: data/weather.json -> NEW three_rates grid (V7), reusing frozen_mdt (V3) and balloon_mdt_total / T_pole_field (N6, N7)
     test: ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V1_equals_rate_along_pathline
   exaggeration: []
   sentence_times:
-  - - 1095.1
-    - 1099.65
-  - - 1100.0
-    - 1108.55
-  - - 1108.9
-    - 1117.025
-  - - 1117.375
-    - 1131.225
-  - - 1131.575
-    - 1145.55
-  - - 1145.9
-    - 1154.875
+  - - 1118.975
+    - 1123.525
+  - - 1123.875
+    - 1132.425
+  - - 1132.775
+    - 1140.9
+  - - 1141.25
+    - 1155.1
+  - - 1155.45
+    - 1169.425
+  - - 1169.775
+    - 1178.75
 - id: s20_twice_steep
   t:
-  - 1155.675
-  - 1201.575
-  status: reused
+  - 1179.55
+  - 1225.45
+  status: reused (v6 word-identical)
   reuse:
     from: ch00_dot_product_why(v6fix1)/s20_twice_steep
     narration: word-identical (archived clip may be spliced)
   changes: []
   related: []
-  visual: |-
-    No Slots, no cards, no chips.
-    S1 ('Now let's change only the map…'): the map becomes T = 13 °C + 2 °C per 100 km × (x − x_pin) (7 → 19 °C); isotherms every 50 km from the precomputed isotherms_steep_km (N11), labels 44 px; bracket '1 °C per 50 km' (54 px) between two lines.
-    S2 ('The isotherms are twice as close, so grad T doubles…'): ∇T arrow doubles in length; CalcStack '∇T = 2.00 × 10⁻⁵ K/m' (orange) with keyword '× 2'.
-    S3 ('The wind's shadow is still…'): shadow band unchanged, '5.00 m/s' (teal) with keyword 'same'.
-    S4 ('But the dot product doubles…'): line 'v·∇T = 5.00 × 2.00 × 10⁻⁵ = 1.00 × 10⁻⁴ K/s' and '× 3600 s = 0.36 K per hour' bold, keyword '× 2'; the pole readout runs 13.00 → 12.64 over 1 h on the clock (same clock rate); keyword 'twice as fast'.
-    S5 ('As with the sled…'): a tiny sled icon beside the shadow value; the 5.00 m/s dims, the 0.36 glows.
-  voiceover: 'Now let''s change only the map: the temperature rises one degree every fifty kilometres, instead of every
-    hundred. The isotherms are twice as close, so grad T doubles, to two times ten to the minus five kelvin per metre. Its
-    length, by Pythagoras again, is that same number, because the northward part is still zero. The wind''s shadow is still
-    five metres per second. But the dot product doubles, to point three six kelvin per hour, so the fixed thermometer cools
-    twice as fast. Just as with the sled, the shadow stayed the same, so on its own it would miss this change. Multiplying
-    by the length of grad T catches it.'
+  visual: 'No Slots, no cards, no chips.
+
+    S1 (''Now let''s change only the map…''): the map becomes T = 13 °C + 2 °C per 100 km × (x − x_pin) (7 → 19 °C); isotherms every 50 km from the precomputed
+    isotherms_steep_km (N11), labels 44 px; bracket ''1 °C per 50 km'' (54 px) between two lines.
+
+    S2 (''The isotherms are twice as close, so grad T doubles…''): ∇T arrow doubles in length; CalcStack ''∇T = 2.00 × 10⁻⁵ K/m'' (orange) with keyword
+    ''× 2''.
+
+    S3 (''The wind''s shadow is still…''): shadow band unchanged, ''5.00 m/s'' (teal) with keyword ''same''.
+
+    S4 (''But the dot product doubles…''): line ''v·∇T = 5.00 × 2.00 × 10⁻⁵ = 1.00 × 10⁻⁴ K/s'' and ''× 3600 s = 0.36 K per hour'' bold, keyword ''× 2'';
+    the pole readout runs 13.00 → 12.64 over 1 h on the clock (same clock rate); keyword ''twice as fast''.
+
+    S5 (''As with the sled…''): a tiny sled icon beside the shadow value; the 5.00 m/s dims, the 0.36 glows.'
+  voiceover: 'Now let''s change only the map: the temperature rises one degree every fifty kilometres, instead of every hundred. The isotherms are twice
+    as close, so grad T doubles, to two times ten to the minus five kelvin per metre. Its length, by Pythagoras again, is that same number, because the
+    northward part is still zero. The wind''s shadow is still five metres per second. But the dot product doubles, to point three six kelvin per hour, so
+    the fixed thermometer cools twice as fast. Just as with the sled, the shadow stayed the same, so on its own it would miss this change. Multiplying by
+    the length of grad T catches it.'
   on_screen_eq:
     latex: \mathbf v\cdot\nabla T = 5.00\ \mathrm{m/s}\times2.00\times10^{-5}\ \mathrm{K/m} = 1.00\times10^{-4}\ \mathrm{K/s}
     vallis_eq: 'provenance only: our numbers'
@@ -2096,47 +2386,42 @@ scenes:
     - fluidpy.geo.vectors.scalar_projection
     - fluidpy.core.kinematics.material_derivative_terms
     - fluidpy.geo.vectors.norm
-    data: data/weather.json -> gradT_steep, shadow_steep_m_s, v_dot_gradT_steep, K_per_h_steep, T_pole_steep, T_west_steep;
-      NEW isotherms_steep_km (N11)
-    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V2_dimensions_pint_advection_unit;
-      ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V7_local_and_advective_vanish
+    data: data/weather.json -> gradT_steep, shadow_steep_m_s, v_dot_gradT_steep, K_per_h_steep, T_pole_steep, T_west_steep; NEW isotherms_steep_km (N11)
+    test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_scalar_projection_V1_and_V7, ::test_dot_V2_dimensions_pint_advection_unit; ../Fluid Dynamics/tests/test_ch03.py::test_material_derivative_V7_local_and_advective_vanish
   exaggeration:
   - time compressed (clock)
   - 'idealised field, not data; badge: none'
   sentence_times:
-  - - 1155.675
-    - 1163.525
-  - - 1163.875
-    - 1171.625
-  - - 1171.975
-    - 1178.65
-  - - 1179.0
-    - 1182.575
-  - - 1182.925
-    - 1190.55
-  - - 1190.9
-    - 1196.85
-  - - 1197.2
-    - 1200.775
+  - - 1179.55
+    - 1187.4
+  - - 1187.75
+    - 1195.5
+  - - 1195.85
+    - 1202.525
+  - - 1202.875
+    - 1206.45
+  - - 1206.8
+    - 1214.425
+  - - 1214.775
+    - 1220.725
+  - - 1221.075
+    - 1224.65
 - id: s20b_runway
   t:
-  - 1201.575
-  - 1240.5
+  - 1225.45
+  - 1267.025
   status: new
   changes:
-  - W12 runway (research §4); 'along', not 'headwind' (a wind blowing towards the runway's heading is a tailwind for that
-    heading)
+  - W12 runway (research §4); 'along', not 'headwind' (a wind blowing towards the runway's heading is a tailwind for that heading)
   related:
-  - '#2 cross product (runway, across part)'
-  visual: 'Picture zone: a runway from above (grey strip, centre-line dashes) pointing north, the unit arrow ê (orange)
-    along it; wind v (teal, 10 m/s) at 30° towards the north east; its shadow on the runway line as a teal band ''along'';
-    the across part greyed and labelled ''across: cross product video''. Maths zone CalcStack: v · ê = |v| cos 30°; = 10
-    × 0.866; ≈ 8.7 m/s. Gold link band -> 8.7.'
-  voiceover: The dot product turns up in many more places, so let's look at a few. First, a runway. Pilots need to know
-    how much of the wind blows along the runway. Say the runway points north, and the wind blows at ten metres per second
-    towards the north east, thirty degrees off the runway. Let e hat be a unit arrow along the runway. Then the wind dot
-    e hat is ten times cos thirty, about eight point seven metres per second along the runway. The part straight across
-    it is a job for the cross product, in the next video.
+  - '#3 cross product at work (s53a: the part across the runway)'
+  visual: 'Picture zone: a runway from above (grey strip, centre-line dashes) pointing north, the unit arrow ê (orange) along it; wind v (teal, 10 m/s)
+    at 30° towards the north east; its shadow on the runway line as a teal band ''along''; the across part greyed and labelled ''across: cross product video''.
+    Maths zone CalcStack: v · ê = |v| cos 30°; = 10 × 0.866; ≈ 8.7 m/s. Gold link band -> 8.7.'
+  voiceover: The dot product turns up in many more places, so let's look at a few. First, a runway. Pilots need to know how much of the wind blows along
+    the runway. Say the runway points north, and the wind blows at ten metres per second towards the north east, thirty degrees off the runway. Let e hat
+    be a unit arrow along the runway. Then the wind dot e hat is ten times cos thirty, about eight point seven metres per second along the runway. [beat]
+    The part straight across it is a job for the cross product, which a later video in this series takes on.
   on_screen_eq:
     latex: \mathbf v\cdot\hat{\mathbf e}=10\cos30^\circ\approx8.7\ \mathrm{m\,s^{-1}}
     vallis_eq: 'provenance only: our numbers'
@@ -2158,41 +2443,39 @@ scenes:
   exaggeration:
   - schematic runway
   sentence_times:
-  - - 1201.575
-    - 1206.425
-  - - 1206.775
-    - 1208.8
-  - - 1209.15
-    - 1213.65
-  - - 1214.0
-    - 1222.375
-  - - 1222.725
-    - 1226.05
-  - - 1226.4
-    - 1234.025
-  - - 1234.375
-    - 1239.7
+  - - 1225.45
+    - 1230.3
+  - - 1230.65
+    - 1232.675
+  - - 1233.025
+    - 1237.525
+  - - 1237.875
+    - 1246.25
+  - - 1246.6
+    - 1249.925
+  - - 1250.275
+    - 1257.9
+  - - 1259.4
+    - 1266.225
 - id: s20c_flux
   t:
-  - 1240.5
-  - 1300.1
+  - 1267.025
+  - 1327.775
   status: new
   changes:
   - D6 / W16 / W14 flux (research §3-§4)
   related:
   - '#22 climate machine'
   - '#7 divergence and flux'
-  visual: 'Picture zone 3-D: parallel gold sunlight arrows; a window frame (slate) with its normal n̂ (orange); arrows passing
-    through are counted (live ''through: 100 %… 50 %… 0 %'') as the frame tilts 0° -> 60° -> 90°; ŝ (gold). Then cut to
-    a globe (BMNG) at the March equinox, noon at the equator: a beam patch on the equator vs the same beam spread over twice
-    the ground at 60°N (two outlined patches); maths zone ŝ · n̂ = cos 60° = 0.5.'
-  voiceover: Second, how much passes through a surface. Hold a window frame in a steady stream of sunlight. When it faces
-    the sun square on, it catches the most light. Tilt it, and less light gets through, and edge on, none at all. The amount
-    is the sunlight's strength times s hat dot n hat, where s hat points towards the sun and n hat points straight out of
-    the window. The ground works the same way. At noon on the March equinox, the sun is straight overhead at the equator,
-    but at sixty degrees north it's sixty degrees away from overhead, so s hat dot n hat is cos sixty, one half. The same
-    sunlight is spread over twice as much ground, which is a big part of why places near the poles are colder. The same
-    dot product measures heat or water flowing through any surface. The climate machine video builds on exactly this.
+  visual: 'Picture zone 3-D: parallel gold sunlight arrows; a window frame (slate) with its normal n̂ (orange); arrows passing through are counted (live
+    ''through: 100 %… 50 %… 0 %'') as the frame tilts 0° -> 60° -> 90°; ŝ (gold). Then cut to a globe (BMNG) at the March equinox, noon at the equator:
+    a beam patch on the equator vs the same beam spread over twice the ground at 60°N (two outlined patches); maths zone ŝ · n̂ = cos 60° = 0.5.'
+  voiceover: Second, how much passes through a surface. Hold a window frame in a steady stream of sunlight. When it faces the sun square on, it catches
+    the most light. Tilt it, and less light gets through, and edge on, none at all. The amount is the sunlight's strength times s hat dot n hat, where s
+    hat points towards the sun and n hat points straight out of the window. The ground works the same way. At noon on the March equinox, the sun is straight
+    overhead at the equator, but at sixty degrees north it's sixty degrees away from overhead, so s hat dot n hat is cos sixty, one half. [beat] The same
+    sunlight is spread over twice as much ground, which is a big part of why places near the poles are colder. The same dot product measures heat or water
+    flowing through any surface. The climate machine video builds on exactly this.
   on_screen_eq:
     latex: \hat{\mathbf s}\cdot\hat{\mathbf n}=\cos60^\circ=0.5
     vallis_eq: 'provenance only: Lambert cosine law'
@@ -2211,49 +2494,46 @@ scenes:
   exaggeration:
   - the window is illustrative; the globe beams ignore the atmosphere
   sentence_times:
-  - - 1240.5
-    - 1243.625
-  - - 1243.975
-    - 1247.475
-  - - 1247.825
-    - 1252.0
-  - - 1252.35
-    - 1256.4
-  - - 1256.75
-    - 1265.875
-  - - 1266.225
-    - 1268.55
-  - - 1268.9
-    - 1281.7
-  - - 1282.05
-    - 1289.6
-  - - 1289.95
-    - 1295.125
-  - - 1295.475
-    - 1299.3
+  - - 1267.025
+    - 1270.15
+  - - 1270.5
+    - 1274.0
+  - - 1274.35
+    - 1278.525
+  - - 1278.875
+    - 1282.925
+  - - 1283.275
+    - 1292.4
+  - - 1292.75
+    - 1295.075
+  - - 1295.425
+    - 1308.225
+  - - 1309.725
+    - 1317.275
+  - - 1317.625
+    - 1322.8
+  - - 1323.15
+    - 1326.975
 - id: s20d_wind_work
   t:
-  - 1300.1
-  - 1360.15
+  - 1327.775
+  - 1388.975
   status: new
   changes:
   - W13 wind work and its sign (research §4)
   related:
   - '#52 wind-driven gyres'
   - '#57 Antarctic Circumpolar Current'
-  visual: 'Picture zone: two ocean tiles from above — left: wind stress τ (orange) and current u (teal) the same way, ''+''
-    and a gold energy bar filling; right: τ against u, rose hatched ''−'' and the bar draining. Maths zone CalcStack: τ
-    · u = 0.1 × 0.1; = 0.01 W/m² (unit cancel N/m² × m/s = W/m²). S8: cut to a globe looking down on Antarctica with the
-    westerlies (orange streaks, NCEP LTM from the v4 data) over the circumpolar current (teal band, schematic position),
-    keyword ''≈ 1 TW'' only after it is spoken (cited).'
-  voiceover: Third, the wind's work on the ocean. Wind blowing over the sea drags on the water. The drag on each square
-    metre is an arrow called the wind stress, tau. The power it gives the water is tau dot u, where u is the water's velocity.
-    Where the wind blows along with a current, the dot product is positive, and the wind feeds the current with energy.
-    Where it blows against the current, the dot product is negative, and the wind takes energy away. Say the wind stress
-    is point one newtons per square metre, and the current flows the same way at point one metres per second. Then the wind
-    gives the current point zero one watts on every square metre. Added up over the world ocean, this comes to about a million
-    million watts, most of it over the Southern Ocean, where strong westerly winds blow along with the current that circles
-    Antarctica.
+  visual: 'Picture zone: two ocean tiles from above — left: wind stress τ (orange) and current u (teal) the same way, ''+'' and a gold energy bar filling;
+    right: τ against u, rose hatched ''−'' and the bar draining. Maths zone CalcStack: τ · u = 0.1 × 0.1; = 0.01 W/m² (unit cancel N/m² × m/s = W/m²). S8:
+    cut to a globe looking down on Antarctica with the westerlies (orange streaks, NCEP LTM from the v4 data) over the circumpolar current (teal band, schematic
+    position), keyword ''≈ 1 TW'' only after it is spoken (cited).'
+  voiceover: Third, the wind's work on the ocean. Wind blowing over the sea drags on the water. The drag on each square metre is an arrow called the wind
+    stress, tau. The power it gives the water is tau dot u, where u is the water's velocity. Where the wind blows along with a current, the dot product
+    is positive, and the wind feeds the current with energy. Where it blows against the current, the dot product is negative, and the wind takes energy
+    away. Say the wind stress is point one newtons per square metre, and the current flows the same way at point one metres per second. Then the wind gives
+    the current point zero one watts on every square metre. [beat] Added up over the world ocean, this comes to about a million million watts, most of it
+    over the Southern Ocean, where strong westerly winds blow along with the current that circles Antarctica.
   on_screen_eq:
     latex: \boldsymbol\tau\cdot\mathbf u
     vallis_eq: 'provenance only: wind work (power per unit area)'
@@ -2279,45 +2559,43 @@ scenes:
   - tiles are illustrative easy numbers; the circumpolar current band is schematic
   honesty: The 1 TW global figure must be confirmed against the paper before the final TTS (data_needs §D W2).
   sentence_times:
-  - - 1300.1
-    - 1303.15
-  - - 1303.5
-    - 1307.1
-  - - 1307.45
-    - 1312.225
-  - - 1312.575
-    - 1318.1
-  - - 1318.45
-    - 1325.9
-  - - 1326.25
-    - 1332.75
-  - - 1333.1
-    - 1341.125
-  - - 1341.475
-    - 1346.65
-  - - 1347.0
-    - 1359.35
+  - - 1327.775
+    - 1330.825
+  - - 1331.175
+    - 1334.775
+  - - 1335.125
+    - 1339.9
+  - - 1340.25
+    - 1345.775
+  - - 1346.125
+    - 1353.575
+  - - 1353.925
+    - 1360.425
+  - - 1360.775
+    - 1368.8
+  - - 1369.15
+    - 1374.325
+  - - 1375.825
+    - 1388.175
 - id: s20e_similarity
   t:
-  - 1360.15
-  - 1419.0
+  - 1388.975
+  - 1448.975
   status: new
   changes:
   - V-D5 similarity / pattern correlation (research §1b-§1c)
   related:
   - '#21 statistics of fields'
-  visual: 'Picture zone: a small map with four station dots, each with today''s pressure departure (teal numbers +3, +1,
-    −2, −2 hPa) and, beside it, the same map for a past day (orange +2, +2, −1, −3). They become two columns of four numbers
-    (arrows in four dimensions: ''can''t draw it, same recipe''). Maths zone CalcStack: A · B = 6 + 2 + 2 + 6 = 16; |A|
-    = |B| = √18; cos = 16 / 18 ≈ 0.89. A gauge from −1 (opposite) through 0 to +1 (alike) with the needle at 0.89. S8: grid
-    of small picture icons (faces/words) lights faintly on ''pictures and words''.'
-  voiceover: 'Fourth, comparing patterns. Write today''s pressure at four weather stations, as departures from their usual
-    values, as one list of four numbers: an arrow in four dimensions. We can''t draw it, but the recipe works just the same.
-    Today reads three, one, minus two and minus two hectopascals, and a day in the past reads two, two, minus one and minus
-    three. Their dot product is six plus two plus two plus six, which is sixteen. Both lengths are the square root of eighteen,
-    so the cosine of the angle between them is sixteen over eighteen, about point eight nine. Near one, two days look alike;
-    near zero, they have nothing in common; and near minus one, they''re opposites. Forecasters have used this to find past
-    days that looked like today, and computers use the same idea to compare pictures and words.'
+  visual: 'Picture zone: a small map with four station dots, each with today''s pressure departure (teal numbers +3, +1, −2, −2 hPa) and, beside it, the
+    same map for a past day (orange +2, +2, −1, −3). They become two columns of four numbers (arrows in four dimensions: ''can''t draw it, same recipe'').
+    Maths zone CalcStack: A · B = 6 + 2 + 2 + 6 = 16; |A| = |B| = √18; cos = 16 / 18 ≈ 0.89. A gauge from −1 (opposite) through 0 to +1 (alike) with the
+    needle at 0.89. S8: grid of small picture icons (faces/words) lights faintly on ''pictures and words''.'
+  voiceover: 'Fourth, comparing patterns. Write today''s pressure at four weather stations, as departures from their usual values, as one list of four numbers:
+    an arrow in four dimensions. We can''t draw it, but the recipe works just the same. Today reads three, one, minus two and minus two hectopascals, and
+    a day in the past reads two, two, minus one and minus three. Their dot product is six plus two plus two plus six, which is sixteen. Both lengths are
+    the square root of eighteen, so the cosine of the angle between them is sixteen over eighteen, about point eight nine. [beat] Near one, two days look
+    alike; near zero, they have nothing in common; and near minus one, they''re opposites. Forecasters have used this to find past days that looked like
+    today, and computers use the same idea to compare pictures and words.'
   on_screen_eq:
     latex: \cos\theta=\frac{\mathbf A\cdot\mathbf B}{|\mathbf A|\,|\mathbf B|}=\frac{16}{18}\approx0.89
     vallis_eq: 'provenance only: pattern similarity (uncentred pattern correlation), our numbers'
@@ -2344,53 +2622,63 @@ scenes:
     builder: movies/data/build_ch00_dot_product_v01b.py
   exaggeration:
   - four stations and the numbers are illustrative (said as 'say')
-  honesty: Analogue forecasting is a historical method (Lorenz 1969 analogues); cited in data_needs, no claim it is used
-    today.
+  honesty: Analogue forecasting is a historical method (Lorenz 1969 analogues); cited in data_needs, no claim it is used today.
   sentence_times:
-  - - 1360.15
-    - 1362.575
-  - - 1362.925
-    - 1373.025
-  - - 1373.375
-    - 1377.2
-  - - 1377.55
-    - 1386.95
-  - - 1387.3
-    - 1392.575
-  - - 1392.925
-    - 1401.5
-  - - 1401.85
-    - 1409.175
-  - - 1409.525
-    - 1418.2
+  - - 1388.975
+    - 1391.4
+  - - 1391.75
+    - 1401.85
+  - - 1402.2
+    - 1406.025
+  - - 1406.375
+    - 1415.775
+  - - 1416.125
+    - 1421.4
+  - - 1421.75
+    - 1430.325
+  - - 1431.825
+    - 1439.15
+  - - 1439.5
+    - 1448.175
 - id: s21_recap
   t:
-  - 1419.0
-  - 1478.175
-  status: changed
+  - 1448.975
+  - 1513.725
+  status: kept + extended
   reuse:
     from: ch00_dot_product_why(v6fix1)/s21_recap
     narration: changed (new sentences marked in script.md)
   changes:
-  - one sentence per new beat (research §5c)
+  - 'all seven v6 sentences word for word, in v6''s order; ADDED: one sentence after S1 (matching parts), one after S6 (runway), and three after S7 (push
+    across, flux / wind work / similarity, the pointer to the cross product)'
   related: []
-  visual: |-
-    Full width, no panels, no heading, no 'RECAP' band; one beat per sentence, each beat replaces the previous (a mini picture left x 120-760, keywords/maths right at 68/54 px):
-    S1: mini a, b plane + 'a·b = 5×1 + 1×3 = 8' and keyword 'a number' (a = 'scalar').
-    S2: shadow band + product rectangle + 'a·b = (|a| cos θ) |b|' with underbraces 'shadow', 'length'.
-    S3-S5: three mini p, q pictures appear one per sentence with '+' / '0' / '−' at T.hero under them and keywords 'same way' · 'right angle' · 'opposite'.
-    S6: v and x̂ mini + 'v·x̂ = 6 m/s' + keyword 'eastward part'.
-    S7: sled mini 'W = F·d = 50 J' and map mini 'v·∇T = 0.18 K per hour' + pole icon 'pole −0.18 K per hour'.
+  visual: 'Full width, no panels, no heading, no ''RECAP'' band; one beat per sentence, each beat replaces the previous (a mini picture left x 120-760,
+    keywords/maths right at 68/54 px):
+
+    S1: mini a, b plane + ''a·b = 5×1 + 1×3 = 8'' and keyword ''a number'' (a = ''scalar'').
+
+    S2: shadow band + product rectangle + ''a·b = (|a| cos θ) |b|'' with underbraces ''shadow'', ''length''.
+
+    S3-S5: three mini p, q pictures appear one per sentence with ''+'' / ''0'' / ''−'' at T.hero under them and keywords ''same way'' · ''right angle''
+    · ''opposite''.
+
+    S6: v and x̂ mini + ''v·x̂ = 6 m/s'' + keyword ''eastward part''.
+
+    S7: sled mini ''W = F·d = 50 J'' and map mini ''v·∇T = 0.18 K per hour'' + pole icon ''pole −0.18 K per hour''.
+
     Final hold: five mini icons in a row with one keyword each (54 px).
 
-    CHANGES FOR THIS MOVIE: mini pictures added for the new beats (matching parts, runway, cart with energy bar, whirl, window, ocean tiles, pattern gauge); one beat per sentence.
-  voiceover: To sum up, the dot product multiplies matching components and adds, giving a number, not an arrow, because
-    each axis only multiplies its own parts. In pictures, it's the shadow of one arrow on the other, times the other's length.
-    When the arrows point the same way, it's positive. At right angles, it's zero. In opposite directions, it's negative.
-    With a unit vector, it picks out one part of an arrow, like the wind along a runway. It gives the work a force does
-    along the motion, and a push across the motion does no work at all. It measures how much sunlight passes through the
-    ground, whether the wind feeds an ocean current or drains it, how alike two weather patterns are, and how fast the wind
-    changes the temperature at a fixed place. The cross product, in the next video, uses the part across instead.
+
+    KEPT + EXTENDED (0.1b, 2026-10-28): v6''s beats stay on their v6 sentences (v6 S1 -> S1, S2 -> S3, S3-S5 -> S4-S6, S6 -> S7, S7 -> S9). New beats, one
+    per new sentence: S2 the s05a matching pairs (5 × 1, 1 × 3, mixed pairs struck); S8 the runway mini with v·ê = 8.7 m/s; S10 the whirl with its flat
+    energy bar; S11 three minis in a row (window in sunlight, ocean tiles + / −, the pattern gauge at 0.89); S12 a faint parallelogram with ''across'' (the
+    cross product). Final hold: v6''s five mini icons plus the four new ones, one keyword each (54 px).'
+  voiceover: To sum up, the dot product multiplies matching components and adds, giving a number, not an arrow. That works because each axis only multiplies
+    its own parts. In pictures, it's the shadow of one arrow on the other, times the other's length. When the arrows point the same way, it's positive.
+    At right angles, it's zero. In opposite directions, it's negative. With a unit vector, it picks out one part of an arrow. A pilot uses this to find
+    the wind along a runway. And in physics, it gives the work a force does, and how fast the wind changes the temperature at a fixed place. A push across
+    the motion does no work at all. The dot product also measures how much sunlight passes through the ground, whether the wind feeds an ocean current or
+    drains it, and how alike two weather patterns are. The cross product, in the next video, uses the part across instead.
   on_screen_eq:
     latex: \mathbf a\cdot\mathbf b = (|\mathbf a|\cos\theta)\,|\mathbf b|
     vallis_eq: 'provenance only: (1) regrouped, no number shown'
@@ -2410,73 +2698,85 @@ scenes:
   exaggeration:
   - 'recap icons illustrative; badge: none'
   sentence_times:
-  - - 1419.0
-    - 1429.45
-  - - 1429.8
-    - 1435.2
-  - - 1435.55
-    - 1439.05
-  - - 1439.4
-    - 1441.775
-  - - 1442.125
-    - 1445.25
-  - - 1445.6
-    - 1451.7
-  - - 1452.05
-    - 1458.425
-  - - 1458.775
-    - 1471.925
-  - - 1472.275
-    - 1477.375
+  - - 1448.975
+    - 1456.0
+  - - 1456.35
+    - 1460.775
+  - - 1461.125
+    - 1466.525
+  - - 1466.875
+    - 1470.375
+  - - 1470.725
+    - 1473.1
+  - - 1473.45
+    - 1476.575
+  - - 1476.925
+    - 1480.9
+  - - 1481.25
+    - 1485.225
+  - - 1485.575
+    - 1492.85
+  - - 1493.2
+    - 1496.55
+  - - 1496.9
+    - 1507.475
+  - - 1507.825
+    - 1512.925
 - id: s22_end
   t:
-  - 1478.175
-  - 1501.4
+  - 1513.725
+  - 1536.95
   status: changed
   reuse:
     from: ch00_dot_product_why(v6fix1)/s22_end
     narration: word-identical (archived clip may be spliced)
   changes: []
   related:
-  - '#1a'
-  - '#2'
-  - '#3'
-  - '#6'
-  - '#10'
-  - '#22'
-  visual: |-
-    End card, no URLs, no paths, no panels, no book name, no lab (user corrections 2026-10-24). S1 ('one of a series…'): a row of four faint tutorial thumbnails (abstract icons: arrows, a cross product, a gradient map, a globe) at y 300 with the keyword 'a series of maths tutorials' (68 px). S2 ('They're made for students…'): keywords 'atmospheric science · meteorology · fluid dynamics' (54 px). S3 ('The notebook for this dot product…'): a large notebook icon with 'dot-product notebook' (68 px) and a fan of smaller notebook icons with 'notebooks for the other maths concepts' (54 px); the voice says 'on the website' (no address on screen). 2.5-s silent hold after the last word; the music fades out over the last 2 s; nothing autoplays.
+  - '#1a vectors'
+  - '#2 cross product'
+  - '#3 cross product at work'
+  - '#6 gradient'
+  - '#10 material derivative'
+  - '#22 climate machine'
+  visual: 'End card, no URLs, no paths, no panels, no book name, no lab (user corrections 2026-10-24). S1 (''one of a series…''): a row of four faint tutorial
+    thumbnails (abstract icons: arrows, a cross product, a gradient map, a globe) at y 300 with the keyword ''a series of maths tutorials'' (68 px). S2
+    (''They''re made for students…''): keywords ''atmospheric science · meteorology · fluid dynamics'' (54 px). S3 (''The notebook for this dot product…''):
+    a large notebook icon with ''dot-product notebook'' (68 px) and a fan of smaller notebook icons with ''notebooks for the other maths concepts'' (54
+    px); the voice says ''on the website'' (no address on screen). 2.5-s silent hold after the last word; the music fades out over the last 2 s; nothing
+    autoplays.
 
-    CHANGES FOR THIS MOVIE: thumbnails: six faint related topics (#1a vectors, #2 cross product, #3 cross product in physics, #6 gradient, #10 material derivative, #22 climate machine) instead of v6's four; wording unchanged.
-  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students
-    of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for this
-    dot product, and the notebooks for the other maths concepts, are on the website that goes with this video.
+
+    CHANGES FOR THIS MOVIE: thumbnails: six faint related topics (#1a vectors, #2 cross product, #3 cross product at work, #6 gradient, #10 material derivative,
+    #22 climate machine) instead of v6''s four; wording unchanged.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
+    and fluid dynamics, and anyone else who needs these ideas. The notebook for this dot product, and the notebooks for the other maths concepts, are on
+    the website that goes with this video.
   on_screen_eq: null
   physics_source: null
   physics_source_note: 'end card: text and icons only'
   exaggeration:
   - 'end card: illustrative icons only; badge: none'
   links:
-    notebook: notebooks/poc_ch00a_dot.html (P1; never drawn, only for the site embed; the lab is not mentioned, user correction
-      2026-10-24)
+    notebook: notebooks/poc_ch00a_dot.html (P1; never drawn, only for the site embed; the lab is not mentioned, user correction 2026-10-24)
   sentence_times:
-  - - 1478.175
-    - 1484.375
-  - - 1484.725
-    - 1492.775
-  - - 1493.125
-    - 1501.1
+  - - 1513.725
+    - 1519.925
+  - - 1520.275
+    - 1528.325
+  - - 1528.675
+    - 1536.65
 honesty_notes:
 - s12-s20 (advection) are word-identical to the approved v6; their physics and CHECK rows are reused.
 - 's05a: the mixed terms vanish because x̂·ŷ = 0 (right angle) and x̂·x̂ = 1, both from equation one; the screen shows both.'
 - 's20b says ''along the runway'', not ''headwind'': a wind blowing towards the runway heading is a tailwind for that heading.'
-- 's20c: the equinox-noon zenith angle equals the latitude (declination ≈ 0); the atmosphere is ignored and said as ''a
-  big part of why''.'
-- 's20d: the tile numbers are illustrative; the ≈ 1 TW global total is a cited published estimate (Wunsch 1998), to be confirmed
-  before the final TTS.'
-- 's20e: the station values are illustrative (''say''); the cosine is an uncentred pattern correlation; analogue forecasting
-  named as a past practice.'
+- 's20c: the equinox-noon zenith angle equals the latitude (declination ≈ 0); the atmosphere is ignored and said as ''a big part of why''.'
+- 's20d: the tile numbers are illustrative; the ≈ 1 TW global total is a cited published estimate (Wunsch 1998), to be confirmed before the final TTS.'
+- 's20e: the station values are illustrative (''say''); the cosine is an uncentred pattern correlation; analogue forecasting named as a past practice.'
 - 'Sign is never shown by colour alone: ''+'', ''0'', ''−'' glyphs and the rose hatch.'
-quiz_hook: 'A runway points east. The wind blows at 8 m/s towards the north. How much of it blows along the runway? (v ·
-  ê = 8 cos 90° = 0: all of it is across.)'
+- Every v6 scene, sentence, example, number and device is present (data_needs.md §0 maps each v6 scene to 0.1b); v6's 121 CHECK rows are reused unchanged.
+- 's20d: the ≈ 1 TW total stays OFF the screen and out of the final narration until the data-scout confirms the citation (data_needs.md §C W2); if it is
+  not confirmed, the sentence is cut and the dry run repeated.'
+quiz_hook: 'A runway points east. The wind blows at 8 m/s towards the north. How much of it blows along the runway? (v · ê = 8 cos 90° = 0: all of it is
+  across.)'
 data_needs: data_needs.md in this folder
+beats: 10
