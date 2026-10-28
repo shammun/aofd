@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -24,6 +25,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 DATA = Path("G:/Geophysical Fluid Dynamics/aofd-data")
 ALLOWED = [DATA / "scratch", DATA / "archive", REPO / "reports" / "movies", REPO / "outputs"]
+TEMP = Path(os.environ.get("TEMP", ""))
+# Remotion leaves a webpack bundle / asset copy in %TEMP% per render (user 2026-10-27: "delete junk on C:"); only those.
+TEMP_PREFIXES = ("remotion-webpack-bundle-", "remotion-v4.0.537-assets")
 PROTECTED_NAMES = ("preview_",)          # files the user may be watching
 PROTECTED_FILES = {"1080.mp4"}           # final movies under movies/out are never removed by this tool
 LOG = DATA / "logs" / "cleanup.log"
@@ -41,7 +45,8 @@ def check(p: Path) -> str | None:
     rp = p.resolve()
     if not rp.exists():
         return "does not exist"
-    if not any(rp != root.resolve() and root.resolve() in rp.parents for root in ALLOWED):
+    in_temp = TEMP.name and rp.parent == TEMP.resolve() and rp.name.startswith(TEMP_PREFIXES)
+    if not in_temp and not any(rp != root.resolve() and root.resolve() in rp.parents for root in ALLOWED):
         return "outside the allowed roots (or is a root itself)"
     names = [rp.name] + ([f.name for f in rp.rglob("*")] if rp.is_dir() else [])
     if any(n.startswith(PROTECTED_NAMES) for n in names):
