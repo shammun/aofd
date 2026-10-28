@@ -1,0 +1,33 @@
+{
+ "files": {
+  "trappes_truecolour_2026-09-30_aqua_terra.jpg": "true colour 2026-09-30 (MODIS Aqua, gaps from Terra then VIIRS NOAA-20), 45-52N 3W-7E, 0.01 deg"
+ },
+ "grid": "regular lat/lon (EPSG:4326, plate carree), 0.01 x 0.01 deg, row 0 = 52.0 N edge, col 0 = -3.0 E edge",
+ "lat_edges": [
+  45.0,
+  52.0
+ ],
+ "lon_edges": [
+  -3.0,
+  7.0
+ ],
+ "shape": [
+  700,
+  1000
+ ],
+ "date": "2026-09-30",
+ "fractions": {
+  "MODIS Aqua": 0.9998,
+  "MODIS Terra": 0.0002,
+  "VIIRS NOAA-20": 0.0
+ },
+ "still_empty": 0.0,
+ "tiles": [
+  "gibs_trappes_0930_MODIS_Aqua_CorrectedReflectance_TrueColor_2026-09-30_0.01deg_t00.jpg",
+  "gibs_trappes_0930_MODIS_Terra_CorrectedReflectance_TrueColor_2026-09-30_0.01deg_t00.jpg",
+  "gibs_trappes_0930_VIIRS_NOAA20_CorrectedReflectance_TrueColor_2026-09-30_0.01deg_t00.jpg"
+ ],
+ "licence": "NASA EOSDIS imagery: NASA-led mission data are CC0, no use restrictions; credit NASA, imply no endorsement (https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance)",
+ "credit": "Imagery from the NASA Worldview application (https://worldview.earthdata.nasa.gov), part of the NASA Earth Science Data and Information System (ESDIS)",
+ "dataset_key": "NASA-GIBS"
+}

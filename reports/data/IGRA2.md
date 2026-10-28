@@ -46,4 +46,26 @@
 - **Colab route**: load the committed `data/derived/ch00/igra2_*.nc|json` (no keys). Refresh with `igra.fetch_station`
   (anonymous, about 87 MB).
 - **Quick-look**: `outputs/ch00/data/ql_soundings_zonal.png` (T(z), p(z) against p₀e^{−z/8.4 km}).
+
+## Refresh for movie #4 ch00_derivatives_taylor (D1, 2026-10-28)
+
+- **HEAD checks on 2026-10-28**:
+  - `access/data-por/FRM00007145-data.txt.zip` is 31,665,518 B (Last-Modified 27 Oct 2026 21:41 GMT), the same size as
+    the copy on disk. Its last sounding is 2026-09-30T12.
+  - `access/data-y2d/FRM00007145-data-beg2026.txt.zip` was fetched through `fluidpy.data.fetch`: 624,714 B in 2.0 s,
+    sha256 `292db4a2…3f13`. It holds 499 soundings, 2026-01-01T00 → **2026-09-30T12**.
+  - Neither file has any October 2026 sounding yet. IGRA's monthly update has not reached October.
+- **Verdict**: the newest sounding available is still **2026-09-30T12**, so A3 is kept and no movie number changes. The POR
+  file was not downloaded again (same size; same last sounding).
+- **The 2026-09-30T12 sounding is identical in both files** (82 levels, every field).
+- **Elapsed time** is present on 100 % of its levels, so the "> 90 % etime" rule passes.
+- **DT01 PASS**:
+  - Surface 997.5 hPa, 168 m, 19.8 °C (292.95 K), etime 0.
+  - 850 hPa: z 1533 m (`fill_heights`), 12.3 °C, etime 312 s.
+  - 500 hPa: z 5795 m, −11.8 °C, etime 1212 s.
+- **DT20 PASS**: 82 levels, filled z to 32,460 m.
+- **DT45 PASS**: `igra.wmo_tropopause` gives 13,072 m, 206.85 K.
+- **DT46 PASS**: T(15 km) = 210.82 K and T(20 km) = 215.76 K, both above the tropopause's 206.85 K. The air warms above
+  the tropopause, so "gets a little warmer" can stay.
+- **Disk**: before C: 68.0 GB, G: 544.6 GB free; after C: 68.0 GB, G: 544.6 GB free. Nothing evicted.
 - **Disk** (data-scout session 2026-10-27, all ch00_weather_basics downloads): before the first download C: 74.2 GB and G: 577.6 GB free, project data 11.96 GB; after the last one C: 74.0 GB and G: 576.2 GB free, project data 13.34 GB (raw 0.46 GB, up 0.18 GB from 0.28 GB). Nothing evicted. Every fetch printed and logged its own before/after line in `G:/Geophysical Fluid Dynamics/aofd-data/logs/downloads.log`.
