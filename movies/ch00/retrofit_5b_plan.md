@@ -516,3 +516,4 @@ Movie-side (not fluidpy):
 
 - 2026-10-29 (user): the house globe is cross-product v5 56:35–57:54. Text may sit on the faded rim only. Every globe has its source line below it, and a coloured globe has a titled colour bar. That v5 sequence itself needs its source line moved below the globe (already among the v5/Part 2 musts).
 - 2026-10-29 (user): no new titles on globes or maps. The §5b globe rule covers only how a globe renders when it zooms or moves. Existing titles and colour-bar labels stay as they are.
+- 2026-10-29 (user): a source line goes below the image, globe, map or figure, or beside it where that fits. It must never lie on the globe or map.
