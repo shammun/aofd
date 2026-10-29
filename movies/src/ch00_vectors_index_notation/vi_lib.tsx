@@ -9,7 +9,7 @@ import * as THREE from "three";
 import { ramp } from "../house";
 import timing from "../../ch00/ch00_vectors_index_notation/timing.json";
 import viJ from "../../ch00/ch00_vectors_index_notation/data/vi.json";
-import { C, T } from "../house/kit/type";
+import { C, FONT, T } from "../house/kit/type";
 import { Arrow, Lbl, Pt, Svg, clamp } from "../house/kit/draw";
 import { GlobeCam, GlobeMesh, GProj, coastPath, globeCam, globeProj, sphereGeo, useTex, Graticule } from "./kit_vi/globe";
 import { View3D } from "./kit_vi/three3d";
@@ -187,6 +187,11 @@ const FieldSphere: React.FC<{ tex: THREE.Texture | null; o: number; r?: number }
   return <mesh geometry={geo} material={mat} renderOrder={6} />;
 };
 export const GBOX = { x: 80, y: 40, w: 920, h: 820 };
+/** the globe projection a <Globe> with this camera and box uses (for links drawn outside its over() layer) */
+export const globeG = (cam: GlobeCam, box = GBOX): GProj => {
+  const st = globeCam({ ...cam, pp: [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);
+  return globeProj(st, box.w, box.h, box.x, box.y);
+};
 export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: number; h: number }; img?: string; field?: string | null; fieldO?: number;
   coast?: number; o?: number; dim?: number; over?: (G: GProj) => React.ReactNode; grat?: number }> = ({
   cam, box = GBOX, img = IMGS.globe, field = null, fieldO = 0, coast = 0.45, o = 1, dim = 1, over, grat = 0 }) => {
@@ -288,5 +293,21 @@ export const AxesGlyph: React.FC<{ O: Pt; s?: number; lab?: number; o?: number }
         );
       })}
     </g>
+  );
+};
+
+// ---------------------------------------------------------------- data-source line (HOUSE_STYLE §5, user 2026-10-28, U-WB-R1)
+/** one small muted line at the bottom of the picture on every frame that plots real data: dataset · time · place.
+ * 30 px (the rule's floor is 28 px; below the 44-px type floor on purpose, so it is drawn without Lbl's guard), baseline
+ * y 866: under the content area (40-860), above the caption band (880-1040). Not spoken. */
+export const SrcLine: React.FC<{ t: string; x?: number; o?: number }> = ({ t, x = 80, o = 1 }) => {
+  const f = useCurrentFrame();
+  const op = o * ramp(f, 0, XF);
+  if (op <= 0 || !t) return null;
+  return (
+    <Svg>
+      <text x={x} y={866} fill={C.muted} fontSize={30} fontFamily={FONT} fontWeight={500} stroke={C.bg} strokeWidth={5}
+        strokeLinejoin="round" paintOrder="stroke" opacity={op}>{t}</text>
+    </Svg>
   );
 };

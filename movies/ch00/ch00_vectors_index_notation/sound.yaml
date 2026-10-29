@@ -1,0 +1,15 @@
+# ch00_vectors_index_notation (#1a): sound cue sheet for tools/sound/mix.py (final build, 2026-10-28).
+# Score: index-lattice (E-flat major, 9/8 at 66 dotted-quarter; celesta three-note cells answered by marimba, glass pad),
+# seed 11, for the whole movie (storyboard audio.music). Effects: only where the picture shows moving air, as quiet ducked
+# beds under the sentence that shows it (HOUSE_STYLE §8). The storyboard's whoosh (s12a) and tick (s28) candidates are
+# left out: in the final timing both pictures move while the voice is speaking, and one-shots must never cover a word.
+music: {style: index-lattice, seed: 11, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects:
+  # s05 S3: the fast southerly stream west of France drawn as arrows
+  - {effect: wind_gentle, scene: s05, offset: 14.7, duration: 6.4, intensity: 0.2, lufs: -29, fade_in: 1.2, fade_out: 1.5, seed: 21}
+  # s12g S2: the Trappes weather balloon rising through the windy column
+  - {effect: wind_gentle, scene: s12g, offset: 5.3, duration: 8.6, intensity: 0.12, lufs: -30, fade_in: 1.5, fade_out: 2.0, seed: 22}
+  # s24 S5: Ciaran's warm air pushing north on the real 850 hPa map
+  - {effect: wind_gentle, scene: s24, offset: 19.5, duration: 5.4, intensity: 0.15, lufs: -29, fade_in: 1.2, fade_out: 1.5, seed: 23}
