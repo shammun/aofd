@@ -38,3 +38,5 @@ M10 publish (needs `! gh repo create shammun/aofd-media --public`; 0.1b is now t
 - Drive links: `outputs/drive_links.md` (folder https://drive.google.com/drive/folders/1u6SWg5e2o0diQtTs15m8hp6GcVQaYyJ6). rclone lives on G: (G:/…/aofd-data/tools/rclone) — Drive upload also needs G:.
 - Archives on G:: `archive/movies/ch00_weather_basics_v3_final/`, `archive/movies/ch00_dot_product_v01b_final/`, `archive/movies/ch00_cross_product_why_v4_final/`.
 - Reviews and reports: `reports/ch00_movies.md`; verification reports `reports/ch00_*_verification.md`.
+
+**User viewing copies:** `outputs/viewing_*/` hold the user's own snapshot copies of the movies (made 2026-10-29). Never overwrite, clean or delete them (tools/clean_scratch.py can reach outputs/ — exclude these).
