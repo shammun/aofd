@@ -31,11 +31,14 @@ IMAGES = {  # out name: (source, max width)
     "wb_cumulus_terra_20240624.jpg": (DER / "cumulus_france_2024-06-24_modis_terra_250m.jpg", 1600),   # UF1 s26 morning
 }
 BINS = ["global_20231102T12.bin", "ciaran_hourly.bin", "ciaran_850.bin", "climatology.bin", "latest_gfs.bin", "tibet_etopo.bin",
-        "brittany_etopo.bin", "slice.bin"]   # UF1: s03 relief, s47-s48 slice
+        "brittany_etopo.bin", "slice.bin", "slice_cf.bin"]   # UF1: s03 relief, s48 slice (48.5N); fix 1: s47 slice (46.5N)
 CROPS = {  # out name: (source, lat0, lat1, lon0, lon1) on an equirectangular image (-180..180, 90..-90)
     "wb_bmng_tibet.jpg": (CP / "globe_bmng_topo_200409_5400x2700.jpg", 25.0, 42.0, 72.0, 105.0),
     # UF1 s03: Blue Marble NG 21600 (A6, 500 m) crop of the ETOPO Brittany tile, cloud-free drape for the 3-D relief
     "wb_bmng_brittany.jpg": (Path("G:/Geophysical Fluid Dynamics/aofd-data/raw/BMNG-2004/world.topo.bathy.200409.3x21600x10800.jpg"), 46.5, 49.5, -6.5, -1.0),
+}
+UPSAMPLE = {  # UF1 fix 1 (review 1 S2): the 330-px Brittany drape is upsampled ×4 (Lanczos) + unsharp mask so the close-up is not a blur
+    "wb_bmng_brittany.jpg": 4,
 }
 
 
@@ -58,7 +61,12 @@ def main() -> int:
         im = Image.open(src).convert("RGB")
         W_, H_ = im.size
         box = (round((lo0 + 180) / 360 * W_), round((90 - la1) / 180 * H_), round((lo1 + 180) / 360 * W_), round((90 - la0) / 180 * H_))
-        im.crop(box).save(a.out / name, quality=92)
+        im = im.crop(box)
+        if name in UPSAMPLE:
+            from PIL import ImageFilter
+            k = UPSAMPLE[name]
+            im = im.resize((im.width * k, im.height * k), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=3, percent=90, threshold=2))
+        im.save(a.out / name, quality=92)
         print(name, box)
     for b in BINS:
         shutil.copy2(DATA / b, a.out / f"wb_{b}")

@@ -39,6 +39,7 @@ Conventions: S<k> = sentence k of the scene; `[beat]` ends a sentence with a 1.5
 > **s47_cold_front**: + S2: Here is a real slice through the air around Storm Ciarán, from the reanalysis, at six in the evening on the first of November, running from west to east through Brest. | + S3: The colours show how much warmer or colder the air is than the average at the same height, and the moving dots follow the wind inside the slice.
 > **s48_warm_front**: + S1: Now let's move east along the same slice, to the warm front near Brest. | − old S5: We've drawn these side views fifty times taller than they really are, so the slopes look much steeper than in nature. | + S6: In this slice, heights are drawn eighty times taller than distances along the ground, so the slopes look much steeper than in nature.
 > **builder (UF1 build, 2026-10-29) — narration follows the data (data_needs §D rule, W70/W71):** s47 S5 − 'Its slope is steep for a front, about one kilometre up for every fifty to a hundred kilometres along, and the warm air is lifted quickly.' + 'Its slope is steep: in this slice, about one kilometre up for every fifteen kilometres along, so the warm air is lifted quickly.' (ERA5 slice 925-500 hPa: 1:15) | s48 S3 − 'Instead, it glides up over the cold air on a gentle slope, rising about one kilometre for every one or two hundred kilometres.' + 'Instead, it glides up over the cold air on a gentler slope: in this slice, about one kilometre up for every fifty kilometres along.' (ERA5 slice 975-600 hPa: 1:52)
+> **UF1 fix loop 1 (2026-10-29, v4 review 1 M1) — the cold-front side view moves to a slice that crosses the map's cold front (46.5°N, W70/W77):** s47 S2 − 'running from west to east through Brest.' + 'running from west to east across the Bay of Biscay, right through the cold front on the map.' | s47 S6 − 'Its slope is steep: in this slice, about one kilometre up for every fifteen kilometres along, so the warm air is lifted quickly.' + 'In this slice, it rises about one kilometre for every fifty kilometres along, and as it pushes forward, it lifts the warm air ahead of it quickly.' (ERA5 46.5°N, 850–650 hPa: 1:49.9 along the slice, 1:43.4 normal to the front) | s48 S1 − 'Now let's move east along the same slice, to the warm front near Brest.' + 'Now let's move north, to a second slice that runs through Brest, where the warm front is arriving.' | s48 S3 − '… on a gentler slope: in this slice, about one kilometre up for every fifty kilometres along.' + '…: in this slice, also about one kilometre up for every fifty kilometres along, and in many storms warm fronts slope even more gently.' (both lines give ≈ 1:50 here). Spliced with a BS.1770 loudness-matched constant gain + look-ahead limiter (tools/movie_wb/splice_uf1fix1.py).
 > **s51_heating**: beat after S5 (words unchanged)
 > **s56_brest_pressure**: beat after S4 (words unchanged)
 > **s58_brest_cold_front**: beat after S3 (words unchanged)
@@ -389,107 +390,107 @@ Where two air masses meet, they don't mix right away. The change from one to the
 > Source line(s): [S1] Data: ERA5 850-hPa temperature (Copernicus C3S) · 1 Nov 2023, 18 UTC · fronts computed from it
 
 ## s47_cold_front
-Let's look at a cold front from the side. Here is a real slice through the air around Storm Ciarán, from the reanalysis, at six in the evening on the first of November, running from west to east through Brest. The colours show how much warmer or colder the air is than the average at the same height, and the moving dots follow the wind inside the slice. Remember the gas law: at the same pressure, cold air is denser than warm air. So the advancing cold air stays low and pushes in under the warm air like a wedge. Its slope is steep: in this slice, about one kilometre up for every fifteen kilometres along, so the warm air is lifted quickly. It cools to its dew point, and tall clouds and heavy showers form in a narrow band. After the front passes, the air is colder and drier, the pressure starts to rise, and the wind turns, in the northern hemisphere usually from the south-west to the west or north-west.
+Let's look at a cold front from the side. Here is a real slice through the air around Storm Ciarán, from the reanalysis, at six in the evening on the first of November, running from west to east across the Bay of Biscay, right through the cold front on the map. The colours show how much warmer or colder the air is than the average at the same height, and the moving dots follow the wind inside the slice. Remember the gas law: at the same pressure, cold air is denser than warm air. So the advancing cold air stays low and pushes in under the warm air like a wedge. In this slice, it rises about one kilometre for every fifty kilometres along, and as it pushes forward, it lifts the warm air ahead of it quickly. It cools to its dew point, and tall clouds and heavy showers form in a narrow band. After the front passes, the air is colder and drier, the pressure starts to rise, and the wind turns, in the northern hemisphere usually from the south-west to the west or north-west.
 
-> 175 words · 8 sentences · 2486.000–2550.450 s (64.4 s; speech 61.2 s) · 41:26.00–42:30.45 (measured) · beat: why · a cold front from the side · UF1: U-WB-31, R1, R2, R3.
+> 187 words · 8 sentences · 2486.000–2553.925 s (67.9 s; speech 64.7 s) · 41:26.00–42:33.93 (measured) · beat: why · a cold front from the side · UF1: U-WB-31, R1, R2, R3.
 > Screen: the s46 transect rises into a real ERA5 slice (×80): colours = warmer/colder than average at that height, saturated air shaded, ≈1500 dots moving with the in-slice wind; cold wedge outlined, slope triangle, lifted warm air brightens; ground winds; colour bar
-> Source line(s): [S1] Data: ERA5 on pressure levels (Copernicus C3S) · 1 Nov 2023, 18 UTC · slice along 48.5°N, 18°W–4°E
+> Source line(s): [S1] Data: ERA5 on pressure levels (Copernicus C3S) · 1 Nov 2023, 18 UTC · slice along 46.5°N, 18°W–0° · fronts computed from it
 
 ## s48_warm_front
-Now let's move east along the same slice, to the warm front near Brest. At a warm front, the warm air is advancing, but it's lighter, so it can't push the cold air away from below. Instead, it glides up over the cold air on a gentler slope: in this slice, about one kilometre up for every fifty kilometres along. As it slides upwards it cools, and a broad sheet of layered cloud forms far ahead of the front, bringing long spells of steady rain. When the warm front passes, the air turns milder and moister, and the wind turns, in the northern hemisphere usually from the south-east to the south or south-west. In this slice, heights are drawn eighty times taller than distances along the ground, so the slopes look much steeper than in nature.
+Now let's move north, to a second slice that runs through Brest, where the warm front is arriving. At a warm front, the warm air is advancing, but it's lighter, so it can't push the cold air away from below. Instead, it glides up over the cold air: in this slice, also about one kilometre up for every fifty kilometres along, and in many storms warm fronts slope even more gently. As it slides upwards it cools, and a broad sheet of layered cloud forms far ahead of the front, bringing long spells of steady rain. When the warm front passes, the air turns milder and moister, and the wind turns, in the northern hemisphere usually from the south-east to the south or south-west. In this slice, heights are drawn eighty times taller than distances along the ground, so the slopes look much steeper than in nature.
 
-> 135 words · 6 sentences · 2550.450–2602.425 s (52.0 s; speech 49.4 s) · 42:30.45–43:22.43 (measured) · beat: why · a warm front from the side · UF1: U-WB-30, U-WB-31, R1, R2, R3.
+> 147 words · 6 sentences · 2553.925–2611.225 s (57.3 s; speech 54.8 s) · 42:33.93–43:31.22 (measured) · beat: why · a warm front from the side · UF1: U-WB-30, U-WB-31, R1, R2, R3.
 > Screen: camera glides east along the slice to the warm front near Brest; warm air gliding up the gentle slope (particles), cloud sheet ahead, ground winds, slope triangle with a true-scale twin
 > Source line(s): [S1] Data: ERA5 on pressure levels (Copernicus C3S) · 1 Nov 2023, 18 UTC · slice along 48.5°N, 18°W–4°E
 
 ## s49_real_fronts
 Here are real fronts, around Ciarán at six in the evening on the first of November. The colours show the temperature about one and a half kilometres up, where the ground's daily warming and cooling matter less. The warm tropical air reaches up towards Brittany in a tongue. Along its leading edge, to the east, is the warm front. Along its trailing edge, curving away to the south-west, is the cold front. The arrows show the wind turning as it crosses the fronts, most sharply at the warm front.
 
-> 89 words · 6 sentences · 2602.425–2637.450 s (35.0 s; speech 32.5 s) · 43:22.43–43:57.45 (measured) · beat: application · real fronts round Ciarán · UF1: U-WB-31, R1, R2.
+> 89 words · 6 sentences · 2611.225–2646.250 s (35.0 s; speech 32.5 s) · 43:31.22–44:06.25 (measured) · beat: application · real fronts round Ciarán · UF1: U-WB-31, R1, R2.
 > Screen: map 40-60N 25W-10E: ERA5 850-hPa T at 00 UTC 2 Nov over a night-free base (BMNG relief, labelled 'base map'), coast/borders; front lines from the thermal front parameter: warm front (red half circles) and cold front (blue triangles) drawn as gold lines first; wind arrows 850 hPa turning across them
 > Source line(s): [S1] Data: ERA5 850-hPa temperature and wind (Copernicus C3S) · 1 Nov 2023, 18 UTC · fronts computed from it
 
 ## s50_front_symbols
 On weather maps, fronts are drawn as lines with symbols on the side they're moving towards. A cold front has blue triangles, and a warm front has red half circles. You'll learn to read these maps in detail in the next video.
 
-> 42 words · 3 sentences · 2637.450–2654.150 s (16.7 s; speech 15.2 s) · 43:57.45–44:14.15 (measured) · beat: application · map symbols (pointer forward) · UF1: R1, R2.
+> 42 words · 3 sentences · 2646.250–2662.950 s (16.7 s; speech 15.2 s) · 44:06.25–44:22.95 (measured) · beat: application · map symbols (pointer forward) · UF1: R1, R2.
 > Screen: the gold lines of s49 gain their symbols: blue triangles on the cold front's leading side, red half circles on the warm front's; keyword 'symbols point where the front moves'
 > Source line(s): [S1] Data: ERA5 850-hPa temperature (Copernicus C3S) · 1 Nov 2023, 18 UTC · fronts computed from it
 
 ## s51_heating
 Now let's zoom out to the whole planet, and ask why the weather moves at all. It starts with sunlight. Picture a beam of sunlight one metre wide, at noon at an equinox, in March or September, when the sun is overhead at the equator. At the equator, it lands on one metre of ground. At sixty degrees north, the ground is tilted to the beam, and the same beam is spread over two metres, so each square metre gets half as much. [beat] So the tropics are heated much more than the poles, and the atmosphere and the ocean carry heat from the tropics towards the poles. Storms like Ciarán are one of the ways the atmosphere does it.
 
-> 119 words · 7 sentences · 2654.150–2699.525 s (45.4 s; speech 41.3 s) · 44:14.15–44:59.53 (measured) · beat: application · the global picture (heating) · UF1: R1, R2, R4.
+> 119 words · 7 sentences · 2662.950–2708.325 s (45.4 s; speech 41.3 s) · 44:22.95–45:08.32 (measured) · beat: application · the global picture (heating) · UF1: R1, R2, R4.
 > Screen: globe at equinox, sun beam (gold band 1 m wide) hitting the equator (1 m patch) and 60°N (2 m patch); CalcStack 1 ÷ cos 60° = 2; 'half as much'; then poleward orange arrows over a mean 2-m temperature globe
 > Source line(s): [S1] Image: Blue Marble NG (NASA) / [field] Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 1991–2020 mean 2-m temperature
 
 ## s52_pressure_belts
 Averaged over many years, sea-level pressure falls into belts. Around thirty degrees north and south, air sinks from high up, and large highs sit over the oceans, like the Azores high we saw. These are the subtropical highs. Near the equator is a belt of low pressure where the winds from both hemispheres meet and rise, building tall thunderclouds. It's called the intertropical convergence zone. How these belts are made is the subject of a later video on the general circulation.
 
-> 81 words · 6 sentences · 2699.525–2735.600 s (36.1 s; speech 33.5 s) · 44:59.53–45:35.60 (measured) · beat: application · high and low pressure belts (preview) · UF1: R1, R2, R4.
+> 81 words · 6 sentences · 2708.325–2744.400 s (36.1 s; speech 33.5 s) · 45:08.32–45:44.40 (measured) · beat: application · high and low pressure belts (preview) · UF1: R1, R2, R4.
 > Screen: Globe3D: 1991-2020 mean MSLP (NCEP R1 LTM, diverging map centred 1013 hPa) with isobars every 4 hPa; labels 'subtropical highs' at the Azores, North Pacific, South Atlantic, South Pacific, Indian Ocean highs; equatorial band 'intertropical convergence zone (ITCZ)'
 > Source line(s): [S1] Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 1991–2020 mean sea-level pressure
 
 ## s53_trades_westerlies
 The winds near the ground follow these belts. Between the subtropical highs and the equator, steady winds blow from the east, called the trade winds; sailing ships relied on them to cross the oceans. North of the equator, they come from the north-east. South of it, they come from the south-east. Poleward of the subtropical highs, in the middle latitudes, the winds come mostly from the west: the westerlies. That's why storms like Ciarán usually travel from west to east. Why the winds bend like this is part of the Coriolis story, coming in a later video.
 
-> 97 words · 7 sentences · 2735.600–2776.250 s (40.7 s; speech 37.8 s) · 45:35.60–46:16.25 (measured) · beat: application · trade winds and westerlies (preview) · UF1: R1, R4.
+> 97 words · 7 sentences · 2744.400–2785.050 s (40.7 s; speech 37.8 s) · 45:44.40–46:25.05 (measured) · beat: application · trade winds and westerlies (preview) · UF1: R1, R4.
 > Screen: same globe: mean 10-m wind arrows (teal) with streaklines; labels 'north-east trades', 'south-east trades', 'westerlies' with gold brackets; Ciarán track arrow west → east
 > Source line(s): [S1] Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 1991–2020 mean 10-m wind · storm track: ERA5 (Copernicus C3S)
 
 ## s54_ciaran_intro
 Now let's put all of this together on one real storm, and watch it from one town. On the first of November, twenty twenty-three, Storm Ciarán was racing across the Atlantic towards Europe. Here it is from a satellite that afternoon, with coastlines and borders drawn in. And here is Brest, a port city at the western tip of France. Let's watch the storm pass over Brest, hour by hour, using the reanalysis. Times are in universal time, the clock that meteorologists everywhere share.
 
-> 84 words · 6 sentences · 2776.250–2812.725 s (36.5 s; speech 33.9 s) · 46:16.25–46:52.72 (measured) · beat: application · one storm over one town · UF1: R1, R4.
+> 84 words · 6 sentences · 2785.050–2821.525 s (36.5 s; speech 33.9 s) · 46:25.05–47:01.53 (measured) · beat: application · one storm over one town · UF1: R1, R4.
 > Screen: true colour 1 Nov 2023 afternoon (MODIS), 35-60N 30W-10E, coast + admin borders; 'Storm Ciarán · 1 Nov 2023'; gold dot 'Brest'; keyword 'UTC = universal time'
 > Source line(s): [S1] Data: ERA5 sea-level pressure (Copernicus C3S) · 1 Nov 2023 · image: NASA MODIS Terra and Aqua (NASA GIBS), 1 Nov 2023, afternoon
 
 ## s55_ciaran_maps
 Here are the isobars every four hectopascals from midday on the first of November to midday on the second, with the warm front in red and the cold front in blue until that evening. The low deepens as it comes, from about nine hundred and seventy to about nine hundred and fifty-four hectopascals, and its centre crosses the English Channel just north of Brest during the night.
 
-> 67 words · 2 sentences · 2812.725–2838.075 s (25.3 s; speech 24.2 s) · 46:52.72–47:18.07 (measured) · beat: application · the low moves in · UF1: R1.
+> 67 words · 2 sentences · 2821.525–2846.875 s (25.3 s; speech 24.2 s) · 47:01.53–47:26.88 (measured) · beat: application · the low moves in · UF1: R1.
 > Screen: same panel; 12 UTC 1 Nov held while the isobars and the warm (red) / cold (blue) fronts are named; then the hours run with the clock, 'L' on Ciarán's own centre with 'low: ≈ 970 hPa' then the running value to 954; the fronts and their key fade out after 21 UTC; gold track; Brest dot
 > Source line(s): [S1] Data: ERA5 hourly sea-level pressure and 10-m wind (Copernicus C3S) · fronts from ERA5 850-hPa temperature · 1 Nov 12 UTC – 2 Nov 12 UTC 2023
 
 ## s56_brest_pressure
 First, the pressure at Brest. At midday on the first, it reads about nine hundred and ninety-seven hectopascals. Then it falls, faster and faster, to about nine hundred and sixty-two at one o'clock in the morning, as the low passes close by. That's thirty-five hectopascals in thirteen hours, a very fast fall. [beat] Then it climbs again, by about fourteen hectopascals in five hours.
 
-> 63 words · 5 sentences · 2838.075–2868.900 s (30.8 s; speech 27.5 s) · 47:18.07–47:48.90 (measured) · beat: application · the pressure at Brest · UF1: R1.
+> 63 words · 5 sentences · 2846.875–2877.700 s (30.8 s; speech 27.5 s) · 47:26.88–47:57.70 (measured) · beat: application · the pressure at Brest · UF1: R1.
 > Screen: TimeGraph (12 UTC 1 Nov → 12 UTC 2 Nov): Brest MSLP (orange line, hour dots) 997 → 962 → 976 hPa; brackets '−35 hPa in 13 h', '+14 hPa in 5 h'; barometer icon needle following; small map thumbnail with the L passing
 > Source line(s): [S1] Data: ERA5 hourly, grid point 48.5°N 4.5°W, nearest to Brest (Copernicus C3S) · 1–2 Nov 2023
 
 ## s57_brest_warm_front
 Now the temperature and the wind. At six in the evening, the wind blows from the south-south-east at about thirteen metres per second, and the temperature is twelve degrees. By eight, the wind has turned to come from the south-south-west, it has strengthened to about eighteen metres per second, and the temperature has risen to about fourteen and a half. That's the warm front passing. Brest is now in the warm air behind it, which is called the storm's warm sector.
 
-> 81 words · 5 sentences · 2868.900–2901.225 s (32.3 s; speech 30.1 s) · 47:48.90–48:21.22 (measured) · beat: application · the warm front passes · UF1: R1.
+> 81 words · 5 sentences · 2877.700–2910.025 s (32.3 s; speech 30.1 s) · 47:57.70–48:30.03 (measured) · beat: application · the warm front passes · UF1: R1.
 > Screen: TimeGraph gains temperature (orange, °C axis right) and a row of wind arrows (teal, pointing where the wind goes, with 'from' labels 155° SSE, 204° SSW and speeds); gold band 18-20 UTC 'warm front'; keyword 'warm sector'
 > Source line(s): [S1] Data: ERA5 hourly, grid point 48.5°N 4.5°W, nearest to Brest (Copernicus C3S) · 1–2 Nov 2023
 
 ## s58_brest_cold_front
 A few hours later comes the cold front. By now the storm has broken and bent its fronts so much that the map can't trace them cleanly, but Brest's own measurements show it clearly. Between midnight and three in the morning, the wind swings from the south-west to the west and strengthens: by three, it's about twenty-three metres per second, or forty-five knots. [beat] The temperature drops by about two degrees, to ten and a half, and the pressure starts its fast climb. Cooler polar air has arrived behind the front, just as our side view said.
 
-> 96 words · 5 sentences · 2901.225–2939.700 s (38.5 s; speech 35.1 s) · 48:21.22–48:59.70 (measured) · beat: application · the cold front passes · UF1: R1.
+> 96 words · 5 sentences · 2910.025–2948.500 s (38.5 s; speech 35.1 s) · 48:30.03–49:08.50 (measured) · beat: application · the cold front passes · UF1: R1.
 > Screen: same TimeGraph: wind arrows at 00 UTC '19 m/s from 221° (SW)' and 03 UTC '23 m/s from 271° (W)'; CalcStack 23.2 ÷ 0.514 ≈ 45 kt; temperature 12.6 → 10.5 °C bracket '−2 °C'; gold band 00-03 UTC 'cold front'; thumbnail of the s47 side view
 > Source line(s): [S1] Data: ERA5 hourly, grid point 48.5°N 4.5°W, nearest to Brest (Copernicus C3S) · 1–2 Nov 2023
 
 ## s59_ciaran_after
 Here is the storm the next afternoon, seen from space, now over the North Sea, with its clouds wrapped in a spiral around the low. In the next video, we'll learn to read weather maps like this one in detail. And later videos will explain why the wind circles the low instead of rushing into it.
 
-> 56 words · 3 sentences · 2939.700–2961.025 s (21.3 s; speech 19.8 s) · 48:59.70–49:21.03 (measured) · beat: application · the storm the next afternoon, and what comes next · UF1: R1.
+> 56 words · 3 sentences · 2948.500–2969.825 s (21.3 s; speech 19.8 s) · 49:08.50–49:29.82 (measured) · beat: application · the storm the next afternoon, and what comes next · UF1: R1.
 > Screen: MODIS Aqua true colour 2 Nov 2023 with isobars at 12 UTC and the L; Brest dot; keywords 'reading weather maps ->', 'why the wind circles ->'
 > Source line(s): [S1] Image: NASA MODIS Aqua true colour (NASA GIBS) · 2 Nov 2023 · isobars: ERA5 (Copernicus C3S), 12 UTC
 
 ## s60_recap
 To sum up, the atmosphere is a thin shell of air, and almost all our weather happens in its lowest layer, the troposphere. Air pressure is the weight of the air above each square metre, about one thousand and thirteen hectopascals at sea level. By hydrostatic balance, it falls with height, roughly exponentially, with a scale height of about eight kilometres. The gas law, p equals rho R T, ties pressure, density and temperature together, so warm air is lighter than cold air. Relative humidity compares the vapour with its saturation value, and cooling air to its dew point makes clouds. Winds are named by where they come from, and are measured in metres per second or knots. Sea-level pressure maps show highs and lows, and fronts are the boundaries between air masses. Weather is what happens now, climate is its long-term statistics, and a reanalysis gives us both, everywhere, every hour.
 
-> 152 words · 8 sentences · 2961.025–3025.475 s (64.4 s; speech 61.2 s) · 49:21.03–50:25.47 (measured) · beat: recap · UF1: R1.
+> 152 words · 8 sentences · 2969.825–3034.275 s (64.5 s; speech 61.2 s) · 49:29.82–50:34.28 (measured) · beat: recap · UF1: R1.
 > Screen: one beat per sentence, mini pictures: thin-shell globe · '1013 hPa' column · p = p₀e^(−z/H), H ≈ 8 km · p = ρRT with two cubes · RH curve + dew point ring · compass '233° south-westerly', '19 kt' · MSLP map with H/L and front symbols · Brest TimeGraph + ERA5 globe
 > Source line(s): [S1] Data: ERA5 (Copernicus C3S) · IGRA v2 (NOAA NCEI) · NASA GIBS · NCEP/NCAR Reanalysis 1 (NOAA PSL)
 
 ## s61_end
 This video is one of a series of related tutorials, so watch out for the others. They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too. The notebook for these weather basics, and the notebooks for the other concepts, are on the website that goes with this video.
 
-> 67 words · 3 sentences · 3025.475–3051.075 s (25.6 s; speech 24.6 s) · 50:25.47–50:51.07 (measured) · beat: end card · UF1: —.
+> 67 words · 3 sentences · 3034.275–3059.875 s (25.6 s; speech 24.6 s) · 50:34.28–50:59.88 (measured) · beat: end card · UF1: —.
 > Screen: house end card: four faint topic thumbnails (globe with shell, pressure column, humidity curve, Ciarán map); 'a series of tutorials' (68 px); 'atmospheric science · meteorology · fluid dynamics' (54 px); notebook icon 'weather-basics notebook'; stacked icons 'notebooks for the other concepts'; 2.5-s silent hold
 
 > Total: 7510 words · 447 sentences · 3051.075 s narration · 3053.575 s movie (50:53.57) · 147.7 words per minute.

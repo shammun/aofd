@@ -13,7 +13,7 @@ concepts:
 - 0B-G13 preview (subtropical highs, ITCZ, trades, westerlies)
 - 0B-G16 units (hPa, K and °C, g/kg, m/s, knots)
 - 0B-G17 data words (observation, reanalysis, climatology)
-target_duration_s: 3054.15
+target_duration_s: 3062.375
 fps: 30
 size:
 - 1920
@@ -42,9 +42,9 @@ audio:
     tail_s: 2.5
     sections_s: from sound_cues.yaml (s54 start → s60 start, measured from timing.json)
     notes: a different score from every other movie (HOUSE_STYLE §8); recorded in v3/sound/sound.json
-measured_narration_s: 3051.65
-measured_frames: 91550
-words: 7508
+measured_narration_s: 3059.875
+measured_frames: 91797
+words: 7534
 sentences: 447
 dry_run:
   tool: tools/tts.py (Kokoro af_bella, speed 1.0, .venv-tts)
@@ -2480,7 +2480,7 @@ scenes:
     1.61\, q\, p'' (84 px); S3 gold underbraces ''vapour pressure'' (e), ''kg of vapour per kg of air'' (q), ''air pressure''
     (p), each on its words; S4 keyword ''this e: vapour pressure, not 2.72'' (slate). S5-S9 two code-drawn boxes, each labelled
     ''1 kg'': ''air'' with 100 small teal dots and ''vapour'' with 161 slate-blue dots (dot counts from 1/ε), molecule glyphs
-    ''29'' (air) and ''18'' (water) on S7, ''\dfrac{29}{18} \approx 1.61'' (68 px) on S8, keyword ''share of molecules = 1.61
+    ''29'' (air) and ''18'' (water) on S7, ''29 \div 18 \approx 1.61'' (one line below the boxes, UF1 fix 1) on S8, keyword ''share of molecules = 1.61
     × share of mass'' on S9. S10-S11 CalcStack ''q = 20\ \mathrm{g/kg} = 0.020'', ''p \approx 1000\ \mathrm{hPa}'', ''e \approx
     1.61 \times 0.020 \times 1000 \approx 32\ \mathrm{hPa}'' (gold underline), keyword ''out of ≈ 1000 hPa''; [beat]. UF1
     R1: R1 source line(s) as listed in this scene''s source_line field: muted #9aa6bd, 30 px (>= 28), one line, left-aligned
@@ -2501,7 +2501,7 @@ scenes:
     vallis_eq: (18.12) e ≈ w p/ε = 1.61 w p with q ≈ w
     page_png: chapters/pages/ch18/p696.png
   on_screen_eq_extra:
-  - latex: \dfrac{29}{18} \approx 1.61
+  - latex: 29 \div 18 \approx 1.61
     vallis_eq: '1/ε = R^v/R^d = M_d/M_w ((18.6) text: 1/ε ≈ 1.608)'
     page_png: chapters/pages/ch18/p695.png
   - latex: e \approx 1.61 \times 0.020 \times 1000 \approx 32\ \mathrm{hPa}
@@ -3779,24 +3779,24 @@ scenes:
 - id: s47_cold_front
   t:
   - 2486.0
-  - 2550.3
+  - 2553.925
   sentence_times:
   - - 2486.0
     - 2488.85
   - - 2489.2
-    - 2500.15
-  - - 2500.5
-    - 2509.3
-  - - 2509.65
-    - 2515.275
-  - - 2515.625
-    - 2521.55
-  - - 2521.9
-    - 2531.225
-  - - 2531.575
-    - 2537.275
-  - - 2537.625
-    - 2549.5
+    - 2503.15
+  - - 2503.5
+    - 2512.3
+  - - 2512.65
+    - 2518.275
+  - - 2518.625
+    - 2524.55
+  - - 2524.9
+    - 2534.85
+  - - 2535.2
+    - 2540.9
+  - - 2541.25
+    - 2553.125
   beat: why · a cold front from the side
   visual: 'Full-width cross-section (illustrative, schematic; vertical exaggeration x50, said in s48): ground line y 760;
 
@@ -3832,24 +3832,27 @@ scenes:
     field: muted #9aa6bd, 30 px (>= 28), one line, left-aligned at the bottom of the picture it credits (y <= 850, never in
     the caption band 880-1040), fades with its picture, never spoken.'
   voiceover: 'Let''s look at a cold front from the side. Here is a real slice through the air around Storm Ciarán, from the
-    reanalysis, at six in the evening on the first of November, running from west to east through Brest. The colours show
-    how much warmer or colder the air is than the average at the same height, and the moving dots follow the wind inside the
-    slice. Remember the gas law: at the same pressure, cold air is denser than warm air. So the advancing cold air stays low
-    and pushes in under the warm air like a wedge. Its slope is steep: in this slice, about one kilometre up for every fifteen
-    kilometres along, so the warm air is lifted quickly. It cools to its dew point, and tall clouds and heavy showers form
-    in a narrow band. After the front passes, the air is colder and drier, the pressure starts to rise, and the wind turns,
-    in the northern hemisphere usually from the south-west to the west or north-west.'
+    reanalysis, at six in the evening on the first of November, running from west to east across the Bay of Biscay, right
+    through the cold front on the map. The colours show how much warmer or colder the air is than the average at the same
+    height, and the moving dots follow the wind inside the slice. Remember the gas law: at the same pressure, cold air is
+    denser than warm air. So the advancing cold air stays low and pushes in under the warm air like a wedge. In this slice,
+    it rises about one kilometre for every fifty kilometres along, and as it pushes forward, it lifts the warm air ahead of
+    it quickly. It cools to its dew point, and tall clouds and heavy showers form in a narrow band. After the front passes,
+    the air is colder and drier, the pressure starts to rise, and the wind turns, in the northern hemisphere usually from
+    the south-west to the west or north-west.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.sections.vertical_section + section_anomaly + in_section_tracks (NEW F15); fluidpy.geo.atmos.omega_to_w;
-      fluidpy.geo.moist.vapour_pressure_from_q + relative_humidity
+      fluidpy.geo.moist.vapour_pressure_from_q + relative_humidity + fluidpy.diag.fronts.front_lines (the front on every level,
+      same method as the s49 map)
     params:
       time: 2023-11-01T18
-      path: 48.5N, 18W -> 4E, 0.05-deg steps
+      path: 46.5N, 18W -> 0E, 0.25-deg steps (crosses the s49 map's cold front at 7.39W, W77)
       levels_hPa: 1000-300 (20 levels)
       vertical_exaggeration: 80
     data: D12 ERA5-CDS-ciaran2023-section (NEW download)
-    test: NEW tests/diag/test_sections.py; ../Fluid Dynamics/tests/geo/test_atmos.py (omega_to_w); CHECK W45, W70, W72, W73
+    test: NEW tests/diag/test_sections.py; ../Fluid Dynamics/tests/geo/test_atmos.py (omega_to_w); CHECK W45, W70, W72, W73,
+      W77, W77
   exaggeration:
   - heights x80 in the slice (said in s48 S6)
   - 'particles: in-slice wind only, vertical speed drawn x80 like the heights; 1 s of screen ≈ 30 min of motion'
@@ -3866,7 +3869,8 @@ scenes:
     so map and side view stay linked'
   source_line:
   - at: S1
-    text: 'Data: ERA5 on pressure levels (Copernicus C3S) · 1 Nov 2023, 18 UTC · slice along 48.5°N, 18°W–4°E'
+    text: 'Data: ERA5 on pressure levels (Copernicus C3S) · 1 Nov 2023, 18 UTC · slice along 46.5°N, 18°W–0° · fronts computed
+      from it'
   runner_up: flat 2-D Remotion SVG slice with the same particles (clearer ticks, loses the link to the map); Cesium wall entity
     (no gain, slower)
   uf1:
@@ -3874,23 +3878,29 @@ scenes:
   - R1
   - R2
   - R3
+  uf1_fix1: 'v4 review 1 M1: the 48.5N slice met a feature at 12.7W (west of the low), not the map''s cold front. The cold-front
+    side view is now its own ERA5 slice along 46.5N, 18W-0E (Bay of Biscay), through the analysed cold front (map 7.39W; slice
+    850 hPa -7.379W, 0.8 km apart). Front traced on 9 levels with front_lines; slope = fit 850-650 hPa: 1:49.86 along the
+    slice (1:43.45 normal to the front), spoken ''fifty''. The fit line is drawn solid, the lowest kilometre (900-875 hPa,
+    leaning the other way) dashed; the map''s cold front is drawn on the 850-hPa map under the slice; Brest is a dot on the
+    map north of the slice.'
 - id: s48_warm_front
   t:
-  - 2550.3
-  - 2603.0
+  - 2553.925
+  - 2611.225
   sentence_times:
-  - - 2550.3
-    - 2555.375
-  - - 2555.725
-    - 2563.425
-  - - 2563.775
-    - 2572.975
-  - - 2573.325
-    - 2582.4
-  - - 2582.75
-    - 2593.425
-  - - 2593.775
-    - 2602.2
+  - - 2553.925
+    - 2560.6
+  - - 2560.95
+    - 2568.65
+  - - 2569.0
+    - 2581.2
+  - - 2581.55
+    - 2590.625
+  - - 2590.975
+    - 2601.65
+  - - 2602.0
+    - 2610.425
   beat: why · a warm front from the side
   visual: 'Full-width cross-section like s47, warm air moving right over a long thin cold wedge; S2 orange arrows gliding
     up the
@@ -3912,13 +3922,13 @@ scenes:
     as s47. UF1 R1: R1 source line(s) as listed in this scene''s source_line field: muted #9aa6bd, 30 px (>= 28), one line,
     left-aligned at the bottom of the picture it credits (y <= 850, never in the caption band 880-1040), fades with its picture,
     never spoken.'
-  voiceover: 'Now let''s move east along the same slice, to the warm front near Brest. At a warm front, the warm air is advancing,
-    but it''s lighter, so it can''t push the cold air away from below. Instead, it glides up over the cold air on a gentler
-    slope: in this slice, about one kilometre up for every fifty kilometres along. As it slides upwards it cools, and a broad
-    sheet of layered cloud forms far ahead of the front, bringing long spells of steady rain. When the warm front passes,
-    the air turns milder and moister, and the wind turns, in the northern hemisphere usually from the south-east to the south
-    or south-west. In this slice, heights are drawn eighty times taller than distances along the ground, so the slopes look
-    much steeper than in nature.'
+  voiceover: 'Now let''s move north, to a second slice that runs through Brest, where the warm front is arriving. At a warm
+    front, the warm air is advancing, but it''s lighter, so it can''t push the cold air away from below. Instead, it glides
+    up over the cold air: in this slice, also about one kilometre up for every fifty kilometres along, and in many storms
+    warm fronts slope even more gently. As it slides upwards it cools, and a broad sheet of layered cloud forms far ahead
+    of the front, bringing long spells of steady rain. When the warm front passes, the air turns milder and moister, and the
+    wind turns, in the northern hemisphere usually from the south-east to the south or south-west. In this slice, heights
+    are drawn eighty times taller than distances along the ground, so the slopes look much steeper than in nature.'
   on_screen_eq: null
   physics_source:
     fn: as s47 (same slice and tracks)
@@ -3943,23 +3953,26 @@ scenes:
   - R1
   - R2
   - R3
+  uf1_fix1: the 48.5N slice (through Brest) is used for the warm front only; S1 now says it is a second slice further north;
+    the warm-front outline is the straight least-squares fit (no zigzag at the ground); 'true scale' is said in S6 ('eighty
+    times taller') and the true-scale twin is labelled 'true slope'.
 - id: s49_real_fronts
   t:
-  - 2603.0
-  - 2638.025
+  - 2611.225
+  - 2646.25
   sentence_times:
-  - - 2603.0
-    - 2608.55
-  - - 2608.9
-    - 2616.45
-  - - 2616.8
-    - 2621.175
-  - - 2621.525
-    - 2625.475
-  - - 2625.825
-    - 2631.025
-  - - 2631.375
-    - 2637.225
+  - - 2611.225
+    - 2616.775
+  - - 2617.125
+    - 2624.675
+  - - 2625.025
+    - 2629.4
+  - - 2629.75
+    - 2633.7
+  - - 2634.05
+    - 2639.25
+  - - 2639.6
+    - 2645.45
   beat: application · real fronts round Ciarán
   visual: 'Map panel (Lambert, 40-60N 25W-10E, x 80-1580): ERA5 850-hPa temperature at 2023-11-02T00 UTC (cmocean ''thermal'',
 
@@ -4017,15 +4030,15 @@ scenes:
   - R2
 - id: s50_front_symbols
   t:
-  - 2638.025
-  - 2654.725
+  - 2646.25
+  - 2662.95
   sentence_times:
-  - - 2638.025
-    - 2643.95
-  - - 2644.3
-    - 2649.725
-  - - 2650.075
-    - 2653.925
+  - - 2646.25
+    - 2652.175
+  - - 2652.525
+    - 2657.95
+  - - 2658.3
+    - 2662.15
   beat: application · map symbols (pointer forward)
   visual: 'Same map; the front lines turn into the standard symbols on their words (cold: blue line + filled triangles on
     the
@@ -4063,23 +4076,23 @@ scenes:
   - R2
 - id: s51_heating
   t:
-  - 2654.725
-  - 2700.1
+  - 2662.95
+  - 2708.325
   sentence_times:
-  - - 2654.725
-    - 2659.775
-  - - 2660.125
-    - 2662.125
-  - - 2662.475
-    - 2671.45
-  - - 2671.8
-    - 2675.575
-  - - 2675.925
-    - 2685.275
-  - - 2686.775
-    - 2694.5
-  - - 2694.85
-    - 2699.3
+  - - 2662.95
+    - 2668.0
+  - - 2668.35
+    - 2670.35
+  - - 2670.7
+    - 2679.675
+  - - 2680.025
+    - 2683.8
+  - - 2684.15
+    - 2693.5
+  - - 2695.0
+    - 2702.725
+  - - 2703.075
+    - 2707.525
   beat: application · the global picture (heating)
   visual: 'Picture zone: Globe3D (BMNG, equinox lighting) with two gold beams of equal width hitting at 0° and 60°N; patches
 
@@ -4141,21 +4154,21 @@ scenes:
   - R4
 - id: s52_pressure_belts
   t:
-  - 2700.1
-  - 2736.175
+  - 2708.325
+  - 2744.4
   sentence_times:
-  - - 2700.1
-    - 2704.575
-  - - 2704.925
-    - 2713.475
-  - - 2713.825
-    - 2716.45
-  - - 2716.8
-    - 2725.25
-  - - 2725.6
-    - 2729.0
-  - - 2729.35
-    - 2735.375
+  - - 2708.325
+    - 2712.8
+  - - 2713.15
+    - 2721.7
+  - - 2722.05
+    - 2724.675
+  - - 2725.025
+    - 2733.475
+  - - 2733.825
+    - 2737.225
+  - - 2737.575
+    - 2743.6
   beat: application · high and low pressure belts (preview)
   visual: 'Picture zone: Globe3D tilted to show both hemispheres, annual mean MSLP 1991-2020 (data/real/wind_climatology.json
 
@@ -4207,23 +4220,23 @@ scenes:
   - R4
 - id: s53_trades_westerlies
   t:
-  - 2736.175
-  - 2776.825
+  - 2744.4
+  - 2785.05
   sentence_times:
-  - - 2736.175
-    - 2739.35
-  - - 2739.7
-    - 2749.65
-  - - 2750.0
-    - 2753.45
-  - - 2753.8
-    - 2756.65
-  - - 2757.0
-    - 2764.675
-  - - 2765.025
-    - 2769.65
-  - - 2770.0
-    - 2776.025
+  - - 2744.4
+    - 2747.575
+  - - 2747.925
+    - 2757.875
+  - - 2758.225
+    - 2761.675
+  - - 2762.025
+    - 2764.875
+  - - 2765.225
+    - 2772.9
+  - - 2773.25
+    - 2777.875
+  - - 2778.225
+    - 2784.25
   beat: application · trade winds and westerlies (preview)
   visual: 'Picture zone: the s52 globe; 1991-2020 mean 10-m winds (teal arrows on a 5° grid, legend ''5 m/s''; streaklines
     from
@@ -4266,21 +4279,21 @@ scenes:
   - R4
 - id: s54_ciaran_intro
   t:
-  - 2776.825
-  - 2813.3
+  - 2785.05
+  - 2821.525
   sentence_times:
-  - - 2776.825
-    - 2782.45
-  - - 2782.8
-    - 2789.95
-  - - 2790.3
-    - 2795.8
-  - - 2796.15
-    - 2800.625
-  - - 2800.975
-    - 2806.6
-  - - 2806.95
-    - 2812.5
+  - - 2785.05
+    - 2790.675
+  - - 2791.025
+    - 2798.175
+  - - 2798.525
+    - 2804.025
+  - - 2804.375
+    - 2808.85
+  - - 2809.2
+    - 2814.825
+  - - 2815.175
+    - 2820.725
   beat: application · one storm over one town
   visual: 'Map panel (Lambert 40-58N 25W-8E, x 80-1580, full brightness): GIBS MODIS Terra/Aqua true colour 2023-11-01
 
@@ -4329,13 +4342,13 @@ scenes:
   - R4
 - id: s55_ciaran_maps
   t:
-  - 2813.3
-  - 2838.65
+  - 2821.525
+  - 2846.875
   sentence_times:
-  - - 2813.3
-    - 2825.125
-  - - 2825.475
-    - 2837.85
+  - - 2821.525
+    - 2833.35
+  - - 2833.7
+    - 2846.075
   beat: application · the low moves in
   visual: 'Same panel; ERA5 MSLP isobars every 4 hPa animate hour by hour (24 frames per hour of data, interpolated only in
 
@@ -4395,19 +4408,19 @@ scenes:
   - R1
 - id: s56_brest_pressure
   t:
-  - 2838.65
-  - 2869.475
+  - 2846.875
+  - 2877.7
   sentence_times:
-  - - 2838.65
-    - 2841.1
-  - - 2841.45
-    - 2847.275
-  - - 2847.625
-    - 2856.65
-  - - 2857.0
-    - 2862.15
-  - - 2863.65
-    - 2868.675
+  - - 2846.875
+    - 2849.325
+  - - 2849.675
+    - 2855.5
+  - - 2855.85
+    - 2864.875
+  - - 2865.225
+    - 2870.375
+  - - 2871.875
+    - 2876.9
   beat: application · the pressure at Brest
   visual: 'Maths zone: TimeGraph (hours across 12 -> 12 UTC, 52-px ticks every 3 h; pressure 955-1000 hPa up) drawing the
 
@@ -4456,19 +4469,19 @@ scenes:
   - R1
 - id: s57_brest_warm_front
   t:
-  - 2869.475
-  - 2901.8
+  - 2877.7
+  - 2910.025
   sentence_times:
-  - - 2869.475
-    - 2871.85
-  - - 2872.2
-    - 2881.05
-  - - 2881.4
-    - 2892.25
-  - - 2892.6
-    - 2894.975
-  - - 2895.325
-    - 2901.0
+  - - 2877.7
+    - 2880.075
+  - - 2880.425
+    - 2889.275
+  - - 2889.625
+    - 2900.475
+  - - 2900.825
+    - 2903.2
+  - - 2903.55
+    - 2909.225
   beat: application · the warm front passes
   visual: 'Same TimeGraph: a second panel below (temperature 9-15 °C, orange line, hour dots); a row of hourly wind arrows
     above
@@ -4517,19 +4530,19 @@ scenes:
   - R1
 - id: s58_brest_cold_front
   t:
-  - 2901.8
-  - 2940.275
+  - 2910.025
+  - 2948.5
   sentence_times:
-  - - 2901.8
-    - 2904.775
-  - - 2905.125
-    - 2913.85
-  - - 2914.2
-    - 2925.75
-  - - 2927.25
-    - 2933.85
-  - - 2934.2
-    - 2939.475
+  - - 2910.025
+    - 2913.0
+  - - 2913.35
+    - 2922.075
+  - - 2922.425
+    - 2933.975
+  - - 2935.475
+    - 2942.075
+  - - 2942.425
+    - 2947.7
   beat: application · the cold front passes
   visual: 'Same TimeGraph; arrows at 00 and 03 UTC with labels ''19 m/s from 221° (SW)'', ''23 m/s from 271° (W)''; maths
     zone
@@ -4588,15 +4601,15 @@ scenes:
   - R1
 - id: s59_ciaran_after
   t:
-  - 2940.275
-  - 2961.6
+  - 2948.5
+  - 2969.825
   sentence_times:
-  - - 2940.275
-    - 2948.9
-  - - 2949.25
-    - 2954.35
-  - - 2954.7
-    - 2960.8
+  - - 2948.5
+    - 2957.125
+  - - 2957.475
+    - 2962.575
+  - - 2962.925
+    - 2969.025
   beat: application · the storm the next afternoon, and what comes next
   visual: 'Map panel: the existing MODIS Aqua true colour of 2023-11-02 (re-used) with ERA5 12 UTC isobars and the ''L'' 956
     hPa
@@ -4632,25 +4645,25 @@ scenes:
   - R1
 - id: s60_recap
   t:
-  - 2961.6
-  - 3026.05
+  - 2969.825
+  - 3034.275
   sentence_times:
-  - - 2961.6
-    - 2969.825
-  - - 2970.175
-    - 2978.1
-  - - 2978.45
-    - 2986.35
-  - - 2986.7
-    - 2995.7
-  - - 2996.05
-    - 3003.375
-  - - 3003.725
-    - 3009.525
-  - - 3009.875
-    - 3016.425
-  - - 3016.775
-    - 3025.25
+  - - 2969.825
+    - 2978.05
+  - - 2978.4
+    - 2986.325
+  - - 2986.675
+    - 2994.575
+  - - 2994.925
+    - 3003.925
+  - - 3004.275
+    - 3011.6
+  - - 3011.95
+    - 3017.75
+  - - 3018.1
+    - 3024.65
+  - - 3025.0
+    - 3033.475
   beat: recap
   visual: 'No heading. One beat per sentence, each a mini picture from its scene (thumbnail re-renders, 60 % size) with its
 
@@ -4699,15 +4712,15 @@ scenes:
   - R1
 - id: s61_end
   t:
-  - 3026.05
-  - 3051.65
+  - 3034.275
+  - 3059.875
   sentence_times:
-  - - 3026.05
-    - 3031.925
-  - - 3032.275
-    - 3043.325
-  - - 3043.675
-    - 3051.35
+  - - 3034.275
+    - 3040.15
+  - - 3040.5
+    - 3051.55
+  - - 3051.9
+    - 3059.575
   beat: end card
   visual: 'House end card (HOUSE_STYLE §3), word for word as the reference with ''maths tutorials'' -> ''tutorials'' (physics
 
@@ -4778,9 +4791,9 @@ honesty_notes:
 quiz_hook: 'A mountain station 3 km up reads 700 hPa at 0 °C. Is its sea-level pressure high or low? (H = 287 x 273 / 9.81
   ≈ 8.0 km; 700 x e^(3/8.0) ≈ 1018 hPa: a slightly high reading.)'
 qa_expectations:
-  duration_s: 3054.15
+  duration_s: 3062.375
   captions:
-    cues: 759
+    cues: 762
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 17.0
@@ -4925,3 +4938,27 @@ uf1_build:
   - 's46: the gold transect stays the fronts.json transect that its graph is drawn along; the 48.5N slice line appears on
     the s47 map'
   - 's47-s48: isotherms on the slice are not drawn (anomaly colours + saturated-air whitening only)'
+uf1_fix1:
+  date: '2026-10-29'
+  review: reports/ch00_movies.md 'ch00_weather_basics v4 — review 1'
+  tts: '4 sentences spliced (s47 S2, S6; s48 S1, S3): tools/movie_wb/splice_uf1fix1.py, BS.1770 loudness match to the neighbours
+    + look-ahead limiter; G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/v4/uf1fix1/tts'
+  narration_follows_data:
+  - 's47 S6: ''about one kilometre for every fifty kilometres along'' (ERA5 46.5N 850-650 hPa 1:49.86, W70)'
+  - 's48 S3: ''also about one kilometre up for every fifty kilometres along'' (ERA5 48.5N 975-600 hPa 1:52.3, W71)'
+  fixes:
+  - 'M1 s47: own ERA5 slice along 46.5N through the map''s cold front (W70 slope, W77 crossing); map cold front + crossing
+    ring drawn under the slice'
+  - 'M2 collisions: s18 ''scale height'' under the fraction, units row lower; s19/s19b ln p inset moved left of the CalcStack
+    (big axes fade while it shows); s23-s25 temperature charts 580 px tall so ''temperature (°C)'' clears the source lines;
+    s27b colour-coded symbol names (no pointer arrows), smaller boxes, 29 ÷ 18 below them; s36 keyword below the month ticks;
+    s48 wind labels kept off ''Brest''; s53 names in belt order (links never cross)'
+  - 'M3 s46: colour bar at y 150 (title at 116)'
+  - 'M4 globes: the main globe draws into a full-frame canvas with the box''s pixel scale (fades over y 850-900), close-ups
+    dist >= 2.9; s25 inset on a right-half canvas; s01 spin reverses visibly (view lon 0 -> 40W -> 15E), U-WB-03'
+  - S1 frame-0 keywords in s14, s18, s19b, s20b, s20c, s20d; S2 s03 full-frame relief, camera el 61-64 deg held on the path's
+    middle (the box crosses the frame), Brest / Brittany / English Channel labels, soft frame edges, drape upsampled x4; S3
+    s45 the four names on their words; S4 dark backing band under every source line; S5 s48 straight warm-front fit line,
+    'true slope' twin; S6 magnifier x50, no wedge strip; S7 s20c link routed over the labels, mattresses moved; S8 s13 '1
+    m²' lifted, s21 orange sonde box; S9 s25 polar key looks across the meridian plane; S10 s38 band clipped to the disc,
+    s39 'Himalayas' above the source line, s58 CalcStack below the ticks, s20b '2nd km', s18 no placeholder bars

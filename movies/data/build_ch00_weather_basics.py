@@ -1298,7 +1298,7 @@ def main() -> int:
                        "fronts_time": "2023-11-01T18 UTC (motion 18 → 21 UTC), locate='centre'",
                        "time_compression": {"s00": "15 h of storm motion in about 5 s", "s44": "1.5 h of streaklines in about 3 s",
                                             "s53": "2 days of mean-wind streaklines", "s55": "24 h of isobars in about 20 s"},
-                       "exaggerations": ["atmosphere shell drawn 50x thicker (s02 on, said)", "front side views 50x taller (s47-s48, said)",
+                       "exaggerations": ["atmosphere shell drawn 50x thicker (s02 on, said)", "front side views 80x taller (s47-s48, said in s48)",
                                          "troposphere 50x in the s25 inset", "model grid drawn every 2° (s38)"]},
         "credits": [
             "Contains modified Copernicus Climate Change Service information 2026 (ERA5: global hour, columns, 850 hPa, Brest series, Ciarán hourly).",
@@ -1527,7 +1527,7 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     Tg = np.stack([np.interp(zg, Zn[:, j], Tn[:, j]) for j in range(s_m.size)], axis=1)
     RHg = np.stack([np.interp(zg, Zn[:, j], RH[:, j]) for j in range(s_m.size)], axis=1)
     Ta = np.asarray(call(SEC_ + "section_anomaly", "s47,s48", "slice.bin", "T minus its along-slice mean at each height", heavy_call=True, S=Tg))
-    truth("W70", "s47 anomaly: along-slice mean is 0 at every height (|mean| < 1e-9 K)", bool(np.nanmax(np.abs(np.nanmean(Ta, axis=1))) < 1e-9))
+    truth("W71", "s48 anomaly (48.5N slice): along-slice mean is 0 at every height (|mean| < 1e-9 K)", bool(np.nanmax(np.abs(np.nanmean(Ta, axis=1))) < 1e-9))
     # frontal zones: largest |dT/ds| (100-km running mean) at each level, west (cold) and near Brest (warm)
     ds_km = (s_m[1] - s_m[0]) / 1e3
     nb = max(1, int(round(100.0 / ds_km)))
@@ -1549,11 +1549,9 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
         return P, a * 1000.0, b                         # ds/dz in km per km
     Pc, dc, bc = zone(-17.0, -6.0, [925, 900, 875, 850, 825, 800, 775, 750, 700, 650, 600, 550, 500])
     Pw, dw, bw = zone(-8.0, 3.0, [975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 700, 650, 600])
-    lon850c = float(Pc[[k for k, r in enumerate(Pc) if r[3] == 850][0], 2])
-    rng("W70", "s47 cold-frontal zone at 850 hPa (largest smoothed dT/ds) lies at 14-11W", lon850c, -14.0, -11.0)
-    truth("W70", "s47 the cold front slopes up towards the west (cold side): ds/dz < 0", dc < 0, r6(dc, 2))
-    rng("W70", "s47 cold-front slope 1:12-1:20 (narration follows the data: 'one kilometre up for every fifteen kilometres'; planned 1:30-1:150)", abs(dc), 12.0, 20.0)
-    truth("W70", "s47 spoken 'fifteen' = the slope rounded to the nearest 5 km", int(5 * round(abs(dc) / 5)) == 15, r6(abs(dc), 2))
+    # UF1 fix 1 (review 1 M1): the 48.5N feature at ~12.7W is NOT the s49 map's cold front (that never crosses 48.5N); the
+    # cold-front side view (s47) now uses its own slice along 46.5N (cf_slice below). The 48.5N slice serves s48 only.
+    void_cold = (Pc, dc, bc)   # the 48.5N 'cold' zone fit is kept out of the products (no s47 use)
     s_ground_w = bw                                   # fitted warm-front position at z = 0 [km along the slice]
     lon_ground_w = -18.0 + s_ground_w / (EARTH_RADIUS / 1e3 * np.cos(48.5 * DEG) * DEG)
     d_brest = (BREST[1] - lon_ground_w) * EARTH_RADIUS / 1e3 * np.cos(48.5 * DEG) * DEG   # km the surface front still has to go
@@ -1562,11 +1560,10 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     truth("W71", "s48 the warm front slopes up towards the east: ds/dz > 0", dw > 0, r6(dw, 2))
     rng("W71", "s48 warm-front slope 1:45-1:57.5 (narration follows the data: 'fifty kilometres'; planned 1:80-1:300)", dw, 45.0, 57.5)
     truth("W71", "s48 spoken 'fifty' = the slope rounded to the nearest 5 km", int(5 * round(dw / 5)) == 50, r6(dw, 2))
-    narration_changes.append(f"s47 S5: slope 'fifty to a hundred kilometres' -> 'fifteen kilometres' (ERA5 slice 925-500 hPa: 1:{abs(dc):.1f}, W70)")
     narration_changes.append(f"s48 S3: slope 'one or two hundred kilometres' -> 'fifty kilometres' (ERA5 slice 975-600 hPa: 1:{dw:.1f}, W71)")
     XS, ZS = 1.0 / 100.0, 80.0 / 100.0               # world units per km: along-slice, height (×80)
     row("W72", "s47-s48 slice vertical exaggeration (z units per km)/(s units per km) = 80 ('eighty times taller')", ZS / XS, 80.0, 1e-9)
-    row("W72", "s47 slice length 22° of longitude at 48.5N = 1621 km", s_m[-1] / 1e3, 1621.0, 1.0)
+    row("W72", "s48 slice length 22° of longitude at 48.5N = 1621 km", s_m[-1] / 1e3, 1621.0, 1.0)
     # in-slice particles (W73)
     so, zo = call(SEC_ + "in_section_tracks", "s47", "slice.bin", "uniform-flow test track (u_s 10 m/s, w 0.1 m/s)", heavy_call=True,
                                            us=np.full((3, 4), 10.0), wz=np.full((3, 4), 0.1), s=[0.0, 1e5, 2e5, 3e5], z=[0.0, 4000.0, 8000.0],
@@ -1578,12 +1575,11 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     trs, trz = call(SEC_ + "in_section_tracks", "s47,s48", "slice.bin", "RK4 tracks of the in-slice wind (u_s, w), 12 × 300 s, 3 generations × 1500", heavy_call=True,
                     us=us, wz=wz, s=s_m, z=Zn, seeds=seeds, dt=300.0, nsteps=12)
     seeds2 = call(SEC_ + "in_section_tracks", "s47", "slice.bin", "same seeds again (determinism)", heavy_call=True, us=us, wz=wz, s=s_m, z=Zn, seeds=seeds, dt=300.0, nsteps=12)
-    truth("W73", "s47 particle tracks are deterministic (same seeds → identical tracks)", bool(np.array_equal(np.nan_to_num(trs), np.nan_to_num(seeds2[0]))))
+    truth("W73", "s48 particle tracks are deterministic (same seeds → identical tracks)", bool(np.array_equal(np.nan_to_num(trs), np.nan_to_num(seeds2[0]))))
     alive = float(np.mean(np.isfinite(trs[-1])))
-    rng("W73", "s47 ≥ 80 % of the particles stay in the slice for the 1-h track", alive, 0.8, 1.0)
+    rng("W73", "s48 ≥ 80 % of the particles stay in the slice for the 1-h track", alive, 0.8, 1.0)
     U["slice"] = {"lat": 48.5, "lon0": -18.0, "lon1": 4.0, "time_utc": "2023-11-01T18", "ns": int(s_m.size), "length_km": r6(s_m[-1] / 1e3, 1),
                   "zg_km": [0, 8], "nz": int(zg.size), "XS": XS, "ZS": ZS, "z_exaggeration": 80, "anomaly_range_C": [-8, 8], "rh_cloud": 0.95,
-                  "cold_front": {"s_km": r6(Pc[:, 0], 1), "z_m": r6(Pc[:, 1], 0), "lon": r6(Pc[:, 2], 2), "slope_km_per_km": r6(abs(dc), 2), "spoken": 15},
                   "warm_front": {"s_km": r6(Pw[:, 0], 1), "z_m": r6(Pw[:, 1], 0), "lon": r6(Pw[:, 2], 2), "slope_km_per_km": r6(dw, 2), "spoken": 50, "dist_to_brest_km": r6(d_brest, 1),
                                  "s_ground_km": r6(s_ground_w, 1), "lon_ground": r6(lon_ground_w, 2)},
                   "brest_s_km": r6((BREST[1] + 18.0) * EARTH_RADIUS / 1e3 * np.cos(48.5 * DEG) * DEG, 1),
@@ -1591,7 +1587,7 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     # ground winds ahead of / behind each front (A1 10-m, 18 UTC)
     a18 = a1.sel(time="2023-11-01T18")
     gw = {}
-    for nm, s0 in (("cold", float(np.interp(0.0, Pc[:, 1], Pc[:, 0]))), ("warm", s_ground_w)):
+    for nm, s0 in (("warm", s_ground_w),):
         for side, off in (("behind", -150.0), ("ahead", 150.0)):   # both fronts move east: behind = west
             sk = s0 + off
             lo_ = -18.0 + sk / (EARTH_RADIUS / 1e3 * np.cos(48.5 * DEG) * DEG)
@@ -1602,8 +1598,6 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     sector = lambda d: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][int(((d + 22.5) % 360) // 45)]  # noqa: E731
     for k_, v_ in gw.items():
         v_["from"] = sector(v_["dir_from"])
-    rng("W45", "s47 ground wind ahead of the cold front (warm sector) from S-SW (157.5-247.5°)", gw["cold_ahead"]["dir_from"], 157.5, 247.5)
-    rng("W45", "s47 ground wind behind the cold front from W-NW (247.5-337.5°)", gw["cold_behind"]["dir_from"], 247.5, 337.5)
     U["slice"]["ground_winds"] = gw
     sh, sb = bin_pack("slice", [
         ("anom", ["z", "s"], Ta, "K", "ERA5 T minus its along-slice mean, regular z 0-8 km (81) × s (89)"),
@@ -1613,6 +1607,7 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     ], {"s_km": r6(s_m / 1e3, 2), "z_km": r6(zg / 1e3, 2)}, {})
     files["slice.json"] = sh
     bins["slice.bin"] = sb
+    cf_slice_block(row, rng, truth, call, files, bins, a1, U, narration_changes, SEC_, GA, MOI)
     # ---- W74 the s49 850-hPa particles (3000 fixed seeds, frozen 18 UTC field)
     flat, flon = f8.lat.values.astype(float), f8.lon.values.astype(float)
     U18, V18 = (f8[v].sel(time="2023-11-01T18").values.astype(float) for v in ("u", "v"))
@@ -1637,6 +1632,159 @@ def uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes) -> 
     U["sources"] = {s["id"]: [x["text"] for x in s["source_line"]] for s in sb_["scenes"] if s.get("source_line")}
     truth("R1", "source lines: every scene with real data has its exact text (count)", len(U["sources"]) >= 40, len(U["sources"]))
     files[fu] = U
+
+
+def cf_slice_block(row, rng, truth, call, files, bins, a1, U, narration_changes, SEC_, GA, MOI) -> None:
+    """UF1 fix 1 (v4 review 1, M1): the s47 cold-front side view on a line that crosses the s49 map's cold front.
+
+    The 48.5N slice (s48) never meets the analysed 850-hPa cold front of fronts.json (it starts at 48.0N 6.7W and runs SW).
+    This slice runs along 46.5N, 18W-0E (Bay of Biscay), 18 UTC 1 Nov 2023, from the same ERA5 pressure-level file. The
+    front in the slice is located with the SAME method as the map (fluidpy.diag.fronts.front_lines, locate='centre',
+    Hewson TFP, 100-km smoothing) on every pressure level of the section file (46-51N, 20W-6E; min_length_km 100 because
+    the file is only 5 deg tall), traced level by level from 850 hPa (nearest crossing, <= 80 km per level step). The slope
+    is the least-squares fit s = a z + b over the levels traced from 850 hPa upwards (the free-tropospheric frontal
+    surface; the lowest kilometre leans the other way, the usual friction 'nose', and is drawn dashed). Products:
+    slice_cf.bin, uf1.json -> slice_cf. Checks W70 (slope), W77 (the slice's own 850-hPa front within 50 km of the
+    map's), W45 (ground winds), W72 (length), W73 (particles).
+    """
+    LATC, LO0, LO1, NS = 46.5, -18.0, 0.0, 73
+    kmdeg = EARTH_RADIUS / 1e3 * np.cos(LATC * DEG) * DEG
+    sec = xr.open_dataset(DER / "era5_ciaran_2023_section_48p5N_18UTC.nc").isel(time=0)
+    lev = sec.level.values.astype(float)
+    kw = dict(lat=sec.lat.values.astype(float), lon=sec.lon.values.astype(float), levels=lev, path_lat=[LATC, LATC], path_lon=[LO0, LO1], n=NS,
+              along="parallel")
+    Ts = call(SEC_ + "vertical_section", "s47", "slice_cf.bin", "temperature along 46.5N (bilinear)", heavy_call=True, F=sec.t.values, **kw)
+    Zs = call(SEC_ + "vertical_section", "s47", "slice_cf.bin", "geopotential along 46.5N", heavy_call=True, F=sec.z.values, **kw) / G0
+    Qs = call(SEC_ + "vertical_section", "s47", "slice_cf.bin", "specific humidity along 46.5N", heavy_call=True, F=sec.q.values, **kw)
+    Us_ = call(SEC_ + "vertical_section", "s47", "slice_cf.bin", "u along 46.5N", heavy_call=True, F=sec.u.values, **kw)
+    Vs_ = call(SEC_ + "vertical_section", "s47", "slice_cf.bin", "v along 46.5N", heavy_call=True, F=sec.v.values, **kw)
+    Ws_ = call(SEC_ + "vertical_section", "s47", "slice_cf.bin", "omega along 46.5N", heavy_call=True, F=sec.w.values, **kw)
+    s_m = Ts.s.values.astype(float)
+    row("W72", "s47 slice length 18 deg of longitude at 46.5N = 1379 km", s_m[-1] / 1e3, 1379.0, 1.5)
+    us = np.asarray(call(SEC_ + "along_section_wind", "s47", "slice_cf.bin", "wind along the slice (eastward parallel: u_s = u)", heavy_call=True,
+                         u_sec=Us_, v_sec=Vs_))
+    Pf = (lev * 100.0)[:, None] * np.ones_like(np.asarray(Ts))
+    wz = np.asarray(call(GA + "omega_to_w", "s47", "slice_cf.bin", "w ≈ −ω/(ρg), ρ = p/(R T_v) (Vallis §2.6.2, (2.50c), (18.14))", heavy_call=True,
+                         omega=np.asarray(Ws_), p=Pf, T=np.asarray(Ts), q=np.asarray(Qs)))
+    ev = np.asarray(call(MOI + "vapour_pressure_from_q", "s47", "slice_cf.bin", "(18.12) e from q", heavy_call=True, q=np.asarray(Qs), p=Pf))
+    RH = np.asarray(call(MOI + "relative_humidity", "s47", "slice_cf.bin", "ℋ = e/e_s(T) (§18.1.2)", heavy_call=True, e=ev, T=np.asarray(Ts)))
+    Tn, Zn = np.asarray(Ts), np.asarray(Zs)
+    zg = np.linspace(0.0, 8000.0, 81)
+    Tg = np.stack([np.interp(zg, Zn[:, j], Tn[:, j]) for j in range(s_m.size)], axis=1)
+    RHg = np.stack([np.interp(zg, Zn[:, j], RH[:, j]) for j in range(s_m.size)], axis=1)
+    Ta = np.asarray(call(SEC_ + "section_anomaly", "s47", "slice_cf.bin", "T minus its along-slice mean at each height", heavy_call=True, S=Tg))
+    truth("W70", "s47 anomaly (46.5N slice): along-slice mean is 0 at every height (|mean| < 1e-9 K)", bool(np.nanmax(np.abs(np.nanmean(Ta, axis=1))) < 1e-9))
+
+    def crossings(la, lo, lat0):
+        la, lo, out = np.asarray(la, float), np.asarray(lo, float), []
+        for i in range(la.size - 1):
+            if (la[i] - lat0) * (la[i + 1] - lat0) <= 0 and la[i] != la[i + 1]:
+                w = (lat0 - la[i]) / (la[i + 1] - la[i])
+                out.append(round(float(lo[i] + w * (lo[i + 1] - lo[i])), 4))
+        return sorted(set(out))
+    # the map's analysed 850-hPa cold front (s49, fronts.json) where it crosses the slice
+    cf = files["fronts.json"]["cold_front"]
+    xm_all = crossings(cf["lat"], cf["lon"], LATC)
+    truth("W70", "s47 the 46.5N slice crosses the s49 map's analysed 850-hPa cold front (fronts.json, 18 UTC) exactly once", len(xm_all) == 1, xm_all)
+    xm = xm_all[0]
+    # orientation of the map front at the crossing: the front normal lies `ang` degrees from east
+    la_, lo_ = np.asarray(cf["lat"], float), np.asarray(cf["lon"], float)
+    i0 = int(np.argmin(np.abs(la_ - LATC)))
+    ia, ib = max(0, i0 - 3), min(la_.size - 1, i0 + 3)
+    dn_ = (la_[ib] - la_[ia]) * 111.32
+    de_ = (lo_[ib] - lo_[ia]) * 111.32 * np.cos(LATC * DEG)
+    ang = float(np.degrees(np.arctan2(abs(de_), abs(dn_))))
+    # the front on every level of the slice's own data (same method as the map)
+    C = {}
+    for L in lev:
+        if L < 500:
+            continue
+        d = sec.sel(level=L)
+        fl = call("fluidpy.diag.fronts.front_lines", "s47", "slice_cf.bin", f"cold front at {int(L)} hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+                  heavy_call=True, T=d.t.values.astype(float), u=d.u.values.astype(float), v=d.v.values.astype(float),
+                  lat=d.lat.values.astype(float), lon=d.lon.values.astype(float), locate="centre", min_length_km=100.0)
+        C[float(L)] = (float(np.nanmean(d.z.values)) / G0,
+                       sorted({x for ln in fl if ln.kind == "cold" for x in crossings(ln.lat, ln.lon, LATC) if -13.0 < x < -3.0}))
+    levs = sorted(C, reverse=True)
+    i8 = levs.index(850.0)
+    a8 = min(C[850.0][1], key=lambda x: abs(x - xm))
+    d850 = abs(a8 - xm) * kmdeg
+    rng("W77", "s47 the slice's own 850-hPa cold front lies within 50 km of the map's cold front where the slice crosses it", d850, 0.0, 50.0)
+    tr = {850.0: a8}
+    for seq in (range(i8 + 1, len(levs)), range(i8 - 1, -1, -1)):
+        prev = a8
+        for i in seq:
+            cs = C[levs[i]][1]
+            if not cs:
+                break
+            x = min(cs, key=lambda x: abs(x - prev))
+            if abs(x - prev) * kmdeg > 80.0:
+                break
+            tr[levs[i]] = x
+            prev = x
+    up = sorted([L for L in tr if L <= 850.0], reverse=True)
+    lo_t = sorted([L for L in tr if L > 850.0], reverse=True)
+    rng("W70", "s47 the cold front is traced on >= 5 levels above 850 hPa (<= 80 km per level step)", len(up) - 1, 5, 20)
+    zf = np.array([C[L][0] for L in up]) / 1e3
+    sf_ = (np.array([tr[L] for L in up]) - LO0) * kmdeg
+    a_, b_ = np.polyfit(zf, sf_, 1)
+    rr = float(np.corrcoef(zf, sf_)[0, 1])
+    truth("W70", "s47 the cold front slopes up towards the west (cold side): ds/dz < 0", a_ < 0, r6(a_, 2))
+    rng("W70", "s47 cold-front slope along the slice (850 hPa upwards, least squares) 1:40-1:60", abs(a_), 40.0, 60.0)
+    rng("W70", "s47 the fit is tight: correlation of s with z <= -0.9", rr, -1.0, -0.9)
+    truth("W70", "s47 spoken 'fifty' = the slope rounded to the nearest 5 km", int(5 * round(abs(a_) / 5)) == 50, r6(abs(a_), 2))
+    slope_n = abs(a_) * np.cos(ang * DEG)
+    rng("W70", "s47 slope normal to the front (slice at the front-normal angle) 1:35-1:55 (recorded; the narration says 'in this slice')", slope_n, 35.0, 55.0)
+    narration_changes.append(f"s47 S5: slope 'fifteen kilometres' (48.5N, wrong feature) -> 'fifty kilometres' (ERA5 slice 46.5N, 850-{int(up[-1])} hPa: "
+                             f"1:{abs(a_):.1f} along the slice, 1:{slope_n:.1f} normal to the front; W70)")
+    narration_changes.append("s47 S2: 'running from west to east through Brest' -> 'across the Bay of Biscay, right through the cold front on the map' "
+                             "(46.5N slice, W77)")
+    narration_changes.append("s48 S1: 'move east along the same slice' -> 'move north, to a second slice that runs through Brest' (the 48.5N slice)")
+    narration_changes.append("s48 S3: 'on a gentler slope: ... fifty kilometres' -> 'also about ... fifty kilometres ..., and in many storms warm fronts "
+                             "slope even more gently' (both slices give about 1:50 here, so 'gentler' was not true of these two lines)")
+    # ground winds 150 km behind / ahead of the lowest traced point (A1 10-m wind, 18 UTC)
+    L_low = sorted(tr)[-1]
+    s_low = (tr[L_low] - LO0) * kmdeg
+    a18 = a1.sel(time="2023-11-01T18")
+    gw = {}
+    for side, off in (("behind", -150.0), ("ahead", 150.0)):
+        sk = s_low + off
+        lo_k = LO0 + sk / kmdeg
+        uu = float(bilin(a18.u10.values.astype(float), a18.lat.values, a18.lon.values, LATC, lo_k))
+        vv = float(bilin(a18.v10.values.astype(float), a18.lat.values, a18.lon.values, LATC, lo_k))
+        dd = float(AT.wind_direction_from(uu, vv))
+        gw[f"cold_{side}"] = {"s_km": r6(sk, 1), "lon": r6(lo_k, 2), "u": r6(uu, 2), "v": r6(vv, 2), "dir_from": r6(dd, 1), "speed": r6(np.hypot(uu, vv), 1),
+                              "from": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][int(((dd + 22.5) % 360) // 45)]}
+    rng("W45", "s47 ground wind ahead of the cold front (warm sector, 46.5N) from S-SW (157.5-247.5 deg)", gw["cold_ahead"]["dir_from"], 157.5, 247.5)
+    rng("W45", "s47 ground wind behind the cold front (46.5N) from W-NW (247.5-337.5 deg)", gw["cold_behind"]["dir_from"], 247.5, 337.5)
+    # in-slice particles (W73), same recipe as the 48.5N slice
+    rs = np.random.default_rng(77)
+    NP, NG = 1500, 3
+    seeds = np.stack([rs.uniform(10e3, s_m[-1] - 10e3, NP * NG), rs.uniform(150.0, 7800.0, NP * NG)], -1)
+    trs, trz = call(SEC_ + "in_section_tracks", "s47", "slice_cf.bin", "RK4 tracks of the in-slice wind (u_s, w), 12 × 300 s, 3 generations × 1500 (46.5N)",
+                    heavy_call=True, us=us, wz=wz, s=s_m, z=Zn, seeds=seeds, dt=300.0, nsteps=12)
+    alive = float(np.mean(np.isfinite(trs[-1])))
+    rng("W73", "s47 (46.5N) >= 80 % of the particles stay in the slice for the 1-h track", alive, 0.8, 1.0)
+    XS, ZS = 1.0 / 100.0, 80.0 / 100.0
+    pts = [{"hPa": int(L), "z_m": r6(C[L][0], 0), "lon": r6(tr[L], 3), "s_km": r6((tr[L] - LO0) * kmdeg, 1)} for L in sorted(tr, reverse=True)]
+    U["slice_cf"] = {"lat": LATC, "lon0": LO0, "lon1": LO1, "time_utc": "2023-11-01T18", "ns": int(s_m.size), "length_km": r6(s_m[-1] / 1e3, 1),
+                     "zg_km": [0, 8], "nz": int(zg.size), "XS": XS, "ZS": ZS, "z_exaggeration": 80, "anomaly_range_C": [-8, 8], "rh_cloud": 0.95,
+                     "km_per_deg": r6(kmdeg, 4),
+                     "cold_front": {"traced": pts, "fit_levels_hPa": [int(up[0]), int(up[-1])], "fit_a_km_per_km": r6(a_, 3), "fit_b_km": r6(b_, 2),
+                                    "fit_z_km": [r6(zf[0], 3), r6(zf[-1], 3)], "corr": r6(rr, 3), "slope_km_per_km": r6(abs(a_), 2),
+                                    "slope_normal_km_per_km": r6(slope_n, 2), "front_normal_angle_deg": r6(ang, 1), "spoken": 50,
+                                    "map_cross_lon": r6(xm, 3), "map_cross_s_km": r6((xm - LO0) * kmdeg, 1), "slice_850_lon": r6(a8, 3),
+                                    "dist_850_km": r6(d850, 1), "below_850_hPa": [int(L) for L in lo_t]},
+                     "ground_winds": gw,
+                     "particles": {"n": NP, "generations": NG, "dt_s": 300, "nsteps": 12, "alive_end": r6(alive, 3), "seed": 77}}
+    sh, sb = bin_pack("slice_cf", [
+        ("anom", ["z", "s"], Ta, "K", "ERA5 T minus its along-slice mean (46.5N), regular z 0-8 km (81) × s (73)"),
+        ("rh", ["z", "s"], RHg, "1", "relative humidity on the same grid"),
+        ("trs", ["step", "p"], trs / 1e3, "km", "particle s along the slice (12 steps of 300 s, 4500 particles)"),
+        ("trz", ["step", "p"], trz / 1e3, "km", "particle height"),
+    ], {"s_km": r6(s_m / 1e3, 2), "z_km": r6(zg / 1e3, 2)}, {})
+    files["slice_cf.json"] = sh
+    bins["slice_cf.bin"] = sb
 
 
 def render_assets(data_hashes: dict) -> dict:

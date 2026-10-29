@@ -4,12 +4,12 @@
  "builder": "movies/data/build_ch00_weather_basics.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "3a3985d3a37f1c22fdc853aaa92b301c3d9bc3eb",
-  "dirty_tracked": true,
+  "commit": "08f83b7dcf563e382a21664e6784e277ed756fcc",
+  "dirty_tracked": false,
   "moist_py_tracked": true,
   "moist_py_sha256": "419e57194a9d136b5f91f702bc0ab1f88b36bfb3e4b7c3a9e0e51dbb4a53ef3c",
   "atmos_py_tracked": true,
-  "atmos_py_sha256": "bed1f9befb5134f51d5915df6c09668dace8a9d6b25eee9a64c623742b176630",
+  "atmos_py_sha256": "fd7273ed9cd4c0c29e4b77ddeb478f4b8a0924cd759f007bea4d1fc968dc207f",
   "constants_py_tracked": true,
   "constants_py_sha256": "b4c5cf36188cca8c78ba9e72f8e54cf5717e3d17e363247645129bd1e6bd5aa8",
   "statics_py_tracked": true,
@@ -61,7 +61,7 @@
   },
   "exaggerations": [
    "atmosphere shell drawn 50x thicker (s02 on, said)",
-   "front side views 50x taller (s47-s48, said)",
+   "front side views 80x taller (s47-s48, said in s48)",
    "troposphere 50x in the s25 inset",
    "model grid drawn every 2° (s38)"
   ]
@@ -86,8 +86,11 @@
   "s49 S6: 'The arrows show the wind turning sharply where it crosses each front.' -> 'The arrows show the wind turning as it crosses the fronts, most sharply at the warm front.' (850-hPa median direction change across the lines inside the map: warm 55°, cold 11°)",
   "s49 S5: 'curving away to the south' -> 'curving away to the south-west' (the 18 UTC cold front runs from 48N 6.7W to 42.5N 34.5W)",
   "s03 (not narration): the parcel path is shown for its first 32 steps (320 min of the 6 h), until it reaches the Channel coast; the narration says no duration",
-  "s47 S5: slope 'fifty to a hundred kilometres' -> 'fifteen kilometres' (ERA5 slice 925-500 hPa: 1:15.1, W70)",
-  "s48 S3: slope 'one or two hundred kilometres' -> 'fifty kilometres' (ERA5 slice 975-600 hPa: 1:52.3, W71)"
+  "s48 S3: slope 'one or two hundred kilometres' -> 'fifty kilometres' (ERA5 slice 975-600 hPa: 1:52.3, W71)",
+  "s47 S5: slope 'fifteen kilometres' (48.5N, wrong feature) -> 'fifty kilometres' (ERA5 slice 46.5N, 850-650 hPa: 1:49.9 along the slice, 1:43.4 normal to the front; W70)",
+  "s47 S2: 'running from west to east through Brest' -> 'across the Bay of Biscay, right through the cold front on the map' (46.5N slice, W77)",
+  "s48 S1: 'move east along the same slice' -> 'move north, to a second slice that runs through Brest' (the 48.5N slice)",
+  "s48 S3: 'on a gentler slope: ... fifty kilometres' -> 'also about ... fifty kilometres ..., and in many storms warm fronts slope even more gently' (both slices give about 1:50 here, so 'gentler' was not true of these two lines)"
  ],
  "inputs_sha256": {
   "data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc": "4f6e4f9fcb290eb0afa0616c583f9e274b15f832078e20e585e4ceadcb52ad21",
@@ -355,8 +358,9 @@
   "title.json": "04121568f55b9cced4d5d87bd1e44f03d24ca091d2fef03d7ffcbd1935e4a8ea",
   "brittany_etopo.json": "fa64a858039fa13880e3c1a5d1f342382e508b18b0c0a29cfc5db2c25ef0fef1",
   "slice.json": "70bf3553c3e46bdcdcd9a75df8b5cea632630c5332ce08849567d2ffee45a1d0",
+  "slice_cf.json": "6cbe15c8d2d0ca7aa93b788550143851d40de153191dc78ce1b8a4d8bb1488ab",
   "t850_particles.json": "f1394d5ca09f081d76f6cc6ebe64240ee652b8f916e2803563147326b78eed4d",
-  "uf1.json": "6d40f1d59b72ef0a1b0223e1981705e2ab09e2400ccd5dced85d09b26445a058",
+  "uf1.json": "a77d4d5df23d868a4771116bce221b78c552fbbc21362cf4f617d9e05b014a09",
   "global_20231102T12.bin": "7dc32374e0bace11dff550556b7e540f1bd1ec39f7d8b4b2d7b634671518b12b",
   "ciaran_hourly.bin": "3fdad96e5663c43b92767d3b701cfed3217cac0e583eb6814350a0a6cd308f59",
   "ciaran_850.bin": "b90bf0cc0b20d5a64e61a74b9d0bcea3cddc6ba5d5c9d07f0944241fb2323251",
@@ -365,6 +369,7 @@
   "tibet_etopo.bin": "dfd09a6279375a1c8f300c5123d3a94dca28d1226c0180a6b78f38e50de1d997",
   "brittany_etopo.bin": "57d890124e61786e8b21d9b88fce527f5fe8237004e0a38e0615fc18b5b173cf",
   "slice.bin": "adb39926a830f1ea2e13015f46dd2eedaa6101628b207aad65cdd2fa2c3bf8bc",
+  "slice_cf.bin": "592e686f99e10c09e4250feec17b49bee488988c7e4d40a8c831a9447f1d3621",
   "t850_particles.bin": "5f3f5eb075981ff44c6e959d3d60dbdc25dbc49c342559e9d18a181e1eee3b7b",
   "cesium_tibet_anchors.json": "e3a99fe65a6580548797d377efa6341a4831b54dfc48612153e02a8aba2ca54a"
  },
@@ -3243,45 +3248,9 @@
    "pass": true
   },
   {
-   "id": "W70",
-   "name": "s47 anomaly: along-slice mean is 0 at every height (|mean| < 1e-9 K)",
+   "id": "W71",
+   "name": "s48 anomaly (48.5N slice): along-slice mean is 0 at every height (|mean| < 1e-9 K)",
    "value": true,
-   "ref": true,
-   "tol": 0,
-   "pass": true
-  },
-  {
-   "id": "W70",
-   "name": "s47 cold-frontal zone at 850 hPa (largest smoothed dT/ds) lies at 14-11W",
-   "value": [
-    -12.75
-   ],
-   "ref": "[-14.0, -11.0]",
-   "tol": null,
-   "pass": true
-  },
-  {
-   "id": "W70",
-   "name": "s47 the cold front slopes up towards the west (cold side): ds/dz < 0",
-   "value": -15.06,
-   "ref": true,
-   "tol": 0,
-   "pass": true
-  },
-  {
-   "id": "W70",
-   "name": "s47 cold-front slope 1:12-1:20 (narration follows the data: 'one kilometre up for every fifteen kilometres'; planned 1:30-1:150)",
-   "value": [
-    15.057936
-   ],
-   "ref": "[12.0, 20.0]",
-   "tol": null,
-   "pass": true
-  },
-  {
-   "id": "W70",
-   "name": "s47 spoken 'fifteen' = the slope rounded to the nearest 5 km",
-   "value": 15.06,
    "ref": true,
    "tol": 0,
    "pass": true
@@ -3336,7 +3305,7 @@
   },
   {
    "id": "W72",
-   "name": "s47 slice length 22° of longitude at 48.5N = 1621 km",
+   "name": "s48 slice length 22° of longitude at 48.5N = 1621 km",
    "value": [
     1620.959728
    ],
@@ -3356,7 +3325,7 @@
   },
   {
    "id": "W73",
-   "name": "s47 particle tracks are deterministic (same seeds → identical tracks)",
+   "name": "s48 particle tracks are deterministic (same seeds → identical tracks)",
    "value": true,
    "ref": true,
    "tol": 0,
@@ -3364,7 +3333,7 @@
   },
   {
    "id": "W73",
-   "name": "s47 ≥ 80 % of the particles stay in the slice for the 1-h track",
+   "name": "s48 ≥ 80 % of the particles stay in the slice for the 1-h track",
    "value": [
     0.961556
    ],
@@ -3373,10 +3342,106 @@
    "pass": true
   },
   {
-   "id": "W45",
-   "name": "s47 ground wind ahead of the cold front (warm sector) from S-SW (157.5-247.5°)",
+   "id": "W72",
+   "name": "s47 slice length 18 deg of longitude at 46.5N = 1379 km",
    "value": [
-    232.9
+    1377.747658
+   ],
+   "ref": [
+    1379.0
+   ],
+   "tol": 1.5,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 anomaly (46.5N slice): along-slice mean is 0 at every height (|mean| < 1e-9 K)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 the 46.5N slice crosses the s49 map's analysed 850-hPa cold front (fronts.json, 18 UTC) exactly once",
+   "value": [
+    -7.389
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W77",
+   "name": "s47 the slice's own 850-hPa cold front lies within 50 km of the map's cold front where the slice crosses it",
+   "value": [
+    0.780724
+   ],
+   "ref": "[0.0, 50.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 the cold front is traced on >= 5 levels above 850 hPa (<= 80 km per level step)",
+   "value": [
+    6.0
+   ],
+   "ref": "[5, 20]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 the cold front slopes up towards the west (cold side): ds/dz < 0",
+   "value": -49.86,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 cold-front slope along the slice (850 hPa upwards, least squares) 1:40-1:60",
+   "value": [
+    49.860303
+   ],
+   "ref": "[40.0, 60.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 the fit is tight: correlation of s with z <= -0.9",
+   "value": [
+    -0.94378
+   ],
+   "ref": "[-1.0, -0.9]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 spoken 'fifty' = the slope rounded to the nearest 5 km",
+   "value": 49.86,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W70",
+   "name": "s47 slope normal to the front (slice at the front-normal angle) 1:35-1:55 (recorded; the narration says 'in this slice')",
+   "value": [
+    43.447837
+   ],
+   "ref": "[35.0, 55.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W45",
+   "name": "s47 ground wind ahead of the cold front (warm sector, 46.5N) from S-SW (157.5-247.5 deg)",
+   "value": [
+    199.5
    ],
    "ref": "[157.5, 247.5]",
    "tol": null,
@@ -3384,11 +3449,21 @@
   },
   {
    "id": "W45",
-   "name": "s47 ground wind behind the cold front from W-NW (247.5-337.5°)",
+   "name": "s47 ground wind behind the cold front (46.5N) from W-NW (247.5-337.5 deg)",
    "value": [
-    318.7
+    252.2
    ],
    "ref": "[247.5, 337.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W73",
+   "name": "s47 (46.5N) >= 80 % of the particles stay in the slice for the 1-h track",
+   "value": [
+    0.940889
+   ],
+   "ref": "[0.8, 1.0]",
    "tol": null,
    "pass": true
   },
@@ -6198,6 +6273,436 @@
     "nsteps": 12
    },
    "output_sha256": "18d61e514665eb4abfe0b725dca07695c295f41206696e07369bdb80f8ed9706"
+  },
+  {
+   "fn": "fluidpy.diag.sections.vertical_section",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "temperature along 46.5N (bilinear)",
+   "params": {
+    "F": "array (20, 21, 105), sha256 f07ceef03720e68bd712012cf67545f8ffee6601d922499983d409cc7e7bfc93",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "levels": "array (20,), sha256 0c3f923ac3c869f0967f9a4ce03a6663da69785cde2ab55331e3cad6f2433d17",
+    "path_lat": "array (2,), sha256 bc273e7eb5f767c5928c04273da3708b62101983ed9ea0af4f79e121958fce56",
+    "path_lon": "array (2,), sha256 233c7e58df08b366e7ef9d891af44d2b5dc855f392497aa5934273ebc8aa275b",
+    "n": 73,
+    "along": "parallel"
+   },
+   "output_sha256": "15983be92c0bac6a552402f940ecbbb0f6f574b78954933bfedd9bb63a96c867"
+  },
+  {
+   "fn": "fluidpy.diag.sections.vertical_section",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "geopotential along 46.5N",
+   "params": {
+    "F": "array (20, 21, 105), sha256 15e20bfe07d375283dc298842a3a023946ed08a953258b7813e6c52e062c5b53",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "levels": "array (20,), sha256 0c3f923ac3c869f0967f9a4ce03a6663da69785cde2ab55331e3cad6f2433d17",
+    "path_lat": "array (2,), sha256 bc273e7eb5f767c5928c04273da3708b62101983ed9ea0af4f79e121958fce56",
+    "path_lon": "array (2,), sha256 233c7e58df08b366e7ef9d891af44d2b5dc855f392497aa5934273ebc8aa275b",
+    "n": 73,
+    "along": "parallel"
+   },
+   "output_sha256": "b3986b47b1f87315f83eea238db681017c69e0d393d2690d148dfbdd7836f207"
+  },
+  {
+   "fn": "fluidpy.diag.sections.vertical_section",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "specific humidity along 46.5N",
+   "params": {
+    "F": "array (20, 21, 105), sha256 8881b519882d0f966f77cb3fa16e9a86addf9e6b7875106f39b82da40a48193e",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "levels": "array (20,), sha256 0c3f923ac3c869f0967f9a4ce03a6663da69785cde2ab55331e3cad6f2433d17",
+    "path_lat": "array (2,), sha256 bc273e7eb5f767c5928c04273da3708b62101983ed9ea0af4f79e121958fce56",
+    "path_lon": "array (2,), sha256 233c7e58df08b366e7ef9d891af44d2b5dc855f392497aa5934273ebc8aa275b",
+    "n": 73,
+    "along": "parallel"
+   },
+   "output_sha256": "ee11c14f4c00468e5c6427bb1c7bc91071ae28db3afa1aa5ed23b26395ae6443"
+  },
+  {
+   "fn": "fluidpy.diag.sections.vertical_section",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "u along 46.5N",
+   "params": {
+    "F": "array (20, 21, 105), sha256 fc030b705245207addeba09a10b1980ae3ad97a8d966a148b48ea6447dfb7239",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "levels": "array (20,), sha256 0c3f923ac3c869f0967f9a4ce03a6663da69785cde2ab55331e3cad6f2433d17",
+    "path_lat": "array (2,), sha256 bc273e7eb5f767c5928c04273da3708b62101983ed9ea0af4f79e121958fce56",
+    "path_lon": "array (2,), sha256 233c7e58df08b366e7ef9d891af44d2b5dc855f392497aa5934273ebc8aa275b",
+    "n": 73,
+    "along": "parallel"
+   },
+   "output_sha256": "6ec6e32851a246485fd27887fdf73bdc6c98fafee9ddf716516ff42fc3ae28ee"
+  },
+  {
+   "fn": "fluidpy.diag.sections.vertical_section",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "v along 46.5N",
+   "params": {
+    "F": "array (20, 21, 105), sha256 86ba6bccd4f3bf11f20dd6e044a30927f61847918cedc9ef7804deafe5c6d3ce",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "levels": "array (20,), sha256 0c3f923ac3c869f0967f9a4ce03a6663da69785cde2ab55331e3cad6f2433d17",
+    "path_lat": "array (2,), sha256 bc273e7eb5f767c5928c04273da3708b62101983ed9ea0af4f79e121958fce56",
+    "path_lon": "array (2,), sha256 233c7e58df08b366e7ef9d891af44d2b5dc855f392497aa5934273ebc8aa275b",
+    "n": 73,
+    "along": "parallel"
+   },
+   "output_sha256": "2e054c635ecbcee6f34fd47bec11d0faa5b0a949b3158d054eb3d8b7be5edd44"
+  },
+  {
+   "fn": "fluidpy.diag.sections.vertical_section",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "omega along 46.5N",
+   "params": {
+    "F": "array (20, 21, 105), sha256 6c7172615285d4c7f6db86682e33f63f8f2c3f2fcb8a14f12a9ec31a1633edb1",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "levels": "array (20,), sha256 0c3f923ac3c869f0967f9a4ce03a6663da69785cde2ab55331e3cad6f2433d17",
+    "path_lat": "array (2,), sha256 bc273e7eb5f767c5928c04273da3708b62101983ed9ea0af4f79e121958fce56",
+    "path_lon": "array (2,), sha256 233c7e58df08b366e7ef9d891af44d2b5dc855f392497aa5934273ebc8aa275b",
+    "n": 73,
+    "along": "parallel"
+   },
+   "output_sha256": "202b8802ed58dad05f0b17f9941af2bec557174c254603c8162db92e4aa91e82"
+  },
+  {
+   "fn": "fluidpy.diag.sections.along_section_wind",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "wind along the slice (eastward parallel: u_s = u)",
+   "params": {
+    "u_sec": "array (20, 73), sha256 6ec6e32851a246485fd27887fdf73bdc6c98fafee9ddf716516ff42fc3ae28ee",
+    "v_sec": "array (20, 73), sha256 2e054c635ecbcee6f34fd47bec11d0faa5b0a949b3158d054eb3d8b7be5edd44"
+   },
+   "output_sha256": "a1fae52b90c25523eab2e1720e6ce2b25a77313b6dd9ea6a5fd8d3b95b05cd04"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.omega_to_w",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "w ≈ −ω/(ρg), ρ = p/(R T_v) (Vallis §2.6.2, (2.50c), (18.14))",
+   "params": {
+    "omega": "array (20, 73), sha256 202b8802ed58dad05f0b17f9941af2bec557174c254603c8162db92e4aa91e82",
+    "p": "array (20, 73), sha256 af48e4e2fa085686c70b990468df644ded691ee58cd48fc7836863bd9c6224b9",
+    "T": "array (20, 73), sha256 15983be92c0bac6a552402f940ecbbb0f6f574b78954933bfedd9bb63a96c867",
+    "q": "array (20, 73), sha256 ee11c14f4c00468e5c6427bb1c7bc91071ae28db3afa1aa5ed23b26395ae6443"
+   },
+   "output_sha256": "194593684f23c10feeb1e415e7598203f30f83c72253b679e8041045cec81121"
+  },
+  {
+   "fn": "fluidpy.geo.moist.vapour_pressure_from_q",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "(18.12) e from q",
+   "params": {
+    "q": "array (20, 73), sha256 ee11c14f4c00468e5c6427bb1c7bc91071ae28db3afa1aa5ed23b26395ae6443",
+    "p": "array (20, 73), sha256 af48e4e2fa085686c70b990468df644ded691ee58cd48fc7836863bd9c6224b9"
+   },
+   "output_sha256": "a4a54bf04df6efbb6be0e248a1bec7e187c271282d91352ce78c3f8662cae338"
+  },
+  {
+   "fn": "fluidpy.geo.moist.relative_humidity",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "ℋ = e/e_s(T) (§18.1.2)",
+   "params": {
+    "e": "array (20, 73), sha256 a4a54bf04df6efbb6be0e248a1bec7e187c271282d91352ce78c3f8662cae338",
+    "T": "array (20, 73), sha256 15983be92c0bac6a552402f940ecbbb0f6f574b78954933bfedd9bb63a96c867"
+   },
+   "output_sha256": "a231664342ed4be3bce86560c98c2e2128922a2ae0feffb4d4e9d220b94a7435"
+  },
+  {
+   "fn": "fluidpy.diag.sections.section_anomaly",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "T minus its along-slice mean at each height",
+   "params": {
+    "S": "array (81, 73), sha256 d8e34ac57173d474c613313151be281a1f04200f94df5129585e49fa10747227"
+   },
+   "output_sha256": "9154d0c3ae54d0e541d038c2e08767e086a210b64a982450647a160eb180514b"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 1000 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 d533ee0a83be501cd2af2e20ab7dc59a1d4c5900fcdd17bc8ecebe0d7acf104c",
+    "u": "array (21, 105), sha256 c95fa7d4c5774f71aba640ec70b3ab3f17f08e99afbdf7b25b36ca1b30d13858",
+    "v": "array (21, 105), sha256 0999ba706a71d3d1cd1427de74f753fafa317f69b0abbbed1d33deb3ceea8591",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "36770f367a10cee6c9db1d9387c681feedf7c615319157aa2d11a81649a4f137"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 975 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 939483990a786f9ccc57e0d7c0ffb1d97b42772d8eafbe82365131da9220e763",
+    "u": "array (21, 105), sha256 1530c601110973f4d1509db6ee1db8e876843c5f48637a8a5a24ba7caed2e15c",
+    "v": "array (21, 105), sha256 a8e99b4955e1a701a07b62046d998b95215531683b40f04a907862bed175da86",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "0c1f2cadf534448ce2d0b450a87d73116c52376ce7169436705a9f604cfbce1d"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 950 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 2f192b79215dd4cb3a43879d3170a998bd49d12a952d1317ff62d9683d864b47",
+    "u": "array (21, 105), sha256 ad47dc82879a37473f3b132609f20e596dfac789edeab807811e2fd8b5867c6e",
+    "v": "array (21, 105), sha256 59d12d2599c5c34bc3eee1007b87abc52224034551ad04dda7c3561d85617a6d",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "54554af0877964b1e034ecde69ca99591968eff88875f71f2ff3e2e59797af5f"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 925 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 35ca7ecc2c66184c08cd8089b831a99faf53e0fcd53eda9797a8037b334b8f87",
+    "u": "array (21, 105), sha256 5e1f6ccbb8c11e429b1647f5440c765229503edfe7a1a8b963e4acce43409fa5",
+    "v": "array (21, 105), sha256 12e05fd60010cd7e0df188bca34d9fb8321a6361dfc40446032fce9ccb67c918",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "85362e948f62a7b9839d2eb940d746b91b98e2f207f967caef3493b9fdc10d8e"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 900 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 d32dde2f1efa90c0ef6539d838d5beb787e388358199f1361e3071891842fc97",
+    "u": "array (21, 105), sha256 fb6d7a57c048acbb565273ccb4af935172bb562455cba1127001e70919d67e8c",
+    "v": "array (21, 105), sha256 252e1e1b70c93e80168e3e00129420f59bc6512bbecc8726e295025ff29b7403",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "1b50df2405312426017694ecb89f4716c18228f984ca8364b27564334713a737"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 875 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 969c0b6be44c2b6fcdcaedf5834d832bd9b91e2a2cbc697b3a878f2e9c4c94b7",
+    "u": "array (21, 105), sha256 1babaceb5a25b591ae1dc399159edbe9e08590c5851f9fe7775de757be376fdf",
+    "v": "array (21, 105), sha256 3a8e9986ea2394718f1ad8d57d41a1a598ee464403c3e88927aa93682f9f57f7",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "5568970d5a2e926cc5750bc506c272e0d928ea868812e16cbf8ba842b4703a9e"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 850 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 906d5a08a994ee2de340867cf010b06c1f3deab118ab2b3a11f10c3d924c6b21",
+    "u": "array (21, 105), sha256 6a09cabda08e48979d8b6e78f24d68a611c5a0dfce4c0160abe98ab17a1088bd",
+    "v": "array (21, 105), sha256 795a6a5f2b7c91f71bd7f0c3d366214f1649bbaa4784ac0afd69eaf8ee76219a",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "68a0a45f7de1073d1799f9d55c2b394125e900ebbc8d6aa7bc1e35936ad81195"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 825 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 c02c228f3ec2c7bd418b1b895471a20b1d0de2e358a5c979e13c2bd2fd0d84cb",
+    "u": "array (21, 105), sha256 307712f8522392f7ae9ba71064e1277dcdd2079c62ccfab00658fc45b7a8da9a",
+    "v": "array (21, 105), sha256 67bce24138898cfb8ff3e6233234c19f3b297333449471b20d1a6bad5e6610fa",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "b43c5dca41dc123a91583c83797d1c985ed2c2329c19189f4a844d4ae5980b7c"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 800 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 c1eeed6f33d84308825f12f4c7a028e3aaf17602f36e453dc435c3f476cd2352",
+    "u": "array (21, 105), sha256 fce46ebf5b5e83815cda947a22639c49ebe7d0c773047bb72ddc438f0808ea40",
+    "v": "array (21, 105), sha256 dbf9644e85c2252b5746473a23218390931d26efe1a4dbf8491f164a6b43fe8d",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "35fe5b5260ddafdc8fd5c756820fcd50682aa55f006d723378328e1826118b6e"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 775 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 9f1f48fd8673365dcff618ce40aefa8c0c845ab61bc9476e4d6ca7cce9539c64",
+    "u": "array (21, 105), sha256 593a8f481082e2ad362ce63e31ff184ca8fe2df9171ab917fffa32182cf34bf9",
+    "v": "array (21, 105), sha256 8a0c2b82906f4092f8e666b50f08453fa38f7b6ed9ce42f15a1a1a60cba5443e",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "a9d98b0cb398cae27b2f5bdbf46d6b429b4a3b6510193e2e971c5c345cfeffce"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 750 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 e5c0691a2cf7901f469f873e225e31eee309371774749bcc5fa15867cb27b3e1",
+    "u": "array (21, 105), sha256 8962022302ca417a8ae800794cd95db8f48214077c9fd36f9869d1dd61690c46",
+    "v": "array (21, 105), sha256 38e57ac4b63810cf75c501c757d991bdd0da17e7375ae1f77b6b4e90381b997f",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "2516e51a901c6559d7fe237e4da078cf00d678f497ec9ca87f8e835e9e028ee1"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 700 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 8f535ec87286ae595e170f2f9ae8319fb7cd30f4a0ae1edd4df22f001167bcf5",
+    "u": "array (21, 105), sha256 df78f149fffa1dd1b35eee2099127a3d6018f1e182df34d7edda0f2e3f56d8ac",
+    "v": "array (21, 105), sha256 f3ad3329bf20cce7764b192dbc24b90c49613db1147ec9ffba7118c73415e24c",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "54cd8e7e6dbb201b5fc338ba70ae1a60990391a64d576f712cd94db8552820ff"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 650 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 21f885bb79bbd6d5cd4db1e8248fe0ecad007f69269b89d12d3f0d4113e42622",
+    "u": "array (21, 105), sha256 46a7c25d279988db4b928c5c5dc361338fc0c42da075ec8b11b5226f6af54efd",
+    "v": "array (21, 105), sha256 a8d6a397c09f11655da2da27aadcb27ac9f400f6917a44b3c3a45052e6e7bce9",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "d7b7c33252eefe3f5629734204364e6ea98498e04de81d98eaa1819163fe84b3"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 600 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 2c3fb606438d99d54a3db66e912ce7af3ecbb509ec169cf2498b735ab0f90cd9",
+    "u": "array (21, 105), sha256 d33b749a2c815a33202002b7c3a22fb0cee75aef41274874f34d0892a8a855a2",
+    "v": "array (21, 105), sha256 0908dfa9d9e966f1efefd3b86f279fa2a02c441e2ab53d637eef8dab23ae9790",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "0f56b48f596cdafb40f63f7d5cf6e86359ab6bc24301dc57fde41e4749f26de2"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 550 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 ff9997e74c7f728bcc6dba2bbca9914f4a3142386fb9eff209acc01d8d2fc06b",
+    "u": "array (21, 105), sha256 fb3f80858ba80682b6b3634b16f50306f7a9a454ac2685f0419e91b1b60d2253",
+    "v": "array (21, 105), sha256 f821cb56b5b91e24a351ff6bc591bbf4229cdb05bd958390d75cf4c276109b06",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "0e36a12328afaf84a14a0dbadf4c914edec580cb8a27036558aa34bdff0bf255"
+  },
+  {
+   "fn": "fluidpy.diag.fronts.front_lines",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "cold front at 500 hPa (Hewson TFP, locate='centre', 100-km smoothing)",
+   "params": {
+    "T": "array (21, 105), sha256 027c771144f83234b5888e973d7020f35e31e2eaeaa196ab4618ae6d6e4c397a",
+    "u": "array (21, 105), sha256 8d16e94a9aefcce298f2309e30dcde1f3a8470bf8b50e7a7660b556a938ec9da",
+    "v": "array (21, 105), sha256 47b7035ac004764179ddf21e6fe8f708d6f7383504561d0a2e17472ab9f537d0",
+    "lat": "array (21,), sha256 b11fba8508a671809d86b71f715eadc7024d83d7295c648b51fdcfc125c1ccf0",
+    "lon": "array (105,), sha256 cb9245246dca5bb2bfa50d1d36237bb8a73c3a05b2b53e3f49d3722931068eeb",
+    "locate": "centre",
+    "min_length_km": 100.0
+   },
+   "output_sha256": "eb4e0d67746fad3496f3514bb70d7326c689ffca68e8cfa51186eb79eeacd1e3"
+  },
+  {
+   "fn": "fluidpy.diag.sections.in_section_tracks",
+   "scene": "s47",
+   "data": "data/slice_cf.bin",
+   "eq": "RK4 tracks of the in-slice wind (u_s, w), 12 × 300 s, 3 generations × 1500 (46.5N)",
+   "params": {
+    "us": "array (20, 73), sha256 a1fae52b90c25523eab2e1720e6ce2b25a77313b6dd9ea6a5fd8d3b95b05cd04",
+    "wz": "array (20, 73), sha256 194593684f23c10feeb1e415e7598203f30f83c72253b679e8041045cec81121",
+    "s": "array (73,), sha256 9f090f06edcd07ddef1bd207afbdd320ac1506f8426171bde95f792700fd817e",
+    "z": "array (20, 73), sha256 807e0b08c12fdfa613030ebf2048d77b8228fceb85c7e400776bf1b96ba84628",
+    "seeds": "array (4500, 2), sha256 17903ade096a981140e72d3d78643f7536ee7072718c9dc553ce46acf91c1ebb",
+    "dt": 300.0,
+    "nsteps": 12
+   },
+   "output_sha256": "63a029153c25f68124c16772480579e92d2b1c75b9f5df88aef15b476e87476e"
   },
   {
    "fn": "fluidpy.diag.trajectories.advect_on_sphere",

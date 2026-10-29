@@ -88,12 +88,12 @@ export const WedgeEarth: React.FC<{ tex: THREE.Texture | null; lon0: number; sli
   if (mW.map !== tex) { mW.map = tex; mW.needsUpdate = true; }
   const s = Math.max(0, Math.min(1, slide));
   const mid = ll(0, lon0 + 45);
-  mW.opacity = 1 - 0.85 * s;
+  mW.opacity = 1 - s; mW.depthWrite = s < 0.01; // UF1 fix 1 (S6): the slid-out quarter fades away completely (no texture strip behind the cut)
   return (
     <group>
       <mesh geometry={rest} material={mR} />
       {s > 0.002 ? faces.map((g, i) => <mesh key={i} geometry={g} material={mF} />) : null}
-      <mesh geometry={wedge} material={mW} position={[mid[0] * 0.9 * s, 0, mid[2] * 0.9 * s]} renderOrder={4} />
+      {s < 0.995 ? <mesh geometry={wedge} material={mW} position={[mid[0] * 0.9 * s, 0, mid[2] * 0.9 * s]} renderOrder={4} /> : null}
     </group>
   );
 };

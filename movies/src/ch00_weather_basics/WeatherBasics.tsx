@@ -23,6 +23,7 @@ import latestJ from "../../ch00/ch00_weather_basics/data/latest_map.json";
 import cesTibJ from "../../ch00/ch00_weather_basics/data/cesium_tibet_anchors.json";
 import uf1J from "../../ch00/ch00_weather_basics/data/uf1.json";
 import sliceJ from "../../ch00/ch00_weather_basics/data/slice.json";
+import sliceCfJ from "../../ch00/ch00_weather_basics/data/slice_cf.json";
 import britJ from "../../ch00/ch00_weather_basics/data/brittany_etopo.json";
 import { CurvedLink, SunGlyph } from "../house/kit/extras";
 import { C, FONT, T } from "../house/kit/type";
@@ -91,7 +92,7 @@ const BA = basicsJ as any, AM = atmosJ as any, SD = soundJ as any, MO = moistJ a
 const ISO_G = (isoGJ as any).levels as IsoLevel[];
 const BC = brestCJ as any, ST = stationsJ as any, HR = hourlyJ as any, BH = brestHJ as any, FR = frontsJ as any, C8 = c850J as any;
 const CL = climJ as any, LN = linesJ as any, TI = titleJ as any;
-const UF = uf1J as any, SLJ = sliceJ as any, BRJ = britJ as any;
+const UF = uf1J as any, SLJ = sliceJ as any, SCJ = sliceCfJ as any, BRJ = britJ as any;
 const COAST = LN.globe_coast_110m as number[][];
 const LUT_THERMAL = GH.luts.thermal as string[], LUT_HALINE = GH.luts.haline as string[], LUT_DENSE = GH.luts.dense as string[],
   LUT_BAL = GH.luts.balance as string[];
@@ -178,18 +179,27 @@ const FieldSphere: React.FC<{ tex: THREE.Texture | null; o: number; r?: number }
 };
 type GlobeProps = { cam: GlobeCam; box?: { x: number; y: number; w: number; h: number }; img?: string; field?: THREE.Texture | null; fieldO?: number;
   field2?: THREE.Texture | null; field2O?: number; shell?: number; shellO?: number; coast?: number; o?: number; dim?: number;
-  over?: (G: GProj) => React.ReactNode; under3d?: React.ReactNode; grat?: number; wedge?: { lon0: number; slide: number } };
+  over?: (G: GProj) => React.ReactNode; under3d?: React.ReactNode; grat?: number; wedge?: { lon0: number; slide: number }; boxed?: boolean; canvas?: { x: number; y: number; w: number; h: number; fadeY: number } };
 const GBOX = { x: 80, y: 40, w: 920, h: 820 };
 const Globe: React.FC<GlobeProps> = ({ cam, box = GBOX, img = IMG.globe, field = null, fieldO = 0, field2 = null, field2O = 0, shell = 0, shellO = 0.32, coast = 0.45,
-  o = 1, dim = 1, over, under3d, grat = 0, wedge }) => {
+  o = 1, dim = 1, over, under3d, grat = 0, wedge, boxed = false, canvas }) => {
   const tex = useTex(img);
-  const st = globeCam({ ...cam, pp: [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);
-  const G = globeProj(st, box.w, box.h, box.x, box.y);
+  // UF1 fix 1 (v4 review 1 M4): the main globe draws into a full-frame canvas with the SAME pixel scale and centre as its
+  // box (fov widened so tan(fov/2)/H is unchanged; principal point moved by the box offset), so a zoomed globe is never cut
+  // by the box's straight edges; the canvas fades out over y 850-900 so the caption band stays clear.
+  const full = (box === GBOX && !boxed) || !!canvas, CV = canvas ?? (full ? { x: 0, y: 0, w: 1920, h: 1080 } : box);
+  const fy = canvas ? canvas.fadeY - canvas.y : 850;
+  const fov0 = cam.fov ?? 35, fovC = full ? (2 * Math.atan(Math.tan((fov0 * D2R) / 2) * CV.h / box.h)) / D2R : fov0;
+  const ppC: Pt = cam.pp ? [cam.pp[0] + box.x - CV.x, cam.pp[1] + box.y - CV.y] : [box.x - CV.x + box.w / 2, box.y - CV.y + box.h / 2];
+  const st = globeCam({ ...cam, fov: fovC, pp: ppC }, ppC);
+  const G = globeProj(st, CV.w, CV.h, CV.x, CV.y);
   if (o <= 0) return null;
   const id = `gc${box.x}_${box.y}`;
+  const fade = full ? `linear-gradient(to bottom, black 0px, black ${fy}px, transparent ${fy + 45}px)` : undefined;
   return (
     <>
-      <View3D st={st} x={box.x} y={box.y} w={box.w} h={box.h} o={tex ? o : 0} key3={st.pos} amb={1.6} dir={1.4}>
+      <View3D st={st} x={CV.x} y={CV.y} w={CV.w} h={CV.h} o={tex ? o : 0} key3={st.pos} amb={1.6} dir={1.4}
+        style={fade ? { WebkitMaskImage: fade, maskImage: fade } : undefined}>
         {wedge && wedge.slide > 0 ? <WedgeEarth tex={tex} lon0={wedge.lon0} slide={wedge.slide} /> : <GlobeMesh tex={tex} dim={dim} />}
         <FieldSphere tex={field} o={fieldO} />
         <FieldSphere tex={field2} o={field2O} r={1.003} />
@@ -197,7 +207,7 @@ const Globe: React.FC<GlobeProps> = ({ cam, box = GBOX, img = IMG.globe, field =
         {under3d}
       </View3D>
       <Svg o={o}>
-        <defs><clipPath id={id}><rect x={box.x} y={box.y} width={box.w} height={box.h} /></clipPath></defs>
+        <defs><clipPath id={id}><rect x={CV.x} y={CV.y} width={CV.w} height={full ? fy + 20 : CV.h} /></clipPath></defs>
         <g clipPath={`url(#${id})`}>
           {grat > 0 ? <Graticule G={G} step={30} o={grat} /> : null}
           {coast > 0 ? <path d={coastPath(G, COAST)} fill="none" stroke={C.key} strokeOpacity={coast} strokeWidth={1.6} /> : null}
@@ -331,7 +341,7 @@ const SondeGlyph: React.FC<{ x: number; y: number; s?: number; o?: number }> = (
   <g opacity={o}>
     <circle cx={x} cy={y - (36 + 24) * s} r={24 * s} fill="#eef2f8" stroke={C.bg} strokeWidth={3} />
     <line x1={x} y1={y - 36 * s} x2={x} y2={y - 26 * s} stroke={C.key} strokeWidth={2} />
-    <rect x={x - 8 * s} y={y - 26 * s} width={16 * s} height={12 * s} fill={C.key} stroke={C.gold} strokeWidth={2} />
+    <rect x={x - 8 * s} y={y - 26 * s} width={16 * s} height={12 * s} fill={C.second} stroke={C.bg} strokeWidth={2.5} /> {/* fix 1 (U-WB-21): orange box, not gold like the trail */}
   </g>
 );
 /** weather balloon with its radiosonde box */
@@ -387,6 +397,9 @@ const SrcLine: React.FC<{ id: string; i?: number; o?: number; x?: number; w?: nu
   const { s, lines } = srcLines(t, w, x);
   return (
     <g opacity={o} data-src={`${id}:${i}`}>
+      {/* UF1 fix 1 (review 1 S4): a dark backing band so the line reads on imagery (maps, satellite pictures, globes) */}
+      {lines.map((ln, k) => { const yy = y - (lines.length - 1 - k) * s * 1.18, ww = textW(ln, s) * 1.02;
+        return <rect key={`b${k}`} x={x - 10} y={yy - s * 0.66} width={ww + 20} height={s * 1.32} rx={6} fill={C.bg} opacity={0.72} />; })}
       {lines.map((ln, k) => <text key={k} x={x} y={y - (lines.length - 1 - k) * s * 1.18} fill={C.muted} fontSize={s} fontFamily={FONT} fontWeight={500}
         dominantBaseline="central" stroke={C.bg} strokeWidth={0.2 * s} strokeLinejoin="round" paintOrder="stroke">{ln}</text>)}
     </g>
@@ -493,8 +506,10 @@ const S01: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01_hook");
   // UF1 U-WB-03, R4: turn, zoom, change direction; end = s02's first camera
   const tRing = AT(k, 1, "real storm");
-  const cam = globePath([{ f: 0, lat: 46, lon: -22, dist: 3.8 }, { f: AT(k, 1, "pressure"), lat: 38, lon: -40, dist: 3.3 }, { f: AT(k, 1, "wind"), lat: 50, lon: -12, dist: 3.0 },
-    { f: tRing, lat: 53, lon: -2, dist: 2.5 }, { f: LEN(k), lat: 35, lon: -15, dist: 3.8 }], f);
+  // UF1 fix 1 (review 1 M4, U-WB-03): the spin visibly reverses — the Earth turns east (lon of view falls 40°) up to "pressure",
+  // then back west (view lon rises 55°) to "wind", then the zoom to Ciarán (dist 2.9: the whole disc stays in the full-frame canvas)
+  const cam = globePath([{ f: 0, lat: 44, lon: 0, dist: 3.8 }, { f: AT(k, 1, "pressure"), lat: 38, lon: -40, dist: 3.4 }, { f: AT(k, 1, "wind"), lat: 48, lon: 15, dist: 3.2 },
+    { f: tRing, lat: 53, lon: -2, dist: 2.9 }, { f: LEN(k), lat: 35, lon: -15, dist: 3.8 }], f);
   const words = ["pressure", "temperature", "humidity", "wind"];
   return (
     <Scene>
@@ -555,11 +570,11 @@ const S02: React.FC = () => {
   const slide = easeIO(clamp((f - tR + 6) / 24, 0, 1)) * (1 - easeIO(clamp((f - SE(k, 3) - 4) / 24, 0, 1)));
   const rodO = clamp((slide - 0.6) / 0.4, 0, 1);
   const pulseT = clamp((f - tCS) / 45, 0, 1);
-  // the hair-line shell zoom circle (×40) on the upper-right limb during S3 to the radius
+  // the hair-line shell zoom circle (×50) on the upper-right limb during S3 to the radius
   const R = silR(cam.dist, GBOX.h), cx = GBOX.x + GBOX.w / 2, cy = GBOX.y + GBOX.h / 2;
   const zO = win(f, SS(k, 2) + 40, tR - 14);
   const lp: Pt = [cx + R * 0.707, cy - R * 0.707], ic: Pt = [cx + 250, cy - 250], ir = 120;
-  const band = Math.max(3, (12 / 6371) * R * 40);
+  const band = Math.max(3, (12 / 6371) * R * 50); // UF1 fix 1 (S6): the magnifier enlarges ×50, the number the narration says
   const rows: CalcRow[] = [
     { rhs: EQ_S02, at: tFr },
     { rhs: String.raw`0.002 \times 150\ \text{mm} \approx 0.3\ \text{mm}`, at: tSh, ul: AT(k, 7, "three tenths") },
@@ -579,7 +594,7 @@ const S02: React.FC = () => {
           return rodO > 0 ? <Lbl x={m[0]} y={m[1] - 50} t="6371 km" c={C.second} s={T.key} a="middle" o={rodO} /> : null;
         }} />
       <Svg>
-        {/* the ×40 zoom circle on the hair-line shell (true scale) */}
+        {/* the ×50 zoom circle on the hair-line shell (true scale) */}
         <g opacity={zO}>
           <circle cx={lp[0]} cy={lp[1]} r={26} fill="none" stroke={C.gold} strokeWidth={4} />
           <line x1={lp[0] + 18} y1={lp[1] - 18} x2={ic[0] - ir * 0.7} y2={ic[1] + ir * 0.7} stroke={C.gold} strokeWidth={4} />
@@ -590,7 +605,7 @@ const S02: React.FC = () => {
             <rect x={ic[0] - ir} y={ic[1] + 20 - band} width={2 * ir} height={band} fill="#7cc4ff" opacity={0.8} />
           </g>
           <circle cx={ic[0]} cy={ic[1]} r={ir} fill="none" stroke={C.gold} strokeWidth={4} />
-          <Lbl x={ic[0]} y={ic[1] - 55} t="× 40" c={C.gold} s={T.floor} a="middle" />
+          <Lbl x={ic[0]} y={ic[1] - 55} t="× 50" c={C.gold} s={T.floor} a="middle" />
         </g>
         <Keyword f={f} text="× 50" at={[1110, 842]} appear={t50} s={T.key} />
         {/* fix loop 1 (M2): the maths zone carries the words from S1 on, until the shrink takes the zone */}
@@ -653,9 +668,17 @@ const S03: React.FC = () => {
   const PZ0 = 1500 * BR_ZS, PH = 2400 * BR_ZS, PW = 0.6; // box floats 1.5 km up (×5), 8 km × 8 km × 1.6 km (×5)
   const pc: V3 = [brx(plon), bry(plat), PZ0 + PH / 2];
   const rise = clamp((f - (tEnd - 50)) / 60, 0, 1);
-  const VB = { x: 80, y: 40, w: 1760, h: 820 };
-  const ost = orbitCam({ az: mix(-118, -78, u) , el: mix(36, 30, u) + 14 * easeIO(rise), dist: mix(9, 6.5, easeIO(u)) + 20 * easeIO(rise), target: [pc[0], pc[1], 0.4] }, [VB.w / 2, VB.h / 2 + 60]);
+  // UF1 fix 1 (review 1 S2): full-frame canvas (same pixel scale as the old 1760×820 box, fades over y 850-900), camera
+  // higher (el 50) and held on the middle of the path so the box visibly travels across the frame and no tile edge shows
+  const VB = { x: 0, y: 0, w: 1920, h: 1080 };
+  const fovT = (2 * Math.atan(Math.tan(17.5 * D2R) * 1080 / 820)) / D2R;
+  const mid: V3 = [brx(-3.3), bry((S3.path_lat[0] + S3.path_lat[n - 1]) / 2), 0.4];
+  const ost = orbitCam({ az: mix(-108, -98, u), el: mix(64, 61, u) + 3 * easeIO(rise), dist: mix(24, 23, easeIO(u)) + 1.5 * easeIO(rise), target: mid, fov: fovT },
+    [960, 490]);
   const pr = projector(ost, VB.w, VB.h, VB.x, VB.y);
+  const places: { t: string; la: number; lo: number; s: number; c: string }[] = [
+    { t: "Brest", la: 48.39, lo: -4.49, s: T.floor, c: C.key }, { t: "Brittany", la: 48.05, lo: -2.35, s: T.key, c: C.key },
+    { t: "English Channel", la: 49.0, lo: -3.6, s: T.floor, c: "#cfe3ff" }];
   const hr = (S3.dt_s * fi) / 3600, h0 = Math.min(S3.arrows.u.length - 2, Math.floor(hr)), wh = hr - h0;
   const AR = S3.arrows;
   const trailN = 14, trail: Pt[] = [];
@@ -670,13 +693,18 @@ const S03: React.FC = () => {
         const c = G.p(48.2, -3.8, 1.01);
         return <g opacity={o}><ellipse cx={c[0]} cy={c[1]} rx={60} ry={44} fill={C.first} fillOpacity={0.3} stroke={C.first} strokeWidth={5} strokeDasharray="10 7" /></g>;
       }} />
-      {xf > 0 && ev && btex ? <View3D st={ost} x={VB.x} y={VB.y} w={VB.w} h={VB.h} o={xf} amb={1.4} dir={1.2}>
+      {xf > 0 && ev && btex ? <View3D st={ost} x={VB.x} y={VB.y} w={VB.w} h={VB.h} o={xf} amb={1.4} dir={1.2}
+        style={{ WebkitMaskImage: "linear-gradient(to bottom, black 0px, black 850px, transparent 900px)", maskImage: "linear-gradient(to bottom, black 0px, black 850px, transparent 900px)" }}>
         <Terrain H={ev.z} ny={BRJ.coords ? 180 : 180} nx={330} x0={brx(BRJ.coords.lon0)} x1={brx(BRJ.coords.lon1)} y0={bry(BRJ.coords.lat0)} y1={bry(BRJ.coords.lat1)} zs={BR_ZS} tex={btex} />
         <Box3D a={[pc[0] - PW, pc[1] - PW, PZ0]} b={[pc[0] + PW, pc[1] + PW, PZ0 + PH]} color={C.first} o={0.35} />
         <BoxEdges3D a={[pc[0] - PW, pc[1] - PW, PZ0]} b={[pc[0] + PW, pc[1] + PW, PZ0 + PH]} color={C.first} px={3} />
       </View3D> : null}
       <Svg>
-        <defs><clipPath id="s03v"><rect x={VB.x} y={VB.y} width={VB.w} height={VB.h} /></clipPath></defs>
+        <defs><clipPath id="s03v"><rect x={0} y={0} width={1920} height={860} /></clipPath>
+          <linearGradient id="s03ft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={C.bg} stopOpacity={1} /><stop offset="1" stopColor={C.bg} stopOpacity={0} /></linearGradient>
+          <linearGradient id="s03fr" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stopColor={C.bg} stopOpacity={1} /><stop offset="1" stopColor={C.bg} stopOpacity={0} /></linearGradient></defs>
+        {/* fix 1 (S2): soft top and right edges so the relief tile's border never shows as a line */}
+        <rect x={0} y={0} width={1920} height={150} fill="url(#s03ft)" opacity={xf} /><rect x={1700} y={0} width={220} height={900} fill="url(#s03fr)" opacity={xf} /><rect x={0} y={0} width={200} height={900} fill="url(#s03fr)" opacity={xf} transform="translate(200 0) scale(-1 1)" />
         <g opacity={xf} clipPath="url(#s03v)">
           {(AR.lat as number[]).map((la, j) => (AR.lon as number[]).map((lo, q) => {
             const uu = AR.u[h0][j][q] * (1 - wh) + AR.u[h0 + 1][j][q] * wh, vv = AR.v[h0][j][q] * (1 - wh) + AR.v[h0 + 1][j][q] * wh;
@@ -686,6 +714,9 @@ const S03: React.FC = () => {
             return <Arrow key={`${j}_${q}`} p={a} q={b} color={C.first} w={4} head={16} o={0.8} />;
           }))}
           <path d={poly(trail)} fill="none" stroke={C.first} strokeWidth={5} strokeOpacity={0.75} strokeLinecap="round" />
+          {places.map((q) => { const w3: V3 = [brx(q.lo), bry(q.la), 0.15]; if (!pr.vis(w3)) return null; const a = pr.p(w3);
+            return <g key={q.t}>{q.t === "Brest" ? <circle cx={a[0]} cy={a[1]} r={8} fill={C.gold} stroke={C.bg} strokeWidth={3} /> : null}
+              <Lbl x={a[0] + (q.t === "Brest" ? -16 : 0)} y={a[1] + (q.t === "Brest" ? -30 : 0)} t={q.t} c={q.c} s={q.s} a={q.t === "Brest" ? "end" : "middle"} /></g>; })}
         </g>
         <g opacity={xf}>
           <Lbl x={top[0]} y={top[1] - 46} t="air parcel" c={C.key} s={T.key} a="middle" />
@@ -694,7 +725,7 @@ const S03: React.FC = () => {
             <circle cx={top[0] - 58} cy={top[1] - 88} r={13} fill={C.second} /><rect x={top[0] - 61} y={top[1] - 126} width={6} height={32} fill={C.second} />
           </g>
           <Droplet x={top[0] + 50} y={top[1] - 110} s={0.8} o={fin(f, tWv)} />
-          <Keyword f={f} text="moves with the wind" at={[1340, 120]} appear={AT(k, 7, "Wherever")} s={T.key} />
+          <Keyword f={f} text="moves with the wind" at={[1420, 110]} appear={AT(k, 7, "Wherever")} s={T.floor} />
         </g>
       </Svg>
       <Svg o={mz}>
@@ -1089,7 +1120,7 @@ const SlabLabels: React.FC<{ pr: Projector; z0: number; z1: number; m1?: number;
   return (
     <g>
       <g opacity={m1}><Lbl x={e1[0] - 10} y={e1[1] + 34} t="1 m" c={C.gold} s={T.floor} a="end" /><Lbl x={e2[0] + 24} y={e2[1] - 6} t="1 m" c={C.gold} s={T.floor} /></g>
-      {area > 0 ? <Lbl x={ct[0]} y={ct[1] - 8} t="1 m²" c={C.gold} s={T.key} a="middle" o={area} /> : null}
+      {area > 0 ? <Lbl x={ct[0]} y={ct[1] - 58} t="1 m²" c={C.gold} s={T.key} a="middle" o={area} /> : null}
       {dz > 0 ? <g opacity={dz}><Bracket p={[b0[0] + 26, b0[1]]} q={[b1[0] + 26, b1[1]]} off={0} c={C.gold} w={5 + 3 * dzPulse} />
         <Lbl x={b0[0] + 64} y={(b0[1] + b1[1]) / 2 + 30} t="Δz" c={C.gold} s={T.key} /></g> : null}
       <Lbl x={tu[0] - 24} y={tu[1] - 10} t="p(z)" c={C.second} s={T.key} a="end" o={up} />
@@ -1144,6 +1175,8 @@ const S14: React.FC = () => {
         {(pr, g) => <SlabLabels pr={pr} z0={g.z0} z1={g.z1} dz={1} dzPulse={pulse(f, tTh, 24)} up={1} dn={1} wt={1} area={fin(f, tBase) * fout(f, tD)} />}
       </SlabStage>
       <Svg>
+        {/* UF1 fix 1 (review 1 S1): the maths zone has a keyword from frame 0 */}
+        <Keyword f={f} text="what does the slab weigh?" at={[1100, 150]} appear={0} out={AT(k, 1, "so its volume") - 8} s={T.key} />
         <Keyword f={f} text="mass = density × volume" at={[110, 100]} appear={AT(k, 2, "mass is density")} out={AT(k, 3, "weight is mass") - 6} s={T.key} />
         <Keyword f={f} text="weight = mass × g" at={[110, 100]} appear={AT(k, 3, "weight is mass")} out={SS(k, 4) + 20} s={T.key} />
         <Keyword f={f} text="push = pressure × area" at={[110, 100]} appear={SS(k, 5)} out={tCan} s={T.key} />
@@ -1266,9 +1299,9 @@ const unitsTeX = (k: number) => {
   const X = (s: string, on: boolean, struck: boolean) => col(struck ? gold : tr, String.raw`\cancel{${col(on ? ink : tr, s)}}`);
   return [
     vis(String.raw`\dfrac{\mathrm{J}}{\mathrm{kg\,K}}`, k >= 0),
-    vis(String.raw`=`, k >= 1), String.raw`\dfrac{${vis(String.raw`\mathrm{m^2}`, k >= 1)}}{${X(String.raw`\mathrm{s^2}`, k >= 1, k >= 4)}\,${X(String.raw`\mathrm{K}`, k >= 1, k >= 2)}}`,
+    vis(String.raw`=`, k >= 1), col(k >= 1 ? ink : tr, String.raw`\dfrac{${vis(String.raw`\mathrm{m^2}`, k >= 1)}}{${X(String.raw`\mathrm{s^2}`, k >= 1, k >= 4)}\,${X(String.raw`\mathrm{K}`, k >= 1, k >= 2)}}`), // fix 1: no bar before its units
     vis(String.raw`\times`, k >= 2), X(String.raw`\mathrm{K}`, k >= 2, k >= 2),
-    vis(String.raw`\div`, k >= 3), String.raw`\dfrac{${X(String.raw`\mathrm{m}`, k >= 3, k >= 4)}}{${X(String.raw`\mathrm{s^2}`, k >= 3, k >= 4)}}`,
+    vis(String.raw`\div`, k >= 3), col(k >= 3 ? ink : tr, String.raw`\dfrac{${X(String.raw`\mathrm{m}`, k >= 3, k >= 4)}}{${X(String.raw`\mathrm{s^2}`, k >= 3, k >= 4)}}`),
     vis(String.raw`= \mathrm{m}`, k >= 5),
   ].join(" ");
 };
@@ -1306,8 +1339,8 @@ const S18: React.FC = () => {
         {(() => { const a = pr.p([2.2, 0.5, 0]), b = pr.p([3.7, 0.5, 0]); return <g opacity={fin(f, tWarm)}>
           <Lbl x={a[0]} y={a[1] + 50} t="colder: smaller H" c={C.local} s={T.floor} a="middle" />
           <Lbl x={b[0] + 30} y={b[1] + 110} t="warmer: bigger H" c={C.second} s={T.floor} a="middle" /></g>; })()}
-        <Keyword f={f} text="g, R, T always together" at={[1100, 300]} appear={AT(k, 0, "always appear together")} out={SS(k, 1)} s={T.key} targets={[[1440, 180]]} />
-        <Keyword f={f} text="scale height" at={[1100, 265]} appear={AT(k, 1, "the scale height")} out={tG} s={T.key} targets={[[1150, 205]]} />
+        <Keyword f={f} text="g, R, T always together" at={[1100, 300]} appear={0} out={AT(k, 1, "the scale height") - 8} s={T.key} targets={[[1440, 180]]} />
+        <Keyword f={f} text="scale height" at={[1100, 318]} appear={AT(k, 1, "the scale height")} out={tG} s={T.key} targets={[[1150, 230]]} />
         {/* U-WB-12: the meaning, on a small graph */}
         <g opacity={gO}>
           <Axes A={MG} xt={[0, 1000]} yt={[0, 4, 8, 12]} yl="km" grid={false} />
@@ -1322,9 +1355,9 @@ const S18: React.FC = () => {
       <TeX s={EQ_S17} x={1100} y={130} size={T.calc} o={fout(f, SS(k, 1) - 6)} />
       <TeX s={EQ_S18} x={1100} y={150} size={96} o={fin(f, AT(k, 1, "the scale height"))} />
       <TeX s={String.raw`\dfrac{\partial p}{\partial z} = -\dfrac{p}{H}`} x={1570} y={150} size={T.calc} o={fin(f, AT(k, 2, "much simpler"))} />
-      {tU.map((t0, i) => <TeX key={i} s={unitsTeX(i)} x={1100} y={400} size={58} o={fin(f, t0) * fout(f, tG - 8)} />)}
-      <Svg><Keyword f={f} text="what kind of quantity?" at={[1100, 380]} appear={SS(k, 3)} out={tU[0] - 6} s={T.key} />
-        <line x1={1640} x2={1700} y1={442} y2={442} stroke={C.gold} strokeWidth={5} opacity={fin(f, tU[5]) * fout(f, tG - 8)} /></Svg>
+      {tU.map((t0, i) => <TeX key={i} s={unitsTeX(i)} x={1100} y={420} size={58} o={fin(f, t0) * fout(f, tG - 8)} />)}
+      <Svg><Keyword f={f} text="what kind of quantity?" at={[1100, 400]} appear={SS(k, 3)} out={tU[0] - 6} s={T.key} />
+        <line x1={1640} x2={1700} y1={462} y2={462} stroke={C.gold} strokeWidth={5} opacity={fin(f, tU[5]) * fout(f, tG - 8)} /></Svg>
     </Scene>
   );
 };
@@ -1382,7 +1415,8 @@ const S18B: React.FC = () => {
 
 // ================================================================ s19 solving for p(z) (UF1 U-WB-14: the assumption, divide, the slope of ln)
 /** the ln p inset (lower right of the picture zone): height up 0-30 km, ln p across */
-const LNG: Ax = { x: 600, y: 430, w: 320, h: 300, xr: [0, 1], yr: [0, 30] };
+// UF1 fix 1 (review 1 M2, S1): the ln p inset sits where the big graph is (whose empty axes fade while it shows), clear of the CalcStack
+const LNG: Ax = { x: 200, y: 260, w: 380, h: 420, xr: [0, 1], yr: [0, 30] };
 const LnInset: React.FC<{ f: number; draw: number; o?: number; marks?: number; tri?: number }> = ({ draw, o = 1, marks = 0, tri = 0 }) => {
   if (o <= 0) return null;
   const X = axX(LNG), Y = axY(LNG), zt = 30 * draw;
@@ -1396,7 +1430,7 @@ const LnInset: React.FC<{ f: number; draw: number; o?: number; marks?: number; t
       <Lbl x={LNG.x - 12} y={LNG.y - 36} t="km" c={C.muted} s={T.floor} a="start" b={false} />
       {draw > 0 ? <line x1={X(xl(0))} y1={Y(0)} x2={X(xl(zt))} y2={Y(zt)} stroke={C.local} strokeWidth={6} /> : null}
       {tri > 0 ? <g opacity={tri}><path d={`M${X(xl(10))} ${Y(10)} L${X(xl(10))} ${Y(16)} L${X(xl(16))} ${Y(16)}`} fill="none" stroke={C.gold} strokeWidth={4} />
-        <Lbl x={X(xl(10)) + 16} y={Y(13)} t="1 m → −1/H" c={C.gold} s={T.floor} a="end" /></g> : null}
+        <Lbl x={X(xl(10)) + 16} y={Y(13)} t="1 m → −1/H" c={C.gold} s={T.floor} a="start" /></g> : null}
       {marks > 0 ? <g opacity={marks}><circle cx={X(xl(0))} cy={Y(0)} r={9} fill={C.gold} /><Lbl x={X(xl(0)) - 12} y={Y(0) - 34} t="z = 0, p₀" c={C.gold} s={T.floor} a="end" />
         <circle cx={X(xl(20))} cy={Y(20)} r={9} fill={C.gold} /><Lbl x={X(xl(20)) + 16} y={Y(20) - 30} t="z, p" c={C.gold} s={T.floor} /></g> : null}
     </g>
@@ -1414,7 +1448,7 @@ const S19: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <PGraph upto={0} curveO={0} />
+        <PGraph upto={0} curveO={0} o={1 - fin(f, SS(k, 4))} />
         <LnInset f={f} draw={clamp((f - tLine) / 60, 0, 1)} o={fin(f, SS(k, 4))} tri={fin(f, AT(k, 6, "one over H"))} />
         <Keyword f={f} text="assume: same T → H fixed" at={[1080, 590]} appear={SS(k, 1)} out={SS(k, 3) - 4} s={T.floor} />
         <Lbl x={1080} y={670} t="a simplification: real T changes" c={C.local} s={T.floor} o={win(f, SS(k, 2), SS(k, 3) - 4)} />
@@ -1444,7 +1478,9 @@ const S19B: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <PGraph upto={30 * draw} curveO={1} />
+        {/* UF1 fix 1 (review 1 S1): the maths zone has a keyword from frame 0 */}
+        <Keyword f={f} text="add up the small falls" at={[1100, 150]} appear={0} out={SS(K("s19b_integrate"), 1) - 6} s={T.key} />
+        <PGraph upto={30 * draw} curveO={1} o={fin(f, tP - 10)} />
         <Lbl x={X(1000)} y={Y(25)} t="p₀ = 1013 hPa" c={C.local} s={T.key} a="end" o={fin(f, tP + 20)} />
         <LnInset f={f} draw={1} o={fout(f, tP - 10)} marks={fin(f, SS(k, 0))} />
         <Keyword f={f} text="add up small steps = integrate" at={[1080, 820]} appear={SS(k, 1)} out={SS(k, 6) - 6} s={T.floor} />
@@ -1501,6 +1537,8 @@ const S20B: React.FC = () => {
   return (
     <Scene>
       <Svg>
+        {/* UF1 fix 1 (review 1 S1): the maths zone has a keyword from frame 0 */}
+        <Keyword f={f} text="one kilometre near the ground" at={[1100, 150]} appear={0} out={SS(K("s20b_per_km"), 1) - 6} s={T.key} />
         <defs><clipPath id="s20bc"><rect x={PG.x} y={PG.y - 10} width={PG.w + 20} height={PG.h + 10} /></clipPath></defs>
         <Axes A={A} xt={xt} yt={yt} xl="pressure (hPa)" yl="height (km)" />
         <g clipPath="url(#s20bc)"><path d={curve} fill="none" stroke={C.local} strokeWidth={6} /></g>
@@ -1513,8 +1551,8 @@ const S20B: React.FC = () => {
         </g>
         <g opacity={fin(f, t7)}>
           <rect x={1120} y={640} width={(p0 - p1) * 3.2} height={50} fill={C.first} opacity={0.75} /><Lbl x={1130 + (p0 - p1) * 3.2} y={665} t="−113 hPa" c={C.key} s={T.key} o={fin(f, AT(k, 7, "a hundred and thirteen"))} />
-          <rect x={1120} y={730} width={(p1 - p2) * 3.2} height={50} fill={C.first} opacity={0.75} /><Lbl x={1130 + (p1 - p2) * 3.2} y={755} t="−101 hPa" c={C.key} s={T.key} o={fin(f, AT(k, 7, "a hundred and one"))} />
-          <Lbl x={1120} y={600} t="1st km" c={C.muted} s={T.floor} b={false} />
+          <rect x={1120} y={770} width={(p1 - p2) * 3.2} height={50} fill={C.first} opacity={0.75} /><Lbl x={1130 + (p1 - p2) * 3.2} y={795} t="−101 hPa" c={C.key} s={T.key} o={fin(f, AT(k, 7, "a hundred and one"))} />
+          <Lbl x={1120} y={600} t="1st km" c={C.muted} s={T.floor} b={false} /><Lbl x={1120} y={730} t="2nd km" c={C.muted} s={T.floor} b={false} />
         </g>
         <Keyword f={f} text="each metre: takes away p/H" at={[1080, 110]} appear={SS(k, 1)} out={SS(k, 4) - 4} s={T.key} />
         <Keyword f={f} text="p held fixed" at={[1520, 330]} appear={AT(k, 2, "one kilometre divided")} out={SS(k, 4) - 4} s={T.floor} />
@@ -1527,10 +1565,10 @@ const S20B: React.FC = () => {
     </Scene>
   );
 };
-const Mattresses: React.FC<{ x: number; y: number; o: number; strike?: number }> = ({ x, y, o, strike = 0 }) => o <= 0 ? null : (
+const Mattresses: React.FC<{ x: number; y: number; o: number; strike?: number; w?: number }> = ({ x, y, o, strike = 0, w = 300 }) => o <= 0 ? null : (
   <g opacity={o}>
-    {[0, 1, 2, 3, 4, 5].map((i) => { const h = 22 + i * 9, yy = y - [0, 22, 53, 93, 142, 200][i]; return <rect key={i} x={x} y={yy - h} width={300} height={h} rx={10} fill="#3a4766" stroke={C.ink} strokeWidth={3} />; })}
-    {strike > 0 ? <line x1={x - 20} y1={y + 10} x2={x + 320} y2={y - 300} stroke={C.neg} strokeWidth={7} opacity={strike} /> : null}
+    {[0, 1, 2, 3, 4, 5].map((i) => { const h = 22 + i * 9, yy = y - [0, 22, 53, 93, 142, 200][i]; return <rect key={i} x={x} y={yy - h} width={w} height={h} rx={10} fill="#3a4766" stroke={C.ink} strokeWidth={3} />; })}
+    {strike > 0 ? <line x1={x - 20} y1={y + 10} x2={x + w + 20} y2={y - 300} stroke={C.neg} strokeWidth={7} opacity={strike} /> : null}
   </g>
 );
 // ================================================================ s20c ten slabs of equal mass (UF1 U-WB-17, new; replaces the mattress picture)
@@ -1557,6 +1595,8 @@ const S20C: React.FC = () => {
         {[0.2, 0.5, 0.8].map((x, i) => <Arrow3D key={i} from={[x, 0.5, 2.2]} to={[x, 0.5, tops[1] * zk + 0.05]} color="#a8743f" px={7} head={26} o={win(f, SS(k, 2), SS(k, 3) + 30)} />)}
       </View3D>
       <Svg>
+        {/* UF1 fix 1 (review 1 S1): the maths zone has a keyword from frame 0 */}
+        <Keyword f={f} text="why does the curve bend?" at={[1100, 150]} appear={0} out={AT(k, 1, "same amount") - 8} s={T.key} />
         <HeightTicks pr={pr} zk={zk} ticks={[0, 5, 10, 15, 20, 25]} x={-0.6} />
         {want.map((p, i) => <g key={i} opacity={shown(i)}>
           <line x1={p[0]} y1={p[1]} x2={p[0] + 70} y2={ys[i]} stroke={C.muted} strokeWidth={2} />
@@ -1564,13 +1604,15 @@ const S20C: React.FC = () => {
         {[0, 1, 2, 3, 4].map((i) => { const a = pr.p([-0.05, 0, tops[i] * zk]), b = pr.p([-0.05, 0, tops[i + 1] * zk]); return <g key={i} opacity={lit(i) * fout(f, SS(k, 4))}>
           <Bracket p={[a[0] - 70, a[1]]} q={[b[0] - 70, b[1]]} off={0} c={C.gold} />
           {i === 0 ? <Lbl x={a[0] - 96} y={(a[1] + b[1]) / 2} t="≈ 900 m" c={C.gold} s={T.floor} a="end" /> : null}</g>; })}
-        <Keyword f={f} text="ninth top ≈ 19 km" at={[1100, 565]} appear={AT(k, 4, "nineteen")} s={T.key} targets={[pr.p([0, 0, tops[9] * zk])]} />
+        {/* UF1 fix 1 (review 1 S7): the link leaves the label's left end, clear of "no sharp top" */}
+        <Keyword f={f} text="ninth top ≈ 19 km" at={[1100, 565]} appear={AT(k, 4, "nineteen")} s={T.key} />
+        <CurvedLink f={f} from={[1084, 560]} to={pr.p([0, 0, tops[9] * zk])} start={AT(k, 4, "nineteen") + 8} end={LEN(k)} ctl={[1000, 0]} />
         <Keyword f={f} text="same mass in every slab" at={[1100, 140]} appear={AT(k, 1, "same amount")} s={T.key} />
         <Lbl x={1100} y={230} t="1/10 of the air above 1 m²" c={C.key} s={T.floor} o={fin(f, AT(k, 1, "one tenth"))} />
         <Keyword f={f} text="bottom slab: squeezed most" at={[1100, 340]} appear={SS(k, 2)} s={T.floor} />
         <Keyword f={f} text="higher: less weight above → thicker" at={[1100, 420]} appear={SS(k, 3)} s={T.floor} />
         <Keyword f={f} text="no sharp top" at={[1100, 480]} appear={AT(k, 4, "no sharp top")} s={T.floor} />
-        <Mattresses x={1530} y={850} o={fin(f, SS(k, 5))} strike={0} />
+        <Mattresses x={1650} y={850} w={200} o={fin(f, SS(k, 5))} strike={0} />
         <Keyword f={f} text="like: foam mattresses" at={[1100, 650]} appear={SS(k, 5)} out={SS(k, 6) - 4} s={T.floor} />
         <Lbl x={1100} y={680} t="unlike:" c={C.local} s={T.floor} o={fin(f, SS(k, 6))} />
         <Lbl x={1100} y={740} t="no separate layers" c={C.local} s={T.floor} o={fin(f, SS(k, 6))} />
@@ -1595,6 +1637,8 @@ const S20D: React.FC = () => {
   return (
     <Scene>
       <Svg>
+        {/* UF1 fix 1 (review 1 S1): the maths zone has a keyword from frame 0 */}
+        <Keyword f={f} text="where has p halved?" at={[1100, 150]} appear={0} out={SS(K("s20d_halving"), 1) - 6} s={T.key} />
         <PGraph />
         {(hv.z_km as number[]).map((z, i) => <g key={i} opacity={fin(f, AT(k, 6, i ? "eleven point seven" : "at five point eight"))}>
           <line x1={X(0)} x2={X(hv.p_hPa[i])} y1={Y(z)} y2={Y(z)} stroke={C.gold} strokeWidth={3} strokeDasharray="4 8" />
@@ -1682,7 +1726,7 @@ const S22: React.FC = () => {
   const { st, pr } = colStage(o3);
   const cO = fout(f, tGl, 20), gO = fin(f, tGl, 20);
   const g = pr.p([1.2, 0, 0]), gt = pr.p([1.2, 0, 4.0]), zz = pr.p([1.2, 0, zM * zk]), zl = pr.p([-0.6, 0, zM * zk]);
-  const cam = globePath([{ f: tGl, lat: 30, lon: -10, dist: 3.8 }, { f: LEN(k), lat: 45, lon: -20, dist: 2.6 }], f);
+  const cam = globePath([{ f: tGl, lat: 30, lon: -10, dist: 3.8 }, { f: LEN(k), lat: 45, lon: -20, dist: 3.0 }], f);
   const rowsA: CalcRow[] = [{ rhs: String.raw`1 - \dfrac{505}{1013} \approx 0.50`, at: t6, ul: AT(k, 5, "a half is a half") }];
   return (
     <Scene>
@@ -1726,7 +1770,7 @@ const S22: React.FC = () => {
 };
 
 // ================================================================ s23-s25 the temperature profile (full width)
-const TG: Ax = { x: 260, y: 80, w: 980, h: 660, xr: [-90, 20], yr: [0, 50] };
+const TG: Ax = { x: 260, y: 80, w: 980, h: 580, xr: [-90, 20], yr: [0, 50] }; // fix 1 (M2): h 660 → 580 so "temperature (°C)" clears the source line
 // fix loop 2 (review 2 S4): + 0.01 km, so `top_km` (33.94, rounded) keeps the last point (33.942 km); s23-s25 now end at the same point
 const tLine = (S: any, upto: number, A: Ax = TG) => { const X = axX(A), Y = axY(A);
   return poly((S.z_km as number[]).map((z, i) => [z, S.T_C[i]] as [number, number]).filter(([z, T_]) => z <= upto + 0.01 && Number.isFinite(T_)).map(([z, T_]) => [X(T_), Y(z)] as Pt)); };
@@ -1839,14 +1883,16 @@ const ZonalFan: React.FC<{ lon0: number; o: number }> = ({ lon0, o }) => {
 const S25: React.FC = () => {
   const f = useCurrentFrame(), k = K("s25_tropics");
   // UF1 U-WB-22/23, R2, R4: the chart narrows to the picture zone; the globe moves to the maths zone, grows and flies
-  const A: Ax = { x: 200, y: 80, w: 720, h: 660, xr: [-90, 20], yr: [0, 50] };
+  const A: Ax = { x: 200, y: 80, w: 720, h: 580, xr: [-90, 20], yr: [0, 50] }; // fix 1 (M2)
   const X = axX(A), Y = axY(A), sg = SD.singapore, tr = SD.trappes.tropopause;
   const tSg = SS(k, 1), tTr = AT(k, 2, "much higher"), tSgW = AT(k, 1, "Singapore"), tRise = AT(k, 3, "Strong rising currents"), tPole = AT(k, 4, "Near the poles");
   const up = sg.top_km * clamp((f - tSg) / 70, 0, 1);
-  const IB = { x: 1020, y: 40, w: 840, h: 620 };
+  const IB = { x: 1020, y: 40, w: 840, h: 560 };
   const Z = SD.zonal_tropopause;
-  const cam = globePath([{ f: 0, lat: 0, lon: 90, dist: 3.8 }, { f: tSgW, lat: 1.4, lon: 103.8, dist: 2.4 }, { f: tRise, lat: 1.4, lon: 103.8, dist: 2.4 },
-    { f: tRise + 40, lat: 15, lon: 70, dist: 3.4 }, { f: tPole, lat: 15, lon: 70, dist: 3.4 }, { f: tPole + 40, lat: 62, lon: 80, dist: 2.6 }, { f: LEN(k), lat: 45, lon: 60, dist: 3.8 }], f);
+  // UF1 fix 1 (review 1 M4, S9): zoom kept inside the canvas (dist ≥ 2.9); the polar key looks straight across the 0/180°
+  // meridian plane (lon 90), so the ×50 zonal-mean section reads as a ring round the limb: high over the equator, low at the poles
+  const cam = globePath([{ f: 0, lat: 0, lon: 90, dist: 3.8 }, { f: tSgW, lat: 1.4, lon: 103.8, dist: 2.9 }, { f: tRise, lat: 1.4, lon: 103.8, dist: 2.9 },
+    { f: tRise + 40, lat: 15, lon: 70, dist: 3.4 }, { f: tPole, lat: 15, lon: 70, dist: 3.4 }, { f: tPole + 40, lat: 18, lon: 90, dist: 3.1 }, { f: LEN(k), lat: 30, lon: 75, dist: 3.8 }], f);
   return (
     <Scene>
       <Svg>
@@ -1861,7 +1907,7 @@ const S25: React.FC = () => {
           </g>} />
         <SrcLine id="s25_tropics" i={0} w={900} />
       </Svg>
-      <Globe cam={cam} box={IB} o={fin(f, 0)} img={IMG.bmng} coast={0.3}
+      <Globe cam={cam} box={IB} canvas={{ x: 960, y: 0, w: 960, h: 1080, fadeY: 600 }} o={fin(f, 0)} img={IMG.bmng} coast={0.3}
         under3d={<><ZonalFan lon0={0} o={0.95} /><ZonalFan lon0={180} o={0.95} /></>}
         over={(G) => {
           const pts = (Z.lat as number[]).map((la, i) => G.pw(G.w(la, 0, 1 + (Z.z_km[i] / 6371) * ZEX_G)));
@@ -1874,7 +1920,7 @@ const S25: React.FC = () => {
               <Lbl x={s[0] + 44} y={s[1] + 40} t="Singapore" c={C.key} s={T.floor} /></g> : null}
             <Lbl x={q(0, 180)[0] - 20} y={q(0, 180)[1] - 40} t="≈ 16 km" c={C.key} s={T.floor} a="end" o={fin(f, tRise)} />
             <g opacity={fin(f, tPole)}><circle cx={pole[0]} cy={pole[1]} r={30} fill="none" stroke={C.gold} strokeWidth={5} />
-              <Lbl x={pole[0] + 40} y={pole[1] - 30} t="≈ 8 km" c={C.key} s={T.floor} /></g>
+              <Lbl x={pole[0] + 40} y={pole[1] < 90 ? pole[1] + 50 : pole[1] - 30} t="≈ 8 km" c={C.key} s={T.floor} /></g>
           </g>;
         }} />
       <Svg>
@@ -2006,7 +2052,7 @@ const S27B: React.FC = () => {
   const g = useGlobal();
   const qTex = useFieldTex(g?.q2m, GNY, GNX, LUT_HALINE, 0, 20, 1, true);
   const QM = UF.vapour.qmax;
-  const cam = globePath([{ f: 0, lat: 8, lon: -35, dist: 3.4 }, { f: SS(k, 9), lat: QM.lat, lon: QM.lon, dist: 2.6 }], f);
+  const cam = globePath([{ f: 0, lat: 8, lon: -35, dist: 3.4 }, { f: SS(k, 9), lat: QM.lat, lon: QM.lon, dist: 3.0 }], f);
   const parts: Part[] = [
     { t: "e", c: C.first, u: { w: String.raw`\text{vapour pressure}`, c: C.gold } }, { t: String.raw`\approx 1.61` },
     { t: "q", c: "#7cc4ff", u: { w: String.raw`\begin{array}{c}\text{kg of vapour}\\ \text{per kg of air}\end{array}`, c: C.gold } },
@@ -2014,7 +2060,7 @@ const S27B: React.FC = () => {
   ];
   const tB = SS(k, 4), tC = SS(k, 9);
   const boxO = fin(f, tB) * fout(f, tC - 6, 12);
-  const dots = (x: number, n: number, c: string, seed: number) => Array.from({ length: n }, (_, i) => <circle key={i} cx={x + 14 + rnd(i * 3 + seed) * 232} cy={420 + rnd(i * 7 + seed) * 232} r={5.5} fill={c} />);
+  const dots = (x: number, n: number, c: string, seed: number) => Array.from({ length: n }, (_, i) => <circle key={i} cx={x + 14 + rnd(i * 3 + seed) * 232} cy={422 + rnd(i * 7 + seed) * 166} r={5.5} fill={c} />);
   const rows: CalcRow[] = [
     { rhs: String.raw`q = 20\ \mathrm{g/kg} = 0.020`, at: AT(k, 9, "q is twenty") },
     { rhs: String.raw`p \approx 1000\ \mathrm{hPa}`, at: AT(k, 9, "and p is about") },
@@ -2032,22 +2078,22 @@ const S27B: React.FC = () => {
         <ColourBar x={120} y={120} w={420} lut={LUT_HALINE} lo={0} hi={20} ticks={[{ v: 0, t: "0" }, { v: 10, t: "10" }, { v: 20, t: "20" }]} unit="g/kg" title="specific humidity" />
         <Keyword f={f} text="this e: vapour pressure, not 2.72" at={[1100, 450]} appear={SS(k, 3)} out={tB - 4} s={T.floor} c={C.local} />
         <g opacity={boxO}>
-          <rect x={1100} y={410} width={260} height={250} fill="#1b2540" stroke={C.muted} strokeWidth={4} />{dots(1100, 100, C.first, 3)}
-          <rect x={1480} y={410} width={260} height={250} fill="#1b2540" stroke={C.muted} strokeWidth={4} />{dots(1480, UF.vapour.dots[1], "#8fa8e8", 11)}
-          <Lbl x={1230} y={700} t="1 kg of air" c={C.first} s={T.floor} a="middle" /><Lbl x={1610} y={700} t="1 kg of vapour" c="#8fa8e8" s={T.floor} a="middle" />
-          <Lbl x={1230} y={760} t="29 each" c={C.key} s={T.floor} a="middle" o={fin(f, SS(k, 6))} /><Lbl x={1610} y={640} t="18 each" c={C.key} s={T.floor} a="middle" o={fin(f, SS(k, 6))} />
+          <rect x={1100} y={410} width={260} height={190} fill="#1b2540" stroke={C.muted} strokeWidth={4} />{dots(1100, 100, C.first, 3)}
+          <rect x={1480} y={410} width={260} height={190} fill="#1b2540" stroke={C.muted} strokeWidth={4} />{dots(1480, UF.vapour.dots[1], "#8fa8e8", 11)}
+          <Lbl x={1230} y={642} t="1 kg of air" c={C.first} s={T.floor} a="middle" /><Lbl x={1610} y={642} t="1 kg of vapour" c="#8fa8e8" s={T.floor} a="middle" />
+          <Lbl x={1230} y={692} t="29 each" c={C.key} s={T.floor} a="middle" o={fin(f, SS(k, 6))} /><Lbl x={1610} y={692} t="18 each" c={C.key} s={T.floor} a="middle" o={fin(f, SS(k, 6))} />
         </g>
         <Keyword f={f} text="molecule share = 1.61 × mass share" at={[1080, 840]} appear={SS(k, 8)} out={tC - 6} s={T.floor} />
         <Keyword f={f} text="out of ≈ 1000 hPa" at={[1100, 760]} appear={AT(k, 10, "out of about")} s={T.key} />
       </Svg>
       <TeX s={EQ_S27B} x={1100} y={150} size={T.eq} o={fin(f, SS(k, 1))} />
       <Svg>
-        <Keyword f={f} text="e: vapour pressure" at={[1100, 265]} appear={AT(k, 2, "the vapour pressure")} s={T.floor} targets={[[1118, 185]]} />
-        <Keyword f={f} text="q: kg of vapour per kg of air" at={[1100, 320]} appear={AT(k, 2, "the specific humidity")} s={T.floor} targets={[[1395, 185]]} />
-        <Keyword f={f} text="p: air pressure" at={[1100, 375]} appear={AT(k, 2, "the air pressure")} s={T.floor} targets={[[1450, 185]]} />
+        <Keyword f={f} text="e: vapour pressure" at={[1100, 265]} appear={AT(k, 2, "the vapour pressure")} s={T.floor} c={C.first} />
+        <Keyword f={f} text="q: kg of vapour per kg of air" at={[1100, 320]} appear={AT(k, 2, "the specific humidity")} s={T.floor} c="#7cc4ff" />
+        <Keyword f={f} text="p: air pressure" at={[1100, 375]} appear={AT(k, 2, "the air pressure")} s={T.floor} c={PRES} />
       </Svg>
 
-      <TeX s={String.raw`\dfrac{29}{18} \approx 1.61`} x={1420} y={770} size={T.calc} o={win(f, SS(k, 7), tC - 6)} />
+      <TeX s={String.raw`29 \div 18 \approx 1.61`} x={1100} y={748} size={T.calc} o={win(f, SS(k, 7), tC - 6)} />
       <CalcStack f={f} x={1100} y={420} rows={tall(rows, 50)} size={50} />
       <Src id="s27b_vapour_pressure" />
     </Scene>
@@ -2294,7 +2340,7 @@ const S34: React.FC = () => {
   return (
     <Scene>
       {/* fix loop 1 (M1): the globe is there from frame 0 (its meridian arc comes on the knot sentence) */}
-      <Globe cam={globePath([{ f: 0, lat: 30, lon: -20, dist: 3.4 }, { f: t4, lat: 30, lon: -20, dist: 3.4 }, { f: t4 + 60, lat: 42, lon: -35, dist: 2.8 }], f)} o={1} over={(G) => {
+      <Globe cam={globePath([{ f: 0, lat: 30, lon: -20, dist: 3.4 }, { f: t4, lat: 30, lon: -20, dist: 3.4 }, { f: t4 + 60, lat: 42, lon: -35, dist: 3.0 }], f)} o={1} over={(G) => {
         const pts: [number, number][] = []; for (let la = -85; la <= 85; la += 2) pts.push([la, -20]);
         const a = G.p(45, -20), b = G.p(55, -20);
         return <g opacity={gArc}><path d={llPath(G, pts)} fill="none" stroke={C.gold} strokeWidth={4} />
@@ -2407,7 +2453,7 @@ const S36: React.FC = () => {
           <Lbl x={X(20)} y={Y(25.2)} t="Brest, 2023" c={C.second} s={T.key} />
           <Lbl x={X(20)} y={Y(22.8)} t="1991–2020: average and 8 days in 10" c={C.key} s={T.floor} o={fin(f, t4)} />
         </g>
-        <Lbl x={1000} y={760} t="climate: what you expect · weather: what you get" c={C.key} s={T.key} a="middle" o={fin(f, t6)} />
+        <Lbl x={1000} y={794} t="climate: what you expect · weather: what you get" c={C.key} s={T.key} a="middle" o={fin(f, t6)} />
         <SrcLine id="s36_weather_climate" i={0} o={fout(f, t3)} />
         <SrcLine id="s36_weather_climate" i={1} o={fin(f, t3)} w={1700} />
       </Svg>
@@ -2451,7 +2497,9 @@ const S38: React.FC = () => {
     <Scene>
       <Globe cam={cam} field={tTex} fieldO={0.85 * fin(f, t3, 30)} grat={0.6 * win(f, t1, t3 + 20)} over={(G) => <g>
         <g opacity={fout(f, t3 + 30) * 0.9}>{(ST.latlon as number[][]).map(([la, lo], i) => G.vis(la, lo) ? <circle key={i} cx={G.p(la, lo)[0]} cy={G.p(la, lo)[1]} r={5} fill={C.gold} /> : null)}</g>
-        {f > t5 ? <g opacity={fin(f, t5) * fout(f, t7) * 0.6}><path d={llPath(G, Array.from({ length: 73 }, (_, i) => [-55, -180 + i * 5] as [number, number]))} stroke={C.local} strokeWidth={60} strokeOpacity={0.35} fill="none" /></g> : null}
+        {f > t5 ? (() => { const c0 = G.pw([0, 0, 0]), R0 = silR(cam.dist, GBOX.h); return <g opacity={fin(f, t5) * fout(f, t7) * 0.6}>
+          <defs><clipPath id="s38disc"><circle cx={c0[0]} cy={c0[1]} r={R0 - 2} /></clipPath></defs>{/* fix 1 (S10): no band past the limb */}
+          <path clipPath="url(#s38disc)" d={llPath(G, Array.from({ length: 73 }, (_, i) => [-55, -180 + i * 5] as [number, number]))} stroke={C.local} strokeWidth={60} strokeOpacity={0.35} fill="none" /></g>; })() : null}
       </g>} />
       <Svg>
         <Keyword f={f} text="model + observations" at={[1100, 140]} appear={t1} s={T.key} />
@@ -2512,7 +2560,7 @@ const S39: React.FC = () => {
         <ColourBar x={1120} y={130} w={560} lut={LUT_DENSE.slice().reverse()} lo={500} hi={1040} ticks={[{ v: 500, t: "500" }, { v: 1000, t: "1000" }]} unit="hPa" o={fin(f, t1) * fout(f, t4)} title="surface pressure" />
         <g opacity={oT}>
           {an ? <Lbl x={VB.x + an[0][0]} y={VB.y + an[0][1] - 40} t="Tibetan Plateau" c={C.key} s={T.key} a="middle" /> : null}
-          {an ? <Lbl x={VB.x + an[1][0]} y={Math.min(VB.y + VB.h - 40, VB.y + an[1][1] + 40)} t="Himalayas" c={C.key} s={T.floor} a="middle" /> : null}
+          {an ? <Lbl x={VB.x + an[1][0]} y={Math.min(VB.y + VB.h - 120, VB.y + an[1][1] - 34)} t="Himalayas" c={C.key} s={T.floor} a="middle" /> : null}
           <Lbl x={1080} y={300} t="mountains × 30 taller" c={C.key} s={T.key} />
         </g>
         <Keyword f={f} text="less air above high ground" at={[1080, 140]} appear={t5} out={t6} s={T.key} />
@@ -2775,8 +2823,12 @@ const S45: React.FC = () => {
         <Lbl x={1100} y={300} t="tropical seas: warm, moist" c={C.second} s={T.key} o={win(f, AT(k, 1, "warm and moist"), t2)} />
         <Keyword f={f} text="air mass" at={[1100, 140]} appear={AT(k, 2, "air mass")} out={t4} s={T.calc} />
         <Lbl x={1100} y={230} t="> 1000 km across" c={C.key} s={T.key} o={win(f, t2, t4)} />
-        {grid.map(([a, b], i) => <g key={i} opacity={win(f, AT(k, 3, i < 2 ? (i === 0 ? "polar" : "continental") : (i === 2 ? "tropical" : "from over land")), t4)}>
-          <Lbl x={1100} y={320 + i * 70} t={`${a} ${b}`} c={a === "polar" ? C.local : C.second} s={T.key} /></g>)}
+        {/* UF1 fix 1 (review 1 S3): the four names, each on its word, kept until the map comes in */}
+        <Lbl x={1100} y={340} t="polar" c={C.local} s={T.key} o={win(f, AT(k, 3, "polar"), tX)} />
+        <Lbl x={1100 + textW("polar · ", T.key)} y={340} t="or tropical" c={C.second} s={T.key} o={win(f, AT(k, 3, "tropical"), tX)} />
+        <Lbl x={1100} y={430} t="maritime: from the sea" c="#7cc4ff" s={T.key} o={win(f, AT(k, 3, "maritime"), tX)} />
+        <Lbl x={1100} y={510} t="continental: from land" c={C.gold} s={T.key} o={win(f, AT(k, 3, "continental"), tX)} />
+        {void grid}
         <ColourBar x={1360} y={150} w={380} lut={LUT_THERMAL} lo={-6} hi={16} ticks={[{ v: -5, t: "−5" }, { v: 15, t: "15" }]} unit="°C" o={fin(f, tX)} title="850-hPa temperature" />
         <ColourBar x={1120} y={730} w={560} lut={LUT_THERMAL} lo={-30} hi={35} ticks={[{ v: -30, t: "−30" }, { v: 0, t: "0" }, { v: 30, t: "30" }]} unit="°C" o={fout(f, tX)} title="2-m temperature" />
         <Lbl x={1340} y={330} t="≈ 1.5 km up" c={C.key} s={T.floor} o={fin(f, tX)} />
@@ -2814,7 +2866,7 @@ const S46: React.FC = () => {
         <Lbl x={1340} y={628} t="T and wind change" c={C.key} s={T.floor} o={fin(f, t2)} />
         <Lbl x={1340} y={686} t="cold air advancing" c={C.key} s={T.floor} o={fin(f, t4)} /><Lbl x={1340} y={734} t="→ cold front" c={C.key} s={T.floor} o={fin(f, t4)} />
         <Lbl x={1340} y={792} t="warm air advancing" c={C.key} s={T.floor} o={fin(f, t5)} /><Lbl x={1340} y={840} t="→ warm front" c={C.key} s={T.floor} o={fin(f, t5)} />
-        <ColourBar x={120} y={110} w={360} lut={LUT_THERMAL} lo={-6} hi={16} ticks={[{ v: -5, t: "−5" }, { v: 15, t: "15" }]} unit="°C" title="850-hPa temperature" />
+        <ColourBar x={120} y={150} w={360} lut={LUT_THERMAL} lo={-6} hi={16} ticks={[{ v: -5, t: "−5" }, { v: 15, t: "15" }]} unit="°C" title="850-hPa temperature" />
         <SrcLine id="s46_fronts" w={1200} />
       </Svg>
     </Scene>
@@ -2824,50 +2876,62 @@ const S46: React.FC = () => {
 /** world: x = distance along the slice / 100 km, z = height km × 0.8 (heights ×80, W72, said in s48 S6), y = north
  * (the 850-hPa map lies flat under the wall); the wall carries the T anomaly (balance, ±8 °C) with saturated air
  * whitened; ~1500 dots follow RK4 tracks of the in-slice wind (builder: diag.sections.in_section_tracks, w ×80 like z) */
-const SL = UF.slice, SLX = SL.XS, SLZK = SL.ZS, SLLEN = SL.length_km;
-const slx = (lon: number) => (lon + 18) * Math.cos(48.5 * D2R) * 111.32 * SLX, sly = (lat: number) => (lat - 48.5) * 111.32 * SLX;
-const useSliceTex = (v: Record<string, Float32Array> | null) => React.useMemo(() => {
+const SL = UF.slice, SC = UF.slice_cf, SLX = SL.XS, SLZK = SL.ZS;
+// UF1 fix 1 (v4 review 1 M1): s47 uses its own slice along 46.5N (through the map's analysed cold front, W70/W77); s48 the 48.5N slice
+const sliceOf = (warm: boolean) => (warm ? SL : SC);
+const mkSlx = (D: any) => (lon: number) => (lon - D.lon0) * Math.cos(D.lat * D2R) * 111.32 * SLX;
+const mkSly = (D: any) => (lat: number) => (lat - D.lat) * 111.32 * SLX;
+const useSliceTex = (v: Record<string, Float32Array> | null, D: any) => React.useMemo(() => {
   if (!v) return null;
-  const nx = SL.ns, nz = SL.nz, d = new Uint8Array(nx * nz * 4), cl = new Uint8Array(nx * nz * 4);
+  const nx = D.ns, nz = D.nz, d = new Uint8Array(nx * nz * 4), cl = new Uint8Array(nx * nz * 4);
   for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
     const a = v.anom[j * nx + i], rh = v.rh[j * nx + i], q = 4 * (j * nx + i);
-    const c = lutAt(LUT_BAL, (a + 8) / 16), wet = rh >= SL.rh_cloud ? 0.4 : 0;
+    const c = lutAt(LUT_BAL, (a + 8) / 16), wet = rh >= D.rh_cloud ? 0.4 : 0;
     d[q] = c[0] + (255 - c[0]) * wet; d[q + 1] = c[1] + (255 - c[1]) * wet; d[q + 2] = c[2] + (255 - c[2]) * wet; d[q + 3] = 235;
-    cl[q] = 255; cl[q + 1] = 255; cl[q + 2] = 255; cl[q + 3] = rh >= SL.rh_cloud ? 150 : 0;
+    cl[q] = 255; cl[q + 1] = 255; cl[q + 2] = 255; cl[q + 3] = rh >= D.rh_cloud ? 150 : 0;
   }
   const mk = (b: Uint8Array) => { const t = new THREE.DataTexture(b, nx, nz, THREE.RGBAFormat); t.colorSpace = THREE.SRGBColorSpace; t.magFilter = THREE.LinearFilter; t.minFilter = THREE.LinearFilter; t.needsUpdate = true; return t; };
   return { field: mk(d), cloud: mk(cl) };
-}, [v]);
+}, [v, D]);
 const SliceScene: React.FC<{ warm: boolean }> = ({ warm }) => {
   const f = useCurrentFrame(), k = K(warm ? "s48_warm_front" : "s47_cold_front");
-  const v = useVars(staticFile("wb_slice.bin"), SLJ);
-  const tx = useSliceTex(v);
+  const D = sliceOf(warm), LENK = D.length_km as number;
+  const slx = mkSlx(D), sly = mkSly(D);
+  const v = useVars(staticFile(warm ? "wb_slice.bin" : "wb_slice_cf.bin"), warm ? SLJ : SCJ);
+  const tx = useSliceTex(v, D);
   const c8 = useC8();
   const mapTex = useFieldTex(c8?.t18, C8NY, C8NX, LUT_THERMAL, -5, 15, 1, false);
-  const tRise = warm ? -999 : AT(k, 1, "a real slice"), rise = warm ? 1 : easeIO(clamp((f - tRise) / 75, 0, 1));
+  // s47: top-down while S2 names the line and the map's cold front (blue, with a gold ring where the slice crosses it); the wall
+  // rises at the end of S2, before S3 explains the colours
+  const tMapF = warm ? -999 : AT(k, 1, "across the Bay"), tCross = warm ? -999 : AT(k, 1, "cold front on the map");
+  const tRise = warm ? -999 : SE(k, 1) - 30, rise = warm ? 1 : easeIO(clamp((f - tRise) / 75, 0, 1));
   const VB = { x: 80, y: 40, w: 1760, h: 780 };
-  const W0: V3 = [SLLEN * SLX / 2, 0, 2.6];
+  // the front: a straight least-squares fit s = a z + b (km); cold: 850-650 hPa, the lowest kilometre (900-875 hPa) dashed
+  const CF = SC.cold_front, WF = SL.warm_front;
+  const fa = warm ? (WF.slope_km_per_km as number) : (CF.fit_a_km_per_km as number), fb = warm ? (WF.s_ground_km as number) : (CF.fit_b_km as number);
+  const fz0 = warm ? 0 : (CF.fit_z_km[0] as number), fz1 = warm ? Math.max(...(WF.z_m as number[])) / 1000 : (CF.fit_z_km[1] as number) + 0.3;
+  const fitS = (z: number) => fa * z + fb;
+  const low: [number, number][] = warm ? [] : (CF.traced as any[]).filter((p) => p.hPa >= 850).map((p) => [p.s_km, p.z_m / 1000] as [number, number]); // z ascending: 900, 875, 850 hPa
+  const frontS = (z: number) => (warm || z >= fz0 || low.length < 2 ? fitS(z) : interp(z, [0, ...low.map((p) => p[1])], [low[0][0], ...low.map((p) => p[0])]));
+  const W0: V3 = [LENK * SLX / 2, 0, 2.6];
+  const zoomC: V3 = [fitS(2.0) * SLX + 0.2, 0, 2.4];
   const keys: OrbitKey[] = warm
     ? [{ f: 0, az: -98, el: 12, dist: 15, target: [6.0, 0, 2.6] }, { f: 75, az: -96, el: 11, dist: 10.5, target: [10.0, 0, 2.2] }, { f: LEN(k), az: -92, el: 11, dist: 10.5, target: [10.2, 0, 2.2], linear: true }]
-    : [{ f: 0, az: -90, el: 84, dist: 26, target: [W0[0], -0.5, 0] }, { f: Math.max(1, tRise), az: -90, el: 84, dist: 26, target: [W0[0], -0.5, 0] },
-      { f: tRise + 75, az: -98, el: 12, dist: 15, target: W0 }, { f: SS(k, 4), az: -98, el: 12, dist: 15, target: W0 },
-      { f: SS(k, 4) + 50, az: -100, el: 11, dist: 10.5, target: [4.6, 0, 2.4] }, { f: SS(k, 7) - 10, az: -98, el: 11, dist: 10.5, target: [4.8, 0, 2.4] },
-      { f: LEN(k), az: -98, el: 12, dist: 15, target: [6.0, 0, 2.6] }];
+    : [{ f: 0, az: -90, el: 84, dist: 24, target: [W0[0], -0.5, 0] }, { f: Math.max(1, tRise), az: -90, el: 84, dist: 24, target: [W0[0], -0.5, 0] },
+      { f: tRise + 75, az: -98, el: 12, dist: 14, target: W0 }, { f: SS(k, 4), az: -98, el: 12, dist: 14, target: W0 },
+      { f: SS(k, 4) + 50, az: -100, el: 10, dist: 7.2, target: zoomC }, { f: SS(k, 7) - 10, az: -97, el: 10, dist: 7.6, target: [zoomC[0] + 0.3, 0, 2.2] },
+      { f: LEN(k), az: -98, el: 12, dist: 14, target: W0 }];
   const st = orbitCam(orbitPath(keys, f), [VB.w / 2, VB.h / 2]);
   const pr = projector(st, VB.w, VB.h, VB.x, VB.y);
   const W = (s_km: number, z_km: number): Pt => pr.p([s_km * SLX, -0.02, z_km * SLZK]);
-  // fronts (builder W70/W71): s, z of the frontal zone; the cold front is vertical below ~750 hPa
-  const fr = warm ? SL.warm_front : SL.cold_front;
-  const fpts: [number, number][] = (fr.s_km as number[]).map((s, i) => [s, fr.z_m[i] / 1000]);
-  const fground: [number, number] = warm ? [SL.warm_front.s_ground_km, 0] : [fpts[0][0], 0];
-  const outline = [fground, ...fpts].map(([s, z]) => W(s, z));
-  const tOut = warm ? SS(k, 2) : SS(k, 4), tTri = warm ? SS(k, 2) + 20 : SS(k, 5), tLift = warm ? AT(k, 2, "glides up") : AT(k, 5, "lifted quickly");
+  const outline = [fz0, (fz0 + fz1) / 2, fz1].map((z) => W(fitS(z), z));
+  const lowLine = warm ? [] : [[low[0][0], 0] as [number, number], ...low].map(([s, z]) => W(s, z));
+  const tOut = warm ? SS(k, 2) : SS(k, 4), tTri = warm ? SS(k, 2) + 20 : SS(k, 5), tLift = warm ? AT(k, 2, "glides up") : AT(k, 5, "lifts the warm air");
   const tCl = warm ? AT(k, 3, "layered cloud") : AT(k, 6, "tall clouds"), tGW = warm ? SS(k, 4) : SS(k, 7), tAir = warm ? SS(k, 1) : SS(k, 3);
-  const frontS = (z: number) => interp(z, fpts.map((p) => p[1]), fpts.map((p) => p[0]));
   // particles
   const parts: React.ReactNode[] = [];
   if (v && rise >= 1) {
-    const NP = SL.particles.n, NT = NP * SL.particles.generations, NS = SL.particles.nsteps, L = 90;
+    const NP = D.particles.n, NT = NP * D.particles.generations, NS = D.particles.nsteps, L = 90;
     const hi = fin(f, tLift);
     for (let p = 0; p < NP; p++) {
       const a = f / L + ((p * 0.6180339887) % 1), g = Math.floor(a) % 3, tau = a - Math.floor(a), sg = tau * NS, tr = p + g * NP;
@@ -2883,53 +2947,66 @@ const SliceScene: React.FC<{ warm: boolean }> = ({ warm }) => {
       parts.push(<line key={p} x1={A[0]} y1={A[1]} x2={B[0]} y2={B[1]} stroke={lifted && hi > 0 ? C.gold : C.key} strokeOpacity={o} strokeWidth={lifted && hi > 0 ? 3.5 : 2.6} strokeLinecap="round" />);
     }
   }
-  // the slope triangle (data: 1 km up per 15 km cold, 50 km warm) and, for the warm front, its true-scale twin (s48 S6)
-  const sp = fr.spoken as number, zt0 = warm ? 1.2 : 3.0, st0 = frontS(zt0);
+  // the slope triangle (data: 1 km up per 50 km, both fronts here) and, for the warm front, its true-scale twin (s48 S6)
+  const sp = (warm ? WF.spoken : CF.spoken) as number, zt0 = warm ? 1.2 : 1.9, st0 = fitS(zt0);
   const tA = W(st0, zt0), tB = W(st0, zt0 + 1), tC = W(st0 + (warm ? sp : -sp), zt0 + 1);
   const tw = fin(f, warm ? AT(k, 5, "eighty times taller") : 1e9);
-  const twA = W(st0 + 120, zt0 - 0.6), twB = W(st0 + 120 + sp, zt0 - 0.6 + 1 / 80);
-  const gw = SL.ground_winds, gk = warm ? ["warm_behind", "warm_ahead"] : ["cold_behind", "cold_ahead"];
-  const brest = W(SL.brest_s_km, 0);
-  const ground0 = W(0, 0), ground1 = W(SLLEN, 0);
+  const twA = W(st0 + 230, zt0 + 1.7), twB = W(st0 + 230 + sp, zt0 + 1.7 + 1 / 80);
+  const gw = D.ground_winds, gk = warm ? ["warm_behind", "warm_ahead"] : ["cold_behind", "cold_ahead"];
+  const brest = warm ? W(SL.brest_s_km, 0) : pr.p([slx(BREST[1]), sly(BREST[0]), 0.01]);
+  const ground0 = W(0, 0), ground1 = W(LENK, 0);
+  // s47: the map's analysed 850-hPa cold front (fronts.json) on the map under the slice — the slice crosses it (W77)
+  const cfMap = !warm ? (FR.cold_front.lat as number[]).map((la, i) => pr.p([slx(FR.cold_front.lon[i]), sly(la), 0.01])) : [];
+  const cross = !warm ? W(CF.map_cross_s_km, 0) : null;
+  const cfO = !warm ? 0.95 * fin(f, tMapF) * (1 - 0.7 * rise) : 0;
+  const brestDy = warm ? 40 : -26;
   return (
     <Scene>
       <View3D st={st} x={VB.x} y={VB.y} w={VB.w} h={VB.h} amb={1.6} dir={0.6}>
         <MapPlane tex={mapTex} x0={slx(-40)} x1={slx(15)} y0={sly(30)} y1={sly(65)} z={-0.01} o={1} dim={0.75} />
-        <SliceWall tex={tx?.field ?? null} x0={0} x1={SLLEN * SLX} z0={0} z1={8 * SLZK} rise={rise} />
-        <SliceWall tex={tx?.cloud ?? null} x0={0} x1={SLLEN * SLX} z0={0} z1={8 * SLZK} rise={rise} o={0.9 * pulse(f, tCl, 40)} />
+        <SliceWall tex={tx?.field ?? null} x0={0} x1={LENK * SLX} z0={0} z1={8 * SLZK} rise={rise} />
+        <SliceWall tex={tx?.cloud ?? null} x0={0} x1={LENK * SLX} z0={0} z1={8 * SLZK} rise={rise} o={0.9 * pulse(f, tCl, 40)} />
       </View3D>
       <Svg>
         <defs><clipPath id={`slc${warm ? 1 : 0}`}><rect x={VB.x} y={VB.y} width={VB.w} height={VB.h} /></clipPath></defs>
         <g clipPath={`url(#slc${warm ? 1 : 0})`}>
+          {cfO > 0 ? <g opacity={cfO}><path d={poly(cfMap)} fill="none" stroke={C.bg} strokeWidth={11} /><path d={poly(cfMap)} fill="none" stroke="#4f7fd8" strokeWidth={7} />
+            {cross ? <circle cx={cross[0]} cy={cross[1]} r={22} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tCross)} /> : null}</g> : null}
           <line x1={ground0[0]} y1={ground0[1]} x2={ground1[0]} y2={ground1[1]} stroke={C.gold} strokeWidth={warm ? 3 : 7} opacity={warm ? 0.6 : fout(f, tRise + 60, 20) * 0.9 + 0.4} />
           {parts}
-          <g opacity={fin(f, tOut)}><path d={poly(outline)} fill="none" stroke={C.bg} strokeWidth={11} strokeLinejoin="round" /><path d={poly(outline)} fill="none" stroke={C.gold} strokeWidth={6} strokeLinejoin="round" /></g>
+          <g opacity={fin(f, tOut)}>
+            {!warm ? <><path d={poly(lowLine)} fill="none" stroke={C.bg} strokeWidth={9} strokeLinejoin="round" /><path d={poly(lowLine)} fill="none" stroke={C.gold} strokeWidth={5} strokeDasharray="12 10" strokeLinejoin="round" /></> : null}
+            <path d={poly(outline)} fill="none" stroke={C.bg} strokeWidth={11} strokeLinecap="round" /><path d={poly(outline)} fill="none" stroke={C.gold} strokeWidth={6} strokeLinecap="round" /></g>
           <g opacity={fin(f, tTri)}><path d={`M${tA[0]} ${tA[1]} L${tB[0]} ${tB[1]} L${tC[0]} ${tC[1]}`} fill="none" stroke={C.gold} strokeWidth={5} />
             <Lbl x={tB[0] + (warm ? -14 : 14)} y={(tA[1] + tB[1]) / 2} t="1 km" c={C.gold} s={T.floor} a={warm ? "end" : "start"} />
-            <Lbl x={(tB[0] + tC[0]) / 2} y={tB[1] - 44} t={`${sp} km`} c={C.gold} s={T.floor} a={warm ? "middle" : "end"} /></g>
+            <Lbl x={warm ? (tB[0] + tC[0]) / 2 : tC[0] - 14} y={tB[1] - (warm ? 44 : 30)} t={`${sp} km`} c={C.gold} s={T.floor} a={warm ? "middle" : "end"} /></g>
           <g opacity={tw}><line x1={twA[0]} y1={twA[1]} x2={twB[0]} y2={twB[1]} stroke={C.gold} strokeWidth={5} />
-            <Lbl x={(twA[0] + twB[0]) / 2} y={twA[1] + 36} t="true scale" c={C.gold} s={T.floor} a="middle" /></g>
+            <Lbl x={(twA[0] + twB[0]) / 2} y={twA[1] - 34} t="true slope" c={C.gold} s={T.floor} a="middle" /></g>
           {gk.map((key, i) => { const g = gw[key], p0 = pr.p([g.s_km * SLX - g.u * 0.03, -g.v * 0.03 - 0.3, 0.02]), p1 = pr.p([g.s_km * SLX + g.u * 0.03, g.v * 0.03 - 0.3, 0.02]);
-            return <g key={key} opacity={fin(f, tGW + i * 20)}><Arrow p={p0} q={p1} color={C.first} w={8} head={30} /><Lbl x={p1[0] + (i ? 40 : -40)} y={Math.min(VB.y + VB.h - 28, p1[1] + 44)} t={`from ${g.from}`} c={C.first} s={T.floor} a="middle" /></g>; })}
-          <g opacity={rise}><line x1={brest[0]} y1={brest[1] - 14} x2={brest[0]} y2={brest[1] + 14} stroke={C.gold} strokeWidth={5} />
-            <Lbl x={brest[0]} y={brest[1] + 40} t="Brest" c={C.key} s={T.floor} a="middle" /></g>
+            const lx = p1[0] + (i ? 60 : -60), near = warm && Math.abs(lx - brest[0]) < 150;
+            return <g key={key} opacity={fin(f, tGW + i * 20)}><Arrow p={p0} q={p1} color={C.first} w={8} head={30} /><Lbl x={near ? brest[0] + 170 : lx} y={warm ? Math.min(VB.y + VB.h - 28, p1[1] + 44) : Math.min(VB.y + VB.h - 60, p1[1] - 46)} t={`from ${g.from}`} c={C.first} s={T.floor} a="middle" /></g>; })}
+          <g opacity={warm ? 1 : fin(f, tMapF) * (1 - rise)}>{warm ? <line x1={brest[0]} y1={brest[1] - 14} x2={brest[0]} y2={brest[1] + 14} stroke={C.gold} strokeWidth={5} /> : <circle cx={brest[0]} cy={brest[1]} r={8} fill={C.key} stroke={C.bg} strokeWidth={3} />}
+            <Lbl x={brest[0] + (warm ? 0 : 16)} y={brest[1] + brestDy} t="Brest" c={C.key} s={T.floor} a={warm ? "middle" : "start"} /></g>
         </g>
         {/* labels on their words */}
         {!warm ? <g>
-          <Lbl x={W(150, 1.4)[0]} y={W(150, 1.4)[1]} t="cold air" c={C.local} s={T.key} a="middle" o={fin(f, tAir)} />
-          <Lbl x={W(640, 2.6)[0]} y={W(640, 2.6)[1]} t="warm air" c={C.second} s={T.key} a="middle" o={fin(f, tAir)} />
-          <Lbl x={outline[0][0] + 20} y={outline[0][1] - 40} t="cold front" c={C.gold} s={T.key} o={fin(f, tOut)} />
+          <Lbl x={W(fitS(1.4) - 380, 1.2)[0]} y={W(fitS(1.4) - 380, 1.2)[1]} t="cold air" c={C.local} s={T.key} a="middle" o={fin(f, tAir)} />
+          <Lbl x={W(fitS(2.6) + 330, 2.6)[0]} y={W(fitS(2.6) + 330, 2.6)[1]} t="warm air" c={C.second} s={T.key} a="middle" o={fin(f, tAir)} />
+          <Lbl x={outline[2][0] + 24} y={outline[2][1] - 30} t="cold front" c={C.gold} s={T.key} o={fin(f, tOut)} />
           <Lbl x={120} y={100} t="cold 1.29 · warm 1.16 kg/m³" c={C.key} s={T.floor} o={fin(f, SS(k, 3))} />
+          <Keyword f={f} text="cold front on the map" at={[120, 100]} appear={tCross} out={SS(k, 3) - 8} s={T.floor} c="#8fb1ff" />
+          <Keyword f={f} text="slice along 46.5°N" at={[120, 170]} appear={AT(k, 1, "a real slice")} out={SS(k, 2) - 8} s={T.floor} />
           <Keyword f={f} text="tall clouds, heavy showers" at={[120, 170]} appear={tCl} out={SS(k, 7) - 6} s={T.floor} />
           <Keyword f={f} text="behind: colder, drier" at={[120, 170]} appear={SS(k, 7)} s={T.floor} o={1} />
         </g> : <g>
           <Lbl x={W(1250, 4.2)[0]} y={W(1250, 4.2)[1]} t="warm air" c={C.second} s={T.key} a="middle" o={fin(f, tAir)} />
           <Lbl x={W(1400, 0.6)[0]} y={W(1400, 0.6)[1]} t="cold air" c={C.local} s={T.key} a="middle" o={fin(f, tAir)} />
           <Lbl x={outline[0][0] - 20} y={outline[0][1] - 40} t="warm front" c={C.gold} s={T.key} a="end" o={fin(f, tOut)} />
+          <Keyword f={f} text="a second slice, through Brest" at={[120, 110]} appear={0} out={SS(k, 3) - 8} s={T.floor} />
           <Keyword f={f} text="layered cloud · steady rain" at={[120, 110]} appear={tCl} s={T.floor} />
           <Keyword f={f} text="behind: milder, moister" at={[120, 180]} appear={SS(k, 4)} s={T.floor} />
         </g>}
-        <ColourBar x={1180} y={110} w={400} lut={LUT_BAL} lo={-8} hi={8} ticks={[{ v: -8, t: "−8" }, { v: 0, t: "0" }, { v: 8, t: "+8" }]} unit="°C" title="colder / warmer than average" o={rise} />
+        <ColourBar x={1180} y={120} w={400} lut={LUT_BAL} lo={-8} hi={8} ticks={[{ v: -8, t: "−8" }, { v: 0, t: "0" }, { v: 8, t: "+8" }]} unit="°C" title="colder / warmer than average" o={rise} />
         <SrcLine id={warm ? "s48_warm_front" : "s47_cold_front"} w={1700} />
       </Svg>
     </Scene>
@@ -3154,11 +3231,12 @@ const S53: React.FC = () => {
       </g>} />
       <Svg>
         <Lbl x={1100} y={140} t="1991–2020 average wind" c={C.key} s={T.key} />
-        <Keyword f={f} text="trade winds" at={[1100, 260]} appear={AT(k, 1, "trade winds")} s={T.calc} />
-        {/* fix loop 1 (S6): gold pointers from each name to its belt on the globe (same camera as the globe) */}
-        <Keyword f={f} text="north-east trades" at={[1100, 350]} appear={t2} s={T.key} targets={beltPt(15, -40)} />
-        <Keyword f={f} text="south-east trades" at={[1100, 430]} appear={t3} s={T.key} targets={beltPt(-12, -20)} />
-        <Keyword f={f} text="westerlies" at={[1100, 560]} appear={AT(k, 4, "westerlies")} s={T.calc} targets={beltPt(47, -30)} />
+        <Keyword f={f} text="trade winds" at={[1100, 380]} appear={AT(k, 1, "trade winds")} s={T.calc} />
+        {/* fix loop 1 (S6): gold pointers from each name to its belt on the globe (same camera as the globe); UF1 fix 1 (M2): names
+            stacked in the belts' north-south order (westerlies, NE trades, SE trades) so the pointers never cross */}
+        <Keyword f={f} text="north-east trades" at={[1100, 465]} appear={t2} s={T.key} targets={beltPt(15, -40)} />
+        <Keyword f={f} text="south-east trades" at={[1100, 545]} appear={t3} s={T.key} targets={beltPt(-12, -20)} />
+        <Keyword f={f} text="westerlies" at={[1100, 260]} appear={AT(k, 4, "westerlies")} s={T.calc} targets={beltPt(47, -30)} />
         <Lbl x={1100} y={660} t="storms travel west → east" c={C.gold} s={T.key} o={fin(f, t5)} />
         <Keyword f={f} text="Coriolis →" at={[1100, 800]} appear={t6} s={T.key} />
         <SrcLine id="s53_trades_westerlies" />
@@ -3180,7 +3258,7 @@ const S54: React.FC = () => {
   const P = mapP(MAPB);
   return (
     <Scene>
-      <Globe cam={cam} o={fout(f, t2, 20)} over={(G) => <g>
+      <Globe cam={cam} boxed o={fout(f, t2, 20)} over={(G) => <g>
         {(HR.isobars[hI].levels as IsoLevel[]).map((L) => <path key={L.level} d={coastPath(G, L.lines, undefined, 1.002)} fill="none" stroke={C.key} strokeOpacity={0.75} strokeWidth={2.2} />)}
         {G.vis(BREST[0], BREST[1]) ? <Place p={G.p(BREST[0], BREST[1])} t="Brest" o={limb(G, BREST[0], BREST[1]) * fin(f, AT(k, 1, "towards Europe"))} /> : null}
       </g>} />
@@ -3385,7 +3463,7 @@ const S58: React.FC = () => {
         <Keyword f={f} text="cooler polar air" at={[1500, 360]} appear={t3} s={T.key} />
         <SrcLine id="s58_brest_cold_front" w={1080} />
       </Svg>
-      <CalcStack f={f} x={1200} y={400} rows={tall(rows, 60)} size={60} />
+      <CalcStack f={f} x={1200} y={430} rows={tall(rows, 60)} size={60} />
     </Scene>
   );
 };

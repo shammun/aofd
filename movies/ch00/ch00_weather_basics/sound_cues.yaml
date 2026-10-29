@@ -1,5 +1,6 @@
 # ch00_weather_basics sound cue sheet v4 (UF1; tools/sound/mix.py format; scene + offset from timing.json). Re-timed by
 # tools/movie_wb/retime_sound_uf1.py: storm-tense = s54 start -> s60 start; s47/s48 effects on their phrases; new whooshes (s03, s25) and wind (s49).
+# UF1 fix loop 1: s47/s48 effects re-anchored on their phrases after the 4-sentence splice; storm-tense = s54 start -> s60 start.
 music:
   style: weather-basics-blend
   seed: 11
@@ -9,12 +10,12 @@ music:
   sections:
   - style: air-flowing
     from_s: 0.0
-    to_s: 2776.825
+    to_s: 2785.05
   - style: storm-tense
-    from_s: 2776.825
-    to_s: 2961.6
+    from_s: 2785.05
+    to_s: 2969.825
   - style: air-flowing
-    from_s: 2961.6
+    from_s: 2969.825
     to_s: end
   note: two styles cross-faded with 4-s raised-cosine ramps by tools/movie_wb/sound_mix.py (tools/sound/mix.py takes one style)
 timing: timing.json
@@ -142,7 +143,7 @@ effects:
   shows: gusts at Brest as the wind swings west at 23 m/s
 - effect: thunder_far
   scene: s47_cold_front
-  offset: 47.7
+  offset: 51.33
   duration: 2.5
   intensity: 0.4
   lufs: -29
@@ -152,7 +153,7 @@ effects:
   shows: saturated air over the cold front pulses (tall clouds)
 - effect: rain_heavy
   scene: s47_cold_front
-  offset: 48.8
+  offset: 52.43
   duration: 3.0
   intensity: 0.35
   lufs: -30
@@ -162,7 +163,7 @@ effects:
   shows: heavy showers at the cold front
 - effect: rain_light
   scene: s48_warm_front
-  offset: 31.28
+  offset: 35.88
   duration: 2.8
   intensity: 0.3
   lufs: -30
