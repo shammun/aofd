@@ -3607,3 +3607,176 @@ The note says the movie names neither. The screen shows only "past days like tod
 - No v6 sentence, audio sample or v6 screen changed beyond what was intended. The 227 untouched sentences are bit-identical to review 1, and 0.00 % of pixels changed in every untouched v6 scene.
 - The splices are clean and level-matched.
 - The cosmetic items above are optional polish for a later pass. The user should watch the movie before `/approve-movie 0 ch00_dot_product_v01b`.
+
+
+---
+
+# ch00_cross_product_uses — review 1 (Part 2 of cross product v5, fresh eyes)                2026-10-28
+
+This review covers `movies/out/ch00/ch00_cross_product_uses/1080.mp4`, "The cross product at work": 1815.53 s (30:15.5), 85.46 MB, 45 scenes. The narration ends at 30:13.0, followed by a 2.5-s hold. The movie is Part 2 of the split cross-product v5. It has six new opening scenes (s00, s01, s01a–s01d), then v5 s23 … s48 word-identical. I did not edit the movie or its sources.
+
+**Frames.** 237 frames are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_uses/review1/` (58 MB, on G:, not C:):
+- one frame per sentence end in the new scenes, in s23/s23a (the splice) and in s47/s48;
+- start, middle and end of every other scene;
+- 1-s steps through s00, s01 and s01d (`dense/`);
+- 1080p crops wherever text size or a collision was in doubt.
+
+I compared the script with v5's s23 … s48 headers ("v4 fix 2, word-identical"). I checked the on-screen equations against Vallis p. 69 ((2.77), (2.79), (2.80)) and p. 88 ((2.195)–(2.197)). The audio was measured, not listened to.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product_uses (Part 2, review 1) | 1815.53 s (30:15.5); narration ends 1813.03 s, then a 2.5-s hold | 85.46 MB (budget 120, cap 160) | 12 PASS + halves WARN (re-run by me): duration, size, codec (H.264 High, yuv420p, AAC, faststart), black 0, frozen 154/154 narrated, content, loudness −16.0 LUFS / −3.0 dBTP, flashes 0/s, captions 451 = script, subtitles SRT = VTT, physics 58 hashes, equations 56 | PASS: Northern Hemisphere right / Southern Hemisphere left; k × u is a quarter turn to the left (anticlockwise seen from above); Coriolis is called an apparent push in the turning frame (s26); f = 0 at the equator (s29, s43); inertial loops clockwise (Northern Hemisphere) and anticlockwise (Southern Hemisphere) seen from above, ≈ 194 km; Ian anticlockwise, Idai clockwise, seen from above; geostrophic wind has the low on its left (Northern Hemisphere); friction turns the surface wind towards the low | PASS: Ω × u components = half the rotation terms of (2.77) with w = 0; −f k × u from (2.79); f = 2Ω sin φ (2.80); u = (1/fρ) k × ∇p from (2.195), components = (2.197); no KaTeX errors | PASS with notes: one new collision (s01a "14" on a's arrowhead); s25b r label still overprinted (R3-S2, open) | FIX: in s01d the picture stays on one kick while the narration says "many small kicks… into a circle" | PASS: 451 cues, ≤ 2 × 42, max 16.91 cps, text = script; two cues under 1 s (cosmetic) | PASS: 0 flashes; violet/teal/orange plus glyphs (⊙/⊗, "−", hatched) | n/a (none, as the house style requires) | **FIX** |
+
+## qa.json (re-run by me with the requested flags)
+`reports/movies/ch00_cross_product_uses/qa.json`: **PASS**, with one WARN. Gate `halves` reports these empty halves longer than 3 s:
+- right 324.5–328.0 (3.5 s), 481–485 (4 s), 800.5–804.5 (4 s);
+- right 1008–1014.5 (6.5 s), 1040–1044 (4 s), 1073–1081 (8 s), 1118.5–1125.5 (7 s);
+- right 1314–1319 (5 s), 1375.5–1379 (3.5 s), 1402–1405.5 (3.5 s), 1477–1481 (4 s);
+- left 1719.5–1725.5 (6 s).
+
+None of them is in the new scenes (0–162 s). All are scene starts carried over from v5 (review-3 R3-S1 is still open).
+
+## Does the new start stand alone? (user requirement)
+| check | verdict | evidence |
+|---|---|---|
+| Opening title s00 (house §3) | PASS, with notes | Title, 150-px gradient "The cross / product / at work", "made easy", "and how **meteorology** uses it", and one sentence in the house pattern. Part B (the globe with the two turning parcels) arrives on "meteorology" (≈ 00:07). Notes: Part A is a flat disc labelled **lowercase ω**, with the readout "ω × r = (…) m/s". The body of the movie uses capital Ω throughout, and the storyboard asks for the globe with Ω and the ground arrows (see S1) |
+| Hook s01 | PASS | "Where does the cross product turn up in the weather?" The globe and its turning arrows are there from the first frame. The keywords "the spinning Earth · moving air turns · storms spin · highs and lows" appear on their words. The mini low has anticlockwise arrows (Northern Hemisphere), which is correct |
+| Recap: the arrow (s01a) | **FIX** | a = (5, 1, 0), b = (1, 3, 0), a × b = (0, 0, 14), right angle, "dot: a number / cross: an arrow ⊥ both". But **only the z component is worked**, and the component recipe is never stated. Part 2 then says "with the recipe" three times and works all three components with it: s23 03:04–03:12, s25b 07:30–07:45 and s28b 13:20–14:02 (the struck-column × pattern). A Part-2-only viewer cannot follow which products go where. The recipe is first stated in words in the recap s47 (28:40), so the recap summarises a rule that this movie never taught (M1) |
+| Recap: the length (s01b) | PASS, with notes | along/across split, \|a\| ≈ 5.1, across ≈ 2.75, product ≈ 14 = area, parallelogram. The numbers are right: √26 = 5.099 and 14/5.099 = 2.746. Notes (S3, S4): the bars notation "\|a\|" is never said in words, and it is used again in s25 as "\|r\| sin θ". "the part along doesn't count" puts a narrated sentence on screen (house §5) |
+| Recap: the direction (s01c) | PASS, with notes | The right hand is curled, the thumb is up and the a × b arrow is up. x̂ × ŷ = ẑ, the cyclic triangle, b × a = −a × b and x̂ × ẑ = −ŷ (rose "−" cycle) are all correct. Notes (S5): "unit vector" is never defined (length one). The axes are not labelled x, y, z and no x̂, ŷ, ẑ arrows are drawn, yet s23 at once says "let k be the unit vector pointing straight up" |
+| Recap: the push (s01d) | **FIX** | See M2 (proton) and M3 (kicks) |
+| Splice into v5 at s23 (02:41.8) | PASS (words and sound); FIX (one reference) | "Now let's see how weather uses the cross product" follows the push recap naturally. At the joint the music bed is continuous: −33 to −35 dBFS in the 0.8-s gap, with no dropout and no jump. But s23a S3 (≈ 03:56) says "like the magnet's push on the **proton**" and shows a "proton" glyph. s01d said "a moving charge" and labelled its glyph "moving charge"; a proton is never mentioned before s23a (M2). "Like our small kicks" (s23a S6) refers back correctly, provided the kicks are actually shown (M3) |
+| Symbols used later | mostly PASS | These are all explained inside Part 2 (s23–s44): u, k, Ω, r, φ, θ, radians, f, ρ, ∇p, hPa, isobars, geostrophic and reanalysis. These are not: "the recipe" (M1), \|·\| (S3), "unit vector" (S5), F and "work" (S6), and the recap's τ, L, p, q, B, "torque", "angular momentum" and "normal" (S2) |
+| Ending / end card | PASS (house); see S7 | s47 "To sum up" and s48 are the weather/climate ending, word for word (HOUSE_STYLE §3, cross-product exception). On screen: four thumbnails, "a series of tutorials", "meteorology · atmospheric science · climate", gold "the ideas, and the maths behind them", "cross-product notebook" and "notebooks for the other concepts". It ends with a hold that fades to silence (−47 → −93 dBFS). There is no URL, book or "thanks". **Nothing points to Part 1.** s47 names only the "later videos" (weather maps; grad, div, curl), and no thumbnail is labelled as Part 1 (S7) |
+
+## Physics and maths honesty (new and changed scenes)
+- s00: ω × r readouts all have length 0.59 m/s and stay perpendicular to r, leading in the anticlockwise sense with ω up. Correct.
+- s01a: 5 × 3 − 1 × 1 = 14. s01c: the cyclic and anticyclic products are correct.
+- s01d: on the circle the push points to the centre and is perpendicular to u. Speed is constant. The circle is anticlockwise with the push to the left of the motion. Correct.
+- v5 body, re-checked on the frames:
+  - k × u = (0, 5, 0) for u = (5, 0, 0), and (−5, 0, 0) for u = (0, 5, 0);
+  - Ω × r ≈ (0, 329, 0) m/s at 45°N and 465 m/s at the equator;
+  - Ω = (0, 5.16, 5.16) × 10⁻⁵ rad/s;
+  - the Ω × u components match (2.77);
+  - f ≈ 1.03 × 10⁻⁴ s⁻¹;
+  - push ≈ 1.03 × 10⁻³ m/s²;
+  - 2π/f ≈ 16.9 h;
+  - loops ≈ 194 km;
+  - ∇p = (0, −1.00 × 10⁻³) Pa/m and fρ ≈ 1.24 × 10⁻⁴, so u ≈ 8.1 m/s east;
+  - both pushes ≈ 8.3 × 10⁻⁴ m/s².
+- Rotation senses always come with hemisphere and viewpoint ("anticlockwise · from above", "f > 0 · anticlockwise", "f < 0 · clockwise").
+- Ekman transport and Rossby waves are not in this movie (the friction turn appears only in s46, as "partly across the isobars, towards the low", which is correct).
+
+## MUST fix
+1. **M1 · 00:50–00:57 · s01a. Restate the component recipe; Part 2 relies on it.**
+   - What is wrong:
+     - Only "for the z component, five times three minus one times one" is said, with no z on screen.
+     - "The other two components are zero" is given without the rule.
+     - Yet s23 (03:04–03:12), s25b (07:30–07:45) and s28b (13:20–14:02) all compute "with the recipe", and s28b uses the struck-column × pattern.
+   - Fix:
+     - Add one sentence to s01a: "Each component leaves out its own direction and cross-multiplies the other two."
+     - Show the three-row form `(a₂b₃ − a₃b₂, a₃b₁ − a₁b₃, a₁b₂ − a₂b₁)` with "x part · y part · z part" (the s47 graphic, which already exists).
+     - Work the x and y rows for (5, 1, 0) × (1, 3, 0) to 0 and 0, and label the z row "z".
+     - Say the word "recipe" once.
+2. **M2 · 02:16.6 (s01d S2) → 03:56 (s23a S3). "Moving charge" here, "proton" later.**
+   - What is wrong: s01d says "the magnetic push on a moving charge" and labels its glyph "moving charge". s23a says "the magnet's push on the proton" and labels its glyph "proton". A viewer who has not seen Part 1 has never met the proton.
+   - Fix: in s01d say "…like a magnet's push on a moving proton" and label the glyph "proton". Or show the s22d proton-in-a-field thumbnail, which the storyboard specifies as a helix.
+3. **M3 · 02:26.3–02:34.3 · s01d S3. The picture does not show what is said.**
+   - What is wrong:
+     - The narration: "Many small sideways kicks, each at a right angle to the new direction, bend the path a little at a time into a circle."
+     - The picture: one kick tilts the arrow at 02:27, then the frame is frozen for ≈ 6 s (02:27.5–02:33.8). Then it cuts to a finished smooth circle at 02:34.
+     - The storyboard asks for "one sideways kick, then ten small kicks, then a smooth curve".
+     - The later "like our small kicks" (s23a S6, 04:24) depends on this picture.
+   - Also at 02:16.6–02:26 (S2), "a push that's always at a right angle to the motion" is said, but no push arrow is drawn until the circle.
+   - Fix:
+     - Animate the kick polygon from the v4 s22e `KickPolygon` data: 1 kick, then N small kicks, each on its own beat with the arrow keeping its length, closing into the circle on "into a circle".
+     - Draw the orange push arrow ⊥ u on "at a right angle to the motion" in S2.
+
+## SHOULD fix
+1. **S1 · 00:00–00:07 · s00. Lowercase ω versus capital Ω.**
+   - What is wrong: Part A is a flat disc labelled "ω" with the readout "ω × r = (…) m/s". The whole movie uses capital Ω for Earth's spin, and the storyboard asks for the globe with Ω and the ground arrows Ω × r along a circle of latitude.
+   - Fix: use Ω (or the globe version as the storyboard says). The Part B parcel arrows on the globe (00:08–00:12) are only about 15 px long; make them bigger (cosmetic).
+2. **S2 · 28:33–29:47 · s47 (v5 words, kept as the user asked). The recap goes beyond Part 2.**
+   - What is wrong:
+     - S2 "each component leaves out its own direction…" (fixed by M1).
+     - S4 "the normal to their plane".
+     - S5 "torque, angular momentum and the push on a moving charge", with τ = r × F, L = r × p and F = q v × B on screen at ≈ 29:01–29:10. τ, L, p, q, B, torque, angular momentum and normal are never explained in Part 2.
+   - This conflicts with "every symbol explained" (house §4) for a viewer who starts here.
+   - **User decision**, because the requirement was "content unchanged". Either:
+     - (a) prefix S5 with "In the last video, we saw that…" and drop the three formulas from the screen (keep the icons); or
+     - (b) leave the words and accept the gap.
+
+   I recommend (a).
+3. **S3 · 01:15–01:34 (s01b) and 06:15–07:04 (s25).** Say "the length of vector a, written with two bars" once when "|a| ≈ 5.1" appears, because "|r| sin θ" depends on it later.
+4. **S4 · 01:30.8–01:34 · s01b.** The narrated sentence "the part along doesn't count" sits on screen (house §5: keywords only). Use "along: 0" or grey out the along band only.
+5. **S5 · 01:52–02:13 · s01c.**
+   - Define "unit vector" (an arrow one unit long along an axis).
+   - Label the floor axes x, y, z, and grow x̂, ŷ, ẑ as each product is spoken: the picture side shows only a, b and a × b while the unit-vector products are read.
+   - s23 then reuses "unit vector" for k.
+6. **S6 · 02:34.6–02:41 · s01d S4.**
+   - F appears in "F · u = 0" but is never named; say "the push, F".
+   - "Does no work" is new to a Part-2 viewer: "no work: it gives no energy" is enough.
+   - "Same speed all the way round" (02:34–02:41) is not spoken; tie it to "never speeds anything up".
+7. **S7 · 29:40–30:15 · s47 S10 / s48. Nothing points to Part 1.**
+   - The user asked for "related movies incl. Part 1". The end card is the house weather card. s47 names only "later videos", and none of the four thumbnails is identified as Part 1.
+   - Fix: add Part 1 to the spoken bridge without a link or title card ("The first part of this video shows why the cross product is built this way, and later videos…"), and make thumbnail 2 the Part 1 picture (parallelogram + a × b).
+   - This needs a words change in s47; it is the user's call.
+8. **S8 · 00:56–01:05 · s01a S4–S5.**
+   - The gold bracket's "14" label sits on vector a's arrowhead and its "a" label.
+   - Move the bracket and "14" to the left of the violet arrow, or above a's tip.
+9. **S9 · 07:53–08:00 · s25b S8. R3-S2 is still open.**
+   - What is wrong:
+     - At the equator, the r arrow's tail runs through "r = (6371, 0, 0) km", and the gold axis cuts "(6".
+     - The axis also runs between "v" and "=" in "v = (0, 465, 0) m/s".
+     - The v arrow is drawn lying on the cut face, pointing at the axis; at 45°N (07:32) it points right, next to "⊙ y". A first-time viewer can read "v points towards the axis", although the narration says east, at a right angle to the axis and to r.
+   - Fix: move the r label outside the globe. Draw v clearly leaving the face (perspective, or a ⊙ glyph at the place with "east").
+10. **S10 · empty halves (qa `halves` WARN, R3-S1 carried over).**
+
+    | time | scene |
+    |---|---|
+    | 17:53–18:01 (8 s) | s33 |
+    | 18:38.5–18:45.5 (7 s) | s34 |
+    | 16:48–16:54.5 (6.5 s) | s31 |
+    | 28:39.5–28:45.5 (6 s, left) | s47 |
+    | 21:54–21:59 | s39 |
+    | 05:24.5–05:28, 08:01–08:05, 13:20.5–13:24.5, 17:20–17:24, 22:55.5–22:59, 23:22–23:25.5, 24:37–24:41 | others, 3.5–4 s |
+
+    Bring each scene's first keyword in on S1.
+
+## COSMETIC
+- **C1 · 25:45–25:49 · s43.** "twice as close" and "balance breaks down / near the equator" nearly touch (≈ 10 px gap) and have different left edges. Stack them with a 24-px gap or separate them.
+- **C2 · Captions.** Two cues are under 1 s: 00:00.30 "In this video," (0.95 s, new) and 20:55.85 "Near its peak," (0.98 s, C5 carried over). Merge each with the next cue.
+- **C3 · 02:16–02:26 · s01d.** The "moving charge" glyph label is in muted grey (house: muted is for ticks and units only); use warm white.
+- **C4 · Inherited from review 3.** C1 (touched labels), C2 (KaTeX brace text ≈ 40 px, house-wide), C3 (s42 overflow while the strip shrinks), C6 (H/L cut by the s39–s40a map top) still apply at their Part-2 times. s41a 24:36: the teal arrowhead overlaps the strip's right border.
+- **C5 · 00:12.8–00:15.9 · s01 S1.** "a × b" alone at the top right is the only thing in the maths zone for 3 s, and the hook has not said "a × b". Use "cross product in the weather?" or nothing.
+
+## House-style conformance
+- **Conforms:**
+  - opening title and sentence pattern;
+  - the hook;
+  - spoken bridges;
+  - no headings (the title only), boxes, references, equation labels, badges or URLs;
+  - colours: Coriolis violet, pressure push orange, wind teal, negative rose with a "−" or ⊗;
+  - type ≥ 44 px on the checked crops (KaTeX brace notes excepted, house-wide);
+  - goal before calculation;
+  - reveals on their words in s00–s01c;
+  - a per-movie score, continuous through the splice;
+  - −16 LUFS;
+  - the weather/climate end card.
+- **Departures:**
+  - M3 (picture ≠ words in s01d);
+  - S4 (a narrated sentence on screen);
+  - S1 (ω versus Ω);
+  - S2 / M1 (terms not explained for a Part-2 viewer);
+  - S10 (empty halves).
+
+## Overall: FIX (ch00_cross_product_uses review 1 — M1–M3; S1–S10 recommended)
+- The v5 body (s23–s48) is word-identical and still correct. The splice sounds seamless, and every physics sign and number checks out.
+- The new opening does not yet stand alone, for two reasons:
+  - Part 2 computes "with the recipe" without ever restating it (M1).
+  - The push recap names a different particle from the one s23a refers to (M2), and shows one kick where it says many (M3).
+- All three fixes are local to s01a and s01d. M1 and M2 add or change two sentences, so they need a TTS re-run for those scenes and re-timed captions; M3 is TSX only.
+- S2 and S7 change v5 words, so they need the user's decision.
+- After the fix: run review 2 on s00–s01d, s23a and the end card, with ≥ 1 frame per sentence.
+
+Disk at review: C: 69 GB free, G: 536 GB free. Review frames: 58 MB (237 PNG) under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_uses/review1/` (not committed). The QA re-run wrote `reports/movies/ch00_cross_product_uses/qa.json` and its contact frames.
