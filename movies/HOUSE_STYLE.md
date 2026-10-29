@@ -181,6 +181,19 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   - pointers and links 5 px gold with open chevrons;
   - a shadow is a 20-px band in the caster's colour.
 
+### 5b. Globes, images and layer stacks (user, 2026-10-29; binding for every movie)
+- **Globe frame.** A 3-D globe gets a large frame, most of the screen's height and width; the model is the cross-product
+  video at 29:30. When it zooms, rotates or flies to a place, its top, bottom, left and right edges **fade out softly**,
+  so the box of the 3-D area is never visible. An unzoomed whole globe needs no fade. While zoomed, text may fade or sit
+  behind, and the globe takes the main space.
+- **Source lines and labels sit fully below an image or globe**, never on any part of it.
+- **No text over images or over other text**, on any frame.
+- **Slabs and columns:** every vertical edge runs all the way to the top.
+- **Layer stacks** (`captests/X3_stacked_levels/threejs_layer_stack/X3Stack.mp4`, with many more than 3 layers): use them
+  wherever a variable changes with height and the stack adds understanding. The camera flies round, through, inside and
+  below the stack. Never reuse the same stack, data and place across movies; skip a stack where it adds nothing.
+- Details and the weather items: `reports/ch00_weather_basics_user_feedback_round2.md`.
+
 ## 6. How things are explained and animated (the teaching moves the user liked)
 - **Picture, then symbols, then numbers.** Build the situation in words and pictures first and name it after.
   - Rule east, rule north, "join the places with the same temperature right now", and only then "isotherms".
@@ -311,3 +324,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-28: §10 QA has 12 gates (content, halves); §7 storm-tracker rule; §4 `[beat]` pauses (user).
 - 2026-10-28: the split cross-product movies: Part 1 (definition, no weather) uses the maths ending; Part 2 and the full v5 use the weather ending (orchestrator, following the user's split request).
 - 2026-10-28: §5 data-source line on every real-data frame, colour bars, 3-D for space, globe camera, explain every number (user feedback on weather basics, reports/ch00_weather_basics_user_feedback.md).
+- 2026-10-29: §5b globe frame + edge fades when zoomed, source lines below images, no text over text, slab edges to the top, many-layer stacks where they add value (user, reports/ch00_weather_basics_user_feedback_round2.md).
