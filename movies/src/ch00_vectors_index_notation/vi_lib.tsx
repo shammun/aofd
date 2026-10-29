@@ -186,7 +186,7 @@ const FieldSphere: React.FC<{ tex: THREE.Texture | null; o: number; r?: number }
   if (!tex || o <= 0) return null;
   return <mesh geometry={geo} material={mat} renderOrder={6} />;
 };
-export const GBOX = { x: 80, y: 40, w: 920, h: 820 };
+export const GBOX = { x: 80, y: 40, w: 920, h: 780 };   // fix 1 (M1): pictures end at y 820
 /** the globe projection a <Globe> with this camera and box uses (for links drawn outside its over() layer) */
 export const globeG = (cam: GlobeCam, box = GBOX): GProj => {
   const st = globeCam({ ...cam, pp: [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);
@@ -299,14 +299,15 @@ export const AxesGlyph: React.FC<{ O: Pt; s?: number; lab?: number; o?: number }
 // ---------------------------------------------------------------- data-source line (HOUSE_STYLE §5, user 2026-10-28, U-WB-R1)
 /** one small muted line at the bottom of the picture on every frame that plots real data: dataset · time · place.
  * 30 px (the rule's floor is 28 px; below the 44-px type floor on purpose, so it is drawn without Lbl's guard), baseline
- * y 866: under the content area (40-860), above the caption band (880-1040). Not spoken. */
+ * y 860 (ink ≈ 839–866): in its own band under the pictures (which end at y 820, fix loop 1 M1), above the caption band
+ * (880-1040); the QA content/halves gates mask y ≥ 835. Not spoken. */
 export const SrcLine: React.FC<{ t: string; x?: number; o?: number }> = ({ t, x = 80, o = 1 }) => {
   const f = useCurrentFrame();
   const op = o * ramp(f, 0, XF);
   if (op <= 0 || !t) return null;
   return (
     <Svg>
-      <text x={x} y={866} fill={C.muted} fontSize={30} fontFamily={FONT} fontWeight={500} stroke={C.bg} strokeWidth={5}
+      <text x={x} y={860} fill={C.muted} fontSize={30} fontFamily={FONT} fontWeight={500} stroke={C.bg} strokeWidth={5}
         strokeLinejoin="round" paintOrder="stroke" opacity={op}>{t}</text>
     </Svg>
   );

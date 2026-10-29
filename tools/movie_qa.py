@@ -18,7 +18,7 @@ Gates (each PASS / FAIL / SKIP with a reason; exit 0 only when no gate FAILs):
 | codec | video not H.264 High (or Main for tiny clips) yuv420p, audio not AAC, or moov atom not before mdat (faststart) |
 | black | black > 0.5 s outside the first/last 0.5 s (blackdetect) |
 | frozen | a frozen stretch > 4 s (freezedetect) holding > 4 s of silence (narration from timing.json; without one, any) |
-| content | the content area (y 40–860) has < --content-frac (0.2 %) of its pixels off the house background #171f33 for > --content-max (1.5 s), sampled every 0.5 s at 480 px — a navy "blank screen" the black gate cannot see (added 2026-10-28, ch00_weather_basics review 1 M1) |
+| content | the content area (y 40–835; the source-line band y ≥ 835 is masked) has < --content-frac (0.2 %) of its pixels off the house background #171f33 for > --content-max (1.5 s), sampled every 0.5 s at 480 px — a navy "blank screen" the black gate cannot see (added 2026-10-28, ch00_weather_basics review 1 M1) |
 | halves | the picture zone (x 80–1000) or the maths zone (x 1060–1840) is empty that way for > --half-max (10 s); WARN above --half-warn (3 s), HOUSE_STYLE §5 / U-M4.2 |
 | loudness | integrated outside −18…−14 LUFS or true peak > −1 dBTP (ebur128) |
 | flashes | > 3 large luminance flashes in any 1 s window (WCAG 2.3.1), from frames sampled at the video fps |
@@ -273,6 +273,7 @@ def longest_silence(s: float, e: float, speech: list[tuple[float, float]]) -> fl
 
 
 CONTENT_BG = (23, 31, 51)         # house background #171f33 (HOUSE_STYLE §5)
+SRC_BAND_Y = 835                  # the data-source line band starts here; excluded from the content/halves gates
 
 
 def content_scan(path: Path, dur: float, step: float = 0.5, thr: int = 28, w: int = 480,
@@ -280,12 +281,14 @@ def content_scan(path: Path, dur: float, step: float = 0.5, thr: int = 28, w: in
     """Sample the movie every ``step`` s at ``w`` px wide and measure, for each sample, the fraction of pixels that
     differ from the house background by more than ``thr`` (max over R, G, B) in three regions of the 1920×1080 layout
     (HOUSE_STYLE §5): the whole content area (x 0–1920, y 40–860), the picture zone (x 80–1000) and the maths zone
-    (x 1060–1840), both y 40–860. Navy background counts as empty, which the black gate cannot see."""
+    (x 1060–1840), all y 40–835. Navy background counts as empty, which the black gate cannot see. The data-source
+    band (y ≥ 835, HOUSE_STYLE §5 source line at y 832–862) is left out on purpose: a source line must never count as
+    content, or it would mask an empty half (ch00_vectors_index_notation review 1, 2026-10-29)."""
     import numpy as np
 
     h = int(round(w * 1080 / 1920))
     s = w / 1920
-    y0, y1 = int(40 * s), int(860 * s)
+    y0, y1 = int(40 * s), int(SRC_BAND_Y * s)
     regions = {"content": (0, w), "left": (int(80 * s), int(1000 * s)), "right": (int(1060 * s), int(1840 * s))}
     proc = subprocess.Popen([FF, "-v", "error", "-i", str(path), "-vf",
                              f"fps=1/{step},scale={w}:{h}:flags=area,format=rgb24", "-f", "rawvideo", "-"],
@@ -431,7 +434,7 @@ def main() -> int:
             (outdir / "content_scan.json").write_text(json.dumps(rows), encoding="utf-8")
             blank = [(s, e) for s, e in empty_spans(rows, "content", a.content_frac, step, dur) if e - s > a.content_max]
             gate("content", "FAIL" if blank else "PASS",
-                 (f"content area (y 40–860) empty > {a.content_max:g} s: "
+                 (f"content area (y 40–835) empty > {a.content_max:g} s: "
                   + ", ".join(f"{s:.1f}–{e:.1f} s ({e - s:.1f} s)" for s, e in blank)) if blank else
                  f"{len(rows)} samples every {step:g} s; no empty content area > {a.content_max:g} s "
                  f"(< {a.content_frac * 100:g} % of pixels off the background)")

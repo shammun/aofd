@@ -10,7 +10,7 @@ concepts:
   2026-10-27)
 - Einstein summation convention, free and dummy indices (K 2.2)
 - Kronecker delta (K 2.16, 2.17; App. B B.3.1, B.3.4)
-target_duration_s: 2076.475
+target_duration_s: 2112.425
 fps: 30
 size:
 - 1920
@@ -68,10 +68,10 @@ audio:
     shows: the nine-term grid filling cell by cell
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a
     word (sentence gaps only); one at a time; no caption tags (no sound carries meaning the voice does not say)'
-measured_narration_s: 2073.975
-measured_frames: 62294
-words: 5172
-sentences: 335
+measured_narration_s: 2109.925
+measured_frames: 63298
+words: 5278
+sentences: 336
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/dryrun/v4_split_1a
@@ -279,7 +279,7 @@ scenes:
 - id: s04_vector_wind
   t:
   - 92.275
-  - 135.625
+  - 139.375
   sentence_times:
   - - 92.275
     - 96.725
@@ -290,13 +290,13 @@ scenes:
   - - 107.275
     - 111.45
   - - 111.8
-    - 117.875
-  - - 118.225
-    - 123.55
-  - - 123.9
-    - 128.65
-  - - 129.0
-    - 134.825
+    - 121.625
+  - - 121.975
+    - 127.3
+  - - 127.65
+    - 132.4
+  - - 132.75
+    - 138.575
   beat: 'building blocks: vector'
   visual: 'Picture zone: a cartostyle relief locator of west Brittany (hillshade tint, Natural Earth coast, ''Brest'' and
     ''Brest-Guipavas'' airport dot, scale bar ''10 km (at 48° N)''), a station glyph at the airport. S2: the SYNOP readout
@@ -307,9 +307,9 @@ scenes:
   voiceover: 'Now let''s look at the wind, at the same place and the same moment. The station at Brest reported a wind of
     nine point three metres per second, from the south-south-east. A single number can''t describe this. We need to know how
     fast the air moves, and which way it goes. A quantity with a size and a direction is called a vector, and we draw it as
-    an arrow. The arrow''s length shows the speed, and the arrow points the way the air is moving. Careful, though: weather
-    reports give the direction the wind comes from. This wind comes from the south-south-east, so the air moves towards the
-    north-north-west.'
+    an arrow, which we name with a bold letter: the wind vector is bold u. The arrow''s length shows the speed, and the arrow
+    points the way the air is moving. Careful, though: weather reports give the direction the wind comes from. This wind comes
+    from the south-south-east, so the air moves towards the north-north-west.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.isd.decode + fluidpy.geo.atmos.wind_components
@@ -330,19 +330,19 @@ scenes:
   related: []
 - id: s05_vector_field
   t:
-  - 135.625
-  - 163.8
+  - 139.375
+  - 168.425
   sentence_times:
-  - - 135.625
-    - 139.725
-  - - 140.075
-    - 150.0
-  - - 150.35
-    - 156.375
-  - - 156.725
-    - 159.325
-  - - 159.675
-    - 163.0
+  - - 139.375
+    - 143.475
+  - - 143.825
+    - 153.75
+  - - 154.1
+    - 161.0
+  - - 161.35
+    - 163.95
+  - - 164.3
+    - 167.625
   beat: 'building blocks: vector field'
   visual: 'Full width map (LCC, 40-56 N, 15 W-5 E) on the GIBS true colour image of 1 Nov 2023 (the clouds of Ciarán; lines
     white with dark halo), ERA5 850 hPa winds as ~15 x 9 teal arrows on a projected grid (arrow length 6 px per m/s, scale
@@ -352,8 +352,8 @@ scenes:
     (54 px). S4-S5: one arrow over Brest lifts out and enlarges (Ken Burns 1.4x) to lead into s06.'
   voiceover: Draw an arrow at every place, and you get a vector field. Here are the winds a little more than a kilometre above
     western Europe at that moment, as Storm Ciarán, a deep area of low pressure, was approaching. Over the sea west of France,
-    the air was streaming north at more than thirty metres per second. Arrows show the wind at a glance. But to calculate
-    with them, we need numbers.
+    the air was streaming towards the north-east at more than thirty metres per second. Arrows show the wind at a glance.
+    But to calculate with them, we need numbers.
   on_screen_eq: null
   physics_source:
     fn: 'build script: A1 u, v at 850 hPa regridded to a projected 15 x 9 grid (cartopy regrid_shape) + fluidpy.data.era5_arco.storm_centre
@@ -374,23 +374,23 @@ scenes:
   sfx: wind_gentle 0.2 under S3 (the stream is shown); never over a word peak
 - id: s06_basis
   t:
-  - 163.8
-  - 200.525
+  - 168.425
+  - 205.15
   sentence_times:
-  - - 163.8
-    - 166.675
-  - - 167.025
-    - 173.225
-  - - 173.575
-    - 179.325
-  - - 179.675
-    - 184.425
-  - - 184.775
-    - 190.1
-  - - 190.45
-    - 193.2
-  - - 193.55
-    - 199.725
+  - - 168.425
+    - 171.3
+  - - 171.65
+    - 177.85
+  - - 178.2
+    - 183.95
+  - - 184.3
+    - 189.05
+  - - 189.4
+    - 194.725
+  - - 195.075
+    - 197.825
+  - - 198.175
+    - 204.35
   beat: 'building blocks: basis'
   visual: 'Picture zone: three.js 3-D scene - a small patch of the Brittany relief (ETOPO, x5 vertical, said nowhere because
     the patch is only a floor) as the floor, Brest dot at the origin; the camera at az 220, el 25. S1: three axes grow from
@@ -428,21 +428,21 @@ scenes:
     spoken_pointer: false
 - id: s07_components_easy
   t:
-  - 200.525
-  - 234.5
+  - 205.15
+  - 239.125
   sentence_times:
-  - - 200.525
-    - 203.325
-  - - 203.675
-    - 211.2
-  - - 211.55
-    - 217.75
-  - - 218.1
-    - 222.2
-  - - 222.55
-    - 227.35
-  - - 227.7
-    - 233.7
+  - - 205.15
+    - 207.95
+  - - 208.3
+    - 215.825
+  - - 216.175
+    - 222.375
+  - - 222.725
+    - 226.825
+  - - 227.175
+    - 231.975
+  - - 232.325
+    - 238.325
   beat: 'building blocks: components (easy numbers)'
   visual: 'Same 3-D scene, camera eases to a near top view (el 70). S2: teal arrow (6, 8, 0) grows from Brest; ''u = (6, 8,
     0) m/s'' appears only on AT(2, "eight towards the north") under the picture. S3: a walker dot steps 6 unit ticks along
@@ -474,31 +474,31 @@ scenes:
   related: []
 - id: s08_components_real
   t:
-  - 234.5
-  - 296.125
+  - 239.125
+  - 302.025
   sentence_times:
-  - - 234.5
-    - 236.8
-  - - 237.15
-    - 243.625
-  - - 243.975
-    - 249.025
-  - - 249.375
-    - 252.675
-  - - 253.025
-    - 259.9
-  - - 260.25
-    - 266.55
-  - - 266.9
-    - 270.75
-  - - 271.1
-    - 278.3
-  - - 278.65
-    - 282.525
-  - - 282.875
-    - 291.6
-  - - 291.95
-    - 295.325
+  - - 239.125
+    - 241.425
+  - - 241.775
+    - 248.25
+  - - 248.6
+    - 253.65
+  - - 254.0
+    - 257.3
+  - - 257.65
+    - 264.525
+  - - 264.875
+    - 271.175
+  - - 271.525
+    - 275.375
+  - - 275.725
+    - 282.925
+  - - 283.275
+    - 287.15
+  - - 287.5
+    - 297.5
+  - - 297.85
+    - 301.225
   beat: 'building blocks: components (real wind)'
   visual: 'Picture zone: top view of the Brest axes (flat now, SVG pair plane mkP with the station glyph at O). S1: the teal
     real wind arrow (from s04) at its true direction; a compass rose arc from north clockwise to 150 deg (slate, ''from 150°'').
@@ -512,8 +512,8 @@ scenes:
     how much north? The east part is the speed times the sine of three hundred and thirty degrees, which is minus a half.
     So it''s nine point three times minus a half: minus four point six five metres per second. The minus means the air moves
     partly towards the west. The north part is the speed times the cosine of three hundred and thirty degrees, about point
-    eight six six. That gives eight point zero five metres per second. Meteorologists call the three components u, v and w:
-    u towards the east, v towards the north, and w upwards. Near the ground, w is almost zero.'
+    eight six six. That gives eight point zero five metres per second. Meteorologists call the three components u, v and w,
+    in plain letters: u towards the east, v towards the north, and w upwards. Near the ground, w is almost zero.'
   on_screen_eq:
     latex: u = |\mathbf u|\sin 330^\circ = -4.65,\quad v = |\mathbf u|\cos 330^\circ = 8.05
     vallis_eq: 'provenance only: meteorological from-convention u = -s sin d, v = -s cos d (fluidpy.geo.atmos.wind_components
@@ -538,17 +538,17 @@ scenes:
     spoken_pointer: false
 - id: s09_up_component
   t:
-  - 296.125
-  - 321.075
+  - 302.025
+  - 327.1
   sentence_times:
-  - - 296.125
-    - 301.45
-  - - 301.8
-    - 307.5
-  - - 307.85
-    - 316.425
-  - - 316.775
-    - 320.275
+  - - 302.025
+    - 307.35
+  - - 307.7
+    - 313.4
+  - - 313.75
+    - 322.45
+  - - 322.8
+    - 326.3
   beat: 'building blocks: the up component'
   visual: 'Picture zone: three.js side view of a column above Brest: the floor (relief patch), the 850 hPa level as a translucent
     slate plane at its real height (z850 from D1, drawn x10 vertical; the column is a sketch, the exaggeration is recorded
@@ -579,27 +579,27 @@ scenes:
   related: []
 - id: s10_magnitude
   t:
-  - 321.075
-  - 371.675
+  - 327.1
+  - 379.775
   sentence_times:
-  - - 321.075
-    - 323.025
-  - - 323.375
-    - 332.525
-  - - 332.875
-    - 336.4
-  - - 336.75
-    - 342.05
-  - - 342.4
-    - 347.275
-  - - 347.625
-    - 352.575
-  - - 352.925
-    - 362.05
-  - - 362.4
-    - 366.5
-  - - 366.85
-    - 370.875
+  - - 327.1
+    - 329.05
+  - - 329.4
+    - 338.55
+  - - 338.9
+    - 342.425
+  - - 342.775
+    - 348.075
+  - - 348.425
+    - 353.3
+  - - 353.65
+    - 359.85
+  - - 360.2
+    - 370.15
+  - - 370.5
+    - 374.6
+  - - 374.95
+    - 378.975
   beat: 'building blocks: magnitude'
   visual: 'Picture zone: three.js box diagonal. S1-S2: flat (6, 8) arrow with its legs; CalcStack (maths zone): |u| = √(6²
     + 8²) = √100 = 10. S3-S4: the camera tilts to 3-D; a generic arrow (6, 8, 3) with its floor shadow (dashed) and the vertical
@@ -610,11 +610,12 @@ scenes:
   voiceover: 'How long is the arrow? On a flat map, Pythagoras'' theorem gives the length from two components: the square
     root of six squared plus eight squared, which is ten. In three dimensions, we use Pythagoras twice. First across the floor,
     to the point straight below the tip, and then up to the tip. So the length is the square root of the sum of all three
-    components squared. The length is also called the magnitude, and we write it with two straight bars. For the real wind
-    at Brest, it''s the square root of four point six five squared, plus eight point zero five squared, plus zero squared.
-    That''s nine point three, the speed the station reported. So the magnitude of the wind vector is the wind speed.'
+    components squared. The length is also called the magnitude, and we write it with a straight bar on each side of bold
+    u. For the real wind at Brest, it''s the square root of minus four point six five, squared, plus eight point zero five
+    squared, plus zero squared. That''s nine point three, the speed the station reported. So the magnitude of the wind vector
+    is the wind speed.'
   on_screen_eq:
-    latex: '|\mathbf u| = \sqrt{u_1^2 + u_2^2 + u_3^2}'
+    latex: '|\mathbf u| = \sqrt{u^2 + v^2 + w^2}'
     vallis_eq: 'provenance only: length by Pythagoras (Kundu §2.8 ''magnitude'', unnumbered; also u_i u_i of (2.2) with a
       = b); our numbers'
     page_png: ../Fluid Dynamics/chapters/pages/ch02/p068.png
@@ -636,29 +637,29 @@ scenes:
   related: []
 - id: s11_other_axes
   t:
-  - 371.675
-  - 430.125
+  - 379.775
+  - 438.225
   sentence_times:
-  - - 371.675
-    - 374.75
-  - - 375.1
-    - 382.275
-  - - 382.625
-    - 387.65
-  - - 388.0
-    - 395.25
-  - - 395.6
-    - 400.975
-  - - 401.325
-    - 406.025
-  - - 406.375
-    - 411.025
-  - - 411.375
-    - 417.575
-  - - 417.925
-    - 421.85
-  - - 422.2
-    - 429.325
+  - - 379.775
+    - 382.85
+  - - 383.2
+    - 390.375
+  - - 390.725
+    - 395.75
+  - - 396.1
+    - 403.35
+  - - 403.7
+    - 409.075
+  - - 409.425
+    - 414.125
+  - - 414.475
+    - 419.125
+  - - 419.475
+    - 425.675
+  - - 426.025
+    - 429.95
+  - - 430.3
+    - 437.425
   beat: 'intuition: same arrow, other axes'
   visual: 'Picture zone: map of north Brittany (cartostyle, coast highlighted gold from Brest to Saint-Malo), the 850 hPa
     wind arrow at Brest (teal, 34 m/s at 8 px per m/s). S1: the east/north axes (slate) at Brest. S2: a second pair of axes
@@ -704,23 +705,23 @@ scenes:
     spoken_pointer: true
 - id: s12_position
   t:
-  - 430.125
-  - 469.6
+  - 438.225
+  - 477.7
   sentence_times:
-  - - 430.125
-    - 432.3
-  - - 432.65
-    - 436.15
-  - - 436.5
-    - 441.7
-  - - 442.05
-    - 449.75
-  - - 450.1
-    - 457.0
-  - - 457.35
-    - 463.85
-  - - 464.2
-    - 468.8
+  - - 438.225
+    - 440.4
+  - - 440.75
+    - 444.25
+  - - 444.6
+    - 449.8
+  - - 450.15
+    - 457.85
+  - - 458.2
+    - 465.1
+  - - 465.45
+    - 471.95
+  - - 472.3
+    - 476.9
   beat: 'building blocks: position vector'
   visual: 'Picture zone: three.js scene over the relief floor, origin at the Brest airport dot; a balloon icon (BalloonThermometer)
     at (3, 4, 1.2) km, its teal position arrow x from the origin with dashed legs 3 (east), 4 (north), 1.2 (up, x2 vertical).
@@ -755,35 +756,35 @@ scenes:
   related: []
 - id: s12a_add_tip_to_tail
   t:
-  - 469.6
-  - 534.675
+  - 477.7
+  - 543.125
   sentence_times:
-  - - 469.6
-    - 471.725
-  - - 472.075
-    - 478.125
-  - - 478.475
-    - 481.85
-  - - 482.2
-    - 484.6
-  - - 484.95
+  - - 477.7
+    - 479.825
+  - - 480.175
+    - 486.225
+  - - 486.575
     - 489.95
   - - 490.3
-    - 494.675
-  - - 495.025
-    - 498.1
-  - - 498.45
-    - 503.625
-  - - 503.975
-    - 510.975
-  - - 511.325
-    - 514.45
-  - - 514.8
-    - 520.725
-  - - 521.075
-    - 526.725
-  - - 527.075
-    - 533.875
+    - 492.7
+  - - 493.05
+    - 498.05
+  - - 498.4
+    - 502.775
+  - - 503.125
+    - 506.2
+  - - 506.55
+    - 511.725
+  - - 512.075
+    - 519.075
+  - - 519.425
+    - 522.55
+  - - 522.9
+    - 528.825
+  - - 529.175
+    - 534.825
+  - - 535.175
+    - 542.325
   beat: 'addition: tip to tail (aircraft in the jet stream)'
   visual: 'Full width: the latest GFS 250 hPa wind map over the North Atlantic (NEW D4, day of production; cmocean ''speed''-family
     sequential shading 0-80 m/s, colour bar ''m/s'' 52 px, streamlines white 1.5 px, coasts), a great-circle route New York
@@ -799,7 +800,8 @@ scenes:
     move over the ground? To find out, we put the wind''s arrow with its tail at the tip of the plane''s arrow. The arrow
     from the first tail to the last tip is the sum: three hundred metres per second, towards the east. This is called adding
     vectors tip to tail. Flying the other way, against the jet, the sum is only two hundred metres per second. That''s why
-    flights from North America to Europe are usually shorter than the flights back. On the day this video was made, the jet over the North Atlantic reached about sixty-five metres per second.'
+    flights from North America to Europe are usually shorter than the flights back. On the day this video was made, the jet
+    over the North Atlantic reached about sixty-five metres per second.'
   on_screen_eq:
     latex: 250 + 50 = 300\ \mathrm{m\,s^{-1}}
     vallis_eq: 'provenance only: our easy numbers (vector addition, Kundu §2.1 components)'
@@ -822,33 +824,33 @@ scenes:
   related: []
 - id: s12b_add_parallelogram
   t:
-  - 534.675
-  - 598.45
+  - 543.125
+  - 612.95
   sentence_times:
-  - - 534.675
-    - 537.875
-  - - 538.225
-    - 544.9
-  - - 545.25
-    - 549.0
-  - - 549.35
-    - 553.925
-  - - 554.275
-    - 556.25
-  - - 556.6
-    - 561.9
-  - - 562.25
-    - 564.975
-  - - 565.325
-    - 570.95
-  - - 571.3
-    - 579.375
-  - - 579.725
-    - 585.575
-  - - 585.925
-    - 588.35
-  - - 588.7
-    - 597.65
+  - - 543.125
+    - 546.325
+  - - 546.675
+    - 553.35
+  - - 553.7
+    - 557.45
+  - - 557.8
+    - 562.375
+  - - 562.725
+    - 564.7
+  - - 565.05
+    - 570.35
+  - - 570.7
+    - 579.475
+  - - 579.825
+    - 585.45
+  - - 585.8
+    - 593.875
+  - - 594.225
+    - 600.075
+  - - 600.425
+    - 602.85
+  - - 603.2
+    - 612.15
   beat: 'addition: parallelogram and components'
   visual: 'Picture zone: house pair plane (mkP) with the plane''s teal arrow (0, 250) north and the orange jet (50, 0), drawn
     1.4 px per m/s. S2: tip to tail -> warm-white sum. S4: second route (orange first, then teal) dashed; S5 both reach the
@@ -859,11 +861,11 @@ scenes:
   voiceover: 'What if the wind blows across the plane''s path? Let the plane head north at two hundred and fifty metres per
     second, while the jet blows east at fifty. Tip to tail, the sum points a little east of north. Now add them the other
     way round: the wind first, then the plane. We reach the same tip. The two routes make the sides of a parallelogram, and
-    the sum is its diagonal. So the order of adding doesn''t matter. In components, adding is easy: we add the east parts,
-    and we add the north parts. Zero plus fifty is fifty towards the east, and two hundred and fifty plus zero is two hundred
-    and fifty towards the north. By Pythagoras, the ground speed is about two hundred and fifty five metres per second. The
-    ocean works the same way. A drifting buoy is carried by the current and pushed by the wind, so its velocity is the current''s
-    arrow plus the wind drift''s arrow.'
+    the sum is its diagonal. Calling the plane''s arrow p and the jet''s arrow q, that''s p plus q equals q plus p: the order
+    of adding doesn''t matter. In components, adding is easy: we add the east parts, and we add the north parts. Zero plus
+    fifty is fifty towards the east, and two hundred and fifty plus zero is two hundred and fifty towards the north. By Pythagoras,
+    the ground speed is about two hundred and fifty five metres per second. The ocean works the same way. A drifting buoy
+    is carried by the current and pushed by the wind, so its velocity is the current''s arrow plus the wind drift''s arrow.'
   on_screen_eq:
     latex: (0,\,250) + (50,\,0) = (50,\,250)
     vallis_eq: 'provenance only: component-wise addition (Kundu §2.1 components); our numbers'
@@ -892,33 +894,33 @@ scenes:
     spoken_pointer: false
 - id: s12c_add_forces
   t:
-  - 598.45
-  - 667.5
+  - 612.95
+  - 686.4
   sentence_times:
-  - - 598.45
-    - 600.725
-  - - 601.075
-    - 606.45
-  - - 606.8
-    - 617.325
-  - - 617.675
-    - 622.7
-  - - 623.05
-    - 629.225
-  - - 629.575
-    - 631.85
-  - - 632.2
-    - 636.725
-  - - 637.075
-    - 643.0
-  - - 643.35
-    - 648.2
-  - - 648.55
-    - 653.475
-  - - 653.825
-    - 661.125
-  - - 661.475
-    - 666.7
+  - - 612.95
+    - 615.225
+  - - 615.575
+    - 620.95
+  - - 621.3
+    - 631.825
+  - - 632.175
+    - 641.6
+  - - 641.95
+    - 648.125
+  - - 648.475
+    - 650.75
+  - - 651.1
+    - 655.625
+  - - 655.975
+    - 661.9
+  - - 662.25
+    - 667.1
+  - - 667.45
+    - 672.375
+  - - 672.725
+    - 680.025
+  - - 680.375
+    - 685.6
   beat: 'addition: forces on a parcel balance'
   visual: 'Picture zone: a near-ground air parcel (translucent cube) on a schematic map with east-west isobars (low ''L''
     to the north, house red), the teal wind arrow towards ENE (8, 6) direction. S3: orange pressure push (0, 12.5) north.
@@ -928,12 +930,13 @@ scenes:
     L (about 37 degrees).'
   voiceover: 'Forces add like this too. Picture an air parcel near the ground, where three pushes act on each kilogram. The
     pressure push points towards low pressure, here straight north, with a size of twelve point five, in units of ten to the
-    minus four metres per second squared. The Coriolis push, from Earth''s spin, has components six and minus eight. Friction
-    with the ground pulls back against the wind: minus six and minus four point five. Let''s add them tip to tail. The east
-    parts give zero plus six minus six, which is zero. The north parts give twelve point five minus eight minus four point
-    five, also zero. The three arrows close into a triangle, so the total push is zero. That means the parcel''s wind doesn''t
-    change: the three pushes balance. Here the wind blows towards the east-north-east, partly across the lines of equal pressure,
-    towards the low. How each of these pushes arises gets its own movies later in the series.'
+    minus four metres per second squared. The Coriolis push is an apparent push, which appears because we measure the wind
+    on a spinning Earth, and here it has components six and minus eight. Friction with the ground pulls back against the wind:
+    minus six and minus four point five. Let''s add them tip to tail. The east parts give zero plus six minus six, which is
+    zero. The north parts give twelve point five minus eight minus four point five, also zero. The three arrows close into
+    a triangle, so the total push is zero. That means the parcel''s wind doesn''t change: the three pushes balance. Here the
+    wind blows towards the east-north-east, partly across the lines of equal pressure, towards the low. How each of these
+    pushes arises gets its own movies later in the series.'
   on_screen_eq:
     latex: (0,\,12.5) + (6,\,-8) + (-6,\,-4.5) = (0,\,0)
     vallis_eq: 'provenance only: our easy numbers (units 10⁻⁴ m s⁻²); the three-force picture is treated in the geostrophic
@@ -976,31 +979,31 @@ scenes:
     spoken_pointer: true
 - id: s12d_add_geostrophic
   t:
-  - 667.5
-  - 741.925
+  - 686.4
+  - 760.825
   sentence_times:
-  - - 667.5
-    - 669.2
-  - - 669.55
-    - 677.55
-  - - 677.9
-    - 682.275
-  - - 682.625
-    - 689.725
-  - - 690.075
-    - 697.6
-  - - 697.95
-    - 706.9
-  - - 707.25
-    - 713.85
-  - - 714.2
-    - 721.4
-  - - 721.75
-    - 727.35
-  - - 727.7
-    - 733.25
-  - - 733.6
-    - 741.125
+  - - 686.4
+    - 688.1
+  - - 688.45
+    - 696.45
+  - - 696.8
+    - 701.175
+  - - 701.525
+    - 708.625
+  - - 708.975
+    - 716.5
+  - - 716.85
+    - 725.8
+  - - 726.15
+    - 732.75
+  - - 733.1
+    - 740.3
+  - - 740.65
+    - 746.25
+  - - 746.6
+    - 752.15
+  - - 752.5
+    - 760.025
   beat: 'addition: real = geostrophic + ageostrophic (Ciarán)'
   visual: 'Full width: ERA5 MSLP 18 UTC 1 Nov 2023 isobars every 4 hPa (white on the GIBS true-colour plate, labels in-line,
     ''L'' with central pressure 961 hPa read from A4), Brest gold dot, a sea point 48.0 N 6.0 W marked. S2 keyword ''isobars'',
@@ -1048,34 +1051,34 @@ scenes:
     spoken_pointer: false
 - id: s12e_subtract_def
   t:
-  - 741.925
-  - 787.675
+  - 760.825
+  - 809.0
   sentence_times:
-  - - 741.925
-    - 743.85
-  - - 744.2
-    - 753.95
-  - - 754.3
-    - 760.9
-  - - 761.25
-    - 763.525
-  - - 763.875
-    - 766.6
-  - - 766.95
-    - 771.9
-  - - 772.25
-    - 779.125
-  - - 779.475
-    - 786.875
+  - - 760.825
+    - 762.75
+  - - 763.1
+    - 775.275
+  - - 775.625
+    - 782.225
+  - - 782.575
+    - 784.85
+  - - 785.2
+    - 787.925
+  - - 788.275
+    - 793.225
+  - - 793.575
+    - 800.45
+  - - 800.8
+    - 808.2
   beat: 'subtraction: definition'
   visual: 'House pair plane: p = (5, 1) teal, q = (1, 3) orange. S1: -q appears as a rose dashed copy of q pointing the other
     way (with ''-'' glyph). S2: p + (-q) tip to tail -> (4, -2). S3-S4: both from one point; the arrow from q''s tip to p''s
     tip (warm white) ''from q to p''. S5: q + (p - q) = p tip to tail check (gold ring). S6: maths (5, 1) - (1, 3) = (4, -2).'
   voiceover: 'Now subtraction. First, the negative of a vector is the same arrow, turned to point the opposite way: minus
-    q has every component of q with its sign flipped. To subtract q from p, we add minus q: p minus q equals p plus minus
-    q. There''s a handy picture too. Draw p and q from the same point. Then p minus q is the arrow from the tip of q to the
-    tip of p. Let''s check it: q plus that arrow lands on the tip of p, so q plus, p minus q, is p. With easy numbers, if
-    p is five, one, and q is one, three, then p minus q is four, minus two.'
+    q has every component of q, which we call q one and q two, with its sign flipped. To subtract q from p, we add minus q:
+    p minus q equals p plus minus q. There''s a handy picture too. Draw p and q from the same point. Then p minus q is the
+    arrow from the tip of q to the tip of p. Let''s check it: q plus that arrow lands on the tip of p, so q plus, p minus
+    q, is p. With easy numbers, if p is five, one, and q is one, three, then p minus q is four, minus two.'
   on_screen_eq:
     latex: \mathbf p - \mathbf q = \mathbf p + (-\mathbf q),\qquad (5,1) - (1,3) = (4,-2)
     vallis_eq: 'provenance only: definition of subtraction; our numbers'
@@ -1099,27 +1102,27 @@ scenes:
   related: []
 - id: s12f_subtract_hour
   t:
-  - 787.675
-  - 842.675
+  - 809.0
+  - 864.0
   sentence_times:
-  - - 787.675
-    - 790.375
-  - - 790.725
-    - 802.025
-  - - 802.375
-    - 809.65
-  - - 810.0
-    - 812.6
-  - - 812.95
-    - 816.025
-  - - 816.375
-    - 821.4
-  - - 821.75
-    - 827.45
-  - - 827.8
-    - 835.675
-  - - 836.025
-    - 841.875
+  - - 809.0
+    - 811.7
+  - - 812.05
+    - 823.35
+  - - 823.7
+    - 830.975
+  - - 831.325
+    - 833.925
+  - - 834.275
+    - 837.35
+  - - 837.7
+    - 842.725
+  - - 843.075
+    - 848.775
+  - - 849.125
+    - 857.0
+  - - 857.35
+    - 863.2
   beat: 'subtraction: the wind''s change in one hour (map animation)'
   visual: 'Picture zone: ERA5 850 hPa map of Brittany animating 17 -> 18 UTC (fields cross-faded, isotherms sliding; clock
     glyph). Teal 17 UTC arrow at Brest (ghosted after the clock passes), teal 18 UTC arrow; both drawn from Brest. S6-S7:
@@ -1159,29 +1162,29 @@ scenes:
     spoken_pointer: false
 - id: s12g_shear_hodograph
   t:
-  - 842.675
-  - 916.525
+  - 864.0
+  - 937.85
   sentence_times:
-  - - 842.675
-    - 847.65
-  - - 848.0
-    - 856.425
-  - - 856.775
-    - 861.425
-  - - 861.775
-    - 865.575
-  - - 865.925
-    - 876.65
-  - - 877.0
-    - 886.725
-  - - 887.075
-    - 898.175
-  - - 898.525
-    - 903.45
-  - - 903.8
-    - 908.075
-  - - 908.425
-    - 915.725
+  - - 864.0
+    - 868.975
+  - - 869.325
+    - 877.75
+  - - 878.1
+    - 882.75
+  - - 883.1
+    - 886.9
+  - - 887.25
+    - 897.975
+  - - 898.325
+    - 908.05
+  - - 908.4
+    - 919.5
+  - - 919.85
+    - 924.775
+  - - 925.125
+    - 929.4
+  - - 929.75
+    - 937.05
   beat: 'subtraction: wind shear and the hodograph (real sounding)'
   visual: 'Left: three.js column above Trappes (relief floor, balloon rising along the IGRA profile, x10 vertical recorded)
     with wind arrows at each reported level (teal, length 6 px per m/s), 850 and 500 hPa highlighted. Right: hodograph (house
@@ -1224,29 +1227,29 @@ scenes:
     spoken_pointer: true
 - id: s12h_anomaly
   t:
-  - 916.525
-  - 988.2
+  - 937.85
+  - 1013.075
   sentence_times:
-  - - 916.525
-    - 920.3
-  - - 920.65
-    - 926.625
-  - - 926.975
-    - 934.925
-  - - 935.275
-    - 942.0
-  - - 942.35
-    - 947.075
-  - - 947.425
-    - 956.275
-  - - 956.625
-    - 964.225
-  - - 964.575
-    - 973.975
-  - - 974.325
-    - 982.975
-  - - 983.325
-    - 987.4
+  - - 937.85
+    - 941.625
+  - - 941.975
+    - 947.95
+  - - 948.3
+    - 956.25
+  - - 956.6
+    - 963.325
+  - - 963.675
+    - 968.4
+  - - 968.75
+    - 977.6
+  - - 977.95
+    - 988.6
+  - - 988.95
+    - 998.725
+  - - 999.075
+    - 1007.85
+  - - 1008.2
+    - 1012.275
   beat: 'subtraction: El Niño trade-wind anomaly (climate)'
   visual: 'Three stacked tropical-Pacific maps (Equal Earth crop 30 S-30 N, 120 E-80 W; land grey, coasts): S5 November 1991-2020
     mean 10-m wind arrows (slate); S6 November 2023 arrows (teal) with an SST-anomaly tint under them (optional D6); S7 the
@@ -1257,9 +1260,11 @@ scenes:
     normal for that time of year. Normal here means the average over the thirty years from nineteen ninety one to twenty twenty,
     called the climatology. Over the equatorial Pacific Ocean, the trade winds normally blow from the east, towards Asia.
     This map shows the average wind for November in those thirty years. Next to it is November twenty twenty-three, during
-    an El Niño, a warming of the tropical Pacific that shifts weather around the world. Subtract the climatology from November
-    twenty twenty-three, arrow by arrow, and the anomaly arrows point east. In the central Pacific, the normal wind blew about five metres per second towards the west, but in twenty twenty-three only about three point seven. So the anomaly is about one point three metres per second towards the east: the trade winds had weakened, as they do in an El Niño. El Niño gets
-    its own long movie later in the series.'
+    an El Niño, a warming of the tropical Pacific that shifts weather around the world. We call the average u bar and the
+    anomaly u prime: subtract u bar from November twenty twenty-three, arrow by arrow, and the anomaly arrows point east.
+    In the central Pacific, the normal wind blew about five metres per second towards the west, but in twenty twenty-three
+    only about three point seven. So the anomaly is about one point three metres per second towards the east: the trade winds
+    had weakened, as they do in an El Niño. El Niño gets its own long movie later in the series.'
   on_screen_eq:
     latex: \mathbf u' = \mathbf u_{2023} - \overline{\mathbf u}_{1991\text{-}2020}
     vallis_eq: 'provenance only: anomaly = value minus climatology (movie #21 statistics of fields); our numbers'
@@ -1293,23 +1298,23 @@ scenes:
     spoken_pointer: false
 - id: s12i_relative
   t:
-  - 988.2
-  - 1039.975
+  - 1013.075
+  - 1066.775
   sentence_times:
-  - - 988.2
-    - 991.4
-  - - 991.75
-    - 997.45
-  - - 997.8
-    - 1006.15
-  - - 1006.5
-    - 1012.725
   - - 1013.075
-    - 1018.725
-  - - 1019.075
-    - 1030.75
-  - - 1031.1
-    - 1039.175
+    - 1016.275
+  - - 1016.625
+    - 1022.325
+  - - 1022.675
+    - 1031.025
+  - - 1031.375
+    - 1038.575
+  - - 1038.925
+    - 1045.525
+  - - 1045.875
+    - 1057.55
+  - - 1057.9
+    - 1065.975
   beat: 'subtraction: storm-relative wind'
   visual: 'Map: ERA5 MSLP animation 18 UTC 1 Nov -> 00 UTC 2 Nov (isobars, the ''L'' moving; track dots every hour, gold).
     S2-S3: storm velocity arrow (orange) at the L ''(20, 5) m/s'', ''about 450 km in 6 h''. S5: at Brest, teal wind (5.8,
@@ -1318,10 +1323,11 @@ scenes:
     wind curl round its eastern side.'
   voiceover: 'One more use: relative velocity. Storms move, and forecasters often want the wind as the storm itself feels
     it. Between six in the evening and midnight, Ciarán''s centre moved about four hundred and fifty kilometres, mostly towards
-    the east. That''s a velocity of about twenty metres per second towards the east and five towards the north. The wind relative
-    to the storm is the wind minus the storm''s velocity. A kilometre above Brest, that''s five point eight minus twenty,
-    about minus fourteen, towards the east, and thirty three point five minus five, about twenty eight, towards the north.
-    So, seen from the moving storm, the air above Brest flows towards the north-north-west, round the storm''s eastern side.'
+    the east. Let''s call the storm''s velocity c: about twenty metres per second towards the east and five towards the north.
+    The wind relative to the storm is u minus c: the wind minus the storm''s velocity. A kilometre above Brest, that''s five
+    point eight minus twenty, about minus fourteen, towards the east, and thirty three point five minus five, about twenty
+    eight, towards the north. So, seen from the moving storm, the air above Brest flows towards the north-north-west, round
+    the storm''s eastern side.'
   on_screen_eq:
     latex: \mathbf u - \mathbf c = (5.8 - 20,\ 33.5 - 5) \approx (-14,\ 28)\ \mathrm{m\,s^{-1}}
     vallis_eq: 'provenance only: our real numbers (storm track from fluidpy.data.era5_arco.storm_centre)'
@@ -1348,27 +1354,27 @@ scenes:
     spoken_pointer: false
 - id: s13_naming
   t:
-  - 1039.975
-  - 1091.1
+  - 1066.775
+  - 1117.9
   sentence_times:
-  - - 1039.975
-    - 1042.35
-  - - 1042.7
-    - 1051.6
-  - - 1051.95
-    - 1058.5
-  - - 1058.85
-    - 1064.65
-  - - 1065.0
-    - 1069.375
-  - - 1069.725
-    - 1071.9
-  - - 1072.25
-    - 1078.975
-  - - 1079.325
-    - 1084.7
-  - - 1085.05
-    - 1090.3
+  - - 1066.775
+    - 1069.15
+  - - 1069.5
+    - 1078.4
+  - - 1078.75
+    - 1085.3
+  - - 1085.65
+    - 1091.45
+  - - 1091.8
+    - 1096.175
+  - - 1096.525
+    - 1098.7
+  - - 1099.05
+    - 1105.775
+  - - 1106.125
+    - 1111.5
+  - - 1111.85
+    - 1117.1
   beat: 'index notation: subscripts'
   visual: 'Maths-only full-width scene with a small persistent 3-D axes glyph (top left, 300 px). S1: a crowd of letters appears:
     u, v, w / x, y, z / e_x, e_y, e_z ... overflowing (54-84 px), then dims. S2: the overflow hits the right edge (no clipping:
@@ -1400,27 +1406,27 @@ scenes:
   related: []
 - id: s14_free_index
   t:
-  - 1091.1
-  - 1150.975
+  - 1117.9
+  - 1178.4
   sentence_times:
-  - - 1091.1
-    - 1095.475
-  - - 1095.825
-    - 1101.25
-  - - 1101.6
-    - 1105.375
-  - - 1105.725
-    - 1113.675
-  - - 1114.025
-    - 1120.675
-  - - 1121.025
-    - 1128.275
-  - - 1128.625
-    - 1133.3
-  - - 1133.65
-    - 1141.4
-  - - 1141.75
-    - 1150.175
+  - - 1117.9
+    - 1122.275
+  - - 1122.625
+    - 1128.05
+  - - 1128.4
+    - 1132.175
+  - - 1132.525
+    - 1141.1
+  - - 1141.45
+    - 1148.1
+  - - 1148.45
+    - 1155.7
+  - - 1156.05
+    - 1160.725
+  - - 1161.075
+    - 1168.825
+  - - 1169.175
+    - 1177.6
   beat: 'index notation: free index'
   visual: 'Left: the s12f picture kept small (old and new wind at Brest, the change arrow). Right: S1 keyword ''free index''.
     S3 the line ''c_i = u_i(18 h) - u_i(17 h)'' (84 px) with the i''s gold. S4: three rows unfold below it, one per value
@@ -1428,14 +1434,14 @@ scenes:
     no numbers). S7 brace ''three equations'' and keyword ''component by component''. S8 keyword ''on both sides'' with gold
     pointers to each i.'
   voiceover: 'An index that appears once in a term is called a free index. An equation with a free index is really three equations,
-    one for each value. Remember the wind''s change over an hour above Brest? In index notation, it''s one line: c sub i equals
-    u sub i at six, minus u sub i at five. For i equal to one, it says minus one point eight equals five point eight minus
-    seven point six. For i equal to two, it says ten point two equals thirty three point five minus twenty three point three.
-    And for i equal to three, it does the same for the up component. So one line holds three equations, and adding or subtracting
-    vectors means adding or subtracting their components. The rule is that a free index must appear in every term, on both
-    sides, so that every term has the same number of components.'
+    one for each value. Remember the wind''s change over an hour above Brest? In index notation, it''s one line: the change,
+    d sub i, equals u sub i at six, minus u sub i at five. For i equal to one, it says minus one point eight equals five point
+    eight minus seven point six. For i equal to two, it says ten point two equals thirty three point five minus twenty three
+    point three. And for i equal to three, it does the same for the up component. So one line holds three equations, and adding
+    or subtracting vectors means adding or subtracting their components. The rule is that a free index must appear in every
+    term, on both sides, so that every term has the same number of components.'
   on_screen_eq:
-    latex: c_i = u_i(18\,\mathrm h) - u_i(17\,\mathrm h)
+    latex: d_i = u_i(\text{6 pm}) - u_i(\text{5 pm})
     vallis_eq: 'provenance only: our example of a free-index equation (Kundu §2.1 index conventions); our numbers'
     page_png: null
   physics_source:
@@ -1454,31 +1460,31 @@ scenes:
   related: []
 - id: s15_dot_product
   t:
-  - 1150.975
-  - 1223.075
+  - 1178.4
+  - 1250.5
   sentence_times:
-  - - 1150.975
-    - 1154.15
-  - - 1154.5
-    - 1166.4
-  - - 1166.75
-    - 1169.9
-  - - 1170.25
-    - 1177.825
-  - - 1178.175
-    - 1180.3
-  - - 1180.65
-    - 1184.175
-  - - 1184.525
-    - 1192.6
-  - - 1192.95
-    - 1203.7
-  - - 1204.05
-    - 1211.0
-  - - 1211.35
-    - 1216.45
-  - - 1216.8
-    - 1222.275
+  - - 1178.4
+    - 1181.575
+  - - 1181.925
+    - 1193.825
+  - - 1194.175
+    - 1197.325
+  - - 1197.675
+    - 1205.25
+  - - 1205.6
+    - 1207.725
+  - - 1208.075
+    - 1211.6
+  - - 1211.95
+    - 1220.025
+  - - 1220.375
+    - 1231.125
+  - - 1231.475
+    - 1238.425
+  - - 1238.775
+    - 1243.875
+  - - 1244.225
+    - 1249.7
   beat: 'index notation: dot product (defined here, stand-alone)'
   visual: 'Picture zone: house pair plane with p (teal) and q (orange) generic arrows; maths zone: S1-S2 p·q = p1q1 + p2q2
     + p3q3 (84 px), matching components linked by gold arcs. S3 keyword ''scalar''. S4: shadow band of q on p, ''shadow'',
@@ -1526,25 +1532,25 @@ scenes:
     spoken_pointer: true
 - id: s16_summation
   t:
-  - 1223.075
-  - 1265.5
+  - 1250.5
+  - 1292.925
   sentence_times:
-  - - 1223.075
-    - 1226.1
-  - - 1226.45
-    - 1235.425
-  - - 1235.775
-    - 1239.8
-  - - 1240.15
-    - 1246.1
-  - - 1246.45
-    - 1249.25
-  - - 1249.6
-    - 1252.825
-  - - 1253.175
-    - 1260.9
-  - - 1261.25
-    - 1264.7
+  - - 1250.5
+    - 1253.525
+  - - 1253.875
+    - 1262.85
+  - - 1263.2
+    - 1267.225
+  - - 1267.575
+    - 1273.525
+  - - 1273.875
+    - 1276.675
+  - - 1277.025
+    - 1280.25
+  - - 1280.6
+    - 1288.325
+  - - 1288.675
+    - 1292.125
   beat: 'index notation: summation convention'
   visual: 'Maths full width. S1: p1q1 + p2q2 + p3q3 (84 px). S2: it folds into Σ_{i=1}^{3} p_i q_i (96 px); the three terms
     slide under the sigma. S3: the two i''s pulse gold, linked by a gold arc ''twice''. S4: keyword ''Albert Einstein'' (54
@@ -1556,7 +1562,7 @@ scenes:
     sigma. This is the Einstein summation convention. When an index is repeated in a term, we add up the terms for one, two
     and three, even though no sum sign is written. So p dot q is just p sub i q sub i.'
   on_screen_eq:
-    latex: \mathbf p\cdot\mathbf q = \sum_{i=1}^{3} p_i q_i \equiv p_i q_i
+    latex: \mathbf p\cdot\mathbf q = \sum_{i=1}^{3} p_i q_i = p_i q_i
     vallis_eq: 'provenance only, not drawn as a reference: Kundu (2.2) (page image checked; letters p, q ours)'
     page_png: ../Fluid Dynamics/chapters/pages/ch02/p068.png
   physics_source:
@@ -1581,19 +1587,21 @@ scenes:
     spoken_pointer: false
 - id: s17_dummy
   t:
-  - 1265.5
-  - 1304.025
+  - 1292.925
+  - 1332.375
   sentence_times:
-  - - 1265.5
-    - 1280.325
-  - - 1280.675
-    - 1285.075
-  - - 1285.425
-    - 1289.55
-  - - 1289.9
-    - 1295.575
-  - - 1295.925
-    - 1303.225
+  - - 1292.925
+    - 1298.3
+  - - 1298.65
+    - 1308.675
+  - - 1309.025
+    - 1313.425
+  - - 1313.775
+    - 1317.9
+  - - 1318.25
+    - 1323.925
+  - - 1324.275
+    - 1331.575
   beat: 'index notation: dummy index and rules'
   visual: 'Maths full width. S1 keyword ''dummy index''. S2: p_i q_i = p_j q_j with the letters cross-fading i -> j; a tiny
     code glyph ''for i in range(3)'' -> ''for j in range(3)'' (54 px, monospace) beside it. S3: ''no free index -> scalar''
@@ -1622,19 +1630,19 @@ scenes:
   related: []
 - id: s18_length_index
   t:
-  - 1304.025
-  - 1332.425
+  - 1332.375
+  - 1360.775
   sentence_times:
-  - - 1304.025
-    - 1305.9
-  - - 1306.25
-    - 1312.9
-  - - 1313.25
-    - 1321.825
-  - - 1322.175
-    - 1325.9
-  - - 1326.25
-    - 1331.625
+  - - 1332.375
+    - 1334.25
+  - - 1334.6
+    - 1341.25
+  - - 1341.6
+    - 1350.175
+  - - 1350.525
+    - 1354.25
+  - - 1354.6
+    - 1359.975
   beat: 'index notation: length with indices'
   visual: 'Picture zone: the 850 hPa wind arrow at Brest (from s11, east/north axes). Maths: S1 |u|² = u_i u_i (84 px). S2:
     CalcStack 5.8² + 33.5² + 0² ; S3: ≈ 1156 ; S4: √1156 ≈ 34.0 m/s with a gold CurvedLink to the ''34 m/s'' tip label.'
@@ -1663,21 +1671,21 @@ scenes:
   related: []
 - id: s19_three_reasons
   t:
-  - 1332.425
-  - 1370.875
+  - 1360.775
+  - 1399.225
   sentence_times:
-  - - 1332.425
-    - 1334.75
-  - - 1335.1
-    - 1337.275
-  - - 1337.625
-    - 1345.025
-  - - 1345.375
-    - 1355.45
-  - - 1355.8
-    - 1359.6
-  - - 1359.95
-    - 1370.075
+  - - 1360.775
+    - 1363.1
+  - - 1363.45
+    - 1365.625
+  - - 1365.975
+    - 1373.375
+  - - 1373.725
+    - 1383.8
+  - - 1384.15
+    - 1387.95
+  - - 1388.3
+    - 1398.425
   beat: 'why: three good reasons'
   visual: 'Three columns appear one per reason (no boxes): S2 ''short'' with a mini glyph of one line expanding to 3 lines
     / 9 terms; S3 ''safe'' with u_i + p_i q_i struck in rose (''vector + number''); S4-S5 ''algebra -> counting'' with small
@@ -1699,29 +1707,29 @@ scenes:
   related: []
 - id: s20_gradient
   t:
-  - 1370.875
-  - 1429.3
+  - 1399.225
+  - 1457.65
   sentence_times:
-  - - 1370.875
-    - 1374.875
-  - - 1375.225
-    - 1380.05
-  - - 1380.4
-    - 1385.2
-  - - 1385.55
-    - 1392.925
-  - - 1393.275
-    - 1400.575
-  - - 1400.925
-    - 1408.025
-  - - 1408.375
-    - 1413.525
-  - - 1413.875
-    - 1418.775
-  - - 1419.125
-    - 1422.675
-  - - 1423.025
-    - 1428.5
+  - - 1399.225
+    - 1403.225
+  - - 1403.575
+    - 1408.4
+  - - 1408.75
+    - 1413.55
+  - - 1413.9
+    - 1421.275
+  - - 1421.625
+    - 1428.925
+  - - 1429.275
+    - 1436.375
+  - - 1436.725
+    - 1441.875
+  - - 1442.225
+    - 1447.125
+  - - 1447.475
+    - 1451.025
+  - - 1451.375
+    - 1456.85
   beat: 'application 1: temperature gradient'
   visual: 'Picture zone: the 850 hPa temperature map around Brest (cartostyle, cmocean thermal, colour bar ''°C'' 52 px),
     no isotherm labels yet. S2 keyword ''?'' at Brest. S3: a walker glyph steps east from Brest; ''-3.2 °C per 100 km'' NOT
@@ -1766,23 +1774,23 @@ scenes:
     spoken_pointer: true
 - id: s21_advection_built
   t:
-  - 1429.3
-  - 1482.225
+  - 1457.65
+  - 1510.575
   sentence_times:
-  - - 1429.3
-    - 1434.6
-  - - 1434.95
-    - 1445.125
-  - - 1445.475
-    - 1454.825
-  - - 1455.175
-    - 1463.325
-  - - 1463.675
-    - 1469.775
-  - - 1470.125
-    - 1473.8
-  - - 1474.15
-    - 1481.425
+  - - 1457.65
+    - 1462.95
+  - - 1463.3
+    - 1473.475
+  - - 1473.825
+    - 1483.175
+  - - 1483.525
+    - 1491.675
+  - - 1492.025
+    - 1498.125
+  - - 1498.475
+    - 1502.15
+  - - 1502.5
+    - 1509.775
   beat: 'application 1: advection built term by term'
   visual: 'Picture zone: an air-parcel cube (translucent, 60 px) at Brest on the same map, the teal wind arrow; the parcel
     moves along the arrow in three hops (east hop, north hop, up hop as a small lift), each hop leaving a coloured trail.
@@ -1826,25 +1834,25 @@ scenes:
     spoken_pointer: false
 - id: s22_advection_easy
   t:
-  - 1482.225
-  - 1538.0
+  - 1510.575
+  - 1566.35
   sentence_times:
-  - - 1482.225
-    - 1484.75
-  - - 1485.1
-    - 1491.275
-  - - 1491.625
-    - 1499.975
-  - - 1500.325
-    - 1509.65
-  - - 1510.0
-    - 1514.55
-  - - 1514.9
-    - 1521.975
-  - - 1522.325
-    - 1530.05
-  - - 1530.4
-    - 1537.2
+  - - 1510.575
+    - 1513.1
+  - - 1513.45
+    - 1519.625
+  - - 1519.975
+    - 1528.325
+  - - 1528.675
+    - 1538.0
+  - - 1538.35
+    - 1542.9
+  - - 1543.25
+    - 1550.325
+  - - 1550.675
+    - 1558.4
+  - - 1558.75
+    - 1565.55
   beat: 'application 1: easy numbers'
   visual: 'Picture zone: an idealised square map (no coast), isotherms straight and tilted (3 °C per 100 km east falling,
     2 per 100 km north falling), teal wind (10, 30). Maths CalcStack (S4-S8): ∂T/∂x1 = -3 °C/100 km = -3 x 10⁻⁵ K/m ; ∂T/∂x2
@@ -1885,25 +1893,25 @@ scenes:
     spoken_pointer: false
 - id: s23_advection_sign
   t:
-  - 1538.0
-  - 1582.375
+  - 1566.35
+  - 1615.825
   sentence_times:
-  - - 1538.0
-    - 1540.25
-  - - 1540.6
-    - 1547.3
-  - - 1547.65
-    - 1550.45
-  - - 1550.8
-    - 1555.0
-  - - 1555.35
-    - 1563.775
-  - - 1564.125
-    - 1566.55
-  - - 1566.9
-    - 1574.55
-  - - 1574.9
-    - 1581.575
+  - - 1566.35
+    - 1568.6
+  - - 1568.95
+    - 1575.65
+  - - 1576.0
+    - 1578.8
+  - - 1579.15
+    - 1583.35
+  - - 1583.7
+    - 1592.125
+  - - 1592.475
+    - 1594.9
+  - - 1595.25
+    - 1608.0
+  - - 1608.35
+    - 1615.025
   beat: 'application 1: what the sign means'
   visual: 'Same idealised map. S1-S2: the parcel travels downwind into colder colours (teal path). S3-S4: a fixed thermometer
     (PoleThermometer, slate) appears; upwind parcels queue on the warmer side, labelled ''warmer''. S5: ''+3.2 K per hour''
@@ -1912,8 +1920,9 @@ scenes:
   voiceover: What does the minus sign mean? The wind blows towards colder places, so each parcel is carried from warmer air
     into colder air. Now turn it around, and stand still. The air arriving at a fixed place comes from the warmer side. So
     if each parcel keeps its own temperature, a thermometer fixed at that place warms by plus three point two kelvin per hour.
-    This is called warm advection. In symbols, the fixed thermometer's rate is minus u sub j times partial T by partial x
-    sub j. Following a parcel like this is the subject of the material derivative movie, later in the series.
+    This is called warm advection. In symbols, the fixed thermometer's rate is partial T by partial small t, where small t
+    stands for time, and it equals minus u sub j times partial T by partial x sub j. Following a parcel like this is the subject
+    of the material derivative movie, later in the series.
   on_screen_eq:
     latex: \frac{\partial T}{\partial t} = -u_j\frac{\partial T}{\partial x_j}
     vallis_eq: 'provenance only: the local-rate form of Vallis (2.143)/(2.144) family D/Dt = d/dt + u·grad with DT/Dt = 0
@@ -1938,21 +1947,21 @@ scenes:
     spoken_pointer: true
 - id: s24_real_map
   t:
-  - 1582.375
-  - 1611.2
+  - 1615.825
+  - 1644.65
   sentence_times:
-  - - 1582.375
-    - 1584.4
-  - - 1584.75
-    - 1590.575
-  - - 1590.925
-    - 1598.175
-  - - 1598.525
-    - 1601.6
-  - - 1601.95
-    - 1606.975
-  - - 1607.325
-    - 1610.4
+  - - 1615.825
+    - 1617.85
+  - - 1618.2
+    - 1624.025
+  - - 1624.375
+    - 1631.625
+  - - 1631.975
+    - 1635.05
+  - - 1635.4
+    - 1640.425
+  - - 1640.775
+    - 1643.85
   beat: 'application 1: the real map'
   visual: 'Full width: ERA5 850 hPa temperature 18 UTC 1 Nov 2023 over the Bay of Biscay / Brittany / Channel (LCC), cmocean
     thermal shading, isotherms every 2 °C (white 2.5 px, in-line labels, <= 10), teal wind arrows (sparser than s05), coast
@@ -1983,19 +1992,19 @@ scenes:
   sfx: wind_gentle 0.15 under S4 only
 - id: s25_real_gradient
   t:
-  - 1611.2
-  - 1641.2
+  - 1644.65
+  - 1674.65
   sentence_times:
-  - - 1611.2
-    - 1617.55
-  - - 1617.9
-    - 1621.225
-  - - 1621.575
-    - 1629.05
-  - - 1629.4
-    - 1635.875
-  - - 1636.225
-    - 1640.4
+  - - 1644.65
+    - 1651.0
+  - - 1651.35
+    - 1654.675
+  - - 1655.025
+    - 1662.5
+  - - 1662.85
+    - 1669.325
+  - - 1669.675
+    - 1673.85
   beat: 'application 1: reading the real gradient'
   visual: 'Zoomed map (100-km grid ticks). S1: a gold east transect from Brest 100 km long, the colour strip under it, ''-3.2
     °C'' at its end; S2: north transect, ''-2.5 °C''. S3: ∂T/∂x1 = -3.2 x 10⁻⁵ K/m (68 px) with gold link from the east transect.
@@ -2031,25 +2040,25 @@ scenes:
   related: []
 - id: s26_real_sum
   t:
-  - 1641.2
-  - 1696.675
+  - 1674.65
+  - 1730.125
   sentence_times:
-  - - 1641.2
-    - 1648.7
-  - - 1649.05
-    - 1651.65
-  - - 1652.0
-    - 1658.2
-  - - 1658.55
-    - 1664.45
-  - - 1664.8
-    - 1675.3
-  - - 1675.65
-    - 1679.5
-  - - 1679.85
-    - 1689.025
-  - - 1689.375
-    - 1695.875
+  - - 1674.65
+    - 1682.15
+  - - 1682.5
+    - 1685.1
+  - - 1685.45
+    - 1691.65
+  - - 1692.0
+    - 1697.9
+  - - 1698.25
+    - 1708.75
+  - - 1709.1
+    - 1712.95
+  - - 1713.3
+    - 1722.475
+  - - 1722.825
+    - 1729.325
   beat: 'application 1: the real sum'
   visual: 'Zoomed map left (wind arrow 5.8/33.5 tip labels), maths right CalcStack: S2 u_j ∂T/∂x_j = u1 ∂T/∂x1 + u2 ∂T/∂x2
     ; S3 5.8 x (-3.2 x 10⁻⁵) ≈ -1.9 x 10⁻⁴ ; S5 33.5 x (-2.5 x 10⁻⁵) ≈ -8.4 x 10⁻⁴ ; S6 the north term''s Balance bar is 4x
@@ -2089,23 +2098,23 @@ scenes:
     spoken_pointer: false
 - id: s27_real_check
   t:
-  - 1696.675
-  - 1743.425
+  - 1730.125
+  - 1776.875
   sentence_times:
-  - - 1696.675
-    - 1698.825
-  - - 1699.175
-    - 1708.2
-  - - 1708.55
-    - 1714.4
-  - - 1714.75
-    - 1721.975
-  - - 1722.325
-    - 1728.275
-  - - 1728.625
-    - 1737.3
-  - - 1737.65
-    - 1742.625
+  - - 1730.125
+    - 1732.275
+  - - 1732.625
+    - 1741.65
+  - - 1742.0
+    - 1747.85
+  - - 1748.2
+    - 1755.425
+  - - 1755.775
+    - 1761.725
+  - - 1762.075
+    - 1770.75
+  - - 1771.1
+    - 1776.075
   beat: 'application 1: check against what happened'
   visual: 'Left: TimeGraph (house TimeGraph) 17-20 UTC: ERA5 850 hPa T over Brest (teal line, hour dots 2.4, 5.1, 8.2) with
     a dashed slate line of slope +3.7 K/h through 18 UTC (the advection estimate); right: TimeGraph of the Brest station 2-m
@@ -2140,25 +2149,25 @@ scenes:
     spoken_pointer: true
 - id: s28_nine_terms
   t:
-  - 1743.425
-  - 1798.65
+  - 1776.875
+  - 1832.1
   sentence_times:
-  - - 1743.425
-    - 1751.525
-  - - 1751.875
-    - 1758.525
-  - - 1758.875
-    - 1762.825
-  - - 1763.175
-    - 1768.2
-  - - 1768.55
-    - 1771.4
-  - - 1771.75
-    - 1785.725
-  - - 1786.075
-    - 1792.125
-  - - 1792.475
-    - 1797.85
+  - - 1776.875
+    - 1784.975
+  - - 1785.325
+    - 1791.975
+  - - 1792.325
+    - 1796.275
+  - - 1796.625
+    - 1801.65
+  - - 1802.0
+    - 1804.85
+  - - 1805.2
+    - 1819.175
+  - - 1819.525
+    - 1825.575
+  - - 1825.925
+    - 1831.3
   beat: 'application 1: nine terms in one line'
   visual: 'Maths full width. S2: u_j ∂u_i/∂x_j (96 px), i gold (''free''), j teal (''summed''). S3: brace ''i: 3 equations''.
     S4: brace ''j: 3 terms each''. S5: a 3 x 3 grid of the nine terms fills cell by cell (68 px; rows i = 1, 2, 3; columns
@@ -2194,25 +2203,25 @@ scenes:
   sfx: tick 0.10, one per grid cell, only while the voice pauses (S5 ends before S6)
 - id: s29_kronecker
   t:
-  - 1798.65
-  - 1838.95
+  - 1832.1
+  - 1872.4
   sentence_times:
-  - - 1798.65
-    - 1801.2
-  - - 1801.55
-    - 1805.525
-  - - 1805.875
-    - 1810.5
-  - - 1810.85
-    - 1815.05
-  - - 1815.4
-    - 1821.95
-  - - 1822.3
-    - 1827.5
-  - - 1827.85
-    - 1832.7
-  - - 1833.05
-    - 1838.15
+  - - 1832.1
+    - 1834.65
+  - - 1835.0
+    - 1838.975
+  - - 1839.325
+    - 1843.95
+  - - 1844.3
+    - 1848.5
+  - - 1848.85
+    - 1855.4
+  - - 1855.75
+    - 1860.95
+  - - 1861.3
+    - 1866.15
+  - - 1866.5
+    - 1871.6
   beat: 'Kronecker delta: from the basis'
   visual: 'Picture zone: the Brest 3-D axes with e1, e2, e3 (from s06). Maths: a 3 x 3 table (no boxes, aligned numbers 68
     px, row/column headers e1 e2 e3). S2: e1 with itself: shadow band of length 1 -> ''1'' in the table. S3: e1 with e2: right-angle
@@ -2247,25 +2256,25 @@ scenes:
     spoken_pointer: false
 - id: s30_substitution
   t:
-  - 1838.95
-  - 1879.475
+  - 1872.4
+  - 1913.025
   sentence_times:
-  - - 1838.95
-    - 1842.65
-  - - 1843.0
-    - 1847.25
-  - - 1847.6
-    - 1855.725
-  - - 1856.075
-    - 1862.225
-  - - 1862.575
-    - 1865.0
-  - - 1865.35
-    - 1867.75
-  - - 1868.1
-    - 1872.1
-  - - 1872.45
-    - 1878.675
+  - - 1872.4
+    - 1876.2
+  - - 1876.55
+    - 1880.8
+  - - 1881.15
+    - 1889.275
+  - - 1889.625
+    - 1895.775
+  - - 1896.125
+    - 1898.55
+  - - 1898.9
+    - 1901.3
+  - - 1901.65
+    - 1905.65
+  - - 1906.0
+    - 1912.225
   beat: 'Kronecker delta: substitution'
   visual: 'Maths full width. S1-S2: delta_ij u_j (96 px) unfolds to delta_i1 u1 + delta_i2 u2 + delta_i3 u3. S3: i = 2 set
     (gold): delta_21 -> 0 and delta_23 -> 0 struck (Strike), delta_22 -> 1. S4: u2 remains. S6: delta_ij u_j = u_i (96 px);
@@ -2292,25 +2301,25 @@ scenes:
   related: []
 - id: s31_balloon_delta
   t:
-  - 1879.475
-  - 1937.65
+  - 1913.025
+  - 1971.2
   sentence_times:
-  - - 1879.475
-    - 1882.375
-  - - 1882.725
-    - 1890.85
-  - - 1891.2
-    - 1897.225
-  - - 1897.575
-    - 1902.95
-  - - 1903.3
-    - 1908.025
-  - - 1908.375
-    - 1917.975
-  - - 1918.325
-    - 1924.625
-  - - 1924.975
-    - 1936.85
+  - - 1913.025
+    - 1915.925
+  - - 1916.275
+    - 1924.4
+  - - 1924.75
+    - 1930.775
+  - - 1931.125
+    - 1936.5
+  - - 1936.85
+    - 1941.575
+  - - 1941.925
+    - 1951.525
+  - - 1951.875
+    - 1958.175
+  - - 1958.525
+    - 1970.4
   beat: 'Kronecker delta: the balloon drifts with the wind'
   visual: 'Picture zone: map of Brittany with a field shading of x1 (east distance from Brest, a sequential ramp with 50-km
     contour lines running north-south, labelled ''0'', ''50'', ''100 km''). S2: keyword ''a map of x1''. S3: walker east:
@@ -2360,17 +2369,17 @@ scenes:
     spoken_pointer: false
 - id: s32_delta_facts
   t:
-  - 1937.65
-  - 1963.7
+  - 1971.2
+  - 1997.275
   sentence_times:
-  - - 1937.65
-    - 1939.6
-  - - 1939.95
-    - 1947.6
-  - - 1947.95
-    - 1956.725
-  - - 1957.075
-    - 1962.9
+  - - 1971.2
+    - 1973.15
+  - - 1973.5
+    - 1981.15
+  - - 1981.5
+    - 1990.275
+  - - 1990.625
+    - 1996.475
   beat: 'Kronecker delta: two facts'
   visual: 'Maths full width. S2: delta_ii = 1 + 1 + 1 = 3 (84 px) with a small 3-D axes glyph ''3 directions''. S3: delta_ij
     p_i q_j : a 3 x 3 grid of nine products collapses to its diagonal (three cells stay, six fade), = p_i q_i = p·q.'
@@ -2399,25 +2408,25 @@ scenes:
     spoken_pointer: true
 - id: s33_recap
   t:
-  - 1963.7
-  - 2029.95
+  - 1997.275
+  - 2063.575
   sentence_times:
-  - - 1963.7
-    - 1970.4
-  - - 1970.75
-    - 1979.3
-  - - 1979.65
-    - 1985.0
-  - - 1985.35
-    - 1997.15
-  - - 1997.5
-    - 2005.125
-  - - 2005.475
-    - 2016.15
-  - - 2016.5
-    - 2021.65
-  - - 2022.0
-    - 2029.15
+  - - 1997.275
+    - 2003.975
+  - - 2004.325
+    - 2012.875
+  - - 2013.225
+    - 2018.575
+  - - 2018.925
+    - 2030.725
+  - - 2031.075
+    - 2038.7
+  - - 2039.05
+    - 2049.725
+  - - 2050.075
+    - 2055.225
+  - - 2055.575
+    - 2062.775
   beat: recap
   visual: 'One beat per sentence, mini pictures left, symbols right (no boxes): S1 globe thumbnail ''10.3 °C'' + the Brest
     wind arrow; S2 e1 e2 e3 with the wind''s legs and the √ line ''9.3''; S3 the same arrow with the axes turning, ''34''
@@ -2448,15 +2457,15 @@ scenes:
   related: []
 - id: s34_next
   t:
-  - 2029.95
-  - 2049.825
+  - 2063.575
+  - 2083.45
   sentence_times:
-  - - 2029.95
-    - 2036.55
-  - - 2036.9
-    - 2043.6
-  - - 2043.95
-    - 2049.025
+  - - 2063.575
+    - 2070.175
+  - - 2070.525
+    - 2077.225
+  - - 2077.575
+    - 2082.65
   beat: forward pointer to 1b (spoken bridge, no card)
   visual: 'Left (picture zone): the 27-cell epsilon cube fades in cell by cell (8 frames each, no flash) and turns slowly;
     on AT(1, "epsilon i j k") the six non-zero cells light (teal +1 for the cyclic orders; rose -1 with a ''−'' glyph for
@@ -2494,16 +2503,16 @@ scenes:
     spoken_pointer: true
 - id: s35_end
   t:
-  - 2049.825
-  - 2073.975
+  - 2083.45
+  - 2109.925
   sentence_times:
-  - - 2049.825
-    - 2056.025
-  - - 2056.375
-    - 2064.425
-  - - 2064.775
-    - 2073.675
-  beat: series end card (maths ending)
+  - - 2083.45
+    - 2089.325
+  - - 2089.675
+    - 2100.725
+  - - 2101.075
+    - 2109.625
+  beat: series end card (weather/climate ending, HOUSE_STYLE §3; fix loop 1 S23)
   visual: 'HOUSE_STYLE §3 maths end card: four faint topic thumbnails along the top (dot product, cross product, this movie''s
     arrow with its three component legs, a grad/div/curl teaser); ''a series of maths tutorials'' (68 px); ''atmospheric science
     · meteorology · fluid dynamics'' (54 px); notebook icon + ''vectors and index notation notebook''; stacked notebook icons
@@ -2512,9 +2521,10 @@ scenes:
     ''epsilon and triple products'' (first, slightly brighter: the next movie) · ''dot product'' · ''cross product'' · ''cross
     product in physics'' · ''gradient'' · ''divergence'' · ''material derivative'' · ''vector identities I · II'' · ''tensors''
     · ''Coriolis'' · ''geostrophic wind'' · ''thermal wind'' · ''El Niño''. Titles only: no numbers, links or citations.'
-  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students
-    of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for vectors
-    and index notation, and the notebooks for the other maths concepts, are on the website that goes with this video.
+  voiceover: This video is one of a series of related tutorials, so watch out for the others. They're made to help students
+    of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but
+    the maths behind them too. The notebook for vectors and index notation, and the notebooks for the other concepts, are
+    on the website that goes with this video.
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -2556,3 +2566,41 @@ scenes:
     slug: ch00_enso (slug from series plan V23)
 quiz_answer: u_j dT/dx_j = 6 x (-2e-5) + 8 x 0 = -1.2e-4 K/s, so a fixed thermometer warms by +1.2e-4 K/s = +0.43 K/h (warm
   advection, if each parcel keeps its temperature)
+fix1_build:
+  date: '2026-10-29'
+  review: reports/ch00_movies.md 'ch00_vectors_index_notation — review 1' (13 Must, 23 Should)
+  narration: 16 sentences replaced by splicing (movies/out/ch00/ch00_vectors_index_notation/_tools/splice_fix1.py; Kokoro
+    af_bella 1.0, local gain per sentence because the v1 loudnorm ran in dynamic mode); every other sentence is the v1 audio
+  replaced:
+  - 's04_vector_wind S5: A quantity with a size and a direction is called a vector, and we draw it as an arrow, which we name
+    with a bold letter: the wind vector is bold u.'
+  - 's05_vector_field S3: Over the sea west of France, the air was streaming towards the north-east at more than thirty metres
+    per second.'
+  - 's08_components_real S10: Meteorologists call the three components u, v and w, in plain letters: u towards the east, v
+    towards the north, and w upwards.'
+  - 's10_magnitude S6: The length is also called the magnitude, and we write it with a straight bar on each side of bold u.'
+  - 's10_magnitude S7: For the real wind at Brest, it''s the square root of minus four point six five, squared, plus eight
+    point zero five squared, plus zero squared.'
+  - 's12b_add_parallelogram S7: Calling the plane''s arrow p and the jet''s arrow q, that''s p plus q equals q plus p: the
+    order of adding doesn''t matter.'
+  - 's12c_add_forces S4: The Coriolis push is an apparent push, which appears because we measure the wind on a spinning Earth,
+    and here it has components six and minus eight.'
+  - 's12e_subtract_def S2: First, the negative of a vector is the same arrow, turned to point the opposite way: minus q has
+    every component of q, which we call q one and q two, with its sign flipped.'
+  - 's12h_anomaly S7: We call the average u bar and the anomaly u prime: subtract u bar from November twenty twenty-three,
+    arrow by arrow, and the anomaly arrows point east.'
+  - 's12i_relative S4: Let''s call the storm''s velocity c: about twenty metres per second towards the east and five towards
+    the north.'
+  - 's12i_relative S5: The wind relative to the storm is u minus c: the wind minus the storm''s velocity.'
+  - 's14_free_index S4: In index notation, it''s one line: the change, d sub i, equals u sub i at six, minus u sub i at five.'
+  - 's23_advection_sign S7: In symbols, the fixed thermometer''s rate is partial T by partial small t, where small t stands
+    for time, and it equals minus u sub j times partial T by partial x sub j.'
+  - 's35_end S1: This video is one of a series of related tutorials, so watch out for the others.'
+  - 's35_end S2: They''re made to help students of meteorology, atmospheric science and climate science, and anyone else who
+    wants to learn not just these ideas, but the maths behind them too.'
+  - 's35_end S3: The notebook for vectors and index notation, and the notebooks for the other concepts, are on the website
+    that goes with this video.'
+  layout: pictures end at y 820, data-source line in its own band at y ≈ 839-866 (M1); QA halves/content gates mask y ≥ 835
+  three_js: 'the air parcel is a three.js box (kit_vi/box3d.tsx: LitBox3D + BoxEdges3D from weather basics'' col3d) in s12c,
+    s21 (tilted ERA5 850 hPa slab, 3-D legs, slow orbit) and s23 (M10)'
+  ending: weather/climate ending (HOUSE_STYLE §3), orchestrator decision following review 1 S23
