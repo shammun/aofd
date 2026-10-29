@@ -3780,3 +3780,224 @@ None of them is in the new scenes (0–162 s). All are scene starts carried over
 - After the fix: run review 2 on s00–s01d, s23a and the end card, with ≥ 1 frame per sentence.
 
 Disk at review: C: 69 GB free, G: 536 GB free. Review frames: 58 MB (237 PNG) under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_uses/review1/` (not committed). The QA re-run wrote `reports/movies/ch00_cross_product_uses/qa.json` and its contact frames.
+
+
+---
+
+# ch00_cross_product_why v5 — review 1 (full movie, fresh eyes)                2026-10-28
+
+This review covers `movies/out/ch00/ch00_cross_product_why/v5_1080.mp4`: 3521.80 s (58:41.8), 150.31 MB, 78 scenes. The narration ends at 58:39.3, followed by a 2.5-s hold. v5 = v4 fix 2 with every word kept, plus the reference-video intuitions (s03, s07, s14, s15, s15a, s17, s18, s18a, s18d, s21, s21a–s21d, s22w, s19). The Part 2 scenes (s23–s48) were reviewed in "ch00_cross_product_uses — review 1" above; I do not repeat those findings here. I did not edit the movie or its sources.
+
+**Frames.** 376 PNG (103 MB) are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_v5/review1/` (on G:, not C:):
+- `v5/`: one frame per sentence end in the 16 new or extended scenes, and the midpoint of every other scene (201 frames, 51 sheets);
+- `edge/`: frames at every edge-scan hit, all 24 frames of the s11 entrance, the s17 card every 1.5 s, and 1080p crops wherever text size or a collision was in doubt;
+- `p1/`: the Part 1 frames (see the next section).
+
+**Checks.** I re-ran every number in the new scenes with `fluidpy.geo.vectors.cross`:
+- (5,1,0)×(1,3,0) = (0,0,14);
+- s21a (0.2,0.1,0)×(10,30,0) = (0,0,5);
+- s21b (0,0.2,0.1)×(0,10,30) = (5,0,0);
+- s21c (0.1,0,0.2)×(30,0,10) = (0,5,0);
+- s21d (0.1,0,0.1)×(0,2,0) = (−0.2,0,0.2);
+- s18 (3,0,0)×(0,2,0) = (0,0,6);
+- s18c (5,1,0)×(6,4,0) = (0,0,14);
+- s22d x̂×ẑ = −ŷ;
+- by hand: s18d 64 + 196 = 260 = 26 × 10, and s22e √101 = 10.05, √100.1 = 10.005, √100.01 = 10.0005, atan 0.1 = 5.7°.
+
+**Captions.** I checked `v5_en.vtt` myself: 853 cues, text = script, ≤ 2 × 42 characters, max 16.7 cps.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product_why v5 (review 1) | 3521.80 s (58:41.8); narration ends 3519.30 s, then a 2.5-s hold | 150.31 MB (**size WARN**: budget 120, hard 160) | 11 PASS + 2 WARN (size; halves: 13 stretches of 3.5–7.5 s). Gates: duration, codec (H.264 High, yuv420p, AAC, faststart), black 0, frozen 321/321 narrated, content, loudness −16.0 LUFS / −3.3 dBTP, flashes 0/s, captions 853 = script, subtitles, physics 131 hashes, equations 123 | PASS. Every new number matches fluidpy. Right-handed axes in every new view: s14 (two camera poses), s21b (x̂ out of the screen, y right, z up), s21c (ŷ out, z right, x up). Torque senses are correct: thumb down tightens; 6 N m anticlockwise and 1 N m clockwise seen from the axis tip; s17 mirror view from below. Notes: s18 S10 "largest when along one line" contradicts p·q = −6 on screen (M3) | **FIX**. The equation "− 0.1 × 10 = 1" is false on screen in s21a and s21b (M1). ε_ijk table: all 27 entries correct. Determinant expansion and its middle-term sign swap are correct. Lagrange identity is correct. No KaTeX errors | PASS with notes: s18a overprint (S1); s17 glyph/text overlap (S6); s21a/b labels (S7); KaTeX subscripts small at 640 px (S3) | **FIX**: s22w is a 62-s text slide (M2); s21c's "one pattern" has no picture for 40 s (S3) | PASS: 853 cues, ≤ 2 × 42, ≤ 16.7 cps, text = script; three cues under 1 s (C1) | PASS: 0 flashes; teal/orange/violet/rose, with "−", hatching and dashes for the signs; no red/green-only coding | n/a (none, as the house style requires) | **FIX** |
+
+## Does v5 deliver the user's intuitions? (the key requirement)
+
+| V-X intuition | Scene (time) | Verdict | Evidence |
+|---|---|---|---|
+| Lever arm: near versus far from the hinge | s03 00:56–01:50 | PASS, with notes | "far from the hinge · easy" / "near the hinge · hard" appear on their words, with a "push needed" bar. Then r (hinge to hand) and F (push), the right-angle door swing, and "r · F = 0 / turns the most" against "r · F largest / no turn / backwards". Note: the bar's "× 4.5" is never spoken (S5) |
+| Plane case first | s07 03:43–04:37 | PASS | Each struck-column cross pattern is worked to (0, 0, 14). The 14 bracket links the picture to the number. "turning in the floor → only z" appears on S6 |
+| Cycle of the axes = cycle of the recipe | s14 09:36–10:32 | PASS | Three hand poses: x̂×ŷ = ẑ, ŷ×ẑ = x̂, ẑ×x̂ = ŷ, then "x ← (y, z) · y ← (z, x) · z ← (x, y)" with the cycle glyph |
+| Backwards round the cycle = minus | s15 10:32–11:22 | PASS | The hand turns over for ŷ×x̂ = −ẑ. b × a = (0, 0, −14) is drawn dashed with a rose "−14", then "a × b = −b × a" and the rose "−" cycle |
+| Index form | s15a 11:22–12:38 | PASS, with a note | The three 3×3 sign tables (row j, column k) are correct. The z row is worked: (+1)(5)(3) + (−1)(1)(1) = 14. "swap two letters → minus" is shown. Note: "the alternating tensor" in S1 is a new word that is never defined (S8) |
+| Arrow = axis, sense of turning, viewpoint | s17 13:29–14:18; s21 19:25–20:01 | PASS, with notes | Seen from above it is anticlockwise ⊙; seen from below, clockwise ⊗. The card with two faces flips. In s21, thumb down = tightens; S5 is a top view down the τ arrow: "seen from the tip: anticlockwise". Notes in S6 |
+| Opposite of the dot product | s18 14:18–15:32 | **FIX** (M3) | The three cases are side by side. S10 says the dot product is "largest when the arrows lie along one line" while the screen shows p·q = −6 for the opposite case |
+| "Why the minus sign?" | s18a 15:32–15:54 | PASS, with a note | The question is added, but its line is overprinted by a gold link (S1) |
+| Along (dot) and across (cross) share b | s18d 16:46–17:41 | PASS, with a note | The right triangle with along = \|b\| cos θ and across = \|b\| sin θ. Bars 8 : 14 drawn to scale (240 : 420 px). 64 + 196 = 260 = 26 × 10 on its words. Note: the screen shows "both sides × \|a\|²" but the narration says only "by the length of vector a" (S2) |
+| z component: two opposing mini-torques | s21a 20:01–21:17 | **FIX** (M1) | This is the strongest new scene. The floor grid has "ẑ towards you". The push splits into 30 N along y and 10 N along x, and gold brackets mark "0.2 m along x" and "0.1 m along y". It shows +0.2 × 30 = 6 with a violet anticlockwise arc, a rose dashed clockwise arc, τ_z = 6 − 1 = 5 N m, and underbraces "anticlockwise" and "clockwise" under r_x F_y − r_y F_x. But the second line reads "− 0.1 × 10 = 1", which is false |
+| x component: same picture, axes relabelled | s21b 21:17–22:21 | **FIX** (M1) | The identical geometry in the y-z wall with "x̂ towards you" makes the pattern visible at a glance. A 3-D inset marks the wall. But "−r_z F_y = 0.1 × 10 = 1" is false too |
+| y component: z before x, why the determinant's middle term looks backwards, the one pattern | s21c 22:21–23:47 | PASS (correct); **SHOULD** (clicking) | z right, x up, ŷ out: right-handed. (r × F)_y = r_z F_x − r_x F_z = 0.2 × 30 − 0.1 × 10 = 5. In the determinant the middle term is highlighted gold, then −ŷ(r_x F_z − r_z F_x) = ŷ(r_z F_x − r_x F_z) with an arrow to the recipe. Correct and well staged. But S5–S9 (40 s) is symbols only, and the closing "one pattern" sentence has no picture of the three turns (S3) |
+| Tilted axis on a 3-D ball | s21d 23:47–24:39 | PASS, with notes | The ball shows r and F; then (x, y) → about z, (y, z) → about x and (z, x) → about y. Arrows "about z: +0.2" and "about x: −0.2" add to a violet τ on a tilted axis, with a tilted equator ring. Notes: "45° between up and −x" is never spoken (S5); the negative part is not drawn in rose (C4) |
+| When to use it; what the two arrows stand for | s22w 29:15–30:18 | **FIX** (M2) | The words are right and useful. The screen is a text table with underlined column headings and no pictures |
+| Along, a number / across, an axis (grid) | s19 30:18–31:08 | PASS | The new row "along · a number / across · an axis" appears on S7. The grid is otherwise v4 |
+
+**Verdict on the requirement.** Every v4 sentence is present: the script diff against the v4 text is clean, and the v5 scene list keeps all v4 scenes. Taken together, s21a → s21b → s21c answer "why does each component look the way it does". The same lever picture is re-labelled for each wall, which is exactly the reference video's intuition. What stops it from clicking cleanly:
+- a false line on screen at the decisive moment (M1);
+- the closing pattern given only in symbols (S3);
+- the "when to use it" scene shown as a slide (M2).
+
+## MUST fix
+1. **M1 · 20:45.8–21:17.4 (s21a S8–S11) and 21:55.5–22:20.7 (s21b S6–S8). A false equation on screen.**
+   - What is wrong: s21a shows "− 0.1 × 10 = 1" and s21b shows "− r_z F_y = 0.1 × 10 = 1". The "−" is meant as a tag for the clockwise turn, but as written each equation is false. A first-time learner reads "minus one-tenth times ten equals one", and this is the very line meant to explain the minus sign.
+   - Fix: write "0.1 × 10 = 1 · clockwise" (rose, with the clockwise arc) and then "τ_z = 6 − 1 = 5", or write "−(0.1 × 10) = −1". In s21b write "r_z F_y = 0.1 × 10 = 1 · clockwise". This is TSX only; the words are unchanged.
+2. **M2 · 29:15.0–30:17.8 (s22w, 62 s). A PowerPoint slide, against house §5 and the user's U-M3.G1.**
+   - What is wrong:
+     - Underlined column headings: "first arrow", "second arrow", "the answer".
+     - Keyword lists and a 50-px globe, and no picture of a lever arm, a push, a spin or a wind.
+     - The lower half of the screen is empty from 29:15 to 29:44.
+     - "position r (after a spin)" is ambiguous: the narration means "when the first arrow is a spin arrow".
+   - Fix:
+     - Put four mini-pictures from earlier scenes in the picture zone: the door (r from the hinge, push F), the spanner (r, F), the ball on a string (r, p) and the globe (Ω, place r, wind u). In each, the first arrow is teal and the second orange, lit on its words in S3 and S4.
+     - For S5, reuse the s18b along/across picture with the ⊥ arrow.
+     - Drop the underlined headings; use colour to show which arrow is first and which second.
+     - Write "position r, when the first is a spin". This is TSX only.
+3. **M3 · 15:14.6–15:22.4 (s18 S10, a new v5 sentence). "largest when the arrows lie along one line" is wrong for the opposite case.**
+   - What is wrong: at that moment the screen shows p·q = 6, 0, −6. The dot product video taught that the opposite case is negative, not largest. The numbers 6, 0 and −6 are also never spoken (house §4).
+   - Fix: say "…which is zero at a right angle, and largest when the arrows point the same way" (the wording s19 S6 already uses). Speak or drop the three p·q values. This needs a TTS re-run of one sentence and re-timed captions.
+
+## SHOULD fix
+1. **S1 · 15:48.1–15:53.7 · s18a S5–S6.**
+   - The new line "the minus sign in the recipe ?" is placed under the gold link from "area … but an arrow, up or down ?", and the link runs through "the".
+   - At S6 the four questions jump to a new layout at the bottom left. Its last line nearly touches "a = (5, 1, 0)".
+   - Fix: give S5 its own row above the links, and keep the layout fixed through S6.
+2. **S2 · 17:02.7–17:06.6 · s18d S4.** The narration says "multiply both sides by the length of vector a", but the screen shows "× |a|²". Say "…by the length of vector a, squared" (words change), or show "× |a|" and square on screen in a second step.
+3. **S3 · 22:55.4–23:46.6 · s21c S5–S9. Symbols only for 40 s.**
+   - What is wrong:
+     - The picture zone has only the long expansion line.
+     - The scene's summary sentence ("each is the turning about its own axis, made by the two parts across that axis…") is shown as "x ← (y, z) +r_yF_z −r_zF_y …" with no turning pictured.
+     - At 640 px the expansion line's subscripts (≈ 30 px at 1080p) are hard to read, and the subscripts are the point of the line.
+   - Fix:
+     - In S9, bring back the three mini walls with + and − arcs. The graphic already exists as Part 1 s50 S4 (31:41: the x-y floor, the y-z and z-x walls, "+ one turn − the other").
+     - Set the expansion at the 68-px calculation size on two lines.
+4. **S4 · 08:15.1–08:15.8 · s11 entrance (edge-scan hit at 495.5 s).**
+   - What is wrong:
+     - During the cross-fade, the hand enters too large and too low, in a blue-grey translucent material.
+     - It runs off the bottom edge and through the caption band (the 27 195-px hit).
+     - It then snaps to cream at ≈ 08:15.6 and slides up into place.
+   - The same frames are in Part 1. Fix: fade the hand in at its final pose and material.
+5. **S5 · Numbers on screen that are never spoken (house §4).**
+
+   | time | scene | number | fix |
+   |---|---|---|---|
+   | 01:07–01:23 | s03 | "× 4.5" on the push-needed bar | say "about four and a half times the push", or drop the number |
+   | 24:30.6–24:38.6 | s21d S8 | "45° between up and −x" | say "halfway between up and minus x", or drop it |
+6. **S6 · s17 13:51–14:18.**
+   - In S6–S7 the legend "orange face: clockwise" refers to a face that is on screen for only ≈ 1 s, before the card flips to teal. Fix: tilt the card in 3-D on "two coloured faces" so that both faces are seen.
+   - In S9–S10 (14:06–14:18) the gold-ringed ⊙/⊗ glyphs overlap the first letters of "anticlockwise" and "clockwise". Fix: move the glyphs 24 px to the left.
+7. **S7 · s21a and s21b, label collisions and edges.**
+   - "30 N along y" / "30 N along z" is crossed by the faded F arrow (20:22–21:17 and 21:44–22:20).
+   - The axis labels "y" (s21a) and "z" (s21b, s21c) sit at y ≈ 20–50, above the content area (the edge hit at 21:19–21:21).
+   - The 3-D inset's axis letters are below 44 px.
+   - S1 of s21a (20:01–20:04) and S1 of s21b (21:17–21:21) show only an empty grid. Fix: draw r on S1.
+8. **S8 · 11:22–11:31 · s15a S1.** "the video on the alternating tensor" uses a word that is never explained. Say "the index-notation video", or define the word.
+9. **S9 · 56:59–58:14 · s47 recap (user decision; v4 words were kept).** The v5 recap does not sum up the two new ideas: the minus sign comes from two opposing turns, and the arrow is the axis, anticlockwise seen from its tip. Part 1's s50 S3–S4 already say both. I recommend adding those two sentences to s47.
+10. **S10 · Empty halves (qa `halves` WARN).**
+    - In the Part-1 scenes:
+      - 01:26.5–01:32.0 (s03 S7–S8, right half);
+      - 09:36.5–09:40.5 (s14 S1);
+      - 11:22.5–11:26.0 (s15a S1);
+      - 13:29.0–13:33.5 (s17 S1).
+    - The rest are in the Part 2 scenes and are listed in the Part 2 review (S10).
+    - Fix: bring the first keyword in on S1.
+11. **S11 · Size 150.31 MB.** This is above the 120-MB budget, though below the hard cap of 160. Accept it, or encode at crf 22.
+
+## COSMETIC
+- **C1 · Captions.** Three cues are under 1 s:
+  - 00:39.60 "In weather," (0.84 s);
+  - 04:57.35 "By Pythagoras," (0.98 s);
+  - 49:22.13 "Near its peak," (0.98 s).
+
+  Merge each with the next cue.
+- **C2 · Small or crowded text.**
+  - s06, 02:56–03:43: the KaTeX "along x / along y / along z" labels are ≈ 30 px (carried from v4).
+  - s18d, 17:06–17:41: the two bar labels are only ≈ 4 px apart.
+- **C3 · Edge-scan hits in the Part 2 scenes not covered by the Part 2 review.**
+  - s28a, 41:41–41:44: the faded Ω label overprints "north", and the Ω arrow touches the top edge.
+  - s44, 55:11: the arrow crosses its own "u = (8.1, 0) m/s" label, and the label touches the map's right edge.
+- **C4 · 24:28–24:39 · s21d.** "about x: −0.2" is drawn in violet with a dash rather than in rose with "−" (house negative), and the label sits on the sphere outline.
+- **C5 · 04:30.8–04:36.3 · s07 S7.** The "vector product" gold link crosses the 14 bracket and the arrows.
+- **C6 · Muted grey used for keywords** (house: muted is for ticks only): "we only need what it gives" (s21c) and the grey "next Ω × r, −2Ω × u" (s22w).
+- **C7 · Deliverables.** The v5 files sit beside v4's (`v5_1080.mp4` / `v5_en.vtt` next to `1080.mp4` / `en.vtt`). The qa `subtitles` gate reports "en.srt", so confirm that it compared the v5 pair. My own check of `v5_en.vtt` passes.
+
+## House-style conformance
+- **Conforms:**
+  - opening title and sentence;
+  - hook;
+  - spoken bridges;
+  - no badges, equation numbers or URLs;
+  - colour roles (a/r teal, b/F orange, cross product violet, negative rose with "−" or a dash);
+  - gold picture-to-number links (s07, s09a, s21a brackets);
+  - goal before calculation in s21a–s21c ("Torque also explains the minus sign…");
+  - beats after the worked results;
+  - −16 LUFS;
+  - the weather/climate end card (the §3 exception for this movie).
+- **Departures:**
+  - M2 (slide and headings);
+  - M3 and S5 (numbers on screen that are never spoken);
+  - S3 (no picture for 40 s);
+  - S1, S6 and S7 (collisions);
+  - S10 (empty halves).
+
+## Overall: FIX (ch00_cross_product_why v5 review 1 — M1–M3; S1–S11 recommended)
+- The new intuition scenes are correct and, apart from the items above, they make the formula's parts click. The best of them are s21a/b/c, s18d, s17 and s21d.
+- M1 and M2 are TSX only. M3 changes one v5 sentence, so it needs a TTS re-run of that sentence, re-timed captions and a re-render of the shifted tail.
+- After the fix, run review 2 with ≥ 1 frame per sentence on s18, s18a, s18d, s21a–s21c and s22w, and spot frames elsewhere.
+
+
+---
+
+# ch00_cross_product (Part 1, "The cross product") — review 1 (fresh eyes)                2026-10-28
+
+This review covers `movies/out/ch00/ch00_cross_product/1080.mp4`: 1960.20 s (32:40.2), 92.58 MB, 41 scenes. The narration ends at 32:37.7, followed by a 2.5-s hold. Part 1 = v5 s02 … s19 word-identical, a new s00 and s01, and the new s50_recap and s51_end. I did not edit the movie.
+
+**Frames.** 59 frames plus three dense tiles are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_v5/review1/p1/`:
+- one frame per sentence in s00, s01, s19, s50 and s51;
+- the midpoint of every other scene;
+- 1-s steps through 00:00–00:20 and through the splice (31:02–31:22);
+- 1.5-s steps through 32:05–32:40.
+
+**Checks.**
+- The body is v5's. The script text of s02–s19 is identical to v5's; the scene times differ by 0.02–0.03 s.
+- Frames at 8 body times (01:40 … 30:00) differ from v5 by at most 0.24/255 mean absolute difference, with 0 % of pixels over 30. So every v5 finding in s02–s19 applies here at the same mm:ss (M1, M2, M3, S1–S8, S10, C1 except "Near its peak", C2, C4–C6).
+- I checked `en.vtt` myself: 464 cues, text = script, ≤ 2 × 42, max 16.4 cps, two cues under 1 s.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_cross_product (Part 1, review 1) | 1960.20 s (32:40.2); narration ends 1957.70 s, then a 2.5-s hold | 92.58 MB (budget 120) | 12 PASS + halves WARN (01:26.5–01:32.0, 09:36.5–09:40.5, 13:29–13:33). Gates: duration, size, codec, black 0, frozen 193/193 narrated, content, loudness −16.0 LUFS / −2.3 dBTP, flashes 0/s, captions 464 = script, subtitles, physics 77 hashes, equations 69 | PASS, as v5 (same notes) | **FIX**: inherits M1 (s21a/s21b false line) | PASS with notes (inherits S1, S4, S6, S7) | **FIX**: inherits M2 (s22w slide) | PASS: 464 cues; two under 1 s | PASS | n/a | **FIX** |
+
+## The new start, the new end and the splice (user requirement)
+| check | verdict | evidence |
+|---|---|---|
+| s00 title (house §3) | PASS | "The cross / product" at 150 px with the gradient, "made easy", "and how **physics** uses it". Part A is p × q sweeping, with a live signed value: teal +2.78, rose −4.08. On "physics" (≈ 00:05) it cross-fades to the door with F, then to the ball with its τ on a tilted axis (≈ 00:09), matching "from opening a door to spinning a ball". There is one sentence, in the house pattern |
+| s01 hook | PASS, with a note | "What is the cross product? … what it tells us about turning." The a, b picture is on the first frame, and the a × b arrow grows at ≈ 00:15. Note (P1-C1): "a × b" is written at the top right from 00:11, before it is spoken (same as Part 2 C5) |
+| Body s02–s19 | = v5 | See above. A Part-1-only viewer meets words that only Part 2 teaches (P1-S2) |
+| Splice s19 → s50 (31:08.1) | PASS | Visually it is the house 10-frame cross-fade from the full grid to "a × b ⊥ a, b". The music bed is continuous at −35 to −38 dBFS through the 0.8-s gap, with no dropout or jump. The voice resumes at 31:08.4 |
+| s50 recap (8 sentences) | PASS | One mini-picture per sentence, each on its words: ⊥ arrow; parallelogram with "across · area" and τ = r × F; curled hand with "from its tip: anticlockwise"; three mini walls with "+ one turn − the other" and "minus: opposite turns"; zero / largest / zero with "swap → flips"; along/across; τ, L, qv × B icons with the circle; a globe with turning arrows and "next: the spinning Earth · why the wind turns · why storms spin". Every claim was taught in Part 1. S4 and S3 sum up the new v5 ideas well |
+| Spoken pointer to Part 2 | PASS | "The next video puts the cross product to work on our spinning Earth, to explain why the wind turns and why storms spin." There is no title card, URL or link |
+| s51 end card | PASS (maths ending, word for word); see P1-S1 | The three sentences match HOUSE_STYLE §3 (maths), with "this cross product". On screen: four thumbnails, "a series of maths tutorials", "atmospheric science · meteorology · fluid dynamics", "cross-product notebook" and "notebooks for the other maths concepts". The audio fades from −47 to −97 dBFS over the 2.5-s hold. There is no URL, book or "thanks" |
+
+## MUST fix
+- The same as v5 M1, M2 and M3, at the same timestamps: 15:14.6 (s18 S10), 20:45.8–21:17.4 and 21:55.5–22:20.7 (s21a/b), and 29:15–30:18 (s22w). Fixing them in v5 and re-cutting Part 1 fixes both movies.
+
+## SHOULD fix (Part-1-specific)
+1. **P1-S1 · 32:14–32:40 · s51. Which ending? (user decision)**
+   - HOUSE_STYLE §3 records the user's 2026-10-27 exception: the cross-product movie uses the weather/climate ending, because its second half is weather.
+   - Part 1 now has no weather, and the brief chooses the maths ending; that choice fits the content.
+   - Ask the user to confirm, and log the decision in HOUSE_STYLE §12 so that later reviews do not flag it.
+2. **P1-S2 · Part-1 words that only Part 2 explains (user decision; these are v5 words).**
+   - s22w S3/S6 (29:22–30:12): "Earth's spin, Omega", "Omega cross r", "the Coriolis push, minus two Omega cross u".
+   - s19 S9 (31:02): "In weather, the dot product gives advection, and the cross product turns the wind".
+   - For a Part-1-only viewer these are previews of things never explained (house §4).
+   - Recommendation: in Part 1 only, prefix s22w S6's last clause with "and, in the next video, …". Keep s19 S9, since advection was taught in the dot-product video.
+3. **P1-S3.** Inherits v5 S1, S2 (words), S3–S8 and S10 at the same times.
+
+## COSMETIC
+- **P1-C1.** In s01 (00:11–00:15), "a × b" appears before it is spoken.
+- **P1-C2.** In s50 S4 (31:31–31:42), the mini walls' axis letters are below 44 px.
+- **P1-C3.** Two cues are under 1 s: 00:39.58 "In weather," and 04:57.33 "By Pythagoras,".
+
+## Overall: FIX (ch00_cross_product Part 1 review 1 — inherits v5 M1–M3; P1-S1 and P1-S2 are user decisions)
+- The new s00/s01 stand alone, the s50 recap with its spoken pointer to Part 2 is clear, and the maths end card is to the house letter.
+- The splice into s50 is seamless in picture and sound.
+- Part 1 needs no fixes of its own beyond the user's two decisions. Once v5 M1–M3 are fixed and Part 1 is re-cut from the fixed v5, run review 2 on s18, s21a, s21b, s22w and s50/s51.
+
+Disk at review: C: 69 GB free, G: 536 GB free (unchanged). Review frames: 103 MB, 376 PNG, under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_v5/review1/` (not committed).

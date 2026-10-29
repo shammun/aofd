@@ -298,3 +298,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-27: §8 a different score per movie, matched to its content; sound effects (water, waves, rain, wind, storm…) where the picture shows them (user).
 - 2026-10-27: §3 the cross-product movie takes the weather/climate ending (user).
 - 2026-10-28: §10 QA has 12 gates (content, halves); §7 storm-tracker rule; §4 `[beat]` pauses (user).
+- 2026-10-28: the split cross-product movies: Part 1 (definition, no weather) uses the maths ending; Part 2 and the full v5 use the weather ending (orchestrator, following the user's split request).
