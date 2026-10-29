@@ -1,6 +1,5 @@
-# ch00_weather_basics sound cue sheet v2 (tools/sound/mix.py format; scene + offset from timing.json, so the stage-2 narration inserts keep cues on their pictures).
-# Effects only where the picture shows the thing, quiet (-29 … -26 LUFS short-term before ducking), faded, at most one non-bed at a time.
-# v2 mix check: the two count ticks sat 1.8 and 5.4 LU under the voice, so they were dropped; rain_heavy and wind_gusty lowered 2 LU.
+# ch00_weather_basics sound cue sheet v4 (UF1; tools/sound/mix.py format; scene + offset from timing.json). Re-timed by
+# tools/movie_wb/retime_sound_uf1.py: storm-tense = s54 start -> s60 start; s47/s48 effects on their phrases; new whooshes (s03, s25) and wind (s49).
 music:
   style: weather-basics-blend
   seed: 11
@@ -10,12 +9,12 @@ music:
   sections:
   - style: air-flowing
     from_s: 0.0
-    to_s: 2130.6
+    to_s: 2776.825
   - style: storm-tense
-    from_s: 2130.6
-    to_s: 2313.075
+    from_s: 2776.825
+    to_s: 2961.6
   - style: air-flowing
-    from_s: 2313.075
+    from_s: 2961.6
     to_s: end
   note: two styles cross-faded with 4-s raised-cosine ramps by tools/movie_wb/sound_mix.py (tools/sound/mix.py takes one style)
 timing: timing.json
@@ -101,36 +100,6 @@ effects:
   fade_out: 2.0
   seed: 20
   shows: 10-m wind swirling round the low
-- effect: rain_heavy
-  scene: s47_cold_front
-  offset: 28.91
-  duration: 3.06
-  intensity: 0.45
-  lufs: -29
-  fade_in: 1.0
-  fade_out: 2.0
-  seed: 21
-  shows: heavy showers in a narrow band
-- effect: thunder_far
-  scene: s47_cold_front
-  offset: 27.9
-  duration: 2.5
-  intensity: 0.5
-  lufs: -27
-  fade_in: 0.3
-  fade_out: 0.6
-  seed: 22
-  shows: distant thunder from the cumulonimbus
-- effect: rain_light
-  scene: s48_warm_front
-  offset: 25.12
-  duration: 2.83
-  intensity: 0.3
-  lufs: -29
-  fade_in: 1.0
-  fade_out: 2.0
-  seed: 23
-  shows: steady rain under the layered cloud
 - effect: whoosh
   scene: s54_ciaran_intro
   offset: 0.0
@@ -171,3 +140,63 @@ effects:
   fade_out: 2.0
   seed: 27
   shows: gusts at Brest as the wind swings west at 23 m/s
+- effect: thunder_far
+  scene: s47_cold_front
+  offset: 47.7
+  duration: 2.5
+  intensity: 0.4
+  lufs: -29
+  fade_in: 0.2
+  fade_out: 1.2
+  seed: 31
+  shows: saturated air over the cold front pulses (tall clouds)
+- effect: rain_heavy
+  scene: s47_cold_front
+  offset: 48.8
+  duration: 3.0
+  intensity: 0.35
+  lufs: -30
+  fade_in: 0.4
+  fade_out: 1.0
+  seed: 32
+  shows: heavy showers at the cold front
+- effect: rain_light
+  scene: s48_warm_front
+  offset: 31.28
+  duration: 2.8
+  intensity: 0.3
+  lufs: -30
+  fade_in: 0.5
+  fade_out: 1.0
+  seed: 33
+  shows: layered cloud ahead of the warm front, steady rain
+- effect: whoosh
+  scene: s03_air_parcel
+  offset: 30.22
+  duration: 2.0
+  intensity: 0.35
+  lufs: -29
+  fade_in: 0.3
+  fade_out: 0.7
+  seed: 34
+  shows: the globe flies down to Brittany
+- effect: whoosh
+  scene: s25_tropics
+  offset: 6.63
+  duration: 1.6
+  intensity: 0.3
+  lufs: -29
+  fade_in: 0.3
+  fade_out: 0.6
+  seed: 35
+  shows: the globe flies to Singapore
+- effect: wind_gentle
+  scene: s49_real_fronts
+  offset: 0.0
+  duration: 18.0
+  intensity: 0.35
+  lufs: -29
+  fade_in: 1.5
+  fade_out: 2.5
+  seed: 36
+  shows: 3000 wind particles flowing over the 850-hPa chart

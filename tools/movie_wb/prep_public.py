@@ -28,10 +28,14 @@ IMAGES = {  # out name: (source, max width)
     "wb_ciaran_tc_20231101.jpg": (DER / "ciaran_truecolour_2023-11-01_aqua_terra.jpg", 2000),
     "wb_modis_20231102.jpg": (DER / "ciaran_modis_aqua_truecolour_2023-11-02.jpg", 2100),
     "wb_cumulus_20240624.jpg": (DER / "cumulus_france_2024-06-24_modis_aqua_250m.jpg", 1600),
+    "wb_cumulus_terra_20240624.jpg": (DER / "cumulus_france_2024-06-24_modis_terra_250m.jpg", 1600),   # UF1 s26 morning
 }
-BINS = ["global_20231102T12.bin", "ciaran_hourly.bin", "ciaran_850.bin", "climatology.bin", "latest_gfs.bin", "tibet_etopo.bin"]
+BINS = ["global_20231102T12.bin", "ciaran_hourly.bin", "ciaran_850.bin", "climatology.bin", "latest_gfs.bin", "tibet_etopo.bin",
+        "brittany_etopo.bin", "slice.bin"]   # UF1: s03 relief, s47-s48 slice
 CROPS = {  # out name: (source, lat0, lat1, lon0, lon1) on an equirectangular image (-180..180, 90..-90)
     "wb_bmng_tibet.jpg": (CP / "globe_bmng_topo_200409_5400x2700.jpg", 25.0, 42.0, 72.0, 105.0),
+    # UF1 s03: Blue Marble NG 21600 (A6, 500 m) crop of the ETOPO Brittany tile, cloud-free drape for the 3-D relief
+    "wb_bmng_brittany.jpg": (Path("G:/Geophysical Fluid Dynamics/aofd-data/raw/BMNG-2004/world.topo.bathy.200409.3x21600x10800.jpg"), 46.5, 49.5, -6.5, -1.0),
 }
 
 

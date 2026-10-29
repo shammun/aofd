@@ -13,7 +13,7 @@ concepts:
 - 0B-G13 preview (subtropical highs, ITCZ, trades, westerlies)
 - 0B-G16 units (hPa, K and °C, g/kg, m/s, knots)
 - 0B-G17 data words (observation, reanalysis, climatology)
-target_duration_s: 3053.575
+target_duration_s: 3054.15
 fps: 30
 size:
 - 1920
@@ -42,9 +42,9 @@ audio:
     tail_s: 2.5
     sections_s: from sound_cues.yaml (s54 start → s60 start, measured from timing.json)
     notes: a different score from every other movie (HOUSE_STYLE §8); recorded in v3/sound/sound.json
-measured_narration_s: 3051.075
-measured_frames: 91608
-words: 7510
+measured_narration_s: 3051.65
+measured_frames: 91550
+words: 7508
 sentences: 447
 dry_run:
   tool: tools/tts.py (Kokoro af_bella, speed 1.0, .venv-tts)
@@ -263,8 +263,8 @@ scenes:
     its radius is fifteen centimetres, or one hundred and fifty millimetres. First, we find what fraction of the Earth''s
     radius the weather layer is: twelve divided by six thousand three hundred and seventy-one, which is about two thousandths.
     Then we shrink the layer by the same factor as the Earth: two thousandths of one hundred and fifty millimetres is about
-    three tenths of a millimetre. [beat] That''s like three sheets of paper, painted onto the desk globe. So from now on,
-    we''ll draw the air fifty times thicker than it really is, just so we can see it.'
+    three tenths of a millimetre. That''s like three sheets of paper, painted onto the desk globe. So from now on, we''ll
+    draw the air fifty times thicker than it really is, just so we can see it.'
   on_screen_eq:
     latex: \dfrac{12\ \text{km}}{6371\ \text{km}} \approx 0.002
     vallis_eq: worked number (our construction; no book equation)
@@ -525,8 +525,8 @@ scenes:
     the ground has to hold up its weight. At sea level, the average pressure is one hundred and one thousand three hundred
     and twenty-five pascals. Weight is mass times g, where g is the pull of gravity, nine point eight one metres per second
     squared. So the mass in our column is the pressure divided by g. That's about ten thousand three hundred kilograms of
-    air above every square metre, as heavy as seven cars. [beat] So the pressure at the ground is the weight of all the air
-    above it, spread over each square metre.
+    air above every square metre, as heavy as seven cars. So the pressure at the ground is the weight of all the air above
+    it, spread over each square metre.
   on_screen_eq:
     latex: m = \dfrac{p_0}{g} = \dfrac{101\,325}{9.81} \approx 10\,300\ \mathrm{kg}
     vallis_eq: 'worked number (hydrostatic: pressure = weight of the fluid above, Vallis §1.3.3 text after (1.51))'
@@ -683,7 +683,7 @@ scenes:
   voiceover: 'Next, density. Density tells us how much mass is packed into each cubic metre, and we write it with the Greek
     letter rho. Air near the ground has a density of about one point two kilograms per cubic metre. So a room five metres
     long, four metres wide and two and a half metres high holds fifty cubic metres of air, which is about sixty kilograms:
-    as much as a person. [beat]'
+    as much as a person.'
   on_screen_eq:
     latex: 50\ \mathrm{m^3} \times 1.2\ \mathrm{kg/m^3} = 60\ \mathrm{kg}
     vallis_eq: worked number (ρ for air near the surface)
@@ -844,7 +844,7 @@ scenes:
   voiceover: 'Let''s use it. What is the density of air at sea level, at one thousand and thirteen hectopascals and fifteen
     degrees? We turn the law around: rho equals p divided by R T. That''s one hundred and one thousand three hundred and twenty-five
     pascals, divided by two hundred and eighty-seven times two hundred and eighty-eight point one five. The answer is about
-    one point two two five kilograms per cubic metre, the number we used for the room. [beat]'
+    one point two two five kilograms per cubic metre, the number we used for the room.'
   on_screen_eq:
     latex: \rho = \dfrac{p}{R T} = \dfrac{101\,325}{287 \times 288.15} \approx 1.225\ \mathrm{kg/m^3}
     vallis_eq: (1.53) rearranged, our numbers
@@ -897,8 +897,8 @@ scenes:
     UF1: [beat] after S4 (worked number).'
   voiceover: Now let's keep the pressure fixed and change only the temperature. At zero degrees, the density comes out at
     about one point two nine kilograms per cubic metre. At thirty degrees, it's about one point one six. So at the same pressure,
-    warm air is about ten percent lighter than cold air. [beat] That's why a hot-air balloon floats, and why warm air tends
-    to rise while cold air tends to sink. We'll meet this again with weather fronts.
+    warm air is about ten percent lighter than cold air. That's why a hot-air balloon floats, and why warm air tends to rise
+    while cold air tends to sink. We'll meet this again with weather fronts.
   on_screen_eq:
     latex: \dfrac{1.29 - 1.16}{1.29} \approx 10\,\%
     vallis_eq: (1.53) evaluated twice, our numbers
@@ -1035,10 +1035,10 @@ scenes:
   voiceover: 'What does the slab weigh? First, its volume: its base is one square metre and its thickness is delta z, so its
     volume, capital V, is one square metre times delta z. Next, its mass: mass is density times volume, so m equals rho times
     V, which is rho, times one square metre, times delta z. Last, its weight: weight is mass times g, so W equals rho g delta
-    z, times one square metre. [beat] Now the balance. Each push is a pressure times the area it pushes on, one square metre.
-    The push up, minus the push down, equals the weight. The square metre appears in every term, so we can cancel it: p at
-    the bottom, minus p at the top, equals rho g delta z. The pressure at the bottom is bigger, by exactly the weight of the
-    slab on each square metre.'
+    z, times one square metre. Now the balance. Each push is a pressure times the area it pushes on, one square metre. The
+    push up, minus the push down, equals the weight. The square metre appears in every term, so we can cancel it: p at the
+    bottom, minus p at the top, equals rho g delta z. The pressure at the bottom is bigger, by exactly the weight of the slab
+    on each square metre.'
   on_screen_eq:
     latex: p(z) - p(z+\Delta z) = \rho\, g\, \Delta z
     vallis_eq: derivation step towards (1.51) (our construction)
@@ -1166,10 +1166,10 @@ scenes:
 
     UF1: [beat] after S2 and S4 (worked numbers).'
   voiceover: How fast is that near the ground? Rho is about one point two two five, and g is nine point eight one, so the
-    pressure falls by about twelve pascals for every metre we climb. [beat] That's one hectopascal for about every eight metres.
-    Ride a lift to the top of a three-hundred-metre tower, and the pressure drops by about thirty-six hectopascals. [beat]
-    That's the change your ears notice. Hydrostatic balance holds very well for large weather systems, because their up and
-    down accelerations are tiny compared with gravity.
+    pressure falls by about twelve pascals for every metre we climb. That's one hectopascal for about every eight metres.
+    Ride a lift to the top of a three-hundred-metre tower, and the pressure drops by about thirty-six hectopascals. That's
+    the change your ears notice. Hydrostatic balance holds very well for large weather systems, because their up and down
+    accelerations are tiny compared with gravity.
   on_screen_eq:
     latex: \rho g = 1.225 \times 9.81 \approx 12\ \mathrm{Pa/m}
     vallis_eq: (1.51) evaluated, our numbers
@@ -1398,14 +1398,14 @@ scenes:
   voiceover: 'So how deep is our air? Let''s work out H for a typical day at sea level. R is two hundred and eighty-seven,
     the gas constant for dry air. T is fifteen degrees, which is two hundred and eighty-eight point one five kelvin. And g
     is nine point eight one metres per second squared. So H is two hundred and eighty-seven times two hundred and eighty-eight
-    point one five, divided by nine point eight one, which is about eight point four three kilometres. [beat] Here''s a nice
-    way to picture that number. Imagine squashing all the air in our column to the same density all the way up: the sea-level
+    point one five, divided by nine point eight one, which is about eight point four three kilometres. Here''s a nice way
+    to picture that number. Imagine squashing all the air in our column to the same density all the way up: the sea-level
     density, one point two two five kilograms per cubic metre, which we found with the gas law. How tall would that column
     be, if it still had to weigh the same as the real one? Its weight on each square metre would be rho g times its height,
     and that must equal the sea-level pressure, p zero. So its height is p zero over rho g: one hundred and one thousand three
     hundred and twenty-five, divided by one point two two five times nine point eight one. That''s again about eight point
-    four three kilometres. [beat] So the scale height is how tall the atmosphere would be if all its air were as dense as
-    it is at sea level.'
+    four three kilometres. So the scale height is how tall the atmosphere would be if all its air were as dense as it is at
+    sea level.'
   on_screen_eq:
     latex: H = \dfrac{287 \times 288.15}{9.81} \approx 8.43\ \mathrm{km}
     vallis_eq: worked number from H = R T_0/g (text after (1.186))
@@ -1550,8 +1550,8 @@ scenes:
     over a climb of z metres, adds up to minus z over H. And the log of p, minus the log of p zero, is the log of p over p
     zero. So the log of p over p zero equals minus z over H. The natural log is built on a special number called e, about
     two point seven two, which turns up with growth and decay just as pi turns up with circles. To undo the log, we raise
-    e to the power of each side, and we get p equals p zero times e to the minus z over H. [beat] This tells us the pressure
-    at any height z, in air that has the same temperature all the way up.
+    e to the power of each side, and we get p equals p zero times e to the minus z over H. This tells us the pressure at any
+    height z, in air that has the same temperature all the way up.
   on_screen_eq:
     latex: \ln\dfrac{p}{p_0} = -\dfrac{z}{H}
     vallis_eq: derivation step (our construction; integral of (1.51)+(1.53) at constant T)
@@ -1623,8 +1623,8 @@ scenes:
   voiceover: 'What does this curve tell us? Let''s climb exactly one scale height, so z equals H. Then the power is minus
     H over H, which is minus one, and e to the minus one is one divided by e: about zero point three seven. So every time
     we climb one scale height, eight point four kilometres, the pressure falls to about thirty-seven percent of what it was.
-    [beat] From the ground''s one thousand and thirteen hectopascals, that''s about three hundred and seventy-three at eight
-    point four kilometres, and about one hundred and thirty-seven at sixteen point nine.'
+    From the ground''s one thousand and thirteen hectopascals, that''s about three hundred and seventy-three at eight point
+    four kilometres, and about one hundred and thirty-seven at sixteen point nine.'
   on_screen_eq:
     latex: e^{-H/H} = e^{-1} = \dfrac{1}{e} \approx \dfrac{1}{2.72} \approx 0.37
     vallis_eq: our number from p = p0 e^{-z/H}
@@ -1685,10 +1685,10 @@ scenes:
   voiceover: 'Now let''s zoom in on a single kilometre near the ground. Our rule says that each metre we climb takes away
     one over H of the pressure. So one kilometre takes away about one kilometre divided by eight point four three kilometres,
     which is about twelve percent. But the pressure shrinks a little as we climb through that kilometre, so the real fall
-    is slightly less: one minus e to the minus one over eight point four three, which is about eleven percent. [beat] Eleven
-    percent of what? Of the pressure at the bottom of that kilometre. So the first kilometre takes one thousand and thirteen
-    hectopascals down to about nine hundred, and the next takes nine hundred down to about eight hundred. Each kilometre takes
-    away the same fraction, so the drops get smaller as we go up: about a hundred and thirteen hectopascals in the first kilometre,
+    is slightly less: one minus e to the minus one over eight point four three, which is about eleven percent. Eleven percent
+    of what? Of the pressure at the bottom of that kilometre. So the first kilometre takes one thousand and thirteen hectopascals
+    down to about nine hundred, and the next takes nine hundred down to about eight hundred. Each kilometre takes away the
+    same fraction, so the drops get smaller as we go up: about a hundred and thirteen hectopascals in the first kilometre,
     but only about a hundred and one in the second.'
   on_screen_eq:
     latex: 1 - e^{-1/8.43} \approx 0.11
@@ -1834,9 +1834,9 @@ scenes:
     z over H, and multiply both sides by minus H. The log of a fraction turned upside down is minus the log of the fraction,
     so we get z equals H times the log of p zero over p. This formula gives the height for any pressure we choose. For half
     the ground pressure, p zero over p is two, so z equals eight point four three times the log of two. The log of two is
-    about zero point six nine, so z is about five point eight kilometres. [beat] So the pressure halves about every five point
-    eight kilometres: to about five hundred hectopascals at five point eight kilometres, and about two hundred and fifty at
-    eleven point seven.'
+    about zero point six nine, so z is about five point eight kilometres. So the pressure halves about every five point eight
+    kilometres: to about five hundred hectopascals at five point eight kilometres, and about two hundred and fifty at eleven
+    point seven.'
   on_screen_eq:
     latex: z = H\, \ln\dfrac{p_0}{p}
     vallis_eq: inverse of p = p0 e^{-z/H} (our step; (1.186) text)
@@ -2004,10 +2004,9 @@ scenes:
     one minus p over p zero. This time, let''s use the standard atmosphere, an average of real measurements that gets colder
     as we go up. At about five and a half kilometres, its pressure is about five hundred and five hectopascals, close to half
     of one thousand and thirteen. So p over p zero is about one half, and one minus a half is a half: half of all the air
-    is below us. [beat] That''s a little lower than our five point eight kilometres, because colder air has a smaller scale
-    height. At sixteen kilometres, the pressure is about one tenth of its ground value, so nine tenths of the air is below.
-    And by about thirty-one kilometres, ninety-nine percent of the air is below. That''s why the atmosphere is such a thin
-    shell.'
+    is below us. That''s a little lower than our five point eight kilometres, because colder air has a smaller scale height.
+    At sixteen kilometres, the pressure is about one tenth of its ground value, so nine tenths of the air is below. And by
+    about thirty-one kilometres, ninety-nine percent of the air is below. That''s why the atmosphere is such a thin shell.'
   on_screen_eq:
     latex: \text{share below} = 1 - \dfrac{p}{p_0}
     vallis_eq: our construction from (1.51) (pressure = weight above)
@@ -2324,9 +2323,9 @@ scenes:
     on the map. Warm air near the ground rises, in bubbles called thermals. As it rises, it moves into lower pressure, so
     it expands. Expanding air pushes its surroundings away, and that work costs it energy, so it cools: by almost ten degrees
     for every kilometre it rises, as long as no cloud forms. A weather balloon launched near Paris at midday that day agrees:
-    in the lowest one and a half kilometres, the temperature fell by about ten degrees for every kilometre. [beat] By the
-    early afternoon, the rising air had cooled enough to make clouds, and the satellite saw the sky fill with them. We''ll
-    work out exactly where those clouds begin a little later.'
+    in the lowest one and a half kilometres, the temperature fell by about ten degrees for every kilometre. By the early afternoon,
+    the rising air had cooled enough to make clouds, and the satellite saw the sky fill with them. We''ll work out exactly
+    where those clouds begin a little later.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.atmos.dry_parcel_ascent (NEW F14) + fluidpy.diag.sounding.layer_lapse_rate
@@ -2496,7 +2495,7 @@ scenes:
     many molecules as a kilogram of air. That''s why the vapour''s share of the molecules, and so of the pressure, is about
     one point six one times its share of the mass, q. Let''s try the steamiest tropical air: q is twenty grams per kilogram,
     which is zero point zero two, and p is about a thousand hectopascals. So e is about one point six one times zero point
-    zero two times a thousand, which is about thirty-two hectopascals, out of about a thousand. [beat]'
+    zero two times a thousand, which is about thirty-two hectopascals, out of about a thousand.'
   on_screen_eq:
     latex: e \approx 1.61\, q\, p
     vallis_eq: (18.12) e ≈ w p/ε = 1.61 w p with q ≈ w
@@ -2645,9 +2644,9 @@ scenes:
   voiceover: Relative humidity compares the two. It's the vapour pressure divided by the saturation vapour pressure, as a
     percentage. Let's try air at twenty-five degrees with a vapour pressure of fifteen hectopascals. At twenty-five degrees,
     the saturation vapour pressure is about thirty-one point three. Fifteen divided by thirty-one point three is about point
-    four eight, so the relative humidity is about forty-eight percent. [beat] Notice that it depends on the temperature as
-    well as on the water. Cool the same air to eighteen degrees, and its relative humidity rises to about seventy-three percent,
-    even though no water is added.
+    four eight, so the relative humidity is about forty-eight percent. Notice that it depends on the temperature as well as
+    on the water. Cool the same air to eighteen degrees, and its relative humidity rises to about seventy-three percent, even
+    though no water is added.
   on_screen_eq:
     latex: RH = \dfrac{\text{vapour pressure}}{\text{saturation vapour pressure}} \times 100\,\%
     vallis_eq: ℋ = e/e_s (Vallis §18.1.2 text before 18.1.3, unnumbered)
@@ -2701,9 +2700,9 @@ scenes:
 
     UF1: [beat] after S3 (worked number).'
   voiceover: 'So how far must we cool this air before it''s saturated? We need the temperature at which the saturation vapour
-    pressure has fallen to fifteen hectopascals. That''s about thirteen degrees. [beat] This is the dew point: the temperature
-    to which air must be cooled, keeping its water, to become saturated. On a clear night, grass cools below the dew point
-    of the air touching it, and dew forms. When a whole layer of air near the ground cools to its dew point, we get fog. And
+    pressure has fallen to fifteen hectopascals. That''s about thirteen degrees. This is the dew point: the temperature to
+    which air must be cooled, keeping its water, to become saturated. On a clear night, grass cools below the dew point of
+    the air touching it, and dew forms. When a whole layer of air near the ground cools to its dew point, we get fog. And
     when rising air cools to its dew point, we get a cloud.'
   on_screen_eq: null
   physics_source:
@@ -2761,9 +2760,9 @@ scenes:
   voiceover: 'Let''s follow that air parcel as it rises from the ground. It cools by almost ten degrees for every kilometre.
     Its dew point falls too, but slowly, by about two degrees per kilometre, because as the parcel expands, its vapour is
     spread more thinly. So the gap between the temperature and the dew point, twelve degrees at the ground, shrinks by about
-    eight degrees for every kilometre. It closes after about one and a half kilometres. [beat] There the vapour condenses,
-    and the cloud begins. That''s why fair-weather clouds have flat bases: parcels rising from the same ground reach their
-    dew point at about the same height.'
+    eight degrees for every kilometre. It closes after about one and a half kilometres. There the vapour condenses, and the
+    cloud begins. That''s why fair-weather clouds have flat bases: parcels rising from the same ground reach their dew point
+    at about the same height.'
   on_screen_eq:
     latex: 12 \div 8 \approx 1.5\ \mathrm{km}
     vallis_eq: our estimate (dry adiabat 9.8 K/km minus dew-point fall about 1.8 K/km); the exact LCL comes from the NEW function
@@ -2831,7 +2830,7 @@ scenes:
     so it''s a vector: an arrow. We can split the arrow into two parts, called components. The eastward part is written u,
     and the northward part is written v. Take a wind blowing towards the north-east, with u equal to eight and v equal to
     six metres per second. By Pythagoras, its speed is the square root of eight squared plus six squared, which is ten metres
-    per second. [beat]'
+    per second.'
   on_screen_eq:
     latex: '|\mathbf v| = \sqrt{8^2 + 6^2} = 10\ \mathrm{m/s}'
     vallis_eq: speed of a horizontal wind (vector length; no equation number)
@@ -2896,8 +2895,8 @@ scenes:
     towards the east. The direction is given in degrees, measured clockwise from north as seen from above: north is zero,
     east ninety, south one hundred and eighty, and west two hundred and seventy. Our wind blows towards the north-east, so
     it comes from the south-west. Its direction is about two hundred and thirty-three degrees, and we call it a south-westerly.
-    [beat] Careful: ocean currents use the opposite habit, and are named by where they go, so an eastward current flows towards
-    the east.'
+    Careful: ocean currents use the opposite habit, and are named by where they go, so an eastward current flows towards the
+    east.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.atmos.wind_direction_from (NEW)
@@ -2954,7 +2953,7 @@ scenes:
     kilometres per hour, so ten metres per second is thirty-six kilometres per hour. Sailors and pilots use knots. A knot
     is one nautical mile per hour, and a nautical mile, one thousand eight hundred and fifty-two metres, is about one sixtieth
     of a degree of latitude along the Earth's surface. So one knot is about point five one metres per second, and our ten
-    metres per second wind is about nineteen knots. [beat]
+    metres per second wind is about nineteen knots.
   on_screen_eq:
     latex: 1\ \mathrm{kt} = 1852\ \mathrm{m} \div 3600\ \mathrm{s} \approx 0.51\ \mathrm{m/s}
     vallis_eq: unit definition (no equation number)
@@ -3358,8 +3357,8 @@ scenes:
     in the United States, and reads eight hundred and thirty-five hectopascals, with an air temperature of fifteen degrees.
     We add the weight of an imaginary column of air, reaching from the station down to sea level. With our exponential rule
     run downwards, that''s eight hundred and thirty-five times e to the power of one point six oh nine divided by eight point
-    four three. That''s about one thousand and ten hectopascals: a perfectly ordinary sea-level reading. [beat] This is called
-    the sea-level pressure. Real weather services use a slightly more careful version of the same idea.'
+    four three. That''s about one thousand and ten hectopascals: a perfectly ordinary sea-level reading. This is called the
+    sea-level pressure. Real weather services use a slightly more careful version of the same idea.'
   on_screen_eq:
     latex: p_{\text{sea}} = p_s\, e^{z_s/H} = 835 \times e^{1.609/8.43} \approx 1010\ \mathrm{hPa}
     vallis_eq: p = p0 e^{−z/H} (from (1.51)+(1.53) at constant T, as s19) run downward; Vallis (2.166) is the general (any
@@ -3780,7 +3779,7 @@ scenes:
 - id: s47_cold_front
   t:
   - 2486.0
-  - 2550.45
+  - 2550.3
   sentence_times:
   - - 2486.0
     - 2488.85
@@ -3793,11 +3792,11 @@ scenes:
   - - 2515.625
     - 2521.55
   - - 2521.9
-    - 2531.375
-  - - 2531.725
-    - 2537.425
-  - - 2537.775
-    - 2549.65
+    - 2531.225
+  - - 2531.575
+    - 2537.275
+  - - 2537.625
+    - 2549.5
   beat: why · a cold front from the side
   visual: 'Full-width cross-section (illustrative, schematic; vertical exaggeration x50, said in s48): ground line y 760;
 
@@ -3836,10 +3835,10 @@ scenes:
     reanalysis, at six in the evening on the first of November, running from west to east through Brest. The colours show
     how much warmer or colder the air is than the average at the same height, and the moving dots follow the wind inside the
     slice. Remember the gas law: at the same pressure, cold air is denser than warm air. So the advancing cold air stays low
-    and pushes in under the warm air like a wedge. Its slope is steep for a front, about one kilometre up for every fifty
-    to a hundred kilometres along, and the warm air is lifted quickly. It cools to its dew point, and tall clouds and heavy
-    showers form in a narrow band. After the front passes, the air is colder and drier, the pressure starts to rise, and the
-    wind turns, in the northern hemisphere usually from the south-west to the west or north-west.'
+    and pushes in under the warm air like a wedge. Its slope is steep: in this slice, about one kilometre up for every fifteen
+    kilometres along, so the warm air is lifted quickly. It cools to its dew point, and tall clouds and heavy showers form
+    in a narrow band. After the front passes, the air is colder and drier, the pressure starts to rise, and the wind turns,
+    in the northern hemisphere usually from the south-west to the west or north-west.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.sections.vertical_section + section_anomaly + in_section_tracks (NEW F15); fluidpy.geo.atmos.omega_to_w;
@@ -3877,21 +3876,21 @@ scenes:
   - R3
 - id: s48_warm_front
   t:
-  - 2550.45
-  - 2602.425
+  - 2550.3
+  - 2603.0
   sentence_times:
-  - - 2550.45
-    - 2555.525
-  - - 2555.875
-    - 2563.575
-  - - 2563.925
-    - 2572.4
-  - - 2572.75
-    - 2581.825
-  - - 2582.175
-    - 2592.85
-  - - 2593.2
-    - 2601.625
+  - - 2550.3
+    - 2555.375
+  - - 2555.725
+    - 2563.425
+  - - 2563.775
+    - 2572.975
+  - - 2573.325
+    - 2582.4
+  - - 2582.75
+    - 2593.425
+  - - 2593.775
+    - 2602.2
   beat: why · a warm front from the side
   visual: 'Full-width cross-section like s47, warm air moving right over a long thin cold wedge; S2 orange arrows gliding
     up the
@@ -3913,13 +3912,13 @@ scenes:
     as s47. UF1 R1: R1 source line(s) as listed in this scene''s source_line field: muted #9aa6bd, 30 px (>= 28), one line,
     left-aligned at the bottom of the picture it credits (y <= 850, never in the caption band 880-1040), fades with its picture,
     never spoken.'
-  voiceover: Now let's move east along the same slice, to the warm front near Brest. At a warm front, the warm air is advancing,
-    but it's lighter, so it can't push the cold air away from below. Instead, it glides up over the cold air on a gentle slope,
-    rising about one kilometre for every one or two hundred kilometres. As it slides upwards it cools, and a broad sheet of
-    layered cloud forms far ahead of the front, bringing long spells of steady rain. When the warm front passes, the air turns
-    milder and moister, and the wind turns, in the northern hemisphere usually from the south-east to the south or south-west.
-    In this slice, heights are drawn eighty times taller than distances along the ground, so the slopes look much steeper
-    than in nature.
+  voiceover: 'Now let''s move east along the same slice, to the warm front near Brest. At a warm front, the warm air is advancing,
+    but it''s lighter, so it can''t push the cold air away from below. Instead, it glides up over the cold air on a gentler
+    slope: in this slice, about one kilometre up for every fifty kilometres along. As it slides upwards it cools, and a broad
+    sheet of layered cloud forms far ahead of the front, bringing long spells of steady rain. When the warm front passes,
+    the air turns milder and moister, and the wind turns, in the northern hemisphere usually from the south-east to the south
+    or south-west. In this slice, heights are drawn eighty times taller than distances along the ground, so the slopes look
+    much steeper than in nature.'
   on_screen_eq: null
   physics_source:
     fn: as s47 (same slice and tracks)
@@ -3946,21 +3945,21 @@ scenes:
   - R3
 - id: s49_real_fronts
   t:
-  - 2602.425
-  - 2637.45
+  - 2603.0
+  - 2638.025
   sentence_times:
-  - - 2602.425
-    - 2607.975
-  - - 2608.325
-    - 2615.875
-  - - 2616.225
-    - 2620.6
-  - - 2620.95
-    - 2624.9
-  - - 2625.25
-    - 2630.45
-  - - 2630.8
-    - 2636.65
+  - - 2603.0
+    - 2608.55
+  - - 2608.9
+    - 2616.45
+  - - 2616.8
+    - 2621.175
+  - - 2621.525
+    - 2625.475
+  - - 2625.825
+    - 2631.025
+  - - 2631.375
+    - 2637.225
   beat: application · real fronts round Ciarán
   visual: 'Map panel (Lambert, 40-60N 25W-10E, x 80-1580): ERA5 850-hPa temperature at 2023-11-02T00 UTC (cmocean ''thermal'',
 
@@ -4018,15 +4017,15 @@ scenes:
   - R2
 - id: s50_front_symbols
   t:
-  - 2637.45
-  - 2654.15
+  - 2638.025
+  - 2654.725
   sentence_times:
-  - - 2637.45
-    - 2643.375
-  - - 2643.725
-    - 2649.15
-  - - 2649.5
-    - 2653.35
+  - - 2638.025
+    - 2643.95
+  - - 2644.3
+    - 2649.725
+  - - 2650.075
+    - 2653.925
   beat: application · map symbols (pointer forward)
   visual: 'Same map; the front lines turn into the standard symbols on their words (cold: blue line + filled triangles on
     the
@@ -4064,23 +4063,23 @@ scenes:
   - R2
 - id: s51_heating
   t:
-  - 2654.15
-  - 2699.525
+  - 2654.725
+  - 2700.1
   sentence_times:
-  - - 2654.15
-    - 2659.2
-  - - 2659.55
-    - 2661.55
-  - - 2661.9
-    - 2670.875
-  - - 2671.225
-    - 2675.0
-  - - 2675.35
-    - 2684.7
-  - - 2686.2
-    - 2693.925
-  - - 2694.275
-    - 2698.725
+  - - 2654.725
+    - 2659.775
+  - - 2660.125
+    - 2662.125
+  - - 2662.475
+    - 2671.45
+  - - 2671.8
+    - 2675.575
+  - - 2675.925
+    - 2685.275
+  - - 2686.775
+    - 2694.5
+  - - 2694.85
+    - 2699.3
   beat: application · the global picture (heating)
   visual: 'Picture zone: Globe3D (BMNG, equinox lighting) with two gold beams of equal width hitting at 0° and 60°N; patches
 
@@ -4102,9 +4101,9 @@ scenes:
   voiceover: Now let's zoom out to the whole planet, and ask why the weather moves at all. It starts with sunlight. Picture
     a beam of sunlight one metre wide, at noon at an equinox, in March or September, when the sun is overhead at the equator.
     At the equator, it lands on one metre of ground. At sixty degrees north, the ground is tilted to the beam, and the same
-    beam is spread over two metres, so each square metre gets half as much. [beat] So the tropics are heated much more than
-    the poles, and the atmosphere and the ocean carry heat from the tropics towards the poles. Storms like Ciarán are one
-    of the ways the atmosphere does it.
+    beam is spread over two metres, so each square metre gets half as much. So the tropics are heated much more than the poles,
+    and the atmosphere and the ocean carry heat from the tropics towards the poles. Storms like Ciarán are one of the ways
+    the atmosphere does it.
   on_screen_eq:
     latex: \dfrac{1\ \mathrm{m}}{\cos 60^\circ} = 2\ \mathrm{m}
     vallis_eq: our geometry (sunlight per unit area ∝ cos latitude at equinox noon)
@@ -4142,21 +4141,21 @@ scenes:
   - R4
 - id: s52_pressure_belts
   t:
-  - 2699.525
-  - 2735.6
+  - 2700.1
+  - 2736.175
   sentence_times:
-  - - 2699.525
-    - 2704.0
-  - - 2704.35
-    - 2712.9
-  - - 2713.25
-    - 2715.875
-  - - 2716.225
-    - 2724.675
-  - - 2725.025
-    - 2728.425
-  - - 2728.775
-    - 2734.8
+  - - 2700.1
+    - 2704.575
+  - - 2704.925
+    - 2713.475
+  - - 2713.825
+    - 2716.45
+  - - 2716.8
+    - 2725.25
+  - - 2725.6
+    - 2729.0
+  - - 2729.35
+    - 2735.375
   beat: application · high and low pressure belts (preview)
   visual: 'Picture zone: Globe3D tilted to show both hemispheres, annual mean MSLP 1991-2020 (data/real/wind_climatology.json
 
@@ -4208,23 +4207,23 @@ scenes:
   - R4
 - id: s53_trades_westerlies
   t:
-  - 2735.6
-  - 2776.25
+  - 2736.175
+  - 2776.825
   sentence_times:
-  - - 2735.6
-    - 2738.775
-  - - 2739.125
-    - 2749.075
-  - - 2749.425
-    - 2752.875
-  - - 2753.225
-    - 2756.075
-  - - 2756.425
-    - 2764.1
-  - - 2764.45
-    - 2769.075
-  - - 2769.425
-    - 2775.45
+  - - 2736.175
+    - 2739.35
+  - - 2739.7
+    - 2749.65
+  - - 2750.0
+    - 2753.45
+  - - 2753.8
+    - 2756.65
+  - - 2757.0
+    - 2764.675
+  - - 2765.025
+    - 2769.65
+  - - 2770.0
+    - 2776.025
   beat: application · trade winds and westerlies (preview)
   visual: 'Picture zone: the s52 globe; 1991-2020 mean 10-m winds (teal arrows on a 5° grid, legend ''5 m/s''; streaklines
     from
@@ -4267,21 +4266,21 @@ scenes:
   - R4
 - id: s54_ciaran_intro
   t:
-  - 2776.25
-  - 2812.725
+  - 2776.825
+  - 2813.3
   sentence_times:
-  - - 2776.25
-    - 2781.875
-  - - 2782.225
-    - 2789.375
-  - - 2789.725
-    - 2795.225
-  - - 2795.575
-    - 2800.05
-  - - 2800.4
-    - 2806.025
-  - - 2806.375
-    - 2811.925
+  - - 2776.825
+    - 2782.45
+  - - 2782.8
+    - 2789.95
+  - - 2790.3
+    - 2795.8
+  - - 2796.15
+    - 2800.625
+  - - 2800.975
+    - 2806.6
+  - - 2806.95
+    - 2812.5
   beat: application · one storm over one town
   visual: 'Map panel (Lambert 40-58N 25W-8E, x 80-1580, full brightness): GIBS MODIS Terra/Aqua true colour 2023-11-01
 
@@ -4330,13 +4329,13 @@ scenes:
   - R4
 - id: s55_ciaran_maps
   t:
-  - 2812.725
-  - 2838.075
+  - 2813.3
+  - 2838.65
   sentence_times:
-  - - 2812.725
-    - 2824.55
-  - - 2824.9
-    - 2837.275
+  - - 2813.3
+    - 2825.125
+  - - 2825.475
+    - 2837.85
   beat: application · the low moves in
   visual: 'Same panel; ERA5 MSLP isobars every 4 hPa animate hour by hour (24 frames per hour of data, interpolated only in
 
@@ -4396,19 +4395,19 @@ scenes:
   - R1
 - id: s56_brest_pressure
   t:
-  - 2838.075
-  - 2868.9
+  - 2838.65
+  - 2869.475
   sentence_times:
-  - - 2838.075
-    - 2840.525
-  - - 2840.875
-    - 2846.7
-  - - 2847.05
-    - 2856.075
-  - - 2856.425
-    - 2861.575
-  - - 2863.075
-    - 2868.1
+  - - 2838.65
+    - 2841.1
+  - - 2841.45
+    - 2847.275
+  - - 2847.625
+    - 2856.65
+  - - 2857.0
+    - 2862.15
+  - - 2863.65
+    - 2868.675
   beat: application · the pressure at Brest
   visual: 'Maths zone: TimeGraph (hours across 12 -> 12 UTC, 52-px ticks every 3 h; pressure 955-1000 hPa up) drawing the
 
@@ -4426,7 +4425,7 @@ scenes:
     fades with its picture, never spoken.'
   voiceover: First, the pressure at Brest. At midday on the first, it reads about nine hundred and ninety-seven hectopascals.
     Then it falls, faster and faster, to about nine hundred and sixty-two at one o'clock in the morning, as the low passes
-    close by. That's thirty-five hectopascals in thirteen hours, a very fast fall. [beat] Then it climbs again, by about fourteen
+    close by. That's thirty-five hectopascals in thirteen hours, a very fast fall. Then it climbs again, by about fourteen
     hectopascals in five hours.
   on_screen_eq: null
   physics_source:
@@ -4457,19 +4456,19 @@ scenes:
   - R1
 - id: s57_brest_warm_front
   t:
-  - 2868.9
-  - 2901.225
+  - 2869.475
+  - 2901.8
   sentence_times:
-  - - 2868.9
-    - 2871.275
-  - - 2871.625
-    - 2880.475
-  - - 2880.825
-    - 2891.675
-  - - 2892.025
-    - 2894.4
-  - - 2894.75
-    - 2900.425
+  - - 2869.475
+    - 2871.85
+  - - 2872.2
+    - 2881.05
+  - - 2881.4
+    - 2892.25
+  - - 2892.6
+    - 2894.975
+  - - 2895.325
+    - 2901.0
   beat: application · the warm front passes
   visual: 'Same TimeGraph: a second panel below (temperature 9-15 °C, orange line, hour dots); a row of hourly wind arrows
     above
@@ -4518,19 +4517,19 @@ scenes:
   - R1
 - id: s58_brest_cold_front
   t:
-  - 2901.225
-  - 2939.7
+  - 2901.8
+  - 2940.275
   sentence_times:
-  - - 2901.225
-    - 2904.2
-  - - 2904.55
-    - 2913.275
-  - - 2913.625
-    - 2925.175
-  - - 2926.675
-    - 2933.275
-  - - 2933.625
-    - 2938.9
+  - - 2901.8
+    - 2904.775
+  - - 2905.125
+    - 2913.85
+  - - 2914.2
+    - 2925.75
+  - - 2927.25
+    - 2933.85
+  - - 2934.2
+    - 2939.475
   beat: application · the cold front passes
   visual: 'Same TimeGraph; arrows at 00 and 03 UTC with labels ''19 m/s from 221° (SW)'', ''23 m/s from 271° (W)''; maths
     zone
@@ -4549,8 +4548,8 @@ scenes:
   voiceover: 'A few hours later comes the cold front. By now the storm has broken and bent its fronts so much that the map
     can''t trace them cleanly, but Brest''s own measurements show it clearly. Between midnight and three in the morning, the
     wind swings from the south-west to the west and strengthens: by three, it''s about twenty-three metres per second, or
-    forty-five knots. [beat] The temperature drops by about two degrees, to ten and a half, and the pressure starts its fast
-    climb. Cooler polar air has arrived behind the front, just as our side view said.'
+    forty-five knots. The temperature drops by about two degrees, to ten and a half, and the pressure starts its fast climb.
+    Cooler polar air has arrived behind the front, just as our side view said.'
   on_screen_eq:
     latex: 23.2 \div 0.514 \approx 45\ \mathrm{kt}
     vallis_eq: unit conversion (s34)
@@ -4589,15 +4588,15 @@ scenes:
   - R1
 - id: s59_ciaran_after
   t:
-  - 2939.7
-  - 2961.025
+  - 2940.275
+  - 2961.6
   sentence_times:
-  - - 2939.7
-    - 2948.325
-  - - 2948.675
-    - 2953.775
-  - - 2954.125
-    - 2960.225
+  - - 2940.275
+    - 2948.9
+  - - 2949.25
+    - 2954.35
+  - - 2954.7
+    - 2960.8
   beat: application · the storm the next afternoon, and what comes next
   visual: 'Map panel: the existing MODIS Aqua true colour of 2023-11-02 (re-used) with ERA5 12 UTC isobars and the ''L'' 956
     hPa
@@ -4633,25 +4632,25 @@ scenes:
   - R1
 - id: s60_recap
   t:
-  - 2961.025
-  - 3025.475
+  - 2961.6
+  - 3026.05
   sentence_times:
-  - - 2961.025
-    - 2969.25
-  - - 2969.6
-    - 2977.525
-  - - 2977.875
-    - 2985.775
-  - - 2986.125
-    - 2995.125
-  - - 2995.475
-    - 3002.8
-  - - 3003.15
-    - 3008.95
-  - - 3009.3
-    - 3015.85
-  - - 3016.2
-    - 3024.675
+  - - 2961.6
+    - 2969.825
+  - - 2970.175
+    - 2978.1
+  - - 2978.45
+    - 2986.35
+  - - 2986.7
+    - 2995.7
+  - - 2996.05
+    - 3003.375
+  - - 3003.725
+    - 3009.525
+  - - 3009.875
+    - 3016.425
+  - - 3016.775
+    - 3025.25
   beat: recap
   visual: 'No heading. One beat per sentence, each a mini picture from its scene (thumbnail re-renders, 60 % size) with its
 
@@ -4700,15 +4699,15 @@ scenes:
   - R1
 - id: s61_end
   t:
-  - 3025.475
-  - 3051.075
+  - 3026.05
+  - 3051.65
   sentence_times:
-  - - 3025.475
-    - 3031.35
-  - - 3031.7
-    - 3042.75
-  - - 3043.1
-    - 3050.775
+  - - 3026.05
+    - 3031.925
+  - - 3032.275
+    - 3043.325
+  - - 3043.675
+    - 3051.35
   beat: end card
   visual: 'House end card (HOUSE_STYLE §3), word for word as the reference with ''maths tutorials'' -> ''tutorials'' (physics
 
@@ -4779,7 +4778,7 @@ honesty_notes:
 quiz_hook: 'A mountain station 3 km up reads 700 hPa at 0 °C. Is its sea-level pressure high or low? (H = 287 x 273 / 9.81
   ≈ 8.0 km; 700 x e^(3/8.0) ≈ 1018 hPa: a slightly high reading.)'
 qa_expectations:
-  duration_s: 3053.575
+  duration_s: 3054.15
   captions:
     cues: 759
     max_lines: 2
@@ -4909,3 +4908,20 @@ user_feedback_1:
   new_checks: data_needs.md §G (W53-W76)
   qa_new_gate: every scene with a source_line field shows that text while its picture is on screen (frame OCR or the composition's
     SourceLine registry); no source line in scenes without real data
+uf1_build:
+  date: '2026-10-29'
+  tts: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/v4/uf1/tts (Kokoro af_bella 1.0)
+  narration_follows_data:
+  - 's47 S5: ''about one kilometre up for every fifteen kilometres along'' (ERA5 slice 925-500 hPa 1:15.1, W70; planned 50-100
+    km)'
+  - 's48 S3: ''about one kilometre up for every fifty kilometres along'' (ERA5 slice 975-600 hPa 1:52.3, W71; planned 100-200
+    km)'
+  deviations:
+  - 's03: the Brittany close-up is a three.js Terrain (ETOPO 2022 60" ×5 + Blue Marble NG 21600 crop) in Remotion, not a CesiumJS
+    frame pass, so the parcel box, trail, wind arrows and labels share one frame-driven renderer; the parcel box is 12 km
+    × 12 km × 2.4 km (×5) and is shown until it reaches the Channel coast (32 × 10 min of the ERA5 path, W75)'
+  - 's25: the polar camera key is {62, 80, 2.6} (not lon 15) so the zonal-mean section (in the 0/180° meridian plane) faces
+    the camera'
+  - 's46: the gold transect stays the fronts.json transect that its graph is drawn along; the 48.5N slice line appears on
+    the s47 map'
+  - 's47-s48: isotherms on the slice are not drawn (anomaly colours + saturated-air whitening only)'

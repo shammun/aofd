@@ -1,2869 +1,3611 @@
 1
-00:00:00,300 --> 00:00:04,597
+00:00:00,300 --> 00:00:04,460
 In this video, we'll learn
 the basics of weather the easy way,
 
 2
-00:00:04,597 --> 00:00:07,578
-and see how meteorology
-uses them to follow
+00:00:04,460 --> 00:00:08,419
+and see how meteorologists use
+them to read the weather and
 
 3
-00:00:07,578 --> 00:00:10,350
-a real storm as it passes over one town.
+00:00:08,419 --> 00:00:10,700
+follow a real storm over one town.
 
 4
-00:00:11,150 --> 00:00:13,100
+00:00:11,500 --> 00:00:13,450
 What is weather made of?
 
 5
-00:00:13,450 --> 00:00:17,576
+00:00:13,800 --> 00:00:17,926
 Let's see what air pressure,
 temperature, humidity and wind are,
 
 6
-00:00:17,576 --> 00:00:22,475
+00:00:17,926 --> 00:00:22,825
 why they behave the way they do, and
 how they come together in a real storm.
 
 7
-00:00:23,275 --> 00:00:25,700
+00:00:23,625 --> 00:00:26,050
 Let's start with the air itself.
 
 8
-00:00:26,050 --> 00:00:30,438
+00:00:26,400 --> 00:00:30,788
 The atmosphere is the layer of air
 that wraps around the Earth,
 
 9
-00:00:30,438 --> 00:00:31,900
+00:00:30,788 --> 00:00:32,250
 held down by gravity.
 
 10
-00:00:32,250 --> 00:00:35,325
+00:00:32,600 --> 00:00:35,675
 It's much thinner than
 most pictures suggest.
 
 11
-00:00:35,675 --> 00:00:40,420
+00:00:36,025 --> 00:00:40,684
 The layer where our weather happens
 is only about twelve kilometres deep,
 
 12
-00:00:40,420 --> 00:00:45,750
-while the Earth's radius is six thousand
-three hundred and seventy-one kilometres.
+00:00:40,684 --> 00:00:42,279
+while the Earth's radius,
 
 13
-00:00:46,100 --> 00:00:48,594
-On a globe thirty centimetres across,
+00:00:42,279 --> 00:00:45,087
+the distance from its centre
+to its surface,
 
 14
-00:00:48,594 --> 00:00:52,705
-that layer would be about three
-tenths of a millimetre thick,
+00:00:45,087 --> 00:00:48,725
+is six thousand three hundred
+and seventy-one kilometres.
 
 15
-00:00:52,705 --> 00:00:54,525
-like three sheets of paper.
+00:00:49,075 --> 00:00:51,175
+How thin is that, really?
 
 16
-00:00:54,875 --> 00:00:59,870
+00:00:51,525 --> 00:00:56,755
+Let's shrink the whole Earth down to a
+desk globe, thirty centimetres across,
+
+17
+00:00:56,755 --> 00:01:01,850
+so its radius is fifteen centimetres,
+or one hundred and fifty millimetres.
+
+18
+00:01:02,200 --> 00:01:06,920
+First, we find what fraction of the
+Earth's radius the weather layer is:
+
+19
+00:01:06,920 --> 00:01:10,066
+twelve divided by six
+thousand three hundred and
+
+20
+00:01:10,066 --> 00:01:12,950
+seventy-one, which
+is about two thousandths.
+
+21
+00:01:13,300 --> 00:01:16,926
+Then we shrink the layer by the same
+factor as the Earth:
+
+22
+00:01:16,926 --> 00:01:19,088
+two thousandths of one hundred and
+
+23
+00:01:19,088 --> 00:01:22,650
+fifty millimetres is about
+three tenths of a millimetre.
+
+24
+00:01:24,150 --> 00:01:28,475
+That's like three sheets of paper,
+painted onto the desk globe.
+
+25
+00:01:28,825 --> 00:01:33,820
 So from now on, we'll draw the air
 fifty times thicker than it really is,
 
-17
-00:00:59,870 --> 00:01:01,375
+26
+00:01:33,820 --> 00:01:35,325
 just so we can see it.
 
-18
-00:01:02,175 --> 00:01:04,525
+27
+00:01:36,125 --> 00:01:38,475
 Air is a mixture of gases.
 
-19
-00:01:04,875 --> 00:01:08,813
+28
+00:01:38,825 --> 00:01:42,763
 By volume, about seventy-eight
 percent is nitrogen,
 
-20
-00:01:08,813 --> 00:01:13,600
+29
+00:01:42,763 --> 00:01:47,550
 twenty-one percent is oxygen, and almost
 one percent is argon.
 
-21
-00:01:13,950 --> 00:01:18,138
+30
+00:01:47,900 --> 00:01:52,088
 Carbon dioxide is only about
 four hundredths of one percent,
 
-22
-00:01:18,138 --> 00:01:23,025
+31
+00:01:52,088 --> 00:01:56,975
 and water vapour comes and goes, from
 almost nothing to a few percent.
 
-23
-00:01:23,375 --> 00:01:28,516
+32
+00:01:57,325 --> 00:02:02,466
 All of it is made of molecules that zip
 around at hundreds of metres per second,
 
-24
-00:01:28,516 --> 00:01:32,050
+33
+00:02:02,466 --> 00:02:06,000
 bumping into each other
 billions of times every second.
 
-25
-00:01:32,400 --> 00:01:37,925
+34
+00:02:06,350 --> 00:02:11,875
 We can't follow single molecules,
 so meteorologists talk about air parcels.
 
-26
-00:01:38,275 --> 00:01:42,549
+35
+00:02:12,225 --> 00:02:16,499
 An air parcel is a small volume
 of air that moves with the flow:
 
-27
-00:01:42,549 --> 00:01:45,153
+36
+00:02:16,499 --> 00:02:19,103
 big enough to hold countless molecules,
 
-28
-00:01:45,153 --> 00:01:48,225
+37
+00:02:19,103 --> 00:02:22,175
 but small compared
 with the weather around it.
 
-29
-00:01:49,025 --> 00:01:51,375
+38
+00:02:22,525 --> 00:02:25,393
+Here's one, drawn far bigger than life,
+
+39
+00:02:25,393 --> 00:02:28,850
+riding the real
+wind over north-western France.
+
+40
+00:02:29,200 --> 00:02:31,936
+Wherever the wind goes, the parcel goes,
+
+41
+00:02:31,936 --> 00:02:36,450
+and it carries its own temperature
+and water vapour along with it.
+
+42
+00:02:37,250 --> 00:02:39,600
 Now let's look at air pressure.
 
-30
-00:01:51,725 --> 00:01:55,780
+43
+00:02:39,950 --> 00:02:44,005
 Those fast molecules keep
 hitting every surface they meet:
 
-31
-00:01:55,780 --> 00:01:59,625
+44
+00:02:44,005 --> 00:02:47,850
 your skin, the walls
 of a room, the surface of the sea.
 
-32
-00:01:59,975 --> 00:02:04,925
+45
+00:02:48,200 --> 00:02:53,150
 Each hit is a tiny push, and billions
 of them add up to a steady force.
 
-33
-00:02:05,275 --> 00:02:09,425
+46
+00:02:53,500 --> 00:02:57,650
 Pressure is that force
 divided by the area it pushes on.
 
-34
-00:02:09,775 --> 00:02:15,650
+47
+00:02:58,000 --> 00:03:03,875
 In air at rest, it pushes equally
 in every direction: up, down and sideways.
 
-35
-00:02:16,000 --> 00:02:20,750
+48
+00:03:04,225 --> 00:03:08,975
 Its unit is the pascal, one newton
 of force on each square metre.
 
-36
-00:02:21,550 --> 00:02:25,850
+49
+00:03:09,775 --> 00:03:14,075
 So how big is the pressure at the
 ground, and where does it come from?
 
-37
-00:02:26,200 --> 00:02:30,522
+50
+00:03:14,425 --> 00:03:18,747
 Picture a tall column of air standing
 on one square metre of ground,
 
-38
-00:02:30,522 --> 00:02:33,700
+51
+00:03:18,747 --> 00:03:21,925
 reaching all the way
 to the top of the atmosphere.
 
-39
-00:02:34,050 --> 00:02:39,150
+52
+00:03:22,275 --> 00:03:27,375
 Gravity pulls all that air down, and
 the ground has to hold up its weight.
 
-40
-00:02:39,500 --> 00:02:43,131
+53
+00:03:27,725 --> 00:03:31,356
 At sea level, the average
 pressure is one hundred and
 
-41
-00:02:43,131 --> 00:02:46,625
+54
+00:03:31,356 --> 00:03:34,850
 one thousand three hundred
 and twenty-five pascals.
 
-42
-00:02:46,975 --> 00:02:50,952
+55
+00:03:35,200 --> 00:03:39,177
 Weight is mass times g, where g is
 the pull of gravity,
 
-43
-00:02:50,952 --> 00:02:54,350
+56
+00:03:39,177 --> 00:03:42,575
 nine point eight one
 metres per second squared.
 
-44
-00:02:54,700 --> 00:02:58,975
+57
+00:03:42,925 --> 00:03:47,200
 So the mass in our column
 is the pressure divided by g.
 
-45
-00:02:59,325 --> 00:03:04,831
+58
+00:03:47,550 --> 00:03:53,056
 That's about ten thousand three hundred
 kilograms of air above every square metre,
 
-46
-00:03:04,831 --> 00:03:06,375
+59
+00:03:53,056 --> 00:03:54,600
 as heavy as seven cars.
 
-47
-00:03:06,725 --> 00:03:10,958
+60
+00:03:56,100 --> 00:04:00,333
 So the pressure at the ground
 is the weight of all the air above it,
 
-48
-00:03:10,958 --> 00:03:12,825
+61
+00:04:00,333 --> 00:04:02,200
 spread over each square metre.
 
-49
-00:03:13,625 --> 00:03:15,675
+62
+00:04:03,000 --> 00:04:05,050
 Why doesn't this crush us?
 
-50
-00:03:16,025 --> 00:03:20,353
+63
+00:04:05,400 --> 00:04:09,728
 Because the air pushes from every
 side at once, and the air and
 
-51
-00:03:20,353 --> 00:03:23,925
+64
+00:04:09,728 --> 00:04:13,300
 fluids inside our bodies
 push back out just as hard.
 
-52
-00:03:24,275 --> 00:03:27,300
+65
+00:04:13,650 --> 00:04:16,675
 The pushes balance, so we don't feel them.
 
-53
-00:03:27,650 --> 00:03:31,075
+66
+00:04:17,025 --> 00:04:20,450
 We only notice when the balance
 breaks for a moment:
 
-54
-00:03:31,075 --> 00:03:34,303
+67
+00:04:20,450 --> 00:04:23,678
 your ears pop in a fast
 lift or a climbing plane,
 
-55
-00:03:34,303 --> 00:03:38,650
+68
+00:04:23,678 --> 00:04:28,025
 because the outside pressure changes
 before the inside catches up.
 
-56
-00:03:39,450 --> 00:03:44,200
+69
+00:04:28,825 --> 00:04:33,575
 Pascals give big numbers,
 so weather maps use hectopascals.
 
-57
-00:03:44,550 --> 00:03:47,450
+70
+00:04:33,925 --> 00:04:36,825
 One hectopascal is one hundred pascals,
 
-58
-00:03:47,450 --> 00:03:53,325
+71
+00:04:36,825 --> 00:04:42,700
 so the average pressure at sea level
 is one thousand and thirteen hectopascals.
 
-59
-00:03:53,675 --> 00:03:57,924
+72
+00:04:43,050 --> 00:04:47,299
 Older maps use millibars,
 which are exactly the same size,
 
-60
-00:03:57,924 --> 00:03:59,975
+73
+00:04:47,299 --> 00:04:49,350
 so the numbers don't change.
 
-61
-00:04:00,325 --> 00:04:04,400
+74
+00:04:49,700 --> 00:04:53,775
 The instrument that measures
 pressure is called a barometer.
 
-62
-00:04:04,750 --> 00:04:10,075
+75
+00:04:54,125 --> 00:04:59,450
 Day to day, the reading at sea level
 moves up or down by only a few percent.
 
-63
-00:04:10,425 --> 00:04:14,725
+76
+00:04:59,800 --> 00:05:04,100
 Yet those few percent are what
 drive the winds, as we'll see.
 
-64
-00:04:15,525 --> 00:04:17,375
+77
+00:05:04,900 --> 00:05:06,750
 Next, density.
 
-65
-00:04:17,725 --> 00:04:21,925
+78
+00:05:07,100 --> 00:05:11,300
 Density tells us how much mass
 is packed into each cubic metre,
 
-66
-00:04:21,925 --> 00:04:24,725
+79
+00:05:11,300 --> 00:05:14,100
 and we write it with the Greek letter rho.
 
-67
-00:04:25,075 --> 00:04:30,600
+80
+00:05:14,450 --> 00:05:19,975
 Air near the ground has a density of about
 one point two kilograms per cubic metre.
 
-68
-00:04:30,950 --> 00:04:34,912
+81
+00:05:20,325 --> 00:05:24,287
 So a room five metres long, four
 metres wide and two and
 
-69
-00:04:34,912 --> 00:04:38,521
+82
+00:05:24,287 --> 00:05:27,896
 a half metres high holds
 fifty cubic metres of air,
 
-70
-00:04:38,521 --> 00:04:42,200
+83
+00:05:27,896 --> 00:05:31,575
 which is about sixty kilograms:
 as much as a person.
 
-71
-00:04:43,000 --> 00:04:47,364
+84
+00:05:33,075 --> 00:05:37,439
 Temperature measures how fast
 the molecules jiggle on average:
 
-72
-00:04:47,364 --> 00:04:50,250
+85
+00:05:37,439 --> 00:05:40,325
 the warmer the air, the faster they move.
 
-73
-00:04:50,600 --> 00:04:55,425
+86
+00:05:40,675 --> 00:05:45,500
 Weather reports use degrees Celsius,
 but physics uses kelvin.
 
-74
-00:04:55,775 --> 00:04:58,141
+87
+00:05:45,850 --> 00:05:48,216
 To get kelvin, add two hundred and
 
-75
-00:04:58,141 --> 00:05:01,689
+88
+00:05:48,216 --> 00:05:51,764
 seventy-three point one five
 to the Celsius number,
 
-76
-00:05:01,689 --> 00:05:07,325
+89
+00:05:51,764 --> 00:05:57,400
 so fifteen degrees Celsius is two hundred
 and eighty-eight point one five kelvin.
 
-77
-00:05:07,675 --> 00:05:11,875
+90
+00:05:57,750 --> 00:06:01,950
 A kelvin step is the same
 size as a degree Celsius step;
 
-78
-00:05:11,875 --> 00:05:14,125
+91
+00:06:01,950 --> 00:06:04,200
 only the starting point moves.
 
-79
-00:05:14,475 --> 00:05:17,639
+92
+00:06:04,550 --> 00:06:07,714
 Zero kelvin is the coldest
 anything can be,
 
-80
-00:05:17,639 --> 00:05:20,950
+93
+00:06:07,714 --> 00:06:11,025
 so a temperature in kelvin
 is never negative.
 
-81
-00:05:21,300 --> 00:05:25,475
+94
+00:06:11,375 --> 00:06:15,550
 That's why the gas law, which
 comes next, uses kelvin.
 
-82
-00:05:26,275 --> 00:05:30,100
+95
+00:06:16,350 --> 00:06:20,175
 Now let's connect pressure,
 density and temperature.
 
-83
-00:05:30,450 --> 00:05:34,250
+96
+00:06:20,525 --> 00:06:24,325
 Think about what makes
 the molecules push harder on a wall.
 
-84
-00:05:34,600 --> 00:05:37,656
+97
+00:06:24,675 --> 00:06:27,731
 If we pack more molecules
 into each cubic metre,
 
-85
-00:05:37,656 --> 00:05:42,750
+98
+00:06:27,731 --> 00:06:32,825
 more of them hit the wall each second, so
 the pressure goes up with the density.
 
-86
-00:05:43,100 --> 00:05:46,627
+99
+00:06:33,175 --> 00:06:36,702
 If the molecules move
 faster, each one hits harder and
 
-87
-00:05:46,627 --> 00:05:50,350
+100
+00:06:36,702 --> 00:06:40,425
 more often, so the pressure
 goes up with the temperature.
 
-88
-00:05:50,700 --> 00:05:56,120
+101
+00:06:40,775 --> 00:06:46,195
 Put together, the pressure is proportional
 to density times temperature:
 
-89
-00:05:56,120 --> 00:05:57,400
+102
+00:06:46,195 --> 00:06:47,475
 p equals rho R T.
 
-90
-00:05:57,750 --> 00:06:00,450
+103
+00:06:47,825 --> 00:06:50,525
 This is called the ideal gas law.
 
-91
-00:06:00,800 --> 00:06:03,218
+104
+00:06:50,875 --> 00:06:53,293
 Here p is the pressure in pascals,
 
-92
-00:06:03,218 --> 00:06:06,845
+105
+00:06:53,293 --> 00:06:56,920
 rho is the density,
 T is the temperature in kelvin,
 
-93
-00:06:06,845 --> 00:06:11,183
+106
+00:06:56,920 --> 00:07:01,258
 and R is a fixed number for dry
 air, called the gas constant:
 
-94
-00:06:11,183 --> 00:06:15,450
+107
+00:07:01,258 --> 00:07:05,525
 two hundred and eighty-seven
 joules per kilogram per kelvin.
 
-95
-00:06:16,250 --> 00:06:17,950
+108
+00:07:06,325 --> 00:07:08,025
 Let's use it.
 
-96
-00:06:18,300 --> 00:06:21,182
+109
+00:07:08,375 --> 00:07:11,257
 What is the density of air at sea level,
 
-97
-00:06:21,182 --> 00:06:25,650
+110
+00:07:11,257 --> 00:07:15,725
 at one thousand and thirteen
 hectopascals and fifteen degrees?
 
-98
-00:06:26,000 --> 00:06:30,600
+111
+00:07:16,075 --> 00:07:20,675
 We turn the law around:
 rho equals p divided by R T.
 
-99
-00:06:30,950 --> 00:06:35,717
+112
+00:07:21,025 --> 00:07:25,792
 That's one hundred and one thousand
 three hundred and twenty-five pascals,
 
-100
-00:06:35,717 --> 00:06:39,646
+113
+00:07:25,792 --> 00:07:29,721
 divided by two hundred
 and eighty-seven times two hundred and
 
-101
-00:06:39,646 --> 00:06:41,450
+114
+00:07:29,721 --> 00:07:31,525
 eighty-eight point one five.
 
-102
-00:06:41,800 --> 00:06:46,377
+115
+00:07:31,875 --> 00:07:36,452
 The answer is about one point two two five
 kilograms per cubic metre,
 
-103
-00:06:46,377 --> 00:06:48,500
+116
+00:07:36,452 --> 00:07:38,575
 the number we used for the room.
 
-104
-00:06:49,300 --> 00:06:53,725
+117
+00:07:40,075 --> 00:07:44,500
 Now let's keep the pressure fixed
 and change only the temperature.
 
-105
-00:06:54,075 --> 00:06:55,197
+118
+00:07:44,850 --> 00:07:45,972
 At zero degrees,
 
-106
-00:06:55,197 --> 00:07:00,525
+119
+00:07:45,972 --> 00:07:51,300
 the density comes out at about one point
 two nine kilograms per cubic metre.
 
-107
-00:07:00,875 --> 00:07:04,575
+120
+00:07:51,650 --> 00:07:55,350
 At thirty degrees,
 it's about one point one six.
 
-108
-00:07:04,925 --> 00:07:10,300
+121
+00:07:55,700 --> 00:08:01,075
 So at the same pressure, warm air is about
 ten percent lighter than cold air.
 
-109
-00:07:10,650 --> 00:07:13,172
+122
+00:08:02,575 --> 00:08:05,097
 That's why a hot-air balloon floats,
 
-110
-00:07:13,172 --> 00:07:17,375
+123
+00:08:05,097 --> 00:08:09,300
 and why warm air tends to rise
 while cold air tends to sink.
 
-111
-00:07:17,725 --> 00:07:20,475
+124
+00:08:09,650 --> 00:08:12,400
 We'll meet this again with weather fronts.
 
-112
-00:07:21,275 --> 00:07:25,325
+125
+00:08:13,200 --> 00:08:17,250
 Now let's work out how the pressure
 changes as we go up.
 
-113
-00:07:25,675 --> 00:07:29,250
+126
+00:08:17,600 --> 00:08:21,175
 Our goal is a rule for how fast
 it falls with height.
 
-114
-00:07:29,600 --> 00:07:32,639
+127
+00:08:21,525 --> 00:08:24,564
 Take a thin slab of air inside our column,
 
-115
-00:07:32,639 --> 00:07:37,125
+128
+00:08:24,564 --> 00:08:29,050
 standing on one square
 metre, with a small thickness, delta z.
 
-116
-00:07:37,475 --> 00:07:41,775
+129
+00:08:29,400 --> 00:08:33,700
 Here z is height, and
 delta z means a small step in height.
 
-117
-00:07:42,125 --> 00:07:46,075
+130
+00:08:34,050 --> 00:08:38,000
 The slab is at rest, so
 the forces on it must balance.
 
-118
-00:07:46,425 --> 00:07:51,558
+131
+00:08:38,350 --> 00:08:43,483
 The air below pushes it up, with a force
 equal to the pressure at its bottom,
 
-119
-00:07:51,558 --> 00:07:54,025
+132
+00:08:43,483 --> 00:08:45,950
 because the area is one square metre.
 
-120
-00:07:54,375 --> 00:07:58,325
+133
+00:08:46,300 --> 00:08:50,250
 The air above pushes it
 down, with the pressure at its top.
 
-121
-00:07:58,675 --> 00:08:01,450
+134
+00:08:50,600 --> 00:08:53,375
 And gravity pulls it down with its weight.
 
-122
-00:08:02,250 --> 00:08:04,300
+135
+00:08:54,175 --> 00:08:56,225
 What does the slab weigh?
 
-123
-00:08:04,650 --> 00:08:11,100
-Its volume is one square metre times
-delta z, so its mass is rho times delta z.
+136
+00:08:56,575 --> 00:09:02,491
+First, its volume: its base is one square
+metre and its thickness is delta z,
 
-124
-00:08:11,450 --> 00:08:15,425
-Its weight is that mass times g:
-rho g delta z.
+137
+00:09:02,491 --> 00:09:07,100
+so its volume, capital V, is one
+square metre times delta z.
 
-125
-00:08:15,775 --> 00:08:17,475
+138
+00:09:07,450 --> 00:09:13,030
+Next, its mass: mass is density times
+volume, so m equals rho times V,
+
+139
+00:09:13,030 --> 00:09:17,175
+which is rho, times one
+square metre, times delta z.
+
+140
+00:09:17,525 --> 00:09:21,051
+Last, its weight: weight is mass times g,
+
+141
+00:09:21,051 --> 00:09:25,350
+so W equals rho g delta z, times one
+square metre.
+
+142
+00:09:26,850 --> 00:09:28,550
 Now the balance.
 
-126
-00:08:17,825 --> 00:08:21,500
+143
+00:09:28,900 --> 00:09:34,100
+Each push is a pressure times the area
+it pushes on, one square metre.
+
+144
+00:09:34,450 --> 00:09:38,125
 The push up, minus the push
 down, equals the weight.
 
-127
-00:08:21,850 --> 00:08:26,925
-So p at the bottom, minus p at
+145
+00:09:38,475 --> 00:09:42,962
+The square metre appears in every
+term, so we can cancel it:
+
+146
+00:09:42,962 --> 00:09:47,300
+p at the bottom, minus p at
 the top, equals rho g delta z.
 
-128
-00:08:27,275 --> 00:08:31,875
-The pressure at the bottom is bigger, by
-exactly the weight of the slab.
+147
+00:09:47,650 --> 00:09:49,963
+The pressure at the bottom is bigger,
 
-129
-00:08:32,675 --> 00:08:34,550
+148
+00:09:49,963 --> 00:09:53,400
+by exactly the weight
+of the slab on each square metre.
+
+149
+00:09:54,200 --> 00:09:56,075
 Let's tidy this up.
 
-130
-00:08:34,900 --> 00:08:38,309
+150
+00:09:56,425 --> 00:09:59,834
 The pressure at the top
 minus the pressure at the
 
-131
-00:08:38,309 --> 00:08:41,718
+151
+00:09:59,834 --> 00:10:03,243
 bottom is the change
 in pressure across the slab,
 
-132
-00:08:41,718 --> 00:08:46,600
+152
+00:10:03,243 --> 00:10:08,125
 delta p. It's negative, because
 the pressure falls as we go up.
 
-133
-00:08:46,950 --> 00:08:50,775
+153
+00:10:08,475 --> 00:10:12,300
 So delta p equals minus rho g delta z.
 
-134
-00:08:51,125 --> 00:08:56,300
+154
+00:10:12,650 --> 00:10:17,825
 Divide both sides by delta z, and let
 the slab get thinner and thinner.
 
-135
-00:08:56,650 --> 00:09:00,090
+155
+00:10:18,175 --> 00:10:21,615
 Delta p over delta z becomes
 the derivative,
 
-136
-00:09:00,090 --> 00:09:05,250
+156
+00:10:21,615 --> 00:10:26,775
 partial p by partial z: how fast
 the pressure changes with height.
 
-137
-00:09:05,600 --> 00:09:10,475
+157
+00:10:27,125 --> 00:10:32,000
 Partial means only the height changes;
 the place and the time stay fixed.
 
-138
-00:09:10,825 --> 00:09:15,050
+158
+00:10:32,350 --> 00:10:36,575
 So partial p by partial z equals
 minus rho g.
 
-139
-00:09:15,400 --> 00:09:18,854
+159
+00:10:36,925 --> 00:10:40,379
 This is called hydrostatic
 balance: at every height,
 
-140
-00:09:18,854 --> 00:09:22,175
+160
+00:10:40,379 --> 00:10:43,700
 the pressure holds up
 the weight of the air above.
 
-141
-00:09:22,975 --> 00:09:25,525
+161
+00:10:44,500 --> 00:10:47,050
 How fast is that near the ground?
 
-142
-00:09:25,875 --> 00:09:30,657
+162
+00:10:47,400 --> 00:10:52,182
 Rho is about one point two two
 five, and g is nine point eight one,
 
-143
-00:09:30,657 --> 00:09:35,725
+163
+00:10:52,182 --> 00:10:57,250
 so the pressure falls by about twelve
 pascals for every metre we climb.
 
-144
-00:09:36,075 --> 00:09:40,125
+164
+00:10:58,750 --> 00:11:02,800
 That's one hectopascal
 for about every eight metres.
 
-145
-00:09:40,475 --> 00:09:44,230
+165
+00:11:03,150 --> 00:11:06,905
 Ride a lift to the top
 of a three-hundred-metre tower,
 
-146
-00:09:44,230 --> 00:09:48,125
+166
+00:11:06,905 --> 00:11:10,800
 and the pressure drops by about
 thirty-six hectopascals.
 
-147
-00:09:48,475 --> 00:09:50,975
+167
+00:11:12,300 --> 00:11:14,800
 That's the change your ears notice.
 
-148
-00:09:51,325 --> 00:09:55,672
+168
+00:11:15,150 --> 00:11:19,497
 Hydrostatic balance holds very
 well for large weather systems,
 
-149
-00:09:55,672 --> 00:10:00,650
+169
+00:11:19,497 --> 00:11:24,475
 because their up and down accelerations
 are tiny compared with gravity.
 
-150
-00:10:01,450 --> 00:10:05,550
+170
+00:11:25,275 --> 00:11:29,375
 But rho isn't fixed: the higher
 we go, the thinner the air.
 
-151
-00:10:05,900 --> 00:10:08,225
+171
+00:11:29,725 --> 00:11:32,050
 So let's bring in the gas law.
 
-152
-00:10:08,575 --> 00:10:11,600
+172
+00:11:32,400 --> 00:11:35,425
 It says rho equals p over R T.
 
-153
-00:10:11,950 --> 00:10:16,225
+173
+00:11:35,775 --> 00:11:40,050
 Let's put that into hydrostatic
 balance, in place of rho.
 
-154
-00:10:16,575 --> 00:10:22,025
+174
+00:11:40,400 --> 00:11:45,850
 We get partial p by partial z equals
 minus p g over R T.
 
-155
-00:10:22,375 --> 00:10:27,475
+175
+00:11:46,200 --> 00:11:51,300
 Now the fall in pressure per metre
 is proportional to the pressure itself.
 
-156
-00:10:27,825 --> 00:10:31,675
+176
+00:11:51,650 --> 00:11:55,500
 Where the pressure is high, near
 the ground, it falls fast.
 
-157
-00:10:32,025 --> 00:10:35,975
+177
+00:11:55,850 --> 00:11:59,800
 Higher up, where there's less
 pressure, it falls more slowly.
 
-158
-00:10:36,775 --> 00:10:39,092
-The group R T over g appears so
+178
+00:12:00,600 --> 00:12:03,893
+Look at the new rule: the three numbers R,
 
-159
-00:10:39,092 --> 00:10:43,650
-often that it gets its own name:
-the scale height, capital H.
+179
+00:12:03,893 --> 00:12:07,500
+T and g always appear
+together, as g over R T.
 
-160
-00:10:44,000 --> 00:10:46,050
+180
+00:12:07,850 --> 00:12:11,370
+So let's give the upside-down
+group, R T over g,
+
+181
+00:12:11,370 --> 00:12:14,450
+its own name: the scale height, capital H.
+
+182
+00:12:14,800 --> 00:12:17,922
+With it, our rule becomes much simpler:
+
+183
+00:12:17,922 --> 00:12:21,525
+partial p by partial z equals
+minus p over H.
+
+184
+00:12:21,875 --> 00:12:24,175
+What kind of quantity is H?
+
+185
+00:12:24,525 --> 00:12:26,575
 Let's check its units.
 
-161
-00:10:46,400 --> 00:10:49,076
+186
+00:12:26,925 --> 00:12:29,601
 R is in joules per kilogram per kelvin,
 
-162
-00:10:49,076 --> 00:10:53,400
+187
+00:12:29,601 --> 00:12:33,925
 and a joule per kilogram is a metre
 squared per second squared.
 
-163
-00:10:53,750 --> 00:10:58,828
+188
+00:12:34,275 --> 00:12:39,353
 Multiply by T in kelvin, divide
 by g in metres per second squared,
 
-164
-00:10:58,828 --> 00:11:01,675
+189
+00:12:39,353 --> 00:12:42,200
 and we're left with metres: a height.
 
-165
-00:11:02,025 --> 00:11:07,074
-At fifteen degrees, H is two hundred
+190
+00:12:42,550 --> 00:12:44,725
+So what does this height mean?
+
+191
+00:12:45,075 --> 00:12:50,130
+The rule says that if the pressure kept
+falling at the rate it has at the start,
+
+192
+00:12:50,130 --> 00:12:53,100
+it would reach zero
+after a climb of exactly H.
+
+193
+00:12:53,450 --> 00:12:55,405
+It never actually gets there,
+
+194
+00:12:55,405 --> 00:12:59,248
+because the fall slows down
+as the pressure gets smaller,
+
+195
+00:12:59,248 --> 00:13:02,350
+but H tells us the size
+of climb that matters.
+
+196
+00:13:02,700 --> 00:13:08,087
+So H is one number that tells us how deep
+the atmosphere is: the bigger H is,
+
+197
+00:13:08,087 --> 00:13:12,775
+the more slowly the pressure
+falls, and the higher the air reaches.
+
+198
+00:13:13,125 --> 00:13:15,795
+And because T is on top of the fraction,
+
+199
+00:13:15,795 --> 00:13:20,600
+warmer air has a bigger scale height
+and reaches higher than colder air.
+
+200
+00:13:21,400 --> 00:13:23,450
+So how deep is our air?
+
+201
+00:13:23,800 --> 00:13:27,350
+Let's work out H for a typical
+day at sea level.
+
+202
+00:13:27,700 --> 00:13:32,500
+R is two hundred and eighty-seven,
+the gas constant for dry air.
+
+203
+00:13:32,850 --> 00:13:38,500
+T is fifteen degrees, which is two hundred
+and eighty-eight point one five kelvin.
+
+204
+00:13:38,850 --> 00:13:43,000
+And g is nine point eight one
+metres per second squared.
+
+205
+00:13:43,350 --> 00:13:47,277
+So H is two hundred
 and eighty-seven times two hundred and
 
-166
-00:11:07,074 --> 00:11:11,180
+206
+00:13:47,277 --> 00:13:49,173
 eighty-eight point one five,
-divided by nine point eight one,
 
-167
-00:11:11,180 --> 00:11:14,075
-which is about
-eight point four kilometres.
+207
+00:13:49,173 --> 00:13:54,725
+divided by nine point eight one, which is
+about eight point four three kilometres.
 
-168
-00:11:14,425 --> 00:11:16,500
-Here's a nice surprise.
+208
+00:13:56,225 --> 00:13:59,250
+Here's a nice way to picture that number.
 
-169
-00:11:16,850 --> 00:11:20,643
-If the air kept its ground-level
-density all the way up,
+209
+00:13:59,600 --> 00:14:05,029
+Imagine squashing all the air in our
+column to the same density all the way up:
 
-170
-00:11:20,643 --> 00:11:23,149
-the column would end at p over rho g,
+210
+00:14:05,029 --> 00:14:06,540
+the sea-level density,
 
-171
-00:11:23,149 --> 00:11:26,400
-and that's the same
-eight point four kilometres.
+211
+00:14:06,540 --> 00:14:12,175
+one point two two five kilograms per cubic
+metre, which we found with the gas law.
 
-172
-00:11:27,200 --> 00:11:32,850
-So now our rule reads: partial p by
-partial z equals minus p over H.
+212
+00:14:12,525 --> 00:14:17,700
+How tall would that column be, if it still
+had to weigh the same as the real one?
 
-173
-00:11:33,200 --> 00:11:38,125
-Let's assume the temperature,
-and so H, is the same at every height.
+213
+00:14:18,050 --> 00:14:22,321
+Its weight on each square metre
+would be rho g times its height,
 
-174
-00:11:38,475 --> 00:11:40,950
-Divide both sides by p.
+214
+00:14:22,321 --> 00:14:25,725
+and that must equal
+the sea-level pressure, p zero.
 
-175
-00:11:41,300 --> 00:11:45,978
-The left side is now the rate
-of change of the natural log of p,
+215
+00:14:26,075 --> 00:14:31,857
+So its height is p zero over rho g: one
+hundred and one thousand three hundred and
 
-176
-00:11:45,978 --> 00:11:49,925
-so log p falls by one over H for every
-metre we climb.
+216
+00:14:31,857 --> 00:14:37,075
+twenty-five, divided by one point two
+two five times nine point eight one.
 
-177
-00:11:50,275 --> 00:11:54,760
-Add that up from the ground, where
-the pressure is p zero,
+217
+00:14:37,425 --> 00:14:41,025
+That's again about
+eight point four three kilometres.
 
-178
-00:11:54,760 --> 00:11:59,400
-to height z: the log of p over p zero
+218
+00:14:42,525 --> 00:14:45,885
+So the scale height is how tall
+the atmosphere would
+
+219
+00:14:45,885 --> 00:14:49,375
+be if all its air were
+as dense as it is at sea level.
+
+220
+00:14:50,175 --> 00:14:54,325
+Now let's solve this rule, to find
+the pressure at any height.
+
+221
+00:14:54,675 --> 00:15:00,202
+To keep the steps simple, let's assume the
+temperature is the same at every height,
+
+222
+00:15:00,202 --> 00:15:02,200
+so that H is one fixed number.
+
+223
+00:15:02,550 --> 00:15:06,883
+That's a simplification: the real
+temperature changes with height,
+
+224
+00:15:06,883 --> 00:15:12,200
+as we'll see soon, but it gives us a clean
+formula that makes a good first guess.
+
+225
+00:15:12,550 --> 00:15:16,313
+First, divide both sides by p: one over p,
+
+226
+00:15:16,313 --> 00:15:21,150
+times partial p by partial z, equals
+minus one over H.
+
+227
+00:15:21,500 --> 00:15:24,041
+Here's a useful fact from calculus:
+
+228
+00:15:24,041 --> 00:15:27,525
+the slope of the natural
+log of p is one over p.
+
+229
+00:15:27,875 --> 00:15:29,347
+So, by the chain rule,
+
+230
+00:15:29,347 --> 00:15:34,500
+the left side is just the rate of change
+of the natural log of p with height.
+
+231
+00:15:34,850 --> 00:15:38,696
+That means the log
+of p falls by the same amount,
+
+232
+00:15:38,696 --> 00:15:41,600
+one over H, for every metre we climb.
+
+233
+00:15:42,400 --> 00:15:47,108
+Now we add up those small falls, from
+the ground, where z is zero and
+
+234
+00:15:47,108 --> 00:15:51,475
+the pressure is p zero, up
+to height z, where the pressure is p.
+
+235
+00:15:51,825 --> 00:15:57,525
+Adding up small changes is what an
+integral does, so we integrate both sides.
+
+236
+00:15:57,875 --> 00:16:03,274
+On the left, adding up the changes
+in the log of p gives the log of p,
+
+237
+00:16:03,274 --> 00:16:05,125
+minus the log of p zero.
+
+238
+00:16:05,475 --> 00:16:09,142
+On the right, minus one
+over H for every metre,
+
+239
+00:16:09,142 --> 00:16:13,200
+over a climb of z metres, adds
+up to minus z over H.
+
+240
+00:16:13,550 --> 00:16:19,450
+And the log of p, minus the log
+of p zero, is the log of p over p zero.
+
+241
+00:16:19,800 --> 00:16:24,400
+So the log of p over p zero
 equals minus z over H.
 
-179
-00:11:59,750 --> 00:12:05,300
-Undo the log, and we get p equals p zero
+242
+00:16:24,750 --> 00:16:28,494
+The natural log is built
+on a special number called e,
+
+243
+00:16:28,494 --> 00:16:30,297
+about two point seven two,
+
+244
+00:16:30,297 --> 00:16:35,150
+which turns up with growth and decay
+just as pi turns up with circles.
+
+245
+00:16:35,500 --> 00:16:39,696
+To undo the log, we
+raise e to the power of each side,
+
+246
+00:16:39,696 --> 00:16:44,125
+and we get p equals p zero
 times e to the minus z over H.
 
-180
-00:12:06,100 --> 00:12:08,250
+247
+00:16:45,625 --> 00:16:48,352
+This tells us the pressure
+at any height z,
+
+248
+00:16:48,352 --> 00:16:51,650
+in air that has the same
+temperature all the way up.
+
+249
+00:16:52,450 --> 00:16:54,600
 What does this curve tell us?
 
-181
-00:12:08,600 --> 00:12:13,172
-Every time we climb one scale
+250
+00:16:54,950 --> 00:16:59,150
+Let's climb exactly one
+scale height, so z equals H.
+
+251
+00:16:59,500 --> 00:17:03,601
+Then the power
+is minus H over H, which is minus one,
+
+252
+00:17:03,601 --> 00:17:09,250
+and e to the minus one is one divided
+by e: about zero point three seven.
+
+253
+00:17:09,600 --> 00:17:13,997
+So every time we climb one scale
 height, eight point four kilometres,
 
-182
-00:12:13,172 --> 00:12:17,675
-the pressure is divided by e, which
-is about two point seven two.
+254
+00:17:13,997 --> 00:17:18,075
+the pressure falls to about
+thirty-seven percent of what it was.
 
-183
-00:12:18,025 --> 00:12:21,354
-And every kilometre takes
+255
+00:17:19,575 --> 00:17:21,698
+From the ground's one thousand and
+
+256
+00:17:21,698 --> 00:17:25,007
+thirteen hectopascals,
+that's about three hundred and
+
+257
+00:17:25,007 --> 00:17:27,816
+seventy-three at
+eight point four kilometres,
+
+258
+00:17:27,816 --> 00:17:31,625
+and about one hundred and thirty-seven
+at sixteen point nine.
+
+259
+00:17:32,425 --> 00:17:36,550
+Now let's zoom in on a single
+kilometre near the ground.
+
+260
+00:17:36,900 --> 00:17:42,100
+Our rule says that each metre we climb
+takes away one over H of the pressure.
+
+261
+00:17:42,450 --> 00:17:45,561
+So one kilometre takes
+away about one kilometre
+
+262
+00:17:45,561 --> 00:17:48,539
+divided by
+eight point four three kilometres,
+
+263
+00:17:48,539 --> 00:17:50,525
+which is about twelve percent.
+
+264
+00:17:50,875 --> 00:17:55,260
+But the pressure shrinks a little
+as we climb through that kilometre,
+
+265
+00:17:55,260 --> 00:17:57,421
+so the real fall is slightly less:
+
+266
+00:17:57,421 --> 00:18:01,043
+one minus e to the minus one
+over eight point four three,
+
+267
+00:18:01,043 --> 00:18:02,950
+which is about eleven percent.
+
+268
+00:18:04,450 --> 00:18:06,550
+Eleven percent of what?
+
+269
+00:18:06,900 --> 00:18:10,325
+Of the pressure at the bottom
+of that kilometre.
+
+270
+00:18:10,675 --> 00:18:13,663
+So the first kilometre
+takes one thousand and
+
+271
+00:18:13,663 --> 00:18:16,916
+thirteen hectopascals down
+to about nine hundred,
+
+272
+00:18:16,916 --> 00:18:20,900
+and the next takes nine hundred
+down to about eight hundred.
+
+273
+00:18:21,250 --> 00:18:24,128
+Each kilometre takes
 away the same fraction,
 
-184
-00:12:21,354 --> 00:12:23,800
-about eleven percent of what's left.
+274
+00:18:24,128 --> 00:18:27,857
+so the drops get smaller as we
+go up: about a hundred and
 
-185
-00:12:24,150 --> 00:12:29,135
+275
+00:18:27,857 --> 00:18:30,801
+thirteen hectopascals
+in the first kilometre,
+
+276
+00:18:30,801 --> 00:18:33,875
+but only about a hundred
+and one in the second.
+
+277
+00:18:34,675 --> 00:18:37,825
+Here's another way to see
+why the curve bends.
+
+278
+00:18:38,175 --> 00:18:43,266
+Let's cut our column into ten slabs
+that each hold the same amount of air:
+
+279
+00:18:43,266 --> 00:18:48,425
+one tenth of the total, about a thousand
+kilograms above each square metre.
+
+280
+00:18:48,775 --> 00:18:52,270
+The bottom slab is only about
+nine hundred metres thick,
+
+281
+00:18:52,270 --> 00:18:57,200
+because it carries the weight of all
+the air above it and is squeezed the most.
+
+282
+00:18:57,550 --> 00:19:00,921
+Each slab higher up has less
+air pressing down on it,
+
+283
+00:19:00,921 --> 00:19:03,275
+so it's squeezed less and is thicker.
+
+284
+00:19:03,625 --> 00:19:07,352
+The ninth slab reaches up
+to about nineteen kilometres,
+
+285
+00:19:07,352 --> 00:19:10,875
+and the last one thins out
+with no sharp top at all.
+
+286
+00:19:11,225 --> 00:19:16,210
 It's like a stack of foam mattresses:
 the bottom ones are squeezed the most,
 
-186
-00:12:29,135 --> 00:12:31,825
+287
+00:19:16,210 --> 00:19:18,900
 because they carry everything above them.
 
-187
-00:12:32,175 --> 00:12:36,075
+288
+00:19:19,250 --> 00:19:23,150
 Unlike mattresses,
 though, the air's layers aren't separate,
 
-188
-00:12:36,075 --> 00:12:39,975
+289
+00:19:23,150 --> 00:19:27,050
 and how much they squeeze also
 depends on their temperature.
 
-189
-00:12:40,325 --> 00:12:44,379
+290
+00:19:27,850 --> 00:19:31,400
+Now let's find the height
+where the pressure has halved.
+
+291
+00:19:31,750 --> 00:19:37,051
+Start again from the log
+of p over p zero equals minus z over H,
+
+292
+00:19:37,051 --> 00:19:39,950
+and multiply both sides by minus H.
+
+293
+00:19:40,300 --> 00:19:45,953
+The log of a fraction turned upside
+down is minus the log of the fraction,
+
+294
+00:19:45,953 --> 00:19:49,925
+so we get z equals H times
+the log of p zero over p.
+
+295
+00:19:50,275 --> 00:19:54,250
+This formula gives the height
+for any pressure we choose.
+
+296
+00:19:54,600 --> 00:19:58,294
+For half the ground pressure,
+p zero over p is two,
+
+297
+00:19:58,294 --> 00:20:02,350
+so z equals eight point four three
+times the log of two.
+
+298
+00:20:02,700 --> 00:20:05,987
+The log of two is about
+zero point six nine,
+
+299
+00:20:05,987 --> 00:20:09,125
+so z is about five point eight kilometres.
+
+300
+00:20:10,625 --> 00:20:14,679
 So the pressure halves about
 every five point eight kilometres:
 
-190
-00:12:44,379 --> 00:12:48,625
+301
+00:20:14,679 --> 00:20:18,925
 to about five hundred hectopascals
 at five point eight kilometres,
 
-191
-00:12:48,625 --> 00:12:52,100
+302
+00:20:18,925 --> 00:20:22,400
 and about two hundred and fifty
 at eleven point seven.
 
-192
-00:12:52,900 --> 00:12:55,850
+303
+00:20:23,200 --> 00:20:26,150
 Does the real atmosphere
 follow this curve?
 
-193
-00:12:56,200 --> 00:12:59,250
+304
+00:20:26,500 --> 00:20:29,550
 Let's check it against a real
 weather balloon.
 
-194
-00:12:59,600 --> 00:13:03,117
+305
+00:20:29,900 --> 00:20:33,417
 Twice a day, at hundreds
 of places around the world,
 
-195
-00:13:03,117 --> 00:13:05,957
+306
+00:20:33,417 --> 00:20:36,257
 meteorologists launch a balloon carrying a
 
-196
-00:13:05,957 --> 00:13:09,000
+307
+00:20:36,257 --> 00:20:39,300
 small instrument package
 called a radiosonde.
 
-197
-00:13:09,350 --> 00:13:13,426
+308
+00:20:39,650 --> 00:20:43,726
 As it rises, it radios back
 the pressure, the temperature and
 
-198
-00:13:13,426 --> 00:13:16,700
+309
+00:20:43,726 --> 00:20:47,000
 the humidity,
 and from its drift we get the wind.
 
-199
-00:13:17,050 --> 00:13:20,203
+310
+00:20:47,350 --> 00:20:50,503
 This one was launched near
 Paris around midnight,
 
-200
-00:13:20,203 --> 00:13:24,000
+311
+00:20:50,503 --> 00:20:54,300
 at the start of the first
 of November, twenty twenty-three.
 
-201
-00:13:24,350 --> 00:13:29,380
+312
+00:20:54,650 --> 00:20:59,680
 In the picture, heights are drawn ten
 times taller than distances on the map,
 
-202
-00:13:29,380 --> 00:13:31,275
+313
+00:20:59,680 --> 00:21:01,575
 so that we can see the climb.
 
-203
-00:13:31,625 --> 00:13:35,650
+314
+00:21:01,925 --> 00:21:05,950
 Near the ground, its pressure
 follows our curve closely.
 
-204
-00:13:36,000 --> 00:13:39,226
+315
+00:21:06,300 --> 00:21:09,526
 Higher up, the real pressure
 falls a little faster,
 
-205
-00:13:39,226 --> 00:13:44,475
+316
+00:21:09,526 --> 00:21:14,775
 because the real air up there is colder,
 and colder air has a smaller scale height.
 
-206
-00:13:44,825 --> 00:13:46,983
+317
+00:21:15,125 --> 00:21:17,283
 So our curve is a good first guess,
 
-207
-00:13:46,983 --> 00:13:50,375
+318
+00:21:17,283 --> 00:21:20,675
 and the measurements tell us
 where it needs correcting.
 
-208
-00:13:51,175 --> 00:13:53,986
+319
+00:21:21,475 --> 00:21:24,286
 Since pressure is the weight
 of the air above,
 
-209
-00:13:53,986 --> 00:13:58,325
+320
+00:21:24,286 --> 00:21:28,625
 the pressure at any height also tells
 us how much air is left above it.
 
-210
-00:13:58,675 --> 00:14:01,048
-At about five and a half kilometres,
+321
+00:21:28,975 --> 00:21:33,467
+At the ground, the pressure p zero
+is the weight of the whole column,
 
-211
-00:14:01,048 --> 00:14:05,925
-the pressure is half its ground value, so
+322
+00:21:33,467 --> 00:21:38,025
+and at height z, the pressure p is
+the weight of only the air above z.
+
+323
+00:21:38,375 --> 00:21:42,823
+So p over p zero is the share
+of all the air that's above us,
+
+324
+00:21:42,823 --> 00:21:46,250
+and the share below is one
+minus p over p zero.
+
+325
+00:21:46,600 --> 00:21:49,763
+This time, let's use
+the standard atmosphere,
+
+326
+00:21:49,763 --> 00:21:54,050
+an average of real measurements
+that gets colder as we go up.
+
+327
+00:21:54,400 --> 00:21:59,450
+At about five and a half kilometres,
+its pressure is about five hundred and
+
+328
+00:21:59,450 --> 00:22:03,625
+five hectopascals, close to half
+of one thousand and thirteen.
+
+329
+00:22:03,975 --> 00:22:06,644
+So p over p zero is about one half,
+
+330
+00:22:06,644 --> 00:22:11,525
+and one minus a half is a half:
 half of all the air is below us.
 
-212
-00:14:06,275 --> 00:14:12,350
-At sixteen kilometres, it's about one
-tenth, so nine tenths of the air is below.
+331
+00:22:13,025 --> 00:22:16,720
+That's a little lower than our
+five point eight kilometres,
 
-213
-00:14:12,700 --> 00:14:18,075
+332
+00:22:16,720 --> 00:22:19,600
+because colder air
+has a smaller scale height.
+
+333
+00:22:19,950 --> 00:22:25,166
+At sixteen kilometres, the pressure
+is about one tenth of its ground value,
+
+334
+00:22:25,166 --> 00:22:27,600
+so nine tenths of the air is below.
+
+335
+00:22:27,950 --> 00:22:33,325
 And by about thirty-one kilometres,
 ninety-nine percent of the air is below.
 
-214
-00:14:18,425 --> 00:14:21,675
+336
+00:22:33,675 --> 00:22:36,925
 That's why the atmosphere
 is such a thin shell.
 
-215
-00:14:22,475 --> 00:14:26,675
+337
+00:22:37,725 --> 00:22:41,925
 Now let's look at the temperature
 that the same balloon measured.
 
-216
-00:14:27,025 --> 00:14:30,525
+338
+00:22:42,275 --> 00:22:45,775
 Here, height goes up
 and temperature goes across.
 
-217
-00:14:30,875 --> 00:14:36,097
+339
+00:22:46,125 --> 00:22:51,347
 Near the ground it's mild, and as the
 balloon climbs, the temperature falls,
 
-218
-00:14:36,097 --> 00:14:40,425
+340
+00:22:51,347 --> 00:22:55,675
 by about six and a half degrees
 for every kilometre on average.
 
-219
-00:14:40,775 --> 00:14:44,485
+341
+00:22:56,025 --> 00:22:59,735
 This lowest layer, where
 the temperature falls with height,
 
-220
-00:14:44,485 --> 00:14:46,120
+342
+00:22:59,735 --> 00:23:01,370
 is called the troposphere,
 
-221
-00:14:46,120 --> 00:14:50,900
+343
+00:23:01,370 --> 00:23:06,150
 from a Greek word for turning, because
 its air keeps overturning and mixing.
 
-222
-00:14:51,250 --> 00:14:56,350
+344
+00:23:06,500 --> 00:23:11,600
 Almost all our weather happens here:
 the clouds, the rain and the storms.
 
-223
-00:14:57,150 --> 00:15:03,050
+345
+00:23:12,400 --> 00:23:18,300
 At about eleven kilometres, at about
 minus sixty-three degrees, the fall stops.
 
-224
-00:15:03,400 --> 00:15:06,450
+346
+00:23:18,650 --> 00:23:21,700
 This boundary is called the tropopause.
 
-225
-00:15:06,800 --> 00:15:11,750
+347
+00:23:22,050 --> 00:23:27,000
 Above it, the temperature stops falling,
 and higher up it rises again.
 
-226
-00:15:12,100 --> 00:15:15,647
+348
+00:23:27,350 --> 00:23:30,897
 That's the stratosphere,
 a calm, layered region,
 
-227
-00:15:15,647 --> 00:15:20,525
+349
+00:23:30,897 --> 00:23:35,775
 where ozone absorbs the sun's
 ultraviolet light and warms the air.
 
-228
-00:15:20,875 --> 00:15:24,278
+350
+00:23:36,125 --> 00:23:39,528
 Balloons usually burst
 at around thirty kilometres,
 
-229
-00:15:24,278 --> 00:15:28,281
+351
+00:23:39,528 --> 00:23:43,531
 but other measurements show
 the warming going on above that,
 
-230
-00:15:28,281 --> 00:15:30,950
+352
+00:23:43,531 --> 00:23:46,200
 up to about fifty kilometres on average.
 
-231
-00:15:31,300 --> 00:15:33,567
+353
+00:23:46,550 --> 00:23:48,817
 Above that come the mesosphere and
 
-232
-00:15:33,567 --> 00:15:36,900
+354
+00:23:48,817 --> 00:23:52,150
 the thermosphere, where
 the air is extremely thin.
 
-233
-00:15:37,700 --> 00:15:41,800
+355
+00:23:52,950 --> 00:23:57,050
 Now let's keep the time the same
 and change only the place.
 
-234
-00:15:42,150 --> 00:15:47,150
+356
+00:23:57,400 --> 00:24:02,400
 Here is a balloon launched at the same
 moment at Singapore, near the equator.
 
-235
-00:15:47,500 --> 00:15:52,797
+357
+00:24:02,750 --> 00:24:08,047
 Its tropopause is much higher, at about
 sixteen or seventeen kilometres,
 
-236
-00:15:52,797 --> 00:15:56,475
+358
+00:24:08,047 --> 00:24:11,725
 and much colder, below
 minus seventy-five degrees.
 
-237
-00:15:56,825 --> 00:16:01,364
+359
+00:24:12,075 --> 00:24:16,614
 Strong rising currents in the warm
 tropics stir the air much higher,
 
-238
-00:16:01,364 --> 00:16:03,700
+360
+00:24:16,614 --> 00:24:18,950
 so the troposphere is deeper there.
 
-239
-00:16:04,050 --> 00:16:08,450
+361
+00:24:19,300 --> 00:24:23,700
 Near the poles, it's shallower,
 about eight to ten kilometres.
 
-240
-00:16:09,250 --> 00:16:14,475
+362
+00:24:24,500 --> 00:24:29,725
 Why does the air get colder as we go
 up, when that brings us closer to the sun?
 
-241
-00:16:14,825 --> 00:16:18,692
+363
+00:24:30,075 --> 00:24:33,942
 Because sunlight mostly passes
 straight through the air and
 
-242
-00:16:18,692 --> 00:16:20,200
+364
+00:24:33,942 --> 00:24:35,450
 warms the ground first.
 
-243
-00:16:20,550 --> 00:16:23,396
+365
+00:24:35,800 --> 00:24:38,646
 The ground then warms the air touching it,
 
-244
-00:16:23,396 --> 00:16:28,275
+366
+00:24:38,646 --> 00:24:43,525
 so the troposphere is heated from
 below, like a pan of water on a stove.
 
-245
-00:16:28,625 --> 00:16:31,150
-Warm air near the ground rises.
+367
+00:24:43,875 --> 00:24:47,003
+Here's a real sunny
+morning over northern France,
 
-246
-00:16:31,500 --> 00:16:35,875
+368
+00:24:47,003 --> 00:24:51,600
+on the twenty-fourth of June, twenty
+twenty-four, seen from a satellite.
+
+369
+00:24:51,950 --> 00:24:57,225
+Heights in this picture are drawn twenty
+times taller than distances on the map.
+
+370
+00:24:57,575 --> 00:25:01,900
+Warm air near the ground
+rises, in bubbles called thermals.
+
+371
+00:25:02,250 --> 00:25:06,625
 As it rises, it moves into
 lower pressure, so it expands.
 
-247
-00:16:36,225 --> 00:16:39,417
+372
+00:25:06,975 --> 00:25:10,167
 Expanding air pushes
 its surroundings away,
 
-248
-00:16:39,417 --> 00:16:42,609
+373
+00:25:10,167 --> 00:25:13,359
 and that work costs it
 energy, so it cools:
 
-249
-00:16:42,609 --> 00:16:48,400
+374
+00:25:13,359 --> 00:25:19,150
 by almost ten degrees for every kilometre
 it rises, as long as no cloud forms.
 
-250
-00:16:48,750 --> 00:16:51,800
-We'll use this cooling
-for clouds in a moment.
+375
+00:25:19,500 --> 00:25:23,654
+A weather balloon launched near
+Paris at midday that day agrees:
 
-251
-00:16:52,600 --> 00:16:54,575
+376
+00:25:23,654 --> 00:25:25,017
+in the lowest one and
+
+377
+00:25:25,017 --> 00:25:30,275
+a half kilometres, the temperature fell
+by about ten degrees for every kilometre.
+
+378
+00:25:31,775 --> 00:25:36,452
+By the early afternoon, the rising
+air had cooled enough to make clouds,
+
+379
+00:25:36,452 --> 00:25:39,375
+and the satellite saw
+the sky fill with them.
+
+380
+00:25:39,725 --> 00:25:43,875
+We'll work out exactly where
+those clouds begin a little later.
+
+381
+00:25:44,675 --> 00:25:46,650
 Now let's add water.
 
-252
-00:16:54,925 --> 00:16:59,025
+382
+00:25:47,000 --> 00:25:51,100
 Water vapour is water
 as a gas, and it's invisible.
 
-253
-00:16:59,375 --> 00:17:04,225
+383
+00:25:51,450 --> 00:25:56,300
 Clouds and fog are not vapour:
 they're tiny drops of liquid water.
 
-254
-00:17:04,575 --> 00:17:09,019
+384
+00:25:56,650 --> 00:26:01,094
 The amount of vapour is often
 measured by the specific humidity:
 
-255
-00:17:09,019 --> 00:17:12,075
+385
+00:26:01,094 --> 00:26:04,150
 the grams of vapour
 in each kilogram of air.
 
-256
-00:17:12,425 --> 00:17:15,625
+386
+00:26:04,500 --> 00:26:07,700
 It goes from almost zero in cold polar air
 
-257
-00:17:15,625 --> 00:17:18,901
+387
+00:26:07,700 --> 00:26:10,976
 to about twenty grams
 per kilogram in warm,
 
-258
-00:17:18,901 --> 00:17:20,425
+388
+00:26:10,976 --> 00:26:12,500
 steamy tropical air.
 
-259
-00:17:20,775 --> 00:17:24,609
+389
+00:26:12,850 --> 00:26:16,684
 Vapour also adds its own small
 share to the air pressure,
 
-260
-00:17:24,609 --> 00:17:26,425
+390
+00:26:16,684 --> 00:26:18,500
 called the vapour pressure.
 
-261
-00:17:26,775 --> 00:17:29,731
-Twenty grams per kilogram
-at sea level is a
+391
+00:26:19,300 --> 00:26:21,325
+How big is that share?
 
-262
-00:17:29,731 --> 00:17:33,100
-vapour pressure of about
-thirty-two hectopascals,
+392
+00:26:21,675 --> 00:26:27,750
+There's a handy rule for it: e is about
+one point six one, times q, times p.
 
-263
-00:17:33,100 --> 00:17:34,750
+393
+00:26:28,100 --> 00:26:30,227
+Here e is the vapour pressure,
+
+394
+00:26:30,227 --> 00:26:35,757
+q is the specific humidity written in
+kilograms of vapour per kilogram of air,
+
+395
+00:26:35,757 --> 00:26:37,600
+and p is the air pressure.
+
+396
+00:26:37,950 --> 00:26:42,254
+Careful: this e is just the usual
+letter for vapour pressure,
+
+397
+00:26:42,254 --> 00:26:44,300
+not the number e from before.
+
+398
+00:26:44,650 --> 00:26:47,525
+Where does one point six one come from?
+
+399
+00:26:47,875 --> 00:26:50,663
+Pressure comes from molecules
+hitting things,
+
+400
+00:26:50,663 --> 00:26:54,875
+so the vapour's share of the pressure
+is its share of the molecules.
+
+401
+00:26:55,225 --> 00:26:59,197
+A water molecule is lighter
+than an average air molecule:
+
+402
+00:26:59,197 --> 00:27:04,075
+it weighs about eighteen atomic mass
+units, against about twenty-nine.
+
+403
+00:27:04,425 --> 00:27:09,298
+So a kilogram of vapour holds about
+twenty-nine divided by eighteen,
+
+404
+00:27:09,298 --> 00:27:14,100
+or one point six one, times as many
+molecules as a kilogram of air.
+
+405
+00:27:14,450 --> 00:27:19,087
+That's why the vapour's share
+of the molecules, and so of the pressure,
+
+406
+00:27:19,087 --> 00:27:22,875
+is about one point six one
+times its share of the mass, q.
+
+407
+00:27:23,225 --> 00:27:28,362
+Let's try the steamiest tropical air:
+q is twenty grams per kilogram,
+
+408
+00:27:28,362 --> 00:27:33,500
+which is zero point zero two, and p is
+about a thousand hectopascals.
+
+409
+00:27:33,850 --> 00:27:39,435
+So e is about one point six one times
+zero point zero two times a thousand,
+
+410
+00:27:39,435 --> 00:27:44,200
+which is about thirty-two hectopascals,
 out of about a thousand.
 
-264
-00:17:35,550 --> 00:17:39,172
+411
+00:27:45,700 --> 00:27:49,322
 Over a water surface,
 molecules leave the water and
 
-265
-00:17:39,172 --> 00:17:41,800
+412
+00:27:49,322 --> 00:27:51,950
 others land back in it, all the time.
 
-266
-00:17:42,150 --> 00:17:47,225
+413
+00:27:52,300 --> 00:27:57,375
 The fastest ones escape, and warmer
 water has more fast molecules.
 
-267
-00:17:47,575 --> 00:17:51,230
+414
+00:27:57,725 --> 00:28:01,380
 When as many land as leave, the air
 above is saturated,
 
-268
-00:17:51,230 --> 00:17:55,550
+415
+00:28:01,380 --> 00:28:05,700
 and its vapour pressure is called
 the saturation vapour pressure.
 
-269
-00:17:55,900 --> 00:17:59,716
+416
+00:28:06,050 --> 00:28:09,866
 It depends only on temperature,
 and it climbs steeply:
 
-270
-00:17:59,716 --> 00:18:02,473
+417
+00:28:09,866 --> 00:28:12,623
 about six hectopascals at zero degrees,
 
-271
-00:18:02,473 --> 00:18:06,925
+418
+00:28:12,623 --> 00:28:17,075
 twelve at ten, twenty-three
 at twenty, and forty-two at thirty.
 
-272
-00:18:07,275 --> 00:18:11,000
+419
+00:28:17,425 --> 00:28:21,150
 It roughly doubles for every
 ten degrees of warming.
 
-273
-00:18:11,350 --> 00:18:16,350
+420
+00:28:21,500 --> 00:28:26,500
 People often say warm air can hold
 more water, like a bigger sponge.
 
-274
-00:18:16,700 --> 00:18:20,366
+421
+00:28:26,850 --> 00:28:30,516
 Unlike a sponge, though, the air
 isn't doing the holding:
 
-275
-00:18:20,366 --> 00:18:25,575
+422
+00:28:30,516 --> 00:28:35,725
 the limit is set by the temperature, and
 it would be the same with no air at all.
 
-276
-00:18:26,375 --> 00:18:29,200
+423
+00:28:36,525 --> 00:28:39,350
 Relative humidity compares the two.
 
-277
-00:18:29,550 --> 00:18:34,131
+424
+00:28:39,700 --> 00:28:44,281
 It's the vapour pressure divided
 by the saturation vapour pressure,
 
-278
-00:18:34,131 --> 00:18:35,225
+425
+00:28:44,281 --> 00:28:45,375
 as a percentage.
 
-279
-00:18:35,575 --> 00:18:41,500
+426
+00:28:45,725 --> 00:28:51,650
 Let's try air at twenty-five degrees with
 a vapour pressure of fifteen hectopascals.
 
-280
-00:18:41,850 --> 00:18:43,428
+427
+00:28:52,000 --> 00:28:53,578
 At twenty-five degrees,
 
-281
-00:18:43,428 --> 00:18:47,750
+428
+00:28:53,578 --> 00:28:57,900
 the saturation vapour pressure
 is about thirty-one point three.
 
-282
-00:18:48,100 --> 00:18:52,643
+429
+00:28:58,250 --> 00:29:02,793
 Fifteen divided by thirty-one point three
 is about point four eight,
 
-283
-00:18:52,643 --> 00:18:56,250
+430
+00:29:02,793 --> 00:29:06,400
 so the relative humidity
 is about forty-eight percent.
 
-284
-00:18:56,600 --> 00:19:01,075
+431
+00:29:07,900 --> 00:29:12,375
 Notice that it depends on the temperature
 as well as on the water.
 
-285
-00:19:01,425 --> 00:19:04,065
+432
+00:29:12,725 --> 00:29:15,365
 Cool the same air to eighteen degrees,
 
-286
-00:19:04,065 --> 00:19:08,441
+433
+00:29:15,365 --> 00:29:19,741
 and its relative humidity rises
 to about seventy-three percent,
 
-287
-00:19:08,441 --> 00:19:10,525
+434
+00:29:19,741 --> 00:29:21,825
 even though no water is added.
 
-288
-00:19:11,325 --> 00:19:15,325
+435
+00:29:22,625 --> 00:29:26,625
 So how far must we cool this
 air before it's saturated?
 
-289
-00:19:15,675 --> 00:19:17,855
+436
+00:29:26,975 --> 00:29:29,155
 We need the temperature at which
 
-290
-00:19:17,855 --> 00:19:22,350
+437
+00:29:29,155 --> 00:29:33,650
 the saturation vapour pressure has
 fallen to fifteen hectopascals.
 
-291
-00:19:22,700 --> 00:19:25,075
+438
+00:29:34,000 --> 00:29:36,375
 That's about thirteen degrees.
 
-292
-00:19:25,425 --> 00:19:28,651
+439
+00:29:37,875 --> 00:29:41,101
 This is the dew point:
 the temperature to which
 
-293
-00:19:28,651 --> 00:19:32,700
+440
+00:29:41,101 --> 00:29:45,150
 air must be cooled, keeping
 its water, to become saturated.
 
-294
-00:19:33,050 --> 00:19:34,237
+441
+00:29:45,500 --> 00:29:46,687
 On a clear night,
 
-295
-00:19:34,237 --> 00:19:39,125
+442
+00:29:46,687 --> 00:29:51,575
 grass cools below the dew point of the air
 touching it, and dew forms.
 
-296
-00:19:39,475 --> 00:19:44,550
+443
+00:29:51,925 --> 00:29:57,000
 When a whole layer of air near the ground
 cools to its dew point, we get fog.
 
-297
-00:19:44,900 --> 00:19:49,125
+444
+00:29:57,350 --> 00:30:01,575
 And when rising air cools
 to its dew point, we get a cloud.
 
-298
-00:19:49,925 --> 00:19:53,850
+445
+00:30:02,375 --> 00:30:06,300
 Let's follow that air parcel
 as it rises from the ground.
 
-299
-00:19:54,200 --> 00:19:58,075
+446
+00:30:06,650 --> 00:30:10,525
 It cools by almost ten
 degrees for every kilometre.
 
-300
-00:19:58,425 --> 00:20:03,494
+447
+00:30:10,875 --> 00:30:15,944
 Its dew point falls too, but slowly, by
 about two degrees per kilometre,
 
-301
-00:20:03,494 --> 00:20:08,000
+448
+00:30:15,944 --> 00:30:20,450
 because as the parcel expands,
 its vapour is spread more thinly.
 
-302
-00:20:08,350 --> 00:20:11,564
+449
+00:30:20,800 --> 00:30:24,014
 So the gap between
 the temperature and the dew point,
 
-303
-00:20:11,564 --> 00:20:16,475
+450
+00:30:24,014 --> 00:30:28,925
 twelve degrees at the ground, shrinks by
 about eight degrees for every kilometre.
 
-304
-00:20:16,825 --> 00:20:20,450
+451
+00:30:29,275 --> 00:30:32,900
 It closes after about one
 and a half kilometres.
 
-305
-00:20:20,800 --> 00:20:24,475
+452
+00:30:34,400 --> 00:30:38,075
 There the vapour condenses,
 and the cloud begins.
 
-306
-00:20:24,825 --> 00:20:27,880
+453
+00:30:38,425 --> 00:30:41,480
 That's why fair-weather
 clouds have flat bases:
 
-307
-00:20:27,880 --> 00:20:33,275
+454
+00:30:41,480 --> 00:30:46,875
 parcels rising from the same ground reach
 their dew point at about the same height.
 
-308
-00:20:34,075 --> 00:20:36,075
+455
+00:30:47,675 --> 00:30:49,675
 Now let's look at wind.
 
-309
-00:20:36,425 --> 00:20:39,653
+456
+00:30:50,025 --> 00:30:53,253
 Wind is air moving across
 the Earth's surface,
 
-310
-00:20:39,653 --> 00:20:44,425
+457
+00:30:53,253 --> 00:30:58,025
 and it has both a speed and a direction,
 so it's a vector: an arrow.
 
-311
-00:20:44,775 --> 00:20:48,725
+458
+00:30:58,375 --> 00:31:02,325
 We can split the arrow into
 two parts, called components.
 
-312
-00:20:49,075 --> 00:20:53,750
+459
+00:31:02,675 --> 00:31:07,350
 The eastward part is written u, and
 the northward part is written v.
 
-313
-00:20:54,100 --> 00:20:57,114
+460
+00:31:07,700 --> 00:31:10,714
 Take a wind blowing
 towards the north-east,
 
-314
-00:20:57,114 --> 00:21:01,250
+461
+00:31:10,714 --> 00:31:14,850
 with u equal to eight and v equal
 to six metres per second.
 
-315
-00:21:01,600 --> 00:21:06,931
+462
+00:31:15,200 --> 00:31:20,531
 By Pythagoras, its speed is the square
 root of eight squared plus six squared,
 
-316
-00:21:06,931 --> 00:21:09,050
+463
+00:31:20,531 --> 00:31:22,650
 which is ten metres per second.
 
-317
-00:21:09,850 --> 00:21:14,800
+464
+00:31:24,150 --> 00:31:29,100
 Meteorologists name a wind by where
 it comes from, not where it's going.
 
-318
-00:21:15,150 --> 00:21:19,200
+465
+00:31:29,450 --> 00:31:33,500
 A westerly wind blows from the west,
 towards the east.
 
-319
-00:21:19,550 --> 00:21:21,874
+466
+00:31:33,850 --> 00:31:36,174
 The direction is given in degrees,
 
-320
-00:21:21,874 --> 00:21:25,223
+467
+00:31:36,174 --> 00:31:39,523
 measured clockwise from north
 as seen from above:
 
-321
-00:21:25,223 --> 00:21:28,573
+468
+00:31:39,523 --> 00:31:42,873
 north is zero, east
 ninety, south one hundred and
 
-322
-00:21:28,573 --> 00:21:31,375
+469
+00:31:42,873 --> 00:31:45,675
 eighty, and west two hundred and seventy.
 
-323
-00:21:31,725 --> 00:21:36,450
+470
+00:31:46,025 --> 00:31:50,750
 Our wind blows towards the north-east,
 so it comes from the south-west.
 
-324
-00:21:36,800 --> 00:21:39,278
+471
+00:31:51,100 --> 00:31:53,578
 Its direction is about two hundred and
 
-325
-00:21:39,278 --> 00:21:42,800
+472
+00:31:53,578 --> 00:31:57,100
 thirty-three degrees,
 and we call it a south-westerly.
 
-326
-00:21:43,150 --> 00:21:46,468
+473
+00:31:58,600 --> 00:32:01,918
 Careful: ocean currents
 use the opposite habit,
 
-327
-00:21:46,468 --> 00:21:51,975
+474
+00:32:01,918 --> 00:32:07,425
 and are named by where they go, so an
 eastward current flows towards the east.
 
-328
-00:21:52,775 --> 00:21:55,600
+475
+00:32:08,225 --> 00:32:11,050
 Wind speed comes in several units.
 
-329
-00:21:55,950 --> 00:21:59,500
+476
+00:32:11,400 --> 00:32:14,950
 Metres per second is the scientific one.
 
-330
-00:21:59,850 --> 00:22:04,023
+477
+00:32:15,300 --> 00:32:19,473
 Multiply by three point six
 to get kilometres per hour,
 
-331
-00:22:04,023 --> 00:22:08,500
+478
+00:32:19,473 --> 00:32:23,950
 so ten metres per second
 is thirty-six kilometres per hour.
 
-332
-00:22:08,850 --> 00:22:11,425
+479
+00:32:24,300 --> 00:32:26,875
 Sailors and pilots use knots.
 
-333
-00:22:11,775 --> 00:22:14,189
+480
+00:32:27,225 --> 00:32:29,639
 A knot is one nautical mile per hour,
 
-334
-00:22:14,189 --> 00:22:17,517
+481
+00:32:29,639 --> 00:32:32,967
 and a nautical mile, one
 thousand eight hundred and
 
-335
-00:22:17,517 --> 00:22:18,627
+482
+00:32:32,967 --> 00:32:34,077
 fifty-two metres,
 
-336
-00:22:18,627 --> 00:22:23,325
+483
+00:32:34,077 --> 00:32:38,775
 is about one sixtieth of a degree
 of latitude along the Earth's surface.
 
-337
-00:22:23,675 --> 00:22:27,414
+484
+00:32:39,125 --> 00:32:42,864
 So one knot is about point five one
 metres per second,
 
-338
-00:22:27,414 --> 00:22:31,500
+485
+00:32:42,864 --> 00:32:46,950
 and our ten metres per second
 wind is about nineteen knots.
 
-339
-00:22:32,300 --> 00:22:34,375
+486
+00:32:48,450 --> 00:32:50,525
 Why does air move at all?
 
-340
-00:22:34,725 --> 00:22:37,200
+487
+00:32:50,875 --> 00:32:53,350
 The simplest reason is pressure.
 
-341
-00:22:37,550 --> 00:22:41,108
+488
+00:32:53,700 --> 00:32:57,258
 Where the pressure is higher
 on one side than on the other,
 
-342
-00:22:41,108 --> 00:22:44,607
+489
+00:32:57,258 --> 00:33:00,757
 the air is pushed from high
 pressure towards low pressure,
 
-343
-00:22:44,607 --> 00:22:47,200
+490
+00:33:00,757 --> 00:33:03,350
 just as air rushes out
 of a punctured tyre.
 
-344
-00:22:47,550 --> 00:22:51,761
+491
+00:33:03,700 --> 00:33:07,911
 But on our spinning Earth, moving
 air is gradually turned aside,
 
-345
-00:22:51,761 --> 00:22:56,564
+492
+00:33:07,911 --> 00:33:12,714
 so over large distances the wind ends
 up blowing around areas of high and
 
-346
-00:22:56,564 --> 00:22:59,525
+493
+00:33:12,714 --> 00:33:15,675
 low pressure, rather
 than straight into them.
 
-347
-00:22:59,875 --> 00:23:04,992
+494
+00:33:16,025 --> 00:33:21,142
 We'll see how that turning works in later
 videos on the Coriolis effect and
 
-348
-00:23:04,992 --> 00:23:06,425
+495
+00:33:21,142 --> 00:33:22,575
 the geostrophic wind.
 
-349
-00:23:07,225 --> 00:23:11,200
+496
+00:33:23,375 --> 00:33:27,350
 Before we look at real
 maps, let's pin down two words.
 
-350
-00:23:11,550 --> 00:23:17,040
+497
+00:33:27,700 --> 00:33:33,190
 Weather is the state of the atmosphere
 at one place and time: its temperature,
 
-351
-00:23:17,040 --> 00:23:22,600
+498
+00:33:33,190 --> 00:33:38,750
 pressure, humidity, wind, clouds and
 rain, right now or over the next few days.
 
-352
-00:23:22,950 --> 00:23:27,790
+499
+00:33:39,100 --> 00:33:43,940
 Climate is the statistics of the
 weather over many years, usually thirty:
 
-353
-00:23:27,790 --> 00:23:31,900
+500
+00:33:43,940 --> 00:33:48,050
 what's normal, and how far
 the weather usually strays from it.
 
-354
-00:23:32,250 --> 00:23:34,895
+501
+00:33:48,400 --> 00:33:51,045
 Here is the daily temperature at Brest,
 
-355
-00:23:34,895 --> 00:23:39,100
+502
+00:33:51,045 --> 00:33:55,250
 in north-western France, for every
 day of twenty twenty-three.
 
-356
-00:23:39,450 --> 00:23:42,935
+503
+00:33:55,600 --> 00:33:59,085
 Behind it is Brest's climate
 for each day of the year,
 
-357
-00:23:42,935 --> 00:23:46,421
+504
+00:33:59,085 --> 00:34:02,571
 the average over nineteen
 ninety-one to twenty twenty,
 
-358
-00:23:46,421 --> 00:23:49,325
+505
+00:34:02,571 --> 00:34:05,475
 with a band that holds
 eight days out of ten.
 
-359
-00:23:49,675 --> 00:23:52,825
+506
+00:34:05,825 --> 00:34:08,975
 The weather line jumps
 around from day to day,
 
-360
-00:23:52,825 --> 00:23:55,975
+507
+00:34:08,975 --> 00:34:12,125
 but most of the time it
 stays inside the band.
 
-361
-00:23:56,325 --> 00:24:00,125
+508
+00:34:12,475 --> 00:34:16,275
 Climate is what you expect;
 weather is what you get.
 
-362
-00:24:00,925 --> 00:24:03,400
+509
+00:34:17,075 --> 00:34:19,550
 How do we know the weather everywhere?
 
-363
-00:24:03,750 --> 00:24:07,221
+510
+00:34:19,900 --> 00:34:23,371
 From observations:
 thousands of weather stations,
 
-364
-00:24:07,221 --> 00:24:11,825
+511
+00:34:23,371 --> 00:34:27,975
 weather balloons, ships, buoys
 and aircraft, and many satellites.
 
-365
-00:24:12,175 --> 00:24:13,975
+512
+00:34:28,325 --> 00:34:30,125
 But they're uneven.
 
-366
-00:24:14,325 --> 00:24:18,925
+513
+00:34:30,475 --> 00:34:35,075
 Here are the places that launched
 weather balloons in twenty twenty-three.
 
-367
-00:24:19,275 --> 00:24:23,315
+514
+00:34:35,425 --> 00:34:39,465
 They're crowded over Europe, North
 America and East Asia,
 
-368
-00:24:23,315 --> 00:24:27,425
+515
+00:34:39,465 --> 00:34:43,575
 but sparse over the oceans, much
 of Africa, and the poles.
 
-369
-00:24:27,775 --> 00:24:32,100
+516
+00:34:43,925 --> 00:34:48,250
 And each instrument measures
 different things, at different times.
 
-370
-00:24:32,900 --> 00:24:35,550
+517
+00:34:49,050 --> 00:34:51,700
 A reanalysis fills in the gaps.
 
-371
-00:24:35,900 --> 00:24:38,656
+518
+00:34:52,050 --> 00:34:54,806
 It starts from a weather forecast model,
 
-372
-00:24:38,656 --> 00:24:43,203
+519
+00:34:54,806 --> 00:34:59,353
 a computer program that steps
 the laws of physics forward in time,
 
-373
-00:24:43,203 --> 00:24:47,475
+520
+00:34:59,353 --> 00:35:03,625
 including the hydrostatic balance
 and the gas law we just met.
 
-374
-00:24:47,825 --> 00:24:48,935
+521
+00:35:03,975 --> 00:35:05,085
 Every few hours,
 
-375
-00:24:48,935 --> 00:24:53,583
+522
+00:35:05,085 --> 00:35:09,733
 it nudges the model towards all
 the observations made at that time,
 
-376
-00:24:53,583 --> 00:24:56,150
+523
+00:35:09,733 --> 00:35:12,300
 trusting the more reliable ones more.
 
-377
-00:24:56,500 --> 00:24:59,950
+524
+00:35:12,650 --> 00:35:16,100
 The result is a complete
 picture of the atmosphere,
 
-378
-00:24:59,950 --> 00:25:03,400
+525
+00:35:16,100 --> 00:35:19,550
 at every place and height, every
 hour, for decades.
 
-379
-00:25:03,750 --> 00:25:07,029
+526
+00:35:19,900 --> 00:35:23,179
 The one we use in this
 video is called ERA5,
 
-380
-00:25:07,029 --> 00:25:11,725
+527
+00:35:23,179 --> 00:35:27,875
 made by the European Centre
 for Medium-Range Weather Forecasts.
 
-381
-00:25:12,075 --> 00:25:14,715
+528
+00:35:28,225 --> 00:35:30,865
 It runs from nineteen forty to today,
 
-382
-00:25:14,715 --> 00:25:18,425
+529
+00:35:30,865 --> 00:35:34,575
 on a grid with points about
 thirty kilometres apart.
 
-383
-00:25:18,775 --> 00:25:21,397
+530
+00:35:34,925 --> 00:35:37,547
 It's like a jigsaw with missing pieces,
 
-384
-00:25:21,397 --> 00:25:25,700
+531
+00:35:37,547 --> 00:35:41,850
 filled in using the pieces around
 them and the rules of physics.
 
-385
-00:25:26,050 --> 00:25:27,797
+532
+00:35:42,200 --> 00:35:43,947
 Unlike a photograph, though,
 
-386
-00:25:27,797 --> 00:25:31,853
+533
+00:35:43,947 --> 00:35:48,003
 where observations are sparse
 the result leans more on the model,
 
-387
-00:25:31,853 --> 00:25:33,600
+534
+00:35:48,003 --> 00:35:49,750
 so it's least certain there.
 
-388
-00:25:34,400 --> 00:25:36,775
+535
+00:35:50,550 --> 00:35:52,925
 Now let's make a pressure map.
 
-389
-00:25:37,125 --> 00:25:41,135
+536
+00:35:53,275 --> 00:35:57,285
 Here is the real air pressure
 at the ground all over the world,
 
-390
-00:25:41,135 --> 00:25:46,100
+537
+00:35:57,285 --> 00:36:02,250
 at midday on the second of November,
 twenty twenty-three, from the reanalysis.
 
-391
-00:25:46,450 --> 00:25:48,875
+538
+00:36:02,600 --> 00:36:05,025
 What stands out are the mountains.
 
-392
-00:25:49,225 --> 00:25:51,192
+539
+00:36:05,375 --> 00:36:07,342
 Over Tibet and the Himalayas,
 
-393
-00:25:51,192 --> 00:25:55,601
+540
+00:36:07,342 --> 00:36:11,751
 the pressure at the ground is less
 than six hundred hectopascals,
 
-394
-00:25:55,601 --> 00:25:58,450
+541
+00:36:11,751 --> 00:36:14,600
 and the Andes and the Rockies show up too.
 
-395
-00:25:58,800 --> 00:26:03,875
+542
+00:36:14,950 --> 00:36:20,025
 In the close-up, the mountains are drawn
 thirty times taller than they really are.
 
-396
-00:26:04,225 --> 00:26:09,025
+543
+00:36:20,375 --> 00:36:25,175
 That's just hydrostatic balance:
 high ground has less air above it.
 
-397
-00:26:09,375 --> 00:26:13,375
+544
+00:36:25,525 --> 00:36:29,525
 The weather is in there, but
 these mountain patterns swamp it.
 
-398
-00:26:14,175 --> 00:26:18,125
+545
+00:36:30,325 --> 00:36:34,275
 So how do we compare a mountain
 town with a seaside town?
 
-399
-00:26:18,475 --> 00:26:22,875
+546
+00:36:34,625 --> 00:36:39,025
 We imagine what the pressure would
 be if each place were at sea level.
 
-400
-00:26:23,225 --> 00:26:26,963
+547
+00:36:39,375 --> 00:36:43,113
 Suppose a weather station sits
 one thousand six hundred and
 
-401
-00:26:26,963 --> 00:26:31,018
+548
+00:36:43,113 --> 00:36:47,168
 nine metres up, about the height
 of Denver in the United States,
 
-402
-00:26:31,018 --> 00:26:34,376
+549
+00:36:47,168 --> 00:36:50,526
 and reads eight hundred
 and thirty-five hectopascals,
 
-403
-00:26:34,376 --> 00:26:37,100
+550
+00:36:50,526 --> 00:36:53,250
 with an air temperature
 of fifteen degrees.
 
-404
-00:26:37,450 --> 00:26:40,698
+551
+00:36:53,600 --> 00:36:56,848
 We add the weight
 of an imaginary column of air,
 
-405
-00:26:40,698 --> 00:26:43,675
+552
+00:36:56,848 --> 00:36:59,825
 reaching from the station
 down to sea level.
 
-406
-00:26:44,025 --> 00:26:48,504
+553
+00:37:00,175 --> 00:37:04,654
 With our exponential rule run
 downwards, that's eight hundred and
 
-407
-00:26:48,504 --> 00:26:51,605
+554
+00:37:04,654 --> 00:37:07,755
 thirty-five times e to
 the power of one point
 
-408
-00:26:51,605 --> 00:26:54,775
+555
+00:37:07,755 --> 00:37:10,925
 six oh nine divided by
 eight point four three.
 
-409
-00:26:55,125 --> 00:26:58,718
+556
+00:37:11,275 --> 00:37:14,868
 That's about one thousand
 and ten hectopascals:
 
-410
-00:26:58,718 --> 00:27:01,700
+557
+00:37:14,868 --> 00:37:17,850
 a perfectly ordinary sea-level reading.
 
-411
-00:27:02,050 --> 00:27:04,750
+558
+00:37:19,350 --> 00:37:22,050
 This is called the sea-level pressure.
 
-412
-00:27:05,100 --> 00:27:10,550
+559
+00:37:22,400 --> 00:37:27,850
 Real weather services use a slightly
 more careful version of the same idea.
 
-413
-00:27:11,350 --> 00:27:15,400
+560
+00:37:28,650 --> 00:37:32,700
 Here is the same moment
 again, now as sea-level pressure.
 
-414
-00:27:15,750 --> 00:27:19,075
+561
+00:37:33,050 --> 00:37:36,375
 The mountains are
 gone, and the weather appears.
 
-415
-00:27:19,425 --> 00:27:23,568
+562
+00:37:36,725 --> 00:37:40,868
 Let's join the places that have
 the same sea-level pressure,
 
-416
-00:27:23,568 --> 00:27:25,225
+563
+00:37:40,868 --> 00:37:42,525
 every four hectopascals.
 
-417
-00:27:25,575 --> 00:27:30,225
+564
+00:37:42,875 --> 00:37:47,525
 These lines are called isobars,
 from Greek words for equal weight.
 
-418
-00:27:30,575 --> 00:27:32,668
+565
+00:37:47,875 --> 00:37:49,967
 Where the isobars crowd together,
 
-419
-00:27:32,668 --> 00:27:37,550
+566
+00:37:49,967 --> 00:37:54,850
 the pressure changes quickly over a short
 distance, and the winds are strong.
 
-420
-00:27:38,350 --> 00:27:43,246
+567
+00:37:55,650 --> 00:38:00,546
 The map shows round patches where
 the pressure is higher than all around,
 
-421
-00:27:43,246 --> 00:27:48,075
+568
+00:38:00,546 --> 00:38:05,375
 called highs, and patches where
 it's lower than all around, called lows.
 
-422
-00:27:48,425 --> 00:27:52,065
+569
+00:38:05,725 --> 00:38:09,365
 A low is also called a depression,
 or a cyclone,
 
-423
-00:27:52,065 --> 00:27:55,175
+570
+00:38:09,365 --> 00:38:12,475
 and a high is also called an anticyclone.
 
-424
-00:27:55,525 --> 00:28:00,938
+571
+00:38:12,825 --> 00:38:18,238
 Over the east coast of England, at the
 edge of the North Sea, is a deep low,
 
-425
-00:28:00,938 --> 00:28:05,425
+572
+00:38:18,238 --> 00:38:22,725
 Storm Ciarán, at about nine
 hundred and fifty-six hectopascals.
 
-426
-00:28:05,775 --> 00:28:09,156
+573
+00:38:23,075 --> 00:38:26,456
 Far to the south-west,
 near the Azores islands,
 
-427
-00:28:09,156 --> 00:28:12,250
+574
+00:38:26,456 --> 00:38:29,550
 is a high at about one
 thousand and thirty.
 
-428
-00:28:12,600 --> 00:28:14,688
+575
+00:38:29,900 --> 00:38:31,988
 Here is a much more recent map,
 
-429
-00:28:14,688 --> 00:28:18,863
+576
+00:38:31,988 --> 00:38:36,163
 a weather-service analysis
 from the twenty-seventh of October,
 
-430
-00:28:18,863 --> 00:28:20,075
+577
+00:38:36,163 --> 00:38:37,375
 twenty twenty-six.
 
-431
-00:28:20,425 --> 00:28:24,167
+578
+00:38:37,725 --> 00:38:41,467
 Its deepest low is a typhoon
 over the western Pacific,
 
-432
-00:28:24,167 --> 00:28:27,701
+579
+00:38:41,467 --> 00:38:45,001
 at about nine hundred
 and thirty-five hectopascals,
 
-433
-00:28:27,701 --> 00:28:31,997
+580
+00:38:45,001 --> 00:38:49,297
 while a low over the North Atlantic,
 at about nine hundred and
 
-434
-00:28:31,997 --> 00:28:34,700
+581
+00:38:49,297 --> 00:38:52,000
 fifty-five, is about as deep as Ciarán.
 
-435
-00:28:35,500 --> 00:28:39,875
+582
+00:38:52,800 --> 00:38:57,175
 Lows and highs bring different
 weather, and now we can see why.
 
-436
-00:28:40,225 --> 00:28:44,450
+583
+00:38:57,525 --> 00:39:01,750
 Near the ground, air drifts
 in towards the centre of a low.
 
-437
-00:28:44,800 --> 00:28:47,650
+584
+00:39:02,100 --> 00:39:04,950
 It can't pile up there, so it rises.
 
-438
-00:28:48,000 --> 00:28:54,275
+585
+00:39:05,300 --> 00:39:11,575
 Rising air expands and cools, it reaches
 its dew point, and clouds and rain form.
 
-439
-00:28:54,625 --> 00:28:58,350
+586
+00:39:11,925 --> 00:39:15,650
 That's why lows bring
 cloudy, wet and windy weather.
 
-440
-00:28:58,700 --> 00:29:03,300
+587
+00:39:16,000 --> 00:39:20,600
 Around a high, air sinks from above
 and spreads out near the ground.
 
-441
-00:29:03,650 --> 00:29:06,034
+588
+00:39:20,950 --> 00:39:23,334
 Sinking air is squeezed and warms,
 
-442
-00:29:06,034 --> 00:29:10,100
+589
+00:39:23,334 --> 00:39:27,400
 so it moves away from its dew
 point, and clouds evaporate.
 
-443
-00:29:10,450 --> 00:29:14,250
+590
+00:39:27,750 --> 00:39:31,550
 That's why highs usually
 bring settled, dry weather.
 
-444
-00:29:15,050 --> 00:29:18,234
+591
+00:39:32,350 --> 00:39:35,534
 Now let's add the real
 winds near the ground,
 
-445
-00:29:18,234 --> 00:29:21,700
+592
+00:39:35,534 --> 00:39:39,000
 measured ten metres
 up, from the same reanalysis.
 
-446
-00:29:22,050 --> 00:29:25,925
+593
+00:39:39,350 --> 00:39:43,225
 Near Ciarán, the air doesn't
 blow straight into the low.
 
-447
-00:29:26,275 --> 00:29:30,150
+594
+00:39:43,575 --> 00:39:47,450
 It swirls around it,
 anticlockwise as seen from above,
 
-448
-00:29:30,150 --> 00:29:34,025
+595
+00:39:47,450 --> 00:39:51,325
 crossing the isobars only
 slightly towards the centre.
 
-449
-00:29:34,375 --> 00:29:39,275
+596
+00:39:51,675 --> 00:39:56,575
 Around the high, it turns the other
 way, clockwise as seen from above.
 
-450
-00:29:39,625 --> 00:29:42,825
+597
+00:39:56,925 --> 00:40:00,125
 In the southern hemisphere,
 both are reversed.
 
-451
-00:29:43,175 --> 00:29:48,701
+598
+00:40:00,475 --> 00:40:06,001
 Why the wind circles instead of rushing
 in is the story of the Coriolis effect,
 
-452
-00:29:48,701 --> 00:29:50,450
+599
+00:40:06,001 --> 00:40:07,750
 and it has its own video.
 
-453
-00:29:51,250 --> 00:29:54,850
+600
+00:40:08,550 --> 00:40:12,150
 Now let's look at temperature
 and moisture together.
 
-454
-00:29:55,200 --> 00:30:00,177
+601
+00:40:12,500 --> 00:40:17,477
 Air that sits for days over one region
 takes on its character: cold and
 
-455
-00:30:00,177 --> 00:30:05,225
+602
+00:40:17,477 --> 00:40:22,525
 dry over snowy land in the far
 north, warm and moist over tropical seas.
 
-456
-00:30:05,575 --> 00:30:10,798
+603
+00:40:22,875 --> 00:40:28,098
 A huge body of air like this, often
 more than a thousand kilometres across,
 
-457
-00:30:10,798 --> 00:30:15,325
+604
+00:40:28,098 --> 00:40:32,625
 with fairly even temperature
 and humidity, is called an air mass.
 
-458
-00:30:15,675 --> 00:30:20,278
+605
+00:40:32,975 --> 00:40:37,578
 Air masses are named after where
 they come from: polar or tropical,
 
-459
-00:30:20,278 --> 00:30:24,675
+606
+00:40:37,578 --> 00:40:41,975
 and maritime, from over the sea, or
 continental, from over land.
 
-460
-00:30:25,025 --> 00:30:28,461
+607
+00:40:42,325 --> 00:40:45,761
 On the first of November,
 twenty twenty-three, warm,
 
-461
-00:30:28,461 --> 00:30:32,227
+608
+00:40:45,761 --> 00:40:49,527
 moist tropical air was flowing
 north-east towards France,
 
-462
-00:30:32,227 --> 00:30:36,125
+609
+00:40:49,527 --> 00:40:53,425
 ahead of Ciarán, while cooler
 polar air followed behind it.
 
-463
-00:30:36,925 --> 00:30:40,775
+610
+00:40:54,225 --> 00:40:58,075
 Where two air masses meet, they
 don't mix right away.
 
-464
-00:30:41,125 --> 00:30:45,378
+611
+00:40:58,425 --> 00:41:02,678
 The change from one to the other
 is squeezed into a narrow zone,
 
-465
-00:30:45,378 --> 00:30:49,100
+612
+00:41:02,678 --> 00:41:06,400
 often a hundred kilometres
 wide or less, called a front.
 
-466
-00:30:49,450 --> 00:30:51,901
+613
+00:41:06,750 --> 00:41:09,201
 Crossing a front, the temperature and
 
-467
-00:30:51,901 --> 00:30:55,875
+614
+00:41:09,201 --> 00:41:13,175
 the humidity change quickly,
 and the wind changes direction.
 
-468
-00:30:56,225 --> 00:30:59,975
+615
+00:41:13,525 --> 00:41:17,275
 A front is named after
 the air that's advancing.
 
-469
-00:31:00,325 --> 00:31:04,000
+616
+00:41:17,625 --> 00:41:21,300
 If cold air is pushing forward,
 it's a cold front.
 
-470
-00:31:04,350 --> 00:31:07,900
+617
+00:41:21,650 --> 00:41:25,200
 If warm air is advancing,
 it's a warm front.
 
-471
-00:31:08,700 --> 00:31:11,550
+618
+00:41:26,000 --> 00:41:28,850
 Let's look at a cold front from the side.
 
-472
-00:31:11,900 --> 00:31:15,083
+619
+00:41:29,200 --> 00:41:34,376
+Here is a real slice through the air
+around Storm Ciarán, from the reanalysis,
+
+620
+00:41:34,376 --> 00:41:37,495
+at six in the evening
+on the first of November,
+
+621
+00:41:37,495 --> 00:41:40,150
+running from west to east through Brest.
+
+622
+00:41:40,500 --> 00:41:43,351
+The colours show how much
+warmer or colder the
+
+623
+00:41:43,351 --> 00:41:46,015
+air is than the average
+at the same height,
+
+624
+00:41:46,015 --> 00:41:49,300
+and the moving dots follow
+the wind inside the slice.
+
+625
+00:41:49,650 --> 00:41:52,833
 Remember the gas law:
 at the same pressure,
 
-473
-00:31:15,083 --> 00:31:17,525
+626
+00:41:52,833 --> 00:41:55,275
 cold air is denser than warm air.
 
-474
-00:31:17,875 --> 00:31:23,800
+627
+00:41:55,625 --> 00:42:01,550
 So the advancing cold air stays low and
 pushes in under the warm air like a wedge.
 
-475
-00:31:24,150 --> 00:31:26,326
-Its slope is steep for a front,
+628
+00:42:01,900 --> 00:42:04,416
+Its slope is steep: in this slice,
 
-476
-00:31:26,326 --> 00:31:31,169
+629
+00:42:04,416 --> 00:42:08,709
 about one kilometre up for every
-fifty to a hundred kilometres along,
+fifteen kilometres along,
 
-477
-00:31:31,169 --> 00:31:33,625
-and the warm air is lifted quickly.
+630
+00:42:08,709 --> 00:42:11,225
+so the warm air is lifted quickly.
 
-478
-00:31:33,975 --> 00:31:39,675
+631
+00:42:11,575 --> 00:42:17,275
 It cools to its dew point, and tall clouds
 and heavy showers form in a narrow band.
 
-479
-00:31:40,025 --> 00:31:45,339
+632
+00:42:17,625 --> 00:42:22,939
 After the front passes, the air is colder
 and drier, the pressure starts to rise,
 
-480
-00:31:45,339 --> 00:31:46,586
+633
+00:42:22,939 --> 00:42:24,186
 and the wind turns,
 
-481
-00:31:46,586 --> 00:31:51,900
+634
+00:42:24,186 --> 00:42:29,500
 in the northern hemisphere usually from
 the south-west to the west or north-west.
 
-482
-00:31:52,700 --> 00:31:57,090
+635
+00:42:30,300 --> 00:42:35,375
+Now let's move east along the same
+slice, to the warm front near Brest.
+
+636
+00:42:35,725 --> 00:42:40,115
 At a warm front, the warm air
 is advancing, but it's lighter,
 
-483
-00:31:57,090 --> 00:32:00,400
+637
+00:42:40,115 --> 00:42:43,425
 so it can't push the cold
 air away from below.
 
-484
-00:32:00,750 --> 00:32:04,682
+638
+00:42:43,775 --> 00:42:47,950
 Instead, it glides up over the cold
-air on a gentle slope,
+air on a gentler slope:
 
-485
-00:32:04,682 --> 00:32:09,225
-rising about one kilometre for every
-one or two hundred kilometres.
+639
+00:42:47,950 --> 00:42:52,975
+in this slice, about one kilometre
+up for every fifty kilometres along.
 
-486
-00:32:09,575 --> 00:32:11,669
+640
+00:42:53,325 --> 00:42:55,419
 As it slides upwards it cools,
 
-487
-00:32:11,669 --> 00:32:16,137
+641
+00:42:55,419 --> 00:42:59,887
 and a broad sheet of layered cloud
 forms far ahead of the front,
 
-488
-00:32:16,137 --> 00:32:18,650
+642
+00:42:59,887 --> 00:43:02,400
 bringing long spells of steady rain.
 
-489
-00:32:19,000 --> 00:32:24,305
+643
+00:43:02,750 --> 00:43:08,055
 When the warm front passes, the air turns
 milder and moister, and the wind turns,
 
-490
-00:32:24,305 --> 00:32:29,675
+644
+00:43:08,055 --> 00:43:13,425
 in the northern hemisphere usually from
 the south-east to the south or south-west.
 
-491
-00:32:30,025 --> 00:32:34,248
-We've drawn these side views
-fifty times taller than they really are,
+645
+00:43:13,775 --> 00:43:14,675
+In this slice,
 
-492
-00:32:34,248 --> 00:32:37,125
+646
+00:43:14,675 --> 00:43:19,177
+heights are drawn eighty times taller
+than distances along the ground,
+
+647
+00:43:19,177 --> 00:43:22,200
 so the slopes look much
 steeper than in nature.
 
-493
-00:32:37,925 --> 00:32:43,475
+648
+00:43:23,000 --> 00:43:28,550
 Here are real fronts, around Ciarán at six
 in the evening on the first of November.
 
-494
-00:32:43,825 --> 00:32:47,932
+649
+00:43:28,900 --> 00:43:33,007
 The colours show the temperature
 about one and a half kilometres up,
 
-495
-00:32:47,932 --> 00:32:51,375
+650
+00:43:33,007 --> 00:43:36,450
 where the ground's daily
 warming and cooling matter less.
 
-496
-00:32:51,725 --> 00:32:56,100
+651
+00:43:36,800 --> 00:43:41,175
 The warm tropical air reaches
 up towards Brittany in a tongue.
 
-497
-00:32:56,450 --> 00:33:00,400
+652
+00:43:41,525 --> 00:43:45,475
 Along its leading edge, to
 the east, is the warm front.
 
-498
-00:33:00,750 --> 00:33:05,950
+653
+00:43:45,825 --> 00:43:51,025
 Along its trailing edge, curving away
 to the south-west, is the cold front.
 
-499
-00:33:06,300 --> 00:33:10,112
+654
+00:43:51,375 --> 00:43:55,187
 The arrows show the wind turning
 as it crosses the fronts,
 
-500
-00:33:10,112 --> 00:33:12,150
+655
+00:43:55,187 --> 00:43:57,225
 most sharply at the warm front.
 
-501
-00:33:12,950 --> 00:33:14,003
+656
+00:43:58,025 --> 00:43:59,078
 On weather maps,
 
-502
-00:33:14,003 --> 00:33:18,875
+657
+00:43:59,078 --> 00:44:03,950
 fronts are drawn as lines with symbols
 on the side they're moving towards.
 
-503
-00:33:19,225 --> 00:33:24,650
+658
+00:44:04,300 --> 00:44:09,725
 A cold front has blue triangles,
 and a warm front has red half circles.
 
-504
-00:33:25,000 --> 00:33:28,850
+659
+00:44:10,075 --> 00:44:13,925
 You'll learn to read these maps
 in detail in the next video.
 
-505
-00:33:29,650 --> 00:33:34,700
+660
+00:44:14,725 --> 00:44:19,775
 Now let's zoom out to the whole planet,
 and ask why the weather moves at all.
 
-506
-00:33:35,050 --> 00:33:37,050
+661
+00:44:20,125 --> 00:44:22,125
 It starts with sunlight.
 
-507
-00:33:37,400 --> 00:33:41,958
+662
+00:44:22,475 --> 00:44:27,033
 Picture a beam of sunlight one
 metre wide, at noon at an equinox,
 
-508
-00:33:41,958 --> 00:33:46,375
+663
+00:44:27,033 --> 00:44:31,450
 in March or September,
 when the sun is overhead at the equator.
 
-509
-00:33:46,725 --> 00:33:50,500
+664
+00:44:31,800 --> 00:44:35,575
 At the equator, it lands
 on one metre of ground.
 
-510
-00:33:50,850 --> 00:33:54,657
+665
+00:44:35,925 --> 00:44:39,732
 At sixty degrees north, the ground
 is tilted to the beam,
 
-511
-00:33:54,657 --> 00:33:57,595
+666
+00:44:39,732 --> 00:44:42,670
 and the same beam
 is spread over two metres,
 
-512
-00:33:57,595 --> 00:34:00,200
+667
+00:44:42,670 --> 00:44:45,275
 so each square metre gets half as much.
 
-513
-00:34:00,550 --> 00:34:04,947
+668
+00:44:46,775 --> 00:44:51,172
 So the tropics are heated much more
 than the poles, and the atmosphere and
 
-514
-00:34:04,947 --> 00:34:08,275
+669
+00:44:51,172 --> 00:44:54,500
 the ocean carry heat
 from the tropics towards the poles.
 
-515
-00:34:08,625 --> 00:34:13,075
+670
+00:44:54,850 --> 00:44:59,300
 Storms like Ciarán are one
 of the ways the atmosphere does it.
 
-516
-00:34:13,875 --> 00:34:18,350
+671
+00:45:00,100 --> 00:45:04,575
 Averaged over many years,
 sea-level pressure falls into belts.
 
-517
-00:34:18,700 --> 00:34:22,874
+672
+00:45:04,925 --> 00:45:09,099
 Around thirty degrees north
 and south, air sinks from high up,
 
-518
-00:34:22,874 --> 00:34:27,250
+673
+00:45:09,099 --> 00:45:13,475
 and large highs sit over the oceans, like
 the Azores high we saw.
 
-519
-00:34:27,600 --> 00:34:30,225
+674
+00:45:13,825 --> 00:45:16,450
 These are the subtropical highs.
 
-520
-00:34:30,575 --> 00:34:33,484
+675
+00:45:16,800 --> 00:45:19,709
 Near the equator is a belt of low pressure
 
-521
-00:34:33,484 --> 00:34:36,670
+676
+00:45:19,709 --> 00:45:22,895
 where the winds from both
 hemispheres meet and
 
-522
-00:34:36,670 --> 00:34:39,025
+677
+00:45:22,895 --> 00:45:25,250
 rise, building tall thunderclouds.
 
-523
-00:34:39,375 --> 00:34:42,775
+678
+00:45:25,600 --> 00:45:29,000
 It's called the intertropical
 convergence zone.
 
-524
-00:34:43,125 --> 00:34:49,150
+679
+00:45:29,350 --> 00:45:35,375
 How these belts are made is the subject of
 a later video on the general circulation.
 
-525
-00:34:49,950 --> 00:34:53,125
+680
+00:45:36,175 --> 00:45:39,350
 The winds near the ground
 follow these belts.
 
-526
-00:34:53,475 --> 00:34:58,646
+681
+00:45:39,700 --> 00:45:44,871
 Between the subtropical highs and the
 equator, steady winds blow from the east,
 
-527
-00:34:58,646 --> 00:35:03,425
+682
+00:45:44,871 --> 00:45:49,650
 called the trade winds; sailing ships
 relied on them to cross the oceans.
 
-528
-00:35:03,775 --> 00:35:07,225
+683
+00:45:50,000 --> 00:45:53,450
 North of the equator,
 they come from the north-east.
 
-529
-00:35:07,575 --> 00:35:10,425
+684
+00:45:53,800 --> 00:45:56,650
 South of it, they come
 from the south-east.
 
-530
-00:35:10,775 --> 00:35:14,855
+685
+00:45:57,000 --> 00:46:01,080
 Poleward of the subtropical
 highs, in the middle latitudes,
 
-531
-00:35:14,855 --> 00:35:18,450
+686
+00:46:01,080 --> 00:46:04,675
 the winds come mostly
 from the west: the westerlies.
 
-532
-00:35:18,800 --> 00:35:23,425
+687
+00:46:05,025 --> 00:46:09,650
 That's why storms like Ciarán
 usually travel from west to east.
 
-533
-00:35:23,775 --> 00:35:28,058
+688
+00:46:10,000 --> 00:46:14,283
 Why the winds bend like this
 is part of the Coriolis story,
 
-534
-00:35:28,058 --> 00:35:29,800
+689
+00:46:14,283 --> 00:46:16,025
 coming in a later video.
 
-535
-00:35:30,600 --> 00:35:36,225
+690
+00:46:16,825 --> 00:46:22,450
 Now let's put all of this together on one
 real storm, and watch it from one town.
 
-536
-00:35:36,575 --> 00:35:39,707
+691
+00:46:22,800 --> 00:46:25,932
 On the first of November,
 twenty twenty-three,
 
-537
-00:35:39,707 --> 00:35:43,725
+692
+00:46:25,932 --> 00:46:29,950
 Storm Ciarán was racing across
 the Atlantic towards Europe.
 
-538
-00:35:44,075 --> 00:35:47,031
+693
+00:46:30,300 --> 00:46:33,256
 Here it is from a satellite
 that afternoon,
 
-539
-00:35:47,031 --> 00:35:49,575
+694
+00:46:33,256 --> 00:46:35,800
 with coastlines and borders drawn in.
 
-540
-00:35:49,925 --> 00:35:54,400
+695
+00:46:36,150 --> 00:46:40,625
 And here is Brest, a port city
 at the western tip of France.
 
-541
-00:35:54,750 --> 00:36:00,375
+696
+00:46:40,975 --> 00:46:46,600
 Let's watch the storm pass over
 Brest, hour by hour, using the reanalysis.
 
-542
-00:36:00,725 --> 00:36:06,275
+697
+00:46:46,950 --> 00:46:52,500
 Times are in universal time, the clock
 that meteorologists everywhere share.
 
-543
-00:36:07,075 --> 00:36:10,795
+698
+00:46:53,300 --> 00:46:57,020
 Here are the isobars every
 four hectopascals from midday
 
-544
-00:36:10,795 --> 00:36:14,050
+699
+00:46:57,020 --> 00:47:00,275
 on the first of November
 to midday on the second,
 
-545
-00:36:14,050 --> 00:36:18,900
+700
+00:47:00,275 --> 00:47:05,125
 with the warm front in red and the cold
 front in blue until that evening.
 
-546
-00:36:19,250 --> 00:36:22,841
+701
+00:47:05,475 --> 00:47:09,066
 The low deepens as it
 comes, from about nine hundred and
 
-547
-00:36:22,841 --> 00:36:24,957
+702
+00:47:09,066 --> 00:47:11,182
 seventy to about nine hundred and
 
-548
-00:36:24,957 --> 00:36:26,495
+703
+00:47:11,182 --> 00:47:12,720
 fifty-four hectopascals,
 
-549
-00:36:26,495 --> 00:36:31,625
+704
+00:47:12,720 --> 00:47:17,850
 and its centre crosses the English Channel
 just north of Brest during the night.
 
-550
-00:36:32,425 --> 00:36:34,875
+705
+00:47:18,650 --> 00:47:21,100
 First, the pressure at Brest.
 
-551
-00:36:35,225 --> 00:36:39,180
+706
+00:47:21,450 --> 00:47:25,405
 At midday on the first, it
 reads about nine hundred and
 
-552
-00:36:39,180 --> 00:36:41,050
+707
+00:47:25,405 --> 00:47:27,275
 ninety-seven hectopascals.
 
-553
-00:36:41,400 --> 00:36:45,593
+708
+00:47:27,625 --> 00:47:31,818
 Then it falls, faster
 and faster, to about nine hundred and
 
-554
-00:36:45,593 --> 00:36:50,425
+709
+00:47:31,818 --> 00:47:36,650
 sixty-two at one o'clock in the morning,
 as the low passes close by.
 
-555
-00:36:50,775 --> 00:36:55,925
+710
+00:47:37,000 --> 00:47:42,150
 That's thirty-five hectopascals
 in thirteen hours, a very fast fall.
 
-556
-00:36:56,275 --> 00:37:01,300
+711
+00:47:43,650 --> 00:47:48,675
 Then it climbs again, by about
 fourteen hectopascals in five hours.
 
-557
-00:37:02,100 --> 00:37:04,475
+712
+00:47:49,475 --> 00:47:51,850
 Now the temperature and the wind.
 
-558
-00:37:04,825 --> 00:37:06,246
+713
+00:47:52,200 --> 00:47:53,621
 At six in the evening,
 
-559
-00:37:06,246 --> 00:37:11,220
+714
+00:47:53,621 --> 00:47:58,595
 the wind blows from the south-south-east
 at about thirteen metres per second,
 
-560
-00:37:11,220 --> 00:37:13,675
+715
+00:47:58,595 --> 00:48:01,050
 and the temperature is twelve degrees.
 
-561
-00:37:14,025 --> 00:37:17,904
+716
+00:48:01,400 --> 00:48:05,279
 By eight, the wind has turned
 to come from the south-south-west,
 
-562
-00:37:17,904 --> 00:37:21,299
+717
+00:48:05,279 --> 00:48:08,674
 it has strengthened to about
 eighteen metres per second,
 
-563
-00:37:21,299 --> 00:37:24,875
+718
+00:48:08,674 --> 00:48:12,250
 and the temperature has risen
 to about fourteen and a half.
 
-564
-00:37:25,225 --> 00:37:27,600
+719
+00:48:12,600 --> 00:48:14,975
 That's the warm front passing.
 
-565
-00:37:27,950 --> 00:37:33,625
+720
+00:48:15,325 --> 00:48:21,000
 Brest is now in the warm air behind it,
 which is called the storm's warm sector.
 
-566
-00:37:34,425 --> 00:37:37,400
+721
+00:48:21,800 --> 00:48:24,775
 A few hours later comes the cold front.
 
-567
-00:37:37,750 --> 00:37:40,911
+722
+00:48:25,125 --> 00:48:28,286
 By now the storm has broken
 and bent its fronts so
 
-568
-00:37:40,911 --> 00:37:43,630
+723
+00:48:28,286 --> 00:48:31,005
 much that the map can't
 trace them cleanly,
 
-569
-00:37:43,630 --> 00:37:46,475
+724
+00:48:31,005 --> 00:48:33,850
 but Brest's own measurements
 show it clearly.
 
-570
-00:37:46,825 --> 00:37:49,550
+725
+00:48:34,200 --> 00:48:36,925
 Between midnight and three in the morning,
 
-571
-00:37:49,550 --> 00:37:52,860
+726
+00:48:36,925 --> 00:48:40,235
 the wind swings from the
 south-west to the west and
 
-572
-00:37:52,860 --> 00:37:54,287
+727
+00:48:40,235 --> 00:48:41,662
 strengthens: by three,
 
-573
-00:37:54,287 --> 00:37:58,375
+728
+00:48:41,662 --> 00:48:45,750
 it's about twenty-three metres
 per second, or forty-five knots.
 
-574
-00:37:58,725 --> 00:38:02,254
+729
+00:48:47,250 --> 00:48:50,779
 The temperature drops by about
 two degrees, to ten and
 
-575
-00:38:02,254 --> 00:38:05,325
+730
+00:48:50,779 --> 00:48:53,850
 a half, and the pressure
 starts its fast climb.
 
-576
-00:38:05,675 --> 00:38:10,950
+731
+00:48:54,200 --> 00:48:59,475
 Cooler polar air has arrived behind
 the front, just as our side view said.
 
-577
-00:38:11,750 --> 00:38:15,360
+732
+00:49:00,275 --> 00:49:03,885
 Here is the storm the next
 afternoon, seen from space,
 
-578
-00:38:15,360 --> 00:38:20,375
+733
+00:49:03,885 --> 00:49:08,900
 now over the North Sea, with its clouds
 wrapped in a spiral around the low.
 
-579
-00:38:20,725 --> 00:38:25,825
+734
+00:49:09,250 --> 00:49:14,350
 In the next video, we'll learn to read
 weather maps like this one in detail.
 
-580
-00:38:26,175 --> 00:38:29,189
+735
+00:49:14,700 --> 00:49:17,714
 And later videos will explain why the wind
 
-581
-00:38:29,189 --> 00:38:32,275
+736
+00:49:17,714 --> 00:49:20,800
 circles the low instead
 of rushing into it.
 
-582
-00:38:33,075 --> 00:38:36,406
+737
+00:49:21,600 --> 00:49:24,931
 To sum up, the atmosphere
 is a thin shell of air,
 
-583
-00:38:36,406 --> 00:38:41,300
+738
+00:49:24,931 --> 00:49:29,825
 and almost all our weather happens
 in its lowest layer, the troposphere.
 
-584
-00:38:41,650 --> 00:38:45,745
+739
+00:49:30,175 --> 00:49:34,270
 Air pressure is the weight
 of the air above each square metre,
 
-585
-00:38:45,745 --> 00:38:49,575
+740
+00:49:34,270 --> 00:49:38,100
 about one thousand and thirteen
 hectopascals at sea level.
 
-586
-00:38:49,925 --> 00:38:53,043
+741
+00:49:38,450 --> 00:49:41,568
 By hydrostatic balance,
 it falls with height,
 
-587
-00:38:53,043 --> 00:38:57,825
+742
+00:49:41,568 --> 00:49:46,350
 roughly exponentially, with a scale
 height of about eight kilometres.
 
-588
-00:38:58,175 --> 00:39:02,597
+743
+00:49:46,700 --> 00:49:51,122
 The gas law, p equals
 rho R T, ties pressure, density and
 
-589
-00:39:02,597 --> 00:39:07,175
+744
+00:49:51,122 --> 00:49:55,700
 temperature together, so warm
 air is lighter than cold air.
 
-590
-00:39:07,525 --> 00:39:11,787
+745
+00:49:56,050 --> 00:50:00,312
 Relative humidity compares
 the vapour with its saturation value,
 
-591
-00:39:11,787 --> 00:39:14,850
+746
+00:50:00,312 --> 00:50:03,375
 and cooling air
 to its dew point makes clouds.
 
-592
-00:39:15,200 --> 00:39:17,867
+747
+00:50:03,725 --> 00:50:06,392
 Winds are named by where they come from,
 
-593
-00:39:17,867 --> 00:39:21,000
+748
+00:50:06,392 --> 00:50:09,525
 and are measured in metres
 per second or knots.
 
-594
-00:39:21,350 --> 00:39:24,449
+749
+00:50:09,875 --> 00:50:12,974
 Sea-level pressure maps
 show highs and lows,
 
-595
-00:39:24,449 --> 00:39:27,900
+750
+00:50:12,974 --> 00:50:16,425
 and fronts are the boundaries
 between air masses.
 
-596
-00:39:28,250 --> 00:39:32,841
+751
+00:50:16,775 --> 00:50:21,366
 Weather is what happens now,
 climate is its long-term statistics,
 
-597
-00:39:32,841 --> 00:39:36,725
+752
+00:50:21,366 --> 00:50:25,250
 and a reanalysis gives us both,
 everywhere, every hour.
 
-598
-00:39:37,525 --> 00:39:43,400
+753
+00:50:26,050 --> 00:50:31,925
 This video is one of a series of related
 tutorials, so watch out for the others.
 
-599
-00:39:43,750 --> 00:39:46,658
+754
+00:50:32,275 --> 00:50:35,183
 They're made to help
 students of meteorology,
 
-600
-00:39:46,658 --> 00:39:49,243
+755
+00:50:35,183 --> 00:50:37,768
 atmospheric science and climate science,
 
-601
-00:39:49,243 --> 00:39:52,861
+756
+00:50:37,768 --> 00:50:41,386
 and anyone else who wants
 to learn not just these ideas,
 
-602
-00:39:52,861 --> 00:39:54,800
+757
+00:50:41,386 --> 00:50:43,325
 but the maths behind them too.
 
-603
-00:39:55,150 --> 00:40:00,062
+758
+00:50:43,675 --> 00:50:48,587
 The notebook for these weather basics, and
 the notebooks for the other concepts,
 
-604
-00:40:00,062 --> 00:40:02,825
+759
+00:50:48,587 --> 00:50:51,350
 are on the website that
 goes with this video.
