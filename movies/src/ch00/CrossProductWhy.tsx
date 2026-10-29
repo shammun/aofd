@@ -35,7 +35,7 @@ import ne110 from "../../ch00/ch00_cross_product_why/data/real/ne_lines_110m.jso
 import ne50 from "../../ch00/ch00_cross_product_why/data/real/ne_lines_50m.json";
 import wx from "../../ch00/ch00_dot_product_why/data/weather.json";
 import { CurvedLink } from "../house/kit/extras";
-import { C, T } from "../house/kit/type";
+import { C, FONT, T } from "../house/kit/type";
 import { Arc, Arrow, Band, Bracket, Dash, Grid, Lbl, Pt, RightTick, Strike, Svg, add, clamp, lerp, mkP, pulse, textW, unit } from "../house/kit/draw";
 import { CalcRow, CalcStack, Layer, Layered, Part, TeX, col, eqPieces, plainOf, rep, splitEq, texHtml } from "../house/kit/tex";
 import { Keyword, TipLabel, placeLabels } from "../house/kit/notes";
@@ -326,15 +326,15 @@ const PairFloor: React.FC<{ st: CamState; gA?: number; gB?: number; axb?: number
 
 /** the gold length bracket beside the a × b arrow (offset to the screen-right of the arrow for the usual views), "14" */
 const BR_OFF: V3 = [1.0, -0.6, 0];
-const Bracket3: React.FC<{ pr: ReturnType<typeof projector>; h: number; o?: number; t?: string }> = ({ pr, h, o = 1, t = "14" }) => {
+const Bracket3: React.FC<{ pr: ReturnType<typeof projector>; h: number; o?: number; t?: string; off?: V3; left?: boolean; lf?: number }> = ({ pr, h, o = 1, t = "14", off = BR_OFF, left = false, lf = 0.5 }) => {
   if (o <= 0) return null;
-  const a = BR_OFF, b = add3(BR_OFF, [0, 0, h]), e: V3 = [-0.14, 0.14, 0];
+  const a = off, b = add3(off, [0, 0, h]), e: V3 = left ? [0.14, -0.14, 0] : [-0.14, 0.14, 0];
   return (
     <g opacity={o}>
       <Seg3 pr={pr} a={a} b={b} c={C.gold} w={5} />
       <Seg3 pr={pr} a={a} b={add3(a, e)} c={C.gold} w={5} />
       <Seg3 pr={pr} a={b} b={add3(b, e)} c={C.gold} w={5} />
-      <L3 pr={pr} at={add3(BR_OFF, [0, 0, h / 2])} t={t} c={C.gold} s={T.key} dx={44} />
+      <L3 pr={pr} at={add3(off, [0, 0, h * lf])} t={t} c={C.gold} s={T.key} dx={left ? -44 : 44} a={left ? "end" : "middle"} />
     </g>
   );
 };
@@ -607,16 +607,17 @@ const S03: React.FC = () => {
           <g opacity={barO}>
             <rect x={470} y={800} width={95 * need} height={34} fill={C.second} opacity={0.85} />
             <Lbl x={470} y={770} t="push needed" c={C.second} s={T.floor} />
-            <Lbl x={490 + 95 * need} y={817} t={need > 1.05 ? `× ${need.toFixed(1)}` : "× 1"} c={C.second} s={T.floor} o={fin(f, tNear + 10)} />
           </g>
           <Keyword f={f} text="far from the hinge · easy" at={[1100, 300]} appear={AT(k, 2, "far from the hinge")} out={t2 - 10} targets={[]} s={T.key} />
           <Keyword f={f} text="near the hinge · hard" at={[1100, 420]} appear={AT(k, 3, "close to the hinge")} out={t2 - 10} targets={[]} s={T.key} />
           <Lbl x={1100} y={560} t="how far from the hinge" c={C.key} s={T.key} o={fin(f, AT(k, 4, "how far from the hinge")) * fout(f, t2 - 10)} />
           <Lbl x={1100} y={640} t="which way you push" c={C.key} s={T.key} o={fin(f, AT(k, 4, "which way you push")) * fout(f, t2 - 10)} />
-          <Lbl x={1100} y={200} t="r" c={C.first} s={T.calc} o={fin(f, AT(k, 5, "from the hinge")) * fout(f, t4 - 10)} />
-          <Keyword f={f} text="hinge to hand" at={[1160, 200]} appear={AT(k, 5, "from the hinge")} out={t4 - 10} targets={[]} />
-          <Lbl x={1100} y={300} t="F" c={C.second} s={T.calc} o={fin(f, AT(k, 6, "your push")) * fout(f, t4 - 10)} />
-          <Keyword f={f} text="push" at={[1160, 300]} appear={AT(k, 6, "your push")} out={t4 - 10} targets={[]} />
+          {/* fx1 (S10): r and F stay until r · F = 0 takes their place (the maths zone was empty in S7-S8) */}
+          <Lbl x={1100} y={200} t="r" c={C.first} s={T.calc} o={fin(f, AT(k, 5, "from the hinge")) * fout(f, tZero - 10)} />
+          <Keyword f={f} text="hinge to hand" at={[1160, 200]} appear={AT(k, 5, "from the hinge")} out={tZero - 10} targets={[]} />
+          <Lbl x={1100} y={300} t="F" c={C.second} s={T.calc} o={fin(f, AT(k, 6, "your push")) * fout(f, tZero - 10)} />
+          <Keyword f={f} text="push" at={[1160, 300]} appear={AT(k, 6, "your push")} out={tZero - 10} targets={[]} />
+          <Keyword f={f} text="push ⟂ door" at={[1100, 420]} appear={AT(k, 7, "at a right angle")} out={tZero - 10} targets={[]} />
         </>} />
       <TeX s={String.raw`\mathbf a\cdot\mathbf b = 8`} x={1100} y={420} size={T.eq} o={fin(f, 4) * fout(f, tFar - 10)} />
       <TeX s={EQ_RF0} x={1100} y={300} size={T.eq} o={fin(f, tZero)} glow={pulse(f, t8, 24)} />
@@ -1142,8 +1143,7 @@ const S11: React.FC = () => {
   const q = handQuat(A3, [0, 0, 1]);
   // little finger (local z −0.29, radius ≈ 0.08) resting on a; the knuckles just past O, the wrist behind it
   const pos = add3(mul3(AH, -0.3 * s), [0, 0, 0.37 * s]);
-  const slideIn = easeIO(clamp(f / 30, 0, 1));
-  const at0 = add3(pos, [-2.5, -2.0, 0], 1 - slideIn);
+  const at0 = pos; // fx1 (S4): no slide-in or translucent fade; the scene's own cross-fade brings the hand in at its final pose
   const curl = CURL11 * easeIO(clamp((f - AT(k, 2, "curl your fingers")) / (AT(k, 2, "the short way round") + 10 - AT(k, 2, "curl your fingers")), 0, 1));
   const thumbUp = easeIO(clamp((f - t3) / 24, 0, 1));
   const thetaArc = clamp((f - tShort) / 30, 0, 1);
@@ -1157,7 +1157,7 @@ const S11: React.FC = () => {
           <Arc3 pr={pr} c0={[0, 0, 0]} e1={[1, 0, 0]} e2={[0, 1, 0]} r={2.6} a0={ANG_A} a1={ANG_B - 360} col={C.muted} head={false} dash="10 12" o={0.6 * fin(f, tShort) * fout(f, t3 + 30)} />
         </>}
         bTop
-        children={<Hand3D q={q} at={at0} s={s} angles={POSE.curl(curl)} thumb={thumbUp} o={fin(f, 0, 14)}
+        children={<Hand3D q={q} at={at0} s={s} angles={POSE.curl(curl)} thumb={thumbUp} o={1}
           glow={{ index: f >= t1 && f < t3 ? C.first : undefined, thumb: thumbUp > 0 ? ROT : undefined }} glowK={thumbUp > 0 ? thumbUp : fin(f, t1, 10) * fout(f, t2 + 20, 10)} />}
         over={<>
           <TipL3 pr={pr} from={[0, 0, 0]} to={A3} t="a" c={C.first} s={T.calc} />
@@ -1331,6 +1331,7 @@ const S14: React.FC = () => {
       <Svg>
         <AxesLabels pr={pr} cols={cols} />
         <CurlArrow pr={pr} q={q} at={pos} s={s} draw={easeIO(clamp((f - curlStart) / 30, 0, 1))} o={f >= t1 ? 1 : 0} a1={100} />
+        <Keyword f={f} text="the rule on x̂, ŷ, ẑ" at={[1100, 240]} appear={AT(k, 0, "the rule on")} out={tXY - 8} targets={[]} />
         <Lbl x={1100} y={565} t={["fingers x̂ · curl to ŷ · thumb ẑ", "fingers ŷ · curl to ẑ · thumb x̂", "fingers ẑ · curl to x̂ · thumb ŷ"][beat]} c={C.key} s={T.floor} o={fin(f, t1 + 6)} />
       </Svg>
       <TeX s={EQ_XY} x={1100} y={240} size={T.calc} o={fin(f, tXY)} c={C.key} glow={pulse(f, tXY, 24)} />
@@ -1509,24 +1510,26 @@ const S17: React.FC = () => {
   const base = { ...FLOOR_K, dist: 13.5, pp: [540, 470] as Pt };
   const top = { ...base, az: 270, el: 89.9, target: [0, 0, 0] as V3, dist: 16, pp: [300, 640] as Pt };
   const bot = { ...base, az: 270, el: -89.9, target: [0, 0, 0] as V3, dist: 16, pp: [700, 640] as Pt, up: [0, 1, 0] as V3 };
-  const st = camOf([{ ...base, f: 0 }, { ...base, f: t1 - 15 }, { ...top, f: t1 + 20 }, { ...top, f: t3 }, { ...bot, f: t3 + 50 }, { ...bot, f: tCard + 30 },
-    { ...top, f: tCard + 80 }, { ...top, f: t5 }, { ...base, f: t5 + 50, az: 230, el: 30, target: [2.5, 1.5, 1.0] }], f);
+  // fx1 (S6): the camera stays below until "two coloured faces" (the orange face is seen while it is named), then swings up
+  const tFaces = AT(k, 5, "two coloured faces"), tUp = Math.max(tCard + 30, tFaces + 24);
+  const st = camOf([{ ...base, f: 0 }, { ...base, f: t1 - 15 }, { ...top, f: t1 + 20 }, { ...top, f: t3 }, { ...bot, f: t3 + 50 }, { ...bot, f: tUp },
+    { ...top, f: tUp + 50 }, { ...top, f: t5 }, { ...base, f: t5 + 50, az: 230, el: 30, target: [2.5, 1.5, 1.0] }], f);
   const pr = projector(st, W3, H3);
   const O = pr.p([0, 0, 0]);
   const above = f >= t1 + 20 && f < t3, below = f >= t3 + 50 && f < tCard + 30;
   const cardO = fin(f, tCard, 16) * fout(f, t5 + 40, 16);
-  const cardTop = f >= tCard + 80 && f < t5, cardBot = f >= tCard && f < tCard + 30;
+  const cardTop = f >= tUp + 50 && f < t5, cardBot = f >= tCard && st.pos[2] < 0;
   const settled = f < t1 - 15 || f >= t5 + 50;   // C1: the a × b label only while the camera is still
   const icon = (y: number, cw: boolean) => (
     <g>
-      <path d={cw ? `M 1150 ${y - 30} A 40 40 0 1 1 1110 ${y - 30}` : `M 1110 ${y - 30} A 40 40 0 1 0 1150 ${y - 30}`} fill="none" stroke={C.gold} strokeWidth={5} />
-      {cw ? <CircleCross x={1130} y={y + 8} r={16} w={4} /> : <CircleDot x={1130} y={y + 8} r={16} w={4} />}
+      <path d={cw ? `M 1126 ${y - 30} A 40 40 0 1 1 1086 ${y - 30}` : `M 1086 ${y - 30} A 40 40 0 1 0 1126 ${y - 30}`} fill="none" stroke={C.gold} strokeWidth={5} />
+      {cw ? <CircleCross x={1106} y={y + 8} r={16} w={4} /> : <CircleDot x={1106} y={y + 8} r={16} w={4} />}
     </g>
   );
   const card = (z: number, c: string): V3[] => [[0, 0, z], [A3[0], A3[1], z], [A3[0] + B3[0], A3[1] + B3[1], z], [B3[0], B3[1], z]];
   return (
     <Scene>
-      <PairFloor st={st} axb={1} grid={1}
+      <PairFloor st={st} axb={1 - fin(f, tUp - 8, 8) * fout(f, tUp + 44, 8)} grid={1}
         children={<>
           <Plane3D x0={-1} x1={6} y0={-1} y1={4} o={0.3 * (1 - 0.6 * cardO)} />
           {cardO > 0 && st.pos[2] >= 0 ? <Quad3D pts={card(0.03, C.first)} color={C.first} o={0.45 * cardO} /> : null}
@@ -1541,12 +1544,13 @@ const S17: React.FC = () => {
           {settled ? <TipL3 pr={pr} from={[0, 0, 0]} to={AXB3} t="a × b = (0, 0, 14)" c={ROT} s={T.key} o={f < t1 ? 1 : fin(f, t5 + 50, 10)} /> : null}
         </>} />
       <Svg>
+        <Keyword f={f} text="where you look from" at={[1150, 280]} appear={AT(k, 0, "where you look from")} out={t1 + 14} targets={[]} />
         <g opacity={fin(f, t1 + 20) * fout(f, t3)}>
           <Lbl x={1150} y={280} t="from above" c={C.key} s={T.key} />
           <Lbl x={1150} y={360} t="anticlockwise" c={C.gold} s={T.key} o={fin(f, AT(k, 2, "anticlockwise"))} />
           <Lbl x={1150} y={440} t="towards you" c={ROT} s={T.key} o={fin(f, AT(k, 2, "straight at you"))} />
         </g>
-        <g opacity={fin(f, t3 + 40) * fout(f, tCard + 30)}>
+        <g opacity={fin(f, t3 + 40) * fout(f, tCard)}>
           <Lbl x={1150} y={280} t="from below" c={C.key} s={T.key} />
           <Lbl x={1150} y={360} t="clockwise" c={C.gold} s={T.key} o={fin(f, AT(k, 4, "looks clockwise"))} />
           <Lbl x={1150} y={440} t="away" c={ROT} s={T.key} o={fin(f, AT(k, 4, "away from you"))} />
@@ -1557,12 +1561,12 @@ const S17: React.FC = () => {
           <rect x={1150} y={255} width={44} height={44} fill={C.second} opacity={0.7} />
           <Lbl x={1215} y={280} t="orange face: clockwise" c={C.key} s={T.key} />
         </g>
-        <g opacity={fin(f, tCard + 70) * fout(f, t5)}>
+        <g opacity={fin(f, tUp + 40) * fout(f, t5)}>
           <rect x={1150} y={355} width={44} height={44} fill={C.first} opacity={0.7} />
           <Lbl x={1215} y={380} t="teal face: anticlockwise" c={C.key} s={T.key} />
         </g>
         <Lbl x={1150} y={480} t="the arrow sticks out of the teal face" c={ROT} s={T.floor} o={fin(f, AT(k, 6, "sticks out of the face")) * fout(f, t5)} />
-        <g opacity={fin(f, t7)}>{icon(640, false)}<Lbl x={1150} y={630} t="anticlockwise → towards you" c={C.key} s={50} /></g>
+        <g opacity={fin(f, t7)}>{icon(640, false)}<Lbl x={1185} y={630} t="anticlockwise → towards you" c={C.key} s={50} /></g>
         <g opacity={fin(f, t8)}>{icon(780, true)}<Lbl x={1185} y={770} t="clockwise → away from you" c={C.key} s={50} /></g>
       </Svg>
     </Scene>
@@ -1641,12 +1645,12 @@ const S18: React.FC = () => {
           o={fin(f, [t2 + 10, t4 + 20, t6 + 20][i]) * oth} />)}
         {[0, 1, 2].map((i) => <Lbl key={`a${i}`} x={PANELS[i].x + 280} y={852} t={`area ${[0, 6, 0][i]}`} c={C.muted} s={T.floor} a="middle"
           o={fin(f, [t3 + 30, t5 + 20, t7 + 20][i]) * oth * fout(f, tDot)} />)}
-        {/* v5 (V-X3): the opposite of the dot product — p·q under each panel (data/v5.json, fluidpy.geo.vectors.dot) */}
-        {[0, 1, 2].map((i) => <Lbl key={`d${i}`} x={PANELS[i].x + 280} y={852} t={`p · q = ${sgnI(V5.cases_dot[i])}`} c={C.local} s={T.floor} a="middle"
-          o={fin(f, AT(k, 9, ["largest when the arrows lie along one line", "zero at a right angle", "largest when the arrows lie along one line"][i]) + 6 * i) * oth} />)}
+        {/* fx1 (M3): the p·q values under the panels are gone (never spoken); the words now say "largest when the arrows point
+            the same way", shown as one keyword line under "dot product: the opposite" */}
+        <Lbl x={960} y={180} t="dot: 0 at a right angle · largest the same way" c={C.local} s={T.floor} a="middle" o={fin(f, AT(k, 9, "zero at a right angle")) * fout(f, t9)} />
         <Lbl x={960} y={110} t="same way or opposite → 0" c={C.key} s={T.key} a="middle" o={fin(f, t8) * oth * fout(f, tDot)} />
         <Lbl x={960} y={190} t="right angle → longest" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 8, "as long as it can be")) * oth * fout(f, tDot)} />
-        <Lbl x={960} y={150} t="dot product: the opposite" c={C.local} s={T.key} a="middle" o={fin(f, tDot + 6) * fout(f, t9)} />
+        <Lbl x={960} y={110} t="dot product: the opposite" c={C.local} s={T.key} a="middle" o={fin(f, tDot + 8) * fout(f, t9)} />
         <Keyword f={f} text="fix one arrow, turn the other" at={[960, 480]} a="middle" appear={6} out={t1 + 20} targets={[]} />
         <g opacity={fin(f, tCW) * big}>
           <circle cx={1650} cy={300} r={120} fill="#1d2740" stroke={C.grid} strokeWidth={3} />
@@ -1666,13 +1670,14 @@ const S18: React.FC = () => {
 
 // ================================================================ s18a the questions; s18b the part across; s18c the slide
 const QLIST = ["sin θ ?", "area ?", "area, but an arrow ?", "the minus sign ?"];
-const QList: React.FC<{ f: number; o: number; ticks: number[] }> = ({ f, o, ticks }) => (o <= 0 ? null : (
+const QList: React.FC<{ f: number; o: number; ticks: number[]; y0?: number; row?: number[] }> = ({ f, o, ticks, y0 = 520, row = [0, 1, 2, 3] }) => (o <= 0 ? null : (
   <g opacity={o}>
     {QLIST.map((q, i) => <g key={q}>
-      <Lbl x={1200} y={520 + 80 * i} t={q} c={C.key} s={T.key} />
-      <Check x={1140} y={520 + 80 * i} o={fin(f, ticks[i] ?? 1e9, 10)} />
+      <Lbl x={1200} y={y0 + 80 * row[i]} t={q} c={C.key} s={T.key} />
+      <Check x={1140} y={y0 + 80 * row[i]} o={fin(f, ticks[i] ?? 1e9, 10)} />
     </g>)}
   </g>));
+const QY0 = 400;
 const S18A: React.FC = () => {
   const f = useCurrentFrame(), k = K("s18a_why_question");
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tMinus = SS(k, 4), t4 = SS(k, 5);
@@ -1689,16 +1694,17 @@ const S18A: React.FC = () => {
           <TipL3 pr={pr} from={[0, 0, 0]} to={B3} t="b" c={C.second} s={T.calc} />
           <TipL3 pr={pr} from={[0, 0, 0]} to={AXB3} t="a × b = (0, 0, 14)" c={ROT} s={T.key} />
           {/* fix 2 (review 2 S4): the two first links leave when the third question arrives, so no two links ever cross */}
-          <Keyword f={f} text="sin θ ?" at={[1100, 330]} appear={AT(k, 2, "Why the sine")} out={t4} targets={[]} />
-          <Keyword f={f} text="area ?" at={[1100, 230]} appear={AT(k, 2, "why an area")} out={t4} targets={[]} />
-          <CurvedLink f={f} from={[1088, 330]} to={add(pr.p([1.7 * Math.cos(30 * D2R), 1.7 * Math.sin(30 * D2R), 0]), [14, -8])} start={AT(k, 2, "Why the sine") + 8} end={t3 - 8} bend={20} />
-          <CurvedLink f={f} from={[1088, 230]} to={add(pr.p([3, 2, 0]), [14, -8])} start={AT(k, 2, "why an area") + 8} end={t3 - 8} bend={20} />
-          <Keyword f={f} text="area … but an arrow, up or down ?" s={T.floor} at={[1100, 430]} appear={t3} out={t4} targets={[pr.p([3.4, 2.1, 0]), pr.p([0, 0, AXB3[2] * 0.7])]} />
-          <Keyword f={f} text="the minus sign in the recipe ?" s={T.floor} at={[1100, 530]} appear={AT(k, 4, "the minus sign")} out={t4} targets={[]} />
+          {/* fx1 (S1): each question on its own row, at the place the list (S6) uses, so nothing jumps; links leave to the left */}
+          <Keyword f={f} text="sin θ ?" at={[1200, QY0 + 80]} appear={AT(k, 2, "Why the sine")} out={t4} targets={[]} />
+          <Keyword f={f} text="area ?" at={[1200, QY0]} appear={AT(k, 2, "why an area")} out={t4} targets={[]} />
+          <CurvedLink f={f} from={[1180, QY0 + 80]} to={add(pr.p([1.7 * Math.cos(30 * D2R), 1.7 * Math.sin(30 * D2R), 0]), [14, -8])} start={AT(k, 2, "Why the sine") + 8} end={t3 - 8} bend={20} />
+          <CurvedLink f={f} from={[1180, QY0]} to={add(pr.p([3, 2, 0]), [14, -8])} start={AT(k, 2, "why an area") + 8} end={t3 - 8} bend={20} />
+          <Keyword f={f} text="area, but an arrow, up or down ?" s={T.floor} at={[1200, QY0 + 160]} appear={t3} out={t4} targets={[pr.p([3.4, 2.1, 0]), pr.p([0, 0, AXB3[2] * 0.7])]} />
+          <Keyword f={f} text="the minus sign ?" at={[1200, QY0 + 240]} appear={AT(k, 4, "the minus sign")} out={t4} targets={[]} />
           <Lbl x={1700} y={180} t="?" c={C.gold} s={T.hero} a="middle" o={fin(f, t1) * fout(f, t4)} />
         </>} />
       <PairTags />
-      <Svg><QList f={f} o={fin(f, t4)} ticks={[1e9, 1e9, 1e9]} /></Svg>
+      <Svg><QList f={f} o={fin(f, t4)} ticks={[1e9, 1e9, 1e9]} y0={QY0} row={[1, 0, 2, 3]} /></Svg>
     </Scene>
   );
 };
@@ -2703,6 +2709,7 @@ const S25A: React.FC = () => {
       </HalfEarthView>
       <Svg>
         {/* v5 R3-S1: the maths zone is never empty at the scene start */}
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="follow a place" at={[1100, 200]} appear={AT(k, 0, "To follow a place")} out={AT(k, 0, "where it is") - 8} targets={[]} />
         <Keyword f={f} text="where is our place?" at={[1100, 200]} appear={AT(k, 0, "where it is")} out={AT(k, 1, "the position vector") - 6} targets={[]} />
         <Keyword f={f} text="position vector" at={[1100, 200]} appear={AT(k, 1, "the position vector")} targets={[]} s={T.calc} />
         <Keyword f={f} text="length + direction" at={[1100, 310]} appear={t2} targets={[]} />
@@ -2805,16 +2812,17 @@ const S25B: React.FC = () => {
         </>}>
         {(pr) => <>
           <FaceLines pr={pr} />
-          <L3 pr={pr} at={pin} t={rlab} c={C.first} s={T.key} a="start" dx={40} dy={-46} o={fin(f, t7)} />
+
           <L3 pr={pr} at={[0, 1.33, 0]} t="Ω" c={ROT} s={T.calc} a="start" dx={24} />
           {vL > 0.02 ? <TipL3 pr={pr} from={pin} to={vt} t={f >= AT(k, 6, "three hundred") ? label : "v"} c={C.second} s={T.key} o={fin(f, t1)} /> : null}
           {/* S6: v points along y (out of the cut face, east): a ⊙ y tag at the arrow; at the pole v = 0 is written */}
-          {vL > 0.02 ? <CircleDot x={pr.p(vt)[0] + 10} y={pr.p(vt)[1] - 64} r={18} w={4} c={C.second} o={fout(f, t7 - 8, 8)} /> : null}{/* v5 R3-S2: the ⊙ y tag leaves before the r label comes */}
-          {vL > 0.02 ? <Lbl x={pr.p(vt)[0] + 36} y={pr.p(vt)[1] - 64} t="y" c={C.second} s={T.floor} o={fin(f, t1) * fout(f, t7)} /> : null}
+          {/* fx1 (Part 2 S9): the ⊙ y tag stays with v at every latitude (v leaves the cut face, east); the r label is in the maths zone */}
+          {vL > 0.02 ? <CircleDot x={pr.p(vt)[0] + 10} y={pr.p(vt)[1] - 64} r={18} w={4} c={C.second} o={fin(f, t1)} /> : null}
+          {vL > 0.02 ? <Lbl x={pr.p(vt)[0] + 36} y={pr.p(vt)[1] - 64} t="y · east" c={C.second} s={T.floor} o={fin(f, t1)} /> : null}
           {vL <= 0.02 ? <L3 pr={pr} at={pin} t="v = (0, 0, 0)" c={C.second} s={T.key} a="start" dx={40} dy={40} o={fin(f, AT(k, 7, "at the poles") + 20)} /> : null}
           <Tick3 pr={pr} at={pin} u1={HE_E} u2={[0, 1, 0]} s={0.12} o={fin(f, t1 + 10) * fout(f, t7)} />
           <Tick3 pr={pr} at={pin} u1={HE_E} u2={norm3(mul3(pin, -1))} s={0.12} c={C.first} o={fin(f, t1 + 16) * fout(f, t7)} />
-          <Keyword f={f} text="east" at={[pr.p(vt)[0] + 30, pr.p(vt)[1] + 70]} appear={AT(k, 6, "towards the east")} out={t7} targets={[]} />
+
           <Keyword f={f} text="faster than sound" at={[1100, 760]} appear={AT(k, 7, "faster than sound")} targets={[]} />
         </>}
       </HalfEarthView>
@@ -2825,7 +2833,9 @@ const S25B: React.FC = () => {
       <CalcStack f={f} x={1200} y={400} size={44} rows={[
         { lhs: OL, rhs: OP[0], at: t5, h: 90 },
         { rhs: OP[1], at: AT(k, 6, "three hundred"), cont: true, c: C.key, h: 90 },
-      ]} />
+      ]} o={fout(f, t7 - 6)} />
+      <Svg><Lbl x={1080} y={430} t={rlab} c={C.first} s={T.key} o={fin(f, t7)} />
+        <Lbl x={1080} y={510} t={label} c={C.second} s={T.key} o={fin(f, t7) * (la > 89 ? 0 : 1)} /></Svg>
     </Scene>
   );
 };
@@ -2859,6 +2869,7 @@ const S26: React.FC = () => {
         }}
       </GlobeView>
       <Svg>
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="air over the spinning ground" at={[1150, 160]} appear={AT(k, 0, "air moving")} out={AT(k, 1, "We turn with Earth") - 8} targets={[]} />
         <Keyword f={f} text="turning with Earth" at={[1150, 160]} appear={AT(k, 1, "We turn with Earth")} out={t2} targets={[]} />
         <Keyword f={f} text="drifts sideways" at={[1150, 270]} appear={AT(k, 1, "drift sideways")} out={t2} targets={[]} />
         <Keyword f={f} text="Coriolis effect" at={[1150, 160]} appear={AT(k, 2, "Coriolis effect")} targets={[]} s={T.calc} />
@@ -3351,7 +3362,7 @@ const S28B: React.FC = () => {
   return (
     <Scene>
       <LocalPatch f={f} st={st} uO={fin(f, t1)} />
-      <Svg><Keyword f={f} text="flat wind" at={[1100, 160]} appear={AT(k, 0, "flat wind")} out={t2} targets={[]} /></Svg>
+      <Svg><Keyword f={f} text="flat wind" at={[1100, 160]} appear={AT(k, 0, "blow almost flat")} out={t2} targets={[]} /></Svg>
       <Table3 f={f} o={fin(f, t2 + 10)} grey={grey} greyO={greyO} links={links} cA={ROT} cB={C.first} labA="Ω:" labB="u:"
         rowA={["0", String.raw`\Omega\cos\varphi`, String.raw`\Omega\sin\varphi`]} rowB={["u", "v", "0"]} />
       <TeX s={String.raw`\boldsymbol\Omega\times\mathbf u = (\quad ${SLOT("east")}\quad ,\quad ${SLOT("north")}\quad ,\quad ${SLOT("up")}\quad )`} x={1420} y={160} size={48} ax={0.5} o={fin(f, t2) * fout(f, slots[0], 10)} />
@@ -3597,7 +3608,8 @@ const S31: React.FC = () => {
   const views = [{ x: 80, tr: paths.nh_track as number[][], st: paths.nh_start as number[], lab: "45°N · France", sense: "clockwise · from above", img: "cp/bmng_s31n.jpg",
     box: { lat: [41, 49] as [number, number], lon: [-5.1569, 6.1569] as [number, number] }, turn: "right · towards the south", tT: t3, o: fin(f, t1 - 10, 16) },
     { x: 980, tr: paths.sh_track as number[][], st: paths.sh_start as number[], lab: "45°S · Patagonia · Argentina", sense: "anticlockwise · from above", img: "cp/bmng_s31s.jpg",
-      box: { lat: [-49, -41] as [number, number], lon: [-75.1569, -63.8431] as [number, number] }, turn: "left · towards the north", tT: tL, o: fin(f, tPat - 6, 16) }];
+      box: { lat: [-49, -41] as [number, number], lon: [-75.1569, -63.8431] as [number, number] }, turn: "left · towards the north", tT: tL, o: fin(f, t1 - 10, 16) }];
+  const labO = [fin(f, t1 - 10, 16), fin(f, tPat - 6, 16)];   // fx1 (S10): the right view from S1, its label on "Patagonia\"
   const dkm = paths.inertial_diameter_km;
   const loc = fout(f, t1 - 4, 16);
   return (
@@ -3652,7 +3664,7 @@ const S31: React.FC = () => {
       })}
       <Svg>
         {views.map((v, i) => <g key={i}>
-          <Lbl x={v.x + VW / 2} y={VY + 70} t={v.lab} c={C.key} s={T.key} a="middle" o={v.o} />
+          <Lbl x={v.x + VW / 2} y={VY + 70} t={v.lab} c={C.key} s={T.key} a="middle" o={labO[i]} />
           <Lbl x={v.x + VW / 2} y={VY + 140} t="10 m/s · east" c={C.first} s={T.floor} a="middle" o={fin(f, t2 + 10 * i) * fout(f, t3 + 30)} />
           <Lbl x={v.x + VW / 2} y={VY + VH + 36} t={v.turn} c={C.key} s={T.key} a="middle" o={fin(f, v.tT) * fout(f, t5)} />
           <Lbl x={v.x + VW / 2} y={VY + VH + 36} t={v.sense} c={C.key} s={T.key} a="middle" o={fin(f, t5 + 20)} />
@@ -3694,7 +3706,8 @@ const S32: React.FC = () => {
         </>}
       </GlobeView>
       <Svg>
-        <Keyword f={f} text="reanalysis" at={[1260, 170]} appear={AT(k, 1, "reanalysis")} targets={[]} s={T.calc} />
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="real winds" at={[1260, 170]} appear={AT(k, 0, "real winds")} out={AT(k, 1, "reanalysis") - 8} targets={[]} s={T.calc} />
+    <Keyword f={f} text="reanalysis" at={[1260, 170]} appear={AT(k, 1, "reanalysis")} targets={[]} s={T.calc} />
         <StationIcon x={1290} y={330} o={fin(f, AT(k, 2, "millions of measurements"))} />
         <BalloonIcon x={1400} y={320} o={fin(f, AT(k, 2, "millions of measurements") + 6)} />
         <SatIcon x={1530} y={320} o={fin(f, AT(k, 2, "millions of measurements") + 12)} />
@@ -3756,6 +3769,7 @@ const S33: React.FC = () => {
         </>}
       </GlobeView>
       <Svg>
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="out of the highs, to the equator" at={[1100, 200]} appear={AT(k, 0, "flows out")} out={AT(k, 1, "turns it to the right") - 8} targets={[]} s={T.floor} />
         <Keyword f={f} text="turned right" at={[1300, 200]} appear={AT(k, 1, "turns it to the right")} out={t5} targets={[]} />
         <Keyword f={f} text="north-east trades" at={[1300, 290]} appear={AT(k, 1, "from the north east")} out={t5} targets={[]} />
         <Keyword f={f} text="turned left" at={[1300, 420]} appear={AT(k, 2, "turned to the left")} out={t5} targets={[]} />
@@ -3798,6 +3812,7 @@ const S34: React.FC = () => {
       </GlobeView>
       <Vignette id="v34" right={fin(f, t5 + 20, 30) * fout(f, t7 + 40, 30)} />
       <Svg>
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="out of the highs, to the poles" at={[1100, 200]} appear={AT(k, 0, "flows out")} out={AT(k, 1, "turned to the right") - 8} targets={[]} s={T.floor} />
         <Keyword f={f} text="turned right" at={[1300, 200]} appear={AT(k, 1, "turned to the right")} out={t3} targets={[]} />
         <Keyword f={f} text="turned left" at={[1300, 300]} appear={AT(k, 2, "turned to the left")} out={t3} targets={[]} />
         <Keyword f={f} text="westerlies" at={[1200, 200]} appear={AT(k, 3, "the westerlies")} out={t6} targets={[]} s={T.calc} />
@@ -4158,6 +4173,7 @@ const S39: React.FC = () => {
     <Scene>
       <Svg>
         <RoundLow g={RL0} o={fin(f, 6, 16)} iso={iso} ticks pin={fin(f, t5 + 30)} />
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="around highs and lows" at={[1150, 160]} appear={AT(k, 0, "how the wind blows")} out={AT(k, 1, "Air presses") - 8} targets={[]} />
         <Keyword f={f} text="pressure" at={[1150, 160]} appear={AT(k, 1, "Air presses")} targets={[]} />
         <Lbl x={1150} y={260} t="hectopascals: hPa" c={C.key} s={T.key} o={fin(f, AT(k, 2, "hectopascals"))} />
         <Lbl x={1150} y={360} t="≈ 1000 hPa" c={C.key} s={T.calc} o={fin(f, AT(k, 2, "about a thousand"))} />
@@ -4220,6 +4236,7 @@ const S40A: React.FC = () => {
         <Observer x={pin[0] + 60 + 140 * walk} y={pin[1] - 60} s={1.1} o={fin(f, t3)} />
         <Lbl x={pin[0] + 150} y={pin[1] - 250} t="left: low" c={C.gold} s={T.key} a="start" o={fin(f, AT(k, 4, "the low is on its left"))} />
         <Lbl x={pin[0]} y={pin[1] + 300} t="right: high" c={C.gold} s={T.key} a="middle" o={fin(f, AT(k, 4, "the high is on its right"))} />
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="the turning tool on grad p" at={[1100, 160]} appear={AT(k, 0, "turning tool")} out={t1 - 8} targets={[]} />
         <Keyword f={f} text="grad p: south" at={[1100, 160]} appear={t1} targets={[]} c={C.second} />
         <Keyword f={f} text="k × grad p: east" at={[1100, 240]} appear={AT(k, 2, "points east")} targets={[]} c={ROT} />
         <Keyword f={f} text="along the isobars" at={[1100, 340]} appear={t2} targets={[]} />
@@ -4258,6 +4275,7 @@ const S41: React.FC = () => {
         {Math.hypot(...cor) > 4 ? <Arrow p={pp} q={[pp[0] + cor[0], pp[1] + cor[1]]} color={ROT} w={7} head={26} o={fin(f, AT(k, 2, "turns it to the right"))} /> : null}
         <circle cx={pp[0]} cy={pp[1]} r={11} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, t1)} />
         <g opacity={fin(f, c0)}><ClockGlyph x={1190} y={150} r={30} h={(h * 12) % 12} /><Lbl x={1240} y={150} t={`t = ${h.toFixed(0)} h`} c={C.key} s={T.key} /></g>
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="zoom in" at={[1170, 260]} appear={AT(k, 0, "zoom in")} out={AT(k, 0, "almost straight") - 8} targets={[]} />
         <Keyword f={f} text="almost straight" at={[1170, 260]} appear={AT(k, 0, "almost straight")} out={t1} targets={[]} />
         <Keyword f={f} text="at rest" at={[1170, 260]} appear={AT(k, 1, "starts at rest")} out={t2} targets={[]} />
         <Keyword f={f} text="pressure push" at={[1170, 330]} appear={AT(k, 2, "pressure push")} targets={[]} c={C.second} />
@@ -4349,6 +4367,7 @@ const S42: React.FC = () => {
           <Lbl x={mx - L - 20} y={my} t="−u" c={C.first} s={T.key} a="end" o={turn2} />
         </g>
         <Keyword f={f} text="geostrophic wind" at={[1080, 810]} appear={AT(k, 7, "the geostrophic wind")} targets={[]} />
+        {/* fx1 (S10): the maths zone carries the first sentence's keyword */}<Keyword f={f} text="the same steps, as maths" at={[1100, 200]} appear={AT(k, 0, "the same steps")} out={t1 - 8} targets={[]} />
       </Svg>
       <CalcStack f={f} x={1520} y={60} size={50} maxLines={3} rows={[
         { lhs: { parts: G0P.map((q) => ({ ...q, t: DF(q.t) })), layers: [{ t: "all", o: 1 }, { u: [0, 1], o: fin(f, t1 + 30) }] }, rhs: G0R, at: t1, h: 220 },
@@ -4393,8 +4412,8 @@ const S43: React.FC = () => {
       <Layered parts={GEO_PARTS} layers={[{ t: "all", o: 1 }, { u: [4], o: fin(f, t1) }, { u: [3], o: fin(f, tK) }, { u: [2], o: fin(f, t2) }]} x={900} y={40} size={T.eq} ax={0.5} ay={0} o={fin(f, 6)} />
       <TeX s={String.raw`f \to 0`} x={1520} y={330} size={T.calc} c={C.neg} o={fin(f, AT(k, 4, "f goes to zero"))} />
       <Svg>
-        <Lbl x={1080} y={740} t="balance breaks down" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "breaks down"))} />
-        <Lbl x={1080} y={796} t="near the equator" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "breaks down"))} />
+        <Lbl x={1080} y={770} t="balance breaks down" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "breaks down"))} />
+        <Lbl x={1080} y={826} t="near the equator" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "breaks down"))} />
       </Svg>
     </Scene>
   );
@@ -4643,29 +4662,47 @@ const S46: React.FC = () => {
 };
 
 // ================================================================ s47 recap, s48 end card
+// fx1: the sentences are found by their words (v5 has two more: the turning per component and the axis seen from its tip;
+// Part 2 says "In the last video, we saw that…" and points to Part 1 in its last sentence), so one component serves both.
 const S47: React.FC = () => {
   const f = useCurrentFrame(), k = K("s47_recap");
-  const t = Array.from({ length: 10 }, (_, j) => SS(k, j));
-  const beat = (j: number, jEnd?: number) => fin(f, t[j] + (j === 0 ? 4 : 0), 10) * (jEnd !== undefined ? fout(f, t[jEnd] - 6, 10) : 1);
+  const S = A.sc[k].sentences;
+  const t = S.map((_, j) => SS(k, j));
+  const si = (ph: string) => S.findIndex((x) => x.text.toLowerCase().includes(ph.toLowerCase()));
+  const iLeave = si("leaves out its own direction"), iTurn = si("is the turning about its own axis"), iLen = si("Its length is"),
+    iDir = si("Its direction is"), iAxis = si("points along the axis of the turn"), iPhys = si("physics uses it"), iEarth = si("On the spinning Earth"),
+    iFlat = si("For flat winds"), iStorm = si("why storms spin"), iGeo = si("the geostrophic wind"), iLast = S.length - 1;
+  const p2 = A === ACT_P2;
+  const beat = (j: number, jEnd?: number) => (j < 0 ? 0 : fin(f, t[j] + (j === 0 ? 4 : 0), 10) * (jEnd !== undefined ? fout(f, t[jEnd] - 6, 10) : 1));
   const st = orbitCam({ az: 221, el: 28, dist: 15, target: [2.2, 1.3, 1.2], pp: [560, 430] }, PP);
   const prS = projector(st, W3, H3);
   const hp = handPlace(A3, [0, 0, 1], 1.4);
   const FT = P(...ALONG);
   const Q = (x: number, y: number): Pt => [x - 60 + 0, y];
+  const afterLeave = iTurn >= 0 ? iTurn : iLen;
+  const pairO = Math.min(1, beat(0, afterLeave) + beat(iDir, iPhys));   // fx1 (S10): the arrows stay through "each component…"
   return (
     <Scene>
-      {beat(0, 1) + beat(3, 4) > 0 ? <div style={{ opacity: Math.min(1, beat(0, 1) + beat(3, 4)) }}>
-        <PairFloor st={st} axb={1} para={beat(3, 4)}
-          children={<Hand3D q={hp.q} at={hp.at} s={1.4} angles={POSE.curl(1)} o={beat(3, 4)} glow={{ thumb: ROT }} />}
+      {pairO > 0 ? <div style={{ opacity: pairO }}>
+        <PairFloor st={st} axb={1} para={beat(iDir, iPhys)}
+          children={<Hand3D q={hp.q} at={hp.at} s={1.4} angles={POSE.curl(1)} o={beat(iDir, iPhys)} glow={{ thumb: ROT }} />}
           over={<>
-            <Tick3 pr={prS} at={[0, 0, 0]} u1={AH} u2={[0, 0, 1]} s={0.55} o={beat(0, 1)} />
-            <Tick3 pr={prS} at={[0, 0, 0]} u1={BH} u2={[0, 0, 1]} s={0.55} o={beat(0, 1)} />
+            <Tick3 pr={prS} at={[0, 0, 0]} u1={AH} u2={[0, 0, 1]} s={0.55} o={beat(0, iLeave)} />
+            <Tick3 pr={prS} at={[0, 0, 0]} u1={BH} u2={[0, 0, 1]} s={0.55} o={beat(0, iLeave)} />
             <TipL3 pr={prS} from={[0, 0, 0]} to={AXB3} t="a × b = (0, 0, 14)" c={ROT} s={T.key} />
           </>} />
       </div> : null}
-      <PairTags o={beat(0, 1)} />
+      <PairTags o={beat(0, iLeave)} />
       <Svg>
-        <g opacity={beat(2, 3)}>
+        {/* v5: each component = the turning in its own wall, + one turn − the other (the s50 / s21c picture) */}
+        <g opacity={beat(iTurn, iLen)}>
+          {([["x ← (y, z)", "yz"], ["y ← (z, x)", "zx"], ["z ← (x, y)", "xy"]] as [string, "yz" | "zx" | "xy"][]).map(([tt, pl], i) => <g key={tt}>
+            <WallTriad x={190} y={230 + 230 * i} plane={pl} />
+            <Lbl x={380} y={200 + 230 * i} t={tt} c={C.key} s={T.calc} />
+            <Lbl x={380} y={270 + 230 * i} t="+ one turn − the other" c={C.key} s={T.floor} />
+          </g>)}
+        </g>
+        <g opacity={beat(iLen, iDir)}>
           <polygon points={CORN.map((p) => Q(...p).join(",")).join(" ")} fill={ROT} fillOpacity={0.2} stroke={ROT} strokeWidth={3} />
           <Arrow p={Q(...O2)} q={Q(...ATIP)} color={C.first} />
           <Arrow p={Q(...O2)} q={Q(...BTIP)} color={C.second} o={0.5} />
@@ -4673,23 +4710,24 @@ const S47: React.FC = () => {
           <Band p={Q(...FT)} q={Q(...BTIP)} color={ROT} o={0.8} />
           <Lbl x={Q(...FT)[0] - 30} y={(Q(...FT)[1] + Q(...BTIP)[1]) / 2} t="across" c={ROT} s={T.key} a="end" />
         </g>
-        <g opacity={beat(4, 5)}>
+        <g opacity={beat(iPhys, iEarth)}>
           <Arrow p={[260, 330]} q={[260, 200]} color={ROT} w={10} />
           <line x1={150} y1={380} x2={380} y2={330} stroke="#c9d2e3" strokeWidth={18} strokeLinecap="round" />
-          <Lbl x={260} y={440} t="τ = r × F" c={C.key} s={T.key} a="middle" />
+          {/* Part 2 (fx1 S2): torque, angular momentum and the charge's push were taught in Part 1; the words, not the formulas */}
+          <Lbl x={p2 ? 220 : 260} y={440} t={p2 ? "torque" : "τ = r × F"} c={C.key} s={p2 ? T.floor : T.key} a="middle" />
           <circle cx={560} cy={330} r={70} fill="none" stroke={C.muted} strokeWidth={3} strokeDasharray="8 8" />
           <circle cx={630} cy={330} r={16} fill={C.second} />
           <Arrow p={[560, 330]} q={[560, 210]} color={ROT} w={10} />
-          <Lbl x={560} y={440} t="L = r × p" c={C.key} s={T.key} a="middle" />
+          <Lbl x={p2 ? 590 : 560} y={440} t={p2 ? "angular momentum" : "L = r × p"} c={C.key} s={p2 ? T.floor : T.key} a="middle" />
           <circle cx={860} cy={330} r={14} fill={C.key} />
           <Arrow p={[860, 330]} q={[960, 330]} color={C.first} w={8} />
           <Arrow p={[860, 330]} q={[860, 410]} color={C.second} w={8} />
-          <Lbl x={860} y={470} t="F = q v × B" c={C.key} s={T.key} a="middle" />
+          <Lbl x={860} y={p2 ? 510 : 470} t={p2 ? "moving charge" : "F = q v × B"} c={C.key} s={p2 ? T.floor : T.key} a="middle" />
           <circle cx={560} cy={660} r={110} fill="none" stroke={C.gold} strokeWidth={5} />
           <Arrow p={[560, 550]} q={[680, 550]} color={C.first} w={8} />
           <Arrow p={[560, 550]} q={[560, 620]} color={C.second} w={8} />
         </g>
-        <g opacity={beat(5, 6)}>
+        <g opacity={beat(iEarth, iFlat)}>
           <circle cx={300} cy={430} r={150} fill="#22406a" stroke={C.ink} strokeWidth={3} />
           <line x1={300} y1={250} x2={300} y2={610} stroke={C.gold} strokeWidth={5} strokeDasharray="12 8" />
           <Arrow p={[300, 430]} q={[406, 324]} color={C.first} w={8} />
@@ -4697,37 +4735,44 @@ const S47: React.FC = () => {
           <Disc cx={760} cy={430} s={45} ang={f / 60} />
         </g>
       </Svg>
-      <CompTable f={f} o={beat(1, 2)} grey={-1} greyO={0} links={[[1, 2, t[1] + 10], [2, 1, t[1] + 30], [2, 0, t[1] + 50], [0, 2, t[1] + 70], [0, 1, t[1] + 90], [1, 0, t[1] + 110]]} dy={-20} />
-      <TeX s={EQ_COMP} x={1830} y={790} size={46} ax={1} o={beat(1, 2)} />
-      <TeX s={String.raw`\mathbf a\times\mathbf b\ \perp\ \mathbf a,\ \mathbf b`} x={1150} y={300} size={T.calc} o={beat(0, 1)} />
-      <TeX s={EQ_SIN} x={1080} y={300} size={T.calc} o={beat(2, 3)} />
-      <TeX s={String.raw`= |\mathbf a|\times\text{across} = \text{area}`} x={1196} y={420} size={T.calc} c={ROT} o={beat(2, 3)} />
+      <CompTable f={f} o={beat(iLeave, iLeave + 1)} grey={-1} greyO={0} links={[[1, 2, t[iLeave] + 10], [2, 1, t[iLeave] + 30], [2, 0, t[iLeave] + 50], [0, 2, t[iLeave] + 70], [0, 1, t[iLeave] + 90], [1, 0, t[iLeave] + 110]]} dy={-20} />
+      <TeX s={EQ_COMP} x={1830} y={790} size={46} ax={1} o={beat(iLeave, iLeave + 1)} />
+      <TeX s={String.raw`\mathbf a\times\mathbf b\ \perp\ \mathbf a,\ \mathbf b`} x={1150} y={300} size={T.calc} o={beat(0, iLeave)} />
+      <TeX s={EQ_SIN} x={1080} y={300} size={T.calc} o={beat(iLen, iDir)} />
+      <TeX s={String.raw`= |\mathbf a|\times\text{across} = \text{area}`} x={1196} y={420} size={T.calc} c={ROT} o={beat(iLen, iDir)} />
       <Svg>
-        <Lbl x={1100} y={420} t="normal · right-hand rule" c={C.key} s={64} o={beat(3, 4)} />
-        <Lbl x={1080} y={420} t="push ⟂ motion → turns, same speed" c={C.key} s={T.floor} o={beat(4, 5)} />
-        <Lbl x={1100} y={560} t="north: right · south: left" c={C.key} s={T.key} o={beat(6, 8)} />
-        <Lbl x={1100} y={640} t="storms spin" c={C.key} s={T.key} o={beat(7, 8)} />
-        <Lbl x={1100} y={360} t="later videos: weather maps" c={C.key} s={T.key} o={beat(9)} />
-        <Lbl x={1100} y={440} t="grad, div, curl" c={C.key} s={T.key} o={beat(9)} />
-        <Lbl x={1100} y={520} t="∇   ∇·   ∇×" c={C.key} s={T.calc} o={beat(9)} />
+        <Lbl x={1100} y={300} t="each component:" c={C.key} s={T.key} o={beat(iTurn, iLen)} />
+        <Lbl x={1100} y={390} t="the turning about its axis" c={C.key} s={T.key} o={beat(iTurn, iLen)} />
+        <Lbl x={1100} y={480} t="minus: opposite turns" c={C.neg} s={T.key} o={beat(iTurn, iLen)} />
+        <Lbl x={1080} y={420} t={p2 ? "⟂ their plane · right-hand rule" : "normal · right-hand rule"} c={C.key} s={p2 ? 50 : 64} o={beat(iDir, iAxis >= 0 ? iAxis : iPhys)} />
+        <Lbl x={1100} y={330} t="direction = the axis of the turn" c={C.key} s={T.key} o={beat(iAxis, iPhys)} />
+        <Lbl x={1100} y={430} t="from its tip: anticlockwise" c={C.gold} s={T.key} o={beat(iAxis, iPhys)} />
+        <Lbl x={1080} y={330} t="from the last video" c={C.gold} s={T.key} o={p2 ? beat(iPhys, iEarth) : 0} />
+        <Lbl x={1080} y={420} t="push ⟂ motion → turns, same speed" c={C.key} s={T.floor} o={beat(iPhys, iEarth)} />
+        <Lbl x={1100} y={560} t="north: right · south: left" c={C.key} s={T.key} o={beat(iFlat, iGeo)} />
+        <Lbl x={1100} y={640} t="storms spin" c={C.key} s={T.key} o={beat(iStorm, iGeo)} />
+        <Lbl x={1100} y={260} t="the last video: why it's built this way" c={C.gold} s={T.floor} o={p2 ? fin(f, AT(k, iLast, "The last video")) : 0} />
+        <Lbl x={1100} y={360} t="later videos: weather maps" c={C.key} s={T.key} o={p2 ? fin(f, AT(k, iLast, "later videos")) : beat(iLast)} />
+        <Lbl x={1100} y={440} t="grad, div, curl" c={C.key} s={T.key} o={p2 ? fin(f, AT(k, iLast, "grad, div and curl")) : beat(iLast)} />
+        <Lbl x={1100} y={520} t="∇   ∇·   ∇×" c={C.key} s={T.calc} o={p2 ? fin(f, AT(k, iLast, "grad, div and curl")) : beat(iLast)} />
       </Svg>
-      <TeX s={EQ_VOR} x={1100} y={330} size={T.eq} o={beat(5, 6)} />
-      <TeX s={EQ_COR} x={1100} y={470} size={T.eq} c={ROT} o={fin(f, AT(k, 5, "minus two Omega")) * fout(f, t[6] - 6)} />
-      <TeX s={EQ_FKU} x={1100} y={420} size={T.eq} c={ROT} o={beat(6, 8)} />
-      <div style={{ position: "absolute", left: 120, top: 220, width: 420, height: 320, overflow: "hidden", opacity: beat(6, 8) }}>
+      <TeX s={EQ_VOR} x={1100} y={330} size={T.eq} o={beat(iEarth, iFlat)} />
+      <TeX s={EQ_COR} x={1100} y={470} size={T.eq} c={ROT} o={fin(f, AT(k, iEarth, "minus two Omega")) * fout(f, t[iFlat] - 6)} />
+      <TeX s={EQ_FKU} x={1100} y={420} size={T.eq} c={ROT} o={beat(iFlat, iGeo)} />
+      <div style={{ position: "absolute", left: 120, top: 220, width: 420, height: 320, overflow: "hidden", opacity: beat(iFlat, iGeo) }}>
         <Img src={staticFile("cp/ian_tc.jpg")} style={{ width: 900, position: "absolute", left: -330, top: -230 }} />
       </div>
-      <div style={{ position: "absolute", left: 580, top: 220, width: 420, height: 320, overflow: "hidden", opacity: beat(6, 8) }}>
+      <div style={{ position: "absolute", left: 580, top: 220, width: 420, height: 320, overflow: "hidden", opacity: beat(iFlat, iGeo) }}>
         <Img src={staticFile("cp/idai_14.jpg")} style={{ width: 1000, position: "absolute", left: -210, top: -310 }} />
       </div>
       <Svg>
-        <Lbl x={330} y={590} t="north: right" c={C.key} s={T.key} a="middle" o={beat(6, 8)} />
-        <Lbl x={790} y={590} t="south: left" c={C.key} s={T.key} a="middle" o={beat(6, 8)} />
+        <Lbl x={330} y={590} t="north: right" c={C.key} s={T.key} a="middle" o={beat(iFlat, iGeo)} />
+        <Lbl x={790} y={590} t="south: left" c={C.key} s={T.key} a="middle" o={beat(iFlat, iGeo)} />
       </Svg>
-      <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: beat(8), transform: "translate(40px, 150px) scale(0.6)", transformOrigin: "0 0" }}>
+      <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: beat(iGeo), transform: "translate(40px, 150px) scale(0.6)", transformOrigin: "0 0" }}>
         <StormMap f={f} isoD={40} geoO={1} actO={0} w10O={0} arcO={0} crowdO={0} lowO={0} />
       </div>
-      <TeX s={EQ_GEO} x={1080} y={420} size={T.eq} c={C.key} o={beat(8, 9)} />
+      <TeX s={EQ_GEO} x={1080} y={420} size={T.eq} c={C.key} o={beat(iGeo, iLast)} />
     </Scene>
   );
 };
@@ -4735,11 +4780,13 @@ const EndCard: React.FC<{ variant: "weather" | "maths"; id: string }> = ({ varia
   const f = useCurrentFrame(), k = K(id);
   const maths = variant === "maths";
   const t1 = SS(k, 1), t2 = SS(k, 2), tOther = AT(k, 2, "and the notebooks");
+  const p2 = A === ACT_P2;   // fx1 (Part 2 S7): thumbnail 2 is the Part 1 picture (parallelogram + a × b), marked "last video"
   const thumb = (x: number, i: number) => (
-    <g key={i} opacity={0.75}>
+    <g key={i} opacity={p2 && i === 1 ? 1 : 0.75}>
       <rect x={x - 150} y={150} width={300} height={190} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
       {i === 0 ? <><Arrow p={[x - 90, 300]} q={[x + 60, 270]} color={C.first} w={8} head={26} halo={false} /><Arrow p={[x - 90, 300]} q={[x - 50, 180]} color={C.second} w={8} head={26} halo={false} /></> : null}
       {i === 1 ? <><polygon points={`${x - 90},${300} ${x + 40},${300} ${x + 90},${230} ${x - 40},${230}`} fill={ROT} fillOpacity={0.3} stroke={ROT} strokeWidth={3} /><Arrow p={[x - 90, 300]} q={[x - 90, 170]} color={ROT} w={8} head={26} halo={false} /></> : null}
+      {i === 1 && p2 ? <rect x={x - 150} y={150} width={300} height={190} rx={16} fill="none" stroke={C.gold} strokeWidth={5} /> : null}
       {i === 2 && !maths ? <>{Array.from({ length: 12 }, (_, j) => <rect key={j} x={x - 120 + j * 20} y={170} width={20.5} height={150} fill={tColor(6 + j)} />)}<Arrow p={[x - 60, 245]} q={[x + 60, 245]} color={C.second} w={8} head={26} halo={false} /></> : null}
       {i === 2 && maths ? <>{[0, 1, 2].map((a) => [0, 1, 2].map((b) => <rect key={`${a}${b}`} x={x - 75 + 50 * b} y={170 + 50 * a} width={46} height={46}
         fill={(a + 1) % 3 === b ? C.first : (b + 1) % 3 === a ? C.neg : "none"} fillOpacity={0.35} stroke={C.grid} strokeWidth={2} />))}</> : null}
@@ -4750,6 +4797,7 @@ const EndCard: React.FC<{ variant: "weather" | "maths"; id: string }> = ({ varia
     <Scene>
       <Svg>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
+        {p2 ? <Lbl x={760} y={112} t="last video" c={C.gold} s={T.floor} a="middle" o={fin(f, 6)} /> : null}
         {/* the weather/climate/ocean ending (HOUSE_STYLE §3, user 2026-10-27): who the series is for, and that it shows the maths */}
         <Lbl x={960} y={415} t={maths ? "a series of maths tutorials" : "a series of tutorials"} c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         {maths ? <Lbl x={960} y={500} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} /> : <>
@@ -4784,6 +4832,7 @@ const EQ_TY = String.raw`(\mathbf r\times\mathbf F)_y = r_zF_x - r_xF_z = 0.2\ti
 const EQ_DET = String.raw`\mathbf r\times\mathbf F=\begin{vmatrix}\hat{\mathbf x}&\hat{\mathbf y}&\hat{\mathbf z}\\ r_x&r_y&r_z\\ F_x&F_y&F_z\end{vmatrix}=\hat{\mathbf x}(r_yF_z-r_zF_y)-\hat{\mathbf y}(r_xF_z-r_zF_x)+\hat{\mathbf z}(r_xF_y-r_yF_x)`;
 const EQ_TBALL = String.raw`\boldsymbol\tau=\mathbf r\times\mathbf F=(-0.2,\;0,\;0.2)\ \mathrm{N\,m}`;
 const EQ_WR = String.raw`\boldsymbol\omega\times\mathbf r`;
+const EQ_OXR0 = String.raw`\boldsymbol\Omega\times\mathbf r`;
 const EQ_FU0 = String.raw`\mathbf F\cdot\mathbf u = 0`;
 const V5 = v5 as unknown as {
   eps: { cycle: number[][]; anti: number[][]; z_terms: number[]; z: number };
@@ -4843,7 +4892,7 @@ const S15A: React.FC = () => {
         {/* the recipe's pairs while the notation is introduced (S0-S2) */}
         <g opacity={fin(f, 6) * fout(f, t3 - 12)}>
           {(["x ← (y, z)", "y ← (z, x)", "z ← (x, y)"]).map((t, i) => <Lbl key={t} x={180} y={330 + 110 * i} t={t} c={C.key} s={T.calc} />)}
-          <Lbl x={180} y={700} t="one short line for all three?" c={C.muted} s={T.floor} o={fin(f, 20)} />
+          <Lbl x={180} y={700} t="one short line for all three?" c={C.key} s={T.floor} o={fin(f, 20)} />
         </g>
         <g opacity={gridO}>
           {[0, 1, 2].map((i) => <g key={i} opacity={i === 2 ? 1 : 1 - 0.7 * zOnly}>
@@ -4858,6 +4907,7 @@ const S15A: React.FC = () => {
             <rect x={EPS_SL.x0[2]} y={EPS_SL.y0 + EPS_SL.c} width={EPS_SL.c} height={EPS_SL.c} fill="none" stroke={C.gold} strokeWidth={6} />
           </g> : null}
         </g>
+        <Keyword f={f} text="the whole recipe, short" at={[1080, 330]} appear={AT(k, 0, "a short way")} out={AT(k, 0, "index notation") - 8} targets={[]} />
         <Keyword f={f} text="index notation" at={[1080, 330]} appear={AT(k, 0, "index notation")} out={AT(k, 1, "the letters i, j and k") - 6} targets={[]} />
         <Keyword f={f} text="i, j, k: each x, y or z" at={[1080, 330]} appear={AT(k, 1, "the letters i, j and k")} out={t3 - 6} targets={[]} />
         <Keyword f={f} text="add up over every j and k" at={[1080, 440]} appear={AT(k, 2, "added up")} out={t3 - 6} targets={[]} s={T.floor} />
@@ -4907,10 +4957,10 @@ const S18D: React.FC = () => {
         <Keyword f={f} text="a right triangle" at={[560, 140]} appear={AT(k, 2, "right triangle")} out={t4} targets={[]} s={T.key} />
         {/* S3: both sides × |a|: the along part becomes a · b, the across part |a × b| (bars to scale, 30 px per unit) */}
         <g opacity={bars}>
-          <rect x={140} y={790} width={TP.dot * 30 * bars} height={26} fill={C.first} opacity={0.85} />
-          <Lbl x={160 + TP.dot * 30} y={803} t="|a| × along = a · b = 8" c={C.first} s={T.floor} />
-          <rect x={140} y={834} width={TP.cross * 30 * bars} height={26} fill={ROT} opacity={0.85} />
-          <Lbl x={160 + TP.cross * 30} y={847} t="|a| × across = |a × b| = 14" c={ROT} s={T.floor} />
+          <rect x={140} y={762} width={TP.dot * 30 * bars} height={26} fill={C.first} opacity={0.85} />
+          <Lbl x={160 + TP.dot * 30} y={775} t="|a| × along = a · b = 8" c={C.first} s={T.floor} />
+          <rect x={140} y={822} width={TP.cross * 30 * bars} height={26} fill={ROT} opacity={0.85} />
+          <Lbl x={160 + TP.cross * 30} y={835} t="|a| × across = |a × b| = 14" c={ROT} s={T.floor} />
         </g>
         <Keyword f={f} text="two products share b" at={[1080, 160]} appear={6} out={t1 - 4} targets={[]} />
         <Lbl x={1080} y={760} t="along + across: all of b" c={C.key} s={T.key} o={fin(f, AT(k, 7, "together they use all of b"))} />
@@ -4918,7 +4968,7 @@ const S18D: React.FC = () => {
       <TeX s={String.raw`\text{along} = |\mathbf b|\cos\theta`} x={1080} y={300} size={T.calc} c={C.first} o={fin(f, AT(k, 1, "cos theta")) * fout(f, t4 - 6)} />
       <TeX s={String.raw`\text{across} = |\mathbf b|\sin\theta`} x={1080} y={410} size={T.calc} c={ROT} o={fin(f, AT(k, 1, "sine theta")) * fout(f, t4 - 6)} />
       <TeX s={String.raw`\text{along}^2 + \text{across}^2 = |\mathbf b|^2`} x={1080} y={530} size={T.calc} o={fin(f, AT(k, 2, "long side is b")) * fout(f, t4 - 6)} />
-      <TeX s={String.raw`\text{both sides}\ \times\,|\mathbf a|^2`} x={1080} y={640} size={T.key} c={C.gold} o={fin(f, t3) * fout(f, t4 - 6)} />
+      <TeX s={String.raw`\text{each side}\ \times\,|\mathbf a|`} x={1080} y={640} size={T.key} c={C.gold} o={fin(f, t3) * fout(f, t4 - 6)} />
       <CalcStack f={f} x={1400} y={170} size={50} maxLines={4} rows={[
         { lhs: LG_L, rhs: LG_R, at: AT(k, 4, "a dot b squared"), h: 110 },
         { lhs: String.raw`8^2 + 14^2`, rhs: String.raw`= 64 + 196`, at: AT(k, 5, "eight squared"), h: 100 },
@@ -4936,7 +4986,7 @@ const S18D: React.FC = () => {
 // display units (1 unit = 0.1 m of arm = 10 N of push); the numbers on screen are the data's.
 const PT = mkP(260, 700, 150);
 const MiniTorque: React.FC<{ f: number; h: string; v: string; out: string; o?: number; arm: number; push: number; split: number; hiA: number; hiB: number;
-  arcA: number; arcB: number; tauO?: number; tauLab?: string; wall?: number }> = ({ f, h, v, out, o = 1, arm, push, split, hiA, hiB, arcA, arcB, tauO = 0, tauLab = "", wall = 0 }) => {
+  arcA: number; arcB: number; tauO?: number; tauLab?: string; wall?: number; rO?: number }> = ({ f, h, v, out, o = 1, arm, push, split, hiA, hiB, arcA, arcB, tauO = 0, tauLab = "", wall = 0, rO }) => {
   if (o <= 0) return null;
   const O = PT(0, 0), H = PT(2, 1), Hx = PT(2, 0), FY = PT(2, 4), FX = PT(3, 1);
   const dimF = (hi: number) => 1 - 0.65 * Math.max(hiA, hiB) + 0.65 * hi;
@@ -4950,15 +5000,15 @@ const MiniTorque: React.FC<{ f: number; h: string; v: string; out: string; o?: n
       {wall > 0 ? <rect x={PT(-1, 4)[0]} y={PT(-1, 4)[1]} width={PT(4, 0)[0] - PT(-1, 0)[0]} height={PT(0, -1)[1] - PT(0, 4)[1]} fill={C.key} opacity={0.05 * wall} /> : null}
       <Grid P={PT} xr={[-1, 4]} yr={[-1, 4]} o={0.6} />
       <Lbl x={PT(4, 0)[0] + 24} y={O[1]} t={h} c={C.muted} s={T.key} />
-      <Lbl x={O[0]} y={PT(0, 4)[1] - 36} t={v} c={C.muted} s={T.key} a="middle" />
+      <Lbl x={O[0] + 28} y={PT(0, 3.3)[1]} t={v} c={C.muted} s={T.key} a="start" />{/* fx1 (S7): inside the content area, under the "towards you" tag */}
       <CircleDot x={PT(-1, 4)[0] + 34} y={PT(-1, 4)[1] + 40} r={20} w={4} c={C.muted} />
       <Lbl x={PT(-1, 4)[0] + 66} y={PT(-1, 4)[1] + 40} t={`${HAT[out]} towards you`} c={C.muted} s={T.floor} a="start" />
       {/* the spanner: a wide grey bar from the bolt to the hand, a hex at the bolt */}
       <line x1={O[0]} y1={O[1]} x2={H[0]} y2={H[1]} stroke="#c9d2e3" strokeWidth={30} strokeLinecap="round" opacity={0.35 * arm} />
       <polygon points={Array.from({ length: 6 }, (_, i) => `${O[0] + 26 * Math.cos((i * Math.PI) / 3)},${O[1] + 26 * Math.sin((i * Math.PI) / 3)}`).join(" ")} fill="#3a4766" stroke="#c9d2e3" strokeWidth={4} opacity={arm} />
-      <Arrow p={O} q={H} color={C.first} o={arm * (1 - 0.5 * split)} />
-      <Lbl x={(O[0] + H[0]) / 2 - 20} y={(O[1] + H[1]) / 2 - 40} t="r" c={C.first} s={T.calc} a="end" o={arm} />
-      <Arrow p={H} q={add(H, [FY[0] - H[0] + FX[0] - H[0], FY[1] - H[1]])} color={C.second} o={push * (1 - 0.6 * split)} />
+      <Arrow p={O} q={H} color={C.first} o={(rO ?? arm) * (1 - 0.5 * split)} />
+      <Lbl x={(O[0] + H[0]) / 2 - 20} y={(O[1] + H[1]) / 2 - 40} t="r" c={C.first} s={T.calc} a="end" o={rO ?? arm} />
+      <Arrow p={H} q={add(H, [FY[0] - H[0] + FX[0] - H[0], FY[1] - H[1]])} color={C.second} o={push * (1 - split)} />{/* fx1 (S7): gone once split, so it never crosses "30 N along" */}
       <Lbl x={FY[0] + FX[0] - H[0] + 30} y={FY[1] + 10} t="F" c={C.second} s={T.calc} a="start" o={push * (1 - split)} />
       {/* split: the arm's two parts (dashed teal) and the push's two parts (orange, the h-part dashed) */}
       <g opacity={split}>
@@ -4988,7 +5038,7 @@ const WallTriad: React.FC<{ x: number; y: number; plane: "xy" | "yz" | "zx"; o?:
     <g opacity={o}>
       <polygon points={`${x},${y} ${x + a[0]},${y + a[1]} ${x + a[0] + b[0]},${y + a[1] + b[1]} ${x + b[0]},${y + b[1]}`} fill={C.gold} fillOpacity={0.22} stroke={C.gold} strokeWidth={3} />
       {(["x", "y", "z"] as const).map((t) => <g key={t}><Arrow p={[x, y]} q={[x + E[t][0] * 1.25, y + E[t][1] * 1.25]} color={C.muted} w={5} head={16} halo={false} />
-        <Lbl x={x + E[t][0] * 1.25 + (t === "x" ? -22 : t === "y" ? 26 : 0)} y={y + E[t][1] * 1.25 + (t === "z" ? -24 : 18)} t={t} c={C.muted} s={T.floor} a="middle" /></g>)}
+        <Lbl x={x + E[t][0] * 1.25 + (t === "x" ? -26 : t === "y" ? 30 : 0)} y={y + E[t][1] * 1.25 + (t === "z" ? -28 : 20)} t={t} c={C.key} s={T.key} a="middle" /></g>)}
     </g>
   );
 };
@@ -5005,7 +5055,7 @@ const S21A: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <MiniTorque f={f} h="x" v="y" out="z" arm={fin(f, AT(k, 1, "lay a spanner"), 14)} push={fin(f, AT(k, 2, "the push, F"), 14)} split={fin(f, t3, 16)}
+        <MiniTorque f={f} h="x" v="y" out="z" arm={fin(f, 4, 14)} rO={fin(f, AT(k, 2, "Its arm, r"), 14)} push={fin(f, AT(k, 2, "the push, F"), 14)} split={fin(f, t3, 16)}
           hiA={hiA} hiB={hiB} arcA={arcA} arcB={arcB} tauO={fin(f, AT(k, 8, "five newton metres"), 16)} tauLab={`τ = (0, 0, ${sgnI(Z.tau[2])}) N m`} />
         <Keyword f={f} text="the minus sign?" at={[1100, 160]} appear={AT(k, 0, "the minus sign")} out={t2} targets={[]} />
         <Lbl x={1100} y={250} t="flat on the floor, seen from above" c={C.key} s={T.floor} o={fin(f, t1) * fout(f, t3)} />
@@ -5014,10 +5064,12 @@ const S21A: React.FC = () => {
         <Lbl x={1100} y={790} t="two little torques fight" c={C.key} s={T.key} o={fin(f, t8) * fout(f, t10 + 30)} />
         <Lbl x={1100} y={790} t="minus: opposite turns" c={C.neg} s={T.key} o={fin(f, AT(k, 10, "opposite directions"))} />
       </Svg>
-      <CalcStack f={f} x={1330} y={480} size={T.calc} maxLines={3} rows={[
-        { lhs: String.raw`\textcolor{${ROT}}{+}`, rhs: String.raw`0.2\times30 = 6`, at: AT(k, 5, "point two times thirty"), h: 96, c: ROT },
-        { lhs: String.raw`\textcolor{${C.neg}}{-}`, rhs: String.raw`0.1\times10 = 1`, at: AT(k, 7, "point one times ten"), h: 96, c: C.neg },
-        { lhs: String.raw`\tau_z`, rhs: String.raw`= 6 - 1 = \mathbf{5}\ \mathrm{N\,m}`, at: AT(k, 8, "six minus one"), h: 96, c: C.key },
+      {/* fx1 (M1): each little torque is a true line, its sense written beside it (violet ↺ anticlockwise, rose ↻ clockwise);
+          the subtraction comes only in the τ_z line */}
+      <CalcStack f={f} x={1215} y={480} size={50} maxLines={3} rows={[
+        { lhs: String.raw`\textcolor{${ROT}}{\circlearrowleft}`, rhs: String.raw`0.2\times30 = 6\ \ \text{anticlockwise}`, at: AT(k, 5, "point two times thirty"), h: 90, c: ROT },
+        { lhs: String.raw`\textcolor{${C.neg}}{\circlearrowright}`, rhs: String.raw`0.1\times10 = 1\ \ \text{clockwise}`, at: AT(k, 7, "point one times ten"), h: 90, c: C.neg },
+        { lhs: String.raw`\tau_z`, rhs: String.raw`= 6 - 1 = \mathbf{5}\ \mathrm{N\,m}`, at: AT(k, 8, "six minus one"), h: 90, c: C.key },
       ]} />
       <TeX s={TZ_L} x={1140} y={200} size={T.calc} ax={1} o={fin(f, t9)} />
       <Layered parts={[{ t: "=" }, ...TZP]} layers={[{ t: "all", o: 1 }, { u: [1, 3], o: fin(f, AT(k, 9, "minus the y part")) }]} x={1150} y={168} size={T.calc} ay={0} o={fin(f, t9)} />
@@ -5034,18 +5086,18 @@ const S21B: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <MiniTorque f={f} h="y" v="z" out="x" wall={fin(f, t1)} arm={fin(f, AT(k, 2, "the arm reaches"), 14)} push={fin(f, AT(k, 2, "the push has"), 14)}
+        <MiniTorque f={f} h="y" v="z" out="x" wall={fin(f, 4)} arm={fin(f, 4, 14)} rO={fin(f, AT(k, 2, "the arm reaches"), 14)} push={fin(f, AT(k, 2, "the push has"), 14)}
           split={fin(f, t3 - 10, 14)} hiA={hiA} hiB={hiB} arcA={arcA} arcB={arcB} tauO={fin(f, AT(k, 6, "five newton metres"), 16)} tauLab={`τ = (${sgnI(X.tau[0])}, 0, 0) N m`} />
-        <WallTriad x={880} y={210} plane="yz" o={fin(f, t1)} />
+        <WallTriad x={880} y={245} plane="yz" o={fin(f, 4)} />
         <Keyword f={f} text="the x component, the same way" at={[1100, 150]} appear={AT(k, 0, "the x component")} out={AT(k, 1, "Turning about the x axis") - 6} targets={[]} />
         <Keyword f={f} text="turning about x → the y-z wall" at={[1100, 150]} appear={AT(k, 1, "Turning about the x axis")} out={t7} targets={[]} s={T.key} />
         <Lbl x={1100} y={250} t="r = (0, 0.2, 0.1) m" c={C.first} s={T.key} o={fin(f, AT(k, 2, "the arm reaches"))} />
         <Lbl x={1100} y={330} t="F = (0, 10, 30) N" c={C.second} s={T.key} o={fin(f, AT(k, 2, "the push has"))} />
         <Lbl x={1100} y={430} t="seen from the tip of x̂" c={C.key} s={T.floor} o={fin(f, AT(k, 4, "Seen from the tip of x hat"))} />
       </Svg>
-      <CalcStack f={f} x={1330} y={500} size={T.key} maxLines={3} rows={[
-        { lhs: String.raw`\textcolor{${ROT}}{+}\,r_yF_z`, rhs: String.raw`= 0.2\times30 = 6`, at: AT(k, 4, "point two times thirty"), h: 84, c: ROT },
-        { lhs: String.raw`\textcolor{${C.neg}}{-}\,r_zF_y`, rhs: String.raw`= 0.1\times10 = 1`, at: AT(k, 5, "point one times ten"), h: 84, c: C.neg },
+      <CalcStack f={f} x={1240} y={500} size={46} maxLines={3} rows={[
+        { lhs: String.raw`\textcolor{${ROT}}{\circlearrowleft}\ r_yF_z`, rhs: String.raw`= 0.2\times30 = 6\ \ \text{anticlockwise}`, at: AT(k, 4, "point two times thirty"), h: 84, c: ROT },
+        { lhs: String.raw`\textcolor{${C.neg}}{\circlearrowright}\ r_zF_y`, rhs: String.raw`= 0.1\times10 = 1\ \ \text{clockwise}`, at: AT(k, 5, "point one times ten"), h: 84, c: C.neg },
         { lhs: String.raw`(\mathbf r\times\mathbf F)_x`, rhs: String.raw`= 6 - 1 = \mathbf{5}\ \mathrm{N\,m}`, at: AT(k, 6, "we subtract"), h: 84, c: C.key },
       ]} o={fout(f, t7 - 4)} />
       <CalcStack f={f} x={1340} y={520} size={T.key} maxLines={3} rows={[
@@ -5071,18 +5123,31 @@ const S21C: React.FC = () => {
       <Svg>
         <MiniTorque f={f} h="z" v="x" out="y" wall={1} o={pic} arm={fin(f, 8, 14)} push={fin(f, 16, 14)} split={fin(f, AT(k, 3, "a push of") + 20, 14)}
           hiA={fin(f, AT(k, 3, "point two times thirty"), 10) * fout(f, AT(k, 3, "five again") - 6, 10)} hiB={0} arcA={arcA} arcB={arcB} tauO={fin(f, AT(k, 3, "five again"), 16)} tauLab={`τ = (0, ${sgnI(Y.tau[1])}, 0) N m`} />
-        <WallTriad x={880} y={210} plane="zx" o={pic * fin(f, 8)} />
-        <CycleWheel x={1730 - 170 * easeIO(clamp((f - t4) / 16, 0, 1))} y={700 - 550 * easeIO(clamp((f - t4) / 16, 0, 1))} r={62} o={fin(f, AT(k, 1, "Following the cycle")) * fout(f, t8 - 6)} arcs={3} hi={f < AT(k, 1, "z comes before x") ? -1 : f < AT(k, 1, "z comes before x") + 30 ? 2 : 0} />
+        <WallTriad x={880} y={245} plane="zx" o={pic * fin(f, 8)} />
+        <CycleWheel x={1730 - 170 * easeIO(clamp((f - t4) / 16, 0, 1))} y={700 - 575 * easeIO(clamp((f - t4) / 16, 0, 1))} r={62} o={fin(f, AT(k, 1, "Following the cycle")) * fout(f, t8 - 6)} arcs={3} hi={f < AT(k, 1, "z comes before x") ? -1 : f < AT(k, 1, "z comes before x") + 30 ? 2 : 0} />
         <Lbl x={1100} y={150} t="turning about y → the z-x wall" c={C.key} s={T.key} o={fin(f, 6) * fout(f, t4 - 6)} />
         <Lbl x={1100} y={240} t="cycle: z before x" c={C.gold} s={T.key} o={fin(f, AT(k, 1, "z comes before x")) * fout(f, t4 - 6)} />
         <Keyword f={f} text="determinant" at={[1100, 150]} appear={AT(k, 4, "a determinant")} out={t8 - 6} targets={[]} />
-        <Lbl x={1100} y={510} t="we only need what it gives" c={C.muted} s={T.floor} o={fin(f, t5) * fout(f, t6)} />
-        {/* s8: the one pattern */}
+        <Lbl x={1100} y={510} t="we only need what it gives" c={C.key} s={T.floor} o={fin(f, t5) * fout(f, t6)} />
+        {/* s8 (fx1 S3): the one pattern as three mini walls, each with its own two turns: + violet anticlockwise, − rose clockwise */}
         <g opacity={fin(f, t8)}>
-          {(["x ← (y, z)", "y ← (z, x)", "z ← (x, y)"]).map((r, i) => <Lbl key={i} x={140} y={250 + 120 * i} t={r} c={C.key} s={T.calc} />)}
-          <Lbl x={140} y={640} t="+ with the cycle" c={C.gold} s={T.key} o={fin(f, AT(k, 8, "a plus for the turn"))} />
-          <Lbl x={140} y={720} t="− against it" c={C.neg} s={T.key} o={fin(f, AT(k, 8, "a minus for the turn"))} />
+          {([["x ← (y, z)", "yz"], ["y ← (z, x)", "zx"], ["z ← (x, y)", "xy"]] as [string, "yz" | "zx" | "xy"][]).map(([r, pl], i) => {
+            const y0 = 225 + 235 * i, cx = 820, cy = y0 - 10;
+            const arcP = (r0: number, a0: number, a1: number) => Array.from({ length: 25 }, (_, j) => { const a = (a0 + ((a1 - a0) * j) / 24) * D2R; return `${cx + r0 * Math.cos(a)},${cy - r0 * Math.sin(a)}`; }).join(" ");
+            const pO = fin(f, AT(k, 8, "a plus for the turn") + 6 * i), mO = fin(f, AT(k, 8, "a minus for the turn") + 6 * i);
+            return <g key={r}>
+              <WallTriad x={190} y={y0 + 20} plane={pl} />
+              <Lbl x={380} y={y0 - 20} t={r} c={C.key} s={T.calc} />
+              <polyline points={arcP(46, -30, 200)} fill="none" stroke={ROT} strokeWidth={7} opacity={pO} />
+              <polyline points={`${cx + 46 * Math.cos(200 * D2R) + 16},${cy - 46 * Math.sin(200 * D2R) - 14} ${cx + 46 * Math.cos(200 * D2R)},${cy - 46 * Math.sin(200 * D2R)} ${cx + 46 * Math.cos(200 * D2R) + 20},${cy - 46 * Math.sin(200 * D2R) + 10}`} fill="none" stroke={ROT} strokeWidth={6} opacity={pO} />
+              <polyline points={arcP(68, 160, -70)} fill="none" stroke={C.neg} strokeWidth={6} strokeDasharray="12 8" opacity={mO} />
+              <Lbl x={cx - 110} y={cy} t="+" c={ROT} s={T.calc} a="middle" o={pO} />
+              <Lbl x={cx + 110} y={cy} t="−" c={C.neg} s={T.calc} a="middle" o={mO} />
+            </g>;
+          })}
         </g>
+        <Lbl x={1100} y={120} t="+ with the cycle" c={C.gold} s={T.key} o={fin(f, AT(k, 8, "a plus for the turn"))} />
+        <Lbl x={1540} y={120} t="− against it" c={C.neg} s={T.key} o={fin(f, AT(k, 8, "a minus for the turn"))} />
       </Svg>
       <CalcStack f={f} x={1330} y={330} size={T.key} maxLines={3} rows={[
         { lhs: String.raw`(\mathbf r\times\mathbf F)_y`, rhs: String.raw`= r_zF_x - r_xF_z`, at: t2, h: 90 },
@@ -5091,11 +5156,13 @@ const S21C: React.FC = () => {
       ]} o={fout(f, t4, 12)} />
       <TeX s={String.raw`(\mathbf r\times\mathbf F)_y = r_zF_x - r_xF_z`} x={1150} y={760} size={T.key} c={C.gold} o={fin(f, t4 + 6) * fout(f, t8 - 6)} />
       {([[String.raw`+\,r_yF_z`, String.raw`-\,r_zF_y`], [String.raw`+\,r_zF_x`, String.raw`-\,r_xF_z`], [String.raw`+\,r_xF_y`, String.raw`-\,r_yF_x`]]).map((r, i) => <React.Fragment key={i}>
-        <TeX s={r[0]} x={1100} y={250 + 120 * i} size={T.calc} c={C.gold} o={fin(f, t8)} />
-        <TeX s={r[1]} x={1420} y={250 + 120 * i} size={T.calc} c={C.neg} o={fin(f, t8)} />
+        <TeX s={r[0]} x={1100} y={205 + 235 * i} size={T.calc} c={ROT} o={fin(f, t8 + 6 * i) * (0.45 + 0.55 * fin(f, AT(k, 8, "a plus for the turn") + 6 * i))} />
+        <TeX s={r[1]} x={1540} y={205 + 235 * i} size={T.calc} c={C.neg} o={fin(f, t8 + 6 * i) * (0.45 + 0.55 * fin(f, AT(k, 8, "a minus for the turn") + 6 * i))} />
       </React.Fragment>)}
-      <TeX s={DL} x={1100} y={340} size={T.calc} o={det} />
-      <Layered parts={DET_PARTS} layers={[{ t: "all", o: 1 }, { t: [1], tc: { 1: C.gold }, o: fin(f, t6) }]} x={120} y={620} size={54} ay={0.5} o={det} />
+      <TeX s={DL} x={1100} y={345} size={T.calc} o={det} />
+      {/* fx1 (S3): the expansion at the 68-px calculation size on two lines (the subscripts are the point of it) */}
+      <Layered parts={DET_PARTS.slice(0, 2)} layers={[{ t: "all", o: 1 }, { t: [1], tc: { 1: C.gold }, o: fin(f, t6) }]} x={120} y={560} size={T.calc} ay={0.5} o={det} />
+      <Layered parts={DET_PARTS.slice(2)} layers={[{ t: "all", o: 1 }]} x={120} y={660} size={T.calc} ay={0.5} o={det} />
       <TeX s={String.raw`-\hat{\mathbf y}(r_xF_z-r_zF_x) = \hat{\mathbf y}(r_zF_x-r_xF_z)`} x={120} y={760} size={T.key} c={C.gold} o={fin(f, AT(k, 7, "swaps the two products")) * fout(f, t8 - 6)} />
       <Svg><CurvedLink f={f} from={[975, 790]} to={[1140, 790]} start={AT(k, 7, "exactly our cycle order")} end={t8 - 6} bend={0} /></Svg>
     </Scene>
@@ -5151,7 +5218,7 @@ const S21D: React.FC = () => {
         <Ball3D at={[0, 0, 0]} r={R} color="#5d6b8f" o={fin(f, 4, 14)} />
         <Arrow3D from={[0, 0, 0]} to={r3} color={C.first} grow={fin(f, AT(k, 2, "your finger, r"), 16)} onTop />
         <Arrow3D from={add3(touch, F3, -0.5 * (1 - finger))} to={add3(touch, F3, 1 - 0.5 * (1 - finger))} color={C.second} o={fin(f, AT(k, 1, "brush your finger"), 10)} onTop />
-        <Arrow3D from={[0, 0, 0]} to={tx} color={ROT} px={10} head={36} o={cx * (1 - 0.5 * add)} grow={cx} dash onTop />
+        <Arrow3D from={[0, 0, 0]} to={tx} color={C.neg} px={10} head={36} o={cx * (1 - 0.5 * add)} grow={cx} dash onTop />
         <Arrow3D from={add3([0, 0, 0], tx, add)} to={add3(tz, tx, add)} color={ROT} px={10} head={36} o={cz * (1 - 0.5 * add)} grow={cz} onTop />
         <Arrow3D from={[0, 0, 0]} to={add3(tx, tz)} color={ROT} px={14} head={46} o={add} grow={add} onTop />
         <Rod3D a={mul3(n, -1.6)} b={mul3(n, 3.2)} px={4} color={C.gold} o={0.8 * spinO} />
@@ -5161,7 +5228,7 @@ const S21D: React.FC = () => {
         {[["x", 3.3], ["y", 3.3], ["z", 3.3]].map(([t, L], i) => <L3 key={t as string} pr={pr} at={mul3(UNIT[i], L as number)} t={t as string} c={C.muted} s={T.key} />)}
         <TipL3 pr={pr} from={[0, 0, 0]} to={r3} t="r" c={C.first} s={T.calc} o={fin(f, AT(k, 2, "your finger, r"))} />
         <TipL3 pr={pr} from={touch} to={add3(touch, F3)} t="F" c={C.second} s={T.calc} o={fin(f, AT(k, 2, "your push, F"))} />
-        <L3 pr={pr} at={tx} t="about x: −0.2" c={ROT} s={T.floor} a="end" dx={-20} dy={50} o={cx * (1 - add)} />
+        <L3 pr={pr} at={tx} t="about x: −0.2" c={C.neg} s={T.floor} a="end" dx={-44} dy={74} o={cx * (1 - add)} />
         <L3 pr={pr} at={tz} t="about z: +0.2" c={ROT} s={T.floor} a="start" dx={30} o={cz * (1 - add)} />
         <L3 pr={pr} at={add3(tx, tz)} t="τ: tilted axis" c={ROT} s={T.key} a="end" dx={-30} dy={20} o={add} />
         <Lbl x={1100} y={150} t="all three together" c={C.key} s={T.key} o={fin(f, 6) * fout(f, t5 - 6)} />
@@ -5171,7 +5238,6 @@ const S21D: React.FC = () => {
         <Lbl x={1100} y={260} t="r = (0.1, 0, 0.1) m" c={C.first} s={T.key} o={fin(f, AT(k, 5, "point one metres along x"))} />
         <Lbl x={1100} y={350} t="F = (0, 2, 0) N" c={C.second} s={T.key} o={fin(f, AT(k, 5, "two newtons along y"))} />
         <Lbl x={1100} y={600} t="spins about the tilted axis" c={C.gold} s={T.key} o={spinO} />
-        <Lbl x={1100} y={680} t="45° between up and −x" c={C.muted} s={T.floor} o={fin(f, AT(k, 7, "a tilted axis"))} />
       </Svg>
       <TeX s={EQ_TBALL} x={1080} y={470} size={T.key} o={fin(f, t6)} glow={pulse(f, t6 + 10, 24)} />
     </Scene>
@@ -5179,46 +5245,122 @@ const S21D: React.FC = () => {
 };
 
 // ---------------------------------------------------------------- s22w when to reach for the cross product
+// fx1 (review 1 M2): no slide. Four mini-pictures from earlier scenes (door s03, spanner s20, ball on a string s22c, globe
+// s24-s28); in each the first arrow is teal and the second orange, lit on their words in S3/S4; S5 shows the along/across
+// picture (s18b/s18d) with the ⟂ result; S6 brings the four pictures back, each lit on its product. Schematic icons, no data.
+const MINI4 = [{ x: 100, y: 80 }, { x: 560, y: 80 }, { x: 100, y: 470 }, { x: 560, y: 470 }];
+const MiniBox: React.FC<{ i: number; o: number; first: number; second: number; second2?: number; hi?: number }> = ({ i, o, first, second, second2 = 0, hi = 0 }) => {
+  if (o <= 0) return null;
+  const { x, y } = MINI4[i];
+  const lit = (v: number) => 0.3 + 0.7 * v;
+  const fr = <rect x={x} y={y} width={420} height={360} rx={18} fill="none" stroke={C.gold} strokeWidth={4} opacity={hi} />;
+  if (i === 0) { // the door seen from above: hinge, r along the door to the hand, F at a right angle
+    const H: Pt = [x + 70, y + 250], Hd: Pt = [x + 330, y + 250];
+    return <g opacity={o}>{fr}
+      <path d={`M ${x + 330} ${y + 250} A 260 260 0 0 0 ${x + 70 + 260 * Math.cos(-55 * D2R)} ${y + 250 + 260 * Math.sin(-55 * D2R)}`} fill="none" stroke={C.muted} strokeWidth={4} strokeDasharray="10 10" opacity={0.6} />
+      <line x1={H[0]} y1={H[1]} x2={x + 360} y2={H[1]} stroke="#c9d2e3" strokeWidth={20} strokeLinecap="round" opacity={0.35} />
+      <circle cx={H[0]} cy={H[1]} r={13} fill={C.gold} />
+      <Arrow p={H} q={Hd} color={C.first} w={9} head={32} o={lit(first)} />
+      <Lbl x={(H[0] + Hd[0]) / 2} y={H[1] + 58} t="r" c={C.first} s={T.calc} a="middle" o={lit(first)} />
+      <Arrow p={Hd} q={[Hd[0], Hd[1] - 150]} color={C.second} w={9} head={32} o={lit(second)} />
+      <Lbl x={Hd[0] + 26} y={Hd[1] - 120} t="F" c={C.second} s={T.calc} o={lit(second)} />
+    </g>;
+  }
+  if (i === 1) { // the spanner on a bolt
+    const B: Pt = [x + 90, y + 260], a = 22 * D2R, Hd: Pt = [B[0] + 240 * Math.cos(a), B[1] - 240 * Math.sin(a)];
+    const Fq: Pt = [Hd[0] - 130 * Math.sin(a), Hd[1] - 130 * Math.cos(a)];
+    return <g opacity={o}>{fr}
+      <line x1={B[0]} y1={B[1]} x2={Hd[0] + 30 * Math.cos(a)} y2={Hd[1] - 30 * Math.sin(a)} stroke="#c9d2e3" strokeWidth={24} strokeLinecap="round" opacity={0.35} />
+      <polygon points={Array.from({ length: 6 }, (_, j) => `${B[0] + 24 * Math.cos((j * Math.PI) / 3)},${B[1] + 24 * Math.sin((j * Math.PI) / 3)}`).join(" ")} fill="#3a4766" stroke="#c9d2e3" strokeWidth={4} />
+      <Arrow p={B} q={Hd} color={C.first} w={9} head={32} o={lit(first)} />
+      <Lbl x={(B[0] + Hd[0]) / 2 + 10} y={(B[1] + Hd[1]) / 2 + 62} t="r" c={C.first} s={T.calc} a="middle" o={lit(first)} />
+      <Arrow p={Hd} q={Fq} color={C.second} w={9} head={32} o={lit(second)} />
+      <Lbl x={Fq[0] + 26} y={Fq[1] + 10} t="F" c={C.second} s={T.calc} o={lit(second)} />
+    </g>;
+  }
+  if (i === 2) { // a ball whirled on a string: r from the centre, momentum p along the circle
+    const c0: Pt = [x + 170, y + 200], R = 120, th = 35 * D2R, b: Pt = [c0[0] + R * Math.cos(th), c0[1] - R * Math.sin(th)];
+    const pq: Pt = [b[0] - 130 * Math.sin(th), b[1] - 130 * Math.cos(th)];
+    return <g opacity={o}>{fr}
+      <circle cx={c0[0]} cy={c0[1]} r={R} fill="none" stroke={C.muted} strokeWidth={3} strokeDasharray="8 8" opacity={0.7} />
+      <circle cx={c0[0]} cy={c0[1]} r={9} fill={C.key} />
+      <Arrow p={c0} q={b} color={C.first} w={9} head={30} o={lit(first)} />
+      <Lbl x={(c0[0] + b[0]) / 2 + 6} y={(c0[1] + b[1]) / 2 + 52} t="r" c={C.first} s={T.calc} a="middle" o={lit(first)} />
+      <circle cx={b[0]} cy={b[1]} r={17} fill={C.key} stroke={C.bg} strokeWidth={3} />
+      <Arrow p={b} q={pq} color={C.second} w={9} head={30} o={lit(second)} />
+      <Lbl x={pq[0] - 20} y={pq[1] - 26} t="p" c={C.second} s={T.calc} a="end" o={lit(second)} />
+    </g>;
+  }
+  // the globe: the spin arrow Ω up the axis, a place r, the wind u there
+  const c0: Pt = [x + 200, y + 205], R = 120, pl: Pt = [c0[0] + R * 0.68, c0[1] - R * 0.62];
+  return <g opacity={o}>{fr}
+    <GlobeIcon x={c0[0]} y={c0[1]} r={R} o={0.85} />
+    <line x1={c0[0]} y1={c0[1] + R + 20} x2={c0[0]} y2={c0[1] - R} stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" opacity={0.7} />
+    <Arrow p={[c0[0], c0[1] - R]} q={[c0[0], c0[1] - R - 110]} color={C.first} w={9} head={30} o={lit(first)} />
+    <Lbl x={c0[0] + 24} y={c0[1] - R - 80} t="Ω" c={C.first} s={T.calc} o={lit(first)} />
+    <Arrow p={c0} q={pl} color={C.second} w={8} head={28} o={lit(second2)} />
+    <Lbl x={(c0[0] + pl[0]) / 2 + 22} y={(c0[1] + pl[1]) / 2 + 40} t="r" c={C.second} s={T.calc} o={lit(second2)} />
+    <Arrow p={pl} q={[pl[0] + 120, pl[1] + 14]} color={C.second} w={8} head={28} o={lit(second)} />
+    <Lbl x={pl[0] + 128} y={pl[1] - 30} t="u" c={C.second} s={T.calc} o={lit(second)} />
+  </g>;
+};
 const S22W: React.FC = () => {
   const f = useCurrentFrame(), k = K("s22w_when_to_use");
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
-  const X1 = 110, X2 = 1080, X3 = 110;
-  const row = (y: number) => y;
-  const tile = (i: number, s: string, at0: number, faint = false) =>
-    <TeX key={i} s={s} x={200 + 380 * i} y={800} size={T.key} ax={0.5} c={faint ? C.local : C.key} o={(faint ? 0.6 : 1) * fin(f, at0)} />;
+  const nextP1 = A.sc[k].sentences[5].text.includes("in the next video");   // Part 1 says "in the next video", v5 "soon"
+  const A2_ = (ph: string) => AT(k, 2, ph), A3_ = (ph: string) => AT(k, 3, ph), A5_ = (ph: string) => AT(k, 5, ph);
+  const minis = fin(f, 6, 14) * fout(f, t4 - 4, 12) + fin(f, t5 - 4, 14);
+  const back = fin(f, t5 - 4, 14);    // S6: every arrow lit again
+  const firsts = [A2_("from a hinge"), A2_("a bolt"), A2_("the centre of a turn"), A2_("Earth's spin")];
+  const seconds = [A3_("a push, F"), A3_("a push, F") + 8, A3_("a momentum"), A3_("the wind, u")];
+  const his = [A5_("That's torque"), A5_("That's torque") + 6, A5_("angular momentum"), A5_("Omega cross r")];
+  const pic = fin(f, t4, 14) * fout(f, t5 - 6, 10);
+  const FT = P(...ALONG);
+  const tile = (i: number, s: string, at0: number) =>
+    <TeX key={i} s={s} x={1100} y={180 + 100 * i} size={T.key} ax={0} c={C.key} o={fin(f, at0) * fout(f, t6 - 6, 10)} />;
   return (
     <Scene>
-      <TeX s={ctex(C.first, String.raw`\mathbf a`) + ctex(ROT, String.raw`\times`) + ctex(C.second, String.raw`\mathbf b`) + String.raw`\ ?`} x={960} y={420} size={T.hero} ax={0.5} o={fin(f, 4) * fout(f, t1 + 10, 14)} />
+      <TeX s={ctex(C.first, String.raw`\mathbf a`) + ctex(ROT, String.raw`\times`) + ctex(C.second, String.raw`\mathbf b`) + String.raw`\ ?`} x={1450} y={420} size={T.hero} ax={0.5} o={fin(f, 4) * fout(f, t2 - 6, 12)} />
       <Svg>
-        <g opacity={fin(f, t1 + 6)}>
-          <Lbl x={X1} y={150} t="first arrow" c={C.first} s={T.calc} />
-          <Lbl x={X2} y={150} t="second arrow" c={C.second} s={T.calc} />
-          <line x1={X1} y1={192} x2={X1 + 420} y2={192} stroke={C.first} strokeWidth={5} />
-          <line x1={X2} y1={192} x2={X2 + 460} y2={192} stroke={C.second} strokeWidth={5} />
+        {[0, 1, 2, 3].map((i) => <MiniBox key={i} i={i} o={minis} first={Math.max(back, fin(f, firsts[i]))} second={Math.max(back, fin(f, seconds[i]))}
+          second2={Math.max(back, fin(f, A3_("the second is often a position")))} hi={pulse(f, firsts[i], 30) + pulse(f, seconds[i], 30) + pulse(f, his[i], 36)} />)}
+        {/* S5: the part of one arrow across the other, and the result at right angles to both (out of the floor: ⊙) */}
+        <g opacity={pic}>
+          <Grid P={P} xr={[-1, 6]} yr={[-1, 4]} o={0.6} />
+          <Arrow p={O2} q={ATIP} color={C.first} o={0.6} />
+          <Band p={O2} q={FT} color={C.first} o={0.5} />
+          <Band p={FT} q={BTIP} color={ROT} o={0.85} />
+          <Arrow p={O2} q={BTIP} color={C.second} />
+          <RightTick at={FT} u1={unit(FT, O2)} u2={unit(FT, BTIP)} />
+          <TipLabel p={PAIR_TIPS.a} c={C.first} /><TipLabel p={PAIR_TIPS.b} c={C.second} />
+          <Lbl x={(FT[0] + BTIP[0]) / 2 + 60} y={(FT[1] + BTIP[1]) / 2} t="across" c={ROT} s={T.key} a="start" />
+          <CircleDot x={O2[0]} y={O2[1]} r={30} w={6} o={fin(f, AT(k, 4, "a direction at right angles"))} />
+          <Lbl x={O2[0] + 50} y={O2[1] + 74} t="a × b ⟂ both" c={ROT} s={T.key} a="start" o={fin(f, AT(k, 4, "a direction at right angles"))} />
         </g>
-        <Lbl x={X1} y={row(260)} t="position · lever arm r" c={C.key} s={T.key} o={fin(f, AT(k, 2, "a position or a lever arm"))} />
-        <Lbl x={X1} y={row(330)} t="hinge · bolt · centre" c={C.muted} s={T.floor} o={fin(f, AT(k, 2, "from a hinge"))} />
-        <Lbl x={X1} y={row(420)} t="spin arrow Ω" c={ROT} s={T.key} o={fin(f, AT(k, 2, "a spin arrow"))} />
-        <GlobeIcon x={X1 + 470} y={410} r={50} o={0.8 * fin(f, AT(k, 2, "Earth's spin"))} />
-        <Lbl x={X2} y={row(260)} t="force F · momentum p" c={C.key} s={T.key} o={fin(f, AT(k, 3, "a force or a velocity"))} />
-        <Lbl x={X2} y={row(330)} t="velocity · wind u" c={C.key} s={T.key} o={fin(f, AT(k, 3, "the wind, u"))} />
-        <Lbl x={X2} y={row(420)} t="position r (after a spin)" c={C.key} s={T.key} o={fin(f, AT(k, 3, "the second is often a position"))} />
-        <g opacity={fin(f, t4)}>
-          <Lbl x={X3} y={520} t="the answer" c={ROT} s={T.calc} />
-          <line x1={X3} y1={562} x2={X3 + 400} y2={562} stroke={ROT} strokeWidth={5} />
+        {/* maths zone: keywords only, coloured like the arrows they name */}
+        <g opacity={fout(f, t4 - 6, 10)}>
+          <Lbl x={1080} y={180} t="first arrow" c={C.first} s={T.key} o={fin(f, t2)} />
+          <Lbl x={1080} y={260} t="position · lever arm r" c={C.key} s={T.key} o={fin(f, A2_("a position or a lever arm"))} />
+          <Lbl x={1080} y={340} t="or a spin arrow Ω" c={C.key} s={T.key} o={fin(f, A2_("a spin arrow"))} />
+          <Lbl x={1080} y={470} t="second arrow" c={C.second} s={T.key} o={fin(f, t3)} />
+          <Lbl x={1080} y={550} t="force F · momentum p · wind u" c={C.key} s={T.key} o={fin(f, A3_("a force or a velocity"))} />
+          <Lbl x={1080} y={630} t="position r, when the first is a spin" c={C.key} s={T.floor} o={fin(f, A3_("the second is often a position"))} />
         </g>
-        <Lbl x={X3} y={620} t="size: across × length" c={C.key} s={T.key} o={fin(f, AT(k, 4, "lies across the other"))} />
-        <Lbl x={X3 + 620} y={620} t="direction ⟂ both:" c={C.key} s={T.key} o={fin(f, AT(k, 4, "a direction at right angles"))} />
-        <Lbl x={X3 + 1080} y={620} t="the axis of a turn" c={ROT} s={T.key} o={fin(f, AT(k, 4, "the axis of a turn"))} />
-        <Lbl x={X3 + 1080} y={680} t="or the side of a push" c={ROT} s={T.key} o={fin(f, AT(k, 4, "the side towards which"))} />
-        <Lbl x={1520} y={745} t="next" c={C.muted} s={T.floor} a="middle" o={fin(f, AT(k, 5, "and soon"))} />
+        <g opacity={fout(f, t5 - 6, 10)}>
+          <Keyword f={f} text="use it when you want:" at={[1080, 130]} appear={AT(k, 4, "Use the cross product")} targets={[]} c={C.gold} s={T.floor} />
+          <Lbl x={1080} y={220} t="size: across × length" c={C.key} s={T.key} o={fin(f, AT(k, 4, "lies across the other"))} />
+          <Lbl x={1080} y={320} t="direction ⟂ both" c={C.key} s={T.key} o={fin(f, AT(k, 4, "a direction at right angles"))} />
+          <Lbl x={1080} y={420} t="the axis of a turn" c={ROT} s={T.key} o={fin(f, AT(k, 4, "the axis of a turn"))} />
+          <Lbl x={1080} y={500} t="or the side of a push" c={ROT} s={T.key} o={fin(f, AT(k, 4, "the side towards which"))} />
+        </g>
+        <Lbl x={1500} y={530} t={nextP1 ? "next video" : "soon"} c={C.key} s={T.key} o={fin(f, A5_(nextP1 ? "in the next" : "and soon")) * fout(f, t6 - 6, 10)} />
       </Svg>
-      {tile(0, String.raw`\boldsymbol\tau = \mathbf r\times\mathbf F`, AT(k, 5, "That's torque"))}
-      {tile(1, String.raw`\mathbf L = \mathbf r\times\mathbf p`, AT(k, 5, "angular momentum"))}
-      {tile(2, String.raw`q\,\mathbf v\times\mathbf B`, AT(k, 5, "the push on a moving charge"))}
-      {tile(3, String.raw`\boldsymbol\Omega\times\mathbf r`, AT(k, 5, "Omega cross r"), true)}
-      {tile(4, String.raw`-2\boldsymbol\Omega\times\mathbf u`, AT(k, 5, "minus two Omega cross u"), true)}
-      <TeX s={String.raw`\mathbf b\times\mathbf a = -\,\mathbf a\times\mathbf b`} x={1560} y={500} size={T.calc} ax={0.5} c={C.neg} o={fin(f, AT(k, 6, "swap the two arrows"))} />
+      {tile(0, String.raw`\boldsymbol\tau = \mathbf r\times\mathbf F`, A5_("That's torque"))}
+      {tile(1, String.raw`\mathbf L = \mathbf r\times\mathbf p`, A5_("angular momentum"))}
+      {tile(2, String.raw`q\,\mathbf v\times\mathbf B`, A5_("the push on a moving charge"))}
+      {tile(3, String.raw`\boldsymbol\Omega\times\mathbf r`, A5_("Omega cross r"))}
+      {tile(4, String.raw`-2\boldsymbol\Omega\times\mathbf u`, A5_("minus two Omega cross u"))}
+      <TeX s={String.raw`\mathbf b\times\mathbf a = -\,\mathbf a\times\mathbf b`} x={1100} y={420} size={T.calc} ax={0} c={C.neg} o={fin(f, AT(k, 6, "swap the two arrows"))} />
     </Scene>
   );
 };
@@ -5400,8 +5542,8 @@ const S00P2: React.FC = () => {
   const G = globeProj(gc, GB.w, GB.h, GB.x, GB.y, M);
   const tex = useTex(staticFile("cp/bmng.jpg"));
   const n = Math.max(2, Math.round(hB * 0.42 * (paths.nh_track.length - 1)));
-  const nh = (paths.nh_track as number[][]).slice(0, n).map(([la, lo]) => [45 + (la - 45) * 7, -20 + (lo - (paths.nh_start as number[])[1]) * 7] as [number, number]);
-  const sh = (paths.sh_track as number[][]).slice(0, n).map(([la, lo]) => [-45 + (la + 45) * 7, -20 + (lo - (paths.sh_start as number[])[1]) * 7] as [number, number]);
+  const nh = (paths.nh_track as number[][]).slice(0, n).map(([la, lo]) => [45 + (la - 45) * 14, -20 + (lo - (paths.nh_start as number[])[1]) * 14] as [number, number]);
+  const sh = (paths.sh_track as number[][]).slice(0, n).map(([la, lo]) => [-45 + (la + 45) * 14, -20 + (lo - (paths.sh_start as number[])[1]) * 14] as [number, number]);
   return (
     <Scene fadeIn={false}>
       <Svg>
@@ -5418,7 +5560,7 @@ const S00P2: React.FC = () => {
           <ellipse cx={cx} cy={cy} rx={0.42 * S} ry={0.42 * S * 0.45} fill="#24304b" stroke="#c9d2e3" strokeWidth={4} />
           {Array.from({ length: 8 }, (_, i) => { const a = 2 * Math.PI * u + (i * Math.PI) / 4; const q = pD(0.42 * Math.cos(a), 0.42 * Math.sin(a)); return <line key={i} x1={cx} y1={cy} x2={q[0]} y2={q[1]} stroke="#3e4b6c" strokeWidth={3} />; })}
           <Arrow p={[cx, cy]} q={[cx, cy - 190]} color={ROT} w={10} head={36} />
-          <Lbl x={cx + 24} y={cy - 190} t="ω" c={ROT} s={T.calc} />
+          <Lbl x={cx + 24} y={cy - 190} t="Ω" c={ROT} s={T.calc} />
           <Arrow p={[cx, cy]} q={pt} color={C.first} w={8} head={28} />
           <Arrow p={pt} q={vt} color={C.second} w={8} head={28} />
           <circle cx={pt[0]} cy={pt[1]} r={10} fill={C.gold} />
@@ -5427,7 +5569,7 @@ const S00P2: React.FC = () => {
         </g>
         <defs><clipPath id="gbclip2"><rect x={GB.x} y={GB.y} width={GB.w} height={GB.h} /></clipPath></defs>
       </Svg>
-      <TeX s={EQ_WR} x={1280} y={612} size={T.key} ax={1} c={C.ink} o={oA} />
+      <TeX s={EQ_OXR0} x={1280} y={612} size={T.key} ax={1} c={C.ink} o={oA} />{/* fx1 (S1): capital Ω, as in the whole movie */}
       <View3D st={gc} x={GB.x} y={GB.y} w={GB.w} h={GB.h} o={tex ? oB : 0} key3={gc.pos} amb={1.6} dir={1.4}>
         <GlobeMesh tex={tex} M={M} />
       </View3D>
@@ -5479,20 +5621,30 @@ const S01P2: React.FC = () => {
             const d: Pt = [-Math.sin(a), -Math.cos(a)]; return <Arrow key={i} p={add(p, d, -36)} q={add(p, d, 36)} color={ROT} w={7} head={22} halo={false} />; })}
         </g>
       </Svg>
-      <TeX s={ctex(C.first, String.raw`\mathbf a`) + ctex(ROT, String.raw`\times`) + ctex(C.second, String.raw`\mathbf b`)} x={1460} y={110} size={T.calc} ax={0.5} o={fin(f, SS(k, 0), 10) * fout(f, AT(k, 1, "the spinning Earth"), 12)} />
+      <Svg><Keyword f={f} text="the cross product in the weather?" s={T.floor} at={[1100, 200]} appear={AT(k, 0, "the cross product")} out={AT(k, 1, "the spinning Earth") - 8} targets={[]} /></Svg>
     </Scene>
   );
 };
 
 // ---------------------------------------------------------------- Part 2 s01a-s01d the recap of Part 1
+// fx1 (review 1 M1): the recipe is restated in words and as three rows (x, y, z), the x and y rows worked to 0 and the z row to
+// 14, each on its words; the "14" bracket sits on the far side of the a × b arrow (S8).
+const REC_ROWS: [string, string, string, string][] = [   // label, recipe, worked numbers (EQ_CX, EQ_CY, EQ_CZ)
+  ["x", String.raw`a_2b_3 - a_3b_2`, String.raw`= 1\times0 - 0\times3 = 0`, ""],
+  ["y", String.raw`a_3b_1 - a_1b_3`, String.raw`= 0\times1 - 5\times0 = 0`, ""],
+  ["z", String.raw`a_1b_2 - a_2b_1`, String.raw`= 5\times3 - 1\times1 = \mathbf{14}`, ""],
+];
+if (`${REC_ROWS[0][2]}`.replace(/\s/g, "") !== `=${EQ_CX}`.replace(/\s/g, "") || `${REC_ROWS[1][2]}`.replace(/\s/g, "") !== `=${EQ_CY}`.replace(/\s/g, "")) throw new Error("s01a rows ≠ EQ_CX/EQ_CY");
 const S01A: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01a_recap_arrow");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4);
+  const t1 = SS(k, 1);
   const st = camOf([{ ...FLOOR_K, f: 0, az: 235, el: 28, dist: 14.5, target: [2.2, 1.4, 1.5] }, { ...FLOOR_K, f: LEN(k), az: 215, el: 24, dist: 14.5, target: [2.2, 1.4, 1.5] }], f);
   const pr = projector(st, W3, H3);
   const g = fin(f, AT(k, 1, "two arrows lying flat"), 16);
   const up = easeIO(clamp((f - AT(k, 2, "is another arrow")) / 30, 0, 1));
-  const [CZ_L, CZ_R] = splitEq(EQ_CZ), CZP = eqPieces(CZ_R);
+  const rowO = [AT(k, 3, "leaves out its own direction"), AT(k, 3, "leaves out its own direction") + 12, AT(k, 3, "leaves out its own direction") + 24];
+  const numO = [AT(k, 5, "every product has a zero"), AT(k, 5, "every product has a zero") + 16, AT(k, 4, "five times three")];
+  const RY = [440, 530, 620];
   return (
     <Scene>
       <PairFloor st={st} gA={g} gB={g} axb={up} over={<>
@@ -5501,19 +5653,22 @@ const S01A: React.FC = () => {
         <TipL3 pr={pr} from={[0, 0, 0]} to={AXB3} t="a × b" c={ROT} s={T.key} o={fin(f, AT(k, 2, "a cross b") + 10)} />
         <Tick3 pr={pr} at={[0, 0, 0]} u1={AH} u2={[0, 0, 1]} s={0.55} o={fin(f, AT(k, 2, "at right angles to both"))} />
         <Tick3 pr={pr} at={[0, 0, 0]} u1={BH} u2={[0, 0, 1]} s={0.55} o={fin(f, AT(k, 2, "at right angles to both"))} />
-        <Bracket3 pr={pr} h={AXB3[2]} o={fin(f, AT(k, 4, "fourteen units long"))} />
+        <Bracket3 pr={pr} h={AXB3[2]} o={fin(f, AT(k, 5, "fourteen units long"))} off={[0.32, -0.22, 0]} lf={0.78} />
       </>} />
       <Svg>
         <Keyword f={f} text="a quick reminder" at={[1100, 160]} appear={AT(k, 0, "a quick reminder")} out={t1 + 20} targets={[]} />
-        <Lbl x={1100} y={270} t="dot: a number" c={C.local} s={T.key} o={fin(f, AT(k, 2, "which gives a number"))} />
-        <Lbl x={1100} y={350} t="cross: an arrow ⟂ both" c={ROT} s={T.key} o={fin(f, AT(k, 2, "is another arrow"))} />
+        <Lbl x={1100} y={250} t="dot: a number" c={C.local} s={T.key} o={fin(f, AT(k, 2, "which gives a number"))} />
+        <Lbl x={1100} y={330} t="cross: an arrow ⟂ both" c={ROT} s={T.key} o={fin(f, AT(k, 2, "is another arrow"))} />
+        {REC_ROWS.map(([lab], i) => <Lbl key={lab} x={1100} y={RY[i]} t={`${lab}:`} c={i === 2 ? ROT : C.key} s={T.key} o={fin(f, rowO[i])} />)}
+        <Keyword f={f} text="the recipe" at={[1500, 160]} appear={AT(k, 3, "the recipe")} targets={[]} c={C.gold} />
       </Svg>
+      {/* each row: the recipe, then its numbers in place (a \phantom keeps the recipe's position fixed) */}
+      {REC_ROWS.map(([, rec, num], i) => <React.Fragment key={i}>
+        <TeX s={`${rec}\\ \\phantom{${num}}`} x={1165} y={RY[i]} size={46} c={i === 2 ? ROT : C.ink} o={fin(f, rowO[i])} />
+        <TeX s={`\\phantom{${rec}}\\ ${num}`} x={1165} y={RY[i]} size={46} c={i === 2 ? C.key : C.ink} o={fin(f, numO[i])} />
+      </React.Fragment>)}
       <PairTags o={fin(f, AT(k, 1, "components five, one and zero"))} />
-      <CalcStack f={f} x={1240} y={480} size={T.calc} rows={[
-        { lhs: CZ_L, rhs: CZP[0], at: t3, h: 100 },
-        { rhs: rep(CZP[1], "= 14", String.raw`= \mathbf{14}`), at: AT(k, 3, "which is fourteen"), cont: true, c: C.key, h: 100 },
-      ]} />
-      <TeX s={ABXB} x={1100} y={720} size={T.calc} o={fin(f, t4)} glow={pulse(f, t4 + 10, 24)} />
+      <TeX s={ABXB} x={1100} y={740} size={T.calc} o={fin(f, AT(k, 5, "points straight up"))} glow={pulse(f, AT(k, 5, "points straight up") + 10, 24)} />
     </Scene>
   );
 };
@@ -5536,12 +5691,12 @@ const S01B: React.FC = () => {
         <RightTick at={FT} u1={unit(FT, O2)} u2={unit(FT, BTIP)} o={split} />
         <Lbl x={FT[0] + 40} y={FT[1] + 64} t="along" c={C.first} s={T.key} a="middle" o={split * alongDim} />
         <Lbl x={(FT[0] + BTIP[0]) / 2 + 74} y={(FT[1] + BTIP[1]) / 2} t={f >= AT(k, 2, "two point seven five") ? "across ≈ 2.75" : "across"} c={ROT} s={T.key} a="start" o={split} />
-        <Bracket p={O2} q={ATIP} off={-46} c={C.gold} o={fin(f, AT(k, 2, "five point one"))} />
-        <Lbl x={ATIP[0] - 40} y={ATIP[1] + 80} t="|a| ≈ 5.1" c={C.gold} s={T.key} a="end" o={fin(f, AT(k, 2, "five point one"))} />
+        <Bracket p={O2} q={ATIP} off={-46} c={C.gold} o={fin(f, AT(k, 2, "The length of vector a"))} />
+        <Lbl x={ATIP[0] - 40} y={ATIP[1] + 80} t={f >= AT(k, 2, "five point one") ? "|a| ≈ 5.1" : "|a|"} c={C.gold} s={T.key} a="end" o={fin(f, AT(k, 2, "two bars"))} />
         <TipLabel p={PAIR_TIPS.a} c={C.first} /><TipLabel p={PAIR_TIPS.b} c={C.second} />
         <Keyword f={f} text="its length" at={[1100, 160]} appear={6} out={t1} targets={[]} />
         <Lbl x={1100} y={260} t="along a + across a = b" c={C.key} s={T.key} o={fin(f, t1 + 20)} />
-        <Lbl x={1100} y={720} t="the part along doesn't count" c={C.first} s={T.key} o={fin(f, t4)} />
+        <Lbl x={1100} y={720} t="along: 0" c={C.first} s={T.key} o={fin(f, t4)} />
       </Svg>
       <CalcStack f={f} x={1420} y={400} size={T.calc} rows={[
         { lhs: String.raw`|\mathbf a\times\mathbf b|`, rhs: String.raw`= 5.1\times2.75`, at: AT(k, 3, "Their product"), h: 100 },
@@ -5551,6 +5706,7 @@ const S01B: React.FC = () => {
     </Scene>
   );
 };
+const OU: V3 = [2.2, -2.6, 0];   // s01c: the corner where the unit vectors stand
 const S01C: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01c_recap_direction");
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4);
@@ -5562,15 +5718,23 @@ const S01C: React.FC = () => {
   const curl = CURL11 * easeIO(clamp((f - AT(k, 1, "curl them")) / 40, 0, 1));
   const thumbUp = easeIO(clamp((f - t2) / 24, 0, 1));
   const handO = fin(f, 4, 14) * fout(f, t3 + 20, 14);
+  const uG = [fin(f, AT(k, 3, "x hat cross y hat"), 14), fin(f, AT(k, 3, "x hat cross y hat") + 12, 14), fin(f, AT(k, 3, "is z hat"), 14)];
   return (
     <Scene>
       <PairFloor st={st} axb={easeIO(clamp((f - t2 - 4) / 24, 0, 1))} bTop
         under={<Arc3 pr={pr} c0={[0, 0, 0]} e1={[1, 0, 0]} e2={[0, 1, 0]} r={2.6} a0={ANG_A} a1={ANG_B} col={C.gold} draw={clamp((f - AT(k, 1, "the short way round")) / 30, 0, 1)} w={4} />}
-        children={<Hand3D q={q} at={pos} s={s} angles={POSE.curl(curl)} thumb={thumbUp} o={handO} glow={{ thumb: thumbUp > 0 ? ROT : undefined }} glowK={thumbUp} />}
+        children={<>
+          <Hand3D q={q} at={pos} s={s} angles={POSE.curl(curl)} thumb={thumbUp} o={handO} glow={{ thumb: thumbUp > 0 ? ROT : undefined }} glowK={thumbUp} />
+          {/* fx1 (Part 2 S5): the unit vectors, one unit long, from their own corner of the floor */}
+          {[0, 1, 2].map((i) => <Arrow3D key={i} from={OU} to={add3(OU, mul3(UNIT[i], 1.6))} color={C.ink} px={8} head={30} grow={uG[i]} o={uG[i]} />)}
+        </>}
         over={<>
           <TipL3 pr={pr} from={[0, 0, 0]} to={A3} t="a" c={C.first} s={T.calc} />
           <TipL3 pr={pr} from={[0, 0, 0]} to={B3} t="b" c={C.second} s={T.calc} gap={34} />
           <TipL3 pr={pr} from={[0, 0, 0]} to={AXB3} t="a × b" c={ROT} s={T.key} o={fin(f, t2 + 24)} />
+          {["x̂", "ŷ", "ẑ"].map((tt, i) => <TipL3 key={tt} pr={pr} from={OU} to={add3(OU, mul3(UNIT[i], 1.6))} t={tt} c={C.ink} s={T.key} o={uG[i]} />)}
+          <L3 pr={pr} at={[6.4, 0, 0]} t="x" c={C.key} s={T.key} o={fin(f, AT(k, 3, "unit vectors"))} />
+          <L3 pr={pr} at={[0, 4.4, 0]} t="y" c={C.key} s={T.key} o={fin(f, AT(k, 3, "unit vectors"))} />
         </>} />
       <Svg>
         <Keyword f={f} text="right-hand rule" at={[1100, 160]} appear={AT(k, 0, "right-hand rule")} out={t3} targets={[]} />
@@ -5588,56 +5752,133 @@ const S01C: React.FC = () => {
     </Scene>
   );
 };
+// fx1 (review 1 M2, M3, S6): "proton" said and labelled; the push arrow drawn on "at a right angle to the motion"; one kick,
+// then ten kicks (one per beat, the arrow keeping its length), then the smooth circle on "into a circle". The kicked path is
+// the regular polygon whose corners lie on the tested inertial circle (examples.json kicks.circle_xy_km, fluidpy
+// inertial_oscillation): between kicks the parcel goes straight; each kick turns it by 36° (ten kicks per turn).
 const S01D: React.FC = () => {
   const f = useCurrentFrame(), k = K("s01d_recap_push");
   const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3);
-  const KK = examples.kicks as unknown as Record<string, { speed: number; turn_deg: number; tips: number[][] }> & { circle_xy_km: number[][]; circle_uv: number[][] };
-  const V = (v: number[]): Pt => [KP.x + v[0] * KP.s, KP.y - v[1] * KP.s];
-  const ten = KK["10"].tips;
-  const n10 = Math.round(clamp((f - AT(k, 2, "Many small sideways kicks")) / 60, 0, 1) * 10);
-  const circ = fin(f, AT(k, 2, "into a circle"), 16);
-  const ph = clamp((f - AT(k, 2, "into a circle") - 10) / (LEN(k) - AT(k, 2, "into a circle") - 30), 0, 1);
-  const cxy = KK.circle_xy_km, cuv = KK.circle_uv;
+  const KK = examples.kicks as unknown as { circle_xy_km: number[][]; circle_uv: number[][] };
+  const cxy = KK.circle_xy_km, cuv = KK.circle_uv, N = cxy.length - 1;
   const C0: Pt = [540, 450], R = 230, Rk = 100;
+  const toS = (p: number[]): Pt => [C0[0] + (p[0] / Rk) * R, C0[1] - ((p[1] - Rk) / Rk) * R];
+  const NK = 10, V = Array.from({ length: NK + 1 }, (_, j) => toS(cxy[Math.round((j * N) / NK) % N]));
+  const tKick = AT(k, 2, "Many small sideways kicks"), tTen = AT(k, 2, "each at a right angle"), tCirc = AT(k, 2, "into a circle");
+  // edges drawn: the first edge while S2 ends (the parcel moves straight), one kick on "Many small sideways kicks", then the
+  // other nine kicks evenly up to "into a circle"
+  const eStep = (tCirc - 6 - tTen) / (NK - 1);
+  const kicksDone = f < tKick ? 0 : f < tTen ? 1 : Math.min(NK, 1 + Math.floor((f - tTen) / eStep) + 1);
+  const edgeFrac = f < tKick ? clamp((f - (t1 + 10)) / Math.max(1, tKick - t1 - 10), 0, 1) : clamp(f < tTen ? (f - tKick) / Math.max(1, tTen - tKick) : ((f - tTen) % eStep) / eStep, 0, 1);
+  const nE = Math.min(NK, kicksDone);   // edges finished
+  const curA = V[nE], curB = V[Math.min(NK, nE + 1)];
+  const head: Pt = nE >= NK ? V[NK] : [curA[0] + (curB[0] - curA[0]) * edgeFrac, curA[1] + (curB[1] - curA[1]) * edgeFrac];
+  const dirE = (j: number): Pt => { const a = V[j], b = V[Math.min(NK, j + 1)]; const L = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1; return [(b[0] - a[0]) / L, (b[1] - a[1]) / L]; };
+  const uDir = dirE(Math.min(NK - 1, nE));
+  const UL = 120, PL = 90;
+  const polyO = fin(f, 6, 12) * (1 - 0.7 * fin(f, tCirc, 16));   // the parcel and its motion are there from the first frame
+  const circ = fin(f, tCirc, 16);
+  const ph = clamp((f - tCirc - 10) / (LEN(k) - tCirc - 30), 0, 1);
   const pq = idx(cxy, ph), uq = idx(cuv, ph);
-  const pp: Pt = [C0[0] + (pq[0] / Rk) * R, C0[1] - ((pq[1] - Rk) / Rk) * R];
-  const trace = Array.from({ length: Math.max(2, Math.round(ph * (cxy.length - 1)) + 1) }, (_, i) => [C0[0] + (cxy[i][0] / Rk) * R, C0[1] - ((cxy[i][1] - Rk) / Rk) * R].join(",")).join(" ");
-  const diag = 1 - circ;
+  const pp: Pt = toS(pq);
+  const trace = Array.from({ length: Math.max(2, Math.round(ph * N) + 1) }, (_, i) => toS(cxy[i]).join(",")).join(" ");
+  const pushO = fin(f, AT(k, 1, "at a right angle to the motion"), 10);
+  const kickFlash = (j: number) => pulse(f, j === 1 ? tKick : tTen + (j - 2) * eStep, 18);
   const ch = examples.charge as { circle_xy: number[][]; centre: number[] };
   const cc = ch.centre;
   return (
     <Scene>
       <Svg>
-        <g opacity={diag}>
-          <Grid P={mkP(KP.x, KP.y, KP.s)} xr={[0, 13]} yr={[-1, 3]} o={0.6} />
-          <Arrow p={[KP.x, KP.y]} q={V([10, 0])} color={C.first} o={fin(f, 6) * (n10 > 0 ? 0.35 : 1)} />
-          <Lbl x={V([10, 0])[0] + 20} y={V([10, 0])[1] + 50} t="motion u" c={C.first} s={T.key} a="start" o={fin(f, 6)} />
-          {n10 > 0 ? <polyline points={ten.slice(0, n10 + 1).map((v) => V(v).join(",")).join(" ")} fill="none" stroke={C.second} strokeWidth={6} /> : null}
-          {n10 > 0 ? <Arrow p={[KP.x, KP.y]} q={V(ten[n10])} color={C.first} /> : null}
-          <Lbl x={KP.x + 20} y={KP.y + 100} t="kicks ⟂ the current direction" c={C.second} s={T.floor} o={fin(f, AT(k, 2, "Many small sideways kicks"))} />
+        <Grid P={mkP(120, 820, 80)} xr={[0, 11]} yr={[0, 9]} o={0.35} />
+        {/* the kicked path: straight edges, a corner (a kick) at each vertex */}
+        <g opacity={polyO}>
+          <circle cx={C0[0]} cy={C0[1]} r={R} fill="none" stroke={C.muted} strokeWidth={3} strokeDasharray="10 10" opacity={0.5 * fin(f, tTen)} />
+          {nE > 0 ? <polyline points={V.slice(0, nE + 1).map((p) => p.join(",")).join(" ")} fill="none" stroke={C.first} strokeWidth={5} opacity={0.75} /> : null}
+          <line x1={curA[0]} y1={curA[1]} x2={head[0]} y2={head[1]} stroke={C.first} strokeWidth={5} opacity={nE >= NK ? 0 : 0.75} />
+          {Array.from({ length: Math.min(nE, NK) }, (_, j0) => j0 + 1).map((j) => {
+            const v = V[j % NK], n0 = dirE(j - 1), n1 = dirE(Math.min(NK - 1, j));
+            const kd: Pt = [n1[0] - n0[0], n1[1] - n0[1]], L = Math.hypot(...kd) || 1;
+            return <Arrow key={j} p={v} q={[v[0] + (kd[0] / L) * 70, v[1] + (kd[1] / L) * 70]} color={C.second} w={7} head={24} halo={false} o={0.45 + 0.55 * kickFlash(j)} />;
+          })}
+          {nE < NK ? <>
+            <Arrow p={head} q={[head[0] + uDir[0] * UL, head[1] + uDir[1] * UL]} color={C.first} />
+            <Arrow p={head} q={[head[0] + uDir[1] * PL, head[1] - uDir[0] * PL]} color={C.second} w={8} head={30} o={pushO} />
+            <RightTick at={head} u1={uDir} u2={[uDir[1], -uDir[0]]} c={C.gold} o={pushO} />
+            <circle cx={head[0]} cy={head[1]} r={11} fill={C.key} stroke={C.bg} strokeWidth={3} />
+          </> : null}
+          <Lbl x={140} y={110} t="u: the motion" c={C.first} s={T.key} o={fin(f, t1) * fout(f, tCirc)} />
+          <Lbl x={140} y={180} t="push ⟂ u" c={C.second} s={T.key} o={pushO * fout(f, tCirc)} />
         </g>
+        <Lbl x={C0[0]} y={C0[1] + 6} t={`${Math.max(1, nE)} kick${nE <= 1 ? "" : "s"}`} c={C.second} s={T.key} a="middle" o={fin(f, tKick) * fout(f, tCirc)} />
         <g opacity={circ}>
-          <circle cx={C0[0]} cy={C0[1]} r={R} fill="none" stroke={C.muted} strokeWidth={3} strokeDasharray="10 10" opacity={0.6} />
           <polyline points={trace} fill="none" stroke={C.gold} strokeWidth={5} />
           <Arrow p={pp} q={[pp[0] + uq[0] * 13, pp[1] - uq[1] * 13]} color={C.first} />
           <Arrow p={pp} q={[pp[0] + (-uq[1]) * 9, pp[1] - uq[0] * 9]} color={C.second} w={8} head={30} />
           <RightTick at={pp} u1={unit(pp, [pp[0] + uq[0], pp[1] - uq[1]])} u2={unit(pp, [pp[0] - uq[1], pp[1] - uq[0]])} c={C.gold} />
           <circle cx={pp[0]} cy={pp[1]} r={11} fill={C.key} stroke={C.bg} strokeWidth={3} />
-          <Lbl x={C0[0]} y={C0[1] + R + 90} t="same speed all the way round" c={C.key} s={T.key} a="middle" />
+          <Lbl x={C0[0]} y={C0[1] + R + 90} t="same speed all the way round" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 3, "the speed stays the same"))} />
         </g>
-        {/* the moving-charge circle (s22d), faint, on "the magnetic push on a moving charge" */}
-        <g opacity={0.6 * fin(f, AT(k, 1, "the magnetic push")) * fout(f, t2)}>
+        {/* the proton circling in a magnetic field (s22d), faint, on "a magnet's push on a moving proton" */}
+        <g opacity={0.8 * fin(f, AT(k, 1, "a magnet's push")) * fout(f, t2)}>
           <polyline points={(ch.circle_xy).map((p) => `${1640 + (p[0] - cc[0]) * 80},${650 - (p[1] - cc[1]) * 80}`).join(" ")} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" />
-          <circle cx={1640} cy={650} r={12} fill={C.key} />
-          <Lbl x={1640} y={790} t="moving charge" c={C.muted} s={T.floor} a="middle" />
+          {(() => { const q = idx(ch.circle_xy, ((Math.max(0, f - AT(k, 1, "a magnet's push")) / 120) % 1)); const x = 1640 + (q[0] - cc[0]) * 80, y = 650 - (q[1] - cc[1]) * 80;
+            return <g><circle cx={x} cy={y} r={30} fill={C.key} /><line x1={x - 14} y1={y} x2={x + 14} y2={y} stroke={C.bg} strokeWidth={6} /><line x1={x} y1={y - 14} x2={x} y2={y + 14} stroke={C.bg} strokeWidth={6} /></g>; })()}
+          <Lbl x={1640} y={790} t="proton" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "a moving proton"))} />
         </g>
         <Keyword f={f} text="one more idea" at={[1100, 160]} appear={AT(k, 0, "One more idea")} out={t1} targets={[]} />
         <Lbl x={1100} y={260} t="push ⟂ motion" c={C.key} s={T.key} o={fin(f, AT(k, 1, "at a right angle to the motion"))} />
         <Lbl x={1100} y={350} t="no speeding up, no slowing down" c={C.key} s={T.floor} o={fin(f, AT(k, 1, "never speeds anything up"))} />
-        <Lbl x={1100} y={600} t="no work: it only turns" c={C.key} s={T.key} o={fin(f, AT(k, 3, "it does no work"))} />
+        <Lbl x={1100} y={600} t="no work: no energy given" c={C.key} s={T.key} o={fin(f, AT(k, 3, "it does no work"))} />
+        <Lbl x={1100} y={680} t="F: the push" c={C.second} s={T.floor} o={fin(f, AT(k, 3, "This push, F"))} />
       </Svg>
-      <TeX s={EQ_FU0} x={1100} y={480} size={T.eq} o={fin(f, t3)} glow={pulse(f, t3 + 10, 24)} />
+      <TeX s={EQ_FU0} x={1100} y={480} size={T.eq} o={fin(f, AT(k, 3, "a dot product of zero"))} glow={pulse(f, AT(k, 3, "a dot product of zero") + 10, 24)} />
     </Scene>
+  );
+};
+
+// ================================================================ data-source lines (HOUSE_STYLE §5, user 2026-10-28, U-WB-R1)
+// One small muted line at the bottom of the picture on every frame that shows real data; not spoken. Dataset, time and place
+// from the manifests and data files (ian.json scan 2022-09-28T18:01, HRRR 18 UTC; idai.json VIIRS 2019-03-14 + ERA5 12 UTC;
+// storm.json ERA5 2023-11-02T12, MODIS Aqua 2023-11-02; winds_mean.json NCEP/NCAR R1 1991-2020; cp/bmng*.jpg Blue Marble NG).
+// No coloured data field is drawn (globe pictures are true-colour images, Ian/Idai/Ciarán are lines and streaks), so no colour bar.
+const SRC_BM = "Image: NASA Blue Marble Next Generation";
+const SRC_NCEP = "Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 10 m wind, mean 1991–2020 · Image: NASA Blue Marble";
+const SRC_IAN_IMG = "Image: NOAA GOES-16 · 28 Sep 2022, 18:01 UTC · Hurricane Ian, Florida · globe: NASA Blue Marble";
+const SRC_IAN = "Image: NOAA GOES-16 · Data: NOAA HRRR 10 m wind · 28 Sep 2022, 18 UTC · Hurricane Ian, Florida";
+const SRC_IDAI = "Image: NASA VIIRS · Data: ERA5 (Copernicus C3S) 10 m wind · 14 Mar 2019, 12 UTC · Cyclone Idai, Mozambique";
+const SRC_BOTH = "Ian: GOES-16 + NOAA HRRR, 28 Sep 2022, 18 UTC · Idai: NASA VIIRS + ERA5 (Copernicus C3S), 14 Mar 2019, 12 UTC";
+const SRC_IMGS = "Images: NOAA GOES-16 (Ian, 28 Sep 2022) · NASA VIIRS (Idai, 14 Mar 2019)";
+const SRC_CIARAN = "Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 12 UTC · Storm Ciarán · coast: Natural Earth";
+const SRC_CIARAN_IMG = "Data: ERA5 (Copernicus C3S), 2 Nov 2023, 12 UTC · Image: NASA MODIS Aqua, 2 Nov 2023 · Storm Ciarán · coast: Natural Earth";
+/** per scene: the lines and their opacity at scene frame f (k = the scene index in the active timing) */
+const SOURCES: Record<string, (f: number, k: number) => [string, number][]> = {
+  s00_title: (f, k) => (A === ACT_P1 ? [] : [[SRC_BM, fin(f, AT(k, 0, "meteorology"), 12)]]),
+  s01_hook: () => (A === ACT_P2 ? [[SRC_BM, 1]] : []),
+  s23_k_cross: () => [[SRC_BM, 1]], s23a_why_turn: () => [[SRC_BM, 1]], s24_spin: () => [[SRC_BM, 1]], s25a_position_vector: () => [[SRC_BM, 1]],
+  s25_ground_speed: () => [[SRC_BM, 1]], s25b_direction: () => [[SRC_BM, 1]], s26_coriolis_effect: () => [[SRC_BM, 1]], s28a_local_axes: () => [[SRC_BM, 1]],
+  s28b_components: () => [[SRC_BM, 1]], s28c_flat_part: () => [[SRC_BM, 1]], s28_f: () => [[SRC_BM, 1]], s29_turn_rule: () => [[SRC_BM, 1]],
+  s30_coriolis_size: () => [[SRC_BM, 1]], s31_globe_paths: () => [[SRC_BM, 1]],
+  s32_reanalysis: () => [[SRC_NCEP, 1]], s33_trades: () => [[SRC_NCEP, 1]], s34_westerlies: () => [[SRC_NCEP, 1]],
+  s35_storms: () => [[SRC_IAN_IMG, 1]], s36_ian: () => [[SRC_IAN, 1]], s37_idai: () => [[SRC_IDAI, 1]], s38_spin_sign: () => [[SRC_BOTH, 1]],
+  s45_storm_map: (f, k) => { const m = fin(f, SS(k, 1) - 20, 24); return [[SRC_BM, 1 - m], [SRC_CIARAN, m]]; },
+  s46_real_winds: () => [[SRC_CIARAN_IMG, 1]],
+  s47_recap: (f, k) => {
+    const S = A.sc[k].sentences, si = (ph: string) => S.findIndex((x) => x.text.includes(ph));
+    const iFlat = si("For flat winds"), iGeo = si("the geostrophic wind");
+    const b = (j: number, e?: number) => fin(f, SS(k, j), 10) * (e !== undefined ? fout(f, SS(k, e) - 6, 10) : 1);
+    return [[SRC_IMGS, b(iFlat, iGeo)], [SRC_CIARAN, b(iGeo)]];
+  },
+};
+const SourceLine: React.FC<{ id: string }> = ({ id }) => {
+  const f = useCurrentFrame();
+  const fn = SOURCES[id];
+  if (!fn) return null;
+  const k = K(id);
+  const fade = (k > 0 ? fin(f, 0, XF) : 1) * fout(f, LEN(k), XF);
+  return (
+    <Svg>
+      {fn(f, k).map(([t, o], i) => (o * fade <= 0 ? null : <text key={i} x={80} y={852} fill={C.muted} fontSize={30} fontFamily={FONT} fontWeight={600} stroke={C.bg} strokeWidth={6} strokeLinejoin="round" paintOrder="stroke" opacity={o * fade}>{t}</text>))}
+    </Svg>
   );
 };
 
@@ -5675,7 +5916,7 @@ const Movie: React.FC<{ which: keyof typeof MOVIES; audio: string; bbox?: boolea
       {bbox ? <BoxProbe /> : null}
       {m.act.sc.map((sc0, k) => {
         const S = m.over[sc0.id] ?? SCENE_BY_ID[sc0.id];
-        return <Sequence key={sc0.id} name={sc0.id} from={m.act.CUT[k]} durationInFrames={m.act.END[k] - m.act.CUT[k] + (k < n - 1 ? XF : 0)}><S /></Sequence>;
+        return <Sequence key={sc0.id} name={sc0.id} from={m.act.CUT[k]} durationInFrames={m.act.END[k] - m.act.CUT[k] + (k < n - 1 ? XF : 0)}><S /><SourceLine id={sc0.id} /></Sequence>;
       })}
       <Audio src={staticFile(audio)} />
     </AbsoluteFill>

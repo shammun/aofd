@@ -9,6 +9,84 @@
   "lead": 0.3,
   "tail": 0.3
  },
+ "total_s": 1958.625,
+ "total_frames": 58759,
+ "render_s": 704.3,
+ "loudnorm_input": {
+  "input_i": "-24.77",
+  "input_tp": "-1.74",
+  "input_lra": "5.00",
+  "input_thresh": "-35.26",
+  "output_i": "-16.48",
+  "output_tp": "-1.50",
+  "output_lra": "4.80",
+  "output_thresh": "-26.97",
+  "normalization_type": "dynamic",
+  "target_offset": "0.48"
+ },
+ "cues": 465,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 1958.625,
+  "audio_s": 1958.625,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true,
+  "splices_fx1": [
+   {
+    "op": "replace",
+    "scene": "s15a_index_form",
+    "index": 0,
+    "text": "Here's a short way to write the whole recipe, in index notation, which the index-notation video builds step by step.",
+    "ref": "Here's a short way to write the whole recipe, in index notation, which the video on the alternating tensor builds step by step.",
+    "gain": 1.02883,
+    "corr_old_resynth": 0.9888,
+    "len_ref_old": 210600,
+    "len_ref_resynth": 210600,
+    "new_s": 8.25,
+    "peak": 0.8652
+   },
+   {
+    "op": "replace",
+    "scene": "s18_cases",
+    "index": 9,
+    "text": "That's the opposite of the dot product, which is zero at a right angle, and largest when the arrows point the same way.",
+    "ref": "That's the opposite of the dot product, which is zero at a right angle, and largest when the arrows lie along one line.",
+    "gain": 1.00307,
+    "corr_old_resynth": 0.9893,
+    "len_ref_old": 187800,
+    "len_ref_resynth": 187800,
+    "new_s": 7.625,
+    "peak": 0.847
+   },
+   {
+    "op": "replace",
+    "scene": "s22w_when_to_use",
+    "index": 5,
+    "text": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and, in the next video, the speed of the spinning ground, Omega cross r, and the Coriolis push, minus two Omega cross u.",
+    "ref": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and soon the speed of the spinning ground, Omega cross r, and the Coriolis push, minus two Omega cross u.",
+    "gain": 1.05677,
+    "corr_old_resynth": 0.9909,
+    "len_ref_old": 324600,
+    "len_ref_resynth": 324600,
+    "new_s": 13.975,
+    "peak": 0.8913
+   },
+   {
+    "op": "replace",
+    "scene": "s22w_when_to_use",
+    "index": 2,
+    "text": "The first is normally a position or a lever arm, like r from a hinge, a bolt or the centre of a turn, and, in the next video, a spin arrow, like Earth's spin, Omega.",
+    "ref": "The first is normally a position or a lever arm, like r from a hinge, a bolt or the centre of a turn, or a spin arrow, like Earth's spin, Omega.",
+    "gain": 1.01103,
+    "corr_old_resynth": 0.9857,
+    "len_ref_old": 246000,
+    "len_ref_resynth": 246000,
+    "new_s": 11.45,
+    "peak": 0.8519
+   }
+  ]
+ },
  "scenes": [
   {
    "id": "s00_title",
@@ -75,7 +153,7 @@
      "end": 31.75,
      "dur": 8.675,
      "start_frame": 692,
-     "end_frame": 953,
+     "end_frame": 952,
      "beat": true
     },
     {
@@ -129,7 +207,7 @@
      "start": 59.95,
      "end": 62.425,
      "dur": 2.475,
-     "start_frame": 1799,
+     "start_frame": 1798,
      "end_frame": 1873
     },
     {
@@ -219,7 +297,7 @@
      "start": 104.85,
      "end": 108.875,
      "dur": 4.025,
-     "start_frame": 3145,
+     "start_frame": 3146,
      "end_frame": 3266
     }
    ],
@@ -246,7 +324,7 @@
      "start": 112.05,
      "end": 118.325,
      "dur": 6.275,
-     "start_frame": 3361,
+     "start_frame": 3362,
      "end_frame": 3550
     },
     {
@@ -337,7 +415,7 @@
      "end": 162.85,
      "dur": 2.5,
      "start_frame": 4810,
-     "end_frame": 4885
+     "end_frame": 4886
     },
     {
      "text": "Our two arrows lie flat on the floor, so their third components are zero.",
@@ -401,7 +479,7 @@
      "end": 201.65,
      "dur": 8.425,
      "start_frame": 5797,
-     "end_frame": 6049
+     "end_frame": 6050
     },
     {
      "text": "The y component leaves out the y parts and uses z and x.",
@@ -428,7 +506,7 @@
      "end": 219.05,
      "dur": 7.525,
      "start_frame": 6346,
-     "end_frame": 6571
+     "end_frame": 6572
     },
     {
      "text": "We'll soon see why it's built like this.",
@@ -474,7 +552,7 @@
      "end": 238.45,
      "dur": 5.575,
      "start_frame": 6986,
-     "end_frame": 7153,
+     "end_frame": 7154,
      "beat": true
     },
     {
@@ -539,7 +617,7 @@
      "start": 282.05,
      "end": 286.325,
      "dur": 4.275,
-     "start_frame": 8461,
+     "start_frame": 8462,
      "end_frame": 8590
     },
     {
@@ -625,7 +703,7 @@
      "start": 338.95,
      "end": 342.075,
      "dur": 3.125,
-     "start_frame": 10169,
+     "start_frame": 10168,
      "end_frame": 10262
     },
     {
@@ -643,8 +721,8 @@
      "start": 348.35,
      "end": 352.95,
      "dur": 4.6,
-     "start_frame": 10451,
-     "end_frame": 10589
+     "start_frame": 10450,
+     "end_frame": 10588
     },
     {
      "text": "This time, look at the dropped line itself: it's the height of vector a above b's line.",
@@ -718,7 +796,7 @@
      "end": 399.95,
      "dur": 6.1,
      "start_frame": 11816,
-     "end_frame": 11999
+     "end_frame": 11998
     },
     {
      "text": "Draw a box around the parallelogram, six along and four up.",
@@ -735,7 +813,7 @@
      "start": 405.15,
      "end": 407.5,
      "dur": 2.35,
-     "start_frame": 12155,
+     "start_frame": 12154,
      "end_frame": 12225
     },
     {
@@ -745,7 +823,7 @@
      "end": 410.75,
      "dur": 2.9,
      "start_frame": 12236,
-     "end_frame": 12323
+     "end_frame": 12322
     },
     {
      "text": "Two triangles sit along vector a and each is half of five times one, so together they make five.",
@@ -793,7 +871,7 @@
      "start": 439.75,
      "end": 444.2,
      "dur": 4.45,
-     "start_frame": 13193,
+     "start_frame": 13192,
      "end_frame": 13326
     },
     {
@@ -802,7 +880,7 @@
      "start": 444.55,
      "end": 452.925,
      "dur": 8.375,
-     "start_frame": 13337,
+     "start_frame": 13336,
      "end_frame": 13588
     },
     {
@@ -812,7 +890,7 @@
      "end": 457.95,
      "dur": 4.675,
      "start_frame": 13598,
-     "end_frame": 13739
+     "end_frame": 13738
     }
    ],
    "end": 458.75,
@@ -829,7 +907,7 @@
      "start": 458.75,
      "end": 461.2,
      "dur": 2.45,
-     "start_frame": 13763,
+     "start_frame": 13762,
      "end_frame": 13836
     },
     {
@@ -838,7 +916,7 @@
      "start": 461.55,
      "end": 466.45,
      "dur": 4.9,
-     "start_frame": 13847,
+     "start_frame": 13846,
      "end_frame": 13994
     },
     {
@@ -921,7 +999,7 @@
      "end": 497.15,
      "dur": 2.1,
      "start_frame": 14852,
-     "end_frame": 14915
+     "end_frame": 14914
     },
     {
      "text": "Point your fingers along vector a so they follow the first arrow.",
@@ -1001,7 +1079,7 @@
      "start": 528.05,
      "end": 531.175,
      "dur": 3.125,
-     "start_frame": 15842,
+     "start_frame": 15841,
      "end_frame": 15935
     },
     {
@@ -1065,7 +1143,7 @@
      "end": 553.55,
      "dur": 4.35,
      "start_frame": 16476,
-     "end_frame": 16607
+     "end_frame": 16606
     },
     {
      "text": "Seen from above, that's anticlockwise, the way you open a bottle, and the cap rises, up along a cross b.",
@@ -1177,7 +1255,7 @@
      "end": 620.15,
      "dur": 5.05,
      "start_frame": 18453,
-     "end_frame": 18605
+     "end_frame": 18604
     },
     {
      "text": "It's the same cycle as in the recipe: the x component is built from y and z, the y component from z and x, and the z component from x and y.",
@@ -1221,7 +1299,7 @@
      "start": 639.75,
      "end": 644.9,
      "dur": 5.15,
-     "start_frame": 19193,
+     "start_frame": 19192,
      "end_frame": 19347
     },
     {
@@ -1278,7 +1356,7 @@
      "start": 676.55,
      "end": 681.475,
      "dur": 4.925,
-     "start_frame": 20297,
+     "start_frame": 20296,
      "end_frame": 20444
     }
    ],
@@ -1291,2017 +1369,1993 @@
    "start": 682.275,
    "sentences": [
     {
-     "text": "Here's a short way to write the whole recipe, in index notation, which the video on the alternating tensor builds step by step.",
+     "text": "Here's a short way to write the whole recipe, in index notation, which the index-notation video builds step by step.",
      "audio_text": null,
      "start": 682.275,
-     "end": 691.05,
-     "dur": 8.775,
+     "end": 690.525,
+     "dur": 8.25,
      "start_frame": 20468,
-     "end_frame": 20732
+     "end_frame": 20716
     },
     {
      "text": "Let the letters i, j and k each stand for x, y or z.",
      "audio_text": null,
-     "start": 691.4,
-     "end": 696.15,
+     "start": 690.875,
+     "end": 695.625,
      "dur": 4.75,
-     "start_frame": 20742,
-     "end_frame": 20885
+     "start_frame": 20726,
+     "end_frame": 20869
     },
     {
      "text": "The i component of a cross b is epsilon i j k, times the j component of vector a times the k component of b, added up over every j and every k.",
      "audio_text": "The i component of [A](/ˈA/) cross b is epsilon i j k, times the j component of vector [A](/ˈA/) times the k component of b, added up over every j and every k.",
-     "start": 696.5,
-     "end": 708.325,
+     "start": 695.975,
+     "end": 707.8,
      "dur": 11.825,
-     "start_frame": 20895,
-     "end_frame": 21250
+     "start_frame": 20879,
+     "end_frame": 21234
     },
     {
      "text": "Epsilon i j k is a table of signs: plus one when i, j and k follow the cycle x, y, z, minus one when they run the other way round, and zero when any two letters are the same.",
      "audio_text": null,
-     "start": 708.675,
-     "end": 722.575,
+     "start": 708.15,
+     "end": 722.05,
      "dur": 13.9,
-     "start_frame": 21260,
-     "end_frame": 21677
+     "start_frame": 21244,
+     "end_frame": 21662
     },
     {
      "text": "A repeated letter means a direction crossed with itself, which makes no area, so it gives zero.",
      "audio_text": null,
-     "start": 722.925,
-     "end": 729.6,
+     "start": 722.4,
+     "end": 729.075,
      "dur": 6.675,
-     "start_frame": 21688,
-     "end_frame": 21888
+     "start_frame": 21672,
+     "end_frame": 21872
     },
     {
      "text": "So for the z component, only two terms are left.",
      "audio_text": null,
-     "start": 729.95,
-     "end": 733.7,
+     "start": 729.425,
+     "end": 733.175,
      "dur": 3.75,
-     "start_frame": 21899,
-     "end_frame": 22011
+     "start_frame": 21883,
+     "end_frame": 21995
     },
     {
      "text": "Epsilon z x y is plus one, times five times three, and epsilon z y x is minus one, times one times one.",
      "audio_text": null,
-     "start": 734.05,
-     "end": 743.7,
+     "start": 733.525,
+     "end": 743.175,
      "dur": 9.65,
-     "start_frame": 22022,
-     "end_frame": 22311,
+     "start_frame": 22006,
+     "end_frame": 22295,
      "beat": true
     },
     {
      "text": "That's fifteen minus one, fourteen again.",
      "audio_text": null,
-     "start": 745.2,
-     "end": 748.6,
+     "start": 744.675,
+     "end": 748.075,
      "dur": 3.4,
-     "start_frame": 22356,
-     "end_frame": 22458,
+     "start_frame": 22340,
+     "end_frame": 22442,
      "beat": true
     },
     {
      "text": "And swapping two letters flips the sign of epsilon, which is exactly why b cross a is minus a cross b.",
      "audio_text": "And swapping two letters flips the sign of epsilon, which is exactly why b cross [A](/ˈA/) is minus [A](/ˈA/) cross b.",
-     "start": 750.1,
-     "end": 757.725,
+     "start": 749.575,
+     "end": 757.2,
      "dur": 7.625,
-     "start_frame": 22503,
-     "end_frame": 22732
+     "start_frame": 22487,
+     "end_frame": 22716
     }
    ],
-   "end": 758.525,
+   "end": 758.0,
    "start_frame": 20468,
-   "end_frame": 22756
+   "end_frame": 22740
   },
   {
    "id": "s16_rhr_screen",
-   "start": 758.525,
+   "start": 758.0,
    "sentences": [
     {
      "text": "Let's see all six results on a flat screen, with x pointing right and y pointing up.",
      "audio_text": null,
-     "start": 758.525,
-     "end": 764.3,
+     "start": 758.0,
+     "end": 763.775,
      "dur": 5.775,
-     "start_frame": 22756,
-     "end_frame": 22929
+     "start_frame": 22740,
+     "end_frame": 22913
     },
     {
      "text": "Then z points straight out of the screen, towards you.",
      "audio_text": null,
-     "start": 764.65,
-     "end": 768.075,
+     "start": 764.125,
+     "end": 767.55,
      "dur": 3.425,
-     "start_frame": 22940,
-     "end_frame": 23042
+     "start_frame": 22924,
+     "end_frame": 23026
     },
     {
      "text": "An arrow coming out of the screen is drawn as a dot in a circle, like the tip of an arrow flying at you.",
      "audio_text": null,
-     "start": 768.425,
-     "end": 775.275,
+     "start": 767.9,
+     "end": 774.75,
      "dur": 6.85,
-     "start_frame": 23053,
-     "end_frame": 23258
+     "start_frame": 23037,
+     "end_frame": 23242
     },
     {
      "text": "An arrow going into the screen is drawn as a cross in a circle, like the tail feathers of an arrow flying away.",
      "audio_text": null,
-     "start": 775.625,
-     "end": 783.125,
+     "start": 775.1,
+     "end": 782.6,
      "dur": 7.5,
-     "start_frame": 23269,
-     "end_frame": 23494
+     "start_frame": 23253,
+     "end_frame": 23478
     },
     {
      "text": "So x hat cross y hat comes out of the screen, and y hat cross x hat goes into it.",
      "audio_text": null,
-     "start": 783.475,
-     "end": 789.7,
+     "start": 782.95,
+     "end": 789.175,
      "dur": 6.225,
-     "start_frame": 23504,
-     "end_frame": 23691,
+     "start_frame": 23488,
+     "end_frame": 23675,
      "beat": true
     },
     {
      "text": "Y hat cross z hat points right, and z hat cross y hat points left.",
      "audio_text": null,
-     "start": 791.2,
-     "end": 796.425,
+     "start": 790.675,
+     "end": 795.9,
      "dur": 5.225,
-     "start_frame": 23736,
-     "end_frame": 23893,
+     "start_frame": 23720,
+     "end_frame": 23877,
      "beat": true
     },
     {
      "text": "Z hat cross x hat points up, and x hat cross z hat points down.",
      "audio_text": null,
-     "start": 797.925,
-     "end": 803.1,
+     "start": 797.4,
+     "end": 802.575,
      "dur": 5.175,
-     "start_frame": 23938,
-     "end_frame": 24093,
+     "start_frame": 23922,
+     "end_frame": 24077,
      "beat": true
     },
     {
      "text": "The right hand always tells us which way.",
      "audio_text": null,
-     "start": 804.6,
-     "end": 807.75,
+     "start": 804.075,
+     "end": 807.225,
      "dur": 3.15,
-     "start_frame": 24138,
-     "end_frame": 24233
+     "start_frame": 24122,
+     "end_frame": 24217
     }
    ],
-   "end": 808.55,
-   "start_frame": 22756,
-   "end_frame": 24256
+   "end": 808.025,
+   "start_frame": 22740,
+   "end_frame": 24241
   },
   {
    "id": "s17_rhr_views",
-   "start": 808.55,
+   "start": 808.025,
    "sentences": [
     {
      "text": "The direction also depends on where you look from.",
      "audio_text": null,
-     "start": 808.55,
-     "end": 812.125,
+     "start": 808.025,
+     "end": 811.6,
      "dur": 3.575,
-     "start_frame": 24257,
-     "end_frame": 24364
+     "start_frame": 24241,
+     "end_frame": 24348
     },
     {
      "text": "Look down at the floor from above.",
      "audio_text": null,
-     "start": 812.475,
-     "end": 814.875,
+     "start": 811.95,
+     "end": 814.35,
      "dur": 2.4,
-     "start_frame": 24374,
-     "end_frame": 24446
+     "start_frame": 24358,
+     "end_frame": 24430
     },
     {
      "text": "Turning from vector a to b is anticlockwise, and a cross b points up, straight at you.",
      "audio_text": "Turning from vector [A](/ˈA/) to b is anticlockwise, and [A](/ˈA/) cross b points up, straight at you.",
-     "start": 815.225,
-     "end": 821.525,
+     "start": 814.7,
+     "end": 821.0,
      "dur": 6.3,
-     "start_frame": 24457,
-     "end_frame": 24646
+     "start_frame": 24441,
+     "end_frame": 24630
     },
     {
      "text": "Now look up from below the floor.",
      "audio_text": null,
-     "start": 821.875,
-     "end": 824.325,
+     "start": 821.35,
+     "end": 823.8,
      "dur": 2.45,
-     "start_frame": 24656,
-     "end_frame": 24730
+     "start_frame": 24640,
+     "end_frame": 24714
     },
     {
      "text": "The same turn looks clockwise, and the same arrow points away from you.",
      "audio_text": null,
-     "start": 824.675,
-     "end": 829.425,
+     "start": 824.15,
+     "end": 828.9,
      "dur": 4.75,
-     "start_frame": 24740,
-     "end_frame": 24883,
+     "start_frame": 24724,
+     "end_frame": 24867,
      "beat": true
     },
     {
      "text": "Think of the parallelogram as a thin card with two coloured faces.",
      "audio_text": null,
-     "start": 830.925,
-     "end": 835.825,
+     "start": 830.4,
+     "end": 835.3,
      "dur": 4.9,
-     "start_frame": 24928,
-     "end_frame": 25075
+     "start_frame": 24912,
+     "end_frame": 25059
     },
     {
      "text": "The cross product sticks out of the face from which the turn from the first arrow to the second looks anticlockwise.",
      "audio_text": null,
-     "start": 836.175,
-     "end": 843.375,
+     "start": 835.65,
+     "end": 842.85,
      "dur": 7.2,
-     "start_frame": 25085,
-     "end_frame": 25301
+     "start_frame": 25070,
+     "end_frame": 25286
     },
     {
      "text": "So here's a handy rule.",
      "audio_text": null,
-     "start": 843.725,
-     "end": 845.825,
+     "start": 843.2,
+     "end": 845.3,
      "dur": 2.1,
-     "start_frame": 25312,
-     "end_frame": 25375
+     "start_frame": 25296,
+     "end_frame": 25359
     },
     {
      "text": "If, from where you stand, the turn from the first arrow to the second is anticlockwise, the cross product points towards you.",
      "audio_text": null,
-     "start": 846.175,
-     "end": 854.375,
+     "start": 845.65,
+     "end": 853.85,
      "dur": 8.2,
-     "start_frame": 25385,
-     "end_frame": 25631
+     "start_frame": 25370,
+     "end_frame": 25616
     },
     {
      "text": "If it's clockwise, it points away.",
      "audio_text": null,
-     "start": 854.725,
-     "end": 857.425,
+     "start": 854.2,
+     "end": 856.9,
      "dur": 2.7,
-     "start_frame": 25642,
-     "end_frame": 25723
+     "start_frame": 25626,
+     "end_frame": 25707
     }
    ],
-   "end": 858.225,
-   "start_frame": 24256,
-   "end_frame": 25747
+   "end": 857.7,
+   "start_frame": 24241,
+   "end_frame": 25731
   },
   {
    "id": "s18_cases",
-   "start": 858.225,
+   "start": 857.7,
    "sentences": [
     {
      "text": "Now let's keep one arrow fixed and change only the other.",
      "audio_text": null,
-     "start": 858.225,
-     "end": 862.375,
+     "start": 857.7,
+     "end": 861.85,
      "dur": 4.15,
-     "start_frame": 25747,
-     "end_frame": 25871
+     "start_frame": 25731,
+     "end_frame": 25856
     },
     {
      "text": "The fixed arrow, p, has components three, zero and zero.",
      "audio_text": null,
-     "start": 862.725,
-     "end": 867.1,
+     "start": 862.2,
+     "end": 866.575,
      "dur": 4.375,
-     "start_frame": 25882,
-     "end_frame": 26013
+     "start_frame": 25866,
+     "end_frame": 25997
     },
     {
      "text": "First, q points the same way, with components two, zero and zero.",
      "audio_text": null,
-     "start": 867.45,
-     "end": 872.225,
+     "start": 866.925,
+     "end": 871.7,
      "dur": 4.775,
-     "start_frame": 26024,
-     "end_frame": 26167
+     "start_frame": 26008,
+     "end_frame": 26151
     },
     {
      "text": "The parallelogram is squashed flat, so p cross q is zero.",
      "audio_text": null,
-     "start": 872.575,
-     "end": 877.2,
+     "start": 872.05,
+     "end": 876.675,
      "dur": 4.625,
-     "start_frame": 26177,
-     "end_frame": 26316,
+     "start_frame": 26162,
+     "end_frame": 26300,
      "beat": true
     },
     {
      "text": "Next, q is at a right angle to p, with components zero, two and zero.",
      "audio_text": null,
-     "start": 878.7,
-     "end": 884.15,
+     "start": 878.175,
+     "end": 883.625,
      "dur": 5.45,
-     "start_frame": 26361,
-     "end_frame": 26525
+     "start_frame": 26345,
+     "end_frame": 26509
     },
     {
      "text": "The parallelogram is a three by two rectangle, and p cross q points straight up, six units long.",
      "audio_text": null,
-     "start": 884.5,
-     "end": 891.5,
+     "start": 883.975,
+     "end": 890.975,
      "dur": 7.0,
-     "start_frame": 26535,
-     "end_frame": 26745,
+     "start_frame": 26519,
+     "end_frame": 26729,
      "beat": true
     },
     {
      "text": "Last, q points the opposite way, with components minus two, zero and zero.",
      "audio_text": null,
-     "start": 893.0,
-     "end": 898.75,
+     "start": 892.475,
+     "end": 898.225,
      "dur": 5.75,
-     "start_frame": 26790,
-     "end_frame": 26963
+     "start_frame": 26774,
+     "end_frame": 26947
     },
     {
      "text": "The parallelogram is flat again, so the cross product is zero.",
      "audio_text": null,
-     "start": 899.1,
-     "end": 903.675,
+     "start": 898.575,
+     "end": 903.15,
      "dur": 4.575,
-     "start_frame": 26973,
-     "end_frame": 27110,
+     "start_frame": 26957,
+     "end_frame": 27094,
      "beat": true
     },
     {
      "text": "So the cross product is zero when two vectors point the same way or in opposite directions, and as long as it can be at right angles.",
      "audio_text": null,
-     "start": 905.175,
-     "end": 914.225,
+     "start": 904.65,
+     "end": 913.7,
      "dur": 9.05,
-     "start_frame": 27155,
-     "end_frame": 27427
+     "start_frame": 27140,
+     "end_frame": 27411
     },
     {
-     "text": "That's the opposite of the dot product, which is zero at a right angle, and largest when the arrows lie along one line.",
+     "text": "That's the opposite of the dot product, which is zero at a right angle, and largest when the arrows point the same way.",
      "audio_text": null,
-     "start": 914.575,
-     "end": 922.4,
-     "dur": 7.825,
-     "start_frame": 27437,
-     "end_frame": 27672
+     "start": 914.05,
+     "end": 921.675,
+     "dur": 7.625,
+     "start_frame": 27422,
+     "end_frame": 27650
     },
     {
      "text": "And if q keeps turning past the opposite direction, the turn from p to q becomes clockwise, and the arrow flips to point down.",
      "audio_text": null,
-     "start": 922.75,
-     "end": 931.5,
+     "start": 922.025,
+     "end": 930.775,
      "dur": 8.75,
-     "start_frame": 27683,
-     "end_frame": 27945
+     "start_frame": 27661,
+     "end_frame": 27923
     }
    ],
-   "end": 932.3,
-   "start_frame": 25747,
-   "end_frame": 27969
+   "end": 931.575,
+   "start_frame": 25731,
+   "end_frame": 27947
   },
   {
    "id": "s18a_why_question",
-   "start": 932.3,
+   "start": 931.575,
    "sentences": [
     {
      "text": "So now we know how to calculate the cross product and which way it points.",
      "audio_text": null,
-     "start": 932.3,
-     "end": 937.1,
+     "start": 931.575,
+     "end": 936.375,
      "dur": 4.8,
-     "start_frame": 27969,
-     "end_frame": 28113
+     "start_frame": 27947,
+     "end_frame": 28091
     },
     {
      "text": "But why is it built like this?",
      "audio_text": null,
-     "start": 937.45,
-     "end": 939.65,
+     "start": 936.725,
+     "end": 938.925,
      "dur": 2.2,
-     "start_frame": 28124,
-     "end_frame": 28190
+     "start_frame": 28102,
+     "end_frame": 28168
     },
     {
      "text": "Why the sine, and why an area?",
      "audio_text": null,
-     "start": 940.0,
-     "end": 942.55,
+     "start": 939.275,
+     "end": 941.825,
      "dur": 2.55,
-     "start_frame": 28200,
-     "end_frame": 28277
+     "start_frame": 28178,
+     "end_frame": 28255
     },
     {
      "text": "And if its length is an area, why is it an arrow that points up or down?",
      "audio_text": null,
-     "start": 942.9,
-     "end": 947.75,
+     "start": 942.175,
+     "end": 947.025,
      "dur": 4.85,
-     "start_frame": 28287,
-     "end_frame": 28433
+     "start_frame": 28265,
+     "end_frame": 28411
     },
     {
      "text": "And why the minus sign in the recipe?",
      "audio_text": null,
-     "start": 948.1,
-     "end": 950.9,
+     "start": 947.375,
+     "end": 950.175,
      "dur": 2.8,
-     "start_frame": 28443,
-     "end_frame": 28527
+     "start_frame": 28421,
+     "end_frame": 28505
     },
     {
      "text": "Let's take these one at a time.",
      "audio_text": null,
-     "start": 951.25,
-     "end": 953.625,
+     "start": 950.525,
+     "end": 952.9,
      "dur": 2.375,
-     "start_frame": 28538,
-     "end_frame": 28609
+     "start_frame": 28516,
+     "end_frame": 28587
     }
    ],
-   "end": 954.425,
-   "start_frame": 27969,
-   "end_frame": 28633
+   "end": 953.7,
+   "start_frame": 27947,
+   "end_frame": 28611
   },
   {
    "id": "s18b_across_part",
-   "start": 954.425,
+   "start": 953.7,
    "sentences": [
     {
      "text": "Let's start with the sine.",
      "audio_text": null,
-     "start": 954.425,
-     "end": 956.45,
+     "start": 953.7,
+     "end": 955.725,
      "dur": 2.025,
-     "start_frame": 28633,
-     "end_frame": 28694
+     "start_frame": 28611,
+     "end_frame": 28672
     },
     {
      "text": "The dot product used the shadow, the part of b that lies along the first arrow.",
      "audio_text": null,
-     "start": 956.8,
-     "end": 962.375,
+     "start": 956.075,
+     "end": 961.65,
      "dur": 5.575,
-     "start_frame": 28704,
-     "end_frame": 28871
+     "start_frame": 28682,
+     "end_frame": 28850
     },
     {
      "text": "Now let's split b into two pieces.",
      "audio_text": null,
-     "start": 962.725,
-     "end": 965.475,
+     "start": 962.0,
+     "end": 964.75,
      "dur": 2.75,
-     "start_frame": 28882,
-     "end_frame": 28964
+     "start_frame": 28860,
+     "end_frame": 28942
     },
     {
      "text": "One piece lies along vector a and the other goes straight across it, at a right angle.",
      "audio_text": "One piece lies along vector [A](/ˈA/) and the other goes straight across it, at a right angle.",
-     "start": 965.825,
-     "end": 971.95,
+     "start": 965.1,
+     "end": 971.225,
      "dur": 6.125,
-     "start_frame": 28975,
-     "end_frame": 29159
+     "start_frame": 28953,
+     "end_frame": 29137
     },
     {
      "text": "Together they make b.",
      "audio_text": null,
-     "start": 972.3,
-     "end": 974.3,
+     "start": 971.575,
+     "end": 973.575,
      "dur": 2.0,
-     "start_frame": 29169,
-     "end_frame": 29229
+     "start_frame": 29147,
+     "end_frame": 29207
     },
     {
      "text": "Here, the part along is about one point five seven, and the part across is about two point seven five.",
      "audio_text": null,
-     "start": 974.65,
-     "end": 981.65,
+     "start": 973.925,
+     "end": 980.925,
      "dur": 7.0,
-     "start_frame": 29240,
-     "end_frame": 29450,
+     "start_frame": 29218,
+     "end_frame": 29428,
      "beat": true
     },
     {
      "text": "The part across is the length of b times sine theta.",
      "audio_text": null,
-     "start": 983.15,
-     "end": 987.025,
+     "start": 982.425,
+     "end": 986.3,
      "dur": 3.875,
-     "start_frame": 29495,
-     "end_frame": 29611
+     "start_frame": 29473,
+     "end_frame": 29589
     },
     {
      "text": "So the length of a cross b is the length of vector a times the part of b across it: five point one times two point seven five, about fourteen.",
      "audio_text": "So the length of [A](/ˈA/) cross b is the length of vector [A](/ˈA/) times the part of b across it: five point one times two point seven five, about fourteen.",
-     "start": 987.375,
-     "end": 997.95,
+     "start": 986.65,
+     "end": 997.225,
      "dur": 10.575,
-     "start_frame": 29621,
-     "end_frame": 29939,
+     "start_frame": 29600,
+     "end_frame": 29917,
      "beat": true
     },
     {
      "text": "The dot product uses the part along, and the cross product uses the part across.",
      "audio_text": null,
-     "start": 999.45,
-     "end": 1005.1,
+     "start": 998.725,
+     "end": 1004.375,
      "dur": 5.65,
-     "start_frame": 29984,
-     "end_frame": 30153
+     "start_frame": 29962,
+     "end_frame": 30131
     }
    ],
-   "end": 1005.9,
-   "start_frame": 28633,
-   "end_frame": 30177
+   "end": 1005.175,
+   "start_frame": 28611,
+   "end_frame": 30155
   },
   {
    "id": "s18d_two_parts",
-   "start": 1005.9,
+   "start": 1005.175,
    "sentences": [
     {
      "text": "The two products share b between them.",
      "audio_text": null,
-     "start": 1005.9,
-     "end": 1008.725,
+     "start": 1005.175,
+     "end": 1008.0,
      "dur": 2.825,
-     "start_frame": 30177,
-     "end_frame": 30262
+     "start_frame": 30155,
+     "end_frame": 30240
     },
     {
      "text": "The part along is the length of b times cos theta, and the part across is the length of b times sine theta.",
      "audio_text": null,
-     "start": 1009.075,
-     "end": 1016.5,
+     "start": 1008.35,
+     "end": 1015.775,
      "dur": 7.425,
-     "start_frame": 30272,
-     "end_frame": 30495
+     "start_frame": 30250,
+     "end_frame": 30473
     },
     {
      "text": "They are the two short sides of a right triangle, whose long side is b itself.",
      "audio_text": null,
-     "start": 1016.85,
-     "end": 1022.35,
+     "start": 1016.125,
+     "end": 1021.625,
      "dur": 5.5,
-     "start_frame": 30506,
-     "end_frame": 30671
+     "start_frame": 30484,
+     "end_frame": 30649
     },
     {
      "text": "Multiply both sides by the length of vector a too.",
      "audio_text": "Multiply both sides by the length of vector [A](/ˈA/) too.",
-     "start": 1022.7,
-     "end": 1026.525,
+     "start": 1021.975,
+     "end": 1025.8,
      "dur": 3.825,
-     "start_frame": 30681,
-     "end_frame": 30796
+     "start_frame": 30659,
+     "end_frame": 30774
     },
     {
      "text": "Then Pythagoras gives a neat rule: a dot b squared, plus the length of a cross b squared, equals the two lengths squared, multiplied.",
      "audio_text": "Then Pythagoras gives a neat rule: [A](/ˈA/) dot b squared, plus the length of [A](/ˈA/) cross b squared, equals the two lengths squared, multiplied.",
-     "start": 1026.875,
-     "end": 1036.45,
+     "start": 1026.15,
+     "end": 1035.725,
      "dur": 9.575,
-     "start_frame": 30806,
-     "end_frame": 31094
+     "start_frame": 30785,
+     "end_frame": 31072
     },
     {
      "text": "With our numbers, eight squared is sixty four, and fourteen squared is one hundred and ninety six, which add up to two hundred and sixty.",
      "audio_text": null,
-     "start": 1036.8,
-     "end": 1045.775,
+     "start": 1036.075,
+     "end": 1045.05,
      "dur": 8.975,
-     "start_frame": 31104,
-     "end_frame": 31373,
+     "start_frame": 31082,
+     "end_frame": 31352,
      "beat": true
     },
     {
      "text": "That's twenty six times ten, the two lengths squared.",
      "audio_text": null,
-     "start": 1047.275,
-     "end": 1051.125,
+     "start": 1046.55,
+     "end": 1050.4,
      "dur": 3.85,
-     "start_frame": 31418,
-     "end_frame": 31534,
+     "start_frame": 31396,
+     "end_frame": 31512,
      "beat": true
     },
     {
      "text": "So the dot product uses the part along, the cross product uses the part across, and together they use all of b.",
      "audio_text": null,
-     "start": 1052.625,
-     "end": 1060.45,
+     "start": 1051.9,
+     "end": 1059.725,
      "dur": 7.825,
-     "start_frame": 31579,
-     "end_frame": 31814
+     "start_frame": 31557,
+     "end_frame": 31792
     }
    ],
-   "end": 1061.25,
-   "start_frame": 30177,
-   "end_frame": 31838
+   "end": 1060.525,
+   "start_frame": 30155,
+   "end_frame": 31816
   },
   {
    "id": "s18c_slide",
-   "start": 1061.25,
+   "start": 1060.525,
    "sentences": [
     {
      "text": "What if we change only the part along?",
      "audio_text": null,
-     "start": 1061.25,
-     "end": 1064.025,
+     "start": 1060.525,
+     "end": 1063.3,
      "dur": 2.775,
-     "start_frame": 31838,
-     "end_frame": 31921
+     "start_frame": 31816,
+     "end_frame": 31899
     },
     {
      "text": "Let's slide the tip of b along the direction of vector a until it reaches six, four.",
      "audio_text": "Let's slide the tip of b along the direction of vector [A](/ˈA/) until it reaches six, four.",
-     "start": 1064.375,
-     "end": 1070.3,
+     "start": 1063.65,
+     "end": 1069.575,
      "dur": 5.925,
-     "start_frame": 31931,
-     "end_frame": 32109
+     "start_frame": 31910,
+     "end_frame": 32087
     },
     {
      "text": "The parallelogram leans over.",
      "audio_text": null,
-     "start": 1070.65,
-     "end": 1073.35,
+     "start": 1069.925,
+     "end": 1072.625,
      "dur": 2.7,
-     "start_frame": 32120,
-     "end_frame": 32201
+     "start_frame": 32098,
+     "end_frame": 32179
     },
     {
      "text": "But its base stays the same, and so does its height.",
      "audio_text": null,
-     "start": 1073.7,
-     "end": 1077.25,
+     "start": 1072.975,
+     "end": 1076.525,
      "dur": 3.55,
-     "start_frame": 32211,
-     "end_frame": 32318
+     "start_frame": 32189,
+     "end_frame": 32296
     },
     {
      "text": "So its area is still fourteen.",
      "audio_text": null,
-     "start": 1077.6,
-     "end": 1080.05,
+     "start": 1076.875,
+     "end": 1079.325,
      "dur": 2.45,
-     "start_frame": 32328,
-     "end_frame": 32402
+     "start_frame": 32306,
+     "end_frame": 32380
     },
     {
      "text": "Let's check with the recipe: five times four, minus one times six, is twenty minus six, which is fourteen again.",
      "audio_text": null,
-     "start": 1080.4,
-     "end": 1088.425,
+     "start": 1079.675,
+     "end": 1087.7,
      "dur": 8.025,
-     "start_frame": 32412,
-     "end_frame": 32653,
+     "start_frame": 32390,
+     "end_frame": 32631,
      "beat": true
     },
     {
      "text": "However far we slide, a cross b doesn't change.",
      "audio_text": "However far we slide, [A](/ˈA/) cross b doesn't change.",
-     "start": 1089.925,
-     "end": 1093.65,
+     "start": 1089.2,
+     "end": 1092.925,
      "dur": 3.725,
-     "start_frame": 32698,
-     "end_frame": 32810
+     "start_frame": 32676,
+     "end_frame": 32788
     },
     {
      "text": "So the cross product ignores how much two arrows agree.",
      "audio_text": null,
-     "start": 1094.0,
-     "end": 1097.825,
+     "start": 1093.275,
+     "end": 1097.1,
      "dur": 3.825,
-     "start_frame": 32820,
-     "end_frame": 32935
+     "start_frame": 32798,
+     "end_frame": 32913
     },
     {
      "text": "It measures only how much one arrow reaches across the other.",
      "audio_text": null,
-     "start": 1098.175,
-     "end": 1102.425,
+     "start": 1097.45,
+     "end": 1101.7,
      "dur": 4.25,
-     "start_frame": 32945,
-     "end_frame": 33073
+     "start_frame": 32924,
+     "end_frame": 33051
     }
    ],
-   "end": 1103.225,
-   "start_frame": 31838,
-   "end_frame": 33097
+   "end": 1102.5,
+   "start_frame": 31816,
+   "end_frame": 33075
   },
   {
    "id": "s20_torque",
-   "start": 1103.225,
+   "start": 1102.5,
    "sentences": [
     {
      "text": "Why would anyone want the part across?",
      "audio_text": null,
-     "start": 1103.225,
-     "end": 1105.9,
+     "start": 1102.5,
+     "end": 1105.175,
      "dur": 2.675,
-     "start_frame": 33097,
-     "end_frame": 33177
+     "start_frame": 33075,
+     "end_frame": 33155
     },
     {
      "text": "Because only that part can turn things.",
      "audio_text": null,
-     "start": 1106.25,
-     "end": 1109.125,
+     "start": 1105.525,
+     "end": 1108.4,
      "dur": 2.875,
-     "start_frame": 33188,
-     "end_frame": 33274
+     "start_frame": 33166,
+     "end_frame": 33252
     },
     {
      "text": "Imagine turning a bolt with a spanner.",
      "audio_text": null,
-     "start": 1109.475,
-     "end": 1112.4,
+     "start": 1108.75,
+     "end": 1111.675,
      "dur": 2.925,
-     "start_frame": 33284,
-     "end_frame": 33372
+     "start_frame": 33262,
+     "end_frame": 33350
     },
     {
      "text": "Draw an arrow, r, from the bolt to your hand, zero point three metres long, and an arrow, F, for your push of fifty newtons.",
      "audio_text": null,
-     "start": 1112.75,
-     "end": 1121.0,
+     "start": 1112.025,
+     "end": 1120.275,
      "dur": 8.25,
-     "start_frame": 33383,
-     "end_frame": 33630
+     "start_frame": 33361,
+     "end_frame": 33608
     },
     {
      "text": "The part of the push along the spanner just pulls on the bolt, and only the part across turns it.",
      "audio_text": null,
-     "start": 1121.35,
-     "end": 1127.225,
+     "start": 1120.625,
+     "end": 1126.5,
      "dur": 5.875,
-     "start_frame": 33641,
-     "end_frame": 33817
+     "start_frame": 33619,
+     "end_frame": 33795
     },
     {
      "text": "This turning effect is called torque, written tau, and tau equals r cross F.",
      "audio_text": null,
-     "start": 1127.575,
-     "end": 1133.275,
+     "start": 1126.85,
+     "end": 1132.55,
      "dur": 5.7,
-     "start_frame": 33827,
-     "end_frame": 33998
+     "start_frame": 33806,
+     "end_frame": 33976
     },
     {
      "text": "Push at a right angle, and all fifty newtons are across: zero point three times fifty is fifteen newton metres.",
      "audio_text": null,
-     "start": 1133.625,
-     "end": 1141.375,
+     "start": 1132.9,
+     "end": 1140.65,
      "dur": 7.75,
-     "start_frame": 34009,
-     "end_frame": 34241,
+     "start_frame": 33987,
+     "end_frame": 34220,
      "beat": true
     },
     {
      "text": "Push at thirty degrees, and the part along is about forty three newtons, while the part across is fifty times sine thirty, twenty five newtons.",
      "audio_text": null,
-     "start": 1142.875,
-     "end": 1152.475,
+     "start": 1142.15,
+     "end": 1151.75,
      "dur": 9.6,
-     "start_frame": 34286,
-     "end_frame": 34574,
+     "start_frame": 34264,
+     "end_frame": 34552,
      "beat": true
     },
     {
      "text": "The torque drops to seven point five newton metres.",
      "audio_text": null,
-     "start": 1153.975,
-     "end": 1157.525,
+     "start": 1153.25,
+     "end": 1156.8,
      "dur": 3.55,
-     "start_frame": 34619,
-     "end_frame": 34726,
+     "start_frame": 34598,
+     "end_frame": 34704,
      "beat": true
     },
     {
      "text": "Push along the spanner, and nothing is across, so the bolt doesn't turn.",
      "audio_text": null,
-     "start": 1159.025,
-     "end": 1164.1,
+     "start": 1158.3,
+     "end": 1163.375,
      "dur": 5.075,
-     "start_frame": 34771,
-     "end_frame": 34923
+     "start_frame": 34749,
+     "end_frame": 34901
     }
    ],
-   "end": 1164.9,
-   "start_frame": 33097,
-   "end_frame": 34947
+   "end": 1164.175,
+   "start_frame": 33075,
+   "end_frame": 34925
   },
   {
    "id": "s21_torque_axis",
-   "start": 1164.9,
+   "start": 1164.175,
    "sentences": [
     {
      "text": "The torque arrow points along the bolt's axis, and the right-hand rule tells us which way the bolt turns.",
      "audio_text": null,
-     "start": 1164.9,
-     "end": 1171.55,
+     "start": 1164.175,
+     "end": 1170.825,
      "dur": 6.65,
-     "start_frame": 34947,
-     "end_frame": 35146
+     "start_frame": 34925,
+     "end_frame": 35125
     },
     {
      "text": "Curl your fingers from r towards F.",
      "audio_text": null,
-     "start": 1171.9,
-     "end": 1174.725,
+     "start": 1171.175,
+     "end": 1174.0,
      "dur": 2.825,
-     "start_frame": 35157,
-     "end_frame": 35242
+     "start_frame": 35135,
+     "end_frame": 35220
     },
     {
      "text": "If your thumb points down into the nut, the bolt tightens.",
      "audio_text": null,
-     "start": 1175.075,
-     "end": 1179.025,
+     "start": 1174.35,
+     "end": 1178.3,
      "dur": 3.95,
-     "start_frame": 35252,
-     "end_frame": 35371
+     "start_frame": 35230,
+     "end_frame": 35349
     },
     {
      "text": "If it points up, the bolt loosens.",
      "audio_text": null,
-     "start": 1179.375,
-     "end": 1182.075,
+     "start": 1178.65,
+     "end": 1181.35,
      "dur": 2.7,
-     "start_frame": 35381,
-     "end_frame": 35462
+     "start_frame": 35360,
+     "end_frame": 35440
     },
     {
      "text": "So the torque arrow is the axis of the turning, and its direction says which way round: seen from its tip, looking back down the arrow, the turn is always anticlockwise.",
      "audio_text": null,
-     "start": 1182.425,
-     "end": 1193.8,
+     "start": 1181.7,
+     "end": 1193.075,
      "dur": 11.375,
-     "start_frame": 35473,
-     "end_frame": 35814
+     "start_frame": 35451,
+     "end_frame": 35792
     },
     {
      "text": "So the cross product tells us both how strongly a force turns something, and which way.",
      "audio_text": null,
-     "start": 1194.15,
-     "end": 1199.85,
+     "start": 1193.425,
+     "end": 1199.125,
      "dur": 5.7,
-     "start_frame": 35824,
-     "end_frame": 35995
+     "start_frame": 35803,
+     "end_frame": 35974
     }
    ],
-   "end": 1200.65,
-   "start_frame": 34947,
-   "end_frame": 36020
+   "end": 1199.925,
+   "start_frame": 34925,
+   "end_frame": 35998
   },
   {
    "id": "s21a_minus_sign",
-   "start": 1200.65,
+   "start": 1199.925,
    "sentences": [
     {
      "text": "Torque also explains the minus sign in the recipe.",
      "audio_text": null,
-     "start": 1200.65,
-     "end": 1204.525,
+     "start": 1199.925,
+     "end": 1203.8,
      "dur": 3.875,
-     "start_frame": 36019,
-     "end_frame": 36136
+     "start_frame": 35998,
+     "end_frame": 36114
     },
     {
      "text": "Let's lay a spanner flat on the floor, with the bolt at the centre.",
      "audio_text": null,
-     "start": 1204.875,
-     "end": 1209.4,
+     "start": 1204.15,
+     "end": 1208.675,
      "dur": 4.525,
-     "start_frame": 36146,
-     "end_frame": 36282
+     "start_frame": 36124,
+     "end_frame": 36260
     },
     {
      "text": "Its arm, r, reaches point two metres along x and point one along y, and the push, F, has ten newtons along x and thirty along y.",
      "audio_text": null,
-     "start": 1209.75,
-     "end": 1219.925,
+     "start": 1209.025,
+     "end": 1219.2,
      "dur": 10.175,
-     "start_frame": 36292,
-     "end_frame": 36598
+     "start_frame": 36271,
+     "end_frame": 36576
     },
     {
      "text": "Split the push into its two parts.",
      "audio_text": null,
-     "start": 1220.275,
-     "end": 1222.85,
+     "start": 1219.55,
+     "end": 1222.125,
      "dur": 2.575,
-     "start_frame": 36608,
-     "end_frame": 36685
+     "start_frame": 36586,
+     "end_frame": 36664
     },
     {
      "text": "The thirty newtons along y push across the x part of the arm, point two metres.",
      "audio_text": null,
-     "start": 1223.2,
-     "end": 1229.0,
+     "start": 1222.475,
+     "end": 1228.275,
      "dur": 5.8,
-     "start_frame": 36696,
-     "end_frame": 36870
+     "start_frame": 36674,
+     "end_frame": 36848
     },
     {
      "text": "On their own, they turn the spanner anticlockwise, seen from above, with a torque of point two times thirty, which is six newton metres.",
      "audio_text": null,
-     "start": 1229.35,
-     "end": 1238.35,
+     "start": 1228.625,
+     "end": 1237.625,
      "dur": 9.0,
-     "start_frame": 36880,
-     "end_frame": 37150,
+     "start_frame": 36859,
+     "end_frame": 37129,
      "beat": true
     },
     {
      "text": "The ten newtons along x push across the y part of the arm, point one metres.",
      "audio_text": null,
-     "start": 1239.85,
-     "end": 1245.375,
+     "start": 1239.125,
+     "end": 1244.65,
      "dur": 5.525,
-     "start_frame": 37195,
-     "end_frame": 37361
+     "start_frame": 37174,
+     "end_frame": 37340
     },
     {
      "text": "On their own, they turn the spanner the other way, clockwise, with a torque of point one times ten, which is one.",
      "audio_text": null,
-     "start": 1245.725,
-     "end": 1253.0,
+     "start": 1245.0,
+     "end": 1252.275,
      "dur": 7.275,
-     "start_frame": 37372,
-     "end_frame": 37590,
+     "start_frame": 37350,
+     "end_frame": 37568,
      "beat": true
     },
     {
      "text": "The two little torques fight each other, so we subtract: six minus one is five newton metres.",
      "audio_text": null,
-     "start": 1254.5,
-     "end": 1260.95,
+     "start": 1253.775,
+     "end": 1260.225,
      "dur": 6.45,
-     "start_frame": 37635,
-     "end_frame": 37828,
+     "start_frame": 37613,
+     "end_frame": 37807,
      "beat": true
     },
     {
      "text": "That's the z recipe: the x part of r times the y part of F, minus the y part of r times the x part of F.",
      "audio_text": null,
-     "start": 1262.45,
-     "end": 1270.625,
+     "start": 1261.725,
+     "end": 1269.9,
      "dur": 8.175,
-     "start_frame": 37873,
-     "end_frame": 38119
+     "start_frame": 37852,
+     "end_frame": 38097
     },
     {
      "text": "The minus sign is there because the two parts turn the spanner in opposite directions.",
      "audio_text": null,
-     "start": 1270.975,
-     "end": 1276.6,
+     "start": 1270.25,
+     "end": 1275.875,
      "dur": 5.625,
-     "start_frame": 38129,
-     "end_frame": 38298
+     "start_frame": 38108,
+     "end_frame": 38276
     }
    ],
-   "end": 1277.4,
-   "start_frame": 36020,
-   "end_frame": 38322
+   "end": 1276.675,
+   "start_frame": 35998,
+   "end_frame": 38300
   },
   {
    "id": "s21b_x_component",
-   "start": 1277.4,
+   "start": 1276.675,
    "sentences": [
     {
      "text": "The same idea builds the x component.",
      "audio_text": null,
-     "start": 1277.4,
-     "end": 1280.625,
+     "start": 1276.675,
+     "end": 1279.9,
      "dur": 3.225,
-     "start_frame": 38322,
-     "end_frame": 38419
+     "start_frame": 38300,
+     "end_frame": 38397
     },
     {
      "text": "Turning about the x axis happens in the wall made by y and z, so only the y and z parts can do it.",
      "audio_text": null,
-     "start": 1280.975,
-     "end": 1288.075,
+     "start": 1280.25,
+     "end": 1287.35,
      "dur": 7.1,
-     "start_frame": 38429,
-     "end_frame": 38642
+     "start_frame": 38408,
+     "end_frame": 38620
     },
     {
      "text": "Let's stand our spanner up in that wall: the arm reaches point two metres along y and point one along z, and the push has ten newtons along y and thirty along z.",
      "audio_text": null,
-     "start": 1288.425,
-     "end": 1299.35,
+     "start": 1287.7,
+     "end": 1298.625,
      "dur": 10.925,
-     "start_frame": 38653,
-     "end_frame": 38980
+     "start_frame": 38631,
+     "end_frame": 38959
     },
     {
      "text": "The thirty newtons along z push across the y part of the arm.",
      "audio_text": null,
-     "start": 1299.7,
-     "end": 1304.425,
+     "start": 1298.975,
+     "end": 1303.7,
      "dur": 4.725,
-     "start_frame": 38991,
-     "end_frame": 39133
+     "start_frame": 38969,
+     "end_frame": 39111
     },
     {
      "text": "Seen from the tip of x hat, looking back at the wall, they turn the spanner anticlockwise, with a torque of point two times thirty, which is six.",
      "audio_text": null,
-     "start": 1304.775,
-     "end": 1314.0,
+     "start": 1304.05,
+     "end": 1313.275,
      "dur": 9.225,
-     "start_frame": 39143,
-     "end_frame": 39420,
+     "start_frame": 39122,
+     "end_frame": 39398,
      "beat": true
     },
     {
      "text": "The ten newtons along y push across the z part of the arm, and turn it clockwise: point one times ten, which is one.",
      "audio_text": null,
-     "start": 1315.5,
-     "end": 1323.8,
+     "start": 1314.775,
+     "end": 1323.075,
      "dur": 8.3,
-     "start_frame": 39465,
-     "end_frame": 39714,
+     "start_frame": 39443,
+     "end_frame": 39692,
      "beat": true
     },
     {
      "text": "Again the two fight, so we subtract, and get five newton metres.",
      "audio_text": null,
-     "start": 1325.3,
-     "end": 1330.0,
+     "start": 1324.575,
+     "end": 1329.275,
      "dur": 4.7,
-     "start_frame": 39759,
-     "end_frame": 39900,
+     "start_frame": 39737,
+     "end_frame": 39878,
      "beat": true
     },
     {
      "text": "That's the x recipe: the y part of r times the z part of F, minus the z part of r times the y part of F.",
      "audio_text": null,
-     "start": 1331.5,
-     "end": 1339.9,
+     "start": 1330.775,
+     "end": 1339.175,
      "dur": 8.4,
-     "start_frame": 39945,
-     "end_frame": 40197
+     "start_frame": 39923,
+     "end_frame": 40175
     }
    ],
-   "end": 1340.7,
-   "start_frame": 38322,
-   "end_frame": 40221
+   "end": 1339.975,
+   "start_frame": 38300,
+   "end_frame": 40199
   },
   {
    "id": "s21c_y_component",
-   "start": 1340.7,
+   "start": 1339.975,
    "sentences": [
     {
      "text": "And the y component, the turning about y, happens in the wall made by z and x.",
      "audio_text": null,
-     "start": 1340.7,
-     "end": 1346.4,
+     "start": 1339.975,
+     "end": 1345.675,
      "dur": 5.7,
-     "start_frame": 40221,
-     "end_frame": 40392
+     "start_frame": 40199,
+     "end_frame": 40370
     },
     {
      "text": "Following the cycle, z comes before x.",
      "audio_text": null,
-     "start": 1346.75,
-     "end": 1350.05,
+     "start": 1346.025,
+     "end": 1349.325,
      "dur": 3.3,
-     "start_frame": 40402,
-     "end_frame": 40501
+     "start_frame": 40381,
+     "end_frame": 40480
     },
     {
      "text": "So the y component is the z part of r times the x part of F, minus the x part of r times the z part of F.",
      "audio_text": null,
-     "start": 1350.4,
-     "end": 1358.85,
+     "start": 1349.675,
+     "end": 1358.125,
      "dur": 8.45,
-     "start_frame": 40512,
-     "end_frame": 40765
+     "start_frame": 40490,
+     "end_frame": 40744
     },
     {
      "text": "With an arm of point two metres along z and point one along x, and a push of thirty newtons along x and ten along z, that's point two times thirty, minus point one times ten: six minus one, five again.",
      "audio_text": null,
-     "start": 1359.2,
-     "end": 1373.9,
+     "start": 1358.475,
+     "end": 1373.175,
      "dur": 14.7,
-     "start_frame": 40776,
-     "end_frame": 41217,
+     "start_frame": 40754,
+     "end_frame": 41195,
      "beat": true
     },
     {
      "text": "You'll often see the recipe written as a determinant: a three by three grid, with x hat, y hat and z hat on the top row, then the parts of r, then the parts of F.",
      "audio_text": null,
-     "start": 1375.4,
-     "end": 1386.7,
+     "start": 1374.675,
+     "end": 1385.975,
      "dur": 11.3,
-     "start_frame": 41262,
-     "end_frame": 41601
+     "start_frame": 41240,
+     "end_frame": 41579
     },
     {
      "text": "We don't need determinants here, only what the grid gives.",
      "audio_text": null,
-     "start": 1387.05,
-     "end": 1390.925,
+     "start": 1386.325,
+     "end": 1390.2,
      "dur": 3.875,
-     "start_frame": 41611,
-     "end_frame": 41728
+     "start_frame": 41590,
+     "end_frame": 41706
     },
     {
      "text": "Its middle term has a minus sign in front of y hat, and the pair inside looks backwards: the x part of r times the z part of F, minus the z part of r times the x part of F.",
      "audio_text": null,
-     "start": 1391.275,
-     "end": 1403.725,
+     "start": 1390.55,
+     "end": 1403.0,
      "dur": 12.45,
-     "start_frame": 41738,
-     "end_frame": 42112
+     "start_frame": 41716,
+     "end_frame": 42090
     },
     {
      "text": "But the minus in front swaps the two products, and that's exactly our cycle order, z before x.",
      "audio_text": null,
-     "start": 1404.075,
-     "end": 1411.1,
+     "start": 1403.35,
+     "end": 1410.375,
      "dur": 7.025,
-     "start_frame": 42122,
-     "end_frame": 42333
+     "start_frame": 42100,
+     "end_frame": 42311
     },
     {
      "text": "So all three components follow one pattern: each is the turning about its own axis, made by the two parts that lie across that axis, with a plus for the turn that follows the cycle and a minus for the turn against it.",
      "audio_text": null,
-     "start": 1411.45,
-     "end": 1425.725,
+     "start": 1410.725,
+     "end": 1425.0,
      "dur": 14.275,
-     "start_frame": 42343,
-     "end_frame": 42772
+     "start_frame": 42322,
+     "end_frame": 42750
     }
    ],
-   "end": 1426.525,
-   "start_frame": 40221,
-   "end_frame": 42796
+   "end": 1425.8,
+   "start_frame": 40199,
+   "end_frame": 42774
   },
   {
    "id": "s21d_tilted_axis",
-   "start": 1426.525,
+   "start": 1425.8,
    "sentences": [
     {
      "text": "In full three dimensions, all three components work together.",
      "audio_text": null,
-     "start": 1426.525,
-     "end": 1430.95,
+     "start": 1425.8,
+     "end": 1430.225,
      "dur": 4.425,
-     "start_frame": 42796,
-     "end_frame": 42928
+     "start_frame": 42774,
+     "end_frame": 42907
     },
     {
      "text": "Imagine a ball floating in space, and brush your finger past it, off centre.",
      "audio_text": null,
-     "start": 1431.3,
-     "end": 1436.85,
+     "start": 1430.575,
+     "end": 1436.125,
      "dur": 5.55,
-     "start_frame": 42939,
-     "end_frame": 43105
+     "start_frame": 42917,
+     "end_frame": 43084
     },
     {
      "text": "The arrow from the centre to your finger, r, and your push, F, can both have x, y and z parts.",
      "audio_text": null,
-     "start": 1437.2,
-     "end": 1444.175,
+     "start": 1436.475,
+     "end": 1443.45,
      "dur": 6.975,
-     "start_frame": 43116,
-     "end_frame": 43325
+     "start_frame": 43094,
+     "end_frame": 43304
     },
     {
      "text": "The x and y parts turn the ball about z, just like the spanner on the floor.",
      "audio_text": null,
-     "start": 1444.525,
-     "end": 1449.725,
+     "start": 1443.8,
+     "end": 1449.0,
      "dur": 5.2,
-     "start_frame": 43336,
-     "end_frame": 43492
+     "start_frame": 43314,
+     "end_frame": 43470
     },
     {
      "text": "The y and z parts turn it about x, and the z and x parts turn it about y.",
      "audio_text": null,
-     "start": 1450.075,
-     "end": 1455.2,
+     "start": 1449.35,
+     "end": 1454.475,
      "dur": 5.125,
-     "start_frame": 43502,
-     "end_frame": 43656
+     "start_frame": 43480,
+     "end_frame": 43634
     },
     {
      "text": "Here r reaches point one metres along x and point one up, and the push is two newtons along y.",
      "audio_text": null,
-     "start": 1455.55,
-     "end": 1462.25,
+     "start": 1454.825,
+     "end": 1461.525,
      "dur": 6.7,
-     "start_frame": 43666,
-     "end_frame": 43867
+     "start_frame": 43645,
+     "end_frame": 43846
     },
     {
      "text": "The recipe gives a torque with components minus point two, zero and point two newton metres.",
      "audio_text": null,
-     "start": 1462.6,
-     "end": 1469.025,
+     "start": 1461.875,
+     "end": 1468.3,
      "dur": 6.425,
-     "start_frame": 43878,
-     "end_frame": 44071,
+     "start_frame": 43856,
+     "end_frame": 44049,
      "beat": true
     },
     {
      "text": "The little torques add up like any arrows, to one torque about a tilted axis, and the ball starts to spin about that axis.",
      "audio_text": null,
-     "start": 1470.525,
-     "end": 1478.6,
+     "start": 1469.8,
+     "end": 1477.875,
      "dur": 8.075,
-     "start_frame": 44116,
-     "end_frame": 44358
+     "start_frame": 44094,
+     "end_frame": 44336
     }
    ],
-   "end": 1479.4,
-   "start_frame": 42796,
-   "end_frame": 44382
+   "end": 1478.675,
+   "start_frame": 42774,
+   "end_frame": 44360
   },
   {
    "id": "s22_door_again",
-   "start": 1479.4,
+   "start": 1478.675,
    "sentences": [
     {
      "text": "Now back to the door.",
      "audio_text": null,
-     "start": 1479.4,
-     "end": 1481.375,
+     "start": 1478.675,
+     "end": 1480.65,
      "dur": 1.975,
-     "start_frame": 44382,
-     "end_frame": 44441
+     "start_frame": 44360,
+     "end_frame": 44420
     },
     {
      "text": "With the cross product, a push at right angles to the door gives the largest torque, and a push along the door gives none, just as our hands tell us.",
      "audio_text": null,
-     "start": 1481.725,
-     "end": 1491.05,
+     "start": 1481.0,
+     "end": 1490.325,
      "dur": 9.325,
-     "start_frame": 44452,
-     "end_frame": 44731
+     "start_frame": 44430,
+     "end_frame": 44710
     },
     {
      "text": "The torque arrow points along the hinge: up when the door swings one way, and down when it swings the other.",
      "audio_text": null,
-     "start": 1491.4,
-     "end": 1498.25,
+     "start": 1490.675,
+     "end": 1497.525,
      "dur": 6.85,
-     "start_frame": 44742,
-     "end_frame": 44947
+     "start_frame": 44720,
+     "end_frame": 44926
     },
     {
      "text": "So the cross product is largest at right angles, and it tells left from right.",
      "audio_text": null,
-     "start": 1498.6,
-     "end": 1504.05,
+     "start": 1497.875,
+     "end": 1503.325,
      "dur": 5.45,
-     "start_frame": 44958,
-     "end_frame": 45121
+     "start_frame": 44936,
+     "end_frame": 45100
     }
    ],
-   "end": 1504.85,
-   "start_frame": 44382,
-   "end_frame": 45146
+   "end": 1504.125,
+   "start_frame": 44360,
+   "end_frame": 45124
   },
   {
    "id": "s22a_plane_normal",
-   "start": 1504.85,
+   "start": 1504.125,
    "sentences": [
     {
      "text": "Now, why does the answer point at right angles to both arrows?",
      "audio_text": null,
-     "start": 1504.85,
-     "end": 1509.275,
+     "start": 1504.125,
+     "end": 1508.55,
      "dur": 4.425,
-     "start_frame": 45145,
-     "end_frame": 45278
+     "start_frame": 45124,
+     "end_frame": 45256
     },
     {
      "text": "The spanner turns in one flat plane, the plane of r and F, and the bolt turns about an axis sticking straight out of that plane.",
      "audio_text": null,
-     "start": 1509.625,
-     "end": 1518.35,
+     "start": 1508.9,
+     "end": 1517.625,
      "dur": 8.725,
-     "start_frame": 45289,
-     "end_frame": 45550
+     "start_frame": 45267,
+     "end_frame": 45529
     },
     {
      "text": "Any turning, or sweep of one arrow across another, happens in a plane.",
      "audio_text": null,
-     "start": 1518.7,
-     "end": 1523.825,
+     "start": 1517.975,
+     "end": 1523.1,
      "dur": 5.125,
-     "start_frame": 45561,
-     "end_frame": 45715
+     "start_frame": 45539,
+     "end_frame": 45693
     },
     {
      "text": "In three dimensions, the simplest way to say which plane is to give the one direction straight out of it: the normal to the plane.",
      "audio_text": null,
-     "start": 1524.175,
-     "end": 1532.3,
+     "start": 1523.45,
+     "end": 1531.575,
      "dur": 8.125,
-     "start_frame": 45725,
-     "end_frame": 45969
+     "start_frame": 45704,
+     "end_frame": 45947
     },
     {
      "text": "So the cross product packs two things into one arrow.",
      "audio_text": null,
-     "start": 1532.65,
-     "end": 1536.275,
+     "start": 1531.925,
+     "end": 1535.55,
      "dur": 3.625,
-     "start_frame": 45979,
-     "end_frame": 46088
+     "start_frame": 45958,
+     "end_frame": 46066
     },
     {
      "text": "Its length says how much: the area, or how strongly something turns.",
      "audio_text": null,
-     "start": 1536.625,
-     "end": 1541.5,
+     "start": 1535.9,
+     "end": 1540.775,
      "dur": 4.875,
-     "start_frame": 46099,
-     "end_frame": 46245
+     "start_frame": 46077,
+     "end_frame": 46223
     },
     {
      "text": "Its direction says which plane, and which way round: up means the turn from the first arrow to the second is anticlockwise, seen from above.",
      "audio_text": null,
-     "start": 1541.85,
-     "end": 1551.5,
+     "start": 1541.125,
+     "end": 1550.775,
      "dur": 9.65,
-     "start_frame": 46255,
-     "end_frame": 46545
+     "start_frame": 46234,
+     "end_frame": 46523
     },
     {
      "text": "The area lies flat in the plane, and the arrow stands on it like a label, telling us how big the patch is and which way it faces.",
      "audio_text": null,
-     "start": 1551.85,
-     "end": 1560.45,
+     "start": 1551.125,
+     "end": 1559.725,
      "dur": 8.6,
-     "start_frame": 46555,
-     "end_frame": 46813
+     "start_frame": 46534,
+     "end_frame": 46792
     }
    ],
-   "end": 1561.25,
-   "start_frame": 45146,
-   "end_frame": 46838
+   "end": 1560.525,
+   "start_frame": 45124,
+   "end_frame": 46816
   },
   {
    "id": "s22b_component_shadows",
-   "start": 1561.25,
+   "start": 1560.525,
    "sentences": [
     {
      "text": "This also explains the recipe.",
      "audio_text": null,
-     "start": 1561.25,
-     "end": 1564.0,
+     "start": 1560.525,
+     "end": 1563.275,
      "dur": 2.75,
-     "start_frame": 46837,
-     "end_frame": 46920
+     "start_frame": 46816,
+     "end_frame": 46898
     },
     {
      "text": "Tilt a parallelogram, and look at its shadows on three walls.",
      "audio_text": null,
-     "start": 1564.35,
-     "end": 1568.65,
+     "start": 1563.625,
+     "end": 1567.925,
      "dur": 4.3,
-     "start_frame": 46930,
-     "end_frame": 47059
+     "start_frame": 46909,
+     "end_frame": 47038
     },
     {
      "text": "Its shadow on the floor uses only x and y parts, and its area is the z component.",
      "audio_text": null,
-     "start": 1569.0,
-     "end": 1575.1,
+     "start": 1568.275,
+     "end": 1574.375,
      "dur": 6.1,
-     "start_frame": 47070,
-     "end_frame": 47253
+     "start_frame": 47048,
+     "end_frame": 47231
     },
     {
      "text": "Its shadows on the other two walls give the x and y components.",
      "audio_text": null,
-     "start": 1575.45,
-     "end": 1580.1,
+     "start": 1574.725,
+     "end": 1579.375,
      "dur": 4.65,
-     "start_frame": 47263,
-     "end_frame": 47403
+     "start_frame": 47242,
+     "end_frame": 47381
     },
     {
      "text": "Our parallelogram lies flat on the floor, so seen from the walls it's edge on, with no area.",
      "audio_text": null,
-     "start": 1580.45,
-     "end": 1587.075,
+     "start": 1579.725,
+     "end": 1586.35,
      "dur": 6.625,
-     "start_frame": 47413,
-     "end_frame": 47612
+     "start_frame": 47392,
+     "end_frame": 47590
     },
     {
      "text": "That's why only the z component of a cross b, fourteen, is left.",
      "audio_text": "That's why only the z component of [A](/ˈA/) cross b, fourteen, is left.",
-     "start": 1587.425,
-     "end": 1592.575,
+     "start": 1586.7,
+     "end": 1591.85,
      "dur": 5.15,
-     "start_frame": 47623,
-     "end_frame": 47777,
+     "start_frame": 47601,
+     "end_frame": 47756,
      "beat": true
     }
    ],
-   "end": 1594.075,
-   "start_frame": 46838,
-   "end_frame": 47822
+   "end": 1593.35,
+   "start_frame": 46816,
+   "end_frame": 47800
   },
   {
    "id": "s22c_angular_momentum",
-   "start": 1594.075,
+   "start": 1593.35,
    "sentences": [
     {
      "text": "Nature uses this arrow in many places.",
      "audio_text": null,
-     "start": 1594.075,
-     "end": 1597.225,
+     "start": 1593.35,
+     "end": 1596.5,
      "dur": 3.15,
-     "start_frame": 47822,
-     "end_frame": 47917
+     "start_frame": 47800,
+     "end_frame": 47895
     },
     {
      "text": "First, a ball whirled round on a string.",
      "audio_text": null,
-     "start": 1597.575,
-     "end": 1600.8,
+     "start": 1596.85,
+     "end": 1600.075,
      "dur": 3.225,
-     "start_frame": 47927,
-     "end_frame": 48024
+     "start_frame": 47906,
+     "end_frame": 48002
     },
     {
      "text": "Let r be the arrow from the centre to the ball, half a metre long.",
      "audio_text": null,
-     "start": 1601.15,
-     "end": 1605.8,
+     "start": 1600.425,
+     "end": 1605.075,
      "dur": 4.65,
-     "start_frame": 48034,
-     "end_frame": 48174
+     "start_frame": 48013,
+     "end_frame": 48152
     },
     {
      "text": "The second arrow is the ball's momentum, p: its mass times its velocity.",
      "audio_text": null,
-     "start": 1606.15,
-     "end": 1611.825,
+     "start": 1605.425,
+     "end": 1611.1,
      "dur": 5.675,
-     "start_frame": 48184,
-     "end_frame": 48355
+     "start_frame": 48163,
+     "end_frame": 48333
     },
     {
      "text": "A two kilogram ball moving at three metres per second has a momentum of six.",
      "audio_text": null,
-     "start": 1612.175,
-     "end": 1617.85,
+     "start": 1611.45,
+     "end": 1617.125,
      "dur": 5.675,
-     "start_frame": 48365,
-     "end_frame": 48535,
+     "start_frame": 48344,
+     "end_frame": 48514,
      "beat": true
     },
     {
      "text": "Then r cross p is called the angular momentum: how much spin the ball carries, and about which axis.",
      "audio_text": null,
-     "start": 1619.35,
-     "end": 1626.475,
+     "start": 1618.625,
+     "end": 1625.75,
      "dur": 7.125,
-     "start_frame": 48580,
-     "end_frame": 48794
+     "start_frame": 48559,
+     "end_frame": 48772
     },
     {
      "text": "Here it's zero point five times six, which is three, pointing straight up, because the ball goes round anticlockwise, seen from above.",
      "audio_text": null,
-     "start": 1626.825,
-     "end": 1636.075,
+     "start": 1626.1,
+     "end": 1635.35,
      "dur": 9.25,
-     "start_frame": 48805,
-     "end_frame": 49082,
+     "start_frame": 48783,
+     "end_frame": 49060,
      "beat": true
     },
     {
      "text": "The string pulls along r, so it has no part across r, and it can't change the spin.",
      "audio_text": null,
-     "start": 1637.575,
-     "end": 1643.625,
+     "start": 1636.85,
+     "end": 1642.9,
      "dur": 6.05,
-     "start_frame": 49127,
-     "end_frame": 49309
+     "start_frame": 49106,
+     "end_frame": 49287
     }
    ],
-   "end": 1644.425,
-   "start_frame": 47822,
-   "end_frame": 49333
+   "end": 1643.7,
+   "start_frame": 47800,
+   "end_frame": 49311
   },
   {
    "id": "s22d_moving_charge",
-   "start": 1644.425,
+   "start": 1643.7,
    "sentences": [
     {
      "text": "Second, a charged particle, like a proton, moving through a magnetic field.",
      "audio_text": null,
-     "start": 1644.425,
-     "end": 1650.05,
+     "start": 1643.7,
+     "end": 1649.325,
      "dur": 5.625,
-     "start_frame": 49333,
-     "end_frame": 49501
+     "start_frame": 49311,
+     "end_frame": 49480
     },
     {
      "text": "The first arrow is its velocity, v, and the second is the magnetic field, B.",
      "audio_text": null,
-     "start": 1650.4,
-     "end": 1656.375,
+     "start": 1649.675,
+     "end": 1655.65,
      "dur": 5.975,
-     "start_frame": 49512,
-     "end_frame": 49691
+     "start_frame": 49490,
+     "end_frame": 49670
     },
     {
      "text": "The push on the particle is its charge times v cross B.",
      "audio_text": null,
-     "start": 1656.725,
-     "end": 1661.125,
+     "start": 1656.0,
+     "end": 1660.4,
      "dur": 4.4,
-     "start_frame": 49702,
-     "end_frame": 49834
+     "start_frame": 49680,
+     "end_frame": 49812
     },
     {
      "text": "If it moves east and the field points straight up, v cross B is along x hat cross z hat, which is minus y hat: a push towards the south.",
      "audio_text": null,
-     "start": 1661.475,
-     "end": 1671.35,
+     "start": 1660.75,
+     "end": 1670.625,
      "dur": 9.875,
-     "start_frame": 49844,
-     "end_frame": 50140
+     "start_frame": 49822,
+     "end_frame": 50119
     },
     {
      "text": "This push is always at a right angle to the velocity.",
      "audio_text": null,
-     "start": 1671.7,
-     "end": 1675.55,
+     "start": 1670.975,
+     "end": 1674.825,
      "dur": 3.85,
-     "start_frame": 50151,
-     "end_frame": 50266
+     "start_frame": 50129,
+     "end_frame": 50245
     },
     {
      "text": "So it never speeds the particle up or slows it down.",
      "audio_text": null,
-     "start": 1675.9,
-     "end": 1679.825,
+     "start": 1675.175,
+     "end": 1679.1,
      "dur": 3.925,
-     "start_frame": 50277,
-     "end_frame": 50395
+     "start_frame": 50255,
+     "end_frame": 50373
     },
     {
      "text": "It only bends its path into a circle.",
      "audio_text": null,
-     "start": 1680.175,
-     "end": 1683.2,
+     "start": 1679.45,
+     "end": 1682.475,
      "dur": 3.025,
-     "start_frame": 50405,
-     "end_frame": 50496
+     "start_frame": 50384,
+     "end_frame": 50474
     },
     {
      "text": "That's how particle accelerators steer their beams round a ring.",
      "audio_text": null,
-     "start": 1683.55,
-     "end": 1687.95,
+     "start": 1682.825,
+     "end": 1687.225,
      "dur": 4.4,
-     "start_frame": 50506,
-     "end_frame": 50638
+     "start_frame": 50485,
+     "end_frame": 50617
     }
    ],
-   "end": 1688.75,
-   "start_frame": 49333,
-   "end_frame": 50662
+   "end": 1688.025,
+   "start_frame": 49311,
+   "end_frame": 50641
   },
   {
    "id": "s22e_perp_push",
-   "start": 1688.75,
+   "start": 1688.025,
    "sentences": [
     {
      "text": "Why does a push at right angles change only the direction?",
      "audio_text": null,
-     "start": 1688.75,
-     "end": 1692.7,
+     "start": 1688.025,
+     "end": 1691.975,
      "dur": 3.95,
-     "start_frame": 50662,
-     "end_frame": 50781
+     "start_frame": 50641,
+     "end_frame": 50759
     },
     {
      "text": "Let's try it with numbers.",
      "audio_text": null,
-     "start": 1693.05,
-     "end": 1695.225,
+     "start": 1692.325,
+     "end": 1694.5,
      "dur": 2.175,
-     "start_frame": 50791,
-     "end_frame": 50857
+     "start_frame": 50770,
+     "end_frame": 50835
     },
     {
      "text": "An air parcel moves east at ten metres per second.",
      "audio_text": null,
-     "start": 1695.575,
-     "end": 1699.625,
+     "start": 1694.85,
+     "end": 1698.9,
      "dur": 4.05,
-     "start_frame": 50867,
-     "end_frame": 50989
+     "start_frame": 50846,
+     "end_frame": 50967
     },
     {
      "text": "One sideways kick adds one metre per second towards the north.",
      "audio_text": null,
-     "start": 1699.975,
-     "end": 1704.675,
+     "start": 1699.25,
+     "end": 1703.95,
      "dur": 4.7,
-     "start_frame": 50999,
-     "end_frame": 51140
+     "start_frame": 50978,
+     "end_frame": 51118
     },
     {
      "text": "By Pythagoras, its new speed is the square root of ten squared plus one squared, about ten point zero five.",
      "audio_text": null,
-     "start": 1705.025,
-     "end": 1712.7,
+     "start": 1704.3,
+     "end": 1711.975,
      "dur": 7.675,
-     "start_frame": 51151,
-     "end_frame": 51381,
+     "start_frame": 51129,
+     "end_frame": 51359,
      "beat": true
     },
     {
      "text": "It has turned by almost six degrees, and sped up a little.",
      "audio_text": null,
-     "start": 1714.2,
-     "end": 1718.325,
+     "start": 1713.475,
+     "end": 1717.6,
      "dur": 4.125,
-     "start_frame": 51426,
-     "end_frame": 51550
+     "start_frame": 51404,
+     "end_frame": 51528
     },
     {
      "text": "Now split that kick into ten kicks, each a tenth as big, and each at a right angle to the new direction.",
      "audio_text": null,
-     "start": 1718.675,
-     "end": 1725.875,
+     "start": 1717.95,
+     "end": 1725.15,
      "dur": 7.2,
-     "start_frame": 51560,
-     "end_frame": 51776
+     "start_frame": 51538,
+     "end_frame": 51754
     },
     {
      "text": "It turns by almost the same angle, but its speed only grows to about ten point zero zero five.",
      "audio_text": null,
-     "start": 1726.225,
-     "end": 1733.125,
+     "start": 1725.5,
+     "end": 1732.4,
      "dur": 6.9,
-     "start_frame": 51787,
-     "end_frame": 51994,
+     "start_frame": 51765,
+     "end_frame": 51972,
      "beat": true
     },
     {
      "text": "With a hundred kicks, it's ten point zero zero zero five.",
      "audio_text": null,
-     "start": 1734.625,
-     "end": 1738.925,
+     "start": 1733.9,
+     "end": 1738.2,
      "dur": 4.3,
-     "start_frame": 52039,
-     "end_frame": 52168,
+     "start_frame": 52017,
+     "end_frame": 52146,
      "beat": true
     },
     {
      "text": "So a push that acts all the time, always at a right angle, doesn't change the speed at all: it just bends the path into a circle.",
      "audio_text": null,
-     "start": 1740.425,
-     "end": 1749.35,
+     "start": 1739.7,
+     "end": 1748.625,
      "dur": 8.925,
-     "start_frame": 52213,
-     "end_frame": 52480
+     "start_frame": 52191,
+     "end_frame": 52459
     },
     {
      "text": "The push dot the velocity is zero, so the push does no work.",
      "audio_text": null,
-     "start": 1749.7,
-     "end": 1754.175,
+     "start": 1748.975,
+     "end": 1753.45,
      "dur": 4.475,
-     "start_frame": 52491,
-     "end_frame": 52625
+     "start_frame": 52469,
+     "end_frame": 52604
     }
    ],
-   "end": 1754.975,
-   "start_frame": 50662,
-   "end_frame": 52649
+   "end": 1754.25,
+   "start_frame": 50641,
+   "end_frame": 52628
   },
   {
    "id": "s22w_when_to_use",
-   "start": 1754.975,
+   "start": 1754.25,
    "sentences": [
     {
      "text": "So when do we reach for the cross product?",
      "audio_text": null,
-     "start": 1754.975,
-     "end": 1757.75,
+     "start": 1754.25,
+     "end": 1757.025,
      "dur": 2.775,
-     "start_frame": 52649,
-     "end_frame": 52732
+     "start_frame": 52628,
+     "end_frame": 52711
     },
     {
      "text": "Look at what the two arrows usually stand for.",
      "audio_text": null,
-     "start": 1758.1,
-     "end": 1761.3,
+     "start": 1757.375,
+     "end": 1760.575,
      "dur": 3.2,
-     "start_frame": 52743,
-     "end_frame": 52839
+     "start_frame": 52721,
+     "end_frame": 52817
     },
     {
-     "text": "The first is normally a position or a lever arm, like r from a hinge, a bolt or the centre of a turn, or a spin arrow, like Earth's spin, Omega.",
+     "text": "The first is normally a position or a lever arm, like r from a hinge, a bolt or the centre of a turn, and, in the next video, a spin arrow, like Earth's spin, Omega.",
      "audio_text": null,
-     "start": 1761.65,
-     "end": 1771.9,
-     "dur": 10.25,
-     "start_frame": 52849,
-     "end_frame": 53157
+     "start": 1760.925,
+     "end": 1772.375,
+     "dur": 11.45,
+     "start_frame": 52828,
+     "end_frame": 53171
     },
     {
      "text": "The second is normally a force or a velocity, like a push, F, a momentum, or the wind, u, and when the first is a spin arrow, the second is often a position.",
      "audio_text": null,
-     "start": 1772.25,
-     "end": 1783.5,
+     "start": 1772.725,
+     "end": 1783.975,
      "dur": 11.25,
-     "start_frame": 53167,
-     "end_frame": 53505
+     "start_frame": 53182,
+     "end_frame": 53519
     },
     {
      "text": "Use the cross product whenever you want the size of the part of one arrow that lies across the other, together with a direction at right angles to both: the axis of a turn, or the side towards which something is pushed.",
      "audio_text": null,
-     "start": 1783.85,
-     "end": 1797.95,
+     "start": 1784.325,
+     "end": 1798.425,
      "dur": 14.1,
-     "start_frame": 53515,
-     "end_frame": 53938
+     "start_frame": 53530,
+     "end_frame": 53953
     },
     {
-     "text": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and soon the speed of the spinning ground, Omega cross r, and the Coriolis push, minus two Omega cross u.",
-     "audio_text": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and soon the speed of the spinning ground, Omega cross r, and the [Coriolis](/kˌɔɹiˈOlɪs/) push, minus two Omega cross u.",
-     "start": 1798.3,
-     "end": 1811.825,
-     "dur": 13.525,
-     "start_frame": 53949,
-     "end_frame": 54355
+     "text": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and, in the next video, the speed of the spinning ground, Omega cross r, and the Coriolis push, minus two Omega cross u.",
+     "audio_text": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and, in the next video, the speed of the spinning ground, Omega cross r, and the [Coriolis](/kˌɔɹiˈOlɪs/) push, minus two Omega cross u.",
+     "start": 1798.775,
+     "end": 1812.75,
+     "dur": 13.975,
+     "start_frame": 53963,
+     "end_frame": 54382
     },
     {
      "text": "And keep the order in mind: swap the two arrows, and the answer flips.",
      "audio_text": null,
-     "start": 1812.175,
-     "end": 1816.925,
+     "start": 1813.1,
+     "end": 1817.85,
      "dur": 4.75,
-     "start_frame": 54365,
-     "end_frame": 54508
+     "start_frame": 54393,
+     "end_frame": 54536
     }
    ],
-   "end": 1817.725,
-   "start_frame": 52649,
-   "end_frame": 54532
+   "end": 1818.65,
+   "start_frame": 52628,
+   "end_frame": 54560
   },
   {
    "id": "s19_grid",
-   "start": 1817.725,
+   "start": 1818.65,
    "sentences": [
     {
      "text": "Let's put the two products side by side.",
      "audio_text": null,
-     "start": 1817.725,
-     "end": 1820.7,
+     "start": 1818.65,
+     "end": 1821.625,
      "dur": 2.975,
-     "start_frame": 54532,
-     "end_frame": 54621
+     "start_frame": 54560,
+     "end_frame": 54649
     },
     {
      "text": "The dot product gives a number, using the part along and the cosine.",
      "audio_text": null,
-     "start": 1821.05,
-     "end": 1825.85,
+     "start": 1821.975,
+     "end": 1826.775,
      "dur": 4.8,
-     "start_frame": 54631,
-     "end_frame": 54775
+     "start_frame": 54659,
+     "end_frame": 54803
     },
     {
      "text": "The cross product gives an arrow, using the part across and the sine.",
      "audio_text": null,
-     "start": 1826.2,
-     "end": 1831.025,
+     "start": 1827.125,
+     "end": 1831.95,
      "dur": 4.825,
-     "start_frame": 54786,
-     "end_frame": 54931
+     "start_frame": 54814,
+     "end_frame": 54958
     },
     {
      "text": "The dot product is a shadow times a length.",
      "audio_text": null,
-     "start": 1831.375,
-     "end": 1834.575,
+     "start": 1832.3,
+     "end": 1835.5,
      "dur": 3.2,
-     "start_frame": 54941,
-     "end_frame": 55037
+     "start_frame": 54969,
+     "end_frame": 55065
     },
     {
      "text": "The cross product's length is an area, and its direction is the normal to the plane.",
      "audio_text": null,
-     "start": 1834.925,
-     "end": 1840.6,
+     "start": 1835.85,
+     "end": 1841.525,
      "dur": 5.675,
-     "start_frame": 55048,
-     "end_frame": 55218
+     "start_frame": 55076,
+     "end_frame": 55246
     },
     {
      "text": "The dot product is largest when the arrows point the same way, the cross product at right angles, and only the cross product flips when we swap the order.",
      "audio_text": null,
-     "start": 1840.95,
-     "end": 1850.75,
+     "start": 1841.875,
+     "end": 1851.675,
      "dur": 9.8,
-     "start_frame": 55228,
-     "end_frame": 55522
+     "start_frame": 55256,
+     "end_frame": 55550
     },
     {
      "text": "So the dot product is the part along, a number, and the cross product is the part across, an axis.",
      "audio_text": null,
-     "start": 1851.1,
-     "end": 1857.975,
+     "start": 1852.025,
+     "end": 1858.9,
      "dur": 6.875,
-     "start_frame": 55533,
-     "end_frame": 55739
+     "start_frame": 55561,
+     "end_frame": 55767
     },
     {
      "text": "In mechanics, they give work and torque.",
      "audio_text": null,
-     "start": 1858.325,
-     "end": 1861.325,
+     "start": 1859.25,
+     "end": 1862.25,
      "dur": 3.0,
-     "start_frame": 55750,
-     "end_frame": 55840
+     "start_frame": 55778,
+     "end_frame": 55868
     },
     {
      "text": "In weather, the dot product gives advection, and the cross product turns the wind.",
      "audio_text": null,
-     "start": 1861.675,
-     "end": 1867.275,
+     "start": 1862.6,
+     "end": 1868.2,
      "dur": 5.6,
-     "start_frame": 55850,
-     "end_frame": 56018
+     "start_frame": 55878,
+     "end_frame": 56046
     }
    ],
-   "end": 1868.075,
-   "start_frame": 54532,
-   "end_frame": 56042
+   "end": 1869.0,
+   "start_frame": 54560,
+   "end_frame": 56070
   },
   {
    "id": "s50_recap",
-   "start": 1868.075,
+   "start": 1869.0,
    "sentences": [
     {
      "text": "To sum up, the cross product of two arrows is another arrow, at right angles to both.",
      "audio_text": null,
-     "start": 1868.075,
-     "end": 1874.225,
+     "start": 1869.0,
+     "end": 1875.15,
      "dur": 6.15,
-     "start_frame": 56042,
-     "end_frame": 56227
+     "start_frame": 56070,
+     "end_frame": 56254
     },
     {
      "text": "Its length is the first arrow's length times the part of the second arrow across it: the area of their parallelogram, and the size of a torque.",
      "audio_text": null,
-     "start": 1874.575,
-     "end": 1883.875,
+     "start": 1875.5,
+     "end": 1884.8,
      "dur": 9.3,
-     "start_frame": 56237,
-     "end_frame": 56516
+     "start_frame": 56265,
+     "end_frame": 56544
     },
     {
      "text": "Its direction is the axis of the turn, and seen from its tip, the turn is anticlockwise.",
      "audio_text": null,
-     "start": 1884.225,
-     "end": 1890.7,
+     "start": 1885.15,
+     "end": 1891.625,
      "dur": 6.475,
-     "start_frame": 56527,
-     "end_frame": 56721
+     "start_frame": 56554,
+     "end_frame": 56749
     },
     {
      "text": "Each component is the turning about its own axis, made by the two parts across that axis, with a minus sign because those two parts turn opposite ways.",
      "audio_text": null,
-     "start": 1891.05,
-     "end": 1901.625,
+     "start": 1891.975,
+     "end": 1902.55,
      "dur": 10.575,
-     "start_frame": 56731,
-     "end_frame": 57049
+     "start_frame": 56759,
+     "end_frame": 57076
     },
     {
      "text": "It's zero when the two arrows lie along one line, largest at right angles, and swapping the order flips it.",
      "audio_text": null,
-     "start": 1901.975,
-     "end": 1909.45,
+     "start": 1902.9,
+     "end": 1910.375,
      "dur": 7.475,
-     "start_frame": 57059,
-     "end_frame": 57283
+     "start_frame": 57087,
+     "end_frame": 57311
     },
     {
      "text": "The dot product uses the part along, and the cross product the part across.",
      "audio_text": null,
-     "start": 1909.8,
-     "end": 1915.075,
+     "start": 1910.725,
+     "end": 1916.0,
      "dur": 5.275,
-     "start_frame": 57294,
-     "end_frame": 57452
+     "start_frame": 57322,
+     "end_frame": 57480
     },
     {
      "text": "Physics uses it for torque, angular momentum and the push on a moving charge, and a push always at a right angle turns a motion without speeding it up.",
      "audio_text": null,
-     "start": 1915.425,
-     "end": 1925.475,
+     "start": 1916.35,
+     "end": 1926.4,
      "dur": 10.05,
-     "start_frame": 57463,
-     "end_frame": 57764
+     "start_frame": 57490,
+     "end_frame": 57792
     },
     {
      "text": "The next video puts the cross product to work on our spinning Earth, to explain why the wind turns and why storms spin.",
      "audio_text": null,
-     "start": 1925.825,
-     "end": 1933.65,
+     "start": 1926.75,
+     "end": 1934.575,
      "dur": 7.825,
-     "start_frame": 57775,
-     "end_frame": 58009
+     "start_frame": 57802,
+     "end_frame": 58037
     }
    ],
-   "end": 1934.45,
-   "start_frame": 56042,
-   "end_frame": 58034
+   "end": 1935.375,
+   "start_frame": 56070,
+   "end_frame": 58061
   },
   {
    "id": "s51_end",
-   "start": 1934.45,
+   "start": 1935.375,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 1934.45,
-     "end": 1940.65,
+     "start": 1935.375,
+     "end": 1941.575,
      "dur": 6.2,
-     "start_frame": 58033,
-     "end_frame": 58219
+     "start_frame": 58061,
+     "end_frame": 58247
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
      "audio_text": null,
-     "start": 1941.0,
-     "end": 1949.05,
+     "start": 1941.925,
+     "end": 1949.975,
      "dur": 8.05,
-     "start_frame": 58230,
-     "end_frame": 58471
+     "start_frame": 58258,
+     "end_frame": 58499
     },
     {
      "text": "The notebook for this cross product, and the notebooks for the other maths concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 1949.4,
-     "end": 1957.4,
+     "start": 1950.325,
+     "end": 1958.325,
      "dur": 8.0,
-     "start_frame": 58482,
-     "end_frame": 58722
+     "start_frame": 58510,
+     "end_frame": 58750
     }
    ],
-   "end": 1957.7,
-   "start_frame": 58034,
-   "end_frame": 58731
+   "end": 1958.625,
+   "start_frame": 58061,
+   "end_frame": 58759
   }
- ],
- "total_s": 1957.7,
- "total_frames": 58731,
- "render_s": 704.3,
- "loudnorm_input": {
-  "input_i": "-24.77",
-  "input_tp": "-1.74",
-  "input_lra": "5.00",
-  "input_thresh": "-35.26",
-  "output_i": "-16.48",
-  "output_tp": "-1.50",
-  "output_lra": "4.80",
-  "output_thresh": "-26.97",
-  "normalization_type": "dynamic",
-  "target_offset": "0.48"
- },
- "cues": 464,
- "warnings": [],
- "self_check": {
-  "expected_s": 1957.7,
-  "audio_s": 1957.7,
-  "diff_ms": 0.0,
-  "len_ok": true,
-  "cues_ok": true
- }
+ ]
 }

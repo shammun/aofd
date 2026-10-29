@@ -43002,5 +43002,10 @@
    },
    "output_sha256": "d1945634d30bc9cb3c7fa7ec1bc2d475dd3db44eb6864646f11066ec614f1e95"
   }
+ ],
+ "fx1_2026_10_28": [
+  "Narration: one-sentence splices (Kokoro af_bella x1.0, gain matched on the replaced or anchor sentence after per-clip loudnorm; _tools/splice_fx1.py); timing.json, captions and storyboard voiceover rebuilt; music re-mixed (same style and seed). No data file, fluidpy call or CHECK row changed; the data_files hashes above are unchanged.",
+  "Words: s15a S1 ('the index-notation video'), s18 S10 ('largest when the arrows point the same way'), s47 +2 sentences (each component = the turning about its own axis; the axis, anticlockwise seen from its tip).",
+  "Screen: s21a/s21b true lines (0.2×30 = 6 anticlockwise, 0.1×10 = 1 clockwise, then τ = 6 − 1 = 5); s22w four schematic mini-pictures (door, spanner, ball on a string, globe; illustrative icons, no data) + the s18b along/across picture; s21c the one pattern as three walls; unspoken numbers dropped (s03 ×4.5, s18 p·q, s21d 45°)."
  ]
 }

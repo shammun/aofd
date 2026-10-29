@@ -8552,5 +8552,10 @@
    "sha256": "e5376260b954a591f8104d2351a3d5af033845f3345e0235b39fcf07d7eb9274"
   }
  ],
- "physics_heavy": []
+ "physics_heavy": [],
+ "fx1_2026_10_28": [
+  "Narration: one-sentence splices (Kokoro af_bella x1.0, gain matched on the replaced or anchor sentence after per-clip loudnorm; _tools/splice_fx1.py); timing.json, captions and storyboard voiceover rebuilt; music re-mixed (same style and seed). No data file, fluidpy call or CHECK row changed; the data_files hashes above are unchanged.",
+  "Words: as v5 for s15a S1 and s18 S10; s22w S3/S6 say 'and, in the next video, …' for the spin arrow, Ω × r and −2Ω × u.",
+  "Screen: the v5 fixes in s03-s22w; s50 wall letters at 54 px."
+ ]
 }

@@ -39636,5 +39636,10 @@
    },
    "output_sha256": "d1945634d30bc9cb3c7fa7ec1bc2d475dd3db44eb6864646f11066ec614f1e95"
   }
+ ],
+ "fx1_2026_10_28": [
+  "Narration: one-sentence splices (Kokoro af_bella x1.0, gain matched on the replaced or anchor sentence after per-clip loudnorm; _tools/splice_fx1.py); timing.json, captions and storyboard voiceover rebuilt; music re-mixed (same style and seed). No data file, fluidpy call or CHECK row changed; the data_files hashes above are unchanged.",
+  "Words: s01a +1 sentence (the recipe) and S6 (x and y rows are zero); s01b S3 (two bars); s01c S4 (unit vectors, one unit long); s01d S2 ('a magnet's push on a moving proton'), S4 (the push, F; no energy; same speed); s47 S4, S5 ('In the last video, we saw that…'), S10 (pointer to Part 1).",
+  "Screen: s01a three-row recipe worked to 0, 0, 14 (EQ_CX, EQ_CY, EQ_CZ, data/pair.json); s01d the kicked path = the regular 10-gon whose corners lie on the tested inertial circle examples.json kicks.circle_xy_km (fluidpy inertial_oscillation), then that circle; s00 capital Ω; s47 words instead of τ = r × F, L = r × p, F = q v × B; s48 thumbnail 2 marked 'last video'."
  ]
 }

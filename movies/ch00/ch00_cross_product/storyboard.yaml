@@ -6,7 +6,7 @@ draft_of: re-plan from the user's review of v2 (reports/ch00_cross_product_user_
 supersedes: v4 fix 2 (commit a1cc435, 48:28, review 3 PASS)
 concepts:
 - C0A-PoC2
-target_duration_s: 1960.2
+target_duration_s: 1961.125
 fps: 30
 size:
 - 1920
@@ -39,9 +39,9 @@ decision_changes:
 - geostrophic section re-sequenced on one round low, one equation per step (s39-s44)
 - Storm Ciarán shown on a true-colour satellite image with country and region borders at about 12 UTC 2 Nov 2023 (s45-s46); the analysis time moves from
   00 to 12 UTC
-measured_narration_s: 1957.7
-measured_frames: 58806
-words: 4898
+measured_narration_s: 1958.625
+measured_frames: 58834
+words: 4902
 sentences: 316
 dry_run:
   tool: tools/tts.py
@@ -2155,7 +2155,7 @@ scenes:
 - id: s15a_index_form
   t:
   - 682.275
-  - 758.525
+  - 758.0
   status: new in v5
   changes:
   - X3c sign cube (research §2)
@@ -2166,13 +2166,13 @@ scenes:
     empty: the three cycle cells (xyz, yzx, zxy) lit teal ''+1'', the three anti-cycle cells rose ''−1'' with a hatch, a repeated-letter cell flashes nothing
     (slate ''0''). For the z component two cells stay lit: ε_zxy = +1 -> 5 × 3, ε_zyx = −1 -> 1 × 1; CalcStack 15 − 1 = 14. On ''swapping two letters''
     two lit cells trade colour (no flash: 12-frame cross-fade).'
-  voiceover: 'Here''s a short way to write the whole recipe, in index notation, which the video on the alternating tensor builds step by step. Let the letters
-    i, j and k each stand for x, y or z. The i component of a cross b is epsilon i j k, times the j component of vector a times the k component of b, added
-    up over every j and every k. Epsilon i j k is a table of signs: plus one when i, j and k follow the cycle x, y, z, minus one when they run the other
-    way round, and zero when any two letters are the same. A repeated letter means a direction crossed with itself, which makes no area, so it gives zero.
-    So for the z component, only two terms are left. Epsilon z x y is plus one, times five times three, and epsilon z y x is minus one, times one times
-    one. [beat] That''s fifteen minus one, fourteen again. [beat] And swapping two letters flips the sign of epsilon, which is exactly why b cross a is
-    minus a cross b.'
+  voiceover: 'Here''s a short way to write the whole recipe, in index notation, which the index-notation video builds step by step. Let the letters i, j
+    and k each stand for x, y or z. The i component of a cross b is epsilon i j k, times the j component of vector a times the k component of b, added up
+    over every j and every k. Epsilon i j k is a table of signs: plus one when i, j and k follow the cycle x, y, z, minus one when they run the other way
+    round, and zero when any two letters are the same. A repeated letter means a direction crossed with itself, which makes no area, so it gives zero. So
+    for the z component, only two terms are left. Epsilon z x y is plus one, times five times three, and epsilon z y x is minus one, times one times one.
+    [beat] That''s fifteen minus one, fourteen again. [beat] And swapping two letters flips the sign of epsilon, which is exactly why b cross a is minus
+    a cross b.'
   on_screen_eq:
     latex: (\mathbf a\times\mathbf b)_i=\varepsilon_{ijk}\,a_j\,b_k
     vallis_eq: 'provenance only: Kundu (K 2.21) form; Vallis notation pages (pdf 19-20) use the same epsilon'
@@ -2200,45 +2200,45 @@ scenes:
   exaggeration: []
   sentence_times:
   - - 682.275
-    - 691.05
-  - - 691.4
-    - 696.15
-  - - 696.5
-    - 708.325
-  - - 708.675
-    - 722.575
-  - - 722.925
-    - 729.6
-  - - 729.95
-    - 733.7
-  - - 734.05
-    - 743.7
-  - - 745.2
-    - 748.6
-  - - 750.1
-    - 757.725
+    - 690.525
+  - - 690.875
+    - 695.625
+  - - 695.975
+    - 707.8
+  - - 708.15
+    - 722.05
+  - - 722.4
+    - 729.075
+  - - 729.425
+    - 733.175
+  - - 733.525
+    - 743.175
+  - - 744.675
+    - 748.075
+  - - 749.575
+    - 757.2
   v5: 'new: V-X6 the cyclic pattern as a sign table (research X3c; pointer to #1b) (scene from the 1aa590f #2 plan)'
 - id: s16_rhr_screen
   t:
-  - 758.525
-  - 808.55
+  - 758.0
+  - 808.025
   sentence_times:
-  - - 758.525
-    - 764.3
-  - - 764.65
-    - 768.075
-  - - 768.425
-    - 775.275
-  - - 775.625
-    - 783.125
-  - - 783.475
-    - 789.7
-  - - 791.2
-    - 796.425
-  - - 797.925
-    - 803.1
-  - - 804.6
-    - 807.75
+  - - 758.0
+    - 763.775
+  - - 764.125
+    - 767.55
+  - - 767.9
+    - 774.75
+  - - 775.1
+    - 782.6
+  - - 782.95
+    - 789.175
+  - - 790.675
+    - 795.9
+  - - 797.4
+    - 802.575
+  - - 804.075
+    - 807.225
   status: changed
   changes:
   - length
@@ -2315,29 +2315,29 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s17_rhr_views
   t:
-  - 808.55
-  - 858.225
+  - 808.025
+  - 857.7
   sentence_times:
-  - - 808.55
-    - 812.125
-  - - 812.475
-    - 814.875
-  - - 815.225
-    - 821.525
-  - - 821.875
-    - 824.325
-  - - 824.675
-    - 829.425
-  - - 830.925
-    - 835.825
-  - - 836.175
-    - 843.375
-  - - 843.725
-    - 845.825
-  - - 846.175
-    - 854.375
-  - - 854.725
-    - 857.425
+  - - 808.025
+    - 811.6
+  - - 811.95
+    - 814.35
+  - - 814.7
+    - 821.0
+  - - 821.35
+    - 823.8
+  - - 824.15
+    - 828.9
+  - - 830.4
+    - 835.3
+  - - 835.65
+    - 842.85
+  - - 843.2
+    - 845.3
+  - - 845.65
+    - 853.85
+  - - 854.2
+    - 856.9
   status: changed
   changes:
   - length
@@ -2424,31 +2424,31 @@ scenes:
     1aa590f #2 plan)'
 - id: s18_cases
   t:
-  - 858.225
-  - 932.3
+  - 857.7
+  - 931.575
   sentence_times:
-  - - 858.225
-    - 862.375
-  - - 862.725
-    - 867.1
-  - - 867.45
-    - 872.225
-  - - 872.575
-    - 877.2
-  - - 878.7
-    - 884.15
-  - - 884.5
-    - 891.5
-  - - 893.0
-    - 898.75
-  - - 899.1
-    - 903.675
-  - - 905.175
-    - 914.225
-  - - 914.575
-    - 922.4
-  - - 922.75
-    - 931.5
+  - - 857.7
+    - 861.85
+  - - 862.2
+    - 866.575
+  - - 866.925
+    - 871.7
+  - - 872.05
+    - 876.675
+  - - 878.175
+    - 883.625
+  - - 883.975
+    - 890.975
+  - - 892.475
+    - 898.225
+  - - 898.575
+    - 903.15
+  - - 904.65
+    - 913.7
+  - - 914.05
+    - 921.675
+  - - 922.025
+    - 930.775
   status: changed
   changes:
   - UV2-11
@@ -2490,7 +2490,7 @@ scenes:
     zero, two and zero. The parallelogram is a three by two rectangle, and p cross q points straight up, six units long. [beat] Last, q points the opposite
     way, with components minus two, zero and zero. The parallelogram is flat again, so the cross product is zero. [beat] So the cross product is zero when
     two vectors point the same way or in opposite directions, and as long as it can be at right angles. That's the opposite of the dot product, which is
-    zero at a right angle, and largest when the arrows lie along one line. And if q keeps turning past the opposite direction, the turn from p to q becomes
+    zero at a right angle, and largest when the arrows point the same way. And if q keeps turning past the opposite direction, the turn from p to q becomes
     clockwise, and the arrow flips to point down.
   on_screen_eq: null
   on_screen_eq_extra:
@@ -2551,21 +2551,21 @@ scenes:
   v5: 'v4 words kept + added: V-X3 pairing: the opposite of the dot product (sentences from the 1aa590f #2 plan)'
 - id: s18a_why_question
   t:
-  - 932.3
-  - 954.425
+  - 931.575
+  - 953.7
   sentence_times:
-  - - 932.3
-    - 937.1
-  - - 937.45
-    - 939.65
-  - - 940.0
-    - 942.55
-  - - 942.9
-    - 947.75
-  - - 948.1
-    - 950.9
-  - - 951.25
-    - 953.625
+  - - 931.575
+    - 936.375
+  - - 936.725
+    - 938.925
+  - - 939.275
+    - 941.825
+  - - 942.175
+    - 947.025
+  - - 947.375
+    - 950.175
+  - - 950.525
+    - 952.9
   status: new
   changes:
   - UV2-10
@@ -2597,27 +2597,27 @@ scenes:
   v5: 'v4 words kept + added: V-X8 announces the question ''why the minus sign?'' (sentences from the 1aa590f #2 plan)'
 - id: s18b_across_part
   t:
-  - 954.425
-  - 1005.9
+  - 953.7
+  - 1005.175
   sentence_times:
-  - - 954.425
-    - 956.45
-  - - 956.8
-    - 962.375
-  - - 962.725
-    - 965.475
-  - - 965.825
-    - 971.95
-  - - 972.3
-    - 974.3
-  - - 974.65
-    - 981.65
-  - - 983.15
-    - 987.025
-  - - 987.375
-    - 997.95
-  - - 999.45
-    - 1005.1
+  - - 953.7
+    - 955.725
+  - - 956.075
+    - 961.65
+  - - 962.0
+    - 964.75
+  - - 965.1
+    - 971.225
+  - - 971.575
+    - 973.575
+  - - 973.925
+    - 980.925
+  - - 982.425
+    - 986.3
+  - - 986.65
+    - 997.225
+  - - 998.725
+    - 1004.375
   status: new
   changes:
   - UV2-10
@@ -2691,8 +2691,8 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s18d_two_parts
   t:
-  - 1005.9
-  - 1061.25
+  - 1005.175
+  - 1060.525
   status: new in v5
   changes:
   - X1b Lagrange triangle; V-X3 pairing (research §1b/§2)
@@ -2734,46 +2734,46 @@ scenes:
     check: X4 (64 + 196 = 260 = 26 × 10)
   exaggeration: []
   sentence_times:
-  - - 1005.9
-    - 1008.725
-  - - 1009.075
-    - 1016.5
-  - - 1016.85
-    - 1022.35
-  - - 1022.7
-    - 1026.525
-  - - 1026.875
-    - 1036.45
-  - - 1036.8
-    - 1045.775
-  - - 1047.275
-    - 1051.125
-  - - 1052.625
-    - 1060.45
+  - - 1005.175
+    - 1008.0
+  - - 1008.35
+    - 1015.775
+  - - 1016.125
+    - 1021.625
+  - - 1021.975
+    - 1025.8
+  - - 1026.15
+    - 1035.725
+  - - 1036.075
+    - 1045.05
+  - - 1046.55
+    - 1050.4
+  - - 1051.9
+    - 1059.725
   v5: 'new: V-X3 the pairing: along part (dot) and across part (cross) share b (scene from the 1aa590f #2 plan)'
 - id: s18c_slide
   t:
-  - 1061.25
-  - 1103.225
+  - 1060.525
+  - 1102.5
   sentence_times:
-  - - 1061.25
-    - 1064.025
-  - - 1064.375
-    - 1070.3
-  - - 1070.65
-    - 1073.35
-  - - 1073.7
-    - 1077.25
-  - - 1077.6
-    - 1080.05
-  - - 1080.4
-    - 1088.425
-  - - 1089.925
-    - 1093.65
-  - - 1094.0
-    - 1097.825
-  - - 1098.175
-    - 1102.425
+  - - 1060.525
+    - 1063.3
+  - - 1063.65
+    - 1069.575
+  - - 1069.925
+    - 1072.625
+  - - 1072.975
+    - 1076.525
+  - - 1076.875
+    - 1079.325
+  - - 1079.675
+    - 1087.7
+  - - 1089.2
+    - 1092.925
+  - - 1093.275
+    - 1097.1
+  - - 1097.45
+    - 1101.7
   status: new
   changes:
   - UV2-10
@@ -2832,29 +2832,29 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s20_torque
   t:
-  - 1103.225
-  - 1164.9
+  - 1102.5
+  - 1164.175
   sentence_times:
-  - - 1103.225
-    - 1105.9
-  - - 1106.25
-    - 1109.125
-  - - 1109.475
-    - 1112.4
-  - - 1112.75
-    - 1121.0
-  - - 1121.35
-    - 1127.225
-  - - 1127.575
-    - 1133.275
-  - - 1133.625
-    - 1141.375
-  - - 1142.875
-    - 1152.475
-  - - 1153.975
-    - 1157.525
-  - - 1159.025
-    - 1164.1
+  - - 1102.5
+    - 1105.175
+  - - 1105.525
+    - 1108.4
+  - - 1108.75
+    - 1111.675
+  - - 1112.025
+    - 1120.275
+  - - 1120.625
+    - 1126.5
+  - - 1126.85
+    - 1132.55
+  - - 1132.9
+    - 1140.65
+  - - 1142.15
+    - 1151.75
+  - - 1153.25
+    - 1156.8
+  - - 1158.3
+    - 1163.375
   status: changed
   changes:
   - UV2-10
@@ -2956,21 +2956,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s21_torque_axis
   t:
-  - 1164.9
-  - 1200.65
+  - 1164.175
+  - 1199.925
   sentence_times:
-  - - 1164.9
-    - 1171.55
-  - - 1171.9
-    - 1174.725
-  - - 1175.075
-    - 1179.025
-  - - 1179.375
-    - 1182.075
-  - - 1182.425
-    - 1193.8
-  - - 1194.15
-    - 1199.85
+  - - 1164.175
+    - 1170.825
+  - - 1171.175
+    - 1174.0
+  - - 1174.35
+    - 1178.3
+  - - 1178.65
+    - 1181.35
+  - - 1181.7
+    - 1193.075
+  - - 1193.425
+    - 1199.125
   status: changed
   changes:
   - length
@@ -3029,8 +3029,8 @@ scenes:
   v5: 'v4 words kept + added: V-X5 the arrow IS the axis of turning, sense anticlockwise seen from its tip (sentences from the 1aa590f #2 plan)'
 - id: s21a_minus_sign
   t:
-  - 1200.65
-  - 1277.4
+  - 1199.925
+  - 1276.675
   status: new in v5
   changes:
   - V-X8 two mini-torques fighting (research §1b; user priority)
@@ -3075,33 +3075,33 @@ scenes:
   exaggeration:
   - spanner and push sizes chosen for easy numbers
   sentence_times:
-  - - 1200.65
-    - 1204.525
-  - - 1204.875
-    - 1209.4
-  - - 1209.75
-    - 1219.925
-  - - 1220.275
-    - 1222.85
-  - - 1223.2
-    - 1229.0
-  - - 1229.35
-    - 1238.35
-  - - 1239.85
-    - 1245.375
-  - - 1245.725
-    - 1253.0
-  - - 1254.5
-    - 1260.95
-  - - 1262.45
-    - 1270.625
-  - - 1270.975
-    - 1276.6
+  - - 1199.925
+    - 1203.8
+  - - 1204.15
+    - 1208.675
+  - - 1209.025
+    - 1219.2
+  - - 1219.55
+    - 1222.125
+  - - 1222.475
+    - 1228.275
+  - - 1228.625
+    - 1237.625
+  - - 1239.125
+    - 1244.65
+  - - 1245.0
+    - 1252.275
+  - - 1253.775
+    - 1260.225
+  - - 1261.725
+    - 1269.9
+  - - 1270.25
+    - 1275.875
   v5: 'new: V-X8 z = r_x F_y − r_y F_x as two opposing mini-torques (scene from the 1aa590f #2 plan)'
 - id: s21b_x_component
   t:
-  - 1277.4
-  - 1340.7
+  - 1276.675
+  - 1339.975
   status: new in v5
   v5: 'new: V-X6/V-X8 the x component built the same way (y and z parts, two opposing mini-torques)'
   related: []
@@ -3144,26 +3144,26 @@ scenes:
   exaggeration:
   - spanner glyph illustrative; arcs show the turn sense only
   sentence_times:
-  - - 1277.4
-    - 1280.625
-  - - 1280.975
-    - 1288.075
-  - - 1288.425
-    - 1299.35
-  - - 1299.7
-    - 1304.425
-  - - 1304.775
-    - 1314.0
-  - - 1315.5
-    - 1323.8
-  - - 1325.3
-    - 1330.0
-  - - 1331.5
-    - 1339.9
+  - - 1276.675
+    - 1279.9
+  - - 1280.25
+    - 1287.35
+  - - 1287.7
+    - 1298.625
+  - - 1298.975
+    - 1303.7
+  - - 1304.05
+    - 1313.275
+  - - 1314.775
+    - 1323.075
+  - - 1324.575
+    - 1329.275
+  - - 1330.775
+    - 1339.175
 - id: s21c_y_component
   t:
-  - 1340.7
-  - 1426.525
+  - 1339.975
+  - 1425.8
   status: new in v5
   v5: 'new: V-X6/V-X8 the y component (z and x parts, cycle order z before x) and why the determinant''s middle term looks backwards; the cyclic pattern
     for all three'
@@ -3214,28 +3214,28 @@ scenes:
     builder: movies/data/build_ch00_cross_product_why.py (v5 rows)
   exaggeration: []
   sentence_times:
-  - - 1340.7
-    - 1346.4
-  - - 1346.75
-    - 1350.05
-  - - 1350.4
-    - 1358.85
-  - - 1359.2
-    - 1373.9
-  - - 1375.4
-    - 1386.7
-  - - 1387.05
-    - 1390.925
-  - - 1391.275
-    - 1403.725
-  - - 1404.075
-    - 1411.1
-  - - 1411.45
-    - 1425.725
+  - - 1339.975
+    - 1345.675
+  - - 1346.025
+    - 1349.325
+  - - 1349.675
+    - 1358.125
+  - - 1358.475
+    - 1373.175
+  - - 1374.675
+    - 1385.975
+  - - 1386.325
+    - 1390.2
+  - - 1390.55
+    - 1403.0
+  - - 1403.35
+    - 1410.375
+  - - 1410.725
+    - 1425.0
 - id: s21d_tilted_axis
   t:
-  - 1426.525
-  - 1479.4
+  - 1425.8
+  - 1478.675
   status: new in v5
   changes:
   - V-X9 sphere brushed off centre (research §1b)
@@ -3275,36 +3275,36 @@ scenes:
   exaggeration:
   - the ball's spin-up is illustrative (no moment of inertia is computed)
   sentence_times:
-  - - 1426.525
-    - 1430.95
-  - - 1431.3
-    - 1436.85
-  - - 1437.2
-    - 1444.175
-  - - 1444.525
-    - 1449.725
-  - - 1450.075
-    - 1455.2
-  - - 1455.55
-    - 1462.25
-  - - 1462.6
-    - 1469.025
-  - - 1470.525
-    - 1478.6
+  - - 1425.8
+    - 1430.225
+  - - 1430.575
+    - 1436.125
+  - - 1436.475
+    - 1443.45
+  - - 1443.8
+    - 1449.0
+  - - 1449.35
+    - 1454.475
+  - - 1454.825
+    - 1461.525
+  - - 1461.875
+    - 1468.3
+  - - 1469.8
+    - 1477.875
   v5: 'new: V-X9 a ball brushed off centre: three component torques add to a tilted axis (scene from the 1aa590f #2 plan)'
 - id: s22_door_again
   t:
-  - 1479.4
-  - 1504.85
+  - 1478.675
+  - 1504.125
   sentence_times:
-  - - 1479.4
-    - 1481.375
-  - - 1481.725
-    - 1491.05
-  - - 1491.4
-    - 1498.25
-  - - 1498.6
-    - 1504.05
+  - - 1478.675
+    - 1480.65
+  - - 1481.0
+    - 1490.325
+  - - 1490.675
+    - 1497.525
+  - - 1497.875
+    - 1503.325
   status: changed
   changes:
   - UV2-12
@@ -3362,25 +3362,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s22a_plane_normal
   t:
-  - 1504.85
-  - 1561.25
+  - 1504.125
+  - 1560.525
   sentence_times:
-  - - 1504.85
-    - 1509.275
-  - - 1509.625
-    - 1518.35
-  - - 1518.7
-    - 1523.825
-  - - 1524.175
-    - 1532.3
-  - - 1532.65
-    - 1536.275
-  - - 1536.625
-    - 1541.5
-  - - 1541.85
-    - 1551.5
-  - - 1551.85
-    - 1560.45
+  - - 1504.125
+    - 1508.55
+  - - 1508.9
+    - 1517.625
+  - - 1517.975
+    - 1523.1
+  - - 1523.45
+    - 1531.575
+  - - 1531.925
+    - 1535.55
+  - - 1535.9
+    - 1540.775
+  - - 1541.125
+    - 1550.775
+  - - 1551.125
+    - 1559.725
   status: new
   changes:
   - UV2-10
@@ -3461,21 +3461,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s22b_component_shadows
   t:
-  - 1561.25
-  - 1594.075
+  - 1560.525
+  - 1593.35
   sentence_times:
-  - - 1561.25
-    - 1564.0
-  - - 1564.35
-    - 1568.65
-  - - 1569.0
-    - 1575.1
-  - - 1575.45
-    - 1580.1
-  - - 1580.45
-    - 1587.075
-  - - 1587.425
-    - 1592.575
+  - - 1560.525
+    - 1563.275
+  - - 1563.625
+    - 1567.925
+  - - 1568.275
+    - 1574.375
+  - - 1574.725
+    - 1579.375
+  - - 1579.725
+    - 1586.35
+  - - 1586.7
+    - 1591.85
   status: new
   changes:
   - UV2-10
@@ -3557,25 +3557,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s22c_angular_momentum
   t:
-  - 1594.075
-  - 1644.425
+  - 1593.35
+  - 1643.7
   sentence_times:
-  - - 1594.075
-    - 1597.225
-  - - 1597.575
-    - 1600.8
-  - - 1601.15
-    - 1605.8
-  - - 1606.15
-    - 1611.825
-  - - 1612.175
-    - 1617.85
-  - - 1619.35
-    - 1626.475
-  - - 1626.825
-    - 1636.075
-  - - 1637.575
-    - 1643.625
+  - - 1593.35
+    - 1596.5
+  - - 1596.85
+    - 1600.075
+  - - 1600.425
+    - 1605.075
+  - - 1605.425
+    - 1611.1
+  - - 1611.45
+    - 1617.125
+  - - 1618.625
+    - 1625.75
+  - - 1626.1
+    - 1635.35
+  - - 1636.85
+    - 1642.9
   status: new
   changes:
   - UV2-10
@@ -3651,25 +3651,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s22d_moving_charge
   t:
-  - 1644.425
-  - 1688.75
+  - 1643.7
+  - 1688.025
   sentence_times:
-  - - 1644.425
-    - 1650.05
-  - - 1650.4
-    - 1656.375
-  - - 1656.725
-    - 1661.125
-  - - 1661.475
-    - 1671.35
-  - - 1671.7
-    - 1675.55
-  - - 1675.9
-    - 1679.825
-  - - 1680.175
-    - 1683.2
-  - - 1683.55
-    - 1687.95
+  - - 1643.7
+    - 1649.325
+  - - 1649.675
+    - 1655.65
+  - - 1656.0
+    - 1660.4
+  - - 1660.75
+    - 1670.625
+  - - 1670.975
+    - 1674.825
+  - - 1675.175
+    - 1679.1
+  - - 1679.45
+    - 1682.475
+  - - 1682.825
+    - 1687.225
   status: new
   changes:
   - UV2-10
@@ -3737,31 +3737,31 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s22e_perp_push
   t:
-  - 1688.75
-  - 1754.975
+  - 1688.025
+  - 1754.25
   sentence_times:
-  - - 1688.75
-    - 1692.7
-  - - 1693.05
-    - 1695.225
-  - - 1695.575
-    - 1699.625
-  - - 1699.975
-    - 1704.675
-  - - 1705.025
-    - 1712.7
-  - - 1714.2
-    - 1718.325
-  - - 1718.675
-    - 1725.875
-  - - 1726.225
-    - 1733.125
-  - - 1734.625
-    - 1738.925
-  - - 1740.425
-    - 1749.35
-  - - 1749.7
-    - 1754.175
+  - - 1688.025
+    - 1691.975
+  - - 1692.325
+    - 1694.5
+  - - 1694.85
+    - 1698.9
+  - - 1699.25
+    - 1703.95
+  - - 1704.3
+    - 1711.975
+  - - 1713.475
+    - 1717.6
+  - - 1717.95
+    - 1725.15
+  - - 1725.5
+    - 1732.4
+  - - 1733.9
+    - 1738.2
+  - - 1739.7
+    - 1748.625
+  - - 1748.975
+    - 1753.45
   status: new
   changes:
   - UV2-10
@@ -3851,8 +3851,8 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s22w_when_to_use
   t:
-  - 1754.975
-  - 1817.725
+  - 1754.25
+  - 1818.65
   status: new in v5
   v5: 'new: V-X10 / orchestrator (c) when to use it and what the two arrows usually stand for'
   related: []
@@ -3861,11 +3861,12 @@ scenes:
     r. S5: the result column (violet): ''across part × length'' and ''⊥ both: axis / side''. S6: four tiles light in turn: τ = r × F, L = r × p, F = q v
     × B, then (faint, ''next'') v = Ω × r and −2Ω × u. S7: the swap glyph ''b × a = −a × b'' in rose.'
   voiceover: 'So when do we reach for the cross product? Look at what the two arrows usually stand for. The first is normally a position or a lever arm,
-    like r from a hinge, a bolt or the centre of a turn, or a spin arrow, like Earth''s spin, Omega. The second is normally a force or a velocity, like
-    a push, F, a momentum, or the wind, u, and when the first is a spin arrow, the second is often a position. Use the cross product whenever you want the
-    size of the part of one arrow that lies across the other, together with a direction at right angles to both: the axis of a turn, or the side towards
-    which something is pushed. That''s torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and soon the speed of the spinning
-    ground, Omega cross r, and the Coriolis push, minus two Omega cross u. And keep the order in mind: swap the two arrows, and the answer flips.'
+    like r from a hinge, a bolt or the centre of a turn, and, in the next video, a spin arrow, like Earth''s spin, Omega. The second is normally a force
+    or a velocity, like a push, F, a momentum, or the wind, u, and when the first is a spin arrow, the second is often a position. Use the cross product
+    whenever you want the size of the part of one arrow that lies across the other, together with a direction at right angles to both: the axis of a turn,
+    or the side towards which something is pushed. That''s torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and, in the
+    next video, the speed of the spinning ground, Omega cross r, and the Coriolis push, minus two Omega cross u. And keep the order in mind: swap the two
+    arrows, and the answer flips.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.vectors.cross
@@ -3873,43 +3874,43 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
   exaggeration: []
   sentence_times:
-  - - 1754.975
-    - 1757.75
-  - - 1758.1
-    - 1761.3
-  - - 1761.65
-    - 1771.9
-  - - 1772.25
-    - 1783.5
-  - - 1783.85
-    - 1797.95
-  - - 1798.3
-    - 1811.825
-  - - 1812.175
-    - 1816.925
+  - - 1754.25
+    - 1757.025
+  - - 1757.375
+    - 1760.575
+  - - 1760.925
+    - 1772.375
+  - - 1772.725
+    - 1783.975
+  - - 1784.325
+    - 1798.425
+  - - 1798.775
+    - 1812.75
+  - - 1813.1
+    - 1817.85
 - id: s19_grid
   t:
-  - 1817.725
-  - 1868.075
+  - 1818.65
+  - 1869.0
   sentence_times:
-  - - 1817.725
-    - 1820.7
-  - - 1821.05
-    - 1825.85
-  - - 1826.2
-    - 1831.025
-  - - 1831.375
-    - 1834.575
-  - - 1834.925
-    - 1840.6
-  - - 1840.95
-    - 1850.75
-  - - 1851.1
-    - 1857.975
-  - - 1858.325
-    - 1861.325
-  - - 1861.675
-    - 1867.275
+  - - 1818.65
+    - 1821.625
+  - - 1821.975
+    - 1826.775
+  - - 1827.125
+    - 1831.95
+  - - 1832.3
+    - 1835.5
+  - - 1835.85
+    - 1841.525
+  - - 1841.875
+    - 1851.675
+  - - 1852.025
+    - 1858.9
+  - - 1859.25
+    - 1862.25
+  - - 1862.6
+    - 1868.2
   status: changed
   changes:
   - UV2-10
@@ -3940,8 +3941,8 @@ scenes:
   v5: 'v4 words kept + added: V-X3/V-S the closing pair ''along, a number / across, an axis'''
 - id: s50_recap
   t:
-  - 1868.075
-  - 1934.45
+  - 1869.0
+  - 1935.375
   status: new (Part 1 ending)
   related:
   - '#3 cross product at work'
@@ -3963,26 +3964,26 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V1_components_on_field
   exaggeration: []
   sentence_times:
-  - - 1868.075
-    - 1874.225
-  - - 1874.575
-    - 1883.875
-  - - 1884.225
-    - 1890.7
-  - - 1891.05
-    - 1901.625
-  - - 1901.975
-    - 1909.45
-  - - 1909.8
-    - 1915.075
-  - - 1915.425
-    - 1925.475
-  - - 1925.825
-    - 1933.65
+  - - 1869.0
+    - 1875.15
+  - - 1875.5
+    - 1884.8
+  - - 1885.15
+    - 1891.625
+  - - 1891.975
+    - 1902.55
+  - - 1902.9
+    - 1910.375
+  - - 1910.725
+    - 1916.0
+  - - 1916.35
+    - 1926.4
+  - - 1926.75
+    - 1934.575
 - id: s51_end
   t:
-  - 1934.45
-  - 1957.7
+  - 1935.375
+  - 1958.625
   status: new (Part 1 ending)
   related:
   - 0.1 dot product
@@ -4000,10 +4001,10 @@ scenes:
   exaggeration:
   - illustrative end card
   sentence_times:
-  - - 1934.45
-    - 1940.65
-  - - 1941.0
-    - 1949.05
-  - - 1949.4
-    - 1957.4
+  - - 1935.375
+    - 1941.575
+  - - 1941.925
+    - 1949.975
+  - - 1950.325
+    - 1958.325
 beats: 56

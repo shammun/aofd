@@ -27,28 +27,36 @@ Where does the cross product turn up in the weather? Let's see how it describes 
 > new (Part 2 start)
 
 ## s01a_recap_arrow
-First, a quick reminder of what the cross product is, from the last video. Take two arrows lying flat on the floor: vector a with components five, one and zero, and vector b with components one, three and zero. Unlike the dot product, which gives a number, their cross product, a cross b, is another arrow, at right angles to both. For the z component, that's five times three, minus one times one, which is fourteen. [beat] The other two components are zero, so a cross b points straight up, fourteen units long.
+First, a quick reminder of what the cross product is, from the last video. Take two arrows lying flat on the floor: vector a with components five, one and zero, and vector b with components one, three and zero. Unlike the dot product, which gives a number, their cross product, a cross b, is another arrow, at right angles to both. We find it with the recipe: each component leaves out its own direction, and cross multiplies the other two. For the z component, that's five times three, minus one times one, which is fourteen. [beat] In the x and y components, every product has a zero in it, so both are zero, and a cross b points straight up, fourteen units long.
+
+> fx1 2026-10-28 (combined fix loop 1, one-sentence splices): 122 words · 6 sentences · 26.125–76.475 s (measured)
 
 > 92 words · 5 sentences · 1 beats · 26.125–65.250 s (39.1 s; speech 35.8 s) · 0:26.12–1:05.25 (measured, dry run 2026-10-28)
 > new (Part 2 start: recap of Part 1)
 > Related: #2 cross product (Part 1)
 
 ## s01b_recap_length
-Its length has a simple meaning. Split b into two pieces: a part that lies along vector a itself, and a part straight across it. The length of vector a is about five point one, and the part of b across it is about two point seven five. Their product, about fourteen, is the length of a cross b: the area of the parallelogram the two arrows make. The part along doesn't count at all.
+Its length has a simple meaning. Split b into two pieces: a part that lies along vector a itself, and a part straight across it. The length of vector a, written with two bars, is about five point one, and the part of b across it is about two point seven five. Their product, about fourteen, is the length of a cross b: the area of the parallelogram the two arrows make. The part along doesn't count at all.
+
+> fx1 2026-10-28 (combined fix loop 1, one-sentence splices): 79 words · 5 sentences · 76.475–107.150 s (measured)
 
 > 75 words · 5 sentences · 0 beats · 65.250–94.225 s (29.0 s; speech 26.8 s) · 1:05.25–1:34.22 (measured, dry run 2026-10-28)
 > new (Part 2 start: recap of Part 1)
 > Related: #2 cross product (Part 1)
 
 ## s01c_recap_direction
-Its direction comes from the right-hand rule. Point the fingers of your right hand along the first arrow, and curl them towards the second, the short way round. Your thumb points along the cross product: here, straight up, towards you if you look down from above. The unit vectors along the axes follow the same rule: x hat cross y hat is z hat, y hat cross z hat is x hat, and z hat cross x hat is y hat. Swap the order, and the arrow flips: b cross a is minus a cross b, and x hat cross z hat is minus y hat.
+Its direction comes from the right-hand rule. Point the fingers of your right hand along the first arrow, and curl them towards the second, the short way round. Your thumb points along the cross product: here, straight up, towards you if you look down from above. The unit vectors, arrows one unit long along the axes, follow the same rule: x hat cross y hat is z hat, y hat cross z hat is x hat, and z hat cross x hat is y hat. Swap the order, and the arrow flips: b cross a is minus a cross b, and x hat cross z hat is minus y hat.
+
+> fx1 2026-10-28 (combined fix loop 1, one-sentence splices): 110 words · 5 sentences · 107.150–148.325 s (measured)
 
 > 106 words · 5 sentences · 0 beats · 94.225–133.650 s (39.4 s; speech 37.2 s) · 1:34.22–2:13.65 (measured, dry run 2026-10-28)
 > new (Part 2 start: recap of Part 1)
 > Related: #2 cross product (Part 1)
 
 ## s01d_recap_push
-One more idea from that video. A push that's always at a right angle to the motion, like the magnetic push on a moving charge, never speeds anything up or slows it down. Many small sideways kicks, each at a right angle to the new direction, bend the path a little at a time into a circle. Its dot product with the velocity is zero, so it does no work: it only turns the motion.
+One more idea from that video. A push that's always at a right angle to the motion, like a magnet's push on a moving proton, never speeds anything up or slows it down. Many small sideways kicks, each at a right angle to the new direction, bend the path a little at a time into a circle. This push, F, has a dot product of zero with the velocity, so it does no work: it gives no energy, and the speed stays the same all the way round.
+
+> fx1 2026-10-28 (combined fix loop 1, one-sentence splices): 88 words · 4 sentences · 148.325–180.250 s (measured)
 
 > 75 words · 4 sentences · 0 beats · 133.650–161.825 s (28.2 s; speech 26.3 s) · 2:13.65–2:41.82 (measured, dry run 2026-10-28)
 > new (Part 2 start: recap of Part 1)
@@ -277,7 +285,9 @@ Now let's add the real winds at the same height, from the reanalysis. They're dr
 > v4 fix 2, word-identical
 
 ## s47_recap
-To sum up, the cross product of two arrows is another arrow, at right angles to both. Each component leaves out its own direction and cross multiplies the other two. Its length is the first arrow's length times the part of the second arrow across it: the area of their parallelogram. Its direction is the normal to their plane, and the right-hand rule says which way round. Physics uses it for torque, angular momentum and the push on a moving charge, and a push always at a right angle turns a motion without speeding it up. On the spinning Earth, the ground moves at Omega cross r, and moving air feels the Coriolis push, minus two Omega cross u. For flat winds, that's minus f k cross u: to the right in the north, and to the left in the south. That's why storms spin. When this push balances the pressure push, we get the geostrophic wind, one over f rho times k cross grad p, along the isobars. Later videos in this series show how to read weather maps, and how grad, div and curl are built from these products.
+To sum up, the cross product of two arrows is another arrow, at right angles to both. Each component leaves out its own direction and cross multiplies the other two. Its length is the first arrow's length times the part of the second arrow across it: the area of their parallelogram. Its direction is at right angles to their plane, and the right-hand rule says which way round. In the last video, we saw that physics uses it for torque, angular momentum and the push on a moving charge, and that a push always at a right angle turns a motion without speeding it up. On the spinning Earth, the ground moves at Omega cross r, and moving air feels the Coriolis push, minus two Omega cross u. For flat winds, that's minus f k cross u: to the right in the north, and to the left in the south. That's why storms spin. When this push balances the pressure push, we get the geostrophic wind, one over f rho times k cross grad p, along the isobars. The last video shows why the cross product is built this way, and later videos in this series show how to read weather maps, and how grad, div and curl are built from these products.
+
+> fx1 2026-10-28 (combined fix loop 1, one-sentence splices): 213 words · 10 sentences · 1731.300–1812.875 s (measured)
 
 > 191 words · 10 sentences · 0 beats · 1712.875–1787.650 s (74.8 s; speech 70.8 s) · 28:32.88–29:47.65 (measured, dry run 2026-10-28)
 > v4 fix 2, word-identical

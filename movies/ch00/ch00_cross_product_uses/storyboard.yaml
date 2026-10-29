@@ -6,7 +6,7 @@ draft_of: re-plan from the user's review of v2 (reports/ch00_cross_product_user_
 supersedes: v4 fix 2 (commit a1cc435, 48:28, review 3 PASS)
 concepts:
 - C0A-PoC2
-target_duration_s: 1815.525
+target_duration_s: 1840.75
 fps: 30
 size:
 - 1920
@@ -39,10 +39,10 @@ decision_changes:
 - geostrophic section re-sequenced on one round low, one equation per step (s39-s44)
 - Storm Ciarán shown on a true-colour satellite image with country and region borders at about 12 UTC 2 Nov 2023 (s45-s46); the analysis time moves from
   00 to 12 UTC
-measured_narration_s: 1813.025
-measured_frames: 54466
-words: 4485
-sentences: 289
+measured_narration_s: 1838.25
+measured_frames: 55223
+words: 4558
+sentences: 290
 dry_run:
   tool: tools/tts.py
   run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\v3_20261028\run2\ch00_cross_product_uses
@@ -664,7 +664,7 @@ scenes:
 - id: s01a_recap_arrow
   t:
   - 26.125
-  - 65.25
+  - 76.475
   status: 'new (Part 2 start: recap of Part 1)'
   changes: []
   related:
@@ -673,8 +673,9 @@ scenes:
     3 − 1 × 1 = 14; ''(0, 0, 14)''.'
   voiceover: 'First, a quick reminder of what the cross product is, from the last video. Take two arrows lying flat on the floor: vector a with components
     five, one and zero, and vector b with components one, three and zero. Unlike the dot product, which gives a number, their cross product, a cross b,
-    is another arrow, at right angles to both. For the z component, that''s five times three, minus one times one, which is fourteen. [beat] The other two
-    components are zero, so a cross b points straight up, fourteen units long.'
+    is another arrow, at right angles to both. We find it with the recipe: each component leaves out its own direction, and cross multiplies the other two.
+    For the z component, that''s five times three, minus one times one, which is fourteen. [beat] In the x and y components, every product has a zero in
+    it, so both are zero, and a cross b points straight up, fourteen units long.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.vectors.cross
@@ -704,13 +705,15 @@ scenes:
   - - 41.925
     - 50.3
   - - 50.65
-    - 56.75
-  - - 58.25
-    - 64.45
+    - 58.2
+  - - 58.55
+    - 64.65
+  - - 66.15
+    - 75.675
 - id: s01b_recap_length
   t:
-  - 65.25
-  - 94.225
+  - 76.475
+  - 107.15
   status: 'new (Part 2 start: recap of Part 1)'
   changes: []
   related:
@@ -718,8 +721,8 @@ scenes:
   visual: 'v4 s18b picture: b split into along (teal, 1.57) and across (orange, 2.75) parts; parallelogram filled; ''|a| ≈ 5.1'', ''across ≈ 2.75'', ''5.1
     × 2.75 ≈ 14''; along part greyed on ''doesn''t count''.'
   voiceover: 'Its length has a simple meaning. Split b into two pieces: a part that lies along vector a itself, and a part straight across it. The length
-    of vector a is about five point one, and the part of b across it is about two point seven five. Their product, about fourteen, is the length of a cross
-    b: the area of the parallelogram the two arrows make. The part along doesn''t count at all.'
+    of vector a, written with two bars, is about five point one, and the part of b across it is about two point seven five. Their product, about fourteen,
+    is the length of a cross b: the area of the parallelogram the two arrows make. The part along doesn''t count at all.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.vectors.parallelogram_area
@@ -737,20 +740,20 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_parallelogram_area_V1_base_times_height
   exaggeration: []
   sentence_times:
-  - - 65.25
-    - 67.85
-  - - 68.2
-    - 74.925
-  - - 75.275
-    - 82.475
-  - - 82.825
-    - 90.5
-  - - 90.85
-    - 93.425
+  - - 76.475
+    - 79.075
+  - - 79.425
+    - 86.15
+  - - 86.5
+    - 95.4
+  - - 95.75
+    - 103.425
+  - - 103.775
+    - 106.35
 - id: s01c_recap_direction
   t:
-  - 94.225
-  - 133.65
+  - 107.15
+  - 148.325
   status: 'new (Part 2 start: recap of Part 1)'
   changes: []
   related:
@@ -758,9 +761,9 @@ scenes:
   visual: v4 s11 right hand (curl) on the floor pair; then the clock triangle x -> y -> z with '+' and the backward '−'; x̂ × ŷ = ẑ … x̂ × ẑ = −ŷ listed
     in the maths zone as spoken.
   voiceover: 'Its direction comes from the right-hand rule. Point the fingers of your right hand along the first arrow, and curl them towards the second,
-    the short way round. Your thumb points along the cross product: here, straight up, towards you if you look down from above. The unit vectors along the
-    axes follow the same rule: x hat cross y hat is z hat, y hat cross z hat is x hat, and z hat cross x hat is y hat. Swap the order, and the arrow flips:
-    b cross a is minus a cross b, and x hat cross z hat is minus y hat.'
+    the short way round. Your thumb points along the cross product: here, straight up, towards you if you look down from above. The unit vectors, arrows
+    one unit long along the axes, follow the same rule: x hat cross y hat is z hat, y hat cross z hat is x hat, and z hat cross x hat is y hat. Swap the
+    order, and the arrow flips: b cross a is minus a cross b, and x hat cross z hat is minus y hat.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.vectors.cross
@@ -770,20 +773,20 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_cross_V7_drawing_invariant_perpendicular_and_antisymmetric
   exaggeration: []
   sentence_times:
-  - - 94.225
-    - 97.5
-  - - 97.85
-    - 105.1
-  - - 105.45
-    - 112.025
-  - - 112.375
-    - 123.9
-  - - 124.25
-    - 132.85
+  - - 107.15
+    - 110.425
+  - - 110.775
+    - 118.025
+  - - 118.375
+    - 124.95
+  - - 125.3
+    - 138.575
+  - - 138.925
+    - 147.525
 - id: s01d_recap_push
   t:
-  - 133.65
-  - 161.825
+  - 148.325
+  - 180.25
   status: 'new (Part 2 start: recap of Part 1)'
   related:
   - '#2 cross product (Part 1)'
@@ -791,9 +794,9 @@ scenes:
   visual: 'Picture zone: the v4 s22e kicks picture in miniature — an arrow u east, one sideways kick, then ten small kicks, then a smooth curve; the energy
     bar flat for the curve; the moving-charge helix thumbnail (s22d) faint top right on ''a moving charge''. Maths zone: ''push ⊥ u'', ''push · u = 0'',
     ''no work: only turns''.'
-  voiceover: 'One more idea from that video. A push that''s always at a right angle to the motion, like the magnetic push on a moving charge, never speeds
+  voiceover: 'One more idea from that video. A push that''s always at a right angle to the motion, like a magnet''s push on a moving proton, never speeds
     anything up or slows it down. Many small sideways kicks, each at a right angle to the new direction, bend the path a little at a time into a circle.
-    Its dot product with the velocity is zero, so it does no work: it only turns the motion.'
+    This push, F, has a dot product of zero with the velocity, so it does no work: it gives no energy, and the speed stays the same all the way round.'
   on_screen_eq:
     latex: \mathbf F\cdot\mathbf u = 0
     vallis_eq: provenance only
@@ -804,39 +807,39 @@ scenes:
     test: ../Fluid Dynamics/tests/geo/test_vectors.py::test_dot_V1_component_sum_on_field
   exaggeration: []
   sentence_times:
-  - - 133.65
-    - 136.25
-  - - 136.6
-    - 145.9
-  - - 146.25
-    - 154.275
-  - - 154.625
-    - 161.025
+  - - 148.325
+    - 150.925
+  - - 151.275
+    - 160.575
+  - - 160.925
+    - 168.95
+  - - 169.3
+    - 179.45
 - id: s23_k_cross
   t:
-  - 161.825
-  - 227.15
+  - 180.25
+  - 245.575
   sentence_times:
-  - - 161.825
-    - 165.275
-  - - 165.625
-    - 171.15
-  - - 171.5
-    - 177.525
-  - - 177.875
-    - 183.55
-  - - 183.9
-    - 190.525
-  - - 190.875
-    - 202.275
-  - - 202.625
-    - 208.7
-  - - 209.05
-    - 214.35
-  - - 214.7
-    - 223.075
-  - - 223.425
-    - 226.35
+  - - 180.25
+    - 183.7
+  - - 184.05
+    - 189.575
+  - - 189.925
+    - 195.95
+  - - 196.3
+    - 201.975
+  - - 202.325
+    - 208.95
+  - - 209.3
+    - 220.7
+  - - 221.05
+    - 227.125
+  - - 227.475
+    - 232.775
+  - - 233.125
+    - 241.5
+  - - 241.85
+    - 244.775
   status: changed
   changes:
   - UV2-13
@@ -930,25 +933,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s23a_why_turn
   t:
-  - 227.15
-  - 280.45
+  - 245.575
+  - 298.875
   sentence_times:
-  - - 227.15
-    - 230.025
-  - - 230.375
-    - 237.05
-  - - 237.4
-    - 246.375
-  - - 246.725
-    - 255.1
-  - - 255.45
-    - 258.225
-  - - 258.575
-    - 264.45
-  - - 264.8
-    - 272.325
-  - - 272.675
-    - 279.65
+  - - 245.575
+    - 248.45
+  - - 248.8
+    - 255.475
+  - - 255.825
+    - 264.8
+  - - 265.15
+    - 273.525
+  - - 273.875
+    - 276.65
+  - - 277.0
+    - 282.875
+  - - 283.225
+    - 290.75
+  - - 291.1
+    - 298.075
   status: new
   changes:
   - UV2-15
@@ -1020,25 +1023,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s24_spin
   t:
-  - 280.45
-  - 324.4
+  - 298.875
+  - 342.825
   sentence_times:
-  - - 280.45
-    - 283.175
-  - - 283.525
-    - 287.475
-  - - 287.825
-    - 291.975
-  - - 292.325
-    - 299.5
-  - - 299.85
-    - 302.925
-  - - 303.275
-    - 308.05
-  - - 308.4
-    - 316.35
-  - - 316.7
-    - 323.6
+  - - 298.875
+    - 301.6
+  - - 301.95
+    - 305.9
+  - - 306.25
+    - 310.4
+  - - 310.75
+    - 317.925
+  - - 318.275
+    - 321.35
+  - - 321.7
+    - 326.475
+  - - 326.825
+    - 334.775
+  - - 335.125
+    - 342.025
   status: changed
   changes:
   - UV2-19
@@ -1109,23 +1112,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s25a_position_vector
   t:
-  - 324.4
-  - 375.9
+  - 342.825
+  - 394.325
   sentence_times:
-  - - 324.4
-    - 328.6
-  - - 328.95
-    - 333.975
-  - - 334.325
-    - 343.1
-  - - 343.45
-    - 348.125
-  - - 348.475
-    - 356.6
-  - - 356.95
-    - 364.25
-  - - 364.6
-    - 375.1
+  - - 342.825
+    - 347.025
+  - - 347.375
+    - 352.4
+  - - 352.75
+    - 361.525
+  - - 361.875
+    - 366.55
+  - - 366.9
+    - 375.025
+  - - 375.375
+    - 382.675
+  - - 383.025
+    - 393.525
   status: new
   changes:
   - UV2-20
@@ -1197,25 +1200,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s25_ground_speed
   t:
-  - 375.9
-  - 424.725
+  - 394.325
+  - 443.15
   sentence_times:
-  - - 375.9
-    - 378.3
-  - - 378.65
-    - 384.85
-  - - 385.2
-    - 389.825
-  - - 390.175
-    - 394.5
-  - - 394.85
-    - 399.025
-  - - 399.375
-    - 409.1
-  - - 409.45
-    - 416.95
-  - - 417.3
-    - 423.925
+  - - 394.325
+    - 396.725
+  - - 397.075
+    - 403.275
+  - - 403.625
+    - 408.25
+  - - 408.6
+    - 412.925
+  - - 413.275
+    - 417.45
+  - - 417.8
+    - 427.525
+  - - 427.875
+    - 435.375
+  - - 435.725
+    - 442.35
   status: changed
   changes:
   - UV2-20
@@ -1285,25 +1288,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s25b_direction
   t:
-  - 424.725
-  - 480.85
+  - 443.15
+  - 499.275
   sentence_times:
-  - - 424.725
-    - 428.1
-  - - 428.45
-    - 435.0
-  - - 435.35
-    - 440.05
-  - - 440.4
-    - 446.125
-  - - 446.475
-    - 454.275
-  - - 454.625
-    - 465.95
-  - - 466.3
-    - 471.325
-  - - 472.825
-    - 480.05
+  - - 443.15
+    - 446.525
+  - - 446.875
+    - 453.425
+  - - 453.775
+    - 458.475
+  - - 458.825
+    - 464.55
+  - - 464.9
+    - 472.7
+  - - 473.05
+    - 484.375
+  - - 484.725
+    - 489.75
+  - - 491.25
+    - 498.475
   status: new
   changes:
   - UV2-20
@@ -1390,19 +1393,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s26_coriolis_effect
   t:
-  - 480.85
-  - 509.2
+  - 499.275
+  - 527.625
   sentence_times:
-  - - 480.85
-    - 484.35
-  - - 484.7
-    - 492.525
-  - - 492.875
-    - 496.5
-  - - 496.85
-    - 505.6
-  - - 505.95
-    - 508.4
+  - - 499.275
+    - 502.775
+  - - 503.125
+    - 510.95
+  - - 511.3
+    - 514.925
+  - - 515.275
+    - 524.025
+  - - 524.375
+    - 526.825
   status: changed
   changes:
   - UV2-22
@@ -1456,21 +1459,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s26a_merry_go_round
   t:
-  - 509.2
-  - 542.6
+  - 527.625
+  - 561.025
   sentence_times:
-  - - 509.2
-    - 518.65
-  - - 519.0
-    - 523.025
-  - - 523.375
-    - 528.825
-  - - 529.175
-    - 534.9
-  - - 535.25
-    - 537.125
-  - - 537.475
-    - 541.8
+  - - 527.625
+    - 537.075
+  - - 537.425
+    - 541.45
+  - - 541.8
+    - 547.25
+  - - 547.6
+    - 553.325
+  - - 553.675
+    - 555.55
+  - - 555.9
+    - 560.225
   status: new
   changes:
   - UV2-22
@@ -1527,25 +1530,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s26b_two_views
   t:
-  - 542.6
-  - 581.0
+  - 561.025
+  - 599.425
   sentence_times:
-  - - 542.6
-    - 545.225
-  - - 545.575
-    - 550.15
-  - - 550.5
-    - 557.025
-  - - 557.375
-    - 563.125
-  - - 563.475
-    - 567.3
-  - - 567.65
-    - 571.8
-  - - 572.15
-    - 575.575
-  - - 575.925
-    - 580.2
+  - - 561.025
+    - 563.65
+  - - 564.0
+    - 568.575
+  - - 568.925
+    - 575.45
+  - - 575.8
+    - 581.55
+  - - 581.9
+    - 585.725
+  - - 586.075
+    - 590.225
+  - - 590.575
+    - 594.0
+  - - 594.35
+    - 598.625
   status: new
   changes:
   - UV2-22
@@ -1606,21 +1609,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s26c_carried_arrow
   t:
-  - 581.0
-  - 608.475
+  - 599.425
+  - 626.9
   sentence_times:
-  - - 581.0
-    - 583.85
-  - - 584.2
-    - 588.775
-  - - 589.125
-    - 593.3
-  - - 593.65
-    - 597.85
-  - - 598.2
-    - 604.65
-  - - 605.0
-    - 607.675
+  - - 599.425
+    - 602.275
+  - - 602.625
+    - 607.2
+  - - 607.55
+    - 611.725
+  - - 612.075
+    - 616.275
+  - - 616.625
+    - 623.075
+  - - 623.425
+    - 626.1
   status: new
   changes:
   - UV2-22
@@ -1670,23 +1673,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s26d_new_ground
   t:
-  - 608.475
-  - 645.3
+  - 626.9
+  - 663.725
   sentence_times:
-  - - 608.475
-    - 612.225
-  - - 612.575
-    - 620.325
-  - - 620.675
-    - 624.05
-  - - 624.4
-    - 632.575
-  - - 632.925
-    - 635.575
-  - - 635.925
-    - 640.65
-  - - 641.0
-    - 644.5
+  - - 626.9
+    - 630.65
+  - - 631.0
+    - 638.75
+  - - 639.1
+    - 642.475
+  - - 642.825
+    - 651.0
+  - - 651.35
+    - 654.0
+  - - 654.35
+    - 659.075
+  - - 659.425
+    - 662.925
   status: new
   changes:
   - UV2-22
@@ -1761,27 +1764,27 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s27_coriolis_term
   t:
-  - 645.3
-  - 706.725
+  - 663.725
+  - 725.15
   sentence_times:
-  - - 645.3
-    - 647.45
-  - - 647.8
-    - 654.55
-  - - 654.9
-    - 663.4
-  - - 663.75
-    - 669.8
-  - - 670.15
-    - 680.5
-  - - 680.85
-    - 686.1
-  - - 686.45
-    - 692.4
-  - - 692.75
-    - 698.35
-  - - 698.7
-    - 705.925
+  - - 663.725
+    - 665.875
+  - - 666.225
+    - 672.975
+  - - 673.325
+    - 681.825
+  - - 682.175
+    - 688.225
+  - - 688.575
+    - 698.925
+  - - 699.275
+    - 704.525
+  - - 704.875
+    - 710.825
+  - - 711.175
+    - 716.775
+  - - 717.125
+    - 724.35
   status: changed
   changes:
   - UV2-22
@@ -1864,23 +1867,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s27a_minus_check
   t:
-  - 706.725
-  - 743.15
+  - 725.15
+  - 761.575
   sentence_times:
-  - - 706.725
-    - 708.75
-  - - 709.1
-    - 715.925
-  - - 716.275
-    - 721.925
-  - - 722.275
-    - 724.475
-  - - 724.825
-    - 731.525
-  - - 731.875
-    - 738.175
-  - - 738.525
-    - 742.35
+  - - 725.15
+    - 727.175
+  - - 727.525
+    - 734.35
+  - - 734.7
+    - 740.35
+  - - 740.7
+    - 742.9
+  - - 743.25
+    - 749.95
+  - - 750.3
+    - 756.6
+  - - 756.95
+    - 760.775
   status: new
   changes:
   - UV2-22
@@ -1940,27 +1943,27 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28a_local_axes
   t:
-  - 743.15
-  - 800.4
+  - 761.575
+  - 818.825
   sentence_times:
-  - - 743.15
-    - 747.65
-  - - 748.0
-    - 755.3
-  - - 755.65
-    - 758.475
-  - - 758.825
-    - 763.0
-  - - 763.35
-    - 771.125
-  - - 771.475
-    - 780.5
-  - - 780.85
-    - 786.95
-  - - 787.3
-    - 793.075
-  - - 793.425
-    - 799.6
+  - - 761.575
+    - 766.075
+  - - 766.425
+    - 773.725
+  - - 774.075
+    - 776.9
+  - - 777.25
+    - 781.425
+  - - 781.775
+    - 789.55
+  - - 789.9
+    - 798.925
+  - - 799.275
+    - 805.375
+  - - 805.725
+    - 811.5
+  - - 811.85
+    - 818.025
   status: new
   changes:
   - UV2-21
@@ -2049,21 +2052,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28b_components
   t:
-  - 800.4
-  - 842.35
+  - 818.825
+  - 860.775
   sentence_times:
-  - - 800.4
-    - 805.125
-  - - 805.475
-    - 811.625
-  - - 811.975
-    - 815.525
-  - - 815.875
-    - 824.425
-  - - 824.775
-    - 832.125
-  - - 832.475
-    - 841.55
+  - - 818.825
+    - 823.55
+  - - 823.9
+    - 830.05
+  - - 830.4
+    - 833.95
+  - - 834.3
+    - 842.85
+  - - 843.2
+    - 850.55
+  - - 850.9
+    - 859.975
   status: new
   changes:
   - UV2-23
@@ -2119,23 +2122,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28c_flat_part
   t:
-  - 842.35
-  - 889.125
+  - 860.775
+  - 907.55
   sentence_times:
-  - - 842.35
-    - 844.8
-  - - 845.15
-    - 850.225
-  - - 850.575
-    - 857.95
-  - - 858.3
-    - 866.325
-  - - 866.675
-    - 869.4
-  - - 869.75
-    - 881.85
-  - - 882.2
-    - 888.325
+  - - 860.775
+    - 863.225
+  - - 863.575
+    - 868.65
+  - - 869.0
+    - 876.375
+  - - 876.725
+    - 884.75
+  - - 885.1
+    - 887.825
+  - - 888.175
+    - 900.275
+  - - 900.625
+    - 906.75
   status: new
   changes:
   - UV2-24
@@ -2203,25 +2206,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28_f
   t:
-  - 889.125
-  - 938.9
+  - 907.55
+  - 957.325
   sentence_times:
-  - - 889.125
-    - 894.25
-  - - 894.6
-    - 899.925
-  - - 900.275
-    - 905.575
-  - - 905.925
-    - 911.7
-  - - 912.05
-    - 915.5
-  - - 915.85
-    - 924.475
-  - - 924.825
-    - 930.0
-  - - 931.5
-    - 938.1
+  - - 907.55
+    - 912.675
+  - - 913.025
+    - 918.35
+  - - 918.7
+    - 924.0
+  - - 924.35
+    - 930.125
+  - - 930.475
+    - 933.925
+  - - 934.275
+    - 942.9
+  - - 943.25
+    - 948.425
+  - - 949.925
+    - 956.525
   status: changed
   changes:
   - UV2-23
@@ -2281,19 +2284,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s29_turn_rule
   t:
-  - 938.9
-  - 966.75
+  - 957.325
+  - 985.175
   sentence_times:
-  - - 938.9
-    - 941.45
-  - - 941.8
-    - 949.175
-  - - 949.525
-    - 955.425
-  - - 955.775
-    - 961.375
-  - - 961.725
-    - 965.95
+  - - 957.325
+    - 959.875
+  - - 960.225
+    - 967.6
+  - - 967.95
+    - 973.85
+  - - 974.2
+    - 979.8
+  - - 980.15
+    - 984.375
   status: changed
   changes:
   - UV2-24
@@ -2356,23 +2359,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s30_coriolis_size
   t:
-  - 966.75
-  - 1004.75
+  - 985.175
+  - 1023.175
   sentence_times:
-  - - 966.75
-    - 968.525
-  - - 968.875
-    - 973.45
-  - - 973.8
-    - 980.925
-  - - 981.275
-    - 985.275
-  - - 986.775
-    - 992.525
-  - - 992.875
-    - 999.55
-  - - 999.9
-    - 1003.95
+  - - 985.175
+    - 986.95
+  - - 987.3
+    - 991.875
+  - - 992.225
+    - 999.35
+  - - 999.7
+    - 1003.7
+  - - 1005.2
+    - 1010.95
+  - - 1011.3
+    - 1017.975
+  - - 1018.325
+    - 1022.375
   status: changed
   changes:
   - UV2-16
@@ -2428,21 +2431,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s31_globe_paths
   t:
-  - 1004.75
-  - 1039.775
+  - 1023.175
+  - 1058.2
   sentence_times:
-  - - 1004.75
-    - 1007.125
-  - - 1007.475
-    - 1018.45
-  - - 1018.8
-    - 1024.925
-  - - 1025.275
-    - 1028.75
-  - - 1029.1
-    - 1032.675
-  - - 1033.025
-    - 1038.975
+  - - 1023.175
+    - 1025.55
+  - - 1025.9
+    - 1036.875
+  - - 1037.225
+    - 1043.35
+  - - 1043.7
+    - 1047.175
+  - - 1047.525
+    - 1051.1
+  - - 1051.45
+    - 1057.4
   status: changed
   changes:
   - UV2-25
@@ -2525,23 +2528,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s32_reanalysis
   t:
-  - 1039.775
-  - 1072.675
+  - 1058.2
+  - 1091.1
   sentence_times:
-  - - 1039.775
-    - 1042.125
-  - - 1042.475
-    - 1048.825
-  - - 1049.175
-    - 1054.4
-  - - 1054.75
-    - 1060.5
-  - - 1060.85
-    - 1064.0
-  - - 1064.35
-    - 1068.975
-  - - 1069.325
-    - 1071.875
+  - - 1058.2
+    - 1060.55
+  - - 1060.9
+    - 1067.25
+  - - 1067.6
+    - 1072.825
+  - - 1073.175
+    - 1078.925
+  - - 1079.275
+    - 1082.425
+  - - 1082.775
+    - 1087.4
+  - - 1087.75
+    - 1090.3
   status: changed
   changes:
   - UV2-14
@@ -2602,21 +2605,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s33_trades
   t:
-  - 1072.675
-  - 1117.675
+  - 1091.1
+  - 1136.1
   sentence_times:
-  - - 1072.675
-    - 1076.175
-  - - 1076.525
-    - 1085.55
-  - - 1085.9
-    - 1094.1
-  - - 1094.45
-    - 1100.525
-  - - 1100.875
-    - 1108.675
-  - - 1109.025
-    - 1116.875
+  - - 1091.1
+    - 1094.6
+  - - 1094.95
+    - 1103.975
+  - - 1104.325
+    - 1112.525
+  - - 1112.875
+    - 1118.95
+  - - 1119.3
+    - 1127.1
+  - - 1127.45
+    - 1135.3
   status: changed
   changes:
   - UV2-27
@@ -2686,21 +2689,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s34_westerlies
   t:
-  - 1117.675
-  - 1162.05
+  - 1136.1
+  - 1180.475
   sentence_times:
-  - - 1117.675
-    - 1122.2
-  - - 1122.55
-    - 1128.0
-  - - 1128.35
-    - 1134.4
-  - - 1134.75
-    - 1140.7
-  - - 1141.05
-    - 1152.925
-  - - 1153.275
-    - 1161.25
+  - - 1136.1
+    - 1140.625
+  - - 1140.975
+    - 1146.425
+  - - 1146.775
+    - 1152.825
+  - - 1153.175
+    - 1159.125
+  - - 1159.475
+    - 1171.35
+  - - 1171.7
+    - 1179.675
   status: changed
   changes:
   - UV2-28
@@ -2751,17 +2754,17 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s35_storms
   t:
-  - 1162.05
-  - 1182.125
+  - 1180.475
+  - 1200.55
   sentence_times:
-  - - 1162.05
-    - 1165.725
-  - - 1166.075
-    - 1170.825
-  - - 1171.175
-    - 1176.175
-  - - 1176.525
-    - 1181.325
+  - - 1180.475
+    - 1184.15
+  - - 1184.5
+    - 1189.25
+  - - 1189.6
+    - 1194.6
+  - - 1194.95
+    - 1199.75
   status: changed
   changes:
   - UV2-14
@@ -2814,23 +2817,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s36_ian
   t:
-  - 1182.125
-  - 1238.825
+  - 1200.55
+  - 1257.25
   sentence_times:
-  - - 1182.125
-    - 1189.125
-  - - 1189.475
-    - 1197.35
-  - - 1197.7
+  - - 1200.55
     - 1207.55
   - - 1207.9
-    - 1214.5
-  - - 1214.85
-    - 1224.925
-  - - 1225.275
-    - 1231.525
-  - - 1231.875
-    - 1238.025
+    - 1215.775
+  - - 1216.125
+    - 1225.975
+  - - 1226.325
+    - 1232.925
+  - - 1233.275
+    - 1243.35
+  - - 1243.7
+    - 1249.95
+  - - 1250.3
+    - 1256.45
   status: changed
   changes:
   - length
@@ -2881,23 +2884,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s37_idai
   t:
-  - 1238.825
-  - 1281.2
+  - 1257.25
+  - 1299.625
   sentence_times:
-  - - 1238.825
-    - 1241.025
-  - - 1241.375
-    - 1250.85
-  - - 1251.2
-    - 1255.5
-  - - 1255.85
-    - 1264.525
-  - - 1264.875
-    - 1267.675
-  - - 1268.025
-    - 1276.35
-  - - 1276.7
-    - 1280.4
+  - - 1257.25
+    - 1259.45
+  - - 1259.8
+    - 1269.275
+  - - 1269.625
+    - 1273.925
+  - - 1274.275
+    - 1282.95
+  - - 1283.3
+    - 1286.1
+  - - 1286.45
+    - 1294.775
+  - - 1295.125
+    - 1298.825
   status: changed
   changes:
   - length
@@ -2936,21 +2939,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s38_spin_sign
   t:
-  - 1281.2
-  - 1313.5
+  - 1299.625
+  - 1331.925
   sentence_times:
-  - - 1281.2
-    - 1284.5
-  - - 1284.85
-    - 1291.8
-  - - 1292.15
-    - 1299.525
-  - - 1299.875
-    - 1303.375
-  - - 1303.725
-    - 1308.1
-  - - 1308.45
-    - 1312.7
+  - - 1299.625
+    - 1302.925
+  - - 1303.275
+    - 1310.225
+  - - 1310.575
+    - 1317.95
+  - - 1318.3
+    - 1321.8
+  - - 1322.15
+    - 1326.525
+  - - 1326.875
+    - 1331.125
   status: changed
   changes:
   - UV2-28
@@ -2994,21 +2997,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s39_isobars
   t:
-  - 1313.5
-  - 1343.775
+  - 1331.925
+  - 1362.2
   sentence_times:
-  - - 1313.5
-    - 1318.625
-  - - 1318.975
-    - 1321.625
-  - - 1321.975
-    - 1328.575
-  - - 1328.925
-    - 1332.725
-  - - 1333.075
-    - 1338.0
-  - - 1338.35
-    - 1342.975
+  - - 1331.925
+    - 1337.05
+  - - 1337.4
+    - 1340.05
+  - - 1340.4
+    - 1347.0
+  - - 1347.35
+    - 1351.15
+  - - 1351.5
+    - 1356.425
+  - - 1356.775
+    - 1361.4
   status: changed
   changes:
   - UV2-29
@@ -3070,21 +3073,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s40_pressure_push
   t:
-  - 1343.775
-  - 1375.225
+  - 1362.2
+  - 1393.65
   sentence_times:
-  - - 1343.775
-    - 1346.1
-  - - 1346.45
-    - 1351.975
-  - - 1352.325
-    - 1357.6
-  - - 1357.95
-    - 1362.025
-  - - 1362.375
-    - 1368.175
-  - - 1368.525
-    - 1374.425
+  - - 1362.2
+    - 1364.525
+  - - 1364.875
+    - 1370.4
+  - - 1370.75
+    - 1376.025
+  - - 1376.375
+    - 1380.45
+  - - 1380.8
+    - 1386.6
+  - - 1386.95
+    - 1392.85
   status: changed
   changes:
   - UV2-29
@@ -3138,19 +3141,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s40a_k_cross_gradp
   t:
-  - 1375.225
-  - 1401.75
+  - 1393.65
+  - 1420.175
   sentence_times:
-  - - 1375.225
-    - 1378.475
-  - - 1378.825
-    - 1383.65
-  - - 1384.0
-    - 1388.2
-  - - 1388.55
-    - 1395.175
-  - - 1395.525
-    - 1400.95
+  - - 1393.65
+    - 1396.9
+  - - 1397.25
+    - 1402.075
+  - - 1402.425
+    - 1406.625
+  - - 1406.975
+    - 1413.6
+  - - 1413.95
+    - 1419.375
   status: new
   changes:
   - UV2-29
@@ -3199,19 +3202,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s41_adjust
   t:
-  - 1401.75
-  - 1434.7
+  - 1420.175
+  - 1453.125
   sentence_times:
-  - - 1401.75
-    - 1407.625
-  - - 1407.975
-    - 1411.0
-  - - 1411.35
-    - 1418.8
-  - - 1419.15
-    - 1426.25
-  - - 1426.6
-    - 1433.9
+  - - 1420.175
+    - 1426.05
+  - - 1426.4
+    - 1429.425
+  - - 1429.775
+    - 1437.225
+  - - 1437.575
+    - 1444.675
+  - - 1445.025
+    - 1452.325
   status: changed
   changes:
   - UV2-29
@@ -3267,23 +3270,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s41a_balance
   t:
-  - 1434.7
-  - 1476.725
+  - 1453.125
+  - 1495.15
   sentence_times:
-  - - 1434.7
-    - 1437.55
-  - - 1437.9
-    - 1445.125
-  - - 1445.475
-    - 1451.425
-  - - 1451.775
-    - 1457.65
-  - - 1458.0
-    - 1462.85
-  - - 1463.2
-    - 1469.525
-  - - 1469.875
-    - 1475.925
+  - - 1453.125
+    - 1455.975
+  - - 1456.325
+    - 1463.55
+  - - 1463.9
+    - 1469.85
+  - - 1470.2
+    - 1476.075
+  - - 1476.425
+    - 1481.275
+  - - 1481.625
+    - 1487.95
+  - - 1488.3
+    - 1494.35
   status: new
   changes:
   - UV2-29
@@ -3337,25 +3340,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s42_geo_equation
   t:
-  - 1476.725
-  - 1522.8
+  - 1495.15
+  - 1541.225
   sentence_times:
-  - - 1476.725
-    - 1480.3
-  - - 1480.65
-    - 1488.175
-  - - 1488.525
-    - 1495.25
-  - - 1495.6
-    - 1499.75
-  - - 1500.1
-    - 1503.4
-  - - 1503.75
-    - 1508.75
-  - - 1509.1
-    - 1513.975
-  - - 1514.325
-    - 1522.0
+  - - 1495.15
+    - 1498.725
+  - - 1499.075
+    - 1506.6
+  - - 1506.95
+    - 1513.675
+  - - 1514.025
+    - 1518.175
+  - - 1518.525
+    - 1521.825
+  - - 1522.175
+    - 1527.175
+  - - 1527.525
+    - 1532.4
+  - - 1532.75
+    - 1540.425
   status: changed
   changes:
   - UV2-29
@@ -3422,19 +3425,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s43_geo_pieces
   t:
-  - 1522.8
-  - 1549.075
+  - 1541.225
+  - 1567.5
   sentence_times:
-  - - 1522.8
-    - 1525.025
-  - - 1525.375
-    - 1529.575
-  - - 1529.925
-    - 1536.125
-  - - 1536.475
-    - 1542.75
-  - - 1543.1
-    - 1548.275
+  - - 1541.225
+    - 1543.45
+  - - 1543.8
+    - 1548.0
+  - - 1548.35
+    - 1554.55
+  - - 1554.9
+    - 1561.175
+  - - 1561.525
+    - 1566.7
   status: changed
   changes:
   - UV2-29
@@ -3490,27 +3493,27 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s44_geo_numbers
   t:
-  - 1549.075
-  - 1616.225
+  - 1567.5
+  - 1634.65
   sentence_times:
-  - - 1549.075
-    - 1551.6
-  - - 1551.95
-    - 1557.8
-  - - 1558.15
-    - 1568.625
-  - - 1568.975
-    - 1572.925
-  - - 1573.275
-    - 1580.2
-  - - 1580.55
-    - 1591.1
-  - - 1591.45
-    - 1596.625
-  - - 1598.125
-    - 1604.55
-  - - 1604.9
-    - 1615.425
+  - - 1567.5
+    - 1570.025
+  - - 1570.375
+    - 1576.225
+  - - 1576.575
+    - 1587.05
+  - - 1587.4
+    - 1591.35
+  - - 1591.7
+    - 1598.625
+  - - 1598.975
+    - 1609.525
+  - - 1609.875
+    - 1615.05
+  - - 1616.55
+    - 1622.975
+  - - 1623.325
+    - 1633.85
   status: changed
   changes:
   - UV2-29
@@ -3600,23 +3603,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s45_storm_map
   t:
-  - 1616.225
-  - 1668.175
+  - 1634.65
+  - 1686.6
   sentence_times:
-  - - 1616.225
-    - 1618.85
-  - - 1619.2
-    - 1626.625
-  - - 1626.975
-    - 1635.45
-  - - 1635.8
-    - 1641.925
-  - - 1642.275
-    - 1651.075
-  - - 1651.425
-    - 1658.15
-  - - 1658.5
-    - 1667.375
+  - - 1634.65
+    - 1637.275
+  - - 1637.625
+    - 1645.05
+  - - 1645.4
+    - 1653.875
+  - - 1654.225
+    - 1660.35
+  - - 1660.7
+    - 1669.5
+  - - 1669.85
+    - 1676.575
+  - - 1676.925
+    - 1685.8
   status: changed
   changes:
   - UV2-31
@@ -3698,25 +3701,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s46_real_winds
   t:
-  - 1668.175
-  - 1712.875
+  - 1686.6
+  - 1731.3
   sentence_times:
-  - - 1668.175
-    - 1672.7
-  - - 1673.05
-    - 1675.475
-  - - 1675.825
-    - 1681.625
-  - - 1681.975
-    - 1686.525
-  - - 1686.875
-    - 1692.625
-  - - 1692.975
-    - 1695.6
-  - - 1695.95
-    - 1701.525
-  - - 1701.875
-    - 1712.075
+  - - 1686.6
+    - 1691.125
+  - - 1691.475
+    - 1693.9
+  - - 1694.25
+    - 1700.05
+  - - 1700.4
+    - 1704.95
+  - - 1705.3
+    - 1711.05
+  - - 1711.4
+    - 1714.025
+  - - 1714.375
+    - 1719.95
+  - - 1720.3
+    - 1730.5
   status: changed
   changes:
   - UV2-31
@@ -3770,29 +3773,29 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s47_recap
   t:
-  - 1712.875
-  - 1787.65
+  - 1731.3
+  - 1812.875
   sentence_times:
-  - - 1712.875
-    - 1719.025
-  - - 1719.375
-    - 1725.05
-  - - 1725.4
-    - 1733.325
-  - - 1733.675
-    - 1739.7
-  - - 1740.05
-    - 1750.1
-  - - 1750.45
-    - 1759.55
-  - - 1759.9
-    - 1766.55
-  - - 1766.9
-    - 1769.025
-  - - 1769.375
-    - 1779.025
-  - - 1779.375
-    - 1786.85
+  - - 1731.3
+    - 1737.45
+  - - 1737.8
+    - 1743.475
+  - - 1743.825
+    - 1751.75
+  - - 1752.1
+    - 1758.35
+  - - 1758.7
+    - 1771.05
+  - - 1771.4
+    - 1780.5
+  - - 1780.85
+    - 1787.5
+  - - 1787.85
+    - 1789.975
+  - - 1790.325
+    - 1799.975
+  - - 1800.325
+    - 1812.075
   status: changed
   changes:
   - UV2-10
@@ -3831,11 +3834,12 @@ scenes:
     '
   voiceover: 'To sum up, the cross product of two arrows is another arrow, at right angles to both. Each component leaves out its own direction and cross
     multiplies the other two. Its length is the first arrow''s length times the part of the second arrow across it: the area of their parallelogram. Its
-    direction is the normal to their plane, and the right-hand rule says which way round. Physics uses it for torque, angular momentum and the push on a
-    moving charge, and a push always at a right angle turns a motion without speeding it up. On the spinning Earth, the ground moves at Omega cross r, and
-    moving air feels the Coriolis push, minus two Omega cross u. For flat winds, that''s minus f k cross u: to the right in the north, and to the left in
-    the south. That''s why storms spin. When this push balances the pressure push, we get the geostrophic wind, one over f rho times k cross grad p, along
-    the isobars. Later videos in this series show how to read weather maps, and how grad, div and curl are built from these products.'
+    direction is at right angles to their plane, and the right-hand rule says which way round. In the last video, we saw that physics uses it for torque,
+    angular momentum and the push on a moving charge, and that a push always at a right angle turns a motion without speeding it up. On the spinning Earth,
+    the ground moves at Omega cross r, and moving air feels the Coriolis push, minus two Omega cross u. For flat winds, that''s minus f k cross u: to the
+    right in the north, and to the left in the south. That''s why storms spin. When this push balances the pressure push, we get the geostrophic wind, one
+    over f rho times k cross grad p, along the isobars. The last video shows why the cross product is built this way, and later videos in this series show
+    how to read weather maps, and how grad, div and curl are built from these products.'
   on_screen_eq:
     latex: '|\mathbf a\times\mathbf b| = |\mathbf a|\,|\mathbf b|\sin\theta'
     vallis_eq: 'provenance only: as s08'
@@ -3860,15 +3864,15 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s48_end
   t:
-  - 1787.65
-  - 1813.025
+  - 1812.875
+  - 1838.25
   sentence_times:
-  - - 1787.65
-    - 1793.525
-  - - 1793.875
-    - 1804.925
-  - - 1805.275
-    - 1812.725
+  - - 1812.875
+    - 1818.75
+  - - 1819.1
+    - 1830.15
+  - - 1830.5
+    - 1837.95
   status: unchanged
   changes: []
   split: 2a and 2b (re-worded per movie)
