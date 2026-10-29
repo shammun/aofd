@@ -15,7 +15,7 @@ changes in s47/s48), as they stood on 2026-10-29.
 - The cross-product globe frame: `movies/src/ch00/CrossProductWhy.tsx` → `GlobeView` + `Vignette`, and `HalfEarthView`
   (`fadeBelow`) with an edge mask.
 
-**Measured length (tools/tts.py dry run, Kokoro af_bella 1.0): 3513.45 s = 58:33.5** (+7.6 min on v4's 51:00). It is
+**Measured length (tools/tts.py dry run, Kokoro af_bella 1.0): 3520.50 s = 58:40.5, including U2-28** (+7.6 min on v4's 51:00). It is
 148.9 words per minute, with 74 scenes and 497 sentences. Trim options down to 56:40 or 55:12 are in §9.
 
 **Coordinator input (2026-10-29, folded in; see `movies/ch00/retrofit_5b_plan.md` §9):**
@@ -45,6 +45,7 @@ changes in s47/s48), as they stood on 2026-10-29.
 | U2-25 | "climate is what you expect…" rushed | s36 (34:12) | S6–S7 replaced by S6–S12: the band = climate (usual range for that day, 1991–2020), the line = weather (what happened each day of 2023), each with a gold link on its words, then 287 of 365 days inside, then the saying |
 | U2-26 | the saying sits on the figure | s36 | the saying goes **below the figure** in bold gold, clear of everything |
 | U2-27 | average winds in the cross-product s33 style | s53 (45:36 = s53 S1 at 2736.2 s in v4 UF1) | s53's own NCEP 1991–2020 mean 10-m wind data, drawn the cross-product v5 `s33_trades` way: moving streaklines brightened in the belt being named, dashed gold belt circles and gold direction chevrons; a large K1 globe that flies to and hovers over each belt on its words, with soft edge fades |
+| U2-28 + house rule | westerlies with their own flights; every globe in the v5 look | s53, every globe scene | s53: separate flight + hover for the North Atlantic and Southern Ocean westerlies (+1 sentence, +7.05 s measured); K1 reproduces cross-product v5 56:35–57:54 (large globe, streaks, hovers, soft fades, keywords and numbers allowed on the faded rim only, titled colour bar always, source line always below) |
 | U2-07, G5 | column and slab edges | s05, s13–s15, s18, s18b, s20c, s20f, s20g, s22, s60 | all four vertical edges run to the top of the drawn column (bug: `ColumnFaces` stops the rods at `top*0.55` = 20 km) |
 | U2-08 | equation off screen | s15 (10:35) | `∂p/∂z = −ρg` (96 px) and its underbraces fit inside x 1080–1840, checked by the K6 overlap gate |
 | **U2-09…15** | **scale-height section** | **s18–s20c (12:00–18:40)** | **rewritten slowly. s18 and s18b are trimmed; s19 and s20 are adjusted; three new scenes: s20e tangent, s20f "a scale, not a lid", s20g the uniform-density block; s20b is rebuilt; s20c S1 is reworded** |
@@ -196,6 +197,11 @@ The five pictures support each other:
 10. Of the pressure at the bottom of that kilometre.
 11. So the first kilometre takes one thousand and thirteen hectopascals down to about nine hundred, and the next takes nine hundred down to about eight hundred.
 12. Each kilometre takes away the same fraction, so the drops get smaller as we go up: about a hundred and thirteen hectopascals in the first kilometre, but only about a hundred and one in the second.
+
+**s53_trades_westerlies** (U2-28): one new sentence after S5. Old S6 and S7 become S7 and S8.
+- + S6 "Over the Southern Ocean, where little land slows them down, the westerlies blow strongest of all."
+- Measured: 6.70 s clip + 0.35 s gap = **+7.05 s** (`dryrun_uf2/supp2/`).
+- CHECK W93 adds: the NCEP 1991–2020 mean 10-m speed averaged over 45–60°S exceeds that over 40–55°N.
 
 **s20c_equal_slabs**: only S1 changes (U2-15). The other sentences are unchanged.
 - − "Here's another way to see why the curve bends."
@@ -490,7 +496,7 @@ maths zone.
 
 **s27b_vapour_pressure (U2-19, U2-20; slot layout).**
 - The globe takes the main space while it is zoomed on the tropics (G1, G2):
-  - K1 `GlobeFrame` in the picture zone (x 80–1000, y 40–820), with four-edge fades while zoomed;
+  - K1 `GlobeFrame` in the v5 look (large globe, soft fades, right panel while zoomed);
   - colour bar in the maths zone at x 1120, y 760 (title above it at y 726), off the globe;
   - the ring label "q ≈ 20 g/kg" is a K3 callout in the maths zone linked to the ring;
   - credit: K2 `SourceBelow` on the frame box.
@@ -553,8 +559,8 @@ maths zone.
 - **Data: unchanged.** These are s53's own NCEP/NCAR R1 1991–2020 mean 10-m u/v (A5) and its `advect_on_sphere`
   streaklines, plus the ERA5 Ciarán track. The 5° arrow grid is replaced by the streaklines. The "5 m/s" scale is kept as
   a K3 callout beside the globe: an animated K7 `dash` arrow of 5 m/s length, with its label.
-- **Frame.** K1 `GlobeFrame`, picture zone x 80–1000, y 40–820. The whole globe has radius ≈ 380 px; the hovers at dist
-  2.4–2.8 fill and pass the box, with all four edges fading. Callouts sit in the maths zone. The credit is K2 under the box:
+- **Frame.** K1 `GlobeFrame` in the v5 look (§4.1). The whole globe has radius ≈ 390 px; the hovers at dist 2.4 fill
+  x 40–1360 with soft fades and the right panel, as in 2.png. Callouts sit in the maths zone. The credit is K2 under the box:
   "Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 1991–2020 mean 10-m wind · storm track: ERA5 (Copernicus C3S)".
 - **Camera keys** (`globePath`, easeIO; hold = hover with a 2°/s slow drift east so the flow keeps moving under the camera):
 
@@ -564,9 +570,10 @@ maths zone.
 | S2 AT "Between the subtropical highs" | → {15, −35, 2.4} over 45 frames, then hover | fly to the tropical North Atlantic between the Azores "H" and the equator; `bright` = 1.4 for \|lat\| ≤ 30, 0.45 elsewhere; callouts "trade winds" on AT(2, "called the trade winds") and "sailing ships" with a small ship icon on its words |
 | S3 AT "North of the equator" | hover {15, −40, 2.4} | `BeltChevrons` along 15°N, 60°W–10°W, pointing towards the south-west (from the north-east); callout "north-east trades" |
 | S4 AT "South of it" | → {−15, −20, 2.4} over 50 frames | glide across the equator to the South Atlantic (the St Helena high "H"); chevrons along 15°S pointing north-west; callout "south-east trades" |
-| S5 AT "Poleward of the subtropical highs" | → {48, −25, 2.6} over 50 frames (towards Brest); on AT(5, "the westerlies") hop → {−48, 15, 2.6} (hop 0.6, 60 frames) | `bright` moves to 35–65° in both hemispheres; chevrons along 45°N (60°W–0°) then 50°S pointing east; callout "westerlies"; Southern Ocean streaks fastest |
-| S6 AT "That's why storms like Ciarán" | → {47, −12, 2.8} over 50 frames | back over the Bay of Biscay; the ERA5 Ciarán track as a gold K7 `pulse` arrow west → east to Brest (outlined "Brest" label on the map); callout "storms travel west → east" |
-| S7 AT "Why the winds bend" | → {40, −20, 3.4} by scene end (= s54 start) | pull back; fades release as the globe returns inside the box; callout "Coriolis →" |
+| S5 AT "Poleward of the subtropical highs" | hop → {48, −30, 2.4} over 60 frames (hop 0.6), then hover | **westerlies, own flight and hover (U2-28)**: the North Atlantic between the Azores high and Brest; `bright` = 1.4 for 35–65°, 0.45 elsewhere (as `S34`); dashed gold circle at 45°N; chevrons along 45°N pointing east; callouts on the faded rim: "westerlies", "named from where they blow", a gold arrow "from the west", "towards the east" |
+| S6 (new) AT "Over the Southern Ocean" | hop → {−50, 30, 2.4} over 60 frames, then hover | **a second westerly belt with its own flight and hover**: circles at 45°S and 55°S, chevrons east, the brightest and fastest streaks of the scene; callout "Southern Ocean: strongest" |
+| S7 AT "That's why storms like Ciarán" | → {47, −12, 2.8} over 70 frames | back over the Bay of Biscay; the ERA5 Ciarán track as a gold K7 `pulse` arrow west → east to Brest (outlined "Brest"); callout "storms travel west → east" |
+| S8 AT "Why the winds bend" | → {40, −20, 3.4} by scene end (= s54 start) | pull back; fades release as the globe returns inside the box; callout "Coriolis →" |
 
 - **CHECK W93:**
   - the chevron directions come from the data: the area-mean wind over 10–20°N, 60–10°W blows from 30–75° (north-east);
@@ -636,15 +643,31 @@ uses it. No scene keeps the kit_wb forks.
 - **Readouts move beside the picture, they are not dropped.** Anything with a number or a sentence ("L 956 hPa", "q ≈ 20 g/kg", "≈ 130 km", "cloud base ≈ 1.5 km",
   "Storm Ciarán · 2 Nov 2023", "air parcel") becomes a `Callout` in the free zone with a gold link to its feature. "L"
   alone may stay on the map.
-- **GlobeFrame boxes.**
-  - Default with text beside it: picture zone x 80–1000, y 40–820.
-  - The frame may widen to x 80–1840 (G2, animated over 0.8 s) only while the scene has no maths-zone text on screen.
-    Text that is on screen keeps its place beside the frame and is never covered. The text is not removed; the widening is
-    timed between sentences that carry no on-screen text.
-  - Unzoomed whole globe: silhouette radius ≈ 380 px, centre (540, 430), inside the box, with no fade.
-  - Zoomed, rotated past the box or flown: all four edges fade softly (the CSS mask of K1), so the 3-D box never shows.
-  - The model is the cross-product composition (`CrossProductWhy.tsx`: `GlobeView` full-frame canvas + `Vignette`;
-    `HalfEarthView fadeBelow` + edge mask at 29:30). K1 replaces both.
+- **GlobeFrame = the cross-product v5 look (new house rule, user 2026-10-29).** The reference for **every** 3-D globe is
+  cross-product v5 56:35–57:54: `S33` trades, then `S34` westerlies (`CrossProductWhy.tsx` ≈ lines 4595–4685); the frame is
+  `outputs/viewing_2026-10-29/weather_basics/2.png`. K1 must reproduce it:
+  - **A large globe.** A full-frame canvas (as `GlobeView`, GW 1920 × GH 1080).
+    - Zoomed or hovering, the sharp globe fills about x 40–1360, y 40–820.
+    - The whole globe (unzoomed) has a silhouette radius ≈ 390 px with its centre near (600, 440).
+  - **Soft edge fades** (the `Vignette` recipe):
+    - top 0–60 and left 0–60 gradients;
+    - a bottom gradient that ends by y 830;
+    - a right gradient 1160 → about 1360 into a background panel at 82 %, ramped in over 1 s when a zoom or hover starts
+      (`right` = fin(…, 30)) and out when it ends.
+    - An unzoomed whole globe needs no fades.
+  - **Animated wind streaks** wherever the scene shows wind (K7 `FlowParticles` globe mode = `Streaks` + `bright(lat)`).
+  - **Camera moves and hovers** with `globecam.ts` (`globePath` keys with `hop`). A hover is a held key with a 2°/s slow
+    drift, so the picture never freezes.
+  - **Text placement:**
+    - Keywords and numbers **may sit on the faded rim**: the right panel, or the outer 60 px of the top and left fades, where
+      the globe shows at ≤ 40 % brightness. This is as in 2.png ("trade winds", "≈ 5–7 m/s").
+    - They **never** sit on the sharp, unfaded globe. Outlined spot labels (place names, H/L, fronts) are the only text
+      allowed there.
+    - K6 uses the K1 **sharp mask** (where the fade alpha is > 0.4) as the no-text region.
+  - **A coloured globe always has its titled colour bar** (title + units, 52-px ticks), on the faded right panel or below the
+    globe. It stays on screen through zooms.
+  - **The source line always sits below the globe**: K2 `SourceBelow` on the bottom of the sharp mask (≥ 16 px gap), at
+    about y 836–866, and never on the sharp globe.
 - **Source lines (K2).** `SourceBelow` gets the picture's bounding box and puts the line at least 16 px under it. The fixed
   `SrcLine` at y 852 in `WeatherBasics.tsx` (≈ line 393) is **deleted**, and every call is replaced.
   - Every picture box must therefore end at y ≤ 820. K2 throws above 856, so any layout that would print a credit on a
@@ -653,7 +676,7 @@ uses it. No scene keeps the kit_wb forks.
   - Tilted 3-D plates (s03, s21, s26, s31) and stacks pass the bounding box of their **projected** quad, or of the GlobeFrame
     box when that is smaller. The plates are sized so the box ends at y ≤ 820 on every camera key.
   - Two pictures side by side (s25 chart + globe, s36 locator + chart) each get their own `SourceBelow` in their own column.
-- **Colour bars** sit in the maths zone (x 1100–1800, typically y 700–790) or under the picture box, never on the picture.
+- **Colour bars** sit in the maths zone (x 1100–1800, typically y 700–790), on a globe's faded rim, or under the picture box. They are never on the sharp picture.
   During a zoom they stay on screen, beside the frame. They are not hidden; where the frame widens (G2), the colour bar moves
   below it.
 
@@ -661,7 +684,7 @@ uses it. No scene keeps the kit_wb forks.
 | Scene | Picture | Zoom / flight? | Change (K1 frame · K2 source · K3 callouts) |
 |---|---|---|---|
 | s00 | title right column: Part A globe + balloon, Part B Ciarán map | Part A zooms to Ciarán | K1 box = the title's animation box (x 1080–1840, y 180–636) with fades while zoomed; K2 under that box; the Brest pressure readout as a K3 callout beside the box, not on the map |
-| s01 | globe | yes (dist 3.8 → 2.5) | K1 picture-zone box, fades while dist < 3.2; the four keywords stay beside the globe at x 1250–1800, which is off the frame box, so nothing fades; "Storm Ciarán · 2 Nov 2023" is a K3 callout at x 1100–1800 linked to the gold ring; K2 |
+| s01 | globe | yes (dist 3.8 → 2.5) | K1 v5 look: large globe, fades and the right panel while dist < 3.2; the four keywords stay at x 1250–1800 on the faded right panel (allowed: faded rim), never on the sharp globe; "Storm Ciarán · 2 Nov 2023" is a K3 callout at x 1100–1800 linked to the gold ring; K2 |
 | s02 | globe + wedge | the ×40 circle and its zoom are removed; whole globe | no fade; "how pictures draw it" / "true thickness" keywords in the maths zone with gold pointers (K3) to the limb; K2 (U2-03) |
 | s03 | globe → flight → Brittany terrain | yes | K1 fades during the flight and on the terrain (tile edge never seen); "air parcel" becomes a K3 callout; Brittany, Brest and English Channel stay as outlined place labels; K2 |
 | s21 | globe zoom → tilted map plate | yes | K1; plate box ends at y ≤ 820; K2 (U2-16); the readouts beside the balloon (p · T · humidity · wind) become K3 callouts in the maths zone |
@@ -669,7 +692,7 @@ uses it. No scene keeps the kit_wb forks.
 | s25 | chart + half-screen globe | to Singapore and the pole | K1 for the globe in its own column; one K2 under each picture; "Paris ≈ 11 km", "Singapore ≈ 16–17 km" stay on the chart (a chart, not an image) |
 | s26 | tilted MODIS plate | orbit | K1 plate fades; "24 June 2024, morning", "thermals" and "−10 °C per km" become K3 callouts; K2 |
 | s27 | Blue Marble → q globe | spin, pole | whole-globe K1; the colour bar in the maths zone (it is already at x 1120, y 720); K2 |
-| s27b | q globe zoomed on the tropics | yes (U2-19) | K1 picture-zone box with fades; colour bar in the maths zone at y 760; the ring label "q ≈ 20 g/kg" becomes a K3 callout; slot layout (§3); K2 |
+| s27b | q globe zoomed on the tropics | yes (U2-19) | K1 v5 look (large globe, fades, right panel); the titled colour bar on the faded right panel at y 760; the ring label "q ≈ 20 g/kg" becomes a K3 callout; slot layout (§3); K2 |
 | s27c | humidity stack (new) | inside the stack | K1 + K5; all readouts are K3 callouts; colour bar in the maths zone; K2 |
 | s31 | Sentinel-2 plate (new) | orbit | K1; "cloud base ≈ 1.5 km" and "same height → flat bases" are K3 callouts; "Trappes" stays as a place label; K2 |
 | s32, s35, s44, s55–s58 | flat MapBox maps | MapCamera zooms | the map box ends at y ≤ 820; K1 fades when zoomed; wind readouts ("13 m/s from 155°") and "−35 hPa in 13 h" are already on the graphs or move to K3; K2 (fix-loop S4) |
@@ -1016,7 +1039,8 @@ self-check diff 0.0 ms, `len_ok` and `cues_ok` true, no warnings; synthesis took
 U2-25, and s38b moved to the equator-to-pole sector. 20 sentences, 156.57 s, self-check OK. The deltas are taken on the
 scene durations, including the 0.8-s scene gap: s36 53.7 → 96.2 s and s38b 45.3 → 58.4 s, a total of **+55.6 s**.
 
-**UF2 measured length: 3510.95 s of narration + 2.5-s end hold = 3513.45 s = 58:33.5.**
+**UF2 measured length: 3510.95 s of narration + 2.5-s end hold = 3513.45 s = 58:33.5.** With the U2-28 sentence
+(+7.05 s, measured separately) it is **3520.50 s = 58:40.5**, with 8730 words and 498 sentences.
 - 8714 words, 497 sentences, 33 beats;
 - speech 3268.7 s;
 - **148.9 words per minute overall** (≤ 150 ✓), 160.0 while speaking.
