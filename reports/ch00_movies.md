@@ -4274,3 +4274,231 @@ Please also check:
 Disk at review: C: 70 GB free, G: 524 GB free (unchanged by this review). Review frames: 184 MB, 382 PNG + 43 sheets, under
 `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/review1/` (not committed). The QA re-run
 rewrote `reports/movies/ch00/ch00_vectors_index_notation/qa.json` and its contact sheets/frames (same results).
+
+
+---
+
+# ch00_vectors_index_notation — review 2 (fresh eyes, after fix loop 1)                    2026-10-29
+
+**Movie.** `movies/out/ch00/ch00_vectors_index_notation/1080.mp4` (commit ed892af): 2112.43 s (35:12.4), 72.31 MB,
+45 scenes, 529 cues. The narration ends at 2109.93 s, then a 2.5-s hold. 16 sentences were spliced (fix1_build).
+
+**Frames.** All frames are in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/review2/`
+(233 MB, not committed):
+- 382 full-size PNGs: one 0.4 s before the end of every sentence, the start of every scene, and the end hold;
+- 43 labelled 3×3 sheets at 640 px;
+- 143 extra crops and time series: s08, s09, s10 3-D, s11, s12, s12b, s12c, s12d (gridded, to measure angles), s12h links,
+  s12i, s21 (every 0.1–2 s), s23, s24, s28, s29, s31, the end card.
+
+**qa.json, as handed over (not re-run): 12 PASS + 1 WARN.**
+- duration, size, codec, black (0), frozen (202, all narrated), content, loudness (−16.0 LUFS / −2.9 dBTP);
+- flashes 0/s, captions (529 = script), subtitles, physics (70 hashes reproduce), equations (35);
+- **halves WARN**: right half empty 1458.0–1461.5 s (s21 start, 3.5 s).
+- The gates now mask the source band (y ≥ 835), so my review-1 gate-blind scan is no longer needed.
+- I spot-checked the masked result on the sheets. No left/right half is empty for more than about 3.5 s.
+
+**Numbers re-checked by hand.**
+- Jet ≈ 65 m/s (GFS 28 Oct 2026): labelled "about 65 m/s · 28 Oct 2026".
+- El Niño (16:29–16:48): the thumbnails read "avg: −5.0" and "2023: −3.7", and the equation is
+  u′ = (−3.7) − (−5.0) = +1.3 m/s (east). The weakened trades are an eastward anomaly, which is correct.
+- s22: −9 × 10⁻⁴ K/s ≈ −3.2 K/h.
+- s26: 5.8 × (−3.2 × 10⁻⁵) = −1.86 × 10⁻⁴ and 33.5 × (−2.5 × 10⁻⁵) = −8.38 × 10⁻⁴. The sum is −1.02 × 10⁻³ K/s = −3.7 K/h, and
+  the fixed-thermometer line reads "+3.7 K per hour" (the sign flip is now written).
+- s27: (8.2 − 2.4)/2 = 2.9 K/h. The station rose 10.3 → 14.9 °C between 18 and 20 UTC.
+- s31: 33.5 × 3.6 = 121 km north and 5.8 × 3.6 = 21 km east. The drawn drift matches the x₁ grid.
+
+**Index-notation and Kronecker-delta signs, all right.**
+- Free index in every term (s14).
+- Dummy index summed, and "at most twice" with p_i q_i s_i struck (s17).
+- δ_ij = 1 if i = j and 0 if i ≠ j, as in (2.16) (s29).
+- For i = 2, δ₂₁u₁ and δ₂₃u₃ are struck and δ₂₂u₂ = u₂ (s30).
+- ∂x_i/∂x_j = δ_ij, and u_j δ_ij = u_i (s31).
+- δ_ii = 3, and δ_ij p_i q_j = p_i q_i with the off-diagonal terms struck (s32).
+
+**Physics directions.**
+- s12c: Coriolis (6, −8) is 90° to the right of the wind (8, 6), which is correct for the NH. The narration and the screen
+  both say it is "apparent".
+- s12g: the wind veers going up ("clockwise going up, seen from above"), which means warm advection.
+- s34: the Coriolis inset points to the right of the wind.
+- s24/s25: grad T points SW, towards the warm air.
+- The one fault is s12d (N-M1 below).
+
+## Review-1 items at their new timestamps
+
+| item | status | where I checked (new times) |
+|---|---|---|
+| M1 source line in its own band, pictures ≤ y 820 | **fixed** | Checked on every sheet: the source line sits at y ≈ 840–866 with nothing on it. One 8-px residual: in s10 at 5:27–5:42 the easy-triangle "6" ends at y ≈ 832 (S-new-12). |
+| M2 gate-blind empty halves | **fixed** | s11 keyword from 6:20; s33 recap has a picture per sentence (33:51–34:23); s12h one map. Only s21 is left, 3.5 s (WARN). |
+| M3 s11 labels pile up | **partly** | Values now sit on the projection bands and the labels are apart (6:36–7:18). At 7:00–7:18 the gold "the arrow itself" link now crosses the "along coast" label (S-new-6). |
+| M4 s12b parallelogram | **fixed** | To scale, both routes, shaded, "call the plane's arrow p and the jet's arrow q" (9:03–10:13). |
+| M5 s12c numbers on their words | **fixed** | (0, 12.5) × 10⁻⁴ m/s² at 10:31; (6, −8) at 10:41; (−6, −4.5) at 10:48. |
+| M6 s12d isobars invisible | **fixed** | Dark 4-px isobars with a halo, labelled 968 and 972 hPa (11:28–12:40). This reveals N-M1. |
+| M7 symbols not explained | **fixed** | Bold **u** (1:52); "east = 9.3 × sin 330°" (4:17); √(u² + v² + w²) (5:48); q₁, q₂ spoken (12:43); "ū: average u′: anomaly" (16:18); "call the storm's velocity c" (17:11); "t: time" (26:35). |
+| M8 s12 balloon drawn vertically | **fixed** | Legs drawn to scale: 3 km and 4 km on the floor, a 1.2-km rise (7:30–7:57). |
+| M9 s23 equation over text | **fixed** | 26:35–26:55. |
+| M10 parcel not 3-D | **fixed** | three.js lit boxes: s12c (10:15), s21 (tilted ERA5 slab, 3-D legs u₁ u₂ u₃, slow orbit; 24:17–25:10), s23 (arriving parcels, 26:08–26:55). Layout faults in S-new-1 and S-new-2. |
+| M11 s31 source line | **fixed** | "Data: ERA5 (Copernicus C3S) 850 hPa wind · 1 Nov 2023, 18 UTC · Brest". |
+| M12 clipped globe | **fixed** | s01, s02 and s33 show the whole disc. |
+| M13 s12h strips | **fixed** | One map at a time, thumbnails, gold links (15:38–16:53). The links cross a label (S-new-4). |
+| S1 empty halves | **partly** | Only s21 is left: 24:17.7–24:21.2, 3.5 s (S-new-1). |
+| S2 s04 degrees | fixed | "from SSE / towards NNW" (2:12). |
+| S3 s05 "north-east", rings | fixed | 2:34. |
+| S4 s07 axis labels | fixed | 3:36–3:59. |
+| S5 calculations | **partly** | ≤ 3 lines and aligned in s08, s12g, s15, s22 and s26. Two lines still run past x 1840: s08 "= 9.3 × (−½) = −4.65 m/s" ends at x ≈ 1873 (4:24–5:02), and s12b "&#124;p + q&#124; = √(50² + 250²) ≈ 255 m/s" ends at x ≈ 1881 (9:54–10:13). |
+| S6 s09 w arrow, 850 hPa | fixed | The w arrow is a stub, "about 1.2 km", and the bars read "> 300 × slower". |
+| S7 s10 (−4.65)², "a bar on each side" | fixed | 5:53–6:19. |
+| S8 s12a coasts, labels, m/s | fixed | New York, London, "wind 10 km up (m/s)". One residual: s12g uses "m s⁻¹" (15:08–15:37, cosmetic). |
+| S9 Coriolis "apparent" | fixed | Spoken, and "apparent push (spinning Earth)" on screen (10:32). |
+| S10 s12i times and labels | **partly** | The 6 pm storm and c are shown. The "−c" label overprints the arrow heads, and a track dot sits on the "u" of "u − c", so it reads "û − c" (17:18–17:46; S-new-5). |
+| S11 colour-bar titles | fixed | All except the s33 recap globe, which has no bar (S-new-9). |
+| S12 cloud blend | fixed | 0:23–1:32. |
+| S13 ≡, range(3), stale loop | fixed | "for j in (1, 2, 3):" (21:38). |
+| S14 s19 3 × 3 dots | fixed | 22:46. |
+| S15 conversion steps | fixed | s22 25:28–25:58; s25 link from "−3.2 °C" and the north 100-km leg. |
+| S16 s26 sign flip | fixed | 28:42. |
+| S17 s27 empty axes, decimals | fixed | 28:50–29:37. |
+| S18 s30 / s32 | **partly** | s32 3 × 3 strike grid is fixed (33:01). In s30 the key result δ_ij u_j = u_i is still the smallest line at the bottom (31:41–31:53; S-new-10). |
+| S19 s13 (u, v, w) row | fixed | 17:58. |
+| S20 title spacing | fixed | The subtitle is about 66 px clear. |
+| S21 s01 → s02 camera | fixed | s02 opens on s01's framing, then pulls out. |
+| S22 spoken vs screen times | fixed | "5 pm UTC / 6 pm UTC". |
+| S23 ending | fixed | Weather/climate ending (s35), words and keyword lines as HOUSE_STYLE §3. |
+
+**Count.** Of 13 Must: 12 fixed, 1 partly (M3, now cosmetic). Of 23 Should: 19 fixed, 4 partly (S1, S5, S10, S18).
+
+## The builder's open items, judged
+
+1. **s12h "avg −5.0" link crossing a label** (16:29–16:53): **Should**. The crossing is not only while the link grows. In the final
+   state, both gold links from "avg: −5.0" and "2023: −3.7", and the "+1.3 m/s" link, run straight through
+   "ū: average u′: anomaly". For 24 s it reads like struck-out text, which breaks the HOUSE_STYLE §6 rule that links must not
+   cross text. See S-new-4.
+2. **s09 column diagram small** (5:02–5:27): **Should**. The slab itself is readable. But the gold link's arrowhead lands on
+   the "w" label and covers it from 5:13 to 5:27. On S4 the link also cuts through "clouds". See S-new-3.
+3. **s31 "−200" tick next to the keyword** (31:56–32:51): **Should**. "a map of x₁" and "−200" are about 15 px apart. The bar's
+   "0" and "100" are about 15 px apart too, and these two ticks sit left of their true positions on a −200…+100 bar
+   (the 0 label is at about 573 px; it should be at about 607). See S-new-8.
+4. **s21 3.5-s empty right half** (24:17.7–24:21.2, halves WARN): **Should**. Below the 10-s FAIL limit, but trivial to fix.
+   See S-new-1.
+5. **Spoken "u bar", "u prime" (16:18), "q one" (12:43), "bold u" (1:52).**
+   - Each phrase is written as words in the captions: "We call the average u bar / and the anomaly u prime:", "which we call
+     q one / and q two", "the wind vector is bold u."
+   - The matching symbol is on screen when it is said: ū and u′ (16:18), (−q₁, −q₂) (12:43), the bold **u** label (1:52).
+   - The timing sits inside the sentence windows.
+   - The same G2P already reads "u one" and "u sub i" in v1 sentences.
+   - Risk is low, but **a short listen check is still needed**. I can't hear the audio, and these are spliced sentences with
+     per-sentence gain (fix1_build). Listen at 1:52, 5:53, 6:00, 9:31, 10:32, 12:43, 16:18, 17:11–17:25, 18:52, 26:35 and
+     34:43–35:10, for two things:
+     - the letter names ("you bar", "you prime", "cue one"), not "uh";
+     - no level jump at the splice edges.
+   - This is a listen item, not a fix.
+
+## ch00_vectors_index_notation review 2 — MUST fix
+
+1. **N-M1 · s12d, 11:41–12:40: the picture shows the opposite of what the scene says (physics honesty, R1 §6).**
+   - **What the narration says.**
+     - S4: "If the pressure push and the Coriolis push balanced exactly, the wind would blow along the isobars."
+     - S11: friction "turns it across the isobars".
+   - **What the screen shows.** Measured on a gridded 1080p crop at 11:56:
+     - The orange geostrophic arrow points at a screen bearing of about 52°. The isobars it passes over run at about 0–20°
+       (nearly north–south).
+     - So the arrow cuts across **three** isobars towards *higher* pressure.
+     - The teal real wind (bearing about 29°) looks almost parallel to them.
+     - Once the isobars were made visible (M6 fixed), any viewer can see this.
+   - **Why it happens.** The numbers themselves are right.
+     - At the tail point (48° N, 6° W), the ERA5 976 and 980 hPa isobars bend. They run NE (about 35–55°) south of 48.4° N and
+       N–S north of 48.5° N. Bearings are from `vi.json → storm.isobars`.
+     - So a local u_g of (30.9, 24.9) at about 51° is right.
+     - But the 39.7 m/s arrow is drawn about 270 px (≈ 190 km) long, so it reaches into the N–S stretch.
+   - **Fix (either):**
+     - **(a) preferred:** move the sea point to where the isobars are straight for ±150 km (e.g. about 47.6° N, 6.5–7° W, on the
+       NE-running 976/980 stretch). Recompute u_g, u10 and u_ag with the same fluidpy call (CHECK rows), and re-splice S6, S7 and
+       S10 with the new numbers.
+     - **(b) minimal:**
+       - Draw both arrows at about 2.5 px per (m/s), centred on the point, so they stay inside one isobar spacing.
+       - Add a short dashed tangent of the local isobar through the point, so "along" can be seen.
+       - Then check on a frame that the screen angle between u_g and the local isobar is ≤ 5° and that the real wind visibly
+         points across them towards the low.
+
+## ch00_vectors_index_notation review 2 — SHOULD fix
+
+- **S-new-1 · s21 (24:17–25:10), layout of the new 3-D parcel.**
+  - The right half is empty for 3.5 s at the start. Show "air parcel · moves with the wind" on the right from frame 0.
+  - The S4 folded result shrinks just as it is revealed. "u_j ∂T/∂x_j = u₁… + u₂… + u₃…" drops to about 52 px, below the
+    84-px S3 line (24:43–25:10). Keep it at ≥ 68 px on two lines, with "= u·∇T" below.
+  - Label collisions:
+    - "wind" overprints "north" during the north hop (24:34–24:36);
+    - "u₁" runs into "east" (24:23–24:33);
+    - "u₃ ≈ 0.1 m/s" overlaps the box edge (24:35–25:10).
+    - Run `placeLabels` on the box-edge labels and the leg labels.
+  - At 24:17–24:33 the parcel box (about 100 px) covers the Brest dot and the start of the u₁ leg. Start it smaller or lift it.
+- **S-new-2 · s23, 26:08–26:55.**
+  - The parcel box sits on the wind arrowhead and covers the "(" of "(10, 30) m/s". Move the label 40 px right, or the box
+    off the tip.
+  - The lowest arriving box pokes out below the field's bottom edge. Clip it to the field.
+- **S-new-3 · s09, 5:13–5:27.**
+  - The gold link's head covers the "w" label. End the link beside the label, and scale the slab group up about 1.3×.
+  - At 5:22–5:27 the link also crosses "clouds". Route it around.
+- **S-new-4 · s12h, 16:29–16:53.** Three gold links run through "ū: average u′: anomaly" (HOUSE_STYLE §6). Either:
+  - move that keyword line above "u′ = u₂₀₂₃ − ū₁₉₉₁₋₂₀₂₀"; or
+  - bring the links in under it, ending them at "(−5.0)" and "(−3.7)" from below.
+- **S-new-5 · s12i, 17:18–17:46.**
+  - A storm-track dot sits over the "u" of "u − c", so it reads "û − c". Hide the track dots under labels, or move the label.
+  - The pink "−c" overprints the arrowheads. Offset it.
+- **S-new-6 · s11, 7:00–7:18 (M3 residual).** The "the arrow itself" link crosses the "along coast" label. Route it under the
+  coast arrow. At 6:20–7:18 the "north" axis label touches the map's top edge.
+- **S-new-7 · s12c, 10:48–11:26.**
+  - "Coriolis" touches the wind arrow and an isobar.
+  - "(0, 12.5)" sits on an isobar line.
+  - "− friction" touches the parcel box.
+  - Fix: `placeLabels`, plus a dark halo on the labels.
+- **S-new-8 · s31, 31:56–32:51.**
+  - Put the colour-bar ticks at their true positions on the −200…+100 bar (0 at 2/3 of the bar).
+  - Leave ≥ 40 px between "a map of x₁" and "−200": move the keyword up one line, or the bar right.
+- **S-new-9 · s33 recap globe (33:17–33:24) has no colour bar** (HOUSE_STYLE §5, U-WB-R2). Add the s02 bar ("temperature,
+  2 m · °C"), or use the uncoloured satellite globe.
+- **S-new-10 · s30, 31:41–31:53 (S18 residual).** Make δ_ij u_j = u_i the 84-px result line in gold. Change the keyword
+  "j → i, and δ is gone" to "swaps j for i" (the current one nearly repeats the narration).
+- **S-new-11 · Data-source lines on frames that show no data** (honesty of attribution). Show the source line only while
+  real data is on screen. These frames carry an ERA5 or SYNOP credit but show only diagrams:
+  - s10 easy 6-8 triangle (5:27–5:48, "SYNOP");
+  - s15 abstract p, q (19:38–20:05, "ERA5 850 hPa wind");
+  - s33 S4–S5 and S8 diagrams (33:39–33:59, 34:16–34:23);
+  - s34 S0–S1 ε-cloud (34:23–34:30).
+- **S-new-12 · M1 residual, s10, 5:27–5:42.** The easy-triangle "6" ends at y ≈ 832, 8 px above the source line. Lift the
+  diagram 30 px.
+- **S-new-13 · s27, 28:52–29:02: spoken numbers not on screen** (house §4). Label the curve's ends "2.4 °C (17 UTC)" and
+  "8.2 °C (19 UTC)" on S2.
+- **S-new-14 · S5 residual.** Break the s08 "= 9.3 × (−½) = −4.65 m/s" (x ≈ 1873) and the s12b |p + q| line (x ≈ 1881) so
+  they end inside 1840.
+
+## COSMETIC (optional)
+- s04 2:12–2:19: the gold direction arc cuts through "Brest".
+- s07 3:36–3:59: "e₁" touches "6".
+- s12a 8:43–9:03: the westbound plane arrow's head hides under the orange 50 arrow. The colour bar disappears during S13
+  without a zoom.
+- s12g 15:08–15:37: "m s⁻¹" where the rest of the movie uses "m/s".
+- s15 20:31–20:50: the "11.5" link crosses "e along the coast".
+- s20 24:02–24:17: the grad T arrow crosses the "Brest" label.
+- s22–s23: the synthetic temperature field shows coarse pixel blocks in its NE corner. Smooth it.
+- s34 34:23–34:43: overlapping ±1 discs in the ε cloud.
+- s35 end card: uneven gaps in the concept list.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_vectors_index_notation (review 2) | 2112.43 s (35:12.4); narration ends 2109.93 s, then a 2.5-s hold | 72.31 MB (budget 120, hard 160) | 12 PASS + halves WARN (s21, 3.5 s) | **FIX**: s12d picture contradicts "along the isobars" (N-M1). Every number right; NH right-deflection, Coriolis "apparent", veering → warm advection, grad T towards warm air, El Niño anomaly sign | PASS: 35 present; δ_ij (2.16); no KaTeX errors | PASS with Shoulds: source band clean; collisions in s09, s11, s12c, s12h, s12i, s21, s23, s31 | PASS: numbers on their words (one gap, s27 S2) | PASS: 529 cues = script; spliced sentences captioned as words | PASS: 0 flashes; perceptual maps | n/a (none, as the house style requires) | **FIX** |
+
+## Overall: FIX (ch00_vectors_index_notation review 2 — 1 Must, 14 Should, 9 Cosmetic)
+- Fix loop 1 worked:
+  - 12 of 13 Musts are fixed; M3 is left only as a cosmetic link crossing.
+  - 19 of 23 Shoulds are fixed; S1, S5, S10 and S18 are partly fixed.
+  - The source band is clean, the 3-D parcel is in, the recap has pictures, s12h is readable, and the weather ending is in.
+- **One Must remains: N-M1.** In s12d the now-visible isobars show the geostrophic arrow crossing three of them while the
+  real wind runs along them. That is the reverse of the scene's message.
+- After N-M1, re-check s12d frames at 11:41, 11:56, 12:08 and 12:32. The Shoulds can go in the same loop.
+- A short listen check at the spliced sentences (listed above) is still open before `qa_pass`.
+
+Disk:
+- At the start: C: 69 GB free, G: 524 GB free.
+- At the end: C: 60 GB free, G: 516 GB free.
+- This review wrote only 233 MB of frames to G: (`…/review2/`, 382 + 143 PNG + 43 sheets) and nothing to C:. The rest of the
+  drop came from other processes.
