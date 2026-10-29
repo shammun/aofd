@@ -1,0 +1,14 @@
+# ch00_derivatives_taylor (#4): sound cue sheet for tools/sound/mix.py (final build, 2026-10-29).
+# Score: tangent-glide (B-flat major with a Lydian E, 4/4 at 72 bpm; FM electric piano adding one note per bar like Taylor
+# partial sums, warm triangle pad, a pluck rising every eight bars; no drums), seed 11 (orchestrator), for the whole movie.
+# Effects: only where the picture shows moving air under a rising balloon, as quiet ducked beds (HOUSE_STYLE §8). The
+# storyboard's engine-hum candidates (s16, s17) are left out: tools/sound/sfx.py has no engine sound, and the flights are
+# thought experiments drawn as a glyph on a map.
+music: {style: tangent-glide, seed: 11, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects:
+  # s09 S4-S5: the Trappes balloon released and rising on the picture
+  - {effect: wind_gentle, scene: s09, offset: 19.0, duration: 9.0, intensity: 0.12, lufs: -30, fade_in: 1.5, fade_out: 2.0, seed: 31}
+  # s18 S2: the balloon climbing from 1.5 to 5.8 km on the profile chart
+  - {effect: wind_gentle, scene: s18, offset: 3.8, duration: 8.0, intensity: 0.10, lufs: -30, fade_in: 1.5, fade_out: 2.0, seed: 32}

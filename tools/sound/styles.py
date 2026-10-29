@@ -355,6 +355,24 @@ _add(Style(
       "gain": 0.30, "pan": "centre", "vel": [0.45, 0.65], "breath": 30.0}],
     lp_hz=6000, reverb={"seconds": 4.2, "decay": 1.05, "wet": 0.28, "tone_hz": 3800}, fade_in=5.0, fade_out=8.0))
 
+# ch00_derivatives_taylor (#4, 2026-10-29; storyboard audio.music.spec): B-flat major with a Lydian E natural (#11 on the
+# tonic chord), 4/4 at 72 bpm. A soft FM electric-piano phrase is played as one note, then two, three and four notes on
+# successive bars (the Taylor partial sums: each bar adds one term), over a warm triangle pad (Bb(#11) - Gm7 - Ebmaj7 - F,
+# two bars each = 6.67 s, so the chords change on the bar); a quiet pluck walks up the chord every eight bars like a rising
+# balloon. No drums; reverb medium (wet 0.25); low-pass 6 kHz.
+Q72 = 60.0 / 72.0
+_add(Style(
+    "tangent-glide", "Gentle and accumulating: B-flat major with a Lydian E, a soft electric-piano figure that adds one note "
+    "per bar (1, 2, 3, 4: partial sums), over a warm triangle pad; a quiet pluck rising every eight bars (no drums).",
+    "calculus, derivatives, Taylor series, linearisation (Chapter 0 maths-toolkit movies)", "B-flat major (Lydian E)",
+    [[34, 50, 53, 57, 64], [31, 46, 50, 53, 58], [39, 46, 50, 55, 58], [41, 45, 48, 53, 57]], 2 * _bar(72), 1.4,
+    "4/4 at 72 bpm", [{"timbre": "warm", "gain": 0.46, "octave": 12, "detune": 5.0}], 0.30,
+    [{"kind": "arp", "inst": "fm_piano", "steps": "x...xx..xxx.xxxx", "step_s": Q72, "octave": 24, "order": "up",
+      "gain": 0.40, "pan": "spread", "vel": [0.32, 0.5], "breath": 28.0},
+     {"kind": "arp", "inst": "pluck", "steps": "xxxxxxxx" + "." * 56, "step_s": Q72 / 2, "octave": 12, "order": "up",
+      "gain": 0.16, "pan": "centre", "vel": [0.4, 0.6], "start": 1.0 + 4 * 2 * _bar(72)}],
+    lp_hz=6000, reverb={"seconds": 3.6, "decay": 0.9, "wet": 0.25, "tone_hz": 3800}, fade_in=5.0, fade_out=8.0))
+
 
 # ===================================================================================================== composer
 def _chord_env(t: np.ndarray, k: int, cs: float, xf: float) -> np.ndarray:

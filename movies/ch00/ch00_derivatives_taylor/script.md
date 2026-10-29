@@ -21,6 +21,14 @@ cross-product movies (#1b, #2, #3) are not needed here and are listed on the end
 
 Lines starting with ">" are notes and are not spoken.
 
+**Change log (motion-builder, 2026-10-29: narration re-worded to the data, `movies/data/build_ch00_derivatives_taylor.py`).**
+- s19 S7-S8 (DT26): ERA5 2026-09-30 12 UTC horizontal temperature gradient at Trappes is 0.31 / 0.74 / 0.98 K per 100 km at
+  850 / 700 / 500 hPa and the sideways term along the drift averages about 3.3e-5 K/s: "only about one degree per hundred
+  kilometres ... around one times ten to the minus four" -> "less than one degree per hundred kilometres ... only a few
+  hundred-thousandths of a degree per second".
+- s19 S9 (DT27): the rising share is 99.6 %: "about ninety nine percent" -> "more than ninety nine percent".
+- Final TTS: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_derivatives_taylor/v1/tts (numbers in timing.json).
+
 ## s00_title
 In this video, we'll learn partial derivatives, the chain rule and Taylor series the easy way, and see how meteorology uses them to follow a weather balloon's temperature, and to find how much more water vapour it takes to saturate warmer air.
 
@@ -117,7 +125,7 @@ Now a real traveller: the Trappes balloon. It rose from one and a half kilometre
 > 94 words · 6 sentences · 2 beats · 931.450–973.675 s (42.2 s; speech 37.4 s) · 15:31.45–16:13.67 (measured, dry run v3).
 
 ## s19_balloon_terms
-Let's size each term. First, the fixed place. Comparing this balloon with the one launched twelve hours earlier, the air at five point eight kilometres cooled by about two and a half degrees in twelve hours. That's only about six times ten to the minus five degrees per second. Next, the sideways terms. The balloon drifted with the wind, about seventeen kilometres to the north-north-east, through air whose temperature changed by only about one degree per hundred kilometres sideways. That's around one times ten to the minus four degrees per second. Last, the rising term: four point seven metres per second, times minus five point seven degrees per kilometre, is minus zero point zero two seven degrees per second. [beat] So the rising term makes about ninety nine percent of what the thermometer saw. That's why we can read a balloon's record as the temperature profile, partial capital T by partial z, even though the balloon is moving.
+Let's size each term. First, the fixed place. Comparing this balloon with the one launched twelve hours earlier, the air at five point eight kilometres cooled by about two and a half degrees in twelve hours. That's only about six times ten to the minus five degrees per second. Next, the sideways terms. The balloon drifted with the wind, about seventeen kilometres to the north-north-east, through air whose temperature changed by less than one degree per hundred kilometres sideways. That's only a few hundred-thousandths of a degree per second. Last, the rising term: four point seven metres per second, times minus five point seven degrees per kilometre, is minus zero point zero two seven degrees per second. [beat] So the rising term makes more than ninety nine percent of what the thermometer saw. That's why we can read a balloon's record as the temperature profile, partial capital T by partial z, even though the balloon is moving.
 
 > 157 words · 10 sentences · 1 beats · 973.675–1043.325 s (69.7 s; speech 64.5 s) · 16:13.67–17:23.33 (measured, dry run v3).
 

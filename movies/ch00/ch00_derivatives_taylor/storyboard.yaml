@@ -1160,19 +1160,19 @@ scenes:
   visual: 'Picture zone: two profiles 00 UTC (faint) and 12 UTC (slate) with the 5.80 km gap bracketed ''−2.6 °C in 12 h''; a small
     map (ERA5 or GFS 500 hPa T, France box, 12 UTC 30 Sep 2026) with the balloon''s drift track (teal, 17 km to the NNE, from the IGRA
     winds and etime). Maths zone: house Balance-style log bars (one per term, labelled, numbers written): ''fixed place ≈ 6 × 10⁻⁵ °C/s''
-    (slate), ''sideways ≈ 1 × 10⁻⁴ °C/s'' (teal faint), ''rising ≈ −0.027 °C/s'' (teal); S9 keyword ''≈ 99 %'' on the rising bar; S10
+    (slate), ''sideways ≈ 3 × 10⁻⁵ °C/s'' (teal faint; builder 2026-10-29, DT26 data), ''rising ≈ −0.027 °C/s'' (teal); S9 keyword ''> 99 %'' on the rising bar; S10
     ''∂T/∂z'' keyword returning to the profile.'
   voiceover: 'Let''s size each term. First, the fixed place. Comparing this balloon with the one launched twelve hours earlier, the
     air at five point eight kilometres cooled by about two and a half degrees in twelve hours. That''s only about six times ten to the
     minus five degrees per second. Next, the sideways terms. The balloon drifted with the wind, about seventeen kilometres to the north-north-east,
-    through air whose temperature changed by only about one degree per hundred kilometres sideways. That''s around one times ten to
-    the minus four degrees per second. Last, the rising term: four point seven metres per second, times minus five point seven degrees
-    per kilometre, is minus zero point zero two seven degrees per second. [beat] So the rising term makes about ninety nine percent
+    through air whose temperature changed by less than one degree per hundred kilometres sideways. That''s only a few hundred-thousandths
+    of a degree per second. Last, the rising term: four point seven metres per second, times minus five point seven degrees
+    per kilometre, is minus zero point zero two seven degrees per second. [beat] So the rising term makes more than ninety nine percent
     of what the thermometer saw. That''s why we can read a balloon''s record as the temperature profile, partial capital T by partial
     z, even though the balloon is moving.'
   on_screen_eq:
     latex: \frac{dT}{dt}=\underbrace{\frac{\partial T}{\partial t}}_{6\times10^{-5}}+\underbrace{u\frac{\partial T}{\partial x}+v\frac{\partial
-      T}{\partial y}}_{\sim10^{-4}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}
+      T}{\partial y}}_{\sim3\times10^{-5}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}
     vallis_eq: 'provenance only: Kundu p. 858 display with our magnitudes'
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
   physics_source:

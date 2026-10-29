@@ -1,0 +1,3348 @@
+{
+ "id": "ch00_derivatives_taylor",
+ "storyboard": "movies/ch00/ch00_derivatives_taylor/storyboard.yaml",
+ "builder": "movies/data/build_ch00_derivatives_taylor.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "08f83b7dcf563e382a21664e6784e277ed756fcc",
+  "dirty_tracked": false,
+  "calculus_py_sha256": "969eeff9a8b10a87b811cc72d4de11401702d071ff39180d43b2557903b60e86",
+  "radiation_py_sha256": "0b8f1d7a9a0236d60a80ebbaee7b46db7435b7db70b2f5509b22cd584d766539",
+  "moist_py_sha256": "419e57194a9d136b5f91f702bc0ab1f88b36bfb3e4b7c3a9e0e51dbb4a53ef3c",
+  "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
+  "atmos_py_sha256": "fd7273ed9cd4c0c29e4b77ddeb478f4b8a0924cd759f007bea4d1fc968dc207f",
+  "sounding_py_sha256": "0d358a123c2e91fe5c139e01b21e2182b3456457d26fdb8f5e2dbce24e4393d5",
+  "climatology_py_sha256": "0facae7e9ed73bd3010798a4d779d7fc29b9039b309ecca826041baee2d37c9d",
+  "advection_py_sha256": "653ac1d74b90b946bb5fef8d253f271a9b33fa2c512d979e115d7384791db91c",
+  "igra_py_sha256": "8e7a8849d595c3756a5328bedd07f2417bcdf5c5f9bb21429fd914317f794e55",
+  "isd_py_sha256": "c00d9eb58a0f2b82d386ea733d054c98e8404539eb87a21949706669c09ed73a",
+  "thermo_py_sha256": "07377b5484140e01495af4af6e97f1ea81d64b572064e023ca12c995f452891c",
+  "statics_py_sha256": "d15571649df3ae2512fe37916d7181f0cbb67bd851b66d67bbe41c3ec49218bf",
+  "fd_py_sha256": "0649689a2f30e83b2fea972033f87a3419d8c683252c250af62705b9c2c5cf71"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "partials/total/chain": "Kundu App. B §B.1 (p. 857-858)",
+  "change of variable": "Kundu (B.2.1)",
+  "taylor/fd": "Kundu (10.4)-(10.6) (ch10 p451)",
+  "hydrostatic/scale height": "Vallis (1.51), (1.53)",
+  "exact differentials/entropy": "Vallis (1.61)-(1.65), (1.69)",
+  "clausius-clapeyron": "Vallis (18.27)",
+  "stefan": "Vallis (14.1) form"
+ },
+ "parameters": {
+  "brest_station": [
+   48.45,
+   -4.42
+  ],
+  "brest_grid_point": [
+   48.5,
+   -4.5
+  ],
+  "trappes": [
+   48.7744,
+   2.0097
+  ],
+  "sounding": "2026-09-30T12 (and T00)",
+  "latent_heat_rates": "L(T) = 2.501e6 - 2370 T[°C] J/kg; drawn curve library defaults (L 2.44e6, R_v 462, e0 612 Pa at 273 K)",
+  "cited": {
+   "warming": "1.26 °C 2016-2025 vs 1850-1900 (Forster et al. 2026, ESSD 18, 3889)",
+   "observed_vapour": "≈ 4-5 % per °C (Allan et al. 2022, JGR 127, e2022JD036728)",
+   "heavy_rain": "≈ 7 % per °C projected (IPCC AR6 WG1 SPM B.2.4)",
+   "erf_2xco2": "3.93 W/m² (AR6 WG1 §7.3.2.1)",
+   "planck_ar6": "−3.22 W m⁻² K⁻¹ (AR6 WG1 Table 7.10)",
+   "sigma": "5.670374419e-8 (CODATA 2022)",
+   "grids": "ENIAC 1950 736 km (Charney, Fjørtoft & von Neumann 1950); FAR-era ~500 km; ECMWF IFS TCo1279 ~9 km"
+  },
+  "time_compression": {
+   "s00": "balloon 15 min in ~4 s",
+   "s04": "12 h of hourly frames in ~5 s",
+   "s08": "17-19 UTC in ~6 s",
+   "s09/s18": "balloon 15 min in ~6-8 s",
+   "s16/s17": "flights 1 h in ~8 s",
+   "s20": "streaks ×600 (10-min RK2 steps, frozen 18 UTC field)"
+  },
+  "exaggerations": [
+   "s05/s11/s13 temperature drawn as height (landscape)",
+   "s22 relief ×5 vertical",
+   "s26 column height not to scale",
+   "s28 a 50 % expansion (thought experiment)",
+   "title zoom window ×8"
+  ]
+ },
+ "credits": [
+  "Contains modified Copernicus Climate Change Service information 2026 (ERA5 hourly 850 hPa, pressure levels, monthly TCWV, Ciarán surface).",
+  "Durre, I., et al.: Integrated Global Radiosonde Archive (IGRA) v2, NOAA NCEI (Trappes 30 Sep 2026, 00 and 12 UTC).",
+  "NOAA NCEI Integrated Surface Database (ISD): Brest-Guipavas 07110 SYNOP (WMO Resolution 40 notice applies).",
+  "CERES EBAF-TOA Edition 4.2.1, NASA Langley Research Center (Loeb et al. 2018, J. Climate 31, 895).",
+  "Imagery from the NASA Worldview application, part of NASA ESDIS (MODIS Aqua/Terra Corrected Reflectance, NASA LANCE / GIBS).",
+  "Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli, NASA GSFC).",
+  "ETOPO 2022 Global Relief Model, NOAA NCEI (public domain), doi:10.25921/fd45-gt74.",
+  "Made with Natural Earth (public domain).",
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0), style tangent-glide seed 11."
+ ],
+ "js_selftest": "none — the composition has no JS physics; every number is read from data/dt.json (TSX CHECK rows re-assert the screen strings)",
+ "narration_changes_from_data": [
+  "s19 S7-S8 (DT26): ERA5 30 Sep 2026 12 UTC |∇T| at Trappes 0.31 / 0.74 / 0.98 K per 100 km (850 / 700 / 500 hPa), sideways term u·∇T along the drift ≈ 3.3e-5 K/s: 'only about one degree per hundred kilometres ... around one times ten to the minus four degrees per second' -> 'less than one degree per hundred kilometres ... only a few hundred-thousandths of a degree per second'",
+  "s19 S9 (DT27): rising share 99.6 %: 'about ninety nine percent' -> 'more than ninety nine percent'"
+ ],
+ "screen_changes_from_data": [
+  "s22: storyboard '+200 m' and '2.1 km' vs '4.8 km' -> ETOPO 2022 60-arc-s hill: height gain 135.5 m (shown '+140 m'), drawn trails 4.0 km (straight) and 9.0 km (winding)",
+  "s19: underbrace and bar for the sideways terms '~1e-4' -> '~3e-5' / 'a few x 10^-5' (DT26); storyboard on_screen_eq updated",
+  "s25: '-10/290 = -3.4 %' shown as '-3.45 %' (the spoken 'about three and a half percent'); storyboard constant kept for the equations gate",
+  "s31: slope shown with the data value -4.86 K/km in the arithmetic (spoken 'minus four point nine'), so 12.3 - 4.26 x 4.86 = -8.4 is exact on screen",
+  "s21: (-5.7e-3)(-12.2) = 0.0695 shown as '~ +0.069' = the data value 0.0689 rounded (DT28)"
+ ],
+ "music": {
+  "style": "tangent-glide",
+  "seed": 11,
+  "key": "B-flat major (Lydian E)",
+  "tempo": "4/4 at 72 bpm",
+  "spec_note": "chords two bars each (6.67 s) so they change on the bar, instead of the storyboard's 8 s"
+ },
+ "inputs_sha256": {
+  "data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc": "a4c25d6e6895c7cea1b8ffb97d384962f93b1486d5512a83df755a3bca2ed9c3",
+  "data/derived/ch00/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc": "38046cb1d87dd86fd44e77b216fdaaaec5d327aaa080afe696eed85116f09f71",
+  "data/derived/ch00/era5_tcwv_global_1979-2026-09.nc": "dee652e39351c9756ba1e456af6ae6e510129642ad44f9a596c8234a84569803",
+  "data/derived/ch00/ceres_ebaf-toa_olr_2000-03_2026-08.nc": "0aa7e8972e85d147309c236ce9c9e96bce44e14806f4ca889f3655b1695968bd",
+  "data/derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.jpg": "6cb521e7033e6d89903fe6974b794bba6c59e8f83249f3bb3d0801b8edd03382",
+  "data/derived/ch00/trappes_truecolour_2026-09-30_aqua_terra.jpg": "e16e88853480e8eb3782941c30123de97a8b08909584cbc13c4371bfd6b6c6a0",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_ciaran_2023_u10-v10-msl-t2m_2023-11-01T00_2023-11-02T23_1h.nc": "57ba6a3d405726ae7c9ed5c178b31b512dbb7cdcd55d13135835d86a0ccc0572",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ISD\\isd_07110099999_2023-11-01_2023-11-02.csv": "1f48454d2f8b6ef71915bc94ca850bda12751ea4d602d44a781a5dcc57bc0919",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ETOPO2022-60s\\etopo2022_60s_brittany_46.5-49.5N_-6.5--1E.nc": "9171ce38b02608f5a711e187048c30d8b0709edc422cf52c77535ad708658c65",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IGRA2\\FRM00007145-data-beg2026.txt.zip": "292db4a28b5584b7dde41e6c77a99ba8a289615f41a1329a536a396701293f13",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
+  "data/derived/ch00/ciaran_coast_10m.geojson": "41013c98acdb9dd04c4223a8e00ca5cd99e78f4c72cbbd2004c60528cfe04ba3",
+  "data/derived/ch00/ciaran_borders_10m.geojson": "037fec5398ff8ddaf13505a9fbe6b85452d4aa509b6eecef94a7fcc745154ee8",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3"
+ },
+ "render_assets": {},
+ "data_files": {
+  "dt.json": "eaca0f32e50b951ae4d6a654b0caf0daa5c10d1a170e51d8ddde5f48ba99d12a",
+  "img/hill_tint.png": "71b53442f3a2a6895d9834dbf4d89b768dfbfd1db4256f34c524dc0868067631",
+  "img/land_18.png": "37496e4de12e2d3d8f911015c1515f9a3e65d8ccd248baafc039d6ee9b7183c5",
+  "img/olr_latest.png": "e16db36e4e150bb8423a46d729e367c3727c3bfbd7733b60c21ec780faef1615",
+  "img/t500_trappes.png": "9bb7deb97bbc1d426331d898881436dcb4de2c5321699fadefbbcbf2e06a19eb",
+  "img/t850_12.png": "c76387225a2d43b603c5ec0a785d2752c54d46bb71b5c04b137b42a2cbc56deb",
+  "img/t850_13.png": "949b7f6fb8eda4e4ea5df2dd0f65ae14ad057b0aa25f2e00da69c57c39ba9a7e",
+  "img/t850_14.png": "62577a5a5978424ef31779673735c3354bf5735c71a73877b6da87f440781646",
+  "img/t850_15.png": "b9b740949e0aee1aea71e8aa3e1cc911149a626566525c5ec0ee5e548b7103ad",
+  "img/t850_16.png": "1cef2afec98ecb2677663fc326082a5ddcbc29ae94b2b948f27531f64043be86",
+  "img/t850_17.png": "2ffbec3fbf9e52ddef133bcfe592f0cc82533e2ed623b61f5a12d963a3f716e4",
+  "img/t850_18.png": "fc97b319778f4ad98b8ef50fdfa30bd1dc2204302c71be4e11f87c702261b9c7",
+  "img/t850_19.png": "c0262dc5c031387a3f0068c751e3ecd87c796daa95d4fdb76bacbed7ac01d213",
+  "img/t850_20.png": "347dd0d723934e331e5ada9a2fc9e272ac132bde980ad0961b2f311fbb2ece74",
+  "img/t850_21.png": "3ec7f4bf7ecd0295693f0c52ec180df0e135470d5368620826462471d2e36836",
+  "img/t850_22.png": "c2e7ecfc99df17893fa0baf0e525af3080e0b0e74da445d3bb402959761771f1",
+  "img/t850_23.png": "c4680d8bddb733fd7863d05e03fbd08ade88f6972271eb8941a8a3bb045b2eb5",
+  "img/t850_24.png": "57b395eb17d830d459323cf10f26ecf1d64907f94b274cdda6bd090bb99b167f",
+  "img/t850c_1.png": "345a31bafbcd597524d675e5ce0735efbe2d802e63c5287663eb50d81d019ed8",
+  "img/t850c_12.png": "017b6e83f240b4cb243b72a11f912f5af151899f91d22dcb7812e2a0f2f30f7e",
+  "img/t850c_2.png": "1ee32457f3f1f529c8727b62b26999baeb98ac648a013efdac3bb2832e496e49",
+  "img/t850c_4.png": "1f0c8cc189958d3845b08c6b5ba73dd4786c698bc0702c97f309ce675ab870f6",
+  "img/t850c_8.png": "e4b6aad46f91b39e9217b269fd53d491711a81d454c68bd69fe0a289a1437b83",
+  "img/tcwv_trend.png": "c9d7f2252b02d902f058e76790086b30f662c0059aff62d3b285c6fc959ccc4d"
+ },
+ "checks": [
+  {
+   "id": "DT02",
+   "name": "ISD Brest 18 / 20 UTC 10.3 / 14.9 °C",
+   "value": [
+    10.3,
+    14.9
+   ],
+   "ref": [
+    10.3,
+    14.9
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT02",
+   "name": "average rate (14.9 − 10.3) / 2 = 2.3 °C/h",
+   "value": [
+    2.3
+   ],
+   "ref": [
+    2.3
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT13",
+   "name": "ISD Brest slp 17 / 18 UTC 988.3 / 983.3 hPa",
+   "value": [
+    988.3,
+    983.3
+   ],
+   "ref": [
+    988.3,
+    983.3
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT13",
+   "name": "pressure tendency −5.0 hPa/h",
+   "value": [
+    -5.0
+   ],
+   "ref": [
+    -5.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT03",
+   "name": "secants of x² at 3: 7, 6.1, 6.01",
+   "value": [
+    7.0,
+    6.1,
+    6.01
+   ],
+   "ref": [
+    7.0,
+    6.1,
+    6.01
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT03",
+   "name": "f(3.1) = 9.61, f(3.01) = 9.0601",
+   "value": [
+    9.61,
+    9.0601
+   ],
+   "ref": [
+    9.61,
+    9.0601
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DT04",
+   "name": "∂/∂x(10 − 0.03x + 3t) = −0.03, ∂/∂t = +3",
+   "value": [
+    -0.03,
+    3.0
+   ],
+   "ref": [
+    -0.03,
+    3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DT04",
+   "name": "∂(xt)/∂x = t, ∂(xt)/∂t = x (sympy)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT04",
+   "name": "core.thermo.partial_derivative agrees (−0.03, 3)",
+   "value": [
+    -0.03,
+    3.0
+   ],
+   "ref": [
+    -0.03,
+    3.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DT10",
+   "name": "ERA5 850 T at (48.5, −4.5) 18 UTC ∈ [5.0, 5.3] °C",
+   "value": [
+    5.122217
+   ],
+   "ref": "[5.0, 5.3]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT12",
+   "name": "T 17 / 18 / 19 UTC = 2.38 / 5.12 / 8.23 °C",
+   "value": [
+    2.379785,
+    5.122217,
+    8.228662
+   ],
+   "ref": [
+    2.38,
+    5.12,
+    8.23
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "DT12",
+   "name": "∂T/∂t (17 → 19 UTC centred) = +2.92 K/h",
+   "value": [
+    2.924438
+   ],
+   "ref": [
+    2.92
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT12",
+   "name": "screen (8.2 − 2.4) / 2 = 2.9",
+   "value": [
+    2.9
+   ],
+   "ref": [
+    2.9
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT11",
+   "name": "∂T/∂x = −3.20, ∂T/∂y = −2.49 K per 100 km (0.25° centred)",
+   "value": [
+    -3.202192,
+    -2.494212
+   ],
+   "ref": [
+    -3.2,
+    -2.49
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT11",
+   "name": "grid spacing at 48.5° N: 18.4 km east-west, 27.8 km north-south",
+   "value": [
+    18.419997,
+    27.798732
+   ],
+   "ref": [
+    18.4,
+    27.8
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DT11",
+   "name": "centred difference by hand = the gradient",
+   "value": [
+    -3.202192
+   ],
+   "ref": [
+    -3.202192
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT14",
+   "name": "mixed partials both orders 1.43e-9 K m⁻¹ s⁻¹",
+   "value": [
+    1.428498,
+    1.428498
+   ],
+   "ref": [
+    1.43,
+    1.43
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT14",
+   "name": "both orders equal to 1e-12 relative",
+   "value": 0.0,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT14",
+   "name": "four-corner formula = mixed partials",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "id": "DT14",
+   "name": "x²t: ∂/∂t(∂/∂x) = ∂/∂x(∂/∂t) = 2x (sympy)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT15",
+   "name": "−0.32, −0.50, +1.45; sum +0.63",
+   "value": [
+    -0.32,
+    -0.5,
+    1.45,
+    0.63
+   ],
+   "ref": [
+    -0.32,
+    -0.5,
+    1.45,
+    0.63
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT15",
+   "name": "full precision +0.64 (recorded)",
+   "value": [
+    0.643158
+   ],
+   "ref": [
+    0.64
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT17",
+   "name": "car −3.0 °C/h",
+   "value": [
+    -3.0
+   ],
+   "ref": [
+    -3.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DT18",
+   "name": "U ∂T/∂x = ∓11.53 K/h",
+   "value": [
+    -11.527893,
+    11.527893
+   ],
+   "ref": [
+    -11.53,
+    11.53
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT18",
+   "name": "totals −8.60 / +14.45 K/h",
+   "value": [
+    -8.603454,
+    14.452331
+   ],
+   "ref": [
+    -8.6,
+    14.45
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT18",
+   "name": "screen: 100 × (−3.2e-5) = −0.0032 °C/s; × 3600 = −11.52 ≈ −11.5",
+   "value": [
+    -0.0032,
+    -11.52
+   ],
+   "ref": [
+    -0.0032,
+    -11.52
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT18",
+   "name": "screen: 2.9 − 11.5 = −8.6; 2.9 + 11.5 = 14.4",
+   "value": [
+    -8.6,
+    14.4
+   ],
+   "ref": [
+    -8.6,
+    14.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT19",
+   "name": "u·∇T = −3.68 K/h; DT/Dt = ∂T/∂t + u·∇T = −0.76 K/h",
+   "value": [
+    -3.681715,
+    -0.757277
+   ],
+   "ref": [
+    -3.68,
+    -0.76
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DT19",
+   "name": "wind at Brest 18 UTC (5.85, 33.49) m/s",
+   "value": [
+    5.848526,
+    33.494247
+   ],
+   "ref": [
+    5.85,
+    33.49
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT19",
+   "name": "screen 2.9 − 3.7 = −0.8",
+   "value": [
+    -0.8
+   ],
+   "ref": [
+    -0.8
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT16",
+   "name": "chain_rule_rate(wind) = ∂T/∂t + advection() at the grid point",
+   "value": [
+    -0.757277
+   ],
+   "ref": [
+    -0.757277
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT13",
+   "name": "Ciarán's low 18 UTC 950-972 hPa (drawn, no number)",
+   "value": [
+    960.735312
+   ],
+   "ref": "[950, 972]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT01",
+   "name": "surface 997.5 hPa / 168 m / 19.8 °C",
+   "value": [
+    997.5,
+    168.0,
+    19.8
+   ],
+   "ref": [
+    997.5,
+    168.0,
+    19.8
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DT01",
+   "name": "850 hPa z 1533 m, T 12.3 °C, etime 312 s",
+   "value": [
+    1533.0,
+    12.3,
+    312.0
+   ],
+   "ref": [
+    1533.0,
+    12.3,
+    312.0
+   ],
+   "tol": [
+    5,
+    1e-06,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT01",
+   "name": "500 hPa z 5795 m, T −11.8 °C, etime 1212 s",
+   "value": [
+    5795.0,
+    -11.8,
+    1212.0
+   ],
+   "ref": [
+    5795.0,
+    -11.8,
+    1212.0
+   ],
+   "tol": [
+    10,
+    1e-06,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT20",
+   "name": "≥ 60 levels with T and z up to ≥ 30 km",
+   "value": [
+    82,
+    32460.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT21",
+   "name": "ΔT −24.1 °C, Δz 4262 m, ∂T/∂z −5.655 K/km",
+   "value": [
+    -24.1,
+    4262.0,
+    -5.654622
+   ],
+   "ref": [
+    -24.1,
+    4262.0,
+    -5.655
+   ],
+   "tol": [
+    1e-06,
+    10,
+    0.02
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT22",
+   "name": "w = 4.736 m/s",
+   "value": [
+    4.735556
+   ],
+   "ref": [
+    4.736
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT23",
+   "name": "dT/dt −0.02678 K/s, −1.607 K/min",
+   "value": [
+    -0.026778,
+    -1.606667
+   ],
+   "ref": [
+    -0.02678,
+    -1.607
+   ],
+   "tol": [
+    1e-05,
+    0.001
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT21",
+   "name": "screen −24.1 / 4.26 ≈ −5.66 ≈ −5.7; 4.26 km / 900 s ≈ 4.73 ≈ 4.7",
+   "value": [
+    -5.657277,
+    4.733333
+   ],
+   "ref": [
+    -5.66,
+    4.73
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT21",
+   "name": "lapse rate (meteorological sign) +5.655 K/km",
+   "value": [
+    5.654622
+   ],
+   "ref": [
+    5.655
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT24",
+   "name": "T at 5795 m 00 → 12 UTC: −9.21 → −11.80 °C, −2.59 K in 12 h, −5.98e-5 K/s",
+   "value": [
+    -9.214839,
+    -2.585161,
+    -5.98417
+   ],
+   "ref": [
+    -9.21,
+    -2.59,
+    -5.98
+   ],
+   "tol": [
+    0.02,
+    0.02,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT25",
+   "name": "drift (7.8, 14.6) km, 16.6 km towards 28°",
+   "value": [
+    7.81499,
+    14.613705,
+    16.572098,
+    28.136591
+   ],
+   "ref": [
+    7.8,
+    14.6,
+    16.6,
+    28.0
+   ],
+   "tol": [
+    0.5,
+    0.5,
+    0.5,
+    3
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT26",
+   "name": "|∇T| at Trappes 850/700/500 hPa < 1 K per 100 km ('less than one degree per hundred kilometres')",
+   "value": [
+    0.313591,
+    0.728664,
+    0.979779
+   ],
+   "ref": "[0.0, 1.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT26",
+   "name": "|sideways term| mean 1e-5 … 9e-5 K/s ('a few hundred-thousandths of a degree per second')",
+   "value": [
+    3.3e-05
+   ],
+   "ref": "[1e-05, 9e-05]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT27",
+   "name": "rising share > 99 % ('more than ninety nine percent')",
+   "value": [
+    0.996555
+   ],
+   "ref": "[0.99, 1.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT19b",
+   "name": "screen rising term 4.7 × (−5.7e-3) = −0.0268 ≈ −0.027",
+   "value": [
+    -0.02679
+   ],
+   "ref": [
+    -0.027
+   ],
+   "tol": 0.0003,
+   "pass": true
+  },
+  {
+   "id": "DT28",
+   "name": "∂z/∂p = −12.18 m/hPa; ∂T/∂p = +0.0689 K/hPa",
+   "value": [
+    -12.177143,
+    0.068857
+   ],
+   "ref": [
+    -12.18,
+    0.0689
+   ],
+   "tol": [
+    0.01,
+    0.0002
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT28",
+   "name": "chain: (∂T/∂z)(∂z/∂p) = ∂T/∂p; direct −24.1 / −350",
+   "value": [
+    0.068857,
+    0.068857
+   ],
+   "ref": [
+    0.068857,
+    0.0689
+   ],
+   "tol": [
+    1e-09,
+    0.0001
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT28",
+   "name": "screen (−5.7e-3)(−12.2) = 0.0695 ≈ 0.069 (rounded inputs; data 0.0689)",
+   "value": [
+    0.06954
+   ],
+   "ref": [
+    0.0695
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DT45",
+   "name": "tropopause 13 072 m, 206.85 K",
+   "value": [
+    13072.0,
+    206.85
+   ],
+   "ref": [
+    13072.0,
+    206.85
+   ],
+   "tol": [
+    5,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT46",
+   "name": "T(15 km) > T(tropopause): 'gets a little warmer'",
+   "value": [
+    210.82,
+    206.85
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT39",
+   "name": "slope −4.86 K/km; line 7.44 vs measured 6.87; line −8.41 vs −11.8",
+   "value": [
+    -4.859611,
+    7.440389,
+    6.87027,
+    -8.411663
+   ],
+   "ref": [
+    -4.86,
+    7.44,
+    6.87,
+    -8.41
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT39",
+   "name": "screen 12.3 + (1)(−4.9) = 7.4; 12.3 + (4.26)(−4.9) = −8.57 → data −8.4 (screen uses the data)",
+   "value": [
+    7.4
+   ],
+   "ref": [
+    7.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT34",
+   "name": "H = 8570 ± 10 m",
+   "value": [
+    8570.504587
+   ],
+   "ref": [
+    8570.0
+   ],
+   "tol": 10,
+   "pass": true
+  },
+  {
+   "id": "DT34",
+   "name": "screen 287 × 293 ÷ 9.81 = 8572 ≈ 8570",
+   "value": [
+    8571.96738
+   ],
+   "ref": [
+    8572.0
+   ],
+   "tol": 1.0,
+   "pass": true
+  },
+  {
+   "id": "DT43",
+   "name": "ρ0 1.186 kg/m³, ρ0 g 11.64 Pa/m, 8.59 m/hPa",
+   "value": [
+    1.186417,
+    11.638755,
+    8.591985
+   ],
+   "ref": [
+    1.186,
+    11.64,
+    8.59
+   ],
+   "tol": [
+    0.001,
+    0.02,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT35",
+   "name": "measured p below the isothermal exponential above 3 km at every level",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT43",
+   "name": "887.0 hPa level 1006 m above; line / bend / cubic 880.4 / 887.3 / 887.0 hPa",
+   "value": [
+    1006.0,
+    880.414128,
+    887.285858,
+    887.016992
+   ],
+   "ref": [
+    1006.0,
+    880.4,
+    887.3,
+    887.0
+   ],
+   "tol": [
+    1,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT44",
+   "name": "342.6 / 557.6 / 510.5 / … 517.3 (series → exponential)",
+   "value": [
+    342.587277,
+    557.580096,
+    510.528623,
+    517.338832,
+    517.338832
+   ],
+   "ref": [
+    342.6,
+    557.6,
+    510.5,
+    517.3,
+    517.3
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DT44",
+   "name": "layer-mean T̄ 277.4 K → 498.7 hPa (balloon 500.0)",
+   "value": [
+    277.447787,
+    498.704388
+   ],
+   "ref": [
+    277.4,
+    498.7
+   ],
+   "tol": [
+    0.1,
+    0.2
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT46",
+   "name": "the line and the quadratic fitted below the kink are colder than the balloon at 16 km",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT29",
+   "name": "height gain equal on both trails (start and end shared)",
+   "value": [
+    135.46484
+   ],
+   "ref": [
+    135.46484
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT29",
+   "name": "height gain 100-200 m (ETOPO; shown rounded to 10 m)",
+   "value": [
+    135.46484
+   ],
+   "ref": "[100, 200]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT29",
+   "name": "winding trail longer than the straight one",
+   "value": [
+    3.99,
+    8.98
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT30",
+   "name": "exactness residuals 0 and 2 (sympy)",
+   "value": [
+    0.0,
+    2.0
+   ],
+   "ref": [
+    0.0,
+    2.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DT31",
+   "name": "loop integrals −2.000 and 0.000",
+   "value": [
+    -2.0,
+    0.0
+   ],
+   "ref": [
+    -2.0,
+    0.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DT31",
+   "name": "running sums end at the loop integrals",
+   "value": [
+    -2.0,
+    0.0
+   ],
+   "ref": [
+    -2.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DT32",
+   "name": "sympy dp = RT dρ + ρR dT; ∂(RT)/∂T = R = ∂(ρR)/∂ρ",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT33",
+   "name": "−3.45 % (linear), −3.33 % (exact)",
+   "value": [
+    -3.448276,
+    -3.333333
+   ],
+   "ref": [
+    -3.45,
+    -3.33
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "DT33",
+   "name": "perfect_gas_density ratio − 1 = −3.33 %",
+   "value": [
+    -3.333333
+   ],
+   "ref": [
+    -3.33
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "DT36",
+   "name": "heat 26.79 / 32.59 / 40.19 kJ/kg",
+   "value": [
+    26.792,
+    32.59,
+    40.188
+   ],
+   "ref": [
+    26.79,
+    32.59,
+    40.19
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT36",
+   "name": "Δe = 0 on all three",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DT37",
+   "name": "Δη = 116.39 J kg⁻¹ K⁻¹ on all three",
+   "value": [
+    116.392,
+    116.392,
+    116.392
+   ],
+   "ref": [
+    116.39,
+    116.39,
+    116.39
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT37",
+   "name": "perfect_gas_entropy_change = 116.39",
+   "value": [
+    116.392001
+   ],
+   "ref": [
+    116.39
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT38",
+   "name": "residuals −R/α (heat) and 0 (heat/T) (sympy)",
+   "value": [
+    "-R/alpha",
+    "0"
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT41",
+   "name": "Taylor table: 1/2! = 1/2, 1/3! = 1/6",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT42",
+   "name": "e^0.1 sums 1, 1.1, 1.105, 1.1051667 vs 1.1051709",
+   "value": [
+    1.0,
+    1.1,
+    1.105,
+    1.105167,
+    1.105171
+   ],
+   "ref": [
+    1.0,
+    1.1,
+    1.105,
+    1.105167,
+    1.105171
+   ],
+   "tol": 1e-07,
+   "pass": true
+  },
+  {
+   "id": "DT42",
+   "name": "e^1 sums 1, 2, 2.5, 2.6667, 2.7083 → 2.7183",
+   "value": [
+    1.0,
+    2.0,
+    2.5,
+    2.666667,
+    2.708333,
+    2.718282
+   ],
+   "ref": [
+    1.0,
+    2.0,
+    2.5,
+    2.6667,
+    2.7083,
+    2.7183
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DT50",
+   "name": "e_s 6.19, 16.92, 41.91 hPa",
+   "value": [
+    6.185364,
+    16.923421,
+    41.913412
+   ],
+   "ref": [
+    6.19,
+    16.92,
+    41.91
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT51",
+   "name": "7.26, 6.43, 5.72 % per K",
+   "value": [
+    7.255533,
+    6.427128,
+    5.723099
+   ],
+   "ref": [
+    7.26,
+    6.43,
+    5.72
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT51",
+   "name": "screen 2.5e6 / (462 × 273²) = 0.0726 ≈ 0.073",
+   "value": [
+    0.072606
+   ],
+   "ref": [
+    0.0726
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DT52",
+   "name": "+1 K exact 7.50 vs line 7.26 %; +4 K exact 33.11 vs line 29.02 %",
+   "value": [
+    7.496776,
+    7.255533,
+    33.113592,
+    29.022131
+   ],
+   "ref": [
+    7.5,
+    7.26,
+    33.11,
+    29.02
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT52",
+   "name": "zoom inset: exact and line at +4 K differ by 33.11 − 29.02 % of e0",
+   "value": [
+    4.091462
+   ],
+   "ref": [
+    4.09
+   ],
+   "tol": 0.03,
+   "pass": true
+  },
+  {
+   "id": "DT54",
+   "name": "1.26 × 7.26 % = 9.1 % linear; compounded 9.2 %",
+   "value": [
+    9.141971,
+    9.226704
+   ],
+   "ref": [
+    9.15,
+    9.23
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DT54",
+   "name": "screen 1.26 × 7 % = 8.8 ≈ 9 %",
+   "value": [
+    8.82
+   ],
+   "ref": [
+    8.82
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT53",
+   "name": "TCWV trend > 0 at 3 SE from 1979 and from 1993",
+   "value": [
+    0.839,
+    0.136,
+    1.667,
+    0.175
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT61",
+   "name": "CERES EBAF global-mean OLR 2001→latest in 235-245 W/m² (240.6)",
+   "value": [
+    240.610298
+   ],
+   "ref": "[235, 245]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT60",
+   "name": "T_e 255.06 K; 4σT³ 3.764 W m⁻² K⁻¹",
+   "value": [
+    255.064417,
+    3.763755
+   ],
+   "ref": [
+    255.06,
+    3.764
+   ],
+   "tol": [
+    0.01,
+    0.001
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT60",
+   "name": "screen 4 × 240 / 255 = 3.765 ≈ 3.8; 255 − 273 = −18 °C",
+   "value": [
+    3.764706,
+    -18.15
+   ],
+   "ref": [
+    3.765,
+    -18.15
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "DT62",
+   "name": "3.93 / 3.764 = 1.04 K; 3.93 / 3.22 = 1.22 K",
+   "value": [
+    1.04417,
+    1.220497
+   ],
+   "ref": [
+    1.04,
+    1.22
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "DT63",
+   "name": "+1 K: 3.786 vs 3.764; +10 K: 39.91 vs 37.64 W/m²",
+   "value": [
+    3.785947,
+    3.763755,
+    39.909385,
+    37.637551
+   ],
+   "ref": [
+    3.786,
+    3.764,
+    39.91,
+    37.64
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "DT70",
+   "name": "forward order 1, leading 1/2; central order 2, leading 1/6",
+   "value": [
+    1.0,
+    0.5,
+    2.0,
+    0.166667
+   ],
+   "ref": [
+    1.0,
+    0.5,
+    2.0,
+    0.166667
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DT71",
+   "name": "sin errors −4.294e-2, −9.001e-4",
+   "value": [
+    -0.042939,
+    -0.0009
+   ],
+   "ref": [
+    -0.04294,
+    -0.0009
+   ],
+   "tol": [
+    5e-06,
+    5e-08
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT72",
+   "name": "18 km: forward −3.32, backward −3.09, centred −3.20",
+   "value": [
+    -3.318829,
+    -3.085556,
+    -3.202192
+   ],
+   "ref": [
+    -3.319,
+    -3.086,
+    -3.202
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT72",
+   "name": "coarse centred −3.17, −3.14, −2.24, −0.98",
+   "value": [
+    -3.167732,
+    -3.139898,
+    -2.237956,
+    -0.983897
+   ],
+   "ref": [
+    -3.168,
+    -3.14,
+    -2.238,
+    -0.984
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DT72",
+   "name": "spacings 36.8, 73.7, 147.4, 221.0 km",
+   "value": [
+    36.839994,
+    73.679988,
+    147.359975,
+    221.039963
+   ],
+   "ref": [
+    36.8,
+    73.7,
+    147.4,
+    221.0
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "DT73",
+   "name": "history line as cited (ENIAC 1950 736 km; FAR ~500 km 'a few hundred'; IFS TCo1279 9 km)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.calculus.mixed_partials",
+   "scene": "s10",
+   "data": "data/dt.json",
+   "eq": "∂/∂t(∂T/∂x) and ∂/∂x(∂T/∂t) by centred differences (Vallis (1.69))",
+   "params": {
+    "F": [
+     [
+      276.34228515625,
+      275.52978515625,
+      274.91650390625
+     ],
+     [
+      278.840576171875,
+      278.272216796875,
+      277.660888671875
+     ],
+     [
+      281.779052734375,
+      281.378662109375,
+      280.732177734375
+     ]
+    ],
+    "x": [
+     -18419.996913640724,
+     0.0,
+     18419.996913640724
+    ],
+    "t": [
+     -3600.0,
+     0.0,
+     3600.0
+    ]
+   },
+   "sha256": "077a4f2363b90aef8690c35049513bcb2c67b5a4eea06106b589be8122828800"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.total_differential",
+   "scene": "s12",
+   "data": "data/dt.json",
+   "eq": "dT = Σ slope × step (rounded screen slopes)",
+   "params": {
+    "slopes": [
+     -0.032,
+     -0.025,
+     2.9
+    ],
+    "steps": [
+     10.0,
+     20.0,
+     0.5
+    ]
+   },
+   "sha256": "0d0bcab96a8369637440b82376407535e3a386170520c2b4b859c19a34cf0e87"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.total_differential",
+   "scene": "s12",
+   "data": "data/dt.json",
+   "eq": "same at full precision (recorded)",
+   "params": {
+    "slopes": [
+     -0.032021924475091335,
+     -0.024942122664151162,
+     2.9244384765625
+    ],
+    "steps": [
+     10.0,
+     20.0,
+     0.5
+    ]
+   },
+   "sha256": "9655a5bf0bf54431c65d13fd5a907d777989b814e81e2b76de09eef51429156b"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s15",
+   "data": "data/dt.json",
+   "eq": "dT/dt = 0 + U ∂T/∂x (frozen map, km and h)",
+   "params": {
+    "dFdt": 0.0,
+    "grad": [
+     -0.03,
+     0.0,
+     0.0
+    ],
+    "velocity": [
+     100.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "87e03b4f3c77fc338c7cbb89454c40c375ef25785963b640068e2abb776aaf65"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s16",
+   "data": "data/dt.json",
+   "eq": "plane east 100 m/s",
+   "params": {
+    "dFdt": 0.0008123440212673611,
+    "grad": [
+     -3.202192447509133e-05,
+     -2.494212266415116e-05,
+     0.0
+    ],
+    "velocity": [
+     100.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "3076e43c511b72fc79fc09c09dd19fd6a382c3b1e3b6229de49c59b341d703ee"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s17",
+   "data": "data/dt.json",
+   "eq": "plane west 100 m/s",
+   "params": {
+    "dFdt": 0.0008123440212673611,
+    "grad": [
+     -3.202192447509133e-05,
+     -2.494212266415116e-05,
+     0.0
+    ],
+    "velocity": [
+     -100.0,
+     0.0,
+     0.0
+    ]
+   },
+   "sha256": "bdaecf352acd0b6d40746df471c4152ede7165d3bb96c45ea72d53f4399e2291"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s20",
+   "data": "data/dt.json",
+   "eq": "the parcel: velocity = the wind",
+   "params": {
+    "dFdt": 0.0008123440212673611,
+    "grad": [
+     -3.202192447509133e-05,
+     -2.494212266415116e-05,
+     0.0
+    ],
+    "velocity": [
+     5.8485260009765625,
+     33.49424743652344,
+     0.0
+    ]
+   },
+   "sha256": "27e62bfcf753cc3467f637b96ecaa7e2b412bf27567821edfa2546b8ffcec1b3"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.ascent_rates",
+   "scene": "s18",
+   "data": "data/dt.json",
+   "eq": "w, dT/dt, dT/dz, dT/dp, dz/dp between 850 and 500 hPa",
+   "params": {
+    "z": [
+     1533.0,
+     5795.0
+    ],
+    "T": [
+     285.45,
+     261.34999999999997
+    ],
+    "etime": [
+     312.0,
+     1212.0
+    ],
+    "p": [
+     85000.0,
+     50000.0
+    ]
+   },
+   "sha256": "84e132f598bb250e3c263d96c63908b8f21d952747af3843180e5baddf022e68"
+  },
+  {
+   "fn": "fluidpy.core.stratification.lapse_rate_convention",
+   "scene": "s09",
+   "data": "data/dt.json",
+   "eq": "meteorological lapse rate Γ = −∂T/∂z",
+   "params": {
+    "dT_dz": -0.005654622243078372,
+    "convention": "meteorology"
+   },
+   "sha256": "1d200eb1473af776792975be7c2446bc55c8f065979a65f771137f37c8b856fc"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.drift",
+   "scene": "s19",
+   "data": "data/dt.json",
+   "eq": "∫(u, v) dt along etime to the 500 hPa level (trapezoid)",
+   "params": {
+    "wspd": [
+     4.2,
+     7.1000000000000005,
+     9.600000000000001,
+     13.8,
+     14.200000000000001,
+     12.3,
+     12.4,
+     13.200000000000001,
+     11.600000000000001,
+     14.9,
+     16.3,
+     14.5,
+     9.0,
+     7.300000000000001,
+     10.0,
+     7.800000000000001,
+     9.8,
+     19.200000000000003,
+     19.200000000000003,
+     22.5,
+     23.400000000000002,
+     23.1,
+     21.8,
+     21.8,
+     21.900000000000002,
+     20.6,
+     17.8,
+     15.4,
+     17.3,
+     20.900000000000002,
+     25.3,
+     25.5,
+     27.700000000000003,
+     26.700000000000003,
+     28.900000000000002,
+     27.3,
+     20.400000000000002,
+     16.400000000000002,
+     15.9,
+     15.700000000000001,
+     15.600000000000001,
+     16.5,
+     15.3,
+     11.8,
+     11.600000000000001,
+     11.4,
+     11.4,
+     14.8,
+     13.600000000000001,
+     8.700000000000001,
+     11.8,
+     11.8,
+     12.200000000000001,
+     11.700000000000001,
+     11.3,
+     5.5,
+     5.7,
+     5.9,
+     10.5,
+     11.8,
+     10.700000000000001,
+     7.4,
+     2.9000000000000004,
+     3.3000000000000003,
+     4.1000000000000005,
+     8.8,
+     4.9,
+     1.5,
+     4.6000000000000005,
+     3.8000000000000003,
+     5.7,
+     6.6000000000000005,
+     0.30000000000000004,
+     6.5,
+     6.7,
+     0.8,
+     7.800000000000001,
+     5.5,
+     3.4000000000000004,
+     0.2,
+     2.2,
+     5.5
+    ],
+    "wdir": [
+     179.0,
+     177.0,
+     188.0,
+     200.0,
+     200.0,
+     203.0,
+     209.0,
+     210.0,
+     203.0,
+     209.0,
+     201.0,
+     208.0,
+     210.0,
+     215.0,
+     220.0,
+     206.0,
+     201.0,
+     214.0,
+     214.0,
+     209.0,
+     205.0,
+     203.0,
+     203.0,
+     197.0,
+     194.0,
+     193.0,
+     195.0,
+     199.0,
+     203.0,
+     200.0,
+     201.0,
+     202.0,
+     197.0,
+     197.0,
+     207.0,
+     208.0,
+     198.0,
+     201.0,
+     199.0,
+     198.0,
+     198.0,
+     207.0,
+     229.0,
+     215.0,
+     212.0,
+     208.0,
+     206.0,
+     210.0,
+     213.0,
+     206.0,
+     191.0,
+     191.0,
+     219.0,
+     223.0,
+     225.0,
+     196.0,
+     188.0,
+     184.0,
+     178.0,
+     214.0,
+     187.0,
+     238.0,
+     241.0,
+     224.0,
+     204.0,
+     152.0,
+     176.0,
+     171.0,
+     200.0,
+     91.0,
+     155.0,
+     189.0,
+     80.0,
+     91.0,
+     104.0,
+     140.0,
+     41.0,
+     82.0,
+     104.0,
+     63.0,
+     284.0,
+     309.0
+    ],
+    "etime": [
+     0.0,
+     24.0,
+     40.0,
+     70.0,
+     96.0,
+     152.0,
+     172.0,
+     234.0,
+     312.0,
+     432.0,
+     514.0,
+     552.0,
+     636.0,
+     670.0,
+     738.0,
+     844.0,
+     872.0,
+     972.0,
+     974.0,
+     1212.0,
+     1300.0,
+     1318.0,
+     1396.0,
+     1448.0,
+     1496.0,
+     1566.0,
+     1668.0,
+     1934.0,
+     2018.0,
+     2084.0,
+     2352.0,
+     2362.0,
+     2722.0,
+     2806.0,
+     2900.0,
+     2920.0,
+     3002.0,
+     3082.0,
+     3090.0,
+     3096.0,
+     3106.0,
+     3144.0,
+     3242.0,
+     3266.0,
+     3270.0,
+     3276.0,
+     3280.0,
+     3448.0,
+     3464.0,
+     3512.0,
+     3576.0,
+     3578.0,
+     3640.0,
+     3650.0,
+     3656.0,
+     3710.0,
+     3720.0,
+     3728.0,
+     3774.0,
+     3906.0,
+     4088.0,
+     4162.0,
+     4224.0,
+     4236.0,
+     4340.0,
+     4534.0,
+     4570.0,
+     4606.0,
+     4680.0,
+     4902.0,
+     4962.0,
+     5030.0,
+     5118.0,
+     5316.0,
+     5328.0,
+     5438.0,
+     5750.0,
+     5802.0,
+     5884.0,
+     6382.0,
+     6584.0,
+     6804.0
+    ],
+    "top": 1212.0,
+    "unit": "km",
+    "cumulative": true
+   },
+   "sha256": "47c036b52d5c4536409755886d9712a0987177b57049fdd7351633336db197a6"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s19",
+   "data": "data/dt.json",
+   "eq": "sonde wind at 850 hPa",
+   "params": {
+    "speed": 11.600000000000001,
+    "dir_from_deg": 203.0
+   },
+   "sha256": "695bc6d9d666630679e7bbc9719a44e8524328b952cb9c381e2a73f2af05a27f"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s19",
+   "data": "data/dt.json",
+   "eq": "sonde wind at 700 hPa",
+   "params": {
+    "speed": 9.0,
+    "dir_from_deg": 210.0
+   },
+   "sha256": "e5d80633456212d1f61cefbc1efb6fb8a13c2bc8d1b64819c1eb036db29419de"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_components",
+   "scene": "s19",
+   "data": "data/dt.json",
+   "eq": "sonde wind at 500 hPa",
+   "params": {
+    "speed": 22.5,
+    "dir_from_deg": 209.0
+   },
+   "sha256": "301df9373a1464ddb0b548e673bf84dba21e450741ca1c79990f5bc1fa439ca1"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s31",
+   "data": "data/dt.json",
+   "eq": "T(z0 + h) ≈ T(z0) + h dT/dz, h = 1 km",
+   "params": {
+    "derivs": [
+     12.3,
+     -4.859611231101512
+    ],
+    "h": 1.0
+   },
+   "sha256": "b1cb9ac7ff494187d22758462c8ebc0b99b3a30db9cfe4e4479e2c634c37378a"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s31",
+   "data": "data/dt.json",
+   "eq": "same, h = 4.262 km",
+   "params": {
+    "derivs": [
+     12.3,
+     -4.859611231101512
+    ],
+    "h": 4.262
+   },
+   "sha256": "b95a68a5fffed051b1c6563cf936f265d32fcc649f8058df85fe023f97055e99"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.scale_height",
+   "scene": "s26",
+   "data": "data/dt.json",
+   "eq": "H = R T / g at the ground (R 287, g 9.81 as spoken)",
+   "params": {
+    "T": 292.95,
+    "R": 287.0,
+    "g": 9.81
+   },
+   "sha256": "19fb1389679b944de18b31278450a3e98c55449e7ca3cc0c54e2889f86d70e46"
+  },
+  {
+   "fn": "fluidpy.core.thermo.perfect_gas_density",
+   "scene": "s34",
+   "data": "data/dt.json",
+   "eq": "ρ0 = p0 / (R T0)",
+   "params": {
+    "p": 99750.0,
+    "T": 292.95,
+    "R": 287.0
+   },
+   "sha256": "55e2a0552f51dedcc288284fd0c50988eb6b4f49d30b4fb403bcb5485fede707"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s34",
+   "data": "data/dt.json",
+   "eq": "p0 e^(−z/H) partial sums at z = 1006 m",
+   "params": {
+    "derivs": [
+     99750.0,
+     -11.638754636394292,
+     0.0013580010976059114,
+     -1.5845054206505602e-07
+    ],
+    "h": 1006.0
+   },
+   "sha256": "e90bd965b4e0761292dd2dc3fbf4337ffc8f042724fbea770b9a8aef92af887b"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s35",
+   "data": "data/dt.json",
+   "eq": "p0 e^(−z/H) partial sums at z = 5627 m (to order 24)",
+   "params": {
+    "derivs": [
+     99750.0,
+     -11.638754636394292,
+     0.0013580010976059114,
+     -1.5845054206505602e-07,
+     1.8487889534825663e-11,
+     -2.157152982863135e-15,
+     2.5169498025774527e-19,
+     -2.936758013465667e-23,
+     3.426587062174599e-27,
+     -3.998115895427901e-31,
+     4.6649714200253843e-35,
+     -5.4430534078663966e-39,
+     6.35091359267637e-43,
+     -7.410197997203172e-47,
+     8.646163037247931e-51,
+     -1.0088277707948905e-54,
+     1.177092621018782e-58,
+     -1.373422776977229e-62,
+     1.602499319626391e-66,
+     -1.8697840988591835e-70,
+     2.1816499598650276e-74,
+     -2.5455326902625077e-78,
+     2.9701083108657644e-82,
+     -3.4654999372112415e-86,
+     4.043519144024207e-90
+    ],
+    "h": 5627.0
+   },
+   "sha256": "0f6c1841b213d8757204ce13b8d2796835a1512175920c3b9ecf6152a486ce89"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s35",
+   "data": "data/dt.json",
+   "eq": "exponential at 5627 m",
+   "params": {
+    "z": 5627.0,
+    "p0": 99750.0,
+    "T": 292.95,
+    "R": 287.0,
+    "g": 9.81
+   },
+   "sha256": "584b53f76ca22a62574beaf48a1bcaa4afb2ff380c84536303c830b499764a1e"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s35",
+   "data": "data/dt.json",
+   "eq": "exponential with the layer's height-averaged temperature",
+   "params": {
+    "z": 5627.0,
+    "p0": 99750.0,
+    "T": 277.44778745335,
+    "R": 287.0,
+    "g": 9.81
+   },
+   "sha256": "59036f8f80c07291221525082ce2c46f33000937e25ea1436058c8bf649d0ee4"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.layer_mean_temperature",
+   "scene": "s35",
+   "data": "data/dt.json",
+   "eq": "hypsometric layer-mean temperature (recorded)",
+   "params": {
+    "thickness": 5627.0,
+    "p1": 99750.0,
+    "p2": 50000.0
+   },
+   "sha256": "2584ff13834e855f48ce3d82134eb48ba03b02efcf34a5533d7b42430904ab1d"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.exactness_residual",
+   "scene": "s23",
+   "data": "data/dt.json",
+   "eq": "∂M/∂y − ∂N/∂x for y dx + x dy",
+   "params": {
+    "M": "y",
+    "N": "x"
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.exactness_residual",
+   "scene": "s23",
+   "data": "data/dt.json",
+   "eq": "∂M/∂y − ∂N/∂x for y dx − x dy",
+   "params": {
+    "M": "y",
+    "N": "-x"
+   },
+   "sha256": "3f710ac088db33363087de2b9a657541fe5447821debaa9fe5cbd538eb1a5f29"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.polygon_path",
+   "scene": "s23",
+   "data": "data/dt.json",
+   "eq": "unit square, anticlockwise",
+   "params": {
+    "vertices": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      0,
+      1
+     ]
+    ],
+    "n_per_edge": 100
+   },
+   "sha256": "ea8ee2b4f699a4af17e1cb0300649047131da9acca79c888f5d1acde9c3a8b2c"
+  },
+  {
+   "fn": "fluidpy.core.thermo.perfect_gas_density",
+   "scene": "s25",
+   "data": "data/dt.json",
+   "eq": "ρ at 290 K and at 300 K, same p (exact ratio)",
+   "params": {
+    "p": 101325.0,
+    "T": [
+     290.0,
+     300.0
+    ]
+   },
+   "sha256": "c224c3b8260820f7b5d89f7632e778c2e47e92eb5d7e1e65908d7ccfb6a85f31"
+  },
+  {
+   "fn": "fluidpy.core.thermo.perfect_gas_pressure",
+   "scene": "s24",
+   "data": "data/dt.json",
+   "eq": "p = ρ R T (1.2 kg/m³, 290 K)",
+   "params": {
+    "rho": 1.2,
+    "T": 290.0
+   },
+   "sha256": "1a8222dcaac1b409d5e7b190450a5b8003b41afdd192b5db8022c043ce851c4d"
+  },
+  {
+   "fn": "fluidpy.core.thermo.path_heat_work_totals",
+   "scene": "s28",
+   "data": "data/dt.json",
+   "eq": "heat, work, Δe, Δη on the isochoric-isobaric route (Vallis (1.10), (1.16))",
+   "params": {
+    "kind": "isochoric-isobaric",
+    "v1": 0.8,
+    "T1": 280.0,
+    "v2": 1.2,
+    "T2": 280.0
+   },
+   "sha256": "e67e220c11f1f05651df95cbfd02df361ee65ff4a4ce6cd651eeaee02a75351b"
+  },
+  {
+   "fn": "fluidpy.core.thermo.path_heat_work_totals",
+   "scene": "s28",
+   "data": "data/dt.json",
+   "eq": "heat, work, Δe, Δη on the isothermal route (Vallis (1.10), (1.16))",
+   "params": {
+    "kind": "isothermal",
+    "v1": 0.8,
+    "T1": 280.0,
+    "v2": 1.2,
+    "T2": 280.0
+   },
+   "sha256": "17eca1199d1a75554c8f0a16b8e0a83465acc57bd03497b232b23f2370577b31"
+  },
+  {
+   "fn": "fluidpy.core.thermo.path_heat_work_totals",
+   "scene": "s28",
+   "data": "data/dt.json",
+   "eq": "heat, work, Δe, Δη on the isobaric-isochoric route (Vallis (1.10), (1.16))",
+   "params": {
+    "kind": "isobaric-isochoric",
+    "v1": 0.8,
+    "T1": 280.0,
+    "v2": 1.2,
+    "T2": 280.0
+   },
+   "sha256": "8dcef6ab2abeb8ba8fd3684badb7adc70ed427fba79300ee21a869907d91fee3"
+  },
+  {
+   "fn": "fluidpy.core.thermo.perfect_gas_entropy_change",
+   "scene": "s29",
+   "data": "data/dt.json",
+   "eq": "η2 − η1 = c_v ln(T2/T1) + R ln(α2/α1)",
+   "params": {
+    "T1": 280.0,
+    "v1": 0.8,
+    "T2": 280.0,
+    "v2": 1.2
+   },
+   "sha256": "96e79bd58a5829fd0be01b188a552f9d685e29df98e26455eb43c9e4b26408eb"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "data": "data/dt.json",
+   "eq": "e^h partial sums at h = 0.1",
+   "params": {
+    "derivs": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "h": 0.1
+   },
+   "sha256": "d045a6680d3b962f8f8af254253ba3680c0698aae237ba0c7dde5d6fcb27fd1c"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "data": "data/dt.json",
+   "eq": "e^h partial sums at h = 1",
+   "params": {
+    "derivs": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "h": 1.0
+   },
+   "sha256": "393f1ef0f867786f4287f258076c71644510e8fadf127431fa1e4aa8fbb76383"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s39",
+   "data": "data/dt.json",
+   "eq": "e_s(T) (library defaults: L 2.44e6, R_v 462, e0 6.12 hPa at 273 K)",
+   "params": {
+    "T": [
+     263.15,
+     263.65,
+     264.15,
+     264.65,
+     265.15,
+     265.65,
+     266.15,
+     266.65,
+     267.15,
+     267.65,
+     268.15,
+     268.65,
+     269.15,
+     269.65,
+     270.15,
+     270.65,
+     271.15,
+     271.65,
+     272.15,
+     272.65,
+     273.15,
+     273.65,
+     274.15,
+     274.65,
+     275.15,
+     275.65,
+     276.15,
+     276.65,
+     277.15,
+     277.65,
+     278.15,
+     278.65,
+     279.15,
+     279.65,
+     280.15,
+     280.65,
+     281.15,
+     281.65,
+     282.15,
+     282.65,
+     283.15,
+     283.65,
+     284.15,
+     284.65,
+     285.15,
+     285.65,
+     286.15,
+     286.65,
+     287.15,
+     287.65,
+     288.15,
+     288.65,
+     289.15,
+     289.65,
+     290.15,
+     290.65,
+     291.15,
+     291.65,
+     292.15,
+     292.65,
+     293.15,
+     293.65,
+     294.15,
+     294.65,
+     295.15,
+     295.65,
+     296.15,
+     296.65,
+     297.15,
+     297.65,
+     298.15,
+     298.65,
+     299.15,
+     299.65,
+     300.15,
+     300.65,
+     301.15,
+     301.65,
+     302.15,
+     302.65,
+     303.15,
+     303.65,
+     304.15,
+     304.65,
+     305.15,
+     305.65,
+     306.15,
+     306.65,
+     307.15,
+     307.65,
+     308.15
+    ]
+   },
+   "sha256": "9941f2177e5968e7ccd459e5c8acf24bd560cb45e163e4e091494f1e46ea61af"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s39",
+   "data": "data/dt.json",
+   "eq": "e_s at 0, 15, 30 °C",
+   "params": {
+    "T": [
+     273.15,
+     288.15,
+     303.15
+    ]
+   },
+   "sha256": "766c0b979de3a8ece03f0c7d3dad4e9260a8e87ef1d424098f96f1cb6278b794"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "L/(R_v T²) at 0.0 °C with L(T)",
+   "params": {
+    "T": 273.15,
+    "L": 2501000.0
+   },
+   "sha256": "144b9b4defb7d030275a5d180134f7cfb5bf118a0b4519415f502cd2eb7dc731"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "L/(R_v T²) at 15.0 °C with L(T)",
+   "params": {
+    "T": 288.15,
+    "L": 2465450.0
+   },
+   "sha256": "d4eca73b5e1ab3657b92976bfa4feb24d6df344a9e14c82afdce92de7fb19929"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "L/(R_v T²) at 30.0 °C with L(T)",
+   "params": {
+    "T": 303.15,
+    "L": 2429900.0
+   },
+   "sha256": "e46a21bac120d202f79b4727fb3d85f35c44ac2845c8801034a4247c01fbefad"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "exact +1 K at 0 °C (constant L(0 °C))",
+   "params": {
+    "T": 274.15,
+    "e0": 611.2,
+    "T0": 273.15,
+    "L": 2501000.0
+   },
+   "sha256": "d0680de6ccdfd0fffd8cfa62929776d02550193d6965b5287bcbfdff9b48370c"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "exact +4 K at 0 °C",
+   "params": {
+    "T": 277.15,
+    "e0": 611.2,
+    "T0": 273.15,
+    "L": 2501000.0
+   },
+   "sha256": "0dc5e4f4d8be9ded6e32da7e1bcc993ed864d4d0c3482ac71f6bcf1991f8f4e3"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "line slope at 0 °C with L(0 °C) = 2.501e6",
+   "params": {
+    "T": 273.15,
+    "L": 2501000.0
+   },
+   "sha256": "144b9b4defb7d030275a5d180134f7cfb5bf118a0b4519415f502cd2eb7dc731"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "e_s at 0.0 °C (drawn curve)",
+   "params": {
+    "T": 273.15
+   },
+   "sha256": "2daa23a919be344f714f724bf65064e035c2625d561a45b4fa293d6ad7dc58c8"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "slope of the drawn curve at 0.0 °C (default L)",
+   "params": {
+    "T": 273.15
+   },
+   "sha256": "3c6710c6991e680af2c6eaf4ee0313ef8e89d6d171edd31f9aa70b521ef1b6ba"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "e_s at 15.0 °C (drawn curve)",
+   "params": {
+    "T": 288.15
+   },
+   "sha256": "6d408d5535a8ed81dfed7428abca46a1321ac04cb575752d114d9be0f61a2cb7"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "slope of the drawn curve at 15.0 °C (default L)",
+   "params": {
+    "T": 288.15
+   },
+   "sha256": "acf12fe7389a6364b4f59f9ca8e135c575e0abb795e4256b0a38074af61888ba"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "e_s at 30.0 °C (drawn curve)",
+   "params": {
+    "T": 303.15
+   },
+   "sha256": "20d624b211583e86718d21cd815c77d20f0f4a990bead1a7c2cb2caf35b84f54"
+  },
+  {
+   "fn": "fluidpy.geo.moist.cc_fractional_rate",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "slope of the drawn curve at 30.0 °C (default L)",
+   "params": {
+    "T": 303.15
+   },
+   "sha256": "2be39ff495948e5c6c09e1cdd4b93689b34fb1a560ab55d4ba5774efdb542859"
+  },
+  {
+   "fn": "fluidpy.geo.moist.saturation_vapour_pressure",
+   "scene": "s40",
+   "data": "data/dt.json",
+   "eq": "exact curve 0-5 °C (constant L(0 °C), e0 611.2 Pa at 273.15 K) for the zoom inset",
+   "params": {
+    "T": [
+     273.15,
+     273.25,
+     273.34999999999997,
+     273.45,
+     273.54999999999995,
+     273.65,
+     273.75,
+     273.84999999999997,
+     273.95,
+     274.04999999999995,
+     274.15,
+     274.25,
+     274.34999999999997,
+     274.45,
+     274.54999999999995,
+     274.65,
+     274.75,
+     274.84999999999997,
+     274.95,
+     275.04999999999995,
+     275.15,
+     275.25,
+     275.34999999999997,
+     275.45,
+     275.54999999999995,
+     275.65,
+     275.75,
+     275.84999999999997,
+     275.95,
+     276.04999999999995,
+     276.15,
+     276.25,
+     276.34999999999997,
+     276.45,
+     276.54999999999995,
+     276.65,
+     276.75,
+     276.84999999999997,
+     276.95,
+     277.04999999999995,
+     277.15,
+     277.25,
+     277.34999999999997,
+     277.45,
+     277.54999999999995,
+     277.65,
+     277.75,
+     277.84999999999997,
+     277.95,
+     278.04999999999995,
+     278.15
+    ],
+    "e0": 611.2,
+    "T0": 273.15,
+    "L": 2501000.0
+   },
+   "sha256": "af94bdbfa108b8d2e23c1be7a1d78a2dec22ea6c6deea7e556b1ff9431381a64"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.linear_trend",
+   "scene": "s41",
+   "data": "data/dt.json",
+   "eq": "global-mean TCWV trend 1979-2025 (OLS, per decade)",
+   "params": {
+    "series": [
+     24.226346969604492,
+     24.316072463989258,
+     24.16659164428711,
+     24.170503616333008,
+     24.419198989868164,
+     23.94243812561035,
+     23.915870666503906,
+     24.06907081604004,
+     24.476804733276367,
+     24.25663185119629,
+     23.90135383605957,
+     24.325929641723633,
+     24.199281692504883,
+     23.704856872558594,
+     23.7498836517334,
+     23.90275001525879,
+     23.910036087036133,
+     23.713512420654297,
+     24.012950897216797,
+     24.442338943481445,
+     23.764171600341797,
+     23.75419807434082,
+     24.0988712310791,
+     24.194549560546875,
+     24.243417739868164,
+     24.170766830444336,
+     24.31427764892578,
+     24.305864334106445,
+     24.219223022460938,
+     24.002033233642578,
+     24.343210220336914,
+     24.658504486083984,
+     24.238059997558594,
+     24.343334197998047,
+     24.445087432861328,
+     24.513038635253906,
+     24.8673152923584,
+     25.147544860839844,
+     24.852678298950195,
+     24.747657775878906,
+     24.931001663208008,
+     24.91446876525879,
+     24.536434173583984,
+     24.43572425842285,
+     25.108997344970703,
+     25.49644660949707,
+     24.968896865844727
+    ],
+    "time": [
+     1979.0,
+     1980.0,
+     1981.0,
+     1982.0,
+     1983.0,
+     1984.0,
+     1985.0,
+     1986.0,
+     1987.0,
+     1988.0,
+     1989.0,
+     1990.0,
+     1991.0,
+     1992.0,
+     1993.0,
+     1994.0,
+     1995.0,
+     1996.0,
+     1997.0,
+     1998.0,
+     1999.0,
+     2000.0,
+     2001.0,
+     2002.0,
+     2003.0,
+     2004.0,
+     2005.0,
+     2006.0,
+     2007.0,
+     2008.0,
+     2009.0,
+     2010.0,
+     2011.0,
+     2012.0,
+     2013.0,
+     2014.0,
+     2015.0,
+     2016.0,
+     2017.0,
+     2018.0,
+     2019.0,
+     2020.0,
+     2021.0,
+     2022.0,
+     2023.0,
+     2024.0,
+     2025.0
+    ],
+    "per": "decade"
+   },
+   "sha256": "cd3a53d0ac12b70979f7ff4f2f1baff98dba9290186b8ac657815fafb81433b6"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.linear_trend",
+   "scene": "s41",
+   "data": "data/dt.json",
+   "eq": "global-mean TCWV trend 1993-2025",
+   "params": {
+    "series": [
+     23.7498836517334,
+     23.90275001525879,
+     23.910036087036133,
+     23.713512420654297,
+     24.012950897216797,
+     24.442338943481445,
+     23.764171600341797,
+     23.75419807434082,
+     24.0988712310791,
+     24.194549560546875,
+     24.243417739868164,
+     24.170766830444336,
+     24.31427764892578,
+     24.305864334106445,
+     24.219223022460938,
+     24.002033233642578,
+     24.343210220336914,
+     24.658504486083984,
+     24.238059997558594,
+     24.343334197998047,
+     24.445087432861328,
+     24.513038635253906,
+     24.8673152923584,
+     25.147544860839844,
+     24.852678298950195,
+     24.747657775878906,
+     24.931001663208008,
+     24.91446876525879,
+     24.536434173583984,
+     24.43572425842285,
+     25.108997344970703,
+     25.49644660949707,
+     24.968896865844727
+    ],
+    "time": [
+     1993.0,
+     1994.0,
+     1995.0,
+     1996.0,
+     1997.0,
+     1998.0,
+     1999.0,
+     2000.0,
+     2001.0,
+     2002.0,
+     2003.0,
+     2004.0,
+     2005.0,
+     2006.0,
+     2007.0,
+     2008.0,
+     2009.0,
+     2010.0,
+     2011.0,
+     2012.0,
+     2013.0,
+     2014.0,
+     2015.0,
+     2016.0,
+     2017.0,
+     2018.0,
+     2019.0,
+     2020.0,
+     2021.0,
+     2022.0,
+     2023.0,
+     2024.0,
+     2025.0
+    ],
+    "per": "decade"
+   },
+   "sha256": "fc98f9fc6602f708fa741770ea02ebeb01e6413cf870a5f150d04fe25b925b93"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.emission_temperature",
+   "scene": "s42",
+   "data": "data/dt.json",
+   "eq": "T_e = (F/σ)^¼ for F = 240 W/m²",
+   "params": {
+    "F": 240.0
+   },
+   "sha256": "dab8e5c5ce5e186c931efe9400365ee2554d52657d029dfbae8916737c8385c1"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.emission_temperature",
+   "scene": "s42",
+   "data": "data/dt.json",
+   "eq": "T_e for the CERES mean (recorded)",
+   "params": {
+    "F": 240.61029839010902
+   },
+   "sha256": "c2cabbc8c967c263011d8fcd68f0ceec6cef1c11526922c9612afb253fdf4e16"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.planck_response",
+   "scene": "s42",
+   "data": "data/dt.json",
+   "eq": "4σT³ at T_e",
+   "params": {
+    "T": 255.06441705528474
+   },
+   "sha256": "55bc1c9be256833d7334aa31402b09fa50353340b388131c0036dfea8ae7e014"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.blackbody_flux",
+   "scene": "s43",
+   "data": "data/dt.json",
+   "eq": "σT⁴ at T_e",
+   "params": {
+    "T": 255.06441705528474
+   },
+   "sha256": "b822e9734e48056f413a866ce1e5d69892ff1b3b1e9c846ccbacafd172693be2"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.blackbody_flux",
+   "scene": "s43",
+   "data": "data/dt.json",
+   "eq": "σT⁴ at T_e + 1",
+   "params": {
+    "T": 256.0644170552847
+   },
+   "sha256": "2a8db0a72a62df849b0524369aa887e5e765254a84cc7cfe365501824cbb85c6"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.blackbody_flux",
+   "scene": "s43",
+   "data": "data/dt.json",
+   "eq": "σT⁴ at T_e + 10",
+   "params": {
+    "T": 265.0644170552847
+   },
+   "sha256": "82af31de4bdd783a7cef5dcc28ae1004860b1726cec3d43a52bbc5e92947510f"
+  },
+  {
+   "fn": "fluidpy.geo.radiation.blackbody_flux",
+   "scene": "s42",
+   "data": "data/dt.json",
+   "eq": "σT⁴ curve 200-300 K",
+   "params": {
+    "T": [
+     200.0,
+     202.0,
+     204.0,
+     206.0,
+     208.0,
+     210.0,
+     212.0,
+     214.0,
+     216.0,
+     218.0,
+     220.0,
+     222.0,
+     224.0,
+     226.0,
+     228.0,
+     230.0,
+     232.0,
+     234.0,
+     236.0,
+     238.0,
+     240.0,
+     242.0,
+     244.0,
+     246.0,
+     248.0,
+     250.0,
+     252.0,
+     254.0,
+     256.0,
+     258.0,
+     260.0,
+     262.0,
+     264.0,
+     266.0,
+     268.0,
+     270.0,
+     272.0,
+     274.0,
+     276.0,
+     278.0,
+     280.0,
+     282.0,
+     284.0,
+     286.0,
+     288.0,
+     290.0,
+     292.0,
+     294.0,
+     296.0,
+     298.0,
+     300.0
+    ]
+   },
+   "sha256": "0cd9e89b1285ddaff7d4259fd4352c996bdfa3b6beca305486e6587ad3aef2c2"
+  },
+  {
+   "fn": "fluidpy.core.fd.stencil_taylor_coefficients",
+   "scene": "s44",
+   "data": "data/dt.json",
+   "eq": "forward stencil Taylor bookkeeping",
+   "params": {
+    "kind": "forward"
+   },
+   "sha256": "8bb1738f8f8b13a6d99d00183ac179af4ebe73ce41d21d3c17e3f150352a418d"
+  },
+  {
+   "fn": "fluidpy.core.fd.stencil_taylor_coefficients",
+   "scene": "s45",
+   "data": "data/dt.json",
+   "eq": "central stencil Taylor bookkeeping",
+   "params": {
+    "kind": "central"
+   },
+   "sha256": "916baea646f1ec85fbf91f19ed7b974b21a35f16c53d85b9ddcf34aa01e3d0a6"
+  },
+  {
+   "fn": "fluidpy.core.fd.stencil_error",
+   "scene": "s45",
+   "data": "data/dt.json",
+   "eq": "forward error, sin at 1, h = 0.1",
+   "params": {
+    "name": "sin",
+    "x0": 1.0,
+    "h": 0.1,
+    "kind": "forward"
+   },
+   "sha256": "ec832387637570bd6f44c11eb009a21329978cba0df65a2186e4bf2b62e92335"
+  },
+  {
+   "fn": "fluidpy.core.fd.stencil_error",
+   "scene": "s45",
+   "data": "data/dt.json",
+   "eq": "central error, sin at 1, h = 0.1",
+   "params": {
+    "name": "sin",
+    "x0": 1.0,
+    "h": 0.1,
+    "kind": "central"
+   },
+   "sha256": "1a3db86d5c70273cb05f373dcf3b8592a12c1c428d656ef62a2a9b9d0532e7bf"
+  }
+ ],
+ "physics_recorded": [
+  {
+   "fn": "fluidpy.geo.calculus.secant_slopes",
+   "scene": "s03",
+   "data": "data/dt.json",
+   "eq": "(f(3+h) − f(3))/h, f = x²",
+   "params": {
+    "f": "lambda x: x**2",
+    "x0": 3.0,
+    "steps": [
+     1.0,
+     0.1,
+     0.01
+    ]
+   },
+   "sha256": null,
+   "recorded": [
+    7.0,
+    6.1,
+    6.01
+   ]
+  },
+  {
+   "fn": "fluidpy.core.thermo.partial_derivative",
+   "scene": "s06",
+   "data": "data/dt.json",
+   "eq": "∂T/∂x, ∂T/∂t of T = 10 − 0.03x + 3t (others fixed)",
+   "params": {
+    "f": "lambda x, t: 10 - 0.03 x + 3 t",
+    "at": {
+     "x": 50.0,
+     "t": 1.0
+    }
+   },
+   "sha256": null,
+   "recorded": [
+    -0.03,
+    3.0
+   ]
+  },
+  {
+   "fn": "fluidpy.geo.calculus.loop_integral",
+   "scene": "s23",
+   "data": "data/dt.json",
+   "eq": "∮(y dx − x dy), ∮(y dx + x dy)",
+   "params": {
+    "M": "y",
+    "N": "∓x",
+    "path": "unit square n=100"
+   },
+   "sha256": null,
+   "recorded": [
+    -2.0,
+    0.0
+   ]
+  }
+ ],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s07",
+   "eq": "∂T/∂x, ∂T/∂y on the sphere (centred differences)",
+   "params": {
+    "F": "array (141, 221), sha256 a0a26b1a03faaa526bd91a4c12a52490b6798fa11fdae325daf2a30908cfbb69",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c"
+   },
+   "output_sha256": "2b0eb0845f371007d0aa39b2708e0fea1099fb6e649f866c338a023de1683122"
+  },
+  {
+   "fn": "fluidpy.diag.advection.advection",
+   "scene": "s20",
+   "eq": "u·∇T on the sphere",
+   "params": {
+    "F": "array (141, 221), sha256 a0a26b1a03faaa526bd91a4c12a52490b6798fa11fdae325daf2a30908cfbb69",
+    "u": "array (141, 221), sha256 7408cdc83865dc918f43c4303c09b68649f73c03944c146a0bd87ed8a597fe4e",
+    "v": "array (141, 221), sha256 79a8eb890690e5c26c176d788fd5d43043e29b29db3637d8a3d56cf1d90f9b0f",
+    "lat": "array (141,), sha256 7beee06961c4f040bc678c624bb858f9ba68a0a465cbfb969ec8abd1115535a1",
+    "lon": "array (221,), sha256 64dc59989680ce2b292cd333f5d68323d7faa6f1febe98b7ec71c32e8240780c"
+   },
+   "output_sha256": "5af0ae6ed15c14a9741cd1ad2eacf3cac3877389f8041c952e8ac5165dd5329d"
+  },
+  {
+   "fn": "fluidpy.data.igra.find_sounding",
+   "scene": "s09",
+   "eq": "IGRA2 Trappes 2026-09-30 12 UTC",
+   "params": {
+    "path": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IGRA2\\FRM00007145-data-beg2026.txt.zip",
+    "when": "2026-09-30T12",
+    "max_hours": 1.0
+   },
+   "output_sha256": "827536ec8f0a8b0dc17702f5c3d6376621a1b24f30cdd11bdf5dda7eb9a09f65"
+  },
+  {
+   "fn": "fluidpy.data.igra.fill_heights",
+   "scene": "s09",
+   "eq": "hypsometric fill of missing heights (Vallis (2.166))",
+   "params": {
+    "df": "array (82, 10), sha256 fad98ba93a251ebc13912179f99f3bd5fff17c44cd6aae2fd8a11f6318cee73e"
+   },
+   "output_sha256": "e01e85d5f33139d9745f3d80b6a7ea1c070c6f0ca769310e54cfa711181d99ba"
+  },
+  {
+   "fn": "fluidpy.data.igra.find_sounding",
+   "scene": "s19",
+   "eq": "IGRA2 Trappes 2026-09-30 00 UTC",
+   "params": {
+    "path": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IGRA2\\FRM00007145-data-beg2026.txt.zip",
+    "when": "2026-09-30T00",
+    "max_hours": 1.0
+   },
+   "output_sha256": "12c2609f2886122fa30db248e8ce5cbe884061da17c5f8bd28b3c9f7eb239077"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s19",
+   "eq": "∇T at 850 hPa round Trappes (ERA5 2026-09-30 12 UTC)",
+   "params": {
+    "F": "array (29, 41), sha256 1fd2da941d25af24dde7d437532a9ba57a0b2309d27b7c0aba9887ba1393bb86",
+    "lat": "array (29,), sha256 539420c0ee6fd217b4e6e04f59b59308a39d2d52e0b6518a080237c7f27a3567",
+    "lon": "array (41,), sha256 734edd6951f29ea26aa36f8b16dc68adda29797fbb4ff8a3e77ee370702dc62c"
+   },
+   "output_sha256": "e2ebce7064b2829c75b5c054457029570abb4b9ad02dea10d810bb14b2625718"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s19",
+   "eq": "∇T at 700 hPa round Trappes (ERA5 2026-09-30 12 UTC)",
+   "params": {
+    "F": "array (29, 41), sha256 fbcda430188e73fb8d65529fac9bd449c06f0345fa2f926868ddf402bf0a3c26",
+    "lat": "array (29,), sha256 539420c0ee6fd217b4e6e04f59b59308a39d2d52e0b6518a080237c7f27a3567",
+    "lon": "array (41,), sha256 734edd6951f29ea26aa36f8b16dc68adda29797fbb4ff8a3e77ee370702dc62c"
+   },
+   "output_sha256": "2dda489e518ff27b93ef2e481790aa1d3322c99e5bddb99916067199e4b72f93"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s19",
+   "eq": "∇T at 500 hPa round Trappes (ERA5 2026-09-30 12 UTC)",
+   "params": {
+    "F": "array (29, 41), sha256 7df042ac619b05fdffd93bb2b7c782cedb4b9b70179dcbffbf87d50af8e9f86e",
+    "lat": "array (29,), sha256 539420c0ee6fd217b4e6e04f59b59308a39d2d52e0b6518a080237c7f27a3567",
+    "lon": "array (41,), sha256 734edd6951f29ea26aa36f8b16dc68adda29797fbb4ff8a3e77ee370702dc62c"
+   },
+   "output_sha256": "85b7f82fecba96ab2a23f2e106487edc6416b6f1d7b37e202e192658c7ab6279"
+  },
+  {
+   "fn": "fluidpy.data.igra.wmo_tropopause",
+   "scene": "s36",
+   "eq": "WMO lapse-rate tropopause",
+   "params": {
+    "T": "array (82,), sha256 40369f7cabc4774edb68f8e6690f5a8c11a5528f8554023a162bffd469e82e04",
+    "z": "array (82,), sha256 e18871764fd77d76cbcc74ac719185668df7f51895baa1818faa725abe8d65c2",
+    "p": "array (82,), sha256 fe5f2fb918c76fc5fbc806611a01be1c4f32138f204098f58dd3d8f26762a9d1"
+   },
+   "output_sha256": "1bf540c2b01f433a3a364aa988159dce594da2210945138d69ac0d0318623635"
+  },
+  {
+   "fn": "fluidpy.core.statics.isothermal_pressure",
+   "scene": "s27",
+   "eq": "p = p0 e^(−z/H) (isothermal at the ground temperature)",
+   "params": {
+    "z": "array (82,), sha256 accaac550340c7e24f25b7fc9f5306013a08e331ae6949967a99af18833a9f2f",
+    "p0": 99750.0,
+    "T": 292.95,
+    "R": 287.0,
+    "g": 9.81
+   },
+   "output_sha256": "a9d5ec9ee61ce1217a4b35364299f18d0f961b678acaa3279ddbb369d0b3e417"
+  },
+  {
+   "fn": "fluidpy.core.thermo.process_path",
+   "scene": "s28",
+   "eq": "the isochoric-isobaric route sampled",
+   "params": {
+    "kind": "isochoric-isobaric",
+    "state1": "array (2,), sha256 41c74584cd8328c9b4c3fd5f1763340c55be9c57f48a895b0df733557b9742bc",
+    "state2": "array (2,), sha256 68383447e13a2fef3b1bb5a2c90d0879f11a18ac93326007f9f416005f387801",
+    "n": 61
+   },
+   "output_sha256": "bd593947a5076fbe3fba701bb045e02f01bcebffcfcecb2bc77aebea3a9caabf"
+  },
+  {
+   "fn": "fluidpy.core.thermo.process_path",
+   "scene": "s28",
+   "eq": "the isothermal route sampled",
+   "params": {
+    "kind": "isothermal",
+    "state1": "array (2,), sha256 41c74584cd8328c9b4c3fd5f1763340c55be9c57f48a895b0df733557b9742bc",
+    "state2": "array (2,), sha256 68383447e13a2fef3b1bb5a2c90d0879f11a18ac93326007f9f416005f387801",
+    "n": 61
+   },
+   "output_sha256": "80bdfafd9cd04014eedab3eeb6252ac038db0340d3dc9673414a9f72d84da5bd"
+  },
+  {
+   "fn": "fluidpy.core.thermo.process_path",
+   "scene": "s28",
+   "eq": "the isobaric-isochoric route sampled",
+   "params": {
+    "kind": "isobaric-isochoric",
+    "state1": "array (2,), sha256 41c74584cd8328c9b4c3fd5f1763340c55be9c57f48a895b0df733557b9742bc",
+    "state2": "array (2,), sha256 68383447e13a2fef3b1bb5a2c90d0879f11a18ac93326007f9f416005f387801",
+    "n": 61
+   },
+   "output_sha256": "a2495ad9760765fb6cd409eb4ac1b37874911a02d53743b34342a3a0f3fe0ea6"
+  },
+  {
+   "fn": "fluidpy.core.fd.taylor_table_sympy",
+   "scene": "s32",
+   "eq": "Taylor table rows s^p/p! for offsets ±1",
+   "params": {
+    "offsets": "array (2,), sha256 723f1c3eac1d2c306857db9f4466b219af88d13fb056836892154fcd058c55d5",
+    "order": 4
+   },
+   "output_sha256": "04c9398b857413351da2e83ba5cd34eb3a40454e93dbf9f9b9b1a1cab4331b63"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "eq": "order-0 partial sum curve",
+   "params": {
+    "derivs": "array (1,), sha256 6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712",
+    "h": "array (59,), sha256 45866da4673fbbd7be3c8b7051b36f59d5e31e52f0c635c50cbdd50c5ce56cad"
+   },
+   "output_sha256": "7afd4b3a85be0295b29f1347b678f7132cf6127b52ef814dace98f4db29c19a4"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "eq": "order-1 partial sum curve",
+   "params": {
+    "derivs": "array (2,), sha256 5f07eef034c5a21fedede8ef2f970fefbcc8ea44c02fd970117dacbee5483005",
+    "h": "array (59,), sha256 45866da4673fbbd7be3c8b7051b36f59d5e31e52f0c635c50cbdd50c5ce56cad"
+   },
+   "output_sha256": "da41a9355c4ba77c4d7e64edfa73c98654b28429f863ded9f9fb5c6d5b15067f"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "eq": "order-2 partial sum curve",
+   "params": {
+    "derivs": "array (3,), sha256 cc143326a2646c605ea66139d7b440df7cbde18c050f1f8cf4dd30f42cfe7123",
+    "h": "array (59,), sha256 45866da4673fbbd7be3c8b7051b36f59d5e31e52f0c635c50cbdd50c5ce56cad"
+   },
+   "output_sha256": "12b2759919106f125856d1119ed5334d437cb42ca543a08eb8cce46d19989d15"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "eq": "order-3 partial sum curve",
+   "params": {
+    "derivs": "array (4,), sha256 c914e8188e43fff1c96e25283e15b252af0d9f39b469f2d1518915802c756d18",
+    "h": "array (59,), sha256 45866da4673fbbd7be3c8b7051b36f59d5e31e52f0c635c50cbdd50c5ce56cad"
+   },
+   "output_sha256": "ed3ed8c0f3b1fac9a7b1f212a6aec22ef1cb77a8cbdfddec2fea0a862ec9a5d9"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.taylor_polynomial",
+   "scene": "s33",
+   "eq": "order-4 partial sum curve",
+   "params": {
+    "derivs": "array (5,), sha256 6e91e92205f42beb0df4ddf13cf0af352b29ffd2de9465348cdb1447a324e828",
+    "h": "array (59,), sha256 45866da4673fbbd7be3c8b7051b36f59d5e31e52f0c635c50cbdd50c5ce56cad"
+   },
+   "output_sha256": "d6178a98437819163bb6767ec7c1e8e74f505084cebf1570288cb056a04f5879"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.global_mean",
+   "scene": "s42",
+   "eq": "global mean of the 2001-latest OLR climatology (cos-lat)",
+   "params": {
+    "field": "array (180, 360), sha256 96f2f1a7aada890e5250967b453708183a2adabbcb59a54970532bad69b2dfab",
+    "lat": "array (180,), sha256 4feb0c2c139d2195caa4129da428c25032f45442442de22c8834a34a58e4c084"
+   },
+   "output_sha256": "c85cf1ac760c986ca966b702636153715414d0f7fbe6e50c302db0993dc9e66f"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "forward difference along 48.5 N, 0.25°",
+   "params": {
+    "f": "array (221,), sha256 e1e06a3670c42f894fd8dec9dbaae032db6071602a8b39e5d915c68d95e765eb",
+    "dx": 18419.996913640724,
+    "kind": "forward"
+   },
+   "output_sha256": "bbadbd470a5dc074f6bb7640c2beed808a8eec903133c70c18076ef41a41c028"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "backward difference",
+   "params": {
+    "f": "array (221,), sha256 e1e06a3670c42f894fd8dec9dbaae032db6071602a8b39e5d915c68d95e765eb",
+    "dx": 18419.996913640724,
+    "kind": "backward"
+   },
+   "output_sha256": "a407f3f4c72226d700fe90e30ff6d256583ba8ab4755320d2b02f450bac59548"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "centred difference",
+   "params": {
+    "f": "array (221,), sha256 e1e06a3670c42f894fd8dec9dbaae032db6071602a8b39e5d915c68d95e765eb",
+    "dx": 18419.996913640724,
+    "kind": "central"
+   },
+   "output_sha256": "4e0fb343237500c64e417b6a38fadec86e273e2d76346dd9d4dab9e138128b88"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "centred difference on every 2th point",
+   "params": {
+    "f": "array (111,), sha256 1812dfabe6369519757cb52058835bab6c31c526327e8df4276bb6da964ba019",
+    "dx": 36839.99382728145,
+    "kind": "central"
+   },
+   "output_sha256": "4237068a26d7d442820c58c5aa6bdb9d57582a31eb5c0a587eb7351ae0a55a7f"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "centred difference on every 4th point",
+   "params": {
+    "f": "array (55,), sha256 70847e5b8b15545167c7c7f9202ef0f30254a04b56fcf5aba31cc2da5a3f4d1b",
+    "dx": 73679.9876545629,
+    "kind": "central"
+   },
+   "output_sha256": "5c665eb2574b4e4ff81a1623f65a191d236ba7e6446cf209995ad85dfa421d76"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "centred difference on every 8th point",
+   "params": {
+    "f": "array (27,), sha256 7aca45e06ab0646d7a2e1cae0b0b527943291023b5fa2e2b7dac2c92416d03ad",
+    "dx": 147359.9753091258,
+    "kind": "central"
+   },
+   "output_sha256": "2e3934912e8f90d4cadf81656bc0609414993644a70c037f182870c30645c880"
+  },
+  {
+   "fn": "fluidpy.core.fd.fd_derivative",
+   "scene": "s46",
+   "eq": "centred difference on every 12th point",
+   "params": {
+    "f": "array (18,), sha256 c6ac6460e2c806fb80b0b9dfd100563a62bf2701b29d52453d720bb313a7eb83",
+    "dx": 221039.96296368868,
+    "kind": "central"
+   },
+   "output_sha256": "57996691032a809c1081a822678b85f7eea6b628985aea653018e385ecf74be3"
+  }
+ ]
+}
