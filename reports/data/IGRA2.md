@@ -69,3 +69,13 @@
   the tropopause, so "gets a little warmer" can stay.
 - **Disk**: before C: 68.0 GB, G: 544.6 GB free; after C: 68.0 GB, G: 544.6 GB free. Nothing evicted.
 - **Disk** (data-scout session 2026-10-27, all ch00_weather_basics downloads): before the first download C: 74.2 GB and G: 577.6 GB free, project data 11.96 GB; after the last one C: 74.0 GB and G: 576.2 GB free, project data 13.34 GB (raw 0.46 GB, up 0.18 GB from 0.28 GB). Nothing evicted. Every fetch printed and logged its own before/after line in `G:/Geophysical Fluid Dynamics/aofd-data/logs/downloads.log`.
+
+## Stack check for #1a K1A, 2026-10-29 (no download)
+
+- The Trappes sounding of 2023-11-01T00 has wind at 41 levels in all. Only **14** of them lie between the surface and
+  200 hPa: 987, 925, 917, 850, 700, 518, 500, 400, 300, 275, 250, 228, 201 and 200 hPa. There are 21 up to 100 hPa.
+  That is fewer than the 16 the plan assumed.
+- Turning: the wind turns 40° clockwise in total from 987 to 200 hPa (seen from above, Northern Hemisphere; direction
+  210° → 250°). Between neighbouring levels it turns clockwise in only 6 of 13 pairs.
+- The 16-layer stack therefore uses `ERA5-CDS-trappes-20231101T00-uv16`, which agrees with this sonde within 1.5 m/s
+  and 8° at the standard levels. The sonde stays the hodograph's source in s12g.

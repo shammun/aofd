@@ -32,3 +32,30 @@
   | After | 68.5 GB | 536.0 GB |
 
   Nothing was evicted.
+
+## Stack check and heights extension, 2026-10-29 (retrofit plan §4.2, #5 K5 stack)
+
+- **Levels**: the product already holds u, v (and ω) on **18** levels (1000, 975, 950, 925, 900, 850, 800, 700, 600,
+  500, 400, 300, 250, 200, 175, 150, 125, 100 hPa), on a 49 × 61 grid over 20–32° N, 90–75° W. That meets the plan's
+  "≥ 18". No u/v extension was needed.
+- **Radial wind**, ring mean at 200 km: inflow from 1000 to 850 hPa (−4.8, −6.1, −5.1, −3.4, −2.1, −0.4 m/s); weak and
+  mixed from 800 to 300 hPa (|v_r| ≤ 0.5 m/s); outflow from 250 to 125 hPa (+0.7, +4.2, +4.7, +2.5, +4.4 m/s); −1.3 m/s at
+  100 hPa. The lowest sign change is between 850 and 800 hPa (on the 100-km ring, 850 hPa −0.8 and 800 hPa +0.3 m/s).
+- **Heights added** (the product had none, and the stack's layer heights and the narration's "sixteen kilometres"
+  need them):
+  - Source: CDS `reanalysis-era5-pressure-levels` geopotential on the same 18 levels, 2022-09-28 18:00, area
+    [32, −90, 20, −75], through `fluidpy.data.cds.retrieve` (raw folder `raw/ERA5-CDS-ian2022-z/`).
+  - Raw file: 106,698 B, 42.4 s transfer (887 s with the CDS queue), sha256 `2bd66393…6ecd`. Final ERA5.
+  - Product `era5_ian_2022-09-28T18_z18.nc` (`fluidpy.data.stack.stack_product`): 212,045 B, sha256 `214daef5…8b0a`, on
+    G: **and in the repo**. Its grid is identical to the u/v product.
+  - zg at the centre (26.454° N, 82.391° W):
+
+    | Level (hPa) | 1000 | 975 | 850 | 500 | 200 | 100 |
+    |---|---|---|---|---|---|---|
+    | zg (m) | −171 | 49 | 1254 | 5680 | 12,422 | 16,647 |
+
+    - At 1000 hPa the height is below sea level, because ERA5 extrapolates under the 979.6 hPa low. The movie should
+      start the stack at 975 hPa at the centre, or label that layer.
+    - The top is 16.6 km, so "from the sea to about sixteen kilometres" holds.
+- **Licence**: CC-BY 4.0. **Redistributable: yes.**
+- **Disk**: before, C: 53.4 GB and G: 520.4 GB free. After, C: 52.8 GB and G: 520.3 GB free. Nothing was evicted.

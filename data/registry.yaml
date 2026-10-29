@@ -549,6 +549,7 @@ datasets:
     derived_in_repo: [data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc, data/derived/ch00/igra2_stations_2023.json]
     checks: "Trappes: 64 levels, top 5.9 hPa at 33.9 km (z_hyps), surface 987 hPa 12.4 C at z_hyps 166 m (station 168 m); WMO tropopause 10.88 km, -62.7 C at 228 hPa = station-reported; 2nd reported 47.2 hPa. Singapore: 121 levels, top 5.41 hPa at 35.4 km; WMO tropopause 16.16 km, -81.3 C at 109.9 hPa = station-reported. Hypsometric refill of removed standard-level heights within 13 m up to 10 hPa. 941 stations span 2023 (of 2931)"
     used_by: [movie ch00_weather_basics s00, s21, s23-s25, s37 (D1)]
+    check_stack_2026-10-29: "#1a K1A: Trappes 2023-11-01T00 has wind at 41 levels in all, but only 14 from the surface to 200 hPa (987, 925, 917, 850, 700, 518, 500, 400, 300, 275, 250, 228, 201, 200) and 21 to 100 hPa -> fewer than the 16 the plan assumed; bulk turn 987->200 hPa -40 deg (clockwise seen from above; wdir 210->250), successive pairs clockwise in only 6 of 13 (wiggles 518/500, 300/275, 228/201). The 16-layer stack uses ERA5-CDS-trappes-20231101T00-uv16 instead (agrees with this sonde within 1.5 m/s and 8 deg)"
   ERA5-ARCO-global-20231102T12:
     catalogue: ARCO
     title: ERA5 0.25 deg global single hour 2023-11-02 12 UTC - MSLP, surface pressure, orography, 2 m temperature and dew point, 10 m wind
@@ -1184,29 +1185,56 @@ datasets:
     used_by: [movie ch00_vectors_index_notation s12h (D5)]
   ERA5-CDS-trappes-20260930-pl:
     catalogue: ERA5-CDS
-    title: ERA5 850/700/500 hPa temperature and wind round Trappes, 2026-09-30 00 and 12 UTC, 45-52N 3W-7E, 0.25 deg (ERA5T)
+    title: ERA5 round Trappes, 2026-09-30 00 and 12 UTC, 45-52N 3W-7E, 0.25 deg (ERA5T) - 850/700/500 hPa t, u, v (D2) + extension 2026-10-29 for the #4 K4 stack: t and z on all 27 levels 1000-100 hPa and surface pressure
     url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels
-    route: CDS API through fluidpy.data.cds.retrieve; area [52, -3, 45, 7], 3 levels, 2 times; 57.4 s transfer, 121 s incl. queue
-    fetcher: fluidpy.data.cds.retrieve / grid_product
+    route: CDS API through fluidpy.data.cds.retrieve; area [52, -3, 45, 7], 3 levels, 2 times; 57.4 s transfer, 121 s incl. queue. Extension (2026-10-29) - reanalysis-era5-pressure-levels t+z, 27 levels 1000..100 hPa, 00+12 UTC, same area (241,903 B, 39.6 s transfer, 88 s incl. queue) + reanalysis-era5-single-levels sp, same area/times (29,981 B, 27.3 s; 82 s incl. queue)
+    fetcher: fluidpy.data.cds.retrieve / grid_product; extension fluidpy.data.stack.stack_product
     login: CDS (free)
     licence: CC-BY 4.0 (Copernicus licence); attribution required
     licence_url: https://cds.climate.copernicus.eu/licences/cc-by
     citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels from 1940 to present, C3S CDS, doi:10.24381/cds.bd0915c6"
     attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
-    size_bytes: 94816
-    sha256: bfe32de866c3be8d4c1847f9cb770c9eebe4f242c25ca8044332706d599ea39d  # ERA5T: may be replaced by final ERA5 (rare change)
-    sha256_derived: {era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc: 38046cb1d87dd86fd44e77b216fdaaaec5d327aaa080afe696eed85116f09f71}
-    variables: {t: "[K]", u: "[m s-1]", v: "[m s-1]", level: "850, 700, 500 hPa"}
-    coordinates: derived (time 2, level 3, lat 45..52 S->N, lon -3..7)
-    subset: 2026-09-30T00, T12
-    fetch_date: "2026-10-28"
+    size_bytes: 366700  # 94,816 (3 levels) + 241,903 (27 levels t, z) + 29,981 (sp)
+    sha256: bfe32de866c3be8d4c1847f9cb770c9eebe4f242c25ca8044332706d599ea39d  # 3-level file. ERA5T: may be replaced by final ERA5 (rare change)
+    sha256_raw_extension: {era5_trappes_pl_t-z_27lev-1000-100_2026-09-30T00-12.nc: 2307299ee2088f75378257faa4fea8f9bb9eebb27d229de26b53044002d7dddd, era5_trappes_sfc_sp_2026-09-30T00-12.nc: 1f7ddf76bb35f706537a09da08e575404ca8e92042c6c376761aa7f250961bb3}  # ERA5T
+    sha256_derived: {era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc: 38046cb1d87dd86fd44e77b216fdaaaec5d327aaa080afe696eed85116f09f71, era5_trappes_stack16_t-z_2026-09-30T12.nc: ff102c8cb5bd06747b5609161f9c33f3a7febd9fa8ac73d14062815624d0f1fd, era5_trappes_stack27_t-z_2026-09-30T12.nc: 84e323ff6c578e654699cf5fcfee1b1d74834bf82081cb2f83db7ac416239f33, era5_trappes_stack27_t-z_2026-09-30T00.nc: f376d2ab26fead0f300281ba4afd8e50a4c988fe7095d2fd908b55a9a7b599fc}
+    variables: {t: "[K]", u: "[m s-1]", v: "[m s-1] (3-level file only)", z: "geopotential [m2 s-2] (stack files)", zg: "geopotential height z/9.80665 [m] (stack files)", sp: "surface pressure [Pa] (stack files)", below_ground: "int8, 1 where level pressure > sp (ERA5 extrapolated)", level: "850, 700, 500 hPa (3-level file); stack16 1000, 950, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 175, 150, 125, 100 hPa; stack27 all ERA5 levels 1000..100 hPa"}
+    coordinates: "3-level file (time 2, level 3, lat 45..52 S->N, lon -3..7); stack files one time, (level bottom->top i.e. pressure decreasing, lat 45..52 S->N 29, lon -3..7 41); raw CDS files lat N->S, lon -180..180"
+    subset: 2026-09-30T00, T12 (stack16 12 UTC only, the movie's hour; stack27 00 and 12 UTC on G:)
+    fetch_date: "2026-10-28 (3 levels); 2026-10-29 (27-level t, z and sp extension)"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/ERA5-CDS-trappes-20260930-pl/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc]
-    derived_on_root: [derived/ch00/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc]
-    derived_in_repo: [data/derived/ch00/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc]
+    raw_files: [raw/ERA5-CDS-trappes-20260930-pl/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc, raw/ERA5-CDS-trappes-20260930-pl/era5_trappes_pl_t-z_27lev-1000-100_2026-09-30T00-12.nc, raw/ERA5-CDS-trappes-20260930-pl/era5_trappes_sfc_sp_2026-09-30T00-12.nc]
+    derived_on_root: [derived/ch00/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc, derived/ch00/era5_trappes_stack16_t-z_2026-09-30T12.nc, derived/ch00/era5_trappes_stack27_t-z_2026-09-30T12.nc, derived/ch00/era5_trappes_stack27_t-z_2026-09-30T00.nc]
+    derived_in_repo: [data/derived/ch00/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc, data/derived/ch00/era5_trappes_stack16_t-z_2026-09-30T12.nc]
     checks: "ERA5 T at Trappes 12 UTC 850/500 hPa 13.15/-11.27 C vs IGRA 12.3/-11.8 C; DT26 -u.gradT along the drift 12 UTC: 850 +3.8e-5, 700 +6.8e-5, 500 -0.2e-5 K/s (mean |.| 3.6e-5 K/s = 0.13 K/h, low end of 0.3-3e-4: borderline; s19 sentence 8 'a few hundred-thousandths of a degree per second'); DT27 rising share ~99.9 % (PASS); F7 GFS archive fallback not needed"
-    used_by: [movie ch00_derivatives_taylor s19, s09 inset (D2)]
+    checks_stack_2026-10-29: "overlap: new 27-level t at 850/700/500 x 00/12 UTC identical to the 3-level file (max |dT| 0.0 K over 7134 values). Trappes 12 UTC (bilinear): WMO tropopause (fluidpy.geo.atmos.lapse_rate_tropopause) 13,004 m, 208.18 K (-65.0 C) at 175 hPa on both the 27- and 16-level profiles vs IGRA 13,072 m, 206.85 K; gaps 1000-950 ... 200-175 hPa all cool upward (-4.3 to -9.1 K/km, 250-200 -9.10), 175-150 +2.01, 150-125 +0.63, 125-100 +0.84 K/km; zg 140 m (1000) .. 16,452 m (100 hPa; box 16,364-16,487). Box (1189 columns): tropopause 11,970-13,077 m (median 13,011), present in every column, 100 hPa at least 3.4 km above it; 100 % of above-ground gaps below the tropopause cool upward (mean -6.63, weakest -0.88 K/km); 95 % of gaps at/above it have dT/dz >= -2 K/km, 75 % warm. Below ground: 1000 hPa in 44.0 % of columns (not at Trappes, sp 1001.8 hPa), 950 hPa 7.9 %, 850 hPa 1.3 % (Alps/Massif Central corner) -> mask with below_ground"
+    used_by: [movie ch00_derivatives_taylor s19, s09 inset (D2), s09b K4 dT/dz stack (retrofit 5b)]
+  ERA5-CDS-trappes-20231101T00-uv16:
+    catalogue: ERA5-CDS
+    title: ERA5 wind (u, v), temperature and geopotential on all 27 pressure levels 1000-100 hPa + surface pressure round Trappes, 2023-11-01 00 UTC, 45-52N 2W-8E, 0.25 deg; 16-level stack 975-200 hPa (movie #1a K1A wind stack)
+    url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels
+    route: "CDS API through fluidpy.data.cds.retrieve (disk guard): reanalysis-era5-pressure-levels u, v, z, t, 27 levels 1000..100 hPa, 2023-11-01 00:00, area [52, -2, 45, 8] (300,894 B, 55.6 s transfer, 109 s incl. queue) + reanalysis-era5-single-levels sp, same area/time (27,853 B, 27.0 s; 82 s incl. queue). CDS chosen over the planned ARCO route (proposed key ERA5-ARCO-trappes-20231101T00-uv16): same ERA5 data, server-side subset of ~0.3 MB instead of ~4 global 37-level chunks (~0.4 GB network)"
+    fetcher: fluidpy.data.cds.retrieve / fluidpy.data.stack.stack_product
+    login: CDS (free)
+    licence: CC-BY 4.0 (Copernicus licence); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels from 1940 to present, C3S CDS, doi:10.24381/cds.bd0915c6; ERA5 hourly data on single levels, doi:10.24381/cds.adbb2d47"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 328747  # 300,894 + 27,853
+    sha256_raw: {era5_trappes_pl_u-v-z-t_27lev-1000-100_2023-11-01T00.nc: ea7a2f9c514847f121422c8974b257861b75ec931281f783755f5b3366d4af86, era5_trappes_sfc_sp_2023-11-01T00.nc: b7befca8e1f69ce3ae19eea9bd69a4129939127dfb033b42e215787771445688}  # final ERA5 (expver 0001): fixed
+    sha256_derived: {era5_trappes_stack16_u-v-z-t_2023-11-01T00.nc: 499e566c0b1b771ae1893b7da8745c97f50cb7959d77945558b177e8f1f6ca48, era5_trappes_stack27_u-v-z-t_2023-11-01T00.nc: c569d467966cdb1601ce792786a4b92ce8fb887026db4d59b80543ea46324985}
+    variables: {u: "eastward wind [m s-1]", v: "northward wind [m s-1]", t: "[K]", z: "geopotential [m2 s-2]", zg: "geopotential height z/9.80665 [m]", sp: "surface pressure [Pa]", below_ground: "int8, 1 where level pressure > sp", level: "stack16 975, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 400, 350, 300, 250, 200 hPa; stack27 all ERA5 levels 1000..100 hPa"}
+    coordinates: "raw lat 52..45 N->S, lon -2..8; derived one time, (level bottom->top i.e. pressure decreasing, lat 45..52 S->N 29, lon -2..8 41)"
+    subset: 2023-11-01T00 (nominal time of the IGRA Trappes sounding, release 23:31 UTC 31 Oct)
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-CDS-trappes-20231101T00-uv16/era5_trappes_pl_u-v-z-t_27lev-1000-100_2023-11-01T00.nc, raw/ERA5-CDS-trappes-20231101T00-uv16/era5_trappes_sfc_sp_2023-11-01T00.nc]
+    derived_on_root: [derived/ch00/era5_trappes_stack16_u-v-z-t_2023-11-01T00.nc, derived/ch00/era5_trappes_stack27_u-v-z-t_2023-11-01T00.nc]
+    derived_in_repo: [data/derived/ch00/era5_trappes_stack16_u-v-z-t_2023-11-01T00.nc]
+    checks: "ERA5 vs IGRA Trappes sonde (spd/dir, m/s / deg FROM): 925 17.8/225 vs 18/230; 850 17.2/240 vs 17/235; 700 14.5/228 vs 15/235; 500 16.8/248 vs 17/255; 400 20.0/252 vs 21/260; 300 26.9/249 vs 26/255; 250 26.6/247 vs 28/255; 200 25.6/249 vs 24/250 (within 1.5 m/s and 8 deg). Turning at Trappes (bilinear): bulk 975->200 hPa -37.8 deg (clockwise seen from above, NH; wdir 212->249), 850->500 -8.3 deg; successive-level cross products negative (clockwise) in 10 of 15 gaps, backing at 800->700 and 350->250 hPa; speed 11.5 (975) -> 25.6 m/s (200), not monotonic (18.6 at 900 to 14.4 at 650). Box: 850->500 turn clockwise in 90.5 % of 1189 columns. 1000 hPa is below ground at Trappes (sp 991.9 hPa) and in 82.3 % of columns -> stack starts at 975 hPa (below ground in 28.3 % of columns, masked by below_ground)"
+    used_by: [movie ch00_vectors_index_notation s12g2 K1A wind stack (retrofit 5b)]
   ERA5-CDS-monthly-tcwv:
     catalogue: ERA5-CDS
     title: ERA5 monthly-mean total column water vapour, 1979-01..2026-09, global 1 deg; global-mean series, annual means, trends from 1979 and from 1993, per-cell trend at 2 deg
@@ -1359,7 +1387,11 @@ datasets:
     derived_on_root: [derived/ch00/era5_ian_2022-09-28T18_pl.nc]
     derived_in_repo: [data/derived/ch00/era5_ian_2022-09-28T18_pl.nc]
     checks: "DC14 PASS: ring-mean v_r at 100/200 km: 1000 hPa -6.4/-4.8, 975 hPa -9.2/-6.1, 850 hPa -0.8/-0.4 (marginal), 200 hPa +2.2/+4.2, 150 hPa +3.4/+2.5 m/s; inflow mainly 1000-925 hPa (near the sea), outflow strongest 200-125 hPa; outflow aloft turns anticyclonic beyond 400 km (v_t -6 to -13 m/s at 150-125 hPa); ERA5 centre 979.6 hPa vs best track 938 hPa (smoothed)"
-    used_by: [movie ch00_coordinates s14 (D2)]
+    used_by: [movie ch00_coordinates s14 (D2), s14 K5 Ian cylindrical stack (retrofit 5b)]
+    check_stack_2026-10-29: "#5 K5: 18 levels (1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 175, 150, 125, 100 hPa) of u, v (and omega) on a 49 x 61 grid 20-32N 90-75W -> >= 18 required, no extension needed. Ring-mean v_r at 200 km: inflow 1000-850 hPa (-4.8, -6.1, -5.1, -3.4, -2.1, -0.4 m/s), weak and mixed 800-300 hPa (|v_r| <= 0.5), outflow 250-125 hPa (+0.7, +4.2, +4.7, +2.5, +4.4), -1.3 at 100 hPa; lowest sign change between 850 and 800 hPa (100 km ring: 850 -0.8, 800 +0.3)"
+    extension_2026-10-29: "layer heights for the K5 stack: CDS reanalysis-era5-pressure-levels geopotential, same 18 levels, 2022-09-28 18:00, area [32, -90, 20, -75] through fluidpy.data.cds.retrieve (raw key folder ERA5-CDS-ian2022-z; 106,698 B, 42.4 s transfer, 887 s incl. CDS queue; final ERA5, sha256 2bd66393e7a73f184cf463033036dfe0b27cd7260cc272e2766f50e4889c6ecd) -> fluidpy.data.stack.stack_product -> derived/ch00/era5_ian_2022-09-28T18_z18.nc (212,045 B, sha256 214daef5e1a44dfe03e2daa1387eb03200d3bc0bfe6cb2900eb2e8bbc9798b0a; z [m2 s-2], zg [m], level bottom->top, same 49 x 61 grid as the u/v product, verified identical). zg at the storm centre (26.454N 82.391W): 1000 hPa -171 m (below sea level: ERA5 extrapolation under the 979.6 hPa low), 975 hPa 49 m, 850 hPa 1254 m, 500 hPa 5680 m, 200 hPa 12,422 m, 100 hPa 16,647 m (SW corner 16,629 m) -> 'sea to about sixteen kilometres' holds; centre heights lower than the environment by 280 m at 1000 hPa, about 0 at 150-100 hPa"
+    raw_files_extension: [raw/ERA5-CDS-ian2022-z/era5_ian_pl_z_18lev_2022-09-28T18.nc]
+    derived_extension: {on_root: derived/ch00/era5_ian_2022-09-28T18_z18.nc, in_repo: data/derived/ch00/era5_ian_2022-09-28T18_z18.nc}
   NOAA-COOPS:
     catalogue: COOPS
     title: NOAA CO-OPS tide gauges 8725520 Fort Myers (Caloosahatchee River, downtown), 8726520 St. Petersburg (Tampa Bay), 8725110 Naples; 6-min observed water level and predicted tide, MHHW, metric, 2022-09-27..30 (Hurricane Ian)
