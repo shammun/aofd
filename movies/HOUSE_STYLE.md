@@ -186,6 +186,10 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   video at 29:30. When it zooms, rotates or flies to a place, its top, bottom, left and right edges **fade out softly**,
   so the box of the 3-D area is never visible. An unzoomed whole globe needs no fade. While zoomed, text may fade or sit
   behind, and the globe takes the main space.
+- **Zoom-reveal (user, 2026-10-29; every movie, past and future):** whenever zooming into a place on a globe shows more data or helps understanding, use the two states of cross-product v5 56:57 → 57:02 (frames `outputs/viewing_2026-10-29/weather_basics/3.png` → `4.png`).
+  1. **Not zoomed:** the whole globe sits on the left, clearly separate from the text column on the right.
+  2. **Zoomed:** the globe grows to fill most of the frame. Its enlarged right part fades and blurs and runs *behind* the text column, so the text sits over the faded globe. The top, left and bottom edges fade too, so the box never shows.
+  Keep the text on the faded part only. The source line stays below the globe in both states.
 - **The house globe** (user, 2026-10-29): the reference for every 3-D globe, and above all one that zooms and moves from place to place, is the cross-product v5 sequence at 56:35–57:54 (s33_trades, then the westerlies; `movies/src/ch00/CrossProductWhy.tsx`; frame `outputs/viewing_2026-10-29/weather_basics/2.png`). Copy its look: a large globe, animated wind streaks, camera moves and hovers, soft fades on the edges. **Text may sit on the faded part of the globe**, as in that frame (keyword and numbers on the right), but never on the sharp, unfaded part. A coloured globe always has its colour bar with its label. Do not add extra titles to globes or maps (they take space); existing titles stay as they are. The source line always sits **below** the globe; that v5 sequence gets this fixed too.
 - **Source lines sit fully below an image, globe, map or figure, or beside it where that fits better.** The one hard rule: a source line never lies on top of any part of the 3-D globe, map or image. Nothing is dropped: titles,
   dates, keywords, calculations, readouts and colour bars stay in the movie, placed beside or below the picture. Only
@@ -334,3 +338,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-29: §5b globe frame + edge fades when zoomed, source lines below images, no text over text, slab edges to the top, many-layer stacks where they add value (user, reports/ch00_weather_basics_user_feedback_round2.md).
 - 2026-10-29: §5b wind arrows on maps and globes are always animated (user).
 - 2026-10-29: §5b the house globe = cross-product v5 56:35–57:54; text allowed on the faded rim only; source below the globe (user).
+- 2026-10-29: §5b zoom-reveal: an unzoomed globe stays separate from the text; a zoomed globe grows and its faded right part runs behind the text (user; frames 3.png → 4.png).
