@@ -4001,3 +4001,276 @@ This review covers `movies/out/ch00/ch00_cross_product/1080.mp4`: 1960.20 s (32:
 - Part 1 needs no fixes of its own beyond the user's two decisions. Once v5 M1–M3 are fixed and Part 1 is re-cut from the fixed v5, run review 2 on s18, s21a, s21b, s22w and s50/s51.
 
 Disk at review: C: 69 GB free, G: 536 GB free (unchanged). Review frames: 103 MB, 376 PNG, under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_v5/review1/` (not committed).
+
+---
+
+# ch00_vectors_index_notation — review 1 (fresh eyes)                                   2026-10-29
+
+**Movie.** `movies/out/ch00/ch00_vectors_index_notation/1080.mp4`: 2078.57 s (34:38.6), 72.89 MB, 45 scenes, 335 sentences.
+Narration ends at 2076.05 s, then a 2.5-s hold.
+
+**Frames.** 382 PNG and 43 labelled 3×3 sheets at 640 px (184 MB) are in
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/review1/`. They cover:
+- one frame 0.4 s before the end of every sentence, the start of every scene, and the end hold;
+- full-size 1080p frames and crops wherever size, a collision or clipping was in doubt;
+- my own empty-half scan at 2 fps (`halves_scan.txt`). It leaves out the source-line band (y ≥ 835).
+
+**QA re-run** (`tools/movie_qa.py` with `--storyboard --captions --script --manifest --composition --timing --sound-cues`,
+`--hard-mb 160 --budget-mb 120 --duration-window 120,2500`). Result: 12 PASS + 1 WARN, the same as the builder's run.
+- duration 2078.57 s vs 2076.05 s; size 72.89 MB; codec H.264 High / yuv420p / AAC / faststart;
+- black 0; frozen 192 stretches, all narrated; content PASS;
+- loudness −16.0 LUFS / −1.9 dBTP; flashes 0/s;
+- captions 520 cues = script; subtitles SRT = VTT; physics 70 hashes reproduce; equations 35 present;
+- **halves WARN**: 12 stretches of 3.5–9.5 s.
+
+**The halves gate is blind here.** The data-source lines run to x ≈ 1100–1850, so they count as content in the right
+half. My scan, without the source-line band, finds stretches that the gate never reports:
+- right half: 1:32.5–1:40 (7.5 s), 4:56.5–5:05.5 (9 s), **6:12–6:28 (16 s)**, 11:08.5–11:15.5 (7 s) and 33:52.5–33:57.5 (5 s);
+- left half: **33:19.5–33:38.5 (19 s)**.
+
+The two bold stretches would FAIL the gate (> 10 s). Recommendation for the tool: mask y ≥ 835 in the halves and content gates.
+
+**Numbers.** I re-derived every spoken number by hand. Each one matches the manifest CHECK rows (92 rows; VI06, VI14, VI16,
+VI41, VI45, VI49 and VI50 read directly):
+- s08: 9.3 sin 330° = −4.65 and 9.3 cos 330° = 8.054;
+- s10: √(4.65² + 8.05²) = 9.296;
+- s11 and s18: √(5.8² + 33.5²) = 34.0 and √(11.5² + 32²) = 34.0; u_i u_i = 1155.9;
+- s15: 5.8 × 0.985 + 33.5 × 0.174 = 11.54;
+- s12a and s12b: 250 ± 50; √65000 = 254.95; GFS 28 Oct 2026, 18 UTC jet maximum 66.1 m/s → "about sixty-five";
+- s12c: forces sum to (0, 0). C = (6, −8) is 90° to the right of u ∥ (8, 6), which is correct for the NH. F ∥ −u;
+- s12d: u_ag = (10, 18) − (30.9, 24.9) = (−20.9, −6.9). The low is on the left of the geostrophic flow, which is correct for the NH;
+- s12f and s14: (−1.8, 10.2);
+- s12g: shear (2.5, −5.4), 5.95 m/s. The wind turns from 235° to 255° going up (veering), which means warm advection in the NH;
+- s12h: −3.7 − (−5.0) = +1.3 (climatology −5.04, 2023 −3.72);
+- s12i: c = (19.9, 5.3), about 444 km in 6 h; u − c = (−14.2, 28.5), towards the NNW;
+- s22: −9 × 10⁻⁴ K/s = −3.24 K/h;
+- s26: −1.86 × 10⁻⁴ + −8.375 × 10⁻⁴ = −1.02 × 10⁻³ K/s = −3.68 K/h;
+- s27: (8.23 − 2.38)/2 = 2.9 K/h;
+- s31: 33.5 m/s × 3600 s = 121 km.
+
+Equations: δ_ij (2.16) matches its page image. δ_ij u_j = u_i, ∂x_i/∂x_j = δ_ij, p·q = Σp_i q_i, |u|² = u_i u_i and
+(p×q)_i = ε_ijk p_j q_k are correct. There are no KaTeX errors.
+
+**Pronunciation (I can't listen; please check by ear).** The lexicon entry `Kronecker → /kɹˈOnɛkəɹ/` ("KROH-neck-er") is
+applied in all four sentences: **30:24.2** (s29 S6), **30:40.9** (s30 S1), **32:39.1** (s32 S4) and **33:44.0** (s33 S8).
+Please also check:
+- "e one" at 2:57 (s06 S4): the letter name, not a schwa;
+- "u sub i" at 17:52 (s13 S6): "sub", not "S U B";
+- "Saint-Malo", if it is spoken anywhere.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_vectors_index_notation (review 1) | 2078.57 s (34:38.6); narration ends 2076.05 s, then a 2.5-s hold | 72.89 MB (budget 120, hard 160) | 12 PASS + halves WARN (12 stretches of 3.5–9.5 s). The gate is blind to 6 more, two of them > 10 s (see above) | PASS on the numbers. NH deflection to the right (s12c, s34); low on the left of the geostrophic wind; veering → warm advection; advection sign; trades weaken in El Niño. Notes: Coriolis is never called "apparent" (S9); the s09 w arrow is drawn longer than the 34 m/s arrow (S6); s12 x is drawn almost vertical (M8) | PASS. 35 present; (2.16) checked against its page; no KaTeX errors | **FIX**. The source line overlaps the pictures and text (M1); s11 labels pile up (M3); s12b sliver diagram (M4); s12d isobars invisible (M6); s23 equation over text (M9); globe clipped (M12); s12h strips (M13) | **FIX**. Numbers not on screen when spoken (M5); empty halves of 16 s and 19 s (M2) | PASS: 520 cues = script; SRT = VTT | PASS: 0 flashes; perceptual temperature map, sequential jet map; rose with a "−" glyph for negatives | n/a (none, as the house style requires) | **FIX** |
+
+## ch00_vectors_index_notation — MUST fix
+
+1. **M1 · Data-source line on the pictures and under text (global, user rule §5 "never over" the picture; legibility).**
+   - **What is wrong.** `SrcLine` is drawn at y ≈ 845–868, but the picture zone runs down to y ≈ 858. So the line sits on
+     cloud, map and relief imagery, and at 640 px it can't be read: muted text on white cloud.
+     - Scenes with the line over the picture: s01 0:14–0:23, s02–s03 0:57–1:32, s04, s05 2:16–2:44, s11, s12d 11:08–12:22,
+       s12f 13:08–14:03, s12i 16:28–17:20, s20 22:51–23:49, s25 26:51–27:21 and s26 27:21–28:17.
+     - Text drawn on top of the line:
+       - s07 "u = (6, 8, 0) m/s", 3:30–3:54;
+       - s08 "u = (−4.65, 8.05, 0) m/s", 4:39–4:56;
+       - s12g hodograph tick labels "5 10 15", 14:21–15:16;
+       - s12h bottom of the "2023 − normal" map, 16:04–16:28;
+       - s12i "about 450 km in 6 h", 16:46–17:20;
+       - s15 "dot product →", 20:22;
+       - s34 "next movie", 34:07–34:12.
+   - **Fix.** Reserve a 40-px strip:
+     - end every picture, label and tick at y ≤ 820;
+     - draw the source line at y ≈ 832–862, above the caption band (880).
+     - Move the bottom labels in the scenes listed above up by 40–60 px.
+     - Then mask y ≥ 835 in the QA halves and content gates.
+2. **M2 · Empty halves the gate can't see, two of them over the 10-s FAIL limit (house §5, U-M4.2).**
+   - **s11, 6:12–6:28: the right half is empty for 16 s.** Fix: show "east, north: (5.8, 33.5)" on S2, when the axes
+     turn, and the keyword "same arrow, other axes" on S1.
+   - **s33 recap, 33:19.5–33:38.5: the picture half is empty for 19 s** (S5 u_i, S6 summation). Fix: put a mini picture
+     for each sentence, as house §2 asks for the recap:
+     - the three-equation fan for "free index";
+     - the 3 × 3 grid collapsing to 3 for "summed";
+     - the Brest advection map for u_j ∂T/∂x_j.
+   - **s12h, 15:17–15:56: the lower two-thirds of the screen is empty** for 39 s (see M13).
+   - Shorter gate-blind stretches: s04 1:32.5–1:40, s09 4:56.5–5:05.5, s12d 11:08.5–11:15.5 and s34 33:52.5–33:57.5. These are Should, with S1.
+3. **M3 · s11, 6:22–7:10: labels pile up and text runs into the map.**
+   - "north", "across" and "32.0" overprint each other at the arrow tips (x ≈ 250–450, y ≈ 120–220).
+   - "11.5" sits on the east axis.
+   - "along, across: (11.5, 32.0)" starts at x = 955, inside the map, which ends at 1000.
+   - The gold "the arrow itself" link crosses the √ line at 6:57.
+   - Fix:
+     - run `placeLabels` on the four tips;
+     - put the component values at the ends of the shaded projection bands, not at the tips;
+     - start the right column at x ≥ 1060 and route the link around the equation.
+4. **M4 · s12b, 8:55–9:58: the parallelogram can't be seen.**
+   - **The diagram is tiny.** The 250 m/s arrow is about 340 px and the 50 m/s arrow about 60 px, crammed into the top-left
+     corner. The parallelogram is a 60-px sliver, so "the two routes make the sides of a parallelogram" has nothing to look at.
+   - **The equation overruns.** "(0, 250) + (50, 0) = (0 + 50, 250 + 0)" spans x = 1020–1860, past both edges of the maths zone.
+   - **p and q are never named.** "p + q = q + p" uses them, but the narration says only "the plane" and "the jet".
+   - Fix:
+     - scale the scene to the picture zone, about 700 px for 250 m/s;
+     - draw both routes, plane-then-wind and wind-then-plane, in their own colours;
+     - shade the parallelogram;
+     - break the equation over two lines inside 1060–1840;
+     - write "plane + jet = jet + plane", or say "call the plane's arrow p and the jet's arrow q".
+5. **M5 · s12c, 10:12–10:43: numbers are spoken before they appear (house §4: on screen at the moment they are spoken).**
+   - "Twelve point five" (S3, 10:12–10:17), "six and minus eight" (S4) and "minus six and minus four point five" (S5) are
+     said while only the arrows and a floating "×10⁻⁴ m s⁻²" are on screen.
+   - The numbers first appear at 10:43, in the sums.
+   - Fix: put "(0, 12.5)", "(6, −8)" and "(−6, −4.5)" at the arrow tips on their words. Attach the unit to the first
+     number ("12.5 × 10⁻⁴ m/s²") instead of leaving it floating at the top right.
+6. **M6 · s12d, 11:17–12:22: the isobars can't be seen.**
+   - They are 1–2 px white lines on white cloud. The scene says "lines of equal pressure … every four hectopascals", but
+     there is no visible isobar and no value.
+   - Fix: draw the isobars 4 px in a dark ink with a light halo (as in s12i, where they show), and label two of them
+     ("960", "964 hPa").
+7. **M7 · Symbols on screen that are not explained, or that clash (house §4: every symbol explained at first use).**
+   - **u means two things at once.** In s04/s07 u labels the wind vector. In s08 (4:51–4:56) "u = 9.3 × (−½)" is the east
+     component, while "u = (−4.65, 8.05, 0)" is the vector, on the same screen. Fix: bold **u** for the vector everywhere and
+     say "we'll call the wind vector bold u" in s04; or write "wind = (−4.65, 8.05, 0)" in s08.
+   - **s10, 5:47–6:12: u₁, u₂, u₃ appear before they are defined.** The screen shows |**u**| = √(u₁² + u₂² + u₃²), but the
+     narration has only u, v, w, and u₁ is defined at 17:32 (s13). Fix: write √(u² + v² + w²) in s10 (and in s18 if needed),
+     or add the sentence "we'll also call them u one, u two and u three".
+   - **s12e, 12:34: "−q = (−q₁, −q₂)"**. The subscripts are not spoken. Fix: say "q one, q two", or write "(−1, −3)" with the easy numbers.
+   - **s12h, 16:04–16:28: u′ and ū are never said.** Fix: say "u prime, the anomaly" and "u bar, the average". Keep one
+     typeface (bold for vectors, italic for the east component).
+   - **s12i, 16:53–17:20: c and u − c are not named.** Fix: say "call the storm's velocity c".
+   - **s23, 26:16: ∂T/∂t appears without "partial T by partial small t, where small t stands for time"** (house §4 example). Fix: add those words to S7.
+8. **M8 · s12, 7:21–7:50: the picture contradicts the numbers.**
+   - x = (3, 4, 1.2) km, but the arrow is drawn almost vertical, with long x₃ and tiny x₁ and x₂. The balloon looks to be
+     mostly above the airport, not 5 km away and 1.2 km up.
+   - Fix: draw it to scale (horizontal 5 km, height 1.2 km), or say "we've stretched the height so you can see it".
+9. **M9 · s23, 26:16–26:24: equation on top of text.** "∂T/∂t = −u_j ∂T/∂x_j" overprints "warmer air → colder air".
+   Fix: move the equation below "stand still", or retire the earlier keyword on S7.
+10. **M10 · s21 (23:51–24:44), with s12c and s23: the air parcel is not 3-D (user rule U-WB-R3).**
+    - **What is on screen.** The parcel is an isometric SVG wire cube, about 40–90 px, with no shading and no x, y, z. In
+      s21 the narration moves it "u one metres east … north … rising adds u three ∂T/∂x₃". That is exactly a 3-D motion,
+      but the flat map only shows two legs.
+    - **My judgement: this does not meet the rule.** The rule names air parcels explicitly and asks for three.js and visible x, y, z.
+    - **Recommendation:** render s21 as a tilted three.js map slab with a translucent shaded parcel box, its edges labelled
+      east / north / up. On S2–S3, draw the three legs (u₁, u₂, u₃ per second) in 3-D, with a slow camera orbit. Reuse
+      `movies/src/ch00_weather_basics/kit_wb/col3d.tsx` (`Box3D`, `BoxEdges3D`, three.js) and this movie's `kit_vi/three3d.tsx`.
+    - In s12c, the force balance is a horizontal vector sum, so keep the plan-view diagram but draw the parcel with the same
+      three.js box and an "air parcel" label (the word is spoken but not shown). Do the same for the arriving parcels in s23.
+11. **M11 · s31, 31:21–32:20: real data with no data-source line (user rule: fail any real-data frame without it).**
+    - The balloon drifts at the ERA5 850-hPa wind (5.8, 33.5) over the real Brittany coast and drifts 120 km, with no source line.
+    - Fix: add `s31_balloon_delta: "Data: ERA5 (Copernicus C3S) 850 hPa wind · 1 Nov 2023, 18 UTC · Brest"` to `SRC`.
+12. **M12 · s01, 0:14–0:23: the globe is clipped.** The satellite globe is cut by straight edges at x = 80 and y = 40, a disc
+    with a flat left side and a flat top. It looks like a rendering fault in the first seconds of the movie.
+    - Fix: pull the camera back so the whole limb fits inside 80–1000 × 40–820, or use the s02 rounded window on purpose.
+    - The same chamfered clipping is in s02 0:57 and s33 32:46. Make them consistent.
+13. **M13 · s12h, 15:17–16:28: the climate maps can't be read.**
+    - Three 900 × 180 px strips stack at the top.
+    - The climatology map's label is cut at the top edge ("Nov 1991–2020" clipped at y = 40).
+    - The arrows are 5–10 px dashes, and the anomaly arrows "point east" can't be seen at 640 px.
+    - For the first 39 s, everything below y ≈ 230 is empty.
+    - Fix:
+      - show one map at a time, full picture-zone height and cropped to about 160° E–100° W, 15° S–15° N, so the arrows are about 3× longer;
+      - cross-fade climatology → Nov 2023 → anomaly on S5/S6/S7, with small labelled thumbnails of the other two;
+      - draw a gold link from the 170–150° W box to "−5.0", "−3.7" and "+1.3".
+
+## ch00_vectors_index_notation — SHOULD fix
+
+- **S1 · Empty halves of 3.5–9.5 s** (gate and my scan; house §5). Show the first keyword or value on S1 of each scene:
+  - right half: 1:32.5–1:40 (s04), 3:21–3:27 (s07), 4:56.5–5:05.5 (s09), 8:55.5–9:00.5 (s12b), 9:59–10:07.5 (s12c),
+    11:08.5–11:15.5 (s12d), 17:21–17:24.5 (s13), 22:19.5–22:27.5 (s19), 23:51.5–23:55 (s21), 24:44.5–24:53.5 (s22),
+    25:40–25:47 (s23), 27:23.5–27:31.5 (s26), 30:01–30:08 (s29), 30:41–30:49.5 (s30), 31:21.5–31:31 (s31), 33:52.5–33:57.5 (s34);
+  - also visually empty: s01 0:14–0:21 (only a "?") and s06 2:44–2:53 (the relief sits in the bottom-left; the top and right are empty).
+- **S2 · s04, 1:38–2:15: degrees on screen are not spoken.** The screen shows "150°", "from 150°" and "towards 330°", but the
+  narration says "south-south-east" and "north-north-west". Degrees are first spoken in s08. Fix: show "from SSE" and
+  "towards NNW" in s04 and keep the degrees for s08, or speak them.
+- **S3 · s05, 2:29–2:43: "streaming north" vs the picture.** The highlighted ">30 m/s" arrows west of France point ENE; only
+  Brest's own arrow points NNE. The cream highlight discs barely show on white cloud. Fix: say "streaming north-east" (or
+  highlight the arrows near Brest), and use a gold ring instead of cream discs.
+- **S4 · s07, 3:21–3:54: the axis labels vanish after the camera turns.** east / north / up and e₁, e₂ disappear, while S3
+  says "along e one". Fix: keep the labels.
+- **S5 · Calculations are small, more than 3 lines, not aligned, and past the safe area** (house §6: CalcStack 68 px, ≤ 3 lines, aligned at "=").
+  - s08 4:19–4:56: 4 lines; sin and cos are not aligned with the u and v lines.
+  - s12g 15:03: 6 lines.
+  - s15 20:04–20:23: the result is 44 px.
+  - s26 27:45–28:17: 5 lines; "sum ≈ −1.0 × 10⁻³ K/s" ends at x ≈ 1893.
+  - s12f 13:55: "north: … = 10.2" and the subtraction line end at x ≈ 1890.
+  - s12b 9:31: the equation ends at x = 1860.
+  - Fix: use CalcStack (dim the older lines) and keep everything inside 1060–1840.
+- **S6 · s09, 4:56–5:21.** The w arrow is about 3× longer than the 34 m/s arrow, while S3 says "more than three hundred times
+  slower". The bars are right, but the arrows say the opposite. Also, "850 hPa" (on the slab label, and in s05/s12g) appears
+  before hectopascals are defined in s12d. Fix: shorten w to a stub and label it "w (drawn larger)"; replace "850 hPa" with
+  "about 1.4 km up", or define hectopascal earlier.
+- **S7 · s10, 6:01–6:12: "4.65²" should be "(−4.65)²".** The sign step is skipped (builder-known). Also say "a straight bar
+  on each side" instead of "two straight bars" (the screen shows |**u**|; "two bars" invites ‖**u**‖).
+- **S8 · s12a, 7:50–8:54.**
+  - The coastlines are almost invisible, so "flights from North America to Europe" has no map to point at. Fix: brighter
+    coast and two place labels.
+  - The orange "50" sits under the white 300 arrow at 8:30.
+  - "300 m s⁻¹" (KaTeX) vs "300 m/s" (labels) mixes unit styles; "m s⁻¹" is never explained. Use "m/s" throughout.
+- **S9 · Coriolis is not called apparent** (R1 §6 honesty). s12c S4 (10:17) says only "the Coriolis push, from Earth's spin".
+  Fix: add "an apparent push, which appears because we measure the wind on a spinning Earth".
+- **S10 · s12i, 16:46–17:20: mixed times.**
+  - The map shows the storm at 00 UTC on 2 Nov, next to Brest, but the wind is the 18 UTC wind. Fix: show the 18 UTC
+    storm position for the u − c step, or say the times.
+  - The "u − c" and "−c" labels and the L glyph overprint each other. Fix: separate them with `placeLabels`.
+- **S11 · Colour bars without a quantity** (house §5 "colour bar … with units"; the title should say what is plotted). These
+  bars show only "°C": s00 Part B, s03 (the title is dropped from 1:07), s12f, s14, s21 and s24. Fix: "temperature, 1.2 km
+  up" as in s20. s31's x₁ field has no colour bar; add "km east of Brest".
+- **S12 · s02–s03, 0:42–1:32: the temperature is tinted over the MODIS cloud texture.** The colour no longer reads against the
+  bar (the cloud brightness darkens it). Fix: drop the cloud blend to about 15 % or less.
+- **S13 · s16 and s17.**
+  - "≡" at 21:05 is never explained. Fix: use "=", or say "means the same as".
+  - "for j in range(3):" (21:21) loops over 0, 1, 2, but the index runs 1, 2, 3. Fix: "for j in (1, 2, 3):".
+  - The loop line stays on screen after p_j q_j is gone (21:26–21:44).
+- **S14 · s19, 22:26: things shown before they are taught.** u_j ∂u_i/∂x_j appears before ∂ is introduced (s20), and the lower
+  two-thirds of the screen is empty. Fix: show "3 × 3 = 9 terms" as a small 3 × 3 grid of dots, not the formula.
+- **S15 · Conversion steps missing** (house §6: show the steps a novice would not do in their head).
+  - s22 25:01–25:16: the step "−3 °C per 100 km = −3 ÷ 10⁵ K/m" is missing.
+  - s22: "sum: 10 × (−3) + 30 × (−2)" drops the "× 10⁻⁵".
+  - s25 27:10: the gold link starts at "100 km", not at "−3.2 °C / 100 km", and the north leg has no "100 km" label.
+- **S16 · s26, 28:10–28:17: the sign flip is not written.** The calculation ends at "−3.7 K per hour", but the map says "+3.7
+  K per hour". Fix: add a line "fixed thermometer: −u_j ∂T/∂x_j ≈ +3.7 K/h" (the s23 rule).
+- **S17 · s27, 28:19–28:55.** The station graph is empty axes for 36 s before its line appears. "T (°C)" touches the "10.0" and
+  "16.0" ticks, and the ".0" decimals are not needed. Fix: fade the station axes in on S6; drop the decimals.
+- **S18 · s30 and s32.**
+  - s30, 31:13: the scene's key result, δ_ij u_j = u_i, is the smallest line (44 px).
+  - s30: "j becomes i, and the delta disappears" is nearly the narrated sentence.
+  - s32, 32:38: the screen never shows "nine terms → three"; three terms float diagonally, and a duplicate 44-px line sits
+    at the right. Fix: a 3 × 3 grid with the off-diagonal terms struck.
+- **S19 · s13, 17:39: "(u, v, w)" overprints the letters r and s.** Fix: give it its own row.
+- **S20 · s00, 0:09: title spacing.** The subtitle ends 39 px from the Part B map (house: ≥ 50). The u_j ∂T/∂x_j numerator
+  touches the bottom edge of the map.
+- **S21 · s01 → s02, 0:23: the globe camera jumps** (U-WB-R4 continuity). It cuts from the zoomed North-Atlantic satellite globe
+  to the whole temperature globe centred on Africa. Fix: start s02 at s01's camera, then pull out.
+- **S22 · Spoken times vs screen times.** s12f says "five o'clock" while the screen shows "17 UTC". s14 says "u sub i at six
+  … at five" while the screen shows "18 h, 17 h". Fix: say "seventeen hundred" / "eighteen hundred", or show "17 UTC (5 pm)".
+- **S23 · The ending is a user decision.** The movie uses the maths ending (orchestrator decision 2). Half the movie is real
+  weather (Ciarán, El Niño, warm advection), so the weather/climate ending (house §3, as granted for the cross product) may
+  fit better. Ask the user.
+
+## ch00_vectors_index_notation — what works
+- The arc is to the letter:
+  - title, then hook with the core picture on its first frame;
+  - building blocks with real Brest data;
+  - adding and subtracting with six real-weather cases;
+  - index notation, then the advection application with a check against what happened;
+  - the delta, recap, spoken bridge to 1b, and the maths end card, said and written word for word (§3).
+- The voice is warm, and goal-before-answer is kept throughout ("How did the wind change in that hour? We subtract…").
+- Every new term is defined in words: reanalysis, scalar field, basis, isobars, geostrophic, hodograph, climatology,
+  anomaly, free / dummy index, advection, warm advection, isotherms, warm front.
+- The gold links work where used: the s25 zoom with 100-km legs; the s20 grad T arrow.
+- The s12f ghost-arrow subtraction; the s27 "our sum +3.7 vs +2.9" check; the s26 term bars ("most of the effect comes from
+  the strong wind from the south").
+- Colours follow the house roles; no headings, boxes or badges.
+
+## Overall: FIX (ch00_vectors_index_notation review 1 — 13 Must, 23 Should)
+- The physics and every number are right, and the teaching arc is sound.
+- The picture layer needs a fix loop:
+  - the source line has to move off the pictures (M1);
+  - three gate-blind empty stretches;
+  - five layout and collision faults (M3, M4, M6, M9, M13);
+  - numbers and symbols on screen off their words (M5, M7);
+  - one misleading drawing (M8);
+  - the 3-D parcel rule (M10);
+  - one missing source line (M11);
+  - the clipped opening globe (M12).
+- After the fixes, run review 2 on s01, s04–s12h, s21, s23, s31, s33 and a whole-movie half scan with the source band masked.
+
+Disk at review: C: 70 GB free, G: 524 GB free (unchanged by this review). Review frames: 184 MB, 382 PNG + 43 sheets, under
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/review1/` (not committed). The QA re-run
+rewrote `reports/movies/ch00/ch00_vectors_index_notation/qa.json` and its contact sheets/frames (same results).
