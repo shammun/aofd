@@ -24,3 +24,5 @@ cmocean
 scikit-image
 # Optional / Windows-fragile, installed only when a chapter needs them (R3 §6.4):
 # ecco_v4_py, neutralocean, copernicusmarine, easyclimate, climlab, windspharm, dedalus
+eccodes>=2.50  # GRIB2 decoder (GEFS ensemble, archived GFS runs; ch00 #69)
+cfgrib>=0.9.15  # xarray engine for GRIB via eccodes
