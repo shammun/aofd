@@ -69,3 +69,16 @@ Used by `../Fluid Dynamics/tests/geo/test_sphere_enu_band.py`, `tests/geo/test_f
 | Storm Ciarán record low pressure | 953.3 hPa mean-sea-level pressure at Plymouth (Kinterbury Point), 2 Nov 2023 — November record for England (previous 959.7 hPa, Teignmouth 1916) | Met Office statement of 2 Nov 2023, as reported by Totnes Times / Tavistock Times and Weatherzone | https://totnes-today.co.uk/news/storm-ciaran-sets-new-record-in-plymouth-for-lowest-barometric-pressure-647807 ; https://www.weatherzone.com.au/news/deadly-storm-ciaran-breaks-records-in-france-and-uk/1599138 | WebFetch / web search (secondary reports of the Met Office statement; primary Met Office post not retrieved) | 2026-10-28 |
 | Storm Ciarán explosive deepening | central pressure fell by more than 24 hPa in 24 h | Met Office statement (as above) | as above | web search | 2026-10-28 |
 | ERA5 hourly msl, Storm Ciarán | derived product `era5_ciaran_2023_sfc.nc` (35–70° N, 50° W–10° E, 0.25°, 1–2 Nov 2023) | Hersbach et al. 2020, *QJRMS* 146, 1999–2049, doi:10.1002/qj.3803; ARCO-ERA5, CC-BY 4.0 | gs://gcp-public-data-arco-era5 | stored derived product (data drive) | 2026-10-28 |
+
+## ch00_gradient (#6) — library batch: pressure_gradient_force (+cartesian), binned_mean, descent_path (verified 2026-10-28)
+
+Used by `../Fluid Dynamics/tests/geo/test_atmos_pgf.py`, `tests/diag/test_binned_mean.py` and
+`tests/geo/test_terrain_descent.py`. Software benchmarks run at test time; no table digitised; no book values.
+
+| Benchmark | Value | Source | URL | How obtained | Verified |
+|---|---|---|---|---|---|
+| Binned (conditional) mean and counts | `scipy.stats.binned_statistic(statistic="mean" / "count")` and `np.histogram` (half-open bins, last bin closed) | SciPy 1.18.1 / NumPy 2.5.4 reference implementations | https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binned_statistic.html | run in the tests | 2026-10-28 |
+| Geostrophic consistency (G1, corrected sign) | f k × u_g = −(1/ρ)∇p = +F, Vallis (2.198); u_g from `geostrophic_wind_from_msl` (itself V1/V2/V3-tested in `tests/geo/test_atmos.py`) | Vallis 2017 §2.8.1 (equation only) | — | run in the tests | 2026-10-28 |
+| ERA5 hourly msl, u10, v10 + NE 50 m land mask, Storm Ciarán | `era5_ciaran_2023_sfc.nc`, `era5_ciaran_2023_sfc_1102.nc` (`land`) | Hersbach et al. 2020, *QJRMS* 146, 1999–2049, doi:10.1002/qj.3803; ARCO-ERA5, CC-BY 4.0; Natural Earth (public domain) | gs://gcp-public-data-arco-era5 | stored derived products (data drive) | 2026-10-28 |
+| ETOPO 2022 60″ surface elevation, Alps subset | `etopo2022_60s_alps_43-49N_4-17E.nc` | NOAA NCEI 2022, ETOPO 2022 15 Arc-Second Global Relief Model, doi:10.25921/fd45-gt74 (public domain) | https://www.ncei.noaa.gov/products/etopo-global-relief-model | stored raw subset (data drive) | 2026-10-28 |
+| Mont Blanc summit position used as the start | 45.8326° N, 6.8652° E (data_needs DG13; "to confirm" by the research-scout — the test only needs a point in the summit region) | data_needs.md §A planning table | — | as listed | 2026-10-28 |

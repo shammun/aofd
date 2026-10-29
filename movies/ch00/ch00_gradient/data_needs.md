@@ -172,3 +172,4 @@ Trappes (exists), radiosonde (exists), hectopascals (exists). Spoken maths to li
 - Decisions: fetch D5 (sea-breeze winds) and D7 (OISST Gulf Stream); maths ending confirmed; add `steepest-ascent` style at build time.
 - G1 sign correction (implementer, 2026-10-28): the V5 relation is **f k × u_g = +(Fx, Fy)** (geostrophic balance (2.198): f k × u_g = −(1/ρ)∇p = F; it is the Coriolis force −f k × u_g that equals −F). The G1 row above has the wrong sign. Measured |f k×u_g − F| ≤ 1.1e-19 m/s².
 - Vallis prints "the force per unit mass is ∇p/ρ" just after (1.47) without the minus sign; (1.47)/(1.48) require −∇p/ρ, which the code and narration use.
+- s15 Mont Blanc descent (verifier, 2026-10-28): from the summit the 60″ descent stops at 45.794 N 6.909 E, 1782 m, after 5.6 km — a V-shaped valley floor (thalweg), not a closed pit. Narration: "reaches the valley floor", not "a minimum".
