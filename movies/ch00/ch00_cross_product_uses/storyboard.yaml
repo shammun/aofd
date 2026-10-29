@@ -1,12 +1,12 @@
 # ch00_cross_product_uses - Part 2 of cross product v5 (movie-director, 2026-10-28). Content = v5 s23..s48.
 id: ch00_cross_product_uses
 title: 'The cross product at work: why the wind turns'
-version: '3-plan (2026-10-28): Part 2 of cross product v5'
+version: '3-plan (2026-10-28): Part 2 of cross product v5 + U-CF centrifugal (2026-10-29)'
 draft_of: re-plan from the user's review of v2 (reports/ch00_cross_product_user_notes_v2.md, UV2-01 ... UV2-31 + the cut-away note); see changes.md
 supersedes: v4 fix 2 (commit a1cc435, 48:28, review 3 PASS)
 concepts:
 - C0A-PoC2
-target_duration_s: 1840.75
+target_duration_s: 2456.75
 fps: 30
 size:
 - 1920
@@ -39,27 +39,32 @@ decision_changes:
 - geostrophic section re-sequenced on one round low, one equation per step (s39-s44)
 - Storm Ciarán shown on a true-colour satellite image with country and region borders at about 12 UTC 2 Nov 2023 (s45-s46); the analysis time moves from
   00 to 12 UTC
-measured_narration_s: 1838.25
-measured_frames: 55223
-words: 4558
-sentences: 290
+- 'U-CF (user 2026-10-28, planned 2026-10-29): the rotating-frame acceleration is derived with the rule (dB/dt)_outside = (dB/dt)_rider + Ω × B (s26a1),
+  used on r (s26b) and again on the velocity (s26e-s26f, the two equal Ω × u and the leftover Ω × (Ω × r)); the leftover is named the centrifugal acceleration
+  and shown = Ω² r⊥ with the vector triple product (s27b-s27d); it is folded into effective gravity g (s27e-s27f) with its traces: g 9.78 vs 9.83 m/s²,
+  the plumb line, the 21-km bulge (s27g); s27''s strike + bulge move to s27f'
+measured_narration_s: 2454.25
+measured_frames: 73628
+words: 6059
+sentences: 376
 dry_run:
   tool: tools/tts.py
-  run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\v3_20261028\run2\ch00_cross_product_uses
-  date: '2026-10-28'
-  audio_s: 1813.025
-  speech_s: 1686.1
-  cues: 451
-  beats: 5
+  run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_cross_product_split\dryrun\cf_20261029\ch00_cross_product_uses
+  date: '2026-10-29'
+  audio_s: 2454.25
+  speech_s: 2287.5
+  cues: 603
+  beats: 10
   self_check:
-    expected_s: 1813.025
-    audio_s: 1813.025
-    diff_ms: 0.0
+    expected_s: 2454.25
+    audio_s: 2454.25
+    diff_ms: -0.0
     len_ok: true
     cues_ok: true
-  render_s: 558.5
+  render_s: 1694.1
   warnings: []
-  lexicon: movies/lexicon.yaml as of 2026-10-28 (no new entries)
+  lexicon: movies/lexicon.yaml as of 2026-10-29 (no new entries)
+  note: 'U-CF plan: 9 new scenes (s26a1, s26e, s26f, s27b-s27g) + changed s26b, s27, s47'
 data_products:
   status: P1-P5 READY (data-scout 2026-10-25); P6, P7 and the s23/s31 imagery patches DELIVERED (data-scout, commit e20037e, data/derived/ch00/); P4b (ERA5
     850 hPa at 12 UTC 2 Nov 2023) is the one remaining data task
@@ -209,6 +214,8 @@ credits:
     MODIS Aqua Corrected Reflectance, NASA LANCE (CC0). [Storm Ciarán, 2023-11-02]
   - 'Made with Natural Earth (public domain): 10m coastline, admin-0 and admin-1 boundaries.'
   - 'Blue Marble: Next Generation, NASA Earth Observatory (Reto Stöckli) - s23/s31 patches.'
+  - 'WGS 84 constants and normal gravity: National Imagery and Mapping Agency (2000), Department of Defense World Geodetic System 1984, TR8350.2, 3rd ed.
+    [values only; s27e-s27g]'
 composition_changes:
   new_file: movies/src/ch00/CrossProductWhy.tsx (scene scaffolding copied from DotProductWhy.tsx - Scene, SS/SE/AT, fin/fout, FPH clock, InlineTeX, SCENES
     + Sequence + XF, one Audio of narration_music.wav)
@@ -311,6 +318,11 @@ composition_changes:
       MeshBasicMaterial with the daytime texture, no lighting terminator, no dark veil.'
   - name: Door3D (fix)
     spec: 'UV2-04/UV2-12: labels placed by placeLabels against the projected geometry AND a 40-px canvas margin; frame self-check at every sentence start.'
+  u_cf_2026-10-29: 'NEW scenes S26A1, S26E, S26F, S27B-S27G (MerryGoRound2D, HalfEarth3D, Globe3D, LocalFrame3D, CalcStack, Layered, Balance reused; new
+    small SVG pieces: two meridian cross-sections (circle | ×50 ellipse), plumb bob, bathroom scale, spring gravity meter, dropped ball icons). S26B: one
+    new sentence (S5) and the rule line. S27: the S9 strike + bulge + ''in gravity'' removed (moved to s27f); the main line stays EQ_DUDT3; the ''centrifugal:
+    outwards'' brace reads ''centrifugal''; EQ_DUDT (''real pushes − 2Ω × u'') is no longer in this storyboard and may be dropped from the TSX or kept unused.
+    S47: one new sentence (S7), later beats shift by one.'
 new_builder_data:
   builder_script: movies/data/build_ch00_cross_product_why.py (writes data/*.json, *.bin and manifest.json with function names, parameters, git SHAs, hashes
     and CHECK rows; the TSX only indexes and interpolates)
@@ -516,6 +528,39 @@ new_builder_data:
     check: msl minimum location falls on the image's storm centre within 1° (visual sanity, reported); anticlockwise ring; 850 hPa over sea 300–1500 km
       from the centre at 12 UTC, median direction difference ≤ 10° and ≥ 65 % of points within 10°; median actual/geostrophic speed in 0.80–0.95 (data-scout
       2026-10-27 gave 0.857 at 12 UTC, 0.852 at 13 UTC; subgeostrophic round a tight low, gradient-wind check at 46°N 5°W); u10 crosses towards the low
+  - id: N23
+    scene: s26a1, s26e, s26f, s27b
+    what: merry.json -> rule, rule_twice, centrifugal (U-CF)
+    check: painted-arrow tip velocity = Ω × B and growing arrow outside rate = rider rate + Ω × B (rotating_basis, finite differences, tol 1e-6); rider
+      rate of (u + Ω × r) = a' + Ω × u' at t = 1.2 s (tol 1e-6); relative + 2Ω × u' + Ω × (Ω × x') = 0 for the straight outside path (frame_acceleration_terms,
+      tol 1e-9); carried Ω × r tip velocity = Ω × (Ω × r) towards the hub; centrifugal_acceleration([0,0,0.5],[0,−2.5,0]) = (0, −0.625, 0) = 0.25 r; triple-product
+      identity on 200 random vectors < 1e-12; period 2π/0.5 = 12.566 s shown ≈ 12.5 s
+  - id: N24
+    scene: s27c-s27g
+    what: earth.json -> centrifugal, effective_gravity, sideways, three_traces (U-CF)
+    fields:
+      centrifugal_m_s2:
+      - 0.033878
+      - 0.023955
+      - 0.0
+      Omega_sq: 5.3175e-09
+      r_perp_45_km: 4504.98
+      north_part_45: -0.016939
+      coriolis_10ms: 0.0014584
+      sideways_over_coriolis: 11.61
+      deflection_max_deg: 0.099
+      geodetic_minus_geocentric_max_deg: 0.1924
+      radius_difference_km: 21.385
+      inverse_flattening: 298.257
+      g_equator: 9.7803253359
+      g_pole: 9.8321849378
+      spin_share: 0.654
+    check: 'centrifugal_acceleration at 0/45/90° (a = 6371 km) = Ω² a cos φ away from the axis (1e-12); r_along + r⊥ = r; up and north parts ±0.016939 at
+      45°N (north < 0: towards the equator); ratio to G0 0.345 % shown ''≈ ⅓ %''; effective_gravity(45°, g_n = GM/a²) deflection 0.0990° and max 0.0990°
+      at 44.95° (shown ≈ 0.1°); |coriolis_acceleration(earth_rotation_local(45°), (10,0,0))| = 1.4584e-3 (shown ≈ 0.0015); sideways / Coriolis = 11.6 (said
+      ''more than ten times''); earth_oblateness_diameter()/2 = 21.385 km (said ≈ 21 km); a/(a − b) = 298.26 (said ''one part in three hundred''); cited
+      γe, γp shown 9.78 / 9.83; Ω² a_WGS84 / (γp − γe) = 0.654 (said ''about two thirds''); geodetic − geocentric latitude from cited e², max 0.1924° at
+      45° (said ''about a fifth of a degree''), 0.1924 − 0.0990 = 0.093 (said ''about as much again'')'
 implementer_needs:
 - id: I1
   fn: fluidpy.diag.trajectories.advect_on_sphere(u, v, lat, lon, seeds_lat, seeds_lon, dt, nsteps, a=EARTH_RADIUS)
@@ -543,6 +588,12 @@ implementer_needs:
     §2.1, Eq. (2.12); Kundu §4.7. Tests: V1 equals turntable_puck(launch=''rotating'') to 1e-8 m; V4 Jacobi integral conserved; V7 Ω → 0 straight line;
     centrifugal=False gives the f-plane inertial circle of inertial_oscillation with f = 2Ω.'
   fallback: builder-local solve_ivp with the same CHECK row (the comparison already exists as tests/geo/test_frames.py::test_turntable_puck_V1_matches_rotating_frame_ode)
+- id: I5
+  fn: fluidpy.geo.sphere.geocentric_latitude(lat, e2=WGS84_E2) and fluidpy.geo.sphere.normal_gravity(lat) (Somigliana, WGS-84 constants)
+  why: 's27g: the plumb-line angle on the real Earth (0.19°) and the equator/pole gravity (9.780/9.832 m/s²) from tested functions instead of cited values'
+  spec: 'geocentric = atan((1 − e²) tan φ); γ(φ) = γe (1 + k sin²φ)/sqrt(1 − e² sin²φ), k = (b γp)/(a γe) − 1. Docstring: WGS-84 (NIMA TR8350.2), Vallis
+    §2.2.1 context. Tests: V5 γ(0) = 9.7803253359, γ(90°) = 9.8321849378; V7 geocentric = geodetic at 0° and 90°, max difference 0.1924° near 45°.'
+  fallback: builder-local formulas from the cited WGS-84 constants with CHECK rows (values only cited on screen, rounded)
 honesty_notes:
 - A cross product is drawn as a violet arrow at right angles to both inputs; the right hand is always a RIGHT hand; every direction is checked by data/rhr.json.
 - 'Display scales: a × b, p × q at 0.25 of their length; Ω, k, τ, L, pushes on their own scales; every value that matters is written with its components
@@ -554,10 +605,10 @@ honesty_notes:
   the inertial circle in the NH).'
 - v = Ω × r is derived (speed Ω |r| sin θ = Ω × distance from the axis; direction east, right-hand rule) and checked with the recipe at 45°N (0, 329, 0)
   m/s; equator 465 m/s; pole 0.
-- '−2Ω × u is derived on a merry-go-round: velocity seen from outside = u + Ω × r; the arrow u carried round gives Ω × u; the floor velocity under the moving
-  ball changes by Ω × u; Newton''s law in the outside frame; the minus from moving the terms to the rider''s side; the centrifugal term Ω × (Ω × r) is said
-  to be absorbed into gravity on Earth (Vallis §2.1). A computer check compares the closed-form path with the integrated rider''s equation (gap ≈ 3e-11
-  m).'
+- '−2Ω × u is derived on a merry-go-round with one rule, (dB/dt)_outside = (dB/dt)_rider + Ω × B (motivated by an arrow painted on the floor): used on r
+  it gives the outside velocity u + Ω × r; used again on that velocity it gives du/dt + Ω × u (the floor speed changing, ②) + Ω × u (u carried round, ①)
+  + Ω × (Ω × r) (the floor velocity carried round, ③), with constant Ω said; Newton''s law in the outside frame; the minus from moving the terms to the
+  rider''s side. A computer check compares the closed-form path with the integrated rider''s equation (gap ≈ 3e-11 m).'
 - On Earth Ω = (0, Ω cos φ, Ω sin φ) in (east, north, up); for a flat wind the horizontal part of −2Ω × u is −2Ω sin φ k × u = −f k × u; the vertical part
   2Ω cos φ u (≈ 1e-3 m/s² for 10 m/s at 45°) is dropped against g (said), which is the traditional approximation for flat winds.
 - f = 2Ω sin φ, φ latitude (Vallis writes ϑ; provenance only); f < 0 in the SH; f = 0 at the equator; f(45°) = 1.03e-4 s⁻¹.
@@ -576,15 +627,21 @@ honesty_notes:
 - No references, book or author names, equation numbers, URLs or badges on screen; credits in this file and manifest.json only.
 - 'Part 2 of the v5 split: every content scene identical to cross product v5 s23-s48; only the new start (s00_title, s01_hook, s01a-s01d) is added. s23a
   still names ''the magnet''s push on the proton'' and ''our small kicks'': both are recapped in s01d.'
+- 'Centrifugal (U-CF): −Ω × (Ω × r) = Ω² r⊥ by the vector triple product (#1b), pointing away from the axis, size Ω² a cos φ: 0.034 m/s² at the equator,
+  0.024 at 45°, 0 at the poles (≈ 1/3 % of g). It is an apparent force of the rotating frame (said as ''the outward pull a rider feels''). It is folded
+  into effective gravity g = g* − Ω × (Ω × r); on a sphere its sideways part (0.017 m/s² at 45°) would exceed the Coriolis push on a 10 m/s wind (≤ 0.0015)
+  more than ten times, but the flattened Earth makes the sea surface normal to g, so weather equations carry only g. Traces: g 9.78 vs 9.83 m/s² (WGS-84
+  normal gravity, cited; the spin explains ≈ 2/3, the bulge the rest), the plumb line 0.1° (spin alone, sphere) and ≈ 0.19° (real ellipsoid), the 21-km
+  bulge (1/298). Flattening, plumb angle and centrifugal arrows are drawn ×50 (listed in exaggeration).'
 quiz_hook: 'At 30°N, f is half its value at the pole. With the same 4 hPa over 400 km, how fast is the geostrophic wind there? (f = 7.29e-5 s⁻¹, so |u|
   = 1.00e-3 / (7.29e-5 x 1.2) ≈ 11.4 m/s: the weaker turning needs a faster wind to balance the same push.)'
 qa_expectations:
-  duration_s: 1815.525
+  duration_s: 2456.75
   duration_window_s:
-  - 1761.1
-  - 1870.0
+  - 2383.0
+  - 2530.5
   captions:
-    cues: 451
+    cues: 603
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 16.8
@@ -1528,30 +1585,130 @@ scenes:
   exaggeration:
   - 'thought experiment: a frictionless ball, said ("nothing to rub or push it"); motion at true speed for a 0.5 rad/s disc'
   v5: v4 fix 2, word-identical
-- id: s26b_two_views
+- id: s26a1_rule
   t:
   - 561.025
-  - 599.425
+  - 624.425
   sentence_times:
   - - 561.025
-    - 563.65
-  - - 564.0
-    - 568.575
-  - - 568.925
+    - 567.075
+  - - 567.425
+    - 570.525
+  - - 570.875
     - 575.45
   - - 575.8
-    - 581.55
-  - - 581.9
-    - 585.725
-  - - 586.075
-    - 590.225
-  - - 590.575
-    - 594.0
-  - - 594.35
-    - 598.625
+    - 580.025
+  - - 580.375
+    - 586.175
+  - - 586.525
+    - 592.325
+  - - 592.675
+    - 598.25
+  - - 598.6
+    - 603.0
+  - - 603.35
+    - 609.45
+  - - 609.8
+    - 618.65
+  - - 619.0
+    - 623.625
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#29 the Coriolis effect, in full detail'
+  visual: 'NEW (U-CF1). THE RULE FOR A TURNING FLOOR, motivated on the merry-go-round. Picture zone x 80-1000: the disc seen from OUTSIDE (MerryGoRound2D
+    mode ''outside'', radius 3 m at 120 px/m, centre (520, 450)), turning anticlockwise at Ω = 0.5 rad/s (angle = Ω t from the frame); Ω ⊙ at the hub as
+    s26a.
+
+    S1: the disc turns; keyword ''one rule'' (54 px) at (1100, 140).
+
+    S2: an arrow painted on the floor (warm white C.key, 10 px, 40-px head) from (1.0, 0.4) m, 1.2 m long, fixed to the spokes; tip label ''B''.
+
+    S3: keyword line ''position · velocity · direction'' (54 px) at (1100, 230).
+
+    S4: a small rider''s-view inset (disc with spokes fixed, x 700-980, y 560-840) where the same painted arrow stays still; keyword ''rider: B stays the
+    same'' (54 px).
+
+    S5: main view: the disc turns 60° over 2 s; ghosts of B every 10° at 30 %; the path of its tip a gold arc.
+
+    S6: at the tip a violet arrow tangent to the arc, label ''Ω × B''; a 40 % thumbnail of the s25b half-Earth with its orange ''Ω × r'' ground arrow fades
+    in at the top left of the picture zone, label ''just as Ω × r''.
+
+    S7: the painted arrow grows from 1.2 m to 1.6 m (in the inset too, a teal extension band ''rider sees B grow''); in the main view the tip now traces
+    an opening spiral; at the tip two arrows: teal ''rider''s change'' (along B) and violet ''Ω × B'' (across B).
+
+    S8: their head-to-tail sum drawn warm white; keyword ''both changes add''.
+
+    S9: ''dB/dt: change per second'' (54 px) with the muted words ''outside'' / ''rider'' under two copies.
+
+    S10: the rule (T.eq 84) at (1080, 480), built part by part on its words, with gold underbraces ''outside watcher'', ''rider'', ''carried round''.
+
+    S11: two gold tags under the rule (54 px, no boxes): ''B = r'' then ''B = velocity'', each lit on its words.'
+  voiceover: 'Before we write down what each one sees, we need one rule, and the merry-go-round shows it. Paint an arrow on the floor, and call it B. It
+    could be any arrow: a position, a velocity, or a direction. The rider sees the painted arrow stay exactly the same. But from outside, it swings round
+    with the floor, and its tip moves along a circle. Just as Earth''s ground moves at Omega cross r, the tip moves at Omega cross B. Now suppose the rider
+    also sees B change, for example by growing longer. Then the outside watcher sees both changes, added together. We write how fast B changes each second
+    as d B by d t, and say who is watching. So here''s the rule: d B by d t seen from outside equals d B by d t seen by the rider, plus Omega cross B. We''ll
+    use it twice: first on the position, then on the velocity.'
+  on_screen_eq:
+    latex: \left(\frac{d\mathbf B}{dt}\right)_{\text{outside}} = \left(\frac{d\mathbf B}{dt}\right)_{\text{rider}} + \boldsymbol\Omega\times\mathbf B
+    vallis_eq: 'provenance only, not drawn: Vallis (2.5) (dB/dt)_I = (dB/dt)_R + Ω × B (page image p076 checked); our words ''outside'' for I and ''rider''
+      for R; motivated by (2.2)-(2.3) (dC/dt)_I = Ω × C for a vector fixed in the rotating frame'
+    page_png: chapters/pages/ch02/p076.png
+  physics_source:
+    fn: fluidpy.core.rotating.rotating_basis
+    params:
+      Omega:
+      - 0
+      - 0
+      - 0.5
+      t: 0 .. 2.09 s (60°), 1/30-s samples
+      B_painted_m: 1.2
+      B_growth_m_s: 0.2
+      B_base_m:
+      - 1.0
+      - 0.4
+      - 0
+    outputs:
+      painted_tip_velocity: finite difference of the painted tip in the outside frame = Ω × B (CHECK, tol 1e-6)
+      growing_arrow: outside rate = rider rate (0.2 m/s along B) + Ω × B (CHECK, tol 1e-6)
+    also:
+    - fluidpy.core.rotating.basis_rate_exact
+    - fluidpy.geo.vectors.cross
+    data: data/merry.json -> rule (NEW, N23)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_rotating_basis_V3_turning_rule_order_2
+  exaggeration:
+  - the painted arrow and Ω × B on display scales; the 60° turn shown in 2 s (true speed for a 0.5 rad/s disc)
+  v5: 'new (2026-10-29, U-CF): the rule (dB/dt)_outside = (dB/dt)_rider + Ω × B stated and motivated before it is used (user item 1)'
+- id: s26b_two_views
+  t:
+  - 624.425
+  - 671.45
+  sentence_times:
+  - - 624.425
+    - 627.05
+  - - 627.4
+    - 631.975
+  - - 632.325
+    - 638.85
+  - - 639.2
+    - 644.95
+  - - 645.3
+    - 653.575
+  - - 653.925
+    - 657.75
+  - - 658.1
+    - 662.25
+  - - 662.6
+    - 666.025
+  - - 666.375
+    - 670.65
   status: new
   changes:
   - UV2-22
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
   split: 2b
   visual: 'NEW. WHAT EACH ONE SEES. One disc (the right view of s26a enlarged in the picture zone, top view) with the ball
 
@@ -1567,20 +1724,25 @@ scenes:
 
     S4: their sum (head to tail) drawn warm white, label ''u + Ω × r''; line ''v_outside = u + Ω × r'' (84 px).
 
-    S5: keyword ''Newton''''s law: outside watcher''.
+    S6: keyword ''Newton''''s law: outside watcher''.
 
-    S6: ''no push → v_outside constant'' (54 px).
+    S7: ''no push → v_outside constant'' (54 px).
 
-    S7: a gold box-free bracket under ''u'' and under ''Ω × r'' labelled ''1'' and ''2'' (54 px).
+    S8: a gold box-free bracket under ''u'' and under ''Ω × r'' labelled ''1'' and ''2'' (54 px).
 
-    S8: keyword ''each gives Ω × u''.
+    S9: keyword ''each gives Ω × u''.
 
 
-    V5 (from the 1aa590f split plans; review-3 items R3-S1..S4, C1-C6): R3-S1: ''outside: u + Ω × r'' keyword from S1.'
+    V5 (from the 1aa590f split plans; review-3 items R3-S1..S4, C1-C6): R3-S1: ''outside: u + Ω × r'' keyword from S1.
+
+
+    U-CF (2026-10-29): NEW S5 (the inserted sentence): the s26a1 rule (54 px, muted) at the top of the maths zone; B → r with a gold link; it becomes on_screen_eq_extra
+    (dr/dt)_outside = (dr/dt)_rider + Ω × r = u + Ω × r (60 px) for the sentence, then fades. Old S5-S8 are now S6-S9.'
   voiceover: 'Let''s write down what each one sees. The rider measures the ball''s velocity over the floor: call it u. The floor under the ball moves at
-    Omega cross r, where r is the arrow from the centre to the ball. So the outside watcher sees the ball''s velocity as u plus Omega cross r. Newton''s
-    law works for this watcher, who isn''t turning. With nothing pushing the ball, this velocity doesn''t change. So let''s see how u plus Omega cross r
-    changes. Two pieces of it change, and each gives an Omega cross u.'
+    Omega cross r, where r is the arrow from the centre to the ball. So the outside watcher sees the ball''s velocity as u plus Omega cross r. That''s our
+    rule used on the position r: the rider sees r change at the rate u, and the spin adds Omega cross r. Newton''s law works for this watcher, who isn''t
+    turning. With nothing pushing the ball, this velocity doesn''t change. So let''s see how u plus Omega cross r changes. Two pieces of it change, and
+    each gives an Omega cross u.'
   on_screen_eq:
     latex: \mathbf v_{\text{outside}} = \mathbf u + \boldsymbol\Omega\times\mathbf r
     vallis_eq: 'provenance only, not drawn: Vallis (2.7) v_I = v_R + Ω × r (page image checked); our names "outside" for I and u for v_R'
@@ -1606,24 +1768,32 @@ scenes:
     test: ../Fluid Dynamics/tests/test_ch04.py (Kundu core rotating tests; V1 a point fixed in the rotating frame moves at Ω × x′)
   exaggeration:
   - arrows on display scales
-  v5: v4 fix 2, word-identical
+  v5: 'v4 words kept + added (2026-10-29, U-CF): S5 ''That''s our rule used on the position r…'''
+  on_screen_eq_extra:
+  - latex: \left(\frac{d\mathbf r}{dt}\right)_{\text{outside}} = \left(\frac{d\mathbf r}{dt}\right)_{\text{rider}} + \boldsymbol\Omega\times\mathbf r =
+      \mathbf u + \boldsymbol\Omega\times\mathbf r
+    vallis_eq: 'provenance only, not drawn: Vallis (2.6) (dr/dt)_I = (dr/dt)_R + Ω × r and (2.7) v_I = v_R + Ω × r (page images p076-p077 checked)'
+    page_png: chapters/pages/ch02/p076.png
+  narration_changed: true
+  related:
+  - '#29 the Coriolis effect, in full detail'
 - id: s26c_carried_arrow
   t:
-  - 599.425
-  - 626.9
+  - 671.45
+  - 698.925
   sentence_times:
-  - - 599.425
-    - 602.275
-  - - 602.625
-    - 607.2
-  - - 607.55
-    - 611.725
-  - - 612.075
-    - 616.275
-  - - 616.625
-    - 623.075
-  - - 623.425
-    - 626.1
+  - - 671.45
+    - 674.3
+  - - 674.65
+    - 679.225
+  - - 679.575
+    - 683.75
+  - - 684.1
+    - 688.3
+  - - 688.65
+    - 695.1
+  - - 695.45
+    - 698.125
   status: new
   changes:
   - UV2-22
@@ -1673,23 +1843,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s26d_new_ground
   t:
-  - 626.9
-  - 663.725
+  - 698.925
+  - 735.75
   sentence_times:
-  - - 626.9
-    - 630.65
-  - - 631.0
-    - 638.75
-  - - 639.1
-    - 642.475
-  - - 642.825
-    - 651.0
-  - - 651.35
-    - 654.0
-  - - 654.35
-    - 659.075
-  - - 659.425
-    - 662.925
+  - - 698.925
+    - 702.675
+  - - 703.025
+    - 710.775
+  - - 711.125
+    - 714.5
+  - - 714.85
+    - 723.025
+  - - 723.375
+    - 726.025
+  - - 726.375
+    - 731.1
+  - - 731.45
+    - 734.95
   status: new
   changes:
   - UV2-22
@@ -1762,32 +1932,200 @@ scenes:
   exaggeration:
   - the outward step is a thought experiment on a display scale
   v5: v4 fix 2, word-identical
+- id: s26e_rule_again
+  t:
+  - 735.75
+  - 786.15
+  sentence_times:
+  - - 735.75
+    - 740.7
+  - - 741.05
+    - 747.875
+  - - 748.225
+    - 756.375
+  - - 756.725
+    - 759.35
+  - - 759.7
+    - 768.15
+  - - 768.5
+    - 773.4
+  - - 773.75
+    - 780.1
+  - - 780.45
+    - 785.35
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#29 the Coriolis effect, in full detail'
+  visual: 'NEW (U-CF1). THE RULE AGAIN, ON THE VELOCITY (part 1: the rider''s side). Picture zone: the rider''s view of the disc as s26b (disc fixed on
+    screen, centre (520, 450), 120 px/m) with the ball at t = 1.2 s, teal u, teal-grey r, orange Ω × r at the ball and their warm-white sum ''u + Ω × r''.
+    Maths zone x 1060-1840: CalcStack (≤ 3 lines, 60-68 px, aligned at ''='', older lines dim to 60 %).
+
+    S1: the rule of s26a1 at the top (54 px, muted).
+
+    S2: the warm-white sum arrow pulses; ''B = u + Ω × r'' (68 px); gold CurvedLink from the arrow to B.
+
+    S3: line 1 = the on_screen_eq (60 px, wrapped after the first ''+''), with underbraces ''rider''s part'' (teal) and ''carried round'' (violet).
+
+    S4: the ''rider''s part'' brace glows; the ''carried round'' part dims to 40 %.
+
+    S5: line 2 starts ''(…)_rider = du/dt'' with the gloss ''du/dt: how fast u changes, for the rider'' (44 px); on the picture two ghosts of u (t = 1.0
+    s and 1.2 s) show it changing.
+
+    S6: keyword ''Ω fixed'' (54 px, violet) under Ω in ''Ω × r''.
+
+    S7: the term becomes ''+ Ω × u'' (gold link from ''rate of r = u''); on the picture the ball steps along u and the orange floor-velocity arrow under
+    it grows (the s26d picture in miniature).
+
+    S8: underbrace ''②'' under Ω × u with keyword ''the floor''s speed changes'' (54 px); line 2 complete = on_screen_eq_extra.'
+  voiceover: 'Now let''s use the rule a second time, to find all the pieces at once. This time, the arrow B is the velocity the outside watcher sees: u
+    plus Omega cross r. The rule says its change seen from outside is its change seen by the rider, plus Omega cross that same velocity. Let''s take the
+    rider''s part first. The rider sees u change at a rate we write d u by d t: how fast the velocity over the floor changes each second. In Omega cross
+    r, Omega doesn''t change, so only r does. The rider sees r change at the rate u, so Omega cross r changes at Omega cross u. That''s our second piece:
+    the floor''s speed changing under the moving ball.'
+  on_screen_eq:
+    latex: \left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf r)\right)_{\text{outside}} = \left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf
+      r)\right)_{\text{rider}} + \boldsymbol\Omega\times(\mathbf u + \boldsymbol\Omega\times\mathbf r)
+    vallis_eq: 'provenance only, not drawn: our route applies Vallis (2.5) to v_I = v_R + Ω × r ((2.7)); Vallis applies (2.5) to v_R ((2.8)-(2.9)); both
+      reach (2.12) for constant Ω (page image p077 checked)'
+    page_png: chapters/pages/ch02/p077.png
+  on_screen_eq_extra:
+  - latex: \left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf r)\right)_{\text{rider}} = \frac{d\mathbf u}{dt} + \boldsymbol\Omega\times\mathbf
+      u
+    vallis_eq: 'provenance only, not drawn: (dv_R/dt)_R + Ω × (dr/dt)_R with dΩ/dt = 0 (the dΩ/dt × r term of Vallis (2.10) vanishes; page image p077 checked)'
+    page_png: chapters/pages/ch02/p077.png
+  physics_source:
+    fn: fluidpy.core.rotating.frame_acceleration_terms
+    params:
+      Omega: 0.5
+      ball: turntable_puck rotating path at t = 1.2 s (the s26b state)
+      a_prime: finite difference
+      u_prime: turntable_puck rotating velocity
+      x_prime: turntable_puck rotating position
+    outputs:
+      rider_rate_of_v_outside: d/dt(u + Ω × r) in the rider's frame = a' + Ω × u' (finite difference, CHECK, tol 1e-6)
+      piece_2: Ω × u' (equals data/merry.json -> new_ground change for u = (0.5, 0, 0), CHECK)
+    also:
+    - fluidpy.geo.frames.turntable_puck
+    - fluidpy.geo.vectors.cross
+    data: data/merry.json -> rule_twice (NEW, N23)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_frame_acceleration_V1_random_paths_reassemble_inertial_acceleration
+  exaggeration:
+  - arrows on display scales
+  honesty: Ω constant is said ('Omega doesn't change'); for a changing spin an extra dΩ/dt × r term appears (not needed on Earth)
+  v5: 'new (2026-10-29, U-CF): the rule applied to the outside velocity u + Ω × r; the rider''s part gives du/dt + Ω × u (piece ②)'
+- id: s26f_collect
+  t:
+  - 786.15
+  - 840.1
+  sentence_times:
+  - - 786.15
+    - 792.45
+  - - 792.8
+    - 800.875
+  - - 801.225
+    - 806.5
+  - - 806.85
+    - 815.6
+  - - 815.95
+    - 820.35
+  - - 820.7
+    - 832.7
+  - - 833.05
+    - 838.6
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#29 the Coriolis effect, in full detail'
+  visual: 'NEW (U-CF1). THE RULE AGAIN (part 2: carried round) AND THE SUM. Picture as s26e (rider''s view, ball at t = 1.2 s). Maths zone keeps line 1
+    (dim) and line 2.
+
+    S1: line 1''s ''carried round'' brace glows; ''Ω × (u + Ω × r)'' (68 px) as a new line.
+
+    S2: ''= Ω × u + Ω × (Ω × r)'' (= on_screen_eq_extra 1) with keyword ''part by part'' (54 px, gold) and, for this sentence only, a muted mini ''3 × (2
+    + 5) = 3 × 2 + 3 × 5'' (54 px).
+
+    S3: underbrace ''①'' under Ω × u; on the picture the s26c ghosts of u swinging round with the floor (mini).
+
+    S4: underbrace ''③'' (slate C.local) under Ω × (Ω × r); on the picture the orange Ω × r arrow at the ball swings round with the floor (ghosts every
+    10°) and the velocity of its tip is a small slate arrow ''Ω × (Ω × r)'' pointing towards the hub.
+
+    S5: Keyword ''the leftover piece'' with a gold pointer to ③.
+
+    S6: CalcStack line ''change seen outside = du/dt + Ω × u + Ω × u + Ω × (Ω × r)'' (64 px; = on_screen_eq_extra 2, the s27 EQ_SEEN string) with braces
+    ''rider sees'', ''②'', ''①'', ''③'', each lit as spoken.
+
+    S7: the two violet Ω × u slide together into ''2Ω × u'' (the gold ''2'' pulses); final line = on_screen_eq (68 px, gold underline); the [beat] holds
+    it.'
+  voiceover: 'Now the last part of the rule: Omega cross, open bracket, u plus Omega cross r. The cross product works part by part, like ordinary multiplication,
+    so we cross Omega with each part on its own. Omega cross u is our first piece: the arrow u carried round by the floor. Omega cross, open bracket, Omega
+    cross r, is the floor''s own velocity, Omega cross r, carried round in its turn. That''s the leftover piece, and now we can see where it comes from.
+    Adding everything, the change seen from outside is d u by d t, plus Omega cross u, plus Omega cross u again, plus Omega cross, open bracket, Omega cross
+    r. The two equal pieces, one from each use of the rule, make two Omega cross u. [beat]'
+  on_screen_eq:
+    latex: \text{change seen outside} = \frac{d\mathbf u}{dt} + 2\boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf
+      r)
+    vallis_eq: 'provenance only, not drawn: (dv_I/dt)_I = (dv_R/dt)_R + 2Ω × v_R + Ω × (Ω × r), i.e. Vallis (2.12) rearranged, from (2.10)-(2.11) with constant
+      Ω (page image p077 checked)'
+    page_png: chapters/pages/ch02/p077.png
+  on_screen_eq_extra:
+  - latex: \boldsymbol\Omega\times(\mathbf u + \boldsymbol\Omega\times\mathbf r) = \boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf
+      r)
+    vallis_eq: 'provenance only: the Ω × (dr/dt)_I = Ω × (v_R + Ω × r) step of Vallis (2.10)-(2.11) (page image p077 checked)'
+    page_png: chapters/pages/ch02/p077.png
+  - latex: \text{change seen outside} = \frac{d\mathbf u}{dt} + \boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf
+      r)
+    vallis_eq: 'provenance only: Vallis (2.10) with (2.11), constant Ω (page image p077 checked); the s27 line'
+    page_png: chapters/pages/ch02/p077.png
+  physics_source:
+    fn: fluidpy.core.rotating.frame_acceleration_terms
+    params:
+      a_prime: turntable_puck rotating acceleration at t = 1.2 s
+      u_prime: rotating velocity
+      x_prime: rotating position
+      Omega: 0.5
+    outputs:
+      total: relative + coriolis (2Ω × u') + centripetal (Ω × (Ω × x')) = inertial acceleration of the straight outside path = 0 (CHECK, tol 1e-9)
+      carried_floor_arrow_tip: finite difference of the carried Ω × r arrow's tip = Ω × (Ω × r), towards the hub (CHECK)
+    also:
+    - fluidpy.geo.frames.turntable_puck
+    - fluidpy.core.rotating.rotating_basis
+    data: data/merry.json -> rule_twice (NEW, N23)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_frame_acceleration_V1_random_paths_reassemble_inertial_acceleration
+  exaggeration:
+  - arrows on display scales
+  v5: 'new (2026-10-29, U-CF): Ω × (u + Ω × r) split part by part into ① Ω × u and ③ Ω × (Ω × r); the two equal Ω × u make the 2 (user item 1)'
 - id: s27_coriolis_term
   t:
-  - 663.725
-  - 725.15
+  - 840.1
+  - 909.1
   sentence_times:
-  - - 663.725
-    - 665.875
-  - - 666.225
-    - 672.975
-  - - 673.325
-    - 681.825
-  - - 682.175
-    - 688.225
-  - - 688.575
-    - 698.925
-  - - 699.275
-    - 704.525
-  - - 704.875
-    - 710.825
-  - - 711.175
-    - 716.775
-  - - 717.125
-    - 724.35
+  - - 840.1
+    - 842.475
+  - - 842.825
+    - 849.575
+  - - 849.925
+    - 860.575
+  - - 860.925
+    - 866.975
+  - - 867.325
+    - 879.575
+  - - 879.925
+    - 885.175
+  - - 885.525
+    - 891.475
+  - - 891.825
+    - 902.7
+  - - 903.05
+    - 908.3
   status: changed
   changes:
   - UV2-22
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
   split: 2b
   narration_changed: true
   visual: 'THE SUM, STEP BY STEP (−2Ω × u derived). Full width CalcStack (68 px, aligned at ''='', ≤ 3 lines visible, older lines
@@ -1812,29 +2150,29 @@ scenes:
 
     S8: ''−Ω × (Ω × r)'' highlighted slate with keyword ''centrifugal: outwards''; a small outward arrow on the thumbnail.
 
-    S9: a mini Earth outline exaggerated as an ellipse (''bulge''), keyword ''in gravity''; the centrifugal term struck
 
-    (slate strike) leaving ''du/dt = real pushes − 2Ω × u'' (96 px) as the main line.
 
-    '
-  voiceover: 'Now let''s add the pieces. A push for each kilogram is just an acceleration: how much the velocity changes every second. The change seen from
-    outside is the change of u that the rider sees, plus two Omega cross u, plus the leftover piece. Newton''s law says this equals the real pushes on each
-    kilogram, like the pressure push. Move the extra pieces to the other side, and the rider sees u change by the real pushes, minus two Omega cross u,
-    minus the leftover piece. So minus two Omega cross u is the Coriolis push, for each kilogram. The two comes from the two equal pieces, and the minus
-    from moving them to the rider''s side. The leftover piece is the centrifugal effect, pulling outwards from the axis. On Earth, the slight bulge at the
-    equator balances it, so it''s already part of gravity, and we can leave it out.'
+
+    U-CF (2026-10-29): S1 unchanged on screen (the s26f sum is the s27 ''change seen outside'' line). S3 and S5 unchanged on screen (the spoken ''leftover
+    piece'' is now said as ''Omega cross, open bracket, Omega cross r''). S8: ''−Ω × (Ω × r)'' highlighted slate with the underbrace ''centrifugal'' (was
+    ''centrifugal: outwards'') and the small outward arrow on the thumbnail. S9 (NEW words): NO strike, NO bulge ellipse, NO ''in gravity'' (moved to s27f);
+    the three-term line stays as the main line (84 px) with a gold ''?'' beside the slate term, handing over to s27a/s27b.'
+  voiceover: 'Now let''s put the sum to work. A push for each kilogram is just an acceleration: how much the velocity changes every second. The change seen
+    from outside is the change of u that the rider sees, plus two Omega cross u, plus Omega cross, open bracket, Omega cross r. Newton''s law says this
+    equals the real pushes on each kilogram, like the pressure push. Move the extra pieces to the other side, and the rider sees u change by the real pushes,
+    minus two Omega cross u, minus Omega cross, open bracket, Omega cross r. So minus two Omega cross u is the Coriolis push, for each kilogram. The two
+    comes from the two equal pieces, and the minus from moving them to the rider''s side. The leftover piece, minus Omega cross, open bracket, Omega cross
+    r, is called the centrifugal acceleration, and it pulls outwards from the axis. We''ll see why, and where it goes on Earth, right after we check the
+    minus sign.'
   on_screen_eq:
-    latex: \frac{d\mathbf u}{dt} = \text{real pushes} - 2\boldsymbol\Omega\times\mathbf u
-    vallis_eq: 'provenance only, not drawn: Vallis (2.12) (dv_R/dt)_R = (dv_I/dt)_I − 2Ω × v_R − Ω × (Ω × r) with the centrifugal term absorbed into gravity
-      (§2.1, page image checked)'
+    latex: \frac{d\mathbf u}{dt} = \text{real pushes} - 2\boldsymbol\Omega\times\mathbf u - \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)
+    vallis_eq: 'provenance only, not drawn: Vallis (2.12) (dv_R/dt)_R = (dv_I/dt)_I − 2Ω × v_R − Ω × (Ω × r) (page image p077 checked); the centrifugal
+      term is now named here and folded into g in s27e-s27f'
     page_png: chapters/pages/ch02/p077.png
   on_screen_eq_extra:
   - latex: \text{change seen outside} = \frac{d\mathbf u}{dt} + \boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf
       r)
     vallis_eq: 'provenance only: Vallis (2.10) with (2.11), constant Ω (page image checked)'
-    page_png: chapters/pages/ch02/p077.png
-  - latex: \frac{d\mathbf u}{dt} = \text{real pushes} - 2\boldsymbol\Omega\times\mathbf u - \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)
-    vallis_eq: 'provenance only: Vallis (2.12) (page image checked)'
     page_png: chapters/pages/ch02/p077.png
   physics_source:
     fn: fluidpy.core.rotating.frame_acceleration_terms
@@ -1862,28 +2200,33 @@ scenes:
     test: ../Fluid Dynamics/tests/test_ch04.py (frame_acceleration_terms V1 200 random cases, V2 sympy, "no factor 2" fails)
   exaggeration:
   - the bulge is drawn exaggerated (illustrative)
-  honesty: 'the centrifugal effect is not neglected but absorbed: on the real Earth, effective gravity (gravitation + centrifugal) is perpendicular to the
-    geoid, so the term does not appear as a separate horizontal push (said as "already part of gravity")'
-  v5: v4 fix 2, word-identical
+  honesty: 'the centrifugal term is named here and not dropped: s27b-s27g derive its size and direction and show that it is folded into effective gravity
+    g (Vallis §2.1-2.2.1)'
+  v5: 'v4 words kept except (2026-10-29, U-CF): S1 ''Now let''s add the pieces.'' → ''Now let''s put the sum to work.''; S3, S5 ''the leftover piece'' →
+    ''Omega cross, open bracket, Omega cross r''; S8-S9 ''The leftover piece is the centrifugal effect… leave it out.'' → named here, the bulge sentence
+    moved to s27f'
+  related:
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  - '#29 the Coriolis effect, in full detail'
 - id: s27a_minus_check
   t:
-  - 725.15
-  - 761.575
+  - 909.1
+  - 945.525
   sentence_times:
-  - - 725.15
-    - 727.175
-  - - 727.525
-    - 734.35
-  - - 734.7
-    - 740.35
-  - - 740.7
-    - 742.9
-  - - 743.25
-    - 749.95
-  - - 750.3
-    - 756.6
-  - - 756.95
-    - 760.775
+  - - 909.1
+    - 911.125
+  - - 911.475
+    - 918.3
+  - - 918.65
+    - 924.3
+  - - 924.65
+    - 926.85
+  - - 927.2
+    - 933.9
+  - - 934.25
+    - 940.55
+  - - 940.9
+    - 944.725
   status: new
   changes:
   - UV2-22
@@ -1941,29 +2284,637 @@ scenes:
   honesty: the readout shows the measured gap from the builder (the implementer measured 1.38e-11 m); if the builder's number differs the label shows its
     value, rounded up
   v5: v4 fix 2, word-identical
+- id: s27b_centrifugal
+  t:
+  - 945.525
+  - 1036.1
+  sentence_times:
+  - - 945.525
+    - 953.0
+  - - 953.35
+    - 957.4
+  - - 957.75
+    - 963.8
+  - - 964.15
+    - 972.65
+  - - 973.0
+    - 976.6
+  - - 976.95
+    - 986.55
+  - - 986.9
+    - 992.95
+  - - 993.3
+    - 1000.575
+  - - 1000.925
+    - 1009.675
+  - - 1010.025
+    - 1016.9
+  - - 1017.25
+    - 1028.1
+  - - 1029.6
+    - 1035.3
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#1b alternating tensor and triple products'
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  visual: 'NEW (U-CF2). NAMING THE LEFTOVER: THE VECTOR TRIPLE PRODUCT. Picture zone: the rider''s view of the disc (fixed on screen, centre (520, 450),
+    120 px/m) with the ball at r = (0, −2.5) m (the s27 ''terms'' point), teal-grey r from the hub, Ω ⊙ at the hub. Maths zone CalcStack (64-68 px, aligned
+    at ''='').
+
+    S1: ''−Ω × (Ω × r)'' (84 px, slate C.local).
+
+    S2: keyword ''depends on where, not how it moves'' (54 px); the ball''s u arrow fades, r stays.
+
+    S3: keyword ''vector triple product'' (54 px).
+
+    S4: on_screen_eq_extra 1 (68 px), p, q, s in muted teal / orange / warm white.
+
+    S5: gold mini arrows ''p, q → Ω'' and ''s → r'' (54 px).
+
+    S6: on_screen_eq_extra 2 (68 px).
+
+    S7: ''(Ω · Ω) = Ω²'' (60 px) with a gold link to the bracket.
+
+    S8: a side-view inset (x 600-980, y 600-840): the disc edge-on, Ω up, r flat, right-angle tick; ''Ω · r = 0'' (68 px); the Ω (Ω · r) term struck in
+    rose.
+
+    S9: on_screen_eq (84 px, gold underline); on the picture a slate arrow from the ball straight away from the hub, tip label ''Ω² r'', keyword ''outwards''.
+
+    S10: ''Ω = 0.5 rad/s'' and ''one turn ≈ 12.5 s'' (54 px).
+
+    S11: CalcStack on_screen_eq_extra 3 (68 px); a bracket ''2.5 m'' along r with a gold link to the 2.5 in the line; [beat].
+
+    S12: a small rider glyph near the rim leans outwards; keyword ''the rider''s outward pull'' (54 px).'
+  voiceover: Now let's look at the centrifugal acceleration, minus Omega cross, open bracket, Omega cross r. It depends only on where the ball is, not on
+    how it moves. To see which way it points, we use the vector triple product from the triple products video. It says that p cross, open bracket, q cross
+    s, equals q times p dot s, minus s times p dot q. Here p and q are both Omega, and s is r. So Omega cross, open bracket, Omega cross r, equals Omega
+    times Omega dot r, minus r times Omega dot Omega. Omega dot Omega is the length of Omega, squared, which we write Omega squared. On the merry-go-round,
+    r lies flat on the floor and Omega points straight up, so Omega dot r is zero. With the minus sign in front, the centrifugal acceleration is just Omega
+    squared times r, pointing straight out from the centre. Our merry-go-round turns at point five radians per second, about once every twelve and a half
+    seconds. So at two and a half metres from the centre, the centrifugal acceleration is point two five times two and a half, which is point six two five
+    metres per second squared. [beat] That's the outward pull a rider feels, as if something were trying to throw them off the edge.
+  on_screen_eq:
+    latex: -\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \Omega^2\,\mathbf r
+    vallis_eq: 'provenance only, not drawn: Vallis (2.13) F_ce = −Ω × (Ω × r) = Ω² r_⊥, here with r already perpendicular to Ω (flat disc) (page image p077
+      checked)'
+    page_png: chapters/pages/ch02/p077.png
+  on_screen_eq_extra:
+  - latex: \mathbf p\times(\mathbf q\times\mathbf s) = \mathbf q\,(\mathbf p\cdot\mathbf s) - \mathbf s\,(\mathbf p\cdot\mathbf q)
+    vallis_eq: 'provenance only: the vector identity stated before Vallis (2.13), Ω × (Ω × r_⊥) = (Ω · r_⊥)Ω − (Ω · Ω)r_⊥ (page image p077 checked); the
+      general form as in the #1b movie'
+    page_png: chapters/pages/ch02/p077.png
+  - latex: \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \boldsymbol\Omega\,(\boldsymbol\Omega\cdot\mathbf r) - \mathbf r\,(\boldsymbol\Omega\cdot\boldsymbol\Omega)
+    vallis_eq: 'provenance only: the identity with p = q = Ω, s = r (page image p077 checked)'
+    page_png: chapters/pages/ch02/p077.png
+  - latex: \Omega^2|\mathbf r| = 0.5^2\times2.5 = 0.25\times2.5 = 0.625\ \mathrm{m/s^2}
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.rotating.centrifugal_acceleration
+    params:
+      Omega:
+      - 0
+      - 0
+      - 0.5
+      x:
+      - 0
+      - -2.5
+      - 0
+    outputs:
+      centrifugal_m_s2:
+      - 0
+      - -0.625
+      - 0
+      magnitude: 0.625
+      direction: away from the hub (= 0.25 × r, CHECK)
+      turn_period_s: 12.566
+    also:
+    - fluidpy.geo.vectors.cross
+    - fluidpy.geo.vectors.dot (identity Ω × (Ω × r) = Ω(Ω · r) − (Ω · Ω) r, CHECK max |diff| = 0 for this case and < 1e-12 on 200 random vectors)
+    data: data/merry.json -> centrifugal (NEW, N23)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity
+  exaggeration:
+  - arrows on display scales
+  honesty: 'the outward pull exists only for the rider (rotating frame): from outside the ball needs no outward force; said as ''the outward pull a rider
+    feels, as if something were trying to throw them off'''
+  v5: 'new (2026-10-29, U-CF): the leftover named; −Ω × (Ω × r) = Ω² r via the vector triple product (#1b) on the flat disc; 0.625 m/s² at 2.5 m (user item
+    2)'
+- id: s27c_centrifugal_earth
+  t:
+  - 1036.1
+  - 1096.975
+  sentence_times:
+  - - 1036.1
+    - 1042.35
+  - - 1042.7
+    - 1052.5
+  - - 1052.85
+    - 1061.275
+  - - 1061.625
+    - 1069.075
+  - - 1069.425
+    - 1078.2
+  - - 1078.55
+    - 1087.6
+  - - 1087.95
+    - 1096.175
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  visual: 'NEW (U-CF2). ON EARTH: r SPLIT ALONG AND ACROSS THE AXIS (3-D). HalfEarth3D as s25a/s28a (face = meridian plane through 45°N, 1°E; camera az
+    25°, el 15°), gold axis, violet Ω, teal r to the pin, ''r = (4505, 0, 4505) km'' at r''s tip. data-source line ''Image: NASA Blue Marble Next Generation''
+    (SRC_BM) at the bottom of the picture, muted, >= 28 px.
+
+    S1: the angle arc between Ω and r at the centre, ''45°'' (the s25 θ); keyword ''not at right angles''.
+
+    S2: r''s two legs drawn on the face: slate dashed ''along the axis'' from the centre up the axis to the gold axis dot at 4505 km (the s25 ring centre),
+    and gold ''r⊥'' from the axis dot to the pin (the s25 ring radius); labels beside the legs (54 px); keyword ''r = along + r⊥''.
+
+    S3: ''Ω (Ω · r) = Ω² r_along'' (64 px), the slate leg pulses.
+
+    S4: on_screen_eq_extra 1 (68 px) with the two ''along'' terms struck in rose.
+
+    S5: the s25 ring of latitude drawn faintly round the axis; ''|r⊥| = a cos φ'' (68 px), gloss ''a: Earth''s radius'' (44 px); gold link from the ring
+    radius to a cos φ.
+
+    S6: on_screen_eq (T.eq 84, gold underline) and on_screen_eq_extra 2 (68 px); at the pin a slate arrow pointing straight away from the axis (parallel
+    to r⊥), tip label ''centrifugal''.
+
+    S7: the local ''up'' (k) and ''north'' arrows of s28a fade in at the pin (faint); a gold arc between ''up'' and the slate arrow, ''45°''; keyword ''leans
+    towards the equator''.'
+  voiceover: 'On Earth, r points from the centre to our place, and it isn''t at right angles to Omega. So let''s split r into two parts: one along Earth''s
+    axis, and one straight out from the axis, which we call r perp, short for perpendicular. In Omega times Omega dot r, only the part along the axis counts,
+    and it gives Omega squared times that part. So it cancels the same part of Omega squared times r, and what''s left is Omega squared times r perp. The
+    length of r perp is our distance from the axis: the radius of our circle of latitude, Earth''s radius times cosine phi. So the centrifugal acceleration
+    is Omega squared, times Earth''s radius, times cosine phi, pointing away from the axis. Notice its direction: it points away from the axis, not straight
+    up, so at forty five degrees it leans towards the equator.'
+  on_screen_eq:
+    latex: -\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \Omega^2\,\mathbf r_\perp
+    vallis_eq: 'provenance only, not drawn: Vallis (2.13) F_ce = −Ω × (Ω × r) = Ω² r_⊥ (page image p077 checked)'
+    page_png: chapters/pages/ch02/p077.png
+  on_screen_eq_extra:
+  - latex: \Omega^2\,\mathbf r - \Omega^2\,\mathbf r_{\text{along}} = \Omega^2\,\mathbf r_\perp
+    vallis_eq: 'provenance only: our step (r = r_along + r_⊥, Ω(Ω · r) = Ω² r_along)'
+    page_png: null
+  - latex: '|\Omega^2\,\mathbf r_\perp| = \Omega^2\,a\cos\varphi'
+    vallis_eq: 'provenance only, not drawn: magnitude Ω² r_⊥ with r_⊥ = r cos ϑ under Vallis (2.23) (page image p079 checked); ϑ written φ, r = a'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.rotating.centrifugal_acceleration
+    params:
+      Omega:
+      - 0
+      - 0
+      - 7.292115e-05
+      x: a (cos φ, 0, sin φ), a = 6 371 000 m, φ = 45°
+    outputs:
+      centrifugal_m_s2:
+      - 0.023955
+      - 0
+      - 0
+      r_perp_km: 4504.98
+      r_along_km: 4504.98
+      up_part_m_s2: 0.016939
+      north_part_m_s2: -0.016939
+      angle_from_up_deg: 45.0
+    also:
+    - fluidpy.geo.vectors.dot / cross (r_along = Ω(Ω · r)/Ω², r_along + r⊥ = r, identity CHECK < 1e-15)
+    - fluidpy.core.gfd.earth_rotation_local (local east/north/up axes)
+    - fluidpy.geo.constants.EARTH_RADIUS
+    data: data/earth.json -> centrifugal (NEW, N24)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity
+  exaggeration:
+  - half-Earth slice; arrows on display scales
+  v5: 'new (2026-10-29, U-CF): on Earth −Ω × (Ω × r) = Ω² r⊥, size Ω² a cos φ, pointing away from the axis, leaning towards the equator (user item 2)'
+- id: s27d_centrifugal_size
+  t:
+  - 1096.975
+  - 1145.4
+  sentence_times:
+  - - 1096.975
+    - 1099.0
+  - - 1099.35
+    - 1105.725
+  - - 1106.075
+    - 1115.875
+  - - 1117.375
+    - 1127.4
+  - - 1127.75
+    - 1132.075
+  - - 1132.425
+    - 1137.125
+  - - 1137.475
+    - 1144.6
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  visual: 'NEW (U-CF2). HOW BIG? Picture zone: Globe3D whole (untilted axis, camera lat 20°N, lon −20°, dist 3.4; camera continuity from s27c) with slate
+    centrifugal arrows at the equator, 45°N and the North Pole, each pointing away from the axis (length ∝ Ω² a cos φ on a display scale), a gold dot at
+    the pole with no arrow. data-source line ''Image: NASA Blue Marble Next Generation'' (SRC_BM) at the bottom of the picture, muted, >= 28 px. Maths zone
+    CalcStack 68 px.
+
+    S1: keyword ''how big?'' (54 px).
+
+    S2: on_screen_eq_extra 1.
+
+    S3: the camera eases towards the equator pin; on_screen_eq (68 px) with a gold link from the pin''s arrow; [beat].
+
+    S4: camera to 45°N; on_screen_eq_extra 2; gold link from the s27c ring radius label ''4505 km''.
+
+    S5: camera to the pole; ''poles: 0'' (68 px), the axis passes through the pin.
+
+    S6: two bars on one zero line (house Balance style): ''g ≈ 9.81 m/s²'' (brown, cut with a break mark, value written).
+
+    S7: beside it ''centrifugal ≈ 0.034 m/s²'' (slate sliver); label ''≈ ⅓ %'' (54 px).'
+  voiceover: How big is it on Earth? Omega squared is about five point three two times ten to the minus nine per second squared. At the equator, times six
+    million three hundred and seventy one thousand metres, that's about zero point zero three four metres per second squared. [beat] At forty five degrees,
+    our distance from the axis is about four thousand five hundred and five kilometres, so it's about zero point zero two four. At the poles, it's zero,
+    because the poles sit on the axis. Gravity is about nine point eight one metres per second squared. So even at the equator, the centrifugal acceleration
+    is only about a third of one percent of gravity.
+  on_screen_eq:
+    latex: 5.32\times10^{-9}\times6\,371\,000\ \mathrm m \approx 0.034\ \mathrm{m/s^2}
+    vallis_eq: 'provenance only: Ω² a at the equator (our numbers; Vallis (2.25) makes the same estimate, page image p079 checked)'
+    page_png: chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: \Omega^2 = (7.29\times10^{-5})^2 \approx 5.32\times10^{-9}\ \mathrm{s^{-2}}
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  - latex: 5.32\times10^{-9}\times4\,505\,000\ \mathrm m \approx 0.024\ \mathrm{m/s^2}
+    vallis_eq: 'provenance only: our numbers'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.rotating.centrifugal_acceleration
+    params:
+      Omega:
+      - 0
+      - 0
+      - 7.292115e-05
+      lat_deg:
+      - 0
+      - 45
+      - 90
+      a_m: 6371000
+    outputs:
+      magnitude_m_s2:
+      - 0.033878
+      - 0.023955
+      - 0.0
+      Omega_sq_s2: 5.3175e-09
+      ratio_to_g0_percent:
+      - 0.345
+      - 0.244
+      - 0.0
+    also:
+    - fluidpy.geo.constants.OMEGA
+    - fluidpy.geo.constants.EARTH_RADIUS
+    - fluidpy.geo.constants.G0 (9.80665, shown ≈ 9.81)
+    data: data/earth.json -> centrifugal (NEW, N24)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity, ::test_earth_rotation_V5_wgs84_numbers
+  exaggeration:
+  - arrows on a display scale; the g bar is cut, its value written
+  v5: 'new (2026-10-29, U-CF): sizes on Earth: ≈ 0.034 m/s² at the equator, ≈ 0.024 at 45°, 0 at the poles, ≈ 1/3 % of g (user item 2)'
+- id: s27e_effective_gravity
+  t:
+  - 1145.4
+  - 1205.45
+  sentence_times:
+  - - 1145.4
+    - 1149.25
+  - - 1149.6
+    - 1151.925
+  - - 1152.275
+    - 1160.85
+  - - 1161.2
+    - 1163.35
+  - - 1163.7
+    - 1168.875
+  - - 1169.225
+    - 1173.975
+  - - 1174.325
+    - 1180.05
+  - - 1180.4
+    - 1189.225
+  - - 1189.575
+    - 1199.55
+  - - 1199.9
+    - 1204.65
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  - '#29A from F = ma to the atmosphere''s equation of motion'
+  visual: 'NEW (U-CF3). EFFECTIVE GRAVITY. Picture zone: HalfEarth3D as s27c, pin at 45°N, the slate centrifugal arrow at the pin. data-source line ''Image:
+    NASA Blue Marble Next Generation'' (SRC_BM) at the bottom of the picture, muted, >= 28 px.
+
+    S1: keyword ''why only g?'' (54 px).
+
+    S2: keyword ''never alone''.
+
+    S3: a brown arrow at the pin pointing to Earth''s centre (display scale, long), gloss ''gravitational attraction'' (44 px).
+
+    S4: tip label ''g*'' (brown).
+
+    S5: keyword ''both depend only on where'' with gold pointers to the brown and the slate arrow.
+
+    S6: head-to-tail sum at the pin (the slate arrow drawn ×50 longer than its true ratio to g*, so the tilt can be seen); the resultant brown ''g'', tip
+    label ''g'', gloss ''effective gravity''.
+
+    S7: on_screen_eq (T.eq 84, g brown, the centrifugal term slate).
+
+    S8: three small code-drawn icons in a row at the bottom of the maths zone: a plumb bob, a bathroom scale, a dropped ball, each with a short brown arrow
+    along g; keyword ''the g of weather equations'' (54 px).
+
+    S9: on_screen_eq_extra 1 (84 px), underbrace ''pressure push, …'' under ''other pushes''.
+
+    S10: a gold underbrace under g: ''g* − Ω × (Ω × r)'' (54 px, the centrifugal part slate).'
+  voiceover: 'So why don''t weather equations have a centrifugal term? Because it never acts alone. One of the real pushes on every kilogram of air is Earth''s
+    gravitational attraction, which pulls it almost straight towards Earth''s centre. Let''s write it g star. Like the centrifugal acceleration, it depends
+    only on where the air is. So we add the two together, and call the sum effective gravity, g. g equals g star, minus Omega cross, open bracket, Omega
+    cross r. This is the gravity that a plumb line, a bathroom scale, or a dropped ball feels, and it''s the g in every weather equation. So the rider''s
+    equation becomes: d u by d t equals the other real pushes, like the pressure push, plus g, minus two Omega cross u. The centrifugal acceleration is
+    still there, just folded into g.'
+  on_screen_eq:
+    latex: \mathbf g = \mathbf g^{*} - \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)
+    vallis_eq: 'provenance only, not drawn: Vallis (2.23) g ≡ g_eff = g_grav + Ω² r_⊥ (page image p079 checked); g* for g_grav'
+    page_png: chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: \frac{d\mathbf u}{dt} = \text{other pushes} + \mathbf g - 2\boldsymbol\Omega\times\mathbf u
+    vallis_eq: 'provenance only, not drawn: Vallis (2.16) Dv/Dt + 2Ω × v = −(1/ρ)∇p − ∇Φ, ''incorporating the centrifugal term into the potential Φ'' (page
+      image p078 checked), with g = −∇Φ ((2.24), p079)'
+    page_png: chapters/pages/ch02/p078.png
+  physics_source:
+    fn: fluidpy.core.rotating.effective_gravity
+    params:
+      lat_deg: 45.0
+      g_n: GM / a² = 9.8203 m/s² (WGS-84 GM = 3.986004418e14 m³/s², cited)
+      a_m: 6371000
+      Omega: 7.292115e-05
+    outputs:
+      g_e_m_s2: 9.8033
+      deflection_deg: 0.099
+    also:
+    - fluidpy.core.rotating.apparent_body_forces (gravity + centrifugal for u' = 0 equals the effective-gravity vector, CHECK)
+    - fluidpy.core.rotating.centrifugal_acceleration
+    data: data/earth.json -> effective_gravity (NEW, N24)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity
+  exaggeration:
+  - the centrifugal arrow is drawn ×50 against g* in the head-to-tail sum (true tilt ≈ 0.1°, said in s27g)
+  - half-Earth slice
+  honesty: Earth's attraction points 'almost straight' to the centre (the oblate Earth's own pull deviates slightly; said in s27g); the sum is the effective
+    gravity g of weather equations
+  v5: 'new (2026-10-29, U-CF): the centrifugal term is folded into effective gravity g = g* − Ω × (Ω × r); the rider''s equation then shows only g (user
+    item 3)'
+- id: s27f_level_sea
+  t:
+  - 1205.45
+  - 1286.025
+  sentence_times:
+  - - 1205.45
+    - 1209.75
+  - - 1210.1
+    - 1217.55
+  - - 1217.9
+    - 1223.075
+  - - 1223.425
+    - 1231.0
+  - - 1231.35
+    - 1240.475
+  - - 1241.975
+    - 1252.225
+  - - 1252.575
+    - 1261.125
+  - - 1261.475
+    - 1269.275
+  - - 1269.625
+    - 1276.325
+  - - 1276.675
+    - 1285.225
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  - '#29A from F = ma to the atmosphere''s equation of motion'
+  visual: 'NEW (U-CF3). WHY g HAS NO SIDEWAYS PART. Two meridian cross-sections side by side (SVG, 2-D): x 80-520 and 540-980, y 160-820, each Earth''s
+    outline through the axis, gold axis, violet Ω at the top.
+
+    LEFT ''round Earth'' (keyword under it): a circle; at 45°N brown g* to the centre, the slate centrifugal arrow (×50), their sum g. RIGHT ''real Earth''
+    (keyword under it): an ellipse with the flattening exaggerated ×50 (axis ratio 0.83), at 45° the sum g exactly at right angles to the surface (gold
+    right-angle tick).
+
+    S1: both outlines; keyword ''its direction'' (54 px) in the maths zone.
+
+    S2: left panel: g* and the slate arrow build.
+
+    S3: their sum g leans; its part along the ground appears as a short rose arrow towards the equator, label ''sideways part''.
+
+    S4: on_screen_eq (68 px) with a gold link from the rose arrow.
+
+    S5: on_screen_eq_extra 1 (68 px, violet ''Coriolis''); [beat].
+
+    S6: ''> 10 ×'' (68 px, gold); on the left panel a thin blue water layer slides towards the equator and thickens there (6 s, schematic); keyword ''oceans
+    pile up at the equator''.
+
+    S7: the right panel lights; its bulge highlighted gold; keyword ''flattened · bulge''.
+
+    S8: the sea surface on the right drawn as a thin blue rim; the right-angle tick between g and the surface pulses; keyword ''level: g ⟂ sea surface''.
+
+    S9: ''up = against g'' (54 px) with a short warm-white arrow opposite g at the pin; ''no sideways part'' (54 px).
+
+    S10: keyword ''in gravity'' (the v4 s27 keyword, kept) and ''g = g* − Ω × (Ω × r)'' (68 px) with the slate term dimming inside g.'
+  voiceover: 'Effective gravity has one more surprise: its direction. On a perfectly round Earth, g star would point to the centre, but the centrifugal
+    part points away from the axis. So their sum would lean slightly towards the equator, with a part along the ground. At forty five degrees, that sideways
+    part would be about zero point zero one seven metres per second squared. A wind of ten metres per second gets a Coriolis push of at most two Omega times
+    ten, about zero point zero zero one five. [beat] So on a round Earth, the sideways pull would be more than ten times stronger than the Coriolis push,
+    and the oceans would flow towards the equator and pile up there. In fact, over its long history, Earth''s rock and water have settled into a slightly
+    flattened shape, with a bulge at the equator. On that shape, the sea surface is level: effective gravity points straight down into it, with no sideways
+    part. So in weather equations, up means straight against g, and g never pushes the wind sideways. On Earth, the slight bulge at the equator balances
+    the centrifugal effect, so it''s already part of gravity, and we can leave it out.'
+  on_screen_eq:
+    latex: \text{sideways} \approx 0.017\ \mathrm{m/s^2}
+    vallis_eq: 'provenance only: the horizontal centrifugal component Ω² a cos φ sin φ at 45° on a sphere (Vallis text before (2.25) and (2.26), page image
+      p079 checked; our numbers)'
+    page_png: chapters/pages/ch02/p079.png
+  on_screen_eq_extra:
+  - latex: \text{Coriolis} \le 2\Omega\times10 \approx 0.0015\ \mathrm{m/s^2}
+    vallis_eq: 'provenance only: |2Ω × u| ≤ 2Ω|u| for |u| = 10 m/s (Vallis (2.26) makes the same comparison, page image p079 checked; our numbers)'
+    page_png: chapters/pages/ch02/p079.png
+  physics_source:
+    fn: fluidpy.core.rotating.centrifugal_acceleration
+    params:
+      Omega:
+      - 0
+      - 0
+      - 7.292115e-05
+      x: a (cos 45°, 0, sin 45°)
+      a_m: 6371000
+    outputs:
+      north_part_m_s2: -0.016939
+      sense: towards the equator (CHECK)
+      coriolis_10ms_m_s2: 0.0014584
+      ratio: 11.6
+    also:
+    - fluidpy.geo.vectors.dot (projection on local north)
+    - fluidpy.core.rotating.coriolis_acceleration with fluidpy.core.gfd.earth_rotation_local(45°) and u = (10, 0, 0) (|−2Ω × u| = 2Ω × 10 = 1.4584e-3, CHECK)
+    - fluidpy.core.rotating.earth_oblateness_diameter (the ellipse's true ratio before the ×50)
+    data: data/earth.json -> sideways (NEW, N24)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity, ::test_earth_rotation_V5_wgs84_numbers
+  exaggeration:
+  - flattening drawn ×50; centrifugal arrows ×50 against g*
+  - 'illustrative: the ocean sliding to the equator on a round Earth is a thought experiment (said with ''would''), schematic'
+  honesty: the real sea surface (the geoid) is a surface of constant geopotential, so effective gravity is normal to it; Earth's flattening is the equilibrium
+    shape of a spinning body (said as 'settled into a slightly flattened shape')
+  v5: 'new (2026-10-29, U-CF): why weather equations have no sideways centrifugal push: on a sphere it would be > 10 × the Coriolis push; the flattened
+    Earth makes the sea level ⟂ g; the v4 ''bulge ... part of gravity ... leave it out'' sentence moved here (user item 3)'
+- id: s27g_three_traces
+  t:
+  - 1286.025
+  - 1368.55
+  sentence_times:
+  - - 1286.025
+    - 1289.7
+  - - 1290.05
+    - 1293.45
+  - - 1293.8
+    - 1302.325
+  - - 1302.675
+    - 1307.225
+  - - 1307.575
+    - 1313.15
+  - - 1313.5
+    - 1319.9
+  - - 1320.25
+    - 1328.075
+  - - 1328.425
+    - 1336.75
+  - - 1337.1
+    - 1344.075
+  - - 1344.425
+    - 1350.825
+  - - 1352.325
+    - 1362.175
+  - - 1362.525
+    - 1367.75
+  status: new
+  changes:
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
+  split: 2b
+  related:
+  - '#28B circular motion: centripetal acceleration and centrifugal force'
+  - '#29 the Coriolis effect, in full detail'
+  - '#29B centripetal vs centrifugal vs Coriolis'
+  visual: 'NEW (U-CF3). THREE TRACES OF THE SPIN. Picture zone changes per trace; maths zone the numbers (68 px).
+
+    S1: three small code-drawn icons in a row at the top of the picture zone: a weight on a spring (gravity meter), a plumb bob, an Earth outline; each
+    lights in turn with its trace.
+
+    S2-S3: Globe3D whole (untilted, camera lat 0°, lon −20°) with gold links from the equator and the North Pole to ''equator: 9.78 m/s²'' and ''poles:
+    9.83 m/s²''. Data-source line ''Image: NASA Blue Marble Next Generation · gravity: WGS 84 normal gravity''.
+
+    S4: a bar of the difference split into slate ''spin ≈ ⅔'' and brown ''bulge: the rest'' (54 px; every number shown is spoken).
+
+    S5: the flattened outline (×50) behind the globe; a bracket ''farther from the centre'' at the equator.
+
+    S6: a large meridian cross-section (SVG), a plumb bob hanging at 45°N, its string continued as a dashed line into Earth passing beside the centre (angle
+    exaggerated ×50); a gold arc at the bob between the string and the line to the centre.
+
+    S7: ''round Earth, spin alone: ≈ 0.1°'' (68 px).
+
+    S8: the outline flattens (×50) and the dashed line swings further; ''real Earth: ≈ 0.2°'' (68 px) = ''about a fifth of a degree''.
+
+    S9: brackets ''equator radius'' and ''polar radius'' on the ×50 outline; ''+21 km'' at the equator (68 px).
+
+    S10: ''≈ 1 part in 300'' (68 px); the true-scale outline drawn over it in faint warm white (it looks like a circle); keyword ''almost a sphere''; [beat].
+
+    S11: two faint thumbnails: a ball on a string (''circular motion'') and the globe with curving tracks (''Coriolis''); keyword ''later videos'' (54 px).
+
+    S12: the half-Earth of s28a fades in (camera continuity into s28a).'
+  voiceover: 'We can see the centrifugal effect in three places. First, gravity is weaker at the equator. Carefully measured, it''s about nine point seven
+    eight metres per second squared at the equator, and nine point eight three at the poles. The centrifugal pull explains about two thirds of that difference.
+    The rest comes from the bulge itself, which puts the equator farther from Earth''s centre. Second, a plumb line, a weight hanging on a string, doesn''t
+    point exactly at Earth''s centre. On a round Earth, the spin alone would tilt it by up to about a tenth of a degree, near forty five degrees latitude.
+    On the real, flattened Earth, the bulge''s own pull adds about as much again, so the tilt reaches about a fifth of a degree. Third, Earth''s shape:
+    its radius at the equator is about twenty one kilometres larger than at the poles. That''s only about one part in three hundred, so for everything else,
+    we can treat Earth as a sphere. [beat] The video on circular motion builds the centrifugal effect from scratch, and the Coriolis video goes through
+    this whole derivation in more detail. Now let''s go back to the Coriolis push, and see how it works on the spinning Earth.'
+  on_screen_eq:
+    latex: g_{\text{equator}} \approx 9.78\ \mathrm{m/s^2},\quad g_{\text{poles}} \approx 9.83\ \mathrm{m/s^2}
+    vallis_eq: 'provenance only: cited WGS-84 normal gravity (NIMA TR8350.2, 3rd ed., 2000): γe = 9.7803253359, γp = 9.8321849378 m/s²; Vallis p080 gives
+      the polar and equatorial diameters (page image checked)'
+    page_png: chapters/pages/ch02/p080.png
+  on_screen_eq_extra:
+  - latex: \text{tilt} \approx 0.1^\circ \;\to\; \approx 0.2^\circ
+    vallis_eq: 'provenance only: spherical model by fluidpy.core.rotating.effective_gravity (max 0.0990° at 44.95°); real Earth = geodetic minus geocentric
+      latitude, max 0.1924° at 45° (WGS-84 e², cited); Vallis p079 ''typically around 3e-3 radians'''
+    page_png: chapters/pages/ch02/p079.png
+  - latex: a_{\text{equator}} - a_{\text{poles}} \approx 21\ \mathrm{km} \approx \tfrac{1}{300}\,a
+    vallis_eq: 'provenance only: WGS-84 a − b = 21.385 km, 1/f = 298.257 (fluidpy.core.rotating.earth_oblateness_diameter / 2; Vallis p080: diameters 12
+      714 and 12 756 km, page image checked)'
+    page_png: chapters/pages/ch02/p080.png
+  physics_source:
+    fn: fluidpy.core.rotating.effective_gravity
+    params:
+      lat_deg: 0 .. 90 (9001 samples)
+      g_n: 9.8203
+      a_m: 6371000
+      Omega: 7.292115e-05
+    outputs:
+      max_deflection_deg: 0.099
+      at_lat_deg: 44.95
+      sphere_equator_minus_pole_m_s2: 0.03388
+      spin_share_of_normal_gravity_difference: 0.654
+      geodetic_minus_geocentric_max_deg: 0.1924 at 45° (builder-local from cited WGS-84 e²; implementer need I5)
+      radius_difference_km: 21.385
+      inverse_flattening: 298.257
+    also:
+    - fluidpy.core.rotating.earth_oblateness_diameter (42.769 km → 21.385 km)
+    - fluidpy.core.rotating.centrifugal_acceleration (Ω² a_WGS84 = 0.033916 m/s²)
+    cited:
+    - WGS-84 normal gravity γe = 9.7803253359 m/s², γp = 9.8321849378 m/s² (NIMA TR8350.2, 3rd ed., 2000, ch. 4)
+    - WGS-84 a = 6378137 m, 1/f = 298.257223563, e² = 6.69437999014e-3, GM = 3.986004418e14 m³/s² (NIMA TR8350.2, ch. 3)
+    data: data/earth.json -> three_traces (NEW, N24)
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity, ::test_earth_rotation_V5_wgs84_numbers
+  exaggeration:
+  - flattening and the plumb-line angle drawn ×50; the true-scale outline is shown for comparison
+  honesty: the spin explains ≈ 2/3 of the equator-pole gravity difference (0.0339 of 0.0519 m/s²); the rest is the bulge (the equator farther from the centre,
+    and the extra mass there); the plumb-line angle 0.1° is the spin alone on a sphere, ≈ 0.19° on the real ellipsoid, both said
+  v5: 'new (2026-10-29, U-CF): where it shows: g 9.78 vs 9.83 m/s², the plumb line (0.1° → 0.2°), the 21-km bulge; pointers to #28B and #29; bridge back
+    to the Coriolis push (user item 3)'
 - id: s28a_local_axes
   t:
-  - 761.575
-  - 818.825
+  - 1368.55
+  - 1425.8
   sentence_times:
-  - - 761.575
-    - 766.075
-  - - 766.425
-    - 773.725
-  - - 774.075
-    - 776.9
-  - - 777.25
-    - 781.425
-  - - 781.775
-    - 789.55
-  - - 789.9
-    - 798.925
-  - - 799.275
-    - 805.375
-  - - 805.725
-    - 811.5
-  - - 811.85
-    - 818.025
+  - - 1368.55
+    - 1373.05
+  - - 1373.4
+    - 1380.7
+  - - 1381.05
+    - 1383.875
+  - - 1384.225
+    - 1388.4
+  - - 1388.75
+    - 1396.525
+  - - 1396.875
+    - 1405.9
+  - - 1406.25
+    - 1412.35
+  - - 1412.7
+    - 1418.475
+  - - 1418.825
+    - 1425.0
   status: new
   changes:
   - UV2-21
@@ -2052,21 +3003,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28b_components
   t:
-  - 818.825
-  - 860.775
+  - 1425.8
+  - 1467.75
   sentence_times:
-  - - 818.825
-    - 823.55
-  - - 823.9
-    - 830.05
-  - - 830.4
-    - 833.95
-  - - 834.3
-    - 842.85
-  - - 843.2
-    - 850.55
-  - - 850.9
-    - 859.975
+  - - 1425.8
+    - 1430.525
+  - - 1430.875
+    - 1437.025
+  - - 1437.375
+    - 1440.925
+  - - 1441.275
+    - 1449.825
+  - - 1450.175
+    - 1457.525
+  - - 1457.875
+    - 1466.95
   status: new
   changes:
   - UV2-23
@@ -2122,23 +3073,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28c_flat_part
   t:
-  - 860.775
-  - 907.55
+  - 1467.75
+  - 1514.525
   sentence_times:
-  - - 860.775
-    - 863.225
-  - - 863.575
-    - 868.65
-  - - 869.0
-    - 876.375
-  - - 876.725
-    - 884.75
-  - - 885.1
-    - 887.825
-  - - 888.175
-    - 900.275
-  - - 900.625
-    - 906.75
+  - - 1467.75
+    - 1470.2
+  - - 1470.55
+    - 1475.625
+  - - 1475.975
+    - 1483.35
+  - - 1483.7
+    - 1491.725
+  - - 1492.075
+    - 1494.8
+  - - 1495.15
+    - 1507.25
+  - - 1507.6
+    - 1513.725
   status: new
   changes:
   - UV2-24
@@ -2206,25 +3157,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s28_f
   t:
-  - 907.55
-  - 957.325
+  - 1514.525
+  - 1564.3
   sentence_times:
-  - - 907.55
-    - 912.675
-  - - 913.025
-    - 918.35
-  - - 918.7
-    - 924.0
-  - - 924.35
-    - 930.125
-  - - 930.475
-    - 933.925
-  - - 934.275
-    - 942.9
-  - - 943.25
-    - 948.425
-  - - 949.925
-    - 956.525
+  - - 1514.525
+    - 1519.65
+  - - 1520.0
+    - 1525.325
+  - - 1525.675
+    - 1530.975
+  - - 1531.325
+    - 1537.1
+  - - 1537.45
+    - 1540.9
+  - - 1541.25
+    - 1549.875
+  - - 1550.225
+    - 1555.4
+  - - 1556.9
+    - 1563.5
   status: changed
   changes:
   - UV2-23
@@ -2284,19 +3235,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s29_turn_rule
   t:
-  - 957.325
-  - 985.175
+  - 1564.3
+  - 1592.15
   sentence_times:
-  - - 957.325
-    - 959.875
-  - - 960.225
-    - 967.6
-  - - 967.95
-    - 973.85
-  - - 974.2
-    - 979.8
-  - - 980.15
-    - 984.375
+  - - 1564.3
+    - 1566.85
+  - - 1567.2
+    - 1574.575
+  - - 1574.925
+    - 1580.825
+  - - 1581.175
+    - 1586.775
+  - - 1587.125
+    - 1591.35
   status: changed
   changes:
   - UV2-24
@@ -2359,23 +3310,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s30_coriolis_size
   t:
-  - 985.175
-  - 1023.175
+  - 1592.15
+  - 1630.15
   sentence_times:
-  - - 985.175
-    - 986.95
-  - - 987.3
-    - 991.875
-  - - 992.225
-    - 999.35
-  - - 999.7
-    - 1003.7
-  - - 1005.2
-    - 1010.95
-  - - 1011.3
-    - 1017.975
-  - - 1018.325
-    - 1022.375
+  - - 1592.15
+    - 1593.925
+  - - 1594.275
+    - 1598.85
+  - - 1599.2
+    - 1606.325
+  - - 1606.675
+    - 1610.675
+  - - 1612.175
+    - 1617.925
+  - - 1618.275
+    - 1624.95
+  - - 1625.3
+    - 1629.35
   status: changed
   changes:
   - UV2-16
@@ -2431,21 +3382,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s31_globe_paths
   t:
-  - 1023.175
-  - 1058.2
+  - 1630.15
+  - 1665.175
   sentence_times:
-  - - 1023.175
-    - 1025.55
-  - - 1025.9
-    - 1036.875
-  - - 1037.225
-    - 1043.35
-  - - 1043.7
-    - 1047.175
-  - - 1047.525
-    - 1051.1
-  - - 1051.45
-    - 1057.4
+  - - 1630.15
+    - 1632.525
+  - - 1632.875
+    - 1643.85
+  - - 1644.2
+    - 1650.325
+  - - 1650.675
+    - 1654.15
+  - - 1654.5
+    - 1658.075
+  - - 1658.425
+    - 1664.375
   status: changed
   changes:
   - UV2-25
@@ -2528,23 +3479,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s32_reanalysis
   t:
-  - 1058.2
-  - 1091.1
+  - 1665.175
+  - 1698.075
   sentence_times:
-  - - 1058.2
-    - 1060.55
-  - - 1060.9
-    - 1067.25
-  - - 1067.6
-    - 1072.825
-  - - 1073.175
-    - 1078.925
-  - - 1079.275
-    - 1082.425
-  - - 1082.775
-    - 1087.4
-  - - 1087.75
-    - 1090.3
+  - - 1665.175
+    - 1667.525
+  - - 1667.875
+    - 1674.225
+  - - 1674.575
+    - 1679.8
+  - - 1680.15
+    - 1685.9
+  - - 1686.25
+    - 1689.4
+  - - 1689.75
+    - 1694.375
+  - - 1694.725
+    - 1697.275
   status: changed
   changes:
   - UV2-14
@@ -2605,21 +3556,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s33_trades
   t:
-  - 1091.1
-  - 1136.1
+  - 1698.075
+  - 1743.075
   sentence_times:
-  - - 1091.1
-    - 1094.6
-  - - 1094.95
-    - 1103.975
-  - - 1104.325
-    - 1112.525
-  - - 1112.875
-    - 1118.95
-  - - 1119.3
-    - 1127.1
-  - - 1127.45
-    - 1135.3
+  - - 1698.075
+    - 1701.575
+  - - 1701.925
+    - 1710.95
+  - - 1711.3
+    - 1719.5
+  - - 1719.85
+    - 1725.925
+  - - 1726.275
+    - 1734.075
+  - - 1734.425
+    - 1742.275
   status: changed
   changes:
   - UV2-27
@@ -2689,21 +3640,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s34_westerlies
   t:
-  - 1136.1
-  - 1180.475
+  - 1743.075
+  - 1787.45
   sentence_times:
-  - - 1136.1
-    - 1140.625
-  - - 1140.975
-    - 1146.425
-  - - 1146.775
-    - 1152.825
-  - - 1153.175
-    - 1159.125
-  - - 1159.475
-    - 1171.35
-  - - 1171.7
-    - 1179.675
+  - - 1743.075
+    - 1747.6
+  - - 1747.95
+    - 1753.4
+  - - 1753.75
+    - 1759.8
+  - - 1760.15
+    - 1766.1
+  - - 1766.45
+    - 1778.325
+  - - 1778.675
+    - 1786.65
   status: changed
   changes:
   - UV2-28
@@ -2754,17 +3705,17 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s35_storms
   t:
-  - 1180.475
-  - 1200.55
+  - 1787.45
+  - 1807.525
   sentence_times:
-  - - 1180.475
-    - 1184.15
-  - - 1184.5
-    - 1189.25
-  - - 1189.6
-    - 1194.6
-  - - 1194.95
-    - 1199.75
+  - - 1787.45
+    - 1791.125
+  - - 1791.475
+    - 1796.225
+  - - 1796.575
+    - 1801.575
+  - - 1801.925
+    - 1806.725
   status: changed
   changes:
   - UV2-14
@@ -2817,23 +3768,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s36_ian
   t:
-  - 1200.55
-  - 1257.25
+  - 1807.525
+  - 1864.225
   sentence_times:
-  - - 1200.55
-    - 1207.55
-  - - 1207.9
-    - 1215.775
-  - - 1216.125
-    - 1225.975
-  - - 1226.325
-    - 1232.925
-  - - 1233.275
-    - 1243.35
-  - - 1243.7
-    - 1249.95
-  - - 1250.3
-    - 1256.45
+  - - 1807.525
+    - 1814.525
+  - - 1814.875
+    - 1822.75
+  - - 1823.1
+    - 1832.95
+  - - 1833.3
+    - 1839.9
+  - - 1840.25
+    - 1850.325
+  - - 1850.675
+    - 1856.925
+  - - 1857.275
+    - 1863.425
   status: changed
   changes:
   - length
@@ -2884,23 +3835,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s37_idai
   t:
-  - 1257.25
-  - 1299.625
+  - 1864.225
+  - 1906.6
   sentence_times:
-  - - 1257.25
-    - 1259.45
-  - - 1259.8
-    - 1269.275
-  - - 1269.625
-    - 1273.925
-  - - 1274.275
-    - 1282.95
-  - - 1283.3
-    - 1286.1
-  - - 1286.45
-    - 1294.775
-  - - 1295.125
-    - 1298.825
+  - - 1864.225
+    - 1866.425
+  - - 1866.775
+    - 1876.25
+  - - 1876.6
+    - 1880.9
+  - - 1881.25
+    - 1889.925
+  - - 1890.275
+    - 1893.075
+  - - 1893.425
+    - 1901.75
+  - - 1902.1
+    - 1905.8
   status: changed
   changes:
   - length
@@ -2939,21 +3890,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s38_spin_sign
   t:
-  - 1299.625
-  - 1331.925
+  - 1906.6
+  - 1938.9
   sentence_times:
-  - - 1299.625
-    - 1302.925
-  - - 1303.275
-    - 1310.225
-  - - 1310.575
-    - 1317.95
-  - - 1318.3
-    - 1321.8
-  - - 1322.15
-    - 1326.525
-  - - 1326.875
-    - 1331.125
+  - - 1906.6
+    - 1909.9
+  - - 1910.25
+    - 1917.2
+  - - 1917.55
+    - 1924.925
+  - - 1925.275
+    - 1928.775
+  - - 1929.125
+    - 1933.5
+  - - 1933.85
+    - 1938.1
   status: changed
   changes:
   - UV2-28
@@ -2997,21 +3948,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s39_isobars
   t:
-  - 1331.925
-  - 1362.2
+  - 1938.9
+  - 1969.175
   sentence_times:
-  - - 1331.925
-    - 1337.05
-  - - 1337.4
-    - 1340.05
-  - - 1340.4
-    - 1347.0
-  - - 1347.35
-    - 1351.15
-  - - 1351.5
-    - 1356.425
-  - - 1356.775
-    - 1361.4
+  - - 1938.9
+    - 1944.025
+  - - 1944.375
+    - 1947.025
+  - - 1947.375
+    - 1953.975
+  - - 1954.325
+    - 1958.125
+  - - 1958.475
+    - 1963.4
+  - - 1963.75
+    - 1968.375
   status: changed
   changes:
   - UV2-29
@@ -3073,21 +4024,21 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s40_pressure_push
   t:
-  - 1362.2
-  - 1393.65
+  - 1969.175
+  - 2000.625
   sentence_times:
-  - - 1362.2
-    - 1364.525
-  - - 1364.875
-    - 1370.4
-  - - 1370.75
-    - 1376.025
-  - - 1376.375
-    - 1380.45
-  - - 1380.8
-    - 1386.6
-  - - 1386.95
-    - 1392.85
+  - - 1969.175
+    - 1971.5
+  - - 1971.85
+    - 1977.375
+  - - 1977.725
+    - 1983.0
+  - - 1983.35
+    - 1987.425
+  - - 1987.775
+    - 1993.575
+  - - 1993.925
+    - 1999.825
   status: changed
   changes:
   - UV2-29
@@ -3141,19 +4092,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s40a_k_cross_gradp
   t:
-  - 1393.65
-  - 1420.175
+  - 2000.625
+  - 2027.15
   sentence_times:
-  - - 1393.65
-    - 1396.9
-  - - 1397.25
-    - 1402.075
-  - - 1402.425
-    - 1406.625
-  - - 1406.975
-    - 1413.6
-  - - 1413.95
-    - 1419.375
+  - - 2000.625
+    - 2003.875
+  - - 2004.225
+    - 2009.05
+  - - 2009.4
+    - 2013.6
+  - - 2013.95
+    - 2020.575
+  - - 2020.925
+    - 2026.35
   status: new
   changes:
   - UV2-29
@@ -3202,19 +4153,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s41_adjust
   t:
-  - 1420.175
-  - 1453.125
+  - 2027.15
+  - 2060.1
   sentence_times:
-  - - 1420.175
-    - 1426.05
-  - - 1426.4
-    - 1429.425
-  - - 1429.775
-    - 1437.225
-  - - 1437.575
-    - 1444.675
-  - - 1445.025
-    - 1452.325
+  - - 2027.15
+    - 2033.025
+  - - 2033.375
+    - 2036.4
+  - - 2036.75
+    - 2044.2
+  - - 2044.55
+    - 2051.65
+  - - 2052.0
+    - 2059.3
   status: changed
   changes:
   - UV2-29
@@ -3270,23 +4221,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s41a_balance
   t:
-  - 1453.125
-  - 1495.15
+  - 2060.1
+  - 2102.125
   sentence_times:
-  - - 1453.125
-    - 1455.975
-  - - 1456.325
-    - 1463.55
-  - - 1463.9
-    - 1469.85
-  - - 1470.2
-    - 1476.075
-  - - 1476.425
-    - 1481.275
-  - - 1481.625
-    - 1487.95
-  - - 1488.3
-    - 1494.35
+  - - 2060.1
+    - 2062.95
+  - - 2063.3
+    - 2070.525
+  - - 2070.875
+    - 2076.825
+  - - 2077.175
+    - 2083.05
+  - - 2083.4
+    - 2088.25
+  - - 2088.6
+    - 2094.925
+  - - 2095.275
+    - 2101.325
   status: new
   changes:
   - UV2-29
@@ -3340,25 +4291,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s42_geo_equation
   t:
-  - 1495.15
-  - 1541.225
+  - 2102.125
+  - 2148.2
   sentence_times:
-  - - 1495.15
-    - 1498.725
-  - - 1499.075
-    - 1506.6
-  - - 1506.95
-    - 1513.675
-  - - 1514.025
-    - 1518.175
-  - - 1518.525
-    - 1521.825
-  - - 1522.175
-    - 1527.175
-  - - 1527.525
-    - 1532.4
-  - - 1532.75
-    - 1540.425
+  - - 2102.125
+    - 2105.7
+  - - 2106.05
+    - 2113.575
+  - - 2113.925
+    - 2120.65
+  - - 2121.0
+    - 2125.15
+  - - 2125.5
+    - 2128.8
+  - - 2129.15
+    - 2134.15
+  - - 2134.5
+    - 2139.375
+  - - 2139.725
+    - 2147.4
   status: changed
   changes:
   - UV2-29
@@ -3425,19 +4376,19 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s43_geo_pieces
   t:
-  - 1541.225
-  - 1567.5
+  - 2148.2
+  - 2174.475
   sentence_times:
-  - - 1541.225
-    - 1543.45
-  - - 1543.8
-    - 1548.0
-  - - 1548.35
-    - 1554.55
-  - - 1554.9
-    - 1561.175
-  - - 1561.525
-    - 1566.7
+  - - 2148.2
+    - 2150.425
+  - - 2150.775
+    - 2154.975
+  - - 2155.325
+    - 2161.525
+  - - 2161.875
+    - 2168.15
+  - - 2168.5
+    - 2173.675
   status: changed
   changes:
   - UV2-29
@@ -3493,27 +4444,27 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s44_geo_numbers
   t:
-  - 1567.5
-  - 1634.65
+  - 2174.475
+  - 2241.625
   sentence_times:
-  - - 1567.5
-    - 1570.025
-  - - 1570.375
-    - 1576.225
-  - - 1576.575
-    - 1587.05
-  - - 1587.4
-    - 1591.35
-  - - 1591.7
-    - 1598.625
-  - - 1598.975
-    - 1609.525
-  - - 1609.875
-    - 1615.05
-  - - 1616.55
-    - 1622.975
-  - - 1623.325
-    - 1633.85
+  - - 2174.475
+    - 2177.0
+  - - 2177.35
+    - 2183.2
+  - - 2183.55
+    - 2194.025
+  - - 2194.375
+    - 2198.325
+  - - 2198.675
+    - 2205.6
+  - - 2205.95
+    - 2216.5
+  - - 2216.85
+    - 2222.025
+  - - 2223.525
+    - 2229.95
+  - - 2230.3
+    - 2240.825
   status: changed
   changes:
   - UV2-29
@@ -3603,23 +4554,23 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s45_storm_map
   t:
-  - 1634.65
-  - 1686.6
+  - 2241.625
+  - 2293.575
   sentence_times:
-  - - 1634.65
-    - 1637.275
-  - - 1637.625
-    - 1645.05
-  - - 1645.4
-    - 1653.875
-  - - 1654.225
-    - 1660.35
-  - - 1660.7
-    - 1669.5
-  - - 1669.85
-    - 1676.575
-  - - 1676.925
-    - 1685.8
+  - - 2241.625
+    - 2244.25
+  - - 2244.6
+    - 2252.025
+  - - 2252.375
+    - 2260.85
+  - - 2261.2
+    - 2267.325
+  - - 2267.675
+    - 2276.475
+  - - 2276.825
+    - 2283.55
+  - - 2283.9
+    - 2292.775
   status: changed
   changes:
   - UV2-31
@@ -3701,25 +4652,25 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s46_real_winds
   t:
-  - 1686.6
-  - 1731.3
+  - 2293.575
+  - 2338.275
   sentence_times:
-  - - 1686.6
-    - 1691.125
-  - - 1691.475
-    - 1693.9
-  - - 1694.25
-    - 1700.05
-  - - 1700.4
-    - 1704.95
-  - - 1705.3
-    - 1711.05
-  - - 1711.4
-    - 1714.025
-  - - 1714.375
-    - 1719.95
-  - - 1720.3
-    - 1730.5
+  - - 2293.575
+    - 2298.1
+  - - 2298.45
+    - 2300.875
+  - - 2301.225
+    - 2307.025
+  - - 2307.375
+    - 2311.925
+  - - 2312.275
+    - 2318.025
+  - - 2318.375
+    - 2321.0
+  - - 2321.35
+    - 2326.925
+  - - 2327.275
+    - 2337.475
   status: changed
   changes:
   - UV2-31
@@ -3773,29 +4724,31 @@ scenes:
   v5: v4 fix 2, word-identical
 - id: s47_recap
   t:
-  - 1731.3
-  - 1812.875
+  - 2338.275
+  - 2428.875
   sentence_times:
-  - - 1731.3
-    - 1737.45
-  - - 1737.8
-    - 1743.475
-  - - 1743.825
-    - 1751.75
-  - - 1752.1
-    - 1758.35
-  - - 1758.7
-    - 1771.05
-  - - 1771.4
-    - 1780.5
-  - - 1780.85
-    - 1787.5
-  - - 1787.85
-    - 1789.975
-  - - 1790.325
-    - 1799.975
-  - - 1800.325
-    - 1812.075
+  - - 2338.275
+    - 2344.425
+  - - 2344.775
+    - 2350.45
+  - - 2350.8
+    - 2358.725
+  - - 2359.075
+    - 2365.325
+  - - 2365.675
+    - 2378.025
+  - - 2378.375
+    - 2387.475
+  - - 2387.825
+    - 2396.5
+  - - 2396.85
+    - 2403.5
+  - - 2403.85
+    - 2405.975
+  - - 2406.325
+    - 2415.975
+  - - 2416.325
+    - 2428.075
   status: changed
   changes:
   - UV2-10
@@ -3803,6 +4756,7 @@ scenes:
   - UV2-22
   - UV2-24
   - UV2-29
+  - 'U-CF (user 2026-10-28: derive and name the centrifugal term, and show where it is used)'
   split: 2a and 2b (re-worded per movie)
   narration_changed: true
   visual: 'Full width, no heading; one beat per sentence, each replaces the previous (mini picture left x 120-760, keywords
@@ -3823,23 +4777,26 @@ scenes:
 
     S6: the half-Earth with v = Ω × r, then the merry-go-round with ① + ②; ''v = Ω × r'', ''−2Ω × u''.
 
-    S7: −f k × u with Ian | Idai thumbnails; ''north: right · south: left''.
+    S7 (U-CF): the half-Earth with the slate outward arrow Ω² r⊥ at 45°N and the ×50 flattened outline; ''−Ω × (Ω × r) = Ω² r⊥ → inside g''.
 
-    S8: the two storms spin (anticlockwise | clockwise).
+    S8: −f k × u with Ian | Idai thumbnails; ''north: right · south: left''.
 
-    S9: the Ciarán satellite map mini with violet arrows; ''u = (1/(fρ)) k × ∇p''.
+    S9: the two storms spin (anticlockwise | clockwise).
 
-    S10: three faint thumbnails (weather map with H/L, ∇ glyphs) and ''later videos'' (54 px).
+    S10: the Ciarán satellite map mini with violet arrows; ''u = (1/(fρ)) k × ∇p''.
+
+    S11: three faint thumbnails (weather map with H/L, ∇ glyphs) and ''later videos'' (54 px).
 
     '
   voiceover: 'To sum up, the cross product of two arrows is another arrow, at right angles to both. Each component leaves out its own direction and cross
     multiplies the other two. Its length is the first arrow''s length times the part of the second arrow across it: the area of their parallelogram. Its
     direction is at right angles to their plane, and the right-hand rule says which way round. In the last video, we saw that physics uses it for torque,
     angular momentum and the push on a moving charge, and that a push always at a right angle turns a motion without speeding it up. On the spinning Earth,
-    the ground moves at Omega cross r, and moving air feels the Coriolis push, minus two Omega cross u. For flat winds, that''s minus f k cross u: to the
-    right in the north, and to the left in the south. That''s why storms spin. When this push balances the pressure push, we get the geostrophic wind, one
-    over f rho times k cross grad p, along the isobars. The last video shows why the cross product is built this way, and later videos in this series show
-    how to read weather maps, and how grad, div and curl are built from these products.'
+    the ground moves at Omega cross r, and moving air feels the Coriolis push, minus two Omega cross u. The spin also gives the centrifugal pull, Omega
+    squared times the distance from the axis, and it''s folded into gravity, g. For flat winds, that''s minus f k cross u: to the right in the north, and
+    to the left in the south. That''s why storms spin. When this push balances the pressure push, we get the geostrophic wind, one over f rho times k cross
+    grad p, along the isobars. The last video shows why the cross product is built this way, and later videos in this series show how to read weather maps,
+    and how grad, div and curl are built from these products.'
   on_screen_eq:
     latex: '|\mathbf a\times\mathbf b| = |\mathbf a|\,|\mathbf b|\sin\theta'
     vallis_eq: 'provenance only: as s08'
@@ -3861,18 +4818,18 @@ scenes:
   physics_source_note: 'recap: pictures and numbers repeated from earlier scenes, no new computation'
   exaggeration:
   - recap minis illustrative
-  v5: v4 fix 2, word-identical
+  v5: 'v4 words kept + added (2026-10-29, U-CF): S7 ''The spin also gives the centrifugal pull…'''
 - id: s48_end
   t:
-  - 1812.875
-  - 1838.25
+  - 2428.875
+  - 2454.25
   sentence_times:
-  - - 1812.875
-    - 1818.75
-  - - 1819.1
-    - 1830.15
-  - - 1830.5
-    - 1837.95
+  - - 2428.875
+    - 2434.75
+  - - 2435.1
+    - 2446.15
+  - - 2446.5
+    - 2453.95
   status: unchanged
   changes: []
   split: 2a and 2b (re-worded per movie)
@@ -3902,4 +4859,4 @@ scenes:
   links:
     notebook: the Chapter 0A cross-product notebook section (site embed only; never drawn or spoken)
   v5: v4 fix 2, word-identical
-beats: 5
+beats: 10
