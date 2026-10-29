@@ -4732,3 +4732,212 @@ Movies reviewed (read-only; nothing edited):
 - After the v5 fixes: run review 3 on s22w, s26a1, s26e, s27b–s27f, s37 S7 and s47 S9, ≥ 1 frame per sentence, then re-check P2 at the same scenes.
 
 Disk: C: 56 GB free at the start, 57 GB at the end; G: 515 GB free at the start and the end. Review frames: 99 MB, 284 PNG, on G: (not committed).
+
+---
+
+# ch00_weather_basics v4 — review 1 (2026-10-29, fresh eyes, frames only) — FIX
+
+Movie `movies/out/ch00/ch00_weather_basics/1080.mp4` (50:54, 143.0 MB, commit a3e6a23). Frames in
+`G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review_v4_1/`. Interim notes (saved first so
+they survive an interruption); the U-WB table and verdict follow below when complete.
+
+## Interim findings, s05–s25 and s47–s61 (frames looked at)
+- 03:25–04:03 s05: 3-D 1 m² column from the ground to 30 km, edges "1 m", "area 1 m²", p₀ = ? before the number (goal
+  first), m = p₀/g ≈ 10 300 kg, seven cars. U-WB-07 done.
+- 08:17–08:59 s13: 3-D slab with "1 m", "Δz", p(z), p(z+Δz), weight. U-WB-08 done. 08:59–09:05 "1 m²" sits on top of
+  the "1 m" edge label (collision); right half empty 08:54–09:05 (QA halves WARN 534.5–542.5).
+- 09:05–09:53 s14: V = 1 m² × Δz → m = ρV = ρ × 1 m² × Δz → W = mg = ρgΔz × 1 m², the × 1 m² struck in every term →
+  p(z) − p(z+Δz) = ρgΔz. U-WB-09 done. The W line is drawn in dim orange (low contrast at 640 px).
+- 12:00–13:21 s18: g, R, T grouped → H = RT/g → ∂p/∂z = −p/H; units cancel to m; tangent reaching 0 at H; colder/warmer
+  columns. U-WB-10/11/12 done. 12:14–12:41 the keyword "scale height" collides with the "g" of RT/g (Must fix);
+  12:30 unit row shows stray placeholder dashes before the units appear; 12:08 right half nearly empty (QA WARN 728–732.5).
+- 13:21–14:50 s18b: purpose first ("how deep is our air?"), R/T/g named one by one, H ≈ 8.43 km, then the uniform box
+  at ρ₀ = 1.225 "sea-level density (gas law)", ρ₀gh = p₀, h ≈ 8.43 km, gold link to H. U-WB-13 done, clean.
+- 14:50–16:52 s19/s19b: "assume: same T → H fixed", "a simplification: real T changes", divide by p, d ln p/dp = 1/p,
+  chain rule, ∫ with limits, ln p − ln p₀ = −z/H, ln(p/p₀), e ≈ 2.72, p = p₀e^(−z/H). U-WB-14 done. But the large
+  p(z) axes stay empty for ~70 s while the ln p inset sits on top of them and over the "pressure (hPa)" label (QA WARN
+  942–952); 16:10–16:16 the inset label "z, p" collides with the line "ln p − ln p₀ = −z/H" (Must fix).
+- 16:52–17:32 s20: z = H marker, e^(−H/H) = e⁻¹ = 1/e ≈ 1/2.72 ≈ 0.37, "falls to 37 % every 8.4 km", 1013 → 373 → 137 hPa.
+  U-WB-15 done. Numbers check: 1013·e⁻¹ = 372.7, 1013·e⁻² = 137.1.
+- 17:32–18:34 s20b: 1 km / 8.43 km ≈ 0.12 "p held fixed", 1 − e^(−1/8.43) ≈ 0.11 "p shrinks", "11 % of the pressure at the
+  bottom of that kilometre", 1013 → 900 → 800, bars −113 / −101 hPa. U-WB-16 done; numbers check (0.1186, 0.1119,
+  1013·0.1119 = 113, 899.6·0.1119 = 101). Second bar has no "2nd km" label (cosmetic).
+- 18:34–19:27 s20c: 3-D column of ten ≈ 1000 kg slabs, bottom ≈ 900 m, ninth top ≈ 19 km, no sharp top, mattress
+  Like/Unlike. U-WB-17 done (much clearer). 19:13–19:25 the mattress icon overlaps "like: foam mattresses" and the gold
+  link crosses "no sharp top" (Should fix).
+- 19:27–20:23 s20d: ln(p/p₀) = −z/H → z = H ln(p₀/p) (with ln(1/x) = −ln x), p₀/p = 2, ln 2 ≈ 0.69, z ≈ 5.8 km, marks
+  500 hPa at 5.8 km and 250 hPa at 11.7 km. U-WB-18 done.
+- 20:23–21:21 s21: source line present. Balloon: white balloon, small gold gondola, a gap above a thin pale-gold trail;
+  the gondola and the trail are both gold, so they still read as one line at 640 px (U-WB-21 partly).
+- 21:21–22:37 s22: p₀ "weight of all the air", p "weight above z", share above = p/p₀, share below = 1 − p/p₀, standard
+  atmosphere defined + source line, 5.5 km p ≈ 505 hPa, 1 − 505/1013 ≈ 0.50, 16 km 90 %, 31 km. U-WB-20 done.
+- 22:56 s23 and 23:52 s24: the source line is drawn across the x-axis title "temperature (°C)" (collision, Must fix).
+- 23:52–24:24 s25: Singapore profile, globe with ERA5 November zonal-mean temperature ring and a titled colour bar,
+  source lines. The chart's source line again runs through "temperature (°C)" (Must fix). 24:22 the polar camera key
+  shows an oblique cut-away ellipse that is hard to read (Should fix).
+- 24:26–25:44 s26: tilted 3-D plate of the real MODIS Terra morning image, sun shafts, pan icon, thermals, the parcel grows
+  and goes red → pink → blue as it rises, Trappes 12 UTC sounding rod "−10 °C per km", cross-fade to the MODIS Aqua
+  afternoon; source lines change with the image. U-WB-24/25 done (big improvement).
+- 42:30 s47 (ERA5 slice): colour bar titled, source line, particles, density callback, slope triangle "15 km / 1 km".
+  PHYSICS: the slice along 48.5°N meets the "cold front" at ≈ 12.75°W (W70), west of the 18 UTC low centre (48.8°N,
+  11.7°W), while the s49 map's cold front at that hour starts at 48.0°N 6.7°W and runs south-west — it never crosses
+  48.5°N. The feature labelled "cold front" in s47 is not the cold front of the s49 map (it lies on the far side of the
+  low, where the bent-back/occluding zone is); the 1:15 slope and the vertical lower part (verifier note) come from that
+  feature (Must fix).
+- 42:30–43:22 s48: warm front near Brest slopes up towards the east (cold side), "50 km / 1 km", "true scale".
+  43:07–43:21 "Brest" and "from S" overlap ("Brestom S") (Must fix); the gold frontal outline ends in a Z-shaped zigzag at
+  the ground (Should fix).
+- 43:22–44:14 s49/s50: 850-hPa map, titled colour bar, "≈ 1.5 km up", warm tongue, fronts attached to the tracked L, wind
+  arrows; cold-front triangles on the warm side, warm-front half circles on the cold side (correct). The map's source line
+  is dark text on the map (low contrast, Should fix).
+- 49:21–50:53 s60/s61: recap pictures; house end card (three keyword lines, notebook icons, silent hold) correct.
+
+## Findings, s00–s03, s27–s46, s51–s59 (added after the resume)
+- 00:01–00:11 s00: title "Weather / basics / made easy / and how meteorologists / read the weather", house pattern,
+  source lines on the right-hand animation. U-WB-01/02 done.
+- 00:11–00:23 s01: the globe grows and turns. At 00:21 its canvas cuts it off with a straight-edged rectangle (left, right and top).
+  The same happens at 02:14 (s03) and 26:54–27:43 (s27b, octagonal corners). Must fix.
+- 00:23–01:36 s02: at 00:45 a quarter wedge opens and a bold orange radius "6371 km" runs from the centre to the surface (U-WB-04 done).
+  A strip of cloud texture shows behind the cut on the right (artefact). At 00:35 the magnifier says "× 40", a number that is never
+  spoken; the movie later says × 50. 00:55–01:30 shows the desk globe (30 cm, radius 150 mm), 12/6371 ≈ 0.002 with "weather
+  layer" / "Earth's radius" pointers, "same shrink", 0.002 × 150 mm ≈ 0.3 mm, 3 sheets of paper and × 50 (U-WB-05 done).
+- 01:36–02:37 s03: composition bar, molecule box, a dashed parcel on the globe and a flight in. At 02:23 a hard cut with a
+  visible brightness seam leads to the three.js Brittany terrain: a teal 3-D box "air parcel" with a trail, ERA5 wind arrows,
+  thermometer and droplet, and a source line. At this camera height the terrain is very blurred and no place name (Brittany, Brest,
+  Channel) is shown. The box stays at screen centre, so it reads as "the camera moves". At 02:36 the edge of the terrain
+  tile is visible. U-WB-06 partly.
+- 25:44–26:19 s27: a cloud-free Blue Marble globe spins east, then turns to the pole, and cross-fades into the ERA5 2-m q globe
+  with a titled colour bar "specific humidity, 2 m up, g/kg" and a source line. U-WB-26/27/28 done.
+- 26:19–27:45 s27b: e ≈ 1.61 q p, each letter named, "this e: vapour pressure, not 2.72", 1-kg boxes of air and vapour,
+  29 vs 18, 29/18 ≈ 1.61, "molecule share = 1.61 × mass share", q = 0.020, p ≈ 1000 hPa, e ≈ 32 hPa. U-WB-29 done, and
+  the numbers check (28.96/18.02 = 1.607; 1.61·0.02·1000 = 32.2). Collisions: the gold pointer arrows run through "vapour
+  pressure" and "kg of vapour", and "29/18" sits on "1 kg of vapour" and on the "1.61 × mass share" line (27:05–27:21). Must fix.
+- 30:02–30:47 s31: T and Td lines meet at ≈ 1.5 km, 12 ÷ 8 ≈ 1.5 km, real cumulus image. Its source line is dark text on
+  the satellite image (low contrast). 30:47–31:24 s32: u = 8, v = 6, |v| = 10 m/s on a Brittany map with a source line.
+  31:24–32:08 s33: compass and 233°, correct sense. 32:08–32:48 s34: 1° = 60 nautical miles, 1852 m, 0.51 m/s, 19 kt.
+- 33:23–34:17 s36: locator with scale bar, TimeGraph with the 1991–2020 band, source lines. At 34:14 the keyword "climate: what
+  you expect · weather: what you get" is printed on the month tick labels (Must fix). The y axis has no °C label.
+- 34:17–35:50 s37/s38: station dots, rotation, ERA5 2-m temperature globe with a titled colour bar. At 35:31–35:42 a grey
+  disc artefact shows under the globe's south edge. 35:50–36:30 s39: surface pressure globe with colour bar, Tibet < 600 hPa,
+  close-up. At 36:26 the close-up's source line overlaps the "Himalayas" label.
+- 37:28–38:52 s41/s42: MSLP globe, titled diverging colour bar, isobars, H/L, Ciarán 956 hPa; GFS 27 Oct 2026 map with
+  its own source line. 38:52–40:08 s43/s44: satellite + isobars and 10-m wind arrows. The wind turns cyclonically round the
+  low (anticlockwise seen from above, NH) and clockwise round the high, and the SH thumbnail is reversed. Physics correct.
+- 40:08–40:54 s45: 2-m temperature globe with colour bar, then the 850-hPa map with "polar maritime" / "tropical maritime". The
+  four names said at 40:32–40:42 (polar, tropical, maritime, continental) are not on screen. At 40:45–40:48 the right half is
+  empty apart from the colour bar (Should fix).
+- 40:54–41:26 s46: 850-hPa map + T graph, "front ≈ 100 km". At 41:00–41:13 the top edge of the frame cuts off the colour-bar
+  title "850-hPa temperature" (Must fix). The old gold transect (builder deviation) is accepted.
+- 44:14–46:16 s51–s53: sun beam 1 m / 2 m, 1 m / cos 60° = 2 m, 2-m T globe; MSLP belts, ITCZ; mean winds. At 46:05–46:16 the
+  gold pointer lines from "westerlies" and the trades labels cross each other and run through the label text (Must fix).
+- 46:16–49:21 s54–s59: MODIS afternoon image, Brest, UTC keyword, isobars, track, low 956 hPa. TimeGraphs show 997 → 962 hPa
+  (−35 hPa in 13 h, +14 hPa in 5 h), 13 m/s from 155° (SSE) → 18 m/s from 204° (SSW), 12.0 → ≈ 14.5 °C, 19 m/s from 221°
+  → 23 m/s from 271°, 23.2 ÷ 0.514 ≈ 45 kt and −2 °C. Every frame has a source line. The wind veers at both fronts, which is
+  correct for the NH. At 48:52 the 45 kt CalcStack sits on the hPa graph's tick labels (Should fix).
+- Not re-reviewed frame by frame (unchanged since v3 fix 3 apart from beats): s04, s06–s12, s15–s17, s28–s30, s40.
+
+## Captions and QA
+- en.vtt: 759 cues, all ≤ 2 lines × 42 chars, max 16.8 cps. One cue is under 1 s (43:13.775–43:14.675 "In this slice,", 0.9 s).
+- qa.json: 12 gates PASS and halves WARN (534.5–542.5, 728–732.5, 942.5–952, 1052.5–1057, 1115–1122, 1168–1172 s). In the
+  frames these are the first 4–10 s of s14, s18, s19b, s20b, s20c and s20d, with only the left picture on screen.
+  source_check.json PASS; it is a static registry check only and does not test contrast or overlap.
+
+## U-WB items (v4 timestamps)
+| item | v4 time | status | note |
+|---|---|---|---|
+| U-WB-01 | 00:00–00:11 | done | opening kept |
+| U-WB-02 | 00:03 | done | "and how meteorologists / read the weather" |
+| U-WB-03 | 00:11–01:36 | partly | turns and zooms; globe clipped by a rectangle at 00:21; no change of spin direction seen |
+| U-WB-04 | 00:45 | done | bold orange radius from the centre; texture strip artefact behind the cut |
+| U-WB-05 | 00:55–01:30 | done | every factor named, same shrink, 0.3 mm, 3 sheets |
+| U-WB-06 | 02:12–02:37 | partly | 3-D box rides ERA5 wind over three.js terrain; blurred, unnamed place, seam at 02:23, tile edge at 02:36 |
+| U-WB-07 | 03:10–04:03 | done | 3-D 1 m² column to 30 km |
+| U-WB-08 | 08:13–08:54 | done | 3-D slab, 1 m edges; "1 m²" over "1 m" at 08:59 |
+| U-WB-09 | 09:05–09:27 | done | V → m = ρV → W = mg, × 1 m² struck |
+| U-WB-10 | 12:00–13:21 | done | 3-D column with 1 m base |
+| U-WB-11 | 12:24–12:42 | done | units appear as spoken (stray dashes first) |
+| U-WB-12 | 12:42–13:21 | done | why H, tangent to 0 at H, warmer → bigger H |
+| U-WB-13 | 13:21–14:50 | done | purpose first, R/T/g named, 1.225 explained |
+| U-WB-14 | 14:50–16:52 | done | assumption said, chain rule, integral with limits |
+| U-WB-15 | 16:52–17:32 | done | e⁻¹ ≈ 0.37, "falls to 37 %" |
+| U-WB-16 | 17:32–18:34 | done | 12 % vs 11 %, "of the pressure at the bottom" |
+| U-WB-17 | 18:34–19:27 | done | ten equal-mass 3-D slabs |
+| U-WB-18 | 19:27–20:23 | done | z = H ln(p₀/p), ln 2, 5.8 km |
+| U-WB-19 | 20:23–21:21 | done | source line |
+| U-WB-20 | 21:21–22:37 | done | share below = 1 − p/p₀, 505 hPa → 0.50 |
+| U-WB-21 | 20:35–21:14 | partly | gap present; gondola and trail both gold |
+| U-WB-22 | 23:54–24:24 | done | source lines (but colliding with the axis title) |
+| U-WB-23 | 23:54–24:22 | done | half-screen globe, zoom to Singapore, titled colour bar, source; polar view at 24:22 confusing |
+| U-WB-24 | 24:26–25:44 | done | real MODIS morning/afternoon plates, real sounding |
+| U-WB-25 | 25:06–25:15 | done | parcel grows, red → blue |
+| U-WB-26 | 25:44–26:00 | done | cloud-free, spin then towards the pole |
+| U-WB-27 | 26:00 | done | continuity into the q globe, source |
+| U-WB-28 | 26:00–27:45 | done | titled colour bar, source |
+| U-WB-29 | 26:19–27:45 | done | every symbol and 1.61 explained (label collisions) |
+| U-WB-30 | 33:52–40:54 | done | source lines and colour bars on all listed data frames; the reanalysis globe turns |
+| U-WB-31 | 41:26–43:22 | partly | real ERA5 slice with moving particles and colour bar; the "cold front" in the slice is not the map's cold front (M1) |
+
+Counts: 27 done, 4 partly, 0 not done. Rules: R1 done (weak contrast on map frames), R2 done, R3 done, R4 partly (globe
+clipping), R5 done.
+
+## Builder deviations
+- s03 three.js terrain instead of Cesium: acceptable, but the result needs the S-fixes below.
+- s25 polar camera key: acceptable; the 24:22 cut-away view needs a cleaner framing.
+- s46 old gold transect: acceptable.
+- s47–s48 isotherms not drawn: acceptable (anomaly colours carry the idea).
+- 143 MB: over the 120-MB budget, under the 160-MB cap; acceptable for a 51-min movie.
+
+## Must fix
+1. 41:26–42:30 s47 physics. The 48.5°N slice meets the "cold front" at ≈ 12.75°W (W70), west of the 18 UTC low
+   (48.8°N 11.7°W). The s49 map's cold front starts at 48.0°N 6.7°W and runs south-west, so it never crosses 48.5°N. Fix:
+   take the cold-front side view on a line that crosses the map's cold front, recompute W70 and the slope, and let s47 S5
+   follow the new number. Candidate lines: the fronts.json transect centred at 45.5°N 8.4°W, or a west–east line at about
+   46.5°N. Keep the 48.5°N slice for the warm front near Brest (s48).
+2. Text collisions:
+   - 12:14–12:41: "scale height" sits under the g of RT/g. Move it below the fraction.
+   - 16:10–16:16: the inset label "z, p" hits "ln p − ln p₀ = −z/H". Move the equation right or the inset down.
+   - 22:56, 23:52 and 23:54–24:22: source lines run across "temperature (°C)". Raise the axis title or move the source line below it.
+   - 26:32–27:43: gold arrows run through "vapour pressure" / "kg of vapour", and "29/18" sits over "1 kg of vapour". End the arrows
+     at the label edge and put 29/18 below the boxes.
+   - 34:14: the keyword sits on the month ticks. Move it above the graph.
+   - 43:07–43:21: "Brest" collides with "from S". Move the wind label right of Brest.
+   - 46:05–46:16: the pointer lines cross each other and run through the trade-wind labels. Re-route the links so they do not
+     cross text or each other.
+3. 41:00–41:13: the top edge cuts off the colour-bar title "850-hPa temperature". Move the bar inside y ≥ 40.
+4. 00:21, 02:14, 26:54–27:43: the canvas clips the globe (straight or octagonal edges). Enlarge the canvas or keep
+   the globe inside it while zooming.
+
+## Should fix
+1. The right half is empty for 4–10 s at the start of s14 (08:54–09:05), s18 (12:00–12:08), s19b (15:42–15:52), s20b (17:32–17:37),
+   s20c (18:34–18:42) and s20d (19:27–19:32). Carry over the previous scene's last line, or show the scene's first keyword at once.
+2. s03 02:23–02:37:
+   - soften the cut (cross-fade, match brightness);
+   - add the labels "Brittany", "Brest" and "English Channel";
+   - frame the camera so the tile edge never shows;
+   - raise the resolution or the camera height so the terrain is not a blur;
+   - let the box visibly travel across the frame for part of the shot.
+3. s45 40:32–40:48: show "polar · tropical" / "maritime · continental" as the four names are said.
+4. Source lines drawn as dark text on images (30:46, 30:58, 41:00, 43:24, 47:10): use the muted light text on a darker
+   band below the picture, as on the globe frames.
+5. s48 43:00–43:21: replace the Z-shaped end of the warm-front outline with one smooth line, and explain or drop "true scale".
+6. 00:35 "× 40" in the magnifier: either say it or show × 50 to match the narration. At 00:45 hide the texture strip behind
+   the wedge.
+7. s20c 19:13–19:25: move the mattress icon off "like: foam mattresses" and route the gold link round "no sharp top".
+8. s13 08:59: separate "1 m²" from the "1 m" edge label. s21: give the gondola a non-gold colour (U-WB-21).
+9. s25 24:22: replace the oblique polar cut-away with a view where the ring reads as a cross-section.
+10. Small items:
+    - 35:31–35:42: remove the grey disc under the globe.
+    - 36:26: move the source line off "Himalayas".
+    - 48:52: move the 45 kt CalcStack off the tick row.
+    - s36: add "°C" to the y axis.
+    - s20b: label the second bar "2nd km".
+    - 12:30: remove the placeholder dashes.
+
+## Overall: FIX
+Nearly all the user's feedback is in: 27 of 31 items are done and 4 are partly done. The new teaching beats (s14, s18–s20d,
+s22, s27b) read well, and their numbers check. The movie is not yet `qa_pass`. The s47 cold-front slice does not match the cold
+front on the s49 map (M1). About a dozen text collisions and clipped elements show at 640 px (M2–M4). After the fixes, re-render
+the touched scenes and run review 2 with one frame per second through s03, s27b, s46–s48 and s53.
+
+Disk: C: 55 GB free at the start and the end. G: 512 GB free at the end (515 GB earlier in the day). Review frames are on G:
+(not committed).
