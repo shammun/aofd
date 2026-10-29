@@ -137,12 +137,23 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - **No references:**
   - no equation numbers or labels;
   - no book or author names;
-  - no footnotes;
+  - no footnotes, **except the data-source line below**;
   - no "not to scale" badges;
   - no "1 grid square = 1 unit";
   - no URLs (U-M2.G1, U-M2.G2, U-M3.G4, U-M3.G6).
 
   When a step refers back to an equation, label it a plain "(1)" inside that scene only.
+- **Data-source line (user, 2026-10-28, U-WB-R1 — supersedes the old "no source strip" for data credits).** Every frame
+  that plots real data (map, globe, station graph, sounding, satellite image, a specific event) carries one small source
+  line at the bottom of the picture, e.g. "Data: ERA5 (Copernicus C3S) · 1 Nov 2023, 18 UTC · Brest". Name, time and
+  place for specific events. Muted colour, ≥ 28 px, inside the safe area, never over the caption band; not spoken.
+- **Colour bar on every coloured data field** (globe or map), with units (U-WB-R2). Hide it only during a zoom.
+- **3-D for space (U-WB-R3):** areas and volumes in the narration (1 m², 1 m³, a column from the ground to the top of the
+  atmosphere, slabs, air parcels) are drawn as 3-D objects with visible x, y, z (three.js), and the camera may move around them.
+- **Globe camera (U-WB-R4):** globes rotate, zoom and fly to the place being discussed; give the globe the space; keep
+  camera continuity between consecutive globe scenes.
+- **Explain every number (U-WB-R5):** no calculation without saying what each factor is and why it is computed;
+  derivations show every step (including the integration); each new quantity gets a "why we care" sentence.
 - **Layout** (`movies/src/house/kit/type.ts`):
   - Content area y 40–860. The **caption band y 880–1040 stays empty**.
   - Picture zone x 80–1000, maths zone x 1060–1840; full-width scenes use x 80–1840.
@@ -299,3 +310,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-27: §3 the cross-product movie takes the weather/climate ending (user).
 - 2026-10-28: §10 QA has 12 gates (content, halves); §7 storm-tracker rule; §4 `[beat]` pauses (user).
 - 2026-10-28: the split cross-product movies: Part 1 (definition, no weather) uses the maths ending; Part 2 and the full v5 use the weather ending (orchestrator, following the user's split request).
+- 2026-10-28: §5 data-source line on every real-data frame, colour bars, 3-D for space, globe camera, explain every number (user feedback on weather basics, reports/ch00_weather_basics_user_feedback.md).
