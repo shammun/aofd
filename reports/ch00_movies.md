@@ -5103,3 +5103,192 @@ None.
 - C: 55 GB free at the start and at the end.
 - G: 512 GB free at the start, 513 GB at the end.
 - This review wrote 224 MB (491 files) to G: under `…/review3/` and nothing to C:.
+
+---
+
+# ch00_derivatives_taylor — review 1 (fresh eyes, build 1, commit c87e959)                    2026-10-29
+
+**What I looked at.**
+- 415 frames, one 0.2 s before each sentence end, taken from the final `timing.json`.
+- 47 labelled 3×3 sheets at 640 px per tile.
+- About 40 full-resolution close-ups: the equations, every suspected collision, the title and the end card.
+- Loudness in three places: a beat gap, speech, and the tail.
+- Every number checked by hand against `data/dt.json` and `manifest.json`.
+- All frames are under `G:/…/scratch/movies/ch00_derivatives_taylor/review1/`.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_derivatives_taylor (build 1) | 2798.77 s (46:38.8); narration ends 2796.25 s, then a 2.5-s hold | 105.80 MB (budget 120, hard 160) | 13/13 PASS | PASS on the maths, every number reproduced by hand. FIX on the teaching: s28/s29 use dI, đQ, đW and the first law without defining them; the s19 sideways term cannot be derived from what is said; s20 skips the reasoning for the sign | PASS: 40 present, no KaTeX errors, no labels, no book refs | **FIX**: 3 collisions hide or garble text (s32, s29, s35); "100 m/s" clipped (s16); maths past x 1840 (s16, s17, s31, s33); tiny inline fractions (s44, s45) | PASS at sentence level: every sampled number appears on its sentence; a few on-screen numbers are never spoken | PASS (QA: 689 cues = script) | PASS: thermal/balance maps, dashes plus colour, 0 flashes; the music bed sits ≈ 13 LU under speech | n/a (house) | **FIX** |
+
+## Maths and physics, checked by hand (all PASS unless noted)
+- **Derivative, s02–s03.**
+  - (14.9 − 10.3)/2 = 2.3 °C/h.
+  - The secant slopes are 7, 6.1 and 6.01, which tend to 6 = 2x at x = 3. The picture turns the secant into the tangent.
+- **Partial derivatives, s06–s10.**
+  - Toy fields: ∂T/∂x = −0.03 °C/km, ∂T/∂t = +3 °C/h; for xt they are t and x.
+  - ERA5 centred difference: (4.51 − 5.69)/36.8 km = −3.20 °C/100 km. North: −1.38/55.6 km = −2.49.
+  - The gradient arrow points to the south-west, towards the warm air. Correct.
+  - ∂T/∂t = (8.23 − 2.38)/2 h = 2.92 °C/h. The pressure falls 988.3 → 983.3 hPa in one hour.
+  - Radiosonde: (−11.8 − 12.3) °C over 5795 − 1533 m = 4262 m gives −5.65 °C/km. The lapse rate is +5.7 °C/km.
+  - Mixed partial: (7.58 − 8.63 − 1.77 + 3.19) °C ÷ (36.8 km × 7200 s) = 1.40×10⁻⁹ °C m⁻¹ s⁻¹ (dt.json 1.4285×10⁻⁹).
+- **Total differential and chain rule, s11–s21.**
+  - s12: −0.32 − 0.50 + 1.45 = +0.63 °C.
+  - s15: 100 km/h × −0.03 °C/km = −3 °C/h.
+  - s16: 100 m/s × −3.2×10⁻⁵ °C/m × 3600 s = −11.5 °C/h. The plane's rate is −8.60 °C/h flying east and +14.45 °C/h flying west.
+  - s18: 4262 m/900 s = 4.74 m/s, and −24.1 °C/900 s = −0.0268 °C/s = −1.6 °C/min.
+  - s19 terms:
+    - fixed place: −2.59 °C/43 200 s = −6.0×10⁻⁵ °C/s;
+    - sideways: −3.27×10⁻⁵ °C/s (dt.json);
+    - rising: 4.74 × −5.65×10⁻³ = −0.0268 °C/s;
+    - rising share 99.66 %, so "more than 99 %" is right.
+    - The drift is 7.81 km E and 14.61 km N, so 16.6 km towards the NNE (28°).
+  - s20: the wind is (5.85, 33.49) m/s, so u·∇T = −3.68 °C/h and DT/Dt = 2.92 − 3.68 = −0.76 °C/h.
+  - s21: 4262 m/−350 hPa = −12.18 m/hPa. Multiplied by −5.65×10⁻³ °C/m, this gives +0.0689 °C/hPa.
+- **Exactness, s22–s29.**
+  - ∮(y dx − x dy) round the unit square, anticlockwise, = −2 by Green's theorem. Correct.
+  - Gas-law test: R = R, so p passes.
+  - s25: −10/290 = −3.45 %. The exact value 290/300 − 1 = −3.33 %.
+  - s26: H = 287 × 292.95/9.81 = 8570.5 m.
+  - s28, three routes, 280 K, α × 1.5:
+    - route 1: R × 93.3 K = 26.8 kJ/kg;
+    - route 2: RT ln 1.5 = 32.6 kJ/kg;
+    - route 3: R × 140 K = 40.2 kJ/kg;
+    - Δη = R ln 1.5 = 116.4 J kg⁻¹ K⁻¹ on every route;
+    - ΔI = 0, as it must be for an ideal gas at the same T.
+  - s29: ∂c_v/∂α = 0 against R/α, so the heat fails the test. Divided by T it passes (0 = 0).
+- **Taylor series, s30–s36.**
+  - s31: slope (9.4 − 13.9)/(2.100 − 1.174) = −4.86 °C/km. 12.3 − 4.86 = 7.44, against 6.87 measured. 12.3 − 4.26 × 4.86 = −8.41, against −11.8.
+  - s32: c = f″/2 and 3! = 6. The series is written correctly.
+  - s33: 1, 1.1, 1.105, 1.10517 against e^0.1 = 1.1051709. The h = 1 partial sums are 2, 2.5, 2.667, 2.708.
+  - s34: p₀ = 997.5 hPa, ρ₀ = 99 750/(287 × 292.95) = 1.186 kg/m³, and ρ₀g = 11.6 Pa/m, which is 8.6 m (28 ft) per hPa.
+    - At z = 1006 m: line 880.4, plus the bend 887.3, against 887.0 measured.
+  - s35: at z = 5627 m the steps are 342.6, 557, 511 and then the exponential's 517.3. With T̄ = 277.45 K the exponential gives 498.7, against 500 measured.
+  - s36: tropopause 13.07 km, −66.3 °C.
+- **Linearisation, s39–s43.**
+  - L/(R_v T²) = 2.5×10⁶/(462 × 273²) = 0.0726 per K. With L(T) it is 6.4 % at 15 °C and 5.7 % at 30 °C.
+  - For +1 °C the line gives 7.26 % and the exact value is 7.5 %. For +4 °C the line gives 29.0 % and the exact value is 33.1 %.
+  - 1.26 × 7 % ≈ 9 %.
+  - (240/5.67×10⁻⁸)^¼ = 255.1 K. 4 × 240/255 = 3.76 W m⁻² K⁻¹. The CERES 2001–2026 mean is 240.61 W/m² (manifest).
+  - Exact Planck changes: 3.79 for +1 K and 39.9 for +10 K. The line gives 3.76 and 37.6.
+  - Warming: 3.9/3.8 = 1.04 K with the Planck rate alone, and 3.9/3.2 = 1.22 K with the AR6 value.
+- **Finite differences, s44–s46.**
+  - The forward error is (h/2)f″ and the centred error is (h²/6)f‴; both derivations are correct on screen.
+  - For sin at x = 1, h = 0.1: forward 0.49736 − 0.54030 = −0.0429; centred 0.53940 − 0.54030 = −0.0009.
+  - Brest: forward −3.319, backward −3.086, centred −3.202 °C/100 km. The coarse grids give −3.17, −3.14, −2.24 and −0.98 at 36.8, 73.7, 147.4 and 221 km. The gentle grid is 3.3× too small.
+- **Builder's adjusted numbers.**
+  - s31 −4.86 and s34/s35 H = 8570.5 m are the data. No issue.
+  - s22 "+140 m" is not the data (135.5 m). See S4.
+- **Voice and house style.**
+  - The opening sentence follows the pattern. The title says "made easy / and how meteorology uses them".
+  - The maths-tutorial ending is word for word, which is correct for a maths movie. There are no headings, boxes, badges, equation labels or book references.
+  - "Air parcel" is defined in s20. No "clearly" or "obviously".
+- **Music.** I read the levels; I did not listen to the score.
+  - A beat gap at 65.1 s measures −30.3 LUFS, against −16.9 LUFS for the neighbouring speech. The bed is well under the voice.
+  - The two gentle wind beds are ducked.
+  - The "tangent-glide" style itself needs the user's ear.
+
+## Must fix
+1. **s32 30:05–30:47: overlapping text.**
+   - Problem: the underbrace label "the bend" sits on top of "d/dh(c h²) = 2c h". From 30:23 the keyword "Taylor series" is printed over "h³/3! f‴" and "3! = 3×2×1 = 6", and neither can be read. Close-up `close/f_1831.9.png`.
+   - Fix: start the CalcStack 60 px below the brace label, and put "Taylor series" under the full series at 30:46, not over the h³ line.
+2. **s16 14:41–14:52: clipped label.**
+   - Problem: the plane's speed label is cut to "100 m/" by the map edge, because it moves with the plane. The result line "dT/dt ≈ +2.9 − 11.5 = −8.6 °C/h" runs to x ≈ 1895. s17 has the same overflow at 15:12–15:31 ("≈ +14.4 °C/h" at x ≈ 1897).
+   - Fix: clamp the speed label inside the map (flip it to the left of the arrow once x > 900), and set the s16/s17 CalcStack at 84 px from x 1060 so it ends before 1840.
+3. **s28–s29 25:23–27:57: undefined symbols.**
+   - Problem: "dI = đQ + đW" is on screen for 67 s, but I, W and the barred đ are never said or defined. s29 then states "đQ = c_v dT + p dα" without saying where it comes from. A first-time viewer meets the first law and the inexact-differential notation unexplained, which breaks "every new term defined".
+   - Fix: add two sentences in s28 S1 and re-run TTS for that scene. For example: "The first law of thermodynamics says the change in the internal energy, d I, equals the heat added, plus the work done on the air. The d with a bar through it means a small amount, not the change of anything." In s29 S1 add: "Warming the air at a fixed volume takes c v d T, and the air does work p d alpha as it expands." Or drop the equation from s28 if the scene should stay picture-only.
+4. **s29 27:45–27:57: the label reads as a minus.**
+   - Problem: the orange route line runs straight through its label, so it reads "Δη = −116" with a strike. A viewer sees a negative entropy change on route 1. Close-up `close/h_1670.png`.
+   - Fix: lift the label 50 px above the horizontal leg (as for the kJ/kg labels), or end the leg before the label. Add the unit "J kg⁻¹ K⁻¹" once.
+5. **s35 33:01–33:46: a spoken number is hidden.**
+   - Problem: "balloon 500" is printed on top of the gold "343" label of the line, so the number the narration says at 33:01 cannot be seen. Close-up `close/h_1985.png`.
+   - Fix: move "balloon 500" to the right of the teal dot (x of the dot + 30) and keep "343" left of the gold dot, or drop the inline value labels, since the right-hand stack already lists 343 / 558 / 511 / 517.
+
+## Should fix
+1. **s19 16:33–17:23: the sizes do not follow from what is said.**
+   - The fixed-place term is written "≈ 6 × 10⁻⁵" in the bar and in the underbrace. It is −6×10⁻⁵, because the air cooled. The narration says "about two and a half degrees" while the screen shows "−2.6 °C in 12 h".
+   - "Less than one degree per hundred kilometres" times 17 km in 15 min (18 m/s) gives up to 1.9×10⁻⁴, not "a few hundred-thousandths". The real 3.3×10⁻⁵ is small because the drift ran nearly along the isotherms.
+   - Fix: show "−6 × 10⁻⁵" and say "two point six". Add one sentence: "and it drifted almost along the lines of equal temperature, so only a small part of that gradient counts."
+2. **Symbols not said: s16–s17 13:58–15:31 (U), s19 16:15–17:23 (u, v, w), s20 17:40 (∇).**
+   - Fix: say "capital U, the plane's speed east" and "for the balloon, the speeds are the wind: u east, v north, w up". Say "grad T" once in s20.
+3. **s20 17:58–18:12: the sign of DT/Dt is not explained.** "The wind brought in warmer air at 3.7 … So the air parcel itself cooled by 0.8" skips the reasoning.
+   - Fix: add "If the parcels had kept their temperature, the place would have warmed by 3.7 degrees per hour. It warmed only 2.9, so each parcel cooled by about 0.8."
+4. **s22 19:45–20:16: hill numbers.**
+   - "+140 m" is shown for both trails, but the data give 135.5 m (summit 325.1 m, car park 189.7 m). "4.0 km" and "9.0 km" are on screen and never spoken.
+   - Fix: show "+135 m". Say "about a hundred and thirty-five metres either way; four kilometres on the straight trail, nine on the winding one."
+5. **s31 29:22–29:31: spoken number differs from the screen.** The narration says "four point three kilometres higher", but the screen and the maths use 4.26. From the spoken numbers a viewer gets −8.8, not −8.4.
+   - Fix: say "four point two six". In s09 7:16–7:54, label the levels "1.53 km" and "5.80 km" so that 4.26 is visible.
+6. **Maths past the 1840 safe line (the builder's known items, plus more).**
+   - s31 28:46–29:40: T(z₀ + h) and dT/dz end at x ≈ 1896.
+   - s33 30:52–31:46: the top formula reaches x ≈ 1905, and the e^h series x ≈ 1880.
+   - s16/s17: see M2.
+   - Fix: 84 px (main 96) from x 1060, or break the line at "≈".
+7. **Source line on frames with no data, or the wrong source.**
+   - 0:13–0:16.8: "IGRA2" under the computed Clausius–Clapeyron curve.
+   - s32 30:00–30:48: IGRA2 under the c h² panels.
+   - s37 34:52–34:59: the flat-plane panel.
+   - s38 35:13–35:40: the MODIS line before the image appears.
+   - s41 38:15–38:45: the ERA5 water-vapour line before the series appears.
+   - s46 44:28–44:51: the ERA5 line under the grid-history dots.
+   - s47 44:51–46:13: one blanket line under abstract recap panels.
+   - Fix: show the source line only while its data element is on screen, and give the recap a per-beat source.
+8. **Collisions (text or links).**
+   - s02 1:01–1:09: the link heads land on "rate =".
+   - s03 1:31–2:13: "= 7" runs into "f(x) = x²". Put f(x) = x² above the stack.
+   - s06 4:24: "+3 °C per h" touches the T-axis label.
+   - s08 5:56–6:14: "fixed thermometer" butts into "the place stays fixed".
+   - s09 7:21–7:54: both gold links cross "4.26 km".
+   - s23 20:37–21:27: the small ∂²f/∂y∂x line touches ∂M/∂y.
+   - s24 22:35: "fractional changes add" touches the denominators.
+   - s28 25:54–27:57: the route line runs into "27 kJ/kg".
+   - s30 28:30–28:35: "locally a line" sits on the inset's "°C".
+   - s34 32:38–32:50: the link crosses "exponential".
+9. **Legibility at 640 px.**
+   - s44/s45 41:58–43:26 use inline \tfrac (the digits of h²/2 and h³/6 are about 25 px). Use \dfrac at ≥ 68 px.
+   - s45 S10 43:15–43:26: the "sin x … forward −0.043 / centred −0.0009" line is small and misaligned. Make it "error: forward −0.043, centred −0.0009" at 54 px.
+   - s10 8:32–9:09: the "→ ∂/∂t : 2x" rows are small.
+10. **s27 24:41–25:00: no integration step.** The scene jumps from dp/p = −dz/H to p = p₀e^(−z/H), which breaks U-WB-R5 ("every step, including the integration").
+    - Fix: add a check line using this movie's chain rule: "d/dz of p₀e^(−z/H) = −p/H, so dp/p = −dz/H ✓". Or show ln p − ln p₀ = −z/H.
+11. **Tools used but not taught.**
+    - s42 39:55: the power rule (T⁴ → 4T³). Add "just as x squared gave two x, T to the fourth gives four T cubed".
+    - s24/s25 21:30: kelvin. Add "kelvin is degrees Celsius plus 273".
+    - s42 39:49: "emission temperature" (the temperature a black body would need to send out 240 W/m²).
+    - s29 27:28: η (say "written eta").
+12. **s10 8:47–9:09: a number without its calculation.** 1.4×10⁻⁹ is given before, and without, its calculation.
+    - Fix: add a CalcStack (7.6 − 8.6 − 1.8 + 3.2) °C ÷ (36.8 km × 2 h) ≈ 1.4×10⁻⁹ °C m⁻¹ s⁻¹ when the corners appear.
+    - The axis title reads "small t" (7:58–9:09). Write "t".
+13. **s07 5:17–5:41.** "4.51 − (5.69)" has stray parentheses, and "≈ −2.5" has no unit. Write "4.51 − 5.69" and "≈ −2.5 °C/100 km".
+14. **s06 4:25–4:42.** While T = x t is discussed, the dimmed plane of the old field stays on the left. Show the x t saddle, or hide the plane.
+15. **Unspoken numbers, or a near-empty half.**
+    - s14 13:00–13:08: the "2.5 °C" traveller readout is never said.
+    - s43 40:22–40:42: "+1.04 °C" is shown, but "about one degree" is spoken.
+    - s43 40:18–40:26: the left half holds only a zero line. Bring in the +3.9 bar or the thermostat picture on S1.
+16. **s28 25:23–26:30: no 3-D parcel (U-WB-R3).** "An air parcel… expand to one and a half times its volume" is shown only on the p–α chart. Add a small 3-D parcel cube growing ×1.5 beside it.
+17. **s16 13:58–14:52: the hour-long flight is an extrapolation.**
+    - The readouts run to −3.5 °C after an hour (5.1 − 8.6) over a map that changes along 360 km. That extrapolates the instant rate.
+    - Fix: say "if these rates held for an hour", or end the clock at 10 min.
+    - The time graph's tick labels (y ≈ 835) crowd the source-line band. Keep the picture ≤ 820.
+18. **s09 7:10–7:16.** The Trappes true-colour tile is a hard-edged white square on the Blue Marble and looks like a glitch. Feather its edge, or outline it and label it "30 Sep 2026".
+19. **End card 46:13–46:39.**
+    - The topic list has uneven gaps, and "coordinates" is brighter and bolder than the rest.
+    - It omits waves, stability and PDEs/numerical methods, which s38 and s46 name.
+    - Fix: a 4-column grid of equal weight, with the three missing topics added.
+20. **s41 38:23–39:09: the warming figure.**
+    - "+1.26 °C (2016–2025)" has no baseline, and the narration says "one and a quarter".
+    - Fix: show "+1.26 °C (2016–2025 vs 1850–1900)" and say "one point two six". Add the Forster et al. 2026 credit to the source line while the number shows.
+    - s42: the source line says "2026-08", but 240.6 W/m² is the 2001–2026 mean. Add "map 2026-08 · mean 2001–2026".
+21. **s05 3:21–3:40.** An orange boxed "x" sits on the landscape with no explanation. Replace it with an arrow labelled "x (east)".
+22. **s29 27:28–27:57.** Δη has no unit; see M4.
+
+## Overall: FIX (ch00_derivatives_taylor review 1 — 5 Must, 22 Should)
+- **The maths and physics are right everywhere.** All 13 QA gates pass, and the manifest hashes reproduce.
+- **The five Musts are layout and one teaching gap.** Three are collisions that hide numbers or text (s32, s29, s35), one is a clipped label (s16), and one is undefined thermodynamics notation (s28/s29).
+- **Fix loop.**
+  - TSX fixes: M1, M2, M4, M5 and most Shoulds. Re-render s02–s10, s16–s17, s19–s24, s28–s35, s41–s47 and the end card.
+  - TTS for the changed sentences: M3, S1–S5, S10, S11, S15, S17 and S20. Use the splice workflow used for #1a.
+- **Then** a fresh re-review.
+
+**Disk.**
+- C: 55 GB free at the start and at the end.
+- G: 512 GB free at the start and at the end.
+- This review wrote 156 MB (502 files) to G: under `…/review1/` and nothing to C:.
