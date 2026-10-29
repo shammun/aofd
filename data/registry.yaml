@@ -1555,3 +1555,145 @@ datasets:
     derived_in_repo: [data/derived/ch00/rwm_gfs_2026-10-27T18_upper.bin, data/derived/ch00/rwm_gfs_2026-10-27T18_upper.json]
     checks: "RM69: 1000-500 hPa thickness at La Grande CYAH (nearest point 53.75N 73.75W) 5255 m < 5350 m PASS (director estimate about 5250 m); 250-hPa max wind 66.4 m/s at 38.25N 53.75W (same as the planning read); t850 249.3-298.7 K"
     used_by: [movie ch00_reading_weather_maps s54, s80 (N2)]
+  ECMWF-OPEN-ENS:
+    catalogue: ECMWF-OPEN
+    title: ECMWF open data, IFS ensemble (ENS, stream enfo, type pf) 0.25 deg - msl and 500-hPa height (gh) of the 50 perturbed members valid 2026-10-27T18 UTC from the runs 22/24/26 Oct 00Z and 12Z (+138/126, +90/78, +42/30 h) and 27 Oct 18Z (+0 h)
+    url: https://www.ecmwf.int/en/forecasts/datasets/open-data
+    raw_url: https://ecmwf-forecasts.s3.eu-central-1.amazonaws.com/{YYYYMMDD}/{HH}z/ifs/0p25/enfo/{YYYYMMDDHH}0000-{step}h-enfo-ef.grib2
+    route: anonymous AWS mirror (keeps history; ECMWF's portal data.ecmwf.int keeps only the last 12 runs). JSON-lines .index -> select 100 messages -> HTTP Range requests (8 in parallel) -> one GRIB-2 file per run (~47 MB of a 4.3 GB file) through fluidpy.data.fetch(retrieve=...) and the disk guard; decoded with cfgrib 0.9.15 / eccodes 2.50. S3 answers 503 "slow down" under load (8 of 47 first-pass requests, all AIFS-ENS); retried with back-off
+    fetcher: fluidpy.data.ecmwf_open.fetch_fields / fluidpy.data.movie_rwm_ecmwf.fetch_all, build_products
+    login: none
+    licence: CC BY 4.0 + ECMWF Terms of Use for open data; no registration; redistribution allowed with attribution
+    licence_url: https://apps.ecmwf.int/datasets/licences/general
+    citation: "ECMWF, 2026: ECMWF open data - real-time IFS and AIFS forecasts, European Centre for Medium-Range Weather Forecasts, https://www.ecmwf.int/en/forecasts/datasets/open-data (AWS mirror https://ecmwf-forecasts.s3.eu-central-1.amazonaws.com/)"
+    attribution: "ECMWF open data (CC BY 4.0). Copyright (c) 2026 European Centre for Medium-Range Weather Forecasts (ECMWF), www.ecmwf.int; CC BY 4.0; subset, regridded and reduced by fluidpy; provided as is, without warranty"
+    credit: ECMWF open data (CC BY 4.0)
+    size_bytes: 328421600  # 7 GRIB files (46.6-47.5 MB each) + 7 index files (2.1 MB each)
+    sha256_files: {2026102212_126h_ifs_enfo_gh500-msl.grib2: 8ec007179d272ce804665c1dfda09e398b67c7d475859596d4fe3a54ce01a4ac}  # all hashes in logs/downloads.log
+    sha256_derived:
+      rwm_ecmwf_ens_2026-10-27T18.nc: b389e21b8ae5e508454cff769d944c890eba854537b96e5262ec3299b33c9087
+      rwm_ecmwf_ens_2026-10-27T18.bin: 9d8abb4317244efabcbe0c8c18049718435e0229379361d8ff7a51775e0e0bf6
+      rwm_ecmwf_ens_2026-10-27T18.json: dd0e0511cc48e71de7ed38e6e830ec78e55c5528774c29374bbfcf5ca9140501
+    variables: {msl: "mean sea-level pressure [Pa]", z500: "geopotential height gh at 500 hPa [gpm]", lows: "per member: deepest +-2 deg local msl minimum within 1200 km of the ECMWF analysis low, with closed-isobar depth and number of closed 4-hPa isobars", z500_contours: "per member 5520/5640/5760 gpm polylines on the 0.5 deg grid"}
+    coordinates: GRIB lat 90..-90 (N->S), lon -180..179.75; products lat 10..80 S->N, lon -170..10; member number 1-50 (NO control in IFS ENS open data; the unperturbed IFS run is ECMWF-OPEN-IFS)
+    subset: 7 runs x 50 members x 2 fields, box 10-80N 170W-10E after decoding (download is whole global messages)
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true  # AWS mirror keeps the archive
+    raw_files: [raw/ECMWF-OPEN-ENS/2026102212_126h_ifs_enfo_gh500-msl.grib2, raw/ECMWF-OPEN-ENS/2026102412_078h_ifs_enfo_gh500-msl.grib2, raw/ECMWF-OPEN-ENS/2026102612_030h_ifs_enfo_gh500-msl.grib2, raw/ECMWF-OPEN-ENS/2026102200_138h_ifs_enfo_gh500-msl.grib2, raw/ECMWF-OPEN-ENS/2026102400_090h_ifs_enfo_gh500-msl.grib2, raw/ECMWF-OPEN-ENS/2026102600_042h_ifs_enfo_gh500-msl.grib2, raw/ECMWF-OPEN-ENS/2026102718_000h_ifs_enfo_gh500-msl.grib2]
+    derived_on_root: [derived/ch00/rwm_ecmwf_ens_2026-10-27T18.nc]
+    derived_in_repo: [data/derived/ch00/rwm_ecmwf_ens_2026-10-27T18.bin, data/derived/ch00/rwm_ecmwf_ens_2026-10-27T18.json]
+    checks: "T+0 ENS mean vs GFS analysis (box, 0.25 deg): msl RMS 1.18 hPa (0.46 hPa where GFS orography <= 500 m), z500 RMS 6.7 m (bias +5.5 m). 982 low, matched lows / pos RMS spread / p s.d.: +126 h 47 of 50 (3 no low) 398 km 5.7 hPa; +78 h 50 237 km 6.5 hPa; +30 h 50 86 km 2.2 hPa; +0 h 50 61 km 1.5 hPa. Every GRIB valid_time = 2026-10-27T18:00"
+    used_by: [movie ch00_reading_weather_maps s72, s73, s73b, s73c]
+  ECMWF-OPEN-IFS:
+    catalogue: ECMWF-OPEN
+    title: ECMWF open data, IFS high-resolution forecast (HRES, stream oper, type fc) 0.25 deg - msl, 500-hPa height (gh) and 6-h precipitation valid 2026-10-27T18 UTC from the runs 22/24/26 Oct 00Z and 12Z, 24 Oct 18Z (+72 h) and 27 Oct 18Z (+0 h = the "ECMWF analysis" used in the movie)
+    url: https://www.ecmwf.int/en/forecasts/datasets/open-data
+    raw_url: https://ecmwf-forecasts.s3.eu-central-1.amazonaws.com/{YYYYMMDD}/{HH}z/ifs/0p25/oper/{YYYYMMDDHH}0000-{step}h-oper-fc.grib2
+    route: as ECMWF-OPEN-ENS (index -> HTTP Range -> fluidpy.data.fetch); 3 messages per run (msl, gh500, tp) + tp at step-6 h. The 06/18 UTC IFS runs are published under stream oper in the bucket (no scda folder; checked with list_files 2026-10-29; 18Z runs reach 144 h)
+    fetcher: fluidpy.data.ecmwf_open.fetch_fields / fluidpy.data.movie_rwm_ecmwf
+    login: none
+    licence: CC BY 4.0 + ECMWF Terms of Use for open data; no registration; redistribution allowed with attribution
+    licence_url: https://apps.ecmwf.int/datasets/licences/general
+    citation: "ECMWF, 2026: ECMWF open data - real-time IFS and AIFS forecasts, European Centre for Medium-Range Weather Forecasts, https://www.ecmwf.int/en/forecasts/datasets/open-data (AWS mirror https://ecmwf-forecasts.s3.eu-central-1.amazonaws.com/)"
+    attribution: "ECMWF open data (CC BY 4.0). Copyright (c) 2026 European Centre for Medium-Range Weather Forecasts (ECMWF), www.ecmwf.int; CC BY 4.0; subset, regridded and reduced by fluidpy; provided as is, without warranty"
+    credit: ECMWF open data (CC BY 4.0)
+    size_bytes: 13703000  # 16 GRIB files 0.30-1.38 MB + index files (41 kB each)
+    sha256_files: {2026102718_000h_ifs_oper_gh500-msl.grib2: 0489523c4fc4cdefca34e6547318168eb4541b7fb33f4525e5d93bcdcb3b0a0d}  # all hashes in logs/downloads.log
+    sha256_derived:
+      rwm_ecmwf_ifs_2026-10-27T18.nc: 287e5fbce2d8c5707c9d713cfb0f0e4f33dbb4adac2451adc6808c80301dff3f
+      rwm_ecmwf_ifs_2026-10-27T18.bin: 39fdcb49633798c1e260e96542404fa026f396ded6f684cfe079a317fd1d70bc
+      rwm_ecmwf_ifs_2026-10-27T18.json: b17930e4d27fd15bc745a30bad2519114538f969fbb86c9dd40bc7d3ad6b4385
+    variables: {msl: "[Pa]", z500: "gh at 500 hPa [gpm]", tp6: "precipitation in the 6 h ending at the valid time = tp(t) - tp(t-6h) [mm] (tp is accumulated from the run start; NaN for the T+0 run)"}
+    coordinates: as ECMWF-OPEN-ENS; nc 0.25 deg, movie .bin 0.5 deg (2x2 block means), 8 runs
+    subset: 8 runs x 3 fields, box 10-80N 170W-10E
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ECMWF-OPEN-IFS/2026102718_000h_ifs_oper_gh500-msl-tp.grib2, raw/ECMWF-OPEN-IFS/2026102418_072h_ifs_oper_gh500-msl-tp.grib2, raw/ECMWF-OPEN-IFS/2026102412_078h_ifs_oper_gh500-msl-tp.grib2]  # + 13 more in raw/ECMWF-OPEN-IFS/
+    derived_on_root: [derived/ch00/rwm_ecmwf_ifs_2026-10-27T18.nc]
+    derived_in_repo: [data/derived/ch00/rwm_ecmwf_ifs_2026-10-27T18.bin, data/derived/ch00/rwm_ecmwf_ifs_2026-10-27T18.json]
+    checks: "T+0 vs GFS analysis: msl RMS 1.19 hPa (0.46 lowland), bias -0.09 hPa; z500 RMS 6.7 m, bias +5.5 m. ECMWF analysis 982 low = 983.15 hPa at 42.0N 43.75W (GFS 982.1 at 42.75N 43.5W: 86 km, +1.0 hPa; RM97 50-km test FAILS -> V-s71b-an). 18Z 24 Oct +72 h: 992.8 hPa at 41.5N 43.0W, 83 km from the ECMWF analysis low; msl RMSE 25-70N 80W-0 vs ECMWF analysis 2.20 hPa (vs GFS analysis 2.20)"
+    used_by: [movie ch00_reading_weather_maps s71b, s71c, s71e, s73]
+  ECMWF-OPEN-AIFS:
+    catalogue: ECMWF-OPEN
+    title: ECMWF open data, AIFS single (machine-learned forecast, stream oper) 0.25 deg - msl, 500-hPa height and 6-h precipitation valid 2026-10-27T18 UTC from the same 8 runs as ECMWF-OPEN-IFS
+    url: https://www.ecmwf.int/en/forecasts/datasets/open-data
+    raw_url: https://ecmwf-forecasts.s3.eu-central-1.amazonaws.com/{YYYYMMDD}/{HH}z/aifs-single/0p25/oper/{YYYYMMDDHH}0000-{step}h-oper-fc.grib2
+    route: as ECMWF-OPEN-ENS; AIFS steps every 6 h to 360 h (all 4 cycles)
+    fetcher: fluidpy.data.ecmwf_open.fetch_fields(model="aifs-single") / fluidpy.data.movie_rwm_ecmwf
+    login: none
+    licence: CC BY 4.0 + ECMWF Terms of Use for open data; no registration; redistribution allowed with attribution
+    licence_url: https://apps.ecmwf.int/datasets/licences/general
+    citation: "ECMWF, 2026: ECMWF open data - real-time IFS and AIFS forecasts (https://www.ecmwf.int/en/forecasts/datasets/open-data); Lang, S., et al., 2024: AIFS - ECMWF's data-driven forecasting system, arXiv:2406.01465"
+    attribution: "ECMWF open data (CC BY 4.0). Copyright (c) 2026 European Centre for Medium-Range Weather Forecasts (ECMWF), www.ecmwf.int; CC BY 4.0; subset, regridded and reduced by fluidpy; provided as is, without warranty"
+    credit: ECMWF open data (CC BY 4.0)
+    size_bytes: 12000000  # 15 GRIB files 0.28-1.29 MB + index files
+    sha256_derived:
+      rwm_ecmwf_aifs_2026-10-27T18.nc: 51eb7db1a60c9e0658ecbac84806bec09b1e120a5dbeb10fe7ae5b244be0731e
+      rwm_ecmwf_aifs_2026-10-27T18.bin: 8e0e0536d0a42cb8b97c79c15e475c858c4b81f5fd7fafb85e23386c7d2466e1
+      rwm_ecmwf_aifs_2026-10-27T18.json: d4c958b5aa4156ed792723d2ede3a15705d3d347122e7d24493973b06ab02892
+    variables: {msl: "[Pa]", z500: "gh at 500 hPa [gpm]", tp6: "6-h precipitation [mm]"}
+    coordinates: as ECMWF-OPEN-IFS
+    subset: 8 runs x 3 fields, box 10-80N 170W-10E
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ECMWF-OPEN-AIFS/2026102418_072h_aifs-single_oper_gh500-msl-tp.grib2, raw/ECMWF-OPEN-AIFS/2026102718_000h_aifs-single_oper_gh500-msl-tp.grib2]  # + 13 more in raw/ECMWF-OPEN-AIFS/
+    derived_on_root: [derived/ch00/rwm_ecmwf_aifs_2026-10-27T18.nc]
+    derived_in_repo: [data/derived/ch00/rwm_ecmwf_aifs_2026-10-27T18.bin, data/derived/ch00/rwm_ecmwf_aifs_2026-10-27T18.json]
+    checks: "T+0 vs GFS analysis: msl RMS 1.18 hPa, z500 RMS 6.7 m (AIFS starts from the IFS analysis: T+0 differs from IFS T+0 by 0.16 hPa RMS). 18Z 24 Oct +72 h: 990.3 hPa at 41.75N 42.75W, 87 km from the ECMWF analysis low; msl RMSE 25-70N 80W-0 vs ECMWF analysis 1.56 hPa"
+    used_by: [movie ch00_reading_weather_maps s71e]
+  ECMWF-OPEN-AIFS-ENS:
+    catalogue: ECMWF-OPEN
+    title: ECMWF open data, AIFS ensemble (stream enfo, control cf + 50 perturbed pf) 0.25 deg - msl and 500-hPa geopotential valid 2026-10-27T18 UTC from the same 7 runs as ECMWF-OPEN-ENS
+    url: https://www.ecmwf.int/en/forecasts/datasets/open-data
+    raw_url: https://ecmwf-forecasts.s3.eu-central-1.amazonaws.com/{YYYYMMDD}/{HH}z/aifs-ens/0p25/enfo/{YYYYMMDDHH}0000-{step}h-enfo-{cf|pf}.grib2
+    route: as ECMWF-OPEN-ENS; control and perturbed members are separate files; AIFS-ENS publishes z (geopotential, m2 s-2) not gh, converted with g0 = 9.80665 m s-2
+    fetcher: fluidpy.data.ecmwf_open.fetch_fields(model="aifs-ens", type_="cf"|"pf") / fluidpy.data.movie_rwm_ecmwf
+    login: none
+    licence: CC BY 4.0 + ECMWF Terms of Use for open data; no registration; redistribution allowed with attribution
+    licence_url: https://apps.ecmwf.int/datasets/licences/general
+    citation: "ECMWF, 2026: ECMWF open data - real-time IFS and AIFS forecasts (https://www.ecmwf.int/en/forecasts/datasets/open-data); Lang, S., et al., 2024: AIFS - ECMWF's data-driven forecasting system, arXiv:2406.01465"
+    attribution: "ECMWF open data (CC BY 4.0). Copyright (c) 2026 European Centre for Medium-Range Weather Forecasts (ECMWF), www.ecmwf.int; CC BY 4.0; subset, regridded and reduced by fluidpy; provided as is, without warranty"
+    credit: ECMWF open data (CC BY 4.0)
+    size_bytes: 562000000  # 14 GRIB files (cf 1.4-2.2 MB, pf 72.6-113.3 MB; z is 0.95 MB per field) + index files
+    sha256_derived:
+      rwm_ecmwf_aifs_ens_2026-10-27T18.nc: 60cc0af95ccb1821e2dab5685f9dfdfa9748e25a5d5787052a4a7a7438ed4790
+      rwm_ecmwf_aifs_ens_2026-10-27T18.bin: a7897ce83f4989f84a7d75f6c5ecb3b6d1804bcbe24de29ee1a460dd969be379
+      rwm_ecmwf_aifs_ens_2026-10-27T18.json: 3556b535a2b3ac064f70e2ef153506abd555534eaea55a91ff3ef09b01aaf02b
+    variables: {msl: "[Pa]", z500: "z/g0 at 500 hPa [gpm]", lows: "as ECMWF-OPEN-ENS", z500_contours: "as ECMWF-OPEN-ENS"}
+    coordinates: as ECMWF-OPEN-ENS; member number 0 (control) - 50
+    subset: 7 runs x 51 members x 2 fields, box 10-80N 170W-10E
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ECMWF-OPEN-AIFS-ENS/2026102212_126h_aifs-ens_enfo_pf_msl-z500.grib2, raw/ECMWF-OPEN-AIFS-ENS/2026102718_000h_aifs-ens_enfo_pf_msl-z-z500.grib2]  # + 12 more in raw/ECMWF-OPEN-AIFS-ENS/
+    derived_on_root: [derived/ch00/rwm_ecmwf_aifs_ens_2026-10-27T18.nc]
+    derived_in_repo: [data/derived/ch00/rwm_ecmwf_aifs_ens_2026-10-27T18.bin, data/derived/ch00/rwm_ecmwf_aifs_ens_2026-10-27T18.json]
+    checks: "T+0 control vs GFS analysis: msl RMS 1.18 hPa, z500 RMS 6.7 m. 982 low, matched / pos RMS spread / p s.d.: +126 h 51 of 51, 329 km, 4.7 hPa; +78 h 51, 263 km, 5.6 hPa; +30 h 51, 80 km, 1.9 hPa; +0 h 51, 57 km, 1.5 hPa"
+    used_by: [movie ch00_reading_weather_maps s72 (51-member alternative with a control), s73 option]
+  GFS-FC-20261024T12-f078:
+    catalogue: GFS
+    title: NOAA NCEP GFS 0.25 deg forecast from the 12Z 24 Oct 2026 run, +78 h (valid 2026-10-27T18), MSLP and 500-hPa height, 10-80N 170W-10E (insurance twin of the ECMWF 12Z runs; leaves THREDDS about 31 Oct)
+    url: https://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_0p25deg/catalog.xml
+    route: Unidata THREDDS NCSS (anonymous, server-side box + time) via fluidpy.data.gfs.fetch_forecast; 2 files 2026-10-29 13:49 EDT
+    fetcher: fluidpy.data.gfs.fetch_forecast
+    login: none
+    licence: US Government work (NOAA/NCEP), public domain; redistributed unchanged by UCAR/Unidata
+    licence_url: https://www.weather.gov/disclaimer
+    citation: "NOAA NCEP Global Forecast System 0.25 deg forecasts via the Unidata THREDDS Data Server (UCAR); archive: NCAR RDA, doi:10.5065/D65D8PWK"
+    attribution: NOAA NCEP GFS forecasts (public domain), via Unidata THREDDS (UCAR)
+    size_bytes: 659947
+    sha256_files:
+      gfs_fc_20261024_1200_f078_mslp.nc: e41b5215bd9b12cee9eed4e6243828f3b3079a251ef3a62def41647b91ac9fcd
+      gfs_fc_20261024_1200_f078_Geopotentialheightisobar_500hPa.nc: a2bdc7882f8c865418da8ab0247a1d248098ecc529f51273fa4c216a49fa99a7
+    variables: {Pressure_reduced_to_MSL_msl: "[Pa]", Geopotential_height_isobaric: "500 hPa [gpm]"}
+    coordinates: server lat 80..10 (N->S), lon 190..370 (0-360 continued); sort and wrap before use
+    subset: one run, one valid time, 2 fields
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: false  # THREDDS rolling window; archive via NCAR RDA / AWS noaa-gfs-bdp-pds
+    raw_files: [raw/GFS-FC/gfs_fc_20261024_1200_f078_mslp.nc, raw/GFS-FC/gfs_fc_20261024_1200_f078_Geopotentialheightisobar_500hPa.nc]
+    checks: "982 low at +78 h: 996.0 hPa at 40.0N 45.0W, 330 km from the GFS analysis low"
+    used_by: [movie ch00_reading_weather_maps (insurance, raw only; no derived product yet)]
