@@ -153,6 +153,12 @@ Wherever a topic has observations, every movie gets the treatment first asked fo
   imagery, and charts (time series, ranks, composites, cross-sections). Each is computed by tested fluidpy code.
 - A **research-scout** pass before the director for every Part V movie gathers the current state, impact studies and
   data sources.
+- **Data-source line on screen (user, 2026-10-28, repeated twice):** every image, animation, map, globe or figure that
+  uses real data shows a small source line at the bottom of the frame (dataset, time, place; not spoken) — HOUSE_STYLE §5.
+  Directors write the exact line per scene in the storyboard; builders draw it; reviewers fail a frame without it.
+  **Retro-fit queue** (movies made before the rule): 0.1b dot product (globes, weather maps, Antarctic winds), 0.1 v6,
+  0.2 cross product v4 (if kept as a deliverable), and the weather-basics revision (in progress); cross product v5/Part 1/
+  Part 2 and #1a get it in their current builds.
 
 ## Boundary with the chapter movies (2026-10-27)
 Vallis treats these topics in depth: Coriolis, geostrophic and thermal wind in Ch 2 and Ch 5; adjustment in Ch 3;
