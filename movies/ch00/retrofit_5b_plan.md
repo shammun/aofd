@@ -499,7 +499,7 @@ Movie-side (not fluidpy):
 - **Q4. Same storm, different stack.** Should #69's thickness stack over Ciarán (2 Nov 12 UTC, heights) count as a repeat of weather basics' stacks (Brest, 1 Nov, T/p/q/wind)? **Recommend:** not a repeat, unless WB UF2 stacks the same 10-level file. In that case K69 switches to the 27 Oct 2026 GFS case.
 
 ## 9. Decisions (orchestrator, 2026-10-29, under the user's "go with your recommendation")
-- Q1: (b). Never put titles, dates, keywords, calculations, readouts, colour bars or source lines on a map or image. Short outlined feature labels (place names, H/L, station plots) may stay.
+- Q1 (clarified with the user): **nothing is removed.** Titles, dates, keywords, calculations, readouts, colour bars and source lines all stay in the movie. They are placed **beside or below** the map, image or globe, never on top of it. Only short outlined labels that point at a spot on the map itself (place names, H/L, fronts, station plots) may sit on it.
 - Q2: re-render both v5 and Part 2. The user asked for the full v5 as well as the split.
 - Q3: yes. #1a gets its 5 musts and the wind stack in one pass.
 - Q4: not a repeat, as long as weather basics does not stack the same 10-level Ciarán file. The UF2 planner has been told.

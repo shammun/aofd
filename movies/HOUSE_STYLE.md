@@ -186,7 +186,9 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   video at 29:30. When it zooms, rotates or flies to a place, its top, bottom, left and right edges **fade out softly**,
   so the box of the 3-D area is never visible. An unzoomed whole globe needs no fade. While zoomed, text may fade or sit
   behind, and the globe takes the main space.
-- **Source lines and labels sit fully below an image or globe**, never on any part of it.
+- **Source lines and labels sit fully below an image or globe**, never on any part of it. Nothing is dropped: titles,
+  dates, keywords, calculations, readouts and colour bars stay in the movie, placed beside or below the picture. Only
+  short labels that point at a spot on the map (place names, H/L, fronts, station plots) may sit on it.
 - **No text over images or over other text**, on any frame.
 - **Slabs and columns:** every vertical edge runs all the way to the top.
 - **Layer stacks** (`captests/X3_stacked_levels/threejs_layer_stack/X3Stack.mp4`, with many more than 3 layers): use them
