@@ -186,6 +186,7 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   video at 29:30. When it zooms, rotates or flies to a place, its top, bottom, left and right edges **fade out softly**,
   so the box of the 3-D area is never visible. An unzoomed whole globe needs no fade. While zoomed, text may fade or sit
   behind, and the globe takes the main space.
+- **The house globe** (user, 2026-10-29): the reference for every 3-D globe, and above all one that zooms and moves from place to place, is the cross-product v5 sequence at 56:35–57:54 (s33_trades, then the westerlies; `movies/src/ch00/CrossProductWhy.tsx`; frame `outputs/viewing_2026-10-29/weather_basics/2.png`). Copy its look: a large globe, animated wind streaks, camera moves and hovers, soft fades on the edges. **Text may sit on the faded part of the globe**, as in that frame (keyword and numbers on the right), but never on the sharp, unfaded part. A coloured globe always has its titled colour bar. The source line always sits **below** the globe; that v5 sequence gets this fixed too.
 - **Source lines and labels sit fully below an image or globe**, never on any part of it. Nothing is dropped: titles,
   dates, keywords, calculations, readouts and colour bars stay in the movie, placed beside or below the picture. Only
   short labels that point at a spot on the map (place names, H/L, fronts, station plots) may sit on it.
@@ -332,3 +333,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-28: §5 data-source line on every real-data frame, colour bars, 3-D for space, globe camera, explain every number (user feedback on weather basics, reports/ch00_weather_basics_user_feedback.md).
 - 2026-10-29: §5b globe frame + edge fades when zoomed, source lines below images, no text over text, slab edges to the top, many-layer stacks where they add value (user, reports/ch00_weather_basics_user_feedback_round2.md).
 - 2026-10-29: §5b wind arrows on maps and globes are always animated (user).
+- 2026-10-29: §5b the house globe = cross-product v5 56:35–57:54; text allowed on the faded rim only; source below the globe (user).
