@@ -1,0 +1,62 @@
+{
+ "dataset_key": "Sentinel2-L2A-beauce-20240822",
+ "source": "Copernicus Sentinel-2 L2A TCI ('visual') COGs via Element 84 Earth Search STAC (https://earth-search.aws.element84.com/v1, collection sentinel-2-l2a), map-toolkit stac adapter",
+ "items": [
+  {
+   "id": "S2B_31UDP_20240822_0_L2A",
+   "cloud": 0.0029,
+   "datetime": "2024-08-22 10:57:42.132000+00:00"
+  },
+  {
+   "id": "S2B_31UDQ_20240822_0_L2A",
+   "cloud": 0.12065,
+   "datetime": "2024-08-22 10:57:27.658000+00:00"
+  },
+  {
+   "id": "S2B_31UCP_20240822_0_L2A",
+   "cloud": 0.485284,
+   "datetime": "2024-08-22 10:57:46.027000+00:00"
+  },
+  {
+   "id": "S2B_30UYU_20240822_0_L2A",
+   "cloud": 3.171934,
+   "datetime": "2024-08-22 10:57:48.183000+00:00"
+  },
+  {
+   "id": "S2B_31UCQ_20240822_0_L2A",
+   "cloud": 3.691613,
+   "datetime": "2024-08-22 10:57:31.220000+00:00"
+  }
+ ],
+ "acquired_utc": "2024-08-22T10:57Z",
+ "crs": "EPSG:4326 (equirectangular in lon/lat; row 0 = north)",
+ "bounds_wsen": [
+  1.2,
+  48.05,
+  2.4,
+  48.85
+ ],
+ "lon_edges": [
+  1.2,
+  2.4
+ ],
+ "lat_edges": [
+  48.05,
+  48.85
+ ],
+ "size_px": [
+  4096,
+  2731
+ ],
+ "deg_per_px": [
+  0.00029296875,
+  0.00029293299157817805
+ ],
+ "nodata_fraction": 0.0,
+ "processing": "bilinear warp of the 10-m TCI to the grid (adapter); dark-object offsets [23.0, 38.0, 25.0] (p0.5); one gain 1.4868 (luminance p99.7 -> 245.0); gamma 0.92; JPEG q90 4:4:4",
+ "licence": "Copernicus Sentinel data terms (free, full and open; attribution required)",
+ "licence_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+ "credit": "Contains modified Copernicus Sentinel data 2024",
+ "fluidpy_commit": "24a73e4+dirty",
+ "created": "2026-10-29T18:53:19"
+}

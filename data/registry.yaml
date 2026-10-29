@@ -1729,3 +1729,90 @@ datasets:
     raw_files: [raw/GFS-FC/gfs_fc_20261024_1200_f078_mslp.nc, raw/GFS-FC/gfs_fc_20261024_1200_f078_Geopotentialheightisobar_500hPa.nc]
     checks: "982 low at +78 h: 996.0 hPa at 40.0N 45.0W, 330 km from the GFS analysis low"
     used_by: [movie ch00_reading_weather_maps (insurance, raw only; no derived product yet)]
+  ERA5-ARCO-wb-stacks-20231102T12:
+    catalogue: ARCO
+    title: ERA5 t, q, z on 21 pressure levels (1000-1 hPa) plus surface pressure, 2023-11-02T12 UTC, 0-80N 65W-35E, 0.25 deg (weather-basics UF2 stacks, D-UF2-1)
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous, lazy box/level/time selection through fluidpy.data.era5_arco.fetch_box (fluidpy.data.fetch + disk guard); guard estimate 32,956,000 B; 17,282,257 B on disk in 46.6 s (2026-10-29, logged); transfer = whole global chunks (3 level variables x ~100 MB + sp ~3 MB)
+    fetcher: fluidpy.data.movie_wb.fetch_stacks / stack_products (uses fluidpy.data.stack.stack_product, source="arco")
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=overview
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels, C3S CDS, doi:10.24381/cds.bd0915c6; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 17282257
+    sha256_raw_subset: 3fd9f119629b787a3b870c26a01595646717ff346adc7f2f5e70d11de6481df9  # informational (netCDF subset, not byte-stable across re-fetches)
+    sha256_derived:
+      era5_wb_stacks_21lev_2023-11-02T12.nc: 6dca72f50766551c03f37c1945e48139597726156e9eba4cb677be1f480c7f2f
+      era5_wb_stack_t16_2023-11-02T12_0p5.nc: 8cf498081fd4302da9d9852ac0cbd4b7a64eea236fdfef39e4fe5e1ea77d5e88
+      era5_wb_stack_q10_2023-11-02T12.nc: 8177f204b89dabc5b2c4f27ec671a3204b51fd18b2c4a5a2b9af16309c91baf7
+    variables: {t: "temperature [K]", q: "specific humidity [kg kg-1]", z: "geopotential [m2 s-2] (full product only)", zg: "geopotential height [m] = z / 9.80665", sp: "surface pressure [Pa]", below_ground: "int8, 1 where level pressure > sp (ERA5 values there are extrapolated)"}
+    coordinates: store lat N->S, lon 0..359.75; products dims (level bottom->top 1000..1 hPa, lat S->N, lon -180..180)
+    subset: 2023-11-02T12; levels 1000,950,900,850,800,700,600,500,400,300,250,200,150,100,70,50,30,20,10,5,1 hPa; 0-80N 65W-35E. Cuts - t16 (s38b) 16 levels 1000..1 hPa, 0-80N 25W-35E, point-subsampled to 0.5 deg (161 x 121); q10 (s27c) 10 levels 1000..300 hPa, 0-24N 34W-2E at 0.25 deg (s27b ring 12N 16W +-12 lat, +-18 lon)
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_wb_stacks_t-q-z-sp_1000-950-900-850-800-700-600-500-400-300-250-200-150-100-70-50-30-20-10-5-1_1t_2023-11-02T12.nc]
+    derived_on_root: [derived/ch00/era5_wb_stacks_21lev_2023-11-02T12.nc]
+    derived_in_repo: [data/derived/ch00/era5_wb_stack_t16_2023-11-02T12_0p5.nc, data/derived/ch00/era5_wb_stack_q10_2023-11-02T12.nc]
+    checks: "WMO tropopause (lapse_rate_tropopause on cos-lat strip means, sector 25W-35E): 45-55N 10.14 km (geopotential), -52.0 C at 250 hPa; 0-10N 16.61 km, -76.7 C at 100 hPa (same on 16 and 21 levels); sector T(1 hPa) - T(20 hPa) = +39.6 K; zbar(1 hPa) 47.1 km geopotential (~47.4 km geometric); 38-58N mean T decreases 1000->250 hPa. q10 box: max q(1000) 19.9 g/kg at 12.5N 18.5W; zbar/qbar 850 1.54 km/8.2, 700 3.19 km/5.1, 300 9.70 km/0.33 g/kg; vapour 1000-850 hPa / 1000-300 hPa = 0.459 (all columns), 0.466 (columns fully above ground), 0.495 adding the surface-1000 hPa layer over ocean"
+    provenance_not: ERA5-ARCO-ciaran2023-10lev  # W84: a new fetch, not the 10-level Ciaran file
+    used_by: [movie ch00_weather_basics s27c (humidity stack), s38b (temperature shells)]
+  ERA5-ARCO-wb-front-20231101T18:
+    catalogue: ARCO
+    title: ERA5 t, z, u, v, q on 11 pressure levels (1000-500 hPa) plus surface pressure, 2023-11-01T18 UTC, 40-56N 25W-8E, 0.25 deg (weather-basics UF2 cold-front stack, D-UF2-2)
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous, through fluidpy.data.era5_arco.fetch_box (fluidpy.data.fetch + disk guard); guard estimate 1,937,000 B; 1,328,250 B on disk in 88.9 s (2026-10-29, logged)
+    fetcher: fluidpy.data.movie_wb.fetch_front / front_product (uses fluidpy.data.stack.stack_product, source="arco")
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=overview
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels, C3S CDS, doi:10.24381/cds.bd0915c6; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 1328250
+    sha256_raw_subset: e28bf170a3b626a136fae555c3a6359cada9b2e3363c833c5b0c80a42edadd51  # informational
+    sha256_derived:
+      era5_wb_front_11lev_2023-11-01T18.nc (root, with z): 590a050797bae5764e67ef8cc6c56d3f5eae35ad01541c3c89733cc2ef5d7764
+      era5_wb_front_11lev_2023-11-01T18.nc (repo, without z): 84af8a6cc36e9c105ac3ebfbbe3e399a3c9fe993286c33b4df644ceaaae499fa
+    variables: {t: "[K]", q: "[kg kg-1]", u: "[m s-1]", v: "[m s-1]", zg: "geopotential height [m]", sp: "[Pa]", below_ground: "int8"}
+    coordinates: products dims (level 1000..500 hPa bottom->top, lat 40..56 S->N, lon -25..8)
+    subset: 2023-11-01T18; levels 1000,950,900,850,800,750,700,650,600,550,500 hPa; 40-56N 25W-8E
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_wb_front_t-z-u-v-q-sp_1000-950-900-850-800-750-700-650-600-550-500_1t_2023-11-01T18.nc]
+    derived_on_root: [derived/ch00/era5_wb_front_11lev_2023-11-01T18.nc]
+    derived_in_repo: [data/derived/ch00/era5_wb_front_11lev_2023-11-01T18.nc]
+    checks: "overlap with ERA5-CDS-ciaran2023-section (11 levels, 24,255 points): max |dT| 6.4e-4 K, mean 2.6e-4 K (< 1e-3 K); cold front (front_lines locate='centre', Hewson TFP, 100 km smoothing) crosses 46.5N at 7.39W at 850 hPa = the s49 map front; traced <= 80 km per step on 900-650 hPa (6 of 11 levels), 600 hPa crossing 9.98W is a 95-km step from 650 hPa; least-squares slope 850-650 hPa 1:43.9 (r -0.976), i.e. 110 km per 2.5 km; 850->650 hPa 103 km; 850->600 hPa 198 km over 2.75 km (1:72); box-mean zbar 850 1.29 km, 600 4.04 km, 500 5.42 km"
+    fallback: data/derived/ch00/era5_ciaran_2023_section_48p5N_18UTC.nc (ERA5-CDS-ciaran2023-section; not needed)
+    used_by: [movie ch00_weather_basics s48b (cold front by level)]
+  Sentinel2-L2A-beauce-20240822:
+    catalogue: STAC
+    title: Copernicus Sentinel-2B L2A true colour (TCI "visual" COG), 2024-08-22 10:57 UTC, Beauce plain south-west of Paris round Trappes, 48.05-48.85N 1.20-2.40E, mosaic 4096 x 2731 px EPSG:4326 (D-UF2-3)
+    url: https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a
+    raw_url: https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/31/U/DP/2024/8/S2B_31UDP_20240822_0_L2A/TCI.tif  # + 31UDQ, 31UCP, 30UYU, 31UCQ (same datatake)
+    route: "map-toolkit stac adapter (tools/maptools/render.py, .venv-maps pystac-client + rasterio; anonymous AWS COG reads warped bilinear to the grid; archived on G: by request hash raw/STAC/s2_beauce_20240822/f227b2d3d30a7261a014/); 622.7 s; not through fluidpy.data.fetch (COG range reads), disk guard checked by hand (tools/disk_guard.py --need 300MB) before each run. First run (max_cloud 0.5; 31UDP, 31UDQ, 31UCP) left 4.9 % no-data in the NW corner (outside those granules); the kept run (max_cloud 4) fills it from 31UCQ (same datatake; corner clear, near-white fraction 0.07 %)"
+    fetcher: tools/maptools STAC recipe s2_beauce_20240822 (text in reports/data/Sentinel2-L2A-beauce-20240822.md) + fluidpy.data.movie_wb.s2_texture (colour balance, sidecar)
+    login: none
+    licence: Copernicus Sentinel data legal notice (EU Reg. 377/2014, Del. Reg. 1159/2013) - free, full and open; reproduction, distribution, communication to the public and modification allowed; notice required
+    licence_url: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice
+    citation: "ESA Copernicus Sentinel-2 Level-2A (MSI, bottom-of-atmosphere reflectance, TCI product), granules S2B_31UDP/31UDQ/31UCP/30UYU/31UCQ_20240822_0_L2A, via the Element 84 Earth Search STAC catalogue (https://earth-search.aws.element84.com/v1) and the AWS Sentinel-2 COG archive"
+    attribution: Contains modified Copernicus Sentinel data 2024
+    size_bytes: 20984411  # archived mosaic PNG (raw/STAC/.../data.png)
+    sha256_raw_mosaic: 809ee50e10de79dbad148dacd73cf63e325f4a65283616fbf913c1892f2c3dd6
+    sha256_derived:
+      s2_beauce_2024-08-22.jpg: c6c8b9a6c6a2a9261449c96470fb1a749b4dba73972e1ecd71145bc912d7b97b
+      s2_beauce_2024-08-22.json: cc84a12e5dbbd0d0619692c16cf4638ad2f18bd9c9bc5accc555a76e54474df8
+      s2_beauce_2024-08-22.png (root): 4a6eea34a7180a145ee8a64e7111d94a5967b56bcc761ccde60dfa134c8fe237
+    variables: {rgb: "8-bit sRGB, EPSG:4326 lon/lat grid, row 0 = 48.85N, col 0 = 1.20E, 0.000293 deg per px both ways (about 21.6 m E-W, 32.6 m N-S)"}
+    coordinates: bounds_wsen [1.20, 48.05, 2.40, 48.85]; Trappes (48.77N 2.01E) at px (2764, 273)
+    subset: items S2B_31UDP (cloud 0.003 %), 31UDQ (0.12 %), 31UCP (0.49 %), 30UYU (3.17 %), 31UCQ (3.69 %) of 2024-08-22, filled in that order; no-data 0.0 %
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/STAC/s2_beauce_20240822/f227b2d3d30a7261a014/data.png, raw/STAC/s2_beauce_20240822/79929994903f464aef02/data.png]
+    raw_note: 79929994903f464aef02 is the first (incomplete, 4.9 % no-data) run; evictable
+    derived_on_root: [derived/ch00/s2_beauce_2024-08-22.png, derived/maptools/s2_beauce_20240822/stac/s2_beauce_20240822.png]
+    derived_in_repo: [data/derived/ch00/s2_beauce_2024-08-22.jpg, data/derived/ch00/s2_beauce_2024-08-22.json]
+    checks: "no-data 0.0 % (W87 < 0.5 %); bbox fully covered; the two plan granules 31UCP (0.49 %) and 31UDP (0.003 %) are <= 1 % cloud, the corner granules 31UCQ / 30UYU are 3.7 / 3.2 % tile-wide but the filled corner is clear; dark-object offsets R/G/B 23/38/25, one gain 1.487, gamma 0.92"
+    used_by: [movie ch00_weather_basics s31 (thermals ground; replaces the MODIS plate, MODIS crop kept for the end)]
