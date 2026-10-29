@@ -1,4 +1,4 @@
-# ch00_weather_basics — data needs and new functions (movie-director, 2026-10-27)
+# ch00_weather_basics — data needs and new functions (movie-director, 2026-10-27; UF1 additions §G, 2026-10-28)
 
 Every download goes through `fluidpy.data.fetch()` and `tools/disk_guard.py` (G: floor 50 GB, project cap 150 GB, C:
 floor 40 GB). Raw files to `G:/Geophysical Fluid Dynamics/aofd-data/raw/<KEY>/`, movie products to
@@ -103,3 +103,72 @@ run for the changed sentences.
 - CalcStack auto-height for fraction rows: house-kit change for the orchestrator.
 - The four CHECK rows re-defined in stage 1 (W44, W45, s53, D11) were reviewed by the orchestrator: claims about the data, narration follows the data; accepted.
 - s00 title: "and how meteorology uses them" is longer than the dot-product subtitle that touched its animation (user phone review 2026-10-27): keep the right-column animation >= 50 px clear (x >= ~1130).
+
+## G. User feedback round 1 (UF1, movie-director, 2026-10-28)
+
+Source: `reports/ch00_weather_basics_user_feedback.md` (U-WB-01…31, R1–R5). Planning numbers below were computed with the
+fluidpy calls named in each row (scratch script, read-only); the builder re-asserts them as CHECK rows in
+`movies/data/build_ch00_weather_basics.py`. **Disk at planning time: C: 28 GB free (below the 40 GB floor — no download
+or install may touch C: until it is cleaned), G: 530 GB free.**
+
+### G1. Data
+| Id | What | Status / route | Scenes |
+|---|---|---|---|
+| D12 | **ERA5 pressure levels, slice round Ciarán** (`ERA5-CDS-ciaran2023-section`, new key): `temperature`, `specific_humidity`, `u/v_component_of_wind`, `vertical_velocity` (omega), `geopotential`; levels 1000, 975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300 hPa; 2023-11-01 **18 UTC** (add 15 and 21 UTC only if the builder wants the slice to evolve); area [51, −20, 46, 6] (N, W, S, E), 0.25° | **NEW download**, CDS API through `fluidpy.data.cds.retrieve` → `fluidpy.data.fetch(retrieve=...)` (disk guard; raw to `G:/…/raw/ERA5-CDS-ciaran2023-section/`, product to `data/derived/ch00/era5_ciaran_2023_section_48p5N_18UTC.nc`). Estimated ≈ 1.1 MB per hour (20 levels × 6 variables × 21 × 105 points), CC-BY 4.0 (Copernicus), attribution as the other ERA5-CDS rows | s47, s48 |
+| — | ETOPO 2022 60″ Brittany, 46.5–49.5N 6.5W–1E | on disk (`G:/…/raw/ETOPO2022-60s/etopo2022_60s_brittany_46.5-49.5N_-6.5--1E.nc`, fetched in the capability tests); **registry row to add** (`ETOPO2022-60s-brittany`, same fields as `ETOPO2022-60s-tibet`) | s03 (Cesium terrain), s36 |
+| — | Blue Marble NG 21600 (A6) crop of the Brittany box | on disk | s03 drape; s27 cloud-free globe (`IMG.bmng`) |
+| — | ERA5 hourly u10/v10 (A1) | on disk | s03 parcel trajectory; s47–s48 ground wind arrows |
+| — | MODIS Terra + Aqua 250 m true colour, 24 Jun 2024, 47–49.5N 0–4E | on disk (`data/derived/ch00/cumulus_france_2024-06-24_modis_{terra,aqua}_250m.{jpg,json}`, `NASA-GIBS-cumulus-france-2024-06-24`) | s26 (morning → afternoon), s31 |
+| — | IGRA2 Trappes sounding 2024-06-24 12 UTC (35 levels, top 6 hPa) | on disk (`G:/…/raw/IGRA2/FRM00007145-data.txt.zip`, read with `fluidpy.data.igra.find_sounding` + `fill_heights`) | s26 |
+| — | ERA5 850 hPa hourly T, u, v (A3 / `ERA5-CDS-ciaran2023-850`) | on disk (repo copy) | s49 particles |
+| D13 (optional) | GIBS MODIS Terra 250 m true colour of a cloud-free day over Brittany (46.5–49.5N, 6.5W–1E) | only if the BMNG drape looks soft in the Cesium close-up; `fluidpy.data.gibs` → `fetch()`, ≈ 3 MB, NASA open | s03 |
+
+No other download. All other UF1 changes reuse data already in the movie.
+
+### G2. New functions (fluidpy, with tests; never in the TSX)
+| Id | Function | Formula / method | Lives in | Tests |
+|---|---|---|---|---|
+| F12 | `MOLAR_MASS_DRY_AIR = 0.0289647` kg/mol, `MOLAR_MASS_WATER = 0.01801528` kg/mol | cited constants (U.S. Standard Atmosphere 1976; IUPAC) | `fluidpy/geo/constants.py` | V1 M_d/M_w = 1.6078 within 0.1 % of 1/`moist.EPSILON` (1.6077) and of R^v/R^d |
+| F13 | `pressure_height(p, p0, T, R=R_D, g=G0)` → z [m] | z = H ln(p0/p), H = RT/g: inverse of the isothermal p = p0 e^{−z/H} (Vallis (1.186) and the text after it, page `chapters/pages/ch01/p062.png`) | `fluidpy/geo/atmos.py` | V1 round trip with `core.statics.isothermal_pressure`; V1 z(p0/2) = H ln 2 = 5846.5 m at 288.15 K; V7 p = p0 → 0 |
+| F14 | `dry_parcel_ascent(z, T0, p0, lapse=None)` → (T, p, V/V0) | T = T0 − Γ_d z (Γ_d from `core.stratification.adiabatic_lapse_rate`), p from `core.statics.linear_lapse_pressure`, V/V0 = (T/T0)(p0/p) (gas law at fixed mass) | `fluidpy/geo/atmos.py` | V1 z = 0 → (T0, p0, 1); V1 V/V0 = (p0/p)^{1−R/c_p} (Poisson) within 1e-3 for small z; values 25 °C, 1013.25 hPa → 1.4 km: 11.3 °C, 860 hPa, 1.12 |
+| F15 | `fluidpy.diag.sections`: `vertical_section(F, lat, lon, levels, path_lat, path_lon)` (bilinear along a parallel or great circle), `section_anomaly(S)` (minus the mean of each level along the path), `in_section_tracks(us, wz, s, z, seeds, dt, nsteps)` (RK4 in the (s, z) plane, w from `geo.atmos.omega_to_w`) | new module | `fluidpy/diag/sections.py` (new) | V1 a linear field is reproduced exactly; V7 reversing the path reverses the section; V1 tracks in uniform (u, w) are straight lines with slope w/u; V3 RK4 order |
+| — | reuse: `diag.trajectories.advect_on_sphere` (s03 parcel, s49 particles), `diag.sounding.layer_lapse_rate` (s26), `moist.vapour_pressure_from_q`, `moist.relative_humidity` (s47 saturated shading), `core.statics.standard_atmosphere`, `isothermal_pressure`, `geo.atmos.scale_height` | — | — | existing tests |
+
+### G3. CHECK rows (builder; W-ids used in the storyboard)
+| Id | Assert | Planning value |
+|---|---|---|
+| W53 | 12 km / EARTH_RADIUS = 0.001884 (spoken "about two thousandths" = rounds to 0.002); × 150 mm = 0.283 mm (spoken 0.3) | 0.0018835; 0.2825 mm |
+| W54 | desk globe 30 cm → radius 150 mm | 150 |
+| W55 | sympy: m = ρ A Δz, W = m g, force balance p(z)A − p(z+Δz)A = ρ g Δz A ⇒ A cancels ⇒ p(z) − p(z+Δz) = ρ g Δz (extends W13) | symbolic |
+| W56 | H from the spoken values 287 × 288.15 / 9.81 = 8430 m and `scale_height(288.15)` = 8434.7 m both round to 8.43 km | 8430.3 / 8434.7 m |
+| W57 | homogeneous height p0/(ρ0 g) = 101 325/(1.225 × 9.81) = 8431.6 m (8.43 km) and = R T/g within 0.1 % (ρ0 = p0/(R T), W11) | 8431.6 m |
+| W58 | sympy: the tangent of p0 e^{−z/H} at any z0 reaches p = 0 at z0 + H (s18 S9) | symbolic |
+| W59 | sympy: ∫_{p0}^{p} dp'/p' = ln(p/p0); ∫_0^z (−1/H) dz' = −z/H; exp ⇒ p0 e^{−z/H} (extends W17) | symbolic |
+| W60 | e = 2.71828 ("about two point seven two"); 1/e = 0.3679 ("about zero point three seven", "37 %"); p(H) = 372.8, p(2H) = 137.1 hPa (W18) | 0.368 |
+| W61 | 1 km / H = 0.1186 ("about twelve percent"); 1 − e^{−1 km/H} = 0.1118 ("about eleven percent"); `isothermal_pressure`(1, 2 km) = 899.97, 799.35 hPa ("about nine hundred", "about eight hundred"); drops 113.3 and 100.6 hPa ("a hundred and thirteen", "a hundred and one") | as stated |
+| W62 | equal-mass slab tops `pressure_height(p0(1 − k/10))` = 0.889, 1.882, 3.008, 4.309, 5.846, 7.729, 10.155, 13.575, 19.422 km; slab mass p0/(10 g) = 1033 kg ("about a thousand"); bottom 889 m ("about nine hundred"); ninth top 19.4 km ("about nineteen") | as stated |
+| W63 | z(p0/2) = H ln 2 = 8.43 × 0.693 = 5.85 km ("five point eight"); ln 2 = 0.693 ("zero point six nine"); p at 5.85 and 11.69 km = 506.6, 253.3 hPa (screen "≈ 500", "≈ 250") (W20) | as stated |
+| W64 | `standard_atmosphere` (geometric): p(5.5 km) = 505.1 hPa ("about five hundred and five"), 1 − p/p0 = 0.5015; p(16 km)/p0 = 0.1015; p(31 km)/p0 = 0.00995; USSA halving height 5.574 km < isothermal 5.846 km (s22 S7) | as stated (W22) |
+| W65 | M_d/M_w = 28.96/18.02 = 1.607 and 1/ε = 1.6077 agree within 0.1 %; spoken 29/18 = 1.611 rounds to 1.61; molecule dots 100 : 161 | 1.607 |
+| W66 | `vapour_pressure_from_q(0.020, 1e5)` = 32.15 hPa; 1.61 × 0.020 × 1000 = 32.2 ("about thirty-two") (W28) | 32.2 |
+| W67 | IGRA Trappes 2024-06-24 12 UTC: `layer_lapse_rate` from the 1000-hPa level (181 m, 23.6 °C) to 850 hPa (1548 m, 9.8 °C) = 10.1 K/km (range 9–11 → "about ten degrees per kilometre"); dew-point depression at 850 hPa ≤ 0.5 K (0.1 K: saturated near 1.5 km, the cloud base); the rod's bracket spans 0.18–1.55 km | 10.1 K/km |
+| W68 | MODIS cloud cover in the 24 Jun 2024 box: bright-pixel fraction (all three bands ≥ 0.7 of full scale) Aqua (13:20 UTC) ≥ 1.5 × Terra (10:20 UTC) ("the sky fill with them") | builder |
+| W69 | `dry_parcel_ascent` 25 °C, 1013.25 hPa → 1.4 km: T ≈ 11.3 °C, p ≈ 860 hPa, V/V0 ≈ 1.12; the drawn radius uses 1 + 5 (r/r0 − 1) (exaggeration recorded in the manifest) | 1.12 |
+| W70 | s47 slice (18 UTC 1 Nov, 48.5N): the cold-frontal zone (largest along-slice T gradient at 850 hPa, smoothed 100 km) lies at 14–11 W and slopes upward towards the west (cold side); its slope between 1:30 and 1:150. Narration keeps "about one kilometre up for every fifty to a hundred kilometres" if the slope is 1:40–1:120, else the sentence follows the data (rule §D) | builder |
+| W71 | s48 slice: the warm-frontal zone reaches the ground within 1° of Brest (Brest's warm front 18–20 UTC, W51) and slopes upward towards the east with slope 1:80–1:300 ("one or two hundred kilometres" kept if 1:100–1:250) | builder |
+| W72 | slice vertical exaggeration: 1621 km drawn over 1680 px (0.965 km/px), 8 km over 663 px (0.0121 km/px) ⇒ ×80.0 ± 1 % ("eighty times taller", s48 S6) | 80 |
+| W73 | in-slice particles: RK4 tracks with u along the slice and w = `omega_to_w`, w drawn ×80 like the heights; a uniform-flow test track is straight; recycled seeds deterministic | builder |
+| W74 | s49 particles: `advect_on_sphere` on the 18 UTC 850-hPa field, 3000 fixed seeds; mean particle speed equals the mean field speed along the tracks ±5 % | builder |
+| W75 | s03 parcel: `advect_on_sphere` on A1 u10/v10 from 47.75N 3.6W at 12 UTC 1 Nov 2023, 36 steps of 600 s; ≥ 50 % of the path over Brittany's land (NE 10 m land mask); the path ends inland of or at the Channel coast; the box never leaves the ETOPO tile | builder |
+| W76 | the s02 radius rod is EARTH_RADIUS = 6371 km ("six thousand three hundred and seventy-one") | 6 371 000 m |
+
+### G4. Rule reminders for the builder
+- R1 source-line texts are in each scene's `source_line` (exact strings); the QA gets a new check that each one is on
+  screen while its picture is, and that scenes without real data have none.
+- Colour bars (R2) carry the units named in the UF1 text, 52-px ticks, hidden only during fast camera moves.
+- 3-D (R3) objects use kit_wb `View3D` / `Quad3D` / `Arrow3D` (or Cesium where named); labels are billboards, never draped.
+- Globe camera keys (R4) are written in each UF1 text; consecutive globe scenes share the camera at the cut (storyboard
+  `user_feedback_1.rule_R4_continuity`).
+- The TSX `SCENES` list gains s18b, s19b, s20b, s20c, s20d and s27b; `timing.json` comes from the builder's final TTS run
+  (the director's dry run is `G:/…/scratch/movies/ch00_weather_basics/dryrun_uf1/`).
+- `sound_cues.yaml` must be re-timed from the new timing (storm-tense section = new s54 start → new s60 start).
