@@ -191,6 +191,10 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   short labels that point at a spot on the map (place names, H/L, fronts, station plots) may sit on it.
 - **No text over images or over other text**, on any frame.
 - **Slabs and columns:** every vertical edge runs all the way to the top.
+- **Wind arrows on a map or globe are always animated**, so the viewer sees the air moving. Use moving dashes or
+  pulses along each arrow, or particles drifting along the flow at a speed scaled to the wind (scale stated). Arrows
+  keep their direction and length from the data. The motion is not a time change in the wind unless the data are a
+  time series.
 - **Layer stacks** (`captests/X3_stacked_levels/threejs_layer_stack/X3Stack.mp4`, with many more than 3 layers): use them
   wherever a variable changes with height and the stack adds understanding. The camera flies round, through, inside and
   below the stack. Never reuse the same stack, data and place across movies; skip a stack where it adds nothing.
@@ -327,3 +331,4 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
 - 2026-10-28: the split cross-product movies: Part 1 (definition, no weather) uses the maths ending; Part 2 and the full v5 use the weather ending (orchestrator, following the user's split request).
 - 2026-10-28: §5 data-source line on every real-data frame, colour bars, 3-D for space, globe camera, explain every number (user feedback on weather basics, reports/ch00_weather_basics_user_feedback.md).
 - 2026-10-29: §5b globe frame + edge fades when zoomed, source lines below images, no text over text, slab edges to the top, many-layer stacks where they add value (user, reports/ch00_weather_basics_user_feedback_round2.md).
+- 2026-10-29: §5b wind arrows on maps and globes are always animated (user).

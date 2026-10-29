@@ -511,3 +511,5 @@ Movie-side (not fluidpy):
   5. 0.1b s20c.
   6. Amend the storyboards of #1b, #5, #6 and #69 before their builds.
   7. #6 moves to the Singapore sounding.
+
+- 2026-10-29 (user): every wind arrow on a map or globe is animated (moving dashes or pulses, or particles along the flow); add this to every retro-fit and new storyboard.
