@@ -45,7 +45,7 @@ import { CamState, D2R, OrbitKey, Projector, V3, add3, cross3, dot3, easeIO, len
 import { Arrow3D, Ball3D, Plane3D, Quad3D, Rod3D, View3D } from "./kit_cp/three3d";
 import { HAND_PTS, Hand3D, POSE, fingerTipLocal, handPoint, handQuat, slerpQ } from "./kit_cp/hand";
 import { BottleCap3D, Door3D, Screw3D, Spanner3D } from "./kit_cp/objects";
-import { Arc3, CircleCross, CircleDot, DoorIcon, FloorGrid, GlobeIcon, L3, MinusGlyph, Observer, Poly3, Seg3, TailSketch, Tick3, TipL3, TipSketch, TurntableIcon, VIOLET } from "./kit_cp/svg3d";
+import { Arc3, CircleCross, CircleDot, DoorIcon, FloorGrid, GlobeIcon, L3, MinusGlyph, Observer, Poly3, Seg3, TailSketch, Tick3, TipL3, TipSketch, TurntableIcon, VIOLET, mid3 } from "./kit_cp/svg3d";
 import { BoxProbe } from "./kit_cp/bbox";
 import { Axis3D, HalfEarthMesh, GlobeCam, GlobeMesh, LatCircle, SurfArrow, Streaks, band, coastPath, decodeTrails, enAt, gcArrowPts, globeCam, globeMatrix, globePath, globeProj, Graticule, ll, llPath, useBin, useTex } from "./kit_cp/globe";
 
@@ -2936,7 +2936,9 @@ const S26A: React.FC = () => {
 };
 const S26B: React.FC = () => {
   const f = useCurrentFrame(), k = K("s26b_two_views");
-  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7);
+  // U-CF (2026-10-29): the new S5 (index 4) is the rule of s26a1 used on r; the old S5-S8 are now indices 5-8
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), tR = SS(k, 4), t4 = SS(k, 5), t5 = SS(k, 6), t6 = SS(k, 7), t7 = SS(k, 8);
+  const [RRL, RRR] = splitEq(EQ_RULE_R), RRP = eqPieces(RRR);
   const s = 120, c: Pt = [520, 450];
   const tv = MG.two_views;
   const P2 = discXY(c[0], c[1], s);
@@ -2972,6 +2974,13 @@ const S26B: React.FC = () => {
         <Keyword f={f} text="each gives Ω × u" at={[1100, 770]} appear={t7} targets={[]} c={ROT} />
       </Svg>
       <Layered parts={VO} layers={[{ t: "all", o: 1 }, { u: [2, 4], o: fin(f, t7) }]} x={1080} y={250} size={70} ay={0} o={fin(f, t3)} />
+      {/* U-CF S5: the rule (muted), B → r, and what it gives for the position (for this sentence only) */}
+      <TeX s={EQ_RULE} x={1080} y={440} size={44} c={C.muted} o={fin(f, tR) * fout(f, SE(k, 4))} />
+      <CalcStack f={f} x={1330} y={500} size={52} o={fout(f, SE(k, 4))} rows={[
+        { lhs: RRL, rhs: RRP[0], at: AT(k, 4, "our rule used on the position"), h: 130 },
+        { rhs: RRP[1], at: AT(k, 4, "the rider sees r change"), cont: true, c: C.key, h: 90 },
+      ]} />
+      <Svg><Lbl x={1080} y={790} t="B → r" c={C.gold} s={T.key} o={fin(f, AT(k, 4, "our rule used on the position")) * fout(f, SE(k, 4))} /></Svg>
     </Scene>
   );
 };
@@ -3067,9 +3076,8 @@ const S27: React.FC = () => {
   if (plainOf(SEEN).replace(/\s/g, "") !== EQ_SEEN.replace(/\s/g, "")) throw new Error("s27 parts ≠ EQ_SEEN");
   const D3: Part[] = [{ t: String.raw`\frac{d\mathbf u}{dt}`, c: C.first }, { t: "=" }, { t: String.raw`\text{real pushes}` },
     { t: String.raw`- 2\boldsymbol\Omega\times\mathbf u`, c: ROT, u: { w: String.raw`\text{Coriolis push (per kg)}`, c: ROT } },
-    { t: String.raw`- \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.local, u: { w: String.raw`\text{centrifugal: outwards}`, c: C.local }, x: C.local }];
+    { t: String.raw`- \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.local, u: { w: String.raw`\text{centrifugal}`, c: C.local } }];
   if (plainOf(D3).replace(/\s/g, "") !== EQ_DUDT3.replace(/\s/g, "")) throw new Error("s27 parts ≠ EQ_DUDT3");
-  const fin2 = fin(f, AT(k, 8, "leave it out"), 14);
   // O2: the merry-go-round is the picture of this scene, large and in the rider's view (as s26a–s26d): first full size,
   // then small at the bottom right while the equation is moved across, then back under the finished equation.
   const kf: [number, number, number, number][] = [[0, 520, 500, 300], [t2 - 4, 520, 500, 300], [t2 + 20, 1600, 690, 160], [t5, 1600, 690, 160], [t5 + 24, 430, 640, 205]];
@@ -3108,23 +3116,19 @@ const S27: React.FC = () => {
         <Lbl x={pushTip[0] - ud[1] * 40} y={pushTip[1] + ud[0] * 40} t="push" c={ROT} s={T.floor} a="middle" o={pushO} />
         <Lbl x={dx} y={Math.min(dy + dR + 52, 840)} t="the rider's view" c={C.key} s={T.key} a="middle" o={big * big} />
         <Arrow p={[dx + dR + 12, dy]} q={[dx + dR + 92, dy]} color={C.local} w={6} head={22} o={fin(f, t7)} />
-        <g opacity={fin(f, t8)}>
-          <ellipse cx={900} cy={700} rx={120} ry={102} fill="none" stroke={C.key} strokeWidth={4} />
-          <Lbl x={900} y={840} t="bulge" c={C.local} s={T.floor} a="middle" />
-        </g>
         <Keyword f={f} text="push per kilogram = acceleration" at={[1100, 300]} appear={t1} out={t2 - 4} targets={[]} s={T.floor} />
         <Keyword f={f} text="velocity change per second" at={[1100, 390]} appear={AT(k, 1, "how much the velocity changes")} out={t2 - 4} targets={[]} s={T.floor} c={C.local} />
         <Keyword f={f} text="Newton" at={[1300, 420]} appear={t3} out={t4 + 10} targets={[[1330, 330]]} />
         <Lbl x={1100} y={500} t="2 ← ① + ②" c={C.gold} s={T.key} o={fin(f, t6)} />
         <Lbl x={1100} y={590} t="− ← moved across" c={C.gold} s={T.key} o={fin(f, AT(k, 6, "the minus"))} />
-        <Keyword f={f} text="in gravity" at={[1060, 700]} appear={AT(k, 8, "part of gravity")} targets={[]} />
+        {/* U-CF S9: where does the leftover go? (s27b-s27g) */}
+        <Lbl x={1470} y={d3y + 46} t="?" c={C.gold} s={T.hero} a="start" o={fin(f, AT(k, 8, "where it goes on Earth"))} />
       </Svg>
       <Layered parts={SEEN.slice(0, 2)} layers={[{ t: "all", o: 1 }]} x={110} y={150} size={56} ay={0} o={seenO} />
       {f < t5 + 11 ? <Layered parts={SEEN.slice(2)} layers={[{ t: "all", o: 1 }, { u: [0, 2, 4, 6], o: fin(f, t2 + 30) }]} x={110} y={240} size={64} ay={0} o={seenO} /> : null}
       <TeX s={String.raw`= \text{real pushes}`} x={1250} y={290} size={56} o={fin(f, AT(k, 3, "equals the real pushes")) * (f < t4 ? 1 : 0.4) * fout(f, t5)} />
       {/* S7: the moved line appears under the dimmed outside line (the move is visible), then takes its place */}
-      <Layered parts={D3} layers={[{ t: "all", o: 1 }, { u: [3], o: fin(f, t5 + 10) }, { u: [4], o: fin(f, t7) }, { x: [4], o: fin2 }]} x={110} y={d3y} size={64} ay={0} o={fin(f, t4) * fout(f, AT(k, 8, "leave it out") + 30)} />
-      <TeX s={EQ_DUDT} x={960} y={300} size={96} ax={0.5} o={fin(f, AT(k, 8, "leave it out") + 30)} />
+      <Layered parts={D3} layers={[{ t: "all", o: 1 }, { u: [3], o: fin(f, t5 + 10) }, { u: [4], o: fin(f, t7) }]} x={110} y={d3y} size={64} ay={0} o={fin(f, t4)} />
     </Scene>
   );
 };
@@ -3175,6 +3179,763 @@ const S27A: React.FC = () => {
         <Lbl x={1100} y={730} t={`largest gap: ${gapUp.toFixed(11)} m`} c={C.key} s={T.floor} o={fin(f, t6 + 20)} />
       </Svg>
       <TeX s={EQ_RIDER} x={1080} y={480} size={46} o={fin(f, t5)} />
+    </Scene>
+  );
+};
+
+// ================================================================ U-CF (2026-10-29): the turning rule used twice, and the centrifugal term
+// s26a1 the rule · s26e/s26f the rule on the velocity (the 2 in 2Ω × u, the leftover Ω × (Ω × r)) · s27b-s27d the centrifugal
+// acceleration (vector triple product, Ω² r⊥, its size) · s27e-s27g effective gravity, the level sea, three traces.
+// Every number is read from data/merry.json (rule, rule_twice, centrifugal) and data/earth.json (centrifugal, effective_gravity,
+// sideways, three_traces), written by build_ch00_cross_product_why.py (N23, N24) from tested fluidpy functions.
+const EQ_RULE = String.raw`\left(\frac{d\mathbf B}{dt}\right)_{\text{outside}} = \left(\frac{d\mathbf B}{dt}\right)_{\text{rider}} + \boldsymbol\Omega\times\mathbf B`;
+const EQ_RULE_R = String.raw`\left(\frac{d\mathbf r}{dt}\right)_{\text{outside}} = \left(\frac{d\mathbf r}{dt}\right)_{\text{rider}} + \boldsymbol\Omega\times\mathbf r = \mathbf u + \boldsymbol\Omega\times\mathbf r`;
+const EQ_RULE_V = String.raw`\left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf r)\right)_{\text{outside}} = \left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf r)\right)_{\text{rider}} + \boldsymbol\Omega\times(\mathbf u + \boldsymbol\Omega\times\mathbf r)`;
+const EQ_RIDER_PART = String.raw`\left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf r)\right)_{\text{rider}} = \frac{d\mathbf u}{dt} + \boldsymbol\Omega\times\mathbf u`;
+const EQ_SEEN2 = String.raw`\text{change seen outside} = \frac{d\mathbf u}{dt} + 2\boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`;
+const EQ_SPLIT = String.raw`\boldsymbol\Omega\times(\mathbf u + \boldsymbol\Omega\times\mathbf r) = \boldsymbol\Omega\times\mathbf u + \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`;
+const EQ_CF = String.raw`-\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \Omega^2\,\mathbf r`;
+const EQ_VTP = String.raw`\mathbf p\times(\mathbf q\times\mathbf s) = \mathbf q\,(\mathbf p\cdot\mathbf s) - \mathbf s\,(\mathbf p\cdot\mathbf q)`;
+const EQ_VTP_OM = String.raw`\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \boldsymbol\Omega\,(\boldsymbol\Omega\cdot\mathbf r) - \mathbf r\,(\boldsymbol\Omega\cdot\boldsymbol\Omega)`;
+const EQ_CF625 = String.raw`\Omega^2|\mathbf r| = 0.5^2\times2.5 = 0.25\times2.5 = 0.625\ \mathrm{m/s^2}`;
+const EQ_CFE = String.raw`-\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r) = \Omega^2\,\mathbf r_\perp`;
+const EQ_CF_ALONG = String.raw`\Omega^2\,\mathbf r - \Omega^2\,\mathbf r_{\text{along}} = \Omega^2\,\mathbf r_\perp`;
+const EQ_CF_MAG = String.raw`|\Omega^2\,\mathbf r_\perp| = \Omega^2\,a\cos\varphi`;
+const EQ_CF034 = String.raw`5.32\times10^{-9}\times6\,371\,000\ \mathrm m \approx 0.034\ \mathrm{m/s^2}`;
+const EQ_OM2 = String.raw`\Omega^2 = (7.29\times10^{-5})^2 \approx 5.32\times10^{-9}\ \mathrm{s^{-2}}`;
+const EQ_CF024 = String.raw`5.32\times10^{-9}\times4\,505\,000\ \mathrm m \approx 0.024\ \mathrm{m/s^2}`;
+const EQ_GEFF = String.raw`\mathbf g = \mathbf g^{*} - \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`;
+const EQ_DUDT_G = String.raw`\frac{d\mathbf u}{dt} = \text{other pushes} + \mathbf g - 2\boldsymbol\Omega\times\mathbf u`;
+const EQ_SIDE = String.raw`\text{sideways} \approx 0.017\ \mathrm{m/s^2}`;
+const EQ_COR10 = String.raw`\text{Coriolis} \le 2\Omega\times10 \approx 0.0015\ \mathrm{m/s^2}`;
+const EQ_GPOLE = String.raw`g_{\text{equator}} \approx 9.78\ \mathrm{m/s^2},\quad g_{\text{poles}} \approx 9.83\ \mathrm{m/s^2}`;
+const EQ_TILT = String.raw`\text{tilt} \approx 0.1^\circ \;\to\; \approx 0.2^\circ`;
+const EQ_BULGE = String.raw`a_{\text{equator}} - a_{\text{poles}} \approx 21\ \mathrm{km} \approx \tfrac{1}{300}\,a`;
+const BROWN = "#c9935f"; // gravity g* and g (storyboard U-CF3: brown); a colour of its own, never a sign
+const MGX = merry as unknown as typeof MG & {
+  rule: { t: number[]; B0: number[]; painted: number[][]; growing: number[][]; omega_x_B0: number[]; growth_m_s: number; len0_m: number };
+  rule_twice: { t: number; u: number[]; r: number[]; omega_x_r: number[]; omega_x_u: number[]; omega_x_omega_x_r: number[]; a_rider: number[];
+    floor_arrow_ghosts: number[][] };
+  centrifugal: { x: number[]; acc: number[]; mag: number; omega_sq: number; period_s: number; omega_dot_r: number; omega_dot_omega: number } };
+const EAX = earth as unknown as {
+  centrifugal: { lat_deg: number[]; acc: number[][]; mag: number[]; omega_sq: number; r_along_km: number[]; r_perp_km: number[]; up_part: number;
+    north_part: number; angle_from_up_deg: number; ratio_to_g_percent: number[] };
+  effective_gravity: { g_star: number; g_45: number; tilt_deg: number; g_vec_45: number[] };
+  sideways: { north_part: number; coriolis_10: number; ratio: number };
+  three_traces: { g_equator: number; g_poles: number; spin_share: number; tilt_sphere_max_deg: number; tilt_real_deg: number; radius_diff_km: number;
+    inv_flattening: number; flattening: number; drawn_ratio_x50: number } };
+// numbers inside the U-CF TeX strings = the data (the render fails otherwise)
+const CHECK_CF: [string, number, number, number][] = [
+  ["Ω × B", Math.hypot(MGX.rule.omega_x_B0[0], MGX.rule.omega_x_B0[1]), 0.6, 1e-6],
+  ["centrifugal disc", MGX.centrifugal.mag, 0.625, 1e-9], ["Ω² disc", MGX.centrifugal.omega_sq, 0.25, 1e-12], ["turn s", MGX.centrifugal.period_s, 12.5, 0.1],
+  ["Ω² Earth", EAX.centrifugal.omega_sq, 5.32e-9, 5e-12], ["cf equator", EAX.centrifugal.mag[0], 0.034, 5e-4], ["cf 45", EAX.centrifugal.mag[1], 0.024, 5e-4],
+  ["cf pole", EAX.centrifugal.mag[2], 0, 1e-9], ["r⊥ 45", EAX.centrifugal.r_perp_km[0], 4505, 0.5], ["⅓ %", EAX.centrifugal.ratio_to_g_percent[0], 0.33, 0.02],
+  ["sideways", -EAX.sideways.north_part, 0.017, 5e-4], ["Coriolis 10", EAX.sideways.coriolis_10, 0.0015, 5e-5], ["> 10 ×", EAX.sideways.ratio, 11.6, 0.1],
+  ["g equator", EAX.three_traces.g_equator, 9.78, 5e-3], ["g poles", EAX.three_traces.g_poles, 9.83, 5e-3], ["⅔", EAX.three_traces.spin_share, 0.667, 0.02],
+  ["tilt sphere", EAX.three_traces.tilt_sphere_max_deg, 0.1, 0.005], ["tilt real", EAX.three_traces.tilt_real_deg, 0.2, 0.01],
+  ["21 km", EAX.three_traces.radius_diff_km, 21, 0.5], ["1/300", EAX.three_traces.inv_flattening, 300, 2], ["g*", EAX.effective_gravity.g_star, 9.82, 5e-3],
+];
+for (const [n, v, ref, tol] of CHECK_CF) if (Math.abs(v - ref) > tol) throw new Error(`U-CF data ≠ storyboard TeX: ${n} = ${v}, TeX ${ref}`);
+const rot2 = (v: number[], a: number): number[] => [v[0] * Math.cos(a) - v[1] * Math.sin(a), v[0] * Math.sin(a) + v[1] * Math.cos(a)];
+/** screen vector of a velocity / acceleration (metres → px, y up) */
+const sv = (p: Pt, v: number[], k: number): Pt => [p[0] + v[0] * k, p[1] - v[1] * k];
+
+// ---------------------------------------------------------------- s26a1 the rule for a turning floor
+const S26A1: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s26a1_rule");
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7), t8 = SS(k, 8), t9 = SS(k, 9), t10 = SS(k, 10);
+  const R = MGX.rule, N = R.t.length - 1, om = MG.Omega;
+  const c: Pt = [500, 450], s = 115;
+  const P2 = discXY(c[0], c[1], s);
+  const tA = AT(k, 4, "swings round"), tG = AT(k, 6, "growing longer");
+  const jA = Math.round(clamp((f - tA) / N, 0, 1) * N);          // one sample per frame: the true speed of a 0.5 rad/s floor
+  const jG = Math.round(clamp((f - tG) / N, 0, 1) * N);
+  const angEnd = om * R.t[N];
+  const grow = f >= tG;
+  // the growing run continues from where the painted run stopped (the data turned by the floor's angle: same physics)
+  const B = grow ? rot2(R.growing[jG], angEnd) : R.painted[jA];
+  const ang = grow ? angEnd + om * R.t[jG] : om * R.t[jA];
+  const tip = P2(B);
+  const VS = 300;                                                 // px per m/s
+  const oxb = [-om * B[1], om * B[0]];                            // Ω × B for Ω = (0, 0, Ω): a quarter turn of B, times Ω
+  const Lb = Math.hypot(B[0], B[1]), rc = grow ? [(B[0] / Lb) * R.growth_m_s, (B[1] / Lb) * R.growth_m_s] : [0, 0];
+  const oA = fout(f, tG - 4, 12);
+  const arcA = R.painted.slice(0, jA + 1).map((p) => P2(p).join(",")).join(" ");
+  const arcG = R.growing.slice(0, jG + 1).map((p) => P2(rot2(p, angEnd)).join(",")).join(" ");
+  const showV = fin(f, t5) * (grow ? fin(f, tG + N, 10) : 1);
+  const sumO = fin(f, t7);
+  const tipV = sv(tip, oxb, VS), tipR = sv(tip, rc, VS), tipS = sv(tip, [rc[0] + oxb[0], rc[1] + oxb[1]], VS);
+  // the rider's inset (disc fixed on the screen, the arrow fixed to it)
+  const ins = { x: 1655, y: 690, s: 44 };
+  const insO = fin(f, t3) * fout(f, t8 - 6);
+  const Bi = grow ? rot2(R.growing[jG], -om * R.t[jG]) : R.painted[0];   // the rider's view: only the length changes
+  const PI = discXY(ins.x, ins.y, ins.s);
+  const RA: Part[] = [{ t: String.raw`\left(\frac{d\mathbf B}{dt}\right)_{\text{outside}}`, u: { w: String.raw`\text{outside watcher}`, c: C.gold } }, { t: "=" }];
+  const RB: Part[] = [{ t: String.raw`\left(\frac{d\mathbf B}{dt}\right)_{\text{rider}}`, c: C.first, u: { w: String.raw`\text{rider}`, c: C.gold } }, { t: "+" },
+    { t: String.raw`\boldsymbol\Omega\times\mathbf B`, c: ROT, u: { w: String.raw`\text{carried round}`, c: C.gold } }];
+  if ((plainOf(RA) + plainOf(RB)).replace(/\s/g, "") !== EQ_RULE.replace(/\s/g, "")) throw new Error("s26a1 parts ≠ EQ_RULE");
+  return (
+    <Scene>
+      <Svg>
+        <Disc cx={c[0]} cy={c[1]} s={s} ang={ang} />
+        <path d={`M ${c[0] + 375} ${c[1]} A 375 375 0 0 0 ${c[0] + 375 * Math.cos(1.0)} ${c[1] - 375 * Math.sin(1.0)}`} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, 8)} />
+        <Lbl x={c[0] + 40} y={c[1] - 46} t="Ω" c={ROT} s={T.key} a="start" o={fin(f, 8)} />
+        {/* S5: ghosts every ≈ 10° and the gold path of the tip */}
+        <g opacity={oA}>
+          {R.painted.filter((_, i) => i % 10 === 0 && i < jA).map((p, i) => <Arrow key={i} p={c} q={P2(p)} color={C.key} w={5} head={20} o={0.3} halo={false} />)}
+          {jA > 0 ? <polyline points={arcA} fill="none" stroke={C.gold} strokeWidth={6} /> : null}
+        </g>
+        {grow && jG > 0 ? <polyline points={arcG} fill="none" stroke={C.gold} strokeWidth={6} /> : null}
+        <Arrow p={c} q={tip} color={C.key} o={fin(f, t1)} />
+        <Lbl x={tip[0] + 22} y={tip[1] + 34} t="B" c={C.key} s={T.calc} o={fin(f, t1)} />
+        {/* S6: the tip's velocity Ω × B (tangent to the circle); S7-S8: the rider's change along B and their sum */}
+        <Arrow p={tip} q={tipV} color={ROT} w={8} head={28} o={showV} />
+        <Lbl x={tipV[0] - 18} y={tipV[1] - 34} t="Ω × B" c={ROT} s={T.key} a="end" o={showV} />
+        <Arrow p={tip} q={tipR} color={C.first} w={8} head={18} o={grow ? fin(f, tG + N, 10) : 0} />
+        <Arrow p={tip} q={tipS} color={C.ink} w={6} head={24} o={sumO} dash="12 8" />
+        {/* S6: the same rule we met on Earth (Ω × r), as a thumbnail */}
+        <g opacity={fin(f, AT(k, 5, "Earth's ground")) * fout(f, t6)}>
+          <circle cx={170} cy={150} r={62} fill="#1d3a5f" stroke={C.ink} strokeWidth={3} />
+          <line x1={170} y1={70} x2={170} y2={230} stroke={C.gold} strokeWidth={4} strokeDasharray="10 7" />
+          <Arrow p={[170, 150]} q={[214, 106]} color={C.first} w={6} head={20} halo={false} />
+          <Arrow p={[214, 106]} q={[262, 120]} color={C.second} w={6} head={20} halo={false} />
+          <Lbl x={262} y={78} t="Ω × r" c={C.second} s={T.floor} a="start" />
+        </g>
+        {/* the rider's view */}
+        <g opacity={insO}>
+          <Disc cx={ins.x} cy={ins.y} s={ins.s} ang={0} />
+          <Arrow p={[ins.x, ins.y]} q={PI(Bi)} color={C.key} w={7} head={24} />
+          {grow ? <Band p={PI(R.painted[0])} q={PI(Bi)} color={C.first} o={fin(f, tG + 10)} w={14} /> : null}
+          <Lbl x={ins.x} y={ins.y - ins.s * MG.radius - 44} t="the rider's view" c={C.key} s={T.floor} a="middle" />
+        </g>
+        <Keyword f={f} text="one rule" at={[1100, 130]} appear={AT(k, 0, "one rule")} out={t3 - 6} targets={[]} />
+        <Keyword f={f} text="an arrow painted on the floor: B" at={[1100, 220]} appear={t1} out={t3 - 6} targets={[]} s={T.floor} />
+        <Keyword f={f} text="position · velocity · direction" at={[1100, 300]} appear={t2} out={t3 - 6} targets={[]} s={T.floor} />
+        <Keyword f={f} text="rider: B stays the same" at={[1100, 130]} appear={t3} out={t6 - 6} targets={[]} />
+        <Keyword f={f} text="outside: B swings round" at={[1100, 220]} appear={tA} out={t6 - 6} targets={[]} />
+        <Keyword f={f} text="tip moves at Ω × B" at={[1100, 310]} appear={AT(k, 5, "the tip moves")} out={t6 - 6} targets={[]} c={ROT} />
+        <Lbl x={1100} y={395} t="just as Ω × r on Earth" c={C.second} s={T.floor} o={fin(f, AT(k, 5, "Earth's ground")) * fout(f, t6 - 6)} />
+        <Keyword f={f} text="rider sees B grow" at={[1100, 130]} appear={t6} out={t8 - 6} targets={[]} c={C.first} />
+        <Keyword f={f} text="both changes add" at={[1100, 220]} appear={t7} out={t8 - 6} targets={[]} />
+        <Keyword f={f} text="dB/dt: change per second" at={[1100, 130]} appear={t8} targets={[]} />
+        <Lbl x={1100} y={215} t="… and who is watching" c={C.muted} s={T.floor} o={fin(f, AT(k, 8, "say who is watching"))} />
+        <Lbl x={1100} y={815} t="B = r" c={C.gold} s={T.calc} o={fin(f, AT(k, 10, "first on the position"))} />
+        <Lbl x={1400} y={815} t="B = velocity" c={C.gold} s={T.calc} o={fin(f, AT(k, 10, "then on the velocity"))} />
+      </Svg>
+      <Layered parts={RA} layers={[{ t: "all", o: 1 }, { u: [0], o: fin(f, AT(k, 9, "seen from outside")) }]} x={1070} y={255} size={64} ay={0} o={fin(f, t9)} />
+      <Layered parts={RB} layers={[{ t: "all", o: fin(f, AT(k, 9, "seen by the rider") - 6) }, { u: [0], o: fin(f, AT(k, 9, "seen by the rider")) },
+        { u: [2], o: fin(f, AT(k, 9, "plus Omega cross B")) }]} x={1160} y={505} size={64} ay={0} o={fin(f, t9)} />
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s26e the rule again, on the velocity (the rider's part → piece ②)
+/** the rider's view of the ball at t = 1.2 s with u, r, Ω × r and their sum (as s26b); `sumPulse` makes the sum glow */
+const RiderBall: React.FC<{ c: Pt; s: number; f: number; sumO?: number; sumPulse?: number; o?: number; uO?: number }> = ({ c, s, f, sumO = 1, sumPulse = 0, o = 1, uO = 1 }) => {
+  const rt = MGX.rule_twice;
+  const P2 = discXY(c[0], c[1], s);
+  const ball = P2(rt.r), VS = (190 * s) / 120;
+  const uT = sv(ball, rt.u, VS), fT = sv(uT, rt.omega_x_r, VS);
+  const j = Math.round(rt.t * 30);
+  return (
+    <g opacity={o}>
+      <Disc cx={c[0]} cy={c[1]} s={s} ang={0} />
+      <polyline points={MG.rotating.slice(0, j + 1).map((p) => P2(p).join(",")).join(" ")} fill="none" stroke={ROT} strokeWidth={5} opacity={0.5} />
+      <Arrow p={c} q={ball} color={C.local} w={6} head={24} />
+      <Lbl x={(c[0] + ball[0]) / 2 - 26} y={(c[1] + ball[1]) / 2 + 18} t="r" c={C.local} s={T.calc} a="end" />
+      <Arrow p={ball} q={uT} color={C.first} o={uO} />
+      <Lbl x={(ball[0] + uT[0]) / 2 - 26} y={(ball[1] + uT[1]) / 2} t="u" c={C.first} s={T.calc} a="end" o={uO} />
+      <Arrow p={uT} q={fT} color={C.second} o={sumO * uO} />
+      <Lbl x={fT[0] + 18} y={fT[1] + 40} t="Ω × r" c={C.second} s={T.key} o={sumO * uO} />
+      <Arrow p={ball} q={fT} color={C.key} w={10 + 4 * sumPulse} o={sumO * uO} />
+      <Lbl x={fT[0] + 26} y={fT[1] - 30} t="u + Ω × r" c={C.key} s={T.key} o={sumO * uO} />
+      <circle cx={ball[0]} cy={ball[1]} r={14} fill={C.key} stroke={C.bg} strokeWidth={3} />
+    </g>
+  );
+};
+const S26E: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s26e_rule_again");
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7);
+  const rt = MGX.rule_twice;
+  const c: Pt = [510, 420], s = 108;
+  const P2 = discXY(c[0], c[1], s);
+  const ball = P2(rt.r), VS = (190 * s) / 120;
+  const sumTip = sv(sv(ball, rt.u, VS), rt.omega_x_r, VS);
+  // S7: the ball steps along u (0.4 s); the floor's velocity under it changes by Ω × u per second of travel
+  const st = easeIO(clamp((f - AT(k, 6, "so Omega cross r changes")) / 40, 0, 1)) * fout(f, t7 + 40, 16);
+  const dtS = 0.4 * st;
+  const b2 = P2([rt.r[0] + rt.u[0] * dtS, rt.r[1] + rt.u[1] * dtS]);
+  const fl2 = [rt.omega_x_r[0] + rt.omega_x_u[0] * dtS, rt.omega_x_r[1] + rt.omega_x_u[1] * dtS];
+  const RV = splitEq(EQ_RULE_V);           // [lhs, "= rider part + Ω × (u + Ω × r)"]
+  const L1R = String.raw`= \left(\frac{d}{dt}(\mathbf u + \boldsymbol\Omega\times\mathbf r)\right)_{\text{rider}}`;
+  const L1C = String.raw`+ \boldsymbol\Omega\times(\mathbf u + \boldsymbol\Omega\times\mathbf r)`;
+  if ((RV[0] + L1R + L1C).replace(/\s/g, "") !== EQ_RULE_V.replace(/\s/g, "")) throw new Error("s26e parts ≠ EQ_RULE_V");
+  const [L2L, L2R] = splitEq(EQ_RIDER_PART);
+  const L2: Part[] = [{ t: "=" }, { t: String.raw`\frac{d\mathbf u}{dt}`, c: C.first }, { t: "+" }, { t: String.raw`\boldsymbol\Omega\times\mathbf u`, c: ROT }];
+  if (plainOf(L2).replace(/\s/g, "") !== L2R.replace(/\s/g, "")) throw new Error("s26e parts ≠ EQ_RIDER_PART");
+  const dimC = f >= t3 ? 0.35 : 1;
+  const tOxu = AT(k, 6, "changes at Omega cross u");
+  const Y1 = 310 - 200 * easeIO(clamp((f - t3) / 20, 0, 1));
+  const topO = fout(f, t3 - 6, 12);
+  return (
+    <Scene>
+      <Svg>
+        <RiderBall c={c} s={s} f={f} sumPulse={pulse(f, t1 + 10, 36)} />
+        {/* S5: two earlier copies of u show that the rider sees u change */}
+        <g opacity={fin(f, AT(k, 4, "d u by d t")) * fout(f, t5)}>
+          {[[-0.4, 0.35], [-0.2, 0.6]].map(([dt, op], i) => { const j0 = Math.round((rt.t + dt) * 30); const p = P2(MG.rotating[j0]);
+            const q = P2(MG.rotating[j0 + 1]); const uu = unit(p, q); return <Arrow key={i} p={p} q={[p[0] + uu[0] * 150, p[1] + uu[1] * 150]} color={C.first} w={6} head={22} o={op} halo={false} />; })}
+        </g>
+        {/* S7: the ball steps along u, the orange floor arrow under it changes (the s26d picture in miniature) */}
+        <g opacity={st > 0 ? fin(f, AT(k, 6, "so Omega cross r changes")) * fout(f, t7 + 40, 16) : 0}>
+          <circle cx={b2[0]} cy={b2[1]} r={12} fill="none" stroke={C.key} strokeWidth={4} />
+          <Arrow p={b2} q={sv(b2, fl2, VS)} color={C.second} w={8} head={28} />
+          <Arrow p={sv(ball, rt.omega_x_r, VS)} q={sv(sv(ball, rt.omega_x_r, VS), rt.omega_x_u, VS * dtS)} color={ROT} w={7} head={22} o={fin(f, tOxu)} />
+        </g>
+        <Keyword f={f} text="the rule, a second time" at={[1080, 120]} appear={AT(k, 0, "the rule a second time")} out={t1 - 4} targets={[]} />
+        <Lbl x={1545} y={Y1 + 170} t="rider's part" c={C.first} s={T.floor} a="start" o={fin(f, AT(k, 2, "seen by the rider"))} />
+        <Lbl x={1540} y={Y1 + 268} t="carried round" c={ROT} s={T.floor} a="start" o={fin(f, AT(k, 2, "plus Omega cross")) * dimC} />
+        <Lbl x={1425} y={615} t="②" c={C.gold} s={T.key} a="start" o={fin(f, t7)} />
+        <Lbl x={90} y={828} t="du/dt: how fast u changes, for the rider" c={C.first} s={T.floor} o={fin(f, AT(k, 4, "how fast the velocity"))} />
+        <Keyword f={f} text="Ω fixed" at={[1100, 730]} appear={AT(k, 5, "Omega doesn't change")} out={AT(k, 6, "so Omega cross r changes") - 4} targets={[]} c={ROT} />
+        <Keyword f={f} text="the floor's speed changes" at={[1100, 730]} appear={AT(k, 6, "so Omega cross r changes")} targets={[]} c={C.second} />
+      </Svg>
+      <TeX s={EQ_RULE} x={1080} y={110} size={46} c={C.muted} o={fin(f, t1) * topO} />
+      <TeX s={String.raw`\mathbf B = \mathbf u + \boldsymbol\Omega\times\mathbf r`} x={1080} y={205} size={56} c={C.key} o={fin(f, AT(k, 1, "u plus Omega cross r")) * topO} />
+      <Svg><CurvedLink f={f} from={[sumTip[0] + 250, sumTip[1] - 40]} to={[1070, 210]} start={AT(k, 1, "u plus Omega cross r") + 6} end={t3 - 8} bend={40} /></Svg>
+      {/* line 1: the rule on the velocity, one part per row (lhs =, the rider's part, the carried-round part) */}
+      <TeX s={RV[0] + " ="} x={1070} y={Y1} size={50} ay={0} o={fin(f, t2)} />
+      <TeX s={L1R.replace(/^= /, "")} x={1130} y={Y1 + 120} size={50} c={C.first} ay={0} o={fin(f, AT(k, 2, "seen by the rider"))} />
+      <TeX s={L1C} x={1130} y={Y1 + 238} size={50} c={ROT} ay={0} o={fin(f, AT(k, 2, "plus Omega cross")) * dimC} />
+      {/* line 2: the rider's part worked out */}
+      <TeX s={L2L + " ="} x={1070} y={420} size={50} c={C.first} ay={0} o={fin(f, t4)} />
+      <Layered parts={L2.slice(1)} layers={[{ t: [0], o: fin(f, AT(k, 4, "d u by d t")) }, { t: [1, 2], o: fin(f, tOxu) }]} x={1130} y={558} size={50} ay={0} o={fin(f, t4)} />
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s26f the carried-round part, part by part, and the sum
+const S26F: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s26f_collect");
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
+  const rt = MGX.rule_twice;
+  // S6: the picture moves up and shrinks so the long sum line can run across the full width
+  const sh = easeIO(clamp((f - t5 + 10) / 24, 0, 1));
+  const c: Pt = [520 - 40 * sh, 450 - 150 * sh], s = 120 - 52 * sh;
+  const P2 = discXY(c[0], c[1], s);
+  const ball = P2(rt.r), VS = (190 * s) / 120;
+  const uTip = sv(ball, rt.u, VS);
+  // S3: ghosts of u swinging round with the floor; S4: the floor arrow Ω × r swinging round, its tip moving at Ω × (Ω × r)
+  const g1 = clamp((f - t2 - 10) / 60, 0, 1), g3 = clamp((f - t3 - 10) / 60, 0, 1);
+  const G3 = rt.floor_arrow_ghosts;
+  const n3 = Math.round(g3 * (G3.length - 1));
+  const fl0 = sv(ball, rt.omega_x_r, VS);
+  const [SPL] = splitEq(EQ_SPLIT);
+  const SPR: Part[] = [{ t: "=" }, { t: String.raw`\boldsymbol\Omega\times\mathbf u`, c: ROT }, { t: "+" },
+    { t: String.raw`\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.local }];
+  if ((SPL + plainOf(SPR)).replace(/\s/g, "") !== EQ_SPLIT.replace(/\s/g, "")) throw new Error("s26f parts ≠ EQ_SPLIT");
+  const SEEN: Part[] = [{ t: String.raw`\text{change seen outside}` }, { t: "=" }, { t: String.raw`\frac{d\mathbf u}{dt}`, c: C.first, u: { w: String.raw`\text{rider sees}`, c: C.first } },
+    { t: "+" }, { t: String.raw`\boldsymbol\Omega\times\mathbf u`, c: ROT, u: { w: String.raw`\text{\textcircled{2}}`, c: C.gold } }, { t: "+" },
+    { t: String.raw`\boldsymbol\Omega\times\mathbf u`, c: ROT, u: { w: String.raw`\text{\textcircled{1}}`, c: C.gold } }, { t: "+" },
+    { t: String.raw`\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.local, u: { w: String.raw`\text{\textcircled{3}}`, c: C.gold } }];
+  if (plainOf(SEEN).replace(/\s/g, "") !== EQ_SEEN.replace(/\s/g, "")) throw new Error("s26f parts ≠ EQ_SEEN");
+  const FIN: Part[] = [{ t: String.raw`\text{change seen outside}` }, { t: "=" }, { t: String.raw`\frac{d\mathbf u}{dt}`, c: C.first }, { t: "+" },
+    { t: String.raw`2\boldsymbol\Omega\times\mathbf u`, c: ROT, u: { w: String.raw`\text{\textcircled{1}} + \text{\textcircled{2}}`, c: C.gold } }, { t: "+" },
+    { t: String.raw`\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.local }];
+  if (plainOf(FIN).replace(/\s/g, "") !== EQ_SEEN2.replace(/\s/g, "")) throw new Error("s26f parts ≠ EQ_SEEN2");
+  const tSum = SS(k, 6), toFin = fin(f, tSum + 20, 14);
+  const lit = (ph: string) => fin(f, AT(k, 5, ph), 8);
+  return (
+    <Scene>
+      <Svg>
+        <RiderBall c={c} s={s} f={f} />
+        <g opacity={fin(f, t2) * fout(f, t3 + 10)}>
+          {[10, 20, 30, 40, 50, 60].filter((d) => d <= 60 * g1).map((d) => { const v = rot2(rt.u, d * D2R); return <Arrow key={d} p={ball} q={sv(ball, v, VS)} color={C.first} w={5} head={20} o={0.35} halo={false} />; })}
+          {g1 > 0 ? <Arrow p={uTip} q={sv(uTip, rt.omega_x_u, VS * 0.8)} color={ROT} w={7} head={24} o={fin(f, t2 + 70)} /> : null}
+          <Lbl x={sv(uTip, rt.omega_x_u, VS * 0.8)[0] - 14} y={sv(uTip, rt.omega_x_u, VS * 0.8)[1] - 30} t="Ω × u" c={ROT} s={T.floor} a="end" o={fin(f, t2 + 70)} />
+        </g>
+        <g opacity={fin(f, t3) * fout(f, t5 - 4)}>
+          {G3.slice(0, n3 + 1).map((v, i) => <Arrow key={i} p={ball} q={sv(ball, v, VS)} color={C.second} w={5} head={20} o={i === n3 ? 1 : 0.3} halo={false} />)}
+          <polyline points={G3.slice(0, n3 + 1).map((v) => sv(ball, v, VS).join(",")).join(" ")} fill="none" stroke={C.gold} strokeWidth={5} />
+          <Arrow p={fl0} q={sv(fl0, rt.omega_x_omega_x_r, VS * 1.6)} color={C.local} w={8} head={26} o={fin(f, t3 + 70)} />
+          <Lbl x={sv(fl0, rt.omega_x_omega_x_r, VS * 1.6)[0] + 16} y={sv(fl0, rt.omega_x_omega_x_r, VS * 1.6)[1] - 36} t="Ω × (Ω × r)" c={C.local} s={T.floor} a="start" o={fin(f, t3 + 70)} />
+          <Lbl x={c[0]} y={c[1] + s * MG.radius + 40} t="towards the centre" c={C.local} s={T.floor} a="middle" o={fin(f, t3 + 80)} />
+        </g>
+        <Keyword f={f} text="the last part of the rule" at={[1080, 120]} appear={AT(k, 0, "the last part")} out={t1 - 4} targets={[]} />
+        <Lbl x={1465} y={300} t="①" c={C.gold} s={T.key} a="middle" o={fin(f, t2) * (f >= t5 ? 0.6 : 1)} />
+        <Lbl x={1700} y={300} t="③" c={C.gold} s={T.key} a="middle" o={fin(f, t3) * (f >= t5 ? 0.6 : 1)} />
+        <Keyword f={f} text="part by part" at={[1080, 420]} appear={AT(k, 1, "part by part")} out={t2} targets={[]} c={C.gold} />
+        <Keyword f={f} text="① the arrow u, carried round" at={[1080, 420]} appear={t2} out={t3 - 4} targets={[]} c={ROT} s={T.floor} />
+        <Keyword f={f} text="③ the floor's velocity, carried round" at={[1080, 420]} appear={t3} out={t4 - 4} targets={[]} c={C.local} s={T.floor} />
+        <Keyword f={f} text="the leftover piece" at={[1300, 450]} appear={t4} out={t5 - 4} targets={[[1700, 325]]} c={C.local} />
+      </Svg>
+      <TeX s={String.raw`3\times(2 + 5) = 3\times2 + 3\times5`} x={1080} y={510} size={T.key} c={C.muted} o={fin(f, AT(k, 1, "ordinary multiplication")) * fout(f, t2)} />
+      <TeX s={String.raw`\boldsymbol\Omega\times(\mathbf u + \boldsymbol\Omega\times\mathbf r)`} x={1080} y={210} size={T.calc} c={ROT} o={fin(f, 6) * fout(f, AT(k, 1, "each part on its own") - 4)} glow={pulse(f, 14, 30)} />
+      <CalcStack f={f} x={1340} y={190} size={50} o={f >= t5 ? 0.6 : 1} rows={[
+        { lhs: SPL, lc: ROT, rhs: { parts: SPR, layers: [{ t: "all", o: 1 }] }, at: AT(k, 1, "each part on its own"), h: 110 },
+      ]} />
+      {f < tSum + 34 ? <Layered parts={SEEN} layers={[{ t: [0, 1], o: 1 }, { t: [2], o: lit("d u by d t") }, { t: [3, 4], o: lit("plus Omega cross u,") },
+        { t: [5, 6], o: lit("Omega cross u again") }, { t: [7, 8], o: lit("plus Omega cross, open bracket") }, { u: [2], o: lit("d u by d t") }, { u: [4], o: lit("plus Omega cross u,") },
+        { u: [6], o: lit("Omega cross u again") }, { u: [8], o: lit("plus Omega cross, open bracket") }]} x={110} y={630} size={64} ay={0}
+        o={fin(f, t5) * (1 - toFin)} /> : null}
+      <Layered parts={FIN} layers={[{ t: "all", o: 1 }, { u: [4], o: fin(f, tSum + 34) }]} x={110} y={630} size={64} ay={0} o={toFin} />
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s27b naming the leftover: the vector triple product on the disc
+const S27B: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27b_centrifugal");
+  const t = (j: number) => SS(k, j);
+  const cf = MGX.centrifugal;
+  const c: Pt = [470, 400], s = 105;
+  const P2 = discXY(c[0], c[1], s);
+  const ball = P2(cf.x);
+  const outT = sv(ball, cf.acc, 170);
+  // the side view: the disc edge-on
+  const sv0: Pt = [885, 230];
+  const sideO = fin(f, t(7));
+  const phaseB = fin(f, t(9) - 4, 16);     // S10-S12: the numbers
+  const VT: Part[] = [{ t: "=" }, { t: String.raw`\boldsymbol\Omega\,(\boldsymbol\Omega\cdot\mathbf r)`, x: C.neg }, { t: "-" }, { t: String.raw`\mathbf r\,(\boldsymbol\Omega\cdot\boldsymbol\Omega)` }];
+  const [VTL] = splitEq(EQ_VTP_OM);
+  if ((VTL + plainOf(VT)).replace(/\s/g, "") !== EQ_VTP_OM.replace(/\s/g, "")) throw new Error("s27b parts ≠ EQ_VTP_OM");
+  const [PL, PR] = splitEq(EQ_VTP);
+  const [NL, NR] = splitEq(EQ_CF625), NP = eqPieces(NR);
+  const resY = 600 - (600 - 150) * easeIO(clamp((f - t(9) + 4) / 20, 0, 1));
+  const rid: Pt = [ball[0] - 92, ball[1] + 10];      // a rider near the rim, beside the ball
+  const ru = unit(c, rid);
+  return (
+    <Scene>
+      <Svg>
+        <Disc cx={c[0]} cy={c[1]} s={s} ang={0} />
+        <Arrow p={c} q={ball} color={C.local} w={6} head={24} />
+        <Lbl x={c[0] - 30} y={(c[1] + ball[1]) / 2} t="r" c={C.local} s={T.calc} a="end" />
+        <Arrow p={ball} q={[ball[0] + 150, ball[1]]} color={C.first} o={fin(f, 4) * fout(f, AT(k, 1, "not on how it moves"))} />
+        <Lbl x={ball[0] + 160} y={ball[1] - 40} t="u" c={C.first} s={T.calc} o={fin(f, 4) * fout(f, AT(k, 1, "not on how it moves"))} />
+        <circle cx={ball[0]} cy={ball[1]} r={14} fill={C.key} stroke={C.bg} strokeWidth={3} />
+        {/* S9: Ω² r points straight out from the centre */}
+        <Arrow p={ball} q={outT} color={C.local} w={10} head={34} o={fin(f, AT(k, 8, "Omega squared times r"))} />
+        <Lbl x={outT[0] + 26} y={outT[1] - 20} t="Ω² r" c={C.local} s={T.calc} a="start" o={fin(f, AT(k, 8, "Omega squared times r"))} />
+        <Keyword f={f} text="outwards" at={[outT[0] + 26, outT[1] + 50]} appear={AT(k, 8, "pointing straight out")} out={t(9) - 4} targets={[]} s={T.floor} />
+        {/* S11: the 2.5 m along r, linked to the number */}
+        <Bracket p={c} q={ball} off={-46} c={C.gold} o={fin(f, AT(k, 10, "two and a half metres"))} />
+        <Lbl x={c[0] + 60} y={(c[1] + ball[1]) / 2} t="2.5 m" c={C.gold} s={T.key} a="start" o={fin(f, AT(k, 10, "two and a half metres"))} />
+        {/* S12: a rider near the rim, pulled outwards (away from the centre) */}
+        <g opacity={fin(f, t(11))}>
+          <Observer x={rid[0]} y={rid[1]} s={0.9} />
+          <Arrow p={[rid[0], rid[1] - 30]} q={[rid[0] + ru[0] * 80, rid[1] - 30 + ru[1] * 80]} color={C.local} w={7} head={22} />
+        </g>
+        {/* S8: the side view: r flat, Ω up, a right angle */}
+        <g opacity={sideO * (1 - phaseB)}>
+          <rect x={sv0[0] - 100} y={sv0[1] - 6} width={200} height={12} rx={6} fill="#24304b" stroke="#c9d2e3" strokeWidth={3} />
+          <Arrow p={sv0} q={[sv0[0], sv0[1] - 130]} color={ROT} w={8} head={28} />
+          <Lbl x={sv0[0] + 18} y={sv0[1] - 120} t="Ω" c={ROT} s={T.key} a="start" />
+          <Arrow p={sv0} q={[sv0[0] - 100, sv0[1]]} color={C.local} w={7} head={24} />
+          <Lbl x={sv0[0] - 100} y={sv0[1] - 40} t="r" c={C.local} s={T.key} a="start" />
+          <RightTick at={sv0} u1={[-1, 0]} u2={[0, -1]} c={C.gold} />
+          <Lbl x={sv0[0]} y={sv0[1] + 52} t="side view" c={C.muted} s={T.floor} a="middle" />
+        </g>
+        {/* maths zone keywords */}
+        <Keyword f={f} text="only where, not how it moves" at={[1080, 240]} appear={t(1)} out={t(2) - 4} targets={[]} s={T.floor} />
+        <Keyword f={f} text="vector triple product" at={[1080, 240]} appear={AT(k, 2, "vector triple product")} out={t(9) - 4} targets={[]} />
+        <Lbl x={1080} y={690} t="p, q → Ω   ·   s → r" c={C.gold} s={T.key} o={fin(f, t(4)) * fout(f, t(6) - 4)} />
+        <Lbl x={1080} y={690} t="Ω · r = 0" c={C.gold} s={T.calc} o={fin(f, AT(k, 7, "Omega dot r is zero")) * fout(f, t(8) + 20)} />
+        <Lbl x={1080} y={280} t="Ω = 0.5 rad/s" c={ROT} s={T.key} o={fin(f, t(9))} />
+        <Lbl x={1440} y={280} t="one turn ≈ 12.5 s" c={C.key} s={T.key} o={fin(f, AT(k, 9, "twelve and a half"))} />
+        <Keyword f={f} text="the rider's outward pull" at={[1080, 720]} appear={t(11)} targets={[]} />
+      </Svg>
+      <TeX s={String.raw`-\boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`} x={1080} y={130} size={T.eq} c={C.local} o={fin(f, 6) * fout(f, t(9) - 4)} />
+      <CalcStack f={f} x={1340} y={300} size={50} maxLines={2} o={1 - phaseB} rows={[
+        { lhs: PL, rhs: PR, at: AT(k, 3, "It says that"), h: 108 },
+        { lhs: VTL, rhs: { parts: VT, layers: [{ t: "all", o: 1 }, { x: [1], o: fin(f, AT(k, 7, "Omega dot r is zero") + 10) }] }, at: t(5), h: 110 },
+      ]} />
+      <TeX s={String.raw`\boldsymbol\Omega\cdot\boldsymbol\Omega = \Omega^2`} x={1080} y={690} size={60} o={fin(f, t(6)) * fout(f, t(7) - 4)} />
+      <TeX s={EQ_CF} x={1080} y={resY} size={T.eq} o={fin(f, AT(k, 8, "Omega squared times r"))} />
+      <Svg><line x1={1080} y1={resY + 58} x2={1600} y2={resY + 58} stroke={C.gold} strokeWidth={6} opacity={fin(f, AT(k, 8, "Omega squared times r") + 10)} /></Svg>
+      <CalcStack f={f} x={1290} y={380} size={60} rows={[
+        { lhs: NL, rhs: NP[0], at: AT(k, 10, "point two five times"), h: 96 },
+        { rhs: NP[1], at: AT(k, 10, "point two five times") + 20, cont: true, h: 96 },
+        { rhs: NP[2], at: AT(k, 10, "point six two five"), cont: true, c: C.key, h: 96, ul: AT(k, 10, "point six two five") + 12 },
+      ]} />
+      <Svg><CurvedLink f={f} from={[c[0] + 160, (c[1] + ball[1]) / 2 + 20]} to={[1590, 362]} start={AT(k, 10, "two and a half metres") + 8} end={t(11)} bend={200} /></Svg>
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s27c on Earth: r split along and across the axis (3-D)
+const S27C: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27c_centrifugal_earth");
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
+  const st = heCam(38, 12, 5.4, [610, 560]);
+  const pin = pinAt(45);
+  const zc: V3 = [0, Math.sin(45 * D2R), 0];
+  const out = add3(pin, HE_M, 0.34);           // the centrifugal arrow at the pin, display scale (away from the axis)
+  const early = fout(f, t6 - 6, 12);           // S7: the first three lines make room for the keyword
+  const ring = Array.from({ length: 121 }, (_, i) => ll(45, LON0 + 3 * i));
+  const legs = fin(f, t1 + 20, 14);
+  return (
+    <Scene>
+      <HalfEarthView st={st} slide={1}
+        three={<>
+          <Arrow3D from={[0, 0, 0]} to={pin} color={C.first} onTop />
+          <Arrow3D from={[0, 1.0, 0]} to={[0, 1.33, 0]} color={ROT} px={12} head={40} />
+          <Arrow3D from={pin} to={out} color={C.local} grow={fin(f, AT(k, 5, "pointing away from the axis"), 16)} onTop />
+          <Arrow3D from={pin} to={add3(pin, pin, 0.3)} color={C.key} px={6} head={24} o={0.7 * fin(f, t6)} onTop />
+          <Ball3D at={pin} px={18} color={C.key} />
+        </>}>
+        {(pr) => {
+          const front = ring.filter((p) => dot3(p, HE_E) >= -0.02), back = ring.filter((p) => dot3(p, HE_E) < -0.02);
+          return <>
+            <FaceLines pr={pr} />
+            <Poly3 pr={pr} pts={back} c={C.gold} w={4} dash="8 10" o={0.35 * fin(f, t4)} />
+            <Poly3 pr={pr} pts={front} c={C.gold} w={4} o={0.6 * fin(f, t4)} />
+            {/* S1: the 45° between Ω (the axis) and r */}
+            <Poly3 pr={pr} pts={Array.from({ length: 21 }, (_, i) => add3(mul3(HE_M, 0.3 * Math.sin((i / 20) * 45 * D2R)), [0, 0.3 * Math.cos((i / 20) * 45 * D2R), 0]))} c={C.gold} w={5} o={fin(f, 8) * fout(f, t2)} />
+            <L3 pr={pr} at={add3(mul3(HE_M, 0.44 * Math.sin(22 * D2R)), [0, 0.44 * Math.cos(22 * D2R), 0])} t="45°" c={C.gold} s={T.key} a="start" o={fin(f, 8) * fout(f, t2)} />
+            {/* S2: the two legs of r */}
+            <Seg3 pr={pr} a={[0, 0, 0]} b={zc} c={C.local} w={8} dash="16 10" o={legs} />
+            <Seg3 pr={pr} a={zc} b={pin} c={C.gold} w={8} o={legs} />
+            <circle cx={pr.p(zc)[0]} cy={pr.p(zc)[1]} r={9} fill={C.gold} opacity={legs} />
+            <L3 pr={pr} at={mul3(zc, 0.32)} t="along" c={C.local} s={T.key} a="start" dx={28} o={fin(f, AT(k, 1, "one along"))} />
+            <L3 pr={pr} at={add3(zc, HE_M, Math.cos(45 * D2R) / 2)} t="r⊥" c={C.gold} s={T.calc} dy={-40} o={fin(f, AT(k, 1, "which we call r perp"))} />
+            <L3 pr={pr} at={mul3(pin, 0.5)} t="r" c={C.first} s={T.calc} a="end" dx={-26} dy={26} />
+            <L3 pr={pr} at={[0, 1.33, 0]} t="Ω" c={ROT} s={T.calc} a="start" dx={24} />
+            <TipL3 pr={pr} from={pin} to={out} t="centrifugal" c={C.local} s={T.floor} gap={18} o={fin(f, AT(k, 5, "pointing away from the axis") + 10)} />
+            {/* S7: local up and north, and the 45° between up and the centrifugal arrow */}
+            <TipL3 pr={pr} from={pin} to={add3(pin, pin, 0.3)} t="up" c={C.key} s={T.floor} o={0.8 * fin(f, t6)} />
+            <Arc3 pr={pr} c0={pin} e1={norm3(pin)} e2={norm3(sub3(HE_M, mul3(norm3(pin), dot3(HE_M, norm3(pin)))))} r={0.2} a0={0} a1={45} col={C.gold} w={5} draw={fin(f, AT(k, 6, "not straight up"), 14)} />
+          </>;
+        }}
+      </HalfEarthView>
+      <Svg>
+        <Keyword f={f} text="not at right angles" at={[1100, 130]} appear={AT(k, 0, "isn't at right angles")} out={t1 - 4} targets={[]} />
+        <Lbl x={1080} y={505} t="a: Earth's radius" c={C.muted} s={T.floor} o={fin(f, AT(k, 4, "Earth's radius times"))} />
+        <Keyword f={f} text="leans towards the equator" at={[1080, 200]} appear={AT(k, 6, "leans towards the equator")} targets={[]} />
+      </Svg>
+      <TeX s={String.raw`\mathbf r = \mathbf r_{\text{along}} + \mathbf r_\perp`} x={1080} y={130} size={60} o={fin(f, AT(k, 1, "which we call r perp")) * early} />
+      <TeX s={String.raw`\boldsymbol\Omega\,(\boldsymbol\Omega\cdot\mathbf r) = \Omega^2\,\mathbf r_{\text{along}}`} x={1080} y={230} size={60} o={fin(f, t2) * early} />
+      <TeX s={EQ_CF_ALONG} x={1080} y={330} size={60} o={fin(f, t3) * early} />
+      <TeX s={String.raw`|\mathbf r_\perp| = a\cos\varphi`} x={1080} y={430} size={T.calc} c={C.gold} o={fin(f, AT(k, 4, "cosine phi"))} />
+      <TeX s={EQ_CFE} x={1080} y={630} size={T.eq} o={fin(f, t5)} />
+      <Svg><line x1={1080} y1={690} x2={1650} y2={690} stroke={C.gold} strokeWidth={6} opacity={fin(f, t5 + 12)} /></Svg>
+      <TeX s={EQ_CF_MAG} x={1080} y={770} size={T.calc} o={fin(f, AT(k, 5, "times cosine phi"))} />
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s27d how big? (the whole globe, three latitudes)
+const S27D: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27d_centrifugal_size");
+  const t1 = SS(k, 1), t2 = SS(k, 2), t3 = SS(k, 3), t4 = SS(k, 4), t5 = SS(k, 5), t6 = SS(k, 6);
+  const LONV = 60;   // the arrows stand on the right limb (lon 60°E), seen side-on from the camera at lon −20°
+  const cam = globePath([{ f: 0, lat: 20, lon: -20, dist: 5.6, pp: [520, 440] }, { f: t2, lat: 12, lon: -14, dist: 5.6, pp: [520, 440] },
+    { f: t3, lat: 26, lon: -14, dist: 5.6, pp: [520, 445] }, { f: t4, lat: 34, lon: -18, dist: 5.6, pp: [520, 450] }], f);
+  const ce = EAX.centrifugal;
+  const away = (lo: number): V3 => [Math.sin(lo * D2R), 0, Math.cos(lo * D2R)];
+  const Lof = (m: number) => 0.4 * (m / ce.mag[0]);
+  const lit = [fin(f, t2), fin(f, t3), fin(f, t4)];
+  const bars = fin(f, t5);
+  return (
+    <Scene>
+      <GlobeView cam={cam} ppDef={[520, 440]}
+        three={<>
+          <Axis3D o={1} r={0.012} L={1.2} />
+          <Arrow3D from={ll(0, LONV)} to={add3(ll(0, LONV), away(LONV), Lof(ce.mag[0]))} color={C.local} px={10} head={34} o={0.5 + 0.5 * lit[0]} />
+          <Arrow3D from={ll(45, LONV)} to={add3(ll(45, LONV), away(LONV), Lof(ce.mag[1]))} color={C.local} px={10} head={34} o={0.5 + 0.5 * lit[1]} />
+          <Ball3D at={ll(90, 0)} px={16} color={C.gold} />
+        </>}>
+        {(G) => <>
+          <LatCircle G={G} lat={0} c={C.gold} w={3} o={0.5} />
+          <LatCircle G={G} lat={45} c={C.gold} w={3} o={0.5} />
+          <Lbl x={(G.pw(add3(ll(0, LONV), away(LONV), Lof(ce.mag[0])))[0] + G.pw(ll(0, LONV))[0]) / 2} y={G.pw(ll(0, LONV))[1] - 40} t="0.034" c={C.local} s={T.floor} a="middle" o={lit[0]} />
+          <Lbl x={(G.pw(add3(ll(45, LONV), away(LONV), Lof(ce.mag[1])))[0] + G.pw(ll(45, LONV))[0]) / 2} y={G.pw(ll(45, LONV))[1] - 40} t="0.024" c={C.local} s={T.floor} a="middle" o={lit[1]} />
+          <Lbl x={G.pw(ll(90, 0))[0] + 30} y={G.pw(ll(90, 0))[1] - 40} t="0" c={C.gold} s={T.key} a="start" o={lit[2]} />
+        </>}
+      </GlobeView>
+      <Svg>
+        <Keyword f={f} text="how big?" at={[1080, 120]} appear={4} out={t1 - 4} targets={[]} />
+        <Lbl x={1080} y={628} t="poles: 0 (on the axis)" c={C.gold} s={T.key} o={fin(f, t4)} />
+        {/* S6-S7: g and the centrifugal acceleration on one zero line (the g bar is cut; its value is written) */}
+        <g opacity={bars}>
+          <line x1={1080} y1={830} x2={1830} y2={830} stroke={C.muted} strokeWidth={3} />
+          <rect x={1100} y={680} width={90} height={150} fill={BROWN} />
+          <polyline points="1090,730 1200,714 1200,728 1090,744" fill={C.bg} stroke="none" />
+          <Lbl x={1210} y={700} t="g ≈ 9.81 m/s²" c={BROWN} s={T.key} a="start" />
+          <rect x={1700} y={826} width={90} height={4} fill={C.local} opacity={fin(f, t6)} />
+          <Lbl x={1210} y={780} t="centrifugal ≈ 0.034" c={C.local} s={T.key} a="start" o={fin(f, t6)} />
+          <Lbl x={1745} y={700} t="≈ ⅓ %" c={C.gold} s={T.key} a="middle" o={fin(f, AT(k, 6, "a third of one percent"))} />
+          <line x1={1745} y1={735} x2={1745} y2={810} stroke={C.gold} strokeWidth={4} opacity={fin(f, AT(k, 6, "a third of one percent"))} />
+        </g>
+      </Svg>
+      {[[EQ_OM2, 120, fin(f, t1)], [EQ_CF034, 300, fin(f, AT(k, 2, "six million"))], [EQ_CF024, 470, fin(f, AT(k, 3, "four thousand five hundred"))]].map(([e, y, o], i) => {
+        const [a, b] = (e as string).split(String.raw` \approx `);
+        return <React.Fragment key={i}><TeX s={a} x={1080} y={y as number} size={54} o={o as number} />
+          <TeX s={String.raw`\approx ` + b} x={1180} y={(y as number) + 72} size={54} c={i > 0 ? C.key : C.ink} o={o as number} /></React.Fragment>;
+      })}
+      <Svg><line x1={1180} y1={410} x2={1520} y2={410} stroke={C.gold} strokeWidth={5} opacity={fin(f, AT(k, 2, "zero point zero three four"))} /></Svg>
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s27e effective gravity (half-Earth, zoom to the pin)
+const S27E: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27e_effective_gravity");
+  const t = (j: number) => SS(k, j);
+  const eg = EAX.effective_gravity;
+  const zin = easeIO(clamp((f - t(5) + 10) / 40, 0, 1));
+  const P45 = pinAt(45);
+  const st = heCam(38 - 10 * zin, 12, 5.4 - 2.4 * zin, [610 - 120 * zin, 560 - 60 * zin], lerp3([0, 0.05, 0], add3(P45, [0, -0.2, 0]), zin));
+  const pin = P45;
+  const LG = 0.75;                                       // g* drawn 0.75 Earth radii long (display)
+  const gs = add3(pin, norm3(mul3(pin, -1)), LG);
+  // the centrifugal arrow: display scale until the sum, then ×100 against g* (so the tilt can be seen; true tilt ≈ 0.1°)
+  const cTrue = (EAX.centrifugal.mag[1] / eg.g_star) * LG * 100;
+  const cLen = 0.42 + (cTrue - 0.42) * zin;
+  const cFrom = f >= t(5) ? gs : pin;
+  const cTo = add3(cFrom, HE_M, cLen);
+  const gTip = add3(gs, HE_M, cTrue);
+  const icons = fin(f, t(7));
+  const DUA: Part[] = [{ t: String.raw`\frac{d\mathbf u}{dt}`, c: C.first }, { t: "=" }, { t: String.raw`\text{other pushes}`, u: { w: String.raw`\text{pressure push, \dots}`, c: C.key } }];
+  const DUB: Part[] = [{ t: "+" }, { t: String.raw`\mathbf g`, c: BROWN, u: { w: String.raw`\mathbf g^{*} - \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.gold } }, { t: String.raw`- 2\boldsymbol\Omega\times\mathbf u`, c: ROT }];
+  if ((plainOf(DUA) + plainOf(DUB)).replace(/\s/g, "") !== EQ_DUDT_G.replace(/\s/g, "")) throw new Error("s27e parts ≠ EQ_DUDT_G");
+  const GE: Part[] = [{ t: String.raw`\mathbf g`, c: BROWN }, { t: "=" }, { t: String.raw`\mathbf g^{*}`, c: BROWN }, { t: String.raw`- \boldsymbol\Omega\times(\boldsymbol\Omega\times\mathbf r)`, c: C.local }];
+  if (plainOf(GE).replace(/\s/g, "") !== EQ_GEFF.replace(/\s/g, "")) throw new Error("s27e parts ≠ EQ_GEFF");
+  const Icon = ({ x, kind }: { x: number; kind: number }) => (
+    <g>
+      {kind === 0 ? <><line x1={x} y1={330} x2={x} y2={392} stroke={C.ink} strokeWidth={3} /><path d={`M ${x - 14} 392 L ${x + 14} 392 L ${x} 420 Z`} fill={C.local} /></> : null}
+      {kind === 1 ? <><rect x={x - 34} y={380} width={68} height={22} rx={6} fill={C.local} /><rect x={x - 24} y={370} width={48} height={10} rx={3} fill={C.ink} /></> : null}
+      {kind === 2 ? <><circle cx={x} cy={360} r={16} fill={C.second} /><line x1={x} y1={330} x2={x} y2={340} stroke={C.muted} strokeWidth={3} strokeDasharray="4 4" /></> : null}
+      <Arrow p={[x + 40, 340]} q={[x + 40, 420]} color={BROWN} w={7} head={22} halo={false} />
+    </g>
+  );
+  return (
+    <Scene>
+      {/* the zoomed half-Earth fades out before the maths zone */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, WebkitMaskImage: "linear-gradient(to right, black 0px, black 930px, transparent 1010px)",
+        maskImage: "linear-gradient(to right, black 0px, black 930px, transparent 1010px)" }}>
+      <HalfEarthView st={st} slide={1} fadeBelow={860}
+        three={<>
+          <Arrow3D from={[0, 0, 0]} to={pin} color={C.first} px={6} head={24} o={1 - zin} onTop />
+          <Arrow3D from={[0, 1.0, 0]} to={[0, 1.33, 0]} color={ROT} px={12} head={40} o={1 - zin} />
+          <Arrow3D from={pin} to={gs} color={BROWN} grow={fin(f, AT(k, 2, "pulls it almost straight"), 18)} onTop />
+          <Arrow3D from={cFrom} to={cTo} color={C.local} px={8} head={26} onTop />
+          <Arrow3D from={pin} to={gTip} color={BROWN} px={12} head={40} o={fin(f, AT(k, 5, "effective gravity"))} onTop />
+          <Ball3D at={pin} px={18} color={C.key} />
+        </>}>
+        {(pr) => <>
+          <FaceLines pr={pr} o={1 - zin} />
+          <L3 pr={pr} at={gs} t="gravitational attraction" c={BROWN} s={T.floor} a="end" dx={-20} dy={56} o={fin(f, AT(k, 2, "gravitational attraction")) * fout(f, t(5))} />
+          <TipL3 pr={pr} from={pin} to={gs} t="g*" c={BROWN} s={T.calc} side={-50} o={fin(f, t(3))} />
+          <TipL3 pr={pr} from={cFrom} to={cTo} t="centrifugal" c={C.local} s={T.floor} gap={18} o={1} />
+          <TipL3 pr={pr} from={pin} to={gTip} t="g" c={BROWN} s={T.calc} side={50} o={fin(f, AT(k, 5, "effective gravity"))} />
+          <L3 pr={pr} at={gTip} t="effective gravity" c={BROWN} s={T.floor} a="middle" dy={140} o={fin(f, AT(k, 5, "effective gravity"))} />
+        </>}
+      </HalfEarthView>
+      </div>
+      <Svg>
+        <Keyword f={f} text="why only g?" at={[1100, 130]} appear={4} out={t(6) - 4} targets={[]} />
+        <Keyword f={f} text="never alone" at={[1100, 220]} appear={t(1)} out={t(6) - 4} targets={[]} />
+        <Keyword f={f} text="both depend only on where" at={[1100, 310]} appear={t(4)} out={t(6) - 4} targets={[]} s={T.floor} />
+        <g opacity={icons} transform="translate(0, -80)">
+          <Icon x={1110} kind={0} /><Icon x={1330} kind={1} /><Icon x={1550} kind={2} />
+        </g>
+        <Lbl x={1080} y={400} t="the g of weather equations" c={C.key} s={T.key} o={fin(f, AT(k, 7, "the g in every weather equation"))} />
+      </Svg>
+      <Layered parts={GE} layers={[{ t: "all", o: 1 }]} x={1080} y={160} size={72} o={fin(f, t(6))} />
+      <Layered parts={DUA} layers={[{ t: "all", o: 1 }, { u: [2], o: fin(f, AT(k, 8, "like the pressure push")) }]} x={1072} y={450} size={64} ay={0} o={fin(f, t(8))} />
+      <Layered parts={DUB} layers={[{ t: "all", o: fin(f, AT(k, 8, "plus g") - 4) }, { u: [1], o: fin(f, t(9)) }]} x={1200} y={640} size={64} ay={0} o={fin(f, t(8))} />
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s27f why g has no sideways part (two meridian sections, 2-D)
+const S27F: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27f_level_sea");
+  const t = (j: number) => SS(k, j);
+  const tr = EAX.three_traces;
+  const X = 100;                                          // arrows ×100 against g* (true sideways part ≈ 0.17 % of g)
+  const ratio = (EAX.centrifugal.mag[1] / EAX.effective_gravity.g_star) * X;
+  const L: Pt = [290, 460], RR = 200, E: Pt = [775, 460], bE = RR * tr.drawn_ratio_x50;
+  const ph = 45 * D2R;
+  const pinL: Pt = [L[0] + RR * Math.cos(ph), L[1] - RR * Math.sin(ph)];
+  const gsL: Pt = [L[0], L[1]];                           // g* to the centre (the full radius)
+  const cL: Pt = [gsL[0] + RR * ratio, gsL[1]];           // + centrifugal (×100), away from the axis
+  const eqDir: Pt = [Math.sin(ph), Math.cos(ph)];          // along the surface, towards the equator (screen, y down)
+  const gv: Pt = [cL[0] - pinL[0], cL[1] - pinL[1]];
+  const along = gv[0] * eqDir[0] + gv[1] * eqDir[1];        // > 0: g leans towards the equator
+  const sideTip: Pt = [pinL[0] + eqDir[0] * along, pinL[1] + eqDir[1] * along];
+  // right panel: the ellipse (flattening ×50), the point at 45° from the centre, and the ellipse's normal there (g, no sideways part)
+  const rho = 1 / Math.hypot(Math.cos(ph) / RR, Math.sin(ph) / bE);
+  const pE: Pt = [E[0] + rho * Math.cos(ph), E[1] - rho * Math.sin(ph)];
+  const nx = (pE[0] - E[0]) / (RR * RR), ny = (E[1] - pE[1]) / (bE * bE), nl = Math.hypot(nx, ny);
+  const gE: Pt = [pE[0] - (nx / nl) * RR * 0.95, pE[1] + (ny / nl) * RR * 0.95];
+  const tE: Pt = [-ny / nl, -nx / nl];                    // the surface direction at the point (screen)
+  const water = clamp((f - t(5) - 20) / 180, 0, 1);
+  const wPath = (side: number) => {
+    const pts: string[] = [];
+    for (let i = 0; i <= 72; i++) { const a = (i / 72) * 2 * Math.PI; const lat = Math.asin(Math.sin(a)); const th = 6 + water * 26 * (Math.cos(lat) ** 2 - 0.55);
+      pts.push(`${L[0] + (RR + side * Math.max(2, th)) * Math.cos(a)},${L[1] - (RR + side * Math.max(2, th)) * Math.sin(a)}`); }
+    return pts.join(" ");
+  };
+  const lit2 = fin(f, t(6));
+  return (
+    <Scene>
+      <Svg>
+        {/* LEFT: round Earth */}
+        <g opacity={1 - 0.45 * lit2}>
+          <polygon points={wPath(1)} fill="#3b7fc4" opacity={0.7 * fin(f, t(5) + 10)} />
+          <circle cx={L[0]} cy={L[1]} r={RR} fill="#2a4a73" stroke={C.ink} strokeWidth={3} />
+          <line x1={L[0]} y1={L[1] - RR - 40} x2={L[0]} y2={L[1] + RR + 30} stroke={C.gold} strokeWidth={4} strokeDasharray="12 8" />
+          <Arrow p={[L[0], L[1] - RR - 40]} q={[L[0], L[1] - RR - 120]} color={ROT} w={8} head={26} />
+          <Lbl x={L[0] + 18} y={L[1] - RR - 110} t="Ω" c={ROT} s={T.key} a="start" />
+          <Arrow p={pinL} q={gsL} color={BROWN} w={8} head={28} o={fin(f, AT(k, 1, "g star would point"))} />
+          <Arrow p={gsL} q={cL} color={C.local} w={6} head={18} o={fin(f, AT(k, 1, "points away from the axis"))} />
+          <Arrow p={pinL} q={cL} color={BROWN} w={6} head={24} o={fin(f, t(2))} dash="10 6" />
+          <Lbl x={(pinL[0] + gsL[0]) / 2 - 20} y={(pinL[1] + gsL[1]) / 2 - 30} t="g*" c={BROWN} s={T.key} a="end" o={fin(f, AT(k, 1, "g star would point"))} />
+          <Lbl x={(pinL[0] + cL[0]) / 2 + 22} y={(pinL[1] + cL[1]) / 2 + 26} t="g" c={BROWN} s={T.key} a="start" o={fin(f, t(2))} />
+          <Lbl x={L[0]} y={L[1] + 62} t="centrifugal" c={C.local} s={T.floor} a="middle" o={fin(f, AT(k, 1, "points away from the axis"))} />
+          <Arrow p={pinL} q={sideTip} color={C.neg} w={8} head={20} o={fin(f, AT(k, 2, "a part along the ground"))} />
+          <Lbl x={pinL[0] - 6} y={pinL[1] - 48} t="sideways part" c={C.neg} s={T.floor} a="middle" o={fin(f, AT(k, 2, "a part along the ground")) * (1 - lit2)} />
+          <circle cx={pinL[0]} cy={pinL[1]} r={10} fill={C.key} />
+          <Lbl x={L[0]} y={790} t="round Earth" c={C.key} s={T.key} a="middle" />
+        </g>
+        {/* RIGHT: the real, flattened Earth (flattening ×50) */}
+        <g opacity={0.35 + 0.65 * lit2}>
+          <ellipse cx={E[0]} cy={E[1]} rx={RR + 8 * fin(f, t(7))} ry={bE + 8 * fin(f, t(7))} fill="none" stroke="#3b7fc4" strokeWidth={8} opacity={0.9 * fin(f, t(7))} />
+          <ellipse cx={E[0]} cy={E[1]} rx={RR} ry={bE} fill="#2a4a73" stroke={lit2 > 0 ? C.gold : C.ink} strokeWidth={3 + 2 * pulse(f, AT(k, 6, "a bulge"), 30)} />
+          <line x1={E[0]} y1={E[1] - bE - 40} x2={E[0]} y2={E[1] + bE + 30} stroke={C.gold} strokeWidth={4} strokeDasharray="12 8" />
+          <Arrow p={[E[0], E[1] - bE - 40]} q={[E[0], E[1] - bE - 120]} color={ROT} w={8} head={26} />
+          <Arrow p={pE} q={gE} color={BROWN} w={8} head={28} o={lit2} />
+          <Lbl x={(pE[0] + gE[0]) / 2 - 18} y={(pE[1] + gE[1]) / 2 + 30} t="g" c={BROWN} s={T.key} a="end" o={lit2} />
+          <line x1={pE[0] - tE[0] * 90} y1={pE[1] - tE[1] * 90} x2={pE[0] + tE[0] * 90} y2={pE[1] + tE[1] * 90} stroke="#3b7fc4" strokeWidth={5} opacity={fin(f, t(7))} />
+          <RightTick at={pE} u1={unit(pE, gE)} u2={tE} c={C.gold} o={fin(f, t(7)) * (0.6 + 0.4 * pulse(f, AT(k, 7, "points straight down"), 30))} />
+          <Arrow p={pE} q={[pE[0] - (pE[0] - gE[0]) * -0.45, pE[1] - (pE[1] - gE[1]) * -0.45]} color={C.key} w={6} head={22} o={fin(f, AT(k, 8, "up means"))} />
+          <circle cx={pE[0]} cy={pE[1]} r={10} fill={C.key} />
+          <Lbl x={E[0]} y={790} t="real Earth" c={C.key} s={T.key} a="middle" />
+          <Lbl x={E[0] + RR + 10} y={E[1] + 50} t="bulge" c={C.gold} s={T.floor} a="end" o={fin(f, AT(k, 6, "a bulge"))} />
+        </g>
+        {/* maths zone */}
+        <Keyword f={f} text="its direction" at={[1100, 130]} appear={AT(k, 0, "its direction")} out={t(6) - 4} targets={[]} />
+        <Lbl x={1100} y={250} t="round Earth: g* to the centre" c={BROWN} s={T.floor} o={fin(f, t(1)) * fout(f, t(3) - 4)} />
+        <Lbl x={1100} y={330} t="centrifugal: away from the axis" c={C.local} s={T.floor} o={fin(f, AT(k, 1, "points away from the axis")) * fout(f, t(3) - 4)} />
+        <Lbl x={1100} y={410} t="g leans towards the equator" c={C.neg} s={T.floor} o={fin(f, t(2)) * fout(f, t(3) - 4)} />
+        <Lbl x={1100} y={460} t="> 10 ×" c={C.gold} s={T.calc} o={fin(f, AT(k, 5, "more than ten times")) * fout(f, t(6) - 4)} />
+        <Keyword f={f} text="oceans would pile up at the equator" at={[1100, 545]} appear={AT(k, 5, "pile up there")} out={t(6) - 4} targets={[]} s={T.floor} />
+        <Keyword f={f} text="flattened · bulge" at={[1100, 160]} appear={t(6)} targets={[]} />
+        <Keyword f={f} text="level: g ⟂ sea surface" at={[1100, 260]} appear={t(7)} targets={[]} />
+        <Lbl x={1100} y={360} t="up = against g" c={C.key} s={T.key} o={fin(f, AT(k, 8, "up means"))} />
+        <Lbl x={1100} y={440} t="no sideways part" c={C.key} s={T.key} o={fin(f, AT(k, 8, "never pushes the wind sideways"))} />
+        <Keyword f={f} text="in gravity" at={[1100, 560]} appear={AT(k, 9, "part of gravity")} targets={[]} />
+        <CurvedLink f={f} from={[pinL[0] + 110, pinL[1] - 50]} to={[1090, 250]} start={t(3) + 6} end={t(6) - 6} bend={50} />
+      </Svg>
+      <TeX s={EQ_SIDE} x={1100} y={250} size={56} c={C.neg} o={fin(f, t(3)) * fout(f, t(6) - 4)} />
+      <TeX s={EQ_COR10} x={1100} y={350} size={48} o={fin(f, t(4)) * fout(f, t(6) - 4)} />
+      <TeX s={EQ_GEFF} x={1100} y={660} size={T.calc} o={fin(f, AT(k, 9, "part of gravity") + 10)} />
+    </Scene>
+  );
+};
+
+// ---------------------------------------------------------------- s27g three traces of the spin
+const S27G: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27g_three_traces");
+  const t = (j: number) => SS(k, j);
+  const tr = EAX.three_traces;
+  const tr1 = fin(f, 4) * fout(f, t(5) - 6, 12), tr2 = fin(f, t(5)) * fout(f, t(8) - 6, 12), tr3 = fin(f, t(8)) * fout(f, t(10) - 6, 12);
+  const endO = fin(f, t(10)) * fout(f, t(11) - 6, 12);
+  const heO = fin(f, t(11) + 10, 24);
+  const cam: GlobeCam = { lat: 0, lon: -20, dist: 6.0, pp: [520, 480] };
+  // the cross-section (traces 2 and 3): circle → ellipse (flattening ×50)
+  const C0: Pt = [520, 480], Rr = 300;
+  const flat = clamp((f - AT(k, 7, "flattened Earth")) / 40, 0, 1) * (f < t(8) ? 1 : 1);
+  const bb = Rr * (1 - (1 - tr.drawn_ratio_x50) * Math.max(flat, f >= t(8) ? 1 : 0));
+  const ph = 45 * D2R;
+  const bob: Pt = [C0[0] + Rr * Math.cos(ph) * 1.0, C0[1] - bb * Math.sin(ph)];
+  const tilt = (f < AT(k, 7, "flattened Earth") ? tr.tilt_sphere_max_deg : tr.tilt_sphere_max_deg + (tr.tilt_real_deg - tr.tilt_sphere_max_deg) * flat) * 50 * D2R;
+  const toC = unit(bob, C0);
+  const sdir: Pt = [toC[0] * Math.cos(tilt) - toC[1] * Math.sin(tilt) * -1, toC[1] * Math.cos(tilt) + toC[0] * Math.sin(tilt) * -1];
+  const top: Pt = [bob[0] - sdir[0] * 120, bob[1] - sdir[1] * 120];
+  const deep: Pt = [bob[0] + sdir[0] * 330, bob[1] + sdir[1] * 330];
+  const icon = (i: number) => (i === 0 ? tr1 : i === 1 ? tr2 : tr3);
+  return (
+    <Scene>
+      {tr1 > 0 ? <GlobeView cam={cam} ppDef={[520, 480]} o={tr1} three={<Axis3D o={1} r={0.012} L={1.18} />}>
+        {(G) => <>
+          <LatCircle G={G} lat={0} c={C.gold} w={4} o={0.7} />
+          <CurvedLink f={f} from={G.p(0, 30)} to={[1080, 250]} start={AT(k, 2, "at the equator") - 10} end={t(5) - 8} bend={60} />
+          <CurvedLink f={f} from={G.p(88, -20)} to={[1080, 345]} start={AT(k, 2, "at the poles") - 10} end={t(5) - 8} bend={40} />
+          {(() => { const c0 = G.pw([0, 0, 0]), Rg = Math.abs(G.pw([0, 1, 0])[1] - c0[1]); return <>
+            <ellipse cx={c0[0]} cy={c0[1]} rx={Rg / tr.drawn_ratio_x50} ry={Rg} fill="none" stroke={C.key} strokeWidth={4} strokeDasharray="14 9" opacity={fin(f, t(4))} />
+            <Arrow p={[c0[0] + Rg - 4, c0[1] + 34]} q={[c0[0] + Rg / tr.drawn_ratio_x50 + 4, c0[1] + 34]} color={C.gold} w={6} head={20} o={fin(f, AT(k, 4, "farther from"))} />
+            <Lbl x={c0[0] + Rg / tr.drawn_ratio_x50 - 10} y={c0[1] + 90} t="farther from the centre" c={C.key} s={T.floor} a="end" o={fin(f, AT(k, 4, "farther from"))} />
+          </>; })()}
+        </>}
+      </GlobeView> : null}
+      {heO > 0 ? <div style={{ opacity: heO }}><HalfEarthView st={heCam(58, 14, 5.2, [520, 545])} slide={1} three={<Arrow3D from={[0, 0, 0]} to={pinAt(45)} color={C.first} onTop />}>
+        {(pr) => <FaceLines pr={pr} />}</HalfEarthView></div> : null}
+      <Svg>
+        {/* S1: three small icons, each lights with its trace */}
+        <g opacity={fin(f, 6) * (1 - heO)}>
+          {[0, 1, 2].map((i) => { const x = 200 + i * 130, o = 0.35 + 0.65 * icon(i); return <g key={i} opacity={o} transform={`translate(${x} 0) scale(2) translate(${-x} -42)`}>
+            {i === 0 ? <><path d={`M ${x} 60 l -12 8 l 24 8 l -24 8 l 24 8 l -12 8`} fill="none" stroke={C.ink} strokeWidth={3} /><rect x={x - 16} y={104} width={32} height={24} fill={C.local} /></> : null}
+            {i === 1 ? <><line x1={x} y1={60} x2={x} y2={108} stroke={C.ink} strokeWidth={3} /><path d={`M ${x - 13} 108 L ${x + 13} 108 L ${x} 132 Z`} fill={C.local} /></> : null}
+            {i === 2 ? <ellipse cx={x} cy={96} rx={36} ry={30} fill="#2a4a73" stroke={C.ink} strokeWidth={3} /> : null}
+          </g>; })}
+        </g>
+        {/* traces 2 and 3: the cross-section with a plumb bob at 45°N */}
+        <g opacity={Math.max(tr2, tr3)}>
+          <ellipse cx={C0[0]} cy={C0[1]} rx={Rr} ry={bb} fill="#2a4a73" stroke={C.ink} strokeWidth={3} />
+          <line x1={C0[0]} y1={C0[1] - Rr - 30} x2={C0[0]} y2={C0[1] + Rr - 20} stroke={C.gold} strokeWidth={4} strokeDasharray="12 8" />
+          <circle cx={C0[0]} cy={C0[1]} r={8} fill={C.gold} />
+        </g>
+        <g opacity={tr2}>
+          <line x1={bob[0]} y1={bob[1]} x2={C0[0]} y2={C0[1]} stroke={C.muted} strokeWidth={4} />
+          <line x1={top[0]} y1={top[1]} x2={bob[0]} y2={bob[1]} stroke={C.ink} strokeWidth={4} />
+          <line x1={bob[0]} y1={bob[1]} x2={deep[0]} y2={deep[1]} stroke={C.key} strokeWidth={4} strokeDasharray="14 9" />
+          <path d={`M ${bob[0] - 14} ${bob[1] - 4} L ${bob[0] + 14} ${bob[1] - 4} L ${bob[0]} ${bob[1] + 24} Z`} fill={C.local} />
+          <Lbl x={top[0] - 16} y={top[1] - 6} t="plumb line" c={C.key} s={T.floor} a="end" />
+          <Lbl x={C0[0] - 20} y={C0[1] + 50} t="centre" c={C.muted} s={T.floor} a="end" />
+          <Arc P={(x, y) => [bob[0] + x, bob[1] - y]} a0={Math.atan2(-toC[1], toC[0]) / D2R} a1={Math.atan2(-sdir[1], sdir[0]) / D2R} r={240} c={C.gold} w={7} />
+        </g>
+        <g opacity={tr3}>
+          <Arrow p={C0} q={[C0[0] + Rr, C0[1]]} color={C.gold} w={6} head={22} />
+          <Arrow p={C0} q={[C0[0], C0[1] - bb]} color={C.gold} w={6} head={22} />
+          <Lbl x={C0[0] + Rr / 2} y={C0[1] + 40} t="equator radius" c={C.gold} s={T.floor} a="middle" />
+          <Lbl x={C0[0] - 20} y={C0[1] - bb / 2} t="polar radius" c={C.gold} s={T.floor} a="end" />
+          <circle cx={C0[0]} cy={C0[1]} r={Rr * (1 - tr.flattening / 2)} fill="none" stroke={C.key} strokeWidth={3} opacity={0.7 * fin(f, t(9))} />
+          <Lbl x={C0[0] - Rr + 10} y={C0[1] - Rr + 30} t="true shape" c={C.key} s={T.floor} a="start" o={fin(f, t(9))} />
+        </g>
+        {/* S11: two later videos */}
+        <g opacity={endO}>
+          <circle cx={330} cy={470} r={120} fill="none" stroke={C.muted} strokeWidth={3} strokeDasharray="8 8" />
+          <line x1={330} y1={470} x2={415} y2={385} stroke={C.ink} strokeWidth={3} /><circle cx={415} cy={385} r={18} fill={C.second} />
+          <Lbl x={330} y={650} t="circular motion" c={C.key} s={T.floor} a="middle" />
+          <GlobeIcon x={760} y={470} r={110} />
+          <Lbl x={760} y={650} t="Coriolis" c={C.key} s={T.floor} a="middle" />
+        </g>
+        {/* maths zone */}
+        <Keyword f={f} text="three traces" at={[1080, 130]} appear={AT(k, 0, "three places")} out={t(1) - 4} targets={[]} />
+        <Keyword f={f} text="gravity is weaker at the equator" at={[1080, 140]} appear={t(1)} out={t(5) - 6} targets={[]} s={T.floor} />
+        <g opacity={fin(f, t(3)) * fout(f, t(5) - 6)}>
+          <rect x={1080} y={480} width={600 * tr.spin_share} height={46} fill={C.local} />
+          <rect x={1080 + 600 * tr.spin_share} y={480} width={600 * (1 - tr.spin_share)} height={46} fill={BROWN} opacity={fin(f, t(4))} />
+          <Lbl x={1080} y={570} t="spin ≈ ⅔" c={C.local} s={T.key} a="start" />
+          <Lbl x={1680} y={570} t="bulge: the rest" c={BROWN} s={T.floor} a="end" o={fin(f, t(4))} />
+          <Lbl x={1080} y={440} t="the difference" c={C.muted} s={T.floor} a="start" />
+        </g>
+        <Keyword f={f} text="a plumb line" at={[1080, 140]} appear={t(5)} out={t(8) - 6} targets={[]} />
+        <Lbl x={1080} y={320} t="round Earth, spin alone" c={C.key} s={T.floor} o={fin(f, t(6)) * fout(f, t(8) - 6)} />
+        <Lbl x={1080} y={400} t="real, flattened Earth" c={C.key} s={T.floor} o={fin(f, t(7)) * fout(f, t(8) - 6)} />
+        <Keyword f={f} text="Earth's shape" at={[1080, 140]} appear={t(8)} out={t(10) - 6} targets={[]} />
+        <Keyword f={f} text="almost a sphere" at={[1080, 440]} appear={AT(k, 9, "treat Earth as a sphere")} out={t(10) - 6} targets={[]} />
+        <Keyword f={f} text="later videos" at={[1080, 300]} appear={t(10)} out={t(11) - 6} targets={[]} />
+        <Keyword f={f} text="back to the Coriolis push" at={[1080, 300]} appear={t(11)} targets={[]} c={ROT} />
+      </Svg>
+      <TeX s={EQ_GPOLE.split(String.raw`,\quad `)[0]} x={1080} y={250} size={60} o={fin(f, AT(k, 2, "nine point seven eight")) * fout(f, t(5) - 6)} />
+      <TeX s={EQ_GPOLE.split(String.raw`,\quad `)[1]} x={1080} y={345} size={60} o={fin(f, AT(k, 2, "nine point eight three")) * fout(f, t(5) - 6)} />
+      <Layered parts={[{ t: String.raw`\text{tilt} \approx 0.1^\circ` }, { t: String.raw`\;\to\;` }, { t: String.raw`\approx 0.2^\circ` }]} layers={[{ t: [0], o: 1 },
+        { t: [1, 2], o: fin(f, AT(k, 7, "a fifth of a degree")) }]} x={1080} y={230} size={T.calc} o={fin(f, AT(k, 6, "a tenth of a degree")) * fout(f, t(8) - 6)} />
+      <Layered parts={[{ t: String.raw`a_{\text{equator}} - a_{\text{poles}} \approx 21\ \mathrm{km}` }, { t: String.raw`\approx \tfrac{1}{300}\,a` }]}
+        layers={[{ t: [0], o: 1 }, { t: [1], o: fin(f, t(9)) }]} x={1080} y={260} size={54} o={fin(f, AT(k, 8, "twenty one kilometres")) * fout(f, t(10) - 6)} />
     </Scene>
   );
 };
@@ -4672,6 +5433,7 @@ const S47: React.FC = () => {
   const iLeave = si("leaves out its own direction"), iTurn = si("is the turning about its own axis"), iLen = si("Its length is"),
     iDir = si("Its direction is"), iAxis = si("points along the axis of the turn"), iPhys = si("physics uses it"), iEarth = si("On the spinning Earth"),
     iFlat = si("For flat winds"), iStorm = si("why storms spin"), iGeo = si("the geostrophic wind"), iLast = S.length - 1;
+  const iCent0 = si("the centrifugal pull"), iCent = iCent0 >= 0 ? iCent0 : iFlat;   // U-CF S7
   const p2 = A === ACT_P2;
   const beat = (j: number, jEnd?: number) => (j < 0 ? 0 : fin(f, t[j] + (j === 0 ? 4 : 0), 10) * (jEnd !== undefined ? fout(f, t[jEnd] - 6, 10) : 1));
   const st = orbitCam({ az: 221, el: 28, dist: 15, target: [2.2, 1.3, 1.2], pp: [560, 430] }, PP);
@@ -4730,9 +5492,20 @@ const S47: React.FC = () => {
         <g opacity={beat(iEarth, iFlat)}>
           <circle cx={300} cy={430} r={150} fill="#22406a" stroke={C.ink} strokeWidth={3} />
           <line x1={300} y1={250} x2={300} y2={610} stroke={C.gold} strokeWidth={5} strokeDasharray="12 8" />
-          <Arrow p={[300, 430]} q={[406, 324]} color={C.first} w={8} />
-          <Arrow p={[406, 324]} q={[480, 360]} color={C.second} w={8} />
-          <Disc cx={760} cy={430} s={45} ang={f / 60} />
+          <g opacity={iCent < iFlat ? 1 - fin(f, t[iCent] - 6, 10) : 1}>
+            <Arrow p={[300, 430]} q={[406, 324]} color={C.first} w={8} />
+            <Arrow p={[406, 324]} q={[480, 360]} color={C.second} w={8} />
+            <Disc cx={760} cy={430} s={45} ang={f / 60} />
+          </g>
+          {/* U-CF S7: the outward centrifugal arrow at 45°N (away from the axis), g, and the flattened outline (×50) */}
+          <g opacity={iCent < iFlat ? fin(f, t[iCent], 10) : 0}>
+            <ellipse cx={300} cy={430} rx={156} ry={156 * EAX.three_traces.drawn_ratio_x50} fill="none" stroke={C.key} strokeWidth={4} strokeDasharray="12 8" />
+            <Arrow p={[406, 324]} q={[496, 324]} color={C.local} w={8} head={30} />
+            <Arrow p={[406, 324]} q={[330, 400]} color={BROWN} w={8} head={30} />
+            <circle cx={406} cy={324} r={10} fill={C.key} />
+            <Lbl x={505} y={300} t="Ω² r⊥" c={C.local} s={T.key} a="start" />
+            <Lbl x={384} y={392} t="g" c={BROWN} s={T.key} a="start" />
+          </g>
         </g>
       </Svg>
       <CompTable f={f} o={beat(iLeave, iLeave + 1)} grey={-1} greyO={0} links={[[1, 2, t[iLeave] + 10], [2, 1, t[iLeave] + 30], [2, 0, t[iLeave] + 50], [0, 2, t[iLeave] + 70], [0, 1, t[iLeave] + 90], [1, 0, t[iLeave] + 110]]} dy={-20} />
@@ -4756,8 +5529,10 @@ const S47: React.FC = () => {
         <Lbl x={1100} y={440} t="grad, div, curl" c={C.key} s={T.key} o={p2 ? fin(f, AT(k, iLast, "grad, div and curl")) : beat(iLast)} />
         <Lbl x={1100} y={520} t="∇   ∇·   ∇×" c={C.key} s={T.calc} o={p2 ? fin(f, AT(k, iLast, "grad, div and curl")) : beat(iLast)} />
       </Svg>
-      <TeX s={EQ_VOR} x={1100} y={330} size={T.eq} o={beat(iEarth, iFlat)} />
-      <TeX s={EQ_COR} x={1100} y={470} size={T.eq} c={ROT} o={fin(f, AT(k, iEarth, "minus two Omega")) * fout(f, t[iFlat] - 6)} />
+      <TeX s={EQ_VOR} x={1100} y={330} size={T.eq} o={beat(iEarth, iCent)} />
+      <TeX s={EQ_COR} x={1100} y={470} size={T.eq} c={ROT} o={fin(f, AT(k, iEarth, "minus two Omega")) * fout(f, t[iCent] - 6)} />
+      <TeX s={EQ_CFE} x={1100} y={330} size={T.calc} c={C.local} o={iCent < iFlat ? beat(iCent, iFlat) : 0} />
+      <Svg><Lbl x={1100} y={450} t="→ folded into g" c={BROWN} s={T.key} o={iCent < iFlat ? fin(f, AT(k, iCent, "folded into gravity")) * fout(f, t[iFlat] - 6) : 0} /></Svg>
       <TeX s={EQ_FKU} x={1100} y={420} size={T.eq} c={ROT} o={beat(iFlat, iGeo)} />
       <div style={{ position: "absolute", left: 120, top: 220, width: 420, height: 320, overflow: "hidden", opacity: beat(iFlat, iGeo) }}>
         <Img src={staticFile("cp/ian_tc.jpg")} style={{ width: 900, position: "absolute", left: -330, top: -230 }} />
@@ -5858,6 +6633,8 @@ const SOURCES: Record<string, (f: number, k: number) => [string, number][]> = {
   s25_ground_speed: () => [[SRC_BM, 1]], s25b_direction: () => [[SRC_BM, 1]], s26_coriolis_effect: () => [[SRC_BM, 1]], s28a_local_axes: () => [[SRC_BM, 1]],
   s28b_components: () => [[SRC_BM, 1]], s28c_flat_part: () => [[SRC_BM, 1]], s28_f: () => [[SRC_BM, 1]], s29_turn_rule: () => [[SRC_BM, 1]],
   s30_coriolis_size: () => [[SRC_BM, 1]], s31_globe_paths: () => [[SRC_BM, 1]],
+  s27c_centrifugal_earth: () => [[SRC_BM, 1]], s27d_centrifugal_size: () => [[SRC_BM, 1]], s27e_effective_gravity: () => [[SRC_BM, 1]],
+  s27g_three_traces: (f, k) => [[SRC_BM + " · gravity: WGS 84 normal gravity", fin(f, SS(k, 1), 12) * fout(f, SS(k, 5) - 6, 12)], [SRC_BM, fin(f, SS(k, 11) + 10, 24)]],
   s32_reanalysis: () => [[SRC_NCEP, 1]], s33_trades: () => [[SRC_NCEP, 1]], s34_westerlies: () => [[SRC_NCEP, 1]],
   s35_storms: () => [[SRC_IAN_IMG, 1]], s36_ian: () => [[SRC_IAN, 1]], s37_idai: () => [[SRC_IDAI, 1]], s38_spin_sign: () => [[SRC_BOTH, 1]],
   s45_storm_map: (f, k) => { const m = fin(f, SS(k, 1) - 20, 24); return [[SRC_BM, 1 - m], [SRC_CIARAN, m]]; },
@@ -5894,6 +6671,8 @@ const SCENE_BY_ID: Record<string, React.FC> = {
   s22w_when_to_use: S22W, s19_grid: S19, s23_k_cross: S23, s23a_why_turn: S23A, s24_spin: S24, s25a_position_vector: S25A,
   s25_ground_speed: S25, s25b_direction: S25B, s26_coriolis_effect: S26, s26a_merry_go_round: S26A, s26b_two_views: S26B,
   s26c_carried_arrow: S26C, s26d_new_ground: S26D, s27_coriolis_term: S27, s27a_minus_check: S27A, s28a_local_axes: S28A,
+  s26a1_rule: S26A1, s26e_rule_again: S26E, s26f_collect: S26F, s27b_centrifugal: S27B, s27c_centrifugal_earth: S27C, s27d_centrifugal_size: S27D,
+  s27e_effective_gravity: S27E, s27f_level_sea: S27F, s27g_three_traces: S27G,
   s28b_components: S28B, s28c_flat_part: S28C, s28_f: S28F, s29_turn_rule: S29, s30_coriolis_size: S30, s31_globe_paths: S31,
   s32_reanalysis: S32, s33_trades: S33, s34_westerlies: S34, s35_storms: S35, s36_ian: S36, s37_idai: S37, s38_spin_sign: S38,
   s39_isobars: S39, s40_pressure_push: S40, s40a_k_cross_gradp: S40A, s41_adjust: S41, s41a_balance: S41A, s42_geo_equation: S42,

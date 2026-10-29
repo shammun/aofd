@@ -9,84 +9,6 @@
   "lead": 0.3,
   "tail": 0.3
  },
- "total_s": 3536.1,
- "total_frames": 106083,
- "render_s": 1113.2,
- "loudnorm_input": {
-  "input_i": "-24.77",
-  "input_tp": "-1.48",
-  "input_lra": "4.80",
-  "input_thresh": "-35.27",
-  "output_i": "-16.48",
-  "output_tp": "-1.50",
-  "output_lra": "4.60",
-  "output_thresh": "-26.98",
-  "normalization_type": "dynamic",
-  "target_offset": "0.48"
- },
- "cues": 858,
- "warnings": [],
- "self_check": {
-  "expected_s": 3536.1,
-  "audio_s": 3536.1,
-  "diff_ms": 0.0,
-  "len_ok": true,
-  "cues_ok": true,
-  "splices_fx1": [
-   {
-    "op": "replace",
-    "scene": "s15a_index_form",
-    "index": 0,
-    "text": "Here's a short way to write the whole recipe, in index notation, which the index-notation video builds step by step.",
-    "ref": "Here's a short way to write the whole recipe, in index notation, which the video on the alternating tensor builds step by step.",
-    "gain": 1.03135,
-    "corr_old_resynth": 0.9895,
-    "len_ref_old": 210600,
-    "len_ref_resynth": 210600,
-    "new_s": 8.25,
-    "peak": 0.8676
-   },
-   {
-    "op": "replace",
-    "scene": "s18_cases",
-    "index": 9,
-    "text": "That's the opposite of the dot product, which is zero at a right angle, and largest when the arrows point the same way.",
-    "ref": "That's the opposite of the dot product, which is zero at a right angle, and largest when the arrows lie along one line.",
-    "gain": 1.00757,
-    "corr_old_resynth": 0.9896,
-    "len_ref_old": 187800,
-    "len_ref_resynth": 187800,
-    "new_s": 7.625,
-    "peak": 0.8492
-   },
-   {
-    "op": "insert",
-    "scene": "s47_recap",
-    "index": 3,
-    "text": "It points along the axis of the turn, and seen from its tip, the turn is anticlockwise.",
-    "ref": "Its direction is the normal to their plane, and the right-hand rule says which way round.",
-    "gain": 0.983,
-    "corr_old_resynth": 0.9776,
-    "len_ref_old": 144600,
-    "len_ref_resynth": 144600,
-    "new_s": 6.25,
-    "peak": 0.828
-   },
-   {
-    "op": "insert",
-    "scene": "s47_recap",
-    "index": 1,
-    "text": "Each component is the turning about its own axis, made by the two parts across that axis, with a minus sign because those two parts turn opposite ways.",
-    "ref": "Each component leaves out its own direction and cross multiplies the other two.",
-    "gain": 0.99935,
-    "corr_old_resynth": 0.9903,
-    "len_ref_old": 136200,
-    "len_ref_resynth": 136200,
-    "new_s": 10.575,
-    "peak": 0.8409
-   }
-  ]
- },
  "scenes": [
   {
    "id": "s00_title",
@@ -144,7 +66,7 @@
      "end": 22.75,
      "dur": 3.35,
      "start_frame": 582,
-     "end_frame": 682
+     "end_frame": 683
     },
     {
      "text": "We took vector a with components five and one, and vector b with components one and three, and found that a dot b equals eight.",
@@ -253,7 +175,7 @@
      "end": 86.45,
      "dur": 2.7,
      "start_frame": 2512,
-     "end_frame": 2594
+     "end_frame": 2593
     },
     {
      "text": "When you push at a right angle to the door, the dot product of these two arrows is zero.",
@@ -280,7 +202,7 @@
      "end": 101.85,
      "dur": 6.35,
      "start_frame": 2865,
-     "end_frame": 3056
+     "end_frame": 3055
     },
     {
      "text": "Yet the door doesn't turn at all.",
@@ -342,7 +264,7 @@
      "start": 124.45,
      "end": 128.8,
      "dur": 4.35,
-     "start_frame": 3734,
+     "start_frame": 3733,
      "end_frame": 3864
     },
     {
@@ -370,7 +292,7 @@
      "end": 144.05,
      "dur": 2.125,
      "start_frame": 4258,
-     "end_frame": 4322
+     "end_frame": 4321
     }
    ],
    "end": 144.85,
@@ -387,7 +309,7 @@
      "start": 144.85,
      "end": 150.025,
      "dur": 5.175,
-     "start_frame": 4346,
+     "start_frame": 4345,
      "end_frame": 4501
     },
     {
@@ -397,7 +319,7 @@
      "end": 154.85,
      "dur": 4.475,
      "start_frame": 4511,
-     "end_frame": 4646
+     "end_frame": 4645
     },
     {
      "text": "The unit vectors along them are called x hat, y hat and z hat.",
@@ -432,8 +354,8 @@
      "start": 168.65,
      "end": 174.25,
      "dur": 5.6,
-     "start_frame": 5060,
-     "end_frame": 5228,
+     "start_frame": 5059,
+     "end_frame": 5227,
      "beat": true
     }
    ],
@@ -469,7 +391,7 @@
      "start": 187.25,
      "end": 192.9,
      "dur": 5.65,
-     "start_frame": 5618,
+     "start_frame": 5617,
      "end_frame": 5787
     },
     {
@@ -478,7 +400,7 @@
      "start": 193.25,
      "end": 201.675,
      "dur": 8.425,
-     "start_frame": 5798,
+     "start_frame": 5797,
      "end_frame": 6050
     },
     {
@@ -562,7 +484,7 @@
      "end": 247.25,
      "dur": 7.275,
      "start_frame": 7199,
-     "end_frame": 7418,
+     "end_frame": 7417,
      "beat": true
     },
     {
@@ -739,7 +661,7 @@
      "start": 359.95,
      "end": 365.6,
      "dur": 5.65,
-     "start_frame": 10798,
+     "start_frame": 10799,
      "end_frame": 10968,
      "beat": true
     },
@@ -768,7 +690,7 @@
      "end": 385.35,
      "dur": 7.125,
      "start_frame": 11347,
-     "end_frame": 11560,
+     "end_frame": 11561,
      "beat": true
     },
     {
@@ -851,7 +773,7 @@
      "start": 425.95,
      "end": 430.05,
      "dur": 4.1,
-     "start_frame": 12778,
+     "start_frame": 12779,
      "end_frame": 12902,
      "beat": true
     },
@@ -861,7 +783,7 @@
      "start": 431.55,
      "end": 438.275,
      "dur": 6.725,
-     "start_frame": 12946,
+     "start_frame": 12947,
      "end_frame": 13148,
      "beat": true
     },
@@ -881,7 +803,7 @@
      "end": 452.95,
      "dur": 8.375,
      "start_frame": 13337,
-     "end_frame": 13588
+     "end_frame": 13589
     },
     {
      "text": "That's exactly the z recipe: an area formula in disguise.",
@@ -934,8 +856,8 @@
      "start": 469.75,
      "end": 473.15,
      "dur": 3.4,
-     "start_frame": 14092,
-     "end_frame": 14194
+     "start_frame": 14093,
+     "end_frame": 14195
     },
     {
      "text": "Zero times five, plus zero times one, plus fourteen times zero, is zero.",
@@ -972,7 +894,7 @@
      "end": 491.15,
      "dur": 2.7,
      "start_frame": 14654,
-     "end_frame": 14734
+     "end_frame": 14735
     },
     {
      "text": "That's what the right-hand rule tells us.",
@@ -1008,7 +930,7 @@
      "end": 502.15,
      "dur": 4.625,
      "start_frame": 14926,
-     "end_frame": 15064
+     "end_frame": 15065
     },
     {
      "text": "Now curl your fingers towards b, the second arrow, the short way round.",
@@ -1025,7 +947,7 @@
      "start": 507.95,
      "end": 511.675,
      "dur": 3.725,
-     "start_frame": 15238,
+     "start_frame": 15239,
      "end_frame": 15350
     },
     {
@@ -1044,7 +966,7 @@
      "end": 518.55,
      "dur": 4.225,
      "start_frame": 15430,
-     "end_frame": 15556
+     "end_frame": 15557
     }
    ],
    "end": 519.35,
@@ -1061,7 +983,7 @@
      "start": 519.35,
      "end": 522.25,
      "dur": 2.9,
-     "start_frame": 15580,
+     "start_frame": 15581,
      "end_frame": 15668
     },
     {
@@ -1088,7 +1010,7 @@
      "start": 531.55,
      "end": 533.8,
      "dur": 2.25,
-     "start_frame": 15946,
+     "start_frame": 15947,
      "end_frame": 16014
     },
     {
@@ -1097,7 +1019,7 @@
      "start": 534.15,
      "end": 537.45,
      "dur": 3.3,
-     "start_frame": 16024,
+     "start_frame": 16025,
      "end_frame": 16124
     },
     {
@@ -1160,7 +1082,7 @@
      "start": 561.95,
      "end": 566.65,
      "dur": 4.7,
-     "start_frame": 16858,
+     "start_frame": 16859,
      "end_frame": 17000,
      "beat": true
     },
@@ -1170,7 +1092,7 @@
      "start": 568.15,
      "end": 575.475,
      "dur": 7.325,
-     "start_frame": 17044,
+     "start_frame": 17045,
      "end_frame": 17264
     }
    ],
@@ -1216,7 +1138,7 @@
      "start": 590.95,
      "end": 596.475,
      "dur": 5.525,
-     "start_frame": 17728,
+     "start_frame": 17729,
      "end_frame": 17894
     },
     {
@@ -1236,7 +1158,7 @@
      "end": 608.15,
      "dur": 4.85,
      "start_frame": 18099,
-     "end_frame": 18244
+     "end_frame": 18245
     },
     {
      "text": "Your thumb points along y hat, so z hat cross x hat is y hat.",
@@ -1318,8 +1240,8 @@
      "start": 650.35,
      "end": 657.75,
      "dur": 7.4,
-     "start_frame": 19510,
-     "end_frame": 19732,
+     "start_frame": 19511,
+     "end_frame": 19733,
      "beat": true
     },
     {
@@ -1375,7 +1297,7 @@
      "end": 690.55,
      "dur": 8.25,
      "start_frame": 20469,
-     "end_frame": 20716
+     "end_frame": 20717
     },
     {
      "text": "Let the letters i, j and k each stand for x, y or z.",
@@ -1428,7 +1350,7 @@
      "start": 733.55,
      "end": 743.2,
      "dur": 9.65,
-     "start_frame": 22006,
+     "start_frame": 22007,
      "end_frame": 22296,
      "beat": true
     },
@@ -1475,7 +1397,7 @@
      "start": 764.15,
      "end": 767.575,
      "dur": 3.425,
-     "start_frame": 22924,
+     "start_frame": 22925,
      "end_frame": 23027
     },
     {
@@ -1668,7 +1590,7 @@
      "start": 866.95,
      "end": 871.725,
      "dur": 4.775,
-     "start_frame": 26008,
+     "start_frame": 26009,
      "end_frame": 26152
     },
     {
@@ -1770,8 +1692,8 @@
      "start": 936.75,
      "end": 938.95,
      "dur": 2.2,
-     "start_frame": 28102,
-     "end_frame": 28168
+     "start_frame": 28103,
+     "end_frame": 28169
     },
     {
      "text": "Why the sine, and why an area?",
@@ -1806,7 +1728,7 @@
      "start": 950.55,
      "end": 952.925,
      "dur": 2.375,
-     "start_frame": 28516,
+     "start_frame": 28517,
      "end_frame": 28588
     }
    ],
@@ -1825,7 +1747,7 @@
      "end": 955.75,
      "dur": 2.025,
      "start_frame": 28612,
-     "end_frame": 28672
+     "end_frame": 28673
     },
     {
      "text": "The dot product used the shadow, the part of b that lies along the first arrow.",
@@ -1869,8 +1791,8 @@
      "start": 973.95,
      "end": 980.95,
      "dur": 7.0,
-     "start_frame": 29218,
-     "end_frame": 29428,
+     "start_frame": 29219,
+     "end_frame": 29429,
      "beat": true
     },
     {
@@ -1898,7 +1820,7 @@
      "start": 998.75,
      "end": 1004.4,
      "dur": 5.65,
-     "start_frame": 29962,
+     "start_frame": 29963,
      "end_frame": 30132
     }
    ],
@@ -1934,7 +1856,7 @@
      "start": 1016.15,
      "end": 1021.65,
      "dur": 5.5,
-     "start_frame": 30484,
+     "start_frame": 30485,
      "end_frame": 30650
     },
     {
@@ -1953,7 +1875,7 @@
      "end": 1035.75,
      "dur": 9.575,
      "start_frame": 30785,
-     "end_frame": 31072
+     "end_frame": 31073
     },
     {
      "text": "With our numbers, eight squared is sixty four, and fourteen squared is one hundred and ninety six, which add up to two hundred and sixty.",
@@ -1982,7 +1904,7 @@
      "end": 1059.75,
      "dur": 7.825,
      "start_frame": 31558,
-     "end_frame": 31792
+     "end_frame": 31793
     }
    ],
    "end": 1060.55,
@@ -1999,7 +1921,7 @@
      "start": 1060.55,
      "end": 1063.325,
      "dur": 2.775,
-     "start_frame": 31816,
+     "start_frame": 31817,
      "end_frame": 31900
     },
     {
@@ -2017,7 +1939,7 @@
      "start": 1069.95,
      "end": 1072.65,
      "dur": 2.7,
-     "start_frame": 32098,
+     "start_frame": 32099,
      "end_frame": 32180
     },
     {
@@ -2027,7 +1949,7 @@
      "end": 1076.55,
      "dur": 3.55,
      "start_frame": 32190,
-     "end_frame": 32296
+     "end_frame": 32297
     },
     {
      "text": "So its area is still fourteen.",
@@ -2036,7 +1958,7 @@
      "end": 1079.35,
      "dur": 2.45,
      "start_frame": 32307,
-     "end_frame": 32380
+     "end_frame": 32381
     },
     {
      "text": "Let's check with the recipe: five times four, minus one times six, is twenty minus six, which is fourteen again.",
@@ -2055,7 +1977,7 @@
      "end": 1092.95,
      "dur": 3.725,
      "start_frame": 32677,
-     "end_frame": 32788
+     "end_frame": 32789
     },
     {
      "text": "So the cross product ignores how much two arrows agree.",
@@ -2099,7 +2021,7 @@
      "start": 1105.55,
      "end": 1108.425,
      "dur": 2.875,
-     "start_frame": 33166,
+     "start_frame": 33167,
      "end_frame": 33253
     },
     {
@@ -2237,7 +2159,7 @@
      "start": 1193.45,
      "end": 1199.15,
      "dur": 5.7,
-     "start_frame": 35804,
+     "start_frame": 35803,
      "end_frame": 35974
     }
    ],
@@ -2273,7 +2195,7 @@
      "start": 1209.05,
      "end": 1219.225,
      "dur": 10.175,
-     "start_frame": 36272,
+     "start_frame": 36271,
      "end_frame": 36577
     },
     {
@@ -2300,8 +2222,8 @@
      "start": 1228.65,
      "end": 1237.65,
      "dur": 9.0,
-     "start_frame": 36860,
-     "end_frame": 37130,
+     "start_frame": 36859,
+     "end_frame": 37129,
      "beat": true
     },
     {
@@ -2330,7 +2252,7 @@
      "end": 1260.25,
      "dur": 6.45,
      "start_frame": 37614,
-     "end_frame": 37808,
+     "end_frame": 37807,
      "beat": true
     },
     {
@@ -2385,7 +2307,7 @@
      "end": 1298.65,
      "dur": 10.925,
      "start_frame": 38632,
-     "end_frame": 38960
+     "end_frame": 38959
     },
     {
      "text": "The thirty newtons along z push across the y part of the arm.",
@@ -2459,7 +2381,7 @@
      "start": 1346.05,
      "end": 1349.35,
      "dur": 3.3,
-     "start_frame": 40382,
+     "start_frame": 40381,
      "end_frame": 40480
     },
     {
@@ -2542,7 +2464,7 @@
      "end": 1430.25,
      "dur": 4.425,
      "start_frame": 42775,
-     "end_frame": 42908
+     "end_frame": 42907
     },
     {
      "text": "Imagine a ball floating in space, and brush your finger past it, off centre.",
@@ -2586,7 +2508,7 @@
      "start": 1454.85,
      "end": 1461.55,
      "dur": 6.7,
-     "start_frame": 43646,
+     "start_frame": 43645,
      "end_frame": 43846
     },
     {
@@ -2678,7 +2600,7 @@
      "end": 1517.65,
      "dur": 8.725,
      "start_frame": 45268,
-     "end_frame": 45530
+     "end_frame": 45529
     },
     {
      "text": "Any turning, or sweep of one arrow across another, happens in a plane.",
@@ -2758,7 +2680,7 @@
      "start": 1563.65,
      "end": 1567.95,
      "dur": 4.3,
-     "start_frame": 46910,
+     "start_frame": 46909,
      "end_frame": 47038
     },
     {
@@ -2831,7 +2753,7 @@
      "start": 1600.45,
      "end": 1605.1,
      "dur": 4.65,
-     "start_frame": 48014,
+     "start_frame": 48013,
      "end_frame": 48153
     },
     {
@@ -2840,7 +2762,7 @@
      "start": 1605.45,
      "end": 1611.125,
      "dur": 5.675,
-     "start_frame": 48164,
+     "start_frame": 48163,
      "end_frame": 48334
     },
     {
@@ -2859,7 +2781,7 @@
      "start": 1618.65,
      "end": 1625.775,
      "dur": 7.125,
-     "start_frame": 48560,
+     "start_frame": 48559,
      "end_frame": 48773
     },
     {
@@ -2924,7 +2846,7 @@
      "end": 1670.65,
      "dur": 9.875,
      "start_frame": 49823,
-     "end_frame": 50120
+     "end_frame": 50119
     },
     {
      "text": "This push is always at a right angle to the velocity.",
@@ -2933,7 +2855,7 @@
      "end": 1674.85,
      "dur": 3.85,
      "start_frame": 50130,
-     "end_frame": 50246
+     "end_frame": 50245
     },
     {
      "text": "So it never speeds the particle up or slows it down.",
@@ -2959,8 +2881,8 @@
      "start": 1682.85,
      "end": 1687.25,
      "dur": 4.4,
-     "start_frame": 50486,
-     "end_frame": 50618
+     "start_frame": 50485,
+     "end_frame": 50617
     }
    ],
    "end": 1688.05,
@@ -2977,7 +2899,7 @@
      "start": 1688.05,
      "end": 1692.0,
      "dur": 3.95,
-     "start_frame": 50642,
+     "start_frame": 50641,
      "end_frame": 50760
     },
     {
@@ -3062,7 +2984,7 @@
      "end": 1748.65,
      "dur": 8.925,
      "start_frame": 52192,
-     "end_frame": 52460
+     "end_frame": 52459
     },
     {
      "text": "The push dot the velocity is zero, so the push does no work.",
@@ -3089,7 +3011,7 @@
      "end": 1757.05,
      "dur": 2.775,
      "start_frame": 52628,
-     "end_frame": 52712
+     "end_frame": 52711
     },
     {
      "text": "Look at what the two arrows usually stand for.",
@@ -3125,7 +3047,7 @@
      "end": 1797.25,
      "dur": 14.1,
      "start_frame": 53494,
-     "end_frame": 53918
+     "end_frame": 53917
     },
     {
      "text": "That's torque, r cross F, angular momentum, r cross p, and the push on a moving charge, and soon the speed of the spinning ground, Omega cross r, and the Coriolis push, minus two Omega cross u.",
@@ -3205,8 +3127,8 @@
      "start": 1840.25,
      "end": 1850.05,
      "dur": 9.8,
-     "start_frame": 55208,
-     "end_frame": 55502
+     "start_frame": 55207,
+     "end_frame": 55501
     },
     {
      "text": "So the dot product is the part along, a number, and the cross product is the part across, an axis.",
@@ -3268,7 +3190,7 @@
      "start": 1877.05,
      "end": 1883.075,
      "dur": 6.025,
-     "start_frame": 56312,
+     "start_frame": 56311,
      "end_frame": 56492
     },
     {
@@ -3286,7 +3208,7 @@
      "start": 1889.45,
      "end": 1896.075,
      "dur": 6.625,
-     "start_frame": 56684,
+     "start_frame": 56683,
      "end_frame": 56882
     },
     {
@@ -3305,7 +3227,7 @@
      "end": 1914.25,
      "dur": 6.075,
      "start_frame": 57245,
-     "end_frame": 57428
+     "end_frame": 57427
     },
     {
      "text": "For a wind blowing north, k cross u points west, again to its left.",
@@ -3322,7 +3244,7 @@
      "start": 1920.25,
      "end": 1928.625,
      "dur": 8.375,
-     "start_frame": 57608,
+     "start_frame": 57607,
      "end_frame": 57859
     },
     {
@@ -3377,7 +3299,7 @@
      "end": 1960.65,
      "dur": 8.375,
      "start_frame": 58568,
-     "end_frame": 58820
+     "end_frame": 58819
     },
     {
      "text": "The spin's push only turns the air.",
@@ -3458,7 +3380,7 @@
      "end": 2005.05,
      "dur": 7.175,
      "start_frame": 59936,
-     "end_frame": 60152
+     "end_frame": 60151
     },
     {
      "text": "Omega's length is how fast Earth turns.",
@@ -3493,7 +3415,7 @@
      "start": 2022.25,
      "end": 2029.15,
      "dur": 6.9,
-     "start_frame": 60668,
+     "start_frame": 60667,
      "end_frame": 60874
     }
    ],
@@ -3530,7 +3452,7 @@
      "end": 2048.65,
      "dur": 8.775,
      "start_frame": 61196,
-     "end_frame": 61460
+     "end_frame": 61459
     },
     {
      "text": "Let's cut Earth in half through its axis and our place, to see inside.",
@@ -3566,7 +3488,7 @@
      "end": 2080.65,
      "dur": 10.5,
      "start_frame": 62104,
-     "end_frame": 62420
+     "end_frame": 62419
     }
    ],
    "end": 2081.45,
@@ -3584,7 +3506,7 @@
      "end": 2083.85,
      "dur": 2.4,
      "start_frame": 62443,
-     "end_frame": 62516
+     "end_frame": 62515
     },
     {
      "text": "As Earth turns, it goes round its circle of latitude, whose centre is on Earth's axis.",
@@ -3611,7 +3533,7 @@
      "end": 2100.05,
      "dur": 4.325,
      "start_frame": 62872,
-     "end_frame": 63002
+     "end_frame": 63001
     },
     {
      "text": "Then that distance is the length of r times sine theta.",
@@ -3629,7 +3551,7 @@
      "end": 2114.65,
      "dur": 9.725,
      "start_frame": 63148,
-     "end_frame": 63440
+     "end_frame": 63439
     },
     {
      "text": "In one turn, the place travels two pi times the radius, and one turn takes two pi over Omega seconds.",
@@ -3646,7 +3568,7 @@
      "start": 2122.85,
      "end": 2129.475,
      "dur": 6.625,
-     "start_frame": 63686,
+     "start_frame": 63685,
      "end_frame": 63884
     }
    ],
@@ -3665,7 +3587,7 @@
      "end": 2133.65,
      "dur": 3.375,
      "start_frame": 63908,
-     "end_frame": 64010
+     "end_frame": 64009
     },
     {
      "text": "And the place moves along its circle, towards the east, at a right angle to the axis and to r.",
@@ -3674,7 +3596,7 @@
      "end": 2140.55,
      "dur": 6.55,
      "start_frame": 64020,
-     "end_frame": 64217
+     "end_frame": 64216
     },
     {
      "text": "Curl your fingers from Omega towards r, and your thumb points east.",
@@ -3718,7 +3640,7 @@
      "start": 2171.85,
      "end": 2176.875,
      "dur": 5.025,
-     "start_frame": 65156,
+     "start_frame": 65155,
      "end_frame": 65306,
      "beat": true
     },
@@ -3755,7 +3677,7 @@
      "start": 2190.25,
      "end": 2198.075,
      "dur": 7.825,
-     "start_frame": 65708,
+     "start_frame": 65707,
      "end_frame": 65942
     },
     {
@@ -3765,7 +3687,7 @@
      "end": 2202.05,
      "dur": 3.625,
      "start_frame": 65953,
-     "end_frame": 66062
+     "end_frame": 66061
     },
     {
      "text": "In the Northern Hemisphere, the half of Earth north of the equator, it turns moving air to the right, and in the Southern Hemisphere, to the left.",
@@ -3828,7 +3750,7 @@
      "end": 2240.45,
      "dur": 5.725,
      "start_frame": 67042,
-     "end_frame": 67214
+     "end_frame": 67213
     },
     {
      "text": "It's the same ball.",
@@ -3854,2167 +3776,3051 @@
    "end_frame": 67444
   },
   {
-   "id": "s26b_two_views",
+   "id": "s26a1_rule",
    "start": 2248.15,
+   "sentences": [
+    {
+     "text": "Before we write down what each one sees, we need one rule, and the merry-go-round shows it.",
+     "audio_text": null,
+     "start": 2248.15,
+     "end": 2254.2,
+     "dur": 6.05,
+     "start_frame": 67444,
+     "end_frame": 67626
+    },
+    {
+     "text": "Paint an arrow on the floor, and call it B.",
+     "audio_text": null,
+     "start": 2254.55,
+     "end": 2257.65,
+     "dur": 3.1,
+     "start_frame": 67636,
+     "end_frame": 67729
+    },
+    {
+     "text": "It could be any arrow: a position, a velocity, or a direction.",
+     "audio_text": null,
+     "start": 2258.0,
+     "end": 2262.575,
+     "dur": 4.575,
+     "start_frame": 67740,
+     "end_frame": 67877
+    },
+    {
+     "text": "The rider sees the painted arrow stay exactly the same.",
+     "audio_text": null,
+     "start": 2262.925,
+     "end": 2267.15,
+     "dur": 4.225,
+     "start_frame": 67888,
+     "end_frame": 68014
+    },
+    {
+     "text": "But from outside, it swings round with the floor, and its tip moves along a circle.",
+     "audio_text": null,
+     "start": 2267.5,
+     "end": 2273.3,
+     "dur": 5.8,
+     "start_frame": 68025,
+     "end_frame": 68199
+    },
+    {
+     "text": "Just as Earth's ground moves at Omega cross r, the tip moves at Omega cross B.",
+     "audio_text": null,
+     "start": 2273.65,
+     "end": 2279.45,
+     "dur": 5.8,
+     "start_frame": 68209,
+     "end_frame": 68383
+    },
+    {
+     "text": "Now suppose the rider also sees B change, for example by growing longer.",
+     "audio_text": null,
+     "start": 2279.8,
+     "end": 2285.375,
+     "dur": 5.575,
+     "start_frame": 68394,
+     "end_frame": 68561
+    },
+    {
+     "text": "Then the outside watcher sees both changes, added together.",
+     "audio_text": null,
+     "start": 2285.725,
+     "end": 2290.125,
+     "dur": 4.4,
+     "start_frame": 68572,
+     "end_frame": 68704
+    },
+    {
+     "text": "We write how fast B changes each second as d B by d t, and say who is watching.",
+     "audio_text": null,
+     "start": 2290.475,
+     "end": 2296.575,
+     "dur": 6.1,
+     "start_frame": 68714,
+     "end_frame": 68897
+    },
+    {
+     "text": "So here's the rule: d B by d t seen from outside equals d B by d t seen by the rider, plus Omega cross B.",
+     "audio_text": null,
+     "start": 2296.925,
+     "end": 2305.775,
+     "dur": 8.85,
+     "start_frame": 68908,
+     "end_frame": 69173
+    },
+    {
+     "text": "We'll use it twice: first on the position, then on the velocity.",
+     "audio_text": null,
+     "start": 2306.125,
+     "end": 2310.75,
+     "dur": 4.625,
+     "start_frame": 69184,
+     "end_frame": 69322
+    }
+   ],
+   "end": 2311.55,
+   "start_frame": 67444,
+   "end_frame": 69346
+  },
+  {
+   "id": "s26b_two_views",
+   "start": 2311.55,
    "sentences": [
     {
      "text": "Let's write down what each one sees.",
      "audio_text": null,
-     "start": 2248.15,
-     "end": 2250.775,
+     "start": 2311.55,
+     "end": 2314.175,
      "dur": 2.625,
-     "start_frame": 67444,
-     "end_frame": 67523
+     "start_frame": 69346,
+     "end_frame": 69425
     },
     {
      "text": "The rider measures the ball's velocity over the floor: call it u.",
      "audio_text": null,
-     "start": 2251.125,
-     "end": 2255.7,
+     "start": 2314.525,
+     "end": 2319.1,
      "dur": 4.575,
-     "start_frame": 67534,
-     "end_frame": 67671
+     "start_frame": 69436,
+     "end_frame": 69573
     },
     {
      "text": "The floor under the ball moves at Omega cross r, where r is the arrow from the centre to the ball.",
      "audio_text": null,
-     "start": 2256.05,
-     "end": 2262.575,
+     "start": 2319.45,
+     "end": 2325.975,
      "dur": 6.525,
-     "start_frame": 67682,
-     "end_frame": 67877
+     "start_frame": 69583,
+     "end_frame": 69779
     },
     {
      "text": "So the outside watcher sees the ball's velocity as u plus Omega cross r.",
      "audio_text": null,
-     "start": 2262.925,
-     "end": 2268.675,
+     "start": 2326.325,
+     "end": 2332.075,
      "dur": 5.75,
-     "start_frame": 67888,
-     "end_frame": 68060
+     "start_frame": 69790,
+     "end_frame": 69962
+    },
+    {
+     "text": "That's our rule used on the position r: the rider sees r change at the rate u, and the spin adds Omega cross r.",
+     "audio_text": null,
+     "start": 2332.425,
+     "end": 2340.7,
+     "dur": 8.275,
+     "start_frame": 69973,
+     "end_frame": 70221
     },
     {
      "text": "Newton's law works for this watcher, who isn't turning.",
      "audio_text": null,
-     "start": 2269.025,
-     "end": 2272.85,
+     "start": 2341.05,
+     "end": 2344.875,
      "dur": 3.825,
-     "start_frame": 68071,
-     "end_frame": 68186
+     "start_frame": 70231,
+     "end_frame": 70346
     },
     {
      "text": "With nothing pushing the ball, this velocity doesn't change.",
      "audio_text": null,
-     "start": 2273.2,
-     "end": 2277.35,
+     "start": 2345.225,
+     "end": 2349.375,
      "dur": 4.15,
-     "start_frame": 68196,
-     "end_frame": 68320
+     "start_frame": 70357,
+     "end_frame": 70481
     },
     {
      "text": "So let's see how u plus Omega cross r changes.",
      "audio_text": null,
-     "start": 2277.7,
-     "end": 2281.125,
+     "start": 2349.725,
+     "end": 2353.15,
      "dur": 3.425,
-     "start_frame": 68331,
-     "end_frame": 68434
+     "start_frame": 70492,
+     "end_frame": 70594
     },
     {
      "text": "Two pieces of it change, and each gives an Omega cross u.",
      "audio_text": null,
-     "start": 2281.475,
-     "end": 2285.75,
+     "start": 2353.5,
+     "end": 2357.775,
      "dur": 4.275,
-     "start_frame": 68444,
-     "end_frame": 68572
+     "start_frame": 70605,
+     "end_frame": 70733
     }
    ],
-   "end": 2286.55,
-   "start_frame": 67444,
-   "end_frame": 68596
+   "end": 2358.575,
+   "start_frame": 69346,
+   "end_frame": 70757
   },
   {
    "id": "s26c_carried_arrow",
-   "start": 2286.55,
+   "start": 2358.575,
    "sentences": [
     {
      "text": "The first piece is the arrow u itself.",
      "audio_text": null,
-     "start": 2286.55,
-     "end": 2289.4,
+     "start": 2358.575,
+     "end": 2361.425,
      "dur": 2.85,
-     "start_frame": 68596,
-     "end_frame": 68682
+     "start_frame": 70757,
+     "end_frame": 70843
     },
     {
      "text": "Say the rider sees the ball keep the same velocity across the floor.",
      "audio_text": null,
-     "start": 2289.75,
-     "end": 2294.325,
+     "start": 2361.775,
+     "end": 2366.35,
      "dur": 4.575,
-     "start_frame": 68692,
-     "end_frame": 68830
+     "start_frame": 70853,
+     "end_frame": 70990
     },
     {
      "text": "But the floor turns, and the rider's directions turn with it.",
      "audio_text": null,
-     "start": 2294.675,
-     "end": 2298.85,
+     "start": 2366.7,
+     "end": 2370.875,
      "dur": 4.175,
-     "start_frame": 68840,
-     "end_frame": 68966
+     "start_frame": 71001,
+     "end_frame": 71126
     },
     {
      "text": "So from outside, the arrow u swings round with the floor.",
      "audio_text": null,
-     "start": 2299.2,
-     "end": 2303.4,
+     "start": 2371.225,
+     "end": 2375.425,
      "dur": 4.2,
-     "start_frame": 68976,
-     "end_frame": 69102
+     "start_frame": 71137,
+     "end_frame": 71263
     },
     {
      "text": "Any arrow carried round by the spin changes at Omega cross that arrow, just as r did.",
      "audio_text": null,
-     "start": 2303.75,
-     "end": 2310.2,
+     "start": 2375.775,
+     "end": 2382.225,
      "dur": 6.45,
-     "start_frame": 69112,
-     "end_frame": 69306
+     "start_frame": 71273,
+     "end_frame": 71467
     },
     {
      "text": "That's the first Omega cross u.",
      "audio_text": null,
-     "start": 2310.55,
-     "end": 2313.225,
+     "start": 2382.575,
+     "end": 2385.25,
      "dur": 2.675,
-     "start_frame": 69316,
-     "end_frame": 69397
+     "start_frame": 71477,
+     "end_frame": 71557
     }
    ],
-   "end": 2314.025,
-   "start_frame": 68596,
-   "end_frame": 69421
+   "end": 2386.05,
+   "start_frame": 70757,
+   "end_frame": 71582
   },
   {
    "id": "s26d_new_ground",
-   "start": 2314.025,
+   "start": 2386.05,
    "sentences": [
     {
      "text": "The second piece is the floor's speed under the ball.",
      "audio_text": null,
-     "start": 2314.025,
-     "end": 2317.775,
+     "start": 2386.05,
+     "end": 2389.8,
      "dur": 3.75,
-     "start_frame": 69421,
-     "end_frame": 69533
+     "start_frame": 71581,
+     "end_frame": 71694
     },
     {
      "text": "The ball moves to a new place, where the floor moves differently: fast near the edge, and hardly at all near the centre.",
      "audio_text": null,
-     "start": 2318.125,
-     "end": 2325.875,
+     "start": 2390.15,
+     "end": 2397.9,
      "dur": 7.75,
-     "start_frame": 69544,
-     "end_frame": 69776
+     "start_frame": 71704,
+     "end_frame": 71937
     },
     {
      "text": "The floor's velocity is Omega cross r.",
      "audio_text": null,
-     "start": 2326.225,
-     "end": 2329.6,
+     "start": 2398.25,
+     "end": 2401.625,
      "dur": 3.375,
-     "start_frame": 69787,
-     "end_frame": 69888
+     "start_frame": 71947,
+     "end_frame": 72049
     },
     {
      "text": "When the ball's position changes by u every second, Omega cross r changes by Omega cross u every second.",
      "audio_text": null,
-     "start": 2329.95,
-     "end": 2338.125,
+     "start": 2401.975,
+     "end": 2410.15,
      "dur": 8.175,
-     "start_frame": 69898,
-     "end_frame": 70144
+     "start_frame": 72059,
+     "end_frame": 72304
     },
     {
      "text": "That's the second Omega cross u.",
      "audio_text": null,
-     "start": 2338.475,
-     "end": 2341.125,
+     "start": 2410.5,
+     "end": 2413.15,
      "dur": 2.65,
-     "start_frame": 70154,
-     "end_frame": 70234
+     "start_frame": 72315,
+     "end_frame": 72394
     },
     {
      "text": "One more piece comes from the ball being carried round with the floor itself.",
      "audio_text": null,
-     "start": 2341.475,
-     "end": 2346.2,
+     "start": 2413.5,
+     "end": 2418.225,
      "dur": 4.725,
-     "start_frame": 70244,
-     "end_frame": 70386
+     "start_frame": 72405,
+     "end_frame": 72547
     },
     {
      "text": "It doesn't depend on u, and we'll come back to it.",
      "audio_text": null,
-     "start": 2346.55,
-     "end": 2350.05,
+     "start": 2418.575,
+     "end": 2422.075,
      "dur": 3.5,
-     "start_frame": 70396,
-     "end_frame": 70502
+     "start_frame": 72557,
+     "end_frame": 72662
     }
    ],
-   "end": 2350.85,
-   "start_frame": 69421,
-   "end_frame": 70526
+   "end": 2422.875,
+   "start_frame": 71582,
+   "end_frame": 72686
+  },
+  {
+   "id": "s26e_rule_again",
+   "start": 2422.875,
+   "sentences": [
+    {
+     "text": "Now let's use the rule a second time, to find all the pieces at once.",
+     "audio_text": null,
+     "start": 2422.875,
+     "end": 2427.825,
+     "dur": 4.95,
+     "start_frame": 72686,
+     "end_frame": 72835
+    },
+    {
+     "text": "This time, the arrow B is the velocity the outside watcher sees: u plus Omega cross r.",
+     "audio_text": null,
+     "start": 2428.175,
+     "end": 2435.0,
+     "dur": 6.825,
+     "start_frame": 72845,
+     "end_frame": 73050
+    },
+    {
+     "text": "The rule says its change seen from outside is its change seen by the rider, plus Omega cross that same velocity.",
+     "audio_text": null,
+     "start": 2435.35,
+     "end": 2443.5,
+     "dur": 8.15,
+     "start_frame": 73060,
+     "end_frame": 73305
+    },
+    {
+     "text": "Let's take the rider's part first.",
+     "audio_text": null,
+     "start": 2443.85,
+     "end": 2446.475,
+     "dur": 2.625,
+     "start_frame": 73315,
+     "end_frame": 73394
+    },
+    {
+     "text": "The rider sees u change at a rate we write d u by d t: how fast the velocity over the floor changes each second.",
+     "audio_text": null,
+     "start": 2446.825,
+     "end": 2455.275,
+     "dur": 8.45,
+     "start_frame": 73405,
+     "end_frame": 73658
+    },
+    {
+     "text": "In Omega cross r, Omega doesn't change, so only r does.",
+     "audio_text": null,
+     "start": 2455.625,
+     "end": 2460.525,
+     "dur": 4.9,
+     "start_frame": 73669,
+     "end_frame": 73816
+    },
+    {
+     "text": "The rider sees r change at the rate u, so Omega cross r changes at Omega cross u.",
+     "audio_text": null,
+     "start": 2460.875,
+     "end": 2467.225,
+     "dur": 6.35,
+     "start_frame": 73826,
+     "end_frame": 74017
+    },
+    {
+     "text": "That's our second piece: the floor's speed changing under the moving ball.",
+     "audio_text": null,
+     "start": 2467.575,
+     "end": 2472.475,
+     "dur": 4.9,
+     "start_frame": 74027,
+     "end_frame": 74174
+    }
+   ],
+   "end": 2473.275,
+   "start_frame": 72686,
+   "end_frame": 74198
+  },
+  {
+   "id": "s26f_collect",
+   "start": 2473.275,
+   "sentences": [
+    {
+     "text": "Now the last part of the rule: Omega cross, open bracket, u plus Omega cross r.",
+     "audio_text": null,
+     "start": 2473.275,
+     "end": 2479.575,
+     "dur": 6.3,
+     "start_frame": 74198,
+     "end_frame": 74387
+    },
+    {
+     "text": "The cross product works part by part, like ordinary multiplication, so we cross Omega with each part on its own.",
+     "audio_text": null,
+     "start": 2479.925,
+     "end": 2488.0,
+     "dur": 8.075,
+     "start_frame": 74398,
+     "end_frame": 74640
+    },
+    {
+     "text": "Omega cross u is our first piece: the arrow u carried round by the floor.",
+     "audio_text": null,
+     "start": 2488.35,
+     "end": 2493.625,
+     "dur": 5.275,
+     "start_frame": 74650,
+     "end_frame": 74809
+    },
+    {
+     "text": "Omega cross, open bracket, Omega cross r, is the floor's own velocity, Omega cross r, carried round in its turn.",
+     "audio_text": null,
+     "start": 2493.975,
+     "end": 2502.725,
+     "dur": 8.75,
+     "start_frame": 74819,
+     "end_frame": 75082
+    },
+    {
+     "text": "That's the leftover piece, and now we can see where it comes from.",
+     "audio_text": null,
+     "start": 2503.075,
+     "end": 2507.475,
+     "dur": 4.4,
+     "start_frame": 75092,
+     "end_frame": 75224
+    },
+    {
+     "text": "Adding everything, the change seen from outside is d u by d t, plus Omega cross u, plus Omega cross u again, plus Omega cross, open bracket, Omega cross r.",
+     "audio_text": null,
+     "start": 2507.825,
+     "end": 2519.825,
+     "dur": 12.0,
+     "start_frame": 75235,
+     "end_frame": 75595
+    },
+    {
+     "text": "The two equal pieces, one from each use of the rule, make two Omega cross u.",
+     "audio_text": null,
+     "start": 2520.175,
+     "end": 2525.725,
+     "dur": 5.55,
+     "start_frame": 75605,
+     "end_frame": 75772,
+     "beat": true
+    }
+   ],
+   "end": 2527.225,
+   "start_frame": 74198,
+   "end_frame": 75817
   },
   {
    "id": "s27_coriolis_term",
-   "start": 2350.85,
+   "start": 2527.225,
    "sentences": [
     {
-     "text": "Now let's add the pieces.",
+     "text": "Now let's put the sum to work.",
      "audio_text": null,
-     "start": 2350.85,
-     "end": 2353.0,
-     "dur": 2.15,
-     "start_frame": 70526,
-     "end_frame": 70590
+     "start": 2527.225,
+     "end": 2529.6,
+     "dur": 2.375,
+     "start_frame": 75817,
+     "end_frame": 75888
     },
     {
      "text": "A push for each kilogram is just an acceleration: how much the velocity changes every second.",
      "audio_text": null,
-     "start": 2353.35,
-     "end": 2360.1,
+     "start": 2529.95,
+     "end": 2536.7,
      "dur": 6.75,
-     "start_frame": 70600,
-     "end_frame": 70803
+     "start_frame": 75898,
+     "end_frame": 76101
     },
     {
-     "text": "The change seen from outside is the change of u that the rider sees, plus two Omega cross u, plus the leftover piece.",
+     "text": "The change seen from outside is the change of u that the rider sees, plus two Omega cross u, plus Omega cross, open bracket, Omega cross r.",
      "audio_text": null,
-     "start": 2360.45,
-     "end": 2368.95,
-     "dur": 8.5,
-     "start_frame": 70814,
-     "end_frame": 71068
+     "start": 2537.05,
+     "end": 2547.7,
+     "dur": 10.65,
+     "start_frame": 76111,
+     "end_frame": 76431
     },
     {
      "text": "Newton's law says this equals the real pushes on each kilogram, like the pressure push.",
      "audio_text": null,
-     "start": 2369.3,
-     "end": 2375.35,
+     "start": 2548.05,
+     "end": 2554.1,
      "dur": 6.05,
-     "start_frame": 71079,
-     "end_frame": 71260
+     "start_frame": 76441,
+     "end_frame": 76623
     },
     {
-     "text": "Move the extra pieces to the other side, and the rider sees u change by the real pushes, minus two Omega cross u, minus the leftover piece.",
+     "text": "Move the extra pieces to the other side, and the rider sees u change by the real pushes, minus two Omega cross u, minus Omega cross, open bracket, Omega cross r.",
      "audio_text": null,
-     "start": 2375.7,
-     "end": 2386.05,
-     "dur": 10.35,
-     "start_frame": 71271,
-     "end_frame": 71582
+     "start": 2554.45,
+     "end": 2566.7,
+     "dur": 12.25,
+     "start_frame": 76633,
+     "end_frame": 77001
     },
     {
      "text": "So minus two Omega cross u is the Coriolis push, for each kilogram.",
      "audio_text": "So minus two Omega cross u is the [Coriolis](/kˌɔɹiˈOlɪs/) push, for each kilogram.",
-     "start": 2386.4,
-     "end": 2391.65,
+     "start": 2567.05,
+     "end": 2572.3,
      "dur": 5.25,
-     "start_frame": 71592,
-     "end_frame": 71750
+     "start_frame": 77011,
+     "end_frame": 77169
     },
     {
      "text": "The two comes from the two equal pieces, and the minus from moving them to the rider's side.",
      "audio_text": null,
-     "start": 2392.0,
-     "end": 2397.95,
+     "start": 2572.65,
+     "end": 2578.6,
      "dur": 5.95,
-     "start_frame": 71760,
-     "end_frame": 71938
+     "start_frame": 77179,
+     "end_frame": 77358
     },
     {
-     "text": "The leftover piece is the centrifugal effect, pulling outwards from the axis.",
+     "text": "The leftover piece, minus Omega cross, open bracket, Omega cross r, is called the centrifugal acceleration, and it pulls outwards from the axis.",
      "audio_text": null,
-     "start": 2398.3,
-     "end": 2403.9,
-     "dur": 5.6,
-     "start_frame": 71949,
-     "end_frame": 72117
+     "start": 2578.95,
+     "end": 2589.825,
+     "dur": 10.875,
+     "start_frame": 77368,
+     "end_frame": 77695
     },
     {
-     "text": "On Earth, the slight bulge at the equator balances it, so it's already part of gravity, and we can leave it out.",
+     "text": "We'll see why, and where it goes on Earth, right after we check the minus sign.",
      "audio_text": null,
-     "start": 2404.25,
-     "end": 2411.475,
-     "dur": 7.225,
-     "start_frame": 72128,
-     "end_frame": 72344
+     "start": 2590.175,
+     "end": 2595.425,
+     "dur": 5.25,
+     "start_frame": 77705,
+     "end_frame": 77863
     }
    ],
-   "end": 2412.275,
-   "start_frame": 70526,
-   "end_frame": 72368
+   "end": 2596.225,
+   "start_frame": 75817,
+   "end_frame": 77887
   },
   {
    "id": "s27a_minus_check",
-   "start": 2412.275,
+   "start": 2596.225,
    "sentences": [
     {
      "text": "What does the minus mean?",
      "audio_text": null,
-     "start": 2412.275,
-     "end": 2414.3,
+     "start": 2596.225,
+     "end": 2598.25,
      "dur": 2.025,
-     "start_frame": 72368,
-     "end_frame": 72429
+     "start_frame": 77887,
+     "end_frame": 77947
     },
     {
      "text": "On the merry-go-round, Omega points up, so Omega cross u points to the left of the ball's motion.",
      "audio_text": null,
-     "start": 2414.65,
-     "end": 2421.475,
+     "start": 2598.6,
+     "end": 2605.425,
      "dur": 6.825,
-     "start_frame": 72440,
-     "end_frame": 72644
+     "start_frame": 77958,
+     "end_frame": 78163
     },
     {
      "text": "The minus flips it to the right, against the floor's turning: the curve the rider saw.",
      "audio_text": null,
-     "start": 2421.825,
-     "end": 2427.475,
+     "start": 2605.775,
+     "end": 2611.425,
      "dur": 5.65,
-     "start_frame": 72655,
-     "end_frame": 72824
+     "start_frame": 78173,
+     "end_frame": 78343
     },
     {
      "text": "Let's check with a computer.",
      "audio_text": null,
-     "start": 2427.825,
-     "end": 2430.025,
+     "start": 2611.775,
+     "end": 2613.975,
      "dur": 2.2,
-     "start_frame": 72835,
-     "end_frame": 72901
+     "start_frame": 78353,
+     "end_frame": 78419
     },
     {
      "text": "We follow the ball from outside, where it rolls straight, and redraw its path as the rider sees it.",
      "audio_text": null,
-     "start": 2430.375,
-     "end": 2437.075,
+     "start": 2614.325,
+     "end": 2621.025,
      "dur": 6.7,
-     "start_frame": 72911,
-     "end_frame": 73112
+     "start_frame": 78430,
+     "end_frame": 78631
     },
     {
      "text": "Then we use only the rider's equation, with the Coriolis push and the centrifugal pull.",
      "audio_text": "Then we use only the rider's equation, with the [Coriolis](/kˌɔɹiˈOlɪs/) push and the centrifugal pull.",
-     "start": 2437.425,
-     "end": 2443.725,
+     "start": 2621.375,
+     "end": 2627.675,
      "dur": 6.3,
-     "start_frame": 73123,
-     "end_frame": 73312
+     "start_frame": 78641,
+     "end_frame": 78830
     },
     {
      "text": "The two curves land exactly on top of each other.",
      "audio_text": null,
-     "start": 2444.075,
-     "end": 2447.9,
+     "start": 2628.025,
+     "end": 2631.85,
      "dur": 3.825,
-     "start_frame": 73322,
-     "end_frame": 73437
+     "start_frame": 78841,
+     "end_frame": 78955
     }
    ],
-   "end": 2448.7,
-   "start_frame": 72368,
-   "end_frame": 73461
+   "end": 2632.65,
+   "start_frame": 77887,
+   "end_frame": 78980
+  },
+  {
+   "id": "s27b_centrifugal",
+   "start": 2632.65,
+   "sentences": [
+    {
+     "text": "Now let's look at the centrifugal acceleration, minus Omega cross, open bracket, Omega cross r.",
+     "audio_text": null,
+     "start": 2632.65,
+     "end": 2640.125,
+     "dur": 7.475,
+     "start_frame": 78979,
+     "end_frame": 79204
+    },
+    {
+     "text": "It depends only on where the ball is, not on how it moves.",
+     "audio_text": null,
+     "start": 2640.475,
+     "end": 2644.525,
+     "dur": 4.05,
+     "start_frame": 79214,
+     "end_frame": 79336
+    },
+    {
+     "text": "To see which way it points, we use the vector triple product from the triple products video.",
+     "audio_text": null,
+     "start": 2644.875,
+     "end": 2650.925,
+     "dur": 6.05,
+     "start_frame": 79346,
+     "end_frame": 79528
+    },
+    {
+     "text": "It says that p cross, open bracket, q cross s, equals q times p dot s, minus s times p dot q.",
+     "audio_text": null,
+     "start": 2651.275,
+     "end": 2659.775,
+     "dur": 8.5,
+     "start_frame": 79538,
+     "end_frame": 79793
+    },
+    {
+     "text": "Here p and q are both Omega, and s is r.",
+     "audio_text": null,
+     "start": 2660.125,
+     "end": 2663.725,
+     "dur": 3.6,
+     "start_frame": 79804,
+     "end_frame": 79912
+    },
+    {
+     "text": "So Omega cross, open bracket, Omega cross r, equals Omega times Omega dot r, minus r times Omega dot Omega.",
+     "audio_text": null,
+     "start": 2664.075,
+     "end": 2673.675,
+     "dur": 9.6,
+     "start_frame": 79922,
+     "end_frame": 80210
+    },
+    {
+     "text": "Omega dot Omega is the length of Omega, squared, which we write Omega squared.",
+     "audio_text": null,
+     "start": 2674.025,
+     "end": 2680.075,
+     "dur": 6.05,
+     "start_frame": 80221,
+     "end_frame": 80402
+    },
+    {
+     "text": "On the merry-go-round, r lies flat on the floor and Omega points straight up, so Omega dot r is zero.",
+     "audio_text": null,
+     "start": 2680.425,
+     "end": 2687.7,
+     "dur": 7.275,
+     "start_frame": 80413,
+     "end_frame": 80631
+    },
+    {
+     "text": "With the minus sign in front, the centrifugal acceleration is just Omega squared times r, pointing straight out from the centre.",
+     "audio_text": null,
+     "start": 2688.05,
+     "end": 2696.8,
+     "dur": 8.75,
+     "start_frame": 80641,
+     "end_frame": 80904
+    },
+    {
+     "text": "Our merry-go-round turns at point five radians per second, about once every twelve and a half seconds.",
+     "audio_text": null,
+     "start": 2697.15,
+     "end": 2704.025,
+     "dur": 6.875,
+     "start_frame": 80914,
+     "end_frame": 81121
+    },
+    {
+     "text": "So at two and a half metres from the centre, the centrifugal acceleration is point two five times two and a half, which is point six two five metres per second squared.",
+     "audio_text": null,
+     "start": 2704.375,
+     "end": 2715.225,
+     "dur": 10.85,
+     "start_frame": 81131,
+     "end_frame": 81457,
+     "beat": true
+    },
+    {
+     "text": "That's the outward pull a rider feels, as if something were trying to throw them off the edge.",
+     "audio_text": null,
+     "start": 2716.725,
+     "end": 2722.425,
+     "dur": 5.7,
+     "start_frame": 81502,
+     "end_frame": 81673
+    }
+   ],
+   "end": 2723.225,
+   "start_frame": 78980,
+   "end_frame": 81697
+  },
+  {
+   "id": "s27c_centrifugal_earth",
+   "start": 2723.225,
+   "sentences": [
+    {
+     "text": "On Earth, r points from the centre to our place, and it isn't at right angles to Omega.",
+     "audio_text": null,
+     "start": 2723.225,
+     "end": 2729.475,
+     "dur": 6.25,
+     "start_frame": 81697,
+     "end_frame": 81884
+    },
+    {
+     "text": "So let's split r into two parts: one along Earth's axis, and one straight out from the axis, which we call r perp, short for perpendicular.",
+     "audio_text": null,
+     "start": 2729.825,
+     "end": 2739.625,
+     "dur": 9.8,
+     "start_frame": 81895,
+     "end_frame": 82189
+    },
+    {
+     "text": "In Omega times Omega dot r, only the part along the axis counts, and it gives Omega squared times that part.",
+     "audio_text": null,
+     "start": 2739.975,
+     "end": 2748.4,
+     "dur": 8.425,
+     "start_frame": 82199,
+     "end_frame": 82452
+    },
+    {
+     "text": "So it cancels the same part of Omega squared times r, and what's left is Omega squared times r perp.",
+     "audio_text": null,
+     "start": 2748.75,
+     "end": 2756.2,
+     "dur": 7.45,
+     "start_frame": 82462,
+     "end_frame": 82686
+    },
+    {
+     "text": "The length of r perp is our distance from the axis: the radius of our circle of latitude, Earth's radius times cosine phi.",
+     "audio_text": null,
+     "start": 2756.55,
+     "end": 2765.325,
+     "dur": 8.775,
+     "start_frame": 82696,
+     "end_frame": 82960
+    },
+    {
+     "text": "So the centrifugal acceleration is Omega squared, times Earth's radius, times cosine phi, pointing away from the axis.",
+     "audio_text": null,
+     "start": 2765.675,
+     "end": 2774.725,
+     "dur": 9.05,
+     "start_frame": 82970,
+     "end_frame": 83242
+    },
+    {
+     "text": "Notice its direction: it points away from the axis, not straight up, so at forty five degrees it leans towards the equator.",
+     "audio_text": null,
+     "start": 2775.075,
+     "end": 2783.3,
+     "dur": 8.225,
+     "start_frame": 83252,
+     "end_frame": 83499
+    }
+   ],
+   "end": 2784.1,
+   "start_frame": 81697,
+   "end_frame": 83523
+  },
+  {
+   "id": "s27d_centrifugal_size",
+   "start": 2784.1,
+   "sentences": [
+    {
+     "text": "How big is it on Earth?",
+     "audio_text": null,
+     "start": 2784.1,
+     "end": 2786.125,
+     "dur": 2.025,
+     "start_frame": 83523,
+     "end_frame": 83584
+    },
+    {
+     "text": "Omega squared is about five point three two times ten to the minus nine per second squared.",
+     "audio_text": null,
+     "start": 2786.475,
+     "end": 2792.85,
+     "dur": 6.375,
+     "start_frame": 83594,
+     "end_frame": 83785
+    },
+    {
+     "text": "At the equator, times six million three hundred and seventy one thousand metres, that's about zero point zero three four metres per second squared.",
+     "audio_text": null,
+     "start": 2793.2,
+     "end": 2803.0,
+     "dur": 9.8,
+     "start_frame": 83796,
+     "end_frame": 84090,
+     "beat": true
+    },
+    {
+     "text": "At forty five degrees, our distance from the axis is about four thousand five hundred and five kilometres, so it's about zero point zero two four.",
+     "audio_text": null,
+     "start": 2804.5,
+     "end": 2814.525,
+     "dur": 10.025,
+     "start_frame": 84135,
+     "end_frame": 84436
+    },
+    {
+     "text": "At the poles, it's zero, because the poles sit on the axis.",
+     "audio_text": null,
+     "start": 2814.875,
+     "end": 2819.2,
+     "dur": 4.325,
+     "start_frame": 84446,
+     "end_frame": 84576
+    },
+    {
+     "text": "Gravity is about nine point eight one metres per second squared.",
+     "audio_text": null,
+     "start": 2819.55,
+     "end": 2824.25,
+     "dur": 4.7,
+     "start_frame": 84586,
+     "end_frame": 84727
+    },
+    {
+     "text": "So even at the equator, the centrifugal acceleration is only about a third of one percent of gravity.",
+     "audio_text": null,
+     "start": 2824.6,
+     "end": 2831.725,
+     "dur": 7.125,
+     "start_frame": 84738,
+     "end_frame": 84952
+    }
+   ],
+   "end": 2832.525,
+   "start_frame": 83523,
+   "end_frame": 84976
+  },
+  {
+   "id": "s27e_effective_gravity",
+   "start": 2832.525,
+   "sentences": [
+    {
+     "text": "So why don't weather equations have a centrifugal term?",
+     "audio_text": null,
+     "start": 2832.525,
+     "end": 2836.375,
+     "dur": 3.85,
+     "start_frame": 84976,
+     "end_frame": 85091
+    },
+    {
+     "text": "Because it never acts alone.",
+     "audio_text": null,
+     "start": 2836.725,
+     "end": 2839.05,
+     "dur": 2.325,
+     "start_frame": 85102,
+     "end_frame": 85171
+    },
+    {
+     "text": "One of the real pushes on every kilogram of air is Earth's gravitational attraction, which pulls it almost straight towards Earth's centre.",
+     "audio_text": null,
+     "start": 2839.4,
+     "end": 2847.975,
+     "dur": 8.575,
+     "start_frame": 85182,
+     "end_frame": 85439
+    },
+    {
+     "text": "Let's write it g star.",
+     "audio_text": null,
+     "start": 2848.325,
+     "end": 2850.475,
+     "dur": 2.15,
+     "start_frame": 85450,
+     "end_frame": 85514
+    },
+    {
+     "text": "Like the centrifugal acceleration, it depends only on where the air is.",
+     "audio_text": null,
+     "start": 2850.825,
+     "end": 2856.0,
+     "dur": 5.175,
+     "start_frame": 85525,
+     "end_frame": 85680
+    },
+    {
+     "text": "So we add the two together, and call the sum effective gravity, g.",
+     "audio_text": null,
+     "start": 2856.35,
+     "end": 2861.1,
+     "dur": 4.75,
+     "start_frame": 85690,
+     "end_frame": 85833
+    },
+    {
+     "text": "g equals g star, minus Omega cross, open bracket, Omega cross r.",
+     "audio_text": null,
+     "start": 2861.45,
+     "end": 2867.175,
+     "dur": 5.725,
+     "start_frame": 85843,
+     "end_frame": 86015
+    },
+    {
+     "text": "This is the gravity that a plumb line, a bathroom scale, or a dropped ball feels, and it's the g in every weather equation.",
+     "audio_text": null,
+     "start": 2867.525,
+     "end": 2876.35,
+     "dur": 8.825,
+     "start_frame": 86026,
+     "end_frame": 86290
+    },
+    {
+     "text": "So the rider's equation becomes: d u by d t equals the other real pushes, like the pressure push, plus g, minus two Omega cross u.",
+     "audio_text": null,
+     "start": 2876.7,
+     "end": 2886.675,
+     "dur": 9.975,
+     "start_frame": 86301,
+     "end_frame": 86600
+    },
+    {
+     "text": "The centrifugal acceleration is still there, just folded into g.",
+     "audio_text": null,
+     "start": 2887.025,
+     "end": 2891.775,
+     "dur": 4.75,
+     "start_frame": 86611,
+     "end_frame": 86753
+    }
+   ],
+   "end": 2892.575,
+   "start_frame": 84976,
+   "end_frame": 86777
+  },
+  {
+   "id": "s27f_level_sea",
+   "start": 2892.575,
+   "sentences": [
+    {
+     "text": "Effective gravity has one more surprise: its direction.",
+     "audio_text": null,
+     "start": 2892.575,
+     "end": 2896.875,
+     "dur": 4.3,
+     "start_frame": 86777,
+     "end_frame": 86906
+    },
+    {
+     "text": "On a perfectly round Earth, g star would point to the centre, but the centrifugal part points away from the axis.",
+     "audio_text": null,
+     "start": 2897.225,
+     "end": 2904.675,
+     "dur": 7.45,
+     "start_frame": 86917,
+     "end_frame": 87140
+    },
+    {
+     "text": "So their sum would lean slightly towards the equator, with a part along the ground.",
+     "audio_text": null,
+     "start": 2905.025,
+     "end": 2910.2,
+     "dur": 5.175,
+     "start_frame": 87151,
+     "end_frame": 87306
+    },
+    {
+     "text": "At forty five degrees, that sideways part would be about zero point zero one seven metres per second squared.",
+     "audio_text": null,
+     "start": 2910.55,
+     "end": 2918.125,
+     "dur": 7.575,
+     "start_frame": 87316,
+     "end_frame": 87544
+    },
+    {
+     "text": "A wind of ten metres per second gets a Coriolis push of at most two Omega times ten, about zero point zero zero one five.",
+     "audio_text": "A wind of ten metres per second gets a [Coriolis](/kˌɔɹiˈOlɪs/) push of at most two Omega times ten, about zero point zero zero one five.",
+     "start": 2918.475,
+     "end": 2927.6,
+     "dur": 9.125,
+     "start_frame": 87554,
+     "end_frame": 87828,
+     "beat": true
+    },
+    {
+     "text": "So on a round Earth, the sideways pull would be more than ten times stronger than the Coriolis push, and the oceans would flow towards the equator and pile up there.",
+     "audio_text": "So on a round Earth, the sideways pull would be more than ten times stronger than the [Coriolis](/kˌɔɹiˈOlɪs/) push, and the oceans would flow towards the equator and pile up there.",
+     "start": 2929.1,
+     "end": 2939.35,
+     "dur": 10.25,
+     "start_frame": 87873,
+     "end_frame": 88180
+    },
+    {
+     "text": "In fact, over its long history, Earth's rock and water have settled into a slightly flattened shape, with a bulge at the equator.",
+     "audio_text": null,
+     "start": 2939.7,
+     "end": 2948.25,
+     "dur": 8.55,
+     "start_frame": 88191,
+     "end_frame": 88447
+    },
+    {
+     "text": "On that shape, the sea surface is level: effective gravity points straight down into it, with no sideways part.",
+     "audio_text": null,
+     "start": 2948.6,
+     "end": 2956.4,
+     "dur": 7.8,
+     "start_frame": 88458,
+     "end_frame": 88692
+    },
+    {
+     "text": "So in weather equations, up means straight against g, and g never pushes the wind sideways.",
+     "audio_text": null,
+     "start": 2956.75,
+     "end": 2963.45,
+     "dur": 6.7,
+     "start_frame": 88702,
+     "end_frame": 88903
+    },
+    {
+     "text": "On Earth, the slight bulge at the equator balances the centrifugal effect, so it's already part of gravity, and we can leave it out.",
+     "audio_text": null,
+     "start": 2963.8,
+     "end": 2972.35,
+     "dur": 8.55,
+     "start_frame": 88914,
+     "end_frame": 89170
+    }
+   ],
+   "end": 2973.15,
+   "start_frame": 86777,
+   "end_frame": 89194
+  },
+  {
+   "id": "s27g_three_traces",
+   "start": 2973.15,
+   "sentences": [
+    {
+     "text": "We can see the centrifugal effect in three places.",
+     "audio_text": null,
+     "start": 2973.15,
+     "end": 2976.825,
+     "dur": 3.675,
+     "start_frame": 89194,
+     "end_frame": 89305
+    },
+    {
+     "text": "First, gravity is weaker at the equator.",
+     "audio_text": null,
+     "start": 2977.175,
+     "end": 2980.575,
+     "dur": 3.4,
+     "start_frame": 89315,
+     "end_frame": 89417
+    },
+    {
+     "text": "Carefully measured, it's about nine point seven eight metres per second squared at the equator, and nine point eight three at the poles.",
+     "audio_text": null,
+     "start": 2980.925,
+     "end": 2989.45,
+     "dur": 8.525,
+     "start_frame": 89428,
+     "end_frame": 89683
+    },
+    {
+     "text": "The centrifugal pull explains about two thirds of that difference.",
+     "audio_text": null,
+     "start": 2989.8,
+     "end": 2994.35,
+     "dur": 4.55,
+     "start_frame": 89694,
+     "end_frame": 89830
+    },
+    {
+     "text": "The rest comes from the bulge itself, which puts the equator farther from Earth's centre.",
+     "audio_text": null,
+     "start": 2994.7,
+     "end": 3000.275,
+     "dur": 5.575,
+     "start_frame": 89841,
+     "end_frame": 90008
+    },
+    {
+     "text": "Second, a plumb line, a weight hanging on a string, doesn't point exactly at Earth's centre.",
+     "audio_text": null,
+     "start": 3000.625,
+     "end": 3007.025,
+     "dur": 6.4,
+     "start_frame": 90019,
+     "end_frame": 90211
+    },
+    {
+     "text": "On a round Earth, the spin alone would tilt it by up to about a tenth of a degree, near forty five degrees latitude.",
+     "audio_text": null,
+     "start": 3007.375,
+     "end": 3015.2,
+     "dur": 7.825,
+     "start_frame": 90221,
+     "end_frame": 90456
+    },
+    {
+     "text": "On the real, flattened Earth, the bulge's own pull adds about as much again, so the tilt reaches about a fifth of a degree.",
+     "audio_text": null,
+     "start": 3015.55,
+     "end": 3023.875,
+     "dur": 8.325,
+     "start_frame": 90466,
+     "end_frame": 90716
+    },
+    {
+     "text": "Third, Earth's shape: its radius at the equator is about twenty one kilometres larger than at the poles.",
+     "audio_text": null,
+     "start": 3024.225,
+     "end": 3031.2,
+     "dur": 6.975,
+     "start_frame": 90727,
+     "end_frame": 90936
+    },
+    {
+     "text": "That's only about one part in three hundred, so for everything else, we can treat Earth as a sphere.",
+     "audio_text": null,
+     "start": 3031.55,
+     "end": 3037.95,
+     "dur": 6.4,
+     "start_frame": 90946,
+     "end_frame": 91138,
+     "beat": true
+    },
+    {
+     "text": "The video on circular motion builds the centrifugal effect from scratch, and the Coriolis video goes through this whole derivation in more detail.",
+     "audio_text": "The video on circular motion builds the centrifugal effect from scratch, and the [Coriolis](/kˌɔɹiˈOlɪs/) video goes through this whole derivation in more detail.",
+     "start": 3039.45,
+     "end": 3049.3,
+     "dur": 9.85,
+     "start_frame": 91183,
+     "end_frame": 91479
+    },
+    {
+     "text": "Now let's go back to the Coriolis push, and see how it works on the spinning Earth.",
+     "audio_text": "Now let's go back to the [Coriolis](/kˌɔɹiˈOlɪs/) push, and see how it works on the spinning Earth.",
+     "start": 3049.65,
+     "end": 3054.875,
+     "dur": 5.225,
+     "start_frame": 91489,
+     "end_frame": 91646
+    }
+   ],
+   "end": 3055.675,
+   "start_frame": 89194,
+   "end_frame": 91670
   },
   {
    "id": "s28a_local_axes",
-   "start": 2448.7,
+   "start": 3055.675,
    "sentences": [
     {
      "text": "On Earth, the floor is a sphere, and the spin arrow is tilted.",
      "audio_text": null,
-     "start": 2448.7,
-     "end": 2453.2,
+     "start": 3055.675,
+     "end": 3060.175,
      "dur": 4.5,
-     "start_frame": 73461,
-     "end_frame": 73596
+     "start_frame": 91670,
+     "end_frame": 91805
     },
     {
      "text": "Let's stand at one place, at forty five degrees north, and use three directions there: east, north, and up.",
      "audio_text": null,
-     "start": 2453.55,
-     "end": 2460.85,
+     "start": 3060.525,
+     "end": 3067.825,
      "dur": 7.3,
-     "start_frame": 73606,
-     "end_frame": 73826
+     "start_frame": 91816,
+     "end_frame": 92035
     },
     {
      "text": "Up is k, straight out of the ground.",
      "audio_text": null,
-     "start": 2461.2,
-     "end": 2464.025,
+     "start": 3068.175,
+     "end": 3071.0,
      "dur": 2.825,
-     "start_frame": 73836,
-     "end_frame": 73921
+     "start_frame": 92045,
+     "end_frame": 92130
     },
     {
      "text": "These three are all there are, because space has three dimensions.",
      "audio_text": null,
-     "start": 2464.375,
-     "end": 2468.55,
+     "start": 3071.35,
+     "end": 3075.525,
      "dur": 4.175,
-     "start_frame": 73931,
-     "end_frame": 74056
+     "start_frame": 92140,
+     "end_frame": 92266
     },
     {
      "text": "Omega isn't a fourth direction: it points along Earth's axis, so at our place it leans partly north and partly up.",
      "audio_text": null,
-     "start": 2468.9,
-     "end": 2476.675,
+     "start": 3075.875,
+     "end": 3083.65,
      "dur": 7.775,
-     "start_frame": 74067,
-     "end_frame": 74300
+     "start_frame": 92276,
+     "end_frame": 92509
     },
     {
      "text": "Just as we split b, let's split Omega into a north part, Omega times cosine phi, and an up part, Omega times sine phi.",
      "audio_text": null,
-     "start": 2477.025,
-     "end": 2486.05,
+     "start": 3084.0,
+     "end": 3093.025,
      "dur": 9.025,
-     "start_frame": 74311,
-     "end_frame": 74582
+     "start_frame": 92520,
+     "end_frame": 92791
     },
     {
      "text": "At forty five degrees, both are about five point one six times ten to the minus five.",
      "audio_text": null,
-     "start": 2486.4,
-     "end": 2492.5,
+     "start": 3093.375,
+     "end": 3099.475,
      "dur": 6.1,
-     "start_frame": 74592,
-     "end_frame": 74775
+     "start_frame": 92801,
+     "end_frame": 92984
     },
     {
      "text": "So Omega has components zero, Omega cosine phi, and Omega sine phi.",
      "audio_text": null,
-     "start": 2492.85,
-     "end": 2498.625,
+     "start": 3099.825,
+     "end": 3105.6,
      "dur": 5.775,
-     "start_frame": 74786,
-     "end_frame": 74959
+     "start_frame": 92995,
+     "end_frame": 93168
     },
     {
      "text": "At the North Pole, Omega points straight up, and at the equator it lies flat, pointing north.",
      "audio_text": null,
-     "start": 2498.975,
-     "end": 2505.15,
+     "start": 3105.95,
+     "end": 3112.125,
      "dur": 6.175,
-     "start_frame": 74969,
-     "end_frame": 75154
+     "start_frame": 93178,
+     "end_frame": 93364
     }
    ],
-   "end": 2505.95,
-   "start_frame": 73461,
-   "end_frame": 75178
+   "end": 3112.925,
+   "start_frame": 91670,
+   "end_frame": 93388
   },
   {
    "id": "s28b_components",
-   "start": 2505.95,
+   "start": 3112.925,
    "sentences": [
     {
      "text": "Large-scale winds blow almost flat, so let's take a flat wind.",
      "audio_text": null,
-     "start": 2505.95,
-     "end": 2510.675,
+     "start": 3112.925,
+     "end": 3117.65,
      "dur": 4.725,
-     "start_frame": 75178,
-     "end_frame": 75320
+     "start_frame": 93388,
+     "end_frame": 93529
     },
     {
      "text": "Its eastward part is small u, its northward part is v, and its up part is zero.",
      "audio_text": null,
-     "start": 2511.025,
-     "end": 2517.175,
+     "start": 3118.0,
+     "end": 3124.15,
      "dur": 6.15,
-     "start_frame": 75331,
-     "end_frame": 75515
+     "start_frame": 93540,
+     "end_frame": 93724
     },
     {
      "text": "Now we find Omega cross u with the recipe.",
      "audio_text": null,
-     "start": 2517.525,
-     "end": 2521.075,
+     "start": 3124.5,
+     "end": 3128.05,
      "dur": 3.55,
-     "start_frame": 75526,
-     "end_frame": 75632
+     "start_frame": 93735,
+     "end_frame": 93841
     },
     {
      "text": "The east component is Omega's north part times zero, minus its up part times v: minus Omega sine phi times v.",
      "audio_text": null,
-     "start": 2521.425,
-     "end": 2529.975,
+     "start": 3128.4,
+     "end": 3136.95,
      "dur": 8.55,
-     "start_frame": 75643,
-     "end_frame": 75899
+     "start_frame": 93852,
+     "end_frame": 94108
     },
     {
      "text": "The north component is Omega's up part times small u, minus zero: Omega sine phi times small u.",
      "audio_text": null,
-     "start": 2530.325,
-     "end": 2537.675,
+     "start": 3137.3,
+     "end": 3144.65,
      "dur": 7.35,
-     "start_frame": 75910,
-     "end_frame": 76130
+     "start_frame": 94119,
+     "end_frame": 94339
     },
     {
      "text": "And the up component is zero times v, minus Omega's north part times small u: minus Omega cosine phi times small u.",
      "audio_text": null,
-     "start": 2538.025,
-     "end": 2547.1,
+     "start": 3145.0,
+     "end": 3154.075,
      "dur": 9.075,
-     "start_frame": 76141,
-     "end_frame": 76413
+     "start_frame": 94350,
+     "end_frame": 94622
     }
    ],
-   "end": 2547.9,
-   "start_frame": 75178,
-   "end_frame": 76437
+   "end": 3154.875,
+   "start_frame": 93388,
+   "end_frame": 94646
   },
   {
    "id": "s28c_flat_part",
-   "start": 2547.9,
+   "start": 3154.875,
    "sentences": [
     {
      "text": "Look at the first two components.",
      "audio_text": null,
-     "start": 2547.9,
-     "end": 2550.35,
+     "start": 3154.875,
+     "end": 3157.325,
      "dur": 2.45,
-     "start_frame": 76437,
-     "end_frame": 76510
+     "start_frame": 94646,
+     "end_frame": 94720
     },
     {
      "text": "Both start with Omega sine phi, followed by minus v and small u.",
      "audio_text": null,
-     "start": 2550.7,
-     "end": 2555.775,
+     "start": 3157.675,
+     "end": 3162.75,
      "dur": 5.075,
-     "start_frame": 76521,
-     "end_frame": 76673
+     "start_frame": 94730,
+     "end_frame": 94882
     },
     {
      "text": "That's exactly k cross u, our quarter turn to the left, with components minus v, small u and zero.",
      "audio_text": null,
-     "start": 2556.125,
-     "end": 2563.5,
+     "start": 3163.1,
+     "end": 3170.475,
      "dur": 7.375,
-     "start_frame": 76684,
-     "end_frame": 76905
+     "start_frame": 94893,
+     "end_frame": 95114
     },
     {
      "text": "So the flat part of Omega cross u is Omega sine phi times k cross u, from the up part of Omega only.",
      "audio_text": null,
-     "start": 2563.85,
-     "end": 2571.875,
+     "start": 3170.825,
+     "end": 3178.85,
      "dur": 8.025,
-     "start_frame": 76916,
-     "end_frame": 77156
+     "start_frame": 95125,
+     "end_frame": 95365
     },
     {
      "text": "The third component points up or down.",
      "audio_text": null,
-     "start": 2572.225,
-     "end": 2574.95,
+     "start": 3179.2,
+     "end": 3181.925,
      "dur": 2.725,
-     "start_frame": 77167,
-     "end_frame": 77248
+     "start_frame": 95376,
+     "end_frame": 95458
     },
     {
      "text": "For a wind of ten metres per second at forty five degrees, the push it gives is about one thousandth of a metre per second squared, ten thousand times weaker than gravity, so we drop it.",
      "audio_text": null,
-     "start": 2575.3,
-     "end": 2587.4,
+     "start": 3182.275,
+     "end": 3194.375,
      "dur": 12.1,
-     "start_frame": 77259,
-     "end_frame": 77622
+     "start_frame": 95468,
+     "end_frame": 95831
     },
     {
      "text": "What's left is the sideways push: minus two Omega sine phi, times k cross u.",
      "audio_text": null,
-     "start": 2587.75,
-     "end": 2593.875,
+     "start": 3194.725,
+     "end": 3200.85,
      "dur": 6.125,
-     "start_frame": 77632,
-     "end_frame": 77816
+     "start_frame": 95842,
+     "end_frame": 96025
     }
    ],
-   "end": 2594.675,
-   "start_frame": 76437,
-   "end_frame": 77840
+   "end": 3201.65,
+   "start_frame": 94646,
+   "end_frame": 96050
   },
   {
    "id": "s28_f",
-   "start": 2594.675,
+   "start": 3201.65,
    "sentences": [
     {
      "text": "Two Omega sine phi has its own name: the Coriolis parameter, f.",
      "audio_text": "Two Omega sine phi has its own name: the [Coriolis](/kˌɔɹiˈOlɪs/) parameter, f.",
-     "start": 2594.675,
-     "end": 2599.8,
+     "start": 3201.65,
+     "end": 3206.775,
      "dur": 5.125,
-     "start_frame": 77840,
-     "end_frame": 77994
+     "start_frame": 96049,
+     "end_frame": 96203
     },
     {
      "text": "So for flat winds, the Coriolis push is minus f times k cross u.",
      "audio_text": "So for flat winds, the [Coriolis](/kˌɔɹiˈOlɪs/) push is minus f times k cross u.",
-     "start": 2600.15,
-     "end": 2605.475,
+     "start": 3207.125,
+     "end": 3212.45,
      "dur": 5.325,
-     "start_frame": 78004,
-     "end_frame": 78164
+     "start_frame": 96214,
+     "end_frame": 96373
     },
     {
      "text": "Only Earth's spin about the local up direction turns flat winds sideways.",
      "audio_text": null,
-     "start": 2605.825,
-     "end": 2611.125,
+     "start": 3212.8,
+     "end": 3218.1,
      "dur": 5.3,
-     "start_frame": 78175,
-     "end_frame": 78334
+     "start_frame": 96384,
+     "end_frame": 96543
     },
     {
      "text": "At the North Pole, the ground spins about up at the full rate, like our merry-go-round.",
      "audio_text": null,
-     "start": 2611.475,
-     "end": 2617.25,
+     "start": 3218.45,
+     "end": 3224.225,
      "dur": 5.775,
-     "start_frame": 78344,
-     "end_frame": 78518
+     "start_frame": 96553,
+     "end_frame": 96727
     },
     {
      "text": "At the equator, there's no spin about up at all.",
      "audio_text": null,
-     "start": 2617.6,
-     "end": 2621.05,
+     "start": 3224.575,
+     "end": 3228.025,
      "dur": 3.45,
-     "start_frame": 78528,
-     "end_frame": 78632
+     "start_frame": 96737,
+     "end_frame": 96841
     },
     {
      "text": "At forty five degrees north, f is two times seven point two nine times ten to the minus five, times sine forty five.",
      "audio_text": null,
-     "start": 2621.4,
-     "end": 2630.025,
+     "start": 3228.375,
+     "end": 3237.0,
      "dur": 8.625,
-     "start_frame": 78642,
-     "end_frame": 78901
+     "start_frame": 96851,
+     "end_frame": 97110
     },
     {
      "text": "That's about one point zero three times ten to the minus four per second.",
      "audio_text": null,
-     "start": 2630.375,
-     "end": 2635.55,
+     "start": 3237.35,
+     "end": 3242.525,
      "dur": 5.175,
-     "start_frame": 78911,
-     "end_frame": 79066,
+     "start_frame": 97120,
+     "end_frame": 97276,
      "beat": true
     },
     {
      "text": "South of the equator, the latitude counts as negative, so sine phi and f are negative too.",
      "audio_text": null,
-     "start": 2637.05,
-     "end": 2643.65,
+     "start": 3244.025,
+     "end": 3250.625,
      "dur": 6.6,
-     "start_frame": 79112,
-     "end_frame": 79310
+     "start_frame": 97321,
+     "end_frame": 97519
     }
    ],
-   "end": 2644.45,
-   "start_frame": 77840,
-   "end_frame": 79334
+   "end": 3251.425,
+   "start_frame": 96050,
+   "end_frame": 97543
   },
   {
    "id": "s29_turn_rule",
-   "start": 2644.45,
+   "start": 3251.425,
    "sentences": [
     {
      "text": "Now the turning tool does its job.",
      "audio_text": null,
-     "start": 2644.45,
-     "end": 2647.0,
+     "start": 3251.425,
+     "end": 3253.975,
      "dur": 2.55,
-     "start_frame": 79334,
-     "end_frame": 79410
+     "start_frame": 97543,
+     "end_frame": 97619
     },
     {
      "text": "The term k cross u is the wind turned a quarter turn to the left, and the minus sign flips it to the right.",
      "audio_text": null,
-     "start": 2647.35,
-     "end": 2654.725,
+     "start": 3254.325,
+     "end": 3261.7,
      "dur": 7.375,
-     "start_frame": 79420,
-     "end_frame": 79642
+     "start_frame": 97630,
+     "end_frame": 97851
     },
     {
      "text": "In the Northern Hemisphere, f is positive, so the push points to the right of the wind.",
      "audio_text": null,
-     "start": 2655.075,
-     "end": 2660.975,
+     "start": 3262.05,
+     "end": 3267.95,
      "dur": 5.9,
-     "start_frame": 79652,
-     "end_frame": 79829
+     "start_frame": 97861,
+     "end_frame": 98038
     },
     {
      "text": "In the Southern Hemisphere, f is negative, which flips it once more, to the left.",
      "audio_text": null,
-     "start": 2661.325,
-     "end": 2666.925,
+     "start": 3268.3,
+     "end": 3273.9,
      "dur": 5.6,
-     "start_frame": 79840,
-     "end_frame": 80008
+     "start_frame": 98049,
+     "end_frame": 98217
     },
     {
      "text": "At the equator, f is zero, and there's no turning at all.",
      "audio_text": null,
-     "start": 2667.275,
-     "end": 2671.5,
+     "start": 3274.25,
+     "end": 3278.475,
      "dur": 4.225,
-     "start_frame": 80018,
-     "end_frame": 80145
+     "start_frame": 98227,
+     "end_frame": 98354
     }
    ],
-   "end": 2672.3,
-   "start_frame": 79334,
-   "end_frame": 80169
+   "end": 3279.275,
+   "start_frame": 97543,
+   "end_frame": 98378
   },
   {
    "id": "s30_coriolis_size",
-   "start": 2672.3,
+   "start": 3279.275,
    "sentences": [
     {
      "text": "How strong is it?",
      "audio_text": null,
-     "start": 2672.3,
-     "end": 2674.075,
+     "start": 3279.275,
+     "end": 3281.05,
      "dur": 1.775,
-     "start_frame": 80169,
-     "end_frame": 80222
+     "start_frame": 98378,
+     "end_frame": 98431
     },
     {
      "text": "Take a wind of ten metres per second at forty five degrees north.",
      "audio_text": null,
-     "start": 2674.425,
-     "end": 2679.0,
+     "start": 3281.4,
+     "end": 3285.975,
      "dur": 4.575,
-     "start_frame": 80233,
-     "end_frame": 80370
+     "start_frame": 98442,
+     "end_frame": 98579
     },
     {
      "text": "The push is f times the wind speed: one point zero three times ten to the minus four, times ten.",
      "audio_text": null,
-     "start": 2679.35,
-     "end": 2686.475,
+     "start": 3286.325,
+     "end": 3293.45,
      "dur": 7.125,
-     "start_frame": 80380,
-     "end_frame": 80594
+     "start_frame": 98590,
+     "end_frame": 98803
     },
     {
      "text": "That's about one millimetre per second, every second.",
      "audio_text": null,
-     "start": 2686.825,
-     "end": 2690.825,
+     "start": 3293.8,
+     "end": 3297.8,
      "dur": 4.0,
-     "start_frame": 80605,
-     "end_frame": 80725,
+     "start_frame": 98814,
+     "end_frame": 98934,
      "beat": true
     },
     {
      "text": "That's tiny, but it never stops, and it always acts at a right angle to the wind.",
      "audio_text": null,
-     "start": 2692.325,
-     "end": 2698.075,
+     "start": 3299.3,
+     "end": 3305.05,
      "dur": 5.75,
-     "start_frame": 80770,
-     "end_frame": 80942
+     "start_frame": 98979,
+     "end_frame": 99151
     },
     {
      "text": "If nothing else pushed the air, it would turn the wind round a full circle, without changing its speed.",
      "audio_text": null,
-     "start": 2698.425,
-     "end": 2705.1,
+     "start": 3305.4,
+     "end": 3312.075,
      "dur": 6.675,
-     "start_frame": 80953,
-     "end_frame": 81153
+     "start_frame": 99162,
+     "end_frame": 99362
     },
     {
      "text": "That takes two pi over f, about seventeen hours.",
      "audio_text": null,
-     "start": 2705.45,
-     "end": 2709.5,
+     "start": 3312.425,
+     "end": 3316.475,
      "dur": 4.05,
-     "start_frame": 81164,
-     "end_frame": 81285
+     "start_frame": 99373,
+     "end_frame": 99494
     }
    ],
-   "end": 2710.3,
-   "start_frame": 80169,
-   "end_frame": 81309
+   "end": 3317.275,
+   "start_frame": 98378,
+   "end_frame": 99518
   },
   {
    "id": "s31_globe_paths",
-   "start": 2710.3,
+   "start": 3317.275,
    "sentences": [
     {
      "text": "Let's watch this on the globe.",
      "audio_text": null,
-     "start": 2710.3,
-     "end": 2712.675,
+     "start": 3317.275,
+     "end": 3319.65,
      "dur": 2.375,
-     "start_frame": 81309,
-     "end_frame": 81380
+     "start_frame": 99518,
+     "end_frame": 99589
     },
     {
      "text": "Here are two air parcels: one over south-west France, at forty five degrees north, and one over Patagonia, in Argentina, at forty five degrees south.",
      "audio_text": null,
-     "start": 2713.025,
-     "end": 2724.0,
+     "start": 3320.0,
+     "end": 3330.975,
      "dur": 10.975,
-     "start_frame": 81391,
-     "end_frame": 81720
+     "start_frame": 99600,
+     "end_frame": 99929
     },
     {
      "text": "Both are set moving towards the east at ten metres per second, with nothing else pushing them.",
      "audio_text": null,
-     "start": 2724.35,
-     "end": 2730.475,
+     "start": 3331.325,
+     "end": 3337.45,
      "dur": 6.125,
-     "start_frame": 81730,
-     "end_frame": 81914
+     "start_frame": 99940,
+     "end_frame": 100123
     },
     {
      "text": "The northern one curves to the right, towards the south.",
      "audio_text": null,
-     "start": 2730.825,
-     "end": 2734.3,
+     "start": 3337.8,
+     "end": 3341.275,
      "dur": 3.475,
-     "start_frame": 81925,
-     "end_frame": 82029
+     "start_frame": 100134,
+     "end_frame": 100238
     },
     {
      "text": "The southern one curves to the left, towards the north.",
      "audio_text": null,
-     "start": 2734.65,
-     "end": 2738.225,
+     "start": 3341.625,
+     "end": 3345.2,
      "dur": 3.575,
-     "start_frame": 82040,
-     "end_frame": 82147
+     "start_frame": 100249,
+     "end_frame": 100356
     },
     {
      "text": "Both trace loops about two hundred kilometres across, turning in opposite directions.",
      "audio_text": null,
-     "start": 2738.575,
-     "end": 2744.525,
+     "start": 3345.55,
+     "end": 3351.5,
      "dur": 5.95,
-     "start_frame": 82157,
-     "end_frame": 82336
+     "start_frame": 100366,
+     "end_frame": 100545
     }
    ],
-   "end": 2745.325,
-   "start_frame": 81309,
-   "end_frame": 82360
+   "end": 3352.3,
+   "start_frame": 99518,
+   "end_frame": 100569
   },
   {
    "id": "s32_reanalysis",
-   "start": 2745.325,
+   "start": 3352.3,
    "sentences": [
     {
      "text": "Now let's look at real winds.",
      "audio_text": null,
-     "start": 2745.325,
-     "end": 2747.675,
+     "start": 3352.3,
+     "end": 3354.65,
      "dur": 2.35,
-     "start_frame": 82360,
-     "end_frame": 82430
+     "start_frame": 100569,
+     "end_frame": 100639
     },
     {
      "text": "These come from a reanalysis: a best estimate of the weather everywhere, on a regular grid.",
      "audio_text": null,
-     "start": 2748.025,
-     "end": 2754.375,
+     "start": 3355.0,
+     "end": 3361.35,
      "dur": 6.35,
-     "start_frame": 82441,
-     "end_frame": 82631
+     "start_frame": 100650,
+     "end_frame": 100840
     },
     {
      "text": "It's made by combining millions of measurements with a weather forecast model.",
      "audio_text": null,
-     "start": 2754.725,
-     "end": 2759.95,
+     "start": 3361.7,
+     "end": 3366.925,
      "dur": 5.225,
-     "start_frame": 82642,
-     "end_frame": 82798
+     "start_frame": 100851,
+     "end_frame": 101008
     },
     {
      "text": "Let's average them over the thirty years from nineteen ninety one to twenty twenty.",
      "audio_text": null,
-     "start": 2760.3,
-     "end": 2766.05,
+     "start": 3367.275,
+     "end": 3373.025,
      "dur": 5.75,
-     "start_frame": 82809,
-     "end_frame": 82982
+     "start_frame": 101018,
+     "end_frame": 101191
     },
     {
      "text": "Near the ground, they show a clear pattern.",
      "audio_text": null,
-     "start": 2766.4,
-     "end": 2769.55,
+     "start": 3373.375,
+     "end": 3376.525,
      "dur": 3.15,
-     "start_frame": 82992,
-     "end_frame": 83086
+     "start_frame": 101201,
+     "end_frame": 101296
     },
     {
      "text": "Around thirty degrees north and south sit belts of high pressure.",
      "audio_text": null,
-     "start": 2769.9,
-     "end": 2774.525,
+     "start": 3376.875,
+     "end": 3381.5,
      "dur": 4.625,
-     "start_frame": 83097,
-     "end_frame": 83236
+     "start_frame": 101306,
+     "end_frame": 101445
     },
     {
      "text": "They're called the subtropical highs.",
      "audio_text": null,
-     "start": 2774.875,
-     "end": 2777.425,
+     "start": 3381.85,
+     "end": 3384.4,
      "dur": 2.55,
-     "start_frame": 83246,
-     "end_frame": 83323
+     "start_frame": 101455,
+     "end_frame": 101532
     }
    ],
-   "end": 2778.225,
-   "start_frame": 82360,
-   "end_frame": 83347
+   "end": 3385.2,
+   "start_frame": 100569,
+   "end_frame": 101556
   },
   {
    "id": "s33_trades",
-   "start": 2778.225,
+   "start": 3385.2,
    "sentences": [
     {
      "text": "Air flows out of these highs towards the equator.",
      "audio_text": null,
-     "start": 2778.225,
-     "end": 2781.725,
+     "start": 3385.2,
+     "end": 3388.7,
      "dur": 3.5,
-     "start_frame": 83347,
-     "end_frame": 83452
+     "start_frame": 101556,
+     "end_frame": 101661
     },
     {
      "text": "In the Northern Hemisphere, it heads south, and the Coriolis effect turns it to the right, towards the west, so it blows from the north east.",
      "audio_text": "In the Northern Hemisphere, it heads south, and the [Coriolis](/kˌɔɹiˈOlɪs/) effect turns it to the right, towards the west, so it blows from the north east.",
-     "start": 2782.075,
-     "end": 2791.1,
+     "start": 3389.05,
+     "end": 3398.075,
      "dur": 9.025,
-     "start_frame": 83462,
-     "end_frame": 83733
+     "start_frame": 101671,
+     "end_frame": 101942
     },
     {
      "text": "In the Southern Hemisphere, it heads north and is turned to the left, again towards the west, so it blows from the south east.",
      "audio_text": null,
-     "start": 2791.45,
-     "end": 2799.65,
+     "start": 3398.425,
+     "end": 3406.625,
      "dur": 8.2,
-     "start_frame": 83744,
-     "end_frame": 83990
+     "start_frame": 101953,
+     "end_frame": 102199
     },
     {
      "text": "These steady winds are the trade winds, which sailing ships once used to cross the oceans.",
      "audio_text": null,
-     "start": 2800.0,
-     "end": 2806.075,
+     "start": 3406.975,
+     "end": 3413.05,
      "dur": 6.075,
-     "start_frame": 84000,
-     "end_frame": 84182
+     "start_frame": 102209,
+     "end_frame": 102391
     },
     {
      "text": "Over the oceans at fifteen degrees north and south, they blow towards the west at about five to seven metres per second.",
      "audio_text": null,
-     "start": 2806.425,
-     "end": 2814.225,
+     "start": 3413.4,
+     "end": 3421.2,
      "dur": 7.8,
-     "start_frame": 84193,
-     "end_frame": 84427
+     "start_frame": 102402,
+     "end_frame": 102636
     },
     {
      "text": "Over the Atlantic and the Pacific, the winds on both sides of the equator lean towards the west, and towards the equator.",
      "audio_text": null,
-     "start": 2814.575,
-     "end": 2822.425,
+     "start": 3421.55,
+     "end": 3429.4,
      "dur": 7.85,
-     "start_frame": 84437,
-     "end_frame": 84673
+     "start_frame": 102646,
+     "end_frame": 102882
     }
    ],
-   "end": 2823.225,
-   "start_frame": 83347,
-   "end_frame": 84697
+   "end": 3430.2,
+   "start_frame": 101556,
+   "end_frame": 102906
   },
   {
    "id": "s34_westerlies",
-   "start": 2823.225,
+   "start": 3430.2,
    "sentences": [
     {
      "text": "Air also flows out of the subtropical highs towards the poles.",
      "audio_text": null,
-     "start": 2823.225,
-     "end": 2827.75,
+     "start": 3430.2,
+     "end": 3434.725,
      "dur": 4.525,
-     "start_frame": 84697,
-     "end_frame": 84832
+     "start_frame": 102906,
+     "end_frame": 103042
     },
     {
      "text": "In the Northern Hemisphere, it heads north and is turned to the right, towards the east.",
      "audio_text": null,
-     "start": 2828.1,
-     "end": 2833.55,
+     "start": 3435.075,
+     "end": 3440.525,
      "dur": 5.45,
-     "start_frame": 84843,
-     "end_frame": 85006
+     "start_frame": 103052,
+     "end_frame": 103216
     },
     {
      "text": "In the Southern Hemisphere, it heads south and is turned to the left, again towards the east.",
      "audio_text": null,
-     "start": 2833.9,
-     "end": 2839.95,
+     "start": 3440.875,
+     "end": 3446.925,
      "dur": 6.05,
-     "start_frame": 85017,
-     "end_frame": 85198
+     "start_frame": 103226,
+     "end_frame": 103408
     },
     {
      "text": "These are the westerlies, named, like all winds, after the direction they blow from.",
      "audio_text": null,
-     "start": 2840.3,
-     "end": 2846.25,
+     "start": 3447.275,
+     "end": 3453.225,
      "dur": 5.95,
-     "start_frame": 85209,
-     "end_frame": 85388
+     "start_frame": 103418,
+     "end_frame": 103597
     },
     {
      "text": "At forty five degrees north and south, they blow towards the east at about three to seven and a half metres per second, strongest over the Southern Ocean, where little land slows them down.",
      "audio_text": null,
-     "start": 2846.6,
-     "end": 2858.475,
+     "start": 3453.575,
+     "end": 3465.45,
      "dur": 11.875,
-     "start_frame": 85398,
-     "end_frame": 85754
+     "start_frame": 103607,
+     "end_frame": 103963
     },
     {
      "text": "Pressure patterns and friction shape these winds too, but the Coriolis turning is why they blow mostly east or west.",
      "audio_text": "Pressure patterns and friction shape these winds too, but the [Coriolis](/kˌɔɹiˈOlɪs/) turning is why they blow mostly east or west.",
-     "start": 2858.825,
-     "end": 2866.8,
+     "start": 3465.8,
+     "end": 3473.775,
      "dur": 7.975,
-     "start_frame": 85765,
-     "end_frame": 86004
+     "start_frame": 103974,
+     "end_frame": 104213
     }
    ],
-   "end": 2867.6,
-   "start_frame": 84697,
-   "end_frame": 86028
+   "end": 3474.575,
+   "start_frame": 102906,
+   "end_frame": 104237
   },
   {
    "id": "s35_storms",
-   "start": 2867.6,
+   "start": 3474.575,
    "sentences": [
     {
      "text": "The cross product also explains why storms spin.",
      "audio_text": null,
-     "start": 2867.6,
-     "end": 2871.275,
+     "start": 3474.575,
+     "end": 3478.25,
      "dur": 3.675,
-     "start_frame": 86028,
-     "end_frame": 86138
+     "start_frame": 104237,
+     "end_frame": 104347
     },
     {
      "text": "A hurricane is a huge storm, hundreds of kilometres across.",
      "audio_text": null,
-     "start": 2871.625,
-     "end": 2876.375,
+     "start": 3478.6,
+     "end": 3483.35,
      "dur": 4.75,
-     "start_frame": 86149,
-     "end_frame": 86291
+     "start_frame": 104358,
+     "end_frame": 104500
     },
     {
      "text": "It forms over warm ocean, around a centre of very low pressure.",
      "audio_text": null,
-     "start": 2876.725,
-     "end": 2881.725,
+     "start": 3483.7,
+     "end": 3488.7,
      "dur": 5.0,
-     "start_frame": 86302,
-     "end_frame": 86452
+     "start_frame": 104511,
+     "end_frame": 104661
     },
     {
      "text": "Air near the surface is pushed towards that low centre from every side.",
      "audio_text": null,
-     "start": 2882.075,
-     "end": 2886.875,
+     "start": 3489.05,
+     "end": 3493.85,
      "dur": 4.8,
-     "start_frame": 86462,
-     "end_frame": 86606
+     "start_frame": 104671,
+     "end_frame": 104815
     }
    ],
-   "end": 2887.675,
-   "start_frame": 86028,
-   "end_frame": 86630
+   "end": 3494.65,
+   "start_frame": 104237,
+   "end_frame": 104840
   },
   {
    "id": "s36_ian",
-   "start": 2887.675,
+   "start": 3494.65,
    "sentences": [
     {
      "text": "This is Hurricane Ian, seen from a weather satellite on the twenty eighth of September, twenty twenty two.",
      "audio_text": null,
-     "start": 2887.675,
-     "end": 2894.675,
+     "start": 3494.65,
+     "end": 3501.65,
      "dur": 7.0,
-     "start_frame": 86630,
-     "end_frame": 86840
+     "start_frame": 104839,
+     "end_frame": 105049
     },
     {
      "text": "Its calm centre, called the eye, is just off the south west coast of Florida, and its cloud bands curl around it.",
      "audio_text": null,
-     "start": 2895.025,
-     "end": 2902.9,
+     "start": 3502.0,
+     "end": 3509.875,
      "dur": 7.875,
-     "start_frame": 86851,
-     "end_frame": 87087
+     "start_frame": 105060,
+     "end_frame": 105296
     },
     {
      "text": "That afternoon, Ian reached the coast with winds of about sixty seven metres per second, the forecasters' best estimate from the observations.",
      "audio_text": null,
-     "start": 2903.25,
-     "end": 2913.1,
+     "start": 3510.225,
+     "end": 3520.075,
      "dur": 9.85,
-     "start_frame": 87098,
-     "end_frame": 87393
+     "start_frame": 105307,
+     "end_frame": 105602
     },
     {
      "text": "Now let's add the winds near the ground, from a weather model with a fine, three kilometre grid.",
      "audio_text": null,
-     "start": 2913.45,
-     "end": 2920.05,
+     "start": 3520.425,
+     "end": 3527.025,
      "dur": 6.6,
-     "start_frame": 87404,
-     "end_frame": 87602
+     "start_frame": 105613,
+     "end_frame": 105811
     },
     {
      "text": "In the Northern Hemisphere, each stream of air heading for the centre is turned to the right: air from the south towards the east, and air from the east towards the north.",
      "audio_text": null,
-     "start": 2920.4,
-     "end": 2930.475,
+     "start": 3527.375,
+     "end": 3537.45,
      "dur": 10.075,
-     "start_frame": 87612,
-     "end_frame": 87914
+     "start_frame": 105821,
+     "end_frame": 106123
     },
     {
      "text": "All the way round, these turned streams add up to an anticlockwise spin, seen from above.",
      "audio_text": null,
-     "start": 2930.825,
-     "end": 2937.075,
+     "start": 3537.8,
+     "end": 3544.05,
      "dur": 6.25,
-     "start_frame": 87925,
-     "end_frame": 88112
+     "start_frame": 106134,
+     "end_frame": 106321
     },
     {
      "text": "Friction near the ground slows the wind, so the air still spirals inwards as it turns.",
      "audio_text": null,
-     "start": 2937.425,
-     "end": 2943.575,
+     "start": 3544.4,
+     "end": 3550.55,
      "dur": 6.15,
-     "start_frame": 88123,
-     "end_frame": 88307
+     "start_frame": 106332,
+     "end_frame": 106516
     }
    ],
-   "end": 2944.375,
-   "start_frame": 86630,
-   "end_frame": 88331
+   "end": 3551.35,
+   "start_frame": 104840,
+   "end_frame": 106540
   },
   {
    "id": "s37_idai",
-   "start": 2944.375,
+   "start": 3551.35,
    "sentences": [
     {
      "text": "Now the Southern Hemisphere.",
      "audio_text": null,
-     "start": 2944.375,
-     "end": 2946.575,
+     "start": 3551.35,
+     "end": 3553.55,
      "dur": 2.2,
-     "start_frame": 88331,
-     "end_frame": 88397
+     "start_frame": 106540,
+     "end_frame": 106606
     },
     {
      "text": "This is Cyclone Idai, seen from a satellite on the fourteenth of March, twenty nineteen, in the channel between Mozambique and Madagascar.",
      "audio_text": "This is Cyclone Ee-dye, seen from a satellite on the fourteenth of March, twenty nineteen, in the channel between Mozambique and Madagascar.",
-     "start": 2946.925,
-     "end": 2956.4,
+     "start": 3553.9,
+     "end": 3563.375,
      "dur": 9.475,
-     "start_frame": 88408,
-     "end_frame": 88692
+     "start_frame": 106617,
+     "end_frame": 106901
     },
     {
      "text": "In this part of the world, storms like this are called cyclones.",
      "audio_text": null,
-     "start": 2956.75,
-     "end": 2961.05,
+     "start": 3563.725,
+     "end": 3568.025,
      "dur": 4.3,
-     "start_frame": 88702,
-     "end_frame": 88832
+     "start_frame": 106912,
+     "end_frame": 107041
     },
     {
      "text": "Near its peak, its winds reached about fifty four to fifty nine metres per second, again from the forecasters' best estimates.",
      "audio_text": null,
-     "start": 2961.4,
-     "end": 2970.075,
+     "start": 3568.375,
+     "end": 3577.05,
      "dur": 8.675,
-     "start_frame": 88842,
-     "end_frame": 89102
+     "start_frame": 107051,
+     "end_frame": 107311
     },
     {
      "text": "Its cloud bands curl the other way.",
      "audio_text": null,
-     "start": 2970.425,
-     "end": 2973.225,
+     "start": 3577.4,
+     "end": 3580.2,
      "dur": 2.8,
-     "start_frame": 89113,
-     "end_frame": 89197
+     "start_frame": 107322,
+     "end_frame": 107406
     },
     {
      "text": "Here f is negative, so air heading for the centre is turned to the left, and the storm spins clockwise, seen from above.",
      "audio_text": null,
-     "start": 2973.575,
-     "end": 2981.9,
+     "start": 3580.55,
+     "end": 3588.875,
      "dur": 8.325,
-     "start_frame": 89207,
-     "end_frame": 89457
+     "start_frame": 107416,
+     "end_frame": 107666
     },
     {
      "text": "It's the same physics, with the opposite sign of f.",
      "audio_text": null,
-     "start": 2982.25,
-     "end": 2985.95,
+     "start": 3589.225,
+     "end": 3592.925,
      "dur": 3.7,
-     "start_frame": 89468,
-     "end_frame": 89578
+     "start_frame": 107677,
+     "end_frame": 107788
     }
    ],
-   "end": 2986.75,
-   "start_frame": 88331,
-   "end_frame": 89602
+   "end": 3593.725,
+   "start_frame": 106540,
+   "end_frame": 107812
   },
   {
    "id": "s38_spin_sign",
-   "start": 2986.75,
+   "start": 3593.725,
    "sentences": [
     {
      "text": "The cross product can even measure the spin.",
      "audio_text": null,
-     "start": 2986.75,
-     "end": 2990.05,
+     "start": 3593.725,
+     "end": 3597.025,
      "dur": 3.3,
-     "start_frame": 89602,
-     "end_frame": 89702
+     "start_frame": 107812,
+     "end_frame": 107911
     },
     {
      "text": "At points around each storm, draw an arrow r from the centre, and take r cross u with the wind there.",
      "audio_text": null,
-     "start": 2990.4,
-     "end": 2997.35,
+     "start": 3597.375,
+     "end": 3604.325,
      "dur": 6.95,
-     "start_frame": 89712,
-     "end_frame": 89920
+     "start_frame": 107921,
+     "end_frame": 108130
     },
     {
      "text": "If the wind goes round anticlockwise, seen from above, the right-hand rule makes r cross u point up.",
      "audio_text": null,
-     "start": 2997.7,
-     "end": 3005.075,
+     "start": 3604.675,
+     "end": 3612.05,
      "dur": 7.375,
-     "start_frame": 89931,
-     "end_frame": 90152
+     "start_frame": 108140,
+     "end_frame": 108361
     },
     {
      "text": "For Ian, the arrows point up all the way round.",
      "audio_text": null,
-     "start": 3005.425,
-     "end": 3008.925,
+     "start": 3612.4,
+     "end": 3615.9,
      "dur": 3.5,
-     "start_frame": 90163,
-     "end_frame": 90268
+     "start_frame": 108372,
+     "end_frame": 108477
     },
     {
      "text": "For Idai, they all point down: clockwise, seen from above.",
      "audio_text": "For Ee-dye, they all point down: clockwise, seen from above.",
-     "start": 3009.275,
-     "end": 3013.65,
+     "start": 3616.25,
+     "end": 3620.625,
      "dur": 4.375,
-     "start_frame": 90278,
-     "end_frame": 90410
+     "start_frame": 108487,
+     "end_frame": 108619
     },
     {
      "text": "Both storms spin the way the Coriolis effect turns the air.",
      "audio_text": "Both storms spin the way the [Coriolis](/kˌɔɹiˈOlɪs/) effect turns the air.",
-     "start": 3014.0,
-     "end": 3018.25,
+     "start": 3620.975,
+     "end": 3625.225,
      "dur": 4.25,
-     "start_frame": 90420,
-     "end_frame": 90548
+     "start_frame": 108629,
+     "end_frame": 108757
     }
    ],
-   "end": 3019.05,
-   "start_frame": 89602,
-   "end_frame": 90572
+   "end": 3626.025,
+   "start_frame": 107812,
+   "end_frame": 108781
   },
   {
    "id": "s39_isobars",
-   "start": 3019.05,
+   "start": 3626.025,
    "sentences": [
     {
      "text": "Now the last application: how the wind blows around highs and lows.",
      "audio_text": null,
-     "start": 3019.05,
-     "end": 3024.175,
+     "start": 3626.025,
+     "end": 3631.15,
      "dur": 5.125,
-     "start_frame": 90572,
-     "end_frame": 90725
+     "start_frame": 108781,
+     "end_frame": 108934
     },
     {
      "text": "Air presses on everything around it.",
      "audio_text": null,
-     "start": 3024.525,
-     "end": 3027.175,
+     "start": 3631.5,
+     "end": 3634.15,
      "dur": 2.65,
-     "start_frame": 90736,
-     "end_frame": 90815
+     "start_frame": 108945,
+     "end_frame": 109024
     },
     {
      "text": "This pressure is measured in hectopascals, and at sea level it's about a thousand hectopascals.",
      "audio_text": "This pressure is measured in [hectopascals](/hˈɛktəpˌæskᵊlz/), and at sea level it's about a thousand [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 3027.525,
-     "end": 3034.125,
+     "start": 3634.5,
+     "end": 3641.1,
      "dur": 6.6,
-     "start_frame": 90826,
-     "end_frame": 91024
+     "start_frame": 109035,
+     "end_frame": 109233
     },
     {
      "text": "Here's a simple weather map with one low in the middle.",
      "audio_text": null,
-     "start": 3034.475,
-     "end": 3038.275,
+     "start": 3641.45,
+     "end": 3645.25,
      "dur": 3.8,
-     "start_frame": 91034,
-     "end_frame": 91148
+     "start_frame": 109243,
+     "end_frame": 109357
     },
     {
      "text": "Joining the places with the same pressure gives lines called isobars.",
      "audio_text": null,
-     "start": 3038.625,
-     "end": 3043.55,
+     "start": 3645.6,
+     "end": 3650.525,
      "dur": 4.925,
-     "start_frame": 91159,
-     "end_frame": 91306
+     "start_frame": 109368,
+     "end_frame": 109516
     },
     {
      "text": "Here they're drawn every four hectopascals, and they circle the low.",
      "audio_text": "Here they're drawn every four [hectopascals](/hˈɛktəpˌæskᵊlz/), and they circle the low.",
-     "start": 3043.9,
-     "end": 3048.525,
+     "start": 3650.875,
+     "end": 3655.5,
      "dur": 4.625,
-     "start_frame": 91317,
-     "end_frame": 91456
+     "start_frame": 109526,
+     "end_frame": 109665
     }
    ],
-   "end": 3049.325,
-   "start_frame": 90572,
-   "end_frame": 91480
+   "end": 3656.3,
+   "start_frame": 108781,
+   "end_frame": 109689
   },
   {
    "id": "s40_pressure_push",
-   "start": 3049.325,
+   "start": 3656.3,
    "sentences": [
     {
      "text": "Pick a place south of the low.",
      "audio_text": null,
-     "start": 3049.325,
-     "end": 3051.65,
+     "start": 3656.3,
+     "end": 3658.625,
      "dur": 2.325,
-     "start_frame": 91480,
-     "end_frame": 91550
+     "start_frame": 109689,
+     "end_frame": 109759
     },
     {
      "text": "The pressure gradient, grad p, points the way the pressure increases fastest.",
      "audio_text": null,
-     "start": 3052.0,
-     "end": 3057.525,
+     "start": 3658.975,
+     "end": 3664.5,
      "dur": 5.525,
-     "start_frame": 91560,
-     "end_frame": 91726
+     "start_frame": 109769,
+     "end_frame": 109935
     },
     {
      "text": "Here, that's straight across the isobars, away from the low, towards the south.",
      "audio_text": null,
-     "start": 3057.875,
-     "end": 3063.15,
+     "start": 3664.85,
+     "end": 3670.125,
      "dur": 5.275,
-     "start_frame": 91736,
-     "end_frame": 91894
+     "start_frame": 109945,
+     "end_frame": 110104
     },
     {
      "text": "Air is pushed the other way, from high pressure towards low.",
      "audio_text": null,
-     "start": 3063.5,
-     "end": 3067.575,
+     "start": 3670.475,
+     "end": 3674.55,
      "dur": 4.075,
-     "start_frame": 91905,
-     "end_frame": 92027
+     "start_frame": 110114,
+     "end_frame": 110236
     },
     {
      "text": "This push, for each kilogram of air, is minus one over rho times grad p.",
      "audio_text": null,
-     "start": 3067.925,
-     "end": 3073.725,
+     "start": 3674.9,
+     "end": 3680.7,
      "dur": 5.8,
-     "start_frame": 92038,
-     "end_frame": 92212
+     "start_frame": 110247,
+     "end_frame": 110421
     },
     {
      "text": "Here rho is the density of the air, about one point two kilograms per cubic metre.",
      "audio_text": null,
-     "start": 3074.075,
-     "end": 3079.975,
+     "start": 3681.05,
+     "end": 3686.95,
      "dur": 5.9,
-     "start_frame": 92222,
-     "end_frame": 92399
+     "start_frame": 110431,
+     "end_frame": 110608
     }
    ],
-   "end": 3080.775,
-   "start_frame": 91480,
-   "end_frame": 92423
+   "end": 3687.75,
+   "start_frame": 109689,
+   "end_frame": 110632
   },
   {
    "id": "s40a_k_cross_gradp",
-   "start": 3080.775,
+   "start": 3687.75,
    "sentences": [
     {
      "text": "Now let's use the turning tool on grad p.",
      "audio_text": null,
-     "start": 3080.775,
-     "end": 3084.025,
+     "start": 3687.75,
+     "end": 3691.0,
      "dur": 3.25,
-     "start_frame": 92423,
-     "end_frame": 92521
+     "start_frame": 110632,
+     "end_frame": 110730
     },
     {
      "text": "k cross grad p is grad p turned a quarter turn to the left.",
      "audio_text": null,
-     "start": 3084.375,
-     "end": 3089.2,
+     "start": 3691.35,
+     "end": 3696.175,
      "dur": 4.825,
-     "start_frame": 92531,
-     "end_frame": 92676
+     "start_frame": 110740,
+     "end_frame": 110885
     },
     {
      "text": "Grad p points south, so k cross grad p points east.",
      "audio_text": null,
-     "start": 3089.55,
-     "end": 3093.75,
+     "start": 3696.525,
+     "end": 3700.725,
      "dur": 4.2,
-     "start_frame": 92686,
-     "end_frame": 92812
+     "start_frame": 110896,
+     "end_frame": 111022
     },
     {
      "text": "Grad p crosses the isobars at a right angle, so a quarter turn brings it exactly along them.",
      "audio_text": null,
-     "start": 3094.1,
-     "end": 3100.725,
+     "start": 3701.075,
+     "end": 3707.7,
      "dur": 6.625,
-     "start_frame": 92823,
-     "end_frame": 93022
+     "start_frame": 111032,
+     "end_frame": 111231
     },
     {
      "text": "Looking along this new arrow, the low is on its left, and the high is on its right.",
      "audio_text": null,
-     "start": 3101.075,
-     "end": 3106.5,
+     "start": 3708.05,
+     "end": 3713.475,
      "dur": 5.425,
-     "start_frame": 93032,
-     "end_frame": 93195
+     "start_frame": 111241,
+     "end_frame": 111404
     }
    ],
-   "end": 3107.3,
-   "start_frame": 92423,
-   "end_frame": 93219
+   "end": 3714.275,
+   "start_frame": 110632,
+   "end_frame": 111428
   },
   {
    "id": "s41_adjust",
-   "start": 3107.3,
+   "start": 3714.275,
    "sentences": [
     {
      "text": "Let's zoom in on this place, where the isobars run almost straight, from west to east.",
      "audio_text": null,
-     "start": 3107.3,
-     "end": 3113.175,
+     "start": 3714.275,
+     "end": 3720.15,
      "dur": 5.875,
-     "start_frame": 93219,
-     "end_frame": 93395
+     "start_frame": 111428,
+     "end_frame": 111604
     },
     {
      "text": "Follow an air parcel that starts at rest.",
      "audio_text": null,
-     "start": 3113.525,
-     "end": 3116.55,
+     "start": 3720.5,
+     "end": 3723.525,
      "dur": 3.025,
-     "start_frame": 93406,
-     "end_frame": 93496
+     "start_frame": 111615,
+     "end_frame": 111706
     },
     {
      "text": "The pressure push starts it moving towards the low, but as soon as it moves, the Coriolis effect turns it to the right.",
      "audio_text": "The pressure push starts it moving towards the low, but as soon as it moves, the [Coriolis](/kˌɔɹiˈOlɪs/) effect turns it to the right.",
-     "start": 3116.9,
-     "end": 3124.35,
+     "start": 3723.875,
+     "end": 3731.325,
      "dur": 7.45,
-     "start_frame": 93507,
-     "end_frame": 93730
+     "start_frame": 111716,
+     "end_frame": 111940
     },
     {
      "text": "The faster it goes, the stronger the turning push, and it keeps turning until it blows along the isobars.",
      "audio_text": null,
-     "start": 3124.7,
-     "end": 3131.8,
+     "start": 3731.675,
+     "end": 3738.775,
      "dur": 7.1,
-     "start_frame": 93741,
-     "end_frame": 93954
+     "start_frame": 111950,
+     "end_frame": 112163
     },
     {
      "text": "It overshoots and makes a series of loops, but on average it moves along the isobars, from west to east.",
      "audio_text": null,
-     "start": 3132.15,
-     "end": 3139.45,
+     "start": 3739.125,
+     "end": 3746.425,
      "dur": 7.3,
-     "start_frame": 93964,
-     "end_frame": 94184
+     "start_frame": 112174,
+     "end_frame": 112393
     }
    ],
-   "end": 3140.25,
-   "start_frame": 93219,
-   "end_frame": 94208
+   "end": 3747.225,
+   "start_frame": 111428,
+   "end_frame": 112417
   },
   {
    "id": "s41a_balance",
-   "start": 3140.25,
+   "start": 3747.225,
    "sentences": [
     {
      "text": "Why does it end up along the isobars?",
      "audio_text": null,
-     "start": 3140.25,
-     "end": 3143.1,
+     "start": 3747.225,
+     "end": 3750.075,
      "dur": 2.85,
-     "start_frame": 94208,
-     "end_frame": 94293
+     "start_frame": 112417,
+     "end_frame": 112502
     },
     {
      "text": "In steady flow, the air isn't speeding up, slowing down, or turning, so the pushes on it add up to zero.",
      "audio_text": null,
-     "start": 3143.45,
-     "end": 3150.675,
+     "start": 3750.425,
+     "end": 3757.65,
      "dur": 7.225,
-     "start_frame": 94304,
-     "end_frame": 94520
+     "start_frame": 112513,
+     "end_frame": 112729
     },
     {
      "text": "Only two pushes act here, so they must be equal in size and opposite in direction.",
      "audio_text": null,
-     "start": 3151.025,
-     "end": 3156.975,
+     "start": 3758.0,
+     "end": 3763.95,
      "dur": 5.95,
-     "start_frame": 94531,
-     "end_frame": 94709
+     "start_frame": 112740,
+     "end_frame": 112918
     },
     {
      "text": "The pressure push points towards the low, so the Coriolis push must point towards the high.",
      "audio_text": "The pressure push points towards the low, so the [Coriolis](/kˌɔɹiˈOlɪs/) push must point towards the high.",
-     "start": 3157.325,
-     "end": 3163.2,
+     "start": 3764.3,
+     "end": 3770.175,
      "dur": 5.875,
-     "start_frame": 94720,
-     "end_frame": 94896
+     "start_frame": 112929,
+     "end_frame": 113105
     },
     {
      "text": "And the Coriolis push is the wind turned a quarter turn to the right.",
      "audio_text": "And the [Coriolis](/kˌɔɹiˈOlɪs/) push is the wind turned a quarter turn to the right.",
-     "start": 3163.55,
-     "end": 3168.4,
+     "start": 3770.525,
+     "end": 3775.375,
      "dur": 4.85,
-     "start_frame": 94906,
-     "end_frame": 95052
+     "start_frame": 113116,
+     "end_frame": 113261
     },
     {
      "text": "So the wind must blow along the isobars, with the high on its right and the low on its left.",
      "audio_text": null,
-     "start": 3168.75,
-     "end": 3175.075,
+     "start": 3775.725,
+     "end": 3782.05,
      "dur": 6.325,
-     "start_frame": 95062,
-     "end_frame": 95252
+     "start_frame": 113272,
+     "end_frame": 113461
     },
     {
      "text": "This is called geostrophic balance, and the wind it gives is the geostrophic wind.",
      "audio_text": "This is called [geostrophic](/ʤˌiOstɹˈɑfɪk/) balance, and the wind it gives is the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind.",
-     "start": 3175.425,
-     "end": 3181.475,
+     "start": 3782.4,
+     "end": 3788.45,
      "dur": 6.05,
-     "start_frame": 95263,
-     "end_frame": 95444
+     "start_frame": 113472,
+     "end_frame": 113653
     }
    ],
-   "end": 3182.275,
-   "start_frame": 94208,
-   "end_frame": 95468
+   "end": 3789.25,
+   "start_frame": 112417,
+   "end_frame": 113678
   },
   {
    "id": "s42_geo_equation",
-   "start": 3182.275,
+   "start": 3789.25,
    "sentences": [
     {
      "text": "Now the same steps as maths, one at a time.",
      "audio_text": null,
-     "start": 3182.275,
-     "end": 3185.85,
+     "start": 3789.25,
+     "end": 3792.825,
      "dur": 3.575,
-     "start_frame": 95468,
-     "end_frame": 95576
+     "start_frame": 113677,
+     "end_frame": 113785
     },
     {
      "text": "The two pushes add up to zero: minus f k cross u, minus one over rho grad p, equals zero.",
      "audio_text": null,
-     "start": 3186.2,
-     "end": 3193.725,
+     "start": 3793.175,
+     "end": 3800.7,
      "dur": 7.525,
-     "start_frame": 95586,
-     "end_frame": 95812
+     "start_frame": 113795,
+     "end_frame": 114021
     },
     {
      "text": "Move the pressure push to the other side: minus f k cross u equals one over rho grad p.",
      "audio_text": null,
-     "start": 3194.075,
-     "end": 3200.8,
+     "start": 3801.05,
+     "end": 3807.775,
      "dur": 6.725,
-     "start_frame": 95822,
-     "end_frame": 96024
+     "start_frame": 114031,
+     "end_frame": 114233
     },
     {
      "text": "To get the wind itself, we apply k cross to both sides.",
      "audio_text": null,
-     "start": 3201.15,
-     "end": 3205.3,
+     "start": 3808.125,
+     "end": 3812.275,
      "dur": 4.15,
-     "start_frame": 96034,
-     "end_frame": 96159
+     "start_frame": 114244,
+     "end_frame": 114368
     },
     {
      "text": "On the left, we get k cross k cross u.",
      "audio_text": null,
-     "start": 3205.65,
-     "end": 3208.95,
+     "start": 3812.625,
+     "end": 3815.925,
      "dur": 3.3,
-     "start_frame": 96170,
-     "end_frame": 96268
+     "start_frame": 114379,
+     "end_frame": 114478
     },
     {
      "text": "Turning the wind twice to the left points it backwards, so that's minus u.",
      "audio_text": null,
-     "start": 3209.3,
-     "end": 3214.3,
+     "start": 3816.275,
+     "end": 3821.275,
      "dur": 5.0,
-     "start_frame": 96279,
-     "end_frame": 96429
+     "start_frame": 114488,
+     "end_frame": 114638
     },
     {
      "text": "The two minus signs cancel, and the left side becomes f times u.",
      "audio_text": null,
-     "start": 3214.65,
-     "end": 3219.525,
+     "start": 3821.625,
+     "end": 3826.5,
      "dur": 4.875,
-     "start_frame": 96440,
-     "end_frame": 96586
+     "start_frame": 114649,
+     "end_frame": 114795
     },
     {
      "text": "Dividing by f, we get the geostrophic wind: u equals one over f rho, times k cross grad p.",
      "audio_text": "Dividing by f, we get the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind: u equals one over f rho, times k cross grad p.",
-     "start": 3219.875,
-     "end": 3227.55,
+     "start": 3826.85,
+     "end": 3834.525,
      "dur": 7.675,
-     "start_frame": 96596,
-     "end_frame": 96826
+     "start_frame": 114805,
+     "end_frame": 115036
     }
    ],
-   "end": 3228.35,
-   "start_frame": 95468,
-   "end_frame": 96850
+   "end": 3835.325,
+   "start_frame": 113678,
+   "end_frame": 115060
   },
   {
    "id": "s43_geo_pieces",
-   "start": 3228.35,
+   "start": 3835.325,
    "sentences": [
     {
      "text": "Read it from right to left.",
      "audio_text": null,
-     "start": 3228.35,
-     "end": 3230.575,
+     "start": 3835.325,
+     "end": 3837.55,
      "dur": 2.225,
-     "start_frame": 96850,
-     "end_frame": 96917
+     "start_frame": 115060,
+     "end_frame": 115126
     },
     {
      "text": "Grad p points across the isobars, towards high pressure.",
      "audio_text": null,
-     "start": 3230.925,
-     "end": 3235.125,
+     "start": 3837.9,
+     "end": 3842.1,
      "dur": 4.2,
-     "start_frame": 96928,
-     "end_frame": 97054
+     "start_frame": 115137,
+     "end_frame": 115263
     },
     {
      "text": "k cross turns it a quarter turn to the left, along the isobars, with the low on the left.",
      "audio_text": null,
-     "start": 3235.475,
-     "end": 3241.675,
+     "start": 3842.45,
+     "end": 3848.65,
      "dur": 6.2,
-     "start_frame": 97064,
-     "end_frame": 97250
+     "start_frame": 115273,
+     "end_frame": 115459
     },
     {
      "text": "One over f rho sets the speed: the closer the isobars, the stronger the wind.",
      "audio_text": null,
-     "start": 3242.025,
-     "end": 3248.3,
+     "start": 3849.0,
+     "end": 3855.275,
      "dur": 6.275,
-     "start_frame": 97261,
-     "end_frame": 97449
+     "start_frame": 115470,
+     "end_frame": 115658
     },
     {
      "text": "And near the equator, f goes to zero, so this balance breaks down there.",
      "audio_text": null,
-     "start": 3248.65,
-     "end": 3253.825,
+     "start": 3855.625,
+     "end": 3860.8,
      "dur": 5.175,
-     "start_frame": 97460,
-     "end_frame": 97615
+     "start_frame": 115669,
+     "end_frame": 115824
     }
    ],
-   "end": 3254.625,
-   "start_frame": 96850,
-   "end_frame": 97639
+   "end": 3861.6,
+   "start_frame": 115060,
+   "end_frame": 115848
   },
   {
    "id": "s44_geo_numbers",
-   "start": 3254.625,
+   "start": 3861.6,
    "sentences": [
     {
      "text": "Let's put in numbers at our place.",
      "audio_text": null,
-     "start": 3254.625,
-     "end": 3257.15,
+     "start": 3861.6,
+     "end": 3864.125,
      "dur": 2.525,
-     "start_frame": 97639,
-     "end_frame": 97714
+     "start_frame": 115848,
+     "end_frame": 115924
     },
     {
      "text": "The pressure drops by four hectopascals over four hundred kilometres going north.",
      "audio_text": "The pressure drops by four [hectopascals](/hˈɛktəpˌæskᵊlz/) over four hundred kilometres going north.",
-     "start": 3257.5,
-     "end": 3263.35,
+     "start": 3864.475,
+     "end": 3870.325,
      "dur": 5.85,
-     "start_frame": 97725,
-     "end_frame": 97900
+     "start_frame": 115934,
+     "end_frame": 116110
     },
     {
      "text": "Four hectopascals is four hundred pascals, so grad p has components zero and minus four hundred pascals over four hundred thousand metres.",
      "audio_text": "Four [hectopascals](/hˈɛktəpˌæskᵊlz/) is four hundred pascals, so grad p has components zero and minus four hundred pascals over four hundred thousand metres.",
-     "start": 3263.7,
-     "end": 3274.175,
+     "start": 3870.675,
+     "end": 3881.15,
      "dur": 10.475,
-     "start_frame": 97911,
-     "end_frame": 98225
+     "start_frame": 116120,
+     "end_frame": 116434
     },
     {
      "text": "That's minus ten to the minus three pascals per metre.",
      "audio_text": null,
-     "start": 3274.525,
-     "end": 3278.475,
+     "start": 3881.5,
+     "end": 3885.45,
      "dur": 3.95,
-     "start_frame": 98236,
-     "end_frame": 98354
+     "start_frame": 116445,
+     "end_frame": 116563
     },
     {
      "text": "Turned to the left, k cross grad p has components ten to the minus three and zero, pointing east.",
      "audio_text": null,
-     "start": 3278.825,
-     "end": 3285.75,
+     "start": 3885.8,
+     "end": 3892.725,
      "dur": 6.925,
-     "start_frame": 98365,
-     "end_frame": 98572
+     "start_frame": 116574,
+     "end_frame": 116782
     },
     {
      "text": "Next, f times rho is one point zero three times ten to the minus four, times one point two, about one point two four times ten to the minus four.",
      "audio_text": null,
-     "start": 3286.1,
-     "end": 3296.65,
+     "start": 3893.075,
+     "end": 3903.625,
      "dur": 10.55,
-     "start_frame": 98583,
-     "end_frame": 98900
+     "start_frame": 116792,
+     "end_frame": 117109
     },
     {
      "text": "Dividing, the wind blows east at about eight point one metres per second.",
      "audio_text": null,
-     "start": 3297.0,
-     "end": 3302.175,
+     "start": 3903.975,
+     "end": 3909.15,
      "dur": 5.175,
-     "start_frame": 98910,
-     "end_frame": 99065,
+     "start_frame": 117119,
+     "end_frame": 117274,
      "beat": true
     },
     {
      "text": "A pascal is a kilogram per metre per second squared, so the units leave metres per second.",
      "audio_text": null,
-     "start": 3303.675,
-     "end": 3310.1,
+     "start": 3910.65,
+     "end": 3917.075,
      "dur": 6.425,
-     "start_frame": 99110,
-     "end_frame": 99303
+     "start_frame": 117319,
+     "end_frame": 117512
     },
     {
      "text": "As a check, the Coriolis push points south and the pressure push north, and both are about eight point three times ten to the minus four metres per second squared.",
      "audio_text": "As a check, the [Coriolis](/kˌɔɹiˈOlɪs/) push points south and the pressure push north, and both are about eight point three times ten to the minus four metres per second squared.",
-     "start": 3310.45,
-     "end": 3320.975,
+     "start": 3917.425,
+     "end": 3927.95,
      "dur": 10.525,
-     "start_frame": 99314,
-     "end_frame": 99629
+     "start_frame": 117523,
+     "end_frame": 117838
     }
    ],
-   "end": 3321.775,
-   "start_frame": 97639,
-   "end_frame": 99653
+   "end": 3928.75,
+   "start_frame": 115848,
+   "end_frame": 117862
   },
   {
    "id": "s45_storm_map",
-   "start": 3321.775,
+   "start": 3928.75,
    "sentences": [
     {
      "text": "Now let's test it on a real storm.",
      "audio_text": null,
-     "start": 3321.775,
-     "end": 3324.4,
+     "start": 3928.75,
+     "end": 3931.375,
      "dur": 2.625,
-     "start_frame": 99653,
-     "end_frame": 99732
+     "start_frame": 117862,
+     "end_frame": 117941
     },
     {
      "text": "This is Storm Ciarán, seen from a satellite early in the afternoon of the second of November, twenty twenty three.",
      "audio_text": "This is Storm Keer-awn, seen from a satellite early in the afternoon of the second of November, twenty twenty three.",
-     "start": 3324.75,
-     "end": 3332.175,
+     "start": 3931.725,
+     "end": 3939.15,
      "dur": 7.425,
-     "start_frame": 99742,
-     "end_frame": 99965
+     "start_frame": 117952,
+     "end_frame": 118174
     },
     {
      "text": "This deep low crossed the North Atlantic and hit north-western France and southern England, whose borders are drawn as thin lines.",
      "audio_text": null,
-     "start": 3332.525,
-     "end": 3341.0,
+     "start": 3939.5,
+     "end": 3947.975,
      "dur": 8.475,
-     "start_frame": 99976,
-     "end_frame": 100230
+     "start_frame": 118185,
+     "end_frame": 118439
     },
     {
      "text": "Let's add the isobars from the reanalysis at the same time, every four hectopascals.",
      "audio_text": "Let's add the isobars from the reanalysis at the same time, every four [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 3341.35,
-     "end": 3347.475,
+     "start": 3948.325,
+     "end": 3954.45,
      "dur": 6.125,
-     "start_frame": 100240,
-     "end_frame": 100424
+     "start_frame": 118450,
+     "end_frame": 118633
     },
     {
      "text": "Near the ground, friction disturbs the wind, so let's look about one and a half kilometres up, where the air feels almost no friction.",
      "audio_text": null,
-     "start": 3347.825,
-     "end": 3356.625,
+     "start": 3954.8,
+     "end": 3963.6,
      "dur": 8.8,
-     "start_frame": 100435,
-     "end_frame": 100699
+     "start_frame": 118644,
+     "end_frame": 118908
     },
     {
      "text": "The violet arrows are the geostrophic wind there, worked out with our formula from the pressure pattern.",
      "audio_text": "The violet arrows are the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind there, worked out with our formula from the pressure pattern.",
-     "start": 3356.975,
-     "end": 3363.7,
+     "start": 3963.95,
+     "end": 3970.675,
      "dur": 6.725,
-     "start_frame": 100709,
-     "end_frame": 100911
+     "start_frame": 118918,
+     "end_frame": 119120
     },
     {
      "text": "They run along the isobars, anticlockwise round the low, with the low on their left, and they're longest where the isobars crowd together.",
      "audio_text": null,
-     "start": 3364.05,
-     "end": 3372.925,
+     "start": 3971.025,
+     "end": 3979.9,
      "dur": 8.875,
-     "start_frame": 100922,
-     "end_frame": 101188
+     "start_frame": 119131,
+     "end_frame": 119397
     }
    ],
-   "end": 3373.725,
-   "start_frame": 99653,
-   "end_frame": 101212
+   "end": 3980.7,
+   "start_frame": 117862,
+   "end_frame": 119421
   },
   {
    "id": "s46_real_winds",
-   "start": 3373.725,
+   "start": 3980.7,
    "sentences": [
     {
      "text": "Now let's add the real winds at the same height, from the reanalysis.",
      "audio_text": null,
-     "start": 3373.725,
-     "end": 3378.25,
+     "start": 3980.7,
+     "end": 3985.225,
      "dur": 4.525,
-     "start_frame": 101212,
-     "end_frame": 101348
+     "start_frame": 119421,
+     "end_frame": 119557
     },
     {
      "text": "They're drawn in a second colour.",
      "audio_text": null,
-     "start": 3378.6,
-     "end": 3381.025,
+     "start": 3985.575,
+     "end": 3988.0,
      "dur": 2.425,
-     "start_frame": 101358,
-     "end_frame": 101431
+     "start_frame": 119567,
+     "end_frame": 119640
     },
     {
      "text": "Over the sea, they point almost exactly the same way as the geostrophic arrows.",
      "audio_text": "Over the sea, they point almost exactly the same way as the [geostrophic](/ʤˌiOstɹˈɑfɪk/) arrows.",
-     "start": 3381.375,
-     "end": 3387.175,
+     "start": 3988.35,
+     "end": 3994.15,
      "dur": 5.8,
-     "start_frame": 101441,
-     "end_frame": 101615
+     "start_frame": 119650,
+     "end_frame": 119824
     },
     {
      "text": "They're a little slower, though, about fifteen percent near this tight low.",
      "audio_text": null,
-     "start": 3387.525,
-     "end": 3392.075,
+     "start": 3994.5,
+     "end": 3999.05,
      "dur": 4.55,
-     "start_frame": 101626,
-     "end_frame": 101762
+     "start_frame": 119835,
+     "end_frame": 119971
     },
     {
      "text": "That's because the air is racing round a sharp curve, which our simple balance leaves out.",
      "audio_text": null,
-     "start": 3392.425,
-     "end": 3398.175,
+     "start": 3999.4,
+     "end": 4005.15,
      "dur": 5.75,
-     "start_frame": 101773,
-     "end_frame": 101945
+     "start_frame": 119982,
+     "end_frame": 120154
     },
     {
      "text": "Down near the ground, it's different.",
      "audio_text": null,
-     "start": 3398.525,
-     "end": 3401.15,
+     "start": 4005.5,
+     "end": 4008.125,
      "dur": 2.625,
-     "start_frame": 101956,
-     "end_frame": 102034
+     "start_frame": 120165,
+     "end_frame": 120244
     },
     {
      "text": "Friction slows the air and turns it partly across the isobars, towards the low.",
      "audio_text": null,
-     "start": 3401.5,
-     "end": 3407.075,
+     "start": 4008.475,
+     "end": 4014.05,
      "dur": 5.575,
-     "start_frame": 102045,
-     "end_frame": 102212
+     "start_frame": 120254,
+     "end_frame": 120421
     },
     {
      "text": "So from nothing more than a pressure map and a cross product, we get the direction of the wind above the ground almost exactly, and its speed to within about a sixth.",
      "audio_text": null,
-     "start": 3407.425,
-     "end": 3417.625,
+     "start": 4014.4,
+     "end": 4024.6,
      "dur": 10.2,
-     "start_frame": 102223,
-     "end_frame": 102529
+     "start_frame": 120432,
+     "end_frame": 120738
     }
    ],
-   "end": 3418.425,
-   "start_frame": 101212,
-   "end_frame": 102553
+   "end": 4025.4,
+   "start_frame": 119421,
+   "end_frame": 120762
   },
   {
    "id": "s47_recap",
-   "start": 3418.425,
+   "start": 4025.4,
    "sentences": [
     {
      "text": "To sum up, the cross product of two arrows is another arrow, at right angles to both.",
      "audio_text": null,
-     "start": 3418.425,
-     "end": 3424.575,
+     "start": 4025.4,
+     "end": 4031.55,
      "dur": 6.15,
-     "start_frame": 102553,
-     "end_frame": 102737
+     "start_frame": 120762,
+     "end_frame": 120946
     },
     {
      "text": "Each component leaves out its own direction and cross multiplies the other two.",
      "audio_text": null,
-     "start": 3424.925,
-     "end": 3430.6,
+     "start": 4031.9,
+     "end": 4037.575,
      "dur": 5.675,
-     "start_frame": 102748,
-     "end_frame": 102918
+     "start_frame": 120957,
+     "end_frame": 121127
     },
     {
      "text": "Each component is the turning about its own axis, made by the two parts across that axis, with a minus sign because those two parts turn opposite ways.",
      "audio_text": null,
-     "start": 3430.95,
-     "end": 3441.525,
+     "start": 4037.925,
+     "end": 4048.5,
      "dur": 10.575,
-     "start_frame": 102928,
-     "end_frame": 103246
+     "start_frame": 121138,
+     "end_frame": 121455
     },
     {
      "text": "Its length is the first arrow's length times the part of the second arrow across it: the area of their parallelogram.",
      "audio_text": null,
-     "start": 3441.875,
-     "end": 3449.8,
+     "start": 4048.85,
+     "end": 4056.775,
      "dur": 7.925,
-     "start_frame": 103256,
-     "end_frame": 103494
+     "start_frame": 121465,
+     "end_frame": 121703
     },
     {
      "text": "Its direction is the normal to their plane, and the right-hand rule says which way round.",
      "audio_text": null,
-     "start": 3450.15,
-     "end": 3456.175,
+     "start": 4057.125,
+     "end": 4063.15,
      "dur": 6.025,
-     "start_frame": 103504,
-     "end_frame": 103685
+     "start_frame": 121714,
+     "end_frame": 121894
     },
     {
      "text": "It points along the axis of the turn, and seen from its tip, the turn is anticlockwise.",
      "audio_text": null,
-     "start": 3456.525,
-     "end": 3462.775,
+     "start": 4063.5,
+     "end": 4069.75,
      "dur": 6.25,
-     "start_frame": 103696,
-     "end_frame": 103883
+     "start_frame": 121905,
+     "end_frame": 122092
     },
     {
      "text": "Physics uses it for torque, angular momentum and the push on a moving charge, and a push always at a right angle turns a motion without speeding it up.",
      "audio_text": null,
-     "start": 3463.125,
-     "end": 3473.175,
+     "start": 4070.1,
+     "end": 4080.15,
      "dur": 10.05,
-     "start_frame": 103894,
-     "end_frame": 104195
+     "start_frame": 122103,
+     "end_frame": 122404
     },
     {
      "text": "On the spinning Earth, the ground moves at Omega cross r, and moving air feels the Coriolis push, minus two Omega cross u.",
      "audio_text": "On the spinning Earth, the ground moves at Omega cross r, and moving air feels the [Coriolis](/kˌɔɹiˈOlɪs/) push, minus two Omega cross u.",
-     "start": 3473.525,
-     "end": 3482.625,
+     "start": 4080.5,
+     "end": 4089.6,
      "dur": 9.1,
-     "start_frame": 104206,
-     "end_frame": 104479
+     "start_frame": 122415,
+     "end_frame": 122688
+    },
+    {
+     "text": "The spin also gives the centrifugal pull, Omega squared times the distance from the axis, and it's folded into gravity, g.",
+     "audio_text": null,
+     "start": 4089.95,
+     "end": 4098.625,
+     "dur": 8.675,
+     "start_frame": 122698,
+     "end_frame": 122959
     },
     {
      "text": "For flat winds, that's minus f k cross u: to the right in the north, and to the left in the south.",
      "audio_text": null,
-     "start": 3482.975,
-     "end": 3489.625,
+     "start": 4098.975,
+     "end": 4105.625,
      "dur": 6.65,
-     "start_frame": 104489,
-     "end_frame": 104689
+     "start_frame": 122969,
+     "end_frame": 123169
     },
     {
      "text": "That's why storms spin.",
      "audio_text": null,
-     "start": 3489.975,
-     "end": 3492.1,
+     "start": 4105.975,
+     "end": 4108.1,
      "dur": 2.125,
-     "start_frame": 104699,
-     "end_frame": 104763
+     "start_frame": 123179,
+     "end_frame": 123243
     },
     {
      "text": "When this push balances the pressure push, we get the geostrophic wind, one over f rho times k cross grad p, along the isobars.",
      "audio_text": "When this push balances the pressure push, we get the [geostrophic](/ʤˌiOstɹˈɑfɪk/) wind, one over f rho times k cross grad p, along the isobars.",
-     "start": 3492.45,
-     "end": 3502.1,
+     "start": 4108.45,
+     "end": 4118.1,
      "dur": 9.65,
-     "start_frame": 104774,
-     "end_frame": 105063
+     "start_frame": 123253,
+     "end_frame": 123543
     },
     {
      "text": "Later videos in this series show how to read weather maps, and how grad, div and curl are built from these products.",
      "audio_text": null,
-     "start": 3502.45,
-     "end": 3509.925,
+     "start": 4118.45,
+     "end": 4125.925,
      "dur": 7.475,
-     "start_frame": 105074,
-     "end_frame": 105298
+     "start_frame": 123553,
+     "end_frame": 123778
     }
    ],
-   "end": 3510.725,
-   "start_frame": 102553,
-   "end_frame": 105322
+   "end": 4126.725,
+   "start_frame": 120762,
+   "end_frame": 123802
   },
   {
    "id": "s48_end",
-   "start": 3510.725,
+   "start": 4126.725,
    "sentences": [
     {
      "text": "This video is one of a series of related tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 3510.725,
-     "end": 3516.6,
+     "start": 4126.725,
+     "end": 4132.6,
      "dur": 5.875,
-     "start_frame": 105322,
-     "end_frame": 105498
+     "start_frame": 123802,
+     "end_frame": 123978
     },
     {
      "text": "They're made to help students of meteorology, atmospheric science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too.",
      "audio_text": null,
-     "start": 3516.95,
-     "end": 3528.0,
+     "start": 4132.95,
+     "end": 4144.0,
      "dur": 11.05,
-     "start_frame": 105508,
-     "end_frame": 105840
+     "start_frame": 123988,
+     "end_frame": 124320
     },
     {
      "text": "The notebook for the cross product, and the notebooks for the other concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 3528.35,
-     "end": 3535.8,
+     "start": 4144.35,
+     "end": 4151.8,
      "dur": 7.45,
-     "start_frame": 105850,
-     "end_frame": 106074
+     "start_frame": 124330,
+     "end_frame": 124554
     }
    ],
-   "end": 3536.1,
-   "start_frame": 105322,
-   "end_frame": 106083
+   "end": 4152.1,
+   "start_frame": 123802,
+   "end_frame": 124563
   }
- ]
+ ],
+ "total_s": 4152.1,
+ "total_frames": 124564,
+ "render_s": 1946.2,
+ "loudnorm_input": {
+  "input_i": "-24.76",
+  "input_tp": "-1.53",
+  "input_lra": "4.90",
+  "input_thresh": "-35.26",
+  "output_i": "-16.47",
+  "output_tp": "-1.50",
+  "output_lra": "4.60",
+  "output_thresh": "-26.96",
+  "normalization_type": "dynamic",
+  "target_offset": "0.47"
+ },
+ "cues": 1005,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 4152.1,
+  "audio_s": 4152.1,
+  "diff_ms": -0.0,
+  "len_ok": true,
+  "cues_ok": true
+ }
 }

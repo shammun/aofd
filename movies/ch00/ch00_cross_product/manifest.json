@@ -2,14 +2,14 @@
  "builder": "movies/data/build_ch00_cross_product_why.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "034a23e8b0b1d3f81affde9b75a9ce20e4e65c2d",
+  "commit": "08f83b7dcf563e382a21664e6784e277ed756fcc",
   "dirty_tracked": false,
   "vectors_py_tracked": true,
   "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
   "frames_py_tracked": true,
-  "frames_py_sha256": "68762b6c77037f03be391d0f4cc655daae2153d94105788a3e9b8cc6a3176159",
+  "frames_py_sha256": "91fd0bc2fceab0901422caf34f4b244bf02a596f92b227fa3d32c1fd1854a7ef",
   "atmos_py_tracked": true,
-  "atmos_py_sha256": "0701685569802a29a910c5e799408c4a04b6c8eaffe60fc9bf1eb10929bd1221",
+  "atmos_py_sha256": "fd7273ed9cd4c0c29e4b77ddeb478f4b8a0924cd759f007bea4d1fc968dc207f",
   "gfd_py_tracked": true,
   "gfd_py_sha256": "4935a5b82144ee9579b322c5b3fe3118d338cd4e784157780a3ff69a0c451bed",
   "operators_py_tracked": true,
@@ -19,7 +19,7 @@
   "trajectories_py_tracked": true,
   "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e",
   "cyclone_py_tracked": true,
-  "cyclone_py_sha256": "632c32637a0c2014dd7806cdd14ba5722e6c316281451daaaf16d3a15c03b835"
+  "cyclone_py_sha256": "302a3892a9af2ccf5e8d19d3bf30bfd4bc2c6ae7afd3f3c31edf52448ed799d2"
  },
  "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
  "equations": {
@@ -105,7 +105,10 @@
    "cap lift per turn ×4",
    "bolt travel ×3",
    "s26 tracks drawn 5× wider",
-   "storm columns, Ω, k, τ and Coriolis arrows on display scales"
+   "storm columns, Ω, k, τ and Coriolis arrows on display scales",
+   "U-CF s26a1-s27d: B, Ω × B, u, Ω × r, Ω × (Ω × r), Ω² r and the centrifugal arrows on display scales",
+   "U-CF s27e-s27f: centrifugal arrows ×100 against g* (storyboard planned ×50; ×50 gave a 20-px arrow); flattening ×50",
+   "U-CF s27g: flattening and plumb-line angle ×50; the true-scale outline drawn beside it"
   ]
  },
  "credits": [
@@ -132,13 +135,13 @@
   "cases.json": "7b673d26922606a549ff2553d61e34ec5179c0f3a16d86009aa8ab3ba2c724a7",
   "torque.json": "10152ecbefcb84b501b33919fd4bf6d23405f87fdf9ae43f9549d135a702ea0a",
   "turning.json": "71d83c62b4de245bfc2e5009ae2fa89e30cf03e450b651f4827f3e1dfc0c60c2",
-  "earth.json": "0da301286662c564304d6f03c6dd2a55bfd20215fd13d368f1b474353464bb8e",
+  "earth.json": "06279960cb37939d9aee04037f4041fd568175bffb57f3140e59bf78fd82635c",
   "inertial30.json": "f6bc9ef296f2a76321404c52fe6489d21dfb6939ff4ea7a5afa030e905ec21a6",
   "coriolis.json": "93a542ab5dcccce1c7367d019f86e1c6fa4aa219145c2c7c5f03e97d86c64a52",
   "paths.json": "370d9d9dc82d8b3bbfb083865b122c106ca3043c7bc5eb7cfa7178e934513ae3",
   "geo.json": "0ec228022c75e75adb2bda742f10f04e3f63a33206d2080c94a8838b3c705cf6",
   "examples.json": "9b797a54c8a0057d87d3291463a37744e14f1c46225462ae6306d0c7d8b3deee",
-  "merry.json": "b40f29a5d646fb219a22b5f45ed2958dec6e195f02be4525ed1186a940a70e1e",
+  "merry.json": "cff05350cc092aa9e7499b0e6ea1a1739b326ab94b7f043e361c6fc8905e83c5",
   "v5.json": "809694d866d69213e46e2f7d49d1b45b782ae27223f8a535a74362d64be3fa26",
   "winds_mean.json": "ee7b31df383c66dd0efbc584dc0d9073794d00042f3149d4db6cba4bfdfa04f1",
   "ian_ring.json": "136a7c1ed0584765f3313b9565ac2119cf82bc79aeeea6084af0ac72e2b312ac",
@@ -2038,6 +2041,410 @@
    "pass": true
   },
   {
+   "name": "N23 painted arrow: outside rate (finite difference) = Ω × B",
+   "value": [
+    -0.229624,
+    0.554322,
+    0.0
+   ],
+   "ref": [
+    -0.22961,
+    0.554328,
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N23 growing arrow: outside rate = rider rate (0.2 m/s along B) + Ω × B",
+   "value": [
+    -0.044852,
+    0.630868,
+    0.0
+   ],
+   "ref": [
+    -0.044834,
+    0.630864,
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N23 |Ω × B| = 0.5 × 1.2 = 0.6 m/s, at right angles to B",
+   "value": [
+    0.6,
+    0.0
+   ],
+   "ref": [
+    0.6,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N23 60° turn at 0.5 rad/s takes 2.09 s",
+   "value": [
+    2.066667
+   ],
+   "ref": [
+    2.094395
+   ],
+   "tol": 0.03333333333333333,
+   "pass": true
+  },
+  {
+   "name": "N23 the ball's place at t = 1.2 s: turntable_puck = two_views r",
+   "value": [
+    -0.564642,
+    -0.825336
+   ],
+   "ref": [
+    -0.564642,
+    -0.825336
+   ],
+   "tol": 1e-05,
+   "pass": true
+  },
+  {
+   "name": "N23 a' + 2Ω × u + Ω × (Ω × r) = 0 (the outside path is straight; 2nd difference, tol 1e-4 m/s²)",
+   "value": [
+    -1e-06,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N23 2Ω × u of the terms = 2 × (Ω × u)",
+   "value": [
+    -1.520325,
+    0.434296,
+    0.0
+   ],
+   "ref": [
+    -1.520325,
+    0.434296,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N23 Ω × (Ω × r) points to the hub: = −Ω² r",
+   "value": [
+    0.14116,
+    0.206334,
+    -0.0
+   ],
+   "ref": [
+    0.14116,
+    0.206334,
+    -0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N23 carried floor arrow Ω × r: tip velocity (finite difference) = Ω × (Ω × r)",
+   "value": [
+    0.141155,
+    0.206338,
+    0.0
+   ],
+   "ref": [
+    0.14116,
+    0.206334,
+    -0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "name": "N23 centrifugal at 2.5 m = (0, −0.625, 0): 0.25 × r, away from the hub",
+   "value": [
+    0.0,
+    -0.625,
+    -0.0,
+    0.625
+   ],
+   "ref": [
+    0.0,
+    -0.625,
+    0.0,
+    0.625
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N23 Ω² = 0.25 s⁻², one turn = 2π/Ω = 12.57 s (≈ 12.5)",
+   "value": [
+    0.25,
+    12.566371
+   ],
+   "ref": [
+    0.25,
+    12.566
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "N23 vector triple product p × (q × s) = q (p·s) − s (p·q): 200 random triples (max |diff|)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N23 Ω · r = 0, Ω · Ω = 0.25; −(Ω (Ω·r) − r (Ω·Ω)) = centrifugal",
+   "value": [
+    0.0,
+    0.25,
+    -0.0,
+    -0.625
+   ],
+   "ref": [
+    0.0,
+    0.25,
+    0.0,
+    -0.625
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N24 |centrifugal| at 0°, 45°, 90° = 0.033878, 0.023955, 0 m/s²",
+   "value": [
+    0.033878,
+    0.023955,
+    0.0
+   ],
+   "ref": [
+    0.033878,
+    0.023955,
+    0.0
+   ],
+   "tol": 2e-06,
+   "pass": true
+  },
+  {
+   "name": "N24 Ω² = 5.3175e-9 s⁻² (shown 5.32)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "N24 display: 5.32e-9 × 6 371 000 ≈ 0.034; × 4 505 000 ≈ 0.024",
+   "value": [
+    0.034,
+    0.024
+   ],
+   "ref": [
+    0.034,
+    0.024
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N24 r = r_along + r⊥: 4504.98 km each at 45°; Ω (Ω·r) = Ω² r_along",
+   "value": [
+    4504.977303,
+    4504.977303,
+    0.0
+   ],
+   "ref": [
+    4504.98,
+    4504.98,
+    0.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "name": "N24 Ω² r − Ω² r_along = Ω² r⊥ = centrifugal at 45°",
+   "value": [
+    0.023955,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.023955,
+    -0.0,
+    -0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "name": "N24 up part +0.016939, north part −0.016939 (towards the equator), 45° from up",
+   "value": [
+    0.016939,
+    -0.016939,
+    45.0
+   ],
+   "ref": [
+    0.016939,
+    -0.016939,
+    45.0
+   ],
+   "tol": 2e-06,
+   "pass": true
+  },
+  {
+   "name": "N24 the sideways part points towards the equator (north part < 0 in the NH)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N24 ratio to g: 0.345 %, 0.244 %, 0 (≈ a third of one percent at the equator)",
+   "value": [
+    0.345457,
+    0.244275,
+    0.0
+   ],
+   "ref": [
+    0.3455,
+    0.2443,
+    0.0
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "N24 g* = GM/a² = 9.8203; g at 45° = 9.8033 m/s², tilt 0.099°",
+   "value": [
+    9.82025,
+    9.803326,
+    0.099
+   ],
+   "ref": [
+    9.8203,
+    9.8033,
+    0.099
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "N24 |g* + centrifugal| from apparent_body_forces = effective_gravity",
+   "value": [
+    9.803326
+   ],
+   "ref": [
+    9.803326
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N24 |−2Ω × u| = 2Ω × 10 = 1.4584e-3 m/s² (u ⟂ Ω: the largest it can be)",
+   "value": [
+    0.001458,
+    0.001458
+   ],
+   "ref": [
+    0.001458,
+    0.001458
+   ],
+   "tol": 1e-07,
+   "pass": true
+  },
+  {
+   "name": "N24 sideways / Coriolis = 11.6 (> 10)",
+   "value": [
+    11.614516
+   ],
+   "ref": [
+    11.6
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "name": "N24 max spin-only tilt on a sphere 0.0990° near 45° (≈ a tenth of a degree)",
+   "value": [
+    0.099,
+    44.95
+   ],
+   "ref": [
+    0.099,
+    44.95
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "N24 real Earth: geodetic − geocentric latitude at 45° = 0.1924° (≈ a fifth of a degree)",
+   "value": [
+    0.192423
+   ],
+   "ref": [
+    0.1924
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "name": "N24 equatorial − polar radius = 21.385 km; 1/f = 298.257 (≈ 1 part in 300)",
+   "value": [
+    21.384686,
+    298.257223
+   ],
+   "ref": [
+    21.385,
+    298.257
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "N24 spin share of the pole-equator gravity difference 0.0339 / 0.0519 = 0.654 (≈ two thirds)",
+   "value": [
+    0.05186,
+    0.653991
+   ],
+   "ref": [
+    0.05186,
+    0.654
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "name": "N24 g equator ≈ 9.78, poles ≈ 9.83 (WGS-84 normal gravity, cited)",
+   "value": [
+    9.78,
+    9.83
+   ],
+   "ref": [
+    9.78,
+    9.83
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
    "name": "X1 ε = +1 on the cycle (xyz, yzx, zxy), −1 against it",
    "value": [
     1.0,
@@ -2281,6 +2688,340 @@
     0.0
    ],
    "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "name": "P1: subtropical highs found over the ocean (N Atlantic, N Pacific, S Atlantic, S Pacific, S Indian)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "P1: Azores high ≈ 1022 hPa",
+   "value": [
+    1022.1
+   ],
+   "ref": [
+    1022.1
+   ],
+   "tol": 1.0,
+   "pass": true
+  },
+  {
+   "name": "P1: trades blow west at 15°N/S over the oceans (−4 … −8 m/s)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "P1: westerlies blow east at 45°N/S (+2.5 … +8 m/s)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 15°N: u < 0 and v < 0 (Atlantic, central Pacific)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 15°S: u < 0 and v > 0 (Atlantic, east Pacific, Indian)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 turned-arrow headings: NH trade 250° in (180, 270), SH trade 290° in (270, 360)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 westerly arrows end east-ish: 70°, 110° in (45, 135)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N19 west is screen-left for the north-up s33 camera keyframes",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "Ian landfall 130 kt = 66.9 m/s (≈ 67, spoken)",
+   "value": [
+    66.87772
+   ],
+   "ref": [
+    66.9
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "name": "Ian IBTrACS 18 UTC fix (26.6°N, 82.4°W)",
+   "value": [
+    26.6,
+    -82.4
+   ],
+   "ref": [
+    26.6,
+    -82.4
+   ],
+   "tol": 0.11,
+   "pass": true
+  },
+  {
+   "name": "Ian: Coriolis turns every inward stream to its right (k·(u × a) < 0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "HRRR 18 UTC centre (26.43, −82.46)",
+   "value": [
+    26.427551,
+    -82.455261
+   ],
+   "ref": [
+    26.43,
+    -82.46
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "ian: I2 tangential wind = k·(r̂×u) by vectors.cross",
+   "value": [
+    11.761695,
+    9.284903,
+    3.93355,
+    2.327423
+   ],
+   "ref": [
+    11.761695,
+    9.284903,
+    3.93355,
+    2.327423
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "ian: k·(r×u) > 0 at all 16 ring points (anticlockwise)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "Idai: f < 0 at the centre",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "Idai 115 kt = 59.2 m/s; 105 kt = 54.0 m/s",
+   "value": [
+    59.16106,
+    54.01662
+   ],
+   "ref": [
+    59.2,
+    54.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "name": "idai: I2 tangential wind = k·(r̂×u) by vectors.cross",
+   "value": [
+    -13.952598,
+    -12.486871,
+    -12.045309,
+    -10.304224
+   ],
+   "ref": [
+    -13.952598,
+    -12.486871,
+    -12.045309,
+    -10.304224
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "idai: k·(r×u) < 0 at all 16 ring points (clockwise)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "Idai: Coriolis turns every inward stream to its left",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "I1 global trails finite",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N21 Ciarán 12 UTC MSLP low (52.5°N, 1.75°E, 955.9 hPa)",
+   "value": [
+    52.5,
+    1.75,
+    955.928672
+   ],
+   "ref": [
+    52.5,
+    1.75,
+    955.93
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "N21 850 hPa height low at the same grid point",
+   "value": [
+    52.5,
+    1.75
+   ],
+   "ref": [
+    52.5,
+    1.75
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "name": "N21 850 hPa vs geostrophic over sea 300-1500 km: median direction difference ≤ 10° (6.9°)",
+   "value": [
+    6.85144
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 10,
+   "pass": true
+  },
+  {
+   "name": "N21 ≥ 65 % of those points within 10° (69 %)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N21 median speed ratio actual/geostrophic in 0.80-0.95 (0.858)",
+   "value": [
+    0.858099
+   ],
+   "ref": [
+    0.875
+   ],
+   "tol": 0.075,
+   "pass": true
+  },
+  {
+   "name": "N21 every drawn arrow over open sea (≥ 0.5° from land) and ≥ 300 km from the low",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N21 geostrophic anticlockwise on the 300-600 km ring (≥ 90 % of sea points)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N21 W flank (typical point): 850 hPa direction within 10° (5.4°)",
+   "value": [
+    5.428557
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 10,
+   "pass": true
+  },
+  {
+   "name": "N21 W flank: speed ratio near the median (0.860)",
+   "value": [
+    0.860492
+   ],
+   "ref": [
+    0.858099
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "N21 W flank: 10 m wind turned towards the low (left of the isobar direction, 14°)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "name": "N21 North Sea (typical point): 850 hPa direction within 10° (5.5°)",
+   "value": [
+    5.48055
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 10,
+   "pass": true
+  },
+  {
+   "name": "N21 North Sea: speed ratio near the median (0.847)",
+   "value": [
+    0.847384
+   ],
+   "ref": [
+    0.858099
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "name": "N21 North Sea: 10 m wind turned towards the low (left of the isobar direction, 10°)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
    "pass": true
   }
  ],
@@ -8552,10 +9293,5 @@
    "sha256": "e5376260b954a591f8104d2351a3d5af033845f3345e0235b39fcf07d7eb9274"
   }
  ],
- "physics_heavy": [],
- "fx1_2026_10_28": [
-  "Narration: one-sentence splices (Kokoro af_bella x1.0, gain matched on the replaced or anchor sentence after per-clip loudnorm; _tools/splice_fx1.py); timing.json, captions and storyboard voiceover rebuilt; music re-mixed (same style and seed). No data file, fluidpy call or CHECK row changed; the data_files hashes above are unchanged.",
-  "Words: as v5 for s15a S1 and s18 S10; s22w S3/S6 say 'and, in the next video, …' for the spin arrow, Ω × r and −2Ω × u.",
-  "Screen: the v5 fixes in s03-s22w; s50 wall letters at 54 px."
- ]
+ "physics_heavy": []
 }

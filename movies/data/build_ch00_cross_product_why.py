@@ -407,6 +407,152 @@ def R_basis(Om, t):
     return rotating_basis(Omega=Om, t=t)
 
 
+# WGS-84 values that no fluidpy function returns (cited, NIMA TR8350.2, 3rd ed., 2000, ch. 3-4); used only for s27g
+WGS84_GAMMA_E, WGS84_GAMMA_P = 9.7803253359, 9.8321849378   # normal gravity at the equator / poles [m/s²]
+WGS84_E2 = 6.69437999014e-3                                   # first eccentricity squared
+
+
+def cf_parts(row, truth, call, files) -> None:
+    """U-CF (2026-10-29): items N23 (merry.json -> rule, rule_twice, centrifugal) and N24 (earth.json -> centrifugal,
+    effective_gravity, sideways, three_traces) for s26a1, s26e, s26f, s27b-s27g. Every displayed number has a CHECK row."""
+    from fluidpy.core import rotating as ROTM
+    from fluidpy.geo.constants import GM_EARTH
+    mg = files["merry.json"]
+    Wm = mg["Omega"]
+    Om = [0.0, 0.0, Wm]
+    # ---------------------------------------------------------------- N23a the rule (s26a1): an arrow painted on the floor
+    ang0 = 22.5 * DEG                                         # between two spokes
+    Bh0 = np.array([np.cos(ang0), np.sin(ang0), 0.0])
+    tr = np.round(np.arange(0, (np.pi / 3) / Wm + 1e-9, 1 / 30), 6)   # a 60° turn at 0.5 rad/s, 1/30-s samples
+    Bp, Bg = [], []
+    for t_ in tr:
+        Rb = np.asarray(R_basis(Om, float(t_)))
+        Bp.append((Rb.T @ (1.2 * Bh0))[:2])                      # painted (rider: unchanged), seen from outside
+        Bg.append((Rb.T @ ((1.2 + 0.2 * t_) * Bh0))[:2])         # growing 0.2 m/s along itself (rider), seen from outside
+    Bp, Bg = np.array(Bp), np.array(Bg)
+    h = 1e-4
+    E0, E1 = (np.asarray(call("fluidpy.core.rotating.rotating_basis", "s26a1", "merry.json", "floor axes carried round (the painted arrow B)",
+                              Omega=Om, t=float(t_))) for t_ in (0.0, h))
+    B0 = 1.2 * Bh0
+    rate_p = ((E1.T @ B0) - (E0.T @ B0)) / h
+    oxb = np.asarray(call(VEC + "cross", "s26a1", "merry.json", "Ω × B for the painted arrow (the rule's last term)", a=Om, b=B0.tolist()))
+    row("N23 painted arrow: outside rate (finite difference) = Ω × B", rate_p, oxb, 1e-4)
+    rate_g = ((E1.T @ ((1.2 + 0.2 * h) * Bh0)) - (E0.T @ B0)) / h
+    row("N23 growing arrow: outside rate = rider rate (0.2 m/s along B) + Ω × B", rate_g, 0.2 * Bh0 + oxb, 1e-4)
+    row("N23 |Ω × B| = 0.5 × 1.2 = 0.6 m/s, at right angles to B", [float(np.linalg.norm(oxb)), float(oxb @ B0)], [0.6, 0.0], 1e-12)
+    row("N23 60° turn at 0.5 rad/s takes 2.09 s", tr[-1], np.pi / 3 / Wm, 1 / 30)
+    rule = {"t": r6(tr, 4), "B0": r6(B0), "painted": r6(Bp, 5), "growing": r6(Bg, 5), "omega_x_B0": r6(oxb), "growth_m_s": 0.2,
+            "len0_m": 1.2, "turn_deg": 60}
+    # ---------------------------------------------------------------- N23b the rule used twice (s26e, s26f) at the s26b state
+    tv = mg["two_views"]
+    j, tm = tv["j"], np.asarray(mg["t"])
+    uR, rR = np.array(tv["u"]), np.array(tv["r"])
+    # the rider's acceleration from the rider's equation itself (no real push): a' = −2Ω × u − Ω × (Ω × r), compared with
+    # a central difference of the rotating_frame_path velocity is not available in merry.json -> use the positions (2nd diff)
+    # a' = the rider's acceleration of the same ball, by a central 2nd difference of turntable_puck's rotating path (h = 1 ms)
+    hh = 1e-3
+    tp3 = call(FRM + "turntable_puck", "s26e", "merry.json", "the ball at t = 1.2 s ± 1 ms (rider's path, for a')",
+               t=[float(tm[j]) - hh, float(tm[j]), float(tm[j]) + hh], x0=0.0, y0=-2.8, u0=0.0, v0=1.5, Omega=Wm, launch="inertial")
+    xr3, yr3 = np.asarray(tp3["x_rotating"]), np.asarray(tp3["y_rotating"])
+    a_fd = np.array([(xr3[2] - 2 * xr3[1] + xr3[0]) / hh ** 2, (yr3[2] - 2 * yr3[1] + yr3[0]) / hh ** 2, 0.0])
+    row("N23 the ball's place at t = 1.2 s: turntable_puck = two_views r", [xr3[1], yr3[1]], rR[:2], 1e-5)
+    ft = call("fluidpy.core.rotating.frame_acceleration_terms", "s26e,s26f", "merry.json",
+              "rider's change of u + Ω × r = a' + Ω × u'; the rule's last term Ω × (u + Ω × r) = Ω × u' + Ω × (Ω × r)",
+              a_prime=a_fd.tolist(), u_prime=uR.tolist(), x_prime=rR.tolist(), Omega=Om)
+    tot = np.asarray(ft["total"])
+    row("N23 a' + 2Ω × u + Ω × (Ω × r) = 0 (the outside path is straight; 2nd difference, tol 1e-4 m/s²)", tot, [0, 0, 0], 1e-4)
+    oxu = np.asarray(call(VEC + "cross", "s26e,s26f", "merry.json", "Ω × u at the ball (pieces ① and ②)", a=Om, b=uR.tolist()))
+    oxr = np.asarray(call(VEC + "cross", "s26e", "merry.json", "Ω × r at the ball (the floor's velocity)", a=Om, b=rR.tolist()))
+    oxoxr = np.asarray(call(VEC + "cross", "s26f", "merry.json", "Ω × (Ω × r) (piece ③)", a=Om, b=oxr.tolist()))
+    row("N23 2Ω × u of the terms = 2 × (Ω × u)", np.asarray(ft["coriolis"]), 2 * oxu, 1e-12)
+    row("N23 Ω × (Ω × r) points to the hub: = −Ω² r", oxoxr, -Wm ** 2 * rR, 1e-12)
+    # piece ③ as the tip velocity of the carried floor arrow Ω × r (finite difference through rotating_basis)
+    tipv = ((E1.T @ oxr) - (E0.T @ oxr)) / h
+    row("N23 carried floor arrow Ω × r: tip velocity (finite difference) = Ω × (Ω × r)", tipv, oxoxr, 1e-4)
+    ghosts3 = [r6((np.asarray(R_basis(Om, float(t_))).T @ oxr)[:2], 5) for t_ in np.linspace(0, (np.pi / 3) / Wm, 7)]
+    rule_twice = {"t": tv["t"], "u": r6(uR), "r": r6(rR), "omega_x_r": r6(oxr), "omega_x_u": r6(oxu), "omega_x_omega_x_r": r6(oxoxr),
+                  "a_rider": r6(a_fd, 5), "total": r6(tot, 5), "floor_arrow_ghosts": ghosts3}
+    # ---------------------------------------------------------------- N23c the centrifugal acceleration on the disc (s27b)
+    xb = [0.0, -2.5, 0.0]
+    cen = np.asarray(call("fluidpy.core.rotating.centrifugal_acceleration", "s27b", "merry.json", "−Ω × (Ω × r) = Ω² r on the disc (Vallis (2.13))",
+                          Omega=Om, x=xb))
+    row("N23 centrifugal at 2.5 m = (0, −0.625, 0): 0.25 × r, away from the hub", [*cen, float(np.linalg.norm(cen))], [0, -0.625, 0, 0.625], 1e-12)
+    row("N23 Ω² = 0.25 s⁻², one turn = 2π/Ω = 12.57 s (≈ 12.5)", [Wm ** 2, 2 * np.pi / Wm], [0.25, 12.566], 1e-3)
+    rng = np.random.default_rng(29)
+    P_, Q_, S_ = rng.normal(size=(200, 3)), rng.normal(size=(200, 3)), rng.normal(size=(200, 3))
+    lhs = np.asarray(V.cross(P_, V.cross(Q_, S_)))
+    rhs = Q_ * np.asarray(V.dot(P_, S_))[:, None] - S_ * np.asarray(V.dot(P_, Q_))[:, None]
+    row("N23 vector triple product p × (q × s) = q (p·s) − s (p·q): 200 random triples (max |diff|)", float(np.max(np.abs(lhs - rhs))), 0.0, 1e-12)
+    dOr = float(call(VEC + "dot", "s27b", "merry.json", "Ω · r on the flat disc", a=Om, b=xb))
+    dOO = float(call(VEC + "dot", "s27b", "merry.json", "Ω · Ω = Ω²", a=Om, b=Om))
+    row("N23 Ω · r = 0, Ω · Ω = 0.25; −(Ω (Ω·r) − r (Ω·Ω)) = centrifugal", [dOr, dOO, *(-(np.array(Om) * dOr - np.array(xb) * dOO))], [0, 0.25, *cen], 1e-12)
+    files["merry.json"].update({"rule": rule, "rule_twice": rule_twice,
+                                "centrifugal": {"x": xb, "acc": r6(cen), "mag": r6(float(np.linalg.norm(cen))), "omega_sq": Wm ** 2,
+                                                "period_s": r6(2 * np.pi / Wm, 3), "omega_dot_r": dOr, "omega_dot_omega": dOO}})
+    # ---------------------------------------------------------------- N24 the centrifugal acceleration on Earth (s27c-s27g)
+    OmE = [0.0, 0.0, OMEGA]
+    a = EARTH_RADIUS
+    lat3 = [0.0, 45.0, 90.0]
+    xs = [[a * np.cos(l * DEG), 0.0, a * np.sin(l * DEG)] for l in lat3]
+    ce = np.asarray(call("fluidpy.core.rotating.centrifugal_acceleration", "s27c,s27d,s27f", "earth.json", "−Ω × (Ω × r) = Ω² r⊥ on Earth (Vallis (2.13))",
+                         Omega=OmE, x=np.asarray(xs).T.tolist())).T      # (3, N) in, (N, 3) here
+    mag = np.linalg.norm(ce, axis=1)
+    row("N24 |centrifugal| at 0°, 45°, 90° = 0.033878, 0.023955, 0 m/s²", mag, [0.033878, 0.023955, 0.0], 2e-6)
+    row("N24 Ω² = 5.3175e-9 s⁻² (shown 5.32)", OMEGA ** 2, 5.3175e-9, 1e-12)
+    row("N24 display: 5.32e-9 × 6 371 000 ≈ 0.034; × 4 505 000 ≈ 0.024", [round(5.32e-9 * 6371000, 3), round(5.32e-9 * 4505000, 3)], [0.034, 0.024], 0)
+    r45 = np.array(xs[1])
+    along = np.asarray(OmE) * float(V.dot(OmE, r45.tolist())) / OMEGA ** 2
+    perp = r45 - along
+    row("N24 r = r_along + r⊥: 4504.98 km each at 45°; Ω (Ω·r) = Ω² r_along", [along[2] / 1e3, perp[0] / 1e3, float(V.dot(along, perp))], [4504.98, 4504.98, 0.0], 0.01)
+    row("N24 Ω² r − Ω² r_along = Ω² r⊥ = centrifugal at 45°", OMEGA ** 2 * (r45 - along), ce[1], 1e-15)
+    up45, north45 = np.array([np.cos(45 * DEG), 0, np.sin(45 * DEG)]), np.array([-np.sin(45 * DEG), 0, np.cos(45 * DEG)])
+    upp = float(call(VEC + "dot", "s27c,s27f", "earth.json", "centrifugal · up at 45°", a=ce[1].tolist(), b=up45.tolist()))
+    nop = float(call(VEC + "dot", "s27c,s27f", "earth.json", "centrifugal · north at 45° (the sideways part)", a=ce[1].tolist(), b=north45.tolist()))
+    ang = float(V.angle_between(ce[1], up45, degrees=True))
+    row("N24 up part +0.016939, north part −0.016939 (towards the equator), 45° from up", [upp, nop, ang], [0.016939, -0.016939, 45.0], 2e-6)
+    truth("N24 the sideways part points towards the equator (north part < 0 in the NH)", nop < 0)
+    row("N24 ratio to g: 0.345 %, 0.244 %, 0 (≈ a third of one percent at the equator)", mag / G0 * 100, [0.3455, 0.2443, 0.0], 5e-4)
+    gn = GM_EARTH / a ** 2
+    ge, defl = call("fluidpy.core.rotating.effective_gravity", "s27e,s27g", "earth.json", "g = g* + Ω² r⊥ on a sphere, at 45° (Vallis (2.23))",
+                    lat_rad=45 * DEG, g_n=gn, Omega=OMEGA, a=a)
+    row("N24 g* = GM/a² = 9.8203; g at 45° = 9.8033 m/s², tilt 0.099°", [gn, float(ge), float(defl) / DEG], [9.8203, 9.8033, 0.0990], 5e-4)
+    ab = call("fluidpy.core.rotating.apparent_body_forces", "s27e", "earth.json", "gravity + centrifugal for u' = 0 (the effective-gravity vector)",
+              u_prime=[0.0, 0.0, 0.0], x_prime=r45.tolist(), Omega=OmE, g=(-gn * up45).tolist())
+    gvec = np.asarray(ab["total"])
+    row("N24 |g* + centrifugal| from apparent_body_forces = effective_gravity", float(np.linalg.norm(gvec)), float(ge), 1e-9)
+    cor = np.asarray(call("fluidpy.core.rotating.coriolis_acceleration", "s27f", "earth.json", "−2Ω × u, u = 10 m/s east at 45° (local axes)",
+                          Omega=GFD.earth_rotation_local(45 * DEG).tolist(), u=[10.0, 0.0, 0.0]))
+    cmag = float(np.linalg.norm(cor))
+    row("N24 |−2Ω × u| = 2Ω × 10 = 1.4584e-3 m/s² (u ⟂ Ω: the largest it can be)", [cmag, 2 * OMEGA * 10], [1.4584e-3, 1.4584e-3], 1e-7)
+    row("N24 sideways / Coriolis = 11.6 (> 10)", abs(nop) / cmag, 11.6, 0.05)
+    lat_g = np.linspace(0, 90, 9001)
+    _, dfl = call("fluidpy.core.rotating.effective_gravity", "s27g", "earth.json", "plumb-line tilt on a sphere, 0..90°", lat_rad=(lat_g * DEG).tolist(),
+                  g_n=gn, Omega=OMEGA, a=a)
+    dfl = np.asarray(dfl) / DEG
+    row("N24 max spin-only tilt on a sphere 0.0990° near 45° (≈ a tenth of a degree)", [float(dfl.max()), float(lat_g[np.argmax(dfl)])], [0.0990, 44.95], 0.06)
+    # the real (ellipsoidal) Earth: plumb line ⟂ ellipsoid = geodetic latitude; geocentric tan ψ = (1 − e²) tan φ (cited WGS-84 e²)
+    psi = np.arctan((1 - WGS84_E2) * np.tan(45 * DEG)) / DEG
+    row("N24 real Earth: geodetic − geocentric latitude at 45° = 0.1924° (≈ a fifth of a degree)", 45 - psi, 0.1924, 5e-4)
+    dd = float(call("fluidpy.core.rotating.earth_oblateness_diameter", "s27g", "earth.json", "equatorial minus polar diameter (WGS-84)"))
+    row("N24 equatorial − polar radius = 21.385 km; 1/f = 298.257 (≈ 1 part in 300)", [dd / 2e3, ROTM.EARTH_A / (dd / 2)], [21.385, 298.257], 1e-3)
+    cen_wgs = np.asarray(call("fluidpy.core.rotating.centrifugal_acceleration", "s27g", "earth.json", "Ω² a at the WGS-84 equator",
+                              Omega=OmE, x=[ROTM.EARTH_A, 0.0, 0.0]))
+    share = float(np.linalg.norm(cen_wgs)) / (WGS84_GAMMA_P - WGS84_GAMMA_E)
+    row("N24 spin share of the pole-equator gravity difference 0.0339 / 0.0519 = 0.654 (≈ two thirds)", [WGS84_GAMMA_P - WGS84_GAMMA_E, share], [0.05186, 0.654], 1e-3)
+    row("N24 g equator ≈ 9.78, poles ≈ 9.83 (WGS-84 normal gravity, cited)", [round(WGS84_GAMMA_E, 2), round(WGS84_GAMMA_P, 2)], [9.78, 9.83], 0)
+    flat = 1 / (ROTM.EARTH_A / (dd / 2))
+    files["earth.json"].update({
+        "centrifugal": {"lat_deg": lat3, "acc": r6(ce, 8), "mag": r6(mag, 6), "omega_sq": float(f"{OMEGA ** 2:.5g}"), "r_along_km": r6(along / 1e3, 2),
+                        "r_perp_km": r6(perp / 1e3, 2), "up_part": r6(upp, 6), "north_part": r6(nop, 6), "angle_from_up_deg": r6(ang, 3),
+                        "ratio_to_g_percent": r6(mag / G0 * 100, 4)},
+        "effective_gravity": {"g_star": r6(gn, 4), "g_45": r6(float(ge), 4), "tilt_deg": r6(float(defl) / DEG, 4), "g_vec_45": r6(gvec, 6)},
+        "sideways": {"north_part": r6(nop, 6), "coriolis_10": r6(cmag, 7), "ratio": r6(abs(nop) / cmag, 2)},
+        "three_traces": {"g_equator": WGS84_GAMMA_E, "g_poles": WGS84_GAMMA_P, "spin_share": r6(share, 3), "tilt_sphere_max_deg": r6(float(dfl.max()), 4),
+                         "tilt_sphere_lat": r6(float(lat_g[np.argmax(dfl)]), 2), "tilt_real_deg": r6(45 - psi, 4), "radius_diff_km": r6(dd / 2e3, 3),
+                         "inv_flattening": r6(1 / flat, 3), "flattening": r6(flat, 7), "drawn_ratio_x50": r6(1 - 50 * flat, 4),
+                         "tilt_curve_deg": r6(dfl[::250], 4), "tilt_curve_lat": r6(lat_g[::250], 2)}})
+
+
 # ---------------------------------------------------------------------------------------------------------- main
 
 
@@ -866,6 +1012,7 @@ def main() -> int:
                             "display_quotient": round(1e-3 / 1.24e-4, 2)}}
 
     v4_parts(row, truth, call, files, pending, f45)
+    cf_parts(row, truth, call, files)
     part_files = v5_parts(row, truth, call, files)
 
     if args.part == "all":
@@ -930,7 +1077,10 @@ def main() -> int:
                                             "s30": "17 h in a few seconds", "s31": "17 h in ≈ 8 s", "s41": "34 h in ≈ 20 s",
                                             "s32-s37": "streaklines ≈ 2 h of flow per frame (global), ≈ 2 min per frame (storms)"},
                        "exaggerations": ["a×b and p×q drawn at 0.25 of their length", "cap lift per turn ×4", "bolt travel ×3",
-                                         "s26 tracks drawn 5× wider", "storm columns, Ω, k, τ and Coriolis arrows on display scales"]},
+                                         "s26 tracks drawn 5× wider", "storm columns, Ω, k, τ and Coriolis arrows on display scales",
+                                         "U-CF s26a1-s27d: B, Ω × B, u, Ω × r, Ω × (Ω × r), Ω² r and the centrifugal arrows on display scales",
+                                         "U-CF s27e-s27f: centrifugal arrows ×100 against g* (storyboard planned ×50; ×50 gave a 20-px arrow); flattening ×50",
+                                         "U-CF s27g: flattening and plumb-line angle ×50; the true-scale outline drawn beside it"]},
         "credits": sb_credits,
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
         "pending": pending,
