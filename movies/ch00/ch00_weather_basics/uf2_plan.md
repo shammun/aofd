@@ -1122,3 +1122,4 @@ scene durations, including the 0.8-s scene gap: s36 53.7 → 96.2 s and s38b 45.
 - Length: keep everything the user asked for (the scale-height rewrite, all three stacks, s36). **Drop only s20c**: it is the fourth picture of one idea, and the planner rated it redundant. That gives about 57:30. The user asked for clarity and detail over brevity.
 - Also do U2-28: the westerlies as well as the trades in s53, with a camera flight and hover per belt. House globe = cross-product v5 56:35–57:54. Text may sit on the faded rim only. The source line goes below the globe.
 - Size: stay under the 160 MB hard cap by encoding (crf 24 or 2-pass at a lower bitrate); do not raise the cap.
+- User, 2026-10-29: **do not add new titles to globes or maps.** They take space. The globe rule only covers how a globe renders when it zooms or moves between places. Keep the weather movie's existing titles as they are now. Keep the colour bar with its label as it is now.
