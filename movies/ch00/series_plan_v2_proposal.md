@@ -136,7 +136,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 ### Stage 9 · Synthesis
 | # | Movie |
 |---|---|
-| 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen) |
+| 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen; user 2026-10-29: very detailed, at least 40–50 min) |
 
 ## Notes
 - User (2026-10-28, final): cross product = STEP 1 update the full movie (0.2 → v5) with the reference video's intuition for every component (î, ĵ, k̂), the meaning (first × across part of second; arrow = axis), when to use it and what the two vectors stand for; STEP 2 split v5 at the start of the meteorology/weather/climate applications into #2 (definition, intuition, examples) and #3 (applications), content unchanged, each with a proper new start and end.
