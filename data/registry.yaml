@@ -24,10 +24,12 @@ datasets:
     fetch_date: "2026-10-21"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/NCEP1-hgt-daily/hgt.2014.nc, raw/NCEP1-hgt-daily/hgt.2014-01-06.500hPa.nc]
-    derived_on_root: [derived/ch00/ncep_r1_z500_20140106.nc]
-    derived_in_repo: [data/derived/ch00/ncep_r1_z500_20140106.nc]
-    used_by: [PoC E (Colab smoke notebook), PoC F (scenes/ch00/the_500hPa_surface.html)]
+    raw_files: [raw/NCEP1-hgt-daily/hgt.2014.nc, raw/NCEP1-hgt-daily/hgt.2014-01-06.500hPa.nc, raw/NCEP1-hgt-daily/hgt.2025-11-01_2025-12-31.10hPa.20N.nc, raw/NCEP1-hgt-daily/hgt.2026-01-01_2026-03-17.10hPa.20N.nc]
+    sha256_raw_subsets: {hgt.2025-11-01_2025-12-31.10hPa.20N.nc: efcce84f21bd18287f5cbfa91f55b66623a1a25bc2448d8823a5d7259d3532b7, hgt.2026-01-01_2026-03-17.10hPa.20N.nc: 93b8e4c84dd459aad2533c18befd6ae011ac7c38b9d2baa86b2d2178121d2b88}  # informational (written by fetch from OPeNDAP)
+    production_note: "NCEP R1 production ended with the day 2026-03-17 (NWS CDAS -> CORe; https://psl.noaa.gov/news/2026/r1datanotice.html); the archive stays online, no later days exist (fluidpy.data.psl.R1_LAST_DAY)"
+    derived_on_root: [derived/ch00/ncep_r1_z500_20140106.nc, derived/ch00/ncep_r1_10hPa_20251101_20260317.nc]
+    derived_in_repo: [data/derived/ch00/ncep_r1_z500_20140106.nc, data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc]
+    used_by: [PoC E (Colab smoke notebook), PoC F (scenes/ch00/the_500hPa_surface.html), movie ch00_coordinates s35-s36 (A7 2014-01-06 and D1 winter 2025-26; with NCEP1-uv-daily)]
   NE-50m-land:
     catalogue: NE
     title: Natural Earth 1:50m land polygons
@@ -1306,3 +1308,250 @@ datasets:
     derived_in_repo: [data/derived/ch00/ceres_ebaf-toa_olr_2000-03_2026-08.nc]
     checks: "DT61 global-mean OLR 2001-01..2026-08 = 240.61 W/m2 (2001-2025: 240.58; CERES gtoa: 240.51) in 235-245 PASS; ours vs CERES gtoa monthly max |diff| 0.11 W/m2; annual 240.06 (2001) -> 241.45 (2025); T_e = (OLR/sigma)^(1/4) = 255.23 K (sigma CODATA 2022)"
     used_by: [movie ch00_derivatives_taylor s42, s43 (D4, DT61)]
+  NCEP1-uv-daily:
+    catalogue: NCEP1
+    title: NCEP/NCAR Reanalysis 1 daily-mean eastward/northward wind at 10 hPa, 20-90N, 2025-11-01..2026-03-17 (with NCEP1-hgt-daily heights); winter 2025-26 polar vortex
+    url: https://psl.noaa.gov/thredds/dodsC/Datasets/ncep.reanalysis.dailyavgs/pressure/uwnd.2026.nc
+    raw_url: https://downloads.psl.noaa.gov/Datasets/ncep.reanalysis.dailyavgs/pressure/uwnd.2026.nc
+    route: OPeNDAP server-side subset via pydap (time range, level 10 hPa, lat 90..20), one file per variable and calendar year, through fluidpy.data.fetch; 6 subsets (hgt, uwnd, vwnd x 2025/2026) 3.3-4.7 s each, about 9 min wall time (pydap metadata); HTTPS whole-year files (32-159 MB) as fallback
+    fetcher: fluidpy.data.psl.fetch_daily_range / stratosphere_season_product
+    login: none
+    licence: US Government work, public domain (no restrictions); PSL asks for an acknowledgement
+    licence_url: https://psl.noaa.gov/data/gridded/data.ncep.reanalysis.html
+    citation: "Kalnay, E., et al., 1996: The NCEP/NCAR 40-Year Reanalysis Project. Bull. Amer. Meteor. Soc., 77, 437-471, doi:10.1175/1520-0477(1996)077<0437:TNYRP>2.0.CO;2"
+    attribution: NCEP/NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA, from their website at https://psl.noaa.gov
+    size_bytes: 2468106  # 4 wind subsets; the 2 height subsets (789,785 B) are listed under NCEP1-hgt-daily
+    sha256_raw_subsets: {uwnd.2025-11-01_2025-12-31.10hPa.20N.nc: c8bb91613517e480faf74ba46e39b5ad7a509f0f21099ab2d8cafcbcc48b686c, uwnd.2026-01-01_2026-03-17.10hPa.20N.nc: d48ca7889ed048dec06b71d600e64395c127cb3c50516f54119b056f95f3375e, vwnd.2025-11-01_2025-12-31.10hPa.20N.nc: 9206b88fd4542bc31a4e8415dd8e0f0dd70324052aaf457b1f19c101488a7650, vwnd.2026-01-01_2026-03-17.10hPa.20N.nc: 14cebef8991cd432bb7948771e3bd67920638d609b85ee96e92078486baaf31d}  # informational
+    sha256_derived: {ncep_r1_10hPa_20251101_20260317.nc: d2173163f964d9f71aa0104d63fcfb187047f32dbbd576ab9be59375f5569247}
+    variables: {u: "eastward wind at 10 hPa [m s-1]", v: "northward wind at 10 hPa [m s-1]", z: "10 hPa geopotential height [m] (NCEP1-hgt-daily)", u60: "zonal-mean u at 60N [m s-1]; < 0 = major-warming wind criterion (Charlton and Polvani 2007)"}
+    coordinates: file lat N->S (90..20), derived S->N (20..90, 2.5 deg); lon 0..357.5 E; time daily means 00-24 UTC, 137 days
+    subset: "2025-11-01..2026-03-17 (R1 ends 2026-03-17), 10 hPa, 20-90N"
+    production_note: "NCEP R1 production ended with 2026-03-17 (PSL data notice https://psl.noaa.gov/news/2026/r1datanotice.html)"
+    fetch_date: "2026-10-28"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NCEP1-uv-daily/uwnd.2025-11-01_2025-12-31.10hPa.20N.nc, raw/NCEP1-uv-daily/uwnd.2026-01-01_2026-03-17.10hPa.20N.nc, raw/NCEP1-uv-daily/vwnd.2025-11-01_2025-12-31.10hPa.20N.nc, raw/NCEP1-uv-daily/vwnd.2026-01-01_2026-03-17.10hPa.20N.nc]
+    derived_on_root: [derived/ch00/ncep_r1_10hPa_20251101_20260317.nc]
+    derived_in_repo: [data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc]
+    checks: "method re-run on A7 2014-01-06 reproduces the plan (28 059 m at 77.5N 45W; centre 78.70N 43.85W; ring ratio 0.87 -> 0.42). Recommended day 2026-01-21 (max u60 42.1 m/s): centre 72.89N 44.26E (Barents Sea) 1902 km from the pole, 28 602 m; zonal-mean z 30N 30 721 m; rms v_r/v_t at 2000 km 1.88 (pole) -> 0.42 (vortex centre); ring-mean v_t max 51.8 m/s at 2500 km. u60 < 0 on 2026-03-04..10 (min -8.8 m/s on 03-06): major-warming wind criterion met in R1; midwinter vs final warming undecidable (R1 ends 03-17)"
+    used_by: [movie ch00_coordinates s35-s36 (D1)]
+  ERA5-ARCO-ian2022-pl:
+    catalogue: ARCO
+    title: ERA5 Hurricane Ian 2022-09-28T18 UTC, u, v, omega on 18 pressure levels (1000-100 hPa) and 10 m wind + MSLP, 20-32N 90-75W, 0.25 deg; ring-mean in-up-out circulation
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous gcsfs, lazy selection through fluidpy.data.fetch (guard sized on the 0.65 + 0.04 MB selections); network about 3 x 37-level global chunks (~0.3 GB), 69.8 s + 3.2 s
+    fetcher: fluidpy.data.era5_arco.fetch_box (new variable w = vertical_velocity) / vertical_ring_product
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=overview
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels, C3S CDS, doi:10.24381/cds.bd0915c6; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 575124  # 527,574 (pressure levels) + 47,550 (surface)
+    sha256_raw_subsets: {era5_ian_pl_u-v-w_1000-975-950-925-900-850-800-700-600-500-400-300-250-200-175-150-125-100_2022-09-28T18_2022-09-28T18_1h.nc: dc33db170370de5725dda43848a9aa1fa26f45e2ca40319c60c35552b69bf15e, era5_ian_sfc18_msl-u10-v10_2022-09-28T18_2022-09-28T18_1h.nc: b29d3fc822af50e189ca6d7643dd387c1bee4014bafe15c7a94649647ece86f4}  # informational
+    sha256_derived: {era5_ian_2022-09-28T18_pl.nc: 7133d65dc57c39d9142ffbc2078476e88434d0cdbfcf99e4363a6fafb2755346}
+    variables: {u: "[m s-1]", v: "[m s-1]", w: "pressure vertical velocity omega [Pa s-1], < 0 rising", msl: "[Pa]", u10: "[m s-1]", v10: "[m s-1]", vr_mean: "ring-mean radial wind (level, radius 50-500 km) [m s-1], < 0 inflow", vt_mean: "ring-mean tangential wind [m s-1], > 0 anticlockwise seen from above", w_mean: "ring-mean omega [Pa s-1]"}
+    coordinates: store lat N->S, lon 0..359.75; derived lat S->N, lon -180..180; one centre (sub-grid MSLP minimum 26.454N 82.391W, 979.6 hPa) for all levels
+    subset: 2022-09-28T18, levels 1000,975,950,925,900,850,800,700,600,500,400,300,250,200,175,150,125,100 hPa, lat 20..32, lon -90..-75
+    fetch_date: "2026-10-28"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_ian_pl_u-v-w_1000-975-950-925-900-850-800-700-600-500-400-300-250-200-175-150-125-100_2022-09-28T18_2022-09-28T18_1h.nc, raw/ERA5-ARCO/era5_ian_sfc18_msl-u10-v10_2022-09-28T18_2022-09-28T18_1h.nc]
+    derived_on_root: [derived/ch00/era5_ian_2022-09-28T18_pl.nc]
+    derived_in_repo: [data/derived/ch00/era5_ian_2022-09-28T18_pl.nc]
+    checks: "DC14 PASS: ring-mean v_r at 100/200 km: 1000 hPa -6.4/-4.8, 975 hPa -9.2/-6.1, 850 hPa -0.8/-0.4 (marginal), 200 hPa +2.2/+4.2, 150 hPa +3.4/+2.5 m/s; inflow mainly 1000-925 hPa (near the sea), outflow strongest 200-125 hPa; outflow aloft turns anticyclonic beyond 400 km (v_t -6 to -13 m/s at 150-125 hPa); ERA5 centre 979.6 hPa vs best track 938 hPa (smoothed)"
+    used_by: [movie ch00_coordinates s14 (D2)]
+  NOAA-COOPS:
+    catalogue: COOPS
+    title: NOAA CO-OPS tide gauges 8725520 Fort Myers (Caloosahatchee River, downtown), 8726520 St. Petersburg (Tampa Bay), 8725110 Naples; 6-min observed water level and predicted tide, MHHW, metric, 2022-09-27..30 (Hurricane Ian)
+    url: https://api.tidesandcurrents.noaa.gov/api/prod/datagetter
+    route: CO-OPS Data API (anonymous HTTPS JSON, no key; at most 31 days of 6-min data per request) through fluidpy.data.fetch (query-string subset; HEAD returns Content-Length 0, so the guard uses about 110 B per record); 6 requests 1.1-2.9 s each
+    fetcher: fluidpy.data.coops.fetch_water_level / residual / surge_product (F5)
+    login: none
+    licence: US Government work (NOAA), public domain; NOS requests attribution and that modified data not be presented as official
+    licence_url: https://tidesandcurrents.noaa.gov/disclaimers.html
+    citation: "NOAA CO-OPS, Tides and Currents Data API, https://api.tidesandcurrents.noaa.gov/api/prod/ (accessed 2026-10-28); stations 8725520, 8726520, 8725110"
+    attribution: NOAA NOS Center for Operational Oceanographic Products and Services (CO-OPS), tidesandcurrents.noaa.gov
+    size_bytes: 287639
+    sha256_raw: {8725520_water_level: cf11db6d056d31b950bdf0b01666587ca3fa797d950f609aed5fcbc341a7374c, 8725520_predictions: 2f3b6d1783439d89ad552688825aaed0658891fd405b91527d99663f53150f17, 8726520_water_level: 5b874f4a6fca3ee56d9198d0ac42d621919e042135dbe0156451a85f0fe3c0ba, 8726520_predictions: f3e9934081bdefe5b672dfdfb416e5d44e91ba5a4bb1105eba21112cc4f76784, 8725110_water_level: bab6cb2bdc52a5b9c200f0808f1f92818c6591ae2c367b4b86e97fb0e6ab98b8, 8725110_predictions: 313f21fb7ddd38fbb162e457307cb943564b88c2740ab9845f628e4f736e96de}  # quality v (verified): fixed
+    sha256_derived: {coops_ian_surge_20220927_20220930.nc: c4f015cfb8aa28f95a51beb26d66886d91108d1bbbc045c5be988336192ff548}
+    variables: {water_level: "observed, m above MHHW (6-min)", prediction: "astronomical tide, m above MHHW", residual: "observed - predicted [m], > 0 surge, < 0 water pushed away"}
+    coordinates: (station, time) UTC 6-min; NaN where a gauge has no data (Naples destroyed after 2022-09-28T17:06)
+    subset: 2022-09-27T00:00..2022-09-30T23:54 UTC
+    fetch_date: "2026-10-28"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/NOAA-COOPS/8725520_water_level_MHHW_20220927T0000_20220930T2354_metric_gmt.json, raw/NOAA-COOPS/8725520_predictions_MHHW_20220927T0000_20220930T2354_metric_gmt.json, raw/NOAA-COOPS/8726520_water_level_MHHW_20220927T0000_20220930T2354_metric_gmt.json, raw/NOAA-COOPS/8726520_predictions_MHHW_20220927T0000_20220930T2354_metric_gmt.json, raw/NOAA-COOPS/8725110_water_level_MHHW_20220927T0000_20220930T2354_metric_gmt.json, raw/NOAA-COOPS/8725110_predictions_MHHW_20220927T0000_20220930T2354_metric_gmt.json]
+    derived_on_root: [derived/ch00/coops_ian_surge_20220927_20220930.nc]
+    derived_in_repo: [data/derived/ch00/coops_ian_surge_20220927_20220930.nc]
+    checks: "DC44 PASS: 8726520 St. Petersburg residual min -1.755 m at 2022-09-28T23:00 (observed -1.889 m rel. MHHW at 23:12); 8725520 Fort Myers (downtown, on the river - NOT Fort Myers Beach) residual max +2.209 m at 22:18, observed max 2.212 m above MHHW = 7.26 ft = NHC TCR value; gauge survived; 8725110 Naples residual +1.91 m at 17:06 then destroyed (TCR 6.18 ft above MHHW); calm 27 Sep 00-12 residuals +0.20..+0.28 m"
+    used_by: [movie ch00_coordinates s40 (D3)]
+  ERA5-CDS-monthly-t2m:
+    catalogue: ERA5-CDS
+    title: ERA5 monthly-mean 2 m temperature, September 1991-2020 and 2026, global 1 deg; September 2026 anomaly from 1991-2020
+    url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels-monthly-means
+    route: CDS API through fluidpy.data.cds.retrieve (fetch retrieve=, guard given 12 MB); monthly_averaged_reanalysis, month 09, years 1991-2020 + 2026, grid 1x1 server-side, netcdf unarchived; 46.7 s transfer, 101 s incl. queue
+    fetcher: fluidpy.data.cds.retrieve / monthly_anomaly_product (fluidpy.diag.climatology.monthly_anomaly, global_mean)
+    login: CDS (free)
+    licence: CC-BY 4.0 (Copernicus licence); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 monthly averaged data on single levels from 1940 to present, C3S CDS, doi:10.24381/cds.f17050d7"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 3144777
+    sha256: 1a1efd4c54a1696857f5c2c5c3c3a3a5a995e84d0b2ede840a93237b59fe65c3  # this request; ERA5 final may later replace the ERA5T values of Sep 2026
+    sha256_derived: {era5_t2m_anom_2026-09_1deg.nc: c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824}
+    variables: {t2m_anom: "Sep 2026 minus Sep 1991-2020 mean [K]", t2m_clim: "Sep 1991-2020 mean [K]", t2m: "Sep 2026 [K]"}
+    coordinates: derived lat -90..90 (S->N, 181), lon -179..180 (360)
+    subset: September only, 31 years, global
+    fetch_date: "2026-10-28"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-CDS-monthly-t2m/era5_monthly_t2m_sep_1991-2020_2026_1deg.nc]
+    derived_on_root: [derived/ch00/era5_t2m_anom_2026-09_1deg.nc]
+    derived_in_repo: [data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc]
+    checks: "30 base years; cos-lat global-mean anomaly +0.823 K; anomaly range -8.5..+14.7 K; share of the Earth's area warmer than 1991-2020: 0.820, but share of a Mercator map (|lat| <= 85) warmer: 0.687 - the s34 area-honesty point in numbers (not spoken); Arctic (>= 66.5N) mean +1.07 K"
+    used_by: [movie ch00_coordinates s34 (D4)]
+  ERA5-CDS-ciaran2023-section:
+    catalogue: ERA5-CDS
+    title: ERA5 pressure levels round Storm Ciaran, 2023-11-01 18 UTC, t, q, u, v, omega, geopotential on 20 levels 1000-300 hPa, 46-51N 20W-6E, 0.25 deg (vertical slices along 48.5N)
+    url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels
+    route: CDS API through fluidpy.data.cds.retrieve -> fluidpy.data.fetch(retrieve=...) (guard given 3 MB); product_type reanalysis, area [51, -20, 46, 6], grid 0.25 x 0.25 server-side, netcdf unarchived; 180.5 s incl. queue
+    fetcher: fluidpy.data.cds.retrieve / grid_product
+    login: CDS (free)
+    licence: CC-BY 4.0 (Copernicus licence); attribution required
+    licence_url: https://cds.climate.copernicus.eu/licences/cc-by
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels from 1940 to present, C3S CDS, doi:10.24381/cds.bd0915c6"
+    attribution: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 617941
+    sha256: 643e5ed40305ce62841f9e4e7cf962da3defb91a494beff598847a632394d48e  # fixed (2023, final ERA5)
+    sha256_derived: {era5_ciaran_2023_section_48p5N_18UTC.nc: 03803164d955c8020d919376cb46f27adce35e7e7cbb8da7df10e27f0ff696c6}
+    variables: {t: "temperature [K]", q: "specific humidity [kg kg-1]", u: "eastward wind [m s-1]", v: "northward wind [m s-1]", w: "pressure vertical velocity omega [Pa s-1], < 0 rising", z: "geopotential [m2 s-2] (divide by 9.80665 for height; NOT converted in the product)"}
+    coordinates: CDS lat N->S; derived (time 1, level 1000..300 hPa (20), lat 46..51 S->N (21), lon -20..6 (105))
+    subset: 2023-11-01T18, levels 1000,975,950,925,900,875,850,825,800,775,750,700,650,600,550,500,450,400,350,300 hPa
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-CDS-ciaran2023-section/era5_ciaran_2023_section_20lev_2023-11-01T18.nc]
+    derived_on_root: [derived/ch00/era5_ciaran_2023_section_48p5N_18UTC.nc]
+    derived_in_repo: [data/derived/ch00/era5_ciaran_2023_section_48p5N_18UTC.nc]
+    checks: "box ranges: t 224.8-289.8 K, q to 9.7 g/kg, u -9.6..50.4 m/s, v -34.2..35.6 m/s, omega -3.17..+1.49 Pa/s; along 48.5N the largest |dT/dlon| at 850 hPa (unsmoothed) is at 12.75W, inside the W70 window 14-11W (the builder's smoothed 100-km test still to run)"
+    used_by: [movie ch00_weather_basics s47, s48 (D12, UF1)]
+  ETOPO2022-60s-brittany:
+    catalogue: NOAA NCEI
+    title: ETOPO 2022 15/30/60 arc-second global relief model, 60-arc-second surface subset 46.5-49.5N 6.5W-1E (Brittany)
+    url: https://www.ncei.noaa.gov/products/etopo-global-relief-model
+    raw_url: https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/60s/60s_surface_elev_netcdf/ETOPO_2022_v1_60s_N90W180_surface.nc
+    route: OPeNDAP subset via fluidpy.data.fetch (capability tests, 2026-10-27, 202,464 B in 1.9 s); reused by the movie ch00_weather_basics s03, s36
+    login: none
+    licence: US Government work, public domain
+    licence_url: https://www.ncei.noaa.gov/products/etopo-global-relief-model
+    citation: "NOAA National Centers for Environmental Information, 2022: ETOPO 2022 15 Arc-Second Global Relief Model. doi:10.25921/fd45-gt74"
+    attribution: ETOPO 2022, NOAA NCEI (public domain)
+    size_bytes: 202464
+    sha256_files:
+      etopo2022_60s_brittany_46.5-49.5N_-6.5--1E.nc: 9171ce38b02608f5a711e187048c30d8b0709edc422cf52c77535ad708658c65
+    variables: {z: "surface elevation, EGM2008 height [m] (negative = below sea level)"}
+    coordinates: lat 46.508..49.492 S->N (180, cell centres), lon -6.492..-1.008 (330), 1/60 deg
+    subset: 46.5-49.5N, 6.5W-1E; z range -4632 .. +328 m
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ETOPO2022-60s/etopo2022_60s_brittany_46.5-49.5N_-6.5--1E.nc]
+    used_by: [movie ch00_weather_basics s03 (Cesium terrain), s36]
+  ERA5-ARCO-ciaran2023-10lev:
+    catalogue: ARCO
+    title: ERA5 t, z, u, v on ten pressure levels (1000-200 hPa) round Storm Ciaran, 2023-11-02T12 UTC, 30-70N 40W-20E, 0.25 deg
+    url: gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3
+    route: ARCO-ERA5 zarr, anonymous, lazy selection through fluidpy.data.era5_arco.fetch_box (capability tests 2026-10-27; 3,934,000 B in 54.0 s, logged); registered 2026-10-29
+    fetcher: fluidpy.data.era5_arco.fetch_box / fluidpy.data.movie_rwm.era5_ciaran_10lev
+    login: none
+    licence: Copernicus licence / CC-BY 4.0 (ERA5 on the C3S CDS); attribution required
+    licence_url: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=overview
+    citation: "Hersbach, H., et al., 2020: The ERA5 global reanalysis. Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 hourly data on pressure levels, C3S CDS, doi:10.24381/cds.bd0915c6; ARCO-ERA5: Carver, R. W., and A. Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1"
+    attribution: Contains modified Copernicus Climate Change Service information 2023. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.
+    size_bytes: 3934000
+    sha256_raw_subset: bc01680bb920a4c8ef0fa36e6dbdcf983d0527a04def9397a5063616c1b1178e  # informational
+    sha256_derived: {rwm_era5_ciaran_6lev_2023-11-02T12.nc: 19927c72b16d618f7bbae08014a51577c1f173a81b9dab2970b939573fcee0c4, rwm_era5_ciaran_6lev_2023-11-02T12.bin: deea20a15c1f599ca131781da282641e14844f03202208dcdf6cd9166ab15dbb, rwm_era5_ciaran_6lev_2023-11-02T12.json: c7395ff47de8d7e4e0905298a8578f2f7ff888cb42acfd6f97889e9304853774}
+    variables: {t: "temperature [K]", z: "geopotential height [m] (geopotential / 9.80665)", u: "[m s-1]", v: "[m s-1]"}
+    coordinates: store lat N->S, lon 0..359.75; product (level 1000,850,700,500,300,250 hPa; lat 30..70 S->N; lon -40..20)
+    subset: 2023-11-02T12, ten levels, 30-70N 40W-20E
+    fetch_date: "2026-10-27"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_captest_ciaran_upper_t-z-u-v_1000-925-850-700-600-500-400-300-250-200_2023-11-02T12_2023-11-02T12_1h.nc]
+    derived_on_root: [derived/ch00/rwm_era5_ciaran_6lev_2023-11-02T12.nc]
+    derived_in_repo: [data/derived/ch00/rwm_era5_ciaran_6lev_2023-11-02T12.bin, data/derived/ch00/rwm_era5_ciaran_6lev_2023-11-02T12.json]
+    checks: "z500 minimum 5114 m at 52.5N 1.25E (Ciaran trough; planning seed 52.5N 1.75E); 250-hPa max wind 83.0 m/s at 46.75N 19.5W; z850 973-1636 m, z500 5114-5970 m, z250 9847-11018 m; z1000 down to -379 m inside the low"
+    used_by: [movie ch00_reading_weather_maps s47, s48, s49, s52, s53, s54, s74 (N1)]
+  GFS-FC:
+    catalogue: GFS
+    title: NOAA NCEP GFS 0.25 deg forecasts valid 2026-10-27T18 UTC from the runs of 22 Oct 18Z (+120 h), 24 Oct 18Z (+72 h, plus +0/+24/+48 h valid 24-26 Oct), 26 Oct 18Z (+24 h) and 27 Oct 18Z (+0 h); MSLP, 500-hPa height, 6-h precipitation; 10-80N 170W-10E
+    url: https://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_0p25deg/catalog.xml
+    raw_url: https://thredds.ucar.edu/thredds/ncss/grid/grib/NCEP/GFS/Global_0p25deg/GFS_Global_0p25deg_20261022_1800.grib2?var=Pressure_reduced_to_MSL_msl&north=80&south=10&west=-170&east=10&time=2026-10-27T18:00:00Z&accept=netcdf4
+    route: Unidata THREDDS NCSS (anonymous, server-side box + time), through fluidpy.data.fetch; 19 files 2026-10-29 05:20-05:36 UTC. The catalogue then held runs 22 Oct 00Z .. 29 Oct 00Z, so the 22 Oct 18Z run was fetched before it rolled off. The mixed-interval precipitation ignores the time selection, so every precipitation request returned the whole run (31-41 MB instead of the 3 MB the guard was given). The 6-h bucket ending at the valid time is selected in the reduction.
+    fetcher: fluidpy.data.gfs.fetch_forecast (F16) / forecast_set_product
+    login: none
+    licence: US Government work (NOAA/NCEP), public domain; redistributed unchanged by UCAR/Unidata
+    licence_url: https://www.weather.gov/disclaimer
+    citation: "NOAA NCEP Global Forecast System 0.25 deg forecasts via the Unidata THREDDS Data Server (UCAR); archive: NCEP GFS 0.25 Degree Global Forecast Grids Historical Archive, NCAR RDA, doi:10.5065/D65D8PWK"
+    attribution: NOAA NCEP GFS forecasts (public domain), via Unidata THREDDS (UCAR)
+    size_bytes: 193000000  # about 184 MB in 19 files (5 whole-run precipitation files of 31-41 MB; 14 single fields of 0.30-0.37 MB)
+    sha256_files:
+      gfs_fc_20261022_1800_f120_Geopotentialheightisobar_500hPa.nc: aa0d6751d88ad1a46cdb96fb0fe3ca608672319e6f318eab39c8e036a9870c37
+      gfs_fc_20261022_1800_f120_mslp.nc: 5f2d102e43584821937afcba38ac6cc97fefe7b5e92d7ee68b342d6832793780
+      gfs_fc_20261022_1800_f120_prcp.nc: b2692af6dad4ceb731089e4e74a77b6a14a774b2de5503ea58b3313c8438240d
+      gfs_fc_20261024_1800_f000_Geopotentialheightisobar_500hPa.nc: 19810808299bda3805fe2ad4d830bdabd12e87768a5e0924284e91cd3b6cda74
+      gfs_fc_20261024_1800_f000_mslp.nc: b821aae37d106683cf95f9f55b1c1a536606097c0e070273f29f6f8958842d18
+      gfs_fc_20261024_1800_f024_Geopotentialheightisobar_500hPa.nc: 2717665f3ae8a94cbc267525a28266d4c4f905bb18c0ef2abe4090a2d464cbf3
+      gfs_fc_20261024_1800_f024_mslp.nc: 2bc3f7062fc171a55e6f0736b7f90c6e0bb9d6d3ed86b990b0b94edbc99cb72a
+      gfs_fc_20261024_1800_f024_prcp.nc: ca80672dabff148befcbee8ab4b754fad8d634281bb02ea50c92501d3134f749
+      gfs_fc_20261024_1800_f048_Geopotentialheightisobar_500hPa.nc: 2aa2e1d4505cb34ca10df1018253e136284ce3fbd5a19fb0a37cd21463d53ac1
+      gfs_fc_20261024_1800_f048_mslp.nc: 812cf07837c8ad553ab52ad61216d1ddd7304dba51b07088ca143ec61e013b4e
+      gfs_fc_20261024_1800_f048_prcp.nc: be2d9baa1e520cd38d5cbad3d8f0bd568fc0a9f483c835f74e58782358be833a
+      gfs_fc_20261024_1800_f072_Geopotentialheightisobar_500hPa.nc: 5332e119c779ead879f145009b793092dbb226c44d7d6f9274a0963e3c1c4612
+      gfs_fc_20261024_1800_f072_mslp.nc: 530b744a0ebdd70040fa8b3070a6d8ef3c37dbb8d192a983e7365578c9774f52
+      gfs_fc_20261024_1800_f072_prcp.nc: e33200d3b1388f82c8173a81e5f78b016311b537459f8c1c780e7acf4367ed56
+      gfs_fc_20261026_1800_f024_Geopotentialheightisobar_500hPa.nc: 1f7e49e5bb74d4841d40ab4ab33e519b85c21fafcadcb70fa71a1102ef53dbf4
+      gfs_fc_20261026_1800_f024_mslp.nc: 8f0fb88b25fcc67dc824eaee045aa1f7fa124c45ee30128aa660809a933ba54c
+      gfs_fc_20261026_1800_f024_prcp.nc: 27afef76a481b52cde383b9a74924311ea9039ff3e774457df52e921425d6193
+      gfs_fc_20261027_1800_f000_Geopotentialheightisobar_500hPa.nc: 33ba6142ec4139327e8ec8be7a039a17f2f08b9bc42f092e636c2cf3b8ded92e
+      gfs_fc_20261027_1800_f000_mslp.nc: 907ce067c5da1c2224ba3844d5d024bdbba67693760a9847383ddf68ce3dddf5
+    sha256_derived: {gfs_fc_valid_2026-10-27T18.nc: 33e9fd420ed318db8ff1610cbe0ee8b1a1be3f7bebd46fbaa8ed5244c8d4498d, gfs_fc_valid_2026-10-27T18_0p5.nc: 343e5ff96bab8893b9915e89122a3dd66659dfb3c54c9ffe0845cfe8340b84e1}
+    variables: {msl: "PRMSL [Pa]", z500: "500-hPa geopotential height [gpm]", precip6h: "total precipitation in the 6 h ending at the valid time [kg m-2 = mm]; NaN at +0 h", init: "run time", valid: "valid time", fhour: "[h]"}
+    coordinates: server lat 80..10 (N->S), lon -170..10; product (case 7, lat S->N, lon -170..10), 0.25 deg on G:, 0.5 deg (stride 2) in the repo
+    subset: 7 cases (run x valid) in one box
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: false  # THREDDS keeps about 7 days; afterwards NCAR RDA ds084.1 or AWS noaa-gfs-bdp-pds (GRIB-2)
+    raw_files: [raw/GFS-FC/gfs_fc_20261022_1800_f120_mslp.nc, raw/GFS-FC/gfs_fc_20261022_1800_f120_Geopotentialheightisobar_500hPa.nc, raw/GFS-FC/gfs_fc_20261022_1800_f120_prcp.nc, "raw/GFS-FC/gfs_fc_20261024_1800_f0{00,24,48,72}_*.nc", "raw/GFS-FC/gfs_fc_20261026_1800_f024_*.nc", "raw/GFS-FC/gfs_fc_20261027_1800_f000_*.nc"]
+    derived_on_root: [derived/ch00/gfs_fc_valid_2026-10-27T18.nc]
+    derived_in_repo: [data/derived/ch00/gfs_fc_valid_2026-10-27T18_0p5.nc]
+    checks: "N Atlantic deepest low (35-70N, 80W-0) valid 27 Oct 18Z: analysis +0 h 960.6 hPa at 66.0N 12.0W; +24 h (26 Oct run) 959.9 hPa at 66.5N 10.75W (79 km, -0.7 hPa); +72 h (24 Oct run) 955.2 hPa at 63.0N 5.75W (448 km, -5.4 hPa); +120 h (22 Oct run) 951.4 hPa at 62.5N 8.0W (434 km, -9.2 hPa). Older forecasts put the low further south-east and deeper. 6-h precipitation maxima 174-281 mm sit in a model East Pacific tropical cyclone near 15N 104W; the 99.9th percentile is 27-34 mm"
+    used_by: [movie ch00_reading_weather_maps s10, s68, s69, s70, s71, s81 (N3)]
+  GFS-ANL-20261027T18-upper:
+    catalogue: GFS
+    title: NOAA NCEP GFS 0.25 deg analysis 2026-10-27T18 UTC, extra fields 1000-hPa height, 850-hPa T/u/v, 250-hPa u/v (+ 500-hPa height already on disk), box 10-80N 170W-10E; extends GFS-ANL-20261027-rwm (D6)
+    url: https://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_0p25deg_ana/catalog.xml
+    route: Unidata THREDDS NCSS (anonymous, server-side variable cut, global), through fluidpy.data.gfs.fetch_analysis; 3 files 2026-10-29 05:35-05:36 UTC (the cycle leaves THREDDS about 3 Nov 2026)
+    fetcher: fluidpy.data.gfs.fetch_analysis / fluidpy.data.movie_rwm.gfs_upper
+    login: none
+    licence: US Government work (NOAA/NCEP), public domain; redistributed unchanged by UCAR/Unidata
+    licence_url: https://www.weather.gov/disclaimer
+    citation: "NOAA NCEP Global Forecast System 0.25 deg analysis via the Unidata THREDDS Data Server (UCAR); archive: NCEP GFS 0.25 Degree Global Forecast Grids Historical Archive, NCAR RDA, doi:10.5065/D65D8PWK"
+    attribution: NOAA NCEP GFS analysis (public domain), via Unidata THREDDS (UCAR)
+    size_bytes: 11953509
+    sha256_files:
+      gfs_anl_20261027_1800_Geopotentialheightisobar_1000hPa.nc: f1552e5f8285fb7cbaca87f341d376df760fa0a7e0a99d8c3f38da66b0b0df3b
+      gfs_anl_20261027_1800_Temperatureisobaric-ucomponentofwindisobaric-vcomponentofwindisobaric_850hPa.nc: f68e080d155900b4342013cf21d929bee8f90effaa1b266d5d7813922d988f53
+      gfs_anl_20261027_1800_ucomponentofwindisobaric-vcomponentofwindisobaric_250hPa.nc: 046723a6a1ae418dd167b41b579cf7154dd3afb2d563d5c94c0d393b4eefd048
+    sha256_derived: {rwm_gfs_2026-10-27T18_upper.nc: 0d28503c19454a013a1fa374771b62c8454eccdc5fe67d2c08d8633e84d90990, rwm_gfs_2026-10-27T18_upper.bin: 9d6ae6193301e520b43c93e1eb777e6be95293eee48bf5c94aee5ac5dda4cc46, rwm_gfs_2026-10-27T18_upper.json: 5b771342a9b88055711576ef7fb897030830de096f9a169f1ede2ff1be411e08}
+    variables: {z1000: "[gpm]", z500: "[gpm]", t850: "[K]", u850: "[m s-1]", v850: "[m s-1]", u250: "[m s-1]", v250: "[m s-1]", thick: "z500 - z1000 [gpm]"}
+    coordinates: product lat 10..80 S->N, lon -170..10, 0.25 deg
+    subset: one cycle, 3 levels + thickness, chart box
+    fetch_date: "2026-10-29"
+    redistributable: yes
+    redownloadable: false  # THREDDS rolling window
+    raw_files: [raw/GFS-ANL/gfs_anl_20261027_1800_Geopotentialheightisobar_1000hPa.nc, raw/GFS-ANL/gfs_anl_20261027_1800_Temperatureisobaric-ucomponentofwindisobaric-vcomponentofwindisobaric_850hPa.nc, raw/GFS-ANL/gfs_anl_20261027_1800_ucomponentofwindisobaric-vcomponentofwindisobaric_250hPa.nc]
+    derived_on_root: [derived/ch00/rwm_gfs_2026-10-27T18_upper.nc]
+    derived_in_repo: [data/derived/ch00/rwm_gfs_2026-10-27T18_upper.bin, data/derived/ch00/rwm_gfs_2026-10-27T18_upper.json]
+    checks: "RM69: 1000-500 hPa thickness at La Grande CYAH (nearest point 53.75N 73.75W) 5255 m < 5350 m PASS (director estimate about 5250 m); 250-hPa max wind 66.4 m/s at 38.25N 53.75W (same as the planning read); t850 249.3-298.7 K"
+    used_by: [movie ch00_reading_weather_maps s54, s80 (N2)]
