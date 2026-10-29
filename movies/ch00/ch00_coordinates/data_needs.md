@@ -162,3 +162,65 @@ Mercator (`[Mercator](/mɜɹkˈAtəɹ/)`), Gerardus (`[Gerardus](/ʤəɹˈɑɹd�
 (exists), ERA5 (exists), Trappes (exists). Spoken letters to listen for: "r hat", "x hat prime", "C i j", "u v tangent phi",
 "d phi", "d lambda", "d theta" (letter names, not run together). The Earth's radius is never spoken as a lone "a" (the
 article problem); if a later edit needs it, add `"radius a ": "radius [A](/ˈA/) "` to the symbols block.
+
+## F. Data-scout results (2026-10-28)
+Products are on G: (`derived/ch00/`) and in the repo (`data/derived/ch00/`). Registry keys: `NCEP1-uv-daily` (+ `NCEP1-hgt-daily`),
+`ERA5-ARCO-ian2022-pl`, `NOAA-COOPS`, `ERA5-CDS-monthly-t2m`. Reports: `reports/data/<key>.md`. Sources:
+`research/ch00_coordinates_sources.md`. D5 was skipped.
+
+| Id | Product (repo) | Size |
+|---|---|---|
+| D1 | `ncep_r1_10hPa_20251101_20260317.nc` (z, u, v, u60; 137 days, 20-90 N) | 3.05 MB |
+| D2 | `era5_ian_2022-09-28T18_pl.nc` (u, v, w on 18 levels; ring-mean v_r, v_t, omega on (level, radius 50-500 km)) | 0.58 MB |
+| D3 | `coops_ian_surge_20220927_20220930.nc` (observed, predicted, residual; 3 stations, 6-min) | 0.06 MB |
+| D4 | `era5_t2m_anom_2026-09_1deg.nc` (Sep 2026 minus Sep 1991-2020) | 0.44 MB |
+
+**D1 (s35-s36): recommended day 2026-01-21.** NCEP R1 **ended on 2026-03-17**, so winter 2025-26 is its last.
+- 2026-01-21 is the strongest vortex of the winter: zonal-mean u at 60 N = 42.1 m/s. It is also strongly displaced.
+- Centre (refined): **72.89 N 44.26 E, over the Barents Sea, north of Russia**, 1902 km from the pole. Height at the centre 28 602 m ("about twenty eight and a half kilometres").
+- Zonal-mean height at 30 N: 30 721 m ("almost thirty one").
+- Ring at 2000 km, rms v_r / v_t: about the pole **1.88**, about the vortex centre **0.42** (geostrophic 1.76 -> 0.39). DC37 holds: the ratio drops.
+- Vortex edge (largest ring-mean v_t about the centre): 51.8 m/s at 2500 km. Strongest wind on the map 79 m/s.
+- **s36 rewording needed**: the centre is "almost seventy three degrees north, over the Barents Sea", not "almost seventy nine, over Greenland". About the pole the winds are more in-and-out than round.
+- Alternative closer to the current wording: 2026-01-05 (u60 41.9; centre 77.21 N 4.32 E, Greenland Sea, between Greenland and Svalbard; 28 386 m; z30 30 775 m; ratio 0.53 -> 0.24).
+- The DC36 method re-run on 6 Jan 2014 reproduces every planning number.
+- **March 2026 wind reversal** (safe wording): "in early March 2026, the winds round the Arctic at that height turned round".
+  - Zonal-mean u at 60 N, 10 hPa was negative 4-10 March 2026 (minimum -8.8 m/s on 6 March): the major-warming wind criterion (Charlton and Polvani 2007).
+  - R1 ends on 17 March, so midwinter vs final warming cannot be decided.
+  - There is no primary text, only secondary reports. Do not claim a split.
+
+**D2 (s14) DC14: PASS.** Ring-mean v_r at 100 / 200 km:
+
+| Level | 1000 hPa | 975 hPa | 850 hPa | 200 hPa | 150 hPa |
+|---|---|---|---|---|---|
+| v_r (m/s) | -6.4 / -4.8 | -9.2 / -6.1 | -0.8 / -0.4 (marginal) | +2.2 / +4.2 | +3.4 / +2.5 |
+
+- The inflow is **near the sea** (1000-925 hPa). The outflow is strongest at **200-125 hPa**, about 12-15 km up.
+- Ascent in the eyewall ring: omega -2.3 Pa/s at 50 km, 850-800 hPa.
+- ERA5 centre 26.454 N 82.391 W, 979.6 hPa (smoothed; best track 938 hPa).
+
+**D3 (s40) DC44: PASS.**
+
+| Station | Residual | Observed | Notes |
+|---|---|---|---|
+| 8726520 St. Petersburg | min **-1.755 m** at 23:00 UTC 28 Sep | -1.889 m relative to MHHW | Tampa Bay drained |
+| 8725520 Fort Myers | max **+2.209 m** at 22:18 UTC | 2.212 m above MHHW = 7.26 ft | equals the NHC TCR value; gauge survived |
+| 8725110 Naples | +1.91 m at 17:06 UTC | — | station destroyed afterwards |
+
+- Calm residuals on 27 Sep (00-12 UTC): +0.20 to +0.28 m.
+- **Gauge-location caution**: 8725520 is **downtown Fort Myers on the Caloosahatchee River, not Fort Myers Beach**.
+  - The spoken "ten to fifteen feet above the ground" at Fort Myers Beach is VERIFIED against the NHC TCR (USGS sensors and high-water marks).
+  - Do not label the gauge curve "Fort Myers Beach".
+
+**D4 (s34).** September 2026, base 1991-2020 (30 years):
+- Global-mean anomaly +0.823 K.
+- 82.0 % of the Earth's area is warmer, but warm anomalies cover only 68.7 % of a Mercator map (|lat| <= 85). This is the area-honesty point in numbers (not spoken).
+
+**Source check** (details in `research/ch00_coordinates_sources.md`):
+- 10-15 ft AGL: VERIFIED (exact TCR quote). 135 kt at 18 UTC: VERIFIED (TCR best track; 938 mb). Landfall at Cayo Costa 19:05 UTC, 130 kt: VERIFIED.
+- Mercator 1569, Equal Earth (Savric et al. 2019, IJGIS 33, 454-465), the nautical mile (1852 m), the ERA5 0.25-degree delivery grid (model about 31 km), and the vortex forming in the polar night (Waugh et al. 2017): all VERIFIED.
+
+## Verifier notes (orchestrator, 2026-10-28; reports/ch00_coordinates_verification.md)
+- DC22: "0.917 of a hemisphere north of the Arctic circle" holds only for 66.5°; with the 2023 Arctic circle (66.5634°) it is 0.9175 → say "about 0.92" or state 66.5°.
+- F4 wording: Ciarán's hourly steps are 23.7–109.4 km per step (not km/h).
+- Ciarán track minimum 953.65 hPa vs Met Office 953.3 hPa at Plymouth (secondary source); track passes within 50 km of Plymouth; 24-h fall 32.2 hPa.
