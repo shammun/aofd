@@ -4941,3 +4941,165 @@ the touched scenes and run review 2 with one frame per second through s03, s27b,
 
 Disk: C: 55 GB free at the start and the end. G: 512 GB free at the end (515 GB earlier in the day). Review frames are on G:
 (not committed).
+
+---
+
+# ch00_vectors_index_notation — review 3 (fresh eyes, after fix loop 2)                    2026-10-29
+
+**Movie.** `movies/out/ch00/ch00_vectors_index_notation/1080.mp4` (commit 07d1910 + the 13:11 render): 2115.20 s (35:15.2),
+72.38 MB, 530 cues. The narration ends at 2112.70 s, then a 2.5-s hold. This is a read-only review: the only file changed is this section.
+
+**Frames.** 491 files, 224 MB, in `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_vectors_index_notation/review3/`:
+- `sent/`: 382 full-size PNGs, one 0.4 s before the end of every sentence, plus every scene start and the end hold.
+- `sheets/`: 43 labelled 3 × 3 sheets, every tile at 640 px (the legibility test).
+- `s12d/`: 13 full frames through 11:28–12:43, two 3× zooms of the sea point, and a 14-frame strip of the right-hand reveals.
+- `chk/`: 30 full frames and crops, at every review-2 item.
+- `audio/`: the splice comparison clips.
+
+**qa.json (not re-run): 13/13 PASS.**
+- duration, size, codec;
+- black 0, frozen 205 (all narrated), content;
+- **halves PASS** (the s21 WARN is gone);
+- loudness −16.0 LUFS / −3.5 dBTP, flashes 0/s;
+- captions 530 = script, subtitles 530 = VTT;
+- physics 70 hashes, equations 35.
+- `vscan.log`: 2115 frames, 0 with pixels in the caption band or at the edges.
+
+## N-M1 (s12d), checked by hand
+- **Numbers** (`vi.json → storm.sea_pt` = 45.0 N, 2.75 W):
+  - u_g = (17.823, 21.015) → (17.8, 21.0); |u_g| = 27.56 m/s, heading 40.3° (towards NE).
+  - u10 = (−2.124, 13.408) → (−2.1, 13.4); |u10| = 13.57 m/s, heading −9.0° (towards N by W).
+  - u_ag = u10 − u_g = (−19.947, −7.607) → (−19.9, −7.6). The sum on screen is right.
+  - The real wind is turned 49.3° to the left of u_g, which is towards the low (NH). The builder's "about 45–49°" is right.
+- **Isobars** (`storm.isobars["2023-11-01T18"]`, my own segment bearings):
+  - The 1000-hPa isobar passes 8 km from the point. Within 150 km its segments head 31–41° (mean ≈ 37°).
+  - The 996 and 1004 isobars run at 29–56°. All three are straight and parallel here, and the low lies to the NW.
+  - So u_g (40.3°) lies along the isobar within about 3°. The builder's on-screen mean of 1.9° is consistent with that.
+  - The CHECK VI45 text claims a "≤ 8°" spread. I measure 10° over ±150 km (cosmetic, below).
+- **On screen** (3× zoom at 12:35.8):
+  - The orange arrow lies on the 1000-hPa line from tail to head. It is 194 px long (7 px per m/s × 27.6 = 193) at a screen bearing of 39°.
+  - The teal arrow is 94 px (95 expected) at −8°. It visibly crosses towards the next, lower isobar on the low side.
+  - The warm-white ageostrophic arrow runs from tip to tip at 249° (true 249.1°).
+  - The twelve faint neighbours show the same construction.
+  - The picture now says what the words say. **N-M1 is fixed.**
+- **New narration vs the picture:**
+  - S6 "Over the Bay of Biscay, south of Brittany": the point is in the Bay, about 300 km south of the labelled Brest. Correct.
+  - S7 "minus two point one towards the east, so a little west": the teal arrow leans slightly west. Correct.
+  - S10 "large": 19.9 and 7.6 against 13.4. Correct.
+  - S11 "turns it across the isobars, towards the low pressure": correct for the direction (see the advisory below).
+  - **One timing fault (S3-1).** The three tuples appear at their sentence starts, not on their numbers:
+    - "(17.8, 21.0)" at 11:56.9; spoken at about 12:00.5, so 3.6 s early.
+    - "(−2.1, 13.4)" at 12:06.8; spoken at about 12:09.2, so 2.4 s early.
+    - "(−19.9, −7.6)" at 12:29.4; spoken at about 12:32.2, so 2.8 s early.
+
+## Audio re-splice, evidence reviewed
+- **`splice_loud.json`.**
+  - All 20 spliced sentences are within 0.83 LU (integrated) of their neighbours. The worst is s12d S10 at −0.83.
+  - Short-term dS is −1.9…+1.4 LU.
+  - One row is flagged `ok: false`: s14 S4 at 18:55.3, dS −1.9 LU. I measured the movie's short-term loudness through that sentence with ebur128: −16.7…−17.6 LUFS while speaking, and no step at either edge. Accept.
+- **`stt.json`.** 20/20 letter checks pass:
+  - "bold you", "U-bar", "U-prime", "Q1", "velocity sea", "d sub i", "small t";
+  - "seventeen point eight", "minus two point one", "minus nineteen point nine", "towards the low".
+  - The other differences are homophones ("blue", "the C", "breast").
+- **The final MP4 carries this mix.** I correlated 8-s windows of the movie with `v3/mix/narration_music.wav` at 716, 749 and 1135 s:
+  - r = 1.000 / 0.999 / 1.000;
+  - lag 0 ms;
+  - gain −0.02…−0.03 dB.
+
+## Review-2 items — status
+| item | status | evidence (new times) |
+|---|---|---|
+| N-M1 s12d geostrophic arrow crosses isobars | **fixed** | 11:48–12:43; numbers and angles above |
+| S-new-1 s21 parcel layout | **fixed** | 24:20: the right half carries "air parcel · moves with the wind" from the cross-fade (halves PASS). The S4 line u_j ∂T/∂x_j stays ≥ 84 px, with the expansion below (24:54). "wind" and "north", "u₁" and "east", and "u₃ ≈ 0.1 m/s" are apart. The box clears Brest (24:36). Residual: "up" sits on the box edge (C) |
+| S-new-2 s23 box on arrowhead, box out of field | **fixed** | 26:18–26:57 |
+| S-new-3 s09 link on "w", crossing "clouds" | **fixed** | 5:13–5:27: the head ends beside "w" |
+| S-new-4 s12h links through "ū: average u′: anomaly" | **fixed** | 16:41–16:55: the links run below the keyword line to "(−3.7)" and "(−5.0)". Residual: they cross each other and the map's lower row (C) |
+| S-new-5 s12i "û − c", "−c" on the arrowheads | **fixed** | 17:28–17:49 |
+| S-new-6 s11 link through "along coast", "north" on the edge | **fixed** | 7:05–7:18 |
+| S-new-7 s12c label collisions | **fixed** | 10:47–11:26. Residual: "isobars" sits on the top isobar (C) |
+| S-new-8 s31 ticks, keyword gap | **fixed** | The bar spans the map (−213…+161 km from Brest, `ColourBar lo/hi` from the crop), and the ticks sit at their true positions (0 at x 693, label at 686). "a map of x₁" is about 100 px above "−200" |
+| S-new-9 s33 globe without a colour bar | **fixed** | 33:26: "air temperature, 2 m up · °C" |
+| S-new-10 s30 result line | **fixed** | 31:48: gold δ_ij u_j = u_i; keyword "swaps j for i" |
+| S-new-11 source lines on data-free frames | **fixed** (one new mismatch) | No source line on s10 S1–S6, s15 S1–S4, s33 S4/S5/S8 or s34 S1. New: s33 S2 credits ERA5 for the SYNOP 9.3 m/s (S3-3) |
+| S-new-12 s10 "6" near the source band | **fixed** | 5:38: ends at y ≈ 805; no source line |
+| S-new-13 s27 spoken numbers | **fixed** | 29:04: "2.4 °C (17 UTC)", "8.2 °C (19 UTC)" |
+| S-new-14 s08 / s12b long lines | **fixed** | 4:42 ends at x ≈ 1805. 10:00: the \|p + q\| line is on two lines and ends at x ≈ 1700 |
+| C s04 arc through "Brest" | fixed | 2:18 |
+| C s07 "e₁" touches "6" | fixed | 3:42 (crop) |
+| C s12a colour bar gone in S13 | fixed | 9:01 |
+| C s12g "m s⁻¹" | fixed | 15:27: "m/s" |
+| C s15 "11.5" link crosses "e along the coast" | moved, not fixed | The link now runs through the "·" of "u · e" (S3-2) |
+| C s20 grad T over "Brest" | fixed | 24:09 |
+| C s22/s23 pixel blocks | fixed | 25:15–26:57: smooth |
+| C s34 overlapping discs | open | 34:32–34:46 |
+| C s35 end-card gaps | fixed | 35:12 |
+
+**Count.**
+- Must: 1/1 fixed.
+- Should: 14/14 fixed (S-new-11 with one new mismatch).
+- Cosmetic: 7/9 fixed, 1 moved, 1 open.
+
+## Physics and numbers re-checked (unchanged scenes, sampled)
+- s12c: Coriolis (6, −8) is 90° to the right of the wind (8, 6), as it should be in the NH, and is called "apparent".
+- s12g: the wind veers going up, which means warm advection.
+- s24/s25: grad T points SW, towards the warm air.
+- s26: −3.7 → +3.7 K/h, with the sign flip written.
+- s27: 2.9 K/h.
+- s31: ≈ 120 km north in 1 h.
+- El Niño: (−3.7) − (−5.0) = +1.3 m/s east.
+- Index and δ_ij signs: s14, s17 and s29–s32 are all right.
+- No sign or number errors.
+
+## MUST fix
+None.
+
+## SHOULD fix
+- **S3-1 · s12d 11:56.9–12:36 (house rule: reveals on their words).**
+  - Problem: each tuple appears at its sentence start, 2.4–3.6 s before its numbers are spoken. The first place named ("Bay of Biscay") has no label.
+  - Fix (TSX only, `S12D`):
+    - show `(17.8, 21.0)` at `AT(k, 5, "seventeen point eight")`;
+    - show `(−2.1, 13.4)` at `AT(k, 6, "minus two point one")`;
+    - show `(−19.9, −7.6)` and its "m/s" at `AT(k, 9, "minus nineteen")`;
+    - add a small "Bay of Biscay" map label beside the gold sea-point dot at `SS(k, 5)`.
+- **S3-2 · s15 20:36–20:52 (S9–S11).**
+  - Problem: the gold link from the map's "11.5" to "≈ 11.5 m/s" passes through the "·" of "u · e". At 640 px this hides the operator being taught.
+  - Fix: route the curve below the "u · e = …" line and into "≈ 11.5" from the left at its baseline, or end it at "11.5" from below.
+- **S3-3 · s33 S2 33:27–33:36 (attribution).**
+  - Problem: the "components · length = 9.3 m/s" picture is the Brest-Guipavas SYNOP surface wind, but the source line reads "Data: ERA5 (Copernicus C3S) · 1 Nov 2023, 18 UTC · Brest".
+  - Fix: give the recap a per-beat source. S2 gets "Data: Brest-Guipavas SYNOP (NOAA ISD) · 1 Nov 2023, 18 UTC". S1, S3, S6 and S7 keep ERA5.
+- **S3-4 · s21 storyboard exaggeration (documentation only).**
+  - Problem: the u₃ leg (0.1 m/s) is drawn about 50 px long, against about 260 px for u₂ (33.5 m/s). That is about ×60 beyond the stated "×2000 in distance".
+  - Fix: add "vertical leg u₃ drawn ≈ ×60 against the horizontal legs (true size < 1 px)" to `s21.exaggeration`. Keep the screen badge-free.
+
+## COSMETIC / advisory
+- **s12d 12:35–12:43.** "m/s" sits only under the ageostrophic tuple. Put one "m/s" after the geostrophic tuple, or drop it.
+- **s12d physics advisory** (no re-speak needed).
+  - A 49° crossing over the sea is more than surface friction alone usually gives (typically 10–30°). Cyclonic curvature and the deepening storm also make the flow sub-geostrophic.
+  - Add this to `honesty_notes`. If S11 is ever re-spoken: "Friction with the sea, and the storm's rapid changes, …".
+- **Storyboard CHECK VI45 text.** Change "isobar bearing spread ≤ 8 deg over ±150 km" to the measured 10° (31–41° on the 1000-hPa isobar), or narrow it to ±100 km.
+- **s12h 16:41–16:55.** The two lower links and the "+1.3" link cross each other and the map's lower row.
+- **s12c 10:14–11:26.** "isobars" sits on the top isobar line.
+- **s21 24:23–24:36.** "up" sits on the box edge.
+- **s12i 17:21–17:49.** A track dot hides under the "L".
+- **s34 34:32–34:46.** The ε-cloud discs overlap.
+- **Captions under 1 s.** 14:11.9 "On the map,", 28:36.1 "Together," and 29:32.6 "eight o'clock.". Merge each with the next cue.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_vectors_index_notation (review 3) | 2115.20 s (35:15.2); narration ends 2112.70 s, then a 2.5-s hold | 72.38 MB (budget 120, hard 160) | 13/13 PASS (halves PASS; caption band 0/2115) | PASS: s12d u_g along the 1000-hPa isobar (≈ 3°), real wind 49° towards the low, sum exact; NH right-deflection, "apparent" Coriolis, veering → warm advection, grad T towards warm air | PASS: 35 present, no KaTeX errors | PASS with Shoulds: one link through "u · e" (S3-2) | PASS with a Should: s12d tuples 2.4–3.6 s early (S3-1) | PASS: 530 = script, ≤ 42 chars, ≤ 2 lines, max 16.71 cps, 3 cues < 1 s | PASS: 0 flashes, perceptual maps | n/a (house) | **PASS** → `qa_pass` |
+
+## Overall: PASS (ch00_vectors_index_notation review 3 — 0 Must, 4 Should, 9 Cosmetic/advisory)
+- **Fix loop 2 fixed the one Must.**
+  - The s12d sea point at 45.0 N 2.75 W shows u_g on a straight isobar and the real wind crossing towards the low.
+  - Every number checks by hand, and the narration matches the picture.
+- **The rest of review 2 is done.** All 14 Shoulds are fixed. The audio splices are level and correctly spoken, and the movie carries that mix.
+- **The four new Shoulds are small.**
+  - S3-1, S3-2 and S3-3 are TSX-only and need no TTS run. Re-render 11:56–12:43, 20:36–20:52 and 33:27–33:36.
+  - S3-4 is storyboard text.
+  - None blocks `qa_pass`. Apply them with the next touch, or before publishing if the user prefers.
+- **Next:** the user watches the movie before `/approve-movie`, including a listen at 12:00–12:43 (the new s12d sentences).
+
+**Disk.**
+- C: 55 GB free at the start and at the end.
+- G: 512 GB free at the start, 513 GB at the end.
+- This review wrote 224 MB (491 files) to G: under `…/review3/` and nothing to C:.
