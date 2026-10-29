@@ -5292,3 +5292,143 @@ None.
 - C: 55 GB free at the start and at the end.
 - G: 512 GB free at the start and at the end.
 - This review wrote 156 MB (502 files) to G: under `…/review1/` and nothing to C:.
+
+---
+
+# cross product v5 / Part 2 — review 3 (fresh eyes, after fix loop 2, commit 11ee76f)                2026-10-29
+
+Movies reviewed (read-only; nothing edited; Part 1 is final and not reviewed):
+- **v5 full** `movies/out/ch00/ch00_cross_product_why/v5_1080.mp4`: 4154.60 s (1:09:14.6), 153,568,451 bytes = the QA'd file `cf2/final_v5/1080.mp4`. Captions `v5_en.vtt`.
+- **Part 2** `movies/out/ch00/ch00_cross_product_uses/1080.mp4`: 2456.75 s (40:56.8), 115.49 MB.
+
+**Frames.** 291 PNG + 54 tiles (122 MB) under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_v5/review3/`:
+- `v5/<scene>/`: at least one frame per sentence in s22w, s23, s26a1, s26e, s27b, s27c, s27d, s27e, s27f, s27g, s37 S5–S8 and s47 S8–S10. There are extra frames around the s22w link and the s37 cross-fade.
+- `p2/`: s37 and s47. Joins: title and hook 00:00.5–00:20, the s01d → s23 splice 02:55–03:10, the 10-frame Part-2 seams at 04:05.6, 20:05.5, 22:48.5, 31:04.2 and 31:46.7, and the end 40:20–40:56.5.
+- `p2diff/`: 41 v5/Part-2 frame pairs at the shared scenes.
+
+**How Part 2 was built.** `cf/seg_p2.json` takes s26e and s27c straight from the v5 fix-3 pieces (`piecesf3_v5/p072686`, `p081697`). So "p2: freshf3 0" in `cf2/final.log` does not mean Part 2 missed them. The pixel comparison confirms it:
+- Mean |Δ| is 0.10–0.65/255 at 39 of the 41 shared times: s23, s26a1, s26e, s27b–g, s37 S7 and s37 S8.
+- Mean |Δ| is 7.61 at 59:49.5 and 1.39 at 59:51. Both fall in the s37 cross-fade, half a frame apart, and both frames look right.
+- Part 2's own s47 recap (39:48–40:06) was looked at on its own.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| v5 (review 3) | 4154.60 s; narration ends 4152.10 s | 153.57 MB (**size WARN**, accepted; hard cap 160) | 12 PASS + size WARN: duration, codec (H.264 High, yuv420p, AAC, faststart), black 0, frozen 383 (all narrated), content, **halves PASS** (was WARN), −16.0 LUFS / −1.9 dBTP, flashes 0/s, captions 1005 = script, subtitles 1005 = VTT, physics 151 hashes, equations 146 | PASS (checked by hand below) | PASS: "p = q = Ω, s = r" (M1 closed); no KaTeX errors | PASS: M3 and M4 closed; S3–S9 at legible sizes | PASS: M2 closed | PASS: 1005 cues, max line 42, ≤ 2 lines, max 16.78 cps, in order, last cue ends 4151.8 s (inside the audio); 3 cues < 1 s (C9) | PASS: 0 flashes; colour families unchanged | n/a (house style: none) | **PASS** → `qa_pass` |
+| Part 2 (review 3) | 2456.75 s; narration ends 2454.25 s | 115.49 MB | 13/13 PASS (halves PASS). Physics 78, equations 79, captions 603, −16.0 LUFS / −3.4 dBTP | PASS | PASS | PASS | PASS | PASS: 603 cues, 42 chars, ≤ 2 lines, max 16.91 cps, last cue ends 2453.95 s; 2 cues < 1 s | PASS | n/a | **PASS** → `qa_pass` |
+
+## Review-2 items — status (v5 · Part 2 times)
+| item | status | evidence |
+|---|---|---|
+| M1 s27b mapping read as "Ω · s" | **fixed** | 44:22–44:40 · 16:15–16:33: gold "p = q = Ω, s = r" on its own row (y ≈ 887), no "·" between symbols, shown on "Here p and q are both Omega, and s is r" |
+| M2 s27c empty maths zone | **fixed** | 45:23.5 · 17:16: "not at right angles" fades in on S1 and stays to 45:30. "r =" is shown at 45:31, "r = r_along" at 45:33 (on "along Earth's axis") and "+ r⊥" at 45:35 (on "straight out"). The qa `halves` gate now PASSes in both movies |
+| M3 s37 labels over the source line | **fixed** | 59:49.4–59:53 · 31:42.4–31:46: "f > 0 · anticlockwise" and "f < 0 · clockwise" sit at y 760–805, with the source at y 840. From the first thumbnail frame the source line credits both storms: "Ian: GOES-16 + NOAA HRRR, 28 Sep 2022, 18 UTC · Idai: NASA VIIRS + ERA5 (Copernicus C3S), 14 Mar 2019, 12 UTC" |
+| M4 s22w gold rectangles | **fixed** | 29:19–30:15: no frames or boxes. The active picture is at full opacity and the others are dimmed. Gold pointers run from the keywords: 29:27 to the hinge and the turn, 29:36 to both F arrows, 29:59 τ = r × F to the bolt |
+| S1 ×50/×100 documentation | **fixed** | The `storyboard.yaml` s27e/s27f rows (5158, 5200, 5241, 5303) and the manifest note both say "×100 against g*" |
+| S2 s47 recap picture | **fixed** | 68:10.5–68:18 · 39:48–39:57: the pin sits on the ×50 outline, g lies along the normal (checked below), and Ω²r⊥ is a short sketch (22 % of g) |
+| S3 s27c "leans towards the equator" | **fixed** | 46:17–46:24 · 18:09–18:16: the camera zooms to the pin. Up, north (newly added) and the centrifugal arrow are ≈ 140 px, and the 45° arc lies between up and the centrifugal arrow |
+| S4 s27f sideways part | **fixed** | 48:27–48:59 · 20:20–20:52: a ×3 magnifier. The rose arrow is ≈ 99 px, with "sideways part" outside the lens. The gold link starts at the arrowhead |
+| S5 s27e icons | **fixed** | 47:51–47:56: code-drawn icons of 110–130 px (string + bob, a scale with a dial, a ball with a drop trail), each labelled on its word. s27g has no icons now, only keywords |
+| S6 s26e miniature | **fixed** | 41:02–41:13 · 12:55–13:06: the disc is zoomed. Ω × u is ≈ 120 px and the two Ω × r arrows are ≈ 170 and 80 px |
+| S7 s26a1 collisions | **fixed, with the deviation (agreed, below)** | 37:36–38:30 · 9:29–10:23: the "B" label is right of the arrow and "Ω" is below the hub, so they no longer touch. "Ω × B" sits beside the middle of its arrow, clear of the dashed sum (38:09). The teal stub is labelled "rider's change" |
+| S8 s26a1 rule layout | **fixed** | 38:24–38:30: about 40 px separate the "outside watcher" brace from line 2. The duplicate "rider" brace is gone; only "carried round" remains |
+| S9 s23 map labels | **fixed** | 31:50–32:12 · 3:43–4:05: the labels have a dark halo and sit below their arrows inside the map. "−k × u = (5, 0, 0)" ends at x ≈ 915, inside the map edge at 958 |
+| S10 size | accepted | 153.57 MB WARN < 160 MB |
+| C1 "4\|5°" | fixed | The "45°" label is hidden during the split (45:31–45:39); the arc stays |
+| C2 s27b link / rider glyph | partly | The link now starts at the 2.5-m bracket (45:10). The rider glyph at 45:21 is still ≈ 50 px |
+| C3 s27d "centrifugal ≈ 0.034" | open | 47:08–47:12: the label still sits beside the g bar, with no unit |
+| C4 s27g links crossing | fixed | 49:49 |
+| C5 s27g radius labels | fixed | 50:26–50:37: the labels are inside the ellipse |
+| C6 brace numbering | open | 41:59 reads ②, ①, ③; 42:27 reads ①, ②, ③ |
+| C7 P2 s01d label on the border | fixed | 02:59.5: about 20 px above the grid border |
+| C8 P2 s00 source line | open | 00:12: still ≈ 20 px under "uses it" |
+| C9 cues < 1 s | open | v5: 3; P2: 2 (narration unchanged, so the same cues) |
+| C10 v5 collisions | open | 15:25 "(3, 0, 0)" sits on the teal arrowhead; 24:35 the r tag sits on F's tail |
+
+## The deviation: B's tail stays on the hub (S7) — **the right call**
+- The rule (dB/dt)_out = (dB/dt)_rider + Ω × B is about the rate of change of a vector, so it holds wherever the arrow is drawn.
+- But the narration says "the tip moves at Omega cross B" (37:53.65–37:59.45).
+  - The tip is a point. Its velocity is Ω × (position of the tip).
+  - That equals Ω × B only when the tail is the fixed hub.
+  - With the tail at (1.0, 0.4) m, the tip would move at Ω × (tail + B), and the spoken sentence would be false on screen.
+- With the tail on the hub, "just as Earth's ground moves at Ω × r" (the inset at 37:58) is an exact parallel. So is "B = r" at 38:26.
+- The collision behind S7 was solved by moving the labels instead (37:36 and 38:09 are clean). So the deviation costs nothing.
+- Recommendation: record it in `storyboard.yaml` s26a1 ("B drawn from the hub so that its tip moves at Ω × B"), so the storyboard and the picture agree.
+
+## New pictures: physics honesty (measured on full-resolution frames)
+- **g along the normal of the flattened outline.**
+  - s27f "real Earth" (49:10–49:31):
+    - The ellipse semi-axes are 205 × 168 px (ratio 0.82; flattening ≈ ×54, documented as "×50, axis ratio 0.83").
+    - The pin sits at (128, 129) px from the centre, on the outline ((x/a)² + (y/b)² = 0.98).
+    - The outline normal there is at 56.3°. g is drawn at 55.8° and "up" at 55.3°.
+    - Extended, g crosses the axis 61 px below the centre, on the equator side, not at the centre. That is correct.
+    - The geodetic − geocentric gap is drawn as 11°, against 0.19° × 54 ≈ 10°.
+  - s47 recap (68:10–68:28 · 39:48–39:57): the ellipse is 157 × 130 px and the pin sits on the outline (0.98). The normal is at 56.1° and g is drawn at 55.7°. PASS.
+- **×100 centrifugal arrows**, against the true ratio Ω²a cos 45° / g ≈ 0.0240 / 9.83 = 0.00244.
+  - s27e head-to-tail (47:40–48:11): g* is 353 px and the centrifugal arrow 81 px, a ratio of 0.229, i.e. ×94.
+  - s27f round Earth (48:24–49:31): g* is 197 px and the centrifugal arrow 50 px, i.e. ×103.
+  - s47 sketch: 28/130, i.e. ×88.
+  - All agree with the storyboard and manifest "×100 against g*".
+  - Every centrifugal arrow points straight away from the axis, and the sum g tilts towards the equator.
+- **The magnifier does not misstate sizes** (s27f, 48:27–49:00).
+  - The surface arc in the lens has a radius of curvature of 602 px, which is 3.0 × the 200-px main circle. So it is exactly the documented "×3 magnifier, same ×100 picture".
+  - The angle between g and g* is the same in the lens as in the main panel (57.6° against 45°). The lens only enlarges; it does not stretch angles.
+  - The rose sideways arrow is 99 px. The prediction is 3 × (50 px × sin 45°) = 106 px.
+  - The readout "sideways ≈ 0.017 m/s²" = Ω²a cos φ sin φ = 0.0169. "Coriolis ≤ 2Ω × 10 ≈ 0.0015", so "> 10 ×" (ratio 11.6) is honest.
+- **The other new pictures.**
+  - s27c zoom (46:17–46:24): up is radial and north is tangent towards the pole. The centrifugal arrow is horizontal and away from the axis, with the 45° arc between up and centrifugal (= φ). Correct.
+  - s26e zoom (41:02–41:13): the disc turns anticlockwise. For u pointing NNE, Ω × u points left and slightly up. Ω × r at both ball positions is ⊥ r, turned anticlockwise. The change between them points along Ω × u. Correct.
+  - s26a1 (38:09): with B up-left, Ω × B points down-left. The dashed sum = teal stub + violet arrow. Correct.
+  - s27b (44:47–45:15): Ω · r = 0 is crossed out, so −Ω × (Ω × r) = Ω²r, pointing outward. 0.5² × 2.5 = 0.625 m/s², and 2π/0.5 = 12.6 s.
+  - s27c: Ω(Ω·r) = Ω²r_along; Ω²r − Ω²r_along = Ω²r⊥; |r⊥| = a cos φ. Correct.
+  - s27d: 5.32 × 10⁻⁹ × 6 371 000 = 0.0339 and × 4 505 000 = 0.0240. Correct.
+  - s37 (59:38–60:00): Ian has f > 0 and turns anticlockwise; Idai has f < 0 and turns clockwise. The r × u arrows go the right way round both storms.
+
+## MUST fix
+None.
+
+## SHOULD fix
+1. **R3-S1 · v5 59:49.4–59:56 (s37 S7–S8) and 68:18–68:28 (s47) · P2 31:42.4–31:49 and 39:57–40:06. The Ian thumbnail shows a hard-edged pale rectangle.**
+   - What is wrong: the bright cloud-overlay tile ends in a soft-edged pale rectangle in the top centre of the Ian image (x ≈ 400–800, y ≈ 200–300 at 59:51). On a satellite picture it reads as an artefact.
+   - It is not new in this loop (the same pieces as review 2), and no physics depends on it.
+   - Fix: feather the overlay mask (a radial alpha of ≥ 120 px), or crop the thumbnail to the storm so that the tile edge falls outside the frame. TSX only.
+2. **R3-S2 · storyboard s26a1. Record the S7 deviation.**
+   - Fix: write "B is drawn from the hub so that its tip moves at Ω × B" in place of "B at (1.0, 0.4) m". Text only; no re-render.
+
+## COSMETIC (optional)
+- **R3-C1 · 29:29.5–29:31 (s22w).** The gold link from 29:27 retracts through the dimmed "u" label just as "or a spin arrow, like Earth's spin, Omega" is spoken, so no link points at Ω. Fix: fade that link out instead of retracting it, or point it from "spin arrow Ω" to the Ω arrow.
+- **R3-C2 · 44:43–44:53 (s27b).** The side-view r arrowhead touches the disc rim (x ≈ 785). Fix: move the inset 30 px right.
+- **R3-C3 · 37:58–38:30 (s26a1).** The "B" letter sits on B's own arrowhead. Fix: offset it 20 px along the perpendicular.
+- **R3-C4 · 45:31–45:33 (s27c).** The gold r⊥ leg is drawn about 2.8 s before "straight out from the axis" (45:33.8). It is acceptable as "split into two parts". Fix: draw it at 45:33.8.
+- **Open from review 2:**
+  - C2 rider glyph ≈ 50 px (45:21);
+  - C3 (47:08–47:12): put "centrifugal ≈ 0.034 m/s²" at the sliver;
+  - C6 (41:59): number the braces ①, ②, ③ in the order of 42:27;
+  - C8 (P2 00:12): move the source line 20 px down;
+  - C9: merge the five < 1-s cues;
+  - C10 (15:25, 24:35).
+
+## House-style conformance
+- **Conforms:**
+  - no boxes, cards or badges (M4 closed);
+  - keywords only;
+  - goal before calculation ("To see which way it points", "How big is it on Earth?", "why don't weather equations have a centrifugal term?");
+  - reveals on their words (M1, M2, S3, S5 timings above);
+  - gold picture-to-number links: 2.5 m, the sideways arrow → 0.017, the poles and equator → g values;
+  - colours: Coriolis violet, g/g* brown, centrifugal slate, sideways/negative rose, the rider teal;
+  - source lines on the Blue Marble, VIIRS/GOES/ERA5/HRRR and WGS 84 frames only (not on the SVG cross-sections);
+  - text ≥ 44 px except the source lines and the s23 axis words, as before;
+  - no empty half > 3 s (qa `halves` PASS in both movies);
+  - the correct end card for each movie (Part 2: "last video" tile, notebook lines).
+- **Departures left:** R3-S1 (the visual artefact) and the cosmetics above. None is one that a viewer would read as wrong.
+
+## Overall
+- **v5: PASS → `qa_pass`.** 0 Must, 2 Should (R3-S1 visual, R3-S2 storyboard text), 4 new cosmetic items plus 6 still open from review 2.
+  - Every review-2 Must (M1–M4) and Should (S1–S9) is fixed at its timestamp; S10 is accepted.
+  - qa is 12 PASS + the accepted size WARN; `halves` now PASSes.
+  - The S7 deviation is the right call.
+- **Part 2: PASS → `qa_pass`.**
+  - It carries the same fixes, shown by the pixel identity at 39 shared times and by the frames looked at in s37, s47, the joins and the end card.
+  - qa is 13/13 PASS. The same R3-S1 thumbnail artefact appears at 31:42–31:49 and 39:57–40:06.
+- The user watches both before `/approve-movie`. R3-S1 can be folded into any later re-render; it does not block.
+
+Disk: at the start, C: 53 GB free and G: 506 GB free; at the end, C: 52 GB free and G: 506 GB free. Review frames: 122 MB (291 PNG + 54 tiles) on G:, not committed.

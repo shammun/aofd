@@ -1624,7 +1624,7 @@ scenes:
 
     S1: the disc turns; keyword ''one rule'' (54 px) at (1100, 140).
 
-    S2: an arrow painted on the floor (warm white C.key, 10 px, 40-px head) from (1.0, 0.4) m, 1.2 m long, fixed to the spokes; tip label ''B''.
+    S2: an arrow painted on the floor (warm white C.key, 10 px, 40-px head) drawn from the hub (so its tip moves at Ω × B), 1.2 m long, fixed to the spokes; tip label ''B''.
 
     S3: keyword line ''position · velocity · direction'' (54 px) at (1100, 230).
 
