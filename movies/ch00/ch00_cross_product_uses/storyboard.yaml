@@ -632,7 +632,7 @@ honesty_notes:
   into effective gravity g = g* − Ω × (Ω × r); on a sphere its sideways part (0.017 m/s² at 45°) would exceed the Coriolis push on a 10 m/s wind (≤ 0.0015)
   more than ten times, but the flattened Earth makes the sea surface normal to g, so weather equations carry only g. Traces: g 9.78 vs 9.83 m/s² (WGS-84
   normal gravity, cited; the spin explains ≈ 2/3, the bulge the rest), the plumb line 0.1° (spin alone, sphere) and ≈ 0.19° (real ellipsoid), the 21-km
-  bulge (1/298). Flattening, plumb angle and centrifugal arrows are drawn ×50 (listed in exaggeration).'
+  bulge (1/298). Flattening and plumb angle are drawn ×50, the centrifugal arrows ×100 against g* (listed in exaggeration).'
 quiz_hook: 'At 30°N, f is half its value at the pole. With the same 4 hPa over 400 km, how fast is the geostrophic wind there? (f = 7.29e-5 s⁻¹, so |u|
   = 1.00e-3 / (7.29e-5 x 1.2) ≈ 11.4 m/s: the weaker turning needs a faster wind to balance the same push.)'
 qa_expectations:
@@ -2627,7 +2627,7 @@ scenes:
 
     S5: keyword ''both depend only on where'' with gold pointers to the brown and the slate arrow.
 
-    S6: head-to-tail sum at the pin (the slate arrow drawn ×50 longer than its true ratio to g*, so the tilt can be seen); the resultant brown ''g'', tip
+    S6: head-to-tail sum at the pin (the slate arrow drawn ×100 longer than its true ratio to g*, so the tilt can be seen); the resultant brown ''g'', tip
     label ''g'', gloss ''effective gravity''.
 
     S7: on_screen_eq (T.eq 84, g brown, the centrifugal term slate).
@@ -2669,7 +2669,7 @@ scenes:
     data: data/earth.json -> effective_gravity (NEW, N24)
     test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity
   exaggeration:
-  - the centrifugal arrow is drawn ×50 against g* in the head-to-tail sum (true tilt ≈ 0.1°, said in s27g)
+  - the centrifugal arrow is drawn ×100 against g* in the head-to-tail sum (true tilt ≈ 0.1°, said in s27g)
   - half-Earth slice
   honesty: Earth's attraction points 'almost straight' to the centre (the oblate Earth's own pull deviates slightly; said in s27g); the sum is the effective
     gravity g of weather equations
@@ -2710,7 +2710,7 @@ scenes:
   visual: 'NEW (U-CF3). WHY g HAS NO SIDEWAYS PART. Two meridian cross-sections side by side (SVG, 2-D): x 80-520 and 540-980, y 160-820, each Earth''s
     outline through the axis, gold axis, violet Ω at the top.
 
-    LEFT ''round Earth'' (keyword under it): a circle; at 45°N brown g* to the centre, the slate centrifugal arrow (×50), their sum g. RIGHT ''real Earth''
+    LEFT ''round Earth'' (keyword under it): a circle; at 45°N brown g* to the centre, the slate centrifugal arrow (×100), their sum g. RIGHT ''real Earth''
     (keyword under it): an ellipse with the flattening exaggerated ×50 (axis ratio 0.83), at 45° the sum g exactly at right angles to the surface (gold
     right-angle tick).
 
@@ -2772,7 +2772,7 @@ scenes:
     data: data/earth.json -> sideways (NEW, N24)
     test: ../Fluid Dynamics/tests/test_ch04.py::test_centrifugal_V2_potential_and_effective_gravity, ::test_earth_rotation_V5_wgs84_numbers
   exaggeration:
-  - flattening drawn ×50; centrifugal arrows ×50 against g*
+  - flattening drawn ×50; centrifugal arrows ×100 against g*; the sideways part also in a ×3 magnifier of the pin (S3-S6, same ×100 picture)
   - 'illustrative: the ocean sliding to the equator on a round Earth is a thought experiment (said with ''would''), schematic'
   honesty: the real sea surface (the geoid) is a surface of constant geopotential, so effective gravity is normal to it; Earth's flattening is the equilibrium
     shape of a spinning body (said as 'settled into a slightly flattened shape')
