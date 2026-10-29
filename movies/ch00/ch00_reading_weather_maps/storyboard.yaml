@@ -1,10 +1,12 @@
-# ch00_reading_weather_maps storyboard v2 (movie-director, 2026-10-29; user: very detailed, 40-50 min). Generated
-# from the director's scene spec and the measured tools/tts.py dry run named in dry_run. S<k> = sentence k.
-# House style movies/HOUSE_STYLE.md binding (incl. §5 data-source line, colour bars, 3-D, globe camera, explain every
-# number). Data, new functions F13-F22 and CHECK ids RM01-RM89: data_needs.md. Scenes reusing v1 carry from_v1.
+# ch00_reading_weather_maps storyboard v3 (movie-director, 2026-10-29): v2 (85 scenes, 49:57, commit 93e7b41) + ECMWF
+# open data in the models-and-ensembles part (user-approved 2026-10-29): s71b-s71e two models / map score / AIFS / physics
+# vs AI, s72-s73b ECMWF 51-member ensemble spaghetti + spread (GEFS comparison s73c kept as optional_scenes). Timing = v2 measured spans + the measured
+# v3 patch dry run (dry_run.v3_splice). S<k> = sentence k. House style movies/HOUSE_STYLE.md binding (incl. §5 data-source
+# line, colour bars, 3-D, globe camera, explain every number). Data, functions F13-F26 and CHECK ids RM01-RM104:
+# data_needs.md (§D2 re-wording variants for the ECMWF scenes). Scenes reusing v1 carry from_v1.
 id: ch00_reading_weather_maps
 title: 'Reading weather maps: from the first report to tomorrow''s forecast'
-version: 2
+version: 3
 concepts:
 - 0A B.5 spherical coordinates (latitude, longitude, arc length δx = a cos φ δλ, δy = a δφ)
 - '0C map projections (E26 sphere_to_map: plate carrée, Mercator, Equal Earth, polar stereographic, Lambert conformal conic;
@@ -23,7 +25,10 @@ concepts:
 - 0C weather radar (ranging, dBZ, Marshall-Palmer, beam height); forecast charts (forecast hour, verification), ensembles
   and spaghetti plots
 - 0B weather vs climate (a 30-year mean chart)
-target_duration_s: 2996.725
+- '0C comparing forecasts: two models at the same lead time (GFS vs ECMWF IFS), a physics model vs a machine-learning model
+  (IFS vs AIFS), the root mean square error of a map; the ECMWF 51-member ensemble as a spaghetti plot and its spread shrinking
+  with lead time'
+target_duration_s: 3317.45
 fps: 30
 size:
 - 1920
@@ -34,7 +39,7 @@ footnote_strip: false
 scale_badges: false
 series:
   name: Chapter 0 series
-  position: '#69 (plan v2, the last movie)'
+  position: '#69 (plan v2, the last movie; v3 adds ECMWF open data, user 2026-10-29)'
   previous: '#68 extremes'
   next: null
 audio:
@@ -116,10 +121,10 @@ audio:
     shows: illustrative storm line (in the gap after S1 only)
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a
     word; one at a time; no caption tags (none carries meaning the voice does not say)'
-measured_narration_s: 2994.225
-measured_frames: 89902
-words: 7098
-sentences: 366
+measured_narration_s: 3314.95
+measured_frames: 99524
+words: 7851
+sentences: 406
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_reading_weather_maps/dryrun/v2_merged
@@ -171,8 +176,71 @@ dry_run:
     warnings_patch: []
   warnings: []
   render_s: 1185.3
+  v3_splice:
+    patch_run: v3_patch
+    patch_script: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_reading_weather_maps\dryrun\script_v3_patch.md
+    log: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_reading_weather_maps\dryrun\v3_patch.log
+    patched:
+    - s69_forecast_runs
+    - s71b_two_models
+    - s71c_map_score
+    - s71d_ai_model
+    - s71e_physics_vs_ai
+    - s72_ensembles
+    - s73_spaghetti
+    - s73b_spread_shrinks
+    - s83_recap
+    old_spans_s:
+      s69_forecast_runs: 23.675
+      s72_ensembles: 30.925
+      s73_spaghetti: 34.25
+      s83_recap: 51.875
+    new_spans_s:
+      s69_forecast_runs: 33.25
+      s71b_two_models: 56.025
+      s71c_map_score: 61.375
+      s71d_ai_model: 45.3
+      s71e_physics_vs_ai: 57.25
+      s72_ensembles: 46.4
+      s73_spaghetti: 49.45
+      s73b_spread_shrinks: 53.525
+      s83_recap: 58.875
+    cues_v3:
+      patch_total: 127
+      per_scene:
+        s69_forecast_runs: 9
+        s71b_two_models: 17
+        s71c_map_score: 15
+        s71d_ai_model: 11
+        s71e_physics_vs_ai: 14
+        s72_ensembles: 12
+        s73_spaghetti: 12
+        s73b_spread_shrinks: 14
+        s73c_two_ensembles: 9
+        s83_recap: 14
+      s73c_cues: 9
+    patch_audio_s: 498.95
+    patch_cues: 127
+    patch_self_check:
+      expected_s: 498.95
+      audio_s: 498.95
+      diff_ms: -0.0
+      len_ok: true
+      cues_ok: true
+    patch_render_s: 302.9
+    warnings_patch: []
+    note: IFS/AIFS written as letters in the measurement copy (lexicon_proposed); the movie's other scenes keep their v2 measured
+      spans; total = v2 total - old spans of the 4 changed scenes + measured spans of the 10 patched scenes
+    cues_old_scenes:
+      s72_ensembles: 7
+      s73_spaghetti: 9
+      s69_forecast_runs: 6
+      s83_recap: 12
+    cues_total: 832
 latest_data_policy: 'frozen: WPC/GFS/GOES 18 UTC 27 Oct 2026; GFS/Himawari 00 UTC 27 Oct 2026; GFS forecasts valid 18 UTC
-  27 Oct 2026 from the 22/24/26 Oct 18 UTC runs (rolling THREDDS archive: fetch at once, data_needs N3)'
+  27 Oct 2026 from the 22/24/26 Oct 18 UTC runs (rolling THREDDS archive: fetch at once, data_needs N3); v3: ECMWF open data
+  (AWS mirror, permanent history): IFS and AIFS runs 18Z 24 Oct +72 h and 18Z 27 Oct step 0; ENS runs 12Z 22 Oct +126 h, 24
+  Oct +78 h, 26 Oct +30 h, all valid 18 UTC 27 Oct 2026'
 honesty_notes:
 - Latitude is written φ (series convention, as in the cross-product movie); Vallis writes ϑ. The arc-length increments δx
   = a cos φ δλ and δy = a δφ are Vallis's §2.2.2 increments at r = a (provenance only, never on screen).
@@ -228,18 +296,38 @@ honesty_notes:
   (rain under 5371 m).'
 - 'v2: forecast-verification numbers come from GFS runs valid 18 UTC 27 Oct 2026, tracked by continuity from the WPC 982 low
   (planning read 2026-10-29, re-asserted RM81).'
-- 'v2: the 12-of-31 gale probability (s72) is a thought example, said with ''if''.'
+- 'v2 (v3: now 20 of 51, see below): the gale probability (s72) is a thought example, said with ''if''.'
 - 'v2: Trappes sounding launched 23:15 UTC 1 Nov 2023 (nominal 00 UTC 2 Nov); freezing level interpolated between standard
   levels; tropopause by the WMO lapse-rate rule.'
 - 'v2: the climate map (s82) is the NCEP/NCAR R1 November mean 1991-2020 (a different reanalysis from ERA5; said only as ''the
   average'').'
+- 'v3: ECMWF open data are a 0.25-deg subset of the operational output (CC BY 4.0); ''the ECMWF analysis'' is step 0 of the
+  IFS 18Z 27 Oct run (the analysis at open-data resolution); the GFS and ECMWF analyses of the 982 low are checked to agree
+  (RM97) before the narration says ''both centres'' analyses''.'
+- 'v3: map scores (root mean square error of MSLP, cos-latitude weighted, 25-70 N, 80 W-0) compare each model with its own
+  centre''s analysis (usual verification practice); RM99/RM100 also score against the other centre''s analysis, and if the
+  order of the models flips the narration says ''about the same''.'
+- 'v3: AIFS is described only by cited facts (C20-C22: machine-learning model, trained on ERA5 and fine-tuned on operational
+  analyses, 6-h step, starts from the ECMWF analysis); no claim about its general skill or speed; the narration says one case
+  cannot decide which model is better. The ''smoother'' sentence is said only if RM101 passes on these fields.'
+- 'v3: the ECMWF ensemble has 51 members (control + 50 perturbed: perturbed starting states and stochastic perturbations of
+  the physics, said as ''small random nudges to the model''s physics'').'
+- 'v3: member lows are found by F24 match_low: the nearest closed low (at least one closed 2-hPa isobar) within 1200 km of
+  the analysis 982 low, never a box minimum; members without one are counted and said, not drawn; an ambiguous match (a second
+  closed low within 1.5 x the distance) is drawn hollow and listed in the manifest.'
+- 'v3: spaghetti colours: all members one teal hue at 55 % opacity (bunches read brighter), the analysis bold gold with a
+  dark casing; GEFS lows orange triangles vs ECMWF teal dots (hue and shape).'
+- 'v3: GEFS starts at 18Z, the ECMWF ensemble at 12Z, so their lead times differ (120 vs 126 h), said as ''started six hours
+  later''.'
+- 'v3: the 20-of-51 gale probability (s72) is a thought example, said with ''if''.'
+- 'v3: the three-point root-mean-square example (s71c) uses made-up numbers, said as an example.'
 quiz_hook: 'You stand in Sydney with a strong wind at your back blowing from the south-west, so you face north-east. Where
   is the low? (Southern hemisphere: on your right, which is south-east; friction near the ground puts it a little in front
   of your right shoulder, so roughly east-south-east.)'
 qa_expectations:
-  duration_s: 2996.725
+  duration_s: 3317.45
   captions:
-    cues: 748
+    cues: 832
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 17.0
@@ -272,7 +360,9 @@ lexicon_proposed:
   dryline: dry line
   hypsometric: hip-so-MET-ric
   GOES: goes
-beats: 56
+  IFS: I F S  (as letters; default may read the word 'ifs')
+  AIFS: A I F S  (as letters; ECMWF's own usage)
+beats: 63
 scenes:
 - id: s00_title
   t:
@@ -3561,7 +3651,7 @@ scenes:
 - id: s69_forecast_runs
   t:
   - 2491.2
-  - 2514.875
+  - 2524.45
   sentence_times:
   - - 2491.2
     - 2493.75
@@ -3569,14 +3659,18 @@ scenes:
     - 2504.3
   - - 2504.65
     - 2514.075
-  beat: application · four charts, one valid time
+  - - 2514.425
+    - 2523.65
+  beat: application · four charts, one valid time; lead time defined
   visual: 'Full width: four LCC panels in a row (same frame as s70), MSLP isobars every 4 hPa, each with two stamps (initial,
     valid) and a forecast-hour tag ''T+120'', ''T+72'', ''T+24'', ''T+0'' (54 px) appearing on their words; the analysed L
-    position marked faintly in all four. Source line ''Data: NOAA NCEP GFS · runs 22, 24, 26, 27 Oct 2026 · valid 27 Oct 2026,
-    18 UTC''.'
-  voiceover: Let's watch a forecast come true. Here are four charts of the North Atlantic, all valid at eighteen hundred universal
-    time on the twenty-seventh of October, from the American GFS model. The first started five days earlier, the second three
-    days earlier, the third one day earlier, and the last is the analysis itself.
+    position marked faintly in all four. v3 S4: a gold bracket from each panel''s ''start'' stamp to its ''valid'' stamp,
+    keyword ''lead time'' (54 px warm white) and the four lead times ''5 days'', ''3 days'', ''1 day'', ''0'' under the brackets
+    on their words. Source line ''Data: NOAA NCEP GFS · runs 22, 24, 26, 27 Oct 2026 · valid 27 Oct 2026, 18 UTC''.'
+  voiceover: 'Let''s watch a forecast come true. Here are four charts of the North Atlantic, all valid at eighteen hundred
+    universal time on the twenty-seventh of October, from the American GFS model. The first started five days earlier, the
+    second three days earlier, the third one day earlier, and the last is the analysis itself. The time between a forecast''s
+    start and the time it''s valid for is called the lead time: here five days, three days, one day and zero.'
   on_screen_eq: null
   physics_source:
     fn: NEW F16 fluidpy.data.gfs.fetch_forecast
@@ -3598,21 +3692,22 @@ scenes:
   related: []
   check_rows:
   - RM80
+  v3_change: 'S4 added: defines lead time (glossary proposal ''Lead time''), used by s71b-s73b'
 - id: s70_forecast_verify
   t:
-  - 2514.875
-  - 2553.675
+  - 2524.45
+  - 2563.25
   sentence_times:
-  - - 2514.875
-    - 2525.425
-  - - 2526.925
-    - 2533.525
-  - - 2533.875
-    - 2539.175
-  - - 2539.525
-    - 2543.175
-  - - 2544.675
-    - 2552.875
+  - - 2524.45
+    - 2535.0
+  - - 2536.5
+    - 2543.1
+  - - 2543.45
+    - 2548.75
+  - - 2549.1
+    - 2552.75
+  - - 2554.25
+    - 2562.45
   beat: application · how far off each forecast was
   visual: 'The four panels merge into one map: four L markers (slate T+120, slate-lighter T+72, teal T+24, warm white analysis)
     with gold distance links ''~ 480 km'', ''~ 200 km'', ''~ 60 km'' and their central pressures ''1001'', ''993'', ''985'',
@@ -3646,13 +3741,13 @@ scenes:
   - RM81
 - id: s71_precip_panel
   t:
-  - 2553.675
-  - 2576.225
+  - 2563.25
+  - 2585.8
   sentence_times:
-  - - 2553.675
-    - 2563.6
-  - - 2563.95
-    - 2574.725
+  - - 2563.25
+    - 2573.175
+  - - 2573.525
+    - 2584.3
   beat: building blocks · the pressure-and-precipitation forecast panel
   visual: 'Full width LCC: GFS T+24 (init 18Z 26 Oct) 6-h accumulated precipitation (sequential blue-green map, colour bar
     0.5-40 mm, 52 px) under MSLP isobars every 4 hPa; WPC fronts faint for comparison; S3 gold outline on the max band; the
@@ -3679,40 +3774,305 @@ scenes:
   related: []
   check_rows:
   - RM82
-- id: s72_ensembles
+- id: s71b_two_models
   t:
-  - 2576.225
-  - 2607.15
+  - 2585.8
+  - 2641.825
   sentence_times:
-  - - 2576.225
-    - 2579.575
-  - - 2579.925
-    - 2585.9
-  - - 2586.25
-    - 2593.45
-  - - 2593.8
-    - 2597.45
-  - - 2598.95
-    - 2605.65
-  beat: building blocks · ensembles and chaos
-  visual: 'Picture zone: 31 thin teal tracks fanning out from one start point over a clock T+0 -> T+120 (illustrative fan
-    for S1-S3, drawn from the real GEFS member low centres when N4 is fetched); S4 ''31 members''. Maths zone CalcStack ''12
-    / 31 ~ 0.39 = 39 %'' (thought example, said ''if'').'
-  voiceover: 'A single forecast can''t say how sure it is. Tiny errors in the starting state grow as it runs, a sensitivity
-    called chaos. So forecast centres run an ensemble: the same model many times, from slightly different starting states.
-    The American ensemble has thirty-one members. [beat] If twelve of the thirty-one bring a gale to a place, the chance of
-    a gale there is about thirty-nine percent. [beat]'
+  - - 2585.8
+    - 2588.625
+  - - 2588.975
+    - 2599.325
+  - - 2599.675
+    - 2609.65
+  - - 2610.0
+    - 2624.7
+  - - 2626.2
+    - 2630.8
+  - - 2631.15
+    - 2641.025
+  beat: application · two models, same start, same valid time (GFS vs ECMWF IFS)
+  visual: 'Full width, three LCC panels in a row (the s69 frame, 25-70 N, 80 W-0): left GFS run 18Z 24 Oct +72 h, middle ECMWF
+    IFS run 18Z 24 Oct +72 h, right the analysis (GFS analysis isobars; the ECMWF analysis low as a second ring). MSLP isobars
+    every 4 hPa, ink; each panel''s tracked/matched 982-low marker ''L'' with its central pressure on its words (''993'' GFS,
+    ''986'' IFS [RM96], ''982'' both analyses [RM97]); keyword tags ''GFS'' (slate) and ''IFS'' (teal) under the panels on
+    S2-S3; stamps ''start 24 Oct 18 UTC'' and ''+72 h'' (54 px) on S3. S4: the two forecast L markers fly onto the analysis
+    panel with gold distance links ''~ 200 km'', ''~ 90 km'' (great-circle). S5: the two panels'' isobars overlay for 3 s
+    on the analysis panel (GFS slate dashed, IFS teal solid), the gold band where they differ most. Source line ''Data: NOAA
+    NCEP GFS · ECMWF open data (CC BY 4.0) · IFS run 24 Oct 2026 18Z +72 h · valid 27 Oct 2026, 18 UTC''.'
   on_screen_eq: null
   physics_source:
-    fn: NEW F17 fluidpy.diag.ensemble.probability; fluidpy.diag.cyclone.track_by_continuity per member
+    fn: NEW F23 fluidpy.data.ecmwf_open.fetch(model='ifs', run='2026-10-24T18Z', step=72, params=['msl']) + fluidpy.data.gfs.fetch_forecast
+      (N3, exists) + NEW F24 fluidpy.diag.cyclone.match_low (seeded on the analysis 982 low) + fluidpy.geo.sphere.great_circle_distance
     params:
-      members: 31
-    test: NEW ../Fluid Dynamics/tests/diag/test_ensemble.py::test_probability_V1; CHECK RM83 (GEFS member count 31 = 30 perturbed
-      + control)
+      run: 2026-10-24T18Z
+      step_h: 72
+      valid: 2026-10-27T18Z
+      ref_low:
+      - 43.0
+      - -43.0
+      max_km: 1200
+    test: NEW ../Fluid Dynamics/tests/data/test_ecmwf_open.py::test_valid_time_V1 and ::test_index_byte_ranges_V1; NEW tests/diag/test_cyclone.py::test_match_low_V1_shifted_lows;
+      CHECK RM81 (GFS +72 h), RM96, RM97, RM104
+  exaggeration: []
+  kind: three maps
+  data: ECMWF open data IFS 0.25 deg run 18Z 24 Oct 2026 +72 h and step 0 of 18Z 27 Oct (NEW N13); GFS N3 (exists)
+  tool: cartostyle panels
+  runner_up: IFS run 12Z 24 Oct +78 h if the 18Z open-data run lacks +72 h (then said 'about three days')
+  why: 'same start, same lead time, same valid time: the only thing that changes is the model'
+  music: data-curious
+  related:
+  - n: 6B
+    slug: how contour maps are made
+    what: analysis and models
+  check_rows:
+  - RM81
+  - RM96
+  - RM97
+  - RM104
+  rewording: data_needs §D2 variants V-s71b (who was closer; 'both about N km' when the two distances differ by < 30 km)
+  voiceover: The GFS isn't the only model. The European Centre for Medium-Range Weather Forecasts runs its own physics model,
+    called the IFS, short for Integrated Forecasting System. Here are the two side by side, both started at eighteen hundred
+    universal time on the twenty-fourth of October, so both have a lead time of three days. The GFS put the Atlantic low about
+    two hundred kilometres from where it turned out to be, at about nine hundred and ninety-three hectopascals, and the European
+    model about ninety kilometres away, at about nine hundred and eighty-six. [beat] Both centres' analyses put it at about
+    nine hundred and eighty-two. When two good models agree, forecasters trust the forecast more, and when they disagree,
+    the disagreement itself warns that the forecast is uncertain.
+- id: s71c_map_score
+  t:
+  - 2641.825
+  - 2703.2
+  sentence_times:
+  - - 2641.825
+    - 2644.85
+  - - 2645.2
+    - 2649.875
+  - - 2650.225
+    - 2659.475
+  - - 2659.825
+    - 2663.175
+  - - 2663.525
+    - 2676.275
+  - - 2677.775
+    - 2685.6
+  - - 2685.95
+    - 2696.5
+  - - 2698.0
+    - 2702.4
+  beat: 'building blocks · scoring a whole map: the root mean square error'
+  visual: 'S1-S4: picture zone, three grid points on a strip of the s71b analysis map, each with a small signed difference
+    bar (forecast minus analysis: teal +1, rose -2 with hatch and ''-'' glyph, teal +2 hPa) and the number at its tip; maths
+    zone CalcStack on the words: ''1² , (-2)² , 2²  =  1 , 4 , 4'' -> ''(1 + 4 + 4)/3 = 3'' -> ''√3 ≈ 1.7 hPa'' (68 px, aligned
+    at ''=''; the minus sign struck when squared). Keywords ''difference'', ''square'', ''average'', ''square root'' light
+    in turn on their words; ''root mean square error'' (54 px warm white) on S2. S5: the strip becomes the full North Atlantic
+    difference map of the GFS +72 h forecast (diverging blue-white-red, colour bar ''forecast - analysis (hPa)'' -12...+12,
+    52 px), grid cells drawn narrower towards the pole with a gold bracket ''smaller area''. S6: the IFS difference map slides
+    in beside it; under each its score ''≈ 3.1 hPa'' (GFS) and ''≈ 2.6 hPa'' (IFS) [RM99]; gold links from each map to its
+    number. Source line ''Data: NOAA NCEP GFS · ECMWF open data (CC BY 4.0) · IFS run 24 Oct 2026 18Z +72 h · valid 27 Oct
+    2026, 18 UTC'' (S5-S7 only; S1-S4 is a worked example on three made-up numbers).'
+  on_screen_eq: null
+  physics_source:
+    fn: NEW F26 fluidpy.diag.ensemble.rmse(forecast, reference, lat, box, weights='coslat') on the GFS and IFS +72 h MSLP
+      against each centre's own analysis
+    params:
+      worked:
+      - 1.0
+      - -2.0
+      - 2.0
+      box:
+      - 25
+      - 70
+      - -80
+      - 0
+      grid_deg: 0.25
+      reference: own-centre analysis (GFS 27 Oct 18Z +0; IFS 27 Oct 18Z step 0)
+    test: NEW ../Fluid Dynamics/tests/diag/test_ensemble.py::test_rmse_V1_hand_three_points (sqrt 3 = 1.732) and ::test_rmse_V1_coslat_weights_vs_band_area;
+      CHECK RM98, RM99
   exaggeration:
-  - the 12-of-31 gale case is a thought example
+  - S1-S4 three-point example uses made-up numbers (said as an example)
+  kind: worked example + two difference maps
+  data: GFS N3 (exists) + IFS N13
+  tool: house CalcStack + cartostyle diverging field
+  runner_up: 'score on the 0.5 deg repo products (same box) if the 0.25 deg GFS product is not on G:'
+  why: 'explain every number: a map score needs its recipe before its value'
+  music: data-curious
+  related:
+  - n: '21'
+    slug: statistics of fields
+    what: means, variances and root mean squares
+  check_rows:
+  - RM98
+  - RM99
+  rewording: data_needs §D2 V-s71c (if the scores differ by < 10 %, the last two sentences say 'about the same')
+  voiceover: One low is only one spot on the map. To score a whole map, forecasters use the root mean square error. Take the
+    difference between the forecast and the analysis at every grid point, and square each one, so that too high and too low
+    can't cancel. Average the squares, and take the square root. With three points off by one, minus two and two hectopascals,
+    the squares are one, four and four, their average is three, and the square root of three is about one point seven hectopascals.
+    [beat] On a real map, grid points crowd together towards the pole, so each one counts in proportion to the area it covers.
+    Over this North Atlantic map, the three-day forecast missed by about three point one hectopascals for the GFS, and about
+    two point six for the European model. [beat] That's the typical size of the miss, everywhere on the map at once.
+- id: s71d_ai_model
+  t:
+  - 2703.2
+  - 2748.5
+  sentence_times:
+  - - 2703.2
+    - 2706.1
+  - - 2706.45
+    - 2717.925
+  - - 2718.275
+    - 2729.5
+  - - 2729.85
+    - 2732.8
+  - - 2733.15
+    - 2741.55
+  - - 2741.9
+    - 2747.7
+  beat: building blocks · what a machine-learning weather model is (AIFS), in plain words
+  visual: 'Full width, code-drawn diagram (decorative, no data colours). S1-S2: keyword ''AIFS'' (warm white) and ''machine
+    learning'' (54 px). S3: a long strip of small slate ERA5 map thumbnails (real ERA5 frames already in the movie: the Ciarán
+    MSLP maps of s12-s19, repeated with dates 1979 ... 2018 under them as a time axis ''decades of past weather'') flowing
+    into a simple box-free ''learn'' arrow; then a short second strip ''recent analyses'' (keyword ''fine-tuned''). S4: the
+    equations-of-motion icon from s68 (a small grid with arrows) shown and struck through in slate (not used). S5: a clock
+    glyph ''+6 h'' and a loop arrow: map -> map six hours later -> ... (''+6 h'', ''+12 h'', ''+18 h'' ... ''+72 h'' counting
+    on the words ''again and again''). S6: one ''analysis'' map (the s68 globe state) splitting into two arrows ''IFS'' (physics,
+    teal) and ''AIFS'' (machine learning, violet with a dashed outline so it is not hue alone). No source line except on the
+    ERA5 thumbnails: ''Data: ERA5 (Copernicus C3S/ECMWF)'' while they are on screen.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - 'illustrative: diagram of how a data-driven model is trained and stepped; the ERA5 thumbnails are this movie''s own Ciarán
+    frames standing for the training archive (said as ''decades of past weather'', not as the actual training sample)'
+  kind: diagram
+  data: none new (ERA5 thumbnails from A1/A2)
+  tool: house SVG + kit icons
+  runner_up: one sentence inside s71e (loses the 'it does not solve the equations' contrast)
+  why: a new kind of chart needs one plain-words scene on where it comes from, before the comparison
+  music: data-curious
+  related:
+  - n: 29A
+    slug: equations of motion
+    what: what the physics model solves
+  check_rows: []
+  facts:
+  - C20
+  - C21
+  - C22
+  voiceover: 'There''s now a different kind of model, too. The European Centre also runs the AIFS, a machine-learning model:
+    a computer program that learned how the weather changes by studying past examples. It was trained on decades of past weather
+    from ERA5, the reanalysis we used for Ciarán, and then fine-tuned on the European Centre''s recent analyses. It doesn''t
+    solve the equations of motion. Instead, it takes the state of the atmosphere and predicts the state six hours later, then
+    repeats that step again and again. It starts from the same analysis as the physics model, so the two can be compared fairly.'
+- id: s71e_physics_vs_ai
+  t:
+  - 2748.5
+  - 2805.75
+  sentence_times:
+  - - 2748.5
+    - 2759.375
+  - - 2759.725
+    - 2767.45
+  - - 2767.8
+    - 2775.175
+  - - 2776.675
+    - 2784.0
+  - - 2785.5
+    - 2793.425
+  - - 2793.775
+    - 2798.375
+  - - 2798.725
+    - 2804.95
+  beat: application · physics model vs machine-learning model vs the analysis (IFS, AIFS, analysis)
+  visual: 'Full width, three LCC panels (same frame as s71b): left IFS run 18Z 24 Oct +72 h (tag ''physics'', teal), middle
+    AIFS run 18Z 24 Oct +72 h (tag ''machine learning'', violet, dashed panel underline), right the ECMWF analysis (step 0
+    of 18Z 27 Oct, tag ''analysis'', gold). MSLP isobars every 4 hPa; each forecast''s matched 982 low ''L'' with its pressure
+    (''986'', ''988'' [RM100]) and a gold distance link to the analysis ring (''~ 90 km'', ''~ 120 km''). S3: under the two
+    forecast panels the map scores ''≈ 2.6 hPa'' and ''≈ 2.8 hPa'' [RM100] with gold links to their panels. S4 (only if RM101
+    passes): zoom (MapCamera) on the low in the IFS and AIFS panels side by side, the 4-hPa rings round each low counted (''5
+    rings'' vs ''4 rings'') and a gold bracket on the isobar spacing; keyword ''smoother''. S5-S6: both forecast panels dim
+    to 60 % beside the analysis; keyword ''one case''. Source line ''Data: ECMWF open data (CC BY 4.0) · IFS/AIFS run 24 Oct
+    2026 18Z +72 h · valid 27 Oct 2026, 18 UTC''.'
+  on_screen_eq: null
+  physics_source:
+    fn: NEW F23 fluidpy.data.ecmwf_open.fetch(model='aifs-single' and 'ifs', run='2026-10-24T18Z', step=72) + NEW F24 fluidpy.diag.cyclone.match_low
+      + NEW F26 fluidpy.diag.ensemble.rmse + fluidpy.geo.sphere.gradient (max |grad p| within 500 km of each low)
+    params:
+      run: 2026-10-24T18Z
+      step_h: 72
+      valid: 2026-10-27T18Z
+      box:
+      - 25
+      - 70
+      - -80
+      - 0
+      smooth_radius_km: 500
+    test: CHECK RM100, RM101 (sentence S4 cut if it fails), RM104; tests as s71b/s71c
+  exaggeration: []
+  kind: three maps + zoom
+  data: ECMWF open data AIFS Single 0.25 deg run 18Z 24 Oct 2026 +72 h (NEW N14) and IFS (N13)
+  tool: cartostyle panels + MapCamera
+  runner_up: IFS/AIFS run 12Z 24 Oct +78 h (then 'about three days')
+  why: the comparison the viewer will meet on real forecast websites, shown honestly on one case
+  music: data-curious
+  related: []
+  check_rows:
+  - RM100
+  - RM101
+  - RM104
+  rewording: data_needs §D2 V-s71e (closer model; scores 'about the same' when < 10 % apart; S4 cut unless RM101)
+  voiceover: 'Here are the two European forecasts from the same start, three days ahead: the physics model on the left, the
+    machine-learning model in the middle, and the analysis on the right. The physics model had the low about ninety kilometres
+    away, at about nine hundred and eighty-six hectopascals. The machine-learning model had it about one hundred and twenty
+    kilometres away, at about nine hundred and eighty-eight. [beat] Over the whole map, it missed by about two point eight
+    hectopascals, against two point six for the physics model. [beat] Notice that the machine-learning map is a little smoother,
+    with a less sharp low and more widely spaced isobars around it. On this one forecast, both were useful and neither was
+    exact. One case can''t tell us which model is better in general; that takes thousands of forecasts.'
+- id: s72_ensembles
+  t:
+  - 2805.75
+  - 2852.15
+  sentence_times:
+  - - 2805.75
+    - 2808.3
+  - - 2808.65
+    - 2812.0
+  - - 2812.35
+    - 2818.9
+  - - 2819.25
+    - 2830.025
+  - - 2830.375
+    - 2833.25
+  - - 2833.6
+    - 2842.4
+  - - 2843.9
+    - 2850.65
+  beat: building blocks · ensembles, members and chaos (ECMWF ENS)
+  visual: 'Picture zone: a clock T+0 -> T+126 h over the North Atlantic frame; from one start point, 51 thin teal tracks fan
+    out (S2-S3; drawn from the real ECMWF member low positions every 6 h if the scout fetches the intermediate steps, otherwise
+    an illustrative fan stated in exaggeration). S1: the four s71e/s71b forecast L markers shrink into the start point. S4:
+    one track highlighted gold, keyword ''member''. S5: one track warm white thicker, keyword ''control'', the others ''50''
+    (54 px); ''51 members''. Maths zone CalcStack on S6: ''20 / 51 ≈ 0.39 = 39 %'' (thought example, said ''if''). Source
+    line only when the tracks are real: ''Data: ECMWF open data (CC BY 4.0) · ENS run 22 Oct 2026 12Z''.'
+  voiceover: 'So which forecast should we believe? A single forecast can''t say how sure it is. Tiny errors in the starting
+    state grow as the model runs, a sensitivity called chaos. So forecast centres run an ensemble: the same model many times,
+    each from a slightly different starting state, with small random nudges to the model''s physics. Each of these runs is
+    called a member. The European ensemble has fifty-one members: one control, started from the best analysis, and fifty with
+    small changes. [beat] If twenty of the fifty-one bring a gale to a place, the chance of a gale there is about thirty-nine
+    percent. [beat]'
+  on_screen_eq: null
+  physics_source:
+    fn: 'fluidpy.diag.ensemble.probability (20 of 51); tracks: NEW F24 fluidpy.diag.cyclone.match_low per member and step
+      (or illustrative)'
+    params:
+      members: 51
+      gale_members: 20
+    test: ../Fluid Dynamics/tests/diag/test_ensemble.py::test_probability_V1_counts_and_complements (+ NEW V1 row 20/51 =
+      0.392); CHECK RM90, RM102
+  exaggeration:
+  - the 20-of-51 gale case is a thought example
+  - if the 6-hourly member steps are not fetched, the fan is illustrative (manifest)
   kind: diagram / data tracks
-  data: GEFS 0.5 deg members (NEW N4)
+  data: ECMWF open data ENS (NEW N12)
   tool: house SVG tracks
   runner_up: 3-D fan
   why: spread is the picture of uncertainty
@@ -3722,45 +4082,63 @@ scenes:
     slug: statistics of fields
     what: ensemble averages and probability
   check_rows:
-  - RM83
+  - RM90
+  - RM102
+  v3_change: GEFS 31 -> ECMWF ENS 51 (control + 50); defines member and control; nudges to the physics (stochastic perturbations)
+    said; 12/31 -> 20/51 (same 39 %)
 - id: s73_spaghetti
   t:
-  - 2607.15
-  - 2641.4
+  - 2852.15
+  - 2901.6
   sentence_times:
-  - - 2607.15
-    - 2610.925
-  - - 2611.275
-    - 2620.15
-  - - 2620.5
-    - 2633.55
-  - - 2633.9
-    - 2639.9
-  beat: application · a spaghetti plot, five days and one day ahead
-  visual: 'Full width LCC (N Atlantic + N America): the 5520-m contour from each of 31 GEFS members (teal 3 px, 60 %), the
-    ensemble mean (warm white 6 px) and the GFS analysis 5520-m line (gold dashed); S3-S4 gold rings where the strands fan
-    out most (largest spread, computed); S5 cross-fade to the T+24 ensemble. Source line ''Data: NOAA NCEP GEFS · runs 22
-    and 26 Oct 2026, 18 UTC · valid 27 Oct 2026, 18 UTC · 500 hPa''.'
+  - - 2852.15
+    - 2855.925
+  - - 2856.275
+    - 2868.2
+  - - 2868.55
+    - 2880.05
+  - - 2880.4
+    - 2885.7
+  - - 2887.2
+    - 2893.3
+  - - 2893.65
+    - 2900.8
+  beat: 'application · a spaghetti plot: the ECMWF ensemble five and a quarter days ahead'
+  visual: 'Full width LCC (N Atlantic + eastern N America, 25-70 N, 85 W-0): the 5520-m z500 contour [RM91] of each of the
+    51 ECMWF ENS members, run 12Z 22 Oct +126 h (one hue: teal 3 px at 55 % opacity, so bunches look brighter; colour-blind
+    safe), and each member''s matched 982-low centre as a teal dot (14 px, dark outline) on ''a dot''. S3: ''51'' and stamp
+    ''+126 h'' (54 px). S4: the analysis (ECMWF step 0 of 18Z 27 Oct) 5520-m line in bold gold (7 px, dark 2-px casing) and
+    the analysis low as a gold ring, on ''bold gold line''. S5: gold rings on the two places where the strands fan out most
+    (largest z500 spread along the contour, computed). S6: a gold bracket across the dot cloud ''~ 1000 km'' [RM92] and a
+    small slate tally ''6 without a low'' [RM92]. No colour bar (lines only; the line legend is the spoken words and the keywords
+    ''members'', ''analysis''). Source line ''Data: ECMWF open data (CC BY 4.0) · ENS run 22 Oct 2026 12Z +126 h · valid 27
+    Oct 2026, 18 UTC · 500 hPa''.'
   voiceover: 'One way to show an ensemble is a spaghetti plot. From each member, we draw just one height line on the five
-    hundred hectopascal map, here five thousand five hundred and twenty metres. These are the thirty-one lines from the American
-    ensemble started five days before our valid time: where the strands bunch, the members agree, and where they fan out,
-    the forecast is uncertain. In the ensemble started one day before, the strands lie almost on top of each other. [beat]'
+    hundred hectopascal map, here five thousand five hundred and twenty metres, and a dot where that member puts the Atlantic
+    low. These are the fifty-one lines from the European ensemble started at noon universal time on the twenty-second of October,
+    five and a quarter days before our valid time. The bold gold line and the gold ring are the analysis: what actually happened.
+    [beat] Where the strands bunch, the members agree, and where they fan out, the forecast is uncertain. Here the dots are
+    scattered across about a thousand kilometres, and in six members the low hasn''t formed at all.'
   on_screen_eq: null
   physics_source:
-    fn: NEW F17 fluidpy.data.gefs.fetch_members (AWS byte ranges) + fluidpy.diag.ensemble.spread
+    fn: NEW F23 fluidpy.data.ecmwf_open.fetch(model='ens', run='2026-10-22T12Z', step=126, params=['gh', 'msl'], levels=[500],
+      members='all') + fluidpy.diag.ensemble.member_contours + fluidpy.diag.ensemble.spread + NEW F24 fluidpy.diag.cyclone.match_low
+      + NEW F25 position_spread (max pair distance)
     params:
-      inits:
-      - 2026-10-22T18Z
-      - 2026-10-26T18Z
-      level: 500
+      run: 2026-10-22T12Z
+      step_h: 126
+      members: 51
+      level_hPa: 500
       contour_m: 5520
-    test: NEW test_ensemble.py::test_spread_V1; CHECK RM84 (mean z500 spread along the analysis 5520 line at T+120 > 2 x that
-      at T+24)
+      ref_low: ECMWF analysis 982 low (step 0, 18Z 27 Oct)
+      max_km: 1200
+    test: ../Fluid Dynamics/tests/diag/test_ensemble.py::test_member_contours_V1_linear_field_gives_exact_meridian; NEW tests/data/test_ecmwf_open.py::test_ens_51_members_V1;
+      CHECK RM90, RM91, RM92, RM104
   exaggeration: []
   kind: map
-  data: GEFS members z500 (NEW N4)
+  data: ECMWF open data ENS 0.25 deg z500 + msl, run 12Z 22 Oct 2026 +126 h (NEW N12); analysis N13
   tool: cartostyle + SVG contours
-  runner_up: HGEFS mean/spread map from THREDDS (no members)
+  runner_up: GEFS 31-member spaghetti (N4) if the ENS fetch fails
   why: the classic forecaster's uncertainty chart
   music: data-curious
   related:
@@ -3768,20 +4146,99 @@ scenes:
     slug: Rossby waves
     what: 500 hPa waves
   check_rows:
-  - RM84
+  - RM90
+  - RM91
+  - RM92
+  - RM104
+  v3_change: 'replaces the planned GEFS spaghetti: ECMWF 51 members, member low dots, analysis bold gold; the +24 h half moves
+    to s73b with +78 h and +30 h'
+  rewording: data_needs §D2 V-s73 (cloud size and the count of members without a low from RM92)
+- id: s73b_spread_shrinks
+  t:
+  - 2901.6
+  - 2955.125
+  sentence_times:
+  - - 2901.6
+    - 2904.0
+  - - 2904.35
+    - 2910.325
+  - - 2910.675
+    - 2918.075
+  - - 2918.425
+    - 2930.425
+  - - 2930.775
+    - 2936.6
+  - - 2938.1
+    - 2944.275
+  - - 2945.775
+    - 2954.325
+  beat: application · the spread shrinks as the start comes closer (+126 h, +78 h, +30 h)
+  visual: 'Full width LCC (the s73 frame). S1: the +126 h spaghetti cross-fades to the ENS run 12Z 24 Oct +78 h (same styling:
+    51 members teal 3 px at 55 % opacity, member low dots teal 14 px, analysis 5520-m line gold 7 px with a dark 2-px casing,
+    analysis low gold ring); stamp ''+78 h'' (54 px) on ''three and a quarter days''. S2: cross-fade to the ENS run 12Z 26
+    Oct +30 h; stamp ''+30 h''. S3: on the +30 h map, the members'' mean low position as a warm-white cross and a gold circle
+    whose radius is the root-mean-square distance (F25), keyword ''spread''. S4: the three maps shrink to three thumbnails
+    on the left (picture zone) with their gold spread circles; TimeGraph in the maths zone: x ''lead time (h)'' 0-130, y ''spread
+    of the low (km)'' 0-500, three teal dots ''≈ 400'', ''≈ 200'', ''≈ 50'' [RM93] arriving on their words and joined. S5:
+    a second slate series on the same graph, right axis ''pressure spread (hPa)'' 0-8: ''≈ 6'', ''≈ 3'', ''≈ 1'' [RM94]. S6:
+    both lines pulse. Source line follows the map shown: ''Data: ECMWF open data (CC BY 4.0) · ENS run 24 Oct 2026 12Z +78
+    h · valid 27 Oct 2026, 18 UTC · 500 hPa'' (then 26 Oct 12Z +30 h; on S4-S6 ''ENS runs 22, 24, 26 Oct 2026 12Z'').'
+  on_screen_eq: null
+  physics_source:
+    fn: NEW F23 fluidpy.data.ecmwf_open.fetch(model='ens', members='all') + fluidpy.diag.ensemble.member_contours + NEW F24
+      fluidpy.diag.cyclone.match_low per member + NEW F25 fluidpy.diag.ensemble.position_spread + fluidpy.diag.ensemble.spread
+      (central pressures, ddof 1) + fluidpy.diag.ensemble.mean_along_contour
+    params:
+      runs:
+      - 2026-10-24T12Z
+      - 2026-10-26T12Z
+      steps_h:
+      - 78
+      - 30
+      members: 51
+      contour_m: 5520
+      ref_low: ECMWF analysis 982 low
+    test: tests/diag/test_ensemble.py::test_spread_V1_two_members_and_ddof, ::test_member_contours_V5_matplotlib_identical_vertices,
+      ::test_mean_along_contour_V1_constant_and_linear_in_latitude; NEW ::test_position_spread_V1_ring; CHECK RM90, RM93,
+      RM94, RM95
+  exaggeration: []
+  kind: map sequence + time graph
+  data: ECMWF open data ENS 0.25 deg z500 + msl, runs 12Z 24 and 26 Oct 2026 (NEW N12)
+  tool: cartostyle + SVG contours + house TimeGraph
+  runner_up: two maps (+126 h and +30 h) only
+  why: 'the spread shrinking with lead time is the lesson; drawn three ways: strands, circles, graph'
+  music: data-curious
+  related:
+  - n: '21'
+    slug: statistics of fields
+    what: standard deviation as spread
+  check_rows:
+  - RM90
+  - RM93
+  - RM94
+  - RM95
+  rewording: data_needs §D2 V-s73b (numbers from the data; if the spread does not fall monotonically, S6 says 'in this case,
+    mostly')
+  voiceover: 'Now let''s move the start closer. Started on the twenty-fourth, three and a quarter days ahead, the strands
+    draw together. Started on the twenty-sixth, just thirty hours ahead, they lie almost on top of each other, and on the
+    analysis. The spread measures how far the members are from one another: here, the typical distance of each member''s low
+    from the members'' average position, using the same root mean square recipe. It shrank from about four hundred kilometres,
+    to about two hundred, to about fifty. [beat] The spread of the central pressure shrank from about six hectopascals, to
+    three, to one. [beat] That''s the lesson of every ensemble: the closer the valid time, the smaller the spread, and the
+    more a forecast can be trusted.'
 - id: s74_case_stack
   t:
-  - 2641.4
-  - 2693.25
+  - 2955.125
+  - 3006.975
   sentence_times:
-  - - 2641.4
-    - 2647.875
-  - - 2648.225
-    - 2670.275
-  - - 2670.625
-    - 2679.825
-  - - 2681.325
-    - 2692.45
+  - - 2955.125
+    - 2961.6
+  - - 2961.95
+    - 2984.0
+  - - 2984.35
+    - 2993.55
+  - - 2995.05
+    - 3006.175
   beat: application · Ciaran through every chart (top-down, 3-D stack)
   visual: 'S1 (the draft workflow scene folded in): a vertical strip of thumbnails from this movie (MODIS IR, 250-hPa jet,
     500-hPa trough, 850 chart, surface analysis) stacks top-down, then dissolves into the 3-D stack. Full width 3-D: four
@@ -3818,15 +4275,15 @@ scenes:
   - RM85
 - id: s75_case_impacts
   t:
-  - 2693.25
-  - 2719.3
+  - 3006.975
+  - 3033.025
   sentence_times:
-  - - 2693.25
-    - 2696.6
-  - - 2696.95
-    - 2714.3
-  - - 2714.65
-    - 2718.5
+  - - 3006.975
+    - 3010.325
+  - - 3010.675
+    - 3028.025
+  - - 3028.375
+    - 3032.225
   beat: application · what the charts meant on the ground
   visual: 'Split: left the latest chart''s deepest L, right Ciarán''s L from s28; S3 the Brest model reappears with a gust
     readout (CalcStack 84 × 1.852 ≈ 156 km/h); S3 end keyword ''≈ 1.2 million homes without power'' with a small house icon.
@@ -3864,15 +4321,15 @@ scenes:
   - C20
 - id: s76_latest_intro
   t:
-  - 2719.3
-  - 2751.925
+  - 3033.025
+  - 3065.65
   sentence_times:
-  - - 2719.3
-    - 2722.025
-  - - 2722.375
-    - 2742.825
-  - - 2743.175
-    - 2751.125
+  - - 3033.025
+    - 3035.75
+  - - 3036.1
+    - 3056.55
+  - - 3056.9
+    - 3064.85
   beat: application · a real forecaster's chart
   visual: 'The s01 chart, full width; S2 keyword ''27 Oct 2026 · 18 UTC'' (44 px, top-left). S3 the layers flash in order
     once, gently (IR, isobars, H/L, fronts; no full-screen flash: each is a 12-frame fade). v2: source line ''Analysis: NOAA
@@ -3903,17 +4360,17 @@ scenes:
   - C2
 - id: s77_latest_letters
   t:
-  - 2751.925
-  - 2774.725
+  - 3065.65
+  - 3088.45
   sentence_times:
-  - - 2751.925
-    - 2754.525
-  - - 2754.875
-    - 2761.2
-  - - 2761.55
-    - 2766.225
-  - - 2766.575
-    - 2773.925
+  - - 3065.65
+    - 3068.25
+  - - 3068.6
+    - 3074.925
+  - - 3075.275
+    - 3079.95
+  - - 3080.3
+    - 3087.65
   beat: application · step one, the letters
   visual: 'MapCamera on the chart; rings pulse on each letter on its words; the values under the letters brighten (WPC''s
     own numbers). No step headings on screen (house §5): only the keyword ''letters'' (54 px).'
@@ -3941,15 +4398,15 @@ scenes:
   - RM42
 - id: s78_latest_spacing
   t:
-  - 2774.725
-  - 2799.375
+  - 3088.45
+  - 3113.1
   sentence_times:
-  - - 2774.725
-    - 2777.4
-  - - 2777.75
-    - 2792.875
-  - - 2793.225
-    - 2798.575
+  - - 3088.45
+    - 3091.125
+  - - 3091.475
+    - 3106.6
+  - - 3106.95
+    - 3112.3
   beat: application · step two, spacing and wind
   visual: 'The builder places the bracket where the GFS |∇p| is largest within 1000 km of the 982-hPa low; the barbs there
     brighten; the person icon from s17 appears once more. v2: numbers from RM43 (9.32 hPa/100 km at 40.0 N 44.25 W, bearing
@@ -3982,17 +4439,17 @@ scenes:
   - RM43
 - id: s79_latest_fronts
   t:
-  - 2799.375
-  - 2830.15
+  - 3113.1
+  - 3143.875
   sentence_times:
-  - - 2799.375
-    - 2801.8
-  - - 2802.15
-    - 2809.3
-  - - 2809.65
-    - 2820.3
-  - - 2820.65
-    - 2829.35
+  - - 3113.1
+    - 3115.525
+  - - 3115.875
+    - 3123.025
+  - - 3123.375
+    - 3134.025
+  - - 3134.375
+    - 3143.075
   beat: application · step three, fronts and clouds
   visual: 'S2 the fronts of the 982-hPa low brighten in order (warm, cold, occluded) on their words. S4 the IR layer brightens
     under the cold front; gold ring on the cloud band. S5 MapCamera pans to Virginia-New Jersey; 5 METAR station models (°C,
@@ -4032,15 +4489,15 @@ scenes:
   - RM44
 - id: s80_latest_aloft
   t:
-  - 2830.15
-  - 2858.925
+  - 3143.875
+  - 3172.65
   sentence_times:
-  - - 2830.15
-    - 2832.275
-  - - 2832.625
-    - 2848.6
-  - - 2850.1
-    - 2858.125
+  - - 3143.875
+    - 3146.0
+  - - 3146.35
+    - 3162.325
+  - - 3163.825
+    - 3171.85
   beat: application · step four, the air above the latest chart
   visual: 'Full width LCC: GFS z500 18Z 27 Oct 2026 contours every 60 m with the trough axis from diag.axes (orange dashed);
     250-hPa isotachs shaded from 30 m/s (colour bar m/s) from the GFS 18Z 27 Oct analysis (NEW N2; until fetched, the 28 Oct
@@ -4072,20 +4529,20 @@ scenes:
   - RM87
 - id: s81_latest_context
   t:
-  - 2858.925
-  - 2882.375
+  - 3172.65
+  - 3196.1
   sentence_times:
-  - - 2858.925
-    - 2861.15
-  - - 2861.5
-    - 2871.275
-  - - 2871.625
-    - 2881.575
+  - - 3172.65
+    - 3174.875
+  - - 3175.225
+    - 3185.0
+  - - 3185.35
+    - 3195.3
   beat: application · step five, compare and conclude
   visual: 'Full width: the s76 chart with ''L 961'' (27 Oct 2026) and a ghost ''L 954'' (Ciaran, 2 Nov 2023) side by side;
-    the T+24 low marker (s70) and the T+24 spaghetti (s73) as faint thumbnails at the right; gold highlight over the open
-    Atlantic storm area and slate over the dry eastern United States under ''H 1033''. Source line ''Analysis: NOAA NWS WPC
-    · Data: NCEP GFS/GEFS · 27 Oct 2026, 18 UTC''.'
+    the T+24 low marker (s70) and the +30 h ECMWF spaghetti (s73b) as faint thumbnails at the right; gold highlight over the
+    open Atlantic storm area and slate over the dry eastern United States under ''H 1033''. Source line ''Analysis: NOAA NWS
+    WPC · Data: NCEP GFS · ECMWF open data (CC BY 4.0) · 27 Oct 2026, 18 UTC''.'
   voiceover: 'Step five: conclude. The deepest low on the chart, nine hundred and sixty-one hectopascals near Iceland, isn''t
     quite as deep as Ciarán''s nine hundred and fifty-four. So a forecaster would expect a stormy, wet night over the open
     Atlantic, while the eastern United States stays dry and quiet under the big high.'
@@ -4106,21 +4563,22 @@ scenes:
   related: []
   check_rows:
   - RM88
+  v3_change: 'thumbnail and source line: GEFS T+24 spaghetti -> ECMWF ENS +30 h (narration unchanged)'
 - id: s82_climate
   t:
-  - 2882.375
-  - 2916.7
+  - 3196.1
+  - 3230.425
   sentence_times:
-  - - 2882.375
-    - 2884.3
-  - - 2884.65
-    - 2887.475
-  - - 2887.825
-    - 2892.125
-  - - 2892.475
-    - 2910.75
-  - - 2912.25
-    - 2915.9
+  - - 3196.1
+    - 3198.025
+  - - 3198.375
+    - 3201.2
+  - - 3201.55
+    - 3205.85
+  - - 3206.2
+    - 3224.475
+  - - 3225.975
+    - 3229.625
   beat: application · from weather to climate
   visual: 'Globe3D turns from the North Atlantic chart to the same frame (continuity); the NCEP/NCAR Reanalysis 1 November
     long-term mean MSLP (1991-2020) cross-fades in: isobars every 4 hPa, ''L 999'' at 62.5 N 30 W, ''H 1022'' at 35 N 25 W;
@@ -4155,36 +4613,38 @@ scenes:
   - RM89
 - id: s83_recap
   t:
-  - 2916.7
-  - 2968.575
+  - 3230.425
+  - 3289.3
   sentence_times:
-  - - 2916.7
-    - 2925.025
-  - - 2925.375
-    - 2931.3
-  - - 2931.65
-    - 2941.15
-  - - 2941.5
-    - 2948.65
-  - - 2949.0
-    - 2955.3
-  - - 2955.65
-    - 2960.875
-  - - 2961.225
-    - 2967.775
+  - - 3230.425
+    - 3238.75
+  - - 3239.1
+    - 3245.025
+  - - 3245.375
+    - 3254.875
+  - - 3255.225
+    - 3262.375
+  - - 3262.725
+    - 3269.025
+  - - 3269.375
+    - 3274.6
+  - - 3274.95
+    - 3281.8
+  - - 3282.15
+    - 3288.5
   beat: recap
   visual: 'House recap (s12 of the reference): one mini picture per sentence, arranged on a 4 x 2 grid that fills the content
-    area, each appearing on its sentence; no headings. v2: one beat per sentence with mini pictures: globe + conformal map
-    · legend + clock · packed isobars + Buys Ballot icon (N/S) · front symbols + station model · stacked levels + thickness
-    slab · satellite thumbnails + radar sweep · four forecast L markers + spaghetti.'
+    area, each appearing on its sentence; no headings. v3: eight beats: globe + conformal map · legend + clock · packed isobars
+    + Buys Ballot icon (N/S) · front symbols + station model · stacked levels + thickness slab · satellite thumbnails + radar
+    sweep · four forecast L markers + the shrinking spread circles (s73b) · three panels GFS | IFS | AIFS (s71b, s71e).'
   from_v1: s59_recap
   voiceover: 'To sum up, latitude and longitude pin down any place, and weather charts use conformal projections, which keep
     angles. Read the small print first: units, contour interval, colour bar, source and time. Isobars show the sea-level pressure;
     the closer they are, the stronger the wind, with the low on your left in the north and on your right in the south. Fronts
     carry symbols on the side they move towards, and station models pack a report into a tiny picture. Upper-air maps show
     the height of a pressure surface, and the thickness tells a layer''s temperature. Satellites show the clouds and the moisture
-    aloft, and radar shows the rain. And forecasts sharpen as the valid time comes closer, while ensembles tell us how sure
-    they are.'
+    aloft, and radar shows the rain. Forecasts sharpen as the lead time gets shorter, and ensembles show how sure they are
+    through their spread. And comparing models, physical or machine-learned, shows where the forecast is still uncertain.'
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -4199,17 +4659,18 @@ scenes:
   why: house arc
   music: data-curious
   related: []
+  v3_change: 'the last sentence split in two: lead time + spread; comparing models (physical or machine-learned)'
 - id: s84_end
   t:
-  - 2968.575
-  - 2994.225
+  - 3289.3
+  - 3314.95
   sentence_times:
-  - - 2968.575
-    - 2974.45
-  - - 2974.8
-    - 2985.85
-  - - 2986.2
-    - 2993.925
+  - - 3289.3
+    - 3295.175
+  - - 3295.525
+    - 3306.575
+  - - 3306.925
+    - 3314.65
   beat: end card
   visual: House end card, HOUSE_STYLE §3 weather/climate ending, word for word.
   from_v1: s60_end
@@ -4232,3 +4693,55 @@ scenes:
   why: house rule
   music: data-curious
   related: []
+glossary_proposed:
+  Ensemble: Many runs of the same forecast model from slightly different starting states (and with small random nudges), used
+    to show how sure a forecast is.
+  Ensemble member: One run of an ensemble; the control member starts from the best analysis without changes.
+  Lead time: The time between a forecast's start (initial time) and the time it is valid for.
+  Spread: How far the ensemble members are from one another, e.g. the standard deviation of a field or the root-mean-square
+    distance of the members' low centres from their average.
+  Spaghetti plot: One chosen contour drawn from every ensemble member on one map.
+  Root mean square error: 'The typical size of a forecast''s miss: square the differences from the analysis, average them
+    (area-weighted on a map), take the square root.'
+  Machine-learning weather model: A forecast model that learned how the atmosphere changes from past data (e.g. ECMWF's AIFS,
+    trained on ERA5) instead of solving the equations of motion.
+optional_scenes:
+- id: s73c_two_ensembles
+  beat: application · two ensembles from two centres (GEFS vs ECMWF ENS, about five days ahead)
+  visual: 'Full width LCC (the s73 frame, no contours: only the low positions). S1-S3: the 45 [RM92] matched ECMWF +126 h
+    member lows as teal dots (14 px), then the matched GEFS 18Z 22 Oct +120 h member lows as orange triangles (18 px) on ''orange
+    triangles'' (shape and hue both differ, colour-blind safe); the analysis low as the gold ring. S4: each cloud gets a faint
+    hull in its own colour and its mean position cross; a gold link between the two crosses ''~ 250 km'' (RM103; only if the
+    offset is ≥ 200 km, else no link). Keywords ''ECMWF ENS 51'', ''GEFS 31''. S5: both hulls pulse. Source line ''Data: ECMWF
+    open data (CC BY 4.0) · ENS run 22 Oct 2026 12Z +126 h · NOAA NCEP GEFS run 22 Oct 2026 18Z +120 h · valid 27 Oct 2026,
+    18 UTC''.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gefs.fetch_members (F17, AWS byte ranges, PRMSL only) + NEW F24 fluidpy.diag.cyclone.match_low + NEW
+      F25 fluidpy.diag.ensemble.position_spread (mean positions) + fluidpy.geo.sphere.great_circle_distance
+    params:
+      gefs_init: 2026-10-22T18Z
+      gefs_fhour: 120
+      ens_run: 2026-10-22T12Z
+      ens_step: 126
+    test: tests/data/test_gefs.py (F17); CHECK RM83 (31 members), RM103
+  exaggeration: []
+  kind: map (points)
+  data: GEFS 0.5 deg PRMSL, 31 members (N4, reduced to msl at f120 only) + ECMWF ENS (N12)
+  tool: cartostyle + SVG points
+  runner_up: cut the scene (one sentence 'other centres run ensembles too' moves to s73b)
+  why: 'GEFS kept only where it adds something: two ensembles can disagree, which is why forecasters compare them'
+  music: data-curious
+  related: []
+  check_rows:
+  - RM83
+  - RM103
+  rewording: data_needs §D2 V-s73c (three wordings by overlap and offset)
+  voiceover: Forecasters also compare ensembles from different centres. Here's the American ensemble, thirty-one members of
+    the GFS, started six hours later, at eighteen hundred universal time on the twenty-second. Its lows are the orange triangles,
+    and the European lows are the teal dots. The two clouds overlap over the middle of the Atlantic, but the American one
+    reaches further south-west. When both clouds cover the same area, the forecast is more trustworthy, and when they sit
+    apart, even the ensembles disagree.
+  measured_span_s: 37.7
+  status: 'OPTIONAL, not in the timeline: cut to keep the movie near 55 min; adding it after s73b costs +37.7 s (measured)
+    and needs N4 (GEFS PRMSL f120, 31 members)'

@@ -1,4 +1,15 @@
-# ch00_reading_weather_maps — data needs, new functions and CHECK rows, v2 (movie-director, 2026-10-29)
+# ch00_reading_weather_maps — data needs, new functions and CHECK rows, v3 (movie-director, 2026-10-29)
+
+**v3 (2026-10-29, user-approved ECMWF open data).** The models-and-ensembles part gains ECMWF open data: N12–N14 (data),
+F23–F26 (functions), RM90–RM105 (CHECK rows, with the re-wording variants in §D2), C20–C24 (cited facts). Scenes:
+s71b two models (GFS vs IFS), s71c the map score (root mean square error), s71d what AIFS is, s71e physics vs machine
+learning (IFS vs AIFS vs analysis), s72 ensembles (ECMWF 51 members), s73 the ECMWF spaghetti (+126 h), s73b the spread
+shrinking (+78 h, +30 h); s73c (GEFS vs ECMWF lows) is optional (`storyboard.yaml → optional_scenes`, +37.7 s).
+GEFS (N4) is now needed only for the optional s73c; RM84 (GEFS spread) is replaced by RM95 (ECMWF spread).
+**The ECMWF numbers in the narration are placeholders chosen to measure the narration, not data reads** (the data-scout
+reports `reports/data/ECMWF-OPEN-*.md` did not exist when v3 was planned); each is a CHECK row below, and §D2 says how
+each sentence is re-worded to the data.
+
 
 v2 expands the movie to 85 scenes (user 2026-10-29: very detailed, 40–50 min). Every v1 item that is still used keeps
 its id (A1–A7, D1–D13, F1–F12, RM01–RM45, C1–C7); v2 adds **N1–N11** (data), **F13–F22** (functions), **RM46–RM89**
@@ -47,13 +58,16 @@ listed in §D and re-asserted by the CHECK rows; if a CHECK fails, the narration
 | **N1** | **ERA5 ten levels round Ciarán, 12 UTC 2 Nov 2023** — already on G: but **not registered** (new key `ERA5-ARCO-ciaran2023-10lev`) | t, z, u, v at 1000, 925, 850, 700, 600, 500, 400, 300, 250, 200 hPa; 30–70° N, 40° W–20° E, 0.25° (`G:/…/raw/ERA5-ARCO/era5_captest_ciaran_upper_t-z-u-v_1000-…-200_2023-11-02T12_2023-11-02T12_1h.nc`, 6 MB) → product: 1000/850/700/500/300/250 hPa, float32 bin ≈ 4.5 MB | 0 (exists) | CC BY 4.0 — "Contains modified Copernicus Climate Change Service information 2023" | s47, s48, s49, s52, s53, s54, s74 | already fetched by `fluidpy.data.era5_arco.fetch_box` (provenance attrs inside the file); write `reports/data/ERA5-ARCO-ciaran2023-10lev.md` + registry entry; product via a new `movie_rwm.era5_ciaran_10lev()` |
 | **N2 ⚠** | GFS 0.25° analysis 18 UTC 27 Oct 2026, extra fields (`GFS-ANL`, extends D6) | `Geopotential_height_isobaric` @ 1000 hPa; `Temperature_isobaric`, `u/v-component_of_wind_isobaric` @ 850 hPa; `u/v-component_of_wind_isobaric` @ 250 hPa; 10–80° N, 170° W–10° E | ≈ 4 MB per variable-level raw → ≈ 6 MB product | US Government (NOAA/NCEP), public domain; "NOAA NCEP GFS analysis via Unidata THREDDS" | s54 (thickness at La Grande), s80 (jet, trough) | `fluidpy.data.gfs.fetch_analysis("2026-10-27T18:00", variables=…, level=1000 / 850 / 250)`; **the 18 UTC 27 Oct cycle leaves THREDDS ≈ 3 Nov 2026** (planning read of the 250-hPa wind succeeded on 2026-10-29: max 66.4 m/s at 38.25° N 53.75° W) |
 | **N3 ⚠⚠** | **GFS 0.25° forecast runs valid 18 UTC 27 Oct 2026** (new key `GFS-FC`) | runs **18 UTC 22 Oct (T+120)**, 18 UTC 24 Oct (T+0, 24, 48, 72), 18 UTC 26 Oct (T+24), 18 UTC 27 Oct (T+0 = analysis check); `Pressure_reduced_to_MSL_msl`, `Geopotential_height_isobaric` @ 500, 6-h precipitation (`Total_precipitation_surface_6_Hour_Accumulation` or the mixed-interval accumulation — check the run's `dataset.xml`), 10–80° N, 170° W–10° E | ≈ 1–3 MB per field and time | public domain (NOAA/NCEP) | s10, s68, s69, s70, s71, s81 | new `fluidpy.data.gfs.fetch_forecast(init, fhour or valid, variables, level, box)` (F16) on `Global_0p25deg/GFS_Global_0p25deg_<init>.grib2` with `time=<valid>`; **the 22 Oct 18 UTC run is the oldest on THREDDS today (catalogue checked 2026-10-29: 22 Oct 00 UTC … 29 Oct 00 UTC) — fetch it today.** Afterwards only NCAR RDA ds084.1 or AWS `noaa-gfs-bdp-pds` (GRIB2, needs a decoder) |
-| **N4** | **GEFS members** (new key `GEFS-AWS`) | `gec00` + `gep01…gep30` (31 members), `pgrb2ap5`, runs 18 UTC 22 Oct (f120) and 18 UTC 26 Oct (f024): `HGT:500 mb`, `PRMSL:mean sea level` via the `.idx` byte ranges (≈ 0.5 MB per field per member) | ≈ 60 MB raw → ≈ 8 MB product (contours + member low centres) | NOAA Open Data Dissemination (NODD), public domain; "NOAA NCEP GEFS via the AWS Open Data Registry" | s72, s73, s81 | AWS `https://noaa-gefs-pds.s3.amazonaws.com/gefs.20261022/18/atmos/pgrb2ap5/gep01.t18z.pgrb2a.0p50.f120` (+ `.idx`; listing checked 2026-10-29); **needs a GRIB2 decoder: `.venv` has none (no cfgrib/eccodes/pygrib). Proposed install: `eccodes` (pip wheel with the bundled library, Apache-2.0) + `cfgrib` (Apache-2.0) into `.venv` — orchestrator decision; report disk before/after.** Permanent archive (not urgent). **Runner-up (no GRIB):** THREDDS "HGEFS Quarter Degree Ensemble Forecast – Statistics" (mean and spread, NCSS netCDF, rolling): s73 then becomes a spread map and loses its spaghetti |
+| **N4** (v3: optional, s73c only; PRMSL f120 is enough) | **GEFS members** (new key `GEFS-AWS`) | `gec00` + `gep01…gep30` (31 members), `pgrb2ap5`, runs 18 UTC 22 Oct (f120) and 18 UTC 26 Oct (f024): `HGT:500 mb`, `PRMSL:mean sea level` via the `.idx` byte ranges (≈ 0.5 MB per field per member) | ≈ 60 MB raw → ≈ 8 MB product (contours + member low centres) | NOAA Open Data Dissemination (NODD), public domain; "NOAA NCEP GEFS via the AWS Open Data Registry" | s72, s73, s81 | AWS `https://noaa-gefs-pds.s3.amazonaws.com/gefs.20261022/18/atmos/pgrb2ap5/gep01.t18z.pgrb2a.0p50.f120` (+ `.idx`; listing checked 2026-10-29); **needs a GRIB2 decoder: `.venv` has none (no cfgrib/eccodes/pygrib). Proposed install: `eccodes` (pip wheel with the bundled library, Apache-2.0) + `cfgrib` (Apache-2.0) into `.venv` — orchestrator decision; report disk before/after.** Permanent archive (not urgent). **Runner-up (no GRIB):** THREDDS "HGEFS Quarter Degree Ensemble Forecast – Statistics" (mean and spread, NCSS netCDF, rolling): s73 then becomes a spread map and loses its spaghetti |
 | **N5** | **IEM NEXRAD n0q composite reflectivity** (new key `IEM-N0Q`) | 8-bit PNG + `.wld` (0.005°, 50° N/126° W origin, 12200 × 5400): **2026-10-27 18:00 UTC**; **2020-08-10 15:00–19:00 UTC** (hourly, or 5-min for a smooth loop) | ≈ 1.6 MB per frame | NWS NEXRAD data public domain; IEM asks for credit: "NEXRAD composite via the Iowa Environmental Mesonet (Iowa State University)" | s66, s67 | `https://mesonet.agron.iastate.edu/archive/data/YYYY/MM/DD/GIS/uscomp/n0q_YYYYMMDDHHMM.png` (HTTP 200 checked 2026-10-29 for 2026-10-27 18:00 and 2022-09-28 18:00) through `fluidpy.data.fetch` in a new `fluidpy.data.iem_radar` (F15) |
 | N6 (optional) | NEXRAD Level II KDMX 10 Aug 2020 ≈ 16–18 UTC (runner-up for N5 in s67) | one volume per 5 min | ≈ 10 MB each | public domain (NOAA NODD) | s67 | AWS `unidata-nexrad-level2/2020/08/10/KDMX/…` (listing format checked 2026-10-29 on KAKQ/KTBW), read with `metpy.io.Level2File` (MetPy installed) |
 | **N7** | IEM ASOS/METAR Oklahoma, 20 May 2013 19:50–20:05 UTC (`IEM-METAR`, extends D8) | network `OK_ASOS` (+ `TX_ASOS` for context), ≈ 50 stations | < 50 kB | as D8 (NWS/FAA public domain; IEM credit) | s26 (dryline) | `fluidpy.data.metar.fetch` with a `network=` option (small F6 extension) — IEM `cgi-bin/request/asos.py?network=OK_ASOS&…&report_type=3` |
 | N8 | product from the existing raw all-station METAR CSV (D8) | PAFB, CYAH, ESKS, MDJB (s32, s37); K4R5, KHPT, KCOQ and every RA/SN station in 42–49° N 97–87° W (s66); every station in 34–45° N 80–68° W (s81) | < 100 kB | as D8 (non-US reports WMO Res. 40, non-commercial) | s32, s36–s37, s54, s66, s81 | no download: `fluidpy.data.metar.read` on the raw CSV |
 | N9 | product from the existing IGRA2 Trappes file (E1) | the 00 UTC 2 Nov 2023 sounding (52 levels, launch 23:15 UTC) | < 20 kB | NOAA NCEI IGRA2, public domain | s55, s56 | no download: `fluidpy.data.igra.find_sounding` + `fill_heights` |
 | N10 | product from the NCEP R1 LTM (E2) | November mean slp, North Atlantic 20–80° N, 80° W–20° E | < 1 MB | NOAA PSL, public domain (PSL acknowledgement) | s82 | no download: `fluidpy.data.psl` reader |
+| **N12** | **ECMWF open data, IFS ensemble (ENS)** (key `ECMWF-OPEN-ENS`) | stream `enfo`, type `ef`, 0.25°: `msl` and `gh` @ 500 hPa, **all members (control 0 + perturbed 1–50 = 51, RM90)**, runs **12 UTC 22 Oct (+126 h), 24 Oct (+78 h), 26 Oct (+30 h)**, all valid 18 UTC 27 Oct 2026; box 10–80° N, 170° W–10° E after decoding. Optional, for real s72 tracks: `msl` every 6 h from +0 to +126 h of the 22 Oct run | ≈ 25–40 MB raw per step (whole global messages; byte ranges from the `.index`) → product ≈ 3 MB (51 contours × 3 runs + 51 low centres × 3 runs, coarsened fields) | CC BY 4.0 + ECMWF open-data terms; credit "ECMWF open data (CC BY 4.0)"; source line "ECMWF open data (CC BY 4.0) · ENS run <date> 12Z +<h> h" | s72, s73, s73b, (s73c) | F23 `fluidpy.data.ecmwf_open.fetch_fields(init, step, params=("msl","gh"), levels=(500,), model="ifs", stream="enfo")` (data-scout; product module `fluidpy.data.movie_rwm_ecmwf`) on the AWS mirror `ecmwf-forecasts` (history kept: not urgent). **In progress 2026-10-29** (raw `2026102212_126h_ifs_enfo_gh500-msl.grib2` already on G:) |
+| **N13** | **ECMWF open data, IFS high resolution** (key `ECMWF-OPEN-IFS`) | `msl`, `gh` @ 500: **run 18 UTC 24 Oct +72 h** (same start and lead time as the GFS run of s70) and **run 18 UTC 27 Oct step 0** (the ECMWF analysis). The 06/18 UTC IFS runs go only to +90 h and, as far as the director knows, sit under the short-cut-off stream `scda` (verify with `ecmwf_open.list_files`; `file_key` accepts oper/enfo/wave/waef only today → F23 extension). **Runner-up**: the scout's 12 UTC 24 Oct +78 h (then s71b/s71e say "three and a quarter days", and GFS 12 UTC 24 Oct +78 h is needed: THREDDS `fetch_forecast` before ≈ 31 Oct 2026, or AWS `noaa-gfs-bdp-pds` later) | ≈ 15 MB raw → < 1 MB product | as N12; source line "ECMWF open data (CC BY 4.0) · IFS run 24 Oct 2026 18Z +72 h" | s71b, s71c, s71e, s73 (analysis line), s73b | F23 `fetch_fields(..., model="ifs", stream="scda" or "oper")`. The scout's `RUNS` hold the 12/00 UTC runs and 27 Oct 18 UTC: **add 24 Oct 18 UTC** |
+| **N14** | **ECMWF open data, AIFS Single** (key `ECMWF-OPEN-AIFS`) | `msl`, `gh` @ 500: **run 18 UTC 24 Oct +72 h** (AIFS Single runs four times a day, 6-h steps) | ≈ 10 MB raw → < 1 MB | as N12; source line "ECMWF open data (CC BY 4.0) · AIFS run 24 Oct 2026 18Z +72 h" | s71e | F23 `fetch_fields(..., model="aifs-single", stream="oper")`. Runner-up as N13 (12 UTC +78 h, already in the scout's `RUNS`). The scout also fetches AIFS-ENS: not used in v3 (no extra teaching within the length budget) |
 | N11 (optional) | GOES-19 C02/C13 00–06 UTC 28 Oct 2026 (the v1 loop extension, not yet fetched) | as D9 | ≈ 25 MB raw | public domain | s61 loop | `fluidpy.data.goes.fetch_cmi_ee` (Earth Engine keeps the collection) |
 
 Dropped from v1: nothing to undo. The v2 cut of Hurricane Ian radar means no Ian radar fetch; v1 D2/D12/D13 stay optional runners-up.
@@ -83,6 +97,18 @@ analysis must not query hull stations at their own positions.
 | F20 | `fluidpy.diag.axes.saddle_points(field, lat, lon, smooth_km=300)` (cols) | grid points with ∇F ≈ 0 and Hessian determinant < 0 on the smoothed field (metric terms as in `zonal_extrema`) | `fluidpy/diag/axes.py` | V1 z = x² − y² on a sphere patch; V7 maxima/minima rejected; data RM53 |
 | F21 | `fluidpy.diag.station.metar_wx_to_ww(wxcodes)` → WMO ww (code table 4677) for the glyph | mapping for −SN/SN/+SN, FG, BR, −DZ/DZ, −RA/RA/+RA, SHRA, TS, TSRA (the codes this movie shows) | `fluidpy/diag/station.py` | V1 table rows vs WMO-No. 306 code table 4677; V1 the four s37 stations |
 | F22 | `fluidpy.geo.orbits.geostationary_altitude(GM, Omega_sidereal, a)` | r = (GM / Ω²)^(1/3); altitude = r − a | `fluidpy/geo/orbits.py` (new; or `constants`) | V1 35 786 km within 1 km (Ω = 7.2921×10⁻⁵ s⁻¹, GM = 3.986004418×10¹⁴ m³ s⁻², equatorial a = 6378.137 km) |
+
+### New in v3 (ECMWF open data)
+| Id | Function | Formula / method | Lives in | V-levels (planned) |
+|---|---|---|---|---|
+| F23 | `fluidpy.data.ecmwf_open.{file_key, list_files, parse_index, read_index, select_messages, merge_ranges, decode_grib, fetch_fields}` (data-scout, in progress) | AWS mirror keys `YYYYMMDD/HHz/<ifs or aifs-single or aifs-ens>/0p25/<stream>/…-<step>h-<stream>-<type>.grib2`; `.index` JSON lines → byte ranges → HTTP Range → cfgrib; valid = init + step | `fluidpy/data/ecmwf_open.py` (keys `ECMWF-OPEN-IFS`, `-ENS`, `-AIFS`) | V1 key format; V1 index parse on a stored index; V1 valid time (12Z 22 Oct + 126 h = 18Z 27 Oct); V1 the ENS file holds numbers 0–50 (RM90); V7 a step not in the run raises. **Needed extension:** stream `scda` for the 06/18 UTC IFS runs (N13), if the listing confirms it |
+| F24 | `fluidpy.diag.cyclone.match_low(msl, lat, lon, ref, max_km=1200, closed_hpa=2.0, closed_radius_km=500)` → per field (members on a leading axis): refined centre (via `storm_centre`), pressure, distance to `ref`, `closed`, `ambiguous` | candidates = local minima within `max_km` of `ref`; keep those enclosed by a closed isobar `closed_hpa` above the minimum within `closed_radius_km` (flood fill); pick the nearest; `ambiguous` when a second closed low lies within 1.5 × that distance; none → NaN + `closed=False`. The ensemble form of the house storm-tracker rule (never a box minimum) | `fluidpy/diag/cyclone.py` | V1 Gaussian lows shifted by known distances are recovered (≤ ¼ cell); V7 a deeper but farther low is not picked; V7 an open trough → NaN; V7 two equidistant closed lows → `ambiguous`; V5 vs `track_by_continuity` on an hourly synthetic sequence (same centre at the last step). **The scout's `movie_rwm_ecmwf.low_centre` is a 10°-radius minimum with a rim test: use F24 for every low drawn on screen** |
+| F25 | `fluidpy.diag.ensemble.position_spread(lat, lon, a=EARTH_RADIUS)` → mean position (normalised mean of unit vectors), RMS great-circle distance from it, max pairwise distance, n | r̄ = Σ r̂ᵢ / ‖Σ r̂ᵢ‖; spread = √(mean dᵢ²), dᵢ = great-circle distance to r̄ | `fluidpy/diag/ensemble.py` | V1 points on a small circle of radius R → mean = centre, spread = R (to O(R²/a²)); V1 identical points → 0; V7 points across the dateline; V7 NaN members ignored, n counted |
+| F26 | `fluidpy.diag.ensemble.rmse(forecast, reference, lat=None, box=None, weights="coslat")` | √(Σ wᵢ (fᵢ − rᵢ)² / Σ wᵢ), wᵢ = cos φᵢ on a regular grid (area weights) | `fluidpy/diag/ensemble.py` (or a new `fluidpy/diag/verify.py`) | V1 [1, −2, 2] unweighted → √3 = 1.732 (RM98); V1 a constant offset d → d; V1 cos-φ weights equal `sphere.band_area` fractions for a field constant on latitude bands; V5 vs the numpy weighted formula; V7 NaN points dropped from both sums |
+
+Also used (existing, tested): `fluidpy.diag.ensemble.{member_contours, spread, probability, mean_along_contour, ensemble_mean}`,
+`fluidpy.diag.cyclone.storm_centre`, `fluidpy.geo.sphere.{great_circle_distance, gradient}`, `fluidpy.data.gfs.fetch_forecast`
+(F16, N3), `fluidpy.diag.axes.trough_ridge_axes` (RM91 fallback).
 
 ## D. CHECK rows the builder must assert (RM-ids in the storyboard `check_rows`)
 **Kept from v1 (wording of v1 data_needs §D):** RM01–RM18, RM21–RM45 as written there, with these **v2 updates**:
@@ -135,9 +161,42 @@ RM44 — METAR part FAILED in the data (1° turn): the narration says the Virgin
 | RM87 | s80 | GFS z500 18Z 27 Oct: a `diag.axes` trough 6–10° W of the 982 low (read: along ≈ 52° W, 40.5–61.8° N); GFS 250-hPa max 64–68 m/s south of 41° N (read: 66.4 at 38.25° N 53.75° W) |
 | RM88 | s81 | METARs in 34–45° N 80–68° W at 18 UTC 27 Oct: no precipitation codes (box product: only HZ and VCSH); n0q fraction > 20 dBZ there < 0.5 %; WPC H 1033 over Quebec |
 | RM89 | s82 | NCEP R1 Nov LTM 1991–2020: Icelandic low 998–1000 hPa near 62.5° N 30° W (read 999.1); Azores high 1021–1023 near 35° N 25° W (1021.6) |
+| **v3** | | **ECMWF open data. Values marked 'placeholder' are NOT data reads: they were chosen to measure the narration; the assertion is the structure (ranges, orders, counts) and the narration speaks the data value** |
+| RM90 | s72, s73, s73b | each ENS file (12Z 22 Oct +126 h, 24 Oct +78 h, 26 Oct +30 h) decodes to 51 members (number 0–50) of `msl` and `gh`@500 with `valid_time` = 2026-10-27T18Z; if the control (number 0) is absent, s72 uses variant V-s72 |
+| RM91 | s73, s73b | the ECMWF analysis (IFS 18Z 27 Oct step 0) 5520-m z500 contour passes within 300 km of the analysis 982 low or crosses the `diag.axes` trough axis; else the spaghetti level becomes the 60-m multiple nearest the analysis z500 on the trough axis at 45° N, and the spoken number changes |
+| RM92 | s73 | F24 `match_low` on the 51 members at +126 h within 1200 km of the ECMWF analysis 982 low: matched + without a closed low = 51 (placeholder 45 + 6); ambiguous matches listed; the cloud size spoken = max pairwise distance of the matched lows rounded to 100 km (placeholder ≈ 1000 km) |
+| RM93 | s73b | F25 position spread of the matched lows: +126 h > +78 h > +30 h, and +126 h ≥ 3 × +30 h (placeholders ≈ 400, 200, 50 km; spoken to 50 km, or to 10 km below 100 km) |
+| RM94 | s73b | `diag.ensemble.spread` (ddof 1) of the matched central pressures: +126 h > +30 h (placeholders ≈ 6, 3, 1 hPa; spoken to 1 hPa) |
+| RM95 | s73b (replaces RM84) | `mean_along_contour` of the z500 member spread along the analysis 5520-m line: +126 h > 2 × +30 h (the "strands draw together" sentence) |
+| RM96 | s71b | IFS 18Z 24 Oct +72 h: F24 low within 1200 km of the analysis low; spoken distance (to 10 km) and pressure (to 1 hPa) from the data (placeholder ≈ 90 km, ≈ 986 hPa); GFS values = RM81 (+72 h: 992.7 hPa, 199 km) |
+| RM97 | s71b, s71e | ECMWF analysis 982 low (F24 on IFS 18Z 27 Oct step 0, seeded on the WPC 43.0° N 43.0° W) within 50 km and 1.5 hPa of the GFS analysis low (982.1 hPa, 42.75° N 43.5° W); else variant V-s71b-an |
+| RM98 | s71c | F26 `rmse([1, −2, 2], [0, 0, 0])` = √3 = 1.732 → "about one point seven" (V1, no data) |
+| RM99 | s71c | cos-φ weighted MSLP RMSE, 25–70° N, 80° W–0°, 0.25°: GFS +72 h vs the GFS analysis and IFS +72 h vs the ECMWF analysis (placeholders ≈ 3.1 and ≈ 2.6 hPa; spoken to 0.1 hPa); both also scored against the other centre's analysis — if the order flips, variant V-s71c |
+| RM100 | s71e | AIFS 18Z 24 Oct +72 h: F24 low distance and pressure (placeholders ≈ 120 km, ≈ 988 hPa); AIFS RMSE vs the ECMWF analysis (placeholder ≈ 2.8 hPa), same box and weights as RM99 |
+| RM101 | s71e | the "smoother" sentence (S4) only if, within 500 km of each forecast's low, max of the pressure-gradient size (`geo.sphere.gradient`) for AIFS ≤ 0.9 × that for IFS **and** the AIFS central pressure is higher **and** fewer closed 4-hPa isobars ring the AIFS low; else S4 is cut (about −6 s) |
+| RM102 | s72 | `diag.ensemble.probability` with 20 of 51 members above a threshold = 0.392 → "about thirty-nine percent" (V1; thought example) |
+| RM103 | s73c (optional) | GEFS 18Z 22 Oct +120 h: 31 members (RM83); F24-matched lows; the fraction of GEFS lows inside the convex hull of the ECMWF +126 h lows, and the distance and bearing between the two mean positions (F25), choose the wording (V-s73c) |
+| RM104 | s71b, s71e, s73, s73b | every ECMWF source line's run date + cycle + step equals the valid time 2026-10-27T18Z read from the file (`valid_time`), and the stamps on screen match |
+| RM105 | s71d | cited facts C20–C22 verified before the build (no data) |
 
 Spare ids (scenes cut in the v2 tightening; kept so the numbering stays stable): RM61 (METAR→plot steps), RM66 (hemispheric
-500 hPa), RM78 (Ian radar), RM79 (beam height), RM86 (track steps).
+500 hPa), RM78 (Ian radar), RM79 (beam height), RM86 (track steps); v3: RM84 (GEFS spread, replaced by RM95). RM83 and RM103
+apply only if the optional s73c is used.
+
+### D2. Re-word to the data (v3 ECMWF scenes)
+The narration in `script.md` uses the placeholder values. When the products exist, the builder (or the director, on
+request) applies these rules, re-runs `tools/tts.py` for the changed sentences and updates the timing.
+
+| Variant | Scene, sentence | Rule |
+|---|---|---|
+| V-s71b | s71b S4 | distances and pressures from RM81/RM96. If the two distances differ by < 30 km: "Both put the Atlantic low about N kilometres from where it turned out to be." Otherwise keep the sentence (GFS first) with each model's numbers; never add a "better/worse" word |
+| V-s71b-an | s71b S5 | RM97 pass: as written. Fail: "The two centres' analyses differ by about N kilometres, so each forecast is checked against its own." |
+| V-s71c | s71c S7 | numbers from RM99. If the scores differ by < 10 % (or the order flips with the other analysis): "…the three-day forecast missed by about N hectopascals for both models." |
+| V-s71e | s71e S2–S4 | numbers from RM96/RM100; same 30-km and 10 % rules; S4 ("smoother") only if RM101 passes; S5–S6 stay in every case |
+| V-s72 | s72 S5–S6 | RM90: if the control is not in the files, "The European ensemble has fifty members, each with small changes." and "If twenty of the fifty…, about forty percent" (RM102 re-asserted with 20/50) |
+| V-s73 | s73 S6 | cloud size and count from RM92; if every member has a closed low: "Here the dots are scattered across about N kilometres." |
+| V-s73b | s73b S4–S6 | numbers from RM93/RM94; if a spread does not fall at every step, S6 says "…in this case, mostly, the closer the valid time, the smaller the spread…" |
+| V-s73c | s73c S4 (optional) | overlap > 50 % and offset < 200 km: "The two clouds cover much the same area." · offset ≥ 200 km: "The American cloud is centred about N kilometres to the <direction> of the European one." · overlap < 20 %: "The two clouds barely overlap." |
 
 **Rule.** If a CHECK fails, the narration changes to the data (never the reverse); the director re-runs the TTS dry run
 for the changed sentences.
@@ -162,10 +221,15 @@ for the changed sentences.
 | C16 | GFS 00Z 27 Oct 2026 MSLP 1057.8 hPa on the Karakoram is a sea-level-reduction artefact (s11) | reports/data/GFS-ANL.md (data) | — |
 | C17 | US station plots write temperature in °F (s35) | NWS station-model guide (WPC) | drop the sentence |
 | C18 | Squall line = dashes and pairs of dots; dryline = open half circles (s26) | NWS Unified Surface Analysis Manual (2013) | describe the symbol only on screen |
+| C20 | AIFS is ECMWF's machine-learning forecasting system, trained on ERA5 reanalysis and fine-tuned on ECMWF operational analyses (s71d) | Lang et al. (2024), "AIFS – ECMWF's data-driven forecasting system", arXiv:2406.01465; ECMWF AIFS Single documentation on the open-data pages | drop "and then fine-tuned on the European Centre's recent analyses" |
+| C21 | AIFS steps forward six hours at a time and starts from the ECMWF analysis (s71d) | as C20; the open-data AIFS Single file list (6-h steps) | "a few hours later" instead of "six hours later" |
+| C22 | IFS stands for Integrated Forecasting System, a physics-based model (s71b) | ECMWF IFS documentation | drop the expansion |
+| C23 | The ECMWF ensemble has 51 members (control + 50 perturbed) with perturbed starting states and stochastic physics (s72) | ECMWF ENS documentation; RM90 on the files | V-s72 |
+| C24 | Routine verification scores each centre's forecasts against its own analysis (honesty note, s71c) | WMO Manual on the GDPFS (WMO-No. 485), verification of deterministic NWP | keep the double scoring of RM99, drop the claim |
 | C19 | Time zones: Europe/Paris UTC+1 on 2 Nov 2023 (summer time ended 29 Oct 2023); America/New_York UTC−4 on 27 Oct 2026 (ends 1 Nov 2026) (s09) | IANA tz database (RM46) | — |
 
 ## F. Credits (manifest and movie page; on screen only the source line)
-ERA5 (CC BY 4.0, Copernicus/ECMWF) · NOAA NCEP GFS and GEFS (public domain; via Unidata THREDDS and the AWS Open Data
+ERA5 (CC BY 4.0, Copernicus/ECMWF) · **ECMWF open data — IFS, ENS, AIFS (CC BY 4.0; "Copyright (c) 2026 ECMWF, www.ecmwf.int"; AWS mirror `ecmwf-forecasts`)** · NOAA NCEP GFS and GEFS (public domain; via Unidata THREDDS and the AWS Open Data
 Registry) · NOAA NWS WPC coded surface bulletin via the Iowa Environmental Mesonet · NOAA NCEI ISD (non-US reports WMO
 Res. 40, non-commercial) · Iowa Environmental Mesonet METAR archive and NEXRAD n0q mosaics (NWS data) · NOAA NCEI IGRA2 ·
 NOAA GOES-19 ABI via Google Earth Engine · NASA EOSDIS GIBS / Worldview (MODIS Aqua; Himawari-9, JMA) · NCEP/NCAR
@@ -180,6 +244,20 @@ Reanalysis 1 (NOAA PSL) · NASA Blue Marble NG · Natural Earth · ETOPO 2022 (N
    orchestrator decision 3 of 2026-10-27 was for the old position (4th in the series). Recommended: keep them out.
 4. Register the already-downloaded ERA5 ten-level file (N1).
 5. Lexicon: apply the `lexicon_proposed` entries (storyboard) before the build; the dry run used the current lexicon.
+
+## G3. Decisions for the orchestrator (v3)
+1. **Ask the data-scout to add the 18 UTC 24 Oct runs** of IFS (+72 h; stream `scda` if the listing confirms it — F23
+   extension) and AIFS Single (+72 h), so s71b/s71e share the start and lead time of the GFS run in s70. Runner-up: the
+   scout's 12 UTC 24 Oct +78 h for IFS/AIFS **plus** GFS 12 UTC 24 Oct +78 h (`gfs.fetch_forecast`, THREDDS, before
+   ≈ 31 Oct 2026; tiny) — recommended to fetch now as insurance.
+2. **Implementer: F24 `cyclone.match_low`, F25 `ensemble.position_spread`, F26 `ensemble.rmse`** with the V-rows above;
+   replace the scout's box minimum `movie_rwm_ecmwf.low_centre` by F24 for every on-screen low (house rule §7).
+3. **Optional s73c** (GEFS vs ECMWF lows, +37.7 s → 55:55): recommended **out** (s71b already teaches "compare models");
+   if kept, N4 needs only PRMSL f120 for the 31 GEFS members.
+4. **Glossary** (knowledge-keeper): add the storyboard's `glossary_proposed` entries (Ensemble, Ensemble member, Lead time,
+   Spread, Spaghetti plot, Root mean square error, Machine-learning weather model); none is in `knowledge/glossary.yaml`
+   today. **Lexicon:** IFS and AIFS as letters (`lexicon_proposed`).
+5. Re-run the TTS for the §D2 sentences once the ECMWF products exist; the v3 total should move by a few seconds only.
 
 ## Notes carried from v1 (still binding)
 ### Orchestrator decisions (2026-10-27)

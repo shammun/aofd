@@ -136,7 +136,7 @@ where the picture shows them; latest data + history + cited impacts; house style
 ### Stage 9 · Synthesis
 | # | Movie |
 |---|---|
-| 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen; user 2026-10-29: very detailed, at least 40–50 min) |
+| 69 | **Reading weather maps, in full detail** (everything above applied; data already fetched and frozen; user 2026-10-29: very detailed, at least 40–50 min). **v3 plan (2026-10-29, user-approved ECMWF open data):** 90 scenes, 55:17 measured (v2 49:57 + 5:21), 142.1 wpm; the models-and-ensembles part adds GFS vs ECMWF IFS at the same lead time, the map score (root mean square error), what the machine-learning AIFS is and IFS vs AIFS vs the analysis, and the ECMWF 51-member ensemble as the main spaghetti plot (runs 12 UTC 22, 24, 26 Oct, +126/+78/+30 h, member lows as dots, spread shrinking); GEFS kept only as an optional two-ensemble scene (+38 s). Data ECMWF-OPEN-ENS/IFS/AIFS (CC BY 4.0, AWS mirror); new functions cyclone.match_low, ensemble.position_spread, ensemble.rmse |
 
 ## Notes
 - User (2026-10-28, final): cross product = STEP 1 update the full movie (0.2 → v5) with the reference video's intuition for every component (î, ĵ, k̂), the meaning (first × across part of second; arrow = axis), when to use it and what the two vectors stand for; STEP 2 split v5 at the start of the meteorology/weather/climate applications into #2 (definition, intuition, examples) and #3 (applications), content unchanged, each with a proper new start and end.
