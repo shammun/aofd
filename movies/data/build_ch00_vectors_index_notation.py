@@ -68,7 +68,8 @@ from fluidpy.geo.constants import EARTH_RADIUS  # noqa: E402
 DEG = np.pi / 180.0
 BREST = (48.45, -4.42)            # Brest-Guipavas (ISD station 07110 at 48.448 N, 4.419 W)
 BREST_GP = (48.5, -4.5)           # the ERA5 grid point used for every 850 hPa number
-SEA_PT = (48.0, -6.0)             # s12d sea point west of Brest
+SEA_PT = (45.0, -2.75)            # s12d sea point, Bay of Biscay south of Brittany (fix loop 2, review 2 N-M1: the
+                                  # isobars run straight NE here for ±150 km; at 48N 6W they bend within the drawn arrow)
 BOX_T = (40.0, 56.0, -20.0, 10.0)  # field textures and isotherms (lat0, lat1, lon0, lon1)
 GV, GA, GS, DA, DC, CT, CI = ("fluidpy.geo.vectors.", "fluidpy.geo.atmos.", "fluidpy.geo.sphere.", "fluidpy.diag.advection.",
                               "fluidpy.diag.climatology.", "fluidpy.core.tensors.", "fluidpy.core.index_notation.")
@@ -443,10 +444,26 @@ def main() -> int:
                   msl=h18.msl.values.astype(float), lat=alat, lon=alon)
     ia, ja = int(np.argmin(abs(alat - SEA_PT[0]))), int(np.argmin(abs(alon - SEA_PT[1])))
     u10, v10 = float(h18.u10.values[ia, ja]), float(h18.v10.values[ia, ja])
-    row("VI45", "u_g at 48N 6W = (30.9, 24.9) ± 1", [ug[ia, ja], vg[ia, ja]], [30.9, 24.9], 1.0)
-    row("VI45", "real 10-m wind = (10.0, 18.0) ± 0.2", [u10, v10], [10.0, 18.0], 0.2)
-    row("VI45", "u_ag = u - u_g = (-20.9, -6.9) (screen)", [10.0 - 30.9, 18.0 - 24.9], [-20.9, -6.9], 1e-9)
-    row("VI45", "u_ag at full precision ≈ (-20.8, -6.9)", [u10 - ug[ia, ja], v10 - vg[ia, ja]], [-20.9, -6.9], 0.3)
+    row("VI45", "u_g at 45N 2.75W = (17.8, 21.0) ± 0.1 (spoken 'seventeen point eight', 'twenty one')", [ug[ia, ja], vg[ia, ja]], [17.8, 21.0], 0.1)
+    row("VI45", "real 10-m wind = (-2.1, 13.4) ± 0.1", [u10, v10], [-2.1, 13.4], 0.1)
+    row("VI45", "u_ag = u - u_g = (-19.9, -7.6) (screen)", [-2.1 - 17.8, 13.4 - 21.0], [-19.9, -7.6], 1e-9)
+    row("VI45", "u_ag at full precision ≈ (-19.9, -7.6)", [u10 - ug[ia, ja], v10 - vg[ia, ja]], [-19.9, -7.6], 0.1)
+    # fix loop 2 (N-M1): the isobar through the sea point is straight for ±150 km (trace the u_g streamline = the isobar
+    # in 10-km steps both ways; bearings stay within 8°), so the drawn 190-km u_g arrow lies along the isobars on screen
+    from scipy.interpolate import RegularGridInterpolator as _RGI
+    _iu, _iv = _RGI((alat, alon), ug), _RGI((alat, alon), vg)
+    _brs = []
+    for _sg in (1.0, -1.0):
+        _y, _x = SEA_PT
+        for _ in range(16):
+            _a, _b = float(_iu((_y, _x))), float(_iv((_y, _x)))
+            _n = float(np.hypot(_a, _b))
+            _brs.append(float(np.degrees(np.arctan2(_a, _b)) % 360.0))
+            _y += _sg * 10e3 * _b / _n / 111195.0
+            _x += _sg * 10e3 * _a / _n / (111195.0 * np.cos(_y * DEG))
+    rng("VI45", "isobar bearing along ±150 km through the sea point spans ≤ 8° (straight isobars)", max(_brs) - min(_brs), 0.0, 8.0)
+    _bg, _br = np.degrees(np.arctan2(ug[ia, ja], vg[ia, ja])) % 360.0, np.degrees(np.arctan2(u10, v10)) % 360.0
+    rng("VI45", "real wind turned 30-60° to the LEFT of u_g (across the isobars towards the low, NH friction)", (_bg - _br) % 360.0, 30.0, 60.0)
     nb12 = []
     for la in (46.5, 47.5, 49.0, 50.0):
         for lo in (-11.0, -9.0, -7.5):

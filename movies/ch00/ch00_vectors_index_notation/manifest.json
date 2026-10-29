@@ -4,14 +4,14 @@
  "builder": "movies/data/build_ch00_vectors_index_notation.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "2cf407d2cd53fd157d04ef269c5f9f4d853f4c16",
-  "dirty_tracked": true,
+  "commit": "08f83b7dcf563e382a21664e6784e277ed756fcc",
+  "dirty_tracked": false,
   "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
-  "atmos_py_sha256": "0701685569802a29a910c5e799408c4a04b6c8eaffe60fc9bf1eb10929bd1221",
-  "sphere_py_sha256": "9d803c1f970a527939f410b6540f84627921b04e6986489b72e2dbd3cf955c0a",
+  "atmos_py_sha256": "fd7273ed9cd4c0c29e4b77ddeb478f4b8a0924cd759f007bea4d1fc968dc207f",
+  "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
   "advection_py_sha256": "653ac1d74b90b946bb5fef8d253f271a9b33fa2c512d979e115d7384791db91c",
-  "cyclone_py_sha256": "ad06091e92b08a68e8cdc23eb90fa27ff0cf68042210d25b83093847df2677cd",
-  "climatology_py_sha256": "f047ee01a44620d2ed01891eb522541e0d4086583014408ee6acd7c7643c5d6d",
+  "cyclone_py_sha256": "302a3892a9af2ccf5e8d19d3bf30bfd4bc2c6ae7afd3f3c31edf52448ed799d2",
+  "climatology_py_sha256": "0facae7e9ed73bd3010798a4d779d7fc29b9039b309ecca826041baee2d37c9d",
   "tensors_py_sha256": "373d3c3384f3699fc93847616eefa8f0b19f9445899a2c3f0103e1eebd9247a6",
   "index_notation_py_sha256": "36301f9946a1112c021f2c7cf6a2f1354a7da54d0e1ad2877f8ca4c680b7c454",
   "isd_py_sha256": "c00d9eb58a0f2b82d386ea733d054c98e8404539eb87a21949706669c09ed73a"
@@ -35,8 +35,8 @@
    -4.5
   ],
   "sea_point_s12d": [
-   48.0,
-   -6.0
+   45.0,
+   -2.75
   ],
   "rho0_geostrophic": 1.25,
   "coast_axis_bearing_deg": 80,
@@ -101,7 +101,7 @@
   "vi_tc_20231101.jpg": "16d4a438f09e5f467a5553af16b1f1a8cb68cd906e2bf24487a2b2e942b7008a"
  },
  "data_files": {
-  "vi.json": "276b21140d9e7d266aeb5579a7b013fce08abb27a576a4f93e2828252c3ae523",
+  "vi.json": "5de0adc8a0a58003db5fd88bfde3cdc192d8829ee47013c7295399e10392ae11",
   "img/gfs250_speed.png": "b64b8e21eee774cc1daf6e92cc3972c3fb2df650879c0990d3cc8fe73b2754da",
   "img/relief_brittany.png": "970fa254088586ece3fa074816cf1b6a0ec3471f7981ca49112d17ee01eb9736",
   "img/t2m_global.png": "85f73a71078acdf4a31c95022597ef803dab39c16dfe97c4b568ca2b414b2421",
@@ -915,58 +915,78 @@
   },
   {
    "id": "VI45",
-   "name": "u_g at 48N 6W = (30.9, 24.9) ± 1",
+   "name": "u_g at 45N 2.75W = (17.8, 21.0) ± 0.1 (spoken 'seventeen point eight', 'twenty one')",
    "value": [
-    30.857096,
-    24.88516
+    17.822733,
+    21.015083
    ],
    "ref": [
-    30.9,
-    24.9
+    17.8,
+    21.0
    ],
-   "tol": 1.0,
+   "tol": 0.1,
    "pass": true
   },
   {
    "id": "VI45",
-   "name": "real 10-m wind = (10.0, 18.0) ± 0.2",
+   "name": "real 10-m wind = (-2.1, 13.4) ± 0.1",
    "value": [
-    10.0174,
-    17.974789
+    -2.124349,
+    13.408265
    ],
    "ref": [
-    10.0,
-    18.0
+    -2.1,
+    13.4
    ],
-   "tol": 0.2,
+   "tol": 0.1,
    "pass": true
   },
   {
    "id": "VI45",
-   "name": "u_ag = u - u_g = (-20.9, -6.9) (screen)",
+   "name": "u_ag = u - u_g = (-19.9, -7.6) (screen)",
    "value": [
-    -20.9,
-    -6.9
+    -19.9,
+    -7.6
    ],
    "ref": [
-    -20.9,
-    -6.9
+    -19.9,
+    -7.6
    ],
    "tol": 1e-09,
    "pass": true
   },
   {
    "id": "VI45",
-   "name": "u_ag at full precision ≈ (-20.8, -6.9)",
+   "name": "u_ag at full precision ≈ (-19.9, -7.6)",
    "value": [
-    -20.839696,
-    -6.910372
+    -19.947081,
+    -7.606818
    ],
    "ref": [
-    -20.9,
-    -6.9
+    -19.9,
+    -7.6
    ],
-   "tol": 0.3,
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "VI45",
+   "name": "isobar bearing along ±150 km through the sea point spans ≤ 8° (straight isobars)",
+   "value": [
+    6.465341
+   ],
+   "ref": "[0.0, 8.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "VI45",
+   "name": "real wind turned 30-60° to the LEFT of u_g (across the isobars towards the low, NH friction)",
+   "value": [
+    49.303893
+   ],
+   "ref": "[30.0, 60.0]",
+   "tol": null,
    "pass": true
   },
   {

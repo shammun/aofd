@@ -10,7 +10,7 @@ concepts:
   2026-10-27)
 - Einstein summation convention, free and dummy indices (K 2.2)
 - Kronecker delta (K 2.16, 2.17; App. B B.3.1, B.3.4)
-target_duration_s: 2112.425
+target_duration_s: 2115.2
 fps: 30
 size:
 - 1920
@@ -68,9 +68,9 @@ audio:
     shows: the nine-term grid filling cell by cell
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a
     word (sentence gaps only); one at a time; no caption tags (no sound carries meaning the voice does not say)'
-measured_narration_s: 2109.925
-measured_frames: 63298
-words: 5278
+measured_narration_s: 2112.7
+measured_frames: 63381
+words: 5283
 sentences: 336
 dry_run:
   tool: tools/tts.py
@@ -980,7 +980,7 @@ scenes:
 - id: s12d_add_geostrophic
   t:
   - 686.4
-  - 760.825
+  - 763.6
   sentence_times:
   - - 686.4
     - 688.1
@@ -995,45 +995,47 @@ scenes:
   - - 716.85
     - 725.8
   - - 726.15
-    - 732.75
-  - - 733.1
-    - 740.3
-  - - 740.65
-    - 746.25
-  - - 746.6
-    - 752.15
-  - - 752.5
-    - 760.025
+    - 735.575
+  - - 735.925
+    - 743.125
+  - - 743.475
+    - 749.075
+  - - 749.425
+    - 756.175
+  - - 756.525
+    - 762.8
   beat: 'addition: real = geostrophic + ageostrophic (Ciarán)'
-  visual: 'Full width: ERA5 MSLP 18 UTC 1 Nov 2023 isobars every 4 hPa (white on the GIBS true-colour plate, labels in-line,
-    ''L'' with central pressure 961 hPa read from A4), Brest gold dot, a sea point 48.0 N 6.0 W marked. S2 keyword ''isobars'',
-    S3 ''hectopascal''. S4-S5: orange geostrophic arrow along the isobars at the sea point, ''(30.9, 24.9)''. S6: teal real
-    10-m wind ''(10.0, 18.0)''. S7: the ageostrophic arrow in warm white from the geostrophic tip to the real tip, ''(-20.9,
-    -6.9)''. S8: maths ''real = geostrophic + ageostrophic''. S10: two keywords ''friction'', ''tight curve''. Other sea points
-    (about 12) show the same three-arrow construction faintly.'
-  voiceover: Now a real map. Here's Ciarán at the same moment, with lines of equal pressure, called isobars, drawn every four
-    hectopascals. A hectopascal is the unit weather maps use for pressure. If the pressure push and the Coriolis push balanced
-    exactly, the wind would blow along the isobars. That imagined wind is called the geostrophic wind, and the geostrophic
-    wind movie explains it in full. Over the sea just west of Brest, it would blow thirty point nine metres per second towards
-    the east and twenty four point nine towards the north. The real wind, ten metres above the sea, blew ten towards the east
-    and eighteen towards the north. The arrow we must add to the geostrophic wind to reach the real wind is called the ageostrophic
-    wind. So the real wind is the geostrophic wind plus the ageostrophic wind. Here the ageostrophic part is large, about
-    minus twenty one and minus seven. Friction with the sea slows the air and turns it across the isobars, and the air is
-    racing round a tight curve.
+  visual: 'Full width: ERA5 MSLP 18 UTC 1 Nov 2023 isobars every 4 hPa (dark lines with a light halo on the GIBS true-colour
+    plate, 968 and 972 hPa tagged, ''L'' at the 18-UTC centre), Brest gold dot, a sea point 45.0 N 2.75 W (Bay of Biscay,
+    south of Brittany) where the 996-1000 hPa isobars run straight to the north-east for more than 150 km each way (fix loop
+    2, review 2 N-M1: at the earlier 48 N 6 W point the isobars bend inside the drawn arrow). S2 keyword ''isobars'', S3 ''hectopascal''.
+    S4-S6: orange geostrophic arrow along the isobars, ''(17.8, 21.0)''. S7: teal real 10-m wind ''(-2.1, 13.4)'', turned
+    about 49 degrees towards the low. S8: the ageostrophic arrow in warm white from the geostrophic tip to the real tip; S10
+    ''(-19.9, -7.6)''. S9: maths ''u = u_g + u_ag''. S11: keywords ''friction'', ''towards the low''. Twelve other sea points
+    show the same construction faintly.'
+  voiceover: 'Now a real map. Here''s Ciarán at the same moment, with lines of equal pressure, called isobars, drawn every
+    four hectopascals. A hectopascal is the unit weather maps use for pressure. If the pressure push and the Coriolis push
+    balanced exactly, the wind would blow along the isobars. That imagined wind is called the geostrophic wind, and the geostrophic
+    wind movie explains it in full. Over the Bay of Biscay, south of Brittany, it would blow seventeen point eight metres
+    per second towards the east and twenty one towards the north. The real wind, ten metres above the sea, blew minus two
+    point one towards the east, so a little west, and thirteen point four towards the north. The arrow we must add to the
+    geostrophic wind to reach the real wind is called the ageostrophic wind. So the real wind is the geostrophic wind plus
+    the ageostrophic wind. Here the ageostrophic part is large: minus nineteen point nine and minus seven point six. Friction
+    with the sea slows the air and turns it across the isobars, towards the low pressure.'
   on_screen_eq:
     latex: \mathbf u = \mathbf u_g + \mathbf u_{ag}
     vallis_eq: 'provenance only: the geostrophic/ageostrophic split (Vallis §2.8 and §5, treated in movie #30); our numbers'
     page_png: null
   physics_source:
-    fn: NEW F5 geostrophic_from_msl (or fluidpy.geo.atmos.geostrophic_wind_from_height with Z = p/(rho0 g0)) + fluidpy.geo.sphere.gradient
-      on A4 msl
+    fn: fluidpy.geo.atmos.geostrophic_wind_from_msl on A4 msl (u10, v10 read at the same grid point)
     params:
-      lat: 48.0
-      lon: -6.0
+      lat: 45.0
+      lon: -2.75
       rho0: 1.25
-    test: CHECK VI45
+    test: CHECK VI45 (u_g (17.8, 21.0), u10 (-2.1, 13.4), u_ag (-19.9, -7.6), isobar bearing spread <= 8 deg over +-150 km,
+      real wind 30-60 deg left of u_g)
   exaggeration:
-  - arrows 6 px per m/s
+  - arrows 7 px per m/s (the 27.6-m/s geostrophic arrow is 193 px, about 190 km, on a straight stretch)
   kind: map (satellite + analysis) + vectors
   data: ERA5 hourly msl, u10, v10 2023-11-01T18 (A4); GIBS true colour 2023-11-01 (A5); Natural Earth 10 m coast/borders (A6)
   tool: GIBS imagery + cartostyle isobars (white, dark halo) -> PNG; arrows in Remotion SVG
@@ -1051,25 +1053,25 @@ scenes:
     spoken_pointer: false
 - id: s12e_subtract_def
   t:
-  - 760.825
-  - 809.0
+  - 763.6
+  - 811.775
   sentence_times:
-  - - 760.825
-    - 762.75
-  - - 763.1
-    - 775.275
-  - - 775.625
-    - 782.225
-  - - 782.575
-    - 784.85
-  - - 785.2
-    - 787.925
-  - - 788.275
-    - 793.225
-  - - 793.575
-    - 800.45
-  - - 800.8
-    - 808.2
+  - - 763.6
+    - 765.525
+  - - 765.875
+    - 778.05
+  - - 778.4
+    - 785.0
+  - - 785.35
+    - 787.625
+  - - 787.975
+    - 790.7
+  - - 791.05
+    - 796.0
+  - - 796.35
+    - 803.225
+  - - 803.575
+    - 810.975
   beat: 'subtraction: definition'
   visual: 'House pair plane: p = (5, 1) teal, q = (1, 3) orange. S1: -q appears as a rose dashed copy of q pointing the other
     way (with ''-'' glyph). S2: p + (-q) tip to tail -> (4, -2). S3-S4: both from one point; the arrow from q''s tip to p''s
@@ -1102,27 +1104,27 @@ scenes:
   related: []
 - id: s12f_subtract_hour
   t:
-  - 809.0
-  - 864.0
+  - 811.775
+  - 866.775
   sentence_times:
-  - - 809.0
-    - 811.7
-  - - 812.05
-    - 823.35
-  - - 823.7
-    - 830.975
-  - - 831.325
-    - 833.925
-  - - 834.275
-    - 837.35
-  - - 837.7
-    - 842.725
-  - - 843.075
-    - 848.775
-  - - 849.125
-    - 857.0
-  - - 857.35
-    - 863.2
+  - - 811.775
+    - 814.475
+  - - 814.825
+    - 826.125
+  - - 826.475
+    - 833.75
+  - - 834.1
+    - 836.7
+  - - 837.05
+    - 840.125
+  - - 840.475
+    - 845.5
+  - - 845.85
+    - 851.55
+  - - 851.9
+    - 859.775
+  - - 860.125
+    - 865.975
   beat: 'subtraction: the wind''s change in one hour (map animation)'
   visual: 'Picture zone: ERA5 850 hPa map of Brittany animating 17 -> 18 UTC (fields cross-faded, isotherms sliding; clock
     glyph). Teal 17 UTC arrow at Brest (ghosted after the clock passes), teal 18 UTC arrow; both drawn from Brest. S6-S7:
@@ -1162,29 +1164,29 @@ scenes:
     spoken_pointer: false
 - id: s12g_shear_hodograph
   t:
-  - 864.0
-  - 937.85
+  - 866.775
+  - 940.625
   sentence_times:
-  - - 864.0
-    - 868.975
-  - - 869.325
-    - 877.75
-  - - 878.1
-    - 882.75
-  - - 883.1
-    - 886.9
-  - - 887.25
-    - 897.975
-  - - 898.325
-    - 908.05
-  - - 908.4
-    - 919.5
-  - - 919.85
-    - 924.775
-  - - 925.125
-    - 929.4
-  - - 929.75
-    - 937.05
+  - - 866.775
+    - 871.75
+  - - 872.1
+    - 880.525
+  - - 880.875
+    - 885.525
+  - - 885.875
+    - 889.675
+  - - 890.025
+    - 900.75
+  - - 901.1
+    - 910.825
+  - - 911.175
+    - 922.275
+  - - 922.625
+    - 927.55
+  - - 927.9
+    - 932.175
+  - - 932.525
+    - 939.825
   beat: 'subtraction: wind shear and the hodograph (real sounding)'
   visual: 'Left: three.js column above Trappes (relief floor, balloon rising along the IGRA profile, x10 vertical recorded)
     with wind arrows at each reported level (teal, length 6 px per m/s), 850 and 500 hPa highlighted. Right: hodograph (house
@@ -1227,29 +1229,29 @@ scenes:
     spoken_pointer: true
 - id: s12h_anomaly
   t:
-  - 937.85
-  - 1013.075
+  - 940.625
+  - 1015.85
   sentence_times:
-  - - 937.85
-    - 941.625
-  - - 941.975
-    - 947.95
-  - - 948.3
-    - 956.25
-  - - 956.6
-    - 963.325
-  - - 963.675
-    - 968.4
-  - - 968.75
-    - 977.6
-  - - 977.95
-    - 988.6
-  - - 988.95
-    - 998.725
-  - - 999.075
-    - 1007.85
-  - - 1008.2
-    - 1012.275
+  - - 940.625
+    - 944.4
+  - - 944.75
+    - 950.725
+  - - 951.075
+    - 959.025
+  - - 959.375
+    - 966.1
+  - - 966.45
+    - 971.175
+  - - 971.525
+    - 980.375
+  - - 980.725
+    - 991.375
+  - - 991.725
+    - 1001.5
+  - - 1001.85
+    - 1010.625
+  - - 1010.975
+    - 1015.05
   beat: 'subtraction: El Niño trade-wind anomaly (climate)'
   visual: 'Three stacked tropical-Pacific maps (Equal Earth crop 30 S-30 N, 120 E-80 W; land grey, coasts): S5 November 1991-2020
     mean 10-m wind arrows (slate); S6 November 2023 arrows (teal) with an SST-anomaly tint under them (optional D6); S7 the
@@ -1298,23 +1300,23 @@ scenes:
     spoken_pointer: false
 - id: s12i_relative
   t:
-  - 1013.075
-  - 1066.775
+  - 1015.85
+  - 1069.55
   sentence_times:
-  - - 1013.075
-    - 1016.275
-  - - 1016.625
-    - 1022.325
-  - - 1022.675
-    - 1031.025
-  - - 1031.375
-    - 1038.575
-  - - 1038.925
-    - 1045.525
-  - - 1045.875
-    - 1057.55
-  - - 1057.9
-    - 1065.975
+  - - 1015.85
+    - 1019.05
+  - - 1019.4
+    - 1025.1
+  - - 1025.45
+    - 1033.8
+  - - 1034.15
+    - 1041.35
+  - - 1041.7
+    - 1048.3
+  - - 1048.65
+    - 1060.325
+  - - 1060.675
+    - 1068.75
   beat: 'subtraction: storm-relative wind'
   visual: 'Map: ERA5 MSLP animation 18 UTC 1 Nov -> 00 UTC 2 Nov (isobars, the ''L'' moving; track dots every hour, gold).
     S2-S3: storm velocity arrow (orange) at the L ''(20, 5) m/s'', ''about 450 km in 6 h''. S5: at Brest, teal wind (5.8,
@@ -1354,27 +1356,27 @@ scenes:
     spoken_pointer: false
 - id: s13_naming
   t:
-  - 1066.775
-  - 1117.9
+  - 1069.55
+  - 1120.675
   sentence_times:
-  - - 1066.775
-    - 1069.15
-  - - 1069.5
-    - 1078.4
-  - - 1078.75
-    - 1085.3
-  - - 1085.65
-    - 1091.45
-  - - 1091.8
-    - 1096.175
-  - - 1096.525
-    - 1098.7
-  - - 1099.05
-    - 1105.775
-  - - 1106.125
-    - 1111.5
-  - - 1111.85
-    - 1117.1
+  - - 1069.55
+    - 1071.925
+  - - 1072.275
+    - 1081.175
+  - - 1081.525
+    - 1088.075
+  - - 1088.425
+    - 1094.225
+  - - 1094.575
+    - 1098.95
+  - - 1099.3
+    - 1101.475
+  - - 1101.825
+    - 1108.55
+  - - 1108.9
+    - 1114.275
+  - - 1114.625
+    - 1119.875
   beat: 'index notation: subscripts'
   visual: 'Maths-only full-width scene with a small persistent 3-D axes glyph (top left, 300 px). S1: a crowd of letters appears:
     u, v, w / x, y, z / e_x, e_y, e_z ... overflowing (54-84 px), then dims. S2: the overflow hits the right edge (no clipping:
@@ -1406,27 +1408,27 @@ scenes:
   related: []
 - id: s14_free_index
   t:
-  - 1117.9
-  - 1178.4
+  - 1120.675
+  - 1181.175
   sentence_times:
-  - - 1117.9
-    - 1122.275
-  - - 1122.625
-    - 1128.05
-  - - 1128.4
-    - 1132.175
-  - - 1132.525
-    - 1141.1
-  - - 1141.45
-    - 1148.1
-  - - 1148.45
-    - 1155.7
-  - - 1156.05
-    - 1160.725
-  - - 1161.075
-    - 1168.825
-  - - 1169.175
-    - 1177.6
+  - - 1120.675
+    - 1125.05
+  - - 1125.4
+    - 1130.825
+  - - 1131.175
+    - 1134.95
+  - - 1135.3
+    - 1143.875
+  - - 1144.225
+    - 1150.875
+  - - 1151.225
+    - 1158.475
+  - - 1158.825
+    - 1163.5
+  - - 1163.85
+    - 1171.6
+  - - 1171.95
+    - 1180.375
   beat: 'index notation: free index'
   visual: 'Left: the s12f picture kept small (old and new wind at Brest, the change arrow). Right: S1 keyword ''free index''.
     S3 the line ''c_i = u_i(18 h) - u_i(17 h)'' (84 px) with the i''s gold. S4: three rows unfold below it, one per value
@@ -1460,31 +1462,31 @@ scenes:
   related: []
 - id: s15_dot_product
   t:
-  - 1178.4
-  - 1250.5
+  - 1181.175
+  - 1253.275
   sentence_times:
-  - - 1178.4
-    - 1181.575
-  - - 1181.925
-    - 1193.825
-  - - 1194.175
-    - 1197.325
-  - - 1197.675
-    - 1205.25
-  - - 1205.6
-    - 1207.725
-  - - 1208.075
-    - 1211.6
-  - - 1211.95
-    - 1220.025
-  - - 1220.375
-    - 1231.125
-  - - 1231.475
-    - 1238.425
-  - - 1238.775
-    - 1243.875
-  - - 1244.225
-    - 1249.7
+  - - 1181.175
+    - 1184.35
+  - - 1184.7
+    - 1196.6
+  - - 1196.95
+    - 1200.1
+  - - 1200.45
+    - 1208.025
+  - - 1208.375
+    - 1210.5
+  - - 1210.85
+    - 1214.375
+  - - 1214.725
+    - 1222.8
+  - - 1223.15
+    - 1233.9
+  - - 1234.25
+    - 1241.2
+  - - 1241.55
+    - 1246.65
+  - - 1247.0
+    - 1252.475
   beat: 'index notation: dot product (defined here, stand-alone)'
   visual: 'Picture zone: house pair plane with p (teal) and q (orange) generic arrows; maths zone: S1-S2 p·q = p1q1 + p2q2
     + p3q3 (84 px), matching components linked by gold arcs. S3 keyword ''scalar''. S4: shadow band of q on p, ''shadow'',
@@ -1532,25 +1534,25 @@ scenes:
     spoken_pointer: true
 - id: s16_summation
   t:
-  - 1250.5
-  - 1292.925
+  - 1253.275
+  - 1295.7
   sentence_times:
-  - - 1250.5
-    - 1253.525
-  - - 1253.875
-    - 1262.85
-  - - 1263.2
-    - 1267.225
-  - - 1267.575
-    - 1273.525
-  - - 1273.875
-    - 1276.675
-  - - 1277.025
-    - 1280.25
-  - - 1280.6
-    - 1288.325
-  - - 1288.675
-    - 1292.125
+  - - 1253.275
+    - 1256.3
+  - - 1256.65
+    - 1265.625
+  - - 1265.975
+    - 1270.0
+  - - 1270.35
+    - 1276.3
+  - - 1276.65
+    - 1279.45
+  - - 1279.8
+    - 1283.025
+  - - 1283.375
+    - 1291.1
+  - - 1291.45
+    - 1294.9
   beat: 'index notation: summation convention'
   visual: 'Maths full width. S1: p1q1 + p2q2 + p3q3 (84 px). S2: it folds into Σ_{i=1}^{3} p_i q_i (96 px); the three terms
     slide under the sigma. S3: the two i''s pulse gold, linked by a gold arc ''twice''. S4: keyword ''Albert Einstein'' (54
@@ -1587,21 +1589,21 @@ scenes:
     spoken_pointer: false
 - id: s17_dummy
   t:
-  - 1292.925
-  - 1332.375
+  - 1295.7
+  - 1335.15
   sentence_times:
-  - - 1292.925
-    - 1298.3
-  - - 1298.65
-    - 1308.675
-  - - 1309.025
-    - 1313.425
-  - - 1313.775
-    - 1317.9
-  - - 1318.25
-    - 1323.925
-  - - 1324.275
-    - 1331.575
+  - - 1295.7
+    - 1301.075
+  - - 1301.425
+    - 1311.45
+  - - 1311.8
+    - 1316.2
+  - - 1316.55
+    - 1320.675
+  - - 1321.025
+    - 1326.7
+  - - 1327.05
+    - 1334.35
   beat: 'index notation: dummy index and rules'
   visual: 'Maths full width. S1 keyword ''dummy index''. S2: p_i q_i = p_j q_j with the letters cross-fading i -> j; a tiny
     code glyph ''for i in range(3)'' -> ''for j in range(3)'' (54 px, monospace) beside it. S3: ''no free index -> scalar''
@@ -1630,19 +1632,19 @@ scenes:
   related: []
 - id: s18_length_index
   t:
-  - 1332.375
-  - 1360.775
+  - 1335.15
+  - 1363.55
   sentence_times:
-  - - 1332.375
-    - 1334.25
-  - - 1334.6
-    - 1341.25
-  - - 1341.6
-    - 1350.175
-  - - 1350.525
-    - 1354.25
-  - - 1354.6
-    - 1359.975
+  - - 1335.15
+    - 1337.025
+  - - 1337.375
+    - 1344.025
+  - - 1344.375
+    - 1352.95
+  - - 1353.3
+    - 1357.025
+  - - 1357.375
+    - 1362.75
   beat: 'index notation: length with indices'
   visual: 'Picture zone: the 850 hPa wind arrow at Brest (from s11, east/north axes). Maths: S1 |u|² = u_i u_i (84 px). S2:
     CalcStack 5.8² + 33.5² + 0² ; S3: ≈ 1156 ; S4: √1156 ≈ 34.0 m/s with a gold CurvedLink to the ''34 m/s'' tip label.'
@@ -1671,21 +1673,21 @@ scenes:
   related: []
 - id: s19_three_reasons
   t:
-  - 1360.775
-  - 1399.225
+  - 1363.55
+  - 1402.0
   sentence_times:
-  - - 1360.775
-    - 1363.1
-  - - 1363.45
-    - 1365.625
-  - - 1365.975
-    - 1373.375
-  - - 1373.725
-    - 1383.8
-  - - 1384.15
-    - 1387.95
-  - - 1388.3
-    - 1398.425
+  - - 1363.55
+    - 1365.875
+  - - 1366.225
+    - 1368.4
+  - - 1368.75
+    - 1376.15
+  - - 1376.5
+    - 1386.575
+  - - 1386.925
+    - 1390.725
+  - - 1391.075
+    - 1401.2
   beat: 'why: three good reasons'
   visual: 'Three columns appear one per reason (no boxes): S2 ''short'' with a mini glyph of one line expanding to 3 lines
     / 9 terms; S3 ''safe'' with u_i + p_i q_i struck in rose (''vector + number''); S4-S5 ''algebra -> counting'' with small
@@ -1707,29 +1709,29 @@ scenes:
   related: []
 - id: s20_gradient
   t:
-  - 1399.225
-  - 1457.65
+  - 1402.0
+  - 1460.425
   sentence_times:
-  - - 1399.225
-    - 1403.225
-  - - 1403.575
-    - 1408.4
-  - - 1408.75
-    - 1413.55
-  - - 1413.9
-    - 1421.275
-  - - 1421.625
-    - 1428.925
-  - - 1429.275
-    - 1436.375
-  - - 1436.725
-    - 1441.875
-  - - 1442.225
-    - 1447.125
-  - - 1447.475
-    - 1451.025
-  - - 1451.375
-    - 1456.85
+  - - 1402.0
+    - 1406.0
+  - - 1406.35
+    - 1411.175
+  - - 1411.525
+    - 1416.325
+  - - 1416.675
+    - 1424.05
+  - - 1424.4
+    - 1431.7
+  - - 1432.05
+    - 1439.15
+  - - 1439.5
+    - 1444.65
+  - - 1445.0
+    - 1449.9
+  - - 1450.25
+    - 1453.8
+  - - 1454.15
+    - 1459.625
   beat: 'application 1: temperature gradient'
   visual: 'Picture zone: the 850 hPa temperature map around Brest (cartostyle, cmocean thermal, colour bar ''°C'' 52 px),
     no isotherm labels yet. S2 keyword ''?'' at Brest. S3: a walker glyph steps east from Brest; ''-3.2 °C per 100 km'' NOT
@@ -1774,23 +1776,23 @@ scenes:
     spoken_pointer: true
 - id: s21_advection_built
   t:
-  - 1457.65
-  - 1510.575
+  - 1460.425
+  - 1513.35
   sentence_times:
-  - - 1457.65
-    - 1462.95
-  - - 1463.3
-    - 1473.475
-  - - 1473.825
-    - 1483.175
-  - - 1483.525
-    - 1491.675
-  - - 1492.025
-    - 1498.125
-  - - 1498.475
-    - 1502.15
-  - - 1502.5
-    - 1509.775
+  - - 1460.425
+    - 1465.725
+  - - 1466.075
+    - 1476.25
+  - - 1476.6
+    - 1485.95
+  - - 1486.3
+    - 1494.45
+  - - 1494.8
+    - 1500.9
+  - - 1501.25
+    - 1504.925
+  - - 1505.275
+    - 1512.55
   beat: 'application 1: advection built term by term'
   visual: 'Picture zone: an air-parcel cube (translucent, 60 px) at Brest on the same map, the teal wind arrow; the parcel
     moves along the arrow in three hops (east hop, north hop, up hop as a small lift), each hop leaving a coloured trail.
@@ -1834,25 +1836,25 @@ scenes:
     spoken_pointer: false
 - id: s22_advection_easy
   t:
-  - 1510.575
-  - 1566.35
+  - 1513.35
+  - 1569.125
   sentence_times:
-  - - 1510.575
-    - 1513.1
-  - - 1513.45
-    - 1519.625
-  - - 1519.975
-    - 1528.325
-  - - 1528.675
-    - 1538.0
-  - - 1538.35
-    - 1542.9
-  - - 1543.25
-    - 1550.325
-  - - 1550.675
-    - 1558.4
-  - - 1558.75
-    - 1565.55
+  - - 1513.35
+    - 1515.875
+  - - 1516.225
+    - 1522.4
+  - - 1522.75
+    - 1531.1
+  - - 1531.45
+    - 1540.775
+  - - 1541.125
+    - 1545.675
+  - - 1546.025
+    - 1553.1
+  - - 1553.45
+    - 1561.175
+  - - 1561.525
+    - 1568.325
   beat: 'application 1: easy numbers'
   visual: 'Picture zone: an idealised square map (no coast), isotherms straight and tilted (3 °C per 100 km east falling,
     2 per 100 km north falling), teal wind (10, 30). Maths CalcStack (S4-S8): ∂T/∂x1 = -3 °C/100 km = -3 x 10⁻⁵ K/m ; ∂T/∂x2
@@ -1893,25 +1895,25 @@ scenes:
     spoken_pointer: false
 - id: s23_advection_sign
   t:
-  - 1566.35
-  - 1615.825
+  - 1569.125
+  - 1618.6
   sentence_times:
-  - - 1566.35
-    - 1568.6
-  - - 1568.95
-    - 1575.65
-  - - 1576.0
-    - 1578.8
-  - - 1579.15
-    - 1583.35
-  - - 1583.7
-    - 1592.125
-  - - 1592.475
+  - - 1569.125
+    - 1571.375
+  - - 1571.725
+    - 1578.425
+  - - 1578.775
+    - 1581.575
+  - - 1581.925
+    - 1586.125
+  - - 1586.475
     - 1594.9
   - - 1595.25
-    - 1608.0
-  - - 1608.35
-    - 1615.025
+    - 1597.675
+  - - 1598.025
+    - 1610.775
+  - - 1611.125
+    - 1617.8
   beat: 'application 1: what the sign means'
   visual: 'Same idealised map. S1-S2: the parcel travels downwind into colder colours (teal path). S3-S4: a fixed thermometer
     (PoleThermometer, slate) appears; upwind parcels queue on the warmer side, labelled ''warmer''. S5: ''+3.2 K per hour''
@@ -1947,21 +1949,21 @@ scenes:
     spoken_pointer: true
 - id: s24_real_map
   t:
-  - 1615.825
-  - 1644.65
+  - 1618.6
+  - 1647.425
   sentence_times:
-  - - 1615.825
-    - 1617.85
-  - - 1618.2
-    - 1624.025
-  - - 1624.375
-    - 1631.625
-  - - 1631.975
-    - 1635.05
-  - - 1635.4
-    - 1640.425
-  - - 1640.775
-    - 1643.85
+  - - 1618.6
+    - 1620.625
+  - - 1620.975
+    - 1626.8
+  - - 1627.15
+    - 1634.4
+  - - 1634.75
+    - 1637.825
+  - - 1638.175
+    - 1643.2
+  - - 1643.55
+    - 1646.625
   beat: 'application 1: the real map'
   visual: 'Full width: ERA5 850 hPa temperature 18 UTC 1 Nov 2023 over the Bay of Biscay / Brittany / Channel (LCC), cmocean
     thermal shading, isotherms every 2 °C (white 2.5 px, in-line labels, <= 10), teal wind arrows (sparser than s05), coast
@@ -1992,19 +1994,19 @@ scenes:
   sfx: wind_gentle 0.15 under S4 only
 - id: s25_real_gradient
   t:
-  - 1644.65
-  - 1674.65
+  - 1647.425
+  - 1677.425
   sentence_times:
-  - - 1644.65
-    - 1651.0
-  - - 1651.35
-    - 1654.675
-  - - 1655.025
-    - 1662.5
-  - - 1662.85
-    - 1669.325
-  - - 1669.675
-    - 1673.85
+  - - 1647.425
+    - 1653.775
+  - - 1654.125
+    - 1657.45
+  - - 1657.8
+    - 1665.275
+  - - 1665.625
+    - 1672.1
+  - - 1672.45
+    - 1676.625
   beat: 'application 1: reading the real gradient'
   visual: 'Zoomed map (100-km grid ticks). S1: a gold east transect from Brest 100 km long, the colour strip under it, ''-3.2
     °C'' at its end; S2: north transect, ''-2.5 °C''. S3: ∂T/∂x1 = -3.2 x 10⁻⁵ K/m (68 px) with gold link from the east transect.
@@ -2040,25 +2042,25 @@ scenes:
   related: []
 - id: s26_real_sum
   t:
-  - 1674.65
-  - 1730.125
+  - 1677.425
+  - 1732.9
   sentence_times:
-  - - 1674.65
-    - 1682.15
-  - - 1682.5
-    - 1685.1
-  - - 1685.45
-    - 1691.65
-  - - 1692.0
-    - 1697.9
-  - - 1698.25
-    - 1708.75
-  - - 1709.1
-    - 1712.95
-  - - 1713.3
-    - 1722.475
-  - - 1722.825
-    - 1729.325
+  - - 1677.425
+    - 1684.925
+  - - 1685.275
+    - 1687.875
+  - - 1688.225
+    - 1694.425
+  - - 1694.775
+    - 1700.675
+  - - 1701.025
+    - 1711.525
+  - - 1711.875
+    - 1715.725
+  - - 1716.075
+    - 1725.25
+  - - 1725.6
+    - 1732.1
   beat: 'application 1: the real sum'
   visual: 'Zoomed map left (wind arrow 5.8/33.5 tip labels), maths right CalcStack: S2 u_j ∂T/∂x_j = u1 ∂T/∂x1 + u2 ∂T/∂x2
     ; S3 5.8 x (-3.2 x 10⁻⁵) ≈ -1.9 x 10⁻⁴ ; S5 33.5 x (-2.5 x 10⁻⁵) ≈ -8.4 x 10⁻⁴ ; S6 the north term''s Balance bar is 4x
@@ -2098,23 +2100,23 @@ scenes:
     spoken_pointer: false
 - id: s27_real_check
   t:
-  - 1730.125
-  - 1776.875
+  - 1732.9
+  - 1779.65
   sentence_times:
-  - - 1730.125
-    - 1732.275
-  - - 1732.625
-    - 1741.65
-  - - 1742.0
-    - 1747.85
-  - - 1748.2
-    - 1755.425
-  - - 1755.775
-    - 1761.725
-  - - 1762.075
-    - 1770.75
-  - - 1771.1
-    - 1776.075
+  - - 1732.9
+    - 1735.05
+  - - 1735.4
+    - 1744.425
+  - - 1744.775
+    - 1750.625
+  - - 1750.975
+    - 1758.2
+  - - 1758.55
+    - 1764.5
+  - - 1764.85
+    - 1773.525
+  - - 1773.875
+    - 1778.85
   beat: 'application 1: check against what happened'
   visual: 'Left: TimeGraph (house TimeGraph) 17-20 UTC: ERA5 850 hPa T over Brest (teal line, hour dots 2.4, 5.1, 8.2) with
     a dashed slate line of slope +3.7 K/h through 18 UTC (the advection estimate); right: TimeGraph of the Brest station 2-m
@@ -2149,25 +2151,25 @@ scenes:
     spoken_pointer: true
 - id: s28_nine_terms
   t:
-  - 1776.875
-  - 1832.1
+  - 1779.65
+  - 1834.875
   sentence_times:
-  - - 1776.875
-    - 1784.975
-  - - 1785.325
-    - 1791.975
-  - - 1792.325
-    - 1796.275
-  - - 1796.625
-    - 1801.65
-  - - 1802.0
-    - 1804.85
-  - - 1805.2
-    - 1819.175
-  - - 1819.525
-    - 1825.575
-  - - 1825.925
-    - 1831.3
+  - - 1779.65
+    - 1787.75
+  - - 1788.1
+    - 1794.75
+  - - 1795.1
+    - 1799.05
+  - - 1799.4
+    - 1804.425
+  - - 1804.775
+    - 1807.625
+  - - 1807.975
+    - 1821.95
+  - - 1822.3
+    - 1828.35
+  - - 1828.7
+    - 1834.075
   beat: 'application 1: nine terms in one line'
   visual: 'Maths full width. S2: u_j ∂u_i/∂x_j (96 px), i gold (''free''), j teal (''summed''). S3: brace ''i: 3 equations''.
     S4: brace ''j: 3 terms each''. S5: a 3 x 3 grid of the nine terms fills cell by cell (68 px; rows i = 1, 2, 3; columns
@@ -2203,25 +2205,25 @@ scenes:
   sfx: tick 0.10, one per grid cell, only while the voice pauses (S5 ends before S6)
 - id: s29_kronecker
   t:
-  - 1832.1
-  - 1872.4
+  - 1834.875
+  - 1875.175
   sentence_times:
-  - - 1832.1
-    - 1834.65
-  - - 1835.0
-    - 1838.975
-  - - 1839.325
-    - 1843.95
-  - - 1844.3
-    - 1848.5
-  - - 1848.85
-    - 1855.4
-  - - 1855.75
-    - 1860.95
-  - - 1861.3
-    - 1866.15
-  - - 1866.5
-    - 1871.6
+  - - 1834.875
+    - 1837.425
+  - - 1837.775
+    - 1841.75
+  - - 1842.1
+    - 1846.725
+  - - 1847.075
+    - 1851.275
+  - - 1851.625
+    - 1858.175
+  - - 1858.525
+    - 1863.725
+  - - 1864.075
+    - 1868.925
+  - - 1869.275
+    - 1874.375
   beat: 'Kronecker delta: from the basis'
   visual: 'Picture zone: the Brest 3-D axes with e1, e2, e3 (from s06). Maths: a 3 x 3 table (no boxes, aligned numbers 68
     px, row/column headers e1 e2 e3). S2: e1 with itself: shadow band of length 1 -> ''1'' in the table. S3: e1 with e2: right-angle
@@ -2256,25 +2258,25 @@ scenes:
     spoken_pointer: false
 - id: s30_substitution
   t:
-  - 1872.4
-  - 1913.025
+  - 1875.175
+  - 1915.8
   sentence_times:
-  - - 1872.4
-    - 1876.2
-  - - 1876.55
-    - 1880.8
-  - - 1881.15
-    - 1889.275
-  - - 1889.625
-    - 1895.775
-  - - 1896.125
+  - - 1875.175
+    - 1878.975
+  - - 1879.325
+    - 1883.575
+  - - 1883.925
+    - 1892.05
+  - - 1892.4
     - 1898.55
   - - 1898.9
-    - 1901.3
-  - - 1901.65
-    - 1905.65
-  - - 1906.0
-    - 1912.225
+    - 1901.325
+  - - 1901.675
+    - 1904.075
+  - - 1904.425
+    - 1908.425
+  - - 1908.775
+    - 1915.0
   beat: 'Kronecker delta: substitution'
   visual: 'Maths full width. S1-S2: delta_ij u_j (96 px) unfolds to delta_i1 u1 + delta_i2 u2 + delta_i3 u3. S3: i = 2 set
     (gold): delta_21 -> 0 and delta_23 -> 0 struck (Strike), delta_22 -> 1. S4: u2 remains. S6: delta_ij u_j = u_i (96 px);
@@ -2301,25 +2303,25 @@ scenes:
   related: []
 - id: s31_balloon_delta
   t:
-  - 1913.025
-  - 1971.2
+  - 1915.8
+  - 1973.975
   sentence_times:
-  - - 1913.025
-    - 1915.925
-  - - 1916.275
-    - 1924.4
-  - - 1924.75
-    - 1930.775
-  - - 1931.125
-    - 1936.5
-  - - 1936.85
-    - 1941.575
-  - - 1941.925
-    - 1951.525
-  - - 1951.875
-    - 1958.175
-  - - 1958.525
-    - 1970.4
+  - - 1915.8
+    - 1918.7
+  - - 1919.05
+    - 1927.175
+  - - 1927.525
+    - 1933.55
+  - - 1933.9
+    - 1939.275
+  - - 1939.625
+    - 1944.35
+  - - 1944.7
+    - 1954.3
+  - - 1954.65
+    - 1960.95
+  - - 1961.3
+    - 1973.175
   beat: 'Kronecker delta: the balloon drifts with the wind'
   visual: 'Picture zone: map of Brittany with a field shading of x1 (east distance from Brest, a sequential ramp with 50-km
     contour lines running north-south, labelled ''0'', ''50'', ''100 km''). S2: keyword ''a map of x1''. S3: walker east:
@@ -2369,17 +2371,17 @@ scenes:
     spoken_pointer: false
 - id: s32_delta_facts
   t:
-  - 1971.2
-  - 1997.275
+  - 1973.975
+  - 2000.05
   sentence_times:
-  - - 1971.2
-    - 1973.15
-  - - 1973.5
-    - 1981.15
-  - - 1981.5
-    - 1990.275
-  - - 1990.625
-    - 1996.475
+  - - 1973.975
+    - 1975.925
+  - - 1976.275
+    - 1983.925
+  - - 1984.275
+    - 1993.05
+  - - 1993.4
+    - 1999.25
   beat: 'Kronecker delta: two facts'
   visual: 'Maths full width. S2: delta_ii = 1 + 1 + 1 = 3 (84 px) with a small 3-D axes glyph ''3 directions''. S3: delta_ij
     p_i q_j : a 3 x 3 grid of nine products collapses to its diagonal (three cells stay, six fade), = p_i q_i = p·q.'
@@ -2408,25 +2410,25 @@ scenes:
     spoken_pointer: true
 - id: s33_recap
   t:
-  - 1997.275
-  - 2063.575
+  - 2000.05
+  - 2066.35
   sentence_times:
-  - - 1997.275
-    - 2003.975
-  - - 2004.325
-    - 2012.875
-  - - 2013.225
-    - 2018.575
-  - - 2018.925
-    - 2030.725
-  - - 2031.075
-    - 2038.7
-  - - 2039.05
-    - 2049.725
-  - - 2050.075
-    - 2055.225
-  - - 2055.575
-    - 2062.775
+  - - 2000.05
+    - 2006.75
+  - - 2007.1
+    - 2015.65
+  - - 2016.0
+    - 2021.35
+  - - 2021.7
+    - 2033.5
+  - - 2033.85
+    - 2041.475
+  - - 2041.825
+    - 2052.5
+  - - 2052.85
+    - 2058.0
+  - - 2058.35
+    - 2065.55
   beat: recap
   visual: 'One beat per sentence, mini pictures left, symbols right (no boxes): S1 globe thumbnail ''10.3 °C'' + the Brest
     wind arrow; S2 e1 e2 e3 with the wind''s legs and the √ line ''9.3''; S3 the same arrow with the axes turning, ''34''
@@ -2457,15 +2459,15 @@ scenes:
   related: []
 - id: s34_next
   t:
-  - 2063.575
-  - 2083.45
+  - 2066.35
+  - 2086.225
   sentence_times:
-  - - 2063.575
-    - 2070.175
-  - - 2070.525
-    - 2077.225
-  - - 2077.575
-    - 2082.65
+  - - 2066.35
+    - 2072.95
+  - - 2073.3
+    - 2080.0
+  - - 2080.35
+    - 2085.425
   beat: forward pointer to 1b (spoken bridge, no card)
   visual: 'Left (picture zone): the 27-cell epsilon cube fades in cell by cell (8 frames each, no flash) and turns slowly;
     on AT(1, "epsilon i j k") the six non-zero cells light (teal +1 for the cyclic orders; rose -1 with a ''−'' glyph for
@@ -2503,15 +2505,15 @@ scenes:
     spoken_pointer: true
 - id: s35_end
   t:
-  - 2083.45
-  - 2109.925
+  - 2086.225
+  - 2112.7
   sentence_times:
-  - - 2083.45
-    - 2089.325
-  - - 2089.675
-    - 2100.725
-  - - 2101.075
-    - 2109.625
+  - - 2086.225
+    - 2092.1
+  - - 2092.45
+    - 2103.5
+  - - 2103.85
+    - 2112.4
   beat: series end card (weather/climate ending, HOUSE_STYLE §3; fix loop 1 S23)
   visual: 'HOUSE_STYLE §3 maths end card: four faint topic thumbnails along the top (dot product, cross product, this movie''s
     arrow with its three component legs, a grad/div/curl teaser); ''a series of maths tutorials'' (68 px); ''atmospheric science
@@ -2604,3 +2606,20 @@ fix1_build:
   three_js: 'the air parcel is a three.js box (kit_vi/box3d.tsx: LitBox3D + BoxEdges3D from weather basics'' col3d) in s12c,
     s21 (tilted ERA5 850 hPa slab, 3-D legs, slow orbit) and s23 (M10)'
   ending: weather/climate ending (HOUSE_STYLE §3), orchestrator decision following review 1 S23
+fix2_build:
+  date: '2026-10-29'
+  review: reports/ch00_movies.md 'ch00_vectors_index_notation — review 2' (1 Must, 14 Should, 9 Cosmetic)
+  n_m1: s12d sea point moved to 45.0 N 2.75 W (straight isobars; build VI45 rows); on screen the u_g arrow lies on the 1000-hPa
+    isobar (mean angle 1.9 deg, segment max 6.5 deg from the contour polyline; _tools/s12d_angle.py); S6, S7, S10, S11 re-spoken
+  narration: '4 s12d sentences replaced (splice_fix2.py: constant gain to the replaced sentence''s loudness + 5-ms peak limiter);
+    the 16 fix-1 sentences re-levelled (they were 1.4-7.6 LU quieter than their neighbours: fix 1 scaled whole clips down
+    to their sample peak); every spliced sentence now within 0.9 LU (integrated) of its neighbours'
+  replaced:
+  - 's12d_add_geostrophic S6: Over the Bay of Biscay, south of Brittany, it would blow seventeen point eight metres per second
+    towards the east and twenty one towards the north.'
+  - 's12d_add_geostrophic S7: The real wind, ten metres above the sea, blew minus two point one towards the east, so a little
+    west, and thirteen point four towards the north.'
+  - 's12d_add_geostrophic S10: Here the ageostrophic part is large: minus nineteen point nine and minus seven point six.'
+  - 's12d_add_geostrophic S11: Friction with the sea slows the air and turns it across the isobars, towards the low pressure.'
+  layout: review-2 Should items S-new-1..14 and the cheap cosmetics (s04, s07, s12a, s12g, s15, s20, s22/s23 field, s34, s35);
+    source lines only while real data is on screen (s10, s15, s33, s34)
