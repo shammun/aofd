@@ -172,3 +172,8 @@ No other download. All other UF1 changes reuse data already in the movie.
 - The TSX `SCENES` list gains s18b, s19b, s20b, s20c, s20d and s27b; `timing.json` comes from the builder's final TTS run
   (the director's dry run is `G:/…/scratch/movies/ch00_weather_basics/dryrun_uf1/`).
 - `sound_cues.yaml` must be re-timed from the new timing (storm-tense section = new s54 start → new s60 start).
+
+## Implementer notes on §G CHECK rows (orchestrator, 2026-10-29)
+- W64: the planning values 505.1 hPa / 0.1015 / 0.00995 are for GEOPOTENTIAL heights (`geometric=False`); state that, or use geometric 505.40 hPa / 0.10218 / 0.010179. The "USSA halving height 5.574 km" is wrong: exact inverse gives 5.482 km geometric (5.477 km geopotential) — still below the isothermal 5.846 km, so the s22 sentence holds with the corrected number.
+- W70/W71 (front slopes, rough check on era5_ciaran_2023_section_48p5N_18UTC.nc): cold front ≈ 1:18 (steeper than the planned 1:30–1:150); warm front ≈ 1:63 (outside 1:80–1:300). The builder's W70/W71 asserts decide; if they agree with this rough check, the s47/s48 narration must follow the data (reword the slope ranges).
+- W65: 28.9644/18.01528 = 1.6078 (= 1/ε within 3e-5); say "about 1.61".
