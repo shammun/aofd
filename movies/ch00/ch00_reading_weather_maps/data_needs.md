@@ -199,3 +199,8 @@ RM23 MetPy `parse_metar` fails on the Brest `//////TCU` METAR (benchmark only on
 - ISD SYNOPs carry no iw: for Irish, Dutch and Belgian stations call `decode_synop(..., wind_unit="m/s")` (or use ISD's
   decoded speed), otherwise speeds are 1.94× too small. **(v2: s27, s28, s43.)**
 - Brest 156 km/h is not Ciarán's strongest gust (Lanvéoc 170, Lannion 158); Enedis 1.2 M homes. **(v2: s75.)**
+
+## Verifier notes (orchestrator, 2026-10-29; reports/ch00_rwm_v2_verification.md)
+- RM68: thickness 5350–5390 m ↔ layer-mean T 263.7–265.7 K (not 264–266); central 5371 m → 264.7 K (−8 °C) is fine.
+- C11: Marshall & Palmer's own drop-size distribution integrates to Z ≈ 296 R^1.47; say "the relation commonly used, Z = 200 R^1.6 (after Marshall and Palmer)".
+- RM71 freezing level at Trappes 30 Sep 2026 = 2144.8 m (verified). RM83/RM84 (GEFS) unverified until N4 data exist.
