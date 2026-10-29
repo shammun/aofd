@@ -205,6 +205,7 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   dates, keywords, calculations, readouts and colour bars stay in the movie, placed beside or below the picture. Only
   short labels that point at a spot on the map (place names, H/L, fronts, station plots) may sit on it.
 - **No text over images or over other text**, on any frame.
+- **Colour bars never sit on a globe or map.** They go beside it, in the text column, as in the weather frames 5.png and 6.png. This holds in every scene and every zoom state.
 - **Slabs and columns:** every vertical edge runs all the way to the top.
 - **Wind arrows on a map or globe are always animated**, so the viewer sees the air moving. Use moving dashes or
   pulses along each arrow, or particles drifting along the flow at a speed scaled to the wind (scale stated). Arrows
