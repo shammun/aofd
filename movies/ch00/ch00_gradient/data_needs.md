@@ -170,3 +170,5 @@ Trappes (exists), radiosonde (exists), hectopascals (exists). Spoken maths to li
 ## Orchestrator notes (2026-10-28)
 - s29 cited facts: already verified elsewhere (reports/data/ISD.md, #69 data): Brest peak gust 156 km/h (84 kt) per Météo-France BCMR Bretagne Nov 2023 — NOT the storm's strongest (Lanvéoc 170, Lannion 158 km/h; semaphores 190–200 km/h are not reference values per Météo-France); Enedis: 1.2 million homes in France without power (press release 7 Nov 2023). The "207 km/h at Pointe du Raz" claim is unverified — drop it or verify from a primary source before the build.
 - Decisions: fetch D5 (sea-breeze winds) and D7 (OISST Gulf Stream); maths ending confirmed; add `steepest-ascent` style at build time.
+- G1 sign correction (implementer, 2026-10-28): the V5 relation is **f k × u_g = +(Fx, Fy)** (geostrophic balance (2.198): f k × u_g = −(1/ρ)∇p = F; it is the Coriolis force −f k × u_g that equals −F). The G1 row above has the wrong sign. Measured |f k×u_g − F| ≤ 1.1e-19 m/s².
+- Vallis prints "the force per unit mass is ∇p/ρ" just after (1.47) without the minus sign; (1.47)/(1.48) require −∇p/ρ, which the code and narration use.
