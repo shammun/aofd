@@ -4502,3 +4502,233 @@ Disk:
 - At the end: C: 60 GB free, G: 516 GB free.
 - This review wrote only 233 MB of frames to G: (`…/review2/`, 382 + 143 PNG + 43 sheets) and nothing to C:. The rest of the
   drop came from other processes.
+
+---
+
+# cross product v5 / Part 1 / Part 2 — review 2 (fresh eyes, after fix loop 1 15d4f4b and the centrifugal build 7efe80d)                2026-10-29
+
+Movies reviewed (read-only; nothing edited):
+- **v5 full** `movies/out/ch00/ch00_cross_product_why/v5_1080.mp4`: 4154.60 s (1:09:14.6), 153.59 MB, md5 = the QA'd G: scratch file. Captions `v5_en.vtt`.
+- **Part 1** `movies/out/ch00/ch00_cross_product/1080.mp4`: 1961.13 s (32:41.1), 92.66 MB (fix-1 render, 02:22).
+- **Part 2** `movies/out/ch00/ch00_cross_product_uses/1080.mp4`: 2456.75 s (40:56.8), 115.55 MB.
+
+**Frames.** 284 PNG + tiles (99 MB) under `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_cross_product_v5/review2/`:
+- `v5/`: one frame per sentence end in all 9 centrifugal scenes and the changed s26b, s27 and s47; a 1-s strip through 45:23–45:41.
+- `v5r1/`: every review-1 item at its timestamp.
+- `p1/`, `p2/`: start, every sentence of the opening and recap scenes, joins and end cards.
+- `band/`, `cmp/`: caption-band hits and the v5-versus-part pixel comparisons.
+
+**Scans.**
+- **Caption band.** I scanned y 880–1040 at 2 fps in all three movies. There are only four hits, each ≤ 0.5 s (13:42, 15:46, 31:48.5, 59:49 in v5).
+  - The builder's old hits in s18_cases, s24_spin, s28a, s17, s21b and s44 are gone.
+  - s37 is still a problem, as a collision just above the band (M3).
+- **Script diff.** P1 s02–s19 and P2 s23–s46 and s48 are word-identical to v5. P1 s22w and P2 s47 differ on purpose.
+- **Pixel diff, v5 against the parts.** Mean |Δ| is ≤ 0.53/255 at 13 Part-1 times and 12 Part-2 times. The one exception is 2.36 at the s46/s47 edge, where the recaps differ.
+- **Captions** (my own check):
+
+  | movie | cues | max line | lines per cue | max cps | order | end |
+  |---|---|---|---|---|---|---|
+  | v5 | 1005 | 42 | ≤ 2 | 16.77 | in order | 4151.8 s |
+  | P1 | 465 | 42 | ≤ 2 | 16.34 | in order | 1958.3 s |
+  | P2 | 603 | 42 | ≤ 2 | 16.77 | in order | 2454.0 s |
+
+  Every cue ends inside the audio.
+
+**Physics checked by hand** (each value against the manifest rows):
+- **The frame rule.** (dB/dt)_out = (dB/dt)_rider + Ω × B. u_out = u + Ω × r.
+- **The rule applied twice.** The rider's part gives du/dt + Ω × u. Then Ω × (u + Ω × r) = Ω × u + Ω × (Ω × r).
+  - So the change seen outside = du/dt + 2Ω × u + Ω × (Ω × r) (Vallis (2.12) rearranged).
+  - So du/dt = pushes − 2Ω × u − Ω × (Ω × r).
+- **Triple product.** p × (q × s) = q(p·s) − s(p·q) gives −Ω × (Ω × r) = Ω²r − Ω(Ω·r).
+  - On the disc this is Ω²r: 0.25 × 2.5 = 0.625 m/s², with 2π/0.5 = 12.57 s per turn.
+  - On Earth it is Ω²r⊥, because Ω(Ω·r) = Ω²r_along.
+- **Pictures.**
+  - The centrifugal arrow points away from the axis and leans equatorward.
+  - The s26f Ω × (Ω × r) arrow points towards the hub.
+  - s27a: Coriolis is to the right of u on the anticlockwise disc.
+- **Size on Earth.**
+  - Ω² = 5.317 × 10⁻⁹ s⁻².
+  - × 6 371 km = 0.0339 m/s² (0.345 % of g).
+  - × 4 505 km = 0.0240 m/s².
+  - 0 at the poles.
+- **Sideways part and Coriolis at 45°.**
+  - Sideways part = Ω²a cos φ sin φ = 0.0169 m/s².
+  - Coriolis on a 10 m/s wind ≤ 2Ω × 10 = 1.46 × 10⁻³ m/s².
+  - Ratio 11.6, so "more than ten times" is honest.
+- **Effective gravity** g = g* − Ω × (Ω × r), so the right equation is du/dt = pushes + g − 2Ω × u.
+- **On the ×50 ellipse,** g is drawn along the normal: 56° versus a true normal of 55°. It does not point at the centre, which is correct.
+- **Plumb line.**
+  - Tilt 0.099° (sphere) and 0.192° (geodetic − geocentric).
+  - The drawn angle ≈ 5.7°, about ×50 of 0.1°, which is honest.
+  - The extended line passes on the equator side of the centre, which is correct.
+- **Gravity and shape.**
+  - g at the equator = 9.780 and at the poles = 9.832 m/s² (WGS 84). The spin share 0.0339/0.0519 = 0.65 is drawn 65 : 35.
+  - a − b = 21.4 km ≈ a/300.
+- **Arrow scales.** No new scene has a "×50"/"×100" label on screen (house: no badges), so nothing on screen claims a scale. The documentation does not agree with the code (S1).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| v5 (review 2) | 4154.60 s; narration ends 4152.10 s | 153.59 MB (**size WARN**, hard 160) | 11 PASS + 2 WARN. Size; halves "right 2723.5–2727.5 (4.0 s), 2730.0–2736.5 (6.5 s)" = s27c. Physics 151 hashes, equations 146, captions 1005 = script, −16.0 LUFS / −1.9 dBTP, flashes 0 | PASS (all signs and numbers above) | **FIX**: s27b "p, q → Ω · s → r" reads as a dot product (M1). No KaTeX errors | FIX: s37 labels over the source line (M3); small new-scene pictures (S3–S6) | **FIX**: s27c maths zone empty ≈ 10 of its first 14 s (M2) | PASS (3 cues < 1 s, C9) | PASS: 0 flashes; violet, teal, orange, brown and slate, with rose "−" | n/a (house) | **FIX** |
+| Part 1 (review 2) | 1961.13 s; narration ends 1958.63 s | 92.66 MB | 13/13 PASS (halves PASS). Physics 77, equations 69, captions 465, −16.0 LUFS / −2.1 dBTP | PASS | PASS (review-1 M1 fixed) | PASS with cosmetics | PASS | PASS | PASS | n/a | **PASS** → `qa_pass` |
+| Part 2 (review 2) | 2456.75 s; narration ends 2454.25 s | 115.55 MB | 12 PASS + halves WARN "right 1036.5–1040.0, 1043.0–1049.5" (= v5 s27c). Physics 78, equations 79, captions 603, −16.0 LUFS / −3.4 dBTP | PASS | **FIX**: inherits M1 | FIX: inherits M3 | **FIX**: inherits M2 | PASS (2 cues < 1 s) | PASS | n/a | **FIX** |
+
+## Are the user's three requests delivered?
+| request | verdict | evidence |
+|---|---|---|
+| 1. Why each part of the formula makes sense (s03, s15a, s18d, s21a–d, s22w) | **Delivered** | Each scene is in the movie, on its words, and correct as written: s03 (lever arm), s15a (ε table), s18d (Pythagoras, "each side × \|a\|"), s21a/b/c (z/x/y mini-torques), s21c (three mini walls with + and − arcs, 23:35–23:46), s21d (tilted axis, rose −x), s22w (four mini-pictures lit on their words). Only s22w's gold frames break the house style (M4) |
+| 2. The split; each part starts and ends properly | **Delivered** | **Part 1:** own title ("and how physics uses it", p × q → door → ball), hook, s50 recap with a spoken pointer to Part 2, maths end card (logged in HOUSE_STYLE §12, 2026-10-28), s19 → s50 cross-fade. **Part 2:** own title with capital Ω, hook, s01a–s01d recap (recipe with all three rows worked, \|a\| "written with two bars", unit vectors defined with x̂, ŷ, ẑ drawn, the proton, 1 → 2 → 7 kicks → circle, F named, "no work: no energy given"), splice into s23, s47 "from the last video" / "the last video: why it's built this way", end-card tile 2 labelled "last video" |
+| 3. Centrifugal derivation and use (s26a1, s26e, s26f, s27b–g) | **Delivered, with fixes** | The derivation is complete and correct (above): the rule motivated before it is used, used twice, the 2 explained, the triple product, size, effective gravity, level sea, three traces, and a bridge back to Coriolis. To fix: M1, M2 and S1–S8 (legibility and documentation). There are no sign or number errors |
+
+## Review-1 items — status
+| item | status | evidence at the new time |
+|---|---|---|
+| v5 M1 false "− 0.1 × 10 = 1" | **fixed** | 21:00 "⟳ 0.1 × 10 = 1 clockwise", τz = 6 − 1 = 5. s21b at 22:18: "0.2 × 30 − 0.1 × 10 = 5" |
+| v5 M2 s22w slide | **fixed**, but a new box (M4) | 29:17–30:15: four mini-pictures with teal first arrows and orange second arrows; the lit one is framed by a gold rectangle |
+| v5 M3 s18 "largest along one line" | **fixed** | words: "largest when the arrows point the same way". The p·q values are gone (15:15) |
+| v5 S1 s18a overprint | fixed | 15:52: "the minus sign ?" has its own row; the layout is stable |
+| v5 S2 s18d "× \|a\|²" | fixed | screen "each side × \|a\|" (17:03) matches "multiply both sides by the length of vector a too" |
+| v5 S3 s21c symbols only | fixed | 23:00 expansion on two lines; 23:35–23:46 three mini walls with ± arcs |
+| v5 S4 s11 hand entrance | fixed | 08:15.2–08:15.8 the hand enters cream at its final pose, above y 820 |
+| v5 S5 "× 4.5", "45°" not spoken | fixed | 01:10 the bar has no number; 24:31 no 45° label |
+| v5 S6 s17 card and glyph overlap | fixed | 13:52 orange face shown, 13:58 teal; 14:06 ⊙ is clear of the text |
+| v5 S7 s21a/b labels, empty S1 | fixed | r is drawn on S1 (20:01.5, 21:18.5); "30 N along y" is clear; axis letters inside the content area |
+| v5 S8 "alternating tensor" | fixed | "the index-notation video" |
+| v5 S9 recap lacks the new ideas | fixed | v5 s47 S3 and S6 |
+| v5 S10 / P2 S10 / P1 empty halves | fixed except s27c | qa `halves` lists only s27c (new, M2) |
+| v5 S11 size | open (accepted WARN) | 153.59 MB < 160 hard |
+| v5 C1 / P1-C3 / P2 C2 cues < 1 s | open | C9 |
+| v5 C3 s28a and s44 edge hits | fixed (band scan clean) | — |
+| v5 C4 s21d negative colour | fixed | 24:31 rose dashed "about x: −0.2" |
+| v5 C7 subtitles gate pair | fixed | qa compared 1005 = 1005 on the v5 file |
+| v5 C2 s06 30-px labels, C5 s07 link, C6 muted keywords | not re-checked | — |
+| P2 M1 recipe | **fixed** | 00:57–01:15 x, y, z rows with 1 × 0 − 0 × 3 = 0 and 0 × 1 − 5 × 0 = 0 worked; "the recipe" |
+| P2 M2 proton | **fixed** | 02:40 "proton" glyph in s01d, the same in s23a (04:24) |
+| P2 M3 kicks | **fixed** | 02:35 push ⊥ u; 02:40 one kick; 02:43 two; 02:46 seven; 02:52 the circle |
+| P2 S1 ω → Ω | fixed | 00:02 Ω, Ω × r readout; 00:11 bigger parcel arrows |
+| P2 S2 recap beyond Part 2 | fixed (option a) | "In the last video, we saw that…", 39:37 "from the last video" |
+| P2 S3, S4, S5, S6 | fixed | "written with two bars"; "along: 0"; unit vectors defined and x̂, ŷ, ẑ drawn (02:18); "F: the push", "no work: no energy given", "same speed all the way round" |
+| P2 S7 pointer to Part 1 | fixed | s47 last sentence; end-card tile 2 "last video" |
+| P2 S8 "14" on a's head | fixed | 01:15 bracket is right of the violet arrow |
+| P2 S9 s25b r label (R3-S2) | not re-checked | — |
+| P2 C5 "a × b" in hook | fixed | "the cross product in the weather?" |
+| P1-S1 ending | resolved | HOUSE_STYLE §12, 2026-10-28 |
+| P1-S2 Part-2 words in Part 1 | fixed | s22w "and, in the next video, …" |
+| P1-C1 "a × b" before spoken | open (cosmetic) | 00:12.4 |
+
+## MUST fix
+1. **M1 · v5 44:13.3–44:47 (s27b S5–S7) · P2 15:26–16:00. "p, q → Ω · s → r" reads as the dot product "Ω · s".**
+   - What is wrong: the gold mapping line uses the house "·" separator between two maths symbols, so it reads "p, q → (Ω·s) → r" at the decisive substitution step.
+   - Fix: write two items, "p, q → Ω" and "s → r", on one row with a 60-px gap, or on two lines. "p = q = Ω, s = r" also works. TSX only.
+2. **M2 · v5 45:23.2–45:37 (s27c S1–S3) · P2 17:16–17:30. The maths zone is empty for about 10 of the first 14 s (qa `halves` WARN: 4.0 s + 6.5 s).**
+   - What is wrong: "not at right angles" shows only from 45:27 to 45:30. Then the right half is empty until "r = r_along + r⊥" at ≈ 45:37, while S2 is already splitting r on the picture.
+   - Fix:
+     - Bring "not at right angles" in on S1 (45:23.3) and keep it.
+     - Show "r = r_along + r⊥" (on_screen_eq_extra 0) at the start of S2 (45:29.8), lit leg by leg as "along the axis" and "straight out" are spoken.
+     - Re-run qa: `halves` must PASS.
+3. **M3 · v5 59:49.2–59:52.9 (s37 S7) · P2 31:42.1–31:45.8. The labels overprint the source line, and the source is wrong for the new frame.**
+   - What is wrong:
+     - When the two thumbnails appear, "f > 0 · anticlockwise" and "f < 0 · clockwise" (y ≈ 806–830) are written over "Image: NASA VIIRS · Data: ERA5 … Cyclone Idai, Mozambique" (y ≈ 840).
+     - That line credits only Idai, but the left thumbnail is Ian (GOES-16).
+   - Fix:
+     - Move the two labels to y ≤ 780, under the thumbnails.
+     - On the thumbnails' first frame, switch the source line to the s38 one: "Ian: GOES-16 + NOAA HRRR, 28 Sep 2022 · Idai: NASA VIIRS + ERA5 (Copernicus C3S), 14 Mar 2019".
+4. **M4 · v5 29:24–30:12 (s22w S3–S6, v5 only; Part 1's render has no frames). Gold rectangles frame the lit mini-picture (house §5: no boxes, cards, chips or panels).**
+   - Seen at 29:30 (globe) and 30:00 (ball).
+   - Fix: light the active picture by bringing it to full opacity with the others at 35 % (as at 29:17), plus a gold pointer from its keyword. Remove the rectangles.
+
+## SHOULD fix
+1. **S1 · s27e / s27f (v5 47:35–49:33; P2 19:07–21:05). The arrow-scale documentation does not match the drawing.**
+   - The code draws the centrifugal arrow ×100 against g*, and the manifest notes this ("storyboard planned ×50; ×50 gave a 20-px arrow"). My frames measure ≈ ×80–100.
+   - But `storyboard.yaml` s27e exaggeration ("drawn ×50") and s27f ("centrifugal arrows ×50 against g*") still say ×50.
+   - Fix: change both storyboard rows to "×100" (s27g's ×50 flattening and plumb angle are correct as documented). Keep the screen badge-free.
+2. **S2 · v5 68:18–68:27 (s47 centrifugal sentence) · P2 39:52–40:01. The recap mini-picture contradicts s27d and s27f.**
+   - What is wrong:
+     - g is drawn pointing exactly at Earth's centre.
+     - The Ω²r⊥ arrow is ≈ 85 % of g's length.
+     - The pin floats off the dashed flattened outline.
+   - Fix:
+     - Reuse the s27f "real Earth" panel: g along the ellipse normal, pin on the outline.
+     - Draw the centrifugal arrow short, ≤ 20 % of g, as a sketch.
+3. **S3 · v5 46:16–46:24 (s27c S7). The "leans towards the equator" picture is about 50 px.**
+   - The white "up" arrow and the gold arc at the pin are unreadable at 640 px, and the planned "north" arrow is missing.
+   - Fix: zoom the camera to the pin as s27e does (47:40), and draw up, north and the slate arrow at ≥ 120 px with the 45° arc.
+4. **S4 · v5 48:24–49:33 (s27f S3–S9). The sideways part is too small and its label collides.**
+   - The rose "sideways part" arrow is ≈ 25 px.
+   - Its label sits across the circle outline and the Ω axis, and from 48:37 the gold link starts on "part".
+   - Fix:
+     - Draw the sideways part at ≥ 80 px (it is already ×100).
+     - Put the label outside the disc, upper right of the pin.
+     - Start the link at the arrow.
+5. **S5 · v5 47:55–48:12 (s27e S8) and 49:34–50:55 (s27g icons). The icons are about 50 px and cannot be recognised.**
+   - The "plumb bob" is two arrows, the scale is a grey bar, and the ball is a dot.
+   - Fix: 110–130-px code-drawn icons (string + bob, a scale with a dial, a ball with drop lines), each labelled on its words. Or drop them and keep the keyword.
+6. **S6 · v5 41:00–41:12 (s26e S7). The "s26d picture in miniature" uses arrows of about 20–25 px.**
+   - These are the ball stepping along u, the growing orange floor-speed arrow and the violet Ω × u. They are invisible at 640 px, yet S7 is the step that makes piece ② click.
+   - Fix: a 300-px inset of the s26d picture, or zoom the disc for S7–S8.
+7. **S7 · v5 37:37–38:31 (s26a1). Collisions around the painted arrow.**
+   - The painted arrow B starts on the hub, so its head and the "B" label sit on the "Ω" label (37:37–37:59).
+   - From 38:09 the "Ω × B" label at the left edge is crossed by the white dashed sum arrowhead. The teal "rider's change" arrow has no label.
+   - Fix:
+     - Start B at (1.0, 0.4) m, as the storyboard says.
+     - Put "Ω × B" beside the middle of its arrow.
+     - Label the teal stub "rider's change".
+8. **S8 · v5 38:25–38:31 (s26a1 S10). The rule's second line touches the brace note.**
+   - The rule wraps, so the "outside watcher" brace note touches line 2's (dB/dt) numerator. The "rider" brace also repeats the subscript.
+   - Fix: set the rule on one line at 68 px (it fits in x 1060–1840), or leave a 24-px gap. Drop the duplicate "rider" brace.
+9. **S9 · v5 31:50–31:56 (s23 S7) · P2 04:03–04:09. Labels on the map are hard to read.**
+   - "k × u = (−5, 0, 0)" is faint violet on the dark map and is crossed by the dashed −k × u arrow.
+   - "−k × u = (5, 0, 0)" runs off the map's right edge.
+   - Fix: give the labels a dark halo and put them above and below their arrows, inside the map.
+10. **S10 · Size.** v5 is 153.6 MB, against a budget of 120 and a hard cap of 160. Accept it (the user saw the WARN before), or re-encode at crf 24.
+
+## COSMETIC
+- **C1 · 45:33–45:40 (s27c).** The "along" leg splits the "45°" label (4|5°). Move the label left of the r arrow.
+- **C2 · s27b.**
+  - 45:14: the gold link starts on the "m" of "2.5 m".
+  - 45:22: the rider glyph is ≈ 30 px.
+- **C3 · 47:03–47:12 (s27d).** "centrifugal ≈ 0.034" sits beside the g bar, not beside its slate sliver, and has no unit. Place it at the sliver, with "m/s²".
+- **C4 · 49:44–49:54 (s27g).** The equator and pole links cross each other. Put "poles" on the top row, or start the pole link on the right.
+- **C5 · 50:30–50:48 (s27g).** "polar radius" and "equator radius" cross the ellipse outline.
+- **C6 · s26f → s27 brace numbering.** At 41:59 it reads ②, ①; at 42:27 it reads ①, ②. Use one order.
+- **C7 · P2 02:57–03:00 (s01d).** "same speed all the way round" sits on the grid's bottom border.
+- **C8 · P2 00:10–00:12 (s00).** The source line is ≈ 20 px under "uses it".
+- **C9 · Captions under 1 s.**
+  - v5: 00:39.60 "In weather,", 04:57.35 "By Pythagoras,", 59:28.38 "Near its peak,".
+  - P2: 00:00.30 "In this video,", 31:21.25 "Near its peak,".
+  - P1: the same two as v5's first two.
+  - Merge each with the next cue.
+- **C10 · v5 collisions.** At 15:25 (s18) "(3, 0, 0)" sits on the teal arrowhead. At 24:31–24:39 (s21d) the r tag sits on F's tail. At 31:48.5 the s23 map corner dips into the caption band for 0.5 s.
+- **C11 · P1-C1 and P1-C2 still open.** "a × b" appears at 00:12 before it is spoken. The s50 mini-wall axis letters are ≈ 40 px.
+
+## House-style conformance
+- **Conforms:**
+  - titles and hooks for v5, P1 and P2;
+  - spoken bridges ("Now let's go back to the Coriolis push");
+  - goal before calculation ("Before we write down what each one sees, we need one rule", "How big is it on Earth?");
+  - reveals on their words;
+  - gold picture-to-number links (2.5 m, 4505 km, sideways part);
+  - beats after worked numbers;
+  - colours: Coriolis violet, g brown, centrifugal slate, negative rose;
+  - source lines only on Blue Marble, VIIRS, ERA5 and WGS-84 frames (the SVG cross-sections in s27f/s27g and the disc scenes have none, which is correct);
+  - no badges or equation numbers;
+  - −16 LUFS;
+  - the correct end card for each movie.
+- **Departures:**
+  - M4 (boxes);
+  - M2 (empty half);
+  - M1 and M3 (text collisions or misreadings);
+  - S3–S6 (pictures under the legible size).
+
+## Overall
+- **v5: FIX** — 4 Must (M1–M4), 10 Should, 11 Cosmetic. All TSX only except S1 (storyboard text). No words change, so no TTS run is needed. Re-render the affected ranges: 29:15–30:18, 37:28–49:33, 59:47–59:54, 68:18–68:27.
+- **Part 2: FIX** — inherits M1, M2 and M3 (3 Must), S1–S9 at the P2 times, and C2–C9. Re-cut from the fixed v5 pieces.
+- **Part 1: PASS → `qa_pass`.**
+  - Every review-1 Must is fixed.
+  - qa is 13/13 PASS and the caption band is clean.
+  - The frames match v5 within 0.26/255 mean.
+  - M4 does not apply: Part 1's s22w has no frames.
+  - Only C9 and C11 remain.
+  - The user watches it before `/approve-movie`.
+- After the v5 fixes: run review 3 on s22w, s26a1, s26e, s27b–s27f, s37 S7 and s47 S9, ≥ 1 frame per sentence, then re-check P2 at the same scenes.
+
+Disk: C: 56 GB free at the start, 57 GB at the end; G: 515 GB free at the start and the end. Review frames: 99 MB, 284 PNG, on G: (not committed).
