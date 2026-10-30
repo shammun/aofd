@@ -5868,3 +5868,176 @@ Two CHECK groups are marked "tests pending at build time" in the manifest: W85 (
 - C: 50 GB free at the start and at the end (floor 40 GB).
 - G: 511 GB free at the start, 509 GB at the end.
 - This review wrote 156 MB (520 files) under `…/review2/` on G: and nothing to C:.
+
+---
+
+## ch00_weather_basics UF2 — review 2 (2026-10-30, render 3, source commit 25eb34b)
+
+**Movie:** `movies/out/ch00/ch00_weather_basics/1080.mp4`: 57:51.5 (3471.47 s), 156.72 MB, 1920×1080, 30 fps, 73 scenes, 491 sentences, 869 cues.
+
+**How I looked:**
+- One frame 0.4 s before the end of each of the 491 sentences, read as 55 tiled sheets at 640 px a tile.
+- About 150 close-ups: both stacks every 3–4 s, the slope labels, the title, the sun beam, the keyword cross-fades and the credit zones at native scale.
+- Frames: `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review_uf2_2/`.
+
+**Limits of this review:**
+- These are stills, so I judged motion from frame sequences only. I did not listen to the audio.
+- I did not re-run QA; the gates below are read from `reports/movies/ch00_weather_basics_fix1c/qa.json`.
+- The session can hold only a limited number of images, so older sheets dropped out of view. I re-read sheets in several passes and kept notes. Some note lines turned out to be unsupported and I voided them; the "fixed" entries for 15:40–24:00 rest on notes from the passes I trust, not on images in view at the end.
+- Pixel sizes marked ≈ are measured or estimated from frames. Word times are estimated from character position within the sentence.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics UF2 render 3 | 57:51 | 156.7 MB | 13/14; overlap FAIL (1 hit, false positive); `pass: false` | FIX (labels and words at the front stack; numbers check by hand) | PASS (gate: 53 present; no KaTeX error seen) | FIX | FIX (no beam for 9 s; two stack stretches unreadable) | PASS (0 violations, max 16.83 cps, 148.8 wpm) | PASS (0 flashes) | n/a (retired) | **FIX** |
+
+**Verdict: FIX. 16 Must and 25 Should.** This is a large step forward from review 1:
+- The scale-height section now reads cleanly.
+- Six of the seven round-3 items (U3-01…07) are met. U3-04 is only partly met.
+- Most of the 16 Musts are small placement fixes. Four need more: the s38b camera (R2-M4, R2-M5) and the s48b words (R2-M2, R2-M3).
+
+### The three QA items
+| item | finding | evidence |
+|---|---|---|
+| Overlap hit, "50 km" vs gold line, frame 86093 | **Confirmed false positive: no contact.** But the label must still move (R2-M1). The gate stays FAIL until it does, and moving it should clear the hit. | "50 km" glyphs end at x ≈ 821, y 437–475. The gold line's left edge is at x = 831 at y 440 and x = 850 at y 470, so the gap is ≈ 10 px at the top and grows downward. QA reported at (831, 438), 22 × 22 px. |
+| "Its stills predate the final bundle" | **Not shown by the file times.** `overlap.json` is dated 17:28 and the MP4 17:24. This does not rule out stills from an older bundle, but I could not confirm it. It does not change the result above. | file timestamps |
+| source_check, s00_title twice | **Confirmed mis-aimed for s00.** The credit is present on all 8 title frames I sampled, 0:01–0:11.3, at y ≈ 555–621. | At the check's own 10 times: band 740–862 holds 0–3 muted pixels; band 540–640 holds 4041–6154 (threshold 150). I tested s00 only and did not run the tool. It needs a per-scene band. |
+
+### Slope triangle at 47:50: is the labelling honest?
+**The numbers are honest. The labelling is misleading, so it is a Must (R2-M1).**
+- **What 50 km is:** the horizontal run. The narration says "one kilometre for every fifty kilometres along", from the fit 1:49.86 (850–650 hPa at 46.5°N).
+- **The triangle is true to the data:**
+  - Horizontal scale: 18° at 46.5°N ≈ 1379 km across ≈ 1600 px ≈ 1.16 px/km, so 50 km should be ≈ 58 px. I measure ≈ 63 px (y 493, x 875–938).
+  - Vertical scale at ×80: 1 km should be ≈ 93 px. I measure ≈ 97 px (x 938, y 493–590).
+  - At true scale the slant is √(50² + 1²) = 50.01 km, so "50 km" would not even be wrong for the slope length.
+- **How it reads:**
+  - "1 km" sits on its leg. "50 km" sits on the other side of the slanted line, above the triangle.
+  - The horizontal leg is thin, pale and unlabelled.
+  - A viewer reads "this slanted line is 50 km long".
+  - The whole solid line is ≈ 171 px across and ≈ 255 px up, about 130–150 km along and about 2.6 km up: neither 50 km nor 1 km.
+  - The ×80 exaggeration that makes the line look steep is first said at 49:06, 77 s later.
+
+### Physics and numbers (by hand)
+| item | check | result |
+|---|---|---|
+| density | 101 325/(287 × 288.15) = 1.225; 273.15 K → 1.293; 303.15 K → 1.165; difference 9.9 % | PASS (1.225, 1.29, 1.16, ≈ 10 %) |
+| hydrostatic | 1.225 × 9.81 = 12.02 Pa/m; 300 m × 12 = 36 hPa; 1013 − 36 = 977 | PASS |
+| wind | √(8² + 6²) = 10; direction 233.1°; 10/0.514 = 19.5 → "19 kt" | PASS |
+| humidity | 15/31.29 = 0.479 (W30); 29/18 = 1.61 | PASS |
+| sea-level pressure | 835 × e^(1.609/8.43) = 1010.6 | PASS (≈ 1010) |
+| Brest wind | 23.2/0.514 = 45.1 kt; 997 − 962 = 35 hPa | PASS |
+| sun beam | 1/cos 60° = 2 | PASS |
+| hemisphere words | s44 "seen from above", southern hemisphere reversed; s33 "clockwise from north, seen from above" | PASS |
+| fronts | cold front rises westward over the cold air; warm air glides up over cold; the wind turns as stated for the northern hemisphere | PASS |
+| front step-back (s48b) | fit 43.93 km per km; 1.3 → 3.4 km gives ≈ 92 km | **FIX** (R2-M3) |
+
+### Round-3 user items
+| ID | state | evidence |
+|---|---|---|
+| U3-01 tropopause surface | **PASS, with R2-M14 and R2-M15** | 27:18–27:45: flat map, one height surface, rods at Paris and Singapore, callouts and colour bar beside it. Height can be read per place. The picture is only ≈ 630 × 450 px (Should 17). |
+| U3-02 five layers | **PASS** | 31:17–31:44: 5 layers labelled 0.1, 1.5, 3.2, 5.9 and 9.7 km; "five heights, to ≈ 10 km". |
+| U3-03 outside camera (humidity) | **PASS** | 31:14–31:44 stays outside. Colour bar and keywords stay beside the stack. |
+| U3-04 outside camera (temperature) | **PARTLY** | The camera never goes inside, the colour bar stays visible, and 40:43–40:56 is kept. But 40:58–41:10 and 41:23–41:33 do not make "the change with place and height clear" (R2-M4, R2-M5). |
+| U3-05 Andes on time | **PASS** | Andes labelled and centred by 41:57 (word ≈ 41:56.7), Rockies by 41:58 (word ≈ 41:57.9), back on Tibet with its image at 42:00. The later drift is Should 7. |
+| U3-06 sun beam | **PASS** | 51:25: the beam's end is the slanted orange footprint, ≈ 2 beam widths long, with its edges meeting the beam. Both beams are the same width. Beam start: R2-M10. |
+| U3-07 close look | **PASS** | 31:31–31:37 and 41:11–41:17: ground and levels both visible, about 6 s each, and back out. `stackCam.flyThrough` now throws, with 0 uses in the movie. |
+
+### Review 1 items
+**Fixed, seen in frames:**
+- Stacks and globes: M2, M3 (each callout links to its layer on its words, 31:20–31:29), M6, M7, M8, M28, S14, S19, S20, S21.
+- Scale height: M9, M10, M11, M12, M13, M14, M15, M16, M17, M18 (the comparison now reads; new credit problem in R2-M12), M19, M20, M31, S1, S3, S4, S5, S6, S9, S10.
+- Other scenes: M21, M22, M23, M24, M25, M26, M27, S12, S13, S15, S17.
+
+**Partly fixed:**
+
+| item | what is left |
+|---|---|
+| M1 | Built; R2-M14, R2-M15 and Should 17 remain |
+| M4 | Inside views are gone, but the replacements are unreadable (R2-M4, R2-M5). This is partly review 1's fault: it asked for a view "from the east", which is the edge-on view at 41:03. The 41:18–41:23 view works |
+| M5 | Keyword and colour bar are off the picture and the camera is outside; the labels now disagree with the words (R2-M3) |
+| M29 | Colour bars are off the stacks; a new case on a map (R2-M8) |
+| M30 | One credit per picture, but the three-line map credit still sits tight on the colour-bar title (Should 17) |
+| S2 | The column stays and the box is gone, but the ln p axes are empty 14:24–14:38 (Should 21) |
+| S7 | Both blocks are labelled 101 325 N, but the arrows are ≈ 45 px, not ≥ 80 |
+| S8 | "≈ 7 hPa" is labelled; the bracket is only ≈ 15 px |
+| S11 | Parcel and wind arrows are fixed; "Brittany" is still dim (Should 22) |
+| S16 | Later labels moved above the plot; 38:08–38:11 is still inside it (Should 8) |
+| S18 | Still a narrow dark edge at 40:47 (Should 6) |
+| S22 | The manifest says the W85 tests pass but are "not yet committed in fluidpy", and W86 is "D3 fix in progress, uncommitted" (Should 25) |
+
+### Must (16)
+**Front stack and slices**
+- **R2-M1 s47 47:50–48:17, s48 48:45–49:14: slope labels.**
+  - Put "50 km" directly above the horizontal leg, on the same side as "1 km".
+  - Draw both legs in 6-px gold.
+  - In s48, keep "50 km" off the thick line; it touches at 49:14.
+  - Show the keyword "heights × 80" in s47 on S6, not 77 s later (a spoken clause would be better but needs TTS).
+- **R2-M2 s48b S3 49:30–49:36: "On every layer, a gold line marks…" is not true.** Only 6 of the 11 layers are traced (W86: 900–650 hPa, not extended further), and about 6 lines show at 49:33. The keyword says "on each layer" too. Say and write "on the lower layers" (TTS splice).
+- **R2-M3 s48b S4 49:37–49:47: labels and words disagree.**
+  - The labels read "1.3 km" and "3.4 km". The voice and keyword say "from 1.5 to 4 km up" and "≈ 100 km back".
+  - 4 km lies above the highest traced line, so it extrapolates beyond the trace.
+  - Say what the labels show: 43.93 × 2.1 km ≈ 92 km, "about ninety kilometres back between about one and three and a half kilometres up" (TTS splice; update the W86 row).
+  - The link also ends on "3.4 km". Stop it short of the label.
+- **R2-M8 s46 46:42–47:09: the colour bar sits on the map** (46:50 close-up). §5b forbids it. Move it into the right column, under the graph.
+- **R2-M9 s47 48:02–48:05, s48 49:05–49:14: keywords run across the slice's top edge.** "tall clouds, heavy showers" and "behind: milder, moister" are half on the picture; "behind: colder, drier" touches it at 48:17. Lower the slice ≈ 50 px, or move these rows beside it.
+
+**Reanalysis stack and pressure globe**
+- **R2-M4 s38b 40:58–41:10: the stack is edge-on.** The camera is outside, but the shells are a thin band at the globe's left limb and bare Asia fills the frame, while the voice says each layer is colder than the one below. Hold an oblique view like 40:55 or 41:18–41:23, rising slowly bottom to top, and mark the Europe tropopause in that view. Keep 40:43–40:56 as the user asked.
+- **R2-M5 s38b 41:23–41:33: seen from above, the shells merge into flat purple haze.** "Warmer again" cannot be seen, and "above about twenty-five kilometres" is not on screen, while "top shell ≈ 45 km" is on screen but not spoken in S6. Use the same oblique view, outline the warming layers, and write "above ≈ 25 km". At this angle the balloon also foreshortens to a short stick; show it as a full column through the shells.
+- **R2-M6 s38b 41:04.0: two keywords overlap** for a few frames ("colder going up, to the tropopause" under "Europe ≈ 10 km"). Fade the old keyword out at least 8 frames before the new one.
+- **R2-M7 s39 42:00–42:14: the coloured globe loses its colour bar and its ERA5 credit** (only the relief credit is left). Keep both until the field fades.
+
+**Other scenes**
+- **R2-M10 s51 S3 51:02.5–51:12.4: "Picture a beam of sunlight one metre wide" with no beam.** The first beam comes at 51:12.5, on S4. Draw the beam in free air with its "1 m" on S3's words; it reaches the ground on S4. The right half also holds only "equinox noon" for this stretch.
+- **R2-M11 s54 about 53:13–53:16: the source line lies on the faded lower globe** (53:14.9, about x 190–770; clear by 53:20). §5b hard rule. Keep the globe's bottom fade above the credit throughout the growth.
+- **R2-M12 s22 S7 25:39: the column and the axis run across the credit** ("(NOAA NCEI)" is crossed). This came with the M18 zoom. Clip the zoomed column at y ≤ 830.
+- **R2-M13 s20f 19:02: "warmer: pressure falls more slowly" covers the end of "8.9 km"** (it reads "8.9 k"). Move the keyword down or right.
+- **R2-M14 s25 S5 27:42–27:46: the Singapore link runs through "the pole ≈ 10 km".** Reorder the callouts so that the links do not cross any text.
+- **R2-M15 s25 27:18–27:46: three tropopause numbers for one region, unexplained.** The balloon chart on the same frame shows the Paris line at about 11 km, the callout says "Paris ≈ 11.7 km" (November mean), and s38b later says "Europe ≈ 10 km". 11.7 is not spoken, and the voice says "eight to ten" for the poles against "≈ 10" on screen. Label the callouts "November mean", or use the balloon values, and write "8–10 km" at the pole.
+- **R2-M16 s42 44:06–44:13: the link from L crosses "high = anticyclone".** Route it under the keyword stack.
+
+### Should (25)
+1. **Credits touching globes (§5b).** The limb reaches the text with a gap of about 0–5 px against the ≥ 16 px asked for at: 2:11 (halo), 36:13–36:49, 41:38–41:55, 44:36, 46:06–46:16.
+2. s48 49:06–49:14: "true slope" sits beside the thick line and the true-scale twin is a faint ≈ 45-px dash, so the words read as naming the steep line. Point the label at the twin and make the twin solid gold.
+3. s47: the labels appear about 2–4 s before their words (by 47:50; "one kilometre" ≈ 47:51.4, "fifty" ≈ 47:53). A straight grey-violet line, about (390, 330) to (1350, 180), appears over the slice from 47:52.5; I could not identify it. The dashed lowest kilometre kinks back west, unexplained, against "like a wedge". "cold 1.29 · warm 1.16 kg/m³" stays on through 48:17: these are the 0 and 30 °C example values next to a real slice.
+4. s48b 49:19–49:29: 11 strongly coloured layers read as one solid block (§5b: about 5 unless more add insight). User decision: the sloping surface does work here.
+5. s48b: the colour bar is in K while the slices are in °C. 49:37–49:49: the stack is cut at the left frame edge and the gold lines run off it.
+6. s38b 40:47: a large dark half-globe with a narrow edge (§5b: x 980–1160), and the colour bar and keyword sit on it. Soften it, keeping the move the user likes. 41:34.5: a hard dark band across the globe as the stack pulls out. The 16 shells have no visible gaps.
+7. s39: 42:04–42:09 Tibet slides to the limb, and by 42:13 the globe shows the Americas beside the Tibet image. Hold on Tibet to the end of the scene. 41:37: a true-colour globe carries only the ERA5 surface-pressure credit.
+8. s36: 38:08–38:11 "Brest, 2023" and "1991–2020: average and 8 days in 10" touch, inside the plot on the 25 line. 38:35–38:42: the weather link crosses the climate link. 38:53–39:01: two links end on one point.
+9. s40 42:18–43:11: "seaside town" sits ≈ 225 px from its square, beside the mountain; "1609 m" sits ≈ 420 px from the summit town.
+10. s44 45:44–45:52: "south: reversed" and "Coriolis effect →" touch the mini globe. The wind arrows on that picture are small and dense.
+11. s46 47:12–47:27: a coloured 850-hPa map with no colour bar until the slice's bar appears.
+12. s50 50:36 → 50:43: the colour bar jumps from top to bottom; 50:49 it sits tight under "warm front".
+13. s51: the link tail of "2 m" runs through the "m"; "1 m" sits on the beam's top edge. The beams are short (≈ 105 px, because the globe is close to the left edge); move the globe right.
+14. s60: the same blanket credit shows on abstract beats with no data (56:30 column, 56:52 cubes, 57:06 compass). §5: data frames only.
+15. s32 35:00–35:05: wind arrows ≈ 15–20 px and faint on cloud, gone by 35:10 (U2-06, §5b). 35:17–35:25: "v = 6 m/s" straddles the image edge. s35 37:18–37:25: the credit names ERA5 10-m wind, but I see no wind drawn.
+16. s26 28:20–28:26: the thermals are sparse pale dots and, at 28:23.8, two grey dots beyond the far edge.
+17. s25: enlarge the picture, now ≈ 630 × 450 px at the right. The three-line credit sits tight on the colour-bar title.
+18. s09 5:39.9: scale rods cross "faster = warmer" before their labels arrive. 6:03–6:15: "same step" touches the K rod. s12 7:55–8:12: the stacked fractions have no gaps.
+19. s15 10:17–10:43: the orange arrow crosses "Δz → 0". s18 12:14–12:21: "scale height" sits tight under the g, with a stray tiny gold "<" above it. 12:45: the gold link ends in the struck s².
+20. **Text that looks under the 44-px floor (estimates, not measured):** 9:37–9:53 brace labels; 11:10–11:24 "300 m × 12…" and "vertical accelerations ≪ g"; 12:41–12:50 units row; 13:35 brace labels; 14:54–15:21 "add up small steps = integrate"; 17:39 tangent row; 20:19 h row; 32:38 "set by temperature, not the air"; 36:49 kt row.
+21. s19 14:24–14:38: empty ln p axes for 14 s. Draw them when the line arrives.
+22. s03 2:28–2:36: "Brittany" is dim on a near-black eastern 40 % of the map.
+23. s27c 31:38: the "lowest 1.5 km" bracket is tiny, at the far corner. Enlarge it.
+24. s58 55:13: "warm sector" touches the "°C" axis label. s29 33:24: "RH 73 %" has no calculation beside it (15 ÷ 20.6).
+25. **Tools and evidence.** Commit the fluidpy tests behind W85 and W86. Give `source_check` a per-scene band for s00. The overlap gate caught none of the 16 Musts above: it needs the colour-bar, keyword-on-picture, link-through-text and credit-on-picture checks review 1 listed. Two cues are under 1 s (house range 1–7 s).
+
+### What works (keep)
+- The arc is complete, from title to end card. The opening sentence and all three ending sentences follow §3, and the card has its three keyword lines, its notebook rows and no URL.
+- The scale-height stretch 12:00–26:00 now reads as a clean chain: define, 8.43 km, the curve, 37 %, the tangent, not a lid, the block, Δz/H.
+- The humidity stack, the 41:11–41:23 close look and gold band, the 49:53–50:01 front surface, and the trade-wind and westerly flights all work; the flights return to the whole globe at 53:08.
+- U2-25 and U2-26: 38:22–39:01 ties the band and the line to climate and weather, with the saying below the figure.
+
+### House-style conformance
+Opening, end card, voice and pace (148.8 wpm), the absence of headings and boxes, and the data-source lines follow the house style. Departures are the listed §5b items: colour bar on a map, keywords on pictures, credits on globes, reveals before their words, and small text.
+
+### qa.json
+`pass: false`. The one failing gate is overlap: "1198 frames, 1 hits {text-shape:text-stroke: 1}; 1590 INFO". The other gates pass: duration 3471.47 s vs narration end 3468.95 s; size 156.72 MB (gate budget 160, while §10 still says 60/80 for long movies, so the override should be recorded); codec; black 0; frozen all narrated; content; halves; loudness −16.3 LUFS, −3.6 dBTP; flashes 0; captions 869 cues; subtitles; physics 74 functions; equations 53.
+
+**My own caption check:** 869 cues, 0 violations of 2 lines × 42 chars or 17 cps, max 16.83 cps, the last cue ends at 3468.65 s, and the copy beside the movie is identical.
+
+### Disk
+C: 68 GB free at the start, 66 GB at my last check (floor 40 GB). G: 490 GB free at both. I wrote about 0.4 GB of frames to G:. The 2 GB drop on C: is not from this review's frames, which are on G:.
+
+## Overall: FIX (ch00_weather_basics UF2 render 3 review 2 — R2-M1…M16; 25 Should recommended)
+Not `qa_pass`. R2-M2 and R2-M3 need a short TTS splice. R2-M4 and R2-M5 need the s38b camera re-keyed. The rest are placement changes. After the fix loop, re-review s20f, s22, s25, s38b, s39, s42, s46–s48b, s51 and s54, plus any scene touched by the Shoulds.

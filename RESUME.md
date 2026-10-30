@@ -2,6 +2,8 @@
 
 Render 3 was restarted with `render_uf2.py --from 4` (log `uf2/render_fix1c_resume.log`); c00–c03 are verified at 4000 frames, and the bundle matches commit 25eb34b. If this session died, check which chunks exist and rerun with `--from <first missing>`. Data scout for #6 and M01 started alongside it.
 
+Update: render 3 finished (57:51, on Drive); review 2 = FIX, 16 Must + 25 Should (reports/ch00_movies.md, "UF2 — review 2"). Fix loop 2 of weather starts when the #4 render finishes (one Remotion job at a time). Item 1 below is done up to review 2; item 3 and item 4 are done (suite: 3188 passed, 1 xfailed).
+
 **Resume in this order:**
 1. Weather UF2 render 3: delete `uf2/render/c04*` if partial; run `tools/movie_wb/render_uf2.py` (TEMP/TMP on G:) for the missing chunks (~2 h); join with `join2pass.py <uf2/render> <uf2/public/narration_music.wav> <out> --mb 152 --abr 128k --alim 0.5`; copy to movies/out; run QA with `--overlap G:/…/uf2/stills/k6final2`, source_check, vscan; then G: viewing copy + Drive, then review 2.
 2. #4 fix loop 2 render (the builder's report has the resume steps).
