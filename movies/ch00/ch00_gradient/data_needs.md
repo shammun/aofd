@@ -224,3 +224,12 @@ of December, twenty twenty-two"), with the place centred and labelled within 1 s
 movie grows to about 32:22.
 
 **Lexicon:** none new ("Changi" is not spoken).
+
+## Orchestrator decisions on the data scout's report (2026-10-30; apply when building)
+- **D8 / DG33b failed (band not monotonic above 700 hPa). Keep Elliott 12 UTC**: the runner-up (Feb 2021) is worse. Reword s33b: not "shifts towards the cold side as we climb" but: every layer above the near-ground front sits on its cold side, 260-450 km back. 1000 hPa is below ground on the line points: use the `below_ground` mask and do not present it as air.
+- **D1 / DG13**: 15″ max slope within 5 km is 1.286, not 0.60. Reword s15 to "more than a hundred and twenty percent" if the 15″ grid is shown; arrows may keep the 60″ grid if labelled as smoothed.
+- **D2**: Sentinel-2 `Sentinel2-L2A-montblanc-20230926`; do not use EOX (CC BY-NC-SA would bind the movie).
+- **D4**: keep the frozen 27 Oct chart for s31 (the 30 Oct chart has no deep Iceland low).
+- **D5**: the morning wind was already weakly northerly: say it strengthens through the afternoon, not that it turned round.
+- **D6**: adopt Sep 2026 real zonal-mean u for s36: "September twenty twenty six", "near forty five", "about six", "about twelve" km, "about twenty five" m/s.
+- **DG35**: builder states the weighting (-7.19 pressure-weighted). **DG31s**: 765 m is the layer, 798 m the 925 hPa height.

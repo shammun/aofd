@@ -29,3 +29,10 @@
 - **Quick-look**: `outputs/ch00/data/rwm_iem_metar_18z.png`.
 - **Colab route**: the committed JSON.
 - **Disk**: before, C: 47.7 GB and G: 561.4 GB free. After, C: 64.0 GB and G: 561.4 GB. Nothing evicted.
+
+## Extension 2026-10-30: Normandy, 24 June 2024 (movie #6 D5, s35)
+
+- **Route**: `fluidpy.data.metar.fetch`, LFRG, LFRK, LFOH, LFOE; 35,612 B; 48 half-hourly reports each.
+- **Product**: `iem_metar_normandy_2024-06-24.nc`, 32,910 B, on G: and in the repo. `t_c`, `td_c`, `wind_from_deg`, `wind_ms` on (station, time).
+- **Measured**: Le Havre 330° at 4.1 m/s (09 UTC), 360° at 5.7 (15), calm before dawn; Deauville 010° at 1.5 (09), 010° at 4.1 (18); Caen 300° at 1.0 (06), 040° at 2.6 (12), 010° at 4.6 (18); Évreux inland 070° at 1.5 (09), 050° at 3.6 (15). At 12 UTC: Le Havre 21, Deauville 23, Caen 23, Évreux 25 °C.
+- **Disk**: whole session, C: 60.4 → 61.0 GB free, G: 492.1 → 491.1 GB free, project data 98.07 → 99.01 GB. Render scratch moves these too. Nothing evicted.

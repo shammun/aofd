@@ -543,13 +543,14 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/IGRA2/FRM00007145-data.txt.zip, raw/IGRA2/SNM00048698-data.txt.zip, raw/IGRA2/igra2-station-list.txt, raw/IGRA2/FRM00007145-data-beg2026.txt.zip]
+    raw_files: [raw/IGRA2/FRM00007145-data.txt.zip, raw/IGRA2/SNM00048698-data.txt.zip, raw/IGRA2/igra2-station-list.txt, raw/IGRA2/FRM00007145-data-beg2026.txt.zip, raw/IGRA2/FRM00007145-data-beg2026_check-20261030.txt.zip]
     refresh_2026-10-28: "movie #4 D1: HEAD of the POR zip = 31,665,518 B (unchanged, last sounding 2026-09-30T12); year-to-date access/data-y2d/FRM00007145-data-beg2026.txt.zip fetched (624,714 B, sha256 292db4a28b5584b7dde41e6c77a99ba8a289615f41a1329a536a396701293f13; 499 soundings 2026-01-01T00..2026-09-30T12). No October sounding in IGRA yet -> 2026-09-30T12 kept; it is identical in both files (82 levels, etime on 100 %). DT01 surface 997.5 hPa/168 m/19.8 C; 850 hPa z 1533 m, 12.3 C, 312 s; 500 hPa z 5795 m, -11.8 C, 1212 s; DT45 WMO tropopause 13,072 m, 206.85 K; DT46 T(15 km) 210.82 K > tropopause"
     derived_on_root: [derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc, derived/ch00/igra2_stations_2023.json]
     derived_in_repo: [data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc, data/derived/ch00/igra2_stations_2023.json]
     checks: "Trappes: 64 levels, top 5.9 hPa at 33.9 km (z_hyps), surface 987 hPa 12.4 C at z_hyps 166 m (station 168 m); WMO tropopause 10.88 km, -62.7 C at 228 hPa = station-reported; 2nd reported 47.2 hPa. Singapore: 121 levels, top 5.41 hPa at 35.4 km; WMO tropopause 16.16 km, -81.3 C at 109.9 hPa = station-reported. Hypsometric refill of removed standard-level heights within 13 m up to 10 hPa. 941 stations span 2023 (of 2931)"
     used_by: [movie ch00_weather_basics s00, s21, s23-s25, s37 (D1)]
     check_stack_2026-10-29: "#1a K1A: Trappes 2023-11-01T00 has wind at 41 levels in all, but only 14 from the surface to 200 hPa (987, 925, 917, 850, 700, 518, 500, 400, 300, 275, 250, 228, 201, 200) and 21 to 100 hPa -> fewer than the 16 the plan assumed; bulk turn 987->200 hPa -40 deg (clockwise seen from above; wdir 210->250), successive pairs clockwise in only 6 of 13 (wiggles 518/500, 300/275, 228/201). The 16-layer stack uses ERA5-CDS-trappes-20231101T00-uv16 instead (agrees with this sonde within 1.5 m/s and 8 deg)"
+    refresh_2026-10-30: "movie #6 D3: year-to-date Trappes file fetched again (624,714 B, sha256 542c30bff511228d9c35d923e966057378c4bd537b7c04388377eba6c2078776; same size as 2026-10-28, bytes differ); newest sounding still 2026-09-30T12, so nothing newer exists. D3 is superseded anyway: s17, s18, s32 moved to the Singapore sounding (data_needs G); all DG15s and DG31s rows re-measured on igra2_trappes_singapore_2023-11-01T00.nc"
   ERA5-ARCO-global-20231102T12:
     catalogue: ARCO
     title: ERA5 0.25 deg global single hour 2023-11-02 12 UTC - MSLP, surface pressure, orography, 2 m temperature and dew point, 10 m wind
@@ -768,11 +769,13 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/ERA5-CDS-monthly-pl/era5_monthly_t-z_37lev_2023-11_1deg.nc]
-    derived_on_root: [derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc]
-    derived_in_repo: [data/derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc]
+    raw_files: [raw/ERA5-CDS-monthly-pl/era5_monthly_t-z_37lev_2023-11_1deg.nc, raw/ERA5-CDS-monthly-pl/era5_monthly_t-u-z_37lev_2026-09_1deg.nc]
+    derived_on_root: [derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc, derived/ch00/era5_zonal_t_u_z_2026-09.nc]
+    derived_in_repo: [data/derived/ch00/era5_zonal_t_z_tropopause_2023-11.nc, data/derived/ch00/era5_zonal_t_u_z_2026-09.nc]
     checks: "WMO tropopause (mean of columns): 16.6 km, -79 C at 15S-15N; 15.5 km at 30N/S; 11.4 km 45N; 9.9 km 60-70N; 8.9 km 85N (8.5 km of the zonal-mean profile); 10.1 km, -68 C at 85S (Antarctic spring); heights quantised by the 37 levels (100 hPa ~ 16.6 km); 1 hPa ~ 47.2 km is the top"
     used_by: [movie ch00_weather_basics s25 inset (D8)]
+    extended_2026-10-30: "September 2026 (newest complete month; may still be ERA5T), t, u, z on 37 levels, 1 deg; 10,918,077 B in 106.3 s (guard given 20 MB); sha256 4b4a6ae43c0e3d40547418cba9c7884f0292277a9c1f251249e752a06c0c465c; zonal means t_zm, u_zm, z_zm (fluidpy.data.movie_gradient.zonal_jet_product) 74,968 B"
+    checks_2026-09: "u_zm NH maximum 25.66 m/s at 45 N, 200 hPa, Z 12.15 km; 850-300 hPa dp-weighted steepest dT/dy -6.37 K/1000 km at 45 N (jet latitude minus steepest-gradient latitude 0 deg); 500 hPa steepest -6.04 at 45 N; T(30N)-T(60N) 15.9 (850), 15.0 (500), 14.5 K (300); SH u_zm max 43.09 m/s"
   GFS-ANL:
     catalogue: GFS
     title: NOAA NCEP GFS 0.25 deg analyses of sea-level pressure (PRMSL) and orography, 2026-10-26 12 UTC and 2026-10-27 00 UTC (latest cycle at fetch time)
@@ -982,12 +985,13 @@ datasets:
     fetch_date: "2026-10-27"
     redistributable: yes  # non-commercial for non-US reports
     redownloadable: true
-    raw_files: [raw/IEM-METAR/iem_metar_all_2026-10-27T1750Z_2026-10-27T1810Z.csv, raw/IEM-METAR/iem_metar_LFRB_2023-11-01T1200Z_2023-11-02T0900Z.csv]
+    raw_files: [raw/IEM-METAR/iem_metar_all_2026-10-27T1750Z_2026-10-27T1810Z.csv, raw/IEM-METAR/iem_metar_LFRB_2023-11-01T1200Z_2023-11-02T0900Z.csv, raw/IEM-METAR/iem_metar_normandy_2024-06-24T0000Z_2024-06-25T0000Z.csv]
     sha256_crosscheck: {iem_metar_LFRB_2023-11-01T1200Z_2023-11-02T0900Z.csv: f08850299e8439f9f7268fb1437a7b9e958248150f6edfc73822ab49f65c32f8}  # D2: Brest METARs 01T12-02T09Z, 41 reports, 11,653 B
     derived_on_root: [derived/ch00/rwm_iem_metar_2026-10-27T18_30-50N_85-65W.json]
     derived_in_repo: [data/derived/ch00/rwm_iem_metar_2026-10-27T18_30-50N_85-65W.json, data/derived/ch00/rwm_iem_metar_stations_2026-10-27T18.json]
     checks: "RM44 METAR part FAILS: the only WPC cold front entering the box (hi-res, 53.6N 40.7W -> 37.7N 75.6W, its tail on the Virginia coast) has 14 / 10 stations within 200 km on either side with circular-mean wind directions 49 / 50 deg (turn 1 deg, < 40 deg) and median T 20.9 / 19.2 C. Use the s56 fallback wording"
     used_by: [movie ch00_reading_weather_maps s01, s56, s58 (D8)]
+    extended_2026-10-30: "LFRG, LFRK, LFOH, LFOE 2024-06-24 (48 half-hourly reports each); 35,612 B, sha256 003879ddf92f964cf1e9c136ab2bcbdc437bc7a8bc2ea89c625abcf1441330ed; product derived/ch00/iem_metar_normandy_2024-06-24.nc and data/derived/ch00/, 32,910 B; used by movie ch00_gradient s35 (D5)"
   GOES19-ABI-GEE:
     catalogue: NOAA GOES-R (Earth Engine)
     title: GOES-19 (GOES-East) ABI full-disk CMI, bands 2 (0.64 um), 8 (6.2 um) and 13 (10.3 um) at 18:00 UTC 27 Oct 2026, and bands 2 and 13 hourly 18-23 UTC, box 25-65N 85-10W
@@ -1437,11 +1441,13 @@ datasets:
     fetch_date: "2026-10-28"
     redistributable: yes
     redownloadable: true
-    raw_files: [raw/ERA5-CDS-monthly-t2m/era5_monthly_t2m_sep_1991-2020_2026_1deg.nc]
-    derived_on_root: [derived/ch00/era5_t2m_anom_2026-09_1deg.nc]
-    derived_in_repo: [data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc]
+    raw_files: [raw/ERA5-CDS-monthly-t2m/era5_monthly_t2m_sep_1991-2020_2026_1deg.nc, raw/ERA5-CDS-monthly-t2m/era5_monthly_t2m_jan_1991-2020_20-85N_170W-60E_0p25.nc]
+    derived_on_root: [derived/ch00/era5_t2m_anom_2026-09_1deg.nc, derived/ch00/era5_t2m_jan_clim_1991-2020_20-85N_170W-60E.nc]
+    derived_in_repo: [data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc, data/derived/ch00/era5_t2m_jan_clim_1991-2020_20-85N_170W-60E.nc]
     checks: "30 base years; cos-lat global-mean anomaly +0.823 K; anomaly range -8.5..+14.7 K; share of the Earth's area warmer than 1991-2020: 0.820, but share of a Mercator map (|lat| <= 85) warmer: 0.687 - the s34 area-honesty point in numbers (not spoken); Arctic (>= 66.5N) mean +1.07 K"
-    used_by: [movie ch00_coordinates s34 (D4)]
+    used_by: [movie ch00_coordinates s34 (D4), movie ch00_contour_maps s21 (D1)]
+    extended_2026-10-30: "January of 1991-2020, 2t, area 85N 170W 20N 60E, native 0.25 deg, unarchived netCDF; 10,521,553 B in 48.9 s (guard given 60 MB); sha256 38cfb0cb7ba9b4c6fbfbef8b7304380530c6988c86f230edfe696dab28255de5; product t2m_clim, t2m_clim_c on 261 lat x 921 lon, 1,018,412 B, sha256 c568b3c9fe2954508eedc083a9c6f7b66a0ffaa4ea40dc39365d83eea2a60057; title and variables above describe the September part"
+    checks_jan: "0 C isotherm 37.8-38.9 N over 100-85 W; 73.7 N at 15 E, 71.7 N at 0 E; difference from 38.4 N to 73.7 N = 3929 km (plan 3300 +- 300: FAIL); largest |grad T| of the frame is not on the North American east coast (Sierra Nevada 28.8 K/100 km, Greenland coast 25.2 K/100 km on low ground; east-coast box 30-45 N 80-65 W p90 4.0, max 9.1 K/100 km against a frame median 1.0)"
   ERA5-CDS-ciaran2023-section:
     catalogue: ERA5-CDS
     title: ERA5 pressure levels round Storm Ciaran, 2023-11-01 18 UTC, t, q, u, v, omega, geopotential on 20 levels 1000-300 hPa, 46-51N 20W-6E, 0.25 deg (vertical slices along 48.5N)
@@ -1816,3 +1822,261 @@ datasets:
     derived_in_repo: [data/derived/ch00/s2_beauce_2024-08-22.jpg, data/derived/ch00/s2_beauce_2024-08-22.json]
     checks: "no-data 0.0 % (W87 < 0.5 %); bbox fully covered; the two plan granules 31UCP (0.49 %) and 31UDP (0.003 %) are <= 1 % cloud, the corner granules 31UCQ / 30UYU are 3.7 / 3.2 % tile-wide but the filled corner is clear; dark-object offsets R/G/B 23/38/25, one gain 1.487, gamma 0.92"
     used_by: [movie ch00_weather_basics s31 (thermals ground; replaces the MODIS plate, MODIS crop kept for the end)]
+  ERA5-ARCO-front-20221222-pl5:
+    catalogue: "ARCO"
+    title: "ERA5 t, u, v, z on 1000, 850, 700, 500, 300 hPa and surface pressure, Winter Storm Elliott Arctic front, 22 Dec 2022 12 UTC (product) and 18 UTC (raw), 25-55N 115-80W, 0.25 deg"
+    url: "gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3"
+    route: "ARCO-ERA5 zarr, anonymous, fluidpy.data.era5_arco.fetch_box through fetch; about 800 MB network, 1,914,530 B on disk, 91.2 s"
+    fetcher: "fluidpy.data.era5_arco.fetch_box; product fluidpy.data.movie_gradient.front_stack (fluidpy.data.stack.stack_product); check fluidpy.data.movie_gradient.front_tilt"
+    login: "none"
+    licence: "CC-BY 4.0 (Copernicus licence); attribution required"
+    licence_url: "https://cds.climate.copernicus.eu/licences/cc-by"
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 via ARCO-ERA5 (Carver and Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1)"
+    attribution: "Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+    size_bytes: 1914530
+    sha256_files:
+      era5_front_elliott_t-u-v-z-sp_1000-850-700-500-300_2t_2022-12-22T12.nc: "7576fc016770325e2867de8c69788d1a51e5506cfd7f420c8dbd26fc3b92b33b"
+      era5_front_feb2021_t-u-v-z-sp_1000-850-700-500-300_1t_2021-02-14T12.nc: "4ff81e5308a7e9bfabd04ba1909a556338479cf97cff6df5da3045e08c4a0b40"
+      era5_front_elliott_2022-12-22T12_pl5.nc: "5c89b89fdac6dc0226fedc15f7b7fb76b1e1be33fa33dbf9b63f780a1a0b8a75"
+    variables: "t [K], u, v [m/s], z [m2/s2], zg [m], sp [Pa], below_ground on (level bottom to top, lat S->N, lon -115..-80); 1,165,824 B"
+    subset: "one hour in the product; 1000 hPa is below ground over 78 % of the box, including every cross-front point (sp 978-991 hPa); the ERA5 values there are extrapolated"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_front_elliott_t-u-v-z-sp_1000-850-700-500-300_2t_2022-12-22T12.nc, raw/ERA5-ARCO/era5_front_feb2021_t-u-v-z-sp_1000-850-700-500-300_1t_2021-02-14T12.nc]
+    derived_on_root: [derived/ch00/era5_front_elliott_2022-12-22T12_pl5.nc]
+    derived_in_repo: [data/derived/ch00/era5_front_elliott_2022-12-22T12_pl5.nc]
+    checks: "DG33b, 12 UTC, cross-front lines through the 850 hPa front at 39, 40, 41 N (cold-ward bearings 316, 309, 300): position from 850 hPa 1000: -250, -188, -212 km; 700: +438, +450, +400; 500: +300, +288, +275; 300: +275, +275, +262. 850 to 500 >= 100 km PASS. Monotonic towards the cold air FAILS: the band moves back 125-162 km from 700 to 500 hPa and 13-25 km from 500 to 300 hPa. 18 UTC fails too (700 to 500: -37..-50 km; 500 to 300: -125..-188 km). Runner-up 14 Feb 2021 12 UTC fails worse (500 hPa peak 0.8-1.2 K/100 km, no front). Z(300) box mean 9.01 km PASS"
+    used_by: [movie ch00_gradient s33b (D8), not yet accepted]
+  ERA5-ARCO-seabreeze-20240624:
+    catalogue: "ARCO"
+    title: "ERA5 hourly 10-m wind and 2-m temperature, Normandy, 24 June 2024 06-18 UTC, 48-51N 1.5W-2.5E"
+    url: "gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3"
+    route: "ARCO-ERA5 zarr, anonymous, fluidpy.data.era5_arco.fetch_box; 46,977 B, 12.5 s"
+    fetcher: "fluidpy.data.era5_arco.fetch_box; product fluidpy.data.movie_gradient.seabreeze_product"
+    login: "none"
+    licence: "CC-BY 4.0 (Copernicus licence); attribution required"
+    licence_url: "https://cds.climate.copernicus.eu/licences/cc-by"
+    citation: "Hersbach, H., et al., 2020: Q. J. R. Meteorol. Soc., 146, 1999-2049, doi:10.1002/qj.3803; ERA5 via ARCO-ERA5 (Carver and Merose, 2023, 22nd Conf. on AI for Env. Science, AMS, 4A.1)"
+    attribution: "Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains."
+    size_bytes: 46977
+    sha256_files:
+      era5_seabreeze_normandy_u10-v10-t2m_2024-06-24T06_2024-06-24T18_1h.nc: "c55d2a59bc1becf126c1ad4b7571d4a29a7b930d9ae55ab7dde293af4f2b6f3b"
+      era5_seabreeze_normandy_2024-06-24.nc: "7c3ddc901e8408c903b3ff685ba8b5d79b7596ce7dcb76e28c1a991c990690e4"
+    variables: "u10, v10 [m/s], t2m [K] on (time, lat S->N, lon)"
+    subset: "13 hours, 13 x 17 cells"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ERA5-ARCO/era5_seabreeze_normandy_u10-v10-t2m_2024-06-24T06_2024-06-24T18_1h.nc]
+    derived_on_root: [derived/ch00/era5_seabreeze_normandy_2024-06-24.nc]
+    derived_in_repo: [data/derived/ch00/era5_seabreeze_normandy_2024-06-24.nc]
+    checks: "49.5 N 0 E: v10 -1.19 m/s at 06 UTC, -3.22 at 12, -4.98 at 15, -4.44 at 18 (northerly, onshore, strengthening); 49.0 N 0 E (inland): -0.66, -0.73, -1.02, -3.37; METAR Le Havre 330 at 4.1 m/s (09), 360 at 5.7 (15), calm before dawn; Deauville 010 at 1.5 (09), 010 at 4.1 (18); Caen 300 at 1.0 (06), 040 at 2.6 (12), 010 at 4.6 (18); 12 UTC T: Le Havre 21, Deauville 23, Caen 23, Evreux 25 C"
+    used_by: [movie ch00_gradient s35 (D5)]
+  OISST-v21:
+    catalogue: "SST"
+    title: "NOAA Daily OISST v2.1 (AVHRR-only), 0.25 deg, newest day 2026-10-29 (preliminary), Gulf Stream box 30-45N 80-55W"
+    url: "https://www.ncei.noaa.gov/products/optimum-interpolation-sst"
+    raw_url: "https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/v2.1/access/avhrr/202610/oisst-avhrr-v02r01.20261029_preliminary.nc"
+    route: "anonymous HTTPS, whole daily file through fluidpy.data.fetch; the global file is 1.5 MB, so a remote subset would save nothing"
+    fetcher: "fluidpy.data.oisst.fetch_day, open_day, box_product"
+    login: "none"
+    licence: "US Government work (NOAA NCEI), public domain; cite the product"
+    licence_url: "https://www.ncei.noaa.gov/products/optimum-interpolation-sst"
+    citation: "Huang, B., et al., 2021: Improvements of the Daily Optimum Interpolation Sea Surface Temperature (DOISST) Version 2.1. J. Climate, 34, 2923-2939, doi:10.1175/JCLI-D-20-0166.1"
+    attribution: "NOAA OISST v2.1, NOAA NCEI (public domain)"
+    size_bytes: 1526077
+    sha256_files:
+      oisst-avhrr-v02r01.20261029_preliminary.nc: "2c9069a3b76cc9b2819ad765d3ec2bac31a8d8e933efad8b56b4a695bfb99449"
+      oisst_gulfstream_2026-10-29.nc: "57e0c8ec9d98d82b0a8731ff2d4e60beedde5cf8817c43ef7cc4c87e9741470f"
+    variables: "sst [C], anom [C] on (lat S->N, lon -180..180); land NaN; 46,078 B"
+    subset: "one day; preliminary files are replaced by final ones after about two weeks"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/OISST-v21/oisst-avhrr-v02r01.20261029_preliminary.nc]
+    derived_on_root: [derived/ch00/oisst_gulfstream_2026-10-29.nc]
+    derived_in_repo: [data/derived/ch00/oisst_gulfstream_2026-10-29.nc]
+    checks: "DG36 PASS: over water deeper than 2000 m the largest drop within 50 km is 6.52 K over 34.8 km, 21.46 C at 40.875 N 65.125 W to 14.94 C at 41.125 N 64.875 W; with no depth limit 6.58 K over 34.8 km at 41.125 N 66.125 W (edge of Georges Bank, not used)"
+    used_by: [movie ch00_gradient s37 (D7)]
+  COPDEM-GLO30:
+    catalogue: "COPDEM"
+    title: "Copernicus DEM GLO-30 Public, tiles round Fuji and Everest, and two height crops"
+    url: "https://registry.opendata.aws/copernicus-dem/"
+    raw_url: "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N35_00_E138_00_DEM/Copernicus_DSM_COG_10_N35_00_E138_00_DEM.tif"
+    route: "anonymous HTTPS whole COG tiles through fluidpy.data.fetch (HEAD gives the size); 215,785,385 B in about 305 s; base image decoded without GDAL"
+    fetcher: "fluidpy.data.copdem.fetch_tiles, read_tile, mosaic, crop_product"
+    login: "none"
+    licence: "Licence for the use of the Copernicus WorldDEM-30: free, worldwide, no time limit; reproduction, distribution, communication to the public, adaptation (Art. 4); notices and no-liability sentence required (Art. 6)"
+    licence_url: "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf"
+    citation: "European Space Agency, 2024: Copernicus Global Digital Elevation Model, distributed by OpenTopography, doi:10.5069/G9028PQB; https://registry.opendata.aws/copernicus-dem/"
+    attribution: "produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved. The organisations in charge of the Copernicus programme by law or by delegation do not incur any liability for any use of the Copernicus WorldDEM-30"
+    size_bytes: 215785385
+    sha256_files:
+      Copernicus_DSM_COG_10_N34_00_E138_00_DEM.tif: "d15a14276cf9982c489e765c2c0af01f6517ff0bf9f3dfe20b9353773c1e8941"
+      Copernicus_DSM_COG_10_N35_00_E138_00_DEM.tif: "06d8b0fa3ebe34ec2c2d2900d7576aeb457beb40f0216d9bebd234610e5ecf03"
+      Copernicus_DSM_COG_10_N27_00_E086_00_DEM.tif: "4dfc87a0dec44a8a037164ddade45dd24bb53187176b5a14175c265bd6d20e76"
+      Copernicus_DSM_COG_10_N27_00_E087_00_DEM.tif: "66e9fb86f48e82b4d4338a130fcc170e282814f5f454ad1f6c0de88ea2fdc6a4"
+      Copernicus_DSM_COG_10_N28_00_E086_00_DEM.tif: "c13a224161a9fb9de14ea259a9f5dfa3c9d39f975c78c53b87e497c04b3c4b9c"
+      Copernicus_DSM_COG_10_N28_00_E087_00_DEM.tif: "121a2baa9d5554ae1dda86d56d29a42a07ff75937040b37017266965aaeac6c3"
+      copdem_fuji_35p05-35p60N_138p50-139p00E.nc: "9d74eb358b8b822ebea3376f1fcdc1ad1c2b8aabfb43db31b767b308cb8b9bd0"
+      copdem_everest_27p80-28p10N_86p70-87p05E.nc: "5b387bc4e1e66118e37a3d09ee85695eda2cd22149298fb8c72d29a9b5738882"
+    variables: "z [m] above EGM2008, digital surface model, on (lat S->N, lon W->E); float64 coordinates"
+    subset: "Fuji 35.05-35.60 N, 138.50-139.00 E (1981 x 1800, 8,649,446 B); Everest 27.80-28.10 N, 86.70-87.05 E (1081 x 1261, 3,068,006 B). The Everest crop reaches 87.05 E, so it needs the E087 tiles the plan did not list; N34 E138 was fetched as asked but no crop uses it"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/COPDEM-GLO30/Copernicus_DSM_COG_10_N34_00_E138_00_DEM.tif, raw/COPDEM-GLO30/Copernicus_DSM_COG_10_N35_00_E138_00_DEM.tif, raw/COPDEM-GLO30/Copernicus_DSM_COG_10_N27_00_E086_00_DEM.tif, raw/COPDEM-GLO30/Copernicus_DSM_COG_10_N27_00_E087_00_DEM.tif, raw/COPDEM-GLO30/Copernicus_DSM_COG_10_N28_00_E086_00_DEM.tif, raw/COPDEM-GLO30/Copernicus_DSM_COG_10_N28_00_E087_00_DEM.tif]
+    derived_on_root: [derived/ch00/copdem_fuji_35p05-35p60N_138p50-139p00E.nc, derived/ch00/copdem_everest_27p80-28p10N_86p70-87p05E.nc]
+    derived_note: "crops stay on G: because data/derived is at 147.0 of 150 MB; the movie builder writes its own heightmaps"
+    checks: "Fuji summit 3768.4 m at 35.3606 N 138.7272 E (cited 3776; DM06 PASS, -7.6 m); Everest 8737.8 m (cited 8849; DM11 FAIL, -111 m); Lhotse 8416.0 m at 27.9617 N 86.9325 E (cited 8516; DM11 FAIL, -100 m); South Col saddle 7860.3 m at 27.9745 N 86.9317 E, raw cell 7857 m (cited 7906; DM13 7900 +- 60 PASS), Fxx < 0 and Fyy > 0: rises north and south towards the peaks, falls east and west; Fuji 200-m spacing 3400-3600 m steepest path 350, 383, 292 m (median 350, DM08 PASS), 1000-1200 m along a radial line 3610, 1740, 1236 m (median 1740, DM08 2000 +- 500 PASS; steepest paths are trapped by the surface model's forest noise)"
+    used_by: [movie ch00_contour_maps s00, s06-s13 (D2)]
+  ETOPO2022-15s-montblanc:
+    catalogue: "ETOPO"
+    title: "ETOPO 2022 15-arc-second surface, Mont Blanc 45.6-46.1N 6.6-7.2E"
+    url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    raw_url: "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/15s/15s_surface_elev_netcdf/ETOPO_2022_v1_15s_N60E000_surface.nc"
+    route: "OPeNDAP subset (pydap) through fluidpy.data.fetch; the server answered 503 on the first tries, retried; 76,807 B in 1.4 s"
+    fetcher: "fluidpy.data.etopo.fetch_15s; product fluidpy.data.movie_gradient.etopo_product"
+    login: "none"
+    licence: "US Government work (NOAA NCEI), public domain"
+    licence_url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    citation: "NOAA National Centers for Environmental Information, 2022: ETOPO 2022 15 Arc-Second Global Relief Model. doi:10.25921/fd45-gt74"
+    attribution: "ETOPO 2022, NOAA NCEI (public domain)"
+    size_bytes: 76807
+    sha256_files:
+      etopo2022_15s_montblanc_45.6-46.1N_6.6-7.2E.nc (raw): "590abfb747988c206af1caf5e502723d4515610c65ee46fcca5ca85de9145a28"
+      etopo2022_15s_montblanc_45.6-46.1N_6.6-7.2E.nc (product): "a13d213f05c67f60e62b2fd2bff9ad13c58cb243b549fb99c6eb0fafd82e2995"
+    variables: "z [m], spike_mask on (lat S->N 120, lon 144)"
+    subset: "45.6-46.1 N, 6.6-7.2 E; tile named by its NW corner"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ETOPO2022-15s-montblanc/etopo2022_15s_montblanc_45.6-46.1N_6.6-7.2E.nc]
+    derived_on_root: [derived/ch00/etopo2022_15s_montblanc_45.6-46.1N_6.6-7.2E.nc]
+    derived_in_repo: [data/derived/ch00/etopo2022_15s_montblanc_45.6-46.1N_6.6-7.2E.nc]
+    checks: "summit cell 4692.8 m (60 arc-s 4009-4169 m; cited 4806), Chamonix cell 1041 m (cited 1035); max |grad h| within 5 km of the summit 1.286 at 45.823 N 6.890 E (DG13 0.60 +- 0.05 FAIL; the 60 arc-s grid gives 0.573 PASS), median 0.586, 90th percentile 0.902; no false soundings"
+    used_by: [movie ch00_gradient s01, s15, s16 (D1)]
+  ETOPO2022-15s-fuji:
+    catalogue: "ETOPO"
+    title: "ETOPO 2022 15-arc-second surface, Fuji and Suruga Bay 34.4-35.8N 138.1-139.3E, false soundings removed"
+    url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    raw_url: "https://www.ngdc.noaa.gov/thredds/dodsC/global/ETOPO2022/15s/15s_surface_elev_netcdf/ETOPO_2022_v1_15s_N45E135_surface.nc"
+    route: "OPeNDAP subset (pydap) through fluidpy.data.fetch; 272,884 B"
+    fetcher: "fluidpy.data.etopo.fetch_15s; product fluidpy.data.movie_gradient.etopo_product"
+    login: "none"
+    licence: "US Government work (NOAA NCEI), public domain"
+    licence_url: "https://www.ncei.noaa.gov/products/etopo-global-relief-model"
+    citation: "NOAA National Centers for Environmental Information, 2022: ETOPO 2022 15 Arc-Second Global Relief Model. doi:10.25921/fd45-gt74"
+    attribution: "ETOPO 2022, NOAA NCEI (public domain)"
+    size_bytes: 272884
+    sha256_files:
+      etopo2022_15s_fuji_34.4-35.8N_138.1-139.3E.nc (raw): "03cf1ca7583ccbb84291628a6cd200f230b284be07534089f47607918bd5eceb"
+      etopo2022_15s_fuji_34.4-35.8N_138.1-139.3E.nc (product): "fbc1d05bf05a5128a4ba0e760b796ee862b080edef77d629431a31c11f879f66"
+    variables: "z [m], spike_mask on (lat S->N 336, lon 288)"
+    subset: "34.4-35.8 N, 138.1-139.3 E"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/ETOPO2022-15s-fuji/etopo2022_15s_fuji_34.4-35.8N_138.1-139.3E.nc]
+    derived_on_root: [derived/ch00/etopo2022_15s_fuji_34.4-35.8N_138.1-139.3E.nc]
+    derived_in_repo: [data/derived/ch00/etopo2022_15s_fuji_34.4-35.8N_138.1-139.3E.nc]
+    checks: "13 false soundings over the shelf removed (for example -8802 m beside -90 m at 34.427 N 138.306 E; never contour the raw file); deepest north of 34.6 N -2439 m at 34.602 N 138.581 E, 18 km from land, 85 km from the summit (DM10 2500 +- 300 and < 100 km PASS; floor -2044 at 34.7 N, -1705 at 34.8 N, -1410 at 35.0 N); box minimum -2829 m at 34.402 N, at the southern edge and 108 km from the summit; summit in this grid 3681 m"
+    used_by: [movie ch00_contour_maps s07, s10 (D3)]
+  EOX-s2cloudless-2023-montblanc:
+    catalogue: "EOX"
+    title: "EOxCloudless (s2cloudless) 2023 mosaic, Mont Blanc 45.6-46.1N 6.6-7.2E, 4096 x 3413"
+    url: "https://cloudless.eox.at/"
+    raw_url: "https://tiles.maps.eox.at/wms?service=WMS&request=GetMap&version=1.1.1&layers=s2cloudless-2023&styles=&srs=EPSG:4326&bbox=6.6,45.6,7.2,46.1&width=4096&height=3413&format=image/jpeg"
+    route: "WMS GetMap through fluidpy.data.fetch; 4,261,084 B in 44 s"
+    fetcher: "fluidpy.data.fetch"
+    login: "none"
+    licence: "CC BY-NC-SA 4.0 for non-commercial use; commercial use needs an EOX licence"
+    licence_url: "https://cloudless.eox.at/documentation/license"
+    citation: "EOxCloudless, EOX IT Services GmbH, https://cloudless.eox.at"
+    attribution: "EOxCloudless https://cloudless.eox.at by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2023)"
+    size_bytes: 4261084
+    sha256: "107509466d3aab24307f1d9d31db2e6a9b61f82efee38bf3c614e9bc93f65835"
+    variables: "8-bit RGB JPEG, plate carree, row 0 = 46.1 N"
+    subset: "one request"
+    fetch_date: "2026-10-30"
+    redistributable: no
+    redownloadable: true
+    raw_files: [raw/EOX-s2cloudless-2023/s2cloudless-2023_montblanc_45.6-46.1N_6.6-7.2E_4096.jpg]
+    redistribution_note: "not copied to the repo (project rule: public domain, CC-BY or NASA open only); the licence needs a visible credit and share-alike, so a movie using it would inherit CC BY-NC-SA. Sentinel2-L2A-montblanc-20230926 has none of these limits"
+    used_by: [movie ch00_gradient s15, s16 (D2, alternative)]
+  Sentinel2-L2A-montblanc-20230926:
+    catalogue: "STAC"
+    title: "Sentinel-2 L2A true colour, Mont Blanc 45.6-46.1N 6.6-7.2E, 2023-09-26"
+    url: "https://earth-search.aws.element84.com/v1"
+    route: "map-toolkit STAC adapter (tools/maptools/render.py, .venv-maps), recipe s2_montblanc_20230926: COG range reads, guard run by hand first (--need 400 MB); no Chrome"
+    fetcher: "tools/maptools/adapters/stac_adapter.py; fluidpy.data.movie_wb.s2_texture"
+    login: "none"
+    licence: "Copernicus Sentinel data legal notice (EU Reg. 377/2014, Del. Reg. 1159/2013): free, full and open; distribution and modification allowed"
+    licence_url: "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice"
+    citation: "Contains modified Copernicus Sentinel data 2023 (ESA Sentinel-2), via Element 84 Earth Search"
+    attribution: "Contains modified Copernicus Sentinel data 2023"
+    size_bytes: 6148166
+    sha256_files:
+      s2_montblanc_2023-09-26.jpg: "5193a9e162118f9e97c6474fe1cb24631e7a970c108fb39b40964c0ed74a9c46"
+      s2_montblanc_2023-09-26.json: "2414bb9fb0f07a0037598498631c355a67195ed8281d98706d1f07e49adb1e58"
+    variables: "8-bit sRGB JPEG plus JSON with bounds, items and processing; row 0 = north"
+    subset: "S2A 32TLR, 32TLS and neighbours, 10:38 UTC, cloud < 0.01 %; 4096 x 3413; no-data 0.009 %"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/STAC/s2_montblanc_20230926/d82aada4a8cd3a9b5fc4/data.png]
+    derived_on_root: [derived/ch00/s2_montblanc_2023-09-26.jpg, derived/ch00/s2_montblanc_2023-09-26.json]
+    derived_note: "on G: only: data/derived is at 147.0 of 150 MB"
+    used_by: [movie ch00_gradient s15, s16 (D2, recommended)]
+  Sentinel2-L2A-fuji-20251207:
+    catalogue: "STAC"
+    title: "Sentinel-2 L2A true colour, Fuji 35.2-35.5N 138.6-138.9E, 2025-12-07"
+    url: "https://earth-search.aws.element84.com/v1"
+    route: "map-toolkit STAC adapter (tools/maptools/render.py, .venv-maps), recipe s2_fuji_20251207: COG range reads, guard run by hand first (--need 400 MB); no Chrome"
+    fetcher: "tools/maptools/adapters/stac_adapter.py; fluidpy.data.movie_wb.s2_texture"
+    login: "none"
+    licence: "Copernicus Sentinel data legal notice (EU Reg. 377/2014, Del. Reg. 1159/2013): free, full and open; distribution and modification allowed"
+    licence_url: "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice"
+    citation: "Contains modified Copernicus Sentinel data 2025 (ESA Sentinel-2), via Element 84 Earth Search"
+    attribution: "Contains modified Copernicus Sentinel data 2025"
+    size_bytes: 5280602
+    sha256_files:
+      s2_fuji_2025-12-07.jpg: "2d26961ec75df21dab44857745e6654934b16da25be89d49f35caa77147f16f5"
+      s2_fuji_2025-12-07.json: "cb32548bb8662fef8f8b5c721fce1062c0a9833c5f7e02d862e8a8e283456fcf"
+    variables: "8-bit sRGB JPEG plus JSON with bounds, items and processing; row 0 = north"
+    subset: "S2B 54STD, 54SUE and neighbours, 01:37 UTC, cloud < 0.3 %, snow cap; 4096 x 4096; no-data 0.0004 %"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: true
+    raw_files: [raw/STAC/s2_fuji_20251207/196e5d70a97d4a2b2716/data.png]
+    derived_on_root: [derived/ch00/s2_fuji_2025-12-07.jpg, derived/ch00/s2_fuji_2025-12-07.json]
+    derived_note: "on G: only: data/derived is at 147.0 of 150 MB"
+    used_by: [movie ch00_contour_maps s07 (D4, optional)]
+  GFS-ANL-20261030T12-grad:
+    catalogue: "GFS"
+    title: "NOAA NCEP GFS 0.25 deg, 12 UTC 30 Oct 2026 (newest cycle at fetch): msl, orography, 10-m wind, 250 hPa wind, North Atlantic 20-80N 100W-20E"
+    url: "https://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_0p25deg_ana/catalog.xml"
+    route: "Unidata THREDDS NCSS through fluidpy.data.gfs.fetch_analysis; 12,127,497 B; rolling window of about 7 days"
+    fetcher: "fluidpy.data.gfs.fetch_analysis; product fluidpy.data.movie_gradient.gfs_refresh_product"
+    login: "none"
+    licence: "US Government work (NOAA/NCEP), public domain; redistributed unchanged by UCAR/Unidata"
+    licence_url: "https://www.weather.gov/disclaimer"
+    citation: "NOAA NCEP Global Forecast System 0.25 deg analysis via the Unidata THREDDS Data Server (UCAR); archive: NCEP GFS 0.25 Degree Global Forecast Grids Historical Archive, NCAR RDA, doi:10.5065/D65D8PWK"
+    attribution: "NOAA NCEP GFS analysis (public domain), via Unidata THREDDS (UCAR)"
+    size_bytes: 12127497
+    sha256_files:
+      gfs_anl_20261030_1200_mslp-orog.nc: "82276aa47512a822afa5d617ba2c5c67a3a2e73329f282bc0861fd9ad2d4dbab"
+      gfs_anl_20261030_1200_ucomponentofwindheightab-vcomponentofwindheightab_10m_fc.nc: "4ec0fd2c9a7c01ea8a997f7c5e9d4cded42899e4081b45ae553e9610ba3e3d32"
+      gfs_anl_20261030_1200_ucomponentofwindisobaric-vcomponentofwindisobaric_250hPa.nc: "052bfb14eb6165d47c2ebad157d9f3a3a544ed893b9bdb8eb134abaddd1c156e"
+      gfs_grad_2026-10-30T12_natl.nc: "aef5054b332d451370206622ac1079118dda3aa27a9ca6788b8ed4c03ff18bfc"
+    variables: "msl [Pa], zs [m], u10, v10, u250, v250 [m/s] on (lat S->N, lon -100..20); 1,445,877 B"
+    subset: "one cycle"
+    fetch_date: "2026-10-30"
+    redistributable: yes
+    redownloadable: false
+    raw_files: [raw/GFS-ANL/gfs_anl_20261030_1200_mslp-orog.nc, raw/GFS-ANL/gfs_anl_20261030_1200_ucomponentofwindheightab-vcomponentofwindheightab_10m_fc.nc, raw/GFS-ANL/gfs_anl_20261030_1200_ucomponentofwindisobaric-vcomponentofwindisobaric_250hPa.nc]
+    derived_on_root: [derived/ch00/gfs_grad_2026-10-30T12_natl.nc]
+    derived_in_repo: [data/derived/ch00/gfs_grad_2026-10-30T12_natl.nc]
+    checks: "no deep low near Iceland in this cycle: lowest sea-level pressure over low ground in 55-75 N, 35 W-5 E is 992.8 hPa at the box edge (75.0 N 19.5 W); largest sea-point gradient 9.89 hPa/100 km at 33.0 N 63.5 W; largest 10-m wind 19.2 m/s at 58.75 N 7.5 W; 250 hPa maximum 75.99 m/s (273.5 km/h) at 60.0 N 15.5 W"
+    used_by: [movie ch00_gradient s31, s36 (D4, alternative to the frozen 27 and 28 Oct charts)]

@@ -108,3 +108,10 @@ Suruga (`[Suruga](/sʊɹˈuɡə/)`), Lhotse (`[Lhotse](/lˈoʊtsˌA/)`), Khumbu 
 (`[isohypses](/ˈIsəhˌIpsɪz/)`), isohyet (`[isohyets](/ˌIsəhˈIəts/)`), isobath (`[isobaths](/ˈIsəbˌæθs/)`), isopycnal
 (`[isopycnals](/ˌIsəpˈɪknəlz/)`), isotach (`[isotachs](/ˈIsətˌæks/)`), isoline (default expected), Azores, Bermuda, Newfoundland,
 Fuji (defaults expected; listen once).
+
+## Orchestrator decisions on the data scout's report (2026-10-30; apply when building)
+- **DM21**: s21 says "about thirty eight", "more than seventy", "almost four thousand" (3929 km). The east coast is an example of a strong gradient, not the frame's maximum (Sierra Nevada 28.8, SW Greenland 25.2 K/100 km): do not call it the strongest.
+- **DM11**: the DEM reads Everest 8737.8 m and Lhotse 8416.0 m, 111 and 100 m low. s11 keeps cited heights; rewrite the check against the DEM and do not imply the 3-D model reaches the cited summit.
+- **DM17**: use `smooth_km=100` (1034.2, 1029.7, 984.3, 991.3 hPa all pass).
+- **DM19**: the col's axes are diagonal, so s19 "north or south falls, west or east rises" is wrong. Reword: pressure rises towards the north-east and south-west, falls towards the south-east and north-west; wind "about two metres per second" (2.2).
+- **Repo budget**: `data/derived` is at 147.0 of 150 MB; new large products stay on G:.

@@ -79,3 +79,12 @@
   210° → 250°). Between neighbouring levels it turns clockwise in only 6 of 13 pairs.
 - The 16-layer stack therefore uses `ERA5-CDS-trappes-20231101T00-uv16`, which agrees with this sonde within 1.5 m/s
   and 8° at the standard levels. The sonde stays the hodograph's source in s12g.
+
+## Refresh 2026-10-30 (movie #6 D3)
+
+- **Trappes year-to-date file fetched again**: 624,714 B, newest sounding still **2026-09-30T12**. Nothing newer exists in IGRA.
+- **D3 is superseded**: s17, s18, s32 moved to the Singapore sounding (data_needs §G). Re-measured on `igra2_trappes_singapore_2023-11-01T00.nc`:
+  - Surface 33 m, 27.7 °C; WMO tropopause 16 163 m, −81.3 °C; layer −6.758 K/km; ρ 1.168 kg/m³; ρg 11.45 Pa/m; dp/dz −10.918 Pa/m; 9.159 m per hPa. All PASS.
+  - The §G text "surface → 925 hPa (798 m)": 798 m is the height of the 925 hPa level; the layer is 765 m thick. The pressure gradient already uses 765 m, so no number changes.
+  - DG16s 675.8/4.059 = 166.5, plan 166. Spoken "more than a hundred and sixty" holds.
+- **Disk**: whole session, C: 60.4 → 61.0 GB free, G: 492.1 → 491.1 GB free, project data 98.07 → 99.01 GB. Render scratch moves these too. Nothing evicted.
