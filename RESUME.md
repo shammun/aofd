@@ -35,6 +35,7 @@
 | 7 | Rest of the series | `movies/ch00/series_plan_v2_proposal.md` | in order |
 
 ## Open with the user (not blocking)
+- **REMIND THE USER (asked 2026-10-29):** open 3 free accounts: EUMETSAT Data Store (older Meteosat images for Sidr, Nargis, Aila), ECMWF (TIGGE forecast archive), NCAR RDA (older GFS runs). Needed before forecasting movies F14/F17/F18/F19; until then use GridSat-B1, HURSAT and NHC ATCF.
 - M10 publish (needs `! gh repo create shammun/aofd-media --public`).
 - M8 push: the user said don't push.
 - PoC A–G feedback.
