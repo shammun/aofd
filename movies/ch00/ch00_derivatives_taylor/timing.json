@@ -750,3608 +750,3623 @@
    "end_frame": 14225
   },
   {
-   "id": "s10_mixed_partials",
+   "id": "s09b_dtdz_stack",
    "start": 474.175,
+   "sentences": [
+    {
+     "text": "Now let's look at the temperature over all of northern France at once, at the same moment, on five levels from near the ground to about sixteen and a half kilometres up.",
+     "audio_text": null,
+     "start": 474.175,
+     "end": 484.85,
+     "dur": 10.675,
+     "start_frame": 14225,
+     "end_frame": 14546,
+     "fix2": true
+    },
+    {
+     "text": "Above Trappes, the change in temperature divided by the gap in height between neighbouring levels is minus six point two, minus five point six, and minus seven point seven degrees per kilometre: colder going up.",
+     "audio_text": "Above [Trappes](/tɹˈæp/), the change in temperature divided by the gap in height between neighbouring levels is minus six point two, minus five point six, and minus seven point seven degrees per kilometre: colder going up.",
+     "start": 485.2,
+     "end": 499.1,
+     "dur": 13.9,
+     "start_frame": 14556,
+     "end_frame": 14973,
+     "fix2": true
+    },
+    {
+     "text": "In the top gap, above thirteen kilometres, the sign flips to plus one point one: above the tropopause, the lid on the weather layer, the air gets warmer going up.",
+     "audio_text": null,
+     "start": 499.45,
+     "end": 510.4,
+     "dur": 10.95,
+     "start_frame": 14984,
+     "end_frame": 15312,
+     "beat": true,
+     "fix2": true
+    }
+   ],
+   "end": 511.9,
+   "start_frame": 14225,
+   "end_frame": 15357
+  },
+  {
+   "id": "s10_mixed_partials",
+   "start": 511.9,
    "sentences": [
     {
      "text": "We can also take a partial derivative of a partial derivative.",
      "audio_text": null,
-     "start": 474.175,
-     "end": 478.525,
+     "start": 511.9,
+     "end": 516.25,
      "dur": 4.35,
-     "start_frame": 14225,
-     "end_frame": 14356
+     "start_frame": 15357,
+     "end_frame": 15488
     },
     {
      "text": "Let's take the eastward slope, partial capital T by partial x, and ask how fast it changes in time.",
      "audio_text": null,
-     "start": 478.875,
-     "end": 486.375,
+     "start": 516.6,
+     "end": 524.1,
      "dur": 7.5,
-     "start_frame": 14366,
-     "end_frame": 14591
+     "start_frame": 15498,
+     "end_frame": 15723
     },
     {
      "text": "Or, the other way round, take the warming rate, partial capital T by partial small t, and ask how it changes going east.",
      "audio_text": null,
-     "start": 486.725,
-     "end": 495.425,
+     "start": 524.45,
+     "end": 533.15,
      "dur": 8.7,
-     "start_frame": 14602,
-     "end_frame": 14863
+     "start_frame": 15734,
+     "end_frame": 15995
     },
     {
      "text": "These sound like different questions, but for any smooth field they give the same answer.",
      "audio_text": null,
-     "start": 495.775,
-     "end": 501.625,
+     "start": 533.5,
+     "end": 539.35,
      "dur": 5.85,
-     "start_frame": 14873,
-     "end_frame": 15049
+     "start_frame": 16005,
+     "end_frame": 16181
     },
     {
      "text": "Let's check with an easy field, T equals x squared times small t.",
      "audio_text": null,
-     "start": 501.975,
-     "end": 506.975,
+     "start": 539.7,
+     "end": 544.7,
      "dur": 5.0,
-     "start_frame": 15059,
-     "end_frame": 15209
+     "start_frame": 16191,
+     "end_frame": 16341
     },
     {
      "text": "The slope in x is two x small t, and its rate in time is two x.",
      "audio_text": null,
-     "start": 507.325,
-     "end": 512.3,
+     "start": 545.05,
+     "end": 550.025,
      "dur": 4.975,
-     "start_frame": 15220,
-     "end_frame": 15369,
+     "start_frame": 16352,
+     "end_frame": 16501,
      "beat": true
     },
     {
      "text": "The rate in time is x squared, and its slope in x is also two x.",
      "audio_text": null,
-     "start": 513.8,
-     "end": 518.625,
+     "start": 551.525,
+     "end": 556.35,
      "dur": 4.825,
-     "start_frame": 15414,
-     "end_frame": 15559,
+     "start_frame": 16546,
+     "end_frame": 16691,
      "beat": true
     },
     {
      "text": "Over Brest, the reanalysis gives both as one point four times ten to the minus nine degrees per metre per second.",
      "audio_text": null,
-     "start": 520.125,
-     "end": 528.175,
+     "start": 557.85,
+     "end": 565.9,
      "dur": 8.05,
-     "start_frame": 15604,
-     "end_frame": 15845,
+     "start_frame": 16736,
+     "end_frame": 16977,
      "beat": true
     },
     {
      "text": "Here's why they must agree.",
      "audio_text": null,
-     "start": 529.675,
-     "end": 531.925,
+     "start": 567.4,
+     "end": 569.65,
      "dur": 2.25,
-     "start_frame": 15890,
-     "end_frame": 15958
+     "start_frame": 17022,
+     "end_frame": 17090
     },
     {
      "text": "Both are built from the same four values, at the corners of a small rectangle in x and small t: top right, minus top left, minus bottom right, plus bottom left.",
      "audio_text": null,
-     "start": 532.275,
-     "end": 543.875,
+     "start": 570.0,
+     "end": 581.6,
      "dur": 11.6,
-     "start_frame": 15968,
-     "end_frame": 16316
+     "start_frame": 17100,
+     "end_frame": 17448
     },
     {
      "text": "At Brest, the four corners give zero point three seven degrees, divided by thirty six point eight kilometres and by two hours: the same one point four times ten to the minus nine.",
      "audio_text": null,
-     "start": 544.225,
-     "end": 556.725,
+     "start": 581.95,
+     "end": 594.45,
      "dur": 12.5,
-     "start_frame": 16327,
-     "end_frame": 16702,
-     "fix1": true
+     "start_frame": 17459,
+     "end_frame": 17834
     },
     {
      "text": "Only the order of the subtractions differs, so the answer can't.",
      "audio_text": null,
-     "start": 557.075,
-     "end": 561.7,
+     "start": 594.8,
+     "end": 599.425,
      "dur": 4.625,
-     "start_frame": 16712,
-     "end_frame": 16851
+     "start_frame": 17844,
+     "end_frame": 17983
     }
    ],
-   "end": 562.5,
-   "start_frame": 14225,
-   "end_frame": 16875
+   "end": 600.225,
+   "start_frame": 15357,
+   "end_frame": 18007
   },
   {
    "id": "s11_total_differential",
-   "start": 562.5,
+   "start": 600.225,
    "sentences": [
     {
      "text": "Now let's change everything at once, but only by a little.",
      "audio_text": null,
-     "start": 562.5,
-     "end": 566.6,
+     "start": 600.225,
+     "end": 604.325,
      "dur": 4.1,
-     "start_frame": 16875,
-     "end_frame": 16998
+     "start_frame": 18007,
+     "end_frame": 18130
     },
     {
      "text": "Suppose we take a small step east, d x, a small step north, d y, a small step up, d z, and wait a short time, d t.",
      "audio_text": null,
-     "start": 566.95,
-     "end": 575.825,
+     "start": 604.675,
+     "end": 613.55,
      "dur": 8.875,
-     "start_frame": 17009,
-     "end_frame": 17275
+     "start_frame": 18140,
+     "end_frame": 18407
     },
     {
      "text": "How much does the temperature change?",
      "audio_text": null,
-     "start": 576.175,
-     "end": 578.775,
+     "start": 613.9,
+     "end": 616.5,
      "dur": 2.6,
-     "start_frame": 17285,
-     "end_frame": 17363
+     "start_frame": 18417,
+     "end_frame": 18495
     },
     {
      "text": "Each partial derivative says how much T changes for each unit of step in its own direction.",
      "audio_text": null,
-     "start": 579.125,
-     "end": 585.575,
+     "start": 616.85,
+     "end": 623.3,
      "dur": 6.45,
-     "start_frame": 17374,
-     "end_frame": 17567
+     "start_frame": 18506,
+     "end_frame": 18699
     },
     {
      "text": "So we multiply each one by its own step, and add them up.",
      "audio_text": null,
-     "start": 585.925,
-     "end": 590.075,
+     "start": 623.65,
+     "end": 627.8,
      "dur": 4.15,
-     "start_frame": 17578,
-     "end_frame": 17702
+     "start_frame": 18710,
+     "end_frame": 18834
     },
     {
      "text": "The small change, d T, equals partial capital T by partial x times d x, plus partial capital T by partial y times d y, plus partial capital T by partial z times d z, plus partial capital T by partial small t times d t.",
      "audio_text": null,
-     "start": 590.425,
-     "end": 608.375,
+     "start": 628.15,
+     "end": 646.1,
      "dur": 17.95,
-     "start_frame": 17713,
-     "end_frame": 18251
+     "start_frame": 18845,
+     "end_frame": 19383
     },
     {
      "text": "This is called the total differential.",
      "audio_text": null,
-     "start": 608.725,
-     "end": 611.45,
+     "start": 646.45,
+     "end": 649.175,
      "dur": 2.725,
-     "start_frame": 18262,
-     "end_frame": 18344
+     "start_frame": 19394,
+     "end_frame": 19475
     },
     {
      "text": "It's like walking on a hillside: your rise is the slope going east times your step east, plus the slope going north times your step north.",
      "audio_text": null,
-     "start": 611.8,
-     "end": 620.725,
+     "start": 649.525,
+     "end": 658.45,
      "dur": 8.925,
-     "start_frame": 18354,
-     "end_frame": 18622
+     "start_frame": 19486,
+     "end_frame": 19754
     },
     {
      "text": "Unlike a real hillside, our landscape also changes while we walk, so the time gets a term too.",
      "audio_text": null,
-     "start": 621.075,
-     "end": 628.125,
+     "start": 658.8,
+     "end": 665.85,
      "dur": 7.05,
-     "start_frame": 18632,
-     "end_frame": 18844
+     "start_frame": 19764,
+     "end_frame": 19976
     }
    ],
-   "end": 628.925,
-   "start_frame": 16875,
-   "end_frame": 18868
+   "end": 666.65,
+   "start_frame": 18007,
+   "end_frame": 20000
   },
   {
    "id": "s12_total_example",
-   "start": 628.925,
+   "start": 666.65,
    "sentences": [
     {
      "text": "Let's try it near Brest.",
      "audio_text": null,
-     "start": 628.925,
-     "end": 631.075,
+     "start": 666.65,
+     "end": 668.8,
      "dur": 2.15,
-     "start_frame": 18868,
-     "end_frame": 18932
+     "start_frame": 20000,
+     "end_frame": 20064
     },
     {
      "text": "We go ten kilometres east and twenty kilometres north, keep the same height, and wait half an hour.",
      "audio_text": null,
-     "start": 631.425,
-     "end": 638.2,
+     "start": 669.15,
+     "end": 675.925,
      "dur": 6.775,
-     "start_frame": 18943,
-     "end_frame": 19146
+     "start_frame": 20075,
+     "end_frame": 20278
     },
     {
      "text": "The east step gives minus three point two degrees per hundred kilometres, times ten kilometres: minus zero point three two degrees.",
      "audio_text": null,
-     "start": 638.55,
-     "end": 647.75,
+     "start": 676.275,
+     "end": 685.475,
      "dur": 9.2,
-     "start_frame": 19157,
-     "end_frame": 19433
+     "start_frame": 20288,
+     "end_frame": 20564
     },
     {
      "text": "The north step gives minus two point five per hundred kilometres, times twenty kilometres: minus zero point five.",
      "audio_text": null,
-     "start": 648.1,
-     "end": 656.075,
+     "start": 685.825,
+     "end": 693.8,
      "dur": 7.975,
-     "start_frame": 19443,
-     "end_frame": 19682
+     "start_frame": 20575,
+     "end_frame": 20814
     },
     {
      "text": "And the wait gives plus two point nine degrees per hour, times half an hour: plus one point four five.",
      "audio_text": null,
-     "start": 656.425,
-     "end": 663.3,
+     "start": 694.15,
+     "end": 701.025,
      "dur": 6.875,
-     "start_frame": 19693,
-     "end_frame": 19899,
+     "start_frame": 20825,
+     "end_frame": 21031,
      "beat": true
     },
     {
      "text": "Adding them up, the temperature changes by about plus zero point six three degrees.",
      "audio_text": null,
-     "start": 664.8,
-     "end": 670.325,
+     "start": 702.525,
+     "end": 708.05,
      "dur": 5.525,
-     "start_frame": 19944,
-     "end_frame": 20110,
+     "start_frame": 21076,
+     "end_frame": 21242,
      "beat": true
     },
     {
      "text": "This works only for small steps, where the landscape looks flat.",
      "audio_text": null,
-     "start": 671.825,
-     "end": 676.325,
+     "start": 709.55,
+     "end": 714.05,
      "dur": 4.5,
-     "start_frame": 20155,
-     "end_frame": 20290
+     "start_frame": 21287,
+     "end_frame": 21422
     },
     {
      "text": "We'll see exactly why, and what goes wrong for big steps, when we get to Taylor series.",
      "audio_text": null,
-     "start": 676.675,
-     "end": 682.65,
+     "start": 714.4,
+     "end": 720.375,
      "dur": 5.975,
-     "start_frame": 20300,
-     "end_frame": 20480
+     "start_frame": 21432,
+     "end_frame": 21611
     }
    ],
-   "end": 683.45,
-   "start_frame": 18868,
-   "end_frame": 20504
+   "end": 721.175,
+   "start_frame": 20000,
+   "end_frame": 21635
   },
   {
    "id": "s13_chain_rule",
-   "start": 683.45,
+   "start": 721.175,
    "sentences": [
     {
      "text": "So far we chose the steps ourselves.",
      "audio_text": null,
-     "start": 683.45,
-     "end": 686.2,
+     "start": 721.175,
+     "end": 723.925,
      "dur": 2.75,
-     "start_frame": 20504,
-     "end_frame": 20586
+     "start_frame": 21635,
+     "end_frame": 21718
     },
     {
      "text": "Now let's ride along with something that moves, like a plane or a balloon.",
      "audio_text": null,
-     "start": 686.55,
-     "end": 691.4,
+     "start": 724.275,
+     "end": 729.125,
      "dur": 4.85,
-     "start_frame": 20597,
-     "end_frame": 20742
+     "start_frame": 21728,
+     "end_frame": 21874
     },
     {
      "text": "Its position changes with time, so its x, y and z are themselves functions of time: capital X of t, capital Y of t, and capital Z of t.",
      "audio_text": null,
-     "start": 691.75,
-     "end": 702.775,
+     "start": 729.475,
+     "end": 740.5,
      "dur": 11.025,
-     "start_frame": 20753,
-     "end_frame": 21083
+     "start_frame": 21884,
+     "end_frame": 22215
     },
     {
      "text": "In a short time d t, it moves east by d X, which is d X by d t, its eastward speed, times d t.",
      "audio_text": null,
-     "start": 703.125,
-     "end": 711.7,
+     "start": 740.85,
+     "end": 749.425,
      "dur": 8.575,
-     "start_frame": 21094,
-     "end_frame": 21351
+     "start_frame": 22226,
+     "end_frame": 22483
     },
     {
      "text": "The same goes for north and up.",
      "audio_text": null,
-     "start": 712.05,
-     "end": 714.525,
+     "start": 749.775,
+     "end": 752.25,
      "dur": 2.475,
-     "start_frame": 21362,
-     "end_frame": 21436
+     "start_frame": 22493,
+     "end_frame": 22568
     },
     {
      "text": "Let's put these steps into the total differential, and divide everything by d t.",
      "audio_text": null,
-     "start": 714.875,
-     "end": 720.525,
+     "start": 752.6,
+     "end": 758.25,
      "dur": 5.65,
-     "start_frame": 21446,
-     "end_frame": 21616
+     "start_frame": 22578,
+     "end_frame": 22748
     },
     {
      "text": "That gives the rate the traveller's own thermometer reads.",
      "audio_text": null,
-     "start": 720.875,
-     "end": 724.875,
+     "start": 758.6,
+     "end": 762.6,
      "dur": 4.0,
-     "start_frame": 21626,
-     "end_frame": 21746
+     "start_frame": 22758,
+     "end_frame": 22878
     },
     {
      "text": "d T by d t equals partial capital T by partial small t, plus d X by d t times partial capital T by partial x, plus d Y by d t times partial capital T by partial y, plus d Z by d t times partial capital T by partial z.",
      "audio_text": null,
-     "start": 725.225,
-     "end": 744.925,
+     "start": 762.95,
+     "end": 782.65,
      "dur": 19.7,
-     "start_frame": 21757,
-     "end_frame": 22348
+     "start_frame": 22889,
+     "end_frame": 23480
     },
     {
      "text": "This is the chain rule.",
      "audio_text": null,
-     "start": 745.275,
-     "end": 747.325,
+     "start": 783.0,
+     "end": 785.05,
      "dur": 2.05,
-     "start_frame": 22358,
-     "end_frame": 22420
+     "start_frame": 23490,
+     "end_frame": 23552
     },
     {
      "text": "In the index notation of the vectors movie, the three moving terms are d X sub j by d t times partial capital T by partial x sub j, with j summed.",
      "audio_text": null,
-     "start": 747.675,
-     "end": 759.25,
+     "start": 785.4,
+     "end": 796.975,
      "dur": 11.575,
-     "start_frame": 22430,
-     "end_frame": 22778
+     "start_frame": 23562,
+     "end_frame": 23909
     }
    ],
-   "end": 760.05,
-   "start_frame": 20504,
-   "end_frame": 22802
+   "end": 797.775,
+   "start_frame": 21635,
+   "end_frame": 23933
   },
   {
    "id": "s14_chain_meaning",
-   "start": 760.05,
+   "start": 797.775,
    "sentences": [
     {
      "text": "Let's read it term by term.",
      "audio_text": null,
-     "start": 760.05,
-     "end": 762.475,
+     "start": 797.775,
+     "end": 800.2,
      "dur": 2.425,
-     "start_frame": 22802,
-     "end_frame": 22874
+     "start_frame": 23933,
+     "end_frame": 24006
     },
     {
      "text": "The first term is the change at a fixed place: the fixed thermometer's rate.",
      "audio_text": null,
-     "start": 762.825,
-     "end": 767.95,
+     "start": 800.55,
+     "end": 805.675,
      "dur": 5.125,
-     "start_frame": 22885,
-     "end_frame": 23039
+     "start_frame": 24017,
+     "end_frame": 24170
     },
     {
      "text": "Each of the other terms is a speed times a slope: how fast the traveller moves in one direction, times how much the temperature changes per metre in that direction.",
      "audio_text": null,
-     "start": 768.3,
-     "end": 778.875,
+     "start": 806.025,
+     "end": 816.6,
      "dur": 10.575,
-     "start_frame": 23049,
-     "end_frame": 23366
+     "start_frame": 24181,
+     "end_frame": 24498
     },
     {
      "text": "Metres per second times degrees per metre gives degrees per second, so every term is a rate in time.",
      "audio_text": null,
-     "start": 779.225,
-     "end": 786.55,
+     "start": 816.95,
+     "end": 824.275,
      "dur": 7.325,
-     "start_frame": 23377,
-     "end_frame": 23597
+     "start_frame": 24509,
+     "end_frame": 24728
     },
     {
      "text": "Moving into colder places cools the traveller, even if nothing changes at any fixed place.",
      "audio_text": null,
-     "start": 786.9,
-     "end": 793.4,
+     "start": 824.625,
+     "end": 831.125,
      "dur": 6.5,
-     "start_frame": 23607,
-     "end_frame": 23802
+     "start_frame": 24739,
+     "end_frame": 24934
     },
     {
      "text": "And the speeds are the traveller's own, so a car, a plane and a balloon at the same place feel different rates.",
      "audio_text": null,
-     "start": 793.75,
-     "end": 801.0,
+     "start": 831.475,
+     "end": 838.725,
      "dur": 7.25,
-     "start_frame": 23813,
-     "end_frame": 24030
+     "start_frame": 24944,
+     "end_frame": 25162
     }
    ],
-   "end": 801.8,
-   "start_frame": 22802,
-   "end_frame": 24054
+   "end": 839.525,
+   "start_frame": 23933,
+   "end_frame": 25186
   },
   {
    "id": "s15_chain_easy",
-   "start": 801.8,
+   "start": 839.525,
    "sentences": [
     {
      "text": "Let's try the simplest case first, on an easy, made-up road.",
      "audio_text": null,
-     "start": 801.8,
-     "end": 806.275,
+     "start": 839.525,
+     "end": 844.0,
      "dur": 4.475,
-     "start_frame": 24054,
-     "end_frame": 24188
+     "start_frame": 25186,
+     "end_frame": 25320
     },
     {
      "text": "Imagine a frozen map, where nothing changes at any fixed place, so partial capital T by partial small t is zero.",
      "audio_text": null,
-     "start": 806.625,
-     "end": 815.275,
+     "start": 844.35,
+     "end": 853.0,
      "dur": 8.65,
-     "start_frame": 24199,
-     "end_frame": 24458
+     "start_frame": 25331,
+     "end_frame": 25590
     },
     {
      "text": "A car drives east at one hundred kilometres per hour, and the air gets colder by zero point zero three degrees for every kilometre east.",
      "audio_text": null,
-     "start": 815.625,
-     "end": 824.9,
+     "start": 853.35,
+     "end": 862.625,
      "dur": 9.275,
-     "start_frame": 24469,
-     "end_frame": 24747
+     "start_frame": 25601,
+     "end_frame": 25879
     },
     {
      "text": "The chain rule gives one hundred kilometres per hour, times minus zero point zero three degrees per kilometre.",
      "audio_text": null,
-     "start": 825.25,
-     "end": 833.175,
+     "start": 862.975,
+     "end": 870.9,
      "dur": 7.925,
-     "start_frame": 24758,
-     "end_frame": 24995
+     "start_frame": 25889,
+     "end_frame": 26127
     },
     {
      "text": "The kilometres cancel, leaving minus three degrees per hour.",
      "audio_text": null,
-     "start": 833.525,
-     "end": 837.825,
+     "start": 871.25,
+     "end": 875.55,
      "dur": 4.3,
-     "start_frame": 25006,
-     "end_frame": 25135,
+     "start_frame": 26138,
+     "end_frame": 26267,
      "beat": true
     },
     {
      "text": "So the car's dashboard thermometer falls by three degrees every hour, though the air at every fixed place keeps its temperature.",
      "audio_text": null,
-     "start": 839.325,
-     "end": 847.325,
+     "start": 877.05,
+     "end": 885.05,
      "dur": 8.0,
-     "start_frame": 25180,
-     "end_frame": 25420
+     "start_frame": 26312,
+     "end_frame": 26552
     }
    ],
-   "end": 848.125,
-   "start_frame": 24054,
-   "end_frame": 25444
+   "end": 885.85,
+   "start_frame": 25186,
+   "end_frame": 26576
   },
   {
    "id": "s16_flight_east",
-   "start": 848.125,
+   "start": 885.85,
    "sentences": [
     {
      "text": "Now a thought experiment on the real map.",
      "audio_text": null,
-     "start": 848.125,
-     "end": 851.075,
+     "start": 885.85,
+     "end": 888.8,
      "dur": 2.95,
-     "start_frame": 25444,
-     "end_frame": 25532
+     "start_frame": 26576,
+     "end_frame": 26664
     },
     {
      "text": "Imagine a small plane at that height over Brest at six in the evening, flying due east at one hundred metres per second, about three hundred and sixty kilometres per hour.",
      "audio_text": null,
-     "start": 851.425,
-     "end": 862.675,
+     "start": 889.15,
+     "end": 900.4,
      "dur": 11.25,
-     "start_frame": 25543,
-     "end_frame": 25880
+     "start_frame": 26675,
+     "end_frame": 27012
     },
     {
      "text": "Let's call its speed east capital U.",
      "audio_text": null,
-     "start": 863.025,
-     "end": 865.95,
+     "start": 900.75,
+     "end": 903.675,
      "dur": 2.925,
-     "start_frame": 25891,
-     "end_frame": 25979,
-     "fix1": true
+     "start_frame": 27023,
+     "end_frame": 27110
     },
     {
      "text": "What does its thermometer read?",
      "audio_text": null,
-     "start": 866.3,
-     "end": 868.6,
+     "start": 904.025,
+     "end": 906.325,
      "dur": 2.3,
-     "start_frame": 25989,
-     "end_frame": 26058
+     "start_frame": 27121,
+     "end_frame": 27190
     },
     {
      "text": "The place itself is warming, at plus two point nine degrees per hour.",
      "audio_text": null,
-     "start": 868.95,
-     "end": 873.725,
+     "start": 906.675,
+     "end": 911.45,
      "dur": 4.775,
-     "start_frame": 26069,
-     "end_frame": 26212
+     "start_frame": 27200,
+     "end_frame": 27344
     },
     {
      "text": "But the plane flies into colder air.",
      "audio_text": null,
-     "start": 874.075,
-     "end": 876.875,
+     "start": 911.8,
+     "end": 914.6,
      "dur": 2.8,
-     "start_frame": 26222,
-     "end_frame": 26306
+     "start_frame": 27354,
+     "end_frame": 27438
     },
     {
      "text": "One hundred metres per second, times minus three point two degrees per hundred kilometres, is minus zero point zero zero three two degrees per second.",
      "audio_text": null,
-     "start": 877.225,
-     "end": 887.775,
+     "start": 914.95,
+     "end": 925.5,
      "dur": 10.55,
-     "start_frame": 26317,
-     "end_frame": 26633
+     "start_frame": 27449,
+     "end_frame": 27765
     },
     {
      "text": "Times three thousand six hundred seconds in an hour, that's minus eleven point five degrees per hour.",
      "audio_text": null,
-     "start": 888.125,
-     "end": 894.9,
+     "start": 925.85,
+     "end": 932.625,
      "dur": 6.775,
-     "start_frame": 26644,
-     "end_frame": 26847,
+     "start_frame": 27776,
+     "end_frame": 27979,
      "beat": true
     },
     {
      "text": "Adding the two, the plane's thermometer falls at about eight point six degrees per hour, if these rates held for a whole hour.",
      "audio_text": null,
-     "start": 896.4,
-     "end": 904.45,
+     "start": 934.125,
+     "end": 942.175,
      "dur": 8.05,
-     "start_frame": 26892,
-     "end_frame": 27134,
-     "beat": true,
-     "fix1": true
+     "start_frame": 28024,
+     "end_frame": 28265,
+     "beat": true
     },
     {
      "text": "So the plane cools, even though every place it passes is warming.",
      "audio_text": null,
-     "start": 905.95,
-     "end": 910.55,
+     "start": 943.675,
+     "end": 948.275,
      "dur": 4.6,
-     "start_frame": 27179,
-     "end_frame": 27317
+     "start_frame": 28310,
+     "end_frame": 28448
     }
    ],
-   "end": 911.35,
-   "start_frame": 25444,
-   "end_frame": 27340
+   "end": 949.075,
+   "start_frame": 26576,
+   "end_frame": 28472
   },
   {
    "id": "s17_flight_west",
-   "start": 911.35,
+   "start": 949.075,
    "sentences": [
     {
      "text": "Now let's turn the plane round, and fly due west at the same speed.",
      "audio_text": null,
-     "start": 911.35,
-     "end": 916.1,
+     "start": 949.075,
+     "end": 953.825,
      "dur": 4.75,
-     "start_frame": 27341,
-     "end_frame": 27483
+     "start_frame": 28472,
+     "end_frame": 28615
     },
     {
      "text": "It now flies into warmer air, so the moving term flips its sign, to plus eleven point five degrees per hour.",
      "audio_text": null,
-     "start": 916.45,
-     "end": 924.275,
+     "start": 954.175,
+     "end": 962.0,
      "dur": 7.825,
-     "start_frame": 27494,
-     "end_frame": 27728
+     "start_frame": 28625,
+     "end_frame": 28860
     },
     {
      "text": "Adding the warming of the place, its thermometer rises at about fourteen point four degrees per hour.",
      "audio_text": null,
-     "start": 924.625,
-     "end": 931.25,
+     "start": 962.35,
+     "end": 968.975,
      "dur": 6.625,
-     "start_frame": 27739,
-     "end_frame": 27938,
+     "start_frame": 28871,
+     "end_frame": 29069,
      "beat": true
     },
     {
      "text": "Same place, same moment, same temperature field, but a different traveller, so a different rate.",
      "audio_text": null,
-     "start": 932.75,
-     "end": 939.05,
+     "start": 970.475,
+     "end": 976.775,
      "dur": 6.3,
-     "start_frame": 27983,
-     "end_frame": 28172
+     "start_frame": 29114,
+     "end_frame": 29303
     },
     {
      "text": "That's the heart of the chain rule: d T by d t belongs to the traveller, while partial capital T by partial small t belongs to the place.",
      "audio_text": null,
-     "start": 939.4,
-     "end": 949.1,
+     "start": 977.125,
+     "end": 986.825,
      "dur": 9.7,
-     "start_frame": 28182,
-     "end_frame": 28473
+     "start_frame": 29314,
+     "end_frame": 29605
     }
    ],
-   "end": 949.9,
-   "start_frame": 27340,
-   "end_frame": 28497
+   "end": 987.625,
+   "start_frame": 28472,
+   "end_frame": 29629
   },
   {
    "id": "s18_balloon_rate",
-   "start": 949.9,
+   "start": 987.625,
    "sentences": [
     {
      "text": "Now a real traveller: the Trappes balloon.",
      "audio_text": "Now a real traveller: the [Trappes](/tɹˈæp/) balloon.",
-     "start": 949.9,
-     "end": 953.175,
+     "start": 987.625,
+     "end": 990.9,
      "dur": 3.275,
-     "start_frame": 28497,
-     "end_frame": 28595
+     "start_frame": 29629,
+     "end_frame": 29727
     },
     {
      "text": "It rose from one and a half kilometres to five point eight kilometres in nine hundred seconds, which is fifteen minutes.",
      "audio_text": null,
-     "start": 953.525,
-     "end": 961.325,
+     "start": 991.25,
+     "end": 999.05,
      "dur": 7.8,
-     "start_frame": 28606,
-     "end_frame": 28840
+     "start_frame": 29738,
+     "end_frame": 29972
     },
     {
      "text": "So its upward speed, d Z by d t, was four point two six kilometres divided by nine hundred seconds: four point seven metres per second.",
      "audio_text": null,
-     "start": 961.675,
-     "end": 972.075,
+     "start": 999.4,
+     "end": 1009.8,
      "dur": 10.4,
-     "start_frame": 28850,
-     "end_frame": 29162,
+     "start_frame": 29982,
+     "end_frame": 30294,
      "beat": true
     },
     {
      "text": "Over the same fifteen minutes, its thermometer fell by twenty four point one degrees.",
      "audio_text": null,
-     "start": 973.575,
-     "end": 979.35,
+     "start": 1011.3,
+     "end": 1017.075,
      "dur": 5.775,
-     "start_frame": 29207,
-     "end_frame": 29381
+     "start_frame": 30339,
+     "end_frame": 30512
     },
     {
      "text": "That's minus zero point zero two seven degrees per second, or about one point six degrees every minute.",
      "audio_text": null,
-     "start": 979.7,
-     "end": 987.15,
+     "start": 1017.425,
+     "end": 1024.875,
      "dur": 7.45,
-     "start_frame": 29391,
-     "end_frame": 29615,
+     "start_frame": 30523,
+     "end_frame": 30746,
      "beat": true
     },
     {
      "text": "Which terms of the chain rule make this?",
      "audio_text": null,
-     "start": 988.65,
-     "end": 991.325,
+     "start": 1026.375,
+     "end": 1029.05,
      "dur": 2.675,
-     "start_frame": 29660,
-     "end_frame": 29740
+     "start_frame": 30791,
+     "end_frame": 30872
     }
    ],
-   "end": 992.125,
-   "start_frame": 28497,
-   "end_frame": 29764
+   "end": 1029.85,
+   "start_frame": 29629,
+   "end_frame": 30895
   },
   {
    "id": "s19_balloon_terms",
-   "start": 992.125,
+   "start": 1029.85,
    "sentences": [
     {
      "text": "Let's size each term, writing the balloon's speeds as u east, v north and w up.",
      "audio_text": null,
-     "start": 992.125,
-     "end": 998.325,
+     "start": 1029.85,
+     "end": 1036.05,
      "dur": 6.2,
-     "start_frame": 29764,
-     "end_frame": 29950,
-     "fix1": true
+     "start_frame": 30896,
+     "end_frame": 31082
     },
     {
      "text": "First, the fixed place.",
      "audio_text": null,
-     "start": 998.675,
-     "end": 1000.925,
+     "start": 1036.4,
+     "end": 1038.65,
      "dur": 2.25,
-     "start_frame": 29960,
-     "end_frame": 30028
+     "start_frame": 31092,
+     "end_frame": 31160
     },
     {
      "text": "Comparing this balloon with the one launched twelve hours earlier, the air at five point eight kilometres cooled by about two point six degrees in twelve hours.",
      "audio_text": null,
-     "start": 1001.275,
-     "end": 1011.275,
+     "start": 1039.0,
+     "end": 1049.0,
      "dur": 10.0,
-     "start_frame": 30038,
-     "end_frame": 30338,
-     "fix1": true
+     "start_frame": 31170,
+     "end_frame": 31470
     },
     {
      "text": "That's only about minus six times ten to the minus five degrees per second.",
      "audio_text": null,
-     "start": 1011.625,
-     "end": 1016.975,
+     "start": 1049.35,
+     "end": 1054.7,
      "dur": 5.35,
-     "start_frame": 30349,
-     "end_frame": 30509,
-     "fix1": true
+     "start_frame": 31481,
+     "end_frame": 31641
     },
     {
      "text": "Next, the sideways terms.",
      "audio_text": null,
-     "start": 1017.325,
-     "end": 1019.7,
+     "start": 1055.05,
+     "end": 1057.425,
      "dur": 2.375,
-     "start_frame": 30520,
-     "end_frame": 30591
+     "start_frame": 31652,
+     "end_frame": 31723
     },
     {
      "text": "The balloon drifted with the wind, about seventeen kilometres to the north-north-east, through air whose temperature changed by less than one degree per hundred kilometres sideways.",
      "audio_text": null,
-     "start": 1020.05,
-     "end": 1031.55,
+     "start": 1057.775,
+     "end": 1069.275,
      "dur": 11.5,
-     "start_frame": 30602,
-     "end_frame": 30947
+     "start_frame": 31733,
+     "end_frame": 32078
     },
     {
      "text": "But it drifted almost along the lines of equal temperature, so only a small part of that gradient counts: about minus three times ten to the minus five degrees per second.",
      "audio_text": null,
-     "start": 1031.9,
-     "end": 1043.15,
+     "start": 1069.625,
+     "end": 1080.875,
      "dur": 11.25,
-     "start_frame": 30957,
-     "end_frame": 31295,
-     "fix1": true
+     "start_frame": 32089,
+     "end_frame": 32426
     },
     {
      "text": "Last, the rising term: w, four point seven metres per second, times minus five point seven degrees per kilometre, is minus zero point zero two seven degrees per second.",
      "audio_text": null,
-     "start": 1043.5,
-     "end": 1056.275,
+     "start": 1081.225,
+     "end": 1094.0,
      "dur": 12.775,
-     "start_frame": 31305,
-     "end_frame": 31688,
-     "beat": true,
-     "fix1": true
+     "start_frame": 32437,
+     "end_frame": 32820,
+     "beat": true
     },
     {
      "text": "So the rising term makes more than ninety nine percent of what the thermometer saw.",
      "audio_text": null,
-     "start": 1057.775,
-     "end": 1063.45,
+     "start": 1095.5,
+     "end": 1101.175,
      "dur": 5.675,
-     "start_frame": 31733,
-     "end_frame": 31904
+     "start_frame": 32865,
+     "end_frame": 33035
     },
     {
      "text": "That's why we can read a balloon's record as the temperature profile, partial capital T by partial z, even though the balloon is moving.",
      "audio_text": null,
-     "start": 1063.8,
-     "end": 1072.8,
+     "start": 1101.525,
+     "end": 1110.525,
      "dur": 9.0,
-     "start_frame": 31914,
-     "end_frame": 32184
+     "start_frame": 33046,
+     "end_frame": 33316
     }
    ],
-   "end": 1073.6,
-   "start_frame": 29764,
-   "end_frame": 32208
+   "end": 1111.325,
+   "start_frame": 30895,
+   "end_frame": 33340
   },
   {
    "id": "s20_parcel_pointer",
-   "start": 1073.6,
+   "start": 1111.325,
    "sentences": [
     {
      "text": "There's one very special traveller: an air parcel, a small volume of air that moves with the wind.",
      "audio_text": null,
-     "start": 1073.6,
-     "end": 1080.65,
+     "start": 1111.325,
+     "end": 1118.375,
      "dur": 7.05,
-     "start_frame": 32208,
-     "end_frame": 32420
+     "start_frame": 33340,
+     "end_frame": 33551
     },
     {
      "text": "For an air parcel, the speeds in the chain rule are the wind itself, and its rate gets its own name and symbol: capital D T by D t, the material derivative.",
      "audio_text": null,
-     "start": 1081.0,
-     "end": 1092.025,
+     "start": 1118.725,
+     "end": 1129.75,
      "dur": 11.025,
-     "start_frame": 32430,
-     "end_frame": 32761
+     "start_frame": 33562,
+     "end_frame": 33893
     },
     {
      "text": "Its moving terms together are the wind, bold u, dotted with the gradient, grad T: the dot product from the dot product movie.",
      "audio_text": null,
-     "start": 1092.375,
-     "end": 1101.55,
+     "start": 1130.1,
+     "end": 1139.275,
      "dur": 9.175,
-     "start_frame": 32771,
-     "end_frame": 33047,
-     "fix1": true
+     "start_frame": 33903,
+     "end_frame": 34178
     },
     {
      "text": "Over Brest, the place warmed by two point nine degrees per hour, while the wind brought in warmer air at three point seven degrees per hour.",
      "audio_text": null,
-     "start": 1101.9,
-     "end": 1111.075,
+     "start": 1139.625,
+     "end": 1148.8,
      "dur": 9.175,
-     "start_frame": 33057,
-     "end_frame": 33332
+     "start_frame": 34189,
+     "end_frame": 34464
     },
     {
      "text": "If the air parcels had kept their temperature, the place would have warmed by three point seven degrees per hour.",
      "audio_text": null,
-     "start": 1111.425,
-     "end": 1118.225,
+     "start": 1149.15,
+     "end": 1155.95,
      "dur": 6.8,
-     "start_frame": 33343,
-     "end_frame": 33547,
-     "fix1": true
+     "start_frame": 34474,
+     "end_frame": 34678
     },
     {
      "text": "It warmed by only two point nine, so each air parcel itself cooled by about zero point eight degrees per hour.",
      "audio_text": null,
-     "start": 1118.575,
-     "end": 1126.125,
+     "start": 1156.3,
+     "end": 1163.85,
      "dur": 7.55,
-     "start_frame": 33557,
-     "end_frame": 33784,
-     "beat": true,
-     "fix1": true
+     "start_frame": 34689,
+     "end_frame": 34915,
+     "beat": true
     },
     {
      "text": "We take this apart fully in the material derivative movie, later in this series.",
      "audio_text": null,
-     "start": 1127.625,
-     "end": 1133.0,
+     "start": 1165.35,
+     "end": 1170.725,
      "dur": 5.375,
-     "start_frame": 33829,
-     "end_frame": 33990
+     "start_frame": 34960,
+     "end_frame": 35122
     }
    ],
-   "end": 1133.8,
-   "start_frame": 32208,
-   "end_frame": 34014
+   "end": 1171.525,
+   "start_frame": 33340,
+   "end_frame": 35146
   },
   {
    "id": "s21_change_variables",
-   "start": 1133.8,
+   "start": 1171.525,
    "sentences": [
     {
      "text": "The chain rule also lets us swap one variable for another.",
      "audio_text": null,
-     "start": 1133.8,
-     "end": 1138.1,
+     "start": 1171.525,
+     "end": 1175.825,
      "dur": 4.3,
-     "start_frame": 34014,
-     "end_frame": 34143
+     "start_frame": 35146,
+     "end_frame": 35275
     },
     {
      "text": "Meteorologists often use pressure instead of height to say how high something is.",
      "audio_text": null,
-     "start": 1138.45,
-     "end": 1144.225,
+     "start": 1176.175,
+     "end": 1181.95,
      "dur": 5.775,
-     "start_frame": 34154,
-     "end_frame": 34327
+     "start_frame": 35285,
+     "end_frame": 35458
     },
     {
      "text": "Weather balloons have long reported pressure, and many of the equations become simpler that way.",
      "audio_text": null,
-     "start": 1144.575,
-     "end": 1151.25,
+     "start": 1182.3,
+     "end": 1188.975,
      "dur": 6.675,
-     "start_frame": 34337,
-     "end_frame": 34538
+     "start_frame": 35469,
+     "end_frame": 35669
     },
     {
      "text": "So how do we turn a rate per kilometre into a rate per hectopascal?",
      "audio_text": "So how do we turn a rate per kilometre into a rate per [hectopascal](/hˈɛktəpˌæskᵊl/)?",
-     "start": 1151.6,
-     "end": 1156.4,
+     "start": 1189.325,
+     "end": 1194.125,
      "dur": 4.8,
-     "start_frame": 34548,
-     "end_frame": 34692
+     "start_frame": 35680,
+     "end_frame": 35824
     },
     {
      "text": "Along the balloon's climb, height is a function of pressure, so partial capital T by partial p equals partial capital T by partial z, times partial z by partial p.",
      "audio_text": null,
-     "start": 1156.75,
-     "end": 1168.875,
+     "start": 1194.475,
+     "end": 1206.6,
      "dur": 12.125,
-     "start_frame": 34702,
-     "end_frame": 35066
+     "start_frame": 35834,
+     "end_frame": 36198
     },
     {
      "text": "Between our two levels, the height rose four thousand two hundred and sixty two metres, while the pressure fell three hundred and fifty hectopascals.",
      "audio_text": "Between our two levels, the height rose four thousand two hundred and sixty two metres, while the pressure fell three hundred and fifty [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 1169.225,
-     "end": 1178.5,
+     "start": 1206.95,
+     "end": 1216.225,
      "dur": 9.275,
-     "start_frame": 35077,
-     "end_frame": 35355
+     "start_frame": 36208,
+     "end_frame": 36487
     },
     {
      "text": "So partial z by partial p is minus twelve point two metres per hectopascal.",
      "audio_text": "So partial z by partial p is minus twelve point two metres per [hectopascal](/hˈɛktəpˌæskᵊl/).",
-     "start": 1178.85,
-     "end": 1185.0,
+     "start": 1216.575,
+     "end": 1222.725,
      "dur": 6.15,
-     "start_frame": 35365,
-     "end_frame": 35550,
+     "start_frame": 36497,
+     "end_frame": 36682,
      "beat": true
     },
     {
      "text": "Times minus five point seven degrees per kilometre, that gives plus zero point zero six nine degrees per hectopascal.",
      "audio_text": "Times minus five point seven degrees per kilometre, that gives plus zero point zero six nine degrees per [hectopascal](/hˈɛktəpˌæskᵊl/).",
-     "start": 1186.5,
-     "end": 1194.975,
+     "start": 1224.225,
+     "end": 1232.7,
      "dur": 8.475,
-     "start_frame": 35595,
-     "end_frame": 35849,
+     "start_frame": 36727,
+     "end_frame": 36981,
      "beat": true
     },
     {
      "text": "So the air gets warmer as the pressure rises, going down.",
      "audio_text": null,
-     "start": 1196.475,
-     "end": 1200.75,
+     "start": 1234.2,
+     "end": 1238.475,
      "dur": 4.275,
-     "start_frame": 35894,
-     "end_frame": 36022
+     "start_frame": 37026,
+     "end_frame": 37154
     },
     {
      "text": "Pressure as a vertical coordinate has its own movie in this series.",
      "audio_text": null,
-     "start": 1201.1,
-     "end": 1206.05,
+     "start": 1238.825,
+     "end": 1243.775,
      "dur": 4.95,
-     "start_frame": 36033,
-     "end_frame": 36181
+     "start_frame": 37165,
+     "end_frame": 37313
     }
    ],
-   "end": 1206.85,
-   "start_frame": 34014,
-   "end_frame": 36206
+   "end": 1244.575,
+   "start_frame": 35146,
+   "end_frame": 37337
   },
   {
    "id": "s22_state_functions",
-   "start": 1206.85,
+   "start": 1244.575,
    "sentences": [
     {
      "text": "Now a question that matters a lot in the physics of air.",
      "audio_text": null,
-     "start": 1206.85,
-     "end": 1210.875,
+     "start": 1244.575,
+     "end": 1248.6,
      "dur": 4.025,
-     "start_frame": 36205,
-     "end_frame": 36326
+     "start_frame": 37337,
+     "end_frame": 37458
     },
     {
      "text": "When is a small change, d of something, really the change of a quantity?",
      "audio_text": null,
-     "start": 1211.225,
-     "end": 1216.1,
+     "start": 1248.95,
+     "end": 1253.825,
      "dur": 4.875,
-     "start_frame": 36337,
-     "end_frame": 36483
+     "start_frame": 37468,
+     "end_frame": 37615
     },
     {
      "text": "Think of climbing a hill.",
      "audio_text": null,
-     "start": 1216.45,
-     "end": 1218.425,
+     "start": 1254.175,
+     "end": 1256.15,
      "dur": 1.975,
-     "start_frame": 36493,
-     "end_frame": 36553
+     "start_frame": 37625,
+     "end_frame": 37684
     },
     {
      "text": "The height you gain from the car park to the summit, about a hundred and thirty five metres, is the same whichever trail you take: it depends only on where you start and where you end.",
      "audio_text": null,
-     "start": 1218.775,
-     "end": 1230.05,
+     "start": 1256.5,
+     "end": 1267.775,
      "dur": 11.275,
-     "start_frame": 36563,
-     "end_frame": 36901,
-     "fix1": true
+     "start_frame": 37695,
+     "end_frame": 38033
     },
     {
      "text": "The distance you walk is different: four kilometres on the straight trail, and nine on the winding one.",
      "audio_text": null,
-     "start": 1230.4,
-     "end": 1237.025,
+     "start": 1268.125,
+     "end": 1274.75,
      "dur": 6.625,
-     "start_frame": 36912,
-     "end_frame": 37111,
-     "fix1": true
+     "start_frame": 38044,
+     "end_frame": 38242
     },
     {
      "text": "A quantity like the height, which depends only on where you are, is called a state function.",
      "audio_text": null,
-     "start": 1237.375,
-     "end": 1243.5,
+     "start": 1275.1,
+     "end": 1281.225,
      "dur": 6.125,
-     "start_frame": 37121,
-     "end_frame": 37305
+     "start_frame": 38253,
+     "end_frame": 38437
     },
     {
      "text": "Its small change is called a perfect differential, or an exact differential.",
      "audio_text": null,
-     "start": 1243.85,
-     "end": 1249.05,
+     "start": 1281.575,
+     "end": 1286.775,
      "dur": 5.2,
-     "start_frame": 37315,
-     "end_frame": 37471
+     "start_frame": 38447,
+     "end_frame": 38603
     },
     {
      "text": "The temperature, pressure and density of air are all state functions.",
      "audio_text": null,
-     "start": 1249.4,
-     "end": 1253.975,
+     "start": 1287.125,
+     "end": 1291.7,
      "dur": 4.575,
-     "start_frame": 37482,
-     "end_frame": 37619
+     "start_frame": 38614,
+     "end_frame": 38751
     },
     {
      "text": "But the distance walked is not: its small steps add up to a total that depends on the route.",
      "audio_text": null,
-     "start": 1254.325,
-     "end": 1260.425,
+     "start": 1292.05,
+     "end": 1298.15,
      "dur": 6.1,
-     "start_frame": 37630,
-     "end_frame": 37813
+     "start_frame": 38761,
+     "end_frame": 38944
     }
    ],
-   "end": 1261.225,
-   "start_frame": 36206,
-   "end_frame": 37837
+   "end": 1298.95,
+   "start_frame": 37337,
+   "end_frame": 38968
   },
   {
    "id": "s23_exact_test",
-   "start": 1261.225,
+   "start": 1298.95,
    "sentences": [
     {
      "text": "How can we tell, just from the formula?",
      "audio_text": null,
-     "start": 1261.225,
-     "end": 1264.225,
+     "start": 1298.95,
+     "end": 1301.95,
      "dur": 3.0,
-     "start_frame": 37837,
-     "end_frame": 37927
+     "start_frame": 38968,
+     "end_frame": 39058
     },
     {
      "text": "Take a small change of the form M times d x, plus N times d y.",
      "audio_text": null,
-     "start": 1264.575,
-     "end": 1269.825,
+     "start": 1302.3,
+     "end": 1307.55,
      "dur": 5.25,
-     "start_frame": 37937,
-     "end_frame": 38095
+     "start_frame": 39069,
+     "end_frame": 39226
     },
     {
      "text": "If it's the change of some function f, then M is partial f by partial x, and N is partial f by partial y.",
      "audio_text": null,
-     "start": 1270.175,
-     "end": 1278.425,
+     "start": 1307.9,
+     "end": 1316.15,
      "dur": 8.25,
-     "start_frame": 38105,
-     "end_frame": 38353
+     "start_frame": 39237,
+     "end_frame": 39484
     },
     {
      "text": "And we just saw that mixed partial derivatives come out the same in either order.",
      "audio_text": null,
-     "start": 1278.775,
-     "end": 1283.7,
+     "start": 1316.5,
+     "end": 1321.425,
      "dur": 4.925,
-     "start_frame": 38363,
-     "end_frame": 38511
+     "start_frame": 39495,
+     "end_frame": 39643
     },
     {
      "text": "So the test is: partial M by partial y must equal partial N by partial x.",
      "audio_text": null,
-     "start": 1284.05,
-     "end": 1290.15,
+     "start": 1321.775,
+     "end": 1327.875,
      "dur": 6.1,
-     "start_frame": 38521,
-     "end_frame": 38704
+     "start_frame": 39653,
+     "end_frame": 39836
     },
     {
      "text": "Let's try y d x plus x d y.",
      "audio_text": null,
-     "start": 1290.5,
-     "end": 1293.7,
+     "start": 1328.225,
+     "end": 1331.425,
      "dur": 3.2,
-     "start_frame": 38715,
-     "end_frame": 38811
+     "start_frame": 39847,
+     "end_frame": 39943
     },
     {
      "text": "Partial y by partial y is one, and partial x by partial x is one.",
      "audio_text": null,
-     "start": 1294.05,
-     "end": 1299.625,
+     "start": 1331.775,
+     "end": 1337.35,
      "dur": 5.575,
-     "start_frame": 38821,
-     "end_frame": 38989
+     "start_frame": 39953,
+     "end_frame": 40120
     },
     {
      "text": "They match, so it's exact: it's the change of x times y.",
      "audio_text": null,
-     "start": 1299.975,
-     "end": 1304.5,
+     "start": 1337.7,
+     "end": 1342.225,
      "dur": 4.525,
-     "start_frame": 38999,
-     "end_frame": 39135,
+     "start_frame": 40131,
+     "end_frame": 40267,
      "beat": true
     },
     {
      "text": "Now try y d x minus x d y.",
      "audio_text": null,
-     "start": 1306.0,
-     "end": 1309.15,
+     "start": 1343.725,
+     "end": 1346.875,
      "dur": 3.15,
-     "start_frame": 39180,
-     "end_frame": 39274
+     "start_frame": 40312,
+     "end_frame": 40406
     },
     {
      "text": "We get one against minus one.",
      "audio_text": null,
-     "start": 1309.5,
-     "end": 1311.95,
+     "start": 1347.225,
+     "end": 1349.675,
      "dur": 2.45,
-     "start_frame": 39285,
-     "end_frame": 39358
+     "start_frame": 40417,
+     "end_frame": 40490
     },
     {
      "text": "They don't match, so it's not the change of anything.",
      "audio_text": null,
-     "start": 1312.3,
-     "end": 1315.75,
+     "start": 1350.025,
+     "end": 1353.475,
      "dur": 3.45,
-     "start_frame": 39369,
-     "end_frame": 39472,
+     "start_frame": 40501,
+     "end_frame": 40604,
      "beat": true
     },
     {
      "text": "Add it up going once round a square of side one, anticlockwise, and you come back to the start with minus two, not zero.",
      "audio_text": null,
-     "start": 1317.25,
-     "end": 1325.5,
+     "start": 1354.975,
+     "end": 1363.225,
      "dur": 8.25,
-     "start_frame": 39517,
-     "end_frame": 39765,
+     "start_frame": 40649,
+     "end_frame": 40897,
      "beat": true
     },
     {
      "text": "For a perfect differential, every round trip adds up to exactly zero.",
      "audio_text": null,
-     "start": 1327.0,
-     "end": 1332.125,
+     "start": 1364.725,
+     "end": 1369.85,
      "dur": 5.125,
-     "start_frame": 39810,
-     "end_frame": 39964
+     "start_frame": 40942,
+     "end_frame": 41095
     }
    ],
-   "end": 1332.925,
-   "start_frame": 37837,
-   "end_frame": 39988
+   "end": 1370.65,
+   "start_frame": 38968,
+   "end_frame": 41120
   },
   {
    "id": "s24_ideal_gas",
-   "start": 1332.925,
+   "start": 1370.65,
    "sentences": [
     {
      "text": "Now real air.",
      "audio_text": null,
-     "start": 1332.925,
-     "end": 1334.65,
+     "start": 1370.65,
+     "end": 1372.375,
      "dur": 1.725,
-     "start_frame": 39988,
-     "end_frame": 40039
+     "start_frame": 41119,
+     "end_frame": 41171
     },
     {
      "text": "Its pressure, density and temperature are tied together by the ideal gas law: p equals rho R T.",
      "audio_text": null,
-     "start": 1335.0,
-     "end": 1342.3,
+     "start": 1372.725,
+     "end": 1380.025,
      "dur": 7.3,
-     "start_frame": 40050,
-     "end_frame": 40269
+     "start_frame": 41182,
+     "end_frame": 41401
     },
     {
      "text": "Here p is the pressure, rho the density, which is the mass of air in each cubic metre, and T the temperature in kelvin, which is the temperature in degrees Celsius plus two hundred and seventy three.",
      "audio_text": null,
-     "start": 1342.65,
-     "end": 1355.625,
+     "start": 1380.375,
+     "end": 1393.35,
      "dur": 12.975,
-     "start_frame": 40279,
-     "end_frame": 40669,
-     "fix1": true
+     "start_frame": 41411,
+     "end_frame": 41800
     },
     {
      "text": "R is a constant for dry air: two hundred and eighty seven joules per kilogram per kelvin.",
      "audio_text": null,
-     "start": 1355.975,
-     "end": 1362.45,
+     "start": 1393.7,
+     "end": 1400.175,
      "dur": 6.475,
-     "start_frame": 40679,
-     "end_frame": 40873
+     "start_frame": 41811,
+     "end_frame": 42005
     },
     {
      "text": "So pressure is a function of density and temperature, and its total differential is d p equals R T d rho, plus rho R d T.",
      "audio_text": null,
-     "start": 1362.8,
-     "end": 1371.9,
+     "start": 1400.525,
+     "end": 1409.625,
      "dur": 9.1,
-     "start_frame": 40884,
-     "end_frame": 41157
+     "start_frame": 42016,
+     "end_frame": 42289
     },
     {
      "text": "Let's test it.",
      "audio_text": null,
-     "start": 1372.25,
-     "end": 1374.05,
+     "start": 1409.975,
+     "end": 1411.775,
      "dur": 1.8,
-     "start_frame": 41167,
-     "end_frame": 41221
+     "start_frame": 42299,
+     "end_frame": 42353
     },
     {
      "text": "Partial of R T by partial T is R, and partial of rho R by partial rho is also R.",
      "audio_text": null,
-     "start": 1374.4,
-     "end": 1381.1,
+     "start": 1412.125,
+     "end": 1418.825,
      "dur": 6.7,
-     "start_frame": 41232,
-     "end_frame": 41433
+     "start_frame": 42364,
+     "end_frame": 42565
     },
     {
      "text": "They match, so pressure passes the test, as a state function must.",
      "audio_text": null,
-     "start": 1381.45,
-     "end": 1386.2,
+     "start": 1419.175,
+     "end": 1423.925,
      "dur": 4.75,
-     "start_frame": 41443,
-     "end_frame": 41586,
+     "start_frame": 42575,
+     "end_frame": 42718,
      "beat": true
     },
     {
      "text": "Now divide both sides by p, which is rho R T.",
      "audio_text": null,
-     "start": 1387.7,
-     "end": 1391.875,
+     "start": 1425.425,
+     "end": 1429.6,
      "dur": 4.175,
-     "start_frame": 41631,
-     "end_frame": 41756
+     "start_frame": 42763,
+     "end_frame": 42888
     },
     {
      "text": "We get d p over p equals d rho over rho, plus d T over T.",
      "audio_text": null,
-     "start": 1392.225,
-     "end": 1397.55,
+     "start": 1429.95,
+     "end": 1435.275,
      "dur": 5.325,
-     "start_frame": 41767,
-     "end_frame": 41926
+     "start_frame": 42898,
+     "end_frame": 43058
     },
     {
      "text": "In words, the fractional change in pressure is the fractional change in density, plus the fractional change in temperature.",
      "audio_text": null,
-     "start": 1397.9,
-     "end": 1406.075,
+     "start": 1435.625,
+     "end": 1443.8,
      "dur": 8.175,
-     "start_frame": 41937,
-     "end_frame": 42182
+     "start_frame": 43069,
+     "end_frame": 43314
     }
    ],
-   "end": 1406.875,
-   "start_frame": 39988,
-   "end_frame": 42206
+   "end": 1444.6,
+   "start_frame": 41120,
+   "end_frame": 43338
   },
   {
    "id": "s25_ideal_gas_example",
-   "start": 1406.875,
+   "start": 1444.6,
    "sentences": [
     {
      "text": "Let's use it.",
      "audio_text": null,
-     "start": 1406.875,
-     "end": 1408.575,
+     "start": 1444.6,
+     "end": 1446.3,
      "dur": 1.7,
-     "start_frame": 42206,
-     "end_frame": 42257
+     "start_frame": 43338,
+     "end_frame": 43389
     },
     {
      "text": "On a sunny afternoon, suppose the air near the ground warms from two hundred and ninety to three hundred kelvin, while the pressure stays the same.",
      "audio_text": null,
-     "start": 1408.925,
-     "end": 1418.475,
+     "start": 1446.65,
+     "end": 1456.2,
      "dur": 9.55,
-     "start_frame": 42268,
-     "end_frame": 42554
+     "start_frame": 43399,
+     "end_frame": 43686
     },
     {
      "text": "The pressure term is zero, so d rho over rho equals minus d T over T: minus ten over two hundred and ninety, about minus three and a half percent.",
      "audio_text": null,
-     "start": 1418.825,
-     "end": 1429.475,
+     "start": 1456.55,
+     "end": 1467.2,
      "dur": 10.65,
-     "start_frame": 42565,
-     "end_frame": 42884,
+     "start_frame": 43696,
+     "end_frame": 44016,
      "beat": true
     },
     {
      "text": "So the warmed air is about three and a half percent lighter than the air around it, which didn't warm.",
      "audio_text": null,
-     "start": 1430.975,
-     "end": 1437.125,
+     "start": 1468.7,
+     "end": 1474.85,
      "dur": 6.15,
-     "start_frame": 42929,
-     "end_frame": 43114
+     "start_frame": 44061,
+     "end_frame": 44245
     },
     {
      "text": "That's what makes it rise.",
      "audio_text": null,
-     "start": 1437.475,
-     "end": 1439.575,
+     "start": 1475.2,
+     "end": 1477.3,
      "dur": 2.1,
-     "start_frame": 43124,
-     "end_frame": 43187
+     "start_frame": 44256,
+     "end_frame": 44319
     },
     {
      "text": "The exact answer is two hundred and ninety over three hundred, minus one: minus three point three percent.",
      "audio_text": null,
-     "start": 1439.925,
-     "end": 1447.45,
+     "start": 1477.65,
+     "end": 1485.175,
      "dur": 7.525,
-     "start_frame": 43198,
-     "end_frame": 43423,
+     "start_frame": 44329,
+     "end_frame": 44555,
      "beat": true
     },
     {
      "text": "That's close, because ten kelvin is a small step compared with two hundred and ninety.",
      "audio_text": null,
-     "start": 1448.95,
-     "end": 1454.675,
+     "start": 1486.675,
+     "end": 1492.4,
      "dur": 5.725,
-     "start_frame": 43468,
-     "end_frame": 43640
+     "start_frame": 44600,
+     "end_frame": 44772
     }
    ],
-   "end": 1455.475,
-   "start_frame": 42206,
-   "end_frame": 43664
+   "end": 1493.2,
+   "start_frame": 43338,
+   "end_frame": 44796
   },
   {
    "id": "s26_hydrostatic",
-   "start": 1455.475,
+   "start": 1493.2,
    "sentences": [
     {
      "text": "Pressure also changes with height.",
      "audio_text": null,
-     "start": 1455.475,
-     "end": 1457.95,
+     "start": 1493.2,
+     "end": 1495.675,
      "dur": 2.475,
-     "start_frame": 43664,
-     "end_frame": 43738
+     "start_frame": 44796,
+     "end_frame": 44870
     },
     {
      "text": "In the weather basics movie, we met hydrostatic balance: at every height, the pressure holds up the weight of the air above.",
      "audio_text": null,
-     "start": 1458.3,
-     "end": 1466.425,
+     "start": 1496.025,
+     "end": 1504.15,
      "dur": 8.125,
-     "start_frame": 43749,
-     "end_frame": 43993
+     "start_frame": 44881,
+     "end_frame": 45124
     },
     {
      "text": "As a differential, d p equals minus rho g d z, where g is gravity, nine point eight one metres per second squared.",
      "audio_text": null,
-     "start": 1466.775,
-     "end": 1475.525,
+     "start": 1504.5,
+     "end": 1513.25,
      "dur": 8.75,
-     "start_frame": 44003,
-     "end_frame": 44266
+     "start_frame": 45135,
+     "end_frame": 45397
     },
     {
      "text": "Going up a small step d z, the pressure drops by the weight of that thin layer.",
      "audio_text": null,
-     "start": 1475.875,
-     "end": 1481.375,
+     "start": 1513.6,
+     "end": 1519.1,
      "dur": 5.5,
-     "start_frame": 44276,
-     "end_frame": 44441
+     "start_frame": 45408,
+     "end_frame": 45573
     },
     {
      "text": "Now divide by p, and use the gas law: rho over p is one over R T.",
      "audio_text": null,
-     "start": 1481.725,
-     "end": 1487.625,
+     "start": 1519.45,
+     "end": 1525.35,
      "dur": 5.9,
-     "start_frame": 44452,
-     "end_frame": 44629
+     "start_frame": 45583,
+     "end_frame": 45760
     },
     {
      "text": "We get d p over p equals minus d z over capital H, where capital H, which is R T over g, is called the scale height.",
      "audio_text": null,
-     "start": 1487.975,
-     "end": 1497.525,
+     "start": 1525.7,
+     "end": 1535.25,
      "dur": 9.55,
-     "start_frame": 44639,
-     "end_frame": 44926,
+     "start_frame": 45771,
+     "end_frame": 46057,
      "beat": true
     },
     {
      "text": "At the ground at Trappes, at nineteen point eight degrees Celsius, capital H is two hundred and eighty seven, times two hundred and ninety three, divided by nine point eight one.",
      "audio_text": "At the ground at [Trappes](/tɹˈæp/), at nineteen point eight degrees Celsius, capital H is two hundred and eighty seven, times two hundred and ninety three, divided by nine point eight one.",
-     "start": 1499.025,
-     "end": 1511.0,
+     "start": 1536.75,
+     "end": 1548.725,
      "dur": 11.975,
-     "start_frame": 44971,
-     "end_frame": 45330
+     "start_frame": 46102,
+     "end_frame": 46462
     },
     {
      "text": "That's about eight thousand five hundred and seventy metres.",
      "audio_text": null,
-     "start": 1511.35,
-     "end": 1515.425,
+     "start": 1549.075,
+     "end": 1553.15,
      "dur": 4.075,
-     "start_frame": 45340,
-     "end_frame": 45463,
+     "start_frame": 46472,
+     "end_frame": 46594,
      "beat": true
     }
    ],
-   "end": 1516.925,
-   "start_frame": 43664,
-   "end_frame": 45508
+   "end": 1554.65,
+   "start_frame": 44796,
+   "end_frame": 46640
   },
   {
    "id": "s27_exponential",
-   "start": 1516.925,
+   "start": 1554.65,
    "sentences": [
     {
      "text": "If the temperature were the same all the way up, capital H would be a constant.",
      "audio_text": null,
-     "start": 1516.925,
-     "end": 1522.05,
+     "start": 1554.65,
+     "end": 1559.775,
      "dur": 5.125,
-     "start_frame": 45508,
-     "end_frame": 45661
+     "start_frame": 46639,
+     "end_frame": 46793
     },
     {
      "text": "Then d p over p equals minus d z over capital H says that the pressure falls by the same fraction for every metre we climb.",
      "audio_text": null,
-     "start": 1522.4,
-     "end": 1531.8,
+     "start": 1560.125,
+     "end": 1569.525,
      "dur": 9.4,
-     "start_frame": 45672,
-     "end_frame": 45954
+     "start_frame": 46804,
+     "end_frame": 47086
     },
     {
      "text": "That makes an exponential: p equals the ground pressure, times e to the minus z over capital H.",
      "audio_text": null,
-     "start": 1532.15,
-     "end": 1539.125,
+     "start": 1569.875,
+     "end": 1576.85,
      "dur": 6.975,
-     "start_frame": 45964,
-     "end_frame": 46174
+     "start_frame": 47096,
+     "end_frame": 47305
     },
     {
      "text": "Here e is the number two point seven one eight.",
      "audio_text": null,
-     "start": 1539.475,
-     "end": 1542.85,
+     "start": 1577.2,
+     "end": 1580.575,
      "dur": 3.375,
-     "start_frame": 46184,
-     "end_frame": 46285
+     "start_frame": 47316,
+     "end_frame": 47417
     },
     {
      "text": "By the chain rule, its slope, d p by d z, is minus p over capital H, so it really does solve d p over p equals minus d z over capital H.",
      "audio_text": null,
-     "start": 1543.2,
-     "end": 1554.725,
+     "start": 1580.925,
+     "end": 1592.45,
      "dur": 11.525,
-     "start_frame": 46296,
-     "end_frame": 46642,
-     "fix1": true
+     "start_frame": 47428,
+     "end_frame": 47773
     },
     {
      "text": "This is the solution of a differential equation, and the ordinary differential equations movie solves many like it.",
      "audio_text": null,
-     "start": 1555.075,
-     "end": 1562.6,
+     "start": 1592.8,
+     "end": 1600.325,
      "dur": 7.525,
-     "start_frame": 46652,
-     "end_frame": 46878
+     "start_frame": 47784,
+     "end_frame": 48010
     },
     {
      "text": "Now let's compare with the balloon.",
      "audio_text": null,
-     "start": 1562.95,
-     "end": 1565.35,
+     "start": 1600.675,
+     "end": 1603.075,
      "dur": 2.4,
-     "start_frame": 46888,
-     "end_frame": 46960
+     "start_frame": 48020,
+     "end_frame": 48092
     },
     {
      "text": "The real pressure follows the exponential closely near the ground, then falls below it higher up.",
      "audio_text": null,
-     "start": 1565.7,
-     "end": 1572.15,
+     "start": 1603.425,
+     "end": 1609.875,
      "dur": 6.45,
-     "start_frame": 46971,
-     "end_frame": 47164
+     "start_frame": 48103,
+     "end_frame": 48296
     },
     {
      "text": "That's because the real air gets colder, and colder air is denser, so the pressure falls faster.",
      "audio_text": null,
-     "start": 1572.5,
-     "end": 1579.15,
+     "start": 1610.225,
+     "end": 1616.875,
      "dur": 6.65,
-     "start_frame": 47175,
-     "end_frame": 47374
+     "start_frame": 48307,
+     "end_frame": 48506
     },
     {
      "text": "We'll use this curve in a minute to see how Taylor series work.",
      "audio_text": null,
-     "start": 1579.5,
-     "end": 1583.65,
+     "start": 1617.225,
+     "end": 1621.375,
      "dur": 4.15,
-     "start_frame": 47385,
-     "end_frame": 47509
+     "start_frame": 48517,
+     "end_frame": 48641
     }
    ],
-   "end": 1584.45,
-   "start_frame": 45508,
-   "end_frame": 47534
+   "end": 1622.175,
+   "start_frame": 46640,
+   "end_frame": 48665
   },
   {
    "id": "s28_heat_routes",
-   "start": 1584.45,
+   "start": 1622.175,
    "sentences": [
     {
      "text": "Now the most important small changes that are not perfect: heat and work.",
      "audio_text": null,
-     "start": 1584.45,
-     "end": 1589.725,
+     "start": 1622.175,
+     "end": 1627.45,
      "dur": 5.275,
-     "start_frame": 47533,
-     "end_frame": 47692
+     "start_frame": 48665,
+     "end_frame": 48823
     },
     {
      "text": "They're tied together by the first law of thermodynamics.",
      "audio_text": null,
-     "start": 1590.075,
-     "end": 1594.15,
+     "start": 1627.8,
+     "end": 1631.875,
      "dur": 4.075,
-     "start_frame": 47702,
-     "end_frame": 47824,
-     "fix1": true
+     "start_frame": 48834,
+     "end_frame": 48956
     },
     {
      "text": "The small change in the air's internal energy, d I, the energy of its molecules' motion, equals a small amount of heat added, plus a small amount of work done on the air.",
      "audio_text": null,
-     "start": 1594.5,
-     "end": 1606.4,
+     "start": 1632.225,
+     "end": 1644.125,
      "dur": 11.9,
-     "start_frame": 47835,
-     "end_frame": 48192,
-     "fix1": true
+     "start_frame": 48967,
+     "end_frame": 49324
     },
     {
      "text": "We write those two with a d that has a bar through it, d bar Q and d bar W, because they're small amounts, not the change of anything.",
      "audio_text": null,
-     "start": 1606.75,
-     "end": 1616.4,
+     "start": 1644.475,
+     "end": 1654.125,
      "dur": 9.65,
-     "start_frame": 48202,
-     "end_frame": 48492,
-     "fix1": true
+     "start_frame": 49334,
+     "end_frame": 49624
     },
     {
      "text": "Take an air parcel at two hundred and eighty kelvin, and let it expand to one and a half times its volume, ending at the same temperature.",
      "audio_text": null,
-     "start": 1616.75,
-     "end": 1625.7,
+     "start": 1654.475,
+     "end": 1663.425,
      "dur": 8.95,
-     "start_frame": 48502,
-     "end_frame": 48771
+     "start_frame": 49634,
+     "end_frame": 49903
     },
     {
      "text": "Route one: first cool it at a fixed volume, then heat it as it expands at a fixed pressure.",
      "audio_text": null,
-     "start": 1626.05,
-     "end": 1632.325,
+     "start": 1663.775,
+     "end": 1670.05,
      "dur": 6.275,
-     "start_frame": 48781,
-     "end_frame": 48970
+     "start_frame": 49913,
+     "end_frame": 50101
     },
     {
      "text": "Route two: expand it slowly at a fixed temperature.",
      "audio_text": null,
-     "start": 1632.675,
-     "end": 1636.7,
+     "start": 1670.4,
+     "end": 1674.425,
      "dur": 4.025,
-     "start_frame": 48980,
-     "end_frame": 49101
+     "start_frame": 50112,
+     "end_frame": 50233
     },
     {
      "text": "Route three: heat it as it expands at a fixed pressure, then cool it at a fixed volume.",
      "audio_text": null,
-     "start": 1637.05,
-     "end": 1642.975,
+     "start": 1674.775,
+     "end": 1680.7,
      "dur": 5.925,
-     "start_frame": 49111,
-     "end_frame": 49289
+     "start_frame": 50243,
+     "end_frame": 50421
     },
     {
      "text": "The heat we must add is twenty seven, thirty three and forty kilojoules for each kilogram of air.",
      "audio_text": null,
-     "start": 1643.325,
-     "end": 1649.85,
+     "start": 1681.05,
+     "end": 1687.575,
      "dur": 6.525,
-     "start_frame": 49300,
-     "end_frame": 49495,
+     "start_frame": 50431,
+     "end_frame": 50627,
      "beat": true
     },
     {
      "text": "Three routes, three different amounts of heat, between the same two states.",
      "audio_text": null,
-     "start": 1651.35,
-     "end": 1656.225,
+     "start": 1689.075,
+     "end": 1693.95,
      "dur": 4.875,
-     "start_frame": 49540,
-     "end_frame": 49687
+     "start_frame": 50672,
+     "end_frame": 50818
     },
     {
      "text": "So heat is not a state function: there's no amount of heat stored in the air, only heat flowing in or out.",
      "audio_text": null,
-     "start": 1656.575,
-     "end": 1663.75,
+     "start": 1694.3,
+     "end": 1701.475,
      "dur": 7.175,
-     "start_frame": 49697,
-     "end_frame": 49912
+     "start_frame": 50829,
+     "end_frame": 51044
     },
     {
      "text": "The same is true of work.",
      "audio_text": null,
-     "start": 1664.1,
-     "end": 1666.175,
+     "start": 1701.825,
+     "end": 1703.9,
      "dur": 2.075,
-     "start_frame": 49923,
-     "end_frame": 49985
+     "start_frame": 51055,
+     "end_frame": 51117
     },
     {
      "text": "But the internal energy, the energy of the molecules' motion, changes by exactly zero on all three routes, because the parcel ends at the temperature it started with.",
      "audio_text": null,
-     "start": 1666.525,
-     "end": 1677.625,
+     "start": 1704.25,
+     "end": 1715.35,
      "dur": 11.1,
-     "start_frame": 49996,
-     "end_frame": 50329
+     "start_frame": 51127,
+     "end_frame": 51460
     }
    ],
-   "end": 1678.425,
-   "start_frame": 47534,
-   "end_frame": 50353
+   "end": 1716.15,
+   "start_frame": 48665,
+   "end_frame": 51484
   },
   {
    "id": "s29_entropy",
-   "start": 1678.425,
+   "start": 1716.15,
    "sentences": [
     {
      "text": "Here's the test at work.",
      "audio_text": null,
-     "start": 1678.425,
-     "end": 1680.45,
+     "start": 1716.15,
+     "end": 1718.175,
      "dur": 2.025,
-     "start_frame": 50353,
-     "end_frame": 50413
+     "start_frame": 51484,
+     "end_frame": 51545
     },
     {
      "text": "For each kilogram of air, the heat added in a small, slow step is c v d T, plus p d alpha.",
      "audio_text": null,
-     "start": 1680.8,
-     "end": 1688.125,
+     "start": 1718.525,
+     "end": 1725.85,
      "dur": 7.325,
-     "start_frame": 50424,
-     "end_frame": 50644
+     "start_frame": 51556,
+     "end_frame": 51775
     },
     {
      "text": "Here c v is the heat needed to warm one kilogram by one kelvin at a fixed volume.",
      "audio_text": null,
-     "start": 1688.475,
-     "end": 1695.075,
+     "start": 1726.2,
+     "end": 1732.8,
      "dur": 6.6,
-     "start_frame": 50654,
-     "end_frame": 50852
+     "start_frame": 51786,
+     "end_frame": 51984
     },
     {
      "text": "Alpha, which is one over rho, is the volume of one kilogram, called the specific volume.",
      "audio_text": null,
-     "start": 1695.425,
-     "end": 1702.075,
+     "start": 1733.15,
+     "end": 1739.8,
      "dur": 6.65,
-     "start_frame": 50863,
-     "end_frame": 51062
+     "start_frame": 51994,
+     "end_frame": 52194
     },
     {
      "text": "That's the first law turned round: c v d T is the change in the internal energy, and p d alpha is the work the air does on its surroundings as it expands.",
      "audio_text": null,
-     "start": 1702.425,
-     "end": 1713.55,
+     "start": 1740.15,
+     "end": 1751.275,
      "dur": 11.125,
-     "start_frame": 51073,
-     "end_frame": 51406,
-     "fix1": true
+     "start_frame": 52204,
+     "end_frame": 52538
     },
     {
      "text": "With the gas law, p is R T over alpha.",
      "audio_text": null,
-     "start": 1713.9,
-     "end": 1717.475,
+     "start": 1751.625,
+     "end": 1755.2,
      "dur": 3.575,
-     "start_frame": 51417,
-     "end_frame": 51524
+     "start_frame": 52549,
+     "end_frame": 52656
     },
     {
      "text": "Let's test it.",
      "audio_text": null,
-     "start": 1717.825,
-     "end": 1719.625,
+     "start": 1755.55,
+     "end": 1757.35,
      "dur": 1.8,
-     "start_frame": 51535,
-     "end_frame": 51589
+     "start_frame": 52666,
+     "end_frame": 52720
     },
     {
      "text": "Partial of c v by partial alpha is zero, but partial of R T over alpha by partial T is R over alpha, which is not zero.",
      "audio_text": null,
-     "start": 1719.975,
-     "end": 1729.625,
+     "start": 1757.7,
+     "end": 1767.35,
      "dur": 9.65,
-     "start_frame": 51599,
-     "end_frame": 51889
+     "start_frame": 52731,
+     "end_frame": 53020
     },
     {
      "text": "They don't match, so heat is not a perfect differential.",
      "audio_text": null,
-     "start": 1729.975,
-     "end": 1733.925,
+     "start": 1767.7,
+     "end": 1771.65,
      "dur": 3.95,
-     "start_frame": 51899,
-     "end_frame": 52018,
+     "start_frame": 53031,
+     "end_frame": 53149,
      "beat": true
     },
     {
      "text": "Now divide the heat by the temperature.",
      "audio_text": null,
-     "start": 1735.425,
-     "end": 1738.3,
+     "start": 1773.15,
+     "end": 1776.025,
      "dur": 2.875,
-     "start_frame": 52063,
-     "end_frame": 52149
+     "start_frame": 53194,
+     "end_frame": 53281
     },
     {
      "text": "We get c v d T over T, plus R d alpha over alpha.",
      "audio_text": null,
-     "start": 1738.65,
-     "end": 1743.425,
+     "start": 1776.375,
+     "end": 1781.15,
      "dur": 4.775,
-     "start_frame": 52159,
-     "end_frame": 52303
+     "start_frame": 53291,
+     "end_frame": 53434
     },
     {
      "text": "Test again: zero, and zero.",
      "audio_text": null,
-     "start": 1743.775,
-     "end": 1746.7,
+     "start": 1781.5,
+     "end": 1784.425,
      "dur": 2.925,
-     "start_frame": 52313,
-     "end_frame": 52401
+     "start_frame": 53445,
+     "end_frame": 53533
     },
     {
      "text": "They match!",
      "audio_text": null,
-     "start": 1747.05,
-     "end": 1748.6,
+     "start": 1784.775,
+     "end": 1786.325,
      "dur": 1.55,
-     "start_frame": 52411,
-     "end_frame": 52458,
+     "start_frame": 53543,
+     "end_frame": 53590,
      "beat": true
     },
     {
      "text": "So heat divided by temperature is a perfect differential, the small change of a state function called entropy, written eta.",
      "audio_text": null,
-     "start": 1750.1,
-     "end": 1758.475,
+     "start": 1787.825,
+     "end": 1796.2,
      "dur": 8.375,
-     "start_frame": 52503,
-     "end_frame": 52754,
-     "fix1": true
+     "start_frame": 53635,
+     "end_frame": 53886
     },
     {
      "text": "On all three of our routes, the entropy rose by the same amount: one hundred and sixteen joules per kilogram per kelvin.",
      "audio_text": null,
-     "start": 1758.825,
-     "end": 1766.875,
+     "start": 1796.55,
+     "end": 1804.6,
      "dur": 8.05,
-     "start_frame": 52765,
-     "end_frame": 53006,
+     "start_frame": 53896,
+     "end_frame": 54138,
      "beat": true
     },
     {
      "text": "Its close cousin, the potential temperature, follows air parcels through the whole atmosphere, and it has its own movie in this series.",
      "audio_text": null,
-     "start": 1768.375,
-     "end": 1777.075,
+     "start": 1806.1,
+     "end": 1814.8,
      "dur": 8.7,
-     "start_frame": 53051,
-     "end_frame": 53312
+     "start_frame": 54183,
+     "end_frame": 54444
     }
    ],
-   "end": 1777.875,
-   "start_frame": 50353,
-   "end_frame": 53336
+   "end": 1815.6,
+   "start_frame": 51484,
+   "end_frame": 54468
   },
   {
    "id": "s30_zoom",
-   "start": 1777.875,
+   "start": 1815.6,
    "sentences": [
     {
      "text": "Now let's zoom in.",
      "audio_text": null,
-     "start": 1777.875,
-     "end": 1779.8,
+     "start": 1815.6,
+     "end": 1817.525,
      "dur": 1.925,
-     "start_frame": 53336,
-     "end_frame": 53394
+     "start_frame": 54468,
+     "end_frame": 54526
     },
     {
      "text": "Here's the temperature profile from the Trappes balloon, all the way up to thirty two kilometres.",
      "audio_text": "Here's the temperature profile from the [Trappes](/tɹˈæp/) balloon, all the way up to thirty two kilometres.",
-     "start": 1780.15,
-     "end": 1786.125,
+     "start": 1817.875,
+     "end": 1823.85,
      "dur": 5.975,
-     "start_frame": 53404,
-     "end_frame": 53584
+     "start_frame": 54536,
+     "end_frame": 54715
     },
     {
      "text": "From afar, it bends, and it even has kinks.",
      "audio_text": null,
-     "start": 1786.475,
-     "end": 1789.925,
+     "start": 1824.2,
+     "end": 1827.65,
      "dur": 3.45,
-     "start_frame": 53594,
-     "end_frame": 53698
+     "start_frame": 54726,
+     "end_frame": 54829
     },
     {
      "text": "Let's zoom in around one and a half kilometres.",
      "audio_text": null,
-     "start": 1790.275,
-     "end": 1793.75,
+     "start": 1828.0,
+     "end": 1831.475,
      "dur": 3.475,
-     "start_frame": 53708,
-     "end_frame": 53812
+     "start_frame": 54840,
+     "end_frame": 54944
     },
     {
      "text": "And again.",
      "audio_text": null,
-     "start": 1794.1,
-     "end": 1795.575,
+     "start": 1831.825,
+     "end": 1833.3,
      "dur": 1.475,
-     "start_frame": 53823,
-     "end_frame": 53867
+     "start_frame": 54955,
+     "end_frame": 54999
     },
     {
      "text": "And again.",
      "audio_text": null,
-     "start": 1795.925,
-     "end": 1797.4,
+     "start": 1833.65,
+     "end": 1835.125,
      "dur": 1.475,
-     "start_frame": 53878,
-     "end_frame": 53922
+     "start_frame": 55009,
+     "end_frame": 55054
     },
     {
      "text": "The closer we look, the straighter it gets, until it's a line.",
      "audio_text": null,
-     "start": 1797.75,
-     "end": 1801.85,
+     "start": 1835.475,
+     "end": 1839.575,
      "dur": 4.1,
-     "start_frame": 53932,
-     "end_frame": 54055
+     "start_frame": 55064,
+     "end_frame": 55187
     },
     {
      "text": "That line is the tangent, and its slope is the derivative there.",
      "audio_text": null,
-     "start": 1802.2,
-     "end": 1806.725,
+     "start": 1839.925,
+     "end": 1844.45,
      "dur": 4.525,
-     "start_frame": 54066,
-     "end_frame": 54202
+     "start_frame": 55198,
+     "end_frame": 55333
     },
     {
      "text": "So close to any one point, a smooth curve is almost a straight line.",
      "audio_text": null,
-     "start": 1807.075,
-     "end": 1811.9,
+     "start": 1844.8,
+     "end": 1849.625,
      "dur": 4.825,
-     "start_frame": 54212,
-     "end_frame": 54357
+     "start_frame": 55344,
+     "end_frame": 55489
     },
     {
      "text": "That's the idea behind Taylor series.",
      "audio_text": null,
-     "start": 1812.25,
-     "end": 1815.225,
+     "start": 1849.975,
+     "end": 1852.95,
      "dur": 2.975,
-     "start_frame": 54367,
-     "end_frame": 54457
+     "start_frame": 55499,
+     "end_frame": 55588
     }
    ],
-   "end": 1816.025,
-   "start_frame": 53336,
-   "end_frame": 54481
+   "end": 1853.75,
+   "start_frame": 54468,
+   "end_frame": 55612
   },
   {
    "id": "s31_linear_approx",
-   "start": 1816.025,
+   "start": 1853.75,
    "sentences": [
     {
      "text": "Let's write that line as a formula.",
      "audio_text": null,
-     "start": 1816.025,
-     "end": 1818.725,
+     "start": 1853.75,
+     "end": 1856.45,
      "dur": 2.7,
-     "start_frame": 54481,
-     "end_frame": 54562
+     "start_frame": 55612,
+     "end_frame": 55693
     },
     {
      "text": "Starting at a height z nought, the temperature a small step h higher is about the temperature at z nought, plus h times the slope there.",
      "audio_text": null,
-     "start": 1819.075,
-     "end": 1827.675,
+     "start": 1856.8,
+     "end": 1865.4,
      "dur": 8.6,
-     "start_frame": 54572,
-     "end_frame": 54830
+     "start_frame": 55704,
+     "end_frame": 55962
     },
     {
      "text": "At one and a half kilometres, the temperature was twelve point three degrees.",
      "audio_text": null,
-     "start": 1828.025,
-     "end": 1832.9,
+     "start": 1865.75,
+     "end": 1870.625,
      "dur": 4.875,
-     "start_frame": 54841,
-     "end_frame": 54987
+     "start_frame": 55972,
+     "end_frame": 56119
     },
     {
      "text": "The slope, from the readings just below and just above, was minus four point nine degrees per kilometre.",
      "audio_text": null,
-     "start": 1833.25,
-     "end": 1840.15,
+     "start": 1870.975,
+     "end": 1877.875,
      "dur": 6.9,
-     "start_frame": 54997,
-     "end_frame": 55204
+     "start_frame": 56129,
+     "end_frame": 56336
     },
     {
      "text": "Let's predict the temperature one kilometre higher.",
      "audio_text": null,
-     "start": 1840.5,
-     "end": 1844.0,
+     "start": 1878.225,
+     "end": 1881.725,
      "dur": 3.5,
-     "start_frame": 55215,
-     "end_frame": 55320
+     "start_frame": 56347,
+     "end_frame": 56452
     },
     {
      "text": "Twelve point three, plus one kilometre times minus four point nine, is seven point four degrees.",
      "audio_text": null,
-     "start": 1844.35,
-     "end": 1851.425,
+     "start": 1882.075,
+     "end": 1889.15,
      "dur": 7.075,
-     "start_frame": 55330,
-     "end_frame": 55543,
+     "start_frame": 56462,
+     "end_frame": 56674,
      "beat": true
     },
     {
      "text": "The balloon measured six point nine, so the line is off by only half a degree.",
      "audio_text": null,
-     "start": 1852.925,
-     "end": 1858.375,
+     "start": 1890.65,
+     "end": 1896.1,
      "dur": 5.45,
-     "start_frame": 55588,
-     "end_frame": 55751,
+     "start_frame": 56719,
+     "end_frame": 56883,
      "beat": true
     },
     {
      "text": "Now let's predict four point two six kilometres higher.",
      "audio_text": null,
-     "start": 1859.875,
-     "end": 1863.65,
+     "start": 1897.6,
+     "end": 1901.375,
      "dur": 3.775,
-     "start_frame": 55796,
-     "end_frame": 55909,
-     "fix1": true
+     "start_frame": 56928,
+     "end_frame": 57041
     },
     {
      "text": "The line gives minus eight point four, but the balloon measured minus eleven point eight.",
      "audio_text": null,
-     "start": 1864.0,
-     "end": 1869.9,
+     "start": 1901.725,
+     "end": 1907.625,
      "dur": 5.9,
-     "start_frame": 55920,
-     "end_frame": 56097
+     "start_frame": 57052,
+     "end_frame": 57229
     },
     {
      "text": "That's off by more than three degrees.",
      "audio_text": null,
-     "start": 1870.25,
-     "end": 1872.9,
+     "start": 1907.975,
+     "end": 1910.625,
      "dur": 2.65,
-     "start_frame": 56107,
-     "end_frame": 56187,
+     "start_frame": 57239,
+     "end_frame": 57319,
      "beat": true
     },
     {
      "text": "The farther we go from the starting point, the worse the line gets, because the curve bends.",
      "audio_text": null,
-     "start": 1874.4,
-     "end": 1880.35,
+     "start": 1912.125,
+     "end": 1918.075,
      "dur": 5.95,
-     "start_frame": 56232,
-     "end_frame": 56410
+     "start_frame": 57364,
+     "end_frame": 57542
     }
    ],
-   "end": 1881.15,
-   "start_frame": 54481,
-   "end_frame": 56434
+   "end": 1918.875,
+   "start_frame": 55612,
+   "end_frame": 57566
   },
   {
    "id": "s32_add_bend",
-   "start": 1881.15,
+   "start": 1918.875,
    "sentences": [
     {
      "text": "To do better, we add a term for the bend.",
      "audio_text": null,
-     "start": 1881.15,
-     "end": 1884.325,
+     "start": 1918.875,
+     "end": 1922.05,
      "dur": 3.175,
-     "start_frame": 56434,
-     "end_frame": 56530
+     "start_frame": 57566,
+     "end_frame": 57661
     },
     {
      "text": "The bend is measured by the second derivative: how fast the slope itself changes.",
      "audio_text": null,
-     "start": 1884.675,
-     "end": 1890.425,
+     "start": 1922.4,
+     "end": 1928.15,
      "dur": 5.75,
-     "start_frame": 56540,
-     "end_frame": 56713
+     "start_frame": 57672,
+     "end_frame": 57844
     },
     {
      "text": "We add h squared, times the second derivative, divided by two.",
      "audio_text": null,
-     "start": 1890.775,
-     "end": 1895.5,
+     "start": 1928.5,
+     "end": 1933.225,
      "dur": 4.725,
-     "start_frame": 56723,
-     "end_frame": 56865
+     "start_frame": 57855,
+     "end_frame": 57997
     },
     {
      "text": "Why divided by two?",
      "audio_text": null,
-     "start": 1895.85,
-     "end": 1897.975,
+     "start": 1933.575,
+     "end": 1935.7,
      "dur": 2.125,
-     "start_frame": 56875,
-     "end_frame": 56939
+     "start_frame": 58007,
+     "end_frame": 58071
     },
     {
      "text": "Take the simplest bend, c times h squared.",
      "audio_text": null,
-     "start": 1898.325,
-     "end": 1902.0,
+     "start": 1936.05,
+     "end": 1939.725,
      "dur": 3.675,
-     "start_frame": 56950,
-     "end_frame": 57060
+     "start_frame": 58081,
+     "end_frame": 58192
     },
     {
      "text": "Its slope is two c h, and its second derivative is two c.",
      "audio_text": null,
-     "start": 1902.35,
-     "end": 1906.8,
+     "start": 1940.075,
+     "end": 1944.525,
      "dur": 4.45,
-     "start_frame": 57070,
-     "end_frame": 57204
+     "start_frame": 58202,
+     "end_frame": 58336
     },
     {
      "text": "So to make the bend's second derivative come out right, c must be half of it.",
      "audio_text": null,
-     "start": 1907.15,
-     "end": 1912.525,
+     "start": 1944.875,
+     "end": 1950.25,
      "dur": 5.375,
-     "start_frame": 57214,
-     "end_frame": 57376,
+     "start_frame": 58346,
+     "end_frame": 58507,
      "beat": true
     },
     {
      "text": "The same idea gives the next term: h cubed, times the third derivative, divided by three times two times one, which is written three factorial.",
      "audio_text": null,
-     "start": 1914.025,
-     "end": 1924.625,
+     "start": 1951.75,
+     "end": 1962.35,
      "dur": 10.6,
-     "start_frame": 57421,
-     "end_frame": 57739
+     "start_frame": 58552,
+     "end_frame": 58870
     },
     {
      "text": "Each term makes one more derivative come out right at the starting point.",
      "audio_text": null,
-     "start": 1924.975,
-     "end": 1929.7,
+     "start": 1962.7,
+     "end": 1967.425,
      "dur": 4.725,
-     "start_frame": 57749,
-     "end_frame": 57891
+     "start_frame": 58881,
+     "end_frame": 59023
     },
     {
      "text": "Added up for ever, this is the Taylor series.",
      "audio_text": null,
-     "start": 1930.05,
-     "end": 1933.525,
+     "start": 1967.775,
+     "end": 1971.25,
      "dur": 3.475,
-     "start_frame": 57901,
-     "end_frame": 58006
+     "start_frame": 59033,
+     "end_frame": 59137
     },
     {
      "text": "f at x nought plus h equals f, plus h times the slope, plus h squared over two factorial times the second derivative, plus h cubed over three factorial times the third derivative, and so on.",
      "audio_text": null,
-     "start": 1933.875,
-     "end": 1948.45,
+     "start": 1971.6,
+     "end": 1986.175,
      "dur": 14.575,
-     "start_frame": 58016,
-     "end_frame": 58453
+     "start_frame": 59148,
+     "end_frame": 59585
     }
    ],
-   "end": 1949.25,
-   "start_frame": 56434,
-   "end_frame": 58478
+   "end": 1986.975,
+   "start_frame": 57566,
+   "end_frame": 59609
   },
   {
    "id": "s33_series_example",
-   "start": 1949.25,
+   "start": 1986.975,
    "sentences": [
     {
      "text": "Let's watch a Taylor series at work on an easy function, e to the x.",
      "audio_text": null,
-     "start": 1949.25,
-     "end": 1954.075,
+     "start": 1986.975,
+     "end": 1991.8,
      "dur": 4.825,
-     "start_frame": 58477,
-     "end_frame": 58622
+     "start_frame": 59609,
+     "end_frame": 59754
     },
     {
      "text": "All its derivatives are e to the x too, so at zero they're all one.",
      "audio_text": null,
-     "start": 1954.425,
-     "end": 1959.275,
+     "start": 1992.15,
+     "end": 1997.0,
      "dur": 4.85,
-     "start_frame": 58633,
-     "end_frame": 58778
+     "start_frame": 59764,
+     "end_frame": 59910
     },
     {
      "text": "Then e to the h is one, plus h, plus h squared over two, plus h cubed over six, and so on.",
      "audio_text": null,
-     "start": 1959.625,
-     "end": 1967.025,
+     "start": 1997.35,
+     "end": 2004.75,
      "dur": 7.4,
-     "start_frame": 58789,
-     "end_frame": 59011
+     "start_frame": 59920,
+     "end_frame": 60142
     },
     {
      "text": "For h equals zero point one, the sums are one, then one point one, then one point one zero five, then one point one zero five one seven.",
      "audio_text": null,
-     "start": 1967.375,
-     "end": 1977.925,
+     "start": 2005.1,
+     "end": 2015.65,
      "dur": 10.55,
-     "start_frame": 59021,
-     "end_frame": 59338,
+     "start_frame": 60153,
+     "end_frame": 60469,
      "beat": true
     },
     {
      "text": "The calculator also says one point one zero five one seven, so just three terms already give four correct figures.",
      "audio_text": null,
-     "start": 1979.425,
-     "end": 1988.025,
+     "start": 2017.15,
+     "end": 2025.75,
      "dur": 8.6,
-     "start_frame": 59383,
-     "end_frame": 59641,
+     "start_frame": 60514,
+     "end_frame": 60772,
      "beat": true
     },
     {
      "text": "For h equals one, we need more terms: one, two, two point five, two point six six seven, two point seven zero eight, and on towards two point seven one eight.",
      "audio_text": null,
-     "start": 1989.525,
-     "end": 2000.675,
+     "start": 2027.25,
+     "end": 2038.4,
      "dur": 11.15,
-     "start_frame": 59686,
-     "end_frame": 60020,
+     "start_frame": 60817,
+     "end_frame": 61152,
      "beat": true
     },
     {
      "text": "So a small step needs few terms, and a big step needs many.",
      "audio_text": null,
-     "start": 2002.175,
-     "end": 2006.55,
+     "start": 2039.9,
+     "end": 2044.275,
      "dur": 4.375,
-     "start_frame": 60065,
-     "end_frame": 60196
+     "start_frame": 61197,
+     "end_frame": 61328
     }
    ],
-   "end": 2007.35,
-   "start_frame": 58478,
-   "end_frame": 60220
+   "end": 2045.075,
+   "start_frame": 59609,
+   "end_frame": 61352
   },
   {
    "id": "s34_pressure_line",
-   "start": 2007.35,
+   "start": 2045.075,
    "sentences": [
     {
      "text": "Now the pressure.",
      "audio_text": null,
-     "start": 2007.35,
-     "end": 2009.075,
+     "start": 2045.075,
+     "end": 2046.8,
      "dur": 1.725,
-     "start_frame": 60220,
-     "end_frame": 60272
+     "start_frame": 61352,
+     "end_frame": 61404
     },
     {
      "text": "Let's expand p equals the ground pressure times e to the minus z over capital H, for a height step z above the ground.",
      "audio_text": null,
-     "start": 2009.425,
-     "end": 2018.025,
+     "start": 2047.15,
+     "end": 2055.75,
      "dur": 8.6,
-     "start_frame": 60283,
-     "end_frame": 60541
+     "start_frame": 61414,
+     "end_frame": 61672
     },
     {
      "text": "The first two terms are the ground pressure, times one minus z over capital H.",
      "audio_text": null,
-     "start": 2018.375,
-     "end": 2023.975,
+     "start": 2056.1,
+     "end": 2061.7,
      "dur": 5.6,
-     "start_frame": 60551,
-     "end_frame": 60719
+     "start_frame": 61683,
+     "end_frame": 61851
     },
     {
      "text": "Look at the slope of that line: the ground pressure over capital H is rho g, so this line is just hydrostatic balance at the ground.",
      "audio_text": null,
-     "start": 2024.325,
-     "end": 2033.4,
+     "start": 2062.05,
+     "end": 2071.125,
      "dur": 9.075,
-     "start_frame": 60730,
-     "end_frame": 61002,
+     "start_frame": 61861,
+     "end_frame": 62134,
      "beat": true
     },
     {
      "text": "At Trappes, that's a fall of eleven point six pascals for every metre, or one hectopascal for every eight point six metres you climb.",
      "audio_text": "At [Trappes](/tɹˈæp/), that's a fall of eleven point six pascals for every metre, or one [hectopascal](/hˈɛktəpˌæskᵊl/) for every eight point six metres you climb.",
-     "start": 2034.9,
-     "end": 2043.875,
+     "start": 2072.625,
+     "end": 2081.6,
      "dur": 8.975,
-     "start_frame": 61047,
-     "end_frame": 61316,
+     "start_frame": 62179,
+     "end_frame": 62448,
      "beat": true
     },
     {
      "text": "Pilots use this rule of thumb near the ground: about thirty feet for each hectopascal.",
      "audio_text": "Pilots use this rule of thumb near the ground: about thirty feet for each [hectopascal](/hˈɛktəpˌæskᵊl/).",
-     "start": 2045.375,
-     "end": 2051.55,
+     "start": 2083.1,
+     "end": 2089.275,
      "dur": 6.175,
-     "start_frame": 61361,
-     "end_frame": 61546
+     "start_frame": 62493,
+     "end_frame": 62678
     },
     {
      "text": "Let's test it one kilometre above the station.",
      "audio_text": null,
-     "start": 2051.9,
-     "end": 2055.425,
+     "start": 2089.625,
+     "end": 2093.15,
      "dur": 3.525,
-     "start_frame": 61557,
-     "end_frame": 61663
+     "start_frame": 62689,
+     "end_frame": 62794
     },
     {
      "text": "The line gives eight hundred and eighty point four hectopascals.",
      "audio_text": "The line gives eight hundred and eighty point four [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 2055.775,
-     "end": 2060.35,
+     "start": 2093.5,
+     "end": 2098.075,
      "dur": 4.575,
-     "start_frame": 61673,
-     "end_frame": 61810
+     "start_frame": 62805,
+     "end_frame": 62942
     },
     {
      "text": "Adding the bend gives eight hundred and eighty seven point three, and the balloon measured eight hundred and eighty seven point zero.",
      "audio_text": null,
-     "start": 2060.7,
-     "end": 2069.25,
+     "start": 2098.425,
+     "end": 2106.975,
      "dur": 8.55,
-     "start_frame": 61821,
-     "end_frame": 62077,
+     "start_frame": 62953,
+     "end_frame": 63209,
      "beat": true
     }
    ],
-   "end": 2070.75,
-   "start_frame": 60220,
-   "end_frame": 62122
+   "end": 2108.475,
+   "start_frame": 61352,
+   "end_frame": 63254
   },
   {
    "id": "s35_pressure_far",
-   "start": 2070.75,
+   "start": 2108.475,
    "sentences": [
     {
      "text": "Now let's go five point six kilometres above the station, where the balloon measured five hundred hectopascals.",
      "audio_text": "Now let's go five point six kilometres above the station, where the balloon measured five hundred [hectopascals](/hˈɛktəpˌæskᵊlz/).",
-     "start": 2070.75,
-     "end": 2078.2,
+     "start": 2108.475,
+     "end": 2115.925,
      "dur": 7.45,
-     "start_frame": 62122,
-     "end_frame": 62346
+     "start_frame": 63254,
+     "end_frame": 63478
     },
     {
      "text": "The line gives only three hundred and forty three, far too low.",
      "audio_text": null,
-     "start": 2078.55,
-     "end": 2083.0,
+     "start": 2116.275,
+     "end": 2120.725,
      "dur": 4.45,
-     "start_frame": 62356,
-     "end_frame": 62490,
+     "start_frame": 63488,
+     "end_frame": 63622,
      "beat": true
     },
     {
      "text": "Adding the bend gives five hundred and fifty eight, and the next term gives five hundred and eleven.",
      "audio_text": null,
-     "start": 2084.5,
-     "end": 2091.325,
+     "start": 2122.225,
+     "end": 2129.05,
      "dur": 6.825,
-     "start_frame": 62535,
-     "end_frame": 62740,
+     "start_frame": 63667,
+     "end_frame": 63871,
      "beat": true
     },
     {
      "text": "With all the terms, the series lands on five hundred and seventeen, the exponential's own value.",
      "audio_text": null,
-     "start": 2092.825,
-     "end": 2099.725,
+     "start": 2130.55,
+     "end": 2137.45,
      "dur": 6.9,
-     "start_frame": 62785,
-     "end_frame": 62992,
+     "start_frame": 63916,
+     "end_frame": 64123,
      "beat": true
     },
     {
      "text": "The last seventeen hectopascals are not the series' fault: our exponential assumed the ground's temperature all the way up.",
      "audio_text": "The last seventeen [hectopascals](/hˈɛktəpˌæskᵊlz/) are not the series' fault: our exponential assumed the ground's temperature all the way up.",
-     "start": 2101.225,
-     "end": 2109.525,
+     "start": 2138.95,
+     "end": 2147.25,
      "dur": 8.3,
-     "start_frame": 63037,
-     "end_frame": 63286
+     "start_frame": 64168,
+     "end_frame": 64417
     },
     {
      "text": "With the layer's average temperature, two hundred and seventy seven kelvin, the exponential gives four hundred and ninety nine, right next to the balloon's five hundred.",
      "audio_text": null,
-     "start": 2109.875,
-     "end": 2120.675,
+     "start": 2147.6,
+     "end": 2158.4,
      "dur": 10.8,
-     "start_frame": 63296,
-     "end_frame": 63620,
+     "start_frame": 64428,
+     "end_frame": 64752,
      "beat": true
     },
     {
      "text": "So a Taylor series can only be as good as the curve it expands.",
      "audio_text": null,
-     "start": 2122.175,
-     "end": 2126.75,
+     "start": 2159.9,
+     "end": 2164.475,
      "dur": 4.575,
-     "start_frame": 63665,
-     "end_frame": 63802
+     "start_frame": 64797,
+     "end_frame": 64934
     }
    ],
-   "end": 2127.55,
-   "start_frame": 62122,
-   "end_frame": 63827
+   "end": 2165.275,
+   "start_frame": 63254,
+   "end_frame": 64958
   },
   {
    "id": "s36_where_fails",
-   "start": 2127.55,
+   "start": 2165.275,
    "sentences": [
     {
      "text": "Taylor series need a smooth curve.",
      "audio_text": null,
-     "start": 2127.55,
-     "end": 2130.175,
+     "start": 2165.275,
+     "end": 2167.9,
      "dur": 2.625,
-     "start_frame": 63826,
-     "end_frame": 63905
+     "start_frame": 64958,
+     "end_frame": 65037
     },
     {
      "text": "At about thirteen kilometres, the balloon's temperature profile has a kink: the cooling stops, and above it the air gets a little warmer.",
      "audio_text": null,
-     "start": 2130.525,
-     "end": 2139.725,
+     "start": 2168.25,
+     "end": 2177.45,
      "dur": 9.2,
-     "start_frame": 63916,
-     "end_frame": 64192
+     "start_frame": 65047,
+     "end_frame": 65323
     },
     {
      "text": "That's the tropopause, the lid on the weather layer.",
      "audio_text": null,
-     "start": 2140.075,
-     "end": 2143.75,
+     "start": 2177.8,
+     "end": 2181.475,
      "dur": 3.675,
-     "start_frame": 64202,
-     "end_frame": 64312
+     "start_frame": 65334,
+     "end_frame": 65444
     },
     {
      "text": "A line or a series built just below the kink predicts ever colder air above it, and gets it wrong.",
      "audio_text": null,
-     "start": 2144.1,
-     "end": 2150.975,
+     "start": 2181.825,
+     "end": 2188.7,
      "dur": 6.875,
-     "start_frame": 64323,
-     "end_frame": 64529
+     "start_frame": 65455,
+     "end_frame": 65661
     },
     {
      "text": "The same happens across a weather front, where the temperature changes sharply over a short distance.",
      "audio_text": null,
-     "start": 2151.325,
-     "end": 2157.7,
+     "start": 2189.05,
+     "end": 2195.425,
      "dur": 6.375,
-     "start_frame": 64540,
-     "end_frame": 64731
+     "start_frame": 65671,
+     "end_frame": 65863
     },
     {
      "text": "So the rule is: use a Taylor series only for steps that are small compared with the distance over which the curve bends.",
      "audio_text": null,
-     "start": 2158.05,
-     "end": 2165.8,
+     "start": 2195.775,
+     "end": 2203.525,
      "dur": 7.75,
-     "start_frame": 64741,
-     "end_frame": 64974
+     "start_frame": 65873,
+     "end_frame": 66106
     }
    ],
-   "end": 2166.6,
-   "start_frame": 63827,
-   "end_frame": 64998
+   "end": 2204.325,
+   "start_frame": 64958,
+   "end_frame": 66130
   },
   {
    "id": "s37_three_reasons",
-   "start": 2166.6,
+   "start": 2204.325,
    "sentences": [
     {
      "text": "So why are these tools built the way they are?",
      "audio_text": null,
-     "start": 2166.6,
-     "end": 2169.45,
+     "start": 2204.325,
+     "end": 2207.175,
      "dur": 2.85,
-     "start_frame": 64998,
-     "end_frame": 65083
+     "start_frame": 66130,
+     "end_frame": 66215
     },
     {
      "text": "There are three good reasons.",
      "audio_text": null,
-     "start": 2169.8,
-     "end": 2171.975,
+     "start": 2207.525,
+     "end": 2209.7,
      "dur": 2.175,
-     "start_frame": 65094,
-     "end_frame": 65159
+     "start_frame": 66226,
+     "end_frame": 66291
     },
     {
      "text": "The first is that the weather depends on many things at once, the place and the time, and partial derivatives let us ask about one of them at a time, by holding the rest fixed.",
      "audio_text": null,
-     "start": 2172.325,
-     "end": 2183.4,
+     "start": 2210.05,
+     "end": 2221.125,
      "dur": 11.075,
-     "start_frame": 65170,
-     "end_frame": 65502
+     "start_frame": 66301,
+     "end_frame": 66634
     },
     {
      "text": "The second is that, when we zoom in close enough, every smooth field looks flat, so small changes simply add up, slope times step, one direction at a time.",
      "audio_text": null,
-     "start": 2183.75,
-     "end": 2194.425,
+     "start": 2221.475,
+     "end": 2232.15,
      "dur": 10.675,
-     "start_frame": 65512,
-     "end_frame": 65833
+     "start_frame": 66644,
+     "end_frame": 66964
     },
     {
      "text": "That's the total differential, and the chain rule.",
      "audio_text": null,
-     "start": 2194.775,
-     "end": 2198.25,
+     "start": 2232.5,
+     "end": 2235.975,
      "dur": 3.475,
-     "start_frame": 65843,
-     "end_frame": 65947
+     "start_frame": 66975,
+     "end_frame": 67079
     },
     {
      "text": "The third reason is practical.",
      "audio_text": null,
-     "start": 2198.6,
-     "end": 2201.025,
+     "start": 2236.325,
+     "end": 2238.75,
      "dur": 2.425,
-     "start_frame": 65958,
-     "end_frame": 66031
+     "start_frame": 67090,
+     "end_frame": 67162
     },
     {
      "text": "The Taylor series tells us how big our error is when we stop at the straight line, and so how small a step must be, whether it's a degree of warming or the spacing of a weather model's grid.",
      "audio_text": null,
-     "start": 2201.375,
-     "end": 2212.975,
+     "start": 2239.1,
+     "end": 2250.7,
      "dur": 11.6,
-     "start_frame": 66041,
-     "end_frame": 66389
+     "start_frame": 67173,
+     "end_frame": 67521
     }
    ],
-   "end": 2213.775,
-   "start_frame": 64998,
-   "end_frame": 66413
+   "end": 2251.5,
+   "start_frame": 66130,
+   "end_frame": 67545
   },
   {
    "id": "s38_linearisation",
-   "start": 2213.775,
+   "start": 2251.5,
    "sentences": [
     {
      "text": "Keeping only the first two terms of a Taylor series, the value and the slope, is called linearisation.",
      "audio_text": null,
-     "start": 2213.775,
-     "end": 2220.675,
+     "start": 2251.5,
+     "end": 2258.4,
      "dur": 6.9,
-     "start_frame": 66413,
-     "end_frame": 66620
+     "start_frame": 67545,
+     "end_frame": 67752
     },
     {
      "text": "It turns a curve into a straight line around a chosen starting state, for small changes.",
      "audio_text": null,
-     "start": 2221.025,
-     "end": 2227.025,
+     "start": 2258.75,
+     "end": 2264.75,
      "dur": 6.0,
-     "start_frame": 66631,
-     "end_frame": 66811
+     "start_frame": 67762,
+     "end_frame": 67942
     },
     {
      "text": "Meteorologists and oceanographers do this all the time: a quiet starting state, plus a small disturbance.",
      "audio_text": null,
-     "start": 2227.375,
-     "end": 2234.975,
+     "start": 2265.1,
+     "end": 2272.7,
      "dur": 7.6,
-     "start_frame": 66821,
-     "end_frame": 67049
+     "start_frame": 67953,
+     "end_frame": 68181
     },
     {
      "text": "That's how waves, and the growth of storms, are first understood, in the waves and stability movies of this series.",
      "audio_text": null,
-     "start": 2235.325,
-     "end": 2242.9,
+     "start": 2273.05,
+     "end": 2280.625,
      "dur": 7.575,
-     "start_frame": 67060,
-     "end_frame": 67287
+     "start_frame": 68191,
+     "end_frame": 68419
     },
     {
      "text": "Now let's linearise two famous climate curves.",
      "audio_text": null,
-     "start": 2243.25,
-     "end": 2246.675,
+     "start": 2280.975,
+     "end": 2284.4,
      "dur": 3.425,
-     "start_frame": 67297,
-     "end_frame": 67400
+     "start_frame": 68429,
+     "end_frame": 68532
     }
    ],
-   "end": 2247.475,
-   "start_frame": 66413,
-   "end_frame": 67424
+   "end": 2285.2,
+   "start_frame": 67545,
+   "end_frame": 68556
   },
   {
    "id": "s39_cc_curve",
-   "start": 2247.475,
+   "start": 2285.2,
    "sentences": [
     {
      "text": "First, water vapour.",
      "audio_text": null,
-     "start": 2247.475,
-     "end": 2249.75,
+     "start": 2285.2,
+     "end": 2287.475,
      "dur": 2.275,
-     "start_frame": 67424,
-     "end_frame": 67492
+     "start_frame": 68556,
+     "end_frame": 68624
     },
     {
      "text": "Over a lake or the sea, water molecules keep escaping into the air as vapour, a gas, while others return to the water.",
      "audio_text": null,
-     "start": 2250.1,
-     "end": 2258.575,
+     "start": 2287.825,
+     "end": 2296.3,
      "dur": 8.475,
-     "start_frame": 67503,
-     "end_frame": 67757
+     "start_frame": 68635,
+     "end_frame": 68889
     },
     {
      "text": "The vapour's share of the air pressure is called the vapour pressure.",
      "audio_text": null,
-     "start": 2258.925,
-     "end": 2263.2,
+     "start": 2296.65,
+     "end": 2300.925,
      "dur": 4.275,
-     "start_frame": 67768,
-     "end_frame": 67896
+     "start_frame": 68899,
+     "end_frame": 69028
     },
     {
      "text": "When escaping and returning balance, we say the air is saturated, and the vapour pressure takes its saturation value, written e s.",
      "audio_text": null,
-     "start": 2263.55,
-     "end": 2272.575,
+     "start": 2301.275,
+     "end": 2310.3,
      "dur": 9.025,
-     "start_frame": 67906,
-     "end_frame": 68177
+     "start_frame": 69038,
+     "end_frame": 69309
     },
     {
      "text": "That value depends only on the temperature, not on the air, and the Clausius–Clapeyron equation tells us how.",
      "audio_text": null,
-     "start": 2272.925,
-     "end": 2280.475,
+     "start": 2310.65,
+     "end": 2318.2,
      "dur": 7.55,
-     "start_frame": 68188,
-     "end_frame": 68414
+     "start_frame": 69319,
+     "end_frame": 69546
     },
     {
      "text": "d e s by d T equals L times e s, divided by R v times T squared.",
      "audio_text": null,
-     "start": 2280.825,
-     "end": 2287.25,
+     "start": 2318.55,
+     "end": 2324.975,
      "dur": 6.425,
-     "start_frame": 68425,
-     "end_frame": 68617
+     "start_frame": 69556,
+     "end_frame": 69749
     },
     {
      "text": "Here L is the latent heat, the energy needed to turn one kilogram of liquid water into vapour: about two and a half million joules at zero degrees, a little less for warmer water.",
      "audio_text": null,
-     "start": 2287.6,
-     "end": 2299.6,
+     "start": 2325.325,
+     "end": 2337.325,
      "dur": 12.0,
-     "start_frame": 68628,
-     "end_frame": 68988
+     "start_frame": 69760,
+     "end_frame": 70120
     },
     {
      "text": "R v is the gas constant for water vapour, four hundred and sixty two joules per kilogram per kelvin.",
      "audio_text": null,
-     "start": 2299.95,
-     "end": 2307.25,
+     "start": 2337.675,
+     "end": 2344.975,
      "dur": 7.3,
-     "start_frame": 68998,
-     "end_frame": 69217
+     "start_frame": 70130,
+     "end_frame": 70349
     },
     {
      "text": "And T is the temperature in kelvin.",
      "audio_text": null,
-     "start": 2307.6,
-     "end": 2310.625,
+     "start": 2345.325,
+     "end": 2348.35,
      "dur": 3.025,
-     "start_frame": 69228,
-     "end_frame": 69319
+     "start_frame": 70360,
+     "end_frame": 70450
     },
     {
      "text": "The curve climbs faster and faster: at zero degrees Celsius, e s is about six hectopascals, at fifteen degrees it's seventeen, and at thirty degrees it's forty two.",
      "audio_text": "The curve climbs faster and faster: at zero degrees Celsius, e s is about six [hectopascals](/hˈɛktəpˌæskᵊlz/), at fifteen degrees it's seventeen, and at thirty degrees it's forty two.",
-     "start": 2310.975,
-     "end": 2323.475,
+     "start": 2348.7,
+     "end": 2361.2,
      "dur": 12.5,
-     "start_frame": 69329,
-     "end_frame": 69704
+     "start_frame": 70461,
+     "end_frame": 70836
     },
     {
      "text": "Water in the air has its own movie in this series.",
      "audio_text": null,
-     "start": 2323.825,
-     "end": 2327.425,
+     "start": 2361.55,
+     "end": 2365.15,
      "dur": 3.6,
-     "start_frame": 69715,
-     "end_frame": 69823
+     "start_frame": 70846,
+     "end_frame": 70954
     }
    ],
-   "end": 2328.225,
-   "start_frame": 67424,
-   "end_frame": 69847
+   "end": 2365.95,
+   "start_frame": 68556,
+   "end_frame": 70978
   },
   {
    "id": "s40_cc_linear",
-   "start": 2328.225,
+   "start": 2365.95,
    "sentences": [
     {
      "text": "How much does e s grow for each extra degree?",
      "audio_text": null,
-     "start": 2328.225,
-     "end": 2331.525,
+     "start": 2365.95,
+     "end": 2369.25,
      "dur": 3.3,
-     "start_frame": 69847,
-     "end_frame": 69946
+     "start_frame": 70978,
+     "end_frame": 71077
     },
     {
      "text": "Let's divide both sides by e s.",
      "audio_text": null,
-     "start": 2331.875,
-     "end": 2334.725,
+     "start": 2369.6,
+     "end": 2372.45,
      "dur": 2.85,
-     "start_frame": 69956,
-     "end_frame": 70042
+     "start_frame": 71088,
+     "end_frame": 71173
     },
     {
      "text": "The fractional growth per kelvin is L over R v T squared.",
      "audio_text": null,
-     "start": 2335.075,
-     "end": 2339.825,
+     "start": 2372.8,
+     "end": 2377.55,
      "dur": 4.75,
-     "start_frame": 70052,
-     "end_frame": 70195
+     "start_frame": 71184,
+     "end_frame": 71326
     },
     {
      "text": "At zero degrees Celsius, that's two and a half million, divided by four hundred and sixty two times two hundred and seventy three squared: zero point zero seven three, or about seven percent per degree.",
      "audio_text": null,
-     "start": 2340.175,
-     "end": 2353.7,
+     "start": 2377.9,
+     "end": 2391.425,
      "dur": 13.525,
-     "start_frame": 70205,
-     "end_frame": 70611,
+     "start_frame": 71337,
+     "end_frame": 71743,
      "beat": true
     },
     {
      "text": "At fifteen degrees, it's six point four percent, and at thirty degrees, five point seven.",
      "audio_text": null,
-     "start": 2355.2,
-     "end": 2361.475,
+     "start": 2392.925,
+     "end": 2399.2,
      "dur": 6.275,
-     "start_frame": 70656,
-     "end_frame": 70844,
+     "start_frame": 71788,
+     "end_frame": 71976,
      "beat": true
     },
     {
      "text": "That's the famous seven percent rule: for each degree of warming, the saturation vapour pressure rises by about seven percent.",
      "audio_text": null,
-     "start": 2362.975,
-     "end": 2371.5,
+     "start": 2400.7,
+     "end": 2409.225,
      "dur": 8.525,
-     "start_frame": 70889,
-     "end_frame": 71145
+     "start_frame": 72021,
+     "end_frame": 72277
     },
     {
      "text": "How good is the line?",
      "audio_text": null,
-     "start": 2371.85,
-     "end": 2373.8,
+     "start": 2409.575,
+     "end": 2411.525,
      "dur": 1.95,
-     "start_frame": 71155,
-     "end_frame": 71214
+     "start_frame": 72287,
+     "end_frame": 72346
     },
     {
      "text": "For one degree, it gives seven point three percent, and the exact curve gives seven point five.",
      "audio_text": null,
-     "start": 2374.15,
-     "end": 2380.75,
+     "start": 2411.875,
+     "end": 2418.475,
      "dur": 6.6,
-     "start_frame": 71224,
-     "end_frame": 71422
+     "start_frame": 72356,
+     "end_frame": 72554
     },
     {
      "text": "For four degrees, the line gives twenty nine percent, and the exact curve gives thirty three.",
      "audio_text": null,
-     "start": 2381.1,
-     "end": 2387.5,
+     "start": 2418.825,
+     "end": 2425.225,
      "dur": 6.4,
-     "start_frame": 71433,
-     "end_frame": 71625,
+     "start_frame": 72565,
+     "end_frame": 72757,
      "beat": true
     },
     {
      "text": "The gap grows with the step, just as the Taylor series told us, because the bend term is missing.",
      "audio_text": null,
-     "start": 2389.0,
-     "end": 2395.55,
+     "start": 2426.725,
+     "end": 2433.275,
      "dur": 6.55,
-     "start_frame": 71670,
-     "end_frame": 71866
+     "start_frame": 72802,
+     "end_frame": 72998
     }
    ],
-   "end": 2396.35,
-   "start_frame": 69847,
-   "end_frame": 71890
+   "end": 2434.075,
+   "start_frame": 70978,
+   "end_frame": 73022
   },
   {
    "id": "s41_cc_climate",
-   "start": 2396.35,
+   "start": 2434.075,
    "sentences": [
     {
      "text": "Why does this matter?",
      "audio_text": null,
-     "start": 2396.35,
-     "end": 2398.25,
+     "start": 2434.075,
+     "end": 2435.975,
      "dur": 1.9,
-     "start_frame": 71890,
-     "end_frame": 71947
+     "start_frame": 73022,
+     "end_frame": 73079
     },
     {
      "text": "The last ten years were about one point two six degrees warmer than the late eighteen hundreds.",
      "audio_text": null,
-     "start": 2398.6,
-     "end": 2404.8,
+     "start": 2436.325,
+     "end": 2442.525,
      "dur": 6.2,
-     "start_frame": 71958,
-     "end_frame": 72144,
-     "fix1": true
+     "start_frame": 73090,
+     "end_frame": 73276
     },
     {
      "text": "By the seven percent rule, that raises the saturation vapour pressure by about nine percent.",
      "audio_text": null,
-     "start": 2405.15,
-     "end": 2411.725,
+     "start": 2442.875,
+     "end": 2449.45,
      "dur": 6.575,
-     "start_frame": 72154,
-     "end_frame": 72352,
+     "start_frame": 73286,
+     "end_frame": 73483,
      "beat": true
     },
     {
      "text": "The rule is about saturated air, though, and the water vapour measured near the ground has risen a little less: about four to five percent for each degree of global warming.",
      "audio_text": null,
-     "start": 2413.225,
-     "end": 2424.075,
+     "start": 2450.95,
+     "end": 2461.8,
      "dur": 10.85,
-     "start_frame": 72397,
-     "end_frame": 72722
+     "start_frame": 73528,
+     "end_frame": 73854
     },
     {
      "text": "Still, the reanalysis shows the water vapour in the whole atmosphere rising since nineteen seventy nine.",
      "audio_text": null,
-     "start": 2424.425,
-     "end": 2431.7,
+     "start": 2462.15,
+     "end": 2469.425,
      "dur": 7.275,
-     "start_frame": 72733,
-     "end_frame": 72951
+     "start_frame": 73864,
+     "end_frame": 74083
     },
     {
      "text": "More vapour means more water for the heaviest downpours.",
      "audio_text": null,
-     "start": 2432.05,
-     "end": 2436.175,
+     "start": 2469.775,
+     "end": 2473.9,
      "dur": 4.125,
-     "start_frame": 72961,
-     "end_frame": 73085
+     "start_frame": 74093,
+     "end_frame": 74217
     },
     {
      "text": "The Intergovernmental Panel on Climate Change assesses that, worldwide, the heaviest daily rainfall is expected to become about seven percent more intense for each degree of global warming.",
      "audio_text": null,
-     "start": 2436.525,
-     "end": 2449.35,
+     "start": 2474.25,
+     "end": 2487.075,
      "dur": 12.825,
-     "start_frame": 73096,
-     "end_frame": 73480
+     "start_frame": 74227,
+     "end_frame": 74612
     }
    ],
-   "end": 2450.15,
-   "start_frame": 71890,
-   "end_frame": 73504
+   "end": 2487.875,
+   "start_frame": 73022,
+   "end_frame": 74636
   },
   {
    "id": "s42_planck",
-   "start": 2450.15,
+   "start": 2487.875,
    "sentences": [
     {
      "text": "Second, the heat that Earth sends to space.",
      "audio_text": null,
-     "start": 2450.15,
-     "end": 2453.225,
+     "start": 2487.875,
+     "end": 2490.95,
      "dur": 3.075,
-     "start_frame": 73504,
-     "end_frame": 73597
+     "start_frame": 74636,
+     "end_frame": 74728
     },
     {
      "text": "Every warm body glows in infrared light, and a perfect emitter, called a black body, gives off sigma T to the fourth watts per square metre.",
      "audio_text": null,
-     "start": 2453.575,
-     "end": 2463.0,
+     "start": 2491.3,
+     "end": 2500.725,
      "dur": 9.425,
-     "start_frame": 73607,
-     "end_frame": 73890
+     "start_frame": 74739,
+     "end_frame": 75022
     },
     {
      "text": "Here sigma is the Stefan–Boltzmann constant, five point six seven times ten to the minus eight.",
      "audio_text": null,
-     "start": 2463.35,
-     "end": 2470.475,
+     "start": 2501.075,
+     "end": 2508.2,
      "dur": 7.125,
-     "start_frame": 73900,
-     "end_frame": 74114
+     "start_frame": 75032,
+     "end_frame": 75246
     },
     {
      "text": "Satellites measure Earth giving off about two hundred and forty watts per square metre, on average.",
      "audio_text": null,
-     "start": 2470.825,
-     "end": 2477.35,
+     "start": 2508.55,
+     "end": 2515.075,
      "dur": 6.525,
-     "start_frame": 74125,
-     "end_frame": 74320
+     "start_frame": 75256,
+     "end_frame": 75452
     },
     {
      "text": "Solving sigma T to the fourth equals two hundred and forty gives T equals two hundred and fifty five kelvin, about minus eighteen degrees Celsius.",
      "audio_text": null,
-     "start": 2477.7,
-     "end": 2487.9,
+     "start": 2515.425,
+     "end": 2525.625,
      "dur": 10.2,
-     "start_frame": 74331,
-     "end_frame": 74637
+     "start_frame": 75463,
+     "end_frame": 75769
     },
     {
      "text": "That's Earth's emission temperature: the temperature a black body would need, to give off those two hundred and forty watts per square metre.",
      "audio_text": null,
-     "start": 2488.25,
-     "end": 2496.8,
+     "start": 2525.975,
+     "end": 2534.525,
      "dur": 8.55,
-     "start_frame": 74647,
-     "end_frame": 74904,
-     "beat": true,
-     "fix1": true
+     "start_frame": 75779,
+     "end_frame": 76036,
+     "beat": true
     },
     {
      "text": "Now let's linearise: how much more does Earth give off for each degree warmer?",
      "audio_text": null,
-     "start": 2498.3,
-     "end": 2503.425,
+     "start": 2536.025,
+     "end": 2541.15,
      "dur": 5.125,
-     "start_frame": 74949,
-     "end_frame": 75103
+     "start_frame": 76081,
+     "end_frame": 76234
     },
     {
      "text": "Just as x squared gave two x, the derivative of sigma T to the fourth is four sigma T cubed.",
      "audio_text": null,
-     "start": 2503.775,
-     "end": 2510.65,
+     "start": 2541.5,
+     "end": 2548.375,
      "dur": 6.875,
-     "start_frame": 75113,
-     "end_frame": 75319,
-     "fix1": true
+     "start_frame": 76245,
+     "end_frame": 76451
     },
     {
      "text": "And sigma T cubed is just sigma T to the fourth, divided by T.",
      "audio_text": null,
-     "start": 2511.0,
-     "end": 2515.925,
+     "start": 2548.725,
+     "end": 2553.65,
      "dur": 4.925,
-     "start_frame": 75330,
-     "end_frame": 75478
+     "start_frame": 76462,
+     "end_frame": 76609
     },
     {
      "text": "So the slope is four times two hundred and forty, divided by two hundred and fifty five: about three point eight watts per square metre for each degree.",
      "audio_text": null,
-     "start": 2516.275,
-     "end": 2525.925,
+     "start": 2554.0,
+     "end": 2563.65,
      "dur": 9.65,
-     "start_frame": 75488,
-     "end_frame": 75778,
+     "start_frame": 76620,
+     "end_frame": 76909,
      "beat": true
     }
    ],
-   "end": 2527.425,
-   "start_frame": 73504,
-   "end_frame": 75823
+   "end": 2565.15,
+   "start_frame": 74636,
+   "end_frame": 76954
   },
   {
    "id": "s43_planck_meaning",
-   "start": 2527.425,
+   "start": 2565.15,
    "sentences": [
     {
      "text": "This is called the Planck response, and it's the planet's thermostat: warm up, and you lose heat faster, which pulls you back.",
      "audio_text": null,
-     "start": 2527.425,
-     "end": 2535.475,
+     "start": 2565.15,
+     "end": 2573.2,
      "dur": 8.05,
-     "start_frame": 75823,
-     "end_frame": 76064
+     "start_frame": 76954,
+     "end_frame": 77196
     },
     {
      "text": "Doubling the carbon dioxide in the air adds about three point nine watts per square metre of heating.",
      "audio_text": null,
-     "start": 2535.825,
-     "end": 2542.4,
+     "start": 2573.55,
+     "end": 2580.125,
      "dur": 6.575,
-     "start_frame": 76075,
-     "end_frame": 76272
+     "start_frame": 77206,
+     "end_frame": 77404
     },
     {
      "text": "To shed that, a planet with only the Planck response would warm by about three point nine divided by three point eight: about one point zero four degrees.",
      "audio_text": null,
-     "start": 2542.75,
-     "end": 2553.3,
+     "start": 2580.475,
+     "end": 2591.025,
      "dur": 10.55,
-     "start_frame": 76282,
-     "end_frame": 76599,
-     "beat": true,
-     "fix1": true
+     "start_frame": 77414,
+     "end_frame": 77731,
+     "beat": true
     },
     {
      "text": "The Intergovernmental Panel's careful estimate of the real Planck response is a little lower, about three point two, which gives about one point two degrees.",
      "audio_text": null,
-     "start": 2554.8,
-     "end": 2565.075,
+     "start": 2592.525,
+     "end": 2602.8,
      "dur": 10.275,
-     "start_frame": 76644,
-     "end_frame": 76952
+     "start_frame": 77776,
+     "end_frame": 78084
     },
     {
      "text": "The full warming is larger, because of feedbacks: for example, a warmer world has more water vapour in its air, and water vapour traps heat too.",
      "audio_text": null,
-     "start": 2565.425,
-     "end": 2575.525,
+     "start": 2603.15,
+     "end": 2613.25,
      "dur": 10.1,
-     "start_frame": 76963,
-     "end_frame": 77266
+     "start_frame": 78094,
+     "end_frame": 78397
     },
     {
      "text": "Is the linear Planck rule good enough?",
      "audio_text": null,
-     "start": 2575.875,
-     "end": 2578.55,
+     "start": 2613.6,
+     "end": 2616.275,
      "dur": 2.675,
-     "start_frame": 77276,
-     "end_frame": 77356
+     "start_frame": 78408,
+     "end_frame": 78488
     },
     {
      "text": "For one degree, the exact curve gives three point seven nine, against the line's three point seven six.",
      "audio_text": null,
-     "start": 2578.9,
-     "end": 2586.075,
+     "start": 2616.625,
+     "end": 2623.8,
      "dur": 7.175,
-     "start_frame": 77367,
-     "end_frame": 77582
+     "start_frame": 78499,
+     "end_frame": 78714
     },
     {
      "text": "For ten degrees, it's forty against thirty eight.",
      "audio_text": null,
-     "start": 2586.425,
-     "end": 2589.95,
+     "start": 2624.15,
+     "end": 2627.675,
      "dur": 3.525,
-     "start_frame": 77593,
-     "end_frame": 77698,
+     "start_frame": 78724,
+     "end_frame": 78830,
      "beat": true
     },
     {
      "text": "For the changes that climate scientists worry about, the line does very well.",
      "audio_text": null,
-     "start": 2591.45,
-     "end": 2596.775,
+     "start": 2629.175,
+     "end": 2634.5,
      "dur": 5.325,
-     "start_frame": 77743,
-     "end_frame": 77903
+     "start_frame": 78875,
+     "end_frame": 79035
     }
    ],
-   "end": 2597.575,
-   "start_frame": 75823,
-   "end_frame": 77927
+   "end": 2635.3,
+   "start_frame": 76954,
+   "end_frame": 79059
   },
   {
    "id": "s44_fd_forward",
-   "start": 2597.575,
+   "start": 2635.3,
    "sentences": [
     {
      "text": "Last, how does a weather model take a derivative?",
      "audio_text": null,
-     "start": 2597.575,
-     "end": 2601.225,
+     "start": 2635.3,
+     "end": 2638.95,
      "dur": 3.65,
-     "start_frame": 77927,
-     "end_frame": 78037
+     "start_frame": 79059,
+     "end_frame": 79168
     },
     {
      "text": "It knows the temperature only at grid points, a distance h apart.",
      "audio_text": null,
-     "start": 2601.575,
-     "end": 2606.325,
+     "start": 2639.3,
+     "end": 2644.05,
      "dur": 4.75,
-     "start_frame": 78047,
-     "end_frame": 78190
+     "start_frame": 79179,
+     "end_frame": 79321
     },
     {
      "text": "The simplest estimate of the slope is the forward difference: the value one step ahead, minus the value here, divided by h.",
      "audio_text": null,
-     "start": 2606.675,
-     "end": 2615.475,
+     "start": 2644.4,
+     "end": 2653.2,
      "dur": 8.8,
-     "start_frame": 78200,
-     "end_frame": 78464
+     "start_frame": 79332,
+     "end_frame": 79596
     },
     {
      "text": "How wrong is it?",
      "audio_text": null,
-     "start": 2615.825,
-     "end": 2617.55,
+     "start": 2653.55,
+     "end": 2655.275,
      "dur": 1.725,
-     "start_frame": 78475,
-     "end_frame": 78526
+     "start_frame": 79606,
+     "end_frame": 79658
     },
     {
      "text": "The Taylor series tells us.",
      "audio_text": null,
-     "start": 2617.9,
-     "end": 2620.125,
+     "start": 2655.625,
+     "end": 2657.85,
      "dur": 2.225,
-     "start_frame": 78537,
-     "end_frame": 78604
+     "start_frame": 79669,
+     "end_frame": 79735
     },
     {
      "text": "The value one step ahead is f, plus h times the slope, plus h squared over two times the second derivative, and so on.",
      "audio_text": null,
-     "start": 2620.475,
-     "end": 2629.2,
+     "start": 2658.2,
+     "end": 2666.925,
      "dur": 8.725,
-     "start_frame": 78614,
-     "end_frame": 78876
+     "start_frame": 79746,
+     "end_frame": 80008
     },
     {
      "text": "Let's subtract f, and divide by h.",
      "audio_text": null,
-     "start": 2629.55,
-     "end": 2632.825,
+     "start": 2667.275,
+     "end": 2670.55,
      "dur": 3.275,
-     "start_frame": 78886,
-     "end_frame": 78985
+     "start_frame": 80018,
+     "end_frame": 80116
     },
     {
      "text": "We get the slope, plus h over two times the second derivative, plus smaller terms.",
      "audio_text": null,
-     "start": 2633.175,
-     "end": 2639.05,
+     "start": 2670.9,
+     "end": 2676.775,
      "dur": 5.875,
-     "start_frame": 78995,
-     "end_frame": 79171
+     "start_frame": 80127,
+     "end_frame": 80303
     },
     {
      "text": "So the forward difference is off by about h over two times the bend.",
      "audio_text": null,
-     "start": 2639.4,
-     "end": 2644.05,
+     "start": 2677.125,
+     "end": 2681.775,
      "dur": 4.65,
-     "start_frame": 79182,
-     "end_frame": 79321
+     "start_frame": 80314,
+     "end_frame": 80453
     },
     {
      "text": "Halve the step, and you halve the error.",
      "audio_text": null,
-     "start": 2644.4,
-     "end": 2647.25,
+     "start": 2682.125,
+     "end": 2684.975,
      "dur": 2.85,
-     "start_frame": 79332,
-     "end_frame": 79417,
+     "start_frame": 80464,
+     "end_frame": 80549,
      "beat": true
     },
     {
      "text": "That's called first-order accurate.",
      "audio_text": null,
-     "start": 2648.75,
-     "end": 2651.3,
+     "start": 2686.475,
+     "end": 2689.025,
      "dur": 2.55,
-     "start_frame": 79462,
-     "end_frame": 79539
+     "start_frame": 80594,
+     "end_frame": 80671
     }
    ],
-   "end": 2652.1,
-   "start_frame": 77927,
-   "end_frame": 79563
+   "end": 2689.825,
+   "start_frame": 79059,
+   "end_frame": 80695
   },
   {
    "id": "s45_fd_centred",
-   "start": 2652.1,
+   "start": 2689.825,
    "sentences": [
     {
      "text": "Now the centred difference we used on the map: the value one step ahead, minus the value one step behind, divided by two h.",
      "audio_text": null,
-     "start": 2652.1,
-     "end": 2661.15,
+     "start": 2689.825,
+     "end": 2698.875,
      "dur": 9.05,
-     "start_frame": 79563,
-     "end_frame": 79834
+     "start_frame": 80695,
+     "end_frame": 80966
     },
     {
      "text": "Let's write both with the Taylor series.",
      "audio_text": null,
-     "start": 2661.5,
-     "end": 2664.2,
+     "start": 2699.225,
+     "end": 2701.925,
      "dur": 2.7,
-     "start_frame": 79845,
-     "end_frame": 79926
+     "start_frame": 80977,
+     "end_frame": 81058
     },
     {
      "text": "Ahead is f, plus h times the slope, plus h squared over two times the bend, plus h cubed over six times the third derivative.",
      "audio_text": null,
-     "start": 2664.55,
-     "end": 2674.1,
+     "start": 2702.275,
+     "end": 2711.825,
      "dur": 9.55,
-     "start_frame": 79936,
-     "end_frame": 80223
+     "start_frame": 81068,
+     "end_frame": 81355
     },
     {
      "text": "Behind is the same, but every odd power of h flips its sign.",
      "audio_text": null,
-     "start": 2674.45,
-     "end": 2679.15,
+     "start": 2712.175,
+     "end": 2716.875,
      "dur": 4.7,
-     "start_frame": 80233,
-     "end_frame": 80374
+     "start_frame": 81365,
+     "end_frame": 81506
     },
     {
      "text": "Subtract, and the f terms cancel, and so do the bend terms.",
      "audio_text": null,
-     "start": 2679.5,
-     "end": 2684.1,
+     "start": 2717.225,
+     "end": 2721.825,
      "dur": 4.6,
-     "start_frame": 80385,
-     "end_frame": 80523
+     "start_frame": 81517,
+     "end_frame": 81655
     },
     {
      "text": "Divide by two h, and we're left with the slope, plus h squared over six times the third derivative.",
      "audio_text": null,
-     "start": 2684.45,
-     "end": 2691.5,
+     "start": 2722.175,
+     "end": 2729.225,
      "dur": 7.05,
-     "start_frame": 80533,
-     "end_frame": 80745,
+     "start_frame": 81665,
+     "end_frame": 81877,
      "beat": true
     },
     {
      "text": "Halve the step, and the error drops to a quarter.",
      "audio_text": null,
-     "start": 2693.0,
-     "end": 2696.5,
+     "start": 2730.725,
+     "end": 2734.225,
      "dur": 3.5,
-     "start_frame": 80790,
-     "end_frame": 80895
+     "start_frame": 81922,
+     "end_frame": 82027
     },
     {
      "text": "That's second-order accurate.",
      "audio_text": null,
-     "start": 2696.85,
-     "end": 2699.15,
+     "start": 2734.575,
+     "end": 2736.875,
      "dur": 2.3,
-     "start_frame": 80905,
-     "end_frame": 80974,
+     "start_frame": 82037,
+     "end_frame": 82106,
      "beat": true
     },
     {
      "text": "Let's check on the sine curve at x equals one, with a step of zero point one.",
      "audio_text": null,
-     "start": 2700.65,
-     "end": 2706.075,
+     "start": 2738.375,
+     "end": 2743.8,
      "dur": 5.425,
-     "start_frame": 81019,
-     "end_frame": 81182
+     "start_frame": 82151,
+     "end_frame": 82314
     },
     {
      "text": "The forward difference is off by minus zero point zero four three, the centred one by only minus zero point zero zero zero nine.",
      "audio_text": null,
-     "start": 2706.425,
-     "end": 2715.625,
+     "start": 2744.15,
+     "end": 2753.35,
      "dur": 9.2,
-     "start_frame": 81193,
-     "end_frame": 81469,
+     "start_frame": 82324,
+     "end_frame": 82600,
      "beat": true
     }
    ],
-   "end": 2717.125,
-   "start_frame": 79563,
-   "end_frame": 81514
+   "end": 2754.85,
+   "start_frame": 80695,
+   "end_frame": 82646
   },
   {
    "id": "s46_fd_grid",
-   "start": 2717.125,
+   "start": 2754.85,
    "sentences": [
     {
      "text": "Now the real map at Brest.",
      "audio_text": null,
-     "start": 2717.125,
-     "end": 2719.375,
+     "start": 2754.85,
+     "end": 2757.1,
      "dur": 2.25,
-     "start_frame": 81514,
-     "end_frame": 81581
+     "start_frame": 82645,
+     "end_frame": 82713
     },
     {
      "text": "With the data points eighteen kilometres apart going east, the forward difference gives minus three point three two degrees per hundred kilometres, the backward difference minus three point zero nine, and the centred one minus three point two zero, in between.",
      "audio_text": null,
-     "start": 2719.725,
-     "end": 2736.25,
+     "start": 2757.45,
+     "end": 2773.975,
      "dur": 16.525,
-     "start_frame": 81592,
-     "end_frame": 82087,
+     "start_frame": 82723,
+     "end_frame": 83219,
      "beat": true
     },
     {
      "text": "Now let's pretend the grid is coarser.",
      "audio_text": null,
-     "start": 2737.75,
-     "end": 2740.55,
+     "start": 2775.475,
+     "end": 2778.275,
      "dur": 2.8,
-     "start_frame": 82132,
-     "end_frame": 82216
+     "start_frame": 83264,
+     "end_frame": 83348
     },
     {
      "text": "With points thirty seven kilometres apart, the centred difference gives minus three point one seven, and seventy four kilometres apart, minus three point one four.",
      "audio_text": null,
-     "start": 2740.9,
-     "end": 2751.8,
+     "start": 2778.625,
+     "end": 2789.525,
      "dur": 10.9,
-     "start_frame": 82227,
-     "end_frame": 82554,
+     "start_frame": 83359,
+     "end_frame": 83686,
      "beat": true
     },
     {
      "text": "But at one hundred and forty seven kilometres, it drops to minus two point two four, and at two hundred and twenty one kilometres, to minus zero point nine eight.",
      "audio_text": null,
-     "start": 2753.3,
-     "end": 2763.85,
+     "start": 2791.025,
+     "end": 2801.575,
      "dur": 10.55,
-     "start_frame": 82599,
-     "end_frame": 82915,
+     "start_frame": 83731,
+     "end_frame": 84047,
      "beat": true
     },
     {
      "text": "The coarse grid steps right over the warm front, so it sees a temperature change three times too gentle.",
      "audio_text": null,
-     "start": 2765.35,
-     "end": 2772.025,
+     "start": 2803.075,
+     "end": 2809.75,
      "dur": 6.675,
-     "start_frame": 82960,
-     "end_frame": 83161
+     "start_frame": 84092,
+     "end_frame": 84292
     },
     {
      "text": "That's why weather models use fine grids.",
      "audio_text": null,
-     "start": 2772.375,
-     "end": 2775.475,
+     "start": 2810.1,
+     "end": 2813.2,
      "dur": 3.1,
-     "start_frame": 83171,
-     "end_frame": 83264
+     "start_frame": 84303,
+     "end_frame": 84396
     },
     {
      "text": "The first computer weather forecast, in nineteen fifty, had grid points seven hundred and thirty six kilometres apart.",
      "audio_text": null,
-     "start": 2775.825,
-     "end": 2784.1,
+     "start": 2813.55,
+     "end": 2821.825,
      "dur": 8.275,
-     "start_frame": 83275,
-     "end_frame": 83523
+     "start_frame": 84406,
+     "end_frame": 84655
     },
     {
      "text": "Early climate models had points a few hundred kilometres apart.",
      "audio_text": null,
-     "start": 2784.45,
-     "end": 2789.15,
+     "start": 2822.175,
+     "end": 2826.875,
      "dur": 4.7,
-     "start_frame": 83533,
-     "end_frame": 83674
+     "start_frame": 84665,
+     "end_frame": 84806
     },
     {
      "text": "The leading global forecast models today have grid points about nine kilometres apart.",
      "audio_text": null,
-     "start": 2789.5,
-     "end": 2795.65,
+     "start": 2827.225,
+     "end": 2833.375,
      "dur": 6.15,
-     "start_frame": 83685,
-     "end_frame": 83869
+     "start_frame": 84817,
+     "end_frame": 85001
     },
     {
      "text": "Solving whole equations on grids has its own movie in this series.",
      "audio_text": null,
-     "start": 2796.0,
-     "end": 2800.6,
+     "start": 2833.725,
+     "end": 2838.325,
      "dur": 4.6,
-     "start_frame": 83880,
-     "end_frame": 84018
+     "start_frame": 85012,
+     "end_frame": 85150
     }
    ],
-   "end": 2801.4,
-   "start_frame": 81514,
-   "end_frame": 84042
+   "end": 2839.125,
+   "start_frame": 82646,
+   "end_frame": 85174
   },
   {
    "id": "s47_recap",
-   "start": 2801.4,
+   "start": 2839.125,
    "sentences": [
     {
      "text": "To sum up, a derivative is the slope of the tangent, the rate at one instant.",
      "audio_text": null,
-     "start": 2801.4,
-     "end": 2807.025,
+     "start": 2839.125,
+     "end": 2844.75,
      "dur": 5.625,
-     "start_frame": 84042,
-     "end_frame": 84211
+     "start_frame": 85174,
+     "end_frame": 85342
     },
     {
      "text": "A partial derivative changes one variable and holds the others fixed.",
      "audio_text": null,
-     "start": 2807.375,
-     "end": 2812.35,
+     "start": 2845.1,
+     "end": 2850.075,
      "dur": 4.975,
-     "start_frame": 84221,
-     "end_frame": 84370
+     "start_frame": 85353,
+     "end_frame": 85502
     },
     {
      "text": "Over Brest, the air got colder by three point two degrees per hundred kilometres towards the east, while a fixed thermometer warmed by two point nine degrees per hour.",
      "audio_text": null,
-     "start": 2812.7,
-     "end": 2823.425,
+     "start": 2850.425,
+     "end": 2861.15,
      "dur": 10.725,
-     "start_frame": 84381,
-     "end_frame": 84703
+     "start_frame": 85513,
+     "end_frame": 85834
     },
     {
      "text": "The total differential adds slope times step for each variable, and dividing by time gives the chain rule, the rate a traveller feels.",
      "audio_text": null,
-     "start": 2823.775,
-     "end": 2832.8,
+     "start": 2861.5,
+     "end": 2870.525,
      "dur": 9.025,
-     "start_frame": 84713,
-     "end_frame": 84984
+     "start_frame": 85845,
+     "end_frame": 86116
     },
     {
      "text": "The plane flying east cooled at eight point six degrees per hour, while every place it passed was warming.",
      "audio_text": null,
-     "start": 2833.15,
-     "end": 2840.05,
+     "start": 2870.875,
+     "end": 2877.775,
      "dur": 6.9,
-     "start_frame": 84994,
-     "end_frame": 85201
+     "start_frame": 86126,
+     "end_frame": 86333
     },
     {
      "text": "The Trappes balloon cooled by one point six degrees every minute, almost all of it from rising.",
      "audio_text": "The [Trappes](/tɹˈæp/) balloon cooled by one point six degrees every minute, almost all of it from rising.",
-     "start": 2840.4,
-     "end": 2846.65,
+     "start": 2878.125,
+     "end": 2884.375,
      "dur": 6.25,
-     "start_frame": 85212,
-     "end_frame": 85399
+     "start_frame": 86344,
+     "end_frame": 86531
     },
     {
      "text": "Mixed partials don't depend on the order, and that gives the test for a perfect differential.",
      "audio_text": null,
-     "start": 2847.0,
-     "end": 2852.875,
+     "start": 2884.725,
+     "end": 2890.6,
      "dur": 5.875,
-     "start_frame": 85410,
-     "end_frame": 85586
+     "start_frame": 86542,
+     "end_frame": 86718
     },
     {
      "text": "Pressure passes it, heat fails it, and heat divided by temperature passes again.",
      "audio_text": null,
-     "start": 2853.225,
-     "end": 2859.05,
+     "start": 2890.95,
+     "end": 2896.775,
      "dur": 5.825,
-     "start_frame": 85597,
-     "end_frame": 85771
+     "start_frame": 86728,
+     "end_frame": 86903
     },
     {
      "text": "A Taylor series builds a curve from its value, slope, bend and more.",
      "audio_text": null,
-     "start": 2859.4,
-     "end": 2864.625,
+     "start": 2897.125,
+     "end": 2902.35,
      "dur": 5.225,
-     "start_frame": 85782,
-     "end_frame": 85939
+     "start_frame": 86914,
+     "end_frame": 87070
     },
     {
      "text": "Keeping the first two terms is linearisation: about seven percent more saturation vapour pressure, and three point eight more watts per square metre sent to space, for each degree.",
      "audio_text": null,
-     "start": 2864.975,
-     "end": 2876.6,
+     "start": 2902.7,
+     "end": 2914.325,
      "dur": 11.625,
-     "start_frame": 85949,
-     "end_frame": 86298
+     "start_frame": 87081,
+     "end_frame": 87430
     },
     {
      "text": "And the same Taylor series tells us how accurate a weather model's derivatives are.",
      "audio_text": null,
-     "start": 2876.95,
-     "end": 2882.475,
+     "start": 2914.675,
+     "end": 2920.2,
      "dur": 5.525,
-     "start_frame": 86308,
-     "end_frame": 86474
+     "start_frame": 87440,
+     "end_frame": 87606
     }
    ],
-   "end": 2883.275,
-   "start_frame": 84042,
-   "end_frame": 86498
+   "end": 2921.0,
+   "start_frame": 85174,
+   "end_frame": 87630
   },
   {
    "id": "s48_end",
-   "start": 2883.275,
+   "start": 2921.0,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 2883.275,
-     "end": 2889.475,
+     "start": 2921.0,
+     "end": 2927.2,
      "dur": 6.2,
-     "start_frame": 86498,
-     "end_frame": 86684
+     "start_frame": 87630,
+     "end_frame": 87816
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
      "audio_text": null,
-     "start": 2889.825,
-     "end": 2897.875,
+     "start": 2927.55,
+     "end": 2935.6,
      "dur": 8.05,
-     "start_frame": 86695,
-     "end_frame": 86936
+     "start_frame": 87826,
+     "end_frame": 88068
     },
     {
      "text": "The notebook for derivatives and Taylor series, and the notebooks for the other maths concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2898.225,
-     "end": 2906.85,
+     "start": 2935.95,
+     "end": 2944.575,
      "dur": 8.625,
-     "start_frame": 86947,
-     "end_frame": 87205
+     "start_frame": 88078,
+     "end_frame": 88337
     }
    ],
-   "end": 2907.15,
-   "start_frame": 86498,
-   "end_frame": 87214
+   "end": 2944.875,
+   "start_frame": 87630,
+   "end_frame": 88346
   }
  ],
- "total_s": 2907.15,
- "total_frames": 87215,
+ "total_s": 2944.875,
+ "total_frames": 88347,
  "render_s": 1082.2,
  "loudnorm_input": {
   "input_i": "-24.75",
@@ -4365,14 +4380,34 @@
   "normalization_type": "dynamic",
   "target_offset": "0.48"
  },
- "cues": 715,
+ "cues": 725,
  "warnings": [],
  "self_check": {
-  "expected_s": 2907.15,
-  "audio_s": 2907.15,
+  "expected_s": 2944.875,
+  "audio_s": 2944.875,
   "diff_ms": -0.0,
   "len_ok": true,
   "cues_ok": true,
+  "spliced_fix2": {
+   "method": "build-1 clips kept sample for sample; new/changed sentences Kokoro af_bella x1.0 + one constant gain to the mean BS.1770 loudness of the nearest unchanged neighbours (ffmpeg ebur128) + 5-ms look-ahead limiter at -1.5 dBFS (splice_fix2.py; base = the fix-1 narration incl. its trims)",
+   "replaced": [
+    {
+     "scene": "s09b_dtdz_stack",
+     "sentence": 1,
+     "text": "Now let's look at the temperature over all of northern France at once, at the same moment, on five levels from near the ground to about sixteen and a half kilometres up."
+    },
+    {
+     "scene": "s09b_dtdz_stack",
+     "sentence": 2,
+     "text": "Above Trappes, the change in temperature divided by the gap in height between neighbouring levels is minus six point two, minus five point six, and minus seven point seven degrees per kilometre: colder going up."
+    },
+    {
+     "scene": "s09b_dtdz_stack",
+     "sentence": 3,
+     "text": "In the top gap, above thirteen kilometres, the sign flips to plus one point one: above the tropopause, the lid on the weather layer, the air gets warmer going up."
+    }
+   ]
+  },
   "spliced_fix1": {
    "method": "build-1 clips kept sample for sample; new/changed sentences Kokoro af_bella x1.0 + one constant gain to the mean BS.1770 loudness of the nearest unchanged neighbours (ffmpeg ebur128) + 5-ms look-ahead limiter at -1.5 dBFS (splice_fix1.py)",
    "replaced": [

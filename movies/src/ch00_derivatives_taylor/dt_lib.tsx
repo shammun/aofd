@@ -240,7 +240,7 @@ export const globeG = (cam: GlobeCam, box = GBOX): GProj => {
   const st = globeCam({ ...cam, pp: [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);
   return globeProj(st, box.w, box.h, box.x, box.y);
 };
-const FieldSphere: React.FC<{ tex: THREE.Texture | null; o: number; r?: number }> = ({ tex, o, r = 1.002 }) => {
+export const FieldSphere: React.FC<{ tex: THREE.Texture | null; o: number; r?: number }> = ({ tex, o, r = 1.002 }) => {
   const geo = React.useMemo(() => sphereGeo(-180, 180, 240, 120, r), [r]);
   const mat = React.useMemo(() => new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false }), []);
   if (mat.map !== tex) { mat.map = tex; mat.needsUpdate = true; }

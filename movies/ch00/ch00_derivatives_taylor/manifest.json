@@ -4,14 +4,14 @@
  "builder": "movies/data/build_ch00_derivatives_taylor.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "08f83b7dcf563e382a21664e6784e277ed756fcc",
-  "dirty_tracked": false,
+  "commit": "3800f159c668c06f9d1a0f507d76bcaa459129b9",
+  "dirty_tracked": true,
   "calculus_py_sha256": "969eeff9a8b10a87b811cc72d4de11401702d071ff39180d43b2557903b60e86",
   "radiation_py_sha256": "0b8f1d7a9a0236d60a80ebbaee7b46db7435b7db70b2f5509b22cd584d766539",
   "moist_py_sha256": "419e57194a9d136b5f91f702bc0ab1f88b36bfb3e4b7c3a9e0e51dbb4a53ef3c",
   "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
   "atmos_py_sha256": "fd7273ed9cd4c0c29e4b77ddeb478f4b8a0924cd759f007bea4d1fc968dc207f",
-  "sounding_py_sha256": "0d358a123c2e91fe5c139e01b21e2182b3456457d26fdb8f5e2dbce24e4393d5",
+  "sounding_py_sha256": "d60b8cfbbd86d8061520b9a3fe8301cbcb17ae60efb5472e3935c7d759ecef3e",
   "climatology_py_sha256": "0facae7e9ed73bd3010798a4d779d7fc29b9039b309ecca826041baee2d37c9d",
   "advection_py_sha256": "653ac1d74b90b946bb5fef8d253f271a9b33fa2c512d979e115d7384791db91c",
   "igra_py_sha256": "8e7a8849d595c3756a5328bedd07f2417bcdf5c5f9bb21429fd914317f794e55",
@@ -66,6 +66,7 @@
    "s05/s11/s13 temperature drawn as height (landscape)",
    "s22 relief ×5 vertical",
    "s26 column height not to scale",
+   "s09b layer stack heights ×45 (zg area means; 730 × 780 km footprint, 16.5 km tall)",
    "s28 a 50 % expansion (thought experiment)",
    "title zoom window ×8"
   ]
@@ -100,9 +101,28 @@
   "tempo": "4/4 at 72 bpm",
   "spec_note": "chords two bars each (6.67 s) so they change on the bar, instead of the storyboard's 8 s"
  },
+ "stack_products": [
+  {
+   "product": "stack_t",
+   "what": "5 layers °C, area-mean heights (cos-lat weights)",
+   "zbar_m": [
+    140.4,
+    3130.8,
+    7457.0,
+    12994.7,
+    16448.1
+   ],
+   "range": [
+    -70.0,
+    25.0
+   ],
+   "exaggeration": 45
+  }
+ ],
  "inputs_sha256": {
   "data/derived/ch00/era5_ciaran_2023_850hPa_1h.nc": "a4c25d6e6895c7cea1b8ffb97d384962f93b1486d5512a83df755a3bca2ed9c3",
   "data/derived/ch00/era5_trappes_pl_t-u-v_850-700-500_2026-09-30T00-12.nc": "38046cb1d87dd86fd44e77b216fdaaaec5d327aaa080afe696eed85116f09f71",
+  "data/derived/ch00/era5_trappes_stack16_t-z_2026-09-30T12.nc": "ff102c8cb5bd06747b5609161f9c33f3a7febd9fa8ac73d14062815624d0f1fd",
   "data/derived/ch00/era5_tcwv_global_1979-2026-09.nc": "dee652e39351c9756ba1e456af6ae6e510129642ad44f9a596c8234a84569803",
   "data/derived/ch00/ceres_ebaf-toa_olr_2000-03_2026-08.nc": "0aa7e8972e85d147309c236ce9c9e96bce44e14806f4ca889f3655b1695968bd",
   "data/derived/ch00/ciaran_truecolour_2023-11-01_aqua_terra.jpg": "6cb521e7033e6d89903fe6974b794bba6c59e8f83249f3bb3d0801b8edd03382",
@@ -116,9 +136,37 @@
   "data/derived/ch00/ciaran_borders_10m.geojson": "037fec5398ff8ddaf13505a9fbe6b85452d4aa509b6eecef94a7fcc745154ee8",
   "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3"
  },
- "render_assets": {},
+ "render_assets": {
+  "dt_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "dt_hill_tint.png": "71b53442f3a2a6895d9834dbf4d89b768dfbfd1db4256f34c524dc0868067631",
+  "dt_land_18.png": "37496e4de12e2d3d8f911015c1515f9a3e65d8ccd248baafc039d6ee9b7183c5",
+  "dt_olr_latest.png": "e16db36e4e150bb8423a46d729e367c3727c3bfbd7733b60c21ec780faef1615",
+  "dt_stack_t.bin": "612faaf521eaca7914db01d22734ca20357e75f20d9c1fd963e5d93f78ba5c9b",
+  "dt_t500_trappes.png": "9bb7deb97bbc1d426331d898881436dcb4de2c5321699fadefbbcbf2e06a19eb",
+  "dt_t850_12.png": "c76387225a2d43b603c5ec0a785d2752c54d46bb71b5c04b137b42a2cbc56deb",
+  "dt_t850_13.png": "949b7f6fb8eda4e4ea5df2dd0f65ae14ad057b0aa25f2e00da69c57c39ba9a7e",
+  "dt_t850_14.png": "62577a5a5978424ef31779673735c3354bf5735c71a73877b6da87f440781646",
+  "dt_t850_15.png": "b9b740949e0aee1aea71e8aa3e1cc911149a626566525c5ec0ee5e548b7103ad",
+  "dt_t850_16.png": "1cef2afec98ecb2677663fc326082a5ddcbc29ae94b2b948f27531f64043be86",
+  "dt_t850_17.png": "2ffbec3fbf9e52ddef133bcfe592f0cc82533e2ed623b61f5a12d963a3f716e4",
+  "dt_t850_18.png": "fc97b319778f4ad98b8ef50fdfa30bd1dc2204302c71be4e11f87c702261b9c7",
+  "dt_t850_19.png": "c0262dc5c031387a3f0068c751e3ecd87c796daa95d4fdb76bacbed7ac01d213",
+  "dt_t850_20.png": "347dd0d723934e331e5ada9a2fc9e272ac132bde980ad0961b2f311fbb2ece74",
+  "dt_t850_21.png": "3ec7f4bf7ecd0295693f0c52ec180df0e135470d5368620826462471d2e36836",
+  "dt_t850_22.png": "c2e7ecfc99df17893fa0baf0e525af3080e0b0e74da445d3bb402959761771f1",
+  "dt_t850_23.png": "c4680d8bddb733fd7863d05e03fbd08ade88f6972271eb8941a8a3bb045b2eb5",
+  "dt_t850_24.png": "57b395eb17d830d459323cf10f26ecf1d64907f94b274cdda6bd090bb99b167f",
+  "dt_t850c_1.png": "345a31bafbcd597524d675e5ce0735efbe2d802e63c5287663eb50d81d019ed8",
+  "dt_t850c_12.png": "017b6e83f240b4cb243b72a11f912f5af151899f91d22dcb7812e2a0f2f30f7e",
+  "dt_t850c_2.png": "1ee32457f3f1f529c8727b62b26999baeb98ac648a013efdac3bb2832e496e49",
+  "dt_t850c_4.png": "1f0c8cc189958d3845b08c6b5ba73dd4786c698bc0702c97f309ce675ab870f6",
+  "dt_t850c_8.png": "e4b6aad46f91b39e9217b269fd53d491711a81d454c68bd69fe0a289a1437b83",
+  "dt_tc_20231101.jpg": "16d4a438f09e5f467a5553af16b1f1a8cb68cd906e2bf24487a2b2e942b7008a",
+  "dt_tcwv_trend.png": "c9d7f2252b02d902f058e76790086b30f662c0059aff62d3b285c6fc959ccc4d",
+  "dt_trappes_tc_20260930.jpg": "ab541425be43a85b5326345e41ec7ce644d7d9d57fc31414a5e59acb9ebf29a4"
+ },
  "data_files": {
-  "dt.json": "eaca0f32e50b951ae4d6a654b0caf0daa5c10d1a170e51d8ddde5f48ba99d12a",
+  "dt.json": "987f576f09febb0b09eaa3d45f940acb4a67f7741de958624c2c74f02e1b7dd9",
   "img/hill_tint.png": "71b53442f3a2a6895d9834dbf4d89b768dfbfd1db4256f34c524dc0868067631",
   "img/land_18.png": "37496e4de12e2d3d8f911015c1515f9a3e65d8ccd248baafc039d6ee9b7183c5",
   "img/olr_latest.png": "e16db36e4e150bb8423a46d729e367c3727c3bfbd7733b60c21ec780faef1615",
@@ -141,7 +189,8 @@
   "img/t850c_2.png": "1ee32457f3f1f529c8727b62b26999baeb98ac648a013efdac3bb2832e496e49",
   "img/t850c_4.png": "1f0c8cc189958d3845b08c6b5ba73dd4786c698bc0702c97f309ce675ab870f6",
   "img/t850c_8.png": "e4b6aad46f91b39e9217b269fd53d491711a81d454c68bd69fe0a289a1437b83",
-  "img/tcwv_trend.png": "c9d7f2252b02d902f058e76790086b30f662c0059aff62d3b285c6fc959ccc4d"
+  "img/tcwv_trend.png": "c9d7f2252b02d902f058e76790086b30f662c0059aff62d3b285c6fc959ccc4d",
+  "stack_t.bin": "612faaf521eaca7914db01d22734ca20357e75f20d9c1fd963e5d93f78ba5c9b"
  },
  "checks": [
   {
@@ -1000,6 +1049,28 @@
    "pass": true
   },
   {
+   "id": "DT26b",
+   "name": "s19 inset isotherms −11.6 … −11.0 °C all present round Trappes",
+   "value": [
+    4.0
+   ],
+   "ref": [
+    4.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT26c",
+   "name": "drift at > 60° to ∇T at 500 hPa ('almost along the lines of equal temperature')",
+   "value": [
+    88.687934
+   ],
+   "ref": "[60.0, 90.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
    "id": "DT46",
    "name": "the line and the quadratic fitted below the kink are colder than the balloon at 16 km",
    "value": true,
@@ -1516,6 +1587,147 @@
    "value": true,
    "ref": true,
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT80",
+   "name": "Trappes column above ground at every level (sp 1001.8 hPa > 1000 hPa)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT81",
+   "name": "ERA5 tropopause at Trappes 13 004 m, 208.18 K (−64.97 °C) at 175 hPa",
+   "value": [
+    13003.968168,
+    208.177177,
+    175.0
+   ],
+   "ref": [
+    13004.0,
+    208.18,
+    175.0
+   ],
+   "tol": [
+    1.0,
+    0.01,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DT82",
+   "name": "gaps at Trappes −6.20, −5.63, −7.75, +1.09 K/km",
+   "value": [
+    -6.200817,
+    -5.633276,
+    -7.749211,
+    1.090817
+   ],
+   "ref": [
+    -6.2,
+    -5.63,
+    -7.75,
+    1.09
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "DT82",
+   "name": "spoken/shown −6.2, −5.6, −7.7, +1.1",
+   "value": [
+    -6.2,
+    -5.6,
+    -7.7,
+    1.1
+   ],
+   "ref": [
+    -6.2,
+    -5.6,
+    -7.7,
+    1.1
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT83",
+   "name": "sign flips between the 400–175 and 175–100 hPa gaps (cooling below the tropopause, warming above)",
+   "value": [
+    -6.2,
+    -5.63,
+    -7.75,
+    1.09
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DT84",
+   "name": "heights at Trappes 0.14 / 3.13 / 7.47 / 13.00 / 16.45 km ('about sixteen and a half', 'above thirteen')",
+   "value": [
+    0.139878,
+    3.133833,
+    7.467774,
+    13.003968,
+    16.451796
+   ],
+   "ref": [
+    0.14,
+    3.13,
+    7.47,
+    13.0,
+    16.45
+   ],
+   "tol": 0.006,
+   "pass": true
+  },
+  {
+   "id": "DT84",
+   "name": "100 hPa height at Trappes rounds to 16.5 km",
+   "value": [
+    16.451796
+   ],
+   "ref": "[16.25, 16.75]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT85",
+   "name": "box finite difference = layer_lapse_rate at a reported-level pair (spot column)",
+   "value": [
+    -7.772468
+   ],
+   "ref": [
+    -7.772468
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DT85",
+   "name": "lower three gaps cool upward over the box (share of above-ground columns)",
+   "value": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": "[0.99, 1.0]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "DT85",
+   "name": "top gap 175–100 hPa warms upward over most of the box (share)",
+   "value": [
+    0.859546
+   ],
+   "ref": "[0.5, 1.0]",
+   "tol": null,
    "pass": true
   }
  ],
@@ -2989,6 +3201,286 @@
     "kind": "central"
    },
    "sha256": "1a3db86d5c70273cb05f373dcf3b8592a12c1c428d656ef62a2a9b9d0532e7bf"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.lapse_rate_tropopause",
+   "scene": "s09b",
+   "data": "data/dt.json",
+   "eq": "WMO tropopause of the ERA5 16-level Trappes column",
+   "params": {
+    "T": [
+     294.05756931499997,
+     290.77282287562497,
+     288.36922968812496,
+     286.300246951875,
+     283.26466652812496,
+     275.4926028971875,
+     269.76010391875,
+     261.88487045,
+     251.07831403304687,
+     235.68849362914065,
+     226.08414778871094,
+     213.03921135445313,
+     208.17717672746093,
+     210.07488357558594,
+     210.7839414154297,
+     211.93812565898435
+    ],
+    "z": [
+     139.87760518797853,
+     582.3721796703516,
+     1044.0311050922658,
+     1527.8969721853123,
+     2036.2107651052343,
+     3133.832674839375,
+     4367.054160144375,
+     5790.124256352187,
+     7467.774142083438,
+     9516.49344025625,
+     10749.943373023123,
+     12183.24859227875,
+     13003.9681677625,
+     13948.9555795725,
+     15073.366130605626,
+     16451.7962087525
+    ]
+   },
+   "sha256": "0c98eda7662dbe5559d8d8d2a696fd6e011fa666414db0f14d4c661ac0cd123e"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.layer_lapse_rate",
+   "scene": "s09b",
+   "data": "data/dt.json",
+   "eq": "ΔT/Δz 1000–700 hPa at Trappes (Kundu sign)",
+   "params": {
+    "z": [
+     139.87760518797853,
+     582.3721796703516,
+     1044.0311050922658,
+     1527.8969721853123,
+     2036.2107651052343,
+     3133.832674839375,
+     4367.054160144375,
+     5790.124256352187,
+     7467.774142083438,
+     9516.49344025625,
+     10749.943373023123,
+     12183.24859227875,
+     13003.9681677625,
+     13948.9555795725,
+     15073.366130605626,
+     16451.7962087525
+    ],
+    "T": [
+     294.05756931499997,
+     290.77282287562497,
+     288.36922968812496,
+     286.300246951875,
+     283.26466652812496,
+     275.4926028971875,
+     269.76010391875,
+     261.88487045,
+     251.07831403304687,
+     235.68849362914065,
+     226.08414778871094,
+     213.03921135445313,
+     208.17717672746093,
+     210.07488357558594,
+     210.7839414154297,
+     211.93812565898435
+    ],
+    "z1": 139.87760518797853,
+    "z2": 3133.832674839375
+   },
+   "sha256": "d775283ece66568739b5c92e857da49cea81fcec94265063fa472c2f1d77de08"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.layer_lapse_rate",
+   "scene": "s09b",
+   "data": "data/dt.json",
+   "eq": "ΔT/Δz 700–400 hPa at Trappes (Kundu sign)",
+   "params": {
+    "z": [
+     139.87760518797853,
+     582.3721796703516,
+     1044.0311050922658,
+     1527.8969721853123,
+     2036.2107651052343,
+     3133.832674839375,
+     4367.054160144375,
+     5790.124256352187,
+     7467.774142083438,
+     9516.49344025625,
+     10749.943373023123,
+     12183.24859227875,
+     13003.9681677625,
+     13948.9555795725,
+     15073.366130605626,
+     16451.7962087525
+    ],
+    "T": [
+     294.05756931499997,
+     290.77282287562497,
+     288.36922968812496,
+     286.300246951875,
+     283.26466652812496,
+     275.4926028971875,
+     269.76010391875,
+     261.88487045,
+     251.07831403304687,
+     235.68849362914065,
+     226.08414778871094,
+     213.03921135445313,
+     208.17717672746093,
+     210.07488357558594,
+     210.7839414154297,
+     211.93812565898435
+    ],
+    "z1": 3133.832674839375,
+    "z2": 7467.774142083438
+   },
+   "sha256": "aa4b0b18b85f0c3f4afcb23504bf68c0774208eb0e293014bef4d395ec4bb951"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.layer_lapse_rate",
+   "scene": "s09b",
+   "data": "data/dt.json",
+   "eq": "ΔT/Δz 400–175 hPa at Trappes (Kundu sign)",
+   "params": {
+    "z": [
+     139.87760518797853,
+     582.3721796703516,
+     1044.0311050922658,
+     1527.8969721853123,
+     2036.2107651052343,
+     3133.832674839375,
+     4367.054160144375,
+     5790.124256352187,
+     7467.774142083438,
+     9516.49344025625,
+     10749.943373023123,
+     12183.24859227875,
+     13003.9681677625,
+     13948.9555795725,
+     15073.366130605626,
+     16451.7962087525
+    ],
+    "T": [
+     294.05756931499997,
+     290.77282287562497,
+     288.36922968812496,
+     286.300246951875,
+     283.26466652812496,
+     275.4926028971875,
+     269.76010391875,
+     261.88487045,
+     251.07831403304687,
+     235.68849362914065,
+     226.08414778871094,
+     213.03921135445313,
+     208.17717672746093,
+     210.07488357558594,
+     210.7839414154297,
+     211.93812565898435
+    ],
+    "z1": 7467.774142083438,
+    "z2": 13003.9681677625
+   },
+   "sha256": "3861392801ec01fa4e09f882401f383403a324846c5fc60017bce61302207e13"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.layer_lapse_rate",
+   "scene": "s09b",
+   "data": "data/dt.json",
+   "eq": "ΔT/Δz 175–100 hPa at Trappes (Kundu sign)",
+   "params": {
+    "z": [
+     139.87760518797853,
+     582.3721796703516,
+     1044.0311050922658,
+     1527.8969721853123,
+     2036.2107651052343,
+     3133.832674839375,
+     4367.054160144375,
+     5790.124256352187,
+     7467.774142083438,
+     9516.49344025625,
+     10749.943373023123,
+     12183.24859227875,
+     13003.9681677625,
+     13948.9555795725,
+     15073.366130605626,
+     16451.7962087525
+    ],
+    "T": [
+     294.05756931499997,
+     290.77282287562497,
+     288.36922968812496,
+     286.300246951875,
+     283.26466652812496,
+     275.4926028971875,
+     269.76010391875,
+     261.88487045,
+     251.07831403304687,
+     235.68849362914065,
+     226.08414778871094,
+     213.03921135445313,
+     208.17717672746093,
+     210.07488357558594,
+     210.7839414154297,
+     211.93812565898435
+    ],
+    "z1": 13003.9681677625,
+    "z2": 16451.7962087525
+   },
+   "sha256": "9ac50efad6697fea0fd6ed462e22e96029b593634f180aebd1213f2dd408e4d4"
+  },
+  {
+   "fn": "fluidpy.diag.sounding.layer_lapse_rate",
+   "scene": "s09b",
+   "data": "data/dt.json",
+   "eq": "spot check: box column (lat index 11, lon index 20), 400–175 hPa",
+   "params": {
+    "z": [
+     143.03948974609375,
+     586.5009155273438,
+     1048.5291748046875,
+     1532.1534423828125,
+     2040.428955078125,
+     3139.04541015625,
+     4374.93603515625,
+     5799.04541015625,
+     7478.03125,
+     9527.8779296875,
+     10763.193359375,
+     12198.1064453125,
+     13019.392578125,
+     13959.080078125,
+     15078.26953125,
+     16456.44140625
+    ],
+    "T": [
+     294.6953125,
+     291.560791015625,
+     288.419677734375,
+     286.099853515625,
+     283.345947265625,
+     276.2318115234375,
+     269.7890625,
+     262.374755859375,
+     250.86325073242188,
+     235.97988891601562,
+     226.25706481933594,
+     213.28250122070312,
+     207.79319763183594,
+     208.94895935058594,
+     209.9051971435547,
+     212.09115600585938
+    ],
+    "z1": 7478.03125,
+    "z2": 13019.392578125
+   },
+   "sha256": "7254b7ecdb604835051c6c8d8a373baccddad4315f5d52aa453c4f3ac2afa05e"
   }
  ],
  "physics_recorded": [
@@ -3160,6 +3652,17 @@
     "g": 9.81
    },
    "output_sha256": "a9d5ec9ee61ce1217a4b35364299f18d0f961b678acaa3279ddbb369d0b3e417"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s19",
+   "eq": "∇T at 500 hPa for the drift-vs-isotherm angle",
+   "params": {
+    "F": "array (29, 41), sha256 b512d3faba4c184781a9431ca83c7585702f771ab3d861caf70459dfeb1cdc76",
+    "lat": "array (29,), sha256 539420c0ee6fd217b4e6e04f59b59308a39d2d52e0b6518a080237c7f27a3567",
+    "lon": "array (41,), sha256 734edd6951f29ea26aa36f8b16dc68adda29797fbb4ff8a3e77ee370702dc62c"
+   },
+   "output_sha256": "72b11956af57264940b8e46e213081f558021621f2eeda600b14801389f6c76f"
   },
   {
    "fn": "fluidpy.core.thermo.process_path",

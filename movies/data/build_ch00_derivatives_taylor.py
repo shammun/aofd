@@ -63,6 +63,7 @@ FTCWV = DER / "era5_tcwv_global_1979-2026-09.nc"
 FOLR = DER / "ceres_ebaf-toa_olr_2000-03_2026-08.nc"
 FTC = DER / "ciaran_truecolour_2023-11-01_aqua_terra.jpg"
 FTRAP_TC = DER / "trappes_truecolour_2026-09-30_aqua_terra.jpg"
+FSTK = DER / "era5_trappes_stack16_t-z_2026-09-30T12.nc"     # fix loop 2: the s09b layer stack (16 levels)
 BMNG = CP_REAL / "globe_bmng_topo_bathy_200409_5400x2700.jpg"
 
 sys.path.insert(0, str(FLUID))
@@ -517,6 +518,14 @@ def main() -> int:
                 "H": r6(H, 1), "rho0": r6(rho0, 4), "p0": r6(p0 / 100, 2), "T0": r6(T0, 2), "pexp": r6(np.asarray(pexp) / 100, 2),
                 "z1": r6(z1, 0), "tp1": r6(np.asarray(tp1) / 100, 2), "z5": r6(z5, 0), "tp5": r6(np.asarray(tp5) / 100, 2), "pe5": r6(pe5, 2),
                 "Tbar": r6(Tbar, 2), "p_tb": r6(p_tb, 2), "Tm_hyp": r6(Tm_hyp, 2), "t500": t500_tex}
+    # fix loop 2 (review 2 Should 4): four thin ERA5 500-hPa isotherms on the s19 inset, every 0.2 °C (the drift runs along them)
+    V["snd"]["iso500"] = contours(T500, tla, tlo, [-11.6, -11.4, -11.2, -11.0], nd=3)
+    row("DT26b", "s19 inset isotherms −11.6 … −11.0 °C all present round Trappes", len(V["snd"]["iso500"]), 4, 0)
+    gT = call(GS + "gradient", "s19", "∇T at 500 hPa for the drift-vs-isotherm angle", heavy_call=True, F=T500, lat=tla, lon=tlo)
+    gx5, gy5 = float(bilin(gT.dFdx, tla, tlo, TRAPPES[0], TRAPPES[1])), float(bilin(gT.dFdy, tla, tlo, TRAPPES[0], TRAPPES[1]))
+    ang = float(np.degrees(np.arccos(abs(de * gx5 + dn * gy5) / (np.hypot(de, dn) * np.hypot(gx5, gy5)))))
+    rng("DT26c", "drift at > 60° to ∇T at 500 hPa ('almost along the lines of equal temperature')", ang, 60.0, 90.0)
+    V["snd"]["drift_vs_grad_deg"] = r6(ang, 1)
     # s36: line and quadratic fitted just below the kink (9-13 km), run on to 20 km (picture only)
     fit = (zf[okT] >= 9000) & (zf[okT] <= zt)
     c1 = np.polyfit(zf[okT][fit] / 1e3, Tk[okT][fit] - 273.15, 1)
@@ -751,6 +760,58 @@ def main() -> int:
                "spacing": r6([dx0 / 1e3, 2 * dx0 / 1e3, 4 * dx0 / 1e3, 8 * dx0 / 1e3, 12 * dx0 / 1e3], 1), "ef": r6(ef, 6), "ec": r6(ec, 7), "tex": cg,
                "lat_pts": r6(lat8[(lat8 >= 47.0) & (lat8 <= 50.0)], 2), "lon_pts": r6(lon8[(lon8 >= -8.0) & (lon8 <= -1.0)], 2)}
 
+    # ================================================================ s09b the layer stack (fix loop 2; retrofit plan §3.7 K4; HOUSE_STYLE §5b)
+    # ERA5 t, zg on 16 levels round Trappes, 30 Sep 2026 12 UTC; five levels shown (1000 / 700 / 400 / 175 / 100 hPa) so the
+    # WMO tropopause (175 hPa) is a level and the sign of ΔT/Δz flips between two neighbouring gaps
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _stack import stack_product
+    sk = xr.open_dataset(FSTK)
+    slev = [float(v) for v in sk.level.values]
+    sla, slo = sk.lat.values.astype(float), sk.lon.values.astype(float)
+    T16 = sk.t.values.astype(float)
+    Z16 = sk.zg.values.astype(float)
+    BG16 = sk.below_ground.values.astype(bool)
+    Tc = np.array([float(bilin(T16[q], sla, slo, TRAPPES[0], TRAPPES[1])) for q in range(len(slev))])
+    Zc = np.array([float(bilin(Z16[q], sla, slo, TRAPPES[0], TRAPPES[1])) for q in range(len(slev))])
+    truth("DT80", "Trappes column above ground at every level (sp 1001.8 hPa > 1000 hPa)", not any(bool(BG16[q][np.argmin(abs(sla - 48.75)), np.argmin(abs(slo - 2.0))]) for q in range(len(slev))))
+    ztp, Ttp = call(GA + "lapse_rate_tropopause", "s09b", "WMO tropopause of the ERA5 16-level Trappes column", T=Tc, z=Zc)
+    ktp = int(np.argmin(abs(Zc - ztp)))
+    row("DT81", "ERA5 tropopause at Trappes 13 004 m, 208.18 K (−64.97 °C) at 175 hPa", [ztp, Ttp, slev[ktp]], [13004.0, 208.18, 175.0], [1.0, 0.01, 0])
+    SHOW = [1000.0, 700.0, 400.0, 175.0, 100.0]
+    ks = [slev.index(v) for v in SHOW]
+    gaps = [float(call(DS + "layer_lapse_rate", "s09b", f"ΔT/Δz {SHOW[i]:.0f}–{SHOW[i + 1]:.0f} hPa at Trappes (Kundu sign)", z=Zc, T=Tc,
+                       z1=float(Zc[ks[i]]), z2=float(Zc[ks[i + 1]]))) * 1e3 for i in range(4)]
+    row("DT82", "gaps at Trappes −6.20, −5.63, −7.75, +1.09 K/km", gaps, [-6.20, -5.63, -7.75, 1.09], 0.006)
+    row("DT82", "spoken/shown −6.2, −5.6, −7.7, +1.1", [round(g, 1) for g in gaps], [-6.2, -5.6, -7.7, 1.1], 1e-9)
+    truth("DT83", "sign flips between the 400–175 and 175–100 hPa gaps (cooling below the tropopause, warming above)",
+          all(g < 0 for g in gaps[:3]) and gaps[3] > 0, [round(g, 2) for g in gaps])
+    row("DT84", "heights at Trappes 0.14 / 3.13 / 7.47 / 13.00 / 16.45 km ('about sixteen and a half', 'above thirteen')",
+        [Zc[k] / 1e3 for k in ks], [0.14, 3.13, 7.47, 13.00, 16.45], 0.006)
+    rng("DT84", "100 hPa height at Trappes rounds to 16.5 km", Zc[ks[-1]] / 1e3, 16.25, 16.75)
+    # the same finite difference over the whole box (exact at reported levels: equals layer_lapse_rate there)
+    Fg = [(T16[ks[i + 1]] - T16[ks[i]]) / (Z16[ks[i + 1]] - Z16[ks[i]]) * 1e3 for i in range(4)]
+    ok_g = [~(BG16[ks[i]] | BG16[ks[i + 1]]) for i in range(4)]
+    jy, jx = 11, 20
+    lr = float(call(DS + "layer_lapse_rate", "s09b", "spot check: box column (lat index 11, lon index 20), 400–175 hPa", z=Z16[:, jy, jx], T=T16[:, jy, jx],
+                    z1=float(Z16[ks[2], jy, jx]), z2=float(Z16[ks[3], jy, jx]))) * 1e3
+    row("DT85", "box finite difference = layer_lapse_rate at a reported-level pair (spot column)", Fg[2][jy, jx], lr, 1e-9)
+    cool = [float(np.mean(Fg[i][ok_g[i]] < 0)) for i in range(3)]
+    warm = float(np.mean(Fg[3][ok_g[3]] > 0))
+    rng("DT85", "lower three gaps cool upward over the box (share of above-ground columns)", cool, 0.99, 1.0)
+    rng("DT85", "top gap 175–100 hPa warms upward over most of the box (share)", warm, 0.5, 1.0)
+    T5 = T16[ks] - 273.15
+    hdr, sblob, srows = stack_product("stack_t", T5, Z16[ks], SHOW, sla, slo, -70.0, 25.0, exaggeration=45, units="°C",
+                                      lut="cmocean.thermal", below_ground=BG16[ks])
+    (DATA / "stack_t.bin").write_bytes(sblob)
+    hdr.update({"trappes": {"z_km": r6(Zc[ks] / 1e3, 3), "T_C": r6(Tc[ks] - 273.15, 2), "gaps_Kkm": r6(gaps, 3),
+                            "gaps_shown": [round(g, 1) for g in gaps]},
+                "trop": {"z": r6(ztp, 0), "T_C": r6(Ttp - 273.15, 2), "p_hPa": slev[ktp]},
+                "box": {"cool_share": r6(cool, 4), "warm_share_top": r6(warm, 4),
+                        "below_ground_share": r6([float(BG16[k].mean()) for k in ks], 4)},
+                "lut_hex": lut_hex("cmocean.thermal")})
+    V["stack"] = hdr
+    stack_rows = srows
+
     # ================================================================ lines and LUTs
     ne110 = json.loads((CP_REAL / "ne_lines_110m.json").read_text(encoding="utf-8"))
     V["lines"] = {"globe_coast_110m": ne110["coastline"],
@@ -773,6 +834,7 @@ def main() -> int:
     data_hashes = {"dt.json": hashlib.sha256(blob).hexdigest()}
     for pimg in sorted(IMG.glob("*.png")):
         data_hashes[f"img/{pimg.name}"] = sha_file(pimg)
+    data_hashes["stack_t.bin"] = sha_file(DATA / "stack_t.bin")
     render = {}
     if a.public:
         a.public.mkdir(parents=True, exist_ok=True)
@@ -782,9 +844,10 @@ def main() -> int:
         Image.open(BMNG).convert("RGB").resize((4096, 2048), Image.LANCZOS).save(a.public / "dt_bmng.jpg", quality=88)
         for pimg in sorted(IMG.glob("*.png")):
             (a.public / f"dt_{pimg.name}").write_bytes(pimg.read_bytes())
+        (a.public / "dt_stack_t.bin").write_bytes((DATA / "stack_t.bin").read_bytes())
         render = {pp.name: sha_file(pp) for pp in sorted(a.public.glob("dt_*"))}
     inputs = {str(pq.relative_to(ROOT)).replace("\\", "/") if ROOT in pq.parents else str(pq): sha_file(pq)
-              for pq in [F850, FTRP, FTCWV, FOLR, FTC, FTRAP_TC, A4, ISD, ETOPO, IGRA, BMNG, DER / "ciaran_coast_10m.geojson",
+              for pq in [F850, FTRP, FSTK, FTCWV, FOLR, FTC, FTRAP_TC, A4, ISD, ETOPO, IGRA, BMNG, DER / "ciaran_coast_10m.geojson",
                          DER / "ciaran_borders_10m.geojson", CP_REAL / "ne_lines_110m.json"]}
     manifest = {
         "id": "ch00_derivatives_taylor", "storyboard": "movies/ch00/ch00_derivatives_taylor/storyboard.yaml",
@@ -808,7 +871,7 @@ def main() -> int:
                        "time_compression": {"s00": "balloon 15 min in ~4 s", "s04": "12 h of hourly frames in ~5 s", "s08": "17-19 UTC in ~6 s",
                                             "s09/s18": "balloon 15 min in ~6-8 s", "s16/s17": "flights 1 h in ~8 s", "s20": "streaks ×600 (10-min RK2 steps, frozen 18 UTC field)"},
                        "exaggerations": ["s05/s11/s13 temperature drawn as height (landscape)", "s22 relief ×5 vertical",
-                                         "s26 column height not to scale", "s28 a 50 % expansion (thought experiment)", "title zoom window ×8"]},
+                                         "s26 column height not to scale", "s09b layer stack heights ×45 (zg area means; 730 × 780 km footprint, 16.5 km tall)", "s28 a 50 % expansion (thought experiment)", "title zoom window ×8"]},
         "credits": [
             "Contains modified Copernicus Climate Change Service information 2026 (ERA5 hourly 850 hPa, pressure levels, monthly TCWV, Ciarán surface).",
             "Durre, I., et al.: Integrated Global Radiosonde Archive (IGRA) v2, NOAA NCEI (Trappes 30 Sep 2026, 00 and 12 UTC).",
@@ -829,7 +892,7 @@ def main() -> int:
             "s21: (-5.7e-3)(-12.2) = 0.0695 shown as '~ +0.069' = the data value 0.0689 rounded (DT28)"],
         "music": {"style": "tangent-glide", "seed": 11, "key": "B-flat major (Lydian E)", "tempo": "4/4 at 72 bpm",
                   "spec_note": "chords two bars each (6.67 s) so they change on the bar, instead of the storyboard's 8 s"},
-        "inputs_sha256": inputs, "render_assets": render, "data_files": data_hashes, "checks": rows,
+        "stack_products": stack_rows, "inputs_sha256": inputs, "render_assets": render, "data_files": data_hashes, "checks": rows,
         "physics": [e for e in entries if e.get("sha256")], "physics_recorded": [e for e in entries if not e.get("sha256")], "physics_heavy": heavy,
     }
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1, ensure_ascii=False, default=str), encoding="utf-8")

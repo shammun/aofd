@@ -18,7 +18,7 @@ concepts:
 - 'Clausius-Clapeyron linearised: the 7 % rule (Vallis (18.27))'
 - 'Stefan-Boltzmann linearised: the Planck response (Vallis (14.1) form)'
 - finite differences and truncation error (Kundu (10.6))
-target_duration_s: 2909.65
+target_duration_s: 2947.375
 fps: 30
 size:
 - 1920
@@ -67,10 +67,10 @@ audio:
     shows: the balloon climbing
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word (sentence gaps
     only); one at a time; no caption tags (no sound carries meaning the voice does not say)'
-measured_narration_s: 2907.15
-measured_frames: 87215
-words: 6992
-sentences: 423
+measured_narration_s: 2944.875
+measured_frames: 88347
+words: 7089
+sentences: 426
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_derivatives_taylor/dryrun/v3
@@ -667,35 +667,85 @@ scenes:
   runner_up: CesiumJS SingleTile drape of the Paris region (no Ion) composited in Remotion
   why: the third partial derivative from the newest real observation, with the lapse-rate sign convention said
   related: []
-- id: s10_mixed_partials
+- id: s09b_dtdz_stack
   t:
   - 474.175
-  - 562.5
+  - 511.9
   sentence_times:
   - - 474.175
-    - 478.525
-  - - 478.875
-    - 486.375
-  - - 486.725
-    - 495.425
-  - - 495.775
-    - 501.625
-  - - 501.975
-    - 506.975
-  - - 507.325
-    - 512.3
-  - - 513.8
-    - 518.625
-  - - 520.125
-    - 528.175
-  - - 529.675
-    - 531.925
-  - - 532.275
-    - 543.875
-  - - 544.225
-    - 556.725
-  - - 557.075
-    - 561.7
+    - 484.85
+  - - 485.2
+    - 499.1
+  - - 499.45
+    - 510.4
+  beat:
+  - 3
+  visual: 'House K5 LayerStack3D full-bleed under a K1 GlobeFrame (right side darkened): five of the 16 ERA5 levels over 45-52 N, 3 W-7 E (1000
+    / 700 / 400 / 175 / 100 hPa) at their area-mean heights x45, each coloured by its temperature on one thermal scale (colour bar in the text
+    column), below-ground points transparent, coast and borders on the bottom layer. The camera hovers outside the stack from the side at an angle,
+    rising from the bottom to the top; one short close side look (about 4 s, outside) at the top gap on ''the sign flips'', then back out (no
+    fly-through). A rod at Trappes carries the four gaps; S2-S3: each gap lights (rose = colder going up, teal = warmer) and its value is a K3
+    Callout in the column (-6.2, -5.6, -7.7, +1.1) with a gold link to the gap; keywords ''colder going up'', ''warmer going up'', ''tropopause''
+    (pointer to the 175-hPa layer). K2 source line under the stack.'
+  layout_5b: stack full-bleed + GlobeFrame(zoom 1, right 1); text column x >= 1180; colour bar beside the stack; source below; no fly-through
+  voiceover: 'Now let''s look at the temperature over all of northern France at once, at the same moment, on five levels from near the ground
+    to about sixteen and a half kilometres up. Above Trappes, the change in temperature divided by the gap in height between neighbouring levels
+    is minus six point two, minus five point six, and minus seven point seven degrees per kilometre: colder going up. In the top gap, above thirteen
+    kilometres, the sign flips to plus one point one: above the tropopause, the lid on the weather layer, the air gets warmer going up. [beat]'
+  on_screen_eq:
+    latex: \frac{\Delta T}{\Delta z}\approx\frac{\partial T}{\partial z}\quad(^{\circ}\mathrm{C/km})
+    vallis_eq: 'provenance only: finite difference of the lapse rate (Vallis §2.10, Eq. 2.246 context; Kundu sign)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.sounding.layer_lapse_rate + fluidpy.geo.atmos.lapse_rate_tropopause (+ movies/data/_stack.stack_product)
+    params:
+      data: data/derived/ch00/era5_trappes_stack16_t-z_2026-09-30T12.nc
+      levels_hPa:
+      - 1000
+      - 700
+      - 400
+      - 175
+      - 100
+      place: Trappes 48.7744 N 2.0097 E
+      time: 2026-09-30T12
+    test: CHECK DT80-DT85 (gaps -6.20/-5.63/-7.75/+1.09 K/km; tropopause 13 004 m, 208.18 K at 175 hPa; box shares)
+  exaggeration:
+  - layer heights x45 (16.5 km over a 730 x 780 km footprint)
+  - five of 16 levels shown
+  kind: layer stack (house K5)
+  data: ERA5-CDS-trappes-20260930-pl extension (16 levels, t, z, sp, below_ground)
+  tool: Remotion + @remotion/three (house kit stack3d, frame, cam)
+  why: 'partial T by partial z is a field: every gap between two levels has its own finite difference, and its sign flips at the tropopause'
+  related: []
+- id: s10_mixed_partials
+  t:
+  - 511.9
+  - 600.225
+  sentence_times:
+  - - 511.9
+    - 516.25
+  - - 516.6
+    - 524.1
+  - - 524.45
+    - 533.15
+  - - 533.5
+    - 539.35
+  - - 539.7
+    - 544.7
+  - - 545.05
+    - 550.025
+  - - 551.525
+    - 556.35
+  - - 557.85
+    - 565.9
+  - - 567.4
+    - 569.65
+  - - 570.0
+    - 581.6
+  - - 581.95
+    - 594.45
+  - - 594.8
+    - 599.425
   beat:
   - 6
   - 7
@@ -738,27 +788,27 @@ scenes:
   related: []
 - id: s11_total_differential
   t:
-  - 562.5
-  - 628.925
+  - 600.225
+  - 666.65
   sentence_times:
-  - - 562.5
-    - 566.6
-  - - 566.95
-    - 575.825
-  - - 576.175
-    - 578.775
-  - - 579.125
-    - 585.575
-  - - 585.925
-    - 590.075
-  - - 590.425
-    - 608.375
-  - - 608.725
-    - 611.45
-  - - 611.8
-    - 620.725
-  - - 621.075
-    - 628.125
+  - - 600.225
+    - 604.325
+  - - 604.675
+    - 613.55
+  - - 613.9
+    - 616.5
+  - - 616.85
+    - 623.3
+  - - 623.65
+    - 627.8
+  - - 628.15
+    - 646.1
+  - - 646.45
+    - 649.175
+  - - 649.525
+    - 658.45
+  - - 658.8
+    - 665.85
   beat: []
   visual: 'Picture zone: the s05 landscape (three.js) with a small gold step arrow from Brest: east leg (orange), north leg (orange), up leg (faint),
     and a clock tick; each leg''s rise drawn as a vertical bar on the surface. S5: maths zone dT = ∂T/∂x dx + ∂T/∂y dy + ∂T/∂z dz + ∂T/∂t dt (84
@@ -789,25 +839,25 @@ scenes:
   related: []
 - id: s12_total_example
   t:
-  - 628.925
-  - 683.45
+  - 666.65
+  - 721.175
   sentence_times:
-  - - 628.925
-    - 631.075
-  - - 631.425
-    - 638.2
-  - - 638.55
-    - 647.75
-  - - 648.1
-    - 656.075
-  - - 656.425
-    - 663.3
-  - - 664.8
-    - 670.325
-  - - 671.825
-    - 676.325
-  - - 676.675
-    - 682.65
+  - - 666.65
+    - 668.8
+  - - 669.15
+    - 675.925
+  - - 676.275
+    - 685.475
+  - - 685.825
+    - 693.8
+  - - 694.15
+    - 701.025
+  - - 702.525
+    - 708.05
+  - - 709.55
+    - 714.05
+  - - 714.4
+    - 720.375
   beat:
   - 5
   - 6
@@ -842,29 +892,29 @@ scenes:
   related: []
 - id: s13_chain_rule
   t:
-  - 683.45
-  - 760.05
+  - 721.175
+  - 797.775
   sentence_times:
-  - - 683.45
-    - 686.2
-  - - 686.55
-    - 691.4
-  - - 691.75
-    - 702.775
-  - - 703.125
-    - 711.7
-  - - 712.05
-    - 714.525
-  - - 714.875
-    - 720.525
-  - - 720.875
-    - 724.875
-  - - 725.225
-    - 744.925
-  - - 745.275
-    - 747.325
-  - - 747.675
-    - 759.25
+  - - 721.175
+    - 723.925
+  - - 724.275
+    - 729.125
+  - - 729.475
+    - 740.5
+  - - 740.85
+    - 749.425
+  - - 749.775
+    - 752.25
+  - - 752.6
+    - 758.25
+  - - 758.6
+    - 762.6
+  - - 762.95
+    - 782.65
+  - - 783.0
+    - 785.05
+  - - 785.4
+    - 796.975
   beat: []
   visual: 'Picture zone: the landscape (s05) with a small plane glyph moving along a teal path; its position readout X(t), Y(t), Z(t) under it.
     S4: the step dX = (dX/dt) dt drawn as a teal leg along the path. S6: maths zone: the total differential from s11, then each dx, dy, dz replaced
@@ -901,21 +951,21 @@ scenes:
     spoken_pointer: true
 - id: s14_chain_meaning
   t:
-  - 760.05
-  - 801.8
+  - 797.775
+  - 839.525
   sentence_times:
-  - - 760.05
-    - 762.475
-  - - 762.825
-    - 767.95
-  - - 768.3
-    - 778.875
-  - - 779.225
-    - 786.55
-  - - 786.9
-    - 793.4
-  - - 793.75
-    - 801.0
+  - - 797.775
+    - 800.2
+  - - 800.55
+    - 805.675
+  - - 806.025
+    - 816.6
+  - - 816.95
+    - 824.275
+  - - 824.625
+    - 831.125
+  - - 831.475
+    - 838.725
   beat: []
   visual: 'Maths zone: the s13 equation; gold underbraces on each term in turn: ''fixed place'' (slate), then ''speed × slope'' under each moving
     term. S3: units line ''m/s × °C/m = °C/s'' with the m struck (Strike). S4: picture zone: the frozen landscape, a traveller sliding into a
@@ -941,21 +991,21 @@ scenes:
   related: []
 - id: s15_chain_easy
   t:
-  - 801.8
-  - 848.125
+  - 839.525
+  - 885.85
   sentence_times:
-  - - 801.8
-    - 806.275
-  - - 806.625
-    - 815.275
-  - - 815.625
-    - 824.9
-  - - 825.25
-    - 833.175
-  - - 833.525
-    - 837.825
-  - - 839.325
-    - 847.325
+  - - 839.525
+    - 844.0
+  - - 844.35
+    - 853.0
+  - - 853.35
+    - 862.625
+  - - 862.975
+    - 870.9
+  - - 871.25
+    - 875.55
+  - - 877.05
+    - 885.05
   beat:
   - 5
   visual: 'Picture zone: a straight road on a frozen schematic map with isotherms every 1 °C 33 km apart (illustrative); a car glyph drives east,
@@ -986,29 +1036,29 @@ scenes:
   related: []
 - id: s16_flight_east
   t:
-  - 848.125
-  - 911.35
+  - 885.85
+  - 949.075
   sentence_times:
-  - - 848.125
-    - 851.075
-  - - 851.425
-    - 862.675
-  - - 863.025
-    - 865.95
-  - - 866.3
-    - 868.6
-  - - 868.95
-    - 873.725
-  - - 874.075
-    - 876.875
-  - - 877.225
-    - 887.775
-  - - 888.125
-    - 894.9
-  - - 896.4
-    - 904.45
-  - - 905.95
-    - 910.55
+  - - 885.85
+    - 888.8
+  - - 889.15
+    - 900.4
+  - - 900.75
+    - 903.675
+  - - 904.025
+    - 906.325
+  - - 906.675
+    - 911.45
+  - - 911.8
+    - 914.6
+  - - 914.95
+    - 925.5
+  - - 925.85
+    - 932.625
+  - - 934.125
+    - 942.175
+  - - 943.675
+    - 948.275
   beat:
   - 8
   - 9
@@ -1047,19 +1097,19 @@ scenes:
   related: []
 - id: s17_flight_west
   t:
-  - 911.35
-  - 949.9
+  - 949.075
+  - 987.625
   sentence_times:
-  - - 911.35
-    - 916.1
-  - - 916.45
-    - 924.275
-  - - 924.625
-    - 931.25
-  - - 932.75
-    - 939.05
-  - - 939.4
-    - 949.1
+  - - 949.075
+    - 953.825
+  - - 954.175
+    - 962.0
+  - - 962.35
+    - 968.975
+  - - 970.475
+    - 976.775
+  - - 977.125
+    - 986.825
   beat:
   - 3
   visual: 'Same map; the plane turns (gentle arc) and flies due west; its readout now rises. CalcStack: ''+2.9 + 11.5 ≈ +14.4 °C/h'' (teal). S3:
@@ -1089,21 +1139,21 @@ scenes:
   related: []
 - id: s18_balloon_rate
   t:
-  - 949.9
-  - 992.125
+  - 987.625
+  - 1029.85
   sentence_times:
-  - - 949.9
-    - 953.175
-  - - 953.525
-    - 961.325
-  - - 961.675
-    - 972.075
-  - - 973.575
-    - 979.35
-  - - 979.7
-    - 987.15
-  - - 988.65
-    - 991.325
+  - - 987.625
+    - 990.9
+  - - 991.25
+    - 999.05
+  - - 999.4
+    - 1009.8
+  - - 1011.3
+    - 1017.075
+  - - 1017.425
+    - 1024.875
+  - - 1026.375
+    - 1029.05
   beat:
   - 3
   - 5
@@ -1137,29 +1187,29 @@ scenes:
   related: []
 - id: s19_balloon_terms
   t:
-  - 992.125
-  - 1073.6
+  - 1029.85
+  - 1111.325
   sentence_times:
-  - - 992.125
-    - 998.325
-  - - 998.675
-    - 1000.925
-  - - 1001.275
-    - 1011.275
-  - - 1011.625
-    - 1016.975
-  - - 1017.325
-    - 1019.7
-  - - 1020.05
-    - 1031.55
-  - - 1031.9
-    - 1043.15
-  - - 1043.5
-    - 1056.275
+  - - 1029.85
+    - 1036.05
+  - - 1036.4
+    - 1038.65
+  - - 1039.0
+    - 1049.0
+  - - 1049.35
+    - 1054.7
+  - - 1055.05
+    - 1057.425
   - - 1057.775
-    - 1063.45
-  - - 1063.8
-    - 1072.8
+    - 1069.275
+  - - 1069.625
+    - 1080.875
+  - - 1081.225
+    - 1094.0
+  - - 1095.5
+    - 1101.175
+  - - 1101.525
+    - 1110.525
   beat:
   - 8
   visual: 'Picture zone: two profiles 00 UTC (faint) and 12 UTC (slate) with the 5.80 km gap bracketed ''−2.6 °C in 12 h''; a small map (ERA5
@@ -1177,7 +1227,7 @@ scenes:
     saw. That''s why we can read a balloon''s record as the temperature profile, partial capital T by partial z, even though the balloon is moving.'
   on_screen_eq:
     latex: \frac{dT}{dt}=\underbrace{\frac{\partial T}{\partial t}}_{-6\times10^{-5}}+\underbrace{u\frac{\partial T}{\partial x}+v\frac{\partial
-      T}{\partial y}}_{\sim-3\times10^{-5}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}
+      T}{\partial y}}_{\approx-3\times10^{-5}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}
     vallis_eq: 'provenance only: Kundu p. 858 display with our magnitudes'
     page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf#page=2
   physics_source:
@@ -1199,23 +1249,23 @@ scenes:
   related: []
 - id: s20_parcel_pointer
   t:
-  - 1073.6
-  - 1133.8
+  - 1111.325
+  - 1171.525
   sentence_times:
-  - - 1073.6
-    - 1080.65
-  - - 1081.0
-    - 1092.025
-  - - 1092.375
-    - 1101.55
-  - - 1101.9
-    - 1111.075
-  - - 1111.425
-    - 1118.225
-  - - 1118.575
-    - 1126.125
-  - - 1127.625
-    - 1133.0
+  - - 1111.325
+    - 1118.375
+  - - 1118.725
+    - 1129.75
+  - - 1130.1
+    - 1139.275
+  - - 1139.625
+    - 1148.8
+  - - 1149.15
+    - 1155.95
+  - - 1156.3
+    - 1163.85
+  - - 1165.35
+    - 1170.725
   beat:
   - 6
   visual: 'Picture zone: MAP850 at Brest with teal 850 hPa streaklines (A1 u, v; RK2 tracks in the build script); one parcel glyph rides a streak,
@@ -1260,29 +1310,29 @@ scenes:
     spoken_pointer: true
 - id: s21_change_variables
   t:
-  - 1133.8
-  - 1206.85
+  - 1171.525
+  - 1244.575
   sentence_times:
-  - - 1133.8
-    - 1138.1
-  - - 1138.45
-    - 1144.225
-  - - 1144.575
-    - 1151.25
-  - - 1151.6
-    - 1156.4
-  - - 1156.75
-    - 1168.875
-  - - 1169.225
-    - 1178.5
-  - - 1178.85
-    - 1185.0
-  - - 1186.5
-    - 1194.975
-  - - 1196.475
-    - 1200.75
-  - - 1201.1
-    - 1206.05
+  - - 1171.525
+    - 1175.825
+  - - 1176.175
+    - 1181.95
+  - - 1182.3
+    - 1188.975
+  - - 1189.325
+    - 1194.125
+  - - 1194.475
+    - 1206.6
+  - - 1206.95
+    - 1216.225
+  - - 1216.575
+    - 1222.725
+  - - 1224.225
+    - 1232.7
+  - - 1234.2
+    - 1238.475
+  - - 1238.825
+    - 1243.775
   beat:
   - 7
   - 8
@@ -1327,27 +1377,27 @@ scenes:
     spoken_pointer: true
 - id: s22_state_functions
   t:
-  - 1206.85
-  - 1261.225
+  - 1244.575
+  - 1298.95
   sentence_times:
-  - - 1206.85
-    - 1210.875
-  - - 1211.225
-    - 1216.1
-  - - 1216.45
-    - 1218.425
-  - - 1218.775
-    - 1230.05
-  - - 1230.4
-    - 1237.025
-  - - 1237.375
-    - 1243.5
-  - - 1243.85
-    - 1249.05
-  - - 1249.4
-    - 1253.975
-  - - 1254.325
-    - 1260.425
+  - - 1244.575
+    - 1248.6
+  - - 1248.95
+    - 1253.825
+  - - 1254.175
+    - 1256.15
+  - - 1256.5
+    - 1267.775
+  - - 1268.125
+    - 1274.75
+  - - 1275.1
+    - 1281.225
+  - - 1281.575
+    - 1286.775
+  - - 1287.125
+    - 1291.7
+  - - 1292.05
+    - 1298.15
   beat: []
   visual: 'Full width 3-D: a real hill (ETOPO 2022 relief of the Monts d''Arrée near Brest, x5 vertical, BMNG texture) with a car park (gold dot)
     and the summit (gold dot); two trails, straight (teal) and winding (orange). S2-S3: a height readout rises to the same ''+200 m'' on both
@@ -1375,35 +1425,35 @@ scenes:
   related: []
 - id: s23_exact_test
   t:
-  - 1261.225
-  - 1332.925
+  - 1298.95
+  - 1370.65
   sentence_times:
-  - - 1261.225
-    - 1264.225
-  - - 1264.575
-    - 1269.825
-  - - 1270.175
-    - 1278.425
-  - - 1278.775
-    - 1283.7
-  - - 1284.05
-    - 1290.15
-  - - 1290.5
-    - 1293.7
-  - - 1294.05
-    - 1299.625
-  - - 1299.975
-    - 1304.5
-  - - 1306.0
-    - 1309.15
-  - - 1309.5
-    - 1311.95
-  - - 1312.3
-    - 1315.75
-  - - 1317.25
-    - 1325.5
-  - - 1327.0
-    - 1332.125
+  - - 1298.95
+    - 1301.95
+  - - 1302.3
+    - 1307.55
+  - - 1307.9
+    - 1316.15
+  - - 1316.5
+    - 1321.425
+  - - 1321.775
+    - 1327.875
+  - - 1328.225
+    - 1331.425
+  - - 1331.775
+    - 1337.35
+  - - 1337.7
+    - 1342.225
+  - - 1343.725
+    - 1346.875
+  - - 1347.225
+    - 1349.675
+  - - 1350.025
+    - 1353.475
+  - - 1354.975
+    - 1363.225
+  - - 1364.725
+    - 1369.85
   beat:
   - 8
   - 11
@@ -1440,31 +1490,31 @@ scenes:
   related: []
 - id: s24_ideal_gas
   t:
-  - 1332.925
-  - 1406.875
+  - 1370.65
+  - 1444.6
   sentence_times:
-  - - 1332.925
-    - 1334.65
-  - - 1335.0
-    - 1342.3
-  - - 1342.65
-    - 1355.625
-  - - 1355.975
-    - 1362.45
-  - - 1362.8
-    - 1371.9
-  - - 1372.25
-    - 1374.05
-  - - 1374.4
-    - 1381.1
-  - - 1381.45
-    - 1386.2
-  - - 1387.7
-    - 1391.875
-  - - 1392.225
-    - 1397.55
-  - - 1397.9
-    - 1406.075
+  - - 1370.65
+    - 1372.375
+  - - 1372.725
+    - 1380.025
+  - - 1380.375
+    - 1393.35
+  - - 1393.7
+    - 1400.175
+  - - 1400.525
+    - 1409.625
+  - - 1409.975
+    - 1411.775
+  - - 1412.125
+    - 1418.825
+  - - 1419.175
+    - 1423.925
+  - - 1425.425
+    - 1429.6
+  - - 1429.95
+    - 1435.275
+  - - 1435.625
+    - 1443.8
   beat:
   - 8
   visual: 'Picture zone: a cube of air (three.js, 1 m), molecules as faint dots; readouts p, ρ, T beside it. Maths zone: ''p = ρRT'' (96 px) with
@@ -1501,23 +1551,23 @@ scenes:
     spoken_pointer: false
 - id: s25_ideal_gas_example
   t:
-  - 1406.875
-  - 1455.475
+  - 1444.6
+  - 1493.2
   sentence_times:
-  - - 1406.875
-    - 1408.575
-  - - 1408.925
-    - 1418.475
-  - - 1418.825
-    - 1429.475
-  - - 1430.975
-    - 1437.125
-  - - 1437.475
-    - 1439.575
-  - - 1439.925
-    - 1447.45
-  - - 1448.95
-    - 1454.675
+  - - 1444.6
+    - 1446.3
+  - - 1446.65
+    - 1456.2
+  - - 1456.55
+    - 1467.2
+  - - 1468.7
+    - 1474.85
+  - - 1475.2
+    - 1477.3
+  - - 1477.65
+    - 1485.175
+  - - 1486.675
+    - 1492.4
   beat:
   - 3
   - 6
@@ -1551,25 +1601,25 @@ scenes:
   related: []
 - id: s26_hydrostatic
   t:
-  - 1455.475
-  - 1516.925
+  - 1493.2
+  - 1554.65
   sentence_times:
-  - - 1455.475
-    - 1457.95
-  - - 1458.3
-    - 1466.425
-  - - 1466.775
-    - 1475.525
-  - - 1475.875
-    - 1481.375
-  - - 1481.725
-    - 1487.625
-  - - 1487.975
-    - 1497.525
-  - - 1499.025
-    - 1511.0
-  - - 1511.35
-    - 1515.425
+  - - 1493.2
+    - 1495.675
+  - - 1496.025
+    - 1504.15
+  - - 1504.5
+    - 1513.25
+  - - 1513.6
+    - 1519.1
+  - - 1519.45
+    - 1525.35
+  - - 1525.7
+    - 1535.25
+  - - 1536.75
+    - 1548.725
+  - - 1549.075
+    - 1553.15
   beat:
   - 6
   - 8
@@ -1607,29 +1657,29 @@ scenes:
     spoken_pointer: true
 - id: s27_exponential
   t:
-  - 1516.925
-  - 1584.45
+  - 1554.65
+  - 1622.175
   sentence_times:
-  - - 1516.925
-    - 1522.05
-  - - 1522.4
-    - 1531.8
-  - - 1532.15
-    - 1539.125
-  - - 1539.475
-    - 1542.85
-  - - 1543.2
-    - 1554.725
-  - - 1555.075
-    - 1562.6
-  - - 1562.95
-    - 1565.35
-  - - 1565.7
-    - 1572.15
-  - - 1572.5
-    - 1579.15
-  - - 1579.5
-    - 1583.65
+  - - 1554.65
+    - 1559.775
+  - - 1560.125
+    - 1569.525
+  - - 1569.875
+    - 1576.85
+  - - 1577.2
+    - 1580.575
+  - - 1580.925
+    - 1592.45
+  - - 1592.8
+    - 1600.325
+  - - 1600.675
+    - 1603.075
+  - - 1603.425
+    - 1609.875
+  - - 1610.225
+    - 1616.875
+  - - 1617.225
+    - 1621.375
   beat: []
   visual: 'Picture zone: p (hPa, 1000-0, log-free linear axis) against height (0-30 km); the isothermal exponential p₀e^(−z/H) (slate) draws itself;
     then the balloon''s measured p(z) (teal dots, every IGRA level) rises along it, drifting below above ~3 km; the gap shaded faintly. Maths
@@ -1664,35 +1714,35 @@ scenes:
     spoken_pointer: true
 - id: s28_heat_routes
   t:
-  - 1584.45
-  - 1678.425
+  - 1622.175
+  - 1716.15
   sentence_times:
-  - - 1584.45
-    - 1589.725
-  - - 1590.075
-    - 1594.15
-  - - 1594.5
-    - 1606.4
-  - - 1606.75
-    - 1616.4
-  - - 1616.75
-    - 1625.7
-  - - 1626.05
-    - 1632.325
-  - - 1632.675
-    - 1636.7
-  - - 1637.05
-    - 1642.975
-  - - 1643.325
-    - 1649.85
-  - - 1651.35
-    - 1656.225
-  - - 1656.575
-    - 1663.75
-  - - 1664.1
-    - 1666.175
-  - - 1666.525
-    - 1677.625
+  - - 1622.175
+    - 1627.45
+  - - 1627.8
+    - 1631.875
+  - - 1632.225
+    - 1644.125
+  - - 1644.475
+    - 1654.125
+  - - 1654.475
+    - 1663.425
+  - - 1663.775
+    - 1670.05
+  - - 1670.4
+    - 1674.425
+  - - 1674.775
+    - 1680.7
+  - - 1681.05
+    - 1687.575
+  - - 1689.075
+    - 1693.95
+  - - 1694.3
+    - 1701.475
+  - - 1701.825
+    - 1703.9
+  - - 1704.25
+    - 1715.35
   beat:
   - 9
   visual: 'Picture zone: a p-α diagram (α = specific volume on x, 0.7-1.3 m³/kg; p on y, hPa); start A (0.80 m³/kg, 280 K, 1005 hPa) and end B
@@ -1738,41 +1788,41 @@ scenes:
   related: []
 - id: s29_entropy
   t:
-  - 1678.425
-  - 1777.875
+  - 1716.15
+  - 1815.6
   sentence_times:
-  - - 1678.425
-    - 1680.45
-  - - 1680.8
-    - 1688.125
-  - - 1688.475
-    - 1695.075
-  - - 1695.425
-    - 1702.075
-  - - 1702.425
-    - 1713.55
-  - - 1713.9
-    - 1717.475
-  - - 1717.825
-    - 1719.625
-  - - 1719.975
-    - 1729.625
-  - - 1729.975
-    - 1733.925
-  - - 1735.425
-    - 1738.3
-  - - 1738.65
-    - 1743.425
-  - - 1743.775
-    - 1746.7
-  - - 1747.05
-    - 1748.6
-  - - 1750.1
-    - 1758.475
-  - - 1758.825
-    - 1766.875
-  - - 1768.375
-    - 1777.075
+  - - 1716.15
+    - 1718.175
+  - - 1718.525
+    - 1725.85
+  - - 1726.2
+    - 1732.8
+  - - 1733.15
+    - 1739.8
+  - - 1740.15
+    - 1751.275
+  - - 1751.625
+    - 1755.2
+  - - 1755.55
+    - 1757.35
+  - - 1757.7
+    - 1767.35
+  - - 1767.7
+    - 1771.65
+  - - 1773.15
+    - 1776.025
+  - - 1776.375
+    - 1781.15
+  - - 1781.5
+    - 1784.425
+  - - 1784.775
+    - 1786.325
+  - - 1787.825
+    - 1796.2
+  - - 1796.55
+    - 1804.6
+  - - 1806.1
+    - 1814.8
   beat:
   - 9
   - 13
@@ -1817,29 +1867,29 @@ scenes:
     spoken_pointer: true
 - id: s30_zoom
   t:
-  - 1777.875
-  - 1816.025
+  - 1815.6
+  - 1853.75
   sentence_times:
-  - - 1777.875
-    - 1779.8
-  - - 1780.15
-    - 1786.125
-  - - 1786.475
-    - 1789.925
-  - - 1790.275
-    - 1793.75
-  - - 1794.1
-    - 1795.575
-  - - 1795.925
-    - 1797.4
-  - - 1797.75
-    - 1801.85
-  - - 1802.2
-    - 1806.725
-  - - 1807.075
-    - 1811.9
-  - - 1812.25
-    - 1815.225
+  - - 1815.6
+    - 1817.525
+  - - 1817.875
+    - 1823.85
+  - - 1824.2
+    - 1827.65
+  - - 1828.0
+    - 1831.475
+  - - 1831.825
+    - 1833.3
+  - - 1833.65
+    - 1835.125
+  - - 1835.475
+    - 1839.575
+  - - 1839.925
+    - 1844.45
+  - - 1844.8
+    - 1849.625
+  - - 1849.975
+    - 1852.95
   beat: []
   visual: 'Picture zone: the full Trappes profile 0-32 km (slate, °C ticks, km ticks), tropopause kink visible at ~13 km. S3-S5: MapCamera zooms
     on 1.53 km three times (×4 each, ticks re-label so values stay true); the gold tangent through the point stays drawn; at the last zoom the
@@ -1864,31 +1914,31 @@ scenes:
   related: []
 - id: s31_linear_approx
   t:
-  - 1816.025
-  - 1881.15
+  - 1853.75
+  - 1918.875
   sentence_times:
-  - - 1816.025
-    - 1818.725
-  - - 1819.075
-    - 1827.675
-  - - 1828.025
-    - 1832.9
-  - - 1833.25
-    - 1840.15
-  - - 1840.5
-    - 1844.0
-  - - 1844.35
-    - 1851.425
-  - - 1852.925
-    - 1858.375
-  - - 1859.875
-    - 1863.65
-  - - 1864.0
-    - 1869.9
-  - - 1870.25
-    - 1872.9
-  - - 1874.4
-    - 1880.35
+  - - 1853.75
+    - 1856.45
+  - - 1856.8
+    - 1865.4
+  - - 1865.75
+    - 1870.625
+  - - 1870.975
+    - 1877.875
+  - - 1878.225
+    - 1881.725
+  - - 1882.075
+    - 1889.15
+  - - 1890.65
+    - 1896.1
+  - - 1897.6
+    - 1901.375
+  - - 1901.725
+    - 1907.625
+  - - 1907.975
+    - 1910.625
+  - - 1912.125
+    - 1918.075
   beat:
   - 6
   - 7
@@ -1926,31 +1976,31 @@ scenes:
   related: []
 - id: s32_add_bend
   t:
-  - 1881.15
-  - 1949.25
+  - 1918.875
+  - 1986.975
   sentence_times:
-  - - 1881.15
-    - 1884.325
-  - - 1884.675
-    - 1890.425
-  - - 1890.775
-    - 1895.5
-  - - 1895.85
-    - 1897.975
-  - - 1898.325
-    - 1902.0
-  - - 1902.35
-    - 1906.8
-  - - 1907.15
-    - 1912.525
-  - - 1914.025
-    - 1924.625
-  - - 1924.975
-    - 1929.7
-  - - 1930.05
-    - 1933.525
-  - - 1933.875
-    - 1948.45
+  - - 1918.875
+    - 1922.05
+  - - 1922.4
+    - 1928.15
+  - - 1928.5
+    - 1933.225
+  - - 1933.575
+    - 1935.7
+  - - 1936.05
+    - 1939.725
+  - - 1940.075
+    - 1944.525
+  - - 1944.875
+    - 1950.25
+  - - 1951.75
+    - 1962.35
+  - - 1962.7
+    - 1967.425
+  - - 1967.775
+    - 1971.25
+  - - 1971.6
+    - 1986.175
   beat:
   - 7
   visual: 'Picture zone: a parabola c h² beside its slope 2ch (line) and second derivative 2c (flat), stacked (house Grid). Maths zone: ''h²/2
@@ -1981,23 +2031,23 @@ scenes:
   related: []
 - id: s33_series_example
   t:
-  - 1949.25
-  - 2007.35
+  - 1986.975
+  - 2045.075
   sentence_times:
-  - - 1949.25
-    - 1954.075
-  - - 1954.425
-    - 1959.275
-  - - 1959.625
-    - 1967.025
-  - - 1967.375
-    - 1977.925
-  - - 1979.425
-    - 1988.025
-  - - 1989.525
-    - 2000.675
-  - - 2002.175
-    - 2006.55
+  - - 1986.975
+    - 1991.8
+  - - 1992.15
+    - 1997.0
+  - - 1997.35
+    - 2004.75
+  - - 2005.1
+    - 2015.65
+  - - 2017.15
+    - 2025.75
+  - - 2027.25
+    - 2038.4
+  - - 2039.9
+    - 2044.275
   beat:
   - 4
   - 5
@@ -2037,27 +2087,27 @@ scenes:
   related: []
 - id: s34_pressure_line
   t:
-  - 2007.35
-  - 2070.75
+  - 2045.075
+  - 2108.475
   sentence_times:
-  - - 2007.35
-    - 2009.075
-  - - 2009.425
-    - 2018.025
-  - - 2018.375
-    - 2023.975
-  - - 2024.325
-    - 2033.4
-  - - 2034.9
-    - 2043.875
-  - - 2045.375
-    - 2051.55
-  - - 2051.9
-    - 2055.425
-  - - 2055.775
-    - 2060.35
-  - - 2060.7
-    - 2069.25
+  - - 2045.075
+    - 2046.8
+  - - 2047.15
+    - 2055.75
+  - - 2056.1
+    - 2061.7
+  - - 2062.05
+    - 2071.125
+  - - 2072.625
+    - 2081.6
+  - - 2083.1
+    - 2089.275
+  - - 2089.625
+    - 2093.15
+  - - 2093.5
+    - 2098.075
+  - - 2098.425
+    - 2106.975
   beat:
   - 4
   - 5
@@ -2093,23 +2143,23 @@ scenes:
   related: []
 - id: s35_pressure_far
   t:
-  - 2070.75
-  - 2127.55
+  - 2108.475
+  - 2165.275
   sentence_times:
-  - - 2070.75
-    - 2078.2
-  - - 2078.55
-    - 2083.0
-  - - 2084.5
-    - 2091.325
-  - - 2092.825
-    - 2099.725
-  - - 2101.225
-    - 2109.525
-  - - 2109.875
-    - 2120.675
-  - - 2122.175
-    - 2126.75
+  - - 2108.475
+    - 2115.925
+  - - 2116.275
+    - 2120.725
+  - - 2122.225
+    - 2129.05
+  - - 2130.55
+    - 2137.45
+  - - 2138.95
+    - 2147.25
+  - - 2147.6
+    - 2158.4
+  - - 2159.9
+    - 2164.475
   beat:
   - 2
   - 3
@@ -2143,21 +2193,21 @@ scenes:
   related: []
 - id: s36_where_fails
   t:
-  - 2127.55
-  - 2166.6
+  - 2165.275
+  - 2204.325
   sentence_times:
-  - - 2127.55
-    - 2130.175
-  - - 2130.525
-    - 2139.725
-  - - 2140.075
-    - 2143.75
-  - - 2144.1
-    - 2150.975
-  - - 2151.325
-    - 2157.7
-  - - 2158.05
-    - 2165.8
+  - - 2165.275
+    - 2167.9
+  - - 2168.25
+    - 2177.45
+  - - 2177.8
+    - 2181.475
+  - - 2181.825
+    - 2188.7
+  - - 2189.05
+    - 2195.425
+  - - 2195.775
+    - 2203.525
   beat: []
   visual: 'Picture zone: the profile 8-20 km; the tropopause kink at 13.07 km (−66.3 °C) marked (gold), keyword ''tropopause''; the line and the
     quadratic fitted just below it run on into ever colder air above (rose dashed), the real curve turns warmer. S5: inset MAP850 cross-section
@@ -2181,23 +2231,23 @@ scenes:
   related: []
 - id: s37_three_reasons
   t:
-  - 2166.6
-  - 2213.775
+  - 2204.325
+  - 2251.5
   sentence_times:
-  - - 2166.6
-    - 2169.45
-  - - 2169.8
-    - 2171.975
-  - - 2172.325
-    - 2183.4
-  - - 2183.75
-    - 2194.425
-  - - 2194.775
-    - 2198.25
-  - - 2198.6
-    - 2201.025
-  - - 2201.375
-    - 2212.975
+  - - 2204.325
+    - 2207.175
+  - - 2207.525
+    - 2209.7
+  - - 2210.05
+    - 2221.125
+  - - 2221.475
+    - 2232.15
+  - - 2232.5
+    - 2235.975
+  - - 2236.325
+    - 2238.75
+  - - 2239.1
+    - 2250.7
   beat: []
   visual: 'Three beats, one picture each (no cards): S2-S3 the s05 slice wall returning on the landscape (''one at a time''); S4-S5 the s11 step
     legs adding on a flattened patch (''slope × step''); S6-S7 the s31 line with its error bracket growing, then a tiny model grid laid on the
@@ -2219,19 +2269,19 @@ scenes:
   related: []
 - id: s38_linearisation
   t:
-  - 2213.775
-  - 2247.475
+  - 2251.5
+  - 2285.2
   sentence_times:
-  - - 2213.775
-    - 2220.675
-  - - 2221.025
-    - 2227.025
-  - - 2227.375
-    - 2234.975
-  - - 2235.325
-    - 2242.9
-  - - 2243.25
-    - 2246.675
+  - - 2251.5
+    - 2258.4
+  - - 2258.75
+    - 2264.75
+  - - 2265.1
+    - 2272.7
+  - - 2273.05
+    - 2280.625
+  - - 2280.975
+    - 2284.4
   beat: []
   visual: 'Maths zone: ''f(x₀ + δ) ≈ f(x₀) + f′(x₀) δ'' (96 px), keyword ''linearisation''; picture zone: a curve with its tangent; a small wave
     riding on a flat line labelled ''quiet state + small disturbance'' (two keywords, 54 px); S4 two tiny thumbnails (a wave train; a storm swirl
@@ -2263,31 +2313,31 @@ scenes:
     spoken_pointer: true
 - id: s39_cc_curve
   t:
-  - 2247.475
-  - 2328.225
+  - 2285.2
+  - 2365.95
   sentence_times:
-  - - 2247.475
-    - 2249.75
-  - - 2250.1
-    - 2258.575
-  - - 2258.925
-    - 2263.2
-  - - 2263.55
-    - 2272.575
-  - - 2272.925
-    - 2280.475
-  - - 2280.825
-    - 2287.25
-  - - 2287.6
-    - 2299.6
-  - - 2299.95
-    - 2307.25
-  - - 2307.6
-    - 2310.625
-  - - 2310.975
-    - 2323.475
-  - - 2323.825
-    - 2327.425
+  - - 2285.2
+    - 2287.475
+  - - 2287.825
+    - 2296.3
+  - - 2296.65
+    - 2300.925
+  - - 2301.275
+    - 2310.3
+  - - 2310.65
+    - 2318.2
+  - - 2318.55
+    - 2324.975
+  - - 2325.325
+    - 2337.325
+  - - 2337.675
+    - 2344.975
+  - - 2345.325
+    - 2348.35
+  - - 2348.7
+    - 2361.2
+  - - 2361.55
+    - 2365.15
   beat: []
   visual: 'Picture zone: a water surface (code-drawn, illustrative) with vapour dots leaving it and some returning (S2), the two counts balancing
     on S4 (keyword ''saturated''); then the saturation curve e_s(T) from −10 to 35 °C (teal, hPa 0-60, 52 px ticks) drawing itself. S5: keyword
@@ -2330,29 +2380,29 @@ scenes:
     spoken_pointer: true
 - id: s40_cc_linear
   t:
-  - 2328.225
-  - 2396.35
+  - 2365.95
+  - 2434.075
   sentence_times:
-  - - 2328.225
-    - 2331.525
-  - - 2331.875
-    - 2334.725
-  - - 2335.075
-    - 2339.825
-  - - 2340.175
-    - 2353.7
-  - - 2355.2
-    - 2361.475
-  - - 2362.975
-    - 2371.5
-  - - 2371.85
-    - 2373.8
-  - - 2374.15
-    - 2380.75
-  - - 2381.1
-    - 2387.5
-  - - 2389.0
-    - 2395.55
+  - - 2365.95
+    - 2369.25
+  - - 2369.6
+    - 2372.45
+  - - 2372.8
+    - 2377.55
+  - - 2377.9
+    - 2391.425
+  - - 2392.925
+    - 2399.2
+  - - 2400.7
+    - 2409.225
+  - - 2409.575
+    - 2411.525
+  - - 2411.875
+    - 2418.475
+  - - 2418.825
+    - 2425.225
+  - - 2426.725
+    - 2433.275
   beat:
   - 4
   - 5
@@ -2397,23 +2447,23 @@ scenes:
   related: []
 - id: s41_cc_climate
   t:
-  - 2396.35
-  - 2450.15
+  - 2434.075
+  - 2487.875
   sentence_times:
-  - - 2396.35
-    - 2398.25
-  - - 2398.6
-    - 2404.8
-  - - 2405.15
-    - 2411.725
-  - - 2413.225
-    - 2424.075
-  - - 2424.425
-    - 2431.7
-  - - 2432.05
-    - 2436.175
-  - - 2436.525
-    - 2449.35
+  - - 2434.075
+    - 2435.975
+  - - 2436.325
+    - 2442.525
+  - - 2442.875
+    - 2449.45
+  - - 2450.95
+    - 2461.8
+  - - 2462.15
+    - 2469.425
+  - - 2469.775
+    - 2473.9
+  - - 2474.25
+    - 2487.075
   beat:
   - 3
   visual: 'Picture zone: S2 keyword ''+1.26 °C (2016–2025)''. S3: CalcStack ''1.26 × 7 % ≈ 9 %'' with ''e_s'' beside the result. S4: keyword ''measured
@@ -2449,29 +2499,29 @@ scenes:
     spoken_pointer: true
 - id: s42_planck
   t:
-  - 2450.15
-  - 2527.425
+  - 2487.875
+  - 2565.15
   sentence_times:
-  - - 2450.15
-    - 2453.225
-  - - 2453.575
-    - 2463.0
-  - - 2463.35
-    - 2470.475
-  - - 2470.825
-    - 2477.35
-  - - 2477.7
-    - 2487.9
-  - - 2488.25
-    - 2496.8
-  - - 2498.3
-    - 2503.425
-  - - 2503.775
-    - 2510.65
-  - - 2511.0
-    - 2515.925
-  - - 2516.275
-    - 2525.925
+  - - 2487.875
+    - 2490.95
+  - - 2491.3
+    - 2500.725
+  - - 2501.075
+    - 2508.2
+  - - 2508.55
+    - 2515.075
+  - - 2515.425
+    - 2525.625
+  - - 2525.975
+    - 2534.525
+  - - 2536.025
+    - 2541.15
+  - - 2541.5
+    - 2548.375
+  - - 2548.725
+    - 2553.65
+  - - 2554.0
+    - 2563.65
   beat:
   - 6
   - 10
@@ -2512,27 +2562,27 @@ scenes:
     spoken_pointer: true
 - id: s43_planck_meaning
   t:
-  - 2527.425
-  - 2597.575
+  - 2565.15
+  - 2635.3
   sentence_times:
-  - - 2527.425
-    - 2535.475
-  - - 2535.825
-    - 2542.4
-  - - 2542.75
-    - 2553.3
-  - - 2554.8
-    - 2565.075
-  - - 2565.425
-    - 2575.525
-  - - 2575.875
-    - 2578.55
-  - - 2578.9
-    - 2586.075
-  - - 2586.425
-    - 2589.95
-  - - 2591.45
-    - 2596.775
+  - - 2565.15
+    - 2573.2
+  - - 2573.55
+    - 2580.125
+  - - 2580.475
+    - 2591.025
+  - - 2592.525
+    - 2602.8
+  - - 2603.15
+    - 2613.25
+  - - 2613.6
+    - 2616.275
+  - - 2616.625
+    - 2623.8
+  - - 2624.15
+    - 2627.675
+  - - 2629.175
+    - 2634.5
   beat:
   - 3
   - 8
@@ -2578,31 +2628,31 @@ scenes:
     spoken_pointer: false
 - id: s44_fd_forward
   t:
-  - 2597.575
-  - 2652.1
+  - 2635.3
+  - 2689.825
   sentence_times:
-  - - 2597.575
-    - 2601.225
-  - - 2601.575
-    - 2606.325
-  - - 2606.675
-    - 2615.475
-  - - 2615.825
-    - 2617.55
-  - - 2617.9
-    - 2620.125
-  - - 2620.475
-    - 2629.2
-  - - 2629.55
-    - 2632.825
-  - - 2633.175
-    - 2639.05
-  - - 2639.4
+  - - 2635.3
+    - 2638.95
+  - - 2639.3
     - 2644.05
   - - 2644.4
-    - 2647.25
-  - - 2648.75
-    - 2651.3
+    - 2653.2
+  - - 2653.55
+    - 2655.275
+  - - 2655.625
+    - 2657.85
+  - - 2658.2
+    - 2666.925
+  - - 2667.275
+    - 2670.55
+  - - 2670.9
+    - 2676.775
+  - - 2677.125
+    - 2681.775
+  - - 2682.125
+    - 2684.975
+  - - 2686.475
+    - 2689.025
   beat:
   - 10
   visual: 'Picture zone: a smooth curve with grid points h apart (ink dots), the forward secant (teal) vs the tangent (gold), the gap bracketed
@@ -2631,29 +2681,29 @@ scenes:
   related: []
 - id: s45_fd_centred
   t:
-  - 2652.1
-  - 2717.125
+  - 2689.825
+  - 2754.85
   sentence_times:
-  - - 2652.1
-    - 2661.15
-  - - 2661.5
-    - 2664.2
-  - - 2664.55
-    - 2674.1
-  - - 2674.45
-    - 2679.15
-  - - 2679.5
-    - 2684.1
-  - - 2684.45
-    - 2691.5
-  - - 2693.0
-    - 2696.5
-  - - 2696.85
-    - 2699.15
-  - - 2700.65
-    - 2706.075
-  - - 2706.425
-    - 2715.625
+  - - 2689.825
+    - 2698.875
+  - - 2699.225
+    - 2701.925
+  - - 2702.275
+    - 2711.825
+  - - 2712.175
+    - 2716.875
+  - - 2717.225
+    - 2721.825
+  - - 2722.175
+    - 2729.225
+  - - 2730.725
+    - 2734.225
+  - - 2734.575
+    - 2736.875
+  - - 2738.375
+    - 2743.8
+  - - 2744.15
+    - 2753.35
   beat:
   - 6
   - 8
@@ -2687,31 +2737,31 @@ scenes:
   related: []
 - id: s46_fd_grid
   t:
-  - 2717.125
-  - 2801.4
+  - 2754.85
+  - 2839.125
   sentence_times:
-  - - 2717.125
-    - 2719.375
-  - - 2719.725
-    - 2736.25
-  - - 2737.75
-    - 2740.55
-  - - 2740.9
-    - 2751.8
-  - - 2753.3
-    - 2763.85
-  - - 2765.35
-    - 2772.025
-  - - 2772.375
-    - 2775.475
-  - - 2775.825
-    - 2784.1
-  - - 2784.45
-    - 2789.15
-  - - 2789.5
-    - 2795.65
-  - - 2796.0
-    - 2800.6
+  - - 2754.85
+    - 2757.1
+  - - 2757.45
+    - 2773.975
+  - - 2775.475
+    - 2778.275
+  - - 2778.625
+    - 2789.525
+  - - 2791.025
+    - 2801.575
+  - - 2803.075
+    - 2809.75
+  - - 2810.1
+    - 2813.2
+  - - 2813.55
+    - 2821.825
+  - - 2822.175
+    - 2826.875
+  - - 2827.225
+    - 2833.375
+  - - 2833.725
+    - 2838.325
   beat:
   - 2
   - 4
@@ -2757,31 +2807,31 @@ scenes:
     spoken_pointer: true
 - id: s47_recap
   t:
-  - 2801.4
-  - 2883.275
+  - 2839.125
+  - 2921.0
   sentence_times:
-  - - 2801.4
-    - 2807.025
-  - - 2807.375
-    - 2812.35
-  - - 2812.7
-    - 2823.425
-  - - 2823.775
-    - 2832.8
-  - - 2833.15
-    - 2840.05
-  - - 2840.4
-    - 2846.65
-  - - 2847.0
-    - 2852.875
-  - - 2853.225
-    - 2859.05
-  - - 2859.4
-    - 2864.625
-  - - 2864.975
-    - 2876.6
-  - - 2876.95
-    - 2882.475
+  - - 2839.125
+    - 2844.75
+  - - 2845.1
+    - 2850.075
+  - - 2850.425
+    - 2861.15
+  - - 2861.5
+    - 2870.525
+  - - 2870.875
+    - 2877.775
+  - - 2878.125
+    - 2884.375
+  - - 2884.725
+    - 2890.6
+  - - 2890.95
+    - 2896.775
+  - - 2897.125
+    - 2902.35
+  - - 2902.7
+    - 2914.325
+  - - 2914.675
+    - 2920.2
   beat: []
   visual: 'One screen beat per sentence, each a mini picture from its scene (no cards, no headings): tangent (s03); slice wall (s05) with ''−3.2
     per 100 km'' and the fixed thermometer ''+2.9 °C/h''; step legs (s11) -> chain rule row; the plane ''−8.6 °C/h''; the balloon ''−1.6 °C/min'';
@@ -2808,15 +2858,15 @@ scenes:
   related: []
 - id: s48_end
   t:
-  - 2883.275
-  - 2907.15
+  - 2921.0
+  - 2944.875
   sentence_times:
-  - - 2883.275
-    - 2889.475
-  - - 2889.825
-    - 2897.875
-  - - 2898.225
-    - 2906.85
+  - - 2921.0
+    - 2927.2
+  - - 2927.55
+    - 2935.6
+  - - 2935.95
+    - 2944.575
   beat: []
   visual: 'HOUSE_STYLE §3 maths end card: four faint topic thumbnails along the top (dot product, vectors and index notation, this movie''s tangent
     on the Trappes profile, a gradient teaser); ''a series of maths tutorials'' (68 px); ''atmospheric science · meteorology · fluid dynamics''
@@ -2874,3 +2924,13 @@ fix1_build:
     split at ≈; M3 s28 first law + definitions, s29 'first law turned round'; M4 route labels lifted, unit J kg⁻¹ K⁻¹; M5 s35 'balloon 500 hPa'
     in the stack; §5b s09 large globe frame with soft edge fades, s42 graph and readout beside the CERES globe; source lines windowed to their
     data (s00, s32, s37, s38, s41, s46, s47)
+fix2_build:
+  date: '2026-10-30'
+  review: reports/ch00_movies.md 'ch00_derivatives_taylor — review 2' (1 Must, 10 Should) + the §5b layer stack (retrofit plan §3.7 K4)
+  narration: 3 new sentences (s09b); splice_fix2.py keeps the fix-1 clips sample for sample; each new clip one constant gain to its neighbours'
+    BS.1770 loudness + a 5-ms look-ahead limiter; all 3 within ±1.5 LU; Whisper 3/3
+  visual: 'M1 s20 three bar rows from x 1120, labels right of bars, ''each parcel: −0.8'' own row; S1 s28 S1 keyword; S2 s28 ≈300-px parcel through
+    the routes, volume + tint per route; S3 route-two label off its curve; S4 s19 ERA5 500-hPa isotherms + animated drift; S5 ''−u·∇T = +3.7'';
+    S6 readouts below the maps with K3 Callouts (s07, s08, s12, s13, s16, s17, s19, s20, s46); S7 s09 house zoom-reveal (GlobeFrame) with zoom
+    back out; S8 s42 ≈760-px CERES globe, eases back for the graph, fraction lifted; S9 \dfrac at 56 (s03, s23, s32), s33 list at 56, s19 underbrace
+    numbers hidden; S10 minor contacts; s09b layer stack (K5); K2 source lines in the changed scenes; BoxProbe (K6) mounted on the prop bbox'

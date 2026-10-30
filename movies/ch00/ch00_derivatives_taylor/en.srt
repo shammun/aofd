@@ -546,2837 +546,2884 @@ so here the lapse rate is plus
 five point seven degrees per kilometre.
 
 116
-00:07:54,175 --> 00:07:58,525
+00:07:54,175 --> 00:07:58,650
+Now let's look at the temperature over all
+of northern France at once,
+
+117
+00:07:58,650 --> 00:07:59,864
+at the same moment,
+
+118
+00:07:59,864 --> 00:08:04,850
+on five levels from near the ground
+to about sixteen and a half kilometres up.
+
+119
+00:08:05,200 --> 00:08:09,766
+Above Trappes, the change in temperature
+divided by the gap in height
+
+120
+00:08:09,766 --> 00:08:13,191
+between neighbouring levels
+is minus six point two,
+
+121
+00:08:13,191 --> 00:08:14,601
+minus five point six,
+
+122
+00:08:14,601 --> 00:08:19,100
+and minus seven point seven degrees
+per kilometre: colder going up.
+
+123
+00:08:19,450 --> 00:08:24,925
+In the top gap, above thirteen kilometres,
+the sign flips to plus one point one:
+
+124
+00:08:24,925 --> 00:08:28,415
+above the tropopause,
+the lid on the weather layer,
+
+125
+00:08:28,415 --> 00:08:30,400
+the air gets warmer going up.
+
+126
+00:08:31,900 --> 00:08:36,250
 We can also take a partial
 derivative of a partial derivative.
 
-117
-00:07:58,875 --> 00:08:03,620
+127
+00:08:36,600 --> 00:08:41,345
 Let's take the eastward slope,
 partial capital T by partial x,
 
-118
-00:08:03,620 --> 00:08:06,375
+128
+00:08:41,345 --> 00:08:44,100
 and ask how fast it changes in time.
 
-119
-00:08:06,725 --> 00:08:10,161
+129
+00:08:44,450 --> 00:08:47,886
 Or, the other way
 round, take the warming rate,
 
-120
-00:08:10,161 --> 00:08:15,425
+130
+00:08:47,886 --> 00:08:53,150
 partial capital T by partial small t, and
 ask how it changes going east.
 
-121
-00:08:15,775 --> 00:08:18,235
+131
+00:08:53,500 --> 00:08:55,960
 These sound like different questions,
 
-122
-00:08:18,235 --> 00:08:21,625
+132
+00:08:55,960 --> 00:08:59,350
 but for any smooth field
 they give the same answer.
 
-123
-00:08:21,975 --> 00:08:26,975
+133
+00:08:59,700 --> 00:09:04,700
 Let's check with an easy
 field, T equals x squared times small t.
 
-124
-00:08:27,325 --> 00:08:32,300
+134
+00:09:05,050 --> 00:09:10,025
 The slope in x is two x small t, and
 its rate in time is two x.
 
-125
-00:08:33,800 --> 00:08:38,625
+135
+00:09:11,525 --> 00:09:16,350
 The rate in time is x squared,
 and its slope in x is also two x.
 
-126
-00:08:40,125 --> 00:08:44,476
+136
+00:09:17,850 --> 00:09:22,201
 Over Brest, the reanalysis gives
 both as one point four times
 
-127
-00:08:44,476 --> 00:08:48,175
+137
+00:09:22,201 --> 00:09:25,900
 ten to the minus nine
 degrees per metre per second.
 
-128
-00:08:49,675 --> 00:08:51,925
+138
+00:09:27,400 --> 00:09:29,650
 Here's why they must agree.
 
-129
-00:08:52,275 --> 00:08:55,285
+139
+00:09:30,000 --> 00:09:33,010
 Both are built from the same four values,
 
-130
-00:08:55,285 --> 00:08:58,516
+140
+00:09:33,010 --> 00:09:36,241
 at the corners of a small
 rectangle in x and
 
-131
-00:08:58,516 --> 00:09:03,875
+141
+00:09:36,241 --> 00:09:41,600
 small t: top right, minus top left, minus
 bottom right, plus bottom left.
 
-132
-00:09:04,225 --> 00:09:08,674
+142
+00:09:41,950 --> 00:09:46,399
 At Brest, the four corners give
 zero point three seven degrees,
 
-133
-00:09:08,674 --> 00:09:12,064
+143
+00:09:46,399 --> 00:09:49,789
 divided by thirty
 six point eight kilometres and
 
-134
-00:09:12,064 --> 00:09:16,725
+144
+00:09:49,789 --> 00:09:54,450
 by two hours: the same one point four
 times ten to the minus nine.
 
-135
-00:09:17,075 --> 00:09:21,700
+145
+00:09:54,800 --> 00:09:59,425
 Only the order of the subtractions
 differs, so the answer can't.
 
-136
-00:09:22,500 --> 00:09:26,600
+146
+00:10:00,225 --> 00:10:04,325
 Now let's change everything
 at once, but only by a little.
 
-137
-00:09:26,950 --> 00:09:31,584
+147
+00:10:04,675 --> 00:10:09,309
 Suppose we take a small step
 east, d x, a small step north,
 
-138
-00:09:31,584 --> 00:09:35,825
+148
+00:10:09,309 --> 00:10:13,550
 d y, a small step
 up, d z, and wait a short time, d t.
 
-139
-00:09:36,175 --> 00:09:38,775
+149
+00:10:13,900 --> 00:10:16,500
 How much does the temperature change?
 
-140
-00:09:39,125 --> 00:09:42,493
+150
+00:10:16,850 --> 00:10:20,218
 Each partial derivative
 says how much T changes
 
-141
-00:09:42,493 --> 00:09:45,575
+151
+00:10:20,218 --> 00:10:23,300
 for each unit of step
 in its own direction.
 
-142
-00:09:45,925 --> 00:09:50,075
+152
+00:10:23,650 --> 00:10:27,800
 So we multiply each one by its own
 step, and add them up.
 
-143
-00:09:50,425 --> 00:09:56,353
+153
+00:10:28,150 --> 00:10:34,078
 The small change, d T, equals partial
 capital T by partial x times d x,
 
-144
-00:09:56,353 --> 00:10:00,193
+154
+00:10:34,078 --> 00:10:37,918
 plus partial capital T by
 partial y times d y,
 
-145
-00:10:00,193 --> 00:10:04,034
+155
+00:10:37,918 --> 00:10:41,759
 plus partial capital T by
 partial z times d z,
 
-146
-00:10:04,034 --> 00:10:08,375
+156
+00:10:41,759 --> 00:10:46,100
 plus partial capital T by partial
 small t times d t.
 
-147
-00:10:08,725 --> 00:10:11,450
+157
+00:10:46,450 --> 00:10:49,175
 This is called the total differential.
 
-148
-00:10:11,800 --> 00:10:13,900
+158
+00:10:49,525 --> 00:10:51,625
 It's like walking on a hillside:
 
-149
-00:10:13,900 --> 00:10:17,509
+159
+00:10:51,625 --> 00:10:55,234
 your rise is the slope going
 east times your step east,
 
-150
-00:10:17,509 --> 00:10:20,725
+160
+00:10:55,234 --> 00:10:58,450
 plus the slope going
 north times your step north.
 
-151
-00:10:21,075 --> 00:10:25,320
+161
+00:10:58,800 --> 00:11:03,045
 Unlike a real hillside,
 our landscape also changes while
 
-152
-00:10:25,320 --> 00:10:28,125
+162
+00:11:03,045 --> 00:11:05,850
 we walk, so the time gets a term too.
 
-153
-00:10:28,925 --> 00:10:31,075
+163
+00:11:06,650 --> 00:11:08,800
 Let's try it near Brest.
 
-154
-00:10:31,425 --> 00:10:35,158
+164
+00:11:09,150 --> 00:11:12,883
 We go ten kilometres east
 and twenty kilometres north,
 
-155
-00:10:35,158 --> 00:10:38,200
+165
+00:11:12,883 --> 00:11:15,925
 keep the same
 height, and wait half an hour.
 
-156
-00:10:38,550 --> 00:10:43,716
+166
+00:11:16,275 --> 00:11:21,441
 The east step gives minus three point two
 degrees per hundred kilometres,
 
-157
-00:10:43,716 --> 00:10:47,750
+167
+00:11:21,441 --> 00:11:25,475
 times ten kilometres:
 minus zero point three two degrees.
 
-158
-00:10:48,100 --> 00:10:52,728
+168
+00:11:25,825 --> 00:11:30,453
 The north step gives minus two point five
 per hundred kilometres,
 
-159
-00:10:52,728 --> 00:10:56,075
+169
+00:11:30,453 --> 00:11:33,800
 times twenty kilometres:
 minus zero point five.
 
-160
-00:10:56,425 --> 00:11:00,237
+170
+00:11:34,150 --> 00:11:37,962
 And the wait gives
 plus two point nine degrees per hour,
 
-161
-00:11:00,237 --> 00:11:03,300
+171
+00:11:37,962 --> 00:11:41,025
 times half an hour:
 plus one point four five.
 
-162
-00:11:04,800 --> 00:11:10,325
+172
+00:11:42,525 --> 00:11:48,050
 Adding them up, the temperature changes by
 about plus zero point six three degrees.
 
-163
-00:11:11,825 --> 00:11:16,325
+173
+00:11:49,550 --> 00:11:54,050
 This works only for small
 steps, where the landscape looks flat.
 
-164
-00:11:16,675 --> 00:11:20,635
+174
+00:11:54,400 --> 00:11:58,360
 We'll see exactly why, and what
 goes wrong for big steps,
 
-165
-00:11:20,635 --> 00:11:22,650
+175
+00:11:58,360 --> 00:12:00,375
 when we get to Taylor series.
 
-166
-00:11:23,450 --> 00:11:26,200
+176
+00:12:01,175 --> 00:12:03,925
 So far we chose the steps ourselves.
 
-167
-00:11:26,550 --> 00:11:31,400
+177
+00:12:04,275 --> 00:12:09,125
 Now let's ride along with something
 that moves, like a plane or a balloon.
 
-168
-00:11:31,750 --> 00:11:38,579
+178
+00:12:09,475 --> 00:12:16,304
 Its position changes with time, so its x,
 y and z are themselves functions of time:
 
-169
-00:11:38,579 --> 00:11:42,775
+179
+00:12:16,304 --> 00:12:20,500
 capital X of t,
 capital Y of t, and capital Z of t.
 
-170
-00:11:43,125 --> 00:11:46,998
+180
+00:12:20,850 --> 00:12:24,723
 In a short time d t, it moves east by d X,
 
-171
-00:11:46,998 --> 00:11:51,700
+181
+00:12:24,723 --> 00:12:29,425
 which is d X by d t, its eastward
 speed, times d t.
 
-172
-00:11:52,050 --> 00:11:54,525
+182
+00:12:29,775 --> 00:12:32,250
 The same goes for north and up.
 
-173
-00:11:54,875 --> 00:11:58,451
+183
+00:12:32,600 --> 00:12:36,176
 Let's put these steps into
 the total differential,
 
-174
-00:11:58,451 --> 00:12:00,525
+184
+00:12:36,176 --> 00:12:38,250
 and divide everything by d t.
 
-175
-00:12:00,875 --> 00:12:04,875
+185
+00:12:38,600 --> 00:12:42,600
 That gives the rate the traveller's
 own thermometer reads.
 
-176
-00:12:05,225 --> 00:12:10,288
+186
+00:12:42,950 --> 00:12:48,013
 d T by d t equals partial
 capital T by partial small t,
 
-177
-00:12:10,288 --> 00:12:15,167
+187
+00:12:48,013 --> 00:12:52,892
 plus d X by d t times partial
 capital T by partial x,
 
-178
-00:12:15,167 --> 00:12:20,046
+188
+00:12:52,892 --> 00:12:57,771
 plus d Y by d t times partial
 capital T by partial y,
 
-179
-00:12:20,046 --> 00:12:24,925
+189
+00:12:57,771 --> 00:13:02,650
 plus d Z by d t times partial
 capital T by partial z.
 
-180
-00:12:25,275 --> 00:12:27,325
+190
+00:13:03,000 --> 00:13:05,050
 This is the chain rule.
 
-181
-00:12:27,675 --> 00:12:31,156
+191
+00:13:05,400 --> 00:13:08,881
 In the index notation
 of the vectors movie,
 
-182
-00:12:31,156 --> 00:12:34,636
+192
+00:13:08,881 --> 00:13:12,361
 the three moving terms
 are d X sub j by d t
 
-183
-00:12:34,636 --> 00:12:38,117
+193
+00:13:12,361 --> 00:13:15,842
 times partial
 capital T by partial x sub j,
 
-184
-00:12:38,117 --> 00:12:39,250
+194
+00:13:15,842 --> 00:13:16,975
 with j summed.
 
-185
-00:12:40,050 --> 00:12:42,475
+195
+00:13:17,775 --> 00:13:20,200
 Let's read it term by term.
 
-186
-00:12:42,825 --> 00:12:47,950
+196
+00:13:20,550 --> 00:13:25,675
 The first term is the change at a fixed
 place: the fixed thermometer's rate.
 
-187
-00:12:48,300 --> 00:12:51,499
+197
+00:13:26,025 --> 00:13:29,224
 Each of the other terms
 is a speed times a slope:
 
-188
-00:12:51,499 --> 00:12:54,501
+198
+00:13:29,224 --> 00:13:32,226
 how fast the traveller
 moves in one direction,
 
-189
-00:12:54,501 --> 00:12:58,875
+199
+00:13:32,226 --> 00:13:36,600
 times how much the temperature
 changes per metre in that direction.
 
-190
-00:12:59,225 --> 00:13:04,182
+200
+00:13:36,950 --> 00:13:41,907
 Metres per second times degrees
 per metre gives degrees per second,
 
-191
-00:13:04,182 --> 00:13:06,550
+201
+00:13:41,907 --> 00:13:44,275
 so every term is a rate in time.
 
-192
-00:13:06,900 --> 00:13:10,260
+202
+00:13:44,625 --> 00:13:47,985
 Moving into colder places
 cools the traveller,
 
-193
-00:13:10,260 --> 00:13:13,400
+203
+00:13:47,985 --> 00:13:51,125
 even if nothing changes
 at any fixed place.
 
-194
-00:13:13,750 --> 00:13:16,980
+204
+00:13:51,475 --> 00:13:54,705
 And the speeds are
 the traveller's own, so a car,
 
-195
-00:13:16,980 --> 00:13:21,000
+205
+00:13:54,705 --> 00:13:58,725
 a plane and a balloon at the same
 place feel different rates.
 
-196
-00:13:21,800 --> 00:13:26,275
+206
+00:13:59,525 --> 00:14:04,000
 Let's try the simplest case
 first, on an easy, made-up road.
 
-197
-00:13:26,625 --> 00:13:31,534
+207
+00:14:04,350 --> 00:14:09,259
 Imagine a frozen map, where
 nothing changes at any fixed place,
 
-198
-00:13:31,534 --> 00:13:35,275
+208
+00:14:09,259 --> 00:14:13,000
 so partial capital T by partial
 small t is zero.
 
-199
-00:13:35,625 --> 00:13:39,266
+209
+00:14:13,350 --> 00:14:16,991
 A car drives east at one
 hundred kilometres per hour,
 
-200
-00:13:39,266 --> 00:13:44,900
+210
+00:14:16,991 --> 00:14:22,625
 and the air gets colder by zero point zero
 three degrees for every kilometre east.
 
-201
-00:13:45,250 --> 00:13:49,103
+211
+00:14:22,975 --> 00:14:26,828
 The chain rule gives one
 hundred kilometres per hour,
 
-202
-00:13:49,103 --> 00:13:53,175
+212
+00:14:26,828 --> 00:14:30,900
 times minus zero point zero three
 degrees per kilometre.
 
-203
-00:13:53,525 --> 00:13:57,825
+213
+00:14:31,250 --> 00:14:35,550
 The kilometres cancel, leaving
 minus three degrees per hour.
 
-204
-00:13:59,325 --> 00:14:03,671
+214
+00:14:37,050 --> 00:14:41,396
 So the car's dashboard thermometer
 falls by three degrees every hour,
 
-205
-00:14:03,671 --> 00:14:07,325
+215
+00:14:41,396 --> 00:14:45,050
 though the air at every fixed
 place keeps its temperature.
 
-206
-00:14:08,125 --> 00:14:11,075
+216
+00:14:45,850 --> 00:14:48,800
 Now a thought experiment on the real map.
 
-207
-00:14:11,425 --> 00:14:16,085
+217
+00:14:49,150 --> 00:14:53,810
 Imagine a small plane at that
 height over Brest at six in the evening,
 
-208
-00:14:16,085 --> 00:14:19,347
+218
+00:14:53,810 --> 00:14:57,072
 flying due east at one
 hundred metres per second,
 
-209
-00:14:19,347 --> 00:14:22,675
+219
+00:14:57,072 --> 00:15:00,400
 about three hundred and sixty
 kilometres per hour.
 
-210
-00:14:23,025 --> 00:14:25,950
+220
+00:15:00,750 --> 00:15:03,675
 Let's call its speed east capital U.
 
-211
-00:14:26,300 --> 00:14:28,600
+221
+00:15:04,025 --> 00:15:06,325
 What does its thermometer read?
 
-212
-00:14:28,950 --> 00:14:33,725
+222
+00:15:06,675 --> 00:15:11,450
 The place itself is warming,
 at plus two point nine degrees per hour.
 
-213
-00:14:34,075 --> 00:14:36,875
+223
+00:15:11,800 --> 00:15:14,600
 But the plane flies into colder air.
 
-214
-00:14:37,225 --> 00:14:39,364
+224
+00:15:14,950 --> 00:15:17,089
 One hundred metres per second,
 
-215
-00:14:39,364 --> 00:14:43,569
+225
+00:15:17,089 --> 00:15:21,294
 times minus three point two
 degrees per hundred kilometres,
 
-216
-00:14:43,569 --> 00:14:47,775
+226
+00:15:21,294 --> 00:15:25,500
 is minus zero point zero zero three two
 degrees per second.
 
-217
-00:14:48,125 --> 00:14:51,648
+227
+00:15:25,850 --> 00:15:29,373
 Times three thousand six
 hundred seconds in an hour,
 
-218
-00:14:51,648 --> 00:14:54,900
+228
+00:15:29,373 --> 00:15:32,625
 that's minus eleven point five
 degrees per hour.
 
-219
-00:14:56,400 --> 00:14:57,374
+229
+00:15:34,125 --> 00:15:35,099
 Adding the two,
 
-220
-00:14:57,374 --> 00:15:02,048
+230
+00:15:35,099 --> 00:15:39,773
 the plane's thermometer falls at about
 eight point six degrees per hour,
 
-221
-00:15:02,048 --> 00:15:04,450
+231
+00:15:39,773 --> 00:15:42,175
 if these rates held for a whole hour.
 
-222
-00:15:05,950 --> 00:15:10,550
+232
+00:15:43,675 --> 00:15:48,275
 So the plane cools, even though
 every place it passes is warming.
 
-223
-00:15:11,350 --> 00:15:16,100
+233
+00:15:49,075 --> 00:15:53,825
 Now let's turn the plane round, and fly
 due west at the same speed.
 
-224
-00:15:16,450 --> 00:15:21,130
+234
+00:15:54,175 --> 00:15:58,855
 It now flies into warmer air, so
 the moving term flips its sign,
 
-225
-00:15:21,130 --> 00:15:24,275
+235
+00:15:58,855 --> 00:16:02,000
 to plus eleven point five
 degrees per hour.
 
-226
-00:15:24,625 --> 00:15:26,745
+236
+00:16:02,350 --> 00:16:04,470
 Adding the warming of the place,
 
-227
-00:15:26,745 --> 00:15:31,250
+237
+00:16:04,470 --> 00:16:08,975
 its thermometer rises at about
 fourteen point four degrees per hour.
 
-228
-00:15:32,750 --> 00:15:35,933
+238
+00:16:10,475 --> 00:16:13,658
 Same place, same moment, same
 temperature field,
 
-229
-00:15:35,933 --> 00:15:39,050
+239
+00:16:13,658 --> 00:16:16,775
 but a different traveller,
 so a different rate.
 
-230
-00:15:39,400 --> 00:15:44,535
+240
+00:16:17,125 --> 00:16:22,260
 That's the heart of the chain rule:
 d T by d t belongs to the traveller,
 
-231
-00:15:44,535 --> 00:15:49,100
+241
+00:16:22,260 --> 00:16:26,825
 while partial capital T by partial
 small t belongs to the place.
 
-232
-00:15:49,900 --> 00:15:53,175
+242
+00:16:27,625 --> 00:16:30,900
 Now a real traveller: the Trappes balloon.
 
-233
-00:15:53,525 --> 00:15:54,847
+243
+00:16:31,250 --> 00:16:32,572
 It rose from one and
 
-234
-00:15:54,847 --> 00:15:59,672
+244
+00:16:32,572 --> 00:16:37,397
 a half kilometres to five point eight
 kilometres in nine hundred seconds,
 
-235
-00:15:59,672 --> 00:16:01,325
+245
+00:16:37,397 --> 00:16:39,050
 which is fifteen minutes.
 
-236
-00:16:01,675 --> 00:16:04,177
+246
+00:16:39,400 --> 00:16:41,902
 So its upward speed, d Z by d t,
 
-237
-00:16:04,177 --> 00:16:09,338
+247
+00:16:41,902 --> 00:16:47,063
 was four point two six kilometres
 divided by nine hundred seconds:
 
-238
-00:16:09,338 --> 00:16:12,075
+248
+00:16:47,063 --> 00:16:49,800
 four point seven metres per second.
 
-239
-00:16:13,575 --> 00:16:15,638
+249
+00:16:51,300 --> 00:16:53,363
 Over the same fifteen minutes,
 
-240
-00:16:15,638 --> 00:16:19,350
+250
+00:16:53,363 --> 00:16:57,075
 its thermometer fell by twenty
 four point one degrees.
 
-241
-00:16:19,700 --> 00:16:23,936
+251
+00:16:57,425 --> 00:17:01,661
 That's minus zero point zero two seven
 degrees per second,
 
-242
-00:16:23,936 --> 00:16:27,150
+252
+00:17:01,661 --> 00:17:04,875
 or about one point six
 degrees every minute.
 
-243
-00:16:28,650 --> 00:16:31,325
+253
+00:17:06,375 --> 00:17:09,050
 Which terms of the chain rule make this?
 
-244
-00:16:32,125 --> 00:16:33,794
+254
+00:17:09,850 --> 00:17:11,519
 Let's size each term,
 
-245
-00:16:33,794 --> 00:16:38,325
+255
+00:17:11,519 --> 00:17:16,050
 writing the balloon's speeds
 as u east, v north and w up.
 
-246
-00:16:38,675 --> 00:16:40,925
+256
+00:17:16,400 --> 00:17:18,650
 First, the fixed place.
 
-247
-00:16:41,275 --> 00:16:45,452
+257
+00:17:19,000 --> 00:17:23,177
 Comparing this balloon with the one
 launched twelve hours earlier,
 
-248
-00:16:45,452 --> 00:16:48,300
+258
+00:17:23,177 --> 00:17:26,025
 the air at five point eight
 kilometres cooled
 
-249
-00:16:48,300 --> 00:16:51,275
+259
+00:17:26,025 --> 00:17:29,000
 by about two point six
 degrees in twelve hours.
 
-250
-00:16:51,625 --> 00:16:56,975
+260
+00:17:29,350 --> 00:17:34,700
 That's only about minus six times ten
 to the minus five degrees per second.
 
-251
-00:16:57,325 --> 00:16:59,700
+261
+00:17:35,050 --> 00:17:37,425
 Next, the sideways terms.
 
-252
-00:17:00,050 --> 00:17:02,247
+262
+00:17:37,775 --> 00:17:39,972
 The balloon drifted with the wind,
 
-253
-00:17:02,247 --> 00:17:05,542
+263
+00:17:39,972 --> 00:17:43,267
 about seventeen kilometres
 to the north-north-east,
 
-254
-00:17:05,542 --> 00:17:08,449
+264
+00:17:43,267 --> 00:17:46,174
 through air whose
 temperature changed by less
 
-255
-00:17:08,449 --> 00:17:11,550
+265
+00:17:46,174 --> 00:17:49,275
 than one degree per hundred
 kilometres sideways.
 
-256
-00:17:11,900 --> 00:17:15,828
+266
+00:17:49,625 --> 00:17:53,553
 But it drifted almost along
 the lines of equal temperature,
 
-257
-00:17:15,828 --> 00:17:18,823
+267
+00:17:53,553 --> 00:17:56,548
 so only a small part
 of that gradient counts:
 
-258
-00:17:18,823 --> 00:17:23,150
+268
+00:17:56,548 --> 00:18:00,875
 about minus three times ten
 to the minus five degrees per second.
 
-259
-00:17:23,500 --> 00:17:28,194
+269
+00:18:01,225 --> 00:18:05,919
 Last, the rising term:
 w, four point seven metres per second,
 
-260
-00:17:28,194 --> 00:17:32,119
+270
+00:18:05,919 --> 00:18:09,844
 times minus five point seven
 degrees per kilometre,
 
-261
-00:17:32,119 --> 00:17:36,275
+271
+00:18:09,844 --> 00:18:14,000
 is minus zero point zero two seven
 degrees per second.
 
-262
-00:17:37,775 --> 00:17:43,450
+272
+00:18:15,500 --> 00:18:21,175
 So the rising term makes more than ninety
 nine percent of what the thermometer saw.
 
-263
-00:17:43,800 --> 00:17:48,400
+273
+00:18:21,525 --> 00:18:26,125
 That's why we can read a balloon's
 record as the temperature profile,
 
-264
-00:17:48,400 --> 00:17:52,800
+274
+00:18:26,125 --> 00:18:30,525
 partial capital T by partial z, even
 though the balloon is moving.
 
-265
-00:17:53,600 --> 00:17:57,234
+275
+00:18:31,325 --> 00:18:34,959
 There's one very special
 traveller: an air parcel,
 
-266
-00:17:57,234 --> 00:18:00,650
+276
+00:18:34,959 --> 00:18:38,375
 a small volume of air
 that moves with the wind.
 
-267
-00:18:01,000 --> 00:18:05,868
+277
+00:18:38,725 --> 00:18:43,593
 For an air parcel, the speeds
 in the chain rule are the wind itself,
 
-268
-00:18:05,868 --> 00:18:08,875
+278
+00:18:43,593 --> 00:18:46,600
 and its rate gets its own name and symbol:
 
-269
-00:18:08,875 --> 00:18:12,025
+279
+00:18:46,600 --> 00:18:49,750
 capital D T by D t, the
 material derivative.
 
-270
-00:18:12,375 --> 00:18:17,776
+280
+00:18:50,100 --> 00:18:55,501
 Its moving terms together are the
 wind, bold u, dotted with the gradient,
 
-271
-00:18:17,776 --> 00:18:21,550
+281
+00:18:55,501 --> 00:18:59,275
 grad T: the dot product
 from the dot product movie.
 
-272
-00:18:21,900 --> 00:18:26,124
+282
+00:18:59,625 --> 00:19:03,849
 Over Brest, the place warmed by
 two point nine degrees per hour,
 
-273
-00:18:26,124 --> 00:18:31,075
+283
+00:19:03,849 --> 00:19:08,800
 while the wind brought in warmer air
 at three point seven degrees per hour.
 
-274
-00:18:31,425 --> 00:18:34,218
+284
+00:19:09,150 --> 00:19:11,943
 If the air parcels had
 kept their temperature,
 
-275
-00:18:34,218 --> 00:18:38,225
+285
+00:19:11,943 --> 00:19:15,950
 the place would have warmed by
 three point seven degrees per hour.
 
-276
-00:18:38,575 --> 00:18:40,861
+286
+00:19:16,300 --> 00:19:18,586
 It warmed by only two point nine,
 
-277
-00:18:40,861 --> 00:18:46,125
+287
+00:19:18,586 --> 00:19:23,850
 so each air parcel itself cooled by about
 zero point eight degrees per hour.
 
-278
-00:18:47,625 --> 00:18:53,000
+288
+00:19:25,350 --> 00:19:30,725
 We take this apart fully in the material
 derivative movie, later in this series.
 
-279
-00:18:53,800 --> 00:18:58,100
+289
+00:19:31,525 --> 00:19:35,825
 The chain rule also lets us
 swap one variable for another.
 
-280
-00:18:58,450 --> 00:19:04,225
+290
+00:19:36,175 --> 00:19:41,950
 Meteorologists often use pressure instead
 of height to say how high something is.
 
-281
-00:19:04,575 --> 00:19:07,737
+291
+00:19:42,300 --> 00:19:45,462
 Weather balloons have
 long reported pressure,
 
-282
-00:19:07,737 --> 00:19:11,250
+292
+00:19:45,462 --> 00:19:48,975
 and many of the equations
 become simpler that way.
 
-283
-00:19:11,600 --> 00:19:16,400
+293
+00:19:49,325 --> 00:19:54,125
 So how do we turn a rate per kilometre
 into a rate per hectopascal?
 
-284
-00:19:16,750 --> 00:19:21,269
+294
+00:19:54,475 --> 00:19:58,994
 Along the balloon's climb, height
 is a function of pressure,
 
-285
-00:19:21,269 --> 00:19:26,691
+295
+00:19:58,994 --> 00:20:04,416
 so partial capital T by partial p equals
 partial capital T by partial z,
 
-286
-00:19:26,691 --> 00:19:28,875
+296
+00:20:04,416 --> 00:20:06,600
 times partial z by partial p.
 
-287
-00:19:29,225 --> 00:19:33,549
+297
+00:20:06,950 --> 00:20:11,274
 Between our two levels, the height
 rose four thousand two hundred and
 
-288
-00:19:33,549 --> 00:19:38,500
+298
+00:20:11,274 --> 00:20:16,225
 sixty two metres, while the pressure fell
 three hundred and fifty hectopascals.
 
-289
-00:19:38,850 --> 00:19:45,000
+299
+00:20:16,575 --> 00:20:22,725
 So partial z by partial p is minus
 twelve point two metres per hectopascal.
 
-290
-00:19:46,500 --> 00:19:50,226
+300
+00:20:24,225 --> 00:20:27,951
 Times minus five point seven
 degrees per kilometre,
 
-291
-00:19:50,226 --> 00:19:54,975
+301
+00:20:27,951 --> 00:20:32,700
 that gives plus zero point zero six nine
 degrees per hectopascal.
 
-292
-00:19:56,475 --> 00:20:00,750
+302
+00:20:34,200 --> 00:20:38,475
 So the air gets warmer
 as the pressure rises, going down.
 
-293
-00:20:01,100 --> 00:20:06,050
+303
+00:20:38,825 --> 00:20:43,775
 Pressure as a vertical coordinate
 has its own movie in this series.
 
-294
-00:20:06,850 --> 00:20:10,875
+304
+00:20:44,575 --> 00:20:48,600
 Now a question that matters a lot
 in the physics of air.
 
-295
-00:20:11,225 --> 00:20:16,100
+305
+00:20:48,950 --> 00:20:53,825
 When is a small change, d of something,
 really the change of a quantity?
 
-296
-00:20:16,450 --> 00:20:18,425
+306
+00:20:54,175 --> 00:20:56,150
 Think of climbing a hill.
 
-297
-00:20:18,775 --> 00:20:22,014
+307
+00:20:56,500 --> 00:20:59,739
 The height you gain
 from the car park to the summit,
 
-298
-00:20:22,014 --> 00:20:24,444
+308
+00:20:59,739 --> 00:21:02,169
 about a hundred and thirty five metres,
 
-299
-00:20:24,444 --> 00:20:26,748
+309
+00:21:02,169 --> 00:21:04,473
 is the same whichever trail you take:
 
-300
-00:20:26,748 --> 00:20:30,050
+310
+00:21:04,473 --> 00:21:07,775
 it depends only on where
 you start and where you end.
 
-301
-00:20:30,400 --> 00:20:32,673
+311
+00:21:08,125 --> 00:21:10,398
 The distance you walk is different:
 
-302
-00:20:32,673 --> 00:20:37,025
+312
+00:21:10,398 --> 00:21:14,750
 four kilometres on the straight
 trail, and nine on the winding one.
 
-303
-00:20:37,375 --> 00:20:39,192
+313
+00:21:15,100 --> 00:21:16,917
 A quantity like the height,
 
-304
-00:20:39,192 --> 00:20:43,500
+314
+00:21:16,917 --> 00:21:21,225
 which depends only on where you
 are, is called a state function.
 
-305
-00:20:43,850 --> 00:20:49,050
+315
+00:21:21,575 --> 00:21:26,775
 Its small change is called a perfect
 differential, or an exact differential.
 
-306
-00:20:49,400 --> 00:20:53,975
+316
+00:21:27,125 --> 00:21:31,700
 The temperature, pressure and density
 of air are all state functions.
 
-307
-00:20:54,325 --> 00:20:56,403
+317
+00:21:32,050 --> 00:21:34,128
 But the distance walked is not:
 
-308
-00:20:56,403 --> 00:21:00,425
+318
+00:21:34,128 --> 00:21:38,150
 its small steps add up to a total
 that depends on the route.
 
-309
-00:21:01,225 --> 00:21:04,225
+319
+00:21:38,950 --> 00:21:41,950
 How can we tell, just from the formula?
 
-310
-00:21:04,575 --> 00:21:09,825
+320
+00:21:42,300 --> 00:21:47,550
 Take a small change
 of the form M times d x, plus N times d y.
 
-311
-00:21:10,175 --> 00:21:13,189
+321
+00:21:47,900 --> 00:21:50,914
 If it's the change of some function f,
 
-312
-00:21:13,189 --> 00:21:18,425
+322
+00:21:50,914 --> 00:21:56,150
 then M is partial f by partial x, and N is
 partial f by partial y.
 
-313
-00:21:18,775 --> 00:21:20,868
+323
+00:21:56,500 --> 00:21:58,593
 And we just saw that mixed partial
 
-314
-00:21:20,868 --> 00:21:23,700
+324
+00:21:58,593 --> 00:22:01,425
 derivatives come out
 the same in either order.
 
-315
-00:21:24,050 --> 00:21:30,150
+325
+00:22:01,775 --> 00:22:07,875
 So the test is: partial M by partial
 y must equal partial N by partial x.
 
-316
-00:21:30,500 --> 00:21:33,700
+326
+00:22:08,225 --> 00:22:11,425
 Let's try y d x plus x d y.
 
-317
-00:21:34,050 --> 00:21:39,625
+327
+00:22:11,775 --> 00:22:17,350
 Partial y by partial y is one, and
 partial x by partial x is one.
 
-318
-00:21:39,975 --> 00:21:44,500
+328
+00:22:17,700 --> 00:22:22,225
 They match, so it's exact:
 it's the change of x times y.
 
-319
-00:21:46,000 --> 00:21:49,150
+329
+00:22:23,725 --> 00:22:26,875
 Now try y d x minus x d y.
 
-320
-00:21:49,500 --> 00:21:51,950
+330
+00:22:27,225 --> 00:22:29,675
 We get one against minus one.
 
-321
-00:21:52,300 --> 00:21:55,750
+331
+00:22:30,025 --> 00:22:33,475
 They don't match, so it's not
 the change of anything.
 
-322
-00:21:57,250 --> 00:22:01,618
+332
+00:22:34,975 --> 00:22:39,343
 Add it up going once round a square
 of side one, anticlockwise,
 
-323
-00:22:01,618 --> 00:22:05,500
+333
+00:22:39,343 --> 00:22:43,225
 and you come back to the start
 with minus two, not zero.
 
-324
-00:22:07,000 --> 00:22:12,125
+334
+00:22:44,725 --> 00:22:49,850
 For a perfect differential, every
 round trip adds up to exactly zero.
 
-325
-00:22:12,925 --> 00:22:14,650
+335
+00:22:50,650 --> 00:22:52,375
 Now real air.
 
-326
-00:22:15,000 --> 00:22:16,941
+336
+00:22:52,725 --> 00:22:54,666
 Its pressure, density and
 
-327
-00:22:16,941 --> 00:22:22,300
+337
+00:22:54,666 --> 00:23:00,025
 temperature are tied together by the ideal
 gas law: p equals rho R T.
 
-328
-00:22:22,650 --> 00:22:25,312
+338
+00:23:00,375 --> 00:23:03,037
 Here p is the pressure, rho the density,
 
-329
-00:22:25,312 --> 00:22:28,306
+339
+00:23:03,037 --> 00:23:06,031
 which is the mass of air
 in each cubic metre,
 
-330
-00:22:28,306 --> 00:22:30,435
+340
+00:23:06,031 --> 00:23:08,160
 and T the temperature in kelvin,
 
-331
-00:22:30,435 --> 00:22:34,693
+341
+00:23:08,160 --> 00:23:12,418
 which is the temperature in degrees
 Celsius plus two hundred and
 
-332
-00:22:34,693 --> 00:22:39,212
+342
+00:23:12,418 --> 00:23:16,937
 seventy three. R is a constant
 for dry air: two hundred and
 
-333
-00:22:39,212 --> 00:22:42,450
+343
+00:23:16,937 --> 00:23:20,175
 eighty seven joules
 per kilogram per kelvin.
 
-334
-00:22:42,800 --> 00:22:46,819
+344
+00:23:20,525 --> 00:23:24,544
 So pressure is a function
 of density and temperature,
 
-335
-00:22:46,819 --> 00:22:51,900
+345
+00:23:24,544 --> 00:23:29,625
 and its total differential
 is d p equals R T d rho, plus rho R d T.
 
-336
-00:22:52,250 --> 00:22:54,050
+346
+00:23:29,975 --> 00:23:31,775
 Let's test it.
 
-337
-00:22:54,400 --> 00:23:01,100
+347
+00:23:32,125 --> 00:23:38,825
 Partial of R T by partial T is R, and
 partial of rho R by partial rho is also R.
 
-338
-00:23:01,450 --> 00:23:06,200
+348
+00:23:39,175 --> 00:23:43,925
 They match, so pressure passes
 the test, as a state function must.
 
-339
-00:23:07,700 --> 00:23:11,875
+349
+00:23:45,425 --> 00:23:49,600
 Now divide both
 sides by p, which is rho R T.
 
-340
-00:23:12,225 --> 00:23:17,550
+350
+00:23:49,950 --> 00:23:55,275
 We get d p over p equals d rho
 over rho, plus d T over T.
 
-341
-00:23:17,900 --> 00:23:18,508
+351
+00:23:55,625 --> 00:23:56,233
 In words,
 
-342
-00:23:18,508 --> 00:23:23,237
+352
+00:23:56,233 --> 00:24:00,962
 the fractional change in pressure
 is the fractional change in density,
 
-343
-00:23:23,237 --> 00:23:26,075
+353
+00:24:00,962 --> 00:24:03,800
 plus the fractional change in temperature.
 
-344
-00:23:26,875 --> 00:23:28,575
+354
+00:24:04,600 --> 00:24:06,300
 Let's use it.
 
-345
-00:23:28,925 --> 00:23:34,158
+355
+00:24:06,650 --> 00:24:11,883
 On a sunny afternoon, suppose the air
 near the ground warms from two hundred and
 
-346
-00:23:34,158 --> 00:23:38,475
+356
+00:24:11,883 --> 00:24:16,200
 ninety to three hundred kelvin, while
 the pressure stays the same.
 
-347
-00:23:38,825 --> 00:23:43,893
+357
+00:24:16,550 --> 00:24:21,618
 The pressure term is zero, so d rho
 over rho equals minus d T over T:
 
-348
-00:23:43,893 --> 00:23:49,475
+358
+00:24:21,618 --> 00:24:27,200
 minus ten over two hundred and ninety,
 about minus three and a half percent.
 
-349
-00:23:50,975 --> 00:23:53,167
+359
+00:24:28,700 --> 00:24:30,892
 So the warmed air is about three and
 
-350
-00:23:53,167 --> 00:23:57,125
+360
+00:24:30,892 --> 00:24:34,850
 a half percent lighter than the air
 around it, which didn't warm.
 
-351
-00:23:57,475 --> 00:23:59,575
+361
+00:24:35,200 --> 00:24:37,300
 That's what makes it rise.
 
-352
-00:23:59,925 --> 00:24:04,368
+362
+00:24:37,650 --> 00:24:42,093
 The exact answer is two hundred
 and ninety over three hundred,
 
-353
-00:24:04,368 --> 00:24:07,450
+363
+00:24:42,093 --> 00:24:45,175
 minus one:
 minus three point three percent.
 
-354
-00:24:08,950 --> 00:24:09,826
+364
+00:24:46,675 --> 00:24:47,551
 That's close,
 
-355
-00:24:09,826 --> 00:24:14,675
+365
+00:24:47,551 --> 00:24:52,400
 because ten kelvin is a small step
 compared with two hundred and ninety.
 
-356
-00:24:15,475 --> 00:24:17,950
+366
+00:24:53,200 --> 00:24:55,675
 Pressure also changes with height.
 
-357
-00:24:18,300 --> 00:24:21,999
+367
+00:24:56,025 --> 00:24:59,724
 In the weather basics movie, we
 met hydrostatic balance:
 
-358
-00:24:21,999 --> 00:24:26,425
+368
+00:24:59,724 --> 00:25:04,150
 at every height, the pressure holds
 up the weight of the air above.
 
-359
-00:24:26,775 --> 00:24:30,337
+369
+00:25:04,500 --> 00:25:08,062
 As a differential,
 d p equals minus rho g d z,
 
-360
-00:24:30,337 --> 00:24:35,525
+370
+00:25:08,062 --> 00:25:13,250
 where g is gravity, nine point eight one
 metres per second squared.
 
-361
-00:24:35,875 --> 00:24:41,375
+371
+00:25:13,600 --> 00:25:19,100
 Going up a small step d z, the pressure
 drops by the weight of that thin layer.
 
-362
-00:24:41,725 --> 00:24:47,625
+372
+00:25:19,450 --> 00:25:25,350
 Now divide by p, and use the gas
 law: rho over p is one over R T.
 
-363
-00:24:47,975 --> 00:24:52,127
+373
+00:25:25,700 --> 00:25:29,852
 We get d p over p equals
 minus d z over capital H,
 
-364
-00:24:52,127 --> 00:24:57,525
+374
+00:25:29,852 --> 00:25:35,250
 where capital H, which
 is R T over g, is called the scale height.
 
-365
-00:24:59,025 --> 00:25:03,516
+375
+00:25:36,750 --> 00:25:41,241
 At the ground at Trappes,
 at nineteen point eight degrees Celsius,
 
-366
-00:25:03,516 --> 00:25:05,421
+376
+00:25:41,241 --> 00:25:43,146
 capital H is two hundred and
 
-367
-00:25:05,421 --> 00:25:11,000
+377
+00:25:43,146 --> 00:25:48,725
 eighty seven, times two hundred and ninety
 three, divided by nine point eight one.
 
-368
-00:25:11,350 --> 00:25:15,425
+378
+00:25:49,075 --> 00:25:53,150
 That's about eight thousand
 five hundred and seventy metres.
 
-369
-00:25:16,925 --> 00:25:22,050
+379
+00:25:54,650 --> 00:25:59,775
 If the temperature were the same all
 the way up, capital H would be a constant.
 
-370
-00:25:22,400 --> 00:25:27,100
+380
+00:26:00,125 --> 00:26:04,825
 Then d p over p equals
 minus d z over capital H says that the
 
-371
-00:25:27,100 --> 00:25:31,800
+381
+00:26:04,825 --> 00:26:09,525
 pressure falls by the same
 fraction for every metre we climb.
 
-372
-00:25:32,150 --> 00:25:36,305
+382
+00:26:09,875 --> 00:26:14,030
 That makes an exponential:
 p equals the ground pressure,
 
-373
-00:25:36,305 --> 00:25:39,125
+383
+00:26:14,030 --> 00:26:16,850
 times e to the minus z over capital H.
 
-374
-00:25:39,475 --> 00:25:42,850
+384
+00:26:17,200 --> 00:26:20,575
 Here e is the number
 two point seven one eight.
 
-375
-00:25:43,200 --> 00:25:49,005
+385
+00:26:20,925 --> 00:26:26,730
 By the chain rule, its slope, d
 p by d z, is minus p over capital H,
 
-376
-00:25:49,005 --> 00:25:54,725
+386
+00:26:26,730 --> 00:26:32,450
 so it really does solve d p over p equals
 minus d z over capital H.
 
-377
-00:25:55,075 --> 00:25:58,243
+387
+00:26:32,800 --> 00:26:35,968
 This is the solution
 of a differential equation,
 
-378
-00:25:58,243 --> 00:26:02,600
+388
+00:26:35,968 --> 00:26:40,325
 and the ordinary differential
 equations movie solves many like it.
 
-379
-00:26:02,950 --> 00:26:05,350
+389
+00:26:40,675 --> 00:26:43,075
 Now let's compare with the balloon.
 
-380
-00:26:05,700 --> 00:26:10,134
+390
+00:26:43,425 --> 00:26:47,859
 The real pressure follows
 the exponential closely near the ground,
 
-381
-00:26:10,134 --> 00:26:12,150
+391
+00:26:47,859 --> 00:26:49,875
 then falls below it higher up.
 
-382
-00:26:12,500 --> 00:26:15,300
+392
+00:26:50,225 --> 00:26:53,025
 That's because the real air gets colder,
 
-383
-00:26:15,300 --> 00:26:19,150
+393
+00:26:53,025 --> 00:26:56,875
 and colder air is denser, so
 the pressure falls faster.
 
-384
-00:26:19,500 --> 00:26:23,650
+394
+00:26:57,225 --> 00:27:01,375
 We'll use this curve in a minute
 to see how Taylor series work.
 
-385
-00:26:24,450 --> 00:26:29,725
+395
+00:27:02,175 --> 00:27:07,450
 Now the most important small changes
 that are not perfect: heat and work.
 
-386
-00:26:30,075 --> 00:26:34,150
+396
+00:27:07,800 --> 00:27:11,875
 They're tied together by the first
 law of thermodynamics.
 
-387
-00:26:34,500 --> 00:26:37,758
+397
+00:27:12,225 --> 00:27:15,483
 The small change
 in the air's internal energy,
 
-388
-00:26:37,758 --> 00:26:40,662
+398
+00:27:15,483 --> 00:27:18,387
 d I, the energy of its molecules' motion,
 
-389
-00:26:40,662 --> 00:26:46,400
+399
+00:27:18,387 --> 00:27:24,125
 equals a small amount of heat added, plus
 a small amount of work done on the air.
 
-390
-00:26:46,750 --> 00:26:51,539
+400
+00:27:24,475 --> 00:27:29,264
 We write those two with a d that
 has a bar through it, d bar Q and
 
-391
-00:26:51,539 --> 00:26:56,400
+401
+00:27:29,264 --> 00:27:34,125
 d bar W, because they're small amounts,
 not the change of anything.
 
-392
-00:26:56,750 --> 00:26:59,185
+402
+00:27:34,475 --> 00:27:36,910
 Take an air parcel at two hundred and
 
-393
-00:26:59,185 --> 00:27:02,015
+403
+00:27:36,910 --> 00:27:39,740
 eighty kelvin, and let
 it expand to one and
 
-394
-00:27:02,015 --> 00:27:05,700
+404
+00:27:39,740 --> 00:27:43,425
 a half times its volume, ending
 at the same temperature.
 
-395
-00:27:06,050 --> 00:27:09,048
+405
+00:27:43,775 --> 00:27:46,773
 Route one: first cool
 it at a fixed volume,
 
-396
-00:27:09,048 --> 00:27:12,325
+406
+00:27:46,773 --> 00:27:50,050
 then heat it as it expands
 at a fixed pressure.
 
-397
-00:27:12,675 --> 00:27:16,700
+407
+00:27:50,400 --> 00:27:54,425
 Route two: expand it slowly
 at a fixed temperature.
 
-398
-00:27:17,050 --> 00:27:20,839
+408
+00:27:54,775 --> 00:27:58,564
 Route three: heat it as it
 expands at a fixed pressure,
 
-399
-00:27:20,839 --> 00:27:22,975
+409
+00:27:58,564 --> 00:28:00,700
 then cool it at a fixed volume.
 
-400
-00:27:23,325 --> 00:27:26,995
+410
+00:28:01,050 --> 00:28:04,720
 The heat we must add is twenty
 seven, thirty three and
 
-401
-00:27:26,995 --> 00:27:29,850
+411
+00:28:04,720 --> 00:28:07,575
 forty kilojoules for each kilogram of air.
 
-402
-00:27:31,350 --> 00:27:36,225
+412
+00:28:09,075 --> 00:28:13,950
 Three routes, three different amounts
 of heat, between the same two states.
 
-403
-00:27:36,575 --> 00:27:38,762
+413
+00:28:14,300 --> 00:28:16,487
 So heat is not a state function:
 
-404
-00:27:38,762 --> 00:27:43,750
+414
+00:28:16,487 --> 00:28:21,475
 there's no amount of heat stored
 in the air, only heat flowing in or out.
 
-405
-00:27:44,100 --> 00:27:46,175
+415
+00:28:21,825 --> 00:28:23,900
 The same is true of work.
 
-406
-00:27:46,525 --> 00:27:50,654
+416
+00:28:24,250 --> 00:28:28,379
 But the internal energy, the energy
 of the molecules' motion,
 
-407
-00:27:50,654 --> 00:27:53,632
+417
+00:28:28,379 --> 00:28:31,357
 changes by exactly zero
 on all three routes,
 
-408
-00:27:53,632 --> 00:27:57,625
+418
+00:28:31,357 --> 00:28:35,350
 because the parcel ends
 at the temperature it started with.
 
-409
-00:27:58,425 --> 00:28:00,450
+419
+00:28:36,150 --> 00:28:38,175
 Here's the test at work.
 
-410
-00:28:00,800 --> 00:28:05,080
+420
+00:28:38,525 --> 00:28:42,805
 For each kilogram
 of air, the heat added in a small,
 
-411
-00:28:05,080 --> 00:28:08,125
+421
+00:28:42,805 --> 00:28:45,850
 slow step is c v d T, plus p d alpha.
 
-412
-00:28:08,475 --> 00:28:15,075
+422
+00:28:46,200 --> 00:28:52,800
 Here c v is the heat needed to warm one
 kilogram by one kelvin at a fixed volume.
 
-413
-00:28:15,425 --> 00:28:17,642
+423
+00:28:53,150 --> 00:28:55,367
 Alpha, which is one over rho,
 
-414
-00:28:17,642 --> 00:28:22,075
+424
+00:28:55,367 --> 00:28:59,800
 is the volume of one kilogram,
 called the specific volume.
 
-415
-00:28:22,425 --> 00:28:28,242
+425
+00:29:00,150 --> 00:29:05,967
 That's the first law turned round: c v d
 T is the change in the internal energy,
 
-416
-00:28:28,242 --> 00:28:33,550
+426
+00:29:05,967 --> 00:29:11,275
 and p d alpha is the work the air does
 on its surroundings as it expands.
 
-417
-00:28:33,900 --> 00:28:37,475
+427
+00:29:11,625 --> 00:29:15,200
 With the gas law, p is R T over alpha.
 
-418
-00:28:37,825 --> 00:28:39,625
+428
+00:29:15,550 --> 00:29:17,350
 Let's test it.
 
-419
-00:28:39,975 --> 00:28:43,246
+429
+00:29:17,700 --> 00:29:20,971
 Partial of c v by partial alpha is zero,
 
-420
-00:28:43,246 --> 00:28:49,625
+430
+00:29:20,971 --> 00:29:27,350
 but partial of R T over alpha by partial
 T is R over alpha, which is not zero.
 
-421
-00:28:49,975 --> 00:28:53,925
+431
+00:29:27,700 --> 00:29:31,650
 They don't match, so heat
 is not a perfect differential.
 
-422
-00:28:55,425 --> 00:28:58,300
+432
+00:29:33,150 --> 00:29:36,025
 Now divide the heat by the temperature.
 
-423
-00:28:58,650 --> 00:29:03,425
+433
+00:29:36,375 --> 00:29:41,150
 We get c v d T over T, plus R d alpha
 over alpha.
 
-424
-00:29:03,775 --> 00:29:06,700
+434
+00:29:41,500 --> 00:29:44,425
 Test again: zero, and zero.
 
-425
-00:29:07,050 --> 00:29:08,600
+435
+00:29:44,775 --> 00:29:46,325
 They match!
 
-426
-00:29:10,100 --> 00:29:14,013
+436
+00:29:47,825 --> 00:29:51,738
 So heat divided by temperature
 is a perfect differential,
 
-427
-00:29:14,013 --> 00:29:18,475
+437
+00:29:51,738 --> 00:29:56,200
 the small change of a state function
 called entropy, written eta.
 
-428
-00:29:18,825 --> 00:29:23,154
+438
+00:29:56,550 --> 00:30:00,879
 On all three of our routes, the entropy
 rose by the same amount:
 
-429
-00:29:23,154 --> 00:29:26,875
+439
+00:30:00,879 --> 00:30:04,600
 one hundred and sixteen joules
 per kilogram per kelvin.
 
-430
-00:29:28,375 --> 00:29:31,253
+440
+00:30:06,100 --> 00:30:08,978
 Its close cousin, the
 potential temperature,
 
-431
-00:29:31,253 --> 00:29:34,458
+441
+00:30:08,978 --> 00:30:12,183
 follows air parcels through
 the whole atmosphere,
 
-432
-00:29:34,458 --> 00:29:37,075
+442
+00:30:12,183 --> 00:30:14,800
 and it has its own movie in this series.
 
-433
-00:29:37,875 --> 00:29:39,800
+443
+00:30:15,600 --> 00:30:17,525
 Now let's zoom in.
 
-434
-00:29:40,150 --> 00:29:43,635
+444
+00:30:17,875 --> 00:30:21,360
 Here's the temperature profile
 from the Trappes balloon,
 
-435
-00:29:43,635 --> 00:29:46,125
+445
+00:30:21,360 --> 00:30:23,850
 all the way up to thirty two kilometres.
 
-436
-00:29:46,475 --> 00:29:49,925
+446
+00:30:24,200 --> 00:30:27,650
 From afar, it bends, and it
 even has kinks.
 
-437
-00:29:50,275 --> 00:29:53,750
+447
+00:30:28,000 --> 00:30:31,475
 Let's zoom in around one
 and a half kilometres.
 
-438
-00:29:54,100 --> 00:29:55,575
+448
+00:30:31,825 --> 00:30:33,300
 And again.
 
-439
-00:29:55,925 --> 00:29:57,400
+449
+00:30:33,650 --> 00:30:35,125
 And again.
 
-440
-00:29:57,750 --> 00:30:01,850
+450
+00:30:35,475 --> 00:30:39,575
 The closer we look, the straighter
 it gets, until it's a line.
 
-441
-00:30:02,200 --> 00:30:06,725
+451
+00:30:39,925 --> 00:30:44,450
 That line is the tangent,
 and its slope is the derivative there.
 
-442
-00:30:07,075 --> 00:30:11,900
+452
+00:30:44,800 --> 00:30:49,625
 So close to any one point, a smooth
 curve is almost a straight line.
 
-443
-00:30:12,250 --> 00:30:15,225
+453
+00:30:49,975 --> 00:30:52,950
 That's the idea behind Taylor series.
 
-444
-00:30:16,025 --> 00:30:18,725
+454
+00:30:53,750 --> 00:30:56,450
 Let's write that line as a formula.
 
-445
-00:30:19,075 --> 00:30:21,000
+455
+00:30:56,800 --> 00:30:58,725
 Starting at a height z nought,
 
-446
-00:30:21,000 --> 00:30:25,814
+456
+00:30:58,725 --> 00:31:03,539
 the temperature a small step h higher
 is about the temperature at z nought,
 
-447
-00:30:25,814 --> 00:30:27,675
+457
+00:31:03,539 --> 00:31:05,400
 plus h times the slope there.
 
-448
-00:30:28,025 --> 00:30:29,885
+458
+00:31:05,750 --> 00:31:07,610
 At one and a half kilometres,
 
-449
-00:30:29,885 --> 00:30:32,900
+459
+00:31:07,610 --> 00:31:10,625
 the temperature was
 twelve point three degrees.
 
-450
-00:30:33,250 --> 00:30:36,934
+460
+00:31:10,975 --> 00:31:14,659
 The slope, from the readings
 just below and just above,
 
-451
-00:30:36,934 --> 00:30:40,150
+461
+00:31:14,659 --> 00:31:17,875
 was minus four point nine
 degrees per kilometre.
 
-452
-00:30:40,500 --> 00:30:44,000
+462
+00:31:18,225 --> 00:31:21,725
 Let's predict the temperature
 one kilometre higher.
 
-453
-00:30:44,350 --> 00:30:49,340
+463
+00:31:22,075 --> 00:31:27,065
 Twelve point three, plus one
 kilometre times minus four point nine,
 
-454
-00:30:49,340 --> 00:30:51,425
+464
+00:31:27,065 --> 00:31:29,150
 is seven point four degrees.
 
-455
-00:30:52,925 --> 00:30:58,375
+465
+00:31:30,650 --> 00:31:36,100
 The balloon measured six point nine, so
 the line is off by only half a degree.
 
-456
-00:30:59,875 --> 00:31:03,650
+466
+00:31:37,600 --> 00:31:41,375
 Now let's predict four point two six
 kilometres higher.
 
-457
-00:31:04,000 --> 00:31:06,548
+467
+00:31:41,725 --> 00:31:44,273
 The line gives minus eight point four,
 
-458
-00:31:06,548 --> 00:31:09,900
+468
+00:31:44,273 --> 00:31:47,625
 but the balloon measured
 minus eleven point eight.
 
-459
-00:31:10,250 --> 00:31:12,900
+469
+00:31:47,975 --> 00:31:50,625
 That's off by more than three degrees.
 
-460
-00:31:14,400 --> 00:31:17,146
+470
+00:31:52,125 --> 00:31:54,871
 The farther we go from the starting point,
 
-461
-00:31:17,146 --> 00:31:20,350
+471
+00:31:54,871 --> 00:31:58,075
 the worse the line gets,
 because the curve bends.
 
-462
-00:31:21,150 --> 00:31:24,325
+472
+00:31:58,875 --> 00:32:02,050
 To do better, we add a term for the bend.
 
-463
-00:31:24,675 --> 00:31:27,981
+473
+00:32:02,400 --> 00:32:05,706
 The bend is measured by
 the second derivative:
 
-464
-00:31:27,981 --> 00:31:30,425
+474
+00:32:05,706 --> 00:32:08,150
 how fast the slope itself changes.
 
-465
-00:31:30,775 --> 00:31:35,500
+475
+00:32:08,500 --> 00:32:13,225
 We add h squared, times the second
 derivative, divided by two.
 
-466
-00:31:35,850 --> 00:31:37,975
+476
+00:32:13,575 --> 00:32:15,700
 Why divided by two?
 
-467
-00:31:38,325 --> 00:31:42,000
+477
+00:32:16,050 --> 00:32:19,725
 Take the simplest bend, c times h squared.
 
-468
-00:31:42,350 --> 00:31:46,800
+478
+00:32:20,075 --> 00:32:24,525
 Its slope is two c h, and its second
 derivative is two c.
 
-469
-00:31:47,150 --> 00:31:52,525
+479
+00:32:24,875 --> 00:32:30,250
 So to make the bend's second derivative
 come out right, c must be half of it.
 
-470
-00:31:54,025 --> 00:31:59,325
+480
+00:32:31,750 --> 00:32:37,050
 The same idea gives the next term:
 h cubed, times the third derivative,
 
-471
-00:31:59,325 --> 00:32:04,625
+481
+00:32:37,050 --> 00:32:42,350
 divided by three times two times
 one, which is written three factorial.
 
-472
-00:32:04,975 --> 00:32:09,700
+482
+00:32:42,700 --> 00:32:47,425
 Each term makes one more derivative
 come out right at the starting point.
 
-473
-00:32:10,050 --> 00:32:13,525
+483
+00:32:47,775 --> 00:32:51,250
 Added up for ever, this
 is the Taylor series.
 
-474
-00:32:13,875 --> 00:32:18,061
+484
+00:32:51,600 --> 00:32:55,786
 f at x nought
 plus h equals f, plus h times the slope,
 
-475
-00:32:18,061 --> 00:32:22,868
+485
+00:32:55,786 --> 00:33:00,593
 plus h squared over two
 factorial times the second derivative,
 
-476
-00:32:22,868 --> 00:32:28,450
+486
+00:33:00,593 --> 00:33:06,175
 plus h cubed over three factorial
 times the third derivative, and so on.
 
-477
-00:32:29,250 --> 00:32:34,075
+487
+00:33:06,975 --> 00:33:11,800
 Let's watch a Taylor series at work
 on an easy function, e to the x.
 
-478
-00:32:34,425 --> 00:32:39,275
+488
+00:33:12,150 --> 00:33:17,000
 All its derivatives are e to the x too, so
 at zero they're all one.
 
-479
-00:32:39,625 --> 00:32:44,281
+489
+00:33:17,350 --> 00:33:22,006
 Then e to the h is
 one, plus h, plus h squared over two,
 
-480
-00:32:44,281 --> 00:32:47,025
+490
+00:33:22,006 --> 00:33:24,750
 plus h cubed over six, and so on.
 
-481
-00:32:47,375 --> 00:32:52,533
+491
+00:33:25,100 --> 00:33:30,258
 For h equals zero point one, the sums
 are one, then one point one,
 
-482
-00:32:52,533 --> 00:32:57,925
+492
+00:33:30,258 --> 00:33:35,650
 then one point one zero five, then
 one point one zero five one seven.
 
-483
-00:32:59,425 --> 00:33:03,915
+493
+00:33:37,150 --> 00:33:41,640
 The calculator also says
 one point one zero five one seven,
 
-484
-00:33:03,915 --> 00:33:08,025
+494
+00:33:41,640 --> 00:33:45,750
 so just three terms already
 give four correct figures.
 
-485
-00:33:09,525 --> 00:33:12,527
+495
+00:33:47,250 --> 00:33:50,252
 For h equals one, we need more terms: one,
 
-486
-00:33:12,527 --> 00:33:15,743
+496
+00:33:50,252 --> 00:33:53,468
 two, two point five, two
 point six six seven,
 
-487
-00:33:15,743 --> 00:33:20,675
+497
+00:33:53,468 --> 00:33:58,400
 two point seven zero eight, and on
 towards two point seven one eight.
 
-488
-00:33:22,175 --> 00:33:26,550
+498
+00:33:59,900 --> 00:34:04,275
 So a small step needs few
 terms, and a big step needs many.
 
-489
-00:33:27,350 --> 00:33:29,075
+499
+00:34:05,075 --> 00:34:06,800
 Now the pressure.
 
-490
-00:33:29,425 --> 00:33:35,305
+500
+00:34:07,150 --> 00:34:13,030
 Let's expand p equals the ground pressure
 times e to the minus z over capital H,
 
-491
-00:33:35,305 --> 00:33:38,025
+501
+00:34:13,030 --> 00:34:15,750
 for a height step z above the ground.
 
-492
-00:33:38,375 --> 00:33:41,575
+502
+00:34:16,100 --> 00:34:19,300
 The first two terms are
 the ground pressure,
 
-493
-00:33:41,575 --> 00:33:43,975
+503
+00:34:19,300 --> 00:34:21,700
 times one minus z over capital H.
 
-494
-00:33:44,325 --> 00:33:49,590
+504
+00:34:22,050 --> 00:34:27,315
 Look at the slope of that line: the ground
 pressure over capital H is rho g,
 
-495
-00:33:49,590 --> 00:33:53,400
+505
+00:34:27,315 --> 00:34:31,125
 so this line is just hydrostatic
 balance at the ground.
 
-496
-00:33:54,900 --> 00:33:59,659
+506
+00:34:32,625 --> 00:34:37,384
 At Trappes, that's a fall of eleven
 point six pascals for every metre,
 
-497
-00:33:59,659 --> 00:34:03,875
+507
+00:34:37,384 --> 00:34:41,600
 or one hectopascal for every
 eight point six metres you climb.
 
-498
-00:34:05,375 --> 00:34:08,717
+508
+00:34:43,100 --> 00:34:46,442
 Pilots use this rule
 of thumb near the ground:
 
-499
-00:34:08,717 --> 00:34:11,550
+509
+00:34:46,442 --> 00:34:49,275
 about thirty feet for each hectopascal.
 
-500
-00:34:11,900 --> 00:34:15,425
+510
+00:34:49,625 --> 00:34:53,150
 Let's test it one kilometre
 above the station.
 
-501
-00:34:15,775 --> 00:34:20,350
+511
+00:34:53,500 --> 00:34:58,075
 The line gives eight hundred
 and eighty point four hectopascals.
 
-502
-00:34:20,700 --> 00:34:24,910
+512
+00:34:58,425 --> 00:35:02,635
 Adding the bend gives eight hundred
 and eighty seven point three,
 
-503
-00:34:24,910 --> 00:34:29,250
+513
+00:35:02,635 --> 00:35:06,975
 and the balloon measured eight
 hundred and eighty seven point zero.
 
-504
-00:34:30,750 --> 00:34:34,610
+514
+00:35:08,475 --> 00:35:12,335
 Now let's go five point six
 kilometres above the station,
 
-505
-00:34:34,610 --> 00:34:38,200
+515
+00:35:12,335 --> 00:35:15,925
 where the balloon measured
 five hundred hectopascals.
 
-506
-00:34:38,550 --> 00:34:43,000
+516
+00:35:16,275 --> 00:35:20,725
 The line gives only three hundred
 and forty three, far too low.
 
-507
-00:34:44,500 --> 00:34:48,016
+517
+00:35:22,225 --> 00:35:25,741
 Adding the bend gives five
 hundred and fifty eight,
 
-508
-00:34:48,016 --> 00:34:51,325
+518
+00:35:25,741 --> 00:35:29,050
 and the next term gives
 five hundred and eleven.
 
-509
-00:34:52,825 --> 00:34:56,892
+519
+00:35:30,550 --> 00:35:34,617
 With all the terms, the series
 lands on five hundred and
 
-510
-00:34:56,892 --> 00:34:59,725
+520
+00:35:34,617 --> 00:35:37,450
 seventeen, the exponential's own value.
 
-511
-00:35:01,225 --> 00:35:05,171
+521
+00:35:38,950 --> 00:35:42,896
 The last seventeen hectopascals
 are not the series' fault:
 
-512
-00:35:05,171 --> 00:35:09,525
+522
+00:35:42,896 --> 00:35:47,250
 our exponential assumed the ground's
 temperature all the way up.
 
-513
-00:35:09,875 --> 00:35:14,725
+523
+00:35:47,600 --> 00:35:52,450
 With the layer's average temperature,
 two hundred and seventy seven kelvin,
 
-514
-00:35:14,725 --> 00:35:18,024
+524
+00:35:52,450 --> 00:35:55,749
 the exponential gives four
 hundred and ninety nine,
 
-515
-00:35:18,024 --> 00:35:20,675
+525
+00:35:55,749 --> 00:35:58,400
 right next to the balloon's five hundred.
 
-516
-00:35:22,175 --> 00:35:26,750
+526
+00:35:59,900 --> 00:36:04,475
 So a Taylor series can only be
 as good as the curve it expands.
 
-517
-00:35:27,550 --> 00:35:30,175
+527
+00:36:05,275 --> 00:36:07,900
 Taylor series need a smooth curve.
 
-518
-00:35:30,525 --> 00:35:35,599
+528
+00:36:08,250 --> 00:36:13,324
 At about thirteen kilometres, the
 balloon's temperature profile has a kink:
 
-519
-00:35:35,599 --> 00:35:39,725
+529
+00:36:13,324 --> 00:36:17,450
 the cooling stops, and above it
 the air gets a little warmer.
 
-520
-00:35:40,075 --> 00:35:43,750
+530
+00:36:17,800 --> 00:36:21,475
 That's the tropopause,
 the lid on the weather layer.
 
-521
-00:35:44,100 --> 00:35:49,699
+531
+00:36:21,825 --> 00:36:27,424
 A line or a series built just below the
 kink predicts ever colder air above it,
 
-522
-00:35:49,699 --> 00:35:50,975
+532
+00:36:27,424 --> 00:36:28,700
 and gets it wrong.
 
-523
-00:35:51,325 --> 00:35:53,875
+533
+00:36:29,050 --> 00:36:31,600
 The same happens across a weather front,
 
-524
-00:35:53,875 --> 00:35:57,700
+534
+00:36:31,600 --> 00:36:35,425
 where the temperature changes
 sharply over a short distance.
 
-525
-00:35:58,050 --> 00:36:01,892
+535
+00:36:35,775 --> 00:36:39,617
 So the rule is: use a Taylor
 series only for steps that are
 
-526
-00:36:01,892 --> 00:36:04,740
+536
+00:36:39,617 --> 00:36:42,465
 small compared
 with the distance over which
 
-527
-00:36:04,740 --> 00:36:05,800
+537
+00:36:42,465 --> 00:36:43,525
 the curve bends.
 
-528
-00:36:06,600 --> 00:36:09,450
+538
+00:36:44,325 --> 00:36:47,175
 So why are these tools
 built the way they are?
 
-529
-00:36:09,800 --> 00:36:11,975
+539
+00:36:47,525 --> 00:36:49,700
 There are three good reasons.
 
-530
-00:36:12,325 --> 00:36:16,230
+540
+00:36:50,050 --> 00:36:53,955
 The first is that the weather
 depends on many things at once,
 
-531
-00:36:16,230 --> 00:36:17,702
+541
+00:36:53,955 --> 00:36:55,427
 the place and the time,
 
-532
-00:36:17,702 --> 00:36:21,736
+542
+00:36:55,427 --> 00:36:59,461
 and partial derivatives let us
 ask about one of them at a time,
 
-533
-00:36:21,736 --> 00:36:23,400
+543
+00:36:59,461 --> 00:37:01,125
 by holding the rest fixed.
 
-534
-00:36:23,750 --> 00:36:29,295
+544
+00:37:01,475 --> 00:37:07,020
 The second is that, when we zoom in close
 enough, every smooth field looks flat,
 
-535
-00:36:29,295 --> 00:36:34,425
+545
+00:37:07,020 --> 00:37:12,150
 so small changes simply add up, slope
 times step, one direction at a time.
 
-536
-00:36:34,775 --> 00:36:38,250
+546
+00:37:12,500 --> 00:37:15,975
 That's the total differential,
 and the chain rule.
 
-537
-00:36:38,600 --> 00:36:41,025
+547
+00:37:16,325 --> 00:37:18,750
 The third reason is practical.
 
-538
-00:36:41,375 --> 00:36:44,104
+548
+00:37:19,100 --> 00:37:21,829
 The Taylor series tells
 us how big our error
 
-539
-00:36:44,104 --> 00:36:46,834
+549
+00:37:21,829 --> 00:37:24,559
 is when we stop
 at the straight line, and so
 
-540
-00:36:46,834 --> 00:36:48,385
+550
+00:37:24,559 --> 00:37:26,110
 how small a step must be,
 
-541
-00:36:48,385 --> 00:36:52,975
+551
+00:37:26,110 --> 00:37:30,700
 whether it's a degree of warming
 or the spacing of a weather model's grid.
 
-542
-00:36:53,775 --> 00:36:57,327
+552
+00:37:31,500 --> 00:37:35,052
 Keeping only the first two
 terms of a Taylor series,
 
-543
-00:36:57,327 --> 00:37:00,675
+553
+00:37:35,052 --> 00:37:38,400
 the value and the slope, is
 called linearisation.
 
-544
-00:37:01,025 --> 00:37:05,784
+554
+00:37:38,750 --> 00:37:43,509
 It turns a curve into a straight
 line around a chosen starting state,
 
-545
-00:37:05,784 --> 00:37:07,025
+555
+00:37:43,509 --> 00:37:44,750
 for small changes.
 
-546
-00:37:07,375 --> 00:37:11,394
+556
+00:37:45,100 --> 00:37:49,119
 Meteorologists and oceanographers
 do this all the time:
 
-547
-00:37:11,394 --> 00:37:14,975
+557
+00:37:49,119 --> 00:37:52,700
 a quiet starting
 state, plus a small disturbance.
 
-548
-00:37:15,325 --> 00:37:19,644
+558
+00:37:53,050 --> 00:37:57,369
 That's how waves, and the growth
 of storms, are first understood,
 
-549
-00:37:19,644 --> 00:37:22,900
+559
+00:37:57,369 --> 00:38:00,625
 in the waves and stability
 movies of this series.
 
-550
-00:37:23,250 --> 00:37:26,675
+560
+00:38:00,975 --> 00:38:04,400
 Now let's linearise two
 famous climate curves.
 
-551
-00:37:27,475 --> 00:37:29,750
+561
+00:38:05,200 --> 00:38:07,475
 First, water vapour.
 
-552
-00:37:30,100 --> 00:37:35,678
+562
+00:38:07,825 --> 00:38:13,403
 Over a lake or the sea, water molecules
 keep escaping into the air as vapour,
 
-553
-00:37:35,678 --> 00:37:38,575
+563
+00:38:13,403 --> 00:38:16,300
 a gas, while others return to the water.
 
-554
-00:37:38,925 --> 00:37:43,200
+564
+00:38:16,650 --> 00:38:20,925
 The vapour's share of the air pressure
 is called the vapour pressure.
 
-555
-00:37:43,550 --> 00:37:48,097
+565
+00:38:21,275 --> 00:38:25,822
 When escaping and returning balance,
 we say the air is saturated,
 
-556
-00:37:48,097 --> 00:37:52,575
+566
+00:38:25,822 --> 00:38:30,300
 and the vapour pressure takes
 its saturation value, written e s.
 
-557
-00:37:52,925 --> 00:37:57,050
+567
+00:38:30,650 --> 00:38:34,775
 That value depends only
 on the temperature, not on the air,
 
-558
-00:37:57,050 --> 00:38:00,475
+568
+00:38:34,775 --> 00:38:38,200
 and the Clausius–Clapeyron
 equation tells us how.
 
-559
-00:38:00,825 --> 00:38:07,250
+569
+00:38:38,550 --> 00:38:44,975
 d e s by d T equals L times e s,
 divided by R v times T squared.
 
-560
-00:38:07,600 --> 00:38:09,373
+570
+00:38:45,325 --> 00:38:47,098
 Here L is the latent heat,
 
-561
-00:38:09,373 --> 00:38:13,941
+571
+00:38:47,098 --> 00:38:51,666
 the energy needed to turn one
 kilogram of liquid water into vapour:
 
-562
-00:38:13,941 --> 00:38:17,486
+572
+00:38:51,666 --> 00:38:55,211
 about two and a half million
 joules at zero degrees,
 
-563
-00:38:17,486 --> 00:38:19,600
+573
+00:38:55,211 --> 00:38:57,325
 a little less for warmer water.
 
-564
-00:38:19,950 --> 00:38:22,973
+574
+00:38:57,675 --> 00:39:00,698
 R v is the gas constant for water vapour,
 
-565
-00:38:22,973 --> 00:38:27,250
+575
+00:39:00,698 --> 00:39:04,975
 four hundred and sixty two
 joules per kilogram per kelvin.
 
-566
-00:38:27,600 --> 00:38:30,625
+576
+00:39:05,325 --> 00:39:08,350
 And T is the temperature in kelvin.
 
-567
-00:38:30,975 --> 00:38:33,676
+577
+00:39:08,700 --> 00:39:11,401
 The curve climbs faster and faster:
 
-568
-00:38:33,676 --> 00:38:37,919
+578
+00:39:11,401 --> 00:39:15,644
 at zero degrees Celsius,
 e s is about six hectopascals,
 
-569
-00:38:37,919 --> 00:38:43,475
+579
+00:39:15,644 --> 00:39:21,200
 at fifteen degrees it's seventeen,
 and at thirty degrees it's forty two.
 
-570
-00:38:43,825 --> 00:38:47,425
+580
+00:39:21,550 --> 00:39:25,150
 Water in the air has its own
 movie in this series.
 
-571
-00:38:48,225 --> 00:38:51,525
+581
+00:39:25,950 --> 00:39:29,250
 How much does e s grow
 for each extra degree?
 
-572
-00:38:51,875 --> 00:38:54,725
+582
+00:39:29,600 --> 00:39:32,450
 Let's divide both sides by e s.
 
-573
-00:38:55,075 --> 00:38:59,825
+583
+00:39:32,800 --> 00:39:37,550
 The fractional growth per kelvin
 is L over R v T squared.
 
-574
-00:39:00,175 --> 00:39:03,913
+584
+00:39:37,900 --> 00:39:41,638
 At zero degrees Celsius,
 that's two and a half million,
 
-575
-00:39:03,913 --> 00:39:07,923
+585
+00:39:41,638 --> 00:39:45,648
 divided by four hundred and sixty
 two times two hundred and
 
-576
-00:39:07,923 --> 00:39:11,389
+586
+00:39:45,648 --> 00:39:49,114
 seventy three squared:
 zero point zero seven three,
 
-577
-00:39:11,389 --> 00:39:13,700
+587
+00:39:49,114 --> 00:39:51,425
 or about seven percent per degree.
 
-578
-00:39:15,200 --> 00:39:18,623
+588
+00:39:52,925 --> 00:39:56,348
 At fifteen degrees,
 it's six point four percent,
 
-579
-00:39:18,623 --> 00:39:21,475
+589
+00:39:56,348 --> 00:39:59,200
 and at thirty degrees, five point seven.
 
-580
-00:39:22,975 --> 00:39:27,408
+590
+00:40:00,700 --> 00:40:05,133
 That's the famous seven percent rule:
 for each degree of warming,
 
-581
-00:39:27,408 --> 00:39:31,500
+591
+00:40:05,133 --> 00:40:09,225
 the saturation vapour pressure
 rises by about seven percent.
 
-582
-00:39:31,850 --> 00:39:33,800
+592
+00:40:09,575 --> 00:40:11,525
 How good is the line?
 
-583
-00:39:34,150 --> 00:39:37,731
+593
+00:40:11,875 --> 00:40:15,456
 For one degree, it gives
 seven point three percent,
 
-584
-00:39:37,731 --> 00:39:40,750
+594
+00:40:15,456 --> 00:40:18,475
 and the exact curve
 gives seven point five.
 
-585
-00:39:41,100 --> 00:39:44,787
+595
+00:40:18,825 --> 00:40:22,512
 For four degrees, the line
 gives twenty nine percent,
 
-586
-00:39:44,787 --> 00:39:47,500
+596
+00:40:22,512 --> 00:40:25,225
 and the exact curve gives thirty three.
 
-587
-00:39:49,000 --> 00:39:53,298
+597
+00:40:26,725 --> 00:40:31,023
 The gap grows with the step, just
 as the Taylor series told us,
 
-588
-00:39:53,298 --> 00:39:55,550
+598
+00:40:31,023 --> 00:40:33,275
 because the bend term is missing.
 
-589
-00:39:56,350 --> 00:39:58,250
+599
+00:40:34,075 --> 00:40:35,975
 Why does this matter?
 
-590
-00:39:58,600 --> 00:40:01,700
+600
+00:40:36,325 --> 00:40:39,425
 The last ten years were
 about one point two six
 
-591
-00:40:01,700 --> 00:40:04,800
+601
+00:40:39,425 --> 00:40:42,525
 degrees warmer than
 the late eighteen hundreds.
 
-592
-00:40:05,150 --> 00:40:07,029
+602
+00:40:42,875 --> 00:40:44,754
 By the seven percent rule,
 
-593
-00:40:07,029 --> 00:40:11,725
+603
+00:40:44,754 --> 00:40:49,450
 that raises the saturation vapour
 pressure by about nine percent.
 
-594
-00:40:13,225 --> 00:40:15,763
+604
+00:40:50,950 --> 00:40:53,488
 The rule is about saturated air, though,
 
-595
-00:40:15,763 --> 00:40:20,205
+605
+00:40:53,488 --> 00:40:57,930
 and the water vapour measured near
 the ground has risen a little less:
 
-596
-00:40:20,205 --> 00:40:24,075
+606
+00:40:57,930 --> 00:41:01,800
 about four to five percent
 for each degree of global warming.
 
-597
-00:40:24,425 --> 00:40:28,027
+607
+00:41:02,150 --> 00:41:05,752
 Still, the reanalysis shows
 the water vapour in the
 
-598
-00:40:28,027 --> 00:40:31,700
+608
+00:41:05,752 --> 00:41:09,425
 whole atmosphere rising
 since nineteen seventy nine.
 
-599
-00:40:32,050 --> 00:40:36,175
+609
+00:41:09,775 --> 00:41:13,900
 More vapour means more water
 for the heaviest downpours.
 
-600
-00:40:36,525 --> 00:40:41,394
+610
+00:41:14,250 --> 00:41:19,119
 The Intergovernmental Panel on Climate
 Change assesses that, worldwide,
 
-601
-00:40:41,394 --> 00:40:45,166
+611
+00:41:19,119 --> 00:41:22,891
 the heaviest daily rainfall
 is expected to become about
 
-602
-00:40:45,166 --> 00:40:49,350
+612
+00:41:22,891 --> 00:41:27,075
 seven percent more intense
 for each degree of global warming.
 
-603
-00:40:50,150 --> 00:40:53,225
+613
+00:41:27,875 --> 00:41:30,950
 Second, the heat that
 Earth sends to space.
 
-604
-00:40:53,575 --> 00:40:57,847
+614
+00:41:31,300 --> 00:41:35,572
 Every warm body glows in infrared
 light, and a perfect emitter,
 
-605
-00:40:57,847 --> 00:41:03,000
+615
+00:41:35,572 --> 00:41:40,725
 called a black body, gives off sigma T to
 the fourth watts per square metre.
 
-606
-00:41:03,350 --> 00:41:06,685
+616
+00:41:41,075 --> 00:41:44,410
 Here sigma
 is the Stefan–Boltzmann constant,
 
-607
-00:41:06,685 --> 00:41:10,475
+617
+00:41:44,410 --> 00:41:48,200
 five point six seven times ten
 to the minus eight.
 
-608
-00:41:10,825 --> 00:41:14,620
+618
+00:41:48,550 --> 00:41:52,345
 Satellites measure Earth giving
 off about two hundred and
 
-609
-00:41:14,620 --> 00:41:17,350
+619
+00:41:52,345 --> 00:41:55,075
 forty watts per square metre, on average.
 
-610
-00:41:17,700 --> 00:41:21,383
+620
+00:41:55,425 --> 00:41:59,108
 Solving sigma T to the fourth
 equals two hundred and
 
-611
-00:41:21,383 --> 00:41:23,933
+621
+00:41:59,108 --> 00:42:01,658
 forty gives T equals two hundred and
 
-612
-00:41:23,933 --> 00:41:27,900
+622
+00:42:01,658 --> 00:42:05,625
 fifty five kelvin, about
 minus eighteen degrees Celsius.
 
-613
-00:41:28,250 --> 00:41:32,952
+623
+00:42:05,975 --> 00:42:10,677
 That's Earth's emission temperature:
 the temperature a black body would need,
 
-614
-00:41:32,952 --> 00:41:36,800
+624
+00:42:10,677 --> 00:42:14,525
 to give off those two hundred
 and forty watts per square metre.
 
-615
-00:41:38,300 --> 00:41:43,425
+625
+00:42:16,025 --> 00:42:21,150
 Now let's linearise: how much more does
 Earth give off for each degree warmer?
 
-616
-00:41:43,775 --> 00:41:45,966
+626
+00:42:21,500 --> 00:42:23,691
 Just as x squared gave two x,
 
-617
-00:41:45,966 --> 00:41:50,650
+627
+00:42:23,691 --> 00:42:28,375
 the derivative of sigma T to the fourth
 is four sigma T cubed.
 
-618
-00:41:51,000 --> 00:41:55,925
+628
+00:42:28,725 --> 00:42:33,650
 And sigma T cubed is just
 sigma T to the fourth, divided by T.
 
-619
-00:41:56,275 --> 00:42:01,132
+629
+00:42:34,000 --> 00:42:38,857
 So the slope is four times two hundred
 and forty, divided by two hundred and
 
-620
-00:42:01,132 --> 00:42:05,925
+630
+00:42:38,857 --> 00:42:43,650
 fifty five: about three point eight
 watts per square metre for each degree.
 
-621
-00:42:07,425 --> 00:42:11,869
+631
+00:42:45,150 --> 00:42:49,594
 This is called the Planck response,
 and it's the planet's thermostat:
 
-622
-00:42:11,869 --> 00:42:15,475
+632
+00:42:49,594 --> 00:42:53,200
 warm up, and you lose heat
 faster, which pulls you back.
 
-623
-00:42:15,825 --> 00:42:19,047
+633
+00:42:53,550 --> 00:42:56,772
 Doubling the carbon dioxide
 in the air adds about
 
-624
-00:42:19,047 --> 00:42:22,400
+634
+00:42:56,772 --> 00:43:00,125
 three point nine watts
 per square metre of heating.
 
-625
-00:42:22,750 --> 00:42:27,291
+635
+00:43:00,475 --> 00:43:05,016
 To shed that, a planet with only
 the Planck response would warm by
 
-626
-00:42:27,291 --> 00:42:30,925
+636
+00:43:05,016 --> 00:43:08,650
 about three point nine
 divided by three point eight:
 
-627
-00:42:30,925 --> 00:42:33,300
+637
+00:43:08,650 --> 00:43:11,025
 about one point zero four degrees.
 
-628
-00:42:34,800 --> 00:42:37,849
+638
+00:43:12,525 --> 00:43:15,574
 The Intergovernmental
 Panel's careful estimate
 
-629
-00:42:37,849 --> 00:42:40,899
+639
+00:43:15,574 --> 00:43:18,624
 of the real Planck
 response is a little lower,
 
-630
-00:42:40,899 --> 00:42:45,075
+640
+00:43:18,624 --> 00:43:22,800
 about three point two, which
 gives about one point two degrees.
 
-631
-00:42:45,425 --> 00:42:49,804
+641
+00:43:23,150 --> 00:43:27,529
 The full warming is larger,
 because of feedbacks: for example,
 
-632
-00:42:49,804 --> 00:42:55,525
+642
+00:43:27,529 --> 00:43:33,250
 a warmer world has more water vapour in
 its air, and water vapour traps heat too.
 
-633
-00:42:55,875 --> 00:42:58,550
+643
+00:43:33,600 --> 00:43:36,275
 Is the linear Planck rule good enough?
 
-634
-00:42:58,900 --> 00:43:03,191
+644
+00:43:36,625 --> 00:43:40,916
 For one degree, the exact curve
 gives three point seven nine,
 
-635
-00:43:03,191 --> 00:43:06,075
+645
+00:43:40,916 --> 00:43:43,800
 against the line's three point seven six.
 
-636
-00:43:06,425 --> 00:43:09,950
+646
+00:43:44,150 --> 00:43:47,675
 For ten degrees,
 it's forty against thirty eight.
 
-637
-00:43:11,450 --> 00:43:16,775
+647
+00:43:49,175 --> 00:43:54,500
 For the changes that climate scientists
 worry about, the line does very well.
 
-638
-00:43:17,575 --> 00:43:21,225
+648
+00:43:55,300 --> 00:43:58,950
 Last, how does a weather
 model take a derivative?
 
-639
-00:43:21,575 --> 00:43:26,325
+649
+00:43:59,300 --> 00:44:04,050
 It knows the temperature only
 at grid points, a distance h apart.
 
-640
-00:43:26,675 --> 00:43:31,075
+650
+00:44:04,400 --> 00:44:08,800
 The simplest estimate of the slope
 is the forward difference:
 
-641
-00:43:31,075 --> 00:43:35,475
+651
+00:44:08,800 --> 00:44:13,200
 the value one step ahead, minus
 the value here, divided by h.
 
-642
-00:43:35,825 --> 00:43:37,550
+652
+00:44:13,550 --> 00:44:15,275
 How wrong is it?
 
-643
-00:43:37,900 --> 00:43:40,125
+653
+00:44:15,625 --> 00:44:17,850
 The Taylor series tells us.
 
-644
-00:43:40,475 --> 00:43:44,502
+654
+00:44:18,200 --> 00:44:22,227
 The value one step ahead
 is f, plus h times the slope,
 
-645
-00:43:44,502 --> 00:43:49,200
+655
+00:44:22,227 --> 00:44:26,925
 plus h squared over two times the second
 derivative, and so on.
 
-646
-00:43:49,550 --> 00:43:52,825
+656
+00:44:27,275 --> 00:44:30,550
 Let's subtract f, and divide by h.
 
-647
-00:43:53,175 --> 00:43:59,050
+657
+00:44:30,900 --> 00:44:36,775
 We get the slope, plus h over two times
 the second derivative, plus smaller terms.
 
-648
-00:43:59,400 --> 00:44:04,050
+658
+00:44:37,125 --> 00:44:41,775
 So the forward difference
 is off by about h over two times the bend.
 
-649
-00:44:04,400 --> 00:44:07,250
+659
+00:44:42,125 --> 00:44:44,975
 Halve the step, and you halve the error.
 
-650
-00:44:08,750 --> 00:44:11,300
+660
+00:44:46,475 --> 00:44:49,025
 That's called first-order accurate.
 
-651
-00:44:12,100 --> 00:44:17,441
+661
+00:44:49,825 --> 00:44:55,166
 Now the centred difference we used
 on the map: the value one step ahead,
 
-652
-00:44:17,441 --> 00:44:21,150
+662
+00:44:55,166 --> 00:44:58,875
 minus the value one step
 behind, divided by two h.
 
-653
-00:44:21,500 --> 00:44:24,200
+663
+00:44:59,225 --> 00:45:01,925
 Let's write both with the Taylor series.
 
-654
-00:44:24,550 --> 00:44:30,326
+664
+00:45:02,275 --> 00:45:08,051
 Ahead is f, plus h times the slope, plus h
 squared over two times the bend,
 
-655
-00:44:30,326 --> 00:44:34,100
+665
+00:45:08,051 --> 00:45:11,825
 plus h cubed over six
 times the third derivative.
 
-656
-00:44:34,450 --> 00:44:39,150
+666
+00:45:12,175 --> 00:45:16,875
 Behind is the same, but every
 odd power of h flips its sign.
 
-657
-00:44:39,500 --> 00:44:44,100
+667
+00:45:17,225 --> 00:45:21,825
 Subtract, and the f terms
 cancel, and so do the bend terms.
 
-658
-00:44:44,450 --> 00:44:47,831
+668
+00:45:22,175 --> 00:45:25,556
 Divide by two h, and we're
 left with the slope,
 
-659
-00:44:47,831 --> 00:44:51,500
+669
+00:45:25,556 --> 00:45:29,225
 plus h squared over six
 times the third derivative.
 
-660
-00:44:53,000 --> 00:44:56,500
+670
+00:45:30,725 --> 00:45:34,225
 Halve the step, and the error
 drops to a quarter.
 
-661
-00:44:56,850 --> 00:44:59,150
+671
+00:45:34,575 --> 00:45:36,875
 That's second-order accurate.
 
-662
-00:45:00,650 --> 00:45:06,075
+672
+00:45:38,375 --> 00:45:43,800
 Let's check on the sine curve at x equals
 one, with a step of zero point one.
 
-663
-00:45:06,425 --> 00:45:11,206
+673
+00:45:44,150 --> 00:45:48,931
 The forward difference is off by
 minus zero point zero four three,
 
-664
-00:45:11,206 --> 00:45:15,625
+674
+00:45:48,931 --> 00:45:53,350
 the centred one by only
 minus zero point zero zero zero nine.
 
-665
-00:45:17,125 --> 00:45:19,375
+675
+00:45:54,850 --> 00:45:57,100
 Now the real map at Brest.
 
-666
-00:45:19,725 --> 00:45:23,469
+676
+00:45:57,450 --> 00:46:01,194
 With the data points eighteen
 kilometres apart going east,
 
-667
-00:45:23,469 --> 00:45:26,438
+677
+00:46:01,194 --> 00:46:04,163
 the forward difference
 gives minus three point
 
-668
-00:45:26,438 --> 00:45:29,085
+678
+00:46:04,163 --> 00:46:06,810
 three two degrees per hundred kilometres,
 
-669
-00:45:29,085 --> 00:45:32,442
+679
+00:46:06,810 --> 00:46:10,167
 the backward difference
 minus three point zero nine,
 
-670
-00:45:32,442 --> 00:45:36,250
+680
+00:46:10,167 --> 00:46:13,975
 and the centred one
 minus three point two zero, in between.
 
-671
-00:45:37,750 --> 00:45:40,550
+681
+00:46:15,475 --> 00:46:18,275
 Now let's pretend the grid is coarser.
 
-672
-00:45:40,900 --> 00:45:43,743
+682
+00:46:18,625 --> 00:46:21,468
 With points thirty seven kilometres apart,
 
-673
-00:45:43,743 --> 00:45:47,602
+683
+00:46:21,468 --> 00:46:25,327
 the centred difference gives
 minus three point one seven,
 
-674
-00:45:47,602 --> 00:45:51,800
+684
+00:46:25,327 --> 00:46:29,525
 and seventy four kilometres
 apart, minus three point one four.
 
-675
-00:45:53,300 --> 00:45:56,352
+685
+00:46:31,025 --> 00:46:34,077
 But at one hundred
 and forty seven kilometres,
 
-676
-00:45:56,352 --> 00:45:58,807
+686
+00:46:34,077 --> 00:46:36,532
 it drops to minus two point two four,
 
-677
-00:45:58,807 --> 00:46:01,793
+687
+00:46:36,532 --> 00:46:39,518
 and at two hundred
 and twenty one kilometres,
 
-678
-00:46:01,793 --> 00:46:03,850
+688
+00:46:39,518 --> 00:46:41,575
 to minus zero point nine eight.
 
-679
-00:46:05,350 --> 00:46:08,461
+689
+00:46:43,075 --> 00:46:46,186
 The coarse grid steps
 right over the warm front,
 
-680
-00:46:08,461 --> 00:46:12,025
+690
+00:46:46,186 --> 00:46:49,750
 so it sees a temperature
 change three times too gentle.
 
-681
-00:46:12,375 --> 00:46:15,475
+691
+00:46:50,100 --> 00:46:53,200
 That's why weather models use fine grids.
 
-682
-00:46:15,825 --> 00:46:19,715
+692
+00:46:53,550 --> 00:46:57,440
 The first computer weather
 forecast, in nineteen fifty,
 
-683
-00:46:19,715 --> 00:46:24,100
+693
+00:46:57,440 --> 00:47:01,825
 had grid points seven hundred
 and thirty six kilometres apart.
 
-684
-00:46:24,450 --> 00:46:29,150
+694
+00:47:02,175 --> 00:47:06,875
 Early climate models had points a few
 hundred kilometres apart.
 
-685
-00:46:29,500 --> 00:46:32,756
+695
+00:47:07,225 --> 00:47:10,481
 The leading global
 forecast models today have
 
-686
-00:46:32,756 --> 00:46:35,650
+696
+00:47:10,481 --> 00:47:13,375
 grid points about nine kilometres apart.
 
-687
-00:46:36,000 --> 00:46:40,600
+697
+00:47:13,725 --> 00:47:18,325
 Solving whole equations on grids
 has its own movie in this series.
 
-688
-00:46:41,400 --> 00:46:47,025
+698
+00:47:19,125 --> 00:47:24,750
 To sum up, a derivative is the slope
 of the tangent, the rate at one instant.
 
-689
-00:46:47,375 --> 00:46:52,350
+699
+00:47:25,100 --> 00:47:30,075
 A partial derivative changes one
 variable and holds the others fixed.
 
-690
-00:46:52,700 --> 00:46:56,362
+700
+00:47:30,425 --> 00:47:34,087
 Over Brest, the air got
 colder by three point two degrees
 
-691
-00:46:56,362 --> 00:46:58,978
+701
+00:47:34,087 --> 00:47:36,703
 per hundred kilometres towards the east,
 
-692
-00:46:58,978 --> 00:47:03,425
+702
+00:47:36,703 --> 00:47:41,150
 while a fixed thermometer
 warmed by two point nine degrees per hour.
 
-693
-00:47:03,775 --> 00:47:08,050
+703
+00:47:41,500 --> 00:47:45,775
 The total differential adds
 slope times step for each variable,
 
-694
-00:47:08,050 --> 00:47:12,800
+704
+00:47:45,775 --> 00:47:50,525
 and dividing by time gives the chain
 rule, the rate a traveller feels.
 
-695
-00:47:13,150 --> 00:47:17,421
+705
+00:47:50,875 --> 00:47:55,146
 The plane flying east cooled
 at eight point six degrees per hour,
 
-696
-00:47:17,421 --> 00:47:20,050
+706
+00:47:55,146 --> 00:47:57,775
 while every place it passed was warming.
 
-697
-00:47:20,400 --> 00:47:24,722
+707
+00:47:58,125 --> 00:48:02,447
 The Trappes balloon cooled by
 one point six degrees every minute,
 
-698
-00:47:24,722 --> 00:47:26,650
+708
+00:48:02,447 --> 00:48:04,375
 almost all of it from rising.
 
-699
-00:47:27,000 --> 00:47:29,618
+709
+00:48:04,725 --> 00:48:07,343
 Mixed partials don't depend on the order,
 
-700
-00:47:29,618 --> 00:47:32,875
+710
+00:48:07,343 --> 00:48:10,600
 and that gives the test
 for a perfect differential.
 
-701
-00:47:33,225 --> 00:47:39,050
+711
+00:48:10,950 --> 00:48:16,775
 Pressure passes it, heat fails it, and
 heat divided by temperature passes again.
 
-702
-00:47:39,400 --> 00:47:44,625
+712
+00:48:17,125 --> 00:48:22,350
 A Taylor series builds a curve
 from its value, slope, bend and more.
 
-703
-00:47:44,975 --> 00:47:47,931
+713
+00:48:22,700 --> 00:48:25,656
 Keeping the first two
 terms is linearisation:
 
-704
-00:47:47,931 --> 00:47:51,346
+714
+00:48:25,656 --> 00:48:29,071
 about seven percent more
 saturation vapour pressure,
 
-705
-00:47:51,346 --> 00:47:55,549
+715
+00:48:29,071 --> 00:48:33,274
 and three point eight more watts
 per square metre sent to space,
 
-706
-00:47:55,549 --> 00:47:56,600
+716
+00:48:33,274 --> 00:48:34,325
 for each degree.
 
-707
-00:47:56,950 --> 00:47:59,578
+717
+00:48:34,675 --> 00:48:37,303
 And the same Taylor series tells us how
 
-708
-00:47:59,578 --> 00:48:02,475
+718
+00:48:37,303 --> 00:48:40,200
 accurate a weather
 model's derivatives are.
 
-709
-00:48:03,275 --> 00:48:07,433
+719
+00:48:41,000 --> 00:48:45,158
 This video is one of a series
 of related maths tutorials,
 
-710
-00:48:07,433 --> 00:48:09,475
+720
+00:48:45,158 --> 00:48:47,200
 so watch out for the others.
 
-711
-00:48:09,825 --> 00:48:14,222
+721
+00:48:47,550 --> 00:48:51,947
 They're made for students
 of atmospheric science, meteorology and
 
-712
-00:48:14,222 --> 00:48:17,875
+722
+00:48:51,947 --> 00:48:55,600
 fluid dynamics, and anyone
 else who needs these ideas.
 
-713
-00:48:18,225 --> 00:48:21,141
+723
+00:48:55,950 --> 00:48:58,866
 The notebook for derivatives
 and Taylor series,
 
-714
-00:48:21,141 --> 00:48:24,058
+724
+00:48:58,866 --> 00:49:01,783
 and the notebooks
 for the other maths concepts,
 
-715
-00:48:24,058 --> 00:48:26,850
+725
+00:49:01,783 --> 00:49:04,575
 are on the website that
 goes with this video.
