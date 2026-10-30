@@ -1,6 +1,8 @@
-# RESUME — G: DISCONNECTED 2026-10-30 ~09:45 (checked 11:17): all G: work stopped
+# RESUME — G: back 2026-10-30 (was disconnected ~09:45); queue restarted
 
-**When G: is back, resume in this order:**
+Render 3 was restarted with `render_uf2.py --from 4` (log `uf2/render_fix1c_resume.log`); c00–c03 are verified at 4000 frames, and the bundle matches commit 25eb34b. If this session died, check which chunks exist and rerun with `--from <first missing>`. Data scout for #6 and M01 started alongside it.
+
+**Resume in this order:**
 1. Weather UF2 render 3: delete `uf2/render/c04*` if partial; run `tools/movie_wb/render_uf2.py` (TEMP/TMP on G:) for the missing chunks (~2 h); join with `join2pass.py <uf2/render> <uf2/public/narration_music.wav> <out> --mb 152 --abr 128k --alim 0.5`; copy to movies/out; run QA with `--overlap G:/…/uf2/stills/k6final2`, source_check, vscan; then G: viewing copy + Drive, then review 2.
 2. #4 fix loop 2 render (the builder's report has the resume steps).
 3. The data scout for #6 D8 (Elliott), #5 (21 Jan 2026), M01 D1–D3 (its report lists what is left).

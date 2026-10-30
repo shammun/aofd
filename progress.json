@@ -89,13 +89,13 @@
     }
   },
   "last_update": {
-    "commit": "3be330c",
-    "fluidpy_commit": "b2857bc",
-    "time": "2026-10-27T19:25"
+    "commit": "ad94c49",
+    "fluidpy_commit": "3800f15",
+    "time": "2026-10-29T20:22"
   },
   "resume": {
     "file": "RESUME.md",
-    "summary": "Movie ch00_cross_product_why: fix loop 2 is committed in source (19628fa) but NOT rendered — drive G: disconnected mid-render (2026-10-26 ~11:00). v2 (33:26, 77.5 MB) is in movies/out; the user's preview copy is preview_v2.mp4 (never touch it).",
-    "instruction": "Read RESUME.md, give the user a short status (incl. whether G: is back and the open M10/M8/M11/PoC questions), then START its 'Do automatically' steps without waiting: check G: -> check files and rebuild data -> motion-builder renders v3 (tools/movie_cp/*) -> QA -> commit -> fresh review 3. If G: is missing, tell the user and stop."
+    "summary": "G: back 2026-10-30. Weather UF2 render 3 restarted from chunk 4; data scout for #6 and M01 running. Next: join, QA, review 2, then #4 fix loop 2 render.",
+    "instruction": "Read RESUME.md, give the user a short status, then continue its queue in order without waiting. If G: is missing, tell the user and stop all G: work."
   }
 }
