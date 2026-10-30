@@ -22,21 +22,21 @@
 | 0.2b | Cross product Part 2 | 40:57 | review 3 PASS; §5b retro-fit pending |
 | 1a | Vectors and index notation | 35:15 | review 3 PASS; §5b retro-fit (5 musts) + wind layer stack pending; 4 polish shoulds |
 
-## Queue (in order; agreed with the user 2026-10-30)
-Only #5 and #6 must come before map reading (M01 needs #5, #6, 0.3). The retro-fits and #1b are slotted in where the renderer would otherwise wait.
+## Queue (in order; series plan v4 adopted 2026-10-30: movies/ch00/series_plan_v4_proposal.md, 176 movies)
 | # | Stream | Next step |
 |---|---|---|
-| 1 | **Weather basics UF2** fix loop 1, pass 1b (rendering) | QA → G: viewing copy + Drive → review 2 → final (fix loop 2 + review 3 only if review 2 says FIX) |
-| 2 | **#4 Derivatives and Taylor** fix loop 2 (+ 5-layer ∂T/∂z stack) | render after the weather → QA → review 3 → final |
-| 3 | **#5 Coordinates** (plan being amended for §5b, + Ian stack) | build → QA → ≥ 2 reviews → final |
-| 4 | **#6 The gradient** (plan being amended; s17 → Singapore) | build → reviews → final |
-| 5 | **M01 Contour maps** (plan being written) | build → reviews → final |
-| 6 | §5b retro-fit: cross product v5 + Part 2 (layout only) | between M01 and M02 |
-| 7 | M02 How weather maps are made → M03 Wind along isobars → M04 Fronts and cyclones (first look) → **M05 Reading the surface chart** | in order |
-| 8 | §5b retro-fit: #1a (+ wind stack) and 0.1b | after M05 |
-| 9 | M06 Station plots → M07 Pressure as vertical coordinate → **M08 Geopotential** → M09 Standard levels → **M10 Reading upper-air charts** → M11 … M20 | in order |
-| 10 | #1b triple products, then T, R, W, S, G, F, A, O, CV stages (current-events CE movies may jump in when their prerequisites are done) | v3 order |
-| — | Full fluidpy suite after the renders (library fc51cf0) | when no render is running |
+| 1 | **Weather basics UF2** fix loop 1 pass 1b | QA → G: viewing copy + Drive → review 2 → final |
+| 2 | **#4 Derivatives and Taylor** fix loop 2 (+ stack) | render after weather → QA → review 3 → final |
+| 3 | **#5 Coordinates** → **#6 The gradient** (plans being amended for §5b) | build → ≥ 2 reviews → final |
+| 4 | **M01 Contour maps** (height on contours first) | build → reviews |
+| 5 | §5b retro-fit: cross product v5 + Part 2 | after M01 |
+| 6 | **U01** pressure-gradient force → **M03** Coriolis/geostrophic/gradient/friction winds | in order |
+| 7 | §5b retro-fit: #1a (+ wind stack) + 0.1b | after M03 |
+| 8 | **U02** convergence/divergence → **M07** pressure as vertical coordinate → **M08 Geopotential** → **M09** standard levels → **M16** climate machine → **U03** lapse rates → **M12** first law/adiabats/θ/stability → **M13** humidity/CAPE → **M14 skew-T** → **M15** clouds → **U04–U18** (rain, snow/hail, rainfall, boundary layer, fronts M04, jet, waves, vorticity, cyclones, thunderstorms, severe storms, ocean, tropical cyclones, monsoon, satellite, radar) | understanding block, positions 11–39 |
+| 9 | Map reading M02, M05, M06, M10, M21–M24, M11, M17–M19, M25–M26, M20 | positions 40–54 |
+| 10 | Forecasting F01–F39 "Reading maps to predict…" | positions 55–93 |
+| 11 | #1b, T, R, W, S, G, A, O, CV, CE (CE may jump in once its prerequisites are done) | v4 order |
+| — | Full fluidpy suite after the renders (library fc51cf0) | when no render runs |
 
 ## Open with the user (not blocking)
 - **REMIND THE USER (asked 2026-10-29):** open 3 free accounts: EUMETSAT Data Store (older Meteosat images for Sidr, Nargis, Aila), ECMWF (TIGGE forecast archive), NCAR RDA (older GFS runs). Needed before forecasting movies F14/F17/F18/F19; until then use GridSat-B1, HURSAT and NHC ATCF.
