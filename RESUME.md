@@ -22,17 +22,21 @@
 | 0.2b | Cross product Part 2 | 40:57 | review 3 PASS; §5b retro-fit pending |
 | 1a | Vectors and index notation | 35:15 | review 3 PASS; §5b retro-fit (5 musts) + wind layer stack pending; 4 polish shoulds |
 
-## Queue (in order)
-| # | Stream | State | Next step |
-|---|---|---|---|
-| 1 | **Weather basics UF2** (user feedback round 2, U2-01…29; plan `movies/ch00/ch00_weather_basics/uf2_plan.md`) | Builder running: kit K1–K7, final TTS, stills, full render. The s48b front stack waits for the `front_by_level` D3 fix | QA → Drive → viewing copy `weather_basics_v5_uf2.mp4` → reviews (≥ 2) → final |
-| 1b | Library fixes D1/D2/D3 (`column_integral`, `front_by_level`) | Implementer running; report `reports/ch00_weather_basics_uf2_verification.md` | commit the fluidpy diag code + tests after the full suite passes |
-| 2 | **#4 Derivatives and Taylor**, fix loop 1 | **PAUSED** by the user for UF2. State in `G:/…/scratch/movies/ch00_derivatives_taylor/v1/fix1/PAUSED.md` (halves FAIL, a few pieces to re-render) | resume after UF2 is final → QA → commit → review 2; then its 16-level ∂T/∂z stack (data committed) |
-| 3 | §5b retro-fit: cross product v5 + Part 2 (layout only, no TTS) | planned (`movies/ch00/retrofit_5b_plan.md`) | builder, after #4 |
-| 4 | §5b retro-fit: #1a (5 musts + Trappes wind stack, data committed) | planned | builder |
-| 5 | §5b retro-fit: 0.1b s20c | planned | builder |
-| 6 | #1b, #5, #6, #69 builds | plans exist; amend the storyboards for §5b first (#69 v3 with ECMWF data, committed) | in series order |
-| 7 | Rest of the series | `movies/ch00/series_plan_v2_proposal.md` | in order |
+## Queue (in order; agreed with the user 2026-10-30)
+Only #5 and #6 must come before map reading (M01 needs #5, #6, 0.3). The retro-fits and #1b are slotted in where the renderer would otherwise wait.
+| # | Stream | Next step |
+|---|---|---|
+| 1 | **Weather basics UF2** fix loop 1, pass 1b (rendering) | QA → G: viewing copy + Drive → review 2 → final (fix loop 2 + review 3 only if review 2 says FIX) |
+| 2 | **#4 Derivatives and Taylor** fix loop 2 (+ 5-layer ∂T/∂z stack) | render after the weather → QA → review 3 → final |
+| 3 | **#5 Coordinates** (plan being amended for §5b, + Ian stack) | build → QA → ≥ 2 reviews → final |
+| 4 | **#6 The gradient** (plan being amended; s17 → Singapore) | build → reviews → final |
+| 5 | **M01 Contour maps** (plan being written) | build → reviews → final |
+| 6 | §5b retro-fit: cross product v5 + Part 2 (layout only) | between M01 and M02 |
+| 7 | M02 How weather maps are made → M03 Wind along isobars → M04 Fronts and cyclones (first look) → **M05 Reading the surface chart** | in order |
+| 8 | §5b retro-fit: #1a (+ wind stack) and 0.1b | after M05 |
+| 9 | M06 Station plots → M07 Pressure as vertical coordinate → **M08 Geopotential** → M09 Standard levels → **M10 Reading upper-air charts** → M11 … M20 | in order |
+| 10 | #1b triple products, then T, R, W, S, G, F, A, O, CV stages (current-events CE movies may jump in when their prerequisites are done) | v3 order |
+| — | Full fluidpy suite after the renders (library fc51cf0) | when no render is running |
 
 ## Open with the user (not blocking)
 - **REMIND THE USER (asked 2026-10-29):** open 3 free accounts: EUMETSAT Data Store (older Meteosat images for Sidr, Nargis, Aila), ECMWF (TIGGE forecast archive), NCAR RDA (older GFS runs). Needed before forecasting movies F14/F17/F18/F19; until then use GridSat-B1, HURSAT and NHC ATCF.
