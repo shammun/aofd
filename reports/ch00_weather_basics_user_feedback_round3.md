@@ -1,0 +1,15 @@
+# ch00_weather_basics — user feedback round 3 (2026-10-30)
+
+Source: `promts_weather.docx` (repo root, not committed: user file), on `weather_basics_v5_uf2_preview.mp4`. That file has the same timings as UF2 build 1 (a45b9e1). All four items must be done in the next fix loop (UF2 fix 1), together with review 1's items.
+
+| ID | Time (UF2) | User feedback (summary) | What to do |
+|---|---|---|---|
+| U3-01 | ~27:30 | The tropopause shown at several places on a globe with circled points is hard to understand: you can't tell which tropopause height belongs to which point | Replace the globe-with-circles with a **layer stack**: a flat 2-D map, with the heights stacked above it, so the tropopause height at each place reads directly as a surface or level in the stack (e.g. a tropopause-height surface over a map, or stacked layers with the tropopause marked per column). Keep the numbers (Europe ≈ 10 km, tropics ≈ 16.6 km) as callouts beside it, not on it |
+| U3-02 | ~31:12 | Likes the humidity stack. For clarity, use only **5 layers** for 5 heights | Reduce the s27c stack to 5 levels (e.g. 1000, 850, 700, 500, 300 hPa), each labelled with its height |
+| U3-03 | ~31:42 | The camera goes inside the stack; that is hard to follow | **Never fly inside a stack.** Hover round it from outside, from the side at an angle, moving from bottom to top |
+| U3-04 | ~40:43–40:53 | Likes the transition at 40:43 and the slow transition at 40:51. After 40:53 the camera moves inside the temperature stack, where you lose track of where you are and which colour means what | Keep 40:43–40:53. Then **stay outside**: hover round from the side at an angle, bottom to top, so the change of temperature with place and height is clear; keep the colour bar visible beside it |
+| U3-05 | ~41:51–42:10 | "Over Tibet and the Himalayas" (41:51), then "Andes and Rockies" (41:57): they are only shown and labelled at 42:10 | Within 6–7 s after 41:51 move the globe so the **Andes and Rockies are centred and labelled within 1 s of being spoken** (~41:57); then move straight back to Tibet and the Himalayas, which the remote-sensing image on the right then shows |
+
+## General rule added (HOUSE_STYLE §5b)
+- **Layer stacks: never fly the camera inside.** Orbit or hover from outside, from the side at an angle, moving from bottom to top. The colour bar stays visible. Use few, clearly separated layers (about 5) unless more add real insight.
+- **A globe shows each named place within about 1 s of it being spoken**, centred and labelled, as part of the zoom-tour rule.
