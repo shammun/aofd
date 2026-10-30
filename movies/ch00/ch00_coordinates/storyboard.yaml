@@ -1654,12 +1654,22 @@ scenes:
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.psl.open_daily; fluidpy.geo.mapproj.forward('polar_stereographic'); fluidpy.geo.sphere.gradient (geostrophic arrows)
-    params: {date: '2014-01-06', level_hPa: 10}
-    test: 'CHECK DC36 grid minimum 28059 m at 77.5 N 45 W (2.5 deg grid; refined centre 78.7 N 43.8 W, 28054 m); zonal-mean height 30 N 30924 m; D1 refresh:
-      newest winter re-derived'
+    params: {date: '2026-01-21', level_hPa: 10}
+    test: 'CHECK DC36 (refresh 2026-01-21, data_needs.md §H) grid minimum 28602 m at 72.5 N 45.0 E (2.5 deg grid; refined centre 72.89 N 44.26 E, 28602
+      m); zonal-mean height 30 N 30721 m; 400-m contours 28.8-31.2 km; zonal-mean u > 0 at 50-80 N (u60 42.1 m/s). Old day 2014-01-06: 28059 m at 77.5
+      N 45 W, refined 78.7 N 43.8 W, z30 30924 m'
+  voiceover_refresh: 'There''s one more map that every forecaster knows: the view from above a pole. On it, the pole sits in the middle, and the circles
+    of latitude become rings round it. So it''s polar coordinates again: the distance from the middle stands for how far you are from the pole, and the
+    angle round it is the longitude. Here is the height of the ten hectopascal pressure surface, about thirty kilometres up in the stratosphere, on the
+    twenty first of January, twenty twenty six. The lines join places where that surface has the same height. They circle the Arctic: about twenty eight
+    and a half kilometres where they''re lowest, and almost thirty one kilometres at thirty degrees north. [beat] The winds blow along these lines, round
+    and round the Arctic, from west to east. This great winter whirl of cold air is called the stratospheric polar vortex.'
+  refresh_note: 'Proposed for the 2026-01-21 refresh (not yet re-timed; voiceover/sentence_times above are still the 2014 version). On screen: readouts
+    ''28.6 km'' at the vortex centre over the Barents Sea (not the middle) and ''30.7 km'' at 30 N; source line ''Data: NCEP/NCAR Reanalysis 1 (NOAA PSL)
+    · 21 Jan 2026 · 10 hPa''.'
   exaggeration: [the lifted sheet has vertical exaggeration x1000 (said nowhere on screen; recorded here)]
   kind: real polar map (+ short 3-D lift)
-  data: NCEP1-hgt-daily 2014 (on disk, raw/NCEP1-hgt-daily/hgt.2014.nc); D1 newest winter (refresh)
+  data: NCEP1-hgt-daily + NCEP1-uv-daily, 2026-01-21 (repo data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc; D1 refresh); old day 2014 (raw/NCEP1-hgt-daily/hgt.2014.nc)
   tool: cartopy NorthPolarStereo base (pre-rendered) + Remotion SVG contours; three.js sheet for the lift
   runner_up: GeoVista/PyVista 3-D sheet (heavier, offline)
   why: polar coordinates on a real forecast map
@@ -1698,13 +1708,24 @@ scenes:
     fn: fluidpy.diag.cyclone.storm_relative_wind on geostrophic winds from the 10 hPa heights (sphere.gradient, f = frames.coriolis_parameter), centre =
       pole vs centre = storm_centre of the height field
     params:
-      date: '2014-01-06'
-      radii_km: [1500, 2500]
-    test: 'CHECK DC37 storm_centre of the 10 hPa heights 78.70 N 43.85 W; rms(v_r)/mean(v_t) of the geostrophic wind at 2000 km: 0.87 about the pole vs
-      0.42 about the vortex centre (planning); else S8 reworded'
+      date: '2026-01-21'
+      radii_km: [1500, 2000, 2500]
+    test: 'CHECK DC37 (refresh 2026-01-21, data_needs.md §H) storm_centre of the 10 hPa heights 72.89 N 44.26 E (1902 km from the pole); rms(v_r)/mean(v_t)
+      of the NCEP wind at 2000 km: 1.88 about the pole vs 0.42 about the vortex centre (1500 km 3.55 vs 0.41; 2500 km 1.01 vs 0.44) - PASS. Old day
+      2014-01-06: 78.70 N 43.85 W; 0.87 vs 0.42 (geostrophic)'
+  voiceover_refresh: 'In this view, the eastward wind is the tangential wind round the pole. And the northward wind is the radial wind with a minus sign,
+    because blowing north means blowing in, towards the pole. Westerly winds, the winds from the west, turn anticlockwise as seen from above the North
+    Pole. So the polar vortex is like the hurricane''s spin, only far wider and slower to change. Unlike a hurricane, though, it isn''t fed by a warm sea:
+    it forms because the polar stratosphere cools in the long winter night. And look where its centre is: not at the pole, but at almost seventy three
+    degrees north, over the Barents Sea, north of Russia. [beat] If we put the origin at the vortex''s own centre instead, its winds become far more purely
+    tangential. Choosing the origin is part of choosing good coordinates. When the vortex weakens or splits, cold air can spill south, which is a story
+    for the stratosphere movie.'
+  refresh_note: 'Proposed for the 2026-01-21 refresh (not yet re-timed). Gold cross label ''72.9° N'' over the Barents Sea (was ''78.7° N'' over Greenland).
+    Optional extra sentence after S7: ''About the pole, they blew more in and out than round.'' (ratio 1.88). The builder re-checks that the centre lies over
+    sea with NE 10 m land (DC36b) when G: is back.'
   exaggeration: []
   kind: real polar map
-  data: NCEP1-hgt-daily 2014 (on disk)
+  data: NCEP1-hgt-daily + NCEP1-uv-daily, 2026-01-21 (repo data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc)
   tool: Remotion SVG over the s35 base
   runner_up: —
   why: the same polar idea with a different origin

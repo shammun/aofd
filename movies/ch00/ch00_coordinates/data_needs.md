@@ -257,3 +257,49 @@ narration (+110.5 s), 48:41.8 with the hold; 49 scenes, 6910 words, 142.0 words 
 re-measure). The orchestrator decides; the §5b layout of s35-s36 does not depend on the date.
 
 **Lexicon:** no new words.
+
+## H. s35-s36 refresh to 21 Jan 2026 (data-scout, 2026-10-30; adopted by the orchestrator)
+Input: only the committed `data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc` (registry `NCEP1-hgt-daily` + `NCEP1-uv-daily`,
+NCEP/NCAR R1 daily means, 10 hPa, 2.5 deg, 20-90 N). No download. Measured with `fluidpy.diag.cyclone.storm_centre` (box 50-89 N),
+`storm_relative_wind` (72 azimuths), `fluidpy.geo.atmos.geostrophic_wind_from_height` (lat_min 15), `fluidpy.geo.sphere.great_circle_distance`.
+Why this day: largest zonal-mean u at 60 N of the winter (u60 = 42.1 m/s; runner-up 5 Jan 41.9; next 4 Jan 39.9). R1 ends 17 Mar 2026.
+
+| Row | 21 Jan 2026 (new) | 6 Jan 2014 (old) | Spoken / on screen (new) |
+|---|---|---|---|
+| DC36 grid minimum | 28 602 m at 72.5 N 45.0 E | 28 059 m at 77.5 N 45 W | — |
+| DC36 refined centre | **72.89 N 44.26 E**, 28 602 m (refined) | 78.70 N 43.85 W, 28 054 m | "almost seventy three degrees north, over the Barents Sea, north of Russia"; label '72.9° N' |
+| centre to pole | 1902 km | ~1260 km | "about nineteen hundred kilometres from the pole" (optional) |
+| height at the vortex centre | 28.60 km | 28.05 km | "about twenty eight and a half kilometres"; readout '28.6 km' |
+| height at the pole (map middle) | 29.24 km | 28.30 km | not spoken (the lowest heights are no longer at the middle) |
+| zonal-mean height 30 N / 45 N / 60 N | 30 721 / 30 673 / 30 030 m | 30 924 / — / 29 976 m | "almost thirty one"; readout '30.7 km' |
+| height range 20-90 N; 400-m contours | 28 602-31 279 m; 7 lines 28.8 … 31.2 km | 28.1-30.9 km | contour labels 28.8 … 31.2 km |
+| zonal-mean u, 50-80 N | > 0 everywhere (westerly); u60 42.1 m/s (also the maximum of the zonal mean) | u60 53.8 (geostrophic) | "from west to east" holds; "anticlockwise seen from above the North Pole" holds |
+| geostrophic zonal-mean u 60 N | 46.8 m/s (max |u_g| 90) | 53.8 (max 108) | manifest only |
+| strongest wind on the map | 79.0 m/s at 60 N 90 E | — | not spoken |
+| DC37 ring 2000 km, actual wind: about the pole | v_t 17.5, rms v_r 32.9 m/s, **ratio 1.88** | 0.87 | "about the pole, they blow more in and out than round" (optional S7b) |
+| DC37 ring 2000 km, actual wind: about the vortex centre | v_t 47.4, rms v_r 19.9 m/s, **ratio 0.42** | 0.42 | "far more purely tangential" — **DC37 PASS** (the ratio drops 1.88 → 0.42) |
+| DC37 other rings (actual) pole / centre | 1500 km 3.55 / 0.41; 2500 km 1.01 / 0.44 | — | the drop holds on every ring |
+| DC37 geostrophic | pole 3.30 / 1.76 / 0.97 (1500/2000/2500 km); centre 0.39 (1500), 0.41 (2500); the 2000-km centre ring is NaN (one ring point touches the NaN pole row of the gradient), so use the actual NCEP wind for DC37 | 0.87 / 0.42 | manifest only |
+| vortex edge (largest ring-mean v_t about the centre) | 51.8 m/s at 2500 km | — | not spoken |
+
+Runner-up 5 Jan 2026 (closer to the old wording; not adopted): centre 77.21 N 4.32 E (Greenland Sea, between Greenland and Svalbard), 28 386 m,
+1423 km from the pole; z30 30 775 m; DC37 ratio 0.53 → 0.24; u60 41.9 m/s. Place word for 21 Jan: 72.9 N 44.3 E is open water of the Barents Sea,
+about 300 km west of Novaya Zemlya and about 470 km north of the Kanin Peninsula (geography; the builder re-checks against NE 10 m land when G: is back,
+DC36b: the centre is not on land).
+
+**Rewording (proposed; the director re-times with `tools/tts.py`):**
+- s35 S4: "… on the sixth of January, twenty fourteen." → "… on the twenty first of January, twenty twenty six."
+- s35 S6: "They circle the Arctic: about twenty eight kilometres near the middle, and almost thirty one kilometres at thirty degrees north." →
+  "They circle the Arctic: about twenty eight and a half kilometres where they're lowest, and almost thirty one kilometres at thirty degrees north."
+  (the lowest heights now sit off the middle, over the Barents Sea; "near the middle" would be wrong).
+- s35 S7: "round and round the pole" → "round and round the Arctic" (about the pole itself the 2000-km ring winds are more radial than tangential, ratio 1.88).
+- s36 S6: "… not at the pole, but at almost seventy nine degrees north, over Greenland." → "… not at the pole, but at almost seventy three degrees
+  north, over the Barents Sea, north of Russia."
+- s36 S7: "… its winds become more purely tangential." → "… its winds become far more purely tangential." Optional extra sentence after it (only if
+  the director wants the strong contrast): "About the pole, they blew more in and out than round."
+- Unchanged: S1-S5, S8-S9 of s36 (the March 2026 wind reversal, zonal-mean u at 60 N < 0 on 4-10 Mar 2026, min −8.8 m/s on 6 Mar, may be named in
+  the stratosphere movie, not here).
+- On screen: readouts '28.6 km' (vortex centre) and '30.7 km' (30 N); gold cross label '72.9° N'; data-source line
+  'Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 21 Jan 2026 · 10 hPa'; contours every 400 m, 28.8-31.2 km.
+- Storyboard: `params.date`, `test`, `data` of s35/s36 updated; proposed voiceovers stored as `voiceover_refresh` (the live `voiceover` and
+  `sentence_times` are untouched until the re-time). `script.md` not edited (it is the TTS input).
