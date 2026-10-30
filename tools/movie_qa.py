@@ -394,6 +394,8 @@ def main() -> int:
     ap.add_argument("--half-warn", type=float, default=3.0, help="picture/maths zone empty longer than this warns (s)")
     ap.add_argument("--half-max", type=float, default=10.0, help="picture/maths zone empty longer than this fails (s)")
     ap.add_argument("--content-only", action="store_true", help="run only the content/halves gates (calibration)")
+    ap.add_argument("--overlap", help="K6 (HOUSE_STYLE §5b): folder of BoxProbe b<frame>.json files; adds the gate 'overlap' "
+                                      "(text over text or over a sharp picture, colour bar on a picture, source-line gap; tools/k6_overlap.py)")
     a = ap.parse_args()
     if a.framemd5:
         return framemd5(Path(a.framemd5[0]), Path(a.framemd5[1]))
@@ -527,6 +529,13 @@ def main() -> int:
              f"{len(freezes)} frozen stretch(es) > 4 s; silent > 4 s inside: {bad}" if bad else
              f"{len(freezes)} frozen stretch(es) > 4 s, all narrated (longest silence inside {worst:.2f} s)")
     content_gates()
+    if a.overlap:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from k6_overlap import overlap_gate
+        st, det, rep = overlap_gate(Path(a.overlap))
+        outdir.mkdir(parents=True, exist_ok=True)
+        (outdir / "overlap.json").write_text(json.dumps(rep, indent=1, ensure_ascii=False), encoding="utf-8")
+        gate("overlap", st, det)
     # loudness
     if au is None:
         gate("loudness", "SKIP" if a.no_audio_ok else "FAIL", "no audio stream")

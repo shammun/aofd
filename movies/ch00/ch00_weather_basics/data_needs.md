@@ -178,3 +178,16 @@ No other download. All other UF1 changes reuse data already in the movie.
 - W70/W71 (front slopes, rough check on era5_ciaran_2023_section_48p5N_18UTC.nc): cold front ≈ 1:18 (steeper than the planned 1:30–1:150); warm front ≈ 1:63 (outside 1:80–1:300). The builder's W70/W71 asserts decide; if they agree with this rough check, the s47/s48 narration must follow the data (reword the slope ranges).
 - W65: 28.9644/18.01528 = 1.6078 (= 1/ε within 3e-5); say "about 1.61".
 - Verifier spec slips (2026-10-29): W56 = 8430.1 m (not 8430.3); W64 halving height 5.482 km geometric (not 5.574). W70: ERA5 cold front ≈ 1:15 (925→500 hPa), vertical below ~750 hPa at 0.25° — s47 narration must follow the data. User (2026-10-29): the ~51-min length is fine.
+
+## H. User feedback round 2 (UF2, 2026-10-29) — data, library, checks
+The full specification is `uf2_plan.md` §7 (D-UF2-1…3 fetches, F-UF2-1/2 library functions, CHECK rows W78–W93). As built
+(`movies/data/build_ch00_weather_basics.py → uf2_block`, all rows PASS):
+- D-UF2-1 `ERA5-ARCO-wb-stacks-20231102T12` → `data/derived/ch00/era5_wb_stack_q10_*.nc` (s27c) and `era5_wb_stack_t16_*_0p5.nc` (s38b);
+  D-UF2-2 `ERA5-ARCO-wb-front-20231101T18` → `era5_wb_front_11lev_*.nc` (s48b); D-UF2-3 Sentinel-2 L2A Beauce 22 Aug 2024 → `s2_beauce_2024-08-22.{jpg,json}` (s31).
+- Library: `fluidpy.diag.sounding.column_integral` (W85: vapour below 850 hPa / column = 0.450, "about half");
+  `fluidpy.diag.fronts.front_by_level` (W86: max_step_km=80, kind='cold', locate='centre', traced 1000–650 hPa only; fit
+  850–650 hPa 1:43.9 → 110 km over 1.5–4 km, "about a hundred kilometres").
+- Narration follows the data (script.md UF2 change log): s27c "about ten kilometres" (z̄(300 hPa) = 9.70 km); s38b "about sixteen and a
+  half kilometres" (0–10°N strip-mean tropopause 16.61 km, −76.7 °C; Europe 10.15 km, −52.0 °C); s48b "about a hundred kilometres".
+- Products: `stack_q.{json,bin}`, `stack_t.{json,bin}`, `stack_front.{json,bin}` (house `movies/data/_stack.py`), `uf2.json`; public images
+  `wb_s2_beauce.jpg`, `wb_s31_modis.jpg` (G: render public folder).

@@ -1,6 +1,5 @@
-# ch00_weather_basics sound cue sheet v4 (UF1; tools/sound/mix.py format; scene + offset from timing.json). Re-timed by
-# tools/movie_wb/retime_sound_uf1.py: storm-tense = s54 start -> s60 start; s47/s48 effects on their phrases; new whooshes (s03, s25) and wind (s49).
-# UF1 fix loop 1: s47/s48 effects re-anchored on their phrases after the 4-sentence splice; storm-tense = s54 start -> s60 start.
+# ch00_weather_basics sound cue sheet v5 (UF2; tools/sound/mix.py format; scene + offset from timing.json). Re-timed by
+# tools/movie_wb/retime_sound_uf2.py: storm-tense = s54 start -> s60 start; s47/s48 effects on their phrases; new whooshes (s27c, s38b), wind (s53, s31).
 music:
   style: weather-basics-blend
   seed: 11
@@ -10,12 +9,12 @@ music:
   sections:
   - style: air-flowing
     from_s: 0.0
-    to_s: 2785.05
+    to_s: 3183.575
   - style: storm-tense
-    from_s: 2785.05
-    to_s: 2969.825
+    from_s: 3183.575
+    to_s: 3368.35
   - style: air-flowing
-    from_s: 2969.825
+    from_s: 3368.35
     to_s: end
   note: two styles cross-faded with 4-s raised-cosine ramps by tools/movie_wb/sound_mix.py (tools/sound/mix.py takes one style)
 timing: timing.json
@@ -201,3 +200,47 @@ effects:
   fade_out: 2.5
   seed: 36
   shows: 3000 wind particles flowing over the 850-hPa chart
+- effect: whoosh
+  scene: s27c_vapour_stack
+  offset: 12.5
+  duration: 1.8
+  intensity: 0.3
+  lufs: -30
+  fade_in: 0.3
+  fade_out: 0.7
+  seed: 41
+  shows: the camera flies up through the humidity layers
+  uf2: true
+- effect: whoosh
+  scene: s38b_reanalysis_stack
+  offset: 20.25
+  duration: 1.8
+  intensity: 0.3
+  lufs: -30
+  fade_in: 0.3
+  fade_out: 0.7
+  seed: 42
+  shows: the camera rises through the temperature shells
+  uf2: true
+- effect: wind_gentle
+  scene: s53_trades_westerlies
+  offset: 3.53
+  duration: 26.0
+  intensity: 0.3
+  lufs: -30
+  fade_in: 2.0
+  fade_out: 3.0
+  seed: 43
+  shows: mean-wind streaklines over the trade-wind and westerly belts
+  uf2: true
+- effect: wind_gentle
+  scene: s31_cloud_base
+  offset: 1.0
+  duration: 12.0
+  intensity: 0.25
+  lufs: -30
+  fade_in: 2.0
+  fade_out: 2.5
+  seed: 44
+  shows: warm air rising in thermals over the sunny fields
+  uf2: true

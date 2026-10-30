@@ -1252,6 +1252,9 @@ def main() -> int:
     # ================================================================ UF1 (user feedback round 1): W53-W76 + new products
     uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes)
 
+    # ================================================================ UF2 (user feedback round 2): W78-W93, stacks, Sentinel-2
+    uf2_block(row, rng, truth, call, files, bins, narration_changes)
+
     # ---------------------------------------------------------------------------------------------- report and write
     for r in rows:
         print(f"  {'PASS' if r['pass'] else 'FAIL'}  {r['id']:5s} {r['name']}  -> {r['value']}")
@@ -1272,7 +1275,9 @@ def main() -> int:
         DER / "era5_ciaran_2023_850hPa_1h.nc", DER / "era5_cumulus_france_2024-06-24_t2m_d2m_msl.nc", DER / "ncep_r1_t2m_ltm_1991-2020.nc",
         DER / "gfs_mslp_latest.nc", DER / "igra2_stations_2023.json", DER / "ciaran_2023_sfc_1102.json", DER / "ciaran_2023_sfc_1102.bin",
         DER / "ciaran_coast_10m.geojson", DER / "ciaran_modis_aqua_truecolour_2023-11-02.jpg",
-        CP_REAL / "wind_climatology.json", CP_REAL / "wind_climatology.bin", A1]}
+        CP_REAL / "wind_climatology.json", CP_REAL / "wind_climatology.bin", A1,
+        DER / "era5_wb_stack_q10_2023-11-02T12.nc", DER / "era5_wb_stack_t16_2023-11-02T12_0p5.nc", DER / "era5_wb_front_11lev_2023-11-01T18.nc",
+        DER / "s2_beauce_2024-08-22.jpg", DER / "s2_beauce_2024-08-22.json", DER / "era5_ciaran_2023_section_48p5N_18UTC.nc"]}
     assets = {str(p.relative_to(ROOT)).replace("\\", "/"): sha_file(p) for p in [
         DER / "gibs_truecolour_global_2023-11-02_0p05.jpg", DER / "ciaran_truecolour_2023-11-01_aqua_terra.jpg",
         DER / "ciaran_modis_aqua_truecolour_2023-11-02.jpg", DER / "cumulus_france_2024-06-24_modis_aqua_250m.jpg",
@@ -1285,7 +1290,7 @@ def main() -> int:
             "moist_py": "fluidpy/geo/moist.py", "atmos_py": "fluidpy/geo/atmos.py", "constants_py": "fluidpy/geo/constants.py",
             "statics_py": "fluidpy/core/statics.py", "thermo_py": "fluidpy/core/thermo.py", "stratification_py": "fluidpy/core/stratification.py",
             "vectors_py": "fluidpy/geo/vectors.py", "fronts_py": "fluidpy/diag/fronts.py", "climatology_py": "fluidpy/diag/climatology.py",
-            "cyclone_py": "fluidpy/diag/cyclone.py", "trajectories_py": "fluidpy/diag/trajectories.py"})},
+            "cyclone_py": "fluidpy/diag/cyclone.py", "trajectories_py": "fluidpy/diag/trajectories.py", "sounding_py": "fluidpy/diag/sounding.py"})},
         "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
         "equations": {"hydrostatic": "Vallis (1.51) ∂p/∂z = −ρg (s13-s16)", "gas_law": "Vallis (1.53) p = ρRT (s10-s12)",
                       "scale_height": "Vallis text after (1.186) H = RT/g; isothermal p = p0 e^{−z/H} (s17-s20)",
@@ -1297,9 +1302,13 @@ def main() -> int:
                        "soundings": "IGRA2 Trappes FRM00007145 and Singapore SNM00048698, 00 UTC 1 Nov 2023 (no 12 UTC Trappes launch; §E)",
                        "fronts_time": "2023-11-01T18 UTC (motion 18 → 21 UTC), locate='centre'",
                        "time_compression": {"s00": "15 h of storm motion in about 5 s", "s44": "1.5 h of streaklines in about 3 s",
-                                            "s53": "2 days of mean-wind streaklines", "s55": "24 h of isobars in about 20 s"},
+                                            "s53": "2 days of mean-wind streaklines", "s55": "24 h of isobars in about 20 s",
+                                            "s03_molecules": "illustrative molecule motion inside the parcel box"},
+                       "uf2_library": {"fluidpy.diag.sounding.column_integral": "W85 (tests by the verifier, pending at build time)",
+                                       "fluidpy.diag.fronts.front_by_level": "W86 max_step_km=80, kind='cold', locate='centre' (tests pending at build time)"},
                        "exaggerations": ["atmosphere shell drawn 50x thicker (s02 on, said)", "front side views 80x taller (s47-s48, said in s48)",
-                                         "troposphere 50x in the s25 inset", "model grid drawn every 2° (s38)"]},
+                                         "troposphere 50x in the s25 inset", "model grid drawn every 2° (s38)",
+                                         "UF2: humidity stack heights x150 (s27c), temperature shells x50 (s38b, = s02), front stack x80 (s48b, = slices), s02 true-thickness hair-line 2-px minimum, s31 heights x20 (= s26)"]},
         "credits": [
             "Contains modified Copernicus Climate Change Service information 2026 (ERA5: global hour, columns, 850 hPa, Brest series, Ciarán hourly).",
             "Durre, I., et al.: Integrated Global Radiosonde Archive (IGRA) v2, NOAA NCEI (Trappes, Singapore, 2023 station list).",
@@ -1311,6 +1320,7 @@ def main() -> int:
             "U.S. Standard Atmosphere 1976 (composition, Table 3); NOAA GML global-mean CO2 2023.",
             "ETOPO 2022 Global Relief Model, NOAA NCEI (public domain), doi:10.25921/fd45-gt74.",
             "CesiumJS (Apache-2.0), no Cesium ion data.",
+            "Contains modified Copernicus Sentinel data 2024 (ESA Sentinel-2 L2A, items S2B_31UCP/31UDP_20240822, via the Element 84 Earth Search STAC catalogue), s31.",
             "Music and sound effects: tools/sound (procedural synthesis, our own code, CC0-1.0)."],
         "js_selftest": "none — the composition has no JS physics; every number is read from data/*.json",
         "narration_changes_from_data": narration_changes,
@@ -1787,6 +1797,275 @@ def cf_slice_block(row, rng, truth, call, files, bins, a1, U, narration_changes,
     bins["slice_cf.bin"] = sb
 
 
+def uf2_block(row, rng, truth, call, files, bins, narration_changes) -> None:
+    """UF2 (user feedback round 2, uf2_plan.md §7): CHECK rows W78-W93 and the products of the new / changed scenes —
+    uf2.json (s20e/s20f/s20g/s20b/s22/s36/s53 numbers, the s31 Sentinel-2 plate and thermal seeds), stack_q.bin (s27c),
+    stack_t.bin (s38b), stack_front.bin (s48b) via movies/data/_stack.py, and the public images wb_s2_beauce.jpg /
+    wb_s31_modis.jpg. Library: fluidpy.diag.sounding.column_integral (W85) and fluidpy.diag.fronts.front_by_level (W86)."""
+    import sympy as sp
+    from PIL import Image
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from _stack import area_mean, stack_product
+
+    U: dict = {}
+    fu = "uf2.json"
+    SND_ = "fluidpy.diag.sounding."
+    FRN = "fluidpy.diag.fronts."
+    # ---- W78 the tangent (s20e)
+    H = call(GA + "scale_height", "s20e", fu, "H = RT/g at 288.15 K (Vallis text after (1.186))", T=T15)
+    rho0 = call(M + "perfect_gas_density", "s20e", fu, "ρ0 = p0/(R T0) (Vallis (1.53))", p=P0, T=T15)
+    rate_spoken, rate_lib, rate_rg = P0 / 8430.1, P0 / H, rho0 * G0
+    row("W78", "s20e p0/H = 101 325/8430 = 12.019 Pa/m ('about twelve'); with scale_height 12.013; ρ0 g = 12.013", [rate_spoken, rate_lib, rate_rg], [12.019, 12.013, 12.013], 0.003)
+    rng("W78", "s20e 'the same rate we found from hydrostatic balance': p0/H vs ρ0 g within 0.1 %", abs(rate_spoken / rate_rg - 1), 0, 1e-3)
+    z, z0, H_, p0_, rho_, g_, R_, T_ = sp.symbols("z z0 H p0 rho g R T", positive=True)
+    pe = p0_ * sp.exp(-z / H_)
+    tan0 = pe.subs(z, 0) + sp.diff(pe, z).subs(z, 0) * z
+    truth("W78", "s20e sympy: the tangent at the ground is p0(1 − z/H), slope −p0/H, zero at z = H",
+          sp.simplify(tan0 - p0_ * (1 - z / H_)) == 0 and sp.simplify(tan0.subs(z, H_)) == 0)
+    # ---- W79 37 % and 14 % (s20, s20e, s20f)
+    pH = call(S + "isothermal_pressure", "s20", fu, "p at H and 2H", z=[H, 2 * H], p0=P0, T=T15) / 100.0
+    row("W79", "s20 p(H)/p0 = e^-1 = 0.368 ('thirty-seven percent'), p(2H)/p0 = 0.135 → 14 %", [pH[0] * 100 / P0, pH[1] * 100 / P0, round(100 * pH[1] * 100 / P0)], [0.3679, 0.1353, 14], 1e-4)
+    row("W79", "s20 1013.25 e^-1 = 372.8 hPa ('about three hundred and seventy-three'), 137.1 hPa", [pH[0], pH[1]], [372.76, 137.13], 0.05)
+    row("W79", "s20 2H = 16.9 km ('sixteen point nine'); H = 8.43 km", [round(2 * H / 1e3, 1), round(H / 1e3, 2)], [16.9, 8.43], 0)
+    # ---- W80 not a lid (s20f)
+    p5 = call(S + "isothermal_pressure", "s20f", fu, "from any height: p(5 km + H)/p(5 km)", z=[5000.0, 5000.0 + H], p0=P0, T=T15)
+    row("W80", "s20f p(5 km + H)/p(5 km) = e^-1 ('from any height'); 5 + 8.43 = 13.43 km", [p5[1] / p5[0], (5000 + H) / 1e3], [np.exp(-1), 13.435], [1e-12, 1e-3])
+    H263 = call(GA + "scale_height", "s20f", fu, "H at −10 °C", T=263.15)
+    H303 = call(GA + "scale_height", "s20f", fu, "H at 30 °C", T=303.15)
+    row("W80", "s20f H(−10 °C) = 7.70 km ('seven point seven'), H(30 °C) = 8.87 km ('eight point nine')", [round(H263 / 1e3, 1), round(H303 / 1e3, 1)], [7.7, 8.9], 0)
+    zz = np.linspace(100.0, 40000.0, 50)
+    pc = call(S + "isothermal_pressure", "s20f", fu, "share above z, cold column", z=zz.tolist(), p0=P0, T=263.15)
+    pw = call(S + "isothermal_pressure", "s20f", fu, "share above z, warm column", z=zz.tolist(), p0=P0, T=303.15)
+    truth("W80", "s20f the warm column holds more of its air above every height (share above larger for the larger H)", bool(np.all(np.asarray(pw) > np.asarray(pc))))
+    # ---- W81 the uniform block (s20g)
+    w1 = 1.225 * 9.81
+    hb = P0 / (1.225 * 9.81)
+    row("W81", "s20g ρ0 g × 1 m = 1.225 × 9.81 = 12.017 N ('about twelve newtons'); p0 × 1 m² = 101 325 N; h = 8431.6 m", [w1, P0 * 1.0, hb], [12.017, 101325.0, 8431.6], 0.06)
+    truth("W81", "s20g sympy: p0/(ρ0 g) = RT/g when ρ0 = p0/(RT); the block's p(z) = p0 − ρ0 g z equals the s20e tangent identically",
+          sp.simplify(p0_ / ((p0_ / (R_ * T_)) * g_) - R_ * T_ / g_) == 0
+          and sp.simplify((p0_ - (p0_ / (R_ * T_)) * g_ * z) - p0_ * (1 - z / (R_ * T_ / g_))) == 0)
+    # ---- W82 per km (s20b)
+    p1 = call(S + "isothermal_pressure", "s20b", fu, "one metre: [p(z) − p(z + 1 m)]/p(z) × H", z=[500.0, 501.0], p0=P0, T=T15)
+    row("W82", "s20b [p(z) − p(z+1 m)]/p(z) × H = 1 (fraction = Δz/H)", (p1[0] - p1[1]) / p1[0] * H, 1.0, 1e-4)
+    row("W82", "s20b 1/8.43 = 0.1186 ('zero point one two'), e^(−1/8.43) = 0.8881 ('zero point eight eight eight'), 1 − 0.888 = 0.112 ('zero point one one')",
+        [1 / 8.43, np.exp(-1 / 8.43), 1 - 0.888], [0.1186, 0.8881, 0.112], 5e-4)
+    truth("W82", "s20b the estimate is bigger than the exact share (0.1186 > 0.1119, 'a bit less')", 1 / 8.43 > 1 - np.exp(-1 / 8.43))
+    U["s20"] = {"H_km": r6(H / 1e3, 3), "rate_Pa_m": 12, "p_H_hPa": r6(pH, 1), "H263_km": r6(H263 / 1e3, 2), "H303_km": r6(H303 / 1e3, 2),
+                "block_m": r6(hb, 1), "slab_N": r6(w1, 3), "exp1": r6(np.exp(-1 / 8.43), 4)}
+    # ---- W83 the Trappes balloon (s22)
+    snd = files["soundings.json"]["trappes"]
+    zk = np.asarray(snd["z_km"], float)
+    lp = np.log(np.asarray(snd["p_hPa"], float))
+    p0b = 1013.25
+    zc = [float(call(SND_ + "level_crossing", "s22", fu, f"Trappes IGRA 00 UTC 1 Nov 2023: height where ln p = ln(p0/{d})",
+                     z=(zk * 1000).tolist(), T=lp.tolist(), value=float(np.log(p0b / d)), direction="down")) / 1000 for d in (2, 10, 100)]
+    row("W83", "s22 Trappes: p0/2 at 5.452 km ('about five and a half'), p0/10 at 16.0 km ('sixteen'), p0/100 at 30.5 km ('a little above thirty')", zc, [5.452, 16.005, 30.507], 0.06)
+    truth("W83", "s22 5.45 < 5.85 km (our estimate) and the sounding top > 30.5 km (measured, not extrapolated)", zc[0] < H * np.log(2) / 1e3 and snd["top_km"] > zc[2],
+          [r6(zc[0], 3), r6(H * np.log(2) / 1e3, 3), snd["top_km"]])
+    row("W83", "s22 p0/2 = 506.6 hPa ('about five hundred and seven')", p0b / 2, 506.6, 0.05)
+    U["s22"] = {"half_km": r6(zc[0], 3), "tenth_km": r6(zc[1], 3), "hundredth_km": r6(zc[2], 3), "estimate_km": r6(H * np.log(2) / 1e3, 3),
+                "points": {"z_km": r6(zk[zk <= 35], 3), "p_hPa": r6(np.exp(lp[zk <= 35]), 1)}}
+    # ---- W91 weather vs climate (s36)
+    bc = files["brest_climate.json"]
+    y = np.asarray(bc["y2023_C"], float)
+    q10, q90 = np.asarray(bc["q10_C"], float)[: y.size], np.asarray(bc["q90_C"], float)[: y.size]
+    inside = int(bc["inside_2023"])   # band_share (pooled ±7-day band, its own inclusive rule) in brest_climate.json
+    row("W91", "s36 2023 days inside the 10-90 % band = 287 of 365; share 0.786 → 'eight in ten'; base 0.804", [inside, y.size, round(inside / y.size, 1), round(bc["share_base"], 1)], [287, 365, 0.8, 0.8], 0)
+    row("W91", "s36 a plain recount on the rounded band (q10 <= T <= q90) agrees within one day", int(np.sum((y >= q10) & (y <= q90))), 287, 1)
+    iw, ic = int(np.argmax(y - q90)), int(np.argmin(y - q10))
+    truth("W91", "s36 at least one warm spell (> q90) and one cold snap (< q10) in 2023; ringed = the largest exceedances", (y - q90).max() > 0 and (y - q10).min() < 0,
+          [bc["y2023_dates"][iw], bc["y2023_dates"][ic]])
+    U["s36"] = {"inside": inside, "days": int(y.size), "warm_i": iw, "cold_i": ic, "warm_date": bc["y2023_dates"][iw], "cold_date": bc["y2023_dates"][ic],
+                "wide_i": int(np.argmax(q90 - q10))}
+    # ---- W93 belts (s53): directions from the data's area-mean wind (NCEP R1 1991-2020 annual mean)
+    ch = files["climatology.json"]
+    cv = {v["name"]: np.frombuffer(bins["climatology.bin"], dtype="<f4", count=v["count"], offset=v["offset_bytes"]).reshape(v["shape"]).astype(float)
+          for v in ch["variables"]}
+    wl, wo = np.asarray(ch["coords"]["lat"], float), np.asarray(ch["coords"]["lon"], float)
+    ua, va = cv["u10_ann"], cv["v10_ann"]
+
+    def boxmean(la0, la1, lo0, lo1):
+        m = ((wl >= la0) & (wl <= la1))[:, None] & ((wo >= lo0) & (wo <= lo1))[None, :]
+        wt = np.cos(np.deg2rad(wl))[:, None] * np.ones_like(ua)
+        return float(np.sum(ua * wt * m) / np.sum(wt * m)), float(np.sum(va * wt * m) / np.sum(wt * m)), float(np.sum(np.hypot(ua, va) * wt * m) / np.sum(wt * m))
+    belts = {"ne_trades": (10, 20, -60, -10, 30, 75), "se_trades": (-20, -10, -30, 10, 105, 150), "westerlies_n": (40, 55, -60, 0, 240, 300),
+             "westerlies_s": (-55, -45, -180, 180, 240, 300)}
+    BD = {}
+    for nm, (a0, a1, b0, b1, d0, d1) in belts.items():
+        u_, v_, s_ = boxmean(a0, a1, b0, b1)
+        d = float(call(GA + "wind_direction_from", "s53", fu, f"direction the {nm} blow from (area mean 1991-2020)", u=u_, v=v_))
+        rng("W93", f"s53 {nm}: area-mean wind blows from {d0}-{d1}° (chevrons from the data)", d, d0, d1)
+        BD[nm] = {"from_deg": r6(d, 1), "toward_deg": r6((d + 180) % 360, 1), "u": r6(u_, 2), "v": r6(v_, 2), "speed": r6(s_, 2)}
+    sS, sN = boxmean(-60, -45, -180, 180)[2], boxmean(40, 55, -60, 0)[2]
+    truth("W93", "s53 S6 'the westerlies blow strongest' over the Southern Ocean: mean speed 45-60S > 40-55N (Atlantic)", sS > sN, r6([sS, sN], 2))
+    U["belts"] = BD
+
+    # ================================================================ stacks (K5, _stack.py)
+    # ---- s27c humidity stack (stack B, W85)
+    dq = xr.open_dataset(DER / "era5_wb_stack_q10_2023-11-02T12.nc")
+    truth("W85", "s27c registry: the stack fetch is ERA5-ARCO-wb-stacks-20231102T12, not the #69 10-level Ciarán file",
+          dq.attrs.get("dataset_key") == "ERA5-ARCO-wb-stacks-20231102T12", dq.attrs.get("dataset_key"))
+    lev_q = dq.level.values.astype(float)
+    q = dq.q.values.astype(float) * 1000.0
+    zq = dq.zg.values.astype(float)
+    hq, bq, rq = stack_product("stack_q", q, zq, lev_q, dq.lat.values, dq.lon.values, 0.0, 20.0, exaggeration=150, units="g/kg", lut="LUT_HALINE (s27 globe)")
+    zbq = np.asarray(hq["zbar_m"]) / 1000
+    qbar = [area_mean(q[k], dq.lat.values) for k in range(lev_q.size)]
+    k700, k300, k850 = list(lev_q).index(700), list(lev_q).index(300), list(lev_q).index(850)
+    row("W85", "s27c 10 layers ('ten heights')", lev_q.size, 10, 0)
+    rng("W85", "s27c max q at 1000 hPa 18-22 g/kg ('up to about twenty grams')", float(np.nanmax(q[0])), 18, 22)
+    rng("W85", "s27c z̄(700) in 2.8-3.3 km ('three kilometres up')", zbq[k700], 2.8, 3.3)
+    rng("W85", "s27c q̄(700) in 2-6 g/kg ('only a few grams')", qbar[k700], 2.0, 6.0)
+    rng("W85", "s27c z̄(300) in 9.5-10.4 km ('about ten kilometres', narration follows the data)", zbq[k300], 9.5, 10.4)
+    rng("W85", "s27c q̄(300) < 0.5 g/kg ('almost none')", qbar[k300], 0, 0.5)
+    rng("W85", "s27c z̄(850) 1.3-1.7 km ('one and a half')", zbq[k850], 1.3, 1.7)
+    pa = lev_q * 100.0
+    sp_ = dq.sp.values.astype(float)
+    cw_all = call(SND_ + "column_integral", "s27c", "stack_q.bin", "column water vapour (1/g)∫q dp, 1000-300 hPa (Vallis (1.51))", heavy_call=True,
+                  q=dq.q.values.astype(float), p=pa, p_surface=sp_)
+    cw_low = call(SND_ + "column_integral", "s27c", "stack_q.bin", "vapour below 850 hPa (1/g)∫q dp, surface-850 hPa", heavy_call=True,
+                  q=dq.q.values.astype(float), p=pa, p_top=85000.0, p_surface=sp_)
+    frac = area_mean(np.asarray(cw_low), dq.lat.values) / area_mean(np.asarray(cw_all), dq.lat.values)
+    rng("W85", "s27c vapour below 850 hPa (≈ 1.5 km) / whole column 0.40-0.60 ('about half'; orchestrator 0.46-0.50)", frac, 0.40, 0.60)
+    hq.update({"qbar": r6(qbar, 3), "frac_below_850": r6(frac, 3), "qmax_1000": r6(float(np.nanmax(q[0])), 2),
+               "imax": [int(v) for v in np.unravel_index(int(np.nanargmax(q[0])), q[0].shape)]})
+    files["stack_q.json"] = hq
+    bins["stack_q.bin"] = bq
+    # ---- s38b temperature shells (stack A, W84)
+    dt = xr.open_dataset(DER / "era5_wb_stack_t16_2023-11-02T12_0p5.nc")
+    lev_t = dt.level.values.astype(float)
+    Tc = dt.t.values.astype(float) - 273.15
+    zt = dt.zg.values.astype(float)
+    ht, bt, rt = stack_product("stack_t", Tc, zt, lev_t, dt.lat.values, dt.lon.values, -85.0, 30.0, exaggeration=50, units="degC",
+                               lut="cmocean.thermal", strips=True)
+    tl = dt.lat.values.astype(float)
+
+    def strip(a0, a1):
+        m = (tl >= a0) & (tl <= a1)
+        w = np.cos(np.deg2rad(tl[m]))
+        T_ = np.array([np.sum(np.nanmean(dt.t.values[k][m], axis=1) * w) / np.sum(w) for k in range(lev_t.size)])
+        Z_ = np.array([np.sum(np.nanmean(zt[k][m], axis=1) * w) / np.sum(w) for k in range(lev_t.size)])
+        return T_, Z_
+    Te, Ze = strip(45, 55)
+    Tt, Zt = strip(0, 10)
+    zte, tte = call(GA + "lapse_rate_tropopause", "s38b", "stack_t.bin", "WMO tropopause of the 45-55N strip-mean profile", T=Te.tolist(), z=Ze.tolist(), p=(lev_t * 100).tolist())
+    ztt, ttt = call(GA + "lapse_rate_tropopause", "s38b", "stack_t.bin", "WMO tropopause of the 0-10N strip-mean profile", T=Tt.tolist(), z=Zt.tolist(), p=(lev_t * 100).tolist())
+    row("W84", "s38b 16 layers ('sixteen heights')", lev_t.size, 16, 0)
+    Tm, Zm = strip(38, 58)
+    k250 = list(lev_t).index(250)
+    truth("W84", "s38b 38-58N: area-mean T decreases monotonically 1000 → 250 hPa ('each layer colder')", bool(np.all(np.diff(Tm[: k250 + 1]) < 0)), r6(Tm[: k250 + 1] - 273.15, 1))
+    rng("W84", "s38b Europe (45-55N) tropopause 9-12 km ('about ten kilometres'; strip mean 10.1)", zte / 1000, 9, 12)
+    rng("W84", "s38b Europe tropopause T −57…−45 °C ('about minus fifty'; −52)", tte - 273.15, -57, -45)
+    rng("W84", "s38b tropics (0-10N) tropopause 15-17.5 km ('about sixteen and a half'; 16.6)", ztt / 1000, 15, 17.5)
+    rng("W84", "s38b tropical tropopause T < −75 °C ('below minus seventy-five'; −77)", ttt - 273.15, -90, -75)
+    rng("W84", "s38b the tropical tropopause is ≥ 4 km higher than the European one", (ztt - zte) / 1000, 4, 10)
+    k1, k20 = list(lev_t).index(1), list(lev_t).index(20)
+    imin = int(np.argmin(Te))
+    rng("W84", "s38b Europe: T(1 hPa) − T(20 hPa) > +15 K and the minimum lies at 15-27 km ('above about twenty-five, warmer')", [Te[k1] - Te[k20], Ze[imin] / 1000], [15, 15], [60, 27])
+    rng("W84", "s38b z̄(1 hPa) 43-48.5 km ('about forty-five')", np.asarray(ht["zbar_m"])[k1] / 1000, 43, 48.5)
+    ht.update({"europe": {"z_km": r6(zte / 1000, 2), "T_C": r6(tte - 273.15, 1), "level": float(lev_t[int(np.argmin(np.abs(Ze - zte)))])},
+               "tropics": {"z_km": r6(ztt / 1000, 2), "T_C": r6(ttt - 273.15, 1), "level": float(lev_t[int(np.argmin(np.abs(Zt - ztt)))])},
+               "shell": "radius 1 + 50 z̄(lat)/a (×50 air, as s02)"})
+    files["stack_t.json"] = ht
+    bins["stack_t.bin"] = bt
+    # ---- s48b the cold front level by level (stack C, W86)
+    dfr = xr.open_dataset(DER / "era5_wb_front_11lev_2023-11-01T18.nc")
+    lev_f = dfr.level.values.astype(float)
+    fl, fo = dfr.lat.values.astype(float), dfr.lon.values.astype(float)
+    Tf, Uf, Vf, Zf = (dfr[v].values.astype(float) for v in ("t", "u", "v", "zg"))
+    anom = np.stack([Tf[k] - area_mean(Tf[k], fl) for k in range(lev_f.size)])
+    truth("W86", "s48b each level's anomaly has zero cos-lat box mean (|mean| < 1e-9 K)", bool(max(abs(area_mean(anom[k], fl)) for k in range(lev_f.size)) < 1e-9))
+    sec = xr.open_dataset(DER / "era5_ciaran_2023_section_48p5N_18UTC.nc").isel(time=0)
+    ov = sec.t.sel(level=850).interp(lat=fl[(fl >= 46.5) & (fl <= 50.5)], lon=fo[(fo >= -19) & (fo <= 5)]).values
+    mine = dfr.t.sel(level=850).sel(lat=fl[(fl >= 46.5) & (fl <= 50.5)], lon=fo[(fo >= -19) & (fo <= 5)]).values
+    rng("W86", "s48b D-UF2-2 equals the section file in the overlap at 850 hPa (|ΔT| < 1e-3 K)", float(np.nanmax(np.abs(ov - mine))), 0, 1e-3)
+    cf = files["fronts.json"]["cold_front"]
+    # the front is traced on 1000-650 hPa only (orchestrator 2026-10-29: max_step 80 km traces 900-650 hPa; above 650 hPa the
+    # nearest line jumps west by > 100 km per level, a different feature, so the stack is not extended to 1:95)
+    kf = lev_f >= 650.0
+    traced, gaps = call(FRN + "front_by_level", "s48b", "stack_front.bin", "the s49 850-hPa cold front traced level by level (Hewson TFP, locate='centre', ≤ 80 km per level)",
+                        heavy_call=True, T=Tf[kf], u=Uf[kf], v=Vf[kf], lat=fl, lon=fo, levels=lev_f[kf], seed_level=850.0, seed_line=(np.asarray(cf["lat"]), np.asarray(cf["lon"])),
+                        max_step_km=80.0, kind="cold", return_gaps=True, locate="centre")
+    levs = sorted(traced.keys(), reverse=True)
+    rng("W86", "s48b cold front traced on ≥ 5 levels (900-650 hPa with max_step 80 km; not extended further, orchestrator)", len([L for L in levs if L <= 900]), 5, 6)
+    LATC = 46.5
+    xs = {}
+    for L in levs:
+        c = call(FRN + "parallel_crossings", "s48b", "stack_front.bin", f"front longitude along 46.5N at {L:.0f} hPa", lat=np.asarray(traced[L].lat).tolist(),
+                 lon=np.asarray(traced[L].lon).tolist(), lat0=LATC)
+        c = np.asarray(c, float)
+        if c.size:
+            xs[L] = float(c[np.argmin(np.abs(c - (xs[levs[0]] if levs[0] in xs else c.mean())))])
+    zbf = {L: area_mean(Zf[list(lev_f).index(L)], fl) for L in lev_f}
+    kmdeg = EARTH_RADIUS / 1e3 * np.cos(LATC * DEG) * DEG
+    lv = [L for L in levs if L in xs and L <= 850]
+    zz_ = np.array([zbf[L] for L in lv]) / 1000
+    xx_ = np.array([xs[L] for L in lv]) * kmdeg
+    fit = np.polyfit(zz_, xx_, 1)
+    truth("W86", "s48b along 46.5N the front's longitude moves west with height (fit slope < 0)", fit[0] < 0, r6(fit, 2))
+    step = -fit[0] * (4.0 - 1.5)
+    rng("W86", "s48b step-back between 1.5 and 4 km from the fit: 70-140 km ('about a hundred kilometres', orchestrator 100 km / 1:44)", step, 70, 140)
+    rng("W86", "s48b implied slope 1:30-1:60 (W70 1:44-1:50)", -fit[0], 30, 60)
+    rng("W86", "s48b z̄(850) ≈ 1.5 km, z̄(500) 5.3-5.8 km ('about five and a half')", [zbf[850.0] / 1000, zbf[500.0] / 1000], [1.2, 5.3], [1.7, 5.8])
+    narration_changes.append(f"s48b S4: 'about a hundred and thirty kilometres' -> 'about a hundred kilometres' (front_by_level max_step 80 km, levels "
+                             f"{', '.join(str(int(L)) for L in lv)} hPa; fit 1:{-fit[0]:.0f} -> {step:.0f} km over 1.5-4 km)")
+    hf, bf, rf = stack_product("stack_front", anom, Zf, lev_f, fl, fo, -8.0, 8.0, exaggeration=80, units="K", lut="cmocean.balance (s47/s48 slices)")
+    hf["front"] = {str(int(L)): {"lat": r6(np.asarray(traced[L].lat)[::2], 3), "lon": r6(np.asarray(traced[L].lon)[::2], 3), "gap_km": r6(float(gaps.get(L, 0.0)), 1)}
+                   for L in levs}
+    hf["x46"] = {str(int(L)): r6(xs[L], 3) for L in lv}
+    hf["fit_km_per_km"] = r6(float(-fit[0]), 2)
+    hf["step_km"] = r6(float(step), 1)
+    files["stack_front.json"] = hf
+    bins["stack_front.bin"] = bf
+    # ---- s31 Sentinel-2 plate (W87)
+    sj = json.loads((DER / "s2_beauce_2024-08-22.json").read_text(encoding="utf-8"))
+    used = [it for it in sj["items"] if it["id"] in ("S2B_31UCP_20240822_0_L2A", "S2B_31UDP_20240822_0_L2A")]
+    rng("W87", "s31 Sentinel-2 items 31UCP / 31UDP cloud cover ≤ 1 %", [it["cloud"] for it in used], 0, 1.0)
+    rng("W87", "s31 image no-data < 0.5 %", sj["nodata_fraction"], 0, 0.005)
+    im = Image.open(DER / "s2_beauce_2024-08-22.jpg").convert("RGB")
+    pub = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/uf2/public")
+    pub.mkdir(parents=True, exist_ok=True)
+    tex = im.resize((2560, round(2560 * im.height / im.width)), Image.LANCZOS)
+    tex.save(pub / "wb_s2_beauce.jpg", quality=88)
+    lum = np.asarray(im.convert("L"), float)
+    lon_e, lat_e = sj["lon_edges"], sj["lat_edges"]
+    cell_px = max(1, round((2.0 / (111.32 * np.cos(48.45 * DEG))) / sj["deg_per_px"][0]))
+    ny_, nx_ = lum.shape[0] // cell_px, lum.shape[1] // cell_px
+    cells = lum[: ny_ * cell_px, : nx_ * cell_px].reshape(ny_, cell_px, nx_, cell_px).mean(axis=(1, 3))
+    cells[:2, :] = cells[-2:, :] = cells[:, :2] = cells[:, -2:] = -1  # keep the seeds off the plate edge
+    order = np.argsort(cells.ravel())[::-1]
+    seeds = []
+    for i in order:
+        r_, c_ = divmod(int(i), nx_)
+        la = lat_e[1] - (r_ + 0.5) * (lat_e[1] - lat_e[0]) / ny_
+        lo = lon_e[0] + (c_ + 0.5) * (lon_e[1] - lon_e[0]) / nx_
+        if all(gc_km(la, lo, s[0], s[1]) > 9.0 for s in seeds):
+            seeds.append((round(la, 4), round(lo, 4)))
+        if len(seeds) == 14:
+            break
+    truth("W87", "s31 the 14 thermal seed cells (brightest 2-km cells, ≥ 9 km apart) lie inside the plate", len(seeds) == 14 and all(
+        lat_e[0] < s[0] < lat_e[1] and lon_e[0] < s[1] < lon_e[1] for s in seeds), len(seeds))
+    td = call(MOI + "dew_point", "s31", fu, "dew point of 15 hPa (as s30)", e=1500.0)
+    lcl = call(MOI + "lifting_condensation_level", "s31", fu, "cloud base of the s31 parcel (25 °C / T_d / 1013 hPa, as W32)", T=298.15, Td=float(td), p=101300.0)
+    zl = float(lcl[0])
+    rng("W87", "s31 parcels stop at the computed cloud base ≈ 1.5 km", zl / 1000, 1.35, 1.65)
+    md = json.loads((DER / "cumulus_france_2024-06-24_modis_aqua_250m.json").read_text(encoding="utf-8"))
+    mi = Image.open(DER / "cumulus_france_2024-06-24_modis_aqua_250m.jpg").convert("RGB")
+    W_, H_px = mi.size
+    x0 = round((lon_e[0] - md["lon_edges"][0]) / (md["lon_edges"][1] - md["lon_edges"][0]) * W_)
+    x1 = round((lon_e[1] - md["lon_edges"][0]) / (md["lon_edges"][1] - md["lon_edges"][0]) * W_)
+    y0 = round((md["lat_edges"][1] - lat_e[1]) / (md["lat_edges"][1] - md["lat_edges"][0]) * H_px)
+    y1 = round((md["lat_edges"][1] - lat_e[0]) / (md["lat_edges"][1] - md["lat_edges"][0]) * H_px)
+    mi.crop((x0, y0, x1, y1)).resize((1280, round(1280 * (y1 - y0) / (x1 - x0))), Image.LANCZOS).save(pub / "wb_s31_modis.jpg", quality=88)
+    truth("W87", "s31 the MODIS crop has the same bounds as the Sentinel plate (pixel-exact edges)", (x1 - x0) > 0 and (y1 - y0) > 0, [x0, y0, x1, y1])
+    U["s31"] = {"bounds_wsen": sj["bounds_wsen"], "items": [it["id"] for it in used], "acquired_utc": sj["acquired_utc"], "seeds": seeds, "lcl_m": r6(zl, 1),
+                "trappes": [48.774, 2.009], "zex": 20, "credit": sj["credit"]}
+    # ---- W89 exaggerations (manifest)
+    U["exaggerations"] = {"stack_q": 150, "stack_t": 50, "stack_front": 80, "s02_hairline_px_min": 2, "s31_heights": 20}
+    files[fu] = U
+
+
 def render_assets(data_hashes: dict) -> dict:
     """Stage-2 render products made outside this builder (recorded by hash; the composition reads them):
     cartostyle map layers (tools/movie_wb/make_maps.py), the CesiumJS Tibet shot (tools/movie_wb/cesium_shots.py) and the
@@ -1813,7 +2092,7 @@ def render_assets(data_hashes: dict) -> dict:
         out["t850_particles_px"] = {"tool": "tools/movie_wb/map_px.py (cartostyle t850 frame, display transform only)", "particles": m.get("particles"),
                                     "public_files_sha256": {n: sha_file(uf1 / "public" / n) for n in ("wb_t850_px.json", "wb_t850_particles_px.bin", "wb_bmng_brittany.jpg",
                                                                                                       "wb_cumulus_terra_20240624.jpg") if (uf1 / "public" / n).exists()}}
-    for d in ("v4/uf1/sound", "v2/sound2", "v2/sound"):
+    for d in ("uf2/sound", "v4/uf1/sound", "v2/sound2", "v2/sound"):
         sj = Path(f"G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/{d}/sound.json")
         if sj.exists():
             sd = json.loads(sj.read_text(encoding="utf-8"))

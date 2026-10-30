@@ -1,7 +1,7 @@
 """UF1 QA gate for ch00_weather_basics: every scene with a storyboard source_line shows it (U-WB-R1), none without.
 
 1. Static: every (scene, index) source line of uf1.json (copied verbatim from the storyboard by the builder) is referenced by a
-   <SrcLine>/<Src> in WeatherBasics.tsx; no SrcLine names a scene that has no source line.
+   <SrcG>/<Src> (UF2 K2 SourceBelow) in WeatherBasics.tsx; no SrcLine names a scene that has no source line.
 2. Frames: for each scene with n source lines, five frames inside the k-th n-th of the scene are taken from the MP4 and
    in at least one of them the bottom band (y 740-862, the source-line area above the caption band) must hold source-line pixels (the muted
    #9aa6bd text colour, ≥ 150 px within ±14 per channel); scenes without real data are reported
@@ -41,7 +41,7 @@ def main() -> int:
     src = json.loads((MOV / "data/uf1.json").read_text(encoding="utf-8"))["sources"]
     tsx = TSX.read_text(encoding="utf-8")
     refs = set()
-    for m in re.finditer(r'<(?:SrcLine|Src) id=(?:"([^"]+)"|\{warm \? "([^"]+)" : "([^"]+)"\})(?: i=\{(\d+)\})?', tsx):
+    for m in re.finditer(r'<(?:SrcLine|SrcG|Src) id=(?:"([^"]+)"|\{warm \? "([^"]+)" : "([^"]+)"\})(?: i=\{(\d+)\})?', tsx):
         i = int(m.group(4) or 0)
         for g in (m.group(1), m.group(2), m.group(3)):
             if g:
