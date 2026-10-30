@@ -224,3 +224,36 @@ Products are on G: (`derived/ch00/`) and in the repo (`data/derived/ch00/`). Reg
 - DC22: "0.917 of a hemisphere north of the Arctic circle" holds only for 66.5°; with the 2023 Arctic circle (66.5634°) it is 0.9175 → say "about 0.92" or state 66.5°.
 - F4 wording: Ciarán's hourly steps are 23.7–109.4 km per step (not km/h).
 - Ciarán track minimum 953.65 hPa vs Met Office 953.3 hPa at Plymouth (secondary source); track passes within 50 km of Plymouth; 24-h fall 32.2 hPa.
+
+## G. HOUSE_STYLE §5b amendment (movie-director, 2026-10-30; storyboard v2)
+**No new download.** Every §5b change is layout (K1 GlobeFrame + zoom-reveal, K2 SourceBelow, K3 off-image readouts, K4
+column edges, K5 LayerStack3D, K6 overlap gate; `movies/src/house/kit/{frame,bbox,col3d,stack3d,wind}.tsx` already exist
+from weather basics UF2) plus one new scene. Each scene's `layout_5b` field in the storyboard says exactly what moves where.
+
+**New scene s14b_ian_stack (Ian radial wind, 5 layers).** Data already committed: `data/derived/ch00/era5_ian_2022-09-28T18_pl.nc`
+(u, v, w on 18 levels; ring means `vr_mean`, `vt_mean`, `w_mean` on 50-500 km) and `data/derived/ch00/era5_ian_2022-09-28T18_z18.nc`
+(zg, same 49 x 61 grid), registry `ERA5-ARCO-ian2022-pl` (CC BY 4.0; attribution line in the manifest). Centre 26.454 N 82.391 W
+(one centre for all levels). Layers chosen for one clear story each (numbers read 2026-10-30 from the committed files):
+
+| Layer | Box-mean height | Ring-mean v_r 100 / 200 km (m/s) | Share of inflow points, 50-300 km | Spoken |
+|---|---|---|---|---|
+| 975 hPa | 322 m (49 m at the centre; 1000 hPa lies below sea level at the centre, so it is not used) | −9.2 / −6.1 | 91 % | "about three hundred metres", "almost everywhere", "about minus six" |
+| 850 hPa | 1508 m | −0.8 / −0.4 | 48 % | "almost died away" |
+| 500 hPa | 5868 m | +0.3 / +0.5; omega at 50 km −1.43 Pa/s (rising) | 48 % | "hardly flows in or out", "near the eye, it rises" |
+| 200 hPa | 12 458 m | +2.2 / +4.2 | 31 % | "twelve and a half", "out at about four" |
+| 125 hPa | 15 348 m | +5.1 / +4.4 (v_t −9.8 at 400 km: anticyclonic outflow, not spoken) | 22 % | "fifteen kilometres", "out at about four" |
+
+CHECK **DC14b** (the builder asserts it, else the words change): the five ring means within ±0.5 m/s of the table; inflow share
+at 975 hPa ≥ 0.85; omega(500 hPa, 50 km) < 0; the box-mean heights round to the spoken values. Per-point u_r for the layer
+textures: `fluidpy.core.coords.velocity_components(u, v, "polar")` about the centre on the local plane, then `movies/data/_stack.py`
+(Float32 textures, colour range −10…+10 m/s, vertical x10 in the manifest). The stack is not reused in any other movie.
+
+**Narration changes measured** (`tools/tts.py` dry run 2026-10-30, `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/c56_5b_dryrun`,
+af_bella x1.0, no caption warnings): s11 +2 sentences (zoom-in surroundings, zoom back out), scene 102.0 s; s14b new, 14
+sentences, 216 words, 87.85 s; s24 +2 sentences (Brest's surroundings, zoom back out), 72.45 s. **Movie: 2808.75 → 2919.275 s
+narration (+110.5 s), 48:41.8 with the hold; 49 scenes, 6910 words, 142.0 words per minute overall.**
+
+**Still open (not §5b):** s35-s36 still say 6 January 2014; §F recommends the D1 refresh to 2026-01-21 (re-wording and a
+re-measure). The orchestrator decides; the §5b layout of s35-s36 does not depend on the date.
+
+**Lexicon:** no new words.

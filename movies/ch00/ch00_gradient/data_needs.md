@@ -173,3 +173,54 @@ Trappes (exists), radiosonde (exists), hectopascals (exists). Spoken maths to li
 - G1 sign correction (implementer, 2026-10-28): the V5 relation is **f k × u_g = +(Fx, Fy)** (geostrophic balance (2.198): f k × u_g = −(1/ρ)∇p = F; it is the Coriolis force −f k × u_g that equals −F). The G1 row above has the wrong sign. Measured |f k×u_g − F| ≤ 1.1e-19 m/s².
 - Vallis prints "the force per unit mass is ∇p/ρ" just after (1.47) without the minus sign; (1.47)/(1.48) require −∇p/ρ, which the code and narration use.
 - s15 Mont Blanc descent (verifier, 2026-10-28): from the summit the 60″ descent stops at 45.794 N 6.909 E, 1782 m, after 5.6 km — a V-shaped valley floor (thalweg), not a closed pit. Narration: "reaches the valley floor", not "a minimum".
+
+## G. HOUSE_STYLE §5b amendment (movie-director, 2026-10-30; storyboard v2)
+Every scene's `layout_5b` field in the storyboard says what moves where (K1 GlobeFrame + zoom-reveal, K2 SourceBelow, K3
+off-image readouts, K4 column edges, K6 overlap gate). No new download for the amendment itself.
+
+**s17 / s18 / s32 move to the registered Singapore sounding (decided).** `IGRA2` (registered), product
+`data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc`, station SNM00048698 Singapore Changi, nominal 00 UTC 1 Nov 2023
+(release 23:31 UTC 31 Oct = 07:31 local). Floor image: `BMNG-2004-21600` patch 1-2 N, 103-105 E (on disk). Numbers read
+2026-10-30 with `fluidpy.diag.sounding.layer_lapse_rate` and the product's `wmo_trop_*`:
+
+| Row | Value | Spoken |
+|---|---|---|
+| DG15s surface | z_hyps 33 m, 27.7 °C (1008.5 hPa) | "thirty three metres", "twenty seven point seven" |
+| DG15s tropopause | 16 163 m, −81.3 °C (WMO = station-reported) | "sixteen point two", "minus eighty one point three" |
+| DG15s layer | −109.0 °C over 16.13 km = −6.76 K/km (Kundu); Γ = +6.76 | "minus a hundred and nine … sixteen point one", "about minus six point eight" |
+| DG15s above | T 16.9 km −78.5, 18.0 km −75.0, 19.9 km −72.6 °C (warming) | "starts rising again" |
+| DG15s Europe | Trappes WMO tropopauses 10.88 km (2023-11-01) and 13.07 km (2026-09-30) | "somewhere between about ten and thirteen" |
+| DG16s | 676 / 4.06 = 166 | "more than a hundred and sixty" |
+| DG31s | surface → 925 hPa (798 m): −10.92 Pa/m = 0.109 hPa/m, 9.16 m per hPa; Ciarán 7.75 km per hPa → ratio 846; ρ = p/(R_d T) = 1.168 kg/m³, ρg = 11.46 Pa/m | "zero point one one", "about nine metres", "about eight hundred and fifty", "one point one seven", "about eleven and a half", "ten point nine" |
+
+**Narration changes measured** (`tools/tts.py` dry run 2026-10-30, `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/c56_5b_dryrun`,
+af_bella x1.0, no caption warnings): s17 82.35 s (was 66.4), s18 35.0 s (35.7), s32 88.1 s (83.4). **Movie: 1878.65 → 1898.65 s
+narration (+20.0 s), 31:41.2 with the hold; 40 scenes, 4487 words, 141.8 words per minute overall.** #4 keeps Trappes 2026-09-30.
+
+**Front stack (retrofit plan K6): NOT added, because the data does not exist.** The only registered frontal pressure-level files
+are Ciarán's (`ERA5-CDS-ciaran2023-section`, `ERA5-ARCO-wb-front-20231101T18`), and weather basics already stacks that front
+(s48b), so a Ciarán stack would repeat. New data need:
+
+| Id | Key (proposed) | Content | Route | Size | Licence |
+|---|---|---|---|---|---|
+| D8 | `ERA5-ARCO-front-20221222-pl5` | ERA5 t, u, v, z at **5 levels: 1000, 850, 700, 500, 300 hPa** (300 hPa ≈ 9 km, "to about nine kilometres"), 25-55 N, 115-80 W, 0.25°, one hour. **Recommended case: the Arctic cold front of Winter Storm Elliott over the Great Plains, 22 Dec 2022, 12 or 18 UTC** (the data agent picks the hour with the clearest tilt). Runner-up: the Arctic front of the Feb 2021 cold outbreak, 14 Feb 2021 12 UTC, same box. Both lie outside NW Europe 2023 and France 2026 | ARCO-ERA5 zarr, anonymous, `fluidpy.data.era5_arco.fetch_box` → `fluidpy.data.stack.stack_product` (guard on the ~2 MB selection) | < 3 MB product | CC BY 4.0 (Copernicus), redistributable |
+
+Acceptance CHECK **DG33b** (case rejected if it fails): at every level the |∇T| maximum along three cross-front lines lies on the
+front (`fluidpy.diag.fronts.front_fields`; `fluidpy.geo.sphere.gradient` per level), and it moves monotonically towards the cold
+side with height (≥ 100 km between 850 and 500 hPa); "about nine kilometres" = box-mean zg(300 hPa). No new library function.
+Kit: K5 LayerStack3D with per-layer orange grad-T glyphs and 2-°C isotherms; the colour bar beside the stack.
+
+**Ready-to-build scene s33b_front_stack** (insert after s33_fronts once D8 passes). Draft narration (5 layers, hover and orbit
+from outside, no fly-through), measured in the same dry run: **8 sentences, 96 words, 39.65 s of speech (≈ 40.5 s with the
+scene gap)**:
+> A front isn't just a line on the ground map. Let's stack five temperature maps above a strong cold front, from near the ground
+> to about nine kilometres up. On every layer, the orange arrows are grad capital T, pointing towards warmer air. Where the
+> isotherms crowd, the arrows are longest. That's the front on that layer. Let's circle the stack from outside, from the bottom
+> layer to the top. The crowded band shifts towards the cold side as we climb. So a front is a sloping surface, and its gradient
+> is measured layer by layer.
+
+Once the case is fixed, a place clause is added (for example "…above the Great Plains of the United States, on the twenty second
+of December, twenty twenty-two"), with the place centred and labelled within 1 s, and the scene re-measured. With s33b the
+movie grows to about 32:22.
+
+**Lexicon:** none new ("Changi" is not spoken).

@@ -1,0 +1,1054 @@
+# ch00_contour_maps storyboard v1 (movie-director, 2026-10-30). S<k> = sentence k of the scene; AT(k, 'words') a phrase inside it.
+# House style movies/HOUSE_STYLE.md binding (incl. §5b: GlobeFrame zoom-reveal, SourceBelow, colour bars beside maps, animated winds, no text
+# over pictures or text). Per scene: kind / data / tool / runner_up / why / layout_5b / related. Data, functions and CHECK ids (DMnn): data_needs.md.
+# Times: MEASURED (tools/tts.py dry run, af_bella x 1.0). Scope re-set 2026-10-30: contours as a concept, no forecasting claims.
+id: ch00_contour_maps
+title: Contour maps and isolines (and how mountains, the sea floor, pressure, temperature and the height of a pressure surface are drawn with them)
+version: 1
+concepts: ['scalar field drawn as a map (recap of #6)', 'isoline / contour line: places of equal value; linear interpolation between grid points', 'rules
+    of contour lines (one value per line, never cross, close or leave the map, higher on one side)', contour interval; reading values between lines; filled
+    contours and stepped colour bars, height contours from slicing real terrain; spacing = steepness; profiles from contours, 'contour spacing and the gradient:
+    |grad h| ~ interval / spacing, grad h perpendicular to the lines (link to #6)', the coastline as the zero contour; isobaths, 'peaks, basins, ridges,
+    valleys and cols (saddles) read from contours', 'isobars on sea-level pressure; highs, lows, ridges, troughs and cols of pressure; crowded isobars and
+    strong winds', isotherms (January climatology), 'isohypses: height contours of the 500-hPa surface', 'the isoline family: isobar, isotherm, isohypse,
+    isobath, isohyet, isotach, isopycnal']
+target_duration_s: 1277.275
+fps: 30
+size: [1920, 1080]
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series: {name: Chapter 0 series, position: 'v3 M01 (map-reading block); place in the order to be set by series plan v4 (coordinator, 2026-10-30)', previous: 'prerequisites
+    #5 coordinates, #6 gradient, 0.3 weather basics', next: set by v4}
+scope_note: 'Re-scoped 2026-10-30 (coordinator): contours and isolines as a concept (terrain, the sea floor, isobars, isotherms, height of a pressure surface);
+  no forecasting claims. Isohyets, isotachs and isopycnals are named only (s23).'
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  beats: '[beat] = 1.5-s hold after worked calculations'
+  music: {source: 'tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)', style: level-lines (NEW style to add), spec: 'G major, 6/8
+      at 66 bpm; a harp ostinato that steps up in equal intervals (1-2-3, 2-3-4, … one step per bar, like contour lines at a fixed interval) over a soft
+      felt-piano and warm string pad (G - Em7 - Cmaj7 - D, 8 bars each); every 16 bars the ostinato returns to its lowest note (sea level); a very quiet
+      low wind-chime on the downbeat every 4 bars; no drums; reverb medium, wet 0.25; low-pass 6 kHz', seed: 41, level: 'bed -28 LUFS, ducked 5 dB under
+      speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail', runner_up: air-flowing seed 41 if the new style is not added, distinct_from: 'maths-calm,
+      rotation-turning, index-lattice(-cycle), tangent-glide, compass-orbit (#5), steepest-ascent (#6), air-flowing + storm-tense (weather basics)'}
+  effects_candidates:
+  - {scene: s07_slicing, kind: wind_mountain_soft, intensity: 0.06, shows: camera orbit round the summit (S1-S2 only)}
+  - {scene: s20_crowded_isobars, kind: wind_strong_far, intensity: 0.1, shows: fast streaks by Hudson Bay (S5-S6)}
+  effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; ducked; never over a word; one at a time; no caption tags'
+measured_narration_s: 1274.775
+measured_frames: 38318
+words: 3075
+sentences: 199
+dry_run:
+  tool: tools/tts.py
+  runs: ['G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_contour_maps/dryrun/v1 (26 scenes)', 'G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_contour_maps/dryrun/v1_add
+      (s08b, s20b)']
+  audio_s: 1274.775
+  speech_s: 1170.9
+  cues: 325
+  self_check: both runs diff 0.0 ms, len_ok, cues_ok
+  warnings: []
+  words_per_minute_overall: 144.7
+  words_per_minute_speaking: 157.6
+  beats: 19
+  lexicon: movies/lexicon.yaml as of HEAD (not edited; proposals in data_needs.md §E)
+moments: {pressure chart: 'ERA5 2 Nov 2023 12 UTC over North America and the western Atlantic (12-68 N, 130-20 W; Ciarán, over Europe, is outside the frame)',
+  terrain: 'Mount Fuji and Suruga Bay (Copernicus DEM GLO-30, ETOPO 2022 15″); Everest, Lhotse, South Col, Khumbu valleys (Copernicus DEM)', climate: ERA5
+    January 2-m temperature 1991-2020, aloft: 'ERA5 500-hPa height, same hour as the chart'}
+conventions: {contour interval: '4 hPa for isobars (weather-chart convention), 500 m and 200 m on terrain, 5 °C isotherms, 60 m isohypses', labels: 'full
+    isobar values (1016, not 16) for beginners', H and L: blue H / red L with the central pressure under the letter (cartography §2a), negative depths: 'rose
+    with a ''−'' glyph, dashed isobaths', projection: Lambert conformal for the chart; polar stereographic for the January map; Lambert conformal for the
+    terrain maps}
+colour_contract: 'house-dark-v1: contour lines warm white; the line being taught gold; grad arrows orange; walkers and wind streaks teal; negatives rose
+  with ''−''; H blue #7fb2ff, L red #ff7a8a (chart convention, carried also by the letters); terrain hypsometric tint + hillshade (no rainbow); msl cmocean
+  ''dense''; temperature cmocean ''thermal''; wind speed cmocean ''speed'''
+honesty_notes: [ERA5 is a reanalysis (said in s02); sea-level pressure over high ground is a reduction (the eastern-US high sits over the Appalachians at
+    558 m; said implicitly via the weather-basics recap in s15)., 'Highs, lows, the col, ridges and troughs come from tested functions (local_extrema F5,
+    saddle_points, trough_ridge_axes), never from a box minimum; the Hudson Bay ''low'' has two minima (985.2 at 60 N 83 W and 983.4 at 67.5 N 84.5 W);
+    the narration names the Hudson Bay one with its value (DM17).', 's08-s09 spacing numbers (350 m, 2 km) are planning values for Fuji''s slopes; the builder
+    measures them on the DEM with F4 (DM08) and the words change if they differ by more than the tolerance.', 's19: ''the wind was light'' describes the
+    analysed 10-m wind at that hour, not a forecast.', 's20: crowded isobars go with strong winds in this snapshot (correlation 0.76 over water, manifest
+    only); the dynamics (Coriolis balance) are not claimed here.', 's21: January mean 1991-2020; ''milder over the warm North Atlantic'' is a description
+    of the map, not an attribution study.', No forecasting claims anywhere (scope note)., 'Exaggerations (terrain x2, 3-D inset x1.5, 500-hPa sheet x200,
+    lift-off motion, globe flights, wind streak speed) are recorded here and in the manifest, not badged (HOUSE_STYLE §5).']
+quiz_hook: On a map with isobars every 4 hPa, two neighbouring lines are 1012 and 1016 hPa. What is the pressure halfway between them, and if the lines
+  are 40 km apart in one place and 200 km apart in another, where is the pressure gradient larger, and by how much?
+headings_exception: 's00_title only: the one title frame'
+scenes:
+- id: s00_title
+  t: [0.3, 11.25]
+  sentence_times:
+  - [0.3, 10.45]
+  beat: opening title (HOUSE_STYLE §3)
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Contour'' / ''maps'' (150 px, 800, TitleGradient teal -> gold); ''made easy''
+    (96 px, warm white) pulses x1.06 on AT(1,''the easy way''); ''and how meteorology uses them'' (68 px, ''meteorology'' teal). Right x 1130-1840, y 180-636
+    (>= 50 px clear of the subtitle). Part A (frame 0 -> AT(1,''meteorology'')): the Copernicus-DEM Mount Fuji in three.js (heights x2), five level sheets
+    slide down through it and the cut lines glow gold, lift off and settle flat as a contour map. Part B (12-frame cross-fade on ''meteorology''): the ERA5
+    msl map of North America and the western Atlantic draws its isobars every 4 hPa one by one, then ''H'' (blue) and ''L'' (red) letters drop onto the
+    closed loops on AT(1,''pressure''), and the 500-hPa contours fade in faintly on AT(1,''height''). Poster = frame 200.'
+  voiceover: In this video, we'll learn contour maps and isolines the easy way, and see how meteorology uses them to draw pressure, temperature and height
+    on a map.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on the Copernicus DEM and on ERA5 msl
+    params:
+      dem: Fuji crop
+      levels_m: [500, 1500, 2500, 3500]
+      msl: 2023-11-02T12
+    test: tests/diag/test_contours.py; CHECK DM01
+  exaggeration: [title animation is a schematic transition (illustrative), terrain heights x2]
+  kind: 3-D terrain + data mini-map
+  data: D2 Copernicus DEM GLO-30 (Fuji); A1 ERA5 2023-11-02T12 msl
+  tool: '@remotion/three terrain mesh + Remotion SVG map (d3-geo, Lambert conformal)'
+  runner_up: Manim insert (no shared colours)
+  why: the concept (slicing into lines) and its application (isobars, H and L) on frame 0
+  layout_5b: 'Title frame only; source line ''Data: Copernicus DEM · ERA5 (Copernicus C3S)'' below the right column (>= 28 px, y <= 860).'
+  related: []
+- id: s01_hook
+  t: [11.25, 26.55]
+  sentence_times:
+  - [11.25, 15.575]
+  - [15.925, 19.725]
+  - [20.075, 25.75]
+  beat: hook question
+  visual: 'Full width from frame 0: left the Fuji contour map (s07 end state, 500-m lines, hypsometric tint + hillshade), right the msl isobar map (s16
+    state). S1: keyword ''contour line'' (54 px, warm white) between them on AT(1,''contour line''). S2: one contour on each picture glows gold on AT(2,''what
+    contour lines are''). S3: three thumbnails slide in under the pictures on AT(3,''mountains, the sea floor, and the air above us''): Everest contours,
+    Suruga isobaths, the 500-hPa contours.'
+  voiceover: What is a contour line, and why are so many maps made of them? Let's see what contour lines are, and how to read them. Then let's see what
+    they tell us about mountains, the sea floor, and the air above us.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2)
+    params: {}
+    test: CHECK DM01
+  exaggeration: []
+  kind: terrain map + data map
+  data: D2 (Fuji); A1 ERA5 msl
+  tool: Remotion SVG (pre-rendered contour paths from the build)
+  runner_up: '-'
+  why: core pictures on the first frame (HOUSE_STYLE §2)
+  layout_5b: 'Two pictures side by side, each with its own source line below (''Data: Copernicus DEM'' / ''Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 12
+    UTC''); keyword in the gap; thumbnails below both, above the caption band.'
+  related: []
+- id: s02_numbers
+  t: [26.55, 77.425]
+  sentence_times:
+  - [26.55, 29.125]
+  - [29.475, 41.075]
+  - [41.425, 46.475]
+  - [46.825, 54.725]
+  - [55.075, 58.225]
+  - [58.575, 60.7]
+  - [61.05, 63.275]
+  - [63.625, 66.675]
+  - [67.025, 70.75]
+  - [71.1, 73.9]
+  - [74.25, 76.625]
+  beat: 'building block: a field as a map of numbers'
+  visual: 'Picture zone x 80-1000: ERA5 msl over the western Atlantic (20-45 N, 85-50 W, Lambert conformal) as a grid of numbers every 2 degrees (whole
+    hPa, 44-px numerals, warm white on a dark sea, NE 10 m coast faint) drawing in row by row on AT(2,''map of numbers'')/S2. S3: one number pulses with
+    keyword ''hectopascals''. S4: keyword ''scalar field'' + gradient-movie thumbnail. S5-S6: keywords ''highest?'' and ''changes fastest?'' with gold pointers
+    that wander, unable to land. S8-S11: the picture splits: left half of the grid washes into a colour field (cmocean ''dense'', colour bar beside) on
+    AT(10,''colour''), right half draws isolines on AT(11,''lines'').'
+  voiceover: Let's start with a map of numbers. Here is the air pressure at sea level over the western Atlantic, at noon universal time on the second of
+    November, twenty twenty-three, from the reanalysis called ERA5. Each number is the pressure in hectopascals at one point of a grid. Pressure, like height
+    or temperature, has one value at every place, so it's a scalar field, as in the gradient movie. But a page full of numbers is hard to read. Where is
+    the pressure highest? Where does it change fastest? Our eyes can't tell from the numbers alone. There are two good ways to turn numbers into a picture.
+    One is to paint each place with a colour. The other is to draw lines.
+  on_screen_eq: null
+  physics_source:
+    fn: builder read of ERA5 msl at grid points; fluidpy.diag.contours.isolines (F2)
+    params: {time: 2023-11-02T12, step_deg: 2}
+    test: CHECK DM02
+  exaggeration: []
+  kind: data grid
+  data: A1 ERA5 2023-11-02T12 msl (0.25 deg raw, sampled every 2 deg)
+  tool: Remotion SVG
+  runner_up: a table of numbers (less map-like)
+  why: 'the problem in plain words: numbers are not a picture'
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: ERA5 (Copernicus C3S) · 2 Nov
+    2023, 12 UTC''); the colour field''s colour bar beside the map in the text column (52-px ticks, unit above), never on the map, in every zoom state;
+    keywords in the maths zone.'
+  related:
+  - &id001 {movie: '#6', slug: ch00_gradient, covers: 'gradient, contour spacing, pressure gradient force'}
+- id: s03_isoline
+  t: [77.425, 138.625]
+  sentence_times:
+  - [77.425, 79.65]
+  - [80.0, 84.525]
+  - [84.875, 90.3]
+  - [90.65, 101.65]
+  - [103.15, 106.4]
+  - [106.75, 115.7]
+  - [117.2, 121.475]
+  - [121.825, 128.0]
+  - [128.35, 131.425]
+  - [131.775, 137.825]
+  beat: 'building block: what an isoline is (interpolation in words)'
+  visual: 'Picture zone: a 3 x 3 patch of the s02 grid enlarged (four of its points 1014, 1018, 1015, 1019 from the real grid, DM02). S2: all points equal
+    to 1016 searched (none exactly). S3-S4: between 1014 and 1018 a gold tick slides to halfway; maths zone CalcStack ''(1016 − 1014) / (1018 − 1014) =
+    2 / 4 = ½''. S5: between 1015 and 1019 the tick lands a quarter of the way, CalcStack ''(1016 − 1015) / (1019 − 1015) = ¼''. S6-S7: the ticks join into
+    a smooth line (teal) across the patch, then across the whole s02 grid. S8-S9: keywords ''isoline'' / ''contour line'' and ''iso = equal''. S10: the
+    1020 line draws, then the others.'
+  voiceover: Here's how the lines are made. Pick one value, say a thousand and sixteen hectopascals. Now find every place where the pressure is exactly
+    a thousand and sixteen. Between two grid points, one with a thousand and fourteen, and its neighbour with a thousand and eighteen, the value a thousand
+    and sixteen lies halfway between them. [beat] So the line passes halfway between the two points. If the neighbours were a thousand and fifteen and a
+    thousand and nineteen, it would pass a quarter of the way along, nearer the fifteen. [beat] Join all those crossing points, and you get one smooth line.
+    A line that joins places with the same value is called an isoline, or a contour line. Iso comes from the Greek word for equal. Then we pick the next
+    value, a thousand and twenty, and draw its line too, and so on.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.crossing_fraction (F3); fluidpy.diag.contours.isolines (F2)
+    params:
+      pairs:
+      - [1014, 1018]
+      - [1015, 1019]
+      level: 1016
+    test: tests/diag/test_contours.py (F3 V1 0.5, 0.25); CHECK DM02, DM03
+  exaggeration: []
+  kind: diagram on data
+  data: A1 ERA5 msl
+  tool: Remotion SVG + CalcStack
+  runner_up: '-'
+  why: goal first, then the one-move construction
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: ERA5 (Copernicus C3S) · 2 Nov
+    2023, 12 UTC''). Calculations in the maths zone only.'
+  related: []
+- id: s04_rules
+  t: [138.625, 185.075]
+  sentence_times:
+  - [138.625, 146.875]
+  - [147.225, 155.05]
+  - [155.4, 163.625]
+  - [163.975, 167.825]
+  - [168.175, 172.075]
+  - [172.425, 179.925]
+  - [180.275, 184.275]
+  beat: 'building block: the four rules of contour lines'
+  visual: 'Picture zone: the s03 map with its isobars. S2 rule 1: a teal walker glides along the 1016 line with a readout ''1016'' that never changes. S3
+    rule 2: two lines are dragged towards each other and a rose ''×'' with ''1016 and 1020?'' flashes once (not a full-screen flash) where they would touch.
+    S4-S5 rule 3: one line traced to its loop, another to the frame edge, a third shown wrongly ending mid-map (rose dashed, ''−'') and fading. S6 rule
+    4: the two sides of one line tint ''higher'' (warm) and ''lower'' (cool). Keywords ''1  same value'', ''2  never cross'', ''3  close or leave'', ''4  higher
+    | lower'' accumulate in the maths zone (no box).'
+  voiceover: 'Contour lines follow a few simple rules, and each one comes from the same fact: every place has exactly one value. First, every point on a
+    line has the same value, so walking along a contour line, the value never changes. Second, two lines with different values can never cross or touch,
+    because the crossing point would need two values at once. Third, a line never just stops in the middle of a map. It either closes into a loop, or it
+    runs off the edge. Fourth, a line splits the map into two sides: higher values on one side, and lower values on the other. So once you know which side
+    is higher, you can read the whole map.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2)
+    params: {}
+    test: CHECK DM04 (no crossings; closed or leaving)
+  exaggeration: [the 'wrong' line in S5 is an illustrative counter-example]
+  kind: rules on data
+  data: A1 ERA5 msl
+  tool: Remotion SVG
+  runner_up: '-'
+  why: 'nothing used unexplained: the rules a reader needs'
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it.'
+  related: []
+- id: s05_interval
+  t: [185.075, 258.3]
+  sentence_times:
+  - [185.075, 189.15]
+  - [189.5, 198.975]
+  - [200.475, 205.725]
+  - [206.075, 210.9]
+  - [212.4, 216.35]
+  - [216.7, 222.9]
+  - [224.4, 226.55]
+  - [226.9, 229.875]
+  - [230.225, 234.15]
+  - [234.5, 238.6]
+  - [238.95, 245.375]
+  - [245.725, 250.475]
+  - [250.825, 257.5]
+  beat: 'building block: the contour interval, reading values, filled contours'
+  visual: 'Picture zone: isobars every 4 hPa with in-line labels 1012, 1016, 1020 (44 px, full values). S2: the three labels pulse. S3-S4: CalcStack ''1020
+    − 1016 = 4 hPa'' (keyword ''contour interval''). S5-S6: a gold dot midway between the 1016 and 1020 lines with ''≈ 1018'' beside it. S8-S10: three small
+    maps of the same field side by side (contours every 1, 10 and 4 hPa) with keywords ''tangle'', ''too few'', ''just right''; the 4-hPa one grows back.
+    S11-S13: the bands between lines fill with one colour each (cmocean ''dense'', 4-hPa classes) and a stepped colour bar appears beside the map; one band
+    and its bar step are linked in gold.'
+  voiceover: 'The steps between the lines are called the contour interval. On this map, the lines are drawn every four hectopascals: a thousand and twelve,
+    a thousand and sixteen, a thousand and twenty. [beat] To find the interval on any map, take two neighbouring labels and subtract. One thousand and twenty
+    minus one thousand and sixteen is four. [beat] A place between two lines has a value between them. Halfway between the sixteen and the twenty lines,
+    the pressure is about a thousand and eighteen. [beat] The interval is a choice. Let''s draw the same pressure map three ways. Every hectopascal, the
+    lines crowd into a tangle. Every ten hectopascals, the small shapes disappear. Every four hectopascals, which is what weather maps use, we see the shapes
+    without the clutter. Many maps also fill the space between two lines with one colour. Then each colour band is one interval, and the colour bar beside
+    the map says which values it holds.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) at 1, 4 and 10 hPa
+    params:
+      intervals_hPa: [1, 4, 10]
+    test: CHECK DM05
+  exaggeration: []
+  kind: data maps + calc
+  data: A1 ERA5 msl
+  tool: Remotion SVG (paths from the build)
+  runner_up: '-'
+  why: how to read any contour map's step
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it under each map (one shared line under
+    the row of three); the stepped colour bar beside the map in the text column (52-px ticks, unit above), never on the map, in every zoom state.'
+  related:
+  - &id002 {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, sea-level pressure, isobars, highs and lows'}
+- id: s06_globe_fuji
+  t: [258.3, 300.325]
+  sentence_times:
+  - [258.3, 261.925]
+  - [262.275, 265.8]
+  - [266.15, 268.725]
+  - [269.075, 274.075]
+  - [274.425, 285.925]
+  - [286.275, 294.375]
+  - [294.725, 299.525]
+  beat: 'intuition: where contours come from (globe zoom tour to Mount Fuji)'
+  visual: 'House globe (BMNG). S1-S2: the unzoomed globe turns slowly. S3: zoom-reveal to Japan, ''Japan'' and ''Pacific Ocean'' labels on AT(3,''Japan'')
+    / AT(3,''Pacific Ocean''); S4: the camera flies on to Mount Fuji, ''Tokyo'' (dot + label) and ''Mount Fuji'' labels within 1 s of their words, Fuji
+    centred; ''3776 m'' in the text column. S5: the camera hovers; labels ''Fuji Five Lakes'' (italic) north of the cone and ''Suruga Bay'' (italic) to
+    the south. S6 on AT(6,''zoom back out''): the camera returns to the unzoomed start view. S7: cross-cut to s07''s 3-D terrain.'
+  voiceover: Contour lines are much older than weather maps. Map makers drew them first for the height of the land. Let's fly to a famous mountain. This
+    is Japan, a chain of islands in the north-west Pacific Ocean. On the main island, about a hundred kilometres south-west of Tokyo, stands Mount Fuji,
+    Japan's highest mountain, at three thousand seven hundred and seventy six metres. It's a volcano, standing almost alone, with lakes at its northern
+    foot and the deep water of Suruga Bay to the south. Let's zoom back out, and then take a closer look at the mountain itself.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.great_circle_distance (Tokyo-Fuji 100 km)
+    params:
+      fuji: [35.3606, 138.7274]
+      tokyo: [35.6812, 139.7671]
+    test: CHECK DM06
+  exaggeration: [globe zoom and flight time-compressed]
+  kind: 3-D globe zoom tour
+  data: A3 BMNG, NE 10 m places/coast; D2 for the close view
+  tool: '@remotion/three house globe (GlobeView + Vignette, globePath per sentence)'
+  runner_up: Cesium globe (heavier, no gain)
+  why: a real place and its surroundings before the slicing
+  layout_5b: 'GlobeFrame (K1) zoom-reveal with the cross-product v5 s33 numbers: unzoomed, the whole globe on the left (>= 760 px), separate from the text;
+    zoomed, full-bleed, camera dist 4.3 -> 2.4 over ~1.5 s centred near x 600, y 470; right side darkened 0 -> 82 % over x 980-1160 then flat 82 % (not
+    blurred, fades in over 1 s); 60-px fades top/left/right; bottom fade y 760-830; source line ''Image: NASA Blue Marble NG · places: Natural Earth'' at
+    y 852 on solid background below the globe in both states; text only on the darkened part; every named place centred and labelled within 1 s of its words;
+    the zoom ends with a zoom back out to the starting view before the scene ends'
+  related:
+  - &id003 {movie: '#5', slug: ch00_coordinates, covers: 'latitude, longitude, map projections'}
+- id: s07_slicing
+  t: [300.325, 353.1]
+  sentence_times:
+  - [300.325, 308.0]
+  - [308.35, 312.5]
+  - [312.85, 319.55]
+  - [319.9, 330.55]
+  - [330.9, 334.4]
+  - [334.75, 337.9]
+  - [338.25, 344.2]
+  - [344.55, 352.3]
+  beat: 'intuition: slicing a real mountain into contour lines (3-D terrain -> contours lift off)'
+  visual: 'Full width (minus the text column): three.js mesh of Mount Fuji from the Copernicus DEM (30 m, cropped 35.05-35.60 N, 138.50-139.00 E, heights
+    x2, hypsometric tint + hillshade, no photo), camera at a side angle outside the mountain. S1-S2: slow orbit (outside). S3: a translucent level sheet
+    appears at 500 m; S4: sheets at 1000 … 3500 m slide in one by one (7 sheets) with their heights in the text column. S5: each sheet''s cut line glows
+    gold where it meets the ground (DEM isolines, F2). S6: keyword ''same height''. S7: the seven lines lift off the surface, rise to their own heights
+    as a floating stack, then drop flat onto a map plane below in order, keeping their colours; the mountain fades to 20 %. S8: the camera tilts to look
+    straight down: the flat contour map, labels ''500'' … ''3500'' on the lines; keywords ''height contour'', ''interval 500 m''.'
+  voiceover: 'Here is Mount Fuji in three dimensions, built from satellite measurements of the height of the ground every thirty metres. We''ve stretched
+    the height twice, so the shape is easier to see. Now imagine cutting the mountain with flat, level sheets, like slicing a loaf of bread sideways. The
+    first sheet is five hundred metres above sea level, the next one a thousand metres, and so on, every five hundred metres up to three thousand five hundred.
+    Where each sheet cuts the ground, it leaves a line. Every point on that line has the same height. Let''s lift those lines off the mountain, and lay
+    them flat, one above the other, on the map. That''s a contour map of the mountain: each line is a height contour, and the contour interval is five hundred
+    metres.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on the Copernicus DEM crop
+    params:
+      levels_m: [500, 1000, 1500, 2000, 2500, 3000, 3500]
+    test: tests/diag/test_contours.py; CHECK DM07
+  exaggeration: [vertical x2 (said in S2), lines lift to their own heights x2 for the lift-off (illustrative motion)]
+  kind: 3-D terrain -> contours
+  data: D2 Copernicus DEM GLO-30 (N35 E138 + N34 E138)
+  tool: '@remotion/three displaced plane (heightmap texture) + line geometry from the build'
+  runner_up: deck.gl TerrainLayer (good terrain, weaker line animation); PyGMT grdview stills (no camera moves)
+  why: 'the one picture that makes contour lines obvious: equal-height cuts of a real mountain'
+  layout_5b: '3-D terrain in a large frame with soft edges on all sides while the camera moves (no hard 3-D box); the colour bar for the height tint (''m'')
+    beside the frame in the text column; source line ''Data: Copernicus DEM GLO-30 (ESA/Airbus)'' below the frame; sheet heights and keywords in the text
+    column; camera always outside the mountain (no fly-through); this is a terrain slice, not a layer stack.'
+  related: []
+- id: s08_spacing
+  t: [353.1, 401.55]
+  sentence_times:
+  - [353.1, 356.0]
+  - [356.35, 360.85]
+  - [361.2, 366.95]
+  - [367.3, 372.5]
+  - [372.85, 379.375]
+  - [380.875, 386.475]
+  - [386.825, 389.4]
+  - [389.75, 395.525]
+  - [395.875, 400.75]
+  beat: 'intuition: spacing = steepness; a walker along and across the lines'
+  visual: 'Picture zone: the Fuji contour map from above at 200-m interval (index contours every 1000 m thicker). S2-S3: a gold bracket between two neighbouring
+    lines near the summit ''≈ 350 m'' (bracket label on the map, the number spoken), then one on the lower slopes ''≈ 2 km''. Maths zone: ''200 m up in
+    350 m'' and ''200 m up in 2 km'' (68 px). S5: keywords ''crowded → steep'', ''spread → gentle''. S6-S8: a walker icon (teal) walks along one contour
+    with a readout ''height 2000 m'' constant, then turns and walks straight across the lines, a climb readout rising.'
+  voiceover: 'Now let''s read the steepness from the map. Let''s draw the contours more closely, every two hundred metres. Near the summit, neighbouring
+    lines are only about three hundred and fifty metres apart. Low down, on the gentle lower slopes, they''re about two kilometres apart. So the same two-hundred-metre
+    climb takes a short walk near the top, and a long walk near the bottom. [beat] Crowded lines mean a steep slope, and widely spaced lines mean a gentle
+    one. Now picture a walker on the mountain. If she walks along a contour line, she stays at the same height: the path is level. If she walks straight
+    across the lines, she climbs as fast as she can.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.contour_spacing (F4) on the DEM
+    params: {interval_m: 200, near_summit: 3400 -> 3600 m, lower: 1000 -> 1200 m, azimuths: 3}
+    test: tests/diag/test_contours.py (F4 V1 cone, V5); CHECK DM08
+  exaggeration: []
+  kind: terrain contour map
+  data: D2 Copernicus DEM
+  tool: Remotion SVG
+  runner_up: 3-D view (spacing harder to judge)
+  why: how to read steepness from spacing
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: Copernicus DEM GLO-30''). readouts
+    and calculations beside the picture with gold CurvedLinks; only short labels at a spot (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related: []
+- id: s08b_profile
+  t: [401.55, 444.65]
+  sentence_times:
+  - [401.55, 406.6]
+  - [406.95, 414.775]
+  - [415.125, 419.875]
+  - [420.225, 426.65]
+  - [427.0, 431.4]
+  - [431.75, 438.2]
+  - [438.55, 443.85]
+  beat: 'intuition: from contours back to the shape (a profile)'
+  visual: 'Picture zone top: the Fuji contour map; a gold straight line draws across it through the summit (SW -> NE) on AT(2,''straight line''). S3: at
+    each crossing a small dot lights with its height. Picture zone bottom (y 520-820): a profile graph (distance along the line vs height, ticks 52 px);
+    each crossing''s dot drops to its height on the graph (S4) and the dots join into a teal profile line (S5). S6: two segments highlighted, a steep one
+    under crowded lines and a gentle one under spread lines, linked by gold links to their map stretches. S7: a faint replay of the s07 lift-off reversed.'
+  voiceover: 'Contour maps also let us draw the shape of the ground along any line. Let''s draw a straight line across the map, from the lower slopes on
+    one side, over the summit, and down the other side. Every time the line crosses a contour, we know the height at that spot. Let''s mark each of those
+    heights above the line, at the right distance along it, and join the dots. That''s a profile: a side view of the mountain along our line. Where the
+    contours crowd, the profile climbs steeply, and where they''re spread out, it''s almost flat. It''s the slicing from before, run backwards: from the
+    lines, back to the shape.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) + line intersection; DEM profile sampled along the same line for the check
+    params: {line: 'SW-NE through the summit, 40 km'}
+    test: CHECK DM08b (profile from crossings within 60 m of the DEM profile at every crossing)
+  exaggeration: []
+  kind: map + profile
+  data: D2 Copernicus DEM
+  tool: Remotion SVG
+  runner_up: three.js cut-away
+  why: a classic map-reading skill that ties spacing to slope
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it below the map/profile pair. The profile
+    graph sits below the map, not on it.'
+  related: []
+- id: s09_gradient_link
+  t: [444.65, 505.325]
+  sentence_times:
+  - [444.65, 450.2]
+  - [450.55, 460.975]
+  - [461.325, 468.025]
+  - [468.375, 475.625]
+  - [477.125, 481.975]
+  - [482.325, 490.825]
+  - [492.325, 501.475]
+  - [501.825, 504.525]
+  beat: 'why it matters: contour spacing gives the gradient (link to #6)'
+  visual: 'Picture zone: the 200-m Fuji map; at three points orange grad-h arrows (10 px, 40-px heads) at right angles to the lines (RightTick), the longest
+    near the summit. Maths zone: the equation builds with gold underbraces ''interval'', ''spacing''; CalcStack ''200 m / 350 m ≈ 0.57'' -> ''≈ 57 m up
+    per 100 m''; then ''200 m / 2000 m = 0.1'' -> ''10 m up per 100 m''. S7: keyword ''no calculus needed''. S8: ''crowded → big gradient'' with the gradient-movie
+    thumbnail.'
+  voiceover: 'That walk straight across the lines is exactly the gradient from the gradient movie. Grad h, the gradient of the height, points the way the
+    height increases fastest, so it''s at right angles to the contour lines, pointing towards the higher ones. And its length, the steepest slope, is the
+    contour interval divided by the spacing between the lines. Near the summit, that''s two hundred metres over three hundred and fifty metres, about zero
+    point five seven. [beat] That means about fifty seven metres up for every hundred metres along. On the lower slopes, it''s two hundred over two thousand,
+    which is zero point one, or ten metres up for every hundred along. [beat] So the map gives us the gradient without any calculus: its direction is across
+    the lines, and its size is the interval over the spacing. Crowded lines mean a big gradient.'
+  on_screen_eq: {latex: '|\nabla h| \approx \frac{\Delta h}{\Delta n} = \frac{\text{contour interval}}{\text{spacing}}', vallis_eq: 'none (not a book equation):
+      the finite-difference reading of |grad h| taught in #6 (Kundu §2.9 gradient)', page_png: not applicable (our statement; the gradient definition's
+      page is cited in ch00_gradient)}
+  physics_source:
+    fn: fluidpy.diag.contours.contour_spacing (F4); fluidpy.geo.sphere.gradient (V5 consistency)
+    params: {interval_m: 200}
+    test: CHECK DM09
+  exaggeration: [arrow lengths scaled for legibility (ratios kept)]
+  kind: terrain map + equation
+  data: D2 Copernicus DEM
+  tool: Remotion SVG + Layered TeX
+  runner_up: '-'
+  why: the bridge from reading lines to the gradient
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. readouts and calculations beside the
+    picture with gold CurvedLinks; only short labels at a spot (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related:
+  - *id001
+- id: s10_coast_isobaths
+  t: [505.325, 549.85]
+  sentence_times:
+  - [505.325, 511.5]
+  - [511.85, 514.65]
+  - [515.0, 518.65]
+  - [519.0, 523.0]
+  - [523.35, 531.175]
+  - [532.675, 541.6]
+  - [541.95, 549.05]
+  beat: 'intuition: the coastline is the zero contour; isobaths below the sea'
+  visual: 'Picture zone: ETOPO 2022 15″ relief of Fuji and Suruga Bay (34.4-35.8 N, 138.1-139.3 E, Lambert conformal), land hypsometric, sea cmocean ''deep'';
+    contours every 500 m above sea level (warm white) and isobaths every 500 m below (light blue, dashed negatives), the 0 m line gold and thicker. S1:
+    the coastline glows gold with ''0 m''. S2-S3: the isobaths draw from the coast outwards, keyword ''isobath''. S4: the deepest isobath in the bay labelled
+    ''−2500 m'' (rose ''−'' glyph) and the summit ''3776 m''. S5: a gold bracket from the summit to the bay floor with ''< 100 km'' and the CalcStack ''3.8
+    km + 2.5 km ≈ 6.3 km'' beside the map.'
+  voiceover: 'The coastline is a contour line too: it''s the line where the height is zero, at sea level. And the contours don''t stop at the coast. Below
+    the sea, we can draw lines of equal depth. These are called isobaths, from the Greek word for depth. South of Mount Fuji, Suruga Bay drops steeply,
+    and its floor reaches about two and a half kilometres below sea level. [beat] So within less than a hundred kilometres, the ground goes from about three
+    point eight kilometres above the sea to about two and a half below it. One set of lines, height above zero and depth below it, draws the whole shape
+    of the land and the sea floor.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on ETOPO 15″ (levels -3000…3500 every 500 m)
+    params: {box: '34.4-35.8 N, 138.1-139.3 E'}
+    test: CHECK DM10
+  exaggeration: []
+  kind: relief + bathymetry map
+  data: D3 ETOPO 2022 15″ (Fuji-Suruga)
+  tool: cartopy (tools/maptools/cartostyle.py) -> Remotion <Img> + SVG labels
+  runner_up: PyGMT grdcontour relief (nicer shading, slower)
+  why: 'one field, height above zero and depth below: isobaths join the family'
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: ETOPO 2022 (NOAA NCEI)''); the
+    relief colour bar beside the map in the text column (52-px ticks, unit above), never on the map, in every zoom state; ''Suruga Bay'' italic water label
+    on the map.'
+  related: []
+- id: s11_globe_everest
+  t: [549.85, 590.125]
+  sentence_times:
+  - [549.85, 554.925]
+  - [555.275, 558.35]
+  - [558.7, 567.85]
+  - [568.2, 576.225]
+  - [576.575, 584.25]
+  - [584.6, 589.325]
+  beat: 'intuition: shapes (globe zoom tour to Everest)'
+  visual: 'House globe. S1-S2: unzoomed, turning to South Asia. S2-S3: zoom-reveal to the Himalaya, labels ''Himalaya'' (letter-spaced, following the range),
+    ''India'', ''Nepal'', ''Tibet'' (area labels) within 1 s of their words. S4: on to Mount Everest, centred, ''Mount Everest'' label, ''8849 m'' in the
+    text column. S5: ''Lhotse'' label just south, ''8516 m''. S6 on AT(6,''zoom back out''): back to the unzoomed start view.'
+  voiceover: Contour maps also show the shapes of mountains, not just their steepness. Let's fly to the highest mountains on Earth. This is the Himalaya,
+    the great mountain wall between the plains of India and Nepal to the south, and the high plateau of Tibet to the north. Here, on the border between
+    Nepal and China, stands Mount Everest, at eight thousand eight hundred and forty nine metres. Its neighbour, Lhotse, is the fourth highest mountain
+    in the world, at eight thousand five hundred and sixteen metres. Let's zoom back out, and then look at the shapes of the ground round them.
+  on_screen_eq: null
+  physics_source:
+    fn: none (positions from Natural Earth; heights cited)
+    params:
+      everest: [27.9881, 86.925]
+      lhotse: [27.9617, 86.9333]
+    test: CHECK DM11
+  exaggeration: [globe zoom and flight time-compressed]
+  kind: 3-D globe zoom tour
+  data: A3 BMNG, NE 10 m admin/places; D2 for the close view
+  tool: '@remotion/three house globe'
+  runner_up: '-'
+  why: a real place with every terrain shape
+  layout_5b: 'GlobeFrame (K1) zoom-reveal with the cross-product v5 s33 numbers: unzoomed, the whole globe on the left (>= 760 px), separate from the text;
+    zoomed, full-bleed, camera dist 4.3 -> 2.4 over ~1.5 s centred near x 600, y 470; right side darkened 0 -> 82 % over x 980-1160 then flat 82 % (not
+    blurred, fades in over 1 s); 60-px fades top/left/right; bottom fade y 760-830; source line ''Image: NASA Blue Marble NG · places: Natural Earth'' at
+    y 852 on solid background below the globe in both states; text only on the darkened part; every named place centred and labelled within 1 s of its words;
+    the zoom ends with a zoom back out to the starting view before the scene ends'
+  related: []
+- id: s12_shapes
+  t: [590.125, 641.6]
+  sentence_times:
+  - [590.125, 596.25]
+  - [596.6, 603.675]
+  - [604.025, 607.35]
+  - [607.7, 610.975]
+  - [611.325, 618.525]
+  - [618.875, 625.625]
+  - [625.975, 633.825]
+  - [634.175, 640.8]
+  beat: 'intuition: peaks, ridges, valleys and basins read from contours'
+  visual: 'Picture zone: Copernicus DEM of the Everest-Lhotse-Khumbu area (27.80-28.10 N, 86.70-87.05 E) as a contour map every 200 m (index lines every
+    1000 m thicker), hypsometric tint; a small 3-D inset (three.js, x1.5) beside it rotates slowly with the same lines draped. S2: Everest''s loops glow,
+    the innermost labelled ''summit''. S3-S4: a ridge (the south-east ridge) highlighted: its U/V bends with gold chevrons pointing downhill, keyword ''ridge''.
+    S5-S7: three river valleys below the glaciers: their Vs with chevrons pointing up-valley, keyword ''valley''. S8: a small idealised basin glyph beside
+    the map (closed loops falling inward, hachure ticks) with keyword ''basin''.'
+  voiceover: 'Let''s read the shapes of the ground round Everest from its contours, every two hundred metres. A peak shows up as a set of closed loops,
+    one inside another, with the values rising towards the middle. Everest''s summit is the smallest loop of all. A ridge is a long, raised spine of ground.
+    Where the lines cross a ridge, they bend into a U or a V that points downhill, towards the lower values. A valley is the opposite: the lines bend into
+    a V that points uphill, towards the higher values. South of Everest, below the glaciers, the river valleys of the Khumbu region make rows of Vs pointing
+    up each valley. The opposite of a peak is a basin, a hollow with closed loops whose values fall towards the middle.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on the DEM; builder curvature test for the V directions
+    params: {interval_m: 200}
+    test: CHECK DM12
+  exaggeration: [3-D inset vertical x1.5, the basin glyph is idealised (no real basin in the frame)]
+  kind: terrain contour map + 3-D inset
+  data: D2 Copernicus DEM GLO-30 (N27 E086 + N28 E086)
+  tool: cartopy/cartostyle contours -> Remotion; three.js inset
+  runner_up: PyGMT
+  why: the four shapes, each named on a real feature
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: Copernicus DEM GLO-30''). The
+    3-D inset sits beside the map, never on it, with soft edges. Place labels only for spoken names.'
+  related: []
+- id: s13_col
+  t: [641.6, 689.9]
+  sentence_times:
+  - [641.6, 643.475]
+  - [643.825, 652.275]
+  - [653.775, 656.55]
+  - [656.9, 660.3]
+  - [660.65, 671.175]
+  - [671.525, 681.6]
+  - [681.95, 689.1]
+  beat: 'intuition: the col (saddle) — South Col'
+  visual: 'Picture zone: same map zoomed between Everest and Lhotse (soft frame edges), the saddle point marked with a gold ''X'' and ''South Col'' label
+    on AT(1,''South Col''); ''≈ 7900 m'' in the text column. S3: keyword ''col = pass'' and ''French: neck''. S4: four sector arrows from the col: two up
+    (towards the peaks, warm), two down (into the valleys, cool). S5: the hourglass of contours highlighted (gold). S6: a small saddle glyph beside the
+    map (code-drawn horse saddle) with keyword ''saddle''. Back out to the s12 view at scene end.'
+  voiceover: 'There''s one more shape. Between Everest and Lhotse, the ridge dips to a low point, about seven thousand nine hundred metres high, called
+    the South Col. [beat] A col is a pass between two peaks. The word comes from French, where it means a neck. Stand at the col, and the ground rises in
+    two directions, towards the two peaks, but falls in the other two directions, down into the valleys on either side. On the map, the contours make an
+    hourglass: two sets of loops round the peaks, and two sets of lines bending in from the valleys, almost touching at the col. That''s why a col is also
+    called a saddle, like a horse''s saddle: up at the front and back, down at the sides.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.axes.saddle_points on the DEM
+    params: {box: Everest-Lhotse}
+    test: ../Fluid Dynamics/tests/diag/test_axes.py; CHECK DM13
+  exaggeration: []
+  kind: terrain contour map (zoom)
+  data: D2 Copernicus DEM
+  tool: Remotion SVG
+  runner_up: 3-D close-up (harder to see the hourglass)
+  why: the last shape, named on the most famous col in the world
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. readouts and calculations beside the
+    picture with gold CurvedLinks; only short labels at a spot (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related: []
+- id: s14_why_reasons
+  t: [689.9, 731.725]
+  sentence_times:
+  - [689.9, 693.4]
+  - [693.75, 695.925]
+  - [696.275, 707.575]
+  - [707.925, 712.075]
+  - [712.425, 719.575]
+  - [719.925, 724.075]
+  - [724.425, 730.925]
+  beat: 'why: three good reasons for contour maps'
+  visual: 'Three beats, one per reason, mini pictures reused: (1) the Everest map with peak, ridge, valley and col glyphs lighting in turn, keyword ''whole
+    shape at a glance''; (2) the Fuji map with crowded lines glowing and an orange grad arrow across them, keyword ''gradient for free''; (3) the msl map:
+    isobar lines over a 2-m temperature colour field (A1 t2m, cmocean ''thermal''), keyword ''room for more''.'
+  voiceover: 'Why do scientists draw so many maps this way? There are three good reasons. The first is that a contour map shows the whole shape of a field
+    at a glance: the peaks, the hollows, the ridges, the valleys and the passes, without reading a single number. The second reason is that the gradient
+    is drawn for free. Wherever the lines crowd together, the field changes fast, and it changes fastest straight across the lines. The third reason is
+    that lines leave room for other things. On one map we can draw pressure as lines over temperature as colours, and read both at once.'
+  on_screen_eq: null
+  physics_source:
+    fn: re-uses F2 outputs; A1 t2m for the overlay
+    params: {}
+    test: CHECK DM24
+  exaggeration: []
+  kind: recap-style mini pictures
+  data: D2; A1 ERA5 msl + t2m
+  tool: Remotion SVG
+  runner_up: '-'
+  why: the 'why it is built this way' beat of the house arc
+  layout_5b: Each mini picture with a short source line under it; the temperature overlay's colour bar beside it; keywords below the pictures.
+  related: []
+- id: s15_globe_chart
+  t: [731.725, 760.975]
+  sentence_times:
+  - [731.725, 735.4]
+  - [735.75, 749.4]
+  - [749.75, 760.175]
+  beat: 'application: back to the weather map (map zoom-out to North America and the western Atlantic)'
+  visual: 'The s02 map zooms OUT (MapCamera) from the western Atlantic to the whole frame 12-68 N, 130-20 W (Lambert conformal, standard parallels at 21
+    and 59 N), msl as a quiet colour field; area labels ''North America'' and ''Atlantic Ocean'' (italic) on their words. S3: a small slate barometer icon
+    and the weather-basics thumbnail beside the map; keyword ''sea-level pressure''.'
+  voiceover: 'Now let''s look at how weather maps use the same idea. Let''s go back to our map of sea-level pressure, and zoom out to see the whole of North
+    America and the western Atlantic Ocean, at the same moment, noon universal time on the second of November, twenty twenty-three. In the weather basics
+    movie, we met sea-level pressure: the pressure of the air, adjusted to what it would be at sea level, so that places at different heights can be compared.'
+  on_screen_eq: null
+  physics_source:
+    fn: builder MapCamera; A1 msl
+    params: {time: 2023-11-02T12}
+    test: CHECK DM15
+  exaggeration: []
+  kind: data map
+  data: A1 ERA5 msl
+  tool: cartopy/cartostyle base -> Remotion with SVG isolines
+  runner_up: '-'
+  why: orient the viewer before the isobars
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: ERA5 (Copernicus C3S) · 2 Nov
+    2023, 12 UTC''); the msl colour bar beside the map in the text column (52-px ticks, unit above), never on the map, in every zoom state.'
+  related:
+  - *id002
+- id: s16_isobars
+  t: [760.975, 801.65]
+  sentence_times:
+  - [760.975, 765.2]
+  - [765.55, 773.725]
+  - [774.075, 776.8]
+  - [777.15, 785.45]
+  - [785.8, 791.95]
+  - [793.45, 800.85]
+  beat: 'application: isobars'
+  visual: 'Same map: isobars every 4 hPa draw (warm white 2.6 px, 1000 hPa heavier), in-line full-value labels (44 px, cartostyle isobar_labels). S2: keyword
+    ''isobar'' and ''baros = weight''. S3-S4: the rule keywords from s04 flash beside the map one by one. S5: labels ''1020'' and ''1024'' pulse; CalcStack
+    ''1024 − 1020 = 4 hPa''. S6: split-second cross-fade echo of the Fuji map (''height'' vs ''pressure'' keywords).'
+  voiceover: 'Let''s draw its contour lines every four hectopascals. Lines of equal pressure are called isobars, from the Greek word for weight, because
+    air pressure is the weight of the air above us. Every rule we''ve learned still holds. The isobars never cross, they close into loops or run off the
+    map, and the interval between them is four hectopascals. Reading two labels, a thousand and twenty and a thousand and twenty four, confirms it. [beat]
+    The only difference from the mountain is what the lines measure: not the height of the ground, but the pressure of the air.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on ERA5 msl
+    params: {time: 2023-11-02T12, box: '12-68 N, 130-20 W', interval_hPa: 4}
+    test: ../Fluid Dynamics/tests/diag/test_contours.py (F2 V1 plane/cone, no-crossing, V3); CHECK DM04, DM16
+  exaggeration: []
+  kind: data map
+  data: A1 ERA5 msl 0.25 deg
+  tool: cartopy + cartostyle (isobar_labels) -> Remotion
+  runner_up: PyGMT grdcontour (labels look good, slower)
+  why: the same idea on the weather map
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. readouts and calculations beside the
+    picture with gold CurvedLinks; only short labels at a spot (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related: []
+- id: s17_highs_lows
+  t: [801.65, 854.075]
+  sentence_times:
+  - [801.65, 806.25]
+  - [806.6, 817.35]
+  - [818.85, 821.55]
+  - [821.9, 829.175]
+  - [829.525, 833.575]
+  - [833.925, 841.3]
+  - [842.8, 848.0]
+  - [848.35, 853.275]
+  beat: 'application: highs and lows'
+  visual: 'Same map. S2: the closed isobars round the eastern-US high glow; ''H'' (blue #7fb2ff, 120 px) with ''1034'' under it (54 px) on AT(3,''big H'');
+    ''Virginia'' label (state outline faint) on its word. S4: ''H 1030'' near the Azores (''Azores'' label at the islands). S5-S6: ''L 985'' over Hudson
+    Bay (red #ff7a8a), ''Hudson Bay'' italic label. S7: ''L 991'' east of Newfoundland (''Newfoundland'' label). S8: keywords ''high = peak'', ''low = hollow''
+    beside the map with mini Fuji / basin glyphs.'
+  voiceover: 'Just like peaks and basins, the pressure map has highs and lows. Over the eastern United States, near Virginia, closed isobars circle a centre
+    of high pressure: about a thousand and thirty four hectopascals in the middle. [beat] Weather maps mark it with a big H. Far out over the Atlantic,
+    near the Azores islands, there''s a second high, of about a thousand and thirty. Lows are the basins of the pressure map, marked with an L. One sits
+    over Hudson Bay, in northern Canada, at about nine hundred and eighty five hectopascals. [beat] Another sits east of Newfoundland, at about nine hundred
+    and ninety one. On a pressure map, a high is a peak of pressure, and a low is a hollow.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.axes.local_extrema (F5) on ERA5 msl
+    params: {smooth_km: 300}
+    test: tests/diag/test_axes.py (F5); CHECK DM17
+  exaggeration: []
+  kind: data map
+  data: A1 ERA5 msl
+  tool: cartostyle mark_extrema -> Remotion
+  runner_up: '-'
+  why: highs and lows as the peaks and basins of pressure
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. H/L letters and values sit on their
+    centres (data-fixed symbols); place labels only for spoken places, within 1 s.'
+  related: []
+- id: s18_ridge_trough
+  t: [854.075, 894.4]
+  sentence_times:
+  - [854.075, 856.4]
+  - [856.75, 863.875]
+  - [864.225, 870.675]
+  - [871.025, 878.175]
+  - [878.525, 884.4]
+  - [884.75, 893.6]
+  beat: 'application: ridges and troughs of pressure'
+  visual: 'Same map. S1-S3: the ridge axis from the eastern-US high (fluidpy.diag.axes.trough_ridge_axes) draws as a slate dash-dot line, the isobars''
+    U-bends along it highlighted with gold chevrons pointing to lower pressure; keyword ''ridge''. S4-S5: the trough axis south from the Hudson Bay low
+    draws as an orange dashed line, bends with chevrons pointing to higher pressure; keyword ''trough''. S6: mini mountain-ridge and valley glyphs from
+    s12 beside the keywords.'
+  voiceover: The other shapes come back too. A long tongue of high pressure, stretching out from a high, is called a ridge, just like a ridge on a mountain.
+    The isobars bulge outwards from the high, bending into U shapes that point towards lower pressure. A long tongue of low pressure, stretching out from
+    a low, is called a trough, like a valley in the pressure map. There, the isobars bend into U or V shapes that point towards higher pressure. On this
+    map, a trough reaches south from the low over Hudson Bay, and a ridge reaches out from the high over the eastern United States.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.axes.trough_ridge_axes on ERA5 msl
+    params: {smooth_km: 300}
+    test: ../Fluid Dynamics/tests/diag/test_axes.py; CHECK DM18
+  exaggeration: []
+  kind: data map
+  data: A1 ERA5 msl
+  tool: Remotion SVG over the cartopy base
+  runner_up: '-'
+  why: the shapes carry over from terrain
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it.'
+  related: []
+- id: s19_col_pressure
+  t: [894.4, 934.35]
+  sentence_times:
+  - [894.4, 896.35]
+  - [896.7, 906.25]
+  - [907.75, 916.525]
+  - [916.875, 920.8]
+  - [921.15, 926.7]
+  - [927.05, 933.55]
+  beat: 'application: a col in the pressure field'
+  visual: 'Same map, MapCamera eases to the subtropical Atlantic (soft frame edges): ''Bermuda'' dot + label on AT(1,''Bermuda''), the col marked with a
+    gold ''X''; ''≈ 1018'' in the text column on S1. S2: two cool arrows from the col north (towards ''L 991'') and south (towards the Caribbean, ''Caribbean
+    Sea'' italic label); S3: two warm arrows east and west towards the two H. S4: the hourglass of the 1016 and 1020 isobars glows gold; a mini South Col
+    thumbnail beside. S5-S6: animated 10-m wind streaks at the col (short, slow) with ''≈ 3 m/s'' in the column. Back out to the full chart at scene end.'
+  voiceover: 'And there''s a col too. South-east of Bermuda, between the high over the United States and the Azores High, the pressure dips to about a thousand
+    and eighteen hectopascals. [beat] Going north or south from there, the pressure falls, towards the low near Newfoundland, and towards lower pressure
+    over the Caribbean Sea. Going west or east, it rises, towards the two highs. That''s the same hourglass we saw at the South Col: a saddle in the pressure
+    field. The isobars there are far apart, and the wind was light, only about three metres per second.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.axes.saddle_points on ERA5 msl; ERA5 u10, v10
+    params: {box: '20-40 N, 75-45 W'}
+    test: CHECK DM19
+  exaggeration: [wind streaks time-compressed]
+  kind: data map (zoom)
+  data: A1 ERA5 msl, u10, v10
+  tool: Remotion SVG
+  runner_up: '-'
+  why: the col on a real pressure map
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. Wind streaks animated (moving particles
+    at a speed scaled to the wind; scale in the manifest). readouts and calculations beside the picture with gold CurvedLinks; only short labels at a spot
+    (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related: []
+- id: s20_crowded_isobars
+  t: [934.35, 980.1]
+  sentence_times:
+  - [934.35, 937.675]
+  - [938.025, 942.45]
+  - [942.8, 950.05]
+  - [951.55, 958.525]
+  - [958.875, 960.825]
+  - [961.175, 970.225]
+  - [971.725, 979.3]
+  beat: 'application: crowded isobars and strong winds (link to #6)'
+  visual: 'Full chart. S2-S3: a gold bracket across the crowded isobars by Hudson Bay with ''≈ 6 hPa per 100 km'' in the text column; S4: a bracket over
+    the open ocean ''≈ 1 hPa per 100 km''. S5-S6: 10-m wind speed fades in under the isobars (cmocean ''speed'', colour bar beside, m/s) with animated streaks
+    everywhere (speed-scaled); ''≈ 18 m/s'' and ''≈ 7 m/s'' in the column with links. S7: gradient-movie thumbnail with the pressure-gradient force arrow.'
+  voiceover: Spacing means the same thing as on the mountain. Where isobars crowd together, the pressure gradient is large. Near the low over Hudson Bay,
+    the pressure changes by about six hectopascals in a hundred kilometres. [beat] Over most of the ocean on this map, it changes by only about one hectopascal
+    per hundred kilometres. And the wind follows. Ten metres above the ground, the wind near Hudson Bay was about eighteen metres per second, while over
+    most of the ocean it was about seven. [beat] As the gradient movie showed, the pressure gradient pushes the air, so crowded isobars go with strong winds.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.gradient on ERA5 msl (|grad p| over water, zs < 50 m); ERA5 u10, v10
+    params: {box: '20-72 N, 150-40 W'}
+    test: CHECK DM20
+  exaggeration: [wind streaks time-compressed]
+  kind: data map
+  data: A1 ERA5 msl, u10, v10, zs
+  tool: Remotion SVG over the cartopy base
+  runner_up: '-'
+  why: spacing means strength on the weather map too
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it; the wind-speed colour bar beside the
+    map in the text column (52-px ticks, unit above), never on the map, in every zoom state. Streaks animated throughout.'
+  related:
+  - *id001
+- id: s20b_practice
+  t: [980.1, 1026.5]
+  sentence_times:
+  - [980.1, 982.475]
+  - [982.825, 992.525]
+  - [992.875, 994.65]
+  - [995.0, 1004.175]
+  - [1005.675, 1012.35]
+  - [1012.7, 1018.375]
+  - [1018.725, 1025.7]
+  beat: 'application: practise reading the chart (prediction pause)'
+  visual: 'Full chart, quiet. S1-S2: three keyword prompts appear in the column one by one, ''interval?'', ''strongest high?'', ''fastest change?'', with
+    a 2-s thinking pause (a small clock glyph fills) after S2. S3-S4: the 1020 and 1024 labels pulse, CalcStack ''1024 − 1020 = 4 hPa''. S5: the eastern-US
+    high''s loops glow, ''H 1034''. S6: the crowded Hudson Bay isobars glow. S7: the three prompts turn into the reading order ''interval → closed loops
+    → spacing''.'
+  voiceover: 'Let''s practise on the whole map. Before we point anything out, try to find three things yourself: the contour interval, the strongest high,
+    and the place where the pressure changes fastest. Here''s the first. Two neighbouring labels, a thousand and twenty and a thousand and twenty four,
+    differ by four, so the interval is four hectopascals. [beat] The strongest high is the set of closed loops near Virginia, at about a thousand and thirty
+    four. The fastest change is near Hudson Bay, where the isobars crowd closest together. That''s a good order for reading any contour map: first the interval,
+    then the closed loops, then the spacing.'
+  on_screen_eq: null
+  physics_source:
+    fn: re-uses DM05/DM17/DM20 outputs
+    params: {}
+    test: CHECK DM24
+  exaggeration: []
+  kind: data map
+  data: A1 ERA5 msl
+  tool: Remotion SVG
+  runner_up: '-'
+  why: ask for a prediction before revealing (teaching-style §1d)
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. readouts and calculations beside the
+    picture with gold CurvedLinks; only short labels at a spot (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related: []
+- id: s21_isotherms
+  t: [1026.5, 1090.975]
+  sentence_times:
+  - [1026.5, 1030.05]
+  - [1030.4, 1043.525]
+  - [1043.875, 1049.925]
+  - [1050.275, 1055.125]
+  - [1055.475, 1063.225]
+  - [1064.725, 1068.75]
+  - [1069.1, 1073.45]
+  - [1073.8, 1081.1]
+  - [1081.45, 1090.175]
+  beat: 'application: isotherms (January climate)'
+  visual: 'Map: ERA5 January 1991-2020 mean 2-m temperature over 20-85 N, 170 W-60 E (polar stereographic, true at 60 N; the frame shows North America,
+    the North Atlantic and Europe), cmocean ''thermal'' shading with isotherms every 5 °C (labels 44 px), the 0 °C isotherm gold and thicker. S2: keyword
+    ''isotherm'', ''thermos = heat''. S3: the 0 °C line traced from west to east. S4: a gold tick at ''≈ 40° N'' over the US Midwest; S5: the line climbs
+    past Norway to ''≈ 70° N'' (''Norway'' label). S6: a gold meridian bracket ''≈ 3300 km'' with CalcStack ''30° × 111 km ≈ 3300 km''. S8: the crowded
+    isotherms along the North American east coast glow.'
+  voiceover: Lines of equal temperature are called isotherms. Here is the average temperature two metres above the ground in January, over the thirty years
+    from nineteen ninety one to twenty twenty, from ERA5, with isotherms every five degrees Celsius. Let's follow the zero-degree isotherm, the line where
+    the average is exactly freezing. Over the middle of North America, it runs at about forty degrees north. But over the north-east Atlantic, off the coast
+    of Norway, it bends far to the north, to about seventy degrees north. [beat] That's about three thousand three hundred kilometres further north. So
+    isotherms don't simply follow the lines of latitude. Over the warm North Atlantic, January is much milder than over the middle of a continent at the
+    same latitude. And where the isotherms crowd together, like along the east coast of North America, the temperature changes fast across a short distance.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on the ERA5 Jan 1991-2020 mean; fluidpy.geo.sphere.gradient (where they crowd)
+    params: {months: January 1991-2020, interval_C: 5}
+    test: CHECK DM21
+  exaggeration: []
+  kind: climatology map
+  data: D1 ERA5 monthly t2m (runner-up A4 NCEP R1 LTM)
+  tool: 'cartopy + cartostyle (climatology rules: period in the source line) -> Remotion'
+  runner_up: Equal Earth (shapes skew at the frame's high latitudes)
+  why: isotherms are not lines of latitude; land and sea bend them
+  layout_5b: 'SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it (''Data: ERA5 (Copernicus C3S) · January
+    mean 1991-2020''); the temperature colour bar beside the map in the text column (52-px ticks, unit above), never on the map, in every zoom state. readouts
+    and calculations beside the picture with gold CurvedLinks; only short labels at a spot (place names, H/L, contour numbers, brackets) on it, with halos.'
+  related: []
+- id: s22_isohypses
+  t: [1090.975, 1157.325]
+  sentence_times:
+  - [1090.975, 1094.2]
+  - [1094.55, 1103.0]
+  - [1103.35, 1105.05]
+  - [1105.4, 1117.525]
+  - [1119.025, 1129.15]
+  - [1129.5, 1135.325]
+  - [1135.675, 1141.025]
+  - [1141.375, 1149.725]
+  - [1150.075, 1156.525]
+  beat: 'application: height on a contour map: the 500-hPa surface and its isohypses'
+  visual: 'S1-S3: three.js view of the 500-hPa surface over 12-68 N, 130-20 W on 2 Nov 2023 12 UTC (ERA5 z500), one sheet (not a stack), vertical x200,
+    tinted by height (cmocean ''deep''-like greys to warm), over a faint flat map of the continents; the camera hovers from the south-west at a side angle
+    (outside). Heights ''≈ 4900 m'' (Hudson Bay) and ''≈ 6000 m'' (subtropical Atlantic) in the text column with gold links. S4: level cuts every 60 m glow
+    on the sheet (as at Fuji), lift off and drop flat onto the map. S5-S6: keyword ''isohypse'', ''hypsos = height''; the camera tilts to look straight
+    down. S8: the trough over eastern North America (orange dashed axis) and the two ridges (slate dash-dot) from trough_ridge_axes. S9: keyword ''geopotential''
+    with a ''later movie'' thumbnail.'
+  voiceover: Contour maps can also show height in the air. Imagine the surface in the sky where the pressure is exactly five hundred hectopascals, about
+    half the pressure at sea level. It isn't flat. On our day, the second of November, twenty twenty-three, it lay about four thousand nine hundred metres
+    up over Hudson Bay, and almost six thousand metres up over the subtropical Atlantic. [beat] Let's draw that surface in three dimensions, stretched upwards
+    so we can see its shape, and slice it, just like Mount Fuji, every sixty metres in height. The lines we get are contours of height, called isohypses,
+    from the Greek word for height. On the map, they look just like a terrain map of a hilly surface high in the sky. A dip in the surface over eastern
+    North America is a trough, and the bulges over the west and over the Atlantic are ridges. This height of a pressure surface is so important that it
+    has its own movie later in the series.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.contours.isolines (F2) on ERA5 z500; fluidpy.diag.axes.trough_ridge_axes
+    params: {time: 2023-11-02T12, interval_m: 60}
+    test: CHECK DM22
+  exaggeration: ['vertical x200 on the 500-hPa sheet (said in S4: ''stretched upwards'')']
+  kind: 3-D sheet -> contour map
+  data: A2 ERA5 z500 2023-11-02T12 (0.5 deg)
+  tool: '@remotion/three displaced sheet + Remotion SVG'
+  runner_up: flat map only (loses the 'terrain in the sky' idea)
+  why: height on a contour map in the air, the bridge to the geopotential movie
+  layout_5b: '3-D sheet in a large frame with soft edges while the camera moves; the height colour bar beside the map in the text column (52-px ticks, unit
+    above), never on the map, in every zoom state; SourceBelow (K2): the source line sits fully below the picture (>= 16 px gap, y <= 860), never on it
+    (''Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 12 UTC · 500 hPa''). One surface, not a layer stack (no stack needed in this movie).'
+  related: []
+- id: s23_family
+  t: [1157.325, 1199.4]
+  sentence_times:
+  - [1157.325, 1167.425]
+  - [1167.775, 1170.45]
+  - [1170.8, 1173.825]
+  - [1174.175, 1179.675]
+  - [1180.025, 1181.85]
+  - [1182.2, 1185.925]
+  - [1186.275, 1189.15]
+  - [1189.5, 1194.325]
+  - [1194.675, 1198.6]
+  beat: 'recap of names: the isoline family'
+  visual: 'Full width, no boxes: seven rows appear one per word, each a code-drawn icon (barometer, thermometer, height ruler, sounding line under a boat,
+    rain drops, wind sock, two water parcels of different density) + the name (54 px, warm white) + the Greek root (44 px, muted): isobar · baros (weight),
+    isotherm · thermos (heat), isohypse · hypsos (height), isobath · bathos (depth), isohyet · hyetos (rain), isotach · tachos (speed), isopycnal · pyknos
+    (dense). The ''iso = equal'' keyword stays at the top-left of the content area.'
+  voiceover: 'So contour lines come in a whole family, and the names all follow the same pattern: iso, meaning equal, plus a Greek word for the thing being
+    measured. Isobars join equal pressure. Isotherms join equal temperature. Isohypses join equal height, and isobaths join equal depth under the sea. You''ll
+    meet a few more. Isohyets join places with equal rainfall. Isotachs join equal wind speed. And in the ocean, isopycnals join water of equal density.
+    Different words, but the same idea, and the same rules.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration: [icons are illustrative]
+  kind: keywords + icons
+  data: '-'
+  tool: Remotion SVG (house icons)
+  runner_up: '-'
+  why: names follow one pattern; the last three are named for later movies
+  layout_5b: 'No real-data picture: no source line; no text over the drawing or over other text (K6 overlap gate)'
+  related: []
+- id: s24_recap
+  t: [1199.4, 1249.425]
+  sentence_times:
+  - [1199.4, 1206.075]
+  - [1206.425, 1211.075]
+  - [1211.425, 1217.925]
+  - [1218.275, 1225.225]
+  - [1225.575, 1232.925]
+  - [1233.275, 1239.825]
+  - [1240.175, 1248.625]
+  beat: recap ('To sum up', one beat per sentence)
+  visual: 'One mini picture per sentence (no headings): (1) the s03 halfway tick and a line; (2) two lines with a rose ''×'' and a closed loop; (3) ''1020
+    − 1016 = 4''; (4) crowded Fuji lines with an orange grad arrow across them; (5) Everest glyphs: loops, bent Vs, hourglass; (6) the chart with H, L,
+    ridge, trough, col; (7) the four icons isobar, isotherm, isohypse, isobath. Each number spoken is on screen at its words.'
+  voiceover: To sum up, an isoline, or contour line, joins places where a field has the same value. Lines never cross, and they close into loops or run
+    off the map. The contour interval is the step between neighbouring lines, found by subtracting two labels. Crowded lines mean a large gradient, and
+    the gradient points straight across them, towards higher values. Closed loops mark peaks and hollows, bent lines mark ridges and valleys, and an hourglass
+    marks a col. On weather maps, the same shapes become highs, lows, ridges, troughs and cols of pressure. Isobars, isotherms, isohypses and isobaths are
+    all the same idea, applied to pressure, temperature, height and depth.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration: [recap thumbnails (illustrative re-use)]
+  kind: recap
+  data: re-used scene frames
+  tool: Remotion SVG
+  runner_up: '-'
+  why: '''To sum up'', one idea per sentence'
+  layout_5b: A small source line under any real-data mini picture; keywords only; no headings.
+  related: []
+- id: s25_end
+  t: [1249.425, 1274.775]
+  sentence_times:
+  - [1249.425, 1255.3]
+  - [1255.65, 1266.7]
+  - [1267.05, 1274.475]
+  beat: series end card (weather/climate ending, HOUSE_STYLE §3)
+  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (Fuji contours, the South Col hourglass, the isobar chart with H and L, the
+    500-hPa isohypses); keyword lines ''a series of tutorials'' (68 px), ''meteorology · atmospheric science · climate'' (54 px) and ''the ideas, and the
+    maths behind them'' (54 px, gold); a notebook icon ''contour maps notebook''; stacked notebook icons ''notebooks for the other concepts''. Then a 2.5-s
+    silent hold while the music fades.'
+  voiceover: This video is one of a series of related tutorials, so watch out for the others. They're made to help students of meteorology, atmospheric
+    science and climate science, and anyone else who wants to learn not just these ideas, but the maths behind them too. The notebook for contour maps,
+    and the notebooks for the other concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration: [decorative end card (illustrative)]
+  kind: end card
+  data: '-'
+  tool: house EndCard
+  runner_up: '-'
+  why: series ending word for word
+  layout_5b: End card. No source line.
+  related:
+  - *id003
+  - *id001
+  - *id002
+  - {movie: M02 (v3), slug: planned (how weather maps are made), covers: 'stations to grid, contouring'}
+  - {movie: M08 (v3), slug: planned (geopotential), covers: 'height of a pressure surface, isohypses'}

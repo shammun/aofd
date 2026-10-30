@@ -100,3 +100,9 @@ titles only. `related:` per scene in the storyboard.
 4. Music: add the new style `compass-orbit` (spec in the storyboard) to `tools/sound/styles.py`; runner-up `ice-polar`.
 5. s14 outflow sign: D2 (ERA5 pressure levels for Ian, ~0.4 GB network for one hour × 3 variables, ~2 MB product) or keep the
    sentence generic with illustrative arrows. Recommendation: fetch D2 (the sign is then from data).
+
+## v2 (2026-10-30): HOUSE_STYLE §5b amendment
+- Every scene has a `layout_5b` field (it overrides the v1 `visual` where they differ): GlobeFrame and the v5 zoom-reveal numbers on every globe zoom, source lines below pictures, colour bars beside maps, readouts off images, animated winds, column edges to the top, no extra titles.
+- s11 (zoom tour round the eye: surroundings + zoom back out) and s24 (zoom-reveal at Brest: surroundings + zoom back out) gained two sentences each.
+- **New s14b_ian_stack**: Ian's ERA5 radial wind on 5 layers (975, 850, 500, 200, 125 hPa; inflow low, quiet middle, outflow aloft), hover from outside, one short close look, colour bar beside (data committed; numbers in data_needs.md §G).
+- Measured: 48:41.8 (was 46:51.3), 49 scenes, 6910 words, 142.0 words per minute.

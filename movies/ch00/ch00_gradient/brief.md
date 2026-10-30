@@ -123,3 +123,9 @@ per scene in the storyboard.
    latitude φ (from #5). On screen the scalar is **F**: ∇F = i (1/(a cos φ)) ∂F/∂λ + j (1/a) ∂F/∂φ + k ∂F/∂r
    (`on_screen_eq.latex` of s22). The narration says "partial by partial lambda" without naming the field, so no
    re-wording is needed. Flagged for the reviewer, not for the user.
+
+## v2 (2026-10-30): HOUSE_STYLE §5b amendment
+- Every scene has a `layout_5b` field (overrides the v1 `visual` where they differ): GlobeFrame/zoom-reveal on s22, s36, s37; source lines below pictures; colour bars beside maps; readouts off images; animated winds; column edges to the top (s07, s17, s25, s32).
+- **s17, s18, s32 moved to the registered Singapore sounding** (00 UTC 1 Nov 2023; tropopause 16.2 km, -6.8 °C/km; decided), so #6 no longer repeats #4's Trappes sounding.
+- **Front stack not added**: no non-Ciarán frontal data exists; data need D8 (Winter Storm Elliott Arctic front, 22 Dec 2022, 5 levels) and a measured draft scene s33b are in data_needs.md §G.
+- Measured: 31:41.2 (was 31:21.2), 40 scenes, 4487 words, 141.8 words per minute.
