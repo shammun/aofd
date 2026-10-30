@@ -1253,7 +1253,7 @@ def main() -> int:
     uf1_block(row, rng, truth, call, files, bins, a1, f8, narration_changes)
 
     # ================================================================ UF2 (user feedback round 2): W78-W93, stacks, Sentinel-2
-    uf2_block(row, rng, truth, call, files, bins, narration_changes)
+    uf2_block(row, rng, truth, call, files, bins, narration_changes, heavy)
 
     # ---------------------------------------------------------------------------------------------- report and write
     for r in rows:
@@ -1277,7 +1277,8 @@ def main() -> int:
         DER / "ciaran_coast_10m.geojson", DER / "ciaran_modis_aqua_truecolour_2023-11-02.jpg",
         CP_REAL / "wind_climatology.json", CP_REAL / "wind_climatology.bin", A1,
         DER / "era5_wb_stack_q10_2023-11-02T12.nc", DER / "era5_wb_stack_t16_2023-11-02T12_0p5.nc", DER / "era5_wb_front_11lev_2023-11-01T18.nc",
-        DER / "s2_beauce_2024-08-22.jpg", DER / "s2_beauce_2024-08-22.json", DER / "era5_ciaran_2023_section_48p5N_18UTC.nc"]}
+        DER / "s2_beauce_2024-08-22.jpg", DER / "s2_beauce_2024-08-22.json", DER / "era5_ciaran_2023_section_48p5N_18UTC.nc",
+        Path("G:/Geophysical Fluid Dynamics/aofd-data/raw/ERA5-CDS-monthly-pl/era5_monthly_t-z_37lev_2023-11_1deg.nc")]}
     assets = {str(p.relative_to(ROOT)).replace("\\", "/"): sha_file(p) for p in [
         DER / "gibs_truecolour_global_2023-11-02_0p05.jpg", DER / "ciaran_truecolour_2023-11-01_aqua_terra.jpg",
         DER / "ciaran_modis_aqua_truecolour_2023-11-02.jpg", DER / "cumulus_france_2024-06-24_modis_aqua_250m.jpg",
@@ -1304,11 +1305,12 @@ def main() -> int:
                        "time_compression": {"s00": "15 h of storm motion in about 5 s", "s44": "1.5 h of streaklines in about 3 s",
                                             "s53": "2 days of mean-wind streaklines", "s55": "24 h of isobars in about 20 s",
                                             "s03_molecules": "illustrative molecule motion inside the parcel box"},
-                       "uf2_library": {"fluidpy.diag.sounding.column_integral": "W85 (tests by the verifier, pending at build time)",
-                                       "fluidpy.diag.fronts.front_by_level": "W86 max_step_km=80, kind='cold', locate='centre' (tests pending at build time)"},
+                       "uf2_library": {"fluidpy.diag.sounding.column_integral": "W85: tests/diag/test_column_integral.py (fluidpy working tree) pass at UF2 fix 1 (52 passed with test_front_by_level.py, 2026-10-30); not yet committed in fluidpy",
+                                       "fluidpy.geo.atmos.lapse_rate_tropopause (grid)": "W94 s25 surface: every Nov-2023 monthly-mean column, 10S-80N x 30W-120E, 1 deg",
+                                       "fluidpy.diag.fronts.front_by_level": "W86 max_step_km=80, kind='cold', locate='centre'; tests/diag/test_front_by_level.py pass in the working tree (D3 fix in progress, uncommitted): s48b products frozen at UF2 b1"},
                        "exaggerations": ["atmosphere shell drawn 50x thicker (s02 on, said)", "front side views 80x taller (s47-s48, said in s48)",
                                          "troposphere 50x in the s25 inset", "model grid drawn every 2° (s38)",
-                                         "UF2: humidity stack heights x150 (s27c), temperature shells x50 (s38b, = s02), front stack x80 (s48b, = slices), s02 true-thickness hair-line 2-px minimum, s31 heights x20 (= s26)"]},
+                                         "UF2: humidity stack heights x150 (s27c), temperature shells x50 (s38b, = s02), front stack x80 (s48b, = slices), s02 true-thickness hair-line 2-px minimum, s31 heights x20 (= s26)", "UF2 fix 1: s25 tropopause-height surface x330 over a flat 150°-wide map plate (s25, said as a picture, not to scale); s03 parcel box drawn 2x (16 km x 16 km x 3.2 km, illustrative)"]},
         "credits": [
             "Contains modified Copernicus Climate Change Service information 2026 (ERA5: global hour, columns, 850 hPa, Brest series, Ciarán hourly).",
             "Durre, I., et al.: Integrated Global Radiosonde Archive (IGRA) v2, NOAA NCEI (Trappes, Singapore, 2023 station list).",
@@ -1797,7 +1799,15 @@ def cf_slice_block(row, rng, truth, call, files, bins, a1, U, narration_changes,
     bins["slice_cf.bin"] = sb
 
 
-def uf2_block(row, rng, truth, call, files, bins, narration_changes) -> None:
+def _fronts_committed() -> bool:
+    """True when ../Fluid Dynamics/fluidpy/diag/fronts.py is committed (no working-tree change) and holds front_by_level."""
+    import subprocess
+    r = subprocess.run(["git", "-C", str(FLUID), "status", "--porcelain", "--", "fluidpy/diag/fronts.py"], capture_output=True, text=True)
+    head = subprocess.run(["git", "-C", str(FLUID), "show", "HEAD:fluidpy/diag/fronts.py"], capture_output=True, text=True).stdout
+    return r.returncode == 0 and not r.stdout.strip() and "def front_by_level" in head
+
+
+def uf2_block(row, rng, truth, call, files, bins, narration_changes, heavy=None) -> None:
     """UF2 (user feedback round 2, uf2_plan.md §7): CHECK rows W78-W93 and the products of the new / changed scenes —
     uf2.json (s20e/s20f/s20g/s20b/s22/s36/s53 numbers, the s31 Sentinel-2 plate and thermal seeds), stack_q.bin (s27c),
     stack_t.bin (s38b), stack_front.bin (s48b) via movies/data/_stack.py, and the public images wb_s2_beauce.jpg /
@@ -1909,11 +1919,17 @@ def uf2_block(row, rng, truth, call, files, bins, narration_changes) -> None:
     lev_q = dq.level.values.astype(float)
     q = dq.q.values.astype(float) * 1000.0
     zq = dq.zg.values.astype(float)
-    hq, bq, rq = stack_product("stack_q", q, zq, lev_q, dq.lat.values, dq.lon.values, 0.0, 20.0, exaggeration=150, units="g/kg", lut="LUT_HALINE (s27 globe)")
-    zbq = np.asarray(hq["zbar_m"]) / 1000
+    # UF2 fix 1 (review M2, user U3-02): the stack shows FIVE layers (1000, 850, 700, 500, 300 hPa); every check and the
+    # half-column fraction below still use all ten fetched levels
+    sel5 = [list(lev_q).index(L) for L in (1000, 850, 700, 500, 300)]
+    hq, bq, rq = stack_product("stack_q", q[sel5], zq[sel5], lev_q[sel5], dq.lat.values, dq.lon.values, 0.0, 20.0, exaggeration=150, units="g/kg",
+                               lut="LUT_HALINE (s27 globe)")
+    zbq = np.asarray([area_mean(zq[k], dq.lat.values) for k in range(lev_q.size)]) / 1000
     qbar = [area_mean(q[k], dq.lat.values) for k in range(lev_q.size)]
     k700, k300, k850 = list(lev_q).index(700), list(lev_q).index(300), list(lev_q).index(850)
-    row("W85", "s27c 10 layers ('ten heights')", lev_q.size, 10, 0)
+    row("W85", "s27c fetch has 10 levels (checks and the half-column fraction use all of them)", lev_q.size, 10, 0)
+    row("W85", "s27c stack shows 5 layers ('five heights', U3-02): 1000, 850, 700, 500, 300 hPa", hq["levels_hPa"], [1000, 850, 700, 500, 300], 0)
+    rng("W85", "s27c layer labels z̄ = 0.1, 1.5, 3.2, 5.9, 9.7 km (rounded to 0.1 km)", np.asarray(hq["zbar_m"]) / 1000, [0.05, 1.45, 3.15, 5.85, 9.65], [0.15, 1.55, 3.25, 5.95, 9.75])
     rng("W85", "s27c max q at 1000 hPa 18-22 g/kg ('up to about twenty grams')", float(np.nanmax(q[0])), 18, 22)
     rng("W85", "s27c z̄(700) in 2.8-3.3 km ('three kilometres up')", zbq[k700], 2.8, 3.3)
     rng("W85", "s27c q̄(700) in 2-6 g/kg ('only a few grams')", qbar[k700], 2.0, 6.0)
@@ -1928,7 +1944,8 @@ def uf2_block(row, rng, truth, call, files, bins, narration_changes) -> None:
                   q=dq.q.values.astype(float), p=pa, p_top=85000.0, p_surface=sp_)
     frac = area_mean(np.asarray(cw_low), dq.lat.values) / area_mean(np.asarray(cw_all), dq.lat.values)
     rng("W85", "s27c vapour below 850 hPa (≈ 1.5 km) / whole column 0.40-0.60 ('about half'; orchestrator 0.46-0.50)", frac, 0.40, 0.60)
-    hq.update({"qbar": r6(qbar, 3), "frac_below_850": r6(frac, 3), "qmax_1000": r6(float(np.nanmax(q[0])), 2),
+    rng("W85", "s27c the fraction is just under a half, 0.43-0.48 ('almost half', review 1 M2: 0.450 is below the orchestrator's 0.46-0.50)", frac, 0.43, 0.48)
+    hq.update({"qbar": r6([qbar[k] for k in sel5], 3), "qbar_all10": r6(qbar, 3), "zbar_km_label": [round(v / 1000, 1) for v in hq["zbar_m"]], "frac_below_850": r6(frac, 3), "qmax_1000": r6(float(np.nanmax(q[0])), 2),
                "imax": [int(v) for v in np.unravel_index(int(np.nanargmax(q[0])), q[0].shape)]})
     files["stack_q.json"] = hq
     bins["stack_q.bin"] = bq
@@ -1983,39 +2000,75 @@ def uf2_block(row, rng, truth, call, files, bins, narration_changes) -> None:
     cf = files["fronts.json"]["cold_front"]
     # the front is traced on 1000-650 hPa only (orchestrator 2026-10-29: max_step 80 km traces 900-650 hPa; above 650 hPa the
     # nearest line jumps west by > 100 km per level, a different feature, so the stack is not extended to 1:95)
-    kf = lev_f >= 650.0
-    traced, gaps = call(FRN + "front_by_level", "s48b", "stack_front.bin", "the s49 850-hPa cold front traced level by level (Hewson TFP, locate='centre', ≤ 80 km per level)",
-                        heavy_call=True, T=Tf[kf], u=Uf[kf], v=Vf[kf], lat=fl, lon=fo, levels=lev_f[kf], seed_level=850.0, seed_line=(np.asarray(cf["lat"]), np.asarray(cf["lon"])),
-                        max_step_km=80.0, kind="cold", return_gaps=True, locate="centre")
-    levs = sorted(traced.keys(), reverse=True)
-    rng("W86", "s48b cold front traced on ≥ 5 levels (900-650 hPa with max_step 80 km; not extended further, orchestrator)", len([L for L in levs if L <= 900]), 5, 6)
-    LATC = 46.5
-    xs = {}
-    for L in levs:
-        c = call(FRN + "parallel_crossings", "s48b", "stack_front.bin", f"front longitude along 46.5N at {L:.0f} hPa", lat=np.asarray(traced[L].lat).tolist(),
-                 lon=np.asarray(traced[L].lon).tolist(), lat0=LATC)
-        c = np.asarray(c, float)
-        if c.size:
-            xs[L] = float(c[np.argmin(np.abs(c - (xs[levs[0]] if levs[0] in xs else c.mean())))])
-    zbf = {L: area_mean(Zf[list(lev_f).index(L)], fl) for L in lev_f}
-    kmdeg = EARTH_RADIUS / 1e3 * np.cos(LATC * DEG) * DEG
-    lv = [L for L in levs if L in xs and L <= 850]
-    zz_ = np.array([zbf[L] for L in lv]) / 1000
-    xx_ = np.array([xs[L] for L in lv]) * kmdeg
-    fit = np.polyfit(zz_, xx_, 1)
-    truth("W86", "s48b along 46.5N the front's longitude moves west with height (fit slope < 0)", fit[0] < 0, r6(fit, 2))
-    step = -fit[0] * (4.0 - 1.5)
-    rng("W86", "s48b step-back between 1.5 and 4 km from the fit: 70-140 km ('about a hundred kilometres', orchestrator 100 km / 1:44)", step, 70, 140)
-    rng("W86", "s48b implied slope 1:30-1:60 (W70 1:44-1:50)", -fit[0], 30, 60)
-    rng("W86", "s48b z̄(850) ≈ 1.5 km, z̄(500) 5.3-5.8 km ('about five and a half')", [zbf[850.0] / 1000, zbf[500.0] / 1000], [1.2, 5.3], [1.7, 5.8])
-    narration_changes.append(f"s48b S4: 'about a hundred and thirty kilometres' -> 'about a hundred kilometres' (front_by_level max_step 80 km, levels "
-                             f"{', '.join(str(int(L)) for L in lv)} hPa; fit 1:{-fit[0]:.0f} -> {step:.0f} km over 1.5-4 km)")
-    hf, bf, rf = stack_product("stack_front", anom, Zf, lev_f, fl, fo, -8.0, 8.0, exaggeration=80, units="K", lut="cmocean.balance (s47/s48 slices)")
-    hf["front"] = {str(int(L)): {"lat": r6(np.asarray(traced[L].lat)[::2], 3), "lon": r6(np.asarray(traced[L].lon)[::2], 3), "gap_km": r6(float(gaps.get(L, 0.0)), 1)}
-                   for L in levs}
-    hf["x46"] = {str(int(L)): r6(xs[L], 3) for L in lv}
-    hf["fit_km_per_km"] = r6(float(-fit[0]), 2)
-    hf["step_km"] = r6(float(step), 1)
+    # UF2 fix 1: fluidpy.diag.fronts defect D3 is being fixed by another agent. Until fronts.py is committed with the fix, the
+    # s48b products are FROZEN at the UF2 build-1 values (stack_front.json/.bin and the build-1 manifest entries), so a
+    # half-finished library edit can never change the movie; the W86 checks are re-evaluated on the frozen values.
+    if _fronts_committed():
+        kf = lev_f >= 650.0
+        traced, gaps = call(FRN + "front_by_level", "s48b", "stack_front.bin", "the s49 850-hPa cold front traced level by level (Hewson TFP, locate='centre', ≤ 80 km per level)",
+                            heavy_call=True, T=Tf[kf], u=Uf[kf], v=Vf[kf], lat=fl, lon=fo, levels=lev_f[kf], seed_level=850.0, seed_line=(np.asarray(cf["lat"]), np.asarray(cf["lon"])),
+                            max_step_km=80.0, kind="cold", return_gaps=True, locate="centre")
+        levs = sorted(traced.keys(), reverse=True)
+        rng("W86", "s48b cold front traced on ≥ 5 levels (900-650 hPa with max_step 80 km; not extended further, orchestrator)", len([L for L in levs if L <= 900]), 5, 6)
+        LATC = 46.5
+        xs = {}
+        for L in levs:
+            c = call(FRN + "parallel_crossings", "s48b", "stack_front.bin", f"front longitude along 46.5N at {L:.0f} hPa", lat=np.asarray(traced[L].lat).tolist(),
+                     lon=np.asarray(traced[L].lon).tolist(), lat0=LATC)
+            c = np.asarray(c, float)
+            if c.size:
+                xs[L] = float(c[np.argmin(np.abs(c - (xs[levs[0]] if levs[0] in xs else c.mean())))])
+        zbf = {L: area_mean(Zf[list(lev_f).index(L)], fl) for L in lev_f}
+        kmdeg = EARTH_RADIUS / 1e3 * np.cos(LATC * DEG) * DEG
+        lv = [L for L in levs if L in xs and L <= 850]
+        zz_ = np.array([zbf[L] for L in lv]) / 1000
+        xx_ = np.array([xs[L] for L in lv]) * kmdeg
+        fit = np.polyfit(zz_, xx_, 1)
+        truth("W86", "s48b along 46.5N the front's longitude moves west with height (fit slope < 0)", fit[0] < 0, r6(fit, 2))
+        step = -fit[0] * (4.0 - 1.5)
+        rng("W86", "s48b step-back between 1.5 and 4 km from the fit: 70-140 km ('about a hundred kilometres', orchestrator 100 km / 1:44)", step, 70, 140)
+        rng("W86", "s48b implied slope 1:30-1:60 (W70 1:44-1:50)", -fit[0], 30, 60)
+        rng("W86", "s48b z̄(850) ≈ 1.5 km, z̄(500) 5.3-5.8 km ('about five and a half')", [zbf[850.0] / 1000, zbf[500.0] / 1000], [1.2, 5.3], [1.7, 5.8])
+        narration_changes.append(f"s48b S4: 'about a hundred and thirty kilometres' -> 'about a hundred kilometres' (front_by_level max_step 80 km, levels "
+                                 f"{', '.join(str(int(L)) for L in lv)} hPa; fit 1:{-fit[0]:.0f} -> {step:.0f} km over 1.5-4 km)")
+        hf, bf, rf = stack_product("stack_front", anom, Zf, lev_f, fl, fo, -8.0, 8.0, exaggeration=80, units="K", lut="cmocean.balance (s47/s48 slices)")
+        hf["front"] = {str(int(L)): {"lat": r6(np.asarray(traced[L].lat)[::2], 3), "lon": r6(np.asarray(traced[L].lon)[::2], 3), "gap_km": r6(float(gaps.get(L, 0.0)), 1)}
+                       for L in levs}
+        hf["x46"] = {str(int(L)): r6(xs[L], 3) for L in lv}
+        hf["fit_km_per_km"] = r6(float(-fit[0]), 2)
+        hf["step_km"] = r6(float(step), 1)
+    else:
+        old_h = json.loads((DATA / "stack_front.json").read_text(encoding="utf-8"))
+        old_m = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
+        for e in old_m.get("physics_heavy", []):
+            if e["fn"].endswith("front_by_level") and heavy is not None:
+                heavy.append({**e, "frozen": "UF2 b1 product kept (fronts.py D3 fix not committed at UF2 fix-1 build time)"})
+        for e in old_m.get("physics", []):
+            if e["fn"].endswith("parallel_crossings") and e["scene"] == "s48b":
+                call(e["fn"], e["scene"], e["data"].replace("data/", ""), e["eq"], **e["params"])
+        levs = sorted((float(L) for L in old_h["front"]), reverse=True)
+        rng("W86", "s48b cold front traced on ≥ 5 levels (900-650 hPa; frozen UF2 b1 product)", len([L for L in levs if L <= 900]), 5, 6)
+        LATC = 46.5
+        zbf = {L: area_mean(Zf[list(lev_f).index(L)], fl) for L in lev_f}
+        kmdeg = EARTH_RADIUS / 1e3 * np.cos(LATC * DEG) * DEG
+        lv = sorted((float(L) for L in old_h["x46"]), reverse=True)
+        zz_ = np.array([zbf[L] for L in lv]) / 1000
+        xx_ = np.array([old_h["x46"][str(int(L))] for L in lv]) * kmdeg
+        fit = np.polyfit(zz_, xx_, 1)
+        truth("W86", "s48b along 46.5N the front's longitude moves west with height (fit slope < 0; frozen)", fit[0] < 0, r6(fit, 2))
+        step = -fit[0] * (4.0 - 1.5)
+        rng("W86", "s48b step-back between 1.5 and 4 km from the fit: 70-140 km ('about a hundred kilometres'; frozen)", step, 70, 140)
+        rng("W86", "s48b implied slope 1:30-1:60 (frozen)", -fit[0], 30, 60)
+        rng("W86", "s48b z̄(850) ≈ 1.5 km, z̄(500) 5.3-5.8 km ('about five and a half')", [zbf[850.0] / 1000, zbf[500.0] / 1000], [1.2, 5.3], [1.7, 5.8])
+        row("W86", "s48b frozen fit reproduces the b1 header (1:43.93, 109.8 km)", [float(-fit[0]), float(step)], [old_h["fit_km_per_km"], old_h["step_km"]], [0.006, 0.06])
+        hf, bf, rf = stack_product("stack_front", anom, Zf, lev_f, fl, fo, -8.0, 8.0, exaggeration=80, units="K", lut="cmocean.balance (s47/s48 slices)")
+        for key in ("front", "x46", "fit_km_per_km", "step_km"):
+            hf[key] = old_h[key]
+        truth("W86", "s48b re-made layer blob equals the b1 stack_front.bin byte for byte", bf == (DATA / "stack_front.bin").read_bytes())
+        hf["frozen"] = "front lines, x46, fit and step from UF2 build 1 (a45b9e1): fronts.py D3 fix not committed at fix-1 time"
+        narration_changes.append(f"s48b S4 (frozen b1 product): 'about a hundred kilometres' (fit 1:{-fit[0]:.0f} -> {step:.0f} km over 1.5-4 km)")
+    # zone heights of the two labelled gold lines (review M5): the 850- and 650-hPa lines
+    hf["label_km"] = {"850": r6(zbf[850.0] / 1000, 2), "650": r6(zbf[650.0] / 1000, 2)}
     files["stack_front.json"] = hf
     bins["stack_front.bin"] = bf
     # ---- s31 Sentinel-2 plate (W87)
@@ -2061,8 +2114,54 @@ def uf2_block(row, rng, truth, call, files, bins, narration_changes) -> None:
     truth("W87", "s31 the MODIS crop has the same bounds as the Sentinel plate (pixel-exact edges)", (x1 - x0) > 0 and (y1 - y0) > 0, [x0, y0, x1, y1])
     U["s31"] = {"bounds_wsen": sj["bounds_wsen"], "items": [it["id"] for it in used], "acquired_utc": sj["acquired_utc"], "seeds": seeds, "lcl_m": r6(zl, 1),
                 "trappes": [48.774, 2.009], "zex": 20, "credit": sj["credit"]}
+    # ---- s25 the tropopause as a height surface over a flat map (UF2 fix 1, review M1 / user U3-01; W94)
+    # ERA5 November-2023 monthly-mean t and z (37 levels, 1°, the file behind era5_zonal_t_z_tropopause_2023-11.nc), the WMO
+    # lapse-rate tropopause of every column with the W84 routine fluidpy.geo.atmos.lapse_rate_tropopause (p ≤ 500 hPa).
+    from scipy import ndimage
+    from fluidpy.geo.atmos import lapse_rate_tropopause
+    MP = Path("G:/Geophysical Fluid Dynamics/aofd-data/raw/ERA5-CDS-monthly-pl/era5_monthly_t-z_37lev_2023-11_1deg.nc")
+    dm = xr.open_dataset(MP).isel(valid_time=0)
+    tlat = np.arange(-10.0, 80.0 + 0.5, 1.0)
+    tlon = np.arange(-30.0, 120.0 + 0.5, 1.0)
+    sub = dm.sel(latitude=tlat, longitude=np.mod(tlon, 360.0))
+    T3 = sub.t.values.astype(float)                      # (level, lat, lon), lat ascending as selected
+    Z3 = sub.z.values.astype(float) / 9.80665            # geopotential height [m]
+    plev = sub.pressure_level.values.astype(float) * 100.0
+    zt_ = np.full((tlat.size, tlon.size), np.nan)
+    Tt_ = np.full_like(zt_, np.nan)
+    for j in range(tlat.size):
+        for i in range(tlon.size):
+            zt_[j, i], Tt_[j, i] = lapse_rate_tropopause(T3[:, j, i], Z3[:, j, i], p=plev)
+    nan_n = int(np.isnan(zt_).sum())
+    if nan_n:   # columns without a WMO tropopause: nearest valid column (counted in the manifest)
+        idx = ndimage.distance_transform_edt(np.isnan(zt_), return_distances=False, return_indices=True)
+        zt_, Tt_ = zt_[tuple(idx)], Tt_[tuple(idx)]
+
+    def spot(la, lo):
+        j, i = int(np.argmin(np.abs(tlat - la))), int(np.argmin(np.abs(tlon - lo)))
+        zz, tt = call(GA + "lapse_rate_tropopause", "s25", "trop_surface.json", f"WMO tropopause of the Nov-2023 monthly-mean column at {tlat[j]:.0f}N {tlon[i]:.0f}E",
+                      T=T3[:, j, i].tolist(), z=Z3[:, j, i].tolist(), p=plev.tolist())
+        return j, i, float(zz), float(tt)
+    jP, iP, zP, TP = spot(48.77, 2.01)       # Trappes / Paris
+    jS, iS, zS, TS = spot(1.37, 103.98)      # Singapore
+    rng("W94", "s25 surface: the Paris column's tropopause 10-12.5 km ('Paris ≈ 11 km', s24 'about eleven kilometres')", zP / 1000, 10.0, 12.5)
+    rng("W94", "s25 surface: the Singapore column's tropopause 15.5-17.5 km ('sixteen or seventeen')", zS / 1000, 15.5, 17.5)
+    rng("W94", "s25 surface: the Singapore tropopause is colder than −75 °C ('below minus seventy-five')", TS - 273.15, -95, -75)
+    row("W94", "s25 the grid loop and the parity calls agree at Paris and Singapore", [zt_[jP, iP], zt_[jS, iS]], [zP, zS], 1e-9)
+    polar = float(np.nanmean(zt_[tlat >= 75])) / 1000
+    rng("W94", "s25 near the pole (75-80N mean) 7-10.5 km ('about eight to ten kilometres')", polar, 7.0, 10.5)
+    rng("W94", "s25 columns without a WMO tropopause (nearest-filled) < 1 %", nan_n / zt_.size, 0, 0.01)
+    files["trop_surface.json"] = {
+        "what": "WMO lapse-rate tropopause height of every ERA5 Nov-2023 monthly-mean column (fluidpy.geo.atmos.lapse_rate_tropopause, p <= 500 hPa)",
+        "source": "ERA5 monthly means on pressure levels, Nov 2023, 1° (CDS reanalysis-era5-pressure-levels-monthly-means)",
+        "lat": [float(tlat[0]), float(tlat[-1])], "lon": [float(tlon[0]), float(tlon[-1])], "ny": int(tlat.size), "nx": int(tlon.size),
+        "layout": "row 0 = south, km, 2 decimals", "z_km": [round(float(v), 2) for v in (zt_ / 1000).ravel()],
+        "range_km": [7.0, 18.0], "nan_filled": nan_n,
+        "paris": {"lat": 48.77, "lon": 2.01, "z_km": r6(zP / 1000, 2), "T_C": r6(TP - 273.15, 1)},
+        "singapore": {"lat": 1.37, "lon": 103.98, "z_km": r6(zS / 1000, 2), "T_C": r6(TS - 273.15, 1)},
+        "polar_km": r6(polar, 2), "exaggeration": "heights x330 over a 6-unit (150°) plate (listed)"}
     # ---- W89 exaggerations (manifest)
-    U["exaggerations"] = {"stack_q": 150, "stack_t": 50, "stack_front": 80, "s02_hairline_px_min": 2, "s31_heights": 20}
+    U["exaggerations"] = {"stack_q": 150, "stack_t": 50, "stack_front": 80, "s02_hairline_px_min": 2, "s31_heights": 20, "s25_trop_surface": 330}
     files[fu] = U
 
 

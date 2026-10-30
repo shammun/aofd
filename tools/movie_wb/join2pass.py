@@ -1,7 +1,10 @@
 """Two-pass join of the ch00_weather_basics chunks to a size target (UF2: the movie must stay under the 160-MB cap; crf 24
 gave > 210 MB on the particle-heavy UF2 cut). Concat FILTER (one re-encode), x264 2-pass at the bitrate that gives
 `--mb` MB with `--abr` audio, bt709 tv-range yuv420p, AAC, faststart. Pass logs and temp files on G:.
-usage: .venv/Scripts/python.exe tools/movie_wb/join2pass.py <render dir> <audio wav> <out mp4> [--mb 152] [--abr 112k]"""
+usage: .venv/Scripts/python.exe tools/movie_wb/join2pass.py <render dir> <audio wav> <out mp4> [--mb 152] [--abr 112k] [--alim 0.5]
+UF2 fix 1: --alim L adds a look-ahead peak limiter (ffmpeg alimiter, linear limit L, 5-ms attack, 50-ms release, no make-up gain)
+before the AAC encoder: one wind transient at 55:27.6 came out of AAC at -0.4 dBFS from a -3.9 dBFS source (the true-peak gate is
+-1 dBTP)."""
 import json
 import subprocess
 import sys
@@ -26,6 +29,8 @@ common = ["-filter_complex", filt, "-map", "[v]", "-c:v", "libx264", "-profile:v
           "-color_trc", "bt709", "-color_range", "tv", "-r", "30", "-passlogfile", plog]
 print(f"{n} chunks, {dur:.1f} s, video {vbr} kbit/s + audio {abr} kbit/s", flush=True)
 subprocess.run(["ffmpeg", "-v", "error", "-y", *ins, *common, "-pass", "1", "-an", "-f", "mp4", "NUL"], check=True)
-subprocess.run(["ffmpeg", "-v", "error", "-y", *ins, "-i", str(audio), *common, "-pass", "2", "-map", f"{n}:a", "-c:a", "aac", "-b:a", f"{abr}k",
+alim = opt("--alim", None)
+af = ["-af", f"alimiter=limit={alim}:attack=5:release=50:level=disabled"] if alim else []
+subprocess.run(["ffmpeg", "-v", "error", "-y", *ins, "-i", str(audio), *common, "-pass", "2", "-map", f"{n}:a", *af, "-c:a", "aac", "-b:a", f"{abr}k",
                 "-movflags", "+faststart", str(out)], check=True)
 print("joined", n, "chunks ->", out, out.stat().st_size / 1e6, "MB", flush=True)

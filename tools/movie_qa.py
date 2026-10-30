@@ -532,7 +532,7 @@ def main() -> int:
     if a.overlap:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         from k6_overlap import overlap_gate
-        st, det, rep = overlap_gate(Path(a.overlap))
+        st, det, rep = overlap_gate(Path(a.overlap), True, timing_path if timing_path and timing_path.exists() else None)
         outdir.mkdir(parents=True, exist_ok=True)
         (outdir / "overlap.json").write_text(json.dumps(rep, indent=1, ensure_ascii=False), encoding="utf-8")
         gate("overlap", st, det)

@@ -2,7 +2,7 @@
 // each at its own (exaggerated) height, coloured in the shader-free way (an RGBA DataTexture per layer from the same LUT as
 // the matching globe/map), flat on a footprint or curved as spherical shells. Built on captests X3Stack (TexPlane, Stage,
 // orbit) with many more layers. Used inside a house View3D; the caller owns the camera (orbitPath keys, `stackCam`
-// presets: orbit / flyThrough / inside / below / topDown). Builder side: movies/data/_stack.py writes the Float32 layers,
+// presets: orbit / inside / below / topDown; flyThrough retired, §5b). Builder side: movies/data/_stack.py writes the Float32 layers,
 // the area-mean heights z̄, the colour range and the exaggeration (manifest rows).
 // Rules: the colour bar lives in the maths zone (never on the stack), readouts are K3 Callouts, the credit is K2 under the
 // frame box, and the stack sits in a K1 GlobeFrame whenever the camera is close or inside. Pure function of props.
@@ -10,7 +10,8 @@ import React, { useMemo } from "react";
 import * as THREE from "three";
 import { Orbit, V3 } from "./cam";
 import { ll } from "./globecam";
-import { Rod3D } from "./three3d";
+import { Rod3D, useView3D } from "./three3d";
+import { PROBE, probe3, probeOff } from "./probe";
 
 const hexRGB = (h: string): [number, number, number] => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
 /** LUT colour (hex list) at t ∈ [0, 1], linear between entries */
@@ -64,9 +65,59 @@ const patchGeo = (c: Curved, layer: number) => {
  * `lines` are 3-D polylines (gold front lines, a column rod) drawn as rods; `walls` optional children (slice walls).
  * DoubleSide, no depth writes, render order by layer (bottom first) so the translucent layers stack correctly.
  */
+/** convex hull (monotone chain) of screen points */
+const hull2 = (P: number[][]): number[][] => {
+  const p = [...P].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const cr = (o: number[], a: number[], b: number[]) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo: number[][] = [], up: number[][] = [];
+  for (const q of p) { while (lo.length >= 2 && cr(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (const q of [...p].reverse()) { while (up.length >= 2 && cr(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
+  return [...lo.slice(0, -1), ...up.slice(0, -1)];
+};
+/** clip a polygon to x ≤ X (the part under a K1 right panel is the faded rim, where text may sit) */
+const clipX2 = (P: number[][], X: number): number[][] => {
+  const out: number[][] = [];
+  P.forEach((a, i) => { const b = P[(i + 1) % P.length], ia = a[0] <= X, ib = b[0] <= X;
+    if (ia) out.push(a);
+    if (ia !== ib) { const t = (X - a[0]) / (b[0] - a[0]); out.push([X, a[1] + t * (b[1] - a[1])]); } });
+  return out;
+};
+
 export const LayerStack3D: React.FC<{ layers: StackLayer[]; foot?: { x0: number; x1: number; y0: number; y1: number }; curved?: Curved; sep?: number;
-  reveal?: number[]; lines?: StackLine[]; o?: number; children?: React.ReactNode }> = ({ layers, foot, curved, sep = 1, reveal, lines = [], o = 1, children }) => {
+  reveal?: number[]; lines?: StackLine[]; o?: number; children?: React.ReactNode; mask?: { name?: string; clipX?: number; clipY?: number } }> = ({ layers, foot, curved, sep = 1, reveal, lines = [], o = 1, children, mask }) => {
   const plane = useMemo(() => new THREE.PlaneGeometry(1, 1), []);
+  // UF2 fix 1 (K6 tuning, review "K5 must publish its projected stack mask"): in bbox mode the stack's projected outline (hull of
+  // its corners at the bottom and top layer heights) is a K6 sharp-picture mask, so text or a colour bar ON the stack fails
+  const { pr } = useView3D();
+  const mid = React.useId();
+  if (PROBE.on) {
+    const vis = layers.map((_, i) => o * (reveal ? Math.max(0, Math.min(1, reveal[i] ?? 1)) : 1)).filter((v) => v > 0.2).length;
+    if (vis > 0) {
+      const ztop = Math.max(...layers.map((L) => L.z)) * sep, zbot = Math.min(...layers.map((L) => L.z)) * sep;
+      const pts3: [number, number, number][] = [];
+      if (curved) {
+        const kTop = layers.length - 1;
+        for (const la of [curved.lat0, (curved.lat0 + curved.lat1) / 2, curved.lat1]) for (const lo of [curved.lon0, (curved.lon0 + curved.lon1) / 2, curved.lon1]) {
+          const rT = 1 + sep * (curved.r(la, kTop) - 1);
+          pts3.push(ll(la, lo, 1) as [number, number, number], ll(la, lo, rT) as [number, number, number]);
+        }
+      } else if (foot) {
+        for (const x of [foot.x0, foot.x1]) for (const y of [foot.y0, foot.y1]) for (const z of [zbot, ztop]) pts3.push([x, y, z]);
+      }
+      // a camera INSIDE the stack (a fly-through, retired) sees the stack over the whole frame
+      const cp = pr.st.pos, rc = Math.hypot(cp[0], cp[1], cp[2]);
+      const inside = curved
+        ? (() => { const la = (Math.asin(cp[1] / rc) * 180) / Math.PI, lo = (Math.atan2(cp[0], cp[2]) * 180) / Math.PI;
+          const rT = 1 + sep * (curved.r(la, layers.length - 1) - 1);
+          return rc > 1 && rc < rT && la > curved.lat0 && la < curved.lat1 && lo > curved.lon0 && lo < curved.lon1; })()
+        : !!foot && cp[0] > foot.x0 && cp[0] < foot.x1 && cp[1] > foot.y0 && cp[1] < foot.y1 && cp[2] > zbot && cp[2] < ztop;
+      let pts = inside ? [[0, 0], [1920, 0], [1920, 1080], [0, 1080]] : hull2(pts3.filter((q) => pr.vis(q)).map((q) => pr.p(q)));
+      if (mask?.clipX !== undefined) pts = clipX2(pts, mask.clipX);
+      if (mask?.clipY !== undefined) pts = clipX2(pts.map((q) => [q[1], q[0]]), mask.clipY).map((q) => [q[1], q[0]]); // y ≤ clipY (K1 bottom fade)
+      if (pts.length >= 3) probe3(mid, { k: "mask3d", c: "", w: 0, o, pts, closed: true, name: mask?.name ?? "stack" });
+      else probeOff(mid);
+    } else probeOff(mid);
+  }
   const geos = useMemo(() => (curved ? layers.map((_, i) => patchGeo({ ...curved, r: (la, k) => 1 + (curved.r(la, k) - 1) * 1 }, i)) : []), [curved, layers.length]); // eslint-disable-line react-hooks/exhaustive-deps
   const mats = useMemo(() => layers.map(() => new THREE.MeshBasicMaterial({ transparent: true, side: THREE.DoubleSide, depthWrite: false })), [layers.length]); // eslint-disable-line react-hooks/exhaustive-deps
   if (o <= 0) return null;
@@ -101,10 +152,11 @@ export const stackCam = {
   orbit: (target: V3, az: number, el: number, dist: number): Orbit => ({ az, el, dist, target }),
   /** topDown: straight down onto a layer (north up the screen) */
   topDown: (target: V3, dist: number): Orbit => ({ az: 270, el: 89.5, dist, target }),
-  /** below: under the bottom layer looking up through it */
+  /** below: under the bottom layer looking up through it — like `inside`, only for the ≤ 5-6-s close look (house §5b) */
   below: (target: V3, az: number, dist: number, el = -18): Orbit => ({ az, el, dist, target }),
-  /** flyThrough: a camera close to the stack, its target at height z (sweep z between layers to fly through them) */
-  flyThrough: (x: number, y: number, z: number, az: number, el = 12, dist = 1.2): Orbit => ({ az, el, dist, target: [x, y, z] }),
-  /** inside: between layers, looking along the stack */
+  /** RETIRED (HOUSE_STYLE §5b, user 2026-10-30: strictly no fly-throughs; UF2 review 1 M6): throws if called */
+  flyThrough: (..._a: number[]): Orbit => { throw new Error("stackCam.flyThrough is retired (HOUSE_STYLE §5b: the camera never passes through the layers)"); },
+  /** inside: between layers, looking along the stack — ONLY for the one short side close look (≤ 5-6 s, ground and levels both
+   * in view, not deep inside; house §5b); every move into and out of it is made from outside */
   inside: (x: number, y: number, z: number, az: number, dist = 0.8): Orbit => ({ az, el: 4, dist, target: [x, y, z] }),
 } as const;

@@ -13,7 +13,7 @@ concepts:
 - 0B-G13 preview (subtropical highs, ITCZ, trades, westerlies)
 - 0B-G16 units (hPa, K and °C, g/kg, m/s, knots)
 - 0B-G17 data words (observation, reanalysis, climatology)
-target_duration_s: 3465.325
+target_duration_s: 3471.45
 fps: 30
 size:
 - 1920
@@ -42,9 +42,9 @@ audio:
     tail_s: 2.5
     sections_s: from sound_cues.yaml (s54 start → s60 start, measured from timing.json)
     notes: a different score from every other movie (HOUSE_STYLE §8); recorded in v3/sound/sound.json
-measured_narration_s: 3462.825
-measured_frames: 103885
-words: 8587
+measured_narration_s: 3468.95
+measured_frames: 104069
+words: 8601
 sentences: 491
 dry_run:
   tool: tools/tts.py (Kokoro af_bella, speed 1.0, .venv-tts)
@@ -2393,8 +2393,8 @@ scenes:
   - at: S1
     text: 'Data: IGRA v2 radiosondes (NOAA NCEI) · Trappes and Singapore · 1 Nov 2023, 00 UTC'
   - at: globe
-    text: 'Data: ERA5 monthly mean temperature (Copernicus C3S) · November 2023 · averaged around each latitude · image: Blue
-      Marble NG (NASA)'
+    text: 'Data: ERA5 monthly mean temperature (Copernicus C3S) · November 2023 · tropopause of each column · map: Blue Marble
+      NG (NASA)'
   runner_up: flat latitude-height section beside the chart (v1 idea)
   uf1:
   - U-WB-22
@@ -2402,6 +2402,12 @@ scenes:
   - R1
   - R2
   - R4
+  uf2_fix1_visual: 'UF2 fix 1 (M1 / U3-01): the left sounding chart stays (Paris and Singapore balloons, 1 Nov 2023); the
+    right half shows a flat Blue Marble map plate, 10S-80N x 30W-120E, with the November-2023 WMO tropopause height of every
+    ERA5 column as one semi-opaque surface above it (heights x330, coloured 8-17 km, colour bar ''tropopause height, Nov 2023
+    average''); gold rods at Paris and Singapore up to the surface, K3 callouts ''Paris ≈ 11.7 km'', ''Singapore ≈ 16.6 km,
+    below −75 °C'', ''near the pole ≈ 10 km'' above the picture, each linked to its rod top. Camera outside, south-east side,
+    slow orbit, rising.'
 - id: s26_why_cold_aloft
   t:
   - 1666.775
@@ -2698,28 +2704,28 @@ scenes:
 - id: s27c_vapour_stack
   t:
   - 1867.975
-  - 1908.475
+  - 1908.825
   sentence_times:
   - - 1867.975
     - 1870.7
   - - 1871.05
-    - 1879.125
-  - - 1879.475
-    - 1890.625
-  - - 1890.975
-    - 1896.7
-  - - 1898.2
-    - 1907.675
+    - 1879.3
+  - - 1879.65
+    - 1890.8
+  - - 1891.15
+    - 1897.05
+  - - 1898.55
+    - 1908.025
   beat: data · where the vapour is (layer stack B)
   visual: 'UF2 (G6, stack B): K5 LayerStack3D of ERA5 specific humidity at 10 levels (1000-300 hPa), 2 Nov 2023 12 UTC, tropical
     Atlantic (0-24N, 34W-2E), heights ×150, LUT_HALINE 0-20 g/kg with alpha 0.30 + 0.70 q/20; colour bar ''specific humidity
     (g/kg)'' in the maths zone. Camera: topDown → orbit (layers rise on ''ten heights'') → flyThrough upward → below (look
     up) → inside down to the sea. Callouts ''≈ 20 g/kg'', ''3 km: a few g/kg'', ''10 km: almost none'', ''half the vapour
     below 1.5 km'' with gold links. K1 frame; K2 source.'
-  voiceover: So where in the air is all this vapour? Let's lift the humidity off the globe and look at it at ten heights at
-    once, from the sea surface up to about ten kilometres. Near the sea, the tropical air has up to about twenty grams of
-    vapour per kilogram, but three kilometres up, only a few grams, and at ten kilometres, almost none. In fact, about half
-    of all the vapour here lies in the lowest one and a half kilometres. That's because the air higher up is much colder,
+  voiceover: So where in the air is all this vapour? Let's lift the humidity off the globe and look at it at five heights
+    at once, from the sea surface up to about ten kilometres. Near the sea, the tropical air has up to about twenty grams
+    of vapour per kilogram, but three kilometres up, only a few grams, and at ten kilometres, almost none. In fact, almost
+    half of all the vapour here lies in the lowest one and a half kilometres. That's because the air higher up is much colder,
     and as we'll see next, the colder it is, the less vapour there can be before it turns into drops.
   on_screen_eq: null
   physics_source:
@@ -2745,25 +2751,29 @@ scenes:
     text: 'Data: ERA5 specific humidity on pressure levels (Copernicus C3S) · 2 Nov 2023, 12 UTC · tropical Atlantic'
   uf2:
   - U2-23
+  uf2_fix1_visual: 'UF2 fix 1 (M2, M3 / U3-02, U3-03, U3-07): five layers (1000, 850, 700, 500, 300 hPa), each labelled with
+    its height at its left edge (0.1, 1.5, 3.2, 5.9, 9.7 km). The map tilts and lifts, then the camera hovers OUTSIDE (side
+    angle, rising); one 4-s side close look on ''almost half'' (sea surface and the 850-hPa layer in view, a gold bracket
+    at the front edge), back out; callouts and the colour bar in the text column. No fly-through.'
 - id: s28_saturation
   t:
-  - 1908.475
-  - 1959.3
+  - 1908.825
+  - 1959.65
   sentence_times:
-  - - 1908.475
-    - 1914.725
-  - - 1915.075
-    - 1920.15
-  - - 1920.5
-    - 1928.475
-  - - 1928.825
-    - 1939.85
-  - - 1940.2
-    - 1943.925
-  - - 1944.275
-    - 1949.275
-  - - 1949.625
-    - 1958.5
+  - - 1908.825
+    - 1915.075
+  - - 1915.425
+    - 1920.5
+  - - 1920.85
+    - 1928.825
+  - - 1929.175
+    - 1940.2
+  - - 1940.55
+    - 1944.275
+  - - 1944.625
+    - 1949.625
+  - - 1949.975
+    - 1958.85
   beat: intuition · saturation
   visual: 'Picture zone S1-S3: water surface strip, seeded dots leaving (up arrows) and landing (down arrows), two counters
 
@@ -2817,23 +2827,23 @@ scenes:
   why: a curve is the message
 - id: s29_relative_humidity
   t:
-  - 1959.3
-  - 2005.4
+  - 1959.65
+  - 2005.75
   sentence_times:
-  - - 1959.3
-    - 1962.125
-  - - 1962.475
-    - 1968.15
-  - - 1968.5
-    - 1974.425
-  - - 1974.775
-    - 1980.675
-  - - 1981.025
-    - 1989.175
-  - - 1990.675
-    - 1995.15
-  - - 1995.5
-    - 2004.6
+  - - 1959.65
+    - 1962.475
+  - - 1962.825
+    - 1968.5
+  - - 1968.85
+    - 1974.775
+  - - 1975.125
+    - 1981.025
+  - - 1981.375
+    - 1989.525
+  - - 1991.025
+    - 1995.5
+  - - 1995.85
+    - 2004.95
   beat: building blocks · relative humidity
   visual: 'Maths zone: ''RH = \dfrac{\text{vapour pressure}}{\text{saturation vapour pressure}} \times 100\,\%'' (68 px).
     Picture
@@ -2877,23 +2887,23 @@ scenes:
   why: same chart persists
 - id: s30_dew_point
   t:
-  - 2005.4
-  - 2045.15
+  - 2005.75
+  - 2045.5
   sentence_times:
-  - - 2005.4
-    - 2009.4
-  - - 2009.75
-    - 2016.425
-  - - 2016.775
-    - 2019.15
-  - - 2020.65
-    - 2027.925
-  - - 2028.275
-    - 2034.35
-  - - 2034.7
-    - 2039.775
-  - - 2040.125
-    - 2044.35
+  - - 2005.75
+    - 2009.75
+  - - 2010.1
+    - 2016.775
+  - - 2017.125
+    - 2019.5
+  - - 2021.0
+    - 2028.275
+  - - 2028.625
+    - 2034.7
+  - - 2035.05
+    - 2040.125
+  - - 2040.475
+    - 2044.7
   beat: building blocks · dew point
   visual: 'Picture zone: the s28-s29 graph; the teal dot continues left along the 15-hPa line until it meets the gold curve
 
@@ -2929,23 +2939,23 @@ scenes:
   why: same chart
 - id: s31_cloud_base
   t:
-  - 2045.15
-  - 2090.45
+  - 2045.5
+  - 2090.8
   sentence_times:
-  - - 2045.15
-    - 2049.075
-  - - 2049.425
-    - 2053.3
-  - - 2053.65
-    - 2063.225
-  - - 2063.575
-    - 2071.7
-  - - 2072.05
-    - 2075.675
-  - - 2077.175
-    - 2080.85
-  - - 2081.2
-    - 2089.65
+  - - 2045.5
+    - 2049.425
+  - - 2049.775
+    - 2053.65
+  - - 2054.0
+    - 2063.575
+  - - 2063.925
+    - 2072.05
+  - - 2072.4
+    - 2076.025
+  - - 2077.525
+    - 2081.2
+  - - 2081.55
+    - 2090.0
   beat: why · where clouds begin
   visual: 'Maths zone graph (height 0-3 km up, temperature 0-30 °C across, 52-px ticks): orange parcel temperature line from
 
@@ -3012,21 +3022,21 @@ scenes:
   - U2-21
 - id: s32_wind_vector
   t:
-  - 2090.45
-  - 2126.925
+  - 2090.8
+  - 2127.275
   sentence_times:
-  - - 2090.45
-    - 2092.45
-  - - 2092.8
-    - 2100.8
-  - - 2101.15
-    - 2105.1
-  - - 2105.45
-    - 2110.125
-  - - 2110.475
-    - 2117.625
-  - - 2117.975
-    - 2125.425
+  - - 2090.8
+    - 2092.8
+  - - 2093.15
+    - 2101.15
+  - - 2101.5
+    - 2105.45
+  - - 2105.8
+    - 2110.475
+  - - 2110.825
+    - 2117.975
+  - - 2118.325
+    - 2125.775
   beat: building blocks · wind is a vector
   visual: 'Picture zone: a flat map patch (true-colour Brittany coast, faint) with N/E axes (warm white) and a compass rose;
 
@@ -3077,21 +3087,21 @@ scenes:
   - R1
 - id: s33_wind_direction
   t:
-  - 2126.925
-  - 2171.0
+  - 2127.275
+  - 2171.35
   sentence_times:
-  - - 2126.925
-    - 2131.875
-  - - 2132.225
-    - 2136.275
-  - - 2136.625
-    - 2148.45
-  - - 2148.8
-    - 2153.525
-  - - 2153.875
-    - 2159.875
-  - - 2161.375
-    - 2170.2
+  - - 2127.275
+    - 2132.225
+  - - 2132.575
+    - 2136.625
+  - - 2136.975
+    - 2148.8
+  - - 2149.15
+    - 2153.875
+  - - 2154.225
+    - 2160.225
+  - - 2161.725
+    - 2170.55
   beat: building blocks · the direction convention
   visual: 'Picture zone: compass dial (ticks 52 px: ''0° N'', ''90° E'', ''180° S'', ''270° W''); S2 a teal arrow entering
     from the west
@@ -3134,21 +3144,21 @@ scenes:
   why: 'a convention: a dial is clearest'
 - id: s34_wind_units
   t:
-  - 2171.0
-  - 2211.225
+  - 2171.35
+  - 2211.575
   sentence_times:
-  - - 2171.0
-    - 2173.825
-  - - 2174.175
-    - 2177.725
-  - - 2178.075
-    - 2186.725
-  - - 2187.075
-    - 2189.65
-  - - 2190.0
-    - 2201.55
-  - - 2201.9
-    - 2209.725
+  - - 2171.35
+    - 2174.175
+  - - 2174.525
+    - 2178.075
+  - - 2178.425
+    - 2187.075
+  - - 2187.425
+    - 2190.0
+  - - 2190.35
+    - 2201.9
+  - - 2202.25
+    - 2210.075
   beat: building blocks · units and knots
   visual: 'Maths zone CalcStack: ''10\ \mathrm{m/s} \times 3.6 = 36\ \mathrm{km/h}'' (with ''× 3600 s/h ÷ 1000 m/km'' shown
     under 3.6).
@@ -3199,19 +3209,19 @@ scenes:
   - R4
 - id: s35_why_wind
   t:
-  - 2211.225
-  - 2246.15
+  - 2211.575
+  - 2246.5
   sentence_times:
-  - - 2211.225
-    - 2213.3
-  - - 2213.65
-    - 2216.125
-  - - 2216.475
-    - 2226.125
-  - - 2226.475
-    - 2238.45
-  - - 2238.8
-    - 2245.35
+  - - 2211.575
+    - 2213.65
+  - - 2214.0
+    - 2216.475
+  - - 2216.825
+    - 2226.475
+  - - 2226.825
+    - 2238.8
+  - - 2239.15
+    - 2245.7
   beat: why · what pushes the wind
   visual: 'Picture zone: two dials from s07 at x 200 and 800, ''H 1020 hPa'' and ''L 1000 hPa''; an orange push arrow between
     them
@@ -3252,33 +3262,33 @@ scenes:
   - R1
 - id: s36_weather_climate
   t:
-  - 2246.15
-  - 2342.375
+  - 2246.5
+  - 2342.725
   sentence_times:
-  - - 2246.15
-    - 2250.125
-  - - 2250.475
-    - 2261.525
-  - - 2261.875
-    - 2270.825
-  - - 2271.175
-    - 2278.025
-  - - 2278.375
-    - 2288.25
-  - - 2288.6
-    - 2291.65
-  - - 2292.0
-    - 2302.975
-  - - 2303.325
-    - 2307.95
-  - - 2308.3
-    - 2315.425
-  - - 2315.775
-    - 2322.975
-  - - 2323.325
-    - 2333.525
-  - - 2335.025
-    - 2341.575
+  - - 2246.5
+    - 2250.475
+  - - 2250.825
+    - 2261.875
+  - - 2262.225
+    - 2271.175
+  - - 2271.525
+    - 2278.375
+  - - 2278.725
+    - 2288.6
+  - - 2288.95
+    - 2292.0
+  - - 2292.35
+    - 2303.325
+  - - 2303.675
+    - 2308.3
+  - - 2308.65
+    - 2315.775
+  - - 2316.125
+    - 2323.325
+  - - 2323.675
+    - 2333.875
+  - - 2335.375
+    - 2341.925
   beat: building blocks · weather vs climate
   visual: 'S1-S3 maths zone keywords ''weather = now · a few days'', ''climate = statistics over 30 years''; picture zone
     a small
@@ -3351,21 +3361,21 @@ scenes:
   - U2-26
 - id: s37_observations
   t:
-  - 2342.375
-  - 2374.35
+  - 2342.725
+  - 2374.7
   sentence_times:
-  - - 2342.375
-    - 2344.85
-  - - 2345.2
-    - 2353.275
-  - - 2353.625
-    - 2355.425
-  - - 2355.775
-    - 2360.375
-  - - 2360.725
-    - 2368.875
-  - - 2369.225
-    - 2373.55
+  - - 2342.725
+    - 2345.2
+  - - 2345.55
+    - 2353.625
+  - - 2353.975
+    - 2355.775
+  - - 2356.125
+    - 2360.725
+  - - 2361.075
+    - 2369.225
+  - - 2369.575
+    - 2373.9
   beat: building blocks · observations
   visual: 'Picture zone: Globe3D rotating slowly (Europe -> Atlantic -> Africa -> Pacific), gold dots (6 px) at every IGRA2
 
@@ -3408,25 +3418,25 @@ scenes:
   - R4
 - id: s38_reanalysis
   t:
-  - 2374.35
-  - 2435.85
+  - 2374.7
+  - 2436.2
   sentence_times:
-  - - 2374.35
-    - 2377.0
-  - - 2377.35
-    - 2388.925
-  - - 2389.275
-    - 2397.6
-  - - 2397.95
-    - 2404.85
-  - - 2405.2
-    - 2413.175
-  - - 2413.525
-    - 2419.875
-  - - 2420.225
-    - 2427.15
-  - - 2427.5
-    - 2435.05
+  - - 2374.7
+    - 2377.35
+  - - 2377.7
+    - 2389.275
+  - - 2389.625
+    - 2397.95
+  - - 2398.3
+    - 2405.2
+  - - 2405.55
+    - 2413.525
+  - - 2413.875
+    - 2420.225
+  - - 2420.575
+    - 2427.5
+  - - 2427.85
+    - 2435.4
   beat: building blocks · reanalysis
   visual: 'Picture zone: the s37 globe; S1-S2 a faint lat-lon grid (0.25°, drawn every 2° for legibility) appears; a small
     loop
@@ -3487,23 +3497,23 @@ scenes:
   - R4
 - id: s38b_reanalysis_stack
   t:
-  - 2435.85
-  - 2494.675
+  - 2436.2
+  - 2495.025
   sentence_times:
-  - - 2435.85
-    - 2441.375
-  - - 2441.725
-    - 2455.75
-  - - 2456.1
-    - 2463.2
-  - - 2463.55
-    - 2469.3
-  - - 2469.65
-    - 2481.65
-  - - 2482.0
-    - 2487.875
-  - - 2488.225
-    - 2493.875
+  - - 2436.2
+    - 2441.725
+  - - 2442.075
+    - 2456.1
+  - - 2456.45
+    - 2463.55
+  - - 2463.9
+    - 2469.65
+  - - 2470.0
+    - 2482.0
+  - - 2482.35
+    - 2488.225
+  - - 2488.575
+    - 2494.225
   beat: data · the reanalysis in layers (stack A, equator to pole)
   visual: 'UF2 (G6, stack A): 16 curved temperature shells (1000-1 hPa) over the 0-80N, 25W-35E sector, 2 Nov 2023 12 UTC,
     radius 1 + 50 z̄(lat)/a (×50 air, as s02; strip means so the tropical tropopause bulges); cmocean thermal −85…+30 °C,
@@ -3534,25 +3544,29 @@ scenes:
     text: 'Data: ERA5 temperature on pressure levels (Copernicus C3S) · 2 Nov 2023, 12 UTC · 0–80°N, 25°W–35°E'
   uf2:
   - U2-23
+  uf2_fix1_visual: 'UF2 fix 1 (M4 / U3-04, U3-07): the 40:36-40:57 build kept; then an outside side view from the east (shells
+    edge-on over Africa and Europe), the Europe tropopause outlined in gold and linked to its callout; one 5-s close look
+    at the tropical tropopause (ground and levels in view), back out; an outside oblique view with the balloon column to the
+    end. Colour bar always beside.'
 - id: s39_surface_pressure
   t:
-  - 2494.675
-  - 2534.45
+  - 2495.025
+  - 2534.8
   sentence_times:
-  - - 2494.675
-    - 2497.05
-  - - 2497.4
-    - 2506.375
-  - - 2506.725
-    - 2509.15
-  - - 2509.5
-    - 2518.725
-  - - 2519.075
-    - 2524.15
-  - - 2524.5
-    - 2529.3
-  - - 2529.65
-    - 2533.65
+  - - 2495.025
+    - 2497.4
+  - - 2497.75
+    - 2506.725
+  - - 2507.075
+    - 2509.5
+  - - 2509.85
+    - 2519.075
+  - - 2519.425
+    - 2524.5
+  - - 2524.85
+    - 2529.65
+  - - 2530.0
+    - 2534.0
   beat: intuition · a pressure map, and the mountain problem
   visual: 'Picture zone: Globe3D with ERA5 surface pressure at 2023-11-02T12 UTC (cmocean ''deep_r'' or ''dense'', never rainbow;
 
@@ -3606,25 +3620,25 @@ scenes:
   - R4
 - id: s40_sea_level
   t:
-  - 2534.45
-  - 2592.775
+  - 2534.8
+  - 2593.125
   sentence_times:
-  - - 2534.45
-    - 2538.4
-  - - 2538.75
-    - 2543.15
-  - - 2543.5
-    - 2557.375
-  - - 2557.725
-    - 2563.95
-  - - 2564.3
-    - 2575.05
-  - - 2575.4
-    - 2581.975
-  - - 2583.475
-    - 2586.175
-  - - 2586.525
-    - 2591.975
+  - - 2534.8
+    - 2538.75
+  - - 2539.1
+    - 2543.5
+  - - 2543.85
+    - 2557.725
+  - - 2558.075
+    - 2564.3
+  - - 2564.65
+    - 2575.4
+  - - 2575.75
+    - 2582.325
+  - - 2583.825
+    - 2586.525
+  - - 2586.875
+    - 2592.325
   beat: why · reducing to sea level
   visual: 'Picture zone: side view, a mountain (brown) with a station icon at its top, height axis ''0 m'', ''1609 m'' (52
     px);
@@ -3673,19 +3687,19 @@ scenes:
   why: thought example
 - id: s41_msl_isobars
   t:
-  - 2592.775
-  - 2619.775
+  - 2593.125
+  - 2620.125
   sentence_times:
-  - - 2592.775
-    - 2596.825
-  - - 2597.175
-    - 2600.5
-  - - 2600.85
-    - 2606.65
-  - - 2607.0
-    - 2611.65
-  - - 2612.0
-    - 2618.975
+  - - 2593.125
+    - 2597.175
+  - - 2597.525
+    - 2600.85
+  - - 2601.2
+    - 2607.0
+  - - 2607.35
+    - 2612.0
+  - - 2612.35
+    - 2619.325
   beat: intuition · sea-level pressure and isobars
   visual: 'Picture zone: Globe3D, the s39 colours cross-fade to the ERA5 mean sea-level pressure (diverging map centred at
 
@@ -3732,21 +3746,21 @@ scenes:
   - R4
 - id: s42_highs_lows
   t:
-  - 2619.775
-  - 2676.925
+  - 2620.125
+  - 2677.275
   sentence_times:
-  - - 2619.775
-    - 2629.5
-  - - 2629.85
-    - 2636.6
-  - - 2636.95
-    - 2646.85
-  - - 2647.2
-    - 2653.675
-  - - 2654.025
-    - 2661.5
-  - - 2661.85
-    - 2676.125
+  - - 2620.125
+    - 2629.85
+  - - 2630.2
+    - 2636.95
+  - - 2637.3
+    - 2647.2
+  - - 2647.55
+    - 2654.025
+  - - 2654.375
+    - 2661.85
+  - - 2662.2
+    - 2676.475
   beat: building blocks · highs and lows
   visual: 'Picture zone: the s41 globe tilted to the North Atlantic; ''L'' (68 px, warm white letters with a 3-px dark outline)
     at the ERA5 MSLP minimum (52.5N 1.75E) and ''H'' at the maximum of the Azores high
@@ -3801,25 +3815,25 @@ scenes:
   - R4
 - id: s43_lows_cloudy
   t:
-  - 2676.925
-  - 2716.475
+  - 2677.275
+  - 2716.825
   sentence_times:
-  - - 2676.925
-    - 2681.3
-  - - 2681.65
-    - 2685.875
-  - - 2686.225
-    - 2689.075
-  - - 2689.425
-    - 2695.7
-  - - 2696.05
-    - 2699.775
-  - - 2700.125
-    - 2704.725
-  - - 2705.075
-    - 2711.525
-  - - 2711.875
-    - 2715.675
+  - - 2677.275
+    - 2681.65
+  - - 2682.0
+    - 2686.225
+  - - 2686.575
+    - 2689.425
+  - - 2689.775
+    - 2696.05
+  - - 2696.4
+    - 2700.125
+  - - 2700.475
+    - 2705.075
+  - - 2705.425
+    - 2711.875
+  - - 2712.225
+    - 2716.025
   beat: why · lows are cloudy, highs are clear
   visual: 'Picture zone: the MODIS Aqua true colour of 2023-11-02 (data/derived/ch00/ciaran_modis_aqua_truecolour_2023-11-02.jpg,
 
@@ -3868,21 +3882,21 @@ scenes:
   - R1
 - id: s44_round_lows
   t:
-  - 2716.475
-  - 2752.675
+  - 2716.825
+  - 2753.025
   sentence_times:
-  - - 2716.475
-    - 2723.125
-  - - 2723.475
-    - 2727.35
-  - - 2727.7
-    - 2735.45
-  - - 2735.8
-    - 2740.7
-  - - 2741.05
-    - 2744.25
-  - - 2744.6
-    - 2751.875
+  - - 2716.825
+    - 2723.475
+  - - 2723.825
+    - 2727.7
+  - - 2728.05
+    - 2735.8
+  - - 2736.15
+    - 2741.05
+  - - 2741.4
+    - 2744.6
+  - - 2744.95
+    - 2752.225
   beat: intuition · winds circle the lows
   visual: 'Picture zone: the s43 panel; ERA5 10-m wind arrows at 12 UTC on a 1.5° grid (teal, length ∝ speed, legend arrow
 
@@ -3934,19 +3948,19 @@ scenes:
   - R1
 - id: s45_air_masses
   t:
-  - 2752.675
-  - 2798.35
+  - 2753.025
+  - 2798.7
   sentence_times:
-  - - 2752.675
-    - 2756.275
-  - - 2756.625
-    - 2766.65
-  - - 2767.0
-    - 2776.75
-  - - 2777.1
-    - 2786.1
-  - - 2786.45
-    - 2797.55
+  - - 2753.025
+    - 2756.625
+  - - 2756.975
+    - 2767.0
+  - - 2767.35
+    - 2777.1
+  - - 2777.45
+    - 2786.45
+  - - 2786.8
+    - 2797.9
   beat: building blocks · air masses
   visual: 'S1-S4: maths zone 2 x 2 keyword grid (no boxes): rows ''polar'' (slate) / ''tropical'' (orange), columns ''maritime''
     /
@@ -4005,21 +4019,21 @@ scenes:
   - R4
 - id: s46_fronts
   t:
-  - 2798.35
-  - 2830.125
+  - 2798.7
+  - 2830.475
   sentence_times:
-  - - 2798.35
-    - 2802.2
-  - - 2802.55
-    - 2810.525
-  - - 2810.875
-    - 2817.3
-  - - 2817.65
-    - 2821.4
-  - - 2821.75
-    - 2825.425
-  - - 2825.775
-    - 2829.325
+  - - 2798.7
+    - 2802.55
+  - - 2802.9
+    - 2810.875
+  - - 2811.225
+    - 2817.65
+  - - 2818.0
+    - 2821.75
+  - - 2822.1
+    - 2825.775
+  - - 2826.125
+    - 2829.675
   beat: building blocks · fronts
   visual: 'Picture zone: the s45 map; a gold transect line crossing the cold edge of the warm tongue; maths zone: a small
     graph
@@ -4067,25 +4081,25 @@ scenes:
   - R2
 - id: s47_cold_front
   t:
-  - 2830.125
-  - 2898.05
+  - 2830.475
+  - 2898.4
   sentence_times:
-  - - 2830.125
-    - 2832.975
-  - - 2833.325
-    - 2847.275
-  - - 2847.625
-    - 2856.425
-  - - 2856.775
-    - 2862.4
-  - - 2862.75
-    - 2868.675
-  - - 2869.025
-    - 2878.975
-  - - 2879.325
-    - 2885.025
-  - - 2885.375
-    - 2897.25
+  - - 2830.475
+    - 2833.325
+  - - 2833.675
+    - 2847.625
+  - - 2847.975
+    - 2856.775
+  - - 2857.125
+    - 2862.75
+  - - 2863.1
+    - 2869.025
+  - - 2869.375
+    - 2879.325
+  - - 2879.675
+    - 2885.375
+  - - 2885.725
+    - 2897.6
   beat: why · a cold front from the side
   visual: 'Full-width cross-section (illustrative, schematic; vertical exaggeration x50, said in s48): ground line y 760;
 
@@ -4177,21 +4191,21 @@ scenes:
   - U2-22
 - id: s48_warm_front
   t:
-  - 2898.05
-  - 2955.35
+  - 2898.4
+  - 2955.7
   sentence_times:
-  - - 2898.05
-    - 2904.725
-  - - 2905.075
-    - 2912.775
-  - - 2913.125
-    - 2925.325
-  - - 2925.675
-    - 2934.75
-  - - 2935.1
-    - 2945.775
-  - - 2946.125
-    - 2954.55
+  - - 2898.4
+    - 2905.075
+  - - 2905.425
+    - 2913.125
+  - - 2913.475
+    - 2925.675
+  - - 2926.025
+    - 2935.1
+  - - 2935.45
+    - 2946.125
+  - - 2946.475
+    - 2954.9
   beat: why · a warm front from the side
   visual: 'Full-width cross-section like s47, warm air moving right over a long thin cold wedge; S2 orange arrows gliding
     up the
@@ -4249,21 +4263,21 @@ scenes:
     times taller') and the true-scale twin is labelled 'true slope'.
 - id: s48b_front_stack
   t:
-  - 2955.35
-  - 3002.7
+  - 2955.7
+  - 3003.05
   sentence_times:
-  - - 2955.35
-    - 2959.55
-  - - 2959.9
-    - 2969.6
-  - - 2969.95
-    - 2976.175
-  - - 2976.525
-    - 2987.5
-  - - 2989.0
-    - 2995.425
-  - - 2995.775
-    - 3001.9
+  - - 2955.7
+    - 2959.9
+  - - 2960.25
+    - 2969.95
+  - - 2970.3
+    - 2976.525
+  - - 2976.875
+    - 2987.85
+  - - 2989.35
+    - 2995.775
+  - - 2996.125
+    - 3002.25
   beat: data · the cold front level by level (stack C)
   visual: 'UF2 (G6, stack C, U2-22 option): 11 layers (1000-500 hPa) of the temperature anomaly (T minus each level''s box
     mean), 1 Nov 2023 18 UTC, 40-56N 25W-8E, heights ×80 (= the slices), the slices'' diverging LUT; the gold cold-front line
@@ -4291,23 +4305,25 @@ scenes:
   uf2:
   - U2-22
   - U2-23
+  uf2_fix1_visual: 'UF2 fix 1 (M5 / U3-07): every view from outside; S3-S4 an oblique view from the south-east, rising; the
+    850- and 650-hPa gold lines labelled with their heights (1.3 km, 3.4 km); keyword and colour bar in the text column.'
 - id: s49_real_fronts
   t:
-  - 3002.7
-  - 3037.725
+  - 3003.05
+  - 3038.075
   sentence_times:
-  - - 3002.7
-    - 3008.25
-  - - 3008.6
-    - 3016.15
-  - - 3016.5
-    - 3020.875
-  - - 3021.225
-    - 3025.175
-  - - 3025.525
-    - 3030.725
-  - - 3031.075
-    - 3036.925
+  - - 3003.05
+    - 3008.6
+  - - 3008.95
+    - 3016.5
+  - - 3016.85
+    - 3021.225
+  - - 3021.575
+    - 3025.525
+  - - 3025.875
+    - 3031.075
+  - - 3031.425
+    - 3037.275
   beat: application · real fronts round Ciarán
   visual: 'Map panel (Lambert, 40-60N 25W-10E, x 80-1580): ERA5 850-hPa temperature at 2023-11-02T00 UTC (cmocean ''thermal'',
 
@@ -4365,15 +4381,15 @@ scenes:
   - R2
 - id: s50_front_symbols
   t:
-  - 3037.725
-  - 3054.425
+  - 3038.075
+  - 3054.775
   sentence_times:
-  - - 3037.725
-    - 3043.65
-  - - 3044.0
-    - 3049.425
-  - - 3049.775
-    - 3053.625
+  - - 3038.075
+    - 3044.0
+  - - 3044.35
+    - 3049.775
+  - - 3050.125
+    - 3053.975
   beat: application · map symbols (pointer forward)
   visual: 'Same map; the front lines turn into the standard symbols on their words (cold: blue line + filled triangles on
     the
@@ -4411,23 +4427,23 @@ scenes:
   - R2
 - id: s51_heating
   t:
-  - 3054.425
-  - 3099.8
+  - 3054.775
+  - 3100.15
   sentence_times:
-  - - 3054.425
-    - 3059.475
-  - - 3059.825
-    - 3061.825
-  - - 3062.175
-    - 3071.15
-  - - 3071.5
-    - 3075.275
-  - - 3075.625
-    - 3084.975
-  - - 3086.475
-    - 3094.2
-  - - 3094.55
-    - 3099.0
+  - - 3054.775
+    - 3059.825
+  - - 3060.175
+    - 3062.175
+  - - 3062.525
+    - 3071.5
+  - - 3071.85
+    - 3075.625
+  - - 3075.975
+    - 3085.325
+  - - 3086.825
+    - 3094.55
+  - - 3094.9
+    - 3099.35
   beat: application · the global picture (heating)
   visual: 'Picture zone: Globe3D (BMNG, equinox lighting) with two gold beams of equal width hitting at 0° and 60°N; patches
 
@@ -4489,21 +4505,21 @@ scenes:
   - R4
 - id: s52_pressure_belts
   t:
-  - 3099.8
-  - 3135.875
+  - 3100.15
+  - 3136.225
   sentence_times:
-  - - 3099.8
-    - 3104.275
-  - - 3104.625
-    - 3113.175
-  - - 3113.525
-    - 3116.15
-  - - 3116.5
-    - 3124.95
-  - - 3125.3
-    - 3128.7
-  - - 3129.05
-    - 3135.075
+  - - 3100.15
+    - 3104.625
+  - - 3104.975
+    - 3113.525
+  - - 3113.875
+    - 3116.5
+  - - 3116.85
+    - 3125.3
+  - - 3125.65
+    - 3129.05
+  - - 3129.4
+    - 3135.425
   beat: application · high and low pressure belts (preview)
   visual: 'Picture zone: Globe3D tilted to show both hemispheres, annual mean MSLP 1991-2020 (data/real/wind_climatology.json
 
@@ -4555,25 +4571,25 @@ scenes:
   - R4
 - id: s53_trades_westerlies
   t:
-  - 3135.875
-  - 3183.575
+  - 3136.225
+  - 3189.7
   sentence_times:
-  - - 3135.875
-    - 3139.05
-  - - 3139.4
-    - 3149.35
-  - - 3149.7
-    - 3153.15
-  - - 3153.5
-    - 3156.35
-  - - 3156.7
-    - 3164.375
-  - - 3164.725
-    - 3171.425
-  - - 3171.775
-    - 3176.4
-  - - 3176.75
-    - 3182.775
+  - - 3136.225
+    - 3139.4
+  - - 3139.75
+    - 3149.7
+  - - 3150.05
+    - 3155.4
+  - - 3155.75
+    - 3160.325
+  - - 3160.675
+    - 3170.5
+  - - 3170.85
+    - 3177.55
+  - - 3177.9
+    - 3182.525
+  - - 3182.875
+    - 3188.9
   beat: application · trade winds and westerlies (preview)
   visual: 'Picture zone: the s52 globe; 1991-2020 mean 10-m winds (teal arrows on a 5° grid, legend ''5 m/s''; streaklines
     from
@@ -4595,11 +4611,12 @@ scenes:
     trades, the North Atlantic westerlies and (new S6) the Southern Ocean westerlies, then Biscay (Ciarán track pulse) and
     back out; K1 fades and right panel while zoomed; callouts on the faded rim; source below.'
   voiceover: 'The winds near the ground follow these belts. Between the subtropical highs and the equator, steady winds blow
-    from the east, called the trade winds; sailing ships relied on them to cross the oceans. North of the equator, they come
-    from the north-east. South of it, they come from the south-east. Poleward of the subtropical highs, in the middle latitudes,
-    the winds come mostly from the west: the westerlies. Over the Southern Ocean, where little land slows them down, the westerlies
-    blow strongest of all. That''s why storms like Ciarán usually travel from west to east. Why the winds bend like this is
-    part of the Coriolis story, coming in a later video.'
+    from the east, called the trade winds; sailing ships relied on them to cross the oceans. North of the equator, over the
+    tropical Atlantic, they come from the north-east. South of it, over the South Atlantic, they come from the south-east.
+    Poleward of the subtropical highs, in the middle latitudes, like here over the North Atlantic, the winds come mostly from
+    the west: the westerlies. Over the Southern Ocean, where little land slows them down, the westerlies blow strongest of
+    all. That''s why storms like Ciarán usually travel from west to east. Why the winds bend like this is part of the Coriolis
+    story, coming in a later video.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.psl.surface_wind_climatology + fluidpy.diag.trajectories
@@ -4626,21 +4643,21 @@ scenes:
   - U2-28
 - id: s54_ciaran_intro
   t:
-  - 3183.575
-  - 3220.05
+  - 3189.7
+  - 3226.175
   sentence_times:
-  - - 3183.575
-    - 3189.2
-  - - 3189.55
-    - 3196.7
-  - - 3197.05
-    - 3202.55
-  - - 3202.9
-    - 3207.375
-  - - 3207.725
-    - 3213.35
-  - - 3213.7
-    - 3219.25
+  - - 3189.7
+    - 3195.325
+  - - 3195.675
+    - 3202.825
+  - - 3203.175
+    - 3208.675
+  - - 3209.025
+    - 3213.5
+  - - 3213.85
+    - 3219.475
+  - - 3219.825
+    - 3225.375
   beat: application · one storm over one town
   visual: 'Map panel (Lambert 40-58N 25W-8E, x 80-1580, full brightness): GIBS MODIS Terra/Aqua true colour 2023-11-01
 
@@ -4682,20 +4699,19 @@ scenes:
   why: space → town in one move; runner-up CesiumJS drape (not tried for this shot)
   source_line:
   - at: S1
-    text: 'Data: ERA5 sea-level pressure (Copernicus C3S) · 1 Nov 2023 · image: NASA MODIS Terra and Aqua (NASA GIBS), 1 Nov
-      2023, afternoon'
+    text: 'Data: ERA5 sea-level pressure (Copernicus C3S), 1 Nov 2023 · image: NASA MODIS Terra and Aqua (NASA GIBS), afternoon'
   uf1:
   - R1
   - R4
 - id: s55_ciaran_maps
   t:
-  - 3220.05
-  - 3245.4
+  - 3226.175
+  - 3251.525
   sentence_times:
-  - - 3220.05
-    - 3231.875
-  - - 3232.225
-    - 3244.6
+  - - 3226.175
+    - 3238.0
+  - - 3238.35
+    - 3250.725
   beat: application · the low moves in
   visual: 'Same panel; ERA5 MSLP isobars every 4 hPa animate hour by hour (24 frames per hour of data, interpolated only in
 
@@ -4749,25 +4765,24 @@ scenes:
     at about 01:50 UTC), then on to 12 UTC 2 Nov
   source_line:
   - at: S1
-    text: 'Data: ERA5 hourly sea-level pressure and 10-m wind (Copernicus C3S) · fronts from ERA5 850-hPa temperature · 1
-      Nov 12 UTC – 2 Nov 12 UTC 2023'
+    text: 'Data: ERA5 hourly sea-level pressure, 10-m wind and 850-hPa fronts (Copernicus C3S) · 1 Nov 12 UTC – 2 Nov 12 UTC 2023'
   uf1:
   - R1
 - id: s56_brest_pressure
   t:
-  - 3245.4
-  - 3276.225
+  - 3251.525
+  - 3282.35
   sentence_times:
-  - - 3245.4
-    - 3247.85
-  - - 3248.2
-    - 3254.025
-  - - 3254.375
-    - 3263.4
-  - - 3263.75
-    - 3268.9
-  - - 3270.4
-    - 3275.425
+  - - 3251.525
+    - 3253.975
+  - - 3254.325
+    - 3260.15
+  - - 3260.5
+    - 3269.525
+  - - 3269.875
+    - 3275.025
+  - - 3276.525
+    - 3281.55
   beat: application · the pressure at Brest
   visual: 'Maths zone: TimeGraph (hours across 12 -> 12 UTC, 52-px ticks every 3 h; pressure 955-1000 hPa up) drawing the
 
@@ -4816,19 +4831,19 @@ scenes:
   - R1
 - id: s57_brest_warm_front
   t:
-  - 3276.225
-  - 3308.55
+  - 3282.35
+  - 3314.675
   sentence_times:
-  - - 3276.225
-    - 3278.6
-  - - 3278.95
-    - 3287.8
-  - - 3288.15
-    - 3299.0
-  - - 3299.35
-    - 3301.725
-  - - 3302.075
-    - 3307.75
+  - - 3282.35
+    - 3284.725
+  - - 3285.075
+    - 3293.925
+  - - 3294.275
+    - 3305.125
+  - - 3305.475
+    - 3307.85
+  - - 3308.2
+    - 3313.875
   beat: application · the warm front passes
   visual: 'Same TimeGraph: a second panel below (temperature 9-15 °C, orange line, hour dots); a row of hourly wind arrows
     above
@@ -4877,19 +4892,19 @@ scenes:
   - R1
 - id: s58_brest_cold_front
   t:
-  - 3308.55
-  - 3347.025
+  - 3314.675
+  - 3353.15
   sentence_times:
-  - - 3308.55
-    - 3311.525
-  - - 3311.875
-    - 3320.6
-  - - 3320.95
-    - 3332.5
-  - - 3334.0
-    - 3340.6
-  - - 3340.95
-    - 3346.225
+  - - 3314.675
+    - 3317.65
+  - - 3318.0
+    - 3326.725
+  - - 3327.075
+    - 3338.625
+  - - 3340.125
+    - 3346.725
+  - - 3347.075
+    - 3352.35
   beat: application · the cold front passes
   visual: 'Same TimeGraph; arrows at 00 and 03 UTC with labels ''19 m/s from 221° (SW)'', ''23 m/s from 271° (W)''; maths
     zone
@@ -4948,15 +4963,15 @@ scenes:
   - R1
 - id: s59_ciaran_after
   t:
-  - 3347.025
-  - 3368.35
+  - 3353.15
+  - 3374.475
   sentence_times:
-  - - 3347.025
-    - 3355.65
-  - - 3356.0
-    - 3361.1
-  - - 3361.45
-    - 3367.55
+  - - 3353.15
+    - 3361.775
+  - - 3362.125
+    - 3367.225
+  - - 3367.575
+    - 3373.675
   beat: application · the storm the next afternoon, and what comes next
   visual: 'Map panel: the existing MODIS Aqua true colour of 2023-11-02 (re-used) with ERA5 12 UTC isobars and the ''L'' 956
     hPa
@@ -4992,25 +5007,25 @@ scenes:
   - R1
 - id: s60_recap
   t:
-  - 3368.35
-  - 3437.225
+  - 3374.475
+  - 3443.35
   sentence_times:
-  - - 3368.35
-    - 3376.575
-  - - 3376.925
-    - 3384.85
-  - - 3385.2
-    - 3397.525
-  - - 3397.875
-    - 3406.875
-  - - 3407.225
-    - 3414.55
-  - - 3414.9
-    - 3420.7
-  - - 3421.05
-    - 3427.6
-  - - 3427.95
-    - 3436.425
+  - - 3374.475
+    - 3382.7
+  - - 3383.05
+    - 3390.975
+  - - 3391.325
+    - 3403.65
+  - - 3404.0
+    - 3413.0
+  - - 3413.35
+    - 3420.675
+  - - 3421.025
+    - 3426.825
+  - - 3427.175
+    - 3433.725
+  - - 3434.075
+    - 3442.55
   beat: recap
   visual: 'No heading. One beat per sentence, each a mini picture from its scene (thumbnail re-renders, 60 % size) with its
 
@@ -5066,15 +5081,15 @@ scenes:
   - U2-24
 - id: s61_end
   t:
-  - 3437.225
-  - 3462.825
+  - 3443.35
+  - 3468.95
   sentence_times:
-  - - 3437.225
-    - 3443.1
-  - - 3443.45
-    - 3454.5
-  - - 3454.85
-    - 3462.525
+  - - 3443.35
+    - 3449.225
+  - - 3449.575
+    - 3460.625
+  - - 3460.975
+    - 3468.65
   beat: end card
   visual: 'House end card (HOUSE_STYLE §3), word for word as the reference with ''maths tutorials'' -> ''tutorials'' (physics
 
@@ -5156,9 +5171,9 @@ honesty_notes:
 quiz_hook: 'A mountain station 3 km up reads 700 hPa at 0 °C. Is its sea-level pressure high or low? (H = 287 x 273 / 9.81
   ≈ 8.0 km; 700 x e^(3/8.0) ≈ 1018 hPa: a slightly high reading.)'
 qa_expectations:
-  duration_s: 3465.325
+  duration_s: 3471.45
   captions:
-    cues: 868
+    cues: 869
     max_lines: 2
     max_chars_per_line: 42
     max_cps: 17.0
@@ -5351,3 +5366,22 @@ uf2_build:
   - s20c dropped (orchestrator)
   - 's48b: the slice walls are not re-drawn in the stack (the two slice lines are marked on the bottom layer instead)'
   - flat maps (s32, s35, s43-s50, s54-s58) scaled ×0.951 about their top-left corner so every map box ends at y 820 (K2)
+uf2_fix1:
+  date: '2026-10-30'
+  narration:
+  - 's27c S2: ''ten heights'' -> ''five heights'' (U3-02, five layers)'
+  - 's27c S4: ''about half'' -> ''almost half'' (W85 = 0.450, under the orchestrator''s 0.46-0.50)'
+  - 's53 S3-S5: each hover names its place: ''over the tropical Atlantic'', ''over the South Atlantic'', ''like here over
+    the North Atlantic'' (review S14)'
+  splice: tools/movie_wb/splice_uf2fix1.py (BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter,
+    Whisper-checked)
+  data:
+  - 'trop_surface.json (W94): WMO tropopause of every ERA5 Nov-2023 monthly-mean column, fluidpy.geo.atmos.lapse_rate_tropopause'
+  - 'stack_q: 5 layers (checks and the half-column fraction on all 10 levels)'
+  - 'stack_front: frozen at UF2 b1 (fluidpy.diag.fronts D3 fix not committed at fix-1 time); heights of the labelled lines
+    added'
+  kit:
+  - stackCam.flyThrough retired (throws)
+  - LayerStack3D publishes its projected outline as a K6 mask
+  - K1 right-panel ramp drawn as stepped bands
+  - 'BoxProbe: owners, CalcStack underlines, axis lines, 3-D stack masks'

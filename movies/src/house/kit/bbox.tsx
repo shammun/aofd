@@ -10,7 +10,17 @@ import React, { useEffect, useMemo } from "react";
 import { continueRender, delayRender, useCurrentFrame } from "remotion";
 import { PROBE } from "./probe";
 
-type Box = { t: string; o: number; r: number[][]; m?: boolean };
+// UF2 fix 1 (K6 tuning): `own` = the owner of a label (the nearest [data-lc-own] group, or "cbar:<name>" for a colour bar's own
+// title / ticks), so tools/k6_overlap.py can log a label touching its own shape as INFO instead of a failure
+type Box = { t: string; o: number; r: number[][]; m?: boolean; own?: string };
+const ownerOf = (el: Element | null): string | undefined => {
+  if (!el) return undefined;
+  const o = el.closest("[data-lc-own]");
+  if (o) return o.getAttribute("data-lc-own") ?? undefined;
+  const cb = el.closest("[data-k6-cbar]");
+  if (cb) { try { return "cbar:" + (JSON.parse(cb.getAttribute("data-k6-cbar") ?? "{}").name ?? "cbar"); } catch { return "cbar"; } }
+  return undefined;
+};
 const FULL = (r: DOMRect) => r.width >= 1900 && r.height >= 1060;
 
 const effOpacity = (el: Element | null): number => {
@@ -52,7 +62,7 @@ const measure = (): Box[] => {
       const r = svgText.getBoundingClientRect();
       if (r.width < 1 || r.height < 1) continue;
       blocks.set(svgText, { t: (svgText.textContent || "").slice(0, 60), o: Math.round(o * 100) / 100, r: [shrink(r, 0.2, 0.17)],
-        m: !!svgText.closest("[data-lc-maplabel]") || undefined });
+        m: !!svgText.closest("[data-lc-maplabel]") || undefined, own: ownerOf(svgText) });
       continue;
     }
     const o = effOpacity(pe) * colourAlpha(getComputedStyle(pe).color);
@@ -67,7 +77,7 @@ const measure = (): Box[] => {
     rg.selectNodeContents(n);
     const rs = Array.from(rg.getClientRects()).filter((r) => r.width >= 1 && r.height >= 1);
     if (!rs.length) continue;
-    const b = blocks.get(root) ?? { t: "", o: 0, r: [] };
+    const b = blocks.get(root) ?? { t: "", o: 0, r: [], own: ownerOf(root) };
     b.t = (b.t + txt).slice(0, 60);
     b.o = Math.max(b.o, Math.round(o * 100) / 100);
     for (const r of rs) b.r.push(shrink(r, 0.18, 0.14));
@@ -87,7 +97,7 @@ const measure = (): Box[] => {
 // label ([data-lc-maplabel]: a contour value or a place name), which sits on the map's linework by design.
 // Grid and background colours (#2b3550, #4a5677, the bg and its halos) are skipped. `g` groups the parts of one drawing
 // (parent element) so a link never "crosses" its own chevron. WebGL arrows come from the PROBE registry (probe.ts).
-type Shape = { k: string; c: string; w: number; o: number; pts: number[][]; closed: boolean; g: string; tag: string; clip?: number[]; contour?: boolean };
+type Shape = { k: string; c: string; w: number; o: number; pts: number[][]; closed: boolean; g: string; tag: string; clip?: number[]; contour?: boolean; own?: string };
 const rgbOf = (c: string): number[] | null => {
   const m = c.match(/rgba?\(([^)]+)\)/);
   if (!m) return null;
@@ -162,7 +172,19 @@ const measureShapes = (frame: number): Shape[] => {
     const mut = rgbOf(cs.stroke);
     const guide = !!mut && Math.abs(mut[0] - 154) + Math.abs(mut[1] - 166) + Math.abs(mut[2] - 189) < 20 && sw <= 4.5;
     const pulseRing = el.tagName === "circle" && isGold(cs.stroke) && el.getAttribute("r") === "30" && cs.fill === "none";
-    if ((guide && fillA < 0.3) || pulseRing) return;
+    if (pulseRing) return;
+    // UF2 fix 1 (K6 tuning): axis / guide lines are reported as kind "axis" (tested against gold links only: "links must not
+    // cross … ticks", house §6), never against text
+    if (guide && fillA < 0.3) {
+      const m0 = g.getScreenCTM();
+      let L0 = 0; try { L0 = g.getTotalLength(); } catch { return; }
+      if (!m0 || !(L0 > 0)) return;
+      const n0 = Math.min(120, Math.max(2, Math.ceil(L0 / 8)));
+      const pts0: number[][] = [];
+      for (let i = 0; i <= n0; i++) { const q = g.getPointAtLength((L0 * i) / n0); const s0 = new DOMPoint(q.x, q.y).matrixTransform(m0); pts0.push([r1(s0.x), r1(s0.y)]); }
+      out.push({ k: "axis", c: cs.stroke, w: r1(sw), o: Math.round(strokeA * 100) / 100, pts: pts0, closed: false, g: groupId(el.parentElement), tag: el.tagName, clip: clipBox(el) });
+      return;
+    }
     const kind = gold ? "link" : fillA >= 0.3 ? "fill" : strokeA >= 0.45 && sw >= 3 ? "stroke" : "";
     if (!kind) return;
     let L = 0;
@@ -180,7 +202,7 @@ const measureShapes = (frame: number): Shape[] => {
     const closed = kind === "fill" || el.tagName === "polygon" || el.tagName === "circle" || el.tagName === "rect" || el.tagName === "ellipse";
     const clip = clipBox(el);
     out.push({ k: kind, c: kind === "fill" ? cs.fill : cs.stroke, w: r1(kind === "fill" ? 0 : sw), o: Math.round((kind === "fill" ? fillA : strokeA) * 100) / 100,
-      pts, closed, g: groupId(el.parentElement), tag: el.tagName, clip, contour: !!el.closest("[data-lc-contour]") || undefined });
+      pts, closed, g: groupId(el.parentElement), tag: el.tagName, clip, contour: !!el.closest("[data-lc-contour]") || undefined, own: ownerOf(el) });
     // a filled shape that also has a visible outline stroke is also a stroke
     if (kind === "fill" && strokeA >= 0.45 && sw >= 3) out.push({ k: "stroke", c: cs.stroke, w: r1(sw), o: Math.round(strokeA * 100) / 100, pts, closed, g: groupId(el.parentElement), tag: el.tagName, clip });
   });
@@ -203,8 +225,22 @@ const measureShapes = (frame: number): Shape[] => {
     out.push({ k: "img", c: "img", w: 0, o: Math.round(o * 100) / 100, closed: true, g: groupId(el), tag: el.tagName.toLowerCase(),
       pts: [[r.left, r.top], [r.right, r.top], [r.right, r.bottom], [r.left, r.bottom]].map((p) => p.map(r1)) });
   });
+  // UF2 fix 1 (K6 tuning): the gold underline of a CalcStack row (an HTML div, not SVG) is a stroke too ("what does it mean?" on
+  // the underline at 13:49 was missed)
+  document.querySelectorAll('div[style*="background"]').forEach((el) => {
+    if (el.closest("[data-lc-ok]")) return;
+    const cs = getComputedStyle(el);
+    if (!isGold(cs.backgroundColor)) return;
+    const r = el.getBoundingClientRect();
+    if (r.height > 10 || r.width < 20) return;
+    const o = effOpacity(el);
+    if (o < 0.2) return;
+    const y = r1(r.top + r.height / 2);
+    out.push({ k: "stroke", c: cs.backgroundColor, w: r1(Math.max(3, r.height)), o: Math.round(o * 100) / 100, pts: [[r1(r.left), y], [r1(r.right), y]], closed: false,
+      g: groupId(el), tag: "underline" });
+  });
   PROBE.reg.forEach((s, id) => {
-    if (s.frame !== frame || s.o < 0.2) return;
+    if (s.frame !== frame || s.o < 0.2 || s.k === "mask3d") return;
     if (s.k === "arrow3d") {
       out.push({ k: "stroke", c: s.c, w: s.w, o: s.o, pts: s.pts.map((p) => p.map(r1)), closed: false, g: id, tag: "arrow3d" });
       if (s.head) out.push({ k: "fill", c: s.c, w: 0, o: s.o, pts: s.head.map((p) => p.map(r1)), closed: true, g: id, tag: "arrow3d-head" });
@@ -239,6 +275,11 @@ const measureMasks = (): Mask[] => {
         out.push({ name: j.name ?? "src", k: "src", o: Math.round(o * 100) / 100, src: [r.left, r.top, r.right, r.bottom].map(r1), r: j.pic });
       } else out.push({ ...j, o: Math.round(o * 100) / 100 });
     } catch (e) { console.log(`BBOXERR mask ${String(e)}`); }
+  });
+  // UF2 fix 1 (K6 tuning): K5 LayerStack3D publishes its projected outline through the WebGL probe registry
+  PROBE.reg.forEach((s) => {
+    if (s.k !== "mask3d" || s.frame !== PROBE.frame || s.o < 0.2) return;
+    out.push({ name: s.name ?? "stack", k: "poly", o: Math.round(s.o * 100) / 100, pts: s.pts.map((p) => p.map(r1)) });
   });
   return out;
 };

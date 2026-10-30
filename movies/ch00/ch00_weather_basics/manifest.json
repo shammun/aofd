@@ -4,8 +4,8 @@
  "builder": "movies/data/build_ch00_weather_basics.py",
  "fluidpy": {
   "repo": "../Fluid Dynamics",
-  "commit": "3800f159c668c06f9d1a0f507d76bcaa459129b9",
-  "dirty_tracked": true,
+  "commit": "fc51cf0cf47d699d1747095a3dda82c172429368",
+  "dirty_tracked": false,
   "moist_py_tracked": true,
   "moist_py_sha256": "419e57194a9d136b5f91f702bc0ab1f88b36bfb3e4b7c3a9e0e51dbb4a53ef3c",
   "atmos_py_tracked": true,
@@ -63,15 +63,17 @@
    "s03_molecules": "illustrative molecule motion inside the parcel box"
   },
   "uf2_library": {
-   "fluidpy.diag.sounding.column_integral": "W85 (tests by the verifier, pending at build time)",
-   "fluidpy.diag.fronts.front_by_level": "W86 max_step_km=80, kind='cold', locate='centre' (tests pending at build time)"
+   "fluidpy.diag.sounding.column_integral": "W85: tests/diag/test_column_integral.py (fluidpy working tree) pass at UF2 fix 1 (52 passed with test_front_by_level.py, 2026-10-30); not yet committed in fluidpy",
+   "fluidpy.geo.atmos.lapse_rate_tropopause (grid)": "W94 s25 surface: every Nov-2023 monthly-mean column, 10S-80N x 30W-120E, 1 deg",
+   "fluidpy.diag.fronts.front_by_level": "W86 max_step_km=80, kind='cold', locate='centre'; tests/diag/test_front_by_level.py pass in the working tree (D3 fix in progress, uncommitted): s48b products frozen at UF2 b1"
   },
   "exaggerations": [
    "atmosphere shell drawn 50x thicker (s02 on, said)",
    "front side views 80x taller (s47-s48, said in s48)",
    "troposphere 50x in the s25 inset",
    "model grid drawn every 2° (s38)",
-   "UF2: humidity stack heights x150 (s27c), temperature shells x50 (s38b, = s02), front stack x80 (s48b, = slices), s02 true-thickness hair-line 2-px minimum, s31 heights x20 (= s26)"
+   "UF2: humidity stack heights x150 (s27c), temperature shells x50 (s38b, = s02), front stack x80 (s48b, = slices), s02 true-thickness hair-line 2-px minimum, s31 heights x20 (= s26)",
+   "UF2 fix 1: s25 tropopause-height surface x330 over a flat 150°-wide map plate (s25, said as a picture, not to scale); s03 parcel box drawn 2x (16 km x 16 km x 3.2 km, illustrative)"
   ]
  },
  "credits": [
@@ -126,7 +128,8 @@
   "data/derived/ch00/era5_wb_front_11lev_2023-11-01T18.nc": "84af8a6cc36e9c105ac3ebfbbe3e399a3c9fe993286c33b4df644ceaaae499fa",
   "data/derived/ch00/s2_beauce_2024-08-22.jpg": "c6c8b9a6c6a2a9261449c96470fb1a749b4dba73972e1ecd71145bc912d7b97b",
   "data/derived/ch00/s2_beauce_2024-08-22.json": "cc84a12e5dbbd0d0619692c16cf4638ad2f18bd9c9bc5accc555a76e54474df8",
-  "data/derived/ch00/era5_ciaran_2023_section_48p5N_18UTC.nc": "03803164d955c8020d919376cb46f27adce35e7e7cbb8da7df10e27f0ff696c6"
+  "data/derived/ch00/era5_ciaran_2023_section_48p5N_18UTC.nc": "03803164d955c8020d919376cb46f27adce35e7e7cbb8da7df10e27f0ff696c6",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-CDS-monthly-pl\\era5_monthly_t-z_37lev_2023-11_1deg.nc": "aa23ba2a0a1223e75b10ee7b44035567b2e8277a1beaa90ac163fa52fd87315e"
  },
  "assets": {
   "data/derived/ch00/gibs_truecolour_global_2023-11-02_0p05.jpg": "524f0506f6cdefc2c151d7d320a3cfc0cb5fc7f3c96c1d1a13c6c180ec278c19",
@@ -412,11 +415,12 @@
   "slice.json": "70bf3553c3e46bdcdcd9a75df8b5cea632630c5332ce08849567d2ffee45a1d0",
   "slice_cf.json": "6cbe15c8d2d0ca7aa93b788550143851d40de153191dc78ce1b8a4d8bb1488ab",
   "t850_particles.json": "f1394d5ca09f081d76f6cc6ebe64240ee652b8f916e2803563147326b78eed4d",
-  "uf1.json": "aa5a415eb04ed5029c7d73d08807e345c495fadfdb066d66738e96b74bc004a5",
-  "stack_q.json": "be8e8545590d930742c05af2cc8600299773db32b71fb22afc2db4388d4e4f10",
+  "uf1.json": "0c02d5a18855c938e37885e4db7b18919b23ef503b79f4f29542e24039649e12",
+  "stack_q.json": "9da20446c47bd65cc1d00c6aa039886a926ea69fc8bf774906872a52876d8fd0",
   "stack_t.json": "5cf0f7dac37bf4cf902d190b22e13db8d263bd6407130aa9e6da1b5ce76d454b",
-  "stack_front.json": "2e24e7a43848f9272a9fbd9f72d448ec33e7d4823fb4407395ef60886e8e554b",
-  "uf2.json": "756b17812a4ca896ef4095ce20cc3df16a1291389970673fd6178644dcb1419c",
+  "stack_front.json": "f84e1e2253210f1c75deb09116d353609982855f50089e71f214f0cdc1feff69",
+  "trop_surface.json": "bbb1494038e8b7b9eb2bd56ba4bc2033f3e66fffc9bce6b2bce816b5a7ac511c",
+  "uf2.json": "4a1f9086c45f52b49eacb313518b7ed83e80b40d471abb8c5ddba6a028674ea3",
   "global_20231102T12.bin": "7dc32374e0bace11dff550556b7e540f1bd1ec39f7d8b4b2d7b634671518b12b",
   "ciaran_hourly.bin": "3fdad96e5663c43b92767d3b701cfed3217cac0e583eb6814350a0a6cd308f59",
   "ciaran_850.bin": "b90bf0cc0b20d5a64e61a74b9d0bcea3cddc6ba5d5c9d07f0944241fb2323251",
@@ -427,7 +431,7 @@
   "slice.bin": "adb39926a830f1ea2e13015f46dd2eedaa6101628b207aad65cdd2fa2c3bf8bc",
   "slice_cf.bin": "592e686f99e10c09e4250feec17b49bee488988c7e4d40a8c831a9447f1d3621",
   "t850_particles.bin": "5f3f5eb075981ff44c6e959d3d60dbdc25dbc49c342559e9d18a181e1eee3b7b",
-  "stack_q.bin": "410e7bbae71ef83fcae636fac5be5ac0978f2df58ff5bad39a6234081bea3510",
+  "stack_q.bin": "1142150cf3e569ad55f24b4b841f937ac137c09f66707c2a1fdd3fc88bb2b74b",
   "stack_t.bin": "69b16ae2e4d22ca76257b54e30e2d4d5a26c3bb9486c83a5747d09f18daa637f",
   "stack_front.bin": "22ffbf99e73dc536fa6ae42cf3b197ded7393895e260a2cd1e69cfe549061365",
   "cesium_tibet_anchors.json": "e3a99fe65a6580548797d377efa6341a4831b54dfc48612153e02a8aba2ca54a"
@@ -3863,7 +3867,7 @@
   },
   {
    "id": "W85",
-   "name": "s27c 10 layers ('ten heights')",
+   "name": "s27c fetch has 10 levels (checks and the half-column fraction use all of them)",
    "value": [
     10.0
    ],
@@ -3871,6 +3875,40 @@
     10.0
    ],
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W85",
+   "name": "s27c stack shows 5 layers ('five heights', U3-02): 1000, 850, 700, 500, 300 hPa",
+   "value": [
+    1000.0,
+    850.0,
+    700.0,
+    500.0,
+    300.0
+   ],
+   "ref": [
+    1000.0,
+    850.0,
+    700.0,
+    500.0,
+    300.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W85",
+   "name": "s27c layer labels z̄ = 0.1, 1.5, 3.2, 5.9, 9.7 km (rounded to 0.1 km)",
+   "value": [
+    0.1217,
+    1.5449,
+    3.1884,
+    5.8948,
+    9.699
+   ],
+   "ref": "[[0.05, 1.45, 3.15, 5.85, 9.65], [0.15, 1.55, 3.25, 5.95, 9.75]]",
+   "tol": null,
    "pass": true
   },
   {
@@ -3887,7 +3925,7 @@
    "id": "W85",
    "name": "s27c z̄(700) in 2.8-3.3 km ('three kilometres up')",
    "value": [
-    3.1884
+    3.188427
    ],
    "ref": "[2.8, 3.3]",
    "tol": null,
@@ -3907,7 +3945,7 @@
    "id": "W85",
    "name": "s27c z̄(300) in 9.5-10.4 km ('about ten kilometres', narration follows the data)",
    "value": [
-    9.699
+    9.698954
    ],
    "ref": "[9.5, 10.4]",
    "tol": null,
@@ -3927,7 +3965,7 @@
    "id": "W85",
    "name": "s27c z̄(850) 1.3-1.7 km ('one and a half')",
    "value": [
-    1.5449
+    1.544914
    ],
    "ref": "[1.3, 1.7]",
    "tol": null,
@@ -3940,6 +3978,16 @@
     0.449951
    ],
    "ref": "[0.4, 0.6]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W85",
+   "name": "s27c the fraction is just under a half, 0.43-0.48 ('almost half', review 1 M2: 0.450 is below the orchestrator's 0.46-0.50)",
+   "value": [
+    0.449951
+   ],
+   "ref": "[0.43, 0.48]",
    "tol": null,
    "pass": true
   },
@@ -4161,6 +4209,70 @@
    ],
    "ref": true,
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "W94",
+   "name": "s25 surface: the Paris column's tropopause 10-12.5 km ('Paris ≈ 11 km', s24 'about eleven kilometres')",
+   "value": [
+    11.706769
+   ],
+   "ref": "[10.0, 12.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W94",
+   "name": "s25 surface: the Singapore column's tropopause 15.5-17.5 km ('sixteen or seventeen')",
+   "value": [
+    16.642387
+   ],
+   "ref": "[15.5, 17.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W94",
+   "name": "s25 surface: the Singapore tropopause is colder than −75 °C ('below minus seventy-five')",
+   "value": [
+    -79.16152
+   ],
+   "ref": "[-95, -75]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W94",
+   "name": "s25 the grid loop and the parity calls agree at Paris and Singapore",
+   "value": [
+    11706.769131,
+    16642.386799
+   ],
+   "ref": [
+    11706.769131,
+    16642.386799
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "W94",
+   "name": "s25 near the pole (75-80N mean) 7-10.5 km ('about eight to ten kilometres')",
+   "value": [
+    9.841707
+   ],
+   "ref": "[7.0, 10.5]",
+   "tol": null,
+   "pass": true
+  },
+  {
+   "id": "W94",
+   "name": "s25 columns without a WMO tropopause (nearest-filled) < 1 %",
+   "value": [
+    0.0
+   ],
+   "ref": "[0, 0.01]",
+   "tol": null,
    "pass": true
   }
  ],
@@ -8604,6 +8716,258 @@
     "p": 101300.0
    },
    "sha256": "98a7f87baf930b38ee141a8fe478e96b08fb2a3765ccb20c3f3846935782acd5"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.lapse_rate_tropopause",
+   "scene": "s25",
+   "data": "data/trop_surface.json",
+   "eq": "WMO tropopause of the Nov-2023 monthly-mean column at 49N 2E",
+   "params": {
+    "T": [
+     282.4896545410156,
+     281.2068786621094,
+     279.87237548828125,
+     278.47802734375,
+     277.2475280761719,
+     276.0354919433594,
+     274.7733154296875,
+     273.60638427734375,
+     272.41888427734375,
+     271.18841552734375,
+     269.90460205078125,
+     267.1599426269531,
+     263.95196533203125,
+     260.320556640625,
+     256.31402587890625,
+     251.8407745361328,
+     246.67745971679688,
+     240.87966918945312,
+     234.46995544433594,
+     227.41659545898438,
+     221.18197631835938,
+     219.0637664794922,
+     217.5158233642578,
+     216.74258422851562,
+     216.48007202148438,
+     215.9387969970703,
+     215.1056671142578,
+     214.5438232421875,
+     213.73590087890625,
+     213.1451873779297,
+     212.3529815673828,
+     212.89877319335938,
+     214.75572204589844,
+     217.83880615234375,
+     225.99879455566406,
+     234.28538513183594,
+     247.25650024414062
+    ],
+    "z": [
+     69.2622321332973,
+     278.6583175542872,
+     492.70267576720903,
+     711.3429268181541,
+     934.8575010324627,
+     1163.6009589156338,
+     1397.8612408416739,
+     1637.9896709120853,
+     1884.3957289186421,
+     2137.4482653352575,
+     2397.5312670483804,
+     2940.5504651180577,
+     3517.2509693677252,
+     4131.945064063671,
+     4790.310895540271,
+     5499.511173540404,
+     6268.578353081838,
+     7109.2144743617855,
+     8038.320935283711,
+     9080.22234912024,
+     10275.83323561053,
+     10954.346030499713,
+     11706.7691311508,
+     12555.224006159087,
+     13532.481785319147,
+     14686.660327430876,
+     16094.085391035676,
+     18336.97032115962,
+     20446.469997399723,
+     23638.366567584242,
+     26163.50894546048,
+     30471.8864240082,
+     32703.433384489097,
+     34832.37140103909,
+     38145.44849668338,
+     40876.223022132945,
+     45772.83654458964
+    ],
+    "p": [
+     100000.0,
+     97500.0,
+     95000.0,
+     92500.0,
+     90000.0,
+     87500.0,
+     85000.0,
+     82500.0,
+     80000.0,
+     77500.0,
+     75000.0,
+     70000.0,
+     65000.0,
+     60000.0,
+     55000.0,
+     50000.0,
+     45000.0,
+     40000.0,
+     35000.0,
+     30000.0,
+     25000.0,
+     22500.0,
+     20000.0,
+     17500.0,
+     15000.0,
+     12500.0,
+     10000.0,
+     7000.0,
+     5000.0,
+     3000.0,
+     2000.0,
+     1000.0,
+     700.0,
+     500.0,
+     300.0,
+     200.0,
+     100.0
+    ]
+   },
+   "sha256": "539009e41dc40b31a104a3323579e621da44c843e81fc96650a6acbbcd630f84"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.lapse_rate_tropopause",
+   "scene": "s25",
+   "data": "data/trop_surface.json",
+   "eq": "WMO tropopause of the Nov-2023 monthly-mean column at 1N 104E",
+   "params": {
+    "T": [
+     300.2503967285156,
+     298.2791442871094,
+     297.05206298828125,
+     295.94384765625,
+     294.6195983886719,
+     293.2063903808594,
+     291.7918701171875,
+     290.38079833984375,
+     288.96087646484375,
+     287.52142333984375,
+     286.07550048828125,
+     283.1335754394531,
+     279.87091064453125,
+     276.059814453125,
+     272.57183837890625,
+     268.47454833984375,
+     263.9049987792969,
+     258.5808410644531,
+     252.05686950683594,
+     243.84921264648438,
+     233.81088256835938,
+     227.9641571044922,
+     221.3712921142578,
+     214.05996704101562,
+     206.30966186523438,
+     198.7610626220703,
+     193.9884796142578,
+     197.1082763671875,
+     203.40875244140625,
+     213.2711639404297,
+     220.7689971923828,
+     236.10678100585938,
+     240.39439392089844,
+     245.04779052734375,
+     254.36207580566406,
+     259.698486328125,
+     260.6539611816406
+    ],
+    "z": [
+     89.08296602305579,
+     313.3286687955367,
+     542.1206727386518,
+     775.9292024576436,
+     1014.9052237512301,
+     1259.3140719562746,
+     1509.456433899446,
+     1765.721873040233,
+     2028.4816298124233,
+     2298.1427940479166,
+     2575.1403384438113,
+     3153.174041976618,
+     3766.877498304722,
+     4420.792427842332,
+     5121.795143474072,
+     5878.692647336246,
+     6701.447487164322,
+     7603.572894413485,
+     8602.65738045102,
+     9722.21018390582,
+     10997.180484671117,
+     11709.241942967274,
+     12483.843871250632,
+     13334.644093548766,
+     14282.788974828307,
+     15362.630205013946,
+     16642.38679875391,
+     18679.95186939475,
+     20651.38197039764,
+     23762.669973946253,
+     26337.370559773215,
+     30966.958645408984,
+     33456.085921288104,
+     35845.05157214747,
+     39576.824144840495,
+     42631.256596289255,
+     47929.33239179537
+    ],
+    "p": [
+     100000.0,
+     97500.0,
+     95000.0,
+     92500.0,
+     90000.0,
+     87500.0,
+     85000.0,
+     82500.0,
+     80000.0,
+     77500.0,
+     75000.0,
+     70000.0,
+     65000.0,
+     60000.0,
+     55000.0,
+     50000.0,
+     45000.0,
+     40000.0,
+     35000.0,
+     30000.0,
+     25000.0,
+     22500.0,
+     20000.0,
+     17500.0,
+     15000.0,
+     12500.0,
+     10000.0,
+     7000.0,
+     5000.0,
+     3000.0,
+     2000.0,
+     1000.0,
+     700.0,
+     500.0,
+     300.0,
+     200.0,
+     100.0
+    ]
+   },
+   "sha256": "579be9abb59576d7f403d8e03bcd80cf510516e3a4c662d1ceed3fc4c2a436ee"
   }
  ],
  "physics_heavy": [

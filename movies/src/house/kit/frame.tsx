@@ -37,8 +37,9 @@ export const GlobeFrame: React.FC<{ id: string; zoom: number; right?: number; di
   const z = Math.max(0, Math.min(1, zoom)) * o, R = Math.max(0, Math.min(1, right)) * o;
   const { edge, right: P, sharp: S } = FRAME;
   const B = bottomAt === undefined ? FRAME.bottom : { y0: bottomAt - 70, y1: bottomAt };
-  const mask = z >= 0.5 ? { name, k: "rect", r: [S.x0, S.y0, R >= 0.5 ? S.x1Right : S.x1, B.y0 + 0.4 * (B.y1 - B.y0)] }
-    : disc && o > 0.2 ? { name, k: "circle", c: disc.c, r: disc.r } : null;
+  // UF2 fix 1 (K6 tuning): a picture fading below half opacity is no longer "sharp" (no mask while it cross-fades away)
+  const mask = o < 0.5 ? null : z >= 0.5 ? { name, k: "rect", r: [S.x0, S.y0, R >= 0.5 ? S.x1Right : S.x1, B.y0 + 0.4 * (B.y1 - B.y0)] }
+    : disc ? { name, k: "circle", c: disc.c, r: disc.r } : null;
   return (
     <Svg>
       <defs>
@@ -48,7 +49,10 @@ export const GlobeFrame: React.FC<{ id: string; zoom: number; right?: number; di
         <linearGradient id={`${id}r`} x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor={C.bg} stopOpacity={0} /><stop offset="0.55" stopColor={C.bg} stopOpacity={1} /></linearGradient>
         <linearGradient id={`${id}k`} x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor={C.bg} stopOpacity={0} /><stop offset="1" stopColor={C.bg} stopOpacity={P.a} /></linearGradient>
       </defs>
-      {R > 0 ? <g opacity={R}><rect x={P.x0} y={0} width={P.x1 - P.x0} height={1080} fill={`url(#${id}k)`} />
+      {/* UF2 fix 1 (weather review M4 / S18 / S14): the 980-1160 ramp as 30 stepped bands (6 px each, smoothstep alpha) — the url(#…k)
+          gradient fill did not paint in the headless renders (only the flat part showed: a hard vertical edge at x 1160) */}
+      {R > 0 ? <g opacity={R}>{Array.from({ length: 30 }, (_, i) => { const t = (i + 0.5) / 30, a = P.a * t * t * (3 - 2 * t);
+        return <rect key={i} x={P.x0 + (i * (P.x1 - P.x0)) / 30} y={0} width={(P.x1 - P.x0) / 30} height={1080} fill={C.bg} fillOpacity={a} shapeRendering="crispEdges" />; })}
         <rect x={P.x1} y={0} width={1920 - P.x1} height={1080} fill={C.bg} fillOpacity={P.a} /></g> : null}
       {z > 0 ? <g opacity={z}>
         <rect x={0} y={B.y0} width={1920} height={B.y1 - B.y0} fill={`url(#${id}b)`} />

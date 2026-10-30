@@ -200,3 +200,46 @@ def test_sound_toolkit_basics():
     assert "maths-calm" in styles.STYLES and len(styles.STYLES) >= 8
     x = np.stack([np.sin(2 * np.pi * 1000 * np.arange(SR * 4) / SR)] * 2, axis=1) * 0.1
     assert integrated_lufs(x) == pytest.approx(-20.0, abs=0.2)   # EBU Tech 3341: stereo 1 kHz sine at −20 dBFS = −20 LUFS
+
+
+def test_k6_overlap_tuned_rules():
+    """tools/k6_overlap.py (UF2 fix 1 tuning): owner / end-label exemptions are INFO, a stroke must cross the middle 60 % of the
+    glyph band, stack poly masks and colour-bar clearance fail, links may not cross axes, the cross-fade frames are sampled."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import k6_overlap as K
+
+    txt = {"t": "pressure = weight above", "o": 1, "r": [[1100, 200, 1500, 240]]}
+    rod = lambda x, w=6, own=None: {"k": "stroke", "c": "#e8833a", "w": w, "o": 1, "pts": [[x, 100], [x, 400]], "closed": False, "g": f"g{x}", "tag": "rod3d", **({"own": own} if own else {})}  # noqa: E731
+    # a rod right through the text: FAIL
+    f, i = K.check_frame({"boxes": [txt], "shapes": [rod(1300)], "masks": []})
+    assert [h["kind"] for h in f] == ["text-shape:text-arrow3d"] and not i
+    # the same rod owned by the label: INFO, not FAIL
+    f, i = K.check_frame({"boxes": [dict(txt, own="w1")], "shapes": [rod(1300, own="w1")], "masks": []})
+    assert not f and len(i) == 1 and "own" in i[0]["why"]
+    # a stroke that only clips the top of the glyph box (outside the middle 60 %): ignored
+    clip = {"k": "stroke", "c": "#e8833a", "w": 4, "o": 1, "pts": [[1000, 203], [1600, 203]], "closed": False, "g": "h", "tag": "line"}
+    assert K.check_frame({"boxes": [txt], "shapes": [clip], "masks": []}) == ([], [])
+    # a gold link leaving its own label (never across the glyph band) is no hit; crossing an axis away from its ends: FAIL (link-axis)
+    link = {"k": "link", "c": "#d8b23a", "w": 5, "o": 1, "pts": [[1110, 220], [800, 600]], "closed": False, "g": "L", "tag": "path"}
+    axis = {"k": "axis", "c": "#9aa6bd", "w": 3, "o": 1, "pts": [[700, 400], [1050, 400]], "closed": False, "g": "A", "tag": "line"}
+    f, i = K.check_frame({"boxes": [txt], "shapes": [link, axis], "masks": []})
+    assert [h["kind"] for h in f] == ["link-axis"] and not i
+    # text inside a stack poly mask fails; a spot label (height) does not; a colour bar on the stack fails
+    poly = {"name": "stack", "k": "poly", "o": 1, "pts": [[100, 100], [1000, 100], [1000, 800], [100, 800]]}
+    cbar = {"name": "cbar", "k": "cbar", "o": 1, "src": [700, 600, 1200, 700]}
+    f, _ = K.check_frame({"boxes": [{"t": "half the vapour", "o": 1, "r": [[300, 300, 600, 340]]}, {"t": "1.5 km", "o": 1, "r": [[300, 400, 420, 440]]}],
+                          "shapes": [], "masks": [poly, cbar]})
+    assert sorted(h["kind"] for h in f) == ["cbar-picture", "text-picture"]
+    # text 8 px above another colour bar fails (clearance 12 px); its own title inside the box does not
+    f, _ = K.check_frame({"boxes": [{"t": "where data are sparse", "o": 1, "r": [[1100, 552, 1500, 592]]}, {"t": "2-m temperature", "o": 1, "r": [[1120, 610, 1400, 640]], "own": "cbar:cbar"}],
+                          "shapes": [], "masks": [cbar]})
+    assert [h["kind"] for h in f] == ["text-cbar"]
+    # two labels 2 px apart vertically ("touching") fail as text-text
+    f, _ = K.check_frame({"boxes": [{"t": "height (km)", "o": 1, "r": [[214, 33, 488, 77]]}, {"t": "137 hPa · 14 %", "o": 1, "r": [[316, 79, 686, 124]]}], "shapes": [], "masks": []})
+    assert [h["kind"] for h in f] == ["text-text"]
+    # the frame list samples every scene boundary at −5, 0, +5
+    tm = ROOT / "movies/ch00/ch00_weather_basics/timing.json"
+    if tm.exists():
+        fr = set(K.k6_frames(tm))
+        b = round(json.loads(tm.read_text(encoding="utf-8"))["scenes"][5]["start"] * 30)
+        assert {b - 5, b, b + 5} <= fr
