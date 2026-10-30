@@ -12,7 +12,7 @@
 - Standing rules live in `movies/HOUSE_STYLE.md` (especially §5b, globes and layer stacks) and memories `ch00-movie-series-loop`, `follow-my-recommendations`, `globe-framing-and-layer-stacks`.
 - **User, 2026-10-29: when the priority movie is finalized, resume the paused work automatically. After every finalized movie, start the next queued task without waiting.**
 
-## Finished (final, on C: and on Drive — see outputs/drive_links.md; user copies in outputs/viewing_2026-10-29/)
+## Finished (final, on C: and on Drive — see outputs/drive_links.md; user copies now on G: at archive/movies/viewing_2026-10-29/viewing_2026-10-29/ (moved off C: 2026-10-29 21:05 under the low-space rule; new viewing copies go there too))
 | # | Movie | Length | Note |
 |---|---|---|---|
 | 0.1 | Dot product v6 | 17:40 | |
