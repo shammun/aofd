@@ -213,9 +213,10 @@ all chapter movies of that kind) says, and writes on the end card, who the serie
   pulses along each arrow, or particles drifting along the flow at a speed scaled to the wind (scale stated). Arrows
   keep their direction and length from the data. The motion is not a time change in the wind unless the data are a
   time series.
-- **Layer stacks** (`captests/X3_stacked_levels/threejs_layer_stack/X3Stack.mp4`, with many more than 3 layers): use them
-  wherever a variable changes with height and the stack adds understanding. The camera flies round, through, inside and
-  below the stack. Never reuse the same stack, data and place across movies; skip a stack where it adds nothing.
+- **Layer stacks** (`captests/X3_stacked_levels/threejs_layer_stack/X3Stack.mp4`; about 5 clear layers unless more add
+  insight): use them wherever a variable changes with height and the stack adds understanding. The camera hovers and
+  orbits round the stack from outside, at a side angle, bottom to top. It never flies through the layers (see the rule
+  above: one short close look of ≤ 5–6 s only). Never reuse the same stack, data and place across movies; skip a stack where it adds nothing.
 - Details and the weather items: `reports/ch00_weather_basics_user_feedback_round2.md`.
 
 ## 6. How things are explained and animated (the teaching moves the user liked)

@@ -5432,3 +5432,257 @@ None.
 - The user watches both before `/approve-movie`. R3-S1 can be folded into any later re-render; it does not block.
 
 Disk: at the start, C: 53 GB free and G: 506 GB free; at the end, C: 52 GB free and G: 506 GB free. Review frames: 122 MB (291 PNG + 54 tiles) on G:, not committed.
+
+
+---
+
+## ch00_weather_basics UF2 — review 1 (2026-10-30, build 1, commit a45b9e1)
+
+**Movie:** `movies/out/ch00/ch00_weather_basics/1080.mp4`: 57:45.3, 156.40 MB, 1920×1080, 30 fps, 74 scenes, 868 cues.
+**How I looked:** I extracted about 330 frames with ffmpeg into `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review_uf2_1/` and read them as tiled 640-px sheets (`sheet_*.png`), plus 960-px and full-size frames for close checks.
+- One frame at the end of every sentence (minus 0.4 s) for s18–s22, s03, s05, s19–s20b, s25, s27–s27c, s31, s36, s38–s39, s48b and s53.
+- Every 3 s through both stacks (31:09–31:48 and 40:43–41:30).
+- Every K6 text-text, edge and text-picture hit.
+- Mid frames for s41–s61.
+- I checked the s51 beam code against v4 fix 1 (`git show 3fc711b`).
+
+I also folded in the user's round-3 items U3-01…U3-07 (`reports/ch00_weather_basics_user_feedback_round3.md`), including the new §5b stack rule.
+**Disk:** C: 50 GB free and G: 509 GB free at the start; C: 50 GB and G: 509 GB at the end. I wrote only frames, about 0.1 GB, to G:.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics UF2 b1 | 57:45 | 156.4 MB | 13/14 (overlap FAIL) | PASS (all numbers check by hand) | PASS (53 present, no KaTeX error) | FIX | FIX (stacks unreadable, U3-05 late) | PASS (gate) | PASS | n/a (retired) | **FIX** |
+
+**Verdict: FIX. 31 Must and 22 Should.**
+- The scale-height rebuild (U2-09…15) now *reads* right. The words are clear and in the right order: define → 8.43 km → curve → 37 % → tangent → not a lid → block → Δz/H. A lost learner can follow them.
+- The pictures still need work. About a dozen labels collide in that section, and the s22 "a bit lower" comparison is invisible.
+- Both stacks fly inside the layers for 10–15 s and nothing can be read there (U3-03/04/07).
+- s25 and s39 need the U3-01/U3-05 rebuilds, and s51 needs the beam-end fix (U3-06).
+
+### Physics and numbers (by hand)
+| item | check | result |
+|---|---|---|
+| H = RT/g | 287 × 288.15 / 9.81 = 8430.1 m | PASS "8.43 km" |
+| 37 %, 14 % | e⁻¹ = 0.368 → 1013 × 0.368 = 372.8 hPa; e⁻² = 0.135 → 137.1 hPa; 2H = 16.86 km | PASS (373, 137, "sixteen point nine") |
+| 12 Pa/m | 101 325 / 8430 = 12.02; ρ₀g = 1.225 × 9.81 = 12.02 | PASS |
+| uniform block | 101 325 / 12.017 = 8431.6 m; p₀/ρ₀g = RT/g with ρ₀ = p₀/RT = 1.2252 | PASS |
+| 12 % vs 11 % | 1/8.43 = 0.1186; e^(−1/8.43) = 0.8881 → 0.112; 1013 → 899.6 → 798.9 hPa; drops 113.4 and 100.7 | PASS |
+| −10 °C / 30 °C | 7.70 km / 8.87 km | PASS |
+| halving | 8.43 ln 2 = 5.84 km, 11.69 km → 507 and 253 hPa | PASS |
+| 5.5 km measured vs 5.8 km estimate | IGRA Trappes 5.452 km (W83) < 5.846 km; reason "colder aloft" is right | PASS (picture fails, M18) |
+| tropopause | Europe 10.15 km, −52 °C → "about ten, about minus fifty"; tropics 16.61 km, −76.7 °C → "about sixteen and a half, below minus seventy-five" | PASS |
+| vapour below 1.5 km | 0.450 (W85). "About half" is inside W85's 0.40–0.60 but **below the orchestrator's 0.46–0.50** | Should: say "almost half" (in M2) |
+| front step-back | W86 fit 109.8 km between 1.5 and 4 km, slope 1:43.9 → "about a hundred kilometres" | PASS |
+| 287 of 365 | W91 287 (recount 288), share 0.786 vs 0.804 base → "close to the usual eight in ten" | PASS |
+| s51 cos 60° | 1/cos 60° = 2 (W47); the frame measures 2.1 beam widths | PASS (drawing fails, M8) |
+| hemisphere words | s44 says "as seen from above" and "in the southern hemisphere both are reversed" | PASS |
+
+Two CHECK groups are marked "tests pending at build time" in the manifest: W85 (s27c) and W86 (s48b). The verifier should close them in the fix loop.
+
+### U2 items (new timestamps)
+| ID | where now | state | note |
+|---|---|---|---|
+| U2-01 | s01 0:13–0:23 | partly | The globe zooms, but this is not the K1 zoom-reveal: the globe stays in the left half, its top is cut flat at the frame (0:20), and a faint 82 % panel rectangle shows behind the keywords at 0:16 (S13) |
+| U2-02 | s02 0:32–0:48 | done | "how pictures draw it" halo → "true thickness"; no ×40 circle |
+| U2-03 | s01–s03 | done | the source line is under every globe |
+| U2-04 | s03 2:22–2:36 | done | no trail |
+| U2-05 | s03 2:22–2:36 | partly | Molecule dots are in the box, but the parcel is about 50 px and the dots cannot be seen at 640 px (S11) |
+| U2-06 | s03 | partly | K7 dash arrows are there but tiny (about 20 px) and faint (S11) |
+| U2-07 | s05 3:14+, s13–s15, s18, s20f, s22, s60 | done | the rods reach the top of the frame |
+| U2-08 | s15 10:00–10:44 | done | The equation fits, but its link crosses a label (M24) |
+| U2-09 | s20e 16:42–18:06 | done (words) / partly (picture) | Tangent, slope and "falls more slowly" are clear; label problems in M12, M13 and S4 |
+| U2-10 | s20f 18:07–19:03 | done | "No, it isn't… a scale, not a lid"; M14, S5 and S6 |
+| U2-11 | s18b 12:52–13:50 | done (words) | The "colder higher up" picture is a stray line (M9) |
+| U2-12 | s20 15:49–16:41 | done | 37 % and 14 % are read off the curve; M11 and S3 |
+| U2-13 | s20g 19:04–20:54 | done | A clear thought experiment, never "squash"; M31 and S7 |
+| U2-14 | s20b 20:55–22:42 | done | Δz/H as a pure number, 12 % vs 11 % explained; M15, M16, S8 and S9 |
+| U2-15 | whole section | done | s20c is dropped; every "curve" is now "the slate curve" and points at it |
+| U2-16 | s21 23:38–24:37 | partly | The credit is below the plate, but its second line enters the caption band (M22) and the links cross the graph (M21) |
+| U2-17 | s21 S4 23:54 | done | |
+| U2-18 | s22 25:03–25:40 | partly | The words and labels are spelled out ("our estimate: 5.8 km", "the measured height: a bit lower"). The two marks are about 2 px apart, so the comparison cannot be seen (M18) |
+| U2-19 | s27b 30:45–31:07 | done | zoomed globe, credit below, colour bar beside |
+| U2-20 | s27b 30:10–30:45 | done | the slot layout is clean |
+| U2-21 | s31 34:05–34:50 | partly | The Sentinel-2 ground is real. The thermals are small and gone by S3; the "gold" plane renders dark grey (S15) |
+| U2-22 | s47 47:10 | done | kept |
+| U2-23 | s27c, s38b, s48b | partly | The three stacks exist, but the camera flies inside them (M3–M6) |
+| U2-24 | s60 56:17–56:25 | done | the same 3-D column, edges to the top |
+| U2-25 | s36 38:08–38:53 | done | band = climate, line = weather, each linked; 287/365 |
+| U2-26 | s36 38:55–39:02 | done | the saying sits below the figure in bold gold, clear of everything |
+| U2-27 | s53 52:16–53:03 | done | streaks, belt circles, chevrons, hovers; S14 |
+| U2-28 | s53 52:37–52:51 | done | North Atlantic and Southern Ocean each get their own flight |
+| U2-29 | s27, s27b, s38, s39, s52 | done | colour bars sit beside the globes; s25 is crowded (M1) |
+
+### §5b globe table
+| scene | unzoomed | zoomed / flight | edges invisible | text only on faded rim | colour bar off globe | source below | zooms back out | verdict |
+|---|---|---|---|---|---|---|---|---|
+| s00 0:00–0:11 | small globe → MODIS map | — | yes | readouts below the image | n/a | yes (3 tiny lines) | n/a | PASS |
+| s01 0:11–0:23 | whole, left | dist 3.8→2.5 | top cut flat at 0:20; panel rectangle visible at 0:16 | yes | n/a | yes | ends zoomed (s02 cuts to whole) | Should S13 |
+| s02 0:23–1:36 | whole | wedge, no zoom | yes | keywords in the maths zone | n/a | yes | n/a | PASS |
+| s03 1:36–2:37 | whole | flight → Brittany | soft fades | the composition bar's left end (x≈1080) touches sharp cloud at 2:21 | n/a | yes (2 lines) | no zoom-out (terrain to s04) | Should S11 |
+| s21 23:38–24:37 | plate | plate | the top edge is hard (24:17+) | readouts outside, but the links cross the graph | n/a | yes, 2nd line at y≈885 | n/a | FIX M21, M22 |
+| s22 S10 25:56 | whole | — | **cut at top and bottom** | yes | n/a | yes | n/a | FIX M20 |
+| s25 27:15–27:46 | globe + shell | to Singapore, pole | **top cut** | "≈ 16 km", "≈ 8 km" readouts **on the sharp globe** | below, crowded by the 3-line credit | touching | — | FIX M1 (U3-01) |
+| s27 29:07–29:41 | whole | spin | yes | yes | beside | 8 px gap | n/a | Should S20 |
+| s27b 29:42–31:07 | whole → zoom tropics | yes | soft | callout beside, linked | beside | yes | to the s27c stack | PASS |
+| s38 39:34–40:35 | whole | rotation | yes | "unlike: least certain…" touches the colour-bar title | beside | yes | n/a | FIX M28 |
+| s38b 40:35–41:34 | globe → shells | flight, **inside** | hard vertical darkening edge at 40:47 | callouts beside | visible | yes | — | FIX M4 |
+| s39 41:35–42:14 | whole | no zoom; close-up inset | yes | **"Tibet < 600 hPa" on the sharp globe** | beside | yes | — | FIX M7 (U3-05) |
+| s41, s42 43:13–44:37 | whole | — | yes | yes | beside | yes | n/a | PASS |
+| s45 45:53 | whole | — | yes | yes | beside | yes | n/a | PASS |
+| s51 50:54–51:39 | whole | — | yes | **"1 m" on the globe; "2 m" touches the limb** | beside | yes | n/a | FIX M8 (U3-06) |
+| s52 51:40–52:16 | whole | — | yes | yes | beside | yes | n/a | PASS |
+| s53 52:16–53:03 | whole → hovers | 4 flights | soft top, left and bottom; the right limb is sharp, with no darkened panel | "Southern Ocean: strongest" starts on the limb (x≈1120) | n/a | yes | yes (S8) | Should S14 |
+| s54 53:04–53:40 | globe → satellite | yes | soft | yes | n/a | 2nd line at y≈885 | — | FIX M22 |
+| s60 56:08 | minis | — | yes | yes | n/a | yes | n/a | PASS |
+
+### K6 overlap triage (1947 hits in 982 frames)
+| kind | hits | real | false positive | notes |
+|---|---|---|---|---|
+| text-text | 14 | **14** | 0 | 21:22.6 and 21:26.9 (s20b "m/m" on Δz/H, M15); 47:07.5 and 47:09.1 (s46 keyword cross-fade, M25); 48:17.1 ×2 (s47→s48 label cross-fade, M26); 55:37–55:46 ×8 (s58, M27) |
+| text-picture | 6 | **6** | 0 | 41:54 and 41:58 "Tibet < 600 hPa" on the globe (M7); 51:13–51:25 ×4 "1 m" on the globe (M8) |
+| edge | 48 | 47 | 1 | s21, s31, s54, s55: the two-line credits end at y≈885 > 880 (M22). 31:30.4 "0" at x −512 is an off-screen stack axis label: harmless, but the s27c axis is cut at the left (31:18) |
+| text-img | 4 | 0 | 4 | s00 "Brest", "997/968 hPa" 5 px into the image box; nothing visible |
+| text-link | 55 | ≈ 30 | ≈ 25 | Real: s15 link across "weight of each m³" (M24); s20f (M14); s21 (M21); s22 (M19); s31 (M23). False: a link's own end labels ("ρ₀g ≈ 12 Pa/m", "Brittany") |
+| text-stroke | 279 | ≈ 60 | ≈ 220 | Real: s20e "H = 8.43 km" and "37 %" on the slate curve (M13); s20b "1013 → 900 hPa" on the curve (M16); s20f "× 0.37" on the dashed line (M14). False: s47/s48 slope-triangle labels on their own lines; H/L on their circles; Brest on its marker; axis titles beside axes |
+| text-fill | 211 | few | most | False: Brest and L on their own marker polygons; slab labels on their own arrow heads |
+| text-arrow3d | 1330 | ≈ 15 | ≈ 1315 | Almost all are axis ticks ("km 30", "0/4/8/12") and edge labels ("1 m", "Δz", "weight") beside their own rods; outlined and readable at 640 px. Real: s05 3:21+ "top of the atmosphere: no sharp edge" and s14 9:30 "push = pressure × area" are crossed by column rods (S18) |
+
+**What K6 missed (all found in frames):**
+- 13:49 s18b "what does it mean?" on the gold underline (M10).
+- 16:40 s20 "137 hPa · 14 %" on the axis title (M11).
+- 25:25 s22 "half the air below" on "≈ 0.50" (M17).
+- 31:44–31:48 s27c keywords and colour bar on the stack picture (M3).
+- 49:30–49:36 s48b keyword and colour bar on the stack (M5).
+- 40:34 s38 keyword on the colour-bar title (M28).
+- 19:47–19:59 s20g inset frame against the block (M31).
+- Links crossing graph axes and ticks (M21, M23).
+
+**How to tune K6:**
+1. **Ownership exemption.** Every label carries `owner` = the id of its rod, marker, curve or link. Hits between a label and its own owner are dropped, and links are exempt within 30 px of their own end labels.
+2. **Glyph band, not bbox.** A stroke or rod counts only if it crosses the middle 60 % of the text height. It also has to cover at least 25 % of the text width, or at least 3 px at opacity > 0.5. Thin rods (≤ 3 px) that only clip a corner are ignored.
+3. **Missing masks and boxes.** KaTeX boxes, Strike/underline lines, axis tick labels and titles join the text set. K5 must publish its projected stack mask, and the colour-bar box goes into the text set, so text or a colour bar on a stack is caught.
+4. **Cross-fades.** Sample every scene boundary at −5, 0 and +5 frames, and every slot change, not only every 0.5 s.
+5. **Edge.** Keep it strict (y ≤ 880). It found a real overrun.
+6. **Severity.** Real hits after steps 1–2 FAIL. Hits that only an owner exemption would have removed are logged as INFO, so the 1330 rod hits stop drowning the 30 real ones.
+
+### Must (31): each with timestamp and exact fix
+**User round 3 (U3-01…07) and stacks**
+- **M1 (U3-01) s25_tropics 27:15–27:46.** Replace the globe-with-shell and circles with a **tropopause stack over a flat map**.
+  - Picture zone (x 560–1840 after the chart): a tilted equirectangular plate, 10°S–80°N × 30°W–120°E (Blue Marble NG), covering Trappes and Singapore. Above it, one semi-opaque **tropopause-height surface** z_trop(lat, lon) from the same ERA5 Nov-2023 monthly-mean temperature (WMO lapse-rate tropopause via the W84 routine). Heights ×N, listed in the manifest. The surface is coloured by height, with its colour bar ("tropopause height, km") in the text column.
+  - Two vertical rods, at Trappes and Singapore, run from the plate to the surface. Callouts beside the picture: "Paris ≈ 11 km" and "Singapore ≈ 16 km, below −75 °C", each with a gold link to its rod top.
+  - Camera: outside, side angle el 20°, slow orbit az −20° → +10°, rising bottom to top. It never enters the surface.
+  - Keep the left sounding chart. Give one K2 credit under each picture, with no credit touching a colour bar.
+  - Must differ from s38b (temperature shells), as §5b requires: this is a height surface, a different variable.
+- **M2 (U3-02) s27c_vapour_stack 31:08–31:48.** Use 5 layers: 1000, 850, 700, 500 and 300 hPa. Label each layer with its height (≈ 0.1, 1.5, 3.2, 5.8, 9.7 km from W85 z̄) at the layer's left edge, outlined, off the layer face.
+  - Narration S2: "…look at it at **five** heights at once, from the sea surface up to about ten kilometres".
+  - S4: "**almost** half" (W85 = 0.450 is under the orchestrator's 0.46–0.50). Keep the half-column fraction computed on all levels.
+  - Re-run TTS for S2 and S4, and update W85 "10 layers" to 5.
+- **M3 (U3-03, U3-07) s27c camera 31:18–31:48.**
+  - Keep 31:09–31:18 (the map tilts and lifts).
+  - **Cut 31:20–31:31** (the camera is inside the layers; nothing readable at 31:27 and 31:30) and **31:43–31:48** (a fly-through, with "half the vapour…", "colder air holds less" and the colour bar drawn on the stack picture).
+  - Replacement:
+    1. S2–S3, 31:11–31:31: outside hover, az −30° → +10°, el 15° → 30° (bottom to top). Each callout links to its layer on its words: "≈ 20 g/kg near the sea" → 1000 hPa, "3 km: a few g/kg" → 700 hPa, "10 km: almost none" → 300 hPa.
+    2. S4, 31:31–31:37: an optional close look of ≤ 5 s from the side, slightly upward. The sea surface and the 850-hPa layer are both visible. The callout "lowest 1.5 km: almost half the vapour" goes beside the picture, linked to a gold bracket.
+    3. S5, 31:38–31:48: back outside, a slow hover.
+  - Text and colour bar stay in the text column. "colder air holds less" goes on its own row, at least 24 px above the colour-bar title.
+- **M4 (U3-04, U3-07) s38b_reanalysis_stack 40:36–41:34.**
+  - Keep 40:36–40:57 as is (the user likes 40:43–40:53). Make the right-side darkening at 40:47 a gradient over x 980–1160 instead of a hard vertical edge.
+  - **Cut 40:58–41:10** (inside the shells, 40:59 and 41:02; an unreadable orange slab with gold brackets, 41:05 and 41:08). Replace it with an outside side view from the east, el 15° → 25°, revealing the layers bottom to top through S3. On S4, 41:03.5 "Over Europe", outline the tropopause layer over Europe (≈ 10 km) in gold and link it to the callout.
+  - **Trim the close look 41:11–41:20 to ≤ 6 s** (keep about 41:12–41:18, the frame the user accepted at 41:18): ground and levels visible, looking up. Outline the 16.5-km tropical tropopause in gold.
+  - 41:18–41:22: out again.
+  - **Cut 41:25–41:34** (top-down haze). For S6–S7, use an outside oblique view (as at 41:23) with the balloon as one vertical gold column through all the shells.
+  - Keep the colour bar visible throughout.
+- **M5 (U3-07) s48b_front_stack 49:30–49:36 (S3).** The camera is edge-on, between the layers. "gold: the cold front on each layer" and the colour bar are drawn **on the stack picture** (49:35.8).
+  - Replace with an outside oblique view from the south-east, el 25°, rising.
+  - Keep the keyword and colour bar in the text column, off the picture.
+  - S4 49:36–49:47: label the lowest and highest gold lines "1.5 km" and "4 km" (outlined, beside the lines) so the step-back can be read.
+- **M6 (U3-07, kit).** `movies/src/house/kit/stack3d.tsx` lines 106–107: remove or disable `stackCam.flyThrough` (throw if it is called). It is used at `movies/src/ch00_weather_basics/WeatherBasics.tsx` line 2330 (s27c); replace that call with the outside hover of M3.
+  - Restrict `inside` and `below` to the ≤ 5–6-s side close look.
+  - Orchestrator: `movies/HOUSE_STYLE.md` §5b line 217 still says "The camera flies round, through, inside and below the stack". This contradicts line 204; rewrite it to the round-3 rule.
+- **M7 (U3-05) s39_surface_pressure 41:49.5–42:14.**
+  - Keep the camera on Tibet until AT(4, "and the Andes") − 25 frames. Then hop to {lat 5, lon −80, dist 3.8}, arriving within 1 s of "Andes" (≈ 41:56).
+  - Outlined place labels: "Andes" on its word, "Rockies" on its word.
+  - Hold until S4 ends (41:58.7), then fly straight back to {lat 32, lon 88} by 42:00.5, before S5 "In the close-up" shows the Tibet image.
+  - Move "Tibet < 600 hPa" off the globe into a K3 callout in the text column, with a gold link to the ring. This clears the K6 text-picture hits at 41:54 and 41:58.
+- **M8 (U3-06) s51_heating 51:11–51:25.** Measured on the 51:25 frame:
+  - What is right: the globe has its centre at (540, 449) and R ≈ 353 px. Both beams are about 39 px wide, horizontal and from the left. The 60°N beam centre (y 142) hits the limb at (363, 143) = latitude 60°. The orange footprint runs (327, 163)–(398, 122): 82 px ≈ 2.1 widths, at 30° to the horizontal, which is the tangent at 60°N.
+  - **The bug:** the beam `rect` ends with a **vertical cut at x = p.x** (`WeatherBasics.tsx` S51 `beam()`). Its upper half stops up to 35 px short of the footprint, and its lower half runs over the globe, so the 2 m is not covered.
+  - The code is **identical in v4 fix 1** (3fc711b `movies/src/ch00_weather_basics/WeatherBasics.tsx`), so v4 had the same flaw.
+  - Fix: draw the beam as a polygon whose right end *is* the footprint:
+    ```
+    yt = p.y - w/2, yb = p.y + w/2, d = (w/2)·tan(lat)
+    points = [GBOX.x,yt] [p.x+d,yt] [p.x-d,yb] [GBOX.x,yb]
+    ```
+    For lat = 0 this is the rect; for 60° the footprint is 2w = 80 px and fully covered.
+  - Labels:
+    - A "1 m" width label at the left end of **each** beam, above it: (90, p.y − 34), off the beam and the globe.
+    - "2 m" at about (250, 92), clear of the limb (no globe above y 96 there), with a gold pointer to the footprint midpoint.
+    - Delete the label at `p + n·(−60)`, which sits on South America and touches the limb.
+
+**Scale-height section (13:00–26:00)**
+- **M9 s18b 12:59–13:17.** The "real air: colder higher up" picture is one unlabelled slate line. It slants from −56 °C at the top to *below* the column base (y ≈ 865) and crosses the "1 m" label.
+  - Replace it with a vertical temperature strip beside the column, inside x 80–1000: `ussa` T(z), 0–12 km, coloured on the house thermal ramp, labelled "15 °C" at the ground and "−56 °C" at 11 km. It ends at the base.
+- **M10 s18b 13:43–13:50.** "what does it mean?" sits on the gold underline of "≈ 8430 m = 8.43 km". Give it its own row at least 24 px below.
+- **M11 s20 16:26–16:41.** "137 hPa · 14 %" overlaps the axis title "height (km)". Put the TipLabel right of the marker (+30, +40), or move the axis title above the plot.
+- **M12 s20e 16:46–17:40.** The KaTeX row "fall per metre at the ground = p₀/H" renders at about 36 px, under the 44-px floor. Make it two rows: the keyword "fall per metre at the ground" (54 px), then `= p_0/H` (68 px).
+  - Keep the CurvedLink to "ρ₀g ≈ 12 Pa/m" off the glyphs: end it 12 px before the text.
+- **M13 s20e 17:28–18:06.** The slate curve runs through the label "H = 8.43 km".
+  - Make it a gold tick label left of the height axis.
+  - S10: the "0" label touches the "8" tick, "37 %" sits on the gold band, and the planned gold bracket is missing. Put "0" below-right of the gold dot and "37 %" right of the slate dot, and draw the bracket between the dots.
+- **M14 s20f 18:29–18:58.** The gold link from "H: a scale, not a lid" crosses "pressure = weight above" and "no sharp top", and "× 0.37" sits on the dashed H line.
+  - Put "H: a scale, not a lid" as the **last** row of the keyword stack (nearest the line), so its link starts below the other rows.
+  - Move "× 0.37" 20 px right of the bracket.
+- **M15 s20b 21:18–21:27 (K6 21:22, 21:26).** The struck "m"/"m" is drawn on top of Δz/H. As planned, put `\frac{m}{m}` with both m struck on its own row below, plus the keyword.
+- **M16 s20b 22:18–22:42.** "1013 → 900 hPa" and "900 → 800 hPa" straddle the slate curve. Place them right of the curve with 40-px gold leaders.
+- **M17 s22 25:18–25:26.** "half the air below" overlaps "≈ 0.50". Give it its own row below the CalcStack.
+- **M18 s22 25:27–25:40 (U2-18 picture).** The measured mark (5.45 km) and the estimate (5.85 km) are about 2 px apart on the 0–35 km axis, so "a bit lower" cannot be seen.
+  - At S7, zoom the column axis to 0–8 km (MapCamera-style re-label, 1.5 s), so the teal "measured: 5.5 km" and slate "our estimate: 5.8 km" ticks are at least 60 px apart, with the gold "a bit lower" bracket between them.
+  - Zoom back to 0–35 km for S8.
+- **M19 s22 25:50–25:56.** The link from "just above 30 km: 99 % below" strikes through "1 − 0.10 = 0.90". Route it from the label's left end up the left side of the maths column, or put the 99 % row above the 90 % row.
+- **M20 s22 25:56–26:00 (S10).** The whole, unzoomed globe is cut at the top and flattened at the bottom. Fit it inside the K1 box (radius ≤ 390, centre about (560, 440)).
+- **M21 s21 23:44–24:37.** The gold links from "radiosonde", "wind at each height ← drift" and the readouts ("13.6 km · 149 hPa", "28.4 km · 14 hPa", "33.9 km · 6 hPa") run diagonally across the graph's axes and the "0" tick. Place the readouts in the maths zone above the graph (x 1100–1840, y 60–140) and link from there over the top of the graph box.
+- **M22 K6 edge: s21 23:39–24:37, s31 34:07–34:46, s54 53:06–53:39, s55 53:46–54:04.** The two-line credits end at y ≈ 885, inside the caption band. Raise the picture box 12 px, or join the credit into one line.
+
+**Other scenes**
+- **M23 s31 34:32–34:50.** The links from "12 ÷ 8 ≈ 1.5 km" / "cloud base ≈ 1.5 km" and "same height → flat bases" cut across the T/Td graph. Anchor these callouts under the plate (x 80–1000, y 760–800) and link straight up to the plane.
+- **M24 s15 10:00–10:44.** The link from "how fast p changes with height" crosses "weight of each m³". Swap the two underbrace label rows (or put "weight of each m³" right of 1840 − width), so the links do not cross.
+  - On the slab, "1 m" overlaps "Δz" (10:35): move "Δz" left of the slab edge.
+- **M25 s46 47:07–47:10 (K6).** "warm air advancing / → warm front" cross-fades in the same slot as "cold air advancing / → cold front" and the lines garble. Fade the old keyword out at least 8 frames before the new one (slot rule).
+- **M26 s47 → s48 48:17 (K6).** During the cross-fade the slice labels overlap ("1 km" on "warm air", "from W" on "cold air"). Fade the s47 labels out before the XF.
+- **M27 s58 55:37–55:47 (K6 ×8).** "23.2 ÷ 0.514 ≈ 45 kt" covers the lower graph's "°C", and "cooler polar air" covers the "00 06" ticks. Move both to the free column right of the graphs (x ≥ 1500).
+- **M28 s38 40:27–40:35.** "unlike: least certain where data are sparse" touches the colour-bar title. Move the colour bar down 30 px.
+- **M29 s38b, s27c, s48b (with M3–M5).** The colour bar must never sit on the stack picture: at 31:44–31:48 and 49:35 it does. Put it in the text column (§5b).
+- **M30 s25 27:15–27:46 (with M1).** The three-line globe credit touches the colour-bar title, and the bar's "−80" touches the IGRA credit. Give one credit per picture, at least 16 px from any other text.
+- **M31 s20g 19:39–19:59.** The "like identical bricks" inset frame collides with the growing pretend block (19:47 and 19:59) and its "12 N" sits on the top brick. Move the inset to x ≥ 700, y 460–720, and put "12 N" beside the top brick.
+
+### Should (22)
+- S1 s18 12:14–12:52: `H = RT/g` and `∂p/∂z = −p/H` run together on one line. Put them on two rows.
+- S2 s19 13:50–14:18: empty 0–30 km axes for about 28 s, then a framed "ln p" box (a box). Keep the column, or draw the axes only when used; drop the box frame.
+- S3 s20 16:12–16:41: the gold "× 0.37" arrows hug the slate curve and read as a second curve. Use straight arrows 40 px right of the curve.
+- S4 s20e 17:40–18:06: the "fall per metre" arrows are tiny. Make them 60–120 px, 6-px strokes.
+- S5 s20f 18:12–18:28: "37 % of the air: still above H" sits outside the teal region. Put it inside, and add a horizontal bracket at H from 0 to 373 hPa, "373 hPa = weight of the air above".
+- S6 s20f 18:46–19:03: the two columns overlap each other and are small. Set them side by side at 1.4× size; show the "8.9 km" tick together with "7.7 km".
+- S7 s20g 19:08–20:00: the weight arrows are 10-px cones with no "101 325 N" labels, so "same weight" is not shown. Use ≥ 80-px brown arrows with labels under both bases.
+- S8 s20b 21:37–21:48: the gap between the 12 % estimate and the exact curve is invisible. Add a gold bracket at 1 km between the tangent end (893 hPa) and the curve (900 hPa), "≈ 7 hPa".
+- S9 s20b 21:02–21:10: the Δp/Δz step is about 10 px. Enlarge it to a 0.3-km step.
+- S10 s18/s18b 12:00–13:50: the column is thin and x 400–1000 is empty. Scale the column 1.4×.
+- S11 s03 2:22–2:36: the parcel is about 50 px (dots invisible at 640 px), the wind arrows about 20 px and faint, and "Brittany" is dim. Make the parcel 2× and the arrows 2× and brighter; Brittany in warm white.
+- S12 s03 1:36–1:38: an empty outline rectangle shows before the composition bar fills. Start the bar filled.
+- S13 s01 0:13–0:23: a faint 82 % panel rectangle shows behind the keywords while unzoomed, and the 0:20 zoom is not the K1 zoom-reveal (the top is cut flat). Apply K1 or stay unzoomed.
+- S14 s53 52:19–52:56: the globe's right limb is sharp beside the text (no darkened panel), and "Southern Ocean: strongest" starts on the limb. Move the callout to x ≥ 1180. Next narration pass: name the places at each hover (zoom-tour rule).
+- S15 s31 34:05–34:50: the thermals are small and gone after S2, and the cloud-base plane is dark grey, not gold. Keep the parcels cycling through S6 at 1.5× radius; make the plane gold at 25 %.
+- S16 s36 38:28–38:53: "weather: what actually happened, 2023", "287 of 365 days inside the band" and "average" sit inside the plot over the grid. Place them outside the plot area, as planned.
+- S17 s05 3:21–4:02 and s14 9:30: "top of the atmosphere: no sharp edge" and "push = pressure × area" are crossed by the column rods. Shift them clear of the rods.
+- S18 s38b 40:47: a hard vertical darkening edge cuts through the globe. Use a gradient (with M4).
+- S19 s27/s27b 29:34 and 29:43: the globe bottom is ≤ 8 px above the credit. Keep the K2 gap at least 16 px.
+- S20 s22 S10: the planned gold 30.5-km line on the limb is missing.
+- S21 s27c 31:18: the stack's height axis is cut at the left frame edge.
+- S22 W85 and W86: the verifier tests are "pending at build time"; close them.
+
+**Layer stacks, insight and legibility.**
+- s27c: good idea (vapour hugs the ground) and readable from outside (31:33–31:42), unreadable inside.
+- s38b: the 40:43–40:56 build and the 41:14–41:20 close look teach well. Everything inside the shells is lost, and the tropopause is never marked on the shells (M4 adds it).
+- s48b: S1, S2, S5 and S6 add real insight (one sloping surface). S3 and S4 are hard to read (M5): the gold lines need height labels.
+- s31 thermals are small (S15).
+
+**Captions and sync.** The captions gate passes (868 cues = script, SRT twin). The caption band is empty on every frame I looked at, except the 5-px credit overruns (M22). The reveals I checked sit on their words, except U3-05 (Andes and Rockies shown 15 s late).
