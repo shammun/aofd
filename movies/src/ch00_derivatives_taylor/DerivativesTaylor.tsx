@@ -53,7 +53,7 @@ const EQ_S15 = String.raw`\frac{dT}{dt}=0+100\ \tfrac{\mathrm{km}}{\mathrm{h}}\t
 const EQ_S16 = String.raw`\frac{dT}{dt}=+2.9+(100)(-3.2\times10^{-5})(3600)\approx+2.9-11.5=-8.6\ ^{\circ}\mathrm{C/h}`;
 const EQ_S17 = String.raw`\frac{dT}{dt}=+2.9+11.5\approx+14.4\ ^{\circ}\mathrm{C/h}`;
 const EQ_S18 = String.raw`\frac{dZ}{dt}\approx\frac{4260\ \mathrm m}{900\ \mathrm s}\approx4.7\ \mathrm{m/s},\qquad \frac{dT}{dt}\approx\frac{-24.1}{900}\approx-0.027\ ^{\circ}\mathrm{C/s}`;
-const EQ_S19 = String.raw`\frac{dT}{dt}=\underbrace{\frac{\partial T}{\partial t}}_{6\times10^{-5}}+\underbrace{u\frac{\partial T}{\partial x}+v\frac{\partial T}{\partial y}}_{\sim3\times10^{-5}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}`;
+const EQ_S19 = String.raw`\frac{dT}{dt}=\underbrace{\frac{\partial T}{\partial t}}_{-6\times10^{-5}}+\underbrace{u\frac{\partial T}{\partial x}+v\frac{\partial T}{\partial y}}_{\sim-3\times10^{-5}}+\underbrace{w\frac{\partial T}{\partial z}}_{-0.027}`;
 const EQ_S20 = String.raw`\frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf u\cdot\nabla T\approx2.9-3.7\approx-0.8\ ^{\circ}\mathrm{C/h}`;
 const EQ_S21 = String.raw`\frac{\partial T}{\partial p}=\frac{\partial T}{\partial z}\,\frac{\partial z}{\partial p}\approx(-5.7\times10^{-3})(-12.2)\approx+0.069\ ^{\circ}\mathrm{C/hPa}`;
 const EQ_S23 = String.raw`\frac{\partial M}{\partial y}=\frac{\partial N}{\partial x};\qquad \oint (y\,dx-x\,dy)=-2`;
@@ -72,7 +72,7 @@ const EQ_S38 = String.raw`f(x_0+\delta)\approx f(x_0)+f'(x_0)\,\delta`;
 const EQ_S39 = String.raw`\frac{de_s}{dT}=\frac{L\,e_s}{R_v\,T^2}`;
 const EQ_S40 = String.raw`\frac{1}{e_s}\frac{de_s}{dT}=\frac{L}{R_vT^2}\approx\frac{2.5\times10^{6}}{462\times273^2}\approx0.073\ \mathrm{K^{-1}}`;
 const EQ_S42 = String.raw`F=\sigma T^4,\qquad \frac{dF}{dT}=4\sigma T^3=\frac{4F}{T}\approx\frac{4\times240}{255}\approx3.8\ \mathrm{W\,m^{-2}\,K^{-1}}`;
-const EQ_S43 = String.raw`\Delta T\approx\frac{3.9}{3.8}\approx1\ ^{\circ}\mathrm C`;
+const EQ_S43 = String.raw`\Delta T\approx\frac{3.9}{3.8}\approx1.04\ ^{\circ}\mathrm C`;
 const EQ_S44 = String.raw`\frac{f(x+h)-f(x)}{h}=f'(x)+\frac{h}{2}f''(x)+\cdots`;
 const EQ_S45 = String.raw`\frac{f(x+h)-f(x-h)}{2h}=f'(x)+\frac{h^2}{6}f'''(x)+\cdots`;
 /** split a storyboard constant at a marker that must exist (so the shown pieces never drift from the constant) */
@@ -101,6 +101,9 @@ const CHECK: [string, number, number, number][] = [
   ["fwd", FDX.forward, -3.319, 0.002], ["bwd", FDX.backward, -3.086, 0.002], ["ctr", FDX.centred, -3.202, 0.002], ["c2", FDX.coarse[0], -3.168, 0.002],
   ["c4", FDX.coarse[1], -3.14, 0.002], ["c8", FDX.coarse[2], -2.238, 0.002], ["c12", FDX.coarse[3], -0.984, 0.002], ["ef", FDX.ef, -0.04294, 1e-5], ["ec", FDX.ec, -0.0009001, 1e-7],
   ["gain", D.hill.gain, 135.5, 0.5], ["Lst", D.hill.Lst, 3.99, 0.01], ["Lw", D.hill.Lw, 8.98, 0.01],
+  // fix 1: the numbers the new narration says
+  ["gain shown", D.hill.summit[2] - D.hill.park[2], 135, 0.5], ["dT planck", RD.dT_planck, 1.04, 0.005], ["warm", CC.warm, 1.26, 1e-9],
+  ["corners", E8.corners.TR - E8.corners.TL - E8.corners.BR + E8.corners.BL, 0.37, 0.005], ["2dx", 2 * E8.dx_km, 36.8, 0.05],
 ];
 CHECK.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -258,8 +261,9 @@ const S02: React.FC = () => {
         <path d={poly([tl(-1.2), tl(1.2)])} stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" opacity={0.7 * fin(f, SS(k, 7) + 10)} />
         <ClockText x={MX + 30} y={110} t="18:00 UTC, 1 Nov 2023" h={6} o={fin(f, t6pm)} />
         <Keyword f={f} text="changes with time only" at={[MX + 20, 210]} appear={AT(k, 0, "just one thing")} out={SS(k, 4) - 12} />
-        <CurvedLink f={f} from={[p18[0] + 14, p18[1] - 14]} to={[MX + 140, 330]} start={SS(k, 4)} end={SS(k, 6)} bend={90} />
-        <CurvedLink f={f} from={[p20[0] + 14, p20[1] - 10]} to={[MX + 60, 290]} start={SS(k, 4) + 6} end={SS(k, 6)} bend={60} />
+        {/* fix 1 (review S8): the link heads stop left of "rate =" instead of landing on it */}
+        <CurvedLink f={f} from={[p18[0] + 14, p18[1] - 14]} to={[MX + 40, 320]} start={SS(k, 4)} end={SS(k, 6)} bend={90} />
+        <CurvedLink f={f} from={[p20[0] + 14, p20[1] - 10]} to={[MX + 40, 270]} start={SS(k, 4) + 6} end={SS(k, 6)} bend={60} />
         <Keyword f={f} text="derivative" at={[MX, 700]} appear={SS(k, 7)} />
         <Lbl x={MX} y={775} t="the rate at one instant" c={C.key} s={T.key} o={fin(f, SS(k, 7) + 8)} />
       </Svg>
@@ -311,16 +315,17 @@ const S03: React.FC = () => {
         <Dot p={P(3, 9)} c={C.gold} r={13} />
         <Keyword f={f} text="tangent" at={[P(3, 9)[0] - 120, P(3, 9)[1] - 170]} a="end" appear={AT(k, 7, "tangent")} targets={[lerp(P(3, 9), P(2.6, 9 - 2.4), 0.5)]} />
       </Svg>
-      <CalcStack f={f} x={MX + 330} y={90} size={64} rows={[
+      <CalcStack f={f} x={MX + 330} y={135} size={64} rows={[
         ROW("= 7", AT(k, 2, "seven over one"), String.raw`\frac{16-9}{1}`),
         ROW("= 6.1", AT(k, 3, "six point one"), String.raw`\frac{9.61-9}{0.1}`),
         ROW("= 6.01", AT(k, 3, "zero one"), String.raw`\frac{9.0601-9}{0.01}`),
       ]} />
-      <TeX s={String.raw`\to 6`} x={MX + 560} y={465} size={84} c={C.gold} o={fin(f, AT(k, 4, "settles on six"))} />
-      <TeX s={String.raw`f(x)=x^2`} x={MX + 470} y={110} size={60} c={C.local} o={fin(f, AT(k, 1, "f of x"))} />
+      {/* fix 1 (review S8): f(x) = x² sits above the stack (it ran into "= 7") */}
+      <TeX s={String.raw`\to 6`} x={MX + 560} y={490} size={84} c={C.gold} o={fin(f, AT(k, 4, "settles on six"))} />
+      <TeX s={String.raw`f(x)=x^2`} x={MX + 40} y={92} size={60} c={C.local} o={fin(f, AT(k, 1, "f of x"))} />
       <Svg><Keyword f={f} text="shrink the step" at={[MX + 20, 640]} appear={AT(k, 0, "shrink")} out={SS(k, 5) - 12} /></Svg>
-      <TeX s={d1} x={MX} y={640} size={56} o={fin(f, SS(k, 5))} />
-      <TeX s={d2 + String.raw`=6\ \text{at}\ x=3`} x={MX} y={780} size={56} o={fin(f, SS(k, 6))} />
+      <TeX s={d1} x={MX} y={656} size={52} o={fin(f, SS(k, 5))} />
+      <TeX s={d2 + String.raw`=6\ \text{at}\ x=3`} x={MX} y={784} size={52} o={fin(f, SS(k, 6))} />
       <Svg><Keyword f={f} text="slope = rate" at={[axX(A)(4.1), axY(A)(4)]} a="middle" appear={SS(k, 8)} /></Svg>
     </Scene>
   );
@@ -462,12 +467,14 @@ const S05: React.FC = () => {
             <path d={poly([tg(-1.6), tg(1.6)])} stroke={C.gold} strokeWidth={6} opacity={fin(f, tSlope)} />
             <circle cx={pB[0]} cy={pB[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
             <Lbl x={pB[0] + 16} y={pB[1] - 34} t="Brest" c={C.key} s={T.floor} />
-            <Lbl x={pr.p([3.0 * xPulse, yW, 0])[0]} y={pr.p([3.0, yW, 0])[1] + 30} t="x" c={C.second} s={T.key} a="middle" o={fin(f, SS(k, 5))} />
+            {/* fix 1 (review S21): the lone "x" became the arrow's own label, at its tip */}
+            <Lbl x={pr.p([-1.2 + 2.6 * xPulse + 0.15, yW, 2.5])[0] + 12} y={pr.p([-1.2 + 2.6 * xPulse, yW, 2.5])[1]} t="x (east)" c={C.second} s={T.key} o={fin(f, SS(k, 5))} />
           </g>
         );
       }}>
         <Quad3D pts={[[-3.4, yW, 0], [3.4, yW, 0], [3.4, yW, 2.3], [-3.4, yW, 2.3]]} color={C.local} o={0.32 * wall} />
-        <Arrow3D from={[-1.2, yW - 0.02, 0.05]} to={[-1.2 + 2.6 * xPulse, yW - 0.02, 0.05]} color={C.second} px={9} head={30} o={fin(f, SS(k, 5))} />
+        {/* fix 1 (review S21): the x arrow runs along the top edge of the wall (z 2.5), above the landscape, so it is seen */}
+        <Arrow3D from={[-1.2, yW - 0.02, 2.5]} to={[-1.2 + 2.6 * xPulse, yW - 0.02, 2.5]} color={C.second} px={9} head={30} o={fin(f, SS(k, 5))} />
       </Landscape>
       <Svg>
         <ColourBar x={130} y={735} w={380} lut={LUT_T} lo={-6} hi={16} unit="°C" title="temperature (°C) = height" ticks={[{ v: -4, t: "−4" }, { v: 4, t: "4" }, { v: 12, t: "12" }]} />
@@ -497,29 +504,40 @@ const S06: React.FC = () => {
   const W = (x: number, t: number): V3 => [x / 33.33, t, z(x, t)];
   const st = orbitCam({ az: -128, el: 26, dist: 9.6, target: [1.5, 1.5, 1.1], fov: 32 }, [460, 380]);
   const pr = projector(st, 920, 760, 80, 60);
-  const dim = 1 - 0.55 * fin(f, tProd);
+  // fix 1 (review S14): while T = x t is discussed, the old plane fades out and the x t surface (a twisted, ruled saddle
+  // piece: every line of fixed t or fixed x on it is straight) is drawn instead, with the two lines the narration holds fixed
+  const pl = 1 - fin(f, tProd, 16), sd = fin(f, tProd + 6, 16);
+  const S = (x: number, t: number): V3 => [x, t, 0.3 * x * t];
   const parts: Part[] = [{ t: "T=10" }, { t: String.raw`-0.03\,x` }, { t: String.raw`+3\,t`, u: { w: String.raw`\text{no slope in }x`, c: C.gold } }];
   const xc = fin(f, tX) * fout(f, tT), tc = fin(f, tT) * fout(f, tProd);
   void EQ_S06;
   return (
     <Scene>
-      <View3D st={st} x={80} y={60} w={920} h={760} o={dim} amb={1.4} dir={1.2}>
-        <Quad3D pts={[W(0, 0), W(100, 0), W(100, 3), W(0, 3)]} color={C.first} o={0.3} />
-        {[[W(0, 0), W(100, 0)], [W(100, 0), W(100, 3)], [W(100, 3), W(0, 3)], [W(0, 3), W(0, 0)]].map(([a, b], i) => <Rod3D key={i} a={a} b={b} px={4} color={C.first} />)}
+      <View3D st={st} x={80} y={60} w={920} h={760} amb={1.4} dir={1.2}>
+        <Quad3D pts={[W(0, 0), W(100, 0), W(100, 3), W(0, 3)]} color={C.first} o={0.3 * pl} />
+        {[[W(0, 0), W(100, 0)], [W(100, 0), W(100, 3)], [W(100, 3), W(0, 3)], [W(0, 3), W(0, 0)]].map(([a, b], i) => <Rod3D key={i} a={a} b={b} px={4} color={C.first} o={pl} />)}
+        {[0, 0.5, 1, 1.5, 2, 2.5, 3].map((c) => <Rod3D key={`st${c}`} a={S(0, c)} b={S(3, c)} px={3} color={C.first} o={0.8 * sd} />)}
+        {[0, 0.5, 1, 1.5, 2, 2.5, 3].map((c) => <Rod3D key={`sx${c}`} a={S(c, 0)} b={S(c, 3)} px={3} color={C.first} o={0.8 * sd} />)}
+        <Rod3D a={S(0, 2)} b={S(3, 2)} px={11} color={C.second} o={fin(f, SS(k, 6))} />
+        <Rod3D a={S(2, 0)} b={S(2, 3)} px={11} color={C.local} o={fin(f, SS(k, 7))} />
         <Arrow3D from={[0, 0, 0]} to={[3.4, 0, 0]} color={C.second} px={6} head={22} />
         <Arrow3D from={[0, 0, 0]} to={[0, 3.4, 0]} color={C.local} px={6} head={22} />
         <Arrow3D from={[0, 0, 0]} to={[0, 0, 2.9]} color={C.ink} px={6} head={22} />
         <Rod3D a={W(0, 1)} b={W(100, 1)} px={10} color={C.second} o={xc} />
         <Rod3D a={W(50, 0)} b={W(50, 3)} px={10} color={C.local} o={tc} />
       </View3D>
-      <Svg o={dim}>
+      <Svg>
+        <Lbl x={pr.p(S(3, 2))[0] + 20} y={pr.p(S(3, 2))[1] + 10} t="t fixed: slope t" c={C.second} s={T.floor} o={fin(f, SS(k, 6))} />
+        <Lbl x={pr.p(S(2, 0))[0] - 14} y={pr.p(S(2, 0))[1] + 44} t="x fixed: slope x" c={C.local} s={T.floor} a="end" o={fin(f, SS(k, 7))} />
+      </Svg>
+      <Svg>
         <Lbl x={pr.p([3.7, 0, 0])[0]} y={pr.p([3.7, 0, 0])[1] + 10} t="x (km)" c={C.key} s={T.floor} a="middle" />
         <Lbl x={pr.p([0, 3.75, 0])[0]} y={pr.p([0, 3.75, 0])[1]} t="t (h)" c={C.key} s={T.floor} a="middle" />
         <Lbl x={pr.p([0, 0, 3.15])[0]} y={pr.p([0, 0, 3.15])[1] - 6} t="T" c={C.key} s={T.key} a="middle" />
         <Lbl x={pr.p(W(100, 1))[0] + 20} y={pr.p(W(100, 1))[1] + 40} t="−0.03 °C per km" c={C.second} s={T.floor} o={xc} />
-        <Lbl x={pr.p(W(50, 3))[0]} y={pr.p(W(50, 3))[1] - 44} t="+3 °C per h" c={C.local} s={T.floor} a="middle" o={tc} />
+        <Lbl x={pr.p(W(50, 1.6))[0] + 30} y={pr.p(W(50, 1.6))[1]} t="+3 °C per h" c={C.local} s={T.floor} o={tc} />
       </Svg>
-      <Layered parts={parts} x={MX} y={150} size={72} o={fin(f, SS(k, 1))}
+      <Layered parts={parts} x={MX - 20} y={150} size={64} o={fin(f, SS(k, 1))}
         layers={[{ t: "all", o: 1 }, { t: [2], tc: { 2: C.muted }, o: fin(f, tX) }, { t: [], u: [2], o: fin(f, tX + 10) }]} />
       <Svg><Lbl x={MX} y={255} t="x in km, t in h" c={C.local} s={T.key} o={fin(f, AT(k, 1, "with x in kilometres"))} />
         <Keyword f={f} text="other variables: constants" at={[MX, 150]} appear={AT(k, 0, "every other variable")} out={SS(k, 1) - 10} /></Svg>
@@ -546,6 +564,7 @@ const S07: React.FC = () => {
   const gx = ((nb.E - nb.W) / dx2) * 100, gy = ((nb.N - nb.S) / dy2) * 100;
   if (Math.abs(gx - E8.dTdx_100km) > 0.03 || Math.abs(gy - E8.dTdy_100km) > 0.03) throw new Error("CHECK s07 screen differences");
   const [l7, r7] = cut2(EQ_S07, String.raw`\approx`);
+  if (!(nb.E > 0 && nb.W > 0 && nb.N > 0 && nb.S > 0)) throw new Error("s07: a neighbour below 0 °C would need brackets");
   const g = Math.hypot(gx, gy), gu: Pt = [gx / g, -gy / g];
   return (
     <Scene>
@@ -572,7 +591,8 @@ const S07: React.FC = () => {
       )} />
       <CalcStack f={f} x={MX + 230} y={90} size={62} rows={[
         ROW(String.raw`\approx` + r7, AT(k, 2, "divide their difference"), l7),
-        ROW(String.raw`= \frac{${nf(nb.E, 2).replace("−", "-")}-(${nf(nb.W, 2).replace("−", "-")})}{36.8\ \mathrm{km}}`, SS(k, 4)),
+        // fix 1 (review S13): no stray brackets (all four neighbours are above 0 °C; checked below)
+        ROW(String.raw`= \frac{${nf(nb.E, 2)}-${nf(nb.W, 2)}}{36.8\ \mathrm{km}}`, SS(k, 4)),
         ROW(String.raw`\approx -3.2\ ^{\circ}\mathrm C/100\ \mathrm{km}`, AT(k, 4, "minus three point two"), undefined, { c: C.neg }),
       ]} />
       <Svg>
@@ -581,8 +601,8 @@ const S07: React.FC = () => {
         <Keyword f={f} text="gradient" at={[MX + 20, 790]} appear={SS(k, 7)} targets={[[pB[0] + gu[0] * 200, pB[1] + gu[1] * 200]]} />
       </Svg>
       <TeX s={String.raw`\frac{\partial T}{\partial x},\ \ \frac{\partial T}{\partial y}`} x={MX + 40} y={640} size={72} o={fin(f, 4) * fout(f, AT(k, 2, "divide their difference") - 10)} />
-      <TeX s={String.raw`\frac{\partial T}{\partial y}\approx\frac{${nf(nb.N, 2).replace("−", "-")}-(${nf(nb.S, 2).replace("−", "-")})}{55.6\ \mathrm{km}}\approx-2.5`} x={MX} y={640} size={56}
-        c={C.neg} o={fin(f, tY)} />
+      <TeX s={String.raw`\frac{\partial T}{\partial y}\approx\frac{${nf(nb.N, 2)}-${nf(nb.S, 2)}}{55.6\ \mathrm{km}}`} x={MX} y={636} size={54} c={C.neg} o={fin(f, tY)} />
+      <TeX s={String.raw`\approx-2.5\ ^{\circ}\mathrm C/100\ \mathrm{km}`} x={MX + 60} y={722} size={54} c={C.neg} o={fin(f, AT(k, 5, "minus two point five"))} />
     </Scene>
   );
 };
@@ -654,7 +674,7 @@ const S08: React.FC = () => {
         ROW(String.raw`=-5\ \mathrm{hPa/h}`, SS(k, 8), undefined, { c: C.neg }),
       ]} maxLines={4} />
       <Svg><Keyword f={f} text="hectopascal (hPa)" at={[MX + 40, 720]} appear={SS(k, 7)} />
-        <Keyword f={f} text="the place stays fixed" at={[MX + 40, 470]} appear={SS(k, 1)} out={SS(k, 4) - 12} /></Svg>
+        <Keyword f={f} text="the place stays fixed" at={[MX + 40, 560]} appear={SS(k, 1)} out={SS(k, 4) - 12} /></Svg>
       <TeX s={String.raw`\frac{\partial T}{\partial t}`} x={MX + 40} y={690} size={84} c={C.local} o={fin(f, 4) * fout(f, SS(k, 5))} />
     </Scene>
   );
@@ -674,10 +694,18 @@ const S09: React.FC = () => {
   const [e1, e2] = cut2(EQ_S09, String.raw`,\qquad `);
   return (
     <Scene>
-      <Globe cam={cam} o={1 - ph2} coast={0.5} drape={{ href: IMGS.trappes, box: BOX.trappes, o: fin(f, tTr) }} over={(G) => {
+      <Globe cam={cam} box={{ x: 40, y: 24, w: 1020, h: 796 }} fade={110} o={1 - ph2} coast={0.5} drape={{ href: IMGS.trappes, box: BOX.trappes, o: fin(f, tTr) }} over={(G) => {
         const p = G.p(TRAP[0], TRAP[1]);
+        // fix 1 (review S18): the MODIS tile gets a thin outline and its date, so it reads as an image, not a glitch
+        const [la0, la1, lo0, lo1] = BOX.trappes;
+        const edge: Pt[] = [];
+        for (let i = 0; i <= 24; i++) edge.push(G.p(la0, lo0 + ((lo1 - lo0) * i) / 24));
+        for (let i = 0; i <= 24; i++) edge.push(G.p(la0 + ((la1 - la0) * i) / 24, lo1));
+        for (let i = 0; i <= 24; i++) edge.push(G.p(la1, lo1 - ((lo1 - lo0) * i) / 24));
+        for (let i = 0; i <= 24; i++) edge.push(G.p(la1 - ((la1 - la0) * i) / 24, lo0));
         return (
           <g opacity={fin(f, tTr - 20)}>
+            <path d={poly(edge) + "Z"} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.8 * fin(f, tTr)} />
             <circle cx={p[0]} cy={p[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={4} />
             <Lbl x={p[0] + 24} y={p[1] + 40} t="Trappes" c={C.key} s={T.key} />
             <Sonde p={[p[0], p[1] - 10 - 300 * rise]} s={1.2} o={fin(f, tSonde - 10)} />
@@ -685,24 +713,31 @@ const S09: React.FC = () => {
         );
       }} />
       <Svg o={1 - ph2}>
-        <Keyword f={f} text="radiosonde" at={[600, 160]} appear={tSonde} targets={[[560, 330]]} />
+        <Keyword f={f} text="radiosonde" at={[MX + 20, 300]} appear={tSonde} targets={[[600, 300]]} />   {/* §5b: off the globe */}
+        <Lbl x={MX + 30} y={190} t="image: MODIS, 30 Sep 2026" c={C.muted} s={T.floor} o={fin(f, tTr + 10)} />   {/* §5b: the tile date moved beside the globe */}
       </Svg>
       <Svg o={ph2}>
         <ClipRect id="s09c" A={A} pad={4} />
-        <Axes A={A} xt={[-20, -10, 0, 10, 20]} yt={[0, 2, 4, 6]} xl="temperature (°C)" yl="height (km)" />
+        {/* fix 1 (review S5): the two levels are read off the axis in gold (1.53 and 5.80 km), so 4.26 km is visible */}
+        <Axes A={A} xt={[-20, -10, 0, 10, 20]} yt={[0, 4]} xl="temperature (°C)" yl="height (km)" />
+        <Lbl x={A.x - 14} y={p85[1]} t={(Math.round(SN.z[SN.k85] / 10) / 100).toFixed(2)} c={C.gold} s={T.floor} a="end" b={false} o={fin(f, AT(k, 4, "one and a half"))} />
+        <Lbl x={A.x - 14} y={p50[1]} t={(Math.round(SN.z[SN.k50] / 10) / 100).toFixed(2)} c={C.gold} s={T.floor} a="end" b={false} o={fin(f, AT(k, 5, "five point eight"))} />
+        <line x1={A.x} y1={p85[1]} x2={p85[0]} y2={p85[1]} stroke={C.gold} strokeWidth={2.5} strokeDasharray="8 8" opacity={0.8 * fin(f, AT(k, 4, "one and a half"))} />
+        <line x1={A.x} y1={p50[1]} x2={p50[0]} y2={p50[1]} stroke={C.gold} strokeWidth={2.5} strokeDasharray="8 8" opacity={0.8 * fin(f, AT(k, 5, "five point eight"))} />
         <ProfileLine A={A} zTop={zb} clip="s09c" />
         <Sonde p={P(Tat(zb), zb)} s={1} o={1 - fin(f, SS(k, 6))} />
         <Dot p={p85} c={C.gold} r={12} o={fin(f, AT(k, 4, "twelve point three"))} />
         <Lbl x={p85[0] + 22} y={p85[1] + 4} t="12.3 °C" c={C.key} s={T.key} o={fin(f, AT(k, 4, "twelve point three"))} />
         <Dot p={p50} c={C.gold} r={12} o={fin(f, AT(k, 5, "minus eleven"))} />
-        <Lbl x={p50[0] - 22} y={p50[1] + 44} t="−11.8 °C" c={C.key} s={T.key} a="end" o={fin(f, AT(k, 5, "minus eleven"))} />
+        <Lbl x={p50[0] - 22} y={p50[1] - 52} t="−11.8 °C" c={C.key} s={T.key} a="end" o={fin(f, AT(k, 5, "minus eleven"))} />
         <Bracket p={[p85[0] + 60, p85[1]]} q={[p85[0] + 60, p50[1]]} off={0} c={C.ink} o={fin(f, SS(k, 6))} />
         <Lbl x={p85[0] + 76} y={(p85[1] + p50[1]) / 2} t="4.26 km" c={C.ink} s={T.floor} o={fin(f, SS(k, 6))} />
         <Bracket p={[p50[0], p50[1] - 50]} q={[p85[0], p50[1] - 50]} off={0} c={C.neg} o={fin(f, SS(k, 6))} />
         <Lbl x={(p50[0] + p85[0]) / 2} y={p50[1] - 84} t="−24.1 °C" c={C.neg} s={T.floor} a="middle" o={fin(f, SS(k, 6))} />
         <Lbl x={p85[0] - 150} y={(p85[1] + p50[1]) / 2 + 60} t="15 min" c={C.local} s={T.key} a="end" o={fin(f, SS(k, 7))} />
-        <CurvedLink f={f} from={[p85[0] + 14, p85[1] - 14]} to={[MX + 20, 330]} start={SS(k, 6)} end={SS(k, 7)} bend={70} />
-        <CurvedLink f={f} from={[p50[0] + 14, p50[1]]} to={[MX + 20, 300]} start={SS(k, 6) + 6} end={SS(k, 7)} bend={50} />
+        {/* fix 1 (review S8): the links start at the two picture numbers (4.26 km, −24.1 °C) instead of crossing them */}
+        <CurvedLink f={f} from={[p85[0] + 76 + textW("4.26 km", T.floor) + 8, (p85[1] + p50[1]) / 2]} to={[MX - 14, 345]} start={SS(k, 6)} end={SS(k, 7)} bend={40} />
+        <CurvedLink f={f} from={[(p50[0] + p85[0]) / 2 + textW("−24.1 °C", T.floor) / 2 + 10, p50[1] - 84]} to={[MX - 14, 300]} start={SS(k, 6) + 6} end={SS(k, 7)} bend={-30} />
       </Svg>
       <Svg><ClockText x={MX + 30} y={110} t="30 Sep 2026, 12 UTC" h={0} o={fin(f, tNoon)} />
         <Lbl x={MX + 200} y={470} t="change with height" c={C.key} s={T.key} o={fin(f, AT(k, 0, "the change with height")) * fout(f, SS(k, 6))} /></Svg>
@@ -722,19 +757,24 @@ const S10: React.FC = () => {
   const P = axP(A);
   const cn = E8.corners;
   const BL = P(-1, 17), BR = P(1, 17), TL = P(-1, 19), TR = P(1, 19);
-  const t9 = SS(k, 9), tTR = AT(k, 9, "top right"), tTL = AT(k, 9, "minus top left"), tBR = AT(k, 9, "minus bottom right"), tBL = AT(k, 9, "plus bottom"), t10 = SS(k, 10);
-  const cl = (v: number) => nf(v, 1);
+  // fix 1 (review S12): the corner values are shown to 2 decimals and turned into 1.4×10⁻⁹ by a CalcStack on the new S11;
+  // the "only the order" arrows move to S12
+  const t9 = SS(k, 9), tTR = AT(k, 9, "top right"), tTL = AT(k, 9, "minus top left"), tBR = AT(k, 9, "minus bottom right"), tBL = AT(k, 9, "plus bottom"), t10 = SS(k, 11);
+  const tCalc = SS(k, 10);
+  const cl = (v: number) => nf(v, 2);
+  const sum = cn.TR - cn.TL - cn.BR + cn.BL, mixed = sum / (2 * E8.dx_km * 1000 * 7200);
+  if (Math.abs(mixed * 1e9 - 1.4) > 0.05 || Math.abs(sum - 0.37) > 0.005) throw new Error(`CHECK s10 corners ${sum} ${mixed}`);
   const r1 = prog(f, t10, t10 + 30), r2 = prog(f, t10 + 36, t10 + 66);
+  const early = fout(f, tCalc - 6);
   return (
     <Scene>
       <Svg>
-        <Axes A={A} xt={[-1, 0, 1]} yt={[17, 18, 19]} xf={(v) => (v === 0 ? "Brest" : v < 0 ? "18 km W" : "18 km E")} yf={(v) => `${v}:00`} xl="x (east)" yl="small t" />
+        <Axes A={A} xt={[-1, 0, 1]} yt={[17, 18, 19]} xf={(v) => (v === 0 ? "Brest" : v < 0 ? "18 km W" : "18 km E")} yf={(v) => `${v}:00`} xl="x (east)" yl="t" />
         <rect x={TL[0]} y={TL[1]} width={BR[0] - TL[0]} height={BR[1] - TL[1]} fill="rgba(216,178,58,0.07)" stroke={C.gold} strokeWidth={4} opacity={0.5 + 0.5 * fin(f, t9)} />
-        {[[TR, tTR, "+", C.first, cn.TR, 1], [TL, tTL, "−", C.neg, cn.TL, -1], [BR, tBR, "−", C.neg, cn.BR, 1], [BL, tBL, "+", C.first, cn.BL, -1]].map(([p, at, sg, c, v, side], i) => (
+        {[[TR, tTR, "+", C.first, cn.TR], [TL, tTL, "−", C.neg, cn.TL], [BR, tBR, "−", C.neg, cn.BR], [BL, tBL, "+", C.first, cn.BL]].map(([p, at, sg, c, v], i) => (
           <g key={i} opacity={fin(f, at as number)}>
             <Dot p={p as Pt} c={c as string} r={16} />
-            <Lbl x={(p as Pt)[0] + (side as number) * 30} y={(p as Pt)[1] + ((p as Pt)[1] < 400 ? -40 : 44)} t={`${sg} (${cl(v as number)} °C)`} c={c as string} s={T.key}
-              a={(side as number) > 0 ? "start" : "end"} />
+            <Lbl x={(p as Pt)[0]} y={(p as Pt)[1] + ((p as Pt)[1] < 400 ? -44 : 48)} t={`${sg} ${cl(v as number)} °C`} c={c as string} s={T.key} a="middle" />
           </g>
         ))}
         <g opacity={fin(f, t10) * (1 - 0.6 * fin(f, t10 + 36))}>
@@ -750,10 +790,15 @@ const S10: React.FC = () => {
       <TeX s={String.raw`\frac{\partial T}{\partial x}`} x={MX + 40} y={430} size={72} c={C.muted} o={fin(f, AT(k, 1, "eastward slope")) * fout(f, SS(k, 5) - 10)} />
       <TeX s="=" x={MX + 330} y={140} size={84} c={C.gold} o={fin(f, AT(k, 3, "the same answer"))} />
       <TeX s={rm} x={MX + 400} y={140} size={68} o={fin(f, AT(k, 2, "ask how it changes"))} />
-      <TeX s={String.raw`T=x^2\,t`} x={MX} y={300} size={64} o={fin(f, SS(k, 4))} />
-      <TeX s={String.raw`\frac{\partial T}{\partial x}=2xt\ \to\ \frac{\partial}{\partial t}:\ 2x`} x={MX} y={440} size={56} o={fin(f, SS(k, 5))} />
-      <TeX s={String.raw`\frac{\partial T}{\partial t}=x^2\ \to\ \frac{\partial}{\partial x}:\ 2x`} x={MX} y={590} size={56} o={fin(f, SS(k, 6))} />
-      <TeX s={String.raw`\text{both}:\ 1.4\times10^{-9}\ ^{\circ}\mathrm C\,\mathrm m^{-1}\,\mathrm s^{-1}`} x={MX} y={730} size={54} c={C.key} o={fin(f, SS(k, 7))} />
+      <TeX s={String.raw`T=x^2\,t`} x={MX} y={290} size={64} o={fin(f, SS(k, 4)) * early} />
+      <TeX s={String.raw`\frac{\partial T}{\partial x}=2xt\ \to\ \frac{\partial}{\partial t}:\ 2x`} x={MX} y={430} size={64} o={fin(f, SS(k, 5)) * early} />
+      <TeX s={String.raw`\frac{\partial T}{\partial t}=x^2\ \to\ \frac{\partial}{\partial x}:\ 2x`} x={MX} y={590} size={64} o={fin(f, SS(k, 6)) * early} />
+      <CalcStack f={f} x={MX + 20} y={240} size={54} maxLines={2} rows={[
+        ROW(String.raw`\frac{(${cl(cn.TR)}-${cl(cn.TL)}-${cl(cn.BR)}+${cl(cn.BL)})\ ^{\circ}\mathrm C}{36.8\ \mathrm{km}\times2\ \mathrm h}`, tCalc),
+        ROW(String.raw`=\frac{${sum.toFixed(2)}\ ^{\circ}\mathrm C}{36\,800\ \mathrm m\times7200\ \mathrm s}`, AT(k, 10, "divided by")),
+      ]} />
+      <TeX s={String.raw`\text{both}:\ 1.4\times10^{-9}\ ^{\circ}\mathrm C\,\mathrm m^{-1}\,\mathrm s^{-1}`} x={MX} y={730} size={54} c={C.key} o={fin(f, SS(k, 7))}
+        glow={pulse(f, AT(k, 10, "the same one point four"), 24)} />
     </Scene>
   );
 };
@@ -919,8 +964,8 @@ const S14: React.FC = () => {
           <g opacity={fin(f, tSlide - 10)}>
             <path d={poly(path.map(([la, lo]) => pr.p(w3(la, lo))))} stroke={C.first} strokeWidth={4} fill="none" strokeDasharray="10 8" opacity={0.8} />
             <circle cx={pc[0]} cy={pc[1]} r={14} fill={C.first} stroke={C.bg} strokeWidth={4} />
+            {/* fix 1 (review S15): the unspoken °C readout is gone; the thermometer's level still falls as it slides */}
             <Thermo x={pc[0] + 44} y={pc[1] - 10} h={90} level={(Tp + 6) / 22} />
-            <Lbl x={pc[0] + 74} y={pc[1] - 80} t={`${nf(Tp, 1)} °C`} c={C.key} s={T.key} />
           </g>
         );
       }} />
@@ -1006,22 +1051,26 @@ const FlightMap: React.FC<{ hour: number; plane?: { lon: number; a: number; o: n
   }} />
 );
 const S16: React.FC = () => {
+  // fix 1: new S3 "Let's call its speed east capital U" (review S2) shifts S3… by one; "if these rates held for a whole hour"
+  // (S17) is said on S9; the speed label flips to the left of the plane near the map edge (M2); the stack ends before x 1840
   const f = useCurrentFrame(), k = K("s16_flight_east");
-  const tGo = AT(k, 1, "flying due east"), tEnd = SE(k, 7);
-  const t = clamp((f - tGo) / (tEnd - tGo), 0, 1);              // simulated hours since 18 UTC (0..1)
+  const tGo = AT(k, 1, "flying due east"), tEnd = SE(k, 8), tU = SS(k, 2);
+  const t = clamp((f - tGo) / (tEnd - tGo), 0, 1);              // simulated hours since 18 UTC (0..1), "if these rates held"
   const lon = BGP[1] + (t * 360) * KM_LON;
   const Tpole = E8.pt["18"] + E8.dTdt * t, Tpl = E8.pt["18"] + E8.plane.east * t;
-  const A: Ax = { x: 250, y: 650, w: 660, h: 130, xr: [0, 1], yr: [-4, 10] };
+  const A: Ax = { x: 250, y: 612, w: 660, h: 100, xr: [0, 1], yr: [-4, 10] };
   const PA = axP(A);
   void EQ_S16;
   return (
     <Scene>
       <FlightMap hour={18 + t} pole={Tpole} plane={{ lon, a: 0, o: fin(f, SS(k, 1)) }} children={(P) => {
         const pp = P(BGP[0] + 0.25, lon);
+        const sp = fin(f, tU) > 0 ? "U = 100 m/s" : "100 m/s";
+        const left = pp[0] + 40 + textW(sp, T.floor) > B16.x + B16.w - 20;
         return (
           <g opacity={fin(f, tGo)}>
             <Arrow p={[pp[0] + 50, pp[1]]} q={[pp[0] + 170, pp[1]]} color={C.first} w={8} head={28} />
-            <Lbl x={pp[0] + 40} y={pp[1] + 60} t="100 m/s" c={C.first} s={T.floor} />
+            <Lbl x={left ? pp[0] - 40 : pp[0] + 40} y={pp[1] + 60} t={sp} c={C.first} s={T.floor} a={left ? "end" : "start"} />
             <Lbl x={pp[0] - 10} y={pp[1] - 70} t={`${nf(Tpl, 1)} °C`} c={C.key} s={T.key} a="middle" />
           </g>
         );
@@ -1034,15 +1083,20 @@ const S16: React.FC = () => {
         <Lbl x={A.x + A.w + 14} y={PA(1, E8.pt["18"] + E8.dTdt)[1]} t="place" c={C.local} s={T.floor} o={t > 0.95 ? 1 : 0} />
         <Lbl x={A.x + A.w + 14} y={PA(1, E8.pt["18"] + E8.plane.east)[1]} t="plane" c={C.first} s={T.floor} o={t > 0.95 ? 1 : 0} />
       </Svg>
-      <CalcStack f={f} x={MX + 200} y={90} size={50} maxLines={4} rows={[
-        ROW(String.raw`=+2.9\ ^{\circ}\mathrm{C/h}`, AT(k, 3, "plus two point nine"), String.raw`\frac{\partial T}{\partial t}`, { c: C.local, lc: C.local }),
-        ROW(String.raw`=100\times(-3.2\times10^{-5})`, SS(k, 5), String.raw`U\frac{\partial T}{\partial x}`, { c: C.first, lc: C.first }),
-        ROW(String.raw`=-0.0032\ ^{\circ}\mathrm{C/s}`, AT(k, 5, "is minus"), undefined, { c: C.first, cont: true }),
-        ROW(String.raw`\times3600=-11.5\ ^{\circ}\mathrm{C/h}`, SS(k, 6), undefined, { c: C.first }),
-        ROW(String.raw`\approx+2.9-11.5=-8.6\ ^{\circ}\mathrm{C/h}`, SS(k, 7), String.raw`\frac{dT}{dt}`, { c: C.neg }),
+      <CalcStack f={f} x={MX + 170} y={90} size={50} maxLines={4} rows={[
+        ROW(String.raw`=+2.9\ ^{\circ}\mathrm{C/h}`, AT(k, 4, "plus two point nine"), String.raw`\frac{\partial T}{\partial t}`, { c: C.local, lc: C.local }),
+        ROW(String.raw`=100\times(-3.2\times10^{-5})`, SS(k, 6), String.raw`U\frac{\partial T}{\partial x}`, { c: C.first, lc: C.first }),
+        ROW(String.raw`=-0.0032\ ^{\circ}\mathrm{C/s}`, AT(k, 6, "is minus"), undefined, { c: C.first, cont: true }),
+        ROW(String.raw`\times3600=-11.5\ ^{\circ}\mathrm{C/h}`, SS(k, 7), undefined, { c: C.first }),
+        ROW(String.raw`\approx+2.9-11.5`, SS(k, 8), String.raw`\frac{dT}{dt}`, { c: C.neg }),
+        ROW(String.raw`=-8.6\ ^{\circ}\mathrm{C/h}`, AT(k, 8, "falls at"), undefined, { c: C.neg, cont: true }),
       ]} />
-      <Svg><Keyword f={f} text="cools while places warm" at={[MX + 20, 780]} appear={SS(k, 8)} /></Svg>
-      <TeX s={String.raw`\frac{dT}{dt}=\frac{\partial T}{\partial t}+U\frac{\partial T}{\partial x}`} x={MX} y={680} size={60} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 7))} />
+      <Svg><Keyword f={f} text="cools while places warm" at={[MX + 20, 790]} appear={SS(k, 9)} />
+        </Svg>
+      <Svg><Lbl x={250} y={806} t="if the rates held for 1 h" c={C.muted} s={T.floor} o={fin(f, AT(k, 8, "if these rates"))} /></Svg>
+      <TeX s={String.raw`\frac{dT}{dt}=\frac{\partial T}{\partial t}+U\frac{\partial T}{\partial x}`} x={MX} y={680} size={60} c={C.muted} o={fin(f, tU) * fout(f, SS(k, 8))} />
+      {/* QA halves: the chain rule is on screen from the start; U joins it on S3 */}
+      <TeX s={String.raw`\frac{dT}{dt}=\frac{\partial T}{\partial t}+\cdots`} x={MX} y={680} size={60} c={C.muted} o={fin(f, 4) * fout(f, tU)} />
     </Scene>
   );
 };
@@ -1075,9 +1129,11 @@ const S17: React.FC = () => {
           <Lbl x={250} y={790} t="← +14.4 °C/h" c={C.first} s={T.key} />
         </g>
       </Svg>
-      <CalcStack f={f} x={MX + 130} y={100} size={50} rows={[
+      {/* fix 1 (review M2): the sum is split at "≈" so the stack ends before x 1840 */}
+      <CalcStack f={f} x={MX + 170} y={100} size={50} rows={[
         ROW(String.raw`=+11.5\ ^{\circ}\mathrm{C/h}`, AT(k, 1, "plus eleven"), String.raw`U\frac{\partial T}{\partial x}`, { c: C.first, lc: C.first }),
-        ROW(rep(EQ_S17, String.raw`\frac{dT}{dt}=`, "="), SS(k, 2), String.raw`\frac{dT}{dt}`, { c: C.first }),
+        ROW(cut2(rep(EQ_S17, String.raw`\frac{dT}{dt}=`, "="), String.raw`\approx`)[0], SS(k, 2), String.raw`\frac{dT}{dt}`, { c: C.first }),
+        ROW(String.raw`\approx` + cut2(EQ_S17, String.raw`\approx`)[1], AT(k, 2, "fourteen point four"), undefined, { c: C.first, cont: true }),
       ]} />
       <TeX s={String.raw`\frac{dT}{dt}=\frac{\partial T}{\partial t}+U\frac{\partial T}{\partial x}`} x={MX} y={600} size={60} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 4) - 10)} />
       <TeX s={String.raw`\frac{dT}{dt}`} x={MX} y={520} size={72} c={C.first} o={fin(f, AT(k, 4, "belongs to the traveller"))} />
@@ -1146,8 +1202,9 @@ const S19: React.FC = () => {
   const bar = (v: number) => (Math.log10(Math.abs(v)) + 6) * 112;
   const X0 = MX + 230;
   const rows: [string, number, string, string, number][] = [
-    ["fixed place", SN.fixed, C.local, String.raw`6\times10^{-5}`, AT(k, 3, "six times")],
-    ["sideways", SN.side, C.first, String.raw`\text{a few}\times10^{-5}`, AT(k, 6, "a few")],
+    // fix 1 (review S1): signed values, as said (snd.fixed −5.98e-5, snd.side −3.27e-5)
+    ["fixed place", SN.fixed, C.local, String.raw`-6\times10^{-5}`, AT(k, 3, "minus six")],
+    ["sideways", SN.side, C.first, String.raw`-3\times10^{-5}`, AT(k, 6, "minus three")],
     ["rising", SN.dTdt, C.first, String.raw`-0.027`, AT(k, 7, "is minus")],
   ];
   const plain = String.raw`\frac{dT}{dt}=\frac{\partial T}{\partial t}+u\frac{\partial T}{\partial x}+v\frac{\partial T}{\partial y}+w\frac{\partial T}{\partial z}`;
@@ -1184,7 +1241,7 @@ const S19: React.FC = () => {
         <ColourBar x={680} y={700} w={290} lut={LUT_T} lo={-16} hi={-8} unit="°C" title="temperature 5.8 km up" ticks={[{ v: -15, t: "−15" }, { v: -10, t: "−10" }]} />
       </Svg>
       <TeX s={plain} x={MX} y={130} size={48} o={fin(f, 6) * fout(f, tShare)} />
-      <TeX s={EQ_S19} x={MX} y={150} size={48} o={fin(f, tShare)} />
+      <TeX s={EQ_S19} x={MX - 30} y={150} size={46} o={fin(f, tShare)} />
       <Svg>
         {rows.map(([t, v, c, , at], i) => (
           <g key={t} opacity={fin(f, [tFix, tSide, tRise][i])}>
@@ -1200,7 +1257,7 @@ const S19: React.FC = () => {
           <line x1={X0} y1={660} x2={X0 + 4.6 * 112} y2={660} stroke={C.muted} strokeWidth={3} />
           <Lbl x={X0 + 4.6 * 112} y={745} t="°C/s" c={C.muted} s={T.floor} a="end" />
         </g>
-        <Keyword f={f} text="more than 99 %" at={[MX + 60, 790]} appear={tShare} targets={[[X0 + bar(SN.dTdt) - 20, 570]]} />
+        <Keyword f={f} text="more than 99 %" at={[MX + 60, 790]} appear={tShare} />   {/* retrofit T-S3: no link across the tick labels */}
       </Svg>
       {rows.map(([t, , c, tx, at], i) => <TeX key={t} s={String.raw`\approx ` + tx} x={i === 2 ? X0 : X0 + Math.max(bar(rows[i][1]), 200) + 16} y={i === 2 ? 626 : 330 + i * 120} size={46} c={c} o={fin(f, at)} />)}
     </Scene>
@@ -1215,7 +1272,8 @@ const S20: React.FC = () => {
   const tr = E8.tracks as number[][];
   const L = tr[0].length / 2;
   const ride = tr.reduce((b, t, i) => (Math.hypot(t[0] - 47.9, t[1] + 6.0) < Math.hypot(tr[b][0] - 47.9, tr[b][1] + 6.0) ? i : b), 0);
-  const tR0 = SS(k, 3), tR1 = SE(k, 4);
+  // fix 1 (review S3): new S5 "If the air parcels had kept their temperature …" and S6 "It warmed by only two point nine …"
+  const tR0 = SS(k, 3), tR1 = SE(k, 5), tKeep = SS(k, 4), tDid = SS(k, 5);
   const rs = clamp((f - tR0) / (tR1 - tR0), 0, 1) * 6;           // 6 steps of 10 min = 1 h
   const ri = Math.min(L - 2, Math.floor(rs)), rw = rs - ri;
   const parts: Part[] = [{ t: String.raw`\frac{DT}{Dt}`, c: C.key }, { t: "=" }, { t: String.raw`\frac{\partial T}{\partial t}`, c: C.local }, { t: "+" },
@@ -1246,21 +1304,30 @@ const S20: React.FC = () => {
         );
       })()}
       <Svg><T850Bar x={130} y={742} /></Svg>
-      <Layered parts={parts} x={MX} y={150} size={80} o={fin(f, AT(k, 1, "capital D T"))} layers={[{ t: "all", o: 1 }, { t: [], u: [4], o: fin(f, SS(k, 2)) }]} />
+      <Layered parts={parts} x={MX} y={150} size={76} o={fin(f, AT(k, 1, "capital D T"))} layers={[{ t: "all", o: 1 }, { t: [], u: [4], o: fin(f, SS(k, 2)) }]} />
       <Svg><Keyword f={f} text="material derivative" at={[MX + 20, 330]} appear={AT(k, 1, "the material")} />
         <Keyword f={f} text="moves with the wind" at={[MX + 20, 620]} appear={AT(k, 0, "an air parcel")} out={SS(k, 3) - 12} /></Svg>
       <CalcStack f={f} x={MX + 250} y={400} size={56} rows={[
         ROW(String.raw`=+2.9\ ^{\circ}\mathrm{C/h}`, AT(k, 3, "two point nine"), String.raw`\partial T/\partial t`, { c: C.local, lc: C.local }),
         ROW(String.raw`=-3.7\ ^{\circ}\mathrm{C/h}`, AT(k, 3, "three point seven"), String.raw`\mathbf u\cdot\nabla T`, { c: C.first, lc: C.first }),
-        ROW(String.raw`\approx-0.8\ ^{\circ}\mathrm{C/h}`, SS(k, 4), String.raw`DT/Dt`, { c: C.key, lc: C.key }),
+        ROW(String.raw`\approx-0.8\ ^{\circ}\mathrm{C/h}`, AT(k, 5, "cooled by"), String.raw`DT/Dt`, { c: C.key, lc: C.key }),
       ]} />
       <Svg>
-        <g opacity={fin(f, SS(k, 4))}>
-          <line x1={MX + 380} y1={700} x2={MX + 380} y2={800} stroke={C.ink} strokeWidth={5} />
-          <rect x={MX + 380} y={712} width={2.9 * 70} height={34} fill={C.local} />
-          <rect x={MX + 380 - 3.7 * 70} y={756} width={3.7 * 70} height={34} fill={C.first} opacity={0.6} stroke={C.first} strokeWidth={3} strokeDasharray="10 6" />
-          <Lbl x={MX + 380 + 2.9 * 70 + 14} y={729} t="+2.9" c={C.local} s={T.floor} />
-          <Lbl x={MX + 380 - 3.7 * 70 - 14} y={773} t="−3.7" c={C.first} s={T.floor} a="end" />
+        {/* the place would have warmed +3.7 (dashed) if parcels kept their T; it warmed +2.9; the gap is the parcels' cooling */}
+        <g opacity={fin(f, tKeep)}>
+          <line x1={MX + 380} y1={690} x2={MX + 380} y2={810} stroke={C.ink} strokeWidth={5} />
+          <rect x={MX + 380} y={702} width={3.7 * 70} height={34} fill={C.first} opacity={0.35} stroke={C.first} strokeWidth={3} strokeDasharray="10 6" />
+          <Lbl x={MX + 360} y={719} t="parcels kept T" c={C.first} s={T.floor} a="end" />
+          <Lbl x={MX + 380 + 3.7 * 70 + 14} y={719} t="+3.7" c={C.first} s={T.floor} />
+        </g>
+        <g opacity={fin(f, tDid)}>
+          <rect x={MX + 380} y={760} width={2.9 * 70} height={34} fill={C.local} />
+          <Lbl x={MX + 360} y={777} t="the place" c={C.local} s={T.floor} a="end" />
+          <Lbl x={MX + 380 + 2.9 * 70 + 14} y={777} t="+2.9" c={C.local} s={T.floor} />
+        </g>
+        <g opacity={fin(f, AT(k, 5, "cooled by"))}>
+          <line x1={MX + 380 + 2.9 * 70} y1={748} x2={MX + 380 + 3.7 * 70} y2={748} stroke={C.key} strokeWidth={6} />
+          <Lbl x={MX + 650} y={750} t="−0.8" c={C.key} s={T.floor} />
         </g>
       </Svg>
     </Scene>
@@ -1337,7 +1404,7 @@ const S22: React.FC = () => {
     return poly(pts.slice(0, n).map((p, i) => pr.p([p[0], p[1], hs[i] * HZ + 0.04])));
   };
   const pulseD = 1 + 0.12 * pulse(f, SS(k, 8), 24);
-  const gainT = `+${Math.round(h.gain / 10) * 10} m`;
+  const gainT = `+${(h.summit[2] - h.park[2]).toFixed(0)} m`;          // fix 1 (review S4): the data, 325.1 − 189.7 = 135.4 m
   return (
     <Scene>
       <View3D st={st} x={80} y={40} w={1180} h={780} amb={1.3} dir={1.5} key3={[-6, -8, 10]}>
@@ -1395,8 +1462,8 @@ const S23: React.FC = () => {
       <TeX s={String.raw`M\,dx+N\,dy`} x={MX} y={120} size={76} o={fin(f, SS(k, 1))} />
       <Svg><Keyword f={f} text="a test from the formula" at={[MX + 20, 760]} appear={AT(k, 0, "just from the formula")} out={SS(k, 5) - 12} /></Svg>
       <TeX s={String.raw`M=\frac{\partial f}{\partial x},\quad N=\frac{\partial f}{\partial y}`} x={MX} y={235} size={56} o={fin(f, SS(k, 2))} />
-      <TeX s={String.raw`\frac{\partial^2 f}{\partial y\,\partial x}=\frac{\partial^2 f}{\partial x\,\partial y}`} x={MX} y={355} size={44} c={C.muted} o={fin(f, SS(k, 3))} />
-      <TeX s={t1} x={MX} y={490} size={80} c={C.gold} o={fin(f, SS(k, 4))} />
+      <TeX s={String.raw`\frac{\partial^2 f}{\partial y\,\partial x}=\frac{\partial^2 f}{\partial x\,\partial y}`} x={MX} y={350} size={46} c={C.muted} o={fin(f, SS(k, 3))} />
+      <TeX s={t1} x={MX} y={510} size={80} c={C.gold} o={fin(f, SS(k, 4))} />
       <TeX s={String.raw`y\,dx+x\,dy:\ \ 1=1`} x={MX} y={630} size={54} c={C.first} o={fin(f, SS(k, 6))} />
       <TeX s={String.raw`=d(xy)`} x={MX + 480} y={630} size={54} c={C.first} o={fin(f, SS(k, 7))} />
       <Svg><Check x={MX + 700} y={630} s={0.9} o={fin(f, SS(k, 7))} /></Svg>
@@ -1429,16 +1496,16 @@ const S24: React.FC = () => {
         <Lbl x={pr.p([1.15, 1.15, 0])[0] + 20} y={pr.p([1.15, 1.15, 0])[1]} t="1 m" c={C.key} s={T.floor} />
         <Lbl x={160} y={110} t="p,  ρ,  T" c={C.key} s={T.key} o={fin(f, SS(k, 1))} />
       </Svg>
-      <Layered parts={parts} x={MX} y={140} size={84} o={fin(f, SS(k, 1)) * dimE}
+      <Layered parts={parts} x={MX} y={140} size={78} o={fin(f, SS(k, 1)) * dimE}
         layers={[{ t: "all", o: 1 }, { t: [], u: [0], o: fin(f, AT(k, 2, "p is the pressure")) }, { t: [], u: [2], o: fin(f, AT(k, 2, "rho the density")) }, { t: [], u: [4], o: fin(f, AT(k, 2, "T the temperature")) }]} />
       <Svg><Lbl x={MX} y={262} t="ρ: kg of air in each m³" c={C.muted} s={T.floor} o={fin(f, AT(k, 2, "mass of air")) * dimE} /></Svg>
       <TeX s={String.raw`R=287\ \mathrm{J\,kg^{-1}\,K^{-1}}`} x={MX} y={335} size={52} c={C.key} o={fin(f, SS(k, 3)) * dimE} />
       <TeX s={g2} x={MX} y={425} size={58} o={fin(f, AT(k, 4, "d p equals")) * dimE} />
-      <TeX s={String.raw`\frac{\partial(RT)}{\partial T}=R=\frac{\partial(\rho R)}{\partial\rho}`} x={MX} y={545} size={52} o={fin(f, SS(k, 6)) * dimE} />
-      <Svg><Check x={MX + 620} y={545} o={fin(f, SS(k, 7)) * dimE} /></Svg>
-      <TeX s={String.raw`\div\ \rho RT`} x={MX + 520} y={695} size={56} c={C.gold} o={fin(f, late)} />
-      <TeX s={g3} x={MX} y={695} size={72} c={C.key} o={fin(f, SS(k, 9))} />
-      <Svg><Keyword f={f} text="fractional changes add" at={[MX + 20, 820 - 30]} appear={SS(k, 10)} /></Svg>
+      <TeX s={String.raw`\frac{\partial(RT)}{\partial T}=R=\frac{\partial(\rho R)}{\partial\rho}`} x={MX} y={528} size={52} o={fin(f, SS(k, 6)) * dimE} />
+      <Svg><Check x={MX + 620} y={528} o={fin(f, SS(k, 7)) * dimE} /></Svg>
+      <TeX s={String.raw`\div\ \rho RT`} x={MX + 520} y={688} size={56} c={C.gold} o={fin(f, late)} />
+      <TeX s={g3} x={MX} y={688} size={72} c={C.key} o={fin(f, SS(k, 9))} />
+      <Svg><Keyword f={f} text="fractional changes add" at={[MX + 20, 806]} appear={SS(k, 10)} /></Svg>
     </Scene>
   );
 };
@@ -1503,14 +1570,14 @@ const S26: React.FC = () => {
       <Svg>
         <Lbl x={pr.p([0.5, 0.5, 0])[0]} y={pr.p([0.5, 0.5, 0])[1] + 40} t="Trappes" c={C.key} s={T.floor} a="middle" />
         <Lbl x={pr.p([-0.1, 0, 2.88])[0] - 20} y={pr.p([-0.1, 0, 2.88])[1]} t="dz" c={C.gold} s={T.key} a="end" o={sl} />
-        <Lbl x={pr.p([0.5, 0.5, 1.5])[0] - 30} y={pr.p([0.5, 0.5, 1.5])[1] + 30} t="weight" c={BROWN} s={T.floor} a="end" o={fin(f, AT(k, 3, "weight"))} />
+        <Lbl x={pr.p([0, 0, 1.5])[0] - 40} y={pr.p([0, 0, 1.5])[1] + 30} t="weight" c={BROWN} s={T.floor} a="end" o={fin(f, AT(k, 3, "weight"))} />
         <Lbl x={pr.p([1.3, 0.5, 2.2])[0] + 20} y={pr.p([1.3, 0.5, 2.2])[1]} t="p" c={C.second} s={T.key} o={fin(f, AT(k, 1, "holds up"))} />
         <Lbl x={pr.p([1.3, 0.5, 3.6])[0] + 20} y={pr.p([1.3, 0.5, 3.6])[1]} t="p + dp" c={C.second} s={T.key} o={fin(f, AT(k, 1, "holds up"))} />
       </Svg>
       <TeX s={h1} x={MX} y={105} size={60} o={fin(f, AT(k, 1, "hydrostatic")) * dim} />
-      <Svg><Keyword f={f} text="pressure changes with height" at={[MX + 20, 760]} appear={AT(k, 0, "changes with height")} out={SS(k, 5) - 12} /></Svg>
+      <Svg><Keyword f={f} text="pressure changes with height" at={[MX - 30, 760]} appear={AT(k, 0, "changes with height")} out={SS(k, 5) - 12} /></Svg>
       <TeX s={String.raw`dp=-\rho g\,dz`} x={MX} y={225} size={76} c={C.key} o={fin(f, AT(k, 2, "d p equals")) * dim} />
-      <TeX s={String.raw`g=9.81\ \mathrm{m/s^2}`} x={MX + 440} y={225} size={50} c={BROWN} o={fin(f, AT(k, 2, "nine point eight one")) * dim} />
+      <TeX s={String.raw`g=9.81\ \mathrm{m/s^2}`} x={MX + 380} y={300} size={50} c={BROWN} o={fin(f, AT(k, 2, "nine point eight one")) * dim} />
       <TeX s={String.raw`\frac{\rho}{p}=\frac{1}{RT}`} x={MX} y={345} size={54} o={fin(f, AT(k, 4, "use the gas law")) * dim} />
       <Layered parts={parts} x={MX} y={525} size={64} o={fin(f, SS(k, 5))} layers={[{ t: "all", o: 1 }, { t: [], u: [0], o: fin(f, AT(k, 5, "scale height")) }]} />
       <TeX s={tail} x={MX} y={705} size={56} c={C.key} o={fin(f, SS(k, 6))} />
@@ -1525,10 +1592,11 @@ const S27: React.FC = () => {
   const f = useCurrentFrame(), k = K("s27_exponential");
   const P = axP(A27);
   const z = PROF.z, pm = SN.p as number[], pe = SN.pexp as number[];
-  const tE = SS(k, 2), tB = SS(k, 5), tB1 = SE(k, 6);
+  // fix 1 (review S10): new S5 checks the solution with the chain rule; later sentences shift by one
+  const tE = SS(k, 2), tB = SS(k, 6), tB1 = SE(k, 7), tChk = SS(k, 4);
   const ex = prog(f, tE, tE + 50);
   const nB = Math.round(z.length * prog(f, tB, tB1));
-  const shade = fin(f, AT(k, 6, "falls below"));
+  const shade = fin(f, AT(k, 7, "falls below"));
   const poly2 = [...z.map((zz, i) => P(pe[i], zz)), ...z.slice().reverse().map((zz, i) => P(pm[z.length - 1 - i], zz))];
   return (
     <Scene>
@@ -1540,11 +1608,13 @@ const S27: React.FC = () => {
         {z.slice(0, nB).map((zz, i) => <Dot key={i} p={P(pm[i], zz)} c={C.first} r={6} />)}
         <Lbl x={P(560, 5)[0]} y={P(560, 5)[1]} t="exponential" c={C.local} s={T.floor} o={ex} />
         <Lbl x={P(60, 24)[0] + 120} y={P(60, 24)[1]} t="balloon" c={C.first} s={T.floor} o={fin(f, tB)} />
-        <Keyword f={f} text="differential equation" at={[MX + 20, 430]} appear={SS(k, 4)} />
-        <Keyword f={f} text="colder → denser → faster fall" at={[MX + 20, 600]} appear={SS(k, 7)} />
+        <Keyword f={f} text="differential equation" at={[MX + 20, 560]} appear={SS(k, 5)} />
+        <Keyword f={f} text="colder → denser → faster fall" at={[MX + 20, 700]} appear={SS(k, 8)} />
+        <Check x={MX + 680} y={430} s={0.9} o={fin(f, AT(k, 4, "so it really"))} />
       </Svg>
       <TeX s={EQ_S27} x={MX + 40} y={160} size={96} c={C.key} o={fin(f, tE)} />
-      <TeX s={String.raw`e\approx2.718`} x={MX + 40} y={300} size={60} o={fin(f, SS(k, 3))} />
+      <TeX s={String.raw`e\approx2.718`} x={MX + 40} y={295} size={60} o={fin(f, SS(k, 3))} />
+      <TeX s={String.raw`\frac{dp}{dz}=-\frac{p_0}{H}e^{-z/H}=-\frac{p}{H}`} x={MX + 40} y={430} size={56} o={fin(f, AT(k, 4, "its slope"))} />
       <TeX s={String.raw`\frac{dp}{p}=-\frac{dz}{H},\ \ H=\frac{RT}{g}`} x={MX + 40} y={160} size={60} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
     </Scene>
   );
@@ -1557,7 +1627,8 @@ const RouteChart: React.FC<{ draw: number[]; label?: number; ent?: number; parce
   const P = axP(A28), R = D.routes;
   const pA = P(D.routes_AB.vA, D.routes_AB.pA), pB = P(D.routes_AB.vB, D.routes_AB.pB);
   const pos = (key: string, s: number): Pt => { const v = R[key].v as number[], p = R[key].p as number[], i = Math.min(v.length - 1, Math.round(s * (v.length - 1))); return P(v[i], p[i]); };
-  const lab: Record<string, [number, number]> = { one: [0.82, 680], two: [1.0, 900], three: [1.06, 1060] };
+  // fix 1 (review M4, S8): route one's label sits 48 hPa above its horizontal leg (p 670 hPa), clear of both legs
+  const lab: Record<string, [number, number]> = { one: [1.0, 718], two: [1.0, 900], three: [1.06, 1060] };
   return (
     <>
       <Svg>
@@ -1575,7 +1646,7 @@ const RouteChart: React.FC<{ draw: number[]; label?: number; ent?: number; parce
         ))}
         {ROUTES.map(([key, c], i) => (
           <g key={`e${key}`} opacity={ent}>
-            <Lbl x={P(lab[key][0], lab[key][1])[0]} y={P(lab[key][0], lab[key][1])[1]} t="Δη = 116" c={c} s={T.key} a="middle" />
+            <Lbl x={P(lab[key][0], lab[key][1])[0]} y={P(lab[key][0], lab[key][1])[1]} t={i === 2 ? "Δη = 116 J kg⁻¹ K⁻¹" : "Δη = 116"} c={c} s={T.key} a="middle" />
           </g>
         ))}
       </Svg>
@@ -1587,26 +1658,45 @@ const RouteChart: React.FC<{ draw: number[]; label?: number; ent?: number; parce
   );
 };
 const S28: React.FC = () => {
+  // fix 1 (review M3, S16): new S2–S4 name the first law, I, đQ, đW and the barred d (the equation now appears on S2, the
+  // definitions beside it); a 3-D air parcel grows ×1.5 in volume on S5 (illustrative cube; the chart parcel follows the
+  // routes); every later sentence shifts by three
   const f = useCurrentFrame(), k = K("s28_heat_routes");
-  const d = [2, 3, 4].map((j) => prog(f, SS(k, j), SS(k, j) + 75));
+  const d = [5, 6, 7].map((j) => prog(f, SS(k, j), SS(k, j) + 75));
   const cur = d[2] > 0 ? 2 : d[1] > 0 ? 1 : 0;
-  const lbl = f >= AT(k, 5, "forty") ? 3 : f >= AT(k, 5, "thirty three") ? 2 : f >= AT(k, 5, "twenty seven") ? 1 : 0;
+  const lbl = f >= AT(k, 8, "forty") ? 3 : f >= AT(k, 8, "thirty three") ? 2 : f >= AT(k, 8, "twenty seven") ? 1 : 0;
+  const tLaw = SS(k, 1), tI = AT(k, 2, "d I"), tBar = AT(k, 3, "with a d"), tPar = SS(k, 4), tR1 = SS(k, 5);
+  const grow = prog(f, AT(k, 4, "let it expand"), AT(k, 4, "ending at"));
+  const oPar = fin(f, tPar) * fout(f, tR1);
+  const eq = rep(rep(EQ_S28, "đQ", String.raw`\textcolor{#d8b23a}{đ}Q`), "đW", String.raw`\textcolor{#d8b23a}{đ}W`);
   return (
     <Scene>
       <RouteChart draw={d} label={lbl} parcel={{ r: cur, s: d[cur] }} />
-      <TeX s={rep(rep(EQ_S28, "đQ", String.raw`\textcolor{#d8b23a}{đ}Q`), "đW", String.raw`\textcolor{#d8b23a}{đ}W`)} x={MX + 40} y={150} size={84} o={fin(f, SS(k, 0))} />
+      <TeX s={eq} x={MX + 40} y={150} size={84} o={fin(f, tLaw)} />
       <TeX s={EQ_S28} x={0} y={0} size={84} o={0} />
       <Svg>
+        <Keyword f={f} text="first law of thermodynamics" at={[MX + 20, 270]} appear={AT(k, 1, "first law")} out={tPar - 10} />
+        <Lbl x={MX + 20} y={360} t="I: internal energy" c={C.key} s={T.floor} o={fin(f, tI) * fout(f, tPar - 10)} />
+        <Lbl x={MX + 20} y={420} t="(the molecules' motion)" c={C.muted} s={T.floor} o={fin(f, AT(k, 2, "molecules")) * fout(f, tPar - 10)} />
+        <Lbl x={MX + 20} y={500} t="Q: heat added" c={C.key} s={T.floor} o={fin(f, AT(k, 2, "heat added")) * fout(f, tPar - 10)} />
+        <Lbl x={MX + 20} y={560} t="W: work done on the air" c={C.key} s={T.floor} o={fin(f, AT(k, 2, "work done")) * fout(f, tPar - 10)} />
+        <Lbl x={MX + 20} y={650} t="đ: a small amount, not a change" c={C.gold} s={T.floor} o={fin(f, tBar) * fout(f, tPar - 10)} />
+        <g opacity={oPar}>
+          <Lbl x={MX + 40} y={330} t="280 K" c={C.key} s={T.key} />
+          <Lbl x={MX + 470} y={640} t="× 1.5 volume" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 4, "one and a half"))} />
+          <Lbl x={MX + 470} y={710} t="same T at the end" c={C.local} s={T.floor} a="middle" o={fin(f, AT(k, 4, "ending at"))} />
+        </g>
         {["1  fixed α, then fixed p", "2  fixed T", "3  fixed p, then fixed α"].map((t, i) => (
-          <g key={t} opacity={fin(f, SS(k, i + 2))}>
+          <g key={t} opacity={fin(f, SS(k, i + 5))}>
             <line x1={MX} y1={300 + i * 70} x2={MX + 60} y2={300 + i * 70} stroke={ROUTES[i][1]} strokeWidth={7} strokeDasharray={ROUTES[i][2] || undefined} />
             <Lbl x={MX + 80} y={300 + i * 70} t={t} c={C.key} s={T.floor} />
           </g>
         ))}
-        <Keyword f={f} text="heat: not a state function" at={[MX + 20, 580]} appear={AT(k, 7, "not a state function")} />
-        <Lbl x={MX + 20} y={650} t="nor is work" c={C.local} s={T.floor} o={fin(f, SS(k, 8))} />
-        <Keyword f={f} text="internal energy: ΔI = 0" at={[MX + 20, 760]} appear={AT(k, 9, "internal energy")} />
+        <Keyword f={f} text="heat: not a state function" at={[MX + 20, 580]} appear={AT(k, 10, "not a state function")} />
+        <Lbl x={MX + 20} y={650} t="nor is work" c={C.local} s={T.floor} o={fin(f, SS(k, 11))} />
+        <Keyword f={f} text="internal energy: ΔI = 0" at={[MX + 20, 760]} appear={AT(k, 12, "internal energy")} />
       </Svg>
+      {oPar > 0 ? <ParcelBox3D p={[MX + 470, 470]} size={Math.round(160 * Math.cbrt(1 + 0.5 * grow))} o={oPar} /> : null}
     </Scene>
   );
 };
@@ -1614,25 +1704,28 @@ const S29: React.FC = () => {
   const f = useCurrentFrame(), k = K("s29_entropy");
   const [q1, q2] = EQ_S29.split(String.raw`,\qquad `);
   const parts: Part[] = [{ t: "đQ=" }, { t: "c_v", u: { w: String.raw`\text{heat per kg per K}`, c: C.gold } }, { t: String.raw`\,dT+p\,` }, { t: String.raw`d\alpha`, u: { w: String.raw`\alpha=1/\rho`, c: C.gold } }];
-  const dim = 1 - 0.55 * fin(f, SS(k, 8));
+  // fix 1 (review M3, S11, M4): new S5 "That's the first law turned round …" (shown as c_v dT = dI, p dα = −đW on S5 only);
+  // "written eta" on S14; later sentences shift by one; Δη labels lifted, unit once
+  const dim = 1 - 0.55 * fin(f, SS(k, 9));
 
   return (
     <Scene>
-      <RouteChart draw={[1, 1, 1]} label={3} ent={fin(f, AT(k, 13, "one hundred and sixteen"))} />
+      <RouteChart draw={[1, 1, 1]} label={3} ent={fin(f, AT(k, 14, "one hundred and sixteen"))} />
       <TeX s={q1} x={MX} y={120} size={66} o={fin(f, SS(k, 1)) * dim} />
       <Svg>
         <Lbl x={MX} y={205} t="cᵥ: heat to warm 1 kg by 1 K" c={C.muted} s={T.floor} o={fin(f, SS(k, 2)) * dim} />
         <Lbl x={MX} y={258} t="α = 1/ρ: specific volume" c={C.muted} s={T.floor} o={fin(f, SS(k, 3)) * dim} />
       </Svg>
-      <TeX s={String.raw`p=\frac{RT}{\alpha}`} x={MX} y={350} size={52} o={fin(f, SS(k, 4)) * dim} />
-      <TeX s={String.raw`\frac{\partial c_v}{\partial\alpha}=0\ \ \neq\ \ \frac{\partial(RT/\alpha)}{\partial T}=\frac{R}{\alpha}`} x={MX} y={475} size={46} c={C.neg} o={fin(f, SS(k, 6)) * dim} />
-      <TeX s={String.raw`\div\,T`} x={MX + 620} y={475} size={56} c={C.gold} o={fin(f, SS(k, 8))} />
-      <TeX s={q2} x={MX} y={610} size={56} c={C.key} o={fin(f, SS(k, 9))} />
-      <TeX s={String.raw`\frac{\partial(c_v/T)}{\partial\alpha}=0=\frac{\partial(R/\alpha)}{\partial T}`} x={MX} y={708} size={44} c={C.first} o={fin(f, SS(k, 10))} />
+      <TeX s={String.raw`c_v\,dT=dI,\qquad p\,d\alpha=-đW`} x={MX} y={350} size={56} c={C.gold} o={fin(f, AT(k, 4, "c v d T")) * fout(f, SS(k, 5) - 8)} />
+      <TeX s={String.raw`p=\frac{RT}{\alpha}`} x={MX} y={350} size={52} o={fin(f, SS(k, 5)) * dim} />
+      <TeX s={String.raw`\frac{\partial c_v}{\partial\alpha}=0\ \ \neq\ \ \frac{\partial(RT/\alpha)}{\partial T}=\frac{R}{\alpha}`} x={MX} y={475} size={46} c={C.neg} o={fin(f, SS(k, 7)) * dim} />
+      <TeX s={String.raw`\div\,T`} x={MX + 620} y={475} size={56} c={C.gold} o={fin(f, SS(k, 9))} />
+      <TeX s={rep(q2, String.raw`d\eta`, String.raw`\textcolor{#d8b23a}{d\eta}`)} x={MX} y={596} size={56} c={C.key} o={fin(f, SS(k, 10))} />
+      <TeX s={String.raw`\frac{\partial(c_v/T)}{\partial\alpha}=0=\frac{\partial(R/\alpha)}{\partial T}`} x={MX} y={716} size={44} c={C.first} o={fin(f, SS(k, 11))} />
       <Svg>
-        <Check x={MX + 600} y={708} o={fin(f, SS(k, 11))} />
-        <Keyword f={f} text="entropy" at={[MX + 20, 790]} appear={AT(k, 12, "entropy")} out={SS(k, 14)} targets={[[MX + 40, 600]]} />
-        <Keyword f={f} text="potential temperature" at={[MX + 20, 800 - 10]} appear={AT(k, 14, "potential temperature")} o={1} />
+        <Check x={MX + 600} y={716} o={fin(f, SS(k, 12))} />
+        <Keyword f={f} text="entropy, η (eta)" at={[MX + 20, 790]} appear={AT(k, 13, "entropy")} out={SS(k, 15)} />
+        <Keyword f={f} text="potential temperature" at={[MX + 20, 800 - 10]} appear={AT(k, 15, "potential temperature")} o={1} />
       </Svg>
     </Scene>
   );
@@ -1686,8 +1779,8 @@ const S30: React.FC = () => {
         <Axes A={Am} xt={[-60, -30, 0]} yt={[0, 10, 20, 30]} xl="°C" yl="km" grid={false} />
         <ProfileLine A={Am} zTop={32} w={4} clip="s30m" />
         <rect x={b0[0]} y={b0[1]} width={Math.max(6, b1[0] - b0[0])} height={Math.max(6, b1[1] - b0[1])} fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, AT(k, 3, "zoom in"))} />
-        <Keyword f={f} text="tangent" at={[1250, 720]} appear={SS(k, 7)} />
-        <Keyword f={f} text="locally a line" at={[1480, 720]} appear={SS(k, 8)} />
+        <Keyword f={f} text="tangent" at={[1250, 722]} appear={SS(k, 7)} />
+        <Keyword f={f} text="locally a line" at={[1250, 792]} appear={SS(k, 8)} />
       </Svg>
     </Scene>
   );
@@ -1723,14 +1816,17 @@ const S31: React.FC = () => {
         <Lbl x={P(SN.lin4, zB)[0] + 30} y={P(SN.lin4, zB)[1]} t="off 3.4" c={C.neg} s={T.floor} o={fin(f, SS(k, 9))} />
         <Lbl x={P(12.3, Z85)[0] + 24} y={P(12.3, Z85)[1] + 36} t="z₀" c={C.gold} s={T.key} />
       </Svg>
-      <TeX s={EQ_S31} x={MX} y={140} size={72} c={C.key} o={tl} />
-      <TeX s={String.raw`T(z_0)=12.3\ ^{\circ}\mathrm C`} x={MX} y={270} size={54} o={fin(f, SS(k, 2))} />
-      <TeX s={String.raw`\frac{dT}{dz}\approx\frac{${nf(Thi, 1).replace("−", "-")}-${nf(Tlo, 1).replace("−", "-")}}{${zhi.toFixed(3)}-${zlo.toFixed(3)}}\approx-4.86\ \tfrac{^{\circ}\mathrm C}{\mathrm{km}}`}
-        x={MX} y={380} size={50} o={fin(f, SS(k, 3))} />
-      <CalcStack f={f} x={MX + 150} y={470} size={44} maxLines={4} rows={[
+      {/* fix 1 (review S6): smaller top line, the slope split at "≈", the stack moved right so its lhs stays in the maths zone */}
+      <TeX s={EQ_S31} x={MX} y={130} size={56} c={C.key} o={tl} />
+      <TeX s={String.raw`T(z_0)=12.3\ ^{\circ}\mathrm C`} x={MX} y={240} size={54} o={fin(f, SS(k, 2))} />
+      <TeX s={String.raw`\frac{dT}{dz}\approx\frac{${nf(Thi, 1).replace("−", "-")}-${nf(Tlo, 1).replace("−", "-")}}{${zhi.toFixed(3)}-${zlo.toFixed(3)}}`}
+        x={MX} y={345} size={50} o={fin(f, SS(k, 3))} />
+      <TeX s={String.raw`\approx-4.86\ ^{\circ}\mathrm C/\mathrm{km}`} x={MX + 110} y={432} size={50} o={fin(f, AT(k, 3, "minus four point nine"))} />
+      <CalcStack f={f} x={MX + 250} y={490} size={44} maxLines={4} rows={[
         ROW(String.raw`\approx12.3-1\times4.86\approx7.4`, p1, String.raw`T(z_0+1)`, { c: C.gold }),
         ROW(String.raw`6.9\ \ (\text{off}\ 0.5)`, SS(k, 6), String.raw`\text{balloon}`, { c: C.local, lc: C.local }),
-        ROW(String.raw`\approx12.3-4.26\times4.86\approx-8.4`, p2, String.raw`T(z_0+4.26)`, { c: C.gold }),
+        ROW(String.raw`\approx12.3-4.26\times4.86`, p2, String.raw`T(z_0+4.26)`, { c: C.gold }),
+        ROW(String.raw`\approx-8.4`, AT(k, 8, "minus eight point four"), undefined, { c: C.gold, cont: true }),
         ROW(String.raw`-11.8\ \ (\text{off}\ 3.4)`, AT(k, 8, "balloon measured"), String.raw`\text{balloon}`, { c: C.neg, lc: C.local }),
       ]} />
     </Scene>
@@ -1770,15 +1866,17 @@ const S32: React.FC = () => {
       </Svg>
       <TeX s={EQ_S31} x={MX} y={150} size={64} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
       <Layered parts={bend} x={MX} y={150} size={72} o={fin(f, SS(k, 2)) * dimR} layers={[{ t: "all", o: 1 }, { t: [], u: [0], o: fin(f, AT(k, 2, "divided by two")) }]} />
-      <CalcStack f={f} x={MX + 290} y={270} size={54} o={1 - fin(f, SS(k, 10))} rows={[
+      {/* fix 1 (review M1): the stack starts 60 px below the "the bend" brace label and leaves when the h³ term arrives (S8),
+          which takes its place; "Taylor series" sits between the h³ line and the full series, over nothing */}
+      <CalcStack f={f} x={MX + 290} y={330} size={54} o={1 - fin(f, SS(k, 7))} rows={[
         ROW(String.raw`=2c\,h`, AT(k, 5, "two c h"), String.raw`\tfrac{d}{dh}(c\,h^2)`),
         ROW(String.raw`=2c`, AT(k, 5, "second derivative is"), String.raw`\tfrac{d^2}{dh^2}(c\,h^2)`),
         ROW(String.raw`=\frac{f''}{2}`, SS(k, 6), "c", { c: C.gold }),
       ]} />
-      <TeX s={String.raw`\frac{h^3}{3!}\,f''',\qquad 3!=3\times2\times1=6`} x={MX} y={640} size={52} o={fin(f, SS(k, 7)) * (1 - fin(f, SS(k, 10)))} />
-      <TeX s={cut2(fs1, String.raw`+\frac{h^2}{2!}`)[0]} x={MX} y={660} size={52} c={C.key} o={fin(f, SS(k, 10))} />
-      <TeX s={String.raw`+\frac{h^2}{2!}` + cut2(fs1, String.raw`+\frac{h^2}{2!}`)[1]} x={MX + 40} y={775} size={52} c={C.key} o={fin(f, AT(k, 10, "plus h squared"))} />
-      <Svg><Keyword f={f} text="Taylor series" at={[MX + 20, 660]} appear={SS(k, 9)} out={SS(k, 10)} /></Svg>
+      <TeX s={String.raw`\frac{h^3}{3!}\,f''',\qquad 3!=3\times2\times1=6`} x={MX} y={420} size={52} o={fin(f, SS(k, 7), 14) * (1 - fin(f, SS(k, 10)))} />
+      <TeX s={cut2(fs1, String.raw`+\frac{h^2}{2!}`)[0]} x={MX} y={650} size={52} c={C.key} o={fin(f, SS(k, 10))} />
+      <TeX s={String.raw`+\frac{h^2}{2!}` + cut2(fs1, String.raw`+\frac{h^2}{2!}`)[1]} x={MX + 40} y={760} size={52} c={C.key} o={fin(f, AT(k, 10, "plus h squared"))} />
+      <Svg><Keyword f={f} text="Taylor series" at={[MX + 20, 545]} appear={SS(k, 9)} /></Svg>
     </Scene>
   );
 };
@@ -1794,7 +1892,7 @@ const S33: React.FC = () => {
   const n3 = s3.filter((a) => f >= a).length, n5 = s5.filter((a) => f >= a).length;
   const order = f >= SS(k, 5) ? Math.max(0, Math.min(4, n5 - 1)) : Math.max(0, n3 - 1);
   const v01 = ["1", "1.1", "1.105", "1.10517"].slice(0, n3).join(String.raw`\ \to\ `);
-  const v1 = ["1", "2", "2.5", "2.667", "2.708", String.raw`\ldots\ 2.718`].slice(0, n5).join(String.raw`,\ `);
+  const v1 = ["1", "2", "2.5", "2.667", "2.708", String.raw`\to2.718`].slice(0, n5).join(", ");   // fix 1 (S6): narrower
   return (
     <Scene>
       <Svg>
@@ -1807,8 +1905,11 @@ const S33: React.FC = () => {
 
         <Lbl x={P(-0.15, 3.3)[0]} y={P(-0.15, 3.3)[1]} t={`${order + 1} term${order ? "s" : ""}`} c={C.first} s={T.key} o={fin(f, SS(k, 3))} />
       </Svg>
-      <TeX s={EQ_S33} x={MX} y={150} size={64} c={C.key} o={fin(f, SS(k, 2))} />
-      <TeX s={cut2(EQ_S32, String.raw`+\frac{h^3}{3!}`)[0] + String.raw`+\cdots`} x={MX} y={150} size={46} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
+      {/* fix 1 (review S6): e^h series at 58 px; the reminder of the general series on two lines (both end before x 1840) */}
+      <TeX s={EQ_S33} x={MX} y={150} size={58} c={C.key} o={fin(f, SS(k, 2))} />
+      <TeX s={cut2(EQ_S32, String.raw`+\frac{h^2}{2!}`)[0]} x={MX} y={120} size={46} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
+      <TeX s={String.raw`+\frac{h^2}{2!}` + cut2(cut2(EQ_S32, String.raw`+\frac{h^2}{2!}`)[1], String.raw`+\frac{h^3}{3!}`)[0] + String.raw`+\cdots`} x={MX + 60} y={215} size={46} c={C.muted}
+        o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
       <TeX s={String.raw`e^x:\ \ \text{every derivative is}\ e^x`} x={MX} y={320} size={52} c={C.local} o={fin(f, AT(k, 0, "e to the x")) * fout(f, SS(k, 3) - 10)} />
       <TeX s={String.raw`h=0.1:`} x={MX} y={320} size={54} c={C.gold} o={fin(f, SS(k, 3))} />
       <TeX s={v01 || "1"} x={MX} y={410} size={54} o={fin(f, SS(k, 3))} />
@@ -1849,7 +1950,7 @@ const S34: React.FC = () => {
         <Dot p={P(SN.tp1[1], z1)} c={C.gold} r={11} o={fin(f, SS(k, 7))} />
         <Dot p={P(SN.tp1[2], z1)} c={C.second} r={11} o={fin(f, tB)} />
         <Lbl x={P(880, 0.3)[0]} y={P(880, 0.3)[1]} t="line" c={C.gold} s={T.floor} o={fin(f, tL)} />
-        <Lbl x={P(935, 0.62)[0]} y={P(935, 0.62)[1]} t="exponential" c={C.local} s={T.floor} />
+        <Lbl x={P(875, 1.32)[0]} y={P(875, 1.32)[1]} t="exponential" c={C.local} s={T.floor} />
         <Plane p={[MX + 60, 560]} s={1.1} o={fin(f, SS(k, 5))} />
         <Lbl x={MX + 120} y={560} t="≈ 30 ft per hPa (pilots)" c={C.key} s={T.floor} o={fin(f, SS(k, 5))} />
         <CurvedLink f={f} from={P(SN.tp1[1], z1)} to={[MX + 10, 660]} start={SS(k, 7)} bend={-60} />
@@ -1859,7 +1960,7 @@ const S34: React.FC = () => {
       <TeX s={first} x={MX} y={140} size={64} o={fin(f, tB)} />
       <TeX s={second} x={MX} y={270} size={60} c={C.gold} o={fin(f, SS(k, 3))} />
       <Svg><Lbl x={MX + 330} y={270} t="hydrostatic balance" c={C.key} s={T.floor} o={fin(f, AT(k, 3, "hydrostatic balance"))} /></Svg>
-      <CalcStack f={f} x={MX + 160} y={350} size={52} rows={[
+      <CalcStack f={f} x={MX + 90} y={350} size={52} rows={[
         ROW(String.raw`=1.186\times9.81\approx11.6\ \mathrm{Pa/m}`, SS(k, 4), String.raw`\rho_0 g`),
         ROW(String.raw`\to\ 1\ \mathrm{hPa}\ \text{per}\ 8.6\ \mathrm m`, AT(k, 4, "one hectopascal")),
       ]} />
@@ -1896,19 +1997,20 @@ const S35: React.FC = () => {
         <Dot p={P(tp[3], z5)} c={C.key} r={9} o={fin(f, t3)} />
         <Dot p={P(SN.pe5, z5)} c={C.local} r={11} o={fin(f, t4)} />
         <Dot p={P(500, z5)} c={C.first} r={13} />
-        <Lbl x={P(500, z5)[0] - 20} y={P(500, z5)[1] + 46} t="balloon 500" c={C.first} s={T.floor} a="end" />
         <Dot p={P(SN.p_tb, z5)} c={C.gold} r={9} o={fin(f, t5)} />
       </Svg>
-      <CalcStack f={f} x={MX + 270} y={100} size={54} maxLines={4} rows={[
+      <CalcStack f={f} x={MX + 270} y={90} size={54} maxLines={5} rows={[
+        ROW(String.raw`500\ \mathrm{hPa}`, AT(k, 0, "five hundred"), String.raw`\text{balloon}`, { c: C.first, lc: C.first }),
         ROW("343", t1, String.raw`\text{line}`, { c: C.gold }),
         ROW("558", t2, String.raw`+\ \text{bend}`, { c: C.second }),
         ROW("511", t3, String.raw`+\ \text{next term}`, { c: C.key }),
         ROW(String.raw`517\ \mathrm{hPa}`, t4, String.raw`\text{all terms}`, { c: C.local }),
       ]} />
-      <TeX s={ser} x={MX - 20} y={560} size={44} o={fin(f, t4)} />
+      <TeX s={cut2(ser, String.raw`\to\cdots`)[0]} x={MX - 20} y={560} size={44} o={fin(f, t4)} />   {/* fix 1 (S6): split, ends before x 1840 */}
+      <TeX s={String.raw`\to\cdots` + cut2(ser, String.raw`\to\cdots`)[1]} x={MX + 160} y={622} size={44} o={fin(f, t4)} />
       <TeX s={EQ_S34.split(String.raw`,\qquad `)[0]} x={MX} y={640} size={56} c={C.muted} o={fin(f, 4) * fout(f, t4 - 10)} />
-      <TeX s={tb} x={MX} y={670} size={54} c={C.gold} o={fin(f, t5)} />
-      <Svg><Lbl x={MX + 20} y={770} t="a series is as good as its curve" c={C.key} s={T.floor} o={fin(f, SS(k, 6))} /></Svg>
+      <TeX s={tb} x={MX} y={700} size={54} c={C.gold} o={fin(f, t5)} />
+      <Svg><Lbl x={MX + 20} y={782} t="a series is as good as its curve" c={C.key} s={T.floor} o={fin(f, SS(k, 6))} /></Svg>
     </Scene>
   );
 };
@@ -2005,7 +2107,7 @@ const S38: React.FC = () => {
   const P = axP(A);
   const tx = D.taylor;
   const x0 = 0.6, e0 = Math.exp(x0);
-  const Bt = { lat0: 44, lat1: 54, lon0: -20, lon1: -4, x: MX + 400, y: 470, w: 380, h: 300 } as MapBox;
+  const Bt = { lat0: 44, lat1: 54, lon0: -20, lon1: -4, x: MX + 360, y: 470, w: 380, h: 300 } as MapBox;
   const wave = Array.from({ length: 121 }, (_, i) => [180 + i * 6.5, 620 - 26 * Math.sin((i / 120) * 6 * Math.PI + f * 0.08) * Math.exp(-(((i - 60) / 40) ** 2))] as Pt);
   return (
     <Scene>
@@ -2029,7 +2131,7 @@ const S38: React.FC = () => {
         </g>
       </Svg>
       <MapView id="s38" B={Bt} o={fin(f, SS(k, 3))} L={{ tc: 1, coast: 0.6 }} />
-      <TeX s={EQ_S38} x={MX - 10} y={150} size={64} c={C.key} o={fin(f, 4)} />
+      <TeX s={EQ_S38} x={MX - 10} y={150} size={58} c={C.key} o={fin(f, 4)} />
     </Scene>
   );
 };
@@ -2163,7 +2265,9 @@ const S41: React.FC = () => {
         </g>
       )} />
       <Svg>
-        <Keyword f={f} text="+1.26 °C (2016–2025)" at={[MX + 20, 120]} appear={SS(k, 1)} />
+        {/* fix 1 (review S20): the warming's baseline is on screen (Forster et al. 2026, credited in the source line) */}
+        <Keyword f={f} text="+1.26 °C" at={[MX + 20, 110]} appear={SS(k, 1)} />
+        <Lbl x={MX + 20} y={170} t="2016–2025 vs 1850–1900" c={C.muted} s={T.floor} o={fin(f, AT(k, 1, "warmer than"))} />
         <Lbl x={MX + 20} y={340} t="measured near the ground:" c={C.key} s={T.floor} o={fin(f, SS(k, 3))} />
         <Lbl x={MX + 20} y={395} t="≈ 4–5 % per °C" c={C.key} s={T.floor} o={fin(f, AT(k, 3, "four to five"))} />
         <Lbl x={MX + 20} y={460} t="rising since 1979" c={C.first} s={T.floor} o={fin(f, AT(k, 4, "rising"))} />
@@ -2174,7 +2278,7 @@ const S41: React.FC = () => {
           <Lbl x={MX + 160} y={770} t="(projected)" c={C.muted} s={T.floor} />
         </g>
       </Svg>
-      <CalcStack f={f} x={MX + 300} y={190} size={56} rows={[ROW(String.raw`\approx 9\,\%\ \ \text{more}\ e_s`, AT(k, 2, "about nine"), String.raw`1.26\times7\,\%`)]} />
+      <CalcStack f={f} x={MX + 300} y={215} size={56} rows={[ROW(String.raw`\approx 9\,\%\ \ \text{more}\ e_s`, AT(k, 2, "about nine"), String.raw`1.26\times7\,\%`)]} />
     </Scene>
   );
 };
@@ -2203,16 +2307,16 @@ const S42: React.FC = () => {
   const [, d2] = EQ_S42.split(String.raw`,\qquad `);
   const [dA, dRest] = cut2(d2, String.raw`=\frac{4F}{T}`);
   const tD = SS(k, 6);
-  const Ai: Ax = { x: 620, y: 90, w: 330, h: 260, xr: [230, 280], yr: [150, 350] };
+  // §5b (retrofit T-M2): the T–F graph and the readout sit beside the CERES globe, never on it
+  const Ai: Ax = { x: 775, y: 290, w: 205, h: 300, xr: [230, 280], yr: [150, 350] };
   return (
     <Scene>
-      <Globe cam={{ ...cam, dist: 3.9 }} box={{ x: 80, y: 40, w: 920, h: 640 }} field={IMGS.olr} fieldO={1} coast={0.5} dim={1} />
+      <Globe cam={{ ...cam, dist: 3.9 }} box={{ x: 80, y: 40, w: 600, h: 640 }} field={IMGS.olr} fieldO={1} coast={0.5} dim={1} />
       <Svg>
         <ColourBar x={130} y={742} w={380} lut={LUT_T} lo={100} hi={320} unit="W/m²" title="heat sent to space (infrared)" ticks={[{ v: 150, t: "150" }, { v: 250, t: "250" }]} />
-        <Lbl x={110} y={110} t="≈ 240 W/m²" c={C.key} s={T.key} o={fin(f, AT(k, 3, "two hundred and forty"))} />
-        <Lbl x={110} y={170} t="global average" c={C.muted} s={T.floor} o={fin(f, AT(k, 3, "on average"))} />
+        <Lbl x={700} y={90} t="≈ 240 W/m²" c={C.key} s={T.key} o={fin(f, AT(k, 3, "two hundred and forty"))} />
+        <Lbl x={700} y={150} t="global average" c={C.muted} s={T.floor} o={fin(f, AT(k, 3, "on average"))} />
         <g opacity={fin(f, tD)}>
-          <rect x={Ai.x - 80} y={Ai.y - 50} width={Ai.w + 100} height={Ai.h + 130} fill={C.bg} opacity={0.85} />
           <SBChart A={Ai} tan={fin(f, AT(k, 7, "four sigma"))} />
         </g>
         <Keyword f={f} text="emission temperature" at={[MX + 20, 545]} appear={SS(k, 5)} />
@@ -2244,13 +2348,18 @@ const S43: React.FC = () => {
   return (
     <Scene>
       <Svg o={1 - ph2}>
-        <line x1={X0} y1={150} x2={X0} y2={560} stroke={C.ink} strokeWidth={5} />
+        <line x1={X0} y1={150} x2={X0} y2={560} stroke={C.ink} strokeWidth={5} opacity={fin(f, SS(k, 1))} />
         <rect x={X0} y={200} width={3.93 * sc} height={56} fill={C.gold} opacity={fin(f, SS(k, 1))} />
         <Lbl x={X0 + 3.93 * sc + 16} y={228} t="+3.9" c={C.gold} s={T.key} o={fin(f, SS(k, 1))} />
         <Lbl x={X0 - 20} y={228} t="CO₂ doubled: heating" c={C.key} s={T.floor} a="end" o={fin(f, SS(k, 1))} />
         <rect x={X0 - RD.lam * dT * sc} y={300} width={RD.lam * dT * sc} height={56} fill={C.first} opacity={0.85 * fin(f, tW)} />
         <Lbl x={X0 + 20} y={328} t="−3.8 per °C × warming" c={C.first} s={T.floor} o={fin(f, tW)} />
-        <Thermo x={200} y={700} h={260} level={0.15 + 0.6 * (dT / 1.3)} o={fin(f, tW)} />
+        {/* fix 1 (review S15): the thermostat picture is there from S1 (warm up → more heat to space), not an empty half */}
+        <Thermo x={200} y={700} h={260} level={0.15 + 0.6 * (dT / 1.3) + 0.12 * prog(f, AT(k, 0, "warm up"), AT(k, 0, "warm up") + 30) * fout(f, tW - 10, 20)} o={fin(f, 6)} />
+        <g opacity={fin(f, AT(k, 0, "lose heat")) * fout(f, SS(k, 1) - 6)}>
+          {[-0.5, 0, 0.5].map((a, i) => <Arrow key={i} p={[230 + 60 * Math.sin(a), 470 - 60 * Math.cos(a)]} q={[230 + 190 * Math.sin(a), 470 - 190 * Math.cos(a)]} color={C.second} w={7} head={24} />)}
+          <Lbl x={330} y={330} t="warmer: more heat to space" c={C.second} s={T.floor} />
+        </g>
         <Lbl x={250} y={500} t={`+${dT.toFixed(2)} °C`} c={C.key} s={T.key} o={fin(f, tW)} />
         <rect x={X0 - 3.22 * RD.dT_ar6 * sc} y={420} width={3.22 * RD.dT_ar6 * sc} height={44} fill={C.first} opacity={0.4 * fin(f, SS(k, 3))} stroke={C.first} strokeWidth={3} strokeDasharray="10 7" />
         <Lbl x={X0 + 20} y={442} t="3.2 → ≈ 1.2 °C" c={C.first} s={T.floor} o={fin(f, SS(k, 3))} />
@@ -2268,7 +2377,7 @@ const S43: React.FC = () => {
         <Lbl x={MX + 20} y={190} t="the planet's thermostat" c={C.local} s={T.floor} o={fin(f, AT(k, 0, "thermostat"))} />
         <Keyword f={f} text="feedbacks" at={[MX + 20, 545]} appear={AT(k, 4, "feedbacks")} />
       </Svg>
-      <TeX s={String.raw`\Delta T\approx\frac{3.9}{3.8}\approx1\ ^{\circ}\mathrm C`} x={MX} y={300} size={64} c={C.key} o={fin(f, AT(k, 2, "divided by"))} />
+      <TeX s={EQ_S43} x={MX} y={300} size={64} c={C.key} o={fin(f, AT(k, 2, "divided by"))} />   {/* fix 1 (S15): 1.04 °C, as said */}
       <TeX s={String.raw`\frac{3.9}{3.2}\approx1.2\ ^{\circ}\mathrm C`} x={MX} y={435} size={52} o={fin(f, SS(k, 3))} />
       <TeX s={String.raw`+1\ ^{\circ}\mathrm C:\ \ 3.79\ \text{exact},\ 3.76\ \text{line}`} x={MX} y={620} size={50} o={fin(f, SS(k, 6))} />
       <TeX s={String.raw`+10\ ^{\circ}\mathrm C:\ \ 39.9\ \text{exact},\ 37.6\ \text{line}`} x={MX} y={720} size={50} o={fin(f, SS(k, 7))} />
@@ -2311,13 +2420,14 @@ const S44: React.FC = () => {
       <Svg><FDPic h={h} fwd={fin(f, SS(k, 2))} ctr={0} f={f} />
         <Keyword f={f} text="grid points" at={[300, 760]} appear={SS(k, 1)} />
       </Svg>
-      <CalcStack f={f} x={MX + 250} y={100} size={46} maxLines={3} rows={[
-        ROW(String.raw`=f+h\,f'+\frac{h^2}{2}f''+\cdots`, SS(k, 5), "f(x+h)"),
-        ROW(String.raw`=h\,f'+\frac{h^2}{2}f''+\cdots`, AT(k, 6, "subtract f"), "f(x+h)-f"),
-        ROW(String.raw`=f'+\frac{h}{2}f''+\cdots`, AT(k, 6, "divide by h"), String.raw`\frac{f(x+h)-f}{h}`, { c: C.key }),
+      {/* fix 1 (review S9): \dfrac, so the digits of h²/2 are full size (48 px), not ~25 px */}
+      <CalcStack f={f} x={MX + 240} y={90} size={46} maxLines={3} rows={[
+        ROW(String.raw`=f+h\,f'+\dfrac{h^2}{2}f''+\cdots`, SS(k, 5), "f(x+h)", { h: 140 }),
+        ROW(String.raw`=h\,f'+\dfrac{h^2}{2}f''+\cdots`, AT(k, 6, "subtract f"), "f(x+h)-f", { h: 140 }),
+        ROW(String.raw`=f'+\dfrac{h}{2}f''+\cdots`, AT(k, 6, "divide by h"), String.raw`\dfrac{f(x+h)-f}{h}`, { c: C.key, h: 150 }),
       ]} />
       <Layered parts={parts} x={MX} y={625} size={64} o={0} layers={[{ t: "all", o: 1 }]} />
-      <TeX s={String.raw`\text{error}\approx\frac{h}{2}\,f''`} x={MX} y={640} size={64} c={C.gold} o={fin(f, SS(k, 8))} />
+      <TeX s={String.raw`\text{error}\approx\dfrac{h}{2}\,f''`} x={MX} y={640} size={64} c={C.gold} o={fin(f, SS(k, 8))} />
       <TeX s={EQ_S44} x={0} y={0} size={56} o={0} />
       <TeX s={String.raw`\frac{f(x+h)-f(x)}{h}`} x={MX} y={650} size={64} c={C.first} o={fin(f, AT(k, 2, "forward difference")) * fout(f, SS(k, 7) - 10)} />
       <Svg><Keyword f={f} text="only grid points" at={[MX + 20, 130]} appear={AT(k, 0, "weather model")} out={SS(k, 5) - 12} /></Svg>
@@ -2331,22 +2441,29 @@ const S44: React.FC = () => {
 const S45: React.FC = () => {
   const f = useCurrentFrame(), k = K("s45_fd_centred");
   const h = mix(0.8, 0.4, prog(f, SS(k, 6), SS(k, 6) + 30));
-  const dimA = 1 - 0.6 * fin(f, SS(k, 8));
+  // fix 1 (review S9): \dfrac terms (full-size digits); on S9 the three Taylor lines give way to the sine check, written as
+  // two 54-px lines "forward error −0.043" / "centred error −0.0009" (fd.ef −0.04294, fd.ec −0.0009001)
+  const tChk = SS(k, 8);
+  const top = fin(f, SS(k, 2)) * fout(f, tChk - 6);
+  const df = (s: string) => s.replace(/\\frac\{h\^2\}\{6\}/g, String.raw`\dfrac{h^2}{6}`);
   return (
     <Scene>
       <Svg><FDPic h={h} fwd={0.35} ctr={fin(f, 6)} f={f} /></Svg>
-      <TeX s={String.raw`\text{ahead}:\ f+hf'+\tfrac{h^2}{2}f''+\tfrac{h^3}{6}f'''`} x={MX} y={120} size={48} o={fin(f, SS(k, 2)) * dimA} />
-      <TeX s={String.raw`\text{behind}:\ f\textcolor{#d9667f}{-hf'}+\tfrac{h^2}{2}f''\textcolor{#d9667f}{-\tfrac{h^3}{6}f'''}`} x={MX} y={220} size={48} o={fin(f, SS(k, 3)) * dimA} />
-      <TeX s={String.raw`\text{difference}:\ 2hf'+\tfrac{h^3}{3}f'''`} x={MX} y={320} size={48} o={fin(f, SS(k, 4)) * dimA} />
-      <TeX s={cut2(EQ_S45, "=")[0]} x={MX} y={430} size={50} c={C.key} o={fin(f, AT(k, 0, "one step ahead"))} />
-      <TeX s={String.raw`\frac{f(x+h)-f}{h}=f'+\frac{h}{2}f''+\cdots`} x={MX} y={650} size={54} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
-      <TeX s={"=" + cut2(EQ_S45, "=")[1]} x={MX + 60} y={540} size={50} c={C.key} o={fin(f, SS(k, 5))} />
+      <TeX s={String.raw`\text{ahead}:\ f+hf'+\dfrac{h^2}{2}f''+\dfrac{h^3}{6}f'''`} x={MX} y={110} size={46} o={top} />
+      <TeX s={String.raw`\text{behind}:\ f\textcolor{#d9667f}{-hf'}+\dfrac{h^2}{2}f''\textcolor{#d9667f}{-\dfrac{h^3}{6}f'''}`} x={MX} y={225} size={46} o={fin(f, SS(k, 3)) * fout(f, tChk - 6)} />
+      <TeX s={String.raw`\text{difference}:\ 2hf'+\dfrac{h^3}{3}f'''`} x={MX} y={340} size={46} o={fin(f, SS(k, 4)) * fout(f, tChk - 6)} />
+      <TeX s={String.raw`\sin x,\ \ x=1,\ \ h=0.1`} x={MX} y={140} size={54} c={C.key} o={fin(f, tChk)} />
       <Svg>
-        <Lbl x={MX} y={625} t="half the step, a quarter of the error" c={C.key} s={T.floor} o={fin(f, SS(k, 6))} />
-        <Keyword f={f} text="second-order accurate" at={[MX + 20, 685]} appear={SS(k, 7)} />
+        <Lbl x={MX} y={235} t="forward error −0.043" c={C.first} s={T.key} o={fin(f, AT(k, 9, "forward difference is off"))} />
+        <Lbl x={MX} y={315} t="centred error −0.0009" c={C.second} s={T.key} o={fin(f, AT(k, 9, "the centred one"))} />
       </Svg>
-      <TeX s={String.raw`\sin x,\ x=1,\ h=0.1:\ \ \text{forward}\ -0.043`} x={MX} y={750} size={44} c={C.first} o={fin(f, AT(k, 9, "forward difference is off"))} />
-      <TeX s={String.raw`\text{centred}\ -0.0009`} x={MX + 330} y={800 - 14} size={44} c={C.second} o={fin(f, AT(k, 9, "the centred one"))} />
+      <TeX s={cut2(EQ_S45, "=")[0]} x={MX} y={455} size={50} c={C.key} o={fin(f, AT(k, 0, "one step ahead"))} />
+      <TeX s={String.raw`\frac{f(x+h)-f}{h}=f'+\frac{h}{2}f''+\cdots`} x={MX} y={650} size={54} c={C.muted} o={fin(f, 4) * fout(f, SS(k, 2) - 10)} />
+      <TeX s={"=" + df(cut2(EQ_S45, "=")[1])} x={MX + 60} y={565} size={50} c={C.key} o={fin(f, SS(k, 5))} />
+      <Svg>
+        <Lbl x={MX} y={665} t="half the step, a quarter of the error" c={C.key} s={T.floor} o={fin(f, SS(k, 6))} />
+        <Keyword f={f} text="second-order accurate" at={[MX + 20, 740]} appear={SS(k, 7)} />
+      </Svg>
     </Scene>
   );
 };
@@ -2486,30 +2603,26 @@ const S48: React.FC = () => {
       {i === 3 ? <>{[0, 1, 2, 3, 4].map((q) => <Arrow key={q} p={[x - 110 + q * 50, 200]} q={[x - 80 + q * 50, 120 + q * 6]} color={C.second} w={5} head={18} />)}</> : null}
     </g>
   );
-  const rel = ["coordinates", "gradient", "material derivative", "vectors and index notation", "dot product", "weather basics", "pressure coordinates", "ODEs", "thermodynamics",
-    "water in the air", "climate machine", "climate change"];
+  // fix 1 (review S19): every related movie the narration names, in an even 3 × 5 grid of equal weight (waves, stability,
+  // PDEs and numerical methods added); maths movies first, then the weather and climate ones
+  const rel = ["weather basics", "vectors and index notation", "dot product", "gradient", "material derivative", "coordinates",
+    "pressure coordinates", "ODEs", "PDEs, numerical methods", "thermodynamics", "water in the air", "climate machine", "climate change",
+    "waves", "stability"];
+  const COLX = [110, 700, 1290], ROWY = (r: number) => 624 + r * 48;
+  rel.forEach((t, i) => { if (COLX[Math.floor(i / 5)] + textW(t, T.floor) > (COLX[Math.floor(i / 5) + 1] ?? 1840) - 10) throw new Error(`end card: "${t}" too wide`); });
   return (
     <Scene>
       <Svg>
         <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
         <Lbl x={960} y={315} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
         <Lbl x={960} y={395} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />
-        <g opacity={fin(f, t2)}><Notebook x={300} y={515} s={0.42} /><Lbl x={370} y={515} t="derivatives and Taylor series notebook" c={C.ink} s={T.key} /></g>
+        <g opacity={fin(f, t2)}><Notebook x={300} y={490} s={0.42} /><Lbl x={370} y={490} t="derivatives and Taylor series notebook" c={C.ink} s={T.key} /></g>
         <g opacity={fin(f, tOther)}>
-          {[0, 1, 2].map((i) => <Notebook key={i} x={260 + i * 30} y={610 - i * 10} s={0.24} c={[C.second, "#8e6fd8", C.muted][i]} o={0.9} />)}
-          <Lbl x={370} y={600} t="notebooks for the other maths concepts" c={C.key} s={T.key} />
+          {[0, 1, 2].map((i) => <Notebook key={i} x={260 + i * 30} y={575 - i * 10} s={0.24} c={[C.second, "#8e6fd8", C.muted][i]} o={0.9} />)}
+          <Lbl x={370} y={565} t="notebooks for the other maths concepts" c={C.key} s={T.key} />
         </g>
-        <g opacity={fin(f, tOther + 20) * 0.75}>
-          {(() => {
-            let x = 110, y = 690;
-            return rel.map((t, i) => {
-              const w = textW(t, T.floor) + 56;
-              if (x + w > 1830) { x = 110; y += 56; }
-              const el = <Lbl key={t} x={x} y={y} t={t} c={i === 0 ? C.key : C.muted} s={T.floor} b={i === 0} />;
-              x += w;
-              return el;
-            });
-          })()}
+        <g opacity={fin(f, tOther + 20) * 0.8}>
+          {rel.map((t, i) => <Lbl key={t} x={COLX[Math.floor(i / 5)]} y={ROWY(i % 5)} t={t} c={C.muted} s={T.floor} b={false} />)}
         </g>
       </Svg>
     </Scene>
@@ -2517,51 +2630,76 @@ const S48: React.FC = () => {
 };
 
 // ---------------------------------------------------------------- data-source lines (HOUSE_STYLE §5): dataset · time · place; not spoken
+// fix 1 (review S7): a source line is shown only while its data element is on screen (`on`: scene-relative windows), and
+// scenes that change data from beat to beat get one line per beat (s37, s41, s47)
 const E5 = "Data: ERA5 (Copernicus C3S) 850 hPa";
 const IG = "Data: IGRA2 radiosonde (NOAA NCEI) · Trappes, near Paris · 30 Sep 2026, 12 UTC";
-const SRC: Record<string, [string, number?, number?]> = {
-  s00_title: ["Data: IGRA2 radiosonde (NOAA NCEI) · Trappes · 30 Sep 2026, 12 UTC", 1290, 560],
-  s01_hook: [`${E5} · 1 Nov 2023, 18 UTC · Brittany · IGRA2 radiosonde (NOAA NCEI) · Trappes, 30 Sep 2026, 12 UTC`],
-  s02_average_rate: ["Data: Brest-Guipavas SYNOP (NOAA ISD) · 1–2 Nov 2023"],
-  s04_fields: [`${E5} temperature · 1 Nov 2023, 12–18 UTC · western France`],
-  s05_partial_idea: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brittany`],
-  s07_partial_real: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brest`],
-  s08_partial_time: [`${E5} · 17–19 UTC · Brest-Guipavas SYNOP (NOAA ISD) · ERA5 sea-level pressure, 18 UTC · 1 Nov 2023`],
-  s09_partial_height: ["Data: IGRA2 radiosonde (NOAA NCEI) · Trappes · 30 Sep 2026, 12 UTC · MODIS (NASA Worldview) · Blue Marble (NASA)"],
-  s10_mixed_partials: [`${E5} temperature · 1 Nov 2023, 17 and 19 UTC · Brest`],
-  s11_total_differential: [`${E5} temperature · 1 Nov 2023, 18 and 19 UTC · Brittany`],
-  s12_total_example: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brest`],
-  s13_chain_rule: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brittany`],
-  s14_chain_meaning: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brittany`],
-  s16_flight_east: [`${E5} temperature · 1 Nov 2023, 18–19 UTC · Brittany`],
-  s17_flight_west: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brittany`],
-  s18_balloon_rate: [IG],
-  s19_balloon_terms: ["Data: IGRA2 radiosonde (NOAA NCEI) · Trappes · 30 Sep 2026, 00 and 12 UTC · ERA5 (Copernicus C3S) 500 hPa, 12 UTC"],
-  s20_parcel_pointer: [`${E5} temperature and wind · 1 Nov 2023, 18 UTC · Brittany`],
-  s21_change_variables: [IG],
-  s22_state_functions: ["Relief: ETOPO 2022 (NOAA NCEI) · Monts d'Arrée, Brittany"],
-  s27_exponential: [IG],
-  s30_zoom: [IG], s31_linear_approx: [IG], s32_add_bend: [IG], s34_pressure_line: [IG], s35_pressure_far: [IG],
-  s36_where_fails: ["Data: IGRA2 (NOAA NCEI) · Trappes, 30 Sep 2026, 12 UTC · ERA5 (Copernicus C3S) 850 hPa, 48.5° N, 1 Nov 2023, 18 UTC"],
-  s37_three_reasons: [`${E5} · 1 Nov 2023, 18 UTC · IGRA2 radiosonde (NOAA NCEI) · Trappes, 30 Sep 2026`],
-  s38_linearisation: ["Imagery: MODIS true colour (NASA Worldview) · Storm Ciarán, 1 Nov 2023"],
-  s41_cc_climate: ["Data: ERA5 (Copernicus C3S) monthly total column water vapour · global · 1979–2025"],
-  s42_planck: [`Data: CERES EBAF-TOA Ed4.2.1 (NASA LaRC) · outgoing longwave · ${RD.latest}`],
-  s46_fd_grid: [`${E5} temperature · 1 Nov 2023, 18 UTC · Brest`],
-  s47_recap: [`${E5} · 1 Nov 2023 · IGRA2 radiosonde (NOAA NCEI) · Trappes, 30 Sep 2026`],
+type Src = { t: string; x?: number; w?: number; on?: (k: number) => [number, number][] };
+const ALWAYS = 1e9;
+const SRC: Record<string, Src[]> = {
+  s00_title: [{ t: "Data: IGRA2 radiosonde (NOAA NCEI) · Trappes · 30 Sep 2026, 12 UTC", x: 1290, w: 560, on: (k) => [[0, AT(k, 0, "water vapour")]] }],
+  s01_hook: [{ t: `${E5} · 1 Nov 2023, 18 UTC · Brittany · IGRA2 radiosonde (NOAA NCEI) · Trappes, 30 Sep 2026, 12 UTC` }],
+  s02_average_rate: [{ t: "Data: Brest-Guipavas SYNOP (NOAA ISD) · 1–2 Nov 2023" }],
+  s04_fields: [{ t: `${E5} temperature · 1 Nov 2023, 12–18 UTC · western France` }],
+  s05_partial_idea: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brittany` }],
+  s07_partial_real: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brest` }],
+  s08_partial_time: [{ t: "Data: ERA5 (Copernicus C3S) 850 hPa, 17–19 UTC, and sea-level pressure, 18 UTC · Brest-Guipavas SYNOP (NOAA ISD) · 1 Nov 2023" }],
+  s09_partial_height: [{ t: "Data: IGRA2 radiosonde (NOAA NCEI) · Trappes · 30 Sep 2026, 12 UTC · MODIS (NASA Worldview) · Blue Marble (NASA)" }],
+  s10_mixed_partials: [{ t: `${E5} temperature · 1 Nov 2023, 17 and 19 UTC · Brest` }],
+  s11_total_differential: [{ t: `${E5} temperature · 1 Nov 2023, 18 and 19 UTC · Brittany` }],
+  s12_total_example: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brest` }],
+  s13_chain_rule: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brittany` }],
+  s14_chain_meaning: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brittany` }],
+  s16_flight_east: [{ t: `${E5} temperature · 1 Nov 2023, 18–19 UTC · Brittany` }],
+  s17_flight_west: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brittany` }],
+  s18_balloon_rate: [{ t: IG }],
+  s19_balloon_terms: [{ t: "Data: IGRA2 radiosonde (NOAA NCEI) · Trappes · 30 Sep 2026, 00 and 12 UTC · ERA5 (Copernicus C3S) 500 hPa, 12 UTC" }],
+  s20_parcel_pointer: [{ t: `${E5} temperature and wind · 1 Nov 2023, 18 UTC · Brittany` }],
+  s21_change_variables: [{ t: IG }],
+  s22_state_functions: [{ t: "Relief: ETOPO 2022 (NOAA NCEI) · Monts d'Arrée, Brittany" }],
+  s27_exponential: [{ t: IG }],
+  s30_zoom: [{ t: IG }], s31_linear_approx: [{ t: IG }], s34_pressure_line: [{ t: IG }], s35_pressure_far: [{ t: IG }],
+  s32_add_bend: [{ t: IG, on: (k) => [[0, SS(k, 4)]] }],
+  s36_where_fails: [{ t: "Data: IGRA2 (NOAA NCEI) · Trappes, 30 Sep 2026, 12 UTC · ERA5 (Copernicus C3S) 850 hPa, 48.5° N, 1 Nov 2023, 18 UTC" }],
+  s37_three_reasons: [
+    { t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brittany`, on: (k) => [[0, SS(k, 3)], [AT(k, 6, "spacing"), ALWAYS]] },
+    { t: IG, on: (k) => [[SS(k, 5), AT(k, 6, "spacing")]] },
+  ],
+  s38_linearisation: [{ t: "Imagery: MODIS true colour (NASA Worldview) · Storm Ciarán, 1 Nov 2023", on: (k) => [[SS(k, 3), ALWAYS]] }],
+  s41_cc_climate: [
+    { t: "Warming: Forster et al. (2026), Indicators of Global Climate Change · 2016–2025 vs 1850–1900", on: (k) => [[SS(k, 1), SS(k, 4)]] },
+    { t: "Data: ERA5 (Copernicus C3S) monthly total column water vapour · global · 1979–2025", on: (k) => [[SS(k, 4), ALWAYS]] },
+  ],
+  s42_planck: [{ t: `Data: CERES EBAF-TOA Ed4.2.1 (NASA LaRC) · outgoing longwave · map ${RD.latest} · global mean 2001–${RD.latest.slice(0, 4)}` }],
+  s46_fd_grid: [{ t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brest`, on: (k) => [[0, SS(k, 7)]] }],
+  s47_recap: [
+    { t: `${E5} temperature · 1 Nov 2023, 18 UTC · Brittany`, on: (k) => [[SS(k, 1), SS(k, 3)], [SS(k, 4), SS(k, 5)]] },
+    { t: IG, on: (k) => [[SS(k, 5), SS(k, 6)]] },
+  ],
 };
 
 // ================================================================ assembly
 const SCENES: React.FC[] = [S00, S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12, S13, S14, S15, S16, S17, S18, S19, S20, S21, S22, S23, S24, S25,
   S26, S27, S28, S29, S30, S31, S32, S33, S34, S35, S36, S37, S38, S39, S40, S41, S42, S43, S44, S45, S46, S47, S48];
 Object.keys(SRC).forEach((id) => K(id));
+/** the source lines of scene k, each shown only inside its windows (scene-relative frames) */
+const SrcWin: React.FC<{ k: number }> = ({ k }) => {
+  const f = useCurrentFrame();
+  const spec = SRC[sc[k].id];
+  if (!spec) return null;
+  return <>{spec.map((q, i) => {
+    const ws = q.on ? q.on(k) : [[0, ALWAYS] as [number, number]];
+    const o = Math.max(0, ...ws.map(([a, b]) => fin(f, a, 10) * fout(f, b - 10, 10)));
+    return o > 0 ? <SrcLine key={i} t={q.t} x={q.x ?? 80} w={q.w ?? 1760} o={o} /> : null;
+  })}</>;
+};
 if (SCENES.length !== sc.length) throw new Error(`${SCENES.length} scene components but ${sc.length} scenes in timing.json`);
 void [END, GBOX, Band, Dash, Strike, Rod3D, gcDest, TRAP, win, XF, CUT, mix, lutCss, cut2, EQ_S02, BROWN, SUMC, clamp, GOLDRING, ColourBar, Iso, MapView];
 export const DerivativesTaylor: React.FC<{ audio?: string }> = ({ audio = "narration_music.wav" }) => (
   <AbsoluteFill style={{ background: C.bg }}>
     {SCENES.map((S, k) => (
       <Sequence key={sc[k].id} name={sc[k].id} from={CUT[k]} durationInFrames={LEN(k) + (k < SCENES.length - 1 ? XF : 0)}><S />
-        {SRC[sc[k].id] ? <SrcLine t={SRC[sc[k].id][0]} x={SRC[sc[k].id][1] ?? 80} w={SRC[sc[k].id][2] ?? 1760} /> : null}</Sequence>
+        <SrcWin k={k} /></Sequence>
     ))}
     {audio ? <Audio src={staticFile(audio)} /> : null}
   </AbsoluteFill>

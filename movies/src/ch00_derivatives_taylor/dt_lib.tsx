@@ -249,8 +249,9 @@ const FieldSphere: React.FC<{ tex: THREE.Texture | null; o: number; r?: number }
   return <mesh geometry={geo} material={mat} renderOrder={6} />;
 };
 export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: number; h: number }; img?: string; field?: string | null; fieldO?: number;
-  coast?: number; o?: number; dim?: number; over?: (G: GProj) => React.ReactNode; grat?: number; drape?: { href: string; box: [number, number, number, number]; o: number } }> = ({
-  cam, box = GBOX, img = IMGS.bmng, field = null, fieldO = 0, coast = 0.45, o = 1, dim = 1, over, grat = 0, drape }) => {
+  coast?: number; o?: number; dim?: number; over?: (G: GProj) => React.ReactNode; grat?: number; drape?: { href: string; box: [number, number, number, number]; o: number };
+  fade?: number }> = ({
+  cam, box = GBOX, img = IMGS.bmng, field = null, fieldO = 0, coast = 0.45, o = 1, dim = 1, over, grat = 0, drape, fade = 0 }) => {
   const tex = useTex(img);
   const ftex = useTex(field);
   const dtex = useTex(drape ? drape.href : null);
@@ -259,8 +260,13 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
   if (o <= 0) return null;
   const id = `gc${box.x}_${box.y}_${box.w}`;
   const drapes: Drape[] = drape && dtex ? [{ tex: dtex, lat: [drape.box[0], drape.box[1]], lon: [drape.box[2], drape.box[3]], o: drape.o }] : [];
+  // HOUSE_STYLE §5b: a zoomed globe's frame edges fade out softly on all four sides (fade = width in px), so the box of the
+  // 3-D area is never seen; the mask covers the WebGL view and its SVG overlay alike
+  const F = fade;
+  const mask = F > 0 ? `linear-gradient(to right, transparent ${box.x}px, black ${box.x + F}px, black ${box.x + box.w - F}px, transparent ${box.x + box.w}px), `
+    + `linear-gradient(to bottom, transparent ${box.y}px, black ${box.y + F}px, black ${box.y + box.h - F}px, transparent ${box.y + box.h}px)` : undefined;
   return (
-    <>
+    <AbsoluteFill style={mask ? ({ WebkitMaskImage: mask, maskImage: mask, WebkitMaskComposite: "source-in", maskComposite: "intersect" } as React.CSSProperties) : undefined}>
       <View3D st={st} x={box.x} y={box.y} w={box.w} h={box.h} o={tex ? o : 0} key3={st.pos} amb={1.6} dir={1.4}>
         <GlobeMesh tex={tex} dim={dim} drapes={drapes} />
         <FieldSphere tex={ftex} o={fieldO} />
@@ -273,7 +279,7 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
           {over ? over(G) : null}
         </g>
       </Svg>
-    </>
+    </AbsoluteFill>
   );
 };
 
