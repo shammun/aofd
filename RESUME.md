@@ -6,7 +6,7 @@
 3. Brief the user, then continue the queue below in order.
 
 **Rules:**
-- Run one heavy render at a time (Windows page-file growth filled C: on 2026-10-29). At most 3–4 agents at once.
+- Only ONE builder may run any Remotion or Chrome job (renders AND stills) at a time. RAM ran out twice on 2026-10-29/30 (0.7 GB free) and the page file grew to 30 GB, filling C:. Set TEMP and TMP to G: for every Remotion or Chrome process. At most 3–4 agents at once.
 - Ports 5100–5270 or 5600–5700 (Windows reserves 5271–5570).
 - Never push. Agents never commit; the orchestrator commits.
 - Standing rules live in `movies/HOUSE_STYLE.md` (especially §5b, globes and layer stacks) and memories `ch00-movie-series-loop`, `follow-my-recommendations`, `globe-framing-and-layer-stacks`.
