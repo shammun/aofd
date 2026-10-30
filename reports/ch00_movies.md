@@ -5686,3 +5686,185 @@ Two CHECK groups are marked "tests pending at build time" in the manifest: W85 (
 - s31 thermals are small (S15).
 
 **Captions and sync.** The captions gate passes (868 cues = script, SRT twin). The caption band is empty on every frame I looked at, except the 5-px credit overruns (M22). The reveals I checked sit on their words, except U3-05 (Andes and Rockies shown 15 s late).
+
+---
+
+# ch00_derivatives_taylor — review 2 (fresh eyes, after fix loop 1, 1080.mp4 of 2026-10-30 01:01)                    2026-10-30
+
+**What I looked at.**
+- 423 frames, one 0.2 s before each sentence ends (times from the repo `timing.json`, 48:27.15), as 47 labelled 3×3 sheets at 640 px a tile.
+- About 45 full-resolution close-ups and crops: every changed scene, the s09 flight (1-s steps from 6:45 to 7:16), the s17 turn, the s28 cube growth, the s20 bars, s29 route labels, s42, the end card, and 640-px versions of the small maths.
+- Loudness (BS.1770) of all 25 spliced sentences against their neighbours, measured on the final mix.
+- Captions re-checked by script: 715 cues, ≤ 2 lines, ≤ 42 chars, max 16.5 cps, 0 violations; 4 cues under 1 s (cosmetic).
+- Every number checked by hand against `data/dt.json` (and the manifest values it carries).
+- Frames: `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_derivatives_taylor/review2/` (520 files, 156 MB). Nothing was written to C:.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_derivatives_taylor (fix 1) | 2909.67 s (48:29.7); narration ends 2907.15 s, then a 2.5-s hold | 119.07 MB (budget 120, hard 160) | 12 PASS + **halves WARN** (right half empty 26:24.5–26:30, s28 S1) | PASS: every number reproduced by hand; first law signs right (đW on the air = −p dα); Δη = +116 J kg⁻¹ K⁻¹ on all routes; s20 sign reasoning right | PASS: 40 present, no KaTeX errors, no labels or book refs | **FIX**: a new text collision on the s20 key numbers (−0.8 on top of +3.7 and +2.9); a few sub-44-px maths items remain | PASS: every changed sentence has its picture on its words; one 5.5-s empty half (s28 S1) | PASS (715 cues = script, 0 violations) | PASS: 0 flashes, blue–red trend map, voice ≥ 13 LU over the bed | n/a (house) | **FIX** |
+
+## Review-1 items — status
+
+| Item | Status | Evidence (new times) |
+|---|---|---|
+| M1 s32 overlapping text | **FIXED** | 31:42–32:13: the CalcStack sits under "the bend"; at S8 (31:54) the h³ line replaces it; "Taylor series" sits below at 32:10. Nothing overlaps. |
+| M2 s16 clipped label, s16/s17 maths overflow | **FIXED** | "U = 100 m/s" stays inside the map (14:23–15:11). The s16 stack ends at x ≈ 1755 and the s17 stack at x ≈ 1572 (15:24–15:49). |
+| M3 s28/s29 first law undefined | **FIXED** | 26:30–26:56: "dI = đQ + đW", "first law of thermodynamics", "I: internal energy (the molecules' motion)", "Q: heat added", "W: work done on the air", "đ: a small amount, not a change", each on its words. 28:22–28:33: "c_v dT = dI, p dα = −đW" with "the first law turned round". The signs are right: dI = đQ − p dα, so đQ = c_v dT + p dα. |
+| M4 Δη read as negative | **FIXED** | 29:18–29:37: "Δη = 116 J kg⁻¹ K⁻¹" sits above the dashed leg, and the orange "Δη = 116" sits above its leg. All three labels read positive, and the unit is shown once. (The teal curve still crosses its own label: see Should 3.) |
+| M5 s35 hidden "balloon 500" | **FIXED** | 34:38–35:27: "balloon 500 hPa" heads the right-hand stack, and "343" stays left of the gold dot. |
+| S1 s19 sizes and sign | **FIXED** (one picture gap) | "≈ −6 × 10⁻⁵" on the bar (16:57) and "two point six" in S3. S7 (17:11–17:23) gives the along-the-isotherms reason and −3 × 10⁻⁵. The inset shows no isotherms: Should 4. |
+| S2 symbols said | **FIXED** | U (14:23), u/v/w (16:32), bold u and grad T (18:12). |
+| S3 s20 sign of DT/Dt | **FIXED in the words**; **new Must on the picture** | 18:31–18:46: "If the air parcels had kept their temperature… +3.7… warmed only 2.9, so each air parcel cooled by about 0.8". The bar labels collide (Must 1). The −3.7 on screen against the spoken "+3.7" is not explained (Should 5). |
+| S4 s22 hill numbers | **FIXED** | "+135 m" both trails, "4.0 km" and "9.0 km" said and shown (20:18–20:37). |
+| S5 s31 4.26 | **FIXED** | "four point two six" (30:59); the s09 axis shows 1.53 and 5.80 (7:16–7:54). |
+| S6 maths past x 1840 | **FIXED** | s31 ends at x ≈ 1797, s33 at x ≈ 1785, s16 at ≈ 1755. |
+| S7 source lines without data | **FIXED** | None on s00, s32, s37 S4–S5, s38 before the image, s41 S1, s46 S8–S11 or the abstract recap beats; the recap has a source per beat. |
+| S8 collisions | **FIXED, one left** | s02 (links stop before "rate"), s03, s06, s08, s09 (links clear of "4.26 km"), s24, s28 orange label, s30 and s34 are clean. The teal labels in s28/s29 are still crossed by the curve (Should 3). |
+| S9 legibility (s44/s45/s10) | **FIXED** | \dfrac in s44/s45; "forward error −0.043 / centred error −0.0009" at about 54 px (45:06); the s10 rows are larger. Other small maths remain (Should 9). |
+| S10 s27 integration step | **FIXED** | 25:43–25:55: "dp/dz = −(p₀/H)e^(−z/H) = −p/H ✓", with the narration. |
+| S11 tools not taught | **FIXED** | Kelvin (22:22), emission temperature (41:28), power rule (41:43), "written eta" (29:10). |
+| S12 s10 number before its calculation | **FIXED** | 9:04–9:17: the four corners, "(7.58 − 8.63 − 1.77 + 3.19) °C / (36.8 km × 2 h) = 0.37 °C / (36 800 m × 7200 s)", and the axis reads "t". The number is still spoken first (S8, 8:40), then justified at S11. That is acceptable. |
+| S13 s07 parentheses and unit | **FIXED** | "4.51 − 5.69", "≈ −2.5 °C/100 km" (5:22). |
+| S14 s06 old plane during x t | **FIXED** | The x t grid replaces the plane (4:25). |
+| S15 unspoken numbers, empty half | **FIXED** | s14 has no "2.5 °C" readout. "+1.04" is said (42:22). The s43 S1 left half holds the thermometer. |
+| S16 s28 3-D parcel | **PARTLY** | 26:56–27:06: a cube appears with "280 K / × 1.5 volume / same T at the end". It grows honestly (edge × 1.15 ≈ ∛1.5), but it is about 150 px across, is shown for only about 6 s, and disappears when the routes start (Should 2). |
+| S17 s16 one-hour extrapolation | **FIXED** | The narration says "if these rates held for a whole hour", and the screen shows "if the rates held for 1 h". The graph stays above y 820. |
+| S18 s09 white tile | **FIXED** | The tile is outlined, and "image: MODIS, 30 Sep 2026" sits beside it in the text column (7:07–7:12). |
+| S19 end card | **FIXED** | Three equal columns of the same weight; waves, stability, and PDEs/numerical methods added (48:18–48:29). |
+| S20 warming baseline, CERES period | **FIXED** | "+1.26 °C / 2016–2025 vs 1850–1900", "one point two six", the Forster et al. (2026) line, and "map 2026-08 · global mean 2001–2026". |
+| S21 s05 boxed x | **FIXED** | An arrow labelled "x (east)" (3:21–3:40). |
+| S22 Δη unit | **FIXED** | See M4. |
+| §5b T-M1 s09 globe frame | **FIXED, short of the zoom-reveal** | The zoomed panel has soft fades on all edges, and the source line sits below it on solid background. It is a ≈ 970 × 630 panel, not the full-bleed zoom-reveal, and it never zooms back out (Should 7). |
+| §5b T-M2 s42 graph on the globe | **FIXED** | The W/m²–T graph sits beside the globe (x ≈ 690–1015), and "≈ 240 W/m² global average" sits outside the silhouette. The colour bar is below the globe. |
+| §5b T-S1 to T-S4 (outside this loop's scope) | T-S1 open; T-S2 open; T-S3 n/a; T-S4 **FIXED** | The globe is about 540 px across (Should 8). Readouts sit on the maps (Should 6). The s19 link is gone. "weight" sits left of the column, and the column edges reach the top. |
+
+## The 25 spliced sentences
+- **Level.** All 25 are within 1.3 LU of their neighbours in the final mix: −15.5 to −16.8 LUFS, against −15.2 to −17.3 for the neighbours. The quietest relative to its neighbours is s42 S8 (41:43.8), at −16.8 against −15.5 and −16.0.
+- **Sense from the captions.** All read correctly and match the data:
+  - s10 S11 0.37 °C / 36.8 km / 2 h;
+  - s16 S3 and S9;
+  - s19 S1, S3, S4, S7 and S8;
+  - s20 S3, S5 and S6;
+  - s22 S4 and S5;
+  - s24 S3;
+  - s27 S5;
+  - s28 S2–S4;
+  - s29 S5 and S14;
+  - s31 S8;
+  - s41 S2;
+  - s42 S6 and S8;
+  - s43 S3.
+- **Timing.** Gaps follow the tts.py pattern: 0.35 s inside a scene and 1.5 s at beats. The fastest is s42 S6 (16.5 cps), still under 17.
+- **Worth a human listen.** I did not listen. These are the places where the ear could catch what numbers cannot:
+  1. s28 S2–S4, 26:30–26:56: how Kokoro says "d I", "d bar Q" and "d bar W", and the 12-s S3.
+  2. s29 S14, 29:10–29:18: "eta". It could come out as "ee-ta", "ay-ta" or spelled.
+  3. s42 S6, 41:28–41:37: the comma in "would need, to give off" may cause an odd pause; it is also the fastest clip.
+  4. s19 S4 and S7, 16:51–17:23: "about minus six times ten to the minus five", and the "only about minus…" phrasing.
+  5. s16 S3, 14:23–14:26: a 2.9-s inserted clip; check the seams on both sides.
+  6. s42 S7–S8, 41:38–41:51: the 1.3-LU step down into S8.
+
+## Physics and numbers re-checked (all PASS)
+- **Brest and the plane.**
+  - s02: 4.6/2 = 2.3.
+  - s07: −1.18/36.8 km = −3.2 and −1.38/55.6 km = −2.5 °C/100 km.
+  - s08: 5.8/2 h = 2.9 °C/h, and −5 hPa/h.
+  - s12: −0.32 − 0.50 + 1.45 = +0.63 °C.
+  - s16: 100 × −3.2×10⁻⁵ × 3600 = −11.5, and 2.9 − 11.5 = −8.6; s17: +14.4.
+- **The balloon.**
+  - s18: 4260 m / 900 s = 4.7 m/s, and −24.1/900 = −0.027 °C/s.
+  - s19: −2.59/43 200 = −6.0×10⁻⁵; −3.27×10⁻⁵ (dt.json); 4.74 × −5.65×10⁻³ = −0.0268; share 99.7 %.
+  - s20: u·∇T = −3.68 °C/h, so DT/Dt = 2.92 − 3.68 = −0.76 °C/h; if the parcels kept their temperature, the place would warm by +3.68.
+  - s21: −12.18 m/hPa × −5.65×10⁻³ = +0.069 °C/hPa.
+- **Gas, hydrostatics and heat routes.**
+  - s25: −3.45 %, exact −3.3 %.
+  - s26: 287 × 293/9.81 = 8571 m.
+  - s28: routes R × 93.3 K = 26.8, RT ln 1.5 = 32.6 and R × 140 K = 40.2 kJ/kg.
+  - s29: Δη = R ln 1.5 = 116.4.
+- **Taylor series.**
+  - s31: −4.86; 7.44 against 6.87, and −8.41 against −11.8.
+  - s33: 1.10517.
+  - s34: 11.6 Pa/m, 8.6 m/hPa; 880.4 and 887.3 against 887.0.
+  - s35: 342.6, 557.6, 510.6 and 517.4; T̄ = 277.45 K gives 498.7.
+- **Climate numbers.**
+  - s40: 0.073 K⁻¹.
+  - s42: 255 K, and 4 × 240/255 = 3.76.
+  - s43: 1.04 and 1.22; 3.79/3.76 and 39.9/37.6.
+- **Finite differences.** s45: −0.043 and −0.0009. s46: −3.32/−3.09/−3.20, then −3.17, −3.14, −2.24 and −0.98.
+
+## MUST fix
+1. **s20 S5–S7, 18:31–18:53: the key numbers of the new sign reasoning overlap.**
+   - Problem: "−0.8" (cream, with its tick) is drawn on top of the "+3.7" label of the "parcels kept T" bar and the "+2.9" label of "the place" bar, at x ≈ 1750–1845, y ≈ 700–795. The labels are also about 34 px tall, so at 640 px they merge into one blob. These are the three numbers S5–S6 now explain.
+   - Close-up: `review2/close/s20_S6.png`, `close/s20_bars2.png`.
+   - Fix:
+     - Give the bars room: start them at x ≈ 1120 and cap them at 1640, so that every value label fits right of its bar at x ≤ 1840.
+     - Put "−0.8" on its own third row ("each parcel: −0.8"), or as a bracket between the two bar ends with its label below the lower bar.
+     - Labels at ≥ 44 px.
+
+## SHOULD fix
+1. **s28 S1, 26:24.5–26:30: empty right half for 5.5 s (QA halves WARN).**
+   - Problem: only the p–α chart is on screen while "the most important small changes that are not perfect: heat and work" is said.
+   - Fix: show the keyword "heat · work: not perfect" on S1's words (or bring "dI = đQ + đW" in dimmed). Then reveal "first law of thermodynamics" at S2 as now.
+2. **s28 S5, 26:56–27:06: the 3-D parcel is too small and too brief (review-1 S16, partly).**
+   - Problem: the cube is about 150 px across and disappears after 6 s, so the routes are never tied to the parcel.
+   - Fix: enlarge it to ≈ 300 px and keep it through S6–S9. On each route, let it shrink or grow (volume) and tint cool/warm (temperature) in step with the line being drawn. Keep the honest ∛1.5 edge growth.
+3. **s28 S9 to s29 S16, 27:23–29:37: the teal route curve runs through its own labels.**
+   - Problem: the curve crosses "33 kJ/kg" (the "3") and later "Δη = 116" (the "Δ"). The orange and pink labels were lifted; the teal one was not.
+   - Fix: move the teal label ≈ 50 px up and right of the curve (perpendicular to it), at both times.
+4. **s19 S6–S7, 17:00–17:23: the reason is said but not shown.**
+   - Problem: "it drifted almost along the lines of equal temperature" is spoken, but the inset shows a nearly uniform colour with no isotherms.
+   - Fix: draw 3–4 thin ERA5 500-hPa isotherms (labelled in the colour bar's units) on the inset. Let the 17-km drift arrow run visibly along them.
+5. **s20 S4–S6, 18:21–18:46: the sign between the screen and the voice is not linked.**
+   - Problem: the screen says "u·∇T = −3.7 °C/h" while the voice says the wind "brought in warmer air at three point seven".
+   - Fix: label the dashed bar "−u·∇T = +3.7 (warm air blown in)", or add a dim line "−u·∇T = +3.7 °C/h" under the u·∇T line. The bar then reads as the same number with its sign explained.
+6. **§5b retrofit T-S2: readouts and non-place text on maps.** §5b allows only short labels that point at a spot (place names, H/L, station plots).
+   - Problem cases:
+     - s07, 5:17–5:42: "colder", "18.4 km", "27.8 km".
+     - s08, 5:50–6:14: "fixed thermometer" lies over the map's lower edge; "2.4 °C" / "8.2 °C".
+     - s12, 10:30–11:23: "10 km", "20 km", "+30 min".
+     - s13, 11:42–12:00: "X(t), Y(t), Z(t)".
+     - s16, 14:11–15:11: "≈ 360 km/h", "U = 100 m/s", "4.0 … −3.5 °C", "5.5 … 8.0 °C".
+     - s17, 15:11–15:49: "5.1 °C", "9.5 °C".
+     - s19, 17:00–17:53: "17 km".
+     - s20, 17:53–18:53: "4.8 … 4.4 °C".
+     - s46, 46:05–46:41: "steps over the front".
+   - Fix (Q1 b): move the numbers to the text column with a short gold link to their spot. Keep place names and markers, and keep "air parcel" only if it is the parcel's tag.
+7. **s09, 6:54–7:16: the zoom is a framed panel and never zooms back out (§5b zoom-reveal and zoom tours).**
+   - Problem:
+     - The zoomed state is a ≈ 970 × 630 panel with soft edges. It is not the full-bleed globe darkened behind the text column (x 980–1160 gradient, then 82 % overlay).
+     - The scene cuts from Europe to the profile at 7:12 without returning to the whole globe.
+     - "Trappes" is labelled at 7:07, about 3 s after it is spoken (≈ 7:04).
+   - Fix:
+     - Render the zoom full-bleed with the house vignette.
+     - Zoom back out to the start view over ≈ 1.5 s before the profile cross-fades in.
+     - Label Trappes on the word "Trappes" in S4.
+8. **s42, 40:50–42:07: globe size and crowding.**
+   - Globe size (T-S1): the CERES globe is ≈ 540 px across. Fix: ≈ 760 px, with the graph and readout still beside it.
+   - Crowding at S10 (41:56–42:07): the "4 × 240 / 255" fraction ends ≈ 3 px above the source line (y 835 against 838). Fix: lift the CalcStack ≈ 40 px, or put "= 4F/T" on the dF/dT line.
+9. **Maths under 44 px (legibility at 640 px).**
+   - Problem cases:
+     - s19 S9–S10, 17:37–17:53: the underbrace numbers (≈ 20 px), and the odd "∼−3×10⁻⁵".
+     - s20 bar labels (see Must 1).
+     - s23, 21:23–22:12: the small ∂²f/∂y∂x = ∂²f/∂x∂y line (≈ 22 px).
+     - s32 S8–S10, 31:54–32:13: "h³/3! f‴" as an inline fraction.
+     - s33 S6–S7, 33:09–33:27: the h = 1 list (≈ 34 px).
+     - s03 S7–S9, 1:50–2:09: "d/dx x²" as \tfrac.
+   - Fix: \dfrac and ≥ 44 px for each. For s19, write "≈ −3 × 10⁻⁵", or drop the underbrace values, since the bars carry them.
+10. **Minor contacts.**
+    - s09 S6–S9, 7:16–7:54: the y-axis runs through "−11.8 °C". Put the label right of the dot.
+    - s16 S9–S10, 15:04–15:11: "plane" touches the "1 h" tick.
+    - s36 S2–S6, 35:39–36:06: the dot and link cover the "1" of "13.07 km". Shift the label 20 px right.
+    - s02 S7–S8, 1:05–1:13: "average rate" sits on the temperature line. Lift it 30 px.
+
+## Overall: FIX (ch00_derivatives_taylor review 2 — 1 Must, 10 Should)
+- **All five review-1 Musts are fixed.**
+  - M3: the first law with I, Q, W and đ defined on their words, and c_v dT + p dα derived as "the first law turned round".
+  - M4: three positive Δη labels with the unit.
+- **Review-1 Shoulds.** 20 of 22 are fixed, S8 has one leftover (teal labels), and S16 is partly done.
+- **§5b.** T-M1 and T-M2 are done. T-S1 and T-S2, and the full zoom-reveal for s09, remain.
+- **The one Must is new.** The s20 bar labels that carry the fixed sign reasoning overlap. It is a TSX-only fix: s20 re-render, no TTS.
+- **Next.** Fix Must 1 (and ideally Shoulds 1–5, all TSX-only, s19/s20/s28/s29), then a short re-review of s19–s20 and s28–s29. The whole movie does not need another pass.
+
+**Disk.**
+- C: 50 GB free at the start and at the end (floor 40 GB).
+- G: 511 GB free at the start, 509 GB at the end.
+- This review wrote 156 MB (520 files) under `…/review2/` on G: and nothing to C:.
