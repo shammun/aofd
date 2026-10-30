@@ -14,3 +14,6 @@ Source: `promts_weather.docx` (repo root, not committed: user file), on `weather
 ## General rule added (HOUSE_STYLE §5b)
 - **Layer stacks: never fly the camera inside.** Orbit or hover from outside, from the side at an angle, moving from bottom to top. The colour bar stays visible. Use few, clearly separated layers (about 5) unless more add real insight.
 - **A globe shows each named place within about 1 s of it being spoken**, centred and labelled, as part of the zoom-tour rule.
+
+## Refinement (user, 2026-10-30)
+| U3-07 | ~41:18 | The close, zoomed-in view at 41:18 can stay | **Rule refined for all movies:** a short close look into a stack is fine: close enough that the ground and its levels are both visible, looking from bottom to top, not deep inside. Come back out after about 5–6 s; every move between views is made from outside, hovering round from the side, bottom to top |
