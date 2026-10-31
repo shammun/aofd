@@ -4,7 +4,7 @@
 // WebGL globe and terrain (kit_dt, copied from the 1a / weather-basics kits), small code-drawn icons (car, plane, balloon,
 // barometer) and the data-source line with wrapping (weather basics). Everything is a pure function of the frame and the data.
 import React from "react";
-import { AbsoluteFill, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import { ramp } from "../house";
 import timing from "../../ch00/ch00_derivatives_taylor/timing.json";
@@ -76,9 +76,19 @@ export const BOX = {
 
 // ---------------------------------------------------------------- flat maps
 export type Proj = (lat: number, lon: number) => Pt;
+const MapFrameCtx = React.createContext<MapBox | null>(null);
 export const GeoImg: React.FC<{ P: Proj; href: string; box: [number, number, number, number]; o?: number }> = ({ P, href, box, o = 1 }) => {
+  const F = React.useContext(MapFrameCtx);
   if (o <= 0) return null;
   const a = P(box[1], box[2]), b = P(box[0], box[3]);
+  // K6: inside a map frame the raster is cropped by an overflow:hidden box, so the probe sees the picture actually on screen
+  if (F) return (
+    <foreignObject x={F.x} y={F.y} width={F.w} height={F.h}>
+      <div style={{ position: "relative", width: F.w, height: F.h, overflow: "hidden" }}>
+        <Img src={href} style={{ position: "absolute", left: a[0] - F.x, top: a[1] - F.y, width: b[0] - a[0], height: b[1] - a[1], opacity: o, maxWidth: "none" }} />
+      </div>
+    </foreignObject>
+  );
   return <image href={href} x={a[0]} y={a[1]} width={b[0] - a[0]} height={b[1] - a[1]} preserveAspectRatio="none" opacity={o} />;
 };
 export type MapLayers = { tc?: number; t850?: { h: number; o: number }[]; coarse?: { n: number; o: number }[]; coast?: number; borders?: number; dim?: number; frame?: number };
@@ -90,7 +100,7 @@ export const MapView: React.FC<{ B: MapBox; L: MapLayers; o?: number; id: string
   return (
     <Svg o={o}>
       <defs><clipPath id={`clip_${id}`}><rect x={B.x} y={B.y} width={B.w} height={B.h} /></clipPath></defs>
-      <g clipPath={`url(#clip_${id})`}>
+      <MapFrameCtx.Provider value={B}><g clipPath={`url(#clip_${id})`}>
         <rect x={B.x} y={B.y} width={B.w} height={B.h} fill="#1d2a44" />
         <GeoImg P={P} href={IMGS.tc} box={BOX.tc} o={L.tc ?? 0} />
         {(L.t850 ?? []).map((t) => <GeoImg key={t.h} P={P} href={IMGS.t850(t.h)} box={BOX.t850} o={t.o} />)}
@@ -99,7 +109,7 @@ export const MapView: React.FC<{ B: MapBox; L: MapLayers; o?: number; id: string
         {(L.coast ?? 0.85) > 0 ? <path d={linesPath(P, D.lines.coast_10m)} fill="none" stroke={C.key} strokeOpacity={L.coast ?? 0.85} strokeWidth={2.2} strokeLinejoin="round" /> : null}
         {(L.borders ?? 0) > 0 ? <path d={linesPath(P, D.lines.borders_10m)} fill="none" stroke={C.key} strokeOpacity={L.borders} strokeWidth={1.5} strokeDasharray="8 6" /> : null}
         {children ? children(P) : null}
-      </g>
+      </g></MapFrameCtx.Provider>
       {(L.frame ?? 1) > 0 ? <rect x={B.x} y={B.y} width={B.w} height={B.h} fill="none" stroke={C.grid} strokeWidth={3} opacity={L.frame ?? 1} /> : null}
       {over ? over(P) : null}
     </Svg>
@@ -121,15 +131,15 @@ export const Place: React.FC<{ p: Pt; t?: string; o?: number; dx?: number; dy?: 
     </g>
   );
 /** a colour bar with a title above it (what the colours mean) and 48-px tick labels */
-export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number; title?: string }> = ({
-  x, y, w, lut, ticks, lo, hi, unit, o = 1, title }) =>
+export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number; title?: string; unitDx?: number }> = ({
+  x, y, w, lut, ticks, lo, hi, unit, o = 1, title, unitDx = 0 }) =>
   o <= 0 ? null : (
     <g opacity={o}>
       {title ? <Lbl x={x} y={y - 34} t={title} c={C.muted} s={44} b={false} /> : null}
       {Array.from({ length: 60 }, (_, i) => <rect key={i} x={x + (i * w) / 60} y={y} width={w / 60 + 0.8} height={24} fill={lutCss(lut, (i + 0.5) / 60)} />)}
       <rect x={x} y={y} width={w} height={24} fill="none" stroke={C.muted} strokeWidth={2} />
       {ticks.map((tk) => <Lbl key={tk.t} x={x + ((tk.v - lo) / (hi - lo)) * w} y={y + 56} t={tk.t} c={C.muted} s={48} a="middle" b={false} />)}
-      {unit ? <Lbl x={x + w + 18} y={y + 12} t={unit} c={C.muted} s={48} b={false} /> : null}
+      {unit ? <Lbl x={x + w + 18 + unitDx} y={y + 12} t={unit} c={C.muted} s={48} b={false} /> : null}
     </g>
   );
 
@@ -150,7 +160,7 @@ export const Axes: React.FC<{ A: Ax; xt: number[]; yt: number[]; xl?: string; yl
       <line x1={A.x} y1={A.y + A.h} x2={A.x + A.w + 8} y2={A.y + A.h} stroke={C.muted} strokeWidth={3} />
       <line x1={A.x} y1={A.y - 8} x2={A.x} y2={A.y + A.h} stroke={C.muted} strokeWidth={3} />
       {xt.map((v) => <Lbl key={`x${v}`} x={X(v)} y={A.y + A.h + 32} t={xf(v)} c={C.muted} s={44} a="middle" b={false} />)}
-      {yt.map((v) => <Lbl key={`y${v}`} x={A.x - 14} y={Y(v)} t={yf(v)} c={C.muted} s={44} a="end" b={false} />)}
+      {yt.map((v) => <Lbl key={`y${v}`} x={A.x - 14} y={Y(v) - (Math.abs(Y(v) - (A.y + A.h)) < 2 && xt.some((u) => X(u) - A.x < 60) ? 14 : 0)} t={yf(v)} c={C.muted} s={44} a="end" b={false} />)}
       {xl ? <Lbl x={A.x + A.w} y={xly ?? Math.min(A.y + A.h + 76, 806)} t={xl} c={C.muted} s={44} a="end" b={false} /> : null}
       {yl ? <Lbl x={ylx ?? A.x + 12} y={A.y - 30} t={yl} c={C.muted} s={44} a="start" b={false} /> : null}
     </g>
