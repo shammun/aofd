@@ -4,6 +4,8 @@ Render 3 was restarted with `render_uf2.py --from 4` (log `uf2/render_fix1c_resu
 
 Update: render 3 finished (57:51, on Drive); review 2 = FIX, 16 Must + 25 Should (reports/ch00_movies.md, "UF2 — review 2"). Fix loop 2 of weather starts when the #4 render finishes (one Remotion job at a time). Item 1 below is done up to review 2; item 3 and item 4 are done (suite: 3188 passed, 1 xfailed).
 
+Update: #4 fix 2 on Drive (49:07, 745397a); review 3 = FIX, 9 Must + 12 Should, all TSX with no TTS (reports/ch00_movies.md, "ch00_derivatives_taylor — review 3"). #4 fix loop 3 (the last allowed before reporting to the user) starts when weather fix loop 2 releases Remotion.
+
 **Resume in this order:**
 1. Weather UF2 render 3: delete `uf2/render/c04*` if partial; run `tools/movie_wb/render_uf2.py` (TEMP/TMP on G:) for the missing chunks (~2 h); join with `join2pass.py <uf2/render> <uf2/public/narration_music.wav> <out> --mb 152 --abr 128k --alim 0.5`; copy to movies/out; run QA with `--overlap G:/…/uf2/stills/k6final2`, source_check, vscan; then G: viewing copy + Drive, then review 2.
 2. #4 fix loop 2 render (the builder's report has the resume steps).

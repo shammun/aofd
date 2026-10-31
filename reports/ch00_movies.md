@@ -6041,3 +6041,135 @@ C: 68 GB free at the start, 66 GB at my last check (floor 40 GB). G: 490 GB free
 
 ## Overall: FIX (ch00_weather_basics UF2 render 3 review 2 — R2-M1…M16; 25 Should recommended)
 Not `qa_pass`. R2-M2 and R2-M3 need a short TTS splice. R2-M4 and R2-M5 need the s38b camera re-keyed. The rest are placement changes. After the fix loop, re-review s20f, s22, s25, s38b, s39, s42, s46–s48b, s51 and s54, plus any scene touched by the Shoulds.
+
+
+---
+
+# ch00_derivatives_taylor — review 3 (fresh eyes, after fix loop 2, source commit 745397a)                    2026-10-30
+
+**What I looked at.**
+- 426 frames, one 0.2 s before each sentence ends (times from the repo `timing.json`), as 48 labelled 3×3 sheets.
+- 27 full-resolution frames, plus 63 targeted frames in 7 groups: the s09 zoom, the s08 and s43 swaps, the s28 cube, the s42 reveals, the s09b close look, the s20 wind and bars. Also 11 extra low-resolution s09b frames.
+- The diff of commit 745397a, `stack` in `data/dt.json`, the s09b storyboard entry and cues, and `qa.json`.
+- Frames: `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_derivatives_taylor/review3/` (60 MB).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_derivatives_taylor (fix 2) | 2947.40 s (49:07.4); narration ends 2944.88 s | 122.91 MB (budget 120, hard 160) | 13 PASS + **size WARN** (`pass: true`) | **FIX** on one label: s36 "too cold" names the wrong curve. Numbers checked are right | PASS: 41 present per QA, no KaTeX errors seen, no labels or references | **FIX**: real collisions behind the K6 exemptions (s19), s07, s08, s20, s34 | PASS on the scenes checked (see limits) | PASS: 725 cues per QA; s09b cues read by me = script | PASS on the frames; no colour-blind simulation run | n/a (house) | **FIX** |
+
+**qa.json, the one gate not PASS:** `"size": {"status": "WARN", "detail": "122.91 MB (budget 120, hard 160)"}`. `overlap`: "1425 frames, 0 hits; 472 INFO". That zero is not evidence: Musts 1–3, 5 and 7 are visible collisions or link crossings.
+
+## New s09b stack: readable, numbers right, one Must
+- **Data.** `stack.trappes`: z = 0.14 / 3.134 / 7.468 / 13.004 / 16.452 km, T = 20.91 / 2.34 / −22.07 / −64.97 / −61.21 °C. I recomputed the gaps by hand: −6.20, −5.63, −7.75, +1.09 K/km. Screen −6.2, −5.6, −7.7, +1.1 and the narration both match them. −7.749 rounds to −7.7 correctly.
+- **Tropopause.** 13.0 km at 175 hPa, on the screen and in the words. s36 gives 13.07 km from the balloon, a consistent small difference between two sources.
+- **Words.** −6.2 (about 8:11), −5.6, −7.7 (about 8:15), "13 km" (8:21–8:22), +1.1 (by 8:24), "tropopause" (by 8:26). All land on or within about 1 s of their words.
+- **§5b.** Five layers, colour bar and source line beside the stack, heights to scale (about 31 px/km at 7:59). The camera stays outside. The close look runs about 8:23–8:26.5, then back out. No fly-through in the sampled frames.
+- **Problems.** Must 8 (holes in the bottom layer), Shoulds 8 and 9.
+
+## K6 exemptions: does each hide a real collision?
+| Exemption | Verdict | Evidence |
+|---|---|---|
+| s19 `data-lc-ok` on the two data curves | **Hides a real collision** (Must 2) | "−2.6 °C in 12 h" sits on both curves |
+| s19 `data-lc-maplabel` on the isotherm labels (not on the builder's list) | **Hides a real collision** (Must 1) | The gold link strikes through "−11.0 °C" |
+| s15 `data-lc-contour` + `data-lc-maplabel` | **Hides real contacts, still legible** (Should 1) | Isotherms run through every readout on the made-up map |
+| s07 "Brest" `data-lc-maplabel` | **Small real contact** (Should 2) | The "t" touches the white bracket |
+| s20 "air parcel" `data-lc-maplabel` | **OK** | The parcel's own tag; legible over the coast and wind streaks, 18:32–19:03 |
+
+## Review-2 items — status
+| Item | Status | Evidence |
+|---|---|---|
+| Must 1, s20 bar labels | **PARTLY** | −0.8, +3.7 and +2.9 are on separate rows and no longer on each other. New problems: Must 5 |
+| S1 s28 empty half | **FIXED** | "small changes, not perfect / heat · work" at 27:07; QA halves PASS |
+| S2 s28 parcel | **FIXED** | About 315 px, kept 27:44–28:08. A small cube rides each route and the large one tints (orange at 27:56). It is gone by 28:13, which is fine |
+| S3 teal labels | **FIXED** | "33 kJ/kg" and "Δη = 116" sit clear of the curve (28:07, 30:04) |
+| S4 s19 isotherms | **FIXED, with a new Must** | Isotherms drawn, the drift arrow runs along them; see Must 1 |
+| S5 s20 sign | **FIXED** | "−u·∇T = +3.7" on the dashed bar from about 19:11 |
+| S6 T-S2 readouts on maps | **FIXED, with new Musts** | s08, s12, s13, s16, s17, s19, s20 and s46 readouts are off the maps. s07 now has Must 3 |
+| S7 s09 zoom | **FIXED** | Full-bleed with the dark right side 7:06–7:10, zoomed back out by 7:12, "Trappes" labelled by 7:06. Balloon cut by the top edge at 7:10 (Should 12) |
+| S8 s42 globe | **MOSTLY FIXED** | About 760 px to 42:15, about 540 px from 42:17 beside the chart. The fraction is clear of the source line at 42:43 |
+| S9 maths under 44 px | **MOSTLY FIXED** | s19, s23, s32 h³/3!, s33 and s03 are fixed. Left: s26 unit line (about 30 px), s32 d/dh lines (Should 11) |
+| S10 minor contacts | **FIXED** | s09 −11.8, s16 "plane", s36 "13.07 km" and s02 "average rate" are clear. New contacts: Shoulds 5 and 12 |
+
+## Label moves and swaps checked
+- **s08 two-stage swap (6:15.5–6:17): clean.** Temperature fades, then pressure and the map arrive, with no double exposure. The curve problem is Must 4.
+- **s43 swap (43:33.5–43:35): clean.**
+- **s42 keyword timing: PASS on the sampled frames.** "≈ 240" is on by 41:53, "emission temperature" at 42:06, the chart at 42:17, and "heat sent to space" leaves before S5. S4–S6 and the 42:17 swap were sampled; other words rely on the `AT()` code.
+- **Moved label away from what it names: s36 only** (Must 6). The s20 reading, s19 "°C/s", s36 "a front" and s46 "steps over the front" are all fine.
+
+## MUST fix (all TSX only, no TTS)
+1. **s19, about 17:55–18:31: the gold link strikes through "−11.0 °C".**
+   - Problem: the "17 km" link runs through the lower half of the number, one of the two labels that make "along the isotherms" readable. The move in fix 2 put it there.
+   - Fix: label that isotherm lower on the map (about y 760, right of Trappes), or start the link below it. Keep the label off the link.
+2. **s19, 17:26–18:31: "−2.6 °C in 12 h" sits on both profile curves.**
+   - Problem: the thick curve runs through "−2" and the thin one through ".6", and in gold from 18:21.
+   - Fix: lift the label above the 7-km end of the curves, or put it right of the bracket at about x 650–900, y 150, in the empty part of the plot.
+3. **s07, 5:29–5:42: fan of five gold links and a run-on label row.**
+   - Problem: "gradient 18.4 km 27.8 km colder (north)" has gaps of about 6–8 px at y 748 and reads as one string. The links cross near Brest and cover the gold dot. The 18.4 and 27.8 tips land about 40 px apart, so a viewer cannot tell which bracket each names. The "colder (north)" link lies along the rose arrow.
+   - Fix: fade the 18.4 and 27.8 km callouts when S7 starts (36.8 and 55.6 km are already in the maths). Keep only the links of the current sentence, and leave ≥ 40 px between labels.
+4. **s08, 6:16.5–6:43: the pressure curve leaves its graph.**
+   - Problem: the data fall to 977.7 and 976.0 hPa at 19:00 and 20:00, but the axis ends at 980. The curve crosses the x axis and the tick row, hits "20:00" and runs down to the map's top edge.
+   - Fix: y axis 970–1000 (or clip and end the series at 18:00). Re-check the two dots and labels afterwards.
+5. **s20, about 19:11–19:31: the bar chart runs into the source line.**
+   - Problem: the white zero axis cuts "18|UTC", and the dashed rose guide cuts "+2|.9". The three rows are squeezed into y 640–860, and "each parcel: −0.8" ends level with the source line.
+   - Fix: end the axis at y 830 and shorten or move the source line left of x 1100. Move "+2.9" clear of the guide, or stop the guide at the "place" bar. Tighten the map or the maths to give the rows about 60 px more.
+6. **s36, about 36:26–36:47: "line, series: too cold" names the wrong curve.**
+   - Problem: fix 2 moved it to −56 °C, 18.5 km, touching the balloon's measured profile. The curves it means are the rose dashed lines at the left (−75 °C, 14 km), about 300 px away. A viewer reads the measured curve as "too cold".
+   - Fix: place it just above the rose line's left end (about x 260–650, y 345, clear of "tropopause"), or give it a short rose link to the dashed line.
+7. **s34, 34:55–35:10: the link reads as a third curve and lands on text.**
+   - Problem: the link from the ring at 1 km has the same gold and weight as "line". It runs along both curves, crosses the frame, and its head lands on the "l" of "line 880.4".
+   - Fix: drop the link and mark the point with a label, or route a thinner link through the empty area above the curves, ending ≥ 20 px before the text.
+8. **s09b, 7:55–8:31: unexplained holes in the bottom layer.**
+   - Problem: `below_ground_share` is 0.44 at 1000 hPa, so 44 % of the layer is transparent, with blocky dark edges next to the rod's lowest dot. For the first 4–5 s this torn yellow patch is almost the whole picture, while the voice says "all of northern France". It looks like a render fault. The treatment is honest; it is just never said.
+   - Fix: choose one. (a) Add a keyword on the layer's first frame, "no 1000 hPa surface over high ground". (b) Use 925 hPa for the bottom layer, which needs rebuilt gaps and narration. (a) needs no TTS. Also show all five layers from the start.
+9. **Colour bar missing on coloured data fields (U-WB-R2, HOUSE_STYLE §5). New here; reviews 1–2 did not flag it.**
+   - Problem scenes: s07 (4:43–5:42), s08 (5:43–6:16), s11 (9:59–11:06), s12, s13, s14 (11:06–13:59), s16 and s17 (14:46–16:28), s37 (36:45–37:00 and 37:21–37:32), s47 S2, S3 and S5. None of these is a zoom, the only exemption.
+   - Fix: add the same bar as s04 (−4, 4, 12 °C) beside or below each map, in the column where the row below the map is taken. Recap beats: either add it or get the user's exemption.
+
+## SHOULD fix
+1. **s15, 14:13–14:46: isotherms run through readouts.** "car: 5.5 °C", the clock, "100 km/h", "−0.03 °C per km", "fixed: no change". "100 km/h" also covers the thermometer's bulb as the car passes (14:30). Fix: end the lines at y ≈ 340 and restart below the road, or move the car readout to the column.
+2. **s07, 5:03–5:42: "Brest" touches the white bracket** and sits nearer the west grid point than the gold dot. Fix: move it up and left, with a short tick to the dot.
+3. **s43, 43:12–43:34: the thermometer's top is drawn inside the dashed bar.** "3.2 → ≈ 1.2 °C" is also odd typography, and the row does not say what 3.2 is. Fix: lower the thermometer about 50 px. Write "IPCC 3.2 per °C: ≈ 1.2 °C".
+4. **s40, 40:10–40:35: ghost text under the inset.** The dimmed "6.4 %/°C", "5.7 %/°C" and "e_s (hPa)" are cut by the inset's axes and "°C" (§5b no text over text). Fix: fade the main chart's labels fully.
+5. **s09, 7:22–7:54: two contacts.** The bracket's foot cuts the "1" of "12.3 °C". "15 min" touches the profile (7:34–7:54). Fix: end the bracket above the label, and move "15 min" 40 px left.
+6. **s17, 16:09–16:28: the thermometer icon touches "°C/h"** in the "−8.6 °C/h" row. Fix: 30 px more space.
+7. **s17, 15:53–16:09: "place 5.1 °C" stays frozen while the plane's reading climbs to 9.5.** In s16 the place warms with the clock. At +14.4 °C/h, 9.5 °C means about 0.3 h, when the place would be about 6.0. Fix: run it as in s16, or say "at 18:00" beside it.
+8. **s09b, S2: the calculation is not on screen (§6, every calculation in full).** No level temperature or gap in km is shown, so −6.2 cannot be followed. Fix: on S2, add one dim worked line "(2.3 − 20.9) °C / 3.0 km ≈ −6.2" under the equation.
+9. **s09b, 8:22–8:23 and 8:26–8:27: abrupt camera; final view crowded.**
+   - The picture grows by well over 1.5× in about 1 s, and the links swing. Fix: 1.5–2 s moves.
+   - At 8:27–8:31 the higher pitch overlaps the layers heavily (§5b "clearly separated"). Fix: return to the 8:04 side angle.
+10. **s42, 41:52–42:15: "≈ 240 W/m² global average" links to one spot on the limb,** implying a local value. Fix: no link, or a bracket round the whole disc.
+11. **Remaining small maths and stacks.**
+    - s26 unit line, 25:50–25:55: about 30 px.
+    - s32 d/dh lines, 32:22–32:40: inline-size fractions.
+    - s03, 1:50–2:09: df/dx touches the row above and the d/dx row below.
+    - s26, 25:29–25:38: ρ/p touches dp/p.
+    - s45, 45:17–45:58: "h³/3" touches the fraction below.
+12. **Minor contacts and tags.**
+    - s02, 0:55–1:13: the secant touches "10.3 °C" and "14.9 °C".
+    - s19, 17:34–18:31: "fixed place" touches its bar.
+    - s23, 22:43–22:50: "−2.00" and the ✓ crowd the axis "x".
+    - s27, 26:11–27:02: "exponential" touches its curve.
+    - s25, 24:41–24:53: "300 K" stays on the ground after its cube rises.
+    - s35, 35:20–36:07: "343" touches the line.
+    - s32, 32:17–33:06: "c h²" touches the curve.
+    - s20, from 18:59: "Over Brest" is said, but the gold dot has no label.
+    - s09, 7:10: the balloon is cut by the top edge.
+    - s48, 48:58–49:07: the stacked notebook icon touches the single one.
+
+## What works (keep)
+- The opening title, the arc, the recap (one beat per sentence) and the end card match the house pattern. The maths ending matches the script.
+- The s28 cube with its routes, the s09 zoom-reveal and the s46 data table. "−u·∇T = +3.7" links voice and screen well.
+- s42's large globe and side-by-side chart, and the separated s43 and s08 swaps.
+- Signs and numbers on the frames I read: s07 gradient arrow points towards warmer air (south-west), s16 −8.6, s17 +14.4, s21 +0.069, s34 880.4 / 887.3 / 887.0, s35 343 / 558 / 511 / 517 / 499.
+
+## Limits of this review
+- **Audio not assessed.** I cannot hear. The bundle has never been heard. The −16.0 LUFS and −1.5 dBTP are QA's figures. I did not measure the 3 new s09b clips, so the builder's ≤ 0.17 LU is unverified. Listen first to the seams at 7:54 and 8:31, and to the "minus six point two, minus five point six" run at 8:09–8:15. The review-2 listening list also still stands.
+- **Motion only sampled.** Mostly one frame per sentence. Steps of 0.5–3 s only in the targeted groups. Word-level reveals were checked only in s09b, s42, s08, s43, s28 and s20, not at ±0.5 s across the movie.
+- **Sizes and gaps are by eye** from frames, not measured from the DOM. Times marked "about", and scene start and end times in Must 9, are bounded by the frames I saw.
+- **Not re-done.** I re-derived only the s09b gaps; other numbers were read against the script and the review-2 check. Physics parity, equation presence, flashes and caption limits rest on `qa.json`. `overlap.json` not opened. No colour-blind simulation. The reference movie was not re-opened frame by frame.
+- **Wind streaks** differ between the sampled s20 frames, so I take them as animated, but did not measure their speed.
+
+## Overall: FIX (ch00_derivatives_taylor review 3 — 9 Must, 12 Should)
+Not `qa_pass`. All nine Musts are TSX changes with no TTS. Re-review s07, s08, s09b, s19, s20, s34, s36, and each scene that gains a colour bar.
+
+**Disk.** C: 64 GB free and G: 488 GB free, at the start and at the end. This review wrote 60 MB on G: and three small helper files to the session scratchpad on C:.
