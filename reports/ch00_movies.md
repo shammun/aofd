@@ -6354,3 +6354,156 @@ Not `qa_pass`. All four Musts are TSX changes (no TTS):
 After the fix loop:
 - re-check s38b, s39, s47, s48 and s48b frame by frame through every keyword swap;
 - re-run QA with the movie's windows and `--composition`.
+
+
+---
+
+# ch00_derivatives_taylor — review 4 (fresh eyes, after fix loop 3) 2026-11-04
+
+**Movie:** `movies/out/ch00/ch00_derivatives_taylor/1080.mp4` (rendered 2026-11-04 04:46): 49:07.4 (2947.40 s; narration ends 2944.88 s), 122.97 MB, 1920×1080, 30 fps, 50 scenes, 426 sentences, 725 cues.
+
+**How I looked:**
+- 426 frames at 640 px, one 0.2 s before each sentence ends (times from `timing.json`), as 48 labelled 3×3 sheets.
+- 30 full-size frames at every review-3 item and at anything suspicious.
+- Strips at 0.1–2 s steps through:
+  - the s07 links (4:56–5:35);
+  - the s08 swap (6:14.5–6:18);
+  - the s09 zoom (6:58–7:16);
+  - s09b (7:54–8:32);
+  - the two s09b cross-fades;
+  - the s47 opening beat.
+- One frame from `fix2_1080.mp4` (47:23.5) for comparison.
+- The s47 source lines in `DerivativesTaylor.tsx` (read only).
+- Frames: `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_derivatives_taylor/review4/` (25 MB).
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_derivatives_taylor (fix 3) | 2947.40 s (49:07.4) | 122.97 MB (budget 120, hard 160) | 14 PASS + **size WARN** (`pass: true`) | PASS on every number checked; **FIX on one picture**: s47 "tangent" misses its curve | PASS: 41 present per QA, KaTeX rendered, no labels or references | PASS: all review-3 collisions are gone; only small contacts left (Should) | PASS | PASS per QA (725 cues = script, SRT = VTT) | PASS (0 flashes; magma, teal/rose and red-blue diverging maps, no red/green-only) | n/a (house) | **FIX** |
+
+**qa.json:** every gate is PASS except `"size": {"status": "WARN", "detail": "122.97 MB (budget 120, hard 160)"}`. The other gates:
+- `av_length`: 2947.40 vs 2947.38 s.
+- `overlap`: "1425 frames, 0 hits; 473 INFO".
+- `loudness`: −16.0 LUFS, −1.5 dBTP.
+- `physics`: 67 functions.
+- `equations`: 41.
+
+## Vscan edge pixels (376.5 s, 424.5 s, 430.5 s): harmless
+| t | scene | what it is | verdict |
+|---|---|---|---|
+| 376.5 s (6:16.5) | s08 | The sea-level-pressure map slides in from beyond the left frame edge. Only its right part (Brittany) shows, x 0–255. It is in place by 6:17.2 (`strip_s08swap.jpg`). No text is cut. | Harmless motion (see Should 10) |
+| 424.5 s (7:04.5) | s09 | The planned full-bleed zoom onto Europe. The globe fills the frame and the top-left fade reaches the edge. Labels, credit and maths are inside the frame. | Harmless (the review-2 S7 design) |
+| 430.5 s (7:10.5) | s09 | The zoom-out. The globe's top limb touches the top edge for a few frames, then shrinks. The balloon is ≥ 85 px from the top at 7:09.6. | Harmless |
+
+## Review-3 items: status in the rendered frames
+| item | status | evidence |
+|---|---|---|
+| M1 s19 link through "−11.0 °C" | **FIXED** | 18:15: the "17 km" link runs about 35 px under "−11.0 °C" to the drift arrow's tip (`full_1095.00.jpg`) |
+| M2 s19 "−2.6 °C in 12 h" on the curves | **FIXED** | Right of the bracket at x 665–960. Both curves end before x 630 at that height |
+| M3 s07 link fan and label row | **FIXED** | Row "colder (north) · 18.4 km · 27.8 km" with gaps of about 45–50 px. Links are shown only on their sentences, never cross, and none lies along an arrow. "gradient" takes the slot on S8. New, smaller problem: Should 1 |
+| M4 s08 pressure leaves its graph | **FIXED** | Axis 970–1000. The curve ends at about 976 inside the plot, and the 988.3 / 983.3 labels are clear (`full_0376.50.jpg`) |
+| M5 s20 bars into the source line | **FIXED** | Axis ends at y ≈ 820. The source line ends at x ≈ 1098, left of the axis (x 1120). "+2.9" is clear of the guide (`full_1163.50.jpg`) |
+| M6 s36 "too cold" on the wrong curve | **FIXED** | Rose "too cold" sits just above the rose dashed lines' left ends, about 12 px from the measured profile (`full_2185.00.jpg`) |
+| M7 s34 link reads as a third curve | **FIXED** | No link. "880.4" sits beside the gold ring (34:58) |
+| M8 s09b unexplained holes | **FIXED** | "holes: no 1000 hPa level / where the ground is higher" from 7:54.4. All five layers are in by 7:55.0 |
+| M9 colour bars | **FIXED** | The bar is under the map in s07, s12, s16 and s17. It is in the column in s08, s37 and s47 S3/S5. The landscape bar is in s11, s13, s14, s37 and s47 S2 |
+| Should 1 (s15) | FIXED | Readout and clock in the top row, "100 km/h" under the road, no isotherm through text |
+| Should 2 (s07 "Brest") | FIXED | — |
+| Should 3 (s43) | FIXED | The thermometer is clear of the dashed bar. Label reads "IPCC 3.2 per °C: ≈ 1.2 °C" |
+| Should 4 (s40) | FIXED | No ghost text under the inset |
+| Should 5 (s09) | FIXED | — |
+| Should 6 (s17) | FIXED | — |
+| Should 7 (s17) | FIXED | "place 6.0 °C" with "plane 9.5 °C" at 16:08.8 |
+| Should 8 (s09b) | FIXED | Worked line "(2.3 − 20.9) °C / 3.0 km ≈ −6.2" is shown |
+| Should 9 (s09b camera) | **PARTLY** | The return to the side angle is clean by 8:28. The links still point off-frame during the close look (Should 8) |
+| Should 10 (s42) | FIXED | — |
+| Should 11 (maths sizes) | FIXED | — |
+| Should 12 | FIXED | s20 "Brest" named at 19:08. s25 "300 K" rises with its cube. s48 icons are apart |
+
+## Physics and numbers re-checked by hand (all PASS)
+- s07: ∂T/∂x = (4.51 − 5.69)/36.8 km = −3.2 °C/100 km; ∂T/∂y = −2.5. The gradient arrow points to the warmer south-west, about 40° below west (expected 38°).
+- s10: (7.58 − 8.63 − 1.77 + 3.19) = 0.37 °C, and 0.37 / (36 800 m × 7200 s) = 1.40×10⁻⁹.
+- s12: −0.32 − 0.50 + 1.45 = +0.63 °C.
+- s15: 100 km/h × (−0.03 °C/km) = −3 °C/h.
+- s16: −3.2×10⁻⁵ × 100 × 3600 = −11.5, so +2.9 − 11.5 = −8.6.
+- s17: +14.4; place 6.0 at plane 9.5.
+- s18 / s19:
+  - 4260 m / 900 s = 4.7 m/s;
+  - −2.6 / 43 200 s = −6×10⁻⁵;
+  - 4.7 × (−5.7×10⁻³) = −0.027;
+  - the drift arrow points NNE along the isotherms.
+- s20: +2.9 − 3.7 = −0.8. The wind is from the SW (warm side), so this is warm advection.
+- s21: (−5.7×10⁻³)(−12.2) = +0.069 °C/hPa.
+- s23: ∮(y dx − x dy) round the unit square, anticlockwise, = −2.
+- s25: −10/290 = −3.45 %; exact 290/300 − 1 = −3.3 %.
+- s26: H = 287 × 293 / 9.81 = 8570 m.
+- s28: at 280 K, α 0.8 → 1.2 gives 33 kJ/kg (RT ln 1.5). The routes give 27 and 40, and Δη = R ln 1.5 = 116 J kg⁻¹ K⁻¹.
+- s31:
+  - (9.4 − 13.9)/(2.100 − 1.174) = −4.86 °C/km;
+  - 12.3 − 4.86 = 7.4 (balloon 6.9);
+  - 12.3 − 4.26 × 4.86 = −8.4 (balloon −11.8).
+- s33: e^0.1 = 1.10517; partial sums 1, 2, 2.5, 2.667, 2.708 → 2.718.
+- s34: 1.186 × 9.81 = 11.6 Pa/m, so 8.6 m per hPa.
+- s40: 2.5×10⁶ / (462 × 273²) = 0.073 K⁻¹; the +4 °C exact value of 33 % holds.
+- s41: 1.26 × 7 % ≈ 9 %.
+- s42: (240/σ)^¼ = 255 K, and 4 × 240/255 = 3.8 W m⁻² K⁻¹.
+- s43: 3.9/3.8 = 1.04 °C.
+
+## Must fix (1)
+1. **s47 S1, 47:19.1–47:24.8: the recap's "slope of the tangent" line never touches the curve** (`strip_s47a.jpg`, `full_2843.5.jpg`).
+   - What is wrong: the gold line runs parallel to the parabola, about 6 units (≈ 130 px) above it. It does not pass through the gold dot at x = 3.
+   - Why it is a Must: this is the picture that defines the derivative in the summary.
+   - Cause in source (`DerivativesTaylor.tsx`, S47, the `<path d={poly([P(1, 3), P(5, 27)])} …>` beside `<Dot p={P(3, 9)} …>`): it draws y = 6x − 3. The tangent to y = x² at x = 3 is y = 6x − 9.
+   - Fix: `poly([P(1.5, 0), P(5, 21)])` (or `P(1, -3)`, already clipped by `r0`). TSX only, no TTS.
+   - History: the error is the same in `fix2_1080.mp4`. Reviews 1–3 missed it.
+
+## Should fix (14; cosmetic, none blocks understanding)
+1. **s07 S7–S8, 5:33.8–5:41.3: orphan "colder" labels.**
+   - The "colder (north)" link appears only about 0.6 s before S7 ends.
+   - On S8 both "colder" links are gone, but the labels stay. "colder (east)" then sits alone right under the ∂T/∂y result "≈ −2.5 °C/100 km", which invites the wrong pairing (`full_0340.90.jpg`).
+   - Fix: start the north link on "towards the north" and hold it ≥ 1.5 s. Fade both "colder" labels with their links at S8.
+2. **s15, 14:20–14:45: the car readout is computed at the car's rear bumper.**
+   - The car's centre is about 40 px (≈ 0.5 °C) further east. At 14:35 the car reads "4.3 °C" while its centre sits at about 3.7 on the isotherm scale (`full_0875.30.jpg`).
+   - Fix: place the car's centre (or a small sensor dot) at the computed position.
+3. **s19 S10, 18:21–18:31: the "∂T/∂z" tag touches the gold profile and the thin 00-UTC curve** at the top of the "z" (`full_1105.00.jpg`). Fix: move it about 20 px down-left, into the empty part of the plot.
+4. **s12, 11:25–12:01: the two gold links from "10 km" and "20 km" cross** inside the map near the arrows.
+5. **s23, 21:51–22:50: cramped stack.** The ∂x denominator of M's fraction sits between the two ∂²f numerators of the next row (`full_1352.00.jpg`). Add about 25 px between rows 2 and 3.
+6. **s31, 30:56–31:58: the gold tangent passes through the "z₀" label** (`full_1910.00.jpg`).
+7. **s44 and s45, 43:58–45:53: the step label "h" straddles the x-axis line** (`full_2721.00.jpg`). Lift it above the axis.
+8. **s09b close look, 8:23.5–8:26.5: links point to layers that have left the frame.** The "−6.2" and "−5.6" links point to the lower layers, which are out of shot, so they end in empty space or at the bottom edge. Fade those links during the close look.
+9. **Scene cross-fades double-expose text for about 0.2–0.3 s.**
+   - 7:54.2–7:54.5: "northern France, one moment" over "30 Sep 2026, 12 UTC", and "holes: …" over the ∂T/∂z fraction.
+   - 8:31.95–8:32.15: s09b labels inside the s10 box.
+   - Fix (if the house cross-fade is touched): fade out before fade in.
+10. **s08, 6:16.3–6:17.0: the isobar map slides in from beyond the left frame edge** (the vscan hit). This is harmless, but a fade would match the house's gentle-motion habit.
+11. **s27 S7, 26:42: "balloon" appears about 7 s before its dots** (the dots arrive on S8).
+12. **s18, 16:30–17:09: "1212 s after launch" ends about 10 px from the gold 1.53-km dot.**
+13. **s10, 8:31–9:30, and s23, 21:39–22:35: an empty grid box stays up for about 55–60 s** before its corner values or loop arrive. QA halves PASS; the box is static but carries nothing new.
+14. **Size:** 122.97 MB is above the 120 MB budget (WARN, under the 160 MB hard cap).
+
+## What works (keep)
+- Every review-3 Must is gone in the rendered frames.
+- The s07 sentence-by-sentence links now read cleanly.
+- The s19 and s20 bar panels are clean.
+- The s09b stack (holes explained, worked line, return to the side view) works.
+- The s40 inset is clean.
+- Colour bars sit on every coloured field.
+- House style holds:
+  - opening title and arc;
+  - recap one beat per sentence;
+  - series end card with the notebook line and the topic list;
+  - keywords only;
+  - no headings, boxes, equation numbers, references or badges;
+  - data-source lines under every data frame;
+  - "lake or sea (illustrative)" marks the decorative scene.
+
+## Limits
+- Audio not heard (QA's loudness figures only).
+- Motion judged from sentence-end frames plus the strips above.
+- Pixel gaps are by eye from frames.
+- Captions, flashes, physics hashes and equation presence rest on `qa.json`.
+- No colour-blind simulation run.
+
+**Disk.** C: 53 GB free and G: 478 GB free, at the start and the end. This review wrote 25 MB of frames on G: and two small helper files in the session scratchpad on C:.
+
+## Overall: FIX (ch00_derivatives_taylor review 4 — 1 Must, 14 Should)
+The one Must is a one-line TSX coordinate fix in s47 (the recap tangent: y = 6x − 9, not 6x − 3). It needs no TTS and no timing change. After that fix and a re-render of s47's first beat (47:19–47:25), a frame check of those seconds is enough for `qa_pass`; no further full review is needed. The Shoulds are optional polish.

@@ -2899,7 +2899,7 @@ const S47: React.FC = () => {
         <ClipRect id="r0" A={A} />
         <Axes A={A} xt={[]} yt={[]} grid={false} />
         <Curve A={A} xs={xs} ys={xs.map((x) => x * x)} c={C.local} w={6} clipId="r0" />
-        <path d={poly([P(1, 3), P(5, 27)])} stroke={C.gold} strokeWidth={5} clipPath="url(#r0)" /><Dot p={P(3, 9)} c={C.gold} r={12} />
+        <path d={poly([P(1.5, 0), P(5, 21)])} stroke={C.gold} strokeWidth={5} clipPath="url(#r0)" /><Dot p={P(3, 9)} c={C.gold} r={12} />
       </Svg>
       <Landscape box={{ x: 80, y: 40, w: 920, h: 780 }} o={b(1)} over={(pr) => <path d={poly(landCutPts(pr, 1))} stroke={C.first} strokeWidth={7} fill="none" />}>
         <Quad3D pts={[[-3.4, 0, 0], [3.4, 0, 0], [3.4, 0, 2.3], [-3.4, 0, 2.3]]} color={C.local} o={0.32} />
