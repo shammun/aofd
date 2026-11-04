@@ -3,7 +3,7 @@
 1. Static: every (scene, index) source line of uf1.json (copied verbatim from the storyboard by the builder) is referenced by a
    <SrcG>/<Src> (UF2 K2 SourceBelow) in WeatherBasics.tsx; no SrcLine names a scene that has no source line.
 2. Frames: for each scene with n source lines, five frames inside the k-th n-th of the scene are taken from the MP4 and
-   in at least one of them the bottom band (y 740-862, the source-line area above the caption band) must hold source-line pixels (the muted
+   in at least one of them the bottom band (y 740-862, the source-line area above the caption band; s00_title: y 540-640, BAND_BY_SCENE) must hold source-line pixels (the muted
    #9aa6bd text colour, ≥ 150 px within ±14 per channel); scenes without real data are reported
    (their chart ticks share the muted colour, so 'none' is not gated; the static check covers it).
 usage: .venv/Scripts/python.exe tools/movie_wb/source_check.py <mp4> [--out <json>]
@@ -22,6 +22,9 @@ ROOT = Path(__file__).resolve().parents[2]
 MOV = ROOT / "movies/ch00/ch00_weather_basics"
 TSX = ROOT / "movies/src/ch00_weather_basics/WeatherBasics.tsx"
 MUTED = np.array([0x9a, 0xa6, 0xbd])
+BAND = (740, 862)                 # where a source line sits under a picture
+# the only scene whose credit sits elsewhere: the s00 title's credit is under its right-column animation (y about 555-621, UF2 review 2)
+BAND_BY_SCENE = {"s00_title": (540, 640)}
 
 
 def frame(mp4: Path, t: float) -> np.ndarray:
@@ -30,8 +33,9 @@ def frame(mp4: Path, t: float) -> np.ndarray:
     return np.frombuffer(raw, np.uint8).reshape(1080, 1920, 3)
 
 
-def muted_px(img: np.ndarray) -> int:
-    band = img[740:862].astype(int)
+def muted_px(img: np.ndarray, sid: str = "") -> int:
+    y0, y1 = BAND_BY_SCENE.get(sid, BAND)
+    band = img[y0:y1].astype(int)
     return int(np.all(np.abs(band - MUTED) <= 14, axis=-1).sum())
 
 
@@ -63,11 +67,11 @@ def main() -> int:
         n = len(src.get(s["id"], []))
         if not n:   # muted tick labels share the colour: "none" is reported, not gated
             t = a + (b - a) * 0.5
-            rows.append({"check": "frame", "scene": s["id"], "t": round(t, 2), "muted_px": muted_px(frame(mp4, t)), "expect": "none", "pass": True})
+            rows.append({"check": "frame", "scene": s["id"], "t": round(t, 2), "muted_px": muted_px(frame(mp4, t), s["id"]), "expect": "none", "pass": True})
             continue
         for j in range(n):   # line j is expected somewhere in its share of the scene (5 frames; a line shows only with its picture)
             ts = [a + (b - a) * (j + (q + 0.5) / 5) / n for q in range(5)]
-            pxs = [muted_px(frame(mp4, t)) for t in ts]
+            pxs = [muted_px(frame(mp4, t), s["id"]) for t in ts]
             p = max(pxs) >= 150
             ok &= p
             rows.append({"check": "frame", "scene": s["id"], "i": j, "t": [round(t, 2) for t in ts], "muted_px": pxs, "expect": "line", "pass": bool(p)})

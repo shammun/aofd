@@ -89,9 +89,9 @@
     }
   },
   "last_update": {
-    "commit": "ad94c49",
-    "fluidpy_commit": "3800f15",
-    "time": "2026-10-29T20:22"
+    "commit": "4d4a6df",
+    "fluidpy_commit": "8cab62e",
+    "time": "2026-10-30T19:02"
   },
   "resume": {
     "file": "RESUME.md",

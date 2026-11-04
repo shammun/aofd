@@ -2069,6 +2069,10 @@ def uf2_block(row, rng, truth, call, files, bins, narration_changes, heavy=None)
         narration_changes.append(f"s48b S4 (frozen b1 product): 'about a hundred kilometres' (fit 1:{-fit[0]:.0f} -> {step:.0f} km over 1.5-4 km)")
     # zone heights of the two labelled gold lines (review M5): the 850- and 650-hPa lines
     hf["label_km"] = {"850": r6(zbf[850.0] / 1000, 2), "650": r6(zbf[650.0] / 1000, 2)}
+    # UF2 fix 2 (R2-M3): the voice and the labels say the same: 1.3 and 3.4 km, about 92 km (fit × the difference of the two rounded labels)
+    row("W86", "s48b labels round to 1.3 and 3.4 km (z̄ 850 and 650 hPa)", [round(hf["label_km"]["850"], 1), round(hf["label_km"]["650"], 1)], [1.3, 3.4], 1e-9)
+    row("W86", "s48b spoken 'about ninety-two kilometres': fit × difference of the two rounded labels", [round(hf["fit_km_per_km"] * 2.1, 2)], [92.25], 0.01)
+    row("W86", "s48b recorded, not the spoken figure: fit × unrounded height difference = 94.0 km (2.2 % above the spoken 92; the raw 850-650 line ends are 103 km apart)", [round(hf["fit_km_per_km"] * (hf["label_km"]["650"] - hf["label_km"]["850"]), 2)], [94.01], 0.01)
     files["stack_front.json"] = hf
     bins["stack_front.bin"] = bf
     # ---- s31 Sentinel-2 plate (W87)
