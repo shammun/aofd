@@ -6,6 +6,7 @@ import { DPW_FPS, DPW_FRAMES, DotProductWhy } from "./ch00/DotProductWhy";
 import { CP1_FRAMES, CP2_FRAMES, CPW_FPS, CPW_FRAMES, CrossProductPart1, CrossProductPart2, CrossProductWhy } from "./ch00/CrossProductWhy";
 import { DT_FPS, DT_FRAMES, DerivativesTaylor } from "./ch00_derivatives_taylor/DerivativesTaylor";
 import { CO_FPS, CO_FRAMES, Coordinates } from "./ch00_coordinates/Coordinates";
+import { GR_FPS, GR_FRAMES, Gradient } from "./ch00_gradient/Gradient";
 
 // Every movie is one <Composition>. Ids: Empty (toolchain test), PocCoriolis (PoC D, movies/src/poc/), and per chapter
 // ChNN<Slug> (movies/src/chNN/<Slug>.tsx). Durations of real movies come from timing.json via calculateMetadata,
@@ -30,6 +31,9 @@ export const Root: React.FC = () => (
       height={1080} defaultProps={{ audio: "narration_music.wav" }} />
     {/* #5 coordinates (movies/ch00/ch00_coordinates; also its own entry src/ch00_coordinates/index.ts) */}
     <Composition id="Ch00Coordinates" component={Coordinates} durationInFrames={CO_FRAMES} fps={CO_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music.wav" }} />
+    {/* #6 the gradient (movies/ch00/ch00_gradient; also its own entry src/ch00_gradient/index.ts) */}
+    <Composition id="Ch00Gradient" component={Gradient} durationInFrames={GR_FRAMES} fps={GR_FPS} width={1920}
       height={1080} defaultProps={{ audio: "narration_music.wav" }} />
   </>
 );

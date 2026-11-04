@@ -4,6 +4,8 @@ Series plan v2 **Stage 1 #6 "The gradient"** (gradient operator, directional der
 gradients). House style `movies/HOUSE_STYLE.md` (binding). Voice Kokoro `af_bella`, speed 1.0. Chapter-0 informal voice;
 our own words; maths spoken in words; `[beat]` = 1.5-s hold after a worked calculation (not spoken, not captioned).
 
+**Build 1 (2026-11-04, motion-builder):** data_needs decisions applied before the final TTS: s29 S6 (Pointe du Raz 207 km/h, unverified) dropped; s33b_front_stack added (Elliott 22 Dec 2022, 4 layers, reworded per the 2026-10-30 decision); s36 moved to the real zonal-mean wind of September 2026 (D6: 45° N, about six K per 1000 km, about twelve km, about twenty six m/s); s37 S3 states the measured OISST north-wall drop (6.5 °C in 35 km, 29 Oct 2026). s18 S4 corrected: grad capital T points almost straight DOWN (towards the warmer air below; the old line said 'up', which is the wrong sign: ∂T/∂z < 0). Measured numbers: `timing.json`, `build1_log.md`.
+
 **v3 (2026-11-04), plan-v5 pointer fixes, measured:** s07_operator (S5: 9.0 -> 9.075 s), s30_coriolis (S9: 5.225 -> 7.375 s); clips from `tools/tts.py` (dry run `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/v5_pointer_dryrun`), every other clip kept and shifted. **298 sentences, 4493 words, narration 1900.875 s + 2.5-s hold = 1903.375 s (31:43.38), 141.6 words per minute overall.** The v2 and v1 numbers below are kept for the record.
 
 **v2 (2026-10-30), HOUSE_STYLE §5b amendment, measured:** changed scenes s17_lapse_rate, s18_thin_layer, s32_vertical_pressure re-run with `tools/tts.py` (dry run `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/c56_5b_dryrun`); every other scene keeps its v2 clip lengths, shifted. **40 scenes, 298 sentences, 4487 words, narration 1898.650 s + 2.5-s hold = 1901.150 s (31:41.15), 141.8 words per minute overall.** The v1 numbers below are kept for the record.
@@ -135,7 +137,7 @@ The gradient works in three dimensions too, and in the air, the upward part is o
 > Beat: intuition: the gradient in 3-D (radiosonde).
 
 ## s18_thin_layer
-Compare that with the sideways gradient over Brest, about four degrees per hundred kilometres. Six point eight degrees per kilometre is six hundred and eighty degrees per hundred kilometres. That's more than a hundred and sixty times bigger. [beat] So surfaces of equal temperature in the air are nearly flat, and grad capital T points almost straight up. In our pictures, we stretch the height to make tilts like these visible, but the real atmosphere is a very thin layer.
+Compare that with the sideways gradient over Brest, about four degrees per hundred kilometres. Six point eight degrees per kilometre is six hundred and eighty degrees per hundred kilometres. That's more than a hundred and sixty times bigger. [beat] So surfaces of equal temperature in the air are nearly flat, and grad capital T points almost straight down, towards the warmer air below. In our pictures, we stretch the height to make tilts like these visible, but the real atmosphere is a very thin layer.
 
 > 79 words · 5 sentences · 1 beats · 836.325–871.350 s (35.0 s; speech 31.7 s) · 13:56.33–14:31.35 (measured, dry run v2, shifted for the plan-v5 pointer fixes).
 > Beat: intuition: vertical vs horizontal.
@@ -201,7 +203,7 @@ Now a real storm. Here is Storm Ciarán at three in the morning on the second of
 > Beat: application: Ciarán's pressure gradient force.
 
 ## s29_crowded_winds
-And this is why winds are strongest where the isobars crowd together. Let's take every point of this map over the sea, sort them by the size of the pressure gradient, and average the wind ten metres above the surface. Where the gradient is below two hectopascals per hundred kilometres, the wind averages ten metres per second. Where it's above ten, the wind averages about twenty six. [beat] At Brest airport that same hour, a gust of eighty four knots was measured, about a hundred and fifty six kilometres per hour. [beat] At the Pointe du Raz, the western tip of Brittany, a gust reached two hundred and seven kilometres per hour. More than a million homes in France lost power.
+And this is why winds are strongest where the isobars crowd together. Let's take every point of this map over the sea, sort them by the size of the pressure gradient, and average the wind ten metres above the surface. Where the gradient is below two hectopascals per hundred kilometres, the wind averages ten metres per second. Where it's above ten, the wind averages about twenty six. [beat] At Brest airport that same hour, a gust of eighty four knots was measured, about a hundred and fifty six kilometres per hour. [beat] More than a million homes in France lost power.
 
 > 119 words · 7 sentences · 2 beats · 1311.500–1361.775 s (50.3 s; speech 45.1 s) · 21:51.50–22:41.78 (measured, dry run v2, shifted for the plan-v5 pointer fixes).
 > Beat: application: crowded isobars, strong winds.
@@ -230,6 +232,12 @@ Now back to temperature. Here again is the map of temperature one and a half kil
 > 108 words · 7 sentences · 1 beats · 1549.225–1592.225 s (43.0 s; speech 38.9 s) · 25:49.22–26:32.22 (measured, dry run v2, shifted for the plan-v5 pointer fixes).
 > Beat: application: temperature gradients at fronts.
 
+## s33b_front_stack
+A front isn't just a line on a map. Let's stack four temperature maps above a strong cold front over the central United States, on the twenty second of December twenty twenty two, from about one and a half to nine kilometres up. On every layer, the orange arrows are grad capital T, pointing towards warmer air. Where the isotherms crowd, the arrows are longest, and that's the front on that layer. Let's circle the stack from outside, from the bottom layer to the top. Every layer above the bottom one has its crowded band on the cold side of the bottom front, between about two hundred and sixty and four hundred and fifty kilometres behind it. [beat] So a front is a sloping surface that leans back over the cold air, and the gradient finds it on every layer.
+
+> Build 1 (2026-11-04): added from data_needs.md §G (orchestrator decision 2026-10-30: keep Elliott 12 UTC, reword: every layer above the near-ground front sits on its cold side, 260-450 km back; 1000 hPa is below ground on the front and is not shown). Four layers (850, 700, 500, 300 hPa).
+> Beat: application: a front in 3-D (layer stack).
+
 ## s34_advection
 The gradient also tells us how the wind changes the temperature at a fixed place. Over Brest at that hour, the wind at that height blew at thirty four metres per second, from just west of south, at a hundred and thirty eight degrees to grad capital T. So along the wind, the temperature changes at grad capital T dot the wind's direction. That's four point one times the cosine of a hundred and thirty eight degrees, which is about minus three degrees per hundred kilometres. [beat] It's negative because the wind blows towards colder air. Times the wind speed, that's minus three point seven degrees per hour. [beat] This is v dot grad capital T, the advection term from the dot product movie. Because the air keeps arriving from the warmer side, a fixed thermometer at Brest would warm by about three point seven degrees per hour from this alone. The material derivative movie takes this apart fully.
 
@@ -243,13 +251,13 @@ Some of the sharpest temperature gradients form on sunny days, along coasts. Her
 > Beat: application: a land-sea temperature gradient (sea breeze).
 
 ## s36_jet
-High up, temperature gradients and the jet stream go together. Here is the average for November twenty twenty three, all the way round the Earth, as a slice from the equator to the North Pole. The temperature drops fastest towards the pole near forty four degrees north, by about seven degrees per thousand kilometres, averaged from about one and a half to nine kilometres up. [beat] Right above that zone, about ten and a half kilometres up, the westerly wind is strongest, about thirty metres per second on average. [beat] Single days can be much stronger. On the twenty eighth of October twenty twenty six, the GFS analysis shows the jet over the North Atlantic at sixty six metres per second. That's about two hundred and forty kilometres per hour. [beat] Why winds grow with height above a temperature gradient is called the thermal wind, and it has its own movie.
+High up, temperature gradients and the jet stream go together. Here is the average for September twenty twenty six, all the way round the Earth, as a slice from the equator to the North Pole. The temperature drops fastest towards the pole near forty five degrees north, by about six degrees per thousand kilometres, averaged from about one and a half to nine kilometres up. [beat] Right above that zone, about twelve kilometres up, the westerly wind is strongest, about twenty six metres per second on average. [beat] Single days can be much stronger. On the twenty eighth of October twenty twenty six, the GFS analysis shows the jet over the North Atlantic at sixty six metres per second. That's about two hundred and forty kilometres per hour. [beat] Why winds grow with height above a temperature gradient is called the thermal wind, and it has its own movie.
 
 > 148 words · 8 sentences · 3 beats · 1718.425–1781.700 s (63.3 s; speech 56.6 s) · 28:38.42–29:41.70 (measured, dry run v2, shifted for the plan-v5 pointer fixes).
 > Beat: application: the jet stream above the strongest temperature gradient.
 
 ## s37_gulf_stream
-The ocean has temperature gradients too. Off the east coast of the United States, the Gulf Stream carries warm water from the tropics towards the north-east, right next to colder water from the north. Along its northern edge, the sea-surface temperature can drop by several degrees within a few tens of kilometres. That's one of the sharpest temperature gradients in the open ocean. Winter storms often deepen fastest near it, so forecasters watch it closely. The great ocean currents have their own movies later in this series.
+The ocean has temperature gradients too. Off the east coast of the United States, the Gulf Stream carries warm water from the tropics towards the north-east, right next to colder water from the north. Along its northern edge, on the twenty ninth of October twenty twenty six, the sea-surface temperature dropped by about six and a half degrees in about thirty five kilometres. That's one of the sharpest temperature gradients in the open ocean. Winter storms often deepen fastest near it, so forecasters watch it closely. The great ocean currents have their own movies later in this series.
 
 > 87 words · 6 sentences · 0 beats · 1781.700–1819.325 s (37.6 s; speech 35.1 s) · 29:41.70–30:19.32 (measured, dry run v2, shifted for the plan-v5 pointer fixes).
 > Beat: application: an ocean temperature gradient (Gulf Stream).

@@ -4,45 +4,73 @@
 # and never drawn. Data, functions and CHECK ids (DGnn): data_needs.md. Times: MEASURED (tools/tts.py dry run, af_bella x 1.0).
 # v3 (2026-11-04): plan-v5 pointer fixes (amendment_v5_pointers at the end; text and measured times only).
 # v2 (2026-10-30): HOUSE_STYLE §5b amendment (layout_5b per scene overrides the v1 'visual' wherever they differ).
+# Build 1 (2026-11-04, motion-builder): version 4 — s33b_front_stack inserted (data_needs §G decision), s29 S6 dropped (unverified),
+# s36 → Sep 2026 real zonal-mean wind (D6), s37 S3 measured numbers (D7), s18 S4 sign corrected; times from the build-1 TTS run.
 id: ch00_gradient
 title: The gradient (and how it finds the steepest way up a mountain, the push on the air in a storm, and the sharpest temperature changes in fronts, sea
   breezes and jets)
-version: 3
-concepts: ['scalar field; partial derivatives as slopes east and north (recap of #4)', 'the gradient grad f = x-hat df/dx + y-hat df/dy (+ z-hat df/dz):
-    the del operator, (grad f)_i = df/dx_i (Kundu §2.9 p. 53; App. B §B.3)', 'the directional derivative df/ds = grad f . n-hat, derived from the total
-    differential (Kundu p. 53, unnumbered)', 'why grad f points the way f increases fastest, why |grad f| is that rate, why grad f is perpendicular to contour
-    lines (level sets)', 'contour spacing and gradient size; the gradient depends on the scale of the data (pointers to #6A, #6B)', 'the gradient in 3-D:
-    vertical temperature gradient and lapse rate (both sign conventions); the thin atmosphere', 'the gradient on the sphere (Vallis (2.31)): the 1/(a cos
-    phi) factor', 'the pressure gradient force -(1/rho) grad p (Vallis (1.45)-(1.48)); high to low; crowded isobars and strong winds; Coriolis balance named
-    (pointer #29)', the vertical pressure gradient and hydrostatic balance (Vallis (1.51)), 'temperature gradients at fronts, advection v.grad T = |v| dT/ds,
-    sea breezes, the jet above the strongest temperature gradient (pointer #32), the Gulf Stream SST front']
-target_duration_s: 1903.375
+version: 4
+concepts:
+- 'scalar field; partial derivatives as slopes east and north (recap of #4)'
+- 'the gradient grad f = x-hat df/dx + y-hat df/dy (+ z-hat df/dz): the del operator, (grad f)_i = df/dx_i (Kundu §2.9 p. 53; App. B §B.3)'
+- the directional derivative df/ds = grad f . n-hat, derived from the total differential (Kundu p. 53, unnumbered)
+- why grad f points the way f increases fastest, why |grad f| is that rate, why grad f is perpendicular to contour lines (level sets)
+- 'contour spacing and gradient size; the gradient depends on the scale of the data (pointers to #6A, #6B)'
+- 'the gradient in 3-D: vertical temperature gradient and lapse rate (both sign conventions); the thin atmosphere'
+- 'the gradient on the sphere (Vallis (2.31)): the 1/(a cos phi) factor'
+- 'the pressure gradient force -(1/rho) grad p (Vallis (1.45)-(1.48)); high to low; crowded isobars and strong winds; Coriolis balance named (pointer #29)'
+- the vertical pressure gradient and hydrostatic balance (Vallis (1.51))
+- 'temperature gradients at fronts, advection v.grad T = |v| dT/ds, sea breezes, the jet above the strongest temperature gradient (pointer #32), the Gulf
+  Stream SST front'
+target_duration_s: 1955.4
 fps: 30
-size: [1920, 1080]
+size:
+- 1920
+- 1080
 style: house-dark-v1
 headings: false
 footnote_strip: false
 scale_badges: false
-series: {name: Chapter 0 series (plan v2), position: 'Stage 1 #6', previous: ch00_coordinates (#5), next: '#6A contour maps and isolines (planned), then
-    #6B how contour maps are made'}
+series:
+  name: Chapter 0 series (plan v2)
+  position: 'Stage 1 #6'
+  previous: ch00_coordinates (#5)
+  next: '#6A contour maps and isolines (planned), then #6B how contour maps are made'
 audio:
   voice: af_bella
   speed: 1.0
   loudness_lufs: -16
   beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py, user 2026-10-28)'
-  music: {source: 'tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)', style: steepest-ascent (NEW style to add to tools/sound/styles.py;
-      spec below), spec: 'E-flat major, 4/4 at 72 bpm; a soft marimba motif that climbs a major scale one step per beat (1-2-3-5, then 2-3-5-6 a step higher,
-      like walking up the steepest path) and rests on the top note for a beat; under it a warm string pad (Eb - Cm7 - Abmaj7 - Bb, 8 bars each) and a low
-      cello pedal that moves down a step every 16 bars (the push from high to low); a felt-piano chord on beat one every fourth bar; no drums; reverb medium,
-      wet 0.25; low-pass 6 kHz', seed: 31, level: 'bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent
-      end-card hold', runner_up: 'sun-radiant seed 31 (not yet used by a finished movie), if the new style is not added', distinct_from: 'maths-calm (dot
-      product), rotation-turning (cross product), index-lattice / -cycle (1a / 1b), tangent-glide (#4), compass-orbit (#5), air-flowing + storm-tense (weather
-      basics), data-curious + planet-wide (reading weather maps plan)'}
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    style: steepest-ascent (NEW style to add to tools/sound/styles.py; spec below)
+    spec: E-flat major, 4/4 at 72 bpm; a soft marimba motif that climbs a major scale one step per beat (1-2-3-5, then 2-3-5-6 a step higher, like walking
+      up the steepest path) and rests on the top note for a beat; under it a warm string pad (Eb - Cm7 - Abmaj7 - Bb, 8 bars each) and a low cello pedal
+      that moves down a step every 16 bars (the push from high to low); a felt-piano chord on beat one every fourth bar; no drums; reverb medium, wet 0.25;
+      low-pass 6 kHz
+    seed: 31
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent end-card hold
+    runner_up: sun-radiant seed 31 (not yet used by a finished movie), if the new style is not added
+    distinct_from: maths-calm (dot product), rotation-turning (cross product), index-lattice / -cycle (1a / 1b), tangent-glide (#4), compass-orbit (#5),
+      air-flowing + storm-tense (weather basics), data-curious + planet-wide (reading weather maps plan)
+    used_build_1: sun-radiant seed 31 (the storyboard's runner-up; steepest-ascent is not in tools/sound/styles.py)
   effects_candidates:
-  - {scene: s15_mont_blanc, kind: wind_mountain_soft, intensity: 0.08, shows: camera glide over the summit ridge (S1-S2 only)}
-  - {scene: s16_water_scale, kind: water_trickle, intensity: 0.08, shows: droplets sliding into the valley streams (S1-S2)}
-  - {scene: s29_crowded_winds, kind: wind_strong_far, intensity: 0.12, shows: streaklines racing where the isobars crowd (S2)}
-  - {scene: s35_sea_breeze, kind: waves_breaking, intensity: 0.08, shows: the Normandy shoreline (S2)}
+  - scene: s15_mont_blanc
+    kind: wind_mountain_soft
+    intensity: 0.08
+    shows: camera glide over the summit ridge (S1-S2 only)
+  - scene: s16_water_scale
+    kind: water_trickle
+    intensity: 0.08
+    shows: droplets sliding into the valley streams (S1-S2)
+  - scene: s29_crowded_winds
+    kind: wind_strong_far
+    intensity: 0.12
+    shows: streaklines racing where the isobars crowd (S2)
+  - scene: s35_sea_breeze
+    kind: waves_breaking
+    intensity: 0.08
+    shows: the Normandy shoreline (S2)
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word (sentence gaps only); one
     at a time; no caption tags (no sound carries meaning the voice does not say)'
 colour_contract: 'house-dark-v1: gradients (grad h, grad T, grad p) orange arrows (the house ''second vector'' colour, project term colour of the pressure
@@ -50,71 +78,92 @@ colour_contract: 'house-dark-v1: gradients (grad h, grad T, grad p) orange arrow
   n-hat and direction needles teal; negative values rose with a ''-'' glyph and hatch; fixed observers (thermometer, barometer) slate; pointers, links,
   brackets and angle arcs gold; keywords warm white; gravity brown; Coriolis violet (s30 only); temperature maps cmocean ''thermal'', height greys-to-warm
   (no rainbow), wind speed cmocean ''speed'', |grad T| cmocean ''amp'''
-measured_narration_s: 1900.875
-measured_frames: 57101
-words: 4493
-sentences: 298
+measured_narration_s: 1952.9
+measured_frames: 58662
+words: 4626
+sentences: 304
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_gradient/dryrun/v2
   audio_s: 1878.65
   speech_s: 1717.7
   cues: 469
-  self_check: {expected_s: 1878.65, audio_s: 1878.65, diff_ms: 0.0, len_ok: true, cues_ok: true}
+  self_check:
+    expected_s: 1878.65
+    audio_s: 1878.65
+    diff_ms: 0.0
+    len_ok: true
+    cues_ok: true
   warnings: []
   words_per_minute_overall: 141.5
   words_per_minute_speaking: 154.7
   beats: 36
   lexicon: movies/lexicon.yaml as of HEAD (not edited; proposed entries in data_needs.md §E)
-moments: {hillside: 'idealised plane h = 30 x + 40 y m/km (easy numbers), then smooth hills', terrain: 'Mont Blanc massif (ETOPO 2022 60-arc-second, Cesium
-    drape; cited heights), Himalaya at 20-arc-minute blocks', temperature map: 'ERA5 850 hPa, 18 UTC 1 Nov 2023, Brittany (Storm Ciaran approaching; same
-    moment as #4)', pressure map: 'ERA5 msl, 03 UTC 2 Nov 2023, centre 953.6 hPa tracked by continuity; Brest gust 84 kt (ISD)', sounding: 'IGRA2 Singapore
-    00 UTC 1 Nov 2023 (07:31 local; tropopause 16.2 km), replacing the Trappes 2026 sounding used by #4 (retrofit 5b decision)', sea breeze: 'Normandy coast
-    13 UTC 24 Jun 2024 (ERA5 t2m + MODIS, from 0.3)', jet: ERA5 Nov 2023 zonal means; GFS 250 hPa 18 UTC 28 Oct 2026 (latest), latest chart: GFS msl 18
-    UTC 27 Oct 2026, ocean: 'Gulf Stream north wall, OISST v2.1 newest day (D7)'}
-conventions: {latitude: 'phi (series convention from #5; Vallis writes vartheta); longitude lambda east positive; Earth''s radius a on screen, never a lone
-    spoken ''a''', scalar in the sphere formula: F on screen (Vallis writes phi for the scalar in (2.31)); the narration does not name it, direction angle: 'alpha
-    from east, anticlockwise seen from above (maths); bearings from north clockwise seen from above for map directions', angle between n-hat and grad: theta,
-  lapse rate: 'both: dT/dz = -6.8 K/km (Kundu-style computed) and Gamma = -dT/dz = +6.8 K/km (meteorology), said in s17', pressure units: 'Pa inside the
-    maths, hPa per 100 km at the interface; 1 hPa per 100 km = 1e-3 Pa/m', temperature for grad T: '''the way the temperature increases fastest'', ''towards
-    warmer air''; ''uphill'' only for real terrain (HOUSE_STYLE §4)', rotation sense: every clockwise/anticlockwise carries 'seen from above' and the hemisphere}
+moments:
+  hillside: idealised plane h = 30 x + 40 y m/km (easy numbers), then smooth hills
+  terrain: Mont Blanc massif (ETOPO 2022 60-arc-second, Cesium drape; cited heights), Himalaya at 20-arc-minute blocks
+  temperature map: 'ERA5 850 hPa, 18 UTC 1 Nov 2023, Brittany (Storm Ciaran approaching; same moment as #4)'
+  pressure map: ERA5 msl, 03 UTC 2 Nov 2023, centre 953.6 hPa tracked by continuity; Brest gust 84 kt (ISD)
+  sounding: 'IGRA2 Singapore 00 UTC 1 Nov 2023 (07:31 local; tropopause 16.2 km), replacing the Trappes 2026 sounding used by #4 (retrofit 5b decision)'
+  sea breeze: Normandy coast 13 UTC 24 Jun 2024 (ERA5 t2m + MODIS, from 0.3)
+  jet: ERA5 Nov 2023 zonal means; GFS 250 hPa 18 UTC 28 Oct 2026 (latest)
+  latest chart: GFS msl 18 UTC 27 Oct 2026
+  ocean: Gulf Stream north wall, OISST v2.1 newest day (D7)
+conventions:
+  latitude: 'phi (series convention from #5; Vallis writes vartheta); longitude lambda east positive; Earth''s radius a on screen, never a lone spoken ''a'''
+  scalar in the sphere formula: F on screen (Vallis writes phi for the scalar in (2.31)); the narration does not name it
+  direction angle: alpha from east, anticlockwise seen from above (maths); bearings from north clockwise seen from above for map directions
+  angle between n-hat and grad: theta
+  lapse rate: 'both: dT/dz = -6.8 K/km (Kundu-style computed) and Gamma = -dT/dz = +6.8 K/km (meteorology), said in s17'
+  pressure units: Pa inside the maths, hPa per 100 km at the interface; 1 hPa per 100 km = 1e-3 Pa/m
+  temperature for grad T: '''the way the temperature increases fastest'', ''towards warmer air''; ''uphill'' only for real terrain (HOUSE_STYLE §4)'
+  rotation sense: every clockwise/anticlockwise carries 'seen from above' and the hemisphere
 cross_reference_rule: 'user 2026-10-27 (series_plan_v2_proposal.md Notes): spoken pointer + end-card listing for every operator another movie explains in
   depth; related: per scene; no on-screen citations'
-honesty_notes: ['s03-s06, s10-s14, s19-s20: the hillside and hills are idealised easy-number examples (said as ''let''s say''); slopes drawn x10 on the
-    3-D hillside.', 's09, s23, s33, s34: ERA5 850 hPa at the grid point 48.5 N 4.5 W (''at Brest''); gradients by centred differences on the 0.25 deg grid
-    with the cos phi factor (fluidpy.geo.sphere.gradient); a reanalysis, said in s09.', 's15: the summit (4806 m) and Chamonix (1035 m) heights are cited
-    (research-scout confirms); the drape uses ETOPO, which smooths the summit (60-arc-second cell 4169 m); ''about sixty percent'' is the steepest gradient
-    on the map product used (DG13), not a field survey; heights x2 said in S3.', 's16: the droplet paths are steepest-descent lines of the smoothed terrain
-    (''roughly''), not a hydrological model; the 5 % Himalayan slope is for 20-arc-minute block means (scale stated).', 's17-s18, s32: one radiosonde (Singapore,
-    00 UTC 1 Nov 2023, released 23:31 UTC 31 Oct); the surface-to-tropopause lapse rate is a layer average; the ratio (more than 160) compares it with the
-    850 hPa horizontal gradient at Brest on another day (both typical; said as ''compare''); the ''ten to thirteen kilometres'' over Europe are the two
-    Trappes soundings on disk (10.88 and 13.07 km), said as ''usually somewhere between''.', 's27-s28: ''if nothing else acted'' is a thought experiment;
-    the real wind is set by the balance with the Coriolis effect and friction (s30).', 's28: Ciaran''s centre from fluidpy.diag.cyclone.track_by_continuity
-    seeded on its known 12 UTC 2 Nov position (HOUSE_STYLE §7 storm-tracker rule); never a box minimum.', 's29: bin means over 9290 sea points (NE 50 m
-    land mask) in 40-60 N, 30 W-5 E at 03 UTC; correlation 0.63 (manifest only); the Brest gust is the 911 group of the 03 UTC SYNOP (ISD, on disk); Pointe
-    du Raz 207 km/h and > 1 million homes without power are cited (to confirm; S6 dropped otherwise).', 's30: the balance sketch is illustrative; no geostrophic
-    speed is spoken (the ERA5 geostrophic speed at Brest, 94 m/s, far exceeds the 23 m/s 10-m wind because of friction and the tight curvature; this is
-    left to #29/#30 so the movie does not mislead).', 's31: GFS msl is NCEP''s sea-level reduction, unreliable over high ground: gradients are taken only
-    where orography < 50 m.', 's33: the high-gradient band is called ''a front'' only; which front (cold, warm or bent-back) is not claimed unless fluidpy.diag.fronts.front_lines
-    attaches it to the tracked low.', 's34: ''a fixed thermometer at Brest would warm by about three point seven degrees per hour from this alone'' is the
-    advection part only; #4 showed the actual local change (+2.9 K/h) and the parcel''s own cooling.', 's35: 2-m temperatures from ERA5 (0.25 deg): the
-    coast lies between the two probe points; the breeze mechanism is standard physics; the onshore wind is drawn from D5 data or, without it, as an illustrative
-    cartoon (listed).', 's36: the November 2023 jet speed is the geostrophic zonal wind from the zonal-mean monthly geopotential height (an estimate; D6
-    replaces it with the real zonal-mean u of the newest month); ''right above'' = jet latitude within 3 deg of the steepest-gradient latitude (DG35).',
-  's37: numbers are added only after D7 is measured; the dry-run wording is qualitative and true for the OISST north wall in every season (DG36 checks it).',
-  'Exaggerations (title hill; hillside slope x10; terrain x2; profile x20; atmosphere slice x50 after a true-scale frame; grid cells x10 on the globe; arrow
-    lengths for legibility; streaklines and balloon ascent time-compressed) are recorded here and in the manifest, not badged (HOUSE_STYLE §5).', 'Every
-    spoken number is a planning value from tested fluidpy functions on files on disk (2026-10-28) or a cited value marked ''to confirm'', and is re-asserted
-    by CHECK rows DG01-DG37 (data_needs.md §D).']
+honesty_notes:
+- 's03-s06, s10-s14, s19-s20: the hillside and hills are idealised easy-number examples (said as ''let''s say''); slopes drawn x10 on the 3-D hillside.'
+- 's09, s23, s33, s34: ERA5 850 hPa at the grid point 48.5 N 4.5 W (''at Brest''); gradients by centred differences on the 0.25 deg grid with the cos phi
+  factor (fluidpy.geo.sphere.gradient); a reanalysis, said in s09.'
+- 's15: the summit (4806 m) and Chamonix (1035 m) heights are cited (research-scout confirms); the drape uses ETOPO, which smooths the summit (60-arc-second
+  cell 4169 m); ''about sixty percent'' is the steepest gradient on the map product used (DG13), not a field survey; heights x2 said in S3.'
+- 's16: the droplet paths are steepest-descent lines of the smoothed terrain (''roughly''), not a hydrological model; the 5 % Himalayan slope is for 20-arc-minute
+  block means (scale stated).'
+- 's17-s18, s32: one radiosonde (Singapore, 00 UTC 1 Nov 2023, released 23:31 UTC 31 Oct); the surface-to-tropopause lapse rate is a layer average; the
+  ratio (more than 160) compares it with the 850 hPa horizontal gradient at Brest on another day (both typical; said as ''compare''); the ''ten to thirteen
+  kilometres'' over Europe are the two Trappes soundings on disk (10.88 and 13.07 km), said as ''usually somewhere between''.'
+- 's27-s28: ''if nothing else acted'' is a thought experiment; the real wind is set by the balance with the Coriolis effect and friction (s30).'
+- 's28: Ciaran''s centre from fluidpy.diag.cyclone.track_by_continuity seeded on its known 12 UTC 2 Nov position (HOUSE_STYLE §7 storm-tracker rule); never
+  a box minimum.'
+- 's29: bin means over 9290 sea points (NE 50 m land mask) in 40-60 N, 30 W-5 E at 03 UTC; correlation 0.63 (manifest only); the Brest gust is the 911 group
+  of the 03 UTC SYNOP (ISD, on disk); Pointe du Raz 207 km/h and > 1 million homes without power are cited (to confirm; S6 dropped otherwise).'
+- 's30: the balance sketch is illustrative; no geostrophic speed is spoken (the ERA5 geostrophic speed at Brest, 94 m/s, far exceeds the 23 m/s 10-m wind
+  because of friction and the tight curvature; this is left to #29/#30 so the movie does not mislead).'
+- 's31: GFS msl is NCEP''s sea-level reduction, unreliable over high ground: gradients are taken only where orography < 50 m.'
+- 's33: the high-gradient band is called ''a front'' only; which front (cold, warm or bent-back) is not claimed unless fluidpy.diag.fronts.front_lines attaches
+  it to the tracked low.'
+- 's34: ''a fixed thermometer at Brest would warm by about three point seven degrees per hour from this alone'' is the advection part only; #4 showed the
+  actual local change (+2.9 K/h) and the parcel''s own cooling.'
+- 's35: 2-m temperatures from ERA5 (0.25 deg): the coast lies between the two probe points; the breeze mechanism is standard physics; the onshore wind is
+  drawn from D5 data or, without it, as an illustrative cartoon (listed).'
+- 's36: the November 2023 jet speed is the geostrophic zonal wind from the zonal-mean monthly geopotential height (an estimate; D6 replaces it with the
+  real zonal-mean u of the newest month); ''right above'' = jet latitude within 3 deg of the steepest-gradient latitude (DG35).'
+- 's37: numbers are added only after D7 is measured; the dry-run wording is qualitative and true for the OISST north wall in every season (DG36 checks it).'
+- Exaggerations (title hill; hillside slope x10; terrain x2; profile x20; atmosphere slice x50 after a true-scale frame; grid cells x10 on the globe; arrow
+  lengths for legibility; streaklines and balloon ascent time-compressed) are recorded here and in the manifest, not badged (HOUSE_STYLE §5).
+- Every spoken number is a planning value from tested fluidpy functions on files on disk (2026-10-28) or a cited value marked 'to confirm', and is re-asserted
+  by CHECK rows DG01-DG37 (data_needs.md §D).
 quiz_hook: On a hillside the ground rises 6 m per 100 m going east and 8 m per 100 m going north. How steep is the steepest way up, which way does it point,
   and how fast do you climb walking north-east? And if isobars 4 hPa apart are 40 km apart, which way does the pressure gradient force point, and roughly
   how big is it per kilogram?
 headings_exception: 's00_title only: the one title frame'
 scenes:
 - id: s00_title
-  t: [0.3, 13.175]
+  t:
+  - 0.3
+  - 13.175
   sentence_times:
-  - [0.3, 12.375]
+  - - 0.3
+    - 12.375
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''The'' / ''gradient'' (150 px, 800, TitleGradient teal -> gold); ''made easy''
     (96 px, warm white) pulses x1.06 on AT(1,''the easy way''); ''and how meteorology uses it'' (68 px, ''meteorology'' teal). Right x 1130-1840, y 180-636
@@ -129,10 +178,14 @@ scenes:
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.operators.gradient + directional_derivative (hill); fluidpy.geo.sphere.gradient (msl); fluidpy.diag.trajectories.advect_on_sphere (streaklines)
-    params: {hill: 'h = 30 x + 40 y m/km, Gaussian title hill', storm: ERA5 2023-11-02T03}
+    params:
+      hill: h = 30 x + 40 y m/km, Gaussian title hill
+      storm: ERA5 2023-11-02T03
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); ../Fluid Dynamics/tests/geo/test_sphere.py (gradient
       V1, V3, V7); ../Fluid Dynamics/tests/diag/test_trajectories.py; CHECK DG01
-  exaggeration: [title hill is illustrative (the s03 numbers on a smooth hill), streaklines time-compressed (6 h in 4 s)]
+  exaggeration:
+  - title hill is illustrative (the s03 numbers on a smooth hill)
+  - streaklines time-compressed (6 h in 4 s)
   kind: 3-D hill + data mini-map
   data: A1 ERA5 msl, u10, v10 hourly (ERA5-ARCO-ciaran2023 + -1102 land mask), 2023-11-02T03; A6 NE 10 m coast/admin
   tool: '@remotion/three hill + Remotion SVG (d3-geo, Lambert conformal on 48 N) for the msl panel'
@@ -143,11 +196,16 @@ scenes:
     animated (Every wind arrow or streak is animated (moving dashes along each arrow, or particles drifting along the flow at a speed scaled to the wind;
     scale in the manifest); arrows keep the data''s direction and length.)'
 - id: s01_hook
-  t: [13.175, 24.475]
+  t:
+  - 13.175
+  - 24.475
   sentence_times:
-  - [13.175, 15.05]
-  - [15.4, 18.85]
-  - [19.2, 23.675]
+  - - 13.175
+    - 15.05
+  - - 15.4
+    - 18.85
+  - - 19.2
+    - 23.675
   beat: hook question
   visual: 'Full width from frame 0: left half the Mont Blanc Cesium drape (s15 frame, static camera) with a few orange grad-h arrows; right half the Ciaran
     msl map with isobars. S1: keyword ''gradient'' (54 px, warm white) between them. S2 on AT(2,''why it''s built this way''): both sets of arrows pulse
@@ -158,7 +216,8 @@ scenes:
     fn: fluidpy.geo.sphere.gradient (ETOPO height and ERA5 msl)
     params: {}
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG02
-  exaggeration: [terrain heights x2 (said in s15)]
+  exaggeration:
+  - terrain heights x2 (said in s15)
   kind: 3-D terrain drape + data map
   data: A4 ETOPO 2022 Alps (D1 15-arc-second or A4 60-arc-second); A1 ERA5 msl, u10, v10 hourly (ERA5-ARCO-ciaran2023 + -1102 land mask), 2023-11-02T03
   tool: CesiumJS drape (no Ion; our imagery + heightmap) composited in Remotion; SVG map
@@ -169,15 +228,24 @@ scenes:
     cloudless (EOX)'' below it. Right: the msl map with ''Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 03 UTC'' below it. Keyword between the pictures; thumbnails
     below both.'
 - id: s02_fields
-  t: [24.475, 56.4]
+  t:
+  - 24.475
+  - 56.4
   sentence_times:
-  - [24.475, 26.65]
-  - [27.0, 31.4]
-  - [31.75, 36.25]
-  - [36.6, 41.175]
-  - [41.525, 47.025]
-  - [47.375, 49.65]
-  - [50.0, 55.6]
+  - - 24.475
+    - 26.65
+  - - 27.0
+    - 31.4
+  - - 31.75
+    - 36.25
+  - - 36.6
+    - 41.175
+  - - 41.525
+    - 47.025
+  - - 47.375
+    - 49.65
+  - - 50.0
+    - 55.6
   beat: 'building block: scalar field'
   visual: 'Picture zone x 80-1000: the Mont Blanc ETOPO height map seen from above (perceptual ''terrain''-free colour map: cmocean ''deep''-like greys
     to warm, no rainbow) with a 52-px colour bar ''height (m)''. A gold probe dot moves to three places; its height value (68 px) appears at each on AT(2,''height
@@ -199,21 +267,33 @@ scenes:
   runner_up: GeoLibre/MapLibre static frames
   why: a real field before any symbols
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
   layout_5b: 'Height map x 80-900 with colour bar beside the map in the text column (52-px ticks, unit label), never on the map, in every zoom state. The
     two inserts sit in the text column, each with its own source line; SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap,
     y <= 860), never on it. (''Data: ETOPO 2022 (NOAA) · ERA5''). Probe values at the probe dot are short labels at a spot.'
 - id: s03_fog
-  t: [56.4, 99.3]
+  t:
+  - 56.4
+  - 99.3
   sentence_times:
-  - [56.4, 59.975]
-  - [60.325, 64.525]
-  - [64.875, 67.775]
-  - [68.125, 71.325]
-  - [71.675, 77.0]
-  - [77.35, 84.525]
-  - [84.875, 89.575]
-  - [89.925, 98.5]
+  - - 56.4
+    - 59.975
+  - - 60.325
+    - 64.525
+  - - 64.875
+    - 67.775
+  - - 68.125
+    - 71.325
+  - - 71.675
+    - 77.0
+  - - 77.35
+    - 84.525
+  - - 84.875
+    - 89.575
+  - - 89.925
+    - 98.5
   beat: 'building block: partial derivatives on a hillside'
   visual: 'Picture zone: a three.js planar hillside h = 30 x + 40 y (m per km; heights x10 for visibility, said nowhere because it is an idealised hill)
     under a light fog shader that fades the far slope; a walker glyph at the origin. S3: the walker steps 1 km east (teal dashed path), a vertical gold
@@ -226,31 +306,50 @@ scenes:
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.operators.gradient on the analytic plane
-    params: {dhdx_m_per_km: 30, dhdy_m_per_km: 40}
+    params:
+      dhdx_m_per_km: 30
+      dhdy_m_per_km: 40
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); CHECK DG04
-  exaggeration: [idealised hillside; fog is decorative, 'slope drawn x10 so 3-4 % slopes are visible (idealised hill, no real-world claim)']
+  exaggeration:
+  - idealised hillside; fog is decorative
+  - slope drawn x10 so 3-4 % slopes are visible (idealised hill, no real-world claim)
   kind: 3-D diagram
   data: analytic
   tool: '@remotion/three'
   runner_up: SVG isometric drawing
   why: the feel of a slope underfoot before symbols
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s04_sweep
-  t: [99.3, 160.7]
+  t:
+  - 99.3
+  - 160.7
   sentence_times:
-  - [99.3, 101.4]
-  - [101.75, 103.975]
-  - [104.325, 109.6]
-  - [109.95, 112.55]
-  - [112.9, 121.325]
-  - [121.675, 130.85]
-  - [131.2, 140.5]
-  - [142.0, 144.525]
-  - [144.875, 150.125]
-  - [150.475, 153.675]
-  - [154.025, 159.2]
+  - - 99.3
+    - 101.4
+  - - 101.75
+    - 103.975
+  - - 104.325
+    - 109.6
+  - - 109.95
+    - 112.55
+  - - 112.9
+    - 121.325
+  - - 121.675
+    - 130.85
+  - - 131.2
+    - 140.5
+  - - 142.0
+    - 144.525
+  - - 144.875
+    - 150.125
+  - - 150.475
+    - 153.675
+  - - 154.025
+    - 159.2
   beat: 'intuition: try every direction'
   visual: 'Picture zone: the hillside from above (contours every 10 m, faint) with the walker; a direction needle (teal) at angle alpha. S3-S5: north-east
     step drawn with its east and north legs (0.71 km each, dashed). Maths zone: CalcStack ''30 × 0.71 + 40 × 0.71 ≈ 49.5 m'' (68 px), gold links from the
@@ -259,14 +358,16 @@ scenes:
   voiceover: So which way is steepest? Let's try some directions. Going east, we climb thirty metres per kilometre, and going north, forty. What about a
     direction in between? From the derivatives movie, a small change in height is the slope east times the step east, plus the slope north times the step
     north. Walk one kilometre north-east, and you go about zero point seven one kilometres east, and zero point seven one kilometres north. So you climb
-    thirty times zero point seven one, plus forty times zero point seven one, which is about forty nine and a half metres. [beat] That beats both east and
-    north. Now let's turn slowly through every direction, and draw the climb for each one. The curve rises, peaks, and falls again. Its peak is fifty metres
-    per kilometre, at fifty three degrees from east. [beat]
+    thirty times zero point seven one, plus forty times zero point seven one, which is about forty nine and a half metres. That beats both east and north.
+    Now let's turn slowly through every direction, and draw the climb for each one. The curve rises, peaks, and falls again. Its peak is fifty metres per
+    kilometre, at fifty three degrees from east.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.calculus.total_differential (NE step); fluidpy.core.operators.directional_derivative over 361 directions
     params:
-      grad: [30, 40]
+      grad:
+      - 30
+      - 40
     test: ../Fluid Dynamics/tests/geo/test_calculus.py (total_differential); ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative
       V1, V3, V7); CHECK DG05 (49.50; peak 50.000 at 53.13 deg)
   exaggeration: []
@@ -276,17 +377,27 @@ scenes:
   runner_up: three.js polar rose
   why: 'a prediction-then-reveal sweep: the peak is the gradient'
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s05_reveal
-  t: [160.7, 191.775]
+  t:
+  - 160.7
+  - 191.775
   sentence_times:
-  - [160.7, 163.05]
-  - [163.4, 169.05]
-  - [169.4, 176.275]
-  - [176.625, 183.05]
-  - [183.4, 188.125]
-  - [188.475, 190.975]
+  - - 160.7
+    - 163.05
+  - - 163.4
+    - 169.05
+  - - 169.4
+    - 176.275
+  - - 176.625
+    - 183.05
+  - - 183.4
+    - 188.125
+  - - 188.475
+    - 190.975
   beat: 'intuition: the arrow built from the two slopes'
   visual: 'The sweep plot shrinks to the maths zone corner. Picture zone: an orange arrow builds from a 30-east leg and a 40-north leg (dashed) at the walker;
     right-angle tick; TipLabel ''grad h''. S2: ''√(30² + 40²) = √2500 = 50'' (68 px). S3: angle arc (gold) ''53°'' linked to the sweep plot''s peak by a
@@ -298,7 +409,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.vectors.norm, angle_between
     params:
-      v: [30, 40]
+      v:
+      - 30
+      - 40
     test: ../Fluid Dynamics/tests/geo/test_vectors.py; CHECK DG05
   exaggeration: []
   kind: diagram
@@ -307,34 +420,48 @@ scenes:
   runner_up: —
   why: picture-to-number gold links (HOUSE_STYLE §6)
   related:
-  - {movie: '#1a', slug: ch00_vectors_index_notation, covers: 'unit vectors, components, index notation'}
+  - movie: '#1a'
+    slug: ch00_vectors_index_notation
+    covers: unit vectors, components, index notation
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s06_definition
-  t: [191.775, 233.975]
+  t:
+  - 191.775
+  - 233.975
   sentence_times:
-  - [191.775, 193.725]
-  - [194.075, 201.575]
-  - [201.925, 209.7]
-  - [210.05, 216.4]
-  - [216.75, 223.55]
-  - [223.9, 227.15]
-  - [228.65, 233.175]
+  - - 191.775
+    - 193.725
+  - - 194.075
+    - 201.575
+  - - 201.925
+    - 209.7
+  - - 210.05
+    - 216.4
+  - - 216.75
+    - 223.55
+  - - 223.9
+    - 227.15
+  - - 228.65
+    - 233.175
   beat: 'building block: the definition'
   visual: 'Maths zone: the definition (main equation 96 px) built with Layered parts: ''∇h'' (orange) ''='' ''x̂ ∂h/∂x'' ''+'' ''ŷ ∂h/∂y''; gold underbraces
     ''going east'' / ''going north'' on AT(3,...). S2 keyword ''nabla / del'' with a gold pointer at ∇ and ''grad h''. S4: ''∇h = 30 x̂ + 40 ŷ  (m/km)''
     (68 px). S5: ''|∇h| = 50 m/km''. S6: ''scalar field → vector at every place'' as two keywords with a gold chevron. Picture zone keeps the s05 arrow.'
   voiceover: Let's write it down. The gradient of h is written with an upside down triangle, called nabla, or del, and we read it grad h. Grad h equals
     x hat times partial h by partial x, plus y hat times partial h by partial y. Here x hat and y hat are the unit arrows pointing east and north, from
-    the vectors movie. For our hillside, grad h is thirty x hat plus forty y hat, in metres per kilometre. Its length is fifty metres per kilometre. [beat]
-    So the gradient turns a scalar field into a vector at every place.
-  on_screen_eq: {latex: '\nabla h=\hat{\mathbf x}\,\frac{\partial h}{\partial x}+\hat{\mathbf y}\,\frac{\partial h}{\partial y}', vallis_eq: 'none numbered;
-      Kundu (2.22) operator and the unnumbered gradient line on printed p. 53 ((grad phi)_i = d phi/dx_i); Kundu App. B §B.3 printed p. 862 (grad rho =
-      e_x d rho/dx + e_y d rho/dy + e_z d rho/dz), 2-D form', page_png: ../Fluid Dynamics/chapters/pages/ch02/p080.png; _private/Kundu_AppendixB_Mathematical_Tools.pdf
-      page 6 (printed 862)}
+    the vectors movie. For our hillside, grad h is thirty x hat plus forty y hat, in metres per kilometre. Its length is fifty metres per kilometre. So
+    the gradient turns a scalar field into a vector at every place.
+  on_screen_eq:
+    latex: \nabla h=\hat{\mathbf x}\,\frac{\partial h}{\partial x}+\hat{\mathbf y}\,\frac{\partial h}{\partial y}
+    vallis_eq: none numbered; Kundu (2.22) operator and the unnumbered gradient line on printed p. 53 ((grad phi)_i = d phi/dx_i); Kundu App. B §B.3 printed
+      p. 862 (grad rho = e_x d rho/dx + e_y d rho/dy + e_z d rho/dz), 2-D form
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p080.png; _private/Kundu_AppendixB_Mathematical_Tools.pdf page 6 (printed 862)
   physics_source:
     fn: fluidpy.core.operators.gradient
     params:
-      grad: [30, 40]
+      grad:
+      - 30
+      - 40
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); CHECK DG05
   exaggeration: []
   kind: equation build
@@ -343,16 +470,25 @@ scenes:
   runner_up: —
   why: equation built, never read as a string (HOUSE_STYLE §6)
   related:
-  - {movie: '#1a', slug: ch00_vectors_index_notation, covers: 'unit vectors, components, index notation'}
+  - movie: '#1a'
+    slug: ch00_vectors_index_notation
+    covers: unit vectors, components, index notation
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s07_operator
-  t: [233.975, 276.6]
+  t:
+  - 233.975
+  - 276.6
   sentence_times:
-  - [233.975, 238.825]
-  - [239.175, 250.95]
-  - [251.3, 257.8]
-  - [258.15, 266.375]
-  - [266.725, 275.8]
+  - - 233.975
+    - 238.825
+  - - 239.175
+    - 250.95
+  - - 251.3
+    - 257.8
+  - - 258.15
+    - 266.375
+  - - 266.725
+    - 275.8
   beat: 'building block: the del operator and index form'
   visual: 'Maths zone: ''∇ = x̂ ∂/∂x + ŷ ∂/∂y + ẑ ∂/∂z'' (84 px) with the ∂/∂z part in slate on AT(3,''going up''); then ''(∇f)_i = ∂f/∂x_i'' (84 px) with
     i cycling 1, 2, 3 in gold. Picture zone: a small 3-D column of air above the hill with an up-arrow ẑ (orange). S5: three faint thumbnails ''divergence'',
@@ -361,32 +497,49 @@ scenes:
     by partial x, plus y hat partial by partial y, plus z hat partial by partial z. The third part is the change going up, which matters for fields that
     fill the air, like temperature. In index notation, from the vectors movie, the i-th component of grad f is partial f by partial x i. The same del operator
     also builds the divergence, the curl and the Laplacian, and each of them has its own movie later in this series.'
-  on_screen_eq: {latex: '\nabla=\hat{\mathbf x}\,\frac{\partial}{\partial x}+\hat{\mathbf y}\,\frac{\partial}{\partial y}+\hat{\mathbf z}\,\frac{\partial}{\partial
-      z},\qquad (\nabla f)_i=\frac{\partial f}{\partial x_i}', vallis_eq: 'Kundu App. B §B.3 printed p. 862 (Cartesian del, unnumbered); Kundu printed p.
-      53 ((grad phi)_i = d phi/dx_i, unnumbered, after (2.22))', page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 6 (printed 862); ../Fluid
-      Dynamics/chapters/pages/ch02/p080.png}
+  on_screen_eq:
+    latex: \nabla=\hat{\mathbf x}\,\frac{\partial}{\partial x}+\hat{\mathbf y}\,\frac{\partial}{\partial y}+\hat{\mathbf z}\,\frac{\partial}{\partial z},\qquad
+      (\nabla f)_i=\frac{\partial f}{\partial x_i}
+    vallis_eq: Kundu App. B §B.3 printed p. 862 (Cartesian del, unnumbered); Kundu printed p. 53 ((grad phi)_i = d phi/dx_i, unnumbered, after (2.22))
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 6 (printed 862); ../Fluid Dynamics/chapters/pages/ch02/p080.png
   physics_source: null
-  exaggeration: [illustrative column (decorative)]
+  exaggeration:
+  - illustrative column (decorative)
   kind: equation + small 3-D
   data: —
   tool: house tex + @remotion/three
   runner_up: —
   why: 'del as an arrow of derivatives (link to #1a index notation)'
   related:
-  - {movie: '#1a', slug: ch00_vectors_index_notation, covers: 'unit vectors, components, index notation'}
-  - {movie: '#7', slug: 'planned (divergence, flux and Gauss)', covers: 'divergence, flux, Gauss''s theorem'}
-  - {movie: '#8', slug: 'planned (curl, circulation and Stokes)', covers: 'curl, circulation, Stokes''s theorem'}
-  - {movie: '#9', slug: planned (Laplacian), covers: 'Laplacian, Laplace and Poisson equations'}
+  - movie: '#1a'
+    slug: ch00_vectors_index_notation
+    covers: unit vectors, components, index notation
+  - movie: '#7'
+    slug: planned (divergence, flux and Gauss)
+    covers: divergence, flux, Gauss's theorem
+  - movie: '#8'
+    slug: planned (curl, circulation and Stokes)
+    covers: curl, circulation, Stokes's theorem
+  - movie: '#9'
+    slug: planned (Laplacian)
+    covers: Laplacian, Laplace and Poisson equations
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings. Column/slab (K4 col3d):
     every vertical edge runs from the floor all the way to the top face; top and bottom rims drawn.'
 - id: s08_units
-  t: [276.6, 305.1]
+  t:
+  - 276.6
+  - 305.1
   sentence_times:
-  - [276.6, 280.525]
-  - [280.875, 285.475]
-  - [285.825, 293.1]
-  - [293.45, 298.0]
-  - [298.35, 304.3]
+  - - 276.6
+    - 280.525
+  - - 280.875
+    - 285.475
+  - - 285.825
+    - 293.1
+  - - 293.45
+    - 298.0
+  - - 298.35
+    - 304.3
   beat: 'building block: units'
   visual: 'Maths zone: three unit lines (68 px), each appearing on its sentence: ''m/km = slope'', ''K/m → K per 100 km'', ''Pa/m → hPa per 100 km''; S4:
     ''1 K step = 1 °C step'' (54 px). Picture zone: three mini icons (hill, thermometer, barometer) each lit as its line appears.'
@@ -405,20 +558,33 @@ scenes:
   runner_up: —
   why: units before real numbers
   related:
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s09_gradient_field
-  t: [305.1, 370.5]
+  t:
+  - 305.1
+  - 370.5
   sentence_times:
-  - [305.1, 310.35]
-  - [310.7, 313.1]
-  - [313.45, 319.9]
-  - [320.25, 326.575]
-  - [326.925, 336.725]
-  - [337.075, 343.675]
-  - [344.025, 355.7]
-  - [356.05, 363.125]
-  - [364.625, 369.7]
+  - - 305.1
+    - 310.35
+  - - 310.7
+    - 313.1
+  - - 313.45
+    - 319.9
+  - - 320.25
+    - 326.575
+  - - 326.925
+    - 336.725
+  - - 337.075
+    - 343.675
+  - - 344.025
+    - 355.7
+  - - 356.05
+    - 363.125
+  - - 364.625
+    - 369.7
   beat: 'intuition: a real gradient field'
   visual: 'Full-width real map (x 80-1840): ERA5 850 hPa temperature 18 UTC 1 Nov 2023 over the Bay of Biscay and Brittany (cmocean ''thermal'', 52-px colour
     bar °C), NE 10 m coast and borders, isotherms every 2 °C (warm white, thin), Brest dot. S1-S2: orange grad-T arrows grow on a thinned grid (every 1°),
@@ -429,43 +595,64 @@ scenes:
     Ciarán approaches. These temperatures come from ERA5, a reanalysis: a careful reconstruction of the weather that blends observations with a weather
     model. Every arrow points the way the temperature increases fastest, towards the warm air in the south-west. At Brest, partial capital T by partial
     x is minus three point two degrees per hundred kilometres, and partial capital T by partial y is minus two point five. By Pythagoras, grad capital T
-    has a length of about four point one degrees per hundred kilometres. [beat] It points about two hundred and thirty degrees from north, towards the south-west.'
+    has a length of about four point one degrees per hundred kilometres. It points about two hundred and thirty degrees from north, towards the south-west.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient on ERA5 850 hPa T
     params:
       time: 2023-11-01T18
-      point: [48.5, -4.5]
+      point:
+      - 48.5
+      - -4.5
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG07 (-3.20, -2.49, 4.06, bearing 232)
-  exaggeration: [arrows thinned to every 1 deg; arrow length scaled for legibility (scale not drawn)]
+  exaggeration:
+  - arrows thinned to every 1 deg; arrow length scaled for legibility (scale not drawn)
   kind: real data map, zoom
   data: A2 ERA5 850 hPa t, u, v hourly (ERA5-CDS-ciaran2023-850), 2023-11-01T18
   tool: cartopy-rendered raster (Lambert conformal 48 N) + Remotion SVG arrows/labels
   runner_up: GeoLibre/MapLibre static frame with our overlays
   why: 'the gradient as a field on a real map; same moment as #4 (series world)'
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
   layout_5b: 'Map x 80-1380 with colour bar beside the map in the text column (52-px ticks, unit label), never on the map, in every zoom state. Readouts
     (''∂T/∂x = −3.2'', ''∂T/∂y = −2.5'', CalcStack, ''≈ 230°'') in the text column with gold links to the legs at Brest; ''Brest'' labelled at the spot;
     keyword ''ERA5 = reanalysis'' in the column. SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on
     it. (''Data: ERA5 (Copernicus C3S) · 1 Nov 2023, 18 UTC · 850 hPa''). Zoom: MapCamera to Brest on S6 (Brittany context spoken in S2), soft map-frame
     edges while zoomed, back out to the start view at the end of S9.'
 - id: s10_directional
-  t: [370.5, 445.775]
+  t:
+  - 370.5
+  - 445.775
   sentence_times:
-  - [370.5, 374.875]
-  - [375.225, 379.75]
-  - [380.1, 386.45]
-  - [386.8, 391.75]
-  - [392.1, 398.875]
-  - [399.225, 407.75]
-  - [408.1, 410.95]
-  - [411.3, 420.75]
-  - [421.1, 427.125]
-  - [427.475, 434.625]
-  - [434.975, 437.175]
-  - [437.525, 444.275]
+  - - 370.5
+    - 374.875
+  - - 375.225
+    - 379.75
+  - - 380.1
+    - 386.45
+  - - 386.8
+    - 391.75
+  - - 392.1
+    - 398.875
+  - - 399.225
+    - 407.75
+  - - 408.1
+    - 410.95
+  - - 411.3
+    - 420.75
+  - - 421.1
+    - 427.125
+  - - 427.475
+    - 434.625
+  - - 434.975
+    - 437.175
+  - - 437.525
+    - 444.275
   beat: 'intuition: the directional derivative (derivation)'
   visual: 'Picture zone: the hillside from above; a short step d s along n̂ (teal) at angle alpha (gold arc) with its legs ''d s cos α'' (east) and ''d
     s sin α'' (north) dashed. Maths zone: CalcStack, one line per move: ''dh = ∂h/∂x · dx + ∂h/∂y · dy'' -> ''dx = ds cos α, dy = ds sin α'' -> divide by
@@ -477,14 +664,17 @@ scenes:
     h by partial y times the step north. Now divide both sides by d s. The rate of climb along n hat is partial h by partial x times cosine alpha, plus
     partial h by partial y times sine alpha. That is exactly the dot product of grad h with n hat, from the dot product movie. So the rate of change in
     any direction is grad h dot n hat, and it's called the directional derivative. Let's check it going north. Alpha is ninety degrees, so we get thirty
-    times zero, plus forty times one, which is forty. [beat]
-  on_screen_eq: {latex: '\frac{\partial h}{\partial s}=\frac{\partial h}{\partial x}\cos\alpha+\frac{\partial h}{\partial y}\sin\alpha=\nabla h\cdot\hat{\mathbf
-      n}', vallis_eq: 'Kundu printed p. 53, unnumbered: d phi/dn = grad phi . n (Fig. 2.7 context); derivation from the total differential (Kundu App. B
-      §B.1)', page_png: ../Fluid Dynamics/chapters/pages/ch02/p080.png}
+    times zero, plus forty times one, which is forty.
+  on_screen_eq:
+    latex: \frac{\partial h}{\partial s}=\frac{\partial h}{\partial x}\cos\alpha+\frac{\partial h}{\partial y}\sin\alpha=\nabla h\cdot\hat{\mathbf n}
+    vallis_eq: 'Kundu printed p. 53, unnumbered: d phi/dn = grad phi . n (Fig. 2.7 context); derivation from the total differential (Kundu App. B §B.1)'
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p080.png
   physics_source:
     fn: fluidpy.core.operators.directional_derivative; fluidpy.geo.vectors.dot
     params:
-      grad: [30, 40]
+      grad:
+      - 30
+      - 40
       alpha_deg: 90
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); ../Fluid Dynamics/tests/geo/test_vectors.py; CHECK
       DG08
@@ -495,20 +685,34 @@ scenes:
   runner_up: —
   why: 'one move per step, from the total differential of #4 to the dot product of 0.1b'
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
-  - {movie: 0.1b, slug: ch00_dot_product_v01b, covers: 'dot product, shadow/projection, advection v dot grad T'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
+  - movie: 0.1b
+    slug: ch00_dot_product_v01b
+    covers: dot product, shadow/projection, advection v dot grad T
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s11_steepest
-  t: [445.775, 498.825]
+  t:
+  - 445.775
+  - 498.825
   sentence_times:
-  - [445.775, 448.875]
-  - [449.225, 458.15]
-  - [458.5, 460.85]
-  - [461.2, 467.75]
-  - [468.1, 473.825]
-  - [474.175, 481.075]
-  - [481.425, 488.65]
-  - [489.0, 498.025]
+  - - 445.775
+    - 448.875
+  - - 449.225
+    - 458.15
+  - - 458.5
+    - 460.85
+  - - 461.2
+    - 467.75
+  - - 468.1
+    - 473.825
+  - - 474.175
+    - 481.075
+  - - 481.425
+    - 488.65
+  - - 489.0
+    - 498.025
   beat: 'why: the gradient points the steepest way'
   visual: 'Maths zone: ''∇h · n̂ = |∇h||n̂| cos θ = |∇h| cos θ'' built term by term; ''|n̂| = 1'' struck through to 1 (Strike). Picture zone: the orange
     grad-h arrow and a teal n̂ needle turning; its shadow band (20 px orange) on grad h; a live value ''50 cos θ'' (68 px) and a small cosine curve with
@@ -518,12 +722,16 @@ scenes:
     A cosine is never bigger than one, and it equals one only when theta is zero. So the climb is largest when you walk along grad h itself, and then it
     equals the length of grad h. That''s why the gradient points the way the field increases fastest, and why its length is that fastest rate. Walk the
     opposite way, where theta is a hundred and eighty degrees, and the cosine is minus one: you go down at the steepest rate.'
-  on_screen_eq: {latex: '\nabla h\cdot\hat{\mathbf n}=|\nabla h|\,|\hat{\mathbf n}|\cos\theta=|\nabla h|\cos\theta', vallis_eq: 'dot-product cosine form
-      (movie 0.1b); maximal when n is parallel to grad phi, Kundu printed p. 53 (unnumbered) and Fig. 2.7 caption', page_png: ../Fluid Dynamics/chapters/pages/ch02/p080.png}
+  on_screen_eq:
+    latex: \nabla h\cdot\hat{\mathbf n}=|\nabla h|\,|\hat{\mathbf n}|\cos\theta=|\nabla h|\cos\theta
+    vallis_eq: dot-product cosine form (movie 0.1b); maximal when n is parallel to grad phi, Kundu printed p. 53 (unnumbered) and Fig. 2.7 caption
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p080.png
   physics_source:
     fn: fluidpy.geo.vectors.dot, norm, angle_between
     params:
-      grad: [30, 40]
+      grad:
+      - 30
+      - 40
     test: ../Fluid Dynamics/tests/geo/test_vectors.py; CHECK DG09
   exaggeration: []
   kind: diagram + equation
@@ -532,18 +740,29 @@ scenes:
   runner_up: —
   why: cos theta <= 1 makes the max visible
   related:
-  - {movie: 0.1b, slug: ch00_dot_product_v01b, covers: 'dot product, shadow/projection, advection v dot grad T'}
+  - movie: 0.1b
+    slug: ch00_dot_product_v01b
+    covers: dot product, shadow/projection, advection v dot grad T
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s12_perpendicular
-  t: [498.825, 540.375]
+  t:
+  - 498.825
+  - 540.375
   sentence_times:
-  - [498.825, 503.925]
-  - [504.275, 508.125]
-  - [508.475, 513.525]
-  - [513.875, 521.0]
-  - [521.35, 525.8]
-  - [526.15, 533.525]
-  - [533.875, 539.575]
+  - - 498.825
+    - 503.925
+  - - 504.275
+    - 508.125
+  - - 508.475
+    - 513.525
+  - - 513.875
+    - 521.0
+  - - 521.35
+    - 525.8
+  - - 526.15
+    - 533.525
+  - - 533.875
+    - 539.575
   beat: 'why: perpendicular to contours'
   visual: 'Picture zone: a smooth hill from above with contour lines every 10 m (warm white); a walker follows one contour (teal path), a live readout ''climb
     = 0''. S4: at three points on the contour a right-angle tick (RightTick) between the orange grad-h arrow and the contour. S6: cross-fade the hill to
@@ -559,48 +778,74 @@ scenes:
     params: {}
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7) (grad . t = 0 row); CHECK DG10 (max |grad . t| /
       |grad| < 1e-3 on the drawn contours)
-  exaggeration: [idealised hill]
+  exaggeration:
+  - idealised hill
   kind: diagram + real maps
   data: analytic; A2; A1
   tool: Remotion SVG (d3-contour for the hill; matplotlib contours for ERA5)
   runner_up: —
   why: the right angle follows from 'nothing changes along a contour'
   related:
-  - {movie: '#6A', slug: planned (contour maps and isolines), covers: 'isolines, contour interval, highs/lows/ridges/troughs/cols read from contours'}
-  - {movie: '#6B', slug: planned (how contour maps are made), covers: 'stations to grid, interpolation, contouring, smoothing, resolution artefacts'}
+  - movie: '#6A'
+    slug: planned (contour maps and isolines)
+    covers: isolines, contour interval, highs/lows/ridges/troughs/cols read from contours
+  - movie: '#6B'
+    slug: planned (how contour maps are made)
+    covers: stations to grid, interpolation, contouring, smoothing, resolution artefacts
   layout_5b: 'Idealised hill: no source line. The Ciarán isotherm/isobar cross-fade carries ''Data: ERA5 (Copernicus C3S)'' below it. Right-angle ticks
     at the spot.'
 - id: s13_cases
-  t: [540.375, 597.225]
+  t:
+  - 540.375
+  - 597.225
   sentence_times:
-  - [540.375, 545.675]
-  - [546.025, 548.625]
-  - [548.975, 553.975]
-  - [555.475, 559.725]
-  - [560.075, 563.05]
-  - [563.4, 567.075]
-  - [568.575, 573.3]
-  - [573.65, 576.275]
-  - [576.625, 579.95]
-  - [581.45, 584.425]
-  - [584.775, 587.65]
-  - [588.0, 591.15]
-  - [592.65, 596.425]
+  - - 540.375
+    - 545.675
+  - - 546.025
+    - 548.625
+  - - 548.975
+    - 553.975
+  - - 555.475
+    - 559.725
+  - - 560.075
+    - 563.05
+  - - 563.4
+    - 567.075
+  - - 568.575
+    - 573.3
+  - - 573.65
+    - 576.275
+  - - 576.625
+    - 579.95
+  - - 581.45
+    - 584.425
+  - - 584.775
+    - 587.65
+  - - 588.0
+    - 591.15
+  - - 592.65
+    - 596.425
   beat: 'intuition: four walkers, one thing changing'
   visual: 'Four panels side by side across the full width, the same hill and grad-h arrow in each; one walker per panel at 0°, 60°, 90°, 180° to grad h;
     each panel''s CalcStack (68 px) appears on its sentence: ''50 × cos 0° = 50'', ''50 × cos 60° = 25'', ''50 × cos 90° = 0'', ''50 × (−1) = −50'' (rose
     with ''−'' glyph and hatch). The rule keywords under each panel (54 px): ''steepest'', ''shadow'', ''no change'', ''steepest down''.'
   voiceover: Let's keep the hillside fixed, and send four walkers out in different directions. The first walks along grad h. The cosine of zero is one,
-    so she climbs fifty metres per kilometre. [beat] When you walk along the gradient, you climb at the steepest rate. The second walks at sixty degrees
-    to it. Fifty times the cosine of sixty is twenty five. [beat] At an angle, you get only the shadow of the gradient on your direction. The third walks
-    along the contour. Fifty times the cosine of ninety is zero. [beat] Along a contour, nothing changes. The fourth walks straight against the gradient.
-    Fifty times minus one is minus fifty. [beat] Against the gradient, you go down at the steepest rate.
+    so she climbs fifty metres per kilometre. When you walk along the gradient, you climb at the steepest rate. The second walks at sixty degrees to it.
+    Fifty times the cosine of sixty is twenty five. At an angle, you get only the shadow of the gradient on your direction. The third walks along the contour.
+    Fifty times the cosine of ninety is zero. Along a contour, nothing changes. The fourth walks straight against the gradient. Fifty times minus one is
+    minus fifty. Against the gradient, you go down at the steepest rate.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.operators.directional_derivative
     params:
-      grad: [30, 40]
-      angles_deg: [0, 60, 90, 180]
+      grad:
+      - 30
+      - 40
+      angles_deg:
+      - 0
+      - 60
+      - 90
+      - 180
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); CHECK DG11
   exaggeration: []
   kind: cases side by side
@@ -611,52 +856,78 @@ scenes:
   related: []
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s14_spacing
-  t: [597.225, 638.75]
+  t:
+  - 597.225
+  - 638.75
   sentence_times:
-  - [597.225, 600.65]
-  - [601.0, 605.5]
-  - [605.85, 615.15]
-  - [616.65, 620.525]
-  - [620.875, 626.025]
-  - [627.525, 630.975]
-  - [631.325, 637.95]
+  - - 597.225
+    - 600.65
+  - - 601.0
+    - 605.5
+  - - 605.85
+    - 615.15
+  - - 616.65
+    - 620.525
+  - - 620.875
+    - 626.025
+  - - 627.525
+    - 630.975
+  - - 631.325
+    - 637.95
   beat: 'intuition: crowded lines mean a big gradient'
   visual: 'Two hill profiles and their maps side by side (left gentle, right steep), contours every 100 m (warm white). Gold brackets ''2 km'' and ''0.5
     km'' between neighbouring contours, linked to CalcStacks ''100 m / 2 km = 50 m/km'' and ''100 m / 0.5 km = 200 m/km''; orange grad-h arrows 4 x longer
     on the right. S5: three mini-icons (slope, thermometer, barometer) lit.'
   voiceover: 'There''s a quick way to read the gradient''s size off a map. Suppose contour lines are drawn every hundred metres of height. On a gentle slope,
-    they might be two kilometres apart, so the slope is a hundred metres over two kilometres: fifty metres per kilometre. [beat] On a steep slope, they
-    might be half a kilometre apart. A hundred metres over half a kilometre is two hundred metres per kilometre. [beat] So the closer the lines, the bigger
-    the gradient. Crowded lines mean a steep slope, a sharp change of temperature, or a strong push from the pressure.'
+    they might be two kilometres apart, so the slope is a hundred metres over two kilometres: fifty metres per kilometre. On a steep slope, they might be
+    half a kilometre apart. A hundred metres over half a kilometre is two hundred metres per kilometre. So the closer the lines, the bigger the gradient.
+    Crowded lines mean a steep slope, a sharp change of temperature, or a strong push from the pressure.'
   on_screen_eq: null
   physics_source:
     fn: builder-only (interval / spacing); fluidpy.core.operators.gradient on the two analytic hills
     params:
       interval_m: 100
-      spacing_km: [2, 0.5]
+      spacing_km:
+      - 2
+      - 0.5
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); CHECK DG12
-  exaggeration: [idealised hills]
+  exaggeration:
+  - idealised hills
   kind: diagram
   data: analytic
   tool: Remotion SVG
   runner_up: —
   why: 'the reading rule, pointed on to #6A'
   related:
-  - {movie: '#6A', slug: planned (contour maps and isolines), covers: 'isolines, contour interval, highs/lows/ridges/troughs/cols read from contours'}
+  - movie: '#6A'
+    slug: planned (contour maps and isolines)
+    covers: isolines, contour interval, highs/lows/ridges/troughs/cols read from contours
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s15_mont_blanc
-  t: [638.75, 702.425]
+  t:
+  - 638.75
+  - 702.425
   sentence_times:
-  - [638.75, 645.55]
-  - [645.9, 654.0]
-  - [654.35, 659.05]
-  - [659.4, 664.7]
-  - [665.05, 671.5]
-  - [671.85, 678.95]
-  - [679.3, 684.725]
-  - [686.225, 689.175]
-  - [689.525, 693.95]
-  - [694.3, 701.625]
+  - - 638.75
+    - 645.55
+  - - 645.9
+    - 654.0
+  - - 654.35
+    - 659.05
+  - - 659.4
+    - 664.7
+  - - 665.05
+    - 671.5
+  - - 671.85
+    - 678.95
+  - - 679.3
+    - 684.725
+  - - 686.225
+    - 689.175
+  - - 689.525
+    - 693.95
+  - - 694.3
+    - 701.625
   beat: 'intuition: a real mountain'
   visual: 'Full width: CesiumJS drape of the Mont Blanc massif (ETOPO heights x2, said in S3; daytime imagery: Sentinel-2 cloudless mosaic or GIBS true
     colour, frozen frames), camera gliding from Chamonix south to the summit. S4-S5: labels at tips ''Chamonix 1035 m'', ''summit 4806 m'' (54 px); S6:
@@ -667,18 +938,24 @@ scenes:
     global relief data set called ETOPO, with satellite imagery laid over it. The heights are drawn stretched two times, so the shape is easier to see.
     The town of Chamonix sits at about one thousand and thirty five metres. The summit, at about four thousand eight hundred and six metres, is about ten
     kilometres to the south. So on average, the ground rises about three thousand seven hundred and seventy metres in ten kilometres. That''s about thirty
-    seven and a half metres up for every hundred metres across. [beat] Now let''s draw grad h at every point. Every arrow points uphill, at right angles
-    to the contours. The longest arrows sit on the steep walls near the summit, where the slope on this map reaches about sixty percent.'
+    seven and a half metres up for every hundred metres across. Now let''s draw grad h at every point. Every arrow points uphill, at right angles to the
+    contours. The longest arrows sit on the steep walls near the summit, where the slope on this map reaches about sixty percent.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient on ETOPO heights; fluidpy.geo.terrain.surface_normals + slope_aspect (cross-check); fluidpy.geo.sphere.great_circle_distance
       (Chamonix-summit)
     params:
-      chamonix: [45.923, 6.869]
-      summit: [45.8326, 6.8652]
+      chamonix:
+      - 45.923
+      - 6.869
+      summit:
+      - 45.8326
+      - 6.8652
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); ../Fluid Dynamics/tests/geo/test_terrain.py; CHECK DG13 (10.06 km; 0.375; max
       slope 0.60 +/- 0.05 within 5 km of the summit on the product used)
-  exaggeration: [heights x2 (said in S3), camera glide time-compressed]
+  exaggeration:
+  - heights x2 (said in S3)
+  - camera glide time-compressed
   kind: 3-D terrain drape + arrows
   data: A4 ETOPO 2022 60-arc-second Alps (on disk) or D1 ETOPO 15-arc-second; imagery D2 (Sentinel-2 cloudless, EOX, CC BY-NC-SA, noncommercial allowed
     by the series rule) or GIBS
@@ -686,22 +963,34 @@ scenes:
   runner_up: three.js displaced plane (deterministic, faster) with the same textures; PyGMT grdview still
   why: the gradient as 'uphill' on real terrain; the summit heights are cited (ETOPO smooths the summit)
   related:
-  - {movie: '#6A', slug: planned (contour maps and isolines), covers: 'isolines, contour interval, highs/lows/ridges/troughs/cols read from contours'}
+  - movie: '#6A'
+    slug: planned (contour maps and isolines)
+    covers: isolines, contour interval, highs/lows/ridges/troughs/cols read from contours
   layout_5b: 'Drape in a large frame with soft edges while the camera glides (no hard box). ''Chamonix 1035 m'', ''summit 4806 m'' are short labels at the
     spots, each within 1 s of its words; the ''10 km'' bracket on the ground; the CalcStack and ''about 60 %'' in the text column with gold links. SourceBelow
     (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. (''Terrain: ETOPO 2022 (NOAA) · imagery: Sentinel-2 cloudless
     (EOX)''). The camera returns to its start view at scene end.'
 - id: s16_water_scale
-  t: [702.425, 753.975]
+  t:
+  - 702.425
+  - 753.975
   sentence_times:
-  - [702.425, 704.975]
-  - [705.325, 714.475]
-  - [714.825, 718.975]
-  - [719.325, 726.15]
-  - [726.5, 733.05]
-  - [733.4, 742.575]
-  - [742.925, 748.25]
-  - [749.75, 753.175]
+  - - 702.425
+    - 704.975
+  - - 705.325
+    - 714.475
+  - - 714.825
+    - 718.975
+  - - 719.325
+    - 726.15
+  - - 726.5
+    - 733.05
+  - - 733.4
+    - 742.575
+  - - 742.925
+    - 748.25
+  - - 749.75
+    - 753.175
   beat: 'intuition: steepest descent and the scale of a gradient'
   visual: 'S1-S2: on the drape, teal droplets slide along −grad h (flow paths from fluidpy, not a hydrology model) into the valley streams (NE 10 m rivers
     as reference). S3-S5: split screen: left the Alps 60-arc-second slope map (max ~60 %), right the Himalaya 20-arc-minute block-mean height with the Everest
@@ -711,41 +1000,59 @@ scenes:
     the arrows backwards. And the size of the gradient depends on how finely you look. On this map, with points less than two kilometres apart, the steepest
     slopes are about sixty percent. Now average the heights over blocks about thirty five kilometres across, and look at the Himalayas. The ground climbs
     from the Ganges plain, about fifty metres above sea level, to the Tibetan plateau, almost five thousand metres up. Yet at that scale, the slope near
-    Mount Everest is only about five percent. [beat] Both numbers are right, each for its own scale.
+    Mount Everest is only about five percent. Both numbers are right, each for its own scale.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient on ETOPO (60-arc-second Alps; 20-arc-minute block means of the 60-arc-second Tibet subset); steepest-descent paths by
       integrating -grad h (NEW G3 descent_path)
     params:
       block: 20 arc-min
-      point: [27.5, 86.83]
+      point:
+      - 27.5
+      - 86.83
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG14 (0.049 +/- 0.005 near Everest, bearing 345 +/- 10; plain median 49
       m; plateau median 4926 m)
-  exaggeration: ['droplet paths are steepest-descent lines, not a hydrological model (said ''roughly'')', Himalaya relief x20 in the profile (said nowhere;
-      profile axes labelled in km and m)]
+  exaggeration:
+  - droplet paths are steepest-descent lines, not a hydrological model (said 'roughly')
+  - Himalaya relief x20 in the profile (said nowhere; profile axes labelled in km and m)
   kind: 3-D drape + maps + profile
   data: A4 ETOPO Alps 60-arc-second; A5 ETOPO Tibet 60-arc-second (block-averaged)
   tool: CesiumJS + Remotion SVG profile; matplotlib rasters
   runner_up: PyGMT grdimage for the two slope maps
   why: '''the gradient depends on the scale'' is honest and sets up #6B'
   related:
-  - {movie: '#6B', slug: planned (how contour maps are made), covers: 'stations to grid, interpolation, contouring, smoothing, resolution artefacts'}
+  - movie: '#6B'
+    slug: planned (how contour maps are made)
+    covers: stations to grid, interpolation, contouring, smoothing, resolution artefacts
   layout_5b: 'Drape and the two slope panels each with their source line below (''Data: ETOPO 2022 (NOAA)''); keywords below the panels; the profile in
     the maths zone.'
 - id: s17_lapse_rate
-  t: [753.975, 836.325]
+  t:
+  - 753.975
+  - 836.325
   sentence_times:
-  - [753.975, 760.35]
-  - [760.7, 771.025]
-  - [771.375, 778.2]
-  - [778.55, 785.325]
-  - [785.675, 792.575]
-  - [792.925, 798.225]
-  - [798.575, 806.625]
-  - [806.975, 816.725]
-  - [817.075, 821.25]
-  - [822.75, 831.025]
-  - [831.375, 835.525]
+  - - 753.975
+    - 760.35
+  - - 760.7
+    - 771.025
+  - - 771.375
+    - 778.2
+  - - 778.55
+    - 785.325
+  - - 785.675
+    - 792.575
+  - - 792.925
+    - 798.225
+  - - 798.575
+    - 806.625
+  - - 806.975
+    - 816.725
+  - - 817.075
+    - 821.25
+  - - 822.75
+    - 831.025
+  - - 831.375
+    - 835.525
   beat: 'intuition: the gradient in 3-D (radiosonde)'
   visual: 'Full width: a three.js column over Singapore on a BMNG 500-m patch (southern Malay Peninsula, Singapore island); the balloon rises through the
     real profile (time-compressed) while a T(z) graph (teal line, 52-px ticks, z up to 35 km) draws itself in the maths zone. S4-S5: dots and labels ''27.7
@@ -758,16 +1065,20 @@ scenes:
     degrees. At sixteen point two kilometres, where the cooling stopped, it measured minus eighty one point three. That level is the tropopause, the top
     of the lowest layer of the atmosphere. Over the tropics it sits much higher than over Europe, where it''s usually somewhere between about ten and thirteen
     kilometres up. So partial capital T by partial z, averaged over that layer, is minus a hundred and nine degrees over sixteen point one kilometres. That''s
-    about minus six point eight degrees per kilometre. [beat] Meteorologists flip the sign, and call plus six point eight the lapse rate: how fast the temperature
+    about minus six point eight degrees per kilometre. Meteorologists flip the sign, and call plus six point eight the lapse rate: how fast the temperature
     drops as you go up. Above the tropopause, the temperature starts rising again.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.igra.find_sounding + fill_heights + wmo_tropopause; fluidpy.diag.sounding.layer_lapse_rate (both conventions)
-    params: {station: SNM00048698 Singapore Changi, time: '2023-11-01T00 (release 23:31 UTC 31 Oct = 07:31 local 1 Nov)'}
+    params:
+      station: SNM00048698 Singapore Changi
+      time: 2023-11-01T00 (release 23:31 UTC 31 Oct = 07:31 local 1 Nov)
     test: ../Fluid Dynamics/tests/data/test_igra.py; ../Fluid Dynamics/tests/diag/test_sounding.py; CHECK DG15s (surface z_hyps 33 m, 27.7 C; WMO tropopause
       16 163 m, -81.3 C = station-reported; layer_lapse_rate -6.76 K/km 'about minus six point eight'; T rises above the tropopause (T at 20 km > T at 16.2
       km); Trappes tropopauses 10.88 km (2023-11-01) and 13.07 km (2026-09-30) for 'between about ten and thirteen')
-  exaggeration: [balloon ascent time-compressed (about 50 min in 10 s), 'column height x20 (said in s18: ''we stretch the height'')']
+  exaggeration:
+  - balloon ascent time-compressed (about 50 min in 10 s)
+  - 'column height x20 (said in s18: ''we stretch the height'')'
   kind: 3-D column + live profile
   data: IGRA2 (registered) Singapore SNM00048698, 2023-11-01T00 (data/derived/ch00/igra2_trappes_singapore_2023-11-01T00.nc); BMNG-2004-21600 patch (on
     disk)
@@ -776,34 +1087,46 @@ scenes:
   why: 'the vertical gradient from a real balloon; a tropical sounding (tropopause 16.2 km) instead of #4''s Trappes case, so the series does not repeat
     the same sounding for the same quantity (retrofit plan §4.3, decided)'
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
-  - {movie: '#24', slug: planned (atmospheric thermodynamics), covers: 'dry and moist lapse rates, potential temperature'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
+  - movie: '#24'
+    slug: planned (atmospheric thermodynamics)
+    covers: dry and moist lapse rates, potential temperature
   layout_5b: 'Singapore column: Column/slab (K4 col3d): every vertical edge runs from the floor all the way to the top face; top and bottom rims drawn.
     Floor = BMNG 500-m patch of the southern Malay Peninsula and Singapore (1-2 N, 103-105 E); ''Singapore'' labelled and centred on AT(2,''Singapore''),
     area label ''Malay Peninsula'' on AT(2,''Malay Peninsula''). Profile graph and numbers in the maths zone; the ''tropopause'' keyword beside the graph.
     Source line below the column: ''Data: IGRA v2 (NOAA NCEI) · Singapore Changi · 1 Nov 2023, 00 UTC · image: NASA Blue Marble NG''.'
 - id: s18_thin_layer
-  t: [836.325, 871.35]
+  t:
+  - 836.325
+  - 873.475
   sentence_times:
-  - [836.325, 842.675]
-  - [843.025, 849.575]
-  - [849.925, 853.55]
-  - [855.05, 862.55]
-  - [862.9, 870.55]
+  - - 836.325
+    - 842.675
+  - - 843.025
+    - 849.575
+  - - 849.925
+    - 853.55
+  - - 855.05
+    - 864.675
+  - - 865.025
+    - 872.675
   beat: 'intuition: vertical vs horizontal'
   visual: 'Picture zone: a true-scale slice of the atmosphere over France (13 km tall over 1000 km wide: a hairline) then stretched x50 on AT(4,''we stretch
     the height'') with tilted isotherm surfaces; an orange grad-T arrow nearly vertical. Maths zone: ''6.8 °C/km = 680 °C per 100 km'' and ''680 / 4.06
     > 160'' (68 px).'
   voiceover: Compare that with the sideways gradient over Brest, about four degrees per hundred kilometres. Six point eight degrees per kilometre is six
-    hundred and eighty degrees per hundred kilometres. That's more than a hundred and sixty times bigger. [beat] So surfaces of equal temperature in the
-    air are nearly flat, and grad capital T points almost straight up. In our pictures, we stretch the height to make tilts like these visible, but the
-    real atmosphere is a very thin layer.
+    hundred and eighty degrees per hundred kilometres. That's more than a hundred and sixty times bigger. So surfaces of equal temperature in the air are
+    nearly flat, and grad capital T points almost straight down, towards the warmer air below. In our pictures, we stretch the height to make tilts like
+    these visible, but the real atmosphere is a very thin layer.
   on_screen_eq: null
   physics_source:
     fn: builder-only ratio of DG15s and DG07
     params: {}
     test: CHECK DG16s (676 / 4.06 = 166 -> 'more than a hundred and sixty')
-  exaggeration: [vertical x50 after the true-scale frame (said in S4)]
+  exaggeration:
+  - vertical x50 after the true-scale frame (said in S4)
   kind: diagram from data
   data: A3; A2
   tool: Remotion SVG
@@ -813,13 +1136,20 @@ scenes:
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings. (Ratio numbers from data,
     the slice is a diagram.)'
 - id: s19_reason_one
-  t: [871.35, 895.7]
+  t:
+  - 873.475
+  - 897.825
   sentence_times:
-  - [871.35, 874.25]
-  - [874.6, 876.775]
-  - [877.125, 881.775]
-  - [882.125, 890.325]
-  - [890.675, 894.9]
+  - - 873.475
+    - 876.375
+  - - 876.725
+    - 878.9
+  - - 879.25
+    - 883.9
+  - - 884.25
+    - 892.45
+  - - 892.8
+    - 897.025
   beat: 'why: reason 1 (one arrow for every direction)'
   visual: 'Picture zone: a fan of 16 direction needles round the walker, each with its climb value (44-54 px) — the ''long table'' — collapsing into the
     single orange grad-h arrow on AT(4,''two numbers''); maths zone ''(30, 40)'' and ''rate = ∇h · n̂''.'
@@ -829,7 +1159,8 @@ scenes:
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.operators.directional_derivative
-    params: {n_dirs: 16}
+    params:
+      n_dirs: 16
     test: ../Fluid Dynamics/tests/test_ch02.py (operators.gradient / directional_derivative V1, V3, V7); CHECK DG17
   exaggeration: []
   kind: diagram
@@ -840,25 +1171,34 @@ scenes:
   related: []
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s20_reason_two
-  t: [895.7, 924.175]
+  t:
+  - 897.825
+  - 926.3
   sentence_times:
-  - [895.7, 900.85]
-  - [901.2, 904.35]
-  - [904.7, 909.375]
-  - [909.725, 914.8]
-  - [916.3, 923.375]
+  - - 897.825
+    - 902.975
+  - - 903.325
+    - 906.475
+  - - 906.825
+    - 911.5
+  - - 911.85
+    - 916.925
+  - - 918.425
+    - 925.5
   beat: 'why: reason 2 (independent of the axes)'
   visual: 'Picture zone: the grad-h arrow fixed; the axes x̂, ŷ (orange-dim) rotate by 30° (gold arc); the new components appear as dashed legs ''≈ 46''
     and ''≈ 19.6''. Maths zone CalcStack: ''30 cos 30° + 40 sin 30° ≈ 46'', ''−30 sin 30° + 40 cos 30° ≈ 19.6'', ''√(46² + 19.6²) = 50''.'
   voiceover: The second reason is that the arrow doesn't depend on how we draw the axes. Let's turn our axes by thirty degrees. The components change, to
-    about forty six and nineteen point six. But the length is still fifty, and the arrow still points the same way up the hill. [beat] The steepest way
-    up a mountain is a fact about the mountain, not about our map, and the gradient respects that.
+    about forty six and nineteen point six. But the length is still fifty, and the arrow still points the same way up the hill. The steepest way up a mountain
+    is a fact about the mountain, not about our map, and the gradient respects that.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.core.tensors.rotation_matrix_2d; fluidpy.geo.vectors.norm
     params:
       angle_deg: 30
-      v: [30, 40]
+      v:
+      - 30
+      - 40
     test: ../Fluid Dynamics/tests/test_ch02.py (rotation); ../Fluid Dynamics/tests/geo/test_vectors.py; CHECK DG18 (45.98, 19.64, 50.00)
   exaggeration: []
   kind: diagram
@@ -867,17 +1207,27 @@ scenes:
   runner_up: —
   why: 'rotation of axes from #5; the length is invariant'
   related:
-  - {movie: '#5', slug: ch00_coordinates, covers: 'latitude-longitude geometry, a cos phi, scale factors, rotation of axes'}
+  - movie: '#5'
+    slug: ch00_coordinates
+    covers: latitude-longitude geometry, a cos phi, scale factors, rotation of axes
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s21_reason_three
-  t: [924.175, 954.925]
+  t:
+  - 926.3
+  - 957.05
   sentence_times:
-  - [924.175, 928.125]
-  - [928.475, 932.9]
-  - [933.25, 935.975]
-  - [936.325, 941.625]
-  - [941.975, 947.6]
-  - [947.95, 954.125]
+  - - 926.3
+    - 930.25
+  - - 930.6
+    - 935.025
+  - - 935.375
+    - 938.1
+  - - 938.45
+    - 943.75
+  - - 944.1
+    - 949.725
+  - - 950.075
+    - 956.25
   beat: 'why: reason 3 (nature responds to gradients)'
   visual: 'Three mini scenes in a row, each lit on its sentence: heat arrows from a warm to a cold block (gold, down grad T); a droplet sliding down a slope
     (teal); air parcels pushed from H to L across two isobars (light-orange hollow-head arrows). S6: a uniformly warm room (one colour) with no arrows;
@@ -887,7 +1237,8 @@ scenes:
     that drives the motion. A room that's equally warm everywhere has no flow of heat inside it, however warm it is.
   on_screen_eq: null
   physics_source: null
-  exaggeration: [illustrative mini scenes]
+  exaggeration:
+  - illustrative mini scenes
   kind: icons
   data: —
   tool: Remotion SVG
@@ -896,15 +1247,24 @@ scenes:
   related: []
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s22_sphere
-  t: [954.925, 1004.4]
+  t:
+  - 957.05
+  - 1006.525
   sentence_times:
-  - [954.925, 960.45]
-  - [960.8, 967.275]
-  - [967.625, 973.55]
-  - [973.9, 984.975]
-  - [985.325, 992.5]
-  - [992.85, 998.6]
-  - [998.95, 1003.6]
+  - - 957.05
+    - 962.575
+  - - 962.925
+    - 969.4
+  - - 969.75
+    - 975.675
+  - - 976.025
+    - 987.1
+  - - 987.45
+    - 994.625
+  - - 994.975
+    - 1000.725
+  - - 1001.075
+    - 1005.725
   beat: 'building block: the gradient on the sphere'
   visual: 'Picture zone: three.js globe (BMNG, on disk) with the graticule; at Brest a small grid cell with sides ''a dφ'' (north, orange) and ''a cos φ
     dλ'' (east, orange) drawn on AT(3) and AT(4); a second cell near Svalbard visibly narrower. Maths zone: the sphere gradient (84 px) built with gold
@@ -914,41 +1274,60 @@ scenes:
     d lambda, covers only the radius times cosine phi times d lambda, because the circles of latitude shrink towards the poles. So the slope going east
     is one over the radius times cosine phi, times partial by partial lambda. And the slope going north is one over the radius, times partial by partial
     phi. Together with the change going up, these make the gradient on the sphere.'
-  on_screen_eq: {latex: '\nabla F=\mathbf i\,\frac{1}{a\cos\varphi}\frac{\partial F}{\partial\lambda}+\mathbf j\,\frac{1}{a}\frac{\partial F}{\partial\varphi}+\mathbf
-      k\,\frac{\partial F}{\partial r}', vallis_eq: '(2.31) with r = a in the first two terms (thin shell). Vallis writes the scalar as phi and latitude
-      as vartheta; on screen the scalar is F and latitude is phi (series convention from #5), said in s22', page_png: chapters/pages/ch02/p081.png}
+  on_screen_eq:
+    latex: \nabla F=\mathbf i\,\frac{1}{a\cos\varphi}\frac{\partial F}{\partial\lambda}+\mathbf j\,\frac{1}{a}\frac{\partial F}{\partial\varphi}+\mathbf
+      k\,\frac{\partial F}{\partial r}
+    vallis_eq: '(2.31) with r = a in the first two terms (thin shell). Vallis writes the scalar as phi and latitude as vartheta; on screen the scalar is
+      F and latitude is phi (series convention from #5), said in s22'
+    page_png: chapters/pages/ch02/p081.png
   physics_source:
     fn: fluidpy.geo.sphere.arc_lengths; fluidpy.geo.sphere.gradient
     params:
-      lat: [48.45, 78.22]
+      lat:
+      - 48.45
+      - 78.22
       dlat_deg: 0.25
       dlon_deg: 0.25
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG19
-  exaggeration: [grid cells drawn 10x larger than 0.25 deg]
+  exaggeration:
+  - grid cells drawn 10x larger than 0.25 deg
   kind: 3-D globe + equation
   data: A6 BMNG
   tool: '@remotion/three globe (house) + tex'
   runner_up: Cesium globe
   why: '(2.31) from the arc lengths taught in #5'
   related:
-  - {movie: '#5', slug: ch00_coordinates, covers: 'latitude-longitude geometry, a cos phi, scale factors, rotation of axes'}
+  - movie: '#5'
+    slug: ch00_coordinates
+    covers: latitude-longitude geometry, a cos phi, scale factors, rotation of axes
   layout_5b: 'GlobeFrame (K1), whole unzoomed globe: no edge fade; globe large (>= 760 px across) in the picture zone, clearly separate from the keyword
     column on the right; SourceBelow (K2) ''Image: NASA Blue Marble Next Generation'' fully below the globe (y <= 860), never on it; billboard place labels
     only for places spoken in the scene, each placed within 1 s of its words and turned to face the camera (centred) as it is spoken; no title on the globe;
     keywords and calculations in the text column, never on the globe. Cell side labels sit just outside the cells with short leaders; the sphere-gradient
     equation in the maths zone.'
 - id: s23_cos_example
-  t: [1004.4, 1063.275]
+  t:
+  - 1006.525
+  - 1065.4
   sentence_times:
-  - [1004.4, 1007.575]
-  - [1007.925, 1012.45]
-  - [1012.8, 1020.825]
-  - [1021.175, 1031.225]
-  - [1031.575, 1038.575]
-  - [1038.925, 1043.1]
-  - [1044.6, 1051.2]
-  - [1051.55, 1055.375]
-  - [1056.875, 1062.475]
+  - - 1006.525
+    - 1009.7
+  - - 1010.05
+    - 1014.575
+  - - 1014.925
+    - 1022.95
+  - - 1023.3
+    - 1033.35
+  - - 1033.7
+    - 1040.7
+  - - 1041.05
+    - 1045.225
+  - - 1046.725
+    - 1053.325
+  - - 1053.675
+    - 1057.5
+  - - 1059.0
+    - 1064.6
   beat: 'building block: why the cosine matters (worked example)'
   visual: 'Picture zone: zoom on the ERA5 grid round Brest (0.25 deg points as dots, 850 hPa T values 68 px beside the east and west points: ''4.51'', ''5.69'');
     gold bracket ''18.4 km'' twice, ''36.8 km'' total. Maths zone CalcStack: ''(4.51 − 5.69) / 36.8 km = −1.18 / 36.8 km'', ''≈ −3.2 °C per 100 km''; S5-S6:
@@ -956,14 +1335,16 @@ scenes:
   voiceover: Let's see why that cosine matters, at Brest. ERA5 gives the temperature every quarter of a degree. One grid point east of Brest, it was four
     point five one degrees, and one point west, it was five point six nine. At Brest's latitude, a quarter of a degree of longitude is eighteen point four
     kilometres, so the two points are thirty six point eight kilometres apart. The slope going east is minus one point one eight degrees over thirty six
-    point eight kilometres. That's minus three point two degrees per hundred kilometres. [beat] Forget the cosine, and you'd use twenty seven point eight
-    kilometres per step, as if you were going north. Then you'd get minus two point one, a third too small. [beat] Near Svalbard, at seventy eight degrees
-    north, it would be five times too small.
+    point eight kilometres. That's minus three point two degrees per hundred kilometres. Forget the cosine, and you'd use twenty seven point eight kilometres
+    per step, as if you were going north. Then you'd get minus two point one, a third too small. Near Svalbard, at seventy eight degrees north, it would
+    be five times too small.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.arc_lengths; fluidpy.geo.sphere.gradient (same value as the hand centred difference)
     params:
-      point: [48.5, -4.5]
+      point:
+      - 48.5
+      - -4.5
       time: 2023-11-01T18
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG20 (TE 4.511, TW 5.691; dx 18.42 km; -3.202 vs -2.122; cos 78.22 = 0.204)
   exaggeration: []
@@ -973,20 +1354,32 @@ scenes:
   runner_up: —
   why: the same number as s09, now built by hand
   related:
-  - {movie: '#5', slug: ch00_coordinates, covers: 'latitude-longitude geometry, a cos phi, scale factors, rotation of axes'}
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
+  - movie: '#5'
+    slug: ch00_coordinates
+    covers: latitude-longitude geometry, a cos phi, scale factors, rotation of axes
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
   layout_5b: 'Zoomed ERA5 grid round Brest (a map zoom with soft frame edges); grid values beside their dots are short labels at a spot; CalcStack in the
     maths zone; back out to the start view at scene end. SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never
     on it. (''Data: ERA5 (Copernicus C3S) · 1 Nov 2023, 18 UTC'').'
 - id: s24_pressure_recap
-  t: [1063.275, 1093.425]
+  t:
+  - 1065.4
+  - 1095.55
   sentence_times:
-  - [1063.275, 1068.05]
-  - [1068.4, 1074.025]
-  - [1074.375, 1081.15]
-  - [1081.5, 1086.925]
-  - [1087.275, 1090.45]
-  - [1090.8, 1092.625]
+  - - 1065.4
+    - 1070.175
+  - - 1070.525
+    - 1076.15
+  - - 1076.5
+    - 1083.275
+  - - 1083.625
+    - 1089.05
+  - - 1089.4
+    - 1092.575
+  - - 1092.925
+    - 1094.75
   beat: 'application: pressure recap'
   visual: 'Picture zone: an air parcel cube with molecules bouncing (code-drawn dots, seeded random) and push arrows on every face; keyword ''force per
     area''. Maths zone: ''≈ 1013 hPa'' (68 px). S4: cross-fade to Ciarán''s isobars (03 UTC) with the keyword ''isobars''. S5: a gold ''?'' between two
@@ -999,26 +1392,39 @@ scenes:
     fn: data only (ERA5 msl); molecule animation illustrative
     params: {}
     test: CHECK DG21
-  exaggeration: [molecule motion illustrative]
+  exaggeration:
+  - molecule motion illustrative
   kind: diagram + data map
   data: A1 ERA5 msl, u10, v10 hourly (ERA5-ARCO-ciaran2023 + -1102 land mask), 2023-11-02T03
   tool: Remotion SVG
   runner_up: —
   why: restate pressure before the derivation (0.3 taught it)
   related:
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
   layout_5b: 'Parcel cube: no source. The Ciarán isobar cross-fade carries ''Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 03 UTC'' below the map.'
 - id: s25_box
-  t: [1093.425, 1142.6]
+  t:
+  - 1095.55
+  - 1144.725
   sentence_times:
-  - [1093.425, 1097.825]
-  - [1098.175, 1104.275]
-  - [1104.625, 1110.3]
-  - [1110.65, 1117.275]
-  - [1117.625, 1120.95]
-  - [1121.3, 1130.15]
-  - [1130.5, 1137.575]
-  - [1137.925, 1141.8]
+  - - 1095.55
+    - 1099.95
+  - - 1100.3
+    - 1106.4
+  - - 1106.75
+    - 1112.425
+  - - 1112.775
+    - 1119.4
+  - - 1119.75
+    - 1123.075
+  - - 1123.425
+    - 1132.275
+  - - 1132.625
+    - 1139.7
+  - - 1140.05
+    - 1143.925
   beat: 'application: the box derivation'
   visual: 'Picture zone: a three.js box of air ''δx'' long (east-west) between two faces; face pushes as arrows: west face ''p δA'' pushing east (warm white),
     east face ''p(x + δx) δA'' pushing west; S3: equal arrows cancel (gold ''= 0''); S4: the east face arrow grows; S5 Taylor tag ''p + ∂p/∂x δx''. Maths
@@ -1028,34 +1434,49 @@ scenes:
     and nothing happens, however high the pressure is. Now suppose the pressure rises towards the east. By the Taylor series, from the derivatives movie,
     the pressure on the east face is bigger by partial p by partial x, times d x. So the net push is minus partial p by partial x, times d x, times the
     area of the face. And d x times that area is the volume of the box.
-  on_screen_eq: {latex: '-\Big[p\big(x+\delta x\big)-p(x)\Big]\,\delta A=-\frac{\partial p}{\partial x}\,\delta x\,\delta A=-\frac{\partial p}{\partial
-      x}\,\delta V', vallis_eq: 'our derivation of (1.47) for one face pair (Vallis uses the divergence theorem, (1.45)-(1.47)); Taylor step from movie
-      #4', page_png: chapters/pages/ch01/p031.png}
+  on_screen_eq:
+    latex: -\Big[p\big(x+\delta x\big)-p(x)\Big]\,\delta A=-\frac{\partial p}{\partial x}\,\delta x\,\delta A=-\frac{\partial p}{\partial x}\,\delta V
+    vallis_eq: 'our derivation of (1.47) for one face pair (Vallis uses the divergence theorem, (1.45)-(1.47)); Taylor step from movie #4'
+    page_png: chapters/pages/ch01/p031.png
   physics_source:
     fn: fluidpy.core.statics / builder-only symbolic step (sympy check of the Taylor step)
     params: {}
     test: 'CHECK DG22 (sympy: p(x+dx) - p(x) - p''(x) dx = O(dx^2))'
-  exaggeration: [box size illustrative]
+  exaggeration:
+  - box size illustrative
   kind: 3-D diagram + derivation
   data: analytic
   tool: '@remotion/three + house tex'
   runner_up: SVG cube
   why: (1.47) derived face by face (first-year calculus) instead of the divergence theorem
   related:
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
-  - {movie: '#7', slug: 'planned (divergence, flux and Gauss)', covers: 'divergence, flux, Gauss''s theorem'}
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
+  - movie: '#7'
+    slug: planned (divergence, flux and Gauss)
+    covers: divergence, flux, Gauss's theorem
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings. The 3-D box draws all twelve
     edges, vertical edges floor to top.'
 - id: s26_per_kilogram
-  t: [1142.6, 1186.55]
+  t:
+  - 1144.725
+  - 1188.675
   sentence_times:
-  - [1142.6, 1150.45]
-  - [1150.8, 1159.325]
-  - [1159.675, 1162.975]
-  - [1163.325, 1168.925]
-  - [1169.275, 1172.025]
-  - [1172.375, 1179.725]
-  - [1180.075, 1185.75]
+  - - 1144.725
+    - 1152.575
+  - - 1152.925
+    - 1161.45
+  - - 1161.8
+    - 1165.1
+  - - 1165.45
+    - 1171.05
+  - - 1171.4
+    - 1174.15
+  - - 1174.5
+    - 1181.85
+  - - 1182.2
+    - 1187.875
   beat: 'application: force per kilogram'
   visual: 'Maths zone: ''÷ (ρ δV)'' with δV struck (Strike) -> ''−(1/ρ) ∂p/∂x'' -> the full vector form (main equation 96 px, orange family for the pressure
     term per project term colours); gold underbrace ''pressure gradient force''. Picture zone: the box with its net arrow; S5: keywords ''Coriolis'', ''gravity'',
@@ -1064,8 +1485,10 @@ scenes:
     per kilogram, going east, is minus one over rho, times partial p by partial x. The same happens going north, and going up. Together, the force per kilogram
     is minus one over rho, times grad p. It's called the pressure gradient force. It appears in the equation that tells the air how to move, next to the
     Coriolis effect, gravity and friction. Only differences in pressure push, which is why its name carries the word gradient.
-  on_screen_eq: {latex: '\mathbf F_p=-\frac{1}{\rho}\nabla p', vallis_eq: '(1.47) per unit volume -grad p, divided by rho (text after (1.47)); the pressure
-      term of (1.48)', page_png: chapters/pages/ch01/p031.png; chapters/pages/ch01/p032.png}
+  on_screen_eq:
+    latex: \mathbf F_p=-\frac{1}{\rho}\nabla p
+    vallis_eq: (1.47) per unit volume -grad p, divided by rho (text after (1.47)); the pressure term of (1.48)
+    page_png: chapters/pages/ch01/p031.png; chapters/pages/ch01/p032.png
   physics_source:
     fn: NEW G1 fluidpy.geo.atmos.pressure_gradient_force (analytic check)
     params: {}
@@ -1077,21 +1500,35 @@ scenes:
   runner_up: —
   why: the named force with its meaning
   related:
-  - {movie: '#29', slug: planned (Coriolis effect), covers: 'Coriolis effect, geostrophic balance'}
+  - movie: '#29'
+    slug: planned (Coriolis effect)
+    covers: Coriolis effect, geostrophic balance
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s27_high_to_low
-  t: [1186.55, 1245.95]
+  t:
+  - 1188.675
+  - 1248.075
   sentence_times:
-  - [1186.55, 1191.625]
-  - [1191.975, 1194.15]
-  - [1194.5, 1200.975]
-  - [1201.325, 1203.675]
-  - [1204.025, 1209.9]
-  - [1210.25, 1217.2]
-  - [1217.55, 1221.45]
-  - [1222.95, 1230.65]
-  - [1232.15, 1237.975]
-  - [1238.325, 1244.45]
+  - - 1188.675
+    - 1193.75
+  - - 1194.1
+    - 1196.275
+  - - 1196.625
+    - 1203.1
+  - - 1203.45
+    - 1205.8
+  - - 1206.15
+    - 1212.025
+  - - 1212.375
+    - 1219.325
+  - - 1219.675
+    - 1223.575
+  - - 1225.075
+    - 1232.775
+  - - 1234.275
+    - 1240.1
+  - - 1240.45
+    - 1246.575
   beat: 'application: high to low, easy numbers'
   visual: 'Picture zone: two straight isobars ''1000'' and ''1001 hPa'' 100 km apart (gold bracket); orange grad-p arrow towards 1001 and the light-orange
     hollow-head force arrow towards 1000 (''H'' and ''L'' sides labelled). Maths zone CalcStack: ''100 Pa / 100 000 m = 0.001 Pa/m''; ''0.001 / 1 ≈ 0.001
@@ -1099,15 +1536,17 @@ scenes:
   voiceover: Grad p points the way pressure increases fastest, towards high pressure. The minus sign flips it. So the pressure gradient force points from
     high pressure to low pressure, straight across the isobars. Let's put in easy numbers. Suppose the pressure changes by one hectopascal every hundred
     kilometres. One hectopascal is a hundred pascals, and a hundred kilometres is a hundred thousand metres. So the gradient is a thousandth of a pascal
-    per metre. [beat] With an air density of about one kilogram per cubic metre, the push is about a thousandth of a metre per second squared. [beat] With
-    the real density near the ground, one point two, it's about eight ten-thousandths. That's small, but kept up for an hour, it would add about three metres
-    per second to the wind. [beat]
+    per metre. With an air density of about one kilogram per cubic metre, the push is about a thousandth of a metre per second squared. With the real density
+    near the ground, one point two, it's about eight ten-thousandths. That's small, but kept up for an hour, it would add about three metres per second
+    to the wind.
   on_screen_eq: null
   physics_source:
     fn: NEW G1 pressure_gradient_force on a uniform analytic gradient
     params:
       dpdx_Pa_per_m: 0.001
-      rho: [1.0, 1.2]
+      rho:
+      - 1.0
+      - 1.2
     test: CHECK DG24 (1e-3; 8.33e-4; 3.0 m/s)
   exaggeration: []
   kind: diagram + calc
@@ -1118,17 +1557,28 @@ scenes:
   related: []
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s28_ciaran_push
-  t: [1245.95, 1311.5]
+  t:
+  - 1248.075
+  - 1313.625
   sentence_times:
-  - [1245.95, 1247.85]
-  - [1248.2, 1258.2]
-  - [1258.55, 1267.4]
-  - [1267.75, 1272.625]
-  - [1272.975, 1282.6]
-  - [1284.1, 1287.925]
-  - [1288.275, 1292.975]
-  - [1293.325, 1301.425]
-  - [1302.925, 1310.0]
+  - - 1248.075
+    - 1249.975
+  - - 1250.325
+    - 1260.325
+  - - 1260.675
+    - 1269.525
+  - - 1269.875
+    - 1274.75
+  - - 1275.1
+    - 1284.725
+  - - 1286.225
+    - 1290.05
+  - - 1290.4
+    - 1295.1
+  - - 1295.45
+    - 1303.55
+  - - 1305.05
+    - 1312.125
   beat: 'application: Ciarán''s pressure gradient force'
   visual: 'Full width real map: ERA5 msl 03 UTC 2 Nov 2023, isobars every 4 hPa (warm white, labelled 52 px), the tracked low ''L 954'' (continuity track,
     storm-tracker rule), Brest dot, NE 10 m coasts. S3: zoom to Brest; gold bracket ''31 km'' between the two isobars either side of Brest. Maths zone:
@@ -1137,40 +1587,54 @@ scenes:
   voiceover: Now a real storm. Here is Storm Ciarán at three in the morning on the second of November twenty twenty three, from ERA5, with isobars every
     four hectopascals. Its centre, at about nine hundred and fifty four hectopascals, is crossing the Channel, about two hundred kilometres north of Brest.
     Over Brest, the isobars are only thirty one kilometres apart. Four hectopascals in thirty one kilometres is about thirteen hectopascals per hundred
-    kilometres, thirteen times our easy example. [beat] Grad p points south-south-west, away from the low. So the pressure gradient force points north-north-east,
-    towards the low. Divide the gradient by the density, one point two five, and the push is about one hundredth of a metre per second squared. [beat] If
-    nothing else acted, that would add about thirty seven metres per second to the wind in a single hour. [beat]
+    kilometres, thirteen times our easy example. Grad p points south-south-west, away from the low. So the pressure gradient force points north-north-east,
+    towards the low. Divide the gradient by the density, one point two five, and the push is about one hundredth of a metre per second squared. If nothing
+    else acted, that would add about thirty seven metres per second to the wind in a single hour.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.cyclone.track_by_continuity (centre); fluidpy.geo.sphere.gradient; NEW G1 pressure_gradient_force
     params:
       time: 2023-11-02T03
-      point: [48.45, -4.42]
+      point:
+      - 48.45
+      - -4.42
       rho: 1.25
     test: ../Fluid Dynamics/tests/diag/test_cyclone_track.py; ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG25 (|grad p| 12.87
       hPa/100 km; spacing 31.1 km; bearing 197; centre 953.6 hPa at 50.12 N 3.73 W; 0.0103; 37 m/s)
-  exaggeration: [force arrows not to a common scale with the wind arrows (no scale drawn)]
+  exaggeration:
+  - force arrows not to a common scale with the wind arrows (no scale drawn)
   kind: real data map, zoom
   data: A1 ERA5 msl, u10, v10 hourly (ERA5-ARCO-ciaran2023 + -1102 land mask), 2023-11-02T03
   tool: cartopy raster + Remotion SVG (d3-geo LCC)
   runner_up: GIBS true colour of 2 Nov under the isobars (kept for s29)
   why: the same storm and hour as the Brest gust (s29)
   related:
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
-  - {movie: '#42', slug: planned (extratropical cyclones), covers: 'storm life cycle, bomb cyclones, Ciaran'}
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
+  - movie: '#42'
+    slug: planned (extratropical cyclones)
+    covers: storm life cycle, bomb cyclones, Ciaran
   layout_5b: 'Map x 80-1380; ''L 954'' and the ''31 km'' bracket on the map (short labels at a spot); all readouts and CalcStacks in the text column with
     gold links; zoom to Brest on S3 (soft frame edges), back out at scene end. SourceBelow (K2): the data-source line sits fully below the picture (>= 16
     px gap, y <= 860), never on it. (''Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 03 UTC'').'
 - id: s29_crowded_winds
-  t: [1311.5, 1361.775]
+  t:
+  - 1313.625
+  - 1356.175
   sentence_times:
-  - [1311.5, 1316.45]
-  - [1316.8, 1326.05]
-  - [1326.4, 1333.85]
-  - [1334.2, 1338.35]
-  - [1339.85, 1348.525]
-  - [1350.025, 1357.4]
-  - [1357.75, 1360.975]
+  - - 1313.625
+    - 1318.575
+  - - 1318.925
+    - 1328.175
+  - - 1328.525
+    - 1335.975
+  - - 1336.325
+    - 1340.475
+  - - 1341.975
+    - 1350.65
+  - - 1352.15
+    - 1355.375
   beat: 'application: crowded isobars, strong winds'
   visual: 'Picture zone: the same map with 10-m wind speed shaded (cmocean ''speed'', 52-px colour bar m/s) and teal streaklines; maths zone: a bar chart
     building bin by bin (TimeGraph style axes): ''|∇p| (hPa per 100 km)'' bins 0-2, 2-4, 4-6, 6-8, 8-10, >10 vs mean wind 10.0, 14.9, 17.1, 21.6, 22.8,
@@ -1179,16 +1643,18 @@ scenes:
     at S2 only.'
   voiceover: And this is why winds are strongest where the isobars crowd together. Let's take every point of this map over the sea, sort them by the size
     of the pressure gradient, and average the wind ten metres above the surface. Where the gradient is below two hectopascals per hundred kilometres, the
-    wind averages ten metres per second. Where it's above ten, the wind averages about twenty six. [beat] At Brest airport that same hour, a gust of eighty
-    four knots was measured, about a hundred and fifty six kilometres per hour. [beat] At the Pointe du Raz, the western tip of Brittany, a gust reached
-    two hundred and seven kilometres per hour. More than a million homes in France lost power.
+    wind averages ten metres per second. Where it's above ten, the wind averages about twenty six. At Brest airport that same hour, a gust of eighty four
+    knots was measured, about a hundred and fifty six kilometres per hour. More than a million homes in France lost power.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient; NEW G2 fluidpy.diag.climatology.binned_mean (or builder-only with CHECK); fluidpy.data.isd (Brest 911 group)
-    params: {time: 2023-11-02T03, box: '40-60 N, 30 W-5 E, sea points (NE 50 m land mask)'}
+    params:
+      time: 2023-11-02T03
+      box: 40-60 N, 30 W-5 E, sea points (NE 50 m land mask)
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); ../Fluid Dynamics/tests/data/test_isd_metar_wpc.py; CHECK DG26 (bins; n 9290
       sea points; corr 0.63; Brest 84 kt = 155.6 km/h); cited DG27, DG28
-  exaggeration: [streaklines time-compressed]
+  exaggeration:
+  - streaklines time-compressed
   kind: real data map + chart
   data: A1 ERA5 msl, u10, v10 hourly (ERA5-ARCO-ciaran2023 + -1102 land mask), 2023-11-02T03; A7 ISD Brest (on disk); cited Météo-France and Enedis numbers
     (research-scout to confirm)
@@ -1196,24 +1662,38 @@ scenes:
   runner_up: scatter plot of all 9290 points (busier)
   why: the rule shown with real numbers, then the human impact (cited)
   related:
-  - {movie: '#42', slug: planned (extratropical cyclones), covers: 'storm life cycle, bomb cyclones, Ciaran'}
+  - movie: '#42'
+    slug: planned (extratropical cyclones)
+    covers: storm life cycle, bomb cyclones, Ciaran
   layout_5b: 'Map x 80-1000 with the wind-speed colour bar beside the map in the text column (52-px ticks, unit label), never on the map, in every zoom
     state. Bar chart in the maths zone; ''Brest'' and ''Pointe du Raz'' labelled at the spots within 1 s of their words; ''84 kt ≈ 156 km/h'', ''207 km/h''
     and the pylon icon in the text column with gold links. SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860),
     never on it. (''Data: ERA5 · ISD (NOAA NCEI) Brest · 2 Nov 2023''). Streaklines animated through the whole scene (not only S2).'
 - id: s30_coriolis
-  t: [1361.775, 1427.425]
+  t:
+  - 1356.175
+  - 1421.825
   sentence_times:
-  - [1361.775, 1363.9]
-  - [1364.25, 1366.825]
-  - [1367.175, 1373.4]
-  - [1373.75, 1380.75]
-  - [1381.1, 1390.45]
-  - [1390.8, 1396.75]
-  - [1397.1, 1401.425]
-  - [1401.775, 1408.525]
-  - [1408.875, 1416.25]
-  - [1416.6, 1426.625]
+  - - 1356.175
+    - 1358.3
+  - - 1358.65
+    - 1361.225
+  - - 1361.575
+    - 1367.8
+  - - 1368.15
+    - 1375.15
+  - - 1375.5
+    - 1384.85
+  - - 1385.2
+    - 1391.15
+  - - 1391.5
+    - 1395.825
+  - - 1396.175
+    - 1402.925
+  - - 1403.275
+    - 1410.65
+  - - 1411.0
+    - 1421.025
   beat: 'application: why the wind blows along the isobars (pointer)'
   visual: 'Same map: teal wind arrows (thinned) nearly along the isobars; gold anticlockwise arc round the L ''anticlockwise, seen from above'' (54 px).
     S3: small spinning-Earth thumbnail; S4: at one point, the light-orange hollow-head pressure-gradient-force arrow (towards L) and a violet Coriolis arrow
@@ -1225,32 +1705,47 @@ scenes:
     ground, the Coriolis push grows until it balances the pressure gradient force, and then the wind blows along the isobars. The bigger the pressure gradient,
     the faster the wind must blow for the two pushes to balance. That''s the deeper reason crowded isobars mean strong winds. Near the ground, friction
     slows the wind, and lets it cross the isobars a little, towards the low. We built all of this in the cross product movie on our spinning Earth, and
-    a later Coriolis movie takes it further. One warning: meteorologists also say gradient wind for a different idea, a balance round curved isobars, which has its own movie too.'
+    a later Coriolis movie takes it further. One warning: meteorologists also say gradient wind for a different idea, a balance round curved isobars, which
+    has its own movie too.'
   on_screen_eq: null
   physics_source:
     fn: data (ERA5 u10, v10); balance sketch illustrative
-    params: {time: 2023-11-02T03}
+    params:
+      time: 2023-11-02T03
     test: CHECK DG29 (mean cross-isobar angle of the 10-m wind over the sea in the box is positive towards the low and < 45 deg)
-  exaggeration: [balance arrows illustrative (no numbers spoken)]
+  exaggeration:
+  - balance arrows illustrative (no numbers spoken)
   kind: real data map + sketch
   data: A1 ERA5 msl, u10, v10 hourly (ERA5-ARCO-ciaran2023 + -1102 land mask), 2023-11-02T03
   tool: Remotion SVG
   runner_up: —
   why: 'answers the obvious question without absorbing #29; separates ''gradient wind'' from ''gradient'''
   related:
-  - {movie: '#3', slug: ch00_cross_product_uses, covers: 'Coriolis effect, f, geostrophic balance and friction inflow, already derived (back-pointer)'}
-  - {movie: '#29', slug: planned (Coriolis effect), covers: 'Coriolis effect, geostrophic balance'}
-  - {movie: '#30', slug: planned (geostrophic and gradient wind), covers: 'geostrophic, gradient, cyclostrophic and inertial flow'}
+  - movie: '#3'
+    slug: ch00_cross_product_uses
+    covers: Coriolis effect, f, geostrophic balance and friction inflow, already derived (back-pointer)
+  - movie: '#29'
+    slug: planned (Coriolis effect)
+    covers: Coriolis effect, geostrophic balance
+  - movie: '#30'
+    slug: planned (geostrophic and gradient wind)
+    covers: geostrophic, gradient, cyclostrophic and inertial flow
   layout_5b: 'Same map; the force-balance sketch moves beside the map (maths zone) with a gold link to its point; keywords in the column. SourceBelow (K2):
     the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. Every wind arrow or streak is animated (moving dashes along
     each arrow, or particles drifting along the flow at a speed scaled to the wind; scale in the manifest); arrows keep the data''s direction and length.'
 - id: s31_latest_chart
-  t: [1427.425, 1461.15]
+  t:
+  - 1421.825
+  - 1455.55
   sentence_times:
-  - [1427.425, 1437.8]
-  - [1438.15, 1444.825]
-  - [1445.175, 1454.85]
-  - [1455.2, 1460.35]
+  - - 1421.825
+    - 1432.2
+  - - 1432.55
+    - 1439.225
+  - - 1439.575
+    - 1449.25
+  - - 1449.6
+    - 1454.75
   beat: 'application: the latest chart (series rule: latest data)'
   visual: 'Full width: GFS analysis 18 UTC 27 Oct 2026 msl over the North Atlantic (isobars every 4 hPa, L 961 just east of Iceland), 10-m wind shaded;
     gold bracket on the crowded isobars over the sea ''≈ 10 hPa per 100 km''; keyword ''GFS, 27 Oct 2026''.'
@@ -1261,7 +1756,8 @@ scenes:
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient on GFS msl (masked where orography > 50 m)
-    params: {time: 2026-10-27T18}
+    params:
+      time: 2026-10-27T18
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG30 (low 960.6 hPa at 66.0 N 12.0 W; max sea gradient 10.4 hPa/100 km;
       max 10-m wind 25.6 m/s at 63.0 N 1.25 E with gradient 9.1)
   exaggeration: []
@@ -1275,74 +1771,108 @@ scenes:
     961'' and the bracket on the map; the date keyword ''GFS, 27 Oct 2026'' moves into the source line below: ''Data: NOAA NCEP GFS analysis · 27 Oct 2026,
     18 UTC'' (no title on the map).'
 - id: s32_vertical_pressure
-  t: [1461.15, 1549.225]
+  t:
+  - 1455.55
+  - 1543.625
   sentence_times:
-  - [1461.15, 1465.075]
-  - [1465.425, 1477.1]
-  - [1478.6, 1487.55]
-  - [1487.9, 1495.075]
-  - [1495.425, 1499.8]
-  - [1501.3, 1504.2]
-  - [1504.55, 1507.6]
-  - [1507.95, 1515.8]
-  - [1516.15, 1530.2]
-  - [1531.7, 1538.65]
-  - [1539.0, 1548.425]
+  - - 1455.55
+    - 1459.475
+  - - 1459.825
+    - 1471.5
+  - - 1473.0
+    - 1481.95
+  - - 1482.3
+    - 1489.475
+  - - 1489.825
+    - 1494.2
+  - - 1495.7
+    - 1498.6
+  - - 1498.95
+    - 1502.0
+  - - 1502.35
+    - 1510.2
+  - - 1510.55
+    - 1524.6
+  - - 1526.1
+    - 1533.05
+  - - 1533.4
+    - 1542.825
   beat: 'application: the vertical pressure gradient and hydrostatic balance'
   visual: 'Picture zone: the Singapore column again; pressure ticks every hPa near the ground spaced about 9 m (zoomed inset beside the column) vs Ciarán''s
     isobars 7.75 km per hPa (a small map inset with a long horizontal bracket), the ratio ''≈ 850×'' and ''ordinary day ≈ 10 000×''. S6: upward pressure-push
     arrow (orange family) and downward gravity arrow (brown) equal on a parcel. Maths zone: ''∂p/∂z = −ρg'' (84 px), CalcStack ''1.17 × 9.81 ≈ 11.5 Pa/m''
     vs ''balloon 10.9 Pa/m''. S11: keyword ''pressure coordinates'' thumbnail.'
   voiceover: 'Pressure has a gradient going up too, and it''s enormous. The Singapore balloon found the pressure falling by about zero point one one hectopascals
-    for every metre it rose near the ground: one hectopascal in about nine metres. [beat] Ciarán''s crowded isobars needed thirty one kilometres for four
-    hectopascals, which is about eight kilometres per hectopascal. So the upward pressure gradient was about eight hundred and fifty times stronger than
-    Ciarán''s sideways one. On an ordinary day, it''s about ten thousand times stronger. [beat] So why doesn''t it blast the air into space? Because gravity
-    pulls down just as hard. This is hydrostatic balance, from the weather basics movie: partial p by partial z equals minus rho g. Near the ground in Singapore,
-    rho is about one point one seven kilograms per cubic metre, and g is nine point eight one, so that''s about eleven and a half pascals per metre, close
-    to the balloon''s ten point nine. [beat] So the upward push is almost exactly cancelled, and the weather is driven by the tiny sideways part. Because
-    pressure falls so steadily with height, meteorologists often use pressure itself as a vertical coordinate, which has its own movie.'
-  on_screen_eq: {latex: '\frac{\partial p}{\partial z}=-\rho g', vallis_eq: (1.51), page_png: chapters/pages/ch01/p032.png}
+    for every metre it rose near the ground: one hectopascal in about nine metres. Ciarán''s crowded isobars needed thirty one kilometres for four hectopascals,
+    which is about eight kilometres per hectopascal. So the upward pressure gradient was about eight hundred and fifty times stronger than Ciarán''s sideways
+    one. On an ordinary day, it''s about ten thousand times stronger. So why doesn''t it blast the air into space? Because gravity pulls down just as hard.
+    This is hydrostatic balance, from the weather basics movie: partial p by partial z equals minus rho g. Near the ground in Singapore, rho is about one
+    point one seven kilograms per cubic metre, and g is nine point eight one, so that''s about eleven and a half pascals per metre, close to the balloon''s
+    ten point nine. So the upward push is almost exactly cancelled, and the weather is driven by the tiny sideways part. Because pressure falls so steadily
+    with height, meteorologists often use pressure itself as a vertical coordinate, which has its own movie.'
+  on_screen_eq:
+    latex: \frac{\partial p}{\partial z}=-\rho g
+    vallis_eq: (1.51)
+    page_png: chapters/pages/ch01/p032.png
   physics_source:
     fn: 'fluidpy.data.igra (surface 1008.5 hPa, 33 m -> 925 hPa, 798 m: -10.92 Pa/m); fluidpy.core.statics hydrostatic (rho g with rho = p/(R T) at the
       surface); builder-only ratios'
-    params: {station: Singapore SNM00048698, time: 2023-11-01T00}
+    params:
+      station: Singapore SNM00048698
+      time: 2023-11-01T00
     test: ../Fluid Dynamics/tests/data/test_igra.py; CHECK DG31s (0.109 hPa/m; 9.16 m per hPa; Ciarán 7.75 km per hPa; ratio 846 -> 'about eight hundred
       and fifty'; rho 1.168; rho g 11.46 -> 'about eleven and a half'; balloon 10.92 -> 'ten point nine')
-  exaggeration: [vertical spacing inset magnified]
+  exaggeration:
+  - vertical spacing inset magnified
   kind: column + equation
   data: IGRA2 Singapore 2023-11-01T00 (registered); A1 ERA5 Ciarán msl (bracket inset)
   tool: '@remotion/three column + tex'
   runner_up: —
   why: the 3-D gradient's huge vertical part, cancelled by gravity
   related:
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
-  - {movie: '#23A', slug: planned (pressure coordinates), covers: 'pressure as a vertical coordinate, constant-pressure charts'}
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
+  - movie: '#23A'
+    slug: planned (pressure coordinates)
+    covers: pressure as a vertical coordinate, constant-pressure charts
   layout_5b: 'The Singapore column again (Column/slab (K4 col3d): every vertical edge runs from the floor all the way to the top face; top and bottom rims
     drawn.); the zoomed inset of the 9-m spacing sits beside the column, not on it; Ciarán''s isobar bracket as a small map inset with its own source line;
     equations in the maths zone. Source line below: ''Data: IGRA v2 (NOAA NCEI) · Singapore · ERA5''.'
 - id: s33_fronts
-  t: [1549.225, 1592.225]
+  t:
+  - 1543.625
+  - 1586.625
   sentence_times:
-  - [1549.225, 1551.35]
-  - [1551.7, 1558.875]
-  - [1559.225, 1564.575]
-  - [1564.925, 1569.475]
-  - [1570.975, 1579.025]
-  - [1579.375, 1586.775]
-  - [1587.125, 1591.425]
+  - - 1543.625
+    - 1545.75
+  - - 1546.1
+    - 1553.275
+  - - 1553.625
+    - 1558.975
+  - - 1559.325
+    - 1563.875
+  - - 1565.375
+    - 1573.425
+  - - 1573.775
+    - 1581.175
+  - - 1581.525
+    - 1585.825
   beat: 'application: temperature gradients at fronts'
   visual: 'Full-width map: ERA5 850 hPa |grad T| shaded (cmocean ''amp'', 52-px colour bar ''K per 100 km'', 0-12) with the 850 hPa isotherms; S3: gold
     band highlight along the high-gradient band near the storm with ''≈ 11'' (68 px) and a muted ''≈ 1'' over the quiet area; S4: the front line drawn ONLY
     if it is attached to the tracked low (fluidpy.diag.fronts.front_lines + track; storm-tracker rule); S6: grad-T arrows crowd and all point across the
     band to the warm side.'
   voiceover: Now back to temperature. Here again is the map of temperature one and a half kilometres up, at six in the evening on the first of November.
-    Over most of the map, the gradient is about one degree per hundred kilometres. But in one narrow band near the storm, it reaches about eleven. [beat]
-    That band is a front, a boundary between a warm air mass and a cold one, as we saw in the weather basics movie. At a front, the temperature gradient
-    is squeezed into a narrow zone, more than ten times stronger than around it. All its arrows point across the front, towards the warm side.
+    Over most of the map, the gradient is about one degree per hundred kilometres. But in one narrow band near the storm, it reaches about eleven. That
+    band is a front, a boundary between a warm air mass and a cold one, as we saw in the weather basics movie. At a front, the temperature gradient is squeezed
+    into a narrow zone, more than ten times stronger than around it. All its arrows point across the front, towards the warm side.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient; fluidpy.diag.fronts.front_fields / front_lines; fluidpy.diag.cyclone.track_by_continuity
-    params: {time: 2023-11-01T18, box: '40-56 N, 20 W-2 E'}
+    params:
+      time: 2023-11-01T18
+      box: 40-56 N, 20 W-2 E
     test: ../Fluid Dynamics/tests/diag/test_fronts.py; CHECK DG32 (median 0.96; max 11.4 at 49.0 N 12.5 W; ratio > 10; band attached to the tracked low
       within 500 km, else S3 says 'near the storm' only - it already does)
   exaggeration: []
@@ -1352,23 +1882,100 @@ scenes:
   runner_up: GIBS true colour cloud band under the |grad T| contours
   why: a front is a squeezed gradient
   related:
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
-  - {movie: '#40', slug: planned (air masses and fronts), covers: 'fronts in depth, frontogenesis'}
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
+  - movie: '#40'
+    slug: planned (air masses and fronts)
+    covers: fronts in depth, frontogenesis
   layout_5b: 'Map x 80-1380 with the |grad T| colour bar beside the map in the text column (52-px ticks, unit label), never on the map, in every zoom state.
     ''≈ 11'' and ''≈ 1'' in the text column with gold links to the band and the quiet area. SourceBelow (K2): the data-source line sits fully below the
     picture (>= 16 px gap, y <= 860), never on it. (''Data: ERA5 (Copernicus C3S) · 1 Nov 2023, 18 UTC · 850 hPa'').'
-- id: s34_advection
-  t: [1592.225, 1658.25]
+- id: s33b_front_stack
+  beat: 'application: a front in 3-D (layer stack, HOUSE_STYLE §5b; added in build 1 from data_needs.md §G)'
+  visual: 'LayerStack3D of four ERA5 layers (850, 700, 500, 300 hPa; 1000 hPa is below ground on the front and is not shown) over 30-50 N, 110-82 W at 12
+    UTC 22 Dec 2022 (Winter Storm Elliott''s Arctic front): each layer |grad T| (cmocean amp, 0-8 K per 100 km, 100-km smoothing) with 4-K isotherms and
+    orange grad-T arrows; gold rods mark each layer''s |grad T| maximum on the three cross-front lines (39, 40, 41 N) and, from S5, the 850 hPa front copied
+    onto the upper layers (dashed gold), so the 260-450 km offset to the cold side is visible. Camera: side view from outside, then one slow orbit from
+    the bottom layer to the top (S4-S6); never inside the stack. Colour bar and the level list in the text column on the K1 right panel.'
+  voiceover: A front isn't just a line on a map. Let's stack four temperature maps above a strong cold front over the central United States, on the twenty
+    second of December twenty twenty two, from about one and a half to nine kilometres up. On every layer, the orange arrows are grad capital T, pointing
+    towards warmer air. Where the isotherms crowd, the arrows are longest, and that's the front on that layer. Let's circle the stack from outside, from
+    the bottom layer to the top. Every layer above the bottom one has its crowded band on the cold side of the bottom front, between about two hundred and
+    sixty and four hundred and fifty kilometres behind it. So a front is a sloping surface that leans back over the cold air, and the gradient finds it
+    on every layer.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.movie_gradient.front_tilt (seed level 850 hPa, lon window 104-80 W); fluidpy.diag.fronts.front_fields per level
+    params:
+      time: 2022-12-22T12
+      levels:
+      - 850
+      - 700
+      - 500
+      - 300
+      smooth_km: 100
+      seed_lats:
+      - 39
+      - 40
+      - 41
+    test: ../Fluid Dynamics/tests/data/test_movie_gradient.py (front_tilt V1); tests/diag/test_fronts.py; CHECK DG33b (build 1)
+  exaggeration:
+  - layer separation ×1.15 per km of height (heights labelled in the text column)
+  - arrow lengths for legibility (no scale drawn)
+  kind: 3-D layer stack
+  data: D8 ERA5-ARCO-front-20221222-pl5 (data/derived/ch00/era5_front_elliott_2022-12-22T12_pl5.nc)
+  tool: '@remotion/three + house LayerStack3D (K5)'
+  runner_up: 'the Feb 2021 Arctic front (rejected by the data scout: no upper front)'
+  why: 'a front is a sloping surface: the gradient finds it on every layer, leaning back over the cold air'
+  related:
+  - movie: M04
+    slug: planned (air masses and fronts)
+    covers: fronts in full
+  layout_5b: 'Stack on the left (house K1 right panel from x 980, text on the faded part only); colour bar ''|grad T| per 100 km'' beside it in the column;
+    level list ''850 hPa ≈ 1.5 km'' … ''300 hPa ≈ 9 km''; ''cold side, 260–450 km back''; place label ''central United States'' on the bottom layer within
+    1 s of its words; source line ''Data: ERA5 (Copernicus C3S) · 22 Dec 2022, 12 UTC'' below. Strictly no fly-through (HOUSE_STYLE §5b).'
+  t:
+  - 1586.625
+  - 1640.75
   sentence_times:
-  - [1592.225, 1597.9]
-  - [1598.25, 1609.425]
-  - [1609.775, 1615.875]
-  - [1616.225, 1625.05]
-  - [1626.55, 1630.65]
-  - [1631.0, 1635.85]
-  - [1637.35, 1643.325]
-  - [1643.675, 1653.125]
-  - [1653.475, 1657.45]
+  - - 1586.625
+    - 1589.425
+  - - 1589.775
+    - 1602.0
+  - - 1602.35
+    - 1608.475
+  - - 1608.825
+    - 1614.625
+  - - 1614.975
+    - 1619.55
+  - - 1619.9
+    - 1631.2
+  - - 1632.7
+    - 1639.95
+- id: s34_advection
+  t:
+  - 1640.75
+  - 1706.775
+  sentence_times:
+  - - 1640.75
+    - 1646.425
+  - - 1646.775
+    - 1657.95
+  - - 1658.3
+    - 1664.4
+  - - 1664.75
+    - 1673.575
+  - - 1675.075
+    - 1679.175
+  - - 1679.525
+    - 1684.375
+  - - 1685.875
+    - 1691.85
+  - - 1692.2
+    - 1701.65
+  - - 1702.0
+    - 1705.975
   beat: 'application: advection as wind speed times the directional derivative'
   visual: 'Picture zone: zoom at Brest; orange grad-T arrow (4.1) and a teal wind arrow (34 m/s, from just west of south) with a gold angle arc ''138°'';
     the shadow of grad T on the wind direction (orange band, negative side hatched rose with ''−''). Maths zone CalcStack: ''4.1 × cos 138° ≈ −3.0 °C per
@@ -1377,17 +1984,22 @@ scenes:
   voiceover: The gradient also tells us how the wind changes the temperature at a fixed place. Over Brest at that hour, the wind at that height blew at
     thirty four metres per second, from just west of south, at a hundred and thirty eight degrees to grad capital T. So along the wind, the temperature
     changes at grad capital T dot the wind's direction. That's four point one times the cosine of a hundred and thirty eight degrees, which is about minus
-    three degrees per hundred kilometres. [beat] It's negative because the wind blows towards colder air. Times the wind speed, that's minus three point
-    seven degrees per hour. [beat] This is v dot grad capital T, the advection term from the dot product movie. Because the air keeps arriving from the
-    warmer side, a fixed thermometer at Brest would warm by about three point seven degrees per hour from this alone. The material derivative movie takes
-    this apart fully.
-  on_screen_eq: {latex: '\mathbf v\cdot\nabla T=|\mathbf v|\,\frac{\partial T}{\partial s}', vallis_eq: advection term of (1.48)-style material derivative
-      for T (Vallis (2.27) spherical form); directional derivative along the wind (Kundu p. 53), page_png: chapters/pages/ch02/p081.png; ../Fluid Dynamics/chapters/pages/ch02/p080.png}
+    three degrees per hundred kilometres. It's negative because the wind blows towards colder air. Times the wind speed, that's minus three point seven
+    degrees per hour. This is v dot grad capital T, the advection term from the dot product movie. Because the air keeps arriving from the warmer side,
+    a fixed thermometer at Brest would warm by about three point seven degrees per hour from this alone. The material derivative movie takes this apart
+    fully.
+  on_screen_eq:
+    latex: \mathbf v\cdot\nabla T=|\mathbf v|\,\frac{\partial T}{\partial s}
+    vallis_eq: advection term of (1.48)-style material derivative for T (Vallis (2.27) spherical form); directional derivative along the wind (Kundu p.
+      53)
+    page_png: chapters/pages/ch02/p081.png; ../Fluid Dynamics/chapters/pages/ch02/p080.png
   physics_source:
     fn: fluidpy.diag.advection.advection; fluidpy.core.operators.directional_derivative; fluidpy.geo.vectors.angle_between
     params:
       time: 2023-11-01T18
-      point: [48.5, -4.5]
+      point:
+      - 48.5
+      - -4.5
     test: ../Fluid Dynamics/tests/diag/test_advection.py; CHECK DG33 (angle 137.8; -3.01; 34.00 m/s; -3.68 K/h = diag.advection value)
   exaggeration: []
   kind: data zoom + calc
@@ -1396,26 +2008,44 @@ scenes:
   runner_up: —
   why: 'links the directional derivative to 0.1b''s advection and #10'
   related:
-  - {movie: 0.1b, slug: ch00_dot_product_v01b, covers: 'dot product, shadow/projection, advection v dot grad T'}
-  - {movie: '#10', slug: planned (material derivative), covers: 'material derivative, advection, continuity'}
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
+  - movie: 0.1b
+    slug: ch00_dot_product_v01b
+    covers: dot product, shadow/projection, advection v dot grad T
+  - movie: '#10'
+    slug: planned (material derivative)
+    covers: material derivative, advection, continuity
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
   layout_5b: 'Zoom at Brest (soft frame edges), back out at scene end; CalcStack in the maths zone; the fixed thermometer icon at the spot (glyph), its
     ''+3.7 °C per hour'' in the column. SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. Every
     wind arrow or streak is animated (moving dashes along each arrow, or particles drifting along the flow at a speed scaled to the wind; scale in the manifest);
     arrows keep the data''s direction and length.'
 - id: s35_sea_breeze
-  t: [1658.25, 1718.425]
+  t:
+  - 1706.775
+  - 1766.95
   sentence_times:
-  - [1658.25, 1663.45]
-  - [1663.8, 1672.025]
-  - [1672.375, 1678.775]
-  - [1679.125, 1684.65]
-  - [1685.0, 1690.95]
-  - [1691.3, 1696.675]
-  - [1698.175, 1701.8]
-  - [1702.15, 1710.65]
-  - [1711.0, 1715.2]
-  - [1715.55, 1717.625]
+  - - 1706.775
+    - 1711.975
+  - - 1712.325
+    - 1720.55
+  - - 1720.9
+    - 1727.3
+  - - 1727.65
+    - 1733.175
+  - - 1733.525
+    - 1739.475
+  - - 1739.825
+    - 1745.2
+  - - 1746.7
+    - 1750.325
+  - - 1750.675
+    - 1759.175
+  - - 1759.525
+    - 1763.725
+  - - 1764.075
+    - 1766.15
   beat: 'application: a land-sea temperature gradient (sea breeze)'
   visual: 'Picture zone: MODIS Aqua 250 m true colour of Normandy, 24 Jun 2024 (on disk) with the coast; S4-S5: two probe dots (inland 49.25 N 0 E; Channel
     49.75 N 0 E) with ''24.6 °C'' and ''16.1 °C'' (68 px) over ERA5 t2m contours; gold bracket ''55 km''. Maths zone CalcStack ''8.5 °C / 55.6 km ≈ 15 °C
@@ -1424,61 +2054,84 @@ scenes:
   voiceover: Some of the sharpest temperature gradients form on sunny days, along coasts. Here is the coast of Normandy, in northern France, at one in the
     afternoon on the twenty fourth of June twenty twenty four. The satellite picture shows small fair-weather clouds over the land, and clear skies over
     the sea. Inland, the air two metres above the ground was at twenty four point six degrees. Over the Channel, about fifty five kilometres to the north,
-    it was sixteen point one. That's about fifteen degrees per hundred kilometres, sharper than the storm's front. [beat] Land warms faster in the sun than
-    the sea does. The warm air over the land expands and rises, so near the ground the pressure ends up a little higher over the sea than over the land.
-    That small pressure gradient pushes cooler sea air inland. This is the sea breeze.
+    it was sixteen point one. That's about fifteen degrees per hundred kilometres, sharper than the storm's front. Land warms faster in the sun than the
+    sea does. The warm air over the land expands and rises, so near the ground the pressure ends up a little higher over the sea than over the land. That
+    small pressure gradient pushes cooler sea air inland. This is the sea breeze.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient on ERA5 t2m; data only for the image
     params:
       time: 2024-06-24T13
       points:
-      - [49.25, 0.0]
-      - [49.75, 0.0]
+      - - 49.25
+        - 0.0
+      - - 49.75
+        - 0.0
     test: '../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG34 (24.6, 16.1; 55.6 km; 15.3 per 100 km; image: cumulus over land,
       clear over sea - builder confirms by eye and records)'
-  exaggeration: [cross-section cartoon illustrative (no numbers)]
+  exaggeration:
+  - cross-section cartoon illustrative (no numbers)
   kind: satellite image + data + sketch
   data: A9 ERA5 t2m 2024-06-24 (on disk); A10 MODIS Aqua 250 m (on disk); D5 ERA5 u10/v10 06-18 UTC + IEM METAR LFRG/LFRK/LFOH for the onshore turn
   tool: Remotion SVG over the MODIS JPEG
   runner_up: HRRR 3-km Florida sea-breeze day (CONUS only; better resolved breeze, outside the series' French world)
   why: a daily, local gradient that drives a wind
   related:
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
   layout_5b: 'MODIS image x 80-1000; probe dots on the image, their values ''24.6 °C'', ''16.1 °C'' in the text column with gold links; ''55 km'' bracket
     on the image. SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. (''Image: NASA MODIS Aqua (GIBS)
     · data: ERA5 · 24 Jun 2024''). Onshore arrows animated.'
 - id: s36_jet
-  t: [1718.425, 1781.7]
+  t:
+  - 1766.95
+  - 1830.025
   sentence_times:
-  - [1718.425, 1722.625]
-  - [1722.975, 1731.15]
-  - [1731.5, 1743.175]
-  - [1744.675, 1753.825]
-  - [1755.325, 1758.075]
-  - [1758.425, 1767.975]
-  - [1768.325, 1772.4]
-  - [1773.9, 1780.9]
+  - - 1766.95
+    - 1771.15
+  - - 1771.5
+    - 1779.675
+  - - 1780.025
+    - 1791.7
+  - - 1793.2
+    - 1802.15
+  - - 1803.65
+    - 1806.4
+  - - 1806.75
+    - 1816.3
+  - - 1816.65
+    - 1820.725
+  - - 1822.225
+    - 1829.225
   beat: 'application: the jet stream above the strongest temperature gradient'
   visual: 'Picture zone: zonal-mean cross-section equator -> 90 N, 1000 -> 100 hPa (log-p axis labelled in km too), temperature shaded (cmocean ''thermal'')
     with isotherms; S2: the |∂T/∂y| maximum band near 44 N glows gold, ''≈ 7 °C per 1000 km''; S3: the geostrophic zonal wind contours (teal, every 5 m/s)
     appear with the jet core ''≈ 30 m/s'' at ≈ 10.5 km, 42 N, right above. S4: cross-fade to a three.js globe with today''s GFS 250 hPa wind speed over
     the North Atlantic (teal ribbon), max ''66 m/s ≈ 240 km/h'' at 40 N 52 W. S5 keyword ''thermal wind''.'
-  voiceover: High up, temperature gradients and the jet stream go together. Here is the average for November twenty twenty three, all the way round the
-    Earth, as a slice from the equator to the North Pole. The temperature drops fastest towards the pole near forty four degrees north, by about seven degrees
-    per thousand kilometres, averaged from about one and a half to nine kilometres up. [beat] Right above that zone, about ten and a half kilometres up,
-    the westerly wind is strongest, about thirty metres per second on average. [beat] Single days can be much stronger. On the twenty eighth of October
-    twenty twenty six, the GFS analysis shows the jet over the North Atlantic at sixty six metres per second. That's about two hundred and forty kilometres
-    per hour. [beat] Why winds grow with height above a temperature gradient is called the thermal wind, and it has its own movie.
+  voiceover: High up, temperature gradients and the jet stream go together. Here is the average for September twenty twenty six, all the way round the Earth,
+    as a slice from the equator to the North Pole. The temperature drops fastest towards the pole near forty five degrees north, by about six degrees per
+    thousand kilometres, averaged from about one and a half to nine kilometres up. Right above that zone, about twelve kilometres up, the westerly wind
+    is strongest, about twenty six metres per second on average. Single days can be much stronger. On the twenty eighth of October twenty twenty six, the
+    GFS analysis shows the jet over the North Atlantic at sixty six metres per second. That's about two hundred and forty kilometres per hour. Why winds
+    grow with height above a temperature gradient is called the thermal wind, and it has its own movie.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.atmos.geostrophic_wind_from_height (zonal-mean Z broadcast in longitude); fluidpy.geo.sphere.gradient (T)
     params:
       month: 2023-11
-      levels_hPa: [850, 700, 500, 400, 300, 250, 200]
+      levels_hPa:
+      - 850
+      - 700
+      - 500
+      - 400
+      - 300
+      - 250
+      - 200
     test: ../Fluid Dynamics/tests/geo/test_atmos.py; ../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG35 (layer-mean steepest -6.98
       K/1000 km at 44 N; u_g max 31.5 m/s at 42 N 250 hPa, Z 10.43 km; GFS 66.07 m/s at 40.0 N 51.75 W = 237.9 km/h)
-  exaggeration: [section height stretched (log-p axis)]
+  exaggeration:
+  - section height stretched (log-p axis)
   kind: cross-section + 3-D globe
   data: A11 ERA5 monthly pl Nov 2023 zonal means (on disk); D6 ERA5 monthly u, t for the newest complete month (refresh, real u instead of geostrophic);
     A12 GFS-ANL-jet250 2026-10-28T18 (on disk)
@@ -1486,8 +2139,12 @@ scenes:
   runner_up: Cesium globe with the jet as a translucent band
   why: 'the jet sits on top of the gradient; pointer to #32'
   related:
-  - {movie: '#32', slug: planned (thickness and thermal wind), covers: 'hypsometric equation, thermal wind, jets'}
-  - {movie: '#23A', slug: planned (pressure coordinates), covers: 'pressure as a vertical coordinate, constant-pressure charts'}
+  - movie: '#32'
+    slug: planned (thickness and thermal wind)
+    covers: hypsometric equation, thermal wind, jets
+  - movie: '#23A'
+    slug: planned (pressure coordinates)
+    covers: pressure as a vertical coordinate, constant-pressure charts
   layout_5b: 'Section x 80-1000 with its temperature colour bar beside the map in the text column (52-px ticks, unit label), never on the map, in every
     zoom state. Then the globe: GlobeFrame; the jet drawn as animated streaks along the GFS 250-hPa wind (speed scaled), its speed colour bar beside the
     map in the text column (52-px ticks, unit label), never on the map, in every zoom state. If the camera moves in to the jet maximum, ZOOM-REVEAL (HOUSE_STYLE
@@ -1499,26 +2156,35 @@ scenes:
     ≈ 240 km/h'' in the text column with a gold link. Sources below: ''Data: ERA5 monthly (Copernicus C3S) · Nov 2023'' under the section; ''Data: NOAA
     NCEP GFS analysis · 28 Oct 2026, 18 UTC'' under the globe.'
 - id: s37_gulf_stream
-  t: [1781.7, 1819.325]
+  t:
+  - 1830.025
+  - 1871.35
   sentence_times:
-  - [1781.7, 1784.675]
-  - [1785.025, 1794.625]
-  - [1794.975, 1802.5]
-  - [1802.85, 1807.45]
-  - [1807.8, 1813.6]
-  - [1813.95, 1818.525]
+  - - 1830.025
+    - 1833.0
+  - - 1833.35
+    - 1842.95
+  - - 1843.3
+    - 1854.525
+  - - 1854.875
+    - 1859.475
+  - - 1859.825
+    - 1865.625
+  - - 1865.975
+    - 1870.55
   beat: 'application: an ocean temperature gradient (Gulf Stream)'
   visual: 'Full width: three.js globe turning to the US east coast; SST (cmocean ''thermal'') from D7 for the newest day, the Gulf Stream''s north wall
     highlighted by |grad SST| contours (gold); S3: a gold bracket across the north wall with the measured drop and distance (numbers added by the builder
     from D7, spoken in the revised S3). S5: a small storm-track thumbnail (keyword ''storms deepen near it''). Sound: none.'
   voiceover: The ocean has temperature gradients too. Off the east coast of the United States, the Gulf Stream carries warm water from the tropics towards
-    the north-east, right next to colder water from the north. Along its northern edge, the sea-surface temperature can drop by several degrees within a
-    few tens of kilometres. That's one of the sharpest temperature gradients in the open ocean. Winter storms often deepen fastest near it, so forecasters
-    watch it closely. The great ocean currents have their own movies later in this series.
+    the north-east, right next to colder water from the north. Along its northern edge, on the twenty ninth of October twenty twenty six, the sea-surface
+    temperature dropped by about six and a half degrees in about thirty five kilometres. That's one of the sharpest temperature gradients in the open ocean.
+    Winter storms often deepen fastest near it, so forecasters watch it closely. The great ocean currents have their own movies later in this series.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.gradient on SST
-    params: {box: '30-45 N, 80-55 W'}
+    params:
+      box: 30-45 N, 80-55 W
     test: '../Fluid Dynamics/tests/geo/test_sphere.py (gradient V1, V3, V7); CHECK DG36 (after D7: the max cross-front drop over <= 50 km at the north wall;
       S3 re-worded to the measured numbers)'
   exaggeration: []
@@ -1528,7 +2194,9 @@ scenes:
   runner_up: Cesium globe
   why: the same idea in the ocean; points to the Gulf Stream movie
   related:
-  - {movie: '#53', slug: planned (Gulf Stream and Kuroshio), covers: 'western boundary currents, SST fronts'}
+  - movie: '#53'
+    slug: planned (Gulf Stream and Kuroshio)
+    covers: western boundary currents, SST fronts
   layout_5b: 'ZOOM-REVEAL (HOUSE_STYLE §5b, cross-product v5 s33 numbers, K1 GlobeFrame): unzoomed, the whole globe sits on the left, separate from the
     text; zoomed, the globe renders full-bleed 1920 x 1080, camera dist 4.3 -> 2.4 over about 1.5 s centred near x 600, y 470 (globePath keyed per sentence);
     right side darkened 0 -> 82 % background over x 980-1160, flat 82 % from x 1160 to the edge (darkened, not blurred; fades in over 1 s as the zoom starts);
@@ -1539,16 +2207,26 @@ scenes:
     The bracket numbers and the storm-track thumbnail in the text column. Zoom back out to the start view on S6. Source line ''Data: NOAA OISST v2.1 · <day>''
     below the globe in both states.'
 - id: s38_recap
-  t: [1819.325, 1878.1]
+  t:
+  - 1871.35
+  - 1930.125
   sentence_times:
-  - [1819.325, 1825.825]
-  - [1826.175, 1832.925]
-  - [1833.275, 1839.15]
-  - [1839.5, 1846.65]
-  - [1847.0, 1852.475]
-  - [1852.825, 1858.9]
-  - [1859.25, 1869.85]
-  - [1870.2, 1877.3]
+  - - 1871.35
+    - 1877.85
+  - - 1878.2
+    - 1884.95
+  - - 1885.3
+    - 1891.175
+  - - 1891.525
+    - 1898.675
+  - - 1899.025
+    - 1904.5
+  - - 1904.85
+    - 1910.925
+  - - 1911.275
+    - 1921.875
+  - - 1922.225
+    - 1929.325
   beat: recap ('To sum up', one beat per sentence)
   visual: 'Full width, mini pictures one per sentence (HOUSE_STYLE §2 recap): (1) three tiny fields; (2) ''∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z)''; (3) the hill arrow
     ''|∇f| = fastest rate''; (4) right-angle tick on a contour + crowded lines; (5) ''∂f/∂s = ∇f · n̂''; (6) ''1/(a cos φ)''; (7) ''−(1/ρ)∇p'' with H ->
@@ -1561,7 +2239,8 @@ scenes:
     jet stream blows above the strongest of them.
   on_screen_eq: null
   physics_source: null
-  exaggeration: [recap thumbnails (illustrative)]
+  exaggeration:
+  - recap thumbnails (illustrative)
   kind: recap
   data: (re-uses scene frames)
   tool: Remotion SVG
@@ -1570,11 +2249,16 @@ scenes:
   related: []
   layout_5b: Mini pictures; a small source line under any real-data mini picture. No headings.
 - id: s39_end
-  t: [1878.1, 1900.875]
+  t:
+  - 1930.125
+  - 1952.9
   sentence_times:
-  - [1878.1, 1884.3]
-  - [1884.65, 1892.7]
-  - [1893.05, 1900.575]
+  - - 1930.125
+    - 1936.325
+  - - 1936.675
+    - 1944.725
+  - - 1945.075
+    - 1952.6
   beat: series end card (maths ending, HOUSE_STYLE §3)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (hill with arrow, isobars with force arrows, Singapore profile, jet section);
     keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''gradient notebook'';
@@ -1586,26 +2270,53 @@ scenes:
     website that goes with this video.
   on_screen_eq: null
   physics_source: null
-  exaggeration: [decorative end card (illustrative)]
+  exaggeration:
+  - decorative end card (illustrative)
   kind: end card
   data: —
   tool: house EndCard
   runner_up: —
   why: series ending word for word
   related:
-  - {movie: '#1a', slug: ch00_vectors_index_notation, covers: 'unit vectors, components, index notation'}
-  - {movie: 0.1b, slug: ch00_dot_product_v01b, covers: 'dot product, shadow/projection, advection v dot grad T'}
-  - {movie: '#4', slug: ch00_derivatives_taylor, covers: 'partial derivatives, total differential, Taylor series, centred differences'}
-  - {movie: '#5', slug: ch00_coordinates, covers: 'latitude-longitude geometry, a cos phi, scale factors, rotation of axes'}
-  - {movie: '0.3', slug: ch00_weather_basics, covers: 'pressure, isobars, fronts, hydrostatic balance, reanalysis'}
-  - {movie: '#6A', slug: planned (contour maps and isolines), covers: 'isolines, contour interval, highs/lows/ridges/troughs/cols read from contours'}
-  - {movie: '#6B', slug: planned (how contour maps are made), covers: 'stations to grid, interpolation, contouring, smoothing, resolution artefacts'}
-  - {movie: '#7', slug: 'planned (divergence, flux and Gauss)', covers: 'divergence, flux, Gauss''s theorem'}
-  - {movie: '#8', slug: 'planned (curl, circulation and Stokes)', covers: 'curl, circulation, Stokes''s theorem'}
-  - {movie: '#9', slug: planned (Laplacian), covers: 'Laplacian, Laplace and Poisson equations'}
-  - {movie: '#10', slug: planned (material derivative), covers: 'material derivative, advection, continuity'}
-  - {movie: '#23A', slug: planned (pressure coordinates), covers: 'pressure as a vertical coordinate, constant-pressure charts'}
-  - {movie: '#29', slug: planned (Coriolis effect), covers: 'Coriolis effect, geostrophic balance'}
+  - movie: '#1a'
+    slug: ch00_vectors_index_notation
+    covers: unit vectors, components, index notation
+  - movie: 0.1b
+    slug: ch00_dot_product_v01b
+    covers: dot product, shadow/projection, advection v dot grad T
+  - movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: partial derivatives, total differential, Taylor series, centred differences
+  - movie: '#5'
+    slug: ch00_coordinates
+    covers: latitude-longitude geometry, a cos phi, scale factors, rotation of axes
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, isobars, fronts, hydrostatic balance, reanalysis
+  - movie: '#6A'
+    slug: planned (contour maps and isolines)
+    covers: isolines, contour interval, highs/lows/ridges/troughs/cols read from contours
+  - movie: '#6B'
+    slug: planned (how contour maps are made)
+    covers: stations to grid, interpolation, contouring, smoothing, resolution artefacts
+  - movie: '#7'
+    slug: planned (divergence, flux and Gauss)
+    covers: divergence, flux, Gauss's theorem
+  - movie: '#8'
+    slug: planned (curl, circulation and Stokes)
+    covers: curl, circulation, Stokes's theorem
+  - movie: '#9'
+    slug: planned (Laplacian)
+    covers: Laplacian, Laplace and Poisson equations
+  - movie: '#10'
+    slug: planned (material derivative)
+    covers: material derivative, advection, continuity
+  - movie: '#23A'
+    slug: planned (pressure coordinates)
+    covers: pressure as a vertical coordinate, constant-pressure charts
+  - movie: '#29'
+    slug: planned (Coriolis effect)
+    covers: Coriolis effect, geostrophic balance
   layout_5b: End card (HOUSE_STYLE §3). No source line.
 amendment_5b:
   date: '2026-10-30'
@@ -1613,7 +2324,10 @@ amendment_5b:
   rules: HOUSE_STYLE §5b + movies/ch00/retrofit_5b_plan.md §4
   dry_run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\c56_5b_dryrun
   dry_run_tool: tools/tts.py af_bella x1.0 (changed scenes only; unchanged scenes keep their v2 dry-run clips, shifted)
-  changed_scenes: [s17_lapse_rate (Singapore sounding), s18_thin_layer (numbers), s32_vertical_pressure (Singapore)]
+  changed_scenes:
+  - s17_lapse_rate (Singapore sounding)
+  - s18_thin_layer (numbers)
+  - s32_vertical_pressure (Singapore)
   front_stack: 's33b NOT added: no registered data for a non-Ciarán cold front; data need D8 and the measured draft narration in data_needs.md §G'
   narration_s_before: 1878.65
   narration_s_after: 1898.65
@@ -1621,11 +2335,11 @@ amendment_5b:
 amendment_v5_pointers:
   date: '2026-11-04'
   by: movie-director
-  why: series plan v5 (movies/ch00/series_plan_v5.md, adopted by the user 2026-11-04); stale 'next / later movie' pointers from the
-    series audit reports/ch00_series_audit.md (a6-a8) and the same kind in this movie
+  why: series plan v5 (movies/ch00/series_plan_v5.md, adopted by the user 2026-11-04); stale 'next / later movie' pointers from the series audit reports/ch00_series_audit.md
+    (a6-a8) and the same kind in this movie
   dry_run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\v5_pointer_dryrun
-  dry_run_tool: tools/tts.py af_bella x1.0 (changed sentences only, old and new; the old clips reproduce the recorded lengths exactly;
-    every other sentence keeps its clip, shifted)
+  dry_run_tool: tools/tts.py af_bella x1.0 (changed sentences only, old and new; the old clips reproduce the recorded lengths exactly; every other sentence
+    keeps its clip, shifted)
   changed_sentences:
   - 's07_operator (S5: 9.0 -> 9.075 s)'
   - 's30_coriolis (S9: 5.225 -> 7.375 s)'
@@ -1633,3 +2347,32 @@ amendment_v5_pointers:
   narration_s_after: 1900.875
   words_after: 4493
   wpm_overall: 141.6
+build_1:
+  date: '2026-11-04'
+  by: motion-builder
+  log: movies/ch00/ch00_gradient/build1_log.md
+  tts:
+    tool: tools/tts.py af_bella x1.0
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_gradient/build1/tts2
+    scenes: 41
+    sentences: 304
+    words: 4626
+    narration_s: 1952.9
+    cues: 489
+    self_check:
+      expected_s: 1952.9
+      audio_s: 1952.9
+      diff_ms: 0.0
+      len_ok: true
+      cues_ok: true
+  script_changes:
+  - s29 S6 'At the Pointe du Raz … two hundred and seven kilometres per hour' dropped (unverified; orchestrator note 2026-10-28)
+  - 's33b_front_stack added (data_needs §G; orchestrator 2026-10-30: keep Elliott 12 UTC, reword to ''every layer above sits on the cold side, 260-450 km
+    back'')'
+  - 's36 moved to September 2026 real zonal-mean u (D6 decision): 45 N, about six K per 1000 km, about twelve km, about twenty six m/s'
+  - 's37 S3 states the measured OISST north-wall drop: about six and a half degrees in about thirty five km (29 Oct 2026)'
+  - 's18 S4 sign corrected: grad T points almost straight DOWN, towards the warmer air below (dT/dz < 0)'
+  data_decisions:
+  - Brest msl numbers at the ERA5 grid point 48.5 N 4.5 W (the planning values); the ISD gust stays the airport
+  - s15 arrows and 'about sixty percent' on the ETOPO 60″ grid; the drape geometry is ETOPO 15″ (×2)
+  - 's35 image: a new GIBS MODIS Aqua crop of the Normandy coast (48.9-50.1 N, 1.6 W-1.6 E) via fluidpy.data.gibs.fetch_wms'

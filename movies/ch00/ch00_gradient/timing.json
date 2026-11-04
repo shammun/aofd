@@ -1,0 +1,3180 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "scenes": [
+  {
+   "id": "s00_title",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "In this video, we'll learn the gradient the easy way, and see how meteorology uses it to find which way the air is pushed, and why the wind blows hardest where the isobars crowd together.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 12.375,
+     "dur": 12.075,
+     "start_frame": 9,
+     "end_frame": 371
+    }
+   ],
+   "end": 13.175,
+   "start_frame": 9,
+   "end_frame": 395
+  },
+  {
+   "id": "s01_hook",
+   "start": 13.175,
+   "sentences": [
+    {
+     "text": "What is the gradient?",
+     "audio_text": null,
+     "start": 13.175,
+     "end": 15.05,
+     "dur": 1.875,
+     "start_frame": 395,
+     "end_frame": 452
+    },
+    {
+     "text": "Let's see what it is, and why it's built this way.",
+     "audio_text": null,
+     "start": 15.4,
+     "end": 18.85,
+     "dur": 3.45,
+     "start_frame": 462,
+     "end_frame": 566
+    },
+    {
+     "text": "Then let's see what it tells us about mountains, storms and the wind.",
+     "audio_text": null,
+     "start": 19.2,
+     "end": 23.675,
+     "dur": 4.475,
+     "start_frame": 576,
+     "end_frame": 710
+    }
+   ],
+   "end": 24.475,
+   "start_frame": 395,
+   "end_frame": 734
+  },
+  {
+   "id": "s02_fields",
+   "start": 24.475,
+   "sentences": [
+    {
+     "text": "Let's start with a mountain.",
+     "audio_text": null,
+     "start": 24.475,
+     "end": 26.65,
+     "dur": 2.175,
+     "start_frame": 734,
+     "end_frame": 800
+    },
+    {
+     "text": "At every place on a map, the ground has a height above sea level.",
+     "audio_text": null,
+     "start": 27.0,
+     "end": 31.4,
+     "dur": 4.4,
+     "start_frame": 810,
+     "end_frame": 942
+    },
+    {
+     "text": "A quantity that has a value at every place is called a field.",
+     "audio_text": null,
+     "start": 31.75,
+     "end": 36.25,
+     "dur": 4.5,
+     "start_frame": 953,
+     "end_frame": 1088
+    },
+    {
+     "text": "Height is a scalar field: at each place, it's just one number.",
+     "audio_text": null,
+     "start": 36.6,
+     "end": 41.175,
+     "dur": 4.575,
+     "start_frame": 1098,
+     "end_frame": 1235
+    },
+    {
+     "text": "Temperature and pressure are scalar fields too, and they're what the weather is made of.",
+     "audio_text": null,
+     "start": 41.525,
+     "end": 47.025,
+     "dur": 5.5,
+     "start_frame": 1246,
+     "end_frame": 1411
+    },
+    {
+     "text": "Today's question is simple.",
+     "audio_text": null,
+     "start": 47.375,
+     "end": 49.65,
+     "dur": 2.275,
+     "start_frame": 1421,
+     "end_frame": 1490
+    },
+    {
+     "text": "Standing at one place in a field, which way does it increase fastest, and how fast?",
+     "audio_text": null,
+     "start": 50.0,
+     "end": 55.6,
+     "dur": 5.6,
+     "start_frame": 1500,
+     "end_frame": 1668
+    }
+   ],
+   "end": 56.4,
+   "start_frame": 734,
+   "end_frame": 1692
+  },
+  {
+   "id": "s03_fog",
+   "start": 56.4,
+   "sentences": [
+    {
+     "text": "Imagine you're standing on a hillside in thick fog.",
+     "audio_text": null,
+     "start": 56.4,
+     "end": 59.975,
+     "dur": 3.575,
+     "start_frame": 1692,
+     "end_frame": 1799
+    },
+    {
+     "text": "You can't see the top, but you can feel the slope under your feet.",
+     "audio_text": null,
+     "start": 60.325,
+     "end": 64.525,
+     "dur": 4.2,
+     "start_frame": 1810,
+     "end_frame": 1936
+    },
+    {
+     "text": "Take a step east, and you climb a little.",
+     "audio_text": null,
+     "start": 64.875,
+     "end": 67.775,
+     "dur": 2.9,
+     "start_frame": 1946,
+     "end_frame": 2033
+    },
+    {
+     "text": "Take a step north, and you climb a bit more.",
+     "audio_text": null,
+     "start": 68.125,
+     "end": 71.325,
+     "dur": 3.2,
+     "start_frame": 2044,
+     "end_frame": 2140
+    },
+    {
+     "text": "These two slopes are partial derivatives, which we met in the derivatives movie.",
+     "audio_text": null,
+     "start": 71.675,
+     "end": 77.0,
+     "dur": 5.325,
+     "start_frame": 2150,
+     "end_frame": 2310
+    },
+    {
+     "text": "Partial h by partial x is how fast the height, h, changes going east, with north held fixed.",
+     "audio_text": null,
+     "start": 77.35,
+     "end": 84.525,
+     "dur": 7.175,
+     "start_frame": 2321,
+     "end_frame": 2536
+    },
+    {
+     "text": "Partial h by partial y is how fast it changes going north.",
+     "audio_text": null,
+     "start": 84.875,
+     "end": 89.575,
+     "dur": 4.7,
+     "start_frame": 2546,
+     "end_frame": 2687
+    },
+    {
+     "text": "On our hillside, let's say the ground rises thirty metres for every kilometre east, and forty metres for every kilometre north.",
+     "audio_text": null,
+     "start": 89.925,
+     "end": 98.5,
+     "dur": 8.575,
+     "start_frame": 2698,
+     "end_frame": 2955
+    }
+   ],
+   "end": 99.3,
+   "start_frame": 1692,
+   "end_frame": 2979
+  },
+  {
+   "id": "s04_sweep",
+   "start": 99.3,
+   "sentences": [
+    {
+     "text": "So which way is steepest?",
+     "audio_text": null,
+     "start": 99.3,
+     "end": 101.4,
+     "dur": 2.1,
+     "start_frame": 2979,
+     "end_frame": 3042
+    },
+    {
+     "text": "Let's try some directions.",
+     "audio_text": null,
+     "start": 101.75,
+     "end": 103.975,
+     "dur": 2.225,
+     "start_frame": 3052,
+     "end_frame": 3119
+    },
+    {
+     "text": "Going east, we climb thirty metres per kilometre, and going north, forty.",
+     "audio_text": null,
+     "start": 104.325,
+     "end": 109.6,
+     "dur": 5.275,
+     "start_frame": 3130,
+     "end_frame": 3288
+    },
+    {
+     "text": "What about a direction in between?",
+     "audio_text": null,
+     "start": 109.95,
+     "end": 112.55,
+     "dur": 2.6,
+     "start_frame": 3298,
+     "end_frame": 3376
+    },
+    {
+     "text": "From the derivatives movie, a small change in height is the slope east times the step east, plus the slope north times the step north.",
+     "audio_text": null,
+     "start": 112.9,
+     "end": 121.325,
+     "dur": 8.425,
+     "start_frame": 3387,
+     "end_frame": 3640
+    },
+    {
+     "text": "Walk one kilometre north-east, and you go about zero point seven one kilometres east, and zero point seven one kilometres north.",
+     "audio_text": null,
+     "start": 121.675,
+     "end": 130.85,
+     "dur": 9.175,
+     "start_frame": 3650,
+     "end_frame": 3925
+    },
+    {
+     "text": "So you climb thirty times zero point seven one, plus forty times zero point seven one, which is about forty nine and a half metres.",
+     "audio_text": null,
+     "start": 131.2,
+     "end": 140.5,
+     "dur": 9.3,
+     "start_frame": 3936,
+     "end_frame": 4215,
+     "beat": true
+    },
+    {
+     "text": "That beats both east and north.",
+     "audio_text": null,
+     "start": 142.0,
+     "end": 144.525,
+     "dur": 2.525,
+     "start_frame": 4260,
+     "end_frame": 4336
+    },
+    {
+     "text": "Now let's turn slowly through every direction, and draw the climb for each one.",
+     "audio_text": null,
+     "start": 144.875,
+     "end": 150.125,
+     "dur": 5.25,
+     "start_frame": 4346,
+     "end_frame": 4504
+    },
+    {
+     "text": "The curve rises, peaks, and falls again.",
+     "audio_text": null,
+     "start": 150.475,
+     "end": 153.675,
+     "dur": 3.2,
+     "start_frame": 4514,
+     "end_frame": 4610
+    },
+    {
+     "text": "Its peak is fifty metres per kilometre, at fifty three degrees from east.",
+     "audio_text": null,
+     "start": 154.025,
+     "end": 159.2,
+     "dur": 5.175,
+     "start_frame": 4621,
+     "end_frame": 4776,
+     "beat": true
+    }
+   ],
+   "end": 160.7,
+   "start_frame": 2979,
+   "end_frame": 4821
+  },
+  {
+   "id": "s05_reveal",
+   "start": 160.7,
+   "sentences": [
+    {
+     "text": "Now look at those two numbers.",
+     "audio_text": null,
+     "start": 160.7,
+     "end": 163.05,
+     "dur": 2.35,
+     "start_frame": 4821,
+     "end_frame": 4891
+    },
+    {
+     "text": "Fifty is the square root of thirty squared plus forty squared, by Pythagoras.",
+     "audio_text": null,
+     "start": 163.4,
+     "end": 169.05,
+     "dur": 5.65,
+     "start_frame": 4902,
+     "end_frame": 5071
+    },
+    {
+     "text": "And fifty three degrees is exactly the direction of an arrow that goes thirty east and forty north.",
+     "audio_text": null,
+     "start": 169.4,
+     "end": 176.275,
+     "dur": 6.875,
+     "start_frame": 5082,
+     "end_frame": 5288
+    },
+    {
+     "text": "So let's build an arrow from the two slopes, with thirty as its east part and forty as its north part.",
+     "audio_text": null,
+     "start": 176.625,
+     "end": 183.05,
+     "dur": 6.425,
+     "start_frame": 5299,
+     "end_frame": 5491
+    },
+    {
+     "text": "It points the steepest way uphill, and its length is the steepest slope.",
+     "audio_text": null,
+     "start": 183.4,
+     "end": 188.125,
+     "dur": 4.725,
+     "start_frame": 5502,
+     "end_frame": 5644
+    },
+    {
+     "text": "That arrow is called the gradient.",
+     "audio_text": null,
+     "start": 188.475,
+     "end": 190.975,
+     "dur": 2.5,
+     "start_frame": 5654,
+     "end_frame": 5729
+    }
+   ],
+   "end": 191.775,
+   "start_frame": 4821,
+   "end_frame": 5753
+  },
+  {
+   "id": "s06_definition",
+   "start": 191.775,
+   "sentences": [
+    {
+     "text": "Let's write it down.",
+     "audio_text": null,
+     "start": 191.775,
+     "end": 193.725,
+     "dur": 1.95,
+     "start_frame": 5753,
+     "end_frame": 5812
+    },
+    {
+     "text": "The gradient of h is written with an upside down triangle, called nabla, or del, and we read it grad h.",
+     "audio_text": null,
+     "start": 194.075,
+     "end": 201.575,
+     "dur": 7.5,
+     "start_frame": 5822,
+     "end_frame": 6047
+    },
+    {
+     "text": "Grad h equals x hat times partial h by partial x, plus y hat times partial h by partial y.",
+     "audio_text": null,
+     "start": 201.925,
+     "end": 209.7,
+     "dur": 7.775,
+     "start_frame": 6058,
+     "end_frame": 6291
+    },
+    {
+     "text": "Here x hat and y hat are the unit arrows pointing east and north, from the vectors movie.",
+     "audio_text": null,
+     "start": 210.05,
+     "end": 216.4,
+     "dur": 6.35,
+     "start_frame": 6301,
+     "end_frame": 6492
+    },
+    {
+     "text": "For our hillside, grad h is thirty x hat plus forty y hat, in metres per kilometre.",
+     "audio_text": null,
+     "start": 216.75,
+     "end": 223.55,
+     "dur": 6.8,
+     "start_frame": 6502,
+     "end_frame": 6706
+    },
+    {
+     "text": "Its length is fifty metres per kilometre.",
+     "audio_text": null,
+     "start": 223.9,
+     "end": 227.15,
+     "dur": 3.25,
+     "start_frame": 6717,
+     "end_frame": 6814,
+     "beat": true
+    },
+    {
+     "text": "So the gradient turns a scalar field into a vector at every place.",
+     "audio_text": null,
+     "start": 228.65,
+     "end": 233.175,
+     "dur": 4.525,
+     "start_frame": 6859,
+     "end_frame": 6995
+    }
+   ],
+   "end": 233.975,
+   "start_frame": 5753,
+   "end_frame": 7019
+  },
+  {
+   "id": "s07_operator",
+   "start": 233.975,
+   "sentences": [
+    {
+     "text": "The upside down triangle on its own is called the del operator.",
+     "audio_text": null,
+     "start": 233.975,
+     "end": 238.825,
+     "dur": 4.85,
+     "start_frame": 7019,
+     "end_frame": 7165
+    },
+    {
+     "text": "Think of it as an arrow made of derivatives, waiting for a field: x hat partial by partial x, plus y hat partial by partial y, plus z hat partial by partial z.",
+     "audio_text": null,
+     "start": 239.175,
+     "end": 250.95,
+     "dur": 11.775,
+     "start_frame": 7175,
+     "end_frame": 7528
+    },
+    {
+     "text": "The third part is the change going up, which matters for fields that fill the air, like temperature.",
+     "audio_text": null,
+     "start": 251.3,
+     "end": 257.8,
+     "dur": 6.5,
+     "start_frame": 7539,
+     "end_frame": 7734
+    },
+    {
+     "text": "In index notation, from the vectors movie, the i-th component of grad f is partial f by partial x i.",
+     "audio_text": null,
+     "start": 258.15,
+     "end": 266.375,
+     "dur": 8.225,
+     "start_frame": 7744,
+     "end_frame": 7991
+    },
+    {
+     "text": "The same del operator also builds the divergence, the curl and the Laplacian, and each of them has its own movie later in this series.",
+     "audio_text": null,
+     "start": 266.725,
+     "end": 275.8,
+     "dur": 9.075,
+     "start_frame": 8002,
+     "end_frame": 8274
+    }
+   ],
+   "end": 276.6,
+   "start_frame": 7019,
+   "end_frame": 8298
+  },
+  {
+   "id": "s08_units",
+   "start": 276.6,
+   "sentences": [
+    {
+     "text": "A gradient has the field's unit, divided by a length.",
+     "audio_text": null,
+     "start": 276.6,
+     "end": 280.525,
+     "dur": 3.925,
+     "start_frame": 8298,
+     "end_frame": 8416
+    },
+    {
+     "text": "A height gradient is metres per kilometre, which is just a slope.",
+     "audio_text": null,
+     "start": 280.875,
+     "end": 285.475,
+     "dur": 4.6,
+     "start_frame": 8426,
+     "end_frame": 8564
+    },
+    {
+     "text": "A temperature gradient is kelvins per metre, though forecasters usually say degrees per hundred kilometres.",
+     "audio_text": null,
+     "start": 285.825,
+     "end": 293.1,
+     "dur": 7.275,
+     "start_frame": 8575,
+     "end_frame": 8793
+    },
+    {
+     "text": "A kelvin step is the same size as a degree Celsius step.",
+     "audio_text": null,
+     "start": 293.45,
+     "end": 298.0,
+     "dur": 4.55,
+     "start_frame": 8804,
+     "end_frame": 8940
+    },
+    {
+     "text": "A pressure gradient is pascals per metre, or hectopascals per hundred kilometres.",
+     "audio_text": "A pressure gradient is pascals per metre, or [hectopascals](/hˈɛktəpˌæskᵊlz/) per hundred kilometres.",
+     "start": 298.35,
+     "end": 304.3,
+     "dur": 5.95,
+     "start_frame": 8951,
+     "end_frame": 9129
+    }
+   ],
+   "end": 305.1,
+   "start_frame": 8298,
+   "end_frame": 9153
+  },
+  {
+   "id": "s09_gradient_field",
+   "start": 305.1,
+   "sentences": [
+    {
+     "text": "Since every place has its own gradient, we can draw an arrow at every place.",
+     "audio_text": null,
+     "start": 305.1,
+     "end": 310.35,
+     "dur": 5.25,
+     "start_frame": 9153,
+     "end_frame": 9311
+    },
+    {
+     "text": "That's called a gradient field.",
+     "audio_text": null,
+     "start": 310.7,
+     "end": 313.1,
+     "dur": 2.4,
+     "start_frame": 9321,
+     "end_frame": 9393
+    },
+    {
+     "text": "Here is the real temperature about one and a half kilometres up, over Brittany in western France.",
+     "audio_text": null,
+     "start": 313.45,
+     "end": 319.9,
+     "dur": 6.45,
+     "start_frame": 9404,
+     "end_frame": 9597
+    },
+    {
+     "text": "It's six in the evening on the first of November twenty twenty three, as Storm Ciarán approaches.",
+     "audio_text": "It's six in the evening on the first of November twenty twenty three, as Storm Keer-awn approaches.",
+     "start": 320.25,
+     "end": 326.575,
+     "dur": 6.325,
+     "start_frame": 9608,
+     "end_frame": 9797
+    },
+    {
+     "text": "These temperatures come from ERA5, a reanalysis: a careful reconstruction of the weather that blends observations with a weather model.",
+     "audio_text": "These temperatures come from [ERA5](/ˌiˌɑɹˈA fˈIv/), a reanalysis: a careful reconstruction of the weather that blends observations with a weather model.",
+     "start": 326.925,
+     "end": 336.725,
+     "dur": 9.8,
+     "start_frame": 9808,
+     "end_frame": 10102
+    },
+    {
+     "text": "Every arrow points the way the temperature increases fastest, towards the warm air in the south-west.",
+     "audio_text": null,
+     "start": 337.075,
+     "end": 343.675,
+     "dur": 6.6,
+     "start_frame": 10112,
+     "end_frame": 10310
+    },
+    {
+     "text": "At Brest, partial capital T by partial x is minus three point two degrees per hundred kilometres, and partial capital T by partial y is minus two point five.",
+     "audio_text": null,
+     "start": 344.025,
+     "end": 355.7,
+     "dur": 11.675,
+     "start_frame": 10321,
+     "end_frame": 10671
+    },
+    {
+     "text": "By Pythagoras, grad capital T has a length of about four point one degrees per hundred kilometres.",
+     "audio_text": null,
+     "start": 356.05,
+     "end": 363.125,
+     "dur": 7.075,
+     "start_frame": 10682,
+     "end_frame": 10894,
+     "beat": true
+    },
+    {
+     "text": "It points about two hundred and thirty degrees from north, towards the south-west.",
+     "audio_text": null,
+     "start": 364.625,
+     "end": 369.7,
+     "dur": 5.075,
+     "start_frame": 10939,
+     "end_frame": 11091
+    }
+   ],
+   "end": 370.5,
+   "start_frame": 9153,
+   "end_frame": 11115
+  },
+  {
+   "id": "s10_directional",
+   "start": 370.5,
+   "sentences": [
+    {
+     "text": "Now let's see why the arrow works, starting from a general rule.",
+     "audio_text": null,
+     "start": 370.5,
+     "end": 374.875,
+     "dur": 4.375,
+     "start_frame": 11115,
+     "end_frame": 11246
+    },
+    {
+     "text": "Suppose we walk a short distance, d s, in some direction.",
+     "audio_text": null,
+     "start": 375.225,
+     "end": 379.75,
+     "dur": 4.525,
+     "start_frame": 11257,
+     "end_frame": 11393
+    },
+    {
+     "text": "Let's describe that direction by a unit vector, n hat, at an angle alpha from east.",
+     "audio_text": null,
+     "start": 380.1,
+     "end": 386.45,
+     "dur": 6.35,
+     "start_frame": 11403,
+     "end_frame": 11594
+    },
+    {
+     "text": "Its east part is cosine alpha, and its north part is sine alpha.",
+     "audio_text": null,
+     "start": 386.8,
+     "end": 391.75,
+     "dur": 4.95,
+     "start_frame": 11604,
+     "end_frame": 11753
+    },
+    {
+     "text": "So the step east is d s times cosine alpha, and the step north is d s times sine alpha.",
+     "audio_text": null,
+     "start": 392.1,
+     "end": 398.875,
+     "dur": 6.775,
+     "start_frame": 11763,
+     "end_frame": 11966
+    },
+    {
+     "text": "The change in height is partial h by partial x times the step east, plus partial h by partial y times the step north.",
+     "audio_text": null,
+     "start": 399.225,
+     "end": 407.75,
+     "dur": 8.525,
+     "start_frame": 11977,
+     "end_frame": 12233
+    },
+    {
+     "text": "Now divide both sides by d s.",
+     "audio_text": null,
+     "start": 408.1,
+     "end": 410.95,
+     "dur": 2.85,
+     "start_frame": 12243,
+     "end_frame": 12329
+    },
+    {
+     "text": "The rate of climb along n hat is partial h by partial x times cosine alpha, plus partial h by partial y times sine alpha.",
+     "audio_text": null,
+     "start": 411.3,
+     "end": 420.75,
+     "dur": 9.45,
+     "start_frame": 12339,
+     "end_frame": 12623
+    },
+    {
+     "text": "That is exactly the dot product of grad h with n hat, from the dot product movie.",
+     "audio_text": null,
+     "start": 421.1,
+     "end": 427.125,
+     "dur": 6.025,
+     "start_frame": 12633,
+     "end_frame": 12814
+    },
+    {
+     "text": "So the rate of change in any direction is grad h dot n hat, and it's called the directional derivative.",
+     "audio_text": null,
+     "start": 427.475,
+     "end": 434.625,
+     "dur": 7.15,
+     "start_frame": 12824,
+     "end_frame": 13039
+    },
+    {
+     "text": "Let's check it going north.",
+     "audio_text": null,
+     "start": 434.975,
+     "end": 437.175,
+     "dur": 2.2,
+     "start_frame": 13049,
+     "end_frame": 13115
+    },
+    {
+     "text": "Alpha is ninety degrees, so we get thirty times zero, plus forty times one, which is forty.",
+     "audio_text": null,
+     "start": 437.525,
+     "end": 444.275,
+     "dur": 6.75,
+     "start_frame": 13126,
+     "end_frame": 13328,
+     "beat": true
+    }
+   ],
+   "end": 445.775,
+   "start_frame": 11115,
+   "end_frame": 13373
+  },
+  {
+   "id": "s11_steepest",
+   "start": 445.775,
+   "sentences": [
+    {
+     "text": "Why does the gradient point the steepest way?",
+     "audio_text": null,
+     "start": 445.775,
+     "end": 448.875,
+     "dur": 3.1,
+     "start_frame": 13373,
+     "end_frame": 13466
+    },
+    {
+     "text": "The dot product has a second form: the length of grad h, times the length of n hat, times the cosine of the angle between them.",
+     "audio_text": null,
+     "start": 449.225,
+     "end": 458.15,
+     "dur": 8.925,
+     "start_frame": 13477,
+     "end_frame": 13745
+    },
+    {
+     "text": "Let's call that angle theta.",
+     "audio_text": null,
+     "start": 458.5,
+     "end": 460.85,
+     "dur": 2.35,
+     "start_frame": 13755,
+     "end_frame": 13826
+    },
+    {
+     "text": "N hat has length one, so the rate of climb is the length of grad h times cosine theta.",
+     "audio_text": null,
+     "start": 461.2,
+     "end": 467.75,
+     "dur": 6.55,
+     "start_frame": 13836,
+     "end_frame": 14033
+    },
+    {
+     "text": "A cosine is never bigger than one, and it equals one only when theta is zero.",
+     "audio_text": null,
+     "start": 468.1,
+     "end": 473.825,
+     "dur": 5.725,
+     "start_frame": 14043,
+     "end_frame": 14215
+    },
+    {
+     "text": "So the climb is largest when you walk along grad h itself, and then it equals the length of grad h.",
+     "audio_text": null,
+     "start": 474.175,
+     "end": 481.075,
+     "dur": 6.9,
+     "start_frame": 14225,
+     "end_frame": 14432
+    },
+    {
+     "text": "That's why the gradient points the way the field increases fastest, and why its length is that fastest rate.",
+     "audio_text": null,
+     "start": 481.425,
+     "end": 488.65,
+     "dur": 7.225,
+     "start_frame": 14443,
+     "end_frame": 14660
+    },
+    {
+     "text": "Walk the opposite way, where theta is a hundred and eighty degrees, and the cosine is minus one: you go down at the steepest rate.",
+     "audio_text": null,
+     "start": 489.0,
+     "end": 498.025,
+     "dur": 9.025,
+     "start_frame": 14670,
+     "end_frame": 14941
+    }
+   ],
+   "end": 498.825,
+   "start_frame": 13373,
+   "end_frame": 14965
+  },
+  {
+   "id": "s12_perpendicular",
+   "start": 498.825,
+   "sentences": [
+    {
+     "text": "Now walk along a path where the height stays the same, round the side of the hill.",
+     "audio_text": null,
+     "start": 498.825,
+     "end": 503.925,
+     "dur": 5.1,
+     "start_frame": 14965,
+     "end_frame": 15118
+    },
+    {
+     "text": "On a map, such paths are drawn as contour lines.",
+     "audio_text": null,
+     "start": 504.275,
+     "end": 508.125,
+     "dur": 3.85,
+     "start_frame": 15128,
+     "end_frame": 15244
+    },
+    {
+     "text": "Along a contour, the height doesn't change, so the rate of climb is zero.",
+     "audio_text": null,
+     "start": 508.475,
+     "end": 513.525,
+     "dur": 5.05,
+     "start_frame": 15254,
+     "end_frame": 15406
+    },
+    {
+     "text": "The length of grad h isn't zero, so cosine theta must be zero, and theta is ninety degrees.",
+     "audio_text": null,
+     "start": 513.875,
+     "end": 521.0,
+     "dur": 7.125,
+     "start_frame": 15416,
+     "end_frame": 15630
+    },
+    {
+     "text": "So the gradient is always at right angles to the contour lines.",
+     "audio_text": null,
+     "start": 521.35,
+     "end": 525.8,
+     "dur": 4.45,
+     "start_frame": 15641,
+     "end_frame": 15774
+    },
+    {
+     "text": "The same goes for isotherms, the lines of equal temperature, and isobars, the lines of equal pressure.",
+     "audio_text": null,
+     "start": 526.15,
+     "end": 533.525,
+     "dur": 7.375,
+     "start_frame": 15785,
+     "end_frame": 16006
+    },
+    {
+     "text": "Contour maps have a whole movie of their own in this series, and so does the way they're made.",
+     "audio_text": null,
+     "start": 533.875,
+     "end": 539.575,
+     "dur": 5.7,
+     "start_frame": 16016,
+     "end_frame": 16187
+    }
+   ],
+   "end": 540.375,
+   "start_frame": 14965,
+   "end_frame": 16211
+  },
+  {
+   "id": "s13_cases",
+   "start": 540.375,
+   "sentences": [
+    {
+     "text": "Let's keep the hillside fixed, and send four walkers out in different directions.",
+     "audio_text": null,
+     "start": 540.375,
+     "end": 545.675,
+     "dur": 5.3,
+     "start_frame": 16211,
+     "end_frame": 16370
+    },
+    {
+     "text": "The first walks along grad h.",
+     "audio_text": null,
+     "start": 546.025,
+     "end": 548.625,
+     "dur": 2.6,
+     "start_frame": 16381,
+     "end_frame": 16459
+    },
+    {
+     "text": "The cosine of zero is one, so she climbs fifty metres per kilometre.",
+     "audio_text": null,
+     "start": 548.975,
+     "end": 553.975,
+     "dur": 5.0,
+     "start_frame": 16469,
+     "end_frame": 16619,
+     "beat": true
+    },
+    {
+     "text": "When you walk along the gradient, you climb at the steepest rate.",
+     "audio_text": null,
+     "start": 555.475,
+     "end": 559.725,
+     "dur": 4.25,
+     "start_frame": 16664,
+     "end_frame": 16792
+    },
+    {
+     "text": "The second walks at sixty degrees to it.",
+     "audio_text": null,
+     "start": 560.075,
+     "end": 563.05,
+     "dur": 2.975,
+     "start_frame": 16802,
+     "end_frame": 16892
+    },
+    {
+     "text": "Fifty times the cosine of sixty is twenty five.",
+     "audio_text": null,
+     "start": 563.4,
+     "end": 567.075,
+     "dur": 3.675,
+     "start_frame": 16902,
+     "end_frame": 17012,
+     "beat": true
+    },
+    {
+     "text": "At an angle, you get only the shadow of the gradient on your direction.",
+     "audio_text": null,
+     "start": 568.575,
+     "end": 573.3,
+     "dur": 4.725,
+     "start_frame": 17057,
+     "end_frame": 17199
+    },
+    {
+     "text": "The third walks along the contour.",
+     "audio_text": null,
+     "start": 573.65,
+     "end": 576.275,
+     "dur": 2.625,
+     "start_frame": 17210,
+     "end_frame": 17288
+    },
+    {
+     "text": "Fifty times the cosine of ninety is zero.",
+     "audio_text": null,
+     "start": 576.625,
+     "end": 579.95,
+     "dur": 3.325,
+     "start_frame": 17299,
+     "end_frame": 17399,
+     "beat": true
+    },
+    {
+     "text": "Along a contour, nothing changes.",
+     "audio_text": null,
+     "start": 581.45,
+     "end": 584.425,
+     "dur": 2.975,
+     "start_frame": 17444,
+     "end_frame": 17533
+    },
+    {
+     "text": "The fourth walks straight against the gradient.",
+     "audio_text": null,
+     "start": 584.775,
+     "end": 587.65,
+     "dur": 2.875,
+     "start_frame": 17543,
+     "end_frame": 17630
+    },
+    {
+     "text": "Fifty times minus one is minus fifty.",
+     "audio_text": null,
+     "start": 588.0,
+     "end": 591.15,
+     "dur": 3.15,
+     "start_frame": 17640,
+     "end_frame": 17735,
+     "beat": true
+    },
+    {
+     "text": "Against the gradient, you go down at the steepest rate.",
+     "audio_text": null,
+     "start": 592.65,
+     "end": 596.425,
+     "dur": 3.775,
+     "start_frame": 17780,
+     "end_frame": 17893
+    }
+   ],
+   "end": 597.225,
+   "start_frame": 16211,
+   "end_frame": 17917
+  },
+  {
+   "id": "s14_spacing",
+   "start": 597.225,
+   "sentences": [
+    {
+     "text": "There's a quick way to read the gradient's size off a map.",
+     "audio_text": null,
+     "start": 597.225,
+     "end": 600.65,
+     "dur": 3.425,
+     "start_frame": 17917,
+     "end_frame": 18020
+    },
+    {
+     "text": "Suppose contour lines are drawn every hundred metres of height.",
+     "audio_text": null,
+     "start": 601.0,
+     "end": 605.5,
+     "dur": 4.5,
+     "start_frame": 18030,
+     "end_frame": 18165
+    },
+    {
+     "text": "On a gentle slope, they might be two kilometres apart, so the slope is a hundred metres over two kilometres: fifty metres per kilometre.",
+     "audio_text": null,
+     "start": 605.85,
+     "end": 615.15,
+     "dur": 9.3,
+     "start_frame": 18176,
+     "end_frame": 18455,
+     "beat": true
+    },
+    {
+     "text": "On a steep slope, they might be half a kilometre apart.",
+     "audio_text": null,
+     "start": 616.65,
+     "end": 620.525,
+     "dur": 3.875,
+     "start_frame": 18500,
+     "end_frame": 18616
+    },
+    {
+     "text": "A hundred metres over half a kilometre is two hundred metres per kilometre.",
+     "audio_text": null,
+     "start": 620.875,
+     "end": 626.025,
+     "dur": 5.15,
+     "start_frame": 18626,
+     "end_frame": 18781,
+     "beat": true
+    },
+    {
+     "text": "So the closer the lines, the bigger the gradient.",
+     "audio_text": null,
+     "start": 627.525,
+     "end": 630.975,
+     "dur": 3.45,
+     "start_frame": 18826,
+     "end_frame": 18929
+    },
+    {
+     "text": "Crowded lines mean a steep slope, a sharp change of temperature, or a strong push from the pressure.",
+     "audio_text": null,
+     "start": 631.325,
+     "end": 637.95,
+     "dur": 6.625,
+     "start_frame": 18940,
+     "end_frame": 19139
+    }
+   ],
+   "end": 638.75,
+   "start_frame": 17917,
+   "end_frame": 19162
+  },
+  {
+   "id": "s15_mont_blanc",
+   "start": 638.75,
+   "sentences": [
+    {
+     "text": "Let's try a real mountain: Mont Blanc, the highest peak in the Alps, on the border of France and Italy.",
+     "audio_text": null,
+     "start": 638.75,
+     "end": 645.55,
+     "dur": 6.8,
+     "start_frame": 19163,
+     "end_frame": 19367
+    },
+    {
+     "text": "This is the real terrain, from a global relief data set called ETOPO, with satellite imagery laid over it.",
+     "audio_text": null,
+     "start": 645.9,
+     "end": 654.0,
+     "dur": 8.1,
+     "start_frame": 19377,
+     "end_frame": 19620
+    },
+    {
+     "text": "The heights are drawn stretched two times, so the shape is easier to see.",
+     "audio_text": null,
+     "start": 654.35,
+     "end": 659.05,
+     "dur": 4.7,
+     "start_frame": 19631,
+     "end_frame": 19772
+    },
+    {
+     "text": "The town of Chamonix sits at about one thousand and thirty five metres.",
+     "audio_text": null,
+     "start": 659.4,
+     "end": 664.7,
+     "dur": 5.3,
+     "start_frame": 19782,
+     "end_frame": 19941
+    },
+    {
+     "text": "The summit, at about four thousand eight hundred and six metres, is about ten kilometres to the south.",
+     "audio_text": null,
+     "start": 665.05,
+     "end": 671.5,
+     "dur": 6.45,
+     "start_frame": 19952,
+     "end_frame": 20145
+    },
+    {
+     "text": "So on average, the ground rises about three thousand seven hundred and seventy metres in ten kilometres.",
+     "audio_text": null,
+     "start": 671.85,
+     "end": 678.95,
+     "dur": 7.1,
+     "start_frame": 20156,
+     "end_frame": 20369
+    },
+    {
+     "text": "That's about thirty seven and a half metres up for every hundred metres across.",
+     "audio_text": null,
+     "start": 679.3,
+     "end": 684.725,
+     "dur": 5.425,
+     "start_frame": 20379,
+     "end_frame": 20542,
+     "beat": true
+    },
+    {
+     "text": "Now let's draw grad h at every point.",
+     "audio_text": null,
+     "start": 686.225,
+     "end": 689.175,
+     "dur": 2.95,
+     "start_frame": 20587,
+     "end_frame": 20675
+    },
+    {
+     "text": "Every arrow points uphill, at right angles to the contours.",
+     "audio_text": null,
+     "start": 689.525,
+     "end": 693.95,
+     "dur": 4.425,
+     "start_frame": 20686,
+     "end_frame": 20819
+    },
+    {
+     "text": "The longest arrows sit on the steep walls near the summit, where the slope on this map reaches about sixty percent.",
+     "audio_text": null,
+     "start": 694.3,
+     "end": 701.625,
+     "dur": 7.325,
+     "start_frame": 20829,
+     "end_frame": 21049
+    }
+   ],
+   "end": 702.425,
+   "start_frame": 19162,
+   "end_frame": 21073
+  },
+  {
+   "id": "s16_water_scale",
+   "start": 702.425,
+   "sentences": [
+    {
+     "text": "Water feels the gradient too.",
+     "audio_text": null,
+     "start": 702.425,
+     "end": 704.975,
+     "dur": 2.55,
+     "start_frame": 21073,
+     "end_frame": 21149
+    },
+    {
+     "text": "Rain that falls on these slopes runs roughly the steepest way down, along minus grad h, so the streams follow the arrows backwards.",
+     "audio_text": null,
+     "start": 705.325,
+     "end": 714.475,
+     "dur": 9.15,
+     "start_frame": 21160,
+     "end_frame": 21434
+    },
+    {
+     "text": "And the size of the gradient depends on how finely you look.",
+     "audio_text": null,
+     "start": 714.825,
+     "end": 718.975,
+     "dur": 4.15,
+     "start_frame": 21445,
+     "end_frame": 21569
+    },
+    {
+     "text": "On this map, with points less than two kilometres apart, the steepest slopes are about sixty percent.",
+     "audio_text": null,
+     "start": 719.325,
+     "end": 726.15,
+     "dur": 6.825,
+     "start_frame": 21580,
+     "end_frame": 21785
+    },
+    {
+     "text": "Now average the heights over blocks about thirty five kilometres across, and look at the Himalayas.",
+     "audio_text": null,
+     "start": 726.5,
+     "end": 733.05,
+     "dur": 6.55,
+     "start_frame": 21795,
+     "end_frame": 21992
+    },
+    {
+     "text": "The ground climbs from the Ganges plain, about fifty metres above sea level, to the Tibetan plateau, almost five thousand metres up.",
+     "audio_text": null,
+     "start": 733.4,
+     "end": 742.575,
+     "dur": 9.175,
+     "start_frame": 22002,
+     "end_frame": 22277
+    },
+    {
+     "text": "Yet at that scale, the slope near Mount Everest is only about five percent.",
+     "audio_text": null,
+     "start": 742.925,
+     "end": 748.25,
+     "dur": 5.325,
+     "start_frame": 22288,
+     "end_frame": 22448,
+     "beat": true
+    },
+    {
+     "text": "Both numbers are right, each for its own scale.",
+     "audio_text": null,
+     "start": 749.75,
+     "end": 753.175,
+     "dur": 3.425,
+     "start_frame": 22493,
+     "end_frame": 22595
+    }
+   ],
+   "end": 753.975,
+   "start_frame": 21073,
+   "end_frame": 22619
+  },
+  {
+   "id": "s17_lapse_rate",
+   "start": 753.975,
+   "sentences": [
+    {
+     "text": "The gradient works in three dimensions too, and in the air, the upward part is often the biggest.",
+     "audio_text": null,
+     "start": 753.975,
+     "end": 760.35,
+     "dur": 6.375,
+     "start_frame": 22619,
+     "end_frame": 22811
+    },
+    {
+     "text": "Here is a real weather balloon, a radiosonde, launched from Singapore, an island city at the southern tip of the Malay Peninsula, close to the equator.",
+     "audio_text": "Here is a real weather balloon, a [radiosonde](/ɹˈAdiOsˌɑnd/), launched from Singapore, an island city at the southern tip of the Malay Peninsula, close to the equator.",
+     "start": 760.7,
+     "end": 771.025,
+     "dur": 10.325,
+     "start_frame": 22821,
+     "end_frame": 23131
+    },
+    {
+     "text": "It went up at half past seven in the morning, local time, on the first of November, twenty twenty-three.",
+     "audio_text": null,
+     "start": 771.375,
+     "end": 778.2,
+     "dur": 6.825,
+     "start_frame": 23141,
+     "end_frame": 23346
+    },
+    {
+     "text": "At the ground, thirty three metres above sea level, it measured twenty seven point seven degrees.",
+     "audio_text": null,
+     "start": 778.55,
+     "end": 785.325,
+     "dur": 6.775,
+     "start_frame": 23357,
+     "end_frame": 23560
+    },
+    {
+     "text": "At sixteen point two kilometres, where the cooling stopped, it measured minus eighty one point three.",
+     "audio_text": null,
+     "start": 785.675,
+     "end": 792.575,
+     "dur": 6.9,
+     "start_frame": 23570,
+     "end_frame": 23777
+    },
+    {
+     "text": "That level is the tropopause, the top of the lowest layer of the atmosphere.",
+     "audio_text": null,
+     "start": 792.925,
+     "end": 798.225,
+     "dur": 5.3,
+     "start_frame": 23788,
+     "end_frame": 23947
+    },
+    {
+     "text": "Over the tropics it sits much higher than over Europe, where it's usually somewhere between about ten and thirteen kilometres up.",
+     "audio_text": null,
+     "start": 798.575,
+     "end": 806.625,
+     "dur": 8.05,
+     "start_frame": 23957,
+     "end_frame": 24199
+    },
+    {
+     "text": "So partial capital T by partial z, averaged over that layer, is minus a hundred and nine degrees over sixteen point one kilometres.",
+     "audio_text": null,
+     "start": 806.975,
+     "end": 816.725,
+     "dur": 9.75,
+     "start_frame": 24209,
+     "end_frame": 24502
+    },
+    {
+     "text": "That's about minus six point eight degrees per kilometre.",
+     "audio_text": null,
+     "start": 817.075,
+     "end": 821.25,
+     "dur": 4.175,
+     "start_frame": 24512,
+     "end_frame": 24638,
+     "beat": true
+    },
+    {
+     "text": "Meteorologists flip the sign, and call plus six point eight the lapse rate: how fast the temperature drops as you go up.",
+     "audio_text": null,
+     "start": 822.75,
+     "end": 831.025,
+     "dur": 8.275,
+     "start_frame": 24683,
+     "end_frame": 24931
+    },
+    {
+     "text": "Above the tropopause, the temperature starts rising again.",
+     "audio_text": null,
+     "start": 831.375,
+     "end": 835.525,
+     "dur": 4.15,
+     "start_frame": 24941,
+     "end_frame": 25066
+    }
+   ],
+   "end": 836.325,
+   "start_frame": 22619,
+   "end_frame": 25090
+  },
+  {
+   "id": "s18_thin_layer",
+   "start": 836.325,
+   "sentences": [
+    {
+     "text": "Compare that with the sideways gradient over Brest, about four degrees per hundred kilometres.",
+     "audio_text": null,
+     "start": 836.325,
+     "end": 842.675,
+     "dur": 6.35,
+     "start_frame": 25090,
+     "end_frame": 25280
+    },
+    {
+     "text": "Six point eight degrees per kilometre is six hundred and eighty degrees per hundred kilometres.",
+     "audio_text": null,
+     "start": 843.025,
+     "end": 849.575,
+     "dur": 6.55,
+     "start_frame": 25291,
+     "end_frame": 25487
+    },
+    {
+     "text": "That's more than a hundred and sixty times bigger.",
+     "audio_text": null,
+     "start": 849.925,
+     "end": 853.55,
+     "dur": 3.625,
+     "start_frame": 25498,
+     "end_frame": 25607,
+     "beat": true
+    },
+    {
+     "text": "So surfaces of equal temperature in the air are nearly flat, and grad capital T points almost straight down, towards the warmer air below.",
+     "audio_text": null,
+     "start": 855.05,
+     "end": 864.675,
+     "dur": 9.625,
+     "start_frame": 25652,
+     "end_frame": 25940
+    },
+    {
+     "text": "In our pictures, we stretch the height to make tilts like these visible, but the real atmosphere is a very thin layer.",
+     "audio_text": null,
+     "start": 865.025,
+     "end": 872.675,
+     "dur": 7.65,
+     "start_frame": 25951,
+     "end_frame": 26180
+    }
+   ],
+   "end": 873.475,
+   "start_frame": 25090,
+   "end_frame": 26204
+  },
+  {
+   "id": "s19_reason_one",
+   "start": 873.475,
+   "sentences": [
+    {
+     "text": "So why is the gradient built this way?",
+     "audio_text": null,
+     "start": 873.475,
+     "end": 876.375,
+     "dur": 2.9,
+     "start_frame": 26204,
+     "end_frame": 26291
+    },
+    {
+     "text": "There are three good reasons.",
+     "audio_text": null,
+     "start": 876.725,
+     "end": 878.9,
+     "dur": 2.175,
+     "start_frame": 26302,
+     "end_frame": 26367
+    },
+    {
+     "text": "The first is that one arrow holds the answer for every direction.",
+     "audio_text": null,
+     "start": 879.25,
+     "end": 883.9,
+     "dur": 4.65,
+     "start_frame": 26378,
+     "end_frame": 26517
+    },
+    {
+     "text": "Instead of a long table of slopes, for east, north, north-east and so on, we keep just two numbers, or three in the air.",
+     "audio_text": null,
+     "start": 884.25,
+     "end": 892.45,
+     "dur": 8.2,
+     "start_frame": 26528,
+     "end_frame": 26774
+    },
+    {
+     "text": "A dot product with any direction gives the rate that way.",
+     "audio_text": null,
+     "start": 892.8,
+     "end": 897.025,
+     "dur": 4.225,
+     "start_frame": 26784,
+     "end_frame": 26911
+    }
+   ],
+   "end": 897.825,
+   "start_frame": 26204,
+   "end_frame": 26935
+  },
+  {
+   "id": "s20_reason_two",
+   "start": 897.825,
+   "sentences": [
+    {
+     "text": "The second reason is that the arrow doesn't depend on how we draw the axes.",
+     "audio_text": null,
+     "start": 897.825,
+     "end": 902.975,
+     "dur": 5.15,
+     "start_frame": 26935,
+     "end_frame": 27089
+    },
+    {
+     "text": "Let's turn our axes by thirty degrees.",
+     "audio_text": null,
+     "start": 903.325,
+     "end": 906.475,
+     "dur": 3.15,
+     "start_frame": 27100,
+     "end_frame": 27194
+    },
+    {
+     "text": "The components change, to about forty six and nineteen point six.",
+     "audio_text": null,
+     "start": 906.825,
+     "end": 911.5,
+     "dur": 4.675,
+     "start_frame": 27205,
+     "end_frame": 27345
+    },
+    {
+     "text": "But the length is still fifty, and the arrow still points the same way up the hill.",
+     "audio_text": null,
+     "start": 911.85,
+     "end": 916.925,
+     "dur": 5.075,
+     "start_frame": 27356,
+     "end_frame": 27508,
+     "beat": true
+    },
+    {
+     "text": "The steepest way up a mountain is a fact about the mountain, not about our map, and the gradient respects that.",
+     "audio_text": null,
+     "start": 918.425,
+     "end": 925.5,
+     "dur": 7.075,
+     "start_frame": 27553,
+     "end_frame": 27765
+    }
+   ],
+   "end": 926.3,
+   "start_frame": 26935,
+   "end_frame": 27789
+  },
+  {
+   "id": "s21_reason_three",
+   "start": 926.3,
+   "sentences": [
+    {
+     "text": "The third reason is that nature responds to gradients.",
+     "audio_text": null,
+     "start": 926.3,
+     "end": 930.25,
+     "dur": 3.95,
+     "start_frame": 27789,
+     "end_frame": 27908
+    },
+    {
+     "text": "Heat flows from warm to cold, down the temperature gradient.",
+     "audio_text": null,
+     "start": 930.6,
+     "end": 935.025,
+     "dur": 4.425,
+     "start_frame": 27918,
+     "end_frame": 28051
+    },
+    {
+     "text": "Water runs down the height gradient.",
+     "audio_text": null,
+     "start": 935.375,
+     "end": 938.1,
+     "dur": 2.725,
+     "start_frame": 28061,
+     "end_frame": 28143
+    },
+    {
+     "text": "And air is pushed from high pressure towards low pressure, down the pressure gradient.",
+     "audio_text": null,
+     "start": 938.45,
+     "end": 943.75,
+     "dur": 5.3,
+     "start_frame": 28154,
+     "end_frame": 28313
+    },
+    {
+     "text": "In each case, it's the gradient, not the value itself, that drives the motion.",
+     "audio_text": null,
+     "start": 944.1,
+     "end": 949.725,
+     "dur": 5.625,
+     "start_frame": 28323,
+     "end_frame": 28492
+    },
+    {
+     "text": "A room that's equally warm everywhere has no flow of heat inside it, however warm it is.",
+     "audio_text": null,
+     "start": 950.075,
+     "end": 956.25,
+     "dur": 6.175,
+     "start_frame": 28502,
+     "end_frame": 28688
+    }
+   ],
+   "end": 957.05,
+   "start_frame": 27789,
+   "end_frame": 28712
+  },
+  {
+   "id": "s22_sphere",
+   "start": 957.05,
+   "sentences": [
+    {
+     "text": "Before we use the gradient on weather maps, there's one twist: the Earth is round.",
+     "audio_text": null,
+     "start": 957.05,
+     "end": 962.575,
+     "dur": 5.525,
+     "start_frame": 28712,
+     "end_frame": 28877
+    },
+    {
+     "text": "Weather data come on a grid of latitude and longitude, as we saw in the coordinates movie.",
+     "audio_text": null,
+     "start": 962.925,
+     "end": 969.4,
+     "dur": 6.475,
+     "start_frame": 28888,
+     "end_frame": 29082
+    },
+    {
+     "text": "A step north by a small angle, d phi, covers the Earth's radius times d phi.",
+     "audio_text": null,
+     "start": 969.75,
+     "end": 975.675,
+     "dur": 5.925,
+     "start_frame": 29093,
+     "end_frame": 29270
+    },
+    {
+     "text": "But a step east by a small angle, d lambda, covers only the radius times cosine phi times d lambda, because the circles of latitude shrink towards the poles.",
+     "audio_text": null,
+     "start": 976.025,
+     "end": 987.1,
+     "dur": 11.075,
+     "start_frame": 29281,
+     "end_frame": 29613
+    },
+    {
+     "text": "So the slope going east is one over the radius times cosine phi, times partial by partial lambda.",
+     "audio_text": null,
+     "start": 987.45,
+     "end": 994.625,
+     "dur": 7.175,
+     "start_frame": 29624,
+     "end_frame": 29839
+    },
+    {
+     "text": "And the slope going north is one over the radius, times partial by partial phi.",
+     "audio_text": null,
+     "start": 994.975,
+     "end": 1000.725,
+     "dur": 5.75,
+     "start_frame": 29849,
+     "end_frame": 30022
+    },
+    {
+     "text": "Together with the change going up, these make the gradient on the sphere.",
+     "audio_text": null,
+     "start": 1001.075,
+     "end": 1005.725,
+     "dur": 4.65,
+     "start_frame": 30032,
+     "end_frame": 30172
+    }
+   ],
+   "end": 1006.525,
+   "start_frame": 28712,
+   "end_frame": 30196
+  },
+  {
+   "id": "s23_cos_example",
+   "start": 1006.525,
+   "sentences": [
+    {
+     "text": "Let's see why that cosine matters, at Brest.",
+     "audio_text": null,
+     "start": 1006.525,
+     "end": 1009.7,
+     "dur": 3.175,
+     "start_frame": 30196,
+     "end_frame": 30291
+    },
+    {
+     "text": "ERA5 gives the temperature every quarter of a degree.",
+     "audio_text": "[ERA5](/ˌiˌɑɹˈA fˈIv/) gives the temperature every quarter of a degree.",
+     "start": 1010.05,
+     "end": 1014.575,
+     "dur": 4.525,
+     "start_frame": 30302,
+     "end_frame": 30437
+    },
+    {
+     "text": "One grid point east of Brest, it was four point five one degrees, and one point west, it was five point six nine.",
+     "audio_text": null,
+     "start": 1014.925,
+     "end": 1022.95,
+     "dur": 8.025,
+     "start_frame": 30448,
+     "end_frame": 30689
+    },
+    {
+     "text": "At Brest's latitude, a quarter of a degree of longitude is eighteen point four kilometres, so the two points are thirty six point eight kilometres apart.",
+     "audio_text": null,
+     "start": 1023.3,
+     "end": 1033.35,
+     "dur": 10.05,
+     "start_frame": 30699,
+     "end_frame": 31001
+    },
+    {
+     "text": "The slope going east is minus one point one eight degrees over thirty six point eight kilometres.",
+     "audio_text": null,
+     "start": 1033.7,
+     "end": 1040.7,
+     "dur": 7.0,
+     "start_frame": 31011,
+     "end_frame": 31221
+    },
+    {
+     "text": "That's minus three point two degrees per hundred kilometres.",
+     "audio_text": null,
+     "start": 1041.05,
+     "end": 1045.225,
+     "dur": 4.175,
+     "start_frame": 31232,
+     "end_frame": 31357,
+     "beat": true
+    },
+    {
+     "text": "Forget the cosine, and you'd use twenty seven point eight kilometres per step, as if you were going north.",
+     "audio_text": null,
+     "start": 1046.725,
+     "end": 1053.325,
+     "dur": 6.6,
+     "start_frame": 31402,
+     "end_frame": 31600
+    },
+    {
+     "text": "Then you'd get minus two point one, a third too small.",
+     "audio_text": null,
+     "start": 1053.675,
+     "end": 1057.5,
+     "dur": 3.825,
+     "start_frame": 31610,
+     "end_frame": 31725,
+     "beat": true
+    },
+    {
+     "text": "Near Svalbard, at seventy eight degrees north, it would be five times too small.",
+     "audio_text": null,
+     "start": 1059.0,
+     "end": 1064.6,
+     "dur": 5.6,
+     "start_frame": 31770,
+     "end_frame": 31938
+    }
+   ],
+   "end": 1065.4,
+   "start_frame": 30196,
+   "end_frame": 31962
+  },
+  {
+   "id": "s24_pressure_recap",
+   "start": 1065.4,
+   "sentences": [
+    {
+     "text": "Now let's use the gradient where it matters most in the weather: pressure.",
+     "audio_text": null,
+     "start": 1065.4,
+     "end": 1070.175,
+     "dur": 4.775,
+     "start_frame": 31962,
+     "end_frame": 32105
+    },
+    {
+     "text": "Pressure is the push of the air's molecules on every surface, a force per area.",
+     "audio_text": null,
+     "start": 1070.525,
+     "end": 1076.15,
+     "dur": 5.625,
+     "start_frame": 32116,
+     "end_frame": 32285
+    },
+    {
+     "text": "At sea level it's about a thousand and thirteen hectopascals, as we saw in the weather basics movie.",
+     "audio_text": "At sea level it's about a thousand and thirteen [hectopascals](/hˈɛktəpˌæskᵊlz/), as we saw in the weather basics movie.",
+     "start": 1076.5,
+     "end": 1083.275,
+     "dur": 6.775,
+     "start_frame": 32295,
+     "end_frame": 32498
+    },
+    {
+     "text": "Lines that join places with the same sea-level pressure are called isobars.",
+     "audio_text": null,
+     "start": 1083.625,
+     "end": 1089.05,
+     "dur": 5.425,
+     "start_frame": 32509,
+     "end_frame": 32672
+    },
+    {
+     "text": "But pressure on its own doesn't move the air.",
+     "audio_text": null,
+     "start": 1089.4,
+     "end": 1092.575,
+     "dur": 3.175,
+     "start_frame": 32682,
+     "end_frame": 32777
+    },
+    {
+     "text": "Let's see what does.",
+     "audio_text": null,
+     "start": 1092.925,
+     "end": 1094.75,
+     "dur": 1.825,
+     "start_frame": 32788,
+     "end_frame": 32843
+    }
+   ],
+   "end": 1095.55,
+   "start_frame": 31962,
+   "end_frame": 32866
+  },
+  {
+   "id": "s25_box",
+   "start": 1095.55,
+   "sentences": [
+    {
+     "text": "Picture a small box of air, d x long from west to east.",
+     "audio_text": null,
+     "start": 1095.55,
+     "end": 1099.95,
+     "dur": 4.4,
+     "start_frame": 32867,
+     "end_frame": 32999
+    },
+    {
+     "text": "The air on its west side pushes it east, with the pressure there times the area of that face.",
+     "audio_text": null,
+     "start": 1100.3,
+     "end": 1106.4,
+     "dur": 6.1,
+     "start_frame": 33009,
+     "end_frame": 33192
+    },
+    {
+     "text": "The air on its east side pushes it west, with the pressure there times the same area.",
+     "audio_text": null,
+     "start": 1106.75,
+     "end": 1112.425,
+     "dur": 5.675,
+     "start_frame": 33203,
+     "end_frame": 33373
+    },
+    {
+     "text": "If the two pressures are equal, the pushes cancel, and nothing happens, however high the pressure is.",
+     "audio_text": null,
+     "start": 1112.775,
+     "end": 1119.4,
+     "dur": 6.625,
+     "start_frame": 33383,
+     "end_frame": 33582
+    },
+    {
+     "text": "Now suppose the pressure rises towards the east.",
+     "audio_text": null,
+     "start": 1119.75,
+     "end": 1123.075,
+     "dur": 3.325,
+     "start_frame": 33592,
+     "end_frame": 33692
+    },
+    {
+     "text": "By the Taylor series, from the derivatives movie, the pressure on the east face is bigger by partial p by partial x, times d x.",
+     "audio_text": null,
+     "start": 1123.425,
+     "end": 1132.275,
+     "dur": 8.85,
+     "start_frame": 33703,
+     "end_frame": 33968
+    },
+    {
+     "text": "So the net push is minus partial p by partial x, times d x, times the area of the face.",
+     "audio_text": null,
+     "start": 1132.625,
+     "end": 1139.7,
+     "dur": 7.075,
+     "start_frame": 33979,
+     "end_frame": 34191
+    },
+    {
+     "text": "And d x times that area is the volume of the box.",
+     "audio_text": null,
+     "start": 1140.05,
+     "end": 1143.925,
+     "dur": 3.875,
+     "start_frame": 34201,
+     "end_frame": 34318
+    }
+   ],
+   "end": 1144.725,
+   "start_frame": 32866,
+   "end_frame": 34342
+  },
+  {
+   "id": "s26_per_kilogram",
+   "start": 1144.725,
+   "sentences": [
+    {
+     "text": "To turn a force into an acceleration, we divide by the mass, which is the density, rho, times the volume.",
+     "audio_text": null,
+     "start": 1144.725,
+     "end": 1152.575,
+     "dur": 7.85,
+     "start_frame": 34342,
+     "end_frame": 34577
+    },
+    {
+     "text": "The volume cancels, and the push per kilogram, going east, is minus one over rho, times partial p by partial x.",
+     "audio_text": null,
+     "start": 1152.925,
+     "end": 1161.45,
+     "dur": 8.525,
+     "start_frame": 34588,
+     "end_frame": 34843
+    },
+    {
+     "text": "The same happens going north, and going up.",
+     "audio_text": null,
+     "start": 1161.8,
+     "end": 1165.1,
+     "dur": 3.3,
+     "start_frame": 34854,
+     "end_frame": 34953
+    },
+    {
+     "text": "Together, the force per kilogram is minus one over rho, times grad p.",
+     "audio_text": null,
+     "start": 1165.45,
+     "end": 1171.05,
+     "dur": 5.6,
+     "start_frame": 34963,
+     "end_frame": 35131
+    },
+    {
+     "text": "It's called the pressure gradient force.",
+     "audio_text": null,
+     "start": 1171.4,
+     "end": 1174.15,
+     "dur": 2.75,
+     "start_frame": 35142,
+     "end_frame": 35224
+    },
+    {
+     "text": "It appears in the equation that tells the air how to move, next to the Coriolis effect, gravity and friction.",
+     "audio_text": "It appears in the equation that tells the air how to move, next to the [Coriolis](/kˌɔɹiˈOlɪs/) effect, gravity and friction.",
+     "start": 1174.5,
+     "end": 1181.85,
+     "dur": 7.35,
+     "start_frame": 35235,
+     "end_frame": 35455
+    },
+    {
+     "text": "Only differences in pressure push, which is why its name carries the word gradient.",
+     "audio_text": null,
+     "start": 1182.2,
+     "end": 1187.875,
+     "dur": 5.675,
+     "start_frame": 35466,
+     "end_frame": 35636
+    }
+   ],
+   "end": 1188.675,
+   "start_frame": 34342,
+   "end_frame": 35660
+  },
+  {
+   "id": "s27_high_to_low",
+   "start": 1188.675,
+   "sentences": [
+    {
+     "text": "Grad p points the way pressure increases fastest, towards high pressure.",
+     "audio_text": null,
+     "start": 1188.675,
+     "end": 1193.75,
+     "dur": 5.075,
+     "start_frame": 35660,
+     "end_frame": 35812
+    },
+    {
+     "text": "The minus sign flips it.",
+     "audio_text": null,
+     "start": 1194.1,
+     "end": 1196.275,
+     "dur": 2.175,
+     "start_frame": 35823,
+     "end_frame": 35888
+    },
+    {
+     "text": "So the pressure gradient force points from high pressure to low pressure, straight across the isobars.",
+     "audio_text": null,
+     "start": 1196.625,
+     "end": 1203.1,
+     "dur": 6.475,
+     "start_frame": 35899,
+     "end_frame": 36093
+    },
+    {
+     "text": "Let's put in easy numbers.",
+     "audio_text": null,
+     "start": 1203.45,
+     "end": 1205.8,
+     "dur": 2.35,
+     "start_frame": 36103,
+     "end_frame": 36174
+    },
+    {
+     "text": "Suppose the pressure changes by one hectopascal every hundred kilometres.",
+     "audio_text": "Suppose the pressure changes by one [hectopascal](/hˈɛktəpˌæskᵊl/) every hundred kilometres.",
+     "start": 1206.15,
+     "end": 1212.025,
+     "dur": 5.875,
+     "start_frame": 36184,
+     "end_frame": 36361
+    },
+    {
+     "text": "One hectopascal is a hundred pascals, and a hundred kilometres is a hundred thousand metres.",
+     "audio_text": "One [hectopascal](/hˈɛktəpˌæskᵊl/) is a hundred pascals, and a hundred kilometres is a hundred thousand metres.",
+     "start": 1212.375,
+     "end": 1219.325,
+     "dur": 6.95,
+     "start_frame": 36371,
+     "end_frame": 36580
+    },
+    {
+     "text": "So the gradient is a thousandth of a pascal per metre.",
+     "audio_text": null,
+     "start": 1219.675,
+     "end": 1223.575,
+     "dur": 3.9,
+     "start_frame": 36590,
+     "end_frame": 36707,
+     "beat": true
+    },
+    {
+     "text": "With an air density of about one kilogram per cubic metre, the push is about a thousandth of a metre per second squared.",
+     "audio_text": null,
+     "start": 1225.075,
+     "end": 1232.775,
+     "dur": 7.7,
+     "start_frame": 36752,
+     "end_frame": 36983,
+     "beat": true
+    },
+    {
+     "text": "With the real density near the ground, one point two, it's about eight ten-thousandths.",
+     "audio_text": null,
+     "start": 1234.275,
+     "end": 1240.1,
+     "dur": 5.825,
+     "start_frame": 37028,
+     "end_frame": 37203
+    },
+    {
+     "text": "That's small, but kept up for an hour, it would add about three metres per second to the wind.",
+     "audio_text": null,
+     "start": 1240.45,
+     "end": 1246.575,
+     "dur": 6.125,
+     "start_frame": 37213,
+     "end_frame": 37397,
+     "beat": true
+    }
+   ],
+   "end": 1248.075,
+   "start_frame": 35660,
+   "end_frame": 37442
+  },
+  {
+   "id": "s28_ciaran_push",
+   "start": 1248.075,
+   "sentences": [
+    {
+     "text": "Now a real storm.",
+     "audio_text": null,
+     "start": 1248.075,
+     "end": 1249.975,
+     "dur": 1.9,
+     "start_frame": 37442,
+     "end_frame": 37499
+    },
+    {
+     "text": "Here is Storm Ciarán at three in the morning on the second of November twenty twenty three, from ERA5, with isobars every four hectopascals.",
+     "audio_text": "Here is Storm Keer-awn at three in the morning on the second of November twenty twenty three, from [ERA5](/ˌiˌɑɹˈA fˈIv/), with isobars every four [hectopascals](/hˈɛktəpˌæskᵊlz/).",
+     "start": 1250.325,
+     "end": 1260.325,
+     "dur": 10.0,
+     "start_frame": 37510,
+     "end_frame": 37810
+    },
+    {
+     "text": "Its centre, at about nine hundred and fifty four hectopascals, is crossing the Channel, about two hundred kilometres north of Brest.",
+     "audio_text": "Its centre, at about nine hundred and fifty four [hectopascals](/hˈɛktəpˌæskᵊlz/), is crossing the Channel, about two hundred kilometres north of Brest.",
+     "start": 1260.675,
+     "end": 1269.525,
+     "dur": 8.85,
+     "start_frame": 37820,
+     "end_frame": 38086
+    },
+    {
+     "text": "Over Brest, the isobars are only thirty one kilometres apart.",
+     "audio_text": null,
+     "start": 1269.875,
+     "end": 1274.75,
+     "dur": 4.875,
+     "start_frame": 38096,
+     "end_frame": 38242
+    },
+    {
+     "text": "Four hectopascals in thirty one kilometres is about thirteen hectopascals per hundred kilometres, thirteen times our easy example.",
+     "audio_text": "Four [hectopascals](/hˈɛktəpˌæskᵊlz/) in thirty one kilometres is about thirteen [hectopascals](/hˈɛktəpˌæskᵊlz/) per hundred kilometres, thirteen times our easy example.",
+     "start": 1275.1,
+     "end": 1284.725,
+     "dur": 9.625,
+     "start_frame": 38253,
+     "end_frame": 38542,
+     "beat": true
+    },
+    {
+     "text": "Grad p points south-south-west, away from the low.",
+     "audio_text": null,
+     "start": 1286.225,
+     "end": 1290.05,
+     "dur": 3.825,
+     "start_frame": 38587,
+     "end_frame": 38701
+    },
+    {
+     "text": "So the pressure gradient force points north-north-east, towards the low.",
+     "audio_text": null,
+     "start": 1290.4,
+     "end": 1295.1,
+     "dur": 4.7,
+     "start_frame": 38712,
+     "end_frame": 38853
+    },
+    {
+     "text": "Divide the gradient by the density, one point two five, and the push is about one hundredth of a metre per second squared.",
+     "audio_text": null,
+     "start": 1295.45,
+     "end": 1303.55,
+     "dur": 8.1,
+     "start_frame": 38863,
+     "end_frame": 39106,
+     "beat": true
+    },
+    {
+     "text": "If nothing else acted, that would add about thirty seven metres per second to the wind in a single hour.",
+     "audio_text": null,
+     "start": 1305.05,
+     "end": 1312.125,
+     "dur": 7.075,
+     "start_frame": 39151,
+     "end_frame": 39364,
+     "beat": true
+    }
+   ],
+   "end": 1313.625,
+   "start_frame": 37442,
+   "end_frame": 39409
+  },
+  {
+   "id": "s29_crowded_winds",
+   "start": 1313.625,
+   "sentences": [
+    {
+     "text": "And this is why winds are strongest where the isobars crowd together.",
+     "audio_text": null,
+     "start": 1313.625,
+     "end": 1318.575,
+     "dur": 4.95,
+     "start_frame": 39409,
+     "end_frame": 39557
+    },
+    {
+     "text": "Let's take every point of this map over the sea, sort them by the size of the pressure gradient, and average the wind ten metres above the surface.",
+     "audio_text": null,
+     "start": 1318.925,
+     "end": 1328.175,
+     "dur": 9.25,
+     "start_frame": 39568,
+     "end_frame": 39845
+    },
+    {
+     "text": "Where the gradient is below two hectopascals per hundred kilometres, the wind averages ten metres per second.",
+     "audio_text": "Where the gradient is below two [hectopascals](/hˈɛktəpˌæskᵊlz/) per hundred kilometres, the wind averages ten metres per second.",
+     "start": 1328.525,
+     "end": 1335.975,
+     "dur": 7.45,
+     "start_frame": 39856,
+     "end_frame": 40079
+    },
+    {
+     "text": "Where it's above ten, the wind averages about twenty six.",
+     "audio_text": null,
+     "start": 1336.325,
+     "end": 1340.475,
+     "dur": 4.15,
+     "start_frame": 40090,
+     "end_frame": 40214,
+     "beat": true
+    },
+    {
+     "text": "At Brest airport that same hour, a gust of eighty four knots was measured, about a hundred and fifty six kilometres per hour.",
+     "audio_text": null,
+     "start": 1341.975,
+     "end": 1350.65,
+     "dur": 8.675,
+     "start_frame": 40259,
+     "end_frame": 40519,
+     "beat": true
+    },
+    {
+     "text": "More than a million homes in France lost power.",
+     "audio_text": null,
+     "start": 1352.15,
+     "end": 1355.375,
+     "dur": 3.225,
+     "start_frame": 40564,
+     "end_frame": 40661
+    }
+   ],
+   "end": 1356.175,
+   "start_frame": 39409,
+   "end_frame": 40685
+  },
+  {
+   "id": "s30_coriolis",
+   "start": 1356.175,
+   "sentences": [
+    {
+     "text": "But look at the wind arrows.",
+     "audio_text": null,
+     "start": 1356.175,
+     "end": 1358.3,
+     "dur": 2.125,
+     "start_frame": 40685,
+     "end_frame": 40749
+    },
+    {
+     "text": "They don't blow straight from high to low.",
+     "audio_text": null,
+     "start": 1358.65,
+     "end": 1361.225,
+     "dur": 2.575,
+     "start_frame": 40759,
+     "end_frame": 40837
+    },
+    {
+     "text": "They blow almost along the isobars, anticlockwise round the low, as seen from above.",
+     "audio_text": null,
+     "start": 1361.575,
+     "end": 1367.8,
+     "dur": 6.225,
+     "start_frame": 40847,
+     "end_frame": 41034
+    },
+    {
+     "text": "That's because the Earth turns, and the Coriolis effect pushes moving air to the right in the northern hemisphere.",
+     "audio_text": "That's because the Earth turns, and the [Coriolis](/kˌɔɹiˈOlɪs/) effect pushes moving air to the right in the northern hemisphere.",
+     "start": 1368.15,
+     "end": 1375.15,
+     "dur": 7.0,
+     "start_frame": 41044,
+     "end_frame": 41254
+    },
+    {
+     "text": "Away from the ground, the Coriolis push grows until it balances the pressure gradient force, and then the wind blows along the isobars.",
+     "audio_text": "Away from the ground, the [Coriolis](/kˌɔɹiˈOlɪs/) push grows until it balances the pressure gradient force, and then the wind blows along the isobars.",
+     "start": 1375.5,
+     "end": 1384.85,
+     "dur": 9.35,
+     "start_frame": 41265,
+     "end_frame": 41545
+    },
+    {
+     "text": "The bigger the pressure gradient, the faster the wind must blow for the two pushes to balance.",
+     "audio_text": null,
+     "start": 1385.2,
+     "end": 1391.15,
+     "dur": 5.95,
+     "start_frame": 41556,
+     "end_frame": 41734
+    },
+    {
+     "text": "That's the deeper reason crowded isobars mean strong winds.",
+     "audio_text": null,
+     "start": 1391.5,
+     "end": 1395.825,
+     "dur": 4.325,
+     "start_frame": 41745,
+     "end_frame": 41875
+    },
+    {
+     "text": "Near the ground, friction slows the wind, and lets it cross the isobars a little, towards the low.",
+     "audio_text": null,
+     "start": 1396.175,
+     "end": 1402.925,
+     "dur": 6.75,
+     "start_frame": 41885,
+     "end_frame": 42088
+    },
+    {
+     "text": "We built all of this in the cross product movie on our spinning Earth, and a later Coriolis movie takes it further.",
+     "audio_text": "We built all of this in the cross product movie on our spinning Earth, and a later [Coriolis](/kˌɔɹiˈOlɪs/) movie takes it further.",
+     "start": 1403.275,
+     "end": 1410.65,
+     "dur": 7.375,
+     "start_frame": 42098,
+     "end_frame": 42319
+    },
+    {
+     "text": "One warning: meteorologists also say gradient wind for a different idea, a balance round curved isobars, which has its own movie too.",
+     "audio_text": null,
+     "start": 1411.0,
+     "end": 1421.025,
+     "dur": 10.025,
+     "start_frame": 42330,
+     "end_frame": 42631
+    }
+   ],
+   "end": 1421.825,
+   "start_frame": 40685,
+   "end_frame": 42655
+  },
+  {
+   "id": "s31_latest_chart",
+   "start": 1421.825,
+   "sentences": [
+    {
+     "text": "Here is a more recent chart: six in the evening, universal time, on the twenty seventh of October twenty twenty six, from the American GFS model.",
+     "audio_text": null,
+     "start": 1421.825,
+     "end": 1432.2,
+     "dur": 10.375,
+     "start_frame": 42655,
+     "end_frame": 42966
+    },
+    {
+     "text": "A deep low of about nine hundred and sixty one hectopascals sits just east of Iceland.",
+     "audio_text": "A deep low of about nine hundred and sixty one [hectopascals](/hˈɛktəpˌæskᵊlz/) sits just east of Iceland.",
+     "start": 1432.55,
+     "end": 1439.225,
+     "dur": 6.675,
+     "start_frame": 42976,
+     "end_frame": 43177
+    },
+    {
+     "text": "Where its isobars crowd over the sea, the pressure gradient reaches about ten hectopascals per hundred kilometres, close to Ciarán's over Brest.",
+     "audio_text": "Where its isobars crowd over the sea, the pressure gradient reaches about ten [hectopascals](/hˈɛktəpˌæskᵊlz/) per hundred kilometres, close to Keer-awn's over Brest.",
+     "start": 1439.575,
+     "end": 1449.25,
+     "dur": 9.675,
+     "start_frame": 43187,
+     "end_frame": 43477
+    },
+    {
+     "text": "There, the winds near the surface reach about twenty five metres per second.",
+     "audio_text": null,
+     "start": 1449.6,
+     "end": 1454.75,
+     "dur": 5.15,
+     "start_frame": 43488,
+     "end_frame": 43642
+    }
+   ],
+   "end": 1455.55,
+   "start_frame": 42655,
+   "end_frame": 43666
+  },
+  {
+   "id": "s32_vertical_pressure",
+   "start": 1455.55,
+   "sentences": [
+    {
+     "text": "Pressure has a gradient going up too, and it's enormous.",
+     "audio_text": null,
+     "start": 1455.55,
+     "end": 1459.475,
+     "dur": 3.925,
+     "start_frame": 43666,
+     "end_frame": 43784
+    },
+    {
+     "text": "The Singapore balloon found the pressure falling by about zero point one one hectopascals for every metre it rose near the ground: one hectopascal in about nine metres.",
+     "audio_text": "The Singapore balloon found the pressure falling by about zero point one one [hectopascals](/hˈɛktəpˌæskᵊlz/) for every metre it rose near the ground: one [hectopascal](/hˈɛktəpˌæskᵊl/) in about nine metres.",
+     "start": 1459.825,
+     "end": 1471.5,
+     "dur": 11.675,
+     "start_frame": 43795,
+     "end_frame": 44145,
+     "beat": true
+    },
+    {
+     "text": "Ciarán's crowded isobars needed thirty one kilometres for four hectopascals, which is about eight kilometres per hectopascal.",
+     "audio_text": "Keer-awn's crowded isobars needed thirty one kilometres for four [hectopascals](/hˈɛktəpˌæskᵊlz/), which is about eight kilometres per [hectopascal](/hˈɛktəpˌæskᵊl/).",
+     "start": 1473.0,
+     "end": 1481.95,
+     "dur": 8.95,
+     "start_frame": 44190,
+     "end_frame": 44458
+    },
+    {
+     "text": "So the upward pressure gradient was about eight hundred and fifty times stronger than Ciarán's sideways one.",
+     "audio_text": "So the upward pressure gradient was about eight hundred and fifty times stronger than Keer-awn's sideways one.",
+     "start": 1482.3,
+     "end": 1489.475,
+     "dur": 7.175,
+     "start_frame": 44469,
+     "end_frame": 44684
+    },
+    {
+     "text": "On an ordinary day, it's about ten thousand times stronger.",
+     "audio_text": null,
+     "start": 1489.825,
+     "end": 1494.2,
+     "dur": 4.375,
+     "start_frame": 44695,
+     "end_frame": 44826,
+     "beat": true
+    },
+    {
+     "text": "So why doesn't it blast the air into space?",
+     "audio_text": null,
+     "start": 1495.7,
+     "end": 1498.6,
+     "dur": 2.9,
+     "start_frame": 44871,
+     "end_frame": 44958
+    },
+    {
+     "text": "Because gravity pulls down just as hard.",
+     "audio_text": null,
+     "start": 1498.95,
+     "end": 1502.0,
+     "dur": 3.05,
+     "start_frame": 44968,
+     "end_frame": 45060
+    },
+    {
+     "text": "This is hydrostatic balance, from the weather basics movie: partial p by partial z equals minus rho g.",
+     "audio_text": null,
+     "start": 1502.35,
+     "end": 1510.2,
+     "dur": 7.85,
+     "start_frame": 45070,
+     "end_frame": 45306
+    },
+    {
+     "text": "Near the ground in Singapore, rho is about one point one seven kilograms per cubic metre, and g is nine point eight one, so that's about eleven and a half pascals per metre, close to the balloon's ten point nine.",
+     "audio_text": null,
+     "start": 1510.55,
+     "end": 1524.6,
+     "dur": 14.05,
+     "start_frame": 45316,
+     "end_frame": 45738,
+     "beat": true
+    },
+    {
+     "text": "So the upward push is almost exactly cancelled, and the weather is driven by the tiny sideways part.",
+     "audio_text": null,
+     "start": 1526.1,
+     "end": 1533.05,
+     "dur": 6.95,
+     "start_frame": 45783,
+     "end_frame": 45991
+    },
+    {
+     "text": "Because pressure falls so steadily with height, meteorologists often use pressure itself as a vertical coordinate, which has its own movie.",
+     "audio_text": null,
+     "start": 1533.4,
+     "end": 1542.825,
+     "dur": 9.425,
+     "start_frame": 46002,
+     "end_frame": 46285
+    }
+   ],
+   "end": 1543.625,
+   "start_frame": 43666,
+   "end_frame": 46309
+  },
+  {
+   "id": "s33_fronts",
+   "start": 1543.625,
+   "sentences": [
+    {
+     "text": "Now back to temperature.",
+     "audio_text": null,
+     "start": 1543.625,
+     "end": 1545.75,
+     "dur": 2.125,
+     "start_frame": 46309,
+     "end_frame": 46372
+    },
+    {
+     "text": "Here again is the map of temperature one and a half kilometres up, at six in the evening on the first of November.",
+     "audio_text": null,
+     "start": 1546.1,
+     "end": 1553.275,
+     "dur": 7.175,
+     "start_frame": 46383,
+     "end_frame": 46598
+    },
+    {
+     "text": "Over most of the map, the gradient is about one degree per hundred kilometres.",
+     "audio_text": null,
+     "start": 1553.625,
+     "end": 1558.975,
+     "dur": 5.35,
+     "start_frame": 46609,
+     "end_frame": 46769
+    },
+    {
+     "text": "But in one narrow band near the storm, it reaches about eleven.",
+     "audio_text": null,
+     "start": 1559.325,
+     "end": 1563.875,
+     "dur": 4.55,
+     "start_frame": 46780,
+     "end_frame": 46916,
+     "beat": true
+    },
+    {
+     "text": "That band is a front, a boundary between a warm air mass and a cold one, as we saw in the weather basics movie.",
+     "audio_text": null,
+     "start": 1565.375,
+     "end": 1573.425,
+     "dur": 8.05,
+     "start_frame": 46961,
+     "end_frame": 47203
+    },
+    {
+     "text": "At a front, the temperature gradient is squeezed into a narrow zone, more than ten times stronger than around it.",
+     "audio_text": null,
+     "start": 1573.775,
+     "end": 1581.175,
+     "dur": 7.4,
+     "start_frame": 47213,
+     "end_frame": 47435
+    },
+    {
+     "text": "All its arrows point across the front, towards the warm side.",
+     "audio_text": null,
+     "start": 1581.525,
+     "end": 1585.825,
+     "dur": 4.3,
+     "start_frame": 47446,
+     "end_frame": 47575
+    }
+   ],
+   "end": 1586.625,
+   "start_frame": 46309,
+   "end_frame": 47599
+  },
+  {
+   "id": "s33b_front_stack",
+   "start": 1586.625,
+   "sentences": [
+    {
+     "text": "A front isn't just a line on a map.",
+     "audio_text": null,
+     "start": 1586.625,
+     "end": 1589.425,
+     "dur": 2.8,
+     "start_frame": 47599,
+     "end_frame": 47683
+    },
+    {
+     "text": "Let's stack four temperature maps above a strong cold front over the central United States, on the twenty second of December twenty twenty two, from about one and a half to nine kilometres up.",
+     "audio_text": null,
+     "start": 1589.775,
+     "end": 1602.0,
+     "dur": 12.225,
+     "start_frame": 47693,
+     "end_frame": 48060
+    },
+    {
+     "text": "On every layer, the orange arrows are grad capital T, pointing towards warmer air.",
+     "audio_text": null,
+     "start": 1602.35,
+     "end": 1608.475,
+     "dur": 6.125,
+     "start_frame": 48070,
+     "end_frame": 48254
+    },
+    {
+     "text": "Where the isotherms crowd, the arrows are longest, and that's the front on that layer.",
+     "audio_text": null,
+     "start": 1608.825,
+     "end": 1614.625,
+     "dur": 5.8,
+     "start_frame": 48265,
+     "end_frame": 48439
+    },
+    {
+     "text": "Let's circle the stack from outside, from the bottom layer to the top.",
+     "audio_text": null,
+     "start": 1614.975,
+     "end": 1619.55,
+     "dur": 4.575,
+     "start_frame": 48449,
+     "end_frame": 48586
+    },
+    {
+     "text": "Every layer above the bottom one has its crowded band on the cold side of the bottom front, between about two hundred and sixty and four hundred and fifty kilometres behind it.",
+     "audio_text": null,
+     "start": 1619.9,
+     "end": 1631.2,
+     "dur": 11.3,
+     "start_frame": 48597,
+     "end_frame": 48936,
+     "beat": true
+    },
+    {
+     "text": "So a front is a sloping surface that leans back over the cold air, and the gradient finds it on every layer.",
+     "audio_text": null,
+     "start": 1632.7,
+     "end": 1639.95,
+     "dur": 7.25,
+     "start_frame": 48981,
+     "end_frame": 49198
+    }
+   ],
+   "end": 1640.75,
+   "start_frame": 47599,
+   "end_frame": 49222
+  },
+  {
+   "id": "s34_advection",
+   "start": 1640.75,
+   "sentences": [
+    {
+     "text": "The gradient also tells us how the wind changes the temperature at a fixed place.",
+     "audio_text": null,
+     "start": 1640.75,
+     "end": 1646.425,
+     "dur": 5.675,
+     "start_frame": 49222,
+     "end_frame": 49393
+    },
+    {
+     "text": "Over Brest at that hour, the wind at that height blew at thirty four metres per second, from just west of south, at a hundred and thirty eight degrees to grad capital T.",
+     "audio_text": null,
+     "start": 1646.775,
+     "end": 1657.95,
+     "dur": 11.175,
+     "start_frame": 49403,
+     "end_frame": 49738
+    },
+    {
+     "text": "So along the wind, the temperature changes at grad capital T dot the wind's direction.",
+     "audio_text": null,
+     "start": 1658.3,
+     "end": 1664.4,
+     "dur": 6.1,
+     "start_frame": 49749,
+     "end_frame": 49932
+    },
+    {
+     "text": "That's four point one times the cosine of a hundred and thirty eight degrees, which is about minus three degrees per hundred kilometres.",
+     "audio_text": null,
+     "start": 1664.75,
+     "end": 1673.575,
+     "dur": 8.825,
+     "start_frame": 49942,
+     "end_frame": 50207,
+     "beat": true
+    },
+    {
+     "text": "It's negative because the wind blows towards colder air.",
+     "audio_text": null,
+     "start": 1675.075,
+     "end": 1679.175,
+     "dur": 4.1,
+     "start_frame": 50252,
+     "end_frame": 50375
+    },
+    {
+     "text": "Times the wind speed, that's minus three point seven degrees per hour.",
+     "audio_text": null,
+     "start": 1679.525,
+     "end": 1684.375,
+     "dur": 4.85,
+     "start_frame": 50386,
+     "end_frame": 50531,
+     "beat": true
+    },
+    {
+     "text": "This is v dot grad capital T, the advection term from the dot product movie.",
+     "audio_text": null,
+     "start": 1685.875,
+     "end": 1691.85,
+     "dur": 5.975,
+     "start_frame": 50576,
+     "end_frame": 50755
+    },
+    {
+     "text": "Because the air keeps arriving from the warmer side, a fixed thermometer at Brest would warm by about three point seven degrees per hour from this alone.",
+     "audio_text": null,
+     "start": 1692.2,
+     "end": 1701.65,
+     "dur": 9.45,
+     "start_frame": 50766,
+     "end_frame": 51049
+    },
+    {
+     "text": "The material derivative movie takes this apart fully.",
+     "audio_text": null,
+     "start": 1702.0,
+     "end": 1705.975,
+     "dur": 3.975,
+     "start_frame": 51060,
+     "end_frame": 51179
+    }
+   ],
+   "end": 1706.775,
+   "start_frame": 49222,
+   "end_frame": 51203
+  },
+  {
+   "id": "s35_sea_breeze",
+   "start": 1706.775,
+   "sentences": [
+    {
+     "text": "Some of the sharpest temperature gradients form on sunny days, along coasts.",
+     "audio_text": null,
+     "start": 1706.775,
+     "end": 1711.975,
+     "dur": 5.2,
+     "start_frame": 51203,
+     "end_frame": 51359
+    },
+    {
+     "text": "Here is the coast of Normandy, in northern France, at one in the afternoon on the twenty fourth of June twenty twenty four.",
+     "audio_text": null,
+     "start": 1712.325,
+     "end": 1720.55,
+     "dur": 8.225,
+     "start_frame": 51370,
+     "end_frame": 51616
+    },
+    {
+     "text": "The satellite picture shows small fair-weather clouds over the land, and clear skies over the sea.",
+     "audio_text": null,
+     "start": 1720.9,
+     "end": 1727.3,
+     "dur": 6.4,
+     "start_frame": 51627,
+     "end_frame": 51819
+    },
+    {
+     "text": "Inland, the air two metres above the ground was at twenty four point six degrees.",
+     "audio_text": null,
+     "start": 1727.65,
+     "end": 1733.175,
+     "dur": 5.525,
+     "start_frame": 51829,
+     "end_frame": 51995
+    },
+    {
+     "text": "Over the Channel, about fifty five kilometres to the north, it was sixteen point one.",
+     "audio_text": null,
+     "start": 1733.525,
+     "end": 1739.475,
+     "dur": 5.95,
+     "start_frame": 52006,
+     "end_frame": 52184
+    },
+    {
+     "text": "That's about fifteen degrees per hundred kilometres, sharper than the storm's front.",
+     "audio_text": null,
+     "start": 1739.825,
+     "end": 1745.2,
+     "dur": 5.375,
+     "start_frame": 52195,
+     "end_frame": 52356,
+     "beat": true
+    },
+    {
+     "text": "Land warms faster in the sun than the sea does.",
+     "audio_text": null,
+     "start": 1746.7,
+     "end": 1750.325,
+     "dur": 3.625,
+     "start_frame": 52401,
+     "end_frame": 52510
+    },
+    {
+     "text": "The warm air over the land expands and rises, so near the ground the pressure ends up a little higher over the sea than over the land.",
+     "audio_text": null,
+     "start": 1750.675,
+     "end": 1759.175,
+     "dur": 8.5,
+     "start_frame": 52520,
+     "end_frame": 52775
+    },
+    {
+     "text": "That small pressure gradient pushes cooler sea air inland.",
+     "audio_text": null,
+     "start": 1759.525,
+     "end": 1763.725,
+     "dur": 4.2,
+     "start_frame": 52786,
+     "end_frame": 52912
+    },
+    {
+     "text": "This is the sea breeze.",
+     "audio_text": null,
+     "start": 1764.075,
+     "end": 1766.15,
+     "dur": 2.075,
+     "start_frame": 52922,
+     "end_frame": 52984
+    }
+   ],
+   "end": 1766.95,
+   "start_frame": 51203,
+   "end_frame": 53008
+  },
+  {
+   "id": "s36_jet",
+   "start": 1766.95,
+   "sentences": [
+    {
+     "text": "High up, temperature gradients and the jet stream go together.",
+     "audio_text": null,
+     "start": 1766.95,
+     "end": 1771.15,
+     "dur": 4.2,
+     "start_frame": 53008,
+     "end_frame": 53134
+    },
+    {
+     "text": "Here is the average for September twenty twenty six, all the way round the Earth, as a slice from the equator to the North Pole.",
+     "audio_text": null,
+     "start": 1771.5,
+     "end": 1779.675,
+     "dur": 8.175,
+     "start_frame": 53145,
+     "end_frame": 53390
+    },
+    {
+     "text": "The temperature drops fastest towards the pole near forty five degrees north, by about six degrees per thousand kilometres, averaged from about one and a half to nine kilometres up.",
+     "audio_text": null,
+     "start": 1780.025,
+     "end": 1791.7,
+     "dur": 11.675,
+     "start_frame": 53401,
+     "end_frame": 53751,
+     "beat": true
+    },
+    {
+     "text": "Right above that zone, about twelve kilometres up, the westerly wind is strongest, about twenty six metres per second on average.",
+     "audio_text": null,
+     "start": 1793.2,
+     "end": 1802.15,
+     "dur": 8.95,
+     "start_frame": 53796,
+     "end_frame": 54064,
+     "beat": true
+    },
+    {
+     "text": "Single days can be much stronger.",
+     "audio_text": null,
+     "start": 1803.65,
+     "end": 1806.4,
+     "dur": 2.75,
+     "start_frame": 54109,
+     "end_frame": 54192
+    },
+    {
+     "text": "On the twenty eighth of October twenty twenty six, the GFS analysis shows the jet over the North Atlantic at sixty six metres per second.",
+     "audio_text": null,
+     "start": 1806.75,
+     "end": 1816.3,
+     "dur": 9.55,
+     "start_frame": 54202,
+     "end_frame": 54489
+    },
+    {
+     "text": "That's about two hundred and forty kilometres per hour.",
+     "audio_text": null,
+     "start": 1816.65,
+     "end": 1820.725,
+     "dur": 4.075,
+     "start_frame": 54499,
+     "end_frame": 54622,
+     "beat": true
+    },
+    {
+     "text": "Why winds grow with height above a temperature gradient is called the thermal wind, and it has its own movie.",
+     "audio_text": null,
+     "start": 1822.225,
+     "end": 1829.225,
+     "dur": 7.0,
+     "start_frame": 54667,
+     "end_frame": 54877
+    }
+   ],
+   "end": 1830.025,
+   "start_frame": 53008,
+   "end_frame": 54901
+  },
+  {
+   "id": "s37_gulf_stream",
+   "start": 1830.025,
+   "sentences": [
+    {
+     "text": "The ocean has temperature gradients too.",
+     "audio_text": null,
+     "start": 1830.025,
+     "end": 1833.0,
+     "dur": 2.975,
+     "start_frame": 54901,
+     "end_frame": 54990
+    },
+    {
+     "text": "Off the east coast of the United States, the Gulf Stream carries warm water from the tropics towards the north-east, right next to colder water from the north.",
+     "audio_text": null,
+     "start": 1833.35,
+     "end": 1842.95,
+     "dur": 9.6,
+     "start_frame": 55000,
+     "end_frame": 55288
+    },
+    {
+     "text": "Along its northern edge, on the twenty ninth of October twenty twenty six, the sea-surface temperature dropped by about six and a half degrees in about thirty five kilometres.",
+     "audio_text": null,
+     "start": 1843.3,
+     "end": 1854.525,
+     "dur": 11.225,
+     "start_frame": 55299,
+     "end_frame": 55636
+    },
+    {
+     "text": "That's one of the sharpest temperature gradients in the open ocean.",
+     "audio_text": null,
+     "start": 1854.875,
+     "end": 1859.475,
+     "dur": 4.6,
+     "start_frame": 55646,
+     "end_frame": 55784
+    },
+    {
+     "text": "Winter storms often deepen fastest near it, so forecasters watch it closely.",
+     "audio_text": null,
+     "start": 1859.825,
+     "end": 1865.625,
+     "dur": 5.8,
+     "start_frame": 55795,
+     "end_frame": 55969
+    },
+    {
+     "text": "The great ocean currents have their own movies later in this series.",
+     "audio_text": null,
+     "start": 1865.975,
+     "end": 1870.55,
+     "dur": 4.575,
+     "start_frame": 55979,
+     "end_frame": 56116
+    }
+   ],
+   "end": 1871.35,
+   "start_frame": 54901,
+   "end_frame": 56140
+  },
+  {
+   "id": "s38_recap",
+   "start": 1871.35,
+   "sentences": [
+    {
+     "text": "To sum up, a scalar field has a value at every place, like height, temperature or pressure.",
+     "audio_text": null,
+     "start": 1871.35,
+     "end": 1877.85,
+     "dur": 6.5,
+     "start_frame": 56140,
+     "end_frame": 56335
+    },
+    {
+     "text": "Its gradient, grad f, is the arrow built from its partial derivatives, going east, north and up.",
+     "audio_text": null,
+     "start": 1878.2,
+     "end": 1884.95,
+     "dur": 6.75,
+     "start_frame": 56346,
+     "end_frame": 56548
+    },
+    {
+     "text": "It points the way the field increases fastest, and its length is that fastest rate.",
+     "audio_text": null,
+     "start": 1885.3,
+     "end": 1891.175,
+     "dur": 5.875,
+     "start_frame": 56559,
+     "end_frame": 56735
+    },
+    {
+     "text": "It's at right angles to contour lines, isotherms and isobars, and it's big where they crowd together.",
+     "audio_text": null,
+     "start": 1891.525,
+     "end": 1898.675,
+     "dur": 7.15,
+     "start_frame": 56746,
+     "end_frame": 56960
+    },
+    {
+     "text": "The rate in any direction is grad f dot n hat, the directional derivative.",
+     "audio_text": null,
+     "start": 1899.025,
+     "end": 1904.5,
+     "dur": 5.475,
+     "start_frame": 56971,
+     "end_frame": 57135
+    },
+    {
+     "text": "On the round Earth, the slope going east carries one over the radius times cosine phi.",
+     "audio_text": null,
+     "start": 1904.85,
+     "end": 1910.925,
+     "dur": 6.075,
+     "start_frame": 57145,
+     "end_frame": 57328
+    },
+    {
+     "text": "The pressure gradient force, minus one over rho times grad p, pushes air from high to low pressure, which is why crowded isobars mean strong winds.",
+     "audio_text": null,
+     "start": 1911.275,
+     "end": 1921.875,
+     "dur": 10.6,
+     "start_frame": 57338,
+     "end_frame": 57656
+    },
+    {
+     "text": "Sharp temperature gradients mark fronts and sea breezes, and the jet stream blows above the strongest of them.",
+     "audio_text": null,
+     "start": 1922.225,
+     "end": 1929.325,
+     "dur": 7.1,
+     "start_frame": 57667,
+     "end_frame": 57880
+    }
+   ],
+   "end": 1930.125,
+   "start_frame": 56140,
+   "end_frame": 57904
+  },
+  {
+   "id": "s39_end",
+   "start": 1930.125,
+   "sentences": [
+    {
+     "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
+     "audio_text": null,
+     "start": 1930.125,
+     "end": 1936.325,
+     "dur": 6.2,
+     "start_frame": 57904,
+     "end_frame": 58090
+    },
+    {
+     "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
+     "audio_text": null,
+     "start": 1936.675,
+     "end": 1944.725,
+     "dur": 8.05,
+     "start_frame": 58100,
+     "end_frame": 58342
+    },
+    {
+     "text": "The notebook for the gradient, and the notebooks for the other maths concepts, are on the website that goes with this video.",
+     "audio_text": null,
+     "start": 1945.075,
+     "end": 1952.6,
+     "dur": 7.525,
+     "start_frame": 58352,
+     "end_frame": 58578
+    }
+   ],
+   "end": 1952.9,
+   "start_frame": 57904,
+   "end_frame": 58587
+  }
+ ],
+ "total_s": 1952.9,
+ "total_frames": 58587,
+ "render_s": 1439.3,
+ "loudnorm_input": {
+  "input_i": "-24.88",
+  "input_tp": "-1.42",
+  "input_lra": "4.70",
+  "input_thresh": "-35.34",
+  "output_i": "-16.50",
+  "output_tp": "-1.50",
+  "output_lra": "4.50",
+  "output_thresh": "-26.95",
+  "normalization_type": "dynamic",
+  "target_offset": "0.50"
+ },
+ "cues": 489,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 1952.9,
+  "audio_s": 1952.9,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true
+ }
+}

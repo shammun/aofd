@@ -1,0 +1,2305 @@
+1
+00:00:00,300 --> 00:00:03,778
+In this video, we'll learn
+the gradient the easy way,
+
+2
+00:00:03,778 --> 00:00:06,731
+and see how meteorology
+uses it to find which
+
+3
+00:00:06,731 --> 00:00:08,175
+way the air is pushed,
+
+4
+00:00:08,175 --> 00:00:12,375
+and why the wind blows hardest
+where the isobars crowd together.
+
+5
+00:00:13,175 --> 00:00:15,050
+What is the gradient?
+
+6
+00:00:15,400 --> 00:00:18,850
+Let's see what it is, and why
+it's built this way.
+
+7
+00:00:19,200 --> 00:00:23,675
+Then let's see what it tells us
+about mountains, storms and the wind.
+
+8
+00:00:24,475 --> 00:00:26,650
+Let's start with a mountain.
+
+9
+00:00:27,000 --> 00:00:31,400
+At every place on a map, the ground
+has a height above sea level.
+
+10
+00:00:31,750 --> 00:00:36,250
+A quantity that has a value
+at every place is called a field.
+
+11
+00:00:36,600 --> 00:00:41,175
+Height is a scalar field:
+at each place, it's just one number.
+
+12
+00:00:41,525 --> 00:00:44,496
+Temperature and pressure
+are scalar fields too,
+
+13
+00:00:44,496 --> 00:00:47,025
+and they're what the weather is made of.
+
+14
+00:00:47,375 --> 00:00:49,650
+Today's question is simple.
+
+15
+00:00:50,000 --> 00:00:52,254
+Standing at one place in a field,
+
+16
+00:00:52,254 --> 00:00:55,600
+which way does it increase
+fastest, and how fast?
+
+17
+00:00:56,400 --> 00:00:59,975
+Imagine you're standing
+on a hillside in thick fog.
+
+18
+00:01:00,325 --> 00:01:04,525
+You can't see the top, but you can
+feel the slope under your feet.
+
+19
+00:01:04,875 --> 00:01:07,775
+Take a step east, and you climb a little.
+
+20
+00:01:08,125 --> 00:01:11,325
+Take a step north, and you
+climb a bit more.
+
+21
+00:01:11,675 --> 00:01:17,000
+These two slopes are partial derivatives,
+which we met in the derivatives movie.
+
+22
+00:01:17,350 --> 00:01:20,977
+Partial h by partial x is
+how fast the height,
+
+23
+00:01:20,977 --> 00:01:24,525
+h, changes going
+east, with north held fixed.
+
+24
+00:01:24,875 --> 00:01:29,575
+Partial h by partial y is how fast
+it changes going north.
+
+25
+00:01:29,925 --> 00:01:31,023
+On our hillside,
+
+26
+00:01:31,023 --> 00:01:35,550
+let's say the ground rises thirty
+metres for every kilometre east,
+
+27
+00:01:35,550 --> 00:01:38,500
+and forty metres
+for every kilometre north.
+
+28
+00:01:39,300 --> 00:01:41,400
+So which way is steepest?
+
+29
+00:01:41,750 --> 00:01:43,975
+Let's try some directions.
+
+30
+00:01:44,325 --> 00:01:49,600
+Going east, we climb thirty metres
+per kilometre, and going north, forty.
+
+31
+00:01:49,950 --> 00:01:52,550
+What about a direction in between?
+
+32
+00:01:52,900 --> 00:01:54,623
+From the derivatives movie,
+
+33
+00:01:54,623 --> 00:01:58,644
+a small change in height is the slope
+east times the step east,
+
+34
+00:01:58,644 --> 00:02:01,325
+plus the slope north times the step north.
+
+35
+00:02:01,675 --> 00:02:03,860
+Walk one kilometre north-east,
+
+36
+00:02:03,860 --> 00:02:07,792
+and you go about
+zero point seven one kilometres east,
+
+37
+00:02:07,792 --> 00:02:10,850
+and zero point seven one kilometres north.
+
+38
+00:02:11,200 --> 00:02:14,588
+So you climb thirty times
+zero point seven one,
+
+39
+00:02:14,588 --> 00:02:17,328
+plus forty times zero point seven one,
+
+40
+00:02:17,328 --> 00:02:20,500
+which is about forty
+nine and a half metres.
+
+41
+00:02:22,000 --> 00:02:24,525
+That beats both east and north.
+
+42
+00:02:24,875 --> 00:02:27,971
+Now let's turn slowly
+through every direction,
+
+43
+00:02:27,971 --> 00:02:30,125
+and draw the climb for each one.
+
+44
+00:02:30,475 --> 00:02:33,675
+The curve rises, peaks, and falls again.
+
+45
+00:02:34,025 --> 00:02:39,200
+Its peak is fifty metres per kilometre,
+at fifty three degrees from east.
+
+46
+00:02:40,700 --> 00:02:43,050
+Now look at those two numbers.
+
+47
+00:02:43,400 --> 00:02:49,050
+Fifty is the square root of thirty
+squared plus forty squared, by Pythagoras.
+
+48
+00:02:49,400 --> 00:02:52,093
+And fifty three degrees is exactly the
+
+49
+00:02:52,093 --> 00:02:55,424
+direction of an arrow
+that goes thirty east and
+
+50
+00:02:55,424 --> 00:02:59,424
+forty north. So let's build
+an arrow from the two slopes,
+
+51
+00:02:59,424 --> 00:03:03,050
+with thirty as its east part
+and forty as its north part.
+
+52
+00:03:03,400 --> 00:03:08,125
+It points the steepest way uphill, and
+its length is the steepest slope.
+
+53
+00:03:08,475 --> 00:03:10,975
+That arrow is called the gradient.
+
+54
+00:03:11,775 --> 00:03:13,725
+Let's write it down.
+
+55
+00:03:14,075 --> 00:03:18,340
+The gradient of h is written
+with an upside down triangle,
+
+56
+00:03:18,340 --> 00:03:21,575
+called nabla, or del, and we
+read it grad h.
+
+57
+00:03:21,925 --> 00:03:26,206
+Grad h equals x hat times
+partial h by partial x,
+
+58
+00:03:26,206 --> 00:03:29,700
+plus y hat times partial h by partial y.
+
+59
+00:03:30,050 --> 00:03:34,235
+Here x hat and y hat are
+the unit arrows pointing east and
+
+60
+00:03:34,235 --> 00:03:36,400
+north, from the vectors movie.
+
+61
+00:03:36,750 --> 00:03:43,550
+For our hillside, grad h is thirty x hat
+plus forty y hat, in metres per kilometre.
+
+62
+00:03:43,900 --> 00:03:47,150
+Its length is fifty metres per kilometre.
+
+63
+00:03:48,650 --> 00:03:53,175
+So the gradient turns a scalar
+field into a vector at every place.
+
+64
+00:03:53,975 --> 00:03:58,825
+The upside down triangle on its own
+is called the del operator.
+
+65
+00:03:59,175 --> 00:04:04,050
+Think of it as an arrow made
+of derivatives, waiting for a field:
+
+66
+00:04:04,050 --> 00:04:08,550
+x hat partial by partial x, plus y hat
+partial by partial y,
+
+67
+00:04:08,550 --> 00:04:10,950
+plus z hat partial by partial z.
+
+68
+00:04:11,300 --> 00:04:13,795
+The third part is the change going up,
+
+69
+00:04:13,795 --> 00:04:17,800
+which matters for fields that
+fill the air, like temperature.
+
+70
+00:04:18,150 --> 00:04:21,639
+In index notation, from the vectors movie,
+
+71
+00:04:21,639 --> 00:04:26,375
+the i-th component
+of grad f is partial f by partial x i.
+
+72
+00:04:26,725 --> 00:04:30,955
+The same del operator also builds
+the divergence, the curl and
+
+73
+00:04:30,955 --> 00:04:35,800
+the Laplacian, and each of them has
+its own movie later in this series.
+
+74
+00:04:36,600 --> 00:04:40,525
+A gradient has the field's
+unit, divided by a length.
+
+75
+00:04:40,875 --> 00:04:45,475
+A height gradient is metres
+per kilometre, which is just a slope.
+
+76
+00:04:45,825 --> 00:04:48,845
+A temperature gradient
+is kelvins per metre,
+
+77
+00:04:48,845 --> 00:04:53,100
+though forecasters usually say
+degrees per hundred kilometres.
+
+78
+00:04:53,450 --> 00:04:58,000
+A kelvin step is the same
+size as a degree Celsius step.
+
+79
+00:04:58,350 --> 00:05:04,300
+A pressure gradient is pascals per metre,
+or hectopascals per hundred kilometres.
+
+80
+00:05:05,100 --> 00:05:10,350
+Since every place has its own gradient,
+we can draw an arrow at every place.
+
+81
+00:05:10,700 --> 00:05:13,100
+That's called a gradient field.
+
+82
+00:05:13,450 --> 00:05:16,272
+Here is the real temperature about one and
+
+83
+00:05:16,272 --> 00:05:19,900
+a half kilometres up, over
+Brittany in western France.
+
+84
+00:05:20,250 --> 00:05:24,796
+It's six in the evening on the first
+of November twenty twenty three,
+
+85
+00:05:24,796 --> 00:05:26,575
+as Storm Ciarán approaches.
+
+86
+00:05:26,925 --> 00:05:30,462
+These temperatures come
+from ERA5, a reanalysis:
+
+87
+00:05:30,462 --> 00:05:33,704
+a careful reconstruction
+of the weather that
+
+88
+00:05:33,704 --> 00:05:36,725
+blends observations with a weather model.
+
+89
+00:05:37,075 --> 00:05:41,101
+Every arrow points the way
+the temperature increases fastest,
+
+90
+00:05:41,101 --> 00:05:43,675
+towards the warm air in the south-west.
+
+91
+00:05:44,025 --> 00:05:48,119
+At Brest, partial
+capital T by partial x is minus three
+
+92
+00:05:48,119 --> 00:05:51,227
+point two degrees per hundred kilometres,
+
+93
+00:05:51,227 --> 00:05:55,700
+and partial capital T by
+partial y is minus two point five.
+
+94
+00:05:56,050 --> 00:05:57,071
+By Pythagoras,
+
+95
+00:05:57,071 --> 00:06:03,125
+grad capital T has a length of about four
+point one degrees per hundred kilometres.
+
+96
+00:06:04,625 --> 00:06:06,567
+It points about two hundred and
+
+97
+00:06:06,567 --> 00:06:09,700
+thirty degrees from north,
+towards the south-west.
+
+98
+00:06:10,500 --> 00:06:14,875
+Now let's see why the arrow works,
+starting from a general rule.
+
+99
+00:06:15,225 --> 00:06:19,750
+Suppose we walk a short distance,
+d s, in some direction.
+
+100
+00:06:20,100 --> 00:06:23,740
+Let's describe that
+direction by a unit vector,
+
+101
+00:06:23,740 --> 00:06:26,450
+n hat, at an angle alpha from east.
+
+102
+00:06:26,800 --> 00:06:31,750
+Its east part is cosine
+alpha, and its north part is sine alpha.
+
+103
+00:06:32,100 --> 00:06:35,488
+So the step east
+is d s times cosine alpha,
+
+104
+00:06:35,488 --> 00:06:38,875
+and the step north
+is d s times sine alpha.
+
+105
+00:06:39,225 --> 00:06:44,149
+The change in height is partial h by
+partial x times the step east,
+
+106
+00:06:44,149 --> 00:06:47,750
+plus partial h by
+partial y times the step north.
+
+107
+00:06:48,100 --> 00:06:50,950
+Now divide both sides by d s.
+
+108
+00:06:51,300 --> 00:06:57,206
+The rate of climb along n hat is
+partial h by partial x times cosine alpha,
+
+109
+00:06:57,206 --> 00:07:00,750
+plus partial h by
+partial y times sine alpha.
+
+110
+00:07:01,100 --> 00:07:07,125
+That is exactly the dot product of grad
+h with n hat, from the dot product movie.
+
+111
+00:07:07,475 --> 00:07:11,611
+So the rate of change in any
+direction is grad h dot n hat,
+
+112
+00:07:11,611 --> 00:07:14,625
+and it's called
+the directional derivative.
+
+113
+00:07:14,975 --> 00:07:17,175
+Let's check it going north.
+
+114
+00:07:17,525 --> 00:07:21,500
+Alpha is ninety degrees,
+so we get thirty times zero,
+
+115
+00:07:21,500 --> 00:07:24,275
+plus forty times one, which is forty.
+
+116
+00:07:25,775 --> 00:07:28,875
+Why does the gradient
+point the steepest way?
+
+117
+00:07:29,225 --> 00:07:33,192
+The dot product has a second
+form: the length of grad h,
+
+118
+00:07:33,192 --> 00:07:38,150
+times the length of n hat, times the
+cosine of the angle between them.
+
+119
+00:07:38,500 --> 00:07:40,850
+Let's call that angle theta.
+
+120
+00:07:41,200 --> 00:07:42,818
+N hat has length one,
+
+121
+00:07:42,818 --> 00:07:47,750
+so the rate of climb is the length
+of grad h times cosine theta.
+
+122
+00:07:48,100 --> 00:07:53,825
+A cosine is never bigger than one, and it
+equals one only when theta is zero.
+
+123
+00:07:54,175 --> 00:07:58,259
+So the climb is largest when
+you walk along grad h itself,
+
+124
+00:07:58,259 --> 00:08:01,075
+and then it equals the length of grad h.
+
+125
+00:08:01,425 --> 00:08:05,949
+That's why the gradient points
+the way the field increases fastest,
+
+126
+00:08:05,949 --> 00:08:08,650
+and why its length is that fastest rate.
+
+127
+00:08:09,000 --> 00:08:13,687
+Walk the opposite way, where theta
+is a hundred and eighty degrees,
+
+128
+00:08:13,687 --> 00:08:18,025
+and the cosine is minus one:
+you go down at the steepest rate.
+
+129
+00:08:18,825 --> 00:08:22,225
+Now walk along a path where
+the height stays the same,
+
+130
+00:08:22,225 --> 00:08:23,925
+round the side of the hill.
+
+131
+00:08:24,275 --> 00:08:28,125
+On a map, such paths are
+drawn as contour lines.
+
+132
+00:08:28,475 --> 00:08:33,525
+Along a contour, the height doesn't
+change, so the rate of climb is zero.
+
+133
+00:08:33,875 --> 00:08:36,408
+The length of grad h isn't zero,
+
+134
+00:08:36,408 --> 00:08:41,000
+so cosine theta must be
+zero, and theta is ninety degrees.
+
+135
+00:08:41,350 --> 00:08:45,800
+So the gradient is always at right
+angles to the contour lines.
+
+136
+00:08:46,150 --> 00:08:50,531
+The same goes for isotherms,
+the lines of equal temperature,
+
+137
+00:08:50,531 --> 00:08:53,525
+and isobars, the lines of equal pressure.
+
+138
+00:08:53,875 --> 00:08:57,552
+Contour maps have a whole movie
+of their own in this series,
+
+139
+00:08:57,552 --> 00:08:59,575
+and so does the way they're made.
+
+140
+00:09:00,375 --> 00:09:05,675
+Let's keep the hillside fixed, and send
+four walkers out in different directions.
+
+141
+00:09:06,025 --> 00:09:08,625
+The first walks along grad h.
+
+142
+00:09:08,975 --> 00:09:13,975
+The cosine of zero is one, so she
+climbs fifty metres per kilometre.
+
+143
+00:09:15,475 --> 00:09:19,725
+When you walk along the gradient,
+you climb at the steepest rate.
+
+144
+00:09:20,075 --> 00:09:23,050
+The second walks at sixty degrees to it.
+
+145
+00:09:23,400 --> 00:09:27,075
+Fifty times the cosine
+of sixty is twenty five.
+
+146
+00:09:28,575 --> 00:09:33,300
+At an angle, you get only the shadow
+of the gradient on your direction.
+
+147
+00:09:33,650 --> 00:09:36,275
+The third walks along the contour.
+
+148
+00:09:36,625 --> 00:09:39,950
+Fifty times the cosine of ninety is zero.
+
+149
+00:09:41,450 --> 00:09:44,425
+Along a contour, nothing changes.
+
+150
+00:09:44,775 --> 00:09:47,650
+The fourth walks straight
+against the gradient.
+
+151
+00:09:48,000 --> 00:09:51,150
+Fifty times minus one is minus fifty.
+
+152
+00:09:52,650 --> 00:09:56,425
+Against the gradient,
+you go down at the steepest rate.
+
+153
+00:09:57,225 --> 00:10:00,650
+There's a quick way to read
+the gradient's size off a map.
+
+154
+00:10:01,000 --> 00:10:05,500
+Suppose contour lines are drawn
+every hundred metres of height.
+
+155
+00:10:05,850 --> 00:10:09,570
+On a gentle slope, they might
+be two kilometres apart,
+
+156
+00:10:09,570 --> 00:10:15,150
+so the slope is a hundred metres over two
+kilometres: fifty metres per kilometre.
+
+157
+00:10:16,650 --> 00:10:20,525
+On a steep slope, they might
+be half a kilometre apart.
+
+158
+00:10:20,875 --> 00:10:26,025
+A hundred metres over half a kilometre
+is two hundred metres per kilometre.
+
+159
+00:10:27,525 --> 00:10:30,975
+So the closer
+the lines, the bigger the gradient.
+
+160
+00:10:31,325 --> 00:10:35,608
+Crowded lines mean a steep
+slope, a sharp change of temperature,
+
+161
+00:10:35,608 --> 00:10:37,950
+or a strong push from the pressure.
+
+162
+00:10:38,750 --> 00:10:41,283
+Let's try a real mountain: Mont Blanc,
+
+163
+00:10:41,283 --> 00:10:45,550
+the highest peak in the Alps, on
+the border of France and Italy.
+
+164
+00:10:45,900 --> 00:10:51,223
+This is the real terrain, from a global
+relief data set called ETOPO,
+
+165
+00:10:51,223 --> 00:10:54,000
+with satellite imagery laid over it.
+
+166
+00:10:54,350 --> 00:10:59,050
+The heights are drawn stretched
+two times, so the shape is easier to see.
+
+167
+00:10:59,400 --> 00:11:04,700
+The town of Chamonix sits at about
+one thousand and thirty five metres.
+
+168
+00:11:05,050 --> 00:11:08,371
+The summit, at about four
+thousand eight hundred and
+
+169
+00:11:08,371 --> 00:11:11,500
+six metres, is about ten
+kilometres to the south.
+
+170
+00:11:11,850 --> 00:11:16,675
+So on average, the ground rises about
+three thousand seven hundred and
+
+171
+00:11:16,675 --> 00:11:18,950
+seventy metres in ten kilometres.
+
+172
+00:11:19,300 --> 00:11:24,725
+That's about thirty seven and a half
+metres up for every hundred metres across.
+
+173
+00:11:26,225 --> 00:11:29,175
+Now let's draw grad h at every point.
+
+174
+00:11:29,525 --> 00:11:33,950
+Every arrow points uphill, at right
+angles to the contours.
+
+175
+00:11:34,300 --> 00:11:38,027
+The longest arrows sit
+on the steep walls near the summit,
+
+176
+00:11:38,027 --> 00:11:41,625
+where the slope on this map
+reaches about sixty percent.
+
+177
+00:11:42,425 --> 00:11:44,975
+Water feels the gradient too.
+
+178
+00:11:45,325 --> 00:11:50,041
+Rain that falls on these slopes
+runs roughly the steepest way down,
+
+179
+00:11:50,041 --> 00:11:54,475
+along minus grad h, so the streams
+follow the arrows backwards.
+
+180
+00:11:54,825 --> 00:11:58,975
+And the size of the gradient
+depends on how finely you look.
+
+181
+00:11:59,325 --> 00:12:03,147
+On this map, with points less
+than two kilometres apart,
+
+182
+00:12:03,147 --> 00:12:06,150
+the steepest slopes are
+about sixty percent.
+
+183
+00:12:06,500 --> 00:12:11,312
+Now average the heights over blocks
+about thirty five kilometres across,
+
+184
+00:12:11,312 --> 00:12:13,050
+and look at the Himalayas.
+
+185
+00:12:13,400 --> 00:12:18,723
+The ground climbs from the Ganges
+plain, about fifty metres above sea level,
+
+186
+00:12:18,723 --> 00:12:22,575
+to the Tibetan plateau,
+almost five thousand metres up.
+
+187
+00:12:22,925 --> 00:12:28,250
+Yet at that scale, the slope near Mount
+Everest is only about five percent.
+
+188
+00:12:29,750 --> 00:12:33,175
+Both numbers are right, each
+for its own scale.
+
+189
+00:12:33,975 --> 00:12:36,830
+The gradient works
+in three dimensions too,
+
+190
+00:12:36,830 --> 00:12:40,350
+and in the air, the upward
+part is often the biggest.
+
+191
+00:12:40,700 --> 00:12:45,518
+Here is a real weather balloon,
+a radiosonde, launched from Singapore,
+
+192
+00:12:45,518 --> 00:12:51,025
+an island city at the southern tip of the
+Malay Peninsula, close to the equator.
+
+193
+00:12:51,375 --> 00:12:54,357
+It went up at half past
+seven in the morning,
+
+194
+00:12:54,357 --> 00:12:58,200
+local time, on the first of November,
+twenty twenty-three.
+
+195
+00:12:58,550 --> 00:13:02,149
+At the ground, thirty three
+metres above sea level,
+
+196
+00:13:02,149 --> 00:13:05,325
+it measured twenty
+seven point seven degrees.
+
+197
+00:13:05,675 --> 00:13:09,746
+At sixteen point two kilometres,
+where the cooling stopped,
+
+198
+00:13:09,746 --> 00:13:12,575
+it measured minus eighty one point three.
+
+199
+00:13:12,925 --> 00:13:18,225
+That level is the tropopause, the top
+of the lowest layer of the atmosphere.
+
+200
+00:13:18,575 --> 00:13:21,971
+Over the tropics it sits
+much higher than over Europe,
+
+201
+00:13:21,971 --> 00:13:26,625
+where it's usually somewhere between
+about ten and thirteen kilometres up.
+
+202
+00:13:26,975 --> 00:13:31,475
+So partial capital T by partial z,
+averaged over that layer,
+
+203
+00:13:31,475 --> 00:13:36,725
+is minus a hundred and nine
+degrees over sixteen point one kilometres.
+
+204
+00:13:37,075 --> 00:13:41,250
+That's about minus six point eight
+degrees per kilometre.
+
+205
+00:13:42,750 --> 00:13:47,965
+Meteorologists flip the sign, and call
+plus six point eight the lapse rate:
+
+206
+00:13:47,965 --> 00:13:51,025
+how fast the temperature
+drops as you go up.
+
+207
+00:13:51,375 --> 00:13:55,525
+Above the tropopause,
+the temperature starts rising again.
+
+208
+00:13:56,325 --> 00:13:59,807
+Compare that with the sideways
+gradient over Brest,
+
+209
+00:13:59,807 --> 00:14:02,675
+about four degrees per hundred kilometres.
+
+210
+00:14:03,025 --> 00:14:06,927
+Six point eight degrees
+per kilometre is six hundred and
+
+211
+00:14:06,927 --> 00:14:09,575
+eighty degrees per hundred kilometres.
+
+212
+00:14:09,925 --> 00:14:13,550
+That's more than a hundred
+and sixty times bigger.
+
+213
+00:14:15,050 --> 00:14:19,265
+So surfaces of equal temperature
+in the air are nearly flat,
+
+214
+00:14:19,265 --> 00:14:24,675
+and grad capital T points almost straight
+down, towards the warmer air below.
+
+215
+00:14:25,025 --> 00:14:29,733
+In our pictures, we stretch the height
+to make tilts like these visible,
+
+216
+00:14:29,733 --> 00:14:32,675
+but the real atmosphere
+is a very thin layer.
+
+217
+00:14:33,475 --> 00:14:36,375
+So why is the gradient built this way?
+
+218
+00:14:36,725 --> 00:14:38,900
+There are three good reasons.
+
+219
+00:14:39,250 --> 00:14:43,900
+The first is that one arrow holds
+the answer for every direction.
+
+220
+00:14:44,250 --> 00:14:48,798
+Instead of a long table
+of slopes, for east, north, north-east and
+
+221
+00:14:48,798 --> 00:14:52,450
+so on, we keep just two numbers,
+or three in the air.
+
+222
+00:14:52,800 --> 00:14:57,025
+A dot product with any direction
+gives the rate that way.
+
+223
+00:14:57,825 --> 00:15:02,975
+The second reason is that the arrow
+doesn't depend on how we draw the axes.
+
+224
+00:15:03,325 --> 00:15:06,475
+Let's turn our axes by thirty degrees.
+
+225
+00:15:06,825 --> 00:15:11,500
+The components change, to about
+forty six and nineteen point six.
+
+226
+00:15:11,850 --> 00:15:13,707
+But the length is still fifty,
+
+227
+00:15:13,707 --> 00:15:16,925
+and the arrow still points
+the same way up the hill.
+
+228
+00:15:18,425 --> 00:15:22,284
+The steepest way up a mountain
+is a fact about the mountain,
+
+229
+00:15:22,284 --> 00:15:25,500
+not about our map, and the
+gradient respects that.
+
+230
+00:15:26,300 --> 00:15:30,250
+The third reason is that
+nature responds to gradients.
+
+231
+00:15:30,600 --> 00:15:35,025
+Heat flows from warm to cold, down
+the temperature gradient.
+
+232
+00:15:35,375 --> 00:15:38,100
+Water runs down the height gradient.
+
+233
+00:15:38,450 --> 00:15:42,066
+And air is pushed from high
+pressure towards low pressure,
+
+234
+00:15:42,066 --> 00:15:43,750
+down the pressure gradient.
+
+235
+00:15:44,100 --> 00:15:49,725
+In each case, it's the gradient, not
+the value itself, that drives the motion.
+
+236
+00:15:50,075 --> 00:15:54,901
+A room that's equally warm everywhere
+has no flow of heat inside it,
+
+237
+00:15:54,901 --> 00:15:56,250
+however warm it is.
+
+238
+00:15:57,050 --> 00:15:59,983
+Before we use the gradient
+on weather maps,
+
+239
+00:15:59,983 --> 00:16:02,575
+there's one twist: the Earth is round.
+
+240
+00:16:02,925 --> 00:16:06,053
+Weather data come
+on a grid of latitude and
+
+241
+00:16:06,053 --> 00:16:09,400
+longitude, as we saw
+in the coordinates movie.
+
+242
+00:16:09,750 --> 00:16:15,675
+A step north by a small angle, d phi,
+covers the Earth's radius times d phi.
+
+243
+00:16:16,025 --> 00:16:19,097
+But a step east by a small
+angle, d lambda,
+
+244
+00:16:19,097 --> 00:16:23,027
+covers only the radius times cosine
+phi times d lambda,
+
+245
+00:16:23,027 --> 00:16:27,100
+because the circles of latitude
+shrink towards the poles.
+
+246
+00:16:27,450 --> 00:16:32,233
+So the slope going east
+is one over the radius times cosine phi,
+
+247
+00:16:32,233 --> 00:16:34,625
+times partial by partial lambda.
+
+248
+00:16:34,975 --> 00:16:40,725
+And the slope going north is one over
+the radius, times partial by partial phi.
+
+249
+00:16:41,075 --> 00:16:45,725
+Together with the change going up, these
+make the gradient on the sphere.
+
+250
+00:16:46,525 --> 00:16:49,700
+Let's see why that
+cosine matters, at Brest.
+
+251
+00:16:50,050 --> 00:16:54,575
+ERA5 gives the temperature
+every quarter of a degree.
+
+252
+00:16:54,925 --> 00:16:59,582
+One grid point east of Brest, it
+was four point five one degrees,
+
+253
+00:16:59,582 --> 00:17:02,950
+and one point west, it
+was five point six nine.
+
+254
+00:17:03,300 --> 00:17:04,631
+At Brest's latitude,
+
+255
+00:17:04,631 --> 00:17:09,224
+a quarter of a degree of longitude
+is eighteen point four kilometres,
+
+256
+00:17:09,224 --> 00:17:13,350
+so the two points are thirty
+six point eight kilometres apart.
+
+257
+00:17:13,700 --> 00:17:17,273
+The slope going east
+is minus one point one eight
+
+258
+00:17:17,273 --> 00:17:20,700
+degrees over thirty
+six point eight kilometres.
+
+259
+00:17:21,050 --> 00:17:25,225
+That's minus three point two
+degrees per hundred kilometres.
+
+260
+00:17:26,725 --> 00:17:31,628
+Forget the cosine, and you'd use twenty
+seven point eight kilometres per step,
+
+261
+00:17:31,628 --> 00:17:33,325
+as if you were going north.
+
+262
+00:17:33,675 --> 00:17:37,500
+Then you'd get
+minus two point one, a third too small.
+
+263
+00:17:39,000 --> 00:17:44,600
+Near Svalbard, at seventy eight degrees
+north, it would be five times too small.
+
+264
+00:17:45,400 --> 00:17:50,175
+Now let's use the gradient where it
+matters most in the weather: pressure.
+
+265
+00:17:50,525 --> 00:17:54,924
+Pressure is the push of the air's
+molecules on every surface,
+
+266
+00:17:54,924 --> 00:17:56,150
+a force per area.
+
+267
+00:17:56,500 --> 00:17:59,101
+At sea level it's about a thousand and
+
+268
+00:17:59,101 --> 00:18:03,275
+thirteen hectopascals, as we
+saw in the weather basics movie.
+
+269
+00:18:03,625 --> 00:18:09,050
+Lines that join places with the same
+sea-level pressure are called isobars.
+
+270
+00:18:09,400 --> 00:18:12,575
+But pressure on its own
+doesn't move the air.
+
+271
+00:18:12,925 --> 00:18:14,750
+Let's see what does.
+
+272
+00:18:15,550 --> 00:18:19,950
+Picture a small box
+of air, d x long from west to east.
+
+273
+00:18:20,300 --> 00:18:22,952
+The air on its west side pushes it east,
+
+274
+00:18:22,952 --> 00:18:26,400
+with the pressure
+there times the area of that face.
+
+275
+00:18:26,750 --> 00:18:29,452
+The air on its east side pushes it west,
+
+276
+00:18:29,452 --> 00:18:32,425
+with the pressure
+there times the same area.
+
+277
+00:18:32,775 --> 00:18:36,088
+If the two pressures are
+equal, the pushes cancel,
+
+278
+00:18:36,088 --> 00:18:39,400
+and nothing happens,
+however high the pressure is.
+
+279
+00:18:39,750 --> 00:18:43,075
+Now suppose the pressure
+rises towards the east.
+
+280
+00:18:43,425 --> 00:18:46,867
+By the Taylor series, from
+the derivatives movie,
+
+281
+00:18:46,867 --> 00:18:52,275
+the pressure on the east face is bigger
+by partial p by partial x, times d x.
+
+282
+00:18:52,625 --> 00:18:56,574
+So the net push is minus
+partial p by partial x,
+
+283
+00:18:56,574 --> 00:18:59,700
+times d x, times the area of the face.
+
+284
+00:19:00,050 --> 00:19:03,925
+And d x times that area
+is the volume of the box.
+
+285
+00:19:04,725 --> 00:19:09,254
+To turn a force into an acceleration,
+we divide by the mass,
+
+286
+00:19:09,254 --> 00:19:12,575
+which is the density,
+rho, times the volume.
+
+287
+00:19:12,925 --> 00:19:17,420
+The volume cancels, and the push
+per kilogram, going east,
+
+288
+00:19:17,420 --> 00:19:21,450
+is minus one over rho, times
+partial p by partial x.
+
+289
+00:19:21,800 --> 00:19:25,100
+The same happens going
+north, and going up.
+
+290
+00:19:25,450 --> 00:19:31,050
+Together, the force per kilogram
+is minus one over rho, times grad p.
+
+291
+00:19:31,400 --> 00:19:34,150
+It's called the pressure gradient force.
+
+292
+00:19:34,500 --> 00:19:38,447
+It appears in the equation
+that tells the air how to move,
+
+293
+00:19:38,447 --> 00:19:41,850
+next to the Coriolis effect,
+gravity and friction.
+
+294
+00:19:42,200 --> 00:19:47,875
+Only differences in pressure push, which
+is why its name carries the word gradient.
+
+295
+00:19:48,675 --> 00:19:53,750
+Grad p points the way pressure increases
+fastest, towards high pressure.
+
+296
+00:19:54,100 --> 00:19:56,275
+The minus sign flips it.
+
+297
+00:19:56,625 --> 00:20:01,305
+So the pressure gradient force points
+from high pressure to low pressure,
+
+298
+00:20:01,305 --> 00:20:03,100
+straight across the isobars.
+
+299
+00:20:03,450 --> 00:20:05,800
+Let's put in easy numbers.
+
+300
+00:20:06,150 --> 00:20:12,025
+Suppose the pressure changes by one
+hectopascal every hundred kilometres.
+
+301
+00:20:12,375 --> 00:20:15,201
+One hectopascal is a hundred pascals,
+
+302
+00:20:15,201 --> 00:20:19,325
+and a hundred kilometres
+is a hundred thousand metres.
+
+303
+00:20:19,675 --> 00:20:23,575
+So the gradient is a thousandth
+of a pascal per metre.
+
+304
+00:20:25,075 --> 00:20:28,828
+With an air density of about
+one kilogram per cubic metre,
+
+305
+00:20:28,828 --> 00:20:32,775
+the push is about a thousandth
+of a metre per second squared.
+
+306
+00:20:34,275 --> 00:20:36,849
+With the real density near the ground,
+
+307
+00:20:36,849 --> 00:20:40,100
+one point two, it's about
+eight ten-thousandths.
+
+308
+00:20:40,450 --> 00:20:42,953
+That's small, but kept up for an hour,
+
+309
+00:20:42,953 --> 00:20:46,575
+it would add about three
+metres per second to the wind.
+
+310
+00:20:48,075 --> 00:20:49,975
+Now a real storm.
+
+311
+00:20:50,325 --> 00:20:53,513
+Here is Storm Ciarán
+at three in the morning
+
+312
+00:20:53,513 --> 00:20:56,847
+on the second of November
+twenty twenty three,
+
+313
+00:20:56,847 --> 00:21:00,325
+from ERA5, with isobars
+every four hectopascals.
+
+314
+00:21:00,675 --> 00:21:04,864
+Its centre, at about nine hundred
+and fifty four hectopascals,
+
+315
+00:21:04,864 --> 00:21:09,525
+is crossing the Channel, about two
+hundred kilometres north of Brest.
+
+316
+00:21:09,875 --> 00:21:14,750
+Over Brest, the isobars are only
+thirty one kilometres apart.
+
+317
+00:21:15,100 --> 00:21:18,484
+Four hectopascals
+in thirty one kilometres is
+
+318
+00:21:18,484 --> 00:21:22,319
+about thirteen hectopascals
+per hundred kilometres,
+
+319
+00:21:22,319 --> 00:21:24,725
+thirteen times our easy example.
+
+320
+00:21:26,225 --> 00:21:30,050
+Grad p points south-south-west,
+away from the low.
+
+321
+00:21:30,400 --> 00:21:35,100
+So the pressure gradient force points
+north-north-east, towards the low.
+
+322
+00:21:35,450 --> 00:21:39,132
+Divide the gradient by the density,
+one point two five,
+
+323
+00:21:39,132 --> 00:21:43,550
+and the push is about one hundredth
+of a metre per second squared.
+
+324
+00:21:45,050 --> 00:21:46,561
+If nothing else acted,
+
+325
+00:21:46,561 --> 00:21:52,125
+that would add about thirty seven metres
+per second to the wind in a single hour.
+
+326
+00:21:53,625 --> 00:21:58,575
+And this is why winds are strongest
+where the isobars crowd together.
+
+327
+00:21:58,925 --> 00:22:01,987
+Let's take every point of this
+map over the sea,
+
+328
+00:22:01,987 --> 00:22:04,985
+sort them by the size
+of the pressure gradient,
+
+329
+00:22:04,985 --> 00:22:08,175
+and average the wind ten
+metres above the surface.
+
+330
+00:22:08,525 --> 00:22:13,216
+Where the gradient is below two
+hectopascals per hundred kilometres,
+
+331
+00:22:13,216 --> 00:22:15,975
+the wind averages ten metres per second.
+
+332
+00:22:16,325 --> 00:22:20,475
+Where it's above ten, the wind
+averages about twenty six.
+
+333
+00:22:21,975 --> 00:22:27,152
+At Brest airport that same hour, a gust
+of eighty four knots was measured,
+
+334
+00:22:27,152 --> 00:22:30,650
+about a hundred and fifty
+six kilometres per hour.
+
+335
+00:22:32,150 --> 00:22:35,375
+More than a million homes
+in France lost power.
+
+336
+00:22:36,175 --> 00:22:38,300
+But look at the wind arrows.
+
+337
+00:22:38,650 --> 00:22:41,225
+They don't blow straight from high to low.
+
+338
+00:22:41,575 --> 00:22:44,200
+They blow almost along the isobars,
+
+339
+00:22:44,200 --> 00:22:47,800
+anticlockwise round
+the low, as seen from above.
+
+340
+00:22:48,150 --> 00:22:50,070
+That's because the Earth turns,
+
+341
+00:22:50,070 --> 00:22:55,150
+and the Coriolis effect pushes moving air
+to the right in the northern hemisphere.
+
+342
+00:22:55,500 --> 00:22:56,976
+Away from the ground,
+
+343
+00:22:56,976 --> 00:23:01,897
+the Coriolis push grows until it
+balances the pressure gradient force,
+
+344
+00:23:01,897 --> 00:23:04,850
+and then the wind blows along the isobars.
+
+345
+00:23:05,200 --> 00:23:07,311
+The bigger the pressure gradient,
+
+346
+00:23:07,311 --> 00:23:11,150
+the faster the wind must blow
+for the two pushes to balance.
+
+347
+00:23:11,500 --> 00:23:15,825
+That's the deeper reason crowded
+isobars mean strong winds.
+
+348
+00:23:16,175 --> 00:23:19,028
+Near the ground, friction slows the wind,
+
+349
+00:23:19,028 --> 00:23:22,925
+and lets it cross the isobars a little,
+towards the low.
+
+350
+00:23:23,275 --> 00:23:27,804
+We built all of this in the cross
+product movie on our spinning Earth,
+
+351
+00:23:27,804 --> 00:23:30,650
+and a later Coriolis
+movie takes it further.
+
+352
+00:23:31,000 --> 00:23:36,468
+One warning: meteorologists also say
+gradient wind for a different idea,
+
+353
+00:23:36,468 --> 00:23:41,025
+a balance round curved isobars,
+which has its own movie too.
+
+354
+00:23:41,825 --> 00:23:46,436
+Here is a more recent chart:
+six in the evening, universal time,
+
+355
+00:23:46,436 --> 00:23:52,200
+on the twenty seventh of October twenty
+twenty six, from the American GFS model.
+
+356
+00:23:52,550 --> 00:23:55,377
+A deep low of about nine hundred and
+
+357
+00:23:55,377 --> 00:23:59,225
+sixty one hectopascals
+sits just east of Iceland.
+
+358
+00:23:59,575 --> 00:24:02,096
+Where its isobars crowd over the sea,
+
+359
+00:24:02,096 --> 00:24:07,274
+the pressure gradient reaches about ten
+hectopascals per hundred kilometres,
+
+360
+00:24:07,274 --> 00:24:09,250
+close to Ciarán's over Brest.
+
+361
+00:24:09,600 --> 00:24:14,750
+There, the winds near the surface reach
+about twenty five metres per second.
+
+362
+00:24:15,550 --> 00:24:19,475
+Pressure has a gradient going
+up too, and it's enormous.
+
+363
+00:24:19,825 --> 00:24:24,186
+The Singapore balloon found
+the pressure falling by about zero
+
+364
+00:24:24,186 --> 00:24:28,898
+point one one hectopascals for every
+metre it rose near the ground:
+
+365
+00:24:28,898 --> 00:24:31,500
+one hectopascal in about nine metres.
+
+366
+00:24:33,000 --> 00:24:38,485
+Ciarán's crowded isobars needed thirty
+one kilometres for four hectopascals,
+
+367
+00:24:38,485 --> 00:24:41,950
+which is about eight
+kilometres per hectopascal.
+
+368
+00:24:42,300 --> 00:24:46,256
+So the upward pressure gradient
+was about eight hundred and
+
+369
+00:24:46,256 --> 00:24:49,475
+fifty times stronger than
+Ciarán's sideways one.
+
+370
+00:24:49,825 --> 00:24:54,200
+On an ordinary day, it's about
+ten thousand times stronger.
+
+371
+00:24:55,700 --> 00:24:58,600
+So why doesn't it blast
+the air into space?
+
+372
+00:24:58,950 --> 00:25:02,000
+Because gravity pulls down just as hard.
+
+373
+00:25:02,350 --> 00:25:06,936
+This is hydrostatic balance,
+from the weather basics movie:
+
+374
+00:25:06,936 --> 00:25:10,200
+partial p by partial z equals minus rho g.
+
+375
+00:25:10,550 --> 00:25:12,509
+Near the ground in Singapore,
+
+376
+00:25:12,509 --> 00:25:16,494
+rho is about one point one seven
+kilograms per cubic metre,
+
+377
+00:25:16,494 --> 00:25:18,521
+and g is nine point eight one,
+
+378
+00:25:18,521 --> 00:25:22,033
+so that's about eleven
+and a half pascals per metre,
+
+379
+00:25:22,033 --> 00:25:24,600
+close to the balloon's ten point nine.
+
+380
+00:25:26,100 --> 00:25:29,399
+So the upward push
+is almost exactly cancelled,
+
+381
+00:25:29,399 --> 00:25:33,050
+and the weather is driven
+by the tiny sideways part.
+
+382
+00:25:33,400 --> 00:25:36,633
+Because pressure falls
+so steadily with height,
+
+383
+00:25:36,633 --> 00:25:41,174
+meteorologists often use pressure
+itself as a vertical coordinate,
+
+384
+00:25:41,174 --> 00:25:42,825
+which has its own movie.
+
+385
+00:25:43,625 --> 00:25:45,750
+Now back to temperature.
+
+386
+00:25:46,100 --> 00:25:50,291
+Here again is the map of temperature
+one and a half kilometres up,
+
+387
+00:25:50,291 --> 00:25:53,275
+at six in the evening
+on the first of November.
+
+388
+00:25:53,625 --> 00:25:58,975
+Over most of the map, the gradient is
+about one degree per hundred kilometres.
+
+389
+00:25:59,325 --> 00:26:03,875
+But in one narrow band near
+the storm, it reaches about eleven.
+
+390
+00:26:05,375 --> 00:26:09,766
+That band is a front, a boundary
+between a warm air mass and
+
+391
+00:26:09,766 --> 00:26:13,425
+a cold one, as we saw
+in the weather basics movie.
+
+392
+00:26:13,775 --> 00:26:18,268
+At a front, the temperature gradient
+is squeezed into a narrow zone,
+
+393
+00:26:18,268 --> 00:26:21,175
+more than ten times stronger
+than around it.
+
+394
+00:26:21,525 --> 00:26:25,825
+All its arrows point across
+the front, towards the warm side.
+
+395
+00:26:26,625 --> 00:26:29,425
+A front isn't just a line on a map.
+
+396
+00:26:29,775 --> 00:26:32,880
+Let's stack four temperature
+maps above a strong
+
+397
+00:26:32,880 --> 00:26:35,596
+cold front over the central United States,
+
+398
+00:26:35,596 --> 00:26:38,895
+on the twenty second
+of December twenty twenty two,
+
+399
+00:26:38,895 --> 00:26:42,000
+from about one and a half
+to nine kilometres up.
+
+400
+00:26:42,350 --> 00:26:48,475
+On every layer, the orange arrows are grad
+capital T, pointing towards warmer air.
+
+401
+00:26:48,825 --> 00:26:52,237
+Where the isotherms
+crowd, the arrows are longest,
+
+402
+00:26:52,237 --> 00:26:54,625
+and that's the front on that layer.
+
+403
+00:26:54,975 --> 00:26:59,550
+Let's circle the stack from outside,
+from the bottom layer to the top.
+
+404
+00:26:59,900 --> 00:27:03,035
+Every layer above the bottom
+one has its crowded
+
+405
+00:27:03,035 --> 00:27:05,779
+band on the cold side of the bottom front,
+
+406
+00:27:05,779 --> 00:27:08,326
+between about two hundred and sixty and
+
+407
+00:27:08,326 --> 00:27:11,200
+four hundred and fifty
+kilometres behind it.
+
+408
+00:27:12,700 --> 00:27:17,172
+So a front is a sloping surface
+that leans back over the cold air,
+
+409
+00:27:17,172 --> 00:27:19,950
+and the gradient finds it on every layer.
+
+410
+00:27:20,750 --> 00:27:26,425
+The gradient also tells us how the wind
+changes the temperature at a fixed place.
+
+411
+00:27:26,775 --> 00:27:28,381
+Over Brest at that hour,
+
+412
+00:27:28,381 --> 00:27:32,530
+the wind at that height blew
+at thirty four metres per second,
+
+413
+00:27:32,530 --> 00:27:37,950
+from just west of south, at a hundred and
+thirty eight degrees to grad capital T.
+
+414
+00:27:38,300 --> 00:27:39,592
+So along the wind,
+
+415
+00:27:39,592 --> 00:27:44,400
+the temperature changes at grad
+capital T dot the wind's direction.
+
+416
+00:27:44,750 --> 00:27:49,784
+That's four point one times the cosine
+of a hundred and thirty eight degrees,
+
+417
+00:27:49,784 --> 00:27:53,575
+which is about minus three
+degrees per hundred kilometres.
+
+418
+00:27:55,075 --> 00:27:59,175
+It's negative because the wind
+blows towards colder air.
+
+419
+00:27:59,525 --> 00:28:04,375
+Times the wind speed, that's
+minus three point seven degrees per hour.
+
+420
+00:28:05,875 --> 00:28:11,850
+This is v dot grad capital T, the
+advection term from the dot product movie.
+
+421
+00:28:12,200 --> 00:28:15,454
+Because the air keeps
+arriving from the warmer side,
+
+422
+00:28:15,454 --> 00:28:18,458
+a fixed thermometer
+at Brest would warm by about
+
+423
+00:28:18,458 --> 00:28:21,650
+three point seven degrees
+per hour from this alone.
+
+424
+00:28:22,000 --> 00:28:25,975
+The material derivative
+movie takes this apart fully.
+
+425
+00:28:26,775 --> 00:28:31,975
+Some of the sharpest temperature gradients
+form on sunny days, along coasts.
+
+426
+00:28:32,325 --> 00:28:35,696
+Here is the coast of Normandy,
+in northern France,
+
+427
+00:28:35,696 --> 00:28:40,550
+at one in the afternoon on the twenty
+fourth of June twenty twenty four.
+
+428
+00:28:40,900 --> 00:28:45,387
+The satellite picture shows small
+fair-weather clouds over the land,
+
+429
+00:28:45,387 --> 00:28:47,300
+and clear skies over the sea.
+
+430
+00:28:47,650 --> 00:28:48,133
+Inland,
+
+431
+00:28:48,133 --> 00:28:53,175
+the air two metres above the ground
+was at twenty four point six degrees.
+
+432
+00:28:53,525 --> 00:28:57,704
+Over the Channel, about fifty
+five kilometres to the north,
+
+433
+00:28:57,704 --> 00:28:59,475
+it was sixteen point one.
+
+434
+00:28:59,825 --> 00:29:03,192
+That's about fifteen degrees
+per hundred kilometres,
+
+435
+00:29:03,192 --> 00:29:05,200
+sharper than the storm's front.
+
+436
+00:29:06,700 --> 00:29:10,325
+Land warms faster in the sun
+than the sea does.
+
+437
+00:29:10,675 --> 00:29:13,573
+The warm air over the land
+expands and rises,
+
+438
+00:29:13,573 --> 00:29:16,213
+so near the ground the pressure ends up a
+
+439
+00:29:16,213 --> 00:29:19,175
+little higher over the sea
+than over the land.
+
+440
+00:29:19,525 --> 00:29:23,725
+That small pressure gradient
+pushes cooler sea air inland.
+
+441
+00:29:24,075 --> 00:29:26,150
+This is the sea breeze.
+
+442
+00:29:26,950 --> 00:29:31,150
+High up, temperature gradients
+and the jet stream go together.
+
+443
+00:29:31,500 --> 00:29:34,847
+Here is the average
+for September twenty twenty six,
+
+444
+00:29:34,847 --> 00:29:39,675
+all the way round the Earth, as a slice
+from the equator to the North Pole.
+
+445
+00:29:40,025 --> 00:29:45,047
+The temperature drops fastest towards
+the pole near forty five degrees north,
+
+446
+00:29:45,047 --> 00:29:47,982
+by about six degrees
+per thousand kilometres,
+
+447
+00:29:47,982 --> 00:29:51,700
+averaged from about one
+and a half to nine kilometres up.
+
+448
+00:29:53,200 --> 00:29:56,696
+Right above that zone, about
+twelve kilometres up,
+
+449
+00:29:56,696 --> 00:30:02,150
+the westerly wind is strongest, about
+twenty six metres per second on average.
+
+450
+00:30:03,650 --> 00:30:06,400
+Single days can be much stronger.
+
+451
+00:30:06,750 --> 00:30:10,287
+On the twenty eighth
+of October twenty twenty six,
+
+452
+00:30:10,287 --> 00:30:13,470
+the GFS analysis shows
+the jet over the North
+
+453
+00:30:13,470 --> 00:30:16,300
+Atlantic at sixty six metres per second.
+
+454
+00:30:16,650 --> 00:30:20,725
+That's about two hundred
+and forty kilometres per hour.
+
+455
+00:30:22,225 --> 00:30:25,234
+Why winds grow with height
+above a temperature
+
+456
+00:30:25,234 --> 00:30:27,589
+gradient is called the thermal wind,
+
+457
+00:30:27,589 --> 00:30:29,225
+and it has its own movie.
+
+458
+00:30:30,025 --> 00:30:33,000
+The ocean has temperature gradients too.
+
+459
+00:30:33,350 --> 00:30:35,796
+Off the east coast of the United States,
+
+460
+00:30:35,796 --> 00:30:40,382
+the Gulf Stream carries warm water
+from the tropics towards the north-east,
+
+461
+00:30:40,382 --> 00:30:42,950
+right next to colder water from the north.
+
+462
+00:30:43,300 --> 00:30:48,101
+Along its northern edge, on the twenty
+ninth of October twenty twenty six,
+
+463
+00:30:48,101 --> 00:30:51,475
+the sea-surface temperature
+dropped by about six and
+
+464
+00:30:51,475 --> 00:30:54,525
+a half degrees in about
+thirty five kilometres.
+
+465
+00:30:54,875 --> 00:30:59,475
+That's one of the sharpest temperature
+gradients in the open ocean.
+
+466
+00:30:59,825 --> 00:31:05,625
+Winter storms often deepen fastest near
+it, so forecasters watch it closely.
+
+467
+00:31:05,975 --> 00:31:10,550
+The great ocean currents have their
+own movies later in this series.
+
+468
+00:31:11,350 --> 00:31:15,178
+To sum up, a scalar field
+has a value at every place,
+
+469
+00:31:15,178 --> 00:31:17,850
+like height, temperature or pressure.
+
+470
+00:31:18,200 --> 00:31:23,174
+Its gradient, grad f, is the arrow
+built from its partial derivatives,
+
+471
+00:31:23,174 --> 00:31:24,950
+going east, north and up.
+
+472
+00:31:25,300 --> 00:31:28,596
+It points the way the field
+increases fastest,
+
+473
+00:31:28,596 --> 00:31:31,175
+and its length is that fastest rate.
+
+474
+00:31:31,525 --> 00:31:35,243
+It's at right angles
+to contour lines, isotherms and
+
+475
+00:31:35,243 --> 00:31:38,675
+isobars, and it's big
+where they crowd together.
+
+476
+00:31:39,025 --> 00:31:44,500
+The rate in any direction is grad
+f dot n hat, the directional derivative.
+
+477
+00:31:44,850 --> 00:31:46,208
+On the round Earth,
+
+478
+00:31:46,208 --> 00:31:50,925
+the slope going east carries
+one over the radius times cosine phi.
+
+479
+00:31:51,275 --> 00:31:55,734
+The pressure gradient
+force, minus one over rho times grad p,
+
+480
+00:31:55,734 --> 00:31:58,439
+pushes air from high to low pressure,
+
+481
+00:31:58,439 --> 00:32:01,875
+which is why crowded
+isobars mean strong winds.
+
+482
+00:32:02,225 --> 00:32:05,873
+Sharp temperature gradients
+mark fronts and sea breezes,
+
+483
+00:32:05,873 --> 00:32:09,325
+and the jet stream blows
+above the strongest of them.
+
+484
+00:32:10,125 --> 00:32:14,283
+This video is one of a series
+of related maths tutorials,
+
+485
+00:32:14,283 --> 00:32:16,325
+so watch out for the others.
+
+486
+00:32:16,675 --> 00:32:21,072
+They're made for students
+of atmospheric science, meteorology and
+
+487
+00:32:21,072 --> 00:32:24,725
+fluid dynamics, and anyone
+else who needs these ideas.
+
+488
+00:32:25,075 --> 00:32:29,847
+The notebook for the gradient, and the
+notebooks for the other maths concepts,
+
+489
+00:32:29,847 --> 00:32:32,600
+are on the website that
+goes with this video.
