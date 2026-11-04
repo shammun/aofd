@@ -1238,8 +1238,8 @@ const S15: React.FC = () => {
         <Bracket p={[x0 + 33 * pxkm * 6, 640]} q={[x0 + 33 * pxkm * 7, 640]} off={0} c={C.ink} o={fin(f, AT(k, 2, "zero point zero three"))} />
         <Lbl x={x0 + 33 * pxkm * 6.5} y={680} t="−0.03 °C per km" c={C.neg} s={T.floor} a="middle" o={fin(f, AT(k, 2, "zero point zero three"))} />
         <Lbl x={100} y={80} t="made-up frozen map" c={C.muted} s={T.floor} o={fin(f, SS(k, 1))} />
-        <Lbl x={545} y={80} t={`car: ${nf(Tcar, 1)} °C`} c={C.key} s={T.key} o={fin(f, SS(k, 2))} />
-        <ClockText x={905} y={80} t={`${hrs.toFixed(1)} h`} h={hrs} s={T.floor} o={fin(f, SS(k, 2))} />
+        <Lbl x={572} y={80} t={`car: ${nf(Tcar, 1)} °C`} c={C.key} s={T.key} o={fin(f, SS(k, 2))} />
+        <ClockText x={925} y={80} t={`${hrs.toFixed(1)} h`} h={hrs} s={T.floor} o={fin(f, SS(k, 2))} />
       </Svg>
       <TeX s={String.raw`\frac{\partial T}{\partial t}=0`} x={MX} y={130} size={68} c={C.local} o={fin(f, AT(k, 1, "is zero"))} />
       <CalcStack f={f} x={MX + 170} y={250} size={54} rows={[
@@ -1465,7 +1465,8 @@ const S19: React.FC = () => {
         <Lbl x={P(-19.5, 4.5)[0]} y={P(-19.5, 4.5)[1]} t="12 UTC" c={C.local} s={T.floor} o={fin(f, tFix)} />
         <Bracket p={P(T00, Z50)} q={P(T50, Z50)} off={30} c={C.neg} o={fin(f, AT(k, 2, "cooled by"))} />
         <Lbl x={P(T00, Z50)[0] + 32} y={P(T00, Z50)[1] - 30} t="−2.6 °C in 12 h" c={C.neg} s={T.floor} o={fin(f, AT(k, 2, "cooled by"))} />
-        <Keyword f={f} text="∂T/∂z" at={[P(-8, 4.4)[0], P(-8, 4.4)[1]]} appear={SS(k, 9)} targets={[P(Tat(4.9), 4.9)]} />
+        {/* fix 3b (K6 link-axis): the link stops 18 px left of / 8 px under the gold curve instead of ending on it */}
+        <Keyword f={f} text="∂T/∂z" at={[P(-8, 4.4)[0], P(-8, 4.4)[1]]} appear={SS(k, 9)} targets={[[P(Tat(4.9), 4.9)[0] - 18, P(Tat(4.9), 4.9)[1] + 8]]} />
       </Svg>
       <MapView id="s19" B={B} o={fin(f, tSide - 10)} L={{ coast: 0 }} children={(Pm) => {
         const pts = (dr.e as number[]).map((e, i) => Pm(TRAP[0] + dr.n[i] * KM_LAT, TRAP[1] + e / (111.195 * Math.cos((TRAP[0] * Math.PI) / 180))));
@@ -1556,12 +1557,25 @@ const S20: React.FC = () => {
           if (head - tail < 1 || ph > L) return;
           const pts: Pt[] = [];
           for (let s = tail; s <= head; s++) pts.push(P(t[2 * s], t[2 * s + 1]));
-          els.push(<path key={i} d={poly(pts)} stroke={C.first} strokeWidth={3.5} fill="none" strokeLinecap="round" opacity={0.85} />);
+          // fix 3b (K6 text-stroke): once "Brest" is named, streak points inside its label box (+8 px) are skipped (the streaks are
+          // a moving texture; their direction still comes from the ERA5 wind)
+          const pb0 = P(BREST[0], BREST[1]), hide = fin(f, AT(k, 3, "Over Brest")) > 0;
+          const inLbl = (q: Pt) => hide && q[0] > pb0[0] + 6 && q[0] < pb0[0] + 30 + textW("Brest", T.floor) && q[1] > pb0[1] - 68 && q[1] < pb0[1] - 2;
+          let d = "", pen = false;
+          // densified to ≤ 4-px steps, so a segment whose ends lie outside the box cannot cut through the label either
+          const dense: Pt[] = [];
+          pts.forEach((q, j) => { if (j === 0) { dense.push(q); return; } const o = pts[j - 1], n = Math.max(1, Math.ceil(Math.hypot(q[0] - o[0], q[1] - o[1]) / 4));
+            for (let m = 1; m <= n; m++) dense.push([o[0] + ((q[0] - o[0]) * m) / n, o[1] + ((q[1] - o[1]) * m) / n]); });
+          // each visible run is its own <path> (the K6 probe joins the sub-paths of one path into one polyline)
+          const runs: string[] = [];
+          for (const q of dense) { if (inLbl(q)) { if (d) runs.push(d); d = ""; pen = false; continue; } d += `${pen ? "L" : "M"}${q[0].toFixed(1)} ${q[1].toFixed(1)}`; pen = true; }
+          if (d) runs.push(d);
+          runs.filter((r) => r.includes("L")).forEach((r, m) => els.push(<path key={`${i}_${m}`} d={r} stroke={C.first} strokeWidth={3.5} fill="none" strokeLinecap="round" opacity={0.85} />));
         });
-        // fix 3 (review 3 S12): the gold dot is named when "Over Brest" is said (below-left of it, clear of the parcel's link)
+        // fix 3 (review 3 S12): the gold dot is named when "Over Brest" is said (above-right of it: the parcel's cube passes below-left, its link below)
         const pb = P(BREST[0], BREST[1]);
         return <g opacity={fin(f, 4)}>{els}<Place p={pb} r={9} />
-          <Lbl x={pb[0] - 20} y={pb[1] + 32} t="Brest" c={C.key} s={T.floor} a="end" o={fin(f, AT(k, 3, "Over Brest"))} /></g>;
+          <Lbl x={pb[0] + 18} y={pb[1] - 34} t="Brest" c={C.key} s={T.floor} o={fin(f, AT(k, 3, "Over Brest"))} /></g>;
       }} />
       {(() => {
         const P = mapP(B20), t = tr[ride];
@@ -1814,9 +1828,10 @@ const S25: React.FC = () => {
       <Svg>
         <SunGlyph x={170} y={150} s={1.6} />
         <Lbl x={pr.p([-1.3, 0, -0.25])[0]} y={pr.p([-1.3, 0, -0.25])[1] + 20} t="290 K" c={C.key} s={T.key} a="middle" />
-        {/* fix 3 (review 3 S12): the warmed parcel's label rises with its cube */}
-        <Lbl x={pr.p([1.3, 0, -0.25 + 1.3 * up])[0]} y={pr.p([1.3, 0, -0.25 + 1.3 * up])[1] + 20} t={warm > 0.5 ? "300 K" : "290 K"} c={C.second} s={T.key} a="middle" o={fin(f, SS(k, 1))} />
-        <Lbl x={560} y={140} t="p fixed" c={C.key} s={T.key} o={fin(f, AT(k, 1, "pressure stays"))} />
+        {/* fix 3 (review 3 S12; K6 text-fill in 3b): the warmed parcel's label sits above its cube and rises with it (below it, it
+            straddled the far edge of the ground) */}
+        <Lbl x={pr.p([1.3, 0, 1.05 + 1.3 * up])[0]} y={pr.p([1.3, 0, 1.05 + 1.3 * up])[1] - 88} t={warm > 0.5 ? "300 K" : "290 K"} c={C.second} s={T.key} a="middle" o={fin(f, SS(k, 1))} />
+        <Lbl x={300} y={140} t="p fixed" c={C.key} s={T.key} o={fin(f, AT(k, 1, "pressure stays"))} />
         <Keyword f={f} text="warming at fixed pressure" at={[MX + 20, 300]} appear={AT(k, 1, "warms from")} out={SS(k, 2) - 12} />
         <Keyword f={f} text="lighter, so it rises" at={[MX + 20, 640]} appear={SS(k, 3)} />
       </Svg>

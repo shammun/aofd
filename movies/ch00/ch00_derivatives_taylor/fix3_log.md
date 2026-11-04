@@ -43,3 +43,13 @@ Removed: s19 `data-lc-ok` (both curves), s19 `data-lc-maplabel` (isotherm labels
 - `npx tsc --noEmit` (movies/): 0 errors.
 - Node module load of DerivativesTaylor.tsx (esbuild bundle, assets stubbed): all CHECK / SK_CHECK rows pass (incl. 4 new), scene count = timing.json, DT_FRAMES = 88 422.
 - Not run: K6 stills, renders, QA (need Chrome / Remotion).
+
+## Fix 3b (after K6 pass 3 on f5838b5: 13 hits) — no exemptions added
+| hit | scene | change | where |
+|---|---|---|---|
+| link-axis (755, 304), 5 frames | s19 | the "∂T/∂z" keyword link now stops 18 px left of / 8 px under the gold profile instead of ending on it (the curve lost its `data-lc-ok` in fix 3) | DT:1468-1469 |
+| text-stroke "Brest" × teal streak, 4 frames | s20 | "Brest" moved above-right of the dot (the parcel cube passed under it below-left, frames 34486-34672); once the label is shown, each streak is densified to ≤ 4-px steps and the part inside the label box (+6–8 px) is cut out; every visible run is its own `<path>` (the K6 probe joins the sub-paths of one path, so an M-break still read as a crossing) | DT:1561-1578 |
+| text-fill "300 K" on the ground quad, 4 frames | s25 | the warmed parcel's label sits 88 px above its cube's top centre (clear of the top face) and rises with it, never straddling the ground's far edge; "p fixed" moved to x 300 so the two never read as one row | DT:1831-1834 |
+| (seen in stills) | s15 | car readout x 572, clock x 925: "made-up frozen map" and "car: …" no longer run together | DT:1241-1242 |
+
+K6 after 3b: `k6_pass3.sh k6final2` → PASS, 1425 frames, 0 hits, 473 INFO (stills and report in v1/fix3/stills/k6final2). No exemption added.
