@@ -1,4 +1,9 @@
-# RESUME — G: back 2026-10-30 (was disconnected ~09:45); queue restarted
+# RESUME — 2026-11-04 (session resumed after a stop)
+
+**State now:** weather UF2 fix loop 2 rendered, joined (58:06, 156.7 MB, commit 4269d36), QA pass (duration/size pass with the movie's own windows), source_check 0 fails; on C: movies/out, G: viewing copy and Drive (outputs/drive_links.md). Review 3 running (reports/ch00_movies.md). #4 fix loop 3 (the last) source fixes running in a builder, no render yet; render #4 after it returns (one Remotion job at a time). Then continue the queue below (#5 → #6 → M01 → …) automatically, movie after movie (user re-confirmed 2026-11-04).
+If this session died: if review 3 is not in reports/ch00_movies.md, rerun it; if #4 has fix3_log.md but no render, render it.
+
+# (older) G: back 2026-10-30 (was disconnected ~09:45); queue restarted
 
 Render 3 was restarted with `render_uf2.py --from 4` (log `uf2/render_fix1c_resume.log`); c00–c03 are verified at 4000 frames, and the bundle matches commit 25eb34b. If this session died, check which chunks exist and rerun with `--from <first missing>`. Data scout for #6 and M01 started alongside it.
 
