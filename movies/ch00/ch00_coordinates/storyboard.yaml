@@ -4,10 +4,11 @@
 # and never drawn. Data, functions and CHECK ids (DCnn): data_needs.md. Times: MEASURED (tools/tts.py dry run, af_bella x 1.0).
 # Colour contract (house-dark-v1): radial / inflow rose ('-' glyph + hatch); tangential spin and winds teal; unit vectors and axes orange;
 # slate for fixed observers (barometer, station) and the maths angle; gold for pointers, links and the latitude/bearing arcs; gravity brown.
+# v3 (2026-11-04): plan-v5 pointer fixes (amendment_v5_pointers at the end; text and measured times only).
 # v2 (2026-10-30): HOUSE_STYLE §5b amendment (layout_5b per scene overrides the v1 'visual' wherever they differ).
 id: ch00_coordinates
 title: 'Coordinates: on a plane, a cylinder and a sphere (and how the winds round a hurricane, great-circle routes and moving storms use them)'
-version: 2
+version: 3
 concepts: [Cartesian coordinates and constant unit vectors (Kundu App. B §B.5), 'plane polar coordinates (r, theta), x = r cos theta, y = r sin theta; radians
     and arc length s = r theta', 'polar unit vectors and their rates d r-hat/d theta = theta-hat, d theta-hat/d theta = -r-hat (Kundu App. B §B.5)', vector
     components in polar coordinates as dot products; centripetal acceleration -v^2/r from turning unit vectors, 'cylindrical coordinates (r, theta, z) (Kundu
@@ -17,7 +18,7 @@ concepts: [Cartesian coordinates and constant unit vectors (Kundu App. B §B.5),
     (Vallis (2.31)) named, 'great circles, rhumb lines; map projections (plate carree, Mercator, Equal Earth, polar stereographic)', rotation of axes x'_j
     = x_i C_ij (Kundu (2.5)), 'Galilean transformation and the invariance of acceleration (Kundu §3.3, (3.9)); changing variables d/dt = d/dtau - U.grad
     (Kundu (B.2.2))']
-target_duration_s: 2921.775
+target_duration_s: 2923.575
 fps: 30
 size: [1920, 1080]
 style: house-dark-v1
@@ -46,9 +47,9 @@ audio:
   - {scene: s43_storm_frame, kind: wind_rising, intensity: 0.12, shows: Ciaran's isobars sweeping in (S2)}
   effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word (sentence gaps only); one
     at a time; no caption tags (no sound carries meaning the voice does not say)'
-measured_narration_s: 2919.275
-measured_frames: 87653
-words: 6910
+measured_narration_s: 2921.075
+measured_frames: 87707
+words: 6917
 sentences: 453
 dry_run:
   tool: tools/tts.py
@@ -574,7 +575,7 @@ scenes:
     view. Map frame edges fade softly while zoomed (no hard box). Every wind arrow or streak is animated (moving dashes along each arrow, or particles drifting
     along the flow at a speed scaled to the wind; scale in the manifest); arrows keep the data''s direction and length.'
 - id: s12_why_polar_storm
-  t: [586.075, 643.2]
+  t: [586.075, 643.85]
   sentence_times:
   - [586.075, 588.9]
   - [589.25, 593.925]
@@ -584,18 +585,18 @@ scenes:
   - [611.25, 619.625]
   - [619.975, 626.9]
   - [628.4, 636.1]
-  - [636.45, 642.4]
+  - [636.45, 643.05]
   beat: 'intuition: why polar helps (jumpy u, v vs steady v_t, v_r)'
   visual: 'Left: the 25-km ring on the zoomed storm with a marker going round it (azimuth 0-360). Right (maths zone as a chart): a TimeGraph-style plot
     against azimuth: u (orange) and v (orange, dashed) swing between about -45 and +45 m/s (S2-S3), then v_t (teal) and v_r (rose, hatched below zero) draw
     as near-flat lines (S4-S5); y ticks 52 px. S6: keywords ''spin'', ''inflow'' at the two lines. S7: an inflow-angle wedge at a ring point (gold) ''≈
-    19°''. S9: small ''vorticity'' keyword with a curl-movie thumbnail.'
+    19°''. S9: small ''vorticity'' keyword with a vorticity-movie (U10) thumbnail (pointer fix, plan v5).'
   voiceover: 'Why bother with polar coordinates here? Let''s go round that ring and plot the eastward and northward winds. Both swing up and down, from
     plus to minus, all the way round, because the wind keeps turning as we circle the eye. Now let''s plot the tangential and radial winds round the same
     ring. They stay much closer to two steady lines. Two jumpy curves have become two fairly steady numbers: how fast the storm spins, and how fast the
     air flows in. The angle at which the wind crosses each ring, called the inflow angle, is about nineteen degrees. [beat] Spin and inflow are exactly
-    what hurricane scientists care about, and polar coordinates hand them over directly. The spin also has its own measure, called vorticity, in the curl
-    movie of this series.'
+    what hurricane scientists care about, and polar coordinates hand them over directly. The spin also has its own measure, called vorticity, which has
+    its own movie later in this series.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.cyclone.storm_relative_wind (per-point u, v, tangential, radial, inflow angle)
@@ -610,25 +611,26 @@ scenes:
   runner_up: polar plot of the ring (less clear for 'steady')
   why: the 'why bother' answer shown with the storm's own numbers
   related:
+  - {movie: U10, slug: ch00_u10_vorticity (planned), covers: 'vorticity in plain words, where the viewer first meets it (plan v5 pos 29)'}
   - &id014 {movie: '#8', slug: ch00_curl_circulation (planned), covers: 'vorticity, circulation round a ring'}
   - *id005
   layout_5b: 'Left: the zoomed ring re-opened as this scene''s start view (soft map-frame edges), chart in the maths zone. SourceBelow (K2): the data-source
     line sits fully below the picture (>= 16 px gap, y <= 860), never on it. Marker on the ring is a gold dot, not a label.'
 - id: s13_centripetal
-  t: [643.2, 735.425]
+  t: [643.85, 736.075]
   sentence_times:
-  - [643.2, 645.05]
-  - [645.4, 657.15]
-  - [657.5, 660.5]
-  - [660.85, 662.75]
-  - [663.1, 669.0]
-  - [669.35, 676.375]
-  - [676.725, 691.125]
-  - [691.475, 699.325]
-  - [700.825, 710.85]
-  - [712.35, 723.075]
-  - [723.425, 728.0]
-  - [728.35, 734.625]
+  - [643.85, 645.7]
+  - [646.05, 657.8]
+  - [658.15, 661.15]
+  - [661.5, 663.4]
+  - [663.75, 669.65]
+  - [670.0, 677.025]
+  - [677.375, 691.775]
+  - [692.125, 699.975]
+  - [701.475, 711.5]
+  - [713.0, 723.725]
+  - [724.075, 728.65]
+  - [729.0, 735.275]
   beat: 'why it matters: steady spin still accelerates (v^2/r)'
   visual: 'Picture: the 25-km ring, an air-parcel glyph circling at constant speed with its velocity arrow (teal, ''37 θ̂'') and, at each position, θ̂ and
     r̂; the velocity arrow visibly turns. S5-S6: the derivation builds as Layered TeX with gold underbraces: ''d θ̂/dθ = −r̂'' (from s09, recalled as a
@@ -663,17 +665,17 @@ scenes:
   layout_5b: 'Ring picture with SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. Derivation and
     CalcStack in the maths zone; the bar pair beside, not on the picture.'
 - id: s14_cylinder
-  t: [735.425, 794.375]
+  t: [736.075, 795.025]
   sentence_times:
-  - [735.425, 737.825]
-  - [738.175, 749.55]
-  - [749.9, 754.75]
-  - [755.1, 766.0]
-  - [766.35, 771.125]
-  - [771.475, 777.05]
-  - [777.4, 780.175]
-  - [780.525, 785.5]
-  - [785.85, 793.575]
+  - [736.075, 738.475]
+  - [738.825, 750.2]
+  - [750.55, 755.4]
+  - [755.75, 766.65]
+  - [767.0, 771.775]
+  - [772.125, 777.7]
+  - [778.05, 780.825]
+  - [781.175, 786.15]
+  - [786.5, 794.225]
   beat: 'building block: cylindrical coordinates (r, theta, z)'
   visual: 'Full-width 3-D: three.js view of Ian''s core from above and to the side: a translucent cylinder of radius 25 km and height 15 km over the sea
     surface (GOES true colour patch as the floor); air-parcel streaks spiral in near the floor (rose radial arrows), rise in the eyewall (brown/teal vertical
@@ -761,31 +763,31 @@ scenes:
     movie (Ian radial wind is this movie''s stack only).'
   related:
   - {movie: '#45', slug: ch00_tropical_cyclones (planned), covers: 'eyewall, inflow, outflow, warm core'}
-  t: [794.375, 882.225]
+  t: [795.025, 882.875]
   sentence_times:
-  - [794.375, 797.275]
-  - [797.625, 805.2]
-  - [805.55, 811.375]
-  - [811.725, 820.4]
-  - [820.75, 824.825]
-  - [825.175, 831.6]
-  - [833.1, 837.925]
-  - [838.275, 846.025]
-  - [846.375, 851.95]
-  - [852.3, 857.1]
-  - [858.6, 864.2]
-  - [864.55, 868.2]
-  - [868.55, 875.275]
-  - [875.625, 881.425]
+  - [795.025, 797.925]
+  - [798.275, 805.85]
+  - [806.2, 812.025]
+  - [812.375, 821.05]
+  - [821.4, 825.475]
+  - [825.825, 832.25]
+  - [833.75, 838.575]
+  - [838.925, 846.675]
+  - [847.025, 852.6]
+  - [852.95, 857.75]
+  - [859.25, 864.85]
+  - [865.2, 868.85]
+  - [869.2, 875.925]
+  - [876.275, 882.075]
 - id: s15_sphere
-  t: [882.225, 916.425]
+  t: [882.875, 917.075]
   sentence_times:
-  - [882.225, 885.125]
-  - [885.475, 888.4]
-  - [888.75, 895.05]
-  - [895.4, 905.875]
-  - [906.225, 908.75]
-  - [909.1, 915.625]
+  - [882.875, 885.775]
+  - [886.125, 889.05]
+  - [889.4, 895.7]
+  - [896.05, 906.525]
+  - [906.875, 909.4]
+  - [909.75, 916.275]
   beat: 'building block: spherical coordinates on the Earth'
   visual: 'Full width three.js globe (BMNG topo+bathy, NE coasts, soft graticule), camera slowly orbiting to the North Atlantic. S2: a gold dot at the centre
     (cut-away hemisphere, see-through); the radius r draws to Brest (teal) on AT(3,''distance from the centre''). S4: ''a ≈ 6400 | 6371 km'' (easy | exact)
@@ -813,20 +815,20 @@ scenes:
     keywords and calculations in the text column, never on the globe. The cut-away hemisphere and the radius sit inside the globe frame; ''a ≈ 6400 | 6371
     km'' in the text column with a gold link to the radius.'
 - id: s16_latitude
-  t: [916.425, 974.35]
+  t: [917.075, 975.0]
   sentence_times:
-  - [916.425, 919.975]
-  - [920.325, 923.525]
-  - [923.875, 928.95]
-  - [929.3, 931.05]
-  - [931.4, 933.95]
-  - [934.3, 937.65]
-  - [938.0, 943.475]
-  - [943.825, 950.075]
-  - [950.425, 956.1]
-  - [956.45, 962.825]
-  - [963.175, 968.725]
-  - [969.075, 973.55]
+  - [917.075, 920.625]
+  - [920.975, 924.175]
+  - [924.525, 929.6]
+  - [929.95, 931.7]
+  - [932.05, 934.6]
+  - [934.95, 938.3]
+  - [938.65, 944.125]
+  - [944.475, 950.725]
+  - [951.075, 956.75]
+  - [957.1, 963.475]
+  - [963.825, 969.375]
+  - [969.725, 974.2]
   beat: 'building block: latitude phi'
   visual: 'Globe from the side (equator plane as a faint disk). S2: the line centre -> Brest (teal). S3: the angle from the equator plane, gold arc, label
     ''φ'' on AT(4,''phi''). S5-S6: the dot slides to the equator (''0°''), to the North Pole (''90° N''), to the South Pole (''−90°'' with ''−'' glyph).
@@ -856,17 +858,17 @@ scenes:
     keywords and calculations in the text column, never on the globe. ''Brest'' billboard on AT(7,''Brest'') with Brest turned to the centre of the globe''s
     face within 1 s; ''48.4° N'' in the text column.'
 - id: s17_longitude
-  t: [974.35, 1025.575]
+  t: [975.0, 1026.225]
   sentence_times:
-  - [974.35, 977.35]
-  - [977.7, 982.5]
-  - [982.85, 986.925]
-  - [987.275, 994.15]
-  - [994.5, 996.325]
-  - [996.675, 1000.075]
-  - [1000.425, 1007.0]
-  - [1007.35, 1018.175]
-  - [1018.525, 1024.775]
+  - [975.0, 978.0]
+  - [978.35, 983.15]
+  - [983.5, 987.575]
+  - [987.925, 994.8]
+  - [995.15, 996.975]
+  - [997.325, 1000.725]
+  - [1001.075, 1007.65]
+  - [1008.0, 1018.825]
+  - [1019.175, 1025.425]
   beat: 'building block: longitude lambda, graticule'
   visual: 'Globe seen from above the North Pole. S2: meridians draw pole to pole (slate); S3: the Greenwich meridian highlighted gold with a billboard ''Greenwich''.
     S4-S5: an arc in the equator plane from the prime meridian to Brest''s meridian, label ''λ''. S6: ''+ east'', ''− west'' along the equator. S7: ''λ
@@ -896,21 +898,21 @@ scenes:
     keywords and calculations in the text column, never on the globe. ''Greenwich'' billboard on AT(3,''Greenwich'') (meridian turned to face the camera);
     ''λ = −4.5°'' and the 0-360 ruler in the text column, not on the globe.'
 - id: s18_position
-  t: [1025.575, 1115.825]
+  t: [1026.225, 1116.475]
   sentence_times:
-  - [1025.575, 1028.325]
-  - [1028.675, 1033.625]
-  - [1033.975, 1038.275]
-  - [1038.625, 1041.575]
-  - [1041.925, 1046.35]
-  - [1046.7, 1052.275]
-  - [1052.625, 1057.9]
-  - [1058.25, 1061.55]
-  - [1061.9, 1067.4]
-  - [1067.75, 1075.3]
-  - [1075.65, 1088.25]
-  - [1088.6, 1101.525]
-  - [1103.025, 1114.325]
+  - [1026.225, 1028.975]
+  - [1029.325, 1034.275]
+  - [1034.625, 1038.925]
+  - [1039.275, 1042.225]
+  - [1042.575, 1047.0]
+  - [1047.35, 1052.925]
+  - [1053.275, 1058.55]
+  - [1058.9, 1062.2]
+  - [1062.55, 1068.05]
+  - [1068.4, 1075.95]
+  - [1076.3, 1088.9]
+  - [1089.25, 1102.175]
+  - [1103.675, 1114.975]
   beat: 'building block: position vector from (a, phi, lambda)'
   visual: 'Two views side by side, both three.js. Left (side view, cut through Brest''s meridian): the radius (teal) at angle φ; the vertical drop to the
     equator plane (orange, ''a sin φ'') and the horizontal leg to the axis (orange, ''a cos φ''), right-angle tick. Right (top view from above the pole):
@@ -945,17 +947,17 @@ scenes:
     (>= 16 px gap, y <= 860), never on it. under the pair (''Image: NASA Blue Marble NG''). Leg labels at the legs; CalcStack in the maths zone with gold
     links.'
 - id: s19_earth_cylinder
-  t: [1115.825, 1194.05]
+  t: [1116.475, 1194.95]
   sentence_times:
-  - [1115.825, 1124.5]
-  - [1124.85, 1131.575]
-  - [1131.925, 1139.85]
-  - [1140.2, 1144.875]
-  - [1145.225, 1160.225]
-  - [1161.725, 1169.25]
-  - [1170.75, 1178.3]
-  - [1179.8, 1182.15]
-  - [1182.5, 1193.25]
+  - [1116.475, 1125.15]
+  - [1125.5, 1132.225]
+  - [1132.575, 1140.5]
+  - [1140.85, 1145.525]
+  - [1145.875, 1160.875]
+  - [1162.375, 1169.9]
+  - [1171.4, 1178.95]
+  - [1180.45, 1182.8]
+  - [1183.15, 1194.15]
   beat: 'intuition: a cos phi is a cylindrical radius; speed of the spinning ground'
   visual: 'three.js globe spinning slowly (one turn in 20 s, said implicitly by the narration ''once a day''), with the Earth''s axis (slate) and three
     parallels drawn as rings (equator, Brest, Longyearbyen) plus a faint cylinder through Brest''s ring (the ''cylindrical coordinate''). Each ring carries
@@ -968,8 +970,8 @@ scenes:
     radius, so the ground moves at seven point two nine times ten to the minus five, times six point three seven one million metres: about four hundred
     and sixty five metres per second. [beat] At Brest, the circle is two thirds as big, so the ground moves at about three hundred and nine metres per second.
     [beat] At Longyearbyen, on the Arctic islands of Svalbard, seventy eight degrees north, it''s only about ninety five. [beat] And at the poles, it''s
-    zero. This shrinking circle is part of the reason the Earth''s spin affects winds differently at different latitudes, which is the story of the Coriolis
-    movie in this series.'
+    zero. This shrinking circle is part of the reason the Earth''s spin affects winds differently at different latitudes, as we saw in the cross product
+    movie on our spinning Earth.'
   on_screen_eq: {latex: 'U=\Omega\,a\cos\varphi', vallis_eq: (2.36) Omega = Omega (j cos theta + k sin theta) and |Omega x r| on the surface (our step;
       the cross-product movie's Omega x r), page_png: chapters/pages/ch02/p082.png}
   physics_source:
@@ -993,16 +995,16 @@ scenes:
     and AT(7,''Longyearbyen''), labels on within 1 s, then resumes. Speed numbers at the arrow tips (short labels at a spot); Omega and the CalcStack in
     the text column.'
 - id: s20_distance_north
-  t: [1194.05, 1254.0]
+  t: [1194.95, 1254.9]
   sentence_times:
-  - [1194.05, 1197.125]
-  - [1197.475, 1207.725]
-  - [1208.075, 1215.95]
-  - [1216.3, 1218.9]
-  - [1219.25, 1226.625]
-  - [1226.975, 1234.8]
-  - [1236.3, 1243.1]
-  - [1243.45, 1253.2]
+  - [1194.95, 1198.025]
+  - [1198.375, 1208.625]
+  - [1208.975, 1216.85]
+  - [1217.2, 1219.8]
+  - [1220.15, 1227.525]
+  - [1227.875, 1235.7]
+  - [1237.2, 1244.0]
+  - [1244.35, 1254.1]
   beat: 'building block: delta y = a delta phi (111 km per degree)'
   visual: 'Globe from the side; Brest''s meridian (orange) with a one-degree step highlighted (band, exaggerated x5 in angle, said by the voice as ''one
     degree''); the radius to both ends (teal) and the angle ''1°''. Maths: ''δy = a δφ''; CalcStack ''1° = π/180 = 0.01745 rad'' then ''6371 × 0.01745 ≈
@@ -1033,19 +1035,19 @@ scenes:
     only for places spoken in the scene, each placed within 1 s of its words and turned to face the camera (centred) as it is spoken; no title on the globe;
     keywords and calculations in the text column, never on the globe. Numbers ''111 km'', ''1′ ≈ 1.85 km'' in the text column with gold links to the band.'
 - id: s21_distance_east
-  t: [1254.0, 1326.225]
+  t: [1254.9, 1327.125]
   sentence_times:
-  - [1254.0, 1256.15]
-  - [1256.5, 1264.05]
-  - [1264.4, 1269.9]
-  - [1270.25, 1276.675]
-  - [1277.025, 1283.625]
-  - [1283.975, 1287.875]
-  - [1288.225, 1295.375]
-  - [1296.875, 1303.275]
-  - [1304.775, 1312.425]
-  - [1313.925, 1317.825]
-  - [1318.175, 1325.425]
+  - [1254.9, 1257.05]
+  - [1257.4, 1264.95]
+  - [1265.3, 1270.8]
+  - [1271.15, 1277.575]
+  - [1277.925, 1284.525]
+  - [1284.875, 1288.775]
+  - [1289.125, 1296.275]
+  - [1297.775, 1304.175]
+  - [1305.675, 1313.325]
+  - [1314.825, 1318.725]
+  - [1319.075, 1326.325]
   beat: 'intuition: delta x = a cos phi delta lambda (why the cos phi)'
   visual: 'Globe; Brest''s parallel (orange ring) with its own small radius ''a cos φ'' drawn to the axis (teal), contrasted with the full radius to the
     centre. Maths: ''δx = a cos φ δλ'' with a gold underbrace under ''a cos φ'': ''radius of the parallel''. S5-S8: four one-degree east steps on four parallels
@@ -1079,15 +1081,15 @@ scenes:
     keywords and calculations in the text column, never on the globe. The globe turns so each named parallel''s step faces the camera on its sentence (equator,
     Brest, Longyearbyen, pole); step lengths in the text column with links.'
 - id: s22_grid_cells
-  t: [1326.225, 1383.5]
+  t: [1327.125, 1384.4]
   sentence_times:
-  - [1326.225, 1329.9]
-  - [1330.25, 1339.425]
-  - [1339.775, 1349.25]
-  - [1350.75, 1356.85]
-  - [1358.35, 1362.025]
-  - [1362.375, 1372.175]
-  - [1372.525, 1382.7]
+  - [1327.125, 1330.8]
+  - [1331.15, 1340.325]
+  - [1340.675, 1350.15]
+  - [1351.65, 1357.75]
+  - [1359.25, 1362.925]
+  - [1363.275, 1373.075]
+  - [1373.425, 1383.6]
   beat: 'application: ERA5 grid boxes thin towards the poles'
   visual: 'Two real map panels (polar-centred LAEA so the boxes are drawn at their true shapes): left Brittany with 0.25-degree ERA5 grid lines over BMNG,
     one box highlighted ''27.8 km'' tall, ''18.5 km'' wide; right Svalbard (Longyearbyen billboard) with the same grid, one box ''27.8 km'' by ''5.7 km''.
@@ -1120,20 +1122,20 @@ scenes:
     never on it. (''Image: NASA Blue Marble NG · ERA5 grid''); box sizes as short bracket labels at the box sides; the ''forgot the cos φ'' ghost label
     beside the panel. The small globe insert: whole globe, no fade, source line under it.'
 - id: s23_area
-  t: [1383.5, 1454.775]
+  t: [1384.4, 1455.675]
   sentence_times:
-  - [1383.5, 1386.075]
-  - [1386.425, 1395.5]
-  - [1395.85, 1402.275]
-  - [1402.625, 1405.05]
-  - [1405.4, 1410.025]
-  - [1410.375, 1415.55]
-  - [1415.9, 1421.1]
-  - [1422.6, 1425.525]
-  - [1425.875, 1435.6]
-  - [1437.1, 1441.825]
-  - [1442.175, 1447.975]
-  - [1448.325, 1453.975]
+  - [1384.4, 1386.975]
+  - [1387.325, 1396.4]
+  - [1396.75, 1403.175]
+  - [1403.525, 1405.95]
+  - [1406.3, 1410.925]
+  - [1411.275, 1416.45]
+  - [1416.8, 1422.0]
+  - [1423.5, 1426.425]
+  - [1426.775, 1436.5]
+  - [1438.0, 1442.725]
+  - [1443.075, 1448.875]
+  - [1449.225, 1454.875]
   beat: 'building block: area element and the sin phi rule'
   visual: 'Globe: one small patch at 45 N (gold) with its sides ''a δφ'' and ''a cos φ δλ''; maths ''dA = a² cos φ dφ dλ'' (Layered, cos φ highlighted).
     S5-S6: bands of patches fill from the equator northwards; a running area gauge rises like sin φ (chart in the maths zone: x latitude 0-90, y fraction
@@ -1166,20 +1168,20 @@ scenes:
     only for places spoken in the scene, each placed within 1 s of its words and turned to face the camera (centred) as it is spoken; no title on the globe;
     keywords and calculations in the text column, never on the globe. Area gauge chart in the maths zone.'
 - id: s24_enu
-  t: [1454.775, 1527.225]
+  t: [1455.675, 1528.125]
   sentence_times:
-  - [1454.775, 1458.175]
-  - [1458.525, 1464.275]
-  - [1464.625, 1468.95]
-  - [1469.3, 1478.575]
-  - [1478.925, 1482.25]
-  - [1482.6, 1489.25]
-  - [1489.6, 1495.9]
-  - [1496.25, 1503.3]
-  - [1503.65, 1506.175]
-  - [1506.525, 1509.275]
-  - [1509.625, 1517.95]
-  - [1519.45, 1525.725]
+  - [1455.675, 1459.075]
+  - [1459.425, 1465.175]
+  - [1465.525, 1469.85]
+  - [1470.2, 1479.475]
+  - [1479.825, 1483.15]
+  - [1483.5, 1490.15]
+  - [1490.5, 1496.8]
+  - [1497.15, 1504.2]
+  - [1504.55, 1507.075]
+  - [1507.425, 1510.175]
+  - [1510.525, 1518.85]
+  - [1520.35, 1526.625]
   beat: 'building block: the local east-north-up frame (2.29)'
   visual: 'Cesium drape close-up of Brest (BMNG/EOX-style imagery on ETOPO relief, our labels) with a station icon; three arrows grow from it: i (orange,
     east), j (orange, north), k (teal, up, away from the centre) on AT(2,...). Maths: ''v = i u + j v + k w'' (96 px) with u, v, w coloured as the arrows.
@@ -1222,17 +1224,17 @@ scenes:
     its k arrow; angles ''≈ 4°'', ''≈ 101°'' in the text column. Source line ''Image: NASA Blue Marble NG · ETOPO 2022 (NOAA)'' below the globe in both
     states.'
 - id: s25_enu_turn
-  t: [1527.225, 1589.3]
+  t: [1528.125, 1590.2]
   sentence_times:
-  - [1527.225, 1532.225]
-  - [1532.575, 1534.25]
-  - [1534.6, 1541.525]
-  - [1541.875, 1545.65]
-  - [1546.0, 1553.0]
-  - [1554.5, 1563.325]
-  - [1563.675, 1572.6]
-  - [1572.95, 1584.6]
-  - [1584.95, 1588.5]
+  - [1528.125, 1533.125]
+  - [1533.475, 1535.15]
+  - [1535.5, 1542.425]
+  - [1542.775, 1546.55]
+  - [1546.9, 1553.9]
+  - [1555.4, 1564.225]
+  - [1564.575, 1573.5]
+  - [1573.85, 1585.5]
+  - [1585.85, 1589.4]
   beat: 'intuition: the local arrows turn as you move (2.39)'
   visual: 'Globe from above the North Pole; a plane glyph flies east along Brest''s parallel (slate trail) for one hour (time-compressed); at its start
     and end, i (orange) and k (teal); the angle swept round the axis ''≈ 12°'' on S4. Maths: CalcStack ''250 × 3600 = 900 km'', ''900 / 74 ≈ 12°''. S5:
@@ -1264,19 +1266,19 @@ scenes:
     only for places spoken in the scene, each placed within 1 s of its words and turned to face the camera (centred) as it is spoken; no title on the globe;
     keywords and calculations in the text column, never on the globe. Plane glyph and trail on the globe; numbers and the rate equations in the text column.'
 - id: s26_metric_terms
-  t: [1589.3, 1661.0]
+  t: [1590.2, 1661.9]
   sentence_times:
-  - [1589.3, 1591.15]
-  - [1591.5, 1597.625]
-  - [1597.975, 1605.675]
-  - [1606.025, 1614.875]
-  - [1615.225, 1618.45]
-  - [1618.8, 1622.575]
-  - [1622.925, 1624.625]
-  - [1624.975, 1641.975]
-  - [1643.475, 1648.825]
-  - [1649.175, 1655.55]
-  - [1655.9, 1660.2]
+  - [1590.2, 1592.05]
+  - [1592.4, 1598.525]
+  - [1598.875, 1606.575]
+  - [1606.925, 1615.775]
+  - [1616.125, 1619.35]
+  - [1619.7, 1623.475]
+  - [1623.825, 1625.525]
+  - [1625.875, 1642.875]
+  - [1644.375, 1649.725]
+  - [1650.075, 1656.45]
+  - [1656.8, 1661.1]
   beat: 'why it matters: metric terms (2.45)'
   visual: 'Maths zone: the i component of (2.45) (96 px) with gold underbraces: ''Du/Dt'' = ''change of the number u'', ''− uv tan φ / a + uw/a'' = ''turning
     arrows'' (metric terms, keyword). Picture: an air parcel on the globe moving north-east along a great circle at constant speed, with its u and v read-outs
@@ -1310,19 +1312,19 @@ scenes:
     keywords and calculations in the text column, never on the globe. The parcel''s u and v readouts move to the maths zone (not on the globe), linked to
     the parcel by a gold link.'
 - id: s27_curvilinear
-  t: [1661.0, 1732.675]
+  t: [1661.9, 1733.575]
   sentence_times:
-  - [1661.0, 1670.025]
-  - [1670.375, 1672.5]
-  - [1672.85, 1677.775]
-  - [1678.125, 1681.975]
-  - [1682.325, 1688.575]
-  - [1688.925, 1695.85]
-  - [1696.2, 1704.225]
-  - [1704.575, 1708.2]
-  - [1708.55, 1718.325]
-  - [1718.675, 1723.575]
-  - [1723.925, 1731.875]
+  - [1661.9, 1670.925]
+  - [1671.275, 1673.4]
+  - [1673.75, 1678.675]
+  - [1679.025, 1682.875]
+  - [1683.225, 1689.475]
+  - [1689.825, 1696.75]
+  - [1697.1, 1705.125]
+  - [1705.475, 1709.1]
+  - [1709.45, 1719.225]
+  - [1719.575, 1724.475]
+  - [1724.825, 1732.775]
   beat: 'generalise: curvilinear coordinates and scale factors'
   visual: 'Three small panels across the top (polar rings, cylinder, globe graticule), each lighting up the three features as S3-S5 name them (curving lines,
     turning unit vectors, a ''scale factor'' ruler). Maths zone: a table without boxes: ''polar: 1, r''; ''sphere: a, a cos φ'' (scale factors) with the
@@ -1355,17 +1357,17 @@ scenes:
   layout_5b: 'Three panels across the top; the ETOPO Alps profile panel carries ''Data: ETOPO 2022 (NOAA) · ERA5'' below it. No panel titles; keywords below
     the panels.'
 - id: s28_why
-  t: [1732.675, 1788.25]
+  t: [1733.575, 1789.15]
   sentence_times:
-  - [1732.675, 1735.75]
-  - [1736.1, 1738.275]
-  - [1738.625, 1740.45]
-  - [1740.8, 1752.575]
-  - [1752.925, 1755.175]
-  - [1755.525, 1767.475]
-  - [1767.825, 1769.75]
-  - [1770.1, 1780.925]
-  - [1781.275, 1787.45]
+  - [1733.575, 1736.65]
+  - [1737.0, 1739.175]
+  - [1739.525, 1741.35]
+  - [1741.7, 1753.475]
+  - [1753.825, 1756.075]
+  - [1756.425, 1768.375]
+  - [1768.725, 1770.65]
+  - [1771.0, 1781.825]
+  - [1782.175, 1788.35]
   beat: 'why: three good reasons'
   visual: 'Three beats, one per reason, each a mini picture that fills the full width in turn (no headings): (1) shape: the Ian ring ''r = const'' and the
     globe ''r = a''; (2) measurement: a radar''s rings, a station''s ENU arrows, the ERA5 lat-lon grid; (3) meaning: the hurricane''s spin and inflow arrows,
@@ -1386,20 +1388,20 @@ scenes:
   related: []
   layout_5b: Reused thumbnails; one small source line under the thumbnail row when a real-data thumbnail is visible. No headings.
 - id: s29_great_circle
-  t: [1788.25, 1862.275]
+  t: [1789.15, 1863.175]
   sentence_times:
-  - [1788.25, 1791.75]
-  - [1792.1, 1794.95]
-  - [1795.3, 1803.3]
-  - [1803.65, 1809.025]
-  - [1809.375, 1813.025]
-  - [1813.375, 1815.1]
-  - [1815.45, 1820.2]
-  - [1820.55, 1827.175]
-  - [1827.525, 1836.5]
-  - [1838.0, 1843.175]
-  - [1843.525, 1854.075]
-  - [1855.575, 1861.475]
+  - [1789.15, 1792.65]
+  - [1793.0, 1795.85]
+  - [1796.2, 1804.2]
+  - [1804.55, 1809.925]
+  - [1810.275, 1813.925]
+  - [1814.275, 1816.0]
+  - [1816.35, 1821.1]
+  - [1821.45, 1828.075]
+  - [1828.425, 1837.4]
+  - [1838.9, 1844.075]
+  - [1844.425, 1854.975]
+  - [1856.475, 1862.375]
   beat: 'application: great circles (dot product of position vectors)'
   visual: 'three.js globe: London and Los Angeles billboards; a translucent plane slicing through both and the centre (S4) cuts the great circle (gold).
     S6-S7: the two unit position arrows from the centre (teal, orange) and the angle between them; maths ''cos σ = r̂₁ · r̂₂'' then ''σ ≈ 79°'' and ''d
@@ -1435,15 +1437,15 @@ scenes:
     turns so the whole route is centred with both labels in view; ''Greenland'' labelled at the vertex on AT(9,''Greenland''). Numbers (''≈ 79°'', ''≈ 8760
     km'', ''312°'', ''62° N'') in the text column with gold links.'
 - id: s30_rhumb_line
-  t: [1862.275, 1907.75]
+  t: [1863.175, 1908.65]
   sentence_times:
-  - [1862.275, 1869.65]
-  - [1870.0, 1872.9]
-  - [1873.25, 1884.425]
-  - [1885.925, 1894.375]
-  - [1895.875, 1900.6]
-  - [1900.95, 1904.9]
-  - [1905.25, 1906.95]
+  - [1863.175, 1870.55]
+  - [1870.9, 1873.8]
+  - [1874.15, 1885.325]
+  - [1886.825, 1895.275]
+  - [1896.775, 1901.5]
+  - [1901.85, 1905.8]
+  - [1906.15, 1907.85]
   beat: 'application: rhumb line vs great circle'
   visual: 'Same globe; the rhumb line (slate, constant 258 degrees, crossing every meridian at the same angle: small angle ticks at five meridians) draws
     beside the great circle (gold). Maths: ''9730 km'' vs ''8760 km'', CalcStack ''9733 / 8761 ≈ 1.11 → 11 % longer, ≈ 970 km''. S5: ''≈ 1 h at 900 km/h''.
@@ -1472,16 +1474,16 @@ scenes:
     only for places spoken in the scene, each placed within 1 s of its words and turned to face the camera (centred) as it is spoken; no title on the globe;
     keywords and calculations in the text column, never on the globe. The Mercator thumbnail sits beside the globe with its own source line below it.'
 - id: s31_plate_carree
-  t: [1907.75, 1953.85]
+  t: [1908.65, 1954.75]
   sentence_times:
-  - [1907.75, 1914.725]
-  - [1915.075, 1921.275]
-  - [1921.625, 1924.3]
-  - [1924.65, 1929.4]
-  - [1929.75, 1935.575]
-  - [1935.925, 1941.275]
-  - [1942.775, 1945.875]
-  - [1947.375, 1953.05]
+  - [1908.65, 1915.625]
+  - [1915.975, 1922.175]
+  - [1922.525, 1925.2]
+  - [1925.55, 1930.3]
+  - [1930.65, 1936.475]
+  - [1936.825, 1942.175]
+  - [1943.675, 1946.775]
+  - [1948.275, 1953.95]
   beat: 'application: flattening; plate carree stretch 1/cos phi'
   visual: 'ProjectionMorph (three.js): the globe peels into 12 gores (mapproj ''gores'', orange-peel look) on AT(1,''orange peel''), then the gores stretch
     sideways into the plate carree rectangle (BMNG texture). Tissot circles (equal 500-km circles on the globe, mapproj.tissot_ellipses) ride along and
@@ -1513,17 +1515,17 @@ scenes:
     (>= 16 px gap, y <= 860), never on it. (''Image: NASA Blue Marble NG''). Stretch numbers in the maths zone with gold links to the two Tissot ellipses;
     links must not cross.'
 - id: s32_mercator
-  t: [1953.85, 2019.45]
+  t: [1954.75, 2020.35]
   sentence_times:
-  - [1953.85, 1958.325]
-  - [1958.675, 1965.75]
-  - [1966.1, 1972.475]
-  - [1972.825, 1975.55]
-  - [1975.9, 1984.325]
-  - [1984.675, 1992.35]
-  - [1992.7, 2002.975]
-  - [2003.325, 2010.65]
-  - [2012.15, 2018.65]
+  - [1954.75, 1959.225]
+  - [1959.575, 1966.65]
+  - [1967.0, 1973.375]
+  - [1973.725, 1976.45]
+  - [1976.8, 1985.225]
+  - [1985.575, 1993.25]
+  - [1993.6, 2003.875]
+  - [2004.225, 2011.55]
+  - [2013.05, 2019.55]
   beat: 'application: Mercator, conformal; y = a ln tan(pi/4 + phi/2)'
   visual: 'Continuation of the morph into Mercator (y stretched by the same 1/cos φ; Tissot ellipses become circles of growing size). S3-S4: keyword ''conformal'';
     a small angle at Brest identical on globe and map. S5: the London-Los Angeles rhumb line straight on the map, the great circle curved. S6-S8: Layered
@@ -1553,15 +1555,15 @@ scenes:
   layout_5b: 'Mercator map frame, SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. Equations in
     the maths zone; the small angle mark sits on the map (short glyph).'
 - id: s33_mercator_area
-  t: [2019.45, 2057.25]
+  t: [2020.35, 2058.15]
   sentence_times:
-  - [2019.45, 2022.575]
-  - [2022.925, 2030.075]
-  - [2030.425, 2033.475]
-  - [2034.975, 2038.275]
-  - [2039.775, 2044.65]
-  - [2045.0, 2048.95]
-  - [2050.45, 2056.45]
+  - [2020.35, 2023.475]
+  - [2023.825, 2030.975]
+  - [2031.325, 2034.375]
+  - [2035.875, 2039.175]
+  - [2040.675, 2045.55]
+  - [2045.9, 2049.85]
+  - [2051.35, 2057.35]
   beat: 'application: Mercator area stretch; Greenland vs Africa'
   visual: 'Mercator map (BMNG); Tissot circles show area growth ''4×'' at 60 degrees (S2) and ''24×'' at Svalbard (S3). S4: Greenland and Africa outlines
     highlighted (NE admin-0) on the Mercator map, nearly equal in size; S5: both outlines lift off and are re-drawn at true relative area (equal-area shapes)
@@ -1586,18 +1588,18 @@ scenes:
   layout_5b: 'Mercator map, SourceBelow (K2): the data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. (''Image: NASA Blue
     Marble NG · borders: Natural Earth''); ''4×'', ''24×'', ''≈ 14×'' in the text column with gold links to the Tissot circles and outlines.'
 - id: s34_equal_area
-  t: [2057.25, 2116.1]
+  t: [2058.15, 2117.0]
   sentence_times:
-  - [2057.25, 2060.4]
-  - [2060.75, 2068.375]
-  - [2068.725, 2074.15]
-  - [2074.5, 2082.675]
-  - [2083.025, 2087.25]
-  - [2087.6, 2094.6]
-  - [2096.1, 2100.55]
-  - [2100.9, 2104.05]
-  - [2104.4, 2110.5]
-  - [2110.85, 2115.3]
+  - [2058.15, 2061.3]
+  - [2061.65, 2069.275]
+  - [2069.625, 2075.05]
+  - [2075.4, 2083.575]
+  - [2083.925, 2088.15]
+  - [2088.5, 2095.5]
+  - [2097.0, 2101.45]
+  - [2101.8, 2104.95]
+  - [2105.3, 2111.4]
+  - [2111.75, 2116.2]
   beat: 'application: equal-area maps (Equal Earth), pick the map for the job'
   visual: 'Equal Earth world map (BMNG) with Greenland and Africa outlined at true relative size; Tissot ellipses equal in area but sheared towards the
     poles; a 60-degree angle mark showing the distortion ''≥ 30°''. S1-S2: a real climate example: the latest complete month''s 2 m temperature anomaly
@@ -1629,16 +1631,16 @@ scenes:
     on the map, in every zoom state. placed between/beside them in the text column; one source line below both: ''Data: ERA5 (Copernicus C3S) · Sep 2026
     vs 1991-2020''. Keywords below the maps.'
 - id: s35_polar_view
-  t: [2116.1, 2174.325]
+  t: [2117.0, 2175.225]
   sentence_times:
-  - [2116.1, 2121.45]
-  - [2121.8, 2127.525]
-  - [2127.875, 2137.05]
-  - [2137.4, 2147.475]
-  - [2147.825, 2152.05]
-  - [2152.4, 2160.65]
-  - [2162.15, 2167.55]
-  - [2167.9, 2173.525]
+  - [2117.0, 2122.35]
+  - [2122.7, 2128.425]
+  - [2128.775, 2137.95]
+  - [2138.3, 2148.375]
+  - [2148.725, 2152.95]
+  - [2153.3, 2161.55]
+  - [2163.05, 2168.45]
+  - [2168.8, 2174.425]
   beat: 'application: the polar view; the 10 hPa polar vortex'
   visual: 'Map seen from above the North Pole (polar stereographic, true at 60 N; BMNG land under a dark sky-blue stratosphere tint), graticule rings and
     spokes highlighted as ''r'' and ''longitude'' on AT(3). S4: NCEP/NCAR 10 hPa geopotential height contours of 6 Jan 2014 every 400 m (slate lines, labels
@@ -1681,17 +1683,17 @@ scenes:
     1 (NOAA PSL) · 6 Jan 2014 · 10 hPa''; date changes if D1 is adopted). The optional 3-D lift is one sheet, not a layer stack; soft frame edges while
     tilted. Wind arrows along the contours have moving dashes.'
 - id: s36_vortex_components
-  t: [2174.325, 2239.05]
+  t: [2175.225, 2239.95]
   sentence_times:
-  - [2174.325, 2179.45]
-  - [2179.8, 2187.975]
-  - [2188.325, 2195.025]
-  - [2195.375, 2201.425]
-  - [2201.775, 2210.625]
-  - [2210.975, 2217.725]
-  - [2219.225, 2226.35]
-  - [2226.7, 2230.7]
-  - [2231.05, 2238.25]
+  - [2175.225, 2180.35]
+  - [2180.7, 2188.875]
+  - [2189.225, 2195.925]
+  - [2196.275, 2202.325]
+  - [2202.675, 2211.525]
+  - [2211.875, 2218.625]
+  - [2220.125, 2227.25]
+  - [2227.6, 2231.6]
+  - [2231.95, 2239.15]
   beat: 'intuition: eastward = tangential round the pole; choose the origin'
   visual: 'Same polar map. S1: at one point, the eastward arrow (teal) and θ̂ round the pole coincide (gold ''same''); S2: the northward arrow points to
     the centre: ''−r̂'' (rose). S3: anticlockwise arrow (seen from above the North Pole). S4-S5: a hurricane thumbnail (s11) beside the vortex, with a size
@@ -1736,19 +1738,19 @@ scenes:
     along each arrow, or particles drifting along the flow at a speed scaled to the wind; scale in the manifest); arrows keep the data''s direction and
     length.'
 - id: s37_rotate_axes
-  t: [2239.05, 2307.125]
+  t: [2239.95, 2308.025]
   sentence_times:
-  - [2239.05, 2244.525]
-  - [2244.875, 2249.55]
-  - [2249.9, 2256.15]
-  - [2256.5, 2261.4]
-  - [2261.75, 2267.3]
-  - [2267.65, 2271.7]
-  - [2272.05, 2280.7]
-  - [2281.05, 2287.825]
-  - [2288.175, 2293.625]
-  - [2295.125, 2300.375]
-  - [2301.875, 2306.325]
+  - [2239.95, 2245.425]
+  - [2245.775, 2250.45]
+  - [2250.8, 2257.05]
+  - [2257.4, 2262.3]
+  - [2262.65, 2268.2]
+  - [2268.55, 2272.6]
+  - [2272.95, 2281.6]
+  - [2281.95, 2288.725]
+  - [2289.075, 2294.525]
+  - [2296.025, 2301.275]
+  - [2302.775, 2307.225]
   beat: 'building block: rotating the axes'
   visual: 'Picture: the east wind arrow (teal, 10 m/s) at the origin with the old axes (orange, faint) and new axes x′, y′ (orange) turned by α (gold arc,
     ''anticlockwise seen from above''). S4-S5: x̂′ = (cos α, sin α), ŷ′ = (−sin α, cos α) at the tips. S6-S7: the two lines (84 px). S8-S10: α = 30°: shadows
@@ -1778,15 +1780,15 @@ scenes:
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings. The wind arrow has moving
     dashes.'
 - id: s38_rotation_matrix
-  t: [2307.125, 2357.925]
+  t: [2308.025, 2358.825]
   sentence_times:
-  - [2307.125, 2312.475]
-  - [2312.825, 2319.65]
-  - [2320.0, 2328.775]
-  - [2329.125, 2333.6]
-  - [2333.95, 2340.25]
-  - [2340.6, 2349.075]
-  - [2350.575, 2357.125]
+  - [2308.025, 2313.375]
+  - [2313.725, 2320.55]
+  - [2320.9, 2329.675]
+  - [2330.025, 2334.5]
+  - [2334.85, 2341.15]
+  - [2341.5, 2349.975]
+  - [2351.475, 2358.025]
   beat: 'building block: the rotation matrix; polar components are a rotation'
   visual: 'Maths: the 2 × 2 matrix [[cos α, −sin α], [sin α, cos α]] built entry by entry with gold links to the angle pairs (each entry the cosine of the
     angle between an old and a new axis); then the index form x′_j = x_i C_ij (vectors-movie thumbnail). Picture: back to the balloon at 53°: r̂, θ̂ shown
@@ -1812,17 +1814,17 @@ scenes:
   - *id001
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s39_coastline
-  t: [2357.925, 2419.025]
+  t: [2358.825, 2419.925]
   sentence_times:
-  - [2357.925, 2362.425]
-  - [2362.775, 2371.575]
-  - [2371.925, 2374.7]
-  - [2375.05, 2382.05]
-  - [2383.55, 2390.05]
-  - [2390.4, 2402.025]
-  - [2403.525, 2407.35]
-  - [2407.7, 2412.9]
-  - [2414.4, 2418.225]
+  - [2358.825, 2363.325]
+  - [2363.675, 2372.475]
+  - [2372.825, 2375.6]
+  - [2375.95, 2382.95]
+  - [2384.45, 2390.95]
+  - [2391.3, 2402.925]
+  - [2404.425, 2408.25]
+  - [2408.6, 2413.8]
+  - [2415.3, 2419.125]
   beat: 'application: along/across a coastline (Ian at Fort Myers Beach)'
   visual: 'Real map (HRRR LCC) of the SW Florida coast with NE 10 m coastline (white), GOES true-colour underlay; the coast''s direction arrow (orange)
     labelled ''329°'' (S3). S4: the axes x′ along the coast, y′ out to sea (orange). S5: HRRR 20 UTC wind at Fort Myers Beach (teal arrow, ''33 m/s from
@@ -1857,18 +1859,18 @@ scenes:
     Every wind arrow or streak is animated (moving dashes along each arrow, or particles drifting along the flow at a speed scaled to the wind; scale in
     the manifest); arrows keep the data''s direction and length.'
 - id: s40_surge
-  t: [2419.025, 2485.25]
+  t: [2419.925, 2486.15]
   sentence_times:
-  - [2419.025, 2422.525]
-  - [2422.875, 2429.4]
-  - [2429.75, 2432.1]
-  - [2432.45, 2441.3]
-  - [2441.65, 2448.825]
-  - [2449.175, 2458.15]
-  - [2459.65, 2465.825]
-  - [2466.175, 2472.475]
-  - [2472.825, 2475.95]
-  - [2476.3, 2484.45]
+  - [2419.925, 2423.425]
+  - [2423.775, 2430.3]
+  - [2430.65, 2433.0]
+  - [2433.35, 2442.2]
+  - [2442.55, 2449.725]
+  - [2450.075, 2459.05]
+  - [2460.55, 2466.725]
+  - [2467.075, 2473.375]
+  - [2473.725, 2476.85]
+  - [2477.2, 2485.35]
   beat: 'application: storm surge vs Tampa Bay drain (sign flip)'
   visual: 'Same map widened to Tampa Bay. S1-S3: a sea-level sheet rises on the Fort Myers coast (three.js inset, x50 vertical) with ''10-15 ft ≈ 3-4.5
     m'' (slate, cited value) and, if D3 arrives, the real NOAA tide-gauge curve (Fort Myers 8725520) drawing itself. S5-S6: at St. Petersburg the coast
@@ -1905,16 +1907,16 @@ scenes:
     to the s39 view. The three.js sea-level inset and both tide-gauge curves sit beside the map (maths zone), never on it; numbers in the text column. Sources
     below: ''Data: HRRR (NOAA) · NOAA CO-OPS tide gauges · NHC report''. Wind arrows animated.'
 - id: s41_galilean
-  t: [2485.25, 2541.3]
+  t: [2486.15, 2542.2]
   sentence_times:
-  - [2485.25, 2489.275]
-  - [2489.625, 2495.925]
-  - [2496.275, 2500.225]
-  - [2500.575, 2508.0]
-  - [2509.5, 2511.525]
-  - [2511.875, 2520.425]
-  - [2520.775, 2530.0]
-  - [2530.35, 2540.5]
+  - [2486.15, 2490.175]
+  - [2490.525, 2496.825]
+  - [2497.175, 2501.125]
+  - [2501.475, 2508.9]
+  - [2510.4, 2512.425]
+  - [2512.775, 2521.325]
+  - [2521.675, 2530.9]
+  - [2531.25, 2541.4]
   beat: 'building block: the Galilean transformation'
   visual: 'Picture: a code-drawn train on a straight track across the screen at a steady 20 m/s (slate), a walker glyph on it at 1.5 m/s (teal arrow, ''u′''),
     an observer beside the track (station icon). Train arrow ''U = 20'' (orange). S3: CalcStack ''20 + 1.5 = 21.5 m/s''. S5: ''u = U + u′''. S6: two rulers,
@@ -1941,31 +1943,32 @@ scenes:
   related: []
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s42_galilean_accel
-  t: [2541.3, 2615.85]
+  t: [2542.2, 2617.65]
   sentence_times:
-  - [2541.3, 2543.45]
-  - [2543.8, 2546.3]
-  - [2546.65, 2551.625]
-  - [2551.975, 2558.275]
-  - [2558.625, 2566.5]
-  - [2568.0, 2579.275]
-  - [2579.625, 2587.7]
-  - [2588.05, 2595.3]
-  - [2595.65, 2600.475]
-  - [2600.825, 2605.0]
-  - [2605.35, 2615.05]
+  - [2542.2, 2544.35]
+  - [2544.7, 2547.2]
+  - [2547.55, 2552.525]
+  - [2552.875, 2559.175]
+  - [2559.525, 2567.4]
+  - [2568.9, 2580.175]
+  - [2580.525, 2588.6]
+  - [2588.95, 2596.2]
+  - [2596.55, 2601.375]
+  - [2601.725, 2605.9]
+  - [2606.25, 2616.85]
   beat: 'why: accelerations are the same in both frames (K 3.9)'
   visual: 'Maths: Layered TeX ''d u/dt = d U/dt + d u′/dt'', the dU/dt struck (Strike) with ''= 0, U steady''; result ''a = a′'' (gold). Picture: a ball
     dropped on the train falls straight down for the rider and along a parabola for the ground observer; at three moments both views show the same downward
     acceleration arrow ''9.8 m/s²'' (brown, gravity). S6-S7: (K 3.9) appears with underbraces ''local change'' (slate) and ''advection'' (teal) on each
-    side, and a sum brace ''same''. S8-S9: a spinning turntable thumbnail with a rose ''extra terms'' tag (Coriolis movie).'
+    side, and a sum brace ''same''. S8-S9: a spinning turntable thumbnail with a rose ''extra terms'' tag (back-pointer to #3, the cross product
+    movie on our spinning Earth; plan v5).'
   voiceover: 'Here''s the beautiful part. What happens to accelerations? Let''s take the rate of change of u, which is capital U plus u prime. The rate
     of change of capital U is zero, because the train''s velocity never changes. So the rate of change of u equals the rate of change of u prime: the acceleration
     is the same in both frames. [beat] Drop a ball on the smooth train, and it falls straight down, speeding up by nine point eight metres per second every
     second, exactly as it does for the person beside the track. And since Newton''s law says force equals mass times acceleration, the same forces explain
     the motion in both frames. For a fluid, the acceleration of an air parcel is the local change of the wind plus the advection term. Each piece can differ
     between the two frames, but their sum is the same. That''s only true for a frame moving steadily in a straight line. A frame that turns, like the spinning
-    Earth, adds new terms, the Coriolis and centrifugal effects, which is the story of the Coriolis movie.'
+    Earth, adds new terms, the Coriolis and centrifugal effects, which we met in the cross product movie on our spinning Earth.'
   on_screen_eq: {latex: '\frac{\partial\mathbf u}{\partial t}+(\mathbf u\cdot\nabla)\mathbf u=\frac{\partial\mathbf u''}{\partial t''}+(\mathbf u''\cdot\nabla'')\mathbf
       u''', vallis_eq: none in Vallis; Kundu (3.9), page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png}
   physics_source:
@@ -1985,18 +1988,18 @@ scenes:
   - *id012
   layout_5b: 'No real-data picture: no source line. No text over the drawing or over other text (K6 overlap gate). No headings.'
 - id: s43_storm_frame
-  t: [2615.85, 2682.55]
+  t: [2617.65, 2684.35]
   sentence_times:
-  - [2615.85, 2618.05]
-  - [2618.4, 2625.425]
-  - [2625.775, 2634.2]
-  - [2635.7, 2643.025]
-  - [2643.375, 2652.025]
-  - [2653.525, 2655.575]
-  - [2655.925, 2664.7]
-  - [2665.05, 2671.6]
-  - [2671.95, 2676.275]
-  - [2676.625, 2681.75]
+  - [2617.65, 2619.85]
+  - [2620.2, 2627.225]
+  - [2627.575, 2636.0]
+  - [2637.5, 2644.825]
+  - [2645.175, 2653.825]
+  - [2655.325, 2657.375]
+  - [2657.725, 2666.5]
+  - [2666.85, 2673.4]
+  - [2673.75, 2678.075]
+  - [2678.425, 2683.55]
   beat: 'application: Ciaran moving at 15 m/s; earth-relative asymmetry'
   visual: 'Real map (LCC, 44-58 N, 15 W-5 E) of ERA5 10-m wind and isobars every 4 hPa, 1-2 Nov 2023, animated hourly 21 UTC -> 06 UTC while S2 speaks,
     with the tracked centre path (gold dots, one per hour, continuity tracker) and a clock glyph; storm motion arrow ''≈ 15 m/s ENE'' (orange) at S2. S4:
@@ -2031,17 +2034,17 @@ scenes:
     Every wind arrow or streak is animated (moving dashes along each arrow, or particles drifting along the flow at a speed scaled to the wind; scale in
     the manifest); arrows keep the data''s direction and length.'
 - id: s44_storm_invariant
-  t: [2682.55, 2742.375]
+  t: [2684.35, 2744.175]
   sentence_times:
-  - [2682.55, 2685.275]
-  - [2685.625, 2690.125]
-  - [2690.475, 2696.35]
-  - [2697.85, 2702.95]
-  - [2704.45, 2706.45]
-  - [2706.8, 2718.1]
-  - [2718.45, 2723.625]
-  - [2723.975, 2732.9]
-  - [2733.25, 2741.575]
+  - [2684.35, 2687.075]
+  - [2687.425, 2691.925]
+  - [2692.275, 2698.15]
+  - [2699.65, 2704.75]
+  - [2706.25, 2708.25]
+  - [2708.6, 2719.9]
+  - [2720.25, 2725.425]
+  - [2725.775, 2734.7]
+  - [2735.05, 2743.375]
   beat: 'intuition: what a uniform shift leaves unchanged (spin, inflow)'
   visual: 'Two rings side by side (earth-relative left, storm-relative right) at 03 UTC with their arrows; under each the ring-mean tangential ''≈ 14 m/s''
     and ring-mean radial ''≈ −6 m/s'' (rose) appear on S2 and S3, gold ''same'' links between the pairs. S5: a uniform arrow field (orange) on a circle:
@@ -2070,17 +2073,17 @@ scenes:
   layout_5b: 'Two rings side by side with their readouts under each ring (not on the rings); the coast map with the house icon at the spot, ''gust 84 kt
     ≈ 156 km/h'' beside with a gold link. Sources below: ''Data: ERA5 · ISD (NOAA NCEI) Brest''. Arrows animated.'
 - id: s45_fixed_barometer
-  t: [2742.375, 2810.175]
+  t: [2744.175, 2811.975]
   sentence_times:
-  - [2742.375, 2746.875]
-  - [2747.225, 2753.925]
-  - [2754.275, 2762.3]
-  - [2762.65, 2775.3]
-  - [2775.65, 2783.85]
-  - [2785.35, 2789.95]
-  - [2791.45, 2796.5]
-  - [2796.85, 2801.25]
-  - [2801.6, 2809.375]
+  - [2744.175, 2748.675]
+  - [2749.025, 2755.725]
+  - [2756.075, 2764.1]
+  - [2764.45, 2777.1]
+  - [2777.45, 2785.65]
+  - [2787.15, 2791.75]
+  - [2793.25, 2798.3]
+  - [2798.65, 2803.05]
+  - [2803.4, 2811.175]
   beat: 'application: a fixed barometer and the moving pattern (B.2.2)'
   visual: 'Map: Ciarán''s isobars at 23 UTC -> 01 UTC sliding ENE (frozen-pattern ghost in slate vs the real field in warm white); a fixed barometer icon
     (PoleThermometer style, slate) at Plymouth (billboard). Maths: (B.2.2) in vector form with underbraces ''fixed barometer'' (slate), ''riding with the
@@ -2116,19 +2119,19 @@ scenes:
   layout_5b: 'Map with ''Plymouth'' labelled at the spot within 1 s of its words; the equation and Balance bars in the maths zone. SourceBelow (K2): the
     data-source line sits fully below the picture (>= 16 px gap, y <= 860), never on it. (''Data: ERA5 (Copernicus C3S) · 1-2 Nov 2023'').'
 - id: s46_recap
-  t: [2810.175, 2896.375]
+  t: [2811.975, 2898.175]
   sentence_times:
-  - [2810.175, 2817.4]
-  - [2817.75, 2825.275]
-  - [2825.625, 2829.925]
-  - [2830.275, 2840.025]
-  - [2840.375, 2845.7]
-  - [2846.05, 2863.6]
-  - [2863.95, 2870.55]
-  - [2870.9, 2873.775]
-  - [2874.125, 2879.475]
-  - [2879.825, 2885.85]
-  - [2886.2, 2895.575]
+  - [2811.975, 2819.2]
+  - [2819.55, 2827.075]
+  - [2827.425, 2831.725]
+  - [2832.075, 2841.825]
+  - [2842.175, 2847.5]
+  - [2847.85, 2865.4]
+  - [2865.75, 2872.35]
+  - [2872.7, 2875.575]
+  - [2875.925, 2881.275]
+  - [2881.625, 2887.65]
+  - [2888.0, 2897.375]
   beat: recap ('To sum up')
   visual: 'One beat per sentence, mini pictures reused (no headings): grid + origin; fixed x̂ŷ vs turning r̂θ̂; the arc rule; Ian''s ring with ''37'' and
     ''12.5''; inward v²/r arrow; meridian step ''111 km'' and parallel steps ''74 / 23 km''; the globe band 30 S-30 N ''½''; great circle vs rhumb; Mercator
@@ -2152,11 +2155,11 @@ scenes:
   related: []
   layout_5b: Mini pictures one per sentence; a small source line under any real-data mini picture. No headings.
 - id: s47_end
-  t: [2896.375, 2919.275]
+  t: [2898.175, 2921.075]
   sentence_times:
-  - [2896.375, 2902.575]
-  - [2902.925, 2910.975]
-  - [2911.325, 2918.975]
+  - [2898.175, 2904.375]
+  - [2904.725, 2912.775]
+  - [2913.125, 2920.775]
   beat: series end card (maths ending, HOUSE_STYLE §3)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (polar rings, globe graticule, Mercator map, storm ring); keyword lines ''a
     series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates notebook''; stacked
@@ -2197,4 +2200,20 @@ amendment_5b:
   changed_scenes: [s11_ian_polar (zoom-tour sentences), 's14b_ian_stack (NEW, 5-layer stack)', s24_enu (zoom-reveal + surroundings)]
   narration_s_before: 2808.75
   narration_s_after: 2919.275
+  wpm_overall: 142.0
+amendment_v5_pointers:
+  date: '2026-11-04'
+  by: movie-director
+  why: series plan v5 (movies/ch00/series_plan_v5.md, adopted by the user 2026-11-04); stale 'next / later movie' pointers from the
+    series audit reports/ch00_series_audit.md (a6-a8) and the same kind in this movie
+  dry_run: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\v5_pointer_dryrun
+  dry_run_tool: tools/tts.py af_bella x1.0 (changed sentences only, old and new; the old clips reproduce the recorded lengths exactly;
+    every other sentence keeps its clip, shifted)
+  changed_sentences:
+  - 's12_why_polar_storm (S9: 5.95 -> 6.6 s)'
+  - 's19_earth_cylinder (S9: 10.75 -> 11.0 s)'
+  - 's42_galilean_accel (S11: 9.7 -> 10.6 s)'
+  narration_s_before: 2919.275
+  narration_s_after: 2921.075
+  words_after: 6917
   wpm_overall: 142.0

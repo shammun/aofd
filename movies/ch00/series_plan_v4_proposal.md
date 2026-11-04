@@ -1,3 +1,5 @@
+> **Superseded by plan v5** (`series_plan_v5.md`, adopted by the user 2026-11-04); kept for the record.
+
 # Chapter 0 movie series: plan v4 (PROPOSAL, movie-director, 2026-10-30; not approved yet)
 
 v3 (`series_plan_v3_proposal.md`, adopted 2026-10-29) stays in force until the user approves this file. v4 keeps all

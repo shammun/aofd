@@ -44,7 +44,7 @@ Meanwhile the render-2 weather movie (57:52, all fixes except the small render-3
 | 0.2b | Cross product Part 2 | 40:57 | review 3 PASS; §5b retro-fit pending |
 | 1a | Vectors and index notation | 35:15 | review 3 PASS; §5b retro-fit (5 musts) + wind layer stack pending; 4 polish shoulds |
 
-## Queue (in order; series plan v4 adopted 2026-10-30: movies/ch00/series_plan_v4_proposal.md, 176 movies)
+## Queue (in order; series plan v5 ADOPTED 2026-11-04: movies/ch00/series_plan_v5.md (174 in viewing order + 2 alternates); v4 superseded)
 | # | Stream | Next step |
 |---|---|---|
 | 1 | **Weather basics UF2** fix loop 1 pass 1b | QA → G: viewing copy + Drive → review 2 → final |
