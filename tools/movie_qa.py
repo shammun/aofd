@@ -481,6 +481,14 @@ def main() -> int:
     else:
         ok = lo <= dur <= hi and (target is None or abs(dur - target) <= 0.03 * target)
         gate("duration", "PASS" if ok else "FAIL", f"{dur:.2f} s; window {lo:g}–{hi:g} s; target {target}")
+    # picture vs sound length (2026-11-04: a partial render joined to the full mix passed 'duration', which reads the container)
+    vdur = float(vs.get("duration") or 0)
+    adur = float(au.get("duration") or 0) if au else 0.0
+    if vdur and adur:
+        ok = abs(vdur - adur) <= 0.5
+        gate("av_length", "PASS" if ok else "FAIL", f"video stream {vdur:.2f} s vs audio stream {adur:.2f} s (≤ 0.5 s apart)")
+    elif vdur:
+        gate("av_length", "PASS", f"video stream {vdur:.2f} s (no audio stream)")
     # size
     mb = path.stat().st_size / 1e6
     gate("size", "FAIL" if mb > a.hard_mb else ("WARN" if mb > a.budget_mb else "PASS"),
