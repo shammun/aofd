@@ -6507,3 +6507,8 @@ After the fix loop:
 
 ## Overall: FIX (ch00_derivatives_taylor review 4 — 1 Must, 14 Should)
 The one Must is a one-line TSX coordinate fix in s47 (the recap tangent: y = 6x − 9, not 6x − 3). It needs no TTS and no timing change. After that fix and a re-render of s47's first beat (47:19–47:25), a frame check of those seconds is enough for `qa_pass`; no further full review is needed. The Shoulds are optional polish.
+
+### ch00_derivatives_taylor — review 4 Must closed (orchestrator, 2026-11-04)
+- s47 tangent: source dd9cfb7 (`poly([P(1.5, 0), P(5, 21)])`, y = 6x − 9); bundle rebuilt (27 hand-staged `public/dt_*` assets copied from the previous bundle), piece c085000 re-rendered, 89 pieces rejoined. Frame 47:23.5 checked: the line touches y = x² at the gold dot (3, 9).
+- movie_qa PASS (av_length 2947.40/2947.38 s; size WARN 122.95 MB). The 14 Shoulds are carried into the §5b retro-fit (fix-loop limit reached).
+- **Status: FINAL**: G: viewing `4_derivatives_taylor_FINAL.mp4` + Drive.
