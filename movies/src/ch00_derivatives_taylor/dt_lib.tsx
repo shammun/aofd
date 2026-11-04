@@ -130,12 +130,13 @@ export const Place: React.FC<{ p: Pt; t?: string; o?: number; dx?: number; dy?: 
       {t ? <Lbl x={p[0] + dx} y={p[1] + dy} t={t} c={C.key} s={s} a={a} /> : null}
     </g>
   );
-/** a colour bar with a title above it (what the colours mean) and 48-px tick labels */
-export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number; title?: string; unitDx?: number }> = ({
+/** a colour bar with a title above it (what the colours mean) and 48-px tick labels. fix 3: `title` may be two lines
+ * (an array, top line first, 52 px apart) where the bar sits in the narrower text column */
+export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number; title?: string | string[]; unitDx?: number }> = ({
   x, y, w, lut, ticks, lo, hi, unit, o = 1, title, unitDx = 0 }) =>
   o <= 0 ? null : (
     <g opacity={o}>
-      {title ? <Lbl x={x} y={y - 34} t={title} c={C.muted} s={44} b={false} /> : null}
+      {title ? (Array.isArray(title) ? title : [title]).map((tl, i, arr) => <Lbl key={i} x={x} y={y - 34 - (arr.length - 1 - i) * 52} t={tl} c={C.muted} s={44} b={false} />) : null}
       {Array.from({ length: 60 }, (_, i) => <rect key={i} x={x + (i * w) / 60} y={y} width={w / 60 + 0.8} height={24} fill={lutCss(lut, (i + 0.5) / 60)} />)}
       <rect x={x} y={y} width={w} height={24} fill="none" stroke={C.muted} strokeWidth={2} />
       {ticks.map((tk) => <Lbl key={tk.t} x={x + ((tk.v - lo) / (hi - lo)) * w} y={y + 56} t={tk.t} c={C.muted} s={48} a="middle" b={false} />)}
