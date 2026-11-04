@@ -1,0 +1,19 @@
+# ch00_coordinates (#5): sound cue sheet for tools/sound/mix.py (build 1, 2026-11-04).
+# Score: the storyboard's new style 'compass-orbit' is not in tools/sound/styles.py (a tools change, not the builder's), so the
+# storyboard's named runner-up is used: ice-polar (E Lydian, glassy pad, rare celesta, long cold reverb), seed 23 — not used by
+# any finished movie (distinct from maths-calm, rotation-turning, index-lattice, tangent-glide, air-flowing, storm-tense).
+# Effects: only where the picture shows the thing, as quiet ducked beds (HOUSE_STYLE §8); offsets = scene-relative seconds of the
+# sentence they sit under (timing.json of the build-1 TTS run). The storyboard's rail rhythm (s41) is left out: tools/sound/sfx.py
+# has no rail sound and the train is a code-drawn thought experiment.
+music: {style: ice-polar, seed: 23, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects:
+  # s11 S2: Ian's HRRR streaklines sweeping round the eye on the map
+  - {effect: wind_gusty, scene: s11, offset: 3.8, duration: 11.5, intensity: 0.12, lufs: -29, fade_in: 1.5, fade_out: 2.0, seed: 51}
+  # s39 S9: arrows of sea water pushed onto Fort Myers Beach
+  - {effect: waves_breaking, scene: s39, offset: 56.3, duration: 4.5, intensity: 0.12, lufs: -29, fade_in: 0.6, fade_out: 1.5, seed: 52}
+  # s40 S7: the St. Petersburg gauge curve falling (the bay draining)
+  - {effect: stream, scene: s40, offset: 40.5, duration: 6.0, intensity: 0.08, lufs: -30, fade_in: 1.0, fade_out: 2.0, seed: 53}
+  # s43 S3: Ciarán's isobars sweeping in, hour by hour
+  - {effect: wind_gusty, scene: s43, offset: 9.8, duration: 8.5, intensity: 0.12, lufs: -29, fade_in: 1.5, fade_out: 2.0, seed: 54}

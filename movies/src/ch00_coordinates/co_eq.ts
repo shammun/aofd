@@ -1,0 +1,32 @@
+// Every on-screen equation of the storyboard, verbatim (String.raw constants: the QA equations gate greps this file;
+// provenance (vallis_eq / page_png) lives in the storyboard only and is never drawn). One constant per scene that shows it.
+
+export const EQ_S04 = String.raw`x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2}`;
+export const EQ_S05 = String.raw`x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2}`;
+export const EQ_S07 = String.raw`s=r\,\theta\quad(\theta\ \text{in radians})`;
+export const EQ_S08 = String.raw`\hat{\mathbf r}=(\cos\theta,\ \sin\theta),\qquad \hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)`;
+export const EQ_S09 = String.raw`\frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \frac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}`;
+export const EQ_S10 = String.raw`u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}`;
+export const EQ_S11 = String.raw`u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}`;
+export const EQ_S13 = String.raw`\frac{d}{dt}\big(v\,\hat{\boldsymbol\theta}\big)=v\,\frac{d\hat{\boldsymbol\theta}}{d\theta}\,\frac{d\theta}{dt}=-\frac{v^2}{r}\,\hat{\mathbf r}`;
+export const EQ_S14 = String.raw`\mathbf u=u_r\,\hat{\mathbf r}+u_\theta\,\hat{\boldsymbol\theta}+w\,\hat{\mathbf z}`;
+export const EQ_S18 = String.raw`x=a\cos\varphi\cos\lambda,\qquad y=a\cos\varphi\sin\lambda,\qquad z=a\sin\varphi`;
+export const EQ_S19 = String.raw`U=\Omega\,a\cos\varphi`;
+export const EQ_S20 = String.raw`\delta y=a\,\delta\varphi,\qquad \delta x=a\cos\varphi\,\delta\lambda`;
+export const EQ_S21 = String.raw`\delta y=a\,\delta\varphi,\qquad \delta x=a\cos\varphi\,\delta\lambda`;
+export const EQ_S23 = String.raw`dA=a^2\cos\varphi\,d\varphi\,d\lambda,\qquad \int_0^{\varphi}\cos\varphi'\,d\varphi'=\sin\varphi`;
+export const EQ_S24 = String.raw`\mathbf v=\mathbf i\,u+\mathbf j\,v+\mathbf k\,w`;
+export const EQ_S25 = String.raw`\frac{D\mathbf i}{Dt}=\frac{u}{a\cos\varphi}\,(\mathbf j\sin\varphi-\mathbf k\cos\varphi),\quad \frac{D\mathbf j}{Dt}=-\mathbf i\,\frac{u}{a}\tan\varphi-\mathbf k\,\frac{v}{a},\quad \frac{D\mathbf k}{Dt}=\mathbf i\,\frac{u}{a}+\mathbf j\,\frac{v}{a}`;
+export const EQ_S26 = String.raw`\frac{D\mathbf v}{Dt}\cdot\mathbf i=\frac{Du}{Dt}-\frac{uv\tan\varphi}{a}+\frac{uw}{a}`;
+export const EQ_S27 = String.raw`\nabla T=\mathbf i\,\frac{1}{a\cos\varphi}\frac{\partial T}{\partial\lambda}+\mathbf j\,\frac{1}{a}\frac{\partial T}{\partial\varphi}`;
+export const EQ_S29 = String.raw`\cos\sigma=\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2,\qquad d=a\,\sigma`;
+export const EQ_S31 = String.raw`x=a\,\lambda,\qquad y=a\,\varphi,\qquad k=\frac{1}{\cos\varphi}`;
+export const EQ_S32 = String.raw`y=a\,\ln\tan\!\left(\frac{\pi}{4}+\frac{\varphi}{2}\right),\qquad \frac{dy}{d\varphi}=\frac{a}{\cos\varphi}`;
+export const EQ_S33 = String.raw`\text{area stretch}=\frac{1}{\cos^2\varphi}`;
+export const EQ_S37 = String.raw`x'=x\cos\alpha+y\sin\alpha,\qquad y'=-x\sin\alpha+y\cos\alpha`;
+export const EQ_S38 = String.raw`x'_j=x_i\,C_{ij},\qquad C_{ij}=\mathbf e_i\cdot\mathbf e'_j`;
+export const EQ_S39 = String.raw`x'=x\cos\alpha+y\sin\alpha,\qquad y'=-x\sin\alpha+y\cos\alpha`;
+export const EQ_S41 = String.raw`\mathbf u=\mathbf U+\mathbf u',\qquad \mathbf x=\mathbf x'+\mathbf U\,t,\qquad t=t'`;
+export const EQ_S42 = String.raw`\frac{\partial\mathbf u}{\partial t}+(\mathbf u\cdot\nabla)\mathbf u=\frac{\partial\mathbf u'}{\partial t'}+(\mathbf u'\cdot\nabla')\mathbf u'`;
+export const EQ_S43 = String.raw`\mathbf u=\mathbf U+\mathbf u',\qquad \mathbf x=\mathbf x'+\mathbf U\,t,\qquad t=t'`;
+export const EQ_S45 = String.raw`\frac{\partial p}{\partial t}=\frac{\partial p}{\partial \tau}-\mathbf U\cdot\nabla p`;

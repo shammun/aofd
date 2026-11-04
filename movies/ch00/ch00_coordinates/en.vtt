@@ -1,0 +1,2671 @@
+WEBVTT
+
+00:00:00.300 --> 00:00:03.622
+In this video, we'll learn
+coordinates on a plane,
+
+00:00:03.622 --> 00:00:06.080
+a cylinder and a sphere the easy way,
+
+00:00:06.080 --> 00:00:11.329
+and see how meteorology uses them to
+measure the winds round a hurricane's eye,
+
+00:00:11.329 --> 00:00:15.050
+and to find distances
+and directions on our round Earth.
+
+00:00:15.850 --> 00:00:19.750
+What are coordinates, and why
+do we need more than one kind?
+
+00:00:20.100 --> 00:00:23.575
+Let's see what they are, and why
+they're built this way.
+
+00:00:23.925 --> 00:00:28.250
+Then let's see what they tell
+us about storms, maps and winds.
+
+00:00:29.050 --> 00:00:31.350
+Let's start with a flat map.
+
+00:00:31.700 --> 00:00:35.298
+To say where something
+is, we need a starting point,
+
+00:00:35.298 --> 00:00:37.650
+and some directions to count from.
+
+00:00:38.000 --> 00:00:41.000
+The starting point is called the origin.
+
+00:00:41.350 --> 00:00:43.825
+Let's put it at a weather station.
+
+00:00:44.175 --> 00:00:48.750
+Now draw one line through it pointing
+east, and one pointing north.
+
+00:00:49.100 --> 00:00:51.675
+These lines are called the axes.
+
+00:00:52.025 --> 00:00:55.516
+A weather balloon drifts
+three kilometres east and
+
+00:00:55.516 --> 00:00:58.100
+four kilometres north of the station.
+
+00:00:58.450 --> 00:01:02.875
+So we can write its position
+as the pair of numbers three and four.
+
+00:01:04.375 --> 00:01:07.266
+These two numbers are
+called its coordinates,
+
+00:01:07.266 --> 00:01:10.350
+and together they pin
+down one place on the map.
+
+00:01:10.700 --> 00:01:14.569
+Measuring along straight axes
+at right angles, like this,
+
+00:01:14.569 --> 00:01:19.525
+is called Cartesian coordinates,
+after the French thinker René Descartes.
+
+00:01:20.325 --> 00:01:25.975
+Each axis comes with a unit vector: an
+arrow of length one that points along it.
+
+00:01:26.325 --> 00:01:29.314
+We write x hat
+for the arrow pointing east,
+
+00:01:29.314 --> 00:01:32.025
+and y hat for the arrow pointing north.
+
+00:01:32.375 --> 00:01:37.475
+The balloon's position is three
+times x hat, plus four times y hat.
+
+00:01:37.825 --> 00:01:41.950
+We met arrows like these
+in the vectors movie of this series.
+
+00:01:42.300 --> 00:01:47.350
+Here's their key property: x hat points
+the same way everywhere on the map.
+
+00:01:47.700 --> 00:01:52.150
+Move the balloon anywhere you
+like, and the two arrows don't change.
+
+00:01:52.500 --> 00:01:56.625
+That's what makes Cartesian
+coordinates so easy to work with.
+
+00:01:56.975 --> 00:02:00.575
+But many things in the weather
+aren't laid out in squares.
+
+00:02:00.925 --> 00:02:06.075
+A hurricane spins round its eye, and
+a weather radar looks out in rings.
+
+00:02:06.425 --> 00:02:10.100
+For those, there's a better
+way to say where something is.
+
+00:02:10.900 --> 00:02:15.173
+Instead of going east and north, we
+can give two other numbers:
+
+00:02:15.173 --> 00:02:18.700
+how far away the balloon
+is, and in which direction.
+
+00:02:19.050 --> 00:02:21.975
+The distance from the origin is called r.
+
+00:02:22.325 --> 00:02:27.289
+By Pythagoras, r is the square root
+of three squared plus four squared,
+
+00:02:27.289 --> 00:02:31.275
+which is the square root
+of twenty five: five kilometres.
+
+00:02:32.775 --> 00:02:35.925
+The direction is an angle, called theta.
+
+00:02:36.275 --> 00:02:39.637
+Mathematicians measure
+it from the east axis,
+
+00:02:39.637 --> 00:02:42.700
+turning anticlockwise as seen from above.
+
+00:02:43.050 --> 00:02:48.225
+Its tangent is four over three, so
+theta is about fifty three degrees.
+
+00:02:49.725 --> 00:02:53.391
+So the same balloon
+is at r equals five kilometres,
+
+00:02:53.391 --> 00:02:56.050
+and theta equals fifty three degrees.
+
+00:02:56.400 --> 00:02:59.700
+These two numbers are
+called polar coordinates.
+
+00:03:00.050 --> 00:03:03.067
+A weather radar measures
+exactly this pair:
+
+00:03:03.067 --> 00:03:06.925
+how far away the raindrops
+are, and in which direction.
+
+00:03:07.725 --> 00:03:10.025
+Can we go back the other way?
+
+00:03:10.375 --> 00:03:11.725
+Yes.
+
+00:03:12.075 --> 00:03:15.550
+Think of the right triangle
+with the balloon at its tip.
+
+00:03:15.900 --> 00:03:20.375
+Its long side is r, and its angle
+at the station is theta.
+
+00:03:20.725 --> 00:03:24.085
+The side going east
+is r times cosine theta,
+
+00:03:24.085 --> 00:03:27.675
+and the side going north
+is r times sine theta.
+
+00:03:28.025 --> 00:03:29.600
+Let's check.
+
+00:03:29.950 --> 00:03:35.417
+Five times the cosine of fifty three
+degrees is five times zero point six,
+
+00:03:35.417 --> 00:03:36.525
+which is three.
+
+00:03:36.875 --> 00:03:39.750
+And five times zero point eight is four.
+
+00:03:41.250 --> 00:03:46.100
+So x equals r cosine
+theta, and y equals r sine theta.
+
+00:03:46.450 --> 00:03:50.875
+These two lines are all we need
+to switch between the two systems.
+
+00:03:51.675 --> 00:03:54.150
+One warning before we go on.
+
+00:03:54.500 --> 00:03:59.150
+Meteorologists and navigators
+measure directions differently.
+
+00:03:59.500 --> 00:04:04.625
+A compass bearing starts from north, and
+turns clockwise as seen from above.
+
+00:04:04.975 --> 00:04:08.631
+So the balloon's bearing
+is ninety minus fifty three,
+
+00:04:08.631 --> 00:04:10.700
+which is thirty seven degrees.
+
+00:04:12.200 --> 00:04:14.647
+Weather reports add one more twist:
+
+00:04:14.647 --> 00:04:18.143
+a wind's direction says
+where the wind blows from,
+
+00:04:18.143 --> 00:04:20.800
+as we saw in the weather basics movie.
+
+00:04:21.150 --> 00:04:24.050
+So a west wind blows towards the east.
+
+00:04:24.400 --> 00:04:26.556
+Same arrows, different rulers,
+
+00:04:26.556 --> 00:04:30.725
+so it's always worth checking
+which angle a data set uses.
+
+00:04:31.525 --> 00:04:34.894
+Before polar coordinates
+can do their real work,
+
+00:04:34.894 --> 00:04:39.175
+we need one more building block:
+measuring angles in radians.
+
+00:04:39.525 --> 00:04:43.475
+Take a circle of radius r, and walk
+along its edge.
+
+00:04:43.825 --> 00:04:49.025
+The angle in radians is the distance
+you walked, divided by the radius.
+
+00:04:49.375 --> 00:04:55.325
+So the distance along the edge, called the
+arc length, is the radius times the angle.
+
+00:04:55.675 --> 00:05:01.250
+A full circle is two pi radians, because
+its edge is two pi times the radius.
+
+00:05:01.600 --> 00:05:05.250
+So one radian is about
+fifty seven degrees.
+
+00:05:05.600 --> 00:05:07.875
+Let's try easy numbers.
+
+00:05:08.225 --> 00:05:11.339
+On a ring five kilometres
+from the station,
+
+00:05:11.339 --> 00:05:16.409
+turning by zero point two radians
+walks you five times zero point two,
+
+00:05:16.409 --> 00:05:18.075
+which is one kilometre.
+
+00:05:19.575 --> 00:05:24.675
+On a ring fifty kilometres out, the same
+turn walks you ten kilometres.
+
+00:05:26.175 --> 00:05:29.500
+The same angle gives
+ten times the distance.
+
+00:05:29.850 --> 00:05:34.875
+Keep this rule in mind, because it
+explains a lot about maps of the Earth.
+
+00:05:35.675 --> 00:05:39.125
+Polar coordinates come
+with their own unit vectors.
+
+00:05:39.475 --> 00:05:44.325
+The arrow r hat points straight away
+from the origin, the way r grows.
+
+00:05:44.675 --> 00:05:48.726
+Theta hat points sideways,
+at a right angle to r hat,
+
+00:05:48.726 --> 00:05:52.700
+the way theta grows:
+anticlockwise, seen from above.
+
+00:05:53.050 --> 00:05:57.625
+At the balloon, r hat
+is zero point six, zero point eight.
+
+00:05:57.975 --> 00:06:02.200
+And theta hat is minus
+zero point eight, zero point six.
+
+00:06:02.550 --> 00:06:05.725
+Now let's move the balloon
+round the circle.
+
+00:06:06.075 --> 00:06:09.925
+Its r hat turns with it, and so
+does its theta hat.
+
+00:06:10.275 --> 00:06:13.669
+That's the big difference
+from x hat and y hat:
+
+00:06:13.669 --> 00:06:16.775
+polar unit vectors
+depend on where you are.
+
+00:06:17.575 --> 00:06:19.650
+How fast do they turn?
+
+00:06:20.000 --> 00:06:24.250
+Let's turn the balloon's
+angle by a small amount, d theta.
+
+00:06:24.600 --> 00:06:28.595
+The tip of r hat moves
+along a circle of radius one,
+
+00:06:28.595 --> 00:06:31.975
+so it moves a distance
+of one times d theta.
+
+00:06:32.325 --> 00:06:36.275
+And it moves sideways,
+in the direction of theta hat.
+
+00:06:36.625 --> 00:06:40.725
+So the change in r hat
+is theta hat times d theta.
+
+00:06:41.075 --> 00:06:46.650
+Dividing by d theta, the rate of change
+of r hat with theta is theta hat.
+
+00:06:48.150 --> 00:06:52.531
+Theta hat turns too, and its tip
+moves towards the centre,
+
+00:06:52.531 --> 00:06:55.325
+so its rate of change is minus r hat.
+
+00:06:56.825 --> 00:06:59.499
+That's all there is to it: turn the angle,
+
+00:06:59.499 --> 00:07:02.300
+and each arrow swings
+towards the other one.
+
+00:07:03.100 --> 00:07:06.875
+Now let's describe a wind
+in polar coordinates.
+
+00:07:07.225 --> 00:07:12.550
+Suppose that at the balloon, a wind
+blows due east at ten metres per second.
+
+00:07:12.900 --> 00:07:17.600
+How much of it blows away from the
+station, and how much blows round it?
+
+00:07:17.950 --> 00:07:23.132
+To find out, we take the dot product
+of the wind with each unit vector,
+
+00:07:23.132 --> 00:07:25.175
+as in the dot product movie.
+
+00:07:25.525 --> 00:07:28.810
+Along r hat, it's ten
+times zero point six,
+
+00:07:28.810 --> 00:07:32.400
+plus zero times
+zero point eight, which is six.
+
+00:07:33.900 --> 00:07:39.425
+Along theta hat, it's ten times minus
+zero point eight, which is minus eight.
+
+00:07:40.925 --> 00:07:46.400
+So six metres per second blow outward,
+and eight metres per second blow round.
+
+00:07:46.750 --> 00:07:51.975
+The minus sign means the wind goes
+round clockwise, as seen from above.
+
+00:07:52.325 --> 00:07:56.817
+Let's check the length: six squared
+plus eight squared is a hundred,
+
+00:07:56.817 --> 00:07:58.600
+and its square root is ten.
+
+00:08:00.100 --> 00:08:03.275
+It's the same wind, with new components.
+
+00:08:04.075 --> 00:08:07.500
+Now let's take polar
+coordinates to a real storm.
+
+00:08:07.850 --> 00:08:11.623
+Here is Hurricane Ian
+on the twenty eighth of September,
+
+00:08:11.623 --> 00:08:14.385
+twenty twenty-two, at six in the evening,
+
+00:08:14.385 --> 00:08:19.775
+universal time, an hour before it came
+ashore on the southwest coast of Florida.
+
+00:08:20.125 --> 00:08:23.652
+The map shows the winds ten
+metres above the ground,
+
+00:08:23.652 --> 00:08:28.400
+from a weather model analysis with grid
+points every three kilometres.
+
+00:08:28.750 --> 00:08:33.750
+Let's put the origin in the eye, where
+the pressure is lowest, and zoom in.
+
+00:08:34.100 --> 00:08:38.503
+The eye sits just off
+the coast, over the warm Gulf of Mexico,
+
+00:08:38.503 --> 00:08:42.550
+with the flat, low land
+of southwest Florida to its east.
+
+00:08:42.900 --> 00:08:45.475
+Now every wind has two parts.
+
+00:08:45.825 --> 00:08:49.675
+The radial
+wind, along r hat, blows in or out.
+
+00:08:50.025 --> 00:08:54.650
+The tangential wind, along
+theta hat, blows round the eye.
+
+00:08:55.000 --> 00:08:58.345
+On a ring twenty five
+kilometres from the centre,
+
+00:08:58.345 --> 00:09:02.850
+the tangential wind averages about
+thirty seven metres per second.
+
+00:09:04.350 --> 00:09:08.099
+That's about a hundred
+and thirty kilometres per hour,
+
+00:09:08.099 --> 00:09:13.375
+anticlockwise as seen from above, as
+in every northern hemisphere hurricane.
+
+00:09:13.725 --> 00:09:18.875
+The radial wind averages about
+minus twelve and a half metres per second.
+
+00:09:20.375 --> 00:09:24.475
+The minus sign means the air
+is flowing in, towards the eye.
+
+00:09:24.825 --> 00:09:27.019
+The real storm was even stronger:
+
+00:09:27.019 --> 00:09:30.211
+the official estimate
+of its strongest sustained
+
+00:09:30.211 --> 00:09:32.871
+wind at that hour is about a hundred and
+
+00:09:32.871 --> 00:09:37.925
+thirty five knots, which is about two
+hundred and fifty kilometres per hour.
+
+00:09:38.275 --> 00:09:42.050
+The model analysis smooths
+the strongest winds.
+
+00:09:42.400 --> 00:09:45.275
+Now let's zoom back
+out to the whole coast.
+
+00:09:46.075 --> 00:09:48.900
+Why bother with polar coordinates here?
+
+00:09:49.250 --> 00:09:53.925
+Let's go round that ring and plot
+the eastward and northward winds.
+
+00:09:54.275 --> 00:09:58.639
+Both swing up and down, from
+plus to minus, all the way round,
+
+00:09:58.639 --> 00:10:02.300
+because the wind keeps
+turning as we circle the eye.
+
+00:10:02.650 --> 00:10:07.550
+Now let's plot the tangential
+and radial winds round the same ring.
+
+00:10:07.900 --> 00:10:10.900
+They stay much closer to two steady lines.
+
+00:10:11.250 --> 00:10:15.400
+Two jumpy curves have become
+two fairly steady numbers:
+
+00:10:15.400 --> 00:10:19.625
+how fast the storm spins, and
+how fast the air flows in.
+
+00:10:19.975 --> 00:10:23.259
+The angle at which
+the wind crosses each ring,
+
+00:10:23.259 --> 00:10:26.900
+called the inflow
+angle, is about nineteen degrees.
+
+00:10:28.400 --> 00:10:32.909
+Spin and inflow are exactly what
+hurricane scientists care about,
+
+00:10:32.909 --> 00:10:36.100
+and polar coordinates
+hand them over directly.
+
+00:10:36.450 --> 00:10:39.988
+The spin also has its own
+measure, called vorticity,
+
+00:10:39.988 --> 00:10:43.050
+which has its own movie
+later in this series.
+
+00:10:43.850 --> 00:10:45.700
+Here's a surprise.
+
+00:10:46.050 --> 00:10:50.946
+Picture an air parcel, a small volume
+of air that moves with the flow,
+
+00:10:50.946 --> 00:10:55.352
+going round the eye at a steady
+thirty seven metres per second,
+
+00:10:55.352 --> 00:10:57.800
+on that twenty five kilometre ring.
+
+00:10:58.150 --> 00:11:01.150
+Its tangential wind never changes.
+
+00:11:01.500 --> 00:11:03.400
+Is it accelerating?
+
+00:11:03.750 --> 00:11:09.650
+Yes, because its direction keeps changing,
+and polar coordinates show exactly why.
+
+00:11:10.000 --> 00:11:13.513
+Its velocity is thirty
+seven times theta hat,
+
+00:11:13.513 --> 00:11:17.025
+and theta hat turns
+as the parcel goes round.
+
+00:11:17.375 --> 00:11:20.514
+By the chain rule, from
+the derivatives movie,
+
+00:11:20.514 --> 00:11:25.496
+the rate of change of theta hat in time
+is its rate of change with theta,
+
+00:11:25.496 --> 00:11:28.977
+which is minus r hat, times
+how fast theta changes,
+
+00:11:28.977 --> 00:11:31.775
+which is the speed divided by the radius.
+
+00:11:32.125 --> 00:11:36.791
+So the acceleration is minus the speed
+squared over the radius,
+
+00:11:36.791 --> 00:11:39.975
+times r hat: it points in,
+towards the eye.
+
+00:11:41.475 --> 00:11:46.868
+With our numbers, it's thirty seven
+squared, over twenty five thousand metres,
+
+00:11:46.868 --> 00:11:51.500
+which is about zero point zero five five
+metres per second squared.
+
+00:11:53.000 --> 00:11:56.404
+That's almost two hundred
+times smaller than gravity,
+
+00:11:56.404 --> 00:11:58.395
+but something has to supply it,
+
+00:11:58.395 --> 00:12:03.725
+and here it's mostly the pressure force,
+because the pressure is lowest in the eye.
+
+00:12:04.075 --> 00:12:08.650
+We'll come back to this balance
+in the movie on the gradient wind.
+
+00:12:09.000 --> 00:12:12.032
+The lesson for now:
+when unit vectors turn,
+
+00:12:12.032 --> 00:12:15.275
+steady components can
+still mean acceleration.
+
+00:12:16.075 --> 00:12:18.475
+A hurricane isn't flat, though.
+
+00:12:18.825 --> 00:12:24.410
+The air spirals in near the sea, rises in
+a ring of towering clouds round the eye,
+
+00:12:24.410 --> 00:12:27.612
+called the eyewall,
+and flows out near the top,
+
+00:12:27.612 --> 00:12:30.200
+about twelve to fifteen kilometres up.
+
+00:12:30.550 --> 00:12:35.400
+To describe that, we add a third
+coordinate: the height, z, straight up.
+
+00:12:35.750 --> 00:12:38.105
+The distance r, the angle theta and
+
+00:12:38.105 --> 00:12:41.940
+the height z together are
+called cylindrical coordinates,
+
+00:12:41.940 --> 00:12:46.650
+because all the places with the
+same r form a cylinder round the axis.
+
+00:12:47.000 --> 00:12:51.775
+The wind now has three parts:
+radial, tangential and vertical.
+
+00:12:52.125 --> 00:12:57.700
+The vertical unit vector, z hat, is
+the same everywhere, just like x hat.
+
+00:12:58.050 --> 00:13:00.825
+Only r hat and theta hat turn.
+
+00:13:01.175 --> 00:13:06.150
+So cylindrical coordinates are just
+polar coordinates with a height added.
+
+00:13:06.500 --> 00:13:10.577
+In a hurricane, the radial
+wind is negative near the sea,
+
+00:13:10.577 --> 00:13:14.225
+flowing in, and positive
+near the top, flowing out.
+
+00:13:15.025 --> 00:13:17.925
+Let's check that with Ian's real winds.
+
+00:13:18.275 --> 00:13:21.783
+Here are five layers
+of air round Ian's eye,
+
+00:13:21.783 --> 00:13:25.850
+at that same hour, from
+the reanalysis called ERA5.
+
+00:13:26.200 --> 00:13:28.941
+They run from about three hundred metres
+
+00:13:28.941 --> 00:13:32.025
+above the sea to about
+fifteen kilometres up.
+
+00:13:32.375 --> 00:13:37.241
+The colour on each layer is the radial
+wind: rose, with a minus sign,
+
+00:13:37.241 --> 00:13:41.050
+where the air flows
+in, and orange where it flows out.
+
+00:13:41.400 --> 00:13:45.475
+On the lowest layer, the air
+flows in almost everywhere.
+
+00:13:45.825 --> 00:13:49.038
+On a ring two hundred
+kilometres from the eye,
+
+00:13:49.038 --> 00:13:52.250
+it averages about minus six
+metres per second.
+
+00:13:53.750 --> 00:13:58.575
+At about one and a half kilometres,
+the inflow has almost died away.
+
+00:13:58.925 --> 00:14:01.698
+At about six kilometres, in the middle,
+
+00:14:01.698 --> 00:14:06.675
+the air hardly flows in or out at all;
+near the eye, it rises instead.
+
+00:14:07.025 --> 00:14:12.600
+Near the top, at about twelve and a half
+and fifteen kilometres, the sign flips.
+
+00:14:12.950 --> 00:14:17.750
+On the same ring, the air flows out
+at about four metres per second.
+
+00:14:19.250 --> 00:14:24.850
+Let's take a short, closer look, from just
+above the sea, up the side of the stack.
+
+00:14:25.200 --> 00:14:28.850
+In at the bottom, up through
+the middle, and out at the top.
+
+00:14:29.200 --> 00:14:32.416
+This reanalysis smooths
+the strongest winds,
+
+00:14:32.416 --> 00:14:35.925
+so we use it for the directions,
+not the speeds.
+
+00:14:36.275 --> 00:14:42.075
+And every layer is described by the same
+three coordinates: r, theta and z.
+
+00:14:42.875 --> 00:14:45.775
+Now the biggest shape of all: the Earth.
+
+00:14:46.125 --> 00:14:49.050
+Let's put the origin
+at the Earth's centre.
+
+00:14:49.400 --> 00:14:54.197
+A point on a sphere is pinned
+down by its distance from the centre,
+
+00:14:54.197 --> 00:14:55.700
+r, and by two angles.
+
+00:14:56.050 --> 00:14:59.380
+On the Earth's surface,
+r is the Earth's radius:
+
+00:14:59.380 --> 00:15:02.363
+about six thousand four
+hundred kilometres,
+
+00:15:02.363 --> 00:15:06.525
+or more exactly, six thousand
+three hundred and seventy one.
+
+00:15:06.875 --> 00:15:09.400
+These are spherical coordinates.
+
+00:15:09.750 --> 00:15:14.488
+Meteorologists use the two angles
+you already know from maps:
+
+00:15:14.488 --> 00:15:16.275
+latitude and longitude.
+
+00:15:17.075 --> 00:15:20.625
+Latitude says how far
+north or south a place is.
+
+00:15:20.975 --> 00:15:24.175
+Draw a line from the Earth's
+centre to the place.
+
+00:15:24.525 --> 00:15:29.600
+Latitude is the angle between that
+line and the plane of the equator.
+
+00:15:29.950 --> 00:15:31.700
+We write it phi.
+
+00:15:32.050 --> 00:15:34.600
+At the equator, phi is zero.
+
+00:15:34.950 --> 00:15:38.300
+At the North Pole, it's ninety
+degrees north.
+
+00:15:38.650 --> 00:15:44.125
+At the South Pole, it's ninety degrees
+south, which we write as minus ninety.
+
+00:15:44.475 --> 00:15:47.396
+Brest, a port at the western
+tip of France,
+
+00:15:47.396 --> 00:15:50.725
+is at about forty
+eight point four degrees north.
+
+00:15:51.075 --> 00:15:55.562
+All the places with the same latitude
+form a circle round the Earth,
+
+00:15:55.562 --> 00:15:56.750
+called a parallel.
+
+00:15:57.100 --> 00:15:58.971
+One caution: many maths and
+
+00:15:58.971 --> 00:16:03.475
+physics books measure the angle
+down from the North Pole instead.
+
+00:16:03.825 --> 00:16:09.375
+That angle is called the colatitude, and
+it's ninety degrees minus the latitude.
+
+00:16:09.725 --> 00:16:14.200
+So sine and cosine swap places
+between the two conventions.
+
+00:16:15.000 --> 00:16:18.000
+Longitude says how far east or west.
+
+00:16:18.350 --> 00:16:23.150
+Picture the half circles that run
+from pole to pole, called meridians.
+
+00:16:23.500 --> 00:16:27.575
+The one through Greenwich,
+in London, is the prime meridian.
+
+00:16:27.925 --> 00:16:30.966
+Longitude is the angle
+round the Earth's axis,
+
+00:16:30.966 --> 00:16:34.800
+from the prime meridian
+to the meridian through the place.
+
+00:16:35.150 --> 00:16:36.975
+We write it lambda.
+
+00:16:37.325 --> 00:16:40.725
+East is positive, and west is negative.
+
+00:16:41.075 --> 00:16:44.363
+Brest is at about four
+and a half degrees west,
+
+00:16:44.363 --> 00:16:47.650
+so its lambda is minus
+four point five degrees.
+
+00:16:48.000 --> 00:16:53.047
+Some data sets count longitude from zero
+to three hundred and sixty degrees,
+
+00:16:53.047 --> 00:16:55.040
+all the way round to the east,
+
+00:16:55.040 --> 00:16:58.825
+so Brest becomes three hundred
+and fifty five point five.
+
+00:16:59.175 --> 00:17:00.892
+The lines of latitude and
+
+00:17:00.892 --> 00:17:05.425
+longitude together make a grid
+on the globe, called the graticule.
+
+00:17:06.225 --> 00:17:08.975
+Where exactly is Brest in space?
+
+00:17:09.325 --> 00:17:14.275
+Let's find its position vector, the arrow
+from the Earth's centre to Brest.
+
+00:17:14.625 --> 00:17:18.925
+We'll do it in two steps, using a right
+triangle each time.
+
+00:17:19.275 --> 00:17:22.225
+First, look at the Earth from the side.
+
+00:17:22.575 --> 00:17:27.000
+The line to Brest makes the angle
+phi with the equator plane.
+
+00:17:27.350 --> 00:17:32.925
+So Brest's height above the equator plane
+is the Earth's radius times sine phi.
+
+00:17:33.275 --> 00:17:38.550
+And its distance from the Earth's
+axis is the radius times cosine phi.
+
+00:17:38.900 --> 00:17:42.200
+Second, look down
+from above the North Pole.
+
+00:17:42.550 --> 00:17:48.050
+In the equator plane, that distance
+from the axis points at the angle lambda.
+
+00:17:48.400 --> 00:17:51.656
+That's polar coordinates
+in a flat plane again,
+
+00:17:51.656 --> 00:17:55.950
+so it splits into a cosine lambda
+part and a sine lambda part.
+
+00:17:56.300 --> 00:18:02.128
+Putting it together: x is the radius
+times cosine phi times cosine lambda,
+
+00:18:02.128 --> 00:18:06.144
+y is the radius times cosine
+phi times sine lambda,
+
+00:18:06.144 --> 00:18:08.900
+and z is the radius times sine phi.
+
+00:18:09.250 --> 00:18:14.355
+For Brest, the height above the equator
+plane is six thousand three hundred and
+
+00:18:14.355 --> 00:18:18.039
+seventy one kilometres times
+zero point seven four eight,
+
+00:18:18.039 --> 00:18:22.175
+which is about four thousand seven
+hundred and sixty kilometres.
+
+00:18:23.675 --> 00:18:28.195
+And its distance from the axis
+is six thousand three hundred and
+
+00:18:28.195 --> 00:18:31.161
+seventy one times zero point six six four:
+
+00:18:31.161 --> 00:18:34.975
+about four thousand two
+hundred and thirty kilometres.
+
+00:18:36.475 --> 00:18:40.630
+That distance from the axis, the
+radius times cosine phi,
+
+00:18:40.630 --> 00:18:45.150
+deserves a second look, because
+it's a cylindrical coordinate.
+
+00:18:45.500 --> 00:18:48.412
+The Earth spins once a day round its axis,
+
+00:18:48.412 --> 00:18:52.225
+so every place travels
+round a circle with that radius.
+
+00:18:52.575 --> 00:18:55.241
+The spin rate, called capital Omega,
+
+00:18:55.241 --> 00:19:00.500
+is seven point two nine times ten
+to the minus five radians per second.
+
+00:19:00.850 --> 00:19:05.525
+The ground's speed is the spin
+rate times the radius of its circle.
+
+00:19:05.875 --> 00:19:09.109
+At the equator,
+the circle has the full radius,
+
+00:19:09.109 --> 00:19:14.063
+so the ground moves at seven point two
+nine times ten to the minus five,
+
+00:19:14.063 --> 00:19:17.297
+times six point three seven one
+million metres:
+
+00:19:17.297 --> 00:19:20.875
+about four hundred and sixty
+five metres per second.
+
+00:19:22.375 --> 00:19:25.197
+At Brest, the circle is two thirds as big,
+
+00:19:25.197 --> 00:19:29.900
+so the ground moves at about three
+hundred and nine metres per second.
+
+00:19:31.400 --> 00:19:34.965
+At Longyearbyen,
+on the Arctic islands of Svalbard,
+
+00:19:34.965 --> 00:19:38.950
+seventy eight degrees
+north, it's only about ninety five.
+
+00:19:40.450 --> 00:19:42.800
+And at the poles, it's zero.
+
+00:19:43.150 --> 00:19:46.751
+This shrinking circle is part
+of the reason the Earth's
+
+00:19:46.751 --> 00:19:50.287
+spin affects winds differently
+at different latitudes,
+
+00:19:50.287 --> 00:19:54.150
+as we saw in the cross product
+movie on our spinning Earth.
+
+00:19:54.950 --> 00:19:58.025
+Now let's measure distances on the sphere.
+
+00:19:58.375 --> 00:20:00.293
+Going north along a meridian,
+
+00:20:00.293 --> 00:20:04.657
+you walk on a circle whose radius
+is the full radius of the Earth,
+
+00:20:04.657 --> 00:20:08.625
+because every meridian is half
+of a circle round the centre.
+
+00:20:08.975 --> 00:20:10.871
+So by the arc length rule,
+
+00:20:10.871 --> 00:20:16.850
+the distance north is the Earth's radius
+times the change in latitude, in radians.
+
+00:20:17.200 --> 00:20:19.800
+Let's find the length of one degree.
+
+00:20:20.150 --> 00:20:23.536
+One degree is pi over one
+hundred and eighty,
+
+00:20:23.536 --> 00:20:27.525
+which is zero point zero
+one seven four five radians.
+
+00:20:27.875 --> 00:20:31.888
+Times six thousand three hundred
+and seventy one kilometres,
+
+00:20:31.888 --> 00:20:35.700
+that's about one hundred
+and eleven point two kilometres.
+
+00:20:37.200 --> 00:20:39.673
+And it's the same at every latitude:
+
+00:20:39.673 --> 00:20:44.000
+a degree north is always
+about a hundred and eleven kilometres.
+
+00:20:44.350 --> 00:20:47.510
+One minute of latitude,
+a sixtieth of a degree,
+
+00:20:47.510 --> 00:20:50.267
+is about one point eight five kilometres,
+
+00:20:50.267 --> 00:20:54.100
+which is the nautical mile
+from the weather basics movie.
+
+00:20:54.900 --> 00:20:57.050
+Going east is different.
+
+00:20:57.400 --> 00:20:59.917
+Walking east, you follow a parallel,
+
+00:20:59.917 --> 00:21:04.950
+and a parallel is a circle round
+the Earth's axis, not round its centre.
+
+00:21:05.300 --> 00:21:10.800
+Its radius is the one we just found:
+the Earth's radius times cosine phi.
+
+00:21:11.150 --> 00:21:17.575
+So the distance east is the radius, times
+cosine phi, times the change in longitude.
+
+00:21:17.925 --> 00:21:20.196
+That cosine phi is there because
+
+00:21:20.196 --> 00:21:24.525
+the circle you walk on shrinks
+as you get closer to the pole.
+
+00:21:24.875 --> 00:21:28.775
+Let's compare one degree
+of longitude at four places.
+
+00:21:29.125 --> 00:21:33.050
+At the equator, cosine phi
+is one, so it's a hundred and
+
+00:21:33.050 --> 00:21:36.275
+eleven kilometres,
+the same as a degree north.
+
+00:21:37.775 --> 00:21:41.173
+At Brest, cosine phi
+is zero point six six,
+
+00:21:41.173 --> 00:21:44.175
+so it's about seventy four kilometres.
+
+00:21:45.675 --> 00:21:49.092
+At Longyearbyen, cosine
+phi is zero point two,
+
+00:21:49.092 --> 00:21:53.325
+so one degree east is only
+about twenty three kilometres.
+
+00:21:54.825 --> 00:21:58.725
+And at the pole, where all
+the meridians meet, it's zero.
+
+00:21:59.075 --> 00:22:04.036
+Like the segments of an orange, the
+meridians are widest apart at the equator,
+
+00:22:04.036 --> 00:22:06.325
+and they come together at the poles.
+
+00:22:07.125 --> 00:22:10.800
+This matters every time
+we use weather data.
+
+00:22:11.150 --> 00:22:14.685
+ERA5, the reanalysis
+we've used in this series,
+
+00:22:14.685 --> 00:22:20.325
+gives values on a grid every quarter
+of a degree in latitude and longitude.
+
+00:22:20.675 --> 00:22:25.880
+Near Brest, one grid box is about twenty
+eight kilometres from south to north,
+
+00:22:25.880 --> 00:22:30.150
+but only about eighteen and a half
+kilometres from west to east.
+
+00:22:31.650 --> 00:22:35.545
+At Svalbard, it's still
+twenty eight kilometres tall,
+
+00:22:35.545 --> 00:22:37.750
+but under six kilometres wide.
+
+00:22:39.250 --> 00:22:42.925
+So the boxes get thinner
+and thinner towards the poles.
+
+00:22:43.275 --> 00:22:44.500
+Forget the cosine,
+
+00:22:44.500 --> 00:22:49.672
+and every east-west distance near
+the poles comes out several times too big,
+
+00:22:49.672 --> 00:22:53.075
+and every east-west slope
+several times too small.
+
+00:22:53.425 --> 00:22:59.269
+A weather model on such a grid also has to
+take very short time steps near the poles,
+
+00:22:59.269 --> 00:23:03.600
+which is one reason many modern
+models use other kinds of grid.
+
+00:23:04.400 --> 00:23:06.975
+Distances give us areas.
+
+00:23:07.325 --> 00:23:12.467
+A small patch of the Earth's surface
+is the radius times d phi tall,
+
+00:23:12.467 --> 00:23:16.400
+and the radius times cosine
+phi times d lambda wide.
+
+00:23:16.750 --> 00:23:23.175
+So its area is the radius squared, times
+cosine phi, times d phi, times d lambda.
+
+00:23:23.525 --> 00:23:25.950
+Here's a lovely consequence.
+
+00:23:26.300 --> 00:23:30.925
+Let's add up all the patches between
+the equator and some latitude.
+
+00:23:31.275 --> 00:23:36.450
+Adding up is integrating, and the integral
+of cosine phi is sine phi.
+
+00:23:36.800 --> 00:23:42.000
+So the area between the equator
+and latitude phi grows like sine phi.
+
+00:23:43.500 --> 00:23:46.425
+The sine of thirty degrees is one half.
+
+00:23:46.775 --> 00:23:50.728
+So half of the northern hemisphere
+lies between the equator and
+
+00:23:50.728 --> 00:23:52.045
+thirty degrees north,
+
+00:23:52.045 --> 00:23:56.500
+and half of the whole Earth lies
+between thirty south and thirty north.
+
+00:23:58.000 --> 00:24:02.725
+The tropics and subtropics are
+huge, and the polar caps are small.
+
+00:24:03.075 --> 00:24:08.875
+That's why a global average temperature
+has to weight each latitude by cosine phi.
+
+00:24:09.225 --> 00:24:14.875
+Otherwise, the small polar boxes would
+count as much as the big tropical ones.
+
+00:24:15.675 --> 00:24:19.075
+Now let's stand at a weather
+station, at Brest.
+
+00:24:19.425 --> 00:24:25.175
+Brest sits at the western tip of Brittany,
+with the Atlantic Ocean on three sides.
+
+00:24:25.525 --> 00:24:29.850
+A forecaster there doesn't use
+axes from the Earth's centre.
+
+00:24:30.200 --> 00:24:35.189
+She uses three local arrows: i hat
+pointing east, j hat pointing north,
+
+00:24:35.189 --> 00:24:39.475
+and k hat pointing straight
+up, away from the Earth's centre.
+
+00:24:39.825 --> 00:24:43.150
+This is the local east, north, up frame.
+
+00:24:43.500 --> 00:24:50.150
+In it, the wind is u times i hat, plus
+v times j hat, plus w times k hat.
+
+00:24:50.500 --> 00:24:56.800
+Here, u is the eastward wind, v the
+northward wind, and w the upward wind.
+
+00:24:57.150 --> 00:24:59.552
+And i hat cross j hat is k hat,
+
+00:24:59.552 --> 00:25:04.200
+so the frame is right-handed,
+as in the cross product movie.
+
+00:25:04.550 --> 00:25:07.075
+Each station has its own frame.
+
+00:25:07.425 --> 00:25:10.175
+Let's zoom back out to the whole globe.
+
+00:25:10.525 --> 00:25:15.310
+At Trappes, near Paris, four hundred
+and eighty kilometres east of Brest,
+
+00:25:15.310 --> 00:25:18.850
+up points in a direction
+about four degrees different.
+
+00:25:20.350 --> 00:25:22.442
+At Singapore, near the equator,
+
+00:25:22.442 --> 00:25:26.625
+up differs from Brest's
+up by about a hundred and one degrees.
+
+00:25:28.125 --> 00:25:33.125
+So the local arrows change as you
+move, just like r hat and theta hat.
+
+00:25:33.475 --> 00:25:35.150
+Let's see how.
+
+00:25:35.500 --> 00:25:39.642
+Suppose a plane flies due east
+along the parallel through Brest,
+
+00:25:39.642 --> 00:25:42.425
+at two hundred and fifty
+metres per second.
+
+00:25:42.775 --> 00:25:46.550
+In one hour, it covers
+nine hundred kilometres.
+
+00:25:46.900 --> 00:25:51.520
+That's nine hundred divided by seventy
+four kilometres per degree:
+
+00:25:51.520 --> 00:25:53.900
+about twelve degrees of longitude.
+
+00:25:55.400 --> 00:26:00.959
+So its east arrow has swung round the
+Earth's axis by those same twelve degrees,
+
+00:26:00.959 --> 00:26:04.225
+exactly like theta hat
+swinging round a circle.
+
+00:26:04.575 --> 00:26:08.145
+Going north tips the arrows
+too: after a hundred and
+
+00:26:08.145 --> 00:26:13.500
+eleven kilometres north, the up arrow
+has tilted one degree towards the north.
+
+00:26:13.850 --> 00:26:17.499
+Written out, the rates
+of change of i hat, j hat and
+
+00:26:17.499 --> 00:26:22.272
+k hat for a moving air parcel each
+have a speed divided by a radius,
+
+00:26:22.272 --> 00:26:25.500
+the same pattern we found
+round the hurricane.
+
+00:26:25.850 --> 00:26:29.400
+Speed over radius
+is how fast the arrows turn.
+
+00:26:30.200 --> 00:26:32.050
+Why does that matter?
+
+00:26:32.400 --> 00:26:36.892
+Because Newton's law is about
+the change of the whole wind vector,
+
+00:26:36.892 --> 00:26:38.525
+not just of its numbers.
+
+00:26:38.875 --> 00:26:43.797
+When the arrows turn, the change
+of the wind has extra pieces,
+
+00:26:43.797 --> 00:26:46.575
+even when u, v and w stay the same.
+
+00:26:46.925 --> 00:26:50.892
+For the eastward part, it's
+the rate of change of u,
+
+00:26:50.892 --> 00:26:55.775
+minus u v tangent phi over the
+radius, plus u w over the radius.
+
+00:26:56.125 --> 00:26:59.350
+Those extra terms are called metric terms.
+
+00:26:59.700 --> 00:27:03.475
+They come only from the turning
+arrows of the coordinates.
+
+00:27:03.825 --> 00:27:05.525
+How big are they?
+
+00:27:05.875 --> 00:27:09.739
+For a wind of ten metres
+per second east and ten north,
+
+00:27:09.739 --> 00:27:15.218
+at forty five degrees, u v tangent phi
+over the radius is a hundred times one,
+
+00:27:15.218 --> 00:27:17.677
+over six point three seven million:
+
+00:27:17.677 --> 00:27:22.875
+about one point six times ten to the
+minus five metres per second squared.
+
+00:27:24.375 --> 00:27:29.725
+That's about sixty five times smaller
+than the Coriolis effect on the same wind.
+
+00:27:30.075 --> 00:27:32.665
+So in one weather system they're small,
+
+00:27:32.665 --> 00:27:36.450
+but across whole oceans
+and the whole globe, they add up.
+
+00:27:36.800 --> 00:27:41.100
+We'll meet them again in the movie
+on the equations of motion.
+
+00:27:41.900 --> 00:27:43.527
+Polar, cylindrical and
+
+00:27:43.527 --> 00:27:48.410
+spherical coordinates are all
+examples of curvilinear coordinates:
+
+00:27:48.410 --> 00:27:50.925
+coordinates whose lines can curve.
+
+00:27:51.275 --> 00:27:53.400
+They share three features.
+
+00:27:53.750 --> 00:27:58.675
+First, the coordinate lines are
+curves, like circles and meridians.
+
+00:27:59.025 --> 00:28:02.875
+Second, the unit vectors
+change from place to place.
+
+00:28:03.225 --> 00:28:07.513
+Third, a change in a coordinate
+isn't a distance by itself,
+
+00:28:07.513 --> 00:28:09.475
+so it needs a scale factor.
+
+00:28:09.825 --> 00:28:14.636
+In polar coordinates, a change
+of theta walks you r times d theta,
+
+00:28:14.636 --> 00:28:16.750
+so theta's scale factor is r.
+
+00:28:17.100 --> 00:28:21.600
+On the Earth, latitude's scale
+factor is the Earth's radius,
+
+00:28:21.600 --> 00:28:25.125
+and longitude's
+is the radius times cosine phi.
+
+00:28:25.475 --> 00:28:29.100
+These scale factors show
+up whenever we take slopes.
+
+00:28:29.450 --> 00:28:33.278
+For example, the eastward
+slope of the temperature on the
+
+00:28:33.278 --> 00:28:36.491
+sphere is one over the
+radius times cosine phi,
+
+00:28:36.491 --> 00:28:39.225
+times its rate of change with longitude.
+
+00:28:39.575 --> 00:28:44.475
+That's part of the gradient, which gets
+its own movie, next in this series.
+
+00:28:44.825 --> 00:28:48.870
+Weather models even use a curvilinear
+vertical coordinate:
+
+00:28:48.870 --> 00:28:52.775
+pressure instead of height, which
+has its own movie too.
+
+00:28:53.575 --> 00:28:56.650
+So why are there so
+many coordinate systems?
+
+00:28:57.000 --> 00:28:59.175
+There are three good reasons.
+
+00:28:59.525 --> 00:29:01.350
+The first is shape.
+
+00:29:01.700 --> 00:29:06.868
+When the coordinates match the shape
+of the problem, the numbers become simple:
+
+00:29:06.868 --> 00:29:10.073
+a ring round the eye
+is just r equals a constant,
+
+00:29:10.073 --> 00:29:13.475
+and the Earth's surface
+is just r equals its radius.
+
+00:29:13.825 --> 00:29:16.075
+The second is measurement.
+
+00:29:16.425 --> 00:29:22.109
+Use the coordinates your instruments use:
+a radar sees distance and direction,
+
+00:29:22.109 --> 00:29:24.659
+a station feels east, north and up,
+
+00:29:24.659 --> 00:29:28.375
+and the data come on a latitude
+and longitude grid.
+
+00:29:28.725 --> 00:29:30.650
+The third is meaning.
+
+00:29:31.000 --> 00:29:36.242
+The right coordinates split a vector
+into the parts that physics cares about:
+
+00:29:36.242 --> 00:29:41.825
+spin and inflow round a storm, or along
+and across a coastline, as we'll see soon.
+
+00:29:42.175 --> 00:29:48.350
+Now let's put these ideas to work on maps,
+on a storm surge, and on a moving storm.
+
+00:29:49.150 --> 00:29:52.650
+First, the shortest
+way between two places.
+
+00:29:53.000 --> 00:29:55.850
+On a flat sheet, it's a straight line.
+
+00:29:56.200 --> 00:29:58.956
+On a sphere, it's part of a great circle:
+
+00:29:58.956 --> 00:30:04.200
+a circle whose centre is the Earth's
+centre, like the equator or any meridian.
+
+00:30:04.550 --> 00:30:07.544
+Picture a flat sheet
+slicing through London,
+
+00:30:07.544 --> 00:30:09.925
+Los Angeles and the Earth's centre.
+
+00:30:10.275 --> 00:30:13.925
+Where it cuts the surface
+is the great circle route.
+
+00:30:14.275 --> 00:30:16.000
+How long is it?
+
+00:30:16.350 --> 00:30:21.100
+Take the dot product of the two
+places' position arrows of length one.
+
+00:30:21.450 --> 00:30:23.305
+As in the dot product movie,
+
+00:30:23.305 --> 00:30:28.075
+that's the cosine of the angle between
+them, here at the Earth's centre.
+
+00:30:28.425 --> 00:30:31.563
+The angle comes out at about
+seventy nine degrees,
+
+00:30:31.563 --> 00:30:36.333
+and the arc length rule turns it into
+about eight thousand seven hundred and
+
+00:30:36.333 --> 00:30:37.400
+sixty kilometres.
+
+00:30:38.900 --> 00:30:44.075
+It doesn't head west-south-west,
+the way Los Angeles looks on a flat map.
+
+00:30:44.425 --> 00:30:49.169
+It leaves London heading north-west,
+at a bearing of about three hundred and
+
+00:30:49.169 --> 00:30:52.915
+twelve degrees, and climbs
+to about sixty two degrees north,
+
+00:30:52.915 --> 00:30:54.975
+near the west coast of Greenland.
+
+00:30:56.475 --> 00:31:01.251
+That's why flights from Europe
+to California pass over Greenland and
+
+00:31:01.251 --> 00:31:02.375
+northern Canada.
+
+00:31:03.175 --> 00:31:07.265
+Sailors used a different route
+for centuries: the rhumb line,
+
+00:31:07.265 --> 00:31:10.550
+which keeps the same
+compass bearing all the way.
+
+00:31:10.900 --> 00:31:13.800
+It's easy to steer, but it's longer.
+
+00:31:14.150 --> 00:31:19.511
+From London to Los Angeles, the rhumb line
+holds a bearing of about two hundred and
+
+00:31:19.511 --> 00:31:23.839
+fifty eight degrees, and it's about
+nine thousand seven hundred and
+
+00:31:23.839 --> 00:31:25.325
+thirty kilometres long.
+
+00:31:26.825 --> 00:31:30.678
+That's about eleven percent
+longer than the great circle:
+
+00:31:30.678 --> 00:31:35.275
+nearly a thousand kilometres
+more, or about an hour of extra flying.
+
+00:31:36.775 --> 00:31:41.500
+On the globe, the great circle looks
+straight, and the rhumb line curves.
+
+00:31:41.850 --> 00:31:45.800
+On the most famous flat
+map, it's the other way round.
+
+00:31:46.150 --> 00:31:47.850
+Let's see why.
+
+00:31:48.650 --> 00:31:51.587
+Flattening the globe
+always stretches something:
+
+00:31:51.587 --> 00:31:55.625
+you can't flatten an orange peel
+without tearing or stretching it.
+
+00:31:55.975 --> 00:32:02.175
+The simplest map just uses longitude
+as x and latitude as y, on squares.
+
+00:32:02.525 --> 00:32:05.200
+That's how most weather data arrive.
+
+00:32:05.550 --> 00:32:10.300
+But on this map, every parallel
+is drawn as long as the equator.
+
+00:32:10.650 --> 00:32:16.475
+So at latitude phi, east-west distances
+are stretched by one over cosine phi.
+
+00:32:16.825 --> 00:32:22.175
+At Brest, that's one over zero point six
+six, about one and a half times.
+
+00:32:23.675 --> 00:32:26.775
+At Svalbard, it's almost five times.
+
+00:32:28.275 --> 00:32:31.208
+North-south distances
+aren't stretched at all,
+
+00:32:31.208 --> 00:32:33.950
+so shapes near the poles
+are squashed flat.
+
+00:32:34.750 --> 00:32:39.225
+In fifteen sixty nine,
+Gerardus Mercator fixed the shapes.
+
+00:32:39.575 --> 00:32:43.834
+His idea: if east-west
+is stretched by one over cosine phi,
+
+00:32:43.834 --> 00:32:46.650
+stretch north-south by the same amount.
+
+00:32:47.000 --> 00:32:49.349
+Then a small circle stays a circle,
+
+00:32:49.349 --> 00:32:53.375
+and a small angle on the map
+is the true angle on the Earth.
+
+00:32:53.725 --> 00:32:56.450
+Maps like this are called conformal.
+
+00:32:56.800 --> 00:33:01.473
+That's exactly what a navigator wants:
+a line of constant bearing,
+
+00:33:01.473 --> 00:33:05.225
+the rhumb line, is a straight
+line on a Mercator map.
+
+00:33:05.575 --> 00:33:10.058
+To build it, each small step
+north, the radius times d phi,
+
+00:33:10.058 --> 00:33:13.250
+is drawn one over cosine phi times longer.
+
+00:33:13.600 --> 00:33:18.474
+Adding up all those steps gives
+the height on the map: the Earth's radius,
+
+00:33:18.474 --> 00:33:23.875
+times the natural log of the tangent of
+forty five degrees plus half the latitude.
+
+00:33:24.225 --> 00:33:27.324
+You can check it
+with the derivatives movie:
+
+00:33:27.324 --> 00:33:31.550
+its slope with respect to phi
+is the radius over cosine phi.
+
+00:33:33.050 --> 00:33:36.512
+Near the poles, that height
+runs off to infinity,
+
+00:33:36.512 --> 00:33:39.550
+so a Mercator map can
+never show the poles.
+
+00:33:40.350 --> 00:33:43.475
+But conformal has a price: areas.
+
+00:33:43.825 --> 00:33:47.543
+Stretched by one over cosine
+phi in both directions,
+
+00:33:47.543 --> 00:33:50.975
+an area is stretched by
+one over cosine squared.
+
+00:33:51.325 --> 00:33:54.375
+At sixty degrees, that's four times.
+
+00:33:55.875 --> 00:33:59.175
+At Svalbard, it's about twenty four times.
+
+00:34:00.675 --> 00:34:05.475
+So on a Mercator map, Greenland
+looks about as big as Africa.
+
+00:34:05.825 --> 00:34:09.775
+In truth, Africa is about
+fourteen times bigger.
+
+00:34:11.275 --> 00:34:14.381
+The Mercator map is great
+for directions and
+
+00:34:14.381 --> 00:34:17.275
+shapes, and terrible for comparing sizes.
+
+00:34:18.075 --> 00:34:21.225
+For climate maps, sizes matter more.
+
+00:34:21.575 --> 00:34:25.616
+If we want to know how much
+of the Earth is warmer than usual,
+
+00:34:25.616 --> 00:34:29.200
+a map that inflates the polar
+regions would mislead us.
+
+00:34:29.550 --> 00:34:34.975
+So climate scientists often use
+equal-area maps, like the Equal Earth map.
+
+00:34:35.325 --> 00:34:38.679
+On it, every patch keeps
+its true relative area,
+
+00:34:38.679 --> 00:34:43.500
+so Greenland is shown at its real
+size, about a fourteenth of Africa.
+
+00:34:43.850 --> 00:34:48.075
+The price now is shape: towards
+the poles, shapes get skewed.
+
+00:34:48.425 --> 00:34:52.375
+At sixty degrees north, away
+from the middle of this map,
+
+00:34:52.375 --> 00:34:55.425
+angles can be off by thirty
+degrees or more.
+
+00:34:56.925 --> 00:35:01.375
+No flat map can keep both areas
+and shapes right everywhere.
+
+00:35:01.725 --> 00:35:04.875
+So the rule is: pick the map for the job.
+
+00:35:05.225 --> 00:35:08.346
+Use conformal maps
+for winds and directions,
+
+00:35:08.346 --> 00:35:11.325
+and equal-area maps for comparing amounts.
+
+00:35:11.675 --> 00:35:16.125
+We'll read many maps like these
+in the movie on reading weather maps.
+
+00:35:16.925 --> 00:35:22.275
+There's one more map that every forecaster
+knows: the view from above a pole.
+
+00:35:22.625 --> 00:35:24.982
+On it, the pole sits in the middle,
+
+00:35:24.982 --> 00:35:28.350
+and the circles of latitude
+become rings round it.
+
+00:35:28.700 --> 00:35:30.768
+So it's polar coordinates again:
+
+00:35:30.768 --> 00:35:35.290
+the distance from the middle stands
+for how far you are from the pole,
+
+00:35:35.290 --> 00:35:37.875
+and the angle round it is the longitude.
+
+00:35:38.225 --> 00:35:42.206
+Here is the height of the ten
+hectopascal pressure surface,
+
+00:35:42.206 --> 00:35:45.377
+about thirty kilometres
+up in the stratosphere,
+
+00:35:45.377 --> 00:35:48.750
+on the twenty first of January,
+twenty twenty six.
+
+00:35:49.100 --> 00:35:53.325
+The lines join places where that
+surface has the same height.
+
+00:35:53.675 --> 00:35:56.485
+They circle the Arctic:
+about twenty eight and
+
+00:35:56.485 --> 00:35:58.868
+a half kilometres where they're lowest,
+
+00:35:58.868 --> 00:36:02.350
+and almost thirty one kilometres
+at thirty degrees north.
+
+00:36:03.850 --> 00:36:09.475
+The winds blow along these lines, round
+and round the Arctic, from west to east.
+
+00:36:09.825 --> 00:36:15.450
+This great winter whirl of cold air
+is called the stratospheric polar vortex.
+
+00:36:16.250 --> 00:36:21.375
+In this view, the eastward wind
+is the tangential wind round the pole.
+
+00:36:21.725 --> 00:36:25.917
+And the northward wind is the radial
+wind with a minus sign,
+
+00:36:25.917 --> 00:36:29.900
+because blowing north means
+blowing in, towards the pole.
+
+00:36:30.250 --> 00:36:33.132
+Westerly winds, the winds from the west,
+
+00:36:33.132 --> 00:36:36.950
+turn anticlockwise as seen
+from above the North Pole.
+
+00:36:37.300 --> 00:36:40.788
+So the polar vortex is like
+the hurricane's spin,
+
+00:36:40.788 --> 00:36:43.350
+only far wider and slower to change.
+
+00:36:43.700 --> 00:36:47.563
+Unlike a hurricane,
+though, it isn't fed by a warm sea:
+
+00:36:47.563 --> 00:36:52.550
+it forms because the polar stratosphere
+cools in the long winter night.
+
+00:36:52.900 --> 00:36:55.852
+And look where its centre is:
+not at the pole,
+
+00:36:55.852 --> 00:37:01.050
+but at almost seventy three degrees north,
+over the Barents Sea, north of Russia.
+
+00:37:02.550 --> 00:37:06.680
+If we put the origin
+at the vortex's own centre instead,
+
+00:37:06.680 --> 00:37:09.925
+its winds become far
+more purely tangential.
+
+00:37:10.275 --> 00:37:14.275
+Choosing the origin is part
+of choosing good coordinates.
+
+00:37:14.625 --> 00:37:18.779
+When the vortex weakens
+or splits, cold air can spill south,
+
+00:37:18.779 --> 00:37:21.825
+which is a story
+for the stratosphere movie.
+
+00:37:22.625 --> 00:37:26.389
+Now let's change coordinates
+without moving the origin:
+
+00:37:26.389 --> 00:37:28.100
+we'll just turn the axes.
+
+00:37:28.450 --> 00:37:33.125
+The arrow stays the same;
+only the rulers we measure it with turn.
+
+00:37:33.475 --> 00:37:39.725
+Say the new x axis is turned by an angle
+alpha, anticlockwise as seen from above.
+
+00:37:40.075 --> 00:37:44.975
+Its unit vector, x hat
+prime, is cosine alpha, sine alpha.
+
+00:37:45.325 --> 00:37:50.875
+The new y axis, y hat prime, is
+minus sine alpha, cosine alpha.
+
+00:37:51.225 --> 00:37:55.275
+The new components are
+just dot products with the new arrows.
+
+00:37:55.625 --> 00:37:59.650
+So x prime is x cosine
+alpha plus y sine alpha,
+
+00:37:59.650 --> 00:38:04.275
+and y prime is minus x sine
+alpha plus y cosine alpha.
+
+00:38:04.625 --> 00:38:08.589
+Let's try it on our east wind
+of ten metres per second,
+
+00:38:08.589 --> 00:38:11.400
+with the axes turned by thirty degrees.
+
+00:38:11.750 --> 00:38:17.200
+The new x prime is ten times zero point
+eight seven, about eight point seven.
+
+00:38:18.700 --> 00:38:23.950
+And y prime is minus ten times
+zero point five, which is minus five.
+
+00:38:25.450 --> 00:38:29.900
+And the length is still ten,
+because the arrow itself didn't change.
+
+00:38:30.700 --> 00:38:36.050
+We can write those two lines as a table
+of numbers, called a rotation matrix.
+
+00:38:36.400 --> 00:38:38.875
+Each entry is a direction cosine:
+
+00:38:38.875 --> 00:38:43.225
+the cosine of the angle between
+an old axis and a new one.
+
+00:38:43.575 --> 00:38:46.773
+In the index notation
+of the vectors movie,
+
+00:38:46.773 --> 00:38:52.350
+new component number j is the sum
+over i of the old components times C i j.
+
+00:38:52.700 --> 00:38:57.175
+And here's a nice link: polar
+components are just a rotation.
+
+00:38:57.525 --> 00:39:01.095
+At each place, r hat
+and theta hat are the east and
+
+00:39:01.095 --> 00:39:03.825
+north arrows turned by the angle theta.
+
+00:39:04.175 --> 00:39:06.206
+So the wind's six outward and
+
+00:39:06.206 --> 00:39:09.218
+minus eight round were
+just the east wind's
+
+00:39:09.218 --> 00:39:12.650
+components in axes
+turned by fifty three degrees.
+
+00:39:14.150 --> 00:39:17.528
+The only difference is that
+in polar coordinates,
+
+00:39:17.528 --> 00:39:20.700
+the turning angle changes
+from place to place.
+
+00:39:21.500 --> 00:39:26.000
+Turning the axes is how forecasters
+look at winds on a coast.
+
+00:39:26.350 --> 00:39:30.982
+What matters there is the part
+of the wind that blows along the shore,
+
+00:39:30.982 --> 00:39:35.150
+and the part that blows across
+it, onto the land or out to sea.
+
+00:39:35.500 --> 00:39:38.275
+Here's the southwest coast of Florida.
+
+00:39:38.625 --> 00:39:41.807
+It runs from south-south-east
+to north-north-west,
+
+00:39:41.807 --> 00:39:45.625
+at a bearing of about three
+hundred and twenty nine degrees.
+
+00:39:47.125 --> 00:39:51.384
+Let's turn our axes so
+that x prime runs along the coast,
+
+00:39:51.384 --> 00:39:53.625
+and y prime points out to sea.
+
+00:39:53.975 --> 00:39:59.149
+At eight in the evening, universal
+time, about an hour after Ian came ashore,
+
+00:39:59.149 --> 00:40:04.256
+the model wind at Fort Myers Beach was
+about thirty three metres per second,
+
+00:40:04.256 --> 00:40:05.600
+from the south-west.
+
+00:40:07.100 --> 00:40:10.925
+Along the shore, it's about
+nine metres per second.
+
+00:40:11.275 --> 00:40:16.475
+Across the shore, it's about thirty two
+metres per second, towards the land.
+
+00:40:17.975 --> 00:40:21.800
+Almost the whole wind was
+pushing the sea onto the coast.
+
+00:40:22.600 --> 00:40:26.100
+That onshore push piles
+water up against the coast.
+
+00:40:26.450 --> 00:40:30.239
+Mostly by that
+push, and a little by the low pressure,
+
+00:40:30.239 --> 00:40:32.975
+the sea rose far above the normal tide.
+
+00:40:33.325 --> 00:40:35.675
+This is called a storm surge.
+
+00:40:36.025 --> 00:40:37.419
+At Fort Myers Beach,
+
+00:40:37.419 --> 00:40:42.227
+the official report found water ten
+to fifteen feet above the ground:
+
+00:40:42.227 --> 00:40:44.875
+about three to four and a half metres.
+
+00:40:45.225 --> 00:40:48.742
+Now go about a hundred
+and fifty kilometres north,
+
+00:40:48.742 --> 00:40:52.400
+to Tampa Bay, on the other
+side of the storm's spin.
+
+00:40:52.750 --> 00:40:57.693
+There, the coast runs almost due north,
+and the wind was blowing out to sea,
+
+00:40:57.693 --> 00:41:01.725
+at about eleven and a half metres
+per second across the shore.
+
+00:41:03.225 --> 00:41:05.997
+So the water was pushed
+away from the coast,
+
+00:41:05.997 --> 00:41:09.400
+and the water level in the bay
+fell instead of rising.
+
+00:41:09.750 --> 00:41:13.212
+It's the same storm, on opposite
+sides of the eye,
+
+00:41:13.212 --> 00:41:16.050
+and the across-shore part flips its sign.
+
+00:41:16.400 --> 00:41:19.525
+Turned axes make that difference jump out.
+
+00:41:19.875 --> 00:41:25.308
+The wind along a coast matters too:
+it can bring cold water up from below,
+
+00:41:25.308 --> 00:41:28.025
+which is a story for the Ekman movie.
+
+00:41:28.825 --> 00:41:32.850
+Our last change of coordinates
+lets the origin move.
+
+00:41:33.200 --> 00:41:36.587
+Imagine you're on a train
+gliding along a straight
+
+00:41:36.587 --> 00:41:39.500
+track at a steady twenty
+metres per second.
+
+00:41:39.850 --> 00:41:43.800
+You walk towards the front at one
+and a half metres per second.
+
+00:41:44.150 --> 00:41:48.605
+Someone standing beside the track
+sees you moving at twenty plus one and
+
+00:41:48.605 --> 00:41:51.575
+a half: twenty one
+and a half metres per second.
+
+00:41:53.075 --> 00:41:55.100
+So velocities add.
+
+00:41:55.450 --> 00:41:59.800
+The velocity seen from the ground
+is the train's velocity,
+
+00:41:59.800 --> 00:42:04.000
+capital U, plus the velocity
+seen on the train, u prime.
+
+00:42:04.350 --> 00:42:07.141
+And positions shift as time goes on:
+
+00:42:07.141 --> 00:42:10.707
+x equals x prime
+plus capital U times small t,
+
+00:42:10.707 --> 00:42:13.575
+while both clocks show the same time.
+
+00:42:13.925 --> 00:42:16.713
+Switching between two frames like this,
+
+00:42:16.713 --> 00:42:19.858
+moving at a steady
+velocity without turning,
+
+00:42:19.858 --> 00:42:24.075
+is called a Galilean transformation,
+after Galileo Galilei.
+
+00:42:24.875 --> 00:42:27.025
+Here's the beautiful part.
+
+00:42:27.375 --> 00:42:29.875
+What happens to accelerations?
+
+00:42:30.225 --> 00:42:35.200
+Let's take the rate of change
+of u, which is capital U plus u prime.
+
+00:42:35.550 --> 00:42:38.586
+The rate of change of capital U is zero,
+
+00:42:38.586 --> 00:42:41.850
+because the train's
+velocity never changes.
+
+00:42:42.200 --> 00:42:46.867
+So the rate of change of u equals
+the rate of change of u prime:
+
+00:42:46.867 --> 00:42:50.075
+the acceleration
+is the same in both frames.
+
+00:42:51.575 --> 00:42:55.463
+Drop a ball on the smooth
+train, and it falls straight down,
+
+00:42:55.463 --> 00:42:59.545
+speeding up by nine point eight
+metres per second every second,
+
+00:42:59.545 --> 00:43:02.850
+exactly as it does
+for the person beside the track.
+
+00:43:03.200 --> 00:43:07.764
+And since Newton's law says force
+equals mass times acceleration,
+
+00:43:07.764 --> 00:43:11.275
+the same forces explain
+the motion in both frames.
+
+00:43:11.625 --> 00:43:15.788
+For a fluid, the acceleration
+of an air parcel is the local
+
+00:43:15.788 --> 00:43:18.875
+change of the wind
+plus the advection term.
+
+00:43:19.225 --> 00:43:24.050
+Each piece can differ between the two
+frames, but their sum is the same.
+
+00:43:24.400 --> 00:43:28.575
+That's only true for a frame
+moving steadily in a straight line.
+
+00:43:28.925 --> 00:43:34.026
+A frame that turns, like the spinning
+Earth, adds new terms, the Coriolis and
+
+00:43:34.026 --> 00:43:39.525
+centrifugal effects, which we met in the
+cross product movie on our spinning Earth.
+
+00:43:40.325 --> 00:43:42.525
+Now a real moving storm.
+
+00:43:42.875 --> 00:43:45.771
+Storm Ciarán crossed
+the English Channel in the
+
+00:43:45.771 --> 00:43:48.668
+night from the first
+to the second of November,
+
+00:43:48.668 --> 00:43:49.900
+twenty twenty-three.
+
+00:43:50.250 --> 00:43:53.195
+Following its lowest
+pressure hour by hour,
+
+00:43:53.195 --> 00:43:56.278
+the centre moved towards
+the east-north-east,
+
+00:43:56.278 --> 00:43:58.675
+at about fifteen metres per second.
+
+00:44:00.175 --> 00:44:04.907
+Let's look at the winds on a ring two
+hundred kilometres from the centre,
+
+00:44:04.907 --> 00:44:07.500
+at three in the morning, universal time.
+
+00:44:07.850 --> 00:44:09.237
+Seen from the ground,
+
+00:44:09.237 --> 00:44:13.859
+the winds on the south side averaged
+about nineteen metres per second,
+
+00:44:13.859 --> 00:44:16.500
+but on the north side, only about eight.
+
+00:44:18.000 --> 00:44:20.050
+Why so lopsided?
+
+00:44:20.400 --> 00:44:25.694
+On the south side, the storm's
+anticlockwise spin blows towards the east,
+
+00:44:25.694 --> 00:44:29.175
+the same way the storm
+moves, so the two add up.
+
+00:44:29.525 --> 00:44:33.117
+On the north side, the spin
+blows towards the west,
+
+00:44:33.117 --> 00:44:36.075
+against the motion, so they partly cancel.
+
+00:44:36.425 --> 00:44:40.750
+Now let's subtract the storm's
+own velocity from every wind.
+
+00:44:41.100 --> 00:44:46.225
+These are the storm-relative winds: what
+you'd feel riding along with the storm.
+
+00:44:47.025 --> 00:44:49.750
+So what changes, and what doesn't?
+
+00:44:50.100 --> 00:44:54.600
+The wind at each point changes
+by fifteen metres per second.
+
+00:44:54.950 --> 00:44:57.956
+But the average spin
+round the ring is about
+
+00:44:57.956 --> 00:45:00.825
+fourteen metres per second in both frames.
+
+00:45:02.325 --> 00:45:07.425
+And the average inflow is about six
+metres per second in both frames.
+
+00:45:08.925 --> 00:45:10.925
+That's no accident.
+
+00:45:11.275 --> 00:45:15.018
+A steady, uniform wind blows
+as much round one side of
+
+00:45:15.018 --> 00:45:17.984
+a circle as it blows back round the other,
+
+00:45:17.984 --> 00:45:22.575
+so it adds nothing to the average
+spin, or to the average inflow.
+
+00:45:22.925 --> 00:45:28.100
+The spin belongs to the storm, and the
+motion belongs to the whole pattern.
+
+00:45:28.450 --> 00:45:33.069
+For a house on the coast, though, the
+ground-relative wind is what counts,
+
+00:45:33.069 --> 00:45:37.375
+and that's why the strongest winds
+came on the storm's southern side.
+
+00:45:37.725 --> 00:45:42.798
+That night, the weather station at Brest
+measured a gust of eighty four knots,
+
+00:45:42.798 --> 00:45:46.050
+about a hundred and fifty
+six kilometres per hour.
+
+00:45:46.850 --> 00:45:51.350
+The moving frame also explains
+what a fixed barometer sees.
+
+00:45:51.700 --> 00:45:54.777
+Picture the pressure
+pattern as a frozen map,
+
+00:45:54.777 --> 00:45:58.400
+sliding east-north-east
+at fifteen metres per second.
+
+00:45:58.750 --> 00:46:03.618
+A barometer that never moves sees
+the pressure fall as the low approaches,
+
+00:46:03.618 --> 00:46:06.775
+even if the storm itself
+isn't deepening at all.
+
+00:46:07.125 --> 00:46:09.936
+Changing to the moving
+frame splits the rate
+
+00:46:09.936 --> 00:46:12.619
+of change at a fixed place into two parts:
+
+00:46:12.619 --> 00:46:15.878
+the change seen by someone
+riding with the pattern,
+
+00:46:15.878 --> 00:46:19.775
+minus the pattern's velocity
+times the slope of the pressure.
+
+00:46:20.125 --> 00:46:23.471
+At Plymouth, on England's
+south coast, at midnight,
+
+00:46:23.471 --> 00:46:28.325
+the pressure was falling by about
+three point eight hectopascals per hour.
+
+00:46:29.825 --> 00:46:34.425
+The sliding pattern alone accounts
+for about three point two of them.
+
+00:46:35.925 --> 00:46:40.975
+The remaining zero point six
+is the storm itself changing as it moved.
+
+00:46:41.325 --> 00:46:45.725
+So most of what the barometer
+saw was the storm just arriving.
+
+00:46:46.075 --> 00:46:50.028
+This is the same idea as advection
+in the dot product movie,
+
+00:46:50.028 --> 00:46:53.850
+and we'll build it fully
+in the material derivative movie.
+
+00:46:54.650 --> 00:46:58.572
+To sum up, coordinates are
+numbers that pin down a place,
+
+00:46:58.572 --> 00:47:01.875
+measured from an origin
+along chosen directions.
+
+00:47:02.225 --> 00:47:05.500
+Cartesian unit vectors
+are the same everywhere,
+
+00:47:05.500 --> 00:47:09.750
+while polar, cylindrical
+and spherical ones turn as you move.
+
+00:47:10.100 --> 00:47:14.400
+The arc length is the radius
+times the angle, in radians.
+
+00:47:14.750 --> 00:47:16.574
+Round Hurricane Ian's eye,
+
+00:47:16.574 --> 00:47:19.590
+polar coordinates split
+the wind into about
+
+00:47:19.590 --> 00:47:22.536
+thirty seven metres per second of spin and
+
+00:47:22.536 --> 00:47:24.500
+twelve and a half of inflow.
+
+00:47:24.850 --> 00:47:30.175
+And because theta hat turns, a steady
+spin still accelerates towards the eye.
+
+00:47:30.525 --> 00:47:34.763
+On the Earth, a degree of latitude
+is always about a hundred and
+
+00:47:34.763 --> 00:47:35.956
+eleven kilometres,
+
+00:47:35.956 --> 00:47:40.790
+but a degree of longitude is the radius
+times cosine phi times the angle:
+
+00:47:40.790 --> 00:47:44.962
+seventy four kilometres
+at Brest, and twenty three at Svalbard,
+
+00:47:44.962 --> 00:47:48.075
+because the parallels
+shrink towards the poles.
+
+00:47:48.425 --> 00:47:50.483
+Areas go with cosine phi too,
+
+00:47:50.483 --> 00:47:55.025
+so half of the Earth lies between
+thirty south and thirty north.
+
+00:47:55.375 --> 00:47:58.250
+The shortest route is a great circle.
+
+00:47:58.600 --> 00:48:03.950
+The Mercator map keeps shapes and
+bearings, and equal-area maps keep sizes.
+
+00:48:04.300 --> 00:48:08.223
+Turning the axes gives new
+components of the same arrow,
+
+00:48:08.223 --> 00:48:10.325
+like along and across a coast.
+
+00:48:10.675 --> 00:48:15.816
+And a Galilean change to a steadily
+moving frame changes velocities,
+
+00:48:15.816 --> 00:48:20.050
+but leaves accelerations,
+and a storm's spin, unchanged.
+
+00:48:20.850 --> 00:48:25.008
+This video is one of a series
+of related maths tutorials,
+
+00:48:25.008 --> 00:48:27.050
+so watch out for the others.
+
+00:48:27.400 --> 00:48:31.797
+They're made for students
+of atmospheric science, meteorology and
+
+00:48:31.797 --> 00:48:35.450
+fluid dynamics, and anyone
+else who needs these ideas.
+
+00:48:35.800 --> 00:48:40.628
+The notebook for coordinates, and the
+notebooks for the other maths concepts,
+
+00:48:40.628 --> 00:48:43.450
+are on the website that
+goes with this video.
