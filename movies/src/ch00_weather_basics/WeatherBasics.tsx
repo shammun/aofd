@@ -1679,7 +1679,7 @@ const S20F: React.FC = () => {
   const tRes = clamp((f - SS(k, 0)) / 45, 0, 1), zTop = mix(18, 40, easeIO(tRes));
   const A = PG18(zTop), X = axX(A), Y = axY(A);
   const t5 = SS(k, 5), t6 = SS(k, 6), t7 = SS(k, 7);
-  const gO = fout(f, t6 - 6, 15), cO = fin(f, t6, 15);
+  const gO = fout(f, t6 - 20, 12), cO = fin(f, t6, 15); // fix 3 K6: the graph (and its teal words) is gone 8 frames before the 3-D columns fade in (was a 15-frame cross-fade: text over the column rods)
   const shade = poly([[X(0), Y(Math.min(zTop, 40))] as Pt, [X(0), Y(HKM)] as Pt, ...Array.from({ length: 61 }, (_, i) => { const z = HKM + ((zTop - HKM) * i) / 60; return [X(p0e(z)), Y(z)] as Pt; })]) + "Z";
   const H263 = U2.s20.H263_km as number, H303 = U2.s20.H303_km as number, zk = 0.12;
   // UF2 fix 1 (S6): the two columns side by side (camera from the front), 1.4× bigger
@@ -1794,7 +1794,7 @@ const S20G: React.FC = () => {
         <Lbl x={lineB[0] + 14} y={lineB[1] - 28} t="8.43 km" c={C.gold} s={T.key} o={fin(f, tTop)} />
         <Keyword f={f} text="a thought experiment" at={[1100, 110]} appear={0} out={SS(k, 3) - 17} s={T.key} />
         <Keyword f={f} text="pretend: same density everywhere" at={[1100, 110]} appear={SS(k, 3)} out={t6 - 17} s={T.floor} />
-        <Keyword f={f} text="same weight?" at={[1100, 110]} appear={t6} out={t10 - 6} s={T.key} />
+        <Keyword f={f} text="same weight?" at={[1100, 110]} appear={t6} out={t7 - 18} s={T.key} />{/* fix 3 K6/swap: gone 8 frames before ρ0 g h = p0 fades in under it */}
         <Lbl x={1100} y={640} t="= the gold line" c={C.gold} s={T.floor} o={fin(f, t10)} />
         <Keyword f={f} text="H = height at sea-level density" at={[1100, 110]} appear={SS(k, 11)} out={SS(k, 12) - 17} s={T.floor} />
         <Keyword f={f} text="real air: no single density, no top" at={[1100, 110]} appear={SS(k, 12)} s={T.floor} c={C.local} />
@@ -1956,7 +1956,7 @@ const S21: React.FC = () => {
         <Callout f={f} lines="radiosonde" at={[1100, 90]} appear={tSonde} out={SS(k, 3) - 4} target={[at[0] + 20, at[1] - 30]} s={T.floor} bend={30} />
         {/* UF2 U2-17: the wind at each height comes from the drift (a short teal arrow along the drift aloft, K7 pulse) */}
         <AnimatedWindArrow from={[at[0] + 30, at[1] - 70]} to={[at[0] + 120, at[1] - 90]} speed={12} f={f} mode="pulse" px={7} head={24} o={win(f, SS(k, 3), tThis)} />
-        <Callout f={f} lines="wind at each height ← drift" at={[1100, 90]} appear={AT(k, 3, "from how the balloon drifts")} out={tThis - 4} target={[at[0] + 125, at[1] - 92]} s={T.floor} bend={30} />
+        <Callout f={f} lines="wind at each height ← drift" at={[1100, 90]} appear={AT(k, 3, "from how the balloon drifts")} out={tThis - 18} target={[at[0] + 125, at[1] - 92]} s={T.floor} bend={30} />
         <Callout f={f} lines={`${fmt(z, 1)} km · ${fmt(v.p, 0)} hPa`} at={[1100, 90]} appear={tThis} target={[at[0] + 22, at[1] - 30]} s={T.floor} bend={30} />
         <Lbl x={1560} y={90} t="heights × 10" c={C.key} s={T.floor} o={win(f, tX10, tLow)} />
         <SrcG id="s21_balloon_pressure" w={1080} pic={VB} />
@@ -2446,7 +2446,7 @@ const S27B: React.FC = () => {
   // the globe zooms on the tropical Atlantic, gives the frame to the two 1-kg boxes (S5-S9), comes back, and zooms back out at the end
   const cam = globePath([{ f: 0, lat: 8, lon: -35, dist: 3.7 }, { f: tC, lat: QM.lat, lon: QM.lon, dist: 3.7 }, { f: tC + 40, lat: QM.lat, lon: QM.lon, dist: 2.9 },
     { f: LEN(k) - 40, lat: QM.lat, lon: QM.lon + 2, dist: 2.9 }, { f: LEN(k), lat: 8, lon: -35, dist: 3.7 }], f); // UF2 fix 1 (S19): 3.4 → 3.7
-  const gO = fout(f, tB - 4, 12) + fin(f, tC - 6, 12) * (f >= tC - 6 ? 1 : 0);
+  const gO = fout(f, tB - 4, 12) + fin(f, tC + 2, 12) * (f >= tC + 2 ? 1 : 0); // fix 3 K6: the globe returns only after the 1-kg boxes and their labels are gone (boxO = 0 at tC)
   const boxO = fin(f, tB + 8) * fout(f, tC - 10, 10);
   const A1 = fout(f, tB - 17, 10); // fix 3 (R3-M2): gone 8 frames before "where does 1.61 come from?"; rows 150-480 belong to the rule and its parts until the boxes come
   const dots = (x: number, n: number, c: string, seed: number) => Array.from({ length: n }, (_, i) => <circle key={i} cx={x + 16 + rnd(i * 3 + seed) * 308} cy={196 + rnd(i * 7 + seed) * 348} r={6.5} fill={c} />);
@@ -2565,10 +2565,11 @@ const S27C: React.FC = () => {
         <Keyword f={f} text="where is the vapour?" at={[1180, 150]} appear={0} out={t1 - 17} s={T.key} />
         <Keyword f={f} text="five heights, to ≈ 10 km" at={[1180, 150]} appear={t1} out={t2 - 17} s={T.key} />
         {/* rows in the order the callouts arrive (top to bottom); each link ends when the next callout arrives, so links never cross */}
-        <Callout f={f} lines="≈ 20 g/kg near the sea" at={[1180, 150]} appear={t2} out={t3 - 4} linkEnd={AT(k, 2, "three kilometres") - 6} target={pMax} s={T.key} bend={-20} />
-        <Callout f={f} lines="3 km: a few g/kg" at={[1180, 260]} appear={AT(k, 2, "three kilometres")} out={t3 - 4} linkEnd={AT(k, 2, "at ten kilometres") - 6} target={edge(k700)} s={T.key} bend={-20} />
-        <Callout f={f} lines="10 km: almost none" at={[1180, 370]} appear={AT(k, 2, "at ten kilometres")} out={t3 - 4} target={edge(k300)} s={T.key} bend={-20} />
-        <Callout f={f} lines={["lowest 1.5 km:", "almost half the vapour"]} at={[1180, 470]} appear={t3} out={t4 - 4} target={[(edge(0)[0] + edge(k850)[0]) / 2 + 44, (edge(0)[1] + edge(k850)[1]) / 2]} s={T.key} bend={-30} />
+        <Callout f={f} lines="≈ 20 g/kg near the sea" at={[1180, 150]} appear={t2} out={t3 - 18} linkEnd={AT(k, 2, "three kilometres") - 6} target={pMax} s={T.key} bend={-20} />
+        <Callout f={f} lines="3 km: a few g/kg" at={[1180, 260]} appear={AT(k, 2, "three kilometres")} out={t3 - 18} linkEnd={AT(k, 2, "at ten kilometres") - 6} target={edge(k700)} s={T.key} bend={-20} />
+        <Callout f={f} lines="10 km: almost none" at={[1180, 370]} appear={AT(k, 2, "at ten kilometres")} out={t3 - 18} target={edge(k300)} s={T.key} bend={-20} />
+        {/* fix 3 K6: the 1.5-km callout moved up (470 → 300) so the bracket at the stack's front-right edge (x ≤ 1200, y ≥ 510 in the close look) never crosses it; the three rows above are gone 8 frames before it */}
+        <Callout f={f} lines={["lowest 1.5 km:", "almost half the vapour"]} at={[1180, 300]} appear={t3} out={t4 - 18} target={[(edge(0)[0] + edge(k850)[0]) / 2 + 44, (edge(0)[1] + edge(k850)[1]) / 2]} s={T.key} bend={-30} />
         <Keyword f={f} text="colder air holds less" at={[1180, 610]} appear={t4} s={T.key} />
         <ColourBar x={1180} y={720} w={480} lut={LUT_HALINE} lo={0} hi={20} ticks={[{ v: 0, t: "0" }, { v: 10, t: "10" }, { v: 20, t: "20" }]} unit="g/kg" title="specific humidity" />
         <SrcG id="s27c_vapour_stack" />
@@ -4305,7 +4306,7 @@ const S60: React.FC = () => {
         </View3D>; })() : null}
       <Svg>
         <Keyword f={f} text="thin shell · troposphere" at={[1100, 400]} appear={SS(k, 0) + 4} out={SS(k, 1) - 17} s={T.key} />
-        <Lbl x={1100} y={400} t="1013 hPa = weight of the air" c={C.key} s={T.key} o={beatT(1)} /><g opacity={beat(1)}>
+        <Lbl x={1100} y={400} t="1013 hPa = weight of the air" c={C.key} s={T.key} o={beatT(1)} />{/* fix 3 K6: the column's labels wait until the globe (beat 0, gone at SS1 + 4) has left */}<g opacity={fin(f, SS(k, 1) + 6, 10) * fout(f, SS(k, 2) - 6, 10)}>
           {(() => { const b0 = colPr60(f, k).p([0.5, 0.5, 0]); return <Lbl x={b0[0]} y={b0[1] + 120} t="1013 hPa on 1 m²" c={PRES} s={T.key} a="middle" />; })()}
           <BaseLabels pr={colPr60(f, k)} area={false} /></g>
         <g opacity={beat(2)}><PGraph xl="" /></g><Lbl x={1100} y={560} t="H ≈ 8.4 km → 37 % left" c={C.key} s={T.calc} o={beatT(2)} />

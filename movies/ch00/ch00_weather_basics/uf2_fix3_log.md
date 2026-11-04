@@ -67,3 +67,21 @@ is NOT done**: try 1 died of memory (4.6 GiB STFT allocation while the #4 render
 - S14 s27c "lowest 1.5 km" bracket: depends on the 3-D view; needs frames.
 - S15 s13/s14 "1 m" on the slab edge: see above.
 - S18 fluidpy W85/W86 tests uncommitted: a fluidpy commit (orchestrator).
+
+## K6 cleanup (2026-11-04, source only; no render, no TTS, timing.json unchanged)
+Pre-render chain `uf2fix3_prerender.sh`: sound mix done (`uf2/fix3/sound/`), cam_speed 0 > 90 °/s, swap_check 1 pair, K6 stills
+`uf2/stills/k6fix3` FAIL 18 hits (`uf2/k6fix3.json`). Every hit fixed by moving/retiming, no exemptions, no owner tags.
+
+| Frame (scene, local) | Hit | Fix (WeatherBasics.tsx line) |
+|---|---|---|
+| 33785 (s20f, t6+3) | 4 × text-arrow3d: "of the air: still above H" over the 3-D columns' rods (graph fading out while the columns fade in) | L1682 `gO = fout(f, t6 - 20, 12)`: the graph and its words are gone at t6 − 8, the columns start at t6 (was a 15-frame cross-fade) |
+| swap 35997 (s20g, 19:59.9) | Keyword "same weight?" × TeX ρ0 g h = p0 ⇒ h = … | L1797 `out={t7 - 18}`: the question is gone 8 frames before the answer fades in |
+| 43306 (s21, tThis+3) | text-text "wind at each height ← drift" × readout "0.4 km · 963 hPa" (same spot, 6-frame overlap) | L1959 `out={tThis - 18}`: gone 8 frames before the readout |
+| 49077 (s25, +20) | 5 × text-text (old globe colour bar vs its source line) | **stale still**: `b49077.json`/`f49077.jpg` dated 2026-10-29 (an old layout: zonal fan, "Paris 11 km"); 49077 is not in the fix-3 frame list. Set aside as `*.stale-2026-10-29.*.bak`; frame re-shot in k6fix3b |
+| 55726 (s27b, tC−4) | 4 × text-picture: "1 kg of air/vapour", "29/18 each" on the globe coming back | L2449 the globe returns at `fin(f, tC + 2, 12)` (was tC − 6); the boxes are 0 at tC |
+| 57188 (s27c, close look) | text-stroke: gold 1.5-km bracket (w9, x ≤ 1197, y 511–582) through "almost half the vapour" | L2572 callout moved up `at={[1180, 300]}` and `out={t4 - 18}`; L2568–2570 the three rows above `out={t3 - 18}` (gone 8 frames before it) |
+| 101945 (s60, SS1+3) | 3 × text-picture: "1013 hPa on 1 m²", "1 m", "1 m" on the fading recap globe | L4309 the column labels' group `fin(f, SS(k, 1) + 6, 10)` (the globe is gone at SS1 + 4); the 3-D column keeps its cross-fade |
+
+Static gates after the edit: swap_check 640 text elements, **0 text-over-text pairs, 0 swaps < 8 frames**; cam_speed **0 cameras
+above 90 °/s**; `tsc --noEmit` clean for WeatherBasics.tsx. Re-shoot list (80 frames: the hit frames, every K6 frame and extra
+frames in each changed transition window): `uf2/k6fix3b_frames.txt`.
