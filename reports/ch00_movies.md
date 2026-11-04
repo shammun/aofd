@@ -6512,3 +6512,191 @@ The one Must is a one-line TSX coordinate fix in s47 (the recap tangent: y = 6x 
 - s47 tangent: source dd9cfb7 (`poly([P(1.5, 0), P(5, 21)])`, y = 6x − 9); bundle rebuilt (27 hand-staged `public/dt_*` assets copied from the previous bundle), piece c085000 re-rendered, 89 pieces rejoined. Frame 47:23.5 checked: the line touches y = x² at the gold dot (3, 9).
 - movie_qa PASS (av_length 2947.40/2947.38 s; size WARN 122.95 MB). The 14 Shoulds are carried into the §5b retro-fit (fix-loop limit reached).
 - **Status: FINAL**: G: viewing `4_derivatives_taylor_FINAL.mp4` + Drive.
+
+
+---
+
+# ch00_weather_basics — UF2 review 4 (fresh eyes, after fix loop 3) 2026-11-04
+
+**Movie:** `movies/out/ch00/ch00_weather_basics/1080.mp4` (rendered 2026-11-04 08:09).
+- Length 58:06.5 (3486.47 s; narration ends 3483.95 s); 156.46 MB; 1920×1080; 30 fps.
+- 73 scenes, 492 sentences, 874 cues.
+
+**How I looked:**
+- 492 frames at 640 px, one 0.25 s before each sentence ends (times from `timing.json`), read as 55 labelled 3×3 sheets.
+- Strips at 0.1–0.5 s steps through:
+  - s39 (42:06–42:17.5);
+  - the s47 colour-bar swap (47:37.5–47:44.5);
+  - s48 (48:40–49:29);
+  - the three review-3 cross-fades (41:08, 41:35, 49:33);
+  - the fix-3 K6 hit frames (18:45.6, 19:59.3, 24:02.9, 30:56.9, 31:45.7);
+  - s60 (56:37–56:46), s45 (46:30) and s02 (0:48.2–0:50.5).
+- Full-size frames and crops at the s47 and s48 triangles, s22, s25, the s13/s14 slab, s38b, s59 and s02.
+- Audio: a 50-ms RMS envelope and a sample-jump scan of the two re-voiced sentences (s50 S3, s59 S2), plus the VTT text for both.
+- Frames: `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_weather_basics/review4/` (40 MB). Nothing large was written to C:.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_weather_basics UF2 fix 3 | 58:06.5 (3486.47 s) | 156.46 MB (cap 160) | 15/15 PASS (`pass: true`) | PASS (every number below re-computed by hand; fronts, hemisphere words and wind sense right) | PASS (53 present per QA; KaTeX rendered; no labels or references) | PASS (no text over text; small contacts only, Should) | PASS (s39 move ≈ 2.5 s each way) | PASS (874 cues = script; both re-voiced cues match) | PASS (0 flashes; blue/red diverging and magma maps, no red/green-only) | n/a (retired) | **PASS** |
+
+**qa.json:** every gate is PASS.
+- `duration`: 3486.47 s against a narration end of 3483.95 s (window 120–3600 s).
+- `av_length`: 3486.47 against 3486.45 s.
+- `size`: 156.46 MB (budget 160).
+- `codec`, `black`, `frozen` (232 stretches, all narrated), `content`, `halves`: PASS.
+- `overlap`: 3387 frames, 0 hits.
+- `loudness`: −16.3 LUFS, −1.8 dBTP.
+- `flashes`: 0 per second.
+- `captions`: 874 cues; `subtitles`: SRT = VTT.
+- `physics`: 74 functions; `equations`: 53.
+
+## Pass 1: review-3 items in the rendered frames
+| item | status | evidence |
+|---|---|---|
+| M1 s48 slope triangle | **FIXED** | 48:56.5 (`crop_s48tri.jpg`): the horizontal leg is ≈ 66 px, the vertical leg ≈ 103 px, both legs ≈ 6 px. "50 km" sits above the leg, ≈ 25 px from the thick line; "1 km" is left of the vertical leg. Drawn ratio 103/66 = 1.56; the line's own slope is 380/245 = 1.55; the expected ratio is 80 × 1/50 = 1.6 (perspective takes off the rest). The legs close on the line. |
+| M2 keyword cross-fades | **FIXED** | No two text blocks are visible together at any swap I sampled.<br>41:08.0–41:09.1: "16 heights…" is gone by 41:08.4; "colder going up," starts at 41:08.7.<br>41:34.9–41:36.0: the Europe row leaves first; the tropics row fades to ≈ 30 % as "warmer again" starts at 41:35.6. The two are at different heights, and the tropics row is gone by 41:35.7.<br>49:32.7–49:33.8: "the side views…" is gone by 49:33.2; "11 heights…" starts at 49:33.5.<br>Also clean: 18:45.6–46.9 (s20f), 19:59.3–20:00.7 (s20g "same weight?" → h = p₀/(ρ₀g), with 0.36 s of empty column between), 24:02.9–04.3 (s21), 30:56.9–58.3 (s27b), 31:45.7–47.0 (s27c), 46:30 (s45), 56:37–56:39.4 (s60). |
+| M3 s39 globe move | **FIXED** | Tibet holds to 42:09.0. The turn over the pole runs 42:09.0–42:11.5 (≈ 2.5 s, no jolt between frames 0.5 s apart). The return runs 42:13.0–42:15.0 (≈ 2 s) beside the Tibet image. "Tibet < 600 hPa" leaves at 42:09.0, before the turn. |
+| M4 s47 two colour bars | **FIXED** | 47:40.14: the 850-hPa bar is fading and the map is dimming. 47:40.47: there is no bar. 47:40.80: the slice bar fades in. Only one bar is on screen at any time. |
+| S1 s38b bar on the darkened globe | NOT FIXED (as logged) | 40:53–41:03: the bar still sits on the K1-dimmed right half of the zoomed globe, and the K1 dark band has a hard vertical edge at x ≈ 1090 (`full/40_58.00.jpg`). → Should 2 |
+| S2 s39 credit | FIXED | 41:50.3: "Image: NASA VIIRS true colour…" is under the true-colour globe |
+| S3 e_s curve | FIXED | 32:32 and the recap at 57:15: the curve ends at the 50-hPa top, inside the plot |
+| S4 s05 top | FIXED | 3:21.7: the column fades out towards the top; "km 30" is faded, not clipped |
+| S5 s47/s48 map without a bar | FIXED | 47:40.5 onwards: plain grey ground under the slice |
+| S6 s57/s58 readouts, "2 °C" | FIXED | 55:19.8 and 55:53.3: the readouts are below the map. 56:01.4: "2 °C / colder" is beside the drop, 12.5 → 10.5 °C |
+| S7 "warm sector" | FIXED | It arrives at 55:28.5 and stays through s58 S2 (55:41.4) |
+| S8 s35 credit | NOT FIXED (as logged) | 37:30: the credit says "ERA5 10-m wind", but the frame shows isobars, not wind arrows. → Should 6 |
+| S9 s25 text | FIXED (the picture is still small) | 27:33.8: "Singapore, Nov mean ≈ 16.6 km" |
+| S10 s22 duplicate | FIXED | 25:39.6: "our estimate: 5.8 km" appears once |
+| S11 small text | NOT FIXED (as logged) | Brace labels at 7:05, 9:37 and 10:36; "300 m × 12 Pa/m…" at 11:10. → Should 9 |
+| S12 s12 fractions | FIXED | 7:55–8:12: the rows are separated. The s18 link still ends in the struck "s²" (12:45), and s10 "same step" is fine |
+| S13 "Brittany" | FIXED | 2:28.6: drawn clear and bright |
+| S14 s27c bracket | NOT FIXED (as logged) | 31:45.7–31:49: the gold "lowest 1.5 km" bracket is still a ≈ 10-px tick at the stack's front corner |
+| S15 contacts | PARTLY | s22: the balloon dots now run between the rod and the column (25:36), FIXED. s13/s14: "1 m" still sits on the slab's top face across its gold edge (8:28–9:54, `crop_slab.jpg`), Should 8 |
+| S16 s40 "1609 m" | FIXED | 42:50: a dashed level line runs to the summit town |
+| S17 QA record | FIXED | `pass: true`, equations 53 |
+| S18 W85/W86 tests | FIXED in fluidpy, manifest stale | fluidpy commit fc51cf0 (2026-10-30) holds `tests/diag/test_column_integral.py` and `test_front_by_level.py`. `manifest.json` lines 66 and 68 still say "not yet committed" / "uncommitted". → Should 12 |
+
+## Re-voiced sentences (s50 S3, s59 S2)
+| sentence | captions | on screen | audio (envelope; not heard) |
+|---|---|---|---|
+| s50 S3 51:04.68–51:08.90 "Later in this series, you'll learn to read these maps in detail." | VTT 00:51:04.675 → 00:51:08.900, 2 lines, text = script | "weather maps: later" (51:08.7) | Speech from 51:05.15 to 51:08.1, at −12 to −30 dB. The gaps before and after sit at −37 to −40 dB, the same floor as the neighbours. No sample jump at the splice edges (largest jumps are inside speech) |
+| s59 S2 56:17.05–56:22.22 "Later in this series, we'll learn to read weather maps like this one in detail." | VTT 00:56:17.050 → 00:56:22.225, text = script | "weather maps: later", then "why the wind circles →" on S3 | Speech from 56:17.5 to 56:21.3. Edges and gaps at −37 to −42 dB, like the neighbours; no step and no click |
+
+## Pass 2: fresh full pass
+**Physics and numbers re-checked by hand (all PASS):**
+- s02: 12/6371 = 0.0019 ≈ 0.002, and 0.002 × 150 mm = 0.3 mm.
+- s05: 101 325/9.81 = 10 329 ≈ 10 300 kg.
+- s08: 5 × 4 × 2.5 = 50 m³, and 50 × 1.2 = 60 kg.
+- s11: 101 325/(287 × 288.15) = 1.225.
+- s12: 1.293, 1.165, and (1.29 − 1.16)/1.29 = 10 %.
+- s16: 1.225 × 9.81 = 12.0 Pa/m; 100/12 ≈ 8 m; 300 × 12 = 36 hPa → 977 hPa.
+- s18: the units J kg⁻¹ K⁻¹ · K ÷ m s⁻² reduce to m.
+- s18b: 287 × 288.15/9.81 = 8430 m.
+- s20: 1013/e = 373 hPa and 1013/e² = 137 hPa. Both dots sit at the right axis positions (x = 151 and 97 px).
+- s20e:
+  - p₀/H = 12.0 Pa/m;
+  - the tangent meets p = 0 at z = H;
+  - the tangent's area construction gives 37 %: ∫_H^∞ p dz / ∫_0^∞ p dz = e⁻¹.
+- s20f:
+  - "5 km → 13.43 km: × 0.37": the dots sit at 559 and 206 hPa;
+  - H = 7.70 and 8.87 km.
+- s20g: 101 325/(1.225 × 9.81) = 8432 m.
+- s20b:
+  - 1/8.43 = 0.119;
+  - e^(−1/8.43) = 0.888;
+  - the gap to the tangent is 899.6 − 892.8 = 6.8 ≈ 7 hPa;
+  - 1st km −113.4, 2nd km −100.7 hPa; the bars are in proportion.
+- s20d: 8.43 × ln 2 = 5.84 km; 11.7 km ↔ 253 hPa. Both dots are placed right.
+- s23: (13 + 62)/11 ≈ 6.8 °C/km (labelled −6.5).
+- s27b: 29/18 = 1.61, and 1.61 × 0.020 × 1000 = 32 hPa.
+- s28–s30: ×2 per 10 °C (6, 12, 23, 42 hPa); 15/31.3 = 0.48; 15/20.4 = 0.73; dew point 13 °C.
+- s31: 12 ÷ 8 = 1.5 km; the crossing sits at 1.5 km.
+- s32: √(8² + 6²) = 10. The drawn legs are 90 and 65 px (expected 0.75).
+- s33: 233° = south-westerly; the arrow points north-east.
+- s34:
+  - 36 km/h;
+  - 1852/3600 = 0.514 m/s per knot;
+  - 19.4 kt;
+  - 60 × 1852 m = 111 km for 1°.
+- s36: 287/365 = 79 % ≈ 8 days in 10.
+- s40: 835 × e^(1.609/8.43) = 1010 hPa.
+- s44: anticlockwise round the low and clockwise round the high, seen from above, in the NH; the southern hemisphere is reversed.
+- s47 triangle: 93/63 px against a line slope of 1.49 (cold air to the west; the surface rises westward over it).
+- s48: the warm front rises eastward over the cold air.
+- s48b: 2.1 km in 92 km ≈ 1:44.
+- s50 symbols:
+  - triangles on the south side of the east–west cold front;
+  - half circles on the north side of the warm front.
+- s51: 1 m/cos 60° = 2 m.
+- s53: north-east trades in the NH, south-east trades in the SH, westerlies, and storms moving west → east.
+- s56: 997 → 962 hPa is −35 hPa in 13 h (12 → 01 UTC).
+- s58: 23.2/0.514 = 45.1 kt; the wind turns SSW (204°) → W (271°) at the cold front.
+
+**Data frames:**
+- Every real-data frame has a source line under the picture.
+- Every coloured data field has a colour bar with units, except the s60 recap map (Should 1).
+
+**House style:**
+- Opening title s00 and the hook.
+- Keywords only.
+- No headings, boxes, equation numbers, references or badges.
+- Gold picture-to-number links.
+- The recap runs one beat per sentence.
+- The series end card has the notebook lines (57:43–58:03).
+
+## Must fix (0)
+None. Every review-3 Must is gone in the rendered frames, and the fresh pass found no wrong physics or maths, no text over text, and no broken teaching step.
+
+## Should fix (16; cosmetic or polish, none blocks understanding)
+1. **s60 S7, 57:22–57:31: the recap 850-hPa temperature map has a source line but no colour bar.** House rule U-WB-R2 asks for a bar on every coloured field. Fix: add the −5…15 °C bar beside the thumbnail, or show the map without its colours.
+2. **s38b, 40:53–41:03 (review-3 S1, carried):**
+   - The colour bar sits on the dimmed right half of the zoomed globe (§5b: never on a globe "in every zoom state").
+   - The K1 dark band has a hard vertical edge at x ≈ 1090 (`full/40_58.00.jpg`).
+   - 41:47: the shells are still cut straight along 0°N.
+3. **s22, 25:14–25:39 and 25:49: the height axis reads low against the column, because of perspective.**
+   - The axis rod (x = −0.6) stands behind the column, so its zero sits ≈ 35 px above the column's base.
+   - Unzoomed (25:17–25:25): the "measured: half at 5.5 km" ring reads ≈ 3.3 km on the ticks.
+   - Zoomed (25:36): the ring reads ≈ 5.0 km and the "our estimate" end of the bracket reads ≈ 5.5 km.
+   - 25:49: the box top behind "16 km: 90 % below" reads ≈ 14 km.
+   - The labels carry the right numbers, and the 3-D placement is correct.
+   - Fix: put the ticks on the column's front-left edge (x ≈ −0.05), or put the ring and the bracket on the rod.
+4. **s02 S4→S5, 0:49.0–0:49.4: the cut-face globe cross-fades with a whole globe that is offset ≈ 140 px to the right.** For ≈ 0.3 s the ghost runs behind "true thickness / weather layer / Earth's radius" and through "6371 km". It has a hard vertical left edge (`crop_s02.jpg`). The text stays on top and is readable. Fix: register both globes on the same centre, or turn the half instead of cross-fading.
+5. **s47 S2, 47:41.1–41.5: the "Brest" map label stays on top of the rising slice wall** (red on red, then a ghost "rest"). Fade the map labels with the map before the wall rises.
+6. **s35, 37:18–37:38 (review-3 S8, carried):** the credit names "ERA5 10-m wind", but the frame shows isobars, not wind arrows. Credit the mean sea-level pressure.
+7. **s47 S4–S5, 47:55–48:02: "cold 1.29 · warm 1.16 kg/m³" are the 0 °C and 30 °C densities from s12,** not the slice's air masses. Those differ by ≈ 8 °C, about 3 % in density. Write "(0 °C vs 30 °C)" or give the slice's own numbers.
+8. **s13/s14, 8:28–9:54 (carried):** the right "1 m" sits on the slab's top face, across its gold edge; the left "1 m" touches the slab corner (`crop_slab.jpg`).
+9. **Small text (review-3 S11/S20, carried):**
+   - 7:05: "density · gas constant · temperature (K)" braces nearly touch.
+   - 6:20: "density temperature" reads as one phrase.
+   - 9:37: brace labels.
+   - 11:10: "300 m × 12 Pa/m…".
+   - 32:50: "set by temperature, not the air".
+10. **Lines leaving their axes:**
+    - s17, 11:55–12:00: the gold "falls fast" tangent runs past the 1000-hPa end and below z = 0.
+    - s25, 27:19–27:58: the Singapore sounding's surface point (+28 °C) is drawn ≈ 12 px right of the axis end (+22 °C).
+11. **s09, 5:40.1 (S1 end): two bare vertical axis lines with no labels.** Also, the °C/K scales are not linear: 0 → 15 is drawn ≈ 24 px, where 0 → −273 is ≈ 180 px. It should be ≈ 10 px.
+12. **manifest.json lines 66 and 68 are stale.** W85/W86 are committed in fluidpy (fc51cf0); change "not yet committed" / "uncommitted" to the commit.
+13. **s27c, 31:45–31:49 (carried):** the "lowest 1.5 km" bracket is a ≈ 10-px tick.
+14. **s39, 42:09.3–42:11.0:** "Andes" and "Rockies" are labelled ≈ 1.7 s after "Andes" is spoken (the §5b target is ≤ 1 s).
+15. **s21, 23:53.8:** the "radiosonde" link ends ≈ 55 px right of the balloon, in empty sky.
+16. **s18, 12:45 (carried):** the gold link ends in the struck "s²". **s25:** the 3-D tropopause map is small (≈ 660 × 360 px).
+
+## Verified (keep)
+- **The 68 keyword swaps:** every sampled swap leaves ≥ 0.25 s of clear column between the old and new text. That covers the three review-3 failures and all seven fix-3 K6 hit frames.
+- **The s39 globe move:** gentle and centred, with ≈ 2.5 s each way.
+- **The s47 single colour bar:** the old bar leaves before the new one arrives, and the map turns grey with its bar.
+- **The s48 slope triangle:** large, legs 6 px, "50 km" clear of the line, and the geometry right.
+- **Re-voiced s50/s59 sentences:** the captions match the script; the keywords say "weather maps: later"; no seam shows in the envelope.
+- Source lines on every data frame; colour bars on every coloured field except Should 1.
+
+## Limits
+- Audio not heard (envelope only).
+- Motion judged from frame runs.
+- Pixel sizes by eye from frames.
+- The 68 swaps were sampled (12 of 35 scenes frame by frame), not exhaustively; the rest rest on `swap_check.mjs` and the QA overlap gate.
+- No colour-blind simulation run.
+
+**Disk.** C: 53 GB free at the start and 52 GB at the end; G: 474 GB and then 472 GB. This review wrote 40 MB of frames to G: and small helper scripts to the session scratchpad on C:.
+
+## Overall: PASS
+ch00_weather_basics UF2 fix 3, review 4: 0 Must and 16 Should. The movie can become `qa_pass`; the user watches it before `/approve-movie`. The Shoulds are optional polish for a §5b retro-fit. If one of them is taken, Should 1 (the recap colour bar) and Should 3 (the s22 axis) are the most visible.
