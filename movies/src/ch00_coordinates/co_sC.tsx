@@ -76,6 +76,7 @@ const S31: React.FC = () => {
         <g opacity={tis}>{(PJ.tissot.pc as number[][]).map((L, i) => <path key={i} d={flatD(p, L) + "Z"} fill={C.gold} fillOpacity={0.25} stroke={C.gold} strokeWidth={3} />)}</g>
         <Callout f={f} lines="1/0.66 ≈ 1.5 ×" at={[1150, 470]} appear={tB} target={ct(iB)} c={C.gold} bend={50} />
         <Callout f={f} lines="≈ 4.9 ×" at={[1150, 590]} appear={tS} target={ct(iS)} c={C.gold} bend={40} />
+        <Keyword f={f} text="flattening stretches" at={[1150, 330]} s={T.floor} appear={AT(k, 0, "stretches")} out={tData - 18} />
         <Keyword f={f} text="how weather data arrive" at={[1150, 330]} s={T.floor} appear={tData} out={tPar - 18} />
         <Keyword f={f} text="every parallel as long" at={[1150, 330]} s={T.floor} appear={tPar} out={tB - 18} />
         <Lbl x={1150} y={386} t="as the equator" c={C.key} s={T.floor} o={win(f, tPar + 8, tB - 18)} />
@@ -120,6 +121,7 @@ const S32: React.FC = () => {
         <rect x={clip.x} y={clip.y} width={clip.w} height={clip.h} fill="none" stroke={C.grid} strokeWidth={3} />
         <g opacity={fin(f, tInf)}>{[0, 60, 80, 85].map((la) => <g key={la}><line x1={latTick(la)[0]} y1={latTick(la)[1]} x2={latTick(la)[0] + 14} y2={latTick(la)[1]} stroke={C.muted} strokeWidth={3} />
           <Lbl x={latTick(la)[0] + 22} y={latTick(la)[1]} t={`${la}°`} c={C.muted} s={T.floor} b={false} /></g>)}</g>
+        <Keyword f={f} text="Mercator, 1569" at={[1150, 320]} appear={AT(k, 0, "fifteen sixty nine")} out={tCirc - 18} />
         <Keyword f={f} text="circles stay circles" at={[1150, 320]} s={T.floor} appear={tCirc} out={tConf - 18} />
         <Keyword f={f} text="conformal" at={[1150, 320]} appear={tConf} c={C.gold} />
         <Lbl x={1150} y={390} t="rhumb line: straight" c={C.local} s={T.floor} o={fin(f, tNav)} />
@@ -306,6 +308,7 @@ const S35: React.FC = () => {
       </PolarMap>
       <Svg>
         <Lbl x={VP.cx + 20} y={VP.cy + 120} t="r" c={C.gold} s={T.calc} o={win(f, tR, tZ)} />
+        <Keyword f={f} text="one more map: from above a pole" at={[1000, 140]} s={T.floor} appear={AT(k, 0, "one more map")} out={tPol - 18} />
         <Keyword f={f} text="polar coordinates again" at={[1000, 140]} s={T.floor} appear={tPol} out={tZ - 18} />
         <Lbl x={1000} y={220} t="r: distance from the pole" c={C.key} s={T.floor} o={win(f, tR, tZ - 18)} />
         <Lbl x={1000} y={276} t="angle: longitude" c={C.key} s={T.floor} o={win(f, tLon, tZ - 18)} />
@@ -399,6 +402,7 @@ const S37: React.FC = () => {
         <Dash p={[O37[0] + 10 * s, O37[1]]} q={sx} c={C.second} w={3} />
         <g opacity={fin(f, 0)}><AnimatedWindArrow from={O37} to={[O37[0] + 10 * s, O37[1]]} speed={10} f={f} c={C.first} px={10} head={40} /></g>
         <Lbl x={O37[0] + 10 * s + 20} y={O37[1] + 40} t="10 m/s east" c={C.first} s={T.floor} />
+        <Keyword f={f} text="change coordinates: turn the axes" at={[1100, 330]} s={T.floor} appear={AT(k, 0, "change coordinates")} out={tEq - 18} />
         <Keyword f={f} text="same arrow, turned rulers" at={[1100, 820]} s={T.floor} appear={tSame} out={tAl - 18} />
         <Lbl x={1100} y={820} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tAl + 10) * fout(f, tDot - 18)} />
         <Keyword f={f} text="dot products with the new arrows" at={[1100, 820]} s={T.floor} appear={tDot} out={t30 - 18} />
@@ -431,7 +435,7 @@ const S38: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={fin(f, tLink)}>
+        <g opacity={fin(f, 0)}>
           <circle cx={O[0]} cy={O[1]} r={R} fill="none" stroke={C.first} strokeWidth={3} opacity={0.4} />
           <PoleThermometer x={O[0]} y={O[1]} s={0.8} />
           <Arrow p={[b[0] - 140, b[1]]} q={[b[0] + 140, b[1]]} color={C.second} w={4} head={22} o={0.4} />
@@ -616,7 +620,7 @@ const S42: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={fin(f, tBall) * fout(f, tFl - 12)}>
+        <g opacity={fin(f, 0) * fout(f, tFl - 12)}>
           <Train x={120} y={720} w={360} />
           <circle cx={300} cy={Math.min(yb, 600)} r={16} fill={C.key} stroke={C.bg} strokeWidth={3} />
           <Arrow p={[340, 420]} q={[340, 560]} color={BROWN} />
@@ -633,6 +637,7 @@ const S42: React.FC = () => {
           <path d={arcD([500, 600], 200, 200, 320)} fill="none" stroke={C.gold} strokeWidth={5} />
           <Lbl x={500} y={840} t="a turning frame: extra terms" c={C.neg} s={T.floor} a="middle" />
         </g>
+        <Keyword f={f} text="accelerations?" at={[1100, 360]} appear={6} out={tSame - 18} />
         <Keyword f={f} text="a = a′" at={[1100, 360]} appear={tSame} c={C.gold} />
         <Keyword f={f} text="same forces in both frames" at={[1100, 450]} s={T.floor} appear={tF} out={tFl - 18} />
         <Keyword f={f} text="the sum is the same" at={[1100, 760]} s={T.floor} appear={tSum} out={tTurn - 18} c={C.gold} />

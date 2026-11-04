@@ -159,3 +159,34 @@ Narration, timing.json and the sound mix unchanged.
 - s39: the three callout links converge on Fort Myers Beach (they meet only at their ends).
 
 Disk: before C: 51.8 GB / G: 470.8 GB free; after C: 51.5 GB / G: 470.1 GB free. Scratch stills: k6b1, k6r1 (obsolete), k6r2 (final).
+
+## 8. Render QA content / halves fix (2026-11-04)
+QA on the full render (`qa.json`): `content` FAIL (all empty 29.5–40.5, 1026.5–1039.5, 1734–1739.5, 2545–2550.5 s) and
+`halves` FAIL (21 spans > 10 s, 34 > 3 s). Mapping every span > 3 s from `content_scan.json` to scene and sentence showed the
+same cause everywhere: **scenes opened with an empty half and filled only when the first item was spoken** (often sentence 2–5).
+Not the GeoMap `<div>` change, and not images failing to load: s02's "empty panel" is the Ground plate (#22304a, 23 levels off
+the background, below the gate's 28 threshold) waiting for the origin at sentence 2; s18 (side view at sentence 3), s28 (first
+mini picture at sentence 2), s38 (picture at sentence 3) and s42 (ball scene at sentence 5) had nothing on the left; the maths
+zone of s02–s10, s14–s25, s29, s31, s32, s35, s37, s42 stayed empty until the first equation/keyword.
+Fixes (HOUSE_STYLE §5: the picture is there from a scene's first frame; keywords only, said when spoken):
+- left: Ground plate gets a visible edge (#4a5677, 3 px; a guide colour, so links over it are not "axis" crossings); s18 side
+  view from frame 0 (position vector and Brest dot at sentence 1); s28 first picture from frame 0; s38 circle, station and balloon
+  from frame 0; s42 train and ball scene from frame 0 (the drop still starts at sentence 5).
+- right: an opening keyword per scene from the words of sentence 0/1, in the slot of the column's first item, out 18 frames
+  before it (swap rule): s02 "a flat map", s03 "unit vectors", s04 "how far · which direction", s05 "back to x and y", s06 "maths
+  angle or compass bearing?", s07 "radians", s08 "their own unit vectors", s09 "how fast do they turn?", s10 "a wind in polar
+  coordinates", s14 "not flat", s15 "the Earth", s16 "how far north or south", s17 "how far east or west", s18 "Brest in space" /
+  "position vector" / "two right triangles", s19 "the distance from the axis", s20 "distances on the sphere", s21 "going east", s22
+  "weather data" → "ERA5: every 0.25°", s23 "areas", s25 "local arrows turn as you move", s28 "why so many?", s29 "the shortest
+  way", s31 "flattening stretches", s32 "Mercator, 1569", s35 "one more map: from above a pole", s37 "change coordinates: turn the
+  axes", s42 "accelerations?".
+Check on stills (movie_qa content_scan metric — 480 px, bg #171f33, thr 28, < 0.2 %, y 40–835 — on 4086 K6 stills + 984 extra
+stills every 1 s through the first 45 s of each changed scene, `S/stills/ct1`): **no empty content area, no half empty > 10 s**;
+remaining WARN spans 3.1–7.7 s (s04 3.1, s07 5.1, s13 7.7, s22 3.1, s24 4.0, s26 4.9, s30 3.3, s33 3.2; sampling of the K6 list
+is sparse there, the render scan will be finer).
+Static gates: tsc 0 · at_check 481 refs, 0 failures · swap_check 413 elements, 0 pairs, 0 swaps < 8 frames · cam_speed 0 ·
+eq_check 29/29 · SSR step 10 10 497 scene-frames, 0 errors.
+K6 (`S/stills/k6r2`, 2076 + 250 frames re-shot): one interim FAIL (55 link-axis: the first panel edge was muted grey = "axis");
+after the colour change **PASS 4086 frames, 0 hits** (`S/k6r5.json`).
+Chunks to re-render (4000-frame chunks): c00 c01 c02 c03 c05 c06 c07 c08 c09 c10 c11 c13 c14 c15 c16 c17 c19
+(unchanged: c04 c12 c18 c20 c21).

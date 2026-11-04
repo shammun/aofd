@@ -42,7 +42,7 @@ const pp = (x: number, y: number): Pt => [PO[0] + x * PU, PO[1] - y * PU];
 const BAL = pp(3, 4);
 const Ground: React.FC<{ o?: number; grid?: number }> = ({ o = 1, grid = 0.5 }) => o <= 0 ? null : (
   <g opacity={o}>
-    <rect x={110} y={60} width={880} height={780} rx={18} fill="#22304a" />
+    <rect x={110} y={60} width={880} height={780} rx={18} fill="#22304a" stroke="#4a5677" strokeWidth={3} />
     {Array.from({ length: 9 }, (_, i) => i - 1).map((i) => <line key={`v${i}`} x1={pp(i, 0)[0]} y1={70} x2={pp(i, 0)[0]} y2={830} stroke={C.grid} strokeWidth={1.5} opacity={grid} />)}
     {Array.from({ length: 8 }, (_, j) => j - 1).map((j) => <line key={`h${j}`} x1={120} y1={pp(0, j)[1]} x2={980} y2={pp(0, j)[1]} stroke={C.grid} strokeWidth={1.5} opacity={grid} />)}
   </g>
@@ -198,6 +198,7 @@ const S02: React.FC = () => {
         <Lbl x={BAL[0] + 40} y={BAL[1] - 20} t="(3, 4)" c={C.key} s={T.calc} o={fin(f, tPair)} />
         <CurvedLink f={f} from={[BAL[0] + 60, BAL[1] + 10]} to={pp(1.5, 0.1)} start={tPair + 8} bend={60} />
         <CurvedLink f={f} from={[BAL[0] + 120, BAL[1] + 10]} to={pp(3.1, 2)} start={tPair + 14} bend={-40} />
+        <Keyword f={f} text="a flat map" at={[1100, 160]} appear={AT(k, 0, "flat map")} out={tOrig - 18} />
         <Keyword f={f} text="origin" at={[1100, 160]} appear={tOrig} />
         <CurvedLink f={f} from={[1090, 180]} to={[PO[0] + 30, PO[1] - 40]} start={tOrig + 8} end={tPair - 12} bend={60} />
         <Keyword f={f} text="axes" at={[1100, 270]} appear={tAxW} />
@@ -237,6 +238,7 @@ const S03: React.FC = () => {
         {f >= tMove ? places.slice(0, Math.min(5, i0 + 1)).map((p, i) => unitAt(p, 0.35, `g${i}`)) : null}
         <Balloon p={pp(at[0], at[1])} />
         {unitAt(at, fin(f, tMove), "b")}
+        <Keyword f={f} text="unit vectors" at={[1100, 160]} appear={AT(k, 0, "unit vector")} out={tSum - 18} />
         <Keyword f={f} text="same everywhere" at={[1100, 300]} appear={tSame} out={tIns - 18} />
         <CurvedLink f={f} from={[1160, 215]} to={pp(1.5, 0.15)} ctl={[400, 230]} start={tSum + 10} end={tSame - 10} />
         <CurvedLink f={f} from={[1390, 215]} to={pp(3.15, 2)} start={tSum + 16} end={tSame - 10} bend={40} />
@@ -298,6 +300,7 @@ const S04: React.FC = () => {
         <path d={arcD(PO, 190, 8, 70)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
         <ArcHead c={PO} r={190} a={70} dir={1} col={C.gold} o={fin(f, tAnti)} />
         <Lbl x={1100} y={700} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tAnti)} />
+        <Keyword f={f} text="how far · which direction" at={[1100, 700]} s={T.floor} appear={AT(k, 0, "two other numbers")} out={tAnti - 18} />
         <Keyword f={f} text="polar coordinates" at={[1100, 790]} appear={tPol} />
       </Svg>
       <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={fin(f, tPy)} />
@@ -335,6 +338,7 @@ const S05: React.FC = () => {
         </g>
         <Station />
         <Balloon p={BAL} />
+        <Keyword f={f} text="back to x and y" at={[1100, 640]} appear={AT(k, 0, "back the other way")} out={tEq - 18} />
         <CurvedLink f={f} from={[1140, 335]} to={pp(1.5, 0.15)} ctl={[900, 700]} start={tC + 10} end={t4 - 4} />
         <CurvedLink f={f} from={[1250, 420]} to={pp(3.15, 3.2)} start={t4 + 6} end={tEq - 10} bend={20} />
       </Svg>
@@ -379,6 +383,7 @@ const S06: React.FC = () => {
           <Lbl x={W1[0] + 24} y={W1[1]} t="E" c={C.muted} s={T.key} />
         </g>
         <Lbl x={1250} y={660} t="a west wind blows east" c={C.key} s={T.floor} o={fin(f, AT(k, 5, "towards the east"))} />
+        <Keyword f={f} text="maths angle or compass bearing?" at={[1100, 790]} s={T.floor} appear={AT(k, 0, "warning")} out={tCheck - 18} />
         <Keyword f={f} text="check which angle" at={[1100, 790]} appear={tCheck} />
       </Svg>
       <TeX s={String.raw`90^{\circ}-53^{\circ}=37^{\circ}`} x={1100} y={200} size={84} o={fin(f, tCalc)} />
@@ -425,6 +430,7 @@ const S07: React.FC = () => {
           <Lbl x={O2[0] + 40} y={O2[1] - 155} t="1 km" c={C.second} s={T.key} o={fin(f, t1)} />
           <Lbl x={O2[0] + 700 * Math.cos(27 * D2R) + 30} y={O2[1] - 700 * Math.sin(27 * D2R) - 30} t="10 km" c={C.second} s={T.key} o={fin(f, t10 + 20)} />
         </g>
+        <Keyword f={f} text="radians" at={[1100, 420]} appear={AT(k, 0, "building block")} out={tArc - 18} />
         <Keyword f={f} text="arc length" at={[1100, 420]} appear={tArc} out={tEasy - 18} />
         <Keyword f={f} text="same angle, ten times the distance" at={[1080, 700]} appear={tSame} s={T.floor} targets={[[O2[0] + 330 * Math.cos(26 * D2R), O2[1] - 330 * Math.sin(26 * D2R)]]} />
         <Keyword f={f} text="keep this rule" at={[1080, 800]} appear={tKeep} s={T.floor} />
@@ -461,6 +467,7 @@ const S08: React.FC = () => {
           <Arrow p={[150, 800]} q={[250, 800]} color={C.second} w={6} head={24} o={0.55} />
           <Arrow p={[150, 800]} q={[150, 700]} color={C.second} w={6} head={24} o={0.55} />
         </g>
+        <Keyword f={f} text="their own unit vectors" at={[1100, 760]} appear={AT(k, 0, "own unit vectors")} out={tDep - 18} />
         <Keyword f={f} text="depend on where you are" at={[1100, 760]} appear={tDep} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf r}`} x={b[0] + er[0] * (L + 36)} y={b[1] + er[1] * (L + 36)} size={60} ax={0.5} c={C.second} o={fin(f, tR + 10)} />
@@ -501,6 +508,7 @@ const S09: React.FC = () => {
           <Arrow p={tipT} q={[tipT[0] - 150 * Math.cos(th0 * D2R), tipT[1] + 150 * Math.sin(th0 * D2R)]} color={C.neg} w={7} head={30} o={fout(f, tSwing - 12)} />
         </g>
         <Lbl x={at(th0 + dth / 2, R + 46)[0]} y={at(th0 + dth / 2, R + 46)[1]} t="dθ" c={C.second} s={T.key} a="middle" o={fin(f, tTip) * fout(f, tSwing - 12)} />
+        <Keyword f={f} text="how fast do they turn?" at={[1080, 760]} s={T.floor} appear={AT(k, 0, "How fast")} out={tSwing - 18} />
         <Keyword f={f} text="each swings towards the other" at={[1080, 760]} s={T.floor} appear={tSwing} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf r}`} x={at(th0 - 8, R + 50)[0]} y={at(th0 - 8, R + 50)[1]} size={60} ax={0.5} c={C.second} />
@@ -537,6 +545,7 @@ const S10: React.FC = () => {
         <CurvedLink f={f} from={[1110, 400]} to={[(b[0] + sr[0]) / 2 + 10, (b[1] + sr[1]) / 2 - 10]} start={tR + 8} end={tSay - 10} bend={60} />
         <CurvedLink f={f} from={[1110, 520]} to={[(b[0] + st[0]) / 2, (b[1] + st[1]) / 2 + 12]} start={tT + 8} end={tSay - 10} bend={-60} />
         <Lbl x={1100} y={660} t="clockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tCw)} />
+        <Keyword f={f} text="a wind in polar coordinates" at={[1100, 150]} s={T.floor} appear={AT(k, 0, "a wind")} out={tDot - 18} />
         <Keyword f={f} text="same wind, new components" at={[1100, 800]} s={T.floor} appear={SS(k, 9)} />
       </Svg>
       <TeX s={String.raw`\mathbf u=10\ \mathrm{m/s}\ \text{east}`} x={b[0] - 40} y={b[1] - 110} size={48} ax={1} c={C.first} o={fin(f, tWind)} />
@@ -773,6 +782,7 @@ const S14: React.FC = () => {
         <Lbl x={P3([R, 0, H * 0.6 + 1.0])[0] + 12} y={P3([R, 0, H * 0.6 + 1.0])[1]} t="w" c={C.local} s={T.floor} o={fin(f, tThree) * fout(f, tZh - 12)} />
         <Lbl x={P3([4.2, -1.5, 0])[0]} y={P3([4.2, -1.5, 0])[1] + 34} t="−" c={C.neg} s={T.calc} a="middle" o={fin(f, tSign)} />
         <Lbl x={P3([4.2, -1.5, H])[0]} y={P3([4.2, -1.5, H])[1] - 34} t="+" c={C.second} s={T.calc} a="middle" o={fin(f, tSign)} />
+        <Keyword f={f} text="not flat" at={[1160, 140]} s={T.floor} appear={AT(k, 0, "isn't flat")} out={AT(k, 1, "eyewall") - 18} />
         <Keyword f={f} text="eyewall" at={[1160, 140]} s={T.floor} appear={AT(k, 1, "eyewall")} out={tCyl - 18} />
         <Keyword f={f} text="cylindrical coordinates" at={[1160, 140]} s={T.key} appear={tCyl} />
         <Lbl x={1160} y={250} t="(r, θ, z)" c={C.key} s={T.calc} o={fin(f, tCyl + 10)} />

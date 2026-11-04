@@ -78,6 +78,7 @@ const S15: React.FC = () => {
       <Svg>
         <Lbl x={1100} y={170} t="r" c={C.first} s={T.calc} o={fin(f, tR)} />
         <Lbl x={1100} y={300} t="a ≈ 6400 | 6371 km" c={C.key} s={T.key} o={fin(f, tA)} />
+        <Keyword f={f} text="the Earth" at={[1100, 480]} appear={AT(k, 0, "the Earth")} out={tSph - 18} />
         <Keyword f={f} text="spherical coordinates" at={[1100, 480]} appear={tSph} />
         <Keyword f={f} text="latitude · longitude" at={[1100, 600]} appear={tLL} />
       </Svg>
@@ -121,6 +122,7 @@ const S16: React.FC = () => {
       <GlobeFrame id="s16k" zoom={0} disc={G0} />
       <GSrc />
       <Svg>
+        <Keyword f={f} text="how far north or south" at={[1100, 150]} appear={AT(k, 0, "how far north")} out={tPhi - 18} />
         <Keyword f={f} text="latitude φ" at={[1100, 150]} appear={tPhi} />
         <Lbl x={1100} y={260} t="48.4° N" c={C.key} s={T.calc} o={fin(f, AT(k, 7, "forty eight point four"))} />
         <Keyword f={f} text="parallel" at={[1100, 380]} appear={AT(k, 8, "parallel")} c={C.second} />
@@ -166,6 +168,7 @@ const S17: React.FC = () => {
       <GlobeFrame id="s17k" zoom={0} disc={G0} />
       <GSrc />
       <Svg>
+        <Keyword f={f} text="how far east or west" at={[1100, 140]} appear={AT(k, 0, "how far east")} out={AT(k, 1, "meridians") - 18} />
         <Keyword f={f} text="meridians" at={[1100, 140]} appear={AT(k, 1, "meridians")} />
         <Keyword f={f} text="prime meridian" at={[1100, 240]} appear={AT(k, 2, "prime meridian")} c={C.gold} />
         <Keyword f={f} text="longitude λ" at={[1100, 340]} appear={tLam} />
@@ -199,19 +202,19 @@ const S18: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <g opacity={fin(f, tSide)}>
+        <g opacity={fin(f, 0)}>
           <circle cx={A[0]} cy={A[1]} r={RS} fill="#22304a" stroke={C.local} strokeWidth={3} />
           <line x1={A[0] - RS - 30} y1={A[1]} x2={A[0] + RS + 30} y2={A[1]} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" />
           <line x1={A[0]} y1={A[1] + RS + 30} x2={A[0]} y2={A[1] - RS - 40} stroke={C.local} strokeWidth={3} />
           <Lbl x={A[0]} y={A[1] - RS - 70} t="axis" c={C.muted} s={T.floor} a="middle" b={false} />
           <Lbl x={A[0]} y={A[1] + RS + 56} t="equator plane" c={C.muted} s={T.floor} a="middle" b={false} />
-          <line x1={A[0]} y1={A[1]} x2={pB[0]} y2={pB[1]} stroke={C.first} strokeWidth={10} strokeLinecap="round" />
+          <line x1={A[0]} y1={A[1]} x2={pB[0]} y2={pB[1]} stroke={C.first} strokeWidth={10} strokeLinecap="round" opacity={fin(f, tVec)} />
           <path d={arcD(A, 70, 0, BREST[0])} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tPhi)} />
           <Lbl x={A[0] + 88} y={A[1] - 34} t="φ" c={C.gold} s={T.key} o={fin(f, tPhi)} />
           <line x1={pB[0]} y1={pB[1]} x2={foot[0]} y2={foot[1]} stroke={C.second} strokeWidth={8} opacity={fin(f, tZ)} />
           <line x1={A[0]} y1={A[1] + 6} x2={foot[0]} y2={foot[1] + 6} stroke={C.second} strokeWidth={8} opacity={fin(f, tR)} />
           <RightTick at={foot} u1={[-1, 0]} u2={[0, -1]} c={C.ink} o={fin(f, tZ)} />
-          <circle cx={pB[0]} cy={pB[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={4} />
+          <circle cx={pB[0]} cy={pB[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tVec)} />
         </g>
         <g opacity={fin(f, tTop)}>
           <circle cx={B[0]} cy={B[1]} r={RS} fill="#22304a" stroke={C.local} strokeWidth={3} />
@@ -231,6 +234,9 @@ const S18: React.FC = () => {
         <CurvedLink f={f} from={[1170, 600]} to={[foot[0] + 12, (pB[1] + foot[1]) / 2 + 30]} start={tN1 + 10} bend={-30} end={tN2 - 6} />
         <CurvedLink f={f} from={[1170, 680]} to={[(A[0] + foot[0]) / 2, A[1] + 16]} start={tN2 + 10} bend={-20} end={LEN(k) - 24} />
         <Keyword f={f} text="polar coordinates again" at={[1080, 120]} s={T.floor} appear={AT(k, 9, "polar coordinates")} out={tAll - 18} />
+        <Keyword f={f} text="Brest in space" at={[1080, 220]} s={T.floor} appear={AT(k, 0, "Brest")} out={tAll - 18} />
+        <Keyword f={f} text="position vector" at={[1080, 300]} s={T.floor} c={C.first} appear={AT(k, 1, "position vector")} out={tAll - 18} />
+        <Keyword f={f} text="two right triangles" at={[1080, 470]} s={T.floor} appear={AT(k, 2, "right triangle")} out={tAll - 18} />
       </Svg>
       <TeX s={String.raw`a\sin\varphi`} x={A[0] + RS + 12} y={(pB[1] + foot[1]) / 2} size={48} c={C.second} o={fin(f, tZ)} />
       <TeX s={String.raw`a\cos\varphi`} x={A[0] + 12} y={A[1] + 50} size={52} c={C.second} o={fin(f, tR)} />
@@ -277,6 +283,7 @@ const S19: React.FC = () => {
       <GlobeFrame id="s19k" zoom={0} disc={G0} />
       <GSrc />
       <Svg><Keyword f={f} text="cylindrical coordinate" at={[1150, 130]} s={T.floor} appear={AT(k, 0, "cylindrical coordinate")} />
+        <Keyword f={f} text="the distance from the axis" at={[1150, 250]} s={T.floor} appear={AT(k, 0, "distance from the axis")} out={tOm - 18} />
         {/* the three ground speeds: each just outside the globe where its parallel meets the limb (K6: no readout on the picture) */}
         {lats.map((la, i) => { const q = limbTag(Gs, G0, la); return <Lbl key={`t${la}`} x={q[0]} y={q[1]} t={tags[i].t} c={C.first} s={T.floor} o={fin(f, tags[i].at)} />; })}
         <Keyword f={f} text="spin and winds: by latitude" at={[1150, 810]} s={T.floor} appear={tWhy} /></Svg>
@@ -313,6 +320,7 @@ const S20: React.FC = () => {
       <GlobeFrame id="s20k" zoom={0} disc={G0} />
       <GSrc />
       <Svg><Keyword f={f} text="same at every latitude" at={[1100, 640]} s={T.floor} appear={tSame} c={C.gold} />
+        <Keyword f={f} text="distances on the sphere" at={[1100, 150]} s={T.floor} appear={AT(k, 0, "distances")} out={tRule - 18} />
         <Lbl x={1100} y={790} t="1′ ≈ 1.85 km = 1 nautical mile" c={C.key} s={T.floor} o={fin(f, tMin + 20)} /></Svg>
       <TeX s={l1} x={1100} y={150} size={80} o={fin(f, tRule)} />
       <TeX s={l2} x={1100} y={260} size={60} c={C.muted} o={fin(f, tRule + 30) * 0.6} />
@@ -355,6 +363,7 @@ const S21: React.FC = () => {
       <Svg>
         <Lbl x={1100} y={560} t="cos φ:" c={C.muted} s={T.floor} o={fin(f, tE)} />
         {cosv.map((c, i) => <Lbl key={i} x={1260 + i * 140} y={560} t={c} c={C.key} s={T.key} o={fin(f, steps[i].at)} />)}
+        <Keyword f={f} text="going east" at={[1100, 200]} appear={AT(k, 0, "east")} out={tDx - 18} />
         <Keyword f={f} text="like segments of an orange" at={[1100, 800]} s={T.floor} appear={tOr} />
       </Svg>
       <Layered parts={parts} x={1100} y={200} size={64} layers={[{ t: "all", o: fin(f, tDx) }, { t: [], u: [1], o: fin(f, tCos) }]} />
@@ -401,6 +410,8 @@ const S22: React.FC = () => {
         <Lbl x={(cb.a[0] + cb.b[0]) / 2} y={cb.b[1] + 34} t="18.5 km" c={C.key} s={T.floor} a="middle" o={fin(f, AT(k, 2, "eighteen and a half"))} />
         <Lbl x={cs.a[0] - 14} y={(cs.a[1] + cs.b[1]) / 2} t="27.8 km" c={C.key} s={T.floor} a="end" o={fin(f, tS)} />
         <Lbl x={cs.a[0]} y={cs.b[1] + 34} t="5.7 km" c={C.key} s={T.floor} a="middle" o={fin(f, AT(k, 3, "under six"))} />
+        <Keyword f={f} text="weather data" at={[1300, 160]} s={T.floor} appear={AT(k, 0, "weather data")} out={AT(k, 1, "ERA5") - 18} />
+        <Keyword f={f} text="ERA5: every 0.25°" at={[1300, 160]} s={T.floor} appear={AT(k, 1, "ERA5")} out={tThin - 18} />
         <Keyword f={f} text="thinner towards the poles" at={[1300, 160]} s={T.floor} appear={tThin} />
         <Lbl x={1300} y={260} t="forgot the cos φ:" c={C.neg} s={T.floor} o={fin(f, tFor)} />
         <Lbl x={1300} y={320} t="× 4.9 too wide" c={C.neg} s={T.floor} o={fin(f, tFor + 10)} />
@@ -445,6 +456,7 @@ const S23: React.FC = () => {
         <Lbl x={1100} y={390} t="width a cos φ δλ" c={C.gold} s={T.floor} o={fin(f, tPatch + 20) * fout(f, tAdd)} />
         <Lbl x={1100} y={450} t="height a δφ" c={C.gold} s={T.floor} o={fin(f, tPatch + 10) * fout(f, tAdd)} />
         <Keyword f={f} text="half of the Earth" at={[1100, 380]} s={T.floor} appear={AT(k, 8, "half of the whole Earth")} out={tW - 18} c={C.first} />
+        <Keyword f={f} text="areas" at={[1100, 600]} appear={AT(k, 0, "areas")} out={tAdd - 18} />
         <Keyword f={f} text="weight each latitude by cos φ" at={[1100, 380]} s={T.floor} appear={tW} />
       </Svg>
       <TeX s={d1} x={1100} y={140} size={72} o={fin(f, tdA)} />
@@ -542,6 +554,7 @@ const S25: React.FC = () => {
       <GlobeFrame id="s25k" zoom={0} disc={G0} />
       <GSrc />
       <Svg><Keyword f={f} text="like θ̂ round a circle" at={[1100, 330]} s={T.floor} appear={AT(k, 5, "exactly like theta hat")} out={tN - 18} />
+        <Keyword f={f} text="local arrows turn as you move" at={[1100, 450]} s={T.floor} appear={AT(k, 0, "local arrows")} out={tEq - 18} />
         <Lbl x={1100} y={330} t="111 km north → up tilts 1°" c={C.key} s={T.floor} o={fin(f, tN)} />
         <Keyword f={f} text="speed / radius = how fast they turn" at={[1100, 800]} s={T.floor} appear={tSR} /></Svg>
       <CalcStack f={f} x={1360} y={110} size={54} rows={[
@@ -649,7 +662,8 @@ const S28: React.FC = () => {
   const t1 = SS(k, 2), t1b = SS(k, 3), t2 = SS(k, 4), t2b = SS(k, 5), t3 = SS(k, 6), t3b = SS(k, 7), tRow = SS(k, 8);
   const row = prog(f, tRow, tRow + 30);
   const pos = (i: number): { x: number; y: number; s: number } => ({ x: mix(500 + 0 * i, 330 + i * 630, row), y: mix(400, 360, row), s: mix(1, 0.62, row) });
-  const op = (i: number) => (row > 0 ? 1 : i === 0 ? win(f, t1, t2 - 18) : i === 1 ? win(f, t2, t3 - 18) : fin(f, t3));
+  // the first picture is up from the scene's first frame (HOUSE_STYLE §5: no empty half > 3 s)
+  const op = (i: number) => (row > 0 ? 1 : i === 0 ? win(f, 0, t2 - 18) : i === 1 ? win(f, t2, t3 - 18) : fin(f, t3));
   const pic = (i: number) => {
     const { x, y, s } = pos(i);
     return <g key={i} opacity={op(i)} transform={`translate(${x} ${y}) scale(${s})`}>
@@ -668,6 +682,7 @@ const S28: React.FC = () => {
     <Scene>
       <Svg>
         {[0, 1, 2].map(pic)}
+        <Keyword f={f} text="why so many?" at={[1250, 160]} appear={AT(k, 0, "so many")} out={t1 - 18} />
         <Keyword f={f} text="1 · shape" at={[1250, 160]} appear={t1} out={row > 0 ? undefined : t2 - 18} />
         <Lbl x={1250} y={300} t="r = constant · r = a" c={C.key} s={T.floor} o={win(f, t1b, t2 - 18)} />
         <Keyword f={f} text="2 · measurement" at={[1250, 160]} appear={t2} out={t3 - 18} />
@@ -719,6 +734,7 @@ const S29: React.FC = () => {
       <GlobeFrame id="s29k" zoom={0} disc={G0} />
       <GSrc />
       <Svg>
+        <Keyword f={f} text="the shortest way" at={[1100, 130]} appear={AT(k, 0, "shortest way")} out={AT(k, 2, "great circle") - 18} />
         <Keyword f={f} text="great circle" at={[1100, 130]} appear={AT(k, 2, "great circle")} c={C.gold} />
         <Lbl x={1100} y={560} t="bearing ≈ 312° (north-west)" c={C.key} s={T.floor} o={fin(f, tBrg)} />
         <Lbl x={1100} y={630} t="highest ≈ 62° N" c={C.key} s={T.floor} o={fin(f, tVx)} />
