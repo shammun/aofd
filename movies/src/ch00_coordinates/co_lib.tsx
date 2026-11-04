@@ -14,6 +14,7 @@ import { Arrow, Lbl, Pt, Svg, clamp } from "../house/kit/draw";
 import { GlobeCam, GlobeMesh, GProj, coastPath, globeCam, globeProj, useTex, Graticule } from "./kit_co/globe";
 import { View3D } from "./kit_co/three3d";
 import { lutCss } from "./kit_co/wb";
+import { CurvedLink } from "../house/kit/extras";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -111,8 +112,13 @@ export const GeoMap: React.FC<{ id: string; B: MapBox; o?: number; children: (P:
   if (o <= 0) return null;
   const P = mapP(B);
   const F = 60 * fade;
+  // K6 clean-up: the map body sits in an overflow-hidden <div> of the map box (as well as its clip-path), so the house BoxProbe —
+  // which crops <image> boxes to overflow-clipping ancestors but not to SVG clip-paths — measures a raster at its visible size
+  // (build-1 K6: 120 false text-img hits from the full, unclipped HRRR / GOES image extents). The drawing is unchanged.
   return (
-    <Svg o={o}>
+    <AbsoluteFill style={{ opacity: o }}>
+    <div style={{ position: "absolute", left: B.x, top: B.y, width: B.w, height: B.h, overflow: "hidden" }}>
+    <svg width={1920} height={1080} style={{ position: "absolute", left: -B.x, top: -B.y }}>
       <defs>
         <clipPath id={`clip_${id}`}><rect x={B.x} y={B.y} width={B.w} height={B.h} /></clipPath>
         {F > 0 ? <linearGradient id={`fx_${id}`} x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="white" stopOpacity={0} /><stop offset={F / B.w} stopColor="white" />
@@ -126,9 +132,13 @@ export const GeoMap: React.FC<{ id: string; B: MapBox; o?: number; children: (P:
         <rect x={B.x} y={B.y} width={B.w} height={B.h} fill={sea} />
         {children(P)}
       </g></g></g>
+    </svg>
+    </div>
+    <Svg>
       {frame * (1 - fade) > 0 ? <rect x={B.x} y={B.y} width={B.w} height={B.h} fill="none" stroke={C.grid} strokeWidth={3} opacity={frame * (1 - fade)} /> : null}
       {over ? over(P) : null}
     </Svg>
+    </AbsoluteFill>
   );
 };
 export const Place: React.FC<{ p: Pt; t?: string; o?: number; dx?: number; dy?: number; a?: "start" | "middle" | "end"; c?: string; r?: number; s?: number; italic?: boolean }> = ({
@@ -165,6 +175,22 @@ export const BmRaster: React.FC<{ id: string; kind: string; B: PBox; o?: number;
     <g opacity={o}>
       {masked ? <defs><mask id={`bm_${id}`}><image href={IMGS.bmA(kind)} x={a[0]} y={a[1]} width={w} height={h} preserveAspectRatio="none" /></mask></defs> : null}
       <image href={IMGS.bm(kind)} x={a[0]} y={a[1]} width={w} height={h} preserveAspectRatio="none" mask={masked ? `url(#bm_${id})` : undefined} />
+    </g>
+  );
+};
+
+/** K6 clean-up: a readout in the text column with a gold link that always leaves from the text's LEFT edge (the house K3
+ * Callout starts its link on the box edge facing the target, which for a wide label below another label is the top edge:
+ * the link then runs up through the label above). Lines stack downward at 1.25 × size; anchor start. Place inside <Svg>. */
+export const SideCallout: React.FC<{ f: number; lines: string[] | string; at: Pt; appear: number; out?: number; target: Pt | null; s?: number; c?: string;
+  bend?: number }> = ({ f, lines, at, appear, out, target, s = 54, c = C.key, bend = 30 }) => {
+  const L = Array.isArray(lines) ? lines : [lines];
+  const op = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1);
+  if (op <= 0) return null;
+  return (
+    <g opacity={op}>
+      {L.map((t, k) => <Lbl key={k} x={at[0]} y={at[1] + k * 1.25 * s} t={t} c={c} s={s} />)}
+      {target ? <CurvedLink f={f} from={[at[0] - 14, at[1]]} to={target} start={appear + 6} bend={bend} /> : null}
     </g>
   );
 };

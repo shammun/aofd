@@ -40,6 +40,19 @@ const wlab = (G: GProj, v: V3, t: string, c: string, o = 1, dx = 16, dy = 0, a: 
   <Lbl x={G.pw(v)[0] + dx} y={G.pw(v)[1] + dy} t={t} c={c} s={s} a={a} o={o} />;
 const scl = (v: V3, s: number): V3 => [v[0] * s, v[1] * s, v[2] * s];
 const mer = (lon: number, a = -89, b = 89): [number, number][] => Array.from({ length: 61 }, (_, i) => [a + ((b - a) * i) / 60, lon]);
+/** a place name on the globe at its own spot: an outlined map label (data-lc-maplabel, house K6 spot-label class) */
+const plab = (G: GProj, v: V3, t: string, c: string, o = 1, dx = 16, dy = 0, a: "start" | "middle" | "end" = "start") =>
+  o <= 0 ? null : <g data-lc-maplabel="1">{wlab(G, v, t, c, o, dx, dy, a)}</g>;
+/** where a parallel leaves the visible disc on the right (its rightmost visible point, or the limb at that height if the whole
+ * parallel is visible): a readout for that parallel sits just outside the globe there (K6: no must-class text on the picture) */
+const limbTag = (G: GProj, disc: { c: Pt; r: number }, lat: number, gap = 30): Pt => {
+  let best: Pt | null = null;
+  for (let lo = -180; lo < 180; lo += 2) if (G.vis(lat, lo)) { const q = G.p(lat, lo); if (!best || q[0] > best[0]) best = q; }
+  const y = best ? best[1] : disc.c[1];
+  const yy = Math.max(Math.min(disc.c[1], y + 22), y - 22);   // the glyph box's height closest to the centre
+  const edge = disc.c[0] + Math.sqrt(Math.max(0, disc.r * disc.r - (yy - disc.c[1]) ** 2));
+  return [Math.max(best ? best[0] : 0, edge) + gap, y];
+};
 
 // ================================================================ s15 the sphere
 const S15: React.FC = () => {
@@ -54,6 +67,7 @@ const S15: React.FC = () => {
       <Globe cam={cam} grat={0.3} meshO={mix(1, 0.62, fin(f, tO))}
         over={(G) => <>
           {seg(G, [0, 0, 0], scl(bW, gr), C.first, 9, fin(f, tR))}
+          {wlab(G, scl(bW, 0.5), "a", C.first, fin(f, tA), 18, 18, "start", T.key)}
           <circle cx={G.pw([0, 0, 0])[0]} cy={G.pw([0, 0, 0])[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tO)} />
           {dot(G, BREST[0], BREST[1], C.key, 10, fin(f, tR + 20))}
           <path d={poly(Array.from({ length: 21 }, (_, i) => G.pw(ll((BREST[0] * i) / 20, BREST[1], 0.32))))} fill="none" stroke={C.local} strokeWidth={5} opacity={fin(f, tLL)} />
@@ -63,7 +77,7 @@ const S15: React.FC = () => {
       <GSrc />
       <Svg>
         <Lbl x={1100} y={170} t="r" c={C.first} s={T.calc} o={fin(f, tR)} />
-        <Callout f={f} lines="a ≈ 6400 | 6371 km" at={[1100, 300]} appear={tA} target={G0.c[0] > 0 ? [mix(G0.c[0], globeLabelX(cam, bW), 0.55), mix(G0.c[1], globeLabelY(cam, bW), 0.55)] : null} />
+        <Lbl x={1100} y={300} t="a ≈ 6400 | 6371 km" c={C.key} s={T.key} o={fin(f, tA)} />
         <Keyword f={f} text="spherical coordinates" at={[1100, 480]} appear={tSph} />
         <Keyword f={f} text="latitude · longitude" at={[1100, 600]} appear={tLL} />
       </Svg>
@@ -85,7 +99,8 @@ const S16: React.FC = () => {
     : mix(-89.5, BREST[0], prog(f, tBr - 10, tBr + 20));
   const pW = ll(lat, BREST[1]);
   const eqRing = Array.from({ length: 73 }, (_, i) => ll(0, i * 5, 1.0));
-  const tag = f < tEq ? "" : f < tNP ? "0°" : f < tSP ? "90° N" : f < tBr - 10 ? "−90°" : "";
+  // the tag names the point once it has arrived (K6: "90° N" flew across the equator ring during the move): 0°, +90°, −90°
+  const tag = f >= tEq + 24 && f < tNP ? "0°" : f >= tNP + 24 && f < tSP ? "+90°" : f >= tSP + 30 && f < tBr - 10 ? "−90°" : "";
   return (
     <Scene>
       <Globe cam={cam} grat={0.22} meshO={0.72}
@@ -140,12 +155,11 @@ const S17: React.FC = () => {
           {seg(G, [0, 0, 0], ll(0, BREST[1], 0.7), C.second, 3, fin(f, tAng + 20), "8 6")}
           {wlab(G, ll(0, -2, 0.75), "λ", C.gold, fin(f, tLam), 0, 30, "middle", T.calc)}
           {dot(G, 51.48, 0.0, C.gold, 10, fin(f, tGr))}
-          {wlab(G, ll(51.48, 0.0), "Greenwich", C.key, fin(f, tGr), 18, -30)}
+          {plab(G, ll(51.48, 0.0), "Greenwich", C.key, fin(f, tGr), 18, -30)}
           {dot(G, BREST[0], BREST[1], C.key, 10, fin(f, tB))}
           <SurfArrow G={G} pts={Array.from({ length: 20 }, (_, i) => [8, 40 + i * 2] as [number, number])} c={C.first} w={7} head={26} o={fin(f, tEW)} />
           <SurfArrow G={G} pts={Array.from({ length: 20 }, (_, i) => [8, -40 - i * 2] as [number, number])} c={C.neg} w={7} head={26} o={fin(f, tEW)} />
-          {wlab(G, ll(8, 75), "+ east", C.first, fin(f, tEW), 0, 0, "middle")}
-          {wlab(G, ll(8, -75), "− west", C.neg, fin(f, tEW), 0, 0, "middle")}
+
           <path d={llPath(G, Array.from({ length: 181 }, (_, i) => [0, -180 + i * 2] as [number, number]))} fill="none" stroke={C.local} strokeWidth={3} opacity={0.6 * fin(f, tEW)} />
         </>} />
       <Globe cam={cam} grat={fin(f, tGrat) * 0.8} gratStep={15} coast={0} o={fin(f, tGrat)} meshO={0} />
@@ -155,6 +169,8 @@ const S17: React.FC = () => {
         <Keyword f={f} text="meridians" at={[1100, 140]} appear={AT(k, 1, "meridians")} />
         <Keyword f={f} text="prime meridian" at={[1100, 240]} appear={AT(k, 2, "prime meridian")} c={C.gold} />
         <Keyword f={f} text="longitude λ" at={[1100, 340]} appear={tLam} />
+        <Lbl x={1100} y={545} t="+ east" c={C.first} s={T.floor} o={fin(f, tEW)} />
+        <Lbl x={1300} y={545} t="− west" c={C.neg} s={T.floor} o={fin(f, tEW)} />
         <g opacity={fin(f, t360)}>
           <line x1={rul.x} y1={rul.y} x2={rul.x + rul.w} y2={rul.y} stroke={C.muted} strokeWidth={4} />
           {[0, 90, 180, 270, 360].map((v) => <g key={v}><line x1={rx(v)} y1={rul.y - 14} x2={rx(v)} y2={rul.y + 14} stroke={C.muted} strokeWidth={3} />
@@ -174,7 +190,7 @@ const S18: React.FC = () => {
   const f = useCurrentFrame(), k = K("s18_position");
   const tVec = SS(k, 1), tSide = SS(k, 3), tPhi = SS(k, 4), tZ = SS(k, 5), tR = SS(k, 6), tTop = SS(k, 7), tLam = SS(k, 8), tSplit = SS(k, 9), tAll = SS(k, 10),
     tN1 = SS(k, 11), tN2 = SS(k, 12);
-  const phi = BREST[0] * D2R, A: Pt = [300, 470], RS = 210, lamS = 35 * D2R, B: Pt = [770, 470];
+  const phi = BREST[0] * D2R, A: Pt = [250, 470], RS = 200, lamS = 35 * D2R, B: Pt = [810, 470];
   const pB: Pt = [A[0] + RS * Math.cos(phi), A[1] - RS * Math.sin(phi)];
   const foot: Pt = [pB[0], A[1]];
   const rT = RS * Math.cos(phi);
@@ -188,7 +204,7 @@ const S18: React.FC = () => {
           <line x1={A[0] - RS - 30} y1={A[1]} x2={A[0] + RS + 30} y2={A[1]} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" />
           <line x1={A[0]} y1={A[1] + RS + 30} x2={A[0]} y2={A[1] - RS - 40} stroke={C.local} strokeWidth={3} />
           <Lbl x={A[0]} y={A[1] - RS - 70} t="axis" c={C.muted} s={T.floor} a="middle" b={false} />
-          <Lbl x={A[0] - RS - 40} y={A[1] - 30} t="equator plane" c={C.muted} s={T.floor} b={false} />
+          <Lbl x={A[0]} y={A[1] + RS + 56} t="equator plane" c={C.muted} s={T.floor} a="middle" b={false} />
           <line x1={A[0]} y1={A[1]} x2={pB[0]} y2={pB[1]} stroke={C.first} strokeWidth={10} strokeLinecap="round" />
           <path d={arcD(A, 70, 0, BREST[0])} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tPhi)} />
           <Lbl x={A[0] + 88} y={A[1] - 34} t="φ" c={C.gold} s={T.key} o={fin(f, tPhi)} />
@@ -212,14 +228,14 @@ const S18: React.FC = () => {
           <circle cx={B[0]} cy={B[1]} r={8} fill={C.local} />
         </g>
         <Lbl x={500} y={140} t="side view" c={C.muted} s={T.floor} a="middle" b={false} o={0} />
-        <CurvedLink f={f} from={[1240, 610]} to={[foot[0] + 18, (pB[1] + foot[1]) / 2]} start={tN1 + 10} bend={70} end={tN2 - 6} />
-        <CurvedLink f={f} from={[1240, 720]} to={[(A[0] + foot[0]) / 2, A[1] + 14]} start={tN2 + 10} bend={-60} />
+        <CurvedLink f={f} from={[1170, 600]} to={[foot[0] + 12, (pB[1] + foot[1]) / 2 + 30]} start={tN1 + 10} bend={-30} end={tN2 - 6} />
+        <CurvedLink f={f} from={[1170, 680]} to={[(A[0] + foot[0]) / 2, A[1] + 16]} start={tN2 + 10} bend={-20} end={LEN(k) - 24} />
         <Keyword f={f} text="polar coordinates again" at={[1080, 120]} s={T.floor} appear={AT(k, 9, "polar coordinates")} out={tAll - 18} />
       </Svg>
-      <TeX s={String.raw`a\sin\varphi`} x={foot[0] + 18} y={(pB[1] + foot[1]) / 2} size={52} c={C.second} o={fin(f, tZ)} />
-      <TeX s={String.raw`a\cos\varphi`} x={(A[0] + foot[0]) / 2} y={A[1] + 50} size={52} ax={0.5} c={C.second} o={fin(f, tR)} />
+      <TeX s={String.raw`a\sin\varphi`} x={A[0] + RS + 12} y={(pB[1] + foot[1]) / 2} size={48} c={C.second} o={fin(f, tZ)} />
+      <TeX s={String.raw`a\cos\varphi`} x={A[0] + 12} y={A[1] + 50} size={52} c={C.second} o={fin(f, tR)} />
       <TeX s={String.raw`a\cos\varphi\cos\lambda`} x={B[0]} y={B[1] + RS + 60} size={48} ax={0.5} c={C.second} o={fin(f, tSplit)} />
-      <TeX s={String.raw`a\cos\varphi\sin\lambda`} x={q[0] + 16} y={(B[1] + q[1]) / 2 - 70} size={48} c={C.second} o={fin(f, tSplit + 10)} />
+      <TeX s={String.raw`a\cos\varphi\sin\lambda`} x={B[0] + RS + 14} y={q[1]} size={48} c={C.second} o={fin(f, tSplit + 10) * fout(f, tAll + 36)} />
       {lines.map((ln, i) => <TeX key={i} s={ln} x={1100} y={180 + i * 100} size={64} o={fin(f, tAll + i * 25)} />)}
       <CalcStack f={f} x={1500} y={570} size={56} rows={[
         { lhs: String.raw`6371\times0.748`, rhs: String.raw`\approx4760\ \mathrm{km}`, at: tN1 },
@@ -239,6 +255,7 @@ const S19: React.FC = () => {
     { f: tL + 18, lat: 36, lon: LYB[1] - 360, dist: 3.4 }, { f: tP + 30, lat: 38, lon: LYB[1] - 366, dist: 3.4 },
     { f: LEN(k) + 10, lat: 30, lon: LYB[1] - 366 - 18 * ((LEN(k) + 10 - tP - 30) / 30), dist: 3.4, spin: 0.15 }], f);
   const G0 = discOf(cam);
+  const Gs = globeG(cam);
   const lats = [0, BREST[0], LYB[0]];
   const tags = [{ t: "465 m/s", at: AT(k, 4, "four hundred and sixty five") }, { t: "309 m/s", at: AT(k, 5, "three hundred and nine") }, { t: "95 m/s", at: AT(k, 6, "ninety five") }];
   return (
@@ -250,22 +267,24 @@ const S19: React.FC = () => {
           <LatCircle G={G} lat={-BREST[0]} c={C.local} w={2} o={0.5 * fin(f, tSpin)} dash="8 8" />
           {lats.map((la, i) => {
             const L = (SPH.spd[i] / SPH.spd[0]) * 22, lo0 = cam.lon - 8;
-            return <g key={`a${la}`}><SurfArrow G={G} pts={gcArrowPts(la, lo0, 90, L)} c={C.first} w={9} head={32} o={fin(f, tags[i].at)} />
-              {wlab(G, ll(la, lo0 + L / Math.cos(la * D2R) + 2), tags[i].t, C.first, fin(f, tags[i].at), 14, -26)}</g>;
+            return <g key={`a${la}`}><SurfArrow G={G} pts={gcArrowPts(la, lo0, 90, L)} c={C.first} w={9} head={32} o={fin(f, tags[i].at)} /></g>;
           })}
           {dot(G, 89.5, 0, C.key, 10, fin(f, tP))}
           {wlab(G, ll(89.5, 0), "0", C.key, fin(f, tP), 18, -26, "start", T.key)}
-          {f >= tB - 20 ? <>{dot(G, BREST[0], BREST[1], C.gold, 10, fin(f, tB - 20))}{wlab(G, ll(BREST[0], BREST[1]), "Brest", C.key, fin(f, tB - 6), -24, 40, "end")}</> : null}
-          {f >= tL - 20 ? <>{dot(G, LYB[0], LYB[1], C.gold, 10, fin(f, tL - 20))}{wlab(G, ll(LYB[0], LYB[1]), "Longyearbyen (Svalbard)", C.key, fin(f, tL - 6), -24, -34, "end")}</> : null}
+          {f >= tB - 20 ? <>{dot(G, BREST[0], BREST[1], C.gold, 10, fin(f, tB - 20))}{plab(G, ll(BREST[0], BREST[1]), "Brest", C.key, fin(f, tB - 6), -24, 40, "end")}</> : null}
+          {f >= tL - 20 ? <>{dot(G, LYB[0], LYB[1], C.gold, 10, fin(f, tL - 20))}{plab(G, ll(LYB[0], LYB[1]), "Svalbard", C.key, fin(f, tL - 6), -22, 40, "end")}</> : null}
         </>} />
       <GlobeFrame id="s19k" zoom={0} disc={G0} />
       <GSrc />
-      <Svg><Keyword f={f} text="cylindrical coordinate" at={[1100, 130]} s={T.floor} appear={AT(k, 0, "cylindrical coordinate")} />
-        <Keyword f={f} text="spin and winds: by latitude" at={[1100, 810]} s={T.floor} appear={tWhy} /></Svg>
-      <TeX s={String.raw`\Omega=7.29\times10^{-5}\ \mathrm{rad/s}`} x={1100} y={250} size={60} o={fin(f, tOm)} />
-      <TeX s={EQ_S19} x={1100} y={380} size={84} o={fin(f, tU)} />
-      <CalcStack f={f} x={1180} y={500} size={50} rows={[{ lhs: "", rhs: String.raw`7.29\times10^{-5}\times6.371\times10^{6}\approx465\ \mathrm{m/s}`, at: AT(k, 4, "seven point two nine") }]} />
-      <TeX s={String.raw`\cos\varphi\approx\tfrac{2}{3}\ \text{at Brest}`} x={1100} y={640} size={52} c={C.local} o={fin(f, AT(k, 5, "two thirds"))} />
+      <Svg><Keyword f={f} text="cylindrical coordinate" at={[1150, 130]} s={T.floor} appear={AT(k, 0, "cylindrical coordinate")} />
+        {/* the three ground speeds: each just outside the globe where its parallel meets the limb (K6: no readout on the picture) */}
+        {lats.map((la, i) => { const q = limbTag(Gs, G0, la); return <Lbl key={`t${la}`} x={q[0]} y={q[1]} t={tags[i].t} c={C.first} s={T.floor} o={fin(f, tags[i].at)} />; })}
+        <Keyword f={f} text="spin and winds: by latitude" at={[1150, 810]} s={T.floor} appear={tWhy} /></Svg>
+      <TeX s={String.raw`\Omega=7.29\times10^{-5}\ \mathrm{rad/s}`} x={1150} y={250} size={60} o={fin(f, tOm)} />
+      <TeX s={EQ_S19} x={1150} y={380} size={84} o={fin(f, tU)} />
+      <CalcStack f={f} x={1150} y={500} size={50} rows={[{ lhs: "", rhs: String.raw`7.29\times10^{-5}\times6.371\times10^{6}`, at: AT(k, 4, "seven point two nine") },
+        { rhs: String.raw`\approx465\ \mathrm{m/s}`, at: AT(k, 4, "seven point two nine") + 20, cont: true }]} />
+      <TeX s={String.raw`\cos\varphi\approx\tfrac{2}{3}\ \text{at Brest}`} x={1150} y={690} size={52} c={C.local} o={fin(f, AT(k, 5, "two thirds"))} />
     </Scene>
   );
 };
@@ -297,7 +316,7 @@ const S20: React.FC = () => {
         <Lbl x={1100} y={790} t="1′ ≈ 1.85 km = 1 nautical mile" c={C.key} s={T.floor} o={fin(f, tMin + 20)} /></Svg>
       <TeX s={l1} x={1100} y={150} size={80} o={fin(f, tRule)} />
       <TeX s={l2} x={1100} y={260} size={60} c={C.muted} o={fin(f, tRule + 30) * 0.6} />
-      <CalcStack f={f} x={1320} y={350} size={56} rows={[
+      <CalcStack f={f} x={1360} y={480} size={46} rows={[
         { lhs: String.raw`1^{\circ}`, rhs: String.raw`=\pi/180=0.01745\ \mathrm{rad}`, at: tOne },
         { lhs: String.raw`6371\times0.01745`, rhs: String.raw`\approx111.2\ \mathrm{km}`, at: t111 },
       ]} />
@@ -322,13 +341,13 @@ const S21: React.FC = () => {
     <Scene>
       <Globe cam={cam} grat={0.2}
         over={(G) => <>
-          <LatCircle G={G} lat={BREST[0]} c={C.second} w={6} o={fin(f, tPar)} />
+          <LatCircle G={G} lat={BREST[0]} c={C.second} w={6} o={fin(f, tPar) * fout(f, tE - 12)} />
           {seg(G, [0, Math.sin(BREST[0] * D2R), 0], ll(BREST[0], BREST[1]), C.first, 7, fin(f, tRad))}
           {seg(G, [0, 0, 0], ll(BREST[0], BREST[1]), C.local, 4, fin(f, tRad), "10 8")}
           {seg(G, [0, -1.3, 0], [0, 1.3, 0], C.local, 4, fin(f, tPar), "14 10")}
           {steps.map((s, i) => <g key={i} opacity={fin(f, s.at)}>
             <path d={llPath(G, Array.from({ length: 11 }, (_, j) => [s.la, BREST[1] + 0.5 * j] as [number, number]), 1.004)} fill="none" stroke={C.gold} strokeWidth={14} strokeLinecap="round" />
-            {wlab(G, ll(s.la, BREST[1] + 5.5), lab[i], C.gold, 1, 18, -10, "start", T.key)}</g>)}
+            {wlab(G, ll(s.la, BREST[1] + 5.5), lab[i], C.gold, fout(f, tOr - 12), 18, -44, "start", T.key)}</g>)}
           {Array.from({ length: 12 }, (_, i) => <path key={i} d={llPath(G, mer(-180 + i * 30))} fill="none" stroke={C.second} strokeWidth={4} opacity={0.8 * fin(f, tOr)} />)}
         </>} />
       <GlobeFrame id="s21k" zoom={0} disc={G0} />
@@ -338,7 +357,7 @@ const S21: React.FC = () => {
         {cosv.map((c, i) => <Lbl key={i} x={1260 + i * 140} y={560} t={c} c={C.key} s={T.key} o={fin(f, steps[i].at)} />)}
         <Keyword f={f} text="like segments of an orange" at={[1100, 800]} s={T.floor} appear={tOr} />
       </Svg>
-      <Layered parts={parts} x={1100} y={200} size={80} layers={[{ t: "all", o: fin(f, tDx) }, { t: [], u: [1], o: fin(f, tCos) }]} />
+      <Layered parts={parts} x={1100} y={200} size={64} layers={[{ t: "all", o: fin(f, tDx) }, { t: [], u: [1], o: fin(f, tCos) }]} />
       <CalcStack f={f} x={1330} y={620} size={52} rows={[
         { lhs: String.raw`111\times0.66`, rhs: String.raw`\approx74`, at: tB + 10 },
         { lhs: String.raw`111\times0.2`, rhs: String.raw`\approx23`, at: tL + 10 },
@@ -380,7 +399,7 @@ const S22: React.FC = () => {
         <Lbl x={BS.x + 20} y={BS.y + BS.h + 40} t="Longyearbyen, Svalbard" c={C.key} s={T.floor} o={fin(f, tS - 30)} />
         <Lbl x={cb.b[0] + 14} y={(cb.a[1] + cb.b[1]) / 2} t="27.8 km" c={C.key} s={T.floor} o={fin(f, tB)} />
         <Lbl x={(cb.a[0] + cb.b[0]) / 2} y={cb.b[1] + 34} t="18.5 km" c={C.key} s={T.floor} a="middle" o={fin(f, AT(k, 2, "eighteen and a half"))} />
-        <Lbl x={cs.b[0] + 14} y={(cs.a[1] + cs.b[1]) / 2 - 30} t="27.8 km" c={C.key} s={T.floor} o={fin(f, tS)} />
+        <Lbl x={cs.a[0] - 14} y={(cs.a[1] + cs.b[1]) / 2} t="27.8 km" c={C.key} s={T.floor} a="end" o={fin(f, tS)} />
         <Lbl x={cs.a[0]} y={cs.b[1] + 34} t="5.7 km" c={C.key} s={T.floor} a="middle" o={fin(f, AT(k, 3, "under six"))} />
         <Keyword f={f} text="thinner towards the poles" at={[1300, 160]} s={T.floor} appear={tThin} />
         <Lbl x={1300} y={260} t="forgot the cos φ:" c={C.neg} s={T.floor} o={fin(f, tFor)} />
@@ -413,8 +432,7 @@ const S23: React.FC = () => {
           {Array.from({ length: 46 }, (_, i) => i * 2).filter((la) => la <= fillTo && f < tBoth).map((la) => <LatCircle key={la} G={G} lat={la} c={C.first} w={9} o={0.35} />)}
           {Array.from({ length: 31 }, (_, i) => -30 + i * 2).map((la) => <LatCircle key={`h${la}`} G={G} lat={la} c={C.first} w={9} o={0.38 * half} />)}
           <path d={llPath(G, [[45, -6], [45, 6], [50, 6], [50, -6], [45, -6]] as [number, number][], 1.004)} fill={C.gold} fillOpacity={0.35} stroke={C.gold} strokeWidth={5} opacity={fin(f, tPatch) * fout(f, tAdd)} />
-          {wlab(G, ll(47.5, 6.5), "a cos φ δλ", C.gold, fin(f, tPatch + 20) * fout(f, tAdd), 0, -70, "middle")}
-          {wlab(G, ll(47.5, -6.5), "a δφ", C.gold, fin(f, tPatch + 10) * fout(f, tAdd), -16, 0, "end")}
+
         </>} />
       <GlobeFrame id="s23k" zoom={0} disc={G0} />
       <GSrc />
@@ -423,6 +441,9 @@ const S23: React.FC = () => {
         <Curve A={A} xs={gx} ys={gl} c={C.first} w={7} upto={upto} />
         <circle cx={axP(A)(30, 0.5)[0]} cy={axP(A)(30, 0.5)[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tHalf)} />
         <Lbl x={axP(A)(30, 0.5)[0] + 20} y={axP(A)(30, 0.5)[1] - 36} t="½" c={C.gold} s={T.calc} o={fin(f, tHalf)} />
+        {/* the patch's sides (gold, as the patch): in the text column, not on the globe (K6) */}
+        <Lbl x={1100} y={390} t="width a cos φ δλ" c={C.gold} s={T.floor} o={fin(f, tPatch + 20) * fout(f, tAdd)} />
+        <Lbl x={1100} y={450} t="height a δφ" c={C.gold} s={T.floor} o={fin(f, tPatch + 10) * fout(f, tAdd)} />
         <Keyword f={f} text="half of the Earth" at={[1100, 380]} s={T.floor} appear={AT(k, 8, "half of the whole Earth")} out={tW - 18} c={C.first} />
         <Keyword f={f} text="weight each latitude by cos φ" at={[1100, 380]} s={T.floor} appear={tW} />
       </Svg>
@@ -438,7 +459,7 @@ const S24: React.FC = () => {
   const f = useCurrentFrame(), k = K("s24_enu");
   const tBr = AT(k, 0, "Brest"), tSur = SS(k, 1), tArr = SS(k, 3), tFr = SS(k, 4), tW = SS(k, 5), tUVW = SS(k, 6), tX = SS(k, 7), tOwn = SS(k, 8), tOut = AT(k, 9, "zoom back out"),
     tTr = AT(k, 10, "Trappes"), t4 = AT(k, 10, "about four degrees"), tSg = AT(k, 11, "Singapore"), t101 = AT(k, 11, "a hundred and one");
-  const Z = { dist: 2.4, pp: [600, 470] as Pt }, U = { dist: 4.3, pp: [520, 430] as Pt };
+  const Z = { dist: 2.4, pp: [600, 470] as Pt }, U = { dist: 4.3, pp: [520, 390] as Pt };
   const cam = globePath([
     { f: 0, lat: BREST[0], lon: BREST[1], ...Z }, { f: tOut, lat: BREST[0], lon: BREST[1], ...Z }, { f: tOut + 45, lat: 46, lon: 0, ...U },
     { f: tTr - 6, lat: 47, lon: 0, ...U }, { f: tSg - 20, lat: 30, lon: 45, ...U }, { f: tSg + 10, lat: 25, lon: 50, ...U }, { f: LEN(k) + 10, lat: 25, lon: 52, ...U }], f);
@@ -464,14 +485,18 @@ const S24: React.FC = () => {
           </g>)}
           {frames[0].labels && frames[0].o > 0 ? <>{wlab(G, frames[0].e, "i", C.second, frames[0].o, 12, -26, "start", T.key)}{wlab(G, frames[0].n, "j", C.second, frames[0].o, 12, -20, "start", T.key)}
             {wlab(G, frames[0].u, "k", C.first, frames[0].o, 14, -20, "start", T.key)}</> : null}
-          {wlab(G, ll(BREST[0], BREST[1]), "Brest", C.key, fin(f, tBr) * (zf > 0.5 ? 1 : fin(f, tTr)), -20, 44, "end")}
-          {wlab(G, ll(48.2, -3.0), "Brittany", C.key, win(f, AT(k, 1, "Brittany"), tOut - 10) * zf, 0, 60, "middle")}
-          {wlab(G, ll(47.0, -9.5), "Atlantic Ocean", C.key, win(f, AT(k, 1, "Atlantic Ocean"), tOut - 10) * zf, 0, 0, "middle")}
-          {G.vis(D.sphere.trappes[0], D.sphere.trappes[1]) ? wlab(G, ll(D.sphere.trappes[0], D.sphere.trappes[1]), "Trappes", C.key, fin(f, tTr), 16, -34) : null}
-          {G.vis(D.sphere.sing[0], D.sphere.sing[1]) ? wlab(G, ll(D.sphere.sing[0], D.sphere.sing[1]), "Singapore", C.key, fin(f, tSg), 16, 34) : null}
+          {/* K6: Brest left of its dot, Brittany below-right, the ocean below-left (they overlapped round the dot) */}
+          {plab(G, ll(BREST[0], BREST[1]), "Brest", C.key, fin(f, tBr) * (zf > 0.5 ? 1 : fin(f, tTr)), -24, zf > 0.5 ? 0 : 44, "end")}
+          {plab(G, ll(BREST[0], BREST[1]), "Brittany", C.key, win(f, AT(k, 1, "Brittany"), tOut - 10) * zf, 40, 52, "start")}
+          {plab(G, ll(BREST[0], BREST[1]), "Atlantic Ocean", C.key, win(f, AT(k, 1, "Atlantic Ocean"), tOut - 10) * zf, -40, 92, "end")}
+          {G.vis(D.sphere.trappes[0], D.sphere.trappes[1]) ? plab(G, ll(D.sphere.trappes[0], D.sphere.trappes[1]), "Trappes", C.key, fin(f, tTr), 16, -34) : null}
+          {G.vis(D.sphere.sing[0], D.sphere.sing[1]) ? plab(G, ll(D.sphere.sing[0], D.sphere.sing[1]), "Singapore", C.key, fin(f, tSg), 16, 34) : null}
         </>} />
       <GlobeFrame id="s24k" zoom={zf} right={right} disc={G0} />
-      <SourceBelow text="Image: NASA Blue Marble NG · ETOPO 2022 (NOAA)" pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} name="s24 src" />
+      {/* K6: while the zooming-out globe (disc mask, zoom < 0.5) still reaches below y 826 it covers the credit's place, so the
+          credit waits (≈ 1 s) until the disc has cleared it or the zoom-reveal fades are back */}
+      <SourceBelow text="Image: NASA Blue Marble NG · ETOPO 2022 (NOAA)" pic={{ x: 80, y: 40, w: 960, h: 772 }} w={960} name="s24 src"
+        o={Math.max(clamp((822 - (G0.c[1] + G0.r)) / 20, 0, 1), clamp((zf - 0.5) / 0.15, 0, 1))} />
       <Svg>
         <Keyword f={f} text="local east, north, up" at={[1200, 140]} appear={AT(k, 4, "east, north, up")} out={tOut - 18} />
         <Lbl x={1200} y={430} t="u east · v north · w up" c={C.key} s={T.floor} o={fin(f, tUVW) * fout(f, tOut - 18)} />
@@ -512,7 +537,7 @@ const S25: React.FC = () => {
           {seg(G, [0, 0, 0], ll(BREST[0], BREST[1], 0.8), C.gold, 3, fin(f, tSw), "8 6")}
           {seg(G, [0, 0, 0], ll(BREST[0], lonP, 0.8), C.gold, 3, fin(f, tSw), "8 6")}
           <path d={poly(Array.from({ length: 21 }, (_, i) => G.pw(ll(0, BREST[1] + ((lonP - BREST[1]) * i) / 20, 0.5))))} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tSw)} />
-          {wlab(G, ll(0, BREST[1] + 6, 0.55), "≈ 12°", C.gold, fin(f, tSw), 0, -40, "middle", T.key)}
+          {wlab(G, ll(0, lonP + 22, 0.62), "≈ 12°", C.gold, fin(f, tSw), 0, 0, "middle", T.key)}
         </>} />
       <GlobeFrame id="s25k" zoom={0} disc={G0} />
       <GSrc />
@@ -536,7 +561,7 @@ const S26: React.FC = () => {
   const G0 = discOf(cam);
   const PC = D.parcel, n = PC.lat.length;
   const run = clamp((f - tWhole) / Math.max(1, tNum - tWhole), 0, 1), j = Math.min(n - 1, Math.floor(run * (n - 1)));
-  const parts: Part[] = [{ t: String.raw`\frac{D\mathbf v}{Dt}\cdot\mathbf i=` }, { t: String.raw`\frac{Du}{Dt}`, u: { w: String.raw`\text{change of the number }u`, c: C.gold } },
+  const parts: Part[] = [{ t: String.raw`\frac{D\mathbf v}{Dt}\cdot\mathbf i=` }, { t: String.raw`\frac{Du}{Dt}`, u: { w: String.raw`\text{change of }u`, c: C.gold } },
     { t: String.raw`-\frac{uv\tan\varphi}{a}+\frac{uw}{a}`, u: { w: String.raw`\text{turning arrows}`, c: C.gold } }];
   if (parts.map((p) => p.t).join("").replace(/\s/g, "") !== EQ_S26.replace(/\s/g, "")) throw new Error("s26 parts drift from EQ_S26");
   const lo10 = Math.log10, bx = (v: number) => 1120 + (lo10(v) + 6) * 170;
@@ -562,9 +587,11 @@ const S26: React.FC = () => {
         </g>
         <Keyword f={f} text="small here, they add up globally" at={[1100, 820]} s={T.floor} appear={tAdd} />
       </Svg>
-      <Layered parts={parts} x={1090} y={200} size={64} layers={[{ t: "all", o: fin(f, tEast) }, { t: [], u: [1], o: fin(f, tEast + 30) }, { t: [], u: [2], o: fin(f, tMet) }]} />
-      <CalcStack f={f} x={1360} y={420} size={46} rows={[{ lhs: String.raw`\frac{10\times10\times\tan45^{\circ}}{6.37\times10^{6}}`, rhs: String.raw`\approx1.6\times10^{-5}\ \mathrm{m/s^2}`, at: tNum, h: 110 }]} />
-      <Svg><Keyword f={f} text="metric terms" at={[1100, 330]} s={T.floor} appear={tMet} out={tNum - 18} c={C.gold} /></Svg>
+      {/* K6: EQ_S26 on two lines at 64 px (the under-words must stay ≥ 44 px; inline it ran 430 px past the frame) */}
+      <Layered parts={[parts[0], parts[1]]} x={1090} y={124} size={64} layers={[{ t: "all", o: fin(f, tEast) }, { t: [], u: [1], o: fin(f, tEast + 30) }]} />
+      <Layered parts={[parts[2]]} x={1200} y={355} size={64} layers={[{ t: "all", o: fin(f, tEast) }, { t: [], u: [0], o: fin(f, tMet) }]} />
+      <CalcStack f={f} x={1360} y={482} size={46} rows={[{ lhs: String.raw`\frac{10\times10\times\tan45^{\circ}}{6.37\times10^{6}}`, rhs: String.raw`\approx1.6\times10^{-5}\ \mathrm{m/s^2}`, at: tNum, h: 110 }]} />
+      <Svg><Keyword f={f} text="metric terms" at={[1100, 495]} s={T.floor} appear={tMet} out={tNum - 18} c={C.gold} /></Svg>
     </Scene>
   );
 };
@@ -575,7 +602,7 @@ const S27: React.FC = () => {
   const tF1 = SS(k, 2), tF2 = SS(k, 3), tF3 = SS(k, 4), tPol = SS(k, 5), tEar = SS(k, 6), tSl = SS(k, 8), tGr = SS(k, 9), tP = SS(k, 10);
   const pan = [{ x: 330 }, { x: 960 }, { x: 1590 }], y0 = 190;
   const AL = D.alps;
-  const PB = { x: 80, y: 560, w: 900, h: 230 };
+  const PB = { x: 80, y: 560, w: 800, h: 230 };
   const ax = (lo: number) => PB.x + ((lo - 5) / 11) * PB.w, az = (z: number) => PB.y + PB.h - (z / 6) * PB.h;
   return (
     <Scene>
@@ -611,7 +638,7 @@ const S27: React.FC = () => {
       <TeX s={String.raw`1,\ \ r`} x={1290} y={400} size={60} o={fin(f, tPol)} />
       <TeX s={String.raw`a,\ \ a\cos\varphi`} x={1290} y={470} size={60} o={fin(f, tEar)} />
       <TeX s={EQ_S27} x={1100} y={600} size={50} o={fin(f, tSl)} />
-      <SourceBelow text="Relief: ETOPO 2022 (NOAA) · 46.5° N · standard pressure levels" pic={PB} w={900} o={fin(f, tP)} name="s27 src" />
+      <SourceBelow text="Relief: ETOPO 2022 (NOAA) · 46.5° N · standard pressure levels" pic={PB} w={860} o={fin(f, tP)} name="s27 src" />
     </Scene>
   );
 };
@@ -683,11 +710,11 @@ const S29: React.FC = () => {
           <path d={poly(arcC.map((v) => G.pw(v)))} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tCos)} />
           {wlab(G, scl(arcC[10], 1.4), "σ", C.gold, fin(f, tCos), 0, 0, "middle", T.key)}
           {dot(G, RT.lhr[0], RT.lhr[1], C.key, 10, fin(f, tLon))}{dot(G, RT.lax[0], RT.lax[1], C.key, 10, fin(f, tLA))}
-          {G.vis(RT.lhr[0], RT.lhr[1]) ? wlab(G, ll(RT.lhr[0], RT.lhr[1]), "London", C.key, fin(f, tLon), 16, 30) : null}
-          {G.vis(RT.lax[0], RT.lax[1]) ? wlab(G, ll(RT.lax[0], RT.lax[1]), "Los Angeles", C.key, fin(f, tLA), -16, 34, "end") : null}
+          {G.vis(RT.lhr[0], RT.lhr[1]) ? plab(G, ll(RT.lhr[0], RT.lhr[1]), "London", C.key, fin(f, tLon), 16, 30) : null}
+          {G.vis(RT.lax[0], RT.lax[1]) ? plab(G, ll(RT.lax[0], RT.lax[1]), "Los Angeles", C.key, fin(f, tLA), -16, 34, "end") : null}
           {fly > 0 && G.vis(pts[jf][0], pts[jf][1]) ? <PlaneIcon p={G.p(pts[jf][0], pts[jf][1], 1.01)} s={0.7} a={Math.atan2(-(G.p(pts[Math.min(180, jf + 2)][0], pts[Math.min(180, jf + 2)][1])[1] - G.p(pts[jf][0], pts[jf][1])[1]), G.p(pts[Math.min(180, jf + 2)][0], pts[Math.min(180, jf + 2)][1])[0] - G.p(pts[jf][0], pts[jf][1])[0]) / D2R} /> : null}
           {dot(G, RT.vx[0], RT.vx[1], C.gold, 9, fin(f, tVx))}
-          {G.vis(RT.vx[0], RT.vx[1]) ? wlab(G, ll(RT.vx[0], RT.vx[1]), "Greenland", C.key, fin(f, tGl), 16, -34) : null}
+          {G.vis(RT.vx[0], RT.vx[1]) ? plab(G, ll(RT.vx[0], RT.vx[1]), "Greenland", C.key, fin(f, tGl), 0, -44, "middle") : null}
         </>} />
       <GlobeFrame id="s29k" zoom={0} disc={G0} />
       <GSrc />
@@ -695,7 +722,8 @@ const S29: React.FC = () => {
         <Keyword f={f} text="great circle" at={[1100, 130]} appear={AT(k, 2, "great circle")} c={C.gold} />
         <Lbl x={1100} y={560} t="bearing ≈ 312° (north-west)" c={C.key} s={T.floor} o={fin(f, tBrg)} />
         <Lbl x={1100} y={630} t="highest ≈ 62° N" c={C.key} s={T.floor} o={fin(f, tVx)} />
-        <Lbl x={1100} y={720} t="over Greenland and northern Canada" c={C.muted} s={T.floor} o={fin(f, tFl)} />
+        <Lbl x={1100} y={712} t="over Greenland and" c={C.muted} s={T.floor} o={fin(f, tFl)} />
+        <Lbl x={1100} y={766} t="northern Canada" c={C.muted} s={T.floor} o={fin(f, tFl)} />
         <Lbl x={1100} y={220} t="flat sheet: a straight line" c={C.muted} s={T.floor} o={win(f, tFlat, tDot - 18)} />
       </Svg>
       <TeX s={EQ_S29} x={1100} y={300} size={60} o={fin(f, tCos)} />

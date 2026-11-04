@@ -112,3 +112,50 @@ stills, render, tmp). Both scripts set TEMP/TMP to `S/tmp`, stop below 45 GB on 
 | after | 53.5 GB | 474.4 GB |
 Scratch now: `S/tts/` (run 1, 137 MB, obsolete — deleting it was not allowed in this run), `S/tts2/` (140 MB), `S/public/` (5 MB),
 `S/storyboard_before_build1.yaml`. fluidpy at 8cab62ebf6 with uncommitted tracked changes (`dirty_tracked: true` in the manifest).
+
+## 7. K6 clean-up (2026-11-04) — 5301 hits → 0
+Pre-render K6 (`S/stills/k6b1`, `S/k6b1.json`): 3920 of 4086 stills, **5301 hits** (edge 1594, text-text 1340, text-stroke 1003,
+text-picture 704, text-fill 180, link-link 146, text-img 120, text-link 111, src-on-picture 47, link-axis 28, src-gap 20, cbar-picture 8).
+The hits collapse to **195 unique (scene, kind, label) faults**; each fault is counted on every K6 frame it lives in (dense scenes are
+sampled every 0.5 s, so s11 alone had 584).
+
+### Why 166 stills were missing
+All 166 are s14_cylinder (frames 22082-23851): every one threw `R3F: G is not part of the THREE namespace`. A `<g>` (SVG group) was
+written inside the `<HView3D>` (react-three-fiber) tree; R3F treats every lower-case tag as a THREE class. The SSR gate did not catch
+it because `run.mjs --3d` suppresses React warnings about 3-D tags. Fix: `<g>` → `<group>` (co_sA s14). s14 now renders.
+
+### Triage
+| | cause | hits (k6b1) | fix |
+|---|---|---|---|
+| systematic | SVG `<image>` inside a GeoMap `clip-path`: the house BoxProbe crops images to overflow-hidden ancestors only, so HRRR/GOES rasters were measured at their full, unclipped extent | 120 text-img (s00, s01, s11) | `GeoMap` (co_lib) puts the map body in an overflow-hidden `<div>` of the map box as well as its clip-path (drawing unchanged); frame stroke and `over` stay in a full-frame SVG |
+| systematic | `SourceLine` (a bare `<g>`) used outside an `<svg>` in s01: drawn as tiny HTML text at the top-left, box 0 | 20 src-gap | `SourceBelow` |
+| systematic | shared `AxesEN`: "east" under the x-axis, on the KmTicks "6 km" | 248 text-text (s02-s05) | "east" above the axis |
+| systematic | the R3F `<g>` crash (above) | 166 stills missing | `<group>` |
+| real | text column wider than the frame (equations at 64-84 px, long keywords from x 1100-1430), and under-brace equations that are wide by nature | 1594 edge | per scene: column moved/shortened, long lines split; EQ_S11/S26/S32/S45 shown on two lines (the 64-px size is kept: under-words must stay ≥ 44 px) |
+| real | must-class labels on globes / maps / the stack (speed tags, east/west, patch sides, Brest/Brittany/Atlantic piled up, s36 component labels on contours) | 704 text-picture + most text-text/-stroke on globes | readouts moved off the picture (s19 speeds at the limb where each parallel leaves the globe; s17 east/west, s23 patch sides, s36 components in the column, in their colours); place names on a globe are now outlined map labels (`data-lc-maplabel`, the tool's spot-label class, only for real place names); s24 labels re-placed round the Brest dot |
+| real | contour labels stacked on the 10 hPa vortex | ~250 (s35/s36) | contours `data-lc-contour`; labels placed once (CONT_LABELS) on their own contour, ≥ 34 px from every arrow, ring, arc, marker and callout chord, no two overlapping |
+| real | gold links crossing (stacked callouts whose links leave from the top edge; the s02 origin link; s03/s05 links) | 146 link-link + 111 text-link | `SideCallout` (co_lib: link always from the text's left edge), callouts ordered like their targets, links timed apart (s05), routed with `ctl` (s03); s15 callout over a graticule replaced by an "a" spot label + plain column readout |
+| real | the s14b stack under the column at the close look, stack bottom on the credit, credit in the caption band | 412 (s14b) | column at x 1300, stack 40 px higher, close look at dist 7.6, the column fades during the close look only |
+| real | misc. (s07 labels on rays, s08 r̂ in the caption band, s09 dθ on r̂, s10 u label on a dash, s13/s19/s20/s21/s22/s25/s27/s29/s31/s33/s34/s38-s46 single overlaps) | rest | moved / retimed per fault |
+
+### Rounds (same 4086-frame list; one stills job at a time, `--jobs 3`, ≈ 24 min per full set)
+| round | stills | K6 |
+|---|---|---|
+| k6b1 (pre-render) | 3920 / 4086 | FAIL 5301 |
+| k6r1 | 4086 / 4086, 0 errors | FAIL 811 (s11 Florida label on the map edge 342, s11 equation 12 px from the colour bar 150, two-line equations too close in s26/s32/s45, s14b close look, singles) |
+| k6r2 | 4086 / 4086, 0 errors | FAIL 28 (s26 calc 1 px under the equation, s45 axis word 4 px under the keyword, s24 credit under the zooming-out globe for 2 frames) |
+| k6r2 + 328 re-shot frames of s24/s26/s45 | 4086 / 4086, 0 errors | **PASS, 0 hits**; 1132 INFO (603 place/≤2-char labels on map linework, 243 spot labels on 3-D rods, 215 cross-fade, 67 marker beside its label, 4 label at a shape's end) |
+Final stills + boxes: `S/stills/k6r2`, report `S/k6r3.json`. **Point the render QA at `--overlap "$S/stills/k6r2"`** (co_render.sh still says k6b1).
+
+Static gates after every round (last run): tsc 0 errors · at_check 448 refs, 0 failures · swap_check 383 text elements, 0 pairs, 0 swaps < 8 frames ·
+cam_speed 0 above 90 °/s · eq_check 29/29 · SSR step 10: 10 497 scene-frames, 0 errors, 0 NaN · SSR --3d step 15: 7596, 0 errors.
+GPU probe (`S/gpuprobe.png`): `ANGLE (NVIDIA, NVIDIA RTX A1000 Laptop GPU (0x000025B9) Direct3D11 vs_5_0 ps_5_0, D3D11)` — hardware GPU, not SwiftShader.
+Narration, timing.json and the sound mix unchanged.
+
+### For the reviewer (not K6 faults)
+- s14: the GOES eye image quad does not show in the stills (the cylinder sits alone on an empty panel; true-aspect cylinder is small).
+- s45: tight stack in the column (two equation lines, keyword, "hPa per hour") — passes K6 with 7-8 px gaps.
+- s24: the credit waits ≈ 1 s while the zooming-out globe still covers its place.
+- s39: the three callout links converge on Fort Myers Beach (they meet only at their ends).
+
+Disk: before C: 51.8 GB / G: 470.8 GB free; after C: 51.5 GB / G: 470.1 GB free. Scratch stills: k6b1, k6r1 (obsolete), k6r2 (final).

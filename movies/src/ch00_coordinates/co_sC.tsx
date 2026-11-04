@@ -16,7 +16,7 @@ import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import { Notebook } from "../house/kit/icons";
 import {
   AT, Arrow, Ax, Axes, BREST, BROWN, Balloon, Barometer, ClockText, ColourBar, Curve, D, D2R, GeoImg, GeoMap, HouseIcon, IMGS, K, LEN, LUT_BAL, Lbl, MapBox,
-  SS, SE, Scene, SpeedBar, Svg, Train, Walker, ArcHead, arcD, axP, boxAt, clamp, fin, fout, linesPath, mapP, mix, nf, poly, prog, win, xyMix, zoomBox,
+  SS, SE, Scene, SideCallout, SpeedBar, Svg, Train, Walker, ArcHead, arcD, axP, boxAt, clamp, fin, fout, linesPath, mapP, mix, nf, poly, prog, win, xyMix, zoomBox,
 } from "./co_lib";
 import { EQ_S31, EQ_S32, EQ_S33, EQ_S37, EQ_S38, EQ_S39, EQ_S41, EQ_S42, EQ_S43, EQ_S45 } from "./co_eq";
 
@@ -77,9 +77,10 @@ const S31: React.FC = () => {
         <Callout f={f} lines="1/0.66 ≈ 1.5 ×" at={[1150, 470]} appear={tB} target={ct(iB)} c={C.gold} bend={50} />
         <Callout f={f} lines="≈ 4.9 ×" at={[1150, 590]} appear={tS} target={ct(iS)} c={C.gold} bend={40} />
         <Keyword f={f} text="how weather data arrive" at={[1150, 330]} s={T.floor} appear={tData} out={tPar - 18} />
-        <Keyword f={f} text="every parallel as long as the equator" at={[1150, 330]} s={T.floor} appear={tPar} out={tB - 18} />
+        <Keyword f={f} text="every parallel as long" at={[1150, 330]} s={T.floor} appear={tPar} out={tB - 18} />
+        <Lbl x={1150} y={386} t="as the equator" c={C.key} s={T.floor} o={win(f, tPar + 8, tB - 18)} />
         <Keyword f={f} text="shapes squashed near the poles" at={[1150, 720]} s={T.floor} appear={tNS} />
-        <Keyword f={f} text="peel" at={[V31.cx, V31.cy + (Math.PI / 2) * V31.s + 50]} a="middle" s={T.floor} appear={tPeel} out={tPC - 18} />
+        <Keyword f={f} text="peel" at={[V31.cx, V31.cy - (Math.PI / 2) * V31.s - 50]} a="middle" s={T.floor} appear={tPeel} out={tPC - 18} />
       </Svg>
       <TeX s={eq[0]} x={1150} y={130} size={64} o={fin(f, tPC)} />
       <TeX s={String.raw`k=${eq[1]}`} x={1150} y={240} size={64} c={C.gold} o={fin(f, tK)} />
@@ -121,13 +122,15 @@ const S32: React.FC = () => {
           <Lbl x={latTick(la)[0] + 22} y={latTick(la)[1]} t={`${la}°`} c={C.muted} s={T.floor} b={false} /></g>)}</g>
         <Keyword f={f} text="circles stay circles" at={[1150, 320]} s={T.floor} appear={tCirc} out={tConf - 18} />
         <Keyword f={f} text="conformal" at={[1150, 320]} appear={tConf} c={C.gold} />
-        <Lbl x={1150} y={400} t="rhumb line: straight" c={C.local} s={T.floor} o={fin(f, tNav)} />
-        <Lbl x={1150} y={460} t="great circle: curved" c={C.gold} s={T.floor} o={fin(f, tNav + 20)} />
-        <Keyword f={f} text="derivatives movie" at={[1150, 800]} s={T.floor} appear={AT(k, 7, "derivatives movie")} out={tInf - 18} />
-        <Keyword f={f} text="→ ∞ at the poles" at={[1150, 800]} s={T.floor} appear={tInf + 10} />
+        <Lbl x={1150} y={390} t="rhumb line: straight" c={C.local} s={T.floor} o={fin(f, tNav)} />
+        <Lbl x={1150} y={445} t="great circle: curved" c={C.gold} s={T.floor} o={fin(f, tNav + 20)} />
+        <Keyword f={f} text="derivatives movie" at={[1460, 790]} s={T.floor} appear={AT(k, 7, "derivatives movie")} out={tInf - 18} />
+        <Keyword f={f} text="→ ∞ at the poles" at={[1460, 790]} s={T.floor} appear={tInf + 10} />
       </Svg>
       <TeX s={String.raw`dy=\frac{a\,d\varphi}{\cos\varphi}`} x={1150} y={150} size={64} o={fin(f, tStep)} />
-      <Layered parts={parts} x={1100} y={620} size={64} layers={[{ t: [0], o: fin(f, tAdd) }, { t: [1, 2], o: fin(f, tChk) }, { t: [], u: [2], o: fin(f, tChk + 20) }]} />
+      {/* K6: the two halves of EQ_S32 on two lines (inline it ran 340 px past the frame) */}
+      <Layered parts={[parts[0], { t: "," }]} x={1100} y={545} size={64} layers={[{ t: [0], o: fin(f, tAdd) }, { t: [1], o: fin(f, tChk) }]} />
+      <Layered parts={[parts[2]]} x={1100} y={735} size={64} layers={[{ t: "all", o: fin(f, tChk) }, { t: [], u: [0], o: fin(f, tChk + 20) }]} />
       <SourceBelow text={BMSRC} pic={{ x: 80, y: 54, w: 880, h: 752 }} w={880} name="s32 src" />
     </Scene>
   );
@@ -161,8 +164,8 @@ const S33: React.FC = () => {
         {shape(PJ.af.mc, PJ.af.eq, C.second, [100, 40], fin(f, tGA))}
         <Callout f={f} lines="4 ×" at={[1150, 330]} appear={t4} target={ct(4)} c={C.gold} out={tGA - 18} bend={40} />
         <Callout f={f} lines="≈ 24 ×" at={[1150, 430]} appear={t24} target={ct(2)} c={C.gold} out={tGA - 18} bend={30} />
-        <Lbl x={1150} y={330} t="Greenland ≈ Africa on the map" c={C.key} s={T.floor} o={win(f, tGA, tTr - 18)} />
-        <Lbl x={1150} y={330} t="true size: Africa ≈ 14 × Greenland" c={C.key} s={T.floor} o={fin(f, tTr + 20)} />
+        <Lbl x={1100} y={330} t="Greenland ≈ Africa on the map" c={C.key} s={T.floor} o={win(f, tGA, tTr - 18)} />
+        <Lbl x={1100} y={330} t="true size: Africa ≈ 14 × Greenland" c={C.key} s={T.floor} o={fin(f, tTr + 20)} />
         <Keyword f={f} text="directions yes, sizes no" at={[1150, 820]} s={T.floor} appear={tVerd} />
       </Svg>
       <TeX s={EQ_S33} x={1150} y={180} size={64} o={fin(f, tA)} />
@@ -205,15 +208,15 @@ const S34: React.FC = () => {
           {(PJ.af.ee as number[][]).map((L, i) => <path key={`a${i}`} d={flatD(pe, L) + "Z"} fill="none" stroke={C.second} strokeWidth={3} />)}
         </g>
         <g opacity={fin(f, tSh)}>{e3.map((L, i) => <path key={i} d={flatD(pe, L) + "Z"} fill={C.gold} fillOpacity={0.2} stroke={C.gold} strokeWidth={3} />)}</g>
-        <ColourBar x={1240} y={130} w={420} lut={LUT_BAL} lo={-5} hi={5} unit="°C" title={["2 m temperature,", "difference from normal"]} ticks={[{ v: -4, t: "−4" }, { v: 0, t: "0" }, { v: 4, t: "4" }]} />
-        <Keyword f={f} text="how much is warmer?" at={[1240, 300]} s={T.floor} appear={tWarm} out={tTrue - 18} />
-        <Lbl x={1240} y={300} t="Greenland ≈ 1/14 of Africa" c={C.key} s={T.floor} o={fin(f, AT(k, 3, "a fourteenth"))} />
-        <Callout f={f} lines="angles off ≥ 30°" at={[1240, 400]} appear={t30} target={om} s={T.floor} c={C.gold} bend={40} />
-        <Keyword f={f} text="no flat map keeps both" at={[1240, 500]} s={T.floor} appear={tNo} />
-        <Keyword f={f} text="pick the map for the job" at={[1240, 580]} s={T.floor} appear={tRule} />
-        <Lbl x={1240} y={660} t="conformal → winds, directions" c={C.key} s={T.floor} o={fin(f, tUse)} />
-        <Lbl x={1240} y={720} t="equal-area → amounts" c={C.key} s={T.floor} o={fin(f, tUse + 20)} />
-        <Keyword f={f} text="reading weather maps" at={[1240, 800]} s={T.floor} appear={AT(k, 9, "reading weather maps")} />
+        <ColourBar x={1200} y={130} w={420} lut={LUT_BAL} lo={-5} hi={5} unit="°C" title={["2 m temperature,", "difference from normal"]} ticks={[{ v: -4, t: "−4" }, { v: 0, t: "0" }, { v: 4, t: "4" }]} />
+        <Keyword f={f} text="how much is warmer?" at={[1200, 300]} s={T.floor} appear={tWarm} out={tTrue - 18} />
+        <Lbl x={1200} y={300} t="Greenland ≈ 1/14 of Africa" c={C.key} s={T.floor} o={fin(f, AT(k, 3, "a fourteenth"))} />
+        <SideCallout f={f} lines="angles off ≥ 30°" at={[1200, 400]} appear={t30} target={om} s={T.floor} c={C.gold} bend={20} />
+        <Keyword f={f} text="no flat map keeps both" at={[1200, 500]} s={T.floor} appear={tNo} />
+        <Keyword f={f} text="pick the map for the job" at={[1200, 580]} s={T.floor} appear={tRule} />
+        <Lbl x={1200} y={660} t="conformal → winds, directions" c={C.key} s={T.floor} o={fin(f, tUse)} />
+        <Lbl x={1200} y={720} t="equal-area → amounts" c={C.key} s={T.floor} o={fin(f, tUse + 20)} />
+        <Keyword f={f} text="reading weather maps" at={[1200, 800]} s={T.floor} appear={AT(k, 9, "reading weather maps")} />
       </Svg>
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · Sep 2026 vs 1991–2020 · coast: Natural Earth" pic={{ x: 80, y: 40, w: 1100, h: 700 }} w={1100} name="s34 src" />
     </Scene>
@@ -233,10 +236,12 @@ const PolarMap: React.FC<{ f: number; o?: number; cont?: number; arrows?: number
         {(VX.coast as number[][]).map((L, i) => <path key={i} d={flatD(p, L)} fill="none" stroke={C.key} strokeOpacity={0.55} strokeWidth={1.6} />)}
         {Object.values(VX.rings as Record<string, number>).map((r, i) => <circle key={i} cx={VP.cx} cy={VP.cy} r={r * VP.s} fill="none" stroke={C.local} strokeWidth={2.5} opacity={rings} />)}
         {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => { const t = (a - 90) * D2R; return <line key={a} x1={VP.cx} y1={VP.cy} x2={VP.cx + R * VP.s * Math.cos(t)} y2={VP.cy + R * VP.s * Math.sin(t)} stroke={C.local} strokeWidth={2} opacity={rings * 0.8} />; })}
+        {/* contour lines (data-lc-contour) and their height labels (outlined map labels, data-lc-maplabel): the labels sit ON
+            their own contour, at spots chosen once (CONT_LABELS) clear of the other labels and of every arrow, ring and arc */}
         <g opacity={cont}>{(VX.contours as { level: number; xy: number[][] }[]).map((c) => <g key={c.level}>
-          {c.xy.map((L, i) => <path key={i} d={flatD(p, L)} fill="none" stroke={C.key} strokeWidth={3} />)}
-          {c.xy[0] && c.xy[0].length > 40 ? <Lbl x={p(c.xy[0][20], c.xy[0][21])[0]} y={p(c.xy[0][20], c.xy[0][21])[1]} t={(c.level / 1000).toFixed(1)} c={C.key} s={T.floor} a="middle" /> : null}
-        </g>)}</g>
+          {c.xy.map((L, i) => <path key={i} d={flatD(p, L)} fill="none" stroke={C.key} strokeWidth={3} data-lc-contour="1" />)}
+        </g>)}
+          {CONT_LABELS.map((q) => <g key={q.t} data-lc-maplabel="1"><Lbl x={q.at[0]} y={q.at[1]} t={q.t} c={C.key} s={T.floor} a="middle" /></g>)}</g>
         <g opacity={arrows}>{(VX.arrows as number[][]).map((A, i) => { const q = p(A[0], A[1]), L = A[4] * 2.2; return <AnimatedWindArrow key={i} from={q} to={[q[0] + A[2] * L, q[1] - A[3] * L]} speed={A[4]} f={f} c={C.first} px={6} head={20} />; })}</g>
         {children ? children(p) : null}
       </g>
@@ -244,6 +249,44 @@ const PolarMap: React.FC<{ f: number; o?: number; cont?: number; arrows?: number
     </Svg>
   );
 };
+/** K6 clean-up: the contour labels, placed ONCE for s35 and s36 (so they never jump at the cut). For each level, the spot on its
+ * own contour farthest from everything else drawn on the polar map in either scene (the wind arrows, the r line and λ arc, the
+ * anticlockwise arc, both rings, the two component arrows, the centre and 30° N markers) and from the labels already placed;
+ * a level with no spot ≥ 34 px clear of all of it gets no label. Pure function of the data. */
+const CONT_LABELS: { t: string; at: Pt }[] = (() => {
+  const p = pv(VP), R = EXT.ps[0] * VP.s;
+  const avoid: Pt[][] = [];
+  (VX.arrows as number[][]).forEach((A) => { const q = p(A[0], A[1]), L = A[4] * 2.2; avoid.push([q, [q[0] + A[2] * L, q[1] - A[3] * L]]); });
+  avoid.push([[VP.cx, VP.cy], p(0, -VX.rings["45"])]);
+  const arcPts = (r: number, a0: number, a1: number): Pt[] => Array.from({ length: 25 }, (_, i) => { const a = (a0 + ((a1 - a0) * i) / 24) * D2R; return [VP.cx + r * Math.cos(a), VP.cy - r * Math.sin(a)] as Pt; });
+  avoid.push(arcPts(90, -90, -30), arcPts(150, 200, 320));
+  const ringPts = (L: number[]) => Array.from({ length: L.length / 2 + 1 }, (_, i) => p(L[(2 * i) % L.length], L[(2 * i + 1) % L.length]));
+  avoid.push(ringPts(VX.ringP), ringPts(VX.ringC));
+  const A6 = (VX.arrows as number[][])[6], a0 = p(A6[0], A6[1]), rad = Math.hypot(a0[0] - VP.cx, a0[1] - VP.cy);
+  const rr: Pt = [(a0[0] - VP.cx) / rad, (a0[1] - VP.cy) / rad], th: Pt = [rr[1], -rr[0]];
+  avoid.push([a0, [a0[0] + th[0] * 120, a0[1] + th[1] * 120]], [a0, [a0[0] - rr[0] * 110, a0[1] - rr[1] * 110]]);
+  const cz = p(VX.cxy[0], VX.cxy[1]), z30 = p(0, -VX.rings["30"]);
+  avoid.push([[cz[0] - 20, cz[1]], [cz[0] + 20, cz[1]]], [[z30[0] - 12, z30[1]], [z30[0] + 12, z30[1]]], [[VP.cx + 20, VP.cy + 100], [VP.cx + 60, VP.cy + 140]]);
+  avoid.push([[986, 360], cz], [[986, 470], z30]);   // the two s35 callout links (bend 20: within ~10 px of these chords)
+  const dSeg = (q: Pt, a: Pt, b: Pt) => { const vx = b[0] - a[0], vy = b[1] - a[1], L2 = vx * vx + vy * vy || 1;
+    const t = Math.max(0, Math.min(1, ((q[0] - a[0]) * vx + (q[1] - a[1]) * vy) / L2)); return Math.hypot(q[0] - a[0] - t * vx, q[1] - a[1] - t * vy); };
+  const hw = 50, hh = 21;   // half box of a "29.6" label at 44 px
+  const dBox = (q: Pt, a: Pt, b: Pt) => Math.min(...[[0, 0], [-hw, -hh], [hw, -hh], [-hw, hh], [hw, hh], [-hw, 0], [hw, 0], [0, -hh], [0, hh]].map(([dx, dy]) => dSeg([q[0] + dx, q[1] + dy], a, b)));
+  const out: { t: string; at: Pt }[] = [];
+  for (const c of VX.contours as { level: number; xy: number[][] }[]) {
+    let best: Pt | null = null, bd = 34;
+    for (const L of c.xy) for (let j = 0; j < L.length / 2; j += 3) {
+      const q = p(L[2 * j], L[2 * j + 1]);
+      if (Math.hypot(q[0] - VP.cx, q[1] - VP.cy) > 0.86 * R) continue;
+      if (out.some((o) => Math.abs(o.at[0] - q[0]) < 2 * hw + 16 && Math.abs(o.at[1] - q[1]) < 2 * hh + 14)) continue;
+      let d = 1e9;
+      for (const poly_ of avoid) for (let i = 0; i + 1 < poly_.length; i++) d = Math.min(d, dBox(q, poly_[i], poly_[i + 1]));
+      if (d > bd) { bd = d; best = q; }
+    }
+    if (best) out.push({ t: (c.level / 1000).toFixed(1), at: best });
+  }
+  return out;
+})();
 const VSRC = "Data: NCEP/NCAR Reanalysis 1 (NOAA PSL) · 21 Jan 2026 · 10 hPa · Image: NASA BMNG";
 const VPIC = { x: VP.cx - EXT.ps[0] * VP.s, y: VP.cy - EXT.ps[0] * VP.s, w: 2 * EXT.ps[0] * VP.s, h: 2 * EXT.ps[0] * VP.s };
 const S35: React.FC = () => {
@@ -264,11 +307,12 @@ const S35: React.FC = () => {
       <Svg>
         <Lbl x={VP.cx + 20} y={VP.cy + 120} t="r" c={C.gold} s={T.calc} o={win(f, tR, tZ)} />
         <Keyword f={f} text="polar coordinates again" at={[1000, 140]} s={T.floor} appear={tPol} out={tZ - 18} />
-        <Lbl x={1000} y={220} t="r: distance from the pole · angle: longitude" c={C.key} s={T.floor} o={win(f, tLon, tZ - 18)} />
+        <Lbl x={1000} y={220} t="r: distance from the pole" c={C.key} s={T.floor} o={win(f, tR, tZ - 18)} />
+        <Lbl x={1000} y={276} t="angle: longitude" c={C.key} s={T.floor} o={win(f, tLon, tZ - 18)} />
         <Keyword f={f} text="10 hPa surface, about 30 km up" at={[1000, 140]} s={T.floor} appear={tZ} />
         <Lbl x={1000} y={220} t="21 Jan 2026" c={C.muted} s={T.floor} o={fin(f, tZ + 10)} />
-        <Callout f={f} lines="≈ 28.6 km" at={[1000, 360]} appear={tVal} target={cz} s={T.key} bend={40} />
-        <Callout f={f} lines="≈ 30.7 km at 30° N" at={[1000, 470]} appear={t31} target={z30} s={T.key} bend={-40} />
+        <SideCallout f={f} lines="≈ 28.6 km" at={[1000, 360]} appear={tVal} target={cz} s={T.key} bend={20} />
+        <SideCallout f={f} lines="≈ 30.7 km at 30° N" at={[1000, 470]} appear={t31} target={z30} s={T.key} bend={-20} />
         <Lbl x={1000} y={580} t="west to east, round the Arctic" c={C.first} s={T.floor} o={fin(f, tWind)} />
         <Keyword f={f} text="stratospheric polar vortex" at={[1000, 700]} appear={tPV} />
       </Svg>
@@ -300,7 +344,7 @@ const S36: React.FC = () => {
           <path d={arcD([VP.cx, VP.cy], 150, 200, 320)} fill="none" stroke={C.gold} strokeWidth={6} opacity={win(f, tAnti, tCen)} />
           <ArcHead c={[VP.cx, VP.cy]} r={150} a={320} dir={1} col={C.gold} o={win(f, tAnti, tCen)} />
           <g opacity={fin(f, tCen)} stroke={C.gold} strokeWidth={8} strokeLinecap="round"><line x1={cz[0] - 18} y1={cz[1] - 18} x2={cz[0] + 18} y2={cz[1] + 18} /><line x1={cz[0] + 18} y1={cz[1] - 18} x2={cz[0] - 18} y2={cz[1] + 18} /></g>
-          <Lbl x={cz[0] + 26} y={cz[1] - 30} t="72.9° N" c={C.key} s={T.floor} o={fin(f, tCen)} />
+
           <path d={ringD(VX.ringP)} fill="none" stroke={C.local} strokeWidth={4} opacity={fin(f, tRe) * 0.9} />
           <path d={ringD(VX.ringC)} fill="none" stroke={C.first} strokeWidth={5} opacity={fin(f, tRe + 30)} />
           {ticks(VX.ringP, VX.ringP_vr, null, fin(f, tRe) * fout(f, tRe + 90, 20))}
@@ -308,9 +352,8 @@ const S36: React.FC = () => {
         </>}
       </PolarMap>
       <Svg>
-        <Lbl x={a0[0] + th[0] * 150} y={a0[1] + th[1] * 150} t="east = θ̂" c={C.first} s={T.floor} a="middle" o={win(f, tE, tHur)} />
-        <Lbl x={a0[0] - rr[0] * 150} y={a0[1] - rr[1] * 150 + 30} t="north = −r̂" c={C.neg} s={T.floor} a="middle" o={win(f, tN, tHur)} />
-        <Keyword f={f} text="eastward = tangential" at={[1000, 140]} s={T.floor} appear={tE} out={tHur - 18} />
+        {/* K6: the two component arrows are named in the column, in their own colours (on the map the labels sat on contours) */}
+        <Keyword f={f} text="eastward = tangential" at={[1000, 140]} s={T.floor} appear={tE} out={tHur - 18} c={C.first} />
         <Keyword f={f} text="northward = − radial" at={[1000, 220]} s={T.floor} appear={tN} out={tHur - 18} c={C.neg} />
         <Lbl x={1000} y={300} t="anticlockwise, seen from above the pole" c={C.key} s={T.floor} o={win(f, tAnti, tHur - 18)} />
         <g opacity={win(f, tHur, tCen - 18)}>
@@ -402,7 +445,7 @@ const S38: React.FC = () => {
         <Lbl x={b[0] + 40} y={b[1] - 150} t="(6, −8)" c={C.key} s={T.calc} o={fin(f, tSix)} />
         <Keyword f={f} text="same" at={[b[0] + 120, b[1] - 220]} s={T.floor} appear={tSix + 20} c={C.gold} />
         <Keyword f={f} text="direction cosines" at={[1100, 380]} s={T.floor} appear={tDC} c={C.gold} />
-        <Keyword f={f} text="turning angle changes from place to place" at={[1080, 800]} s={T.floor} appear={tPl} />
+        <Keyword f={f} text="angle changes from place to place" at={[1080, 800]} s={T.floor} appear={tPl} />
       </Svg>
       <TeX s={String.raw`C=\begin{pmatrix}\cos\alpha & -\sin\alpha\\ \sin\alpha & \cos\alpha\end{pmatrix}`} x={1100} y={200} size={64} o={fin(f, tM)} />
       <TeX s={EQ_S38} x={1100} y={500} size={60} o={fin(f, tIdx)} />
@@ -413,8 +456,8 @@ const S38: React.FC = () => {
 };
 
 // ================================================================ s39-s40 along and across the coast (HRRR 20 UTC), the surge and Tampa Bay
-const FLB: MapBox = boxAt(26.75, -82.05, 2.3, 80, 40, 1220, 760);
-const TPB: MapBox = boxAt(27.55, -82.45, 1.8, 80, 40, 1220, 760);
+const FLB: MapBox = boxAt(26.75, -82.05, 2.3, 80, 40, 1140, 760);
+const TPB: MapBox = boxAt(27.55, -82.45, 1.8, 80, 40, 1140, 760);
 const CoastMap: React.FC<{ B: MapBox; o?: number; children?: (P: (la: number, lo: number) => Pt) => React.ReactNode }> = ({ B, o = 1, children }) => (
   <GeoMap id="s39m" B={B} o={o}>
     {(P) => <>
@@ -456,20 +499,21 @@ const S39: React.FC = () => {
         </>}
       </CoastMap>
       <Svg>
-        <Lbl x={F[0] - 20} y={F[1] + 36} t="Fort Myers Beach" c={C.key} s={T.floor} a="end" o={fin(f, tFMB)} />
+        <Lbl x={F[0] - 60} y={F[1] - 36} t="Fort Myers Beach" c={C.key} s={T.floor} a="end" o={fin(f, tFMB)} />
         <Lbl x={F[0] + ea[0] * 300} y={F[1] + ea[1] * 300} t="x′" c={C.second} s={T.key} a="middle" o={fin(f, tAx)} />
         <Lbl x={F[0] + ec[0] * 285} y={F[1] + ec[1] * 285} t="y′" c={C.second} s={T.key} a="middle" o={fin(f, tAx)} />
-        <SpeedBar x={1360} y={120} w={330} />
-        <Keyword f={f} text="along · across the shore" at={[1350, 260]} s={T.floor} appear={tWhat} />
-        <Callout f={f} lines="coast ≈ 329°" at={[1350, 350]} appear={AT(k, 3, "three hundred and twenty nine")} target={[(pN[0] + pV[0]) / 2 + 10, (pN[1] + pV[1]) / 2]} s={T.floor} c={C.second} bend={40} />
-        <Lbl x={1350} y={555} t="33 m/s from the SW" c={C.first} s={T.floor} o={fin(f, AT(k, 5, "thirty three"))} />
-        <Callout f={f} lines="≈ 9 m/s along" at={[1350, 630]} appear={tAl} target={[(F[0] + sa[0]) / 2, (F[1] + sa[1]) / 2]} s={T.floor} c={C.second} bend={-50} />
-        <Callout f={f} lines="≈ −32 m/s: onto the land" at={[1350, 705]} appear={tAc} target={[(F[0] + sc_[0]) / 2, (F[1] + sc_[1]) / 2]} s={T.floor} c={C.neg} bend={40} />
-        <Keyword f={f} text="pushing the sea onto the coast" at={[1350, 790]} s={T.floor} appear={tPush} />
+        <SpeedBar x={1270} y={120} w={300} />
+        <Keyword f={f} text="along · across the shore" at={[1260, 260]} s={T.floor} appear={tWhat} />
+        <SideCallout f={f} lines="coast ≈ 329°" at={[1260, 350]} appear={AT(k, 3, "three hundred and twenty nine")} target={[(pN[0] + pV[0]) / 2 + 10, (pN[1] + pV[1]) / 2]} s={T.floor} c={C.second} bend={20} />
+        <Lbl x={1260} y={555} t="33 m/s from the SW" c={C.first} s={T.floor} o={fin(f, AT(k, 5, "thirty three"))} />
+        {/* K6: across above along, so the two links (both from the left edge) never cross */}
+        <SideCallout f={f} lines="≈ −32 m/s: onto the land" at={[1260, 630]} appear={tAc} target={[(F[0] + sc_[0]) / 2, (F[1] + sc_[1]) / 2]} s={T.floor} c={C.neg} bend={20} />
+        <SideCallout f={f} lines="≈ 9 m/s along" at={[1260, 705]} appear={tAl} target={[(F[0] + sa[0]) / 2, (F[1] + sa[1]) / 2]} s={T.floor} c={C.second} bend={-20} />
+        <Keyword f={f} text="pushing the sea onshore" at={[1260, 790]} s={T.floor} appear={tPush} />
       </Svg>
-      <TeX s={cutAt(EQ_S39, String.raw`,\qquad `)[0]} x={1350} y={430} size={44} o={fin(f, tAx)} />
-      <TeX s={cutAt(EQ_S39, String.raw`,\qquad `)[1]} x={1350} y={490} size={44} o={fin(f, tAx + 15)} />
-      <SourceBelow text={CSRC} pic={{ x: 80, y: 40, w: 1220, h: 760 }} w={1220} name="s39 src" />
+      <TeX s={cutAt(EQ_S39, String.raw`,\qquad `)[0]} x={1260} y={430} size={44} o={fin(f, tAx)} />
+      <TeX s={cutAt(EQ_S39, String.raw`,\qquad `)[1]} x={1260} y={490} size={44} o={fin(f, tAx + 15)} />
+      <SourceBelow text={CSRC} pic={{ x: 80, y: 40, w: 1140, h: 760 }} w={1140} name="s39 src" />
     </Scene>
   );
 };
@@ -483,7 +527,7 @@ const S40: React.FC = () => {
   const b = 355.4 * D2R, ec: Pt = [-Math.cos(b), -Math.sin(b)];
   const sc_: Pt = [S[0] + ec[0] * CO.acS * s, S[1] + ec[1] * CO.acS * s];
   const G = D.gauges;
-  const A: Ax = { x: 1400, y: 140, w: 400, h: 300, xr: [0, 36], yr: [-2, 2.5] };
+  const A: Ax = { x: 1330, y: 150, w: 440, h: 270, xr: [0, 36], yr: [-2, 2.5] };
   return (
     <Scene>
       <CoastMap B={B}>
@@ -498,20 +542,21 @@ const S40: React.FC = () => {
         </>; }}
       </CoastMap>
       <Svg>
-        <Lbl x={S[0] + 24} y={S[1] - 30} t="St. Petersburg, Tampa Bay" c={C.key} s={T.floor} o={fin(f, tTB)} />
-        <Axes A={A} xt={[0, 12, 24, 36]} yt={[-2, 0, 2]} xl="hours from 28 Sep, 00 UTC" yl="water above the tide (m)" zero o={fin(f, tRose)} />
+        <Lbl x={S[0] + 24} y={S[1] + 34} t="St. Petersburg, Tampa Bay" c={C.key} s={T.floor} o={fin(f, tTB)} />
+        <Axes A={A} xt={[0, 12, 24, 36]} yt={[-2, 0, 2]} xl="hours from 28 Sep, 00 UTC" yl="water above tide (m)" zero o={fin(f, tRose)} />
         <Curve A={A} xs={G["8725520"].h} ys={G["8725520"].res} c={C.neg} w={5} upto={prog(f, tRose, tFt)} />
         <Curve A={A} xs={G["8726520"].h} ys={G["8726520"].res} c={C.first} w={5} upto={prog(f, tFell, tFell + 60)} />
-        <Lbl x={1410} y={560} t="Fort Myers gauge" c={C.neg} s={T.floor} o={fin(f, tRose)} />
-        <Lbl x={1410} y={610} t="St. Petersburg gauge" c={C.first} s={T.floor} o={fin(f, tFell)} />
-        <Keyword f={f} text="storm surge" at={[1350, 680]} appear={tSurge} out={tFt - 18} />
-        <Lbl x={1350} y={680} t="Fort Myers Beach: 10–15 ft ≈ 3–4.5 m" c={C.local} s={T.floor} o={fin(f, tFt) * fout(f, tTB - 18)} />
-        <Lbl x={1350} y={680} t="+11.5 m/s: out to sea" c={C.first} s={T.floor} o={fin(f, AT(k, 5, "eleven and a half")) * fout(f, tFlip - 18)} />
-        <Lbl x={1350} y={680} t="−32 · +11.5: the sign flips" c={C.gold} s={T.floor} o={fin(f, tFlip) * fout(f, tEk - 18)} />
-        <Keyword f={f} text="along-shore wind: Ekman movie" at={[1350, 680]} s={T.floor} appear={tEk} />
-        <Lbl x={1350} y={760} t="almost due north" c={C.second} s={T.floor} o={win(f, tDue, LEN(k) - 90)} />
+        <Lbl x={1340} y={565} t="Fort Myers gauge" c={C.neg} s={T.floor} o={fin(f, tRose)} />
+        <Lbl x={1340} y={615} t="St. Petersburg gauge" c={C.first} s={T.floor} o={fin(f, tFell)} />
+        <Keyword f={f} text="storm surge" at={[1260, 685]} appear={tSurge} out={tFt - 18} />
+        <Lbl x={1260} y={685} t="Fort Myers Beach:" c={C.local} s={T.floor} o={fin(f, tFt) * fout(f, tTB - 18)} />
+        <Lbl x={1260} y={737} t="10–15 ft ≈ 3–4.5 m" c={C.local} s={T.floor} o={fin(f, tFt) * fout(f, tTB - 18)} />
+        <Lbl x={1260} y={685} t="+11.5 m/s: out to sea" c={C.first} s={T.floor} o={fin(f, AT(k, 5, "eleven and a half")) * fout(f, tFlip - 18)} />
+        <Lbl x={1260} y={685} t="−32 · +11.5: the sign flips" c={C.gold} s={T.floor} o={fin(f, tFlip) * fout(f, tEk - 18)} />
+        <Keyword f={f} text="along-shore: Ekman movie" at={[1260, 685]} s={T.floor} appear={tEk} />
+        <Lbl x={1260} y={775} t="almost due north" c={C.second} s={T.floor} o={win(f, tDue, LEN(k) - 90)} />
       </Svg>
-      <SourceBelow text="Data: HRRR (NOAA) · NOAA CO-OPS tide gauges · NHC report" pic={{ x: 80, y: 40, w: 1220, h: 760 }} w={1220} name="s40 src" />
+      <SourceBelow text="Data: HRRR (NOAA) · NOAA CO-OPS tide gauges · NHC report" pic={{ x: 80, y: 40, w: 1140, h: 760 }} w={1140} name="s40 src" />
     </Scene>
   );
 };
@@ -550,7 +595,7 @@ const S41: React.FC = () => {
         <Keyword f={f} text="velocities add" at={[1100, 140]} appear={tAdd} />
         <Keyword f={f} text="Galilean transformation" at={[1100, 380]} appear={tGal} c={C.gold} />
       </Svg>
-      <CalcStack f={f} x={1400} y={60} size={54} rows={[{ lhs: "", rhs: String.raw`20+1.5=21.5\ \mathrm{m/s}`, at: AT(k, 3, "twenty one and a half") }]} />
+      <CalcStack f={f} x={1100} y={36} size={54} rows={[{ lhs: "", rhs: String.raw`20+1.5=21.5\ \mathrm{m/s}`, at: AT(k, 3, "twenty one and a half") }]} />
       <TeX s={eq[0]} x={1100} y={230} size={64} o={fin(f, tU)} />
       <TeX s={`${eq[1]},\\qquad ${eq[2]}`} x={1100} y={310} size={56} o={fin(f, tX)} />
     </Scene>
@@ -586,7 +631,7 @@ const S42: React.FC = () => {
         <g opacity={fin(f, tTurn)}>
           <ellipse cx={500} cy={600} rx={260} ry={90} fill="#22304a" stroke={C.local} strokeWidth={4} />
           <path d={arcD([500, 600], 200, 200, 320)} fill="none" stroke={C.gold} strokeWidth={5} />
-          <Lbl x={500} y={740} t="a turning frame: extra terms" c={C.neg} s={T.floor} a="middle" />
+          <Lbl x={500} y={840} t="a turning frame: extra terms" c={C.neg} s={T.floor} a="middle" />
         </g>
         <Keyword f={f} text="a = a′" at={[1100, 360]} appear={tSame} c={C.gold} />
         <Keyword f={f} text="same forces in both frames" at={[1100, 450]} s={T.floor} appear={tF} out={tFl - 18} />
@@ -708,11 +753,12 @@ const S44: React.FC = () => {
             {Array.from({ length: 8 }, (_, i) => { const a = (i * Math.PI) / 4, p0: Pt = [cU[0] + RU * Math.cos(a), cU[1] - RU * Math.sin(a)];
               return <g key={i}><Arrow p={p0} q={[p0[0] + 70, p0[1]]} color={C.second} w={6} head={22} />
                 <Lbl x={p0[0] + (Math.cos(a) > 0.1 ? 26 : Math.cos(a) < -0.1 ? -26 : 0)} y={p0[1] + (Math.sin(a) > 0 ? -34 : 34)} t={Math.sin(a) > 0.1 ? "−" : Math.sin(a) < -0.1 ? "+" : ""} c={Math.sin(a) > 0.1 ? C.neg : C.first} s={T.key} a="middle" /></g>; })}
-            <Lbl x={cU[0]} y={cU[1] + RU + 70} t="uniform wind: adds ≈ 0" c={C.key} s={T.floor} a="middle" />
+            <Lbl x={cU[0]} y={cU[1] + RU + 104} t="uniform wind: adds ≈ 0" c={C.key} s={T.floor} a="middle" />
           </g>
           <Keyword f={f} text="each point: changes by 15 m/s" at={[1180, 620]} s={T.floor} appear={tCh} out={tAcc - 18} />
           <Keyword f={f} text="no accident" at={[1180, 620]} s={T.floor} appear={tAcc} out={tUni - 18} />
-          <Lbl x={1180} y={720} t="spin: the storm's · motion: the pattern's" c={C.key} s={T.floor} o={fin(f, tBel)} />
+          <Lbl x={1180} y={720} t="spin: the storm's" c={C.key} s={T.floor} o={fin(f, tBel)} />
+          <Lbl x={1180} y={776} t="motion: the pattern's" c={C.key} s={T.floor} o={fin(f, tBel + 10)} />
         </g>
       </Svg>
       <CiaMap f={f} h={6} o={oM}>
@@ -731,14 +777,14 @@ const S44: React.FC = () => {
 const S45: React.FC = () => {
   const f = useCurrentFrame(), k = K("s45_fixed_barometer");
   const tFroz = SS(k, 1), tFall = SS(k, 2), tSplit = SS(k, 3), tPly = AT(k, 4, "Plymouth"), t38 = AT(k, 4, "three point eight"), t32 = SS(k, 5), t06 = SS(k, 6), tMost = SS(k, 7), tAdv = SS(k, 8);
-  const B = boxAt(50.5, -4.5, 4.5, 80, 40, 1100, 760);
+  const B = boxAt(50.5, -4.5, 4.5, 80, 40, 880, 760);   // K6: narrower map, wider text column for the three under-words
   const P = mapP(B);
   const slide = prog(f, tFroz + 10, SE(k, 2) - 10) * 2;
   const g = CI.ghost as { level: number; lines: number[][] }[][];
   const gi = Math.min(2, Math.floor(slide)), gw = slide - gi;
   const ply = P(CI.ply.p[0], CI.ply.p[1]);
   const parts: Part[] = [{ t: String.raw`\frac{\partial p}{\partial t}`, u: { w: String.raw`\text{fixed barometer}`, c: C.local } }, { t: "=" },
-    { t: String.raw`\frac{\partial p}{\partial \tau}`, u: { w: String.raw`\text{riding with the pattern}`, c: C.gold } }, { t: String.raw`-\mathbf U\cdot\nabla p`, u: { w: String.raw`\text{sliding pattern}`, c: C.second } }];
+    { t: String.raw`\frac{\partial p}{\partial \tau}`, u: { w: String.raw`\text{with the storm}`, c: C.gold } }, { t: String.raw`-\mathbf U\cdot\nabla p`, u: { w: String.raw`\text{sliding pattern}`, c: C.second } }];
   if (parts.map((p) => p.t).join("").replace(/\s/g, "") !== EQ_S45.replace(/\s/g, "")) throw new Error("s45 parts drift from EQ_S45");
   const bar = (x: number, v: number, c: string, o: number) => o <= 0 ? null : <rect x={x} y={560} width={70} height={Math.abs(v) * 60} fill={c} opacity={o} />;
   const ghostO = fin(f, tFroz) * fout(f, tSplit + 40, 20);
@@ -751,8 +797,8 @@ const S45: React.FC = () => {
       <Svg>
         <Barometer x={ply[0]} y={ply[1] - 50} r={36} hPa={mix(965, 958, prog(f, tFall, tFall + 90))} o={fin(f, 0)} />
         <Lbl x={ply[0] + 50} y={ply[1] + 10} t="Plymouth" c={C.key} s={T.floor} o={fin(f, tPly)} />
-        <Lbl x={1240} y={140} t="frozen pattern, sliding" c={C.local} s={T.floor} o={win(f, tFroz, tSplit - 18)} />
-        <Lbl x={1240} y={200} t="pressure falls at a fixed place" c={C.key} s={T.floor} o={win(f, tFall, tSplit - 18)} />
+        <Lbl x={1010} y={140} t="frozen pattern, sliding" c={C.local} s={T.floor} o={win(f, tFroz, tSplit - 18)} />
+        <Lbl x={1010} y={200} t="pressure falls at a fixed place" c={C.key} s={T.floor} o={win(f, tFall, tSplit - 18)} />
         <g>
           <line x1={1250} y1={560} x2={1800} y2={560} stroke={C.muted} strokeWidth={3} />
           {bar(1280, CI.ply.dpdt, C.local, fin(f, t38))}
@@ -761,13 +807,15 @@ const S45: React.FC = () => {
           <Lbl x={1315} y={840} t="−3.8" c={C.local} s={T.floor} a="middle" o={fin(f, t38)} />
           <Lbl x={1495} y={840} t="−3.2" c={C.second} s={T.floor} a="middle" o={fin(f, t32)} />
           <Lbl x={1675} y={840} t="−0.6" c={C.gold} s={T.floor} a="middle" o={fin(f, t06)} />
-          <Lbl x={1250} y={520} t="hPa per hour" c={C.muted} s={T.floor} o={fin(f, t38)} />
+          <Lbl x={1250} y={542} t="hPa per hour" c={C.muted} s={T.floor} o={fin(f, t38)} />
         </g>
-        <Keyword f={f} text="mostly: the storm arriving" at={[1240, 440]} s={T.floor} appear={tMost} out={tAdv - 18} />
-        <Keyword f={f} text="advection · material derivative" at={[1240, 440]} s={T.floor} appear={tAdv} />
+        <Keyword f={f} text="mostly: the storm arriving" at={[1010, 488]} s={T.floor} appear={tMost} out={tAdv - 18} />
+        <Keyword f={f} text="advection · material derivative" at={[1010, 488]} s={T.floor} appear={tAdv} />
       </Svg>
-      <Layered parts={parts} x={1210} y={290} size={64} layers={[{ t: "all", o: fin(f, tSplit) }, { t: [], u: [0, 2, 3], o: fin(f, tSplit + 40) }]} />
-      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 1–2 Nov 2023, 23–01 UTC" pic={{ x: 80, y: 40, w: 1100, h: 760 }} w={1100} name="s45 src" />
+      {/* K6: EQ_S45 on two lines at 64 px (three under-words ≥ 44 px do not fit on one line beside the map) */}
+      <Layered parts={[parts[0], parts[1]]} x={1010} y={116} size={64} layers={[{ t: "all", o: fin(f, tSplit) }, { t: [], u: [0], o: fin(f, tSplit + 40) }]} />
+      <Layered parts={[parts[2], parts[3]]} x={1080} y={345} size={64} layers={[{ t: "all", o: fin(f, tSplit) }, { t: [], u: [0, 1], o: fin(f, tSplit + 40) }]} />
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 1–2 Nov 2023, 23–01 UTC" pic={{ x: 80, y: 40, w: 880, h: 760 }} w={880} name="s45 src" />
     </Scene>
   );
 };
@@ -801,14 +849,16 @@ const S46: React.FC = () => {
       {j === 10 ? <><Train x={O[0] - 380} y={O[1] + 60} w={380} /><circle cx={O[0] + 220} cy={O[1] - 40} r={140} fill="none" stroke={C.first} strokeWidth={4} /><circle cx={O[0] + 220} cy={O[1] - 40} r={8} fill={C.gold} /></> : null}
     </g>;
   };
-  const txt: [string, string?][] = [["origin + directions"], ["fixed x̂, ŷ · turning r̂, θ̂"], ["s = r θ (radians)"], ["spin ≈ 37 m/s", "inflow ≈ 12.5 m/s"], ["steady spin still accelerates"],
-    ["1° north ≈ 111 km", "1° east: 74 km Brest · 23 km Svalbard"], ["half the Earth: 30° S – 30° N"], ["shortest: a great circle"], ["Mercator: shapes · equal-area: sizes"],
-    ["turned axes: along · across"], ["Galilean: accelerations and spin unchanged"]];
+  // K6: every line ≤ 760 px (x 1080 … 1840); long beats split over two or three lines
+  const txt: [string, string?, string?][] = [["origin + directions"], ["fixed x̂, ŷ · turning r̂, θ̂"], ["s = r θ (radians)"], ["spin ≈ 37 m/s", "inflow ≈ 12.5 m/s"], ["steady spin still accelerates"],
+    ["1° north ≈ 111 km", "1° east: 74 km at Brest,", "23 km at Svalbard"], ["half the Earth: 30° S – 30° N"], ["shortest: a great circle"], ["Mercator keeps shapes", "equal-area keeps sizes"],
+    ["turned axes: along · across"], ["Galilean frames:", "accelerations and spin unchanged"]];
   return (
     <Scene>
       <Svg>
         {Array.from({ length: n }, (_, j) => pic(j))}
-        {txt.map(([a, b], j) => <g key={j} opacity={beat(j)}><Lbl x={1080} y={360} t={a} c={C.key} s={T.key} />{b ? <Lbl x={1080} y={450} t={b} c={C.key} s={T.floor} /> : null}</g>)}
+        {txt.map(([a, b, c], j) => <g key={j} opacity={beat(j)}><Lbl x={1080} y={360} t={a} c={C.key} s={T.key} />{b ? <Lbl x={1080} y={450} t={b} c={C.key} s={T.floor} /> : null}
+          {c ? <Lbl x={1080} y={506} t={c} c={C.key} s={T.floor} /> : null}</g>)}
       </Svg>
     </Scene>
   );

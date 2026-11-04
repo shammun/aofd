@@ -18,7 +18,7 @@ import { OrbitKey, orbitCam as hOrbitCam, orbitPath as hOrbitPath, projector as 
 import { LayerStack3D, StackLayer } from "../house/kit/stack3d";
 import { globePath, llPath, useTex } from "./kit_co/globe";
 import {
-  AT, Arrow, Ax, Axes, BREST, BROWN, Balloon, Curve, D, D2R, GeoImg, GeoMap, Globe, IMGS, K, LEN, LUT_RAD, Lbl, MapBox, Place, SS, SE, Scene, SpeedBar,
+  AT, Arrow, Ax, Axes, BREST, BROWN, Balloon, Curve, D, D2R, GeoImg, GeoMap, Globe, IMGS, K, LEN, LUT_RAD, Lbl, MapBox, Place, SS, SE, Scene, SideCallout, SpeedBar,
   Svg, ArcHead, arcD, axP, boxAt, clamp, discOf, fin, fout, linesPath, mapP, mix, nf, poly, prog, win, zoomBox, ColourBar,
 } from "./co_lib";
 import { EQ_S04, EQ_S05, EQ_S07, EQ_S08, EQ_S09, EQ_S10, EQ_S11, EQ_S13, EQ_S14 } from "./co_eq";
@@ -55,7 +55,7 @@ const AxesEN: React.FC<{ f: number; at: number; o?: number }> = ({ f, at, o = 1 
     <g opacity={o}>
       <Arrow p={pp(-1.5, 0)} q={[mix(PO[0], 960, g), PO[1]]} color={C.second} w={6} head={30} />
       <Arrow p={pp(0, -1.2)} q={[PO[0], mix(PO[1], 90, g)]} color={C.second} w={6} head={30} />
-      <Lbl x={952} y={PO[1] + 44} t="east" c={C.key} s={T.floor} a="end" o={fin(f, at + 24)} />
+      <Lbl x={952} y={PO[1] - 44} t="east" c={C.key} s={T.floor} a="end" o={fin(f, at + 24)} />
       <Lbl x={PO[0] + 20} y={110} t="north" c={C.key} s={T.floor} o={fin(f, at + 24)} />
     </g>
   );
@@ -71,7 +71,7 @@ const KmTicks: React.FC<{ o: number }> = ({ o }) => o <= 0 ? null : (
 );
 
 // ================================================================ s00 title
-const TBOX = { x: 1130, y: 180, w: 710, h: 456 };
+const TBOX = { x: 1250, y: 200, w: 590, h: 400 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
   const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way"), tDist = AT(k, 0, "distances and directions");
@@ -169,7 +169,7 @@ const S01: React.FC = () => {
           </g>
         ))}
       </Svg>
-      <SourceLine text="Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 80, w: 620, h: 690 }} w={640} name="s01 src hrrr" />
+      <SourceBelow text="Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 80, w: 620, h: 700 }} w={640} name="s01 src hrrr" />
       <SourceBelow text="Image: NASA Blue Marble Next Generation" pic={{ x: 1000, y: 40, w: 840, h: 770 }} w={840} name="s01 src bmng" />
     </Scene>
   );
@@ -198,7 +198,8 @@ const S02: React.FC = () => {
         <Lbl x={BAL[0] + 40} y={BAL[1] - 20} t="(3, 4)" c={C.key} s={T.calc} o={fin(f, tPair)} />
         <CurvedLink f={f} from={[BAL[0] + 60, BAL[1] + 10]} to={pp(1.5, 0.1)} start={tPair + 8} bend={60} />
         <CurvedLink f={f} from={[BAL[0] + 120, BAL[1] + 10]} to={pp(3.1, 2)} start={tPair + 14} bend={-40} />
-        <Keyword f={f} text="origin" at={[1100, 160]} appear={tOrig} targets={[[PO[0] + 30, PO[1] - 40]]} />
+        <Keyword f={f} text="origin" at={[1100, 160]} appear={tOrig} />
+        <CurvedLink f={f} from={[1090, 180]} to={[PO[0] + 30, PO[1] - 40]} start={tOrig + 8} end={tPair - 12} bend={60} />
         <Keyword f={f} text="axes" at={[1100, 270]} appear={tAxW} />
         <Keyword f={f} text="coordinates" at={[1100, 560]} appear={tCo} />
         <Keyword f={f} text="Cartesian coordinates" at={[1100, 670]} appear={tCa} />
@@ -213,7 +214,7 @@ const S02: React.FC = () => {
 const S03: React.FC = () => {
   const f = useCurrentFrame(), k = K("s03_cartesian_arrows");
   const t1 = SS(k, 0), tSum = SS(k, 2), tSame = AT(k, 4, "the same way everywhere"), tMove = SS(k, 5), tIns = SS(k, 7), tRing = AT(k, 8, "rings");
-  const places: [number, number][] = [[3, 4], [6, 1.5], [1, 5.5], [-0.8, 2.5], [5, 5]];
+  const places: [number, number][] = [[3, 4], [6, 1.5], [1.8, 5.2], [-0.8, 2.5], [5, 5]];
   const hop = clamp((f - tMove) / ((SE(k, 5) - tMove) / 4), 0, 4);
   const i0 = Math.floor(hop), w = hop - i0;
   const cur: [number, number] = i0 >= 4 ? places[4] : [mix(places[i0][0], places[i0 + 1][0], prog(w, 0, 0.6)), mix(places[i0][1], places[i0 + 1][1], prog(w, 0, 0.6))];
@@ -237,8 +238,8 @@ const S03: React.FC = () => {
         <Balloon p={pp(at[0], at[1])} />
         {unitAt(at, fin(f, tMove), "b")}
         <Keyword f={f} text="same everywhere" at={[1100, 300]} appear={tSame} out={tIns - 18} />
-        <CurvedLink f={f} from={[1330, 210]} to={pp(1.5, 0.15)} start={tSum + 10} end={tSame - 10} bend={70} />
-        <CurvedLink f={f} from={[1500, 210]} to={pp(3.15, 2)} start={tSum + 16} end={tSame - 10} bend={50} />
+        <CurvedLink f={f} from={[1160, 215]} to={pp(1.5, 0.15)} ctl={[400, 230]} start={tSum + 10} end={tSame - 10} />
+        <CurvedLink f={f} from={[1390, 215]} to={pp(3.15, 2)} start={tSum + 16} end={tSame - 10} bend={40} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf x}`} x={pp(1, 0)[0] + 10} y={PO[1] - 40} size={60} c={C.second} o={fin(f, t1 + 10)} />
       <TeX s={String.raw`\hat{\mathbf y}`} x={PO[0] + 20} y={pp(0, 1)[1] - 10} size={60} c={C.second} o={fin(f, t1 + 10)} />
@@ -334,16 +335,16 @@ const S05: React.FC = () => {
         </g>
         <Station />
         <Balloon p={BAL} />
-        <CurvedLink f={f} from={[1210, 330]} to={pp(1.5, 0.15)} start={tC + 10} end={tEq - 10} bend={80} />
-        <CurvedLink f={f} from={[1210, 440]} to={pp(3.15, 2.2)} start={t4 + 6} end={tEq - 10} bend={40} />
+        <CurvedLink f={f} from={[1140, 335]} to={pp(1.5, 0.15)} ctl={[900, 700]} start={tC + 10} end={t4 - 4} />
+        <CurvedLink f={f} from={[1250, 420]} to={pp(3.15, 3.2)} start={t4 + 6} end={tEq - 10} bend={20} />
       </Svg>
       <TeX s={String.raw`r\cos\theta`} x={pp(1.5, 0)[0]} y={PO[1] + 60} size={60} ax={0.5} c={C.second} o={fin(f, tSides)} />
       <TeX s={String.raw`r\sin\theta`} x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} size={60} c={C.second} o={fin(f, AT(k, 4, "the side going north"))} />
-      <CalcStack f={f} x={1500} y={290} size={60} rows={[
+      <CalcStack f={f} x={1440} y={290} size={60} rows={[
         { lhs: String.raw`5\times\cos 53^{\circ}`, rhs: String.raw`=5\times0.6=3`, at: tC },
         { lhs: String.raw`5\times0.8`, rhs: String.raw`=4`, at: t4 },
       ]} />
-      <TeX s={e1} x={1100} y={640} size={72} o={fin(f, tEq)} />
+      <TeX s={e1} x={1100} y={640} size={60} o={fin(f, tEq)} />
       <TeX s={String.raw`r=${e2}`} x={1100} y={760} size={64} c={C.local} o={fin(f, tEq + 20)} />
     </Scene>
   );
@@ -420,8 +421,8 @@ const S07: React.FC = () => {
           <path d={arcD(O2, 70, a0, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, t1 - 20)} />
           <path d={arcD(O2, 700, a0, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, t10)} />
           <Lbl x={O2[0] + 120} y={O2[1] - 10} t="5 km" c={C.first} s={T.floor} o={fin(f, tEasy)} />
-          <Lbl x={O2[0] + 640 * Math.cos(8 * D2R)} y={O2[1] - 640 * Math.sin(8 * D2R) + 40} t="50 km" c={C.first} s={T.floor} o={fin(f, tEasy + 20)} />
-          <Lbl x={O2[0] + 100} y={O2[1] - 90} t="1 km" c={C.second} s={T.key} o={fin(f, t1)} />
+          <Lbl x={O2[0] + 460} y={O2[1] - 60} t="50 km" c={C.first} s={T.floor} o={fin(f, tEasy + 20)} />
+          <Lbl x={O2[0] + 40} y={O2[1] - 155} t="1 km" c={C.second} s={T.key} o={fin(f, t1)} />
           <Lbl x={O2[0] + 700 * Math.cos(27 * D2R) + 30} y={O2[1] - 700 * Math.sin(27 * D2R) - 30} t="10 km" c={C.second} s={T.key} o={fin(f, t10 + 20)} />
         </g>
         <Keyword f={f} text="arc length" at={[1100, 420]} appear={tArc} out={tEasy - 18} />
@@ -439,13 +440,13 @@ const S07: React.FC = () => {
 };
 
 // ================================================================ s08 polar unit vectors (they depend on where you are)
-const O8: Pt = [430, 520], R8 = 300;
+const O8: Pt = [430, 440], R8 = 250;   // K6: the whole turn stays above the caption band (r̂ label at the bottom of the circle)
 const S08: React.FC = () => {
   const f = useCurrentFrame(), k = K("s08_polar_unit_vectors");
   const tR = SS(k, 1), tT = SS(k, 2), tRv = SS(k, 3), tTv = SS(k, 4), tMove = SS(k, 5), tDep = AT(k, 7, "depend on where you are");
   const th = PL.th + 360 * prog(f, tMove + 10, SE(k, 6) - 6);
   const b: Pt = [O8[0] + R8 * Math.cos(th * D2R), O8[1] - R8 * Math.sin(th * D2R)];
-  const L = 140, er: Pt = [Math.cos(th * D2R), -Math.sin(th * D2R)], et: Pt = [-Math.sin(th * D2R), -Math.cos(th * D2R)];
+  const L = 110, er: Pt = [Math.cos(th * D2R), -Math.sin(th * D2R)], et: Pt = [-Math.sin(th * D2R), -Math.cos(th * D2R)];
   const [q1, q2] = cutAt(EQ_S08, String.raw`,\qquad `);
   return (
     <Scene>
@@ -462,8 +463,8 @@ const S08: React.FC = () => {
         </g>
         <Keyword f={f} text="depend on where you are" at={[1100, 760]} appear={tDep} />
       </Svg>
-      <TeX s={String.raw`\hat{\mathbf r}`} x={b[0] + er[0] * (L + 40)} y={b[1] + er[1] * (L + 40)} size={60} ax={0.5} c={C.second} o={fin(f, tR + 10)} />
-      <TeX s={String.raw`\hat{\boldsymbol\theta}`} x={b[0] + et[0] * (L + 44)} y={b[1] + et[1] * (L + 44)} size={60} ax={0.5} c={C.second} o={fin(f, tT + 10)} />
+      <TeX s={String.raw`\hat{\mathbf r}`} x={b[0] + er[0] * (L + 36)} y={b[1] + er[1] * (L + 36)} size={60} ax={0.5} c={C.second} o={fin(f, tR + 10)} />
+      <TeX s={String.raw`\hat{\boldsymbol\theta}`} x={b[0] + et[0] * (L + 40)} y={b[1] + et[1] * (L + 40)} size={60} ax={0.5} c={C.second} o={fin(f, tT + 10)} />
       <TeX s={String.raw`\hat{\mathbf x},\ \hat{\mathbf y}`} x={270} y={760} size={44} c={C.muted} o={fin(f, tMove)} />
       <TeX s={q1} x={1100} y={160} size={60} o={fin(f, tR + 30)} />
       <TeX s={q2} x={1100} y={270} size={60} o={fin(f, tT + 30)} />
@@ -502,7 +503,7 @@ const S09: React.FC = () => {
         <Lbl x={at(th0 + dth / 2, R + 46)[0]} y={at(th0 + dth / 2, R + 46)[1]} t="dθ" c={C.second} s={T.key} a="middle" o={fin(f, tTip) * fout(f, tSwing - 12)} />
         <Keyword f={f} text="each swings towards the other" at={[1080, 760]} s={T.floor} appear={tSwing} />
       </Svg>
-      <TeX s={String.raw`\hat{\mathbf r}`} x={at(th0, R + 50)[0]} y={at(th0, R + 50)[1]} size={60} ax={0.5} c={C.second} />
+      <TeX s={String.raw`\hat{\mathbf r}`} x={at(th0 - 8, R + 50)[0]} y={at(th0 - 8, R + 50)[1]} size={60} ax={0.5} c={C.second} />
       <TeX s={String.raw`\hat{\boldsymbol\theta}`} x={at(th0 + 90, R + 50)[0]} y={at(th0 + 90, R + 50)[1]} size={60} ax={0.5} c={C.second} o={fin(f, tTh)} />
       <TeX s={String.raw`-\hat{\mathbf r}`} x={tipT[0] - 190 * Math.cos(th0 * D2R)} y={tipT[1] + 190 * Math.sin(th0 * D2R)} size={54} ax={0.5} c={C.neg} o={fin(f, tTh + 20) * fout(f, tSwing - 12)} />
       <TeX s={String.raw`d\hat{\mathbf r}=\hat{\boldsymbol\theta}\,d\theta`} x={1100} y={200} size={72} o={fin(f, tChg)} />
@@ -538,9 +539,9 @@ const S10: React.FC = () => {
         <Lbl x={1100} y={660} t="clockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tCw)} />
         <Keyword f={f} text="same wind, new components" at={[1100, 800]} s={T.floor} appear={SS(k, 9)} />
       </Svg>
-      <TeX s={String.raw`\mathbf u=10\ \mathrm{m/s}\ \text{east}`} x={b[0] + 30} y={b[1] - 50} size={48} c={C.first} o={fin(f, tWind)} />
+      <TeX s={String.raw`\mathbf u=10\ \mathrm{m/s}\ \text{east}`} x={b[0] - 40} y={b[1] - 110} size={48} ax={1} c={C.first} o={fin(f, tWind)} />
       <TeX s={EQ_S10} x={1100} y={150} size={60} o={fin(f, tDot)} />
-      <CalcStack f={f} x={1260} y={250} size={56} rows={[
+      <CalcStack f={f} x={1180} y={250} size={50} rows={[
         { lhs: String.raw`u_r`, rhs: String.raw`=10\times0.6+0\times0.8=6`, at: tR },
         { lhs: String.raw`u_\theta`, rhs: String.raw`=10\times(-0.8)+0\times0.6=-8`, at: tT },
         { lhs: String.raw`\sqrt{6^2+8^2}`, rhs: String.raw`=\sqrt{100}=10`, at: tLen },
@@ -591,22 +592,23 @@ const S11: React.FC = () => {
           <path d={arcD(cE, (25 / 111.2 / (B.lat1 - B.lat0)) * B.h * 1.45, 200, 290)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tKmh + 20) * z} />
           <ArcHead c={cE} r={(25 / 111.2 / (B.lat1 - B.lat0)) * B.h * 1.45} a={290} dir={1} col={C.gold} o={fin(f, tKmh + 20) * z} />
           <Place p={Pm(26.3, -83.15)} t="Gulf of Mexico" r={0} dx={0} dy={0} a="middle" italic o={win(f, tGulf, tOut - 6) * z} />
-          <Place p={Pm(26.75, -81.62)} t="southwest Florida" r={0} dx={0} dy={0} a="middle" o={win(f, tLand, tOut - 6) * z} />
+          <Place p={Pm(26.75, -81.62)} t="southwest Florida" r={0} dx={60} dy={0} a="end" o={win(f, tLand, tOut - 6) * z} />
         </>}
       </IanMap>
       <Svg>
-        <SpeedBar x={1440} y={110} w={330} />
-        <Keyword f={f} text="radial: in or out" at={[1430, 320]} s={T.floor} appear={tRad} c={C.neg} out={tOut - 18} />
-        <Keyword f={f} text="tangential: round" at={[1430, 385]} s={T.floor} appear={tTan} c={C.first} out={tOut - 18} />
-        <Callout f={f} lines="≈ 37 m/s" at={[1430, 465]} appear={tRing + 20} target={z > 0.5 ? [cE[0] + 70, cE[1] - 90] : null} c={C.first} out={tOut - 18} />
+        <SpeedBar x={1420} y={110} w={300} />
+        <Keyword f={f} text="radial: in or out" at={[1430, 358]} s={T.floor} appear={tRad} c={C.neg} out={tOut - 18} />
+        <Keyword f={f} text="tangential: round" at={[1430, 412]} s={T.floor} appear={tTan} c={C.first} out={tOut - 18} />
+        <Callout f={f} lines="≈ 37 m/s" at={[1430, 470]} appear={tRing + 20} target={z > 0.5 ? [(ra.p0[0] + ra.tp[0]) / 2, (ra.p0[1] + ra.tp[1]) / 2] : null} c={C.first} out={tOut - 18} />
         <Lbl x={1430} y={530} t="≈ 130 km/h" c={C.first} s={T.floor} o={win(f, tKmh, tOut - 18)} />
         <Lbl x={1430} y={590} t="anticlockwise" c={C.key} s={T.floor} o={win(f, tKmh + 20, tOut - 18)} />
-        <Callout f={f} lines="−12.5 m/s" at={[1430, 665]} appear={tRadM} target={z > 0.5 ? [ra.p0[0], ra.p0[1]] : null} c={C.neg} out={tOut - 18} />
+        <Callout f={f} lines="−12.5 m/s" at={[1430, 665]} appear={tRadM} target={z > 0.5 ? [(ra.p0[0] + ra.rp[0]) / 2, (ra.p0[1] + ra.rp[1]) / 2] : null} c={C.neg} out={tOut - 18} />
         <Lbl x={1430} y={730} t="in, towards the eye" c={C.neg} s={T.floor} o={win(f, tIn, tOut - 18)} />
         <Lbl x={1430} y={790} t="official best track" c={C.local} s={T.floor} o={win(f, tBest, tOut - 18)} />
         <Lbl x={1430} y={845} t="135 kt ≈ 250 km/h" c={C.local} s={T.floor} o={win(f, tBest, tOut - 18)} />
       </Svg>
-      <TeX s={EQ_S11} x={1430} y={250} size={46} o={fin(f, tRad) * fout(f, tOut - 18)} />
+      <TeX s={cutAt(EQ_S11, String.raw`\qquad `)[0]} x={1430} y={240} size={46} o={fin(f, tRad) * fout(f, tOut - 18)} />
+      <TeX s={cutAt(EQ_S11, String.raw`\qquad `)[1]} x={1430} y={298} size={46} o={fin(f, tRad) * fout(f, tOut - 18)} />
       <SourceBelow text="Data: HRRR analysis (NOAA) · GOES-16 (NOAA) · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 40, w: 1300, h: 760 }} w={1300} name="s11 src" />
     </Scene>
   );
@@ -618,7 +620,7 @@ const S12: React.FC = () => {
   const tUV = SS(k, 1), tSw = SS(k, 2), tPol = SS(k, 3), tSt = SS(k, 4), tTwo = SS(k, 5), tAng = SS(k, 6), tVort = SS(k, 8);
   const B = ianZoom(80, 920);
   const P = mapP(B);
-  const A: Ax = { x: 1200, y: 120, w: 600, h: 440, xr: [0, 360], yr: [-60, 60] };
+  const A: Ax = { x: 1180, y: 100, w: 500, h: 400, xr: [0, 360], yr: [-60, 60] };
   const r = IAN.ring, az = r.az as number[];
   const run = prog(f, tUV, SE(k, 2));
   const mi = Math.min(71, Math.floor(run * 72));
@@ -645,10 +647,10 @@ const S12: React.FC = () => {
         <Curve A={A} xs={az} ys={r.v} c={C.second} dash="14 10" upto={run} o={fout(f, tSt + 30, 20) * 0.9 + 0.1} />
         <Curve A={A} xs={az} ys={r.vt} c={C.first} w={7} upto={prog(f, tPol + 10, tSt)} />
         <Curve A={A} xs={az} ys={r.vr} c={C.neg} w={7} dash="16 8" upto={prog(f, tPol + 10, tSt)} />
-        <Lbl x={1210} y={630} t="east, north: swing" c={C.second} s={T.floor} o={fin(f, tSw)} />
+        <Lbl x={1210} y={652} t="east, north: swing" c={C.second} s={T.floor} o={fin(f, tSw)} />
         <Keyword f={f} text="spin" at={[PA(360, IAN.vt[3])[0] + 14, PA(360, IAN.vt[3])[1] - 40]} s={T.floor} c={C.first} appear={tTwo} />
         <Keyword f={f} text="inflow" at={[PA(360, IAN.vr[3])[0] + 14, PA(360, IAN.vr[3])[1] + 40]} s={T.floor} c={C.neg} appear={tTwo + 10} />
-        <Callout f={f} lines="inflow angle ≈ 19°" at={[1210, 720]} appear={tAng + 20} target={[ra.p0[0] + 20, ra.p0[1] - 20]} s={T.floor} bend={40} />
+        <SideCallout f={f} lines="inflow angle ≈ 19°" at={[1210, 732]} appear={tAng + 20} target={[ra.p0[0] + 20, ra.p0[1] - 20]} s={T.floor} bend={20} />
         <Keyword f={f} text="vorticity" at={[1210, 810]} s={T.floor} appear={AT(k, 8, "vorticity")} />
       </Svg>
       <SourceBelow text="Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 40, w: 920, h: 760 }} w={920} name="s12 src" />
@@ -660,7 +662,7 @@ const S12: React.FC = () => {
 const S13: React.FC = () => {
   const f = useCurrentFrame(), k = K("s13_centripetal");
   const tPar = SS(k, 1), tQ = SS(k, 3), tVel = SS(k, 5), tChain = SS(k, 6), tRes = SS(k, 7), tNum = SS(k, 8), tG = SS(k, 9), tP = AT(k, 9, "pressure force"), tLes = SS(k, 11);
-  const B = ianZoom(80, 920);
+  const B = ianZoom(80, 880);   // K6: 40 px narrower, so the 64-px chain-rule line (under-words ≥ 44 px) fits from x 1000
   const P = mapP(B);
   const cE = P(IAN.c[0], IAN.c[1]);
   const Rpx = (25 / 111.2 / (B.lat1 - B.lat0)) * B.h;
@@ -694,18 +696,18 @@ const S13: React.FC = () => {
         <Keyword f={f} text="air parcel" at={[1100, 120]} s={T.floor} appear={AT(k, 1, "air parcel")} out={tChain - 18} />
         <Keyword f={f} text="accelerating?" at={[1100, 200]} s={T.floor} appear={tQ} out={tChain - 18} />
         <g opacity={fin(f, tG)}>
-          <rect x={barX} y={barY - 34} width={600} height={30} fill={BROWN} />
-          <rect x={barX} y={barY + 30} width={Math.max(4, (IAN.acc / 9.81) * 600)} height={30} fill={C.neg} />
-          <Lbl x={barX + 610} y={barY - 20} t="gravity 9.8" c={C.muted} s={T.floor} />
+          <rect x={barX} y={barY - 34} width={480} height={30} fill={BROWN} />
+          <rect x={barX} y={barY + 30} width={Math.max(4, (IAN.acc / 9.81) * 480)} height={30} fill={C.neg} />
+          <Lbl x={barX + 494} y={barY - 20} t="gravity 9.8" c={C.muted} s={T.floor} />
           <Lbl x={barX + 20} y={barY + 45} t="0.055" c={C.neg} s={T.floor} />
         </g>
         <Lbl x={barX} y={barY + 120} t="almost 200 × smaller" c={C.key} s={T.floor} o={fin(f, AT(k, 9, "two hundred"))} />
         <Keyword f={f} text="turning arrows → acceleration" at={[1080, 820]} s={T.floor} appear={tLes} />
       </Svg>
       <TeX s={String.raw`37\,\hat{\boldsymbol\theta}`} x={pa[0] + tg[0] * 200} y={pa[1] + tg[1] * 200} size={50} ax={0.5} c={C.first} o={fin(f, tVel + 8) * fout(f, tChain - 10)} />
-      <Layered parts={parts} x={1090} y={300} size={64} layers={[{ t: "all", o: fin(f, tChain) }, { t: [], u: [1], o: fin(f, AT(k, 6, "minus r hat")) }, { t: [], u: [3], o: fin(f, AT(k, 6, "speed divided by the radius")) }]} />
+      <Layered parts={parts} x={1000} y={300} size={64} layers={[{ t: "all", o: fin(f, tChain) }, { t: [], u: [1], o: fin(f, AT(k, 6, "minus r hat")) }, { t: [], u: [3], o: fin(f, AT(k, 6, "speed divided by the radius")) }]} />
       <CalcStack f={f} x={1330} y={460} size={56} rows={[{ lhs: String.raw`\frac{37^2}{25\,000}`, rhs: String.raw`\approx0.055\ \mathrm{m/s^2}`, at: tNum, h: 120 }]} />
-      <SourceBelow text="Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 40, w: 920, h: 760 }} w={920} name="s13 src" />
+      <SourceBelow text="Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 40, w: 880, h: 760 }} w={880} name="s13 src" />
     </Scene>
   );
 };
@@ -738,7 +740,8 @@ const S14: React.FC = () => {
   const R = 2.5, H = 1.5;
   const circ = (r: number, z: number): V3[] => Array.from({ length: 49 }, (_, i) => [r * Math.cos((i * Math.PI) / 24), r * Math.sin((i * Math.PI) / 24), z]);
   const ph = (f / 30) * 0.6;
-  const oIn = fin(f, tIn), oUp = fin(f, tUp), oOut = fin(f, tOutF);
+  // K6: the turning inflow arrows step aside while the three labelled component arrows are up (they swept under u_r, u_θ)
+  const oIn = fin(f, tIn) * (1 - win(f, tThree - 12, tZh - 12)), oUp = fin(f, tUp), oOut = fin(f, tOutF);
   const P3 = (v: V3) => pr.p(v);
   const tipU: V3 = [R, 0, H * 0.6];
   return (
@@ -755,10 +758,10 @@ const S14: React.FC = () => {
         {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * Math.PI) / 3 + 0.2 - ph * 0.5; const p: V3 = [2.8 * Math.cos(a), 2.8 * Math.sin(a), H];
           const q: V3 = [4.4 * Math.cos(a - 0.3), 4.4 * Math.sin(a - 0.3), H]; return <group key={`out${i}`}><HArrow3D from={p} to={q} color={C.second} px={8} head={26} o={oOut} /><Bead3D f={f} a={p} b={q} speed={10} o={oOut} /></group>; })}
         <HArrow3D from={[0, 0, 0]} to={[0, 0, 2.2]} color={C.second} px={8} head={30} o={fin(f, tZ)} />
-        <g>{[0, 1, 2].map((i) => { const a = (i * 2 * Math.PI) / 3 + 0.9; const p: V3 = [R * Math.cos(a), R * Math.sin(a), H * 0.6];
+        <group>{[0, 1, 2].map((i) => { const a = (i * 2 * Math.PI) / 3 + 0.9; const p: V3 = [R * Math.cos(a), R * Math.sin(a), H * 0.6];
           return <group key={`zh${i}`}><HArrow3D from={p} to={[p[0], p[1], p[2] + 0.9]} color={C.second} px={7} head={24} o={fin(f, tZh)} />
             <HArrow3D from={p} to={[p[0] + Math.cos(a) * 1.2, p[1] + Math.sin(a) * 1.2, p[2]]} color={C.second} px={6} head={22} o={fin(f, tOnly)} />
-            <HArrow3D from={p} to={[p[0] - Math.sin(a) * 1.2, p[1] + Math.cos(a) * 1.2, p[2]]} color={C.second} px={6} head={22} o={fin(f, tOnly)} /></group>; })}</g>
+            <HArrow3D from={p} to={[p[0] - Math.sin(a) * 1.2, p[1] + Math.cos(a) * 1.2, p[2]]} color={C.second} px={6} head={22} o={fin(f, tOnly)} /></group>; })}</group>
         <HArrow3D from={tipU} to={[R + 1.1, 0, H * 0.6]} color={C.neg} px={8} head={26} o={fin(f, tThree) * fout(f, tZh - 12)} />
         <HArrow3D from={tipU} to={[R, 1.3, H * 0.6]} color={C.first} px={8} head={26} o={fin(f, tThree) * fout(f, tZh - 12)} />
         <HArrow3D from={tipU} to={[R, 0, H * 0.6 + 0.9]} color={C.local} px={8} head={26} o={fin(f, tThree) * fout(f, tZh - 12)} />
@@ -801,12 +804,14 @@ const S14B: React.FC = () => {
   const keys: OrbitKey[] = [
     { f: 0, az: -100, el: 24, dist: 11.5, target: [0, 0, top * 0.35] },
     { f: tLook - 4, az: -76, el: 26, dist: 11.5, target: [0, 0, top * 0.55], linear: true },
-    { f: tLook + 48, az: -72, el: 8, dist: 6.4, target: [0, -1.0, top * 0.45] },
-    { f: tLook + 48 + 42, az: -70, el: 8, dist: 6.4, target: [0, -1.0, top * 0.5], linear: true },
+    { f: tLook + 48, az: -72, el: 8, dist: 7.6, target: [0, -1.0, top * 0.45] },
+    { f: tLook + 48 + 42, az: -70, el: 8, dist: 7.6, target: [0, -1.0, top * 0.5], linear: true },
     { f: tLook + 48 + 42 + 50, az: -84, el: 24, dist: 11.5, target: [0, 0, top * 0.45] },
     { f: LEN(k) + 10, az: -92, el: 24, dist: 11.5, target: [0, 0, top * 0.45], linear: true },
   ];
-  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [560, 430]);
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [560, 360]);
+  // K6: the text column steps aside during the one close look (the stack then reaches x ≈ 1380 under it)
+  const colO = 1 - win(f, tLook - 4, tLook + 128, 10);
   const pr = hProjector(st, 1920, 1080, 0, 0);
   const ring = (z: number): V3[] => Array.from({ length: 49 }, (_, i) => [2 * Math.cos((i * Math.PI) / 24), 2 * Math.sin((i * Math.PI) / 24), z]);
   const arrows = STK.arrows as { lev: number; vt: number[]; vr: number[] }[];
@@ -835,18 +840,19 @@ const S14B: React.FC = () => {
       </Svg>
       <GlobeFrame id="s14bk" zoom={1} right={1} name="s14b stack" />
       <Svg>
-        <Keyword f={f} text="ERA5 reanalysis" at={[1180, 120]} s={T.key} appear={AT(k, 1, "ERA5")} out={tCol - 18} />
-        <Keyword f={f} text="radial wind" at={[1180, 120]} s={T.key} appear={tCol} out={tPath - 18} />
-        <ColourBar x={1190} y={250} w={420} lut={LUT_RAD} lo={-10} hi={10} unit="m/s" title="in (−) · out (+)" ticks={[{ v: -10, t: "−10" }, { v: 0, t: "0" }, { v: 10, t: "10" }]} />
-        <Callout f={f} lines="≈ −6 m/s" at={[1190, 430]} appear={tRing + 10} out={tPath - 18} target={lowRing} c={C.neg} bend={30} />
-        <Lbl x={1190} y={510} t="inflow almost gone" c={C.key} s={T.floor} o={win(f, t15, tPath - 18)} />
-        <Lbl x={1190} y={580} t="hardly in or out; rising" c={C.key} s={T.floor} o={win(f, t6, tPath - 18)} />
-        <Callout f={f} lines="≈ +4 m/s" at={[1190, 660]} appear={tOutN} out={tPath - 18} target={topRing} c={C.second} bend={-30} />
-        <Lbl x={1190} y={430} t="in → up → out" c={C.gold} s={T.key} o={fin(f, tPath)} />
-        <Keyword f={f} text="directions, not speeds" at={[1190, 560]} s={T.floor} appear={tDir} />
-        <Keyword f={f} text="r, θ, z" at={[1190, 670]} s={T.key} appear={tRtz} />
+        <Keyword f={f} text="ERA5 reanalysis" at={[1300, 120]} s={T.key} appear={AT(k, 1, "ERA5")} out={tCol - 18} />
+        <Keyword f={f} text="radial wind" at={[1300, 120]} s={T.key} appear={tCol} out={tPath - 18} />
+        <ColourBar o={colO} x={1300} y={250} w={420} lut={LUT_RAD} lo={-10} hi={10} unit="m/s" title="in (−) · out (+)" ticks={[{ v: -10, t: "−10" }, { v: 0, t: "0" }, { v: 10, t: "10" }]} />
+        {/* the column reads like the stack: top layer on top (so the two callout links never cross) */}
+        <Callout f={f} lines="≈ +4 m/s" at={[1300, 430]} appear={tOutN} out={tPath - 18} target={topRing} c={C.second} bend={30} o={colO} />
+        <Lbl x={1300} y={510} t="hardly in or out; rising" c={C.key} s={T.floor} o={win(f, t6, tPath - 18) * colO} />
+        <Lbl x={1300} y={580} t="inflow almost gone" c={C.key} s={T.floor} o={win(f, t15, tPath - 18) * colO} />
+        <Callout f={f} lines="≈ −6 m/s" at={[1300, 660]} appear={tRing + 10} out={tPath - 18} target={lowRing} c={C.neg} bend={-30} o={colO} />
+        <Lbl x={1300} y={430} t="in → up → out" c={C.gold} s={T.key} o={fin(f, tPath)} />
+        <Keyword f={f} text="directions, not speeds" at={[1300, 560]} s={T.floor} appear={tDir} />
+        <Keyword f={f} text="r, θ, z" at={[1300, 670]} s={T.key} appear={tRtz} />
       </Svg>
-      <SourceBelow text="Data: ERA5 (Copernicus C3S) · Hurricane Ian · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 40, w: 1000, h: 790 }} w={1000} name="s14b src" />
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · Hurricane Ian · 28 Sep 2022, 18 UTC" pic={{ x: 80, y: 40, w: 1000, h: 770 }} w={1000} name="s14b src" />
     </Scene>
   );
 };
