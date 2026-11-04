@@ -13,7 +13,7 @@ concepts:
 - 0B-G13 preview (subtropical highs, ITCZ, trades, westerlies)
 - 0B-G16 units (hPa, K and °C, g/kg, m/s, knots)
 - 0B-G17 data words (observation, reanalysis, climatology)
-target_duration_s: 3486.0
+target_duration_s: 3486.45
 fps: 30
 size:
 - 1920
@@ -42,8 +42,8 @@ audio:
     tail_s: 2.5
     sections_s: from sound_cues.yaml (s54 start → s60 start, measured from timing.json)
     notes: a different score from every other movie (HOUSE_STYLE §8); recorded in v3/sound/sound.json
-measured_narration_s: 3483.5
-measured_frames: 104505
+measured_narration_s: 3483.95
+measured_frames: 104519
 words: 8640
 sentences: 492
 dry_run:
@@ -3558,6 +3558,7 @@ scenes:
   uf2_fix2_visual: 'UF2 fix 2 (R2-M4, M5, M6): after the 40:43-40:56 build every hold is one oblique view from outside, drifting
     upward; one close look (5 s); Europe''s callout dated ''2 Nov'' (said in S4); ''above ≈ 25 km'' with the four warming
     shells outlined; ''top shell ≈ 45 km'' dropped (45 km is spoken and written in S2).'
+  uf2_fix3_visual: 'UF2 fix 3 (R3-M2): each keyword row is gone 8 frames before the next fades in (no double exposure).'
 - id: s39_surface_pressure
   t:
   - 2508.175
@@ -3628,6 +3629,8 @@ scenes:
   - R1
   - R2
   - R4
+  uf2_fix3_visual: 'UF2 fix 3 (R3-M3): the Tibet -> Americas hop starts on ''and the Andes'' and takes 2.7 s, the return starts
+    as S3 ends and takes 2.7 s; sine-eased (peak 82 °/s, was ~1200 °/s).'
 - id: s40_sea_level
   t:
   - 2547.95
@@ -4201,6 +4204,8 @@ scenes:
   - U2-22
   uf2_fix2_visual: 'UF2 fix 2 (R2-M1, M9): slice 50 px lower; both legs of the slope triangle 6-px gold, ''1 km'' and ''50
     km'' on their words, on the legs; ''heights × 80'' from S6; the dashed lowest kilometre is no longer drawn.'
+  uf2_fix3_visual: 'UF2 fix 3 (R3-M4, R3-S5): one colour bar at a time; the 850-hPa map turns to plain grey ground as the
+    wall rises (its bar leaves with its colours).'
 - id: s48_warm_front
   t:
   - 2911.55
@@ -4275,6 +4280,8 @@ scenes:
     times taller') and the true-scale twin is labelled 'true slope'.
   uf2_fix2_visual: 'UF2 fix 2 (R2-M1, M9): as s47; ''heights × 80'' from the start; the true-scale twin solid gold, further
     from the thick line.'
+  uf2_fix3_visual: 'UF2 fix 3 (R3-M1): the camera zooms in on the slope triangle during S2 (horizontal leg 66 px) and back
+    out at its end; ''50 km'' sits clear of the thick line; grey ground.'
 - id: s48b_front_stack
   t:
   - 2968.85
@@ -4323,6 +4330,7 @@ scenes:
     850- and 650-hPa gold lines labelled with their heights (1.3 km, 3.4 km); keyword and colour bar in the text column.'
   uf2_fix2_visual: 'UF2 fix 2 (R2-M2, M3): ''the lower layers''; labels 1.3 and 3.4 km, callout ''≈ 92 km back, from 1.3 to
     3.4 km up''; the link ends on the gold bar, not on a label; colour bar in °C.'
+  uf2_fix3_visual: 'UF2 fix 3 (R3-M2): keyword rows swap with an 8-frame gap.'
 - id: s49_real_fronts
   t:
   - 3017.6
@@ -4398,14 +4406,14 @@ scenes:
 - id: s50_front_symbols
   t:
   - 3052.625
-  - 3069.325
+  - 3069.7
   sentence_times:
   - - 3052.625
     - 3058.55
   - - 3058.9
     - 3064.325
   - - 3064.675
-    - 3068.525
+    - 3068.9
   beat: application · map symbols (pointer forward)
   visual: 'Same map; the front lines turn into the standard symbols on their words (cold: blue line + filled triangles on
     the
@@ -4421,7 +4429,7 @@ scenes:
     source_line field: muted #9aa6bd, 30 px (>= 28), one line, left-aligned at the bottom of the picture it credits (y <=
     850, never in the caption band 880-1040), fades with its picture, never spoken.'
   voiceover: On weather maps, fronts are drawn as lines with symbols on the side they're moving towards. A cold front has
-    blue triangles, and a warm front has red half circles. You'll learn to read these maps in detail in the next video.
+    blue triangles, and a warm front has red half circles. Later in this series, you'll learn to read these maps in detail.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.fronts.front_lines (NEW) at 00 and 03 UTC (direction of motion)
@@ -4441,25 +4449,27 @@ scenes:
   uf1:
   - R1
   - R2
+  uf2_fix3_visual: 'UF2 fix 3 (series audit): S3 ''Later in this series, you''ll learn to read these maps in detail.''; keyword
+    ''weather maps: later''.'
 - id: s51_heating
   t:
-  - 3069.325
-  - 3114.7
+  - 3069.7
+  - 3115.075
   sentence_times:
-  - - 3069.325
-    - 3074.375
-  - - 3074.725
-    - 3076.725
-  - - 3077.075
-    - 3086.05
-  - - 3086.4
-    - 3090.175
-  - - 3090.525
-    - 3099.875
-  - - 3101.375
-    - 3109.1
-  - - 3109.45
-    - 3113.9
+  - - 3069.7
+    - 3074.75
+  - - 3075.1
+    - 3077.1
+  - - 3077.45
+    - 3086.425
+  - - 3086.775
+    - 3090.55
+  - - 3090.9
+    - 3100.25
+  - - 3101.75
+    - 3109.475
+  - - 3109.825
+    - 3114.275
   beat: application · the global picture (heating)
   visual: 'Picture zone: Globe3D (BMNG, equinox lighting) with two gold beams of equal width hitting at 0° and 60°N; patches
 
@@ -4521,21 +4531,21 @@ scenes:
   - R4
 - id: s52_pressure_belts
   t:
-  - 3114.7
-  - 3150.775
+  - 3115.075
+  - 3151.15
   sentence_times:
-  - - 3114.7
-    - 3119.175
-  - - 3119.525
-    - 3128.075
-  - - 3128.425
-    - 3131.05
-  - - 3131.4
-    - 3139.85
-  - - 3140.2
-    - 3143.6
-  - - 3143.95
-    - 3149.975
+  - - 3115.075
+    - 3119.55
+  - - 3119.9
+    - 3128.45
+  - - 3128.8
+    - 3131.425
+  - - 3131.775
+    - 3140.225
+  - - 3140.575
+    - 3143.975
+  - - 3144.325
+    - 3150.35
   beat: application · high and low pressure belts (preview)
   visual: 'Picture zone: Globe3D tilted to show both hemispheres, annual mean MSLP 1991-2020 (data/real/wind_climatology.json
 
@@ -4587,25 +4597,25 @@ scenes:
   - R4
 - id: s53_trades_westerlies
   t:
-  - 3150.775
-  - 3204.25
+  - 3151.15
+  - 3204.625
   sentence_times:
-  - - 3150.775
-    - 3153.95
-  - - 3154.3
-    - 3164.25
-  - - 3164.6
-    - 3169.95
-  - - 3170.3
-    - 3174.875
-  - - 3175.225
-    - 3185.05
-  - - 3185.4
-    - 3192.1
-  - - 3192.45
-    - 3197.075
-  - - 3197.425
-    - 3203.45
+  - - 3151.15
+    - 3154.325
+  - - 3154.675
+    - 3164.625
+  - - 3164.975
+    - 3170.325
+  - - 3170.675
+    - 3175.25
+  - - 3175.6
+    - 3185.425
+  - - 3185.775
+    - 3192.475
+  - - 3192.825
+    - 3197.45
+  - - 3197.8
+    - 3203.825
   beat: application · trade winds and westerlies (preview)
   visual: 'Picture zone: the s52 globe; 1991-2020 mean 10-m winds (teal arrows on a 5° grid, legend ''5 m/s''; streaklines
     from
@@ -4659,21 +4669,21 @@ scenes:
   - U2-28
 - id: s54_ciaran_intro
   t:
-  - 3204.25
-  - 3240.725
+  - 3204.625
+  - 3241.1
   sentence_times:
-  - - 3204.25
-    - 3209.875
-  - - 3210.225
-    - 3217.375
-  - - 3217.725
-    - 3223.225
-  - - 3223.575
-    - 3228.05
-  - - 3228.4
-    - 3234.025
-  - - 3234.375
-    - 3239.925
+  - - 3204.625
+    - 3210.25
+  - - 3210.6
+    - 3217.75
+  - - 3218.1
+    - 3223.6
+  - - 3223.95
+    - 3228.425
+  - - 3228.775
+    - 3234.4
+  - - 3234.75
+    - 3240.3
   beat: application · one storm over one town
   visual: 'Map panel (Lambert 40-58N 25W-8E, x 80-1580, full brightness): GIBS MODIS Terra/Aqua true colour 2023-11-01
 
@@ -4721,13 +4731,13 @@ scenes:
   - R4
 - id: s55_ciaran_maps
   t:
-  - 3240.725
-  - 3266.075
+  - 3241.1
+  - 3266.45
   sentence_times:
-  - - 3240.725
-    - 3252.55
-  - - 3252.9
-    - 3265.275
+  - - 3241.1
+    - 3252.925
+  - - 3253.275
+    - 3265.65
   beat: application · the low moves in
   visual: 'Same panel; ERA5 MSLP isobars every 4 hPa animate hour by hour (24 frames per hour of data, interpolated only in
 
@@ -4787,19 +4797,19 @@ scenes:
   - R1
 - id: s56_brest_pressure
   t:
-  - 3266.075
-  - 3296.9
+  - 3266.45
+  - 3297.275
   sentence_times:
-  - - 3266.075
-    - 3268.525
-  - - 3268.875
-    - 3274.7
-  - - 3275.05
-    - 3284.075
-  - - 3284.425
-    - 3289.575
-  - - 3291.075
-    - 3296.1
+  - - 3266.45
+    - 3268.9
+  - - 3269.25
+    - 3275.075
+  - - 3275.425
+    - 3284.45
+  - - 3284.8
+    - 3289.95
+  - - 3291.45
+    - 3296.475
   beat: application · the pressure at Brest
   visual: 'Maths zone: TimeGraph (hours across 12 -> 12 UTC, 52-px ticks every 3 h; pressure 955-1000 hPa up) drawing the
 
@@ -4848,19 +4858,19 @@ scenes:
   - R1
 - id: s57_brest_warm_front
   t:
-  - 3296.9
-  - 3329.225
+  - 3297.275
+  - 3329.6
   sentence_times:
-  - - 3296.9
-    - 3299.275
-  - - 3299.625
-    - 3308.475
-  - - 3308.825
-    - 3319.675
-  - - 3320.025
-    - 3322.4
-  - - 3322.75
-    - 3328.425
+  - - 3297.275
+    - 3299.65
+  - - 3300.0
+    - 3308.85
+  - - 3309.2
+    - 3320.05
+  - - 3320.4
+    - 3322.775
+  - - 3323.125
+    - 3328.8
   beat: application · the warm front passes
   visual: 'Same TimeGraph: a second panel below (temperature 9-15 °C, orange line, hour dots); a row of hourly wind arrows
     above
@@ -4909,19 +4919,19 @@ scenes:
   - R1
 - id: s58_brest_cold_front
   t:
-  - 3329.225
-  - 3367.7
+  - 3329.6
+  - 3368.075
   sentence_times:
-  - - 3329.225
-    - 3332.2
-  - - 3332.55
-    - 3341.275
-  - - 3341.625
-    - 3353.175
-  - - 3354.675
-    - 3361.275
-  - - 3361.625
-    - 3366.9
+  - - 3329.6
+    - 3332.575
+  - - 3332.925
+    - 3341.65
+  - - 3342.0
+    - 3353.55
+  - - 3355.05
+    - 3361.65
+  - - 3362.0
+    - 3367.275
   beat: application · the cold front passes
   visual: 'Same TimeGraph; arrows at 00 and 03 UTC with labels ''19 m/s from 221° (SW)'', ''23 m/s from 271° (W)''; maths
     zone
@@ -4980,30 +4990,30 @@ scenes:
   - R1
 - id: s59_ciaran_after
   t:
-  - 3367.7
-  - 3389.025
+  - 3368.075
+  - 3389.475
   sentence_times:
-  - - 3367.7
-    - 3376.325
-  - - 3376.675
-    - 3381.775
-  - - 3382.125
-    - 3388.225
+  - - 3368.075
+    - 3376.7
+  - - 3377.05
+    - 3382.225
+  - - 3382.575
+    - 3388.675
   beat: application · the storm the next afternoon, and what comes next
   visual: 'Map panel: the existing MODIS Aqua true colour of 2023-11-02 (re-used) with ERA5 12 UTC isobars and the ''L'' 956
     hPa
 
     (no number shown unless spoken: DEFAULT the L only), NE borders, Brest dot; keywords as forward pointers (54 px,
 
-    no headings): ''reading weather maps'', ''why the wind circles''.
+    no headings): ''weather maps: later'', ''why the wind circles''.
 
 
     UF1 R1: R1 source line(s) as listed in this scene''s source_line field: muted #9aa6bd, 30 px (>= 28), one line, left-aligned
     at the bottom of the picture it credits (y <= 850, never in the caption band 880-1040), fades with its picture, never
     spoken.'
   voiceover: Here is the storm the next afternoon, seen from space, now over the North Sea, with its clouds wrapped in a spiral
-    around the low. In the next video, we'll learn to read weather maps like this one in detail. And later videos will explain
-    why the wind circles the low instead of rushing into it.
+    around the low. Later in this series, we'll learn to read weather maps like this one in detail. And later videos will
+    explain why the wind circles the low instead of rushing into it.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.gibs (existing product)
@@ -5022,27 +5032,29 @@ scenes:
     text: 'Image: NASA MODIS Aqua true colour (NASA GIBS) · 2 Nov 2023 · isobars: ERA5 (Copernicus C3S), 12 UTC'
   uf1:
   - R1
+  uf2_fix3_visual: 'UF2 fix 3 (series audit): S2 ''Later in this series, we''ll learn to read weather maps like this one in
+    detail.''; keyword ''weather maps: later''.'
 - id: s60_recap
   t:
-  - 3389.025
-  - 3457.9
+  - 3389.475
+  - 3458.35
   sentence_times:
-  - - 3389.025
-    - 3397.25
-  - - 3397.6
-    - 3405.525
-  - - 3405.875
-    - 3418.2
-  - - 3418.55
-    - 3427.55
-  - - 3427.9
-    - 3435.225
-  - - 3435.575
-    - 3441.375
-  - - 3441.725
-    - 3448.275
-  - - 3448.625
-    - 3457.1
+  - - 3389.475
+    - 3397.7
+  - - 3398.05
+    - 3405.975
+  - - 3406.325
+    - 3418.65
+  - - 3419.0
+    - 3428.0
+  - - 3428.35
+    - 3435.675
+  - - 3436.025
+    - 3441.825
+  - - 3442.175
+    - 3448.725
+  - - 3449.075
+    - 3457.55
   beat: recap
   visual: 'No heading. One beat per sentence, each a mini picture from its scene (thumbnail re-renders, 60 % size) with its
 
@@ -5098,15 +5110,15 @@ scenes:
   - U2-24
 - id: s61_end
   t:
-  - 3457.9
-  - 3483.5
+  - 3458.35
+  - 3483.95
   sentence_times:
-  - - 3457.9
-    - 3463.775
-  - - 3464.125
-    - 3475.175
-  - - 3475.525
-    - 3483.2
+  - - 3458.35
+    - 3464.225
+  - - 3464.575
+    - 3475.625
+  - - 3475.975
+    - 3483.65
   beat: end card
   visual: 'House end card (HOUSE_STYLE §3), word for word as the reference with ''maths tutorials'' -> ''tutorials'' (physics
 
@@ -5188,7 +5200,7 @@ honesty_notes:
 quiz_hook: 'A mountain station 3 km up reads 700 hPa at 0 °C. Is its sea-level pressure high or low? (H = 287 x 273 / 9.81
   ≈ 8.0 km; 700 x e^(3/8.0) ≈ 1018 hPa: a slightly high reading.)'
 qa_expectations:
-  duration_s: 3486.0
+  duration_s: 3486.45
   captions:
     cues: 874
     max_lines: 2
@@ -5410,3 +5422,12 @@ uf2_fix2:
   - 's48b S3: ''On the lower layers…'' (R2-M2)'
   - 's48b S4: ''about ninety-two kilometres back between one point three and three point four kilometres up'' (R2-M3)'
   splice: tools/movie_wb/splice_uf2fix2.py (BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter)
+uf2_fix3:
+  date: '2026-11-04'
+  narration:
+  - 's50 S3: ''You''ll learn to read these maps in detail in the next video.'' -> ''Later in this series, you''ll learn to
+    read these maps in detail.'''
+  - 's59 S2: ''In the next video, we''ll learn to read weather maps like this one in detail.'' -> ''Later in this series,
+    we''ll learn to read weather maps like this one in detail.'''
+  why: 'series audit (reports/ch00_series_audit.md): map reading starts about 36 movies later'
+  splice: tools/movie_wb/splice_uf2fix3.py (BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter)

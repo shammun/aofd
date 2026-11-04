@@ -9,12 +9,12 @@ music:
   sections:
   - style: air-flowing
     from_s: 0.0
-    to_s: 3204.25
+    to_s: 3204.625
   - style: storm-tense
-    from_s: 3204.25
-    to_s: 3389.025
+    from_s: 3204.625
+    to_s: 3389.475
   - style: air-flowing
-    from_s: 3389.025
+    from_s: 3389.475
     to_s: end
   note: two styles cross-faded with 4-s raised-cosine ramps by tools/movie_wb/sound_mix.py (tools/sound/mix.py takes one style)
 timing: timing.json

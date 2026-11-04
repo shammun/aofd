@@ -459,7 +459,7 @@ Here are real fronts, around Ciarán at six in the evening on the first of Novem
 > Source line(s): [S1] Data: ERA5 850-hPa temperature and wind (Copernicus C3S) · 1 Nov 2023, 18 UTC · fronts computed from it
 
 ## s50_front_symbols
-On weather maps, fronts are drawn as lines with symbols on the side they're moving towards. A cold front has blue triangles, and a warm front has red half circles. You'll learn to read these maps in detail in the next video.
+On weather maps, fronts are drawn as lines with symbols on the side they're moving towards. A cold front has blue triangles, and a warm front has red half circles. Later in this series, you'll learn to read these maps in detail.
 
 > 42 words · 3 sentences · 2646.250–2662.950 s (16.7 s; speech 15.2 s) · 44:06.25–44:22.95 (measured) · beat: application · map symbols (pointer forward) · UF1: R1, R2.
 > Screen: the gold lines of s49 gain their symbols: blue triangles on the cold front's leading side, red half circles on the warm front's; keyword 'symbols point where the front moves'
@@ -522,10 +522,10 @@ A few hours later comes the cold front. By now the storm has broken and bent its
 > Source line(s): [S1] Data: ERA5 hourly, grid point 48.5°N 4.5°W, nearest to Brest (Copernicus C3S) · 1–2 Nov 2023
 
 ## s59_ciaran_after
-Here is the storm the next afternoon, seen from space, now over the North Sea, with its clouds wrapped in a spiral around the low. In the next video, we'll learn to read weather maps like this one in detail. And later videos will explain why the wind circles the low instead of rushing into it.
+Here is the storm the next afternoon, seen from space, now over the North Sea, with its clouds wrapped in a spiral around the low. Later in this series, we'll learn to read weather maps like this one in detail. And later videos will explain why the wind circles the low instead of rushing into it.
 
 > 56 words · 3 sentences · 2948.500–2969.825 s (21.3 s; speech 19.8 s) · 49:08.50–49:29.82 (measured) · beat: application · the storm the next afternoon, and what comes next · UF1: R1.
-> Screen: MODIS Aqua true colour 2 Nov 2023 with isobars at 12 UTC and the L; Brest dot; keywords 'reading weather maps ->', 'why the wind circles ->'
+> Screen: MODIS Aqua true colour 2 Nov 2023 with isobars at 12 UTC and the L; Brest dot; keywords 'weather maps: later', 'why the wind circles ->'
 > Source line(s): [S1] Image: NASA MODIS Aqua true colour (NASA GIBS) · 2 Nov 2023 · isobars: ERA5 (Copernicus C3S), 12 UTC
 
 ## s60_recap
