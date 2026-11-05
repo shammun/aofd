@@ -1,0 +1,2562 @@
+{
+ "id": "ch00_coordinates_maps",
+ "title": "Coordinates, Part 7 — Maps: projections and the view from the pole",
+ "storyboard": "movies/ch00/ch00_coordinates_maps/storyboard.yaml",
+ "builder": "movies/data/build_ch00_coordinates_maps.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "dirty_tracked": true,
+  "mapproj_py_sha256": "f8da90cb00f90da803adbd4754feceb68775dfc0400ff116a1c2e60d45c64769",
+  "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
+  "coords_py_sha256": "3497d372316d1dd7fc3277a74e794eec3b8997dcb85525d1ea2d5d450111c2d2",
+  "cyclone_py_sha256": "302a3892a9af2ccf5e8d19d3bf30bfd4bc2c6ae7afd3f3c31edf52448ed799d2",
+  "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "h_phi = a, h_lambda = a cos phi": "Vallis §2.2.2 text before (2.27)",
+  "x = a lambda, y = a phi": "Snyder (12-1, 12-2)",
+  "k = 1/cos phi": "Snyder (12-3) with phi_1 = 0",
+  "grad T": "Vallis (2.31) horizontal part, r = a",
+  "dy = a dphi / cos phi; y = a ln tan(pi/4 + phi/2)": "Snyder (7-2)",
+  "area stretch 1/cos^2 phi": "Snyder (7-3)",
+  "Equal Earth": "Šavrič et al. (2019) Eqs. (1)-(2)",
+  "polar stereographic": "Snyder (21-5…21-7), lat_ts 60",
+  "u_theta = u, u_r = -v": "Part 1 D04 with i = theta-hat, j = -r-hat; Vallis (2.29)",
+  "u_r = u . r-hat": "Part 1 D04"
+ },
+ "parameters": {
+  "places": {
+   "brest": [
+    48.39,
+    -4.49
+   ],
+   "iceland": [
+    65.0,
+    -19.0
+   ],
+   "greenland": [
+    72.0,
+    -40.0
+   ],
+   "scandinavia": [
+    64.0,
+    16.0
+   ],
+   "longyearbyen": [
+    78.22,
+    15.65
+   ],
+   "barents": [
+    75.0,
+    40.0
+   ],
+   "siberia": [
+    65.0,
+    100.0
+   ],
+   "bering": [
+    65.8,
+    -169.0
+   ],
+   "alaska": [
+    65.0,
+    -150.0
+   ],
+   "canada": [
+    56.0,
+    -100.0
+   ],
+   "hudson": [
+    60.0,
+    -85.0
+   ],
+   "la": [
+    34.05,
+    -118.24
+   ]
+  },
+  "london": [
+   51.51,
+   -0.13
+  ],
+  "los_angeles": [
+   34.05,
+   -118.24
+  ],
+  "brest": [
+   48.39,
+   -4.49
+  ],
+  "longyearbyen": [
+   78.22,
+   15.65
+  ],
+  "tissot": {
+   "radius_km": 500,
+   "a": "EARTH_RADIUS (6.371e6 m), divided by a for drawing",
+   "centres": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     48.39,
+     -4.49
+    ],
+    [
+     60.0,
+     0.0
+    ],
+    [
+     78.22,
+     15.65
+    ],
+    [
+     60.0,
+     30.0
+    ],
+    [
+     30.0,
+     60.0
+    ],
+    [
+     30.0,
+     -60.0
+    ],
+    [
+     0.0,
+     -120.0
+    ],
+    [
+     0.0,
+     120.0
+    ],
+    [
+     -30.0,
+     20.0
+    ],
+    [
+     -60.0,
+     -60.0
+    ],
+    [
+     60.0,
+     -100.0
+    ]
+   ]
+  },
+  "polar_map": {
+   "lat_0": 90.0,
+   "lat_ts": 60.0,
+   "edge_lat": 20.0
+  },
+  "vortex": {
+   "date": "2026-01-21",
+   "level_hPa": 10,
+   "contour_m": 400,
+   "levels_m": [
+    28800.0,
+    29200.0,
+    29600.0,
+    30000.0,
+    30400.0,
+    30800.0,
+    31200.0
+   ],
+   "ring_km": 2000,
+   "n_az": 72,
+   "ticks_drawn": 36
+  },
+  "trails": {
+   "seeds": "jittered 2.5-degree equal-area grid 30-88 N, numpy default_rng(7)",
+   "n": 1700,
+   "dt_s": 600,
+   "kept": "every 3rd step",
+   "screen_time": "1 frame = 30 min of flow (1 s of screen = 15 h) through the frozen daily mean",
+   "samples": 180,
+   "speed_uint8_cap_ms": 63.75
+  },
+  "time_compression": {
+   "s00": "title morph and trails in a few seconds",
+   "s03": "the peel and stretch morph in about 4 s",
+   "s16": "the globe turns about 20° per second (one turn per 18 s) while it is shown; flattening in about 3 s",
+   "s18-s21": "trails 1 s of screen = 15 h through the frozen daily-mean wind"
+  },
+  "exaggerations": [
+   "Tissot circles 500 km in radius (visibility)",
+   "s03/s16 morphs are linear blends of vertex positions between two projections (a drawing aid)",
+   "s08 one-degree step magnified on the slice",
+   "s12 the short rhumb piece magnified",
+   "s19 vortex size bar: order of magnitude",
+   "s20 an idealised ring of air (thought experiment)",
+   "s06 the 1-degree, 1 °C example is illustrative (easy numbers)"
+  ],
+  "screen_deviations": [
+   "s00 title in the series layout of Parts 4 and 5 ('Coordinates · Part 7' 64 px, 'Maps' 150 px, 'made easy' 88 px, 'projections and' / 'the view from the pole' 68 px)",
+   "skip chips at the top of the maths column x 1076-1840 (the storyboard's x 1500-1840 cannot hold 'every step · optional · skip to m:ss' at the 44-px floor); then the small 'optional maths' tag at x 1520-1840 until the block ends",
+   "s18 trails: 1 frame = 30 min (storyboard 1 s = 3 h): at 3 h per second a 14-frame tail of a 79 m/s parcel is 16 px on this map",
+   "trail seeds on a 2.5-degree grid (storyboard 1.5): ~1600 SVG trails instead of ~4800 (render cost); one 600-s RK4 step per sample → every 3rd step kept",
+   "polar map cut at 20 N (the NCEP file's edge) instead of 15 N"
+  ],
+  "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05): polar stereo + particles from NCEP 10 hPa, Python RK tracks drawn as trails"
+ },
+ "credits": [
+  "NCEP/NCAR Reanalysis 1 data provided by the NOAA PSL, Boulder, Colorado, USA (public domain): 10 hPa daily means, 21 Jan 2026.",
+  "Contains modified Copernicus Climate Change Service information 2026 (ERA5 monthly 2-m temperature, Sep 2026, base 1991-2020).",
+  "NASA Blue Marble Next Generation (NASA Earth Observatory).",
+  "Made with Natural Earth.",
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0); style per storyboard (polar-chart, seed 31) or its runner-up."
+ ],
+ "js_selftest": "the TSX projects with JS mirrors of mapproj.forward (platecarree, mercator, equalearth, gores, polar_stereographic); mp_lib.tsx asserts them against data jscheck (16 points each, |Δ| < 1e-9 a) at module load; CHECK rows in the scene files re-assert every screen string",
+ "chapters": [
+  {
+   "time": "0:00",
+   "t_s": 0.0,
+   "title": "Maps: the question",
+   "scene": "s00_title"
+  },
+  {
+   "time": "0:34",
+   "t_s": 34.8,
+   "title": "What we use from Parts 1, 3 and 6",
+   "scene": "s02_part6_recap"
+  },
+  {
+   "time": "1:29",
+   "t_s": 89.7,
+   "title": "Flattening the Earth",
+   "scene": "s03_flattening"
+  },
+  {
+   "time": "2:02",
+   "t_s": 122.95,
+   "title": "Every step: the flat square map and its stretch (optional maths)",
+   "scene": "s04_plate_carree"
+  },
+  {
+   "time": "6:13",
+   "t_s": 373.975,
+   "title": "Scale factors on weather grids",
+   "scene": "s06_gradient_preview"
+  },
+  {
+   "time": "7:41",
+   "t_s": 461.05,
+   "title": "Mercator's idea",
+   "scene": "s07_mercator_idea"
+  },
+  {
+   "time": "9:06",
+   "t_s": 546.25,
+   "title": "Every step: Mercator's formula (optional maths)",
+   "scene": "s08_mercator_dy"
+  },
+  {
+   "time": "16:15",
+   "t_s": 975.05,
+   "title": "Why the rhumb line is straight",
+   "scene": "s12_rhumb_straight"
+  },
+  {
+   "time": "17:47",
+   "t_s": 1067.775,
+   "title": "The price: areas",
+   "scene": "s13_area_stretch"
+  },
+  {
+   "time": "19:13",
+   "t_s": 1153.625,
+   "title": "Equal-area maps: pick the map for the job",
+   "scene": "s14_equal_earth"
+  },
+  {
+   "time": "20:45",
+   "t_s": 1245.8,
+   "title": "Why so many coordinate systems",
+   "scene": "s15_why_many"
+  },
+  {
+   "time": "21:49",
+   "t_s": 1309.975,
+   "title": "The view from the pole",
+   "scene": "s16_globe_to_pole"
+  },
+  {
+   "time": "23:10",
+   "t_s": 1390.05,
+   "title": "A tour of the polar map",
+   "scene": "s17_where_is_what"
+  },
+  {
+   "time": "24:53",
+   "t_s": 1493.85,
+   "title": "The stratospheric polar vortex",
+   "scene": "s18_vortex"
+  },
+  {
+   "time": "26:21",
+   "t_s": 1581.725,
+   "title": "East is round, north is in",
+   "scene": "s19_vortex_components"
+  },
+  {
+   "time": "27:36",
+   "t_s": 1656.625,
+   "title": "Choosing the origin",
+   "scene": "s20_origin_wheel"
+  },
+  {
+   "time": "30:59",
+   "t_s": 1859.25,
+   "title": "To sum up",
+   "scene": "s22_recap"
+  }
+ ],
+ "maths_skips": [
+  {
+   "block": "A",
+   "chip_scene": "s04_plate_carree",
+   "chip_sentence": 2,
+   "chip_at_s": 131.75,
+   "skip_to": "6:13",
+   "skip_to_s": 373.975,
+   "keep_scene": "s06_gradient_preview",
+   "keep_line": "If you skipped, here's what to keep."
+  },
+  {
+   "block": "B",
+   "chip_scene": "s08_mercator_dy",
+   "chip_sentence": 2,
+   "chip_at_s": 561.775,
+   "skip_to": "16:15",
+   "skip_to_s": 975.05,
+   "keep_scene": "s12_rhumb_straight",
+   "keep_line": "If you skipped, here's what to keep."
+  }
+ ],
+ "timing_provisional": true,
+ "inputs_sha256": {
+  "data/derived/ch00/ncep_r1_10hPa_20251101_20260317.nc": "d2173163f964d9f71aa0104d63fcfb187047f32dbbd576ab9be59375f5569247",
+  "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc": "c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_admin_0_countries.zip": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-50m-land\\ne_50m_land.zip": "0b8e670cf80dce9cbebe2a193bc44ba5602758c22e1fa603980553646d7ff162"
+ },
+ "render_assets": {
+  "mp_bm_ee.png": "e3139faa08768b2e3820243e9f5aa5ac4297364526e99794a79ca64732e6b2e1",
+  "mp_bm_mc.jpg": "a09bce48e555859ebcbb248b38ad8004901fa89dec0aa67516996aa32e87c47d",
+  "mp_bm_pc.jpg": "079377a8a629f71d3cd307b11c92c4b96da7e4c963d71421de4eba48d1b1e6fc",
+  "mp_bm_ps.jpg": "236411da56568439ba06814181fcf531805ed09b742f00bc077a2f696f1b8023",
+  "mp_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "mp_brest_crop.jpg": "8f86241b2784d0e25f380784b3cb4d54aec1846c847142a9ad0b30a4485f9c95",
+  "mp_t2m_ee.png": "9f1ab95dac14fa0bde36508c6c949ea62bf1df98f3abfadae465484012da3383",
+  "mp_t2m_mc.png": "0266c832ed1da950e5d863dca38d541df344603fa9b6b87e9c4891a866f7e25a",
+  "mp_trails.bin": "8ae187bd1a388c7b318592a2dfaaa2f1ca53f84959a72ef75ac9b5a83d595a5f",
+  "mp_z10_ps.png": "582aa7117a9031ab9f7abd739fa74b9f720686461d02f9926e432aec2bd19342"
+ },
+ "data_files": {
+  "mp.json": "6f3d2a339b142f6d082a1133bde0ddb2a9f3784da73b6356b443c84470cc40ed",
+  "img/bm_ee.png": "e3139faa08768b2e3820243e9f5aa5ac4297364526e99794a79ca64732e6b2e1",
+  "img/bm_mc.jpg": "a09bce48e555859ebcbb248b38ad8004901fa89dec0aa67516996aa32e87c47d",
+  "img/bm_pc.jpg": "079377a8a629f71d3cd307b11c92c4b96da7e4c963d71421de4eba48d1b1e6fc",
+  "img/bm_ps.jpg": "236411da56568439ba06814181fcf531805ed09b742f00bc077a2f696f1b8023",
+  "img/brest_crop.jpg": "8f86241b2784d0e25f380784b3cb4d54aec1846c847142a9ad0b30a4485f9c95",
+  "img/t2m_ee.png": "9f1ab95dac14fa0bde36508c6c949ea62bf1df98f3abfadae465484012da3383",
+  "img/t2m_mc.png": "0266c832ed1da950e5d863dca38d541df344603fa9b6b87e9c4891a866f7e25a",
+  "img/trails.bin": "8ae187bd1a388c7b318592a2dfaaa2f1ca53f84959a72ef75ac9b5a83d595a5f",
+  "img/z10_ps.png": "582aa7117a9031ab9f7abd739fa74b9f720686461d02f9926e432aec2bd19342"
+ },
+ "checks": [
+  {
+   "id": "DM00",
+   "name": "EARTH_RADIUS = 6371 km (the movie's a)",
+   "value": [
+    6371.0
+   ],
+   "ref": [
+    6371.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DM01",
+   "name": "1° north = 111.2 km, 1° east at Brest = 73.8 km (arc_lengths)",
+   "value": [
+    111.194927,
+    73.839738
+   ],
+   "ref": [
+    111.2,
+    73.8
+   ],
+   "tol": [
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM13",
+   "name": "rhumb 9732.8 km, 258.49°, × 1.1116 of the great circle 8755 km, +977.5 km",
+   "value": [
+    9732.816907,
+    258.493681,
+    1.111648,
+    977.508914,
+    8755.307993
+   ],
+   "ref": [
+    9732.8,
+    258.49,
+    1.1116,
+    977.5,
+    8755.3
+   ],
+   "tol": [
+    0.1,
+    0.01,
+    0.0001,
+    0.2,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM13",
+   "name": "screen '≈ 8755 km', '+11 %'",
+   "value": [
+    8755.0,
+    11.0
+   ],
+   "ref": [
+    8755.0,
+    11.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM16",
+   "name": "Brest on the plate carrée: x = −499.3 km, y = 5380.7 km",
+   "value": [
+    -499.265221,
+    5380.7225
+   ],
+   "ref": [
+    -499.3,
+    5380.7
+   ],
+   "tol": [
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM16",
+   "name": "screen: 48.39° = 0.8446 rad, −4.49° = −0.0784 rad; 6371 × −0.0784 ≈ −500; 6371 × 0.8446 ≈ 5381",
+   "value": [
+    0.844565,
+    -0.078365,
+    -499.4864,
+    5380.9466
+   ],
+   "ref": [
+    0.8446,
+    -0.0784,
+    -499.5,
+    5380.9
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM16",
+   "name": "2πa = 40 030 km ('about forty thousand'); 30° of the equator = 3336 km",
+   "value": [
+    40030.173592,
+    3335.847799
+   ],
+   "ref": [
+    40030.2,
+    3335.8
+   ],
+   "tol": [
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM17",
+   "name": "plate carrée k = 1.5059 (Brest), 2.0000 (60° N), 4.8983 (Longyearbyen); h = 1",
+   "value": [
+    1.505895,
+    2.0,
+    4.898255,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.5059,
+    2.0,
+    4.8983,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    1e-06,
+    1e-06,
+    1e-06
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM17",
+   "name": "a cos φ at Brest = 4230 km; 2π × 4230 = 26 580 km; 2π a cos φ = 26 582; 40 030 / 26 580 = 1.506",
+   "value": [
+    4230.70535,
+    26577.873849,
+    26582.305694,
+    1.50602
+   ],
+   "ref": [
+    4230.7,
+    26577.9,
+    26582.3,
+    1.506
+   ],
+   "tol": [
+    0.1,
+    0.1,
+    0.1,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM17",
+   "name": "screen cos: 0.664, 0.5, 0.204 → 1/0.664 ≈ 1.5, 1/0.5 = 2, 1/0.204 ≈ 4.9",
+   "value": [
+    0.664057,
+    0.204154,
+    1.506024,
+    4.901961
+   ],
+   "ref": [
+    0.664,
+    0.204,
+    1.506,
+    4.902
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.0005,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (0.0, 0.0) outline encloses y0/a = 0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (48.4, -4.5) outline encloses y0/a = 0.845",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (60.0, 0.0) outline encloses y0/a = 1.047",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (78.2, 15.7) outline encloses y0/a = 1.365",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (60.0, 30.0) outline encloses y0/a = 1.047",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (30.0, 60.0) outline encloses y0/a = 0.524",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (30.0, -60.0) outline encloses y0/a = 0.524",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (0.0, -120.0) outline encloses y0/a = 0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (0.0, 120.0) outline encloses y0/a = 0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (-30.0, 20.0) outline encloses y0/a = -0.524",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (-60.0, -60.0) outline encloses y0/a = -1.047",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (60.0, -100.0) outline encloses y0/a = 1.047",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot ring at Brest (platecarree): destination_point ring projected = tissot_ellipses outline",
+   "value": [
+    4.9e-05
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (0.0, 0.0) outline encloses y0/a = -0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (48.4, -4.5) outline encloses y0/a = 0.968",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (60.0, 0.0) outline encloses y0/a = 1.317",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (78.2, 15.7) outline encloses y0/a = 2.271",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (60.0, 30.0) outline encloses y0/a = 1.317",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (30.0, 60.0) outline encloses y0/a = 0.549",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (30.0, -60.0) outline encloses y0/a = 0.549",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (0.0, -120.0) outline encloses y0/a = -0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (0.0, 120.0) outline encloses y0/a = -0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (-30.0, 20.0) outline encloses y0/a = -0.549",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (-60.0, -60.0) outline encloses y0/a = -1.317",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (60.0, -100.0) outline encloses y0/a = 1.317",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot ring at Brest (mercator): destination_point ring projected = tissot_ellipses outline",
+   "value": [
+    4.9e-05
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (0.0, 0.0) outline encloses y0/a = 0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (48.4, -4.5) outline encloses y0/a = 0.916",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (60.0, 0.0) outline encloses y0/a = 1.088",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (78.2, 15.7) outline encloses y0/a = 1.277",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (60.0, 30.0) outline encloses y0/a = 1.088",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (30.0, 60.0) outline encloses y0/a = 0.593",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (30.0, -60.0) outline encloses y0/a = 0.593",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (0.0, -120.0) outline encloses y0/a = 0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (0.0, 120.0) outline encloses y0/a = 0.000",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (-30.0, 20.0) outline encloses y0/a = -0.593",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (-60.0, -60.0) outline encloses y0/a = -1.088",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (60.0, -100.0) outline encloses y0/a = 1.088",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot ring at Brest (equalearth): destination_point ring projected = tissot_ellipses outline",
+   "value": [
+    5e-05
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot callout ellipse pc #1 lies north of the equator (centre 48.39)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot callout ellipse pc #3 lies north of the equator (centre 78.22)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot callout ellipse mc #2 lies north of the equator (centre 60.0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot callout ellipse mc #3 lies north of the equator (centre 78.22)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot callout ellipse ee #4 lies north of the equator (centre 60.0)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM17",
+   "name": "Brest Tissot oval on the plate carrée: width/height ratio ≈ 1.5 (width 1.5×, height 1×)",
+   "value": [
+    1.506519,
+    1.0
+   ],
+   "ref": [
+    1.506,
+    1.0
+   ],
+   "tol": [
+    0.02,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM05",
+   "name": "1 °C over 73.84 km = 1.354 °C per 100 km ('about 1.4'); over 111.2 km it would be 0.899",
+   "value": [
+    1.354284,
+    0.899322
+   ],
+   "ref": [
+    1.354,
+    0.899
+   ],
+   "tol": [
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM05",
+   "name": "sphere.gradient: ∂T/∂x at Brest = 1/(a cos φ) ∂T/∂λ = 1.354 K per 100 km",
+   "value": [
+    1.354459
+   ],
+   "ref": [
+    1.354
+   ],
+   "tol": 0.002,
+   "pass": true
+  },
+  {
+   "id": "DM18",
+   "name": "Mercator h = k = 1.506, 2.000, 4.898; ω = 0",
+   "value": [
+    1.505895,
+    2.0,
+    4.898255,
+    1.505895,
+    2.0,
+    4.898255,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    1.5059,
+    2.0,
+    4.8983,
+    1.5059,
+    2.0,
+    4.8983,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05,
+    1e-05,
+    1e-05,
+    1e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM19",
+   "name": "1° north drawn 167.45 km at Brest, 222.39 km at 60° N",
+   "value": [
+    167.447936,
+    222.389853
+   ],
+   "ref": [
+    167.45,
+    222.39
+   ],
+   "tol": [
+    0.01,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM19",
+   "name": "screen 111.2 × 2 = 222.4",
+   "value": [
+    222.4
+   ],
+   "ref": [
+    222.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "midpoint totals 0.1752 0.3559 0.5485 0.7615 1.0084 1.3126 1.7256 2.4000",
+   "value": [
+    0.1752,
+    0.355889,
+    0.548465,
+    0.761531,
+    1.008357,
+    1.312646,
+    1.725626,
+    2.39997
+   ],
+   "ref": [
+    0.1752,
+    0.3559,
+    0.5485,
+    0.7615,
+    1.0084,
+    1.3126,
+    1.7256,
+    2.4
+   ],
+   "tol": 5e-05,
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "steps 0.1752 0.1807 0.1926; 1/cos 5° 15° 25° = 1.004 1.035 1.103; 80-90 step = 2.0025",
+   "value": [
+    0.1752,
+    0.18069,
+    0.192576,
+    1.00382,
+    1.035276,
+    1.103378,
+    2.002541
+   ],
+   "ref": [
+    0.1752,
+    0.1807,
+    0.1926,
+    1.004,
+    1.035,
+    1.103,
+    2.0025
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    0.0005,
+    0.0005,
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "screen: 10° = 0.1745 rad; 0.1745 × 1.004 ≈ 0.175 ≈ 1116 km; 0.356; 0.549 (= 0.356 + 0.193)",
+   "value": [
+    0.174533,
+    0.175198,
+    1116.196732,
+    0.356,
+    0.549
+   ],
+   "ref": [
+    0.1745,
+    0.1752,
+    1116.2,
+    0.356,
+    0.549
+   ],
+   "tol": [
+    5e-05,
+    0.0005,
+    0.1,
+    1e-09,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "each 10° midpoint total lies below ln tan by 0.1-1.6 % up to 80°",
+   "value": [
+    0.13,
+    0.14,
+    0.15,
+    0.18,
+    0.23,
+    0.33,
+    0.56,
+    1.49
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM21",
+   "name": "ln tan 75° = 1.31696; 1° midpoint sum = 1.31691; Brest 0.96768 a = 6165.1 km",
+   "value": [
+    1.316958,
+    1.316914,
+    0.967678,
+    6165.077613
+   ],
+   "ref": [
+    1.31696,
+    1.31691,
+    0.96768,
+    6165.1
+   ],
+   "tol": [
+    5e-06,
+    5e-06,
+    5e-06,
+    0.1
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM21",
+   "name": "screen: e = 2.718; tan 75° = 3.732; ln 3.732 = 1.317; 45 + 24.2 = 69.2; tan 69.2° = 2.632; ln 2.632 = 0.968",
+   "value": [
+    2.718282,
+    3.732051,
+    1.316944,
+    69.195,
+    2.631827,
+    0.967744
+   ],
+   "ref": [
+    2.718,
+    3.732,
+    1.317,
+    69.2,
+    2.632,
+    0.968
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.0005,
+    0.01,
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM22",
+   "name": "y(61°) = 1.3524, y(59°) = 1.2826, slope (centred) = 2.0007, 1/cos 60° = 2; y(85°) = 3.1313 a = 19 949.5 km",
+   "value": [
+    1.352405,
+    1.282567,
+    2.000711,
+    2.0,
+    3.131301,
+    19949.520783
+   ],
+   "ref": [
+    1.3524,
+    1.2826,
+    2.0007,
+    2.0,
+    3.1313,
+    19949.5
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    0.0005,
+    1e-12,
+    5e-05,
+    0.3
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM22",
+   "name": "screen: 1.3524 − 1.2826 = 0.0698; 2° = 0.0349 rad; 0.0698 / 0.0349 = 2.00",
+   "value": [
+    0.0698,
+    0.034907,
+    2.0
+   ],
+   "ref": [
+    0.0698,
+    0.0349,
+    2.0
+   ],
+   "tol": [
+    1e-09,
+    5e-05,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM23",
+   "name": "tan(258.49° − 180°) = 4.91 west per 1 south; stretch 1/cos 40° = 1.31, 1/cos 50° = 1.56; rhumb residual from a straight line on Mercator",
+   "value": [
+    4.912384,
+    1.305407,
+    1.555724,
+    0.0
+   ],
+   "ref": [
+    4.91,
+    1.305,
+    1.556,
+    0.0
+   ],
+   "tol": [
+    0.01,
+    0.0005,
+    0.0005,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM24",
+   "name": "Mercator areal 4.000 (60° N), 23.99 (Longyearbyen); screen 4.9 × 4.9 = 24.01 ≈ 24; 200 × 200 = 40 000",
+   "value": [
+    4.0,
+    23.992899,
+    24.01,
+    4.0
+   ],
+   "ref": [
+    4.0,
+    23.99,
+    24.01,
+    4.0
+   ],
+   "tol": [
+    1e-05,
+    0.01,
+    1e-09,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC34",
+   "name": "Greenland, Africa areas (polygon_area, NE 10 m) within 2 % of the cited 2.17 and 30.4 million km²; 30.4 / 2.17 = 14.0; our ratio 14.0",
+   "value": [
+    0.98702,
+    0.987387,
+    14.009217,
+    14.026459
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    14.0,
+    14.0
+   ],
+   "tol": [
+    0.02,
+    0.02,
+    0.05,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC34",
+   "name": "on the Mercator map Greenland's drawn area / Africa's in 0.8-1.25 ('about as big')",
+   "value": [
+    1.049781
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.25,
+   "pass": true
+  },
+  {
+   "id": "DC35",
+   "name": "Equal Earth areal = 1 at 400 random points",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DC35",
+   "name": "Equal Earth ω(60° N, 30° E) = 31.4° ('about thirty one')",
+   "value": [
+    31.39929
+   ],
+   "ref": [
+    31.4
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DM27",
+   "name": "ring radii 1565, 3186, 4924, 6864 km (75, 60, 45, 30° N)",
+   "value": [
+    1565.143852,
+    3185.5,
+    4924.356334,
+    6863.798565
+   ],
+   "ref": [
+    1565.0,
+    3186.0,
+    4924.0,
+    6864.0
+   ],
+   "tol": 1.0,
+   "pass": true
+  },
+  {
+   "id": "DM27",
+   "name": "polar stereographic k = 1.000 at 60° N (true to scale there), 1.068 at Brest, 1.244 at 30° N",
+   "value": [
+    1.0,
+    1.067714,
+    1.244017
+   ],
+   "ref": [
+    1.0,
+    1.068,
+    1.244
+   ],
+   "tol": 0.002,
+   "pass": true
+  },
+  {
+   "id": "DM27",
+   "name": "lon 0 at the bottom (y < 0), 90 E right (x > 0), 180 top (y > 0), 90 W left (x < 0)",
+   "value": [
+    0.0,
+    -1.866,
+    1.866,
+    -0.0,
+    -0.0,
+    1.866,
+    -1.866,
+    -0.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Brest (48.39, -4.49) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Iceland (65.0, -19.0) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Greenland (72.0, -40.0) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Scandinavia (64.0, 16.0) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Longyearbyen (78.22, 15.65) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Barents Sea (75.0, 40.0) is on sea (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Siberia (65.0, 100.0) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Bering Strait (65.8, -169.0) is on sea (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Alaska (65.0, -150.0) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Canada (56.0, -100.0) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Hudson Bay (60.0, -85.0) is on sea (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "Los Angeles (34.05, -118.24) is on land (NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM28",
+   "name": "screen quadrants: Brest bottom, left of the 0 spoke; Iceland left of 0; Greenland left of Iceland; Scandinavia right of 0; Siberia right; Bering top; Alaska left of the 180 spoke; Hudson Bay and Canada left; Los Angeles upper left, just INSIDE the 30° ring (34° N is poleward of 30° N)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC31b",
+   "name": "raster inverse round trip via mapproj.forward (pc)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DC31b",
+   "name": "raster inverse round trip via mapproj.forward (mc)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DC31b",
+   "name": "raster inverse round trip via mapproj.forward (ee)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DC31b",
+   "name": "raster inverse round trip via mapproj.forward (ps)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DM40",
+   "name": "global-mean anomaly Sep 2026 +0.823 K (manifest; not spoken)",
+   "value": [
+    0.823436
+   ],
+   "ref": [
+    0.823
+   ],
+   "tol": 0.005,
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "vortex centre 72.89 N 44.26 E, 28 602 m ('28.6 km'; '73° N, 44° E'; '72.9, 44.3')",
+   "value": [
+    72.894611,
+    44.259829,
+    28601.956372
+   ],
+   "ref": [
+    72.89,
+    44.26,
+    28602.0
+   ],
+   "tol": [
+    0.02,
+    0.02,
+    2
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "zonal-mean height along 30 N = 30 721 m ('thirty point seven')",
+   "value": [
+    30720.78125
+   ],
+   "ref": [
+    30721.0
+   ],
+   "tol": 2,
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "fastest wind 79.0 m/s at 60 N 90 E; × 3.6 = 284.4 km/h",
+   "value": [
+    78.954827,
+    60.0,
+    90.0,
+    284.237377
+   ],
+   "ref": [
+    79.0,
+    60.0,
+    90.0,
+    284.4
+   ],
+   "tol": [
+    0.05,
+    0,
+    0,
+    0.2
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "screen and voice (fixed 2026-11-05, was 285): 79 m/s × 3.6 ≈ 284 km/h; the exact 78.95 × 3.6 = 284.2",
+   "value": [
+    284.0,
+    284.0
+   ],
+   "ref": [
+    284.0,
+    284.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "zonal-mean u at 60 N = 42.1 m/s; zonal-mean u > 0 at 50-80 N",
+   "value": [
+    42.101391,
+    6.404167
+   ],
+   "ref": [
+    42.1,
+    10.0
+   ],
+   "tol": [
+    0.05,
+    10.0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "the vortex centre is over the sea (the Barents Sea; NE 50 m land)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC37",
+   "name": "centre to pole 1902 km ('about one thousand nine hundred')",
+   "value": [
+    1902.032455
+   ],
+   "ref": [
+    1902.0
+   ],
+   "tol": 3,
+   "pass": true
+  },
+  {
+   "id": "DC37",
+   "name": "ring 2000 km: mean round 17.49 (pole) vs 47.39 (centre); rms in/out 32.9 vs 19.9; ratio 1.883 vs 0.419",
+   "value": [
+    17.493081,
+    47.388719,
+    32.944384,
+    19.855648,
+    1.883281,
+    0.418995
+   ],
+   "ref": [
+    17.49,
+    47.39,
+    32.9,
+    19.9,
+    1.883,
+    0.419
+   ],
+   "tol": [
+    0.01,
+    0.01,
+    0.05,
+    0.05,
+    0.002,
+    0.002
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC37",
+   "name": "screen: 17.5, 33, 1.9; 47, 20, 0.4",
+   "value": [
+    17.5,
+    33.0,
+    1.9,
+    47.0,
+    20.0,
+    0.4
+   ],
+   "ref": [
+    17.5,
+    33.0,
+    1.9,
+    47.0,
+    20.0,
+    0.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DC36",
+   "name": "height raster range inside 28.4-31.2 km (colour bar)",
+   "value": [
+    28.602935,
+    31.278924
+   ],
+   "ref": [
+    28.4,
+    31.2
+   ],
+   "tol": [
+    0.25,
+    0.25
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM30",
+   "name": "solar declination 21 Jan = −20.2°; polar night north of 69.8° N",
+   "value": [
+    -20.180926,
+    69.819074
+   ],
+   "ref": [
+    -20.2,
+    69.8
+   ],
+   "tol": [
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM30",
+   "name": "i ∥ θ̂ and j ∥ −r̂ on the polar map at 12 points (angle error, degrees)",
+   "value": [
+    5e-05
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DM29",
+   "name": "trail speeds from the track steps: max ≤ 80 m/s (field max 79.0), median of the 60-70 N trails > 30 m/s",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM29",
+   "name": "trails go round anticlockwise seen from above the North Pole (mean eastward displacement > 0 at 50-80 N)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DM31",
+   "name": "|O₂P| = 1118 km; r̂ = (0.447, 0.894); u_r = −4.472, u_θ = 8.944, |u| = 10",
+   "value": [
+    1118.033989,
+    0.447214,
+    0.894427,
+    -4.472136,
+    8.944272,
+    10.0
+   ],
+   "ref": [
+    1118.0,
+    0.447,
+    0.894,
+    -4.472,
+    8.944,
+    10.0
+   ],
+   "tol": [
+    0.1,
+    0.0005,
+    0.0005,
+    0.0005,
+    0.0005,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM31",
+   "name": "origin at the centre: u_r = 0, u_θ = 10 at the top of the ring",
+   "value": [
+    -0.0,
+    10.0
+   ],
+   "ref": [
+    0.0,
+    10.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  }
+ ],
+ "flags": [
+  {
+   "id": "F1",
+   "scene": "s08_mercator_dy",
+   "what": "Brest drawn step",
+   "screen_or_voice": "'a hundred and eleven point two times one point five zero six … about a hundred and sixty seven point four'",
+   "hand_check": "111.2 × 1.506 = 167.47 (rounds to 167.5); the exact 111.19 × 1.5059 = 167.45",
+   "note": "voice kept ('167.4' = the exact 167.45 to 1 dp); the SCREEN writes the unrounded factors '111.19 × 1.5059 ≈ 167.4' so its arithmetic checks by hand (director: optional re-voice)"
+  },
+  {
+   "id": "F2",
+   "scene": "s10_ln_formula",
+   "what": "Brest height in km",
+   "screen_or_voice": "'0.968 × 6371 ≈ 6165' (screen row and voice 'about six thousand one hundred and sixty five')",
+   "hand_check": "0.968 × 6371 = 6167.1; the exact 0.96768 × 6371 = 6165.1",
+   "note": "voice kept ('6165' from the unrounded ln); the SCREEN row writes '0.9677 × 6371 ≈ 6165' (hand check 6165.2) instead of the storyboard's '0.968 × 6371 ≈ 6165' (hand check 6167)"
+  },
+  {
+   "id": "F4",
+   "scene": "s13_area_stretch",
+   "what": "Greenland and Africa areas",
+   "screen_or_voice": "'two point one seven million … thirty point four million' (cited survey areas)",
+   "hand_check": "polygon_area on NE 10 m outlines (sphere): 2.138 and 29.99 million km², ratio 14.03",
+   "note": "screen shows the cited 2.17 / 30.4 (as voiced); the computed ratio 14.0 is the same; the manifest records both"
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s02/s06",
+   "data": "data/mp.json",
+   "eq": "δy = a δφ, δx = a cos φ δλ (1°) at Brest",
+   "params": {
+    "lat": 48.39
+   },
+   "sha256": "4a80dab48c340586c43226f5ecb0dfdf703585b525eee8a422da638b5960fe42"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s02/s12",
+   "data": "data/mp.json",
+   "eq": "London–Los Angeles great circle",
+   "params": {
+    "lat1": 51.51,
+    "lon1": -0.13,
+    "lat2": 34.05,
+    "lon2": -118.24
+   },
+   "sha256": "32713191b26607662f51961073def2acd523f8476774bd876aad8894397ff932"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s04",
+   "data": "data/mp.json",
+   "eq": "plate carrée x = a λ, y = a φ at Brest",
+   "params": {
+    "name": "platecarree",
+    "lat": 48.39,
+    "lon": -4.49,
+    "a": 6371000.0
+   },
+   "sha256": "4828f3ee1a650cd8d6b3552d4d8b5f80f5922838ce0b9e64dfb4645d917f75ce"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.scale_factors",
+   "scene": "s05",
+   "data": "data/mp.json",
+   "eq": "plate carrée stretch along the parallel k = 1/cos φ",
+   "params": {
+    "name": "platecarree",
+    "lat": [
+     48.39,
+     60.0,
+     78.22
+    ],
+    "lon": 0.0
+   },
+   "sha256": "77e340cf9ba54e52b34f529b71d6175f29d1ba27ae8b75f1bb19068c5e652f6d"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.scale_factors",
+   "scene": "s07/s08",
+   "data": "data/mp.json",
+   "eq": "Mercator h = k = 1/cos φ, ω = 0",
+   "params": {
+    "name": "mercator",
+    "lat": [
+     48.39,
+     60.0,
+     78.22
+    ],
+    "lon": 0.0
+   },
+   "sha256": "3bae0b47fcc638524eda604c3f28e219da4b9ba1a484d66c67ce1481d9a52826"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.isometric_latitude",
+   "scene": "s09-s11",
+   "data": "data/mp.json",
+   "eq": "ψ = ln tan(π/4 + φ/2) = Mercator y / a",
+   "params": {
+    "lat": [
+     10.0,
+     20.0,
+     30.0,
+     40.0,
+     50.0,
+     60.0,
+     70.0,
+     80.0
+    ]
+   },
+   "sha256": "33def71d71adcf2be16baaa91140ae7daa11056e21fcda239ad4af23797bf7cb"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s10",
+   "data": "data/mp.json",
+   "eq": "Mercator y = a ln tan(π/4 + φ/2) at 60° and Brest (a = 1)",
+   "params": {
+    "name": "mercator",
+    "lat": [
+     60.0,
+     48.39
+    ],
+    "lon": 0.0,
+    "a": 1.0
+   },
+   "sha256": "615cb66b5409dfd1b4bd11da00d074864124abea8aa6a5e72a9ec06f8a4c55a7"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.scale_factors",
+   "scene": "s12",
+   "data": "data/mp.json",
+   "eq": "Mercator stretch at the two legs (40°, 50° N)",
+   "params": {
+    "name": "mercator",
+    "lat": [
+     40.0,
+     50.0
+    ],
+    "lon": 0.0
+   },
+   "sha256": "d144f91cd641755997c2d1b0a001af3938bee317490e00bd599d98b2fd3e488f"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.scale_factors",
+   "scene": "s13",
+   "data": "data/mp.json",
+   "eq": "Mercator areal scale 1/cos² φ at 60° N and Longyearbyen",
+   "params": {
+    "name": "mercator",
+    "lat": [
+     60.0,
+     78.22
+    ],
+    "lon": 0.0
+   },
+   "sha256": "78753fb6a246d054a2ecda796f128ffd95a54bf97943e00b451549d450e7231f"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.scale_factors",
+   "scene": "s14",
+   "data": "data/mp.json",
+   "eq": "Equal Earth ω at 60° N 30° E",
+   "params": {
+    "name": "equalearth",
+    "lat": 60.0,
+    "lon": 30.0
+   },
+   "sha256": "87d143d93718c3596f7a3c69c8e46e91fe806c4bef2d5c90d7019b86bca4dc3b"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.scale_factors",
+   "scene": "s16",
+   "data": "data/mp.json",
+   "eq": "polar stereographic k: 1 at 60° N",
+   "params": {
+    "name": "polar_stereographic",
+    "lat": [
+     60.0,
+     48.39,
+     30.0
+    ],
+    "lon": 0.0,
+    "lat_0": 90.0,
+    "lat_ts": 60.0
+   },
+   "sha256": "68750a220b3e222125cc0a5cb628db302a00f6c4c117286aa44d80ddb6eb1390"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s21",
+   "data": "data/mp.json",
+   "eq": "vortex centre to the pole",
+   "params": {
+    "lat1": 72.89461118112091,
+    "lon1": 44.25982854785434,
+    "lat2": 90.0,
+    "lon2": 0.0
+   },
+   "sha256": "6f7cceeb626b05bb737f15f543c50e5e6144bae8bce00939cb73b7569e62d023"
+  },
+  {
+   "fn": "fluidpy.core.coords.unit_vectors_polar",
+   "scene": "s19",
+   "data": "data/mp.json",
+   "eq": "r̂, θ̂ on the polar map",
+   "params": {
+    "theta": -3.141592653589793
+   },
+   "sha256": "92ee61d4ea1f30a754eff2a0fd89f698ac444106f7ac96477eb5cf417f9c530a"
+  },
+  {
+   "fn": "fluidpy.core.coords.velocity_components",
+   "scene": "s20",
+   "data": "data/mp.json",
+   "eq": "u_r = u·r̂, u_θ = u·θ̂ at P = (500, 1000) km from the new origin, u = (−10, 0)",
+   "params": {
+    "u_cart": [
+     -10.0,
+     0.0
+    ],
+    "x": [
+     500.0,
+     1000.0
+    ],
+    "system": "polar"
+   },
+   "sha256": "6f04c4b5c392466c43dc3709902043cd41b0a1d046f40ff781ef4740097275ac"
+  },
+  {
+   "fn": "fluidpy.core.coords.velocity_components",
+   "scene": "s20",
+   "data": "data/mp.json",
+   "eq": "origin at the ring's centre: u at the top of the ring",
+   "params": {
+    "u_cart": [
+     -10.0,
+     0.0
+    ],
+    "x": [
+     0.0,
+     1000.0
+    ],
+    "system": "polar"
+   },
+   "sha256": "88870fb4d753ed599ac5f03c4181083967722bdb813434e273ea663b48df481e"
+  }
+ ],
+ "physics_recorded": [
+  {
+   "fn": "fluidpy.geo.sphere.destination_point",
+   "scene": "s00/s03/s05/s07",
+   "data": "data/mp.json",
+   "eq": "Tissot circles: 500 km on the real sphere (a = EARTH_RADIUS)",
+   "params": {
+    "centres": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      48.39,
+      -4.49
+     ],
+     [
+      60.0,
+      0.0
+     ],
+     [
+      78.22,
+      15.65
+     ],
+     [
+      60.0,
+      30.0
+     ],
+     [
+      30.0,
+      60.0
+     ],
+     [
+      30.0,
+      -60.0
+     ],
+     [
+      0.0,
+      -120.0
+     ],
+     [
+      0.0,
+      120.0
+     ],
+     [
+      -30.0,
+      20.0
+     ],
+     [
+      -60.0,
+      -60.0
+     ],
+     [
+      60.0,
+      -100.0
+     ]
+    ],
+    "r_m": 500000.0,
+    "n": 49
+   },
+   "sha256": null,
+   "recorded": "12 rings × 49 points"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s11",
+   "data": "data/mp.json",
+   "eq": "Mercator y/a at 61°, 59°, 85°",
+   "params": {
+    "name": "mercator",
+    "lat": [
+     61,
+     59,
+     85
+    ],
+    "a": 1.0
+   },
+   "sha256": null,
+   "recorded": [
+    1.352405,
+    1.282567,
+    3.131301
+   ]
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s13",
+   "data": "data/mp.json",
+   "eq": "Greenland, Africa (NE 10 m admin-0)",
+   "params": {
+    "source": "ne_10m_admin_0_countries"
+   },
+   "sha256": null,
+   "recorded": [
+    2.1379,
+    29.987
+   ]
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s13",
+   "data": "data/mp.json",
+   "eq": "true-size outlines (laea about each centre; equal-area)",
+   "params": {
+    "name": "laea",
+    "centres": [
+     [
+      72,
+      -40
+     ],
+     [
+      2,
+      18
+     ]
+    ],
+    "a": 1.0
+   },
+   "sha256": null,
+   "recorded": "outlines"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s16",
+   "data": "data/mp.json",
+   "eq": "polar stereographic ring radii (lat_ts 60)",
+   "params": {
+    "name": "polar_stereographic",
+    "lat": [
+     75,
+     60,
+     45,
+     30,
+     20
+    ],
+    "lon": 0,
+    "lat_0": 90.0,
+    "lat_ts": 60.0,
+    "a_km": 6371.0
+   },
+   "sha256": null,
+   "recorded": [
+    1565.14,
+    3185.5,
+    4924.36,
+    6863.8,
+    8324.38
+   ]
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "all",
+   "data": "data/mp.json",
+   "eq": "JS-mirror check points (16 per projection, a = 1)",
+   "params": {
+    "names": [
+     "platecarree",
+     "mercator",
+     "equalearth",
+     "gores",
+     "polar_stereographic"
+    ],
+    "seed": 11
+   },
+   "sha256": null,
+   "recorded": "jscheck"
+  }
+ ],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.geo.sphere.rhumb_line",
+   "scene": "s02/s12",
+   "eq": "London–Los Angeles rhumb line (constant bearing)",
+   "params": {
+    "lat1": 51.51,
+    "lon1": -0.13,
+    "lat2": 34.05,
+    "lon2": -118.24,
+    "n": 121
+   },
+   "output_sha256": "9fdeab05f1dac02c13039e4aaf00fbd172a7947abc78dbd042474dfb2c8bc1e8"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_points",
+   "scene": "s02/s12",
+   "eq": "London–Los Angeles great-circle track",
+   "params": {
+    "lat1": 51.51,
+    "lon1": -0.13,
+    "lat2": 34.05,
+    "lon2": -118.24,
+    "n": 121
+   },
+   "output_sha256": "581b883096b8ba4d112154d346e72444ab4ee4dc336908b4f2d3a5233ca0e4e8"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
+   "scene": "s05/s07/s14",
+   "eq": "Tissot circles 500 km (platecarree), a = EARTH_RADIUS",
+   "params": {
+    "name": "platecarree",
+    "centres": "array (12, 2), sha256 d7402f997e7594f490df0acefc94fb687715d17eb29d5bfe1c5b670616b42b48",
+    "radius_km": 500.0,
+    "n": 49
+   },
+   "output_sha256": "d6e4ae4686336d246bb3f4b50f850ef06590816a4f9b356bd9467a023fd625a8"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
+   "scene": "s05/s07/s14",
+   "eq": "Tissot circles 500 km (mercator), a = EARTH_RADIUS",
+   "params": {
+    "name": "mercator",
+    "centres": "array (12, 2), sha256 d7402f997e7594f490df0acefc94fb687715d17eb29d5bfe1c5b670616b42b48",
+    "radius_km": 500.0,
+    "n": 49
+   },
+   "output_sha256": "a9d4e86ab3c839605f2e51326170a34dfdaa6389d02837c47d9885fef4dcd2fb"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
+   "scene": "s05/s07/s14",
+   "eq": "Tissot circles 500 km (equalearth), a = EARTH_RADIUS",
+   "params": {
+    "name": "equalearth",
+    "centres": "array (12, 2), sha256 d7402f997e7594f490df0acefc94fb687715d17eb29d5bfe1c5b670616b42b48",
+    "radius_km": 500.0,
+    "n": 49
+   },
+   "output_sha256": "21be7be04f76ecdf57e9823c04eae4adc6dc3e84e586f19399aef710f5e13e20"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s06",
+   "eq": "∇T on the sphere (Vallis (2.31)), T rising 1 K per degree east",
+   "params": {
+    "F": "array (9, 11), sha256 0d8fc7d46078905c8d435da69318f127daf61102a515cc26ea4cfbf6cf07846a",
+    "lat": "array (9,), sha256 4b746ed93937c27e836345c3b726cb238a3761a2025db0e944726b1caaff8e37",
+    "lon": "array (11,), sha256 b42ebbd9052136843f61c4f1f71752273d48d5decaf1ba3b15041cbb46f3209f"
+   },
+   "output_sha256": "a65181c0d35213082b2859ec7ecc096046af155fefdc6f880a91ebb08c0983f3"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.global_mean",
+   "scene": "s14",
+   "eq": "cos-latitude weighted mean anomaly (manifest only)",
+   "params": {
+    "field": "array (181, 360), sha256 4a59d4dede23bc6e88e3c140d7101564de0cd628720be81a525bc1441024b6dd",
+    "lat": "array (181,), sha256 c7f1de0b4d7e68b22ee2a095b56fbc5c8b3aa40478c596d7fba6927fd697b9a7"
+   },
+   "output_sha256": "bbabb40ce4cbc20dbad62e7723510295b643adedf62a52544a023cff10f3cb0a"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s18/s21",
+   "eq": "vortex centre = minimum of the 10 hPa height",
+   "params": {
+    "msl": "array (29, 144), sha256 2cc3d176fa0d71871f56e9f4f090d6d5ff53526d8c0ac24eaf9e97c767ad2673",
+    "lat": "array (29,), sha256 9c0a7f6a9e94122bf8b131ce7c3de545e02775d69c64be972818fd63f6338978",
+    "lon": "array (144,), sha256 225372784f3886837216b2bfa13e25ca61690aa7cdcaa0fdadf1d78c45e1fe2e",
+    "box": [
+     50.0,
+     89.0,
+     0.0,
+     359.99
+    ]
+   },
+   "output_sha256": "cf5800fcb549443229275d072daea3c5c82329017223676b859f89122aba3523"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s21",
+   "eq": "ring 2000 km about the pole",
+   "params": {
+    "u": "array (29, 144), sha256 404eb81878c64ab2c24f8f91709e769f91ea4e4665749fcd6a20eff612b94773",
+    "v": "array (29, 144), sha256 ee118d05215d6783b5028e5a342959ad2e99b2a80c56d6457e6667247b3aa7b0",
+    "lat": "array (29,), sha256 9c0a7f6a9e94122bf8b131ce7c3de545e02775d69c64be972818fd63f6338978",
+    "lon": "array (144,), sha256 225372784f3886837216b2bfa13e25ca61690aa7cdcaa0fdadf1d78c45e1fe2e",
+    "centre": [
+     89.999,
+     0.0
+    ],
+    "radii_km": [
+     2000.0
+    ],
+    "n_az": 72
+   },
+   "output_sha256": "4517af8f61bfcec0609e2b228667c5539d5347a571a2d8d425ebcd96adbde08a"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s21",
+   "eq": "ring 2000 km about the vortex centre",
+   "params": {
+    "u": "array (29, 144), sha256 404eb81878c64ab2c24f8f91709e769f91ea4e4665749fcd6a20eff612b94773",
+    "v": "array (29, 144), sha256 ee118d05215d6783b5028e5a342959ad2e99b2a80c56d6457e6667247b3aa7b0",
+    "lat": "array (29,), sha256 9c0a7f6a9e94122bf8b131ce7c3de545e02775d69c64be972818fd63f6338978",
+    "lon": "array (144,), sha256 225372784f3886837216b2bfa13e25ca61690aa7cdcaa0fdadf1d78c45e1fe2e",
+    "centre": [
+     72.89461118112091,
+     44.25982854785434
+    ],
+    "radii_km": [
+     2000.0
+    ],
+    "n_az": 72
+   },
+   "output_sha256": "1d948ec7b73d2ed3d9ee5080b6c6b3aa1c7cec18c2006823635a45dd6c5202f7"
+  },
+  {
+   "fn": "fluidpy.diag.trajectories.advect_on_sphere",
+   "scene": "s00/s01/s18-s21",
+   "eq": "RK4 trails through the frozen 21 Jan 2026 10 hPa wind (600-s steps)",
+   "params": {
+    "u": "array (29, 144), sha256 404eb81878c64ab2c24f8f91709e769f91ea4e4665749fcd6a20eff612b94773",
+    "v": "array (29, 144), sha256 ee118d05215d6783b5028e5a342959ad2e99b2a80c56d6457e6667247b3aa7b0",
+    "lat": "array (29,), sha256 9c0a7f6a9e94122bf8b131ce7c3de545e02775d69c64be972818fd63f6338978",
+    "lon": "array (144,), sha256 225372784f3886837216b2bfa13e25ca61690aa7cdcaa0fdadf1d78c45e1fe2e",
+    "seeds_lat": "array (1700,), sha256 4f6466884434c8a51d7f277e5ce9f595f5e08662174693a8b7a35a65fec0ce76",
+    "seeds_lon": "array (1700,), sha256 e008c11cf68b4e82cdae034729da31a068d831d401fca5cb5241fb9415c93d39",
+    "dt": 600.0,
+    "nsteps": 540
+   },
+   "output_sha256": "0c8d828d07b456e730f4b148e39bcf0c2a6c402a4b95d05c505d89f6b064055c"
+  }
+ ]
+}

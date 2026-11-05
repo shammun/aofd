@@ -1608,7 +1608,7 @@ scenes:
     on Svalbard. Between Scandinavia and the pole lies the Barents Sea, around seventy five degrees north and forty degrees east. To the right, along the
     ninety degrees east spoke, stretches Siberia. At the top, near a hundred and eighty degrees, is the Bering Strait, with Alaska to its left, around sixty
     five degrees north and a hundred and fifty degrees west. And on the left, along ninety degrees west, is Canada, with Hudson Bay at about sixty degrees
-    north. [beat] One last test: where''s Los Angeles, at thirty four degrees north and a hundred and eighteen degrees west? Just outside the thirty degree
+    north. [beat] One last test: where''s Los Angeles, at thirty four degrees north and a hundred and eighteen degrees west? Just inside the thirty degree
     ring, between the ninety west and the hundred and eighty spokes, on the upper left. [beat]'
   on_screen_eq: null
   calc_rows: []
@@ -1692,7 +1692,7 @@ scenes:
     link. AT(8, ''thirty point seven'') the 30° ring pulses with ''≈ 30.7 km'' in the column. AT(9, ''let the air move'') warm-white FlowParticles start
     (house kit wind.tsx, the weather-basics look the user liked): trails advected through the frozen 10-hPa wind of the day by fluidpy.diag.trajectories.advect_on_sphere,
     fading tails, brightness by speed, flowing along the contours (U-CO-082). AT(11, ''nearly eighty metres per second'') the fastest trails over Siberia
-    near 60° N 90° E brighten; readout ''≈ 79 m/s ≈ 285 km/h''. AT(12, ''stratospheric polar vortex'') keyword ''stratospheric polar vortex''.'
+    near 60° N 90° E brighten; readout ''≈ 79 m/s ≈ 284 km/h''. AT(12, ''stratospheric polar vortex'') keyword ''stratospheric polar vortex''.'
   voiceover: 'Now let''s put real weather on this map. The air pressure falls as we go up. About thirty kilometres up, in the stratosphere, the layer above
     the one where our weather happens, it''s only ten hectopascals, about a hundredth of the pressure at the ground. The height where the pressure is exactly
     ten hectopascals isn''t the same everywhere, and this map shows it on the twenty first of January, twenty twenty six. The colours show that height,
@@ -1700,11 +1700,11 @@ scenes:
     surface is lowest, about twenty eight point six kilometres, over the Barents Sea, at about seventy three degrees north and forty four degrees east.
     And it''s higher further south: about thirty point seven kilometres on average along thirty degrees north. [beat] Now let''s let the air move. The winds
     blow nearly along these lines, round and round the Arctic, from west to east. The fastest, nearly eighty metres per second, about two hundred and eighty
-    five kilometres per hour, blow over Siberia, near sixty degrees north. [beat] This great winter whirl of cold air, high above the Arctic, is called
+    four kilometres per hour, blow over Siberia, near sixty degrees north. [beat] This great winter whirl of cold air, high above the Arctic, is called
     the stratospheric polar vortex.'
   on_screen_eq: null
   calc_rows:
-  - 79\ \text{m/s}\times3.6\approx285\ \text{km/h}
+  - 79\ \text{m/s}\times3.6\approx284\ \text{km/h}
   physics_source:
     fn: fluidpy.data.psl.open_daily (NCEP R1 hgt and uwnd/vwnd, 10 hPa); fluidpy.diag.trajectories.advect_on_sphere; fluidpy.geo.mapproj.forward('polar_stereographic');
       fluidpy.diag.cyclone.storm_centre
