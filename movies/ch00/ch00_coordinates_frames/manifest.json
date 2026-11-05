@@ -1,0 +1,1999 @@
+{
+ "id": "ch00_coordinates_frames",
+ "title": "Coordinates, Part 4 — Turning frames: local axes and how they turn",
+ "storyboard": "movies/ch00/ch00_coordinates_frames/storyboard.yaml",
+ "builder": "movies/data/build_ch00_coordinates_frames.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "dirty_tracked": true,
+  "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
+  "frames_py_sha256": "91fd0bc2fceab0901422caf34f4b244bf02a596f92b227fa3d32c1fd1854a7ef",
+  "vectors_py_sha256": "aa543b478ab584db183fac3aaff252503eb69bc805a53af27cf6cfb29c65933d",
+  "tensors_py_sha256": "373d3c3384f3699fc93847616eefa8f0b19f9445899a2c3f0103e1eebd9247a6",
+  "coords_py_sha256": "3497d372316d1dd7fc3277a74e794eec3b8997dcb85525d1ea2d5d450111c2d2",
+  "cyclone_py_sha256": "302a3892a9af2ccf5e8d19d3bf30bfd4bc2c6ae7afd3f3c31edf52448ed799d2",
+  "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e",
+  "ibtracs_py_sha256": "8f9ca6410e72ccc4b3f48bc7404a5e66df1740f3e8dabeb8159d58866a4bd52f"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "v = u i + v j + w k": "Vallis (2.29)",
+  "Di/Dt, Dj/Dt, Dk/Dt": "Vallis (2.39a)-(2.39c), r = a",
+  "u = a cos φ Dλ/Dt": "Vallis (2.28)",
+  "Dv/Dt product rule and metric terms": "Vallis (2.44a), (2.45)",
+  "f = 2Ω sin φ": "Vallis (2.80)",
+  "great circles (no force)": "Vallis §2.2.4 (2.50a,b) with f = 0",
+  "turned axes": "Kundu (2.4)-(2.5) family (Part 1 recap)"
+ },
+ "parameters": {
+  "stations": {
+   "Brest": [
+    48.39,
+    -4.49
+   ],
+   "Trappes": [
+    48.77,
+    2.01
+   ],
+   "Singapore": [
+    1.35,
+    103.82
+   ],
+   "Khulna": [
+    22.8,
+    89.6
+   ],
+   "Khulna_NE": [
+    22.8419,
+    89.5581
+   ]
+  },
+  "coast_segment": {
+   "A": [
+    26.09861888200004,
+    -81.80089270699995
+   ],
+   "B": [
+    26.92210521000004,
+    -82.35362708199995
+   ],
+   "source": "NE 10 m coastline vertices nearest Naples (26.10, −81.80) and Venice (26.93, −82.36) — build-1 pN, pV",
+   "flat_bearing_deg": 329.0094138560756,
+   "sphere_bearing_deg": 329.1323631563035
+  },
+  "ian": {
+   "hrrr_time": "2022-09-28T20",
+   "point": "nearest HRRR 3-km grid point to Fort Myers Beach [26.4574, -81.9412]",
+   "eye_marker": "HRRR's own calm centre (10-m wind-speed minimum in ±0.3° of the MSLP minimum), data report §1c",
+   "eye": [
+    26.674988067061967,
+    -82.18987944990621
+   ],
+   "regrid": "HRRR LCC -> 0.03° lat/lon (scipy griddata linear), raster ×5 (≥ 1024 px, no hatch)",
+   "tracks": "advect_on_sphere, 60 s per sample, frozen 20 UTC field (time compression, not badged)"
+  },
+  "amphan": {
+   "sid": "2020136N10088",
+   "file": "IBTrACS.NI.v04r01.nc",
+   "closest_km": 79.3714841895887,
+   "closest_utc": "2020-05-20T16:50"
+  },
+  "turning": {
+   "plane_ms": 250.0,
+   "wind_ms": 10.0,
+   "lat": 48.39
+  },
+  "puck": {
+   "lat0": 45.0,
+   "lon0": 0.0,
+   "u0": 10.0,
+   "v0": 10.0,
+   "t_s": 86400
+  },
+  "metric": {
+   "u": 10.0,
+   "v": 10.0,
+   "w": 0.0,
+   "lat": 45.0
+  },
+  "time_compression": {
+   "s00/s01/s15": "a 250 m/s flight hour in a few seconds",
+   "s26": "one day of puck travel in about 6 s",
+   "s14": "streaklines 60 s per sample through the frozen 20 UTC field"
+  },
+  "exaggerations": [
+   "tripod arrows ≈ 800 km on the whole globe, ≈ 30-90 km zoomed (illustrative)",
+   "Δλ, Δφ steps magnified to 15° in s16-s21",
+   "half-Earth cuts (s04, s06, s20)",
+   "s12 triangle drawn larger than the map",
+   "s27 log-scale bars; the polar tan φ growth glyph is illustrative"
+  ],
+  "screen_deviations": [
+   "s03 three.js globe zoom (the storyboard's runner-up) instead of a Cesium ETOPO drape; source line without ETOPO",
+   "skip chip in the lower maths zone (as Part 1), 44 px, three lines with the storyboard's words",
+   "s14 across row '≈ −31.5' (the voice), check row 31.6 with an 'unrounded' keyword (see flags)"
+  ],
+  "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05) §1b, §1c, §3 applied"
+ },
+ "credits": [
+  "NOAA HRRR analyses (public domain) via the University of Utah HRRR-zarr archive.",
+  "IBTrACS v04r01 (NOAA NCEI).",
+  "NASA Blue Marble Next Generation (NASA Earth Observatory).",
+  "Made with Natural Earth.",
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."
+ ],
+ "js_selftest": "none — every number is read from data/fr.json (TSX CHECK rows re-assert the screen strings; enAt of the kit = enu_basis to 1e-6)",
+ "chapters": [
+  {
+   "time": "0:00",
+   "t_s": 0.0,
+   "title": "Title",
+   "scene": "s00_title"
+  },
+  {
+   "time": "0:12",
+   "t_s": 12.2,
+   "title": "Local frames: the question",
+   "scene": "s01_hook"
+  },
+  {
+   "time": "0:40",
+   "t_s": 40.5,
+   "title": "Recap of Part 3",
+   "scene": "s02_part3_recap"
+  },
+  {
+   "time": "1:53",
+   "t_s": 113.3,
+   "title": "The local east-north-up frame",
+   "scene": "s03_enu"
+  },
+  {
+   "time": "3:11",
+   "t_s": 191.225,
+   "title": "Every step: up, east and north as numbers",
+   "scene": "s04_k_up"
+  },
+  {
+   "time": "9:14",
+   "t_s": 554.05,
+   "title": "Every place has its own frame",
+   "scene": "s08_other_stations"
+  },
+  {
+   "time": "10:41",
+   "t_s": 641.125,
+   "title": "Khulna",
+   "scene": "s09_khulna"
+  },
+  {
+   "time": "12:10",
+   "t_s": 730.2,
+   "title": "A frame turned to a coast",
+   "scene": "s10_coast_frame"
+  },
+  {
+   "time": "13:12",
+   "t_s": 792.875,
+   "title": "Every step: the coast's bearing, 329 degrees",
+   "scene": "s11_coast_points"
+  },
+  {
+   "time": "17:51",
+   "t_s": 1071.75,
+   "title": "Ian's wind along and across the coast",
+   "scene": "s14_along_across"
+  },
+  {
+   "time": "19:38",
+   "t_s": 1178.475,
+   "title": "The arrows turn as you move",
+   "scene": "s15_arrows_turn"
+  },
+  {
+   "time": "21:05",
+   "t_s": 1265.925,
+   "title": "Every step: how fast the arrows turn",
+   "scene": "s16_toolkit"
+  },
+  {
+   "time": "30:50",
+   "t_s": 1850.075,
+   "title": "Every step: Newton's law and the metric terms",
+   "scene": "s23_whole_vector"
+  },
+  {
+   "time": "34:54",
+   "t_s": 2094.675,
+   "title": "What metric terms mean",
+   "scene": "s26_glider"
+  },
+  {
+   "time": "36:18",
+   "t_s": 2178.75,
+   "title": "How big they are",
+   "scene": "s27_metric_size"
+  },
+  {
+   "time": "37:40",
+   "t_s": 2260.775,
+   "title": "Recap",
+   "scene": "s28_recap"
+  },
+  {
+   "time": "38:58",
+   "t_s": 2338.075,
+   "title": "End",
+   "scene": "s29_end"
+  }
+ ],
+ "maths_skips": [
+  {
+   "block": "A",
+   "chip_scene": "s04_k_up",
+   "chip_sentence": 2,
+   "chip_at_s": 199.975,
+   "skip_to": "9:03",
+   "skip_to_s": 543.35,
+   "keep_line": "If you skipped, here's what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the Earth's centre."
+  },
+  {
+   "block": "B",
+   "chip_scene": "s16_toolkit",
+   "chip_sentence": 2,
+   "chip_at_s": 1273.775,
+   "skip_to": "30:38",
+   "skip_to_s": 1838.775,
+   "keep_line": "If you skipped, here's what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth's radius."
+  },
+  {
+   "block": "C",
+   "chip_scene": "s23_whole_vector",
+   "chip_sentence": 3,
+   "chip_at_s": 1859.275,
+   "skip_to": "34:41",
+   "skip_to_s": 2081.8,
+   "keep_line": "If you skipped, here's what to keep: because the arrows turn, the wind's numbers can change even when nothing pushes the air, and the extra terms that say so are called metric terms."
+  }
+ ],
+ "timing_provisional": true,
+ "inputs_sha256": {
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\derived\\ch00\\hrrr_ian_2022.nc": "2146826befd736c00d676a33984cd77e92bd7f6d0187ff9315d6165805977057",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc": "5831ac1a03dbc74172f08e4eb8294327a00d49249d0a4a012ab0e2f4cdf2f272",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_admin_0_boundary_lines_land.zip": "16ead035f539c8b6c23650c5845d86ad3556553e7456bdf9b4730210f26aacbe",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-places\\ne_10m_populated_places_simple.zip": "2963ee08f7743f13f37d5243acd77a2f7a510e26a36c7e04b920f1b381f2b251",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b"
+ },
+ "render_assets": {
+  "fr_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "fr_ian_speed_20.png": "5a9d61245c05d107b0f295195747bc6f1866a301716ac97e69311530d1d75e67"
+ },
+ "data_files": {
+  "fr.json": "876e9eb94677882c5989e6d0707c7ca0100d1e91413c9059290dae557c4ba5bf",
+  "img/ian_speed_20.png": "5a9d61245c05d107b0f295195747bc6f1866a301716ac97e69311530d1d75e67"
+ },
+ "checks": [
+  {
+   "id": "DP02",
+   "name": "a = 6371 km (fluidpy.geo.constants.EARTH_RADIUS, metres)",
+   "value": [
+    6371.0
+   ],
+   "ref": [
+    6371.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP02",
+   "name": "1° north = 111.2 km ('about 111'); 1° east at Brest = 73.8 km ('about 74')",
+   "value": [
+    111.194927,
+    73.839738
+   ],
+   "ref": [
+    111.19,
+    73.84
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DP02",
+   "name": "height a sin φ = 4764 km, distance from the axis a cos φ = 4230 km (Part 3)",
+   "value": [
+    4763.48331,
+    4230.70535
+   ],
+   "ref": [
+    4763.5,
+    4230.5
+   ],
+   "tol": 0.5,
+   "pass": true
+  },
+  {
+   "id": "DP02",
+   "name": "Part 3 README: Brest (48.4 N, 4.5 W) a r̂ = (4217, −332, 4764) km; 4230 km from the axis; 73.8 / 111.2 km per degree (Part 4's 48.39/−4.49 give the same 3-decimal unit arrows)",
+   "value": [
+    4216.834611,
+    -331.872081,
+    4764.221635,
+    4230.70535,
+    73.839738,
+    111.194927
+   ],
+   "ref": [
+    4217.0,
+    -332.0,
+    4764.0,
+    4230.0,
+    73.8,
+    111.2
+   ],
+   "tol": [
+    0.5,
+    0.5,
+    0.5,
+    1.0,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP04",
+   "name": "3-decimal i, j, k identical for (48.39, −4.49) and Part 3's (48.4, −4.5)",
+   "value": [
+    0.078,
+    0.997,
+    0.0,
+    -0.745,
+    0.059,
+    0.664,
+    0.662,
+    -0.052,
+    0.748
+   ],
+   "ref": [
+    0.078,
+    0.997,
+    0.0,
+    -0.745,
+    0.059,
+    0.664,
+    0.662,
+    -0.052,
+    0.748
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP04",
+   "name": "cos φ 0.664, sin φ 0.748, cos λ 0.997, sin λ −0.078 (Brest 48.39 N, 4.49 W)",
+   "value": [
+    0.664057,
+    0.747682,
+    0.996931,
+    -0.078285
+   ],
+   "ref": [
+    0.664,
+    0.748,
+    0.997,
+    -0.078
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "DP04",
+   "name": "k_Brest = r̂ = (0.6620, −0.0520, 0.7477) to 1e-4 (storyboard)",
+   "value": [
+    0.662019,
+    -0.051986,
+    0.747682
+   ],
+   "ref": [
+    0.662,
+    -0.052,
+    0.7477
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DP04",
+   "name": "k = unit_vector (up = the position arrow / a)",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "id": "DP04",
+   "name": "screen: 0.664 × 0.997 = 0.662; 0.664 × (−0.078) = −0.052; third 0.748",
+   "value": [
+    0.662008,
+    -0.051792,
+    0.748
+   ],
+   "ref": [
+    0.662,
+    -0.052,
+    0.748
+   ],
+   "tol": 0.0006,
+   "pass": true
+  },
+  {
+   "id": "DP04",
+   "name": "|k|² = 0.662² + 0.052² + 0.748² ≈ 1 (screen numbers, ±0.002)",
+   "value": [
+    1.000452
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.002,
+   "pass": true
+  },
+  {
+   "id": "DP05",
+   "name": "i_Brest = (0.0783, 0.9969, 0) to 1e-4 (storyboard)",
+   "value": [
+    0.078285,
+    0.996931,
+    0.0
+   ],
+   "ref": [
+    0.0783,
+    0.9969,
+    0.0
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DP05",
+   "name": "i = R̂ = (cos λ, sin λ) turned +90° (rotation_matrix_2d(π/2) @ R̂), third part 0",
+   "value": [
+    0.078285,
+    0.996931,
+    0.0
+   ],
+   "ref": [
+    0.078285,
+    0.996931,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DP05",
+   "name": "screen: −(−0.078) = 0.078, 0.997",
+   "value": [
+    0.078,
+    0.997
+   ],
+   "ref": [
+    0.078,
+    0.997
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DP06",
+   "name": "j_Brest = (−0.7454, 0.0585, 0.6641) to 1e-4 (storyboard)",
+   "value": [
+    -0.745388,
+    0.058532,
+    0.664057
+   ],
+   "ref": [
+    -0.7454,
+    0.0585,
+    0.6641
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DP06",
+   "name": "slice: k = cos φ R̂ + sin φ ẑ; j = (−sin φ) R̂ + (cos φ) ẑ from the 90° rule",
+   "value": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DP06",
+   "name": "screen (3-decimal factors): 0.748 × 0.997 = 0.746 vs −0.745 shown; 0.748 × 0.078 = 0.058 vs 0.059 shown (last-digit rounding)",
+   "value": [
+    0.745756,
+    0.058344
+   ],
+   "ref": [
+    0.745,
+    0.059
+   ],
+   "tol": 0.0012,
+   "pass": true
+  },
+  {
+   "id": "DP07",
+   "name": "|i|² = 1, i·j = 0, i × j = k at Brest (right-handed) — build-1 DC23 kept",
+   "value": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DP07",
+   "name": "screen: 0.078² + 0.997² = 1.0001 ≈ 1",
+   "value": [
+    1.000093
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0002,
+   "pass": true
+  },
+  {
+   "id": "DP07",
+   "name": "screen: 0.078 × (−0.745) = −0.058; 0.997 × 0.059 = 0.059; sum ≈ 0",
+   "value": [
+    -0.05811,
+    0.058823,
+    0.000713
+   ],
+   "ref": [
+    -0.058,
+    0.059,
+    0.0
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "DP07",
+   "name": "screen cross recipe with 3-decimal parts: (0.662, −0.052, 0.747) ≈ (0.662, −0.052, 0.748)",
+   "value": [
+    0.662008,
+    -0.051792,
+    0.747367
+   ],
+   "ref": [
+    0.662,
+    -0.052,
+    0.748
+   ],
+   "tol": 0.0012,
+   "pass": true
+  },
+  {
+   "id": "DP08",
+   "name": "Brest → Trappes 480 km; σ = 0.0753 rad = 4.32°; angle between the ups = σ (DC23)",
+   "value": [
+    479.879003,
+    0.075322,
+    4.315656,
+    4.315656
+   ],
+   "ref": [
+    480.0,
+    0.0753,
+    4.32,
+    4.32
+   ],
+   "tol": [
+    0.5,
+    0.0001,
+    0.01,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP08",
+   "name": "screen: 480 / 6371 = 0.0753 ≈ 0.075 rad ≈ 4.3°",
+   "value": [
+    0.075341,
+    4.316744
+   ],
+   "ref": [
+    0.075,
+    4.3
+   ],
+   "tol": [
+    0.0005,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP08",
+   "name": "k_S = (−0.239, 0.971, 0.024) (Singapore 1.35 N, 103.82 E)",
+   "value": [
+    -0.238806,
+    0.970781,
+    0.02356
+   ],
+   "ref": [
+    -0.239,
+    0.971,
+    0.024
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "DP08",
+   "name": "screen products −0.158, −0.050, +0.018; sum −0.191",
+   "value": [
+    -0.158218,
+    -0.050492,
+    0.017952,
+    -0.190758
+   ],
+   "ref": [
+    -0.158,
+    -0.05,
+    0.018,
+    -0.191
+   ],
+   "tol": 0.0006,
+   "pass": true
+  },
+  {
+   "id": "DP08",
+   "name": "k_B·k_S = −0.191 → 101.0° ('a hundred and one'); DC23",
+   "value": [
+    -0.190946,
+    101.00798,
+    101.011149
+   ],
+   "ref": [
+    -0.191,
+    101.0,
+    101.0
+   ],
+   "tol": [
+    0.0005,
+    0.1,
+    0.1
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "k_K = (0.006, 0.922, 0.388); screen 0.922 × 0.007 = 0.006, 0.922 × 1.000 = 0.922",
+   "value": [
+    0.006436,
+    0.921841,
+    0.387516,
+    0.006454,
+    0.922
+   ],
+   "ref": [
+    0.006,
+    0.922,
+    0.388,
+    0.006,
+    0.922
+   ],
+   "tol": 0.0006,
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "screen products 0.004, −0.048, 0.290; sum 0.246",
+   "value": [
+    0.003972,
+    -0.047944,
+    0.290224,
+    0.246252
+   ],
+   "ref": [
+    0.004,
+    -0.048,
+    0.29,
+    0.246
+   ],
+   "tol": 0.0006,
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "angle(k_B, k_K) 75.76° → 75.8° (22.8 N, 89.6 E as Part 3's README; screen and voice 75.8); NE point 75.7° (record); arccos 0.246 = 75.76°",
+   "value": [
+    75.754538,
+    75.8,
+    75.697556,
+    75.759062
+   ],
+   "ref": [
+    75.76,
+    75.8,
+    75.7,
+    75.76
+   ],
+   "tol": [
+    0.01,
+    1e-09,
+    0.05,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "i_K = (−1.000, 0.007, 0); i_B·i_K = −0.071 → 94.1° ('about 94')",
+   "value": [
+    -0.999976,
+    0.006981,
+    0.0,
+    -0.071323,
+    94.09
+   ],
+   "ref": [
+    -1.0,
+    0.007,
+    0.0,
+    -0.071,
+    94.1
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    1e-12,
+    0.0005,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "Amphan's closest approach to Khulna ≈ 78 km (data report §3), centre WEST of Khulna",
+   "value": [
+    79.371484,
+    1.0
+   ],
+   "ref": [
+    78.0,
+    1.0
+   ],
+   "tol": [
+    4.0,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "closest approach on 20 May 2020, about 16 UTC (data report: ~15:50)",
+   "value": "2020-05-20T16:50",
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP09",
+   "name": "Natural Earth places: Khulna, Kolkata found",
+   "value": {
+    "Khulna": [
+     22.8419329,
+     89.5580549
+    ],
+    "Dhaka": [
+     23.7250056,
+     90.4066336
+    ],
+    "Kolkata": [
+     22.569578883795778,
+     88.36912550443886
+    ]
+   },
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP11",
+   "name": "coast points A = (26.099, −81.801), B = (26.922, −82.354) (build-1 pN, pV; NE 10 m)",
+   "value": [
+    26.098619,
+    -81.800893,
+    26.922105,
+    -82.353627
+   ],
+   "ref": [
+    26.099,
+    -81.801,
+    26.922,
+    -82.354
+   ],
+   "tol": 0.0006,
+   "pass": true
+  },
+  {
+   "id": "DP11",
+   "name": "screen: A 26.10 N 81.80 W, B 26.92 N 82.35 W",
+   "value": [
+    26.1,
+    81.8,
+    26.92,
+    82.35
+   ],
+   "ref": [
+    26.1,
+    81.8,
+    26.92,
+    82.35
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP11",
+   "name": "Δφ = +0.823°, Δλ = −0.553° (data 0.8235, −0.5527); in rad 0.0144 (0.823° = 0.01436), −0.00965",
+   "value": [
+    0.823486,
+    -0.552734,
+    0.014373,
+    0.014364,
+    -0.009647
+   ],
+   "ref": [
+    0.823,
+    -0.553,
+    0.0144,
+    0.01436,
+    -0.00965
+   ],
+   "tol": [
+    0.0006,
+    0.0006,
+    5e-05,
+    5e-06,
+    1e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP11",
+   "name": "dy 91.51 km, dx −55.03 km (± 0.1), φ_mid 26.51°, cos 0.895",
+   "value": [
+    91.567502,
+    -54.998831,
+    26.510362,
+    0.894854
+   ],
+   "ref": [
+    91.51,
+    -55.03,
+    26.51,
+    0.895
+   ],
+   "tol": [
+    0.1,
+    0.1,
+    0.01,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP11",
+   "name": "screen: 6371 × 0.895 × (−0.00965) = −55.0",
+   "value": [
+    -55.024734
+   ],
+   "ref": [
+    -55.0
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP11",
+   "name": "screen Δy: 6371 × 0.01436 = 91.5 (the 4-figure radians; see flags)",
+   "value": [
+    91.48756
+   ],
+   "ref": [
+    91.5
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP12",
+   "name": "tan β = 55.0 / 91.5 = 0.601; β = 31.0°; flat bearing 329.0°",
+   "value": [
+    0.600637,
+    0.601093,
+    30.990586,
+    329.009414
+   ],
+   "ref": [
+    0.601,
+    0.601,
+    31.0,
+    329.0
+   ],
+   "tol": [
+    0.0006,
+    0.0006,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP12",
+   "name": "sphere bearing 329.1° (build-1 DC42 329.13° ± 0.05)",
+   "value": [
+    329.132363
+   ],
+   "ref": [
+    329.1
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP13",
+   "name": "α = 90 − 329 = −239 ≡ 121°; x̂′ = (−0.515, 0.857), ŷ′ = (−0.857, −0.515)",
+   "value": [
+    -239.0,
+    121.0,
+    -0.515038,
+    0.857167,
+    -0.857167,
+    -0.515038
+   ],
+   "ref": [
+    -239.0,
+    121.0,
+    -0.515,
+    0.857,
+    -0.857,
+    -0.515
+   ],
+   "tol": [
+    0,
+    0,
+    0.0005,
+    0.0005,
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP13",
+   "name": "check: 121° = 90° + 31°",
+   "value": [
+    121.0
+   ],
+   "ref": [
+    121.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "nearest HRRR 3-km point to Fort Myers Beach, 20 UTC: u 22.232, v 24.293 m/s (storyboard params)",
+   "value": [
+    22.232193,
+    24.2934
+   ],
+   "ref": [
+    22.232,
+    24.293
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "32.9 m/s ('about 33') from 222° (south-west); along 9.4, across −31.6 — build-1 DC42",
+   "value": [
+    32.930832,
+    222.463304,
+    9.373082,
+    -31.568735
+   ],
+   "ref": [
+    32.9,
+    222.0,
+    9.4,
+    -31.6
+   ],
+   "tol": [
+    0.05,
+    1.0,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "components_in_axes along/across axes = x̂′, ŷ′ of α = 121° (same arrows)",
+   "value": [
+    -0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 0.002,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "screen: 22.2 × (−0.515) = −11.4; 24.3 × 0.857 = 20.8; sum 9.4",
+   "value": [
+    -11.433,
+    20.8251,
+    9.3921
+   ],
+   "ref": [
+    -11.4,
+    20.8,
+    9.4
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "screen: 22.2 × (−0.857) = −19.0; 24.3 × (−0.515) = −12.5; sum −31.5 ('thirty one and a half', 'roughly 32')",
+   "value": [
+    -19.0254,
+    -12.5145,
+    -31.5399
+   ],
+   "ref": [
+    -19.0,
+    -12.5,
+    -31.5
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "screen check: 9.4² + 31.6² = 1087; √ = 33.0",
+   "value": [
+    1086.92,
+    32.96847
+   ],
+   "ref": [
+    1087.0,
+    33.0
+   ],
+   "tol": [
+    0.5,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "the model's calm centre (20 UTC) lies north of Fort Myers Beach",
+   "value": [
+    26.675,
+    -82.19
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "speed raster ≥ 1024 px wide, no hatch (data report §1b)",
+   "value": [
+    1155,
+    1105
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP15",
+   "name": "plane 250 m/s, 1 h: 900 km; i swings 12.19° (DC24); screen 900/74 = 12.16 ≈ 12",
+   "value": [
+    900.0,
+    12.188559,
+    12.162162
+   ],
+   "ref": [
+    900.0,
+    12.19,
+    12.16
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DP15",
+   "name": "111 km north tilts k by 1.00° (DC24); screen 111/6371 = 0.0174 ('0.0175 rad = 1°')",
+   "value": [
+    0.999956,
+    0.017423,
+    0.017454
+   ],
+   "ref": [
+    1.0,
+    0.0174,
+    0.0175
+   ],
+   "tol": [
+    0.001,
+    0.0001,
+    0.0001
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP16",
+   "name": "Part 2 picture: r̂ = (0.6, 0.8), θ̂ = (−0.8, 0.6) at θ = 53.13°",
+   "value": [
+    0.600001,
+    0.799999,
+    -0.799999,
+    0.600001
+   ],
+   "ref": [
+    0.6,
+    0.8,
+    -0.8,
+    0.6
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DP19",
+   "name": "|Di/Dt| = 2.364e-6 s⁻¹ = 10 / 4 230 000 m; j part 1.767e-6, k part −1.570e-6",
+   "value": [
+    2.363672,
+    2.364066,
+    1.767276,
+    -1.569612,
+    4230.70535
+   ],
+   "ref": [
+    2.364,
+    2.364,
+    1.767,
+    -1.57,
+    4230.5
+   ],
+   "tol": [
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP19",
+   "name": "× 86 400 s = 0.204 rad = 11.70° per day ('about twelve degrees in a day')",
+   "value": [
+    0.204221,
+    11.701017
+   ],
+   "ref": [
+    0.204,
+    11.7
+   ],
+   "tol": [
+    0.001,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP19",
+   "name": "(u/(a cos φ))(sin φ j − cos φ k) = library Di/Dt (no i part)",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "id": "DP22",
+   "name": "D(i,j,k)/Dt in local (i, j, k) parts = the three lines of s22 (u = v = 10)",
+   "value": [
+    0.0,
+    2e-06,
+    -2e-06,
+    -2e-06,
+    0.0,
+    -2e-06,
+    2e-06,
+    2e-06,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    2e-06,
+    -2e-06,
+    -2e-06,
+    0.0,
+    -2e-06,
+    2e-06,
+    2e-06,
+    0.0
+   ],
+   "tol": 1e-15,
+   "pass": true
+  },
+  {
+   "id": "DP22",
+   "name": "each change has no own part (i·Di = j·Dj = k·Dk = 0)",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "id": "DP22",
+   "name": "D e/Dt = Ω_flow × e for e = i, j, k (the cross-product movie's rule)",
+   "value": [
+    0.0,
+    0.0,
+    -0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-18,
+   "pass": true
+  },
+  {
+   "id": "DP25",
+   "name": "east metric term −uv tan φ / a = −1.570e-5 m/s² (u = v = 10, w = 0, φ = 45°)",
+   "value": [
+    -1.569612
+   ],
+   "ref": [
+    -1.57
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "DP25",
+   "name": "w = 1 m/s adds + u w / a = 1.57e-6 to the i row",
+   "value": [
+    1.569612
+   ],
+   "ref": [
+    1.569612
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DP26",
+   "name": "puck after 86 400 s: u 11.52, v 8.20, speed 14.142 (centred difference, h = 1 s)",
+   "value": [
+    11.519849,
+    8.203235,
+    14.142136
+   ],
+   "ref": [
+    11.52,
+    8.2,
+    14.142
+   ],
+   "tol": [
+    0.005,
+    0.005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP26",
+   "name": "screen: √(11.5² + 8.2²) = 14.12 ≈ 14.1 = √(10² + 10²)",
+   "value": [
+    14.124093,
+    14.142136
+   ],
+   "ref": [
+    14.1,
+    14.1
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP26",
+   "name": "along the path u grows and v shrinks monotonically; speed stays 14.142 (± 1e-6)",
+   "value": [
+    10.0,
+    11.52,
+    10.0,
+    8.203
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP27",
+   "name": "f = 1.031e-4 s⁻¹; f v = 1.031e-3; ratio f v / (uv tan φ / a) = 65.7 ('about 66'); DC25",
+   "value": [
+    1.031261,
+    1.031261,
+    65.701625
+   ],
+   "ref": [
+    1.031,
+    1.031,
+    65.7
+   ],
+   "tol": [
+    0.001,
+    0.001,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP27",
+   "name": "screen: 100 / 6.371e6 = 1.57e-5; 2 × 7.29e-5 × 0.707 = 1.031e-4; 1.03e-3 / 1.57e-5 = 65.6",
+   "value": [
+    1.569612,
+    1.030806,
+    65.605096
+   ],
+   "ref": [
+    1.57,
+    1.031,
+    65.6
+   ],
+   "tol": [
+    0.001,
+    0.001,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP27",
+   "name": "Ω = 7.292e-5 s⁻¹ (fluidpy.geo.constants)",
+   "value": [
+    7.292115
+   ],
+   "ref": [
+    7.292
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "DP28",
+   "name": "recap: 75.8° / 329° / 9 along / 32 onto the land / 66×",
+   "value": [
+    75.8,
+    329.0,
+    9.0,
+    32.0,
+    66.0
+   ],
+   "ref": [
+    75.8,
+    329.0,
+    9.0,
+    32.0,
+    66.0
+   ],
+   "tol": 0,
+   "pass": true
+  }
+ ],
+ "flags": [
+  {
+   "id": "DP06",
+   "scene": "s06",
+   "what": "j = (−0.748×0.997, −0.748×(−0.078), 0.664) ≈ (−0.745, 0.059, 0.664)",
+   "screen_or_voice": "−0.745, 0.059 (exact −0.7454, 0.0585)",
+   "hand_check": "0.748 × 0.997 = 0.7458; 0.748 × 0.078 = 0.0583",
+   "note": "the products of the rounded factors round to −0.746 and 0.058; the screen keeps '≈' with the exact values (voice says ·745, ·059)"
+  },
+  {
+   "id": "DP07",
+   "scene": "s07",
+   "what": "i × j third part",
+   "screen_or_voice": "0.748 (voice and screen)",
+   "hand_check": "0.078×0.059 + 0.997×0.745 = 0.7474",
+   "note": "with the rounded parts it is 0.747; the exact cross product is 0.7477 (k). '≈' kept"
+  },
+  {
+   "id": "DP09",
+   "scene": "s09",
+   "what": "Amphan closest approach",
+   "screen_or_voice": "'about seventy eight kilometres' (data report §3)",
+   "hand_check": "79.4 km at 2020-05-20T16:50 (our 10-min linear interpolation of the IBTrACS NI fixes)",
+   "note": "both 'about 78-79 km west'; the screen bracket shows the data report's ≈ 78 km as voiced"
+  },
+  {
+   "id": "DP11",
+   "scene": "s11",
+   "what": "Δy = 6371 × 0.0144 ≈ 91.5 km (storyboard row and voice: 'zero point zero one four four')",
+   "screen_or_voice": "0.0144 → 91.5",
+   "hand_check": "6371 × 0.0144 = 91.74; 6371 × 0.01436 = 91.49",
+   "note": "screen shows 0.0144 rad as spoken, and the Δy row multiplies 0.01436 (= 0.823° in radians, = 91.5; arc_lengths with the exact points 91.57). Director: voice 'zero point zero one four four' with 'about ninety one and a half' is off by 0.2 km; suggest saying 'zero point zero one four three six' or keep and accept"
+  },
+  {
+   "id": "DP14",
+   "scene": "s14",
+   "what": "across row",
+   "screen_or_voice": "storyboard calc row '≈ −19.0 − 12.5 ≈ −31.6'",
+   "hand_check": "−19.0 − 12.5 = −31.5 (unrounded data −31.57)",
+   "note": "screen shows '≈ −31.5' (= the voice 'about minus thirty one and a half'); the check row keeps the voice's 31.6 with a muted 'unrounded: −31.6' keyword"
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s02",
+   "data": "data/fr.json",
+   "eq": "r̂ = (cos φ cos λ, cos φ sin λ, sin φ)",
+   "params": {
+    "lat": 48.39,
+    "lon": -4.49
+   },
+   "sha256": "77c85a37cb7a64a470dd85a2136ff8c800de7e75ebbfc4fa220b5366e595e9ed"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s02",
+   "data": "data/fr.json",
+   "eq": "δy = a δφ, δx = a cos φ δλ (1°)",
+   "params": {
+    "lat": 48.39,
+    "dlat": 1.0,
+    "dlon": 1.0
+   },
+   "sha256": "4a80dab48c340586c43226f5ecb0dfdf703585b525eee8a422da638b5960fe42"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s02",
+   "data": "data/fr.json",
+   "eq": "Part 3 README point 48.4 N, 4.5 W (its rounded coordinates)",
+   "params": {
+    "lat": 48.4,
+    "lon": -4.5
+   },
+   "sha256": "fd56a933b9500cb7ba45b85d7c3b22791a221c994072cebb3b77b10fa53bfeea"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.enu_basis",
+   "scene": "s03",
+   "data": "data/fr.json",
+   "eq": "(i, j, k) east, north, up in the Earth's axes",
+   "params": {
+    "lat": 48.39,
+    "lon": -4.49
+   },
+   "sha256": "57dcde07cb70223c1a45bcf3d1a950f6f6c91c9ab7ab98fdcd8b6f4b93bd84f6"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.enu_basis",
+   "scene": "s03",
+   "data": "data/fr.json",
+   "eq": "Part 3's rounded Brest 48.4 N, 4.5 W",
+   "params": {
+    "lat": 48.4,
+    "lon": -4.5
+   },
+   "sha256": "469f7f84b67d5d7fca6f25543db55a5f8bdf29d262f0bd73fcde9b99c5397a3d"
+  },
+  {
+   "fn": "fluidpy.core.tensors.rotation_matrix_2d",
+   "scene": "s05",
+   "data": "data/fr.json",
+   "eq": "C(π/2): (p, q) → (−q, p), the 90° turn of Part 1",
+   "params": {
+    "theta": 1.5707963267948966
+   },
+   "sha256": "6c9c4b9522a652cef59b7a236473a3a1f0c30a5bddadfd89c0567d03a48dd4d5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.dot",
+   "scene": "s07",
+   "data": "data/fr.json",
+   "eq": "i·j",
+   "params": {
+    "a": [
+     0.0782850996352895,
+     0.9969310122446251,
+     0.0
+    ],
+    "b": [
+     -0.7453875746022584,
+     0.0585323756889269,
+     0.6640567179275978
+    ]
+   },
+   "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.cross",
+   "scene": "s07",
+   "data": "data/fr.json",
+   "eq": "i × j",
+   "params": {
+    "a": [
+     0.0782850996352895,
+     0.9969310122446251,
+     0.0
+    ],
+    "b": [
+     -0.7453875746022584,
+     0.0585323756889269,
+     0.6640567179275978
+    ]
+   },
+   "sha256": "6301821a48a6fff91fdffb616613b80809032a2312fe9316279255306226f7e8"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.enu_basis",
+   "scene": "s08",
+   "data": "data/fr.json",
+   "eq": "Trappes frame",
+   "params": {
+    "lat": 48.77,
+    "lon": 2.01
+   },
+   "sha256": "3d19bdbe98462951991c7a79379f9c82270c6eed31aa1feffb47095883c7eaaf"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.enu_basis",
+   "scene": "s08",
+   "data": "data/fr.json",
+   "eq": "Singapore frame",
+   "params": {
+    "lat": 1.35,
+    "lon": 103.82
+   },
+   "sha256": "100d26fec57688a715ed695efed5ba6dd66903ef56325465fd81d419094aeec6"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.central_angle",
+   "scene": "s08",
+   "data": "data/fr.json",
+   "eq": "σ = angle at the centre",
+   "params": {
+    "lat1": 48.39,
+    "lon1": -4.49,
+    "lat2": 48.77,
+    "lon2": 2.01
+   },
+   "sha256": "681a634cba0a4cc01ae2b18e37e564afa3ebc8fdd682eaf500dde5ecb9374b75"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s08",
+   "data": "data/fr.json",
+   "eq": "s = a σ (a in metres)",
+   "params": {
+    "lat1": 48.39,
+    "lon1": -4.49,
+    "lat2": 48.77,
+    "lon2": 2.01
+   },
+   "sha256": "cfdc077d94cdfb9f8a7677e10ebf60d350d622f231758b6784eb81b59c813867"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.enu_basis",
+   "scene": "s09",
+   "data": "data/fr.json",
+   "eq": "Khulna frame (22.8 N, 89.6 E)",
+   "params": {
+    "lat": 22.8,
+    "lon": 89.6
+   },
+   "sha256": "511160c0fccc1811289b5b20a1261a99255d1b2beca106dcf607dde6ba825827"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s09",
+   "data": "data/fr.json",
+   "eq": "Khulna (Natural Earth 22.8419, 89.5581)",
+   "params": {
+    "lat": 22.8419,
+    "lon": 89.5581
+   },
+   "sha256": "807bb9b3b67d18aa38e8dae872411ef93128ab1809fb81d458a81d62ae3eab36"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s11",
+   "data": "data/fr.json",
+   "eq": "δy = a δφ, δx = a cos φ_mid δλ (a in metres)",
+   "params": {
+    "lat": 26.51036204600004,
+    "dlat": 0.8234863280000013,
+    "dlon": -0.552734375
+   },
+   "sha256": "b1194d4e14d02bddf215d2bb4c6c91ffd629c744b363baa23e8bda8a691b33b9"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.initial_bearing",
+   "scene": "s12",
+   "data": "data/fr.json",
+   "eq": "initial bearing A → B on the sphere (DC42)",
+   "params": {
+    "lat1": 26.09861888200004,
+    "lon1": -81.80089270699995,
+    "lat2": 26.92210521000004,
+    "lon2": -82.35362708199995
+   },
+   "sha256": "0568fbda560b3318f42e6f486e0c28f2f8a44703e4ee7eaf20abd2a5efcba474"
+  },
+  {
+   "fn": "fluidpy.core.tensors.rotation_matrix_2d",
+   "scene": "s13",
+   "data": "data/fr.json",
+   "eq": "C(α): columns x̂′ = (cos α, sin α), ŷ′ = (−sin α, cos α)",
+   "params": {
+    "theta": 2.111848394913139
+   },
+   "sha256": "feeae17b44fc031ddd896aed490f3b3f992ab1800d51305831e1182b2849cb43"
+  },
+  {
+   "fn": "fluidpy.geo.atmos.wind_direction_from",
+   "scene": "s14",
+   "data": "data/fr.json",
+   "eq": "direction the wind blows from",
+   "params": {
+    "u": 22.232192993164062,
+    "v": 24.293399810791016
+   },
+   "sha256": "6b381fdd1a928a2c1ea2ee4978334d9096fd8ff05eda5dc3fe9996082d4060d5"
+  },
+  {
+   "fn": "fluidpy.geo.vectors.components_in_axes",
+   "scene": "s14",
+   "data": "data/fr.json",
+   "eq": "along = v·x̂′, across = v·ŷ′ (bearing 329°)",
+   "params": {
+    "u": [
+     22.232192993164062,
+     24.293399810791016
+    ],
+    "bearing_deg": 329.0
+   },
+   "sha256": "0a4bd45c0896253e8d99bf39265b1a03305a052b790304ba7cfa926d6a533fc8"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s14",
+   "data": "data/fr.json",
+   "eq": "calm centre → Fort Myers Beach",
+   "params": {
+    "lat1": 26.674988067061967,
+    "lon1": -82.18987944990621,
+    "lat2": 26.45,
+    "lon2": -81.95
+   },
+   "sha256": "0827e6f949a12fffd5de2c5636f82ade2db082e184f270783bc36b52be570635"
+  },
+  {
+   "fn": "fluidpy.geo.frames.unit_vector_rates",
+   "scene": "s15",
+   "data": "data/fr.json",
+   "eq": "Di/Dt = (u/(a cos φ))(j sin φ − k cos φ) (2.39a), u = 250 m/s",
+   "params": {
+    "u": 250.0,
+    "v": 0.0,
+    "w": 0.0,
+    "lat": 0.844564825040056
+   },
+   "sha256": "7c5ced7b8f80d6ad57880712acd73481e2395dcdf5e5bc073e69798fb1730d5c"
+  },
+  {
+   "fn": "fluidpy.geo.frames.unit_vector_rates",
+   "scene": "s15",
+   "data": "data/fr.json",
+   "eq": "Dk/Dt = j v/a (north step)",
+   "params": {
+    "u": 0.0,
+    "v": 10.0,
+    "w": 0.0,
+    "lat": 0.844564825040056
+   },
+   "sha256": "b88588fa5da454e25d383baeeab4cda3367f43e478c5b6db7cb4b205d23307d4"
+  },
+  {
+   "fn": "fluidpy.core.coords.unit_vectors_polar",
+   "scene": "s16",
+   "data": "data/fr.json",
+   "eq": "r̂ = (cos θ, sin θ), θ̂ = (−sin θ, cos θ) at θ = 53.13°",
+   "params": {
+    "theta": 0.9272934315845873
+   },
+   "sha256": "5d0129c6f9588d862cc9672e755c043573e76614560e7b62d08259a74430bf51"
+  },
+  {
+   "fn": "fluidpy.geo.frames.unit_vector_rates",
+   "scene": "s19",
+   "data": "data/fr.json",
+   "eq": "east wind 10 m/s at Brest",
+   "params": {
+    "u": 10.0,
+    "v": 0.0,
+    "w": 0.0,
+    "lat": 0.844564825040056
+   },
+   "sha256": "0a4bca10066060043e64b617b61aead2c90f464ef629839c3bc8ecc0a35c76f4"
+  },
+  {
+   "fn": "fluidpy.geo.frames.unit_vector_rates",
+   "scene": "s22",
+   "data": "data/fr.json",
+   "eq": "(2.39a-c), u = v = 10 m/s at Brest",
+   "params": {
+    "u": 10.0,
+    "v": 10.0,
+    "w": 0.0,
+    "lat": 0.844564825040056
+   },
+   "sha256": "141b0b9f2c6a244a12175358f3a9a6aeffb1ea6472b69cd088151f46f90c679d"
+  },
+  {
+   "fn": "fluidpy.geo.frames.metric_terms",
+   "scene": "s25",
+   "data": "data/fr.json",
+   "eq": "(2.45) i row: −uv tan φ / a + uw / a (u = v = 10, w = 0, 45°)",
+   "params": {
+    "u": 10.0,
+    "v": 10.0,
+    "w": 0.0,
+    "lat": 0.7853981633974483
+   },
+   "sha256": "83d77d29851ed76a5f8210589bd93ff6b60137cb031e73758b46ea35d529b28d"
+  },
+  {
+   "fn": "fluidpy.geo.frames.metric_terms",
+   "scene": "s25",
+   "data": "data/fr.json",
+   "eq": "(2.45) i row with w = 1 m/s: + uw / a appears",
+   "params": {
+    "u": 10.0,
+    "v": 10.0,
+    "w": 1.0,
+    "lat": 0.7853981633974483
+   },
+   "sha256": "1f372cfe20df51bb99e6579620aa213e07b5f41edd76bb9728c0c9bb12a51994"
+  },
+  {
+   "fn": "fluidpy.geo.frames.coriolis_parameter",
+   "scene": "s27",
+   "data": "data/fr.json",
+   "eq": "f = 2Ω sin φ (lat in rad)",
+   "params": {
+    "lat": 0.7853981633974483
+   },
+   "sha256": "bf7aced04778b8538add5a7e0a544ae5cda15983b1e3ce8871ab490bb876db8f"
+  }
+ ],
+ "physics_recorded": [],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.data.ibtracs.storm_table",
+   "scene": "s09",
+   "eq": "IBTrACS v04r01 NI, Amphan",
+   "params": {
+    "path": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc",
+    "sid": "2020136N10088",
+    "agencies": [
+     "usa",
+     "newdelhi"
+    ]
+   },
+   "output_sha256": "36bbf860912e62ba6dd00d8af0dedf9eb2a679de95b5a06c6014333047ffa930"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s09",
+   "eq": "Amphan centre (10-min linear interpolation) → Khulna (NE point)",
+   "params": {
+    "lat1": "array (469,), sha256 7eb75b8681befe8767b9c92df77b78dce4705e15dd3fef753e5f7f1a16ea55e6",
+    "lon1": "array (469,), sha256 8d2608e8546dfcb9d8354a234ba5e105afaf107414c2e3ca6ca7b1c9ad9d8d36",
+    "lat2": 22.8419,
+    "lon2": 89.5581
+   },
+   "output_sha256": "10fabd0ed1d2cc518b54e4c9183e617f8a7dab19515aeb61ddb7d3571b214ae3"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s14",
+   "eq": "sea-level pressure minimum (only to place the speed search box)",
+   "params": {
+    "msl": "array (236, 217), sha256 e2a04cc4a792d33919e5afa1fd90bcf9a72ae8be722715d14fbcbe4a9ac6b874",
+    "lat": "array (236, 217), sha256 1d81799af4f83bad34405b586c677d2a015229a4e40d9230727123c072b554d3",
+    "lon": "array (236, 217), sha256 249861ab08f70dda5a05c04976eb4edf15b5722470ab68da347b1a7bfb0650cd",
+    "box": [
+     25.5,
+     28.5,
+     -83.5,
+     -80.5
+    ]
+   },
+   "output_sha256": "2354195c55b75453c7f785af45f7e492a5b211e7ab6190be40963b30b800d80a"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_centre",
+   "scene": "s14",
+   "eq": "sub-grid minimum of the 10-m wind speed (HRRR's own calm centre)",
+   "params": {
+    "msl": "array (236, 217), sha256 97026d1ffff1e6d45b0b5f09b307d9e15feebd956110ec9571fa5f83bbcd4215",
+    "lat": "array (236, 217), sha256 1d81799af4f83bad34405b586c677d2a015229a4e40d9230727123c072b554d3",
+    "lon": "array (236, 217), sha256 249861ab08f70dda5a05c04976eb4edf15b5722470ab68da347b1a7bfb0650cd",
+    "box": [
+     26.361509975807845,
+     26.961509975807846,
+     -82.48097629924284,
+     -81.88097629924285
+    ]
+   },
+   "output_sha256": "8c1a7fd792b12884e0a15e03f38d04029a6b6fb26485c8c1a30e72f1ac65fef6"
+  },
+  {
+   "fn": "fluidpy.diag.trajectories.advect_on_sphere",
+   "scene": "s14",
+   "eq": "dλ/dt = u/(a cos φ), dφ/dt = v/a (RK4), frozen 20 UTC field",
+   "params": {
+    "u": "array (221, 231), sha256 3fb4850952ce3e982fcb1c3596e8eae29d206db53780f23c5818a0e5a23d9cee",
+    "v": "array (221, 231), sha256 74cadbe120126b25c9a165bd9397dd827fb9a280dc13ebe6c0fec4cbdbec0ec3",
+    "lat": "array (221,), sha256 14361422e6f9fa8a29e3724685b4947451a5f0d70e33a04dcff08af5d373b661",
+    "lon": "array (231,), sha256 e24ad2bfde91544f44011ebf17e1a5a2f0be4ac73c70c35433d3717baf7397dd",
+    "seeds_lat": "array (240,), sha256 1e8a4a6e368b57de67084a00fe27fc928e5500d65925390044b0c60384ee720e",
+    "seeds_lon": "array (240,), sha256 85feeff07bd8e1ae62a1310b6bdd8c38d3c8c25609282f2f84608c13d3b737fd",
+    "dt": 60.0,
+    "nsteps": 47
+   },
+   "output_sha256": "a74d9a8aa5b7c56bcdf005b20cb08e9939ce1e3b7aea27a687a7d917212acce1"
+  },
+  {
+   "fn": "fluidpy.geo.frames.great_circle",
+   "scene": "s26",
+   "eq": "great circle, constant speed, non-rotating sphere (a in metres)",
+   "params": {
+    "lat0": 0.7853981633974483,
+    "lon0": 0.0,
+    "u0": 10.0,
+    "v0": 10.0,
+    "t": "array (3,), sha256 92be1616716417af08623b2e23671fe747391848fd0a796a18b8b149db3d89f7"
+   },
+   "output_sha256": "739defbf5fb7ee607f00d12f418c48e8464054f37b5d67504291197907ec5d8c"
+  },
+  {
+   "fn": "fluidpy.geo.frames.great_circle",
+   "scene": "s26",
+   "eq": "the puck's path over one day (49 samples)",
+   "params": {
+    "lat0": 0.7853981633974483,
+    "lon0": 0.0,
+    "u0": 10.0,
+    "v0": 10.0,
+    "t": "array (49,), sha256 5463450d3f2e0415a92b22aad9af2f88ede27ed69c86e8c8a9def02a3c324bb2"
+   },
+   "output_sha256": "ba3391102c6bfd0fd790cc84020882d2f544a9de93f5dc720294bfef463323a7"
+  },
+  {
+   "fn": "fluidpy.geo.frames.great_circle",
+   "scene": "s26",
+   "eq": "centred difference sample",
+   "params": {
+    "lat0": 0.7853981633974483,
+    "lon0": 0.0,
+    "u0": 10.0,
+    "v0": 10.0,
+    "t": "array (3,), sha256 fb1aa2ca369460d48f61985439da718f78b683dc5d09d4cfd4e9024e00c678dc"
+   },
+   "output_sha256": "ccb84bd22e6f9bb8fb300945d4f428bb9ab4af75b7c1281714ed3c2144fc0284"
+  },
+  {
+   "fn": "fluidpy.geo.frames.great_circle",
+   "scene": "s26",
+   "eq": "centred difference sample",
+   "params": {
+    "lat0": 0.7853981633974483,
+    "lon0": 0.0,
+    "u0": 10.0,
+    "v0": 10.0,
+    "t": "array (3,), sha256 92be1616716417af08623b2e23671fe747391848fd0a796a18b8b149db3d89f7"
+   },
+   "output_sha256": "739defbf5fb7ee607f00d12f418c48e8464054f37b5d67504291197907ec5d8c"
+  }
+ ]
+}

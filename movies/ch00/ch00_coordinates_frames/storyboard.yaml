@@ -171,7 +171,7 @@ guards:
 honesty_notes:
 - 's04-s09: unit vectors on a sphere (geocentric = geodetic here; the WGS-84 difference is < 0.2°). Screen values rounded to 3 decimals; CHECK rows at 1e-4.'
 - 's08: the Trappes angle uses the arc rule (480 km / 6371 km) because a 3-decimal dot product is too coarse for 4°; the library dot product gives 4.32°.'
-- 's09: Khulna at the split plan''s rounded 22.8 N, 89.6 E gives 75.76°; the Natural Earth point (22.8419, 89.5581) gives 75.7°; both are spoken ''about seventy six''.
+- 's09: Khulna at the split plan''s rounded 22.8 N, 89.6 E gives 75.76°; the Natural Earth point (22.8419, 89.5581) gives 75.7°; spoken ''about seventy five point eight'' (Part 3 README: 75.8°, coordinator 2026-11-05).
   Amphan''s centre passed ≈ 78 km W of Khulna (data report §3, IBTrACS NI).'
 - 's11-s12: the 329° comes from the NE 10 m coastline vertices nearest Naples and Venice (build-1 manifest pN, pV); flat triangle 329.0°, sphere 329.1° (DC42 329.13°).
   Coastline direction depends on the segment chosen; said as ''the coast between Naples and Venice''.'
@@ -1040,14 +1040,14 @@ scenes:
   visual: 'Zoom tour (HOUSE_STYLE §5b): the globe turns and zooms to the Bay of Bengal; labels on their words: ''Khulna'' (centred within 1 s), ''Ganges delta'',
     ''Sundarbans'' (green-tinted forest outline from Natural Earth / ESA WorldCover if available, else a label only), ''Bay of Bengal'' (italic), ''Kolkata'', ''India'',
     ''Bangladesh''; Amphan''s IBTrACS track (gold dots, 18-21 May 2020) with ''≈ 78 km'' bracket west of Khulna. Khulna''s tripod grows. Column: ''22.8° N, 89.6°
-    E'', k_K = (0.006, 0.922, 0.388), the dot product with each product written, ''≈ 76°''; then i_K = (−1.000, 0.007, 0) and ''≈ 94° from Brest''s east''. S8: zoom
-    back out to the starting view, Brest''s and Khulna''s tripods both visible, the 76° arc between the two ups drawn at the centre (slice).'
+    E'', k_K = (0.006, 0.922, 0.388), the dot product with each product written, ''≈ 75.8°''; then i_K = (−1.000, 0.007, 0) and ''≈ 94° from Brest''s east''. S8: zoom
+    back out to the starting view, Brest''s and Khulna''s tripods both visible, the 75.8° arc between the two ups drawn at the centre (slice).'
   voiceover: 'Now let''s fly to Khulna, in south-west Bangladesh. Khulna lies on the rivers of the Ganges delta, just north of the Sundarbans, the largest mangrove
     forest in the world. To the south is the Bay of Bengal, and to the west, across the border, is Kolkata, in India. In May twenty twenty, the centre of Cyclone
     Amphan passed about seventy eight kilometres west of Khulna, and the sea flooded the coast to its south. Khulna is at twenty two point eight degrees north, and
     eighty nine point six degrees east. Its up arrow is zero point zero zero six, zero point nine two two, zero point three eight eight. [beat] Dotted with Brest''s
     up, that''s zero point zero zero four, minus zero point zero four eight, plus zero point two nine zero: zero point two four six. The angle whose cosine is zero
-    point two four six is about seventy six degrees. [beat] Even east is different. Khulna''s i hat is minus one, zero point zero zero seven, zero, almost exactly
+    point two four six is about seventy five point eight degrees. [beat] Even east is different. Khulna''s i hat is minus one, zero point zero zero seven, zero, almost exactly
     opposite to x hat. It''s about ninety four degrees away from Brest''s east. [beat] So forecasters in Khulna and in Brest both say east, north and up, but they
     mean different arrows. Let''s zoom back out.'
   on_screen_eq: null
@@ -1068,7 +1068,7 @@ scenes:
       - 22.8419
       - 89.5581
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
-      ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; new CHECK DP09 angle(k_B, k_K) = 75.76° (22.8/89.6) and 75.7° (NE coords) both round to 76°; i_B·i_K
+      ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; new CHECK DP09 angle(k_B, k_K) = 75.76° (22.8/89.6) and 75.7° (NE coords) screen and voice 75.8° (Part 3); i_B·i_K
       = -0.071 -> 94.1°; Amphan closest approach to Khulna 78 km W (data report §3)
   exaggeration:
   - tripod arrows about 800 km long (illustrative size)
@@ -2801,12 +2801,12 @@ scenes:
     - 2337.275
   beat: recap ('To sum up'); last sentence the teaser to Part 5, Moving frames (seven-part series)
   visual: 'One beat per sentence, mini pictures reused (no headings): Brest''s tripod with ''v = u i + v j + w k''; the top view and the meridian slice side by side;
-    Brest and Khulna ups with ''76°''; the coast with ''329°'', ''9 along'', ''−32 onto the land''; the turning tripod with ''speed / radius''; the i-row of (2.45)
+    Brest and Khulna ups with ''75.8°''; the coast with ''329°'', ''9 along'', ''−32 onto the land''; the turning tripod with ''speed / radius''; the i-row of (2.45)
     with ''metric terms'' brace; the log bars ''≈ 66×''; a storm ring sliding with a rider icon (Part 5 teaser). Each spoken number on screen at its words; small
     source lines under the data minis.'
   voiceover: 'To sum up, a forecaster''s local frame has three arrows: i hat east, j hat north and k hat up, and the wind is u i hat, plus v j hat, plus w k hat.
     Up is the arrow from the Earth''s centre, east comes from turning in the view from above the pole, and north from turning in the meridian slice. Every place has
-    its own frame: Brest''s up and Khulna''s up are about seventy six degrees apart. Turning the frame to a coast, at a bearing of three hundred and twenty nine degrees,
+    its own frame: Brest''s up and Khulna''s up are about seventy five point eight degrees apart. Turning the frame to a coast, at a bearing of three hundred and twenty nine degrees,
     split Ian''s wind into about nine metres per second along the shore, and about thirty two onto the land. As the air moves, the arrows turn by themselves, at speeds
     divided by radii. So the eastward acceleration is capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius: two metric terms that come
     only from the turning arrows. For an ordinary wind, they''re about sixty six times smaller than the Coriolis effect, but weather and climate models keep them.

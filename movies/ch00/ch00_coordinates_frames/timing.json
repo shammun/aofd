@@ -1,0 +1,3499 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "provisional": "made from the measured dry runs (dryrun1 / splice2 / splice3) by checks/make_timing.py; the final TTS replaces it; s09 S7 and s28 S2 re-worded to 'seventy five point eight' after the dry run (clip lengths not re-measured)",
+ "scenes": [
+  {
+   "id": "s00_title",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "In this video, we'll learn local frames, and how they turn, the easy way, and see how meteorology uses them to measure the winds on a coast and over the round Earth.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 11.4,
+     "dur": 11.1,
+     "start_frame": 9,
+     "end_frame": 342
+    }
+   ],
+   "end": 12.2,
+   "start_frame": 9,
+   "end_frame": 366,
+   "timing_source": "splice3"
+  },
+  {
+   "id": "s01_hook",
+   "start": 12.2,
+   "sentences": [
+    {
+     "text": "A forecaster at Brest, in France, measures the wind with three arrows: east, north and up.",
+     "audio_text": null,
+     "start": 12.2,
+     "end": 18.775,
+     "dur": 6.575,
+     "start_frame": 366,
+     "end_frame": 563
+    },
+    {
+     "text": "Are those the same three arrows at Khulna, in Bangladesh?",
+     "audio_text": null,
+     "start": 19.125,
+     "end": 23.025,
+     "dur": 3.9,
+     "start_frame": 574,
+     "end_frame": 691
+    },
+    {
+     "text": "And what happens to them as the air moves?",
+     "audio_text": null,
+     "start": 23.375,
+     "end": 26.325,
+     "dur": 2.95,
+     "start_frame": 701,
+     "end_frame": 790
+    },
+    {
+     "text": "This is the fourth of seven parts on coordinates.",
+     "audio_text": null,
+     "start": 26.675,
+     "end": 30.2,
+     "dur": 3.525,
+     "start_frame": 800,
+     "end_frame": 906
+    },
+    {
+     "text": "Let's see what local frames are, how to turn them to fit a coast, how they turn by themselves as the air moves, and why that matters for the wind.",
+     "audio_text": null,
+     "start": 30.55,
+     "end": 39.7,
+     "dur": 9.15,
+     "start_frame": 917,
+     "end_frame": 1191
+    }
+   ],
+   "end": 40.5,
+   "start_frame": 366,
+   "end_frame": 1215,
+   "timing_source": "splice3"
+  },
+  {
+   "id": "s02_part3_recap",
+   "start": 40.5,
+   "sentences": [
+    {
+     "text": "In Part 3, we took coordinates to our round Earth.",
+     "audio_text": null,
+     "start": 40.5,
+     "end": 44.4,
+     "dur": 3.9,
+     "start_frame": 1215,
+     "end_frame": 1332
+    },
+    {
+     "text": "Latitude, phi, is the angle north of the equator, and longitude, lambda, is the angle east of the prime meridian.",
+     "audio_text": null,
+     "start": 44.75,
+     "end": 52.975,
+     "dur": 8.225,
+     "start_frame": 1342,
+     "end_frame": 1589
+    },
+    {
+     "text": "We put the origin at the Earth's centre, with three fixed axes.",
+     "audio_text": null,
+     "start": 53.325,
+     "end": 57.675,
+     "dur": 4.35,
+     "start_frame": 1600,
+     "end_frame": 1730
+    },
+    {
+     "text": "X hat points to latitude zero and longitude zero, y hat to latitude zero and ninety degrees east, and z hat along the spin axis to the North Pole.",
+     "audio_text": null,
+     "start": 58.025,
+     "end": 68.8,
+     "dur": 10.775,
+     "start_frame": 1741,
+     "end_frame": 2064
+    },
+    {
+     "text": "The Earth's radius is about six thousand four hundred kilometres, or more exactly six thousand three hundred and seventy one.",
+     "audio_text": null,
+     "start": 69.15,
+     "end": 77.425,
+     "dur": 8.275,
+     "start_frame": 2074,
+     "end_frame": 2323
+    },
+    {
+     "text": "On screen, it has its own symbol.",
+     "audio_text": null,
+     "start": 77.775,
+     "end": 80.675,
+     "dur": 2.9,
+     "start_frame": 2333,
+     "end_frame": 2420
+    },
+    {
+     "text": "The arrow of length one from the centre to a place is cosine phi cosine lambda, cosine phi sine lambda, sine phi.",
+     "audio_text": null,
+     "start": 81.025,
+     "end": 89.075,
+     "dur": 8.05,
+     "start_frame": 2431,
+     "end_frame": 2672
+    },
+    {
+     "text": "A place sits at the radius times sine phi above the equator's plane, and at the radius times cosine phi from the axis.",
+     "audio_text": null,
+     "start": 89.425,
+     "end": 98.125,
+     "dur": 8.7,
+     "start_frame": 2683,
+     "end_frame": 2944
+    },
+    {
+     "text": "And one degree north is always about a hundred and eleven kilometres, while one degree east is the radius, times cosine phi, times the angle in radians: about seventy four kilometres at Brest.",
+     "audio_text": null,
+     "start": 98.475,
+     "end": 111.8,
+     "dur": 13.325,
+     "start_frame": 2954,
+     "end_frame": 3354,
+     "beat": true
+    }
+   ],
+   "end": 113.3,
+   "start_frame": 1215,
+   "end_frame": 3399,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s03_enu",
+   "start": 113.3,
+   "sentences": [
+    {
+     "text": "Now let's stand at a weather station at Brest.",
+     "audio_text": null,
+     "start": 113.3,
+     "end": 116.45,
+     "dur": 3.15,
+     "start_frame": 3399,
+     "end_frame": 3494
+    },
+    {
+     "text": "Brest sits at the western tip of Brittany, in France, with the Atlantic Ocean on three sides.",
+     "audio_text": null,
+     "start": 116.8,
+     "end": 123.5,
+     "dur": 6.7,
+     "start_frame": 3504,
+     "end_frame": 3705
+    },
+    {
+     "text": "A forecaster there doesn't use axes from the Earth's centre.",
+     "audio_text": null,
+     "start": 123.85,
+     "end": 128.175,
+     "dur": 4.325,
+     "start_frame": 3716,
+     "end_frame": 3845
+    },
+    {
+     "text": "She uses three arrows of length one, fixed to her own spot.",
+     "audio_text": null,
+     "start": 128.525,
+     "end": 132.775,
+     "dur": 4.25,
+     "start_frame": 3856,
+     "end_frame": 3983
+    },
+    {
+     "text": "I hat points east, j hat points north, and k hat points straight up, away from the Earth's centre.",
+     "audio_text": null,
+     "start": 133.125,
+     "end": 139.825,
+     "dur": 6.7,
+     "start_frame": 3994,
+     "end_frame": 4195
+    },
+    {
+     "text": "This is called the local east, north, up frame.",
+     "audio_text": null,
+     "start": 140.175,
+     "end": 143.925,
+     "dur": 3.75,
+     "start_frame": 4205,
+     "end_frame": 4318
+    },
+    {
+     "text": "In Part 1, we called the wind arrow bold u.",
+     "audio_text": null,
+     "start": 144.275,
+     "end": 147.825,
+     "dur": 3.55,
+     "start_frame": 4328,
+     "end_frame": 4435
+    },
+    {
+     "text": "With three parts, it's usual to call it bold v, and to keep small u, v and w for its parts.",
+     "audio_text": null,
+     "start": 148.175,
+     "end": 155.125,
+     "dur": 6.95,
+     "start_frame": 4445,
+     "end_frame": 4654
+    },
+    {
+     "text": "So the wind is u times i hat, plus v times j hat, plus w times k hat.",
+     "audio_text": null,
+     "start": 155.475,
+     "end": 161.65,
+     "dur": 6.175,
+     "start_frame": 4664,
+     "end_frame": 4849
+    },
+    {
+     "text": "Here, u is the eastward wind, v the northward wind, and w the upward wind.",
+     "audio_text": null,
+     "start": 162.0,
+     "end": 168.3,
+     "dur": 6.3,
+     "start_frame": 4860,
+     "end_frame": 5049
+    },
+    {
+     "text": "And i hat cross j hat is k hat, so the frame is right-handed, as in the cross product movie.",
+     "audio_text": null,
+     "start": 168.65,
+     "end": 175.7,
+     "dur": 7.05,
+     "start_frame": 5059,
+     "end_frame": 5271
+    },
+    {
+     "text": "Why these arrows?",
+     "audio_text": null,
+     "start": 176.05,
+     "end": 177.875,
+     "dur": 1.825,
+     "start_frame": 5281,
+     "end_frame": 5336
+    },
+    {
+     "text": "Gravity pulls along minus k hat, the ground lies along i hat and j hat, and wind directions are measured from north.",
+     "audio_text": null,
+     "start": 178.225,
+     "end": 186.9,
+     "dur": 8.675,
+     "start_frame": 5347,
+     "end_frame": 5607
+    },
+    {
+     "text": "So every weather report uses this frame.",
+     "audio_text": null,
+     "start": 187.25,
+     "end": 190.425,
+     "dur": 3.175,
+     "start_frame": 5617,
+     "end_frame": 5713
+    }
+   ],
+   "end": 191.225,
+   "start_frame": 3399,
+   "end_frame": 5737,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s04_k_up",
+   "start": 191.225,
+   "sentences": [
+    {
+     "text": "The next few steps write these three arrows as numbers, one move at a time.",
+     "audio_text": null,
+     "start": 191.225,
+     "end": 196.225,
+     "dur": 5.0,
+     "start_frame": 5737,
+     "end_frame": 5887
+    },
+    {
+     "text": "They're here for anyone who wants every step.",
+     "audio_text": null,
+     "start": 196.575,
+     "end": 199.625,
+     "dur": 3.05,
+     "start_frame": 5897,
+     "end_frame": 5989
+    },
+    {
+     "text": "You don't need them to follow the weather, the climate or maps, so if it feels like a lot, skip ahead to the time on screen.",
+     "audio_text": null,
+     "start": 199.975,
+     "end": 207.8,
+     "dur": 7.825,
+     "start_frame": 5999,
+     "end_frame": 6234
+    },
+    {
+     "text": "Each of the three arrows can be written with the Earth's fixed axes, x hat, y hat and z hat.",
+     "audio_text": null,
+     "start": 208.15,
+     "end": 214.95,
+     "dur": 6.8,
+     "start_frame": 6244,
+     "end_frame": 6448
+    },
+    {
+     "text": "Let's start with up, because it's the easiest.",
+     "audio_text": null,
+     "start": 215.3,
+     "end": 218.55,
+     "dur": 3.25,
+     "start_frame": 6459,
+     "end_frame": 6556
+    },
+    {
+     "text": "Up points straight out from the Earth's centre.",
+     "audio_text": null,
+     "start": 218.9,
+     "end": 221.725,
+     "dur": 2.825,
+     "start_frame": 6567,
+     "end_frame": 6652
+    },
+    {
+     "text": "That's exactly the direction of the arrow from the centre to the station, the one we found in Part 3.",
+     "audio_text": null,
+     "start": 222.075,
+     "end": 228.85,
+     "dur": 6.775,
+     "start_frame": 6662,
+     "end_frame": 6865
+    },
+    {
+     "text": "So k hat is cosine phi cosine lambda, cosine phi sine lambda, sine phi.",
+     "audio_text": null,
+     "start": 229.2,
+     "end": 235.175,
+     "dur": 5.975,
+     "start_frame": 6876,
+     "end_frame": 7055,
+     "beat": true
+    },
+    {
+     "text": "Let's put in Brest's numbers.",
+     "audio_text": null,
+     "start": 236.675,
+     "end": 239.0,
+     "dur": 2.325,
+     "start_frame": 7100,
+     "end_frame": 7170
+    },
+    {
+     "text": "Brest is at forty eight point four degrees north, and four point five degrees west, so lambda is minus four point five degrees.",
+     "audio_text": null,
+     "start": 239.35,
+     "end": 248.175,
+     "dur": 8.825,
+     "start_frame": 7180,
+     "end_frame": 7445
+    },
+    {
+     "text": "Cosine phi is zero point six six four, and sine phi is zero point seven four eight.",
+     "audio_text": null,
+     "start": 248.525,
+     "end": 254.825,
+     "dur": 6.3,
+     "start_frame": 7456,
+     "end_frame": 7645
+    },
+    {
+     "text": "Cosine lambda is zero point nine nine seven, and sine lambda is minus zero point zero seven eight.",
+     "audio_text": null,
+     "start": 255.175,
+     "end": 262.45,
+     "dur": 7.275,
+     "start_frame": 7655,
+     "end_frame": 7873
+    },
+    {
+     "text": "So the first part of k hat is zero point six six four times zero point nine nine seven, which is zero point six six two.",
+     "audio_text": null,
+     "start": 262.8,
+     "end": 271.575,
+     "dur": 8.775,
+     "start_frame": 7884,
+     "end_frame": 8147
+    },
+    {
+     "text": "The second is zero point six six four times minus zero point zero seven eight, which is minus zero point zero five two.",
+     "audio_text": null,
+     "start": 271.925,
+     "end": 280.925,
+     "dur": 9.0,
+     "start_frame": 8158,
+     "end_frame": 8428
+    },
+    {
+     "text": "And the third is zero point seven four eight.",
+     "audio_text": null,
+     "start": 281.275,
+     "end": 284.45,
+     "dur": 3.175,
+     "start_frame": 8438,
+     "end_frame": 8533,
+     "beat": true
+    },
+    {
+     "text": "Its length is one, because it's still the arrow from Part 3, divided by the radius.",
+     "audio_text": null,
+     "start": 285.95,
+     "end": 291.9,
+     "dur": 5.95,
+     "start_frame": 8578,
+     "end_frame": 8757
+    }
+   ],
+   "end": 292.7,
+   "start_frame": 5737,
+   "end_frame": 8781,
+   "timing_source": "splice2"
+  },
+  {
+   "id": "s05_i_east",
+   "start": 292.7,
+   "sentences": [
+    {
+     "text": "Now east.",
+     "audio_text": null,
+     "start": 292.7,
+     "end": 294.275,
+     "dur": 1.575,
+     "start_frame": 8781,
+     "end_frame": 8828
+    },
+    {
+     "text": "Let's look down on the Earth from far above the North Pole.",
+     "audio_text": null,
+     "start": 294.625,
+     "end": 298.5,
+     "dur": 3.875,
+     "start_frame": 8839,
+     "end_frame": 8955
+    },
+    {
+     "text": "From there, the circle of latitude through Brest, the parallel, is a circle round the Earth's axis.",
+     "audio_text": null,
+     "start": 298.85,
+     "end": 305.575,
+     "dur": 6.725,
+     "start_frame": 8965,
+     "end_frame": 9167
+    },
+    {
+     "text": "Brest sits on it at the angle lambda from the x axis, measured anticlockwise as seen from above the North Pole.",
+     "audio_text": null,
+     "start": 305.925,
+     "end": 313.75,
+     "dur": 7.825,
+     "start_frame": 9178,
+     "end_frame": 9412
+    },
+    {
+     "text": "Going east means lambda grows, so Brest slides anticlockwise round this circle.",
+     "audio_text": null,
+     "start": 314.1,
+     "end": 320.075,
+     "dur": 5.975,
+     "start_frame": 9423,
+     "end_frame": 9602
+    },
+    {
+     "text": "This is exactly the picture from Part 1.",
+     "audio_text": null,
+     "start": 320.425,
+     "end": 323.625,
+     "dur": 3.2,
+     "start_frame": 9613,
+     "end_frame": 9709
+    },
+    {
+     "text": "The arrow pointing from the circle's centre out to Brest plays the role of r hat.",
+     "audio_text": null,
+     "start": 323.975,
+     "end": 329.35,
+     "dur": 5.375,
+     "start_frame": 9719,
+     "end_frame": 9881
+    },
+    {
+     "text": "We'll call it capital R hat: it points straight away from the Earth's axis, level with the equator, and it's cosine lambda, sine lambda, zero.",
+     "audio_text": null,
+     "start": 329.7,
+     "end": 339.15,
+     "dur": 9.45,
+     "start_frame": 9891,
+     "end_frame": 10175
+    },
+    {
+     "text": "East is the way the angle grows, so east plays the role of theta hat.",
+     "audio_text": null,
+     "start": 339.5,
+     "end": 344.65,
+     "dur": 5.15,
+     "start_frame": 10185,
+     "end_frame": 10340
+    },
+    {
+     "text": "In Part 1, we found theta hat by turning r hat by ninety degrees anticlockwise: swap the two numbers, and put a minus on the first.",
+     "audio_text": null,
+     "start": 345.0,
+     "end": 354.575,
+     "dur": 9.575,
+     "start_frame": 10350,
+     "end_frame": 10637
+    },
+    {
+     "text": "So i hat is minus sine lambda, cosine lambda.",
+     "audio_text": null,
+     "start": 354.925,
+     "end": 358.7,
+     "dur": 3.775,
+     "start_frame": 10648,
+     "end_frame": 10761
+    },
+    {
+     "text": "Its third part is zero, because east runs level, round the circle, with no part along the axis.",
+     "audio_text": null,
+     "start": 359.05,
+     "end": 366.05,
+     "dur": 7.0,
+     "start_frame": 10772,
+     "end_frame": 10982,
+     "beat": true
+    },
+    {
+     "text": "At Brest, that's zero point zero seven eight, zero point nine nine seven, zero.",
+     "audio_text": null,
+     "start": 367.55,
+     "end": 373.3,
+     "dur": 5.75,
+     "start_frame": 11027,
+     "end_frame": 11199,
+     "beat": true
+    },
+    {
+     "text": "So east at Brest points almost exactly along y hat.",
+     "audio_text": null,
+     "start": 374.8,
+     "end": 379.2,
+     "dur": 4.4,
+     "start_frame": 11244,
+     "end_frame": 11376
+    },
+    {
+     "text": "That makes sense: Brest is close to longitude zero, and there, east points towards ninety degrees east.",
+     "audio_text": null,
+     "start": 379.55,
+     "end": 386.875,
+     "dur": 7.325,
+     "start_frame": 11387,
+     "end_frame": 11606
+    }
+   ],
+   "end": 387.675,
+   "start_frame": 8781,
+   "end_frame": 11630,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s06_j_north",
+   "start": 387.675,
+   "sentences": [
+    {
+     "text": "Now north.",
+     "audio_text": null,
+     "start": 387.675,
+     "end": 389.2,
+     "dur": 1.525,
+     "start_frame": 11630,
+     "end_frame": 11676
+    },
+    {
+     "text": "This time, let's slice the Earth along Brest's meridian, the half circle from pole to pole through Brest, as we did in Part 3.",
+     "audio_text": null,
+     "start": 389.55,
+     "end": 398.45,
+     "dur": 8.9,
+     "start_frame": 11687,
+     "end_frame": 11954
+    },
+    {
+     "text": "In this slice, there are two fixed directions: capital R hat, pointing away from the axis, and z hat, pointing up the axis.",
+     "audio_text": null,
+     "start": 398.8,
+     "end": 407.3,
+     "dur": 8.5,
+     "start_frame": 11964,
+     "end_frame": 12219
+    },
+    {
+     "text": "Up, k hat, sits at the angle phi above capital R hat.",
+     "audio_text": null,
+     "start": 407.65,
+     "end": 412.375,
+     "dur": 4.725,
+     "start_frame": 12230,
+     "end_frame": 12371
+    },
+    {
+     "text": "So, just like r hat in Part 1, k hat is cosine phi times capital R hat, plus sine phi times z hat.",
+     "audio_text": null,
+     "start": 412.725,
+     "end": 420.65,
+     "dur": 7.925,
+     "start_frame": 12382,
+     "end_frame": 12620,
+     "beat": true
+    },
+    {
+     "text": "North is the way phi grows: Brest sliding round the meridian towards the North Pole.",
+     "audio_text": null,
+     "start": 422.15,
+     "end": 427.975,
+     "dur": 5.825,
+     "start_frame": 12665,
+     "end_frame": 12839
+    },
+    {
+     "text": "So north plays the role of theta hat in this slice.",
+     "audio_text": null,
+     "start": 428.325,
+     "end": 431.85,
+     "dur": 3.525,
+     "start_frame": 12850,
+     "end_frame": 12956
+    },
+    {
+     "text": "Let's turn k hat by ninety degrees towards the pole, with the same rule: swap the two numbers, and put a minus on the first.",
+     "audio_text": null,
+     "start": 432.2,
+     "end": 440.45,
+     "dur": 8.25,
+     "start_frame": 12966,
+     "end_frame": 13214
+    },
+    {
+     "text": "That gives j hat equals minus sine phi times capital R hat, plus cosine phi times z hat.",
+     "audio_text": null,
+     "start": 440.8,
+     "end": 448.025,
+     "dur": 7.225,
+     "start_frame": 13224,
+     "end_frame": 13441
+    },
+    {
+     "text": "Now put in capital R hat, which is cosine lambda, sine lambda, zero.",
+     "audio_text": null,
+     "start": 448.375,
+     "end": 453.85,
+     "dur": 5.475,
+     "start_frame": 13451,
+     "end_frame": 13616
+    },
+    {
+     "text": "So j hat is minus sine phi cosine lambda, minus sine phi sine lambda, cosine phi.",
+     "audio_text": null,
+     "start": 454.2,
+     "end": 460.775,
+     "dur": 6.575,
+     "start_frame": 13626,
+     "end_frame": 13823,
+     "beat": true
+    },
+    {
+     "text": "At Brest, that's minus zero point seven four five, zero point zero five nine, and zero point six six four.",
+     "audio_text": null,
+     "start": 462.275,
+     "end": 470.5,
+     "dur": 8.225,
+     "start_frame": 13868,
+     "end_frame": 14115,
+     "beat": true
+    },
+    {
+     "text": "So north at Brest points partly up the Earth's axis, and partly in towards it.",
+     "audio_text": null,
+     "start": 472.0,
+     "end": 477.525,
+     "dur": 5.525,
+     "start_frame": 14160,
+     "end_frame": 14326
+    }
+   ],
+   "end": 478.325,
+   "start_frame": 11630,
+   "end_frame": 14350,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s07_enu_checks",
+   "start": 478.325,
+   "sentences": [
+    {
+     "text": "Let's check that these really are three arrows of length one, at right angles.",
+     "audio_text": null,
+     "start": 478.325,
+     "end": 483.45,
+     "dur": 5.125,
+     "start_frame": 14350,
+     "end_frame": 14504
+    },
+    {
+     "text": "For i hat, zero point zero seven eight squared, plus zero point nine nine seven squared, is one.",
+     "audio_text": null,
+     "start": 483.8,
+     "end": 490.875,
+     "dur": 7.075,
+     "start_frame": 14514,
+     "end_frame": 14726,
+     "beat": true
+    },
+    {
+     "text": "The dot product of i hat and j hat is zero point zero seven eight times minus zero point seven four five, plus zero point nine nine seven times zero point zero five nine, plus zero.",
+     "audio_text": null,
+     "start": 492.375,
+     "end": 506.175,
+     "dur": 13.8,
+     "start_frame": 14771,
+     "end_frame": 15185
+    },
+    {
+     "text": "That's minus zero point zero five eight, plus zero point zero five nine: zero, up to rounding.",
+     "audio_text": null,
+     "start": 506.525,
+     "end": 513.7,
+     "dur": 7.175,
+     "start_frame": 15196,
+     "end_frame": 15411
+    },
+    {
+     "text": "So they're at right angles.",
+     "audio_text": null,
+     "start": 514.05,
+     "end": 516.125,
+     "dur": 2.075,
+     "start_frame": 15422,
+     "end_frame": 15484,
+     "beat": true
+    },
+    {
+     "text": "The other pairs work out the same way.",
+     "audio_text": null,
+     "start": 517.625,
+     "end": 520.325,
+     "dur": 2.7,
+     "start_frame": 15529,
+     "end_frame": 15610
+    },
+    {
+     "text": "And with the cross product recipe, i hat cross j hat gives zero point six six two, minus zero point zero five two, and zero point seven four eight.",
+     "audio_text": null,
+     "start": 520.675,
+     "end": 531.7,
+     "dur": 11.025,
+     "start_frame": 15620,
+     "end_frame": 15951
+    },
+    {
+     "text": "That's k hat.",
+     "audio_text": null,
+     "start": 532.05,
+     "end": 533.8,
+     "dur": 1.75,
+     "start_frame": 15962,
+     "end_frame": 16014,
+     "beat": true
+    },
+    {
+     "text": "So the three local arrows are right-handed, just like x hat, y hat and z hat, only turned to fit Brest.",
+     "audio_text": null,
+     "start": 535.3,
+     "end": 543.0,
+     "dur": 7.7,
+     "start_frame": 16059,
+     "end_frame": 16290
+    },
+    {
+     "text": "If you skipped, here's what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the Earth's centre.",
+     "audio_text": null,
+     "start": 543.35,
+     "end": 553.25,
+     "dur": 9.9,
+     "start_frame": 16301,
+     "end_frame": 16598
+    }
+   ],
+   "end": 554.05,
+   "start_frame": 14350,
+   "end_frame": 16622,
+   "timing_source": "splice2"
+  },
+  {
+   "id": "s08_other_stations",
+   "start": 554.05,
+   "sentences": [
+    {
+     "text": "Each station has its own frame.",
+     "audio_text": null,
+     "start": 554.05,
+     "end": 556.575,
+     "dur": 2.525,
+     "start_frame": 16622,
+     "end_frame": 16697
+    },
+    {
+     "text": "Let's zoom back out to the whole globe.",
+     "audio_text": null,
+     "start": 556.925,
+     "end": 559.675,
+     "dur": 2.75,
+     "start_frame": 16708,
+     "end_frame": 16790
+    },
+    {
+     "text": "Trappes, near Paris, is four hundred and eighty kilometres east of Brest.",
+     "audio_text": "[Trappes](/tɹˈæp/), near Paris, is four hundred and eighty kilometres east of Brest.",
+     "start": 560.025,
+     "end": 565.1,
+     "dur": 5.075,
+     "start_frame": 16801,
+     "end_frame": 16953
+    },
+    {
+     "text": "How different is its up?",
+     "audio_text": null,
+     "start": 565.45,
+     "end": 567.425,
+     "dur": 1.975,
+     "start_frame": 16964,
+     "end_frame": 17023
+    },
+    {
+     "text": "The angle between two ups is the angle at the Earth's centre between the two places.",
+     "audio_text": null,
+     "start": 567.775,
+     "end": 573.475,
+     "dur": 5.7,
+     "start_frame": 17033,
+     "end_frame": 17204
+    },
+    {
+     "text": "By the arc rule, that's the distance divided by the radius: four hundred and eighty over six thousand three hundred and seventy one.",
+     "audio_text": null,
+     "start": 573.825,
+     "end": 582.575,
+     "dur": 8.75,
+     "start_frame": 17215,
+     "end_frame": 17477
+    },
+    {
+     "text": "That's zero point zero seven five radians, about four point three degrees.",
+     "audio_text": null,
+     "start": 582.925,
+     "end": 588.425,
+     "dur": 5.5,
+     "start_frame": 17488,
+     "end_frame": 17653,
+     "beat": true
+    },
+    {
+     "text": "Now Singapore, near the equator.",
+     "audio_text": null,
+     "start": 589.925,
+     "end": 592.575,
+     "dur": 2.65,
+     "start_frame": 17698,
+     "end_frame": 17777
+    },
+    {
+     "text": "For places far apart, the dot product is easier.",
+     "audio_text": null,
+     "start": 592.925,
+     "end": 596.775,
+     "dur": 3.85,
+     "start_frame": 17788,
+     "end_frame": 17903
+    },
+    {
+     "text": "The dot product of two arrows of length one is the cosine of the angle between them.",
+     "audio_text": null,
+     "start": 597.125,
+     "end": 602.825,
+     "dur": 5.7,
+     "start_frame": 17914,
+     "end_frame": 18085
+    },
+    {
+     "text": "Singapore's up is minus zero point two three nine, zero point nine seven one, zero point zero two four.",
+     "audio_text": null,
+     "start": 603.175,
+     "end": 610.85,
+     "dur": 7.675,
+     "start_frame": 18095,
+     "end_frame": 18326
+    },
+    {
+     "text": "Multiply the matching parts of the two ups, and add.",
+     "audio_text": null,
+     "start": 611.2,
+     "end": 615.05,
+     "dur": 3.85,
+     "start_frame": 18336,
+     "end_frame": 18452
+    },
+    {
+     "text": "That's minus zero point one five eight, minus zero point zero five zero, plus zero point zero one eight, which is minus zero point one nine one.",
+     "audio_text": null,
+     "start": 615.4,
+     "end": 626.025,
+     "dur": 10.625,
+     "start_frame": 18462,
+     "end_frame": 18781,
+     "beat": true
+    },
+    {
+     "text": "The angle whose cosine is minus zero point one nine one is about a hundred and one degrees.",
+     "audio_text": null,
+     "start": 627.525,
+     "end": 634.45,
+     "dur": 6.925,
+     "start_frame": 18826,
+     "end_frame": 19034,
+     "beat": true
+    },
+    {
+     "text": "So Singapore's up points more than a right angle away from Brest's up.",
+     "audio_text": null,
+     "start": 635.95,
+     "end": 640.325,
+     "dur": 4.375,
+     "start_frame": 19079,
+     "end_frame": 19210
+    }
+   ],
+   "end": 641.125,
+   "start_frame": 16622,
+   "end_frame": 19234,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s09_khulna",
+   "start": 641.125,
+   "sentences": [
+    {
+     "text": "Now let's fly to Khulna, in south-west Bangladesh.",
+     "audio_text": null,
+     "start": 641.125,
+     "end": 645.075,
+     "dur": 3.95,
+     "start_frame": 19234,
+     "end_frame": 19352
+    },
+    {
+     "text": "Khulna lies on the rivers of the Ganges delta, just north of the Sundarbans, the largest mangrove forest in the world.",
+     "audio_text": null,
+     "start": 645.425,
+     "end": 653.525,
+     "dur": 8.1,
+     "start_frame": 19363,
+     "end_frame": 19606
+    },
+    {
+     "text": "To the south is the Bay of Bengal, and to the west, across the border, is Kolkata, in India.",
+     "audio_text": null,
+     "start": 653.875,
+     "end": 660.475,
+     "dur": 6.6,
+     "start_frame": 19616,
+     "end_frame": 19814
+    },
+    {
+     "text": "In May twenty twenty, the centre of Cyclone Amphan passed about seventy eight kilometres west of Khulna, and the sea flooded the coast to its south.",
+     "audio_text": null,
+     "start": 660.825,
+     "end": 670.4,
+     "dur": 9.575,
+     "start_frame": 19825,
+     "end_frame": 20112
+    },
+    {
+     "text": "Khulna is at twenty two point eight degrees north, and eighty nine point six degrees east.",
+     "audio_text": null,
+     "start": 670.75,
+     "end": 676.65,
+     "dur": 5.9,
+     "start_frame": 20123,
+     "end_frame": 20300
+    },
+    {
+     "text": "Its up arrow is zero point zero zero six, zero point nine two two, zero point three eight eight.",
+     "audio_text": null,
+     "start": 677.0,
+     "end": 683.925,
+     "dur": 6.925,
+     "start_frame": 20310,
+     "end_frame": 20518,
+     "beat": true
+    },
+    {
+     "text": "Dotted with Brest's up, that's zero point zero zero four, minus zero point zero four eight, plus zero point two nine zero: zero point two four six.",
+     "audio_text": null,
+     "start": 685.425,
+     "end": 696.25,
+     "dur": 10.825,
+     "start_frame": 20563,
+     "end_frame": 20888
+    },
+    {
+     "text": "The angle whose cosine is zero point two four six is about seventy five point eight degrees.",
+     "audio_text": null,
+     "start": 696.6,
+     "end": 702.7,
+     "dur": 6.1,
+     "start_frame": 20898,
+     "end_frame": 21081,
+     "beat": true
+    },
+    {
+     "text": "Even east is different.",
+     "audio_text": null,
+     "start": 704.2,
+     "end": 706.35,
+     "dur": 2.15,
+     "start_frame": 21126,
+     "end_frame": 21191
+    },
+    {
+     "text": "Khulna's i hat is minus one, zero point zero zero seven, zero, almost exactly opposite to x hat.",
+     "audio_text": null,
+     "start": 706.7,
+     "end": 714.675,
+     "dur": 7.975,
+     "start_frame": 21201,
+     "end_frame": 21440
+    },
+    {
+     "text": "It's about ninety four degrees away from Brest's east.",
+     "audio_text": null,
+     "start": 715.025,
+     "end": 718.5,
+     "dur": 3.475,
+     "start_frame": 21451,
+     "end_frame": 21555,
+     "beat": true
+    },
+    {
+     "text": "So forecasters in Khulna and in Brest both say east, north and up, but they mean different arrows.",
+     "audio_text": null,
+     "start": 720.0,
+     "end": 727.025,
+     "dur": 7.025,
+     "start_frame": 21600,
+     "end_frame": 21811
+    },
+    {
+     "text": "Let's zoom back out.",
+     "audio_text": null,
+     "start": 727.375,
+     "end": 729.4,
+     "dur": 2.025,
+     "start_frame": 21821,
+     "end_frame": 21882
+    }
+   ],
+   "end": 730.2,
+   "start_frame": 19234,
+   "end_frame": 21906,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s10_coast_frame",
+   "start": 730.2,
+   "sentences": [
+    {
+     "text": "Sometimes a forecaster turns her east and north arrows on purpose.",
+     "audio_text": null,
+     "start": 730.2,
+     "end": 735.05,
+     "dur": 4.85,
+     "start_frame": 21906,
+     "end_frame": 22052
+    },
+    {
+     "text": "On a coast, what matters is the part of the wind blowing along the shore, and the part blowing across it, onto the land or out to sea.",
+     "audio_text": null,
+     "start": 735.4,
+     "end": 744.45,
+     "dur": 9.05,
+     "start_frame": 22062,
+     "end_frame": 22334
+    },
+    {
+     "text": "In Part 1, we learned how to turn axes.",
+     "audio_text": null,
+     "start": 744.8,
+     "end": 748.325,
+     "dur": 3.525,
+     "start_frame": 22344,
+     "end_frame": 22450
+    },
+    {
+     "text": "We keep up, k hat, as it is, and turn i hat and j hat by an angle alpha, anticlockwise as seen from above.",
+     "audio_text": null,
+     "start": 748.675,
+     "end": 757.425,
+     "dur": 8.75,
+     "start_frame": 22460,
+     "end_frame": 22723
+    },
+    {
+     "text": "The new along arrow, x hat prime, is cosine alpha times i hat, plus sine alpha times j hat.",
+     "audio_text": null,
+     "start": 757.775,
+     "end": 765.25,
+     "dur": 7.475,
+     "start_frame": 22733,
+     "end_frame": 22958
+    },
+    {
+     "text": "The new across arrow, y hat prime, is that one turned by ninety degrees: minus sine alpha times i hat, plus cosine alpha times j hat.",
+     "audio_text": null,
+     "start": 765.6,
+     "end": 776.325,
+     "dur": 10.725,
+     "start_frame": 22968,
+     "end_frame": 23290
+    },
+    {
+     "text": "And the wind's parts along them are dot products.",
+     "audio_text": null,
+     "start": 776.675,
+     "end": 780.15,
+     "dur": 3.475,
+     "start_frame": 23300,
+     "end_frame": 23405
+    },
+    {
+     "text": "So everything hangs on one number: the angle of the coast.",
+     "audio_text": null,
+     "start": 780.5,
+     "end": 784.65,
+     "dur": 4.15,
+     "start_frame": 23415,
+     "end_frame": 23540
+    },
+    {
+     "text": "Let's find it for the south-west coast of Florida, where Hurricane Ian came ashore in September twenty twenty two.",
+     "audio_text": null,
+     "start": 785.0,
+     "end": 792.075,
+     "dur": 7.075,
+     "start_frame": 23550,
+     "end_frame": 23762
+    }
+   ],
+   "end": 792.875,
+   "start_frame": 21906,
+   "end_frame": 23786,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s11_coast_points",
+   "start": 792.875,
+   "sentences": [
+    {
+     "text": "First, we need two points on the coastline.",
+     "audio_text": null,
+     "start": 792.875,
+     "end": 796.1,
+     "dur": 3.225,
+     "start_frame": 23786,
+     "end_frame": 23883
+    },
+    {
+     "text": "Let's take one near Naples, in Florida, at twenty six point one zero degrees north and eighty one point eight zero degrees west.",
+     "audio_text": null,
+     "start": 796.45,
+     "end": 805.225,
+     "dur": 8.775,
+     "start_frame": 23894,
+     "end_frame": 24157
+    },
+    {
+     "text": "And one near Venice, further up the coast, at twenty six point nine two degrees north and eighty two point three five degrees west.",
+     "audio_text": null,
+     "start": 805.575,
+     "end": 814.275,
+     "dur": 8.7,
+     "start_frame": 24167,
+     "end_frame": 24428
+    },
+    {
+     "text": "Both come from a world map of coastlines.",
+     "audio_text": null,
+     "start": 814.625,
+     "end": 817.7,
+     "dur": 3.075,
+     "start_frame": 24439,
+     "end_frame": 24531
+    },
+    {
+     "text": "Going from Naples to Venice, the latitude grows by zero point eight two three degrees.",
+     "audio_text": null,
+     "start": 818.05,
+     "end": 824.1,
+     "dur": 6.05,
+     "start_frame": 24542,
+     "end_frame": 24723,
+     "beat": true
+    },
+    {
+     "text": "The longitude changes by minus zero point five five three degrees.",
+     "audio_text": null,
+     "start": 825.6,
+     "end": 830.525,
+     "dur": 4.925,
+     "start_frame": 24768,
+     "end_frame": 24916
+    },
+    {
+     "text": "It's minus because we go west.",
+     "audio_text": null,
+     "start": 830.875,
+     "end": 833.525,
+     "dur": 2.65,
+     "start_frame": 24926,
+     "end_frame": 25006,
+     "beat": true
+    },
+    {
+     "text": "Now let's turn these angles into kilometres, with the rules from Part 3.",
+     "audio_text": null,
+     "start": 835.025,
+     "end": 840.2,
+     "dur": 5.175,
+     "start_frame": 25051,
+     "end_frame": 25206
+    },
+    {
+     "text": "The step north is the Earth's radius times the change in latitude, in radians.",
+     "audio_text": null,
+     "start": 840.55,
+     "end": 846.25,
+     "dur": 5.7,
+     "start_frame": 25217,
+     "end_frame": 25388
+    },
+    {
+     "text": "Zero point eight two three degrees is zero point zero one four four radians, so the step north is six thousand three hundred and seventy one times zero point zero one four four: about ninety one and a half kilometres.",
+     "audio_text": null,
+     "start": 846.6,
+     "end": 861.75,
+     "dur": 15.15,
+     "start_frame": 25398,
+     "end_frame": 25853,
+     "beat": true
+    },
+    {
+     "text": "The step east is the radius, times cosine phi, times the change in longitude in radians.",
+     "audio_text": null,
+     "start": 863.25,
+     "end": 870.075,
+     "dur": 6.825,
+     "start_frame": 25898,
+     "end_frame": 26102
+    },
+    {
+     "text": "For phi, we use the middle latitude, twenty six and a half degrees, whose cosine is zero point eight nine five.",
+     "audio_text": null,
+     "start": 870.425,
+     "end": 878.075,
+     "dur": 7.65,
+     "start_frame": 26113,
+     "end_frame": 26342
+    },
+    {
+     "text": "So the step east is six thousand three hundred and seventy one, times zero point eight nine five, times minus zero point zero zero nine six five: about minus fifty five kilometres.",
+     "audio_text": null,
+     "start": 878.425,
+     "end": 891.225,
+     "dur": 12.8,
+     "start_frame": 26353,
+     "end_frame": 26737,
+     "beat": true
+    },
+    {
+     "text": "So going up the coast, we move about ninety one and a half kilometres north, and fifty five kilometres west.",
+     "audio_text": null,
+     "start": 892.725,
+     "end": 900.15,
+     "dur": 7.425,
+     "start_frame": 26782,
+     "end_frame": 27005
+    }
+   ],
+   "end": 900.95,
+   "start_frame": 23786,
+   "end_frame": 27029,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s12_coast_angle",
+   "start": 900.95,
+   "sentences": [
+    {
+     "text": "Let's draw that as a triangle on a small flat map in kilometres: ninety one and a half to the north, and fifty five to the west.",
+     "audio_text": null,
+     "start": 900.95,
+     "end": 909.55,
+     "dur": 8.6,
+     "start_frame": 27029,
+     "end_frame": 27287
+    },
+    {
+     "text": "The coast is the long side.",
+     "audio_text": null,
+     "start": 909.9,
+     "end": 912.2,
+     "dur": 2.3,
+     "start_frame": 27297,
+     "end_frame": 27366
+    },
+    {
+     "text": "We want its angle measured from north, because that's how compasses work.",
+     "audio_text": null,
+     "start": 912.55,
+     "end": 917.325,
+     "dur": 4.775,
+     "start_frame": 27377,
+     "end_frame": 27520
+    },
+    {
+     "text": "The angle between north and the coast has fifty five kilometres opposite it, and ninety one and a half next to it.",
+     "audio_text": null,
+     "start": 917.675,
+     "end": 925.025,
+     "dur": 7.35,
+     "start_frame": 27530,
+     "end_frame": 27751
+    },
+    {
+     "text": "So its tangent is fifty five divided by ninety one and a half, which is zero point six zero one.",
+     "audio_text": null,
+     "start": 925.375,
+     "end": 932.325,
+     "dur": 6.95,
+     "start_frame": 27761,
+     "end_frame": 27970,
+     "beat": true
+    },
+    {
+     "text": "The angle whose tangent is zero point six zero one is thirty one degrees.",
+     "audio_text": null,
+     "start": 933.825,
+     "end": 939.575,
+     "dur": 5.75,
+     "start_frame": 28015,
+     "end_frame": 28187,
+     "beat": true
+    },
+    {
+     "text": "So the coast runs thirty one degrees west of north.",
+     "audio_text": null,
+     "start": 941.075,
+     "end": 944.725,
+     "dur": 3.65,
+     "start_frame": 28232,
+     "end_frame": 28342
+    },
+    {
+     "text": "In Part 1, we met compass bearings: they're measured from north, turning clockwise as seen from above.",
+     "audio_text": null,
+     "start": 945.075,
+     "end": 951.975,
+     "dur": 6.9,
+     "start_frame": 28352,
+     "end_frame": 28559
+    },
+    {
+     "text": "Thirty one degrees anticlockwise from north is the same as three hundred and sixty minus thirty one degrees clockwise: three hundred and twenty nine degrees.",
+     "audio_text": null,
+     "start": 952.325,
+     "end": 962.9,
+     "dur": 10.575,
+     "start_frame": 28570,
+     "end_frame": 28887,
+     "beat": true
+    },
+    {
+     "text": "That's where three hundred and twenty nine comes from.",
+     "audio_text": null,
+     "start": 964.4,
+     "end": 968.125,
+     "dur": 3.725,
+     "start_frame": 28932,
+     "end_frame": 29044
+    },
+    {
+     "text": "It's measured from the local north arrow, j hat, at the coast, turning clockwise, and it points north-north-west.",
+     "audio_text": null,
+     "start": 968.475,
+     "end": 975.75,
+     "dur": 7.275,
+     "start_frame": 29054,
+     "end_frame": 29273
+    },
+    {
+     "text": "Worked out on the round Earth instead of a flat map, the bearing comes out the same, three hundred and twenty nine degrees.",
+     "audio_text": null,
+     "start": 976.1,
+     "end": 983.825,
+     "dur": 7.725,
+     "start_frame": 29283,
+     "end_frame": 29515
+    },
+    {
+     "text": "Why north-north-west, and not the other way along the coast, south-south-east?",
+     "audio_text": null,
+     "start": 984.175,
+     "end": 989.275,
+     "dur": 5.1,
+     "start_frame": 29525,
+     "end_frame": 29678
+    },
+    {
+     "text": "Because then the across arrow, which is the along arrow turned anticlockwise, points out to sea, into the Gulf of Mexico.",
+     "audio_text": null,
+     "start": 989.625,
+     "end": 998.3,
+     "dur": 8.675,
+     "start_frame": 29689,
+     "end_frame": 29949
+    }
+   ],
+   "end": 999.1,
+   "start_frame": 27029,
+   "end_frame": 29973,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s13_alpha",
+   "start": 999.1,
+   "sentences": [
+    {
+     "text": "Now we need alpha, which is measured from east, anticlockwise.",
+     "audio_text": null,
+     "start": 999.1,
+     "end": 1003.9,
+     "dur": 4.8,
+     "start_frame": 29973,
+     "end_frame": 30117
+    },
+    {
+     "text": "In Part 1, we found that the maths angle is ninety degrees minus the bearing.",
+     "audio_text": null,
+     "start": 1004.25,
+     "end": 1009.85,
+     "dur": 5.6,
+     "start_frame": 30128,
+     "end_frame": 30296
+    },
+    {
+     "text": "Ninety minus three hundred and twenty nine is minus two hundred and thirty nine degrees.",
+     "audio_text": null,
+     "start": 1010.2,
+     "end": 1016.4,
+     "dur": 6.2,
+     "start_frame": 30306,
+     "end_frame": 30492,
+     "beat": true
+    },
+    {
+     "text": "Adding a full turn of three hundred and sixty degrees doesn't change a direction, so that's the same as a hundred and twenty one degrees.",
+     "audio_text": null,
+     "start": 1017.9,
+     "end": 1027.025,
+     "dur": 9.125,
+     "start_frame": 30537,
+     "end_frame": 30811,
+     "beat": true
+    },
+    {
+     "text": "Let's check: a hundred and twenty one degrees from east is ninety degrees round to north, plus thirty one more towards the west.",
+     "audio_text": null,
+     "start": 1028.525,
+     "end": 1037.0,
+     "dur": 8.475,
+     "start_frame": 30856,
+     "end_frame": 31110
+    },
+    {
+     "text": "That's the coast.",
+     "audio_text": null,
+     "start": 1037.35,
+     "end": 1039.05,
+     "dur": 1.7,
+     "start_frame": 31121,
+     "end_frame": 31172,
+     "beat": true
+    },
+    {
+     "text": "So the along arrow, x hat prime, is cosine a hundred and twenty one degrees, sine a hundred and twenty one degrees: minus zero point five one five, zero point eight five seven, in east and north parts.",
+     "audio_text": null,
+     "start": 1040.55,
+     "end": 1055.15,
+     "dur": 14.6,
+     "start_frame": 31217,
+     "end_frame": 31655,
+     "beat": true
+    },
+    {
+     "text": "The across arrow, y hat prime, is minus the sine, then the cosine: minus zero point eight five seven, minus zero point five one five.",
+     "audio_text": null,
+     "start": 1056.65,
+     "end": 1066.775,
+     "dur": 10.125,
+     "start_frame": 31700,
+     "end_frame": 32003
+    },
+    {
+     "text": "It points west-south-west, out to sea.",
+     "audio_text": null,
+     "start": 1067.125,
+     "end": 1070.25,
+     "dur": 3.125,
+     "start_frame": 32014,
+     "end_frame": 32108,
+     "beat": true
+    }
+   ],
+   "end": 1071.75,
+   "start_frame": 29973,
+   "end_frame": 32153,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s14_along_across",
+   "start": 1071.75,
+   "sentences": [
+    {
+     "text": "Now Ian's wind.",
+     "audio_text": null,
+     "start": 1071.75,
+     "end": 1073.6,
+     "dur": 1.85,
+     "start_frame": 32153,
+     "end_frame": 32208
+    },
+    {
+     "text": "At eight in the evening, universal time, on the twenty eighth of September, about an hour after Ian came ashore, a weather model gave the wind at Fort Myers Beach as about thirty three metres per second, from the south-west.",
+     "audio_text": null,
+     "start": 1073.95,
+     "end": 1088.275,
+     "dur": 14.325,
+     "start_frame": 32219,
+     "end_frame": 32648
+    },
+    {
+     "text": "Its east part was twenty two point two, and its north part twenty four point three metres per second.",
+     "audio_text": null,
+     "start": 1088.625,
+     "end": 1095.175,
+     "dur": 6.55,
+     "start_frame": 32659,
+     "end_frame": 32855,
+     "beat": true
+    },
+    {
+     "text": "The part along the coast is the dot product with x hat prime.",
+     "audio_text": null,
+     "start": 1096.675,
+     "end": 1101.15,
+     "dur": 4.475,
+     "start_frame": 32900,
+     "end_frame": 33035
+    },
+    {
+     "text": "That's twenty two point two times minus zero point five one five, plus twenty four point three times zero point eight five seven.",
+     "audio_text": null,
+     "start": 1101.5,
+     "end": 1110.375,
+     "dur": 8.875,
+     "start_frame": 33045,
+     "end_frame": 33311
+    },
+    {
+     "text": "That's minus eleven point four, plus twenty point eight: about nine point four metres per second along the shore.",
+     "audio_text": null,
+     "start": 1110.725,
+     "end": 1118.425,
+     "dur": 7.7,
+     "start_frame": 33322,
+     "end_frame": 33553,
+     "beat": true
+    },
+    {
+     "text": "The part across is the dot product with y hat prime: twenty two point two times minus zero point eight five seven, plus twenty four point three times minus zero point five one five.",
+     "audio_text": null,
+     "start": 1119.925,
+     "end": 1132.25,
+     "dur": 12.325,
+     "start_frame": 33598,
+     "end_frame": 33968
+    },
+    {
+     "text": "That's minus nineteen point zero, minus twelve point five: about minus thirty one and a half, roughly minus thirty two metres per second.",
+     "audio_text": null,
+     "start": 1132.6,
+     "end": 1141.9,
+     "dur": 9.3,
+     "start_frame": 33978,
+     "end_frame": 34257,
+     "beat": true
+    },
+    {
+     "text": "Minus means against y hat prime: not out to sea, but onto the land.",
+     "audio_text": null,
+     "start": 1143.4,
+     "end": 1148.825,
+     "dur": 5.425,
+     "start_frame": 34302,
+     "end_frame": 34465
+    },
+    {
+     "text": "A check: nine point four squared, plus thirty one point six squared, is about one thousand and eighty seven, and its square root is thirty three, the full wind.",
+     "audio_text": null,
+     "start": 1149.175,
+     "end": 1160.175,
+     "dur": 11.0,
+     "start_frame": 34475,
+     "end_frame": 34805,
+     "beat": true
+    },
+    {
+     "text": "So almost the whole wind was pushing the sea onto the coast.",
+     "audio_text": null,
+     "start": 1161.675,
+     "end": 1165.675,
+     "dur": 4.0,
+     "start_frame": 34850,
+     "end_frame": 34970
+    },
+    {
+     "text": "That push piles the water up against the shore: the storm surge that flooded Fort Myers Beach that afternoon.",
+     "audio_text": null,
+     "start": 1166.025,
+     "end": 1173.4,
+     "dur": 7.375,
+     "start_frame": 34981,
+     "end_frame": 35202
+    },
+    {
+     "text": "Storm surges get their own movie later in this series.",
+     "audio_text": null,
+     "start": 1173.75,
+     "end": 1177.675,
+     "dur": 3.925,
+     "start_frame": 35213,
+     "end_frame": 35330
+    }
+   ],
+   "end": 1178.475,
+   "start_frame": 32153,
+   "end_frame": 35354,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s15_arrows_turn",
+   "start": 1178.475,
+   "sentences": [
+    {
+     "text": "Now a second kind of turning.",
+     "audio_text": null,
+     "start": 1178.475,
+     "end": 1180.85,
+     "dur": 2.375,
+     "start_frame": 35354,
+     "end_frame": 35426
+    },
+    {
+     "text": "Our arrows also turn by themselves, as you move over the round Earth.",
+     "audio_text": null,
+     "start": 1181.2,
+     "end": 1186.05,
+     "dur": 4.85,
+     "start_frame": 35436,
+     "end_frame": 35582
+    },
+    {
+     "text": "Suppose a plane flies due east along the parallel through Brest, at two hundred and fifty metres per second.",
+     "audio_text": null,
+     "start": 1186.4,
+     "end": 1193.325,
+     "dur": 6.925,
+     "start_frame": 35592,
+     "end_frame": 35800
+    },
+    {
+     "text": "In one hour, it covers two hundred and fifty times three thousand six hundred metres: nine hundred kilometres.",
+     "audio_text": null,
+     "start": 1193.675,
+     "end": 1201.375,
+     "dur": 7.7,
+     "start_frame": 35810,
+     "end_frame": 36041,
+     "beat": true
+    },
+    {
+     "text": "At Brest, one degree of longitude is about seventy four kilometres, so that's nine hundred divided by seventy four: about twelve degrees of longitude.",
+     "audio_text": null,
+     "start": 1202.875,
+     "end": 1213.125,
+     "dur": 10.25,
+     "start_frame": 36086,
+     "end_frame": 36394,
+     "beat": true
+    },
+    {
+     "text": "Seen from above the North Pole, the plane has gone twelve degrees round the axis, and its east arrow has swung round by the same twelve degrees, just like theta hat swinging round a circle.",
+     "audio_text": null,
+     "start": 1214.625,
+     "end": 1227.175,
+     "dur": 12.55,
+     "start_frame": 36439,
+     "end_frame": 36815
+    },
+    {
+     "text": "Going north tips the arrows too.",
+     "audio_text": null,
+     "start": 1227.525,
+     "end": 1230.075,
+     "dur": 2.55,
+     "start_frame": 36826,
+     "end_frame": 36902
+    },
+    {
+     "text": "After a hundred and eleven kilometres north, which is one degree of latitude, the up arrow has tilted by one degree.",
+     "audio_text": null,
+     "start": 1230.425,
+     "end": 1238.575,
+     "dur": 8.15,
+     "start_frame": 36913,
+     "end_frame": 37157
+    },
+    {
+     "text": "So for a moving air parcel, i hat, j hat and k hat keep changing.",
+     "audio_text": null,
+     "start": 1238.925,
+     "end": 1244.35,
+     "dur": 5.425,
+     "start_frame": 37168,
+     "end_frame": 37330
+    },
+    {
+     "text": "We write their rates of change as capital D i hat by D t, and so on.",
+     "audio_text": null,
+     "start": 1244.7,
+     "end": 1249.95,
+     "dur": 5.25,
+     "start_frame": 37341,
+     "end_frame": 37498
+    },
+    {
+     "text": "Capital D by D t means the rate of change as we follow the air parcel, as in the derivatives movie.",
+     "audio_text": null,
+     "start": 1250.3,
+     "end": 1258.05,
+     "dur": 7.75,
+     "start_frame": 37509,
+     "end_frame": 37741
+    },
+    {
+     "text": "How fast do the arrows turn, and which way?",
+     "audio_text": null,
+     "start": 1258.4,
+     "end": 1261.7,
+     "dur": 3.3,
+     "start_frame": 37752,
+     "end_frame": 37851
+    },
+    {
+     "text": "Let's work it out, one motion at a time.",
+     "audio_text": null,
+     "start": 1262.05,
+     "end": 1265.125,
+     "dur": 3.075,
+     "start_frame": 37861,
+     "end_frame": 37954
+    }
+   ],
+   "end": 1265.925,
+   "start_frame": 35354,
+   "end_frame": 37978,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s16_toolkit",
+   "start": 1265.925,
+   "sentences": [
+    {
+     "text": "Now let's work out exactly how fast the arrows turn.",
+     "audio_text": null,
+     "start": 1265.925,
+     "end": 1269.7,
+     "dur": 3.775,
+     "start_frame": 37978,
+     "end_frame": 38091
+    },
+    {
+     "text": "This part is for those who enjoy every step.",
+     "audio_text": null,
+     "start": 1270.05,
+     "end": 1273.425,
+     "dur": 3.375,
+     "start_frame": 38101,
+     "end_frame": 38203
+    },
+    {
+     "text": "It isn't needed for the weather, the climate or maps, so skip ahead to the time on screen if you like.",
+     "audio_text": null,
+     "start": 1273.775,
+     "end": 1280.375,
+     "dur": 6.6,
+     "start_frame": 38213,
+     "end_frame": 38411
+    },
+    {
+     "text": "We need just two results from Part 2.",
+     "audio_text": null,
+     "start": 1280.725,
+     "end": 1283.55,
+     "dur": 2.825,
+     "start_frame": 38422,
+     "end_frame": 38506
+    },
+    {
+     "text": "Take a point going round a circle, with r hat pointing out from the centre, and theta hat pointing the way the angle grows.",
+     "audio_text": null,
+     "start": 1283.9,
+     "end": 1292.025,
+     "dur": 8.125,
+     "start_frame": 38517,
+     "end_frame": 38761
+    },
+    {
+     "text": "First, as the angle grows, r hat changes towards theta hat, and theta hat changes towards minus r hat.",
+     "audio_text": null,
+     "start": 1292.375,
+     "end": 1300.375,
+     "dur": 8.0,
+     "start_frame": 38771,
+     "end_frame": 39011
+    },
+    {
+     "text": "We wrote that as d r hat by d theta equals theta hat, and d theta hat by d theta equals minus r hat.",
+     "audio_text": null,
+     "start": 1300.725,
+     "end": 1309.075,
+     "dur": 8.35,
+     "start_frame": 39022,
+     "end_frame": 39272,
+     "beat": true
+    },
+    {
+     "text": "Second, if the point moves along the circle at a speed v, its angle grows at v divided by the circle's radius, in radians per second.",
+     "audio_text": null,
+     "start": 1310.575,
+     "end": 1320.5,
+     "dur": 9.925,
+     "start_frame": 39317,
+     "end_frame": 39615
+    },
+    {
+     "text": "Putting the two together with the chain rule from the derivatives movie, theta hat changes at minus r hat, times the speed over the radius.",
+     "audio_text": null,
+     "start": 1320.85,
+     "end": 1330.075,
+     "dur": 9.225,
+     "start_frame": 39625,
+     "end_frame": 39902
+    },
+    {
+     "text": "And r hat changes at theta hat, times the speed over the radius.",
+     "audio_text": null,
+     "start": 1330.425,
+     "end": 1335.275,
+     "dur": 4.85,
+     "start_frame": 39913,
+     "end_frame": 40058,
+     "beat": true
+    },
+    {
+     "text": "So here's the recipe.",
+     "audio_text": null,
+     "start": 1336.775,
+     "end": 1338.95,
+     "dur": 2.175,
+     "start_frame": 40103,
+     "end_frame": 40168
+    },
+    {
+     "text": "Find the circle, find which arrow plays r hat and which plays theta hat, and divide the speed by the circle's radius.",
+     "audio_text": null,
+     "start": 1339.3,
+     "end": 1347.425,
+     "dur": 8.125,
+     "start_frame": 40179,
+     "end_frame": 40423
+    }
+   ],
+   "end": 1348.225,
+   "start_frame": 37978,
+   "end_frame": 40447,
+   "timing_source": "splice2"
+  },
+  {
+   "id": "s17_which_moves",
+   "start": 1348.225,
+   "sentences": [
+    {
+     "text": "An air parcel can move in three ways: east, north and up.",
+     "audio_text": null,
+     "start": 1348.225,
+     "end": 1352.875,
+     "dur": 4.65,
+     "start_frame": 40447,
+     "end_frame": 40586
+    },
+    {
+     "text": "Let's take them one at a time, and add them up at the end.",
+     "audio_text": null,
+     "start": 1353.225,
+     "end": 1357.2,
+     "dur": 3.975,
+     "start_frame": 40597,
+     "end_frame": 40716
+    },
+    {
+     "text": "Going straight up is the easiest.",
+     "audio_text": null,
+     "start": 1357.55,
+     "end": 1360.025,
+     "dur": 2.475,
+     "start_frame": 40726,
+     "end_frame": 40801
+    },
+    {
+     "text": "Look at our three formulas: i hat, j hat and k hat depend only on phi and lambda, the latitude and the longitude.",
+     "audio_text": null,
+     "start": 1360.375,
+     "end": 1369.025,
+     "dur": 8.65,
+     "start_frame": 40811,
+     "end_frame": 41071
+    },
+    {
+     "text": "Going up changes neither, so going up turns none of the arrows.",
+     "audio_text": null,
+     "start": 1369.375,
+     "end": 1373.825,
+     "dur": 4.45,
+     "start_frame": 41081,
+     "end_frame": 41215,
+     "beat": true
+    },
+    {
+     "text": "Going north changes phi, but not lambda.",
+     "audio_text": null,
+     "start": 1375.325,
+     "end": 1378.675,
+     "dur": 3.35,
+     "start_frame": 41260,
+     "end_frame": 41360
+    },
+    {
+     "text": "And i hat, minus sine lambda, cosine lambda, zero, has no phi in it.",
+     "audio_text": null,
+     "start": 1379.025,
+     "end": 1384.2,
+     "dur": 5.175,
+     "start_frame": 41371,
+     "end_frame": 41526
+    },
+    {
+     "text": "So going north leaves i hat alone.",
+     "audio_text": null,
+     "start": 1384.55,
+     "end": 1387.325,
+     "dur": 2.775,
+     "start_frame": 41536,
+     "end_frame": 41620,
+     "beat": true
+    },
+    {
+     "text": "That leaves four things to find: how going east turns i hat, how going north turns j hat and k hat, and how going east turns j hat and k hat.",
+     "audio_text": null,
+     "start": 1388.825,
+     "end": 1399.275,
+     "dur": 10.45,
+     "start_frame": 41665,
+     "end_frame": 41978
+    }
+   ],
+   "end": 1400.075,
+   "start_frame": 40447,
+   "end_frame": 42002,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s18_i_east_a",
+   "start": 1400.075,
+   "sentences": [
+    {
+     "text": "First, going east, and i hat.",
+     "audio_text": null,
+     "start": 1400.075,
+     "end": 1402.875,
+     "dur": 2.8,
+     "start_frame": 42002,
+     "end_frame": 42086
+    },
+    {
+     "text": "Going east, the parcel moves round its parallel: a circle round the Earth's axis, whose radius is the distance from the axis, the Earth's radius times cosine phi.",
+     "audio_text": null,
+     "start": 1403.225,
+     "end": 1414.75,
+     "dur": 11.525,
+     "start_frame": 42097,
+     "end_frame": 42442
+    },
+    {
+     "text": "In the view from above the North Pole, capital R hat plays r hat, i hat plays theta hat, and lambda plays the angle.",
+     "audio_text": null,
+     "start": 1415.1,
+     "end": 1423.6,
+     "dur": 8.5,
+     "start_frame": 42453,
+     "end_frame": 42708
+    },
+    {
+     "text": "Step one: how fast does lambda grow?",
+     "audio_text": null,
+     "start": 1423.95,
+     "end": 1427.225,
+     "dur": 3.275,
+     "start_frame": 42718,
+     "end_frame": 42817
+    },
+    {
+     "text": "The parcel moves east at the speed u, round a circle whose radius is the Earth's radius times cosine phi.",
+     "audio_text": null,
+     "start": 1427.575,
+     "end": 1434.95,
+     "dur": 7.375,
+     "start_frame": 42827,
+     "end_frame": 43048
+    },
+    {
+     "text": "So lambda grows at u divided by that radius.",
+     "audio_text": null,
+     "start": 1435.3,
+     "end": 1439.2,
+     "dur": 3.9,
+     "start_frame": 43059,
+     "end_frame": 43176,
+     "beat": true
+    },
+    {
+     "text": "Step two: Part 2's rule says theta hat changes towards minus r hat.",
+     "audio_text": null,
+     "start": 1440.7,
+     "end": 1445.825,
+     "dur": 5.125,
+     "start_frame": 43221,
+     "end_frame": 43375
+    },
+    {
+     "text": "So as lambda grows, i hat changes towards minus capital R hat: d i hat by d lambda equals minus capital R hat.",
+     "audio_text": null,
+     "start": 1446.175,
+     "end": 1454.975,
+     "dur": 8.8,
+     "start_frame": 43385,
+     "end_frame": 43649,
+     "beat": true
+    },
+    {
+     "text": "Step three: multiply the two, by the chain rule.",
+     "audio_text": null,
+     "start": 1456.475,
+     "end": 1460.175,
+     "dur": 3.7,
+     "start_frame": 43694,
+     "end_frame": 43805
+    },
+    {
+     "text": "Capital D i hat by D t equals minus capital R hat, times u, over the Earth's radius times cosine phi.",
+     "audio_text": null,
+     "start": 1460.525,
+     "end": 1469.05,
+     "dur": 8.525,
+     "start_frame": 43816,
+     "end_frame": 44071,
+     "beat": true
+    },
+    {
+     "text": "In words: going east, the east arrow swings in towards the Earth's axis.",
+     "audio_text": null,
+     "start": 1470.55,
+     "end": 1475.95,
+     "dur": 5.4,
+     "start_frame": 44116,
+     "end_frame": 44278
+    }
+   ],
+   "end": 1476.75,
+   "start_frame": 42002,
+   "end_frame": 44302,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s19_i_east_b",
+   "start": 1476.75,
+   "sentences": [
+    {
+     "text": "But a forecaster doesn't use capital R hat.",
+     "audio_text": null,
+     "start": 1476.75,
+     "end": 1480.375,
+     "dur": 3.625,
+     "start_frame": 44302,
+     "end_frame": 44411
+    },
+    {
+     "text": "She wants the answer in her own arrows.",
+     "audio_text": null,
+     "start": 1480.725,
+     "end": 1483.45,
+     "dur": 2.725,
+     "start_frame": 44422,
+     "end_frame": 44503
+    },
+    {
+     "text": "Let's go back to Brest's meridian slice.",
+     "audio_text": null,
+     "start": 1483.8,
+     "end": 1486.85,
+     "dur": 3.05,
+     "start_frame": 44514,
+     "end_frame": 44605
+    },
+    {
+     "text": "There, we wrote k hat as cosine phi capital R hat, plus sine phi z hat.",
+     "audio_text": null,
+     "start": 1487.2,
+     "end": 1492.85,
+     "dur": 5.65,
+     "start_frame": 44616,
+     "end_frame": 44785
+    },
+    {
+     "text": "And j hat as minus sine phi capital R hat, plus cosine phi z hat.",
+     "audio_text": null,
+     "start": 1493.2,
+     "end": 1498.725,
+     "dur": 5.525,
+     "start_frame": 44796,
+     "end_frame": 44962
+    },
+    {
+     "text": "Step four: multiply the first line by cosine phi, and the second line by sine phi.",
+     "audio_text": null,
+     "start": 1499.075,
+     "end": 1505.425,
+     "dur": 6.35,
+     "start_frame": 44972,
+     "end_frame": 45163
+    },
+    {
+     "text": "Step five: take the second line away from the first.",
+     "audio_text": null,
+     "start": 1505.775,
+     "end": 1509.575,
+     "dur": 3.8,
+     "start_frame": 45173,
+     "end_frame": 45287
+    },
+    {
+     "text": "The z hat parts cancel, because cosine phi sine phi minus sine phi cosine phi is zero.",
+     "audio_text": null,
+     "start": 1509.925,
+     "end": 1516.775,
+     "dur": 6.85,
+     "start_frame": 45298,
+     "end_frame": 45503
+    },
+    {
+     "text": "The capital R hat parts give cosine squared phi plus sine squared phi, which is one.",
+     "audio_text": null,
+     "start": 1517.125,
+     "end": 1523.325,
+     "dur": 6.2,
+     "start_frame": 45514,
+     "end_frame": 45700
+    },
+    {
+     "text": "So capital R hat equals cosine phi k hat, minus sine phi j hat.",
+     "audio_text": null,
+     "start": 1523.675,
+     "end": 1529.225,
+     "dur": 5.55,
+     "start_frame": 45710,
+     "end_frame": 45877,
+     "beat": true
+    },
+    {
+     "text": "In words: pointing away from the axis is partly up, and partly south.",
+     "audio_text": null,
+     "start": 1530.725,
+     "end": 1535.95,
+     "dur": 5.225,
+     "start_frame": 45922,
+     "end_frame": 46078
+    },
+    {
+     "text": "Step six: put minus capital R hat into step three.",
+     "audio_text": null,
+     "start": 1536.3,
+     "end": 1540.575,
+     "dur": 4.275,
+     "start_frame": 46089,
+     "end_frame": 46217
+    },
+    {
+     "text": "Capital D i hat by D t equals u over the Earth's radius times cosine phi, times, open bracket, j hat sine phi, minus k hat cosine phi, close bracket.",
+     "audio_text": null,
+     "start": 1540.925,
+     "end": 1553.6,
+     "dur": 12.675,
+     "start_frame": 46228,
+     "end_frame": 46608,
+     "beat": true
+    },
+    {
+     "text": "So going east, the east arrow tips a little towards the north, and a little downwards.",
+     "audio_text": null,
+     "start": 1555.1,
+     "end": 1560.575,
+     "dur": 5.475,
+     "start_frame": 46653,
+     "end_frame": 46817
+    },
+    {
+     "text": "How fast?",
+     "audio_text": null,
+     "start": 1560.925,
+     "end": 1562.5,
+     "dur": 1.575,
+     "start_frame": 46828,
+     "end_frame": 46875
+    },
+    {
+     "text": "For a wind of ten metres per second towards the east at Brest, divide ten by the distance from the axis, four million two hundred and thirty thousand metres.",
+     "audio_text": null,
+     "start": 1562.85,
+     "end": 1573.325,
+     "dur": 10.475,
+     "start_frame": 46885,
+     "end_frame": 47200
+    },
+    {
+     "text": "That's about two point four times ten to the minus six radians per second.",
+     "audio_text": null,
+     "start": 1573.675,
+     "end": 1578.9,
+     "dur": 5.225,
+     "start_frame": 47210,
+     "end_frame": 47367,
+     "beat": true
+    },
+    {
+     "text": "That's about twelve degrees in a day.",
+     "audio_text": null,
+     "start": 1580.4,
+     "end": 1583.1,
+     "dur": 2.7,
+     "start_frame": 47412,
+     "end_frame": 47493
+    }
+   ],
+   "end": 1583.9,
+   "start_frame": 44302,
+   "end_frame": 47517,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s20_jk_north",
+   "start": 1583.9,
+   "sentences": [
+    {
+     "text": "Next, going north, which turns j hat and k hat.",
+     "audio_text": null,
+     "start": 1583.9,
+     "end": 1587.85,
+     "dur": 3.95,
+     "start_frame": 47517,
+     "end_frame": 47635
+    },
+    {
+     "text": "Going north, the parcel moves round its meridian: a circle round the Earth's centre, whose radius is the Earth's radius itself.",
+     "audio_text": null,
+     "start": 1588.2,
+     "end": 1596.95,
+     "dur": 8.75,
+     "start_frame": 47646,
+     "end_frame": 47908
+    },
+    {
+     "text": "In the meridian slice, k hat points out from the centre, so it plays r hat.",
+     "audio_text": null,
+     "start": 1597.3,
+     "end": 1602.675,
+     "dur": 5.375,
+     "start_frame": 47919,
+     "end_frame": 48080
+    },
+    {
+     "text": "And j hat points the way phi grows, so it plays theta hat.",
+     "audio_text": null,
+     "start": 1603.025,
+     "end": 1607.45,
+     "dur": 4.425,
+     "start_frame": 48091,
+     "end_frame": 48223
+    },
+    {
+     "text": "The parcel moves north at the speed v, so phi grows at v over the radius.",
+     "audio_text": null,
+     "start": 1607.8,
+     "end": 1613.3,
+     "dur": 5.5,
+     "start_frame": 48234,
+     "end_frame": 48399,
+     "beat": true
+    },
+    {
+     "text": "Part 2's rules then give the answer at once.",
+     "audio_text": null,
+     "start": 1614.8,
+     "end": 1618.325,
+     "dur": 3.525,
+     "start_frame": 48444,
+     "end_frame": 48550
+    },
+    {
+     "text": "K hat changes towards j hat: capital D k hat by D t equals j hat, v over the radius.",
+     "audio_text": null,
+     "start": 1618.675,
+     "end": 1625.925,
+     "dur": 7.25,
+     "start_frame": 48560,
+     "end_frame": 48778
+    },
+    {
+     "text": "And j hat changes towards minus k hat: capital D j hat by D t equals minus k hat, v over the radius.",
+     "audio_text": null,
+     "start": 1626.275,
+     "end": 1635.0,
+     "dur": 8.725,
+     "start_frame": 48788,
+     "end_frame": 49050,
+     "beat": true
+    },
+    {
+     "text": "In words: going north, up tips towards the north, and north tips downwards.",
+     "audio_text": null,
+     "start": 1636.5,
+     "end": 1641.75,
+     "dur": 5.25,
+     "start_frame": 49095,
+     "end_frame": 49252
+    },
+    {
+     "text": "A hundred and eleven kilometres north, divided by six thousand three hundred and seventy one kilometres, is zero point zero one seven five radians: the one-degree tilt of up that we saw before.",
+     "audio_text": null,
+     "start": 1642.1,
+     "end": 1655.65,
+     "dur": 13.55,
+     "start_frame": 49263,
+     "end_frame": 49669,
+     "beat": true
+    }
+   ],
+   "end": 1657.15,
+   "start_frame": 47517,
+   "end_frame": 49714,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s21_jk_east",
+   "start": 1657.15,
+   "sentences": [
+    {
+     "text": "Last, going east also tilts j hat and k hat.",
+     "audio_text": null,
+     "start": 1657.15,
+     "end": 1661.125,
+     "dur": 3.975,
+     "start_frame": 49714,
+     "end_frame": 49834
+    },
+    {
+     "text": "Look again at how they're built: k hat is cosine phi capital R hat, plus sine phi z hat, and j hat is minus sine phi capital R hat, plus cosine phi z hat.",
+     "audio_text": null,
+     "start": 1661.475,
+     "end": 1673.625,
+     "dur": 12.15,
+     "start_frame": 49844,
+     "end_frame": 50209
+    },
+    {
+     "text": "Going east, phi stays the same, so the sines and cosines don't change.",
+     "audio_text": null,
+     "start": 1673.975,
+     "end": 1679.225,
+     "dur": 5.25,
+     "start_frame": 50219,
+     "end_frame": 50377
+    },
+    {
+     "text": "Z hat lies along the Earth's axis, and never turns.",
+     "audio_text": null,
+     "start": 1679.575,
+     "end": 1683.725,
+     "dur": 4.15,
+     "start_frame": 50387,
+     "end_frame": 50512
+    },
+    {
+     "text": "Only capital R hat turns.",
+     "audio_text": null,
+     "start": 1684.075,
+     "end": 1686.575,
+     "dur": 2.5,
+     "start_frame": 50522,
+     "end_frame": 50597
+    },
+    {
+     "text": "In the view from above, capital R hat plays r hat, so it changes towards i hat, which plays theta hat.",
+     "audio_text": null,
+     "start": 1686.925,
+     "end": 1694.425,
+     "dur": 7.5,
+     "start_frame": 50608,
+     "end_frame": 50833
+    },
+    {
+     "text": "Capital D capital R hat by D t equals i hat, times u over the Earth's radius times cosine phi.",
+     "audio_text": null,
+     "start": 1694.775,
+     "end": 1702.75,
+     "dur": 7.975,
+     "start_frame": 50843,
+     "end_frame": 51082,
+     "beat": true
+    },
+    {
+     "text": "So capital D k hat by D t is cosine phi times that.",
+     "audio_text": null,
+     "start": 1704.25,
+     "end": 1708.7,
+     "dur": 4.45,
+     "start_frame": 51127,
+     "end_frame": 51261
+    },
+    {
+     "text": "The cosines cancel, leaving i hat, u over the radius.",
+     "audio_text": null,
+     "start": 1709.05,
+     "end": 1713.525,
+     "dur": 4.475,
+     "start_frame": 51271,
+     "end_frame": 51406,
+     "beat": true
+    },
+    {
+     "text": "And capital D j hat by D t is minus sine phi times the same thing: minus i hat, times u over the radius, times sine phi over cosine phi.",
+     "audio_text": null,
+     "start": 1715.025,
+     "end": 1726.1,
+     "dur": 11.075,
+     "start_frame": 51451,
+     "end_frame": 51783
+    },
+    {
+     "text": "Sine over cosine is the tangent, so that's minus i hat, u over the radius, tangent phi.",
+     "audio_text": null,
+     "start": 1726.45,
+     "end": 1733.325,
+     "dur": 6.875,
+     "start_frame": 51793,
+     "end_frame": 52000,
+     "beat": true
+    },
+    {
+     "text": "In words: going east, up leans towards the east, and north leans towards the west.",
+     "audio_text": null,
+     "start": 1734.825,
+     "end": 1740.625,
+     "dur": 5.8,
+     "start_frame": 52045,
+     "end_frame": 52219
+    }
+   ],
+   "end": 1741.425,
+   "start_frame": 49714,
+   "end_frame": 52243,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s22_add_motions",
+   "start": 1741.425,
+   "sentences": [
+    {
+     "text": "Now let's add the motions.",
+     "audio_text": null,
+     "start": 1741.425,
+     "end": 1743.65,
+     "dur": 2.225,
+     "start_frame": 52243,
+     "end_frame": 52309
+    },
+    {
+     "text": "In a short time, the parcel moves a little east and a little north.",
+     "audio_text": null,
+     "start": 1744.0,
+     "end": 1748.45,
+     "dur": 4.45,
+     "start_frame": 52320,
+     "end_frame": 52453
+    },
+    {
+     "text": "As in the total differential from the derivatives movie, the small changes from each move add up.",
+     "audio_text": null,
+     "start": 1748.8,
+     "end": 1755.125,
+     "dur": 6.325,
+     "start_frame": 52464,
+     "end_frame": 52654
+    },
+    {
+     "text": "So capital D i hat by D t equals u over the radius times cosine phi, times, open bracket, j hat sine phi, minus k hat cosine phi, close bracket.",
+     "audio_text": null,
+     "start": 1755.475,
+     "end": 1767.875,
+     "dur": 12.4,
+     "start_frame": 52664,
+     "end_frame": 53036
+    },
+    {
+     "text": "Capital D j hat by D t equals minus i hat, u over the radius, tangent phi, minus k hat, v over the radius.",
+     "audio_text": null,
+     "start": 1768.225,
+     "end": 1777.5,
+     "dur": 9.275,
+     "start_frame": 53047,
+     "end_frame": 53325
+    },
+    {
+     "text": "And capital D k hat by D t equals i hat, u over the radius, plus j hat, v over the radius.",
+     "audio_text": null,
+     "start": 1777.85,
+     "end": 1785.65,
+     "dur": 7.8,
+     "start_frame": 53335,
+     "end_frame": 53569,
+     "beat": true
+    },
+    {
+     "text": "Every piece is a speed divided by a radius, just as round the hurricane in Part 2.",
+     "audio_text": null,
+     "start": 1787.15,
+     "end": 1793.4,
+     "dur": 6.25,
+     "start_frame": 53614,
+     "end_frame": 53802
+    },
+    {
+     "text": "Speed over radius is how fast the arrows turn.",
+     "audio_text": null,
+     "start": 1793.75,
+     "end": 1797.3,
+     "dur": 3.55,
+     "start_frame": 53812,
+     "end_frame": 53919
+    },
+    {
+     "text": "And here's a check.",
+     "audio_text": null,
+     "start": 1797.65,
+     "end": 1799.45,
+     "dur": 1.8,
+     "start_frame": 53929,
+     "end_frame": 53983
+    },
+    {
+     "text": "The change of i hat has no i hat part, the change of j hat has no j hat part, and the change of k hat has no k hat part.",
+     "audio_text": null,
+     "start": 1799.8,
+     "end": 1809.05,
+     "dur": 9.25,
+     "start_frame": 53994,
+     "end_frame": 54271
+    },
+    {
+     "text": "That has to be so.",
+     "audio_text": null,
+     "start": 1809.4,
+     "end": 1811.3,
+     "dur": 1.9,
+     "start_frame": 54282,
+     "end_frame": 54339
+    },
+    {
+     "text": "An arrow of length one can only turn, never grow, so its change is always at right angles to itself.",
+     "audio_text": null,
+     "start": 1811.65,
+     "end": 1818.825,
+     "dur": 7.175,
+     "start_frame": 54349,
+     "end_frame": 54565,
+     "beat": true
+    },
+    {
+     "text": "No earlier movie derived these three lines.",
+     "audio_text": null,
+     "start": 1820.325,
+     "end": 1823.725,
+     "dur": 3.4,
+     "start_frame": 54610,
+     "end_frame": 54712
+    },
+    {
+     "text": "The cross product at work met a close cousin: an arrow carried round by a spin changes at Omega cross the arrow.",
+     "audio_text": null,
+     "start": 1824.075,
+     "end": 1831.925,
+     "dur": 7.85,
+     "start_frame": 54722,
+     "end_frame": 54958
+    },
+    {
+     "text": "These three lines follow the same rule, with the flow's own turning in place of the Earth's spin.",
+     "audio_text": null,
+     "start": 1832.275,
+     "end": 1838.425,
+     "dur": 6.15,
+     "start_frame": 54968,
+     "end_frame": 55153
+    },
+    {
+     "text": "If you skipped, here's what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth's radius.",
+     "audio_text": null,
+     "start": 1838.775,
+     "end": 1849.275,
+     "dur": 10.5,
+     "start_frame": 55163,
+     "end_frame": 55478
+    }
+   ],
+   "end": 1850.075,
+   "start_frame": 52243,
+   "end_frame": 55502,
+   "timing_source": "splice2"
+  },
+  {
+   "id": "s23_whole_vector",
+   "start": 1850.075,
+   "sentences": [
+    {
+     "text": "Why does all this matter?",
+     "audio_text": null,
+     "start": 1850.075,
+     "end": 1852.0,
+     "dur": 1.925,
+     "start_frame": 55502,
+     "end_frame": 55560
+    },
+    {
+     "text": "Because of Newton's law.",
+     "audio_text": null,
+     "start": 1852.35,
+     "end": 1854.45,
+     "dur": 2.1,
+     "start_frame": 55570,
+     "end_frame": 55633
+    },
+    {
+     "text": "The next three steps show where the turning arrows end up in it.",
+     "audio_text": null,
+     "start": 1854.8,
+     "end": 1858.925,
+     "dur": 4.125,
+     "start_frame": 55644,
+     "end_frame": 55768
+    },
+    {
+     "text": "They're for anyone who wants every step, and you can skip ahead to the time on screen without losing the weather story.",
+     "audio_text": null,
+     "start": 1859.275,
+     "end": 1866.45,
+     "dur": 7.175,
+     "start_frame": 55778,
+     "end_frame": 55993
+    },
+    {
+     "text": "Force equals mass times acceleration, and the acceleration is the rate of change of the whole wind arrow, bold v, as we follow the air parcel.",
+     "audio_text": null,
+     "start": 1866.8,
+     "end": 1877.075,
+     "dur": 10.275,
+     "start_frame": 56004,
+     "end_frame": 56312
+    },
+    {
+     "text": "Bold v is u i hat, plus v j hat, plus w k hat.",
+     "audio_text": null,
+     "start": 1877.425,
+     "end": 1882.4,
+     "dur": 4.975,
+     "start_frame": 56323,
+     "end_frame": 56472
+    },
+    {
+     "text": "Each of those is a number times an arrow, and as the parcel moves, both of them change.",
+     "audio_text": null,
+     "start": 1882.75,
+     "end": 1888.875,
+     "dur": 6.125,
+     "start_frame": 56482,
+     "end_frame": 56666
+    },
+    {
+     "text": "So we need the product rule from Part 2.",
+     "audio_text": null,
+     "start": 1889.225,
+     "end": 1892.225,
+     "dur": 3.0,
+     "start_frame": 56677,
+     "end_frame": 56767
+    },
+    {
+     "text": "The change of a number times an arrow is the change of the number times the arrow, plus the number times the change of the arrow.",
+     "audio_text": null,
+     "start": 1892.575,
+     "end": 1900.625,
+     "dur": 8.05,
+     "start_frame": 56777,
+     "end_frame": 57019,
+     "beat": true
+    },
+    {
+     "text": "Using it on all three pieces gives six terms.",
+     "audio_text": null,
+     "start": 1902.125,
+     "end": 1905.475,
+     "dur": 3.35,
+     "start_frame": 57064,
+     "end_frame": 57164
+    },
+    {
+     "text": "Capital D bold v by D t equals capital D u by D t times i hat, plus u times capital D i hat by D t.",
+     "audio_text": null,
+     "start": 1905.825,
+     "end": 1915.175,
+     "dur": 9.35,
+     "start_frame": 57175,
+     "end_frame": 57455
+    },
+    {
+     "text": "Plus capital D v by D t times j hat, plus v times capital D j hat by D t.",
+     "audio_text": null,
+     "start": 1915.525,
+     "end": 1922.05,
+     "dur": 6.525,
+     "start_frame": 57466,
+     "end_frame": 57661
+    },
+    {
+     "text": "Plus capital D w by D t times k hat, plus w times capital D k hat by D t.",
+     "audio_text": null,
+     "start": 1922.4,
+     "end": 1929.6,
+     "dur": 7.2,
+     "start_frame": 57672,
+     "end_frame": 57888,
+     "beat": true
+    },
+    {
+     "text": "In each pair, the first term is the change of the number, and the second is the change of the arrow.",
+     "audio_text": null,
+     "start": 1931.1,
+     "end": 1937.6,
+     "dur": 6.5,
+     "start_frame": 57933,
+     "end_frame": 58128
+    }
+   ],
+   "end": 1938.4,
+   "start_frame": 55502,
+   "end_frame": 58152,
+   "timing_source": "splice2"
+  },
+  {
+   "id": "s24_dot_i_a",
+   "start": 1938.4,
+   "sentences": [
+    {
+     "text": "Let's find the eastward part of this acceleration.",
+     "audio_text": null,
+     "start": 1938.4,
+     "end": 1942.025,
+     "dur": 3.625,
+     "start_frame": 58152,
+     "end_frame": 58261
+    },
+    {
+     "text": "How do we get the part of any arrow along i hat?",
+     "audio_text": null,
+     "start": 1942.375,
+     "end": 1945.675,
+     "dur": 3.3,
+     "start_frame": 58271,
+     "end_frame": 58370
+    },
+    {
+     "text": "With the dot product, as in Part 1.",
+     "audio_text": null,
+     "start": 1946.025,
+     "end": 1949.125,
+     "dur": 3.1,
+     "start_frame": 58381,
+     "end_frame": 58474
+    },
+    {
+     "text": "So we dot all six terms with i hat, one at a time.",
+     "audio_text": null,
+     "start": 1949.475,
+     "end": 1953.5,
+     "dur": 4.025,
+     "start_frame": 58484,
+     "end_frame": 58605
+    },
+    {
+     "text": "First term: capital D u by D t, times i hat dot i hat.",
+     "audio_text": null,
+     "start": 1953.85,
+     "end": 1958.725,
+     "dur": 4.875,
+     "start_frame": 58615,
+     "end_frame": 58762
+    },
+    {
+     "text": "I hat dot i hat is one, so it's capital D u by D t.",
+     "audio_text": null,
+     "start": 1959.075,
+     "end": 1963.5,
+     "dur": 4.425,
+     "start_frame": 58772,
+     "end_frame": 58905,
+     "beat": true
+    },
+    {
+     "text": "Second term: u times capital D i hat by D t, dot i hat.",
+     "audio_text": null,
+     "start": 1965.0,
+     "end": 1970.1,
+     "dur": 5.1,
+     "start_frame": 58950,
+     "end_frame": 59103
+    },
+    {
+     "text": "The change of i hat has only j hat and k hat parts, and both are at right angles to i hat.",
+     "audio_text": null,
+     "start": 1970.45,
+     "end": 1977.45,
+     "dur": 7.0,
+     "start_frame": 59113,
+     "end_frame": 59323
+    },
+    {
+     "text": "So this term is zero.",
+     "audio_text": null,
+     "start": 1977.8,
+     "end": 1979.85,
+     "dur": 2.05,
+     "start_frame": 59334,
+     "end_frame": 59395,
+     "beat": true
+    },
+    {
+     "text": "Third term: capital D v by D t, times j hat dot i hat.",
+     "audio_text": null,
+     "start": 1981.35,
+     "end": 1986.35,
+     "dur": 5.0,
+     "start_frame": 59440,
+     "end_frame": 59590
+    },
+    {
+     "text": "J hat is at right angles to i hat, so that's zero too.",
+     "audio_text": null,
+     "start": 1986.7,
+     "end": 1991.125,
+     "dur": 4.425,
+     "start_frame": 59601,
+     "end_frame": 59734,
+     "beat": true
+    },
+    {
+     "text": "Fifth term, in the same way: capital D w by D t, times k hat dot i hat, is zero.",
+     "audio_text": null,
+     "start": 1992.625,
+     "end": 1999.725,
+     "dur": 7.1,
+     "start_frame": 59779,
+     "end_frame": 59992,
+     "beat": true
+    }
+   ],
+   "end": 2001.225,
+   "start_frame": 58152,
+   "end_frame": 60037,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s25_dot_i_b",
+   "start": 2001.225,
+   "sentences": [
+    {
+     "text": "Now the two terms that survive.",
+     "audio_text": null,
+     "start": 2001.225,
+     "end": 2003.7,
+     "dur": 2.475,
+     "start_frame": 60037,
+     "end_frame": 60111
+    },
+    {
+     "text": "Fourth term: v times capital D j hat by D t, dot i hat.",
+     "audio_text": null,
+     "start": 2004.05,
+     "end": 2009.0,
+     "dur": 4.95,
+     "start_frame": 60121,
+     "end_frame": 60270
+    },
+    {
+     "text": "Capital D j hat by D t has an i hat part, minus u over the radius tangent phi, and a k hat part, which the dot product drops.",
+     "audio_text": null,
+     "start": 2009.35,
+     "end": 2019.5,
+     "dur": 10.15,
+     "start_frame": 60280,
+     "end_frame": 60585
+    },
+    {
+     "text": "So this term is v times minus u over the radius tangent phi: minus u v tangent phi over the radius.",
+     "audio_text": null,
+     "start": 2019.85,
+     "end": 2027.9,
+     "dur": 8.05,
+     "start_frame": 60595,
+     "end_frame": 60837,
+     "beat": true
+    },
+    {
+     "text": "Sixth term: w times capital D k hat by D t, dot i hat.",
+     "audio_text": null,
+     "start": 2029.4,
+     "end": 2034.675,
+     "dur": 5.275,
+     "start_frame": 60882,
+     "end_frame": 61040
+    },
+    {
+     "text": "Capital D k hat by D t has the i hat part, u over the radius.",
+     "audio_text": null,
+     "start": 2035.025,
+     "end": 2040.15,
+     "dur": 5.125,
+     "start_frame": 61051,
+     "end_frame": 61204
+    },
+    {
+     "text": "So this term is plus u w over the radius.",
+     "audio_text": null,
+     "start": 2040.5,
+     "end": 2044.05,
+     "dur": 3.55,
+     "start_frame": 61215,
+     "end_frame": 61321,
+     "beat": true
+    },
+    {
+     "text": "Adding the six terms, capital D bold v by D t dot i hat equals capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius.",
+     "audio_text": null,
+     "start": 2045.55,
+     "end": 2058.425,
+     "dur": 12.875,
+     "start_frame": 61366,
+     "end_frame": 61753,
+     "beat": true
+    },
+    {
+     "text": "The first term is the change of the number u.",
+     "audio_text": null,
+     "start": 2059.925,
+     "end": 2063.525,
+     "dur": 3.6,
+     "start_frame": 61798,
+     "end_frame": 61906
+    },
+    {
+     "text": "The other two come only from the turning arrows of our coordinates.",
+     "audio_text": null,
+     "start": 2063.875,
+     "end": 2068.45,
+     "dur": 4.575,
+     "start_frame": 61916,
+     "end_frame": 62053
+    },
+    {
+     "text": "They're called metric terms.",
+     "audio_text": null,
+     "start": 2068.8,
+     "end": 2070.975,
+     "dur": 2.175,
+     "start_frame": 62064,
+     "end_frame": 62129
+    },
+    {
+     "text": "With the same recipe, dotting with j hat and with k hat, we get the northward and upward parts, each with metric terms of its own.",
+     "audio_text": null,
+     "start": 2071.325,
+     "end": 2080.3,
+     "dur": 8.975,
+     "start_frame": 62140,
+     "end_frame": 62409,
+     "beat": true
+    },
+    {
+     "text": "If you skipped, here's what to keep: because the arrows turn, the wind's numbers can change even when nothing pushes the air, and the extra terms that say so are called metric terms.",
+     "audio_text": null,
+     "start": 2081.8,
+     "end": 2093.875,
+     "dur": 12.075,
+     "start_frame": 62454,
+     "end_frame": 62816
+    }
+   ],
+   "end": 2094.675,
+   "start_frame": 60037,
+   "end_frame": 62840,
+   "timing_source": "splice2"
+  },
+  {
+   "id": "s26_glider",
+   "start": 2094.675,
+   "sentences": [
+    {
+     "text": "What do the metric terms mean?",
+     "audio_text": null,
+     "start": 2094.675,
+     "end": 2097.0,
+     "dur": 2.325,
+     "start_frame": 62840,
+     "end_frame": 62910
+    },
+    {
+     "text": "Let's try a thought experiment.",
+     "audio_text": null,
+     "start": 2097.35,
+     "end": 2099.775,
+     "dur": 2.425,
+     "start_frame": 62920,
+     "end_frame": 62993
+    },
+    {
+     "text": "Imagine a puck gliding over a smooth Earth that doesn't spin, with nothing pushing it along the ground.",
+     "audio_text": null,
+     "start": 2100.125,
+     "end": 2106.875,
+     "dur": 6.75,
+     "start_frame": 63004,
+     "end_frame": 63206
+    },
+    {
+     "text": "Then the eastward part of its acceleration, capital D bold v by D t dot i hat, is zero.",
+     "audio_text": null,
+     "start": 2107.225,
+     "end": 2114.475,
+     "dur": 7.25,
+     "start_frame": 63217,
+     "end_frame": 63434
+    },
+    {
+     "text": "So capital D u by D t must equal u v tangent phi over the radius, minus u w over the radius.",
+     "audio_text": null,
+     "start": 2114.825,
+     "end": 2123.5,
+     "dur": 8.675,
+     "start_frame": 63445,
+     "end_frame": 63705
+    },
+    {
+     "text": "The puck stays on the ground, so w is zero, and that leaves u v tangent phi over the radius, which isn't zero.",
+     "audio_text": null,
+     "start": 2123.85,
+     "end": 2132.075,
+     "dur": 8.225,
+     "start_frame": 63715,
+     "end_frame": 63962
+    },
+    {
+     "text": "So the puck's eastward number changes, even though nothing pushes it.",
+     "audio_text": null,
+     "start": 2132.425,
+     "end": 2136.975,
+     "dur": 4.55,
+     "start_frame": 63973,
+     "end_frame": 64109
+    },
+    {
+     "text": "Let's start it at forty five degrees north, going north-east, at ten metres per second east and ten north.",
+     "audio_text": null,
+     "start": 2137.325,
+     "end": 2144.55,
+     "dur": 7.225,
+     "start_frame": 64120,
+     "end_frame": 64336
+    },
+    {
+     "text": "After one day, its east part has grown to about eleven and a half, and its north part has shrunk to about eight point two.",
+     "audio_text": null,
+     "start": 2144.9,
+     "end": 2152.925,
+     "dur": 8.025,
+     "start_frame": 64347,
+     "end_frame": 64588,
+     "beat": true
+    },
+    {
+     "text": "But its speed is still fourteen point one metres per second.",
+     "audio_text": null,
+     "start": 2154.425,
+     "end": 2158.475,
+     "dur": 4.05,
+     "start_frame": 64633,
+     "end_frame": 64754,
+     "beat": true
+    },
+    {
+     "text": "The puck goes straight, along a great circle, which we'll meet in Part 6.",
+     "audio_text": null,
+     "start": 2159.975,
+     "end": 2164.85,
+     "dur": 4.875,
+     "start_frame": 64799,
+     "end_frame": 64945
+    },
+    {
+     "text": "It's our arrows that turned under it.",
+     "audio_text": null,
+     "start": 2165.2,
+     "end": 2167.875,
+     "dur": 2.675,
+     "start_frame": 64956,
+     "end_frame": 65036
+    },
+    {
+     "text": "Metric terms never speed anything up or slow it down.",
+     "audio_text": null,
+     "start": 2168.225,
+     "end": 2172.35,
+     "dur": 4.125,
+     "start_frame": 65047,
+     "end_frame": 65170
+    },
+    {
+     "text": "They only share the same speed out between east and north, as the arrows turn.",
+     "audio_text": null,
+     "start": 2172.7,
+     "end": 2177.95,
+     "dur": 5.25,
+     "start_frame": 65181,
+     "end_frame": 65338
+    }
+   ],
+   "end": 2178.75,
+   "start_frame": 62840,
+   "end_frame": 65362,
+   "timing_source": "splice3"
+  },
+  {
+   "id": "s27_metric_size",
+   "start": 2178.75,
+   "sentences": [
+    {
+     "text": "How big are they?",
+     "audio_text": null,
+     "start": 2178.75,
+     "end": 2180.45,
+     "dur": 1.7,
+     "start_frame": 65362,
+     "end_frame": 65413
+    },
+    {
+     "text": "Take the same wind, ten metres per second east and ten north, at forty five degrees, where the tangent is one.",
+     "audio_text": null,
+     "start": 2180.8,
+     "end": 2188.8,
+     "dur": 8.0,
+     "start_frame": 65424,
+     "end_frame": 65664
+    },
+    {
+     "text": "U v tangent phi over the radius is ten times ten times one, divided by six point three seven one million metres.",
+     "audio_text": null,
+     "start": 2189.15,
+     "end": 2197.675,
+     "dur": 8.525,
+     "start_frame": 65674,
+     "end_frame": 65930
+    },
+    {
+     "text": "That's about one point six times ten to the minus five metres per second squared.",
+     "audio_text": null,
+     "start": 2198.025,
+     "end": 2203.675,
+     "dur": 5.65,
+     "start_frame": 65941,
+     "end_frame": 66110,
+     "beat": true
+    },
+    {
+     "text": "Let's compare the Coriolis effect, from the cross product movies: f times v, where f is two Omega sine phi.",
+     "audio_text": "Let's compare the [Coriolis](/kˌɔɹiˈOlɪs/) effect, from the cross product movies: f times v, where f is two Omega sine phi.",
+     "start": 2205.175,
+     "end": 2213.25,
+     "dur": 8.075,
+     "start_frame": 66155,
+     "end_frame": 66397
+    },
+    {
+     "text": "Two times seven point two nine times ten to the minus five, times zero point seven zero seven, is one point zero three times ten to the minus four per second.",
+     "audio_text": null,
+     "start": 2213.6,
+     "end": 2224.975,
+     "dur": 11.375,
+     "start_frame": 66408,
+     "end_frame": 66749
+    },
+    {
+     "text": "Times ten metres per second, that's about one point zero times ten to the minus three.",
+     "audio_text": null,
+     "start": 2225.325,
+     "end": 2231.25,
+     "dur": 5.925,
+     "start_frame": 66760,
+     "end_frame": 66937,
+     "beat": true
+    },
+    {
+     "text": "So the metric term is about sixty six times smaller.",
+     "audio_text": null,
+     "start": 2232.75,
+     "end": 2236.675,
+     "dur": 3.925,
+     "start_frame": 66982,
+     "end_frame": 67100,
+     "beat": true
+    },
+    {
+     "text": "In one weather system, metric terms are small.",
+     "audio_text": null,
+     "start": 2238.175,
+     "end": 2241.65,
+     "dur": 3.475,
+     "start_frame": 67145,
+     "end_frame": 67249
+    },
+    {
+     "text": "But they grow near the poles, where the tangent gets large, and over flows that span whole oceans or the whole globe, so weather and climate models keep them.",
+     "audio_text": null,
+     "start": 2242.0,
+     "end": 2252.1,
+     "dur": 10.1,
+     "start_frame": 67260,
+     "end_frame": 67563
+    },
+    {
+     "text": "We'll meet them again in a later movie: From F equals mass times acceleration, to the equation of motion.",
+     "audio_text": null,
+     "start": 2252.45,
+     "end": 2259.975,
+     "dur": 7.525,
+     "start_frame": 67573,
+     "end_frame": 67799
+    }
+   ],
+   "end": 2260.775,
+   "start_frame": 65362,
+   "end_frame": 67823,
+   "timing_source": "dryrun1"
+  },
+  {
+   "id": "s28_recap",
+   "start": 2260.775,
+   "sentences": [
+    {
+     "text": "To sum up, a forecaster's local frame has three arrows: i hat east, j hat north and k hat up, and the wind is u i hat, plus v j hat, plus w k hat.",
+     "audio_text": null,
+     "start": 2260.775,
+     "end": 2272.8,
+     "dur": 12.025,
+     "start_frame": 67823,
+     "end_frame": 68184
+    },
+    {
+     "text": "Up is the arrow from the Earth's centre, east comes from turning in the view from above the pole, and north from turning in the meridian slice.",
+     "audio_text": null,
+     "start": 2273.15,
+     "end": 2282.1,
+     "dur": 8.95,
+     "start_frame": 68194,
+     "end_frame": 68463
+    },
+    {
+     "text": "Every place has its own frame: Brest's up and Khulna's up are about seventy five point eight degrees apart.",
+     "audio_text": null,
+     "start": 2282.45,
+     "end": 2288.775,
+     "dur": 6.325,
+     "start_frame": 68473,
+     "end_frame": 68663
+    },
+    {
+     "text": "Turning the frame to a coast, at a bearing of three hundred and twenty nine degrees, split Ian's wind into about nine metres per second along the shore, and about thirty two onto the land.",
+     "audio_text": null,
+     "start": 2289.125,
+     "end": 2301.05,
+     "dur": 11.925,
+     "start_frame": 68674,
+     "end_frame": 69031
+    },
+    {
+     "text": "As the air moves, the arrows turn by themselves, at speeds divided by radii.",
+     "audio_text": null,
+     "start": 2301.4,
+     "end": 2307.15,
+     "dur": 5.75,
+     "start_frame": 69042,
+     "end_frame": 69214
+    },
+    {
+     "text": "So the eastward acceleration is capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius: two metric terms that come only from the turning arrows.",
+     "audio_text": null,
+     "start": 2307.5,
+     "end": 2320.65,
+     "dur": 13.15,
+     "start_frame": 69225,
+     "end_frame": 69619
+    },
+    {
+     "text": "For an ordinary wind, they're about sixty six times smaller than the Coriolis effect, but weather and climate models keep them.",
+     "audio_text": "For an ordinary wind, they're about sixty six times smaller than the [Coriolis](/kˌɔɹiˈOlɪs/) effect, but weather and climate models keep them.",
+     "start": 2321.0,
+     "end": 2329.425,
+     "dur": 8.425,
+     "start_frame": 69630,
+     "end_frame": 69883
+    },
+    {
+     "text": "In Part 5, we'll let the frame itself move, and see what a storm's winds look like to someone riding along with it.",
+     "audio_text": null,
+     "start": 2329.775,
+     "end": 2337.275,
+     "dur": 7.5,
+     "start_frame": 69893,
+     "end_frame": 70118
+    }
+   ],
+   "end": 2338.075,
+   "start_frame": 67823,
+   "end_frame": 70142,
+   "timing_source": "splice3"
+  },
+  {
+   "id": "s29_end",
+   "start": 2338.075,
+   "sentences": [
+    {
+     "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
+     "audio_text": null,
+     "start": 2338.075,
+     "end": 2344.275,
+     "dur": 6.2,
+     "start_frame": 70142,
+     "end_frame": 70328
+    },
+    {
+     "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
+     "audio_text": null,
+     "start": 2344.625,
+     "end": 2352.675,
+     "dur": 8.05,
+     "start_frame": 70339,
+     "end_frame": 70580
+    },
+    {
+     "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
+     "audio_text": null,
+     "start": 2353.025,
+     "end": 2360.675,
+     "dur": 7.65,
+     "start_frame": 70591,
+     "end_frame": 70820
+    }
+   ],
+   "end": 2360.975,
+   "start_frame": 70142,
+   "end_frame": 70829,
+   "timing_source": "dryrun1"
+  }
+ ],
+ "total_s": 2360.975,
+ "total_frames": 70830
+}
