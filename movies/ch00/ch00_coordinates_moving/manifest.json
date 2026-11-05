@@ -1,0 +1,1454 @@
+{
+ "id": "ch00_coordinates_moving",
+ "title": "Coordinates, Part 5 — Moving frames: storm-relative winds",
+ "storyboard": "movies/ch00/ch00_coordinates_moving/storyboard.yaml",
+ "builder": "movies/data/build_ch00_coordinates_moving.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "dirty_tracked": true,
+  "kinematics_py_sha256": "dfd7e1abea38775a2469a329fd9724232a87c53fb3f01e765d5acffe5fa6b1ea",
+  "coords_py_sha256": "3497d372316d1dd7fc3277a74e794eec3b8997dcb85525d1ea2d5d450111c2d2",
+  "calculus_py_sha256": "969eeff9a8b10a87b811cc72d4de11401702d071ff39180d43b2557903b60e86",
+  "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
+  "cyclone_py_sha256": "302a3892a9af2ccf5e8d19d3bf30bfd4bc2c6ae7afd3f3c31edf52448ed799d2",
+  "trajectories_py_sha256": "83b56ae0134c14950628026ab13e8b4cb5f45ae0e7006a5ef3ade70c6539a51e"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "x = x' + Ut, t' = t": "Kundu §3.3 text before (3.9) (x'_o = 0)",
+  "u = u' + U": "Kundu §3.3",
+  "accelerations equal": "Kundu (3.9)",
+  "DT/Dt, Du/Dt": "Vallis §1.1.2 (1.5), (1.7); Kundu (B.1.4)",
+  "v' = v − U": "Kundu §3.3 rearranged",
+  "x' = x − Ut, tau = t; dp/dt = dp/dtau − U·grad p": "Kundu (B.2.1)-(B.2.2), Example B.2 (xi written x')",
+  "ring components": "Vallis (2.28)-(2.29) via diag.cyclone.storm_relative_wind"
+ },
+ "parameters": {
+  "places": {
+   "Plymouth": [
+    50.25,
+    -4.25
+   ],
+   "Brest": [
+    48.39,
+    -4.49
+   ],
+   "Newquay_hook": [
+    50.42,
+    -5.08
+   ]
+  },
+  "train": {
+   "U": 20.0,
+   "walker": 1.5,
+   "speeding": "1.5 -> 2.0 m/s in 1 s",
+   "g": 9.81
+  },
+  "gust_pattern": {
+   "u": "10 + 5 sin(2π (x − 10 t) / 200 km) m/s",
+   "point_phase_deg": 45,
+   "U": 10.0,
+   "fluidpy_steps": {
+    "h_m": 1.0,
+    "ht_s": 1.0
+   }
+  },
+  "ciaran": {
+   "seed": [
+    52.5,
+    1.75,
+    "2023-11-02T12"
+   ],
+   "box_deg": [
+    1.2,
+    2.0
+   ],
+   "max_step_km": 120,
+   "ring_km": 200,
+   "n_az": 72,
+   "sectors": "±45° about the right (bearing + 90°) and left of the track",
+   "motion": "00-06 UTC 2 Nov (translation_velocity, at='start')",
+   "plymouth": "bilinear msl at 50.25 N 4.25 W; centred hourly difference 23-01 UTC; fluidpy.geo.sphere.gradient of msl at 00 UTC"
+  },
+  "time_compression": {
+   "s00": "title animations (train, hourly isobars) in a few seconds",
+   "s07": "one hour of the gust pattern in about 4 s",
+   "s08": "hourly fields 21 -> 06 UTC at about 1 h per 1.5 s; particles 600 s per sample through the frozen 03 UTC field",
+   "s13": "the frozen-pattern ghost slid 1 h and 2 h in a few seconds"
+  },
+  "exaggerations": [
+   "s01 icons illustrative",
+   "s02 tripod arrows ≈ 800 km on the globe mini",
+   "s06 parcel cube and map illustrative (no data)",
+   "s10 inset arrows enlarged (scale in the scene: 9 px per m/s)",
+   "s14 1-D profile = the real 00 UTC msl along U through Plymouth"
+  ],
+  "screen_deviations": [
+   "s00 title in the series layout of Parts 1 and 4 ('Coordinates · Part 5' 64 px, 'Moving' / 'frames' 150 px, 'made easy' 88 px, 'storm-relative winds' 68 px) instead of the storyboard's one-line 150-px 'Coordinates · Part 5' (does not fit x 100-1075)",
+   "skip chips in the lower maths zone (as Parts 1 and 4)",
+   "s10 south calc written with '≈' (flag F3)"
+  ],
+  "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05): Ciarán unchanged from build 1"
+ },
+ "credits": [
+  "Contains modified Copernicus Climate Change Service information 2026 (ERA5 hourly surface for Ciarán, via the ARCO ERA5 store).",
+  "NOAA NCEI Integrated Surface Database (ISD): Brest-Guipavas 07110 SYNOP (WMO Resolution 40 notice applies).",
+  "NASA Blue Marble Next Generation (NASA Earth Observatory).",
+  "Made with Natural Earth.",
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0); style per storyboard (passing-front, seed 43) or its runner-up."
+ ],
+ "js_selftest": "none — every number is read from data/mv.json (TSX CHECK rows re-assert the screen strings)",
+ "chapters": [
+  {
+   "time": "0:00",
+   "t_s": 0.0,
+   "title": "Title",
+   "scene": "s00_title"
+  },
+  {
+   "time": "0:13",
+   "t_s": 13.25,
+   "title": "Riding with a storm: the question",
+   "scene": "s01_hook"
+  },
+  {
+   "time": "0:37",
+   "t_s": 37.825,
+   "title": "Recap of Part 4",
+   "scene": "s02_part4_recap"
+  },
+  {
+   "time": "1:27",
+   "t_s": 87.625,
+   "title": "A frame that moves: the train",
+   "scene": "s03_train"
+  },
+  {
+   "time": "2:34",
+   "t_s": 154.175,
+   "title": "Every step: why speeds add",
+   "scene": "s04_velocities_add"
+  },
+  {
+   "time": "3:53",
+   "t_s": 233.45,
+   "title": "Every step: accelerations stay the same",
+   "scene": "s05_accel_same"
+  },
+  {
+   "time": "5:40",
+   "t_s": 340.075,
+   "title": "An air parcel's acceleration in two frames",
+   "scene": "s06_parcel_accel"
+  },
+  {
+   "time": "7:08",
+   "t_s": 428.875,
+   "title": "A sliding gust pattern, in numbers",
+   "scene": "s07_sliding_pattern"
+  },
+  {
+   "time": "9:24",
+   "t_s": 564.15,
+   "title": "Storm Ciarán",
+   "scene": "s08_ciaran"
+  },
+  {
+   "time": "10:28",
+   "t_s": 628.4,
+   "title": "Why the winds were lopsided",
+   "scene": "s09_lopsided"
+  },
+  {
+   "time": "11:15",
+   "t_s": 675.95,
+   "title": "Storm-relative winds",
+   "scene": "s10_storm_relative"
+  },
+  {
+   "time": "13:35",
+   "t_s": 815.125,
+   "title": "What does not change",
+   "scene": "s12_invariant"
+  },
+  {
+   "time": "14:47",
+   "t_s": 887.625,
+   "title": "What a fixed barometer sees",
+   "scene": "s13_tau"
+  },
+  {
+   "time": "16:24",
+   "t_s": 984.75,
+   "title": "Every step: linking the barometer and the rider",
+   "scene": "s14_tau_derive"
+  },
+  {
+   "time": "18:11",
+   "t_s": 1091.525,
+   "title": "Plymouth, in numbers",
+   "scene": "s15_plymouth"
+  },
+  {
+   "time": "20:25",
+   "t_s": 1225.075,
+   "title": "Recap",
+   "scene": "s17_recap"
+  },
+  {
+   "time": "21:35",
+   "t_s": 1295.675,
+   "title": "End",
+   "scene": "s18_end"
+  }
+ ],
+ "maths_skips": [
+  {
+   "block": "A",
+   "chip_scene": "s04_velocities_add",
+   "chip_sentence": 2,
+   "chip_at_s": 163.95,
+   "skip_to": "5:28",
+   "skip_to_s": 328.0,
+   "keep_line": "If you skipped, here's what to keep: in a frame moving steadily in a straight line, speeds change by the frame's own speed, but accelerations, and so forces, stay the same."
+  },
+  {
+   "block": "B",
+   "chip_scene": "s14_tau_derive",
+   "chip_sentence": 2,
+   "chip_at_s": 989.8,
+   "skip_to": "18:02",
+   "skip_to_s": 1082.75,
+   "keep_line": "If you skipped, here's what to keep: what the barometer sees is the storm changing, minus the pattern sliding past."
+  }
+ ],
+ "timing_provisional": true,
+ "inputs_sha256": {
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\derived\\ch00\\era5_ciaran_2023_sfc.nc": "9ed602b9a8f5e563b47f65f9c3275e46caad8e4ea0c05f6f611d0c4e6c1fa439",
+  "data/derived/ch00/rwm_isd_brest_2023-11-01T12_2023-11-02T09.json": "b405b20c6bdb21631c77f66a95171dadd63c3e06563ddcf8a1afd7aa9c76dde7",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b"
+ },
+ "render_assets": {
+  "mv_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "mv_cia_msl_00.png": "f4129056494dee7b0b22f93ac02ec74d151a9461e8d62f830593b971a7139848",
+  "mv_cia_msl_01.png": "9135c62dfe5a7f3112049d8421dbf00a7002b7d823aa7143ef72941e6429b9c4",
+  "mv_cia_msl_02.png": "e314c2b6b150769a0cb6831d37d13da05a3360268533e8087fb72254112b1fdd",
+  "mv_cia_msl_03.png": "0933deef66863970699baa0030d3005354400242d72e70a512df921908900c72",
+  "mv_cia_msl_04.png": "a9caa2bd7521ce399d3f060b53ef94e65bf22f52950b67bd0e1324be7dd3481d",
+  "mv_cia_msl_05.png": "e30e08fa179e7c6eba2915fb2c6aba63d9297b26c31c9e5e881fe1f07a69f021",
+  "mv_cia_msl_06.png": "911a77943f8da09e0ea8572d9b38c062546d7c5c09e24dadf0d889064061d73f",
+  "mv_cia_msl_07.png": "a3d62c6d2d5875c8bdd2ac31044409a36b339b0fab1be89b2e15f65f6541d434",
+  "mv_cia_msl_08.png": "32143ac78d2f51c826f5ffaed9d2b2c491469e0dda64bda47560327eca5e1589",
+  "mv_cia_msl_09.png": "484e607ff3f8a5e6165f70a02fba336b0ea572c018ab12f1532105b2be0f4049",
+  "mv_cia_speed_00.png": "517b3a1448fc6ed44f0a218e5bbaf8617508a6f1103e9ad0b61764a8c11ada33",
+  "mv_cia_speed_01.png": "e66b17acf34ae87811d5659301f285d8064aa049102346e607e5ab4be7105d6b",
+  "mv_cia_speed_02.png": "7f55475fd96972302e72d215c03bf624161c510e05076cd24f1f57e7ee7dabf5",
+  "mv_cia_speed_03.png": "c64f3f85c3a9a546ded2efd0dbe487658e3731efe76ee1a0b9733c64a8ccf384",
+  "mv_cia_speed_04.png": "d384e342ffc754ddc6750c2df3667ee6565c2568b418344a2477f4a6a51218f8",
+  "mv_cia_speed_05.png": "18eac298e3b5ea35e02a07aac3fc7ffc124868f2d38cdc15e841b2d4eb35a835",
+  "mv_cia_speed_06.png": "c9dbc07f98cdb745e84f3588c2bc82a814682187564f971f215dfc21521e0ab9",
+  "mv_cia_speed_07.png": "0f8a4536a9de97e570542590872c08af008c60083e47f2744ab8c31c1c8c9b15",
+  "mv_cia_speed_08.png": "e4225b95eacd49b0f7ceabf4ef209538df5a15bed5126f0a4d6ebc5b54191f2b",
+  "mv_cia_speed_09.png": "94c9afe3eaac3c927ae03ed6d349ca62249603f15f3586e89063cb6cc3167537"
+ },
+ "data_files": {
+  "mv.json": "eb1dab911b431f37fb7b5f4b761ec3062e38aac51c21d62bdf5a005062c95e6a",
+  "img/cia_msl_00.png": "f4129056494dee7b0b22f93ac02ec74d151a9461e8d62f830593b971a7139848",
+  "img/cia_msl_01.png": "9135c62dfe5a7f3112049d8421dbf00a7002b7d823aa7143ef72941e6429b9c4",
+  "img/cia_msl_02.png": "e314c2b6b150769a0cb6831d37d13da05a3360268533e8087fb72254112b1fdd",
+  "img/cia_msl_03.png": "0933deef66863970699baa0030d3005354400242d72e70a512df921908900c72",
+  "img/cia_msl_04.png": "a9caa2bd7521ce399d3f060b53ef94e65bf22f52950b67bd0e1324be7dd3481d",
+  "img/cia_msl_05.png": "e30e08fa179e7c6eba2915fb2c6aba63d9297b26c31c9e5e881fe1f07a69f021",
+  "img/cia_msl_06.png": "911a77943f8da09e0ea8572d9b38c062546d7c5c09e24dadf0d889064061d73f",
+  "img/cia_msl_07.png": "a3d62c6d2d5875c8bdd2ac31044409a36b339b0fab1be89b2e15f65f6541d434",
+  "img/cia_msl_08.png": "32143ac78d2f51c826f5ffaed9d2b2c491469e0dda64bda47560327eca5e1589",
+  "img/cia_msl_09.png": "484e607ff3f8a5e6165f70a02fba336b0ea572c018ab12f1532105b2be0f4049",
+  "img/cia_speed_00.png": "517b3a1448fc6ed44f0a218e5bbaf8617508a6f1103e9ad0b61764a8c11ada33",
+  "img/cia_speed_01.png": "e66b17acf34ae87811d5659301f285d8064aa049102346e607e5ab4be7105d6b",
+  "img/cia_speed_02.png": "7f55475fd96972302e72d215c03bf624161c510e05076cd24f1f57e7ee7dabf5",
+  "img/cia_speed_03.png": "c64f3f85c3a9a546ded2efd0dbe487658e3731efe76ee1a0b9733c64a8ccf384",
+  "img/cia_speed_04.png": "d384e342ffc754ddc6750c2df3667ee6565c2568b418344a2477f4a6a51218f8",
+  "img/cia_speed_05.png": "18eac298e3b5ea35e02a07aac3fc7ffc124868f2d38cdc15e841b2d4eb35a835",
+  "img/cia_speed_06.png": "c9dbc07f98cdb745e84f3588c2bc82a814682187564f971f215dfc21521e0ab9",
+  "img/cia_speed_07.png": "0f8a4536a9de97e570542590872c08af008c60083e47f2744ab8c31c1c8c9b15",
+  "img/cia_speed_08.png": "e4225b95eacd49b0f7ceabf4ef209538df5a15bed5126f0a4d6ebc5b54191f2b",
+  "img/cia_speed_09.png": "94c9afe3eaac3c927ae03ed6d349ca62249603f15f3586e89063cb6cc3167537"
+ },
+ "checks": [
+  {
+   "id": "DC50",
+   "name": "train: ground 21.5 m/s seen from the train = 1.5 m/s (galilean_transform); 20 + 1.5 = 21.5",
+   "value": [
+    1.5,
+    0.0,
+    21.5
+   ],
+   "ref": [
+    1.5,
+    0.0,
+    21.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DC50",
+   "name": "x = x′ + U t: the back of the train after t = 3 s is 60 m from the station; walker 4 m ahead → 64 m",
+   "value": [
+    64.0
+   ],
+   "ref": [
+    64.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC51",
+   "name": "walker speeding up: acceleration 0.5 m/s² from the ground and from the train (kinematics.acceleration)",
+   "value": [
+    0.5,
+    0.5
+   ],
+   "ref": [
+    0.5,
+    0.5
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DC51",
+   "name": "screen: 1.5 → 2.0 and 21.5 → 22.0: + 0.5 m/s in 1 s in both frames",
+   "value": [
+    0.5,
+    0.5
+   ],
+   "ref": [
+    0.5,
+    0.5
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC51",
+   "name": "kinematics.acceleration equal in both frames at 200 points of an unsteady vortex; local and advective parts differ",
+   "value": [
+    0.0,
+    3.904768
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC51",
+   "name": "ball: g = 9.81 m/s² ('nine point eight') in both frames (vertical acceleration does not depend on a steady horizontal U)",
+   "value": [
+    9.81
+   ],
+   "ref": [
+    9.8
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "u = 13.536 m/s, ∂u/∂x = 0.1111 m/s per km at phase 45°",
+   "value": [
+    13.535534,
+    0.111072
+   ],
+   "ref": [
+    13.536,
+    0.1111
+   ],
+   "tol": [
+    0.0005,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "ground local −3.999, advection +5.412; rider local 0, advection +1.414 m/s per hour (kinematics.acceleration)",
+   "value": [
+    -3.998595,
+    5.412311,
+    0.0,
+    1.413717
+   ],
+   "ref": [
+    -3.999,
+    5.412,
+    0.0,
+    1.414
+   ],
+   "tol": [
+    0.002,
+    0.002,
+    0.002,
+    0.002
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "sums agree: ground −4.0 + 5.4 = rider 0 + 1.4 (both 1.414)",
+   "value": [
+    1.413717,
+    1.413717
+   ],
+   "ref": [
+    1.414,
+    1.414
+   ],
+   "tol": 0.002,
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "chain_rule_rate = kinematics.acceleration (ground and rider totals)",
+   "value": [
+    1.413717,
+    1.413717
+   ],
+   "ref": [
+    1.413717,
+    1.413717
+   ],
+   "tol": 0.001,
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "screen: 3.5 × 3.6 = 12.6 ('twelve point seven' = 3.536 × 3.6 = 12.73); 36 × 0.111 = 4.0; 48.7 × 0.111 = 5.4; 12.7 × 0.111 = 1.4",
+   "value": [
+    12.727922,
+    3.996,
+    5.4057,
+    1.4097,
+    48.727922
+   ],
+   "ref": [
+    12.73,
+    4.0,
+    5.4,
+    1.41,
+    48.73
+   ],
+   "tol": [
+    0.01,
+    0.01,
+    0.01,
+    0.01,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "over one hour the anemometer's wind falls (13.5 → 8.3) and the parcel's wind rises (13.5 → 14.6)",
+   "value": [
+    13.54,
+    8.31,
+    13.54,
+    14.76
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP32",
+   "name": "parcel's wind after 1 h ≈ 13.54 + 1.4 at first (slope at t = 0 = 1.414 m/s per hour)",
+   "value": [
+    1.413675
+   ],
+   "ref": [
+    1.414
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DP29",
+   "name": "Brest k = (0.662, −0.052, 0.748) (Part 4)",
+   "value": [
+    0.662019,
+    -0.051986,
+    0.747682
+   ],
+   "ref": [
+    0.662,
+    -0.052,
+    0.748
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
+   "id": "DC52",
+   "name": "hourly steps 21-06 UTC ≤ 120 km (47-77 km), no flags",
+   "value": [
+    76.7,
+    58.5,
+    48.3,
+    54.3,
+    47.7,
+    49.0,
+    49.3,
+    47.2,
+    67.6
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC52",
+   "name": "track 00 UTC 954.5 hPa ('nine hundred and fifty four and a half'), 03 UTC 953.6 hPa",
+   "value": [
+    954.533115,
+    953.646673
+   ],
+   "ref": [
+    954.5,
+    953.6
+   ],
+   "tol": [
+    0.05,
+    0.15
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC52",
+   "name": "motion 14.58 m/s towards 71.0° (east 13.78, north 4.75)",
+   "value": [
+    14.577627,
+    70.966398,
+    13.780632,
+    4.754094
+   ],
+   "ref": [
+    14.58,
+    71.0,
+    13.78,
+    4.75
+   ],
+   "tol": [
+    0.02,
+    0.2,
+    0.02,
+    0.02
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP33",
+   "name": "screen: |U| ≈ 14.6 m/s ≈ 52.5 km/h; 14.6 sin 71° ≈ 13.8; 14.6 cos 71° ≈ 4.8; 'roughly fifteen'",
+   "value": [
+    14.6,
+    52.479458,
+    13.804571,
+    4.753295,
+    15.0
+   ],
+   "ref": [
+    14.6,
+    52.5,
+    13.8,
+    4.8,
+    15.0
+   ],
+   "tol": [
+    0,
+    0.05,
+    0.05,
+    0.05,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "Plymouth ≈ 123 km from the 00 UTC centre, to its north-east (bearing 22.5-67.5°)",
+   "value": [
+    123.333038
+   ],
+   "ref": [
+    123.0
+   ],
+   "tol": 1.5,
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "centre → Plymouth bearing is north-east",
+   "value": 57.8,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP33",
+   "name": "00 UTC centre 'just off the tip of Cornwall' (49.4-50.2 N, 7.0-5.0 W)",
+   "value": [
+    49.67,
+    -5.72
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP34",
+   "name": "sector-mean round part (ground): south 18.20, north 6.91 m/s ('about eighteen', 'about seven')",
+   "value": [
+    18.196339,
+    6.912354
+   ],
+   "ref": [
+    18.2,
+    6.91
+   ],
+   "tol": 0.3,
+   "pass": true
+  },
+  {
+   "id": "DP36",
+   "name": "sector-mean round part riding along: south 4.99, north 19.94; the motion's round part S +13.21, N −13.03",
+   "value": [
+    4.986524,
+    19.939592,
+    13.209815,
+    -13.027237
+   ],
+   "ref": [
+    4.99,
+    19.94,
+    13.21,
+    -13.03
+   ],
+   "tol": 0.3,
+   "pass": true
+  },
+  {
+   "id": "DP36",
+   "name": "ground − motion = rider, sector by sector (exact)",
+   "value": [
+    4.986524,
+    19.939592
+   ],
+   "ref": [
+    4.986524,
+    19.939592
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP36",
+   "name": "screen: 18.2 − 13.2 = 5.0; 6.9 − (−13.0) = 19.9; ≈ 13 both sides",
+   "value": [
+    5.0,
+    19.9,
+    13.0,
+    13.0
+   ],
+   "ref": [
+    5.0,
+    19.9,
+    13.0,
+    13.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP36",
+   "name": "screen rounding: 18.2, 6.9, 13.2, −13.0, 5.0, 19.9 = the sector means to 0.1",
+   "value": [
+    18.196339,
+    6.912354,
+    13.209815,
+    -13.027237,
+    4.986524,
+    19.939592
+   ],
+   "ref": [
+    18.2,
+    6.9,
+    13.2,
+    -13.0,
+    5.0,
+    19.9
+   ],
+   "tol": 0.051,
+   "pass": true
+  },
+  {
+   "id": "DP34",
+   "name": "the southern sector is centred on the right of the track (bearing + 90° = 161°, azimuth 289°)",
+   "value": 289.03,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP35",
+   "name": "points: south (48.43, −2.80), north (51.81, −4.73)",
+   "value": [
+    48.429395,
+    -2.804316,
+    51.809394,
+    -4.726168
+   ],
+   "ref": [
+    48.43,
+    -2.8,
+    51.81,
+    -4.73
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DP35",
+   "name": "ground (13.47, 8.44) / (−4.22, −5.33); storm-relative (−0.32, 3.68) / (−18.00, −10.08)",
+   "value": [
+    13.465622,
+    8.43555,
+    -4.217002,
+    -5.329825,
+    -0.31501,
+    3.681456,
+    -17.997633,
+    -10.083919
+   ],
+   "ref": [
+    13.47,
+    8.44,
+    -4.22,
+    -5.33,
+    -0.32,
+    3.68,
+    -18.0,
+    -10.08
+   ],
+   "tol": 0.03,
+   "pass": true
+  },
+  {
+   "id": "DP35",
+   "name": "storm-relative = the ring's own v − U interpolation (Rs) at the same points",
+   "value": [
+    -0.31501,
+    3.681456,
+    -17.997633,
+    -10.083919
+   ],
+   "ref": [
+    -0.31501,
+    3.681456,
+    -17.997633,
+    -10.083919
+   ],
+   "tol": 1e-06,
+   "pass": true
+  },
+  {
+   "id": "DP35",
+   "name": "|v′| south 3.7, north 20.6 m/s ('gentle three point seven', 'about twenty point six')",
+   "value": [
+    3.694909,
+    20.630081
+   ],
+   "ref": [
+    3.7,
+    20.6
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DP35",
+   "name": "screen north: (−4.2, −5.3) − (13.8, 4.8) = (−18.0, −10.1); |(−18.0, −10.1)| = 20.6",
+   "value": [
+    -18.0,
+    -10.1,
+    20.64001
+   ],
+   "ref": [
+    -18.0,
+    -10.1,
+    20.6
+   ],
+   "tol": [
+    1e-09,
+    1e-09,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP35",
+   "name": "screen south east part: 13.5 − 13.8 = −0.3",
+   "value": [
+    -0.3
+   ],
+   "ref": [
+    -0.3
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DC54",
+   "name": "ring means v_t 14.1 vs 13.8; v_r −6.0 vs −5.9 m/s",
+   "value": [
+    14.064981,
+    13.805973,
+    -6.015143,
+    -5.925789
+   ],
+   "ref": [
+    14.1,
+    13.8,
+    -6.0,
+    -5.9
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DC54",
+   "name": "uniform-field ring mean = ground − storm-relative ring mean (v_t, v_r); 0.26 ('zero point three')",
+   "value": [
+    0.259008,
+    -0.089354,
+    0.3
+   ],
+   "ref": [
+    0.259008,
+    -0.089354,
+    0.3
+   ],
+   "tol": [
+    1e-06,
+    1e-06,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC54",
+   "name": "flat circle: a uniform wind's mean u_r and u_θ are 0 (to 1e-12)",
+   "value": [
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DP31",
+   "name": "s01: the shore and the rider see different winds at the same spot (|v| ≠ |v − U| by > 2 m/s)",
+   "value": [
+    5.95,
+    15.9
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "Plymouth p(23, 00, 01 UTC) = 964.13, 960.77, 956.49 hPa",
+   "value": [
+    964.134609,
+    960.766094,
+    956.487031
+   ],
+   "ref": [
+    964.13,
+    960.77,
+    956.49
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DC56",
+   "name": "Plymouth 00 UTC: ∂p/∂t −3.82, −U·∇p −3.21, residual ∂p/∂τ −0.61 hPa/h",
+   "value": [
+    -3.823789,
+    -3.214807,
+    -0.608982
+   ],
+   "ref": [
+    -3.82,
+    -3.21,
+    -0.61
+   ],
+   "tol": 0.02,
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "|∇p| 0.0618 hPa/km towards 63°; along U 0.0613 ('zero point zero six one')",
+   "value": [
+    0.061845,
+    63.069958,
+    0.061258
+   ],
+   "ref": [
+    0.0618,
+    63.0,
+    0.0613
+   ],
+   "tol": [
+    0.0003,
+    1.5,
+    0.0003
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "U·∇p = speed × slope along U (exact)",
+   "value": [
+    3.214807
+   ],
+   "ref": [
+    3.214807
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "screen: (956.5 − 964.1)/2 = −3.8; 52.5 × 0.061 ≈ 3.2; −3.8 + 3.2 = −0.6",
+   "value": [
+    -3.8,
+    3.2025,
+    -0.6
+   ],
+   "ref": [
+    -3.8,
+    3.2,
+    -0.6
+   ],
+   "tol": [
+    1e-09,
+    0.01,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "screen rounding: 964.1, 956.5, −3.8, 0.061, 3.2, −0.6 = the data to their last digit",
+   "value": [
+    964.134609,
+    956.487031,
+    -3.823789,
+    0.061258,
+    3.214807,
+    -0.608982
+   ],
+   "ref": [
+    964.1,
+    956.5,
+    -3.8,
+    0.061,
+    3.2,
+    -0.6
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    0.05,
+    0.0005,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP41",
+   "name": "centre msl_min 954.9 -> 954.0 hPa in 2 h: −0.47 hPa/h ('about minus half')",
+   "value": [
+    954.918101,
+    953.98747,
+    -0.465316
+   ],
+   "ref": [
+    954.9,
+    954.0,
+    -0.47
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    0.03
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP41",
+   "name": "screen: (954.0 − 954.9)/2 = −0.45 ≈ −0.5 (the exact −0.47)",
+   "value": [
+    -0.45
+   ],
+   "ref": [
+    -0.45
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP42",
+   "name": "s16 bars: −3.8 = −0.6 − 3.2",
+   "value": [
+    -3.8
+   ],
+   "ref": [
+    -3.8
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP40",
+   "name": "1-D profile along U: centred slope at Plymouth = 0.061 hPa/km (bilinear profile ≈ gradient)",
+   "value": [
+    0.061408
+   ],
+   "ref": [
+    0.061258
+   ],
+   "tol": 0.004,
+   "pass": true
+  },
+  {
+   "id": "DC55",
+   "name": "Brest SYNOP 03 UTC 2 Nov 911 group = 84 kt = 155.6 km/h ('about a hundred and fifty six')",
+   "value": [
+    84.0,
+    155.568
+   ],
+   "ref": [
+    84.0,
+    155.6
+   ],
+   "tol": 0.1,
+   "pass": true
+  },
+  {
+   "id": "DP42",
+   "name": "recap: U ≈ 15 m/s; spin ≈ 14; −3.8 at Plymouth; 9.8; −4.0 + 5.4 = 1.4",
+   "value": [
+    15.0,
+    14.0,
+    -3.8,
+    1.4
+   ],
+   "ref": [
+    15.0,
+    14.0,
+    -3.8,
+    1.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  }
+ ],
+ "flags": [
+  {
+   "id": "F1",
+   "scene": "s07",
+   "what": "relative wind",
+   "screen_or_voice": "'thirteen and a half minus ten: three and a half metres per second, or twelve point seven kilometres per hour'",
+   "hand_check": "3.5 × 3.6 = 12.6; the exact 3.536 × 3.6 = 12.73",
+   "note": "screen writes 3.5 m/s ≈ 12.7 km/h (≈, the exact relative wind 3.54 m/s); voice unchanged"
+  },
+  {
+   "id": "F2",
+   "scene": "s15",
+   "what": "speed in km/h",
+   "screen_or_voice": "storyboard visual '14.6 m/s × 3.6 = 52.5 km/h'",
+   "hand_check": "14.6 × 3.6 = 52.56 ≈ 52.6; the exact 14.58 × 3.6 = 52.49",
+   "note": "the screen never writes 14.6 × 3.6; it writes '14.6 m/s ≈ 52.5 km/h' (both rounded from 14.58)"
+  },
+  {
+   "id": "F3",
+   "scene": "s10",
+   "what": "south point, north part",
+   "screen_or_voice": "'(13.5, 8.4) − (13.8, 4.8) = (−0.3, 3.7)'; voice 'three point seven north'",
+   "hand_check": "8.4 − 4.8 = 3.6 with the rounded inputs; the exact 8.44 − 4.75 = 3.69 ≈ 3.7",
+   "note": "screen writes '≈ (−0.3, 3.7)' (≈, house rule for rounded results). Option for the director before the final TTS: say the storm's north part as 'four point seven five' in S6 (8.44 − 4.75 = 3.69 ≈ 3.7). Not applied (the storyboard voice is fixed)."
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s07",
+   "data": "data/mv.json",
+   "eq": "anemometer + advection = dF/dt along the wind",
+   "params": {
+    "dFdt": -0.0011107207345395914,
+    "grad": [
+     0.00011107207345395915
+    ],
+    "velocity": [
+     13.535533905932738
+    ]
+   },
+   "sha256": "e70a584a8f0fe5222fb143737132b9df98395e9684075009e650b120a21b46f2"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s07",
+   "data": "data/mv.json",
+   "eq": "rider: frozen pattern + relative wind",
+   "params": {
+    "dFdt": 0.0,
+    "grad": [
+     0.00011107207345395915
+    ],
+    "velocity": [
+     3.5355339059327378
+    ]
+   },
+   "sha256": "1dd2677c19b38cb43e7598fba4b0c12218217f843eba61222c7a6389d57b5dd8"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.enu_basis",
+   "scene": "s02",
+   "data": "data/mv.json",
+   "eq": "(i, j, k) east, north, up at Brest",
+   "params": {
+    "lat": 48.39,
+    "lon": -4.49
+   },
+   "sha256": "57dcde07cb70223c1a45bcf3d1a950f6f6c91c9ab7ab98fdcd8b6f4b93bd84f6"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s15",
+   "data": "data/mv.json",
+   "eq": "Plymouth – centre at 00 UTC",
+   "params": {
+    "lat1": 49.66739568304401,
+    "lon1": -5.71713099993444,
+    "lat2": 50.25,
+    "lon2": -4.25
+   },
+   "sha256": "f5ede384fab41cdac9ce4ae0fb899238b822c114d06483147b24888320a3188e"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.initial_bearing",
+   "scene": "s15",
+   "data": "data/mv.json",
+   "eq": "bearing centre → Plymouth",
+   "params": {
+    "lat1": 49.66739568304401,
+    "lon1": -5.71713099993444,
+    "lat2": 50.25,
+    "lon2": -4.25
+   },
+   "sha256": "a32df98966e9dee20c948bf168b03f97db500422d532936aa56fff3ea1d3e812"
+  },
+  {
+   "fn": "fluidpy.geo.calculus.chain_rule_rate",
+   "scene": "s14",
+   "data": "data/mv.json",
+   "eq": "∂p/∂τ = ∂p/∂t + U·∇p (the rider is a traveller at U)",
+   "params": {
+    "dFdt": -0.10621636284722216,
+    "grad": [
+     0.005513836724509682,
+     0.0028009652454339365
+    ],
+    "velocity": [
+     13.780631694295396,
+     4.754093840387319
+    ]
+   },
+   "sha256": "72a1a2cdced89621f2843fb763b77d8f2e4e6726ff33432bbf17611dc5521348"
+  }
+ ],
+ "physics_recorded": [
+  {
+   "fn": "fluidpy.core.kinematics.galilean_transform",
+   "scene": "s03",
+   "data": "data/mv.json",
+   "eq": "u′(x′, t′) = u(x′ + U t′, t′) − U",
+   "params": {
+    "u": "uniform 21.5 m/s east",
+    "U": [
+     20.0,
+     0.0
+    ],
+    "x′": [
+     5.0,
+     0.0
+    ],
+    "t′": 3.0
+   },
+   "sha256": null,
+   "recorded": [
+    1.5,
+    0.0
+   ]
+  },
+  {
+   "fn": "fluidpy.core.kinematics.acceleration",
+   "scene": "s05",
+   "data": "data/mv.json",
+   "eq": "Du/Dt in both frames (walker speeding up)",
+   "params": {
+    "u": "21.5 + 0.5 t (ground)",
+    "U": [
+     20.0,
+     0.0
+    ]
+   },
+   "sha256": null,
+   "recorded": [
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "fn": "fluidpy.core.kinematics.acceleration",
+   "scene": "s05/s06",
+   "data": "data/mv.json",
+   "eq": "(K 3.9) in both frames",
+   "params": {
+    "field": "Gaussian-core vortex ×(1 + 0.1 t), U = (20, 0)",
+    "points": 200
+   },
+   "sha256": null,
+   "recorded": [
+    2.95e-07
+   ]
+  },
+  {
+   "fn": "fluidpy.geo.sphere.destination_point",
+   "scene": "s13",
+   "data": "data/mv.json",
+   "eq": "frozen 23 UTC isobars slid along U for 1 h and 2 h",
+   "params": {
+    "bearing": 70.96639826433086,
+    "distance_m": [
+     52479.45833424613,
+     104958.91666849225
+    ]
+   },
+   "sha256": null,
+   "recorded": [
+    52.479,
+    104.959
+   ]
+  }
+ ],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.core.kinematics.acceleration",
+   "scene": "s07",
+   "eq": "ground: ∂u/∂t + u ∂u/∂x (K 3.9)",
+   "params": {
+    "u": "callable",
+    "x": "array (2,), sha256 f0acc2d110f08b4ade01859767a41f1d331af251b5eaa39252014d5e6abe5315",
+    "t": 0.0,
+    "h": 1.0,
+    "ht": 1.0
+   },
+   "output_sha256": "087fa728e70011f390b6535ab0589b0421b20de63b3303bf55b10b0ccedec9db"
+  },
+  {
+   "fn": "fluidpy.core.kinematics.acceleration",
+   "scene": "s07",
+   "eq": "rider: ∂u′/∂t′ + u′ ∂u′/∂x′ (K 3.9, primed)",
+   "params": {
+    "u": "callable",
+    "x": "array (2,), sha256 f0acc2d110f08b4ade01859767a41f1d331af251b5eaa39252014d5e6abe5315",
+    "t": 0.0,
+    "h": 1.0,
+    "ht": 1.0
+   },
+   "output_sha256": "be7ccc8721fddc77e967dd9c7043a28067397e33d2be289df729ed2cfa5cd83c"
+  },
+  {
+   "fn": "fluidpy.core.kinematics.pathline",
+   "scene": "s07",
+   "eq": "the parcel's path dr/dt = u(r, t) (K 3.8)",
+   "params": {
+    "u": "callable",
+    "r0": "array (2,), sha256 f0acc2d110f08b4ade01859767a41f1d331af251b5eaa39252014d5e6abe5315",
+    "t0": 0.0,
+    "t_eval": "array (61,), sha256 eecd6889f7400b841e8332ded543c144aa34517008474e29a62c6e7262325161"
+   },
+   "output_sha256": "344fe7f48c55b551e40daefa6fe7fed2337c2202ade03bd76a2997cd448e61f7"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.track_by_continuity",
+   "scene": "s08",
+   "eq": "storm tracker rule: seed + continuity",
+   "params": {
+    "msl": "array (48, 141, 241), sha256 0ebf57ed9a65ef2cbc18b8c2bc8d2b1e9bf0e5083ee7ce249aced4e5d9495407",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6",
+    "times": "array (48,), sha256 a93c45193ef79cf97552a34a677758e42919e66bc4f1d48c26114fd2117c80ed",
+    "seed": [
+     52.5,
+     1.75
+    ],
+    "seed_time": "array (), sha256 9aeebf34465112603ce33a2eaec14c7f49f0aa07ed90a5b0339246eb088cc6c4",
+    "box_deg": [
+     1.2,
+     2.0
+    ],
+    "max_step_km": 120.0
+   },
+   "output_sha256": "0cb211bf3d924a78ec912fa23406837d885a1bf0a28d5772ea9a87e01b8eefc0"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.translation_velocity",
+   "scene": "s08",
+   "eq": "great-circle distance / time, bearing at the start",
+   "params": {
+    "track": [
+     "['2023-11-01T00:00:00.000000000' '2023-11-01T01:00:00.000000000'\n '2023-11-01T02:00:00.000000000' '2023-11-01T03:00:00.000000000'\n '2023-11-01T04:00:00.000000000' '2023-11-01T05:00:00.000000000'\n '2023-11-01T06:00:00.000000000' '2023-11-01T07:00:00.000000000'\n '2023-11-01T08:00:00.000000000' '2023-11-01T09:00:00.000000000'\n '2023-11-01T10:00:00.000000000' '2023-11-01T11:00:00.000000000'\n '2023-11-01T12:00:00.000000000' '2023-11-01T13:00:00.000000000'\n '2023-11-01T14:00:00.000000000' '2023-11-01T15:00:00.000000000'\n '2023-11-01T16:00:00.000000000' '2023-11-01T17:00:00.000000000'\n '2023-11-01T18:00:00.000000000' '2023-11-01T19:00:00.000000000'\n '2023-11-01T20:00:00.000000000' '2023-11-01T21:00:00.000000000'\n '2023-11-01T22:00:00.000000000' '2023-11-01T23:00:00.000000000'\n '2023-11-02T00:00:00.000000000' '2023-11-02T01:00:00.000000000'\n '2023-11-02T02:00:00.000000000' '2023-11-02T03:00:00.000000000'\n '2023-11-02T04:00:00.000000000' '2023-11-02T05:00:00.000000000'\n '2023-11-02T06:00:00.000000000' '2023-11-02T07:00:00.000000000'\n '2023-11-02T08:00:00.000000000' '2023-11-02T09:00:00.000000000'\n '2023-11-02T10:00:00.000000000' '2023-11-02T11:00:00.000000000'\n '2023-11-02T12:00:00.000000000' '2023-11-02T13:00:00.000000000'\n '2023-11-02T14:00:00.000000000' '2023-11-02T15:00:00.000000000'\n '2023-11-02T16:00:00.000000000' '2023-11-02T17:00:00.000000000'\n '2023-11-02T18:00:00.000000000' '2023-11-02T19:00:00.000000000'\n '2023-11-02T20:00:00.000000000' '2023-11-02T21:00:00.000000000'\n '2023-11-02T22:00:00.000000000' '2023-11-02T23:00:00.000000000']",
+     "[46.68149945 46.7434911  46.83542398 46.97276367 47.0606021  47.18688747\n 47.27287298 47.38507453 47.49137718 47.60172536 47.73278279 47.90667732\n 48.04242431 48.31332    48.4336068  48.58406755 48.69664075 48.76851596\n 48.79536694 48.83917728 48.87374667 49.08168301 49.35480536 49.50866331\n 49.66739568 49.85039376 49.97957667 50.12335476 50.23885426 50.33642437\n 50.51554069 50.77040954 51.06903112 51.39499497 51.87024438 52.26553782\n 52.55718681 52.90279871 53.16548586 53.38294424 53.66755705 53.88951776\n 54.16317983 54.39943284 54.65200944 54.8649185  55.15894618 55.34596835]",
+     "[-31.9474335  -30.51527824 -29.14598806 -27.97738608 -26.65896257\n -25.36222661 -24.10677606 -22.93672977 -21.8582077  -20.61474738\n -19.44003807 -18.21488392 -17.29992795 -16.03362907 -15.19370463\n -14.21740899 -13.40934432 -12.59090899 -11.69166555 -10.67831981\n  -9.19883809  -8.08457251  -7.11530772  -6.34139041  -5.717131\n  -5.0158872   -4.38054521  -3.73130739  -3.06242369  -2.416495\n  -1.50516624  -0.71309152  -0.03959367   0.63904568   1.13704077\n   1.36684099   1.69424367   1.87352448   2.23783642   2.38984606\n   2.70068966   2.83901212   2.98788271   3.1666574    3.19347219\n   3.18668327   3.04195636   2.84752088]",
+     "[98676.41572471 98551.54582228 98471.81755663 98329.16819267\n 98203.66233152 98084.97122156 97941.72131194 97848.5078086\n 97712.20438332 97592.63998861 97463.11446629 97319.93203292\n 97071.55548456 96835.06993648 96605.27669645 96434.03744627\n 96217.7550504  96108.17248011 96068.93596965 96045.47517365\n 95968.63386255 95854.98769142 95595.12941513 95491.81009028\n 95453.31148197 95398.74698391 95374.12834391 95364.66729292\n 95368.57230893 95389.57744029 95402.67178716 95456.68053961\n 95514.74607118 95527.04292405 95533.31817372 95565.85914835\n 95589.40377041 95606.08877229 95595.67588157 95623.01174378\n 95668.88054852 95736.8117958  95798.04284134 95841.49788149\n 95884.37111535 95940.16573632 95934.49759961 95983.21558269]",
+     "[ True  True  True  True  True  True  True  True  True  True  True  True\n  True  True  True  True  True  True  True  True  True  True  True  True\n  True  True  True  True  True  True  True  True  True  True  True  True\n  True  True  True  True  True  True  True  True  True  True  True  True]",
+     "[         nan 109.40603597 104.74691925  90.08258901 100.42597547\n  99.10830347  95.27628487  89.05971593  81.97224981  94.13070959\n  89.1632862   93.49460858  69.76197615  98.60444831  63.46501846\n  73.84064791  60.67803519  60.55455537  65.9541592   74.35404446\n 108.30606081  84.54466455  76.66864732  58.52278747  48.33743764\n  54.32660871  47.70498243  49.03373924  49.32893071  47.15564422\n  67.55996476  62.63083154  57.71847475  59.55154976  63.03930315\n  46.67698427  39.30442904  40.28177113  38.03415145  26.20777888\n  37.7326308   26.30112473  31.94568022  28.71939682  28.1384907\n  23.67841393  33.97165192  24.17267281]",
+     "[False False False False False False False False False False False False\n False False False False False False False False False False False False\n False False False False False False False False False False False False\n False False False False False False False False False False False False]",
+     "[False False False False False False False False False False False False\n False False False False False False False False False False False False\n False False False False False False False False False False False False\n False False False False False False False False False False False False]",
+     36,
+     7.393344381523145,
+     [
+      1.2,
+      2.0
+     ],
+     120.0
+    ],
+    "t1": "array (), sha256 245d1b5a1321ded89ce103191b118030250a57c89fc921e4c3deba90d175afdd",
+    "t2": "array (), sha256 5429451d23957b50fac53f82e81d712aa190a26b15ef9f1459bd43b4f12e843b"
+   },
+   "output_sha256": "3c5a47a0289c88248427050c355a239413939b9306247b7732413c9fefc12989"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s09",
+   "eq": "200-km ring, ground-relative",
+   "params": {
+    "u": "array (141, 241), sha256 151586f55d2e749a8fc86693ef1b9725adb87bac39b6ac19b69fda6bfbf03d1a",
+    "v": "array (141, 241), sha256 00749d422e82bccf3c0a159b4d40362ed09bef648349962eb5534a95de77842a",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6",
+    "centre": [
+     50.123354761964016,
+     -3.7313073913140826
+    ],
+    "radii_km": [
+     200.0
+    ],
+    "n_az": 72
+   },
+   "output_sha256": "ed4262dd0601194c1507269883f7ad5c93230daac4efbd5d0cb198e90f45141d"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s10",
+   "eq": "200-km ring, storm-relative (v − U)",
+   "params": {
+    "u": "array (141, 241), sha256 92814462b99c207179b912179996ca4977b8bfc4341650d259ec97b41ff783db",
+    "v": "array (141, 241), sha256 fa195c1881e228614632fe2d80282993046fc1dd9a60959407d9710521ff4378",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6",
+    "centre": [
+     50.123354761964016,
+     -3.7313073913140826
+    ],
+    "radii_km": [
+     200.0
+    ],
+    "n_az": 72
+   },
+   "output_sha256": "01273a6fc5aa95c924c3f60cdedc968b06ac393c7c2c5f9bd2f4ecef2a32329e"
+  },
+  {
+   "fn": "fluidpy.diag.cyclone.storm_relative_wind",
+   "scene": "s11",
+   "eq": "a uniform wind U on the same ring",
+   "params": {
+    "u": "array (141, 241), sha256 81f547579d7a9468a7debf4511d323984b4ee5a75d950f079c18a86bba0555a4",
+    "v": "array (141, 241), sha256 a2c7001200a84df492ea0b525dd08ce91e6d36402899056a7a2caa2d18a6c9e0",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6",
+    "centre": [
+     50.123354761964016,
+     -3.7313073913140826
+    ],
+    "radii_km": [
+     200.0
+    ],
+    "n_az": 72
+   },
+   "output_sha256": "432b86fd391122d57c1f0bfaaa54e39803398bf160f474be76cd1585f94072b6"
+  },
+  {
+   "fn": "fluidpy.core.coords.velocity_components",
+   "scene": "s12",
+   "eq": "a uniform wind on a flat circle: u_r, u_θ",
+   "params": {
+    "u_cart": "array (2, 72), sha256 97ba185d7b47caff67e153f0d6b872f0f08601578088f43e278297c86b8ad390",
+    "x": "array (2, 72), sha256 37dabca9c01c31baf45e53568d3d5568649cf7fce5144aae5ce73cdfe88f2772",
+    "system": "polar"
+   },
+   "output_sha256": "8886b45f308ea8b6504c31afab35743bcc26c8f7365b12e6882769dee473bd58"
+  },
+  {
+   "fn": "fluidpy.diag.trajectories.advect_on_sphere",
+   "scene": "s08",
+   "eq": "tracks through the frozen 03 UTC 10-m wind",
+   "params": {
+    "u": "array (65, 89), sha256 4ad276790cd08b7f8f64d91a407fdd44c9cfb5053818b44a55a30de9df946c26",
+    "v": "array (65, 89), sha256 b78305f92adb1b21a64232cfd035fcaa0dba32e091227159a4cb610d97d15dda",
+    "lat": "array (65,), sha256 4fb23801f6b644535c39507801945e6f1b4d382f07c352d8ca421be93bab401c",
+    "lon": "array (89,), sha256 bc387ce2baf59d698acc4d3b2368b943e6409a2bca27819ad6ee98396121e4da",
+    "seeds_lat": "array (260,), sha256 1dd71c68242d909c5af5493b9358d07d93fad644fe6363429e769c2b05156078",
+    "seeds_lon": "array (260,), sha256 4729d35f42737fa4928e72fc401d0473e728f2081947f597738953bfc15258fa",
+    "dt": 600.0,
+    "nsteps": 47
+   },
+   "output_sha256": "ca56d8b0f5adffef3d63c5bd12835db3a6cfc9ff5af64c842c5521add87bb3c8"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.gradient",
+   "scene": "s15",
+   "eq": "∇p = (1/(a cos φ) ∂p/∂λ, (1/a) ∂p/∂φ)",
+   "params": {
+    "F": "array (141, 241), sha256 9a28e8f4b49b5a06fb2208aaff4745007d180f333eab67d82c509f2f649b0290",
+    "lat": "array (141,), sha256 c3fc01f94cd798384a543afffb152bd2564cccff8552a3e540e0f398cb45af79",
+    "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6"
+   },
+   "output_sha256": "e6daf15199b4c1c4db625b6911fc07de703b113c45ecbe279b6c6d58209ebad1"
+  }
+ ]
+}

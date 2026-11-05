@@ -1,0 +1,1983 @@
+{
+ "voice": "af_bella",
+ "speed": 1.0,
+ "fps": 30,
+ "sample_rate": 24000,
+ "gaps": {
+  "sentence": 0.35,
+  "scene": 0.8,
+  "lead": 0.3,
+  "tail": 0.3
+ },
+ "provisional": "made from the measured dry runs (dryrun1 / splice2 / splice3) by checks/make_timing.py; the final TTS replaces it",
+ "scenes": [
+  {
+   "id": "s00_title",
+   "start": 0.3,
+   "sentences": [
+    {
+     "text": "In this video, we'll learn moving frames the easy way, and see how meteorology uses them to understand a moving storm's winds, and what a barometer sees as the storm passes.",
+     "audio_text": null,
+     "start": 0.3,
+     "end": 12.45,
+     "dur": 12.15,
+     "start_frame": 9,
+     "end_frame": 374
+    }
+   ],
+   "end": 13.25,
+   "start_frame": 9,
+   "end_frame": 398,
+   "timing_source": "splice3:M_s00_title"
+  },
+  {
+   "id": "s01_hook",
+   "start": 13.25,
+   "sentences": [
+    {
+     "text": "Imagine riding along with a storm as it crosses the English Channel.",
+     "audio_text": null,
+     "start": 13.25,
+     "end": 18.05,
+     "dur": 4.8,
+     "start_frame": 398,
+     "end_frame": 542
+    },
+    {
+     "text": "Would its winds look the same to you as they do to someone standing on the shore?",
+     "audio_text": null,
+     "start": 18.4,
+     "end": 23.475,
+     "dur": 5.075,
+     "start_frame": 552,
+     "end_frame": 704
+    },
+    {
+     "text": "This is the fifth of seven parts on coordinates.",
+     "audio_text": null,
+     "start": 23.825,
+     "end": 27.25,
+     "dur": 3.425,
+     "start_frame": 715,
+     "end_frame": 818
+    },
+    {
+     "text": "Let's see what changes, and what doesn't, when the frame itself moves.",
+     "audio_text": null,
+     "start": 27.6,
+     "end": 32.225,
+     "dur": 4.625,
+     "start_frame": 828,
+     "end_frame": 967
+    },
+    {
+     "text": "Then let's use it on a real storm, and on a barometer it passed.",
+     "audio_text": null,
+     "start": 32.575,
+     "end": 37.025,
+     "dur": 4.45,
+     "start_frame": 977,
+     "end_frame": 1111
+    }
+   ],
+   "end": 37.825,
+   "start_frame": 398,
+   "end_frame": 1135,
+   "timing_source": "splice3:M_s01_hook"
+  },
+  {
+   "id": "s02_part4_recap",
+   "start": 37.825,
+   "sentences": [
+    {
+     "text": "In Part 4, we stood at a weather station and used its own three arrows: i hat east, j hat north and k hat up.",
+     "audio_text": null,
+     "start": 37.825,
+     "end": 46.15,
+     "dur": 8.325,
+     "start_frame": 1135,
+     "end_frame": 1385
+    },
+    {
+     "text": "The wind arrow is bold v, which is u i hat, plus v j hat, plus w k hat.",
+     "audio_text": null,
+     "start": 46.5,
+     "end": 53.0,
+     "dur": 6.5,
+     "start_frame": 1395,
+     "end_frame": 1590
+    },
+    {
+     "text": "We turned those arrows to fit a coast, and the parts of the wind along the new arrows were dot products.",
+     "audio_text": null,
+     "start": 53.35,
+     "end": 59.825,
+     "dur": 6.475,
+     "start_frame": 1601,
+     "end_frame": 1795
+    },
+    {
+     "text": "Then we saw that the arrows turn by themselves as air moves over the round Earth.",
+     "audio_text": null,
+     "start": 60.175,
+     "end": 65.8,
+     "dur": 5.625,
+     "start_frame": 1805,
+     "end_frame": 1974
+    },
+    {
+     "text": "From the derivatives movie, we also have the rate a traveller feels: the change at a fixed place, plus the traveller's speed times the slope.",
+     "audio_text": null,
+     "start": 66.15,
+     "end": 75.2,
+     "dur": 9.05,
+     "start_frame": 1985,
+     "end_frame": 2256
+    },
+    {
+     "text": "When the traveller is an air parcel, a small volume of air moving with the wind, we write that rate as capital D by D t.",
+     "audio_text": null,
+     "start": 75.55,
+     "end": 83.95,
+     "dur": 8.4,
+     "start_frame": 2266,
+     "end_frame": 2518
+    },
+    {
+     "text": "Today, the frame itself moves.",
+     "audio_text": null,
+     "start": 84.3,
+     "end": 86.825,
+     "dur": 2.525,
+     "start_frame": 2529,
+     "end_frame": 2605
+    }
+   ],
+   "end": 87.625,
+   "start_frame": 1135,
+   "end_frame": 2629,
+   "timing_source": "splice3:M_s02_part4_recap"
+  },
+  {
+   "id": "s03_train",
+   "start": 87.625,
+   "sentences": [
+    {
+     "text": "Let's start with the simplest moving frame.",
+     "audio_text": null,
+     "start": 87.625,
+     "end": 90.775,
+     "dur": 3.15,
+     "start_frame": 2629,
+     "end_frame": 2723
+    },
+    {
+     "text": "Imagine you're on a train gliding along a straight track at a steady twenty metres per second.",
+     "audio_text": null,
+     "start": 91.125,
+     "end": 97.425,
+     "dur": 6.3,
+     "start_frame": 2734,
+     "end_frame": 2923
+    },
+    {
+     "text": "You walk towards the front at one and a half metres per second.",
+     "audio_text": null,
+     "start": 97.775,
+     "end": 101.725,
+     "dur": 3.95,
+     "start_frame": 2933,
+     "end_frame": 3052
+    },
+    {
+     "text": "Someone standing beside the track sees you moving at twenty plus one and a half: twenty one and a half metres per second.",
+     "audio_text": null,
+     "start": 102.075,
+     "end": 109.5,
+     "dur": 7.425,
+     "start_frame": 3062,
+     "end_frame": 3285,
+     "beat": true
+    },
+    {
+     "text": "Why do the speeds add?",
+     "audio_text": null,
+     "start": 111.0,
+     "end": 112.975,
+     "dur": 1.975,
+     "start_frame": 3330,
+     "end_frame": 3389
+    },
+    {
+     "text": "Let's measure positions along the track.",
+     "audio_text": null,
+     "start": 113.325,
+     "end": 116.225,
+     "dur": 2.9,
+     "start_frame": 3400,
+     "end_frame": 3487
+    },
+    {
+     "text": "The person beside the track uses x, measured from the station.",
+     "audio_text": null,
+     "start": 116.575,
+     "end": 121.125,
+     "dur": 4.55,
+     "start_frame": 3497,
+     "end_frame": 3634
+    },
+    {
+     "text": "You use x prime, measured from the back of the train.",
+     "audio_text": null,
+     "start": 121.475,
+     "end": 125.25,
+     "dur": 3.775,
+     "start_frame": 3644,
+     "end_frame": 3757
+    },
+    {
+     "text": "The back of the train passed the station at time zero, and it moves at capital U, twenty metres per second.",
+     "audio_text": null,
+     "start": 125.6,
+     "end": 132.875,
+     "dur": 7.275,
+     "start_frame": 3768,
+     "end_frame": 3986
+    },
+    {
+     "text": "So after a time t, the back of the train is capital U times t from the station.",
+     "audio_text": null,
+     "start": 133.225,
+     "end": 138.95,
+     "dur": 5.725,
+     "start_frame": 3997,
+     "end_frame": 4168,
+     "beat": true
+    },
+    {
+     "text": "Your distance from the station is that, plus your distance from the back of the train: x equals x prime plus capital U t.",
+     "audio_text": null,
+     "start": 140.45,
+     "end": 148.775,
+     "dur": 8.325,
+     "start_frame": 4213,
+     "end_frame": 4463
+    },
+    {
+     "text": "And both clocks show the same time: t prime equals t.",
+     "audio_text": null,
+     "start": 149.125,
+     "end": 153.375,
+     "dur": 4.25,
+     "start_frame": 4474,
+     "end_frame": 4601
+    }
+   ],
+   "end": 154.175,
+   "start_frame": 2629,
+   "end_frame": 4625,
+   "timing_source": "splice3:M_s03_train"
+  },
+  {
+   "id": "s04_velocities_add",
+   "start": 154.175,
+   "sentences": [
+    {
+     "text": "Next come two short derivations: why speeds add, and why accelerations don't change.",
+     "audio_text": null,
+     "start": 154.175,
+     "end": 160.675,
+     "dur": 6.5,
+     "start_frame": 4625,
+     "end_frame": 4820
+    },
+    {
+     "text": "They're for those who like every step.",
+     "audio_text": null,
+     "start": 161.025,
+     "end": 163.6,
+     "dur": 2.575,
+     "start_frame": 4831,
+     "end_frame": 4908
+    },
+    {
+     "text": "If not, skip ahead to the time on screen.",
+     "audio_text": null,
+     "start": 163.95,
+     "end": 167.15,
+     "dur": 3.2,
+     "start_frame": 4918,
+     "end_frame": 5014
+    },
+    {
+     "text": "Now let's get the speeds from the positions.",
+     "audio_text": null,
+     "start": 167.5,
+     "end": 170.525,
+     "dur": 3.025,
+     "start_frame": 5025,
+     "end_frame": 5116
+    },
+    {
+     "text": "In a short time, delta t, your place on the train changes by delta x prime, and the back of the train moves on by capital U delta t.",
+     "audio_text": null,
+     "start": 170.875,
+     "end": 180.85,
+     "dur": 9.975,
+     "start_frame": 5126,
+     "end_frame": 5425
+    },
+    {
+     "text": "So, step one: delta x equals delta x prime, plus capital U delta t.",
+     "audio_text": null,
+     "start": 181.2,
+     "end": 187.2,
+     "dur": 6.0,
+     "start_frame": 5436,
+     "end_frame": 5616,
+     "beat": true
+    },
+    {
+     "text": "Step two: divide by delta t.",
+     "audio_text": null,
+     "start": 188.7,
+     "end": 191.625,
+     "dur": 2.925,
+     "start_frame": 5661,
+     "end_frame": 5749
+    },
+    {
+     "text": "Delta x over delta t is the speed seen from the ground, small u.",
+     "audio_text": null,
+     "start": 191.975,
+     "end": 197.225,
+     "dur": 5.25,
+     "start_frame": 5759,
+     "end_frame": 5917
+    },
+    {
+     "text": "Delta x prime over delta t is the speed seen on the train, u prime.",
+     "audio_text": null,
+     "start": 197.575,
+     "end": 203.175,
+     "dur": 5.6,
+     "start_frame": 5927,
+     "end_frame": 6095
+    },
+    {
+     "text": "So u equals u prime plus capital U.",
+     "audio_text": null,
+     "start": 203.525,
+     "end": 206.7,
+     "dur": 3.175,
+     "start_frame": 6106,
+     "end_frame": 6201,
+     "beat": true
+    },
+    {
+     "text": "With our numbers, one and a half plus twenty is twenty one and a half.",
+     "audio_text": null,
+     "start": 208.2,
+     "end": 212.875,
+     "dur": 4.675,
+     "start_frame": 6246,
+     "end_frame": 6386,
+     "beat": true
+    },
+    {
+     "text": "Switching between two frames like this, moving at a steady velocity without turning, is called a Galilean transformation, after Galileo Galilei.",
+     "audio_text": null,
+     "start": 214.375,
+     "end": 224.525,
+     "dur": 10.15,
+     "start_frame": 6431,
+     "end_frame": 6736
+    },
+    {
+     "text": "In three dimensions, the same holds for each part: bold v equals bold capital U plus bold v prime.",
+     "audio_text": null,
+     "start": 224.875,
+     "end": 232.65,
+     "dur": 7.775,
+     "start_frame": 6746,
+     "end_frame": 6979
+    }
+   ],
+   "end": 233.45,
+   "start_frame": 4625,
+   "end_frame": 7003,
+   "timing_source": "splice2:s29_velocities_add"
+  },
+  {
+   "id": "s05_accel_same",
+   "start": 233.45,
+   "sentences": [
+    {
+     "text": "Here's the beautiful part.",
+     "audio_text": null,
+     "start": 233.45,
+     "end": 235.6,
+     "dur": 2.15,
+     "start_frame": 7003,
+     "end_frame": 7068
+    },
+    {
+     "text": "What happens to accelerations?",
+     "audio_text": null,
+     "start": 235.95,
+     "end": 238.45,
+     "dur": 2.5,
+     "start_frame": 7078,
+     "end_frame": 7153
+    },
+    {
+     "text": "Let's follow the same steps, one move at a time.",
+     "audio_text": null,
+     "start": 238.8,
+     "end": 242.425,
+     "dur": 3.625,
+     "start_frame": 7164,
+     "end_frame": 7273
+    },
+    {
+     "text": "Step one: at every moment, u equals capital U plus u prime.",
+     "audio_text": null,
+     "start": 242.775,
+     "end": 247.65,
+     "dur": 4.875,
+     "start_frame": 7283,
+     "end_frame": 7429
+    },
+    {
+     "text": "Step two: a short time later, each of them has changed a little, and the sum still holds.",
+     "audio_text": null,
+     "start": 248.0,
+     "end": 254.1,
+     "dur": 6.1,
+     "start_frame": 7440,
+     "end_frame": 7623
+    },
+    {
+     "text": "So delta u equals delta capital U plus delta u prime: the change of a sum is the sum of the changes.",
+     "audio_text": null,
+     "start": 254.45,
+     "end": 262.4,
+     "dur": 7.95,
+     "start_frame": 7633,
+     "end_frame": 7872,
+     "beat": true
+    },
+    {
+     "text": "Step three: divide by delta t.",
+     "audio_text": null,
+     "start": 263.9,
+     "end": 266.875,
+     "dur": 2.975,
+     "start_frame": 7917,
+     "end_frame": 8006
+    },
+    {
+     "text": "Step four: let delta t shrink, as in the derivatives movie.",
+     "audio_text": null,
+     "start": 267.225,
+     "end": 271.85,
+     "dur": 4.625,
+     "start_frame": 8017,
+     "end_frame": 8155
+    },
+    {
+     "text": "That gives d u by d t equals d capital U by d t, plus d u prime by d t.",
+     "audio_text": null,
+     "start": 272.2,
+     "end": 278.85,
+     "dur": 6.65,
+     "start_frame": 8166,
+     "end_frame": 8365,
+     "beat": true
+    },
+    {
+     "text": "Step five: the train's speed never changes, so d capital U by d t is zero.",
+     "audio_text": null,
+     "start": 280.35,
+     "end": 286.575,
+     "dur": 6.225,
+     "start_frame": 8410,
+     "end_frame": 8597
+    },
+    {
+     "text": "So d u by d t equals d u prime by d t: the acceleration is the same in both frames.",
+     "audio_text": null,
+     "start": 286.925,
+     "end": 294.55,
+     "dur": 7.625,
+     "start_frame": 8608,
+     "end_frame": 8836,
+     "beat": true
+    },
+    {
+     "text": "For example, if you speed up from one and a half to two metres per second in one second, the person beside the track sees you go from twenty one and a half to twenty two, in the same second.",
+     "audio_text": null,
+     "start": 296.05,
+     "end": 307.45,
+     "dur": 11.4,
+     "start_frame": 8882,
+     "end_frame": 9224,
+     "beat": true
+    },
+    {
+     "text": "Drop a ball on a smooth train, and it speeds up downwards by nine point eight metres per second every second, for you, and for the person beside the track.",
+     "audio_text": null,
+     "start": 308.95,
+     "end": 319.225,
+     "dur": 10.275,
+     "start_frame": 9268,
+     "end_frame": 9577
+    },
+    {
+     "text": "And since Newton's law says force equals mass times acceleration, the same forces explain the motion in both frames.",
+     "audio_text": null,
+     "start": 319.575,
+     "end": 327.65,
+     "dur": 8.075,
+     "start_frame": 9587,
+     "end_frame": 9830
+    },
+    {
+     "text": "If you skipped, here's what to keep: in a frame moving steadily in a straight line, speeds change by the frame's own speed, but accelerations, and so forces, stay the same.",
+     "audio_text": null,
+     "start": 328.0,
+     "end": 339.275,
+     "dur": 11.275,
+     "start_frame": 9840,
+     "end_frame": 10178
+    }
+   ],
+   "end": 340.075,
+   "start_frame": 7003,
+   "end_frame": 10202,
+   "timing_source": "splice2:s30_accel_same"
+  },
+  {
+   "id": "s06_parcel_accel",
+   "start": 340.075,
+   "sentences": [
+    {
+     "text": "In a fluid, we follow an air parcel: a small volume of air that moves with the wind.",
+     "audio_text": null,
+     "start": 340.075,
+     "end": 346.325,
+     "dur": 6.25,
+     "start_frame": 10202,
+     "end_frame": 10390
+    },
+    {
+     "text": "In the derivatives movie, we found the rate that an air parcel's own thermometer reads.",
+     "audio_text": null,
+     "start": 346.675,
+     "end": 352.375,
+     "dur": 5.7,
+     "start_frame": 10400,
+     "end_frame": 10571
+    },
+    {
+     "text": "Capital D T by D t equals partial capital T by partial small t, plus bold v dot grad T.",
+     "audio_text": null,
+     "start": 352.725,
+     "end": 360.825,
+     "dur": 8.1,
+     "start_frame": 10582,
+     "end_frame": 10825
+    },
+    {
+     "text": "The first part is the change at one fixed place.",
+     "audio_text": null,
+     "start": 361.175,
+     "end": 364.7,
+     "dur": 3.525,
+     "start_frame": 10835,
+     "end_frame": 10941
+    },
+    {
+     "text": "The second is advection: the change from being carried to places where the temperature is different.",
+     "audio_text": null,
+     "start": 365.05,
+     "end": 371.55,
+     "dur": 6.5,
+     "start_frame": 10952,
+     "end_frame": 11147
+    },
+    {
+     "text": "The eastward wind, u, is just another number the parcel carries along, so we can put u in place of T.",
+     "audio_text": null,
+     "start": 371.9,
+     "end": 379.45,
+     "dur": 7.55,
+     "start_frame": 11157,
+     "end_frame": 11384
+    },
+    {
+     "text": "Capital D u by D t equals partial u by partial t, plus bold v dot grad u.",
+     "audio_text": null,
+     "start": 379.8,
+     "end": 386.625,
+     "dur": 6.825,
+     "start_frame": 11394,
+     "end_frame": 11599
+    },
+    {
+     "text": "The same goes for v and for w.",
+     "audio_text": null,
+     "start": 386.975,
+     "end": 390.0,
+     "dur": 3.025,
+     "start_frame": 11609,
+     "end_frame": 11700,
+     "beat": true
+    },
+    {
+     "text": "So the air parcel's acceleration is a local change at a fixed place, plus advection.",
+     "audio_text": null,
+     "start": 391.5,
+     "end": 397.725,
+     "dur": 6.225,
+     "start_frame": 11745,
+     "end_frame": 11932
+    },
+    {
+     "text": "Now here's the train's lesson, written for a fluid.",
+     "audio_text": null,
+     "start": 398.075,
+     "end": 401.7,
+     "dur": 3.625,
+     "start_frame": 11942,
+     "end_frame": 12051
+    },
+    {
+     "text": "On the left is the parcel's acceleration, worked out by someone on the ground.",
+     "audio_text": null,
+     "start": 402.05,
+     "end": 407.4,
+     "dur": 5.35,
+     "start_frame": 12062,
+     "end_frame": 12222
+    },
+    {
+     "text": "On the right is the same parcel's acceleration, worked out by someone riding in a frame that moves at capital U, with primes on everything.",
+     "audio_text": null,
+     "start": 407.75,
+     "end": 417.275,
+     "dur": 9.525,
+     "start_frame": 12233,
+     "end_frame": 12518
+    },
+    {
+     "text": "They're equal, because the acceleration is the same in both frames.",
+     "audio_text": null,
+     "start": 417.625,
+     "end": 422.425,
+     "dur": 4.8,
+     "start_frame": 12529,
+     "end_frame": 12673
+    },
+    {
+     "text": "But each piece on its own can be different.",
+     "audio_text": null,
+     "start": 422.775,
+     "end": 425.625,
+     "dur": 2.85,
+     "start_frame": 12683,
+     "end_frame": 12769
+    },
+    {
+     "text": "Let's see that with numbers.",
+     "audio_text": null,
+     "start": 425.975,
+     "end": 428.075,
+     "dur": 2.1,
+     "start_frame": 12779,
+     "end_frame": 12842
+    }
+   ],
+   "end": 428.875,
+   "start_frame": 10202,
+   "end_frame": 12866,
+   "timing_source": "dryrun1:s31_parcel_accel"
+  },
+  {
+   "id": "s07_sliding_pattern",
+   "start": 428.875,
+   "sentences": [
+    {
+     "text": "Picture a pattern of stronger and weaker winds, two hundred kilometres from one gust to the next, all blowing east.",
+     "audio_text": null,
+     "start": 428.875,
+     "end": 436.6,
+     "dur": 7.725,
+     "start_frame": 12866,
+     "end_frame": 13098
+    },
+    {
+     "text": "The whole pattern slides east at a steady ten metres per second, without changing its shape.",
+     "audio_text": null,
+     "start": 436.95,
+     "end": 442.975,
+     "dur": 6.025,
+     "start_frame": 13109,
+     "end_frame": 13289
+    },
+    {
+     "text": "Take one moment, at a place where the wind is thirteen and a half metres per second, and is getting stronger towards the east by zero point one one one metres per second for every kilometre.",
+     "audio_text": null,
+     "start": 443.325,
+     "end": 455.425,
+     "dur": 12.1,
+     "start_frame": 13300,
+     "end_frame": 13663,
+     "beat": true
+    },
+    {
+     "text": "First, ride with the pattern, at capital U, ten metres per second.",
+     "audio_text": null,
+     "start": 456.925,
+     "end": 462.0,
+     "dur": 5.075,
+     "start_frame": 13708,
+     "end_frame": 13860
+    },
+    {
+     "text": "To you, the pattern is frozen, so the local change is zero.",
+     "audio_text": null,
+     "start": 462.35,
+     "end": 466.9,
+     "dur": 4.55,
+     "start_frame": 13871,
+     "end_frame": 14007
+    },
+    {
+     "text": "Relative to you, the air at that place moves east at thirteen and a half minus ten: three and a half metres per second, or twelve point seven kilometres per hour.",
+     "audio_text": null,
+     "start": 467.25,
+     "end": 477.85,
+     "dur": 10.6,
+     "start_frame": 14018,
+     "end_frame": 14336
+    },
+    {
+     "text": "It's carried into stronger wind, so the advection is twelve point seven kilometres per hour, times zero point one one one metres per second per kilometre.",
+     "audio_text": null,
+     "start": 478.2,
+     "end": 488.725,
+     "dur": 10.525,
+     "start_frame": 14346,
+     "end_frame": 14662
+    },
+    {
+     "text": "That's plus one point four metres per second, every hour.",
+     "audio_text": null,
+     "start": 489.075,
+     "end": 493.375,
+     "dur": 4.3,
+     "start_frame": 14672,
+     "end_frame": 14801,
+     "beat": true
+    },
+    {
+     "text": "Now stand on the ground, beside an anemometer, a wind meter that never moves.",
+     "audio_text": null,
+     "start": 494.875,
+     "end": 500.7,
+     "dur": 5.825,
+     "start_frame": 14846,
+     "end_frame": 15021
+    },
+    {
+     "text": "The pattern slides past at thirty six kilometres per hour, bringing the weaker wind from the west.",
+     "audio_text": null,
+     "start": 501.05,
+     "end": 507.7,
+     "dur": 6.65,
+     "start_frame": 15032,
+     "end_frame": 15231
+    },
+    {
+     "text": "So the anemometer sees a local change of minus thirty six times zero point one one one: minus four point zero metres per second, every hour.",
+     "audio_text": null,
+     "start": 508.05,
+     "end": 518.45,
+     "dur": 10.4,
+     "start_frame": 15242,
+     "end_frame": 15554,
+     "beat": true
+    },
+    {
+     "text": "The advection, with the full wind of forty eight point seven kilometres per hour, is plus five point four.",
+     "audio_text": null,
+     "start": 519.95,
+     "end": 527.35,
+     "dur": 7.4,
+     "start_frame": 15599,
+     "end_frame": 15821,
+     "beat": true
+    },
+    {
+     "text": "Add them: minus four point zero, plus five point four, is plus one point four, the same as for the rider.",
+     "audio_text": null,
+     "start": 528.85,
+     "end": 536.575,
+     "dur": 7.725,
+     "start_frame": 15866,
+     "end_frame": 16097,
+     "beat": true
+    },
+    {
+     "text": "So each piece depends on who measures it, but their sum, the air parcel's acceleration, doesn't.",
+     "audio_text": null,
+     "start": 538.075,
+     "end": 544.8,
+     "dur": 6.725,
+     "start_frame": 16142,
+     "end_frame": 16344
+    },
+    {
+     "text": "That only works for a frame moving steadily in a straight line.",
+     "audio_text": null,
+     "start": 545.15,
+     "end": 549.225,
+     "dur": 4.075,
+     "start_frame": 16355,
+     "end_frame": 16477
+    },
+    {
+     "text": "A frame that turns, like the spinning Earth, adds the Coriolis and centrifugal effects, as we saw in the cross product movies.",
+     "audio_text": "A frame that turns, like the spinning Earth, adds the [Coriolis](/kˌɔɹiˈOlɪs/) and centrifugal effects, as we saw in the cross product movies.",
+     "start": 549.575,
+     "end": 558.325,
+     "dur": 8.75,
+     "start_frame": 16487,
+     "end_frame": 16750
+    },
+    {
+     "text": "We'll build all of this fully in a later movie: The material derivative.",
+     "audio_text": null,
+     "start": 558.675,
+     "end": 563.35,
+     "dur": 4.675,
+     "start_frame": 16760,
+     "end_frame": 16901
+    }
+   ],
+   "end": 564.15,
+   "start_frame": 12866,
+   "end_frame": 16925,
+   "timing_source": "dryrun1:s32_sliding_pattern"
+  },
+  {
+   "id": "s08_ciaran",
+   "start": 564.15,
+   "sentences": [
+    {
+     "text": "Now a real moving storm.",
+     "audio_text": null,
+     "start": 564.15,
+     "end": 566.35,
+     "dur": 2.2,
+     "start_frame": 16925,
+     "end_frame": 16991
+    },
+    {
+     "text": "Storm Ciarán crossed the English Channel in the night from the first to the second of November, twenty twenty three.",
+     "audio_text": "Storm Keer-awn crossed the English Channel in the night from the first to the second of November, twenty twenty three.",
+     "start": 566.7,
+     "end": 573.75,
+     "dur": 7.05,
+     "start_frame": 17001,
+     "end_frame": 17213
+    },
+    {
+     "text": "To follow it, we find its lowest pressure, then look for the lowest pressure close by an hour later, and so on, hour by hour.",
+     "audio_text": null,
+     "start": 574.1,
+     "end": 582.675,
+     "dur": 8.575,
+     "start_frame": 17223,
+     "end_frame": 17480
+    },
+    {
+     "text": "At midnight, universal time, its centre was just off the tip of Cornwall, at nine hundred and fifty four and a half hectopascals.",
+     "audio_text": "At midnight, universal time, its centre was just off the tip of Cornwall, at nine hundred and fifty four and a half [hectopascals](/hˈɛktəpˌæskᵊlz/).",
+     "start": 583.025,
+     "end": 592.175,
+     "dur": 9.15,
+     "start_frame": 17491,
+     "end_frame": 17765,
+     "beat": true
+    },
+    {
+     "text": "Between midnight and six in the morning, the centre moved towards a bearing of seventy one degrees, east-north-east, at about fourteen point six metres per second, roughly fifteen.",
+     "audio_text": null,
+     "start": 593.675,
+     "end": 605.575,
+     "dur": 11.9,
+     "start_frame": 17810,
+     "end_frame": 18167,
+     "beat": true
+    },
+    {
+     "text": "With Part 1's bearing rule, its east part is fourteen point six times sine seventy one degrees, about thirteen point eight.",
+     "audio_text": null,
+     "start": 607.075,
+     "end": 615.575,
+     "dur": 8.5,
+     "start_frame": 18212,
+     "end_frame": 18467
+    },
+    {
+     "text": "Its north part is fourteen point six times cosine seventy one degrees, about four point eight.",
+     "audio_text": null,
+     "start": 615.925,
+     "end": 622.625,
+     "dur": 6.7,
+     "start_frame": 18478,
+     "end_frame": 18679,
+     "beat": true
+    },
+    {
+     "text": "We'll call this storm velocity bold capital U.",
+     "audio_text": null,
+     "start": 624.125,
+     "end": 627.6,
+     "dur": 3.475,
+     "start_frame": 18724,
+     "end_frame": 18828
+    }
+   ],
+   "end": 628.4,
+   "start_frame": 16925,
+   "end_frame": 18852,
+   "timing_source": "dryrun1:s33_ciaran"
+  },
+  {
+   "id": "s09_lopsided",
+   "start": 628.4,
+   "sentences": [
+    {
+     "text": "Let's look at the winds on a ring two hundred kilometres from the centre, at three in the morning.",
+     "audio_text": null,
+     "start": 628.4,
+     "end": 634.425,
+     "dur": 6.025,
+     "start_frame": 18852,
+     "end_frame": 19033
+    },
+    {
+     "text": "As in Part 1, we split each wind into its part round the ring and its part in or out.",
+     "audio_text": null,
+     "start": 634.775,
+     "end": 640.875,
+     "dur": 6.1,
+     "start_frame": 19043,
+     "end_frame": 19226
+    },
+    {
+     "text": "Seen from the ground, the round part averaged about eighteen metres per second on the storm's southern side, but only about seven on its northern side.",
+     "audio_text": null,
+     "start": 641.225,
+     "end": 651.05,
+     "dur": 9.825,
+     "start_frame": 19237,
+     "end_frame": 19532,
+     "beat": true
+    },
+    {
+     "text": "Why so lopsided?",
+     "audio_text": null,
+     "start": 652.55,
+     "end": 654.6,
+     "dur": 2.05,
+     "start_frame": 19577,
+     "end_frame": 19638
+    },
+    {
+     "text": "The storm spins anticlockwise as seen from above, as northern storms do.",
+     "audio_text": null,
+     "start": 654.95,
+     "end": 660.475,
+     "dur": 5.525,
+     "start_frame": 19649,
+     "end_frame": 19814
+    },
+    {
+     "text": "On its southern side, the spin blows towards the east, the same way the storm moves, so the two add up.",
+     "audio_text": null,
+     "start": 660.825,
+     "end": 667.85,
+     "dur": 7.025,
+     "start_frame": 19825,
+     "end_frame": 20036
+    },
+    {
+     "text": "On its northern side, the spin blows towards the west, against the motion, so they partly cancel.",
+     "audio_text": null,
+     "start": 668.2,
+     "end": 675.15,
+     "dur": 6.95,
+     "start_frame": 20046,
+     "end_frame": 20255
+    }
+   ],
+   "end": 675.95,
+   "start_frame": 18852,
+   "end_frame": 20279,
+   "timing_source": "dryrun1:s34_lopsided"
+  },
+  {
+   "id": "s10_storm_relative",
+   "start": 675.95,
+   "sentences": [
+    {
+     "text": "Now let's ask what the wind looks like to someone riding along with the storm's centre, at bold capital U.",
+     "audio_text": null,
+     "start": 675.95,
+     "end": 682.675,
+     "dur": 6.725,
+     "start_frame": 20279,
+     "end_frame": 20480
+    },
+    {
+     "text": "That's called the storm-relative wind.",
+     "audio_text": null,
+     "start": 683.025,
+     "end": 685.7,
+     "dur": 2.675,
+     "start_frame": 20491,
+     "end_frame": 20571
+    },
+    {
+     "text": "From the Galilean rule, the ground wind is bold capital U plus the rider's wind, bold v prime.",
+     "audio_text": null,
+     "start": 686.05,
+     "end": 693.375,
+     "dur": 7.325,
+     "start_frame": 20582,
+     "end_frame": 20801
+    },
+    {
+     "text": "So the rider's wind is the ground wind minus bold capital U.",
+     "audio_text": null,
+     "start": 693.725,
+     "end": 698.425,
+     "dur": 4.7,
+     "start_frame": 20812,
+     "end_frame": 20953,
+     "beat": true
+    },
+    {
+     "text": "Taking an arrow away is the same as adding that arrow turned to point the opposite way.",
+     "audio_text": null,
+     "start": 699.925,
+     "end": 705.8,
+     "dur": 5.875,
+     "start_frame": 20998,
+     "end_frame": 21174
+    },
+    {
+     "text": "Take a point in the middle of the southern side.",
+     "audio_text": null,
+     "start": 706.15,
+     "end": 709.425,
+     "dur": 3.275,
+     "start_frame": 21185,
+     "end_frame": 21283
+    },
+    {
+     "text": "There, the ground wind is thirteen point five east and eight point four north.",
+     "audio_text": null,
+     "start": 709.775,
+     "end": 714.975,
+     "dur": 5.2,
+     "start_frame": 21293,
+     "end_frame": 21449
+    },
+    {
+     "text": "Take away thirteen point eight east and four point eight north, and the rider feels minus zero point three east and three point seven north: a gentle three point seven metres per second.",
+     "audio_text": null,
+     "start": 715.325,
+     "end": 727.575,
+     "dur": 12.25,
+     "start_frame": 21460,
+     "end_frame": 21827,
+     "beat": true
+    },
+    {
+     "text": "Now a point in the middle of the northern side.",
+     "audio_text": null,
+     "start": 729.075,
+     "end": 732.45,
+     "dur": 3.375,
+     "start_frame": 21872,
+     "end_frame": 21974
+    },
+    {
+     "text": "The ground wind is minus four point two east and minus five point three north.",
+     "audio_text": null,
+     "start": 732.8,
+     "end": 738.35,
+     "dur": 5.55,
+     "start_frame": 21984,
+     "end_frame": 22151
+    },
+    {
+     "text": "Take away the same storm velocity, and the rider feels minus eighteen point zero east and minus ten point one north: about twenty point six metres per second.",
+     "audio_text": null,
+     "start": 738.7,
+     "end": 749.7,
+     "dur": 11.0,
+     "start_frame": 22161,
+     "end_frame": 22491,
+     "beat": true
+    },
+    {
+     "text": "So for the rider, the northern side is the windy one.",
+     "audio_text": null,
+     "start": 751.2,
+     "end": 755.175,
+     "dur": 3.975,
+     "start_frame": 22536,
+     "end_frame": 22655
+    }
+   ],
+   "end": 755.975,
+   "start_frame": 20279,
+   "end_frame": 22679,
+   "timing_source": "dryrun1:s35_storm_relative"
+  },
+  {
+   "id": "s11_round_parts",
+   "start": 755.975,
+   "sentences": [
+    {
+     "text": "Let's do the same with the round parts, averaged over each side.",
+     "audio_text": null,
+     "start": 755.975,
+     "end": 760.35,
+     "dur": 4.375,
+     "start_frame": 22679,
+     "end_frame": 22811
+    },
+    {
+     "text": "On the southern side, the storm's motion runs the same way as the spin, so it adds about thirteen metres per second to the round part.",
+     "audio_text": null,
+     "start": 760.7,
+     "end": 769.65,
+     "dur": 8.95,
+     "start_frame": 22821,
+     "end_frame": 23090
+    },
+    {
+     "text": "Riding with the storm, the round part there drops from eighteen to about five.",
+     "audio_text": null,
+     "start": 770.0,
+     "end": 775.1,
+     "dur": 5.1,
+     "start_frame": 23100,
+     "end_frame": 23253,
+     "beat": true
+    },
+    {
+     "text": "On the northern side, the motion runs against the spin, so it takes away about thirteen.",
+     "audio_text": null,
+     "start": 776.6,
+     "end": 782.675,
+     "dur": 6.075,
+     "start_frame": 23298,
+     "end_frame": 23480
+    },
+    {
+     "text": "Riding with the storm, the round part there grows from seven to about twenty.",
+     "audio_text": null,
+     "start": 783.025,
+     "end": 788.275,
+     "dur": 5.25,
+     "start_frame": 23491,
+     "end_frame": 23648,
+     "beat": true
+    },
+    {
+     "text": "So the motion explains why people on the ground felt the southern side as the stronger one.",
+     "audio_text": null,
+     "start": 789.775,
+     "end": 796.125,
+     "dur": 6.35,
+     "start_frame": 23693,
+     "end_frame": 23884
+    },
+    {
+     "text": "The rider sees the storm's own shape, and at that hour, on this ring, its own winds were stronger on its northern side.",
+     "audio_text": null,
+     "start": 796.475,
+     "end": 804.375,
+     "dur": 7.9,
+     "start_frame": 23894,
+     "end_frame": 24131
+    },
+    {
+     "text": "Forecasters use storm-relative winds to see a storm's own structure, and they matter for thunderstorms too, in a later movie: Severe storms.",
+     "audio_text": null,
+     "start": 804.725,
+     "end": 814.325,
+     "dur": 9.6,
+     "start_frame": 24142,
+     "end_frame": 24430
+    }
+   ],
+   "end": 815.125,
+   "start_frame": 22679,
+   "end_frame": 24454,
+   "timing_source": "dryrun1:s36_round_parts"
+  },
+  {
+   "id": "s12_invariant",
+   "start": 815.125,
+   "sentences": [
+    {
+     "text": "So what changes, and what doesn't?",
+     "audio_text": null,
+     "start": 815.125,
+     "end": 817.85,
+     "dur": 2.725,
+     "start_frame": 24454,
+     "end_frame": 24536
+    },
+    {
+     "text": "The wind at each point changes by the storm's velocity.",
+     "audio_text": null,
+     "start": 818.2,
+     "end": 822.275,
+     "dur": 4.075,
+     "start_frame": 24546,
+     "end_frame": 24668
+    },
+    {
+     "text": "But the average round part over the whole ring is about fourteen metres per second in both frames: fourteen point one from the ground, and thirteen point eight riding along.",
+     "audio_text": null,
+     "start": 822.625,
+     "end": 833.55,
+     "dur": 10.925,
+     "start_frame": 24679,
+     "end_frame": 25007,
+     "beat": true
+    },
+    {
+     "text": "And the average inflow is about six metres per second in both frames.",
+     "audio_text": null,
+     "start": 835.05,
+     "end": 840.15,
+     "dur": 5.1,
+     "start_frame": 25052,
+     "end_frame": 25205,
+     "beat": true
+    },
+    {
+     "text": "That's no accident.",
+     "audio_text": null,
+     "start": 841.65,
+     "end": 843.65,
+     "dur": 2.0,
+     "start_frame": 25250,
+     "end_frame": 25310
+    },
+    {
+     "text": "A steady, uniform wind blows as much round one side of a circle as it blows back round the other, so it adds nothing to the average spin, or to the average inflow.",
+     "audio_text": null,
+     "start": 844.0,
+     "end": 855.3,
+     "dur": 11.3,
+     "start_frame": 25320,
+     "end_frame": 25659
+    },
+    {
+     "text": "On a flat map, it adds exactly zero.",
+     "audio_text": null,
+     "start": 855.65,
+     "end": 858.975,
+     "dur": 3.325,
+     "start_frame": 25670,
+     "end_frame": 25769
+    },
+    {
+     "text": "On the round Earth, the meridians close in towards the pole, and that leaves the small difference of zero point three.",
+     "audio_text": null,
+     "start": 859.325,
+     "end": 866.975,
+     "dur": 7.65,
+     "start_frame": 25780,
+     "end_frame": 26009,
+     "beat": true
+    },
+    {
+     "text": "The spin belongs to the storm, and the motion belongs to the whole pattern.",
+     "audio_text": null,
+     "start": 868.475,
+     "end": 873.65,
+     "dur": 5.175,
+     "start_frame": 26054,
+     "end_frame": 26210
+    },
+    {
+     "text": "For a house on the coast, though, the ground wind is what counts.",
+     "audio_text": null,
+     "start": 874.0,
+     "end": 878.15,
+     "dur": 4.15,
+     "start_frame": 26220,
+     "end_frame": 26345
+    },
+    {
+     "text": "That night, the weather station at Brest measured a gust of eighty four knots, about a hundred and fifty six kilometres per hour.",
+     "audio_text": null,
+     "start": 878.5,
+     "end": 886.825,
+     "dur": 8.325,
+     "start_frame": 26355,
+     "end_frame": 26605
+    }
+   ],
+   "end": 887.625,
+   "start_frame": 24454,
+   "end_frame": 26629,
+   "timing_source": "dryrun1:s37_invariant"
+  },
+  {
+   "id": "s13_tau",
+   "start": 887.625,
+   "sentences": [
+    {
+     "text": "The moving frame also explains what a fixed barometer sees.",
+     "audio_text": null,
+     "start": 887.625,
+     "end": 892.125,
+     "dur": 4.5,
+     "start_frame": 26629,
+     "end_frame": 26764
+    },
+    {
+     "text": "Let's take Plymouth, on England's south coast.",
+     "audio_text": null,
+     "start": 892.475,
+     "end": 895.7,
+     "dur": 3.225,
+     "start_frame": 26774,
+     "end_frame": 26871
+    },
+    {
+     "text": "Picture the pressure pattern as a frozen map, sliding east-north-east with the storm.",
+     "audio_text": null,
+     "start": 896.05,
+     "end": 901.6,
+     "dur": 5.55,
+     "start_frame": 26882,
+     "end_frame": 27048
+    },
+    {
+     "text": "A barometer that never moves sees the pressure fall as the low comes closer, even if the storm itself isn't deepening at all.",
+     "audio_text": null,
+     "start": 901.95,
+     "end": 910.225,
+     "dur": 8.275,
+     "start_frame": 27059,
+     "end_frame": 27307
+    },
+    {
+     "text": "So the barometer's reading mixes two things: the storm arriving, and the storm changing.",
+     "audio_text": null,
+     "start": 910.575,
+     "end": 916.5,
+     "dur": 5.925,
+     "start_frame": 27317,
+     "end_frame": 27495
+    },
+    {
+     "text": "To pull them apart, we need two observers.",
+     "audio_text": null,
+     "start": 916.85,
+     "end": 920.15,
+     "dur": 3.3,
+     "start_frame": 27506,
+     "end_frame": 27605
+    },
+    {
+     "text": "The first is the fixed barometer.",
+     "audio_text": null,
+     "start": 920.5,
+     "end": 923.35,
+     "dur": 2.85,
+     "start_frame": 27615,
+     "end_frame": 27701
+    },
+    {
+     "text": "Its rate is partial p by partial t: the change of pressure in time, at one fixed place.",
+     "audio_text": null,
+     "start": 923.7,
+     "end": 930.525,
+     "dur": 6.825,
+     "start_frame": 27711,
+     "end_frame": 27916
+    },
+    {
+     "text": "Here p is the pressure, and t is the time.",
+     "audio_text": null,
+     "start": 930.875,
+     "end": 934.225,
+     "dur": 3.35,
+     "start_frame": 27926,
+     "end_frame": 28027,
+     "beat": true
+    },
+    {
+     "text": "The second is a rider, moving with the pressure pattern at bold capital U.",
+     "audio_text": null,
+     "start": 935.725,
+     "end": 940.95,
+     "dur": 5.225,
+     "start_frame": 28072,
+     "end_frame": 28229
+    },
+    {
+     "text": "The rider's position, measured in the moving pattern, is x prime, which is x minus capital U t, as on the train.",
+     "audio_text": null,
+     "start": 941.3,
+     "end": 949.725,
+     "dur": 8.425,
+     "start_frame": 28239,
+     "end_frame": 28492
+    },
+    {
+     "text": "And the rider's clock reads tau, the Greek letter t.",
+     "audio_text": null,
+     "start": 950.075,
+     "end": 954.0,
+     "dur": 3.925,
+     "start_frame": 28502,
+     "end_frame": 28620
+    },
+    {
+     "text": "Tau is the same time as t, but we give it a new name, because it marks a different thing held fixed.",
+     "audio_text": null,
+     "start": 954.35,
+     "end": 961.15,
+     "dur": 6.8,
+     "start_frame": 28631,
+     "end_frame": 28835
+    },
+    {
+     "text": "Partial p by partial tau is the change of pressure in time while x prime is held fixed: riding with the pattern.",
+     "audio_text": null,
+     "start": 961.5,
+     "end": 969.3,
+     "dur": 7.8,
+     "start_frame": 28845,
+     "end_frame": 29079,
+     "beat": true
+    },
+    {
+     "text": "If the pattern really were frozen, the rider would see no change at all.",
+     "audio_text": null,
+     "start": 970.8,
+     "end": 975.525,
+     "dur": 4.725,
+     "start_frame": 29124,
+     "end_frame": 29266
+    },
+    {
+     "text": "So partial p by partial tau is the storm itself changing: negative when it deepens, and positive when it fills.",
+     "audio_text": null,
+     "start": 975.875,
+     "end": 983.95,
+     "dur": 8.075,
+     "start_frame": 29276,
+     "end_frame": 29519
+    }
+   ],
+   "end": 984.75,
+   "start_frame": 26629,
+   "end_frame": 29543,
+   "timing_source": "dryrun1:s38_tau"
+  },
+  {
+   "id": "s14_tau_derive",
+   "start": 984.75,
+   "sentences": [
+    {
+     "text": "How are the two rates linked?",
+     "audio_text": null,
+     "start": 984.75,
+     "end": 986.9,
+     "dur": 2.15,
+     "start_frame": 29543,
+     "end_frame": 29607
+    },
+    {
+     "text": "The next three steps show it.",
+     "audio_text": null,
+     "start": 987.25,
+     "end": 989.45,
+     "dur": 2.2,
+     "start_frame": 29618,
+     "end_frame": 29684
+    },
+    {
+     "text": "They're for anyone who wants every step, so skip ahead to the time on screen if you'd rather go straight to the numbers.",
+     "audio_text": null,
+     "start": 989.8,
+     "end": 997.075,
+     "dur": 7.275,
+     "start_frame": 29694,
+     "end_frame": 29912
+    },
+    {
+     "text": "Step one: the rider is a traveller, moving at bold capital U.",
+     "audio_text": null,
+     "start": 997.425,
+     "end": 1002.2,
+     "dur": 4.775,
+     "start_frame": 29923,
+     "end_frame": 30066
+    },
+    {
+     "text": "In the derivatives movie, we found the rate a traveller feels: the change at a fixed place, plus the traveller's speed times the slope, in each direction.",
+     "audio_text": null,
+     "start": 1002.55,
+     "end": 1012.65,
+     "dur": 10.1,
+     "start_frame": 30077,
+     "end_frame": 30380
+    },
+    {
+     "text": "With the dot product, that's partial p by partial t, plus bold capital U dot grad p.",
+     "audio_text": null,
+     "start": 1013.0,
+     "end": 1019.875,
+     "dur": 6.875,
+     "start_frame": 30390,
+     "end_frame": 30596,
+     "beat": true
+    },
+    {
+     "text": "Step two: for this traveller, that rate is partial p by partial tau.",
+     "audio_text": null,
+     "start": 1021.375,
+     "end": 1026.525,
+     "dur": 5.15,
+     "start_frame": 30641,
+     "end_frame": 30796
+    },
+    {
+     "text": "So partial p by partial tau equals partial p by partial t, plus bold capital U dot grad p.",
+     "audio_text": null,
+     "start": 1026.875,
+     "end": 1034.775,
+     "dur": 7.9,
+     "start_frame": 30806,
+     "end_frame": 31043,
+     "beat": true
+    },
+    {
+     "text": "Step three: move bold capital U dot grad p to the other side.",
+     "audio_text": null,
+     "start": 1036.275,
+     "end": 1041.15,
+     "dur": 4.875,
+     "start_frame": 31088,
+     "end_frame": 31235
+    },
+    {
+     "text": "Partial p by partial t equals partial p by partial tau, minus bold capital U dot grad p.",
+     "audio_text": null,
+     "start": 1041.5,
+     "end": 1049.225,
+     "dur": 7.725,
+     "start_frame": 31245,
+     "end_frame": 31477,
+     "beat": true
+    },
+    {
+     "text": "Now let's read each term.",
+     "audio_text": null,
+     "start": 1050.725,
+     "end": 1052.9,
+     "dur": 2.175,
+     "start_frame": 31522,
+     "end_frame": 31587
+    },
+    {
+     "text": "On the left is the barometer's rate.",
+     "audio_text": null,
+     "start": 1053.25,
+     "end": 1056.25,
+     "dur": 3.0,
+     "start_frame": 31598,
+     "end_frame": 31688
+    },
+    {
+     "text": "The first term on the right is the storm changing.",
+     "audio_text": null,
+     "start": 1056.6,
+     "end": 1060.075,
+     "dur": 3.475,
+     "start_frame": 31698,
+     "end_frame": 31802
+    },
+    {
+     "text": "And bold capital U dot grad p is the storm's speed, times how fast the pressure rises along its direction of motion.",
+     "audio_text": null,
+     "start": 1060.425,
+     "end": 1068.95,
+     "dur": 8.525,
+     "start_frame": 31813,
+     "end_frame": 32069
+    },
+    {
+     "text": "Kilometres per hour, times hectopascals per kilometre, gives hectopascals per hour.",
+     "audio_text": "Kilometres per hour, times [hectopascals](/hˈɛktəpˌæskᵊlz/) per kilometre, gives [hectopascals](/hˈɛktəpˌæskᵊlz/) per hour.",
+     "start": 1069.3,
+     "end": 1075.775,
+     "dur": 6.475,
+     "start_frame": 32079,
+     "end_frame": 32273
+    },
+    {
+     "text": "With its minus sign, it's the change caused by the pattern sliding past.",
+     "audio_text": null,
+     "start": 1076.125,
+     "end": 1081.25,
+     "dur": 5.125,
+     "start_frame": 32284,
+     "end_frame": 32438,
+     "beat": true
+    },
+    {
+     "text": "If you skipped, here's what to keep: what the barometer sees is the storm changing, minus the pattern sliding past.",
+     "audio_text": null,
+     "start": 1082.75,
+     "end": 1090.725,
+     "dur": 7.975,
+     "start_frame": 32483,
+     "end_frame": 32722
+    }
+   ],
+   "end": 1091.525,
+   "start_frame": 29543,
+   "end_frame": 32746,
+   "timing_source": "splice2:s39_tau_derive"
+  },
+  {
+   "id": "s15_plymouth",
+   "start": 1091.525,
+   "sentences": [
+    {
+     "text": "Now the numbers at Plymouth, around midnight.",
+     "audio_text": null,
+     "start": 1091.525,
+     "end": 1094.675,
+     "dur": 3.15,
+     "start_frame": 32746,
+     "end_frame": 32840
+    },
+    {
+     "text": "At eleven in the evening, the pressure was nine hundred and sixty four point one hectopascals, and at one in the morning, nine hundred and fifty six point five.",
+     "audio_text": "At eleven in the evening, the pressure was nine hundred and sixty four point one [hectopascals](/hˈɛktəpˌæskᵊlz/), and at one in the morning, nine hundred and fifty six point five.",
+     "start": 1095.025,
+     "end": 1105.35,
+     "dur": 10.325,
+     "start_frame": 32851,
+     "end_frame": 33161
+    },
+    {
+     "text": "So, at midnight, the barometer's rate was nine hundred and fifty six point five minus nine hundred and sixty four point one, over two hours: about minus three point eight hectopascals per hour.",
+     "audio_text": "So, at midnight, the barometer's rate was nine hundred and fifty six point five minus nine hundred and sixty four point one, over two hours: about minus three point eight [hectopascals](/hˈɛktəpˌæskᵊlz/) per hour.",
+     "start": 1105.7,
+     "end": 1119.175,
+     "dur": 13.475,
+     "start_frame": 33171,
+     "end_frame": 33575,
+     "beat": true
+    },
+    {
+     "text": "Plymouth was ahead of the low, about a hundred and twenty three kilometres to its north-east.",
+     "audio_text": null,
+     "start": 1120.675,
+     "end": 1126.425,
+     "dur": 5.75,
+     "start_frame": 33620,
+     "end_frame": 33793
+    },
+    {
+     "text": "There, the pressure rose along the storm's direction by about zero point zero six one hectopascals per kilometre.",
+     "audio_text": "There, the pressure rose along the storm's direction by about zero point zero six one [hectopascals](/hˈɛktəpˌæskᵊlz/) per kilometre.",
+     "start": 1126.775,
+     "end": 1134.6,
+     "dur": 7.825,
+     "start_frame": 33803,
+     "end_frame": 34038,
+     "beat": true
+    },
+    {
+     "text": "The storm moved at fourteen point six metres per second, which is fifty two and a half kilometres per hour.",
+     "audio_text": null,
+     "start": 1136.1,
+     "end": 1143.15,
+     "dur": 7.05,
+     "start_frame": 34083,
+     "end_frame": 34295
+    },
+    {
+     "text": "So bold capital U dot grad p is fifty two and a half times zero point zero six one: about three point two hectopascals per hour.",
+     "audio_text": "So bold capital U dot grad p is fifty two and a half times zero point zero six one: about three point two [hectopascals](/hˈɛktəpˌæskᵊlz/) per hour.",
+     "start": 1143.5,
+     "end": 1153.75,
+     "dur": 10.25,
+     "start_frame": 34305,
+     "end_frame": 34613,
+     "beat": true
+    },
+    {
+     "text": "Then the storm's own change, partial p by partial tau, is partial p by partial t plus bold capital U dot grad p.",
+     "audio_text": null,
+     "start": 1155.25,
+     "end": 1164.325,
+     "dur": 9.075,
+     "start_frame": 34658,
+     "end_frame": 34930
+    },
+    {
+     "text": "That's minus three point eight plus three point two: about minus zero point six hectopascals per hour.",
+     "audio_text": "That's minus three point eight plus three point two: about minus zero point six [hectopascals](/hˈɛktəpˌæskᵊlz/) per hour.",
+     "start": 1164.675,
+     "end": 1171.975,
+     "dur": 7.3,
+     "start_frame": 34940,
+     "end_frame": 35159,
+     "beat": true
+    }
+   ],
+   "end": 1173.475,
+   "start_frame": 32746,
+   "end_frame": 35204,
+   "timing_source": "dryrun1:s40_plymouth"
+  },
+  {
+   "id": "s16_meaning",
+   "start": 1173.475,
+   "sentences": [
+    {
+     "text": "So, at Plymouth, minus three point eight equals minus zero point six, from the storm changing, minus three point two, from the pattern sliding past.",
+     "audio_text": null,
+     "start": 1173.475,
+     "end": 1183.375,
+     "dur": 9.9,
+     "start_frame": 35204,
+     "end_frame": 35501,
+     "beat": true
+    },
+    {
+     "text": "Most of what the barometer saw was the storm arriving.",
+     "audio_text": null,
+     "start": 1184.875,
+     "end": 1188.825,
+     "dur": 3.95,
+     "start_frame": 35546,
+     "end_frame": 35665
+    },
+    {
+     "text": "Is the minus zero point six believable?",
+     "audio_text": null,
+     "start": 1189.175,
+     "end": 1192.175,
+     "dur": 3.0,
+     "start_frame": 35675,
+     "end_frame": 35765
+    },
+    {
+     "text": "Here's a check.",
+     "audio_text": null,
+     "start": 1192.525,
+     "end": 1194.175,
+     "dur": 1.65,
+     "start_frame": 35776,
+     "end_frame": 35825
+    },
+    {
+     "text": "Between eleven and one, the lowest pressure at the storm's tracked centre fell from nine hundred and fifty four point nine to nine hundred and fifty four point zero hectopascals: about minus half a hectopascal per hour, the same size.",
+     "audio_text": "Between eleven and one, the lowest pressure at the storm's tracked centre fell from nine hundred and fifty four point nine to nine hundred and fifty four point zero [hectopascals](/hˈɛktəpˌæskᵊlz/): about minus half a [hectopascal](/hˈɛktəpˌæskᵊl/) per hour, the same size.",
+     "start": 1194.525,
+     "end": 1210.15,
+     "dur": 15.625,
+     "start_frame": 35836,
+     "end_frame": 36304,
+     "beat": true
+    },
+    {
+     "text": "This is the same idea as advection in the dot product movie.",
+     "audio_text": null,
+     "start": 1211.65,
+     "end": 1216.4,
+     "dur": 4.75,
+     "start_frame": 36350,
+     "end_frame": 36492
+    },
+    {
+     "text": "Forecasters draw maps of these pressure changes, and we'll read them in a later movie: Reading maps over time.",
+     "audio_text": null,
+     "start": 1216.75,
+     "end": 1224.275,
+     "dur": 7.525,
+     "start_frame": 36502,
+     "end_frame": 36728
+    }
+   ],
+   "end": 1225.075,
+   "start_frame": 35204,
+   "end_frame": 36752,
+   "timing_source": "dryrun1:s41_meaning"
+  },
+  {
+   "id": "s17_recap",
+   "start": 1225.075,
+   "sentences": [
+    {
+     "text": "To sum up, a frame moving steadily in a straight line shifts positions by capital U times t, and velocities by capital U: u equals u prime plus capital U.",
+     "audio_text": null,
+     "start": 1225.075,
+     "end": 1236.925,
+     "dur": 11.85,
+     "start_frame": 36752,
+     "end_frame": 37108
+    },
+    {
+     "text": "But it leaves accelerations unchanged, so the same forces explain the motion in both frames.",
+     "audio_text": null,
+     "start": 1237.275,
+     "end": 1243.925,
+     "dur": 6.65,
+     "start_frame": 37118,
+     "end_frame": 37318
+    },
+    {
+     "text": "For an air parcel, the acceleration is the local change plus advection.",
+     "audio_text": null,
+     "start": 1244.275,
+     "end": 1249.5,
+     "dur": 5.225,
+     "start_frame": 37328,
+     "end_frame": 37485
+    },
+    {
+     "text": "Each piece depends on who measures it, but their sum doesn't.",
+     "audio_text": null,
+     "start": 1249.85,
+     "end": 1253.9,
+     "dur": 4.05,
+     "start_frame": 37495,
+     "end_frame": 37617
+    },
+    {
+     "text": "Storm Ciarán moved east-north-east at about fifteen metres per second.",
+     "audio_text": "Storm Keer-awn moved east-north-east at about fifteen metres per second.",
+     "start": 1254.25,
+     "end": 1259.375,
+     "dur": 5.125,
+     "start_frame": 37627,
+     "end_frame": 37781
+    },
+    {
+     "text": "Taking that motion away from every wind gives the storm-relative wind: what a rider moving with the storm feels.",
+     "audio_text": null,
+     "start": 1259.725,
+     "end": 1267.8,
+     "dur": 8.075,
+     "start_frame": 37792,
+     "end_frame": 38034
+    },
+    {
+     "text": "It changed the wind at every point, but left the storm's average spin of about fourteen metres per second.",
+     "audio_text": null,
+     "start": 1268.15,
+     "end": 1275.3,
+     "dur": 7.15,
+     "start_frame": 38044,
+     "end_frame": 38259
+    },
+    {
+     "text": "A fixed barometer's rate is the storm changing, minus the pattern sliding past.",
+     "audio_text": null,
+     "start": 1275.65,
+     "end": 1281.425,
+     "dur": 5.775,
+     "start_frame": 38269,
+     "end_frame": 38443
+    },
+    {
+     "text": "At Plymouth, the fall of three point eight hectopascals per hour was mostly the storm arriving.",
+     "audio_text": "At Plymouth, the fall of three point eight [hectopascals](/hˈɛktəpˌæskᵊlz/) per hour was mostly the storm arriving.",
+     "start": 1281.775,
+     "end": 1288.425,
+     "dur": 6.65,
+     "start_frame": 38453,
+     "end_frame": 38653
+    },
+    {
+     "text": "In Part 6, we'll find the shortest way round the Earth: great circles, and rhumb lines.",
+     "audio_text": null,
+     "start": 1288.775,
+     "end": 1294.875,
+     "dur": 6.1,
+     "start_frame": 38663,
+     "end_frame": 38846
+    }
+   ],
+   "end": 1295.675,
+   "start_frame": 36752,
+   "end_frame": 38870,
+   "timing_source": "splice3:M_s17_recap"
+  },
+  {
+   "id": "s18_end",
+   "start": 1295.675,
+   "sentences": [
+    {
+     "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
+     "audio_text": null,
+     "start": 1295.675,
+     "end": 1301.875,
+     "dur": 6.2,
+     "start_frame": 38870,
+     "end_frame": 39056
+    },
+    {
+     "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
+     "audio_text": null,
+     "start": 1302.225,
+     "end": 1310.275,
+     "dur": 8.05,
+     "start_frame": 39067,
+     "end_frame": 39308
+    },
+    {
+     "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
+     "audio_text": null,
+     "start": 1310.625,
+     "end": 1318.275,
+     "dur": 7.65,
+     "start_frame": 39319,
+     "end_frame": 39548
+    }
+   ],
+   "end": 1318.575,
+   "start_frame": 38870,
+   "end_frame": 39557,
+   "timing_source": "dryrun1:s43_end"
+  }
+ ],
+ "total_s": 1318.575,
+ "total_frames": 39558
+}
