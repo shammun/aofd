@@ -1,0 +1,605 @@
+// ch00_coordinates_sphere scenes s26-s36: ERA5 grid boxes at four places (real BMNG panels, the 0.25° grid), the area of a patch
+// (zoom-reveal, skip chip K4), ERA5 box areas (3-D tiles), the strip round the Earth, the slope of sine, adding strips (integration),
+// the band fraction, Archimedes' cylinder, the cos φ weighting of a global mean (toy, then ERA5 September 2026; keep line K4), the
+// recap and the series end card. Numbers from data/cs.json only (CHECK_C re-asserts every screen string).
+import React from "react";
+import { useCurrentFrame } from "remotion";
+import { C, T } from "../house/kit/type";
+import { Pt, pulse } from "../house/kit/draw";
+import { Check, Notebook } from "../house/kit/icons";
+import { CurvedLink } from "../house/kit/extras";
+import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { globePath } from "./kit_cs/globe";
+import { orbitCam, projector, V3 } from "./kit_cs/cam";
+import {
+  AT, Arrow, BREST, BandTint, CalcStack, ColourBar, D, D2R, Earth, GB, GFULL, IMGS, K, KHULNA, KeepLine, Keyword, LEN, LUT_T, LYB, Layered, Lbl, SE, SING, SRC_G, SS,
+  Scene, SideCallout, SkipChip, Svg, TeX, Thermo, VIOLET, XC, XZ, arcD, chipSpan, clamp, cutAt, discOf, fin, fout, gdot, gseg, globeG, keepGone, keepTime, ll, merPath, mix,
+  parPath, plab, poly, prog, rep, spinPath, splitVis, win,
+} from "./cs_lib";
+import { EQ_S18, EQ_S27, EQ_S28, EQ_S29, EQ_S30, EQ_S31, EQ_S32, EQ_S33, EQ_S34 } from "./cs_eq";
+
+const E5 = D.era5, AR = D.area, BD = D.band, TM = D.t2m;
+const CHECK_C: [string, number, number, number][] = [
+  ["tall", E5.tall, 27.8, 0.05], ["wS", E5.wide[0], 27.8, 0.05], ["wK", E5.wide[1], 25.6, 0.05], ["wB", E5.wide[2], 18.5, 0.05], ["wL", E5.wide[3], 5.7, 0.05],
+  ["ratio", E5.ratio, 4.9, 0.05], ["a2", AR.a2 / 1e6, 40.6, 0.05], ["rad", AR.rad025, 0.00436, 5e-6], ["A0", AR.flat[0], 773, 0.5], ["AK", AR.flat[1], 712, 0.5],
+  ["AB", AR.flat[2], 513, 0.5], ["AL", AR.flat[3], 158, 0.5], ["exB", AR.exact[2], 513.1, 0.05], ["st1", BD.steps[0], 0.174, 5e-4], ["st2", BD.steps[1], 0.168, 5e-4],
+  ["st3", BD.steps[2], 0.158, 5e-4], ["nh", BD.nh / 1e6, 255, 0.5], ["whole", BD.whole / 1e6, 510, 0.5], ["f48", BD.f48, 0.7478, 5e-5], ["Tw", TM.weighted, 16.3, 0.05],
+  ["Tp", TM.plain, 7.1, 0.05], ["dT", TM.weighted - TM.plain, 9, 0.2], ["sin30", BD.curve[30], 0.5, 1e-9], ["sin20", BD.curve[20], 0.342, 5e-4], ["cos25", Math.cos(25 * D2R), 0.906, 5e-4],
+];
+CHECK_C.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
+const GSrc: React.FC<{ o?: number }> = ({ o = 1 }) => <SourceBelow text={SRC_G} pic={GB} w={960} o={o} name="globe src" />;
+const PHI = BREST[0];
+
+// ================================================================ s26 ERA5 grid boxes at four places
+const PW = 400, PH = 440, PY = 120, PX = [80, 500, 920, 1340];
+type PanelD = { key: string; name: string; box: number[]; cell: number[]; glat: number[]; glon: number[]; coast: number[][] };
+const Panel: React.FC<{ p: PanelD; x: number; o: number; f: number; tCell: number; ghost: number }> = ({ p, x, o, f, tCell, ghost }) => {
+  if (o <= 0) return null;
+  const [la0, la1, lo0, lo1] = p.box;
+  const P = (la: number, lo: number): Pt => [x + ((lo - lo0) / (lo1 - lo0)) * PW, PY + ((la1 - la) / (la1 - la0)) * PH];
+  const c = p.cell, a = P(c[1], c[2]), b = P(c[0], c[3]);
+  const gw = (b[0] - a[0]) * (E5.ratio - 1) / 2;
+  let coast = "";
+  for (const ln of p.coast) for (let i = 0; i < ln.length; i += 2) { const q = P(ln[i + 1], ln[i]); coast += `${i ? "L" : "M"}${q[0].toFixed(1)} ${q[1].toFixed(1)}`; }
+  return (
+    <div style={{ position: "absolute", left: x, top: PY, width: PW, height: PH, overflow: "hidden", opacity: o }}>
+      <svg width={1920} height={1080} style={{ position: "absolute", left: -x, top: -PY }}>
+        <image href={IMGS.panel(p.key)} x={x} y={PY} width={PW} height={PH} preserveAspectRatio="none" />
+        <path d={coast} fill="none" stroke={C.key} strokeOpacity={0.7} strokeWidth={2} />
+        {p.glat.map((la) => <line key={`a${la}`} x1={x} y1={P(la, lo0)[1]} x2={x + PW} y2={P(la, lo0)[1]} stroke="#cfd6e6" strokeOpacity={0.75} strokeWidth={2} />)}
+        {p.glon.map((lo) => <line key={`o${lo}`} x1={P(la0, lo)[0]} y1={PY} x2={P(la0, lo)[0]} y2={PY + PH} stroke="#cfd6e6" strokeOpacity={0.75} strokeWidth={2} />)}
+        <rect x={a[0]} y={a[1]} width={b[0] - a[0]} height={b[1] - a[1]} fill={C.gold} fillOpacity={0.35 * fin(f, tCell)} stroke={C.gold} strokeWidth={5} opacity={fin(f, tCell)} />
+        {ghost > 0 ? <rect x={a[0] - gw} y={a[1]} width={(b[0] - a[0]) * E5.ratio} height={b[1] - a[1]} fill="none" stroke={C.neg} strokeWidth={5} strokeDasharray="14 9" opacity={ghost} /> : null}
+      </svg>
+    </div>
+  );
+};
+const cellCentre = (p: PanelD, x: number): Pt => {
+  const [la0, la1, lo0, lo1] = p.box, c = p.cell;
+  return [x + (((c[2] + c[3]) / 2 - lo0) / (lo1 - lo0)) * PW, PY + ((la1 - (c[0] + c[1]) / 2) / (la1 - la0)) * PH];
+};
+const S26: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s26_grid_boxes");
+  const tRe = AT(k, 1, "reanalysis"), tGrid = SS(k, 2), tTall = SS(k, 3), tH = AT(k, 4, "is about"), tW = SS(k, 5), tThin = SS(k, 10), tForget = SS(k, 11), tSlope = SS(k, 12),
+    tP2 = SS(k, 13), tOther = SS(k, 14);
+  const atW = [AT(k, 6, "twenty seven point eight"), AT(k, 7, "twenty five point six"), AT(k, 8, "eighteen and a half"), AT(k, 9, "five point seven")];
+  const atName = [AT(k, 6, "Singapore"), AT(k, 7, "Khulna"), AT(k, 8, "Brest"), AT(k, 9, "Longyearbyen")];
+  const pans = E5.panels as PanelD[];
+  const oP = 1 - fin(f, tOther, 20);
+  const camG = globePath([{ f: tOther, lat: 75, lon: 20, dist: 3.4 }, { f: LEN(k) + 10, lat: 72, lon: 30, dist: 3.4 }], f);
+  const GBOX = { x: 560, y: 100, w: 800, h: 560 };
+  return (
+    <Scene>
+      {pans.map((p, i) => <Panel key={p.key} p={p} x={PX[i]} o={oP} f={f} tCell={tGrid + 20} ghost={i === 3 ? win(f, tForget, tP2) : 0} />)}
+      <Svg o={oP}>
+        {pans.map((p, i) => <g key={p.key}>
+          <Lbl x={PX[i] + PW / 2} y={PY + PH + 34} t={p.name} c={C.key} s={T.floor} a="middle" o={0.6 + 0.4 * fin(f, atName[i])} />
+          <Lbl x={PX[i] + PW / 2} y={PY + PH + 90} t={`${E5.wide[i].toFixed(1)} km wide`} c={C.gold} s={T.floor} a="middle" o={fin(f, atW[i])} />
+        </g>)}
+      </Svg>
+      <SourceBelow text="Image: NASA Blue Marble Next Generation · Natural Earth · ERA5 0.25° grid (Copernicus C3S)" pic={{ x: 80, y: PY, w: 1660, h: PH + 110 }} w={1660}
+        o={oP} name="s26 src" />
+      {f >= tOther ? <>
+        <Earth cam={camG} box={GBOX} o={fin(f, tOther, 20)} coast={0.4} over={(G) => <>
+          {(() => { let d = ""; for (let la = 60; la <= 88; la += 2) d += parPath(G, la); for (let lo = -180; lo < 180; lo += 6) d += merPath(G, lo, 60, 90); return <path d={d} fill="none" stroke={C.ink} strokeOpacity={0.6} strokeWidth={1.5} />; })()}
+        </>} />
+        <SourceBelow text={SRC_G} pic={GBOX} w={800} o={fin(f, tOther, 20)} name="s26 globe src" />
+      </> : null}
+      <Svg>
+        <Keyword f={f} text="weather data" at={[XC, 770]} appear={0} out={tRe - 20} />
+        <Keyword f={f} text="reanalysis = observations + model" at={[80, 770]} appear={tRe} out={tTall - 15} />
+        <Keyword f={f} text="every 0.25°" at={[1340, 770]} appear={tGrid} out={tTall - 15} />
+        <Keyword f={f} text="width depends on cos φ" at={[80, 830]} appear={tW} out={tThin - 20} s={T.floor + 4} />
+        <Keyword f={f} text="thinner and thinner towards the poles" at={[80, 830]} appear={tThin} out={tForget - 20} s={T.floor + 4} />
+        <Keyword f={f} text="5 × too big · slopes 5 × too small" at={[80, 830]} appear={tSlope} out={tP2 - 20} s={T.floor + 4} />
+        <Keyword f={f} text="Part 2: degrees → km" at={[80, 830]} appear={tP2} out={tOther - 20} s={T.floor + 4} />
+        <Keyword f={f} text="other grids" at={[XC + 300, 770]} appear={tOther + 20} />
+      </Svg>
+      <TeX s={String.raw`111.2\div4\approx27.8\ \text{km}`} x={980} y={770} size={56} c={C.ink} o={win(f, tH - 20, tThin - 15)} />
+
+      <TeX s={String.raw`27.8\ \text{km}\div5.7\ \text{km}\approx4.9`} x={980} y={770} size={56} c={C.neg} o={win(f, tForget, tOther - 15)} />
+
+      {void [cellCentre]}
+    </Scene>
+  );
+};
+
+// ================================================================ s27 the area of a small patch (zoom-reveal; skip chip K4)
+const S27: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s27_area_patch");
+  const chipA = AT(k, 4, "skip ahead"), chipEnd = chipA + 255;
+  const tWhy = SS(k, 1), tAvg = SS(k, 2), tTake = SS(k, 5), tNS = SS(k, 6), tEW = SS(k, 7), tRight = SS(k, 8), tFlat = SS(k, 9), tRect = SS(k, 10), tMul = SS(k, 11),
+    tColl = SS(k, 12), tShrink = SS(k, 13), tLimit = SS(k, 14), tDA = SS(k, 15), tDelta = SS(k, 16), tRad = SS(k, 17);
+  const zOut = SE(k, 16);
+  const cam = globePath([{ f: 0, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }, { f: tTake, lat: 32, lon: -2, dist: 4.3, pp: [520, 420] },
+    { f: tTake + 45, lat: PHI, lon: BREST[1], dist: 1.35, pp: [560, 470] }, { f: zOut, lat: PHI, lon: BREST[1], dist: 1.35, pp: [560, 470] },
+    { f: zOut + 45, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }, { f: LEN(k) + 10, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }], f);
+  const zoom = clamp((4.3 - cam.dist) / (4.3 - 1.35), 0, 1);
+  const la0 = PHI - 2.5, la1 = PHI + 2.5, lo0 = BREST[1] - 2.5, lo1 = BREST[1] + 2.5;
+  const lift = 0.06 * prog(f, tFlat, tFlat + 40) * (1 - prog(f, tShrink, tShrink + 60));
+  const G = globeG(cam, GFULL);
+  const ring = (r: number): Pt[] => [...Array.from({ length: 11 }, (_, i) => G.pw(ll(la0, lo0 + 0.5 * i, r))), ...Array.from({ length: 11 }, (_, i) => G.pw(ll(la0 + 0.5 * i, lo1, r))),
+    ...Array.from({ length: 11 }, (_, i) => G.pw(ll(la1, lo1 - 0.5 * i, r))), ...Array.from({ length: 11 }, (_, i) => G.pw(ll(la1 - 0.5 * i, lo0, r)))];
+  const shrink = 1 - 0.75 * prog(f, tShrink, tShrink + 60);
+  const sc = (p: Pt, c: Pt): Pt => [c[0] + (p[0] - c[0]) * shrink, c[1] + (p[1] - c[1]) * shrink];
+  const cc = G.pw(ll(PHI, BREST[1], 1 + lift));
+  const tile = ring(1 + lift).map((p) => sc(p, cc)), base = ring(1.001);
+  const sW = sc(G.pw(ll(PHI, lo0, 1 + lift)), cc), sS = sc(G.pw(ll(la0, BREST[1], 1 + lift)), cc);
+  const cornerSW = sc(G.pw(ll(la0, lo0, 1 + lift)), cc), cornerSE = sc(G.pw(ll(la0, lo1, 1 + lift)), cc), cornerNW = sc(G.pw(ll(la1, lo0, 1 + lift)), cc);
+  const u = (a: Pt, b: Pt): Pt => { const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1; return [(b[0] - a[0]) / d, (b[1] - a[1]) / d]; };
+  const eD = rep(EQ_S27, String.raw`\cos\varphi`, String.raw`\textcolor{${C.gold}}{\cos\varphi}`);
+  const oP = fin(f, tTake + 30) * fout(f, zOut - 10);
+  return (
+    <Scene>
+      <Earth cam={cam} box={GFULL} coast={0.5} borders={0.5}
+        over={() => <g opacity={oP}>
+          <path d={`${poly(base)}Z`} fill={C.gold} fillOpacity={0.25 * (1 - fin(f, tFlat))} stroke={C.gold} strokeWidth={4} opacity={1} />
+          {lift > 0.001 ? <path d={`${poly(tile)}Z`} fill={C.gold} fillOpacity={0.45} stroke={C.gold} strokeWidth={3} /> : null}
+          <Arrow p={cornerSW} q={cornerSE} color={C.second} w={7} head={24} o={fin(f, tFlat + 20)} />
+          <Arrow p={cornerSW} q={cornerNW} color={C.second} w={7} head={24} o={fin(f, tFlat + 20)} />
+          <path d={`M${cornerSW[0] + 26 * u(cornerSW, cornerSE)[0]} ${cornerSW[1] + 26 * u(cornerSW, cornerSE)[1]}l${26 * u(cornerSW, cornerNW)[0]} ${26 * u(cornerSW, cornerNW)[1]}l${-26 * u(cornerSW, cornerSE)[0]} ${-26 * u(cornerSW, cornerSE)[1]}`}
+            fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, tRight)} />
+        </g>} />
+      <TeX s={String.raw`a\,\Delta\varphi`} x={sW[0] - 26} y={sW[1]} size={T.key} c={C.second} ax={1} o={oP * fin(f, tNS) * fout(f, tShrink)} halo />
+      <TeX s={String.raw`a\cos\varphi\,\Delta\lambda`} x={sS[0]} y={sS[1] + 44} size={T.key} c={C.second} ax={0.5} o={oP * fin(f, tEW) * fout(f, tShrink)} halo />
+      <GlobeFrame id="s27k" zoom={zoom} right={zoom} disc={discOf(cam, GFULL)} />
+      <SourceBelow text={SRC_G} pic={{ x: 60, y: 20, w: 960, h: 810 }} w={960} name="globe src" />
+      <Svg>
+        <Keyword f={f} text="areas" at={[XZ, 160]} appear={0} out={chipA - 20} />
+        <Keyword f={f} text="why do we care?" at={[XZ, 470]} appear={tWhy} out={tTake - 20} />
+        <Keyword f={f} text="to average over the Earth" at={[XZ, 560]} appear={tAvg} out={tTake - 20} s={T.floor + 4} />
+        <Keyword f={f} text="almost a rectangle" at={[XZ, 160]} appear={Math.max(tFlat, chipEnd + 10)} out={tLimit - 15} />
+        <Keyword f={f} text="Δ: a small step" at={[XZ, 680]} appear={tDelta} />
+        <Keyword f={f} text="d: a tiny step" at={[XZ, 755]} appear={AT(k, 16, "a small d")} />
+        <Keyword f={f} text="angles in radians" at={[XZ, 830]} appear={tRad} />
+      </Svg>
+      <CalcStack f={f} x={XZ + 110} y={260} size={56} rows={[
+        { lhs: String.raw`\Delta A`, rhs: String.raw`\approx(a\cos\varphi\,\Delta\lambda)(a\,\Delta\varphi)`, at: tMul, out: tLimit - 15 },
+        { lhs: String.raw`\Delta A`, rhs: String.raw`\approx a^2\cos\varphi\,\Delta\varphi\,\Delta\lambda`, at: tColl, out: tLimit - 15 },
+      ]} />
+      <TeX s={eD} x={XZ} y={500} size={72} c={C.ink} o={fin(f, tDA)} />
+
+      <SkipChip f={f} k={k} to={keepTime("s34_global_mean")} />
+      {void [tRect, VIOLET]}
+    </Scene>
+  );
+};
+
+// ================================================================ s28 the area of one ERA5 box (3-D tiles)
+const S28: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s28_box_areas");
+  const tRad = SS(k, 1), tA2 = SS(k, 2), tEq = AT(k, 3, "that's about"), tCos = SS(k, 4), tK = AT(k, 5, "is about"), tB = AT(k, 6, "it's about"), tL = AT(k, 7, "it's only about"),
+    tChk = SS(k, 8), tEx = SS(k, 9);
+  const st = orbitCam({ az: -62, el: 38, dist: 260, target: [60, 0, 0], fov: 30 }, [520, 430]);
+  const pr = projector(st, 1920, 1080);
+  const tiles = [{ w: E5.wide[0], n: "equator", at: tEq, A: AR.flat[0] }, { w: E5.wide[1], n: "Khulna", at: tK, A: AR.flat[1] },
+    { w: E5.wide[2], n: "Brest", at: tB, A: AR.flat[2] }, { w: E5.wide[3], n: "Longyearbyen", at: tL, A: AR.flat[3] }];
+  let x0 = 0;
+  const placed = tiles.map((t) => { const o = { ...t, x: x0 }; x0 += t.w + 10; return o; });
+  const H = E5.tall;
+  const P = (x: number, y: number, z = 0): Pt => pr.p([x, y, z] as V3);
+  const quad = (x: number, w: number) => `M${P(x, 0)[0]} ${P(x, 0)[1]}L${P(x + w, 0)[0]} ${P(x + w, 0)[1]}L${P(x + w, H)[0]} ${P(x + w, H)[1]}L${P(x, H)[0]} ${P(x, H)[1]}Z`;
+  const rows = [String.raw`0.25^\circ\approx0.00436\ \text{rad}`, String.raw`a^2=6371^2\approx40.6\times10^{6}\ \text{km}^2`];
+  return (
+    <Scene>
+      <Svg>
+        {placed.map((t) => { const o = fin(f, t.at);
+          return <g key={t.n}>
+            <path d={quad(t.x, t.w)} fill={C.gold} fillOpacity={0.12 + 0.5 * o} stroke={C.gold} strokeWidth={4} />
+            <path d={`M${P(t.x, 0)[0]} ${P(t.x, 0)[1]}L${P(t.x + t.w, 0)[0]} ${P(t.x + t.w, 0)[1]}`} stroke={C.second} strokeWidth={6} />
+            <path d={`M${P(t.x, 0)[0]} ${P(t.x, 0)[1]}L${P(t.x, H)[0]} ${P(t.x, H)[1]}`} stroke={C.second} strokeWidth={6} />
+            <Lbl x={(P(t.x, 0)[0] + P(t.x + t.w, 0)[0]) / 2} y={(P(t.x, 0)[1] + P(t.x + t.w, 0)[1]) / 2 + 40} t={`${t.w.toFixed(1)}`} c={C.second} s={T.floor} a="middle" />
+            <Lbl x={(P(t.x + t.w / 2, 0)[0])} y={P(t.x + t.w / 2, 0)[1] + 100} t={t.n} c={C.key} s={T.floor} a="middle" />
+          </g>; })}
+        <Lbl x={P(0, H / 2)[0] - 20} y={P(0, H / 2)[1]} t="27.8 km" c={C.second} s={T.floor} a="end" />
+        <Lbl x={P(0, 0)[0] - 20} y={P(0, 0)[1] + 40} t="km wide:" c={C.muted} s={T.floor} a="end" />
+
+        <g opacity={fin(f, tEx)}>
+          <Lbl x={1100} y={790} t="exact: 513.1 km²" c={C.gold} s={T.key} />
+          <Check x={1560} y={790} s={0.8} />
+        </g>
+        <Keyword f={f} text="every other box: × cos φ" at={[XC, 400]} appear={tCos} out={tK - 15} s={T.floor + 4} />
+      </Svg>
+      <TeX s={EQ_S28} x={XC} y={140} size={T.calc} c={C.ink} o={fin(f, 0)} />
+      <CalcStack f={f} x={XC} y={230} size={52} maxLines={4} rows={[
+        { lhs: "", rhs: rows[0], at: tRad },
+        { lhs: "", rhs: rows[1], at: tA2 },
+        { lhs: "", rhs: String.raw`40.6\times10^{6}\times0.00436\times0.00436`, at: tEq - 40, size: 46 },
+        { lhs: "", rhs: String.raw`\approx773\ \text{km}^2`, at: tEq, cont: true },
+        { lhs: "", rhs: String.raw`773\times0.9219\approx712\ \text{km}^2`, at: tK - 20 },
+        { lhs: "", rhs: String.raw`773\times0.6639\approx513\ \text{km}^2`, at: tB - 20 },
+        { lhs: "", rhs: String.raw`773\times0.2045\approx158\ \text{km}^2`, at: tL - 20 },
+      ]} />
+    </Scene>
+  );
+};
+
+// ================================================================ s29 a strip all round the Earth
+const GB29 = { x: 60, y: 28, w: 960, h: 640 };
+const S29: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s29_strip_round");
+  const tQ = SS(k, 1), tWhy = SS(k, 2), tTrop = SS(k, 3), tBuild = SS(k, 4), tOne = SS(k, 5), tUn = AT(k, 6, "Cut it and unroll it"), tLen = SS(k, 7), tWid = SS(k, 8), tArea = SS(k, 9);
+  const cam = globePath([{ f: 0, lat: 20, lon: 0, dist: 4.0 }, { f: LEN(k) + 10, lat: 20, lon: -6, dist: 4.0 }], f);
+  const G = globeG(cam, GB29);
+  const un = prog(f, tUn, tUn + 60);
+  const N = 72, L = cam.lon;
+  const pts = Array.from({ length: N + 1 }, (_, i) => { const lo = L + 180 - (360 * i) / N, q = ll(27.5, lo, 1.003), c = G.camPos;
+    const vis = q[0] * (c[0] - q[0]) + q[1] * (c[1] - q[1]) + q[2] * (c[2] - q[2]) > 0; const s = G.pw(q); const t: Pt = [100 + (860 * i) / N, 760];
+    return { p: [mix(s[0], t[0], un), mix(s[1], t[1], un)] as Pt, w: vis ? 1 : un }; });
+  const axP = G.pw([0, Math.sin(27.5 * D2R), 0]), rimP = G.pw(ll(27.5, L - 60, 1.003));
+  const parts = cutAt(EQ_S29, "=2");
+  return (
+    <Scene>
+      <Earth cam={cam} box={GB29} coast={0.45}
+        over={(Gg) => <>
+          <BandTint G={Gg} a={0} b={30} c={C.first} o={0.35 * fin(f, tQ) * fout(f, tOne)} />
+          <BandTint G={Gg} a={25} b={30} c={C.gold} o={0.75 * fin(f, tOne) * (1 - un)} />
+          {gseg(Gg, [0, -1.2, 0], [0, 1.25, 0], C.local, 3, fin(f, tLen), "10 8")}
+          <line x1={axP[0]} y1={axP[1]} x2={rimP[0]} y2={rimP[1]} stroke={C.second} strokeWidth={5} opacity={fin(f, tLen)} />
+        </>} />
+      <SourceBelow text={SRC_G} pic={{ x: 60, y: 28, w: 960, h: 650 }} w={960} name="globe src" o={fout(f, tUn - 10)} />
+      <Svg>
+        {un > 0 ? pts.slice(1).map((q, i) => <line key={i} x1={pts[i].p[0]} y1={pts[i].p[1]} x2={q.p[0]} y2={q.p[1]} stroke={C.gold} strokeWidth={8 + 14 * un} strokeLinecap="butt"
+          opacity={Math.min(q.w, pts[i].w)} />) : null}
+        <Keyword f={f} text="area between 0° and φ?" at={[XC, 150]} appear={tQ} />
+        <Keyword f={f} text="why care?" at={[XC, 250]} appear={tWhy} out={tBuild - 20} />
+
+        <Keyword f={f} text="how much is tropical" at={[XC, 340]} appear={tTrop} s={T.floor + 4} />
+        <Keyword f={f} text="thin strips" at={[XC, 250]} appear={tBuild} />
+        <Keyword f={f} text="almost a rectangle" at={[XC, 440]} appear={tUn + 40} />
+        <Keyword f={f} text="the Earth" at={[XC, 150]} appear={0} out={tQ - 20} />
+      </Svg>
+      <TeX s={String.raw`2\pi\,a\cos\varphi`} x={530} y={700} size={T.key} c={C.second} ax={0.5} o={fin(f, tLen + 30) * un} />
+      <TeX s={String.raw`a\,\Delta\varphi`} x={980} y={760} size={T.key} c={C.gold} ax={0} o={fin(f, tWid) * un} />
+      <TeX s={parts[0]} x={XC} y={600} size={50} c={C.ink} o={fin(f, tArea)} />
+      <TeX s={`=2${parts[1]}`} x={XC + 40} y={700} size={60} c={C.ink} o={fin(f, AT(k, 9, "two pi, times the radius squared"))} />
+    </Scene>
+  );
+};
+
+// ================================================================ s30 the slope of sine (Part 2's shortcut)
+const S30: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s30_slope_of_sine");
+  const tStep = SS(k, 2), tSo = SS(k, 3), tCall = SS(k, 4), tChk = SS(k, 5), tTen = SS(k, 6), tMid = SS(k, 7), tProd = AT(k, 8, "about zero point one five eight"),
+    tGrow = SS(k, 9), tToo = SS(k, 10), tStrip = SS(k, 11);
+  const O: Pt = [180, 760], R = 620;
+  const at = (deg: number, r = R): Pt => [O[0] + r * Math.cos(deg * D2R), O[1] - r * Math.sin(deg * D2R)];
+  const a0 = 20, a1 = 30;
+  const y20 = O[1] - R * BD.curve[20], y30 = O[1] - R * BD.curve[30];
+  const xb = O[0] + R + 60;
+  return (
+    <Scene>
+      <Svg>
+        <path d={arcD(O, R, 0, 90, 90)} fill="none" stroke={C.grid} strokeWidth={4} />
+        <line x1={O[0] - 20} y1={O[1]} x2={O[0] + R + 140} y2={O[1]} stroke={C.muted} strokeWidth={3} />
+        <line x1={O[0]} y1={O[1] + 20} x2={O[0]} y2={O[1] - R - 30} stroke={C.muted} strokeWidth={3} />
+        <Arrow p={O} q={at(a0)} color={C.first} w={8} head={30} o={fin(f, tChk)} />
+        <Arrow p={O} q={at(a1)} color={C.first} w={8} head={30} o={fin(f, tChk)} />
+        <line x1={O[0]} y1={O[1]} x2={at(25)[0]} y2={at(25)[1]} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" opacity={fin(f, tMid)} />
+        <path d={arcD(O, R, a0, a1)} fill="none" stroke={C.gold} strokeWidth={12} opacity={fin(f, tStep)} />
+        <line x1={at(a0)[0]} y1={y20} x2={xb} y2={y20} stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={fin(f, tStep)} />
+        <line x1={at(a1)[0]} y1={y30} x2={xb} y2={y30} stroke={C.second} strokeWidth={3} strokeDasharray="8 8" opacity={fin(f, tStep)} />
+        <line x1={xb} y1={y20} x2={xb} y2={y30} stroke={C.second} strokeWidth={14} opacity={fin(f, tStep + 20)} />
+        <path d={arcD(O, 120, 0, 25)} fill="none" stroke={C.local} strokeWidth={5} opacity={fin(f, tMid)} />
+        <Lbl x={O[0] + 140} y={O[1] - 30} t="25°" c={C.local} s={T.floor} o={fin(f, tMid)} />
+        <Lbl x={at(a0)[0] + 14} y={at(a0)[1] + 34} t="20°" c={C.key} s={T.floor} o={fin(f, tChk)} />
+        <Lbl x={at(a1)[0] + 10} y={at(a1)[1] - 34} t="30°" c={C.key} s={T.floor} o={fin(f, tChk)} />
+        <Keyword f={f} text="a shortcut" at={[XC, 150]} appear={0} out={tSo - 20} />
+        <Check x={1780} y={730} s={0.8} o={fin(f, tToo)} />
+      </Svg>
+      <TeX s={String.raw`\Delta\varphi`} x={at(25, R + 30)[0]} y={at(25, R + 30)[1]} size={T.key} c={C.gold} ax={0} o={fin(f, tStep)} halo />
+      <TeX s={String.raw`\Delta(\sin\varphi)`} x={xb - 20} y={(y20 + y30) / 2 - 70} size={T.key} c={C.second} ax={1} o={fin(f, tCall)} halo />
+      <TeX s={EQ_S30} x={XC} y={160} size={T.calc} c={C.ink} o={fin(f, tSo)} />
+      <CalcStack f={f} x={XC + 40} y={260} size={52} maxLines={4} rows={[
+        { lhs: String.raw`10^\circ`, rhs: String.raw`\approx0.1745\ \text{rad}`, at: tTen },
+        { lhs: String.raw`\cos25^\circ`, rhs: String.raw`\approx0.906`, at: tMid + 30 },
+        { lhs: "", rhs: String.raw`0.906\times0.1745\approx0.158`, at: tProd - 20, ul: tToo },
+        { lhs: "", rhs: String.raw`\sin30^\circ-\sin20^\circ=0.5-0.342`, at: tGrow + 40, size: 46 },
+        { lhs: "", rhs: String.raw`=0.158`, at: AT(k, 10, "zero point one five eight"), ul: tToo, cont: true },
+      ]} />
+      <TeX s={String.raw`\text{strip}\approx2\pi a^2\,\Delta(\sin\varphi)`} x={XC} y={810} size={T.calc} c={C.ink} o={fin(f, tStrip)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s31 adding the strips: integration
+const S31: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s31_adding_strips");
+  const tStack = SS(k, 0), tStair = SS(k, 1), tAdd = SS(k, 2), tZero = SS(k, 3), tSum = SS(k, 4), tBand = SS(k, 5), tChk = SS(k, 6), tSteps = AT(k, 7, "zero point one seven four"),
+    tFive = SS(k, 8), tName = SS(k, 9), tS = SS(k, 10), tPrime = SS(k, 11), tInt = SS(k, 12);
+  const cam = globePath([{ f: 0, lat: 22, lon: 0, dist: 3.4 }, { f: LEN(k) + 10, lat: 22, lon: -8, dist: 3.4 }], f);
+  const A = { x: 1140, y: 140, w: 640, h: 380 };
+  const X = (d: number) => A.x + (d / 90) * A.w, Y = (s: number) => A.y + A.h - s * A.h;
+  const curve = poly((BD.curve as number[]).map((s, d) => [X(d), Y(s)] as Pt));
+  const width = f < tName ? 10 : f < tS ? 5 : f < tPrime ? 2 : 1;
+  const upto = f < tName ? 30 : 90;
+  const stairs = (() => { let d = ""; for (let a = 0; a < upto; a += width) { const s0 = BD.curve[a], s1 = BD.curve[Math.min(90, a + width)];
+    d += `M${X(a)} ${Y(s0)}L${X(a + width)} ${Y(s0)}L${X(a + width)} ${Y(s1)}`; } return d; })();
+  const oS = (i: number) => fin(f, tSteps + i * 25);
+  const eqs = cutAt(EQ_S31, String.raw`,\qquad `);
+  return (
+    <Scene>
+      <Earth cam={cam} coast={0.45}
+        over={(Gg) => <>
+          {[0, 1, 2].map((i) => <BandTint key={i} G={Gg} a={10 * i} b={10 * i + 10} c={i % 2 ? C.gold : C.first} o={0.5 * fin(f, tStack + 20 * i) * (f >= tChk ? (0.4 + 0.6 * oS(i)) : 1)} />)}
+          <path d={parPath(Gg, 30)} fill="none" stroke={C.key} strokeWidth={3} opacity={fin(f, tStack)} />
+        </>} />
+      <GSrc />
+      <Svg>
+        <line x1={A.x} y1={A.y + A.h} x2={A.x + A.w + 10} y2={A.y + A.h} stroke={C.muted} strokeWidth={3} />
+        <line x1={A.x} y1={A.y - 10} x2={A.x} y2={A.y + A.h} stroke={C.muted} strokeWidth={3} />
+        {[0, 30, 60, 90].map((d) => <Lbl key={d} x={X(d)} y={A.y + A.h + 36} t={`${d}°`} c={C.muted} s={48} a="middle" b={false} />)}
+        {[0, 0.5, 1].map((s) => <Lbl key={s} x={A.x - 14} y={Y(s)} t={`${s}`} c={C.muted} s={48} a="end" b={false} />)}
+        <Lbl x={A.x + 14} y={A.y - 30} t="sin φ" c={C.muted} s={T.floor} b={false} />
+        <path d={curve} fill="none" stroke={C.second} strokeWidth={5} opacity={0.8} />
+        <path d={stairs} fill="none" stroke={C.gold} strokeWidth={width === 10 ? 7 : 4} opacity={fin(f, tStair)} />
+        {[0, 1, 2].map((i) => <Lbl key={i} x={X(10 * i + 10) + 12} y={(Y(BD.curve[10 * i]) + Y(BD.curve[10 * i + 10])) / 2} t={BD.steps[i].toFixed(3)} c={C.gold} s={T.floor}
+          o={oS(i) * fout(f, tName - 10)} />)}
+        <Keyword f={f} text="stack the strips" at={[XC, 620]} appear={0} out={tAdd - 20} />
+        <Keyword f={f} text="steps add up: top − bottom" at={[XC, 620]} appear={tAdd} out={tBand - 20} s={T.floor + 4} />
+        <Keyword f={f} text="integration" at={[XC, 820]} appear={tName} out={tPrime - 20} />
+        <Lbl x={XC} y={830} t="φ′: the latitude of each strip" c={C.key} s={T.floor} o={fin(f, tPrime)} />
+      </Svg>
+      <TeX s={eqs[1]} x={XC} y={630} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, tInt - 15)} />
+      <TeX s={String.raw`0.174+0.168+0.158`} x={XC} y={730} size={52} c={C.ink} o={win(f, tSteps + 70, tName - 22)} />
+      <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "They add up"), tName - 22)} />
+      <Layered parts={[{ t: String.raw`\int_0^{\varphi}`, u: { w: String.raw`\text{sum}`, c: C.gold } }, { t: String.raw`\cos\varphi'` },
+        { t: String.raw`\,d\varphi'`, u: { w: String.raw`\text{tiny step}`, c: C.gold } }, { t: String.raw`=\sin\varphi` }]} x={XC} y={660} size={72}
+        layers={[{ t: "all", o: fin(f, tInt) }, { t: [], u: [0, 2], o: fin(f, tInt + 25) }]} />
+      {void [tZero, tSum, tFive, SE, eqs[0]]}
+    </Scene>
+  );
+};
+
+// ================================================================ s32 the share sin φ: half the Earth within 30° of the equator
+const S32: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s32_band_fraction");
+  const tUp = SS(k, 1), tSin90 = SS(k, 2), t255 = AT(k, 3, "two hundred"), tWhole = SS(k, 4), tShare = SS(k, 5), tHalf = SS(k, 6), tHalfNH = SS(k, 7), tSouth = SS(k, 8),
+    tBoth = SS(k, 9), tBrest = SS(k, 10), tTrop = SS(k, 11);
+  const cam = globePath([{ f: 0, lat: 18, lon: 20, dist: 3.4 }, { f: LEN(k) + 10, lat: 22, lon: 12, dist: 3.4 }], f);
+  const top = 90 * prog(f, tUp, tSin90 + 30);
+  const phase2 = f >= tHalf;
+  const G = globeG(cam);
+  return (
+    <Scene>
+      <Earth cam={cam} coast={0.45}
+        over={(Gg) => <>
+          {!phase2 ? <BandTint G={Gg} a={0} b={top} c={C.first} o={0.45} /> : null}
+          {!phase2 ? <BandTint G={Gg} a={-90 * prog(f, tWhole, tWhole + 40)} b={0} c={C.first} o={0.45 * fin(f, tWhole)} /> : null}
+          {phase2 ? <BandTint G={Gg} a={f >= tBoth ? -30 : 0} b={30} c={C.first} o={0.5} /> : null}
+          {phase2 ? <BandTint G={Gg} a={30} b={90} c={C.local} o={0.35} /> : null}
+          {phase2 && f >= tBoth ? <BandTint G={Gg} a={-90} b={-30} c={C.local} o={0.35} /> : null}
+          <path d={parPath(Gg, PHI)} fill="none" stroke={C.second} strokeWidth={6} opacity={fin(f, tBrest)} />
+          {gdot(Gg, PHI, BREST[1], C.gold, 10, fin(f, tBrest))}
+        </>} />
+      <GSrc />
+      <Svg>
+        <g data-lc-maplabel="1">
+          <Lbl x={G.p(15, cam.lon)[0]} y={G.p(15, cam.lon)[1]} t="½" c={C.key} s={T.key} a="middle" o={win(f, tHalfNH, tBoth)} />
+          <Lbl x={G.p(55, cam.lon)[0]} y={G.p(55, cam.lon)[1]} t="½" c={C.key} s={T.key} a="middle" o={win(f, tHalfNH, tBoth)} />
+        </g>
+        <Keyword f={f} text="check the formula" at={[XC, 150]} appear={0} out={t255 - 60} />
+        <Keyword f={f} text="half of the Earth" at={[XC, 830]} appear={tBoth + 20} out={tTrop - 20} />
+        <Keyword f={f} text="tropics: huge · polar caps: small" at={[XC, 830]} appear={tTrop} s={46} />
+      </Svg>
+      <CalcStack f={f} x={XC + 40} y={110} size={52} maxLines={3} rows={[
+        { lhs: String.raw`\sin90^\circ`, rhs: "=1", at: AT(k, 2, "is one") },
+        { lhs: "", rhs: String.raw`2\pi a^2\approx255\times10^{6}\ \text{km}^2`, at: t255 - 20 },
+        { lhs: "", rhs: String.raw`4\pi a^2\approx510\times10^{6}\ \text{km}^2`, at: AT(k, 4, "about five hundred") - 20 },
+      ]} />
+      <TeX s={EQ_S32} x={XC} y={460} size={T.eq} c={C.ink} o={fin(f, tShare)} />
+      <TeX s={String.raw`\sin30^\circ=\tfrac12`} x={XC} y={635} size={60} c={C.ink} o={win(f, tHalf, tBrest - 22)} />
+      <TeX s={String.raw`\sin48.4^\circ\approx0.7478\approx\tfrac34`} x={XC} y={740} size={60} c={C.second} o={fin(f, AT(k, 10, "zero point seven four"))} />
+      {void [tSouth]}
+    </Scene>
+  );
+};
+
+// ================================================================ s33 Archimedes' cylinder
+const S33: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s33_archimedes");
+  const tWrap = SS(k, 1), tPush = SS(k, 2), tH = SS(k, 3), tZ = SS(k, 4), tRoll = SS(k, 5), tLen = SS(k, 6), tSame = SS(k, 7), tWhy = SS(k, 8), tShort = SS(k, 9), tWide = SS(k, 10),
+    tCancel = SS(k, 11), tEq = SS(k, 12);
+  const cam = spinPath([{ f: 0, lat: 15, lon: 0, dist: 3.6 }, { f: LEN(k) + 10, lat: 15, lon: 40, dist: 3.6, spin: 0.2 }], f);
+  const G = globeG(cam);
+  const L = cam.lon, sp = Math.sin(PHI * D2R);
+  const cyl = (lo: number, y: number): V3 => [Math.sin(lo * D2R), y, Math.cos(lo * D2R)];
+  const front = (lo: number) => Math.cos((lo - L) * D2R) > 0;
+  const rim = (y: number) => { const pf: Pt[] = [], pb: Pt[] = []; for (let lo = L - 90; lo <= L + 90; lo += 3) pf.push(G.pw(cyl(lo, y))); for (let lo = L + 90; lo <= L + 270; lo += 3) pb.push(G.pw(cyl(lo, y))); return { pf, pb }; };
+  const band = [...Array.from({ length: 61 }, (_, i) => G.pw(cyl(L - 90 + 3 * i, 0))), ...Array.from({ length: 61 }, (_, i) => G.pw(cyl(L + 90 - 3 * i, sp)))];
+  const s70a = Math.sin(68 * D2R), s70b = Math.sin(72 * D2R);
+  const strip = [...Array.from({ length: 61 }, (_, i) => G.pw(cyl(L - 90 + 3 * i, s70a))), ...Array.from({ length: 61 }, (_, i) => G.pw(cyl(L + 90 - 3 * i, s70b)))];
+  const br0 = G.pw(cyl(L + 92, 0)), br1 = G.pw(cyl(L + 92, sp));
+  const cylO = fin(f, tWrap);
+  return (
+    <Scene>
+      <Earth cam={cam} coast={0.45}
+        over={(Gg) => <>
+          <BandTint G={Gg} a={0} b={PHI} c={C.first} o={0.45 * fin(f, tPush)} />
+          <BandTint G={Gg} a={68} b={72} c={C.gold} o={0.8 * win(f, tShort, tEq)} />
+        </>} />
+      <Svg>
+        <g opacity={cylO}>
+          {[-1.15, 1.15].map((y) => { const r = rim(y); return <g key={y}><path d={poly(r.pf)} fill="none" stroke={C.local} strokeWidth={3} /><path d={poly(r.pb)} fill="none" stroke={C.local} strokeWidth={2} strokeDasharray="8 8" opacity={0.6} /></g>; })}
+          {Array.from({ length: 12 }, (_, i) => { const lo = i * 30; const a = G.pw(cyl(lo, -1.15)), b = G.pw(cyl(lo, 1.15));
+            return <line key={i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={C.local} strokeWidth={front(lo) ? 2.5 : 1.5} strokeDasharray={front(lo) ? undefined : "8 8"} opacity={front(lo) ? 0.8 : 0.4} />; })}
+          <path d={`${poly(band)}Z`} fill={C.first} fillOpacity={0.3 * fin(f, tH)} stroke={C.first} strokeWidth={3} opacity={fin(f, tH)} />
+          <path d={`${poly(strip)}Z`} fill={C.gold} fillOpacity={0.5} stroke={C.gold} strokeWidth={2} opacity={win(f, tShort, tEq)} />
+          {[10, 25, 40].map((la) => [-35, 0, 35].map((d) => { const lo = L + d; const a = G.pw(ll(la, lo, 1.003)), b = G.pw(cyl(lo, Math.sin(la * D2R)));
+            return <Arrow key={`${la}${d}`} p={a} q={b} color={C.first} w={4} head={16} o={win(f, tPush + 20, tH + 30)} />; }))}
+          <line x1={br0[0] + 30} y1={br0[1]} x2={br1[0] + 30} y2={br1[1]} stroke={C.gold} strokeWidth={5} opacity={fin(f, tH)} />
+          <line x1={br0[0] + 18} y1={br0[1]} x2={br0[0] + 42} y2={br0[1]} stroke={C.gold} strokeWidth={5} opacity={fin(f, tH)} />
+          <line x1={br1[0] + 18} y1={br1[1]} x2={br1[0] + 42} y2={br1[1]} stroke={C.gold} strokeWidth={5} opacity={fin(f, tH)} />
+        </g>
+        <SideCallout f={f} lines={["height a sin φ = z"]} at={[XC + 4, 160]} appear={tZ} target={[(br0[0] + br1[0]) / 2 + 36, (br0[1] + br1[1]) / 2]} bend={30} out={tWhy - 15} />
+        <g opacity={win(f, tRoll, tWhy - 15)}>
+          <rect x={1110} y={300} width={640} height={130} fill={C.first} fillOpacity={0.3} stroke={C.first} strokeWidth={4} />
+        </g>
+        <Keyword f={f} text="Archimedes" at={[XC, 160]} appear={0} out={tZ - 20} />
+        <Keyword f={f} text="shorter round: × cos φ" at={[XC, 300]} appear={tShort} s={T.floor + 4} />
+        <Keyword f={f} text="wider along the surface: × 1/cos φ" at={[XC, 380]} appear={tWide} s={T.floor} />
+        <Keyword f={f} text="they cancel" at={[XC, 470]} appear={tCancel} />
+        <Keyword f={f} text="equal heights, equal areas" at={[XC, 760]} appear={tEq} />
+      </Svg>
+      <TeX s={String.raw`\text{length }2\pi a`} x={1430} y={470} size={52} c={C.ink} ax={0.5} o={win(f, tLen, tWhy - 15)} />
+
+      <TeX s={String.raw`\text{height }a\sin\varphi`} x={1430} y={250} size={52} c={C.ink} ax={0.5} o={win(f, tLen + 30, tWhy - 15)} />
+      <TeX s={EQ_S33} x={XC} y={590} size={60} c={C.ink} o={fin(f, tSame)} />
+      <TeX s={String.raw`A_{0\to\varphi}=2\pi a^2\sin\varphi`} x={XC} y={680} size={52} c={C.muted} o={fin(f, tSame + 30)} />
+      <Svg><Check x={1700} y={680} s={0.7} o={fin(f, tSame + 50)} /></Svg>
+    </Scene>
+  );
+};
+
+// ================================================================ s34 the cos φ weighting of a global mean (keep line K4)
+const MB = { x: 90, y: 220, w: 900, h: Math.round(900 * TM.ee_ext[1] / TM.ee_ext[0]) };
+const S34: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s34_global_mean");
+  const g0 = keepGone(k, 1);
+  const tPlanet = SS(k, 3), tEq = SS(k, 4), tN60 = SS(k, 5), tPlain = SS(k, 6), tHalf = SS(k, 7), tW = SS(k, 8), t20 = SS(k, 9), tWhy = SS(k, 10), tReal = AT(k, 11, "real data"),
+    tP = AT(k, 12, "about seven point one"), tWt = AT(k, 13, "about sixteen point three"), tCold = SS(k, 14), tHow = SS(k, 15);
+  const oToy = fin(f, tPlanet) * fout(f, tReal - 10), oMap = fin(f, tReal, 15);
+  const tile = (x: number, y: number, w: number, h: number) => `M${x} ${y + h}L${x + w} ${y + h}L${x + w + 60} ${y}L${x + 60} ${y}Z`;
+  const cx = MB.x + MB.w / 2, cy = MB.y + MB.h / 2;
+  const coast = (TM.coast_ee as number[][]).map((ln) => poly(Array.from({ length: ln.length / 2 }, (_, i) => [cx + ln[2 * i] * MB.w / 2, cy - ln[2 * i + 1] * MB.h / 2] as Pt))).join("");
+  const thermoL = (t: number) => clamp((t + 10) / 45, 0, 1);
+  return (
+    <Scene>
+      <Svg>
+        <g opacity={oToy}>
+          <path d={tile(150, 560, 400, 200)} fill={C.gold} fillOpacity={0.35} stroke={C.gold} strokeWidth={4} opacity={fin(f, tEq)} />
+          <path d={tile(650, 300, 200, 200)} fill={C.gold} fillOpacity={0.35} stroke={C.gold} strokeWidth={4} opacity={fin(f, tN60)} />
+          <Lbl x={380} y={800} t="equator · area 1" c={C.key} s={T.floor} a="middle" o={fin(f, tEq)} />
+          <Lbl x={780} y={540} t="60° N · area ½" c={C.key} s={T.floor} a="middle" o={fin(f, tHalf)} />
+          <Thermo x={380} y={600} level={thermoL(30)} c={C.neg} o={fin(f, tEq + 20)} />
+          <Thermo x={780} y={340} level={thermoL(0)} c={C.first} o={fin(f, tN60 + 20)} />
+          <Lbl x={430} y={510} t="30 °C" c={C.key} s={T.key} o={fin(f, tEq + 20)} />
+          <Lbl x={830} y={250} t="0 °C" c={C.key} s={T.key} o={fin(f, tN60 + 20)} />
+        </g>
+        <g opacity={oMap}>
+          <rect x={MB.x} y={MB.y} width={MB.w} height={MB.h} fill="none" stroke="none" />
+          <image href={IMGS.t2mEE} x={MB.x} y={MB.y} width={MB.w} height={MB.h} preserveAspectRatio="none" />
+          <path d={coast} fill="none" stroke={C.bg} strokeOpacity={0.7} strokeWidth={1.6} />
+          <ColourBar x={1100} y={190} w={560} lut={LUT_T} lo={-60} hi={40} unit="°C" title="2-m air temperature"
+            ticks={[{ v: -60, t: "−60" }, { v: -20, t: "−20" }, { v: 0, t: "0" }, { v: 20, t: "20" }, { v: 40, t: "40" }]} />
+        </g>
+        <g opacity={fin(f, tCold) * oMap}>
+          <image href={IMGS.t2mPolar} x={1100} y={580} width={720} height={60} preserveAspectRatio="none" opacity={0.4} />
+          {Array.from({ length: 61 }, (_, i) => <line key={i} x1={1100 + 12 * i} y1={580} x2={1100 + 12 * i} y2={640} stroke={C.ink} strokeOpacity={0.35} strokeWidth={1} />)}
+          <rect x={1100} y={580} width={720} height={60} fill="none" stroke={C.muted} strokeWidth={2} />
+          <Lbl x={1100} y={685} t="60-90° N: many thin boxes" c={C.muted} s={T.floor} b={false} />
+        </g>
+        <Keyword f={f} text="plain average" at={[XC, 360]} appear={tP} c={C.local} o={oMap} />
+        <Keyword f={f} text="weighted by cos φ" at={[XC, 470]} appear={tWt} c={C.first} o={oMap} />
+        <Keyword f={f} text="9 °C too cold" at={[XC, 760]} appear={tCold + 20} c={C.neg} />
+        <Keyword f={f} text="cos φ weighting" at={[XC, 830]} appear={tHow} />
+      </Svg>
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 monthly mean · 1° grid" pic={MB} w={900} o={oMap} name="s34 src" />
+      <TeX s={String.raw`\approx7.1\ ^\circ\text{C}`} x={1570} y={360} size={60} c={C.local} o={fin(f, tP) * oMap} />
+      <TeX s={String.raw`\approx16.3\ ^\circ\text{C}`} x={1570} y={470} size={60} c={C.first} o={fin(f, tWt) * oMap} />
+      <CalcStack f={f} x={XC} y={250} size={50} maxLines={3} o={fout(f, tReal - 10)} rows={[
+        { lhs: "", rhs: String.raw`\text{plain: }(30+0)\div2=15\ ^\circ\text{C}`, at: tPlain },
+        { lhs: "", rhs: String.raw`\text{weights: }\cos0^\circ=1,\ \cos60^\circ=\tfrac12`, at: tHalf + 20 },
+        { lhs: "", rhs: String.raw`\text{weighted: }(30\times1+0\times\tfrac12)`, at: tW + 30, size: 46 },
+        { lhs: "", rhs: String.raw`\div1.5=20\ ^\circ\text{C}`, at: tW + 60, size: 46, cont: true },
+      ]} />
+      <TeX s={EQ_S34} x={XC} y={620} size={T.eq} c={C.ink} o={fin(f, tWhy) * fout(f, tReal - 10)} />
+      <KeepLine f={f} k={k} lines={["boxes shrink by cos φ ·", "half the Earth within", "30° of the equator"]} />
+      {void [g0, t20, LYB, KHULNA, SING]}
+    </Scene>
+  );
+};
+
+// ================================================================ s35 to sum up
+const MC: Pt = [520, 430];
+const Mini: React.FC<{ i: number; o: number }> = ({ i, o }) => {
+  if (o <= 0) return null;
+  const R = 260, c = MC;
+  const p = (deg: number, r = R): Pt => [c[0] + r * Math.cos(deg * D2R), c[1] - r * Math.sin(deg * D2R)];
+  const half = `${arcD(c, R, -90, 90, 60)}Z`;
+  return (
+    <g opacity={o}>
+      {i === 0 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} /><Arrow p={c} q={p(40)} color={C.first} /><circle cx={c[0]} cy={c[1]} r={10} fill={C.gold} /></> : null}
+      {i === 1 ? <><path d={half} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><Arrow p={c} q={p(48.4)} color={C.first} /><Lbl x={p(48.4, 140)[0] - 30} y={p(48.4, 140)[1] - 20} t="a" c={C.first} s={T.key} a="end" /></> : null}
+      {i === 2 || i === 3 ? <><path d={half} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><line x1={c[0]} y1={c[1]} x2={c[0] + R} y2={c[1]} stroke={C.local} strokeWidth={4} />
+        <line x1={c[0]} y1={c[1] + R} x2={c[0]} y2={c[1] - R} stroke={C.local} strokeWidth={4} /><Arrow p={c} q={p(48.4)} color={C.first} />
+        <path d={`M${c[0]} ${c[1]}${arcD(c, 120, 0, 48.4).replace("M", "L")}Z`} fill={C.gold} fillOpacity={i === 2 ? 0.35 : 0.12} stroke={C.gold} strokeWidth={5} />
+        {i === 3 ? <path d={`M${c[0]} ${c[1]}${arcD(c, 100, 48.4, 90).replace("M", "L")}Z`} fill={C.local} fillOpacity={0.35} stroke={C.local} strokeWidth={5} /> : null}</> : null}
+      {i === 4 || i === 5 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} />
+        {i === 4 ? <ellipse cx={c[0]} cy={c[1] - R * 0.75} rx={R * 0.66} ry={40} fill="none" stroke={C.second} strokeWidth={6} /> : <ellipse cx={c[0]} cy={c[1]} rx={R * 0.45} ry={R} fill="none" stroke={C.second} strokeWidth={6} />}
+        <line x1={c[0]} y1={c[1] - R - 40} x2={c[0]} y2={c[1] + R + 40} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" /><circle cx={c[0]} cy={i === 4 ? c[1] - R * 0.75 : c[1]} r={9} fill={i === 4 ? C.local : C.gold} /></> : null}
+      {i === 6 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#4a3d36" stroke={C.muted} strokeWidth={4} /><line x1={c[0]} y1={c[1]} x2={p(0)[0]} y2={p(0)[1]} stroke={C.gold} strokeWidth={6} />
+        <line x1={c[0]} y1={c[1]} x2={p(40)[0]} y2={p(40)[1]} stroke={C.key} strokeWidth={5} /><path d={arcD(c, 140, 0, 40)} fill="none" stroke={C.second} strokeWidth={8} /></> : null}
+      {i === 7 ? <><path d={`M${c[0] - 200} ${c[1] + 150}L${c[0] + 120} ${c[1] + 150}L${c[0] + 120} ${c[1] - 210}Z`} fill={C.ink} fillOpacity={0.08} stroke="none" />
+        <Arrow p={[c[0] - 200, c[1] + 150]} q={[c[0] + 120, c[1] - 210]} color={C.first} />
+        <line x1={c[0] - 200} y1={c[1] + 150} x2={c[0] + 120} y2={c[1] + 150} stroke={C.second} strokeWidth={8} /><line x1={c[0] + 120} y1={c[1] + 150} x2={c[0] + 120} y2={c[1] - 210} stroke={C.second} strokeWidth={8} /></> : null}
+      {i === 8 ? <><circle cx={c[0]} cy={c[1]} r={R} fill="#1d2a44" stroke={C.muted} strokeWidth={4} /><ellipse cx={c[0]} cy={c[1]} rx={R} ry={50} fill="none" stroke={C.second} strokeWidth={4} />
+        <Arrow p={[c[0] - 60, c[1] + 50]} q={[c[0] + 200, c[1] + 48]} color={C.first} /></> : null}
+      {i === 9 ? <><path d={arcD(c, R, -10, 90)} fill="none" stroke={C.muted} strokeWidth={4} /><path d={arcD(c, R, 30, 45)} fill="none" stroke={C.second} strokeWidth={16} />
+        <line x1={c[0]} y1={c[1]} x2={p(30)[0]} y2={p(30)[1]} stroke={C.key} strokeWidth={4} /><line x1={c[0]} y1={c[1]} x2={p(45)[0]} y2={p(45)[1]} stroke={C.key} strokeWidth={4} /></> : null}
+      {i === 10 ? <>{[0, 1, 2, 3].map((q) => <rect key={q} x={c[0] - 200} y={c[1] - 200 + q * 110} width={360 * Math.cos(q * 25 * D2R)} height={50} fill={C.gold} rx={6} />)}</> : null}
+      {i === 11 ? <path d={`M${c[0] - 220} ${c[1] + 100}L${c[0] + 140} ${c[1] + 100}L${c[0] + 220} ${c[1] - 60}L${c[0] - 140} ${c[1] - 60}Z`} fill={C.gold} fillOpacity={0.4} stroke={C.gold} strokeWidth={5} /> : null}
+      {i === 12 ? <>{Array.from({ length: 9 }, (_, q) => <rect key={q} x={c[0] - 280 + q * 60} y={c[1] + 200 - 400 * Math.sin((q + 1) * 10 * D2R)} width={56} height={400 * Math.sin((q + 1) * 10 * D2R)} fill={C.gold} opacity={0.6} />)}</> : null}
+      {i === 13 ? <><line x1={c[0]} y1={c[1] + 220} x2={c[0]} y2={c[1] + 40} stroke={C.muted} strokeWidth={8} />
+        <Arrow p={[c[0], c[1] + 40]} q={[c[0] + 200, c[1] + 40]} color={C.second} /><Arrow p={[c[0], c[1] + 40]} q={[c[0] + 110, c[1] - 60]} color={C.second} />
+        <Arrow p={[c[0], c[1] + 40]} q={[c[0], c[1] - 170]} color={C.first} /><Lbl x={c[0] + 160} y={c[1] - 150} t="?" c={C.gold} s={T.hero} /></> : null}
+    </g>
+  );
+};
+const S35: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s35_recap");
+  const n = 14;
+  const a = (j: number) => SS(k, j), b = (j: number) => (j + 1 < n ? SS(k, j + 1) - 20 : LEN(k) + 20);
+  const kw: [number, string, string | null][] = [
+    [0, "distance + two angles", null], [1, "", String.raw`a\approx6400\ \text{km}`], [2, "latitude φ", null], [3, "", String.raw`\text{colatitude}=90^\circ-\varphi`],
+    [4, "parallel: round the axis", null], [5, "meridian: round the centre", null], [6, "longitude λ: east +", null],
+    [7, "", EQ_S18.split(String.raw`,\quad `)[2]], [8, "", String.raw`U=\Omega\,a\cos\varphi\approx465\ \text{m/s}`], [9, "", String.raw`\Delta y=a\,\Delta\varphi\approx111\ \text{km}`],
+    [10, "", String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`], [11, "", String.raw`dA=a^2\cos\varphi\,d\varphi\,d\lambda`], [12, "share sin φ · weights cos φ", null], [13, "Part 4: turning frames", null],
+  ];
+  return (
+    <Scene>
+      <Svg>{Array.from({ length: n }, (_, j) => <Mini key={j} i={j} o={fin(f, a(j), 10) * fout(f, b(j), 10)} />)}</Svg>
+      <Svg>{kw.filter((q) => q[1]).map(([j, t]) => <Keyword key={j} f={f} text={t} at={[XC, 430]} appear={a(j)} out={j + 1 < n ? b(j) : undefined} />)}</Svg>
+      {kw.filter((q) => q[2]).map(([j, , s]) => <TeX key={j} s={s as string} x={XC} y={430} size={j === 7 ? T.calc : 60} c={C.ink} o={fin(f, a(j)) * (j + 1 < n ? fout(f, b(j)) : 1)} />)}
+      <Svg><Lbl x={XC} y={540} t="sin ↔ cos" c={C.key} s={T.key} o={win(f, AT(k, 3, "swaps sine"), b(3))} />
+        <Lbl x={XC} y={540} t="a cos φ cos λ, a cos φ sin λ" c={C.muted} s={T.floor} o={win(f, AT(k, 7, "x is the radius"), b(7))} /></Svg>
+    </Scene>
+  );
+};
+
+// ================================================================ s36 the series end card (maths ending)
+const S36: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s36_end");
+  const t2 = SS(k, 2), tOther = AT(k, 2, "and the notebooks");
+  const thumb = (x: number, i: number) => (
+    <g key={i} opacity={0.75}>
+      <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
+      {i === 0 ? <><path d={`M${x - 20} 225 A 70 70 0 0 1 ${x - 20} 85 Z`} fill="#4a3d36" stroke={C.muted} strokeWidth={3} /><line x1={x - 20} y1={155} x2={x + 40} y2={155} stroke={C.local} strokeWidth={3} />
+        <Arrow p={[x - 20, 155]} q={[x + 26, 103]} color={C.first} w={5} head={16} halo={false} /></> : null}
+      {i === 1 ? <><circle cx={x} cy={155} r={70} fill="none" stroke={C.muted} strokeWidth={3} />{[-40, 0, 40].map((q) => <ellipse key={q} cx={x} cy={155 + q} rx={70 * Math.cos(Math.asin(q / 70))} ry={10} fill="none" stroke={C.second} strokeWidth={2} />)}
+        {[25, 50].map((q) => <ellipse key={q} cx={x} cy={155} rx={q} ry={70} fill="none" stroke={C.local} strokeWidth={2} />)}</> : null}
+      {i === 2 ? <><path d={`M${x - 90} 215 L${x + 60} 215 L${x + 60} 100 Z`} fill={C.ink} fillOpacity={0.1} stroke={C.second} strokeWidth={4} /></> : null}
+      {i === 3 ? <path d={`M${x - 90} 210 L${x + 50} 210 L${x + 90} 110 L${x - 50} 110 Z`} fill={C.gold} fillOpacity={0.4} stroke={C.gold} strokeWidth={4} /> : null}
+    </g>
+  );
+  return (
+    <Scene>
+      <Svg>
+        <g opacity={fin(f, 6)}>{[420, 760, 1100, 1440].map((x, i) => thumb(x, i))}</g>
+        <Lbl x={960} y={330} t="a series of maths tutorials" c={C.key} s={T.calc} a="middle" o={fin(f, 10)} />
+        <Lbl x={960} y={410} t="atmospheric science · meteorology · fluid dynamics" c={C.key} s={T.key} a="middle" o={fin(f, AT(k, 1, "atmospheric science"))} />
+        <g opacity={fin(f, t2)}><Notebook x={300} y={500} s={0.4} /><Lbl x={370} y={508} t="coordinates notebook" c={C.ink} s={T.key} /></g>
+        <g opacity={fin(f, tOther)}>
+          {[0, 1, 2].map((i) => <Notebook key={i} x={260 + i * 30} y={600 - i * 10} s={0.24} c={[C.second, VIOLET, C.muted][i]} o={0.9} />)}
+          <Lbl x={370} y={590} t="notebooks for the other maths concepts" c={C.key} s={T.key} />
+        </g>
+      </Svg>
+    </Scene>
+  );
+};
+
+export const SCENES_C: Record<string, React.FC> = {
+  s26_grid_boxes: S26, s27_area_patch: S27, s28_box_areas: S28, s29_strip_round: S29, s30_slope_of_sine: S30, s31_adding_strips: S31, s32_band_fraction: S32,
+  s33_archimedes: S33, s34_global_mean: S34, s35_recap: S35, s36_end: S36,
+};
+void [gdot, plab, splitVis, pulse, GFULL, mix];

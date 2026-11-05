@@ -1,0 +1,1888 @@
+{
+ "id": "ch00_coordinates_sphere",
+ "title": "Coordinates, Part 3 — Our round Earth: latitude, longitude, distances and areas",
+ "storyboard": "movies/ch00/ch00_coordinates_sphere/storyboard.yaml",
+ "builder": "movies/data/build_ch00_coordinates_sphere.py",
+ "fluidpy": {
+  "repo": "../Fluid Dynamics",
+  "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+  "dirty_tracked": true,
+  "sphere_py_sha256": "49866e7d01f39d2c4ee3fe963d0c8730b69ea867c8c7a00a402a878d68436207",
+  "constants_py_sha256": "b4c5cf36188cca8c78ba9e72f8e54cf5717e3d17e363247645129bd1e6bd5aa8",
+  "coords_py_sha256": "3497d372316d1dd7fc3277a74e794eec3b8997dcb85525d1ea2d5d450111c2d2",
+  "climatology_py_sha256": "0facae7e9ed73bd3010798a4d779d7fc29b9039b309ecca826041baee2d37c9d",
+  "naturalearth_py_sha256": "2b32ed30d613ce25c92b9dfd4387a9a2d43f11e19a72ca0a5756f0fb22f66f6f",
+  "ibtracs_py_sha256": "8f9ca6410e72ccc4b3f48bc7404a5e66df1740f3e8dabeb8159d58866a4bd52f",
+  "mapproj_py_sha256": "f8da90cb00f90da803adbd4754feceb68775dfc0400ff116a1c2e60d45c64769"
+ },
+ "equations_note": "provenance only (QA/reviewer); the movie draws no equation labels or numbers (HOUSE_STYLE §5)",
+ "equations": {
+  "a (the Earth's radius)": "Vallis §2.2.2 p. 61",
+  "(λ, φ, r) spherical coordinates": "Vallis §2.2.2 p. 61, Fig. 2.3",
+  "x = a cos φ cos λ, y = a cos φ sin λ, z = a sin φ": "Vallis §2.2.2 (Kundu App. B §B.5 with colatitude θ = 90° − φ)",
+  "δy = a δφ, δx = a cos φ δλ": "Vallis §2.2.2, text before (2.27)",
+  "dA = a² cos φ dφ dλ": "from δx δy (Vallis §2.2.2)",
+  "U = Ω a cos φ": "our step (|Ω × r| of Vallis (2.36))",
+  "global mean weights cos φ": "fluidpy.diag.climatology.global_mean"
+ },
+ "parameters": {
+  "places": {
+   "brest": [
+    48.4,
+    -4.5
+   ],
+   "khulna": [
+    22.8,
+    89.6
+   ],
+   "sing": [
+    1.35,
+    103.8
+   ],
+   "lyb": [
+    78.2,
+    15.6
+   ],
+   "greenwich": [
+    51.48,
+    0.0
+   ]
+  },
+  "a_m": 6371000.0,
+  "Omega": 7.292115e-05,
+  "amphan": {
+   "sid": "2020136N10088",
+   "file": "IBTrACS.NI.v04r01.nc",
+   "closest_km_to_khulna": 85.52134319831156,
+   "data_report": "reports/data/ch00_coordinates_research.md §3 (78 km W)"
+  },
+  "era5_panels": {
+   "tall_deg": 1.25,
+   "px": [
+    400,
+    440
+   ],
+   "km_per_px": 0.31589467796749643,
+   "projection": "local equirectangular scaled by cos φ (true local shape; storyboard asked LAEA: differences < 0.3 % over 1.25°)",
+   "image": "BMNG 21 600 × 10 800 (1.85 km per pixel), bilinear"
+  },
+  "t2m": {
+   "file": "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc (variable t2m, K)",
+   "weighted_C": 16.272369009397437,
+   "plain_C": 7.113659997686,
+   "lut": "cmocean thermal, −60 … +40 °C"
+  },
+  "exaggerations": [
+   "1° steps drawn ×5 (s22, s24, s25)",
+   "4.5° wedge ×6 inset (s11, s17)",
+   "one-minute step ×60 inset (s23)",
+   "balloon height ×50 (s03, s04)",
+   "s27 patch 5° wide (×20 an ERA5 box)",
+   "lifted caps and slid halves (s04-s08, s11, s14-s17, s22, s24)",
+   "interior rings decorative"
+  ],
+  "time_compression": [
+   "globe spins (s06, s09, s20, s21)",
+   "the camera tour along the prime meridian (s10)",
+   "the title slice (s00)"
+  ],
+  "speed_arrows": "s21: 1 px per 1.5 m/s on the globe (illustrative length)"
+ },
+ "credits": [
+  "NASA Blue Marble Next Generation (NASA Earth Observatory).",
+  "Made with Natural Earth.",
+  "IBTrACS v04r01 (NOAA NCEI).",
+  "ERA5 monthly means (Copernicus Climate Change Service; contains modified Copernicus Climate Change Service information 2026).",
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."
+ ],
+ "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
+ "chapters": [
+  {
+   "time": "0:00",
+   "t_s": 0.0,
+   "title": "title, hook and look back",
+   "scene": "s00_title"
+  },
+  {
+   "time": "1:38",
+   "t_s": 98.75,
+   "title": "the sphere, latitude and the parallel",
+   "scene": "s03_sphere"
+  },
+  {
+   "time": "5:51",
+   "t_s": 351.525,
+   "title": "colatitude and the sine-cosine swap",
+   "scene": "s07_colatitude"
+  },
+  {
+   "time": "8:50",
+   "t_s": 530.25,
+   "title": "meridians, the prime meridian, longitude",
+   "scene": "s09_meridians"
+  },
+  {
+   "time": "13:46",
+   "t_s": 826.75,
+   "title": "Earth-centred x, y, z",
+   "scene": "s13_earth_axes"
+  },
+  {
+   "time": "14:59",
+   "t_s": 899.55,
+   "title": "Brest's position, step by step",
+   "scene": "s14_brest_side"
+  },
+  {
+   "time": "22:07",
+   "t_s": 1327.975,
+   "title": "Khulna",
+   "scene": "s19_khulna"
+  },
+  {
+   "time": "23:46",
+   "t_s": 1426.55,
+   "title": "the spinning ground",
+   "scene": "s20_spin_rate"
+  },
+  {
+   "time": "27:59",
+   "t_s": 1679.1,
+   "title": "distances north and east",
+   "scene": "s22_distance_north"
+  },
+  {
+   "time": "33:09",
+   "t_s": 1989.4,
+   "title": "ERA5 grid boxes",
+   "scene": "s26_grid_boxes"
+  },
+  {
+   "time": "34:53",
+   "t_s": 2093.925,
+   "title": "areas, step by step",
+   "scene": "s27_area_patch"
+  },
+  {
+   "time": "42:48",
+   "t_s": 2568.775,
+   "title": "Archimedes",
+   "scene": "s33_archimedes"
+  },
+  {
+   "time": "44:09",
+   "t_s": 2649.35,
+   "title": "global averages",
+   "scene": "s34_global_mean"
+  },
+  {
+   "time": "45:54",
+   "t_s": 2754.8,
+   "title": "to sum up",
+   "scene": "s35_recap"
+  }
+ ],
+ "maths_skips": [
+  {
+   "block": "K1",
+   "chip_scene": "s08_sin_cos_swap",
+   "chip_sentence": 3,
+   "chip_at_s": 415.8,
+   "skip_to": "8:50",
+   "skip_to_s": 530.25,
+   "keep_scene": "s09_meridians",
+   "keep_line": "If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever we have a sine of the latitude, and the other way round."
+  },
+  {
+   "block": "K2",
+   "chip_scene": "s14_brest_side",
+   "chip_sentence": 2,
+   "chip_at_s": 914.65,
+   "skip_to": "25:31",
+   "skip_to_s": 1531.875,
+   "keep_scene": "s21_ground_speeds",
+   "keep_line": "If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius times cosine phi from the Earth's axis."
+  },
+  {
+   "block": "K3",
+   "chip_scene": "s22_distance_north",
+   "chip_sentence": 1,
+   "chip_at_s": 1683.7,
+   "skip_to": "31:48",
+   "skip_to_s": 1908.35,
+   "keep_scene": "s25_degree_east",
+   "keep_line": "If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is that times cosine phi, so it shrinks towards the poles."
+  },
+  {
+   "block": "K4",
+   "chip_scene": "s27_area_patch",
+   "chip_sentence": 4,
+   "chip_at_s": 2114.675,
+   "skip_to": "44:09",
+   "skip_to_s": 2649.35,
+   "keep_scene": "s34_global_mean",
+   "keep_line": "If you skipped, here's what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north."
+  }
+ ],
+ "timing_provisional": true,
+ "inputs_sha256": {
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc": "5831ac1a03dbc74172f08e4eb8294327a00d49249d0a4a012ab0e2f4cdf2f272",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_admin_0_countries.zip": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-places\\ne_10m_populated_places_simple.zip": "2963ee08f7743f13f37d5243acd77a2f7a510e26a36c7e04b920f1b381f2b251",
+  "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
+  "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\BMNG-2004\\world.topo.bathy.200409.3x21600x10800.jpg": "863036b622ba3dab4eb4ffb7149730b02cfa433ce49672e9b7267022051e04a2",
+  "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc": "c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824"
+ },
+ "render_assets": {
+  "cs_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "cs_panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
+  "cs_panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
+  "cs_panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
+  "cs_panel_sing.jpg": "505938614bd1ffe4063567055a6af18771dbe72e5ee106995dd2d78983ddfe11",
+  "cs_t2m_ee.png": "8a74899c2dd05b8668b22360a732dac250894f6a98a34f2d53121a2aacb9d022",
+  "cs_t2m_pc_polar.png": "7e9b6cea4a4c7fc759aa18fef88293eb1a0bdce3400d0b85ee79f2d22ea5b6f2"
+ },
+ "data_files": {
+  "cs.json": "d86aabca8803be95ab3524eaf77a47837aeebeddcb65c00f0c18ca2afe6138f2",
+  "img/panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
+  "img/panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
+  "img/panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
+  "img/panel_sing.jpg": "505938614bd1ffe4063567055a6af18771dbe72e5ee106995dd2d78983ddfe11",
+  "img/t2m_ee.png": "8a74899c2dd05b8668b22360a732dac250894f6a98a34f2d53121a2aacb9d022",
+  "img/t2m_pc_polar.png": "7e9b6cea4a4c7fc759aa18fef88293eb1a0bdce3400d0b85ee79f2d22ea5b6f2"
+ },
+ "checks": [
+  {
+   "id": "DS01",
+   "name": "a = 6.371e6 m (fluidpy.geo.constants.EARTH_RADIUS, metres; easy 6400 km)",
+   "value": [
+    6371000.0,
+    6400.0
+   ],
+   "ref": [
+    6371000.0,
+    6400.0
+   ],
+   "tol": [
+    0.5,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS02",
+   "name": "balloon 10 km up: 10 / 6371 = 0.157 % ('about a sixth of one percent'; screen ≈ 0.16 %)",
+   "value": [
+    0.156961,
+    0.16,
+    0.166667
+   ],
+   "ref": [
+    0.157,
+    0.16,
+    0.166667
+   ],
+   "tol": [
+    0.0005,
+    1e-12,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS03",
+   "name": "the Brest arrow's angle above the equator plane asin(z/a) = 48.4°",
+   "value": [
+    48.4
+   ],
+   "ref": [
+    48.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DS04",
+   "name": "every point of the 48.4° parallel: distance from the axis cos φ = 0.6639, height sin φ = 0.7478 (unit sphere)",
+   "value": [
+    0.0,
+    0.663926,
+    0.747798
+   ],
+   "ref": [
+    0.0,
+    0.6639,
+    0.7478
+   ],
+   "tol": [
+    1e-12,
+    5e-05,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS05",
+   "name": "countries crossed by 48.4 N (NE 10 m admin-0) = the storyboard's 13 (France … Canada)",
+   "value": [
+    "Austria",
+    "Canada",
+    "China",
+    "France",
+    "Germany",
+    "Hungary",
+    "Kazakhstan",
+    "Moldova",
+    "Mongolia",
+    "Russia",
+    "Slovakia",
+    "Ukraine",
+    "United States of America"
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS05",
+   "name": "label points lie on their country's crossing (central Europe on Austria or Germany; no land on 48.4 N between 50 W and 20 W)",
+   "value": [
+    [
+     "central Europe",
+     14.08
+    ],
+    [
+     "Ukraine",
+     33.88
+    ],
+    [
+     "Kazakhstan",
+     66.15
+    ],
+    [
+     "Mongolia",
+     102.14
+    ],
+    [
+     "United States",
+     -107.51
+    ],
+    [
+     "Canada",
+     -81.63
+    ],
+    [
+     "Atlantic",
+     -35.0
+    ]
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS06",
+   "name": "cartesian_from_spherical(a, 90° − φ, λ) = a·unit_vector(φ, λ) (km, to 1e-9)",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DS07",
+   "name": "colatitude 90 − 48.4 = 41.6°; sin 41.6° = cos 48.4° = 0.6639; cos 41.6° = sin 48.4° = 0.7478",
+   "value": [
+    41.6,
+    0.663926,
+    0.663926,
+    0.747798,
+    0.747798
+   ],
+   "ref": [
+    41.6,
+    0.6639,
+    0.6639,
+    0.7478,
+    0.7478
+   ],
+   "tol": [
+    1e-12,
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS07",
+   "name": "triangle: 180 − 90 − 48.4 = 41.6",
+   "value": [
+    41.6
+   ],
+   "ref": [
+    41.6
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "meridian_points(0°): a half circle round the centre (|r| = 1, y = 0, from the South Pole to the North Pole)",
+   "value": [
+    0.0,
+    0.0,
+    -1.0,
+    1.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    -1.0,
+    1.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing United Kingdom: 53.76…50.79° (NE 10 m admin-0, shapely)",
+   "value": [
+    53.761,
+    50.789
+   ],
+   "ref": [
+    53.76,
+    50.79
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing France: 49.33…42.69° (NE 10 m admin-0, shapely)",
+   "value": [
+    49.331,
+    42.689
+   ],
+   "ref": [
+    49.33,
+    42.69
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing Spain: 42.69…39.94° (NE 10 m admin-0, shapely)",
+   "value": [
+    42.689,
+    39.937
+   ],
+   "ref": [
+    42.69,
+    39.94
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing Algeria: 35.84…21.85° (NE 10 m admin-0, shapely)",
+   "value": [
+    35.836,
+    21.851
+   ],
+   "ref": [
+    35.84,
+    21.85
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing Mali: 21.85…14.99° (NE 10 m admin-0, shapely)",
+   "value": [
+    21.851,
+    14.985
+   ],
+   "ref": [
+    21.85,
+    14.99
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing Burkina Faso: 14.99…11.1° (NE 10 m admin-0, shapely)",
+   "value": [
+    14.985,
+    11.101
+   ],
+   "ref": [
+    14.99,
+    11.1
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing Ghana: 10.6…5.62° (NE 10 m admin-0, shapely)",
+   "value": [
+    10.595,
+    5.617
+   ],
+   "ref": [
+    10.6,
+    5.62
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "prime meridian land crossing Antarctica: -71.5…-90.0° (NE 10 m admin-0, shapely)",
+   "value": [
+    -71.499,
+    -90.0
+   ],
+   "ref": [
+    -71.5,
+    -90.0
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "Togo/Ghana: the 0° line runs on or within 0.06° of the border between 11.1 and 10.6 N (Togo touches it or Ghana's crossing restarts there)",
+   "value": {
+    "Togo": [
+     [
+      10.972,
+      10.595
+     ],
+     [
+      11.101,
+      11.086
+     ]
+    ],
+    "Ghana": [
+     [
+      10.595,
+      5.617
+     ],
+     [
+      11.086,
+      10.972
+     ]
+    ]
+   },
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS09",
+   "name": "Greenwich (51.48 N) within 0.01° of lon 0 and inside the UK crossing",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS08",
+   "name": "NE places (by country) Accra, Valencia, London on or within 0.5° of the 0° line",
+   "value": {
+    "Accra": [
+     5.5519805,
+     -0.2186616
+    ],
+    "Valencia": [
+     39.4869634,
+     -0.4019579
+    ],
+    "London": [
+     51.5019406,
+     -0.1186677
+    ],
+    "Brighton": [
+     50.8303457,
+     -0.1699744
+    ]
+   },
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS10",
+   "name": "wrap_lon(355.5) = −4.5; wrap_lon(−4.5, west=0) = 355.5; screen 360 − 4.5 = 355.5",
+   "value": [
+    -4.5,
+    355.5,
+    355.5
+   ],
+   "ref": [
+    -4.5,
+    355.5,
+    355.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DS10",
+   "name": "unit_vector(0,0) = x̂, (0,90) = ŷ, (90,0) = ẑ; x̂ × ŷ = ẑ",
+   "value": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DS11",
+   "name": "z = a sin φ = 4764.2 km; screen sin 48.4° ≈ 0.7478, 6371 × 0.7478 ≈ 4764, easy 6400 × ¾ = 4800",
+   "value": [
+    4764.221635,
+    0.747798,
+    4764.2338,
+    4800.0
+   ],
+   "ref": [
+    4764.2,
+    0.7478,
+    4764.2,
+    4800.0
+   ],
+   "tol": [
+    0.05,
+    5e-05,
+    0.05,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS12",
+   "name": "a cos φ = 4229.9 km = the radius of Brest's parallel; screen cos 48.4° ≈ 0.6639, 6371 × 0.6639 ≈ 4230, easy 6400 × ⅔ ≈ 4270",
+   "value": [
+    4229.873901,
+    4229.873901,
+    0.663926,
+    4229.7069,
+    4266.666667
+   ],
+   "ref": [
+    4229.9,
+    4229.9,
+    0.6639,
+    4229.7,
+    4266.7
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    5e-05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS12",
+   "name": "screen roundings: 4229.7 → 4230, 4266.7 → 4270 ('about')",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS13",
+   "name": "x = 4216.8 km, y = −331.9 km (polar rule = unit_vector); screen cos(−4.5°) ≈ 0.9969, sin ≈ −0.0785; 4230 × 0.9969 ≈ 4217, 4230 × (−0.0785) ≈ −332",
+   "value": [
+    4216.834611,
+    -331.872081,
+    0.0,
+    0.0,
+    0.996917,
+    -0.078459,
+    4216.887,
+    -332.055
+   ],
+   "ref": [
+    4216.8,
+    -331.9,
+    0.0,
+    0.0,
+    0.9969,
+    -0.0785,
+    4216.9,
+    -332.06
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    1e-09,
+    1e-09,
+    5e-05,
+    5e-05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS14",
+   "name": "|r| = 6371.0 km; screen √(4217² + 332²) ≈ 4230, √(4230² + 4764²) ≈ 6371",
+   "value": [
+    6371.0,
+    4230.048818,
+    6370.917987
+   ],
+   "ref": [
+    6371.0,
+    4230.05,
+    6370.9
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS15",
+   "name": "r̂ = (0.6619, −0.0521, 0.7478); screen (0.662, −0.052, 0.748); cos² φ + sin² φ = 1",
+   "value": [
+    0.66188,
+    -0.052091,
+    0.747798,
+    1.0
+   ],
+   "ref": [
+    0.6619,
+    -0.0521,
+    0.7478,
+    1.0
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    1e-15
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS16",
+   "name": "Khulna (41.0, 5873.1, 2468.9) km, |r| = 6371.0; a cos φ = 5873.2",
+   "value": [
+    41.002269,
+    5873.047013,
+    2468.861801,
+    6371.0,
+    5873.190139
+   ],
+   "ref": [
+    41.0,
+    5873.1,
+    2468.9,
+    6371.0,
+    5873.2
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS16",
+   "name": "screen: sin 22.8° ≈ 0.3875 → 6371 × 0.3875 ≈ 2469; cos ≈ 0.9219 → 6371 × 0.9219 ≈ 5873; cos 89.6° ≈ 0.00698 → 5873 × 0.00698 ≈ 41; √(41² + 5873² + 2469²) ≈ 6371",
+   "value": [
+    0.387516,
+    2468.7625,
+    0.921863,
+    5873.4249,
+    0.006981,
+    40.99354,
+    0.999976,
+    6371.010202
+   ],
+   "ref": [
+    0.3875,
+    2468.8,
+    0.9219,
+    5873.4,
+    0.00698,
+    40.99,
+    1.0,
+    6371.0
+   ],
+   "tol": [
+    5e-05,
+    0.05,
+    5e-05,
+    0.05,
+    5e-06,
+    0.01,
+    0.0005,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS16",
+   "name": "Amphan passes within about 100 km of Khulna (storyboard rule: keep 'close to where … came ashore'); data report: 78 km W",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS17",
+   "name": "T = 2π / Ω = 86164.1 s (sidereal day 23 h 56 min 4 s); Ω = 7.292e-5 rad/s",
+   "value": [
+    86164.100637,
+    7.292115,
+    86164.0
+   ],
+   "ref": [
+    86164.1,
+    7.292,
+    86164.0
+   ],
+   "tol": [
+    0.05,
+    0.0005,
+    0.1
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "U = Ω a cos φ: equator 464.6, Singapore 464.5, Khulna 428.3, Brest 308.5, Longyearbyen 95.0, pole 0 m/s",
+   "value": [
+    464.580647,
+    464.451693,
+    428.279779,
+    308.447269,
+    95.004908,
+    0.0
+   ],
+   "ref": [
+    464.6,
+    464.5,
+    428.3,
+    308.5,
+    95.0,
+    0.0
+   ],
+   "tol": 0.06,
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "screen: 2π / 86 164 ≈ 7.29e-5; 40 000 km ÷ 24 h ≈ 1670 km/h; cos 78.2° ≈ 0.2045",
+   "value": [
+    7.292124,
+    1666.666667,
+    0.204496
+   ],
+   "ref": [
+    7.292,
+    1666.7,
+    0.2045
+   ],
+   "tol": [
+    0.0005,
+    0.05,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "spoken/screen speeds = round(U): 465, 464, 428, 308, 95, 0",
+   "value": [
+    464.58,
+    464.45,
+    428.28,
+    308.45,
+    95.0,
+    0.0
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS19",
+   "name": "1° north = 111.19 km; π/180 = 0.01745; screen 6371 × 0.01745 ≈ 111.2; easy 6400 × 0.0175 = 112",
+   "value": [
+    111.194927,
+    0.017453,
+    111.17395,
+    112.0
+   ],
+   "ref": [
+    111.19,
+    0.01745,
+    111.17,
+    112.0
+   ],
+   "tol": [
+    0.01,
+    5e-06,
+    0.01,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS20",
+   "name": "1′ = 1.853 km ('111.2 ÷ 60 ≈ 1.85'); 48.4° = 5381.8 km (screen 48.4 × 111.2 ≈ 5382) > z 4764",
+   "value": [
+    1.853249,
+    1.853333,
+    5381.83445,
+    5382.08
+   ],
+   "ref": [
+    1.853,
+    1.853,
+    5381.8,
+    5382.1
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS21",
+   "name": "1° east at Brest = 73.83 km; screen 4230 × 0.01745 ≈ 73.8; 73.8 / 111.2 ≈ ⅔",
+   "value": [
+    73.825227,
+    73.8135,
+    0.663669
+   ],
+   "ref": [
+    73.83,
+    73.81,
+    0.664
+   ],
+   "tol": [
+    0.01,
+    0.01,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS22",
+   "name": "1° east: Singapore 111.16, Khulna 102.51, Brest 73.83, Longyearbyen 22.74, pole 0 km",
+   "value": [
+    111.164062,
+    102.506506,
+    73.825227,
+    22.738923,
+    0.0
+   ],
+   "ref": [
+    111.16,
+    102.51,
+    73.83,
+    22.74,
+    0.0
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DS22",
+   "name": "screen: 111.2 × 0.9997 ≈ 111.2, × 0.9219 ≈ 102.5, × 0.6639 ≈ 73.8, × 0.2045 ≈ 22.7",
+   "value": [
+    111.16664,
+    102.51528,
+    73.82568,
+    22.7404,
+    0.999722
+   ],
+   "ref": [
+    111.17,
+    102.51,
+    73.83,
+    22.74,
+    0.9997
+   ],
+   "tol": [
+    0.01,
+    0.01,
+    0.01,
+    0.01,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS23",
+   "name": "0.25° box: 27.80 km tall; wide 27.79, 25.63, 18.46, 5.69 km; 1/cos 78.2° = 4.89; screen 111.2 ÷ 4 ≈ 27.8, 27.8 ÷ 5.7 ≈ 4.9",
+   "value": [
+    27.798732,
+    27.791016,
+    25.626626,
+    18.456307,
+    5.684731,
+    4.89007,
+    27.8,
+    4.877193
+   ],
+   "ref": [
+    27.8,
+    27.79,
+    25.63,
+    18.46,
+    5.69,
+    4.89,
+    27.8,
+    4.877
+   ],
+   "tol": [
+    0.01,
+    0.01,
+    0.01,
+    0.01,
+    0.01,
+    0.005,
+    1e-09,
+    0.001
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS23",
+   "name": "spoken widths: 27.8, 25.6, 18.5 ('eighteen and a half'), 5.7 (Part 4 / #6 use 18.5)",
+   "value": [
+    27.79,
+    25.63,
+    18.46,
+    5.68
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS23",
+   "name": "the highlighted cells' own widths round to the same spoken values (27.8, 25.6, 18.4/18.5, 5.7)",
+   "value": [
+    27.792,
+    25.636,
+    18.42,
+    5.661
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "box areas a² cos φ (0.25° in rad)²: 772.8, 712.4, 513.1, 158.0 km²; exact cells (polygon_area) agree < 2e-4",
+   "value": [
+    772.769482,
+    712.38771,
+    513.061915,
+    158.028308,
+    -1e-06,
+    -1e-06,
+    -1e-06,
+    -1e-06
+   ],
+   "ref": [
+    772.8,
+    712.4,
+    513.1,
+    158.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": [
+    0.06,
+    0.06,
+    0.06,
+    0.06,
+    0.0002,
+    0.0002,
+    0.0002,
+    0.0002
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "Brest cell exact a² Δλ (sin φ₂ − sin φ₁) = polygon_area = 513.06 km² ('five hundred and thirteen point one')",
+   "value": [
+    513.061508,
+    513.061508
+   ],
+   "ref": [
+    513.06,
+    513.06
+   ],
+   "tol": 0.01,
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "screen: 0.25° ≈ 0.00436 rad; 6371² ≈ 40.6 million km²",
+   "value": [
+    0.004363,
+    40.589641
+   ],
+   "ref": [
+    0.00436,
+    40.59
+   ],
+   "tol": [
+    4e-06,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "screen: 773 × 0.6639 ≈ 513, 773 × 0.2045 ≈ 158",
+   "value": [
+    513.1947,
+    158.0785
+   ],
+   "ref": [
+    513.2,
+    158.1
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "s27 patch 5° × 5° at Brest: flat a² cos φ ΔφΔλ within 0.2 % of the exact area",
+   "value": [
+    -0.000317
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 0.002,
+   "pass": true
+  },
+  {
+   "id": "DS25",
+   "name": "slope of sine on 20-30°: 10° = 0.1745 rad, cos 25° = 0.906, 0.906 × 0.1745 ≈ 0.158; sin 30 − sin 20 = 0.5 − 0.342 = 0.158",
+   "value": [
+    0.174533,
+    0.906308,
+    0.158097,
+    0.158181,
+    0.15798,
+    0.34202
+   ],
+   "ref": [
+    0.1745,
+    0.906,
+    0.1581,
+    0.1582,
+    0.158,
+    0.342
+   ],
+   "tol": [
+    5e-05,
+    0.0005,
+    0.0001,
+    0.0001,
+    0.0001,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS25",
+   "name": "band_area(20, 30) = 2π a² × 0.1580",
+   "value": [
+    0.15798
+   ],
+   "ref": [
+    0.158
+   ],
+   "tol": 0.0001,
+   "pass": true
+  },
+  {
+   "id": "DS26",
+   "name": "steps 0.1736, 0.1684, 0.1580 sum 0.5000; screen 0.174 + 0.168 + 0.158 = 0.500; midpoint strips 10°: 1.0013 ×, 1°: 1.00001 × exact",
+   "value": [
+    0.173648,
+    0.168372,
+    0.15798,
+    0.5,
+    0.5,
+    1.00127,
+    1.000013
+   ],
+   "ref": [
+    0.1736,
+    0.1684,
+    0.158,
+    0.5,
+    0.5,
+    1.0013,
+    1.00001
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    1e-12,
+    1e-12,
+    5e-05,
+    5e-06
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS27",
+   "name": "2π a² = 255.03, 4π a² = 510.06 million km²; band 0-30 = ½ NH; 30 S-30 N = 0.5000; NH south of 48.4 N = 0.7478",
+   "value": [
+    255.032236,
+    510.064472,
+    0.5,
+    0.5,
+    0.747798
+   ],
+   "ref": [
+    255.03,
+    510.06,
+    0.5,
+    0.5,
+    0.7478
+   ],
+   "tol": [
+    0.005,
+    0.005,
+    1e-12,
+    1e-12,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS28",
+   "name": "Archimedes: equal steps in z = a sin φ give equal areas (0-0.1 vs 0.8-0.9: both 0.1 × 2π a² = 25.50 million km²)",
+   "value": [
+    25.503224,
+    25.503224,
+    1.0
+   ],
+   "ref": [
+    25.503,
+    25.503,
+    1.0
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    1e-12
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS29",
+   "name": "Sep 2026 t2m: weighted 16.27 °C, plain 7.11 °C, difference > 9 (screen 16.3, 7.1)",
+   "value": [
+    16.272369,
+    7.11366,
+    9.158709
+   ],
+   "ref": [
+    16.27,
+    7.11,
+    9.16
+   ],
+   "tol": [
+    0.005,
+    0.005,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS29",
+   "name": "toy: (30 + 0) ÷ 2 = 15; cos 60° = ½; (30 × 1 + 0 × ½) ÷ 1.5 = 20",
+   "value": [
+    15.0,
+    0.5,
+    20.0
+   ],
+   "ref": [
+    15.0,
+    0.5,
+    20.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DS29",
+   "name": "Equal Earth raster inverse round trip via mapproj.forward (a = 1: map units, no distance)",
+   "value": [
+    0.0
+   ],
+   "ref": [
+    0.0
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DS29",
+   "name": "colour range −60 … +40 °C covers 99 % of the boxes (Antarctic interior colder: clipped)",
+   "value": 0.9928790669122161,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  }
+ ],
+ "flags": [
+  {
+   "id": "DS17",
+   "scene": "s21",
+   "what": "S4 'Twenty three hours and fifty six minutes is eighty six thousand one hundred and sixty four seconds'",
+   "screen_or_voice": "voice: 23 h 56 min = 86 164 s",
+   "hand_check": "23 h 56 min = 86 160 s; the sidereal day is 23 h 56 min 4 s = 86 164 s",
+   "note": "MUST before the final TTS: say 'Twenty three hours, fifty six minutes and four seconds is …' (screen shows 'T ≈ 86 164 s' and '23 h 56 min 4 s')"
+  },
+  {
+   "id": "DS18",
+   "scene": "s21",
+   "what": "7.29 × 10⁻⁵ × 6.371 × 10⁶ m ≈ 465 m/s",
+   "screen_or_voice": "screen and voice",
+   "hand_check": "with the rounded 7.29 the product is 464.4 (exact Ω 7.2921e-5 gives 464.6)",
+   "note": "≈ kept: 465 is the exact value rounded; the factor 7.29 is rounded"
+  },
+  {
+   "id": "DS18",
+   "scene": "s21",
+   "what": "storyboard rows '465 × 0.9219 ≈ 428', '465 × 0.6639 ≈ 308'",
+   "screen_or_voice": "screen",
+   "hand_check": "465 × 0.9219 = 428.7, 465 × 0.6639 = 308.7 (exact 428.3, 308.5)",
+   "note": "screen writes 'U_eq × 0.9219 ≈ 428' and 'U_eq × 0.6639 ≈ 308' (U_eq = the exact 464.6, said 'about four hundred and sixty five'): no rounded factor to contradict"
+  },
+  {
+   "id": "DS24",
+   "scene": "s28",
+   "what": "'40.6 × 10⁶ × 0.00436 × 0.00436 ≈ 773'",
+   "screen_or_voice": "screen and voice",
+   "hand_check": "with the rounded factors 771.8 (exact 772.8)",
+   "note": "≈ kept (773 is the exact value rounded); director may prefer 'zero point zero zero four three six three' — not changed"
+  },
+  {
+   "id": "DS24",
+   "scene": "s28",
+   "what": "'773 × 0.9219 ≈ 712'",
+   "screen_or_voice": "screen and voice",
+   "hand_check": "773 × 0.9219 = 712.6 (exact 712.4 from 772.8)",
+   "note": "≈ kept (712 is the exact area rounded)"
+  }
+ ],
+ "physics": [
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s05",
+   "data": "data/cs.json",
+   "eq": "r̂ = (cos φ cos λ, cos φ sin λ, sin φ)",
+   "params": {
+    "lat": 48.4,
+    "lon": -4.5
+   },
+   "sha256": "fd56a933b9500cb7ba45b85d7c3b22791a221c994072cebb3b77b10fa53bfeea"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.parallel_points",
+   "scene": "s06",
+   "data": "data/cs.json",
+   "eq": "parallel at 48.4 N: radius a cos φ (unit sphere)",
+   "params": {
+    "lat": 48.4,
+    "n": 361
+   },
+   "sha256": "9b08c5c5fea9d2434f8d02c47f34ba4ebe777b4f445cd44a1eddd5dbb062a768"
+  },
+  {
+   "fn": "fluidpy.core.coords.cartesian_from_spherical",
+   "scene": "s07",
+   "data": "data/cs.json",
+   "eq": "colatitude bridge: (r, θ = 90° − φ, λ) → x, y, z",
+   "params": {
+    "r": 6371.0,
+    "theta": 0.7260569688296411,
+    "phi": -0.07853981633974483
+   },
+   "sha256": "aedca3b0070ea2083f38c39d91e3689eb48f19a0f186e7d27a38606b0d69191d"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.meridian_points",
+   "scene": "s09",
+   "data": "data/cs.json",
+   "eq": "half great circles pole to pole",
+   "params": {
+    "lon": 0.0,
+    "n": 181
+   },
+   "sha256": "98e7e4638b775e605928c2d62905e92f89215fb24ac0a8b67f385cf6bd709817"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.wrap_lon",
+   "scene": "s11",
+   "data": "data/cs.json",
+   "eq": "λ in −180…180",
+   "params": {
+    "lon": 355.5
+   },
+   "sha256": "b198fbd75b99bb4fcc1a5d975feafee47ecb94af5d559f992e8f0b5498ac9402"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.wrap_lon",
+   "scene": "s11",
+   "data": "data/cs.json",
+   "eq": "λ in 0…360",
+   "params": {
+    "lon": -4.5,
+    "west": 0.0
+   },
+   "sha256": "4db000082d31e81952f5c89c5223f64a64e8f9e9879893c66e2717fb43ea54db"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s13",
+   "data": "data/cs.json",
+   "eq": "axis x̂ (0 N, 0 E)",
+   "params": {
+    "lat": 0.0,
+    "lon": 0.0
+   },
+   "sha256": "725c4777db328932b197731b1c986c84913a069a2090deb3667b697624551c8b"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s13",
+   "data": "data/cs.json",
+   "eq": "axis ŷ (0 N, 90 E)",
+   "params": {
+    "lat": 0.0,
+    "lon": 90.0
+   },
+   "sha256": "9572da6e96e797836ffb0e6d2b015dfbe8a9ef4d6e216ee7b1f0d6094a9c080c"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s13",
+   "data": "data/cs.json",
+   "eq": "axis ẑ (90 N)",
+   "params": {
+    "lat": 90.0,
+    "lon": 0.0
+   },
+   "sha256": "25d32a05ee0de818c9dee111aa9046167e274a735996f5fbee7ae5d7922e18a7"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.parallel_points",
+   "scene": "s16",
+   "data": "data/cs.json",
+   "eq": "Brest's parallel, radius a cos φ (km)",
+   "params": {
+    "lat": 48.4,
+    "n": 361,
+    "radius": 6371.0
+   },
+   "sha256": "f15a97859f816df7b067b065b324089bd7d80e9d095cca682a846e9c924509e6"
+  },
+  {
+   "fn": "fluidpy.core.coords.cartesian_from_polar_coords",
+   "scene": "s17",
+   "data": "data/cs.json",
+   "eq": "top view: polar coordinates with r = a cos φ, θ = λ",
+   "params": {
+    "r": 4229.873900807432,
+    "theta": -0.07853981633974483
+   },
+   "sha256": "d95c57ca562895bcfbb5c7280182c5e482b7312298a040b4b0853cf71bca7d56"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.unit_vector",
+   "scene": "s19",
+   "data": "data/cs.json",
+   "eq": "Khulna r̂",
+   "params": {
+    "lat": 22.8,
+    "lon": 89.6
+   },
+   "sha256": "e35db5a252baf920d3431043830199d10fc18b9be0288ae8e8243951f0f2a176"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_points",
+   "scene": "s01",
+   "data": "data/cs.json",
+   "eq": "great-circle arc Brest → Khulna (91 points)",
+   "params": {
+    "lat1": 48.4,
+    "lon1": -4.5,
+    "lat2": 22.8,
+    "lon2": 89.6,
+    "n": 91
+   },
+   "sha256": "6d7019078bafacf803f6b5a1c2a2cb4b9f0d5e786a542d8343af6f3e71de3ab1"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s22",
+   "data": "data/cs.json",
+   "eq": "δy = a δφ, δx = a cos φ δλ (1°; a in metres)",
+   "params": {
+    "lat": [
+     0.0,
+     1.35,
+     22.8,
+     48.4,
+     78.2,
+     90.0
+    ],
+    "dlat": 1.0,
+    "dlon": 1.0
+   },
+   "sha256": "de9d01519beff477b216fb54b221537b9cada5aa9ad9e8290f89c1f37dc68825"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s23",
+   "data": "data/cs.json",
+   "eq": "one minute and 48.4° of latitude",
+   "params": {
+    "lat": 48.4,
+    "dlat": 0.016666666666666666,
+    "dlon": 0.0
+   },
+   "sha256": "4e2c268e6368c6cc84f172d26d50157299f0b570930be1561a0a0d3e78d9281f"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s23",
+   "data": "data/cs.json",
+   "eq": "Brest to the equator along its meridian",
+   "params": {
+    "lat": 48.4,
+    "dlat": 48.4,
+    "dlon": 0.0
+   },
+   "sha256": "80cad0d965ca25dc02ccac4efd79b8b427814e724cfc1477e4f88fd245d409ae"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s26",
+   "data": "data/cs.json",
+   "eq": "ERA5 0.25° box at the four places",
+   "params": {
+    "lat": [
+     1.35,
+     22.8,
+     48.4,
+     78.2
+    ],
+    "dlat": 0.25,
+    "dlon": 0.25
+   },
+   "sha256": "7e31977169a80604ee8fdfc9d286d6470695367d538adf13d36f0fcbd7a80000"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s26",
+   "data": "data/cs.json",
+   "eq": "0.25° cell width at Singapore's grid cell centre",
+   "params": {
+    "lat": 1.25,
+    "dlat": 0.25,
+    "dlon": 0.25
+   },
+   "sha256": "015f4c8ea4e61033ab55fbc934dd20c4238432a781aa36eccad638a73209b151"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s26",
+   "data": "data/cs.json",
+   "eq": "0.25° cell width at Khulna's grid cell centre",
+   "params": {
+    "lat": 22.75,
+    "dlat": 0.25,
+    "dlon": 0.25
+   },
+   "sha256": "361e416a44949f30f22ec81fc4810af1ef07a579843c4cfb0510749f6a336a82"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s26",
+   "data": "data/cs.json",
+   "eq": "0.25° cell width at Brest's grid cell centre",
+   "params": {
+    "lat": 48.5,
+    "dlat": 0.25,
+    "dlon": 0.25
+   },
+   "sha256": "314cad18667c447dd701eadeae7c4a322f4446c691a7e3841cac19f18dbd2656"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.arc_lengths",
+   "scene": "s26",
+   "data": "data/cs.json",
+   "eq": "0.25° cell width at Longyearbyen's grid cell centre",
+   "params": {
+    "lat": 78.25,
+    "dlat": 0.25,
+    "dlon": 0.25
+   },
+   "sha256": "f40a75211a435ca12a03bfdd69da10c647cf99eb5a4622276ff328694fca74c6"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_area",
+   "scene": "s29",
+   "data": "data/cs.json",
+   "eq": "2π a² (sin φ₂ − sin φ₁), a in metres",
+   "params": {
+    "lat1": 0.0,
+    "lat2": 30.0
+   },
+   "sha256": "5e6eaf8d55edb131cc48d25f94a2100425b56f86bed9e5c5d2614e0f50f3c47a"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_area",
+   "scene": "s30",
+   "data": "data/cs.json",
+   "eq": "band 20-30 N",
+   "params": {
+    "lat1": 20.0,
+    "lat2": 30.0
+   },
+   "sha256": "7c84735933ef8482efb9fc56ae13be9aee29b881c5a6405e2f735f4038b08a26"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_area",
+   "scene": "s32",
+   "data": "data/cs.json",
+   "eq": "northern hemisphere",
+   "params": {
+    "lat1": 0.0,
+    "lat2": 90.0
+   },
+   "sha256": "472e63b33beb4939c3e825738174e35c433c8dc3675cee316e5bdaebd59ff894"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_area",
+   "scene": "s32",
+   "data": "data/cs.json",
+   "eq": "whole Earth",
+   "params": {
+    "lat1": -90.0,
+    "lat2": 90.0
+   },
+   "sha256": "4837df2270d8d58f79f3f07e499e5b7f771281887f05f7a250e2dcad10b8b38e"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_fraction",
+   "scene": "s32",
+   "data": "data/cs.json",
+   "eq": "share of the Earth between 30 S and 30 N",
+   "params": {
+    "lat1": -30.0,
+    "lat2": 30.0
+   },
+   "sha256": "657d1e826c160357065d249dcc1e4728f113ba30b8a5ee7ba0fcfbc5a182244a"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_fraction",
+   "scene": "s32",
+   "data": "data/cs.json",
+   "eq": "share of the NH south of Brest (×2: band_fraction is of the whole Earth)",
+   "params": {
+    "lat1": 0.0,
+    "lat2": 48.4
+   },
+   "sha256": "ac2d053a90a0678cd4f4c286cf8b4b0f714b0080c0ea1f0574fda78faac97e04"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_area",
+   "scene": "s33",
+   "data": "data/cs.json",
+   "eq": "equal-height band sin φ 0-0.1",
+   "params": {
+    "lat1": 0.0,
+    "lat2": 5.739170477266787
+   },
+   "sha256": "7cf5d45bfd03bb529f12b5e83a65629543611e0ff8fadd9d4a8b0da45878ee7a"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.band_area",
+   "scene": "s33",
+   "data": "data/cs.json",
+   "eq": "equal-height band sin φ 0.8-0.9",
+   "params": {
+    "lat1": 53.13010235415599,
+    "lat2": 64.15806723683288
+   },
+   "sha256": "b619e917f8798dcc61d82d8e9fd22179b197df20fcfca2ce8de47848696f8df1"
+  }
+ ],
+ "physics_recorded": [],
+ "physics_heavy": [
+  {
+   "fn": "fluidpy.data.naturalearth.read_records",
+   "scene": "s06",
+   "eq": "NE 10 m admin-0 polygons",
+   "params": {
+    "zip_path": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_admin_0_countries.zip"
+   },
+   "output_sha256": "33159a2c9484550d128167cc34440d4fbfc266d408160ca9c6d566a17d3d0f95"
+  },
+  {
+   "fn": "fluidpy.data.ibtracs.storm_table",
+   "scene": "s19",
+   "eq": "IBTrACS v04r01 NI, Amphan",
+   "params": {
+    "path": "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc",
+    "sid": "2020136N10088",
+    "agencies": [
+     "usa",
+     "newdelhi"
+    ]
+   },
+   "output_sha256": "36bbf860912e62ba6dd00d8af0dedf9eb2a679de95b5a06c6014333047ffa930"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s19",
+   "eq": "Amphan centre (10-min linear interpolation) → Khulna (a in metres)",
+   "params": {
+    "lat1": "array (757,), sha256 b5dd79b0f0cd6c0a5e9c16d09888bd42f15390b9b55258c204df98bb8312d153",
+    "lon1": "array (757,), sha256 405b0b9619e5f3d9260cc2d51ec1e2eeff12bafe74caa77c474dee9bf82ccf1c",
+    "lat2": 22.8,
+    "lon2": 89.6
+   },
+   "output_sha256": "8a5d331feb71ccacb509c41ea4f8338f78e9df114c71895837dcb6703b266c50"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s28",
+   "eq": "exact 0.25° cell at 0.0° (densified edges, a in metres)",
+   "params": {
+    "lat": "array (260,), sha256 8df279d6e41bd1331078cf62d8274ddbd6f075f1127e619b78e12c93bcec7ea6",
+    "lon": "array (260,), sha256 78dc1e76965c0c818ce7736a3b921057b8a2c7143f0d6cab157bb57aadd827f5"
+   },
+   "output_sha256": "43385d50f02b1be8c26652e5262c3e27bc56224f3adcd3c51cefaff3ef8b591b"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s28",
+   "eq": "exact 0.25° cell at 22.8° (densified edges, a in metres)",
+   "params": {
+    "lat": "array (260,), sha256 bbabe33dc7e0592ea52f80ad8ef2de7ea17c81990658d126306894a17f7a3664",
+    "lon": "array (260,), sha256 78dc1e76965c0c818ce7736a3b921057b8a2c7143f0d6cab157bb57aadd827f5"
+   },
+   "output_sha256": "e3f8eca3caa46ea5d504675fd42c1b2b17a1cce93e7a926b348aaf0868fdf14f"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s28",
+   "eq": "exact 0.25° cell at 48.4° (densified edges, a in metres)",
+   "params": {
+    "lat": "array (260,), sha256 1ebb75bba339c3a4ebe4ee48946712a8581c1e966e11c14343e286179471d91a",
+    "lon": "array (260,), sha256 78dc1e76965c0c818ce7736a3b921057b8a2c7143f0d6cab157bb57aadd827f5"
+   },
+   "output_sha256": "0e6e76ee5e2bfcdb1fc6ef3332d58b3f324a66b2edb163dc92edaa32ecec2557"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s28",
+   "eq": "exact 0.25° cell at 78.2° (densified edges, a in metres)",
+   "params": {
+    "lat": "array (260,), sha256 3e475ad3799bdd8b5d1b805fcfe3a12771c91500cec1d6de028baf7b16088c22",
+    "lon": "array (260,), sha256 78dc1e76965c0c818ce7736a3b921057b8a2c7143f0d6cab157bb57aadd827f5"
+   },
+   "output_sha256": "bcdfbdb06dac1a0154b922b95c971fffa826437240697b83e122c0bd0126bdd7"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.polygon_area",
+   "scene": "s27",
+   "eq": "the 5° patch at Brest (exact)",
+   "params": {
+    "lat": "array (804,), sha256 4866f3c0fd5bc15b40c077707dd167a7d23a9a203678de379721ecab933db956",
+    "lon": "array (804,), sha256 6aae0f0d208cad096bfd220ef313203a01782ff4f053b7738b3e3151ab37f051"
+   },
+   "output_sha256": "22e5429bc866702a5b30ff46201f3f78eaf5e03f67da313359f8fcbb1a45d536"
+  },
+  {
+   "fn": "fluidpy.diag.climatology.global_mean",
+   "scene": "s34",
+   "eq": "cos-latitude weighted mean of t2m (K)",
+   "params": {
+    "field": "array (181, 360), sha256 3c388d8e8ff3753805eccec8be7e8645010fdb839bbf48b4dbb09d004b61b8bc",
+    "lat": "array (181,), sha256 c7f1de0b4d7e68b22ee2a095b56fbc5c8b3aa40478c596d7fba6927fd697b9a7"
+   },
+   "output_sha256": "14e43667a974c01314109c49b3070dc2e4e40e9ed52c04e58f1fb05bd44b5b7e"
+  }
+ ]
+}
