@@ -16,7 +16,7 @@ export const EQ_S14 = String.raw`|\Delta\mathbf v|\approx v\,\Delta\theta=34.8\t
 export const EQ_S15 = String.raw`(r,\ \theta,\ z)`;
 export const EQ_S16 = String.raw`\mathbf u=u_r\,\hat{\mathbf r}+u_\theta\,\hat{\boldsymbol\theta}+w\,\hat{\mathbf z}`;
 export const EQ_S20 = String.raw`\overline{u_r}(r,z)=\frac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)`;
-export const EQ_S23 = String.raw`\tan(\text{inflow angle})=\frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \approx17^\circ`;
+export const EQ_S23 = String.raw`\frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \arctan0.30\approx16.6^\circ\approx17^\circ`;
 export const EQ_S25 = String.raw`\mathbf a=-\frac{v^2}{r}\,\hat{\mathbf r}`;
 /** split a constant at a separator that must exist (each half is drawn on its own line) */
 export const cutAt = (s: string, at: string): [string, string] => { const i = s.indexOf(at); if (i < 0) throw new Error(`cutAt: ${at} not in ${s}`); return [s.slice(0, i), s.slice(i + at.length)]; };

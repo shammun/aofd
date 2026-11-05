@@ -920,7 +920,17 @@ def main() -> int:
     row("DS30", f"continuity w round the calm centre: mean over r 18-26 km, z 1-12 km = {wc_mean:.2f} m/s; slanted max {', '.join(f'{q[1]:.2f}' for q in slC)} m/s at "
         f"{', '.join(f'{q[2]:.0f}' for q in slC)} km — ≈ 1 m/s at r ≈ 18-26 km (said: about a metre per second; method spread 0.8-1.6, report)",
         [wc_mean, *[q[2] for q in slC]], [1.0, 22, 22, 22, 22], [0.15, 4, 4, 4, 4])
-    say.update({"w_cont": 1, "w_ring": 3, "w_ring_z": 9, "w_tower": 10})
+    # fix 0 B13 (pre-render audit): the s20 box estimate the narration now walks through. Air enters a cylinder r = 30 km through
+    # its side in a layer h ≈ 1 km at |u_r| ≈ 16 m/s (the section's strongest ring-mean inflow, −15.7 m/s at 30 km, 925 hPa) and
+    # leaves through the lid: 2π r h |u_r| = π r² w → w = 2 h |u_r| / r. It must agree with the continuity integral (DS30, ≈ 1 m/s).
+    ur_box = abs(V["sec"]["min"][0])
+    w_box = 2 * 1000.0 * ur_box / 30_000.0
+    w_box_said = 2 * 1000.0 * 16 / 30_000.0
+    row("DS30", f"s20 box estimate (B13): w = 2 h |u_r| / r = 2 × 1000 m × {ur_box:.1f} m/s / 30 000 m = {w_box:.2f} m/s (said with 16: {w_box_said:.2f}, "
+        f"'about one'); the section minimum is at r = {V['sec']['min'][1]} km; agrees with the continuity integral {wc_mean:.2f} m/s within 0.15",
+        [w_box, w_box_said, V["sec"]["min"][1], abs(w_box - wc_mean)], [1.0, 1.0, 30, 0], [0.1, 0.1, 0, 0.15])
+    say.update({"w_box": {"h_m": 1000, "ur": 16, "r_m": 30000, "w": round(w_box_said, 2)}})
+    say.update({"w_cont": 1, "w_ring": 3, "w_ring_z": 8.5, "w_tower": 10})
     V["w"] = {"tdr": {"origin": tdr_origin, "time_utc": TDR_T, "cov": TDR_COV, "lim": W_LIM, "lut": B1.lut_hex(W_LUT),
                       "peak": [float(Wpk[kpk, jpk]), float(zt[kpk]), float(rcT[jpk])], "slanted": slT, "band35_60": [wb23, wb5, wb10],
                       "point_max": [float(np.nanmax(Wp)), float(zt[ipt[0]]), float(rT[ipt[1], ipt[2]])], "p999": float(np.nanpercentile(Wp, 99.9)),
@@ -958,6 +968,10 @@ def main() -> int:
     tt = ni["time"]
     k06 = tt.index("2020-05-20 06:00:00")
     row("DS21", "IBTrACS 06 UTC 20 May: WMO (IMD, 3-min) 90 kt, 956 hPa", [ni["wmo_wind_kt"][k06], ni["wmo_pres_hPa"][k06]], [90, 956], 0)
+    # fix 0 B14 (pre-render audit): like with like — the official 90 kt in m/s, and the two LOWEST PRESSURES (ERA5 967 vs official 956)
+    row("DS21", "s23 like-for-like (B14): 90 kt × 1.852 / 3.6 = 46.3 (≈ 46) m/s; ERA5 lowest msl 966.9 (≈ 967) hPa vs official 956: ERA5 11 hPa too high (too weak)",
+        [90 * 1.852 / 3.6, float(ac.msl_min) / 100, float(ac.msl_min) / 100 - ni["wmo_pres_hPa"][k06]], [46.3, 967, 11], [0.05, 0.5, 0.5])
+    say.update({"a_ms": 46, "a_msl": 967})
     nd_w = [w for w in ni.get("newdelhi_wind_kt", []) if w is not None]
     kpk = int(np.nanargmax([w if w is not None else -1 for w in ni["newdelhi_wind_kt"]]))
     row("DS19", "IMD peak 130 kt, 920 hPa on 18 May", [max(nd_w), ni["newdelhi_pres_hPa"][kpk], int(tt[kpk][8:10])], [130, 920, 18], 0)
@@ -1100,6 +1114,9 @@ def main() -> int:
     dFS = gcd(FMB, STP) / 1e3
     row("DS25", "Fort Myers Beach → St. Petersburg 160.5 km (≈ 160)", dFS, 160.5, 0.1)
     row("DS25", "NHC 10-15 ft = 3.05-4.57 m ('three to four and a half')", [10 * 0.3048, 15 * 0.3048], [3.05, 4.57], 0.005)
+    # fix 0 B25b: the inverted barometer for Ian (official 938 hPa vs the 1013-hPa standard): 1 hPa ↔ 100 Pa / (ρ g) ≈ 1 cm
+    row("DS25", "s27 (B25b): 1 hPa ↔ 100 / (1025 × 9.81) = 0.0099 m (≈ 1 cm); 1013 − 938 = 75 hPa → 0.75 m ('only about seventy five centimetres')",
+        [100 / (1025 * G0), 1013 - say["p_best"], (1013 - say["p_best"]) * 100 / (1025 * G0)], [0.0099, 75, 0.746], [0.00005, 0, 0.005])
     Gg_ = xr.open_dataset(B1.F_COOPS)
     inputs.append(B1.F_COOPS)
     gt = Gg_.time.values

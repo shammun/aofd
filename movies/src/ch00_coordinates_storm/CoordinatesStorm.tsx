@@ -14,7 +14,7 @@ import { SCENES_C } from "./cs_sC";
  * the user's maths-skip chips, no references, source lines below the pictures, a colour bar beside every data field, wind arrows
  * animated, caption band empty, text ≥ 44 px, reveals on their words (AT). Every number comes from data/cs.json
  * (movies/data/build_ch00_coordinates_storm.py, tested fluidpy functions, CHECK rows DS01-DS28); scene files only index and place.
- * timing.json is PROVISIONAL (dry run 6) until the final TTS of the heavy phase.
+ * timing.json is the FINAL TTS (build 1, 2026-11-05: 2499.025 s + 2.5-s hold; checks/make_timing.py --final).
  */
 export const CST_FPS = FPS;
 export { CST_FRAMES };

@@ -234,7 +234,7 @@
  "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
  "inputs_sha256": {
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\derived\\ch00\\hrrr_ian_2022.nc": "2146826befd736c00d676a33984cd77e92bd7f6d0187ff9315d6165805977057",
-  "movies/ch00/ch00_coordinates_flat/data/cf.json": "34dfe24e18e66d5f225ac2f0ce2a8e3e2e89936282b934ee1ad457e08ab66647",
+  "movies/ch00/ch00_coordinates_flat/data/cf.json": "8b7a25b85b6ada639eea0b0886212a4eac42cbc9ec140be486ec3a20710c474a",
   "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GOES16-ABI\\OR_ABI-L2-CMIPM1-M6C01_G16_s20222711801253_e20222711801310_c20222711801367.nc": "20d67d6a0a5f2dcc17eacfd14a8934f9018f39622734502ae0f2003e7d0e26eb",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GOES16-ABI\\OR_ABI-L2-CMIPM1-M6C02_G16_s20222711801253_e20222711801310_c20222711801369.nc": "fe964383fb4bf362319e5b9ec72a4c8d10cbcd253299f6635f8d5f55d1b9ad3e",
@@ -324,7 +324,7 @@
   "cst_ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_files": {
-  "cs.json": "57ed6ebd0a2c3287e88e46d6d537f75e58b127217f9d8cd9dd2e9ee0528b1c76",
+  "cs.json": "b995a1f8e683c1a2e0b9d28336de9e4ce6f7046ca6b2b12299752ae4db22c3b5",
   "img/amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "img/bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "img/goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
@@ -345,7 +345,7 @@
   "img/ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_sizes_bytes": {
-  "cs.json": 276908,
+  "cs.json": 276982,
   "img/amphan_speed.png": 26371,
   "img/bay_patch.png": 2181893,
   "img/goes_eye.jpg": 148883,
@@ -1712,6 +1712,30 @@
    "kind": "check"
   },
   {
+   "id": "DS30",
+   "name": "s20 box estimate (B13): w = 2 h |u_r| / r = 2 × 1000 m × 15.7 m/s / 30 000 m = 1.04 m/s (said with 16: 1.07, 'about one'); the section minimum is at r = 30 km; agrees with the continuity integral 1.04 m/s within 0.15",
+   "value": [
+    1.044814,
+    1.066667,
+    30.0,
+    0.000761
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    30.0,
+    0.0
+   ],
+   "tol": [
+    0.1,
+    0.1,
+    0,
+    0.15
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
    "id": "DS21",
    "name": "ERA5 centre 20.657 N 87.796 E; msl min 966.9 hPa",
    "value": [
@@ -1814,6 +1838,27 @@
     956.0
    ],
    "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS21",
+   "name": "s23 like-for-like (B14): 90 kt × 1.852 / 3.6 = 46.3 (≈ 46) m/s; ERA5 lowest msl 966.9 (≈ 967) hPa vs official 956: ERA5 11 hPa too high (too weak)",
+   "value": [
+    46.3,
+    966.867264,
+    10.867264
+   ],
+   "ref": [
+    46.3,
+    967.0,
+    11.0
+   ],
+   "tol": [
+    0.05,
+    0.5,
+    0.5
+   ],
    "pass": true,
    "kind": "check"
   },
@@ -2050,6 +2095,27 @@
     4.57
    ],
    "tol": 0.005,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS25",
+   "name": "s27 (B25b): 1 hPa ↔ 100 / (1025 × 9.81) = 0.0099 m (≈ 1 cm); 1013 − 938 = 75 hPa → 0.75 m ('only about seventy five centimetres')",
+   "value": [
+    0.009948,
+    75.0,
+    0.746134
+   ],
+   "ref": [
+    0.0099,
+    75.0,
+    0.746
+   ],
+   "tol": [
+    5e-05,
+    0,
+    0.005
+   ],
    "pass": true,
    "kind": "check"
   },

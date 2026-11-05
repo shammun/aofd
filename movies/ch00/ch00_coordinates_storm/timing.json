@@ -110,7 +110,7 @@
      "start": 64.55,
      "end": 75.125,
      "dur": 10.575,
-     "start_frame": 1937,
+     "start_frame": 1936,
      "end_frame": 2254
     },
     {
@@ -120,7 +120,7 @@
      "end": 87.35,
      "dur": 11.875,
      "start_frame": 2264,
-     "end_frame": 2621
+     "end_frame": 2620
     }
    ],
    "end": 88.15,
@@ -209,7 +209,7 @@
      "start": 146.65,
      "end": 150.9,
      "dur": 4.25,
-     "start_frame": 4399,
+     "start_frame": 4400,
      "end_frame": 4527
     },
     {
@@ -218,7 +218,7 @@
      "start": 151.25,
      "end": 154.475,
      "dur": 3.225,
-     "start_frame": 4537,
+     "start_frame": 4538,
      "end_frame": 4634
     }
    ],
@@ -246,7 +246,7 @@
      "end": 172.25,
      "dur": 10.55,
      "start_frame": 4851,
-     "end_frame": 5167
+     "end_frame": 5168
     },
     {
      "text": "Let's start with r hat on its own.",
@@ -300,7 +300,7 @@
      "end": 200.45,
      "dur": 6.125,
      "start_frame": 5830,
-     "end_frame": 6013
+     "end_frame": 6014
     },
     {
      "text": "And the tip is exactly the point cosine theta, sine theta.",
@@ -327,7 +327,7 @@
      "end": 213.85,
      "dur": 5.3,
      "start_frame": 6256,
-     "end_frame": 6415
+     "end_frame": 6416
     },
     {
      "text": "The tip slides along the unit circle.",
@@ -372,8 +372,8 @@
      "start": 232.85,
      "end": 241.85,
      "dur": 9.0,
-     "start_frame": 6985,
-     "end_frame": 7255,
+     "start_frame": 6986,
+     "end_frame": 7256,
      "beat": true
     },
     {
@@ -409,7 +409,7 @@
      "start": 258.25,
      "end": 265.55,
      "dur": 7.3,
-     "start_frame": 7747,
+     "start_frame": 7748,
      "end_frame": 7966
     }
    ],
@@ -427,7 +427,7 @@
      "start": 266.35,
      "end": 274.175,
      "dur": 7.825,
-     "start_frame": 7990,
+     "start_frame": 7991,
      "end_frame": 8225
     },
     {
@@ -446,7 +446,7 @@
      "end": 290.65,
      "dur": 4.95,
      "start_frame": 8571,
-     "end_frame": 8719
+     "end_frame": 8720
     },
     {
      "text": "The tip moved delta theta along theta hat, which is minus sine theta, cosine theta.",
@@ -519,3435 +519,3899 @@
      "start": 333.75,
      "end": 344.325,
      "dur": 10.575,
-     "start_frame": 10013,
+     "start_frame": 10012,
      "end_frame": 10330
     },
     {
-     "text": "Turn by zero point zero one radians.",
+     "text": "Turn by zero point zero one radians, about half a degree, to fifty three point seven degrees.",
      "audio_text": null,
      "start": 344.675,
-     "end": 347.725,
-     "dur": 3.05,
+     "end": 351.775,
+     "dur": 7.1,
      "start_frame": 10340,
-     "end_frame": 10432
+     "end_frame": 10553
     },
     {
      "text": "The cosine drops from zero point six zero zero to zero point five nine two, a change of minus zero point zero zero eight.",
      "audio_text": null,
-     "start": 348.075,
-     "end": 357.125,
+     "start": 352.125,
+     "end": 361.175,
      "dur": 9.05,
-     "start_frame": 10442,
-     "end_frame": 10714
+     "start_frame": 10564,
+     "end_frame": 10835
     },
     {
      "text": "Divided by zero point zero one, that's minus zero point eight: minus the sine.",
      "audio_text": null,
-     "start": 357.475,
-     "end": 363.4,
+     "start": 361.525,
+     "end": 367.45,
      "dur": 5.925,
-     "start_frame": 10724,
-     "end_frame": 10902,
+     "start_frame": 10846,
+     "end_frame": 11024,
      "beat": true
     },
     {
      "text": "The sine grows from zero point eight zero zero to zero point eight zero six, a change of zero point zero zero six.",
      "audio_text": null,
-     "start": 364.9,
-     "end": 373.45,
+     "start": 368.95,
+     "end": 377.5,
      "dur": 8.55,
-     "start_frame": 10947,
-     "end_frame": 11204
+     "start_frame": 11068,
+     "end_frame": 11325
     },
     {
      "text": "Divided by zero point zero one, that's zero point six: the cosine.",
      "audio_text": null,
-     "start": 373.8,
-     "end": 379.05,
+     "start": 377.85,
+     "end": 383.1,
      "dur": 5.25,
-     "start_frame": 11214,
-     "end_frame": 11372,
+     "start_frame": 11336,
+     "end_frame": 11493,
      "beat": true
     },
     {
      "text": "So the rule works.",
      "audio_text": null,
-     "start": 380.55,
-     "end": 382.375,
+     "start": 384.6,
+     "end": 386.425,
      "dur": 1.825,
-     "start_frame": 11417,
-     "end_frame": 11471
+     "start_frame": 11538,
+     "end_frame": 11593
     },
     {
      "text": "These two slopes will come back again and again in this series.",
      "audio_text": null,
-     "start": 382.725,
-     "end": 386.825,
+     "start": 386.775,
+     "end": 390.875,
      "dur": 4.1,
-     "start_frame": 11482,
-     "end_frame": 11605
+     "start_frame": 11603,
+     "end_frame": 11726
     }
    ],
-   "end": 387.625,
+   "end": 391.675,
    "start_frame": 7991,
-   "end_frame": 11629
+   "end_frame": 11750
   },
   {
    "id": "s05_dr_dtheta",
-   "start": 387.625,
+   "start": 391.675,
    "sentences": [
     {
      "text": "Now let's put the two parts back together into one arrow.",
      "audio_text": null,
-     "start": 387.625,
-     "end": 391.6,
+     "start": 391.675,
+     "end": 395.65,
      "dur": 3.975,
-     "start_frame": 11629,
-     "end_frame": 11748
+     "start_frame": 11750,
+     "end_frame": 11870
     },
     {
      "text": "The change in r hat is the short arrow from its old tip to its new tip.",
      "audio_text": null,
-     "start": 391.95,
-     "end": 397.3,
+     "start": 396.0,
+     "end": 401.35,
      "dur": 5.35,
-     "start_frame": 11759,
-     "end_frame": 11919
+     "start_frame": 11880,
+     "end_frame": 12040
     },
     {
      "text": "We call it delta r hat.",
      "audio_text": null,
-     "start": 397.65,
-     "end": 399.9,
+     "start": 401.7,
+     "end": 403.95,
      "dur": 2.25,
-     "start_frame": 11930,
-     "end_frame": 11997
+     "start_frame": 12051,
+     "end_frame": 12118
     },
     {
      "text": "It's about theta hat times delta theta.",
      "audio_text": null,
-     "start": 400.25,
-     "end": 403.225,
+     "start": 404.3,
+     "end": 407.275,
      "dur": 2.975,
-     "start_frame": 12008,
-     "end_frame": 12097,
+     "start_frame": 12129,
+     "end_frame": 12218,
      "beat": true
     },
     {
      "text": "Now divide by delta theta, and let it shrink.",
      "audio_text": null,
-     "start": 404.725,
-     "end": 408.275,
+     "start": 408.775,
+     "end": 412.325,
      "dur": 3.55,
-     "start_frame": 12142,
-     "end_frame": 12248
+     "start_frame": 12263,
+     "end_frame": 12370
     },
     {
      "text": "We get the rate of change of r hat with theta.",
      "audio_text": null,
-     "start": 408.625,
-     "end": 411.7,
+     "start": 412.675,
+     "end": 415.75,
      "dur": 3.075,
-     "start_frame": 12259,
-     "end_frame": 12351
+     "start_frame": 12380,
+     "end_frame": 12472
     },
     {
      "text": "We write it d r hat by d theta, and it equals theta hat.",
      "audio_text": null,
-     "start": 412.05,
-     "end": 416.45,
+     "start": 416.1,
+     "end": 420.5,
      "dur": 4.4,
-     "start_frame": 12362,
-     "end_frame": 12494,
+     "start_frame": 12483,
+     "end_frame": 12615,
      "beat": true
     },
     {
      "text": "The letter d is how the derivatives movie writes a change when it's tiny.",
      "audio_text": null,
-     "start": 417.95,
-     "end": 423.025,
+     "start": 422.0,
+     "end": 427.075,
      "dur": 5.075,
-     "start_frame": 12539,
-     "end_frame": 12691
+     "start_frame": 12660,
+     "end_frame": 12812
     },
     {
      "text": "Some books multiply both sides by d theta, and write d r hat equals theta hat d theta.",
      "audio_text": null,
-     "start": 423.375,
-     "end": 430.125,
+     "start": 427.425,
+     "end": 434.175,
      "dur": 6.75,
-     "start_frame": 12701,
-     "end_frame": 12904
+     "start_frame": 12823,
+     "end_frame": 13025
     },
     {
      "text": "It's the same statement.",
      "audio_text": null,
-     "start": 430.475,
-     "end": 432.475,
+     "start": 434.525,
+     "end": 436.525,
      "dur": 2.0,
-     "start_frame": 12914,
-     "end_frame": 12974
+     "start_frame": 13036,
+     "end_frame": 13096
     },
     {
      "text": "We can also check it one part at a time.",
      "audio_text": null,
-     "start": 432.825,
-     "end": 435.8,
+     "start": 436.875,
+     "end": 439.85,
      "dur": 2.975,
-     "start_frame": 12985,
-     "end_frame": 13074
+     "start_frame": 13106,
+     "end_frame": 13196
     },
     {
      "text": "The slopes of cosine theta and sine theta are minus sine theta and cosine theta.",
      "audio_text": null,
-     "start": 436.15,
-     "end": 442.35,
+     "start": 440.2,
+     "end": 446.4,
      "dur": 6.2,
-     "start_frame": 13085,
-     "end_frame": 13271
+     "start_frame": 13206,
+     "end_frame": 13392
     },
     {
      "text": "Together, that's minus sine theta, cosine theta, which is theta hat.",
      "audio_text": null,
-     "start": 442.7,
-     "end": 447.85,
+     "start": 446.75,
+     "end": 451.9,
      "dur": 5.15,
-     "start_frame": 13281,
-     "end_frame": 13436,
+     "start_frame": 13402,
+     "end_frame": 13557,
      "beat": true
     },
     {
      "text": "So both routes agree.",
      "audio_text": null,
-     "start": 449.35,
-     "end": 451.4,
+     "start": 453.4,
+     "end": 455.45,
      "dur": 2.05,
-     "start_frame": 13481,
-     "end_frame": 13542
+     "start_frame": 13602,
+     "end_frame": 13664
     },
     {
      "text": "In words: when theta grows, r hat swings towards theta hat.",
      "audio_text": null,
-     "start": 451.75,
-     "end": 456.525,
+     "start": 455.8,
+     "end": 460.575,
      "dur": 4.775,
-     "start_frame": 13553,
-     "end_frame": 13696
+     "start_frame": 13674,
+     "end_frame": 13817
     }
    ],
-   "end": 457.325,
-   "start_frame": 11629,
-   "end_frame": 13720
+   "end": 461.375,
+   "start_frame": 11750,
+   "end_frame": 13841
   },
   {
    "id": "s06_dtheta_dtheta",
-   "start": 457.325,
+   "start": 461.375,
    "sentences": [
     {
      "text": "Now theta hat.",
      "audio_text": null,
-     "start": 457.325,
-     "end": 459.1,
+     "start": 461.375,
+     "end": 463.15,
      "dur": 1.775,
-     "start_frame": 13720,
-     "end_frame": 13773
+     "start_frame": 13841,
+     "end_frame": 13894
     },
     {
      "text": "How does theta hat change when theta grows?",
      "audio_text": null,
-     "start": 459.45,
-     "end": 462.55,
+     "start": 463.5,
+     "end": 466.6,
      "dur": 3.1,
-     "start_frame": 13784,
-     "end_frame": 13877
+     "start_frame": 13905,
+     "end_frame": 13998
     },
     {
      "text": "Let's take this slowly, one step at a time, and assume nothing.",
      "audio_text": null,
-     "start": 462.9,
-     "end": 467.25,
+     "start": 466.95,
+     "end": 471.3,
      "dur": 4.35,
-     "start_frame": 13887,
-     "end_frame": 14018
+     "start_frame": 14008,
+     "end_frame": 14139
     },
     {
      "text": "Step one.",
      "audio_text": null,
-     "start": 467.6,
-     "end": 469.175,
+     "start": 471.65,
+     "end": 473.225,
      "dur": 1.575,
-     "start_frame": 14028,
-     "end_frame": 14075
+     "start_frame": 14150,
+     "end_frame": 14197
     },
     {
      "text": "Theta hat is also an arrow of length one.",
      "audio_text": null,
-     "start": 469.525,
-     "end": 472.825,
+     "start": 473.575,
+     "end": 476.875,
      "dur": 3.3,
-     "start_frame": 14086,
-     "end_frame": 14185
+     "start_frame": 14207,
+     "end_frame": 14306
     },
     {
      "text": "So let's draw it from the origin too, from the same starting point as r hat.",
      "audio_text": null,
-     "start": 473.175,
-     "end": 478.375,
+     "start": 477.225,
+     "end": 482.425,
      "dur": 5.2,
-     "start_frame": 14195,
-     "end_frame": 14351
+     "start_frame": 14317,
+     "end_frame": 14473
     },
     {
      "text": "Its tip sits on the same unit circle.",
      "audio_text": null,
-     "start": 478.725,
-     "end": 481.65,
+     "start": 482.775,
+     "end": 485.7,
      "dur": 2.925,
-     "start_frame": 14362,
-     "end_frame": 14450
+     "start_frame": 14483,
+     "end_frame": 14571
     },
     {
      "text": "Step two.",
      "audio_text": null,
-     "start": 482.0,
-     "end": 483.575,
+     "start": 486.05,
+     "end": 487.625,
      "dur": 1.575,
-     "start_frame": 14460,
-     "end_frame": 14507
+     "start_frame": 14582,
+     "end_frame": 14629
     },
     {
      "text": "Theta hat is always r hat turned by ninety degrees.",
      "audio_text": null,
-     "start": 483.925,
-     "end": 487.975,
+     "start": 487.975,
+     "end": 492.025,
      "dur": 4.05,
-     "start_frame": 14518,
-     "end_frame": 14639
+     "start_frame": 14639,
+     "end_frame": 14761
     },
     {
      "text": "So its tip sits on the circle a quarter turn ahead of r hat's tip.",
      "audio_text": null,
-     "start": 488.325,
-     "end": 492.875,
+     "start": 492.375,
+     "end": 496.925,
      "dur": 4.55,
-     "start_frame": 14650,
-     "end_frame": 14786
+     "start_frame": 14771,
+     "end_frame": 14908
     },
     {
      "text": "Step three.",
      "audio_text": null,
-     "start": 493.225,
-     "end": 494.825,
+     "start": 497.275,
+     "end": 498.875,
      "dur": 1.6,
-     "start_frame": 14797,
-     "end_frame": 14845
+     "start_frame": 14918,
+     "end_frame": 14966
     },
     {
      "text": "Now turn theta by delta theta.",
      "audio_text": null,
-     "start": 495.175,
-     "end": 497.9,
+     "start": 499.225,
+     "end": 501.95,
      "dur": 2.725,
-     "start_frame": 14855,
-     "end_frame": 14937
+     "start_frame": 14977,
+     "end_frame": 15058
     },
     {
      "text": "R hat turns by delta theta, and theta hat, which always stays a quarter turn ahead, turns by the same delta theta.",
      "audio_text": null,
-     "start": 498.25,
-     "end": 506.725,
+     "start": 502.3,
+     "end": 510.775,
      "dur": 8.475,
-     "start_frame": 14948,
-     "end_frame": 15202
+     "start_frame": 15069,
+     "end_frame": 15323
     },
     {
      "text": "So its tip also slides a distance delta theta along the unit circle.",
      "audio_text": null,
-     "start": 507.075,
-     "end": 512.525,
+     "start": 511.125,
+     "end": 516.575,
      "dur": 5.45,
-     "start_frame": 15212,
-     "end_frame": 15376
+     "start_frame": 15334,
+     "end_frame": 15497
     },
     {
      "text": "Step four.",
      "audio_text": null,
-     "start": 512.875,
-     "end": 514.45,
+     "start": 516.925,
+     "end": 518.5,
      "dur": 1.575,
-     "start_frame": 15386,
-     "end_frame": 15434
+     "start_frame": 15508,
+     "end_frame": 15555
     },
     {
      "text": "Which way does it slide?",
      "audio_text": null,
-     "start": 514.8,
-     "end": 516.8,
+     "start": 518.85,
+     "end": 520.85,
      "dur": 2.0,
-     "start_frame": 15444,
-     "end_frame": 15504
+     "start_frame": 15566,
+     "end_frame": 15626
     },
     {
      "text": "The same rule as before: a tip sliding anticlockwise along the circle moves along its own arrow, turned by ninety degrees.",
      "audio_text": null,
-     "start": 517.15,
-     "end": 525.825,
+     "start": 521.2,
+     "end": 529.875,
      "dur": 8.675,
-     "start_frame": 15515,
-     "end_frame": 15775
+     "start_frame": 15636,
+     "end_frame": 15896
     },
     {
      "text": "So theta hat's tip moves along theta hat, turned by ninety degrees.",
      "audio_text": null,
-     "start": 526.175,
-     "end": 531.225,
+     "start": 530.225,
+     "end": 535.275,
      "dur": 5.05,
-     "start_frame": 15785,
-     "end_frame": 15937,
+     "start_frame": 15907,
+     "end_frame": 16058,
      "beat": true
     },
     {
      "text": "Step five.",
      "audio_text": null,
-     "start": 532.725,
-     "end": 534.35,
+     "start": 536.775,
+     "end": 538.4,
      "dur": 1.625,
-     "start_frame": 15982,
-     "end_frame": 16031
+     "start_frame": 16103,
+     "end_frame": 16152
     },
     {
      "text": "Let's turn theta hat with Part 1's rule: swap the two numbers, and put a minus on the first.",
      "audio_text": null,
-     "start": 534.7,
-     "end": 541.075,
+     "start": 538.75,
+     "end": 545.125,
      "dur": 6.375,
-     "start_frame": 16041,
-     "end_frame": 16232
+     "start_frame": 16162,
+     "end_frame": 16354
     },
     {
      "text": "Theta hat is minus sine theta, cosine theta.",
      "audio_text": null,
-     "start": 541.425,
-     "end": 545.25,
+     "start": 545.475,
+     "end": 549.3,
      "dur": 3.825,
-     "start_frame": 16243,
-     "end_frame": 16358
+     "start_frame": 16364,
+     "end_frame": 16479
     },
     {
      "text": "Swapping gives cosine theta, minus sine theta.",
      "audio_text": null,
-     "start": 545.6,
-     "end": 549.4,
+     "start": 549.65,
+     "end": 553.45,
      "dur": 3.8,
-     "start_frame": 16368,
-     "end_frame": 16482
+     "start_frame": 16490,
+     "end_frame": 16604
     },
     {
      "text": "And a minus on the first gives minus cosine theta, minus sine theta.",
      "audio_text": null,
-     "start": 549.75,
-     "end": 554.875,
+     "start": 553.8,
+     "end": 558.925,
      "dur": 5.125,
-     "start_frame": 16493,
-     "end_frame": 16646,
+     "start_frame": 16614,
+     "end_frame": 16768,
      "beat": true
     },
     {
      "text": "That's exactly minus r hat: the arrow r hat, flipped to point the other way.",
      "audio_text": null,
-     "start": 556.375,
-     "end": 562.175,
+     "start": 560.425,
+     "end": 566.225,
      "dur": 5.8,
-     "start_frame": 16691,
-     "end_frame": 16865,
+     "start_frame": 16813,
+     "end_frame": 16987,
      "beat": true
     },
     {
      "text": "So, for a small turn, theta hat changes by about minus r hat times delta theta.",
      "audio_text": null,
-     "start": 563.675,
-     "end": 570.0,
+     "start": 567.725,
+     "end": 574.05,
      "dur": 6.325,
-     "start_frame": 16910,
-     "end_frame": 17100
+     "start_frame": 17032,
+     "end_frame": 17222
     },
     {
      "text": "And its rate of change with theta, d theta hat by d theta, is minus r hat.",
      "audio_text": null,
-     "start": 570.35,
-     "end": 576.25,
+     "start": 574.4,
+     "end": 580.3,
      "dur": 5.9,
-     "start_frame": 17111,
-     "end_frame": 17288
+     "start_frame": 17232,
+     "end_frame": 17409
     }
    ],
-   "end": 577.05,
-   "start_frame": 13720,
-   "end_frame": 17312
+   "end": 581.1,
+   "start_frame": 13841,
+   "end_frame": 17433
   },
   {
    "id": "s07_toward_centre",
-   "start": 577.05,
+   "start": 581.1,
    "sentences": [
     {
      "text": "So what does minus r hat mean in the picture?",
      "audio_text": null,
-     "start": 577.05,
-     "end": 580.25,
+     "start": 581.1,
+     "end": 584.3,
      "dur": 3.2,
-     "start_frame": 17312,
-     "end_frame": 17408
+     "start_frame": 17433,
+     "end_frame": 17529
     },
     {
      "text": "Let's go back to the balloon, five kilometres from the station, and move it round its circle.",
      "audio_text": null,
-     "start": 580.6,
-     "end": 586.775,
+     "start": 584.65,
+     "end": 590.825,
      "dur": 6.175,
-     "start_frame": 17418,
-     "end_frame": 17603
+     "start_frame": 17540,
+     "end_frame": 17725
     },
     {
      "text": "At each place, draw theta hat at the balloon.",
      "audio_text": null,
-     "start": 587.125,
-     "end": 590.525,
+     "start": 591.175,
+     "end": 594.575,
      "dur": 3.4,
-     "start_frame": 17614,
-     "end_frame": 17716
+     "start_frame": 17735,
+     "end_frame": 17837
     },
     {
      "text": "Due east of the station, theta hat points north.",
      "audio_text": null,
-     "start": 590.875,
-     "end": 594.65,
+     "start": 594.925,
+     "end": 598.7,
      "dur": 3.775,
-     "start_frame": 17726,
-     "end_frame": 17840
+     "start_frame": 17848,
+     "end_frame": 17961
     },
     {
      "text": "A little further round, it leans to the west, towards the station's side.",
      "audio_text": null,
-     "start": 595.0,
-     "end": 600.025,
+     "start": 599.05,
+     "end": 604.075,
      "dur": 5.025,
-     "start_frame": 17850,
-     "end_frame": 18001
+     "start_frame": 17972,
+     "end_frame": 18122
     },
     {
      "text": "Now slide those arrows so that their tails touch.",
      "audio_text": null,
-     "start": 600.375,
-     "end": 603.975,
+     "start": 604.425,
+     "end": 608.025,
      "dur": 3.6,
-     "start_frame": 18011,
-     "end_frame": 18119
+     "start_frame": 18133,
+     "end_frame": 18241
     },
     {
      "text": "Their tips swing round, and the small change from one arrow to the next points back towards the station.",
      "audio_text": null,
-     "start": 604.325,
-     "end": 610.9,
+     "start": 608.375,
+     "end": 614.95,
      "dur": 6.575,
-     "start_frame": 18130,
-     "end_frame": 18327
+     "start_frame": 18251,
+     "end_frame": 18448
     },
     {
      "text": "That's minus r hat: from the balloon, back towards the centre of its circle.",
      "audio_text": null,
-     "start": 611.25,
-     "end": 616.5,
+     "start": 615.3,
+     "end": 620.55,
      "dur": 5.25,
-     "start_frame": 18338,
-     "end_frame": 18495
+     "start_frame": 18459,
+     "end_frame": 18616
     },
     {
      "text": "That's what we mean when we say that theta hat's tip moves towards the centre.",
      "audio_text": null,
-     "start": 616.85,
-     "end": 622.05,
+     "start": 620.9,
+     "end": 626.1,
      "dur": 5.2,
-     "start_frame": 18506,
-     "end_frame": 18662,
+     "start_frame": 18627,
+     "end_frame": 18783,
      "beat": true
     },
     {
      "text": "Let's check with numbers.",
      "audio_text": null,
-     "start": 623.55,
-     "end": 625.625,
+     "start": 627.6,
+     "end": 629.675,
      "dur": 2.075,
-     "start_frame": 18707,
-     "end_frame": 18769
+     "start_frame": 18828,
+     "end_frame": 18890
     },
     {
      "text": "At fifty three degrees, theta hat is minus zero point eight, zero point six.",
      "audio_text": null,
-     "start": 625.975,
-     "end": 631.75,
+     "start": 630.025,
+     "end": 635.8,
      "dur": 5.775,
-     "start_frame": 18779,
-     "end_frame": 18953
+     "start_frame": 18901,
+     "end_frame": 19074
     },
     {
      "text": "After a turn of zero point zero one radians, it's minus zero point eight zero six, zero point five nine two.",
      "audio_text": null,
-     "start": 632.1,
-     "end": 640.475,
+     "start": 636.15,
+     "end": 644.525,
      "dur": 8.375,
-     "start_frame": 18963,
-     "end_frame": 19214
+     "start_frame": 19084,
+     "end_frame": 19336
     },
     {
      "text": "The change is minus zero point zero zero six, minus zero point zero zero eight.",
      "audio_text": null,
-     "start": 640.825,
-     "end": 646.6,
+     "start": 644.875,
+     "end": 650.65,
      "dur": 5.775,
-     "start_frame": 19225,
-     "end_frame": 19398
+     "start_frame": 19346,
+     "end_frame": 19520
     },
     {
      "text": "Divided by zero point zero one, that's minus zero point six, minus zero point eight.",
      "audio_text": null,
-     "start": 646.95,
-     "end": 653.35,
+     "start": 651.0,
+     "end": 657.4,
      "dur": 6.4,
-     "start_frame": 19409,
-     "end_frame": 19601,
+     "start_frame": 19530,
+     "end_frame": 19722,
      "beat": true
     },
     {
      "text": "And r hat is zero point six, zero point eight, so that's minus r hat.",
      "audio_text": null,
-     "start": 654.85,
-     "end": 660.325,
+     "start": 658.9,
+     "end": 664.375,
      "dur": 5.475,
-     "start_frame": 19646,
-     "end_frame": 19810,
+     "start_frame": 19767,
+     "end_frame": 19931,
      "beat": true
     },
     {
      "text": "We can also check it one part at a time with the new slopes.",
      "audio_text": null,
-     "start": 661.825,
-     "end": 665.775,
+     "start": 665.875,
+     "end": 669.825,
      "dur": 3.95,
-     "start_frame": 19855,
-     "end_frame": 19973
+     "start_frame": 19976,
+     "end_frame": 20095
     },
     {
      "text": "The slope of minus sine theta is minus cosine theta, and the slope of cosine theta is minus sine theta.",
      "audio_text": null,
-     "start": 666.125,
-     "end": 673.775,
+     "start": 670.175,
+     "end": 677.825,
      "dur": 7.65,
-     "start_frame": 19984,
-     "end_frame": 20213
+     "start_frame": 20105,
+     "end_frame": 20335
     },
     {
      "text": "Together, that's minus cosine theta, minus sine theta: minus r hat again.",
      "audio_text": null,
-     "start": 674.125,
-     "end": 680.0,
+     "start": 678.175,
+     "end": 684.05,
      "dur": 5.875,
-     "start_frame": 20224,
-     "end_frame": 20400,
+     "start_frame": 20345,
+     "end_frame": 20522,
      "beat": true
     },
     {
      "text": "So here's the whole rule in words: turn the angle, and each arrow swings towards the other one.",
      "audio_text": null,
-     "start": 681.5,
-     "end": 687.8,
+     "start": 685.55,
+     "end": 691.85,
      "dur": 6.3,
-     "start_frame": 20445,
-     "end_frame": 20634
+     "start_frame": 20566,
+     "end_frame": 20756
     },
     {
      "text": "R hat swings towards theta hat, and theta hat swings towards minus r hat.",
      "audio_text": null,
-     "start": 688.15,
-     "end": 693.75,
+     "start": 692.2,
+     "end": 697.8,
      "dur": 5.6,
-     "start_frame": 20645,
-     "end_frame": 20813
+     "start_frame": 20766,
+     "end_frame": 20934
     }
    ],
-   "end": 694.55,
-   "start_frame": 17312,
-   "end_frame": 20836
+   "end": 698.6,
+   "start_frame": 17433,
+   "end_frame": 20958
   },
   {
    "id": "s08_product_rule",
-   "start": 694.55,
+   "start": 698.6,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep: as the angle grows, r hat swings towards theta hat, and theta hat swings towards minus r hat, back towards the centre.",
      "audio_text": null,
-     "start": 694.55,
-     "end": 705.3,
+     "start": 698.6,
+     "end": 709.35,
      "dur": 10.75,
-     "start_frame": 20837,
-     "end_frame": 21159
+     "start_frame": 20958,
+     "end_frame": 21280
     },
     {
      "text": "Next comes one more stretch with every step, from a new tool all the way to the acceleration.",
      "audio_text": null,
-     "start": 705.65,
-     "end": 711.9,
+     "start": 709.7,
+     "end": 715.95,
      "dur": 6.25,
-     "start_frame": 21170,
-     "end_frame": 21357
+     "start_frame": 21291,
+     "end_frame": 21478
     },
     {
      "text": "If you'd rather, jump to the time on the screen.",
      "audio_text": null,
-     "start": 712.25,
-     "end": 715.675,
+     "start": 716.3,
+     "end": 719.725,
      "dur": 3.425,
-     "start_frame": 21368,
-     "end_frame": 21470
+     "start_frame": 21489,
+     "end_frame": 21592
     },
     {
      "text": "Before we use these rules on a moving air parcel, we need one more tool, which no earlier movie in this series has shown.",
      "audio_text": null,
-     "start": 716.025,
-     "end": 724.3,
+     "start": 720.075,
+     "end": 728.35,
      "dur": 8.275,
-     "start_frame": 21481,
-     "end_frame": 21729
+     "start_frame": 21602,
+     "end_frame": 21850
     },
     {
      "text": "It's called the product rule.",
      "audio_text": null,
-     "start": 724.65,
-     "end": 726.9,
+     "start": 728.7,
+     "end": 730.95,
      "dur": 2.25,
-     "start_frame": 21740,
-     "end_frame": 21807
+     "start_frame": 21861,
+     "end_frame": 21928
     },
     {
      "text": "Here's the question it answers: how does a number times an arrow change, when both the number and the arrow change?",
      "audio_text": null,
-     "start": 727.25,
-     "end": 734.6,
+     "start": 731.3,
+     "end": 738.65,
      "dur": 7.35,
-     "start_frame": 21818,
-     "end_frame": 22038
+     "start_frame": 21939,
+     "end_frame": 22160
     },
     {
      "text": "Let's try easy numbers first.",
      "audio_text": null,
-     "start": 734.95,
-     "end": 737.475,
+     "start": 739.0,
+     "end": 741.525,
      "dur": 2.525,
-     "start_frame": 22049,
-     "end_frame": 22124
+     "start_frame": 22170,
+     "end_frame": 22246
     },
     {
-     "text": "Take a speed of ten metres per second, along an arrow pointing east, one, zero.",
+     "text": "Take a speed of ten metres per second, along an arrow pointing east, one, zero, which we'll call d hat.",
      "audio_text": null,
-     "start": 737.825,
-     "end": 743.85,
-     "dur": 6.025,
-     "start_frame": 22135,
-     "end_frame": 22316
+     "start": 741.875,
+     "end": 749.125,
+     "dur": 7.25,
+     "start_frame": 22256,
+     "end_frame": 22474
     },
     {
      "text": "Their product is the arrow ten, zero.",
      "audio_text": null,
-     "start": 744.2,
-     "end": 747.4,
+     "start": 749.475,
+     "end": 752.675,
      "dur": 3.2,
-     "start_frame": 22326,
-     "end_frame": 22422,
+     "start_frame": 22484,
+     "end_frame": 22580,
      "beat": true
     },
     {
      "text": "One second later, the speed has grown to eleven.",
      "audio_text": null,
-     "start": 748.9,
-     "end": 752.8,
+     "start": 754.175,
+     "end": 758.075,
      "dur": 3.9,
-     "start_frame": 22467,
-     "end_frame": 22584
+     "start_frame": 22625,
+     "end_frame": 22742
     },
     {
      "text": "And the arrow has turned by zero point one radians, to about zero point nine nine five, zero point one.",
      "audio_text": null,
-     "start": 753.15,
-     "end": 760.625,
+     "start": 758.425,
+     "end": 765.9,
      "dur": 7.475,
-     "start_frame": 22595,
-     "end_frame": 22819
+     "start_frame": 22753,
+     "end_frame": 22977
     },
     {
      "text": "The product is now eleven times that, which is ten point nine four five, one point one.",
      "audio_text": null,
-     "start": 760.975,
-     "end": 767.625,
+     "start": 766.25,
+     "end": 772.9,
      "dur": 6.65,
-     "start_frame": 22829,
-     "end_frame": 23029
+     "start_frame": 22988,
+     "end_frame": 23187
     },
     {
      "text": "So the product changed by zero point nine four five, one point one.",
      "audio_text": null,
-     "start": 767.975,
-     "end": 772.925,
+     "start": 773.25,
+     "end": 778.2,
      "dur": 4.95,
-     "start_frame": 23039,
-     "end_frame": 23188,
+     "start_frame": 23198,
+     "end_frame": 23346,
      "beat": true
     },
     {
      "text": "Where does that change come from?",
      "audio_text": null,
-     "start": 774.425,
-     "end": 776.675,
+     "start": 779.7,
+     "end": 781.95,
      "dur": 2.25,
-     "start_frame": 23233,
-     "end_frame": 23300
+     "start_frame": 23391,
+     "end_frame": 23458
     },
     {
      "text": "There are three pieces.",
      "audio_text": null,
-     "start": 777.025,
-     "end": 778.95,
+     "start": 782.3,
+     "end": 784.225,
      "dur": 1.925,
-     "start_frame": 23311,
-     "end_frame": 23369
+     "start_frame": 23469,
+     "end_frame": 23527
     },
     {
      "text": "First, the change in the number, times the old arrow: one times one, zero, which is one, zero.",
      "audio_text": null,
-     "start": 779.3,
-     "end": 785.975,
+     "start": 784.575,
+     "end": 791.25,
      "dur": 6.675,
-     "start_frame": 23379,
-     "end_frame": 23579
+     "start_frame": 23537,
+     "end_frame": 23738
     },
     {
-     "text": "Second, the old number, times the change in the arrow: ten times minus zero point zero zero five, zero point one, which is minus zero point zero five, one.",
+     "text": "Second, the old number times the change in the arrow, which went from one, zero to zero point nine nine five, zero point one, a change of minus zero point zero zero five, zero point one: ten times that is minus zero point zero five, one.",
      "audio_text": null,
-     "start": 786.325,
-     "end": 798.05,
-     "dur": 11.725,
-     "start_frame": 23590,
-     "end_frame": 23942
+     "start": 791.6,
+     "end": 808.975,
+     "dur": 17.375,
+     "start_frame": 23748,
+     "end_frame": 24269
     },
     {
      "text": "Third, the two changes multiplied together: one times minus zero point zero zero five, zero point one, which is minus zero point zero zero five, zero point one.",
      "audio_text": null,
-     "start": 798.4,
-     "end": 810.775,
+     "start": 809.325,
+     "end": 821.7,
      "dur": 12.375,
-     "start_frame": 23952,
-     "end_frame": 24323,
+     "start_frame": 24280,
+     "end_frame": 24651,
      "beat": true
     },
     {
      "text": "Add the three pieces, and we get zero point nine four five, one point one: the whole change.",
      "audio_text": null,
-     "start": 812.275,
-     "end": 818.675,
+     "start": 823.2,
+     "end": 829.6,
      "dur": 6.4,
-     "start_frame": 24368,
-     "end_frame": 24560,
+     "start_frame": 24696,
+     "end_frame": 24888,
      "beat": true
     },
     {
      "text": "Now the key step.",
      "audio_text": null,
-     "start": 820.175,
-     "end": 821.95,
+     "start": 831.1,
+     "end": 832.875,
      "dur": 1.775,
-     "start_frame": 24605,
-     "end_frame": 24659
+     "start_frame": 24933,
+     "end_frame": 24986
     },
     {
      "text": "The third piece is a small change times a small change.",
      "audio_text": null,
-     "start": 822.3,
-     "end": 826.4,
+     "start": 833.225,
+     "end": 837.325,
      "dur": 4.1,
-     "start_frame": 24669,
-     "end_frame": 24792
+     "start_frame": 24997,
+     "end_frame": 25120
     },
     {
      "text": "If we halve the time step, the first two pieces halve, but the third one shrinks to a quarter.",
      "audio_text": null,
-     "start": 826.75,
-     "end": 833.05,
+     "start": 837.675,
+     "end": 843.975,
      "dur": 6.3,
-     "start_frame": 24803,
-     "end_frame": 24992
+     "start_frame": 25130,
+     "end_frame": 25319
     },
     {
-     "text": "So after we divide by the time step and let it shrink, the third piece vanishes.",
+     "text": "Divide each piece by the time step: the first two stay at about one, but the third goes from zero point one to zero point zero five to zero point zero two five, so as the time step shrinks, the third piece vanishes.",
      "audio_text": null,
-     "start": 833.4,
-     "end": 838.95,
-     "dur": 5.55,
-     "start_frame": 25002,
-     "end_frame": 25169
+     "start": 844.325,
+     "end": 859.45,
+     "dur": 15.125,
+     "start_frame": 25330,
+     "end_frame": 25784
     },
     {
      "text": "What's left is the product rule.",
      "audio_text": null,
-     "start": 839.3,
-     "end": 841.85,
+     "start": 859.8,
+     "end": 862.35,
      "dur": 2.55,
-     "start_frame": 25179,
-     "end_frame": 25256
+     "start_frame": 25794,
+     "end_frame": 25870
     },
     {
      "text": "The rate of change of a number times an arrow is the number's rate times the arrow, plus the number times the arrow's rate.",
      "audio_text": null,
-     "start": 842.2,
-     "end": 849.975,
+     "start": 862.7,
+     "end": 870.475,
      "dur": 7.775,
-     "start_frame": 25266,
-     "end_frame": 25499,
+     "start_frame": 25881,
+     "end_frame": 26114,
      "beat": true
     }
    ],
-   "end": 851.475,
-   "start_frame": 20836,
-   "end_frame": 25544
+   "end": 871.975,
+   "start_frame": 20958,
+   "end_frame": 26159
   },
   {
    "id": "s09_dtheta_dt",
-   "start": 851.475,
+   "start": 871.975,
    "sentences": [
     {
      "text": "Now let's put an air parcel on Ian's ring, twenty five kilometres from the centre, going round at a steady speed.",
      "audio_text": null,
-     "start": 851.475,
-     "end": 859.475,
+     "start": 871.975,
+     "end": 879.975,
      "dur": 8.0,
-     "start_frame": 25544,
-     "end_frame": 25784
+     "start_frame": 26159,
+     "end_frame": 26399
     },
     {
      "text": "We'll call its speed v.",
      "audio_text": null,
-     "start": 859.825,
-     "end": 861.85,
+     "start": 880.325,
+     "end": 882.35,
      "dur": 2.025,
-     "start_frame": 25795,
-     "end_frame": 25856
+     "start_frame": 26410,
+     "end_frame": 26470
     },
     {
      "text": "On this ring, v is about thirty five metres per second.",
      "audio_text": null,
-     "start": 862.2,
-     "end": 866.625,
+     "start": 882.7,
+     "end": 887.125,
      "dur": 4.425,
-     "start_frame": 25866,
-     "end_frame": 25999
+     "start_frame": 26481,
+     "end_frame": 26614
     },
     {
      "text": "As the parcel goes round, its angle theta grows.",
      "audio_text": null,
-     "start": 866.975,
-     "end": 871.025,
+     "start": 887.475,
+     "end": 891.525,
      "dur": 4.05,
-     "start_frame": 26009,
-     "end_frame": 26131
+     "start_frame": 26624,
+     "end_frame": 26746
     },
     {
      "text": "How fast?",
      "audio_text": null,
-     "start": 871.375,
-     "end": 872.95,
+     "start": 891.875,
+     "end": 893.45,
      "dur": 1.575,
-     "start_frame": 26141,
-     "end_frame": 26189
+     "start_frame": 26756,
+     "end_frame": 26804
     },
     {
      "text": "Let's find out, one step at a time.",
      "audio_text": null,
-     "start": 873.3,
-     "end": 876.3,
+     "start": 893.8,
+     "end": 896.8,
      "dur": 3.0,
-     "start_frame": 26199,
-     "end_frame": 26289
+     "start_frame": 26814,
+     "end_frame": 26904
     },
     {
      "text": "In a short time, delta t, the parcel moves a distance v times delta t along the ring.",
      "audio_text": null,
-     "start": 876.65,
-     "end": 883.35,
+     "start": 897.15,
+     "end": 903.85,
      "dur": 6.7,
-     "start_frame": 26300,
-     "end_frame": 26501,
+     "start_frame": 26914,
+     "end_frame": 27116,
      "beat": true
     },
     {
      "text": "By the arc rule, a distance along a circle is the radius times the angle.",
      "audio_text": null,
-     "start": 884.85,
-     "end": 890.475,
+     "start": 905.35,
+     "end": 910.975,
      "dur": 5.625,
-     "start_frame": 26546,
-     "end_frame": 26714
+     "start_frame": 27160,
+     "end_frame": 27329
     },
     {
      "text": "So the angle it turns through is that distance divided by the radius: v delta t over r.",
      "audio_text": null,
-     "start": 890.825,
-     "end": 897.725,
+     "start": 911.325,
+     "end": 918.225,
      "dur": 6.9,
-     "start_frame": 26725,
-     "end_frame": 26932,
+     "start_frame": 27340,
+     "end_frame": 27547,
      "beat": true
     },
     {
      "text": "Now divide by delta t, and let it shrink.",
      "audio_text": null,
-     "start": 899.225,
-     "end": 902.675,
+     "start": 919.725,
+     "end": 923.175,
      "dur": 3.45,
-     "start_frame": 26977,
-     "end_frame": 27080
+     "start_frame": 27592,
+     "end_frame": 27695
     },
     {
      "text": "The rate at which theta grows, d theta by d t, is v over r.",
      "audio_text": null,
-     "start": 903.025,
-     "end": 907.9,
+     "start": 923.525,
+     "end": 928.4,
      "dur": 4.875,
-     "start_frame": 27091,
-     "end_frame": 27237,
+     "start_frame": 27706,
+     "end_frame": 27852,
      "beat": true
     },
     {
      "text": "The derivatives movie didn't show this one, so let's put in the numbers.",
      "audio_text": null,
-     "start": 909.4,
-     "end": 914.025,
+     "start": 929.9,
+     "end": 934.525,
      "dur": 4.625,
-     "start_frame": 27282,
-     "end_frame": 27421
+     "start_frame": 27897,
+     "end_frame": 28036
     },
     {
      "text": "Thirty four point eight metres per second, divided by twenty five thousand metres, is about zero point zero zero one three nine radians per second.",
      "audio_text": null,
-     "start": 914.375,
-     "end": 924.75,
+     "start": 934.875,
+     "end": 945.25,
      "dur": 10.375,
-     "start_frame": 27431,
-     "end_frame": 27743,
+     "start_frame": 28046,
+     "end_frame": 28358,
      "beat": true
     },
     {
      "text": "The metres cancel, and radians per second are left.",
      "audio_text": null,
-     "start": 926.25,
-     "end": 930.1,
+     "start": 946.75,
+     "end": 950.6,
      "dur": 3.85,
-     "start_frame": 27788,
-     "end_frame": 27903
+     "start_frame": 28402,
+     "end_frame": 28518
     },
     {
      "text": "That's about zero point zero eight degrees every second, or about five degrees every minute.",
      "audio_text": null,
-     "start": 930.45,
-     "end": 936.7,
+     "start": 950.95,
+     "end": 957.2,
      "dur": 6.25,
-     "start_frame": 27914,
-     "end_frame": 28101,
+     "start_frame": 28528,
+     "end_frame": 28716,
      "beat": true
     },
     {
      "text": "So one full lap, two pi radians, takes two pi divided by zero point zero zero one three nine.",
      "audio_text": null,
-     "start": 938.2,
-     "end": 945.575,
+     "start": 958.7,
+     "end": 966.075,
      "dur": 7.375,
-     "start_frame": 28146,
-     "end_frame": 28367
+     "start_frame": 28761,
+     "end_frame": 28982
     },
     {
      "text": "That's about four thousand five hundred seconds, or about seventy five minutes.",
      "audio_text": null,
-     "start": 945.925,
-     "end": 951.05,
+     "start": 966.425,
+     "end": 971.55,
      "dur": 5.125,
-     "start_frame": 28378,
-     "end_frame": 28532,
+     "start_frame": 28993,
+     "end_frame": 29146,
      "beat": true
     }
    ],
-   "end": 952.55,
-   "start_frame": 25544,
-   "end_frame": 28576
+   "end": 973.05,
+   "start_frame": 26159,
+   "end_frame": 29192
   },
   {
    "id": "s10_position_arrow",
-   "start": 952.55,
+   "start": 973.05,
    "sentences": [
     {
      "text": "Next, the parcel's velocity.",
      "audio_text": null,
-     "start": 952.55,
-     "end": 955.275,
+     "start": 973.05,
+     "end": 975.775,
      "dur": 2.725,
-     "start_frame": 28577,
-     "end_frame": 28658
+     "start_frame": 29192,
+     "end_frame": 29273
     },
     {
      "text": "Why do we need it?",
      "audio_text": null,
-     "start": 955.625,
-     "end": 957.275,
+     "start": 976.125,
+     "end": 977.775,
      "dur": 1.65,
-     "start_frame": 28669,
-     "end_frame": 28718
+     "start_frame": 29284,
+     "end_frame": 29333
     },
     {
      "text": "Because acceleration is the rate of change of velocity, so we need the velocity first.",
      "audio_text": null,
-     "start": 957.625,
-     "end": 963.725,
+     "start": 978.125,
+     "end": 984.225,
      "dur": 6.1,
-     "start_frame": 28729,
-     "end_frame": 28912
+     "start_frame": 29344,
+     "end_frame": 29527
     },
     {
      "text": "And velocity is the rate of change of position: how far, and in which direction, the parcel moves each second.",
      "audio_text": null,
-     "start": 964.075,
-     "end": 971.875,
+     "start": 984.575,
+     "end": 992.375,
      "dur": 7.8,
-     "start_frame": 28922,
-     "end_frame": 29156
+     "start_frame": 29537,
+     "end_frame": 29771
     },
     {
      "text": "So let's write the parcel's position as an arrow from the centre of the eye.",
      "audio_text": null,
-     "start": 972.225,
-     "end": 977.25,
+     "start": 992.725,
+     "end": 997.75,
      "dur": 5.025,
-     "start_frame": 29167,
-     "end_frame": 29318
+     "start_frame": 29782,
+     "end_frame": 29932
     },
     {
      "text": "Its length is the distance r, and its direction is r hat.",
      "audio_text": null,
-     "start": 977.6,
-     "end": 982.025,
+     "start": 998.1,
+     "end": 1002.525,
      "dur": 4.425,
-     "start_frame": 29328,
-     "end_frame": 29461
+     "start_frame": 29943,
+     "end_frame": 30076
     },
     {
      "text": "So the position arrow is r times r hat.",
      "audio_text": null,
-     "start": 982.375,
-     "end": 985.65,
+     "start": 1002.875,
+     "end": 1006.15,
      "dur": 3.275,
-     "start_frame": 29471,
-     "end_frame": 29570,
+     "start_frame": 30086,
+     "end_frame": 30184,
      "beat": true
     },
     {
      "text": "That's just Part 1 read backwards.",
      "audio_text": null,
-     "start": 987.15,
-     "end": 989.95,
+     "start": 1007.65,
+     "end": 1010.45,
      "dur": 2.8,
-     "start_frame": 29615,
-     "end_frame": 29699
+     "start_frame": 30230,
+     "end_frame": 30314
     },
     {
      "text": "R hat is the arrow divided by its length, so the arrow is its length times r hat.",
      "audio_text": null,
-     "start": 990.3,
-     "end": 996.275,
+     "start": 1010.8,
+     "end": 1016.775,
      "dur": 5.975,
-     "start_frame": 29709,
-     "end_frame": 29888
+     "start_frame": 30324,
+     "end_frame": 30503
     },
     {
      "text": "For Ian's parcel, that's twenty five kilometres times r hat.",
      "audio_text": null,
-     "start": 996.625,
-     "end": 1001.125,
+     "start": 1017.125,
+     "end": 1021.625,
      "dur": 4.5,
-     "start_frame": 29899,
-     "end_frame": 30034
+     "start_frame": 30514,
+     "end_frame": 30649
     },
     {
      "text": "Velocity is the rate of change of this arrow.",
      "audio_text": null,
-     "start": 1001.475,
-     "end": 1004.875,
+     "start": 1021.975,
+     "end": 1025.375,
      "dur": 3.4,
-     "start_frame": 30044,
-     "end_frame": 30146
+     "start_frame": 30659,
+     "end_frame": 30761
     },
     {
      "text": "It's a number, r, times an arrow, r hat, so we use the product rule.",
      "audio_text": null,
-     "start": 1005.225,
-     "end": 1010.475,
+     "start": 1025.725,
+     "end": 1030.975,
      "dur": 5.25,
-     "start_frame": 30157,
-     "end_frame": 30314
+     "start_frame": 30772,
+     "end_frame": 30929
     },
     {
      "text": "The rate of change of r times r hat is d r by d t times r hat, plus r times d r hat by d t.",
      "audio_text": null,
-     "start": 1010.825,
-     "end": 1018.975,
+     "start": 1031.325,
+     "end": 1039.475,
      "dur": 8.15,
-     "start_frame": 30325,
-     "end_frame": 30569,
+     "start_frame": 30940,
+     "end_frame": 31184,
      "beat": true
     }
    ],
-   "end": 1020.475,
-   "start_frame": 28576,
-   "end_frame": 30614
+   "end": 1040.975,
+   "start_frame": 29192,
+   "end_frame": 31229
   },
   {
    "id": "s11_velocity_on_ring",
-   "start": 1020.475,
+   "start": 1040.975,
    "sentences": [
     {
      "text": "Now let's simplify, one term at a time.",
      "audio_text": null,
-     "start": 1020.475,
-     "end": 1023.8,
+     "start": 1040.975,
+     "end": 1044.3,
      "dur": 3.325,
-     "start_frame": 30614,
-     "end_frame": 30714
+     "start_frame": 31229,
+     "end_frame": 31329
     },
     {
      "text": "On a ring, the distance r never changes, so d r by d t is zero, and the first term drops out.",
      "audio_text": null,
-     "start": 1024.15,
-     "end": 1031.6,
+     "start": 1044.65,
+     "end": 1052.1,
      "dur": 7.45,
-     "start_frame": 30725,
-     "end_frame": 30948,
+     "start_frame": 31340,
+     "end_frame": 31563,
      "beat": true
     },
     {
      "text": "For the second term, we need how fast r hat changes in time.",
      "audio_text": null,
-     "start": 1033.1,
-     "end": 1037.75,
+     "start": 1053.6,
+     "end": 1058.25,
      "dur": 4.65,
-     "start_frame": 30993,
-     "end_frame": 31133
+     "start_frame": 31608,
+     "end_frame": 31748
     },
     {
      "text": "R hat depends on theta, and theta depends on time.",
      "audio_text": null,
-     "start": 1038.1,
-     "end": 1042.325,
+     "start": 1058.6,
+     "end": 1062.825,
      "dur": 4.225,
-     "start_frame": 31143,
-     "end_frame": 31270
+     "start_frame": 31758,
+     "end_frame": 31885
     },
     {
      "text": "That's a chain, so we use the chain rule from the derivatives movie.",
      "audio_text": null,
-     "start": 1042.675,
-     "end": 1047.4,
+     "start": 1063.175,
+     "end": 1067.9,
      "dur": 4.725,
-     "start_frame": 31280,
-     "end_frame": 31422
+     "start_frame": 31895,
+     "end_frame": 32037
     },
     {
      "text": "D r hat by d t equals d r hat by d theta, times d theta by d t.",
      "audio_text": null,
-     "start": 1047.75,
-     "end": 1053.775,
+     "start": 1068.25,
+     "end": 1074.275,
      "dur": 6.025,
-     "start_frame": 31433,
-     "end_frame": 31613
+     "start_frame": 32048,
+     "end_frame": 32228
     },
     {
      "text": "We've found both: theta hat, and v over r.",
      "audio_text": null,
-     "start": 1054.125,
-     "end": 1057.575,
+     "start": 1074.625,
+     "end": 1078.075,
      "dur": 3.45,
-     "start_frame": 31624,
-     "end_frame": 31727
+     "start_frame": 32239,
+     "end_frame": 32342
     },
     {
      "text": "So d r hat by d t is theta hat times v over r.",
      "audio_text": null,
-     "start": 1057.925,
-     "end": 1062.35,
+     "start": 1078.425,
+     "end": 1082.85,
      "dur": 4.425,
-     "start_frame": 31738,
-     "end_frame": 31871,
+     "start_frame": 32353,
+     "end_frame": 32485,
      "beat": true
     },
     {
      "text": "Now multiply by r.",
      "audio_text": null,
-     "start": 1063.85,
-     "end": 1065.925,
+     "start": 1084.35,
+     "end": 1086.425,
      "dur": 2.075,
-     "start_frame": 31916,
-     "end_frame": 31978
+     "start_frame": 32530,
+     "end_frame": 32593
     },
     {
      "text": "The two r's cancel, and the velocity is v times theta hat.",
      "audio_text": null,
-     "start": 1066.275,
-     "end": 1070.9,
+     "start": 1086.775,
+     "end": 1091.4,
      "dur": 4.625,
-     "start_frame": 31988,
-     "end_frame": 32127,
+     "start_frame": 32603,
+     "end_frame": 32742,
      "beat": true
     },
     {
      "text": "So yes: v theta hat is the parcel's velocity.",
      "audio_text": null,
-     "start": 1072.4,
-     "end": 1076.575,
+     "start": 1092.9,
+     "end": 1097.075,
      "dur": 4.175,
-     "start_frame": 32172,
-     "end_frame": 32297
+     "start_frame": 32787,
+     "end_frame": 32912
     },
     {
      "text": "Its size is the speed v, and its direction is theta hat, along the ring.",
      "audio_text": null,
-     "start": 1076.925,
-     "end": 1082.5,
+     "start": 1097.425,
+     "end": 1103.0,
      "dur": 5.575,
-     "start_frame": 32308,
-     "end_frame": 32475
+     "start_frame": 32923,
+     "end_frame": 33090
     },
     {
      "text": "For Ian's parcel, that's thirty four point eight metres per second, along the ring, anticlockwise as seen from above.",
      "audio_text": null,
-     "start": 1082.85,
-     "end": 1090.95,
+     "start": 1103.35,
+     "end": 1111.45,
      "dur": 8.1,
-     "start_frame": 32486,
-     "end_frame": 32729
+     "start_frame": 33100,
+     "end_frame": 33344
     }
    ],
-   "end": 1091.75,
-   "start_frame": 30614,
-   "end_frame": 32752
+   "end": 1112.25,
+   "start_frame": 31229,
+   "end_frame": 33368
   },
   {
    "id": "s12_acceleration",
-   "start": 1091.75,
+   "start": 1112.25,
    "sentences": [
     {
      "text": "Now we can answer the opening question.",
      "audio_text": null,
-     "start": 1091.75,
-     "end": 1094.7,
+     "start": 1112.25,
+     "end": 1115.2,
      "dur": 2.95,
-     "start_frame": 32753,
-     "end_frame": 32841
+     "start_frame": 33368,
+     "end_frame": 33456
     },
     {
      "text": "Acceleration is the rate of change of velocity.",
      "audio_text": null,
-     "start": 1095.05,
-     "end": 1098.95,
+     "start": 1115.55,
+     "end": 1119.45,
      "dur": 3.9,
-     "start_frame": 32852,
-     "end_frame": 32969
+     "start_frame": 33466,
+     "end_frame": 33584
     },
     {
      "text": "So we need the rate of change of v theta hat, which is a number times an arrow again.",
      "audio_text": null,
-     "start": 1099.3,
-     "end": 1105.2,
+     "start": 1119.8,
+     "end": 1125.7,
      "dur": 5.9,
-     "start_frame": 32979,
-     "end_frame": 33156
+     "start_frame": 33594,
+     "end_frame": 33771
     },
     {
      "text": "By the product rule, it's d v by d t times theta hat, plus v times d theta hat by d t.",
      "audio_text": null,
-     "start": 1105.55,
-     "end": 1112.75,
+     "start": 1126.05,
+     "end": 1133.25,
      "dur": 7.2,
-     "start_frame": 33167,
-     "end_frame": 33383,
+     "start_frame": 33782,
+     "end_frame": 33998,
      "beat": true
     },
     {
      "text": "The parcel goes round at a steady speed, so d v by d t is zero, and the first term drops out.",
      "audio_text": null,
-     "start": 1114.25,
-     "end": 1121.275,
+     "start": 1134.75,
+     "end": 1141.775,
      "dur": 7.025,
-     "start_frame": 33428,
-     "end_frame": 33638,
+     "start_frame": 34042,
+     "end_frame": 34253,
      "beat": true
     },
     {
      "text": "For the second term, we use the chain rule again.",
      "audio_text": null,
-     "start": 1122.775,
-     "end": 1126.375,
+     "start": 1143.275,
+     "end": 1146.875,
      "dur": 3.6,
-     "start_frame": 33683,
-     "end_frame": 33791
+     "start_frame": 34298,
+     "end_frame": 34406
     },
     {
      "text": "D theta hat by d t equals d theta hat by d theta, times d theta by d t.",
      "audio_text": null,
-     "start": 1126.725,
-     "end": 1132.975,
+     "start": 1147.225,
+     "end": 1153.475,
      "dur": 6.25,
-     "start_frame": 33802,
-     "end_frame": 33989
+     "start_frame": 34417,
+     "end_frame": 34604
     },
     {
      "text": "Remember the turning arrows: d theta hat by d theta is minus r hat, because theta hat swings towards minus r hat.",
      "audio_text": null,
-     "start": 1133.325,
-     "end": 1141.8,
+     "start": 1153.825,
+     "end": 1162.3,
      "dur": 8.475,
-     "start_frame": 34000,
-     "end_frame": 34254
+     "start_frame": 34615,
+     "end_frame": 34869
     },
     {
      "text": "And d theta by d t is v over r.",
      "audio_text": null,
-     "start": 1142.15,
-     "end": 1145.225,
+     "start": 1162.65,
+     "end": 1165.725,
      "dur": 3.075,
-     "start_frame": 34265,
-     "end_frame": 34357
+     "start_frame": 34880,
+     "end_frame": 34972
     },
     {
      "text": "So d theta hat by d t is minus r hat, times v over r.",
      "audio_text": null,
-     "start": 1145.575,
-     "end": 1150.475,
+     "start": 1166.075,
+     "end": 1170.975,
      "dur": 4.9,
-     "start_frame": 34367,
-     "end_frame": 34514,
+     "start_frame": 34982,
+     "end_frame": 35129,
      "beat": true
     },
     {
      "text": "Now multiply by v.",
      "audio_text": null,
-     "start": 1151.975,
-     "end": 1153.95,
+     "start": 1172.475,
+     "end": 1174.45,
      "dur": 1.975,
-     "start_frame": 34559,
-     "end_frame": 34619
+     "start_frame": 35174,
+     "end_frame": 35234
     },
     {
      "text": "The acceleration is minus v squared over r, times r hat.",
      "audio_text": null,
-     "start": 1154.3,
-     "end": 1159.125,
+     "start": 1174.8,
+     "end": 1179.625,
      "dur": 4.825,
-     "start_frame": 34629,
-     "end_frame": 34774,
+     "start_frame": 35244,
+     "end_frame": 35389,
      "beat": true
     },
     {
      "text": "The minus sign means that it points along minus r hat: inward, towards the centre of the ring.",
      "audio_text": null,
-     "start": 1160.625,
-     "end": 1167.3,
+     "start": 1181.125,
+     "end": 1187.8,
      "dur": 6.675,
-     "start_frame": 34819,
-     "end_frame": 35019
+     "start_frame": 35434,
+     "end_frame": 35634
     },
     {
      "text": "An acceleration that points to the centre of a circle is called a centripetal acceleration.",
      "audio_text": null,
-     "start": 1167.65,
-     "end": 1173.9,
+     "start": 1188.15,
+     "end": 1194.4,
      "dur": 6.25,
-     "start_frame": 35030,
-     "end_frame": 35217
+     "start_frame": 35644,
+     "end_frame": 35832
     },
     {
      "text": "Let's check the units.",
      "audio_text": null,
-     "start": 1174.25,
-     "end": 1176.275,
+     "start": 1194.75,
+     "end": 1196.775,
      "dur": 2.025,
-     "start_frame": 35228,
-     "end_frame": 35288
+     "start_frame": 35842,
+     "end_frame": 35903
     },
     {
      "text": "V squared is in metres squared per second squared.",
      "audio_text": null,
-     "start": 1176.625,
-     "end": 1180.375,
+     "start": 1197.125,
+     "end": 1200.875,
      "dur": 3.75,
-     "start_frame": 35299,
-     "end_frame": 35411
+     "start_frame": 35914,
+     "end_frame": 36026
     },
     {
      "text": "Dividing by r, in metres, leaves metres per second squared, which are the units of an acceleration.",
      "audio_text": null,
-     "start": 1180.725,
-     "end": 1187.95,
+     "start": 1201.225,
+     "end": 1208.45,
      "dur": 7.225,
-     "start_frame": 35422,
-     "end_frame": 35639,
+     "start_frame": 36037,
+     "end_frame": 36254,
      "beat": true
     }
    ],
-   "end": 1189.45,
-   "start_frame": 32752,
-   "end_frame": 35684
+   "end": 1209.95,
+   "start_frame": 33368,
+   "end_frame": 36298
   },
   {
    "id": "s13_acceleration_numbers",
-   "start": 1189.45,
+   "start": 1209.95,
    "sentences": [
     {
      "text": "If you skipped, here's what to keep: an air parcel going round a circle at a steady speed v is always accelerating towards the centre, by v squared over r.",
      "audio_text": null,
-     "start": 1189.45,
-     "end": 1200.45,
+     "start": 1209.95,
+     "end": 1220.95,
      "dur": 11.0,
-     "start_frame": 35684,
-     "end_frame": 36014
+     "start_frame": 36298,
+     "end_frame": 36628
     },
     {
      "text": "So how big is it for Ian's parcel?",
      "audio_text": null,
-     "start": 1200.8,
-     "end": 1203.35,
+     "start": 1221.3,
+     "end": 1223.85,
      "dur": 2.55,
-     "start_frame": 36024,
-     "end_frame": 36101
+     "start_frame": 36639,
+     "end_frame": 36716
     },
     {
      "text": "Thirty four point eight squared is about twelve hundred and eleven.",
      "audio_text": null,
-     "start": 1203.7,
-     "end": 1208.325,
+     "start": 1224.2,
+     "end": 1228.825,
      "dur": 4.625,
-     "start_frame": 36111,
-     "end_frame": 36250
+     "start_frame": 36726,
+     "end_frame": 36865
     },
     {
      "text": "Divided by twenty five thousand metres, that's about zero point zero four eight metres per second squared.",
      "audio_text": null,
-     "start": 1208.675,
-     "end": 1215.925,
+     "start": 1229.175,
+     "end": 1236.425,
      "dur": 7.25,
-     "start_frame": 36260,
-     "end_frame": 36478,
+     "start_frame": 36875,
+     "end_frame": 37093,
      "beat": true
     },
     {
      "text": "With easy numbers, thirty five squared over twenty five thousand is about zero point zero four nine, almost the same.",
      "audio_text": null,
-     "start": 1217.425,
-     "end": 1225.725,
+     "start": 1237.925,
+     "end": 1246.225,
      "dur": 8.3,
-     "start_frame": 36523,
-     "end_frame": 36772,
+     "start_frame": 37138,
+     "end_frame": 37387,
      "beat": true
     },
     {
      "text": "Is that big?",
      "audio_text": null,
-     "start": 1227.225,
-     "end": 1228.925,
+     "start": 1247.725,
+     "end": 1249.425,
      "dur": 1.7,
-     "start_frame": 36817,
-     "end_frame": 36868
+     "start_frame": 37432,
+     "end_frame": 37483
     },
     {
      "text": "Gravity is nine point eight one metres per second squared, so this is about two hundred times smaller.",
      "audio_text": null,
-     "start": 1229.275,
-     "end": 1236.45,
+     "start": 1249.775,
+     "end": 1256.95,
      "dur": 7.175,
-     "start_frame": 36878,
-     "end_frame": 37093,
+     "start_frame": 37493,
+     "end_frame": 37708,
      "beat": true
     },
     {
      "text": "But it acts all the time.",
      "audio_text": null,
-     "start": 1237.95,
-     "end": 1240.0,
+     "start": 1258.45,
+     "end": 1260.5,
      "dur": 2.05,
-     "start_frame": 37138,
-     "end_frame": 37200
+     "start_frame": 37754,
+     "end_frame": 37815
     },
     {
      "text": "A car with this acceleration would take about ten minutes to reach a hundred kilometres per hour.",
      "audio_text": null,
-     "start": 1240.35,
-     "end": 1246.6,
+     "start": 1260.85,
+     "end": 1267.1,
      "dur": 6.25,
-     "start_frame": 37210,
-     "end_frame": 37398,
+     "start_frame": 37826,
+     "end_frame": 38013,
      "beat": true
     },
     {
      "text": "Here, instead of making the parcel faster, all of it goes into turning the parcel round the eye.",
      "audio_text": null,
-     "start": 1248.1,
-     "end": 1254.175,
+     "start": 1268.6,
+     "end": 1274.675,
      "dur": 6.075,
-     "start_frame": 37443,
-     "end_frame": 37625
+     "start_frame": 38058,
+     "end_frame": 38240
     }
    ],
-   "end": 1254.975,
-   "start_frame": 35684,
-   "end_frame": 37649
+   "end": 1275.475,
+   "start_frame": 36298,
+   "end_frame": 38264
   },
   {
    "id": "s14_steady_but_turning",
-   "start": 1254.975,
+   "start": 1275.475,
    "sentences": [
     {
      "text": "So how can a steady speed still mean an acceleration?",
      "audio_text": null,
-     "start": 1254.975,
-     "end": 1258.775,
+     "start": 1275.475,
+     "end": 1279.275,
      "dur": 3.8,
-     "start_frame": 37649,
-     "end_frame": 37763
+     "start_frame": 38264,
+     "end_frame": 38378
     },
     {
      "text": "The answer is that velocity is more than speed.",
      "audio_text": null,
-     "start": 1259.125,
-     "end": 1262.7,
+     "start": 1279.625,
+     "end": 1283.2,
      "dur": 3.575,
-     "start_frame": 37774,
-     "end_frame": 37881
+     "start_frame": 38389,
+     "end_frame": 38496
     },
     {
      "text": "Velocity is speed and direction together.",
      "audio_text": null,
-     "start": 1263.05,
-     "end": 1266.375,
+     "start": 1283.55,
+     "end": 1286.875,
      "dur": 3.325,
-     "start_frame": 37891,
-     "end_frame": 37991
+     "start_frame": 38506,
+     "end_frame": 38606
     },
     {
      "text": "Let's see it with two velocity arrows, one minute apart.",
      "audio_text": null,
-     "start": 1266.725,
-     "end": 1270.775,
+     "start": 1287.225,
+     "end": 1291.275,
      "dur": 4.05,
-     "start_frame": 38002,
-     "end_frame": 38123
+     "start_frame": 38617,
+     "end_frame": 38738
     },
     {
      "text": "In one minute, theta grows by zero point zero zero one three nine times sixty, which is about zero point zero eight four radians, or about five degrees.",
      "audio_text": null,
-     "start": 1271.125,
-     "end": 1282.175,
+     "start": 1291.625,
+     "end": 1302.675,
      "dur": 11.05,
-     "start_frame": 38134,
-     "end_frame": 38465,
+     "start_frame": 38749,
+     "end_frame": 39080,
      "beat": true
     },
     {
      "text": "Both arrows are thirty four point eight metres per second long, but they point in slightly different directions.",
      "audio_text": null,
-     "start": 1283.675,
-     "end": 1290.8,
+     "start": 1304.175,
+     "end": 1311.3,
      "dur": 7.125,
-     "start_frame": 38510,
-     "end_frame": 38724
+     "start_frame": 39125,
+     "end_frame": 39339
     },
     {
      "text": "Now slide them so that their tails touch.",
      "audio_text": null,
-     "start": 1291.15,
-     "end": 1293.95,
+     "start": 1311.65,
+     "end": 1314.45,
      "dur": 2.8,
-     "start_frame": 38734,
-     "end_frame": 38818
+     "start_frame": 39350,
+     "end_frame": 39434
     },
     {
      "text": "The short arrow from the first tip to the second is the change in velocity.",
      "audio_text": null,
-     "start": 1294.3,
-     "end": 1299.3,
+     "start": 1314.8,
+     "end": 1319.8,
      "dur": 5.0,
-     "start_frame": 38829,
-     "end_frame": 38979
+     "start_frame": 39444,
+     "end_frame": 39594
     },
     {
      "text": "It points towards the eye.",
      "audio_text": null,
-     "start": 1299.65,
-     "end": 1301.8,
+     "start": 1320.15,
+     "end": 1322.3,
      "dur": 2.15,
-     "start_frame": 38989,
-     "end_frame": 39054,
+     "start_frame": 39604,
+     "end_frame": 39669,
      "beat": true
     },
     {
      "text": "How long is it?",
      "audio_text": null,
-     "start": 1303.3,
-     "end": 1305.025,
+     "start": 1323.8,
+     "end": 1325.525,
      "dur": 1.725,
-     "start_frame": 39099,
-     "end_frame": 39151
+     "start_frame": 39714,
+     "end_frame": 39766
     },
     {
      "text": "Its two ends lie on a circle of radius thirty four point eight, a small turn apart.",
      "audio_text": null,
-     "start": 1305.375,
-     "end": 1311.225,
+     "start": 1325.875,
+     "end": 1331.725,
      "dur": 5.85,
-     "start_frame": 39161,
-     "end_frame": 39337
+     "start_frame": 39776,
+     "end_frame": 39952
     },
     {
      "text": "So by the arc rule, it's about thirty four point eight times zero point zero eight four, which is about two point nine metres per second.",
      "audio_text": null,
-     "start": 1311.575,
-     "end": 1320.525,
+     "start": 1332.075,
+     "end": 1341.025,
      "dur": 8.95,
-     "start_frame": 39347,
-     "end_frame": 39616,
+     "start_frame": 39962,
+     "end_frame": 40231,
      "beat": true
     },
     {
      "text": "Divide by sixty seconds, and we get about zero point zero four eight metres per second squared: the same acceleration, found with no formula at all.",
      "audio_text": null,
-     "start": 1322.025,
-     "end": 1332.65,
+     "start": 1342.525,
+     "end": 1353.15,
      "dur": 10.625,
-     "start_frame": 39661,
-     "end_frame": 39979,
+     "start_frame": 40276,
+     "end_frame": 40594,
      "beat": true
     },
     {
      "text": "So a steady speed means no acceleration only when the direction stays the same too.",
      "audio_text": null,
-     "start": 1334.15,
-     "end": 1340.15,
+     "start": 1354.65,
+     "end": 1360.65,
      "dur": 6.0,
-     "start_frame": 40024,
-     "end_frame": 40204
+     "start_frame": 40640,
+     "end_frame": 40820
     },
     {
      "text": "Something must push the parcel inward all the time.",
      "audio_text": null,
-     "start": 1340.5,
-     "end": 1343.9,
+     "start": 1361.0,
+     "end": 1364.4,
      "dur": 3.4,
-     "start_frame": 40215,
-     "end_frame": 40317
+     "start_frame": 40830,
+     "end_frame": 40932
     },
     {
-     "text": "In a tropical cyclone, it's mostly the pressure force, because the pressure is lowest in the eye.",
+     "text": "In a tropical cyclone, that push is the pressure force, because the pressure is lowest in the eye.",
      "audio_text": null,
-     "start": 1344.25,
-     "end": 1350.775,
-     "dur": 6.525,
-     "start_frame": 40327,
-     "end_frame": 40523
+     "start": 1364.75,
+     "end": 1371.425,
+     "dur": 6.675,
+     "start_frame": 40942,
+     "end_frame": 41143
     },
     {
-     "text": "The Earth's spin adds a smaller push, about twenty times smaller here.",
+     "text": "The Earth's spin pushes the other way, a little outward, about twenty times weaker, so the pressure force has to be a little stronger than the turning alone needs.",
      "audio_text": null,
-     "start": 1351.125,
-     "end": 1355.95,
-     "dur": 4.825,
-     "start_frame": 40534,
-     "end_frame": 40678
+     "start": 1371.775,
+     "end": 1381.975,
+     "dur": 10.2,
+     "start_frame": 41153,
+     "end_frame": 41459
     },
     {
      "text": "How winds balance these pushes has its own movie later in this series: Wind on weather charts.",
      "audio_text": null,
-     "start": 1356.3,
-     "end": 1362.925,
+     "start": 1382.325,
+     "end": 1388.95,
      "dur": 6.625,
-     "start_frame": 40689,
-     "end_frame": 40888
+     "start_frame": 41470,
+     "end_frame": 41668
     },
     {
      "text": "And if you rode with the parcel, you'd feel this as a push outward, called the centrifugal force, which also has its own movie: Circular motion.",
      "audio_text": null,
-     "start": 1363.275,
-     "end": 1372.925,
+     "start": 1389.3,
+     "end": 1398.95,
      "dur": 9.65,
-     "start_frame": 40898,
-     "end_frame": 41188
+     "start_frame": 41679,
+     "end_frame": 41968
     }
    ],
-   "end": 1373.725,
-   "start_frame": 37649,
-   "end_frame": 41212
+   "end": 1399.75,
+   "start_frame": 38264,
+   "end_frame": 41992
   },
   {
    "id": "s15_cylinder",
-   "start": 1373.725,
+   "start": 1399.75,
    "sentences": [
     {
      "text": "So far, our storm has been flat.",
      "audio_text": null,
-     "start": 1373.725,
-     "end": 1376.5,
+     "start": 1399.75,
+     "end": 1402.525,
      "dur": 2.775,
-     "start_frame": 41212,
-     "end_frame": 41295
+     "start_frame": 41992,
+     "end_frame": 42076
     },
     {
      "text": "But a real tropical cyclone is tall.",
      "audio_text": null,
-     "start": 1376.85,
-     "end": 1379.825,
+     "start": 1402.875,
+     "end": 1405.85,
      "dur": 2.975,
-     "start_frame": 41305,
-     "end_frame": 41395
+     "start_frame": 42086,
+     "end_frame": 42176
     },
     {
      "text": "Near the sea, the air spirals in.",
      "audio_text": null,
-     "start": 1380.175,
-     "end": 1383.15,
+     "start": 1406.2,
+     "end": 1409.175,
      "dur": 2.975,
-     "start_frame": 41405,
-     "end_frame": 41494
+     "start_frame": 42186,
+     "end_frame": 42275
     },
     {
      "text": "Close to the eye, it rises in a ring of towering clouds called the eyewall.",
      "audio_text": null,
-     "start": 1383.5,
-     "end": 1388.675,
+     "start": 1409.525,
+     "end": 1414.7,
      "dur": 5.175,
-     "start_frame": 41505,
-     "end_frame": 41660
+     "start_frame": 42286,
+     "end_frame": 42441
     },
     {
      "text": "And near the top, about twelve to fifteen kilometres up, it flows out again.",
      "audio_text": null,
-     "start": 1389.025,
-     "end": 1394.5,
+     "start": 1415.05,
+     "end": 1420.525,
      "dur": 5.475,
-     "start_frame": 41671,
-     "end_frame": 41835
+     "start_frame": 42452,
+     "end_frame": 42616
     },
     {
      "text": "Here's Ian from above, seen by a weather satellite at six in the evening, universal time.",
      "audio_text": null,
-     "start": 1394.85,
-     "end": 1401.125,
+     "start": 1420.875,
+     "end": 1427.15,
      "dur": 6.275,
-     "start_frame": 41845,
-     "end_frame": 42034
+     "start_frame": 42626,
+     "end_frame": 42814
     },
     {
      "text": "The clear hole in the middle is the eye, and the ring of bright cloud round it is the eyewall.",
      "audio_text": null,
-     "start": 1401.475,
-     "end": 1407.35,
+     "start": 1427.5,
+     "end": 1433.375,
      "dur": 5.875,
-     "start_frame": 42044,
-     "end_frame": 42220
+     "start_frame": 42825,
+     "end_frame": 43001
     },
     {
      "text": "To describe a tall, round storm, we add a third coordinate to polar coordinates: the height, z, measured straight up.",
      "audio_text": null,
-     "start": 1407.7,
-     "end": 1416.0,
+     "start": 1433.725,
+     "end": 1442.025,
      "dur": 8.3,
-     "start_frame": 42231,
-     "end_frame": 42480
+     "start_frame": 43012,
+     "end_frame": 43261
     },
     {
      "text": "The distance r, the angle theta and the height z are called cylindrical coordinates.",
      "audio_text": null,
-     "start": 1416.35,
-     "end": 1422.2,
+     "start": 1442.375,
+     "end": 1448.225,
      "dur": 5.85,
-     "start_frame": 42490,
-     "end_frame": 42666
+     "start_frame": 43271,
+     "end_frame": 43447
     },
     {
      "text": "That's because all the places at one distance r form a cylinder round the storm's axis.",
      "audio_text": null,
-     "start": 1422.55,
-     "end": 1428.75,
+     "start": 1448.575,
+     "end": 1454.775,
      "dur": 6.2,
-     "start_frame": 42676,
-     "end_frame": 42862
+     "start_frame": 43457,
+     "end_frame": 43643
     }
    ],
-   "end": 1429.55,
-   "start_frame": 41212,
-   "end_frame": 42886
+   "end": 1455.575,
+   "start_frame": 41992,
+   "end_frame": 43667
   },
   {
    "id": "s16_three_parts",
-   "start": 1429.55,
+   "start": 1455.575,
    "sentences": [
     {
      "text": "In cylindrical coordinates, the wind has three parts.",
      "audio_text": null,
-     "start": 1429.55,
-     "end": 1433.625,
+     "start": 1455.575,
+     "end": 1459.65,
      "dur": 4.075,
-     "start_frame": 42886,
-     "end_frame": 43009
+     "start_frame": 43667,
+     "end_frame": 43790
     },
     {
      "text": "The radial wind, u sub r, points along r hat: in or out.",
      "audio_text": null,
-     "start": 1433.975,
-     "end": 1438.825,
+     "start": 1460.0,
+     "end": 1464.85,
      "dur": 4.85,
-     "start_frame": 43019,
-     "end_frame": 43165
+     "start_frame": 43800,
+     "end_frame": 43946
     },
     {
      "text": "The tangential wind, u sub theta, points along theta hat: round the eye.",
      "audio_text": null,
-     "start": 1439.175,
-     "end": 1444.675,
+     "start": 1465.2,
+     "end": 1470.7,
      "dur": 5.5,
-     "start_frame": 43175,
-     "end_frame": 43340
+     "start_frame": 43956,
+     "end_frame": 44121
     },
     {
      "text": "And the vertical wind, w, points along z hat: up or down.",
      "audio_text": null,
-     "start": 1445.025,
-     "end": 1449.725,
+     "start": 1471.05,
+     "end": 1475.75,
      "dur": 4.7,
-     "start_frame": 43351,
-     "end_frame": 43492
+     "start_frame": 44132,
+     "end_frame": 44272
     },
     {
      "text": "Written as one arrow, the wind is u sub r times r hat, plus u sub theta times theta hat, plus w times z hat.",
      "audio_text": null,
-     "start": 1450.075,
-     "end": 1459.325,
+     "start": 1476.1,
+     "end": 1485.35,
      "dur": 9.25,
-     "start_frame": 43502,
-     "end_frame": 43780
+     "start_frame": 44283,
+     "end_frame": 44560
     },
     {
      "text": "Z hat points straight up everywhere, just like x hat points east everywhere, so z hat never turns.",
      "audio_text": null,
-     "start": 1459.675,
-     "end": 1466.525,
+     "start": 1485.7,
+     "end": 1492.55,
      "dur": 6.85,
-     "start_frame": 43790,
-     "end_frame": 43996
+     "start_frame": 44571,
+     "end_frame": 44776
     },
     {
      "text": "Only r hat and theta hat turn as we go round, by the same rules we found today.",
      "audio_text": null,
-     "start": 1466.875,
-     "end": 1472.9,
+     "start": 1492.9,
+     "end": 1498.925,
      "dur": 6.025,
-     "start_frame": 44006,
-     "end_frame": 44187
+     "start_frame": 44787,
+     "end_frame": 44968
     },
     {
      "text": "So everything we've learned about turning arrows works in three dimensions too.",
      "audio_text": null,
-     "start": 1473.25,
-     "end": 1478.15,
+     "start": 1499.275,
+     "end": 1504.175,
      "dur": 4.9,
-     "start_frame": 44197,
-     "end_frame": 44344
+     "start_frame": 44978,
+     "end_frame": 45125
     }
    ],
-   "end": 1478.95,
-   "start_frame": 42886,
-   "end_frame": 44368
+   "end": 1504.975,
+   "start_frame": 43667,
+   "end_frame": 45149
   },
   {
    "id": "s17_ian_check",
-   "start": 1478.95,
+   "start": 1504.975,
    "sentences": [
     {
      "text": "Before we look inside Ian, let's check where its eye really was, because different instruments see it differently.",
      "audio_text": null,
-     "start": 1478.95,
-     "end": 1486.025,
+     "start": 1504.975,
+     "end": 1512.05,
      "dur": 7.075,
-     "start_frame": 44368,
-     "end_frame": 44581
+     "start_frame": 45149,
+     "end_frame": 45362
     },
     {
      "text": "A weather radar on the coast near Tampa measures the rain round the storm.",
      "audio_text": null,
-     "start": 1486.375,
-     "end": 1491.45,
+     "start": 1512.4,
+     "end": 1517.475,
      "dur": 5.075,
-     "start_frame": 44591,
-     "end_frame": 44743
+     "start_frame": 45372,
+     "end_frame": 45524
     },
     {
      "text": "At six in the evening, its picture shows a ring of heavy rain, the eyewall, about thirty kilometres in radius, round an eye with almost no rain.",
      "audio_text": null,
-     "start": 1491.8,
-     "end": 1502.0,
+     "start": 1517.825,
+     "end": 1528.025,
      "dur": 10.2,
-     "start_frame": 44754,
-     "end_frame": 45060
+     "start_frame": 45535,
+     "end_frame": 45841
     },
     {
      "text": "This is the best picture of where the eye was.",
      "audio_text": null,
-     "start": 1502.35,
-     "end": 1505.375,
+     "start": 1528.375,
+     "end": 1531.4,
      "dur": 3.025,
-     "start_frame": 45070,
-     "end_frame": 45161,
+     "start_frame": 45851,
+     "end_frame": 45942,
      "beat": true
     },
     {
      "text": "The weather model analysis that gives us Ian's winds in three dimensions puts its own calm centre about seventeen kilometres west-south-west of the radar's eye.",
      "audio_text": null,
-     "start": 1506.875,
-     "end": 1517.65,
+     "start": 1532.9,
+     "end": 1543.675,
      "dur": 10.775,
-     "start_frame": 45206,
-     "end_frame": 45529
+     "start_frame": 45987,
+     "end_frame": 46310
     },
     {
      "text": "And its lowest pressure is nine hundred and sixty hectopascals, while the official estimate is nine hundred and thirty eight.",
-     "audio_text": null,
-     "start": 1518.0,
-     "end": 1526.175,
+     "audio_text": "And its lowest pressure is nine hundred and sixty [hectopascals](/hˈɛktəpˌæskᵊlz/), while the official estimate is nine hundred and thirty eight.",
+     "start": 1544.025,
+     "end": 1552.2,
      "dur": 8.175,
-     "start_frame": 45540,
-     "end_frame": 45785,
+     "start_frame": 46321,
+     "end_frame": 46566,
      "beat": true
     },
     {
      "text": "So the model is close, but a little off, and a little too weak.",
      "audio_text": null,
-     "start": 1527.675,
-     "end": 1531.775,
+     "start": 1553.7,
+     "end": 1557.8,
      "dur": 4.1,
-     "start_frame": 45830,
-     "end_frame": 45953
+     "start_frame": 46611,
+     "end_frame": 46734
     },
     {
      "text": "That's normal: a model with grid points every three kilometres can't hold the sharpest part of a storm exactly.",
      "audio_text": null,
-     "start": 1532.125,
-     "end": 1539.8,
+     "start": 1558.15,
+     "end": 1565.825,
      "dur": 7.675,
-     "start_frame": 45964,
-     "end_frame": 46194
+     "start_frame": 46744,
+     "end_frame": 46975
     },
     {
      "text": "So here's our rule.",
      "audio_text": null,
-     "start": 1540.15,
-     "end": 1542.0,
+     "start": 1566.175,
+     "end": 1568.025,
      "dur": 1.85,
-     "start_frame": 46204,
-     "end_frame": 46260
+     "start_frame": 46985,
+     "end_frame": 47041
     },
     {
      "text": "For where the eye is, we use the radar and the satellite.",
      "audio_text": null,
-     "start": 1542.35,
-     "end": 1546.3,
+     "start": 1568.375,
+     "end": 1572.325,
      "dur": 3.95,
-     "start_frame": 46270,
-     "end_frame": 46389
+     "start_frame": 47051,
+     "end_frame": 47170
     },
     {
      "text": "For the winds, we use the model, measured round the model's own centre.",
      "audio_text": null,
-     "start": 1546.65,
-     "end": 1551.675,
+     "start": 1572.675,
+     "end": 1577.7,
      "dur": 5.025,
-     "start_frame": 46399,
-     "end_frame": 46550
+     "start_frame": 47180,
+     "end_frame": 47331
     },
     {
      "text": "And we never mix the two centres in one picture.",
      "audio_text": null,
-     "start": 1552.025,
-     "end": 1555.525,
+     "start": 1578.05,
+     "end": 1581.55,
      "dur": 3.5,
-     "start_frame": 46561,
-     "end_frame": 46666
+     "start_frame": 47342,
+     "end_frame": 47446
     }
    ],
-   "end": 1556.325,
-   "start_frame": 44368,
-   "end_frame": 46690
+   "end": 1582.35,
+   "start_frame": 45149,
+   "end_frame": 47470
   },
   {
    "id": "s18_ian_stack",
-   "start": 1556.325,
+   "start": 1582.35,
    "sentences": [
     {
      "text": "Now let's look inside Ian, layer by layer.",
      "audio_text": null,
-     "start": 1556.325,
-     "end": 1559.85,
+     "start": 1582.35,
+     "end": 1585.875,
      "dur": 3.525,
-     "start_frame": 46690,
-     "end_frame": 46795
+     "start_frame": 47470,
+     "end_frame": 47576
     },
     {
      "text": "Weather models store the wind on pressure levels: surfaces where the air pressure has one value, like nine hundred and twenty five hectopascals.",
-     "audio_text": null,
-     "start": 1560.2,
-     "end": 1569.925,
+     "audio_text": "Weather models store the wind on pressure levels: surfaces where the air pressure has one value, like nine hundred and twenty five [hectopascals](/hˈɛktəpˌæskᵊlz/).",
+     "start": 1586.225,
+     "end": 1595.95,
      "dur": 9.725,
-     "start_frame": 46806,
-     "end_frame": 47098
+     "start_frame": 47587,
+     "end_frame": 47878
     },
     {
      "text": "Since the pressure drops as we go up, each level sits at a height, and we'll write that height beside it.",
      "audio_text": null,
-     "start": 1570.275,
-     "end": 1576.75,
+     "start": 1596.3,
+     "end": 1602.775,
      "dur": 6.475,
-     "start_frame": 47108,
-     "end_frame": 47302
+     "start_frame": 47889,
+     "end_frame": 48083
     },
     {
      "text": "Here are five layers round Ian's eye, from the model, at six in the evening.",
      "audio_text": null,
-     "start": 1577.1,
-     "end": 1582.525,
+     "start": 1603.125,
+     "end": 1608.55,
      "dur": 5.425,
-     "start_frame": 47313,
-     "end_frame": 47476
+     "start_frame": 48094,
+     "end_frame": 48256
     },
     {
      "text": "Each layer is a square about five hundred kilometres across.",
      "audio_text": null,
-     "start": 1582.875,
-     "end": 1587.15,
+     "start": 1608.9,
+     "end": 1613.175,
      "dur": 4.275,
-     "start_frame": 47486,
-     "end_frame": 47614
+     "start_frame": 48267,
+     "end_frame": 48395
     },
     {
      "text": "The lowest is at nine hundred and twenty five hectopascals, about seven hundred metres above the sea.",
-     "audio_text": null,
-     "start": 1587.5,
-     "end": 1594.75,
+     "audio_text": "The lowest is at nine hundred and twenty five [hectopascals](/hˈɛktəpˌæskᵊlz/), about seven hundred metres above the sea.",
+     "start": 1613.525,
+     "end": 1620.775,
      "dur": 7.25,
-     "start_frame": 47625,
-     "end_frame": 47842
+     "start_frame": 48406,
+     "end_frame": 48623
     },
     {
      "text": "We don't use a lower level, because near the eye the pressure at the sea surface was below nine hundred and seventy five hectopascals, so that level would lie under the sea there.",
-     "audio_text": null,
-     "start": 1595.1,
-     "end": 1606.0,
+     "audio_text": "We don't use a lower level, because near the eye the pressure at the sea surface was below nine hundred and seventy five [hectopascals](/hˈɛktəpˌæskᵊlz/), so that level would lie under the sea there.",
+     "start": 1621.125,
+     "end": 1632.025,
      "dur": 10.9,
-     "start_frame": 47853,
-     "end_frame": 48180
+     "start_frame": 48634,
+     "end_frame": 48961
     },
     {
-     "text": "Then come eight hundred and fifty hectopascals, about one and a half kilometres up, five hundred, about six kilometres, two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres.",
-     "audio_text": null,
-     "start": 1606.35,
-     "end": 1620.275,
-     "dur": 13.925,
-     "start_frame": 48190,
-     "end_frame": 48608,
+     "text": "Then come eight hundred and fifty hectopascals, about one point four kilometres up, five hundred, about six kilometres, two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres.",
+     "audio_text": "Then come eight hundred and fifty [hectopascals](/hˈɛktəpˌæskᵊlz/), about one point four kilometres up, five hundred, about six kilometres, two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres.",
+     "start": 1632.375,
+     "end": 1646.625,
+     "dur": 14.25,
+     "start_frame": 48971,
+     "end_frame": 49399,
      "beat": true
     },
     {
      "text": "The colour on each layer is the radial wind, u sub r.",
      "audio_text": null,
-     "start": 1621.775,
-     "end": 1626.05,
+     "start": 1648.125,
+     "end": 1652.4,
      "dur": 4.275,
-     "start_frame": 48653,
-     "end_frame": 48781
+     "start_frame": 49444,
+     "end_frame": 49572
     },
     {
      "text": "Rose, with a minus sign, means that the air flows in, towards the eye.",
      "audio_text": null,
-     "start": 1626.4,
-     "end": 1631.425,
+     "start": 1652.75,
+     "end": 1657.775,
      "dur": 5.025,
-     "start_frame": 48792,
-     "end_frame": 48943
+     "start_frame": 49582,
+     "end_frame": 49733
     },
     {
      "text": "Blue, with a plus sign, means that it flows out.",
      "audio_text": null,
-     "start": 1631.775,
-     "end": 1635.4,
+     "start": 1658.125,
+     "end": 1661.75,
      "dur": 3.625,
-     "start_frame": 48953,
-     "end_frame": 49062
+     "start_frame": 49744,
+     "end_frame": 49852
     },
     {
      "text": "Pale means neither, and a dark line marks where the radial wind is exactly zero.",
      "audio_text": null,
-     "start": 1635.75,
-     "end": 1641.6,
+     "start": 1662.1,
+     "end": 1667.95,
      "dur": 5.85,
-     "start_frame": 49072,
-     "end_frame": 49248
+     "start_frame": 49863,
+     "end_frame": 50038
     },
     {
-     "text": "We drew the heights much taller than they really are, so that we can see between the layers.",
+     "text": "We drew the layers much farther apart than they really are, so that we can see between them.",
      "audio_text": null,
-     "start": 1641.95,
-     "end": 1647.3,
-     "dur": 5.35,
-     "start_frame": 49258,
-     "end_frame": 49419
+     "start": 1668.3,
+     "end": 1673.95,
+     "dur": 5.65,
+     "start_frame": 50049,
+     "end_frame": 50218
     }
    ],
-   "end": 1648.1,
-   "start_frame": 46690,
-   "end_frame": 49443
+   "end": 1674.75,
+   "start_frame": 47470,
+   "end_frame": 50242
   },
   {
    "id": "s19_ian_layers_lit",
-   "start": 1648.1,
+   "start": 1674.75,
    "sentences": [
     {
      "text": "Let's light the layers one at a time, from the bottom up, and read each one on a ring a hundred kilometres from the centre.",
      "audio_text": null,
-     "start": 1648.1,
-     "end": 1655.775,
+     "start": 1674.75,
+     "end": 1682.425,
      "dur": 7.675,
-     "start_frame": 49443,
-     "end_frame": 49673
+     "start_frame": 50242,
+     "end_frame": 50473
     },
     {
      "text": "On the lowest layer, about seven hundred metres up, the air flows in on most of the ring.",
      "audio_text": null,
-     "start": 1656.125,
-     "end": 1663.7306,
-     "dur": 7.6056,
-     "start_frame": 49684,
-     "end_frame": 49912,
-     "estimated": true
+     "start": 1682.775,
+     "end": 1688.975,
+     "dur": 6.2,
+     "start_frame": 50483,
+     "end_frame": 50669
     },
     {
      "text": "Round the ring, the radial wind averages about minus six and a half metres per second.",
      "audio_text": null,
-     "start": 1664.0806,
-     "end": 1670.1556,
+     "start": 1689.325,
+     "end": 1695.4,
      "dur": 6.075,
-     "start_frame": 49922,
-     "end_frame": 50105,
+     "start_frame": 50680,
+     "end_frame": 50862,
      "beat": true
     },
     {
-     "text": "At one and a half kilometres, it's almost zero.",
+     "text": "At one point four kilometres, it's almost zero.",
      "audio_text": null,
-     "start": 1671.6556,
-     "end": 1675.1306,
-     "dur": 3.475,
-     "start_frame": 50150,
-     "end_frame": 50254
+     "start": 1696.9,
+     "end": 1700.475,
+     "dur": 3.575,
+     "start_frame": 50907,
+     "end_frame": 51014
     },
     {
      "text": "At six and at twelve kilometres, it's a little positive, about plus one.",
      "audio_text": null,
-     "start": 1675.4806,
-     "end": 1680.8056,
+     "start": 1700.825,
+     "end": 1706.15,
      "dur": 5.325,
-     "start_frame": 50264,
-     "end_frame": 50424
+     "start_frame": 51025,
+     "end_frame": 51184
     },
     {
      "text": "And at fourteen kilometres, the sign has flipped: the air flows out, at about plus six and a half metres per second.",
      "audio_text": null,
-     "start": 1681.1556,
-     "end": 1689.0806,
+     "start": 1706.5,
+     "end": 1714.425,
      "dur": 7.925,
-     "start_frame": 50435,
-     "end_frame": 50672,
+     "start_frame": 51195,
+     "end_frame": 51433,
      "beat": true
     },
     {
      "text": "So the air comes in near the bottom, and goes out near the top.",
      "audio_text": null,
-     "start": 1690.5806,
-     "end": 1694.7806,
+     "start": 1715.925,
+     "end": 1720.125,
      "dur": 4.2,
-     "start_frame": 50717,
-     "end_frame": 50843
+     "start_frame": 51478,
+     "end_frame": 51604
     },
     {
      "text": "Now let's swing round the stack, to see it from another side.",
      "audio_text": null,
-     "start": 1695.1306,
-     "end": 1699.2806,
+     "start": 1720.475,
+     "end": 1724.625,
      "dur": 4.15,
-     "start_frame": 50854,
-     "end_frame": 50978
+     "start_frame": 51614,
+     "end_frame": 51739
     },
     {
      "text": "And here's one short, closer look from the side, just above the sea, looking up past the layers.",
      "audio_text": null,
-     "start": 1699.6306,
-     "end": 1706.0306,
+     "start": 1724.975,
+     "end": 1731.375,
      "dur": 6.4,
-     "start_frame": 50989,
-     "end_frame": 51181
+     "start_frame": 51749,
+     "end_frame": 51941
     }
    ],
-   "end": 1706.8306,
-   "start_frame": 49443,
-   "end_frame": 51205
+   "end": 1732.175,
+   "start_frame": 50242,
+   "end_frame": 51965
   },
   {
    "id": "s20_ian_curtain",
-   "start": 1706.8306,
+   "start": 1732.175,
    "sentences": [
     {
      "text": "Five layers still leave gaps, and cylindrical coordinates give us a neater picture.",
      "audio_text": null,
-     "start": 1706.8306,
-     "end": 1712.4556,
+     "start": 1732.175,
+     "end": 1737.8,
      "dur": 5.625,
-     "start_frame": 51205,
-     "end_frame": 51374
+     "start_frame": 51965,
+     "end_frame": 52134
     },
     {
      "text": "On every level, we can average round each ring, just as we averaged round one ring in Part 1.",
      "audio_text": null,
-     "start": 1712.8056,
-     "end": 1719.9056,
+     "start": 1738.15,
+     "end": 1745.25,
      "dur": 7.1,
-     "start_frame": 51384,
-     "end_frame": 51597
+     "start_frame": 52144,
+     "end_frame": 52358
     },
     {
      "text": "An average round a ring depends only on the distance r and the height z, because going all the way round removes theta.",
      "audio_text": null,
-     "start": 1720.2556,
-     "end": 1728.7556,
+     "start": 1745.6,
+     "end": 1754.1,
      "dur": 8.5,
-     "start_frame": 51608,
-     "end_frame": 51863,
+     "start_frame": 52368,
+     "end_frame": 52623,
      "beat": true
     },
     {
      "text": "So we can draw the whole storm on one slice, with the distance from the centre along the bottom, and the height going up.",
      "audio_text": null,
-     "start": 1730.2556,
-     "end": 1737.9056,
+     "start": 1755.6,
+     "end": 1763.25,
      "dur": 7.65,
-     "start_frame": 51908,
-     "end_frame": 52137
+     "start_frame": 52668,
+     "end_frame": 52898
     },
     {
      "text": "This picture is called a radius-height section.",
      "audio_text": null,
-     "start": 1738.2556,
-     "end": 1741.3556,
+     "start": 1763.6,
+     "end": 1766.7,
      "dur": 3.1,
-     "start_frame": 52148,
-     "end_frame": 52241
+     "start_frame": 52908,
+     "end_frame": 53001
     },
     {
      "text": "Each colour is a ring average of the radial wind, now from all nine levels of the model.",
      "audio_text": null,
-     "start": 1741.7056,
-     "end": 1747.8806,
+     "start": 1767.05,
+     "end": 1773.225,
      "dur": 6.175,
-     "start_frame": 52251,
-     "end_frame": 52436
+     "start_frame": 53012,
+     "end_frame": 53197
     },
     {
      "text": "Near the sea, there's a thin layer of strong inflow.",
      "audio_text": null,
-     "start": 1748.2306,
-     "end": 1752.0556,
+     "start": 1773.575,
+     "end": 1777.4,
      "dur": 3.825,
-     "start_frame": 52447,
-     "end_frame": 52562
+     "start_frame": 53207,
+     "end_frame": 53322
     },
     {
      "text": "Its strongest ring average is about minus sixteen metres per second, thirty kilometres from the centre, about seven hundred metres up.",
      "audio_text": null,
-     "start": 1752.4056,
-     "end": 1761.6306,
+     "start": 1777.75,
+     "end": 1786.975,
      "dur": 9.225,
-     "start_frame": 52572,
-     "end_frame": 52849,
+     "start_frame": 53332,
+     "end_frame": 53609,
      "beat": true
     },
     {
      "text": "Near the top, from about twelve kilometres up, the air flows out, at up to about plus nine metres per second.",
      "audio_text": null,
-     "start": 1763.1306,
-     "end": 1770.6056,
+     "start": 1788.475,
+     "end": 1795.95,
      "dur": 7.475,
-     "start_frame": 52894,
-     "end_frame": 53118,
+     "start_frame": 53654,
+     "end_frame": 53878,
      "beat": true
     },
     {
      "text": "The dark lines show the tangential wind.",
      "audio_text": null,
-     "start": 1772.1056,
-     "end": 1775.1556,
+     "start": 1797.45,
+     "end": 1800.5,
      "dur": 3.05,
-     "start_frame": 53163,
-     "end_frame": 53255
+     "start_frame": 53924,
+     "end_frame": 54015
     },
     {
-     "text": "Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one and a half kilometres up.",
+     "text": "Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one point four kilometres up.",
      "audio_text": null,
-     "start": 1775.5056,
-     "end": 1784.9806,
-     "dur": 9.475,
-     "start_frame": 53265,
-     "end_frame": 53549,
+     "start": 1800.85,
+     "end": 1810.65,
+     "dur": 9.8,
+     "start_frame": 54026,
+     "end_frame": 54320,
      "beat": true
     },
     {
      "text": "It's weaker right at the sea surface, where the sea slows the air, and it gets weaker higher up.",
      "audio_text": null,
-     "start": 1786.4806,
-     "end": 1792.7306,
+     "start": 1812.15,
+     "end": 1818.4,
      "dur": 6.25,
-     "start_frame": 53594,
-     "end_frame": 53782
+     "start_frame": 54364,
+     "end_frame": 54552
     },
     {
-     "text": "The inflow alone says the air must rise, at about a metre per second… and radar on a hurricane-hunter aircraft measured it: about three metres per second at nine kilometres up, with single towers near ten.",
+     "text": "Here's a quick check.",
      "audio_text": null,
-     "start": 1793.0806,
-     "end": 1808.2919,
-     "dur": 15.2113,
-     "start_frame": 53792,
-     "end_frame": 54249,
-     "beat": true,
-     "estimated": true
+     "start": 1818.75,
+     "end": 1820.625,
+     "dur": 1.875,
+     "start_frame": 54562,
+     "end_frame": 54619
+    },
+    {
+     "text": "Air flows in through the side of a cylinder thirty kilometres in radius, in a layer about one kilometre deep, at about sixteen metres per second.",
+     "audio_text": null,
+     "start": 1820.975,
+     "end": 1831.15,
+     "dur": 10.175,
+     "start_frame": 54629,
+     "end_frame": 54934
+    },
+    {
+     "text": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: two times one thousand times sixteen, divided by thirty thousand, is about one metre per second.",
+     "audio_text": null,
+     "start": 1831.5,
+     "end": 1845.5,
+     "dur": 14.0,
+     "start_frame": 54945,
+     "end_frame": 55365,
+     "beat": true
+    },
+    {
+     "text": "And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with single towers near ten.",
+     "audio_text": null,
+     "start": 1847.0,
+     "end": 1856.725,
+     "dur": 9.725,
+     "start_frame": 55410,
+     "end_frame": 55702,
+     "beat": true
     },
     {
      "text": "It rises in the eyewall, close to the eye.",
      "audio_text": null,
-     "start": 1809.7919,
-     "end": 1812.9919,
+     "start": 1858.225,
+     "end": 1861.425,
      "dur": 3.2,
-     "start_frame": 54294,
-     "end_frame": 54390
+     "start_frame": 55747,
+     "end_frame": 55843
     },
     {
      "text": "In, up and out: that's a tropical cyclone's overturning circulation, and cylindrical coordinates show it in one picture.",
      "audio_text": null,
-     "start": 1813.3419,
-     "end": 1821.8419,
+     "start": 1861.775,
+     "end": 1870.275,
      "dur": 8.5,
-     "start_frame": 54400,
-     "end_frame": 54655
+     "start_frame": 55853,
+     "end_frame": 56108
     },
     {
      "text": "How a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.",
      "audio_text": null,
-     "start": 1822.1919,
-     "end": 1830.3919,
+     "start": 1870.625,
+     "end": 1878.825,
      "dur": 8.2,
-     "start_frame": 54666,
-     "end_frame": 54912
+     "start_frame": 56119,
+     "end_frame": 56365
     }
    ],
-   "end": 1831.1919,
-   "start_frame": 51205,
-   "end_frame": 54936
+   "end": 1879.625,
+   "start_frame": 51965,
+   "end_frame": 56389
   },
   {
    "id": "s21_amphan_intro",
-   "start": 1831.1919,
+   "start": 1879.625,
    "sentences": [
     {
      "text": "Now let's meet our second storm, on the other side of the world, in the Bay of Bengal, between India and Myanmar, with Bangladesh at its northern end.",
      "audio_text": null,
-     "start": 1831.1919,
-     "end": 1841.2669,
+     "start": 1879.625,
+     "end": 1889.7,
      "dur": 10.075,
-     "start_frame": 54936,
-     "end_frame": 55238
+     "start_frame": 56389,
+     "end_frame": 56691
     },
     {
      "text": "Remember, here a tropical cyclone is simply called a cyclone.",
      "audio_text": null,
-     "start": 1841.6169,
-     "end": 1846.1419,
+     "start": 1890.05,
+     "end": 1894.575,
      "dur": 4.525,
-     "start_frame": 55249,
-     "end_frame": 55384
+     "start_frame": 56702,
+     "end_frame": 56837
     },
     {
      "text": "In May twenty twenty, Cyclone Amphan formed in the south of the Bay.",
      "audio_text": null,
-     "start": 1846.4919,
-     "end": 1851.3169,
+     "start": 1894.925,
+     "end": 1899.75,
      "dur": 4.825,
-     "start_frame": 55395,
-     "end_frame": 55540
+     "start_frame": 56848,
+     "end_frame": 56992
     },
     {
      "text": "On the eighteenth of May, it became a super cyclonic storm, the strongest class there, and the first in the Bay of Bengal since nineteen ninety nine.",
      "audio_text": null,
-     "start": 1851.6669,
-     "end": 1861.4669,
+     "start": 1900.1,
+     "end": 1909.9,
      "dur": 9.8,
-     "start_frame": 55550,
-     "end_frame": 55844
+     "start_frame": 57003,
+     "end_frame": 57297
     },
     {
      "text": "On the twentieth, it came ashore in the Sundarbans, the huge mangrove forest on the border between India's state of West Bengal and Bangladesh.",
      "audio_text": null,
-     "start": 1861.8169,
-     "end": 1871.3419,
+     "start": 1910.25,
+     "end": 1919.775,
      "dur": 9.525,
-     "start_frame": 55855,
-     "end_frame": 56140
+     "start_frame": 57308,
+     "end_frame": 57593
     },
     {
      "text": "Its centre then passed close to Kolkata, about forty five kilometres west of Satkhira, and about seventy nine kilometres west of Khulna.",
      "audio_text": null,
-     "start": 1871.6919,
-     "end": 1880.9877,
-     "dur": 9.2958,
-     "start_frame": 56151,
-     "end_frame": 56430,
-     "estimated": true
+     "start": 1920.125,
+     "end": 1929.6,
+     "dur": 9.475,
+     "start_frame": 57604,
+     "end_frame": 57888
     },
     {
      "text": "So the Khulna and Satkhira districts of Bangladesh took much of its flooding.",
      "audio_text": null,
-     "start": 1881.3377,
-     "end": 1886.5627,
+     "start": 1929.95,
+     "end": 1935.175,
      "dur": 5.225,
-     "start_frame": 56440,
-     "end_frame": 56597
+     "start_frame": 57898,
+     "end_frame": 58055
     }
    ],
-   "end": 1887.3627,
-   "start_frame": 54936,
-   "end_frame": 56621
+   "end": 1935.975,
+   "start_frame": 56389,
+   "end_frame": 58079
   },
   {
    "id": "s22_amphan_eye",
-   "start": 1887.3627,
+   "start": 1935.975,
    "sentences": [
     {
      "text": "Here's Amphan on the eighteenth of May, two days before landfall, seen by a NASA satellite.",
      "audio_text": null,
-     "start": 1887.3627,
-     "end": 1893.7377,
+     "start": 1935.975,
+     "end": 1942.35,
      "dur": 6.375,
-     "start_frame": 56621,
-     "end_frame": 56812
+     "start_frame": 58079,
+     "end_frame": 58270
     },
     {
      "text": "In the middle of its clouds is a tiny clear dot: a pinhole eye.",
      "audio_text": null,
-     "start": 1894.0877,
-     "end": 1898.8377,
+     "start": 1942.7,
+     "end": 1947.45,
      "dur": 4.75,
-     "start_frame": 56823,
-     "end_frame": 56965
+     "start_frame": 58281,
+     "end_frame": 58424
     },
     {
      "text": "It's the same shape as Ian, a round storm turning round a calm eye, so the same cylindrical coordinates fit it too.",
      "audio_text": null,
-     "start": 1899.1877,
-     "end": 1907.1127,
+     "start": 1947.8,
+     "end": 1955.725,
      "dur": 7.925,
-     "start_frame": 56976,
-     "end_frame": 57213
+     "start_frame": 58434,
+     "end_frame": 58672
     }
    ],
-   "end": 1907.9127,
-   "start_frame": 56621,
-   "end_frame": 57237
+   "end": 1956.525,
+   "start_frame": 58079,
+   "end_frame": 58696
   },
   {
    "id": "s23_amphan_ring",
-   "start": 1907.9127,
+   "start": 1956.525,
    "sentences": [
     {
      "text": "Let's measure Amphan's winds the same way we did Ian's.",
      "audio_text": null,
-     "start": 1907.9127,
-     "end": 1911.7877,
+     "start": 1956.525,
+     "end": 1960.4,
      "dur": 3.875,
-     "start_frame": 57237,
-     "end_frame": 57354
+     "start_frame": 58696,
+     "end_frame": 58812
     },
     {
      "text": "There's no fine model like Ian's over the Bay of Bengal, so we use a global data set called ERA5.",
-     "audio_text": null,
-     "start": 1912.1377,
-     "end": 1919.4627,
+     "audio_text": "There's no fine model like Ian's over the Bay of Bengal, so we use a global data set called [ERA5](/ˌiˌɑɹˈA fˈIv/).",
+     "start": 1960.75,
+     "end": 1968.075,
      "dur": 7.325,
-     "start_frame": 57364,
-     "end_frame": 57584
+     "start_frame": 58822,
+     "end_frame": 59042
     },
     {
      "text": "It's a reanalysis: a best estimate of past weather, made by blending observations with a weather model.",
      "audio_text": null,
-     "start": 1919.8127,
-     "end": 1927.0377,
+     "start": 1968.425,
+     "end": 1975.65,
      "dur": 7.225,
-     "start_frame": 57594,
-     "end_frame": 57811
+     "start_frame": 59053,
+     "end_frame": 59270
     },
     {
      "text": "Its grid boxes are about twenty eight kilometres wide, wider than Amphan's eye, so it smooths the storm a lot.",
      "audio_text": null,
-     "start": 1927.3877,
-     "end": 1935.2127,
+     "start": 1976.0,
+     "end": 1983.825,
      "dur": 7.825,
-     "start_frame": 57822,
-     "end_frame": 58056
+     "start_frame": 59280,
+     "end_frame": 59515
     },
     {
      "text": "Here's Amphan at six in the morning, universal time, on the twentieth of May, about four hours before landfall.",
      "audio_text": null,
-     "start": 1935.5627,
-     "end": 1943.6627,
+     "start": 1984.175,
+     "end": 1992.275,
      "dur": 8.1,
-     "start_frame": 58067,
-     "end_frame": 58310
+     "start_frame": 59525,
+     "end_frame": 59768
     },
     {
      "text": "We put the origin at ERA5's own centre, and draw a ring fifty kilometres out, where ERA5's spin is strongest.",
-     "audio_text": null,
-     "start": 1944.0127,
-     "end": 1952.4634,
-     "dur": 8.4507,
-     "start_frame": 58320,
-     "end_frame": 58574,
-     "estimated": true
+     "audio_text": "We put the origin at [ERA5](/ˌiˌɑɹˈA fˈIv/)'s own centre, and draw a ring fifty kilometres out, where [ERA5](/ˌiˌɑɹˈA fˈIv/)'s spin is strongest.",
+     "start": 1992.625,
+     "end": 2001.25,
+     "dur": 8.625,
+     "start_frame": 59779,
+     "end_frame": 60038
     },
     {
      "text": "Ten metres above the sea, the tangential wind averages about twenty metres per second, and the radial wind about minus six.",
      "audio_text": null,
-     "start": 1952.8134,
-     "end": 1961.5134,
+     "start": 2001.6,
+     "end": 2010.3,
      "dur": 8.7,
-     "start_frame": 58584,
-     "end_frame": 58845,
+     "start_frame": 60048,
+     "end_frame": 60309,
      "beat": true
     },
     {
      "text": "The air goes round anticlockwise as seen from above, just like Ian's, because both storms are in the northern hemisphere.",
      "audio_text": null,
-     "start": 1963.0134,
-     "end": 1971.2384,
+     "start": 2011.8,
+     "end": 2020.025,
      "dur": 8.225,
-     "start_frame": 58890,
-     "end_frame": 59137
+     "start_frame": 60354,
+     "end_frame": 60601
     },
     {
-     "text": "The official estimate at that hour, averaged over three minutes, was about ninety knots, or about a hundred and sixty seven kilometres per hour.",
-     "audio_text": null,
-     "start": 1971.5884,
-     "end": 1981.2384,
-     "dur": 9.65,
-     "start_frame": 59148,
-     "end_frame": 59437
+     "text": "The official estimate at that hour, averaged over three minutes, was about ninety knots, which is about forty six metres per second, and a lowest pressure of nine hundred and fifty six hectopascals.",
+     "audio_text": "The official estimate at that hour, averaged over three minutes, was about ninety knots, which is about forty six metres per second, and a lowest pressure of nine hundred and fifty six [hectopascals](/hˈɛktəpˌæskᵊlz/).",
+     "start": 2020.375,
+     "end": 2033.575,
+     "dur": 13.2,
+     "start_frame": 60611,
+     "end_frame": 61007
     },
     {
-     "text": "So the reanalysis is far too weak.",
-     "audio_text": null,
-     "start": 1981.5884,
-     "end": 1984.3634,
-     "dur": 2.775,
-     "start_frame": 59448,
-     "end_frame": 59531,
+     "text": "ERA5's lowest pressure is only about nine hundred and sixty seven, so the reanalysis storm is much too weak.",
+     "audio_text": "[ERA5](/ˌiˌɑɹˈA fˈIv/)'s lowest pressure is only about nine hundred and sixty seven, so the reanalysis storm is much too weak.",
+     "start": 2033.925,
+     "end": 2041.975,
+     "dur": 8.05,
+     "start_frame": 61018,
+     "end_frame": 61259,
      "beat": true
     },
     {
      "text": "But the shape is right.",
      "audio_text": null,
-     "start": 1985.8634,
-     "end": 1987.8384,
+     "start": 2043.475,
+     "end": 2045.45,
      "dur": 1.975,
-     "start_frame": 59576,
-     "end_frame": 59635
+     "start_frame": 61304,
+     "end_frame": 61364
     },
     {
      "text": "Six over twenty is zero point three, so Amphan's inflow angle is about seventeen degrees, close to Ian's twenty one.",
      "audio_text": null,
-     "start": 1988.1884,
-     "end": 1997.0134,
+     "start": 2045.8,
+     "end": 2054.625,
      "dur": 8.825,
-     "start_frame": 59646,
-     "end_frame": 59910,
+     "start_frame": 61374,
+     "end_frame": 61639,
      "beat": true
     },
     {
      "text": "Two storms, in two different oceans, both spiral in at a similar angle.",
      "audio_text": null,
-     "start": 1998.5134,
-     "end": 2004.1134,
+     "start": 2056.125,
+     "end": 2061.725,
      "dur": 5.6,
-     "start_frame": 59955,
-     "end_frame": 60123
+     "start_frame": 61684,
+     "end_frame": 61852
     }
    ],
-   "end": 2004.9134,
-   "start_frame": 57237,
-   "end_frame": 60147
+   "end": 2062.525,
+   "start_frame": 58696,
+   "end_frame": 61876
   },
   {
    "id": "s24_amphan_curtain",
-   "start": 2004.9134,
+   "start": 2062.525,
    "sentences": [
     {
      "text": "Here's Amphan's radius-height section from ERA5, next to Ian's.",
-     "audio_text": null,
-     "start": 2004.9134,
-     "end": 2009.9634,
+     "audio_text": "Here's Amphan's radius-height section from [ERA5](/ˌiˌɑɹˈA fˈIv/), next to Ian's.",
+     "start": 2062.525,
+     "end": 2067.575,
      "dur": 5.05,
-     "start_frame": 60147,
-     "end_frame": 60299
+     "start_frame": 61876,
+     "end_frame": 62027
     },
     {
      "text": "The same pattern appears.",
      "audio_text": null,
-     "start": 2010.3134,
-     "end": 2012.4634,
+     "start": 2067.925,
+     "end": 2070.075,
      "dur": 2.15,
-     "start_frame": 60309,
-     "end_frame": 60374
+     "start_frame": 62038,
+     "end_frame": 62102
     },
     {
      "text": "Near the sea, the air flows in, at up to about minus eleven metres per second, a hundred kilometres from the centre.",
      "audio_text": null,
-     "start": 2012.8134,
-     "end": 2021.1384,
+     "start": 2070.425,
+     "end": 2078.75,
      "dur": 8.325,
-     "start_frame": 60384,
-     "end_frame": 60634,
+     "start_frame": 62113,
+     "end_frame": 62362,
      "beat": true
     },
     {
      "text": "Near the top, it flows out, at up to about plus six.",
      "audio_text": null,
-     "start": 2022.6384,
-     "end": 2026.5634,
+     "start": 2080.25,
+     "end": 2084.175,
      "dur": 3.925,
-     "start_frame": 60679,
-     "end_frame": 60797,
+     "start_frame": 62408,
+     "end_frame": 62525,
      "beat": true
     },
     {
      "text": "It's blurred, because ERA5's boxes are wide, but it's the same in, up and out.",
-     "audio_text": null,
-     "start": 2028.0634,
-     "end": 2034.1884,
+     "audio_text": "It's blurred, because [ERA5](/ˌiˌɑɹˈA fˈIv/)'s boxes are wide, but it's the same in, up and out.",
+     "start": 2085.675,
+     "end": 2091.8,
      "dur": 6.125,
-     "start_frame": 60842,
-     "end_frame": 61026
+     "start_frame": 62570,
+     "end_frame": 62754
     },
     {
      "text": "With cylindrical coordinates, two different storms, from two different data sets, fit into the same picture.",
      "audio_text": null,
-     "start": 2034.5384,
-     "end": 2041.6384,
+     "start": 2092.15,
+     "end": 2099.25,
      "dur": 7.1,
-     "start_frame": 61036,
-     "end_frame": 61249
+     "start_frame": 62764,
+     "end_frame": 62978
     }
    ],
-   "end": 2042.4384,
-   "start_frame": 60147,
-   "end_frame": 61273
+   "end": 2100.05,
+   "start_frame": 61876,
+   "end_frame": 63002
   },
   {
    "id": "s25_why_cylindrical",
-   "start": 2042.4384,
+   "start": 2100.05,
    "sentences": [
     {
      "text": "So why do scientists who study tropical cyclones use cylindrical coordinates?",
      "audio_text": null,
-     "start": 2042.4384,
-     "end": 2048.3384,
+     "start": 2100.05,
+     "end": 2105.95,
      "dur": 5.9,
-     "start_frame": 61273,
-     "end_frame": 61450
+     "start_frame": 63002,
+     "end_frame": 63178
     },
     {
      "text": "There are three good reasons.",
      "audio_text": null,
-     "start": 2048.6884,
-     "end": 2050.8634,
+     "start": 2106.3,
+     "end": 2108.475,
      "dur": 2.175,
-     "start_frame": 61461,
-     "end_frame": 61526
+     "start_frame": 63189,
+     "end_frame": 63254
     },
     {
      "text": "The first is shape.",
      "audio_text": null,
-     "start": 2051.2134,
-     "end": 2053.0384,
+     "start": 2108.825,
+     "end": 2110.65,
      "dur": 1.825,
-     "start_frame": 61536,
-     "end_frame": 61591
+     "start_frame": 63265,
+     "end_frame": 63320
     },
     {
      "text": "A tropical cyclone is nearly round, so averaging round the rings turns a messy storm in three dimensions into one clear slice.",
      "audio_text": null,
-     "start": 2053.3884,
-     "end": 2062.3884,
+     "start": 2111.0,
+     "end": 2120.0,
      "dur": 9.0,
-     "start_frame": 61602,
-     "end_frame": 61872
+     "start_frame": 63330,
+     "end_frame": 63600
     },
     {
      "text": "The second is physics.",
      "audio_text": null,
-     "start": 2062.7384,
-     "end": 2064.7884,
+     "start": 2120.35,
+     "end": 2122.4,
      "dur": 2.05,
-     "start_frame": 61882,
-     "end_frame": 61944
+     "start_frame": 63610,
+     "end_frame": 63672
     },
     {
      "text": "With turning arrows, the inward acceleration, minus v squared over r, appears the moment we write the velocity down.",
      "audio_text": null,
-     "start": 2065.1384,
-     "end": 2073.6134,
+     "start": 2122.75,
+     "end": 2131.225,
      "dur": 8.475,
-     "start_frame": 61954,
-     "end_frame": 62208
+     "start_frame": 63682,
+     "end_frame": 63937
     },
     {
      "text": "With east and north arrows, the same acceleration hides inside changes of both parts.",
      "audio_text": null,
-     "start": 2073.9634,
-     "end": 2080.0634,
+     "start": 2131.575,
+     "end": 2137.675,
      "dur": 6.1,
-     "start_frame": 62219,
-     "end_frame": 62402
+     "start_frame": 63947,
+     "end_frame": 64130
     },
     {
      "text": "The third is meaning.",
      "audio_text": null,
-     "start": 2080.4134,
-     "end": 2082.3384,
+     "start": 2138.025,
+     "end": 2139.95,
      "dur": 1.925,
-     "start_frame": 62412,
-     "end_frame": 62470
+     "start_frame": 64141,
+     "end_frame": 64198
     },
     {
      "text": "The three parts, in, round and up, are exactly what we want to know: how fast the storm draws air in, how fast it spins, and where the air rises.",
      "audio_text": null,
-     "start": 2082.6884,
-     "end": 2092.9134,
+     "start": 2140.3,
+     "end": 2150.525,
      "dur": 10.225,
-     "start_frame": 62481,
-     "end_frame": 62787
+     "start_frame": 64209,
+     "end_frame": 64516
     }
    ],
-   "end": 2093.7134,
-   "start_frame": 61273,
-   "end_frame": 62811
+   "end": 2151.325,
+   "start_frame": 63002,
+   "end_frame": 64540
   },
   {
    "id": "s26_onshore",
-   "start": 2093.7134,
+   "start": 2151.325,
    "sentences": [
     {
      "text": "Now let's come back down to the ground, to Ian's landfall on the coast of Florida.",
      "audio_text": null,
-     "start": 2093.7134,
-     "end": 2099.3134,
+     "start": 2151.325,
+     "end": 2156.925,
      "dur": 5.6,
-     "start_frame": 62811,
-     "end_frame": 62979
+     "start_frame": 64540,
+     "end_frame": 64708
     },
     {
      "text": "On a coast, east and north are not the most useful directions.",
      "audio_text": null,
-     "start": 2099.6634,
-     "end": 2104.1384,
+     "start": 2157.275,
+     "end": 2161.75,
      "dur": 4.475,
-     "start_frame": 62990,
-     "end_frame": 63124
+     "start_frame": 64718,
+     "end_frame": 64852
     },
     {
      "text": "What matters is how much of the wind blows along the shore, and how much blows across it, onto the land or out to sea.",
      "audio_text": null,
-     "start": 2104.4884,
-     "end": 2112.6884,
+     "start": 2162.1,
+     "end": 2170.3,
      "dur": 8.2,
-     "start_frame": 63135,
-     "end_frame": 63381
+     "start_frame": 64863,
+     "end_frame": 65109
     },
     {
      "text": "At eight in the evening, universal time, about an hour after landfall, the model's wind at Fort Myers Beach was about thirty three metres per second, from the south-west.",
      "audio_text": null,
-     "start": 2113.0384,
-     "end": 2124.4134,
+     "start": 2170.65,
+     "end": 2182.025,
      "dur": 11.375,
-     "start_frame": 63391,
-     "end_frame": 63732
+     "start_frame": 65120,
+     "end_frame": 65461
     },
     {
      "text": "The coast there runs towards the north-north-west, so that wind blew almost straight onto the land.",
      "audio_text": null,
-     "start": 2124.7634,
-     "end": 2131.1384,
+     "start": 2182.375,
+     "end": 2188.75,
      "dur": 6.375,
-     "start_frame": 63743,
-     "end_frame": 63934
+     "start_frame": 65471,
+     "end_frame": 65662
     },
     {
      "text": "In Part 4, we'll turn our axes to line up with the coast, and measure exactly how much of it pushed straight onto the coast.",
      "audio_text": null,
-     "start": 2131.4884,
-     "end": 2139.5384,
+     "start": 2189.1,
+     "end": 2197.15,
      "dur": 8.05,
-     "start_frame": 63945,
-     "end_frame": 64186
+     "start_frame": 65673,
+     "end_frame": 65914
     }
    ],
-   "end": 2140.3384,
-   "start_frame": 62811,
-   "end_frame": 64210
+   "end": 2197.95,
+   "start_frame": 64540,
+   "end_frame": 65938
   },
   {
    "id": "s27_surge",
-   "start": 2140.3384,
+   "start": 2197.95,
    "sentences": [
     {
      "text": "That onshore push piles sea water up against the coast.",
      "audio_text": null,
-     "start": 2140.3384,
-     "end": 2144.1134,
+     "start": 2197.95,
+     "end": 2201.725,
      "dur": 3.775,
-     "start_frame": 64210,
-     "end_frame": 64323
+     "start_frame": 65938,
+     "end_frame": 66052
     },
     {
      "text": "The sea rises far above the normal tide, and this rise is called a storm surge.",
      "audio_text": null,
-     "start": 2144.4634,
-     "end": 2150.1384,
+     "start": 2202.075,
+     "end": 2207.75,
      "dur": 5.675,
-     "start_frame": 64334,
-     "end_frame": 64504
+     "start_frame": 66062,
+     "end_frame": 66232
     },
     {
      "text": "The wind's push does most of the work, especially over a wide, shallow sea floor like the one off southwest Florida.",
      "audio_text": null,
-     "start": 2150.4884,
-     "end": 2158.3384,
+     "start": 2208.1,
+     "end": 2215.95,
      "dur": 7.85,
-     "start_frame": 64515,
-     "end_frame": 64750
+     "start_frame": 66243,
+     "end_frame": 66478
     },
     {
-     "text": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops.",
-     "audio_text": null,
-     "start": 2158.6884,
-     "end": 2166.3134,
-     "dur": 7.625,
-     "start_frame": 64761,
-     "end_frame": 64989,
+     "text": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops, and Ian's centre was about seventy five hectopascals below normal, so that's only about seventy five centimetres.",
+     "audio_text": "The low pressure helps a little: the sea rises by about one centimetre for every [hectopascal](/hˈɛktəpˌæskᵊl/) that the pressure drops, and Ian's centre was about seventy five [hectopascals](/hˈɛktəpˌæskᵊlz/) below normal, so that's only about seventy five centimetres.",
+     "start": 2216.3,
+     "end": 2231.4,
+     "dur": 15.1,
+     "start_frame": 66489,
+     "end_frame": 66942,
      "beat": true
     },
     {
      "text": "At Fort Myers Beach, the official report found water ten to fifteen feet above the ground: about three to four and a half metres.",
      "audio_text": null,
-     "start": 2167.8134,
-     "end": 2176.6634,
+     "start": 2232.9,
+     "end": 2241.75,
      "dur": 8.85,
-     "start_frame": 65034,
-     "end_frame": 65300,
+     "start_frame": 66987,
+     "end_frame": 67252,
      "beat": true
     },
     {
      "text": "A tide gauge up the river, at Fort Myers, measured the water about two point two metres above the normal tide.",
      "audio_text": null,
-     "start": 2178.1634,
-     "end": 2185.6634,
+     "start": 2243.25,
+     "end": 2250.75,
      "dur": 7.5,
-     "start_frame": 65345,
-     "end_frame": 65570,
+     "start_frame": 67298,
+     "end_frame": 67522,
      "beat": true
     },
     {
      "text": "Now go about a hundred and sixty kilometres north, to Tampa Bay, on the other side of the storm's spin.",
      "audio_text": null,
-     "start": 2187.1634,
-     "end": 2194.2884,
+     "start": 2252.25,
+     "end": 2259.375,
      "dur": 7.125,
-     "start_frame": 65615,
-     "end_frame": 65829
+     "start_frame": 67568,
+     "end_frame": 67781
     },
     {
      "text": "There, the coast runs almost due north, and the wind blew out to sea.",
      "audio_text": null,
-     "start": 2194.6384,
-     "end": 2199.7134,
+     "start": 2259.725,
+     "end": 2264.8,
      "dur": 5.075,
-     "start_frame": 65839,
-     "end_frame": 65991
+     "start_frame": 67792,
+     "end_frame": 67944
     },
     {
      "text": "So the water was pushed away, and the gauge at Saint Petersburg read about one point eight metres below the normal tide.",
      "audio_text": null,
-     "start": 2200.0634,
-     "end": 2207.7634,
+     "start": 2265.15,
+     "end": 2272.85,
      "dur": 7.7,
-     "start_frame": 66002,
-     "end_frame": 66233,
+     "start_frame": 67954,
+     "end_frame": 68186,
      "beat": true
     },
     {
      "text": "Same storm, opposite sides of the eye: onto the land on one side, out to sea on the other, and the surge flips with it.",
      "audio_text": null,
-     "start": 2209.2634,
-     "end": 2217.4634,
+     "start": 2274.35,
+     "end": 2282.55,
      "dur": 8.2,
-     "start_frame": 66278,
-     "end_frame": 66524
+     "start_frame": 68230,
+     "end_frame": 68476
     },
     {
      "text": "The wind along a coast matters too, because it can bring cold water up from below, which is a story for the movie on Friction and Ekman layers.",
-     "audio_text": null,
-     "start": 2217.8134,
-     "end": 2227.5384,
+     "audio_text": "The wind along a coast matters too, because it can bring cold water up from below, which is a story for the movie on Friction and Eckman layers.",
+     "start": 2282.9,
+     "end": 2292.625,
      "dur": 9.725,
-     "start_frame": 66534,
-     "end_frame": 66826
+     "start_frame": 68487,
+     "end_frame": 68779
     },
     {
      "text": "And the full story of storm surge has its own movie later in this series.",
      "audio_text": null,
-     "start": 2227.8884,
-     "end": 2232.7134,
+     "start": 2292.975,
+     "end": 2297.8,
      "dur": 4.825,
-     "start_frame": 66837,
-     "end_frame": 66981
+     "start_frame": 68789,
+     "end_frame": 68934
     }
    ],
-   "end": 2233.5134,
-   "start_frame": 64210,
-   "end_frame": 67005
+   "end": 2298.6,
+   "start_frame": 65938,
+   "end_frame": 68958
   },
   {
    "id": "s28_ian_record",
-   "start": 2233.5134,
+   "start": 2298.6,
    "sentences": [
     {
      "text": "What did satellites see of Ian's surge?",
      "audio_text": null,
-     "start": 2233.5134,
-     "end": 2236.3134,
+     "start": 2298.6,
+     "end": 2301.4,
      "dur": 2.8,
-     "start_frame": 67005,
-     "end_frame": 67089
+     "start_frame": 68958,
+     "end_frame": 69042
     },
     {
      "text": "Here's an honest answer: nothing.",
      "audio_text": null,
-     "start": 2236.6634,
-     "end": 2239.6134,
+     "start": 2301.75,
+     "end": 2304.7,
      "dur": 2.95,
-     "start_frame": 67100,
-     "end_frame": 67188
+     "start_frame": 69052,
+     "end_frame": 69141
     },
     {
      "text": "The surge drained back to the sea within hours, before any satellite or survey plane passed overhead.",
      "audio_text": null,
-     "start": 2239.9634,
-     "end": 2246.9384,
+     "start": 2305.05,
+     "end": 2312.025,
      "dur": 6.975,
-     "start_frame": 67199,
-     "end_frame": 67408
+     "start_frame": 69152,
+     "end_frame": 69361
     },
     {
      "text": "So the best record of it is the tide gauges we just met, which measure the water level every few minutes.",
      "audio_text": null,
-     "start": 2247.2884,
-     "end": 2254.3384,
+     "start": 2312.375,
+     "end": 2319.425,
      "dur": 7.05,
-     "start_frame": 67419,
-     "end_frame": 67630
+     "start_frame": 69371,
+     "end_frame": 69583
     },
     {
      "text": "Here are their two lines over a day and a half: the water rises by about two point two metres above the normal tide at Fort Myers, and drops by about one point eight metres below it at Saint Petersburg, both within a few hours of landfall.",
      "audio_text": null,
-     "start": 2254.6884,
-     "end": 2269.8884,
+     "start": 2319.775,
+     "end": 2334.975,
      "dur": 15.2,
-     "start_frame": 67641,
-     "end_frame": 68097,
+     "start_frame": 69593,
+     "end_frame": 70049,
      "beat": true
     },
     {
      "text": "Those two lines are the surge, measured.",
      "audio_text": null,
-     "start": 2271.3884,
-     "end": 2274.3134,
+     "start": 2336.475,
+     "end": 2339.4,
      "dur": 2.925,
-     "start_frame": 68142,
-     "end_frame": 68229
+     "start_frame": 70094,
+     "end_frame": 70182
     }
    ],
-   "end": 2275.1134,
-   "start_frame": 67005,
-   "end_frame": 68253
+   "end": 2340.2,
+   "start_frame": 68958,
+   "end_frame": 70206
   },
   {
    "id": "s29_flood_flight",
-   "start": 2275.1134,
+   "start": 2340.2,
    "sentences": [
     {
      "text": "Floods that last longer can be seen from space.",
      "audio_text": null,
-     "start": 2275.1134,
-     "end": 2278.6634,
+     "start": 2340.2,
+     "end": 2343.75,
      "dur": 3.55,
-     "start_frame": 68253,
-     "end_frame": 68360
+     "start_frame": 70206,
+     "end_frame": 70312
     },
     {
      "text": "Let's fly to one: the Bay of Bengal, after Cyclone Amphan in twenty twenty.",
      "audio_text": null,
-     "start": 2279.0134,
-     "end": 2284.7134,
+     "start": 2344.1,
+     "end": 2349.8,
      "dur": 5.7,
-     "start_frame": 68370,
-     "end_frame": 68541
+     "start_frame": 70323,
+     "end_frame": 70494
     },
     {
      "text": "The blue gets darker where the sea gets deeper.",
      "audio_text": null,
-     "start": 2285.0634,
-     "end": 2288.1884,
+     "start": 2350.15,
+     "end": 2353.275,
      "dur": 3.125,
-     "start_frame": 68552,
-     "end_frame": 68646
+     "start_frame": 70504,
+     "end_frame": 70598
     },
     {
      "text": "The white line marks where the sea is twenty metres deep, and the darker line two hundred metres.",
      "audio_text": null,
-     "start": 2288.5384,
-     "end": 2294.7134,
+     "start": 2353.625,
+     "end": 2359.8,
      "dur": 6.175,
-     "start_frame": 68656,
-     "end_frame": 68841
+     "start_frame": 70609,
+     "end_frame": 70794
     },
     {
      "text": "Off the Sundarbans, the sea stays shallower than twenty metres for about thirty three kilometres from the coast.",
      "audio_text": null,
-     "start": 2295.0634,
-     "end": 2302.3384,
+     "start": 2360.15,
+     "end": 2367.425,
      "dur": 7.275,
-     "start_frame": 68852,
-     "end_frame": 69070,
+     "start_frame": 70804,
+     "end_frame": 71023,
      "beat": true
     },
     {
      "text": "A wide, shallow shelf like this lets a storm pile the water up high, just as off Florida.",
      "audio_text": null,
-     "start": 2303.8384,
-     "end": 2310.2634,
+     "start": 2368.925,
+     "end": 2375.35,
      "dur": 6.425,
-     "start_frame": 69115,
-     "end_frame": 69308
+     "start_frame": 71068,
+     "end_frame": 71260
     },
     {
      "text": "Here's Amphan's track, coming up from the south of the Bay, and crossing the coast in the Sundarbans on the twentieth of May.",
      "audio_text": null,
-     "start": 2310.6134,
-     "end": 2318.0134,
+     "start": 2375.7,
+     "end": 2383.1,
      "dur": 7.4,
-     "start_frame": 69318,
-     "end_frame": 69540
+     "start_frame": 71271,
+     "end_frame": 71493
     }
    ],
-   "end": 2318.8134,
-   "start_frame": 68253,
-   "end_frame": 69564
+   "end": 2383.9,
+   "start_frame": 70206,
+   "end_frame": 71517
   },
   {
    "id": "s30_flood_swipe",
-   "start": 2318.8134,
+   "start": 2383.9,
    "sentences": [
     {
      "text": "Satellites caught a cyclone's flood most clearly for Cyclone Nargis, in the same Bay of Bengal, in May two thousand and eight.",
      "audio_text": null,
-     "start": 2318.8134,
-     "end": 2328.1092,
-     "dur": 9.2958,
-     "start_frame": 69564,
-     "end_frame": 69843,
-     "estimated": true
+     "start": 2383.9,
+     "end": 2392.425,
+     "dur": 8.525,
+     "start_frame": 71517,
+     "end_frame": 71773
     },
     {
      "text": "Here's a before and after picture from NASA's MODIS instrument.",
      "audio_text": null,
-     "start": 2328.4592,
-     "end": 2333.8092,
+     "start": 2392.775,
+     "end": 2398.125,
      "dur": 5.35,
-     "start_frame": 69854,
-     "end_frame": 70014
+     "start_frame": 71783,
+     "end_frame": 71944
     },
     {
      "text": "It's in false colour.",
      "audio_text": null,
-     "start": 2334.1592,
-     "end": 2336.1092,
+     "start": 2398.475,
+     "end": 2400.425,
      "dur": 1.95,
-     "start_frame": 70025,
-     "end_frame": 70083
+     "start_frame": 71954,
+     "end_frame": 72013
     },
     {
      "text": "The satellite measures light that our eyes can't see, shortwave infrared and near infrared, and we paint them red and green, with ordinary red light painted blue.",
      "audio_text": null,
-     "start": 2336.4592,
-     "end": 2347.2342,
+     "start": 2400.775,
+     "end": 2411.55,
      "dur": 10.775,
-     "start_frame": 70094,
-     "end_frame": 70417
+     "start_frame": 72023,
+     "end_frame": 72346
     },
     {
      "text": "In these colours, plants look bright green, bare ground looks brown, clouds look white, and water looks dark blue or black.",
      "audio_text": null,
-     "start": 2347.5842,
-     "end": 2355.9842,
+     "start": 2411.9,
+     "end": 2420.3,
      "dur": 8.4,
-     "start_frame": 70428,
-     "end_frame": 70680
+     "start_frame": 72357,
+     "end_frame": 72609
     },
     {
      "text": "That makes water easy to spot.",
      "audio_text": null,
-     "start": 2356.3342,
-     "end": 2358.7842,
+     "start": 2420.65,
+     "end": 2423.1,
      "dur": 2.45,
-     "start_frame": 70690,
-     "end_frame": 70764
+     "start_frame": 72620,
+     "end_frame": 72693
     },
     {
      "text": "On the left is the twenty first of April, eleven days before landfall.",
      "audio_text": null,
-     "start": 2359.1342,
-     "end": 2364.6272,
-     "dur": 5.493,
-     "start_frame": 70774,
-     "end_frame": 70939,
-     "estimated": true
+     "start": 2423.45,
+     "end": 2428.75,
+     "dur": 5.3,
+     "start_frame": 72704,
+     "end_frame": 72862
     },
     {
      "text": "On the right is the fifth of May, about three days after.",
      "audio_text": null,
-     "start": 2364.9772,
-     "end": 2370.0476,
-     "dur": 5.0704,
-     "start_frame": 70949,
-     "end_frame": 71101,
-     "beat": true,
-     "estimated": true
+     "start": 2429.1,
+     "end": 2433.125,
+     "dur": 4.025,
+     "start_frame": 72873,
+     "end_frame": 72994,
+     "beat": true
     },
     {
      "text": "As the line glides across, dark water spreads over land that was green before.",
      "audio_text": null,
-     "start": 2371.5476,
-     "end": 2377.2726,
+     "start": 2434.625,
+     "end": 2440.35,
      "dur": 5.725,
-     "start_frame": 71146,
-     "end_frame": 71318,
+     "start_frame": 73039,
+     "end_frame": 73210,
      "beat": true
     },
     {
      "text": "Both pictures are pinned to the same latitudes and longitudes, so every pixel compares the same patch of ground.",
      "audio_text": null,
-     "start": 2378.7726,
-     "end": 2386.2476,
+     "start": 2441.85,
+     "end": 2449.325,
      "dur": 7.475,
-     "start_frame": 71363,
-     "end_frame": 71587
+     "start_frame": 73256,
+     "end_frame": 73480
     },
     {
      "text": "Even so, the picture shows what the surge left behind, not the surge itself.",
      "audio_text": null,
-     "start": 2386.5976,
-     "end": 2392.3976,
+     "start": 2449.675,
+     "end": 2455.475,
      "dur": 5.8,
-     "start_frame": 71598,
-     "end_frame": 71772
+     "start_frame": 73490,
+     "end_frame": 73664
     },
     {
      "text": "How to map floods from space has its own movie later in this series.",
      "audio_text": null,
-     "start": 2392.7476,
-     "end": 2397.5476,
+     "start": 2455.825,
+     "end": 2460.625,
      "dur": 4.8,
-     "start_frame": 71782,
-     "end_frame": 71926
+     "start_frame": 73675,
+     "end_frame": 73819
     }
    ],
-   "end": 2398.3476,
-   "start_frame": 69564,
-   "end_frame": 71950
+   "end": 2461.425,
+   "start_frame": 71517,
+   "end_frame": 73843
   },
   {
    "id": "s31_recap",
-   "start": 2398.3476,
+   "start": 2461.425,
    "sentences": [
     {
      "text": "To sum up, the tip of r hat moves along a circle of radius one, so for a small turn delta theta, it moves delta theta along theta hat.",
      "audio_text": null,
-     "start": 2398.3476,
-     "end": 2408.2476,
+     "start": 2461.425,
+     "end": 2471.325,
      "dur": 9.9,
-     "start_frame": 71950,
-     "end_frame": 72247
+     "start_frame": 73843,
+     "end_frame": 74140
     },
     {
      "text": "That gave us the slopes of cosine and sine: minus sine, and cosine.",
      "audio_text": null,
-     "start": 2408.5976,
-     "end": 2413.8726,
+     "start": 2471.675,
+     "end": 2476.95,
      "dur": 5.275,
-     "start_frame": 72258,
-     "end_frame": 72416
+     "start_frame": 74150,
+     "end_frame": 74308
     },
     {
      "text": "So d r hat by d theta is theta hat, and d theta hat by d theta is minus r hat: each arrow swings towards the other one.",
      "audio_text": null,
-     "start": 2414.2226,
-     "end": 2423.7226,
+     "start": 2477.3,
+     "end": 2486.8,
      "dur": 9.5,
-     "start_frame": 72427,
-     "end_frame": 72712
+     "start_frame": 74319,
+     "end_frame": 74604
     },
     {
      "text": "The product rule says that a number times an arrow changes through both of them.",
      "audio_text": null,
-     "start": 2424.0726,
-     "end": 2429.2476,
+     "start": 2487.15,
+     "end": 2492.325,
      "dur": 5.175,
-     "start_frame": 72722,
-     "end_frame": 72877
+     "start_frame": 74614,
+     "end_frame": 74770
     },
     {
      "text": "On a ring, the angle grows at v over r, the velocity is v theta hat, and the acceleration is minus v squared over r, times r hat: inward, even at a steady speed.",
      "audio_text": null,
-     "start": 2429.5976,
-     "end": 2442.6726,
+     "start": 2492.675,
+     "end": 2505.75,
      "dur": 13.075,
-     "start_frame": 72888,
-     "end_frame": 73280
+     "start_frame": 74780,
+     "end_frame": 75172
     },
     {
      "text": "For Ian's ring, that's about zero point zero four eight metres per second squared, about two hundred times smaller than gravity.",
      "audio_text": null,
-     "start": 2443.0226,
-     "end": 2451.7226,
+     "start": 2506.1,
+     "end": 2514.8,
      "dur": 8.7,
-     "start_frame": 73291,
-     "end_frame": 73552
+     "start_frame": 75183,
+     "end_frame": 75444
     },
     {
      "text": "Adding the height z gives cylindrical coordinates, and averaging round the rings shows a tropical cyclone's in, up and out, in Ian and in Amphan alike.",
      "audio_text": null,
-     "start": 2452.0726,
-     "end": 2462.6226,
+     "start": 2515.15,
+     "end": 2525.7,
      "dur": 10.55,
-     "start_frame": 73562,
-     "end_frame": 73879
+     "start_frame": 75454,
+     "end_frame": 75771
     },
     {
      "text": "Wind blowing onto a coast piles up a storm surge.",
      "audio_text": null,
-     "start": 2462.9726,
-     "end": 2466.7726,
+     "start": 2526.05,
+     "end": 2529.85,
      "dur": 3.8,
-     "start_frame": 73889,
-     "end_frame": 74003
+     "start_frame": 75782,
+     "end_frame": 75896
     },
     {
      "text": "Tide gauges measured Ian's, and satellites can map the floods a surge leaves behind.",
      "audio_text": null,
-     "start": 2467.1226,
-     "end": 2473.0726,
+     "start": 2530.2,
+     "end": 2536.15,
      "dur": 5.95,
-     "start_frame": 74014,
-     "end_frame": 74192
+     "start_frame": 75906,
+     "end_frame": 76084
     },
     {
      "text": "In Part 3, we'll take these ideas to the biggest round shape of all: the Earth.",
      "audio_text": null,
-     "start": 2473.4226,
-     "end": 2479.0476,
+     "start": 2536.5,
+     "end": 2542.125,
      "dur": 5.625,
-     "start_frame": 74203,
-     "end_frame": 74371
+     "start_frame": 76095,
+     "end_frame": 76264
     }
    ],
-   "end": 2479.8476,
-   "start_frame": 71950,
-   "end_frame": 74395
+   "end": 2542.925,
+   "start_frame": 73843,
+   "end_frame": 76288
   },
   {
    "id": "s32_end",
-   "start": 2479.8476,
+   "start": 2542.925,
    "sentences": [
     {
      "text": "This video is one of a series of related maths tutorials, so watch out for the others.",
      "audio_text": null,
-     "start": 2479.8476,
-     "end": 2486.0476,
+     "start": 2542.925,
+     "end": 2549.125,
      "dur": 6.2,
-     "start_frame": 74395,
-     "end_frame": 74581
+     "start_frame": 76288,
+     "end_frame": 76474
     },
     {
      "text": "They're made for students of atmospheric science, meteorology and fluid dynamics, and anyone else who needs these ideas.",
      "audio_text": null,
-     "start": 2486.3976,
-     "end": 2494.4476,
+     "start": 2549.475,
+     "end": 2557.525,
      "dur": 8.05,
-     "start_frame": 74592,
-     "end_frame": 74833
+     "start_frame": 76484,
+     "end_frame": 76726
     },
     {
      "text": "The notebook for coordinates, and the notebooks for the other maths concepts, are on the website that goes with this video.",
      "audio_text": null,
-     "start": 2494.7976,
-     "end": 2502.4476,
+     "start": 2557.875,
+     "end": 2565.525,
      "dur": 7.65,
-     "start_frame": 74844,
-     "end_frame": 75073
+     "start_frame": 76736,
+     "end_frame": 76966
     }
    ],
-   "end": 2502.7476,
-   "start_frame": 74395,
-   "end_frame": 75082
+   "end": 2565.825,
+   "start_frame": 76288,
+   "end_frame": 76975
   }
  ],
- "total_s": 2502.7476,
- "provisional": "dry run 6 (G:/.../ch00_coordinates_storm/dryrun6) measured clip lengths, recomposed by checks/make_timing.py; sentences rewritten in the light phase 2026-11-05 are ESTIMATED at 142 wpm ('estimated': true); the final TTS (heavy phase) replaces it",
- "total_frames": 75083
+ "total_s": 2565.825,
+ "total_frames": 76975,
+ "render_s": 1115.9,
+ "loudnorm_input": {
+  "input_i": "-24.78",
+  "input_tp": "-2.26",
+  "input_lra": "5.00",
+  "input_thresh": "-35.31",
+  "output_i": "-16.49",
+  "output_tp": "-1.50",
+  "output_lra": "4.80",
+  "output_thresh": "-27.03",
+  "normalization_type": "dynamic",
+  "target_offset": "0.49"
+ },
+ "cues": 625,
+ "warnings": [],
+ "self_check": {
+  "expected_s": 2565.825,
+  "audio_s": 2565.825,
+  "diff_ms": 0.0,
+  "len_ok": true,
+  "cues_ok": true,
+  "spliced_fix0": {
+   "method": "BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter (-1.5 dBTP)",
+   "corr_resynth": 0.9955,
+   "replaced": [
+    {
+     "scene": "s04_slopes_sin_cos",
+     "neighbours": [
+      "S10",
+      "S12"
+     ],
+     "neighbours_lufs": [
+      -16.18,
+      -16.08
+     ],
+     "target_lufs": -16.13,
+     "raw_lufs": -25.36,
+     "gain_db": 9.97,
+     "limiter_gr_db": -5.84,
+     "final_lufs": -16.18,
+     "true_peak_dbtp": -1.88,
+     "within_1p5_lu": true,
+     "dur_s": 7.1,
+     "new": "Turn by zero point zero one radians, about half a degree, to fifty three point seven degrees.",
+     "item": "B6",
+     "sentence": 11,
+     "part": 0,
+     "old": "Turn by zero point zero one radians.",
+     "old_dur_s": 3.05,
+     "beat": false
+    },
+    {
+     "scene": "s08_product_rule",
+     "neighbours": [
+      "S6",
+      "S8"
+     ],
+     "neighbours_lufs": [
+      -16.41,
+      -16.69
+     ],
+     "target_lufs": -16.55,
+     "raw_lufs": -24.22,
+     "gain_db": 8.25,
+     "limiter_gr_db": -6.53,
+     "final_lufs": -16.56,
+     "true_peak_dbtp": -1.84,
+     "within_1p5_lu": true,
+     "dur_s": 7.25,
+     "new": "Take a speed of ten metres per second, along an arrow pointing east, one, zero, which we'll call d hat.",
+     "item": "B19",
+     "sentence": 7,
+     "part": 0,
+     "old": "Take a speed of ten metres per second, along an arrow pointing east, one, zero.",
+     "old_dur_s": 6.025,
+     "beat": false
+    },
+    {
+     "scene": "s08_product_rule",
+     "neighbours": [
+      "S15",
+      "S17"
+     ],
+     "neighbours_lufs": [
+      -16.1,
+      -15.18
+     ],
+     "target_lufs": -15.61,
+     "raw_lufs": -24.26,
+     "gain_db": 8.88,
+     "limiter_gr_db": -6.36,
+     "final_lufs": -15.62,
+     "true_peak_dbtp": -1.83,
+     "within_1p5_lu": true,
+     "dur_s": 17.375,
+     "new": "Second, the old number times the change in the arrow, which went from one, zero to zero point nine nine five, zero point one, a change of minus zero point zero zero five, zero point one: ten times that is minus zero point zero five, one.",
+     "item": "B4",
+     "sentence": 16,
+     "part": 0,
+     "old": "Second, the old number, times the change in the arrow: ten times minus zero point zero zero five, zero point one, which is minus zero point zero five, one.",
+     "old_dur_s": 11.725,
+     "beat": false
+    },
+    {
+     "scene": "s08_product_rule",
+     "neighbours": [
+      "S21",
+      "S23"
+     ],
+     "neighbours_lufs": [
+      -16.11,
+      -16.36
+     ],
+     "target_lufs": -16.23,
+     "raw_lufs": -24.49,
+     "gain_db": 8.76,
+     "limiter_gr_db": -5.66,
+     "final_lufs": -16.25,
+     "true_peak_dbtp": -1.81,
+     "within_1p5_lu": true,
+     "dur_s": 15.125,
+     "new": "Divide each piece by the time step: the first two stay at about one, but the third goes from zero point one to zero point zero five to zero point zero two five, so as the time step shrinks, the third piece vanishes.",
+     "item": "B3",
+     "sentence": 22,
+     "part": 0,
+     "old": "So after we divide by the time step and let it shrink, the third piece vanishes.",
+     "old_dur_s": 5.55,
+     "beat": false
+    },
+    {
+     "scene": "s14_steady_but_turning",
+     "neighbours": [
+      "S14",
+      "S17"
+     ],
+     "neighbours_lufs": [
+      -16.21,
+      -15.9
+     ],
+     "target_lufs": -16.05,
+     "raw_lufs": -24.9,
+     "gain_db": 9.72,
+     "limiter_gr_db": -3.96,
+     "final_lufs": -16.11,
+     "true_peak_dbtp": -1.77,
+     "within_1p5_lu": true,
+     "dur_s": 6.675,
+     "new": "In a tropical cyclone, that push is the pressure force, because the pressure is lowest in the eye.",
+     "item": "B1",
+     "sentence": 15,
+     "part": 0,
+     "old": "In a tropical cyclone, it's mostly the pressure force, because the pressure is lowest in the eye.",
+     "old_dur_s": 6.525,
+     "beat": false
+    },
+    {
+     "scene": "s14_steady_but_turning",
+     "neighbours": [
+      "S14",
+      "S17"
+     ],
+     "neighbours_lufs": [
+      -16.21,
+      -15.9
+     ],
+     "target_lufs": -16.05,
+     "raw_lufs": -24.69,
+     "gain_db": 9.22,
+     "limiter_gr_db": -5.92,
+     "final_lufs": -16.06,
+     "true_peak_dbtp": -1.71,
+     "within_1p5_lu": true,
+     "dur_s": 10.2,
+     "new": "The Earth's spin pushes the other way, a little outward, about twenty times weaker, so the pressure force has to be a little stronger than the turning alone needs.",
+     "item": "B1",
+     "sentence": 16,
+     "part": 0,
+     "old": "The Earth's spin adds a smaller push, about twenty times smaller here.",
+     "old_dur_s": 4.825,
+     "beat": false
+    },
+    {
+     "scene": "s18_ian_stack",
+     "neighbours": [
+      "S6",
+      "S8"
+     ],
+     "neighbours_lufs": [
+      -15.87,
+      -16.21
+     ],
+     "target_lufs": -16.04,
+     "raw_lufs": -24.39,
+     "gain_db": 8.92,
+     "limiter_gr_db": -5.5,
+     "final_lufs": -16.06,
+     "true_peak_dbtp": -1.84,
+     "within_1p5_lu": true,
+     "dur_s": 14.25,
+     "new": "Then come eight hundred and fifty hectopascals, about one point four kilometres up, five hundred, about six kilometres, two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres.",
+     "item": "B12",
+     "sentence": 7,
+     "part": 0,
+     "old": "Then come eight hundred and fifty hectopascals, about one and a half kilometres up, five hundred, about six kilometres, two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres.",
+     "old_dur_s": 13.925,
+     "beat": true
+    },
+    {
+     "scene": "s19_ian_layers_lit",
+     "neighbours": [
+      "S2",
+      "S4"
+     ],
+     "neighbours_lufs": [
+      -16.4,
+      -16.66
+     ],
+     "target_lufs": -16.53,
+     "raw_lufs": -25.12,
+     "gain_db": 8.94,
+     "limiter_gr_db": -2.62,
+     "final_lufs": -16.54,
+     "true_peak_dbtp": -1.94,
+     "within_1p5_lu": true,
+     "dur_s": 3.575,
+     "new": "At one point four kilometres, it's almost zero.",
+     "item": "B12",
+     "sentence": 3,
+     "part": 0,
+     "old": "At one and a half kilometres, it's almost zero.",
+     "old_dur_s": 3.475,
+     "beat": false
+    },
+    {
+     "scene": "s20_ian_curtain",
+     "neighbours": [
+      "S9",
+      "S11"
+     ],
+     "neighbours_lufs": [
+      -18.25,
+      -16.46
+     ],
+     "target_lufs": -17.26,
+     "raw_lufs": -24.49,
+     "gain_db": 7.52,
+     "limiter_gr_db": -3.72,
+     "final_lufs": -17.27,
+     "true_peak_dbtp": -1.78,
+     "within_1p5_lu": true,
+     "dur_s": 9.8,
+     "new": "Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one point four kilometres up.",
+     "item": "B12",
+     "sentence": 10,
+     "part": 0,
+     "old": "Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one and a half kilometres up.",
+     "old_dur_s": 9.475,
+     "beat": true
+    },
+    {
+     "scene": "s20_ian_curtain",
+     "neighbours": [
+      "S11",
+      "S13"
+     ],
+     "neighbours_lufs": [
+      -16.46,
+      -16.56
+     ],
+     "target_lufs": -16.51,
+     "raw_lufs": -23.97,
+     "gain_db": 7.46,
+     "limiter_gr_db": 0.0,
+     "final_lufs": -16.51,
+     "true_peak_dbtp": -2.25,
+     "within_1p5_lu": true,
+     "dur_s": 1.875,
+     "new": "Here's a quick check.",
+     "item": "B13",
+     "sentence": 12,
+     "part": 0,
+     "old": "The inflow alone says the air must rise, at about a metre per second… and radar on a hurricane-hunter aircraft measured it: about three metres per second at nine kilometres up, with single towers near ten.",
+     "old_dur_s": 14.25,
+     "beat": false
+    },
+    {
+     "scene": "s20_ian_curtain",
+     "neighbours": [
+      "S11",
+      "S13"
+     ],
+     "neighbours_lufs": [
+      -16.46,
+      -16.56
+     ],
+     "target_lufs": -16.51,
+     "raw_lufs": -24.72,
+     "gain_db": 8.51,
+     "limiter_gr_db": -2.52,
+     "final_lufs": -16.51,
+     "true_peak_dbtp": -1.84,
+     "within_1p5_lu": true,
+     "dur_s": 10.175,
+     "new": "Air flows in through the side of a cylinder thirty kilometres in radius, in a layer about one kilometre deep, at about sixteen metres per second.",
+     "item": "B13",
+     "sentence": 12,
+     "part": 1,
+     "old": null,
+     "old_dur_s": null,
+     "beat": false
+    },
+    {
+     "scene": "s20_ian_curtain",
+     "neighbours": [
+      "S11",
+      "S13"
+     ],
+     "neighbours_lufs": [
+      -16.46,
+      -16.56
+     ],
+     "target_lufs": -16.51,
+     "raw_lufs": -23.95,
+     "gain_db": 7.84,
+     "limiter_gr_db": -5.47,
+     "final_lufs": -16.52,
+     "true_peak_dbtp": -1.94,
+     "within_1p5_lu": true,
+     "dur_s": 14.0,
+     "new": "All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: two times one thousand times sixteen, divided by thirty thousand, is about one metre per second.",
+     "item": "B13",
+     "sentence": 12,
+     "part": 2,
+     "old": null,
+     "old_dur_s": null,
+     "beat": true
+    },
+    {
+     "scene": "s20_ian_curtain",
+     "neighbours": [
+      "S11",
+      "S13"
+     ],
+     "neighbours_lufs": [
+      -16.46,
+      -16.56
+     ],
+     "target_lufs": -16.51,
+     "raw_lufs": -24.32,
+     "gain_db": 8.2,
+     "limiter_gr_db": -6.07,
+     "final_lufs": -16.52,
+     "true_peak_dbtp": -1.64,
+     "within_1p5_lu": true,
+     "dur_s": 9.725,
+     "new": "And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with single towers near ten.",
+     "item": "B13",
+     "sentence": 12,
+     "part": 3,
+     "old": null,
+     "old_dur_s": null,
+     "beat": true
+    },
+    {
+     "scene": "s23_amphan_ring",
+     "neighbours": [
+      "S7",
+      "S10"
+     ],
+     "neighbours_lufs": [
+      -15.95,
+      -16.91
+     ],
+     "target_lufs": -16.4,
+     "raw_lufs": -24.37,
+     "gain_db": 8.39,
+     "limiter_gr_db": -5.19,
+     "final_lufs": -16.42,
+     "true_peak_dbtp": -1.77,
+     "within_1p5_lu": true,
+     "dur_s": 13.2,
+     "new": "The official estimate at that hour, averaged over three minutes, was about ninety knots, which is about forty six metres per second, and a lowest pressure of nine hundred and fifty six hectopascals.",
+     "item": "B14",
+     "sentence": 8,
+     "part": 0,
+     "old": "The official estimate at that hour, averaged over three minutes, was about ninety knots, or about a hundred and sixty seven kilometres per hour.",
+     "old_dur_s": 9.65,
+     "beat": false
+    },
+    {
+     "scene": "s23_amphan_ring",
+     "neighbours": [
+      "S7",
+      "S10"
+     ],
+     "neighbours_lufs": [
+      -15.95,
+      -16.91
+     ],
+     "target_lufs": -16.4,
+     "raw_lufs": -24.95,
+     "gain_db": 8.9,
+     "limiter_gr_db": -5.02,
+     "final_lufs": -16.42,
+     "true_peak_dbtp": -1.9,
+     "within_1p5_lu": true,
+     "dur_s": 8.05,
+     "new": "ERA5's lowest pressure is only about nine hundred and sixty seven, so the reanalysis storm is much too weak.",
+     "item": "B14",
+     "sentence": 9,
+     "part": 0,
+     "old": "So the reanalysis is far too weak.",
+     "old_dur_s": 2.775,
+     "beat": true
+    },
+    {
+     "scene": "s27_surge",
+     "neighbours": [
+      "S2",
+      "S4"
+     ],
+     "neighbours_lufs": [
+      -15.87,
+      -16.09
+     ],
+     "target_lufs": -15.98,
+     "raw_lufs": -24.77,
+     "gain_db": 9.28,
+     "limiter_gr_db": -4.81,
+     "final_lufs": -16.0,
+     "true_peak_dbtp": -1.93,
+     "within_1p5_lu": true,
+     "dur_s": 15.1,
+     "new": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops, and Ian's centre was about seventy five hectopascals below normal, so that's only about seventy five centimetres.",
+     "item": "B25b",
+     "sentence": 3,
+     "part": 0,
+     "old": "The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops.",
+     "old_dur_s": 7.625,
+     "beat": true
+    }
+   ]
+  }
+ }
 }

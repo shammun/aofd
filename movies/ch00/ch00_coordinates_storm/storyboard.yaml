@@ -26,7 +26,7 @@ concepts:
 - 'application: Cyclone Amphan (Bay of Bengal, 2020): eye, ERA5 ring means, inflow angle, section'
 - the wind onshore at a coast (numbers in Part 4); storm surge and its sign flip; tide gauges as the record of Ian's surge
 - 'before/after imagery: Ian (Sentinel-2, aerial) and Amphan (Sentinel-1 new water, 147 km2)'
-target_duration_s: 2505.248
+target_duration_s: 2568.325
 fps: 30
 size:
 - 1920
@@ -81,6 +81,396 @@ dry_run:
   sentences: 395
   words: 5900
   words_per_minute_overall: 142.6
+build_1:
+  tts:
+    tool: tools/tts.py
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/fix0/tts
+    voice: af_bella
+    speed: 1.0
+    audio_s: 2565.825
+    total_frames: 76975
+    cues: 625
+    warnings: []
+    sentences: 399
+    words: 6112
+    render_s: 1115.9
+    self_check:
+      expected_s: 2565.825
+      audio_s: 2565.825
+      diff_ms: 0.0
+      len_ok: true
+      cues_ok: true
+      spliced_fix0:
+        method: BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter (-1.5 dBTP)
+        corr_resynth: 0.9955
+        replaced:
+        - scene: s04_slopes_sin_cos
+          neighbours:
+          - S10
+          - S12
+          neighbours_lufs:
+          - -16.18
+          - -16.08
+          target_lufs: -16.13
+          raw_lufs: -25.36
+          gain_db: 9.97
+          limiter_gr_db: -5.84
+          final_lufs: -16.18
+          true_peak_dbtp: -1.88
+          within_1p5_lu: true
+          dur_s: 7.1
+          new: Turn by zero point zero one radians, about half a degree, to fifty three point seven degrees.
+          item: B6
+          sentence: 11
+          part: 0
+          old: Turn by zero point zero one radians.
+          old_dur_s: 3.05
+          beat: false
+        - scene: s08_product_rule
+          neighbours:
+          - S6
+          - S8
+          neighbours_lufs:
+          - -16.41
+          - -16.69
+          target_lufs: -16.55
+          raw_lufs: -24.22
+          gain_db: 8.25
+          limiter_gr_db: -6.53
+          final_lufs: -16.56
+          true_peak_dbtp: -1.84
+          within_1p5_lu: true
+          dur_s: 7.25
+          new: Take a speed of ten metres per second, along an arrow pointing east, one, zero, which we'll call d hat.
+          item: B19
+          sentence: 7
+          part: 0
+          old: Take a speed of ten metres per second, along an arrow pointing east, one, zero.
+          old_dur_s: 6.025
+          beat: false
+        - scene: s08_product_rule
+          neighbours:
+          - S15
+          - S17
+          neighbours_lufs:
+          - -16.1
+          - -15.18
+          target_lufs: -15.61
+          raw_lufs: -24.26
+          gain_db: 8.88
+          limiter_gr_db: -6.36
+          final_lufs: -15.62
+          true_peak_dbtp: -1.83
+          within_1p5_lu: true
+          dur_s: 17.375
+          new: 'Second, the old number times the change in the arrow, which went from one, zero to zero point nine nine five, zero point one, a change of
+            minus zero point zero zero five, zero point one: ten times that is minus zero point zero five, one.'
+          item: B4
+          sentence: 16
+          part: 0
+          old: 'Second, the old number, times the change in the arrow: ten times minus zero point zero zero five, zero point one, which is minus zero point
+            zero five, one.'
+          old_dur_s: 11.725
+          beat: false
+        - scene: s08_product_rule
+          neighbours:
+          - S21
+          - S23
+          neighbours_lufs:
+          - -16.11
+          - -16.36
+          target_lufs: -16.23
+          raw_lufs: -24.49
+          gain_db: 8.76
+          limiter_gr_db: -5.66
+          final_lufs: -16.25
+          true_peak_dbtp: -1.81
+          within_1p5_lu: true
+          dur_s: 15.125
+          new: 'Divide each piece by the time step: the first two stay at about one, but the third goes from zero point one to zero point zero five to zero
+            point zero two five, so as the time step shrinks, the third piece vanishes.'
+          item: B3
+          sentence: 22
+          part: 0
+          old: So after we divide by the time step and let it shrink, the third piece vanishes.
+          old_dur_s: 5.55
+          beat: false
+        - scene: s14_steady_but_turning
+          neighbours:
+          - S14
+          - S17
+          neighbours_lufs:
+          - -16.21
+          - -15.9
+          target_lufs: -16.05
+          raw_lufs: -24.9
+          gain_db: 9.72
+          limiter_gr_db: -3.96
+          final_lufs: -16.11
+          true_peak_dbtp: -1.77
+          within_1p5_lu: true
+          dur_s: 6.675
+          new: In a tropical cyclone, that push is the pressure force, because the pressure is lowest in the eye.
+          item: B1
+          sentence: 15
+          part: 0
+          old: In a tropical cyclone, it's mostly the pressure force, because the pressure is lowest in the eye.
+          old_dur_s: 6.525
+          beat: false
+        - scene: s14_steady_but_turning
+          neighbours:
+          - S14
+          - S17
+          neighbours_lufs:
+          - -16.21
+          - -15.9
+          target_lufs: -16.05
+          raw_lufs: -24.69
+          gain_db: 9.22
+          limiter_gr_db: -5.92
+          final_lufs: -16.06
+          true_peak_dbtp: -1.71
+          within_1p5_lu: true
+          dur_s: 10.2
+          new: The Earth's spin pushes the other way, a little outward, about twenty times weaker, so the pressure force has to be a little stronger than
+            the turning alone needs.
+          item: B1
+          sentence: 16
+          part: 0
+          old: The Earth's spin adds a smaller push, about twenty times smaller here.
+          old_dur_s: 4.825
+          beat: false
+        - scene: s18_ian_stack
+          neighbours:
+          - S6
+          - S8
+          neighbours_lufs:
+          - -15.87
+          - -16.21
+          target_lufs: -16.04
+          raw_lufs: -24.39
+          gain_db: 8.92
+          limiter_gr_db: -5.5
+          final_lufs: -16.06
+          true_peak_dbtp: -1.84
+          within_1p5_lu: true
+          dur_s: 14.25
+          new: Then come eight hundred and fifty hectopascals, about one point four kilometres up, five hundred, about six kilometres, two hundred, about
+            twelve kilometres, and one hundred and fifty, about fourteen kilometres.
+          item: B12
+          sentence: 7
+          part: 0
+          old: Then come eight hundred and fifty hectopascals, about one and a half kilometres up, five hundred, about six kilometres, two hundred, about
+            twelve kilometres, and one hundred and fifty, about fourteen kilometres.
+          old_dur_s: 13.925
+          beat: true
+        - scene: s19_ian_layers_lit
+          neighbours:
+          - S2
+          - S4
+          neighbours_lufs:
+          - -16.4
+          - -16.66
+          target_lufs: -16.53
+          raw_lufs: -25.12
+          gain_db: 8.94
+          limiter_gr_db: -2.62
+          final_lufs: -16.54
+          true_peak_dbtp: -1.94
+          within_1p5_lu: true
+          dur_s: 3.575
+          new: At one point four kilometres, it's almost zero.
+          item: B12
+          sentence: 3
+          part: 0
+          old: At one and a half kilometres, it's almost zero.
+          old_dur_s: 3.475
+          beat: false
+        - scene: s20_ian_curtain
+          neighbours:
+          - S9
+          - S11
+          neighbours_lufs:
+          - -18.25
+          - -16.46
+          target_lufs: -17.26
+          raw_lufs: -24.49
+          gain_db: 7.52
+          limiter_gr_db: -3.72
+          final_lufs: -17.27
+          true_peak_dbtp: -1.78
+          within_1p5_lu: true
+          dur_s: 9.8
+          new: Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one point four kilometres
+            up.
+          item: B12
+          sentence: 10
+          part: 0
+          old: Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one and a half kilometres
+            up.
+          old_dur_s: 9.475
+          beat: true
+        - scene: s20_ian_curtain
+          neighbours:
+          - S11
+          - S13
+          neighbours_lufs:
+          - -16.46
+          - -16.56
+          target_lufs: -16.51
+          raw_lufs: -23.97
+          gain_db: 7.46
+          limiter_gr_db: 0.0
+          final_lufs: -16.51
+          true_peak_dbtp: -2.25
+          within_1p5_lu: true
+          dur_s: 1.875
+          new: Here's a quick check.
+          item: B13
+          sentence: 12
+          part: 0
+          old: 'The inflow alone says the air must rise, at about a metre per second… and radar on a hurricane-hunter aircraft measured it: about three
+            metres per second at nine kilometres up, with single towers near ten.'
+          old_dur_s: 14.25
+          beat: false
+        - scene: s20_ian_curtain
+          neighbours:
+          - S11
+          - S13
+          neighbours_lufs:
+          - -16.46
+          - -16.56
+          target_lufs: -16.51
+          raw_lufs: -24.72
+          gain_db: 8.51
+          limiter_gr_db: -2.52
+          final_lufs: -16.51
+          true_peak_dbtp: -1.84
+          within_1p5_lu: true
+          dur_s: 10.175
+          new: Air flows in through the side of a cylinder thirty kilometres in radius, in a layer about one kilometre deep, at about sixteen metres per
+            second.
+          item: B13
+          sentence: 12
+          part: 1
+          old: null
+          old_dur_s: null
+          beat: false
+        - scene: s20_ian_curtain
+          neighbours:
+          - S11
+          - S13
+          neighbours_lufs:
+          - -16.46
+          - -16.56
+          target_lufs: -16.51
+          raw_lufs: -23.95
+          gain_db: 7.84
+          limiter_gr_db: -5.47
+          final_lufs: -16.52
+          true_peak_dbtp: -1.94
+          within_1p5_lu: true
+          dur_s: 14.0
+          new: 'All of it has to leave through the cylinder''s lid, which is a much bigger area, so it rises more slowly: two times one thousand times sixteen,
+            divided by thirty thousand, is about one metre per second.'
+          item: B13
+          sentence: 12
+          part: 2
+          old: null
+          old_dur_s: null
+          beat: true
+        - scene: s20_ian_curtain
+          neighbours:
+          - S11
+          - S13
+          neighbours_lufs:
+          - -16.46
+          - -16.56
+          target_lufs: -16.51
+          raw_lufs: -24.32
+          gain_db: 8.2
+          limiter_gr_db: -6.07
+          final_lufs: -16.52
+          true_peak_dbtp: -1.64
+          within_1p5_lu: true
+          dur_s: 9.725
+          new: 'And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with single towers
+            near ten.'
+          item: B13
+          sentence: 12
+          part: 3
+          old: null
+          old_dur_s: null
+          beat: true
+        - scene: s23_amphan_ring
+          neighbours:
+          - S7
+          - S10
+          neighbours_lufs:
+          - -15.95
+          - -16.91
+          target_lufs: -16.4
+          raw_lufs: -24.37
+          gain_db: 8.39
+          limiter_gr_db: -5.19
+          final_lufs: -16.42
+          true_peak_dbtp: -1.77
+          within_1p5_lu: true
+          dur_s: 13.2
+          new: The official estimate at that hour, averaged over three minutes, was about ninety knots, which is about forty six metres per second, and
+            a lowest pressure of nine hundred and fifty six hectopascals.
+          item: B14
+          sentence: 8
+          part: 0
+          old: The official estimate at that hour, averaged over three minutes, was about ninety knots, or about a hundred and sixty seven kilometres per
+            hour.
+          old_dur_s: 9.65
+          beat: false
+        - scene: s23_amphan_ring
+          neighbours:
+          - S7
+          - S10
+          neighbours_lufs:
+          - -15.95
+          - -16.91
+          target_lufs: -16.4
+          raw_lufs: -24.95
+          gain_db: 8.9
+          limiter_gr_db: -5.02
+          final_lufs: -16.42
+          true_peak_dbtp: -1.9
+          within_1p5_lu: true
+          dur_s: 8.05
+          new: ERA5's lowest pressure is only about nine hundred and sixty seven, so the reanalysis storm is much too weak.
+          item: B14
+          sentence: 9
+          part: 0
+          old: So the reanalysis is far too weak.
+          old_dur_s: 2.775
+          beat: true
+        - scene: s27_surge
+          neighbours:
+          - S2
+          - S4
+          neighbours_lufs:
+          - -15.87
+          - -16.09
+          target_lufs: -15.98
+          raw_lufs: -24.77
+          gain_db: 9.28
+          limiter_gr_db: -4.81
+          final_lufs: -16.0
+          true_peak_dbtp: -1.93
+          within_1p5_lu: true
+          dur_s: 15.1
+          new: 'The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops, and Ian''s centre
+            was about seventy five hectopascals below normal, so that''s only about seventy five centimetres.'
+          item: B25b
+          sentence: 3
+          part: 0
+          old: 'The low pressure helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops.'
+          old_dur_s: 7.625
+          beat: true
 conventions:
   polar angle: theta from east, anticlockwise as seen from above; compass bearing from north, clockwise as seen from above; wind direction = 'from'
   spoken symbols: '''r hat'', ''theta hat'', ''delta theta'', ''d r hat by d theta'', ''d theta by d t'', ''v squared over r'', ''u sub r'', ''u
@@ -409,16 +799,16 @@ honesty_notes:
   on one data picture.'
 - 's18-s20: one centre (the model''s 10-m calm centre) for every level; the vortex tilt is ignored (research §1d: 500-hPa dipole); ring means
   at 100 km and the section average it out.'
-- 's20: the rising air is computed and measured (2026-11-05): continuity of the HRRR f00 ring-mean inflow says ≈ 1 m/s (said in words, no equation
-  on screen); the NOAA P-3 tail Doppler radar measured a ring-mean peak of 3.3 m/s at 8.5 km (said ''about three … nine kilometres up'') and single
+- 's20: the rising air is computed and measured (2026-11-05): continuity of the HRRR f00 ring-mean inflow says ≈ 1 m/s, shown as the box estimate w = 2h|u_r|/r = 2 × 1000 × 16 / 30 000 ≈ 1 m/s (fix 0 B13; CHECK DS30 box 1.04 vs integral 1.04 m/s); the NOAA P-3 tail Doppler radar measured a ring-mean peak of 3.3 m/s at 8.5 km (said ''about three … eight and a half kilometres up'') and single
   updraughts to 11.6 m/s (''single towers near ten''). The radar is ≈ 8 h before the HRRR 18 UTC winds (source line only, not voiced). Sinking in
   the clear eye is not measured (no echoes): grey band in words only, no number. The HRRR analysis vertical velocity is not used (≈ 0 at hour 0).
   s24 keeps schematic in-up-out arrows (no measured w for Amphan).'
 - 's20: the 10-m spin (34.8 m/s at 25 km) is weaker than the 850-hPa spin (55 m/s at 30 km): said as the sea slowing the air near the surface.'
+- 's14 (fix 0 B1, 2026-11-05): in this northern-hemisphere cyclone the air goes round anticlockwise (seen from above), so the Coriolis push (to the right of the motion) points OUTWARD, about 1/20 of the turning; the inward push is the pressure force, which must be a little stronger than v²/r alone (0.048 + 0.002 m/s²). Said and drawn outward; the violet arrow is drawn 6× longer (listed).'
 - 's21: ''first super cyclonic storm in the Bay since 1999'' is IMD''s statement (cited in the manifest); intensity classes are left to U15.'
-- 's23: ERA5 cannot resolve Amphan''s eye (0.25-deg boxes vs a pinhole eye); the ring is at ERA5''s strongest-spin radius (100 km), not the eyewall;
-  ERA5 is far weaker than the official 90 kt (said).'
-- 's23: Ian (HRRR, 25 km) and Amphan (ERA5, 100 km) inflow angles come from different products and radii; compared as a shape, not a speed.'
+- 's23: ERA5 cannot resolve Amphan''s eye (0.25-deg boxes vs a pinhole eye); the ring is at ERA5''s strongest-spin radius (50 km), not the eyewall;
+  ERA5 is weaker than the official estimate, compared like with like (fix 0 B14): lowest pressure ERA5 967 vs official 956 hPa; the official 90 kt (≈ 46 m/s, 3-min maximum) is not set against a ring mean.'
+- 's23: Ian (HRRR, 25 km) and Amphan (ERA5, 50 km) inflow angles come from different products and radii; compared as a shape, not a speed.'
 - 's26: the onshore wind is the nearest HRRR grid point at 20 UTC (33 m/s from 222 deg); its along/across split is derived in Part 4.'
 - 's27: the inverse-barometer rule (≈ 1 cm per hPa) is a standard approximation; the Fort Myers gauge is upriver (2.2 m above predicted tide),
   the NHC value is above the ground at the beach (3-4.6 m).'
@@ -437,23 +827,23 @@ maths_skip:
 - block: B1
   what: how r-hat and theta-hat turn (D12-D14)
   intro: s03_tip_on_circle S0
-  chip: every step · not needed for the weather intuition · skip to 11:35
+  chip: every step · optional / skip to 11:38
   chip_on: 155.275
   chip_off: end of the intro sentence + 4 s
-  skip_to_s: 694.55
-  skip_to: '11:35 (provisional: refill after the final TTS)'
-  takeaway: 's08_product_rule S0: ''If you skipped, here''s what to keep: as the angle grows, r-hat swings towards theta-hat, and theta-hat towards
-    minus r-hat'''
+  skip_to_s: 698.6
+  skip_to: 11:38 (final TTS)
+  takeaway: 's08_product_rule S0: ''If you skipped, here''s what to keep: as the angle grows, r-hat swings towards theta-hat, and theta-hat towards minus
+    r-hat'''
 - block: B2
   what: product rule -> velocity -> acceleration (D15-D18)
   intro: s08_product_rule S1-S2
-  chip: every step · not needed for the weather intuition · skip to 19:49
-  chip_on: 705.65
+  chip: every step · optional / skip to 20:09
+  chip_on: 709.7
   chip_off: end of the intro sentence + 4 s
-  skip_to_s: 1189.45
-  skip_to: '19:49 (provisional: refill after the final TTS)'
-  takeaway: 's13_acceleration_numbers S0: ''If you skipped, here''s what to keep: a parcel going round at a steady speed v always accelerates
-    towards the centre by v squared over r'''
+  skip_to_s: 1209.95
+  skip_to: 20:09 (final TTS)
+  takeaway: 's13_acceleration_numbers S0: ''If you skipped, here''s what to keep: a parcel going round at a steady speed v always accelerates towards the
+    centre by v squared over r'''
 chapter_marks:
 - t: 0:00
   t_s: 0.3
@@ -467,56 +857,56 @@ chapter_marks:
   t_s: 155.275
   scene: s03_tip_on_circle
   name: how r-hat turns (maths block 1)
-- t: '11:35'
-  t_s: 694.55
+- t: '11:38'
+  t_s: 698.6
   scene: s08_product_rule
   name: product rule to acceleration (maths block 2)
-- t: '19:49'
-  t_s: 1189.45
+- t: '20:09'
+  t_s: 1209.95
   scene: s13_acceleration_numbers
   name: how big, and why a steady speed accelerates
-- t: '22:54'
-  t_s: 1373.725
+- t: '23:19'
+  t_s: 1399.75
   scene: s15_cylinder
   name: 'a tall storm: cylindrical coordinates'
-- t: '24:39'
-  t_s: 1478.95
+- t: '25:04'
+  t_s: 1504.975
   scene: s17_ian_check
   name: is Ian shown right?
-- t: '25:56'
-  t_s: 1556.325
+- t: '26:22'
+  t_s: 1582.35
   scene: s18_ian_stack
   name: Ian layer by layer
-- t: '28:25'
-  t_s: 1705.475
+- t: '28:52'
+  t_s: 1732.175
   scene: s20_ian_curtain
   name: in, up and out
-- t: '30:19'
-  t_s: 1818.9
+- t: '31:19'
+  t_s: 1879.625
   scene: s21_amphan_intro
   name: 'second storm: Cyclone Amphan'
-- t: '33:50'
-  t_s: 2030.475
+- t: '35:00'
+  t_s: 2100.05
   scene: s25_why_cylindrical
   name: why cylindrical coordinates
-- t: '34:42'
-  t_s: 2081.75
+- t: '35:51'
+  t_s: 2151.325
   scene: s26_onshore
   name: back to the coast
-- t: '35:28'
-  t_s: 2128.375
+- t: '36:37'
+  t_s: 2197.95
   scene: s27_surge
   name: storm surge
-- t: '37:02'
-  t_s: 2221.55
+- t: '38:18'
+  t_s: 2298.6
   scene: s28_ian_record
   name: Ian's surge, measured by gauges
-- t: '37:43'
-  t_s: 2263.15
+- t: '39:00'
+  t_s: 2340.2
   scene: s29_flood_flight
   name: a flood seen from space
-- t: '39:35'
-  t_s: 2375.05
+- t: '41:01'
+  t_s: 2461.425
   scene: s31_recap
   name: to sum up
 scenes:
@@ -806,7 +1196,7 @@ scenes:
 - id: s04_slopes_sin_cos
   t:
   - 266.35
-  - 387.625
+  - 391.675
   sentence_times:
   - - 266.35
     - 274.175
@@ -831,19 +1221,19 @@ scenes:
   - - 333.75
     - 344.325
   - - 344.675
-    - 347.725
-  - - 348.075
-    - 357.125
-  - - 357.475
-    - 363.4
-  - - 364.9
-    - 373.45
-  - - 373.8
-    - 379.05
-  - - 380.55
-    - 382.375
-  - - 382.725
-    - 386.825
+    - 351.775
+  - - 352.125
+    - 361.175
+  - - 361.525
+    - 367.45
+  - - 368.95
+    - 377.5
+  - - 377.85
+    - 383.1
+  - - 384.6
+    - 386.425
+  - - 386.775
+    - 390.875
   beat: 'building block D12 (4)-(6): the slopes of cosine and sine (owned here)'
   visual: 'Same unit circle (left). S3: the tip''s east part (orange band along x, ''cos θ'') and north part (''sin θ'') as the two legs of its
     triangle. S5-S6: after the turn, the legs change: the east leg shrinks by a rose sliver labelled ''≈ −sin θ Δθ'', the north leg grows by a
@@ -853,18 +1243,17 @@ scenes:
     inputs row ''θ ≈ 53°, cos θ = 0.6, sin θ = 0.8, Δθ = 0.01 rad'' first; each result on its words. Right side x 1420-1840 under the CalcStack:
     two small graphs of cos θ and sin θ (0-360 deg) with the tangent line at 53 deg drawn on each and its slope ''−0.8'' / ''0.6'' (orange solid
     / dashed, end labels).'
-  voiceover: 'This little picture gives us something that no earlier movie in this series has shown: how fast cosine and sine change. In the derivatives
-    movie, we met the slope, or derivative: the small change in a quantity, divided by the small change that caused it, as both shrink towards
-    zero. The tip''s east part is cosine theta, and its north part is sine theta. The tip moved delta theta along theta hat, which is minus sine
-    theta, cosine theta. So its east part changes by about minus sine theta times delta theta. And its north part changes by about cosine theta
-    times delta theta. [beat] Now divide both changes by delta theta, and let delta theta shrink towards zero. The slope of cosine theta is minus
-    sine theta. And the slope of sine theta is cosine theta. [beat] The minus sign makes sense: turning anticlockwise from east, the tip moves
-    towards the west, so its east part shrinks. Let''s check with numbers, at the balloon''s angle from Part 1, about fifty three degrees, where
-    the cosine is zero point six and the sine is zero point eight. Turn by zero point zero one radians. The cosine drops from zero point six zero
-    zero to zero point five nine two, a change of minus zero point zero zero eight. Divided by zero point zero one, that''s minus zero point eight:
-    minus the sine. [beat] The sine grows from zero point eight zero zero to zero point eight zero six, a change of zero point zero zero six.
-    Divided by zero point zero one, that''s zero point six: the cosine. [beat] So the rule works. These two slopes will come back again and again
-    in this series.'
+  voiceover: 'This little picture gives us something that no earlier movie in this series has shown: how fast cosine and sine change. In the derivatives movie,
+    we met the slope, or derivative: the small change in a quantity, divided by the small change that caused it, as both shrink towards zero. The tip''s east
+    part is cosine theta, and its north part is sine theta. The tip moved delta theta along theta hat, which is minus sine theta, cosine theta. So its east
+    part changes by about minus sine theta times delta theta. And its north part changes by about cosine theta times delta theta. [beat] Now divide both changes
+    by delta theta, and let delta theta shrink towards zero. The slope of cosine theta is minus sine theta. And the slope of sine theta is cosine theta. [beat]
+    The minus sign makes sense: turning anticlockwise from east, the tip moves towards the west, so its east part shrinks. Let''s check with numbers, at the
+    balloon''s angle from Part 1, about fifty three degrees, where the cosine is zero point six and the sine is zero point eight. Turn by zero point zero
+    one radians, about half a degree, to fifty three point seven degrees. The cosine drops from zero point six zero zero to zero point five nine two, a change
+    of minus zero point zero zero eight. Divided by zero point zero one, that''s minus zero point eight: minus the sine. [beat] The sine grows from zero point
+    eight zero zero to zero point eight zero six, a change of zero point zero zero six. Divided by zero point zero one, that''s zero point six: the cosine.
+    [beat] So the rule works. These two slopes will come back again and again in this series.'
   on_screen_eq:
     latex: \frac{d}{d\theta}\cos\theta=-\sin\theta,\qquad \frac{d}{d\theta}\sin\theta=\cos\theta
     vallis_eq: none in Vallis (standard calculus; derived on screen from the unit circle, D12)
@@ -916,39 +1305,39 @@ scenes:
   layout: Graphs sit under the CalcStack in the maths zone, >= 40 px apart; no axis through a word; ticks 44 px.
 - id: s05_dr_dtheta
   t:
-  - 387.625
-  - 457.325
+  - 391.675
+  - 461.375
   sentence_times:
-  - - 387.625
-    - 391.6
-  - - 391.95
-    - 397.3
-  - - 397.65
-    - 399.9
-  - - 400.25
-    - 403.225
-  - - 404.725
-    - 408.275
-  - - 408.625
-    - 411.7
-  - - 412.05
-    - 416.45
-  - - 417.95
-    - 423.025
-  - - 423.375
-    - 430.125
-  - - 430.475
-    - 432.475
-  - - 432.825
-    - 435.8
-  - - 436.15
-    - 442.35
-  - - 442.7
-    - 447.85
-  - - 449.35
-    - 451.4
-  - - 451.75
-    - 456.525
+  - - 391.675
+    - 395.65
+  - - 396.0
+    - 401.35
+  - - 401.7
+    - 403.95
+  - - 404.3
+    - 407.275
+  - - 408.775
+    - 412.325
+  - - 412.675
+    - 415.75
+  - - 416.1
+    - 420.5
+  - - 422.0
+    - 427.075
+  - - 427.425
+    - 434.175
+  - - 434.525
+    - 436.525
+  - - 436.875
+    - 439.85
+  - - 440.2
+    - 446.4
+  - - 446.75
+    - 451.9
+  - - 453.4
+    - 455.45
+  - - 455.8
+    - 460.575
   beat: 'building block D13: d r-hat / d theta = theta-hat'
   visual: 'Unit circle. S1-S3: the short arrow Δr̂ (gold) from the old tip to the new tip; tag ''Δr̂'' (KaTeX). S3: it lies along theta-hat at
     the tip (a ghost theta-hat beside it, ''same direction'' gold tick). Maths zone: S3 ''Δr̂ ≈ θ̂ Δθ''; S4-S5 the main equation (96 px) with
@@ -1005,61 +1394,61 @@ scenes:
   layout: Picture left, maths right; links never cross; KaTeX hats only (Should 2).
 - id: s06_dtheta_dtheta
   t:
-  - 457.325
-  - 577.05
+  - 461.375
+  - 581.1
   sentence_times:
-  - - 457.325
-    - 459.1
-  - - 459.45
-    - 462.55
-  - - 462.9
-    - 467.25
-  - - 467.6
-    - 469.175
-  - - 469.525
-    - 472.825
-  - - 473.175
-    - 478.375
-  - - 478.725
-    - 481.65
-  - - 482.0
-    - 483.575
-  - - 483.925
-    - 487.975
-  - - 488.325
-    - 492.875
-  - - 493.225
-    - 494.825
-  - - 495.175
-    - 497.9
-  - - 498.25
-    - 506.725
-  - - 507.075
-    - 512.525
-  - - 512.875
-    - 514.45
-  - - 514.8
-    - 516.8
-  - - 517.15
-    - 525.825
-  - - 526.175
-    - 531.225
-  - - 532.725
-    - 534.35
-  - - 534.7
-    - 541.075
-  - - 541.425
-    - 545.25
-  - - 545.6
-    - 549.4
-  - - 549.75
-    - 554.875
-  - - 556.375
-    - 562.175
-  - - 563.675
-    - 570.0
-  - - 570.35
-    - 576.25
+  - - 461.375
+    - 463.15
+  - - 463.5
+    - 466.6
+  - - 466.95
+    - 471.3
+  - - 471.65
+    - 473.225
+  - - 473.575
+    - 476.875
+  - - 477.225
+    - 482.425
+  - - 482.775
+    - 485.7
+  - - 486.05
+    - 487.625
+  - - 487.975
+    - 492.025
+  - - 492.375
+    - 496.925
+  - - 497.275
+    - 498.875
+  - - 499.225
+    - 501.95
+  - - 502.3
+    - 510.775
+  - - 511.125
+    - 516.575
+  - - 516.925
+    - 518.5
+  - - 518.85
+    - 520.85
+  - - 521.2
+    - 529.875
+  - - 530.225
+    - 535.275
+  - - 536.775
+    - 538.4
+  - - 538.75
+    - 545.125
+  - - 545.475
+    - 549.3
+  - - 549.65
+    - 553.45
+  - - 553.8
+    - 558.925
+  - - 560.425
+    - 566.225
+  - - 567.725
+    - 574.05
+  - - 574.4
+    - 580.3
   beat: 'building block D14 (steps 1-5): d theta-hat / d theta = −r-hat, from scratch'
   visual: 'Unit circle (left), one step per sentence, a small step number ''1''…''5'' in muted grey under the circle (no heading). Step 1 (S3-S5):
     theta-hat drawn FROM THE CENTRE (orange, dashed outline at first) — its tip on the same circle; a gold ''same start'' dot at the origin. Step
@@ -1136,49 +1525,49 @@ scenes:
   layout: Step numbers are small muted digits, not headings or chips. One arrow moves at a time.
 - id: s07_toward_centre
   t:
-  - 577.05
-  - 694.55
+  - 581.1
+  - 698.6
   sentence_times:
-  - - 577.05
-    - 580.25
-  - - 580.6
-    - 586.775
-  - - 587.125
-    - 590.525
-  - - 590.875
-    - 594.65
-  - - 595.0
-    - 600.025
-  - - 600.375
-    - 603.975
-  - - 604.325
-    - 610.9
-  - - 611.25
-    - 616.5
-  - - 616.85
-    - 622.05
-  - - 623.55
-    - 625.625
-  - - 625.975
-    - 631.75
-  - - 632.1
-    - 640.475
-  - - 640.825
-    - 646.6
-  - - 646.95
-    - 653.35
-  - - 654.85
-    - 660.325
-  - - 661.825
-    - 665.775
-  - - 666.125
-    - 673.775
-  - - 674.125
-    - 680.0
-  - - 681.5
-    - 687.8
-  - - 688.15
-    - 693.75
+  - - 581.1
+    - 584.3
+  - - 584.65
+    - 590.825
+  - - 591.175
+    - 594.575
+  - - 594.925
+    - 598.7
+  - - 599.05
+    - 604.075
+  - - 604.425
+    - 608.025
+  - - 608.375
+    - 614.95
+  - - 615.3
+    - 620.55
+  - - 620.9
+    - 626.1
+  - - 627.6
+    - 629.675
+  - - 630.025
+    - 635.8
+  - - 636.15
+    - 644.525
+  - - 644.875
+    - 650.65
+  - - 651.0
+    - 657.4
+  - - 658.9
+    - 664.375
+  - - 665.875
+    - 669.825
+  - - 670.175
+    - 677.825
+  - - 678.175
+    - 684.05
+  - - 685.55
+    - 691.85
+  - - 692.2
+    - 697.8
   beat: 'D14 (step 6 + checks): what −r-hat means at the balloon; numbers; components'
   visual: 'Left: Part 1''s station (slate PoleThermometer) and the 5-km circle; the balloon at three places (theta = 0, 25, 53 deg) with theta-hat
     (orange) drawn AT the balloon on S2-S4 (''north'', ''leans west''). S5-S6: the three theta-hat arrows lift off and slide to one common tail
@@ -1253,59 +1642,59 @@ scenes:
   layout: The tail-to-tail inset sits beside the circle with >= 40 px clear; links never cross; CalcStack x >= 1100.
 - id: s08_product_rule
   t:
-  - 694.55
-  - 851.475
+  - 698.6
+  - 871.975
   sentence_times:
-  - - 694.55
-    - 705.3
-  - - 705.65
-    - 711.9
-  - - 712.25
-    - 715.675
-  - - 716.025
-    - 724.3
-  - - 724.65
-    - 726.9
-  - - 727.25
-    - 734.6
-  - - 734.95
-    - 737.475
-  - - 737.825
-    - 743.85
-  - - 744.2
-    - 747.4
-  - - 748.9
-    - 752.8
-  - - 753.15
-    - 760.625
-  - - 760.975
-    - 767.625
-  - - 767.975
-    - 772.925
-  - - 774.425
-    - 776.675
-  - - 777.025
-    - 778.95
-  - - 779.3
-    - 785.975
-  - - 786.325
-    - 798.05
-  - - 798.4
-    - 810.775
-  - - 812.275
-    - 818.675
-  - - 820.175
-    - 821.95
-  - - 822.3
-    - 826.4
-  - - 826.75
-    - 833.05
-  - - 833.4
-    - 838.95
-  - - 839.3
-    - 841.85
-  - - 842.2
-    - 849.975
+  - - 698.6
+    - 709.35
+  - - 709.7
+    - 715.95
+  - - 716.3
+    - 719.725
+  - - 720.075
+    - 728.35
+  - - 728.7
+    - 730.95
+  - - 731.3
+    - 738.65
+  - - 739.0
+    - 741.525
+  - - 741.875
+    - 749.125
+  - - 749.475
+    - 752.675
+  - - 754.175
+    - 758.075
+  - - 758.425
+    - 765.9
+  - - 766.25
+    - 772.9
+  - - 773.25
+    - 778.2
+  - - 779.7
+    - 781.95
+  - - 782.3
+    - 784.225
+  - - 784.575
+    - 791.25
+  - - 791.6
+    - 808.975
+  - - 809.325
+    - 821.7
+  - - 823.2
+    - 829.6
+  - - 831.1
+    - 832.875
+  - - 833.225
+    - 837.325
+  - - 837.675
+    - 843.975
+  - - 844.325
+    - 859.45
+  - - 859.8
+    - 862.35
+  - - 862.7
+    - 870.475
   beat: 'building block D15: the product rule for a number times an arrow (owned here)'
   visual: 'S0 = block B1 takeaway: keyword ''what to keep: r̂ → θ̂, θ̂ → −r̂'' (gold swing arrows on a mini circle). MATHS-SKIP CHIP (block B2)
     on S1-S2: ''every step · skip to 19:49''. Left x 80-1000: a grid (1 m/s per 60 px). S8: the arrow 10 (1, 0) (teal) from the origin. S9-S10:
@@ -1315,21 +1704,21 @@ scenes:
     tiny); a gold ''sum'' tick at the end. S16: a rectangle-free ''halve the step'' animation: the three pieces redrawn for Δt = 1 s, 0.5 s, 0.25
     s side by side — the first two halve, the third quarters (bars with numbers under them). Maths zone: inputs row first; CalcStack rows on their
     words; S18: the rule (96 px) with gold underbraces ''number''s rate × arrow'', ''number × arrow''s rate''.'
-  voiceover: 'If you skipped, here''s what to keep: as the angle grows, r hat swings towards theta hat, and theta hat swings towards minus r hat,
-    back towards the centre. Next comes one more stretch with every step, from a new tool all the way to the acceleration. If you''d rather, jump
-    to the time on the screen. Before we use these rules on a moving air parcel, we need one more tool, which no earlier movie in this series
-    has shown. It''s called the product rule. Here''s the question it answers: how does a number times an arrow change, when both the number and
-    the arrow change? Let''s try easy numbers first. Take a speed of ten metres per second, along an arrow pointing east, one, zero. Their product
-    is the arrow ten, zero. [beat] One second later, the speed has grown to eleven. And the arrow has turned by zero point one radians, to about
-    zero point nine nine five, zero point one. The product is now eleven times that, which is ten point nine four five, one point one. So the
-    product changed by zero point nine four five, one point one. [beat] Where does that change come from? There are three pieces. First, the change
-    in the number, times the old arrow: one times one, zero, which is one, zero. Second, the old number, times the change in the arrow: ten times
-    minus zero point zero zero five, zero point one, which is minus zero point zero five, one. Third, the two changes multiplied together: one
-    times minus zero point zero zero five, zero point one, which is minus zero point zero zero five, zero point one. [beat] Add the three pieces,
-    and we get zero point nine four five, one point one: the whole change. [beat] Now the key step. The third piece is a small change times a
-    small change. If we halve the time step, the first two pieces halve, but the third one shrinks to a quarter. So after we divide by the time
-    step and let it shrink, the third piece vanishes. What''s left is the product rule. The rate of change of a number times an arrow is the number''s
-    rate times the arrow, plus the number times the arrow''s rate. [beat]'
+  voiceover: 'If you skipped, here''s what to keep: as the angle grows, r hat swings towards theta hat, and theta hat swings towards minus r hat, back towards
+    the centre. Next comes one more stretch with every step, from a new tool all the way to the acceleration. If you''d rather, jump to the time on the screen.
+    Before we use these rules on a moving air parcel, we need one more tool, which no earlier movie in this series has shown. It''s called the product rule.
+    Here''s the question it answers: how does a number times an arrow change, when both the number and the arrow change? Let''s try easy numbers first. Take
+    a speed of ten metres per second, along an arrow pointing east, one, zero, which we''ll call d hat. Their product is the arrow ten, zero. [beat] One second
+    later, the speed has grown to eleven. And the arrow has turned by zero point one radians, to about zero point nine nine five, zero point one. The product
+    is now eleven times that, which is ten point nine four five, one point one. So the product changed by zero point nine four five, one point one. [beat]
+    Where does that change come from? There are three pieces. First, the change in the number, times the old arrow: one times one, zero, which is one, zero.
+    Second, the old number times the change in the arrow, which went from one, zero to zero point nine nine five, zero point one, a change of minus zero point
+    zero zero five, zero point one: ten times that is minus zero point zero five, one. Third, the two changes multiplied together: one times minus zero point
+    zero zero five, zero point one, which is minus zero point zero zero five, zero point one. [beat] Add the three pieces, and we get zero point nine four
+    five, one point one: the whole change. [beat] Now the key step. The third piece is a small change times a small change. If we halve the time step, the
+    first two pieces halve, but the third one shrinks to a quarter. Divide each piece by the time step: the first two stay at about one, but the third goes
+    from zero point one to zero point zero five to zero point zero two five, so as the time step shrinks, the third piece vanishes. What''s left is the product
+    rule. The rate of change of a number times an arrow is the number''s rate times the arrow, plus the number times the arrow''s rate. [beat]'
   on_screen_eq:
     latex: \frac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\frac{dv}{dt}\,\hat{\mathbf d}+v\,\frac{d\hat{\mathbf d}}{dt}
     vallis_eq: none in Vallis (standard calculus; derived on screen with numbers, D15)
@@ -1392,43 +1781,43 @@ scenes:
   layout: Easy numbers with the inputs beside every row; the second 'arrow' slot is said and written as a pair; no boxes round the three pieces.
 - id: s09_dtheta_dt
   t:
-  - 851.475
-  - 952.55
+  - 871.975
+  - 973.05
   sentence_times:
-  - - 851.475
-    - 859.475
-  - - 859.825
-    - 861.85
-  - - 862.2
-    - 866.625
-  - - 866.975
-    - 871.025
-  - - 871.375
-    - 872.95
-  - - 873.3
-    - 876.3
-  - - 876.65
-    - 883.35
-  - - 884.85
-    - 890.475
-  - - 890.825
-    - 897.725
-  - - 899.225
-    - 902.675
-  - - 903.025
-    - 907.9
-  - - 909.4
-    - 914.025
-  - - 914.375
-    - 924.75
-  - - 926.25
-    - 930.1
-  - - 930.45
-    - 936.7
-  - - 938.2
-    - 945.575
-  - - 945.925
-    - 951.05
+  - - 871.975
+    - 879.975
+  - - 880.325
+    - 882.35
+  - - 882.7
+    - 887.125
+  - - 887.475
+    - 891.525
+  - - 891.875
+    - 893.45
+  - - 893.8
+    - 896.8
+  - - 897.15
+    - 903.85
+  - - 905.35
+    - 910.975
+  - - 911.325
+    - 918.225
+  - - 919.725
+    - 923.175
+  - - 923.525
+    - 928.4
+  - - 929.9
+    - 934.525
+  - - 934.875
+    - 945.25
+  - - 946.75
+    - 950.6
+  - - 950.95
+    - 957.2
+  - - 958.7
+    - 966.075
+  - - 966.425
+    - 971.55
   beat: 'D16: d theta / dt = v / r from the arc rule'
   visual: 'Left: Ian''s 25-km ring (slate) round the model''s centre (data_block.ian.centre_hrrr), no map underneath (a clean top view; small
     source line not needed: no data field drawn, only the radius and speed numbers). The parcel (teal) moves at one constant rate; clock glyph
@@ -1497,35 +1886,35 @@ scenes:
   layout: No data field drawn, so no colour bar; the numbers' source is said in s02 and written in the manifest. Clock glyph at one constant rate.
 - id: s10_position_arrow
   t:
-  - 952.55
-  - 1020.475
+  - 973.05
+  - 1040.975
   sentence_times:
-  - - 952.55
-    - 955.275
-  - - 955.625
-    - 957.275
-  - - 957.625
-    - 963.725
-  - - 964.075
-    - 971.875
-  - - 972.225
-    - 977.25
-  - - 977.6
-    - 982.025
-  - - 982.375
-    - 985.65
-  - - 987.15
-    - 989.95
-  - - 990.3
-    - 996.275
-  - - 996.625
-    - 1001.125
-  - - 1001.475
-    - 1004.875
-  - - 1005.225
-    - 1010.475
-  - - 1010.825
-    - 1018.975
+  - - 973.05
+    - 975.775
+  - - 976.125
+    - 977.775
+  - - 978.125
+    - 984.225
+  - - 984.575
+    - 992.375
+  - - 992.725
+    - 997.75
+  - - 998.1
+    - 1002.525
+  - - 1002.875
+    - 1006.15
+  - - 1007.65
+    - 1010.45
+  - - 1010.8
+    - 1016.775
+  - - 1017.125
+    - 1021.625
+  - - 1021.975
+    - 1025.375
+  - - 1025.725
+    - 1030.975
+  - - 1031.325
+    - 1039.475
   beat: 'D17 (steps 1-2): velocity = rate of change of position; position = r r-hat'
   visual: 'Left: the ring and the parcel; the position arrow from the centre to the parcel (teal) grows on AT(5,''position arrow'') with a length
     tag ''r = 25 km'' and its direction r-hat (orange unit arrow on it). S1-S3: keyword chain in the maths zone ''acceleration ← velocity ← position''
@@ -1582,35 +1971,35 @@ scenes:
   layout: Keyword chain in the maths zone, >= 40 px above the equation.
 - id: s11_velocity_on_ring
   t:
-  - 1020.475
-  - 1091.75
+  - 1040.975
+  - 1112.25
   sentence_times:
-  - - 1020.475
-    - 1023.8
-  - - 1024.15
-    - 1031.6
-  - - 1033.1
-    - 1037.75
-  - - 1038.1
-    - 1042.325
-  - - 1042.675
-    - 1047.4
-  - - 1047.75
-    - 1053.775
-  - - 1054.125
-    - 1057.575
-  - - 1057.925
-    - 1062.35
-  - - 1063.85
-    - 1065.925
-  - - 1066.275
-    - 1070.9
-  - - 1072.4
-    - 1076.575
-  - - 1076.925
-    - 1082.5
-  - - 1082.85
-    - 1090.95
+  - - 1040.975
+    - 1044.3
+  - - 1044.65
+    - 1052.1
+  - - 1053.6
+    - 1058.25
+  - - 1058.6
+    - 1062.825
+  - - 1063.175
+    - 1067.9
+  - - 1068.25
+    - 1074.275
+  - - 1074.625
+    - 1078.075
+  - - 1078.425
+    - 1082.85
+  - - 1084.35
+    - 1086.425
+  - - 1086.775
+    - 1091.4
+  - - 1092.9
+    - 1097.075
+  - - 1097.425
+    - 1103.0
+  - - 1103.35
+    - 1111.45
   beat: 'D17 (steps 3-5): on a ring the velocity is v theta-hat'
   visual: 'Same picture. S1-S2: the first term struck (Strike, slate) with the tag ''r fixed: dr/dt = 0''. S3-S6: the chain rule as Layered TeX
     with gold underbraces ''θ̂ (s05)'' and ''v/r (s09)'', each linked to a mini picture of its scene. S7: the two r''s struck; result ''v θ̂''
@@ -1665,43 +2054,43 @@ scenes:
   layout: Struck terms stay visible at 60 % for 2 s, then fade.
 - id: s12_acceleration
   t:
-  - 1091.75
-  - 1189.45
+  - 1112.25
+  - 1209.95
   sentence_times:
-  - - 1091.75
-    - 1094.7
-  - - 1095.05
-    - 1098.95
-  - - 1099.3
-    - 1105.2
-  - - 1105.55
-    - 1112.75
-  - - 1114.25
-    - 1121.275
-  - - 1122.775
-    - 1126.375
-  - - 1126.725
-    - 1132.975
-  - - 1133.325
-    - 1141.8
-  - - 1142.15
-    - 1145.225
-  - - 1145.575
-    - 1150.475
-  - - 1151.975
-    - 1153.95
-  - - 1154.3
-    - 1159.125
-  - - 1160.625
-    - 1167.3
-  - - 1167.65
-    - 1173.9
-  - - 1174.25
-    - 1176.275
-  - - 1176.625
-    - 1180.375
-  - - 1180.725
-    - 1187.95
+  - - 1112.25
+    - 1115.2
+  - - 1115.55
+    - 1119.45
+  - - 1119.8
+    - 1125.7
+  - - 1126.05
+    - 1133.25
+  - - 1134.75
+    - 1141.775
+  - - 1143.275
+    - 1146.875
+  - - 1147.225
+    - 1153.475
+  - - 1153.825
+    - 1162.3
+  - - 1162.65
+    - 1165.725
+  - - 1166.075
+    - 1170.975
+  - - 1172.475
+    - 1174.45
+  - - 1174.8
+    - 1179.625
+  - - 1181.125
+    - 1187.8
+  - - 1188.15
+    - 1194.4
+  - - 1194.75
+    - 1196.775
+  - - 1197.125
+    - 1200.875
+  - - 1201.225
+    - 1208.45
   beat: 'D18: acceleration = −(v²/r) r-hat'
   visual: 'Same ring. Maths zone, one move per sentence: S1-S3 the product rule on v theta-hat (Layered TeX, gold underbraces); S4 ''steady speed:
     dv/dt = 0'' strikes the first term; S5-S8 chain rule with underbraces ''−r̂ (s06)'' and ''v/r (s09)'', the s06 mini picture (theta-hat''s
@@ -1778,35 +2167,34 @@ scenes:
   layout: Inward arrow >= 90 px, rose, pointing at the centre.
 - id: s13_acceleration_numbers
   t:
-  - 1189.45
-  - 1254.975
+  - 1209.95
+  - 1275.475
   sentence_times:
-  - - 1189.45
-    - 1200.45
-  - - 1200.8
-    - 1203.35
-  - - 1203.7
-    - 1208.325
-  - - 1208.675
-    - 1215.925
-  - - 1217.425
-    - 1225.725
-  - - 1227.225
-    - 1228.925
-  - - 1229.275
-    - 1236.45
-  - - 1237.95
-    - 1240.0
-  - - 1240.35
-    - 1246.6
-  - - 1248.1
-    - 1254.175
+  - - 1209.95
+    - 1220.95
+  - - 1221.3
+    - 1223.85
+  - - 1224.2
+    - 1228.825
+  - - 1229.175
+    - 1236.425
+  - - 1237.925
+    - 1246.225
+  - - 1247.725
+    - 1249.425
+  - - 1249.775
+    - 1256.95
+  - - 1258.45
+    - 1260.5
+  - - 1260.85
+    - 1267.1
+  - - 1268.6
+    - 1274.675
   beat: 'D18 numbers: 0.048 m/s², 200× smaller than gravity, ''that is like'''
   visual: 'S0 = block B2 takeaway: keyword ''what to keep: steady speed on a circle → acceleration v²/r, inward''. Left: the ring with the inward
     rose arrow. Maths zone CalcStack with inputs row ''v = 34.8 m/s, r = 25 000 m'': ''34.8² ≈ 1211'', ''1211 ÷ 25 000 ≈ 0.048 m/s²'' (S2-S3);
     easy row ''35² ÷ 25 000 ≈ 0.049'' (S4, slate). S5-S6: log bars (Balance style) ''gravity 9.81'' vs ''0.048'' with ''≈ 200 × smaller'' and
-    a gold link. S7-S8: a code-drawn car glyph with a speedometer 0 → 100 km/h while a clock glyph runs to ''≈ 10 min''; row ''27.8 m/s ÷ 0.048
-    ≈ 570 s ≈ 10 min''. S9: the rose arrow pulses; keyword ''all of it turns the parcel''.'
+    a gold link. S7-S8: a code-drawn car glyph with a speedometer 0 → 100 km/h while a clock glyph runs to ''≈ 10 min''; rows ''100 km/h = 100 000 m / 3600 s ≈ 27.8 m/s'', ''27.8 ÷ 0.048 ≈ 580 s'', ''580 / 60 ≈ 9.7 ≈ 10 min'' (fix 0 B22). S9: the rose arrow pulses; keyword ''all of it turns the parcel''.'
   voiceover: 'If you skipped, here''s what to keep: an air parcel going round a circle at a steady speed v is always accelerating towards the
     centre, by v squared over r. So how big is it for Ian''s parcel? Thirty four point eight squared is about twelve hundred and eleven. Divided
     by twenty five thousand metres, that''s about zero point zero four eight metres per second squared. [beat] With easy numbers, thirty five
@@ -1833,7 +2221,9 @@ scenes:
   - \frac{1211}{25\,000}\approx0.048\ \mathrm{m/s^2}
   - \frac{35^2}{25\,000}\approx0.049
   - \frac{9.81}{0.048}\approx200
-  - \frac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}\approx570\ \mathrm s\approx10\ \mathrm{min}
+  - 100\ \mathrm{km/h}=\frac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}
+  - \frac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}\approx580\ \mathrm s
+  - \frac{580\ \mathrm s}{60}\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}
   kind: calc + bars
   data: data_block.ian (ring mean)
   tool: Remotion SVG + CalcStack + house Balance bars
@@ -1844,68 +2234,66 @@ scenes:
   layout: Bars beside the CalcStack, ticks >= 44 px.
 - id: s14_steady_but_turning
   t:
-  - 1254.975
-  - 1373.725
+  - 1275.475
+  - 1399.75
   sentence_times:
-  - - 1254.975
-    - 1258.775
-  - - 1259.125
-    - 1262.7
-  - - 1263.05
-    - 1266.375
-  - - 1266.725
-    - 1270.775
-  - - 1271.125
-    - 1282.175
-  - - 1283.675
-    - 1290.8
-  - - 1291.15
-    - 1293.95
-  - - 1294.3
-    - 1299.3
-  - - 1299.65
-    - 1301.8
-  - - 1303.3
-    - 1305.025
-  - - 1305.375
-    - 1311.225
-  - - 1311.575
-    - 1320.525
-  - - 1322.025
-    - 1332.65
-  - - 1334.15
-    - 1340.15
-  - - 1340.5
-    - 1343.9
-  - - 1344.25
-    - 1350.775
-  - - 1351.125
-    - 1355.95
-  - - 1356.3
-    - 1362.925
-  - - 1363.275
-    - 1372.925
+  - - 1275.475
+    - 1279.275
+  - - 1279.625
+    - 1283.2
+  - - 1283.55
+    - 1286.875
+  - - 1287.225
+    - 1291.275
+  - - 1291.625
+    - 1302.675
+  - - 1304.175
+    - 1311.3
+  - - 1311.65
+    - 1314.45
+  - - 1314.8
+    - 1319.8
+  - - 1320.15
+    - 1322.3
+  - - 1323.8
+    - 1325.525
+  - - 1325.875
+    - 1331.725
+  - - 1332.075
+    - 1341.025
+  - - 1342.525
+    - 1353.15
+  - - 1354.65
+    - 1360.65
+  - - 1361.0
+    - 1364.4
+  - - 1364.75
+    - 1371.425
+  - - 1371.775
+    - 1381.975
+  - - 1382.325
+    - 1388.95
+  - - 1389.3
+    - 1398.95
   beat: 'D19: steady speed, changing velocity; what supplies the push (pointers M03, R01)'
   visual: 'Left: two velocity arrows one minute apart on the ring (teal), the turn ''≈ 0.084 rad ≈ 5°'' as a gold wedge at the centre (drawn ×3
     so it is visible, listed). S4-S5: both arrows lift off and slide tail to tail (one common tail beside the ring); the short difference arrow
     (rose) from tip to tip grows and points at the eye — a gold link from it to the eye. S6-S7: the two tips sit on a dashed circle of radius
     34.8 (slate), the small arc between them labelled; CalcStack ''34.8 × 0.084 ≈ 2.9 m/s'' then ''2.9 ÷ 60 s ≈ 0.048 m/s²'' with a gold ''same
-    as s13'' tick. S9-S11: the eye''s low pressure (a ring of three code-drawn isobars, ''L'' in the eye) and an orange pressure-force arrow at
-    the parcel pointing in (term colour: pressure orange); a thin violet arrow for the Earth''s spin push, 1/21 of its length, tag ''≈ 1/20''.
+    as s13'' tick. S9-S11: the eye''s low pressure (a ring of three code-drawn isobars, ''L'' in the eye) and an orange pressure-force arrow at the parcel pointing in (term colour: pressure orange); a violet arrow for the Earth''s spin push pointing OUTWARD (northern hemisphere, anticlockwise: Coriolis to the right of the motion, a = −f ẑ × v θ̂ = +f v r̂), with a head, 51 px = 6× its true 1/20 length, keyed in the column ''pressure force: inward'', ''Earth''s spin: ≈ 1/20, outward'', ''(violet arrow drawn 6× longer)''; S16 rows ''turning: 0.048 m/s² (inward)'', ''Earth''s spin: ≈ 0.0023 m/s² (outward)'', ''0.048/0.0023 ≈ 21'', ''pressure push ≈ 0.048 + 0.002 = 0.050 m/s²'' and the slate note ''Earth''s spin: worked out in the Coriolis movie'' (fix 0 B1, 2026-11-05).
     S12: keyword ''more: Wind on weather charts''; S13: keyword ''more: Circular motion''. The s01 gold question mark resolves to ''yes: it turns''
     at S8.'
-  voiceover: 'So how can a steady speed still mean an acceleration? The answer is that velocity is more than speed. Velocity is speed and direction
-    together. Let''s see it with two velocity arrows, one minute apart. In one minute, theta grows by zero point zero zero one three nine times
-    sixty, which is about zero point zero eight four radians, or about five degrees. [beat] Both arrows are thirty four point eight metres per
-    second long, but they point in slightly different directions. Now slide them so that their tails touch. The short arrow from the first tip
-    to the second is the change in velocity. It points towards the eye. [beat] How long is it? Its two ends lie on a circle of radius thirty four
-    point eight, a small turn apart. So by the arc rule, it''s about thirty four point eight times zero point zero eight four, which is about
-    two point nine metres per second. [beat] Divide by sixty seconds, and we get about zero point zero four eight metres per second squared: the
-    same acceleration, found with no formula at all. [beat] So a steady speed means no acceleration only when the direction stays the same too.
-    Something must push the parcel inward all the time. In a tropical cyclone, it''s mostly the pressure force, because the pressure is lowest
-    in the eye. The Earth''s spin adds a smaller push, about twenty times smaller here. How winds balance these pushes has its own movie later
-    in this series: Wind on weather charts. And if you rode with the parcel, you''d feel this as a push outward, called the centrifugal force,
-    which also has its own movie: Circular motion.'
+  voiceover: 'So how can a steady speed still mean an acceleration? The answer is that velocity is more than speed. Velocity is speed and direction together.
+    Let''s see it with two velocity arrows, one minute apart. In one minute, theta grows by zero point zero zero one three nine times sixty, which is about
+    zero point zero eight four radians, or about five degrees. [beat] Both arrows are thirty four point eight metres per second long, but they point in slightly
+    different directions. Now slide them so that their tails touch. The short arrow from the first tip to the second is the change in velocity. It points
+    towards the eye. [beat] How long is it? Its two ends lie on a circle of radius thirty four point eight, a small turn apart. So by the arc rule, it''s
+    about thirty four point eight times zero point zero eight four, which is about two point nine metres per second. [beat] Divide by sixty seconds, and we
+    get about zero point zero four eight metres per second squared: the same acceleration, found with no formula at all. [beat] So a steady speed means no
+    acceleration only when the direction stays the same too. Something must push the parcel inward all the time. In a tropical cyclone, that push is the pressure
+    force, because the pressure is lowest in the eye. The Earth''s spin pushes the other way, a little outward, about twenty times weaker, so the pressure
+    force has to be a little stronger than the turning alone needs. How winds balance these pushes has its own movie later in this series: Wind on weather
+    charts. And if you rode with the parcel, you''d feel this as a push outward, called the centrifugal force, which also has its own movie: Circular motion.'
   on_screen_eq:
     latex: '|\Delta\mathbf v|\approx v\,\Delta\theta=34.8\times0.084\approx2.9\ \mathrm{m/s}'
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -1964,29 +2352,29 @@ scenes:
   layout: 'Later-movie names as keywords (''more: …''), each <= 1 line, out before the next scene; no box.'
 - id: s15_cylinder
   t:
-  - 1373.725
-  - 1429.55
+  - 1399.75
+  - 1455.575
   sentence_times:
-  - - 1373.725
-    - 1376.5
-  - - 1376.85
-    - 1379.825
-  - - 1380.175
-    - 1383.15
-  - - 1383.5
-    - 1388.675
-  - - 1389.025
-    - 1394.5
-  - - 1394.85
-    - 1401.125
-  - - 1401.475
-    - 1407.35
-  - - 1407.7
-    - 1416.0
-  - - 1416.35
-    - 1422.2
-  - - 1422.55
-    - 1428.75
+  - - 1399.75
+    - 1402.525
+  - - 1402.875
+    - 1405.85
+  - - 1406.2
+    - 1409.175
+  - - 1409.525
+    - 1414.7
+  - - 1415.05
+    - 1420.525
+  - - 1420.875
+    - 1427.15
+  - - 1427.5
+    - 1433.375
+  - - 1433.725
+    - 1442.025
+  - - 1442.375
+    - 1448.225
+  - - 1448.575
+    - 1454.775
   beat: 'intuition: a tall storm needs height; cylindrical coordinates; the eyewall (Must 1, 2 guards)'
   visual: 'Full-width three.js (HView3D, from build 1, fixed): the GOES-16 mesoscale 0.5-km visible image (contrast enhanced, unlit, toneMapped
     false, opacity 1) as the floor, centred on the radar eye (26.552 N, 82.278 W; never the model centre in this picture), 120 × 120 km; S5-S6
@@ -2041,25 +2429,25 @@ scenes:
   layout: 'SourceBelow under the 3-D picture (never on it); the eyewall callout''s link from its own left edge; Must 2: KaTeX only.'
 - id: s16_three_parts
   t:
-  - 1429.55
-  - 1478.95
+  - 1455.575
+  - 1504.975
   sentence_times:
-  - - 1429.55
-    - 1433.625
-  - - 1433.975
-    - 1438.825
-  - - 1439.175
-    - 1444.675
-  - - 1445.025
-    - 1449.725
-  - - 1450.075
-    - 1459.325
-  - - 1459.675
-    - 1466.525
-  - - 1466.875
-    - 1472.9
-  - - 1473.25
-    - 1478.15
+  - - 1455.575
+    - 1459.65
+  - - 1460.0
+    - 1464.85
+  - - 1465.2
+    - 1470.7
+  - - 1471.05
+    - 1475.75
+  - - 1476.1
+    - 1485.35
+  - - 1485.7
+    - 1492.55
+  - - 1492.9
+    - 1498.925
+  - - 1499.275
+    - 1504.175
   beat: the wind's three parts; only r-hat and theta-hat turn
   visual: 'Same 3-D view, camera holds. S1-S4: at one point on the cylinder wall, three component arrows grow on their words: u_r (rose, pointing
     in, ''−''), u_theta (teal, along the ring), w (slate, up) with KaTeX TipLabels (Must 2); the unit arrows r-hat, theta-hat, z-hat (orange)
@@ -2097,33 +2485,33 @@ scenes:
   layout: Tags in KaTeX (Must 2); the equation in the column at x >= 1100.
 - id: s17_ian_check
   t:
-  - 1478.95
-  - 1556.325
+  - 1504.975
+  - 1582.35
   sentence_times:
-  - - 1478.95
-    - 1486.025
-  - - 1486.375
-    - 1491.45
-  - - 1491.8
-    - 1502.0
-  - - 1502.35
-    - 1505.375
-  - - 1506.875
-    - 1517.65
-  - - 1518.0
-    - 1526.175
-  - - 1527.675
-    - 1531.775
-  - - 1532.125
-    - 1539.8
-  - - 1540.15
-    - 1542.0
-  - - 1542.35
-    - 1546.3
-  - - 1546.65
-    - 1551.675
-  - - 1552.025
-    - 1555.525
+  - - 1504.975
+    - 1512.05
+  - - 1512.4
+    - 1517.475
+  - - 1517.825
+    - 1528.025
+  - - 1528.375
+    - 1531.4
+  - - 1532.9
+    - 1543.675
+  - - 1544.025
+    - 1552.2
+  - - 1553.7
+    - 1557.8
+  - - 1558.15
+    - 1565.825
+  - - 1566.175
+    - 1568.025
+  - - 1568.375
+    - 1572.325
+  - - 1572.675
+    - 1577.7
+  - - 1578.05
+    - 1581.55
   beat: is Ian shown correctly? radar eye vs model centre (U-CO-022, -025, -027)
   visual: 'Left: the NEXRAD KTBW 0.5-deg reflectivity map (dBZ, a perceptual rain colour map, not rainbow; colour bar ''radar echo (dBZ)'' beside
     it, 0-60) on a Natural Earth coast, 160 × 160 km round the radar eye; S2-S3 a gold eyewall circle fitted to the >= 35 dBZ ring (radius ''≈
@@ -2176,35 +2564,35 @@ scenes:
   layout: One colour bar per picture, beside it (never on it); each picture its own SourceBelow; the locator inset is a drawing (no data colours).
 - id: s18_ian_stack
   t:
-  - 1556.325
-  - 1648.1
+  - 1582.35
+  - 1674.75
   sentence_times:
-  - - 1556.325
-    - 1559.85
-  - - 1560.2
-    - 1569.925
-  - - 1570.275
-    - 1576.75
-  - - 1577.1
-    - 1582.525
-  - - 1582.875
-    - 1587.15
-  - - 1587.5
-    - 1594.75
-  - - 1595.1
-    - 1606.0
-  - - 1606.35
-    - 1620.275
-  - - 1621.775
-    - 1626.05
-  - - 1626.4
-    - 1631.425
-  - - 1631.775
-    - 1635.4
-  - - 1635.75
-    - 1641.6
-  - - 1641.95
-    - 1647.3
+  - - 1582.35
+    - 1585.875
+  - - 1586.225
+    - 1595.95
+  - - 1596.3
+    - 1602.775
+  - - 1603.125
+    - 1608.55
+  - - 1608.9
+    - 1613.175
+  - - 1613.525
+    - 1620.775
+  - - 1621.125
+    - 1632.025
+  - - 1632.375
+    - 1646.625
+  - - 1648.125
+    - 1652.4
+  - - 1652.75
+    - 1657.775
+  - - 1658.125
+    - 1661.75
+  - - 1662.1
+    - 1667.95
+  - - 1668.3
+    - 1673.95
   beat: 'the layer stack, redesigned (U-CO-029-032): what pressure levels are; heights; colours'
   visual: 'HOUSE K5 LayerStack3D (copy the derivatives s09b / weather-basics stack look), full width minus the column, from frame 0 seen from
     the side at 20 deg elevation, OUTSIDE the stack. FIVE HRRR 3-km layers of u_r round the model''s calm centre (26.506 N, 82.441 W, one centre
@@ -2216,16 +2604,15 @@ scenes:
     tangential dashes (warm white, moving, anticlockwise seen from above) on each layer''s 100-km ring. Colour bar ''radial wind u_r (m/s)'' with
     ''−  in'' and ''+  out'' glyphs in the column, visible throughout. S2-S3 keyword ''pressure level'' and a tiny pressure-vs-height glyph. S6
     keyword ''975 hPa: under the sea near the eye'' (slate). S11: ''heights drawn ×15''.'
-  voiceover: 'Now let''s look inside Ian, layer by layer. Weather models store the wind on pressure levels: surfaces where the air pressure has
-    one value, like nine hundred and twenty five hectopascals. Since the pressure drops as we go up, each level sits at a height, and we''ll write
-    that height beside it. Here are five layers round Ian''s eye, from the model, at six in the evening. Each layer is a square about five hundred
-    kilometres across. The lowest is at nine hundred and twenty five hectopascals, about seven hundred metres above the sea. We don''t use a lower
-    level, because near the eye the pressure at the sea surface was below nine hundred and seventy five hectopascals, so that level would lie
-    under the sea there. Then come eight hundred and fifty hectopascals, about one and a half kilometres up, five hundred, about six kilometres,
-    two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres. [beat] The colour on each layer is the radial
-    wind, u sub r. Rose, with a minus sign, means that the air flows in, towards the eye. Blue, with a plus sign, means that it flows out. Pale
-    means neither, and a dark line marks where the radial wind is exactly zero. We drew the heights much taller than they really are, so that
-    we can see between the layers.'
+  voiceover: 'Now let''s look inside Ian, layer by layer. Weather models store the wind on pressure levels: surfaces where the air pressure has one value,
+    like nine hundred and twenty five hectopascals. Since the pressure drops as we go up, each level sits at a height, and we''ll write that height beside
+    it. Here are five layers round Ian''s eye, from the model, at six in the evening. Each layer is a square about five hundred kilometres across. The lowest
+    is at nine hundred and twenty five hectopascals, about seven hundred metres above the sea. We don''t use a lower level, because near the eye the pressure
+    at the sea surface was below nine hundred and seventy five hectopascals, so that level would lie under the sea there. Then come eight hundred and fifty
+    hectopascals, about one point four kilometres up, five hundred, about six kilometres, two hundred, about twelve kilometres, and one hundred and fifty,
+    about fourteen kilometres. [beat] The colour on each layer is the radial wind, u sub r. Rose, with a minus sign, means that the air flows in, towards
+    the eye. Blue, with a plus sign, means that it flows out. Pale means neither, and a dark line marks where the radial wind is exactly zero. We drew the
+    layers much farther apart than they really are, so that we can see between them.'
   on_screen_eq: null
   physics_source:
     fn: NEW fluidpy.data.hrrr.fetch_fields(store='prs', levels=…) (research R/_scripts/ian_hrrr_prs.py route through fetch()); fluidpy.diag.cyclone.storm_relative_wind
@@ -2276,27 +2663,27 @@ scenes:
     layer's tag; SourceBelow.
 - id: s19_ian_layers_lit
   t:
-  - 1648.1
-  - 1706.8306
+  - 1674.75
+  - 1732.175
   sentence_times:
-  - - 1648.1
-    - 1655.775
-  - - 1656.125
-    - 1663.7306
-  - - 1664.0806
-    - 1670.1556
-  - - 1671.6556
-    - 1675.1306
-  - - 1675.4806
-    - 1680.8056
-  - - 1681.1556
-    - 1689.0806
-  - - 1690.5806
-    - 1694.7806
-  - - 1695.1306
-    - 1699.2806
-  - - 1699.6306
-    - 1706.0306
+  - - 1674.75
+    - 1682.425
+  - - 1682.775
+    - 1688.975
+  - - 1689.325
+    - 1695.4
+  - - 1696.9
+    - 1700.475
+  - - 1700.825
+    - 1706.15
+  - - 1706.5
+    - 1714.425
+  - - 1715.925
+    - 1720.125
+  - - 1720.475
+    - 1724.625
+  - - 1724.975
+    - 1731.375
   beat: layers lit bottom to top with readouts; orbit; one close look (<= 6 s)
   visual: 'Same stack. S1: all layers dim to 40 %; the 100-km ring (teal, 3 px) on every layer. S2-S3: the 925 layer lights (100 %); its ring-mean readout
     ''0.7 km: ≈ −6.5 m/s'' (rose, ''−'') appears in the column as a SideCallout with a gold link to that layer''s ring (link from the text''s left edge).
@@ -2311,7 +2698,7 @@ scenes:
     path''s up-leg follows the same slope; the source line adds the radar.'
   voiceover: 'Let''s light the layers one at a time, from the bottom up, and read each one on a ring a hundred kilometres from the centre. On the lowest layer,
     about seven hundred metres up, the air flows in on most of the ring. Round the ring, the radial wind averages about minus six and a half metres per second.
-    [beat] At one and a half kilometres, it''s almost zero. At six and at twelve kilometres, it''s a little positive, about plus one. And at fourteen kilometres,
+    [beat] At one point four kilometres, it''s almost zero. At six and at twelve kilometres, it''s a little positive, about plus one. And at fourteen kilometres,
     the sign has flipped: the air flows out, at about plus six and a half metres per second. [beat] So the air comes in near the bottom, and goes out near
     the top. Now let''s swing round the stack, to see it from another side. And here''s one short, closer look from the side, just above the sea, looking
     up past the layers.'
@@ -2354,41 +2741,47 @@ scenes:
     close look.
 - id: s20_ian_curtain
   t:
-  - 1706.8306
-  - 1831.1919
+  - 1732.175
+  - 1879.625
   sentence_times:
-  - - 1706.8306
-    - 1712.4556
-  - - 1712.8056
-    - 1719.9056
-  - - 1720.2556
-    - 1728.7556
-  - - 1730.2556
-    - 1737.9056
-  - - 1738.2556
-    - 1741.3556
-  - - 1741.7056
-    - 1747.8806
-  - - 1748.2306
-    - 1752.0556
-  - - 1752.4056
-    - 1761.6306
-  - - 1763.1306
-    - 1770.6056
-  - - 1772.1056
-    - 1775.1556
-  - - 1775.5056
-    - 1784.9806
-  - - 1786.4806
-    - 1792.7306
-  - - 1793.0806
-    - 1808.2919
-  - - 1809.7919
-    - 1812.9919
-  - - 1813.3419
-    - 1821.8419
-  - - 1822.1919
-    - 1830.3919
+  - - 1732.175
+    - 1737.8
+  - - 1738.15
+    - 1745.25
+  - - 1745.6
+    - 1754.1
+  - - 1755.6
+    - 1763.25
+  - - 1763.6
+    - 1766.7
+  - - 1767.05
+    - 1773.225
+  - - 1773.575
+    - 1777.4
+  - - 1777.75
+    - 1786.975
+  - - 1788.475
+    - 1795.95
+  - - 1797.45
+    - 1800.5
+  - - 1800.85
+    - 1810.65
+  - - 1812.15
+    - 1818.4
+  - - 1818.75
+    - 1820.625
+  - - 1820.975
+    - 1831.15
+  - - 1831.5
+    - 1845.5
+  - - 1847.0
+    - 1856.725
+  - - 1858.225
+    - 1861.425
+  - - 1861.775
+    - 1870.275
+  - - 1870.625
+    - 1878.825
   beat: 'D20: the ring average → radius-height section (in, up, out); pointer U15'
   visual: 'Cross-fade from the stack: a vertical slice through the stack''s axis rotates to face the camera and becomes the 2-D radius-height section (picture
     zone x 80-1000, y 80-800): x = radius 0-200 km (linear, ticks 0, 50, 100, 150, 200 km), y = height 0-16 km (ticks 0, 4, 8, 12, 16 km), filled colours
@@ -2411,11 +2804,13 @@ scenes:
     called a radius-height section. Each colour is a ring average of the radial wind, now from all nine levels of the model. Near the sea, there''s a thin
     layer of strong inflow. Its strongest ring average is about minus sixteen metres per second, thirty kilometres from the centre, about seven hundred metres
     up. [beat] Near the top, from about twelve kilometres up, the air flows out, at up to about plus nine metres per second. [beat] The dark lines show the
-    tangential wind. Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one and a half kilometres
-    up. [beat] It''s weaker right at the sea surface, where the sea slows the air, and it gets weaker higher up. The inflow alone says the air must rise,
-    at about a metre per second… and radar on a hurricane-hunter aircraft measured it: about three metres per second at nine kilometres up, with single towers
-    near ten. [beat] It rises in the eyewall, close to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical coordinates
-    show it in one picture. How a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
+    tangential wind. Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one point four kilometres
+    up. [beat] It''s weaker right at the sea surface, where the sea slows the air, and it gets weaker higher up. Here''s a quick check. Air flows in through
+    the side of a cylinder thirty kilometres in radius, in a layer about one kilometre deep, at about sixteen metres per second. All of it has to leave through
+    the cylinder''s lid, which is a much bigger area, so it rises more slowly: two times one thousand times sixteen, divided by thirty thousand, is about
+    one metre per second. [beat] And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with
+    single towers near ten. [beat] It rises in the eyewall, close to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical
+    coordinates show it in one picture. How a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
   on_screen_eq:
     latex: \overline{u_r}(r,z)=\frac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)
     vallis_eq: 'none: arithmetic or a definition (no book equation) (the ring average of Part 1, at every r and z)'
@@ -2485,23 +2880,23 @@ scenes:
     and 'height (km)' >= 44 px.
 - id: s21_amphan_intro
   t:
-  - 1831.1919
-  - 1887.3627
+  - 1879.625
+  - 1935.975
   sentence_times:
-  - - 1831.1919
-    - 1841.2669
-  - - 1841.6169
-    - 1846.1419
-  - - 1846.4919
-    - 1851.3169
-  - - 1851.6669
-    - 1861.4669
-  - - 1861.8169
-    - 1871.3419
-  - - 1871.6919
-    - 1880.9877
-  - - 1881.3377
-    - 1886.5627
+  - - 1879.625
+    - 1889.7
+  - - 1890.05
+    - 1894.575
+  - - 1894.925
+    - 1899.75
+  - - 1900.1
+    - 1909.9
+  - - 1910.25
+    - 1919.775
+  - - 1920.125
+    - 1929.6
+  - - 1929.95
+    - 1935.175
   beat: 'application 2: the Bay of Bengal, Cyclone Amphan (globe zoom tour, zoom back out)'
   visual: 'House globe (cross-product v5 56:35-57:54 look; §5b zoom-reveal): Blue Marble globe on the left, unzoomed, text column right. S1 on
     ''Bay of Bengal'': the globe turns to 15 N, 88 E and zooms (dist 4.3 → 2.4, 1.5 s, full-bleed, right side darkened behind the column); labels
@@ -2552,15 +2947,15 @@ scenes:
   layout: '§5b: text only on the faded part; names centred within 1 s; zoom back out before the scene ends; source line below the globe.'
 - id: s22_amphan_eye
   t:
-  - 1887.3627
-  - 1907.9127
+  - 1935.975
+  - 1956.525
   sentence_times:
-  - - 1887.3627
-    - 1893.7377
-  - - 1894.0877
-    - 1898.8377
-  - - 1899.1877
-    - 1907.1127
+  - - 1935.975
+    - 1942.35
+  - - 1942.7
+    - 1947.45
+  - - 1947.8
+    - 1955.725
   beat: Amphan's pinhole eye (MODIS 18 May)
   visual: 'Picture zone: the MODIS Terra true-colour image of 18 May 2020 (GIBS, 250 m), cropped round the eye (≈ 600 × 600 km, then a slow zoom
     to ≈ 150 km), the pinhole eye marked by a thin gold ring on ''pinhole eye'' (S2); S3: a ghost of s15''s cylinder (outline only) settles over
@@ -2595,35 +2990,35 @@ scenes:
   layout: SourceBelow; the ring thin enough to leave the eye visible.
 - id: s23_amphan_ring
   t:
-  - 1907.9127
-  - 2004.9134
+  - 1956.525
+  - 2062.525
   sentence_times:
-  - - 1907.9127
-    - 1911.7877
-  - - 1912.1377
-    - 1919.4627
-  - - 1919.8127
-    - 1927.0377
-  - - 1927.3877
-    - 1935.2127
-  - - 1935.5627
-    - 1943.6627
-  - - 1944.0127
-    - 1952.4634
-  - - 1952.8134
-    - 1961.5134
-  - - 1963.0134
-    - 1971.2384
-  - - 1971.5884
-    - 1981.2384
-  - - 1981.5884
-    - 1984.3634
-  - - 1985.8634
-    - 1987.8384
-  - - 1988.1884
-    - 1997.0134
-  - - 1998.5134
-    - 2004.1134
+  - - 1956.525
+    - 1960.4
+  - - 1960.75
+    - 1968.075
+  - - 1968.425
+    - 1975.65
+  - - 1976.0
+    - 1983.825
+  - - 1984.175
+    - 1992.275
+  - - 1992.625
+    - 2001.25
+  - - 2001.6
+    - 2010.3
+  - - 2011.8
+    - 2020.025
+  - - 2020.375
+    - 2033.575
+  - - 2033.925
+    - 2041.975
+  - - 2043.475
+    - 2045.45
+  - - 2045.8
+    - 2054.625
+  - - 2056.125
+    - 2061.725
   beat: Amphan's spin and inflow on a ring, beside Ian's
   visual: 'Left: ERA5 10-m wind speed map 06 UTC 20 May 2020 (85-92 E, 17.5-24.5 N, cmocean speed 0-30 m/s, colour bar beside, Natural Earth coast
     and borders, animated wind arrows from the data), the ERA5 centre (teal cross ''ERA5 centre'') and the 100-km ring with 72 dots; S4 a gold
@@ -2638,11 +3033,12 @@ scenes:
     of May, about four hours before landfall. We put the origin at ERA5''s own centre, and draw a ring fifty kilometres out, where ERA5''s spin is strongest.
     Ten metres above the sea, the tangential wind averages about twenty metres per second, and the radial wind about minus six. [beat] The air goes round
     anticlockwise as seen from above, just like Ian''s, because both storms are in the northern hemisphere. The official estimate at that hour, averaged over
-    three minutes, was about ninety knots, or about a hundred and sixty seven kilometres per hour. So the reanalysis is far too weak. [beat] But the shape
-    is right. Six over twenty is zero point three, so Amphan''s inflow angle is about seventeen degrees, close to Ian''s twenty one. [beat] Two storms, in
-    two different oceans, both spiral in at a similar angle.'
+    three minutes, was about ninety knots, which is about forty six metres per second, and a lowest pressure of nine hundred and fifty six hectopascals. ERA5''s
+    lowest pressure is only about nine hundred and sixty seven, so the reanalysis storm is much too weak. [beat] But the shape is right. Six over twenty is
+    zero point three, so Amphan''s inflow angle is about seventeen degrees, close to Ian''s twenty one. [beat] Two storms, in two different oceans, both spiral
+    in at a similar angle.'
   on_screen_eq:
-    latex: \tan(\text{inflow angle})=\frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \approx17^\circ
+    latex: \frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \arctan0.30\approx16.6^\circ\approx17^\circ
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
     page_png: null
   physics_source:
@@ -2682,21 +3078,21 @@ scenes:
   layout: Colour bar beside the map; comparison rows aligned in two columns in the maths zone; no box.
 - id: s24_amphan_curtain
   t:
-  - 2004.9134
-  - 2042.4384
+  - 2062.525
+  - 2100.05
   sentence_times:
-  - - 2004.9134
-    - 2009.9634
-  - - 2010.3134
-    - 2012.4634
-  - - 2012.8134
-    - 2021.1384
-  - - 2022.6384
-    - 2026.5634
-  - - 2028.0634
-    - 2034.1884
-  - - 2034.5384
-    - 2041.6384
+  - - 2062.525
+    - 2067.575
+  - - 2067.925
+    - 2070.075
+  - - 2070.425
+    - 2078.75
+  - - 2080.25
+    - 2084.175
+  - - 2085.675
+    - 2091.8
+  - - 2092.15
+    - 2099.25
   beat: Amphan's radius-height section beside Ian's
   visual: 'Two radius-height sections side by side across the full width (each x-range 0-300 km linear for Amphan, 0-200 km for Ian, both 0-16
     km high), the same diverging colour map and ONE shared colour bar between them in a gap >= 40 px (never on a picture). Ian left (from s20,
@@ -2748,27 +3144,27 @@ scenes:
   layout: One shared colour bar between the two (it is the same scale); two SourceBelow lines, one under each; no text over either picture.
 - id: s25_why_cylindrical
   t:
-  - 2042.4384
-  - 2093.7134
+  - 2100.05
+  - 2151.325
   sentence_times:
-  - - 2042.4384
-    - 2048.3384
-  - - 2048.6884
-    - 2050.8634
-  - - 2051.2134
-    - 2053.0384
-  - - 2053.3884
-    - 2062.3884
-  - - 2062.7384
-    - 2064.7884
-  - - 2065.1384
-    - 2073.6134
-  - - 2073.9634
-    - 2080.0634
-  - - 2080.4134
-    - 2082.3384
-  - - 2082.6884
-    - 2092.9134
+  - - 2100.05
+    - 2105.95
+  - - 2106.3
+    - 2108.475
+  - - 2108.825
+    - 2110.65
+  - - 2111.0
+    - 2120.0
+  - - 2120.35
+    - 2122.4
+  - - 2122.75
+    - 2131.225
+  - - 2131.575
+    - 2137.675
+  - - 2138.025
+    - 2139.95
+  - - 2140.3
+    - 2150.525
   beat: 'why: ''There are three good reasons'''
   visual: 'Three mini pictures built one per reason across the picture zone (no boxes): (1) a messy plan-view u_r layer (s18 925 hPa) folding
     round its axis into the s20 slice (''shape''); (2) the ring with v theta-hat and the inward rose arrow next to an east/north pair whose u,
@@ -2801,21 +3197,21 @@ scenes:
   layout: One small source line under the data minis; keywords only.
 - id: s26_onshore
   t:
-  - 2093.7134
-  - 2140.3384
+  - 2151.325
+  - 2197.95
   sentence_times:
-  - - 2093.7134
-    - 2099.3134
-  - - 2099.6634
-    - 2104.1384
-  - - 2104.4884
-    - 2112.6884
-  - - 2113.0384
-    - 2124.4134
-  - - 2124.7634
-    - 2131.1384
-  - - 2131.4884
-    - 2139.5384
+  - - 2151.325
+    - 2156.925
+  - - 2157.275
+    - 2161.75
+  - - 2162.1
+    - 2170.3
+  - - 2170.65
+    - 2182.025
+  - - 2182.375
+    - 2188.75
+  - - 2189.1
+    - 2197.15
   beat: 'back to Ian''s landfall: the wind blew onshore (D21/D22 moved to Part 4)'
   visual: 'Real map (local true-shape frame) of SW Florida from Naples to Tampa Bay: HRRR 20 UTC 10-m wind speed (cmocean speed 0-50 m/s, colour
     bar beside, Must 15) with animated wind arrows from the data, Natural Earth 10 m coast (white). S1-S2: keyword ''along the shore · across
@@ -2855,33 +3251,33 @@ scenes:
   layout: GeoMap body in an overflow-hidden div; colour bar beside; SourceBelow.
 - id: s27_surge
   t:
-  - 2140.3384
-  - 2233.5134
+  - 2197.95
+  - 2298.6
   sentence_times:
-  - - 2140.3384
-    - 2144.1134
-  - - 2144.4634
-    - 2150.1384
-  - - 2150.4884
-    - 2158.3384
-  - - 2158.6884
-    - 2166.3134
-  - - 2167.8134
-    - 2176.6634
-  - - 2178.1634
-    - 2185.6634
-  - - 2187.1634
-    - 2194.2884
-  - - 2194.6384
-    - 2199.7134
-  - - 2200.0634
-    - 2207.7634
-  - - 2209.2634
-    - 2217.4634
-  - - 2217.8134
-    - 2227.5384
-  - - 2227.8884
-    - 2232.7134
+  - - 2197.95
+    - 2201.725
+  - - 2202.075
+    - 2207.75
+  - - 2208.1
+    - 2215.95
+  - - 2216.3
+    - 2231.4
+  - - 2232.9
+    - 2241.75
+  - - 2243.25
+    - 2250.75
+  - - 2252.25
+    - 2259.375
+  - - 2259.725
+    - 2264.8
+  - - 2265.15
+    - 2272.85
+  - - 2274.35
+    - 2282.55
+  - - 2282.9
+    - 2292.625
+  - - 2292.975
+    - 2297.8
   beat: 'storm surge: Fort Myers Beach up, Tampa Bay down; the sign flip (pointers R06, F19)'
   visual: 'Same map widened to Tampa Bay (colour bar 0-50 m/s beside, Must 15). S1-S2: a water-colour arrow pushes onto the beach and a thin animated
     sea-level sheet in a small three.js side-section inset beside the map (×50 vertical, listed) rises; keyword ''storm surge''. S3: a shallow
@@ -2891,16 +3287,16 @@ scenes:
     north'' and the wind arrow there pointing out to sea (keyword ''out to sea''). S8: the Saint Petersburg gauge curve drops to ''≈ −1.8 m''
     (Should 11 labels kept). S9: two small arrows side by side ''onto the land'' (rose) and ''out to sea'' (blue) with a gold ''surge flips''
     bracket. S11-S12: keywords ''more: Friction and Ekman layers'' and ''more: Storm surge''. Sound: water draining, −30 LUFS, under S8 only.'
-  voiceover: 'That onshore push piles sea water up against the coast. The sea rises far above the normal tide, and this rise is called a storm
-    surge. The wind''s push does most of the work, especially over a wide, shallow sea floor like the one off southwest Florida. The low pressure
-    helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops. [beat] At Fort Myers Beach, the official
-    report found water ten to fifteen feet above the ground: about three to four and a half metres. [beat] A tide gauge up the river, at Fort
-    Myers, measured the water about two point two metres above the normal tide. [beat] Now go about a hundred and sixty kilometres north, to Tampa
-    Bay, on the other side of the storm''s spin. There, the coast runs almost due north, and the wind blew out to sea. So the water was pushed
-    away, and the gauge at Saint Petersburg read about one point eight metres below the normal tide. [beat] Same storm, opposite sides of the
-    eye: onto the land on one side, out to sea on the other, and the surge flips with it. The wind along a coast matters too, because it can bring
-    cold water up from below, which is a story for the movie on Friction and Ekman layers. And the full story of storm surge has its own movie
-    later in this series.'
+  voiceover: 'That onshore push piles sea water up against the coast. The sea rises far above the normal tide, and this rise is called a storm surge. The
+    wind''s push does most of the work, especially over a wide, shallow sea floor like the one off southwest Florida. The low pressure helps a little: the
+    sea rises by about one centimetre for every hectopascal that the pressure drops, and Ian''s centre was about seventy five hectopascals below normal, so
+    that''s only about seventy five centimetres. [beat] At Fort Myers Beach, the official report found water ten to fifteen feet above the ground: about three
+    to four and a half metres. [beat] A tide gauge up the river, at Fort Myers, measured the water about two point two metres above the normal tide. [beat]
+    Now go about a hundred and sixty kilometres north, to Tampa Bay, on the other side of the storm''s spin. There, the coast runs almost due north, and the
+    wind blew out to sea. So the water was pushed away, and the gauge at Saint Petersburg read about one point eight metres below the normal tide. [beat]
+    Same storm, opposite sides of the eye: onto the land on one side, out to sea on the other, and the surge flips with it. The wind along a coast matters
+    too, because it can bring cold water up from below, which is a story for the movie on Friction and Ekman layers. And the full story of storm surge has
+    its own movie later in this series.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.coops.fetch_water_level + residual (8725520 Fort Myers, 8726520 St. Petersburg); fluidpy.geo.vectors.components_in_axes (355.4
@@ -2944,21 +3340,21 @@ scenes:
   layout: Colour bar beside the map (Must 15); gauge graphs under the column, no text on curves; SourceBelow.
 - id: s28_ian_record
   t:
-  - 2233.5134
-  - 2275.1134
+  - 2298.6
+  - 2340.2
   sentence_times:
-  - - 2233.5134
-    - 2236.3134
-  - - 2236.6634
-    - 2239.6134
-  - - 2239.9634
-    - 2246.9384
-  - - 2247.2884
-    - 2254.3384
-  - - 2254.6884
-    - 2269.8884
-  - - 2271.3884
-    - 2274.3134
+  - - 2298.6
+    - 2301.4
+  - - 2301.75
+    - 2304.7
+  - - 2305.05
+    - 2312.025
+  - - 2312.375
+    - 2319.425
+  - - 2319.775
+    - 2334.975
+  - - 2336.475
+    - 2339.4
   beat: 'Ian: no satellite saw the surge; the tide gauges are its record (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
     §v3))'
   visual: 'S0-S2: keyword ''no satellite saw the surge itself'' (warm white, 54 px) in the column, kept through the scene; the s27 map shrinks
@@ -3004,23 +3400,23 @@ scenes:
   layout: Chart labels at line ends (no legend over curves); the NHC reference beside the chart; colour bar beside the locator map (Must 15).
 - id: s29_flood_flight
   t:
-  - 2275.1134
-  - 2318.8134
+  - 2340.2
+  - 2383.9
   sentence_times:
-  - - 2275.1134
-    - 2278.6634
-  - - 2279.0134
-    - 2284.7134
-  - - 2285.0634
-    - 2288.1884
-  - - 2288.5384
-    - 2294.7134
-  - - 2295.0634
-    - 2302.3384
-  - - 2303.8384
-    - 2310.2634
-  - - 2310.6134
-    - 2318.0134
+  - - 2340.2
+    - 2343.75
+  - - 2344.1
+    - 2349.8
+  - - 2350.15
+    - 2353.275
+  - - 2353.625
+    - 2359.8
+  - - 2360.15
+    - 2367.425
+  - - 2368.925
+    - 2375.35
+  - - 2375.7
+    - 2383.1
   beat: zoom flight to the chosen flood event (provisional Amphan, Bay of Bengal) (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
     §v3))
   visual: 'three.js in Remotion (flight() + Patch from movies/src/captests/flights.tsx; v2 prototype V2/clips/amphan_zoom_flight_threejs.mp4 re-timed):
@@ -3062,33 +3458,33 @@ scenes:
   layout: Depth colour bar in the column (never on the globe); §5b edge fades; the last frame matches s30.
 - id: s30_flood_swipe
   t:
-  - 2318.8134
-  - 2398.3476
+  - 2383.9
+  - 2461.425
   sentence_times:
-  - - 2318.8134
-    - 2328.1092
-  - - 2328.4592
-    - 2333.8092
-  - - 2334.1592
-    - 2336.1092
-  - - 2336.4592
-    - 2347.2342
-  - - 2347.5842
-    - 2355.9842
-  - - 2356.3342
-    - 2358.7842
-  - - 2359.1342
-    - 2364.6272
-  - - 2364.9772
-    - 2370.0476
-  - - 2371.5476
-    - 2377.2726
-  - - 2378.7726
-    - 2386.2476
-  - - 2386.5976
-    - 2392.3976
-  - - 2392.7476
-    - 2397.5476
+  - - 2383.9
+    - 2392.425
+  - - 2392.775
+    - 2398.125
+  - - 2398.475
+    - 2400.425
+  - - 2400.775
+    - 2411.55
+  - - 2411.9
+    - 2420.3
+  - - 2420.65
+    - 2423.1
+  - - 2423.45
+    - 2428.75
+  - - 2429.1
+    - 2433.125
+  - - 2434.625
+    - 2440.35
+  - - 2441.85
+    - 2449.325
+  - - 2449.675
+    - 2455.475
+  - - 2455.825
+    - 2460.625
   beat: 'ONE plain false-colour before/after swipe (captests A5 look), no overlay: Cyclone Nargis 2008 (flood_visuals v3 DECIDED by the user 2026-11-05);
     pointer F32'
   visual: 'Swipe as captests/A5_before_after/swipe_offline_capture.mp4: a wide false-colour pair in one frame, the gold vertical line GLIDING across at one
@@ -3137,29 +3533,29 @@ scenes:
   layout: Legend and colour key under the image beside the source line; nothing on the image but place dots, names and pointers.
 - id: s31_recap
   t:
-  - 2398.3476
-  - 2479.8476
+  - 2461.425
+  - 2542.925
   sentence_times:
-  - - 2398.3476
-    - 2408.2476
-  - - 2408.5976
-    - 2413.8726
-  - - 2414.2226
-    - 2423.7226
-  - - 2424.0726
-    - 2429.2476
-  - - 2429.5976
-    - 2442.6726
-  - - 2443.0226
-    - 2451.7226
-  - - 2452.0726
-    - 2462.6226
-  - - 2462.9726
-    - 2466.7726
-  - - 2467.1226
-    - 2473.0726
-  - - 2473.4226
-    - 2479.0476
+  - - 2461.425
+    - 2471.325
+  - - 2471.675
+    - 2476.95
+  - - 2477.3
+    - 2486.8
+  - - 2487.15
+    - 2492.325
+  - - 2492.675
+    - 2505.75
+  - - 2506.1
+    - 2514.8
+  - - 2515.15
+    - 2525.7
+  - - 2526.05
+    - 2529.85
+  - - 2530.2
+    - 2536.15
+  - - 2536.5
+    - 2542.125
   beat: recap ('To sum up'); last sentence the teaser to Part 3
   visual: 'One beat per sentence, mini pictures reused (no headings): the unit circle with Δθ along θ̂; the two slope graphs; the two turning
     rules with gold swing arrows; the three product-rule pieces; the ring with v/r, v θ̂ and the inward arrow; ''0.048 m/s² ≈ g/200''; the cylinder
@@ -3191,15 +3587,15 @@ scenes:
   layout: Mini pictures one per sentence; small source lines under the data minis. No headings.
 - id: s32_end
   t:
-  - 2479.8476
-  - 2502.7476
+  - 2542.925
+  - 2565.825
   sentence_times:
-  - - 2479.8476
-    - 2486.0476
-  - - 2486.3976
-    - 2494.4476
-  - - 2494.7976
-    - 2502.4476
+  - - 2542.925
+    - 2549.125
+  - - 2549.475
+    - 2557.525
+  - - 2557.875
+    - 2565.525
   beat: 'series end card (maths ending, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (unit circle with r-hat and theta-hat, a storm cylinder, a radius-height
     section, a coast with turned axes); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid

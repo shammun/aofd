@@ -1,0 +1,15 @@
+# ch00_coordinates_storm (#5b, Part 2): sound cue sheet for tools/sound/mix.py (build 1, 2026-11-05, final TTS timing).
+# Score: the storyboard's own style 'eyewall-spiral' (tools/sound/styles.py, added d2a472b), seed 31. The style has no
+# scene-timed layers (no enter_s / exit_s), so nothing in it depends on the timing.
+# Effects only where the picture shows the thing (HOUSE_STYLE §8), from the storyboard's effects_candidates:
+#  - s15 S2-S4: the three streak families (in near the sea, up the eyewall, out at the top) animate; a soft gusty wind bed
+#    (candidate 'wind_strong_far' is not in tools/sound/sfx.py: wind_gusty at low intensity instead); offset = S2 start.
+#  - s27 S0-S2: the onshore push at the beach and the sea-level sheet rising in the side-section; surf (candidate
+#    'waves_breaking' as a bed: surf is a bed, waves_breaking is not). The candidate 'water_draining' (S8) has no effect in
+#    tools/sound/sfx.py and is dropped.
+music: {style: eyewall-spiral, seed: 31, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects:
+  - {effect: wind_gusty, scene: s15, offset: 6.4, duration: 15.0, intensity: 0.1, lufs: -29, fade_in: 1.5, fade_out: 2.5, seed: 62}
+  - {effect: surf, scene: s27, offset: 0.2, duration: 18.0, intensity: 0.12, lufs: -29, fade_in: 1.5, fade_out: 3.0, seed: 63}

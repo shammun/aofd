@@ -14,6 +14,7 @@ import { Arrow, Lbl, Pt, Svg, clamp, textW } from "../house/kit/draw";
 import { CurvedLink } from "../house/kit/extras";
 import { Drape, GProj, GlobeCam, GlobeMesh, Graticule, coastPath, globeCam, globeProj, useTex } from "./kit_cs/globe";
 import { View3D } from "./kit_cs/three3d";
+import { CalcStack as HouseCalcStack } from "../house/kit/tex";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -197,17 +198,19 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string; a?: number; 
   const o = ramp(f, t0, t0 + 10) * (1 - ramp(f, t1, t1 + 10));
   if (o <= 0) return null;
   return (
-    <g opacity={o}>
-      <rect x={1070} y={y} width={700} height={116} rx={22} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
-      <Lbl x={1100} y={y + 34} t="every step, if you want it" c={C.key} s={T.floor} />
-      <Lbl x={1100} y={y + 86} t={`not needed for the weather · skip to ${to}`} c={C.gold} s={T.floor} />
+    <g opacity={o} data-lc-own="skipchip">
+      {/* heavy-phase K6 r0: the long second line ran past the chip and the 1842 edge; the Part 1 wording (fix 1, review 1
+          Should 5: the user's word "optional"); the narration says it is not needed for the weather */}
+      <rect x={1070} y={y} width={640} height={116} rx={22} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
+      <Lbl x={1100} y={y + 34} t="every step · optional" c={C.key} s={T.floor} />
+      <Lbl x={1100} y={y + 86} t={`skip to ${to}`} c={C.gold} s={T.floor} />
     </g>
   );
 };
 
 // ---------------------------------------------------------------- colour bars (beside the picture, in the text column)
 export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[]; ticks: { v: number; t: string }[]; lo: number; hi: number; unit?: string; o?: number;
-  title?: string }> = ({ x, y, w, lut, ticks, lo, hi, unit, o = 1, title }) => {
+  title?: string; children?: React.ReactNode }> = ({ x, y, w, lut, ticks, lo, hi, unit, o = 1, title, children }) => {
   if (unit && x + w + 18 + textW(unit, 48) > 1842) throw new Error(`colour bar unit ends past 1842`);
   if (o <= 0) return null;
   return (
@@ -217,6 +220,7 @@ export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[
       <rect x={x} y={y} width={w} height={24} fill="none" stroke={C.muted} strokeWidth={2} />
       {ticks.map((tk) => <Lbl key={tk.t} x={x + ((tk.v - lo) / (hi - lo)) * w} y={y + 56} t={tk.t} c={C.muted} s={48} a="middle" b={false} />)}
       {unit ? <Lbl x={x + w + 18} y={y + 12} t={unit} c={C.muted} s={48} b={false} /> : null}
+      {children}
     </g>
   );
 };
@@ -224,9 +228,11 @@ export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[
 export const URBar: React.FC<{ x: number; y: number; o?: number; w?: number; title?: boolean }> = ({ x, y, o = 1, w = 420, title = true }) => o <= 0 ? null : (
   <g opacity={o}>
     <ColourBar x={x} y={y} w={w} lut={LUT_UR} lo={-16} hi={16} unit="m/s" title={title ? "radial wind" : undefined}
-      ticks={[{ v: -16, t: "−16" }, { v: 0, t: "0" }, { v: 16, t: "+16" }]} />
-    <Lbl x={x} y={y + 112} t="− in" c={C.neg} s={T.floor} />
-    <Lbl x={x + w} y={y + 112} t="+ out" c="#8db5e2" s={T.floor} a="end" />
+      ticks={[{ v: -16, t: "−16" }, { v: 0, t: "0" }, { v: 16, t: "+16" }]}>
+      {/* heavy-phase K6 r0: the sign legend is part of the bar (its own, inside the data-k6-cbar group) */}
+      <Lbl x={x} y={y + 112} t="− in" c={C.neg} s={T.floor} />
+      <Lbl x={x + w} y={y + 112} t="+ out" c="#8db5e2" s={T.floor} a="end" />
+    </ColourBar>
   </g>
 );
 export const SpeedBar: React.FC<{ x: number; y: number; o?: number; w?: number; hi?: number }> = ({ x, y, o = 1, w = 300, hi = 50 }) =>
@@ -333,3 +339,11 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
   );
 };
 export { Arrow, Lbl, Svg, clamp };
+
+// ---------------------------------------------------------------- calc stacks (heavy phase, K6 r0)
+/** The house CalcStack with the real height of a fraction row: a row whose TeX has a \frac and no explicit `h` is ~2.2× its
+ * type size tall, not the default 1.42× (K6 r0 found fraction rows printed over the next row in s04, s07, s09, s13, s14). */
+export const CalcStack: typeof HouseCalcStack = (p) => (
+  <HouseCalcStack {...p} rows={p.rows.map((r) => (r.h !== undefined || !/\frac/.test(`${typeof r.lhs === "string" ? r.lhs : ""}${typeof r.rhs === "string" ? r.rhs : ""}`)
+    ? r : { ...r, h: (r.size ?? p.size ?? 68) * 2.2 }))} />
+);

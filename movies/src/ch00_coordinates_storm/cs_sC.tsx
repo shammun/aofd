@@ -7,6 +7,7 @@ import { Img, useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
 import { Pt, pulse, textW } from "../house/kit/draw";
 import { TeX } from "../house/kit/tex";
+import { CalcStack } from "./cs_lib";  // fix 0: fraction rows get their real height
 import { Keyword } from "../house/kit/notes";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
@@ -27,6 +28,7 @@ const CHECK_C: [string, number, number, number][] = [
   ["fmb", CST.spF, 33, 0.1], ["fmb from", CST.fromF, 222.5, 0.1], ["coast brg", CST.coast_brg, 329, 0.2], ["fm res", CST.gauges["8725520"].ext, 2.2, 0.01],
   ["stp res", CST.gauges["8726520"].ext, -1.8, 0.05], ["d fs", CST.d_fs, 160, 1], ["shelf", FLD.shelf["89.0E"].km_to_20m, 33, 0.2], ["acc", RING.acc, 0.048, 0.0006],
   ["say a_vt", SAY.a_vt, 20, 0], ["say a_kmh", SAY.a_kmh, 167, 0],
+  ["say a_ms", SAY.a_ms, 46, 0], ["a ms", (AMP.best06.kt * 1.852) / 3.6, 46, 0.5], ["say a_msl", SAY.a_msl, 967, 0], ["a msl", AMP.msl, 967, 0.5],
 ];
 CHECK_C.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -90,7 +92,7 @@ const S21: React.FC = () => {
         <Lbl x={1210} y={440} t={`Khulna ≈ ${Math.round(AMP.close.Khulna.km)} km W`} c={C.key} s={T.floor} o={win(f, tKhu, LEN(k) - 50)} />
         <Lbl x={1210} y={530} t="Khulna, Satkhira districts" c={C.gold} s={T.floor} o={win(f, tDis, LEN(k) - 50)} />
       </Svg>
-      <SourceBelow text={SRC.ibtAmp} pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1400} name="s21 src" />
+      <SourceBelow text={SRC.ibtAmp} pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1740} name="s21 src" />{/* K6 r0: one line (two ran into the caption band) */}
     </Scene>
   );
 };
@@ -143,6 +145,11 @@ const S23: React.FC = () => {
   const bx = (0.25 / 7.0) * PB.h;
   const sp = 3.2;                                             // px per m/s for the ring-mean arrows
   const a0 = 160 * D2R, rp: Pt = [c[0] + rpx * Math.cos(a0), c[1] - rpx * Math.sin(a0)];
+  const vtV: Pt = [-Math.sin(a0) * AMP.vt10[0] * sp * 2, -Math.cos(a0) * AMP.vt10[0] * sp * 2];
+  const vrV: Pt = [Math.cos(a0) * AMP.vr10[0] * sp * 2, -Math.sin(a0) * AMP.vr10[0] * sp * 2];
+  const angT = Math.atan2(-vtV[1], vtV[0]), angW = Math.atan2(-(vtV[1] + vrV[1]), vtV[0] + vrV[0]);   // screen angles (y up), radians
+  const angArc = arcD(rp, 70, Math.min(angT, angW) / D2R, Math.max(angT, angW) / D2R);
+  const angLbl = polar(rp, 96, (angT + angW) / 2 / D2R);
   const oMap = fin(f, tHere - 10, 14) + (f < tHere ? 0.0 : 0);
   return (
     <Scene>
@@ -163,8 +170,14 @@ const S23: React.FC = () => {
         </g>
         <rect x={c[0] + 120} y={c[1] + 120} width={bx} height={bx} fill="none" stroke={C.gold} strokeWidth={4} opacity={win(f, tBox, tOrig + 40)} />
         <g opacity={fin(f, tMeans)}>
-          <AnimatedWindArrow from={rp} to={[rp[0] - Math.sin(a0) * AMP.vt10[0] * sp * 2, rp[1] - Math.cos(a0) * AMP.vt10[0] * sp * 2]} speed={AMP.vt10[0]} f={f} c={C.first} px={9} head={30} />
-          <AnimatedWindArrow from={rp} to={[rp[0] + Math.cos(a0) * AMP.vr10[0] * sp * 2, rp[1] - Math.sin(a0) * AMP.vr10[0] * sp * 2]} speed={Math.abs(AMP.vr10[0])} f={f} c={C.neg} px={9} head={30} />
+          <AnimatedWindArrow from={rp} to={[rp[0] + vtV[0], rp[1] + vtV[1]]} speed={AMP.vt10[0]} f={f} c={C.first} px={9} head={30} />
+          <AnimatedWindArrow from={rp} to={[rp[0] + vrV[0], rp[1] + vrV[1]]} speed={Math.abs(AMP.vr10[0])} f={f} c={C.neg} px={9} head={30} />
+        </g>
+        {/* fix 0 B24: the actual wind (round + in) and the inflow angle between it and the round arrow */}
+        <g opacity={fin(f, tTan)}>
+          <AnimatedWindArrow from={rp} to={[rp[0] + vtV[0] + vrV[0], rp[1] + vtV[1] + vrV[1]]} speed={Math.hypot(AMP.vt10[0], AMP.vr10[0])} f={f} c={C.ink} px={8} head={28} />
+          <path d={angArc} fill="none" stroke={C.gold} strokeWidth={5} />
+          <g data-lc-maplabel="1"><Lbl x={angLbl[0]} y={angLbl[1]} t="inflow angle" c={C.gold} s={T.floor} a="end" /></g>
         </g>
         <path d={arcD(c, rpx + 40, 30, 120)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tACW)} />
         <polyline points={`${polar(c, rpx + 40, 120)[0] + 4},${polar(c, rpx + 40, 120)[1] + 22} ${polar(c, rpx + 40, 120)[0]},${polar(c, rpx + 40, 120)[1]} ${polar(c, rpx + 40, 120)[0] + 24},${polar(c, rpx + 40, 120)[1] - 2}`}
@@ -175,24 +188,30 @@ const S23: React.FC = () => {
         <SideCallout f={f} lines="one box ≈ 28 km" at={[MX, 290]} appear={tBox} out={tHere - 20} target={[c[0] + 120 + bx + 4, c[1] + 120 + bx / 2]} s={T.floor} c={C.gold} />
         <Keyword f={f} text="20 May · 06 UTC" at={[MX, 120]} s={T.key} appear={tHere} out={tWeak + 10} />
         <SideCallout f={f} lines="ERA5 centre · ring 50 km" at={[MX, 210]} appear={tOrig} out={tShape - 20} target={[c[0] + rpx + 6, c[1] - 20]} s={T.floor} c={C.first} />
-        <SpeedBar x={830} y={90} w={190} hi={30} />
-        <Lbl x={MX} y={470} t={`round ≈ ${SAY.a_vt} m/s · in ≈ ${Math.abs(SAY.a_vr)} m/s (−)`} c={C.key} s={T.floor} o={win(f, tMeans, tShape - 20)} />
-        <Lbl x={MX} y={540} t="anticlockwise, like Ian" c={C.key} s={T.floor} o={win(f, tACW, tShape - 20)} />
-        <Lbl x={MX} y={600} t="both: northern hemisphere" c={C.key} s={T.floor} o={win(f, tACW + 20, tShape - 20)} />
-        <Lbl x={MX} y={660} t="official: 90 kt (3-min)" c={C.local} s={T.floor} o={win(f, tOff, tShape - 20)} />
-        <Lbl x={MX} y={790} t="reanalysis: far too weak" c={C.local} s={T.floor} o={win(f, tWeak, tShape - 20)} />
+        <SpeedBar x={830} y={90} w={160} hi={30} />{/* K6 r0: its "m/s" touched the keyword column */}
+        <Lbl x={MX} y={470} t={`round ≈ ${SAY.a_vt} m/s · in ≈ ${Math.abs(SAY.a_vr)} m/s (−)`} c={C.key} s={T.floor} o={win(f, tMeans, tOff - 10)} />
+        <Lbl x={MX} y={540} t="anticlockwise, like Ian" c={C.key} s={T.floor} o={win(f, tACW, tOff - 10)} />
+        <Lbl x={MX} y={600} t="both: northern hemisphere" c={C.key} s={T.floor} o={win(f, tACW + 20, tOff - 10)} />
+        <Lbl x={MX} y={700} t="ERA5's storm: much too weak" c={C.local} s={T.floor} o={win(f, AT(k, 9, "so the reanalysis"), tShape - 20)} />
         <Keyword f={f} text="but the shape is right" at={[MX, 120]} s={T.key} appear={tShape} />
         <g opacity={fin(f, tTan)}>
-          <Lbl x={MX} y={380} t="Ian · 25 km · HRRR" c={C.key} s={T.floor} />
-          <Lbl x={MX} y={440} t="round 34.8 · in −13.3" c={C.local} s={T.floor} />
-          <Lbl x={MX} y={520} t="Amphan · 50 km · ERA5" c={C.key} s={T.floor} />
-          <Lbl x={MX} y={580} t={`round ${nf(AMP.vt10[0], 1)} · in ${nf(AMP.vr10[0], 1)}`} c={C.local} s={T.floor} />
+          <Lbl x={MX} y={320} t="Amphan · 50 km · ERA5" c={C.key} s={T.floor} />
+          <Lbl x={MX} y={378} t={`round ${nf(AMP.vt10[0], 1)} · in ${nf(AMP.vr10[0], 1)}`} c={C.local} s={T.floor} />
+          <Lbl x={MX} y={560} t="Ian · 25 km · HRRR" c={C.key} s={T.floor} />
+          <Lbl x={MX} y={618} t="round 34.8 · in −13.3" c={C.local} s={T.floor} />
         </g>
         <Lbl x={MX} y={800} t="a similar spiral angle" c={C.gold} s={T.floor} o={fin(f, tTwo)} />
       </Svg>
-      <TeX s={EQ_S23} x={MX} y={270} size={44} o={fin(f, tTan)} />
-      <TeX s={String.raw`\frac{13.3}{34.8}\approx0.38\ \Rightarrow\ \approx21^\circ`} x={MX} y={690} size={50} o={fin(f, tTan + 30)} />
-      <TeX s={String.raw`90\ \mathrm{kt}\times1.852\approx167\ \mathrm{km/h}`} x={MX} y={725} size={44} c={C.local} o={win(f, tOff + 20, tShape - 20)} />
+      {/* fix 0 B24: what the inflow angle is, then the angle step for each storm */}
+      <TeX s={String.raw`\tan(\text{inflow angle})=\frac{|u_r|}{u_\theta}`} x={MX} y={215} size={46} o={fin(f, tTan)} />
+      <TeX s={EQ_S23} x={MX} y={465} size={44} o={fin(f, tTan + 20)} />
+      <TeX s={String.raw`\frac{13.3}{34.8}\approx0.38\ \Rightarrow\ \arctan0.38\approx20.9^\circ\approx21^\circ`} x={MX} y={705} size={44} o={fin(f, tTan + 40)} />
+      {/* fix 0 B14: like with like: the official 90 kt in m/s, and the two lowest pressures */}
+      <CalcStack f={f} x={MX} y={440} size={44} maxLines={3} o={fout(f, tShape - 10)} rows={[
+        { rhs: String.raw`\text{official (3-min): }90\ \mathrm{kt}\times1.852\approx167\ \mathrm{km/h}`, at: tOff, c: C.local },
+        { rhs: String.raw`167\div3.6\approx${SAY.a_ms}\ \mathrm{m/s}`, at: AT(k, 8, "forty six"), c: C.local },
+        { rhs: String.raw`p_{\min}:\ \text{ERA5 }${SAY.a_msl}\ \text{vs official }${AMP.best06.hpa}\ \mathrm{hPa}`, at: tWeak, c: C.local },
+      ]} />
       <SourceBelow text={SRC.era5} pic={PB} w={1400} o={oMap + 1} name="s23 src" />
     </Scene>
   );
@@ -323,8 +342,14 @@ const S26: React.FC = () => {
         <Lbl x={MX} y={290} t="coast runs NNW" c={C.second} s={T.floor} o={win(f, tCoast, tP4 - 20)} />
         <Lbl x={MX} y={360} t="almost straight onto the land" c={C.key} s={T.floor} o={win(f, tCoast + 30, tP4 - 20)} />
         <Keyword f={f} text="Part 4: how much, exactly" at={[MX, 120]} s={T.key} c={C.local} appear={tP4} />
-        <SpeedBar x={MX} y={560} w={360} hi={50} />
+        <SpeedBar x={MX} y={720} w={360} hi={50} />
+        <Lbl x={MX} y={620} t="towards the NE = from the SW" c={C.muted} s={T.floor} o={win(f, AT(k, 3, "from the s") , tP4 - 20)} />
       </Svg>
+      {/* fix 0 B25a: the 33 m/s from its two components */}
+      <CalcStack f={f} x={MX} y={410} size={44} maxLines={3} o={fout(f, tP4 - 10)} rows={[
+        { rhs: String.raw`u=${nf(u[0], 1)}\ \mathrm{m/s}\ (\text{east}),\ \ v=${nf(u[1], 1)}\ \mathrm{m/s}\ (\text{north})`, at: tWind + 20 },
+        { rhs: String.raw`\sqrt{${nf(u[0], 1)}^2+${nf(u[1], 1)}^2}=\sqrt{${Math.round(u[0] ** 2)}+${Math.round(u[1] ** 2)}}\approx${nf(CST.spF, 1)}\ \mathrm{m/s}`, at: AT(k, 3, "thirty three") },
+      ]} />
       <SourceBelow text={SRC.hrrr20} pic={Bx} w={1400} name="s26 src" />
     </Scene>
   );
@@ -338,7 +363,7 @@ const Gauges: React.FC<{ A: Ax; f: number; tF: number; tS: number; land?: boolea
   return (
     <g>
       <Axes A={A} xt={[0, 12, 24, 36]} yt={[-2, 0, 2]} xf={(v) => ["27 Sep 12", "28 Sep 00", "28 Sep 12", "29 Sep 00"][v / 12]} yf={(v) => nf(v, 0, true)} zero
-        yl="above / below the predicted tide (m)" />
+        yl="vs predicted tide (m)" />{/* K6 r0: the long axis title ran past 1842 */}
       <line x1={P(CST.land_h, 0)[0]} y1={A.y} x2={P(CST.land_h, 0)[0]} y2={A.y + A.h} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" opacity={land ? 1 : 0} />
       <Lbl x={P(CST.land_h, 0)[0] - 10} y={A.y + 26} t="landfall ≈ 19 UTC" c={C.local} s={T.floor} a="end" o={land ? 1 : 0} />
       <Curve A={A} xs={G1.h} ys={G1.res} c={C.second} w={6} upto={prog(f, tF, tF + 60)} />
@@ -358,9 +383,9 @@ const S27: React.FC = () => {
   const Bx: MapBox = { ...B, x: 340 - B.w / 2 + 120 };
   const P = mapP(Bx), fm = P(CST.fmb[0], CST.fmb[1]), sp = P(CST.stp[0], CST.stp[1]);
   const uF = CST.uF as number[], uS = CST.uS as number[], s = 4.5;
-  const sh = CST.shelf, SA: Ax = { x: 1110, y: 300, w: 640, h: 200, xr: [0, 150], yr: [-80, 10] };
+  const sh = CST.shelf, SA: Ax = { x: 1110, y: 440, w: 640, h: 200, xr: [0, 150], yr: [-80, 10] };   // K6 r0 / fix 0: below the rows
   const rise = prog(f, tSurge, tSurge + 90) * fout(f, tNorth - 10);
-  const GAx = GA(1180, 530, 600, 230);
+  const GAx = GA(1130, 530, 560, 230);   // K6 r0: "29 Sep 00" ran past 1842
   return (
     <Scene>
       <GeoMap id="s27m" B={Bx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
@@ -377,7 +402,8 @@ const S27: React.FC = () => {
         <Keyword f={f} text="onto the land" at={[MX, 120]} s={T.key} appear={0} out={tSurge - 20} />
         <Keyword f={f} text="storm surge" at={[MX, 120]} s={T.key} appear={tSurge} out={tNHC - 20} />
         <Lbl x={MX} y={210} t="wide, shallow shelf" c={C.key} s={T.floor} o={win(f, tWind, tNHC - 20)} />
-        <Lbl x={MX} y={280} t="≈ 1 cm per hPa" c={C.local} s={T.floor} o={win(f, tCm, tNHC - 20)} />
+        <Lbl x={MX} y={270} t="≈ 1 cm per hPa" c={C.local} s={T.floor} o={win(f, tCm, tNHC - 20)} />
+        <Lbl x={MX} y={270} t="75 cm: small next to 3-4.5 m" c={C.muted} s={T.floor} o={win(f, tNHC + 30, tFM - 10)} />
         <Keyword f={f} text="NHC: 3-4.5 m above the ground" at={[MX, 120]} s={T.floor} c={C.local} appear={tNHC} out={tNorth - 20} />
         <g opacity={fin(f, tFM)}><Gauges A={GAx} f={f} tF={tFM} tS={tStP} land={false} labels={false} /></g>
         <Lbl x={MX} y={230} t={`Fort Myers (upriver) ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.second} s={T.floor} o={win(f, tFM + 30, tEk - 20)} />
@@ -389,7 +415,9 @@ const S27: React.FC = () => {
         <Keyword f={f} text="more: Storm surge" at={[MX, 120]} s={T.floor} appear={tMore} />
         <SpeedBar x={770} y={90} w={220} hi={50} />
       </Svg>
-      <TeX s={String.raw`10\text{-}15\ \mathrm{ft}\approx3\text{-}4.5\ \mathrm m`} x={MX} y={340} size={52} c={C.local} o={win(f, tNHC + 10, tNorth - 20)} />
+      {/* fix 0 B25b: Ian's number for the inverted barometer; B25c: the feet-to-metres factor */}
+      <TeX s={String.raw`1013-${(D.s17 as { best: number }).best}\approx75\ \mathrm{hPa}\ \Rightarrow\ \approx75\ \mathrm{cm}`} x={MX} y={335} size={46} c={C.local} o={win(f, AT(k, 3, "Ian's centre"), tFM - 10)} />
+      <TeX s={String.raw`10\times0.3048\approx3.0\ \mathrm m,\ \ 15\times0.3048\approx4.6\ \mathrm m`} x={MX} y={205} size={46} c={C.local} o={win(f, tNHC + 10, tFM - 10)} />
       <SourceBelow text={SRC.surge} pic={Bx} w={1400} name="s27 src" />
     </Scene>
   );
@@ -418,7 +446,7 @@ const S28: React.FC = () => {
       <GeoMap id="s28m" B={Lx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
       <Svg>
         <Place p={fm} t="Fort Myers" dx={-14} dy={40} a="end" />
-        <Place p={sp} t="St. Pete" dx={-14} dy={-36} a="end" />
+        <Place p={sp} t="Saint Petersburg" dx={-14} dy={-36} a="end" />{/* fix 0 B25d: as the voice and the chart say */}
       </Svg>
       <SourceBelow text={SRC.surge} pic={{ x: 220, y: 300, w: 760, h: 520 }} w={1400} name="s28 src" />
     </Scene>
@@ -455,6 +483,9 @@ const S29: React.FC = () => {
           <g opacity={win(f, tShelf, tTrack)}>
             <line x1={G.p(sh.coast_lat, 89.0, 1.003)[0]} y1={G.p(sh.coast_lat, 89.0, 1.003)[1]} x2={G.p(sh.coast_lat - sh.km_to_20m / 111.2, 89.0, 1.003)[0]}
               y2={G.p(sh.coast_lat - sh.km_to_20m / 111.2, 89.0, 1.003)[1]} stroke={C.gold} strokeWidth={6} />
+            {/* fix 0 B25e: the number on the shelf line itself */}
+            <g data-lc-maplabel="1"><Lbl x={G.p(sh.coast_lat - sh.km_to_20m / 222.4, 89.0, 1.003)[0] + 18} y={G.p(sh.coast_lat - sh.km_to_20m / 222.4, 89.0, 1.003)[1]}
+              t={`≈ ${Math.round(sh.km_to_20m)} km`} c={C.gold} s={T.floor} /></g>
           </g>
           <path d={llPath(G, trackLL.slice(0, nTr), 1.004)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tTrack)} />
           <circle cx={G.p(AMP.landfall[0], AMP.landfall[1], 1.004)[0]} cy={G.p(AMP.landfall[0], AMP.landfall[1], 1.004)[1]} r={16} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, t20)} />
@@ -474,7 +505,7 @@ const S29: React.FC = () => {
         <Lbl x={1210} y={480} t="a wide, shallow shelf" c={C.key} s={T.floor} o={win(f, tPile, tTrack - 20)} />
         <Keyword f={f} text="track · landfall 20 May" at={[1210, 120]} s={T.floor} appear={tTrack} />
       </Svg>
-      <SourceBelow text={SRC.flight} pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1400} name="s29 src" />
+      <SourceBelow text={SRC.flight} pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1740} name="s29 src" />{/* K6 r0: one line */}
     </Scene>
   );
 };
@@ -562,7 +593,7 @@ const S31: React.FC = () => {
         <g opacity={beat(1)}>
           {[0, 1].map((i) => { const A: Ax = { x: 160 + i * 420, y: 330, w: 340, h: 220, xr: [0, 360], yr: [-1, 1] };
             const xs = Array.from({ length: 73 }, (_, q) => q * 5);
-            return <g key={i}><Axes A={A} xt={[0, 360]} yt={[-1, 1]} xf={(v) => `${v}°`} />
+            return <g key={i}><Axes A={A} xt={[180]} yt={[-1, 1]} xf={(v) => `${v}°`} />
               <Curve A={A} xs={xs} ys={xs.map((d) => (i ? Math.sin(d * D2R) : Math.cos(d * D2R)))} c={i ? C.first : C.second} /></g>; })}
         </g>
         <g opacity={beat(2)}>
