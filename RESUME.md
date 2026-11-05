@@ -85,3 +85,4 @@ Meanwhile the render-2 weather movie (57:52, all fixes except the small render-3
 - Reviews: `reports/ch00_movies.md`.
 - User feedback: `reports/ch00_weather_basics_user_feedback{,_round2}.md`.
 - Never clean `outputs/viewing_*`, except by the archive-to-G: rule when C: is below 45 GB.
+**Update 2026-11-05 10:30:** Part 1 build 1 rendered (38:29, 148.7 MB), QA PASS (halves WARN 2), G: viewing 5a_coordinates_flat_build1.mp4 (+.vtt) + Drive 1VyL2TW39PY3tqLmbEHZ62t-18ZjEQzHp. Review 1 of Part 1 running (movie-reviewer -> reports/ch00_movies.md). Part 2 heavy phase running in a motion-builder (final TTS -> data build -> gates -> eyewall-spiral mix -> K6 0 -> cst_render.sh written, NOT rendered); orchestrator then runs `bash movies/src/ch00_coordinates_storm/checks/cst_render.sh`. Flood v3b clips done (report 11f6b7c).
