@@ -1,14 +1,14 @@
-# ch00_coordinates_frames storyboard v1 (movie-director, 2026-11-05). Part 4 of the #5 split (#5d). S<k> = sentence k of the scene;
+# ch00_coordinates_frames storyboard v1 (movie-director, 2026-11-05). Part 4 of the seven-part coordinates series (#5d). S<k> = sentence k;
 # AT(k, 'words') a phrase inside it. House style movies/HOUSE_STYLE.md binding (no headings except s00, keywords only, no boxes, no references
 # or badges, 44-px floor, caption band empty, source line + colour bar on data frames, source lines below images). Equation provenance
 # (vallis_eq, page_png) is for QA only and never drawn. calc_rows = every other LaTeX line drawn in the scene (CalcStack rows).
-# derivation.steps = [what we did, the new line, why we can do this, in words]. Times MEASURED (tools/tts.py dry run, af_bella x 1.0).
+# derivation.steps = [what we did, the new line, why we can do this, in words]. Times MEASURED (tools/tts.py runs, af_bella x 1.0).
 id: ch00_coordinates_frames
-title: 'Coordinates, Part 4 — Moving frames: local axes and storm-relative winds'
+title: 'Coordinates, Part 4 — Turning frames: local axes and how they turn'
 title_card:
   line1: Coordinates · Part 4
-  line2: Moving frames
-  subtitle: local axes and storm-relative winds
+  line2: Turning frames
+  subtitle: local axes and how they turn
 version: 1
 concepts:
 - the local east-north-up frame (i-hat, j-hat, k-hat) and v = u i + v j + w k (Vallis (2.29))
@@ -17,11 +17,7 @@ concepts:
 - 'a local frame turned on purpose: the coast frame; the coast bearing 329 deg from two coastline points (Part 3''s km); along/across components'
 - 'how the local arrows turn as a parcel moves: Di/Dt, Dj/Dt, Dk/Dt from Part 2''s turning rules (Vallis (2.39a)-(2.39c), r = a)'
 - 'Dv/Dt in spherical coordinates: product rule, the eastward part, metric terms (Vallis (2.44a), (2.45))'
-- Galilean transformation x = x' + Ut, u = u' + U; accelerations unchanged (Kundu §3.3, (3.9))
-- 'the air parcel''s acceleration: local change + advection; each piece frame-dependent, the sum not'
-- storm-relative wind v' = v - U; ring means unchanged by a uniform shift (Storm Ciaran)
-- 'change of variables to a moving frame: tau, dp/dt = dp/dtau - U.grad p (Kundu (B.2.2)); a fixed barometer at Plymouth'
-target_duration_s: 3520.0
+target_duration_s: 2360.975
 fps: 30
 size:
 - 1920
@@ -31,13 +27,14 @@ headings: false
 footnote_strip: false
 scale_badges: false
 series:
-  name: Chapter 0 series (plan v6)
+  name: 'Chapter 0 series (plan v6; coordinates now seven parts: 1 flat, 2 cyclone, 3 sphere, 4 turning frames, 5 moving frames, 6 routes, 7 maps)'
   position: 10
   plan_id: '#5d'
-  previous: ch00_coordinates_sphere (#5c, pos 9)
-  next: Part 5, Routes (great circles, rhumb lines); Part 6 Maps follows (six-part series, coordinator 2026-11-05)
-  split_plan: movies/ch00/ch00_coordinates/split_plan.md §2e (commit 73044df)
-  archive: 'movies/ch00/ch00_coordinates (build 1: s24-s26, s39, s41-s45 reused)'
+  part: 4
+  previous: ch00_coordinates_sphere (#5c, Part 3)
+  next: 'ch00_coordinates_moving (#5e, Part 5: Moving frames)'
+  split_plan: movies/ch00/ch00_coordinates/split_plan.md §2e (commit 73044df) + coordinator split at the old s27/s28 seam (2026-11-05)
+  archive: movies/ch00/ch00_coordinates (build 1)
 audio:
   voice: af_bella
   speed: 1.0
@@ -58,30 +55,24 @@ audio:
     kind: waves_breaking
     intensity: 0.12
     shows: water pushed onto Fort Myers Beach (S12-S13 only)
-  - scene: s28_train
-    kind: rail_rhythm_soft
-    intensity: 0.08
-    shows: the train gliding (S2-S3)
-  - scene: s33_ciaran
-    kind: wind_rising
-    intensity: 0.12
-    shows: Ciaran's isobars sweeping in (S2)
-  effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word; one at a time; no caption tags'
+  effects_rules: 'HOUSE_STYLE §8: only where the picture shows the thing; -30...-24 LUFS short-term, ducked; never over a word; one at a time'
 dry_run:
   tool: tools/tts.py (Kokoro af_bella x 1.0, movies/lexicon.yaml as of HEAD, not edited)
-  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/dryrun1
-  splice: '12 changed scenes re-measured in one tools/tts.py run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_frames/splice2 (s01, s04,
-    s07, s16, s22, s23, s25, s26, s29, s30, s39, s42); every time recomputed with the tts.py gap rules (method reproduces the full run total 3396.575 s exactly)'
-  audio_s: 3520.0
-  with_hold_s: 3522.5
-  speech_s: 3199.0
-  sentences: 516
-  words: 8448
-  beats: 107
-  words_per_minute_overall: 144.0
-  words_per_minute_speaking: 158.4
-  cues_full_run: 798
-  warnings_full_run: []
+  runs:
+    dryrun1: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\dryrun1 (full single-movie script, 3396.575 s)
+    splice2: G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\splice2 (12 scenes changed for title, six-part and skip guidance)
+    splice3: 'G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\splice3 (the split: new titles, hooks, recaps, Part 5 opening)'
+  method: every sentence clip length comes from one of the three runs (scene field measured.timing_source); times recomputed with the tools/tts.py gap rules (lead
+    0.3, sentence 0.35, beat 1.5, scene 0.8, tail 0.3); the method reproduces dryrun1's total exactly
+  audio_s: 2360.975
+  with_hold_s: 2363.475
+  speech_s: 2150.17
+  sentences: 346
+  words: 5709
+  beats: 68
+  words_per_minute_overall: 145.1
+  words_per_minute_speaking: 159.3
+  warnings: none in any of the three runs
 conventions:
   latitude: phi (Vallis writes a theta variant); longitude lambda, east positive
   local arrows: i-hat east, j-hat north, k-hat up (Vallis writes bold i, j, k; hats here, as in Parts 1-3; spoken 'i hat')
@@ -97,10 +88,9 @@ colour_contract: unit arrows orange (i, j, R, x', y', z) except up k-hat teal (a
   terms orange; gold for pointers, links, angle arcs, 'same' ticks, speed/radius braces
 data_block:
   status: data report READ (reports/data/ch00_coordinates_research.md, 2026-11-05)
-  ian: 'kept (§0, §1): s14 uses the HRRR 20 UTC 10-m wind at Fort Myers Beach (unchanged by the centre question); no layers, no stripes in Part 4'
-  ciaran: 'unchanged (§6 ''Part 4 frames: ERA5 (as build 1)'')'
+  ian: 'kept (§0, §1): s14 uses the HRRR 20 UTC 10-m wind at Fort Myers Beach (unchanged by the centre question)'
   khulna: 22.8419 N, 89.5581 E (Natural Earth); Amphan 78 km W (IBTrACS NI)
-  pending: none for Part 4
+  pending: none
 cross_part:
   from_part1:
   - the 90-deg turn rule (p, q) -> (-q, p) (D02, s10)
@@ -131,7 +121,6 @@ cross_part:
   - cross product recipe; i x j = k; right-handed (#2)
   - f = 2 Omega sin phi, Omega = 7.29e-5 s^-1; Coriolis; dB/dt = Omega x B for an arrow carried by a spin (#3, 'The cross product at work')
   - limits, total differential, the traveller's chain rule dT/dt = dT/dt|place + speed x slope, DT/Dt = dT/dt + v.grad T, centred differences (#4)
-  - subtracting an arrow = adding its reverse (vectors movie)
   shared_numbers_used:
     a_km: 6371
     Brest:
@@ -154,24 +143,21 @@ cross_part:
     Ian_coast_wind_ms:
     - 22.2
     - 24.3
-    Ciaran_U_ms: 14.58
-    Ciaran_U_towards_deg: 71.0
   handed_to_part5:
-  - great circles named (s26 puck) and promised for Part 5 (Routes)
-  - 'teaser: In Part 5, we''ll find the shortest way round the Earth: great circles, and rhumb lines.'
+  - the local frame and bold v (recapped in Part 5 s02)
+  - 'teaser: In Part 5, we''ll let the frame itself move, and see what a storm''s winds look like to someone riding along with it.'
   handed_to_6_gradient:
   - 'i-hat, j-hat, k-hat derived here (split plan §3b item 3: #6 recaps them in <= 30 s)'
+  handed_to_part6:
+  - great circles named (s26 puck) and promised for Part 6 (Routes)
 guards:
   review_1:
-  - 'Must 12 (s28: ''u′ = 1.5'' and calcs in the column x >= 1100)'
-  - 'Must 13 (s34-s36: north above south, SideCallouts, links never cross)'
-  - 'Must 14 (s41: bars get the whole picture zone; two scenes s40-s41 instead of one)'
-  - 'Must 15 (s14, s33-s41: colour bar beside + dated source line)'
+  - 'Must 15 (s14: colour bar beside + dated source line)'
   - 'Must 16 (s26: the glider/puck thought experiment voiced)'
   - Should 2 (KaTeX hats only)
   - 'Should 12 (s11, s14: links end on their own targets)'
   - 'Should 13 (s14: ''minus thirty two'' voiced)'
-  - 'Should 14 (s43: 24-px gap)'
+  - 'Should 14 (s29: 24-px gap)'
   - 'Should 15 (s14: manifest coast_segment kept, extended with A/B points)'
   - 'Should 17 (s03, s08: labels only after the camera settles)'
   - Should 18 (an opening keyword from frame 0 in every scene)
@@ -197,18 +183,10 @@ honesty_notes:
 - 's26: a frictionless, non-spinning sphere; only the horizontal parts of Dv/Dt vanish (the surface pushes up); u, v from the analytic great circle (fluidpy.geo.frames.great_circle)
   by a centred difference.'
 - 's27: ''about sixty six times'' = 1.031e-3 / 1.570e-5 = 65.7 (build 1 said ''sixty five''; corrected).'
-- 's32: an idealised gust pattern (thought experiment); numbers from u = 10 + 5 sin(2π(x − 10 t)/200 km) at phase 45°: local −4.00, advection +5.41, rider +1.41 m/s
-  per hour.'
-- 's33-s37: Ciaran tracked by continuity (HOUSE_STYLE §7), ERA5 10-m winds; motion 00-06 UTC 2 Nov 14.58 m/s towards 71.0°. Sector means over ±45° about right/left
-  of the track. ''its own winds were stronger on its northern side'' is said for this ring and hour only (land/sea friction mixes in; not interpreted further). Ring
-  means 14.1/13.8 and −6.0/−5.9; the 0.26 m/s difference is meridian convergence (DC54).'
-- 's38-s41: ∂p/∂t by a centred hourly difference of ERA5 msl at Plymouth (50.25 N, 4.25 W), 00 UTC 2 Nov; U·∇p with fluidpy.geo.sphere.gradient and the tracked motion;
-  the residual −0.61 is ''the storm changing'' at Plymouth''s place in the pattern; the centre''s own −0.47 hPa/h is a size check, not the same quantity.'
 - Exaggerations (tripod arrow lengths, magnified angle steps, half-Earth cuts, inset arrow scales) and time compression (flight, puck day, hourly loops, gust pattern)
   are listed per scene and in the manifest, not badged (HOUSE_STYLE §5).
 quiz_hook: 'A parcel at 60 deg N moves due east at 20 m/s. Which way, and how fast, does its north arrow j-hat turn? (Towards the west: -i (u/a) tan phi, |Dj/Dt|
-  = 20 / 6.371e6 x 1.732 = 5.4e-6 s^-1, about 27 deg a day.) And a barometer reads -2 hPa/h while a storm moving at 36 km/h has a pressure slope of 0.05 hPa/km along
-  its path at that place: is the storm deepening? (dp/dtau = -2 + 1.8 = -0.2 hPa/h: slightly.)'
+  = 20 / 6.371e6 x 1.732 = 5.4e-6 s^-1, about 31 deg a day.) And what is the bearing of a coast that runs 40 km north and 40 km east? (45 deg.)'
 headings_exception: s00_title only
 skip_guidance:
   rule: 'series-wide (user via coordinator, 2026-11-05): before each step-by-step block one friendly spoken line + an on-screen chip; after it one line "If you skipped,
@@ -218,89 +196,65 @@ skip_guidance:
     what: the local arrows in numbers (D33)
     chip_scene: s04_k_up
     chip_sentence: 3
-    chip_at_s: 202.425
-    chip_at: '3:22'
+    chip_at_s: 199.975
+    chip_at: '3:19'
     skip_to_scene: s07_enu_checks
     skip_to_sentence: 10
-    skip_to_s: 545.8
-    skip_to: '9:05'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 9:05
+    skip_to_s: 543.35
+    skip_to: '9:03'
+    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 9:03
     takeaway: 'If you skipped, here''s what to keep: every place has its own three arrows, east, north and up, and up always points straight away from the Earth''s
       centre.'
   - block: B
     what: how fast the arrows turn (D35-D38)
     chip_scene: s16_toolkit
     chip_sentence: 3
-    chip_at_s: 1276.225
-    chip_at: '21:16'
+    chip_at_s: 1273.775
+    chip_at: '21:13'
     skip_to_scene: s22_add_motions
     skip_to_sentence: 16
-    skip_to_s: 1841.225
-    skip_to: '30:41'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 30:41
+    skip_to_s: 1838.775
+    skip_to: '30:38'
+    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 30:38
     takeaway: 'If you skipped, here''s what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth''s
       radius.'
   - block: C
     what: Dv/Dt and the metric terms (D39)
     chip_scene: s23_whole_vector
     chip_sentence: 4
-    chip_at_s: 1861.725
-    chip_at: '31:01'
+    chip_at_s: 1859.275
+    chip_at: '30:59'
     skip_to_scene: s25_dot_i_b
     skip_to_sentence: 13
-    skip_to_s: 2084.25
-    skip_to: '34:44'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 34:44
+    skip_to_s: 2081.8
+    skip_to: '34:41'
+    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 34:41
     takeaway: 'If you skipped, here''s what to keep: because the arrows turn, the wind''s numbers can change even when nothing pushes the air, and the extra terms
       that say so are called metric terms.'
-  - block: D
-    what: speeds add, accelerations stay (D40-D41)
-    chip_scene: s29_velocities_add
-    chip_sentence: 3
-    chip_at_s: 2340.45
-    chip_at: '39:00'
-    skip_to_scene: s30_accel_same
-    skip_to_sentence: 15
-    skip_to_s: 2504.5
-    skip_to: '41:44'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 41:44
-    takeaway: 'If you skipped, here''s what to keep: in a frame moving steadily in a straight line, speeds change by the frame''s own speed, but accelerations, and
-      so forces, stay the same.'
-  - block: E
-    what: linking the barometer and the rider (D44)
-    chip_scene: s39_tau_derive
-    chip_sentence: 3
-    chip_at_s: 3166.3
-    chip_at: '52:46'
-    skip_to_scene: s39_tau_derive
-    skip_to_sentence: 17
-    skip_to_s: 3259.25
-    skip_to: '54:19'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 54:19
-    takeaway: 'If you skipped, here''s what to keep: what the barometer sees is the storm changing, minus the pattern sliding past.'
 scenes:
 - id: s00_title
   t:
   - 0.3
-  - 11.775
+  - 12.2
   sentence_times:
   - - 0.3
-    - 10.975
+    - 11.4
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: line 1 ''Coordinates · Part 4'' (RiseText, 150 px, weight 800, TitleGradient teal -> gold; letters
-    rise 24 px over 8 frames, 2-frame stagger); line 2 ''Moving frames'' (96 px, warm white), pulsing x1.06 on AT(1,''the easy way''); subtitle ''local axes and storm-relative
-    winds'' (68 px, ''storm-relative winds'' teal), >= 50 px clear of the animation (title-card layout per the coordinator 2026-11-05). Right x 1130-1840, y 180-636:
-    Part A (frame 0 -> AT(1,''meteorology'')): a small globe turning slowly with four stations (Brest, Trappes, Singapore, Khulna), each with its own orange i, j,
-    k tripod; a parcel glides east along Brest''s parallel and its tripod visibly turns. Part B (12-frame cross-fade on ''meteorology''): Ciaran''s isobars sliding
-    ENE over the Channel with the 200-km ring and a gold storm-motion arrow; its source line below the column (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn local frames, and frames that move, the easy way, and see how meteorology uses them to follow the winds and a moving storm.
+    rise 24 px over 8 frames, 2-frame stagger); line 2 ''Turning frames'' (96 px, warm white) pulsing x1.06 on AT(1,''the easy way''); subtitle ''local axes and how
+    they turn'' (68 px, ''how they turn'' teal), >= 50 px clear of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): a small
+    globe turning slowly with four stations (Brest, Trappes, Singapore, Khulna), each with its own orange i, j, k tripod; a parcel glides east along Brest''s parallel
+    and its tripod visibly turns. Part B (12-frame cross-fade on ''meteorology''): the SW Florida coast with the coast frame turning to 329° and Ian''s wind arrow
+    split into along and across; its source line below the column (y <= 860). Poster = frame 200.'
+  voiceover: In this video, we'll learn local frames, and how they turn, the easy way, and see how meteorology uses them to measure the winds on a coast and over
+    the round Earth.
   on_screen_eq: null
   calc_rows: []
   physics_source:
-    fn: fluidpy.geo.sphere.enu_basis; fluidpy.geo.frames.unit_vector_rates; fluidpy.diag.cyclone.track_by_continuity
+    fn: fluidpy.geo.sphere.enu_basis; fluidpy.geo.frames.unit_vector_rates; fluidpy.geo.vectors.components_in_axes
     params:
       stations:
-        Brest: &id001
+        Brest:
         - 48.39
         - -4.49
         Trappes:
@@ -309,64 +263,65 @@ scenes:
         Singapore:
         - 1.35
         - 103.82
-        Khulna: &id002
+        Khulna:
         - 22.8
         - 89.6
       parcel_u_ms: 250.0
-      ciaran_times: 2023-11-01T21..2023-11-02T06
-    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
-      ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; ../Fluid Dynamics/tests/geo/test_frames_unit_vector_rates.py::test_unit_vector_rates_V1_zero_velocity_and_DC24_airliner;
-      ../Fluid Dynamics/tests/diag/test_cyclone_track.py::test_track_by_continuity_V1_ciaran_DC52_steps_and_pressures; ::test_translation_velocity_V1_ciaran_DC52_motion;
-      ::test_track_by_continuity_V7_deeper_distant_low_never_picked
+      coast_bearing_deg: 329
+    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ../Fluid Dynamics/tests/geo/test_frames_unit_vector_rates.py::test_unit_vector_rates_V1_zero_velocity_and_DC24_airliner;
+      ../Fluid Dynamics/tests/geo/test_vectors_1a1b.py::test_components_in_axes_V1_cardinals_and_movie_number
   exaggeration:
   - title animation time compressed (one hour of flight in about 3 s)
   - tripod arrows about 800 km long on the globe (illustrative size)
   kind: title
-  data: BMNG globe texture; ERA5-ARCO-ciaran2023 (msl)
+  data: BMNG globe texture; HRRR Ian 20 UTC point wind; Natural Earth coast
   tool: house title kit + three.js globe + Remotion SVG
   runner_up: —
-  why: the movie's two halves (local frames that turn; a frame that moves with a storm) on frame 0
+  why: the movie's three ideas (local frames, turned to a coast, turning as the air moves) on frame 0
   related: []
   feedback:
   - U-CO-101
   pending_data: false
-  layout: 'Title frame; the Ciaran mini-map has ''Data: ERA5 (Copernicus C3S) · 2 Nov 2023'' below it (>= 28 px, y <= 860); isobars animated. No other text.'
+  layout: 'Title frame; the coast mini-map has ''Data: HRRR (NOAA) · Natural Earth · 28 Sep 2022'' below it (>= 28 px, y <= 860). No other text.'
   measured:
-    seconds: 11.475
-    words: 28
+    seconds: 11.9
+    words: 32
     sentences: 1
     beats: 0
+    timing_source: splice3
 - id: s01_hook
   t:
-  - 11.775
-  - 42.95
+  - 12.2
+  - 40.5
   sentence_times:
-  - - 11.775
-    - 18.35
-  - - 18.7
-    - 22.6
-  - - 22.95
-    - 25.9
-  - - 26.25
-    - 29.625
-  - - 29.975
-    - 35.575
-  - - 35.925
-    - 42.15
+  - - 12.2
+    - 18.775
+  - - 19.125
+    - 23.025
+  - - 23.375
+    - 26.325
+  - - 26.675
+    - 30.2
+  - - 30.55
+    - 39.7
   beat: hook question
   visual: 'Picture zone: the globe (unzoomed, left) with Brest and Khulna marked, each with its own east (orange), north (orange) and up (teal) arrows, the two tripods
     visibly pointing different ways; on AT(3,''as the air moves'') a parcel starts moving east from Brest and its tripod turns. Column: keywords ''east · north ·
-    up'' (54 px) from frame 0, then ''local frames'' and ''frames that move'' (54 px) on S4-S5; S5 a small storm ring sliding right with a gold motion arrow.'
+    up'' (54 px) from frame 0, then ''local frames'', ''turned to a coast'' and ''turning as you move'' (54 px) on S5, each with a small mini (a coast with turned axes; a tripod sliding along a parallel).'
   voiceover: 'A forecaster at Brest, in France, measures the wind with three arrows: east, north and up. Are those the same three arrows at Khulna, in Bangladesh?
-    And what happens to them as the air moves? This is the fourth of six parts on coordinates. Let''s see what local frames are, how they turn, and why that matters
-    for the wind. Then let''s see what changes, and what doesn''t, when the frame itself moves along with a storm.'
+    And what happens to them as the air moves? This is the fourth of seven parts on coordinates. Let''s see what local frames are, how to turn them to fit a coast,
+    how they turn by themselves as the air moves, and why that matters for the wind.'
   on_screen_eq: null
   calc_rows: []
   physics_source:
     fn: fluidpy.geo.sphere.enu_basis; fluidpy.geo.frames.unit_vector_rates
     params:
-      Brest: *id001
-      Khulna: *id002
+      Brest:
+      - 48.39
+      - -4.49
+      Khulna:
+      - 22.8
+      - 89.6
       u: 250.0
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points
@@ -387,33 +342,34 @@ scenes:
     fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860).'
   measured:
-    seconds: 31.175
-    words: 77
-    sentences: 6
+    seconds: 28.3
+    words: 74
+    sentences: 5
     beats: 0
+    timing_source: splice3
 - id: s02_part3_recap
   t:
-  - 42.95
-  - 115.75
+  - 40.5
+  - 113.3
   sentence_times:
-  - - 42.95
-    - 46.85
-  - - 47.2
-    - 55.425
-  - - 55.775
-    - 60.125
-  - - 60.475
-    - 71.25
-  - - 71.6
-    - 79.875
-  - - 80.225
-    - 83.125
-  - - 83.475
-    - 91.525
-  - - 91.875
-    - 100.575
-  - - 100.925
-    - 114.25
+  - - 40.5
+    - 44.4
+  - - 44.75
+    - 52.975
+  - - 53.325
+    - 57.675
+  - - 58.025
+    - 68.8
+  - - 69.15
+    - 77.425
+  - - 77.775
+    - 80.675
+  - - 81.025
+    - 89.075
+  - - 89.425
+    - 98.125
+  - - 98.475
+    - 111.8
   beat: recap of Part 3 (<= 60 s, split plan §2g)
   visual: 'Reuse Part 3''s sliced globe (TwoViewSlice) on the left: the Earth''s axes x-hat (to 0 N 0 E), y-hat (to 0 N 90 E), z-hat (to the North Pole), orange,
     appear on S3-S4; Brest''s latitude arc phi (gold) and longitude arc lambda (gold) on S2; the radius ''a ≈ 6400 km (6371 km)'' on S5-S6. Column builds one line
@@ -437,7 +393,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector; fluidpy.geo.sphere.arc_lengths; fluidpy.geo.constants.EARTH_RADIUS
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
       dlat: 1.0
       dlon: 1.0
     test: ../Fluid Dynamics/tests/geo/test_sphere.py (unit_vector, arc_lengths V1)
@@ -461,39 +419,40 @@ scenes:
     words: 176
     sentences: 9
     beats: 1
+    timing_source: dryrun1
 - id: s03_enu
   t:
-  - 115.75
-  - 193.675
+  - 113.3
+  - 191.225
   sentence_times:
-  - - 115.75
-    - 118.9
-  - - 119.25
-    - 125.95
-  - - 126.3
-    - 130.625
-  - - 130.975
-    - 135.225
-  - - 135.575
-    - 142.275
-  - - 142.625
-    - 146.375
-  - - 146.725
-    - 150.275
-  - - 150.625
-    - 157.575
-  - - 157.925
-    - 164.1
-  - - 164.45
-    - 170.75
-  - - 171.1
-    - 178.15
-  - - 178.5
-    - 180.325
-  - - 180.675
-    - 189.35
-  - - 189.7
-    - 192.875
+  - - 113.3
+    - 116.45
+  - - 116.8
+    - 123.5
+  - - 123.85
+    - 128.175
+  - - 128.525
+    - 132.775
+  - - 133.125
+    - 139.825
+  - - 140.175
+    - 143.925
+  - - 144.275
+    - 147.825
+  - - 148.175
+    - 155.125
+  - - 155.475
+    - 161.65
+  - - 162.0
+    - 168.3
+  - - 168.65
+    - 175.7
+  - - 176.05
+    - 177.875
+  - - 178.225
+    - 186.9
+  - - 187.25
+    - 190.425
   beat: 'building block: the local east-north-up frame'
   visual: 'Opens ZOOMED at Brest (Cesium drape of BMNG on ETOPO relief, as build-1 s24; zoom-reveal): ''Brest'' labelled after the camera settles (Should 17), area
     labels ''Brittany'' and ''Atlantic Ocean'' (italic) on S2. S5: three arrows grow from the station: i-hat (orange, east), j-hat (orange, north), k-hat (teal, up),
@@ -515,7 +474,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.enu_basis
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points
   exaggeration:
@@ -538,43 +499,44 @@ scenes:
     words: 192
     sentences: 14
     beats: 0
+    timing_source: dryrun1
 - id: s04_k_up
   t:
-  - 193.675
-  - 295.15
+  - 191.225
+  - 292.7
   sentence_times:
-  - - 193.675
-    - 198.675
-  - - 199.025
-    - 202.075
-  - - 202.425
-    - 210.25
-  - - 210.6
-    - 217.4
-  - - 217.75
-    - 221.0
-  - - 221.35
-    - 224.175
-  - - 224.525
-    - 231.3
-  - - 231.65
-    - 237.625
-  - - 239.125
-    - 241.45
-  - - 241.8
-    - 250.625
-  - - 250.975
-    - 257.275
-  - - 257.625
-    - 264.9
-  - - 265.25
-    - 274.025
-  - - 274.375
-    - 283.375
-  - - 283.725
-    - 286.9
-  - - 288.4
-    - 294.35
+  - - 191.225
+    - 196.225
+  - - 196.575
+    - 199.625
+  - - 199.975
+    - 207.8
+  - - 208.15
+    - 214.95
+  - - 215.3
+    - 218.55
+  - - 218.9
+    - 221.725
+  - - 222.075
+    - 228.85
+  - - 229.2
+    - 235.175
+  - - 236.675
+    - 239.0
+  - - 239.35
+    - 248.175
+  - - 248.525
+    - 254.825
+  - - 255.175
+    - 262.45
+  - - 262.8
+    - 271.575
+  - - 271.925
+    - 280.925
+  - - 281.275
+    - 284.45
+  - - 285.95
+    - 291.9
   beat: 'derivation D33 (1): up = the position arrow''s direction'
   visual: 'Globe (unzoomed, left) with the centre-to-Brest arrow (teal) drawn from the Earth''s centre through the surface (half-Earth slice from kit_cp so the centre
     is visible, as Part 3); k-hat at Brest lies along it (gold ''same direction'' tick). Column: inputs row first ''φ = 48.4°, λ = −4.5°'', then ''cos φ = 0.664,
@@ -600,7 +562,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector; fluidpy.geo.sphere.enu_basis
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; new CHECK DP04 k_Brest = (0.6620, -0.0520, 0.7477) to 1e-4
   exaggeration:
@@ -642,49 +606,49 @@ scenes:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860). CalcStack x >= 1100 (Must 8 pattern).'
   skip_chip:
     'on': S3 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 9:05
-    look: small warm-white keyword chip at the top of the column (54 px, the one allowed chip style, gold outline), fades after 6 s; timestamp re-filled after the
-      final TTS
+    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 9:03
+    look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   measured:
     seconds: 101.475
     words: 256
     sentences: 16
     beats: 2
+    timing_source: splice2
 - id: s05_i_east
   t:
-  - 295.15
-  - 390.125
+  - 292.7
+  - 387.675
   sentence_times:
-  - - 295.15
-    - 296.725
-  - - 297.075
-    - 300.95
-  - - 301.3
-    - 308.025
-  - - 308.375
-    - 316.2
-  - - 316.55
-    - 322.525
-  - - 322.875
-    - 326.075
-  - - 326.425
-    - 331.8
-  - - 332.15
-    - 341.6
-  - - 341.95
-    - 347.1
-  - - 347.45
-    - 357.025
-  - - 357.375
-    - 361.15
-  - - 361.5
-    - 368.5
-  - - 370.0
-    - 375.75
-  - - 377.25
-    - 381.65
-  - - 382.0
-    - 389.325
+  - - 292.7
+    - 294.275
+  - - 294.625
+    - 298.5
+  - - 298.85
+    - 305.575
+  - - 305.925
+    - 313.75
+  - - 314.1
+    - 320.075
+  - - 320.425
+    - 323.625
+  - - 323.975
+    - 329.35
+  - - 329.7
+    - 339.15
+  - - 339.5
+    - 344.65
+  - - 345.0
+    - 354.575
+  - - 354.925
+    - 358.7
+  - - 359.05
+    - 366.05
+  - - 367.55
+    - 373.3
+  - - 374.8
+    - 379.2
+  - - 379.55
+    - 386.875
   beat: 'derivation D33 (2): east from the top view (Part 1''s 90° rule)'
   visual: 'Camera rises over the North Pole (<= 90°/s, eased): the globe seen from above, Brest''s parallel drawn as a gold circle round the axis, Brest''s foot at
     angle λ from x-hat (slate arc, ''−4.5°''). The view flattens into a 2-D top-view diagram (cross-fade into an SVG copy, same positions): the circle, x-hat and
@@ -710,7 +674,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.enu_basis; fluidpy.core.tensors.rotation_matrix_2d (pi/2, active)
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; new CHECK DP05 i_Brest = (0.0783, 0.9969, 0) to 1e-4
   exaggeration:
@@ -760,37 +726,38 @@ scenes:
     words: 222
     sentences: 15
     beats: 2
+    timing_source: dryrun1
 - id: s06_j_north
   t:
-  - 390.125
-  - 480.775
+  - 387.675
+  - 478.325
   sentence_times:
-  - - 390.125
-    - 391.65
-  - - 392.0
-    - 400.9
-  - - 401.25
-    - 409.75
-  - - 410.1
-    - 414.825
-  - - 415.175
-    - 423.1
-  - - 424.6
-    - 430.425
-  - - 430.775
-    - 434.3
-  - - 434.65
-    - 442.9
-  - - 443.25
-    - 450.475
-  - - 450.825
-    - 456.3
-  - - 456.65
-    - 463.225
-  - - 464.725
-    - 472.95
-  - - 474.45
-    - 479.975
+  - - 387.675
+    - 389.2
+  - - 389.55
+    - 398.45
+  - - 398.8
+    - 407.3
+  - - 407.65
+    - 412.375
+  - - 412.725
+    - 420.65
+  - - 422.15
+    - 427.975
+  - - 428.325
+    - 431.85
+  - - 432.2
+    - 440.45
+  - - 440.8
+    - 448.025
+  - - 448.375
+    - 453.85
+  - - 454.2
+    - 460.775
+  - - 462.275
+    - 470.5
+  - - 472.0
+    - 477.525
   beat: 'derivation D33 (3): north from the meridian slice'
   visual: 'Camera returns to the side and the globe is sliced along Brest''s meridian (half-Earth face, kit_cp, as Part 3 s05); on the face: the axis (z-hat, orange,
     up), capital R-hat (orange, level), Brest on the rim at angle φ (gold arc at the centre ''48.4°''). k-hat drawn at Brest along the radius; TurnRule90 turns it
@@ -816,7 +783,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.enu_basis
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; new CHECK DP06 j_Brest = (-0.7454, 0.0585, 0.6641) to 1e-4
   exaggeration:
@@ -870,31 +839,32 @@ scenes:
     words: 217
     sentences: 13
     beats: 3
+    timing_source: dryrun1
 - id: s07_enu_checks
   t:
-  - 480.775
-  - 556.5
+  - 478.325
+  - 554.05
   sentence_times:
-  - - 480.775
-    - 485.9
-  - - 486.25
-    - 493.325
-  - - 494.825
-    - 508.625
-  - - 508.975
-    - 516.15
-  - - 516.5
-    - 518.575
-  - - 520.075
-    - 522.775
-  - - 523.125
-    - 534.15
-  - - 534.5
-    - 536.25
-  - - 537.75
-    - 545.45
-  - - 545.8
-    - 555.7
+  - - 478.325
+    - 483.45
+  - - 483.8
+    - 490.875
+  - - 492.375
+    - 506.175
+  - - 506.525
+    - 513.7
+  - - 514.05
+    - 516.125
+  - - 517.625
+    - 520.325
+  - - 520.675
+    - 531.7
+  - - 532.05
+    - 533.8
+  - - 535.3
+    - 543.0
+  - - 543.35
+    - 553.25
   beat: 'check: unit length, right angles, right-handed'
   visual: 'Brest''s three arrows from s03 at the station (zoomed globe, left). Column CalcStack (<= 3 lines visible, older dim to 60 %): |i-hat|², i-hat·j-hat with
     the three products written, then i-hat × j-hat with the cross-product recipe (component rows from the cross product movie), its result gold-linked to k-hat from
@@ -915,7 +885,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.enu_basis; fluidpy.geo.vectors.dot; fluidpy.geo.vectors.cross
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
     test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_enu_basis_V1_closed_form_known_points_and_k_is_unit_vector; ::test_enu_basis_V2_derivation_from_position_vector;
       ::test_enu_basis_V1_orthonormal_right_handed_1e4_points; CHECK DC23 i x j = k at Brest (build 1) kept as DP07
   exaggeration: []
@@ -942,41 +914,42 @@ scenes:
     words: 179
     sentences: 10
     beats: 3
+    timing_source: splice2
 - id: s08_other_stations
   t:
-  - 556.5
-  - 643.575
+  - 554.05
+  - 641.125
   sentence_times:
-  - - 556.5
-    - 559.025
-  - - 559.375
-    - 562.125
-  - - 562.475
-    - 567.55
-  - - 567.9
-    - 569.875
-  - - 570.225
-    - 575.925
-  - - 576.275
-    - 585.025
-  - - 585.375
-    - 590.875
-  - - 592.375
-    - 595.025
-  - - 595.375
-    - 599.225
-  - - 599.575
-    - 605.275
-  - - 605.625
-    - 613.3
-  - - 613.65
-    - 617.5
-  - - 617.85
-    - 628.475
-  - - 629.975
-    - 636.9
-  - - 638.4
-    - 642.775
+  - - 554.05
+    - 556.575
+  - - 556.925
+    - 559.675
+  - - 560.025
+    - 565.1
+  - - 565.45
+    - 567.425
+  - - 567.775
+    - 573.475
+  - - 573.825
+    - 582.575
+  - - 582.925
+    - 588.425
+  - - 589.925
+    - 592.575
+  - - 592.925
+    - 596.775
+  - - 597.125
+    - 602.825
+  - - 603.175
+    - 610.85
+  - - 611.2
+    - 615.05
+  - - 615.4
+    - 626.025
+  - - 627.525
+    - 634.45
+  - - 635.95
+    - 640.325
   beat: 'intuition: every place has its own frame (Trappes, Singapore)'
   visual: 'Zoom back out to the whole globe (Should 17: labels only after the camera stops). Trappes turned to the centre and labelled within 1 s, with its tripod;
     the arc Brest-Trappes on the surface (gold, ''480 km'') and the angle at the centre (gold, ''4.3°'') drawn on a slice through both places and the centre. Then
@@ -1001,7 +974,9 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector; fluidpy.geo.sphere.central_angle; fluidpy.geo.sphere.great_circle_distance
     params:
-      Brest: *id001
+      Brest:
+      - 48.39
+      - -4.49
       Trappes:
       - 48.77
       - 2.01
@@ -1029,37 +1004,38 @@ scenes:
     words: 200
     sentences: 15
     beats: 3
+    timing_source: dryrun1
 - id: s09_khulna
   t:
-  - 643.575
-  - 732.65
+  - 641.125
+  - 730.2
   sentence_times:
-  - - 643.575
-    - 647.525
-  - - 647.875
-    - 655.975
-  - - 656.325
-    - 662.925
-  - - 663.275
-    - 672.85
-  - - 673.2
-    - 679.1
-  - - 679.45
-    - 686.375
-  - - 687.875
-    - 698.7
-  - - 699.05
-    - 705.15
-  - - 706.65
-    - 708.8
-  - - 709.15
-    - 717.125
-  - - 717.475
-    - 720.95
-  - - 722.45
-    - 729.475
-  - - 729.825
-    - 731.85
+  - - 641.125
+    - 645.075
+  - - 645.425
+    - 653.525
+  - - 653.875
+    - 660.475
+  - - 660.825
+    - 670.4
+  - - 670.75
+    - 676.65
+  - - 677.0
+    - 683.925
+  - - 685.425
+    - 696.25
+  - - 696.6
+    - 702.7
+  - - 704.2
+    - 706.35
+  - - 706.7
+    - 714.675
+  - - 715.025
+    - 718.5
+  - - 720.0
+    - 727.025
+  - - 727.375
+    - 729.4
   beat: 'intuition: Khulna (U-CO-060), the Bay of Bengal seen from the globe'
   visual: 'Zoom tour (HOUSE_STYLE §5b): the globe turns and zooms to the Bay of Bengal; labels on their words: ''Khulna'' (centred within 1 s), ''Ganges delta'',
     ''Sundarbans'' (green-tinted forest outline from Natural Earth / ESA WorldCover if available, else a label only), ''Bay of Bengal'' (italic), ''Kolkata'', ''India'',
@@ -1082,8 +1058,12 @@ scenes:
   physics_source:
     fn: fluidpy.geo.sphere.enu_basis; fluidpy.geo.sphere.unit_vector; fluidpy.data.ibtracs (Amphan track, NI 2020136N10088)
     params:
-      Brest: *id001
-      Khulna: *id002
+      Brest:
+      - 48.39
+      - -4.49
+      Khulna:
+      - 22.8
+      - 89.6
       khulna_naturalearth:
       - 22.8419
       - 89.5581
@@ -1111,29 +1091,30 @@ scenes:
     words: 204
     sentences: 13
     beats: 3
+    timing_source: dryrun1
 - id: s10_coast_frame
   t:
-  - 732.65
-  - 795.325
+  - 730.2
+  - 792.875
   sentence_times:
-  - - 732.65
-    - 737.5
-  - - 737.85
-    - 746.9
-  - - 747.25
-    - 750.775
-  - - 751.125
-    - 759.875
-  - - 760.225
-    - 767.7
-  - - 768.05
-    - 778.775
-  - - 779.125
-    - 782.6
-  - - 782.95
-    - 787.1
-  - - 787.45
-    - 794.525
+  - - 730.2
+    - 735.05
+  - - 735.4
+    - 744.45
+  - - 744.8
+    - 748.325
+  - - 748.675
+    - 757.425
+  - - 757.775
+    - 765.25
+  - - 765.6
+    - 776.325
+  - - 776.675
+    - 780.15
+  - - 780.5
+    - 784.65
+  - - 785.0
+    - 792.075
   beat: 'frames we turn on purpose: the coast frame (recap of Part 1''s turned axes, not re-derived)'
   visual: 'Picture zone: a small local map of SW Florida (NE 10 m coast, land muted, Gulf of Mexico labelled) with Brest-style i-hat, j-hat at a coast point (orange);
     on S4 the pair turns rigidly by α (orange arc) into x-hat'' (along) and y-hat'' (across, out to sea), tip labels. Column: the two Part 1 lines recalled at 68
@@ -1176,39 +1157,40 @@ scenes:
     words: 156
     sentences: 9
     beats: 0
+    timing_source: dryrun1
 - id: s11_coast_points
   t:
-  - 795.325
-  - 903.4
+  - 792.875
+  - 900.95
   sentence_times:
-  - - 795.325
-    - 798.55
-  - - 798.9
-    - 807.675
-  - - 808.025
-    - 816.725
-  - - 817.075
-    - 820.15
-  - - 820.5
-    - 826.55
-  - - 828.05
-    - 832.975
-  - - 833.325
-    - 835.975
-  - - 837.475
-    - 842.65
-  - - 843.0
-    - 848.7
-  - - 849.05
-    - 864.2
-  - - 865.7
-    - 872.525
-  - - 872.875
-    - 880.525
-  - - 880.875
-    - 893.675
-  - - 895.175
-    - 902.6
+  - - 792.875
+    - 796.1
+  - - 796.45
+    - 805.225
+  - - 805.575
+    - 814.275
+  - - 814.625
+    - 817.7
+  - - 818.05
+    - 824.1
+  - - 825.6
+    - 830.525
+  - - 830.875
+    - 833.525
+  - - 835.025
+    - 840.2
+  - - 840.55
+    - 846.25
+  - - 846.6
+    - 861.75
+  - - 863.25
+    - 870.075
+  - - 870.425
+    - 878.075
+  - - 878.425
+    - 891.225
+  - - 892.725
+    - 900.15
   beat: 'derivation D21 (1)-(3): two coast points, the steps north and east in km (Part 3''s rules)'
   visual: 'Map zoomed to the SW Florida coast between Naples and Venice (NE 10 m coastline in white); two gold dots labelled ''Naples'' and ''Venice'' with their
     lat/lon written beside them (left of the dots, never on the coastline); the straight chord between them (gold dashed). Column CalcStack with inputs next to every
@@ -1286,39 +1268,40 @@ scenes:
     words: 251
     sentences: 14
     beats: 4
+    timing_source: dryrun1
 - id: s12_coast_angle
   t:
-  - 903.4
-  - 1001.55
+  - 900.95
+  - 999.1
   sentence_times:
-  - - 903.4
-    - 912.0
-  - - 912.35
-    - 914.65
-  - - 915.0
-    - 919.775
-  - - 920.125
-    - 927.475
-  - - 927.825
-    - 934.775
-  - - 936.275
-    - 942.025
-  - - 943.525
-    - 947.175
-  - - 947.525
-    - 954.425
-  - - 954.775
-    - 965.35
-  - - 966.85
-    - 970.575
-  - - 970.925
-    - 978.2
-  - - 978.55
-    - 986.275
-  - - 986.625
-    - 991.725
-  - - 992.075
-    - 1000.75
+  - - 900.95
+    - 909.55
+  - - 909.9
+    - 912.2
+  - - 912.55
+    - 917.325
+  - - 917.675
+    - 925.025
+  - - 925.375
+    - 932.325
+  - - 933.825
+    - 939.575
+  - - 941.075
+    - 944.725
+  - - 945.075
+    - 951.975
+  - - 952.325
+    - 962.9
+  - - 964.4
+    - 968.125
+  - - 968.475
+    - 975.75
+  - - 976.1
+    - 983.825
+  - - 984.175
+    - 989.275
+  - - 989.625
+    - 998.3
   beat: 'derivation D21 (4)-(6): the triangle, the angle from north, the bearing 329°'
   visual: 'The two legs from s11 slide out of the map into a clean right triangle in the picture zone (north leg 91.5 km up, west leg 55.0 km left, the coast as the
     long side, orange). A local north arrow j-hat (orange) at A; the angle between j-hat and the coast marked (gold arc ''31°''). S6-S8: a compass rose (slate) behind
@@ -1399,29 +1382,30 @@ scenes:
     words: 235
     sentences: 14
     beats: 3
+    timing_source: dryrun1
 - id: s13_alpha
   t:
-  - 1001.55
-  - 1074.2
+  - 999.1
+  - 1071.75
   sentence_times:
-  - - 1001.55
-    - 1006.35
-  - - 1006.7
-    - 1012.3
-  - - 1012.65
-    - 1018.85
-  - - 1020.35
-    - 1029.475
-  - - 1030.975
-    - 1039.45
-  - - 1039.8
-    - 1041.5
-  - - 1043.0
-    - 1057.6
-  - - 1059.1
-    - 1069.225
-  - - 1069.575
-    - 1072.7
+  - - 999.1
+    - 1003.9
+  - - 1004.25
+    - 1009.85
+  - - 1010.2
+    - 1016.4
+  - - 1017.9
+    - 1027.025
+  - - 1028.525
+    - 1037.0
+  - - 1037.35
+    - 1039.05
+  - - 1040.55
+    - 1055.15
+  - - 1056.65
+    - 1066.775
+  - - 1067.125
+    - 1070.25
   beat: 'derivation D22 (1)-(2): α = 90° − 329° ≡ 121°; the along and across arrows'
   visual: 'Local coast diagram: east and north (i-hat, j-hat, faint orange), a slate arc from east anticlockwise to the coast direction labelled ''α = 121°'' built
     as ''90°'' (to north) + ''31°'' (on to the coast). x-hat'' (orange) along the coast and y-hat'' (orange) turned +90° from it, pointing WSW out to sea (''Gulf
@@ -1487,37 +1471,38 @@ scenes:
     words: 160
     sentences: 9
     beats: 5
+    timing_source: dryrun1
 - id: s14_along_across
   t:
-  - 1074.2
-  - 1180.925
+  - 1071.75
+  - 1178.475
   sentence_times:
-  - - 1074.2
-    - 1076.05
-  - - 1076.4
-    - 1090.725
-  - - 1091.075
-    - 1097.625
-  - - 1099.125
-    - 1103.6
-  - - 1103.95
-    - 1112.825
-  - - 1113.175
-    - 1120.875
-  - - 1122.375
-    - 1134.7
-  - - 1135.05
-    - 1144.35
-  - - 1145.85
-    - 1151.275
-  - - 1151.625
-    - 1162.625
-  - - 1164.125
-    - 1168.125
-  - - 1168.475
-    - 1175.85
-  - - 1176.2
-    - 1180.125
+  - - 1071.75
+    - 1073.6
+  - - 1073.95
+    - 1088.275
+  - - 1088.625
+    - 1095.175
+  - - 1096.675
+    - 1101.15
+  - - 1101.5
+    - 1110.375
+  - - 1110.725
+    - 1118.425
+  - - 1119.925
+    - 1132.25
+  - - 1132.6
+    - 1141.9
+  - - 1143.4
+    - 1148.825
+  - - 1149.175
+    - 1160.175
+  - - 1161.675
+    - 1165.675
+  - - 1166.025
+    - 1173.4
+  - - 1173.75
+    - 1177.675
   beat: 'application D22 (3)-(5): Ian''s wind at Fort Myers Beach, along 9.4 and across −31.6 m/s'
   visual: 'Real map (HRRR local frame as build-1 s39, Fix: drop the GOES underlay if it fights the arrows) of the SW Florida coast, HRRR 10-m wind speed shaded (perceptual
     LUT, 0-50 m/s) with animated streaks; ''Fort Myers Beach'' labelled at the spot on its word; the eye (gold dot, HRRR wind centre at 20 UTC) north of it. The wind
@@ -1598,37 +1583,38 @@ scenes:
     words: 258
     sentences: 13
     beats: 4
+    timing_source: dryrun1
 - id: s15_arrows_turn
   t:
-  - 1180.925
-  - 1268.375
+  - 1178.475
+  - 1265.925
   sentence_times:
-  - - 1180.925
-    - 1183.3
-  - - 1183.65
-    - 1188.5
-  - - 1188.85
-    - 1195.775
-  - - 1196.125
-    - 1203.825
-  - - 1205.325
-    - 1215.575
-  - - 1217.075
-    - 1229.625
-  - - 1229.975
-    - 1232.525
-  - - 1232.875
-    - 1241.025
-  - - 1241.375
-    - 1246.8
-  - - 1247.15
-    - 1252.4
-  - - 1252.75
-    - 1260.5
-  - - 1260.85
-    - 1264.15
-  - - 1264.5
-    - 1267.575
+  - - 1178.475
+    - 1180.85
+  - - 1181.2
+    - 1186.05
+  - - 1186.4
+    - 1193.325
+  - - 1193.675
+    - 1201.375
+  - - 1202.875
+    - 1213.125
+  - - 1214.625
+    - 1227.175
+  - - 1227.525
+    - 1230.075
+  - - 1230.425
+    - 1238.575
+  - - 1238.925
+    - 1244.35
+  - - 1244.7
+    - 1249.95
+  - - 1250.3
+    - 1258.05
+  - - 1258.4
+    - 1261.7
+  - - 1262.05
+    - 1265.125
   beat: 'intuition: the local arrows turn by themselves as you move (build-1 s25, kept and re-voiced)'
   visual: 'Globe from above the North Pole (unzoomed); a plane glyph flies east along Brest''s parallel (slate trail) for one hour (time compressed); its i-hat (orange)
     and k-hat (teal) drawn at start and end; the angle swept round the axis ''≈ 12°'' (gold arc at the axis). Column CalcStack: ''250 × 3600 = 900 km'', ''900 / 74
@@ -1675,35 +1661,36 @@ scenes:
     words: 213
     sentences: 13
     beats: 2
+    timing_source: dryrun1
 - id: s16_toolkit
   t:
-  - 1268.375
-  - 1350.675
+  - 1265.925
+  - 1348.225
   sentence_times:
-  - - 1268.375
-    - 1272.15
-  - - 1272.5
-    - 1275.875
-  - - 1276.225
-    - 1282.825
-  - - 1283.175
-    - 1286.0
-  - - 1286.35
-    - 1294.475
-  - - 1294.825
-    - 1302.825
-  - - 1303.175
-    - 1311.525
-  - - 1313.025
-    - 1322.95
-  - - 1323.3
-    - 1332.525
-  - - 1332.875
-    - 1337.725
-  - - 1339.225
-    - 1341.4
-  - - 1341.75
-    - 1349.875
+  - - 1265.925
+    - 1269.7
+  - - 1270.05
+    - 1273.425
+  - - 1273.775
+    - 1280.375
+  - - 1280.725
+    - 1283.55
+  - - 1283.9
+    - 1292.025
+  - - 1292.375
+    - 1300.375
+  - - 1300.725
+    - 1309.075
+  - - 1310.575
+    - 1320.5
+  - - 1320.85
+    - 1330.075
+  - - 1330.425
+    - 1335.275
+  - - 1336.775
+    - 1338.95
+  - - 1339.3
+    - 1347.425
   beat: recap of Part 2's turning rules (the only tools D35-D38 need)
   visual: 'Picture zone: Part 2''s circle with a point, r-hat and θ-hat (orange) at the point; the point slides a little round the circle and the two arrows turn:
     r-hat''s tip moves towards θ-hat (gold short arrow), θ-hat''s tip towards −r-hat (gold short arrow). A small speed arrow ''v'' (teal) and the radius ''r'' (slate)
@@ -1743,37 +1730,37 @@ scenes:
     frame 0 (Should 18).'
   skip_chip:
     'on': S3 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 30:41
-    look: small warm-white keyword chip at the top of the column (54 px, the one allowed chip style, gold outline), fades after 6 s; timestamp re-filled after the
-      final TTS
+    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 30:38
+    look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   measured:
     seconds: 82.3
     words: 205
     sentences: 12
     beats: 2
+    timing_source: splice2
 - id: s17_which_moves
   t:
-  - 1350.675
-  - 1402.525
+  - 1348.225
+  - 1400.075
   sentence_times:
-  - - 1350.675
-    - 1355.325
-  - - 1355.675
-    - 1359.65
-  - - 1360.0
-    - 1362.475
-  - - 1362.825
-    - 1371.475
-  - - 1371.825
-    - 1376.275
-  - - 1377.775
-    - 1381.125
-  - - 1381.475
-    - 1386.65
-  - - 1387.0
-    - 1389.775
-  - - 1391.275
-    - 1401.725
+  - - 1348.225
+    - 1352.875
+  - - 1353.225
+    - 1357.2
+  - - 1357.55
+    - 1360.025
+  - - 1360.375
+    - 1369.025
+  - - 1369.375
+    - 1373.825
+  - - 1375.325
+    - 1378.675
+  - - 1379.025
+    - 1384.2
+  - - 1384.55
+    - 1387.325
+  - - 1388.825
+    - 1399.275
   beat: 'plan of the derivation: three motions, what each one leaves alone'
   visual: 'Column: the three formulas of s04-s06 at 68 px with φ and λ highlighted (gold) wherever they appear; S3-S4 an ''up'' arrow (teal) with a strike over ''turns
     nothing''; S5-S6 the i-hat formula with no φ, gold tick ''north leaves i-hat alone''. Picture zone: a 3 × 3 grid of small icons (rows i-hat, j-hat, k-hat; columns
@@ -1806,33 +1793,34 @@ scenes:
     words: 126
     sentences: 9
     beats: 2
+    timing_source: dryrun1
 - id: s18_i_east_a
   t:
-  - 1402.525
-  - 1479.2
+  - 1400.075
+  - 1476.75
   sentence_times:
-  - - 1402.525
-    - 1405.325
-  - - 1405.675
-    - 1417.2
-  - - 1417.55
-    - 1426.05
-  - - 1426.4
-    - 1429.675
-  - - 1430.025
-    - 1437.4
-  - - 1437.75
-    - 1441.65
-  - - 1443.15
-    - 1448.275
-  - - 1448.625
-    - 1457.425
-  - - 1458.925
-    - 1462.625
-  - - 1462.975
-    - 1471.5
-  - - 1473.0
-    - 1478.4
+  - - 1400.075
+    - 1402.875
+  - - 1403.225
+    - 1414.75
+  - - 1415.1
+    - 1423.6
+  - - 1423.95
+    - 1427.225
+  - - 1427.575
+    - 1434.95
+  - - 1435.3
+    - 1439.2
+  - - 1440.7
+    - 1445.825
+  - - 1446.175
+    - 1454.975
+  - - 1456.475
+    - 1460.175
+  - - 1460.525
+    - 1469.05
+  - - 1470.55
+    - 1475.95
   beat: 'derivation D35 (1)-(3): going east turns i-hat towards −R-hat'
   visual: 'Top view from above the North Pole (SVG, as s05): the parallel (gold circle, radius ''a cos φ'' labelled outside the stroke), the parcel at angle λ with
     R-hat and i-hat (orange); the parcel slides east by Δλ (magnified) and both arrows turn; i-hat''s tip moves towards −R-hat (gold short arrow). Column CalcStack:
@@ -1904,47 +1892,48 @@ scenes:
     words: 173
     sentences: 11
     beats: 3
+    timing_source: dryrun1
 - id: s19_i_east_b
   t:
-  - 1479.2
-  - 1586.35
+  - 1476.75
+  - 1583.9
   sentence_times:
-  - - 1479.2
-    - 1482.825
-  - - 1483.175
-    - 1485.9
-  - - 1486.25
-    - 1489.3
-  - - 1489.65
-    - 1495.3
-  - - 1495.65
-    - 1501.175
-  - - 1501.525
-    - 1507.875
-  - - 1508.225
-    - 1512.025
-  - - 1512.375
-    - 1519.225
-  - - 1519.575
-    - 1525.775
-  - - 1526.125
-    - 1531.675
-  - - 1533.175
-    - 1538.4
-  - - 1538.75
-    - 1543.025
-  - - 1543.375
-    - 1556.05
-  - - 1557.55
-    - 1563.025
-  - - 1563.375
-    - 1564.95
-  - - 1565.3
-    - 1575.775
-  - - 1576.125
-    - 1581.35
-  - - 1582.85
-    - 1585.55
+  - - 1476.75
+    - 1480.375
+  - - 1480.725
+    - 1483.45
+  - - 1483.8
+    - 1486.85
+  - - 1487.2
+    - 1492.85
+  - - 1493.2
+    - 1498.725
+  - - 1499.075
+    - 1505.425
+  - - 1505.775
+    - 1509.575
+  - - 1509.925
+    - 1516.775
+  - - 1517.125
+    - 1523.325
+  - - 1523.675
+    - 1529.225
+  - - 1530.725
+    - 1535.95
+  - - 1536.3
+    - 1540.575
+  - - 1540.925
+    - 1553.6
+  - - 1555.1
+    - 1560.575
+  - - 1560.925
+    - 1562.5
+  - - 1562.85
+    - 1573.325
+  - - 1573.675
+    - 1578.9
+  - - 1580.4
+    - 1583.1
   beat: 'derivation D35 (4)-(7): R-hat in local arrows; Di/Dt; the Brest number'
   visual: 'Meridian slice diagram (SVG, as s06): k-hat and j-hat at Brest, and R-hat drawn at Brest too (orange dashed), split into a ''cos φ k-hat'' leg (up) and
     a ''−sin φ j-hat'' leg (south), gold-linked to the CalcStack. Column: the two s06 lines, multiplied (step 4, the multipliers in gold), subtracted (step 5, the
@@ -2024,31 +2013,32 @@ scenes:
     words: 248
     sentences: 18
     beats: 3
+    timing_source: dryrun1
 - id: s20_jk_north
   t:
-  - 1586.35
-  - 1659.6
+  - 1583.9
+  - 1657.15
   sentence_times:
-  - - 1586.35
-    - 1590.3
-  - - 1590.65
-    - 1599.4
-  - - 1599.75
-    - 1605.125
-  - - 1605.475
-    - 1609.9
-  - - 1610.25
-    - 1615.75
-  - - 1617.25
-    - 1620.775
-  - - 1621.125
-    - 1628.375
-  - - 1628.725
-    - 1637.45
-  - - 1638.95
-    - 1644.2
-  - - 1644.55
-    - 1658.1
+  - - 1583.9
+    - 1587.85
+  - - 1588.2
+    - 1596.95
+  - - 1597.3
+    - 1602.675
+  - - 1603.025
+    - 1607.45
+  - - 1607.8
+    - 1613.3
+  - - 1614.8
+    - 1618.325
+  - - 1618.675
+    - 1625.925
+  - - 1626.275
+    - 1635.0
+  - - 1636.5
+    - 1641.75
+  - - 1642.1
+    - 1655.65
   beat: 'derivation D36: going north turns k-hat towards j-hat and j-hat towards −k-hat'
   visual: 'Meridian slice (half-Earth face, kit_cp, then the SVG copy): the meridian circle of radius ''a'' round the centre (gold), the parcel at angle φ with k-hat
     (teal) and j-hat (orange); it slides north by Δφ (magnified) and both arrows turn (gold short arrows: k-hat towards j-hat, j-hat towards −k-hat). Role tags ''k-hat
@@ -2122,35 +2112,36 @@ scenes:
     words: 174
     sentences: 10
     beats: 3
+    timing_source: dryrun1
 - id: s21_jk_east
   t:
-  - 1659.6
-  - 1743.875
+  - 1657.15
+  - 1741.425
   sentence_times:
-  - - 1659.6
-    - 1663.575
-  - - 1663.925
-    - 1676.075
-  - - 1676.425
-    - 1681.675
-  - - 1682.025
-    - 1686.175
-  - - 1686.525
-    - 1689.025
-  - - 1689.375
-    - 1696.875
-  - - 1697.225
-    - 1705.2
-  - - 1706.7
-    - 1711.15
-  - - 1711.5
-    - 1715.975
-  - - 1717.475
-    - 1728.55
-  - - 1728.9
-    - 1735.775
-  - - 1737.275
-    - 1743.075
+  - - 1657.15
+    - 1661.125
+  - - 1661.475
+    - 1673.625
+  - - 1673.975
+    - 1679.225
+  - - 1679.575
+    - 1683.725
+  - - 1684.075
+    - 1686.575
+  - - 1686.925
+    - 1694.425
+  - - 1694.775
+    - 1702.75
+  - - 1704.25
+    - 1708.7
+  - - 1709.05
+    - 1713.525
+  - - 1715.025
+    - 1726.1
+  - - 1726.45
+    - 1733.325
+  - - 1734.825
+    - 1740.625
   beat: 'derivation D37: going east also tilts k-hat (towards east) and j-hat (towards west)'
   visual: 'Side-by-side: left, the top view (s18) with R-hat turning towards i-hat (gold short arrow) as the parcel goes east; right, the meridian slice with k-hat
     and j-hat written as R-hat and z-hat legs (z-hat pinned, a small padlock-free ''never turns'' tag in slate). Column CalcStack: DR/Dt = i-hat u/(a cos φ), Dk/Dt
@@ -2222,43 +2213,44 @@ scenes:
     words: 198
     sentences: 12
     beats: 3
+    timing_source: dryrun1
 - id: s22_add_motions
   t:
-  - 1743.875
-  - 1852.525
+  - 1741.425
+  - 1850.075
   sentence_times:
-  - - 1743.875
-    - 1746.1
-  - - 1746.45
-    - 1750.9
-  - - 1751.25
-    - 1757.575
-  - - 1757.925
-    - 1770.325
-  - - 1770.675
-    - 1779.95
-  - - 1780.3
-    - 1788.1
-  - - 1789.6
-    - 1795.85
-  - - 1796.2
-    - 1799.75
-  - - 1800.1
-    - 1801.9
-  - - 1802.25
-    - 1811.5
-  - - 1811.85
-    - 1813.75
-  - - 1814.1
-    - 1821.275
-  - - 1822.775
-    - 1826.175
-  - - 1826.525
-    - 1834.375
-  - - 1834.725
-    - 1840.875
-  - - 1841.225
-    - 1851.725
+  - - 1741.425
+    - 1743.65
+  - - 1744.0
+    - 1748.45
+  - - 1748.8
+    - 1755.125
+  - - 1755.475
+    - 1767.875
+  - - 1768.225
+    - 1777.5
+  - - 1777.85
+    - 1785.65
+  - - 1787.15
+    - 1793.4
+  - - 1793.75
+    - 1797.3
+  - - 1797.65
+    - 1799.45
+  - - 1799.8
+    - 1809.05
+  - - 1809.4
+    - 1811.3
+  - - 1811.65
+    - 1818.825
+  - - 1820.325
+    - 1823.725
+  - - 1824.075
+    - 1831.925
+  - - 1832.275
+    - 1838.425
+  - - 1838.775
+    - 1849.275
   beat: 'derivation D38: add the motions -> the three rates; check; the link to Ω × B'
   visual: 'The s17 icon grid now full; its cells slide into the column and stack into the three final lines (84 px), each term coloured by its motion (east terms
     teal-outlined, north terms slate-outlined), every ''speed / radius'' fragment underbraced gold. S6-S8: a check per line: a strike-through ''no i-hat part'', ''no
@@ -2334,39 +2326,40 @@ scenes:
     words: 275
     sentences: 16
     beats: 2
+    timing_source: splice2
 - id: s23_whole_vector
   t:
-  - 1852.525
-  - 1940.85
+  - 1850.075
+  - 1938.4
   sentence_times:
-  - - 1852.525
+  - - 1850.075
+    - 1852.0
+  - - 1852.35
     - 1854.45
   - - 1854.8
-    - 1856.9
-  - - 1857.25
-    - 1861.375
-  - - 1861.725
-    - 1868.9
-  - - 1869.25
-    - 1879.525
-  - - 1879.875
-    - 1884.85
-  - - 1885.2
-    - 1891.325
-  - - 1891.675
-    - 1894.675
-  - - 1895.025
-    - 1903.075
-  - - 1904.575
-    - 1907.925
-  - - 1908.275
-    - 1917.625
-  - - 1917.975
-    - 1924.5
-  - - 1924.85
-    - 1932.05
-  - - 1933.55
-    - 1940.05
+    - 1858.925
+  - - 1859.275
+    - 1866.45
+  - - 1866.8
+    - 1877.075
+  - - 1877.425
+    - 1882.4
+  - - 1882.75
+    - 1888.875
+  - - 1889.225
+    - 1892.225
+  - - 1892.575
+    - 1900.625
+  - - 1902.125
+    - 1905.475
+  - - 1905.825
+    - 1915.175
+  - - 1915.525
+    - 1922.05
+  - - 1922.4
+    - 1929.6
+  - - 1931.1
+    - 1937.6
   beat: 'why it matters: Newton''s law needs D(bold v)/Dt; the product rule gives six terms (D39 (1)-(2))'
   visual: 'Column: ''F = m a'' keyword, then bold v = u i-hat + v j-hat + w k-hat (u, v, w coloured as their arrows), then the product rule recalled from Part 2 (68
     px, faint ''Part 2''), then the six-term line built pair by pair (84 px), each pair underbraced: ''change of the number'' (slate) / ''change of the arrow'' (orange).
@@ -2411,43 +2404,43 @@ scenes:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860). Equation column x >= 1060, never on the globe.'
   skip_chip:
     'on': S4 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 34:44
-    look: small warm-white keyword chip at the top of the column (54 px, the one allowed chip style, gold outline), fades after 6 s; timestamp re-filled after the
-      final TTS
+    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 34:41
+    look: small warm-white keyword chip at the top of the column (54 px, gold outline), fades after 6 s; timestamp re-filled after the final TTS
   measured:
     seconds: 88.325
     words: 234
     sentences: 14
     beats: 2
+    timing_source: splice2
 - id: s24_dot_i_a
   t:
-  - 1940.85
-  - 2003.675
+  - 1938.4
+  - 2001.225
   sentence_times:
-  - - 1940.85
-    - 1944.475
-  - - 1944.825
-    - 1948.125
-  - - 1948.475
-    - 1951.575
-  - - 1951.925
-    - 1955.95
-  - - 1956.3
-    - 1961.175
-  - - 1961.525
-    - 1965.95
-  - - 1967.45
-    - 1972.55
-  - - 1972.9
-    - 1979.9
-  - - 1980.25
-    - 1982.3
-  - - 1983.8
-    - 1988.8
-  - - 1989.15
-    - 1993.575
-  - - 1995.075
-    - 2002.175
+  - - 1938.4
+    - 1942.025
+  - - 1942.375
+    - 1945.675
+  - - 1946.025
+    - 1949.125
+  - - 1949.475
+    - 1953.5
+  - - 1953.85
+    - 1958.725
+  - - 1959.075
+    - 1963.5
+  - - 1965.0
+    - 1970.1
+  - - 1970.45
+    - 1977.45
+  - - 1977.8
+    - 1979.85
+  - - 1981.35
+    - 1986.35
+  - - 1986.7
+    - 1991.125
+  - - 1992.625
+    - 1999.725
   beat: 'derivation D39 (3)-(4): dot with i-hat; terms 1, 2, 3, 5'
   visual: 'The six-term line stays at the top of the column; a gold ''dot i-hat'' tag slides along it, stopping at each term in turn. Term 1 -> ''Du/Dt'' (kept, warm
     white). Terms 2, 3, 5 -> ''0'' (each struck with Strike as its reason appears: ''D i-hat/Dt has only j-hat, k-hat parts'', ''j-hat ⟂ i-hat'', ''k-hat ⟂ i-hat'').
@@ -2513,37 +2506,38 @@ scenes:
     words: 158
     sentences: 12
     beats: 4
+    timing_source: dryrun1
 - id: s25_dot_i_b
   t:
-  - 2003.675
-  - 2097.125
+  - 2001.225
+  - 2094.675
   sentence_times:
-  - - 2003.675
-    - 2006.15
-  - - 2006.5
-    - 2011.45
-  - - 2011.8
-    - 2021.95
-  - - 2022.3
-    - 2030.35
-  - - 2031.85
-    - 2037.125
-  - - 2037.475
-    - 2042.6
-  - - 2042.95
-    - 2046.5
-  - - 2048.0
-    - 2060.875
-  - - 2062.375
-    - 2065.975
-  - - 2066.325
-    - 2070.9
-  - - 2071.25
-    - 2073.425
-  - - 2073.775
-    - 2082.75
-  - - 2084.25
-    - 2096.325
+  - - 2001.225
+    - 2003.7
+  - - 2004.05
+    - 2009.0
+  - - 2009.35
+    - 2019.5
+  - - 2019.85
+    - 2027.9
+  - - 2029.4
+    - 2034.675
+  - - 2035.025
+    - 2040.15
+  - - 2040.5
+    - 2044.05
+  - - 2045.55
+    - 2058.425
+  - - 2059.925
+    - 2063.525
+  - - 2063.875
+    - 2068.45
+  - - 2068.8
+    - 2070.975
+  - - 2071.325
+    - 2080.3
+  - - 2081.8
+    - 2093.875
   beat: 'derivation D39 (5)-(7): terms 4 and 6; the result; metric terms named'
   visual: 'The gold ''dot i-hat'' tag stops on term 4: Dj/Dt from s22 slides in, its i-hat part highlighted (gold band) and its k-hat part struck; the product ''v
     × (−(u/a) tan φ)'' builds to ''−uv tan φ / a''. Term 6: Dk/Dt slides in, i-hat part highlighted, j-hat part struck; ''+uw/a''. Then the result (96 px) with underbraces
@@ -2621,39 +2615,40 @@ scenes:
     words: 230
     sentences: 13
     beats: 4
+    timing_source: splice2
 - id: s26_glider
   t:
-  - 2097.125
-  - 2181.275
+  - 2094.675
+  - 2178.75
   sentence_times:
-  - - 2097.125
-    - 2099.45
-  - - 2099.8
-    - 2102.225
-  - - 2102.575
-    - 2109.325
-  - - 2109.675
-    - 2116.925
-  - - 2117.275
-    - 2125.95
-  - - 2126.3
-    - 2134.525
-  - - 2134.875
-    - 2139.425
-  - - 2139.775
-    - 2147.0
-  - - 2147.35
-    - 2155.375
-  - - 2156.875
-    - 2160.925
-  - - 2162.425
-    - 2167.375
-  - - 2167.725
-    - 2170.4
-  - - 2170.75
-    - 2174.875
-  - - 2175.225
-    - 2180.475
+  - - 2094.675
+    - 2097.0
+  - - 2097.35
+    - 2099.775
+  - - 2100.125
+    - 2106.875
+  - - 2107.225
+    - 2114.475
+  - - 2114.825
+    - 2123.5
+  - - 2123.85
+    - 2132.075
+  - - 2132.425
+    - 2136.975
+  - - 2137.325
+    - 2144.55
+  - - 2144.9
+    - 2152.925
+  - - 2154.425
+    - 2158.475
+  - - 2159.975
+    - 2164.85
+  - - 2165.2
+    - 2167.875
+  - - 2168.225
+    - 2172.35
+  - - 2172.7
+    - 2177.95
   beat: 'intuition: the force-free puck (Must 16, re-voiced): numbers change, speed does not'
   visual: 'Globe (non-spinning, unzoomed): a puck glides from 45° N, 0° E heading north-east along its great circle (gold path, 1 day, time compressed); at start
     and after one day its local tripod and its velocity arrow (teal) are drawn; readouts in the column (never on the globe), gold-linked to the puck: ''u = 10.0 ->
@@ -2665,7 +2660,7 @@ scenes:
     the radius, minus u w over the radius. The puck stays on the ground, so w is zero, and that leaves u v tangent phi over the radius, which isn't zero. So the puck's
     eastward number changes, even though nothing pushes it. Let's start it at forty five degrees north, going north-east, at ten metres per second east and ten north.
     After one day, its east part has grown to about eleven and a half, and its north part has shrunk to about eight point two. [beat] But its speed is still fourteen
-    point one metres per second. [beat] The puck goes straight, along a great circle, which we'll meet in Part 5. It's our arrows that turned under it. Metric terms
+    point one metres per second. [beat] The puck goes straight, along a great circle, which we'll meet in Part 6. It's our arrows that turned under it. Metric terms
     never speed anything up or slow it down. They only share the same speed out between east and north, as the arrows turn.
   on_screen_eq:
     latex: \frac{D\mathbf v}{Dt}\cdot\hat{\mathbf i}=0\ \Rightarrow\ \frac{Du}{Dt}=\frac{uv\tan\varphi}{a}-\frac{uw}{a}=\frac{uv\tan\varphi}{a}\neq0\quad(w=0)
@@ -2703,37 +2698,38 @@ scenes:
     fade y 760-830; text only on the darkened part; every zoom ends with a zoom back out; places centred and labelled within 1 s of being spoken. SourceBelow ''Image:
     NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860).'
   measured:
-    seconds: 84.15
+    seconds: 84.075
     words: 205
     sentences: 14
     beats: 2
+    timing_source: splice3
 - id: s27_metric_size
   t:
-  - 2181.275
-  - 2263.3
+  - 2178.75
+  - 2260.775
   sentence_times:
-  - - 2181.275
-    - 2182.975
-  - - 2183.325
-    - 2191.325
-  - - 2191.675
-    - 2200.2
-  - - 2200.55
-    - 2206.2
-  - - 2207.7
-    - 2215.775
-  - - 2216.125
-    - 2227.5
-  - - 2227.85
-    - 2233.775
-  - - 2235.275
-    - 2239.2
-  - - 2240.7
-    - 2244.175
-  - - 2244.525
-    - 2254.625
-  - - 2254.975
-    - 2262.5
+  - - 2178.75
+    - 2180.45
+  - - 2180.8
+    - 2188.8
+  - - 2189.15
+    - 2197.675
+  - - 2198.025
+    - 2203.675
+  - - 2205.175
+    - 2213.25
+  - - 2213.6
+    - 2224.975
+  - - 2225.325
+    - 2231.25
+  - - 2232.75
+    - 2236.675
+  - - 2238.175
+    - 2241.65
+  - - 2242.0
+    - 2252.1
+  - - 2252.45
+    - 2259.975
   beat: 'why it matters: size of the metric term vs Coriolis (log bars)'
   visual: 'Column CalcStack: ''10 × 10 × 1 / 6.371 × 10⁶ ≈ 1.6 × 10⁻⁵ m/s²''; ''f = 2 Ω sin φ = 2 × 7.29 × 10⁻⁵ × 0.707 ≈ 1.03 × 10⁻⁴ s⁻¹''; ''f v ≈ 1.0 × 10⁻³ m/s²''.
     Picture zone: two horizontal log-scale bars (house Balance style): metric (orange) and Coriolis (violet), tick labels 10⁻⁶ … 10⁻² at 52 px, a gold bracket ''≈
@@ -2781,1253 +2777,40 @@ scenes:
     words: 195
     sentences: 11
     beats: 3
-- id: s28_train
+    timing_source: dryrun1
+- id: s28_recap
   t:
-  - 2263.3
-  - 2330.675
+  - 2260.775
+  - 2338.075
   sentence_times:
-  - - 2263.3
-    - 2267.275
-  - - 2267.625
-    - 2273.925
-  - - 2274.275
-    - 2278.225
-  - - 2278.575
-    - 2286.0
-  - - 2287.5
-    - 2289.475
-  - - 2289.825
-    - 2292.725
-  - - 2293.075
-    - 2297.625
-  - - 2297.975
-    - 2301.75
-  - - 2302.1
-    - 2309.375
-  - - 2309.725
-    - 2315.45
-  - - 2316.95
-    - 2325.275
-  - - 2325.625
-    - 2329.875
-  beat: 'building block: a frame that moves (the train); x = x'' + U t derived'
-  visual: 'Code-drawn train on a straight track across the picture zone at 20 m/s (slate), a walker glyph at 1.5 m/s (teal arrow ''u′ = 1.5''), an observer beside
-    the track (station icon). Train arrow ''U = 20'' (orange). S3: CalcStack ''20 + 1.5 = 21.5 m/s'' in the column (x >= 1100, Must 12). S5-S8: two rulers: the ground
-    ruler x from the station (slate) and the train ruler x′ from the back of the train (orange) sliding apart; a gold bracket ''U t'' from the station to the back
-    of the train, a teal bracket ''x′'' from there to the walker, a long warm-white bracket ''x'' above both; the house clock glyph on both rulers reading the same
-    time. Sound: soft rail rhythm, −30 LUFS, under S2-S3 only.'
-  voiceover: 'Now our last change of coordinates lets the frame move. Imagine you''re on a train gliding along a straight track at a steady twenty metres per second.
-    You walk towards the front at one and a half metres per second. Someone standing beside the track sees you moving at twenty plus one and a half: twenty one and
-    a half metres per second. [beat] Why do the speeds add? Let''s measure positions along the track. The person beside the track uses x, measured from the station.
-    You use x prime, measured from the back of the train. The back of the train passed the station at time zero, and it moves at capital U, twenty metres per second.
-    So after a time t, the back of the train is capital U times t from the station. [beat] Your distance from the station is that, plus your distance from the back
-    of the train: x equals x prime plus capital U t. And both clocks show the same time: t prime equals t.'
-  on_screen_eq:
-    latex: x=x'+U\,t,\qquad t'=t
-    vallis_eq: 'none in Vallis; Kundu §3.3 text before (3.9): x = x'' + Ut + x''_o, t = t'' (x''_o = 0 here)'
-    page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
-  calc_rows:
-  - 20+1.5=21.5\ \text{m/s}
-  physics_source:
-    fn: fluidpy.core.kinematics.galilean_transform
-    params:
-      U:
-      - 20.0
-      - 0.0
-    test: ../Fluid Dynamics/tests/test_ch03.py::test_galilean_V1_acceleration_equal_in_both_frames; ::test_galilean_V2_derivation; CHECK DC50 21.5 m/s
-  exaggeration:
-  - thought experiment (said 'imagine')
-  kind: diagram animation
-  data: —
-  tool: Remotion SVG
-  runner_up: —
-  why: everyday frame change before the storm
-  related: []
-  feedback:
-  - U-CO-093
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18). Must 12: the ''u′ = 1.5'' tag and every calc in the column x >= 1100, clear of the equation.'
-  measured:
-    seconds: 67.375
-    words: 170
-    sentences: 12
-    beats: 2
-- id: s29_velocities_add
-  t:
-  - 2330.675
-  - 2409.95
-  sentence_times:
-  - - 2330.675
-    - 2337.175
-  - - 2337.525
-    - 2340.1
-  - - 2340.45
-    - 2343.65
-  - - 2344.0
-    - 2347.025
-  - - 2347.375
-    - 2357.35
-  - - 2357.7
-    - 2363.7
-  - - 2365.2
-    - 2368.125
-  - - 2368.475
-    - 2373.725
-  - - 2374.075
-    - 2379.675
-  - - 2380.025
-    - 2383.2
-  - - 2384.7
-    - 2389.375
-  - - 2390.875
-    - 2401.025
-  - - 2401.375
-    - 2409.15
-  beat: 'derivation: u = u'' + U from the positions; Galilean transformation named'
-  visual: 'The rulers from s28 frozen at one moment, then a short time Δt later (ghost of the first moment in slate): the three brackets grow by ''Δx′'' (teal), ''U
-    Δt'' (gold) and ''Δx'' (warm white). Column CalcStack: Δx = Δx′ + U Δt; ÷ Δt; u = u′ + U; ''1.5 + 20 = 21.5''. Keyword ''Galilean transformation'' (54 px) on
-    S6; ''bold v = bold U + bold v′'' (84 px) on S7.'
-  voiceover: 'Next come two short derivations: why speeds add, and why accelerations don''t change. They''re for those who like every step. If not, skip ahead to
-    the time on screen. Now let''s get the speeds from the positions. In a short time, delta t, your place on the train changes by delta x prime, and the back of
-    the train moves on by capital U delta t. So, step one: delta x equals delta x prime, plus capital U delta t. [beat] Step two: divide by delta t. Delta x over
-    delta t is the speed seen from the ground, small u. Delta x prime over delta t is the speed seen on the train, u prime. So u equals u prime plus capital U. [beat]
-    With our numbers, one and a half plus twenty is twenty one and a half. [beat] Switching between two frames like this, moving at a steady velocity without turning,
-    is called a Galilean transformation, after Galileo Galilei. In three dimensions, the same holds for each part: bold v equals bold capital U plus bold v prime.'
-  on_screen_eq:
-    latex: u=u'+U\qquad\Longrightarrow\qquad \mathbf v=\mathbf U+\mathbf v'
-    vallis_eq: none in Vallis; Kundu §3.3 u = U + u' (written here with bold v for the wind, as in this movie)
-    page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
-  calc_rows:
-  - \Delta x=\Delta x'+U\,\Delta t
-  - \frac{\Delta x}{\Delta t}=\frac{\Delta x'}{\Delta t}+U\ \Rightarrow\ u=u'+U
-  - 1.5+20=21.5\ \text{m/s}
-  physics_source:
-    fn: fluidpy.core.kinematics.galilean_transform
-    params:
-      U:
-      - 20.0
-      - 0.0
-    test: ../Fluid Dynamics/tests/test_ch03.py::test_galilean_V1_acceleration_equal_in_both_frames; ::test_galilean_V2_derivation
-  exaggeration:
-  - thought experiment
-  derivation:
-    id: D40
-    goal: why velocities add
-    steps:
-    - - change in a short time
-      - \Delta x=\Delta x'+U\Delta t
-      - take the change of x = x′ + U t (U steady)
-      - walker's step plus the train's advance
-    - - divide by Δt
-      - u=u'+U
-      - speed = distance ÷ time; shrink Δt (derivatives movie)
-      - ground speed = train's speed + speed on the train
-    - - numbers
-      - '21.5'
-      - 1.5 + 20
-      - matches the picture
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: diagram derivation
-  data: —
-  tool: Remotion SVG + CalcStack
-  runner_up: —
-  why: velocities add, derived, not asserted
-  related: []
-  feedback:
-  - U-CO-093
-  - U-CO-054
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18).'
-  skip_chip:
-    'on': S3 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 41:44
-    look: small warm-white keyword chip at the top of the column (54 px, the one allowed chip style, gold outline), fades after 6 s; timestamp re-filled after the
-      final TTS
-  measured:
-    seconds: 79.275
-    words: 178
-    sentences: 13
-    beats: 3
-- id: s30_accel_same
-  t:
-  - 2409.95
-  - 2516.575
-  sentence_times:
-  - - 2409.95
-    - 2412.1
-  - - 2412.45
-    - 2414.95
-  - - 2415.3
-    - 2418.925
-  - - 2419.275
-    - 2424.15
-  - - 2424.5
-    - 2430.6
-  - - 2430.95
-    - 2438.9
-  - - 2440.4
-    - 2443.375
-  - - 2443.725
-    - 2448.35
-  - - 2448.7
-    - 2455.35
-  - - 2456.85
-    - 2463.075
-  - - 2463.425
-    - 2471.05
-  - - 2472.55
-    - 2483.95
-  - - 2485.45
-    - 2495.725
-  - - 2496.075
-    - 2504.15
-  - - 2504.5
-    - 2515.775
-  beat: 'derivation D41: du/dt = dU/dt + du''/dt; dU/dt = 0; the falling ball'
-  visual: 'Column builds D41 one row per step (Layered TeX): u = U + u′; Δu = ΔU + Δu′ (''change of a sum'' brace); ÷ Δt; the limit (Δt -> 0, ''derivatives movie''
-    faint); d U/dt struck with ''= 0, U steady''; result ''du/dt = du′/dt'' (gold). Picture zone: the walker''s speed readout ''1.5 -> 2.0'' on the train and ''21.5
-    -> 22.0'' beside the track over one second (both ''+0.5'', gold ''same''); then a ball dropped on the train: straight down for the rider, a parabola for the ground
-    observer; at three moments both views show the same downward acceleration arrow ''9.8 m/s²'' (brown).'
-  voiceover: 'Here''s the beautiful part. What happens to accelerations? Let''s follow the same steps, one move at a time. Step one: at every moment, u equals capital
-    U plus u prime. Step two: a short time later, each of them has changed a little, and the sum still holds. So delta u equals delta capital U plus delta u prime:
-    the change of a sum is the sum of the changes. [beat] Step three: divide by delta t. Step four: let delta t shrink, as in the derivatives movie. That gives d
-    u by d t equals d capital U by d t, plus d u prime by d t. [beat] Step five: the train''s speed never changes, so d capital U by d t is zero. So d u by d t equals
-    d u prime by d t: the acceleration is the same in both frames. [beat] For example, if you speed up from one and a half to two metres per second in one second,
-    the person beside the track sees you go from twenty one and a half to twenty two, in the same second. [beat] Drop a ball on a smooth train, and it speeds up downwards
-    by nine point eight metres per second every second, for you, and for the person beside the track. And since Newton''s law says force equals mass times acceleration,
-    the same forces explain the motion in both frames. If you skipped, here''s what to keep: in a frame moving steadily in a straight line, speeds change by the frame''s
-    own speed, but accelerations, and so forces, stay the same.'
-  on_screen_eq:
-    latex: \frac{du}{dt}=\frac{dU}{dt}+\frac{du'}{dt}=\frac{du'}{dt}
-    vallis_eq: none in Vallis; Kundu §3.3 (steady U) before (3.9)
-    page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
-  calc_rows:
-  - u+\Delta u=(U+\Delta U)+(u'+\Delta u')\ \Rightarrow\ \Delta u=\Delta U+\Delta u'
-  - \frac{\Delta u}{\Delta t}=\frac{\Delta U}{\Delta t}+\frac{\Delta u'}{\Delta t}
-  - 1.5\to2.0\ \ \text{and}\ \ 21.5\to22.0:\ \ +0.5\ \text{m/s in 1 s}
-  physics_source:
-    fn: fluidpy.core.kinematics.galilean_transform; fluidpy.core.kinematics.acceleration
-    params:
-      U:
-      - 20.0
-      - 0.0
-    test: ../Fluid Dynamics/tests/test_ch03.py::test_galilean_V1_acceleration_equal_in_both_frames; ::test_galilean_V2_derivation; CHECK DC51
-  exaggeration:
-  - thought experiment (smooth train)
-  derivation:
-    id: D41
-    goal: the acceleration is the same in both frames
-    steps:
-    - - at every moment
-      - u=U+u'
-      - s29
-      - the rule holds at t and at t + Δt
-    - - subtract the two moments
-      - \Delta u=\Delta U+\Delta u'
-      - the change of a sum is the sum of the changes
-      - each speed's change
-    - - divide by Δt
-      - \frac{\Delta u}{\Delta t}=\frac{\Delta U}{\Delta t}+\frac{\Delta u'}{\Delta t}
-      - dividing both sides by the same number
-      - average accelerations
-    - - shrink Δt
-      - \frac{du}{dt}=\frac{dU}{dt}+\frac{du'}{dt}
-      - the limit (derivatives movie)
-      - accelerations add
-    - - steady train
-      - \frac{dU}{dt}=0\Rightarrow\frac{du}{dt}=\frac{du'}{dt}
-      - U never changes
-      - same acceleration, same forces (Newton)
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: equations + diagram
-  data: —
-  tool: Layered TeX + Remotion SVG
-  runner_up: —
-  why: 'U-CO-093: du/dt = dU/dt + du′/dt derived'
-  related: []
-  feedback:
-  - U-CO-093
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18).'
-  skip_takeaway:
-    'on': S15
-    keyword: what to keep
-    spoken: 'If you skipped, here''s what to keep: in a frame moving steadily in a straight line, speeds change by the frame''s own speed, but accelerations, and
-      so forces, stay the same.'
-  measured:
-    seconds: 106.625
-    words: 265
-    sentences: 15
-    beats: 4
-- id: s31_parcel_accel
-  t:
-  - 2516.575
-  - 2605.375
-  sentence_times:
-  - - 2516.575
-    - 2522.825
-  - - 2523.175
-    - 2528.875
-  - - 2529.225
-    - 2537.325
-  - - 2537.675
-    - 2541.2
-  - - 2541.55
-    - 2548.05
-  - - 2548.4
-    - 2555.95
-  - - 2556.3
-    - 2563.125
-  - - 2563.475
-    - 2566.5
-  - - 2568.0
-    - 2574.225
-  - - 2574.575
-    - 2578.2
-  - - 2578.55
-    - 2583.9
-  - - 2584.25
-    - 2593.775
-  - - 2594.125
-    - 2598.925
-  - - 2599.275
-    - 2602.125
-  - - 2602.475
-    - 2604.575
-  beat: 'derivation D42 (1)-(3): the air parcel''s acceleration = local change + advection; the frame equation explained'
-  visual: 'Column: the derivatives movie''s line DT/Dt = ∂T/∂t + v·∇T (68 px, faint ''derivatives movie''), with underbraces ''one fixed place'' (slate) and ''advection''
-    (teal); a gold swap arrow ''T -> u'' turns it into Du/Dt = ∂u/∂t + v·∇u; ''same for v, w''. Then the frame equation (84 px) with braces: left ''ground observer''
-    (slate), right ''rider, frame moving at U'' (orange), a gold ''='' tag ''same acceleration''; under each side, ''local'' and ''advection'' sub-braces. Picture
-    zone: an air parcel (small cube, 3-D, teal edges) drifting across a faint map with its wind arrow, a fixed anemometer icon (slate) on the ground and a rider icon
-    gliding at U.'
-  voiceover: 'In a fluid, we follow an air parcel: a small volume of air that moves with the wind. In the derivatives movie, we found the rate that an air parcel''s
-    own thermometer reads. Capital D T by D t equals partial capital T by partial small t, plus bold v dot grad T. The first part is the change at one fixed place.
-    The second is advection: the change from being carried to places where the temperature is different. The eastward wind, u, is just another number the parcel carries
-    along, so we can put u in place of T. Capital D u by D t equals partial u by partial t, plus bold v dot grad u. The same goes for v and for w. [beat] So the air
-    parcel''s acceleration is a local change at a fixed place, plus advection. Now here''s the train''s lesson, written for a fluid. On the left is the parcel''s
-    acceleration, worked out by someone on the ground. On the right is the same parcel''s acceleration, worked out by someone riding in a frame that moves at capital
-    U, with primes on everything. They''re equal, because the acceleration is the same in both frames. But each piece on its own can be different. Let''s see that
-    with numbers.'
-  on_screen_eq:
-    latex: \frac{\partial\mathbf v}{\partial t}+(\mathbf v\cdot\nabla)\mathbf v=\frac{\partial\mathbf v'}{\partial t'}+(\mathbf v'\cdot\nabla')\mathbf v'
-    vallis_eq: none in Vallis; Kundu (3.9) (written with bold v for the wind, as in this movie)
-    page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
-  calc_rows:
-  - \frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
-  - \frac{Du}{Dt}=\frac{\partial u}{\partial t}+\mathbf v\cdot\nabla u
-  physics_source:
-    fn: fluidpy.core.kinematics.acceleration; fluidpy.core.kinematics.galilean_transform; fluidpy.geo.calculus.chain_rule_rate
-    params:
-      U:
-      - 10.0
-      - 0.0
-    test: ../Fluid Dynamics/tests/test_ch03.py::test_galilean_V1_acceleration_equal_in_both_frames; ::test_galilean_V2_derivation; ../Fluid Dynamics/tests/geo/test_calculus.py::test_chain_rule_V1_limits_and_frozen_pattern;
-      ::test_chain_rule_V2_sympy_total_derivative_along_a_path_B1_1
-  exaggeration:
-  - illustrative parcel and map (no data)
-  derivation:
-    id: D42a
-    goal: the acceleration of an air parcel, and why both frames agree
-    steps:
-    - - start from the parcel's thermometer
-      - \frac{DT}{Dt}=\frac{\partial T}{\partial t}+\mathbf v\cdot\nabla T
-      - derivatives movie (traveller's chain rule with the wind as the speed)
-      - local change + advection
-    - - u is just another carried number
-      - \frac{Du}{Dt}=\frac{\partial u}{\partial t}+\mathbf v\cdot\nabla u
-      - the chain rule holds for any quantity the parcel carries
-      - the parcel's eastward acceleration
-    - - all three parts
-      - \frac{\partial\mathbf v}{\partial t}+(\mathbf v\cdot\nabla)\mathbf v
-      - (v·∇) applied to each part
-      - the parcel's acceleration
-    - - two frames
-      - \text{left}=\text{right}
-      - 'D41: the same parcel has the same acceleration in both frames'
-      - pieces may differ, the sum cannot
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: equations + diagram
-  data: —
-  tool: Layered TeX + three.js parcel cube
-  runner_up: —
-  why: 'U-CO-094: the equation shown at 43:21 (build 1) explained'
-  related: []
-  feedback:
-  - U-CO-094
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18).'
-  measured:
-    seconds: 88.8
-    words: 214
-    sentences: 15
-    beats: 1
-- id: s32_sliding_pattern
-  t:
-  - 2605.375
-  - 2740.65
-  sentence_times:
-  - - 2605.375
-    - 2613.1
-  - - 2613.45
-    - 2619.475
-  - - 2619.825
-    - 2631.925
-  - - 2633.425
-    - 2638.5
-  - - 2638.85
-    - 2643.4
-  - - 2643.75
-    - 2654.35
-  - - 2654.7
-    - 2665.225
-  - - 2665.575
-    - 2669.875
-  - - 2671.375
-    - 2677.2
-  - - 2677.55
-    - 2684.2
-  - - 2684.55
-    - 2694.95
-  - - 2696.45
-    - 2703.85
-  - - 2705.35
-    - 2713.075
-  - - 2714.575
-    - 2721.3
-  - - 2721.65
-    - 2725.725
-  - - 2726.075
-    - 2734.825
-  - - 2735.175
-    - 2739.85
-  beat: 'derivation D42 (4)-(6): a sliding pattern: each piece differs, the sum agrees (-4.0 + 5.4 = 1.4 = 0 + 1.4)'
-  visual: 'Picture zone: a 1-D wind profile (teal curve, wind speed vs east distance, 0-400 km, ticks at 52 px) sliding right at 10 m/s, its shape unchanged; the
-    chosen place marked by a fixed anemometer icon (slate) and a rider icon (orange) sharing the spot at this moment; a gold tangent on the curve ''0.111 m/s per
-    km''. Two columns of numbers under ''rider'' and ''ground'' (house three-row grid, s19d pattern): ''local'' 0 | −4.0, ''advection'' +1.4 | +5.4, ''sum'' +1.4
-    | +1.4 (m/s per hour), each number gold-linked to its factor (speed or slope) in the picture. TimeGraph inset: the anemometer''s wind falling, the parcel''s wind
-    rising, over one hour. Labels sit beside bars and curves, never on them.'
-  voiceover: 'Picture a pattern of stronger and weaker winds, two hundred kilometres from one gust to the next, all blowing east. The whole pattern slides east at
-    a steady ten metres per second, without changing its shape. Take one moment, at a place where the wind is thirteen and a half metres per second, and is getting
-    stronger towards the east by zero point one one one metres per second for every kilometre. [beat] First, ride with the pattern, at capital U, ten metres per second.
-    To you, the pattern is frozen, so the local change is zero. Relative to you, the air at that place moves east at thirteen and a half minus ten: three and a half
-    metres per second, or twelve point seven kilometres per hour. It''s carried into stronger wind, so the advection is twelve point seven kilometres per hour, times
-    zero point one one one metres per second per kilometre. That''s plus one point four metres per second, every hour. [beat] Now stand on the ground, beside an anemometer,
-    a wind meter that never moves. The pattern slides past at thirty six kilometres per hour, bringing the weaker wind from the west. So the anemometer sees a local
-    change of minus thirty six times zero point one one one: minus four point zero metres per second, every hour. [beat] The advection, with the full wind of forty
-    eight point seven kilometres per hour, is plus five point four. [beat] Add them: minus four point zero, plus five point four, is plus one point four, the same
-    as for the rider. [beat] So each piece depends on who measures it, but their sum, the air parcel''s acceleration, doesn''t. That only works for a frame moving
-    steadily in a straight line. A frame that turns, like the spinning Earth, adds the Coriolis and centrifugal effects, as we saw in the cross product movies. We''ll
-    build all of this fully in a later movie: The material derivative.'
-  on_screen_eq:
-    latex: \frac{\partial u}{\partial t}+u\,\frac{\partial u}{\partial x}=\frac{\partial u'}{\partial t'}+u'\,\frac{\partial u'}{\partial x'}
-    vallis_eq: none in Vallis; Kundu (3.9), one-dimensional form
-    page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
-  calc_rows:
-  - '\text{rider: }0+12.7\ \tfrac{\text{km}}{\text{h}}\times0.111\ \tfrac{\text{m/s}}{\text{km}}\approx+1.4\ \tfrac{\text{m/s}}{\text{h}}'
-  - '\text{ground: }-36\times0.111+48.7\times0.111\approx-4.0+5.4=+1.4\ \tfrac{\text{m/s}}{\text{h}}'
-  physics_source:
-    fn: fluidpy.core.kinematics.acceleration; fluidpy.core.kinematics.galilean_transform
-    params:
-      field: u = 10 + 5 sin(2 pi (x - 10 t) / 200 km)
-      point_phase_deg: 45
-    test: ../Fluid Dynamics/tests/test_ch03.py::test_galilean_V1_sine_wave_worked_number (same structure, unit numbers); new CHECK DP32 local -3.999, advection +5.412,
-      rider advection +1.414 m/s per hour
-  exaggeration:
-  - thought experiment (an idealised gust pattern, said 'picture')
-  - one hour shown in about 4 s
-  derivation:
-    id: D42b
-    goal: see that local change and advection depend on the observer, but their sum does not
-    steps:
-    - - the pattern
-      - u=U+u'(x-Ut),\ U=10\ \text{m/s}
-      - a shape that slides without changing (frozen in the moving frame)
-      - wavelength 200 km, gusts ±5 m/s
-    - - the moment
-      - u=13.5\ \text{m/s},\ \partial u/\partial x=0.111\ \text{m/s per km}
-      - the chosen place (phase 45°)
-      - wind strengthening eastward
-    - - rider
-      - 0+3.5\ \text{m/s}\times0.111
-      - frozen for the rider; relative wind u′ = u − U = 3.5 m/s = 12.7 km/h
-      - +1.4 m/s per hour
-    - - ground local
-      - -U\,\partial u/\partial x=-36\times0.111
-      - the pattern slides past at 36 km/h, bringing weaker wind
-      - −4.0 m/s per hour
-    - - ground advection
-      - u\,\partial u/\partial x=48.7\times0.111
-      - the full wind carries the parcel
-      - +5.4 m/s per hour
-    - - sum
-      - -4.0+5.4=+1.4
-      - D41
-      - the parcel's acceleration agrees
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: graph + three-row grid
-  data: —
-  tool: Remotion SVG (TimeGraph, three-row grid)
-  runner_up: —
-  why: 'U-CO-094: each term made sensible with numbers; pointers T04, #3 (<= 30 s)'
-  related: []
-  feedback:
-  - U-CO-094
-  - U-CO-099
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18). No text on the curve or bars (U-CO-098 rule applied everywhere).'
-  measured:
-    seconds: 135.275
-    words: 323
-    sentences: 17
-    beats: 5
-- id: s33_ciaran
-  t:
-  - 2740.65
-  - 2804.9
-  sentence_times:
-  - - 2740.65
-    - 2742.85
-  - - 2743.2
-    - 2750.25
-  - - 2750.6
-    - 2759.175
-  - - 2759.525
-    - 2768.675
-  - - 2770.175
-    - 2782.075
-  - - 2783.575
-    - 2792.075
-  - - 2792.425
-    - 2799.125
-  - - 2800.625
-    - 2804.1
-  beat: 'application: Storm Ciaran, tracked by continuity; U = 14.6 m/s towards 71°'
-  visual: 'Real map (LCC, 44-58 N, 15 W-5 E) of ERA5 10-m wind speed (perceptual LUT 0-30 m/s, colour bar beside the map in the column) and isobars every 4 hPa, 1-2
-    Nov 2023, animated hourly 21 -> 06 UTC while S2-S3 speak, with the tracked centre (gold dots, one per hour) and the house clock glyph; ''Cornwall'' label on S3;
-    the motion arrow (orange, ''71°'' with a small compass rose) on S4. Column CalcStack: ''14.6 × sin 71° ≈ 13.8'', ''14.6 × cos 71° ≈ 4.8''; keyword ''bold U''
-    on S7. Sound: rising wind, −28 LUFS, under S2 only.'
-  voiceover: Now a real moving storm. Storm Ciarán crossed the English Channel in the night from the first to the second of November, twenty twenty three. To follow
-    it, we find its lowest pressure, then look for the lowest pressure close by an hour later, and so on, hour by hour. At midnight, universal time, its centre was
-    just off the tip of Cornwall, at nine hundred and fifty four and a half hectopascals. [beat] Between midnight and six in the morning, the centre moved towards
-    a bearing of seventy one degrees, east-north-east, at about fourteen point six metres per second, roughly fifteen. [beat] With Part 1's bearing rule, its east
-    part is fourteen point six times sine seventy one degrees, about thirteen point eight. Its north part is fourteen point six times cosine seventy one degrees,
-    about four point eight. [beat] We'll call this storm velocity bold capital U.
-  on_screen_eq:
-    latex: \mathbf U=(14.6\sin71^\circ,\ 14.6\cos71^\circ)\approx(13.8,\ 4.8)\ \text{m/s}
-    vallis_eq: 'none: arithmetic (bearing rule, Part 1)'
-    page_png: null
-  calc_rows:
-  - '|\mathbf U|\approx14.6\ \text{m/s}\approx52.5\ \text{km/h},\ \ \text{towards }71^\circ'
-  physics_source:
-    fn: fluidpy.diag.cyclone.track_by_continuity (seed 52.5 N 1.75 E at 12 UTC 2 Nov, box ±1.2° lat ±2° lon, step <= 120 km); fluidpy.diag.cyclone.translation_velocity
-    params:
-      times: 2023-11-01T21..2023-11-02T06
-      motion: 00-06 UTC 2 Nov
-    test: '../Fluid Dynamics/tests/diag/test_cyclone_track.py::test_track_by_continuity_V1_ciaran_DC52_steps_and_pressures; ::test_translation_velocity_V1_ciaran_DC52_motion;
-      ::test_track_by_continuity_V7_deeper_distant_low_never_picked (DC52: steps 47-77 km; 954.5 hPa at 00 UTC; 14.58 m/s towards 71.0°)'
-  exaggeration:
-  - hourly fields played at about 1 h per 1.5 s
-  kind: real data animation
-  data: ERA5-ARCO-ciaran2023 (hourly u10, v10, msl)
-  tool: Remotion canvas/SVG map (d3-geo LCC) + house clock
-  runner_up: three.js globe drape (a small region reads better flat)
-  why: a real storm moving at 15 m/s
-  related: []
-  feedback:
-  - U-CO-095
-  pending_data: false
-  layout: 'Map x 80-1000; colour bar (m/s, 52-px ticks) beside the map in the column, never on the map (Must 15); ''Data: ERA5 (Copernicus C3S) · 1-2 Nov 2023, hourly''
-    fully below the map (SourceBelow, y <= 860); streaks animated, keeping the data''s direction and length.'
-  measured:
-    seconds: 64.25
-    words: 146
-    sentences: 8
-    beats: 3
-- id: s34_lopsided
-  t:
-  - 2804.9
-  - 2852.45
-  sentence_times:
-  - - 2804.9
-    - 2810.925
-  - - 2811.275
-    - 2817.375
-  - - 2817.725
-    - 2827.55
-  - - 2829.05
-    - 2831.1
-  - - 2831.45
-    - 2836.975
-  - - 2837.325
-    - 2844.35
-  - - 2844.7
-    - 2851.65
-  beat: 'application: ground-relative round winds, south ≈ 18, north ≈ 7 (why lopsided)'
-  visual: 'Map frozen at 03 UTC; the 200-km ring (teal), the south and north sectors (±45° about the right/left of the track) highlighted as bands; readouts ''≈ 18
-    m/s'' (south) and ''≈ 7 m/s'' (north) in the column, north row above south row (Must 13), each with a gold link to its band leaving from the readout''s left edge
-    (SideCallout). S5-S7: at the south side, the spin arrow (teal) and the motion arrow (orange) add head to tail; at the north side, they oppose (rose ''partly cancel'').'
-  voiceover: Let's look at the winds on a ring two hundred kilometres from the centre, at three in the morning. As in Part 1, we split each wind into its part round
-    the ring and its part in or out. Seen from the ground, the round part averaged about eighteen metres per second on the storm's southern side, but only about seven
-    on its northern side. [beat] Why so lopsided? The storm spins anticlockwise as seen from above, as northern storms do. On its southern side, the spin blows towards
-    the east, the same way the storm moves, so the two add up. On its northern side, the spin blows towards the west, against the motion, so they partly cancel.
-  on_screen_eq: null
-  calc_rows:
-  - '\text{round part, ground: south}\approx18.2,\ \ \text{north}\approx6.9\ \text{m/s}'
-  physics_source:
-    fn: fluidpy.diag.cyclone.storm_relative_wind (ground-relative u, v about the tracked centre)
-    params:
-      time: 2023-11-02T03
-      ring_km: 200
-      n_az: 72
-      sectors_deg: 45
-    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_uniform_wind_V1_spin_and_radial_signs_exact; ::test_ring_geometry_V1_distance_bearing_and_rhat_match_navigation_formulas;
-      new CHECK DP34 sector-mean tangential (ground) S 18.20, N 6.91 m/s (±0.3)
-  exaggeration: []
-  kind: real data map
-  data: ERA5-ARCO-ciaran2023
-  tool: Remotion SVG map
-  runner_up: —
-  why: the ground observer's lopsided storm
-  related: []
-  feedback:
-  - U-CO-095
-  pending_data: false
-  layout: 'As s33 (colour bar beside, source below). Must 13: north readout above south, SideCallouts, links never cross.'
-  measured:
-    seconds: 47.55
-    words: 118
-    sentences: 7
-    beats: 1
-- id: s35_storm_relative
-  t:
-  - 2852.45
-  - 2932.475
-  sentence_times:
-  - - 2852.45
-    - 2859.175
-  - - 2859.525
-    - 2862.2
-  - - 2862.55
-    - 2869.875
-  - - 2870.225
-    - 2874.925
-  - - 2876.425
-    - 2882.3
-  - - 2882.65
-    - 2885.925
-  - - 2886.275
-    - 2891.475
-  - - 2891.825
-    - 2904.075
-  - - 2905.575
-    - 2908.95
-  - - 2909.3
-    - 2914.85
-  - - 2915.2
-    - 2926.2
-  - - 2927.7
-    - 2931.675
-  beat: 'derivation D43: v'' = v − U; arrow subtraction at two points with numbers'
-  visual: 'Two insets beside the frozen map (picture zone split top/bottom: north point above, south point below, Must 13), each with: the ground wind (teal), the
-    storm velocity U (orange), −U drawn tip-to-tail from the ground arrow''s tip (orange dashed), and the result v′ (warm white) closing the triangle; a component
-    readout under each inset. Column: v = U + v′ -> v′ = v − U (84 px), then the two CalcStacks with the inputs written. Keyword ''storm-relative'' on S2.'
-  voiceover: 'Now let''s ask what the wind looks like to someone riding along with the storm''s centre, at bold capital U. That''s called the storm-relative wind.
-    From the Galilean rule, the ground wind is bold capital U plus the rider''s wind, bold v prime. So the rider''s wind is the ground wind minus bold capital U.
-    [beat] Taking an arrow away is the same as adding that arrow turned to point the opposite way. Take a point in the middle of the southern side. There, the ground
-    wind is thirteen point five east and eight point four north. Take away thirteen point eight east and four point eight north, and the rider feels minus zero point
-    three east and three point seven north: a gentle three point seven metres per second. [beat] Now a point in the middle of the northern side. The ground wind is
-    minus four point two east and minus five point three north. Take away the same storm velocity, and the rider feels minus eighteen point zero east and minus ten
-    point one north: about twenty point six metres per second. [beat] So for the rider, the northern side is the windy one.'
-  on_screen_eq:
-    latex: \mathbf v=\mathbf U+\mathbf v'\ \Rightarrow\ \mathbf v'=\mathbf v-\mathbf U
-    vallis_eq: none in Vallis; Kundu §3.3 u = U + u' rearranged
-    page_png: ../Fluid Dynamics/chapters/pages/ch03/p101.png
-  calc_rows:
-  - '\text{south: }(13.5,\ 8.4)-(13.8,\ 4.8)=(-0.3,\ 3.7),\ \ |\mathbf v''|\approx3.7\ \text{m/s}'
-  - '\text{north: }(-4.2,\ -5.3)-(13.8,\ 4.8)=(-18.0,\ -10.1),\ \ |\mathbf v''|\approx20.6\ \text{m/s}'
-  physics_source:
-    fn: fluidpy.diag.cyclone.storm_relative_wind; fluidpy.diag.cyclone.translation_velocity
-    params:
-      time: 2023-11-02T03
-      ring_km: 200
-      n_az: 72
-      south_point:
-      - 48.43
-      - -2.8
-      north_point:
-      - 51.81
-      - -4.73
-    test: '../Fluid Dynamics/tests/diag/test_cyclone.py::test_uniform_wind_V1_spin_and_radial_signs_exact; ::test_ring_geometry_V1_distance_bearing_and_rhat_match_navigation_formulas;
-      new CHECK DP35 points: ground (13.47, 8.44) / (−4.22, −5.33); storm-relative (−0.32, 3.68) / (−18.00, −10.08)'
-  exaggeration:
-  - inset arrows enlarged (scale in the manifest)
-  derivation:
-    id: D43
-    goal: what the wind looks like to a rider moving with the storm
-    steps:
-    - - Galilean rule
-      - \mathbf v=\mathbf U+\mathbf v'
-      - s29 with the storm as the moving frame
-      - ground wind = storm motion + rider's wind
-    - - subtract U
-      - \mathbf v'=\mathbf v-\mathbf U
-      - take U from both sides
-      - the storm-relative wind
-    - - arrow subtraction
-      - \mathbf v+(-\mathbf U)
-      - subtracting an arrow = adding its reverse (vectors movie)
-      - tip-to-tail picture
-    - - south point
-      - (13.5,8.4)-(13.8,4.8)=(-0.3,3.7)
-      - components subtract one by one
-      - nearly calm for the rider
-    - - north point
-      - (-4.2,-5.3)-(13.8,4.8)=(-18.0,-10.1)
-      - the same
-      - 20.6 m/s for the rider
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: real data + vector diagrams
-  data: ERA5-ARCO-ciaran2023
-  tool: Remotion SVG
-  runner_up: —
-  why: 'U-CO-095: storm-relative winds explained with arrows and numbers'
-  related: []
-  feedback:
-  - U-CO-095
-  pending_data: false
-  layout: Map x 80-1000 with source below; insets in the picture zone never overlapping the map; colour bar beside (column top). No text on arrows except tip labels.
-  measured:
-    seconds: 80.025
-    words: 193
-    sentences: 12
-    beats: 3
-- id: s36_round_parts
-  t:
-  - 2932.475
-  - 2991.625
-  sentence_times:
-  - - 2932.475
-    - 2936.85
-  - - 2937.2
-    - 2946.15
-  - - 2946.5
-    - 2951.6
-  - - 2953.1
-    - 2959.175
-  - - 2959.525
-    - 2964.775
-  - - 2966.275
-    - 2972.625
-  - - 2972.975
-    - 2980.875
-  - - 2981.225
-    - 2990.825
-  beat: 'D43 (4): the round parts per side, ground vs rider (18 -> 5, 7 -> 20); pointer U13'
-  visual: 'A three-row grid (house s19d pattern) in the column: rows ''ground'', ''storm''s motion'', ''rider'' × columns ''north side'' (top) and ''south side'':
-    6.9 | 18.2; −13.0 | +13.2; 19.9 | 5.0 (m/s, the motion row orange, signs with ''−'' glyphs and rose for negative). Picture zone: the ring with sector bands; the
-    round arrows shrink on the south and grow on the north as the rider''s view fades in (animated subtraction, 2 s).'
-  voiceover: 'Let''s do the same with the round parts, averaged over each side. On the southern side, the storm''s motion runs the same way as the spin, so it adds
-    about thirteen metres per second to the round part. Riding with the storm, the round part there drops from eighteen to about five. [beat] On the northern side,
-    the motion runs against the spin, so it takes away about thirteen. Riding with the storm, the round part there grows from seven to about twenty. [beat] So the
-    motion explains why people on the ground felt the southern side as the stronger one. The rider sees the storm''s own shape, and at that hour, on this ring, its
-    own winds were stronger on its northern side. Forecasters use storm-relative winds to see a storm''s own structure, and they matter for thunderstorms too, in
-    a later movie: Severe storms.'
-  on_screen_eq: null
-  calc_rows:
-  - '\text{south: }18.2-13.2\approx5.0,\qquad \text{north: }6.9-(-13.0)\approx19.9\ \ \text{m/s}'
-  physics_source:
-    fn: fluidpy.diag.cyclone.storm_relative_wind (ground and v − U)
-    params:
-      time: 2023-11-02T03
-      ring_km: 200
-      n_az: 72
-      sectors_deg: 45
-    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_uniform_wind_V1_spin_and_radial_signs_exact; ::test_ring_geometry_V1_distance_bearing_and_rhat_match_navigation_formulas;
-      new CHECK DP36 sector-mean tangential storm-relative S 4.99, N 19.94 m/s; motion's round part S +13.21, N −13.03 (±0.3)
-  exaggeration: []
-  kind: real data ring + grid
-  data: ERA5-ARCO-ciaran2023
-  tool: Remotion SVG
-  runner_up: —
-  why: what the motion did to each side
-  related: []
-  feedback:
-  - U-CO-095
-  - U-CO-099
-  pending_data: false
-  layout: As s34; source below the ring picture.
-  measured:
-    seconds: 59.15
-    words: 144
-    sentences: 8
-    beats: 2
-- id: s37_invariant
-  t:
-  - 2991.625
-  - 3064.125
-  sentence_times:
-  - - 2991.625
-    - 2994.35
-  - - 2994.7
-    - 2998.775
-  - - 2999.125
-    - 3010.05
-  - - 3011.55
-    - 3016.65
-  - - 3018.15
-    - 3020.15
-  - - 3020.5
-    - 3031.8
-  - - 3032.15
-    - 3035.475
-  - - 3035.825
-    - 3043.475
-  - - 3044.975
-    - 3050.15
-  - - 3050.5
-    - 3054.65
-  - - 3055.0
-    - 3063.325
-  beat: 'intuition: ring averages unchanged (14.1 vs 13.8; −6.0 vs −5.9); the uniform-wind picture; Brest gust 84 kt (build-1 s44, kept)'
-  visual: 'Two rings side by side (ground left, rider right) at 03 UTC with their arrows; under each ring the ring-mean round ''≈ 14 m/s'' and ring-mean inflow ''≈
-    −6 m/s'' (rose, ''−'' glyph) on S2-S3, gold ''same'' links between the pairs. S5: a uniform arrow field (orange) on a circle, its round parts plus on one side
-    and minus on the other (teal / rose bands) summing to zero; a small ''0.3 on a sphere'' tag. S8-S9: back to the ground map with a house icon on the Brittany coast;
-    ''gust 84 kt ≈ 156 km/h'' at Brest (slate) beside the map with a gold link.'
-  voiceover: 'So what changes, and what doesn''t? The wind at each point changes by the storm''s velocity. But the average round part over the whole ring is about
-    fourteen metres per second in both frames: fourteen point one from the ground, and thirteen point eight riding along. [beat] And the average inflow is about six
-    metres per second in both frames. [beat] That''s no accident. A steady, uniform wind blows as much round one side of a circle as it blows back round the other,
-    so it adds nothing to the average spin, or to the average inflow. On a flat map, it adds exactly zero. On the round Earth, the meridians close in towards the
-    pole, and that leaves the small difference of zero point three. [beat] The spin belongs to the storm, and the motion belongs to the whole pattern. For a house
-    on the coast, though, the ground wind is what counts. That night, the weather station at Brest measured a gust of eighty four knots, about a hundred and fifty
-    six kilometres per hour.'
-  on_screen_eq: null
-  calc_rows:
-  - 84\ \text{kt}\times1.852\approx156\ \text{km/h}
-  physics_source:
-    fn: fluidpy.diag.cyclone.storm_relative_wind (ground vs v − U); fluidpy.core.coords.velocity_components (uniform wind on a flat circle)
-    params:
-      time: 2023-11-02T03
-      ring_km: 200
-    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_uniform_wind_V1_spin_and_radial_signs_exact; ::test_ring_geometry_V1_distance_bearing_and_rhat_match_navigation_formulas;
-      CHECK DC54 v_t 14.1 vs 13.8, v_r −6.0 vs −5.9; flat circle 0 to 1e-12; sphere 0.26; DC55 Brest ISD 911 group 84 kt
-  exaggeration: []
-  kind: real data rings + diagram
-  data: ERA5-ARCO-ciaran2023; ISD Brest (data/derived/ch00/rwm_isd_brest_2023-11-01T12_2023-11-02T09.json)
-  tool: Remotion SVG
-  runner_up: —
-  why: Galilean invariance seen in the storm's own numbers
-  related: []
-  feedback:
-  - U-CO-095
-  pending_data: false
-  layout: 'Readouts under each ring (not on the rings); ''Data: ERA5 (Copernicus C3S) · ISD (NOAA NCEI), Brest · 2 Nov 2023, 03 UTC'' below. Arrows animated.'
-  measured:
-    seconds: 72.5
-    words: 174
-    sentences: 11
-    beats: 3
-- id: s38_tau
-  t:
-  - 3064.125
-  - 3161.25
-  sentence_times:
-  - - 3064.125
-    - 3068.625
-  - - 3068.975
-    - 3072.2
-  - - 3072.55
-    - 3078.1
-  - - 3078.45
-    - 3086.725
-  - - 3087.075
-    - 3093.0
-  - - 3093.35
-    - 3096.65
-  - - 3097.0
-    - 3099.85
-  - - 3100.2
-    - 3107.025
-  - - 3107.375
-    - 3110.725
-  - - 3112.225
-    - 3117.45
-  - - 3117.8
-    - 3126.225
-  - - 3126.575
-    - 3130.5
-  - - 3130.85
-    - 3137.65
-  - - 3138.0
-    - 3145.8
-  - - 3147.3
-    - 3152.025
-  - - 3152.375
-    - 3160.45
-  beat: 'building block D44 (1): two observers; tau defined; what ∂p/∂τ means'
-  visual: 'Map (as s33, isobars only + msl shading with colour bar 950-1010 hPa beside it) at 23 UTC -> 01 UTC: a frozen-pattern ghost (slate, the 23 UTC isobars
-    slid along U by 1 h and 2 h) beside the real field (warm white); a fixed barometer icon (PoleThermometer style, slate) at ''Plymouth'', labelled within 1 s of
-    its word; a rider icon (orange) gliding with the pattern. Column: two rows built on their sentences: ''∂p/∂t: fixed place x'' (slate) and ''∂p/∂τ: fixed x′ =
-    x − U t'' (orange), with ''τ = t (the rider''s clock)'' between them; keywords ''storm arriving'' / ''storm changing''.'
-  voiceover: 'The moving frame also explains what a fixed barometer sees. Let''s take Plymouth, on England''s south coast. Picture the pressure pattern as a frozen
-    map, sliding east-north-east with the storm. A barometer that never moves sees the pressure fall as the low comes closer, even if the storm itself isn''t deepening
-    at all. So the barometer''s reading mixes two things: the storm arriving, and the storm changing. To pull them apart, we need two observers. The first is the
-    fixed barometer. Its rate is partial p by partial t: the change of pressure in time, at one fixed place. Here p is the pressure, and t is the time. [beat] The
-    second is a rider, moving with the pressure pattern at bold capital U. The rider''s position, measured in the moving pattern, is x prime, which is x minus capital
-    U t, as on the train. And the rider''s clock reads tau, the Greek letter t. Tau is the same time as t, but we give it a new name, because it marks a different
-    thing held fixed. Partial p by partial tau is the change of pressure in time while x prime is held fixed: riding with the pattern. [beat] If the pattern really
-    were frozen, the rider would see no change at all. So partial p by partial tau is the storm itself changing: negative when it deepens, and positive when it fills.'
-  on_screen_eq:
-    latex: x'=x-U\,t,\qquad \tau=t
-    vallis_eq: none in Vallis; Kundu (B.2.1) change of variables ξ = x − Ut, τ = t (ξ written x′ here, as on the train)
-    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 5 (printed 861)
-  calc_rows:
-  - \frac{\partial p}{\partial t}\Big|_{x\ \text{fixed}}\qquad\text{vs}\qquad \frac{\partial p}{\partial\tau}\Big|_{x'\ \text{fixed}}
-  physics_source:
-    fn: fluidpy.geo.sphere.destination_point (frozen ghost slid along U); fluidpy.diag.cyclone.translation_velocity
-    params:
-      t0: 2023-11-01T23
-      hours:
-      - 1
-      - 2
-      point:
-      - 50.25
-      - -4.25
-    test: ../Fluid Dynamics/tests/diag/test_cyclone_track.py::test_track_by_continuity_V1_ciaran_DC52_steps_and_pressures; ::test_translation_velocity_V1_ciaran_DC52_motion;
-      ::test_track_by_continuity_V7_deeper_distant_low_never_picked; ../Fluid Dynamics/tests/geo/test_calculus.py::test_chain_rule_V1_limits_and_frozen_pattern; ::test_chain_rule_V2_sympy_total_derivative_along_a_path_B1_1
-      (frozen pattern -> rider's rate 0)
-  exaggeration:
-  - the frozen map is a thought experiment said as such
-  kind: real data map + definitions
-  data: ERA5-ARCO-ciaran2023 hourly msl
-  tool: Remotion SVG map + Layered TeX
-  runner_up: —
-  why: 'U-CO-097: τ defined before it is used'
-  related: []
-  feedback:
-  - U-CO-097
-  - U-CO-096
-  pending_data: false
-  layout: 'Map x 80-1000; colour bar beside it; ''Data: ERA5 (Copernicus C3S) · 1-2 Nov 2023, hourly'' below; ''Plymouth'' the only label on the map besides the coast
-    names.'
-  measured:
-    seconds: 97.125
-    words: 233
-    sentences: 16
-    beats: 2
-- id: s39_tau_derive
-  t:
-  - 3161.25
-  - 3268.025
-  sentence_times:
-  - - 3161.25
-    - 3163.4
-  - - 3163.75
-    - 3165.95
-  - - 3166.3
-    - 3173.575
-  - - 3173.925
-    - 3178.7
-  - - 3179.05
-    - 3189.15
-  - - 3189.5
-    - 3196.375
-  - - 3197.875
-    - 3203.025
-  - - 3203.375
-    - 3211.275
-  - - 3212.775
-    - 3217.65
-  - - 3218.0
-    - 3225.725
-  - - 3227.225
-    - 3229.4
-  - - 3229.75
-    - 3232.75
-  - - 3233.1
-    - 3236.575
-  - - 3236.925
-    - 3245.45
-  - - 3245.8
-    - 3252.275
-  - - 3252.625
-    - 3257.75
-  - - 3259.25
-    - 3267.225
-  beat: 'derivation D44 (2)-(4): the traveller''s chain rule -> ∂p/∂t = ∂p/∂τ − U·∇p; every term read'
-  visual: 'Column builds D44 one row per step: the derivatives movie''s traveller line (68 px, faint), the rider''s version, the move across the ''='' (a gold arrow
-    carrying U·∇p to the other side, its sign flipping on arrival), the result (96 px) with underbraces ''barometer'' (slate), ''storm changing'' (orange), ''pattern
-    sliding past'' (teal); then a units row ''km/h × hPa/km = hPa/h'' with ''km'' struck. Picture zone: a 1-D pressure profile (slate curve, hPa vs distance along
-    U) sliding right; the barometer''s spot marked; a gold tangent ''slope''.'
-  voiceover: 'How are the two rates linked? The next three steps show it. They''re for anyone who wants every step, so skip ahead to the time on screen if you''d
-    rather go straight to the numbers. Step one: the rider is a traveller, moving at bold capital U. In the derivatives movie, we found the rate a traveller feels:
-    the change at a fixed place, plus the traveller''s speed times the slope, in each direction. With the dot product, that''s partial p by partial t, plus bold capital
-    U dot grad p. [beat] Step two: for this traveller, that rate is partial p by partial tau. So partial p by partial tau equals partial p by partial t, plus bold
-    capital U dot grad p. [beat] Step three: move bold capital U dot grad p to the other side. Partial p by partial t equals partial p by partial tau, minus bold
-    capital U dot grad p. [beat] Now let''s read each term. On the left is the barometer''s rate. The first term on the right is the storm changing. And bold capital
-    U dot grad p is the storm''s speed, times how fast the pressure rises along its direction of motion. Kilometres per hour, times hectopascals per kilometre, gives
-    hectopascals per hour. With its minus sign, it''s the change caused by the pattern sliding past. [beat] If you skipped, here''s what to keep: what the barometer
-    sees is the storm changing, minus the pattern sliding past.'
-  on_screen_eq:
-    latex: \frac{\partial p}{\partial t}=\frac{\partial p}{\partial\tau}-\mathbf U\cdot\nabla p
-    vallis_eq: none in Vallis; Kundu (B.2.2) ∂/∂t = −U ∂/∂ξ − V ∂/∂ψ − W ∂/∂ζ + ∂/∂τ (W = 0, vector form), Example B.2
-    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 5 (printed 861)
-  calc_rows:
-  - \frac{\partial p}{\partial\tau}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
-  - \frac{\text{km}}{\text{h}}\times\frac{\text{hPa}}{\text{km}}=\frac{\text{hPa}}{\text{h}}
-  physics_source:
-    fn: fluidpy.geo.calculus.chain_rule_rate
-    params: {}
-    test: ../Fluid Dynamics/tests/geo/test_calculus.py::test_chain_rule_V1_limits_and_frozen_pattern; ::test_chain_rule_V2_sympy_total_derivative_along_a_path_B1_1
-  exaggeration:
-  - illustrative 1-D profile
-  derivation:
-    id: D44a
-    goal: link the barometer's rate to the storm's own change
-    steps:
-    - - traveller's rate
-      - \frac{dp}{dt}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
-      - 'derivatives movie: chain rule for a traveller moving at U'
-      - change at a place + speed × slope
-    - - the rider is that traveller
-      - \frac{\partial p}{\partial\tau}=\frac{\partial p}{\partial t}+\mathbf U\cdot\nabla p
-      - holding x′ fixed = moving at U
-      - the rider's rate
-    - - move a term
-      - \frac{\partial p}{\partial t}=\frac{\partial p}{\partial\tau}-\mathbf U\cdot\nabla p
-      - subtract U·∇p from both sides
-      - the barometer's rate
-    - - read the terms
-      - \text{hPa/h}
-      - U·∇p = speed × slope along U; units km/h × hPa/km
-      - storm changing, minus pattern sliding past
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: equations + graph
-  data: —
-  tool: Layered TeX + Remotion SVG
-  runner_up: —
-  why: 'U-CO-096, U-CO-097: every term made sensible'
-  related: []
-  feedback:
-  - U-CO-096
-  - U-CO-097
-  pending_data: false
-  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other. No headings. Opening keyword from
-    frame 0 (Should 18).'
-  skip_chip:
-    'on': S3 (AT(k, 'skip ahead'))
-    text: every step, for those who want it · not needed for weather, climate or GIS · skip to 54:19
-    look: small warm-white keyword chip at the top of the column (54 px, the one allowed chip style, gold outline), fades after 6 s; timestamp re-filled after the
-      final TTS
-  skip_takeaway:
-    'on': S17
-    keyword: what to keep
-    spoken: 'If you skipped, here''s what to keep: what the barometer sees is the storm changing, minus the pattern sliding past.'
-  measured:
-    seconds: 106.775
-    words: 242
-    sentences: 17
-    beats: 4
-- id: s40_plymouth
-  t:
-  - 3268.025
-  - 3349.975
-  sentence_times:
-  - - 3268.025
-    - 3271.175
-  - - 3271.525
-    - 3281.85
-  - - 3282.2
-    - 3295.675
-  - - 3297.175
-    - 3302.925
-  - - 3303.275
-    - 3311.1
-  - - 3312.6
-    - 3319.65
-  - - 3320.0
-    - 3330.25
-  - - 3331.75
-    - 3340.825
-  - - 3341.175
-    - 3348.475
-  beat: 'application D44 (5): Plymouth numbers: −3.8, slope 0.061 hPa/km, U·∇p = 3.2, ∂p/∂τ = −0.6'
-  visual: 'Map at 00 UTC (as s38) with Plymouth''s barometer, the tracked centre (''954.5 hPa'', gold), the distance bracket ''≈ 123 km'' and the pressure-gradient
-    arrow at Plymouth (slate) next to the motion arrow U (orange), the small angle between them drawn. A TimeGraph inset under the map: Plymouth''s pressure 23-01
-    UTC (rose line, hour dots: 964.1, 960.8, 956.5 hPa). Column CalcStack with inputs: the centred difference, ''14.6 m/s × 3.6 = 52.5 km/h'', ''52.5 × 0.061 ≈ 3.2'',
-    ''−3.8 + 3.2 ≈ −0.6''. Colour bar beside the map.'
-  voiceover: 'Now the numbers at Plymouth, around midnight. At eleven in the evening, the pressure was nine hundred and sixty four point one hectopascals, and at
-    one in the morning, nine hundred and fifty six point five. So, at midnight, the barometer''s rate was nine hundred and fifty six point five minus nine hundred
-    and sixty four point one, over two hours: about minus three point eight hectopascals per hour. [beat] Plymouth was ahead of the low, about a hundred and twenty
-    three kilometres to its north-east. There, the pressure rose along the storm''s direction by about zero point zero six one hectopascals per kilometre. [beat]
-    The storm moved at fourteen point six metres per second, which is fifty two and a half kilometres per hour. So bold capital U dot grad p is fifty two and a half
-    times zero point zero six one: about three point two hectopascals per hour. [beat] Then the storm''s own change, partial p by partial tau, is partial p by partial
-    t plus bold capital U dot grad p. That''s minus three point eight plus three point two: about minus zero point six hectopascals per hour. [beat]'
-  on_screen_eq: null
-  calc_rows:
-  - \frac{\partial p}{\partial t}\approx\frac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}
-  - \mathbf U\cdot\nabla p\approx52.5\ \tfrac{\text{km}}{\text{h}}\times0.061\ \tfrac{\text{hPa}}{\text{km}}\approx3.2\ \text{hPa/h}
-  - \frac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}
-  physics_source:
-    fn: fluidpy.geo.sphere.gradient (msl at 00 UTC 2 Nov); centred time difference; fluidpy.diag.cyclone.translation_velocity
-    params:
-      point:
-      - 50.25
-      - -4.25
-      time: 2023-11-02T00
-      U:
-      - 13.78
-      - 4.75
-    test: ../Fluid Dynamics/tests/geo/test_calculus.py::test_data_era5_brest_gradient_cross_check_sphere_gradient; ../Fluid Dynamics/tests/geo/test_atmos_pgf.py::test_pgf_V2_derivation_231_spherical_gradient_from_position_vector;
-      CHECK DC56 dp/dt −3.82, −U·∇p −3.21, residual −0.61 hPa/h; new CHECK DP40 p(23, 00, 01) = 964.13, 960.77, 956.49 hPa; |∇p| 0.0618 hPa/km towards 63°; along
-      U 0.0613; Plymouth–centre 123 km
-  exaggeration: []
-  derivation:
-    id: D44b
-    goal: the Plymouth numbers
-    steps:
-    - - barometer
-      - (956.5-964.1)/2\approx-3.8
-      - centred difference over 23-01 UTC (derivatives movie)
-      - falling fast
-    - - slope along U
-      - 0.061\ \text{hPa/km}
-      - fluidpy.geo.sphere.gradient of msl at 00 UTC, dotted with U's direction
-      - pressure rises ahead of the low
-    - - speed
-      - 14.6\times3.6=52.5\ \text{km/h}
-      - 1 m/s = 3.6 km/h
-      - units to match
-    - - sliding term
-      - 52.5\times0.061\approx3.2
-      - U·∇p = speed × slope along U
-      - the pattern sliding past
-    - - storm's own change
-      - -3.8+3.2=-0.6
-      - ∂p/∂τ = ∂p/∂t + U·∇p (s39)
-      - the storm deepening slowly
-    step_format: '[what we did, the new line, why we can do this, in words]'
-  kind: real data map + CalcStack + TimeGraph
-  data: ERA5-ARCO-ciaran2023 hourly msl
-  tool: Remotion SVG map + house TimeGraph
-  runner_up: —
-  why: the derivation used on a real barometer
-  related: []
-  feedback:
-  - U-CO-096
-  - U-CO-098
-  pending_data: false
-  layout: 'Map x 80-1000, TimeGraph under the map (y <= 840) with its own ticks at 52 px; colour bar beside the map; ''Data: ERA5 (Copernicus C3S) · 1-2 Nov 2023
-    · Plymouth'' below the TimeGraph (SourceBelow). No text over the map or the graph except ''Plymouth'' and the centre label.'
-  measured:
-    seconds: 81.95
-    words: 189
-    sentences: 9
-    beats: 4
-- id: s41_meaning
-  t:
-  - 3349.975
-  - 3401.575
-  sentence_times:
-  - - 3349.975
-    - 3359.875
-  - - 3361.375
-    - 3365.325
-  - - 3365.675
-    - 3368.675
-  - - 3369.025
-    - 3370.675
-  - - 3371.025
-    - 3386.65
-  - - 3388.15
-    - 3392.9
-  - - 3393.25
-    - 3400.775
-  beat: 'meaning: −3.8 = −0.6 − 3.2 (Balance bars, Must 14 redesign); the centre check; pointers'
-  visual: 'Picture zone (full height, x 80-1000): house Balance bars on a zero line, wide spacing: ''−3.8'' total (slate), ''−0.6 storm changing'' (orange), ''−3.2
-    pattern sliding past'' (teal), each value label placed BESIDE its bar (to the right, x >= bar end + 24 px), never on or over a bar; the unit ''hPa per hour''
-    written once on the axis title at the left, rotated, clear of every bar (U-CO-098). Column: the equation with the numbers in place; S4-S5 the centre check ''954.9
-    -> 954.0 hPa in 2 h ≈ −0.5 hPa/h'' gold-linked to the −0.6 bar. S6: dot-product and material-derivative thumbnails (keywords).'
-  voiceover: 'So, at Plymouth, minus three point eight equals minus zero point six, from the storm changing, minus three point two, from the pattern sliding past.
-    [beat] Most of what the barometer saw was the storm arriving. Is the minus zero point six believable? Here''s a check. Between eleven and one, the lowest pressure
-    at the storm''s tracked centre fell from nine hundred and fifty four point nine to nine hundred and fifty four point zero hectopascals: about minus half a hectopascal
-    per hour, the same size. [beat] This is the same idea as advection in the dot product movie. Forecasters draw maps of these pressure changes, and we''ll read
-    them in a later movie: Reading maps over time.'
-  on_screen_eq:
-    latex: -3.8=-0.6-3.2\ \ \text{hPa/h}
-    vallis_eq: 'none: the Plymouth numbers in ∂p/∂t = ∂p/∂τ − U·∇p'
-    page_png: null
-  calc_rows:
-  - \frac{954.0-954.9}{2\ \text{h}}\approx-0.5\ \text{hPa/h}
-  physics_source:
-    fn: fluidpy.diag.cyclone.track_by_continuity (msl_min at 23, 00, 01 UTC); fluidpy.geo.sphere.gradient
-    params:
-      times:
-      - 2023-11-01T23
-      - 2023-11-02T01
-    test: ../Fluid Dynamics/tests/diag/test_cyclone_track.py::test_track_by_continuity_V1_ciaran_DC52_steps_and_pressures; ::test_translation_velocity_V1_ciaran_DC52_motion;
-      ::test_track_by_continuity_V7_deeper_distant_low_never_picked; new CHECK DP41 centre msl_min 954.9 -> 954.0 hPa, −0.47 hPa/h; DC56 kept
-  exaggeration: []
-  kind: bars + equation
-  data: ERA5-ARCO-ciaran2023
-  tool: Remotion SVG (house Balance)
-  runner_up: —
-  why: Must 14 (more space, two scenes) and U-CO-098 (no text on the bars)
-  related: []
-  feedback:
-  - U-CO-098
-  - U-CO-099
-  pending_data: false
-  layout: 'Must 14 fixed by design: bars get the whole picture zone; labels beside bars; ''Data: ERA5 (Copernicus C3S) · 2 Nov 2023'' below the bars (the numbers
-    are data).'
-  measured:
-    seconds: 51.6
-    words: 116
-    sentences: 7
-    beats: 2
-- id: s42_recap
-  t:
-  - 3401.575
-  - 3497.1
-  sentence_times:
-  - - 3401.575
-    - 3413.6
-  - - 3413.95
-    - 3422.9
-  - - 3423.25
-    - 3429.575
-  - - 3429.925
-    - 3441.85
-  - - 3442.2
-    - 3447.2
-  - - 3447.55
-    - 3460.7
-  - - 3461.05
-    - 3468.625
-  - - 3468.975
-    - 3477.275
-  - - 3477.625
-    - 3489.75
-  - - 3490.1
-    - 3496.3
-  beat: recap ('To sum up'); last sentence the teaser to Part 5, Routes (six-part series)
+  - - 2260.775
+    - 2272.8
+  - - 2273.15
+    - 2282.1
+  - - 2282.45
+    - 2288.775
+  - - 2289.125
+    - 2301.05
+  - - 2301.4
+    - 2307.15
+  - - 2307.5
+    - 2320.65
+  - - 2321.0
+    - 2329.425
+  - - 2329.775
+    - 2337.275
+  beat: recap ('To sum up'); last sentence the teaser to Part 5, Moving frames (seven-part series)
   visual: 'One beat per sentence, mini pictures reused (no headings): Brest''s tripod with ''v = u i + v j + w k''; the top view and the meridian slice side by side;
     Brest and Khulna ups with ''76°''; the coast with ''329°'', ''9 along'', ''−32 onto the land''; the turning tripod with ''speed / radius''; the i-row of (2.45)
-    with ''metric terms'' brace; the train with ''same acceleration''; Ciaran''s two rings with ''≈ 14''; the Plymouth bars ''−3.8 = −0.6 − 3.2''; a great-circle
-    arc on a globe and a flat map (Part 5 teaser). Each spoken number on screen at its words; small source lines under the data minis.'
+    with ''metric terms'' brace; the log bars ''≈ 66×''; a storm ring sliding with a rider icon (Part 5 teaser). Each spoken number on screen at its words; small
+    source lines under the data minis.'
   voiceover: 'To sum up, a forecaster''s local frame has three arrows: i hat east, j hat north and k hat up, and the wind is u i hat, plus v j hat, plus w k hat.
     Up is the arrow from the Earth''s centre, east comes from turning in the view from above the pole, and north from turning in the meridian slice. Every place has
     its own frame: Brest''s up and Khulna''s up are about seventy six degrees apart. Turning the frame to a coast, at a bearing of three hundred and twenty nine degrees,
-    split Ian''s wind into about nine metres per second along the shore, and about thirty two onto the land. As the air moves, the arrows turn, at speeds divided
-    by radii. So the eastward acceleration is capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius: two metric terms that come only
-    from the turning arrows. A frame moving steadily changes velocities by its own velocity, but leaves accelerations unchanged. Riding with Storm Ciarán changed
-    the wind at every point, but left its average spin of about fourteen metres per second. And a fixed barometer''s rate is the storm changing, minus the pattern
-    sliding past: at Plymouth, the fall of three point eight hectopascals per hour was mostly the storm arriving. In Part 5, we''ll find the shortest way round the
-    Earth: great circles, and rhumb lines.'
+    split Ian''s wind into about nine metres per second along the shore, and about thirty two onto the land. As the air moves, the arrows turn by themselves, at speeds
+    divided by radii. So the eastward acceleration is capital D u by D t, minus u v tangent phi over the radius, plus u w over the radius: two metric terms that come
+    only from the turning arrows. For an ordinary wind, they''re about sixty six times smaller than the Coriolis effect, but weather and climate models keep them.
+    In Part 5, we''ll let the frame itself move, and see what a storm''s winds look like to someone riding along with it.'
   on_screen_eq: null
   calc_rows: []
   physics_source: null
@@ -4044,24 +2827,24 @@ scenes:
   pending_data: false
   layout: Mini pictures one per sentence; a small source line under each real-data mini. No headings.
   measured:
-    seconds: 95.525
-    words: 242
-    sentences: 10
+    seconds: 77.3
+    words: 207
+    sentences: 8
     beats: 0
-- id: s43_end
+    timing_source: splice3
+- id: s29_end
   t:
-  - 3497.1
-  - 3520.0
+  - 2338.075
+  - 2360.975
   sentence_times:
-  - - 3497.1
-    - 3503.3
-  - - 3503.65
-    - 3511.7
-  - - 3512.05
-    - 3519.7
+  - - 2338.075
+    - 2344.275
+  - - 2344.625
+    - 2352.675
+  - - 2353.025
+    - 2360.675
   beat: 'series end card (maths ending, HOUSE_STYLE §3, word for word; decision: maths end card)'
-  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (Brest''s tripod, the turning tripod on a parallel, the coast frame, Ciaran''s ring
-    with U); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates
+  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (Brest''s tripod, the turning tripod on a parallel, the coast frame, the metric-term log bars); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates
     notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with a 24-px gap under the icon row (Should 14). Then a 2.5-s silent hold while
     the music fades.'
   voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
@@ -4086,3 +2869,4 @@ scenes:
     words: 56
     sentences: 3
     beats: 0
+    timing_source: dryrun1
