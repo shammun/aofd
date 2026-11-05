@@ -1,0 +1,14 @@
+import React from "react";
+export const useCurrentFrame = () => globalThis.__F ?? 0;
+export const useVideoConfig = () => ({ width: 1920, height: 1080, fps: 30, durationInFrames: 1 });
+export const AbsoluteFill = ({ children, style }) => React.createElement("div", { style }, children);
+export const Sequence = ({ children }) => React.createElement(React.Fragment, null, children);
+export const Freeze = ({ children }) => React.createElement(React.Fragment, null, children);
+export const Audio = () => null;
+export const Img = (p) => React.createElement("img", p);
+export const Composition = () => null;
+export const registerRoot = () => {};
+export const staticFile = (s) => { (globalThis.__ASSETS ??= new Set()).add(s); return "/" + s; };
+export const delayRender = () => 1;
+export const continueRender = () => {};
+export const cancelRender = (e) => { throw e; };

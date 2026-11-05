@@ -1,0 +1,664 @@
+// ch00_coordinates_storm scenes s09-s20: maths block 2 on Ian's 25-km ring (dθ/dt = v/r, the position arrow, v θ̂, −(v²/r) r̂),
+// the numbers, why a steady speed accelerates; then the tall storm: cylindrical coordinates on the GOES-16 plate (three.js), the
+// three wind parts, is Ian shown right (NEXRAD radar eye vs the model's calm centre), the HRRR layer stack (three.js, orbit,
+// one close look) and the radius-height section. Every number on screen is asserted against data/cs.json below.
+import React, { useLayoutEffect, useMemo } from "react";
+import { useThree } from "@react-three/fiber";
+import { useCurrentFrame } from "remotion";
+import * as THREE from "three";
+import { C, T } from "../house/kit/type";
+import { Pt, pulse } from "../house/kit/draw";
+import { CalcStack, TeX } from "../house/kit/tex";
+import { Keyword } from "../house/kit/notes";
+import { CurvedLink } from "../house/kit/extras";
+import { GlobeFrame, SourceBelow } from "../house/kit/frame";
+import { View3D as HView3D, Arrow3D as HArrow3D, Rod3D as HRod3D, Ball3D as HBall3D } from "../house/kit/three3d";
+import { OrbitKey, orbitCam as hOrbitCam, orbitPath as hOrbitPath, projector as hProjector, V3 } from "../house/kit/cam";
+import { LayerStack3D, StackLayer } from "../house/kit/stack3d";
+import { useTex } from "./kit_cs/globe";
+import {
+  AT, ArcHead, Arrow, ColourBar, Cross, D, D2R, DashArrow, GeoImg, GeoMap, IMG, K, LEN, LUT_DBZ, Lbl, Parcel, RING, RTick, SAY, SEC, SRC, SS, STK, Scene,
+  SideCallout, SpeedBar, Svg, URBar, Wedge, arcD, boxAt, clamp, fin, fout, linesPath, mix, nf, polar, poly, prog, win,
+} from "./cs_lib";
+import { EQ_S09, EQ_S10, EQ_S11, EQ_S12, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S20, cutAt } from "./cs_eq";
+
+const S17D = D.s17, GO = D.goes;
+// ---------------------------------------------------------------- numbers on screen = the data (the render fails otherwise)
+const CHECK_B: [string, number, number, number][] = [
+  ["v", RING.v, 34.8, 0.05], ["omega", RING.om, 0.00139, 5e-6], ["omega deg/s", RING.om / D2R, 0.08, 0.005], ["omega deg/min", (RING.om / D2R) * 60, 5, 0.3],
+  ["lap s", (2 * Math.PI) / RING.om, 4500, 50], ["lap min", (2 * Math.PI) / RING.om / 60, 75, 0.5], ["acc", RING.acc, 0.048, 0.0006], ["g ratio", 9.81 / RING.acc, 200, 5],
+  ["dth60", RING.dth60, 0.084, 0.0006], ["dv60", RING.dv60, 2.9, 0.05], ["f ratio", RING.fratio, 20, 1.5], ["d eye", S17D.d_eye, 17, 0.5],
+  ["p model", S17D.pmin, 960, 0.5], ["p best", S17D.best, 938, 0], ["radar r", S17D.r_fit, 30, 2],
+  ["z925", STK.z_km[0], 0.7, 0.05], ["z850", STK.z_km[1], 1.4, 0.05], ["z500", STK.z_km[2], 5.8, 0.05], ["z200", STK.z_km[3], 12.4, 0.05], ["z150", STK.z_km[4], 14.2, 0.06],
+  ["vr925", STK.vr100[0], -6.5, 0.05], ["vr850", STK.vr100[1], 0, 0.5], ["vr500", STK.vr100[2], 1, 0.1], ["vr200", STK.vr100[3], 1, 0.1], ["vr150", STK.vr100[4], 6.5, 0.2],
+  ["sec min", SEC.min[0], -16, 0.5], ["sec min r", SEC.min[1], 30, 0], ["sec max", SEC.max[0], 9, 0.25], ["sec max r", SEC.max[1], 125, 0], ["vt max", SEC.vtmax[0], 55, 0.05],
+  ["vt max r", SEC.vtmax[1], 30, 0], ["vt10", SEC.vt10_25, 34.8, 0.05],
+];
+CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
+
+const MX = 1100;
+const RC: Pt = [500, 460], RR = 300;                       // Ian's 25-km ring, drawn (no map: a clean top view, s09-s14)
+const unitV = (a: number): Pt => [Math.cos(a * D2R), -Math.sin(a * D2R)];
+/** the parcel's angle: one lap of 75 min shown in ≈ 10 s (time compressed) */
+const lapA = (f: number, a0 = 20, per = 300) => a0 + (360 * f) / per;
+const RingBase: React.FC<{ o?: number; km?: boolean }> = ({ o = 1, km = true }) => o <= 0 ? null : (
+  <g opacity={o}>
+    <circle cx={RC[0]} cy={RC[1]} r={RR} fill="none" stroke={C.local} strokeWidth={5} />
+    <circle cx={RC[0]} cy={RC[1]} r={36} fill="#22304a" stroke={C.local} strokeWidth={3} />
+    <circle cx={RC[0]} cy={RC[1]} r={7} fill={C.local} />
+    {km ? <Lbl x={RC[0]} y={RC[1] + RR + 60} t="Ian's ring: r = 25 km" c={C.local} s={T.floor} a="middle" /> : null}
+  </g>
+);
+const ClockG: React.FC<{ x: number; y: number; t: string; frac: number; o?: number }> = ({ x, y, t, frac, o = 1 }) => o <= 0 ? null : (
+  <g opacity={o}>
+    <circle cx={x} cy={y} r={30} fill="none" stroke={C.ink} strokeWidth={4} />
+    <line x1={x} y1={y} x2={x + Math.sin(frac * 2 * Math.PI) * 22} y2={y - Math.cos(frac * 2 * Math.PI) * 22} stroke={C.ink} strokeWidth={4} strokeLinecap="round" />
+    <Lbl x={x + 46} y={y} t={t} c={C.key} s={T.floor} />
+  </g>
+);
+
+// ================================================================ s09 dθ/dt = v/r (D16)
+const S09: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s09_dtheta_dt");
+  const tV = SS(k, 1), tV35 = SS(k, 2), tGrow = SS(k, 3), tDt = SS(k, 6), tArc = SS(k, 7), tAng = SS(k, 8), tDiv = SS(k, 9), tRate = SS(k, 10), tNum = SS(k, 11),
+    tN1 = SS(k, 12), tCancel = SS(k, 13), tDeg = SS(k, 14), tLap = SS(k, 15), tLap2 = SS(k, 16);
+  const a = lapA(f), p = polar(RC, RR, a);
+  const a0 = 30, aW = 30;                                     // the short time Δt drawn as a 30° step
+  const P0 = polar(RC, RR, a0), P1 = polar(RC, RR, a0 + aW);
+  const lapFrac = clamp((f - tLap) / (LEN(k) - tLap), 0, 1);
+  return (
+    <Scene>
+      <Svg>
+        <RingBase />
+        <Parcel p={p} o={fout(f, tDt - 6) + fin(f, tLap)} />
+        <DashArrow f={f} p={p} q={[p[0] + unitV(a + 90)[0] * 130, p[1] + unitV(a + 90)[1] * 130]} o={fin(f, tV) * (fout(f, tDt - 6) + fin(f, tLap))} />
+        <g opacity={win(f, tDt, tLap - 20)}>
+          <Parcel p={P0} /><Parcel p={P1} o={0.6} />
+          <path d={arcD(RC, RR, a0, a0 + aW)} fill="none" stroke={C.first} strokeWidth={12} />
+          <Lbl x={polar(RC, RR + 60, a0 + aW / 2)[0]} y={polar(RC, RR + 60, a0 + aW / 2)[1]} t="v Δt" c={C.first} s={T.key} />
+          <Wedge c={RC} r={110} a0={a0} a1={a0 + aW} o={fin(f, tAng)} />
+          <Lbl x={polar(RC, 160, a0 + aW / 2)[0]} y={polar(RC, 160, a0 + aW / 2)[1]} t="Δθ" c={C.gold} s={T.key} a="middle" o={fin(f, tAng)} />
+          <line x1={RC[0]} y1={RC[1]} x2={P0[0]} y2={P0[1]} stroke={C.local} strokeWidth={5} opacity={fin(f, tArc)} />
+          <Lbl x={mix(RC[0], P0[0], 0.55)} y={mix(RC[1], P0[1], 0.55) + 46} t="r" c={C.local} s={T.key} o={fin(f, tArc)} />
+        </g>
+        <ClockG x={140} y={120} t={f < tLap ? "t" : `t = ${Math.round(lapFrac * 75)} min`} frac={f < tLap ? (f / 300) % 1 : lapFrac} />
+        <Keyword f={f} text="how fast does θ grow?" at={[MX, 120]} s={T.key} appear={0} out={tNum - 20} />
+        <Keyword f={f} text={`v ≈ ${SAY.vt} m/s on this ring`} at={[MX, 220]} s={T.floor} appear={tV35} out={tDt - 20} />
+        <Keyword f={f} text="the numbers" at={[MX, 120]} s={T.key} appear={tNum} out={tLap - 20} />
+        <Keyword f={f} text="one full lap" at={[MX, 120]} s={T.key} appear={tLap} />
+        <CurvedLink f={f} from={[MX - 14, 300]} to={polar(RC, RR + 20, a0 + aW / 2)} start={tDt + 10} end={tAng} bend={60} />
+      </Svg>
+      <CalcStack f={f} x={MX + 160} y={250} size={T.calc} maxLines={3} o={fout(f, tNum - 6)} rows={[
+        { lhs: String.raw`\Delta s`, rhs: String.raw`=v\,\Delta t`, at: tDt },
+        { lhs: String.raw`\Delta\theta`, rhs: String.raw`=\frac{\Delta s}{r}=\frac{v\,\Delta t}{r}`, at: tAng },
+      ]} />
+      <TeX s={EQ_S09} x={MX} y={520} size={96} o={fin(f, tRate) * fout(f, tNum - 6)} glow={pulse(f, tRate, 20)} />
+      <CalcStack f={f} x={MX + 20} y={230} size={60} maxLines={3} o={fin(f, tNum)} rows={[
+        { rhs: String.raw`\frac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: tN1 },
+        { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: tDeg, size: 52 },
+        { rhs: String.raw`\approx5^\circ/\mathrm{min}`, at: AT(k, 14, "five degrees"), size: 52, cont: true },
+        { rhs: String.raw`\frac{2\pi}{0.00139}\approx4500\ \mathrm{s}\approx75\ \mathrm{min}`, at: tLap2, size: 56 },
+      ]} />
+      <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
+      <Svg><Lbl x={MX} y={800} t={`${nf(RING.v, 1)} m/s ÷ 25 000 m`} c={C.muted} s={T.floor} o={0 * tGrow} /></Svg>
+    </Scene>
+  );
+};
+
+// ================================================================ s10 the position arrow r r̂ (D17 1-2)
+const S10: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s10_position_arrow");
+  const tWhy = SS(k, 2), tVel = SS(k, 3), tPos = AT(k, 4, "position as an arrow"), tLen = SS(k, 5), tRr = SS(k, 6), tBack = SS(k, 7), tFlip = SS(k, 8), tIan = SS(k, 9),
+    tRate = SS(k, 10), tProd = SS(k, 11), tRes = SS(k, 12);
+  const a = 50, p = polar(RC, RR, a);
+  return (
+    <Scene>
+      <Svg>
+        <RingBase />
+        <Arrow p={RC} q={p} color={C.first} w={10} head={40} o={fin(f, tPos)} />
+        <Arrow p={RC} q={polar(RC, 120, a)} color={C.second} w={8} head={30} o={fin(f, tLen)} />
+        <Lbl x={polar(RC, 160, a + 12)[0]} y={polar(RC, 160, a + 12)[1]} t="r̂" c={C.second} s={T.key} o={fin(f, tLen)} />
+        <Lbl x={polar(RC, RR * 0.62, a - 14)[0]} y={polar(RC, RR * 0.62, a - 14)[1]} t="r = 25 km" c={C.first} s={T.floor} o={fin(f, tIan)} />
+        <Parcel p={p} />
+        <Keyword f={f} text="velocity next" at={[MX, 120]} s={T.key} appear={0} out={tWhy - 20} />
+        <Lbl x={1075} y={120} t="acceleration ← velocity ← position" c={C.key} s={T.floor} o={win(f, tWhy, tRate - 20)} />
+        <Lbl x={MX + 320} y={180} t="(rate of change)" c={C.gold} s={T.floor} o={win(f, tVel, tRate - 20)} />
+      </Svg>
+      <CalcStack f={f} x={MX + 200} y={280} size={60} maxLines={3} o={fout(f, tRate - 6)} rows={[
+        { lhs: String.raw`\text{position}`, rhs: String.raw`=r\,\hat{\mathbf r}`, at: tRr },
+        { lhs: String.raw`\hat{\mathbf r}`, rhs: String.raw`=\frac{\text{arrow}}{r}\ \Rightarrow\ \text{arrow}=r\,\hat{\mathbf r}`, at: tFlip, size: 52 },
+        { lhs: String.raw`\text{arrow}`, rhs: String.raw`=25\ \mathrm{km}\times\hat{\mathbf r}`, at: tIan },
+      ]} />
+      <Svg><Keyword f={f} text="number × arrow → product rule" at={[MX, 120]} s={T.floor} appear={tRate} /></Svg>
+      <TeX s={String.raw`\frac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\frac{dv}{dt}\,\hat{\mathbf d}+v\,\frac{d\hat{\mathbf d}}{dt}`} x={MX} y={300} size={52} c={C.local} o={win(f, tProd, LEN(k) + 20)} />
+      <Svg><Lbl x={MX} y={400} t="v → r,  d̂ → r̂" c={C.gold} s={T.floor} o={fin(f, tProd + 20)} /></Svg>
+      <TeX s={EQ_S10} x={MX} y={530} size={56} o={fin(f, tRes)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s11 the velocity on the ring: v θ̂ (D17 3-5)
+const S11: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s11_velocity_on_ring");
+  const tZero = SS(k, 1), tSecond = SS(k, 2), tChain = SS(k, 4), tCR = SS(k, 5), tBoth = SS(k, 6), tSo = SS(k, 7), tMul = SS(k, 8), tCancel = SS(k, 9), tYes = SS(k, 10),
+    tSize = SS(k, 11), tIan = SS(k, 12);
+  const a = lapA(f, 50, 300), p = polar(RC, RR, a), u = unitV(a + 90), er = unitV(a);
+  const [e1] = cutAt(EQ_S11, "=v");
+  return (
+    <Scene>
+      <Svg>
+        <RingBase />
+        <Arrow p={RC} q={p} color={C.first} w={8} head={30} o={0.6} />
+        <DashArrow f={f} p={p} q={[p[0] + u[0] * 170, p[1] + u[1] * 170]} o={fin(f, tYes)} />
+        <RTick p={p} u1={[-er[0], -er[1]]} u2={u} o={fin(f, tSize)} />
+        <Parcel p={p} />
+        <path d={arcD(RC, RR + 70, a - 60, a - 10)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tIan)} />
+        <ArcHead c={RC} r={RR + 70} a={a - 10} dir={1} col={C.gold} o={fin(f, tIan)} />
+        <Keyword f={f} text="one term at a time" at={[MX, 120]} s={T.key} appear={0} out={tChain - 20} />
+        <Keyword f={f} text="the chain rule" at={[MX, 120]} s={T.key} appear={tChain} out={tYes - 20} />
+        <Keyword f={f} text={`${nf(RING.v, 1)} m/s along θ̂`} at={[MX, 120]} s={T.key} appear={tIan} />
+        <Lbl x={MX} y={210} t="anticlockwise (seen from above)" c={C.key} s={T.floor} o={fin(f, tIan + 20)} />
+        <Lbl x={MX} y={190} t="r fixed: dr/dt = 0" c={C.local} s={T.floor} o={win(f, tZero, tChain - 20)} />
+        <Lbl x={MX} y={430} t="θ̂  (s05)" c={C.gold} s={T.floor} o={win(f, tBoth, tMul - 20)} />
+        <Lbl x={MX + 300} y={430} t="v/r  (s09)" c={C.gold} s={T.floor} o={win(f, tBoth, tMul - 20)} />
+      </Svg>
+      <TeX s={String.raw`\frac{dr}{dt}=0`} x={MX} y={330} size={T.calc} o={win(f, tZero, tChain - 20)} />
+      <TeX s={String.raw`\frac{d\hat{\mathbf r}}{dt}=\frac{d\hat{\mathbf r}}{d\theta}\,\frac{d\theta}{dt}=\hat{\boldsymbol\theta}\,\frac{v}{r}`} x={MX} y={330} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
+      <TeX s={EQ_S11} x={MX} y={330} size={46} o={win(f, tMul, tYes - 20)} />
+      <TeX s={String.raw`\mathbf v=v\,\hat{\boldsymbol\theta}`} x={MX} y={360} size={96} o={win(f, tYes, tIan - 20)} glow={pulse(f, tCancel + 20, 20)} />
+      <TeX s={String.raw`\mathbf v=34.8\ \hat{\boldsymbol\theta}\ \mathrm{m/s}`} x={MX} y={360} size={T.calc} o={fin(f, tIan)} />
+      <Svg><Lbl x={MX} y={540} t="the two r's cancel" c={C.gold} s={T.floor} o={win(f, tCancel, tIan - 20)} /></Svg>
+    </Scene>
+  );
+};
+
+// ================================================================ s12 the acceleration −(v²/r) r̂ (D18)
+const S12: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s12_acceleration");
+  const tAcc = SS(k, 1), tNeed = SS(k, 2), tPR = SS(k, 3), tSteady = SS(k, 4), tChain = SS(k, 5), tCR = SS(k, 6), tRem = SS(k, 7), tVr = SS(k, 8), tSo = SS(k, 9),
+    tMul = SS(k, 10), tRes = SS(k, 11), tMinus = SS(k, 12), tCentri = SS(k, 13), tUnits = SS(k, 14), tU2 = SS(k, 16);
+  const a = lapA(f, 50, 300), p = polar(RC, RR, a), u = unitV(a + 90), er = unitV(a);
+  // the s06 mini picture (θ̂'s tip swinging to −r̂) recalled at the left bottom
+  const mC: Pt = [880, 760], mR = 70;
+  return (
+    <Scene>
+      <Svg>
+        <RingBase />
+        <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
+        <Arrow p={p} q={[p[0] - er[0] * 120, p[1] - er[1] * 120]} color={C.neg} w={10} head={40} o={fin(f, tMinus)} />
+        <Lbl x={p[0] - er[0] * 160} y={p[1] - er[1] * 160} t="−" c={C.neg} s={T.calc} a="middle" o={fin(f, tMinus)} />
+        <Parcel p={p} />
+        <g opacity={win(f, tRem, tSo + 30)}>
+          <circle cx={mC[0]} cy={mC[1]} r={mR} fill="none" stroke={C.local} strokeWidth={3} />
+          <Arrow p={mC} q={polar(mC, mR, 140)} color={C.second} w={5} head={18} />
+          <Arrow p={mC} q={polar(mC, mR, 230)} color={C.neg} w={5} head={18} />
+          <path d={arcD(mC, mR + 20, 145, 220)} fill="none" stroke={C.gold} strokeWidth={4} />
+        </g>
+        <Keyword f={f} text="the opening question" at={[MX, 120]} s={T.key} appear={0} out={tPR - 20} />
+        <Keyword f={f} text="steady speed: dv/dt = 0" at={[MX, 120]} s={T.key} appear={tSteady} out={tRes - 20} />
+        <Keyword f={f} text="centripetal: towards the centre" at={[MX, 120]} s={T.floor} appear={tCentri} out={tUnits - 20} />
+        <Keyword f={f} text="units check" at={[MX, 120]} s={T.key} appear={tUnits} />
+        <Lbl x={MX} y={210} t="a = rate of change of velocity" c={C.key} s={T.floor} o={win(f, tAcc, tPR - 20)} />
+        <Lbl x={MX} y={460} t="−r̂  (s06)" c={C.gold} s={T.floor} o={win(f, tRem, tMul - 20)} />
+        <Lbl x={MX + 300} y={460} t="v/r  (s09)" c={C.gold} s={T.floor} o={win(f, tVr, tMul - 20)} />
+      </Svg>
+      <TeX s={String.raw`\frac{d}{dt}(v\hat{\boldsymbol\theta})=\frac{dv}{dt}\hat{\boldsymbol\theta}+v\frac{d\hat{\boldsymbol\theta}}{dt}`} x={MX} y={280} size={58} o={win(f, tPR, tChain - 20) * (f < tNeed ? 0 : 1)} />
+      <TeX s={String.raw`\frac{dv}{dt}=0`} x={MX} y={480} size={T.calc} c={C.local} o={win(f, tSteady, tChain - 20)} />
+      <TeX s={String.raw`\frac{d\hat{\boldsymbol\theta}}{dt}=\frac{d\hat{\boldsymbol\theta}}{d\theta}\frac{d\theta}{dt}=-\hat{\mathbf r}\,\frac{v}{r}`} x={MX} y={300} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
+      <TeX s={cutAt(EQ_S12, "=v")[0]} x={MX} y={260} size={52} o={win(f, tMul, tMinus - 20)} />
+      <TeX s={"=v" + cutAt(EQ_S12, "=v")[1]} x={MX + 60} y={370} size={52} o={win(f, tMul, tMinus - 20)} />
+      <TeX s={String.raw`\mathbf a=-\frac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={300} size={96} o={fin(f, tMinus)} glow={pulse(f, tRes + 20, 20)} />
+      <TeX s={String.raw`\frac{\mathrm{m^2/s^2}}{\mathrm m}=\mathrm{m/s^2}`} x={MX} y={520} size={T.calc} o={fin(f, tU2)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s13 how big: 0.048 m/s², ≈ g / 200 (D18 numbers)
+const S13: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s13_acceleration_numbers");
+  const tHow = SS(k, 1), tSq = SS(k, 2), tDiv = SS(k, 3), tEasy = SS(k, 4), tBig = SS(k, 5), tG = SS(k, 6), tAll = SS(k, 7), tCar = SS(k, 8), tTurn = SS(k, 9);
+  const a = lapA(f, 50, 300), p = polar(RC, RR, a), er = unitV(a), u = unitV(a + 90);
+  const carT = clamp((f - tCar) / 90, 0, 1);
+  return (
+    <Scene>
+      <Svg>
+        <RingBase />
+        <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
+        <Arrow p={p} q={[p[0] - er[0] * 120, p[1] - er[1] * 120]} color={C.neg} w={10 + 4 * pulse(f, tTurn, 24)} head={40} />
+        <Parcel p={p} />
+        <Keyword f={f} text="keep: v²/r, towards the centre" at={[MX, 120]} s={T.floor} appear={0} out={tHow - 20} />
+        <Keyword f={f} text="how big?" at={[MX, 120]} s={T.key} appear={tHow} out={tBig - 20} />
+        <Keyword f={f} text="≈ 200 × smaller than gravity" at={[MX, 120]} s={T.floor} appear={tG} out={tCar - 20} />
+        <Keyword f={f} text="all of it turns the parcel" at={[MX, 120]} s={T.key} appear={tTurn} />
+        <g opacity={win(f, tBig, tCar - 20)}>
+          <line x1={MX} y1={680} x2={MX + 700} y2={680} stroke={C.muted} strokeWidth={3} />
+          <rect x={MX} y={600} width={700} height={50} fill={C.local} opacity={0.85} />
+          <rect x={MX} y={700} width={Math.max(4, (700 * RING.acc) / 9.81)} height={50} fill={C.neg} opacity={0.95} />
+          <Lbl x={MX + 10} y={570} t="gravity 9.81 m/s²" c={C.local} s={T.floor} />
+          <Lbl x={MX + 30} y={790} t="0.048 m/s²" c={C.neg} s={T.floor} />
+        </g>
+        <g opacity={fin(f, tCar)}>
+          <rect x={MX + 20} y={640} width={150} height={50} rx={14} fill={C.second} />
+          <circle cx={MX + 55} cy={695} r={16} fill={C.ink} /><circle cx={MX + 135} cy={695} r={16} fill={C.ink} />
+          <Lbl x={MX + 220} y={665} t={`${Math.round(100 * carT)} km/h`} c={C.key} s={T.floor} />
+          <ClockG x={MX + 470} y={665} t={`≈ ${Math.round(10 * carT)} min`} frac={carT} />
+        </g>
+      </Svg>
+      <CalcStack f={f} x={MX + 230} y={250} size={60} maxLines={3} o={fout(f, tAll)} rows={[
+        { lhs: String.raw`34.8^2`, rhs: String.raw`\approx1211`, at: tSq },
+        { lhs: String.raw`\frac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv },
+        { lhs: String.raw`\frac{35^2}{25\,000}`, rhs: String.raw`\approx0.049`, at: tEasy, c: C.local },
+        { lhs: String.raw`\frac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG },
+      ]} />
+      <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
+      <TeX s={String.raw`\frac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}\approx580\ \mathrm s\approx10\ \mathrm{min}`} x={MX} y={450} size={56} o={fin(f, tCar + 20)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s14 a steady speed, a turning velocity (D19)
+const S14: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s14_steady_but_turning");
+  const tMore = SS(k, 1), tSD = SS(k, 2), tTwo = SS(k, 3), tMin = SS(k, 4), tLen = SS(k, 5), tSlide = SS(k, 6), tShort = SS(k, 7), tEye = SS(k, 8), tHow = SS(k, 9),
+    tEnds = SS(k, 10), tArc = SS(k, 11), tDiv = SS(k, 12), tOnly = SS(k, 13), tPush = SS(k, 14), tP = SS(k, 15), tEarth = SS(k, 16), tM1 = SS(k, 17), tM2 = SS(k, 18);
+  const DT = 15;                                               // the 5° turn drawn at 15° (listed)
+  const a0 = 60, a1 = a0 + DT, p0 = polar(RC, RR, a0), p1 = polar(RC, RR, a1);
+  const L = 200, v0 = unitV(a0 + 90), v1 = unitV(a1 + 90);
+  const sl = prog(f, tSlide, tSlide + 50);
+  const tail: Pt = [mix(p0[0], 860, sl), mix(p0[1], 220, sl)], tail1: Pt = [mix(p1[0], 860, sl), mix(p1[1], 220, sl)];
+  const q0: Pt = [tail[0] + v0[0] * L, tail[1] + v0[1] * L], q1: Pt = [tail1[0] + v1[0] * L, tail1[1] + v1[1] * L];
+  const oPic = fout(f, tOnly - 10), oPush = fin(f, tP);
+  return (
+    <Scene>
+      <Svg>
+        <RingBase o={1} km={false} />
+        <g opacity={oPic}>
+          <Wedge c={RC} r={110} a0={a0} a1={a1} o={fin(f, tMin)} />
+          <Lbl x={polar(RC, 160, a0 + DT / 2)[0]} y={polar(RC, 160, a0 + DT / 2)[1]} t="≈ 5°" c={C.gold} s={T.floor} a="middle" o={fin(f, tMin)} />
+          <Parcel p={p0} o={fin(f, tTwo)} /><Parcel p={p1} o={fin(f, tTwo)} />
+          <Arrow p={tail} q={q0} color={C.first} w={10} head={36} o={fin(f, tTwo)} />
+          <Arrow p={tail1} q={q1} color={C.first} w={10} head={36} o={fin(f, tTwo + 10)} />
+          <Arrow p={q0} q={q1} color={C.neg} w={7} head={24} o={fin(f, tShort)} />
+          <path d={arcD(tail, L, a0 + 90, a1 + 90)} fill="none" stroke={C.local} strokeWidth={4} strokeDasharray="10 8" opacity={fin(f, tEnds)} />
+          <CurvedLink f={f} from={[(q0[0] + q1[0]) / 2, (q0[1] + q1[1]) / 2 + 20]} to={[RC[0] + 30, RC[1] - 30]} start={tEye} end={tHow} bend={-40} />
+        </g>
+        <g opacity={oPush}>
+          {[60, 100, 140].map((r) => <circle key={r} cx={RC[0]} cy={RC[1]} r={r} fill="none" stroke={C.local} strokeWidth={3} strokeDasharray="12 8" />)}
+          <Lbl x={RC[0]} y={RC[1]} t="L" c={C.key} s={T.key} a="middle" />
+          <Arrow p={polar(RC, RR, 120)} q={polar(RC, RR - 170, 120)} color={C.second} w={10} head={36} />
+          <Arrow p={polar(RC, RR, 120)} q={polar(RC, RR - 170 / 21, 120)} color="#8e6fd8" w={6} head={0} o={fin(f, tEarth)} />
+          <Parcel p={polar(RC, RR, 120)} />
+          <Lbl x={polar(RC, RR + 50, 120)[0]} y={polar(RC, RR + 50, 120)[1]} t="pressure force" c={C.second} s={T.floor} a="middle" />
+          <Lbl x={polar(RC, RR + 50, 120)[0]} y={polar(RC, RR + 50, 120)[1] + 56} t="Earth's spin: ≈ 1/20" c="#b49cf0" s={T.floor} a="middle" o={fin(f, tEarth)} />
+        </g>
+        <Keyword f={f} text="steady speed, yet accelerating?" at={[MX, 120]} s={T.floor} appear={0} out={tSD - 20} />
+        <Keyword f={f} text="velocity = speed + direction" at={[MX, 120]} s={T.floor} appear={tSD} out={tMin - 20} />
+        <Keyword f={f} text="Δv points at the eye" at={[MX, 120]} s={T.key} appear={tEye} out={tOnly - 20} />
+        <Keyword f={f} text="yes: it turns" at={[MX, 120]} s={T.key} appear={tOnly} out={tM1 - 20} />
+        <Keyword f={f} text="more: Wind on weather charts" at={[MX, 120]} s={T.floor} appear={tM1} out={tM2 - 20} />
+        <Keyword f={f} text="more: Circular motion" at={[MX, 120]} s={T.floor} appear={tM2} />
+        <Lbl x={MX} y={220} t={`both ${nf(RING.v, 1)} m/s long`} c={C.first} s={T.floor} o={win(f, tLen, tOnly - 20)} />
+        <Lbl x={MX} y={220} t="something pushes inward" c={C.key} s={T.floor} o={win(f, tPush, tM1 - 20)} />
+      </Svg>
+      <CalcStack f={f} x={MX + 20} y={320} size={56} maxLines={3} o={fout(f, tOnly - 6)} rows={[
+        { rhs: String.raw`\Delta\theta=0.00139\times60`, at: tMin, size: 50 },
+        { rhs: String.raw`\approx0.084\ \mathrm{rad}\approx5^\circ`, at: AT(k, 4, "zero point zero eight four"), size: 50, cont: true },
+        { rhs: String.raw`34.8\times0.084\approx2.9\ \mathrm{m/s}`, at: tArc },
+        { rhs: String.raw`\frac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}`, at: tDiv, glow: pulse(f, tDiv + 30, 20) },
+      ]} />
+      <TeX s={EQ_S14} x={MX} y={660} size={44} o={win(f, tArc + 30, tOnly - 20)} />
+      <Svg><Lbl x={MX} y={760} t="same as v²/r" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tOnly - 20)} /></Svg>
+    </Scene>
+  );
+};
+
+// ================================================================ three.js pieces for the tall storm (s15, s16, s18-s20)
+/** an image quad on z = const (unlit, not tone-mapped; redraw when the texture lands — build-1 fix loop 1) */
+const TexQuad: React.FC<{ href: string; x0: number; x1: number; y0: number; y1: number; z?: number; o?: number }> = ({ href, x0, x1, y0, y1, z = 0, o = 1 }) => {
+  const tex = useTex(href);
+  const mat = useMemo(() => new THREE.MeshBasicMaterial({ transparent: true, side: THREE.DoubleSide, depthWrite: false, toneMapped: false }), []);
+  if (mat.map !== tex) { mat.map = tex; mat.needsUpdate = true; }
+  mat.opacity = o;
+  const advance = useThree((s) => s.advance);
+  useLayoutEffect(() => { if (tex && o > 0) advance(performance.now()); }, [tex, o > 0, advance]); // eslint-disable-line react-hooks/exhaustive-deps
+  const geo = useMemo(() => new THREE.PlaneGeometry(x1 - x0, y1 - y0), [x0, x1, y0, y1]);
+  if (!tex || o <= 0) return null;
+  return <mesh position={[(x0 + x1) / 2, (y0 + y1) / 2, z]} material={mat} renderOrder={1} geometry={geo} />;
+};
+/** a bead running from a to b (house wind rule: arrows always animated) */
+const Bead3D: React.FC<{ f: number; a: V3; b: V3; speed: number; o?: number }> = ({ f, a, b, speed, o = 1 }) => {
+  const per = Math.max(0.6, 12 / Math.max(0.1, Math.abs(speed))) * 30, t = ((f % per) / per) * 0.8;
+  return <HBall3D at={[a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]} px={9} color={C.key} o={o * 0.85} />;
+};
+// s15-s16 world: 1 unit = 10 km; the plate is 120 × 120 km (±6), the cylinder radius 3 (30 km), height 15 km drawn ×4 → 6
+const CYL_R = 3, CYL_H = 6;
+const circ = (r: number, z: number, n = 48): V3[] => Array.from({ length: n + 1 }, (_, i) => [r * Math.cos((i * 2 * Math.PI) / n), r * Math.sin((i * 2 * Math.PI) / n), z]);
+const camS15 = (f: number, tTilt: number, len: number): OrbitKey[] => [{ f: 0, az: -90, el: 88, dist: 30, target: [0, 0, 0] }, { f: Math.max(1, tTilt - 1), az: -90, el: 88, dist: 30, target: [0, 0, 0] }, { f: tTilt + 90, az: -70, el: 35, dist: 30, target: [0, 0, 1.6] }, { f: len + 10, az: -58, el: 35, dist: 30, target: [0, 0, 1.6], linear: true }];
+
+// ================================================================ s15 a tall storm: cylindrical coordinates (GOES-16 plate)
+const S15: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s15_cylinder");
+  const tTall = SS(k, 1), tIn = SS(k, 2), tEw = AT(k, 3, "eyewall"), tOut = SS(k, 4), tIan = SS(k, 5), tHole = SS(k, 6), tZ = AT(k, 7, "the height, z"), tCyl = SS(k, 8), tWhy = SS(k, 9);
+  const keys = camS15(f, tIan + 20, LEN(k));
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 30 }, [520, 420]);
+  const pr = hProjector(st, 1040, 820, 20, 20);
+  const ph = (f / 30) * 0.5;
+  const oIn = fin(f, tIn), oUp = fin(f, AT(k, 3, "rises")), oOut = fin(f, tOut), oCyl = fin(f, tCyl), oZ = fin(f, tZ);
+  const ewR = (S17D.r_fit ?? 30) / 10;
+  const ewT = circ(ewR, 0.02).map((v) => pr.p(v)).reduce((a, b) => (b[0] > a[0] ? b : a));
+  return (
+    <Scene>
+      <HView3D st={st} x={20} y={20} w={1040} h={820}>
+        <TexQuad href={IMG("cst_goes_eye.jpg")} x0={-6} x1={6} y0={-6} y1={6} o={1} />
+        {circ(ewR, 0.03).slice(1).map((q, i) => <HRod3D key={`ew${i}`} a={circ(ewR, 0.03)[i]} b={q} px={9} color={C.gold} o={win(f, tEw, tIan) + fin(f, tHole)} />)}
+        {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * Math.PI) / 3 + ph; const p: V3 = [5.2 * Math.cos(a), 5.2 * Math.sin(a), 0.1];
+          const q: V3 = [3.4 * Math.cos(a + 0.6), 3.4 * Math.sin(a + 0.6), 0.1];
+          return <group key={`in${i}`}><HArrow3D from={p} to={q} color={C.neg} px={8} head={26} o={oIn} /><Bead3D f={f} a={p} b={q} speed={10} o={oIn} /></group>; })}
+        {[0, 1, 2, 3].map((i) => { const a = (i * Math.PI) / 2 + 0.4; const p: V3 = [ewR * Math.cos(a), ewR * Math.sin(a), 0.3];
+          return <group key={`up${i}`}><HArrow3D from={p} to={[p[0], p[1], 4.6]} color={C.local} px={8} head={26} o={oUp} /><Bead3D f={f} a={p} b={[p[0], p[1], 4.6]} speed={6} o={oUp} /></group>; })}
+        {[0, 1, 2, 3, 4, 5].map((i) => { const a = (i * Math.PI) / 3 + 0.2 - ph * 0.5; const p: V3 = [3.2 * Math.cos(a), 3.2 * Math.sin(a), 5.2];
+          const q: V3 = [5.4 * Math.cos(a - 0.4), 5.4 * Math.sin(a - 0.4), 5.2];
+          return <group key={`out${i}`}><HArrow3D from={p} to={q} color="#8db5e2" px={8} head={26} o={oOut} /><Bead3D f={f} a={p} b={q} speed={10} o={oOut} /></group>; })}
+        <HArrow3D from={[0, 0, 0]} to={[0, 0, 7.4]} color={C.second} px={8} head={30} o={oZ} />
+        {circ(CYL_R, 0).slice(1).map((q, i) => <HRod3D key={`b${i}`} a={circ(CYL_R, 0)[i]} b={q} px={6} color={C.key} o={0.95 * oCyl} />)}
+        {circ(CYL_R, CYL_H).slice(1).map((q, i) => <HRod3D key={`t${i}`} a={circ(CYL_R, CYL_H)[i]} b={q} px={6} color={C.key} o={0.95 * oCyl} />)}
+        {Array.from({ length: 12 }, (_, i) => { const a = (i * Math.PI) / 6;
+          return <HRod3D key={`v${i}`} a={[CYL_R * Math.cos(a), CYL_R * Math.sin(a), 0]} b={[CYL_R * Math.cos(a), CYL_R * Math.sin(a), CYL_H]} px={3} color={C.key} o={0.6 * oCyl} />; })}
+      </HView3D>
+      <Svg>
+        <Lbl x={pr.p([0, 0, 7.6])[0] + 20} y={pr.p([0, 0, 7.6])[1]} t="z" c={C.second} s={T.key} o={oZ} />
+        <Keyword f={f} text="a tall storm" at={[MX + 20, 120]} s={T.key} appear={0} out={tEw - 20} />
+        <Lbl x={MX + 20} y={230} t="in near the sea" c={C.neg} s={T.floor} o={win(f, tIn, tIan - 20)} />
+        <Lbl x={MX + 20} y={300} t="up in the eyewall" c={C.local} s={T.floor} o={win(f, AT(k, 3, "rises"), tIan - 20)} />
+        <Lbl x={MX + 20} y={370} t="out at 12-15 km" c="#8db5e2" s={T.floor} o={win(f, tOut, tIan - 20)} />
+        <SideCallout f={f} lines="eyewall" at={[MX + 20, 120]} s={T.key} appear={tEw} out={tZ - 20} target={ewT} c={C.gold} bend={-30} />
+        <Keyword f={f} text="cylindrical coordinates" at={[MX + 20, 120]} s={T.key} appear={tCyl} />
+        <Lbl x={MX + 20} y={560} t="heights drawn ×4" c={C.muted} s={T.floor} o={fin(f, tZ)} />
+        <Lbl x={MX + 20} y={640} t="r = 30 km: a cylinder" c={C.key} s={T.floor} o={fin(f, tWhy)} />
+      </Svg>
+      <TeX s={EQ_S15} x={MX + 20} y={300} size={T.eq} o={fin(f, tCyl + 10)} />
+      <SourceBelow text={SRC.goes} pic={{ x: 20, y: 20, w: 1040, h: 800 }} w={1400} name="s15 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s16 the wind's three parts
+const S16: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s16_three_parts");
+  const tUr = SS(k, 1), tUt = SS(k, 2), tW = SS(k, 3), tEq = SS(k, 4), tZh = SS(k, 5), tOnly = SS(k, 6), tAll = SS(k, 7);
+  const keys = camS15(0, 0, 0);
+  const st = hOrbitCam({ ...hOrbitPath([{ ...keys[3], f: 0, az: -58 }, { ...keys[3], f: LEN(k) + 10, az: -40, linear: true }], f), fov: 30 }, [520, 420]);
+  const pr = hProjector(st, 1040, 820, 20, 20);
+  const P0: V3 = [CYL_R, 0, CYL_H * 0.5];
+  const oT = (t: number) => fin(f, t) * fout(f, tZh - 10);
+  const az3 = [0, 120, 240].map((d) => d * D2R + 0.5);
+  return (
+    <Scene>
+      <HView3D st={st} x={20} y={20} w={1040} h={820}>
+        <TexQuad href={IMG("cst_goes_eye.jpg")} x0={-6} x1={6} y0={-6} y1={6} o={0.85} />
+        {circ(CYL_R, 0).slice(1).map((q, i) => <HRod3D key={`b${i}`} a={circ(CYL_R, 0)[i]} b={q} px={6} color={C.key} o={0.95} />)}
+        {circ(CYL_R, CYL_H).slice(1).map((q, i) => <HRod3D key={`t${i}`} a={circ(CYL_R, CYL_H)[i]} b={q} px={6} color={C.key} o={0.95} />)}
+        {Array.from({ length: 12 }, (_, i) => { const a = (i * Math.PI) / 6;
+          return <HRod3D key={`v${i}`} a={[CYL_R * Math.cos(a), CYL_R * Math.sin(a), 0]} b={[CYL_R * Math.cos(a), CYL_R * Math.sin(a), CYL_H]} px={3} color={C.key} o={0.55} />; })}
+        <HArrow3D from={P0} to={[CYL_R - 1.8, 0, P0[2]]} color={C.neg} px={9} head={30} o={oT(tUr)} />
+        <HArrow3D from={P0} to={[CYL_R, 2.2, P0[2]]} color={C.first} px={9} head={30} o={oT(tUt)} />
+        <HArrow3D from={P0} to={[CYL_R, 0, P0[2] + 1.8]} color={C.local} px={9} head={30} o={oT(tW)} />
+        {az3.map((a, i) => { const p: V3 = [CYL_R * Math.cos(a), CYL_R * Math.sin(a), CYL_H * 0.75];
+          return <group key={i}>
+            <HArrow3D from={p} to={[p[0], p[1], p[2] + 1.3]} color={C.second} px={7} head={24} o={fin(f, tZh)} />
+            <HArrow3D from={p} to={[p[0] + Math.cos(a) * 1.4, p[1] + Math.sin(a) * 1.4, p[2]]} color={C.second} px={6} head={22} o={fin(f, tOnly)} />
+            <HArrow3D from={p} to={[p[0] - Math.sin(a) * 1.4, p[1] + Math.cos(a) * 1.4, p[2]]} color={C.second} px={6} head={22} o={fin(f, tOnly)} />
+          </group>; })}
+      </HView3D>
+      <TeX s="u_r" x={pr.p([CYL_R - 2.0, 0, P0[2]])[0] - 10} y={pr.p([CYL_R - 2.0, 0, P0[2]])[1] - 40} size={52} c={C.neg} ax={1} o={oT(tUr)} halo haloW={0.07} />
+      <TeX s={String.raw`u_\theta`} x={pr.p([CYL_R, 2.4, P0[2]])[0] + 12} y={pr.p([CYL_R, 2.4, P0[2]])[1]} size={52} c={C.first} o={oT(tUt)} halo haloW={0.07} />
+      <TeX s="w" x={pr.p([CYL_R, 0, P0[2] + 2.0])[0] + 12} y={pr.p([CYL_R, 0, P0[2] + 2.0])[1]} size={52} c={C.local} o={oT(tW)} halo haloW={0.07} />
+      <Svg>
+        <Keyword f={f} text="three parts" at={[MX + 20, 120]} s={T.key} appear={0} out={tZh - 20} />
+        <Lbl x={MX + 20} y={210} t="in or out · round · up or down" c={C.key} s={T.floor} o={win(f, tW + 20, tZh - 20)} />
+        <Keyword f={f} text="ẑ: the same everywhere" at={[MX + 20, 120]} s={T.key} appear={tZh} out={tOnly - 20} />
+        <Keyword f={f} text="works in 3-D too" at={[MX + 20, 120]} s={T.key} appear={tAll} />
+      </Svg>
+      <TeX s={EQ_S16} x={MX + 20} y={380} size={56} o={fin(f, tEq)} />
+      <TeX s={String.raw`\text{only }\hat{\mathbf r},\ \hat{\boldsymbol\theta}\text{ turn}`} x={MX + 20} y={120} size={T.key} c={C.second} o={win(f, tOnly, tAll - 20)} />
+      <SourceBelow text={SRC.goes} pic={{ x: 20, y: 20, w: 1040, h: 800 }} w={1400} name="s16 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s17 is Ian shown right? (radar eye vs the model's calm centre)
+const S17: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s17_ian_check");
+  const tRadar = SS(k, 1), tRing = SS(k, 2), tBest = SS(k, 3), tModel = SS(k, 4), tP = SS(k, 5), tOff = SS(k, 6), tRule = SS(k, 8), tR1 = SS(k, 9), tR2 = SS(k, 10), tR3 = SS(k, 11);
+  const bx = S17D.box as number[];
+  const PB = { x: 100, y: 60, w: 740, h: 740 };
+  const B = { lat0: bx[0], lat1: bx[1], lon0: bx[2], lon1: bx[3], ...PB };
+  const oR = fout(f, tModel - 4, 14), oM = fin(f, tModel, 14);
+  const ewR = (S17D.r_fit / 111.2 / (bx[1] - bx[0])) * PB.h;
+  return (
+    <Scene>
+      <GeoMap id="s17r" B={B} o={oR}>
+        {(P) => <>
+          <GeoImg P={P} href={IMG("cst_radar_ktbw.png")} box={bx} />
+          <path d={linesPath(P, S17D.coast)} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.85} />
+          <circle cx={P(S17D.radar_eye[0], S17D.radar_eye[1])[0]} cy={P(S17D.radar_eye[0], S17D.radar_eye[1])[1]} r={ewR} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tRing)} />
+          <Cross p={P(S17D.radar_eye[0], S17D.radar_eye[1])} c={C.key} o={fin(f, tBest)} />
+        </>}
+      </GeoMap>
+      <GeoMap id="s17m" B={B} o={oM}>
+        {(P) => <>
+          <GeoImg P={P} href={IMG("cst_hrrr_s17.png")} box={bx} />
+          <path d={linesPath(P, S17D.coast)} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.85} />
+          <Cross p={P(S17D.calm[0], S17D.calm[1])} c={C.first} />
+        </>}
+      </GeoMap>
+      <Svg>
+        <Keyword f={f} text="where was the eye?" at={[MX, 120]} s={T.key} appear={0} out={tRing - 20} />
+        <ColourBar x={MX} y={250} w={420} lut={LUT_DBZ} lo={0} hi={60} unit="dBZ" title="radar echo" o={oR} ticks={[{ v: 0, t: "0" }, { v: 30, t: "30" }, { v: 60, t: "60" }]} />
+        <SideCallout f={f} lines="eyewall ≈ 30 km radius" at={[MX, 120]} appear={tRing} out={tModel - 20} target={[PB.x + PB.w / 2 + ewR * 0.7, PB.y + PB.h / 2 - ewR * 0.7]} s={T.floor} c={C.gold} />
+        <Lbl x={MX} y={440} t="radar eye" c={C.key} s={T.floor} o={win(f, tBest, tModel - 20)} />
+        <SpeedBar x={MX} y={250} w={420} hi={55} o={oM} />
+        <Keyword f={f} text="model centre" at={[MX, 120]} s={T.key} c={C.first} appear={tModel} out={tRule - 20} />
+        <g opacity={win(f, tModel + 30, tRule - 20)}>
+          <circle cx={MX + 60} cy={470} r={12} fill="none" stroke={C.key} strokeWidth={4} />
+          <line x1={MX + 60} y1={470} x2={MX + 60 + 170 * Math.sin(S17D.brg * D2R)} y2={470 - 170 * Math.cos(S17D.brg * D2R)} stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" />
+          <circle cx={MX + 60 + 170 * Math.sin(S17D.brg * D2R)} cy={470 - 170 * Math.cos(S17D.brg * D2R)} r={12} fill={C.first} stroke={C.bg} strokeWidth={3} />
+          <Lbl x={MX + 120} y={420} t="radar eye" c={C.key} s={T.floor} />
+          <Lbl x={MX + 120} y={590} t={`≈ ${Math.round(S17D.d_eye)} km WSW: model`} c={C.gold} s={T.floor} />
+        </g>
+        <Lbl x={MX} y={650} t={`model: ${Math.round(S17D.pmin)} hPa`} c={C.first} s={T.floor} o={win(f, tP, tRule - 20)} />
+        <Lbl x={MX} y={720} t={`official estimate: ${S17D.best} hPa`} c={C.key} s={T.floor} o={win(f, tP + 30, tRule - 20)} />
+        <Lbl x={MX} y={790} t="a little off, a little weak" c={C.local} s={T.floor} o={win(f, tOff, tRule - 20)} />
+        <Keyword f={f} text="our rule" at={[MX, 120]} s={T.key} appear={tRule} />
+        <Lbl x={MX} y={430} t="where the eye is: radar, satellite" c={C.key} s={T.floor} o={fin(f, tR1)} />
+        <Lbl x={MX} y={510} t="winds: model, own centre" c={C.first} s={T.floor} o={fin(f, tR2)} />
+        <Lbl x={MX} y={590} t="never mixed" c={C.gold} s={T.key} o={fin(f, tR3)} />
+      </Svg>
+      <SourceBelow text={SRC.radar} pic={PB} w={1400} o={oR} name="s17 src r" />
+      <SourceBelow text={SRC.hrrr18} pic={PB} w={1400} o={oM} name="s17 src m" />
+    </Scene>
+  );
+};
+
+// ================================================================ the HRRR layer stack (s18, s19): 1 unit = 100 km, heights ×15
+const ZX = 15 / 100;
+const zs = (STK.z_km as number[]).map((z) => z * ZX);
+const ringPts = (r: number, z: number): V3[] => circ(r, z, 64);
+const StackBody: React.FC<{ f: number; lit: (i: number) => number; ringO: number; dashO: number; path?: number }> = ({ f, lit, ringO, dashO, path = 0 }) => {
+  const tex = (STK.levels as number[]).map((lv) => useTex(IMG(`cst_ur_${lv}.png` as "cst_ur_925.png"))); // eslint-disable-line react-hooks/rules-of-hooks
+  const H = STK.half_km / 100;
+  const layers: StackLayer[] = tex.map((t, i) => ({ tex: t, z: zs[i], o: lit(i) }));
+  const reveal = zs.map((_, i) => clamp((f - 4 - i * 6) / 12, 0, 1));
+  const top = zs[4];
+  const pth: V3[] = [[2.2, -1.6, zs[0] + 0.02], [0.45, -0.3, zs[0] + 0.02], [0.4, -0.25, top - 0.02], [2.2, -1.6, top - 0.02]];
+  return (
+    <group>
+      <LayerStack3D layers={f < 3 ? [] : layers} foot={{ x0: -H, x1: H, y0: -H, y1: H }} sep={1} reveal={reveal}
+        lines={zs.map((z) => ({ pts: ringPts(1, z + 0.01), color: C.first, px: 3, o: 0.9 * ringO }))} />
+      {[[-H, -H], [H, -H], [H, H], [-H, H]].map(([x, y], i) => <HRod3D key={`e${i}`} a={[x, y, 0]} b={[x, y, top + 0.05]} px={2} color={C.muted} o={0.6} />)}
+      <HArrow3D from={[-H, -H, 0]} to={[-H, -H, 16 * ZX + 0.2]} color={C.second} px={5} head={22} />
+      {[0, 3, 6, 9, 12, 15].map((km) => <HRod3D key={`t${km}`} a={[-H, -H, km * ZX]} b={[-H - 0.18, -H - 0.18, km * ZX]} px={3} color={C.muted} />)}
+      {(STK.dash_vt as number[][]).map((vts, li) => vts.map((vt, j) => {
+        const a = (j * Math.PI) / 4, p: V3 = [Math.cos(a), Math.sin(a), zs[li] + 0.02], L = (vt / 35) * 0.55;
+        const q: V3 = [p[0] - Math.sin(a) * L, p[1] + Math.cos(a) * L, p[2]];
+        return <group key={`${li}_${j}`}><HArrow3D from={p} to={q} color={C.key} px={4} head={14} o={0.9 * dashO * reveal[li]} /><Bead3D f={f} a={p} b={q} speed={vt} o={dashO * reveal[li]} /></group>;
+      }))}
+      {pth.slice(1).map((q, i) => <HArrow3D key={`p${i}`} from={pth[i]} to={q} color={C.gold} px={7} head={26} grow={clamp(path * 3 - i, 0, 1)} o={path > 0 ? 1 : 0} />)}
+    </group>
+  );
+};
+const S18: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s18_ian_stack");
+  const tLev = SS(k, 1), tHt = SS(k, 2), tFive = SS(k, 3), tSq = SS(k, 4), tLow = SS(k, 5), tNo = SS(k, 6), tRest = SS(k, 7), tCol = SS(k, 8), tRose = SS(k, 9), tBlue = SS(k, 10),
+    tPale = SS(k, 11), tTall = SS(k, 12);
+  const keys: OrbitKey[] = [{ f: 0, az: -100, el: 20, dist: 12.5, target: [0, 0, 0.75] }, { f: LEN(k) + 10, az: -76, el: 22, dist: 12.5, target: [0, 0, 0.75], linear: true }];
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [540, 400]);
+  const pr = hProjector(st, 1920, 1080, 0, 0);
+  const H = STK.half_km / 100;
+  const tagAt = (i: number) => pr.p([H, -H, zs[i]]);
+  const tTag = [tLow, AT(k, 7, "eight hundred"), AT(k, 7, "five hundred,"), AT(k, 7, "two hundred,"), AT(k, 7, "one hundred and fifty")];
+  const tags = ["925 hPa ≈ 0.7 km", "850 hPa ≈ 1.4 km", "500 hPa ≈ 5.8 km", "200 hPa ≈ 12.4 km", "150 hPa ≈ 14.2 km"];
+  return (
+    <Scene>
+      <HView3D st={st} x={0} y={0} w={1920} h={1080}>
+        <StackBody f={f} lit={() => 0.92} ringO={0} dashO={1} />
+      </HView3D>
+      <GlobeFrame id="s18k" zoom={1} right={1} name="s18 stack" />
+      <Svg>
+        {[0, 3, 6, 9, 12, 15].map((km) => { const q = pr.p([-H - 0.2, -H - 0.2, km * ZX]); return <Lbl key={km} x={q[0] - 10} y={q[1]} t={`${km}`} c={C.muted} s={T.floor} a="end" b={false} />; })}
+        <Lbl x={pr.p([-H - 0.2, -H - 0.2, 16 * ZX + 0.3])[0] - 10} y={pr.p([-H - 0.2, -H - 0.2, 16 * ZX + 0.3])[1] - 10} t="km" c={C.muted} s={T.floor} a="end" b={false} />
+        {tags.map((t, i) => { const q = tagAt(i); const y = [790, 700, 560, 300, 210][i];
+          return <g key={t} opacity={fin(f, tTag[i])}><Lbl x={1210} y={y} t={t} c={C.key} s={T.floor} />
+            <line x1={1196} y1={y} x2={q[0] + 8} y2={q[1]} stroke={C.gold} strokeWidth={3} opacity={0.8} /></g>; })}
+        <Keyword f={f} text="layer by layer" at={[1210, 120]} s={T.key} appear={0} out={tLev - 20} />
+        <Keyword f={f} text="pressure levels" at={[1210, 120]} s={T.key} appear={tLev} out={tCol - 20} />
+        <Lbl x={1210} y={410} t="square ≈ 500 km" c={C.local} s={T.floor} o={win(f, tSq, tCol - 20)} />
+        <Lbl x={1210} y={480} t="975 hPa: under the sea" c={C.local} s={T.floor} o={win(f, tNo, tRest - 20)} />
+        <URBar x={1210} y={360} w={420} o={fin(f, tCol) * fout(f, LEN(k) + 20)} />
+        <Keyword f={f} text="rose −: in · blue +: out" at={[1210, 120]} s={T.floor} appear={tRose} out={tPale - 20} />
+        <Keyword f={f} text="dark line: zero" at={[1210, 120]} s={T.floor} appear={tPale} out={tTall - 20} />
+        <Keyword f={f} text="heights drawn ×15" at={[1210, 120]} s={T.floor} appear={tTall} />
+      </Svg>
+      <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 790 }} w={1400} name="s18 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s19 the layers lit, bottom to top; orbit; one close look
+const S19: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s19_ian_layers_lit");
+  const tLow = SS(k, 1), tAvg = SS(k, 2), t15 = SS(k, 3), t6 = SS(k, 4), tTop = SS(k, 5), tSo = SS(k, 6), tOrbit = SS(k, 7), tLook = SS(k, 8);
+  const top = zs[4];
+  const keys: OrbitKey[] = [
+    { f: 0, az: -76, el: 22, dist: 12.5, target: [0, 0, 0.75] },
+    { f: tOrbit, az: -76, el: 22, dist: 12.5, target: [0, 0, 0.75] },
+    { f: Math.min(tOrbit + 150, tLook - 12), az: 4, el: 34, dist: 12.5, target: [0, 0, 0.75] },
+    { f: tLook, az: 4, el: 30, dist: 12.5, target: [0, 0, 0.75] },
+    { f: tLook + 45, az: -6, el: 6, dist: 6.8, target: [0, -1.6, top * 0.45] },
+    { f: tLook + 45 + 40, az: -2, el: 6, dist: 6.8, target: [0, -1.6, top * 0.5], linear: true },
+    { f: tLook + 45 + 40 + 45, az: -20, el: 24, dist: 12.5, target: [0, 0, 0.75] },
+    { f: LEN(k) + 10, az: -26, el: 24, dist: 12.5, target: [0, 0, 0.75], linear: true },
+  ];
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [540, 400]);
+  const pr = hProjector(st, 1920, 1080, 0, 0);
+  const sel = f < tLow ? null : f < t15 ? [0] : f < t6 ? [1] : f < tTop ? [2, 3] : f < tSo ? [4] : null;
+  const lit = (i: number) => (f < SS(k, 0) + 20 ? 0.92 : sel === null ? 0.85 : sel.includes(i) ? 1 : 0.4);
+  const ringR = zs.map((z) => ringPts(1, z).map((v) => pr.p(v)).reduce((a, b) => (b[0] > a[0] ? b : a)));
+  const colO = (1 - 0.5 * win(f, tOrbit, tLook - 20, 12)) * (1 - win(f, tLook - 4, tLook + 135, 12));
+  const vr = STK.vr100 as number[];
+  return (
+    <Scene>
+      <HView3D st={st} x={0} y={0} w={1920} h={1080}>
+        <StackBody f={f} lit={lit} ringO={fin(f, 6)} dashO={1} path={prog(f, tSo, tSo + 60)} />
+      </HView3D>
+      <GlobeFrame id="s19k" zoom={1} right={1} name="s19 stack" />
+      <Svg>
+        <Keyword f={f} text="read on the 100-km ring" at={[1210, 120]} s={T.floor} appear={0} out={tSo - 20} />
+        <g opacity={colO}>
+          <URBar x={1210} y={230} w={400} title={false} />
+          <SideCallout f={f} lines={`14.2 km: ≈ +${(Math.round(vr[4] * 2) / 2).toFixed(1)} m/s`} at={[1210, 420]} appear={tTop} target={ringR[4]} s={T.floor} c="#8db5e2" bend={20} />
+          <SideCallout f={f} lines={`12.4 km: ≈ +${Math.round(vr[3])}`} at={[1210, 500]} appear={t6} target={ringR[3]} s={T.floor} c="#8db5e2" bend={20} />
+          <SideCallout f={f} lines={`5.8 km: ≈ +${Math.round(vr[2])}`} at={[1210, 580]} appear={t6 + 20} target={ringR[2]} s={T.floor} c="#8db5e2" bend={10} />
+          <SideCallout f={f} lines="1.4 km: ≈ 0" at={[1210, 660]} appear={t15} target={ringR[1]} s={T.floor} c={C.local} bend={-10} />
+          <SideCallout f={f} lines={`0.7 km: ≈ ${nf(vr[0], 1)} m/s`} at={[1210, 740]} appear={tAvg} target={ringR[0]} s={T.floor} c={C.neg} bend={-20} />
+        </g>
+        <Lbl x={1210} y={120} t="in → up → out" c={C.gold} s={T.key} o={fin(f, tSo) * fout(f, tOrbit - 20)} />
+        <Keyword f={f} text="swing round" at={[1210, 120]} s={T.key} appear={tOrbit} out={tLook - 20} />
+      </Svg>
+      <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 790 }} w={1400} name="s19 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s20 the radius-height section: in, up and out (D20)
+const SB = { x: 170, y: 80, w: 820, h: 640 };
+export const secP = (r: number, z: number, B = SB, rMax = 200): Pt => [B.x + (r / rMax) * B.w, B.y + B.h - (z / 16) * B.h];
+export const SecAxes: React.FC<{ B?: typeof SB; rMax?: number; o?: number; rt?: number[] }> = ({ B = SB, rMax = 200, o = 1, rt = [0, 50, 100, 150, 200] }) => o <= 0 ? null : (
+  <g opacity={o}>
+    <rect x={B.x} y={B.y} width={B.w} height={B.h} fill="none" stroke={C.grid} strokeWidth={3} />
+    {rt.map((r) => <Lbl key={r} x={secP(r, 0, B, rMax)[0]} y={B.y + B.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} />)}
+    {[0, 4, 8, 12, 16].map((z) => <Lbl key={z} x={B.x - 14} y={secP(0, z, B, rMax)[1]} t={`${z}`} c={C.muted} s={T.floor} a="end" b={false} />)}
+    <Lbl x={B.x + B.w} y={B.y + B.h + 84} t="distance from the centre (km)" c={C.muted} s={T.floor} a="end" b={false} />
+    <Lbl x={B.x - 14} y={B.y - 30} t="height (km)" c={C.muted} s={T.floor} a="start" b={false} />
+  </g>
+);
+export const InUpOut: React.FC<{ f: number; P: (r: number, z: number) => Pt; rIn: [number, number]; rUp: number; zTop: number; o?: number }> = ({ f, P, rIn, rUp, zTop, o = 1 }) => {
+  if (o <= 0) return null;
+  const segs: [Pt, Pt][] = [[P(rIn[1], 0.8), P(rIn[0], 0.8)], [P(rUp, 1.6), P(rUp, zTop - 1.5)], [P(rIn[0] + 10, zTop - 0.5), P(rIn[1], zTop - 0.5)]];
+  return <g opacity={o}>{segs.map(([a, b], i) => <g key={i}><Arrow p={a} q={b} color={C.gold} w={8} head={30} />
+    <line x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={C.bg} strokeWidth={3} strokeDasharray="8 30" strokeDashoffset={-((f * 1.5) % 38)} /></g>)}</g>;
+};
+const S20: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s20_ian_curtain");
+  const tAvg = SS(k, 1), tDep = SS(k, 2), tSlice = SS(k, 3), tName = SS(k, 4), tCol = SS(k, 5), tSea = SS(k, 6), tMin = SS(k, 7), tTop = SS(k, 8), tLines = SS(k, 9), tVt = SS(k, 10),
+    tWeak = SS(k, 11), tMust = SS(k, 12), tEw = SS(k, 13), tIUO = SS(k, 14), tMore = SS(k, 15);
+  const oSec = fin(f, tSlice);
+  const ringE = 1 - prog(f, tAvg, tAvg + 70);
+  const vtl = SEC.vt_lines as { level: number; pts: number[] }[];
+  const vlab = SEC.vt_labels as { level: number; r: number; z: number }[];
+  const mn = secP(SEC.min[1], SEC.min[2]), mxp = secP(SEC.max[1], SEC.max[2]), vtp = secP(SEC.vtmax[1], SEC.vtmax[2]);
+  return (
+    <Scene>
+      <Svg>
+        <g opacity={fout(f, tSlice - 6) * fin(f, 0, 10)}>
+          <ellipse cx={580} cy={420} rx={360 * ringE + 6} ry={110 * ringE + 6} fill="none" stroke={C.first} strokeWidth={5} />
+          {Array.from({ length: 12 }, (_, i) => { const a = (i * 2 * Math.PI) / 12; return <circle key={i} cx={580 + 360 * ringE * Math.cos(a)} cy={420 + 110 * ringE * Math.sin(a)} r={7} fill={C.first} />; })}
+          <circle cx={580} cy={420} r={14} fill={C.gold} opacity={fin(f, tDep)} />
+          <Lbl x={580} y={600} t="one ring → one point (r, z)" c={C.key} s={T.floor} a="middle" o={fin(f, tDep)} />
+        </g>
+        <g opacity={oSec}>
+          <image href={IMG("cst_sec_ian.png")} x={SB.x} y={SB.y} width={SB.w} height={SB.h} preserveAspectRatio="none" />
+          {vtl.map((L, i) => <path key={i} d={poly(Array.from({ length: L.pts.length / 2 }, (_, j) => secP(L.pts[2 * j], L.pts[2 * j + 1])))} fill="none" stroke="#1a1a24"
+            strokeWidth={3.5} opacity={fin(f, tLines)} />)}
+          {vlab.map((L, i) => { const q = secP(L.r, L.z); return <Lbl key={i} x={q[0]} y={q[1]} t={`${L.level}`} c="#1a1a24" s={T.floor} a="middle" o={fin(f, tLines + 10)} />; })}
+          <SecAxes />
+          <line x1={secP(25, 0)[0]} y1={SB.y + SB.h - 4} x2={secP(25, 0)[0]} y2={SB.y + SB.h - 40} stroke={C.first} strokeWidth={8} opacity={fin(f, tWeak)} />
+          <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tMin)} />
+          <circle cx={mxp[0]} cy={mxp[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tTop)} />
+          <circle cx={vtp[0]} cy={vtp[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, tVt)} />
+          <InUpOut f={f} P={(r, z) => secP(r, z)} rIn={[30, 170]} rUp={40} zTop={15.5} o={fin(f, tMust)} />
+        </g>
+        <Keyword f={f} text="average round each ring" at={[MX, 120]} s={T.key} appear={0} out={tSlice - 20} />
+        <Keyword f={f} text="radius-height section" at={[MX, 120]} s={T.key} appear={tName} out={tMust - 20} />
+        <URBar x={MX} y={250} w={420} o={fin(f, tCol)} />
+        <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 540]} appear={tMin} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
+        <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 400]} appear={tTop} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
+        <SideCallout f={f} lines={`u_θ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 460]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
+        <Lbl x={MX} y={620} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
+        <Keyword f={f} text="must rise in between" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tIUO - 20} />
+        <Lbl x={MX} y={460} t="rises in the eyewall" c={C.key} s={T.floor} o={fin(f, tEw)} />
+        <Keyword f={f} text="in, up and out" at={[MX, 120]} s={T.key} c={C.gold} appear={tIUO} out={tMore - 20} />
+        <Keyword f={f} text="more: How tropical cyclones form" at={[MX, 120]} s={T.floor} appear={tMore} />
+      </Svg>
+      <TeX s={EQ_S20} x={MX} y={330} size={50} o={win(f, tAvg, tSlice + 40)} />
+      <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 100 }} w={1400} o={oSec} name="s20 src" />
+    </Scene>
+  );
+};
+
+export const SCENES_B: Record<string, React.FC> = {
+  s09_dtheta_dt: S09, s10_position_arrow: S10, s11_velocity_on_ring: S11, s12_acceleration: S12, s13_acceleration_numbers: S13, s14_steady_but_turning: S14,
+  s15_cylinder: S15, s16_three_parts: S16, s17_ian_check: S17, s18_ian_stack: S18, s19_ian_layers_lit: S19, s20_ian_curtain: S20,
+};
+void [boxAt, mix, GO];
+
