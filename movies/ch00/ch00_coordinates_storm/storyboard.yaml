@@ -1,0 +1,3202 @@
+# ch00_coordinates_storm storyboard v1 (movie-director, 2026-11-05). Part 2 of the #5 split (#5b). S<k> = sentence k of the
+# scene (0-based, as AT(k, ...) in the TSX); AT(k, 'words') a phrase inside it. House style movies/HOUSE_STYLE.md binding (no
+# headings except s00, keywords only, no boxes, no references or badges, 44-px floor, caption band empty, source line + colour
+# bar on data frames). Equation provenance (vallis_eq, page_png) is for QA only and never drawn. calc_rows = every other LaTeX
+# line drawn in the scene (CalcStack rows). Times MEASURED (tools/tts.py dry run, af_bella x 1.0). Data follow
+# reports/data/ch00_coordinates_research.md (data_block, data_products).
+id: ch00_coordinates_storm
+title: 'Coordinates, Part 2 — Inside a tropical cyclone: turning arrows and cylindrical coordinates'
+title_card:
+  line1: Coordinates · Part 2
+  line2: Inside a tropical cyclone
+  subtitle: turning arrows and cylindrical coordinates
+  spoken: short (s00 sentence only)
+version: 1
+concepts:
+- 'how r-hat changes: its tip slides delta-theta along theta-hat on the unit circle (Kundu App. B §B.5)'
+- 'the slopes of cosine and sine (owned here): d cos/d theta = -sin, d sin/d theta = cos'
+- d r-hat/d theta = theta-hat and d theta-hat/d theta = -r-hat, from scratch (Kundu App. B §B.5)
+- the product rule for a number times an arrow (owned here)
+- d theta/dt = v/r from the arc rule; velocity = rate of change of position, r r-hat -> v theta-hat
+- centripetal acceleration -(v^2/r) r-hat; a steady speed with a turning direction is an acceleration
+- cylindrical coordinates (r, theta, z); u = u_r r-hat + u_theta theta-hat + w z-hat; only r-hat, theta-hat turn
+- 'application: Hurricane Ian in 3-D (radar eye vs model centre; HRRR layer stack; the ring-average radius-height section: in, up, out)'
+- 'the general term tropical cyclone (hurricane, cyclone = regional names); two storms with two roles: Ian (detailed 3-D winds, coast, surge)
+  and Amphan (another ocean, same picture; floods)'
+- 'application: Cyclone Amphan (Bay of Bengal, 2020): eye, ERA5 ring means, inflow angle, section'
+- the wind onshore at a coast (numbers in Part 4); storm surge and its sign flip; tide gauges as the record of Ian's surge
+- 'before/after imagery: Ian (Sentinel-2, aerial) and Amphan (Sentinel-1 new water, 147 km2)'
+target_duration_s: 2481.95
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: Chapter 0 series (plan v6)
+  position: 8
+  plan_id: '#5b'
+  previous: ch00_coordinates_flat (#5a, pos 7)
+  next: ch00_coordinates_sphere (#5c, pos 9)
+  split_plan: movies/ch00/ch00_coordinates/split_plan.md §2c
+  archive: movies/ch00/ch00_coordinates (build 1, unpublished archive)
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py)'
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    style: eyewall-spiral (NEW style to add to tools/sound/styles.py; spec below)
+    spec: D minor (Dorian colour), 6/8 at 76 bpm; a low cello-like ostinato that circles root-fifth-octave-fifth (the ring), a soft tremolo string
+      pad that swells every 8 bars (the eyewall), a sparse high electric-piano figure stepping up a third every 4 bars (rising air), a faint filtered-noise
+      wind bed (-36 LUFS); restrained, not dramatic
+    runner_up: storm-tense with a new seed (only if no other movie uses storm-tense; check tools/sound usage)
+    seed: 31
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail
+    note: Part 1 = compass-orbit; Parts 3-5 need their own styles (HOUSE_STYLE §8)
+  effects_candidates:
+  - scene: s15_cylinder
+    kind: wind_strong_far
+    intensity: 0.1
+    shows: the streak families (S2-S4)
+  - scene: s27_surge
+    kind: waves_breaking
+    intensity: 0.12
+    shows: the onshore push at the beach (S0-S1)
+  - scene: s27_surge
+    kind: water_draining
+    intensity: 0.1
+    shows: the Saint Petersburg gauge dropping (S8)
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/dryrun6
+  audio_s: 2479.45
+  cues: 602
+  warnings:
+  - 's18_ian_stack s13: 17.2 chars/s > 17.0 (slow the speed or shorten)'
+  sentences: 395
+  words: 5900
+  words_per_minute_overall: 142.6
+conventions:
+  polar angle: theta from east, anticlockwise as seen from above; compass bearing from north, clockwise as seen from above; wind direction = 'from'
+  spoken symbols: '''r hat'', ''theta hat'', ''delta theta'', ''d r hat by d theta'', ''d theta by d t'', ''v squared over r'', ''u sub r'', ''u
+    sub theta'', ''w'', ''z hat'', ''x hat prime''; never a lone ''a'''
+  hemisphere: 'Ian and Amphan are northern hemisphere: cyclonic = anticlockwise seen from above'
+  radial sign: u_r < 0 inflow (towards the centre), > 0 outflow
+  centres: radar/satellite pictures use the radar eye (26.552 N, 82.278 W); every wind number uses the model's own calm centre (HRRR 10-m wind
+    minimum 26.506 N, 82.441 W); never both on one data picture (research §1c)
+colour_contract: 'unit vectors orange (r-hat, theta-hat, z-hat, x-hat'', y-hat''); the measured arrow (position, velocity, wind) teal with moving
+  dashes when it is a wind; inward acceleration and inflow rose with a ''−'' glyph; u_r field: diverging rose (−) ↔ pale ↔ blue (+), symmetric,
+  bold dark zero contour, no hatch; u_theta contours dark; tangential dashes on the stack warm white; pressure-force arrow orange, Earth''s-spin
+  push violet (term colours); gold for pointers, links, wedges and ''same'' ticks; slate for the ''books write'' form and the easy-number rows.'
+data_block:
+  ian:
+    storm: Hurricane Ian (AL092022)
+    time_utc: 2022-09-28T18:00 (stack, section, check); 2022-09-28T20:00 (coast, surge)
+    landfall: Cayo Costa, SW Florida, about 19:05 UTC 28 Sep 2022
+    centre_model:
+      lat: 26.506
+      lon: -82.441
+      method: HRRR 10-m wind-speed minimum (the model's calm centre; research §1c)
+      ring_25km_10m:
+        vt: 34.78
+        vr: -13.3
+        inflow_angle_deg: 20.9
+    centre_radar:
+      lat: 26.552
+      lon: -82.278
+      method: NEXRAD KTBW 0.5-deg, >= 35 dBZ eyewall circle fit, 18:01:48 UTC
+      eyewall_radius_km: 29.7
+    centre_offset: model centre 17.0 km from the radar eye, bearing 252.5 deg (WSW)
+    msl_min_hPa:
+      hrrr: 960.3
+      best_track: 938
+    stack:
+      product: HRRR 3-km analysis, pressure levels (hrrrzarr prs, 2022-09-28 18z anl)
+      levels_hPa:
+      - 925
+      - 850
+      - 500
+      - 200
+      - 150
+      heights_km:
+      - 0.7
+      - 1.43
+      - 5.8
+      - 12.44
+      - 14.25
+      ring_km: 100
+      vr_ring_ms:
+      - -6.5
+      - 0.5
+      - 0.9
+      - 0.9
+      - 6.6
+      vt_ring_ms:
+      - 32.7
+      - 33.4
+      - 29.3
+      - 18.1
+      - 12.2
+      why_not_975: 'p_sfc < 975 hPa near the core (HRRR msl min 960.3): 975 extrapolated below ground; masked in the section'
+      colour_range_ms:
+      - -16
+      - 16
+    section:
+      levels_hPa:
+      - 975
+      - 925
+      - 850
+      - 700
+      - 500
+      - 300
+      - 200
+      - 150
+      - 125
+      radii_km: 5-200 every 5
+      min_vr:
+      - -15.7
+      - 30 km, 925 hPa (0.7 km)
+      max_vr:
+      - 8.9
+      - 150 km, 125 hPa (15.3 km)
+      max_vt:
+      - 55.0
+      - 30 km, 850 hPa (1.4 km)
+      w: 'NOT used: the HRRR analysis VVEL in the research subset is ≈ 0 everywhere (|omega| <= 0.02 Pa/s); rising is inferred and said as such'
+    coast_for_part4:
+      note: D21-D22 moved to Part 4; kept here for the shared CHECK module
+      A_Naples:
+      - 26.099
+      - -81.801
+      B_Englewood:
+      - 26.922
+      - -82.354
+      dy_km: 91.5
+      dx_km: -55.0
+      lean_deg: 31.0
+      bearing_deg: 329
+      fmb_point:
+      - 26.45
+      - -81.95
+      u_fmb:
+      - 22.232
+      - 24.293
+      speed: 32.93
+      from_deg: 222.5
+      along: 9.37
+      across: -31.57
+      stp_point:
+      - 27.76
+      - -82.63
+      u_stp:
+      - -10.25
+      - -16.0
+      stp_coast_bearing: 355.4
+      stp_across: 11.5
+    gauges:
+      8725520 Fort Myers (upriver):
+        residual_peak_m: 2.209
+      8726520 St. Petersburg:
+        residual_min_m: -1.755
+    nhc_tcr: Fort Myers Beach 10-15 ft above ground level (cited, AL092022 TCR)
+  amphan:
+    storm: Cyclone Amphan (IBTrACS 2020136N10088)
+    time_utc: 2020-05-20T06:00 (≈ 4 h before landfall)
+    landfall: Sundarbans, West Bengal-Bangladesh border, 10-12 UTC 20 May 2020 (IMD); IBTrACS 21.4 N 88.1 E at 09 UTC
+    closest:
+      Kolkata_km: 17
+      Satkhira_km_W: 45
+      Khulna_km_W: 78
+    peak: IMD 130 kt (3-min), 920 hPa, 18 May (super cyclonic storm; first in the Bay since 1999, IMD); JTWC 140 kt (1-min)
+    best_track_06utc:
+      wmo_kt: 90
+      kmh: 166.7
+      hPa: 956
+      agency: IMD (3-min mean)
+    era5_centre:
+    - 20.657
+    - 87.796
+    era5_msl_min_hPa: 966.9
+    ring_100km_10m:
+      vt: 20.1
+      vr: -6.0
+      inflow_angle_deg: 16.6
+    section:
+      min_vr:
+      - -11.1
+      - 100 km, 975 hPa
+      max_vr:
+      - 6.2
+      - 200 km, 150 hPa
+    eye_image: MODIS Terra true colour 18 May 2020 (GIBS), pinhole eye
+    flood_pair:
+      sensor: Sentinel-1 GRD VV
+      before: '2020-05-16'
+      after: '2020-05-22'
+      orbit: 150
+      bbox_wsen:
+      - 88.9
+      - 22.1
+      - 89.6
+      - 22.5
+      water_km2:
+      - 648.4
+      - 714.4
+      new_water_km2: 147.0
+      threshold: VV < -18 dB after a 30-m focal median
+  flood_visuals:
+    status: PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md §v3); user decision 2026-11-05
+    rules:
+    - Ian gets NO swipe unless its inland flooding shows clearly; it keeps the gauge chart (s27-s28)
+    - ONE plain false-colour before/after swipe (captests A5 look), NO inundation overlay, for the cyclone event that shows the flood most clearly
+      (scout picks; may not be Amphan)
+    - the flight (s29) goes to that event
+    provisional:
+      event: Cyclone Amphan, May 2020
+      swipe: MODIS 7-2-1, Terra 16 May vs Aqua 29 May 2020, 88.05-89.95 E, 21.55-23.0 N
+      shelf: under 20 m for about 33 km at 89.0 E (v2 §2)
+    slots:
+      s29:
+      - EVENT
+      - BASIN
+      - LANDFALL_PLACE
+      - SHELF_KM
+      s30:
+      - SENSOR
+      - BANDS
+      - BEFORE
+      - AFTER
+      - WHAT_SHOWS
+      s28:
+      - only if a swipe is added
+    swap_rule: fill the slots from §v3; re-voice only slot sentences (tools/tts.py splice); if the event is not Amphan, s29 S1 and S6 name the
+      new event and the s21-s24 Amphan scenes stay as the 3-D comparison storm; refill maths_skip and chapter_marks times after the final TTS
+  shared_with_part1: ring means 34.78 / -13.30 m/s at 25 km about the HRRR calm centre (Part 1 data_block after its re-centring); one _coords_common.py
+    CHECK module
+data_products:
+- key: HRRR-zarr-prs-ian2022 (NEW)
+  what: u, v, z (and w) on 975-125 hPa, 9 levels
+  time: 2022-09-28 18z anl
+  route: NEW fluidpy.data.hrrr.fetch_fields(store='prs', levels=…)
+  scenes:
+  - s00
+  - s18
+  - s19
+  - s20
+  - s24
+  - s25
+  research_file: R/ian_hrrr_prs_18z.nc
+- key: HRRR-zarr-ian2022 (build 1)
+  what: 10-m u, v, msl
+  time: 18 and 20 UTC 28 Sep 2022
+  route: fluidpy.data.hrrr.fetch_fields
+  scenes:
+  - s02
+  - s09
+  - s13
+  - s17
+  - s26
+  - s27
+  - s28
+- key: NEXRAD-L2-KTBW-ian2022 (NEW)
+  what: 0.5-deg reflectivity
+  time: 18:01:48 UTC 28 Sep 2022
+  route: NEW fluidpy.data.nexrad (unidata-nexrad-level2, anonymous)
+  scenes:
+  - s17
+- key: GOES16-ABI-M1-ian2022 (NEW)
+  what: mesoscale M1 C01-C03 (0.5-km C02) true colour
+  time: 18:01 UTC 28 Sep 2022
+  route: fluidpy.data.goes.fetch_abi('ABI-L2-CMIPM', …)
+  scenes:
+  - s15
+  - s16
+- key: IBTrACS-v04r01 (NA, NI)
+  what: best tracks
+  time: Ian 18 UTC 28 Sep; Amphan 16-21 May 2020
+  route: fluidpy.data.ibtracs.storm_table
+  scenes:
+  - s17
+  - s21
+  - s23
+  - s29
+- key: ERA5-ARCO-amphan2020 (NEW)
+  what: msl, 10-m u, v; u, v, w, z on 10 levels
+  time: 2020-05-20T06
+  route: fluidpy.data.era5_arco.fetch_box + vertical_ring_product
+  scenes:
+  - s23
+  - s24
+  research_file: R/bob_era5_amphan.nc
+- key: GIBS MODIS Terra (NEW)
+  what: true colour 250 m
+  time: '2020-05-18'
+  route: fluidpy.data.gibs.fetch_wms
+  scenes:
+  - s22
+- key: 'PENDING flood_visuals v3: ONE false-colour pair (provisional GEE-MODIS-721-amphan2020)'
+  what: plain before/after pair, no overlay
+  time: provisional Terra 2020-05-16 vs Aqua 2020-05-29
+  route: NEW fluidpy.data.gee or fluidpy.data.gibs
+  scenes:
+  - s29
+  - s30
+- key: GEE-ETOPO1-bay / ETOPO 2022 15in + GEE-MCD43A4-bay2020 (NEW)
+  what: 'Bay of Bengal flight patch: depth tint, 20/200 m isobaths, NBAR land'
+  time: NBAR 1-8 Feb 2020
+  route: fluidpy.data.etopo + NEW fluidpy.data.gee
+  scenes:
+  - s29
+- key: (dropped by the user 2026-11-05) S1 close-up + new-water overlay
+  what: not used
+  time: —
+  route: —
+  scenes: []
+- key: NOAA CO-OPS (build 1)
+  what: water level and predictions, 8725520, 8726520
+  time: 27-30 Sep 2022
+  route: fluidpy.data.coops.fetch_water_level
+  scenes:
+  - s27
+  - s28
+- key: ETOPO 2022
+  what: shelf profile WSW of Fort Myers Beach; flight isobaths
+  time: —
+  route: fluidpy.data.etopo
+  scenes:
+  - s27
+  - s29
+- key: Natural Earth 10 m + NASA BMNG
+  what: coast, borders, places; globe
+  time: —
+  route: fluidpy.data.naturalearth, nasa_bmng
+  scenes:
+  - s21
+  - s26
+guards:
+  review_1:
+  - 'Must 1 (s15 GOES plate: unlit, centred on the radar eye, contrast stretched, gold eyewall ring, thick cylinder edges)'
+  - 'Must 2 (KaTeX tags only: u_r, u_theta, w; s16)'
+  - 'Must 3 (superseded: height axis + per-layer tags + linked readouts, s18-s19)'
+  - Must 9 ('radius 1' inside the frame, s03)
+  - Must 15 (colour bar + dated credit on every data frame, s26-s28)
+  - Should 2 (KaTeX hats)
+  - Should 11 ('Fort Myers (upriver)', 'above the ground', s27-s28)
+  - 'Should 12, 13 (''minus thirty two''), 15 (coast_segment): moved to Part 4 with D21-D22'
+  - Should 14 (end card 24-px gap)
+  - Should 18 (an opening keyword from frame 0 in every scene)
+  fix_loop_1:
+  - GOES crop centred on the eye (now the RADAR eye), contrast-stretched, unlit
+  - GeoMap body in an overflow-hidden div; SourceBelow, never a bare SourceLine
+  - 'R3F: no lower-case SVG tags in a three tree'
+  - 'halves: picture from frame 0; opening keyword from the scene''s first words'
+  - keyword swaps >= 8 frames apart; cameras <= 90 deg/s eased; one colour bar per picture, beside it; a source line under every data picture
+  - the builder checks raw TeX, edge clipping, label-on-KaTeX, link crossings, text over a limb, axis through a word on its own stills
+  - 'assets staged into movies/public before any bundle; one Remotion/Chrome job at a time; TEMP/TMP on G:'
+  research:
+  - no hatch on u_r layers; diverging map centred on 0, symmetric, bold zero contour (stripes = our own hatch, research §1b)
+  - never two storm centres on one data picture (research §1c)
+  - 975 hPa masked below ground near the core (research §1d)
+  - layer textures >= 1024 px (HRRR 3 km)
+honesty_notes:
+- 's17: the model''s calm centre is 17 km WSW of the radar eye and the model is weaker (960 vs 938 hPa); said, and the two centres are never drawn
+  on one data picture.'
+- 's18-s20: one centre (the model''s 10-m calm centre) for every level; the vortex tilt is ignored (research §1d: 500-hPa dipole); ring means
+  at 100 km and the section average it out.'
+- 's20, s24: ''the air must rise in between'' is inferred from inflow below and outflow above (mass continuity, said in words); the HRRR analysis
+  vertical velocity is not used (≈ 0 in the subset).'
+- 's20: the 10-m spin (34.8 m/s at 25 km) is weaker than the 850-hPa spin (55 m/s at 30 km): said as the sea slowing the air near the surface.'
+- 's21: ''first super cyclonic storm in the Bay since 1999'' is IMD''s statement (cited in the manifest); intensity classes are left to U15.'
+- 's23: ERA5 cannot resolve Amphan''s eye (0.25-deg boxes vs a pinhole eye); the ring is at ERA5''s strongest-spin radius (100 km), not the eyewall;
+  ERA5 is far weaker than the official 90 kt (said).'
+- 's23: Ian (HRRR, 25 km) and Amphan (ERA5, 100 km) inflow angles come from different products and radii; compared as a shape, not a speed.'
+- 's26: the onshore wind is the nearest HRRR grid point at 20 UTC (33 m/s from 222 deg); its along/across split is derived in Part 4.'
+- 's27: the inverse-barometer rule (≈ 1 cm per hPa) is a standard approximation; the Fort Myers gauge is upriver (2.2 m above predicted tide),
+  the NHC value is above the ground at the beach (3-4.6 m).'
+- 's28: no satellite saw Ian''s surge (said and shown as a keyword); the gauges are the measurement; the chart spans 36 h and the gauge datum
+  differs from the NHC above-ground value (shown beside, not on the axis).'
+- 's30 (PENDING v3): one plain false-colour pair, same sensor and stretch, dates on screen; it shows what the surge left, not the surge (said);
+  no inundation overlay (user).'
+- 's29: the camera flight and onshore chevrons are illustrative; the track is IBTrACS.'
+- Exaggerations (small turns drawn larger, vertical ×15 / ×4 / ×50, time compression of laps and streaks, illustrative streak families and in-up-out
+  arrows) are listed per scene and in the manifest, not badged (HOUSE_STYLE §5).
+quiz_hook: 'A parcel circles a southern-hemisphere cyclone''s centre at 30 m/s on a 30-km ring. Which way does it go round, seen from above, and
+  what are the size and direction of its acceleration? (Clockwise; v²/r = 900/30 000 = 0.03 m/s², towards the centre: the direction of −r̂ does
+  not depend on the hemisphere.)'
+headings_exception: s00_title only; the maths-skip chips (user rule 2026-11-05) are the one allowed on-screen chip
+maths_skip:
+- block: B1
+  what: how r-hat and theta-hat turn (D12-D14)
+  intro: s03_tip_on_circle S0
+  chip: every step · not needed for the weather intuition · skip to 11:35
+  chip_on: 155.275
+  chip_off: end of the intro sentence + 4 s
+  skip_to_s: 694.55
+  skip_to: '11:35 (provisional: refill after the final TTS)'
+  takeaway: 's08_product_rule S0: ''If you skipped, here''s what to keep: as the angle grows, r-hat swings towards theta-hat, and theta-hat towards
+    minus r-hat'''
+- block: B2
+  what: product rule -> velocity -> acceleration (D15-D18)
+  intro: s08_product_rule S1-S2
+  chip: every step · not needed for the weather intuition · skip to 19:49
+  chip_on: 705.65
+  chip_off: end of the intro sentence + 4 s
+  skip_to_s: 1189.45
+  skip_to: '19:49 (provisional: refill after the final TTS)'
+  takeaway: 's13_acceleration_numbers S0: ''If you skipped, here''s what to keep: a parcel going round at a steady speed v always accelerates
+    towards the centre by v squared over r'''
+chapter_marks:
+- t: 0:00
+  t_s: 0.3
+  scene: s00_title
+  name: title
+- t: '1:28'
+  t_s: 88.15
+  scene: s02_part1_recap
+  name: Part 1 in a minute
+- t: '2:35'
+  t_s: 155.275
+  scene: s03_tip_on_circle
+  name: how r-hat turns (maths block 1)
+- t: '11:35'
+  t_s: 694.55
+  scene: s08_product_rule
+  name: product rule to acceleration (maths block 2)
+- t: '19:49'
+  t_s: 1189.45
+  scene: s13_acceleration_numbers
+  name: how big, and why a steady speed accelerates
+- t: '22:54'
+  t_s: 1373.725
+  scene: s15_cylinder
+  name: 'a tall storm: cylindrical coordinates'
+- t: '24:39'
+  t_s: 1478.95
+  scene: s17_ian_check
+  name: is Ian shown right?
+- t: '25:56'
+  t_s: 1556.325
+  scene: s18_ian_stack
+  name: Ian layer by layer
+- t: '28:25'
+  t_s: 1705.475
+  scene: s20_ian_curtain
+  name: in, up and out
+- t: '30:19'
+  t_s: 1818.9
+  scene: s21_amphan_intro
+  name: 'second storm: Cyclone Amphan'
+- t: '33:50'
+  t_s: 2030.475
+  scene: s25_why_cylindrical
+  name: why cylindrical coordinates
+- t: '34:42'
+  t_s: 2081.75
+  scene: s26_onshore
+  name: back to the coast
+- t: '35:28'
+  t_s: 2128.375
+  scene: s27_surge
+  name: storm surge
+- t: '37:02'
+  t_s: 2221.55
+  scene: s28_ian_record
+  name: Ian's surge, measured by gauges
+- t: '37:43'
+  t_s: 2263.15
+  scene: s29_flood_flight
+  name: a flood seen from space
+- t: '39:35'
+  t_s: 2375.05
+  scene: s31_recap
+  name: to sum up
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 15.45
+  sentence_times:
+  - - 0.3
+    - 14.65
+  beat: opening title (HOUSE_STYLE §3)
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, three tiers (user title rule 2026-11-05): ''Coordinates · Part 2'' (68 px, warm
+    white), then RiseText ''Inside a tropical'' / ''cyclone'' (128-150 px as fits, weight 800, TitleGradient teal -> gold; letters rise 24 px
+    over 8 frames, 2-frame stagger), then the subtitle on two lines at 68 px: ''turning arrows and'' / ''cylindrical coordinates'' (warm white,
+    ''cylindrical'' teal); the two storms appear in the right-hand animation, not in the title; ''made easy'' (68 px) pulses x1.06 on AT(0,''the
+    easy way''); >= 50 px clear of the animation; nothing below 44 px. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(0,''meteorology'')):
+    a ring with an air parcel (teal dot) gliding round anticlockwise; its velocity arrow v theta-hat (teal) turns with it; every 0.5 s a faint
+    copy of the arrow is left behind, then the copies slide tail to tail and a short rose arrow pointing at the centre grows (the inward acceleration).
+    Part B (12-frame cross-fade on ''meteorology''): Ian''s radius-height section (data_block.ian.curtain) in miniature, in-up-out arrows moving;
+    its source line below the column (y <= 860). Poster = frame 200.'
+  voiceover: 'In this video, we''ll learn how turning arrows and cylinders work the easy way, and see how meteorology uses them to look inside
+    a tropical cyclone: its spin, its winds in three dimensions, and its storm surge.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar; fluidpy.diag.cyclone.storm_relative_wind (ring means by level, curtain)
+    params:
+      v_ms: 34.8
+      r_km: 25
+      storm: data_block.ian
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero,
+      ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt, ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact
+  exaggeration:
+  - title animation time compressed (one lap in about 4 s)
+  - arrow lengths in the title not to scale
+  kind: title
+  data: data_block.ian (curtain, mini)
+  tool: house title kit + Remotion SVG
+  why: the movie's two halves on frame 0 (turning arrows; a hurricane in 3-D)
+  related: []
+  feedback:
+  - U-CO-101
+  layout: 'Title frame; the curtain mini-picture has its source line ''Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC'' below it (>= 28 px). No
+    other text.'
+- id: s01_hook
+  t:
+  - 15.45
+  - 88.15
+  sentence_times:
+  - - 15.45
+    - 26.925
+  - - 27.275
+    - 29.175
+  - - 29.525
+    - 34.125
+  - - 34.475
+    - 40.225
+  - - 40.575
+    - 48.775
+  - - 49.125
+    - 52.775
+  - - 53.125
+    - 59.575
+  - - 59.925
+    - 64.2
+  - - 64.55
+    - 75.125
+  - - 75.475
+    - 87.35
+  beat: hook question (prediction asked, not answered)
+  visual: 'Full width from frame 0. Left x 80-1000: the 25-km ring (slate) round a small eye glyph; the parcel (teal dot) circling at one steady
+    rate with its velocity arrow (teal, moving dashes) and a speedometer glyph that never moves (''35 m/s''). S1 on AT(1,''accelerating''): keyword
+    ''accelerating?'' (54 px, warm white) in the maths zone x 1060-1840, with a gold question mark that stays until s14. S2: keyword ''your guess:
+    yes · no'' (nothing chosen). S3 on AT(3,''tropical cyclone''): keyword ''tropical cyclone'' (54 px); S4: two lines under it ''hurricane: near
+    America'' / ''cyclone: near India and Bangladesh'' with a gold ''= one kind of storm'' bracket. S5 on AT(5,''six parts''): six small code-drawn
+    thumbnails under both zones, above the caption band (grid, storm cylinder, globe, east-north-up arrows, a great-circle route, a world map);
+    the second lit, the others at 35 %. S6: the parcel''s r-hat, theta-hat appear and visibly turn. S7-S9: the left picture cross-fades to a mini
+    world outline with two storm markers; S8 ''Hurricane Ian · 2022'' lights over Florida with its role keyword ''winds in 3-D · storm surge'';
+    S9 ''Cyclone Amphan · 2020'' lights over the Bay of Bengal with ''another ocean · floods''.'
+  voiceover: Picture an air parcel, a small volume of air that moves with the flow, going round the eye of a tropical cyclone at a steady speed,
+    never faster and never slower. Is it accelerating? Hold on to your guess, because we'll answer it with arrows that turn. A tropical cyclone
+    is a huge spinning storm that forms over a warm ocean. Near America it's called a hurricane, and near India and Bangladesh it's called a cyclone,
+    but it's the same kind of storm. This is the second of seven parts on coordinates. In this part, we find out exactly how the arrows of polar
+    coordinates change as we go round. Then we look inside two real storms, each with its own job. Hurricane Ian, which hit Florida in twenty
+    twenty two, has the most detailed wind data, so it shows us the storm in three dimensions, and its storm surge. Cyclone Amphan, which hit
+    India and Bangladesh in twenty twenty, shows that the same picture fits a storm in another ocean, and it shows us the floods a storm leaves
+    behind.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar
+    params:
+      v_ms: 34.8
+      r_km: 25
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections
+  exaggeration:
+  - the parcel's lap is time compressed (75 min in about 8 s)
+  kind: diagram
+  data: —
+  tool: Remotion SVG
+  why: 'hook: a prediction question the movie answers in s12-s14; the general term ''tropical cyclone'' and the two storms'' roles'
+  related:
+  - &id001
+    movie: '#5a'
+    slug: ch00_coordinates_flat
+    covers: polar coordinates, r-hat, theta-hat, the 90-deg rule, Ian's ring
+  feedback:
+  - U-CO-101
+  - U-CO-021
+  layout: Thumbnails are drawings, not cards (no boxes). Picture from frame 0; opening keyword from frame 0 (Should 18).
+- id: s02_part1_recap
+  t:
+  - 88.15
+  - 155.275
+  sentence_times:
+  - - 88.15
+    - 91.45
+  - - 91.8
+    - 99.825
+  - - 100.175
+    - 108.7
+  - - 109.05
+    - 111.675
+  - - 112.025
+    - 117.4
+  - - 117.75
+    - 127.525
+  - - 127.875
+    - 136.075
+  - - 136.425
+    - 146.3
+  - - 146.65
+    - 150.9
+  - - 151.25
+    - 154.475
+  beat: opening recap of Part 1 (<= 60 s)
+  visual: 'Left: the Part 1 polar grid (rings, spokes) with the balloon at (3, 4) km: r and the theta arc (slate) on S1; the arc rule on S2 (a
+    ring with an arc highlighted, ''s = r theta''); r-hat and theta-hat (orange, KaTeX TipLabels) at the balloon on S4-S5 with the gold +90 deg
+    arc; S6: the two shadow bands of a wind arrow (u_r, u_theta). Right column: the Part 1 equations build one per sentence. S7: a mini Ian ring
+    (data_block.ian, 10-m wind) with ''≈ 35 round'' (teal) and ''≈ 13 in'' (rose, ''−'' glyph) SideCallouts; its source line below it. S8-S9:
+    the balloon slides round and both arrows turn (gold ''turn'' arc).'
+  voiceover: 'In Part 1, we met polar coordinates. A point is a distance r from the origin, at an angle theta from east, measured anticlockwise
+    as seen from above. We also met the arc rule: on a circle of radius r, turning by an angle in radians walks you the radius times the angle.
+    Each point has two unit vectors. R hat, cosine theta, sine theta, points straight away from the origin. Theta hat, minus sine theta, cosine
+    theta, is r hat turned by ninety degrees anticlockwise, and it points the way theta grows. The parts of a wind along these two arrows are
+    the radial wind, u sub r, and the tangential wind, u sub theta. Round Hurricane Ian''s eye, twenty five kilometres out, the air went round
+    at about thirty five metres per second, and in at about thirteen. And we saw that r hat and theta hat turn as we go round. Today, we find
+    out exactly how fast.'
+  on_screen_eq:
+    latex: \hat{\mathbf r}=(\cos\theta,\ \sin\theta),\qquad \hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar; fluidpy.diag.cyclone.storm_relative_wind (25-km ring, 10 m)
+    params:
+      theta_deg: 53.13
+      storm: data_block.ian
+      ring_km: 25
+      n_az: 72
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero,
+      ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt, ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact;
+      CHECK DS01 ring means 34.78 / -13.30 m/s (shared with Part 1, _coords_common.py)
+  exaggeration: []
+  calc_rows:
+  - s=r\,\theta
+  - u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}
+  - \overline{u_\theta}\approx35\ \mathrm{m/s},\qquad \overline{u_r}\approx-13\ \mathrm{m/s}
+  kind: recap diagram + mini data map
+  data: data_block.ian.surface (mini)
+  tool: Remotion SVG
+  why: ties Part 2 to Part 1 (split plan §2g)
+  related:
+  - *id001
+  feedback:
+  - U-CO-101
+  layout: Mini Ian map with SourceBelow; no colour bar needed (ring arrows only, no colour field) — if the speed field is drawn, its 0-55 m/s
+    bar sits beside it.
+- id: s03_tip_on_circle
+  t:
+  - 155.275
+  - 266.35
+  sentence_times:
+  - - 155.275
+    - 161.35
+  - - 161.7
+    - 172.25
+  - - 172.6
+    - 175.2
+  - - 175.55
+    - 177.875
+  - - 178.225
+    - 185.925
+  - - 186.275
+    - 191.175
+  - - 191.525
+    - 193.975
+  - - 194.325
+    - 200.45
+  - - 200.8
+    - 205.2
+  - - 205.55
+    - 208.2
+  - - 208.55
+    - 213.85
+  - - 214.2
+    - 216.975
+  - - 217.325
+    - 218.825
+  - - 219.175
+    - 225.275
+  - - 225.625
+    - 231.35
+  - - 232.85
+    - 241.85
+  - - 243.35
+    - 245.6
+  - - 245.95
+    - 252.35
+  - - 252.7
+    - 257.9
+  - - 258.25
+    - 265.55
+  beat: 'building block D12 (1)-(3): r-hat''s tip on the unit circle'
+  visual: 'MATHS-SKIP CHIP (block B1) on S0-S1: a small rounded chip top-right of the maths zone, slate outline, 44 px: ''every step · not needed
+    for the weather intuition · skip to 11:35''; out 4 s after S1 ends. Picture zone x 80-1000: a big unit circle (slate, radius 330 px) centred
+    at (540, 470), ''radius 1'' centred UNDER the circle (Must 9: never at the frame edge). S7: r-hat (orange, 10 px) from the centre at theta
+    = 53 deg; its tip dot (gold) labelled ''(cos θ, sin θ)'' outside the circle. S9-S10 on AT(9,''delta theta''): a gold wedge at the centre for
+    the small turn, drawn at 20 deg so it is visible (exaggeration listed), tag ''Δθ''; the tip slides along the circle leaving an orange arc.
+    S12: the arc labelled ''length 1 × Δθ = Δθ'' with a gold link to it. S13: numeric example: wedge relabels 0.1 rad ≈ 6°, arc ''≈ 0.1''. S14-S16:
+    a right-angle tick between the radius and the slide; theta-hat (orange) grows at the tip along the slide; keyword ''along θ̂'' (KaTeX hat).
+    Maths zone: ''Δθ: a small change in θ'' (S9), then the CalcStack.'
+  voiceover: The next few minutes build these rules step by step, for anyone who wants to see every move. You don't need them for the weather,
+    the climate science or the maps later on, so if it feels like too much, jump to the time on the screen, and you'll get the main idea there.
+    Let's start with r hat on its own. Why do we care how it changes? Because we write winds with r hat and theta hat, and when an air parcel
+    goes round, these arrows turn under it. To find the parcel's acceleration, we'll need to know how fast they turn. So draw r hat from the origin.
+    Its length is one, so its tip sits on a circle of radius one, called the unit circle. And the tip is exactly the point cosine theta, sine
+    theta. Now turn theta by a small amount. We call this small turn delta theta, where delta just means a small change. The tip slides along
+    the unit circle. How far? By the arc rule, the distance is the radius times the angle, and the radius is one. So the tip slides a distance
+    of one times delta theta, which is just delta theta. [beat] For example, a turn of zero point one radians, about six degrees, slides the tip
+    about zero point one along the circle. [beat] And which way does it slide? Sliding along a circle is at right angles to the radius, and theta
+    grows anticlockwise. That's exactly the direction of theta hat, as we found in Part 1. So, for a small turn, the tip of r hat moves a distance
+    delta theta, in the direction of theta hat.
+  on_screen_eq:
+    latex: \text{tip moves } 1\times\Delta\theta=\Delta\theta\ \text{ along }\ \hat{\boldsymbol\theta}
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (the arc rule s = r theta with r = 1)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar
+    params:
+      theta_deg: 53.13
+      dtheta_rad:
+      - 0.1
+      - 0.01
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS02 chord of a 0.1-rad turn = 0.09996
+      (≈ 0.1)
+  exaggeration:
+  - the 'small' turn is drawn at 20 deg so it is visible; the spoken example is 0.1 rad
+  calc_rows:
+  - s=r\,\theta\ \Rightarrow\ s=1\times\Delta\theta
+  - \Delta\theta=0.1\ \mathrm{rad}\approx6^\circ\ \Rightarrow\ s\approx0.1
+  derivation:
+    id: D12 (steps 1-3)
+    goal: how r-hat changes when theta changes a little (U-CO-005)
+    steps:
+    - - the tip is a point on the unit circle
+      - \text{tip}=(\cos\theta,\ \sin\theta)
+      - r-hat has length 1 (Part 1)
+      - the tip lives on a circle of radius 1
+    - - turn by a small Δθ
+      - s=1\times\Delta\theta
+      - arc rule s = r theta, r = 1
+      - the tip slides Δθ along the circle
+    - - which way
+      - \perp\hat{\mathbf r},\ \text{anticlockwise}\Rightarrow\hat{\boldsymbol\theta}
+      - the edge of a circle is at right angles to its radius; theta grows anticlockwise (Part 1 D01)
+      - the tip moves along theta-hat
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG (house TurnRule-style animation)
+  why: 'U-CO-005: where Δr̂ = θ̂ Δθ comes from'
+  related:
+  - *id001
+  feedback:
+  - U-CO-004
+  - U-CO-005
+  - U-CO-057
+  layout: '''radius 1'' inside the frame, under the circle (Must 9). Opening keyword ''how does r̂ change?'' from frame 0 (Should 18).'
+- id: s04_slopes_sin_cos
+  t:
+  - 266.35
+  - 387.625
+  sentence_times:
+  - - 266.35
+    - 274.175
+  - - 274.525
+    - 285.35
+  - - 285.7
+    - 290.65
+  - - 291.0
+    - 297.55
+  - - 297.9
+    - 303.15
+  - - 303.5
+    - 308.525
+  - - 310.025
+    - 315.975
+  - - 316.325
+    - 320.05
+  - - 320.4
+    - 323.8
+  - - 325.3
+    - 333.4
+  - - 333.75
+    - 344.325
+  - - 344.675
+    - 347.725
+  - - 348.075
+    - 357.125
+  - - 357.475
+    - 363.4
+  - - 364.9
+    - 373.45
+  - - 373.8
+    - 379.05
+  - - 380.55
+    - 382.375
+  - - 382.725
+    - 386.825
+  beat: 'building block D12 (4)-(6): the slopes of cosine and sine (owned here)'
+  visual: 'Same unit circle (left). S3: the tip''s east part (orange band along x, ''cos θ'') and north part (''sin θ'') as the two legs of its
+    triangle. S5-S6: after the turn, the legs change: the east leg shrinks by a rose sliver labelled ''≈ −sin θ Δθ'', the north leg grows by a
+    teal sliver ''≈ cos θ Δθ'', each with a gold link to its sliver. Maths zone: the slope definition from the derivatives movie (S2: ''slope
+    = change ÷ change, as both shrink''), then the two rules (S8-S9, Layered TeX with gold underbraces ''slope of cos θ'', ''slope of sin θ'').
+    S10: a small arrow at the tip pointing west, keyword ''east part shrinks''. S11-S16: the numeric check as a CalcStack at the balloon''s angle,
+    inputs row ''θ ≈ 53°, cos θ = 0.6, sin θ = 0.8, Δθ = 0.01 rad'' first; each result on its words. Right side x 1420-1840 under the CalcStack:
+    two small graphs of cos θ and sin θ (0-360 deg) with the tangent line at 53 deg drawn on each and its slope ''−0.8'' / ''0.6'' (orange solid
+    / dashed, end labels).'
+  voiceover: 'This little picture gives us something that no earlier movie in this series has shown: how fast cosine and sine change. In the derivatives
+    movie, we met the slope, or derivative: the small change in a quantity, divided by the small change that caused it, as both shrink towards
+    zero. The tip''s east part is cosine theta, and its north part is sine theta. The tip moved delta theta along theta hat, which is minus sine
+    theta, cosine theta. So its east part changes by about minus sine theta times delta theta. And its north part changes by about cosine theta
+    times delta theta. [beat] Now divide both changes by delta theta, and let delta theta shrink towards zero. The slope of cosine theta is minus
+    sine theta. And the slope of sine theta is cosine theta. [beat] The minus sign makes sense: turning anticlockwise from east, the tip moves
+    towards the west, so its east part shrinks. Let''s check with numbers, at the balloon''s angle from Part 1, about fifty three degrees, where
+    the cosine is zero point six and the sine is zero point eight. Turn by zero point zero one radians. The cosine drops from zero point six zero
+    zero to zero point five nine two, a change of minus zero point zero zero eight. Divided by zero point zero one, that''s minus zero point eight:
+    minus the sine. [beat] The sine grows from zero point eight zero zero to zero point eight zero six, a change of zero point zero zero six.
+    Divided by zero point zero one, that''s zero point six: the cosine. [beat] So the rule works. These two slopes will come back again and again
+    in this series.'
+  on_screen_eq:
+    latex: \frac{d}{d\theta}\cos\theta=-\sin\theta,\qquad \frac{d}{d\theta}\sin\theta=\cos\theta
+    vallis_eq: none in Vallis (standard calculus; derived on screen from the unit circle, D12)
+    page_png: null
+  physics_source:
+    fn: numpy cos/sin finite differences in the builder; fluidpy.core.coords.unit_vectors_polar (the same vectors)
+    params:
+      theta_deg: 53.1301
+      dtheta_rad: 0.01
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS03 cos 0.59197, sin 0.80596; FD slopes
+      −0.80299, 0.59599 (spoken −0.8, 0.6; 3-dp rounded values give exactly −0.8, 0.6)
+  exaggeration:
+  - slivers drawn ×20 so they are visible (the true change is 0.008)
+  calc_rows:
+  - \Delta(\cos\theta)\approx-\sin\theta\,\Delta\theta,\qquad \Delta(\sin\theta)\approx\cos\theta\,\Delta\theta
+  - \theta\approx53^\circ,\ \cos\theta=0.6,\ \sin\theta=0.8,\ \Delta\theta=0.01
+  - \frac{0.592-0.600}{0.01}=-0.8=-\sin\theta
+  - \frac{0.806-0.800}{0.01}=0.6=\cos\theta
+  derivation:
+    id: D12 (steps 4-6)
+    goal: 'the slopes of cosine and sine (owner: here; #4 did not teach them)'
+    steps:
+    - - split the move into east and north
+      - \Delta(\cos\theta)\approx-\sin\theta\,\Delta\theta,\ \Delta(\sin\theta)\approx\cos\theta\,\Delta\theta
+      - the move is Δθ times theta-hat = (−sin θ, cos θ)
+      - east part shrinks, north part grows
+    - - divide by Δθ, let it shrink
+      - \frac{d\cos\theta}{d\theta}=-\sin\theta,\ \frac{d\sin\theta}{d\theta}=\cos\theta
+      - 'the slope (derivative) of the derivatives movie: a limit'
+      - the slopes of cos and sin
+    - - check with numbers
+      - (-0.803,\ 0.596)\approx(-0.8,\ 0.6)
+      - finite step 0.01 rad at 53.13 deg
+      - the rule holds
+  kind: diagram + graphs + calc
+  data: —
+  tool: Remotion SVG + CalcStack
+  why: primer owned here (split plan §3a), needed for D13, D14, Part 3 D31
+  related:
+  - &id002
+    movie: '#4'
+    slug: ch00_derivatives_taylor
+    covers: limit, slope, chain rule
+  feedback:
+  - U-CO-005
+  - U-CO-054
+  - U-CO-057
+  - U-CO-100
+  layout: Graphs sit under the CalcStack in the maths zone, >= 40 px apart; no axis through a word; ticks 44 px.
+- id: s05_dr_dtheta
+  t:
+  - 387.625
+  - 457.325
+  sentence_times:
+  - - 387.625
+    - 391.6
+  - - 391.95
+    - 397.3
+  - - 397.65
+    - 399.9
+  - - 400.25
+    - 403.225
+  - - 404.725
+    - 408.275
+  - - 408.625
+    - 411.7
+  - - 412.05
+    - 416.45
+  - - 417.95
+    - 423.025
+  - - 423.375
+    - 430.125
+  - - 430.475
+    - 432.475
+  - - 432.825
+    - 435.8
+  - - 436.15
+    - 442.35
+  - - 442.7
+    - 447.85
+  - - 449.35
+    - 451.4
+  - - 451.75
+    - 456.525
+  beat: 'building block D13: d r-hat / d theta = theta-hat'
+  visual: 'Unit circle. S1-S3: the short arrow Δr̂ (gold) from the old tip to the new tip; tag ''Δr̂'' (KaTeX). S3: it lies along theta-hat at
+    the tip (a ghost theta-hat beside it, ''same direction'' gold tick). Maths zone: S3 ''Δr̂ ≈ θ̂ Δθ''; S4-S5 the main equation (96 px) with
+    underbrace ''rate of change of r̂ with θ''. S7-S8: the ''books write'' form ''dr̂ = θ̂ dθ'' in slate, smaller, with a gold ''= same'' bracket.
+    S9-S11: component route as Layered TeX: d/dθ (cos θ, sin θ) = (−sin θ, cos θ) = θ̂, each slot gold-linked to the s04 slopes (mini graphs reused).
+    S13: keyword ''r̂ swings towards θ̂'' and a gold curved arrow from r-hat towards theta-hat on the circle.'
+  voiceover: 'Now let''s put the two parts back together into one arrow. The change in r hat is the short arrow from its old tip to its new tip.
+    We call it delta r hat. It''s about theta hat times delta theta. [beat] Now divide by delta theta, and let it shrink. We get the rate of change
+    of r hat with theta. We write it d r hat by d theta, and it equals theta hat. [beat] The letter d is how the derivatives movie writes a change
+    when it''s tiny. Some books multiply both sides by d theta, and write d r hat equals theta hat d theta. It''s the same statement. We can also
+    check it one part at a time. The slopes of cosine theta and sine theta are minus sine theta and cosine theta. Together, that''s minus sine
+    theta, cosine theta, which is theta hat. [beat] So both routes agree. In words: when theta grows, r hat swings towards theta hat.'
+  on_screen_eq:
+    latex: \frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar (centred difference in theta)
+    params:
+      dtheta: 0.0001
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS04 centred-difference d r-hat/d theta
+      = theta-hat to 1e-8 (V7, build-1 DC07)
+  exaggeration:
+  - the small turn drawn at 20 deg
+  calc_rows:
+  - \Delta\hat{\mathbf r}\approx\hat{\boldsymbol\theta}\,\Delta\theta
+  - d\hat{\mathbf r}=\hat{\boldsymbol\theta}\,d\theta
+  - \frac{d}{d\theta}(\cos\theta,\ \sin\theta)=(-\sin\theta,\ \cos\theta)=\hat{\boldsymbol\theta}
+  derivation:
+    id: D13
+    goal: d r-hat / d theta = theta-hat (U-CO-005)
+    steps:
+    - - the change as one arrow
+      - \Delta\hat{\mathbf r}\approx\hat{\boldsymbol\theta}\,\Delta\theta
+      - 'D12 steps 2-3: length Δθ, direction theta-hat'
+      - r-hat's tip slides along theta-hat
+    - - divide and shrink
+      - \frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}
+      - definition of the derivative (limit)
+      - the rate is theta-hat
+    - - the same in components
+      - (-\sin\theta,\ \cos\theta)
+      - D12 slopes slot by slot
+      - both routes agree
+  kind: diagram + equation
+  data: —
+  tool: Remotion SVG + Layered TeX
+  why: U-CO-005 answered with both routes
+  related:
+  - *id002
+  feedback:
+  - U-CO-005
+  layout: Picture left, maths right; links never cross; KaTeX hats only (Should 2).
+- id: s06_dtheta_dtheta
+  t:
+  - 457.325
+  - 577.05
+  sentence_times:
+  - - 457.325
+    - 459.1
+  - - 459.45
+    - 462.55
+  - - 462.9
+    - 467.25
+  - - 467.6
+    - 469.175
+  - - 469.525
+    - 472.825
+  - - 473.175
+    - 478.375
+  - - 478.725
+    - 481.65
+  - - 482.0
+    - 483.575
+  - - 483.925
+    - 487.975
+  - - 488.325
+    - 492.875
+  - - 493.225
+    - 494.825
+  - - 495.175
+    - 497.9
+  - - 498.25
+    - 506.725
+  - - 507.075
+    - 512.525
+  - - 512.875
+    - 514.45
+  - - 514.8
+    - 516.8
+  - - 517.15
+    - 525.825
+  - - 526.175
+    - 531.225
+  - - 532.725
+    - 534.35
+  - - 534.7
+    - 541.075
+  - - 541.425
+    - 545.25
+  - - 545.6
+    - 549.4
+  - - 549.75
+    - 554.875
+  - - 556.375
+    - 562.175
+  - - 563.675
+    - 570.0
+  - - 570.35
+    - 576.25
+  beat: 'building block D14 (steps 1-5): d theta-hat / d theta = −r-hat, from scratch'
+  visual: 'Unit circle (left), one step per sentence, a small step number ''1''…''5'' in muted grey under the circle (no heading). Step 1 (S3-S5):
+    theta-hat drawn FROM THE CENTRE (orange, dashed outline at first) — its tip on the same circle; a gold ''same start'' dot at the origin. Step
+    2 (S6-S7): a gold 90 deg arc between r-hat''s tip and theta-hat''s tip (''quarter turn ahead''). Step 3 (S8-S10): both arrows turn together
+    by Δθ (20 deg drawn); two gold wedges of equal size; theta-hat''s tip slides an arc labelled ''Δθ''. Step 4 (S11-S13): at theta-hat''s tip,
+    the slide direction drawn as a short arrow at right angles to theta-hat (right-angle tick), labelled ''θ̂ turned 90°''. Step 5 (S14-S17):
+    the Part 1 turn rule replayed as an animated rotation (TurnRule90 from Part 1): the pair (−sin θ, cos θ) → swap → (cos θ, −sin θ) → minus
+    on the first → (−cos θ, −sin θ); maths zone shows each line on its words. S18: a rose arrow ''−r̂'' (rose, ''−'' glyph) drawn from the origin
+    opposite r-hat; the slide arrow from step 4 moves onto it: same direction (gold tick). S19-S20: the main equation (96 px).'
+  voiceover: 'Now theta hat. How does theta hat change when theta grows? Let''s take this slowly, one step at a time, and assume nothing. Step
+    one. Theta hat is also an arrow of length one. So let''s draw it from the origin too, from the same starting point as r hat. Its tip sits
+    on the same unit circle. Step two. Theta hat is always r hat turned by ninety degrees. So its tip sits on the circle a quarter turn ahead
+    of r hat''s tip. Step three. Now turn theta by delta theta. R hat turns by delta theta, and theta hat, which always stays a quarter turn ahead,
+    turns by the same delta theta. So its tip also slides a distance delta theta along the unit circle. Step four. Which way does it slide? The
+    same rule as before: a tip sliding anticlockwise along the circle moves along its own arrow, turned by ninety degrees. So theta hat''s tip
+    moves along theta hat, turned by ninety degrees. [beat] Step five. Let''s turn theta hat with Part 1''s rule: swap the two numbers, and put
+    a minus on the first. Theta hat is minus sine theta, cosine theta. Swapping gives cosine theta, minus sine theta. And a minus on the first
+    gives minus cosine theta, minus sine theta. [beat] That''s exactly minus r hat: the arrow r hat, flipped to point the other way. [beat] So,
+    for a small turn, theta hat changes by about minus r hat times delta theta. And its rate of change with theta, d theta hat by d theta, is
+    minus r hat.'
+  on_screen_eq:
+    latex: \frac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar
+    params:
+      theta_deg: 53.13
+      dtheta: 0.0001
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS05 centred-difference d theta-hat/d
+      theta = −r-hat to 1e-8; turn rule on theta-hat = −r-hat exactly
+  exaggeration:
+  - the small turn drawn at 20 deg
+  calc_rows:
+  - \hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)
+  - '\text{swap: }(\cos\theta,\ -\sin\theta)'
+  - '\text{minus on the first: }(-\cos\theta,\ -\sin\theta)=-\hat{\mathbf r}'
+  - \Delta\hat{\boldsymbol\theta}\approx-\hat{\mathbf r}\,\Delta\theta
+  derivation:
+    id: D14 (steps 1-5)
+    goal: how theta-hat changes when theta grows, assuming nothing (U-CO-006, U-CO-020)
+    steps:
+    - - draw theta-hat from the origin
+      - '|\hat{\boldsymbol\theta}|=1'
+      - a unit arrow can be moved without changing it
+      - its tip is on the unit circle too
+    - - a quarter turn ahead
+      - \hat{\boldsymbol\theta}=\hat{\mathbf r}\ \text{turned } 90^\circ
+      - Part 1 D01-D03
+      - its tip leads r-hat's by 90 deg
+    - - turn theta by Δθ
+      - s=\Delta\theta
+      - both arrows turn by the same angle; arc rule with r = 1
+      - theta-hat's tip slides Δθ
+    - - which way
+      - \hat{\boldsymbol\theta}\ \text{turned } 90^\circ
+      - same rule as D12 step 3
+      - the slide is at right angles to theta-hat
+    - - turn theta-hat by 90 deg
+      - (p,q)\to(-q,p):\ (-\sin\theta,\cos\theta)\to(-\cos\theta,-\sin\theta)
+      - Part 1's 90-deg turn rule D02
+      - that is −r-hat
+  kind: diagram + derivation
+  data: —
+  tool: Remotion SVG + TurnRule90 (Part 1 component)
+  why: 'U-CO-006: the step the user ''absolutely did not understand'', rebuilt from scratch in five moves'
+  related:
+  - *id001
+  feedback:
+  - U-CO-006
+  - U-CO-020
+  - U-CO-057
+  layout: Step numbers are small muted digits, not headings or chips. One arrow moves at a time.
+- id: s07_toward_centre
+  t:
+  - 577.05
+  - 694.55
+  sentence_times:
+  - - 577.05
+    - 580.25
+  - - 580.6
+    - 586.775
+  - - 587.125
+    - 590.525
+  - - 590.875
+    - 594.65
+  - - 595.0
+    - 600.025
+  - - 600.375
+    - 603.975
+  - - 604.325
+    - 610.9
+  - - 611.25
+    - 616.5
+  - - 616.85
+    - 622.05
+  - - 623.55
+    - 625.625
+  - - 625.975
+    - 631.75
+  - - 632.1
+    - 640.475
+  - - 640.825
+    - 646.6
+  - - 646.95
+    - 653.35
+  - - 654.85
+    - 660.325
+  - - 661.825
+    - 665.775
+  - - 666.125
+    - 673.775
+  - - 674.125
+    - 680.0
+  - - 681.5
+    - 687.8
+  - - 688.15
+    - 693.75
+  beat: 'D14 (step 6 + checks): what −r-hat means at the balloon; numbers; components'
+  visual: 'Left: Part 1''s station (slate PoleThermometer) and the 5-km circle; the balloon at three places (theta = 0, 25, 53 deg) with theta-hat
+    (orange) drawn AT the balloon on S2-S4 (''north'', ''leans west''). S5-S6: the three theta-hat arrows lift off and slide to one common tail
+    point beside the circle (inset, no box); their tips are joined by a gold curve; the short change arrows between neighbours (rose) point back
+    towards the station — a gold link from them to a rose ''−r̂'' arrow at the balloon pointing at the station. S7 keyword ''tip swings towards
+    the centre''. S8-S12: CalcStack with inputs ''θ̂(53°) = (−0.8, 0.6)'', ''θ̂(53° + 0.01 rad) = (−0.806, 0.592)'', change, ÷ 0.01 = (−0.6, −0.8)
+    = −r̂ on their words. S13-S14: component route (Layered TeX): slope of −sin θ is −cos θ; slope of cos θ is −sin θ. S15-S16: the two-row rule
+    ''r̂ → towards θ̂'' and ''θ̂ → towards −r̂'' with gold curved arrows on a small unit-circle glyph.'
+  voiceover: 'So what does minus r hat mean in the picture? Let''s go back to the balloon, five kilometres from the station, and move it round
+    its circle. At each place, draw theta hat at the balloon. Due east of the station, theta hat points north. A little further round, it leans
+    to the west, towards the station''s side. Now slide those arrows so that their tails touch. Their tips swing round, and the small change from
+    one arrow to the next points back towards the station. That''s minus r hat: from the balloon, back towards the centre of its circle. That''s
+    what we mean when we say that theta hat''s tip moves towards the centre. [beat] Let''s check with numbers. At fifty three degrees, theta hat
+    is minus zero point eight, zero point six. After a turn of zero point zero one radians, it''s minus zero point eight zero six, zero point
+    five nine two. The change is minus zero point zero zero six, minus zero point zero zero eight. Divided by zero point zero one, that''s minus
+    zero point six, minus zero point eight. [beat] And r hat is zero point six, zero point eight, so that''s minus r hat. [beat] We can also check
+    it one part at a time with the new slopes. The slope of minus sine theta is minus cosine theta, and the slope of cosine theta is minus sine
+    theta. Together, that''s minus cosine theta, minus sine theta: minus r hat again. [beat] So here''s the whole rule in words: turn the angle,
+    and each arrow swings towards the other one. R hat swings towards theta hat, and theta hat swings towards minus r hat.'
+  on_screen_eq:
+    latex: \frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \frac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar
+    params:
+      theta_deg:
+      - 0
+      - 25
+      - 53.13
+      dtheta_rad: 0.01
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS06 theta-hat(53.13 deg + 0.01) = (−0.80596,
+      0.59197); FD (−0.59599, −0.80299)
+  exaggeration:
+  - balloon positions 25 deg apart so the tilt is visible; the numbers use 0.01 rad
+  calc_rows:
+  - \hat{\boldsymbol\theta}(53^\circ)=(-0.8,\ 0.6)
+  - \hat{\boldsymbol\theta}(53^\circ+0.01)=(-0.806,\ 0.592)
+  - \frac{(-0.006,\ -0.008)}{0.01}=(-0.6,\ -0.8)=-\hat{\mathbf r}
+  - \frac{d}{d\theta}(-\sin\theta,\ \cos\theta)=(-\cos\theta,\ -\sin\theta)
+  derivation:
+    id: D14 (step 6 and checks)
+    goal: the meaning of −r-hat ('its tip moves towards the centre'), very simply
+    steps:
+    - - theta-hat at the balloon, round the circle
+      - \text{north}\to\text{leans west}
+      - theta-hat = (−sin θ, cos θ) at growing theta
+      - it tilts towards the station's side
+    - - tails together
+      - \Delta\hat{\boldsymbol\theta}\parallel-\hat{\mathbf r}
+      - moving an arrow does not change it
+      - the change points back at the station
+    - - numbers
+      - (-0.596,\ -0.803)\approx-\hat{\mathbf r}
+      - finite step 0.01 rad
+      - −r-hat = (−0.6, −0.8)
+    - - components
+      - (-\cos\theta,\ -\sin\theta)
+      - s04 slopes slot by slot
+      - the same result a second way
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG + CalcStack
+  why: 'U-CO-006 ''very easily'': the picture at the balloon + numbers + components'
+  related:
+  - *id001
+  feedback:
+  - U-CO-006
+  - U-CO-020
+  - U-CO-054
+  layout: The tail-to-tail inset sits beside the circle with >= 40 px clear; links never cross; CalcStack x >= 1100.
+- id: s08_product_rule
+  t:
+  - 694.55
+  - 851.475
+  sentence_times:
+  - - 694.55
+    - 705.3
+  - - 705.65
+    - 711.9
+  - - 712.25
+    - 715.675
+  - - 716.025
+    - 724.3
+  - - 724.65
+    - 726.9
+  - - 727.25
+    - 734.6
+  - - 734.95
+    - 737.475
+  - - 737.825
+    - 743.85
+  - - 744.2
+    - 747.4
+  - - 748.9
+    - 752.8
+  - - 753.15
+    - 760.625
+  - - 760.975
+    - 767.625
+  - - 767.975
+    - 772.925
+  - - 774.425
+    - 776.675
+  - - 777.025
+    - 778.95
+  - - 779.3
+    - 785.975
+  - - 786.325
+    - 798.05
+  - - 798.4
+    - 810.775
+  - - 812.275
+    - 818.675
+  - - 820.175
+    - 821.95
+  - - 822.3
+    - 826.4
+  - - 826.75
+    - 833.05
+  - - 833.4
+    - 838.95
+  - - 839.3
+    - 841.85
+  - - 842.2
+    - 849.975
+  beat: 'building block D15: the product rule for a number times an arrow (owned here)'
+  visual: 'S0 = block B1 takeaway: keyword ''what to keep: r̂ → θ̂, θ̂ → −r̂'' (gold swing arrows on a mini circle). MATHS-SKIP CHIP (block B2)
+    on S1-S2: ''every step · skip to 19:49''. Left x 80-1000: a grid (1 m/s per 60 px). S8: the arrow 10 (1, 0) (teal) from the origin. S9-S10:
+    the direction arrow turns 0.1 rad (orange unit arrow, gold wedge ''0.1 rad'') and the speed grows to 11: the product 11 (0.995, 0.1) drawn
+    (teal), the old one faded to 40 %. S11: the change arrow (gold) from tip to tip, ''(0.945, 1.1)''. S12-S15: the change is split into three
+    arrows laid tip to tail along the gold arrow, each in its own colour and built on its words: Δv d̂ (slate), v Δd̂ (orange), Δv Δd̂ (rose,
+    tiny); a gold ''sum'' tick at the end. S16: a rectangle-free ''halve the step'' animation: the three pieces redrawn for Δt = 1 s, 0.5 s, 0.25
+    s side by side — the first two halve, the third quarters (bars with numbers under them). Maths zone: inputs row first; CalcStack rows on their
+    words; S18: the rule (96 px) with gold underbraces ''number''s rate × arrow'', ''number × arrow''s rate''.'
+  voiceover: 'If you skipped, here''s what to keep: as the angle grows, r hat swings towards theta hat, and theta hat swings towards minus r hat,
+    back towards the centre. Next comes one more stretch with every step, from a new tool all the way to the acceleration. If you''d rather, jump
+    to the time on the screen. Before we use these rules on a moving air parcel, we need one more tool, which no earlier movie in this series
+    has shown. It''s called the product rule. Here''s the question it answers: how does a number times an arrow change, when both the number and
+    the arrow change? Let''s try easy numbers first. Take a speed of ten metres per second, along an arrow pointing east, one, zero. Their product
+    is the arrow ten, zero. [beat] One second later, the speed has grown to eleven. And the arrow has turned by zero point one radians, to about
+    zero point nine nine five, zero point one. The product is now eleven times that, which is ten point nine four five, one point one. So the
+    product changed by zero point nine four five, one point one. [beat] Where does that change come from? There are three pieces. First, the change
+    in the number, times the old arrow: one times one, zero, which is one, zero. Second, the old number, times the change in the arrow: ten times
+    minus zero point zero zero five, zero point one, which is minus zero point zero five, one. Third, the two changes multiplied together: one
+    times minus zero point zero zero five, zero point one, which is minus zero point zero zero five, zero point one. [beat] Add the three pieces,
+    and we get zero point nine four five, one point one: the whole change. [beat] Now the key step. The third piece is a small change times a
+    small change. If we halve the time step, the first two pieces halve, but the third one shrinks to a quarter. So after we divide by the time
+    step and let it shrink, the third piece vanishes. What''s left is the product rule. The rate of change of a number times an arrow is the number''s
+    rate times the arrow, plus the number times the arrow''s rate. [beat]'
+  on_screen_eq:
+    latex: \frac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\frac{dv}{dt}\,\hat{\mathbf d}+v\,\frac{d\hat{\mathbf d}}{dt}
+    vallis_eq: none in Vallis (standard calculus; derived on screen with numbers, D15)
+    page_png: null
+  physics_source:
+    fn: builder arithmetic (numpy) on the toy numbers; product rule checked against fluidpy.core.kinematics.lagrangian_velocity_acceleration on
+      v(t) d(t)
+    params:
+      v:
+      - 10
+      - 11
+      turn_rad: 0.1
+      dt_s:
+      - 1
+      - 0.5
+      - 0.25
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_lagrangian_velocity_V3_order_two, ::test_lagrangian_eulerian_V2_three_maps_Du_Dt_equals_d2r_dt2;
+      CHECK DS07 product after (10.945, 1.098); pieces (1,0), (−0.050, 0.998), (−0.005, 0.100) sum to the change; cross piece ratio 1/4 per halving
+  exaggeration:
+  - toy numbers (a 0.1-rad turn in 1 s), not a real parcel
+  calc_rows:
+  - 10\,(1,\ 0)=(10,\ 0)
+  - 11\,(0.995,\ 0.1)=(10.945,\ 1.1)
+  - \text{change}=(0.945,\ 1.1)
+  - 1\,(1,0)+10\,(-0.005,\ 0.1)+1\,(-0.005,\ 0.1)
+  - =(1,0)+(-0.05,\ 1)+(-0.005,\ 0.1)=(0.945,\ 1.1)
+  derivation:
+    id: D15
+    goal: 'how a number times an arrow changes when both change (owner: here)'
+    steps:
+    - - before and after
+      - v\hat{\mathbf d}\ \to\ (v+\Delta v)(\hat{\mathbf d}+\Delta\hat{\mathbf d})
+      - both the number and the arrow change
+      - the product changes
+    - - multiply out
+      - v\hat{\mathbf d}+\Delta v\,\hat{\mathbf d}+v\,\Delta\hat{\mathbf d}+\Delta v\,\Delta\hat{\mathbf d}
+      - distribute (each piece times each piece)
+      - four pieces
+    - - subtract the old product
+      - \Delta(v\hat{\mathbf d})=\Delta v\,\hat{\mathbf d}+v\,\Delta\hat{\mathbf d}+\Delta v\,\Delta\hat{\mathbf d}
+      - the change = after − before
+      - three pieces of change (checked with numbers)
+    - - the tiny piece
+      - \Delta v\,\Delta\hat{\mathbf d}\propto(\Delta t)^2
+      - halving Δt halves Δv and Δd̂, so their product quarters
+      - it vanishes after ÷Δt as Δt → 0
+    - - divide by Δt and shrink
+      - \frac{d}{dt}(v\hat{\mathbf d})=\frac{dv}{dt}\hat{\mathbf d}+v\frac{d\hat{\mathbf d}}{dt}
+      - the limit
+      - the product rule
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG + CalcStack
+  why: 'primer owned here (split plan §3a): used in s10-s12'
+  related: []
+  feedback:
+  - U-CO-019
+  - U-CO-057
+  - U-CO-100
+  layout: Easy numbers with the inputs beside every row; the second 'arrow' slot is said and written as a pair; no boxes round the three pieces.
+- id: s09_dtheta_dt
+  t:
+  - 851.475
+  - 952.55
+  sentence_times:
+  - - 851.475
+    - 859.475
+  - - 859.825
+    - 861.85
+  - - 862.2
+    - 866.625
+  - - 866.975
+    - 871.025
+  - - 871.375
+    - 872.95
+  - - 873.3
+    - 876.3
+  - - 876.65
+    - 883.35
+  - - 884.85
+    - 890.475
+  - - 890.825
+    - 897.725
+  - - 899.225
+    - 902.675
+  - - 903.025
+    - 907.9
+  - - 909.4
+    - 914.025
+  - - 914.375
+    - 924.75
+  - - 926.25
+    - 930.1
+  - - 930.45
+    - 936.7
+  - - 938.2
+    - 945.575
+  - - 945.925
+    - 951.05
+  beat: 'D16: d theta / dt = v / r from the arc rule'
+  visual: 'Left: Ian''s 25-km ring (slate) round the model''s centre (data_block.ian.centre_hrrr), no map underneath (a clean top view; small
+    source line not needed: no data field drawn, only the radius and speed numbers). The parcel (teal) moves at one constant rate; clock glyph
+    ''t'' runs. S5-S6: a short teal arc ''v Δt'' along the ring with a gold link; S7: the wedge ''Δθ'' at the centre and the radius ''r = 25 km''.
+    Maths zone: Layered TeX building s = r θ → Δθ = vΔt / r → dθ/dt = v/r (96 px), each on its words; S9-S11 CalcStack: ''34.8 m/s ÷ 25 000 m
+    ≈ 0.00139 rad/s'' with the m struck through (units), ''× 57.3 ≈ 0.08°/s ≈ 5°/min''; S12-S13: lap row ''2π ÷ 0.00139 ≈ 4500 s ≈ 75 min'' while
+    the clock glyph runs one lap.'
+  voiceover: 'Now let''s put an air parcel on Ian''s ring, twenty five kilometres from the centre, going round at a steady speed. We''ll call
+    its speed v. On this ring, v is about thirty five metres per second. As the parcel goes round, its angle theta grows. How fast? Let''s find
+    out, one step at a time. In a short time, delta t, the parcel moves a distance v times delta t along the ring. [beat] By the arc rule, a distance
+    along a circle is the radius times the angle. So the angle it turns through is that distance divided by the radius: v delta t over r. [beat]
+    Now divide by delta t, and let it shrink. The rate at which theta grows, d theta by d t, is v over r. [beat] The derivatives movie didn''t
+    show this one, so let''s put in the numbers. Thirty four point eight metres per second, divided by twenty five thousand metres, is about zero
+    point zero zero one three nine radians per second. [beat] The metres cancel, and radians per second are left. That''s about zero point zero
+    eight degrees every second, or about five degrees every minute. [beat] So one full lap, two pi radians, takes two pi divided by zero point
+    zero zero one three nine. That''s about four thousand five hundred seconds, or about seventy five minutes. [beat]'
+  on_screen_eq:
+    latex: \frac{d\theta}{dt}=\frac{v}{r}
+    vallis_eq: none in Vallis (derived on screen from s = r theta, D16)
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (v_t ring mean 34.78 m/s at 25 km, 10 m) + builder arithmetic
+    params:
+      v_ms: 34.78
+      r_m: 25000
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS08 omega
+      = 1.3912e-3 rad/s; 0.0797 deg/s; 4.78 deg/min; lap 4516 s = 75.3 min
+  exaggeration:
+  - the parcel's motion is time compressed (one lap of 75 min in about 10 s)
+  calc_rows:
+  - \Delta s=v\,\Delta t
+  - \Delta\theta=\frac{\Delta s}{r}=\frac{v\,\Delta t}{r}
+  - \frac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}
+  - 0.00139\times57.3\approx0.08^\circ/\mathrm{s}\approx5^\circ/\mathrm{min}
+  - \frac{2\pi}{0.00139}\approx4500\ \mathrm{s}\approx75\ \mathrm{min}
+  derivation:
+    id: D16
+    goal: how fast theta grows for a parcel going round (U-CO-018)
+    steps:
+    - - distance in a short time
+      - \Delta s=v\,\Delta t
+      - distance = speed × time
+      - the parcel moves v Δt along the ring
+    - - arc rule
+      - \Delta\theta=\Delta s/r
+      - s = r theta (Part 1)
+      - the angle it turns through
+    - - divide by Δt and shrink
+      - d\theta/dt=v/r
+      - the limit
+      - the rate of turning
+    - - numbers
+      - 34.8/25\,000\approx0.00139\ \mathrm{rad/s}
+      - 'inputs: v = 34.8 m/s (Part 1 ring mean), r = 25 km'
+      - about 5 deg per minute; one lap ≈ 75 min
+  kind: diagram + calc
+  data: data_block.ian (ring mean only)
+  tool: Remotion SVG + CalcStack + clock glyph
+  why: 'U-CO-018: dθ/dt = v/r was used, never shown'
+  related:
+  - *id002
+  feedback:
+  - U-CO-018
+  - U-CO-054
+  layout: No data field drawn, so no colour bar; the numbers' source is said in s02 and written in the manifest. Clock glyph at one constant rate.
+- id: s10_position_arrow
+  t:
+  - 952.55
+  - 1020.475
+  sentence_times:
+  - - 952.55
+    - 955.275
+  - - 955.625
+    - 957.275
+  - - 957.625
+    - 963.725
+  - - 964.075
+    - 971.875
+  - - 972.225
+    - 977.25
+  - - 977.6
+    - 982.025
+  - - 982.375
+    - 985.65
+  - - 987.15
+    - 989.95
+  - - 990.3
+    - 996.275
+  - - 996.625
+    - 1001.125
+  - - 1001.475
+    - 1004.875
+  - - 1005.225
+    - 1010.475
+  - - 1010.825
+    - 1018.975
+  beat: 'D17 (steps 1-2): velocity = rate of change of position; position = r r-hat'
+  visual: 'Left: the ring and the parcel; the position arrow from the centre to the parcel (teal) grows on AT(5,''position arrow'') with a length
+    tag ''r = 25 km'' and its direction r-hat (orange unit arrow on it). S1-S3: keyword chain in the maths zone ''acceleration ← velocity ← position''
+    (gold arrows, built right to left on the words). S6-S7: Part 1 recall: ''r̂ = arrow ÷ length'' flips to ''arrow = length × r̂'' (Layered TeX,
+    the ÷ turns into ×). S9-S10: the product rule from s08 (mini, slate) with v → r and d̂ → r̂ substituted in gold; the result row.'
+  voiceover: 'Next, the parcel''s velocity. Why do we need it? Because acceleration is the rate of change of velocity, so we need the velocity
+    first. And velocity is the rate of change of position: how far, and in which direction, the parcel moves each second. So let''s write the
+    parcel''s position as an arrow from the centre of the eye. Its length is the distance r, and its direction is r hat. So the position arrow
+    is r times r hat. [beat] That''s just Part 1 read backwards. R hat is the arrow divided by its length, so the arrow is its length times r
+    hat. For Ian''s parcel, that''s twenty five kilometres times r hat. Velocity is the rate of change of this arrow. It''s a number, r, times
+    an arrow, r hat, so we use the product rule. The rate of change of r times r hat is d r by d t times r hat, plus r times d r hat by d t. [beat]'
+  on_screen_eq:
+    latex: \frac{d}{dt}\big(r\,\hat{\mathbf r}\big)=\frac{dr}{dt}\,\hat{\mathbf r}+r\,\frac{d\hat{\mathbf r}}{dt}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z) (position x = R e_R + z e_z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar; fluidpy.core.kinematics.lagrangian_velocity_acceleration (r(t) on the ring)
+    params:
+      r_m: 25000
+      v_ms: 34.78
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; ../Fluid Dynamics/tests/test_ch03.py::test_lagrangian_velocity_V3_order_two,
+      ::test_lagrangian_eulerian_V2_three_maps_Du_Dt_equals_d2r_dt2
+  exaggeration: []
+  calc_rows:
+  - \text{position}=r\,\hat{\mathbf r}
+  - \hat{\mathbf r}=\frac{\text{arrow}}{r}\ \Rightarrow\ \text{arrow}=r\,\hat{\mathbf r}
+  - 25\ \mathrm{km}\times\hat{\mathbf r}
+  derivation:
+    id: D17 (steps 1-2)
+    goal: why the velocity is v theta-hat (U-CO-019)
+    steps:
+    - - what velocity is
+      - \mathbf v=\frac{d}{dt}(\text{position})
+      - 'definition (derivatives movie: rate of change)'
+      - how position changes each second
+    - - position as an arrow
+      - \text{position}=r\,\hat{\mathbf r}
+      - 'Part 1: r-hat = arrow / length'
+      - distance times direction
+    - - product rule
+      - \frac{dr}{dt}\hat{\mathbf r}+r\frac{d\hat{\mathbf r}}{dt}
+      - D15 with v → r, d-hat → r-hat
+      - two pieces
+  kind: diagram + derivation
+  data: —
+  tool: Remotion SVG + Layered TeX
+  why: 'U-CO-019: velocity is the derivative of position'
+  related:
+  - *id002
+  - *id001
+  feedback:
+  - U-CO-019
+  layout: Keyword chain in the maths zone, >= 40 px above the equation.
+- id: s11_velocity_on_ring
+  t:
+  - 1020.475
+  - 1091.75
+  sentence_times:
+  - - 1020.475
+    - 1023.8
+  - - 1024.15
+    - 1031.6
+  - - 1033.1
+    - 1037.75
+  - - 1038.1
+    - 1042.325
+  - - 1042.675
+    - 1047.4
+  - - 1047.75
+    - 1053.775
+  - - 1054.125
+    - 1057.575
+  - - 1057.925
+    - 1062.35
+  - - 1063.85
+    - 1065.925
+  - - 1066.275
+    - 1070.9
+  - - 1072.4
+    - 1076.575
+  - - 1076.925
+    - 1082.5
+  - - 1082.85
+    - 1090.95
+  beat: 'D17 (steps 3-5): on a ring the velocity is v theta-hat'
+  visual: 'Same picture. S1-S2: the first term struck (Strike, slate) with the tag ''r fixed: dr/dt = 0''. S3-S6: the chain rule as Layered TeX
+    with gold underbraces ''θ̂ (s05)'' and ''v/r (s09)'', each linked to a mini picture of its scene. S7: the two r''s struck; result ''v θ̂''
+    (96 px). S8-S10: at the parcel, the velocity arrow v theta-hat (teal, moving dashes) along the ring, a right-angle tick to the position arrow;
+    tag ''34.8 m/s along θ̂''; keyword ''anticlockwise (seen from above)''.'
+  voiceover: 'Now let''s simplify, one term at a time. On a ring, the distance r never changes, so d r by d t is zero, and the first term drops
+    out. [beat] For the second term, we need how fast r hat changes in time. R hat depends on theta, and theta depends on time. That''s a chain,
+    so we use the chain rule from the derivatives movie. D r hat by d t equals d r hat by d theta, times d theta by d t. We''ve found both: theta
+    hat, and v over r. So d r hat by d t is theta hat times v over r. [beat] Now multiply by r. The two r''s cancel, and the velocity is v times
+    theta hat. [beat] So yes: v theta hat is the parcel''s velocity. Its size is the speed v, and its direction is theta hat, along the ring.
+    For Ian''s parcel, that''s thirty four point eight metres per second, along the ring, anticlockwise as seen from above.'
+  on_screen_eq:
+    latex: \mathbf v=r\,\frac{d\hat{\mathbf r}}{d\theta}\,\frac{d\theta}{dt}=r\,\hat{\boldsymbol\theta}\,\frac{v}{r}=v\,\hat{\boldsymbol\theta}
+    vallis_eq: derived on screen (our steps, D17) from Kundu App. B §B.5 ∂e_R/∂φ = e_φ and the chain rule
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.kinematics.lagrangian_velocity_acceleration (finite-difference velocity of r(t) = r(cos ωt, sin ωt))
+    params:
+      r_m: 25000
+      v_ms: 34.78
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_lagrangian_velocity_V3_order_two, ::test_lagrangian_eulerian_V2_three_maps_Du_Dt_equals_d2r_dt2;
+      CHECK DS09 FD velocity = v theta-hat to 1e-6 relative
+  exaggeration: []
+  calc_rows:
+  - \frac{dr}{dt}=0
+  - \frac{d\hat{\mathbf r}}{dt}=\frac{d\hat{\mathbf r}}{d\theta}\,\frac{d\theta}{dt}=\hat{\boldsymbol\theta}\,\frac{v}{r}
+  - \mathbf v=34.8\ \hat{\boldsymbol\theta}\ \mathrm{m/s}
+  derivation:
+    id: D17 (steps 3-5)
+    goal: the velocity on a ring
+    steps:
+    - - on a ring r is fixed
+      - dr/dt=0
+      - the parcel stays 25 km out
+      - first piece drops
+    - - chain rule
+      - \frac{d\hat{\mathbf r}}{dt}=\frac{d\hat{\mathbf r}}{d\theta}\frac{d\theta}{dt}=\hat{\boldsymbol\theta}\frac{v}{r}
+      - r-hat depends on theta, theta on t (derivatives movie); D13, D16
+      - r-hat turns at v/r
+    - - multiply by r
+      - \mathbf v=v\,\hat{\boldsymbol\theta}
+      - r × (v/r) = v
+      - speed v, direction theta-hat
+  kind: diagram + derivation
+  data: —
+  tool: Remotion SVG + Layered TeX
+  why: 'U-CO-019 answered: yes, v θ̂ is the velocity'
+  related:
+  - *id002
+  feedback:
+  - U-CO-019
+  layout: Struck terms stay visible at 60 % for 2 s, then fade.
+- id: s12_acceleration
+  t:
+  - 1091.75
+  - 1189.45
+  sentence_times:
+  - - 1091.75
+    - 1094.7
+  - - 1095.05
+    - 1098.95
+  - - 1099.3
+    - 1105.2
+  - - 1105.55
+    - 1112.75
+  - - 1114.25
+    - 1121.275
+  - - 1122.775
+    - 1126.375
+  - - 1126.725
+    - 1132.975
+  - - 1133.325
+    - 1141.8
+  - - 1142.15
+    - 1145.225
+  - - 1145.575
+    - 1150.475
+  - - 1151.975
+    - 1153.95
+  - - 1154.3
+    - 1159.125
+  - - 1160.625
+    - 1167.3
+  - - 1167.65
+    - 1173.9
+  - - 1174.25
+    - 1176.275
+  - - 1176.625
+    - 1180.375
+  - - 1180.725
+    - 1187.95
+  beat: 'D18: acceleration = −(v²/r) r-hat'
+  visual: 'Same ring. Maths zone, one move per sentence: S1-S3 the product rule on v theta-hat (Layered TeX, gold underbraces); S4 ''steady speed:
+    dv/dt = 0'' strikes the first term; S5-S8 chain rule with underbraces ''−r̂ (s06)'' and ''v/r (s09)'', the s06 mini picture (theta-hat''s
+    tip swinging to −r-hat) recalled beside it (U-CO-020); S9 result (96 px) ''a = −(v²/r) r̂''. Picture: on S10 an inward rose arrow at the parcel
+    pointing at the centre (''−'' glyph), keyword ''centripetal: towards the centre'' on S11. S12-S14 units row with ''m'' struck once.'
+  voiceover: 'Now we can answer the opening question. Acceleration is the rate of change of velocity. So we need the rate of change of v theta
+    hat, which is a number times an arrow again. By the product rule, it''s d v by d t times theta hat, plus v times d theta hat by d t. [beat]
+    The parcel goes round at a steady speed, so d v by d t is zero, and the first term drops out. [beat] For the second term, we use the chain
+    rule again. D theta hat by d t equals d theta hat by d theta, times d theta by d t. Remember the turning arrows: d theta hat by d theta is
+    minus r hat, because theta hat swings towards minus r hat. And d theta by d t is v over r. So d theta hat by d t is minus r hat, times v over
+    r. [beat] Now multiply by v. The acceleration is minus v squared over r, times r hat. [beat] The minus sign means that it points along minus
+    r hat: inward, towards the centre of the ring. An acceleration that points to the centre of a circle is called a centripetal acceleration.
+    Let''s check the units. V squared is in metres squared per second squared. Dividing by r, in metres, leaves metres per second squared, which
+    are the units of an acceleration. [beat]'
+  on_screen_eq:
+    latex: \mathbf a=\frac{d}{dt}\big(v\,\hat{\boldsymbol\theta}\big)=v\,\frac{d\hat{\boldsymbol\theta}}{d\theta}\,\frac{d\theta}{dt}=-\frac{v^2}{r}\,\hat{\mathbf
+      r}
+    vallis_eq: derived on screen (our steps, D18) from Kundu App. B §B.5 ∂e_φ/∂φ = −e_R, the product rule and the chain rule
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.kinematics.lagrangian_velocity_acceleration (FD acceleration of r(t) on the ring)
+    params:
+      r_m: 25000
+      v_ms: 34.78
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_lagrangian_velocity_V3_order_two, ::test_lagrangian_eulerian_V2_three_maps_Du_Dt_equals_d2r_dt2;
+      CHECK DS10 FD acceleration = −(v²/r) r-hat to 1e-6 relative (build-1 DC13 V7)
+  exaggeration: []
+  calc_rows:
+  - \frac{d}{dt}(v\hat{\boldsymbol\theta})=\frac{dv}{dt}\hat{\boldsymbol\theta}+v\frac{d\hat{\boldsymbol\theta}}{dt}
+  - \frac{dv}{dt}=0
+  - \frac{d\hat{\boldsymbol\theta}}{dt}=\frac{d\hat{\boldsymbol\theta}}{d\theta}\frac{d\theta}{dt}=-\hat{\mathbf r}\,\frac{v}{r}
+  - \frac{\mathrm{m^2/s^2}}{\mathrm m}=\mathrm{m/s^2}
+  derivation:
+    id: D18
+    goal: the acceleration of a parcel going round at a steady speed (the hook)
+    steps:
+    - - acceleration = rate of change of velocity
+      - \mathbf a=\frac{d}{dt}(v\hat{\boldsymbol\theta})
+      - definition
+      - why we differentiate v theta-hat (U-CO-019)
+    - - product rule
+      - \frac{dv}{dt}\hat{\boldsymbol\theta}+v\frac{d\hat{\boldsymbol\theta}}{dt}
+      - D15
+      - two pieces
+    - - steady speed
+      - dv/dt=0
+      - the parcel never speeds up or slows down
+      - first piece drops
+    - - chain rule
+      - \frac{d\hat{\boldsymbol\theta}}{dt}=-\hat{\mathbf r}\,\frac{v}{r}
+      - D14 and D16
+      - theta-hat turns towards −r-hat at v/r
+    - - multiply by v
+      - \mathbf a=-\frac{v^2}{r}\hat{\mathbf r}
+      - algebra
+      - inward, centripetal
+    - - units
+      - \mathrm{m^2\,s^{-2}/m=m\,s^{-2}}
+      - dimensional check
+      - an acceleration
+  kind: diagram + derivation
+  data: —
+  tool: Remotion SVG + Layered TeX
+  why: answers the hook; U-CO-019, U-CO-020
+  related:
+  - &id003
+    movie: R01
+    slug: 'Circular motion: centripetal and centrifugal (planned, v6 pos 108)'
+    covers: centrifugal force
+  feedback:
+  - U-CO-019
+  - U-CO-020
+  - U-CO-054
+  layout: Inward arrow >= 90 px, rose, pointing at the centre.
+- id: s13_acceleration_numbers
+  t:
+  - 1189.45
+  - 1254.975
+  sentence_times:
+  - - 1189.45
+    - 1200.45
+  - - 1200.8
+    - 1203.35
+  - - 1203.7
+    - 1208.325
+  - - 1208.675
+    - 1215.925
+  - - 1217.425
+    - 1225.725
+  - - 1227.225
+    - 1228.925
+  - - 1229.275
+    - 1236.45
+  - - 1237.95
+    - 1240.0
+  - - 1240.35
+    - 1246.6
+  - - 1248.1
+    - 1254.175
+  beat: 'D18 numbers: 0.048 m/s², 200× smaller than gravity, ''that is like'''
+  visual: 'S0 = block B2 takeaway: keyword ''what to keep: steady speed on a circle → acceleration v²/r, inward''. Left: the ring with the inward
+    rose arrow. Maths zone CalcStack with inputs row ''v = 34.8 m/s, r = 25 000 m'': ''34.8² ≈ 1211'', ''1211 ÷ 25 000 ≈ 0.048 m/s²'' (S2-S3);
+    easy row ''35² ÷ 25 000 ≈ 0.049'' (S4, slate). S5-S6: log bars (Balance style) ''gravity 9.81'' vs ''0.048'' with ''≈ 200 × smaller'' and
+    a gold link. S7-S8: a code-drawn car glyph with a speedometer 0 → 100 km/h while a clock glyph runs to ''≈ 10 min''; row ''27.8 m/s ÷ 0.048
+    ≈ 570 s ≈ 10 min''. S9: the rose arrow pulses; keyword ''all of it turns the parcel''.'
+  voiceover: 'If you skipped, here''s what to keep: an air parcel going round a circle at a steady speed v is always accelerating towards the
+    centre, by v squared over r. So how big is it for Ian''s parcel? Thirty four point eight squared is about twelve hundred and eleven. Divided
+    by twenty five thousand metres, that''s about zero point zero four eight metres per second squared. [beat] With easy numbers, thirty five
+    squared over twenty five thousand is about zero point zero four nine, almost the same. [beat] Is that big? Gravity is nine point eight one
+    metres per second squared, so this is about two hundred times smaller. [beat] But it acts all the time. A car with this acceleration would
+    take about ten minutes to reach a hundred kilometres per hour. [beat] Here, instead of making the parcel faster, all of it goes into turning
+    the parcel round the eye.'
+  on_screen_eq:
+    latex: \frac{v^2}{r}=\frac{34.8^2}{25\,000}\approx0.048\ \mathrm{m/s^2}
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (34.78 m/s) + builder arithmetic
+    params:
+      v_ms: 34.78
+      r_m: 25000
+      g: 9.81
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS11 v²/r
+      = 0.04839; 35²/25000 = 0.049; g/a = 202.7; 100 km/h in 568 s = 9.6 min
+  exaggeration: []
+  calc_rows:
+  - 34.8^2\approx1211
+  - \frac{1211}{25\,000}\approx0.048\ \mathrm{m/s^2}
+  - \frac{35^2}{25\,000}\approx0.049
+  - \frac{9.81}{0.048}\approx200
+  - \frac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}\approx570\ \mathrm s\approx10\ \mathrm{min}
+  kind: calc + bars
+  data: data_block.ian (ring mean)
+  tool: Remotion SVG + CalcStack + house Balance bars
+  why: every number explained (U-WB-R5)
+  related: []
+  feedback:
+  - U-CO-054
+  layout: Bars beside the CalcStack, ticks >= 44 px.
+- id: s14_steady_but_turning
+  t:
+  - 1254.975
+  - 1373.725
+  sentence_times:
+  - - 1254.975
+    - 1258.775
+  - - 1259.125
+    - 1262.7
+  - - 1263.05
+    - 1266.375
+  - - 1266.725
+    - 1270.775
+  - - 1271.125
+    - 1282.175
+  - - 1283.675
+    - 1290.8
+  - - 1291.15
+    - 1293.95
+  - - 1294.3
+    - 1299.3
+  - - 1299.65
+    - 1301.8
+  - - 1303.3
+    - 1305.025
+  - - 1305.375
+    - 1311.225
+  - - 1311.575
+    - 1320.525
+  - - 1322.025
+    - 1332.65
+  - - 1334.15
+    - 1340.15
+  - - 1340.5
+    - 1343.9
+  - - 1344.25
+    - 1350.775
+  - - 1351.125
+    - 1355.95
+  - - 1356.3
+    - 1362.925
+  - - 1363.275
+    - 1372.925
+  beat: 'D19: steady speed, changing velocity; what supplies the push (pointers M03, R01)'
+  visual: 'Left: two velocity arrows one minute apart on the ring (teal), the turn ''≈ 0.084 rad ≈ 5°'' as a gold wedge at the centre (drawn ×3
+    so it is visible, listed). S4-S5: both arrows lift off and slide tail to tail (one common tail beside the ring); the short difference arrow
+    (rose) from tip to tip grows and points at the eye — a gold link from it to the eye. S6-S7: the two tips sit on a dashed circle of radius
+    34.8 (slate), the small arc between them labelled; CalcStack ''34.8 × 0.084 ≈ 2.9 m/s'' then ''2.9 ÷ 60 s ≈ 0.048 m/s²'' with a gold ''same
+    as s13'' tick. S9-S11: the eye''s low pressure (a ring of three code-drawn isobars, ''L'' in the eye) and an orange pressure-force arrow at
+    the parcel pointing in (term colour: pressure orange); a thin violet arrow for the Earth''s spin push, 1/21 of its length, tag ''≈ 1/20''.
+    S12: keyword ''more: Wind on weather charts''; S13: keyword ''more: Circular motion''. The s01 gold question mark resolves to ''yes: it turns''
+    at S8.'
+  voiceover: 'So how can a steady speed still mean an acceleration? The answer is that velocity is more than speed. Velocity is speed and direction
+    together. Let''s see it with two velocity arrows, one minute apart. In one minute, theta grows by zero point zero zero one three nine times
+    sixty, which is about zero point zero eight four radians, or about five degrees. [beat] Both arrows are thirty four point eight metres per
+    second long, but they point in slightly different directions. Now slide them so that their tails touch. The short arrow from the first tip
+    to the second is the change in velocity. It points towards the eye. [beat] How long is it? Its two ends lie on a circle of radius thirty four
+    point eight, a small turn apart. So by the arc rule, it''s about thirty four point eight times zero point zero eight four, which is about
+    two point nine metres per second. [beat] Divide by sixty seconds, and we get about zero point zero four eight metres per second squared: the
+    same acceleration, found with no formula at all. [beat] So a steady speed means no acceleration only when the direction stays the same too.
+    Something must push the parcel inward all the time. In a tropical cyclone, it''s mostly the pressure force, because the pressure is lowest
+    in the eye. The Earth''s spin adds a smaller push, about twenty times smaller here. How winds balance these pushes has its own movie later
+    in this series: Wind on weather charts. And if you rode with the parcel, you''d feel this as a push outward, called the centrifugal force,
+    which also has its own movie: Circular motion.'
+  on_screen_eq:
+    latex: '|\Delta\mathbf v|\approx v\,\Delta\theta=34.8\times0.084\approx2.9\ \mathrm{m/s}'
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar (theta-hat at t and t + 60 s); fluidpy.geo.frames.coriolis_parameter (26.5 N) for the 1/20 ratio
+    params:
+      v_ms: 34.78
+      dt_s: 60
+      lat_deg: 26.5
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS12 chord 2.9023, arc 2.9032 m/s; ÷60
+      = 0.04839; f = 6.51e-5 s⁻¹, f v = 2.26e-3, ratio 21.4
+  exaggeration:
+  - the 5-deg turn drawn at 15 deg
+  - isobars round the eye are a code-drawn schematic (illustrative)
+  calc_rows:
+  - \Delta\theta=0.00139\times60\approx0.084\ \mathrm{rad}\approx5^\circ
+  - 34.8\times0.084\approx2.9\ \mathrm{m/s}
+  - \frac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}
+  derivation:
+    id: D19
+    goal: how a steady speed still means acceleration (U-CO-021)
+    steps:
+    - - velocity is speed and direction
+      - \mathbf v=v\,\hat{\boldsymbol\theta}
+      - s11
+      - two equal-length arrows can differ
+    - - one minute of turning
+      - \Delta\theta\approx0.084\ \mathrm{rad}
+      - D16 rate × 60 s
+      - the arrow turns ≈ 5 deg
+    - - tails together
+      - \Delta\mathbf v\ \text{points at the eye}
+      - subtract arrows tip to tip
+      - the change points inward
+    - - its size
+      - v\,\Delta\theta\approx2.9\ \mathrm{m/s}
+      - 'arc rule on a circle of radius v (small turn: chord ≈ arc, 2.902 vs 2.903)'
+      - about 3 m/s per minute
+    - - per second
+      - 2.9/60\approx0.048\ \mathrm{m/s^2}
+      - acceleration = change of velocity ÷ time
+      - 'the same as v²/r: found with no formula'
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG + CalcStack
+  why: 'U-CO-021: the user''s ''how can a steady component still mean acceleration'''
+  related:
+  - movie: M03
+    slug: Wind on weather charts (planned, v6 pos 15)
+    covers: gradient and cyclostrophic wind
+  - *id003
+  feedback:
+  - U-CO-021
+  - U-CO-099
+  layout: 'Later-movie names as keywords (''more: …''), each <= 1 line, out before the next scene; no box.'
+- id: s15_cylinder
+  t:
+  - 1373.725
+  - 1429.55
+  sentence_times:
+  - - 1373.725
+    - 1376.5
+  - - 1376.85
+    - 1379.825
+  - - 1380.175
+    - 1383.15
+  - - 1383.5
+    - 1388.675
+  - - 1389.025
+    - 1394.5
+  - - 1394.85
+    - 1401.125
+  - - 1401.475
+    - 1407.35
+  - - 1407.7
+    - 1416.0
+  - - 1416.35
+    - 1422.2
+  - - 1422.55
+    - 1428.75
+  beat: 'intuition: a tall storm needs height; cylindrical coordinates; the eyewall (Must 1, 2 guards)'
+  visual: 'Full-width three.js (HView3D, from build 1, fixed): the GOES-16 mesoscale 0.5-km visible image (contrast enhanced, unlit, toneMapped
+    false, opacity 1) as the floor, centred on the radar eye (26.552 N, 82.278 W; never the model centre in this picture), 120 × 120 km; S5-S6
+    the camera tilts from top-down to 35 deg; a gold eyewall ring (9 px) at the radar eyewall radius 29.7 km on ''eyewall'' (S3 and S6) with a
+    SideCallout ''eyewall'' linked to it. S2-S4: three animated streak families (illustrative): rose spiralling in near the floor, a slate rising
+    sheet at the eyewall, blue flowing out at the top. S7-S9: the z axis (orange) rises from the eye; a translucent cylinder (rims 6 px, sides
+    3 px) of radius 30 km and height 15 km (vertical exaggeration listed); keywords ''r, θ, z'' and ''cylindrical coordinates'' in the column.
+    Source line under the picture.'
+  voiceover: 'So far, our storm has been flat. But a real tropical cyclone is tall. Near the sea, the air spirals in. Close to the eye, it rises
+    in a ring of towering clouds called the eyewall. And near the top, about twelve to fifteen kilometres up, it flows out again. Here''s Ian
+    from above, seen by a weather satellite at six in the evening, universal time. The clear hole in the middle is the eye, and the ring of bright
+    cloud round it is the eyewall. To describe a tall, round storm, we add a third coordinate to polar coordinates: the height, z, measured straight
+    up. The distance r, the angle theta and the height z are called cylindrical coordinates. That''s because all the places at one distance r
+    form a cylinder round the storm''s axis.'
+  on_screen_eq:
+    latex: (r,\ \theta,\ z)
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.data.goes.fetch_abi + true_colour / to_latlon (ABI L2 CMIPM, mesoscale M1, C01-C03)
+    params:
+      time: 2022-09-28T18:01
+      sector: M1
+      res_km: 0.5
+      centre:
+      - 26.552
+      - -82.278
+      box_km: 120
+      eyewall_radius_km: 29.7
+    test: ../Fluid Dynamics/tests/data/test_imagery_admin.py::test_write_drape_sidecar_edges; CHECK DS13 crop centred on the radar eye (≤ 2 km),
+      eye pixels darker than the eyewall ring (research R/plate_options.png)
+  exaggeration:
+  - vertical ×4 (15 km drawn against a 120-km floor)
+  - streak families are an illustrative in-up-out picture; s18-s20 show the data
+  - contrast stretched (said on the source line)
+  kind: 3-D satellite plate + cylinder
+  data: GOES16-ABI-M1-ian2022 (new registry key)
+  tool: three.js (HView3D) + house SideCallout
+  runner_up: NEXRAD 0.5-deg reflectivity plate
+  why: the tall storm; Must 1 fixed with a 4× sharper, correctly centred image
+  related:
+  - &id004
+    movie: U15
+    slug: How tropical cyclones form, and how their strength is classed (planned, v6 pos 38)
+    covers: eyewall, warm core, classes
+  feedback:
+  - U-CO-022
+  - U-CO-027
+  - U-CO-028
+  source_line: 'Image: NOAA GOES-16 ABI mesoscale · 28 Sep 2022, 18:01 UTC · contrast enhanced'
+  layout: 'SourceBelow under the 3-D picture (never on it); the eyewall callout''s link from its own left edge; Must 2: KaTeX only.'
+- id: s16_three_parts
+  t:
+  - 1429.55
+  - 1478.95
+  sentence_times:
+  - - 1429.55
+    - 1433.625
+  - - 1433.975
+    - 1438.825
+  - - 1439.175
+    - 1444.675
+  - - 1445.025
+    - 1449.725
+  - - 1450.075
+    - 1459.325
+  - - 1459.675
+    - 1466.525
+  - - 1466.875
+    - 1472.9
+  - - 1473.25
+    - 1478.15
+  beat: the wind's three parts; only r-hat and theta-hat turn
+  visual: 'Same 3-D view, camera holds. S1-S4: at one point on the cylinder wall, three component arrows grow on their words: u_r (rose, pointing
+    in, ''−''), u_theta (teal, along the ring), w (slate, up) with KaTeX TipLabels (Must 2); the unit arrows r-hat, theta-hat, z-hat (orange)
+    beside them. S5: the equation (84 px) in the column. S6: z-hat copies at three points round the cylinder, identical (gold ''same'' ticks);
+    S7: r-hat and theta-hat at the same three points visibly turned (gold ''turn'' arcs); keyword ''only r̂, θ̂ turn''.'
+  voiceover: 'In cylindrical coordinates, the wind has three parts. The radial wind, u sub r, points along r hat: in or out. The tangential wind,
+    u sub theta, points along theta hat: round the eye. And the vertical wind, w, points along z hat: up or down. Written as one arrow, the wind
+    is u sub r times r hat, plus u sub theta times theta hat, plus w times z hat. Z hat points straight up everywhere, just like x hat points
+    east everywhere, so z hat never turns. Only r hat and theta hat turn as we go round, by the same rules we found today. So everything we''ve
+    learned about turning arrows works in three dimensions too.'
+  on_screen_eq:
+    latex: \mathbf u=u_r\,\hat{\mathbf r}+u_\theta\,\hat{\boldsymbol\theta}+w\,\hat{\mathbf z}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 (cylindrical coordinates, printed p. 865, page image read 2026-11-05): e_R = e_x cos φ + e_y
+      sin φ, e_φ = −e_x sin φ + e_y cos φ, ∂e_R/∂φ = e_φ, ∂e_φ/∂φ = −e_R; Kundu''s (R, φ, z) = our (r, θ, z)'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_cylindrical
+    params:
+      phi_deg:
+      - 0
+      - 120
+      - 240
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS14 z-hat identical at three azimuths;
+      r-hat, theta-hat rotate by the azimuth
+  exaggeration:
+  - component arrow lengths illustrative
+  kind: 3-D diagram
+  data: GOES plate (reused)
+  tool: three.js + KaTeX TipLabels
+  why: cylindrical = polar + height
+  related: []
+  feedback:
+  - U-CO-057
+  source_line: 'Image: NOAA GOES-16 ABI mesoscale · 28 Sep 2022, 18:01 UTC · contrast enhanced'
+  layout: Tags in KaTeX (Must 2); the equation in the column at x >= 1100.
+- id: s17_ian_check
+  t:
+  - 1478.95
+  - 1556.325
+  sentence_times:
+  - - 1478.95
+    - 1486.025
+  - - 1486.375
+    - 1491.45
+  - - 1491.8
+    - 1502.0
+  - - 1502.35
+    - 1505.375
+  - - 1506.875
+    - 1517.65
+  - - 1518.0
+    - 1526.175
+  - - 1527.675
+    - 1531.775
+  - - 1532.125
+    - 1539.8
+  - - 1540.15
+    - 1542.0
+  - - 1542.35
+    - 1546.3
+  - - 1546.65
+    - 1551.675
+  - - 1552.025
+    - 1555.525
+  beat: is Ian shown correctly? radar eye vs model centre (U-CO-022, -025, -027)
+  visual: 'Left: the NEXRAD KTBW 0.5-deg reflectivity map (dBZ, a perceptual rain colour map, not rainbow; colour bar ''radar echo (dBZ)'' beside
+    it, 0-60) on a Natural Earth coast, 160 × 160 km round the radar eye; S2-S3 a gold eyewall circle fitted to the >= 35 dBZ ring (radius ''≈
+    30 km'', gold link), a white cross ''radar eye''. Source line under it. S4 cross-fade to the SAME box with the HRRR 10-m wind speed (cmocean
+    speed 0-55 m/s, its own colour bar) and the model''s calm centre (teal cross ''model centre''); S5 the radar eye shown as a hollow white ring
+    position marker ON A SEPARATE small locator inset beside the map (two dots with a gold ''≈ 17 km WSW'' bracket) — never both centres on one
+    data picture. S6: a two-row number pair in the column: ''model: 960 hPa'' / ''official estimate: 938 hPa''. S9-S11: keyword rows ''where the
+    eye is: radar, satellite'', ''winds: model, round its own centre'', ''never mixed''.'
+  voiceover: 'Before we look inside Ian, let''s check where its eye really was, because different instruments see it differently. A weather radar
+    on the coast near Tampa measures the rain round the storm. At six in the evening, its picture shows a ring of heavy rain, the eyewall, about
+    thirty kilometres in radius, round an eye with almost no rain. This is the best picture of where the eye was. [beat] The weather model analysis
+    that gives us Ian''s winds in three dimensions puts its own calm centre about seventeen kilometres west-south-west of the radar''s eye. And
+    its lowest pressure is nine hundred and sixty hectopascals, while the official estimate is nine hundred and thirty eight. [beat] So the model
+    is close, but a little off, and a little too weak. That''s normal: a model with grid points every three kilometres can''t hold the sharpest
+    part of a storm exactly. So here''s our rule. For where the eye is, we use the radar and the satellite. For the winds, we use the model, measured
+    round the model''s own centre. And we never mix the two centres in one picture.'
+  on_screen_eq: null
+  physics_source:
+    fn: NEW fluidpy.data.nexrad (Level-II via fetch(); MetPy reader, as in research R/_scripts/ian_nexrad.py) + eyewall circle fit; fluidpy.diag.cyclone.storm_centre
+      (HRRR msl) and the 10-m wind-speed minimum; fluidpy.data.ibtracs.storm_table (938 hPa)
+    params:
+      radar: KTBW
+      time: '2022-09-28T18:01:48'
+      elev_deg: 0.5
+      dbz_ring: 35
+      radar_eye:
+      - 26.552
+      - -82.278
+      model_centre:
+      - 26.506
+      - -82.441
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_storm_centre_V1_paraboloid_recovered_exactly, ::test_real_era5_V5_centre_near_ibtracs_and_cyclonic_inflow;
+      ../Fluid Dynamics/tests/diag/test_radar.py (beam height); CHECK DS15 radar-eye to model-centre 17.0 km at bearing 252.5 deg (geo.sphere.central_angle,
+      initial_bearing); HRRR msl min 960.3 hPa; IBTrACS USA 938 hPa at 18 UTC
+  exaggeration: []
+  kind: data map (radar) + data map (model) + locator
+  data: NEXRAD-L2-KTBW-ian2022; HRRR-zarr-ian2022; IBTrACS-v04r01
+  tool: 'matplotlib/cartopy textures (research: mpl fastest and deterministic) in Remotion'
+  runner_up: GOES M1 'sandwich' plate
+  why: the user asked whether Ian is shown correctly; the honest answer is on screen
+  related: []
+  feedback:
+  - U-CO-022
+  - U-CO-025
+  - U-CO-027
+  - U-CO-028
+  - U-CO-010
+  source_line: 'Data: NOAA NEXRAD radar KTBW (Tampa Bay) · 28 Sep 2022, 18:02 UTC · lowest scan | Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC
+    · centre = the model''s calm centre'
+  layout: One colour bar per picture, beside it (never on it); each picture its own SourceBelow; the locator inset is a drawing (no data colours).
+- id: s18_ian_stack
+  t:
+  - 1556.325
+  - 1648.1
+  sentence_times:
+  - - 1556.325
+    - 1559.85
+  - - 1560.2
+    - 1569.925
+  - - 1570.275
+    - 1576.75
+  - - 1577.1
+    - 1582.525
+  - - 1582.875
+    - 1587.15
+  - - 1587.5
+    - 1594.75
+  - - 1595.1
+    - 1606.0
+  - - 1606.35
+    - 1620.275
+  - - 1621.775
+    - 1626.05
+  - - 1626.4
+    - 1631.425
+  - - 1631.775
+    - 1635.4
+  - - 1635.75
+    - 1641.6
+  - - 1641.95
+    - 1647.3
+  beat: 'the layer stack, redesigned (U-CO-029-032): what pressure levels are; heights; colours'
+  visual: 'HOUSE K5 LayerStack3D (copy the derivatives s09b / weather-basics stack look), full width minus the column, from frame 0 seen from
+    the side at 20 deg elevation, OUTSIDE the stack. FIVE HRRR 3-km layers of u_r round the model''s calm centre (26.506 N, 82.441 W, one centre
+    for all levels): 925, 850, 500, 200, 150 hPa at their box-mean heights 0.70, 1.43, 5.80, 12.44, 14.25 km, each a 500 × 500 km square (the
+    HRRR box), textures >= 1024 px, built in matplotlib: diverging map centred on 0, symmetric ±16 m/s, rose (−, inflow) ↔ pale ↔ blue (+, outflow),
+    a bold dark ZERO CONTOUR on every layer, NO hatching (U-CO-023); below-ground points transparent. Coast (Natural Earth 10 m, white) on the
+    bottom layer. A HEIGHT AXIS on the stack''s left edge with km ticks 0, 3, 6, 9, 12, 15 km (52 px); each layer gets a tag at its right edge
+    as it is spoken: ''925 hPa ≈ 0.7 km'', ''850 hPa ≈ 1.4 km'', ''500 hPa ≈ 5.8 km'', ''200 hPa ≈ 12.4 km'', ''150 hPa ≈ 14.3 km'' (S5-S8). Short
+    tangential dashes (warm white, moving, anticlockwise seen from above) on each layer''s 100-km ring. Colour bar ''radial wind u_r (m/s)'' with
+    ''−  in'' and ''+  out'' glyphs in the column, visible throughout. S2-S3 keyword ''pressure level'' and a tiny pressure-vs-height glyph. S6
+    keyword ''975 hPa: under the sea near the eye'' (slate). S11: ''heights drawn ×15''.'
+  voiceover: 'Now let''s look inside Ian, layer by layer. Weather models store the wind on pressure levels: surfaces where the air pressure has
+    one value, like nine hundred and twenty five hectopascals. Since the pressure drops as we go up, each level sits at a height, and we''ll write
+    that height beside it. Here are five layers round Ian''s eye, from the model, at six in the evening. Each layer is a square about five hundred
+    kilometres across. The lowest is at nine hundred and twenty five hectopascals, about seven hundred metres above the sea. We don''t use a lower
+    level, because near the eye the pressure at the sea surface was below nine hundred and seventy five hectopascals, so that level would lie
+    under the sea there. Then come eight hundred and fifty hectopascals, about one and a half kilometres up, five hundred, about six kilometres,
+    two hundred, about twelve kilometres, and one hundred and fifty, about fourteen kilometres. [beat] The colour on each layer is the radial
+    wind, u sub r. Rose, with a minus sign, means that the air flows in, towards the eye. Blue, with a plus sign, means that it flows out. Pale
+    means neither, and a dark line marks where the radial wind is exactly zero. We drew the heights much taller than they really are, so that
+    we can see between the layers.'
+  on_screen_eq: null
+  physics_source:
+    fn: NEW fluidpy.data.hrrr.fetch_fields(store='prs', levels=…) (research R/_scripts/ian_hrrr_prs.py route through fetch()); fluidpy.diag.cyclone.storm_relative_wind
+      per level (u_r, u_theta per point); fluidpy.data.stack.stack_product (heights, below-ground mask)
+    params:
+      time: 2022-09-28T18
+      levels_hPa:
+      - 925
+      - 850
+      - 500
+      - 200
+      - 150
+      centre:
+      - 26.506
+      - -82.441
+      box_km: 500
+      colour_range_ms:
+      - -16
+      - 16
+      zero_contour: true
+      hatch: false
+    test: '../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; ../Fluid Dynamics/tests/data/test_stack.py::test_stack_levels_order_height_mask,
+      ::test_stack_arco_names_and_provenance; CHECK DS16 box-mean heights 0.70/1.43/5.80/12.44/14.25 km (spoken 0.7, 1.5, 6, 12, 14 ±15 %); 975
+      hPa below ground within the core (p_sfc < 975 hPa at the centre: HRRR msl 960.3)'
+  exaggeration:
+  - vertical ×15 (14 km drawn against a 500-km floor)
+  - tangential dashes move as an animation, not a time change (one analysis hour)
+  kind: 3-D layer stack (data)
+  data: HRRR-zarr-prs-ian2022 (new registry key; research file ian_hrrr_prs_18z.nc)
+  tool: three.js LayerStack3D fed by mpl textures (research §5)
+  runner_up: PyVista stills
+  why: 'U-CO-029-032 and U-CO-023: heights, readable values, orbit, no stripes'
+  related:
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: pressure, hPa, pressure levels and heights
+  feedback:
+  - U-CO-023
+  - U-CO-029
+  - U-CO-030
+  - U-CO-031
+  - U-CO-032
+  - U-CO-027
+  - U-CO-028
+  source_line: 'Data: NOAA HRRR analysis (pressure levels) · 28 Sep 2022, 18 UTC · centre = the model''s calm centre'
+  layout: Colour bar beside the stack in the column (never on it); height axis ticks 52 px; tags at each layer's right edge, never over another
+    layer's tag; SourceBelow.
+- id: s19_ian_layers_lit
+  t:
+  - 1648.1
+  - 1705.475
+  sentence_times:
+  - - 1648.1
+    - 1655.775
+  - - 1656.125
+    - 1662.375
+  - - 1662.725
+    - 1668.8
+  - - 1670.3
+    - 1673.775
+  - - 1674.125
+    - 1679.45
+  - - 1679.8
+    - 1687.725
+  - - 1689.225
+    - 1693.425
+  - - 1693.775
+    - 1697.925
+  - - 1698.275
+    - 1704.675
+  beat: layers lit bottom to top with readouts; orbit; one close look (<= 6 s)
+  visual: 'Same stack. S1: all layers dim to 40 %; the 100-km ring (teal, 3 px) on every layer. S2-S3: the 925 layer lights (100 %); its ring-mean
+    readout ''0.7 km: ≈ −6.5 m/s'' (rose, ''−'') appears in the column as a SideCallout with a gold link to that layer''s ring (link from the
+    text''s left edge). S4: ''1.4 km: ≈ 0'' (slate) linked to the 850 ring; S5: ''5.8 km: ≈ +1'' and ''12.4 km: ≈ +1'' (blue) linked to their
+    rings; S6: the 150 layer lights, ''14.3 km: ≈ +6.5 m/s'' (blue, ''+''). Readouts stack in the column in the SAME vertical order as the layers
+    (top layer at the top), so no two links cross. S7: a gold three-part path on the stack''s side: in (bottom) → up → out (top). S8: the camera
+    ORBITS from outside, azimuth −40 deg → +40 deg, elevation 20 → 35 deg, eased, <= 30 deg/s; readouts fade to 50 % during the orbit and back.
+    S9: the ONE close look (<= 6 s): the camera eases in to just above the sea at the stack''s side, ground and all five levels visible, looking
+    from bottom to top, then eases back out to the start view (never between or through the layers; the column fades during the close look only).'
+  voiceover: 'Let''s light the layers one at a time, from the bottom up, and read each one on a ring a hundred kilometres from the centre. On
+    the lowest layer, about seven hundred metres up, the air flows in almost everywhere. Round the ring, the radial wind averages about minus
+    six and a half metres per second. [beat] At one and a half kilometres, it''s almost zero. At six and at twelve kilometres, it''s a little
+    positive, about plus one. And at fourteen kilometres, the sign has flipped: the air flows out, at about plus six and a half metres per second.
+    [beat] So the air comes in near the bottom, and goes out near the top. Now let''s swing round the stack, to see it from another side. And
+    here''s one short, closer look from the side, just above the sea, looking up past the layers.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (ring means at 100 km per level, 72 azimuths)
+    params:
+      ring_km: 100
+      levels_hPa:
+      - 925
+      - 850
+      - 500
+      - 200
+      - 150
+      centre:
+      - 26.506
+      - -82.441
+    test: '../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS17 ring
+      means at 100 km: 925 −6.5, 850 +0.5, 500 +0.9, 200 +0.9, 150 +6.6 m/s (±0.3); inflow share 50-300 km at 925 hPa >= 0.85 (''almost everywhere'')'
+  exaggeration:
+  - vertical ×15
+  - camera orbit and close look are camera moves, not data
+  calc_rows:
+  - \overline{u_r}(100\ \mathrm{km}):\ -6.5,\ +0.5,\ +0.9,\ +0.9,\ +6.6\ \mathrm{m/s}
+  kind: 3-D layer stack (data) + readouts
+  data: HRRR-zarr-prs-ian2022
+  tool: three.js LayerStack3D + house SideCallout
+  why: 'U-CO-030: values readable per layer, linked to their heights'
+  related: []
+  feedback:
+  - U-CO-030
+  - U-CO-031
+  - U-CO-032
+  source_line: 'Data: NOAA HRRR analysis (pressure levels) · 28 Sep 2022, 18 UTC · centre = the model''s calm centre'
+  layout: Cameras <= 90 deg/s, eased (fix-loop rule 7); stack never under the column (build-1 K6 lesson); colour bar visible except during the
+    close look.
+- id: s20_ian_curtain
+  t:
+  - 1705.475
+  - 1818.9
+  sentence_times:
+  - - 1705.475
+    - 1711.1
+  - - 1711.45
+    - 1718.55
+  - - 1718.9
+    - 1727.4
+  - - 1728.9
+    - 1736.55
+  - - 1736.9
+    - 1740.0
+  - - 1740.35
+    - 1746.525
+  - - 1746.875
+    - 1750.7
+  - - 1751.05
+    - 1760.275
+  - - 1761.775
+    - 1769.25
+  - - 1770.75
+    - 1773.8
+  - - 1774.15
+    - 1783.625
+  - - 1785.125
+    - 1791.375
+  - - 1791.725
+    - 1797.15
+  - - 1797.5
+    - 1800.7
+  - - 1801.05
+    - 1809.55
+  - - 1809.9
+    - 1818.1
+  beat: 'D20: the ring average → radius-height section (in, up, out); pointer U15'
+  visual: 'Cross-fade from the stack: a vertical slice through the stack''s axis rotates to face the camera and becomes the 2-D radius-height
+    section (picture zone x 80-1000, y 80-800): x = radius 0-200 km (linear, ticks 0, 50, 100, 150, 200 km), y = height 0-16 km (ticks 0, 4, 8,
+    12, 16 km), filled colours = ring-mean u_r from all nine HRRR levels (975 masked where below ground), the stack''s diverging map and zero
+    contour, the SAME colour bar in the column; dark contour lines of ring-mean u_theta every 10 m/s with labels on the lines (no label over another).
+    S1-S3: an animated ring at one height shrinks to a single point on the slice (''average round the ring → one point (r, z)''), Layered TeX
+    of the average in the column. S7-S8: the inflow core marked with a gold dot ''≈ −16 m/s, 30 km, 0.7 km up'' (SideCallout); S9: the outflow
+    region ''≈ +9 m/s'' at 150 km, 15 km up; S10-S11: the u_theta maximum marked ''≈ 55 m/s, 30 km, 1.4 km up''. S12: the 10-m ring mean 34.8
+    at 25 km as a small teal tick at the bottom edge (weaker at the sea surface). S13-S14: in-up-out arrows (gold, animated dashes) drawn on the
+    slice: in along the bottom, up at r ≈ 30-50 km, out along the top — labelled ''must rise'' (inferred from in-below / out-above; the model''s
+    analysed vertical velocity is not used). S15: keyword ''more: How tropical cyclones form''.'
+  voiceover: 'Five layers still leave gaps, and cylindrical coordinates give us a neater picture. On every level, we can average round each ring,
+    just as we averaged round one ring in Part 1. An average round a ring depends only on the distance r and the height z, because going all the
+    way round removes theta. [beat] So we can draw the whole storm on one slice, with the distance from the centre along the bottom, and the height
+    going up. This picture is called a radius-height section. Each colour is a ring average of the radial wind, now from all nine levels of the
+    model. Near the sea, there''s a thin layer of strong inflow. Its strongest ring average is about minus sixteen metres per second, thirty kilometres
+    from the centre, about seven hundred metres up. [beat] Near the top, from about twelve kilometres up, the air flows out, at up to about plus
+    nine metres per second. [beat] The dark lines show the tangential wind. Its strongest ring average is about fifty five metres per second,
+    also thirty kilometres from the centre, about one and a half kilometres up. [beat] It''s weaker right at the sea surface, where the sea slows
+    the air, and it gets weaker higher up. Air that flows in at the bottom and out at the top must rise in between. It rises in the eyewall, close
+    to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical coordinates show it in one picture. How
+    a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
+  on_screen_eq:
+    latex: \overline{u_r}(r,z)=\frac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (the ring average of Part 1, at every r and z)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind on all nine HRRR levels (radii 5-200 km every 5 km, 72 azimuths); heights from the box-mean HRRR
+      geopotential height
+    params:
+      levels_hPa:
+      - 975
+      - 925
+      - 850
+      - 700
+      - 500
+      - 300
+      - 200
+      - 150
+      - 125
+      radii_km: 5..200 step 5
+      centre:
+      - 26.506
+      - -82.441
+      mask: p > p_sfc
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS18 min
+      ring-mean u_r = −15.7 m/s at 30 km, 925 hPa; max +8.9 at 150 km, 125 hPa; max u_theta 55.0 at 30 km, 850 hPa; 10-m u_theta(25 km) 34.78
+  exaggeration:
+  - height axis stretched (16 km against 200 km)
+  - in-up-out arrows inferred from the u_r pattern (illustrative), not from w data
+  calc_rows:
+  - \min\overline{u_r}\approx-16\ \mathrm{m/s}\ (30\ \mathrm{km},\ 0.7\ \mathrm{km})
+  - \max\overline{u_r}\approx+9\ \mathrm{m/s}\ (150\ \mathrm{km},\ 15\ \mathrm{km})
+  - \max\overline{u_\theta}\approx55\ \mathrm{m/s}\ (30\ \mathrm{km},\ 1.4\ \mathrm{km})
+  derivation:
+    id: D20
+    goal: 'the azimuthal mean: one slice for the whole storm'
+    steps:
+    - - average round a ring at one height
+      - \overline{u_r}(r,z)=\tfrac{1}{72}\sum_k u_r(r,\theta_k,z)
+      - Part 1's ring average
+      - theta is averaged away
+    - - repeat for every r and every level
+      - (r,z)\mapsto\overline{u_r},\ \overline{u_\theta}
+      - nine levels × radii 5-200 km
+      - a radius-height section
+    - - read it
+      - \text{in below},\ \text{out above}\Rightarrow\text{rise between}
+      - mass must go somewhere (said, not computed)
+      - the overturning circulation
+  kind: 2-D data section
+  data: HRRR-zarr-prs-ian2022 (+ the 10-m field of Part 1)
+  tool: matplotlib texture + Remotion SVG overlays
+  runner_up: ERA5 section (pattern only)
+  why: U-CO-030 'values hard to read' → one slice with numbers; why cylindrical coordinates help
+  related:
+  - *id004
+  feedback:
+  - U-CO-030
+  - U-CO-099
+  source_line: 'Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · ring averages round the model''s calm centre'
+  layout: Colour bar in the column beside the slice; contour labels on their own lines; SourceBelow; axis titles 'distance from the centre (km)'
+    and 'height (km)' >= 44 px.
+- id: s21_amphan_intro
+  t:
+  - 1818.9
+  - 1875.1
+  sentence_times:
+  - - 1818.9
+    - 1828.975
+  - - 1829.325
+    - 1833.85
+  - - 1834.2
+    - 1839.025
+  - - 1839.375
+    - 1849.175
+  - - 1849.525
+    - 1859.05
+  - - 1859.4
+    - 1868.725
+  - - 1869.075
+    - 1874.3
+  beat: 'application 2: the Bay of Bengal, Cyclone Amphan (globe zoom tour, zoom back out)'
+  visual: 'House globe (cross-product v5 56:35-57:54 look; §5b zoom-reveal): Blue Marble globe on the left, unzoomed, text column right. S1 on
+    ''Bay of Bengal'': the globe turns to 15 N, 88 E and zooms (dist 4.3 → 2.4, 1.5 s, full-bleed, right side darkened behind the column); labels
+    centred within 1 s of their words: ''India'', ''Myanmar'', ''Bangladesh'', ''Bay of Bengal''. S2-S3: keyword ''storm 2: Cyclone Amphan'' and
+    a one-line recall ''cyclone = tropical cyclone (Bay of Bengal name)''. S4: Amphan''s IBTrACS track draws (gold, dots every 6 h) from 16 May;
+    S5 on ''18 May'': the dot at peak grows, keyword ''super cyclonic storm''. S6: the camera flies to the landfall point (21.4 N, 88.1 E), ''Sundarbans''
+    and ''West Bengal'' labelled. S7: ''Kolkata'', ''Satkhira'', ''Khulna'' dots with labels; the track passes west of Satkhira and Khulna with
+    gold distance brackets ''≈ 45 km'', ''≈ 78 km''. S8: the Khulna and Satkhira districts outlined (Natural Earth admin-1/2 or GADM if licence-clear;
+    else a dashed circle round the two cities, said). End: the camera zooms back out to the start view (zoom-tour rule). Source line under the
+    globe.'
+  voiceover: Now let's meet our second storm, on the other side of the world, in the Bay of Bengal, between India and Myanmar, with Bangladesh
+    at its northern end. Remember, here a tropical cyclone is simply called a cyclone. In May twenty twenty, Cyclone Amphan formed in the south
+    of the Bay. On the eighteenth of May, it became a super cyclonic storm, the strongest class there, and the first in the Bay of Bengal since
+    nineteen ninety nine. On the twentieth, it came ashore in the Sundarbans, the huge mangrove forest on the border between India's state of
+    West Bengal and Bangladesh. Its centre then passed close to Kolkata, about forty five kilometres west of Satkhira, and about seventy eight
+    kilometres west of Khulna. So the Khulna and Satkhira districts of Bangladesh took much of its flooding.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.ibtracs.storm_table (NI basin, sid 2020136N10088); fluidpy.geo.sphere.central_angle (closest approaches); fluidpy.data.naturalearth
+      (places, admin lines)
+    params:
+      sid: 2020136N10088
+      landfall_utc: 2020-05-20T10:00-12:00
+      places:
+        Khulna:
+        - 22.842
+        - 89.558
+        Satkhira:
+        - 22.72
+        - 89.07
+        Kolkata:
+        - 22.57
+        - 88.36
+    test: 'CHECK DS19 closest approach of the 3-hourly IBTrACS track (interpolated): Kolkata ≈ 17 km, Satkhira ≈ 45 km W, Khulna ≈ 78 km W (research
+      §3); peak IMD 130 kt / 920 hPa 18 May; IMD ''super cyclonic storm'' first since 1999 (cited: IMD report)'
+  exaggeration:
+  - globe zoom is a camera move
+  kind: 3-D globe tour
+  data: IBTrACS-NI (registry IBTrACS-v04r01); NASA BMNG; Natural Earth
+  tool: house globe (kit_cp Globe3D / GlobeView) with GlobeFrame fades
+  why: 'U-CO-024: a Bay of Bengal storm; U-CO-060 groundwork (Khulna)'
+  related:
+  - *id004
+  feedback:
+  - U-CO-024
+  - U-CO-026
+  source_line: 'Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Amphan, 16-21 May 2020 · NASA Blue Marble · Natural Earth'
+  layout: '§5b: text only on the faded part; names centred within 1 s; zoom back out before the scene ends; source line below the globe.'
+- id: s22_amphan_eye
+  t:
+  - 1875.1
+  - 1895.65
+  sentence_times:
+  - - 1875.1
+    - 1881.475
+  - - 1881.825
+    - 1886.575
+  - - 1886.925
+    - 1894.85
+  beat: Amphan's pinhole eye (MODIS 18 May)
+  visual: 'Picture zone: the MODIS Terra true-colour image of 18 May 2020 (GIBS, 250 m), cropped round the eye (≈ 600 × 600 km, then a slow zoom
+    to ≈ 150 km), the pinhole eye marked by a thin gold ring on ''pinhole eye'' (S2); S3: a ghost of s15''s cylinder (outline only) settles over
+    the eye; keyword ''same shape → same coordinates''. Source line under the image.'
+  voiceover: 'Here''s Amphan on the eighteenth of May, two days before landfall, seen by a NASA satellite. In the middle of its clouds is a tiny
+    clear dot: a pinhole eye. It''s the same shape as Ian, a round storm turning round a calm eye, so the same cylindrical coordinates fit it
+    too.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.gibs.fetch_wms (MODIS_Terra_CorrectedReflectance_TrueColor, 2020-05-18) + write_drape
+    params:
+      date: '2020-05-18'
+      lat:
+      - 12.0
+      - 19.0
+      lon:
+      - 83.0
+      - 90.0
+    test: ../Fluid Dynamics/tests/data/test_imagery_admin.py::test_nodata_mask_and_mosaic_fill, ::test_write_drape_sidecar_edges; CHECK DS20 the
+      eye lies within 30 km of the IBTrACS 06 UTC 18 May position (13.4 N, 86.2 E)
+  exaggeration:
+  - slow zoom is a camera move
+  kind: satellite image
+  data: GIBS MODIS Terra 2020-05-18 (research R/bob_gibs_sheet.png)
+  tool: Remotion <Img> + SVG ring
+  runner_up: Himawari-8 (oblique, VZA ≈ 64 deg)
+  why: the eye for Amphan, honestly two days before landfall
+  related: []
+  feedback:
+  - U-CO-024
+  source_line: 'Image: NASA Worldview (MODIS Terra) · 18 May 2020 · Cyclone Amphan'
+  layout: SourceBelow; the ring thin enough to leave the eye visible.
+- id: s23_amphan_ring
+  t:
+  - 1895.65
+  - 1992.95
+  sentence_times:
+  - - 1895.65
+    - 1899.525
+  - - 1899.875
+    - 1907.2
+  - - 1907.55
+    - 1914.775
+  - - 1915.125
+    - 1922.95
+  - - 1923.3
+    - 1931.4
+  - - 1931.75
+    - 1940.5
+  - - 1940.85
+    - 1949.55
+  - - 1951.05
+    - 1959.275
+  - - 1959.625
+    - 1969.275
+  - - 1969.625
+    - 1972.4
+  - - 1973.9
+    - 1975.875
+  - - 1976.225
+    - 1985.05
+  - - 1986.55
+    - 1992.15
+  beat: Amphan's spin and inflow on a ring, beside Ian's
+  visual: 'Left: ERA5 10-m wind speed map 06 UTC 20 May 2020 (85-92 E, 17.5-24.5 N, cmocean speed 0-30 m/s, colour bar beside, Natural Earth coast
+    and borders, animated wind arrows from the data), the ERA5 centre (teal cross ''ERA5 centre'') and the 100-km ring with 72 dots; S4 a gold
+    square the size of one 0.25-deg box drawn next to the centre (''one box ≈ 28 km''). S6: the ring-mean arrows at one ring point (teal round
+    ''≈ 20'', rose in ''≈ −6'', to one m/s scale). S7: anticlockwise arc + ''northern hemisphere'' keyword. S8: slate ''official estimate: 90
+    kt (3-min) ≈ 167 km/h''. S10-S11: a compact two-column comparison in the maths zone (no box): ''Ian · 25 km · HRRR'' | ''Amphan · 100 km ·
+    ERA5''; rows ''round 34.8 | 20.1'', ''in −13.3 | −6.0'', ''inflow angle ≈ 21° | ≈ 17°'' with the tan rows ''13.3/34.8 ≈ 0.38'', ''6.0/20.1
+    ≈ 0.30''. Source line under the map.'
+  voiceover: 'Let''s measure Amphan''s winds the same way we did Ian''s. There''s no fine model like Ian''s over the Bay of Bengal, so we use
+    a global data set called ERA5. It''s a reanalysis: a best estimate of past weather, made by blending observations with a weather model. Its
+    grid boxes are about twenty eight kilometres wide, wider than Amphan''s eye, so it smooths the storm a lot. Here''s Amphan at six in the morning,
+    universal time, on the twentieth of May, about four hours before landfall. We put the origin at ERA5''s own centre, and draw a ring a hundred
+    kilometres out, where ERA5''s spin is strongest. Ten metres above the sea, the tangential wind averages about twenty metres per second, and
+    the radial wind about minus six. [beat] The air goes round anticlockwise as seen from above, just like Ian''s, because both storms are in
+    the northern hemisphere. The official estimate at that hour, averaged over three minutes, was about ninety knots, or about a hundred and sixty
+    seven kilometres per hour. So the reanalysis is far too weak. [beat] But the shape is right. Six over twenty is zero point three, so Amphan''s
+    inflow angle is about seventeen degrees, close to Ian''s twenty one. [beat] Two storms, in two different oceans, both spiral in at a similar
+    angle.'
+  on_screen_eq:
+    latex: \tan(\text{inflow angle})=\frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \approx17^\circ
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.fetch_box (sfc, 2020-05-20T06); fluidpy.diag.cyclone.storm_centre + storm_relative_wind; fluidpy.data.ibtracs.storm_table
+    params:
+      time: 2020-05-20T06
+      centre:
+      - 20.657
+      - 87.796
+      msl_min_hPa: 966.9
+      radii_km:
+      - 50
+      - 100
+      - 200
+      - 300
+      n_az: 72
+    test: '../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; ../Fluid Dynamics/tests/diag/test_cyclone.py::test_storm_centre_V1_paraboloid_recovered_exactly,
+      ::test_real_era5_V5_centre_near_ibtracs_and_cyclonic_inflow; CHECK DS21 ring means 10 m at 100 km: v_t 20.1, v_r −6.0 m/s (research era5_rings.json);
+      ERA5 v_t max at 100 km among 50/100/200/300; inflow angles 16.6 / 20.9 deg; IBTrACS wmo 90 kt, 956 hPa at 06 UTC (IMD, 3-min)'
+  exaggeration:
+  - ring-mean arrows drawn at one ring point to a common m/s scale
+  calc_rows:
+  - \overline{u_\theta}\approx20\ \mathrm{m/s},\qquad \overline{u_r}\approx-6\ \mathrm{m/s}\ (100\ \mathrm{km})
+  - 90\ \mathrm{kt}\times1.852\approx167\ \mathrm{km/h}
+  - \frac{13.3}{34.8}\approx0.38\ \Rightarrow\ \approx21^\circ
+  kind: data map + comparison
+  data: ERA5-ARCO-amphan2020 (research compare/amphan_era5_sfc_06z.nc); IBTrACS-NI
+  tool: mpl texture + Remotion SVG
+  runner_up: —
+  why: 'U-CO-024: the Bay storm''s numbers beside Ian''s, with the product''s limits said'
+  related: []
+  feedback:
+  - U-CO-024
+  - U-CO-027
+  source_line: 'Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC · Cyclone Amphan'
+  layout: Colour bar beside the map; comparison rows aligned in two columns in the maths zone; no box.
+- id: s24_amphan_curtain
+  t:
+  - 1992.95
+  - 2030.475
+  sentence_times:
+  - - 1992.95
+    - 1998.0
+  - - 1998.35
+    - 2000.5
+  - - 2000.85
+    - 2009.175
+  - - 2010.675
+    - 2014.6
+  - - 2016.1
+    - 2022.225
+  - - 2022.575
+    - 2029.675
+  beat: Amphan's radius-height section beside Ian's
+  visual: 'Two radius-height sections side by side across the full width (each x-range 0-300 km linear for Amphan, 0-200 km for Ian, both 0-16
+    km high), the same diverging colour map and ONE shared colour bar between them in a gap >= 40 px (never on a picture). Ian left (from s20,
+    shrunk), Amphan right: ERA5 ring means at radii 25-400 km, 10 levels 1000-125 hPa, heights from ERA5 geopotential; levels below ground masked.
+    S2: gold marker on Amphan''s inflow core ''≈ −11 m/s, 100 km, 975 hPa (≈ 0.3 km)''; S3: outflow ''≈ +6 m/s'' at 200 km, 150 hPa; S4: the gold
+    in-up-out arrows drawn on both (the same shape). Each section its own source line under it.'
+  voiceover: Here's Amphan's radius-height section from ERA5, next to Ian's. The same pattern appears. Near the sea, the air flows in, at up to
+    about minus eleven metres per second, a hundred kilometres from the centre. [beat] Near the top, it flows out, at up to about plus six. [beat]
+    It's blurred, because ERA5's boxes are wide, but it's the same in, up and out. With cylindrical coordinates, two different storms, from two
+    different data sets, fit into the same picture.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.era5_arco.vertical_ring_product (Amphan, 2020-05-20T06, ring means by level)
+    params:
+      levels_hPa:
+      - 1000
+      - 975
+      - 925
+      - 850
+      - 700
+      - 500
+      - 300
+      - 200
+      - 150
+      - 125
+      radii_km:
+      - 25
+      - 50
+      - 75
+      - 100
+      - 150
+      - 200
+      - 300
+      - 400
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS22 min
+      ring-mean v_r −11.1 m/s at 100 km, 975 hPa; max +6.2 at 200 km, 150 hPa (research era5_rings.json; recomputed with p_sfc mask)
+  exaggeration:
+  - height axis stretched
+  - in-up-out arrows illustrative
+  kind: 2-D data sections, side by side
+  data: ERA5-ARCO-amphan2020 (pl); HRRR-zarr-prs-ian2022
+  tool: matplotlib textures + Remotion SVG
+  why: 'two storms, one picture: cylindrical coordinates generalise'
+  related: []
+  feedback:
+  - U-CO-024
+  source_line: 'Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC · Cyclone Amphan | Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC'
+  layout: One shared colour bar between the two (it is the same scale); two SourceBelow lines, one under each; no text over either picture.
+- id: s25_why_cylindrical
+  t:
+  - 2030.475
+  - 2081.75
+  sentence_times:
+  - - 2030.475
+    - 2036.375
+  - - 2036.725
+    - 2038.9
+  - - 2039.25
+    - 2041.075
+  - - 2041.425
+    - 2050.425
+  - - 2050.775
+    - 2052.825
+  - - 2053.175
+    - 2061.65
+  - - 2062.0
+    - 2068.1
+  - - 2068.45
+    - 2070.375
+  - - 2070.725
+    - 2080.95
+  beat: 'why: ''There are three good reasons'''
+  visual: 'Three mini pictures built one per reason across the picture zone (no boxes): (1) a messy plan-view u_r layer (s18 925 hPa) folding
+    round its axis into the s20 slice (''shape''); (2) the ring with v theta-hat and the inward rose arrow next to an east/north pair whose u,
+    v both wiggle on two small sine-like curves (''physics''; the curves are the Part 1 ring curves, data_block.ian, reused small); (3) three
+    arrows ''in'', ''round'', ''up'' on the cylinder (''meaning''). Keywords ''shape'', ''physics'', ''meaning'' in the maths zone on their words.'
+  voiceover: 'So why do scientists who study tropical cyclones use cylindrical coordinates? There are three good reasons. The first is shape.
+    A tropical cyclone is nearly round, so averaging round the rings turns a messy storm in three dimensions into one clear slice. The second
+    is physics. With turning arrows, the inward acceleration, minus v squared over r, appears the moment we write the velocity down. With east
+    and north arrows, the same acceleration hides inside changes of both parts. The third is meaning. The three parts, in, round and up, are exactly
+    what we want to know: how fast the storm draws air in, how fast it spins, and where the air rises.'
+  on_screen_eq:
+    latex: \mathbf a=-\frac{v^2}{r}\,\hat{\mathbf r}
+    vallis_eq: derived in s12 (D18)
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed p. 865)
+  physics_source:
+    fn: reuses s12, s18, s20 products and Part 1's ring curves (fluidpy.diag.cyclone.storm_relative_wind)
+    params:
+      storm: data_block.ian
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact
+  exaggeration:
+  - mini pictures are reduced copies of earlier scenes
+  kind: three-reason summary
+  data: reused
+  tool: Remotion SVG
+  why: HOUSE_STYLE §2 beat 4 ('three good reasons')
+  related: []
+  feedback: []
+  source_line: 'Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC (mini pictures)'
+  layout: One small source line under the data minis; keywords only.
+- id: s26_onshore
+  t:
+  - 2081.75
+  - 2128.375
+  sentence_times:
+  - - 2081.75
+    - 2087.35
+  - - 2087.7
+    - 2092.175
+  - - 2092.525
+    - 2100.725
+  - - 2101.075
+    - 2112.45
+  - - 2112.8
+    - 2119.175
+  - - 2119.525
+    - 2127.575
+  beat: 'back to Ian''s landfall: the wind blew onshore (D21/D22 moved to Part 4)'
+  visual: 'Real map (local true-shape frame) of SW Florida from Naples to Tampa Bay: HRRR 20 UTC 10-m wind speed (cmocean speed 0-50 m/s, colour
+    bar beside, Must 15) with animated wind arrows from the data, Natural Earth 10 m coast (white). S1-S2: keyword ''along the shore · across
+    the shore'' with two short orange arrows at Fort Myers Beach (along the coast; across it), drawn as a schematic pair (no numbers). S3: the
+    wind arrow at the beach (teal, moving dashes) ''≈ 33 m/s from the SW''. S4: the coast''s direction shown as a thin orange line ''coast runs
+    NNW'' and keyword ''almost straight onto the land''. S5: keyword ''Part 4: how much, exactly'' (slate), with a tiny turned-axes glyph.'
+  voiceover: Now let's come back down to the ground, to Ian's landfall on the coast of Florida. On a coast, east and north are not the most useful
+    directions. What matters is how much of the wind blows along the shore, and how much blows across it, onto the land or out to sea. At eight
+    in the evening, universal time, about an hour after landfall, the model's wind at Fort Myers Beach was about thirty three metres per second,
+    from the south-west. The coast there runs towards the north-north-west, so that wind blew almost straight onto the land. In Part 4, we'll
+    turn our axes to line up with the coast, and measure exactly how much of it pushed straight onto the coast.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.hrrr.fetch_fields (sfc, 2022-09-28T20; build 1 HRRR-zarr-ian2022), nearest grid point to Fort Myers Beach
+    params:
+      time: 2022-09-28T20
+      point:
+      - 26.45
+      - -81.95
+      u:
+      - 22.232
+      - 24.293
+    test: CHECK DS24 speed 32.93 m/s from 222.5 deg (build-1 DC42); coast bearing 329 (initial_bearing Naples -> Englewood 329.1) only for the
+      'NNW' word; numbers in Part 4
+  exaggeration: []
+  kind: data map
+  data: HRRR-zarr-ian2022 (20 UTC)
+  tool: Remotion SVG map (build-1 GeoMap)
+  why: keeps the surge story; the along/across derivation now lives in Part 4 (coordinator 2026-11-05)
+  related:
+  - movie: '#5d'
+    slug: Part 4 (turning frames)
+    covers: coast bearing 329 deg, along/across winds (D21-D22)
+  feedback:
+  - U-CO-092
+  source_line: 'Data: NOAA HRRR analysis · 28 Sep 2022, 20 UTC · Natural Earth coast'
+  layout: GeoMap body in an overflow-hidden div; colour bar beside; SourceBelow.
+- id: s27_surge
+  t:
+  - 2128.375
+  - 2221.55
+  sentence_times:
+  - - 2128.375
+    - 2132.15
+  - - 2132.5
+    - 2138.175
+  - - 2138.525
+    - 2146.375
+  - - 2146.725
+    - 2154.35
+  - - 2155.85
+    - 2164.7
+  - - 2166.2
+    - 2173.7
+  - - 2175.2
+    - 2182.325
+  - - 2182.675
+    - 2187.75
+  - - 2188.1
+    - 2195.8
+  - - 2197.3
+    - 2205.5
+  - - 2205.85
+    - 2215.575
+  - - 2215.925
+    - 2220.75
+  beat: 'storm surge: Fort Myers Beach up, Tampa Bay down; the sign flip (pointers R06, F19)'
+  visual: 'Same map widened to Tampa Bay (colour bar 0-50 m/s beside, Must 15). S1-S2: a water-colour arrow pushes onto the beach and a thin animated
+    sea-level sheet in a small three.js side-section inset beside the map (×50 vertical, listed) rises; keyword ''storm surge''. S3: a shallow
+    sea-floor profile under the sheet from ETOPO 2022 along a line WSW from Fort Myers Beach (''wide, shallow shelf''). S4: keyword ''≈ 1 cm per
+    hPa'' (slate). S5: ''NHC: 10-15 ft above ground ≈ 3-4.5 m'' (slate, ''above the ground'', Should 11). S6: the Fort Myers (upriver) tide-gauge
+    curve (residual above predicted tide) draws itself to ''≈ +2.2 m''. S7: the camera pans north to Tampa Bay; the coast line ''runs almost due
+    north'' and the wind arrow there pointing out to sea (keyword ''out to sea''). S8: the Saint Petersburg gauge curve drops to ''≈ −1.8 m''
+    (Should 11 labels kept). S9: two small arrows side by side ''onto the land'' (rose) and ''out to sea'' (blue) with a gold ''surge flips''
+    bracket. S11-S12: keywords ''more: Friction and Ekman layers'' and ''more: Storm surge''. Sound: water draining, −30 LUFS, under S8 only.'
+  voiceover: 'That onshore push piles sea water up against the coast. The sea rises far above the normal tide, and this rise is called a storm
+    surge. The wind''s push does most of the work, especially over a wide, shallow sea floor like the one off southwest Florida. The low pressure
+    helps a little: the sea rises by about one centimetre for every hectopascal that the pressure drops. [beat] At Fort Myers Beach, the official
+    report found water ten to fifteen feet above the ground: about three to four and a half metres. [beat] A tide gauge up the river, at Fort
+    Myers, measured the water about two point two metres above the normal tide. [beat] Now go about a hundred and sixty kilometres north, to Tampa
+    Bay, on the other side of the storm''s spin. There, the coast runs almost due north, and the wind blew out to sea. So the water was pushed
+    away, and the gauge at Saint Petersburg read about one point eight metres below the normal tide. [beat] Same storm, opposite sides of the
+    eye: onto the land on one side, out to sea on the other, and the surge flips with it. The wind along a coast matters too, because it can bring
+    cold water up from below, which is a story for the movie on Friction and Ekman layers. And the full story of storm surge has its own movie
+    later in this series.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.coops.fetch_water_level + residual (8725520 Fort Myers, 8726520 St. Petersburg); fluidpy.geo.vectors.components_in_axes (355.4
+      deg); fluidpy.data.etopo (shelf profile)
+    params:
+      gauges:
+      - '8725520'
+      - '8726520'
+      coast_bearing_StP_deg: 355.4
+      u_StP:
+      - -10.25
+      - -16.0
+      time: '2022-09-28'
+    test: ../Fluid Dynamics/tests/data/test_coops.py::test_parse_recorded_predictions_and_residual_sign, ::test_residual_identical_is_zero_and_offset_recovered,
+      ::test_surge_product_checks_if_present; ../Fluid Dynamics/tests/geo/test_vectors_1a1b.py::test_components_in_axes_V1_cardinals_and_movie_number,
+      ::test_components_in_axes_V2_axes_are_compass_and_left_turn, ::test_components_in_axes_V7_invariants; CHECK DS25 Fort Myers residual peak
+      2.209 m; St. Petersburg min −1.755 m; St. Petersburg wind out to sea (HRRR 20 UTC, coast ≈ 355 deg; the number is Part 4's); FMB–StP 160.5
+      km; NHC TCR AL092022 10-15 ft = 3.05-4.57 m (cited)
+  exaggeration:
+  - sea-level inset vertical ×50
+  - shelf profile vertical exaggeration (stated in the manifest)
+  calc_rows:
+  - 10\text{-}15\ \mathrm{ft}\approx3\text{-}4.5\ \mathrm m
+  - '\text{Fort Myers: }\approx+2.2\ \mathrm m,\qquad \text{Saint Petersburg: }\approx-1.8\ \mathrm m'
+  kind: data map + gauge graphs
+  data: HRRR-zarr-ian2022 (20 UTC); NOAA CO-OPS gauges (build 1 D3); ETOPO 2022; NHC TCR (cited)
+  tool: Remotion SVG + TimeGraph + three.js inset
+  why: storm surge (user request) and the sign flip that turned axes reveal
+  related:
+  - &id005
+    movie: F19
+    slug: …storm surge (planned, v6 pos 79)
+    covers: wind set-up, inverse barometer, shelf
+  - movie: R06
+    slug: Friction and Ekman layers (planned, v6 pos 113)
+    covers: coastal upwelling
+  feedback:
+  - U-CO-092
+  - U-CO-099
+  source_line: 'Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · NOAA CO-OPS gauges · NHC report'
+  layout: Colour bar beside the map (Must 15); gauge graphs under the column, no text on curves; SourceBelow.
+- id: s28_ian_record
+  t:
+  - 2221.55
+  - 2263.15
+  sentence_times:
+  - - 2221.55
+    - 2224.35
+  - - 2224.7
+    - 2227.65
+  - - 2228.0
+    - 2234.975
+  - - 2235.325
+    - 2242.375
+  - - 2242.725
+    - 2257.925
+  - - 2259.425
+    - 2262.35
+  beat: 'Ian: no satellite saw the surge; the tide gauges are its record (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
+    §v3))'
+  visual: 'S0-S2: keyword ''no satellite saw the surge itself'' (warm white, 54 px) in the column, kept through the scene; the s27 map shrinks
+    to a locator on the right (colour bar beside it, dated credit under it, Must 15) with the two gauge dots ''Fort Myers (upriver)'' and ''Saint
+    Petersburg'' labelled. S3-S4: the build-1 s40 gauge chart, now large in the picture zone: x = hours, 27 Sep 12 UTC → 29 Sep 00 UTC (36 h,
+    ticks every 6 h with dates), y = water level above / below the predicted tide (m), zero line slate; Fort Myers (orange solid, end label ''Fort
+    Myers (upriver)'', peak ''≈ +2.2 m'') and Saint Petersburg (blue dashed, end label, trough ''≈ −1.8 m''), drawn on their words; a slate vertical
+    line ''landfall ≈ 19 UTC''. A separate slate reference line ''NHC: 3-4.5 m above the ground at Fort Myers Beach'' sits BESIDE the chart with
+    ''above the ground'' (Should 11), not on the gauge axis (different datum). S5: keyword ''the surge, measured''. Source line under the chart.'
+  voiceover: 'What did satellites see of Ian''s surge? Here''s an honest answer: nothing. The surge drained back to the sea within hours, before
+    any satellite or survey plane passed overhead. So the best record of it is the tide gauges we just met, which measure the water level every
+    few minutes. Here are their two lines over a day and a half: the water rises by about two point two metres above the normal tide at Fort Myers,
+    and drops by about one point eight metres below it at Saint Petersburg, both within a few hours of landfall. [beat] Those two lines are the
+    surge, measured.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.coops.fetch_water_level + residual (8725520 Fort Myers, 8726520 St. Petersburg; observed minus predicted, MHHW datum)
+    params:
+      gauges:
+      - '8725520'
+      - '8726520'
+      window_utc:
+      - 2022-09-27T12
+      - 2022-09-29T00
+    test: ../Fluid Dynamics/tests/data/test_coops.py::test_parse_recorded_predictions_and_residual_sign, ::test_residual_identical_is_zero_and_offset_recovered,
+      ::test_surge_product_checks_if_present; CHECK DS25 Fort Myers residual peak 2.209 m at h 22.5; St. Petersburg min −1.755 m at h 23.0; both
+      extremes within 4 h of landfall (19:05 UTC)
+  exaggeration: []
+  pending: 'PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md §v3): Ian gets NO swipe unless §v3 finds its inland flooding
+    clearly visible in a before/after pair; then S3-S4 may be replaced by a swipe and re-voiced'
+  calc_rows:
+  - '\text{Fort Myers: }\approx+2.2\ \mathrm m,\qquad \text{Saint Petersburg: }\approx-1.8\ \mathrm m'
+  kind: gauge time series + locator map
+  data: NOAA CO-OPS gauges (build 1 D3); HRRR 20 UTC locator; NHC TCR (cited)
+  tool: house TimeGraph + Remotion SVG
+  runner_up: aerial NAIP vs NGS swipe (flood_visuals v2; only if §v3 says the flooding shows)
+  why: 'user decision: Ian keeps the gauge chart, no swipe unless the flooding shows; honest that no satellite saw the surge'
+  related:
+  - *id005
+  feedback:
+  - U-CO-092
+  source_line: 'Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · NOAA CO-OPS gauges · NHC report'
+  layout: Chart labels at line ends (no legend over curves); the NHC reference beside the chart; colour bar beside the locator map (Must 15).
+- id: s29_flood_flight
+  t:
+  - 2263.15
+  - 2306.85
+  sentence_times:
+  - - 2263.15
+    - 2266.7
+  - - 2267.05
+    - 2272.75
+  - - 2273.1
+    - 2276.225
+  - - 2276.575
+    - 2282.75
+  - - 2283.1
+    - 2290.375
+  - - 2291.875
+    - 2298.3
+  - - 2298.65
+    - 2306.05
+  beat: zoom flight to the chosen flood event (provisional Amphan, Bay of Bengal) (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
+    §v3))
+  visual: 'three.js in Remotion (flight() + Patch from movies/src/captests/flights.tsx; v2 prototype V2/clips/amphan_zoom_flight_threejs.mp4 re-timed):
+    Blue Marble globe → great-circle slerp, log-eased distance, tilt → the basin patch (provisional Bay of Bengal 84-94 E, 15-25 N; land MODIS
+    NBAR colour-matched to Blue Marble; sea ETOPO depth on one light-to-dark blue ramp, colour bar ''sea depth (m)'' in the column) with the 20-m
+    (white) and 200-m (darker) isobaths as VECTOR contours from ETOPO 2022 15″. S2-S3: the two lines pulse on their words; S4: gold bracket coast
+    → 20-m line along 89.0 E ''≈ 33 km''. S6: the IBTrACS track draws on with a UTC date readout, landfall ring on ''20 May''. The flight ends
+    top-down on the swipe''s frame, cross-fading to its BEFORE image so the last frame = s30''s first frame. §5b edge fades; source line below.'
+  voiceover: 'Floods that last longer can be seen from space. Let''s fly to one: the Bay of Bengal, after Cyclone Amphan in twenty twenty. The
+    blue gets darker where the sea gets deeper. The white line marks where the sea is twenty metres deep, and the darker line two hundred metres.
+    Off the Sundarbans, the sea stays shallower than twenty metres for about thirty three kilometres from the coast. [beat] A wide, shallow shelf
+    like this lets a storm pile the water up high, just as off Florida. Here''s Amphan''s track, coming up from the south of the Bay, and crossing
+    the coast in the Sundarbans on the twentieth of May.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.ibtracs.storm_table; fluidpy.data.etopo (isobaths 20, 200 m); fluidpy.data.nasa_bmng; GEE MCD43A4 NBAR patch
+    params:
+      event: pending v3 (provisional Amphan 2020136N10088)
+      isobaths_m:
+      - 20
+      - 200
+      shelf_check_lon_E: 89.0
+    test: CHECK DS28 shelf width to the 20-m line along the check meridian (provisional ≈ 33 km at 89.0 E, flood_visuals §2); DS19 track
+  exaggeration:
+  - camera flight (a camera move, not data)
+  pending: 'PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md §v3): the flight goes to the event the scout picks; slots
+    EVENT, BASIN, LANDFALL_PLACE, SHELF_KM; re-voice the slot sentences (S1, S4, S6)'
+  kind: 3-D zoom flight
+  data: IBTrACS; ETOPO 2022; MODIS NBAR; NASA BMNG (event per §v3)
+  tool: three.js in Remotion (flights.tsx)
+  runner_up: MapLibre globe (T3 route)
+  why: takes the viewer to the flood with the shelf depth and the track
+  related:
+  - *id005
+  feedback:
+  - U-CO-024
+  - U-CO-092
+  source_line: 'Data: NASA Blue Marble · MODIS NBAR · NOAA ETOPO · IBTrACS v04r01 (NOAA NCEI) · <event, dates from §v3>'
+  layout: Depth colour bar in the column (never on the globe); §5b edge fades; the last frame matches s30.
+- id: s30_flood_swipe
+  t:
+  - 2306.85
+  - 2375.05
+  sentence_times:
+  - - 2306.85
+    - 2312.2
+  - - 2312.55
+    - 2314.5
+  - - 2314.85
+    - 2325.625
+  - - 2325.975
+    - 2334.375
+  - - 2334.725
+    - 2337.175
+  - - 2337.525
+    - 2342.25
+  - - 2342.6
+    - 2346.75
+  - - 2348.25
+    - 2353.975
+  - - 2355.475
+    - 2362.95
+  - - 2363.3
+    - 2369.1
+  - - 2369.45
+    - 2374.25
+  beat: ONE plain false-colour before/after swipe (captests A5 look), no overlay, for the clearest event (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
+    §v3)); pointer F32
+  visual: 'Swipe as captests/A5_before_after/swipe_offline_capture.mp4: a wide false-colour pair in one frame, the gold vertical line GLIDING
+    across at one eased rate (hold BEFORE 1.2 s → glide 3.2 s → pause → back to 62 % → settle 50 %), ''before · <date>'' / ''after · <date>''
+    tags at the top of each half (each dims while its side is hidden), haloed 44-px place names, scale bar + north arrow, NO inundation overlay,
+    same sensor and one fixed stretch on both dates. Provisional: MODIS 7-2-1, Terra 16 May vs Aqua 29 May 2020, 88.05-89.95 E, 21.55-23.0 N.
+    S2-S3: three-row band legend under the image (''shortwave infrared → red'', ''near infrared → green'', ''red light → blue''); S4: colour key
+    swatches ''plants · bare ground · clouds · water''. S6-S7: the date tags on their words. S8: pointers on the darkened areas on their words
+    (from §v3). S10: keyword ''what the surge left, not the surge'' (slate). S11: keyword ''more: Floods from space''. Source line under the image.'
+  voiceover: Here's a before and after picture from NASA's MODIS instrument. It's in false colour. The satellite measures light that our eyes
+    can't see, shortwave infrared and near infrared, and we paint them red and green, with ordinary red light painted blue. In these colours,
+    plants look bright green, bare ground looks brown, clouds look white, and water looks dark blue or black. That makes water easy to spot. On
+    the left is the sixteenth of May, four days before landfall. On the right is the twenty ninth of May, nine days after. [beat] As the line
+    glides across, dark water spreads over land that was green before. [beat] Both pictures are pinned to the same latitudes and longitudes, so
+    every pixel compares the same patch of ground. Even so, the picture shows what the surge left behind, not the surge itself. How to map floods
+    from space has its own movie later in this series.
+  on_screen_eq: null
+  physics_source:
+    fn: NEW fluidpy.data.gee route (or fluidpy.data.gibs) for the §v3 pair; fixed stretch from the before image; cloud QA reported
+    params:
+      event: pending v3
+      provisional:
+        sensor: MODIS
+        bands: 7-2-1
+        before: 2020-05-16 (Terra)
+        after: 2020-05-29 (Aqua)
+        bbox_wsen:
+        - 88.05
+        - 21.55
+        - 89.95
+        - 23.0
+    test: NEW route tests (request recorded, same grid both dates, fixed stretch); CHECK clear fraction of both dates stated in the manifest
+  exaggeration:
+  - the gliding line animates the comparison, not a time change
+  pending: 'PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md §v3): event, sensor, bands, dates and the ''what shows''
+    sentence from §v3; slots SENSOR, BANDS, BEFORE, AFTER, WHAT_SHOWS; re-voice S0, S6-S8'
+  kind: before/after false-colour swipe (no overlay)
+  data: pending flood_visuals §v3 (provisional GEE-MODIS-721-amphan2020)
+  tool: Remotion Slider (flights.tsx) + legend/place layers
+  why: 'user decision: one plain false-colour swipe for the clearest flood; colours explained before use'
+  related:
+  - movie: F32
+    slug: '…floods II: Sentinel-1 inundation maps (planned, v6 pos 84)'
+    covers: SAR flood mapping
+  feedback:
+  - U-CO-092
+  source_line: 'Images: <sensor, dates from §v3> · bands 7-2-1 · processed in Google Earth Engine'
+  layout: Legend and colour key under the image beside the source line; nothing on the image but place dots, names and pointers.
+- id: s31_recap
+  t:
+  - 2375.05
+  - 2456.55
+  sentence_times:
+  - - 2375.05
+    - 2384.95
+  - - 2385.3
+    - 2390.575
+  - - 2390.925
+    - 2400.425
+  - - 2400.775
+    - 2405.95
+  - - 2406.3
+    - 2419.375
+  - - 2419.725
+    - 2428.425
+  - - 2428.775
+    - 2439.325
+  - - 2439.675
+    - 2443.475
+  - - 2443.825
+    - 2449.775
+  - - 2450.125
+    - 2455.75
+  beat: recap ('To sum up'); last sentence the teaser to Part 3
+  visual: 'One beat per sentence, mini pictures reused (no headings): the unit circle with Δθ along θ̂; the two slope graphs; the two turning
+    rules with gold swing arrows; the three product-rule pieces; the ring with v/r, v θ̂ and the inward arrow; ''0.048 m/s² ≈ g/200''; the cylinder
+    with u_r, u_θ, w, and the two radius-height sections (Ian, Amphan) with in-up-out arrows (small source lines under them); the coast with along/across
+    bands and the surge sheet; a thumbnail of the s30 swipe (pending v3); a small globe for the Part 3 teaser. Each spoken number on screen at
+    its words.'
+  voiceover: 'To sum up, the tip of r hat moves along a circle of radius one, so for a small turn delta theta, it moves delta theta along theta
+    hat. That gave us the slopes of cosine and sine: minus sine, and cosine. So d r hat by d theta is theta hat, and d theta hat by d theta is
+    minus r hat: each arrow swings towards the other one. The product rule says that a number times an arrow changes through both of them. On
+    a ring, the angle grows at v over r, the velocity is v theta hat, and the acceleration is minus v squared over r, times r hat: inward, even
+    at a steady speed. For Ian''s ring, that''s about zero point zero four eight metres per second squared, about two hundred times smaller than
+    gravity. Adding the height z gives cylindrical coordinates, and averaging round the rings shows a tropical cyclone''s in, up and out, in Ian
+    and in Amphan alike. Wind blowing onto a coast piles up a storm surge. Tide gauges measured Ian''s, and satellites can map the floods a surge
+    leaves behind. In Part 3, we''ll take these ideas to the biggest round shape of all: the Earth.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative summary of earlier scenes
+  kind: recap
+  data: reused
+  tool: Remotion SVG
+  why: HOUSE_STYLE §2 beat 6; split plan §2g teaser
+  related:
+  - movie: '#5c'
+    slug: ch00_coordinates_sphere
+    covers: latitude, longitude, km from degrees (the coast map's km)
+  feedback:
+  - U-CO-101
+  layout: Mini pictures one per sentence; small source lines under the data minis. No headings.
+- id: s32_end
+  t:
+  - 2456.55
+  - 2479.45
+  sentence_times:
+  - - 2456.55
+    - 2462.75
+  - - 2463.1
+    - 2471.15
+  - - 2471.5
+    - 2479.15
+  beat: 'series end card (maths ending, word for word; decision: maths end card)'
+  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (unit circle with r-hat and theta-hat, a storm cylinder, a radius-height
+    section, a coast with turned axes); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid
+    dynamics'' (54 px); notebook icon ''coordinates notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with a 24-px
+    gap under the icon row (Should 14). Then a 2.5-s silent hold while the music fades.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science,
+    meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths
+    concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - decorative end card (illustrative)
+  kind: end card
+  data: —
+  tool: house EndCard
+  why: 'series ending word for word (user decision: maths end card)'
+  related: []
+  feedback: []
+  layout: End card. No source line.
