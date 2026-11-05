@@ -5,6 +5,7 @@ If this session died: if review 3 is not in reports/ch00_movies.md, rerun it; if
 **Update 2026-11-04 later:** weather review 3 = FIX (4 must, 18 should); weather fix loop 3 (last) source fixes + s50/s59 narration splice in a builder (no Remotion until #4 is done). #4 fix 3b K6 0 hits (37c6ce1); full render running: `render_fix3.py --conc 3` (resumable) then `finish_fix3.sh 21` (QA uses stills/k6final2), log G:/…/ch00_derivatives_taylor/v1/fix3/render_fix3*.log. Then review 4 of #4. Series audit reports/ch00_series_audit.md: proposals A–E waiting for the user's go (C: 55 GB after npm cache clean).
 **Update 2026-11-04 evening:** #4 FINAL and weather basics v5 FINAL (UF2 review 4 PASS, 0 Must, 16 Should -> §5b retro-fit; G: viewing 0.3_weather_basics_v5_FINAL.mp4 + Drive). Finalised since last data-account reminder: 2.
 **#5 coordinates:** K6 clean (0 hits, stills/k6r2), full render running: `bash movies/src/ch00_coordinates/checks/co_render.sh` (resumable; 22 chunks, join, QA). Then G: viewing + Drive, review 1 (+2). Reviewer flags in build1_log.md. **#6 gradient** build 1 pre-render (source only) in a builder.
+**User decisions 2026-11-04 19:10:** (1) #4 (14) and weather (16) Shoulds -> §5b retro-fit, not reopened. (2) fluidpy uncommitted `fluidpy/diag/axes.py` (+222) and new `fluidpy/diag/contours.py`: library-steward tests + commits them at the next fluidpy release (before M01 contour maps uses them). (3) Obsolete scratch deleted (0.97 GB); larger scratch audit pending.
 
 # (older) G: back 2026-10-30 (was disconnected ~09:45); queue restarted
 
