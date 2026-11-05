@@ -6979,3 +6979,116 @@ The physics and every spoken number are right. The Musts are all TSX/data-overla
 - the missing colour bars.
 
 Only two optional fixes would need narration: the s26 thought-experiment sentence and the "a" clause in s15, and both have TSX-only alternatives. No re-voice is required.
+
+---
+
+## #5a ch00_coordinates_flat — build 1, review 1 (2026-11-05)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat (Part 1) | 38:29.3 (2309.27 s; narration 2306.75 s) | 148.7 MB | 11 PASS, 1 WARN (halves), 3 SKIP (captions, subtitles, physics) | PASS (58/58 CHECK; parity not re-run) | FIX (1 wrong table, 1 unit-wrong line) | FIX | FIX (2 early reveals) | PASS (own check) | PASS (0 flashes, CB-safe ramp) | n/a (retired) | **FIX** |
+
+**Method.** I extracted 231 frames at 640 px, one every 10 s (offset +5 s, checked against a direct grab at 895 s). I tiled them into 26 sheets, which is the 640-px legibility test. I also took 45 full-resolution frames at the title, the hook, every skip chip, every suspicious spot, the halves-WARN windows and the end card. All of them are in `reports/movies/ch00_coordinates_flat/review1/`. I read the timed script (405 lines from `timing.json`) against the frames, and checked every spoken number by hand and against the manifest CHECK rows (DF04–DF26).
+
+**What is right (keep).**
+- Title: "Coordinates · Part 1 / Arrows on a flat map / made easy / polar coordinates and rotated axes".
+  - The s00 sentence follows the house pattern.
+  - The hook says "first of seven parts" and shows the seven-part strip.
+- The recap teaser and the "Part 2: accelerating?" frame point to Part 2. Nothing names the gradient movie as next; "gradient" appears only in the other-notebooks list.
+- End card: the maths-tutorial ending, word for word.
+- Ian numbers match the data report and CHECK rows:
+  - centre: 26.506 N 82.441 W (DF20, 0.76 km from `storm_centre`, 17.0 km from the KTBW radar eye);
+  - ring averages: v_t 34.80 (said "35"), v_r −13.29 (said "minus 13");
+  - inflow angle: 13.3/34.8 = 0.382, giving 20.9° ≈ 21°;
+  - unit conversions: 35 × 3.6 = 126 km/h; 13 × 3.6 ≈ 47 km/h;
+  - travel times: 25 000/13 ≈ 1900 s ≈ 32 min; 2π·25 km = 157 km, which takes ≈ 75 min at 35 m/s;
+  - ratio 35/13 ≈ 2.7; 135 kt ≈ 250 km/h;
+  - the three ring points 0°, 90°, 135° (DF24).
+- No sentence says the inflow holds "all the way round". s25 S11 says "negative at 58 of 72 points" (DF25), and the keyword shows the same.
+- The tangential wind "stays positive all the way round" is true (DF21, min 16.9).
+- Hemisphere and viewpoint are always given: "anticlockwise, seen from above, NH" on the s22 map, and the gold arc runs the right way.
+- Polar and rotated-axes maths checked:
+  - r̂ = (cos θ, sin θ) and θ̂ = (−sin θ, cos θ);
+  - the 90° rule (p, q) → (−q, p);
+  - x′ = x cos α + y sin α, y′ = −x sin α + y cos α;
+  - (4.598, 1.964), length 5;
+  - C₁₁…C₂₂ and the j = 1, 2 sums;
+  - α = θ gives (6, −8) and (5, 0);
+  - the 0.1° slide: 8.73 m = (−6.99, 5.23).
+- Data frames: the HRRR source line sits below every Ian map, and the colour bar is in the column in s01, s21–s24.
+- No equation numbers, book names, URLs or badges on screen.
+- Text stays inside x ≤ 1842 (widest: s14 CalcStack at x 1836).
+- Captions: 542 cues, 0 violations (≤ 2 × 42, ≤ 17 cps, 1–7 s). The text equals the script, and `out/` vtt/srt are byte-identical to the source copies.
+- Loudness −16.3 LUFS, peak −4.0 dBTP. Flashes 0/s. The wind-speed ramp is perceptual (pale to dark green), and the radial vs tangential lines are also told apart by dash pattern.
+
+**U-CO items mapped to Part 1.** These are all addressed on screen and in the voice:
+- 001–003: s09–s11, D01–D03, anticlockwise +90°;
+- 007–009: s13 column shows u = (10, 0), θ = 53°, r̂, θ̂; u_r = 6 and u_θ = −8 grow on their words;
+- 010: re-centred on the model's calm eye, with the offset named in the source line;
+- 011: s23 explains what 35 and 13 mean (47 km/h, 32 min, 75 min, ~3 m round per 1 m in, spiral);
+- 012/014: end labels plus a legend;
+- 013/015: s24 works three points by hand;
+- 016: s25 is slower, with dashed mean lines;
+- 017: s26 puts the four angles side by side;
+- 022/025–027: product, time and centre are on the source line;
+- 084–089: s16–s20;
+- 099: later movies are named ("more: Tensors made easy", "How tropical cyclones form", "Vorticity in plain words");
+- 101: the split.
+
+Review-1 guards are kept: Must 4/5, Should 1/2/3/4/14/18.
+
+**Maths-skip guidance.** All four blocks have a spoken lead-in, a chip, and an "If you skipped, here's what to keep" line. Every chip time matches the VTT:
+
+| Block | Chip | VTT cue |
+|---|---|---|
+| s09 | "skip to 11:47" | 707.55 s |
+| s13 | "skip to 16:05" | 965.90 s |
+| s15 | "skip to 26:05" | 1565.15 s |
+| s24 | "skip to 33:39" | 2019.275 s |
+
+All 18 manifest chapter marks equal the scene starts in `timing.json`, and the render follows `timing.json` (offset 0 at 895 s). Two gaps are listed under Should 5–6.
+
+**Halves WARN.**
+- Right half, 1758–1762 s: dead space. The keyword fades at the start of S4 and the √ line arrives 4 s later; fix with Should 2.
+- Left half, 2199.5–2207 s: intentional. The recap grid is there, but at near-background contrast, so the gate reads it as empty; brighten it (Should 13).
+
+### Must fix (6)
+1. **23:54–24:11, s19 S19–S21: the flipped table shows wrong labels.** After the "flipped over its diagonal" swap, the table holds [[cos α, sin α], [−sin α, cos α]] but keeps the row labels e₁, e₂ and drops the column labels. It now says C₁₂ = sin α, which contradicts C₁₂ = −sin α derived 80 s earlier on the same screen. **Fix** (`cf_sB.tsx`, S19): on the flipped table, label the rows e′₁, e′₂ and the columns e₁, e₂. Or keep the C table and draw the rotation matrix beside it with a gold "rows ↔ columns" link.
+2. **31:13–33:39, s24, and 27:20–27:40, s22: on-map component labels are unreadable at 640 px.** "u_θ = 38.0", "u_r = −8.7", "u_θ = 16.9", "u_r = −37.4" and "u_r = −24.3" are drawn semi-transparent, in thin KaTeX, with no halo, on the green field. The coastline and streaks cross them, and at 32:25 the u_θ arrowhead sits on "16.9". The s22 per-point "u_r"/"u_θ" tags have the same problem. **Fix** (`cf_sC.tsx` S22/S24): full opacity, ≥ 44 px, and a dark 6-px halo like "25 km" has. Place each label off its arrow and the coast (or keep the numbers in the column only, with a gold link).
+3. **33:50–35:25, s25: the wind-speed map has no colour bar.** The whole scene shows it without one, against the user rule U-WB-R2 and point 3 of this brief. **Fix** (`cf_sC.tsx` S25): put the `SpeedBar` under the "why polar here?" keyword or under the graph legend, beside the map, never on it. The same gap, smaller, is at 2:03 (s03 thumbnail), 37:40 (s27 recap mini-map) and the s00 title map: add a compact bar or treat those as Should.
+4. **20:04–20:27, s17 S11–S16: picture label runs into the maths column.** The label "(x′, y′) = (4.6, 1.96)" ends at x ≈ 1055, past the picture zone (≤ 1000). It sits on the same baseline as "x = 3, y = 4, α = 30°", which starts at x 1082. At 640 px the two read as one line. **Fix** (`cf_sB.tsx` S17): move the tip label inside x ≤ 1000, e.g. above-left of the arrow tip, or drop it to two lines.
+5. **28:05, s22 S6: the conversion line has wrong units.** "3600 s / 1000 m = 3.6" is dimensionally wrong (s/m ≠ 1). **Fix** (`cf_sC.tsx` S22 / `cf_eq.ts`): write `1\ \mathrm{m/s}=3600\ \mathrm{m/h}=3.6\ \mathrm{km/h}`, or (3600 s/h) ÷ (1000 m/km), at ≥ 44 px (the fraction is ≈ 32 px now).
+6. **QA is incomplete.** qa.json has `captions` SKIP, `subtitles` SKIP and `physics` SKIP ("no --captions given", "no --manifest given") besides the halves WARN. My own caption check passes, but the physics-parity gate (manifest hashes re-run) was never run. **Fix:** re-run `tools/movie_qa.py` with `--storyboard --captions --manifest` on the fixed build and record 15/15.
+
+### Should fix (14)
+1. **12:39–16:17 (s13–s14) and 37:20 (s27 mini): radial and tangential colours are swapped.** These scenes colour u_r teal and u_θ rose ("u_r: along r̂" teal, "6 r̂" teal, "−8 θ̂" rose). From the title on, and in s21–s26 and the end-card thumbnail, u_θ is teal and u_r is rose. A quantity must keep its colour (HOUSE_STYLE §5). **Fix** (`cf_sB.tsx` S13/S14, `cf_sC.tsx` S27): u_θ teal, u_r rose throughout. Keep the "−" glyph for u_θ = −8.
+2. **29:18–29:26, s23 S4: the answer 37 appears too early.** "≈ 37 m/s" and "√(35²+13²) ≈ 37 m/s" are on screen at 1762 s, ≈ 4–5 s before "about thirty seven" (≈ 1766 s); the answer comes before the calculation. The column is also empty from 1758 to 1762 s (the halves WARN). **Fix** (`cf_sC.tsx` S23): keep "what do they mean?" until the √ line. Reveal the √ on "square root" and "≈ 37" on "thirty seven" (`AT`).
+3. **33:05–33:39, s24: the θ = 135° numbers disagree.** The map says "u_r = −24.3"; the column and the voice say −24.4 (7.1 − 31.5); the exact value is −24.32. Also "38.0" on the map vs "38" in the column. **Fix:** one value everywhere. Either "7.14 − 31.46 ≈ −24.3" (re-voice S20) or a map label of −24.4.
+4. **34:59, s25 S11: "only on the southwest side does it blow a little outward" understates the outflow.** The outward part reaches +14.1 m/s ≈ 51 km/h (DF25), which is not "a little". **Fix** (script, storyboard s25 S11, re-TTS one sentence): "...does it blow outward, by up to about fourteen metres per second."
+5. **31:00, s24 S0–S1: the skip lead-in leaves out the required words.** It only says "if that feels like too much, skip ahead". The rule requires saying the steps are not needed for the weather/climate/maps intuition (s09 and s15 do; s13 S1 omits "maps"). The chip text "every step, if you want it" also lacks the user's word "optional". **Fix** (script s24 S1, s13 S1; `SkipChip` text "every step · optional · skip to mm:ss").
+6. **26:05, s20 keep line: alpha is never given to viewers who skipped.** The line does not name α, yet s26 S8 ("Alpha says how far we turned our axes") and the recap use it. **Fix:** "...turning the axes by an angle alpha changes the numbers…".
+7. **5:38–8:25, s08–s09: θ has no east reference ray.** At 5:45 the θ arc floats with no rays at all; later only the radius is drawn. **Fix** (`cf_sB.tsx` S08/S09): add a dashed east ray from the station, and draw the radius from 5:38.
+8. **7:30–7:50, s09 S8–S10: the inset is unlabelled and boxed.** It shows two arrows (gold and orange, at right angles) with no labels, inside a panel box (no boxes) that touches the circle at x 700. **Fix:** label "slide" and "r̂", drop the box, and keep it ≥ 24 px off the circle.
+9. **1:22–2:13, s03: x̂ and ŷ are hard to see.** They are drawn on top of the same-orange axes, so only the arrowheads show, and the ŷ label crowds tick "1". **Fix** (`cf_sA.tsx` S03): draw the axes muted (as in s15) or offset or thicken the unit arrows.
+10. **1:55–2:10, s03 S5–S6: a "same everywhere" arrow pair overflows.** The pair at (6, 1.5) km pokes past the map panel edge (x 1000 > 990), and one pair covers the balloon. Move both inside.
+11. **0:31–0:40, s02 S0–S2: the map panel is empty for 9 s.** **Fix:** show the station or a faint grid on "a starting point" (33.9 s).
+12. **21:12, s18 S8: "top row: … = 4.60" should be "≈ 4.60"** (0.866·3 + 2 = 4.598; HOUSE_STYLE §6).
+13. **36:39–36:47, s27 S0: the recap grid is near the background colour** (halves WARN). Draw its axes in orange or brighten the grid.
+14. **Other small items.**
+    - 0:10–0:31 and 37:40: the source line wraps, leaving "eye" or "eye, ≈ 17 km…" orphaned. Shorten it to "centre: model's calm eye, ≈ 17 km SW of radar eye".
+    - 28:25–28:56: the "−13 m/s: in" gold link crosses the teal arrow shaft.
+    - 14:47–14:55, s14 S0–S1: the r̂/θ̂ tip labels are missing while the voice says "six times r hat plus minus eight times theta hat".
+
+### Limits
+- Audio not heard. Captions = script was checked from timing.json and the VTT.
+- Motion judged from 10-s samples plus targeted grabs. Swaps between samples were not checked frame by frame.
+- No colour-blind simulation; pixel sizes judged by eye at 1920 and 640 px.
+- I did not re-render page PNGs: the on-screen equations are standard identities with no Vallis numbers, and the storyboard provenance is Kundu (2.4)/(2.5).
+
+**Disk.** C: 115 GB free, G: 487 GB free at the end. This review wrote 24 MB of frames (ignored folder) and one text file to the session scratchpad.
+
+### Overall: FIX (#5a build 1, review 1: 6 Must, 14 Should)
+The physics, the Ian numbers, the maths-skip times and the captions are right.
+- Must fixes 1–5 are TSX-only; Must 6 is a QA re-run.
+- Two Shoulds need one re-voiced sentence each (s24 S20 if −24.3 is chosen, s25 S11).
+- Two Shoulds change narration lines (s24 S1, s20 S19).
