@@ -92,11 +92,14 @@ const S26: React.FC = () => {
         <Keyword f={f} text="width depends on cos φ" at={[80, 830]} appear={tW} out={tThin - 20} s={T.floor + 4} />
         <Keyword f={f} text="thinner and thinner towards the poles" at={[80, 830]} appear={tThin} out={tForget - 20} s={T.floor + 4} />
         <Keyword f={f} text="5 × too big · slopes 5 × too small" at={[80, 830]} appear={tSlope} out={tP2 - 20} s={T.floor + 4} />
-        <Keyword f={f} text="Part 2: degrees → km" at={[80, 830]} appear={tP2} out={tOther - 20} s={T.floor + 4} />
+        <Keyword f={f} text="Part 4: degrees → km" at={[80, 830]} appear={tP2} out={tOther - 20} s={T.floor + 4} />
         <Keyword f={f} text="other grids" at={[XC + 300, 770]} appear={tOther + 20} />
       </Svg>
       <TeX s={String.raw`111.2\div4\approx27.8\ \text{km}`} x={980} y={770} size={56} c={C.ink} o={win(f, tH - 20, tThin - 15)} />
 
+      {[[0.9997, 27.8], [0.9219, 25.6], [0.6639, 18.5], [0.2045, 5.7]].map(([c, w], i) =>
+        <TeX key={i} s={String.raw`27.8\times${c.toFixed(4)}\approx${w.toFixed(1)}\ \text{km}`} x={980} y={840} size={52} c={C.gold}
+          o={win(f, atW[i] - 20, i < 3 ? atW[i + 1] - 30 : tThin - 15)} />)}
       <TeX s={String.raw`27.8\ \text{km}\div5.7\ \text{km}\approx4.9`} x={980} y={770} size={56} c={C.neg} o={win(f, tForget, tOther - 15)} />
 
       {void [cellCentre]}
@@ -340,8 +343,14 @@ const S31: React.FC = () => {
         <Keyword f={f} text="integration" at={[XC, 820]} appear={tName} out={tPrime - 20} />
         <Lbl x={XC} y={830} t="φ′: the latitude of each strip" c={C.key} s={T.floor} o={fin(f, tPrime)} />
       </Svg>
-      <TeX s={eqs[1]} x={XC} y={630} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, tInt - 15)} />
-      <TeX s={String.raw`0.174+0.168+0.158`} x={XC} y={730} size={52} c={C.ink} o={win(f, tSteps + 70, tName - 22)} />
+      <TeX s={eqs[1]} x={XC} y={630} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, SS(k, 7) - 12)} />
+      <CalcStack f={f} x={XC} y={600} size={44} maxLines={4} rows={[
+        { lhs: "", rhs: String.raw`\sin10^\circ\approx0.174,\ \ \sin20^\circ\approx0.342`, at: SS(k, 7), out: SS(k, 8) - 8, c: C.muted },
+        { lhs: "", rhs: String.raw`0^\circ\to10^\circ:\ \ 0.174-0=0.174`, at: AT(k, 7, "zero point one seven four"), out: SS(k, 8) - 8 },
+        { lhs: "", rhs: String.raw`10^\circ\to20^\circ:\ \ 0.342-0.174=0.168`, at: AT(k, 7, "zero point one six eight"), out: SS(k, 8) - 8 },
+        { lhs: "", rhs: String.raw`20^\circ\to30^\circ:\ \ 0.500-0.342=0.158`, at: AT(k, 7, "zero point one five eight"), out: SS(k, 8) - 8 },
+      ]} />
+      <TeX s={String.raw`0.174+0.168+0.158`} x={XC} y={730} size={52} c={C.ink} o={win(f, SS(k, 8), tName - 22)} />
       <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "They add up"), tName - 22)} />
       <Layered parts={[{ t: String.raw`\int_0^{\varphi}`, u: { w: String.raw`\text{sum}`, c: C.gold } }, { t: String.raw`\cos\varphi'` },
         { t: String.raw`\,d\varphi'`, u: { w: String.raw`\text{tiny step}`, c: C.gold } }, { t: String.raw`=\sin\varphi` }]} x={XC} y={660} size={72}
@@ -384,8 +393,11 @@ const S32: React.FC = () => {
       </Svg>
       <CalcStack f={f} x={XC + 40} y={110} size={52} maxLines={3} rows={[
         { lhs: String.raw`\sin90^\circ`, rhs: "=1", at: AT(k, 2, "is one") },
-        { lhs: "", rhs: String.raw`2\pi a^2\approx255\times10^{6}\ \text{km}^2`, at: t255 - 20 },
-        { lhs: "", rhs: String.raw`4\pi a^2\approx510\times10^{6}\ \text{km}^2`, at: AT(k, 4, "about five hundred") - 20 },
+        { lhs: String.raw`a^2`, rhs: String.raw`=6371^2\approx40.6\times10^{6}\ \text{km}^2`, at: SS(k, 3) },
+        { lhs: String.raw`2\pi a^2`, rhs: String.raw`\approx2\pi\times40.6\times10^{6}`, at: t255 - 20 },
+        { lhs: "", rhs: String.raw`\approx255\times10^{6}\ \text{km}^2`, at: t255 + 20, cont: true },
+        { lhs: String.raw`4\pi a^2`, rhs: String.raw`=2\times255\times10^{6}`, at: AT(k, 4, "twice that") },
+        { lhs: "", rhs: String.raw`=510\times10^{6}\ \text{km}^2`, at: AT(k, 4, "about five hundred") - 20, cont: true },
       ]} />
       <TeX s={EQ_S32} x={XC} y={460} size={T.eq} c={C.ink} o={fin(f, tShare)} />
       <TeX s={String.raw`\sin30^\circ=\tfrac12`} x={XC} y={635} size={60} c={C.ink} o={win(f, tHalf, tBrest - 22)} />
@@ -491,12 +503,12 @@ const S34: React.FC = () => {
         </g>
         <Keyword f={f} text="plain average" at={[XC, 360]} appear={tP} c={C.local} o={oMap} />
         <Keyword f={f} text="weighted by cos φ" at={[XC, 470]} appear={tWt} c={C.first} o={oMap} />
-        <Keyword f={f} text="9 °C too cold" at={[XC, 760]} appear={tCold + 20} c={C.neg} />
         <Keyword f={f} text="cos φ weighting" at={[XC, 830]} appear={tHow} />
       </Svg>
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 monthly mean · 1° grid" pic={MB} w={900} o={oMap} name="s34 src" />
       <TeX s={String.raw`\approx7.1\ ^\circ\text{C}`} x={1570} y={360} size={60} c={C.local} o={fin(f, tP) * oMap} />
       <TeX s={String.raw`\approx16.3\ ^\circ\text{C}`} x={1570} y={470} size={60} c={C.first} o={fin(f, tWt) * oMap} />
+      <TeX s={String.raw`16.3-7.1=9.2\ ^\circ\text{C}\ \text{too cold}`} x={XC} y={760} size={50} c={C.neg} o={fin(f, AT(k, 14, "more than nine")) * oMap} />
       <CalcStack f={f} x={XC} y={250} size={50} maxLines={3} o={fout(f, tReal - 10)} rows={[
         { lhs: "", rhs: String.raw`\text{plain: }(30+0)\div2=15\ ^\circ\text{C}`, at: tPlain },
         { lhs: "", rhs: String.raw`\text{weights: }\cos0^\circ=1,\ \cos60^\circ=\tfrac12`, at: tHalf + 20 },
@@ -553,7 +565,7 @@ const S35: React.FC = () => {
   const kw: [number, string, string | null][] = [
     [0, "distance + two angles", null], [1, "", String.raw`a\approx6400\ \text{km}`], [2, "latitude φ", null], [3, "", String.raw`\text{colatitude}=90^\circ-\varphi`],
     [4, "parallel: round the axis", null], [5, "meridian: round the centre", null], [6, "longitude λ: east +", null],
-    [7, "", EQ_S18.split(String.raw`,\quad `)[2]], [8, "", String.raw`U=\Omega\,a\cos\varphi\approx465\ \text{m/s}`], [9, "", String.raw`\Delta y=a\,\Delta\varphi\approx111\ \text{km}`],
+    [7, "", EQ_S18.split(String.raw`,\quad `)[2]], [8, "", String.raw`U=\Omega\,a\cos\varphi\approx464.6\ \text{m/s}`], [9, "", String.raw`\Delta y=a\,\Delta\varphi\approx111\ \text{km}`],
     [10, "", String.raw`\Delta x=a\cos\varphi\,\Delta\lambda`], [11, "", String.raw`dA=a^2\cos\varphi\,d\varphi\,d\lambda`], [12, "share sin φ · weights cos φ", null], [13, "Part 4: turning frames", null],
   ];
   return (

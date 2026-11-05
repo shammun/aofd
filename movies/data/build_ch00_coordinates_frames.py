@@ -190,8 +190,6 @@ def main() -> int:
     row("DP06", "slice: k = cos φ R̂ + sin φ ẑ; j = (−sin φ) R̂ + (cos φ) ẑ from the 90° rule", [*(cp * R3 + sp * Z3 - kB), *(pq[0] * R3 + pq[1] * Z3 - jB)], [0] * 6, 1e-12)
     row("DP06", "screen (3-decimal factors): 0.748 × 0.997 = 0.746 vs −0.745 shown; 0.748 × 0.078 = 0.058 vs 0.059 shown (last-digit rounding)",
         [0.748 * 0.997, 0.748 * 0.078], [0.745, 0.059], 1.2e-3)
-    flag("DP06", "s06", "j = (−0.748×0.997, −0.748×(−0.078), 0.664) ≈ (−0.745, 0.059, 0.664)", "−0.745, 0.059 (exact −0.7454, 0.0585)",
-         "0.748 × 0.997 = 0.7458; 0.748 × 0.078 = 0.0583", "the products of the rounded factors round to −0.746 and 0.058; the screen keeps '≈' with the exact values (voice says ·745, ·059)")
     # s07 checks
     dij = float(call(GV + "dot", "s07", "i·j", a=iB, b=jB))
     cij = np.asarray(call(GV + "cross", "s07", "i × j", a=iB, b=jB))
@@ -241,10 +239,9 @@ def main() -> int:
     dK = np.asarray(call(GS + "great_circle_distance", "s09", "Amphan centre (10-min linear interpolation) → Khulna (NE point)", heavy_call=True,
                          lat1=laf, lon1=lof, lat2=KHULNA_NE[0], lon2=KHULNA_NE[1])) / 1e3
     jm = int(np.argmin(dK))
-    row("DP09", "Amphan's closest approach to Khulna ≈ 78 km (data report §3), centre WEST of Khulna", [dK[jm], float(lof[jm] < KHULNA_NE[1])], [78.0, 1.0], [4.0, 0])
+    row("DP09", "Amphan's closest approach to Khulna 79.4 km → 'about seventy nine' (Part 2 s21: 79.36 km; audit D1), centre WEST of Khulna",
+        [dK[jm], round(float(dK[jm])), float(lof[jm] < KHULNA_NE[1])], [79.37, 79, 1.0], [0.05, 0, 0])
     tmin = np.datetime64("2020-05-20T00:00") + np.timedelta64(int(round(hf[jm] * 60)), "m")
-    flag("DP09", "s09", "Amphan closest approach", "'about seventy eight kilometres' (data report §3)", f"{dK[jm]:.1f} km at {tmin} (our 10-min linear interpolation of the IBTrACS NI fixes)",
-         "both 'about 78-79 km west'; the screen bracket shows the data report's ≈ 78 km as voiced")
     truth("DP09", "closest approach on 20 May 2020, about 16 UTC (data report: ~15:50)", str(tmin).startswith("2020-05-20T15") or str(tmin).startswith("2020-05-20T16"), str(tmin))
     pl = places_ne(["Kolkata", "Khulna", "Dhaka"])
     truth("DP09", "Natural Earth places: Khulna, Kolkata found", "Kolkata" in pl and "Khulna" in pl, pl)
@@ -277,8 +274,6 @@ def main() -> int:
     row("DP11", "dy 91.51 km, dx −55.03 km (± 0.1), φ_mid 26.51°, cos 0.895", [dy, dx, phim, np.cos(phim * D2R)], [91.51, -55.03, 26.51, 0.895], [0.1, 0.1, 0.01, 5e-4])
     row("DP11", "screen: 6371 × 0.895 × (−0.00965) = −55.0", 6371 * 0.895 * -0.00965, -55.0, 0.05)
     row("DP11", "screen Δy: 6371 × 0.01436 = 91.5 (the 4-figure radians; see flags)", 6371 * 0.01436, 91.5, 0.05)
-    flag("DP11", "s11", "Δy = 6371 × 0.0144 ≈ 91.5 km (storyboard row and voice: 'zero point zero one four four')", "0.0144 → 91.5",
-         "6371 × 0.0144 = 91.74; 6371 × 0.01436 = 91.49", "screen shows 0.0144 rad as spoken, and the Δy row multiplies 0.01436 (= 0.823° in radians, = 91.5; arc_lengths with the exact points 91.57). Director: voice 'zero point zero one four four' with 'about ninety one and a half' is off by 0.2 km; suggest saying 'zero point zero one four three six' or keep and accept")
     tanb = abs(dx) / dy
     beta = np.degrees(np.arctan(tanb))
     brg = float(call(GS + "initial_bearing", "s12", "initial bearing A → B on the sphere (DC42)", lat1=A_[0], lon1=A_[1], lat2=B_[0], lon2=B_[1]))
@@ -310,9 +305,10 @@ def main() -> int:
     row("DP14", "screen: 22.2 × (−0.515) = −11.4; 24.3 × 0.857 = 20.8; sum 9.4", [22.2 * -0.515, 24.3 * 0.857, 22.2 * -0.515 + 24.3 * 0.857], [-11.4, 20.8, 9.4], 0.05)
     row("DP14", "screen: 22.2 × (−0.857) = −19.0; 24.3 × (−0.515) = −12.5; sum −31.5 ('thirty one and a half', 'roughly 32')",
         [22.2 * -0.857, 24.3 * -0.515, 22.2 * -0.857 + 24.3 * -0.515], [-19.0, -12.5, -31.5], 0.05)
-    row("DP14", "screen check: 9.4² + 31.6² = 1087; √ = 33.0", [9.4 ** 2 + 31.6 ** 2, np.sqrt(9.4 ** 2 + 31.6 ** 2)], [1087, 33.0], [0.5, 0.05])
-    flag("DP14", "s14", "across row", "storyboard calc row '≈ −19.0 − 12.5 ≈ −31.6'", "−19.0 − 12.5 = −31.5 (unrounded data −31.57)",
-         "screen shows '≈ −31.5' (= the voice 'about minus thirty one and a half'); the check row keeps the voice's 31.6 with a muted 'unrounded: −31.6' keyword")
+    row("DP14", "audit D4: 2-dp products 22.2 × (−0.857) = −19.03, 24.3 × (−0.515) = −12.51; sum −31.54 ≈ −31.5; data −31.57 within 0.05 of −31.54",
+        [round(22.2 * -0.857, 2), round(24.3 * -0.515, 2), round(22.2 * -0.857, 2) + round(24.3 * -0.515, 2), float(acF)], [-19.03, -12.51, -31.54, -31.54], [0, 0, 1e-9, 0.05])
+    truth("DP14", "audit D4: −31.54 rounds to −31.5 (screen and voice use 31.5 everywhere)", round(-31.54, 1) == -31.5)
+    row("DP14", "audit D4 check: 9.4² ≈ 88, 31.5² ≈ 992, 88 + 992 = 1080, √1080 = 32.9 ≈ 33", [9.4 ** 2, 31.5 ** 2, 88 + 992, np.sqrt(1080)], [88.36, 992.25, 1080, 32.86], [1e-9, 1e-9, 0, 5e-3])
     # HRRR's own calm centre at 20 UTC (data report §1c: never the MSLP minimum)
     sp20 = np.hypot(u20, v20)
     pmin = call(DC + "storm_centre", "s14", "sea-level pressure minimum (only to place the speed search box)", heavy_call=True,
@@ -401,6 +397,32 @@ def main() -> int:
           and np.allclose(np.hypot(pu, pv), np.sqrt(200), atol=1e-6)), B1.r6([pu[0], pu[-1], pv[0], pv[-1]], 3))
     V["puck"] = {"lat": B1.r6(pla, 3), "lon": B1.r6(plo, 3), "u": B1.r6(pu, 3), "v": B1.r6(pv, 3), "t_h": B1.r6(tp / 3600, 2)}
     fco = float(call(GF + "coriolis_parameter", "s27", "f = 2Ω sin φ (lat in rad)", lat=45.0 * D2R))
+    # ================================================================ calc & sync audit #5d (2026-11-05): every new screen number
+    row("DP30", "D6 j at Brest with Part 3's 4-dp factors: −0.7478 × 0.9969 = −0.745, −0.7478 × (−0.0785) = 0.059, cos φ = 0.6639 → 0.664",
+        [-0.7478 * 0.9969, -0.7478 * -0.0785, 0.6639, np.sin(BREST[0] * D2R), np.cos(BREST[1] * D2R), np.sin(BREST[1] * D2R)], [-0.7455, 0.0587, 0.6639, 0.7478, 0.9969, -0.0783], [5e-4, 5e-4, 1e-9, 5e-4, 5e-4, 5e-4])
+    truth("DP30", "D6 roundings: −0.7455 → −0.745, 0.0587 → 0.059, 0.6639 → 0.664", [round(-0.7478 * 0.9969, 3), round(-0.7478 * -0.0785, 3), round(0.6639, 3)] == [-0.745, 0.059, 0.664])
+    row("DP30", "D8 s07: j·k = −0.745 × 0.662 + 0.059 × (−0.052) + 0.664 × 0.748 = −0.493 − 0.003 + 0.497 ≈ 0; k·i = 0.662 × 0.078 − 0.052 × 0.997 = 0.052 − 0.052 = 0",
+        [-0.745 * 0.662, 0.059 * -0.052, 0.664 * 0.748, -0.493 - 0.003 + 0.497, 0.662 * 0.078, -0.052 * 0.997, float(jB @ kB), float(kB @ iB)], [-0.493, -0.003, 0.497, 0.001, 0.052, -0.052, 0, 0],
+        [5e-4, 5e-4, 5e-4, 1e-9, 5e-4, 5e-4, 1e-12, 1e-12])
+    row("DP30", "D8 s08: Trappes 2.01° E − (−4.49°) = 6.50°; 6.50 × 73.8 km = 479.7 ≈ 480 km (great circle 480.4)", [TRAPPES[1] - BREST[1], 6.5 * 73.8, dBT / 1e3], [6.50, 479.7, 480], [1e-9, 0.05, 0.5])
+    row("DP30", "D2 Khulna: cos 22.8° = 0.922, sin 22.8° = 0.388 (Part 3: 0.9219, 0.3875), cos 89.6° = 0.007, sin 89.6° = 1.000",
+        [np.cos(22.8 * D2R), np.sin(22.8 * D2R), np.cos(89.6 * D2R), np.sin(89.6 * D2R)], [0.922, 0.388, 0.007, 1.000], [5e-4, 6e-4, 5e-4, 5e-4])
+    row("DP30", "D2 dot: 0.662 × 0.006 = 0.004, −0.052 × 0.922 = −0.048, 0.748 × 0.388 = 0.290; sum 0.246; cos⁻¹ 0.246 = 75.8°",
+        [0.662 * 0.006, -0.052 * 0.922, 0.748 * 0.388, 0.004 - 0.048 + 0.290, np.degrees(np.arccos(0.246))], [0.004, -0.048, 0.290, 0.246, 75.76], [5e-4, 5e-4, 5e-4, 1e-9, 0.01])
+    row("DP30", "D2 east: i_K = (−sin 89.6°, cos 89.6°, 0) = (−1.000, 0.007, 0); i_B·i_K = 0.078 × (−1.000) + 0.997 × 0.007 = −0.078 + 0.007 = −0.071; cos⁻¹ = 94.1°",
+        [-np.sin(89.6 * D2R), np.cos(89.6 * D2R), 0.078 * -1.0, 0.997 * 0.007, -0.078 + 0.007, np.degrees(np.arccos(-0.071))], [-1.0, 0.007, -0.078, 0.007, -0.071, 94.07], [5e-4, 5e-4, 1e-9, 5e-4, 1e-9, 0.01])
+    row("DP30", "D3 radians: 1° = 0.01745 rad; 0.823 × 0.01745 = 0.01436; −0.553 × 0.01745 = −0.00965; middle latitude (26.10 + 26.92) / 2 = 26.51 ≈ 26.5; cos 26.5° = 0.895",
+        [np.pi / 180, 0.823 * 0.01745, -0.553 * 0.01745, (26.10 + 26.92) / 2, np.cos(26.5 * D2R)], [0.01745, 0.01436, -0.00965, 26.51, 0.895], [5e-6, 5e-6, 5e-6, 1e-9, 5e-4])
+    truth("DP30", "D3 (a): the second coast point is near Englewood FL (26.96 N, 82.35 W; < 6 km), not Venice FL (27.10 N, 82.45 W; > 20 km)",
+          float(np.hypot((B_[0] - 26.962) * 111.19, (B_[1] + 82.352) * 111.19 * np.cos(B_[0] * D2R))) < 6
+          and float(np.hypot((B_[0] - 27.100) * 111.19, (B_[1] + 82.454) * 111.19 * np.cos(B_[0] * D2R))) > 20,
+          [round(float(np.hypot((B_[0] - 26.962) * 111.19, (B_[1] + 82.352) * 111.19 * np.cos(B_[0] * D2R))), 1),
+           round(float(np.hypot((B_[0] - 27.100) * 111.19, (B_[1] + 82.454) * 111.19 * np.cos(B_[0] * D2R))), 1)])
+    row("DP30", "D5: 10 / 4 230 000 = 2.36e-6 ≈ 2.4e-6 rad/s; 2.36e-6 × 86 400 = 0.204 rad; 0.204 × 57.3° = 11.7° ≈ 12°",
+        [10 / 4.23e6 * 1e6, 2.36e-6 * 86400, 0.204 * 57.3, np.degrees(1)], [2.364, 0.204, 11.69, 57.30], [5e-4, 5e-4, 5e-3, 5e-3])
+    row("DP30", "D7 puck first guess: 10 × 10 × 1 / 6 371 000 = 1.57e-5 m/s²; × 86 400 s = 1.36 ≈ 1.4 m/s; 10 + 1.4 = 11.4 (full path 11.52 → 11.5)",
+        [10 * 10 * 1 / 6.371e6 * 1e5, 1.57e-5 * 86400, 10 + 1.4, u1], [1.570, 1.356, 11.4, 11.52], [5e-4, 5e-4, 1e-9, 0.005])
+    row("DP30", "D8 s27: sin 45° = 0.707", np.sin(45 * D2R), 0.707, 5e-4)
     row("DP27", "f = 1.031e-4 s⁻¹; f v = 1.031e-3; ratio f v / (uv tan φ / a) = 65.7 ('about 66'); DC25", [fco * 1e4, fco * 10 * 1e3, fco * 10 / abs(mx)], [1.031, 1.031, 65.7], [1e-3, 1e-3, 0.05])
     row("DP27", "screen: 100 / 6.371e6 = 1.57e-5; 2 × 7.29e-5 × 0.707 = 1.031e-4; 1.03e-3 / 1.57e-5 = 65.6",
         [100 / 6.371e6 * 1e5, 2 * 7.29e-5 * 0.707 * 1e4, 1.03e-3 / 1.57e-5], [1.57, 1.031, 65.6], [1e-3, 1e-3, 0.05])

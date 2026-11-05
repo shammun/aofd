@@ -23,7 +23,7 @@ const CHECK_B: [string, number, number, number][] = [
   ["dphi", CO.dphi, 0.823, 6e-4], ["dlam", CO.dlam, -0.553, 6e-4], ["dy", CO.dy, 91.5, 0.1], ["dx", CO.dx, -55.0, 0.05], ["tanb", CO.tanb, 0.601, 6e-4],
   ["beta", CO.beta, 31, 0.05], ["brg", CO.brg, 329.1, 0.05], ["xp1", CO.xp[0], -0.515, 5e-4], ["xp2", CO.xp[1], 0.857, 5e-4], ["yp1", CO.yp[0], -0.857, 5e-4],
   ["yp2", CO.yp[1], -0.515, 5e-4], ["u", IAN.u[0], 22.2, 0.05], ["v", IAN.u[1], 24.3, 0.05], ["sp", IAN.sp, 33, 0.5], ["along", IAN.along, 9.4, 0.05],
-  ["across", IAN.across, -31.6, 0.05], ["swing", TU.swing, 12, 0.2], ["tilt", TU.tilt, 1, 1e-3], ["rate", TU.rate10 * 1e6, 2.4, 0.04], ["perday", TU.rate10 * 86400 / D2R, 12, 0.31],
+  ["across", IAN.across, -31.54, 0.05], ["swing", TU.swing, 12, 0.2], ["tilt", TU.tilt, 1, 1e-3], ["rate", TU.rate10 * 1e6, 2.4, 0.04], ["perday", TU.rate10 * 86400 / D2R, 12, 0.31],
   ["R", TU.R_km, 4230, 1],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
@@ -82,7 +82,7 @@ const S10: React.FC = () => {
 // ================================================================ s11 two coast points and the steps north and east in km (Part 3's rules)
 const S11: React.FC = () => {
   const f = useCurrentFrame(), k = K("s11_coast_points");
-  const tN = AT(k, 1, "Naples"), tV = AT(k, 2, "Venice"), tWorld = SS(k, 3), tRules = SS(k, 7), tNorth = AT(k, 9, "about ninety one"), tWest = AT(k, 12, "about minus fifty five"),
+  const tN = AT(k, 1, "Naples"), tV = AT(k, 2, "Englewood"), tWorld = SS(k, 3), tRules = SS(k, 7), tNorth = AT(k, 9, "about ninety one"), tWest = AT(k, 12, "about minus fifty five"),
     tSum = SS(k, 13);
   const B = boxAt(26.52, -82.15, 1.35, MAPB.x, MAPB.y, MAPB.w, MAPB.h);
   const P = mapP(B);
@@ -98,7 +98,7 @@ const S11: React.FC = () => {
         <Arrow p={A} q={[A[0], mix(A[1], Cn[1], gN)]} color={C.second} w={9} head={30} o={fin(f, tNorth)} />
         <Arrow p={Cn} q={[mix(Cn[0], Bp[0], gW), Cn[1]]} color={C.second} w={9} head={30} o={fin(f, tWest)} />
         <Place p={A} t="Naples" o={fin(f, tN)} dx={-24} dy={-30} a="end" />
-        <Place p={Bp} t="Venice" o={fin(f, tV)} dx={-24} dy={-30} a="end" />
+        <Place p={Bp} t="Englewood" o={fin(f, tV)} dx={-24} dy={-30} a="end" />
         <g data-lc-maplabel="1">
           <Lbl x={A[0] - 24} y={A[1] + 20} t="26.10° N, 81.80° W" c={C.key} s={T.floor} a="end" o={fin(f, tN + 20)} />
           <Lbl x={Bp[0] - 24} y={Bp[1] + 20} t="26.92° N, 82.35° W" c={C.key} s={T.floor} a="end" o={fin(f, tV + 20)} />
@@ -115,10 +115,14 @@ const S11: React.FC = () => {
       <CalcStack f={f} x={1175} y={230} size={44} maxLines={4} rows={[
         { lhs: String.raw`\Delta\varphi`, rhs: String.raw`=0.823^\circ`, at: AT(k, 4, "zero point eight two three") },
         { lhs: String.raw`\Delta\lambda`, rhs: String.raw`=-0.553^\circ`, at: AT(k, 5, "minus zero point") },
-        { lhs: String.raw`\Delta\varphi`, rhs: String.raw`=0.823^\circ=0.0144\ \text{rad}`, at: AT(k, 9, "zero point zero one four four") },
+        { lhs: String.raw`1^\circ`, rhs: String.raw`=0.01745\ \text{rad}`, at: SS(k, 9), c: C.muted },
+        { lhs: String.raw`\Delta\varphi`, rhs: String.raw`=0.823\times0.01745=0.01436`, at: AT(k, 9, "zero point zero one four three six radians") },
         { lhs: String.raw`\Delta y`, rhs: String.raw`=6371\times0.01436\approx91.5\ \text{km}`, at: tNorth },
+        { lhs: String.raw`\varphi_{\text{mid}}`, rhs: String.raw`=\tfrac{26.10+26.92}{2}=26.51^\circ`, at: AT(k, 11, "middle latitude"), h: 80 },
+        { lhs: "", rhs: String.raw`\approx26.5^\circ`, at: AT(k, 11, "twenty six and a half"), cont: true },
         { lhs: String.raw`\cos\varphi`, rhs: String.raw`=\cos26.5^\circ=0.895`, at: AT(k, 11, "zero point eight nine five") },
-        { lhs: String.raw`\Delta\lambda`, rhs: String.raw`=-0.553^\circ=-0.00965\ \text{rad}`, at: AT(k, 12, "minus zero point zero zero") },
+        { lhs: String.raw`\Delta\lambda`, rhs: String.raw`=-0.553\times0.01745`, at: AT(k, 12, "minus zero point zero zero") - 20 },
+        { lhs: "", rhs: String.raw`=-0.00965\ \text{rad}`, at: AT(k, 12, "minus zero point zero zero"), cont: true },
         { lhs: String.raw`\Delta x`, rhs: String.raw`=6371\times0.895\times(-0.00965)`, at: AT(k, 12, "six thousand") },
         { rhs: String.raw`\approx-55.0\ \text{km}`, at: tWest, cont: true },
       ]} />
@@ -268,7 +272,6 @@ const S14: React.FC = () => {
         <Keyword f={f} text="Ian's wind" at={[XC, 110]} appear={0} out={t33 - 20} />
         <Lbl x={XC} y={110} t="≈ 33 m/s from the south-west" c={C.first} s={T.floor} o={win(f, t33, gone)} />
         <Lbl x={XC} y={825} t="minus: onto the land" c={C.neg} s={T.floor} o={win(f, tMin, tPush - 20)} />
-        <Lbl x={XC} y={300} t="unrounded: −31.6" c={C.muted} s={T.floor} o={win(f, tChk + 10, tLater)} />
         <Keyword f={f} text="pushing the sea onto the coast" at={[XC, 400]} s={T.floor} appear={tPush} out={tSurge - 20} />
         <Keyword f={f} text="the storm surge" at={[XC, 400]} s={T.floor} appear={tSurge} out={tLater - 20} />
         <Keyword f={f} text="surges: a later movie" at={[XC, 400]} s={T.floor} appear={tLater} />
@@ -280,9 +283,11 @@ const S14: React.FC = () => {
       <TeX s={String.raw`\text{across}=\mathbf v\cdot\hat{\mathbf y}'`} x={XC} y={555} size={50} o={win(f, tAc, gone)} />
       <TeX s={String.raw`=22.2\times(-0.857)`} x={XC} y={620} size={44} o={win(f, AT(k, 6, "twenty two point two"), gone)} />
       <TeX s={String.raw`+24.3\times(-0.515)`} x={XC + 40} y={682} size={44} o={win(f, AT(k, 6, "plus twenty four"), gone)} />
-      <TeX s={String.raw`=-19.0-12.5\approx-31.5\approx-32`} x={1080} y={750} size={44} c={C.neg} o={win(f, tAc3, gone)} />
-      <TeX s={String.raw`9.4^2+31.6^2\approx1087,\ \ \sqrt{1087}\approx33`} x={1080} y={210} size={44} o={win(f, AT(k, 9, "nine point four"), tLater)} />
-      <TeX s={String.raw`\text{along}\approx9.4,\ \ \text{across}\approx-31.6\ \text{m/s}`} x={1080} y={530} size={44} o={fin(f, tPush)} />
+      <TeX s={String.raw`=-19.03-12.51=-31.54`} x={1080} y={750} size={44} c={C.neg} o={win(f, tAc3, gone)} />
+      <TeX s={String.raw`\approx-31.5,\ \ \text{roughly}\ -32`} x={1080} y={810} size={44} c={C.neg} o={win(f, AT(k, 7, "about minus"), tMin - 22)} />
+      <TeX s={String.raw`9.4^2+31.5^2\approx88+992=1080`} x={1080} y={210} size={44} o={win(f, AT(k, 9, "nine point four"), tLater)} />
+      <TeX s={String.raw`\sqrt{1080}\approx32.9\approx33`} x={1080} y={275} size={44} o={win(f, AT(k, 9, "square root"), tLater)} />
+      <TeX s={String.raw`\text{along}\approx9.4,\ \ \text{across}\approx-31.5\ \text{m/s}`} x={1080} y={530} size={44} o={fin(f, tPush)} />
     </Scene>
   );
 };
@@ -498,9 +503,12 @@ const S19: React.FC = () => {
       <TeX s={String.raw`\cos^2\varphi+\sin^2\varphi=1`} x={XC + 40} y={595} size={46} c={C.gold} o={win(f, tOne, tS6 - 20)} />
       <TeX s={String.raw`\hat{\mathbf R}=\cos\varphi\,\hat{\mathbf k}-\sin\varphi\,\hat{\mathbf j}`} x={XC} y={690} size={54} c={C.key} o={win(f, tR, tS6 - 20)} />
       <TeX s={EQ_S19} x={XC} y={370} size={54} o={fin(f, tEq)} />
-      <TeX s={String.raw`\frac{u}{a\cos\varphi}=\frac{10}{4\,230\,000}`} x={XC} y={680} size={50} o={fin(f, AT(k, 15, "divide ten"))} />
-      <TeX s={String.raw`\approx2.4\times10^{-6}\ \text{rad/s}`} x={XC + 40} y={780} size={50} o={win(f, t24, t12 - 20)} />
-      <TeX s={String.raw`\approx12^\circ\ \text{per day}`} x={XC + 40} y={780} size={50} c={C.gold} o={fin(f, t12)} />
+      <CalcStack f={f} x={XC} y={600} size={44} maxLines={3} rows={[
+        { lhs: "", rhs: String.raw`\frac{u}{a\cos\varphi}=\frac{10}{4\,230\,000}`, at: AT(k, 15, "divide ten"), h: 96 },
+        { lhs: "", rhs: String.raw`\approx2.36\times10^{-6}\approx2.4\times10^{-6}\ \text{rad/s}`, at: t24 },
+        { lhs: "", rhs: String.raw`2.36\times10^{-6}\times86\,400\approx0.204\ \text{rad}`, at: t12 },
+        { lhs: "", rhs: String.raw`0.204\times57.3^\circ\approx11.7^\circ\approx12^\circ`, at: t12 + 40, c: C.gold },
+      ]} />
       {void [tSl, tHow, svP, tvP, gdot, Tripod, GB, LEN, SE, XZ, Place, fout]}
     </Scene>
   );

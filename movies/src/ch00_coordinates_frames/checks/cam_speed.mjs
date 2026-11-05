@@ -79,7 +79,7 @@ Object.assign(BASE, CO_HELP);
 { const stripRet = (e) => e.replace(/\)\s*:\s*[A-Za-z][\w<>\[\], |]*\s*=>/g, ") =>").replace(/:\s*(PV|Pt|MapBox|V3|number|string|Ax)(\[\])?(?=\s*[=,)])/g, "");
   for (const file of CO_FILES) for (const ln of fs.readFileSync(file, "utf8").split("\n")) {
     const m = ln.match(/^const (\w+)(?::\s*[\w<>\[\], |]+)?\s*=\s*(.+);\s*$/); if (!m || /React\.FC|=>\s*\{\s*$/.test(ln) || m[1] in BASE) continue;
-    for (const part of splitTop(m[0].replace(/^const /, "").replace(/;\s*$/, ""))) { const q = part.match(/^(\w+)(?::\s*[\w<>\[\], |]+)?\s*=\s*([\s\S]+)$/); if (!q) continue;
+    for (const part of splitTop(m[0].replace(/^(?:export )?const /, "").replace(/;\s*$/, ""))) { const q = part.match(/^(\w+)(?::\s*[\w<>\[\], |]+)?\s*=\s*([\s\S]+)$/); if (!q) continue;
       try { BASE[q[1]] = Function("scope", `with (scope) { return (${stripTS(stripRet(q[2]))}); }`)(BASE); } catch { /* not evaluable: skipped */ } } } }
 const lines = src.split("\n");
 const comp = {}; // name -> body text

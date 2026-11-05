@@ -20,7 +20,7 @@ concepts:
 - latitude-longitude grid boxes of reanalysis data (ERA5 0.25 deg) and their true sizes
 - area element dA = a^2 cos phi dphi dlambda; band area 2 pi a^2 sin phi by adding strips (integration, owned here); Archimedes' cylinder
 - cos-latitude weighting of global means (fluidpy.diag.climatology.global_mean)
-target_duration_s: 2896.05
+target_duration_s: 2900.003
 fps: 30
 size:
 - 1920
@@ -58,7 +58,7 @@ audio:
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/dryrun3
-  audio_s: 2896.05
+  audio_s: 2900.003
   cues: 711
   sentences: 445
   words: 6984
@@ -200,28 +200,28 @@ chapter_marks:
   mmss: '23:46.5'
   title: the spinning ground
   scene: s20_spin_rate
-- t: 1679.1
-  mmss: '27:59.1'
+- t: 1682.2725
+  mmss: '28:02.3'
   title: distances north and east
   scene: s22_distance_north
-- t: 1989.4
-  mmss: '33:09.4'
+- t: 1992.5725
+  mmss: '33:12.6'
   title: ERA5 grid boxes
   scene: s26_grid_boxes
-- t: 2093.925
-  mmss: '34:53.9'
+- t: 2097.1719
+  mmss: '34:57.2'
   title: areas, step by step
   scene: s27_area_patch
-- t: 2568.775
-  mmss: '42:48.8'
+- t: 2572.0219
+  mmss: '42:52.0'
   title: Archimedes
   scene: s33_archimedes
-- t: 2649.35
-  mmss: '44:09.3'
+- t: 2652.5969
+  mmss: '44:12.6'
   title: global averages
   scene: s34_global_mean
-- t: 2754.8
-  mmss: '45:54.8'
+- t: 2758.0469
+  mmss: '45:58.0'
   title: to sum up
   scene: s35_recap
 skip_blocks:
@@ -241,8 +241,8 @@ skip_blocks:
   chip_sentence: 3
   chip_t: 914.65
   skip_to_scene: s21_ground_speeds
-  skip_to_t: 1531.875
-  skip_to_mmss: '25:31.9'
+  skip_to_t: 1532.8106
+  skip_to_mmss: '25:32.8'
   keep_sentence: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane,
     and the radius times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance
     from the axis.
@@ -251,10 +251,10 @@ skip_blocks:
 - id: K3
   chip_scene: s22_distance_north
   chip_sentence: 2
-  chip_t: 1683.7
+  chip_t: 1686.8725
   skip_to_scene: s25_degree_east
-  skip_to_t: 1908.35
-  skip_to_mmss: '31:48.3'
+  skip_to_t: 1911.5225
+  skip_to_mmss: '31:51.5'
   keep_sentence: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude
     is that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side.
   takeaway_keyword: 1° north ≈ 111 km · 1° east = 111 km × cos φ
@@ -262,10 +262,10 @@ skip_blocks:
 - id: K4
   chip_scene: s27_area_patch
   chip_sentence: 5
-  chip_t: 2114.675
+  chip_t: 2117.9219
   skip_to_scene: s34_global_mean
-  skip_to_t: 2649.35
-  skip_to_mmss: '44:09.3'
+  skip_to_t: 2652.5969
+  skip_to_mmss: '44:12.6'
   keep_sentence: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar
     caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate.'
   takeaway_keyword: boxes shrink by cos φ · half the Earth within 30° of the equator
@@ -1836,7 +1836,7 @@ scenes:
 - id: s20_spin_rate
   t:
   - 1426.55
-  - 1531.875
+  - 1532.8106
   sentence_times:
   - - 1426.55
     - 1430.3
@@ -1851,47 +1851,47 @@ scenes:
   - - 1451.225
     - 1454.1
   - - 1454.45
-    - 1461.4
-  - - 1461.75
-    - 1464.25
-  - - 1464.6
-    - 1471.875
-  - - 1472.225
-    - 1475.85
-  - - 1476.2
-    - 1481.1
-  - - 1481.45
-    - 1485.975
-  - - 1486.325
-    - 1489.875
-  - - 1490.225
-    - 1498.675
-  - - 1499.025
-    - 1505.475
-  - - 1505.825
-    - 1510.225
-  - - 1510.575
-    - 1517.05
-  - - 1517.4
-    - 1523.7
-  - - 1525.2
-    - 1531.075
+    - 1462.3356
+  - - 1462.6856
+    - 1465.1856
+  - - 1465.5356
+    - 1472.8106
+  - - 1473.1606
+    - 1476.7856
+  - - 1477.1356
+    - 1482.0356
+  - - 1482.3856
+    - 1486.9106
+  - - 1487.2606
+    - 1490.8106
+  - - 1491.1606
+    - 1499.6106
+  - - 1499.9606
+    - 1506.4106
+  - - 1506.7606
+    - 1511.1606
+  - - 1511.5106
+    - 1517.9856
+  - - 1518.3356
+    - 1524.6356
+  - - 1526.1356
+    - 1532.0106
   beat: 'derivation D27 (1)-(4): ground speed U = Omega a cos phi (U-CO-051)'
   visual: 'Globe with the spin axis (slate) and Brest''s parallel (orange ring, radius tag ''a cos φ''), spinning slowly. S5-S6: a clock glyph
     with a star icon, ''one turn: 23 h 56 min'', ''T'' (KaTeX). S7: a small sun-and-orbit glyph in the column (the Earth moving along its orbit:
     the extra 4 minutes). S8-S9: Brest''s dot travels once round its ring (gold trail); the column builds ''distance = 2π × a cos φ''. S10-S11:
     ''U = 2π a cos φ / T'' (Layered; the 2π/T part violet). S12-S14: the 2π/T part lifts out: ''Ω = 2π / T'' (violet, rotation colour), keyword
     ''spin rate, rad/s''. S15: ''U = Ω a cos φ'' (96 px). S16: mini Part 2 ring glyph ''speed = radius × turning rate''.'
-  voiceover: 'That distance from the axis has a second meaning. The Earth spins round its axis, so every place on the ground is carried round
-    a circle: its parallel. The radius of that circle is the distance from the axis, the Earth''s radius times cosine phi. How fast is the ground
-    moving? Let''s work it out, one step at a time. First, how long does one turn take? Measured against the distant stars, the Earth turns once
-    every twenty three hours and fifty six minutes. We call this time capital T. It''s four minutes shorter than a day from noon to noon, because
-    the Earth also moves along its orbit round the Sun. Second, how far does the place travel in one turn? Once round its circle, which is two
-    pi times the radius of the circle. That''s two pi, times the Earth''s radius, times cosine phi. Third, speed is distance divided by time.
-    So the ground speed, capital U, is two pi, times the Earth''s radius, times cosine phi, divided by capital T. Fourth, we pull out the part
-    that''s the same for every place: two pi divided by capital T. That''s the angle the Earth turns through each second, in radians. It''s called
-    the Earth''s spin rate, and we write it capital Omega, as in the cross product movie. So capital U equals capital Omega, times the Earth''s
-    radius, times cosine phi. [beat] It''s Part 2''s rule for a ring again: the speed is the radius times the turning rate.'
+  voiceover: 'That distance from the axis has a second meaning. The Earth spins round its axis, so every place on the ground is carried round a circle: its
+    parallel. The radius of that circle is the distance from the axis, the Earth''s radius times cosine phi. How fast is the ground moving? Let''s work it
+    out, one step at a time. First, how long does one turn take? Measured against the distant stars, the Earth turns once every twenty three hours, fifty
+    six minutes and four seconds. We call this time capital T. It''s four minutes shorter than a day from noon to noon, because the Earth also moves along
+    its orbit round the Sun. Second, how far does the place travel in one turn? Once round its circle, which is two pi times the radius of the circle. That''s
+    two pi, times the Earth''s radius, times cosine phi. Third, speed is distance divided by time. So the ground speed, capital U, is two pi, times the Earth''s
+    radius, times cosine phi, divided by capital T. Fourth, we pull out the part that''s the same for every place: two pi divided by capital T. That''s the
+    angle the Earth turns through each second, in radians. It''s called the Earth''s spin rate, and we write it capital Omega, as in the cross product movie.
+    So capital U equals capital Omega, times the Earth''s radius, times cosine phi. [beat] It''s Part 2''s rule for a ring again: the speed is the radius
+    times the turning rate.'
   on_screen_eq:
     latex: U=\frac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\frac{2\pi}{T}
     vallis_eq: 'our step: the speed of a point on its parallel; cf. Vallis (2.36) Ω = Ω(j cos ϑ + k sin ϑ) (p. 62) for the vector Ω; |Ω × r| =
@@ -1950,47 +1950,47 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s21_ground_speeds
   t:
-  - 1531.875
-  - 1679.1
+  - 1532.8106
+  - 1682.2725
   sentence_times:
-  - - 1531.875
-    - 1534.55
-  - - 1534.9
-    - 1545.125
-  - - 1545.475
-    - 1552.6
-  - - 1552.95
-    - 1554.725
-  - - 1555.075
-    - 1562.325
-  - - 1562.675
-    - 1574.625
-  - - 1576.125
-    - 1579.2
-  - - 1579.55
-    - 1591.625
-  - - 1593.125
-    - 1605.725
-  - - 1606.075
-    - 1609.775
-  - - 1610.125
-    - 1616.6
-  - - 1618.1
-    - 1625.075
-  - - 1626.575
-    - 1633.1
-  - - 1634.6
-    - 1644.275
-  - - 1644.625
-    - 1649.4
-  - - 1650.9
-    - 1656.325
-  - - 1656.675
-    - 1660.975
-  - - 1661.325
-    - 1667.65
-  - - 1668.0
-    - 1678.3
+  - - 1532.8106
+    - 1535.4856
+  - - 1535.8356
+    - 1546.0606
+  - - 1546.4106
+    - 1553.5356
+  - - 1553.8856
+    - 1555.6606
+  - - 1556.0106
+    - 1564.2859
+  - - 1564.6359
+    - 1576.8687
+  - - 1578.3687
+    - 1581.4437
+  - - 1581.7937
+    - 1594.7975
+  - - 1596.2975
+    - 1608.8975
+  - - 1609.2475
+    - 1612.9475
+  - - 1613.2975
+    - 1619.7725
+  - - 1621.2725
+    - 1628.2475
+  - - 1629.7475
+    - 1636.2725
+  - - 1637.7725
+    - 1647.4475
+  - - 1647.7975
+    - 1652.5725
+  - - 1654.0725
+    - 1659.4975
+  - - 1659.8475
+    - 1664.1475
+  - - 1664.4975
+    - 1670.8225
+  - - 1671.1725
+    - 1681.4725
   beat: 'derivation D27 (5)-(6): numbers at the equator, Singapore, Khulna, Brest, Longyearbyen, the pole (Must 11)'
   visual: 'Globe spinning slowly (one turn in 20 s), the axis slate; rings for the equator, Khulna, Brest, Longyearbyen (Singapore''s ring is
     the equator''s within 0.03 %); each ring gets a teal speed arrow pointing east with moving dashes, length ∝ Ω a cos φ. S1-S2: CalcStack ''T
@@ -2002,21 +2002,20 @@ scenes:
     LINE (user rule 2026-11-05): S1 is the ''If you skipped, here''s what to keep'' sentence; during it the takeaway keyword ''height a sin φ
     · from the axis a cos φ · ground east at Ω a cos φ'' (54 px, warm white, gold underline) sits at the top of the column, then moves to its
     usual place.'
-  voiceover: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and
-    the radius times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance from
-    the axis. Now the numbers. Twenty three hours and fifty six minutes and four seconds is eighty six thousand one hundred and sixty four seconds. So capital
-    Omega is two pi divided by eighty six thousand one hundred and sixty four, which is about seven point two nine times ten to the minus five
-    radians per second. [beat] At the equator, cosine phi is one. So the ground moves at seven point two nine times ten to the minus five, times
-    six point three seven one million metres, which is about four hundred and sixty five metres per second. [beat] With easy numbers, the equator
-    is about forty thousand kilometres round, and forty thousand kilometres in twenty four hours is about one thousand six hundred and seventy
-    kilometres per hour. That's almost twice as fast as a passenger jet. Singapore, almost on the equator, moves at about four hundred and sixty
-    four metres per second. [beat] At Khulna, cosine phi is zero point nine two one nine, so it's about four hundred and twenty eight. [beat]
-    At Brest, cosine phi is zero point six six three nine, so it's about three hundred and eight. [beat] At Longyearbyen, on the Arctic islands
-    of Svalbard, seventy eight point two degrees north, cosine phi is zero point two zero four five. So the ground there moves at only about ninety
-    five metres per second. [beat] And at the poles, cosine phi is zero, so the ground just turns on the spot. Every one of these speeds points
-    east, the way the Earth turns. We don't feel any of it, because the air, the sea and we ourselves all move along with the ground. But this
-    shrinking circle is part of the reason why the Earth's spin affects the winds differently at different latitudes, as we saw in the cross product
-    movie.
+  voiceover: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius times
+    cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance from the axis. Now the numbers.
+    Twenty three hours, fifty six minutes and four seconds is eighty six thousand one hundred and sixty four seconds. So capital Omega is two pi divided by
+    eighty six thousand one hundred and sixty four, which is about seven point two nine two times ten to the minus five radians per second. [beat] At the
+    equator, cosine phi is one. So the ground moves at seven point two nine two times ten to the minus five, times six point three seven one million metres,
+    which is about four hundred and sixty four point six metres per second. [beat] With easy numbers, the equator is about forty thousand kilometres round,
+    and forty thousand kilometres in twenty four hours is about one thousand six hundred and seventy kilometres per hour. That's almost twice as fast as a
+    passenger jet. Singapore, almost on the equator, moves at about four hundred and sixty four metres per second. [beat] At Khulna, cosine phi is zero point
+    nine two one nine, so it's about four hundred and twenty eight. [beat] At Brest, cosine phi is zero point six six three nine, so it's about three hundred
+    and eight. [beat] At Longyearbyen, on the Arctic islands of Svalbard, seventy eight point two degrees north, cosine phi is zero point two zero four five.
+    So the ground there moves at only about ninety five metres per second. [beat] And at the poles, cosine phi is zero, so the ground just turns on the spot.
+    Every one of these speeds points east, the way the Earth turns. We don't feel any of it, because the air, the sea and we ourselves all move along with
+    the ground. But this shrinking circle is part of the reason why the Earth's spin affects the winds differently at different latitudes, as we saw in the
+    cross product movie.
   on_screen_eq:
     latex: U=\Omega\,a\cos\varphi
     vallis_eq: our step (see s20)
@@ -2063,41 +2062,41 @@ scenes:
     18).'
 - id: s22_distance_north
   t:
-  - 1679.1
-  - 1785.825
+  - 1682.2725
+  - 1788.9975
   sentence_times:
-  - - 1679.1
-    - 1683.35
-  - - 1683.7
-    - 1693.55
-  - - 1693.9
-    - 1696.1
-  - - 1696.45
-    - 1699.45
-  - - 1699.8
-    - 1707.025
-  - - 1707.375
-    - 1711.825
-  - - 1712.175
-    - 1719.425
-  - - 1719.775
-    - 1727.775
-  - - 1728.125
-    - 1736.725
-  - - 1737.075
-    - 1739.675
-  - - 1740.025
-    - 1745.025
-  - - 1745.375
-    - 1752.8
-  - - 1754.3
-    - 1762.125
-  - - 1763.625
-    - 1772.625
-  - - 1774.125
-    - 1779.825
-  - - 1780.175
-    - 1785.025
+  - - 1682.2725
+    - 1686.5225
+  - - 1686.8725
+    - 1696.7225
+  - - 1697.0725
+    - 1699.2725
+  - - 1699.6225
+    - 1702.6225
+  - - 1702.9725
+    - 1710.1975
+  - - 1710.5475
+    - 1714.9975
+  - - 1715.3475
+    - 1722.5975
+  - - 1722.9475
+    - 1730.9475
+  - - 1731.2975
+    - 1739.8975
+  - - 1740.2475
+    - 1742.8475
+  - - 1743.1975
+    - 1748.1975
+  - - 1748.5475
+    - 1755.9725
+  - - 1757.4725
+    - 1765.2975
+  - - 1766.7975
+    - 1775.7975
+  - - 1777.2975
+    - 1782.9975
+  - - 1783.3475
+    - 1788.1975
   beat: 'derivation D28: Delta y = a Delta phi on the meridian slice (U-CO-052)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2176,25 +2175,25 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s23_north_examples
   t:
-  - 1785.825
-  - 1839.25
+  - 1788.9975
+  - 1842.4225
   sentence_times:
-  - - 1785.825
-    - 1787.6
-  - - 1787.95
-    - 1798.45
-  - - 1799.95
-    - 1805.3
-  - - 1805.65
-    - 1811.35
-  - - 1811.7
-    - 1821.625
-  - - 1823.125
-    - 1831.2
-  - - 1831.55
-    - 1834.675
-  - - 1835.025
-    - 1838.45
+  - - 1788.9975
+    - 1790.7725
+  - - 1791.1225
+    - 1801.6225
+  - - 1803.1225
+    - 1808.4725
+  - - 1808.8225
+    - 1814.5225
+  - - 1814.8725
+    - 1824.7975
+  - - 1826.2975
+    - 1834.3725
+  - - 1834.7225
+    - 1837.8475
+  - - 1838.1975
+    - 1841.6225
   beat: 'worked examples: one minute = the nautical mile; Brest to the equator 5382 km (arc vs straight height)'
   visual: 'Same two-view. S1-S2: the step shrinks to one minute (x60 magnifier inset in the flat view); CalcStack ''111.2 km ÷ 60 ≈ 1.85 km'',
     keyword ''nautical mile''. S3-S4: the walker goes from Brest down the rim to the equator (orange arc, both views); CalcStack ''48.4 × 111.2
@@ -2236,29 +2235,29 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s24_distance_east
   t:
-  - 1839.25
-  - 1908.35
+  - 1842.4225
+  - 1911.5225
   sentence_times:
-  - - 1839.25
-    - 1841.4
-  - - 1841.75
-    - 1844.875
-  - - 1845.225
-    - 1852.8
-  - - 1853.15
-    - 1859.125
-  - - 1859.475
-    - 1862.8
-  - - 1863.15
-    - 1871.875
-  - - 1872.225
-    - 1879.825
-  - - 1880.175
-    - 1887.475
-  - - 1887.825
-    - 1899.3
-  - - 1900.8
-    - 1907.55
+  - - 1842.4225
+    - 1844.5725
+  - - 1844.9225
+    - 1848.0475
+  - - 1848.3975
+    - 1855.9725
+  - - 1856.3225
+    - 1862.2975
+  - - 1862.6475
+    - 1865.9725
+  - - 1866.3225
+    - 1875.0475
+  - - 1875.3975
+    - 1882.9975
+  - - 1883.3475
+    - 1890.6475
+  - - 1890.9975
+    - 1902.4725
+  - - 1903.9725
+    - 1910.7225
   beat: 'derivation D29: Delta x = a cos phi Delta lambda on the parallel slice (U-CO-053)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2329,31 +2328,31 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s25_degree_east
   t:
-  - 1908.35
-  - 1989.4
+  - 1911.5225
+  - 1992.5725
   sentence_times:
-  - - 1908.35
-    - 1911.025
-  - - 1911.375
-    - 1921.6
-  - - 1921.95
-    - 1926.85
-  - - 1927.2
-    - 1932.85
-  - - 1933.2
-    - 1943.675
-  - - 1945.175
-    - 1952.425
-  - - 1953.925
-    - 1957.2
-  - - 1958.7
-    - 1968.075
-  - - 1969.575
-    - 1973.475
-  - - 1973.825
-    - 1981.4
-  - - 1981.75
-    - 1988.6
+  - - 1911.5225
+    - 1914.1975
+  - - 1914.5475
+    - 1924.7725
+  - - 1925.1225
+    - 1930.0225
+  - - 1930.3725
+    - 1936.0225
+  - - 1936.3725
+    - 1946.8475
+  - - 1948.3475
+    - 1955.5975
+  - - 1957.0975
+    - 1960.3725
+  - - 1961.8725
+    - 1971.2475
+  - - 1972.7475
+    - 1976.6475
+  - - 1976.9975
+    - 1984.5725
+  - - 1984.9225
+    - 1991.7725
   beat: 'intuition: one degree east at four latitudes, globe and flat strip side by side (U-CO-055, U-CO-056; Should 16)'
   visual: 'Two-view: left the globe (camera at 35 N) with four parallel discs cut at 1.35 N (Singapore), 22.8 N (Khulna), 48.4 N (Brest), 78.2
     N (Longyearbyen), each a thin translucent disc with its radius drawn from the axis (teal) and a gold 1-deg step on its rim (x5); right a flat
@@ -2411,39 +2410,39 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s26_grid_boxes
   t:
-  - 1989.4
-  - 2093.925
+  - 1992.5725
+  - 2097.1719
   sentence_times:
-  - - 1989.4
-    - 1993.075
-  - - 1993.425
-    - 2004.45
-  - - 2004.8
-    - 2010.675
-  - - 2011.025
-    - 2016.25
-  - - 2016.6
-    - 2025.45
-  - - 2026.95
-    - 2029.7
-  - - 2030.05
-    - 2036.1
-  - - 2037.6
-    - 2042.075
-  - - 2043.575
-    - 2046.425
-  - - 2047.925
-    - 2055.875
-  - - 2057.375
-    - 2061.05
-  - - 2061.4
-    - 2069.125
-  - - 2070.625
-    - 2078.1
-  - - 2078.45
-    - 2085.15
-  - - 2085.5
-    - 2093.125
+  - - 1992.5725
+    - 1996.2475
+  - - 1996.5975
+    - 2007.6225
+  - - 2007.9725
+    - 2013.8475
+  - - 2014.1975
+    - 2019.4225
+  - - 2019.7725
+    - 2028.6225
+  - - 2030.1225
+    - 2032.8725
+  - - 2033.2225
+    - 2039.2725
+  - - 2040.7725
+    - 2045.2475
+  - - 2046.7475
+    - 2049.5975
+  - - 2051.0975
+    - 2059.0475
+  - - 2060.5475
+    - 2064.2225
+  - - 2064.5725
+    - 2072.2975
+  - - 2073.7975
+    - 2081.2725
+  - - 2081.6225
+    - 2088.3969
+  - - 2088.7469
+    - 2096.3719
   beat: 'application: ERA5 grid boxes thin towards the poles (Should 6 spoken)'
   visual: 'Four real map panels side by side, each 400 px wide with 20-px gaps (x 80-480, 500-900, 920-1320, 1340-1740; y 140-600), each in a
     polar-aspect LAEA centred on its place so the boxes keep their true shape: Singapore (Strait of Singapore), Khulna (the Sundarbans and the
@@ -2454,16 +2453,15 @@ scenes:
     S5: ''height: 111.2 ÷ 4 ≈ 27.8 km''. S11-S12: at Longyearbyen a ghost box (rose, dashed) 4.9 x too wide, ''× 4.9 too wide'' (spoken: Should
     6). S14: a Part 2 callback thumbnail (coast with two points) ''degrees → km''. S15: the panels shrink and a small whole-globe insert shows
     the lat-lon grid crowding at the pole beside a faint icosahedral mesh, keyword ''other grids''.'
-  voiceover: 'This matters every time we use weather data. ERA5, the reanalysis we''ve used throughout this series, is a reconstruction of the
-    past weather everywhere, made by combining observations with a weather model. It gives its values on a grid of latitude and longitude, every
-    quarter of a degree. So each grid box is a quarter of a degree tall, and a quarter of a degree wide. The height is easy: a quarter of one
-    hundred and eleven point two is about twenty seven point eight kilometres, at every latitude. [beat] The width depends on cosine phi. At Singapore,
-    a box is about twenty seven point eight kilometres wide: nearly square. [beat] At Khulna, it''s about twenty five point six kilometres wide.
-    [beat] At Brest, about eighteen and a half. [beat] At Longyearbyen, a box is still twenty seven point eight kilometres tall, but only about
-    five point seven wide. [beat] So the boxes get thinner and thinner towards the poles. Forget the cosine, and a box at Longyearbyen comes out
-    four point nine times, so about five times, too wide. [beat] Every east-west distance there would be five times too big, and every east-west
-    slope five times too small. This is also how we turned the coast''s latitudes and longitudes into kilometres in Part 2. And it''s one reason
-    why many modern weather models use other kinds of grid, which don''t crowd together at the poles.'
+  voiceover: 'This matters every time we use weather data. ERA5, the reanalysis we''ve used throughout this series, is a reconstruction of the past weather
+    everywhere, made by combining observations with a weather model. It gives its values on a grid of latitude and longitude, every quarter of a degree. So
+    each grid box is a quarter of a degree tall, and a quarter of a degree wide. The height is easy: a quarter of one hundred and eleven point two is about
+    twenty seven point eight kilometres, at every latitude. [beat] The width depends on cosine phi. At Singapore, a box is about twenty seven point eight
+    kilometres wide: nearly square. [beat] At Khulna, it''s about twenty five point six kilometres wide. [beat] At Brest, about eighteen and a half. [beat]
+    At Longyearbyen, a box is still twenty seven point eight kilometres tall, but only about five point seven wide. [beat] So the boxes get thinner and thinner
+    towards the poles. Forget the cosine, and a box at Longyearbyen comes out four point nine times, so about five times, too wide. [beat] Every east-west
+    distance there would be five times too big, and every east-west slope five times too small. This is also how, in Part 4, we''ll turn a coast''s latitudes
+    and longitudes into kilometres. And it''s one reason why many modern weather models use other kinds of grid, which don''t crowd together at the poles.'
   on_screen_eq: null
   calc_rows:
   - 111.2\div4\approx27.8\ \text{km}
@@ -2498,45 +2496,45 @@ scenes:
     these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s27_area_patch
   t:
-  - 2093.925
-  - 2201.2
+  - 2097.1719
+  - 2204.4469
   sentence_times:
-  - - 2093.925
-    - 2096.5
-  - - 2096.85
-    - 2098.475
-  - - 2098.825
-    - 2106.5
-  - - 2106.85
-    - 2114.325
-  - - 2114.675
-    - 2122.5
-  - - 2122.85
-    - 2128.1
-  - - 2128.45
-    - 2133.025
-  - - 2133.375
-    - 2139.425
-  - - 2139.775
-    - 2145.65
-  - - 2146.0
-    - 2151.15
-  - - 2151.5
-    - 2155.575
-  - - 2155.925
-    - 2160.875
-  - - 2161.225
-    - 2168.7
-  - - 2169.05
-    - 2173.975
-  - - 2174.325
-    - 2181.65
-  - - 2182.0
-    - 2188.6
-  - - 2188.95
-    - 2197.175
-  - - 2197.525
-    - 2200.4
+  - - 2097.1719
+    - 2099.7469
+  - - 2100.0969
+    - 2101.7219
+  - - 2102.0719
+    - 2109.7469
+  - - 2110.0969
+    - 2117.5719
+  - - 2117.9219
+    - 2125.7469
+  - - 2126.0969
+    - 2131.3469
+  - - 2131.6969
+    - 2136.2719
+  - - 2136.6219
+    - 2142.6719
+  - - 2143.0219
+    - 2148.8969
+  - - 2149.2469
+    - 2154.3969
+  - - 2154.7469
+    - 2158.8219
+  - - 2159.1719
+    - 2164.1219
+  - - 2164.4719
+    - 2171.9469
+  - - 2172.2969
+    - 2177.2219
+  - - 2177.5719
+    - 2184.8969
+  - - 2185.2469
+    - 2191.8469
+  - - 2192.1969
+    - 2200.4219
+  - - 2200.7719
+    - 2203.6469
   beat: 'derivation D30: dA = a^2 cos phi dphi dlambda (U-CO-058; Should 7)'
   visual: 'Globe zoomed to a patch at Brest (zoom-reveal), between two meridians and two parallels 5 deg apart (x20 an ERA5 box so it reads);
     the patch gold, slightly curved. S4: its north-south side tagged ''a Δφ'' (orange); S5: its east-west side ''a cos φ Δλ'' (orange), each a
@@ -2620,29 +2618,29 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s28_box_areas
   t:
-  - 2201.2
-  - 2281.1
+  - 2204.4469
+  - 2284.3469
   sentence_times:
-  - - 2201.2
-    - 2204.925
-  - - 2205.275
-    - 2210.725
-  - - 2211.075
-    - 2219.325
-  - - 2220.825
-    - 2233.45
-  - - 2234.95
-    - 2238.525
-  - - 2238.875
-    - 2248.0
-  - - 2249.5
-    - 2255.475
-  - - 2256.975
-    - 2263.675
-  - - 2265.175
-    - 2270.9
-  - - 2271.25
-    - 2279.6
+  - - 2204.4469
+    - 2208.1719
+  - - 2208.5219
+    - 2213.9719
+  - - 2214.3219
+    - 2222.5719
+  - - 2224.0719
+    - 2236.6969
+  - - 2238.1969
+    - 2241.7719
+  - - 2242.1219
+    - 2251.2469
+  - - 2252.7469
+    - 2258.7219
+  - - 2260.2219
+    - 2266.9219
+  - - 2268.4219
+    - 2274.1469
+  - - 2274.4969
+    - 2282.8469
   beat: 'worked numbers: ERA5 box areas 773, 712, 513, 158 km^2; the exact curved patch'
   visual: 'Left: four 3-D tiles (flat, to scale with each other) in a row like the s26 boxes, each with x and y edge tags (27.8 × 27.8, 27.8 ×
     25.6, 27.8 × 18.5, 27.8 × 5.7 km) and its place name below; right: CalcStack. S1: ''0.25° ≈ 0.00436 rad''. S2: ''a² = 6371² ≈ 40.6 million
@@ -2691,29 +2689,29 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s29_strip_round
   t:
-  - 2281.1
-  - 2340.425
+  - 2284.3469
+  - 2343.6719
   sentence_times:
-  - - 2281.1
-    - 2283.1
-  - - 2283.45
-    - 2289.95
-  - - 2290.3
-    - 2291.725
-  - - 2292.075
-    - 2300.575
-  - - 2300.925
-    - 2303.875
-  - - 2304.225
-    - 2312.45
-  - - 2312.8
-    - 2317.425
-  - - 2317.775
-    - 2326.725
-  - - 2327.075
-    - 2331.975
-  - - 2332.325
-    - 2339.625
+  - - 2284.3469
+    - 2286.3469
+  - - 2286.6969
+    - 2293.1969
+  - - 2293.5469
+    - 2294.9719
+  - - 2295.3219
+    - 2303.8219
+  - - 2304.1719
+    - 2307.1219
+  - - 2307.4719
+    - 2315.6969
+  - - 2316.0469
+    - 2320.6719
+  - - 2321.0219
+    - 2329.9719
+  - - 2330.3219
+    - 2335.2219
+  - - 2335.5719
+    - 2342.8719
   beat: 'derivation D31 (1)-(2): a strip all round the Earth (U-CO-059)'
   visual: 'Globe at a 20 deg N view. S1-S3: column keyword ''area between 0° and φ?''; the band 0-30 N tints teal. S4: a thin gold strip all round
     between phi and phi + Δphi (drawn 5 deg wide at 25 N). S5 on AT(5,''Cut it and unroll it''): the strip cuts at one meridian and unrolls into
@@ -2772,33 +2770,33 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s30_slope_of_sine
   t:
-  - 2340.425
-  - 2415.0
+  - 2343.6719
+  - 2418.2469
   sentence_times:
-  - - 2340.425
-    - 2343.725
-  - - 2344.075
-    - 2346.725
-  - - 2347.075
-    - 2353.575
-  - - 2353.925
-    - 2359.9
-  - - 2360.25
-    - 2362.75
-  - - 2363.1
-    - 2368.475
-  - - 2368.825
-    - 2373.4
-  - - 2373.75
-    - 2380.3
-  - - 2380.65
-    - 2390.8
-  - - 2392.3
-    - 2400.4
-  - - 2400.75
-    - 2404.05
-  - - 2405.55
-    - 2414.2
+  - - 2343.6719
+    - 2346.9719
+  - - 2347.3219
+    - 2349.9719
+  - - 2350.3219
+    - 2356.8219
+  - - 2357.1719
+    - 2363.1469
+  - - 2363.4969
+    - 2365.9969
+  - - 2366.3469
+    - 2371.7219
+  - - 2372.0719
+    - 2376.6469
+  - - 2376.9969
+    - 2383.5469
+  - - 2383.8969
+    - 2394.0469
+  - - 2395.5469
+    - 2403.6469
+  - - 2403.9969
+    - 2407.2969
+  - - 2408.7969
+    - 2417.4469
   beat: 'derivation D31 (3)-(4): the slope of sine from Part 2 turns cos phi dphi into Delta(sin phi)'
   visual: 'Left: Part 2''s unit-circle picture (reused module): the arrow at angle phi, a small step Δphi, the tip rising by Δ(sin φ) (orange)
     ≈ cos φ Δφ; right: CalcStack. S3-S4: ''cos φ Δφ ≈ Δ(sin φ)''. S5-S8: the check with a 20-30 deg strip: ''Δφ = 10° ≈ 0.1745 rad'', ''cos 25°
@@ -2858,35 +2856,35 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s31_adding_strips
   t:
-  - 2415.0
-  - 2495.9
+  - 2418.2469
+  - 2499.1469
   sentence_times:
-  - - 2415.0
-    - 2419.975
-  - - 2420.325
-    - 2425.4
-  - - 2425.75
-    - 2431.475
-  - - 2431.825
-    - 2434.825
-  - - 2435.175
-    - 2438.7
-  - - 2439.05
-    - 2446.825
-  - - 2448.325
-    - 2453.05
-  - - 2453.4
-    - 2461.475
-  - - 2462.975
-    - 2468.525
-  - - 2470.025
-    - 2474.65
-  - - 2475.0
-    - 2480.225
-  - - 2480.575
-    - 2487.75
-  - - 2488.1
-    - 2495.1
+  - - 2418.2469
+    - 2423.2219
+  - - 2423.5719
+    - 2428.6469
+  - - 2428.9969
+    - 2434.7219
+  - - 2435.0719
+    - 2438.0719
+  - - 2438.4219
+    - 2441.9469
+  - - 2442.2969
+    - 2450.0719
+  - - 2451.5719
+    - 2456.2969
+  - - 2456.6469
+    - 2464.7219
+  - - 2466.2219
+    - 2471.7719
+  - - 2473.2719
+    - 2477.8969
+  - - 2478.2469
+    - 2483.4719
+  - - 2483.8219
+    - 2490.9969
+  - - 2491.3469
+    - 2498.3469
   beat: 'derivation D31 (5)-(6): the staircase sum; integration named'
   visual: 'Left: three ten-degree strips on the globe (0-10, 10-20, 20-30 N), each lighting in turn; right: a staircase graph (x latitude 0-90
     deg, y sin φ 0-1, 52-px ticks) with the sine curve and three steps (gold risers 0.174, 0.168, 0.158) appearing with their strips on the same
@@ -2962,33 +2960,33 @@ scenes:
     its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s32_band_fraction
   t:
-  - 2495.9
-  - 2568.775
+  - 2499.1469
+  - 2572.0219
   sentence_times:
-  - - 2495.9
-    - 2498.05
-  - - 2498.4
-    - 2500.925
-  - - 2501.275
-    - 2508.75
-  - - 2509.1
-    - 2513.825
-  - - 2515.325
-    - 2523.45
-  - - 2524.95
-    - 2531.425
-  - - 2531.775
-    - 2534.7
-  - - 2535.05
-    - 2540.85
-  - - 2542.35
-    - 2544.625
-  - - 2544.975
-    - 2550.775
-  - - 2552.275
-    - 2561.75
-  - - 2563.25
-    - 2567.975
+  - - 2499.1469
+    - 2501.2969
+  - - 2501.6469
+    - 2504.1719
+  - - 2504.5219
+    - 2511.9969
+  - - 2512.3469
+    - 2517.0719
+  - - 2518.5719
+    - 2526.6969
+  - - 2528.1969
+    - 2534.6719
+  - - 2535.0219
+    - 2537.9469
+  - - 2538.2969
+    - 2544.0969
+  - - 2545.5969
+    - 2547.8719
+  - - 2548.2219
+    - 2554.0219
+  - - 2555.5219
+    - 2564.9969
+  - - 2566.4969
+    - 2571.2219
   beat: 'derivation D31 (7)-(8): checks and the share sin phi; half the Earth within 30 deg of the equator'
   visual: 'Globe (whole, unzoomed). S1-S3: the band fills from the equator to the pole (teal), ''sin 90° = 1'', CalcStack ''2π a² ≈ 255 million
     km²''. S4: the southern hemisphere fills too: ''4π a² ≈ 510 million km²''. S5: ''share = sin φ''. S6-S7: the band 0-30 N teal, the rest of
@@ -3045,35 +3043,35 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s33_archimedes
   t:
-  - 2568.775
-  - 2649.35
+  - 2572.0219
+  - 2652.5969
   sentence_times:
-  - - 2568.775
-    - 2575.1
-  - - 2575.45
-    - 2583.375
-  - - 2583.725
-    - 2592.7
-  - - 2593.05
-    - 2598.7
-  - - 2599.05
-    - 2603.25
-  - - 2603.6
-    - 2607.15
-  - - 2607.5
-    - 2613.4
-  - - 2613.75
-    - 2621.5
-  - - 2623.0
-    - 2624.75
-  - - 2625.1
-    - 2632.175
-  - - 2632.525
-    - 2639.875
-  - - 2640.225
-    - 2642.975
-  - - 2643.325
-    - 2648.55
+  - - 2572.0219
+    - 2578.3469
+  - - 2578.6969
+    - 2586.6219
+  - - 2586.9719
+    - 2595.9469
+  - - 2596.2969
+    - 2601.9469
+  - - 2602.2969
+    - 2606.4969
+  - - 2606.8469
+    - 2610.3969
+  - - 2610.7469
+    - 2616.6469
+  - - 2616.9969
+    - 2624.7469
+  - - 2626.2469
+    - 2627.9969
+  - - 2628.3469
+    - 2635.4219
+  - - 2635.7719
+    - 2643.1219
+  - - 2643.4719
+    - 2646.2219
+  - - 2646.5719
+    - 2651.7969
   beat: 'intuition: Archimedes'' cylinder (equal heights, equal areas)'
   visual: 'Globe inside a snug translucent cylinder (radius a, slate wireframe, 3-D, the camera orbiting slowly from outside at 15 deg elevation).
     S3: the band 0-phi (phi = 48.4) on the globe teal; horizontal arrows push it out onto the cylinder, where a matching teal band appears. S4:
@@ -3118,41 +3116,41 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s34_global_mean
   t:
-  - 2649.35
-  - 2754.8
+  - 2652.5969
+  - 2758.0469
   sentence_times:
-  - - 2649.35
-    - 2652.025
-  - - 2652.375
-    - 2665.025
-  - - 2665.375
-    - 2667.975
-  - - 2668.325
-    - 2673.5
-  - - 2673.85
-    - 2677.575
-  - - 2677.925
-    - 2682.575
-  - - 2682.925
-    - 2685.8
-  - - 2686.15
-    - 2694.2
-  - - 2694.55
-    - 2702.35
-  - - 2702.7
-    - 2704.75
-  - - 2706.25
-    - 2711.375
-  - - 2711.725
-    - 2722.225
-  - - 2722.575
-    - 2728.5
-  - - 2730.0
-    - 2734.525
-  - - 2736.025
-    - 2748.775
-  - - 2749.125
-    - 2754.0
+  - - 2652.5969
+    - 2655.2719
+  - - 2655.6219
+    - 2668.2719
+  - - 2668.6219
+    - 2671.2219
+  - - 2671.5719
+    - 2676.7469
+  - - 2677.0969
+    - 2680.8219
+  - - 2681.1719
+    - 2685.8219
+  - - 2686.1719
+    - 2689.0469
+  - - 2689.3969
+    - 2697.4469
+  - - 2697.7969
+    - 2705.5969
+  - - 2705.9469
+    - 2707.9969
+  - - 2709.4969
+    - 2714.6219
+  - - 2714.9719
+    - 2725.4719
+  - - 2725.8219
+    - 2731.7469
+  - - 2733.2469
+    - 2737.7719
+  - - 2739.2719
+    - 2752.0219
+  - - 2752.3719
+    - 2757.2469
   beat: 'application: the cos phi weighting of a global mean (toy, then ERA5 September 2026: 7.1 vs 16.3 C)'
   visual: 'S1-S6 (toy): two 3-D tiles from s28, the equator one (area 1) and the 60 N one (area 1/2), each with a thermometer icon ''30 °C'' and
     ''0 °C''; CalcStack ''plain: (30 + 0) ÷ 2 = 15'', ''weights: cos 0° = 1, cos 60° = 1/2'', ''weighted: (30 × 1 + 0 × 1/2) ÷ 1.5 = 20 °C''.
@@ -3203,55 +3201,54 @@ scenes:
     from frame 0 (Should 18).'
 - id: s35_recap
   t:
-  - 2754.8
-  - 2873.15
+  - 2758.0469
+  - 2877.103
   sentence_times:
-  - - 2754.8
-    - 2763.45
-  - - 2763.8
-    - 2771.6
-  - - 2771.95
-    - 2777.7
-  - - 2778.05
-    - 2785.325
-  - - 2785.675
-    - 2790.675
-  - - 2791.025
-    - 2796.025
-  - - 2796.375
-    - 2804.125
-  - - 2804.475
-    - 2818.275
-  - - 2818.625
-    - 2829.075
-  - - 2829.425
-    - 2836.85
-  - - 2837.2
-    - 2844.45
-  - - 2844.8
-    - 2851.575
-  - - 2851.925
-    - 2863.95
-  - - 2864.3
-    - 2872.35
+  - - 2758.0469
+    - 2766.6969
+  - - 2767.0469
+    - 2774.8469
+  - - 2775.1969
+    - 2780.9469
+  - - 2781.2969
+    - 2788.5719
+  - - 2788.9219
+    - 2793.9219
+  - - 2794.2719
+    - 2799.2719
+  - - 2799.6219
+    - 2807.3719
+  - - 2807.7219
+    - 2821.5219
+  - - 2821.8719
+    - 2833.028
+  - - 2833.378
+    - 2840.803
+  - - 2841.153
+    - 2848.403
+  - - 2848.753
+    - 2855.528
+  - - 2855.878
+    - 2867.903
+  - - 2868.253
+    - 2876.303
   beat: recap ('To sum up'); the last sentence is the teaser to Part 4 (split plan §2g)
   visual: 'One beat per sentence, mini pictures reused (no headings): the globe with the centre and r; the sliced face with ''a ≈ 6400 km''; the
     phi wedge; the colatitude wedge with ''sin ↔ cos''; a parallel disc and a meridian; the lambda wedge from Greenwich; the two-view triangles
     with x, y, z; the spinning globe with the 465 m/s arrow; the 111-km step; the shrinking east steps; the dA tile; the staircase and the half-Earth
     band (30 S - 30 N); a small weather station at Brest with three arrows (east, north, up) and a question mark for the Part 4 teaser. Each spoken
     number on screen at its words.'
-  voiceover: 'To sum up, a point on or around the Earth is pinned down by spherical coordinates: its distance from the centre, and two angles.
-    On the ground, that distance is the Earth''s radius, about six thousand four hundred kilometres, which we call a. Latitude, phi, is the angle
-    up from the equator plane, measured at the centre. The colatitude is ninety degrees minus phi, measured down from the pole, and it swaps sine
-    and cosine. A parallel is a circle of constant latitude, round the Earth''s axis. A meridian is a half circle from pole to pole, round the
-    Earth''s centre. Longitude, lambda, is the angle round the axis, from the prime meridian through Greenwich, positive to the east. Two slices
-    give the position arrow: x is the radius times cosine phi times cosine lambda, y is the radius times cosine phi times sine lambda, and z is
-    the radius times sine phi. The ground is carried east at capital Omega, times the radius, times cosine phi: about four hundred and sixty five
-    metres per second at the equator. A step north is the radius times delta phi, about a hundred and eleven kilometres per degree, everywhere.
-    A step east is the radius, times cosine phi, times delta lambda, and it shrinks towards the poles. So a small patch has an area of the radius
-    squared, times cosine phi, d phi, d lambda. Adding up strips shows that the band from the equator to latitude phi holds a share sine phi of
-    its hemisphere, which is why global averages weight each latitude by cosine phi. In Part 4, we''ll stand at a weather station, and see how
-    its own east, north and up arrows turn as the air moves.'
+  voiceover: 'To sum up, a point on or around the Earth is pinned down by spherical coordinates: its distance from the centre, and two angles. On the ground,
+    that distance is the Earth''s radius, about six thousand four hundred kilometres, which we call a. Latitude, phi, is the angle up from the equator plane,
+    measured at the centre. The colatitude is ninety degrees minus phi, measured down from the pole, and it swaps sine and cosine. A parallel is a circle
+    of constant latitude, round the Earth''s axis. A meridian is a half circle from pole to pole, round the Earth''s centre. Longitude, lambda, is the angle
+    round the axis, from the prime meridian through Greenwich, positive to the east. Two slices give the position arrow: x is the radius times cosine phi
+    times cosine lambda, y is the radius times cosine phi times sine lambda, and z is the radius times sine phi. The ground is carried east at capital Omega,
+    times the radius, times cosine phi: about four hundred and sixty four point six metres per second at the equator. A step north is the radius times delta
+    phi, about a hundred and eleven kilometres per degree, everywhere. A step east is the radius, times cosine phi, times delta lambda, and it shrinks towards
+    the poles. So a small patch has an area of the radius squared, times cosine phi, d phi, d lambda. Adding up strips shows that the band from the equator
+    to latitude phi holds a share sine phi of its hemisphere, which is why global averages weight each latitude by cosine phi. In Part 4, we''ll stand at
+    a weather station, and see how its own east, north and up arrows turn as the air moves.'
   on_screen_eq: null
   physics_source: null
   exaggeration:
@@ -3272,15 +3269,15 @@ scenes:
     18).'
 - id: s36_end
   t:
-  - 2873.15
-  - 2896.05
+  - 2877.103
+  - 2900.003
   sentence_times:
-  - - 2873.15
-    - 2879.35
-  - - 2879.7
-    - 2887.75
-  - - 2888.1
-    - 2895.75
+  - - 2877.103
+    - 2883.303
+  - - 2883.653
+    - 2891.703
+  - - 2892.053
+    - 2899.703
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word; decision 2)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the sliced globe with phi, the graticule, the two-view triangle,
     the dA tile); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook

@@ -149,56 +149,56 @@
    "scene": "s07_sliding_pattern"
   },
   {
-   "time": "9:24",
-   "t_s": 564.15,
+   "time": "9:25",
+   "t_s": 565.123,
    "title": "Storm Ciarán",
    "scene": "s08_ciaran"
   },
   {
-   "time": "10:28",
-   "t_s": 628.4,
+   "time": "10:29",
+   "t_s": 629.373,
    "title": "Why the winds were lopsided",
    "scene": "s09_lopsided"
   },
   {
-   "time": "11:15",
-   "t_s": 675.95,
+   "time": "11:16",
+   "t_s": 676.923,
    "title": "Storm-relative winds",
    "scene": "s10_storm_relative"
   },
   {
-   "time": "13:35",
-   "t_s": 815.125,
+   "time": "13:36",
+   "t_s": 816.098,
    "title": "What does not change",
    "scene": "s12_invariant"
   },
   {
-   "time": "14:47",
-   "t_s": 887.625,
+   "time": "14:48",
+   "t_s": 888.598,
    "title": "What a fixed barometer sees",
    "scene": "s13_tau"
   },
   {
-   "time": "16:24",
-   "t_s": 984.75,
+   "time": "16:25",
+   "t_s": 985.723,
    "title": "Every step: linking the barometer and the rider",
    "scene": "s14_tau_derive"
   },
   {
-   "time": "18:11",
-   "t_s": 1091.525,
+   "time": "18:12",
+   "t_s": 1092.498,
    "title": "Plymouth, in numbers",
    "scene": "s15_plymouth"
   },
   {
-   "time": "20:25",
-   "t_s": 1225.075,
+   "time": "20:26",
+   "t_s": 1226.048,
    "title": "Recap",
    "scene": "s17_recap"
   },
   {
-   "time": "21:35",
-   "t_s": 1295.675,
+   "time": "21:36",
+   "t_s": 1296.648,
    "title": "End",
    "scene": "s18_end"
   }
@@ -217,9 +217,9 @@
    "block": "B",
    "chip_scene": "s14_tau_derive",
    "chip_sentence": 2,
-   "chip_at_s": 989.8,
-   "skip_to": "18:02",
-   "skip_to_s": 1082.75,
+   "chip_at_s": 990.773,
+   "skip_to": "18:03",
+   "skip_to_s": 1083.723,
    "keep_line": "If you skipped, here's what to keep: what the barometer sees is the storm changing, minus the pattern sliding past."
   }
  ],
@@ -231,31 +231,9 @@
   "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
   "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b"
  },
- "render_assets": {
-  "mv_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
-  "mv_cia_msl_00.png": "f4129056494dee7b0b22f93ac02ec74d151a9461e8d62f830593b971a7139848",
-  "mv_cia_msl_01.png": "9135c62dfe5a7f3112049d8421dbf00a7002b7d823aa7143ef72941e6429b9c4",
-  "mv_cia_msl_02.png": "e314c2b6b150769a0cb6831d37d13da05a3360268533e8087fb72254112b1fdd",
-  "mv_cia_msl_03.png": "0933deef66863970699baa0030d3005354400242d72e70a512df921908900c72",
-  "mv_cia_msl_04.png": "a9caa2bd7521ce399d3f060b53ef94e65bf22f52950b67bd0e1324be7dd3481d",
-  "mv_cia_msl_05.png": "e30e08fa179e7c6eba2915fb2c6aba63d9297b26c31c9e5e881fe1f07a69f021",
-  "mv_cia_msl_06.png": "911a77943f8da09e0ea8572d9b38c062546d7c5c09e24dadf0d889064061d73f",
-  "mv_cia_msl_07.png": "a3d62c6d2d5875c8bdd2ac31044409a36b339b0fab1be89b2e15f65f6541d434",
-  "mv_cia_msl_08.png": "32143ac78d2f51c826f5ffaed9d2b2c491469e0dda64bda47560327eca5e1589",
-  "mv_cia_msl_09.png": "484e607ff3f8a5e6165f70a02fba336b0ea572c018ab12f1532105b2be0f4049",
-  "mv_cia_speed_00.png": "517b3a1448fc6ed44f0a218e5bbaf8617508a6f1103e9ad0b61764a8c11ada33",
-  "mv_cia_speed_01.png": "e66b17acf34ae87811d5659301f285d8064aa049102346e607e5ab4be7105d6b",
-  "mv_cia_speed_02.png": "7f55475fd96972302e72d215c03bf624161c510e05076cd24f1f57e7ee7dabf5",
-  "mv_cia_speed_03.png": "c64f3f85c3a9a546ded2efd0dbe487658e3731efe76ee1a0b9733c64a8ccf384",
-  "mv_cia_speed_04.png": "d384e342ffc754ddc6750c2df3667ee6565c2568b418344a2477f4a6a51218f8",
-  "mv_cia_speed_05.png": "18eac298e3b5ea35e02a07aac3fc7ffc124868f2d38cdc15e841b2d4eb35a835",
-  "mv_cia_speed_06.png": "c9dbc07f98cdb745e84f3588c2bc82a814682187564f971f215dfc21521e0ab9",
-  "mv_cia_speed_07.png": "0f8a4536a9de97e570542590872c08af008c60083e47f2744ab8c31c1c8c9b15",
-  "mv_cia_speed_08.png": "e4225b95eacd49b0f7ceabf4ef209538df5a15bed5126f0a4d6ebc5b54191f2b",
-  "mv_cia_speed_09.png": "94c9afe3eaac3c927ae03ed6d349ca62249603f15f3586e89063cb6cc3167537"
- },
+ "render_assets": {},
  "data_files": {
-  "mv.json": "eb1dab911b431f37fb7b5f4b761ec3062e38aac51c21d62bdf5a005062c95e6a",
+  "mv.json": "b1ec2f812770086a65b6f5d22368d9dd34e0047abd5f309332f0edd59a984c25",
   "img/cia_msl_00.png": "f4129056494dee7b0b22f93ac02ec74d151a9461e8d62f830593b971a7139848",
   "img/cia_msl_01.png": "9135c62dfe5a7f3112049d8421dbf00a7002b7d823aa7143ef72941e6429b9c4",
   "img/cia_msl_02.png": "e314c2b6b150769a0cb6831d37d13da05a3360268533e8087fb72254112b1fdd",
@@ -477,6 +455,66 @@
    "pass": true
   },
   {
+   "id": "DP43",
+   "name": "E2: x0 = 25 km = 200/8 (phase 45°); 5 sin 45° = 3.536 → 3.54; 10 + 3.54 = 13.54; slope 5 × 2π/200 × cos 45° = 0.1111 m/s per km",
+   "value": [
+    25.0,
+    3.535534,
+    13.54,
+    0.111072,
+    13.535534
+   ],
+   "ref": [
+    25.0,
+    3.536,
+    13.54,
+    0.1111,
+    13.536
+   ],
+   "tol": [
+    1e-12,
+    0.0005,
+    1e-09,
+    5e-05,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E2: 13.54 − 10 = 3.54; 3.54 × 3.6 = 12.74 ≈ 12.7 km/h; 10 × 3.6 = 36; 13.54 × 3.6 = 48.74 ≈ 48.7; 12.7 × 0.111 = 1.41 ≈ 1.4",
+   "value": [
+    3.54,
+    12.744,
+    36.0,
+    48.744,
+    1.4097
+   ],
+   "ref": [
+    3.54,
+    12.74,
+    36.0,
+    48.74,
+    1.41
+   ],
+   "tol": [
+    1e-09,
+    0.005,
+    1e-09,
+    0.005,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E2 roundings: 12.744 → 12.7, 48.744 → 48.7 (voice 'twelve point seven', 'forty eight point seven')",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
    "id": "DP29",
    "name": "Brest k = (0.662, −0.052, 0.748) (Part 4)",
    "value": [
@@ -573,6 +611,104 @@
     0.05,
     0.05,
     0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E3: 00 UTC (49.667 N, 5.717 W), 06 UTC (50.516 N, 1.505 W); Δφ 0.849°, Δλ 4.212°, φ_mid 50.09°",
+   "value": [
+    49.667,
+    -5.717,
+    50.516,
+    -1.505,
+    0.849,
+    4.212,
+    50.09
+   ],
+   "ref": [
+    49.667,
+    -5.717,
+    50.516,
+    -1.505,
+    0.849,
+    4.212,
+    50.09
+   ],
+   "tol": [
+    0,
+    0,
+    0,
+    0,
+    1e-09,
+    1e-09,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E3: Δy = 6371 × 0.849 × 0.01745 = 94.4 km; Δλ = 4.212 × 0.01745 = 0.07350 rad; cos 50.09° = 0.6416; Δx = 6371 × 0.6416 × 0.07350 = 300.4 km",
+   "value": [
+    94.386684,
+    0.0735,
+    0.6416,
+    300.44107
+   ],
+   "ref": [
+    94.39,
+    0.0735,
+    0.6416,
+    300.44
+   ],
+   "tol": [
+    0.005,
+    1e-09,
+    0,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E3: √(94.4² + 300.4²) = 314.9 ≈ 315 km; 315 000 / 21 600 = 14.58 ≈ 14.6 m/s (= translation_velocity 14.58)",
+   "value": [
+    314.883343,
+    14.583333,
+    14.577627
+   ],
+   "ref": [
+    314.88,
+    14.583,
+    14.58
+   ],
+   "tol": [
+    0.005,
+    0.0005,
+    0.02
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E3: tan β = 300.4 / 94.4 = 3.18 → 72.6° on the flat map (the average direction); the great circle leaves at 71.0° (initial_bearing) and turns ≈ Δλ sin φ = 3.2°",
+   "value": [
+    3.182203,
+    72.554795,
+    70.966398,
+    3.230828
+   ],
+   "ref": [
+    3.18,
+    72.55,
+    70.95,
+    3.23
+   ],
+   "tol": [
+    0.005,
+    0.01,
+    0.1,
+    0.005
    ],
    "pass": true
   },
@@ -810,6 +946,121 @@
    "pass": true
   },
   {
+   "id": "DP43",
+   "name": "E1: south ground (13.47, 8.44), U (13.78, 4.75) to 2 dp; (13.47 − 13.78, 8.44 − 4.75) = (−0.31, 3.69); √(0.31² + 3.69²) = 3.70",
+   "value": [
+    13.47,
+    8.44,
+    13.78,
+    4.75,
+    -0.31,
+    3.69,
+    3.702999
+   ],
+   "ref": [
+    13.47,
+    8.44,
+    13.78,
+    4.75,
+    -0.31,
+    3.69,
+    3.703
+   ],
+   "tol": [
+    0,
+    0,
+    0,
+    0,
+    1e-09,
+    1e-09,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E1 north: 18.0² = 324, 10.1² = 102.01 ≈ 102; √(324 + 102) = 20.64 ≈ 20.6",
+   "value": [
+    324.0,
+    102.01,
+    20.639767
+   ],
+   "ref": [
+    324.0,
+    102.01,
+    20.64
+   ],
+   "tol": [
+    1e-09,
+    1e-09,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E4: middle of the south side U·θ̂ = |U| (14.6); average cos over ±45° = 0.906; 14.6 × 0.906 = 13.2; north side −13.0",
+   "value": [
+    14.577473,
+    0.90617,
+    13.2276,
+    -13.027237
+   ],
+   "ref": [
+    14.58,
+    0.906,
+    13.23,
+    -13.03
+   ],
+   "tol": [
+    0.05,
+    0.0005,
+    0.005,
+    0.03
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E4 picture: U·θ̂ (data, vtu) at ring points −40°, −20°, 0°, +20°, +40° along the south side = 11.4, 13.8, 14.6, 13.7, 11.3 (screen, 1 dp)",
+   "value": [
+    11.4,
+    13.8,
+    14.6,
+    13.7,
+    11.3
+   ],
+   "ref": [
+    11.4,
+    13.8,
+    14.6,
+    13.7,
+    11.3
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E4 picture: ≈ |U| cos(offset) (11.2, 13.7, 14.6, 13.7, 11.2) within 0.3 (the ring's points are 5° apart in azimuth on the sphere, not on the flat map)",
+   "value": [
+    11.43529,
+    13.780632,
+    14.577473,
+    13.729987,
+    11.305054
+   ],
+   "ref": [
+    11.16711,
+    13.698489,
+    14.577627,
+    13.698489,
+    11.16711
+   ],
+   "tol": 0.3,
+   "pass": true
+  },
+  {
    "id": "DC54",
    "name": "ring means v_t 14.1 vs 13.8; v_r −6.0 vs −5.9 m/s",
    "value": [
@@ -986,6 +1237,49 @@
    "pass": true
   },
   {
+   "id": "DP43",
+   "name": "E5: |∇p| = 0.0618 ≈ 0.062 hPa/km towards 63°; angle to U 71 − 63 = 8°; 0.062 × cos 8° = 0.0614 ≈ 0.061",
+   "value": [
+    0.062,
+    63.0,
+    8.0,
+    0.061397,
+    0.061258
+   ],
+   "ref": [
+    0.062,
+    63.0,
+    8.0,
+    0.0614,
+    0.0613
+   ],
+   "tol": [
+    0,
+    0,
+    0,
+    5e-05,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP43",
+   "name": "E6: 14.58 m/s × 3.6 = 52.49 ≈ 52.5 km/h",
+   "value": [
+    14.58,
+    52.488
+   ],
+   "ref": [
+    14.58,
+    52.49
+   ],
+   "tol": [
+    0,
+    0.005
+   ],
+   "pass": true
+  },
+  {
    "id": "DP41",
    "name": "centre msl_min 954.9 -> 954.0 hPa in 2 h: −0.47 hPa/h ('about minus half')",
    "value": [
@@ -1074,32 +1368,7 @@
    "pass": true
   }
  ],
- "flags": [
-  {
-   "id": "F1",
-   "scene": "s07",
-   "what": "relative wind",
-   "screen_or_voice": "'thirteen and a half minus ten: three and a half metres per second, or twelve point seven kilometres per hour'",
-   "hand_check": "3.5 × 3.6 = 12.6; the exact 3.536 × 3.6 = 12.73",
-   "note": "screen writes 3.5 m/s ≈ 12.7 km/h (≈, the exact relative wind 3.54 m/s); voice unchanged"
-  },
-  {
-   "id": "F2",
-   "scene": "s15",
-   "what": "speed in km/h",
-   "screen_or_voice": "storyboard visual '14.6 m/s × 3.6 = 52.5 km/h'",
-   "hand_check": "14.6 × 3.6 = 52.56 ≈ 52.6; the exact 14.58 × 3.6 = 52.49",
-   "note": "the screen never writes 14.6 × 3.6; it writes '14.6 m/s ≈ 52.5 km/h' (both rounded from 14.58)"
-  },
-  {
-   "id": "F3",
-   "scene": "s10",
-   "what": "south point, north part",
-   "screen_or_voice": "'(13.5, 8.4) − (13.8, 4.8) = (−0.3, 3.7)'; voice 'three point seven north'",
-   "hand_check": "8.4 − 4.8 = 3.6 with the rounded inputs; the exact 8.44 − 4.75 = 3.69 ≈ 3.7",
-   "note": "screen writes '≈ (−0.3, 3.7)' (≈, house rule for rounded results). Option for the director before the final TTS: say the storm's north part as 'four point seven five' in S6 (8.44 − 4.75 = 3.69 ≈ 3.7). Not applied (the storyboard voice is fixed)."
-  }
- ],
+ "flags": [],
  "physics": [
   {
    "fn": "fluidpy.geo.calculus.chain_rule_rate",

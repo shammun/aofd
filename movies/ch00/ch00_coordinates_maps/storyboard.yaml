@@ -22,7 +22,7 @@ concepts:
 - 'the 10-hPa stratospheric polar vortex on 21 Jan 2026: east = tangential (theta-hat), north = -radial (-r-hat); westerlies anticlockwise seen from above
   the North Pole'
 - choosing the origin of polar coordinates (flat ring; the vortex about the pole vs about its own centre)
-target_duration_s: 1949.1
+target_duration_s: 1949.8104
 fps: 30
 size:
 - 1920
@@ -62,7 +62,7 @@ audio:
 dry_run:
   tool: tools/tts.py
   run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_maps/dryrun3_spliced
-  audio_s: 1949.1
+  audio_s: 1949.8104
   with_end_hold_s: 1951.6
   cues: 477
   sentences: 285
@@ -232,7 +232,7 @@ maths_skip:
     - s05_stretch_k
     chip_on: AT(1, 'skip ahead') in s04_plate_carree
     skip_to_scene: s06_gradient_preview
-    skip_to_t: 373.98
+    skip_to_t: 374.2604
     skip_to_mmss: '6:13 (provisional: dry run; refill after the final TTS)'
     keep_line: S1 of s06_gradient_preview
   - chip_scene: s08_mercator_dy
@@ -241,7 +241,7 @@ maths_skip:
     - s11_slope_check
     chip_on: AT(1, 'skip ahead') in s08_mercator_dy
     skip_to_scene: s12_rhumb_straight
-    skip_to_t: 975.05
+    skip_to_t: 975.7604
     skip_to_mmss: '16:15 (provisional: dry run; refill after the final TTS)'
     keep_line: S1 of s12_rhumb_straight
 chapter_marks:
@@ -261,55 +261,55 @@ chapter_marks:
   mmss: '2:02'
   title: 'Every step: the flat square map and its stretch (optional maths)'
   scene: s04_plate_carree
-- t: 373.98
+- t: 374.2604
   mmss: '6:13'
   title: Scale factors on weather grids
   scene: s06_gradient_preview
-- t: 461.05
+- t: 461.3304
   mmss: '7:41'
   title: Mercator's idea
   scene: s07_mercator_idea
-- t: 546.25
+- t: 546.5304
   mmss: '9:06'
   title: 'Every step: Mercator''s formula (optional maths)'
   scene: s08_mercator_dy
-- t: 975.05
+- t: 975.7604
   mmss: '16:15'
   title: Why the rhumb line is straight
   scene: s12_rhumb_straight
-- t: 1067.78
+- t: 1068.4904
   mmss: '17:47'
   title: 'The price: areas'
   scene: s13_area_stretch
-- t: 1153.62
+- t: 1154.3304
   mmss: '19:13'
   title: 'Equal-area maps: pick the map for the job'
   scene: s14_equal_earth
-- t: 1245.8
+- t: 1246.5104
   mmss: '20:45'
   title: Why so many coordinate systems
   scene: s15_why_many
-- t: 1309.97
+- t: 1310.6804
   mmss: '21:49'
   title: The view from the pole
   scene: s16_globe_to_pole
-- t: 1390.05
+- t: 1390.7604
   mmss: '23:10'
   title: A tour of the polar map
   scene: s17_where_is_what
-- t: 1493.85
+- t: 1494.5604
   mmss: '24:53'
   title: The stratospheric polar vortex
   scene: s18_vortex
-- t: 1581.72
+- t: 1582.4304
   mmss: '26:21'
   title: East is round, north is in
   scene: s19_vortex_components
-- t: 1656.62
+- t: 1657.3304
   mmss: '27:36'
   title: Choosing the origin
   scene: s20_origin_wheel
-- t: 1859.25
+- t: 1859.9604
   mmss: '30:59'
   title: To sum up
   scene: s22_recap
@@ -508,7 +508,7 @@ scenes:
 - id: s04_plate_carree
   t:
   - 122.95
-  - 258.825
+  - 259.1054
   sentence_times:
   - - 122.95
     - 128.0
@@ -541,17 +541,17 @@ scenes:
   - - 200.85
     - 206.775
   - - 207.125
-    - 213.9
-  - - 214.25
-    - 225.775
-  - - 227.275
-    - 237.5
-  - - 239.0
-    - 244.925
-  - - 245.275
-    - 250.575
-  - - 250.925
-    - 258.025
+    - 214.0441
+  - - 214.3941
+    - 225.9191
+  - - 227.4191
+    - 237.7804
+  - - 239.2804
+    - 245.2054
+  - - 245.5554
+    - 250.8554
+  - - 251.2054
+    - 258.3054
   beat: 'D48 (1)-(3): why x = a lambda and y = a phi make sense; Brest on the map'
   visual: 'Two views side by side (picture zone split): left, the globe with the equator gold; right, the empty page with the x axis. AT(6, ''Cut it, and
     unroll'') the equator unrolls from the globe onto the page as a straight gold line ''2πa ≈ 40 030 km'', with ticks every 30° of λ (each ''≈ 3336 km'').
@@ -562,19 +562,19 @@ scenes:
     the BMNG plate carrée fills in under the lines. AT(3, ''skip ahead'') the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): ''every
     step · optional · skip to mm:ss'' (44 px, warm white on a thin gold outline: the one chip the user''s 2026-11-05 maths-skip rule asks for; mm:ss filled
     after the final TTS); it stays 6 s, then shrinks to a small ''optional maths'' tag in the same corner until the block ends.'
-  voiceover: 'Next, we''ll build the simplest map step by step, with every number. That''s for anyone who enjoys every step. For the intuition behind weather,
-    climate science or GIS, you only need the result, so if it feels like a lot, skip ahead to the time on screen. We''ll build it from the lines on the
-    globe whose lengths we know. First, the equator. Cut it, and unroll it into a straight line across the page. Its length is two pi times the Earth''s
-    radius, about forty thousand kilometres. A place at longitude lambda, in radians, is the Earth''s radius times lambda along the equator from the prime
-    meridian. That''s the arc rule again. So we set x equal to the Earth''s radius times lambda. [beat] Second, the meridians. Each one runs from the equator
-    to the pole, and a place at latitude phi is the Earth''s radius times phi from the equator, along its meridian. That''s the distance north from Part
-    3. So we draw every meridian as a straight line going up the page, and set y equal to the Earth''s radius times phi. [beat] Let''s try Brest, at forty
-    eight point four degrees north, and four and a half degrees west. In radians, that''s zero point eight four four six, and minus zero point zero seven
-    eight four. So x is six thousand three hundred and seventy one times minus zero point zero seven eight four, about minus five hundred kilometres: just
-    west of the middle line. [beat] And y is six thousand three hundred and seventy one times zero point eight four four six, about five thousand three
-    hundred and eighty one kilometres. [beat] That''s exactly how far Brest is from the equator, walking north along its meridian. So along the equator,
-    and along every meridian, this map is true to scale. It''s called the plate carrée, French for flat square, and most weather data come on exactly this
-    kind of grid.'
+  voiceover: "Next, we'll build the simplest map step by step, with every number. That's for anyone who enjoys every step. For the intuition behind weather,\
+    \ climate science or GIS, you only need the result, so if it feels like a lot, skip ahead to the time on screen. We'll build it from the lines on the\
+    \ globe whose lengths we know. First, the equator. Cut it, and unroll it into a straight line across the page. Its length is two pi times the Earth's\
+    \ radius, about forty thousand kilometres. A place at longitude lambda, in radians, is the Earth's radius times lambda along the equator from the prime\
+    \ meridian. That's the arc rule again. So we set x equal to the Earth's radius times lambda. [beat] Second, the meridians. Each one runs from the equator\
+    \ to the pole, and a place at latitude phi is the Earth's radius times phi from the equator, along its meridian. That's the distance north from Part 3.\
+    \ So we draw every meridian as a straight line going up the page, and set y equal to the Earth's radius times phi. [beat] Let's try Brest, at forty eight\
+    \ point four degrees north, and four and a half degrees west. In radians, that's zero point eight four four seven, and minus zero point zero seven eight\
+    \ five. So x is six thousand three hundred and seventy one times minus zero point zero seven eight five, about minus five hundred kilometres: just west\
+    \ of the middle line. [beat] And y is six thousand three hundred and seventy one times zero point eight four four seven, about five thousand three hundred\
+    \ and eighty two kilometres. [beat] That's exactly how far Brest is from the equator, walking north along its meridian. So along the equator, and along\
+    \ every meridian, this map is true to scale. It's called the plate carr\xE9e, French for flat square, and most weather data come on exactly this kind\
+    \ of grid."
   on_screen_eq:
     latex: x=a\,\lambda,\qquad y=a\,\varphi
     vallis_eq: 'none in Vallis: plate carrée (Snyder 1987 eqs 12-1, 12-2), built from the metric δx = a cos ϑ δλ, δy = a δϑ (text before (2.27))'
@@ -605,39 +605,39 @@ scenes:
   layout: Globe x 80-560, page x 600-1000 (>= 40 px apart), column x >= 1100; source line below the map once the image fills in.
 - id: s05_stretch_k
   t:
-  - 258.825
-  - 373.975
+  - 259.1054
+  - 374.2554
   sentence_times:
-  - - 258.825
-    - 262.575
-  - - 262.925
-    - 275.125
-  - - 275.475
-    - 280.025
-  - - 280.375
-    - 289.8
-  - - 290.15
-    - 298.9
-  - - 300.4
-    - 307.1
-  - - 307.45
-    - 317.775
-  - - 319.275
-    - 321.55
-  - - 321.9
-    - 330.6
-  - - 330.95
-    - 336.525
-  - - 338.025
-    - 343.575
-  - - 343.925
-    - 349.075
-  - - 349.425
-    - 358.625
-  - - 360.125
-    - 363.425
-  - - 363.775
-    - 373.175
+  - - 259.1054
+    - 262.8554
+  - - 263.2054
+    - 275.4054
+  - - 275.7554
+    - 280.3054
+  - - 280.6554
+    - 290.0804
+  - - 290.4304
+    - 299.1804
+  - - 300.6804
+    - 307.3804
+  - - 307.7304
+    - 318.0554
+  - - 319.5554
+    - 321.8304
+  - - 322.1804
+    - 330.8804
+  - - 331.2304
+    - 336.8054
+  - - 338.3054
+    - 343.8554
+  - - 344.2054
+    - 349.3554
+  - - 349.7054
+    - 358.9054
+  - - 360.4054
+    - 363.7054
+  - - 364.0554
+    - 373.4554
   beat: 'D48 (4)-(6): k = 1/cos phi derived from the parallel''s two lengths; Tissot ovals'
   visual: 'Left: the globe with Brest''s parallel lit teal and its radius a cos φ drawn from the axis (gold link ''≈ 4230 km''); right: the plate carrée
     with the same parallel as a full-width teal line. AT(2, ''as long as the equator'') the map''s parallel tagged ''40 030 km''; AT(5, ''true length'')
@@ -699,33 +699,33 @@ scenes:
   layout: Globe and map >= 40 px apart; links ordered like their targets (Longyearbyen above 60° above Brest) and never crossing; source below.
 - id: s06_gradient_preview
   t:
-  - 373.975
-  - 461.05
+  - 374.2554
+  - 461.3304
   sentence_times:
-  - - 373.975
-    - 376.65
-  - - 377.0
-    - 381.725
-  - - 382.075
-    - 396.475
-  - - 396.825
-    - 403.875
-  - - 404.225
-    - 413.25
-  - - 413.6
-    - 417.3
-  - - 417.65
-    - 425.225
-  - - 425.575
-    - 429.725
-  - - 431.225
-    - 439.55
-  - - 439.9
-    - 444.45
-  - - 444.8
-    - 449.45
-  - - 449.8
-    - 460.25
+  - - 374.2554
+    - 376.9304
+  - - 377.2804
+    - 382.0054
+  - - 382.3554
+    - 396.7554
+  - - 397.1054
+    - 404.1554
+  - - 404.5054
+    - 413.5304
+  - - 413.8804
+    - 417.5804
+  - - 417.9304
+    - 425.5054
+  - - 425.8554
+    - 430.0054
+  - - 431.5054
+    - 439.8304
+  - - 440.1804
+    - 444.7304
+  - - 445.0804
+    - 449.7304
+  - - 450.0804
+    - 460.5304
   beat: 'takeaway after the plate-carrée block; then the <= 1-min gradient pointer (scale factors in a slope; #6 is next)'
   visual: 'AT(''here''s what to keep'') keyword ''if you skipped, keep this:'' (54 px, gold) and the takeaway''s numbers as keywords in the column, beside
     the picture named in the sentence. Here: the plate carrée with the three bands ''× 1.5'', ''× 2'', ''× 4.9'' (north of the equator, Must 6). Then Left
@@ -778,37 +778,37 @@ scenes:
   layout: Keyword lines name the later movies; no box, no thumbnail card. The ghost 111.2-km bracket is slate and dashed, with the short tag 'not this'.
 - id: s07_mercator_idea
   t:
-  - 461.05
-  - 546.25
+  - 461.3304
+  - 546.5304
   sentence_times:
-  - - 461.05
-    - 469.475
-  - - 469.825
-    - 472.025
-  - - 472.375
-    - 476.45
-  - - 476.8
-    - 483.025
-  - - 483.375
-    - 487.95
-  - - 488.3
-    - 496.325
-  - - 496.675
-    - 500.025
-  - - 500.375
-    - 503.55
-  - - 505.05
-    - 507.975
-  - - 508.325
-    - 512.35
-  - - 512.7
-    - 518.9
-  - - 519.25
-    - 527.575
-  - - 527.925
-    - 538.225
-  - - 538.575
-    - 545.45
+  - - 461.3304
+    - 469.7554
+  - - 470.1054
+    - 472.3054
+  - - 472.6554
+    - 476.7304
+  - - 477.0804
+    - 483.3054
+  - - 483.6554
+    - 488.2304
+  - - 488.5804
+    - 496.6054
+  - - 496.9554
+    - 500.3054
+  - - 500.6554
+    - 503.8304
+  - - 505.3304
+    - 508.2554
+  - - 508.6054
+    - 512.6304
+  - - 512.9804
+    - 519.1804
+  - - 519.5304
+    - 527.8554
+  - - 528.2054
+    - 538.5054
+  - - 538.8554
+    - 545.7304
   beat: 'D49: the Mercator idea made intuitive (photo stretch, Like / Unlike), conformal'
   visual: 'Left from frame 0: a code-drawn photo of a smiling face (simple icon). AT(3, ''only sideways'') it stretches sideways (too wide). AT(4, ''up
     and down by the same amount'') it also stretches up and down: right shape, bigger. Keywords ''Like a photo…'' then later ''Unlike a photo: each strip
@@ -850,39 +850,39 @@ scenes:
   layout: The face icon left (x 80-460), the map x 500-1000 or full width after the face fades; keywords right; source below the map.
 - id: s08_mercator_dy
   t:
-  - 546.25
-  - 650.65
+  - 546.5304
+  - 650.9304
   sentence_times:
-  - - 546.25
-    - 552.1
-  - - 552.45
-    - 561.425
-  - - 561.775
-    - 565.975
-  - - 566.325
-    - 570.3
-  - - 570.65
-    - 575.725
-  - - 576.075
-    - 584.025
-  - - 584.375
-    - 590.575
-  - - 590.925
-    - 598.175
-  - - 599.675
-    - 601.625
-  - - 601.975
-    - 608.425
-  - - 608.775
-    - 619.625
-  - - 621.125
-    - 628.475
-  - - 629.975
-    - 634.95
-  - - 635.3
-    - 641.075
-  - - 641.425
-    - 649.85
+  - - 546.5304
+    - 552.3804
+  - - 552.7304
+    - 561.7054
+  - - 562.0554
+    - 566.2554
+  - - 566.6054
+    - 570.5804
+  - - 570.9304
+    - 576.0054
+  - - 576.3554
+    - 584.3054
+  - - 584.6554
+    - 590.8554
+  - - 591.2054
+    - 598.4554
+  - - 599.9554
+    - 601.9054
+  - - 602.2554
+    - 608.7054
+  - - 609.0554
+    - 619.9054
+  - - 621.4054
+    - 628.7554
+  - - 630.2554
+    - 635.2304
+  - - 635.5804
+    - 641.3554
+  - - 641.7054
+    - 650.1304
   beat: 'D49 step by step: the north step drawn a d(phi)/cos(phi)'
   visual: 'Left: the globe slice along Brest''s meridian with a small north step a Δφ (teal); right of it, the plate carrée strip and the Mercator strip
     at Brest side by side, the same step drawn ''× 1'' and ''× 1.506'' long (teal brackets). Column: the derivation in four lines, each on its words (what
@@ -933,39 +933,39 @@ scenes:
   layout: Derivation lines x >= 1100, at most three visible, older dimmed; the two strips >= 40 px apart.
 - id: s09_adding_steps
   t:
-  - 650.65
-  - 763.125
+  - 650.9304
+  - 763.4054
   sentence_times:
-  - - 650.65
-    - 654.3
-  - - 654.65
-    - 659.05
-  - - 659.4
-    - 662.575
-  - - 662.925
-    - 667.5
-  - - 667.85
-    - 671.675
-  - - 672.025
-    - 679.675
-  - - 680.025
-    - 694.7
-  - - 696.2
-    - 705.85
-  - - 706.2
-    - 709.675
-  - - 711.175
-    - 721.775
-  - - 723.275
-    - 725.0
-  - - 725.35
-    - 735.95
-  - - 737.45
-    - 742.05
-  - - 742.4
-    - 750.0
-  - - 750.35
-    - 762.325
+  - - 650.9304
+    - 654.5804
+  - - 654.9304
+    - 659.3304
+  - - 659.6804
+    - 662.8554
+  - - 663.2054
+    - 667.7804
+  - - 668.1304
+    - 671.9554
+  - - 672.3054
+    - 679.9554
+  - - 680.3054
+    - 694.9804
+  - - 696.4804
+    - 706.1304
+  - - 706.4804
+    - 709.9554
+  - - 711.4554
+    - 722.0554
+  - - 723.5554
+    - 725.2804
+  - - 725.6304
+    - 736.2304
+  - - 737.7304
+    - 742.3304
+  - - 742.6804
+    - 750.2804
+  - - 750.6304
+    - 762.6054
   beat: 'D50 part 1: Mercator y by adding up the drawn steps (table, 10-degree steps, midpoint stretch); Edward Wright 1599'
   visual: 'Left: a tall Mercator ladder (y axis in units of a, 0 at the equator) next to a globe slice; each 10° step on the globe (teal arc) is drawn on
     the ladder as a teal block whose height is the step × stretch; blocks stack up from the equator on their words, the first three computed in full, the
@@ -1013,43 +1013,43 @@ scenes:
   layout: Ladder x 80-1000; table x >= 1060; every number in the table is spoken when it appears.
 - id: s10_ln_formula
   t:
-  - 763.125
-  - 876.15
+  - 763.4054
+  - 876.8604
   sentence_times:
-  - - 763.125
-    - 770.925
-  - - 771.275
-    - 776.425
-  - - 776.775
-    - 780.2
-  - - 780.55
-    - 786.975
-  - - 787.325
-    - 792.075
-  - - 792.425
-    - 794.6
-  - - 796.1
-    - 806.4
-  - - 806.75
-    - 813.8
-  - - 814.15
-    - 816.725
-  - - 817.075
-    - 822.125
-  - - 822.475
-    - 830.5
-  - - 832.0
-    - 836.525
-  - - 836.875
-    - 843.45
-  - - 844.95
-    - 851.5
-  - - 851.85
-    - 857.7
-  - - 858.05
-    - 869.075
-  - - 870.575
-    - 875.35
+  - - 763.4054
+    - 771.2054
+  - - 771.5554
+    - 776.7054
+  - - 777.0554
+    - 780.4804
+  - - 780.8304
+    - 787.2554
+  - - 787.6054
+    - 792.3554
+  - - 792.7054
+    - 794.8804
+  - - 796.3804
+    - 806.6804
+  - - 807.0304
+    - 814.0804
+  - - 814.4304
+    - 817.0054
+  - - 817.3554
+    - 822.4054
+  - - 822.7554
+    - 830.7804
+  - - 832.2804
+    - 836.8054
+  - - 837.1554
+    - 843.7304
+  - - 845.2304
+    - 851.7804
+  - - 852.1304
+    - 858.3415
+  - - 858.6915
+    - 869.7854
+  - - 871.2854
+    - 876.0604
   beat: 'D50 part 2: the natural log primed; y = a ln tan(pi/4 + phi/2) matches the sums'
   visual: 'Column first: ''e ≈ 2.718''; ''ln x: e to what power gives x?''; ''ln 1 = 0'', ''ln e = 1'' (68 px) on their words; a small curve of ln x (teal)
     through (1, 0) and (e, 1) on the left. AT(''Here''s the answer'') the main formula (96 px) with a gold underbrace under π/4 ''forty five degrees''.
@@ -1061,11 +1061,11 @@ scenes:
     gives this number? So l n of one is zero, because e to the power zero is one. And l n of e is one. [beat] Here''s the answer to our sum: y equals the
     Earth''s radius, times the natural logarithm of the tangent of forty five degrees plus half the latitude. Forty five degrees is pi over four radians,
     so on screen it''s pi over four plus phi over two. Let''s test it against our table. At sixty degrees, forty five plus thirty is seventy five degrees.
-    Its tangent is three point seven three two, and l n of three point seven three two is one point three one seven. [beat] Our ten-degree sum gave one
-    point three one three, very close. With one-degree steps, the sum gives one point three one seven, the same to three decimals. [beat] At Brest, forty
-    five plus half of forty eight point four is sixty nine point two degrees. Its tangent is two point six three two, and its l n is zero point nine six
-    eight. So on a Mercator map, Brest sits zero point nine six eight times the Earth''s radius above the equator, about six thousand one hundred and sixty
-    five kilometres. [beat] On the flat square map, it was five thousand three hundred and eighty one.'
+    Its tangent is three point seven three two, and l n of three point seven three two is one point three one seven. [beat] Our ten-degree sum gave one point
+    three one three, very close. With one-degree steps, the sum gives one point three one seven, the same to three decimals. [beat] At Brest, forty five plus
+    half of forty eight point four is sixty nine point two degrees. Its tangent is two point six three two five, and its l n is zero point nine six eight.
+    So on a Mercator map, Brest sits zero point nine six eight times the Earth''s radius above the equator, about six thousand one hundred and sixty seven
+    kilometres. [beat] On the flat square map, it was five thousand three hundred and eighty two.'
   on_screen_eq:
     latex: y=a\,\ln\tan\!\left(\frac{\pi}{4}+\frac{\varphi}{2}\right)
     vallis_eq: 'none in Vallis: Mercator ordinate (Snyder 1987 eq. 7-2); fluidpy.geo.sphere.isometric_latitude, fluidpy.geo.mapproj.forward(''mercator'')'
@@ -1099,39 +1099,39 @@ scenes:
   layout: The ln primer stays small (left, x 80-560); the formula and the test rows right; no keyword over the graph.
 - id: s11_slope_check
   t:
-  - 876.15
-  - 975.05
+  - 876.8604
+  - 975.7604
   sentence_times:
-  - - 876.15
-    - 881.25
-  - - 881.6
-    - 887.575
-  - - 887.925
-    - 893.85
-  - - 894.2
-    - 899.325
-  - - 899.675
-    - 903.975
-  - - 905.475
-    - 914.675
-  - - 915.025
-    - 922.925
-  - - 924.425
-    - 929.05
-  - - 929.4
-    - 932.875
-  - - 933.225
-    - 935.0
-  - - 935.35
-    - 943.7
-  - - 945.2
-    - 952.6
-  - - 952.95
-    - 955.925
-  - - 956.275
-    - 965.925
-  - - 967.425
-    - 974.25
+  - - 876.8604
+    - 881.9604
+  - - 882.3104
+    - 888.2854
+  - - 888.6354
+    - 894.5604
+  - - 894.9104
+    - 900.0354
+  - - 900.3854
+    - 904.6854
+  - - 906.1854
+    - 915.3854
+  - - 915.7354
+    - 923.6354
+  - - 925.1354
+    - 929.7604
+  - - 930.1104
+    - 933.5854
+  - - 933.9354
+    - 935.7104
+  - - 936.0604
+    - 944.4104
+  - - 945.9104
+    - 953.3104
+  - - 953.6604
+    - 956.6354
+  - - 956.9854
+    - 966.6354
+  - - 968.1354
+    - 974.9604
   beat: 'D50 checks: centred-difference slope at 60 deg = 2.00; y(0) = 0; y -> infinity at the pole'
   visual: 'Left: the curve y/a = ln tan(π/4 + φ/2) against φ (0-85°), teal; at 60° the two points at 59° and 61° (dots) and their chord (gold) with its
     rise 0.0698 and run 0.0349 rad bracketed. Column: CalcStack. AT(8, ''exactly two'') ''1/cos 60° = 2'' with a gold ''same'' tick. AT(11, ''At the equator'')
@@ -1180,39 +1180,39 @@ scenes:
   layout: Graph x 80-1000 with 52-px ticks; CalcStack x >= 1100; the small map has its source line below.
 - id: s12_rhumb_straight
   t:
-  - 975.05
-  - 1067.775
+  - 975.7604
+  - 1068.4854
   sentence_times:
-  - - 975.05
-    - 977.725
-  - - 978.075
-    - 990.275
-  - - 990.625
-    - 994.625
-  - - 994.975
-    - 997.85
-  - - 998.2
-    - 1000.7
-  - - 1001.05
-    - 1006.875
-  - - 1007.225
-    - 1011.3
-  - - 1011.65
-    - 1020.45
-  - - 1021.95
-    - 1024.45
-  - - 1024.8
-    - 1032.625
-  - - 1032.975
-    - 1037.775
-  - - 1038.125
-    - 1045.075
-  - - 1045.425
-    - 1049.075
-  - - 1050.575
-    - 1057.425
-  - - 1057.775
-    - 1066.975
+  - - 975.7604
+    - 978.4354
+  - - 978.7854
+    - 990.9854
+  - - 991.3354
+    - 995.3354
+  - - 995.6854
+    - 998.5604
+  - - 998.9104
+    - 1001.4104
+  - - 1001.7604
+    - 1007.5854
+  - - 1007.9354
+    - 1012.0104
+  - - 1012.3604
+    - 1021.1604
+  - - 1022.6604
+    - 1025.1604
+  - - 1025.5104
+    - 1033.3354
+  - - 1033.6854
+    - 1038.4854
+  - - 1038.8354
+    - 1045.7854
+  - - 1046.1354
+    - 1049.7854
+  - - 1051.2854
+    - 1058.1354
+  - - 1058.4854
+    - 1067.6854
   beat: 'D52: constant bearing = constant slant; Mercator stretches both parts equally, so the rhumb line is straight'
   visual: 'Left: the globe with the slate rhumb line; AT(5, ''Zoom into any short piece'') a zoom inset (house Zoom-reveal) of one short piece: a right
     triangle with legs ''west 4.9'' and ''south 1'' (teal, orange) and the bearing arc. AT(9, ''Now draw it on the Mercator map'') the triangle moves to
@@ -1265,33 +1265,33 @@ scenes:
   layout: Globe and map >= 60 px apart; each with its source line below; inset never over the column text.
 - id: s13_area_stretch
   t:
-  - 1067.775
-  - 1153.625
+  - 1068.4854
+  - 1154.3354
   sentence_times:
-  - - 1067.775
-    - 1071.075
-  - - 1071.425
-    - 1073.675
-  - - 1074.025
-    - 1080.175
-  - - 1080.525
-    - 1086.0
-  - - 1086.35
-    - 1091.775
-  - - 1092.125
-    - 1099.425
-  - - 1100.925
-    - 1111.95
-  - - 1112.3
-    - 1121.575
-  - - 1123.075
-    - 1128.375
-  - - 1128.725
-    - 1137.275
-  - - 1137.625
-    - 1145.65
-  - - 1147.15
-    - 1152.825
+  - - 1068.4854
+    - 1071.7854
+  - - 1072.1354
+    - 1074.3854
+  - - 1074.7354
+    - 1080.8854
+  - - 1081.2354
+    - 1086.7104
+  - - 1087.0604
+    - 1092.4854
+  - - 1092.8354
+    - 1100.1354
+  - - 1101.6354
+    - 1112.6604
+  - - 1113.0104
+    - 1122.2854
+  - - 1123.7854
+    - 1129.0854
+  - - 1129.4354
+    - 1137.9854
+  - - 1138.3354
+    - 1146.3604
+  - - 1147.8604
+    - 1153.5354
   beat: 'D51: area stretch k squared (a 100-km square at 60 N, Svalbard 24), Greenland vs Africa 14'
   visual: 'Column keywords at the top right from frame 0 (''conformal has a price'', Should 18). Left: a 100 × 100 km square on the globe at 60° N (teal)
     and its Mercator copy 200 × 200 km (teal, sides bracketed ''× 2''), with ''10 000 km²'' and ''40 000 km²'' beside them. AT(7, ''k times k'') the Layered
@@ -1338,39 +1338,39 @@ scenes:
     and Svalbard ordered like their targets.'
 - id: s14_equal_earth
   t:
-  - 1153.625
-  - 1245.8
+  - 1154.3354
+  - 1246.5104
   sentence_times:
-  - - 1153.625
-    - 1157.125
-  - - 1157.475
-    - 1165.85
-  - - 1166.2
-    - 1173.3
-  - - 1173.65
-    - 1182.175
-  - - 1182.525
-    - 1188.15
-  - - 1188.5
-    - 1197.675
-  - - 1198.025
-    - 1201.7
-  - - 1202.05
-    - 1205.55
-  - - 1205.9
-    - 1209.7
-  - - 1210.05
-    - 1212.075
-  - - 1212.425
-    - 1221.625
-  - - 1223.125
-    - 1227.575
-  - - 1227.925
-    - 1231.075
-  - - 1231.425
-    - 1237.525
-  - - 1237.875
-    - 1245.0
+  - - 1154.3354
+    - 1157.8354
+  - - 1158.1854
+    - 1166.5604
+  - - 1166.9104
+    - 1174.0104
+  - - 1174.3604
+    - 1182.8854
+  - - 1183.2354
+    - 1188.8604
+  - - 1189.2104
+    - 1198.3854
+  - - 1198.7354
+    - 1202.4104
+  - - 1202.7604
+    - 1206.2604
+  - - 1206.6104
+    - 1210.4104
+  - - 1210.7604
+    - 1212.7854
+  - - 1213.1354
+    - 1222.3354
+  - - 1223.8354
+    - 1228.2854
+  - - 1228.6354
+    - 1231.7854
+  - - 1232.1354
+    - 1238.2354
+  - - 1238.5854
+    - 1245.7104
   beat: equal-area maps (Equal Earth), the climate example, angles off by 31 deg; pick the map for the job
   visual: 'Keywords row across the top (y 60-140) from frame 0. Two maps side by side under it, clearly apart (U-CO-077, Should 9): Mercator x 80-880 and
     Equal Earth x 960-1840 (gap >= 80 px), both y 190-700. AT(3, ''Equal Earth map'') the Equal Earth map fills in with Greenland and Africa outlined at
@@ -1423,31 +1423,31 @@ scenes:
   layout: 'Data source line ''Data: ERA5 (Copernicus C3S) · Sep 2026 vs 1991–2020'' fully below the colour bar; maps never touch (>= 80 px).'
 - id: s15_why_many
   t:
-  - 1245.8
-  - 1309.975
+  - 1246.5104
+  - 1310.6854
   sentence_times:
-  - - 1245.8
-    - 1249.425
-  - - 1249.775
-    - 1251.95
-  - - 1252.3
-    - 1254.125
-  - - 1254.475
-    - 1259.5
-  - - 1259.85
-    - 1271.025
-  - - 1271.375
-    - 1273.625
-  - - 1273.975
-    - 1277.875
-  - - 1278.225
-    - 1287.85
-  - - 1288.2
-    - 1290.125
-  - - 1290.475
-    - 1303.625
-  - - 1303.975
-    - 1309.175
+  - - 1246.5104
+    - 1250.1354
+  - - 1250.4854
+    - 1252.6604
+  - - 1253.0104
+    - 1254.8354
+  - - 1255.1854
+    - 1260.2104
+  - - 1260.5604
+    - 1271.7354
+  - - 1272.0854
+    - 1274.3354
+  - - 1274.6854
+    - 1278.5854
+  - - 1278.9354
+    - 1288.5604
+  - - 1288.9104
+    - 1290.8354
+  - - 1291.1854
+    - 1304.3354
+  - - 1304.6854
+    - 1309.8854
   beat: 'why: three good reasons (shape, measurement, meaning)'
   visual: 'Three beats, one per reason, each a mini picture filling the width in turn (first from frame 0, Should 18): (1) shape: the hurricane ring ''r
     = const'', the globe ''r = a'', the great circle with ''σ''; (2) measurement: a radar''s rings, a station''s i, j, k, the ERA5 latitude-longitude grid;
@@ -1475,37 +1475,37 @@ scenes:
   layout: Reused thumbnails; one small source line under a thumbnail row when a real-data thumbnail is visible. No headings.
 - id: s16_globe_to_pole
   t:
-  - 1309.975
-  - 1390.05
+  - 1310.6854
+  - 1390.7604
   sentence_times:
-  - - 1309.975
-    - 1315.325
-  - - 1315.675
-    - 1317.925
-  - - 1318.275
-    - 1320.475
-  - - 1320.825
-    - 1325.05
-  - - 1325.4
-    - 1333.75
-  - - 1334.1
-    - 1336.85
-  - - 1337.2
-    - 1339.625
-  - - 1339.975
-    - 1347.275
-  - - 1347.625
-    - 1349.975
-  - - 1350.325
-    - 1354.675
-  - - 1355.025
-    - 1362.45
-  - - 1363.95
-    - 1369.7
-  - - 1370.05
-    - 1379.275
-  - - 1379.625
-    - 1389.25
+  - - 1310.6854
+    - 1316.0354
+  - - 1316.3854
+    - 1318.6354
+  - - 1318.9854
+    - 1321.1854
+  - - 1321.5354
+    - 1325.7604
+  - - 1326.1104
+    - 1334.4604
+  - - 1334.8104
+    - 1337.5604
+  - - 1337.9104
+    - 1340.3354
+  - - 1340.6854
+    - 1347.9854
+  - - 1348.3354
+    - 1350.6854
+  - - 1351.0354
+    - 1355.3854
+  - - 1355.7354
+    - 1363.1604
+  - - 1364.6604
+    - 1370.4104
+  - - 1370.7604
+    - 1379.9854
+  - - 1380.3354
+    - 1389.9604
   beat: 'D54: from the turning globe to the polar stereographic map; rings and spokes labelled'
   visual: 'GlobeToPolarMorph (new; three.js). Frame 0: the BMNG globe, large (house globe look), turning slowly eastward (anticlockwise seen from above
     the North Pole). AT(4, ''rise up above the North Pole'') the camera rises along a smooth path (<= 60 °/s, eased) from the equator view to straight above
@@ -1564,35 +1564,35 @@ scenes:
     · Natural Earth'' below the map.'
 - id: s17_where_is_what
   t:
-  - 1390.05
-  - 1493.85
+  - 1390.7604
+  - 1494.5604
   sentence_times:
-  - - 1390.05
-    - 1396.75
-  - - 1397.1
-    - 1403.4
-  - - 1403.75
-    - 1415.0
-  - - 1415.35
-    - 1423.9
-  - - 1424.25
-    - 1431.275
-  - - 1431.625
-    - 1434.975
-  - - 1435.325
-    - 1443.675
-  - - 1444.025
-    - 1451.775
-  - - 1452.125
-    - 1457.125
-  - - 1457.475
-    - 1468.5
-  - - 1468.85
-    - 1476.1
-  - - 1477.6
-    - 1484.725
-  - - 1485.075
-    - 1492.35
+  - - 1390.7604
+    - 1397.4604
+  - - 1397.8104
+    - 1404.1104
+  - - 1404.4604
+    - 1415.7104
+  - - 1416.0604
+    - 1424.6104
+  - - 1424.9604
+    - 1431.9854
+  - - 1432.3354
+    - 1435.6854
+  - - 1436.0354
+    - 1444.3854
+  - - 1444.7354
+    - 1452.4854
+  - - 1452.8354
+    - 1457.8354
+  - - 1458.1854
+    - 1469.2104
+  - - 1469.5604
+    - 1476.8104
+  - - 1478.3104
+    - 1485.4354
+  - - 1485.7854
+    - 1493.0604
   beat: 'tour of the polar map: places with latitude and longitude; ring first, then spoke'
   visual: 'The polar map (BMNG land, dark ocean, slate rings and spokes with their labels from s27). Each place gets a dot and a short label (54 px, TipLabel
     placement, never over another label) within 1 s of its name, and the ring and spoke it sits on brighten (gold) while its coordinates are spoken: Brest
@@ -1657,33 +1657,33 @@ scenes:
   layout: Labels never overlap (placeLabels); source line below the map; the column never covers the map.
 - id: s18_vortex
   t:
-  - 1493.85
-  - 1581.725
+  - 1494.5604
+  - 1582.4354
   sentence_times:
-  - - 1493.85
-    - 1496.65
-  - - 1497.0
-    - 1499.8
-  - - 1500.15
-    - 1511.3
-  - - 1511.65
-    - 1521.775
-  - - 1522.125
-    - 1528.925
-  - - 1529.275
-    - 1533.875
-  - - 1534.225
-    - 1544.05
-  - - 1544.4
-    - 1551.375
-  - - 1552.875
-    - 1555.0
-  - - 1555.35
-    - 1561.575
-  - - 1561.925
-    - 1572.175
-  - - 1573.675
-    - 1580.925
+  - - 1494.5604
+    - 1497.3604
+  - - 1497.7104
+    - 1500.5104
+  - - 1500.8604
+    - 1512.0104
+  - - 1512.3604
+    - 1522.4854
+  - - 1522.8354
+    - 1529.6354
+  - - 1529.9854
+    - 1534.5854
+  - - 1534.9354
+    - 1544.7604
+  - - 1545.1104
+    - 1552.0854
+  - - 1553.5854
+    - 1555.7104
+  - - 1556.0604
+    - 1562.2854
+  - - 1562.6354
+    - 1572.8854
+  - - 1574.3854
+    - 1581.6354
   beat: 'the 10-hPa polar vortex: height field, contours, natural wind trails; labels fade (U-CO-081)'
   visual: 'Same polar map. AT(4, ''this map shows it'') the 10-hPa height field fades in (sequential perceptual colour map, cmocean ''deep'' reversed: low
     = dark blue, high = pale), colour bar beside the map in the column (''height of the 10 hPa surface, km'', 28.4…31.2, 52-px ticks), slate contours every
@@ -1744,31 +1744,31 @@ scenes:
     860); readouts in the column with gold links; contour labels on the lines allowed.'
 - id: s19_vortex_components
   t:
-  - 1581.725
-  - 1656.625
+  - 1582.4354
+  - 1657.3354
   sentence_times:
-  - - 1581.725
-    - 1586.0
-  - - 1586.35
-    - 1590.1
-  - - 1590.45
-    - 1598.65
-  - - 1599.0
-    - 1602.7
-  - - 1603.05
-    - 1606.75
-  - - 1607.1
-    - 1609.925
-  - - 1611.425
-    - 1623.475
-  - - 1623.825
-    - 1628.7
-  - - 1629.05
-    - 1636.275
-  - - 1636.625
-    - 1646.925
-  - - 1647.275
-    - 1655.825
+  - - 1582.4354
+    - 1586.7104
+  - - 1587.0604
+    - 1590.8104
+  - - 1591.1604
+    - 1599.3604
+  - - 1599.7104
+    - 1603.4104
+  - - 1603.7604
+    - 1607.4604
+  - - 1607.8104
+    - 1610.6354
+  - - 1612.1354
+    - 1624.1854
+  - - 1624.5354
+    - 1629.4104
+  - - 1629.7604
+    - 1636.9854
+  - - 1637.3354
+    - 1647.6354
+  - - 1647.9854
+    - 1656.5354
   beat: 'D55: east = tangential (theta-hat), north = -radial (-r-hat); u_theta = u, u_r = -v; westerlies anticlockwise'
   visual: 'Same map, field dimmed to 60 %, trails slowed. AT(2, ''Pick any point'') a point at 60° N 90° W (left) gets its east arrow i (orange) and north
     arrow j (orange). AT(3, ''theta hat'') the map''s polar arrows r̂ and θ̂ (slate) at the same point; θ̂ slides onto i with a gold ''same'' tick. AT(5,
@@ -1810,43 +1810,43 @@ scenes:
   layout: The thumbnail and size bar beside the map, not on it; source line kept below the map.
 - id: s20_origin_wheel
   t:
-  - 1656.625
-  - 1774.175
+  - 1657.3354
+  - 1774.8854
   sentence_times:
-  - - 1656.625
-    - 1661.825
-  - - 1662.175
-    - 1666.3
-  - - 1666.65
-    - 1675.0
-  - - 1675.35
-    - 1680.825
-  - - 1681.175
-    - 1686.65
-  - - 1687.0
-    - 1692.6
-  - - 1692.95
-    - 1696.425
-  - - 1696.775
-    - 1701.825
-  - - 1702.175
-    - 1708.925
-  - - 1709.275
-    - 1718.525
-  - - 1718.875
-    - 1729.775
-  - - 1731.275
-    - 1741.6
-  - - 1741.95
-    - 1744.625
-  - - 1746.125
-    - 1753.175
-  - - 1753.525
-    - 1760.5
-  - - 1762.0
-    - 1767.125
-  - - 1767.475
-    - 1773.375
+  - - 1657.3354
+    - 1662.5354
+  - - 1662.8854
+    - 1667.0104
+  - - 1667.3604
+    - 1675.7104
+  - - 1676.0604
+    - 1681.5354
+  - - 1681.8854
+    - 1687.3604
+  - - 1687.7104
+    - 1693.3104
+  - - 1693.6604
+    - 1697.1354
+  - - 1697.4854
+    - 1702.5354
+  - - 1702.8854
+    - 1709.6354
+  - - 1709.9854
+    - 1719.2354
+  - - 1719.5854
+    - 1730.4854
+  - - 1731.9854
+    - 1742.3104
+  - - 1742.6604
+    - 1745.3354
+  - - 1746.8354
+    - 1753.8854
+  - - 1754.2354
+    - 1761.2104
+  - - 1762.7104
+    - 1767.8354
+  - - 1768.1854
+    - 1774.0854
   beat: 'D56 part 1 (re-thought, U-CO-083): a flat ring of air, two origins, one point worked by hand'
   visual: 'Full picture zone, a clean flat diagram (no map): a ring of radius 1000 km (km ticks 52 px) round its centre C, ten teal arrows going round anticlockwise
     with moving dashes (10 m/s). AT(4, ''origin at its centre'') origin O₁ = C with r̂, θ̂ (orange) at one point; column ''round 10'', ''in/out 0''. AT(6,
@@ -1903,31 +1903,31 @@ scenes:
   layout: Diagram x 80-1000, CalcStack x >= 1100 with <= 3 live rows; bands never under text.
 - id: s21_origin_vortex
   t:
-  - 1774.175
-  - 1859.25
+  - 1774.8854
+  - 1859.9604
   sentence_times:
-  - - 1774.175
-    - 1776.35
-  - - 1776.7
-    - 1779.325
-  - - 1779.675
-    - 1790.4
-  - - 1790.75
-    - 1797.975
-  - - 1798.325
-    - 1810.75
-  - - 1812.25
-    - 1818.1
-  - - 1818.45
-    - 1829.425
-  - - 1830.925
-    - 1837.45
-  - - 1837.8
-    - 1844.45
-  - - 1844.8
-    - 1851.475
-  - - 1851.825
-    - 1858.45
+  - - 1774.8854
+    - 1777.0604
+  - - 1777.4104
+    - 1780.0354
+  - - 1780.3854
+    - 1791.1104
+  - - 1791.4604
+    - 1798.6854
+  - - 1799.0354
+    - 1811.4604
+  - - 1812.9604
+    - 1818.8104
+  - - 1819.1604
+    - 1830.1354
+  - - 1831.6354
+    - 1838.1604
+  - - 1838.5104
+    - 1845.1604
+  - - 1845.5104
+    - 1852.1854
+  - - 1852.5354
+    - 1859.1604
   beat: 'D56 part 2: the vortex about the pole vs about its own centre (17.5 vs 47 m/s round; ratio 1.9 vs 0.4); pointers U09, G03'
   visual: 'Back to the polar map (field and trails at 70 %). AT(2, ''Its own centre'') the gold cross at 72.9° N 44.3° E with ''≈ 1900 km'' along a gold
     line to the pole. AT(4, ''ring two thousand kilometres from the pole'') a slate ring round the pole; its winds split into round (teal) and in/out (rose
@@ -1980,25 +1980,25 @@ scenes:
     (§5 rule), else beside the map.
 - id: s22_recap
   t:
-  - 1859.25
-  - 1926.2
+  - 1859.9604
+  - 1926.9104
   sentence_times:
-  - - 1859.25
-    - 1863.175
-  - - 1863.525
-    - 1877.775
-  - - 1878.125
-    - 1883.3
-  - - 1883.65
-    - 1891.425
-  - - 1891.775
-    - 1899.775
-  - - 1900.125
-    - 1907.575
-  - - 1907.925
-    - 1918.8
-  - - 1919.15
-    - 1925.4
+  - - 1859.9604
+    - 1863.8854
+  - - 1864.2354
+    - 1878.4854
+  - - 1878.8354
+    - 1884.0104
+  - - 1884.3604
+    - 1892.1354
+  - - 1892.4854
+    - 1900.4854
+  - - 1900.8354
+    - 1908.2854
+  - - 1908.6354
+    - 1919.5104
+  - - 1919.8604
+    - 1926.1104
   beat: recap ('To sum up'); last sentence names The gradient as the next movie
   visual: 'One beat per sentence, mini pictures reused (no headings): the orange peel; the plate carrée with ''x = a λ, y = a φ'' and ''k = 1/cos φ''; the
     two Brest grid points with ''73.8 km''; the Mercator ladder with dy and the ln tan formula; the rhumb line straight on Mercator; the 100-km square ''×
@@ -2037,15 +2037,15 @@ scenes:
   layout: One mini picture per sentence, previous ones dimmed; source lines under any real-data thumbnail.
 - id: s23_end
   t:
-  - 1926.2
-  - 1949.1
+  - 1926.9104
+  - 1949.8104
   sentence_times:
-  - - 1926.2
-    - 1932.4
-  - - 1932.75
-    - 1940.8
-  - - 1941.15
-    - 1948.8
+  - - 1926.9104
+    - 1933.1104
+  - - 1933.4604
+    - 1941.5104
+  - - 1941.8604
+    - 1949.5104
   beat: series end card (maths-tutorial ending, word for word; decision 2)
   visual: 'House end card (HOUSE_STYLE §3): four faint topic thumbnails along the top (globe with a great circle, Mercator map, polar map, a gradient arrow);
     keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); a notebook icon with ''coordinates

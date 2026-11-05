@@ -10,7 +10,7 @@ import { Notebook } from "../house/kit/icons";
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeCam, llPath } from "./kit_fr/globe";
 import {
-  AT, Arrow, BREST, D, D2R, GB, Globe, H, K, KHULNA, Keyword, LEN, Lbl, SS, Scene, SideCallout, SkipChip, Svg, TeX, Tripod, VIOLET, XC, add, clamp, discOf, fin,
+  AT, Arrow, BREST, CalcStack, D, D2R, GB, Globe, H, K, KHULNA, Keyword, LEN, Lbl, SS, Scene, SideCallout, SkipChip, Svg, TeX, Tripod, VIOLET, XC, add, clamp, discOf, fin,
   fout, gdot, globeG, keepTime, ll, mix, pieces, poly, prog, sang, texW, textW, win, SliceV, TopV, ParcelDot, linesPath, mapP, boxAt, chipSpan,
 } from "./fr_lib";
 import { AngleArc, GRID, GridBase, MiniTick, MiniTripod, SliceBase, TopViewBase, TRI, gridCell, logX, sliceArrows, topArrows } from "./fr_dia";
@@ -343,9 +343,16 @@ const S26: React.FC = () => {
         <Keyword f={f} text="no speeding up, no slowing down" at={[XC, 330]} s={T.floor} appear={tNever} />
         <Lbl x={XC} y={430} t="the same speed, shared out" c={C.key} s={T.floor} o={fin(f, tShare)} />
       </Svg>
-      <TeX s={e[0]} x={XC} y={130} size={52} o={win(f, tZero, out1)} />
-      <TeX s={String.raw`\frac{Du}{Dt}=\frac{uv\tan\varphi}{a}-\frac{uw}{a}`} x={XC} y={260} size={52} o={win(f, tDu, out1)} />
-      <TeX s={e[2]} x={XC + 120} y={385} size={50} o={win(f, tW, out1)} />
+      <TeX s={e[0]} x={XC} y={130} size={52} o={win(f, tZero, tDay - 12)} />
+      <TeX s={String.raw`\frac{Du}{Dt}=\frac{uv\tan\varphi}{a}-\frac{uw}{a}`} x={XC} y={260} size={52} o={win(f, tDu, tDay - 12)} />
+      <TeX s={e[2]} x={XC + 120} y={385} size={50} o={win(f, tW, tDay - 12)} />
+      <CalcStack f={f} x={XC} y={110} size={44} maxLines={4} rows={[
+        { lhs: "", rhs: String.raw`\frac{uv\tan\varphi}{a}=\frac{10\times10\times1}{6\,371\,000}`, at: tDay, h: 96, out: out1 },
+        { lhs: "", rhs: String.raw`\approx1.57\times10^{-5}\ \text{m/s}^2`, at: tDay + 20, out: out1 },
+        { lhs: "", rhs: String.raw`\times86\,400\ \text{s}\approx1.4\ \text{m/s}`, at: tDay + 40, out: out1 },
+        { lhs: "", rhs: String.raw`u\approx10+1.4=11.4`, at: AT(k, 8, "eleven and a half") - 10, out: out1 },
+        { lhs: "", rhs: String.raw`\text{full great-circle path: }11.5`, at: AT(k, 8, "eleven and a half") + 15, out: out1, c: C.muted },
+      ]} />
       <TeX s={String.raw`\sqrt{11.5^2+8.2^2}\approx14.1=\sqrt{10^2+10^2}`} x={XC} y={740} size={44} o={win(f, tSp, out1)} />
       {void [e[1], tShare]}
     </Scene>
@@ -389,7 +396,7 @@ const S27: React.FC = () => {
       </Svg>
       <TeX s={e[0]} x={XC} y={130} size={50} o={fin(f, tNum)} />
       <TeX s={e[1]} x={XC + 100} y={225} size={50} c={C.second} o={fin(f, tRes)} />
-      <TeX s={String.raw`f=2\Omega\sin\varphi`} x={XC} y={310} size={48} o={fin(f, tCor)} />
+      <TeX s={String.raw`f=2\Omega\sin\varphi,\ \ \sin45^\circ\approx0.707`} x={XC} y={310} size={48} o={fin(f, tCor)} />
       <TeX s={String.raw`=2\times7.29\times10^{-5}\times0.707`} x={XC + 100} y={375} size={44} o={fin(f, tF)} />
       <TeX s={String.raw`\approx1.03\times10^{-4}\ \text{s}^{-1}`} x={XC + 100} y={435} size={44} o={fin(f, AT(k, 5, "one point zero three"))} />
       <TeX s={String.raw`f\,v\approx1.03\times10^{-4}\times10`} x={XC} y={510} size={44} c={VIOLET} o={fin(f, tFv)} />

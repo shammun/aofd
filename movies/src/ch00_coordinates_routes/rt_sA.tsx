@@ -269,6 +269,8 @@ const S03: React.FC = () => {
         <Keyword f={f} text="3 · a step is not a distance" at={[1080, 760]} s={T.floor} appear={tF3} c={C.gold} />
         <Keyword f={f} text="it needs a name" at={[1080, 830]} s={T.floor} appear={tName} />
       </Svg>
+      <TeX s={String.raw`6371\times0.01745\approx111\ \text{km}`} x={1270} y={630} size={44} c={C.muted} o={fin(f, tDeg + 10)} />
+      <TeX s={String.raw`111.2\times\cos78.2^\circ\approx23\ \text{km}`} x={1270} y={690} size={44} c={C.muted} o={fin(f, tDeg + 30)} />
       <TeX s={H.r} x={xs[0] - 175} y={y0 - 160} size={46} c={C.second} o={fin(f, tF2)} />
       <TeX s={H.th} x={xs[0] - 175} y={y0 - 95} size={46} c={C.second} o={fin(f, tF2)} />
     </Scene>

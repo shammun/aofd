@@ -21,7 +21,8 @@ import { EQ_S02, EQ_S04, EQ_S05, EQ_S06, cutAt } from "./mp_eq";
 // ---------------------------------------------------------------- numbers on screen = the data (the module throws otherwise)
 const CHECK_A: [string, number, number, number][] = [
   ["dy1", D.slope.dy, 111.2, 0.05], ["dx1", D.slope.dx, 73.8, 0.05], ["gc", D.routes.d_gc, 8755, 0.5], ["rh+", 100 * (D.routes.d_rh / D.routes.d_gc - 1), 11, 0.2],
-  ["brest x", D.pc.brest_km[0], -500, 1], ["brest y", D.pc.brest_km[1], 5381, 0.5], ["phi rad", D.pc.brest_rad[0], 0.8446, 5e-5], ["lam rad", D.pc.brest_rad[1], -0.0784, 5e-5],
+  ["brest x", D.pc.brest_s_km[0], -500, 1], ["brest y", D.pc.brest_s_km[1], 5382, 0.5], ["phi rad", D.pc.brest_s_rad[0], 0.8447, 5e-5], ["lam rad", D.pc.brest_s_rad[1], -0.0785, 5e-5],
+  ["6371*0.8447", 6371 * 0.8447, 5382, 0.5], ["6371*-0.0785", 6371 * -0.0785, -500, 0.5],
   ["2pi a", D.pc.eq_km, 40030, 0.5], ["acB", D.k.acB, 4230, 1], ["k Brest", D.k.k[0], 1.5, 0.01], ["k 60", D.k.k[1], 2, 1e-9], ["k LYB", D.k.k[2], 4.9, 0.002],
   ["cos B", D.k.cos[0], 0.664, 5e-4], ["cos LYB", D.k.cos[2], 0.204, 5e-4], ["slope", D.slope.slope, 1.4, 0.05], ["2pi 4230", 2 * Math.PI * 4230, 26580, 2.5],
   ["40030/26580", 40030 / 26580, 1.5, 0.01], ["a", D.consts.a_km, 6371, 0],
@@ -274,7 +275,7 @@ const S04: React.FC = () => {
         <SkipChip f={f} k={k} to={keepTime("s06_gradient_preview")} />
         <CurvedLink f={f} from={[XC - 14, 230]} to={[pLam[0], pLam[1] - 14]} start={t9 + 8} end={t10} bend={60} />
         <SideCallout f={f} lines="≈ −500 km" at={[XC + 20, 700]} appear={t16 + 40} out={t19} target={[(p0[0] + pX[0]) / 2, p0[1] + 10]} c={C.second} bend={-40} />
-        <SideCallout f={f} lines="≈ 5381 km" at={[XC + 20, 620]} appear={t17 + 40} out={t19} target={[pB[0] + 10, (pX[1] + pB[1]) / 2]} c={C.first} bend={20} />
+        <SideCallout f={f} lines="≈ 5382 km" at={[XC + 20, 620]} appear={t17 + 40} out={t19} target={[pB[0] + 10, (pX[1] + pB[1]) / 2]} c={C.first} bend={20} />
         <Keyword f={f} text="true along the equator" at={[XC, 680]} s={T.floor} appear={t19 + 60} />
         <Lbl x={XC} y={740} t="and along every meridian" c={C.key} s={T.floor} o={fin(f, t19 + 68)} />
         <Keyword f={f} text="plate carrée = flat square" at={[XC, 810]} appear={AT(k, 20, "plate carrée")} c={C.gold} />
@@ -284,11 +285,11 @@ const S04: React.FC = () => {
       <Layered parts={eqParts} x={XC} y={230} size={76} layers={[{ t: [0], o: fin(f, t9) }, { t: [1, 2], o: fin(f, t13 + 40) }]} />
       <CalcStack f={f} x={XC + 110} y={300} size={56} maxLines={2} o={fout(f, t19 + 50, 14)} rows={[
         { lhs: String.raw`\varphi,\ \lambda`, rhs: String.raw`=48.4^\circ,\ \ -4.5^\circ`, at: AT(k, 14, "forty eight") },
-        { lhs: String.raw`\text{in rad}`, rhs: String.raw`=0.8446,\ \ -0.0784`, at: AT(k, 15, "zero point") },
-        { lhs: String.raw`x`, rhs: String.raw`=6371\times(-0.0784)`, at: t16, c: C.second },
+        { lhs: String.raw`\times\tfrac{\pi}{180}`, rhs: String.raw`=0.8447,\ \ -0.0785`, at: AT(k, 15, "zero point") },
+        { lhs: String.raw`x`, rhs: String.raw`=6371\times(-0.0785)`, at: t16, c: C.second },
         { rhs: String.raw`\approx-500\ \text{km}`, at: AT(k, 16, "about minus"), c: C.second, cont: true },
-        { lhs: String.raw`y`, rhs: String.raw`=6371\times0.8446`, at: t17, c: C.first },
-        { rhs: String.raw`\approx5381\ \text{km}`, at: AT(k, 17, "about five"), c: C.first, cont: true },
+        { lhs: String.raw`y`, rhs: String.raw`=6371\times0.8447`, at: t17, c: C.first },
+        { rhs: String.raw`\approx5382\ \text{km}`, at: AT(k, 17, "about five"), c: C.first, cont: true },
       ]} />
       <SourceBelow text={SRC_IMG} pic={B4} w={830} gap={12} name="s04 src" />
     </Scene>

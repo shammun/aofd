@@ -186,7 +186,9 @@ const S15: React.FC = () => {
       <TeX s={String.raw`\mathbf U`} x={uTip[0] + 14} y={uTip[1] + 30} size={44} c={C.second} o={fin(f, t4)} halo />
       <CalcStack f={f} x={XC} y={300} size={44} maxLines={3} rows={[
         { rhs: String.raw`\frac{\partial p}{\partial t}\approx\frac{956.5-964.1}{2\ \text{h}}\approx-3.8\ \text{hPa/h}`, at: AT(k, 2, "about minus three point eight"), h: 110 },
-        { rhs: String.raw`|\mathbf U|\approx14.6\ \text{m/s}\approx52.5\ \text{km/h}`, at: AT(k, 5, "fifty two and a half") },
+        { rhs: String.raw`|\nabla p|\approx0.062\ \text{hPa/km},\ \text{towards }63^\circ`, at: t4, c: C.local },
+        { rhs: String.raw`\text{along }71^\circ:\ 0.062\times\cos8^\circ\approx0.061`, at: AT(k, 4, "zero point zero six one"), c: C.local, cont: true },
+        { rhs: String.raw`|\mathbf U|\approx14.58\ \text{m/s}\times3.6\approx52.5\ \text{km/h}`, at: AT(k, 5, "fifty two and a half") },
         { rhs: String.raw`\mathbf U\cdot\nabla p\approx52.5\times0.061\approx3.2\ \text{hPa/h}`, at: AT(k, 6, "fifty two and a half times") },
         { rhs: String.raw`\frac{\partial p}{\partial\tau}\approx-3.8+3.2=-0.6\ \text{hPa/h}`, at: AT(k, 8, "minus three point eight plus"), h: 110, c: C.second },
       ]} />

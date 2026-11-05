@@ -213,8 +213,6 @@ def main() -> int:
     # the screen arithmetic: 13.5 − 10 = 3.5 m/s = 12.7 km/h; 10 m/s = 36 km/h; 13.5 m/s = 48.7 km/h (unrounded 48.73)
     row("DP32", "screen: 3.5 × 3.6 = 12.6 ('twelve point seven' = 3.536 × 3.6 = 12.73); 36 × 0.111 = 4.0; 48.7 × 0.111 = 5.4; 12.7 × 0.111 = 1.4",
         [(u_at - Upat) * 3.6, 36 * 0.111, 48.7 * 0.111, 12.7 * 0.111, u_at * 3.6], [12.73, 4.0, 5.4, 1.41, 48.73], [0.01, 0.01, 0.01, 0.01, 0.01])
-    flag("F1", "s07", "relative wind", "'thirteen and a half minus ten: three and a half metres per second, or twelve point seven kilometres per hour'",
-         "3.5 × 3.6 = 12.6; the exact 3.536 × 3.6 = 12.73", "screen writes 3.5 m/s ≈ 12.7 km/h (≈, the exact relative wind 3.54 m/s); voice unchanged")
     # profile 0-400 km (t = 0) and the anemometer / parcel over one hour
     xs = np.linspace(0, 400e3, 201)
     prof = mean + amp * np.sin(k_ * xs)
@@ -225,10 +223,16 @@ def main() -> int:
     rng_ = (anem[-1] < anem[0]) and (parc[-1] > parc[0])
     truth("DP32", "over one hour the anemometer's wind falls (13.5 → 8.3) and the parcel's wind rises (13.5 → 14.6)", rng_, B1.r6([anem[0], anem[-1], parc[0], parc[-1]], 2))
     row("DP32", "parcel's wind after 1 h ≈ 13.54 + 1.4 at first (slope at t = 0 = 1.414 m/s per hour)", (parc[1] - parc[0]) / (th[1] - th[0]) * H, 1.414, 0.02)
+    # calc & sync audit #5e E2: the pattern's value and slope at x = 25 km, and the unit conversions, every step on screen
+    row("DP43", "E2: x0 = 25 km = 200/8 (phase 45°); 5 sin 45° = 3.536 → 3.54; 10 + 3.54 = 13.54; slope 5 × 2π/200 × cos 45° = 0.1111 m/s per km",
+        [x0 / 1e3, 5 * np.sin(np.pi / 4), 10 + 3.54, 5 * 2 * np.pi / 200 * np.cos(np.pi / 4), u_at], [25.0, 3.536, 13.54, 0.1111, 13.536], [1e-12, 5e-4, 1e-9, 5e-5, 5e-4])
+    row("DP43", "E2: 13.54 − 10 = 3.54; 3.54 × 3.6 = 12.74 ≈ 12.7 km/h; 10 × 3.6 = 36; 13.54 × 3.6 = 48.74 ≈ 48.7; 12.7 × 0.111 = 1.41 ≈ 1.4",
+        [13.54 - 10, 3.54 * 3.6, 10 * 3.6, 13.54 * 3.6, 12.7 * 0.111], [3.54, 12.74, 36.0, 48.74, 1.41], [1e-9, 5e-3, 1e-9, 5e-3, 5e-3])
+    truth("DP43", "E2 roundings: 12.744 → 12.7, 48.744 → 48.7 (voice 'twelve point seven', 'forty eight point seven')", round(3.54 * 3.6, 1) == 12.7 and round(13.54 * 3.6, 1) == 48.7)
     V["slide"] = {"L_km": 200, "U": Upat, "amp": amp, "mean": mean, "x0_km": x0 / 1e3, "u": u_at, "dudx_km": dudx * 1e3, "loc_g": loc_g, "adv_g": adv_g,
                   "loc_r": loc_r, "adv_r": adv_r, "x_km": B1.r6(xs / 1e3, 1), "prof": B1.r6(prof, 3), "th": B1.r6(th / H, 4), "anem": B1.r6(anem, 3),
                   "parc": B1.r6(parc, 3), "parc_x_km": B1.r6(path[0] / 1e3, 2)}
-    say["slide"] = {"u": "13.5", "slope": "0.111", "rel": "3.5", "rel_kmh": "12.7", "U_kmh": "36", "u_kmh": "48.7", "loc_g": "−4.0", "adv_g": "+5.4", "adv_r": "+1.4"}
+    say["slide"] = {"u": "13.54", "slope": "0.111", "rel": "3.54", "rel_kmh": "12.7", "U_kmh": "36", "u_kmh": "48.7", "loc_g": "−4.0", "adv_g": "+5.4", "adv_r": "+1.4"}
 
     # ================================================================ s02 Brest's local frame (recap mini; Part 4 numbers)
     eB = call(GS + "enu_basis", "s02", "(i, j, k) east, north, up at Brest", lat=BREST[0], lon=BREST[1])
@@ -256,8 +260,21 @@ def main() -> int:
     row("DC52", "motion 14.58 m/s towards 71.0° (east 13.78, north 4.75)", [spd, brg, Ue, Un], [14.58, 71.0, 13.78, 4.75], [0.02, 0.2, 0.02, 0.02])
     row("DP33", "screen: |U| ≈ 14.6 m/s ≈ 52.5 km/h; 14.6 sin 71° ≈ 13.8; 14.6 cos 71° ≈ 4.8; 'roughly fifteen'",
         [round(spd, 1), spd * 3.6, 14.6 * np.sin(71 * D2R), 14.6 * np.cos(71 * D2R), round(spd)], [14.6, 52.5, 13.8, 4.8, 15], [0, 0.05, 0.05, 0.05, 0])
-    flag("F2", "s15", "speed in km/h", "storyboard visual '14.6 m/s × 3.6 = 52.5 km/h'", "14.6 × 3.6 = 52.56 ≈ 52.6; the exact 14.58 × 3.6 = 52.49",
-         "the screen never writes 14.6 × 3.6; it writes '14.6 m/s ≈ 52.5 km/h' (both rounded from 14.58)")
+    # calc & sync audit #5e E3: the 00 -> 06 UTC move with Part 3's flat rules (one move per row on screen)
+    la0, lo0, la1, lo1 = (float(trk.lat[k00]), float(trk.lon[k00]), float(trk.lat[k06]), float(trk.lon[k06]))
+    dphi3, dlam3, pm3 = round(la1, 3) - round(la0, 3), round(lo1, 3) - round(lo0, 3), (round(la0, 3) + round(la1, 3)) / 2
+    dy3 = 6371 * round(dphi3, 3) * 0.01745
+    lam3 = round(round(dlam3, 3) * 0.01745, 5)
+    dx3 = 6371 * round(np.cos(round(pm3, 2) * D2R), 4) * lam3
+    row("DP43", "E3: 00 UTC (49.667 N, 5.717 W), 06 UTC (50.516 N, 1.505 W); Δφ 0.849°, Δλ 4.212°, φ_mid 50.09°",
+        [round(la0, 3), round(lo0, 3), round(la1, 3), round(lo1, 3), dphi3, dlam3, round(pm3, 2)], [49.667, -5.717, 50.516, -1.505, 0.849, 4.212, 50.09], [0, 0, 0, 0, 1e-9, 1e-9, 0])
+    row("DP43", "E3: Δy = 6371 × 0.849 × 0.01745 = 94.4 km; Δλ = 4.212 × 0.01745 = 0.07350 rad; cos 50.09° = 0.6416; Δx = 6371 × 0.6416 × 0.07350 = 300.4 km",
+        [dy3, lam3, round(np.cos(50.09 * D2R), 4), dx3], [94.39, 0.07350, 0.6416, 300.44], [5e-3, 1e-9, 0, 5e-3])
+    row("DP43", "E3: √(94.4² + 300.4²) = 314.9 ≈ 315 km; 315 000 / 21 600 = 14.58 ≈ 14.6 m/s (= translation_velocity 14.58)",
+        [np.hypot(94.4, 300.4), 315000 / 21600, spd], [314.88, 14.583, 14.58], [5e-3, 5e-4, 0.02])
+    row("DP43", "E3: tan β = 300.4 / 94.4 = 3.18 → 72.6° on the flat map (the average direction); the great circle leaves at 71.0° (initial_bearing) and turns ≈ Δλ sin φ = 3.2°",
+        [300.4 / 94.4, np.degrees(np.arctan2(300.4, 94.4)), brg, 4.212 * np.sin(50.09 * D2R)], [3.18, 72.55, 70.95, 3.23], [5e-3, 0.01, 0.1, 5e-3])
+    V["e3"] = {"ll0": [round(la0, 3), round(lo0, 3)], "ll6": [round(la1, 3), round(lo1, 3)], "dy": dy3, "dx": dx3}
     # the centre: 'just off the tip of Cornwall' at 00 UTC; Plymouth to the centre
     c00 = (float(trk.lat[k00]), float(trk.lon[k00]))
     dP = float(call(GS + "great_circle_distance", "s15", "Plymouth – centre at 00 UTC", lat1=c00[0], lon1=c00[1], lat2=PLY[0], lon2=PLY[1])) / 1e3
@@ -300,10 +317,21 @@ def main() -> int:
     row("DP35", "|v′| south 3.7, north 20.6 m/s ('gentle three point seven', 'about twenty point six')", [np.hypot(*sS), np.hypot(*sN)], [3.7, 20.6], 0.05)
     row("DP35", "screen north: (−4.2, −5.3) − (13.8, 4.8) = (−18.0, −10.1); |(−18.0, −10.1)| = 20.6", [-4.2 - 13.8, -5.3 - 4.8, np.hypot(18.0, 10.1)], [-18.0, -10.1, 20.6], [1e-9, 1e-9, 0.05])
     row("DP35", "screen south east part: 13.5 − 13.8 = −0.3", 13.5 - 13.8, -0.3, 1e-9)
-    flag("F3", "s10", "south point, north part", "'(13.5, 8.4) − (13.8, 4.8) = (−0.3, 3.7)'; voice 'three point seven north'",
-         "8.4 − 4.8 = 3.6 with the rounded inputs; the exact 8.44 − 4.75 = 3.69 ≈ 3.7",
-         "screen writes '≈ (−0.3, 3.7)' (≈, house rule for rounded results). Option for the director before the final TTS: say the storm's north part "
-         "as 'four point seven five' in S6 (8.44 − 4.75 = 3.69 ≈ 3.7). Not applied (the storyboard voice is fixed).")
+    # calc & sync audit #5e E1: the south point to 2 decimals; Pythagoras for both lengths
+    row("DP43", "E1: south ground (13.47, 8.44), U (13.78, 4.75) to 2 dp; (13.47 − 13.78, 8.44 − 4.75) = (−0.31, 3.69); √(0.31² + 3.69²) = 3.70",
+        [round(gS[0], 2), round(gS[1], 2), round(Ue, 2), round(Un, 2), 13.47 - 13.78, 8.44 - 4.75, np.hypot(0.31, 3.69)], [13.47, 8.44, 13.78, 4.75, -0.31, 3.69, 3.703],
+        [0, 0, 0, 0, 1e-9, 1e-9, 5e-4])
+    row("DP43", "E1 north: 18.0² = 324, 10.1² = 102.01 ≈ 102; √(324 + 102) = 20.64 ≈ 20.6", [18.0 ** 2, 10.1 ** 2, np.sqrt(324 + 102)], [324, 102.01, 20.64], [1e-9, 1e-9, 5e-3])
+    # calc & sync audit #5e E4: the motion's round part on each side = |U| × the average of cos(angle between U and θ̂) over the ±45° side
+    mcos = S_u / spd
+    row("DP43", "E4: middle of the south side U·θ̂ = |U| (14.6); average cos over ±45° = 0.906; 14.6 × 0.906 = 13.2; north side −13.0",
+        [float(tu[iS]), mcos, 14.6 * 0.906, N_u], [14.58, 0.906, 13.23, -13.03], [0.05, 5e-4, 5e-3, 0.03])
+    tu5 = [float(tu[(iS + d) % len(tu)]) for d in (-8, -4, 0, 4, 8)]
+    row("DP43", "E4 picture: U·θ̂ (data, vtu) at ring points −40°, −20°, 0°, +20°, +40° along the south side = 11.4, 13.8, 14.6, 13.7, 11.3 (screen, 1 dp)",
+        [round(x, 1) for x in tu5], [11.4, 13.8, 14.6, 13.7, 11.3], 1e-9)
+    row("DP43", "E4 picture: ≈ |U| cos(offset) (11.2, 13.7, 14.6, 13.7, 11.2) within 0.3 (the ring's points are 5° apart in azimuth on the sphere, not on the flat map)", tu5,
+        [spd * np.cos(40 * D2R), spd * np.cos(20 * D2R), spd, spd * np.cos(20 * D2R), spd * np.cos(40 * D2R)], 0.3)
+    V["e4"] = {"tu5": tu5, "di": [-8, -4, 0, 4, 8], "mcos": mcos}
     # ring means (s12, DC54)
     row("DC54", "ring means v_t 14.1 vs 13.8; v_r −6.0 vs −5.9 m/s", [Rg.tangential_mean[0], Rs.tangential_mean[0], Rg.radial_mean[0], Rs.radial_mean[0]],
         [14.1, 13.8, -6.0, -5.9], 0.06)
@@ -357,6 +385,10 @@ def main() -> int:
     row("DP40", "screen: (956.5 − 964.1)/2 = −3.8; 52.5 × 0.061 ≈ 3.2; −3.8 + 3.2 = −0.6", [(956.5 - 964.1) / 2, 52.5 * 0.061, -3.8 + 3.2], [-3.8, 3.2, -0.6], [1e-9, 0.01, 1e-9])
     row("DP40", "screen rounding: 964.1, 956.5, −3.8, 0.061, 3.2, −0.6 = the data to their last digit", [p23, p01, dpdt, along, UgP, dpdtau],
         [964.1, 956.5, -3.8, 0.061, 3.2, -0.6], [0.05, 0.05, 0.05, 0.0005, 0.05, 0.05])
+    # calc & sync audit #5e E5, E6: the slope along U is a dot product; the m/s → km/h step
+    row("DP43", "E5: |∇p| = 0.0618 ≈ 0.062 hPa/km towards 63°; angle to U 71 − 63 = 8°; 0.062 × cos 8° = 0.0614 ≈ 0.061",
+        [round(gmag, 3), round(gdir), round(brg) - round(gdir), 0.062 * np.cos(8 * D2R), along], [0.062, 63, 8, 0.0614, 0.0613], [0, 0, 0, 5e-5, 5e-4])
+    row("DP43", "E6: 14.58 m/s × 3.6 = 52.49 ≈ 52.5 km/h", [round(spd, 2), round(spd, 2) * 3.6], [14.58, 52.49], [0, 5e-3])
     c23m, c01m = trk.msl_min[k23] / 100, trk.msl_min[k01] / 100
     row("DP41", "centre msl_min 954.9 -> 954.0 hPa in 2 h: −0.47 hPa/h ('about minus half')", [c23m, c01m, (c01m - c23m) / 2], [954.9, 954.0, -0.47], [0.05, 0.05, 0.03])
     row("DP41", "screen: (954.0 − 954.9)/2 = −0.45 ≈ −0.5 (the exact −0.47)", (954.0 - 954.9) / 2, -0.45, 1e-9)

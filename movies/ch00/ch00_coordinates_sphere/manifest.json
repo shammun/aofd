@@ -146,38 +146,38 @@
    "scene": "s20_spin_rate"
   },
   {
-   "time": "27:59",
-   "t_s": 1679.1,
+   "time": "28:02",
+   "t_s": 1682.273,
    "title": "distances north and east",
    "scene": "s22_distance_north"
   },
   {
-   "time": "33:09",
-   "t_s": 1989.4,
+   "time": "33:12",
+   "t_s": 1992.572,
    "title": "ERA5 grid boxes",
    "scene": "s26_grid_boxes"
   },
   {
-   "time": "34:53",
-   "t_s": 2093.925,
+   "time": "34:57",
+   "t_s": 2097.172,
    "title": "areas, step by step",
    "scene": "s27_area_patch"
   },
   {
-   "time": "42:48",
-   "t_s": 2568.775,
+   "time": "42:52",
+   "t_s": 2572.022,
    "title": "Archimedes",
    "scene": "s33_archimedes"
   },
   {
-   "time": "44:09",
-   "t_s": 2649.35,
+   "time": "44:12",
+   "t_s": 2652.597,
    "title": "global averages",
    "scene": "s34_global_mean"
   },
   {
-   "time": "45:54",
-   "t_s": 2754.8,
+   "time": "45:58",
+   "t_s": 2758.047,
    "title": "to sum up",
    "scene": "s35_recap"
   }
@@ -198,8 +198,8 @@
    "chip_scene": "s14_brest_side",
    "chip_sentence": 2,
    "chip_at_s": 914.65,
-   "skip_to": "25:31",
-   "skip_to_s": 1531.875,
+   "skip_to": "25:32",
+   "skip_to_s": 1532.811,
    "keep_scene": "s21_ground_speeds",
    "keep_line": "If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius times cosine phi from the Earth's axis."
   },
@@ -207,9 +207,9 @@
    "block": "K3",
    "chip_scene": "s22_distance_north",
    "chip_sentence": 1,
-   "chip_at_s": 1683.7,
-   "skip_to": "31:48",
-   "skip_to_s": 1908.35,
+   "chip_at_s": 1686.872,
+   "skip_to": "31:51",
+   "skip_to_s": 1911.523,
    "keep_scene": "s25_degree_east",
    "keep_line": "If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is that times cosine phi, so it shrinks towards the poles."
   },
@@ -217,9 +217,9 @@
    "block": "K4",
    "chip_scene": "s27_area_patch",
    "chip_sentence": 4,
-   "chip_at_s": 2114.675,
-   "skip_to": "44:09",
-   "skip_to_s": 2649.35,
+   "chip_at_s": 2117.922,
+   "skip_to": "44:12",
+   "skip_to_s": 2652.597,
    "keep_scene": "s34_global_mean",
    "keep_line": "If you skipped, here's what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north."
   }
@@ -235,17 +235,9 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\BMNG-2004\\world.topo.bathy.200409.3x21600x10800.jpg": "863036b622ba3dab4eb4ffb7149730b02cfa433ce49672e9b7267022051e04a2",
   "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc": "c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824"
  },
- "render_assets": {
-  "cs_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
-  "cs_panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
-  "cs_panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
-  "cs_panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
-  "cs_panel_sing.jpg": "505938614bd1ffe4063567055a6af18771dbe72e5ee106995dd2d78983ddfe11",
-  "cs_t2m_ee.png": "8a74899c2dd05b8668b22360a732dac250894f6a98a34f2d53121a2aacb9d022",
-  "cs_t2m_pc_polar.png": "7e9b6cea4a4c7fc759aa18fef88293eb1a0bdce3400d0b85ee79f2d22ea5b6f2"
- },
+ "render_assets": {},
  "data_files": {
-  "cs.json": "d86aabca8803be95ab3524eaf77a47837aeebeddcb65c00f0c18ca2afe6138f2",
+  "cs.json": "9a75ed0271b1f360e22636fb8a888132e2a1c9e18236f43fa5b8588353ec1cc4",
   "img/panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
   "img/panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
   "img/panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
@@ -903,6 +895,50 @@
    "pass": true
   },
   {
+   "id": "DS17",
+   "name": "audit C1 (fixed): 23 × 3600 = 82 800, 56 × 60 = 3 360, 82 800 + 3 360 + 4 = 86 164 s (voice: 'twenty three hours, fifty six minutes and four seconds')",
+   "value": [
+    82800.0,
+    3360.0,
+    86164.0,
+    86164.0
+   ],
+   "ref": [
+    82800.0,
+    3360.0,
+    86164.0,
+    86164.0
+   ],
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS17",
+   "name": "audit C5: 360° ÷ 365 days ≈ 1° a day (0.986); 24 h = 1440 min; 1440 ÷ 360 = 4 min per 1°; 86 400 − 86 164 = 236 s ≈ 4 min",
+   "value": [
+    0.986301,
+    1440.0,
+    4.0,
+    236.0,
+    3.933333
+   ],
+   "ref": [
+    0.986,
+    1440.0,
+    4.0,
+    236.0,
+    3.93
+   ],
+   "tol": [
+    0.0005,
+    0,
+    0,
+    0,
+    0.005
+   ],
+   "pass": true
+  },
+  {
    "id": "DS18",
    "name": "U = Ω a cos φ: equator 464.6, Singapore 464.5, Khulna 428.3, Brest 308.5, Longyearbyen 95.0, pole 0 m/s",
    "value": [
@@ -946,7 +982,7 @@
   },
   {
    "id": "DS18",
-   "name": "spoken/screen speeds = round(U): 465, 464, 428, 308, 95, 0",
+   "name": "spoken/screen speeds: equator 464.6 (one decimal, audit C3), then round(U): 464, 428, 308, 95, 0",
    "value": [
     464.58,
     464.45,
@@ -955,6 +991,74 @@
     95.0,
     0.0
    ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "audit C3 rows: 7.292e-5 × 6.371e6 = 464.6; 464.6 × 0.9997 ≈ 464 (464.5), × 0.9219 ≈ 428 (428.3), × 0.6639 ≈ 308 (308.4), × 0.2045 ≈ 95 (95.0)",
+   "value": [
+    464.57332,
+    464.46062,
+    428.31474,
+    308.44794,
+    95.0107,
+    0.999722
+   ],
+   "ref": [
+    464.6,
+    464.46,
+    428.3,
+    308.4,
+    95.0,
+    0.9997
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "audit C3 roundings: 464.46 → 464, 428.3 → 428, 308.4 → 308, 95.0 → 95",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "audit C4: 2π × 6400 ≈ 40 200 ('about 40 000 km'); 40 000 ÷ 24 ≈ 1667 ≈ 1670 km/h; 464.6 × 3.6 = 1672.6 ≈ 1670; 1670 ÷ 900 ≈ 1.86 ≈ 1.9",
+   "value": [
+    40212.385966,
+    1666.666667,
+    1672.56,
+    1.855556
+   ],
+   "ref": [
+    40212.0,
+    1666.7,
+    1672.6,
+    1.856
+   ],
+   "tol": [
+    0.5,
+    0.05,
+    0.05,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS18",
+   "name": "audit C4 roundings: 40 212 → 'about 40 000'; 1667 and 1673 → 1670; 1.856 → 1.9",
+   "value": true,
    "ref": true,
    "tol": 0,
    "pass": true
@@ -1380,6 +1484,182 @@
    "pass": true
   },
   {
+   "id": "DS30",
+   "name": "C6 Khulna: sin 22.8° ≈ 0.3875, cos 22.8° ≈ 0.9219, cos 89.6° ≈ 0.00698, sin 89.6° ≈ 1.000",
+   "value": [
+    0.387516,
+    0.921863,
+    0.006981,
+    0.999976
+   ],
+   "ref": [
+    0.3875,
+    0.9219,
+    0.00698,
+    1.0
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-06,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C7 box widths: 27.8 × 0.9997 ≈ 27.8, × 0.9219 ≈ 25.6, × 0.6639 ≈ 18.5, × 0.2045 ≈ 5.7",
+   "value": [
+    27.79166,
+    25.62882,
+    18.45642,
+    5.6851
+   ],
+   "ref": [
+    27.8,
+    25.6,
+    18.5,
+    5.7
+   ],
+   "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C8 steps: sin 10° ≈ 0.174, sin 20° ≈ 0.342, sin 30° = 0.500; 0.174 − 0 = 0.174, 0.342 − 0.174 = 0.168, 0.500 − 0.342 = 0.158",
+   "value": [
+    0.173648,
+    0.34202,
+    0.5,
+    0.174,
+    0.168,
+    0.158
+   ],
+   "ref": [
+    0.174,
+    0.342,
+    0.5,
+    0.174,
+    0.168,
+    0.158
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    1e-12,
+    1e-12,
+    1e-12,
+    1e-12
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C9 Brest squares: 4217² ≈ 17 783 000, 332² ≈ 110 000, sum ≈ 17 893 000, √ ≈ 4230; 4230² ≈ 17 893 000, 4764² ≈ 22 696 000, sum ≈ 40 589 000, √ ≈ 6371",
+   "value": [
+    17783.089,
+    110.224,
+    17893.313,
+    4230.01182,
+    17892.9,
+    22695.696,
+    40588.596,
+    6370.949694
+   ],
+   "ref": [
+    17783.0,
+    110.0,
+    17893.0,
+    4230.0,
+    17893.0,
+    22696.0,
+    40589.0,
+    6371.0
+   ],
+   "tol": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C9 Khulna squares: 41² = 1681, 5873² ≈ 34 492 000, 2469² ≈ 6 096 000, sum ≈ 40 590 000, √ ≈ 6371",
+   "value": [
+    1681.0,
+    34492.129,
+    6095.961,
+    4058.9771,
+    6371.028174
+   ],
+   "ref": [
+    1681.0,
+    34492.0,
+    6096.0,
+    4059.0,
+    6371.0
+   ],
+   "tol": [
+    0,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C9 areas: a² = 6371² ≈ 40.6 × 10⁶ km²; 2π × 40.6 × 10⁶ ≈ 255 × 10⁶; 2 × 255 = 510",
+   "value": [
+    40.589641,
+    255.097323,
+    510.0
+   ],
+   "ref": [
+    40.6,
+    255.1,
+    510.0
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C9 roundings: 2π × 40.6 = 255.1 → 255",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DS30",
+   "name": "C9 global mean: 16.3 − 7.1 = 9.2 °C (exact 9.16)",
+   "value": [
+    9.2,
+    9.158709
+   ],
+   "ref": [
+    9.2,
+    9.16
+   ],
+   "tol": [
+    1e-09,
+    0.01
+   ],
+   "pass": true
+  },
+  {
    "id": "DS29",
    "name": "Equal Earth raster inverse round trip via mapproj.forward (a = 1: map units, no distance)",
    "value": [
@@ -1401,30 +1681,6 @@
   }
  ],
  "flags": [
-  {
-   "id": "DS17",
-   "scene": "s21",
-   "what": "S4 'Twenty three hours and fifty six minutes is eighty six thousand one hundred and sixty four seconds'",
-   "screen_or_voice": "voice: 23 h 56 min = 86 164 s",
-   "hand_check": "23 h 56 min = 86 160 s; the sidereal day is 23 h 56 min 4 s = 86 164 s",
-   "note": "MUST before the final TTS: say 'Twenty three hours, fifty six minutes and four seconds is …' (screen shows 'T ≈ 86 164 s' and '23 h 56 min 4 s')"
-  },
-  {
-   "id": "DS18",
-   "scene": "s21",
-   "what": "7.29 × 10⁻⁵ × 6.371 × 10⁶ m ≈ 465 m/s",
-   "screen_or_voice": "screen and voice",
-   "hand_check": "with the rounded 7.29 the product is 464.4 (exact Ω 7.2921e-5 gives 464.6)",
-   "note": "≈ kept: 465 is the exact value rounded; the factor 7.29 is rounded"
-  },
-  {
-   "id": "DS18",
-   "scene": "s21",
-   "what": "storyboard rows '465 × 0.9219 ≈ 428', '465 × 0.6639 ≈ 308'",
-   "screen_or_voice": "screen",
-   "hand_check": "465 × 0.9219 = 428.7, 465 × 0.6639 = 308.7 (exact 428.3, 308.5)",
-   "note": "screen writes 'U_eq × 0.9219 ≈ 428' and 'U_eq × 0.6639 ≈ 308' (U_eq = the exact 464.6, said 'about four hundred and sixty five'): no rounded factor to contradict"
-  },
   {
    "id": "DS24",
    "scene": "s28",

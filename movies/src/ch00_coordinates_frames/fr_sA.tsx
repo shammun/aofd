@@ -28,8 +28,8 @@ const CHECK_A: [string, number, number, number][] = [
   ["j1", BR.j[0], -0.745, 5e-4], ["j2", BR.j[1], 0.059, 5e-4], ["j3", BR.j[2], 0.664, 5e-4], ["dBT", TR.dkm, 480, 0.5], ["sig", TR.sig, 0.075, 5e-4],
   ["degBT", TR.deg, 4.3, 0.05], ["kS1", SG.k[0], -0.239, 5e-4], ["kS2", SG.k[1], 0.971, 5e-4], ["kS3", SG.k[2], 0.024, 5e-4], ["dotBS", SG.dot, -0.191, 5e-4],
   ["degBS", SG.deg, 101, 0.05], ["kK1", KH.k[0], 0.006, 5e-4], ["kK2", KH.k[1], 0.922, 5e-4], ["kK3", KH.k[2], 0.388, 5e-4], ["degBK", KH.deg, 75.8, 0.05],
-  ["iK1", KH.i[0], -1.0, 5e-4], ["iK2", KH.i[1], 0.007, 5e-4], ["degii", KH.iideg, 94, 0.5], ["amphan", KH.amphan.closest_km, 78, 4],
-  ["a", D.consts.a / 1e3, 6371, 1e-9], ["brg", CO.brg, 329, 0.5], ["along", IAN.along, 9.4, 0.05], ["across", IAN.across, -31.6, 0.05], ["sp", IAN.sp, 33, 0.5],
+  ["iK1", KH.i[0], -1.0, 5e-4], ["iK2", KH.i[1], 0.007, 5e-4], ["degii", KH.iideg, 94, 0.5], ["amphan", KH.amphan.closest_km, 79, 0.5],
+  ["a", D.consts.a / 1e3, 6371, 1e-9], ["brg", CO.brg, 329, 0.5], ["along", IAN.along, 9.4, 0.05], ["across", IAN.across, -31.54, 0.05], ["sp", IAN.sp, 33, 0.5],
 ];
 CHECK_A.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 // the kit's globe frame (enAt, Y-up) = fluidpy enu_basis (Earth axes) at Brest, mapped by e2g (parity row)
@@ -427,7 +427,9 @@ const S06: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf R}=(\cos\lambda,\ \sin\lambda,\ 0)`} x={XC} y={490} size={52} o={fin(f, tR)} />
       <TeX s={eq[0]} x={XC} y={590} size={50} o={fin(f, tJf)} />
       <TeX s={eq[1]} x={XC + 140} y={655} size={50} o={fin(f, tJf)} />
-      <TeX s={String.raw`\hat{\mathbf j}\approx(-0.745,\ 0.059,\ 0.664)`} x={XC} y={770} size={54} o={fin(f, AT(k, 11, "that's minus"))} />
+      <TeX s={String.raw`\hat{\mathbf j}=(-0.7478\times0.9969,`} x={XC} y={715} size={44} o={fin(f, SS(k, 11))} />
+      <TeX s={String.raw`-0.7478\times(-0.0785),\ 0.6639)`} x={XC + 40} y={770} size={44} o={fin(f, SS(k, 11) + 15)} />
+      <TeX s={String.raw`\approx(-0.745,\ 0.059,\ 0.664)`} x={XC + 100} y={825} size={46} o={fin(f, AT(k, 11, "that's minus"))} />
     </Scene>
   );
 };
@@ -463,6 +465,9 @@ const S07: React.FC = () => {
         { lhs: String.raw`\hat{\mathbf i}\cdot\hat{\mathbf j}`, rhs: String.raw`=0.078\times(-0.745)`, at: AT(k, 2, "zero point zero seven eight") },
         { rhs: String.raw`+0.997\times0.059+0`, at: AT(k, 2, "plus zero point nine"), cont: true },
         { rhs: String.raw`\approx-0.058+0.059\approx0`, at: t3 },
+        { lhs: String.raw`\hat{\mathbf j}\cdot\hat{\mathbf k}`, rhs: String.raw`=-0.493-0.003`, at: SS(k, 5), c: C.muted },
+        { rhs: String.raw`+0.497\approx0`, at: SS(k, 5) + 15, c: C.muted, cont: true },
+        { lhs: String.raw`\hat{\mathbf k}\cdot\hat{\mathbf i}`, rhs: String.raw`\approx0.052-0.052+0=0`, at: SS(k, 5) + 30, c: C.muted },
         { lhs: String.raw`\hat{\mathbf i}\times\hat{\mathbf j}`, rhs: String.raw`=(0.997\times0.664-0,`, at: tCr },
         { rhs: String.raw`\ \ 0-0.078\times0.664,`, at: tCr + 12, cont: true },
         { rhs: String.raw`\ \ 0.078\times0.059`, at: tCr + 24, cont: true },
@@ -525,6 +530,8 @@ const S08: React.FC = () => {
         <Lbl x={XZ} y={190} t="ups' angle = centre angle" c={C.muted} s={T.floor} o={fin(f, SS(k, 4))} />
         <Keyword f={f} text="more than a right angle" at={[XZ, 822]} s={T.floor} appear={tMore} />
       </Svg>
+      <TeX s={String.raw`2.01^\circ-(-4.49^\circ)=6.50^\circ`} x={XZ} y={190} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred"), SS(k, 4) - 22)} />
+      <TeX s={String.raw`6.50\times73.8\ \text{km}\approx480\ \text{km}`} x={XZ} y={250} size={44} c={C.muted} o={win(f, AT(k, 2, "four hundred") + 25, SS(k, 4) - 22)} />
       <TeX s={String.raw`\frac{480}{6371}\approx0.075\ \text{rad}\approx4.3^\circ`} x={XZ} y={300} size={50} o={fin(f, tArc)} />
       <TeX s={EQ_S08} x={XZ} y={430} size={52} o={fin(f, tDot)} />
       <TeX s={String.raw`\hat{\mathbf k}_S=(-0.239,\ 0.971,\ 0.024)`} x={XZ} y={515} size={44} o={fin(f, tKs)} />
@@ -542,7 +549,7 @@ const S08: React.FC = () => {
 const S09: React.FC = () => {
   const f = useCurrentFrame(), k = K("s09_khulna");
   const tKh = AT(k, 0, "Khulna"), tBd = AT(k, 0, "Bangladesh"), tGa = AT(k, 1, "Ganges delta"), tSu = AT(k, 1, "Sundarbans"), tBay = AT(k, 2, "Bay of Bengal"),
-    tKo = AT(k, 2, "Kolkata"), tIn = AT(k, 2, "in India"), tAm = AT(k, 3, "Cyclone Amphan"), t78 = AT(k, 3, "seventy eight"), tLL = SS(k, 4), tKk = SS(k, 5), tDot = SS(k, 6),
+    tKo = AT(k, 2, "Kolkata"), tIn = AT(k, 2, "in India"), tAm = AT(k, 3, "Cyclone Amphan"), t78 = AT(k, 3, "seventy nine"), tLL = SS(k, 4), tKk = SS(k, 5), tDot = SS(k, 6),
     t76 = SS(k, 7), tEast = SS(k, 8), tIk = SS(k, 9), t94 = SS(k, 10), tMean = SS(k, 11), tZo = AT(k, 12, "zoom back out");
   const Z: GlobeCam = { lat: KHULNA[0] - 1.2, lon: KHULNA[1] - 0.5, dist: 1.55, pp: [560, 450] };
   const cam = globePath([{ f: 0, ...UN, lat: 30, lon: 50 }, { f: 6, ...UN, lat: 30, lon: 50 }, { f: tKh + 20, ...Z }, { f: tZo, ...Z }, { f: tZo + 50, ...UN, lat: 35, lon: 42 },
@@ -585,20 +592,32 @@ const S09: React.FC = () => {
         o={Math.max(clamp((790 - (G0.c[1] + G0.r)) / 20, 0, 1), clamp((zf - 0.5) / 0.15, 0, 1))} />
       <Svg>
         <Keyword f={f} text="Khulna, Bangladesh" at={[XZ, 110]} appear={0} out={tLL - 20} />
-        <SideCallout f={f} lines={["Amphan, May 2020:", "centre ≈ 78 km west"]} at={[XZ, 230]} appear={t78} out={tLL - 20} target={null} s={T.floor} />
+        <SideCallout f={f} lines={["Amphan, May 2020:", "centre ≈ 79 km west"]} at={[XZ, 230]} appear={t78} out={tLL - 20} target={null} s={T.floor} />
         <Keyword f={f} text="same words, different arrows" at={[XZ, 820]} s={T.floor} appear={tMean} />
       </Svg>
-      <TeX s={String.raw`22.8^\circ\text{N},\ \ 89.6^\circ\text{E}`} x={XZ} y={110} size={54} o={fin(f, tLL)} />
-      <TeX s={String.raw`\hat{\mathbf k}_K=(0.922\times0.007,`} x={XZ} y={200} size={44} o={fin(f, tKk)} />
-      <TeX s={String.raw`0.922\times1.000,\ 0.388)`} x={XZ + 100} y={262} size={44} o={fin(f, tKk)} />
-      <TeX s={String.raw`\approx(0.006,\ 0.922,\ 0.388)`} x={XZ + 100} y={324} size={44} o={fin(f, tKk + 20)} />
-      <TeX s={String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_K`} x={XZ} y={405} size={44} o={fin(f, tDot)} />
-      <TeX s={String.raw`=0.004-0.048+0.290`} x={XZ + 100} y={462} size={44} o={fin(f, AT(k, 6, "that's zero"))} />
-      <TeX s={String.raw`=0.246\ \Rightarrow\ \approx75.8^\circ`} x={XZ + 100} y={522} size={44} o={fin(f, t76)} />
-      <Svg><Keyword f={f} text="even east is different" at={[XZ, 605]} s={T.floor} appear={tEast} out={tIk - 20} /></Svg>
-      <TeX s={String.raw`\hat{\mathbf i}_K=(-1.000,\ 0.007,\ 0)`} x={XZ} y={605} size={46} o={fin(f, tIk)} />
-      <TeX s={String.raw`\hat{\mathbf i}_K\approx-\hat{\mathbf x}`} x={XZ} y={672} size={46} c={C.muted} o={fin(f, AT(k, 9, "almost exactly"))} />
-      <TeX s={String.raw`\hat{\mathbf i}_B\cdot\hat{\mathbf i}_K\approx-0.071\ \Rightarrow\ \approx94^\circ`} x={XZ} y={740} size={44} o={fin(f, t94)} />
+      <TeX s={String.raw`22.8^\circ\text{N},\ \ 89.6^\circ\text{E}`} x={XZ} y={110} size={54} o={fin(f, tLL) * fout(f, tEast - 22)} />
+      <Svg><Keyword f={f} text="even east is different" at={[XZ, 110]} s={T.floor} appear={tEast} /></Svg>
+      <CalcStack f={f} x={XZ + 20} y={190} size={44} maxLines={3} rows={[
+        { lhs: "", rhs: String.raw`\cos\varphi=0.922,\ \ \sin\varphi=0.388`, at: tKk, c: C.muted },
+        { lhs: "", rhs: String.raw`\cos\lambda=0.007,\ \ \sin\lambda=1.000`, at: tKk + 15, c: C.muted },
+        { lhs: String.raw`\hat{\mathbf k}_K`, rhs: String.raw`=(0.922\times0.007,`, at: tKk + 30 },
+        { lhs: "", rhs: String.raw`\ \ 0.922\times1.000,\ 0.388)`, at: tKk + 45, cont: true },
+        { lhs: "", rhs: String.raw`\approx(0.006,\ 0.922,\ 0.388)`, at: AT(k, 5, "zero point zero zero six"), cont: true },
+        { lhs: String.raw`\hat{\mathbf k}_B\cdot\hat{\mathbf k}_K`, rhs: String.raw`=0.662\times0.006`, at: tDot },
+        { lhs: "", rhs: String.raw`\ \ +(-0.052)\times0.922`, at: tDot + 15, cont: true },
+        { lhs: "", rhs: String.raw`\ \ +0.748\times0.388`, at: tDot + 30, cont: true },
+        { lhs: "", rhs: String.raw`=0.004-0.048+0.290`, at: AT(k, 6, "that's zero"), cont: true },
+        { lhs: "", rhs: String.raw`=0.246`, at: AT(k, 6, "zero point two four six"), cont: true },
+        { lhs: "", rhs: String.raw`\cos^{-1}0.246\approx75.8^\circ`, at: t76 },
+        { lhs: String.raw`\hat{\mathbf i}_K`, rhs: String.raw`=(-\sin89.6^\circ,\ \cos89.6^\circ,\ 0)`, at: tIk },
+        { lhs: "", rhs: String.raw`=(-1.000,\ 0.007,\ 0)`, at: AT(k, 9, "minus one"), cont: true },
+        { lhs: "", rhs: String.raw`\approx-\hat{\mathbf x}`, at: AT(k, 9, "almost exactly"), cont: true },
+        { lhs: String.raw`\hat{\mathbf i}_B\cdot\hat{\mathbf i}_K`, rhs: String.raw`=0.078\times(-1.000)`, at: t94 },
+        { lhs: "", rhs: String.raw`\ \ +0.997\times0.007`, at: t94 + 15, cont: true },
+        { lhs: "", rhs: String.raw`=-0.078+0.007`, at: t94 + 30, cont: true },
+        { lhs: "", rhs: String.raw`=-0.071`, at: t94 + 40, cont: true },
+        { lhs: "", rhs: String.raw`\cos^{-1}(-0.071)\approx94^\circ`, at: t94 + 55 },
+      ]} />
     </Scene>
   );
 };

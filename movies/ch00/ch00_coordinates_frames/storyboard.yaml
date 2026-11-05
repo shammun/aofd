@@ -17,7 +17,7 @@ concepts:
 - 'a local frame turned on purpose: the coast frame; the coast bearing 329 deg from two coastline points (Part 3''s km); along/across components'
 - 'how the local arrows turn as a parcel moves: Di/Dt, Dj/Dt, Dk/Dt from Part 2''s turning rules (Vallis (2.39a)-(2.39c), r = a)'
 - 'Dv/Dt in spherical coordinates: product rule, the eastward part, metric terms (Vallis (2.44a), (2.45))'
-target_duration_s: 2360.975
+target_duration_s: 2362.0874
 fps: 30
 size:
 - 1920
@@ -64,7 +64,7 @@ dry_run:
     splice3: 'G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\splice3 (the split: new titles, hooks, recaps, Part 5 opening)'
   method: every sentence clip length comes from one of the three runs (scene field measured.timing_source); times recomputed with the tools/tts.py gap rules (lead
     0.3, sentence 0.35, beat 1.5, scene 0.8, tail 0.3); the method reproduces dryrun1's total exactly
-  audio_s: 2360.975
+  audio_s: 2362.0874
   with_hold_s: 2363.475
   speech_s: 2150.17
   sentences: 346
@@ -173,8 +173,8 @@ honesty_notes:
 - 's08: the Trappes angle uses the arc rule (480 km / 6371 km) because a 3-decimal dot product is too coarse for 4°; the library dot product gives 4.32°.'
 - 's09: Khulna at the split plan''s rounded 22.8 N, 89.6 E gives 75.76°; the Natural Earth point (22.8419, 89.5581) gives 75.7°; spoken ''about seventy five point eight'' (Part 3 README: 75.8°, coordinator 2026-11-05).
   Amphan''s centre passed ≈ 78 km W of Khulna (data report §3, IBTrACS NI).'
-- 's11-s12: the 329° comes from the NE 10 m coastline vertices nearest Naples and Venice (build-1 manifest pN, pV); flat triangle 329.0°, sphere 329.1° (DC42 329.13°).
-  Coastline direction depends on the segment chosen; said as ''the coast between Naples and Venice''.'
+- 's11-s12: the 329° comes from the NE 10 m coastline vertices nearest Naples and Englewood (build-1 manifest pN, pV); flat triangle 329.0°, sphere 329.1° (DC42 329.13°).
+  Coastline direction depends on the segment chosen; said as ''the coast between Naples and Englewood''.'
 - 's14: HRRR 3-km analysis wind at Fort Myers Beach, 20 UTC (a model analysis, said ''a weather model''); the data report (§1c) finds HRRR''s vortex ≈ 11-16 km SW
   of the radar eye: the eye marker, if drawn, is HRRR''s wind centre and the source line says so. ''Flooded Fort Myers Beach that afternoon'': NHC report (local time);
   surge numbers belong to Part 2/F19.'
@@ -209,26 +209,26 @@ skip_guidance:
     what: how fast the arrows turn (D35-D38)
     chip_scene: s16_toolkit
     chip_sentence: 3
-    chip_at_s: 1273.775
-    chip_at: '21:13'
+    chip_at_s: 1274.8874
+    chip_at: '21:14'
     skip_to_scene: s22_add_motions
     skip_to_sentence: 16
-    skip_to_s: 1838.775
-    skip_to: '30:38'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 30:38
+    skip_to_s: 1839.8874
+    skip_to: '30:39'
+    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 30:39
     takeaway: 'If you skipped, here''s what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth''s
       radius.'
   - block: C
     what: Dv/Dt and the metric terms (D39)
     chip_scene: s23_whole_vector
     chip_sentence: 4
-    chip_at_s: 1859.275
-    chip_at: '30:59'
+    chip_at_s: 1860.3874
+    chip_at: '31:00'
     skip_to_scene: s25_dot_i_b
     skip_to_sentence: 13
-    skip_to_s: 2081.8
-    skip_to: '34:41'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 34:41
+    skip_to_s: 2082.9124
+    skip_to: '34:42'
+    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 34:42
     takeaway: 'If you skipped, here''s what to keep: because the arrows turn, the wind''s numbers can change even when nothing pushes the air, and the extra terms
       that say so are called metric terms.'
 scenes:
@@ -1008,7 +1008,7 @@ scenes:
 - id: s09_khulna
   t:
   - 641.125
-  - 730.2
+  - 730.1353
   sentence_times:
   - - 641.125
     - 645.075
@@ -1017,39 +1017,39 @@ scenes:
   - - 653.875
     - 660.475
   - - 660.825
-    - 670.4
-  - - 670.75
-    - 676.65
-  - - 677.0
-    - 683.925
-  - - 685.425
-    - 696.25
-  - - 696.6
-    - 702.7
-  - - 704.2
-    - 706.35
-  - - 706.7
-    - 714.675
-  - - 715.025
-    - 718.5
-  - - 720.0
-    - 727.025
-  - - 727.375
-    - 729.4
+    - 670.3353
+  - - 670.6853
+    - 676.5853
+  - - 676.9353
+    - 683.8603
+  - - 685.3603
+    - 696.1853
+  - - 696.5353
+    - 702.6353
+  - - 704.1353
+    - 706.2853
+  - - 706.6353
+    - 714.6103
+  - - 714.9603
+    - 718.4353
+  - - 719.9353
+    - 726.9603
+  - - 727.3103
+    - 729.3353
   beat: 'intuition: Khulna (U-CO-060), the Bay of Bengal seen from the globe'
   visual: 'Zoom tour (HOUSE_STYLE §5b): the globe turns and zooms to the Bay of Bengal; labels on their words: ''Khulna'' (centred within 1 s), ''Ganges delta'',
     ''Sundarbans'' (green-tinted forest outline from Natural Earth / ESA WorldCover if available, else a label only), ''Bay of Bengal'' (italic), ''Kolkata'', ''India'',
     ''Bangladesh''; Amphan''s IBTrACS track (gold dots, 18-21 May 2020) with ''≈ 78 km'' bracket west of Khulna. Khulna''s tripod grows. Column: ''22.8° N, 89.6°
     E'', k_K = (0.006, 0.922, 0.388), the dot product with each product written, ''≈ 75.8°''; then i_K = (−1.000, 0.007, 0) and ''≈ 94° from Brest''s east''. S8: zoom
     back out to the starting view, Brest''s and Khulna''s tripods both visible, the 75.8° arc between the two ups drawn at the centre (slice).'
-  voiceover: 'Now let''s fly to Khulna, in south-west Bangladesh. Khulna lies on the rivers of the Ganges delta, just north of the Sundarbans, the largest mangrove
-    forest in the world. To the south is the Bay of Bengal, and to the west, across the border, is Kolkata, in India. In May twenty twenty, the centre of Cyclone
-    Amphan passed about seventy eight kilometres west of Khulna, and the sea flooded the coast to its south. Khulna is at twenty two point eight degrees north, and
-    eighty nine point six degrees east. Its up arrow is zero point zero zero six, zero point nine two two, zero point three eight eight. [beat] Dotted with Brest''s
-    up, that''s zero point zero zero four, minus zero point zero four eight, plus zero point two nine zero: zero point two four six. The angle whose cosine is zero
-    point two four six is about seventy five point eight degrees. [beat] Even east is different. Khulna''s i hat is minus one, zero point zero zero seven, zero, almost exactly
-    opposite to x hat. It''s about ninety four degrees away from Brest''s east. [beat] So forecasters in Khulna and in Brest both say east, north and up, but they
-    mean different arrows. Let''s zoom back out.'
+  voiceover: 'Now let''s fly to Khulna, in south-west Bangladesh. Khulna lies on the rivers of the Ganges delta, just north of the Sundarbans, the largest
+    mangrove forest in the world. To the south is the Bay of Bengal, and to the west, across the border, is Kolkata, in India. In May twenty twenty, the centre
+    of Cyclone Amphan passed about seventy nine kilometres west of Khulna, and the sea flooded the coast to its south. Khulna is at twenty two point eight
+    degrees north, and eighty nine point six degrees east. Its up arrow is zero point zero zero six, zero point nine two two, zero point three eight eight.
+    [beat] Dotted with Brest''s up, that''s zero point zero zero four, minus zero point zero four eight, plus zero point two nine zero: zero point two four
+    six. The angle whose cosine is zero point two four six is about seventy five point eight degrees. [beat] Even east is different. Khulna''s i hat is minus
+    one, zero point zero zero seven, zero, almost exactly opposite to x hat. It''s about ninety four degrees away from Brest''s east. [beat] So forecasters
+    in Khulna and in Brest both say east, north and up, but they mean different arrows. Let''s zoom back out.'
   on_screen_eq: null
   calc_rows:
   - \hat{\mathbf k}_K=(0.922\times0.007,\ 0.922\times1.000,\ 0.388)\approx(0.006,\ 0.922,\ 0.388)
@@ -1094,27 +1094,27 @@ scenes:
     timing_source: dryrun1
 - id: s10_coast_frame
   t:
-  - 730.2
-  - 792.875
+  - 730.1353
+  - 792.8103
   sentence_times:
-  - - 730.2
-    - 735.05
-  - - 735.4
-    - 744.45
-  - - 744.8
-    - 748.325
-  - - 748.675
-    - 757.425
-  - - 757.775
-    - 765.25
-  - - 765.6
-    - 776.325
-  - - 776.675
-    - 780.15
-  - - 780.5
-    - 784.65
-  - - 785.0
-    - 792.075
+  - - 730.1353
+    - 734.9853
+  - - 735.3353
+    - 744.3853
+  - - 744.7353
+    - 748.2603
+  - - 748.6103
+    - 757.3603
+  - - 757.7103
+    - 765.1853
+  - - 765.5353
+    - 776.2603
+  - - 776.6103
+    - 780.0853
+  - - 780.4353
+    - 784.5853
+  - - 784.9353
+    - 792.0103
   beat: 'frames we turn on purpose: the coast frame (recap of Part 1''s turned axes, not re-derived)'
   visual: 'Picture zone: a small local map of SW Florida (NE 10 m coast, land muted, Gulf of Mexico labelled) with Brest-style i-hat, j-hat at a coast point (orange);
     on S4 the pair turns rigidly by α (orange arc) into x-hat'' (along) and y-hat'' (across, out to sea), tip labels. Column: the two Part 1 lines recalled at 68
@@ -1160,51 +1160,52 @@ scenes:
     timing_source: dryrun1
 - id: s11_coast_points
   t:
-  - 792.875
-  - 900.95
+  - 792.8103
+  - 901.9937
   sentence_times:
-  - - 792.875
-    - 796.1
-  - - 796.45
-    - 805.225
-  - - 805.575
-    - 814.275
-  - - 814.625
-    - 817.7
-  - - 818.05
-    - 824.1
-  - - 825.6
-    - 830.525
-  - - 830.875
-    - 833.525
-  - - 835.025
-    - 840.2
-  - - 840.55
-    - 846.25
-  - - 846.6
-    - 861.75
-  - - 863.25
-    - 870.075
-  - - 870.425
-    - 878.075
-  - - 878.425
-    - 891.225
-  - - 892.725
-    - 900.15
+  - - 792.8103
+    - 796.0353
+  - - 796.3853
+    - 805.1603
+  - - 805.5103
+    - 814.4095
+  - - 814.7595
+    - 817.8345
+  - - 818.1845
+    - 824.4455
+  - - 825.9455
+    - 830.8705
+  - - 831.2205
+    - 833.8705
+  - - 835.3705
+    - 840.5455
+  - - 840.8955
+    - 846.5955
+  - - 846.9455
+    - 862.7937
+  - - 864.2937
+    - 871.1187
+  - - 871.4687
+    - 879.1187
+  - - 879.4687
+    - 892.2687
+  - - 893.7687
+    - 901.1937
   beat: 'derivation D21 (1)-(3): two coast points, the steps north and east in km (Part 3''s rules)'
-  visual: 'Map zoomed to the SW Florida coast between Naples and Venice (NE 10 m coastline in white); two gold dots labelled ''Naples'' and ''Venice'' with their
+  visual: 'Map zoomed to the SW Florida coast between Naples and Englewood (NE 10 m coastline in white); two gold dots labelled ''Naples'' and ''Englewood'' with their
     lat/lon written beside them (left of the dots, never on the coastline); the straight chord between them (gold dashed). Column CalcStack with inputs next to every
     row: Δφ, Δλ, then Δy = a Δφ (rad conversion written), then Δx = a cos φ_mid Δλ. S8: on the map, the chord''s north leg (orange) and west leg (orange) drawn with
     their km labels, each gold-linked to its CalcStack row.'
-  voiceover: 'First, we need two points on the coastline. Let''s take one near Naples, in Florida, at twenty six point one zero degrees north and eighty one point
-    eight zero degrees west. And one near Venice, further up the coast, at twenty six point nine two degrees north and eighty two point three five degrees west. Both
-    come from a world map of coastlines. Going from Naples to Venice, the latitude grows by zero point eight two three degrees. [beat] The longitude changes by minus
-    zero point five five three degrees. It''s minus because we go west. [beat] Now let''s turn these angles into kilometres, with the rules from Part 3. The step
-    north is the Earth''s radius times the change in latitude, in radians. Zero point eight two three degrees is zero point zero one four four radians, so the step
-    north is six thousand three hundred and seventy one times zero point zero one four four: about ninety one and a half kilometres. [beat] The step east is the radius,
-    times cosine phi, times the change in longitude in radians. For phi, we use the middle latitude, twenty six and a half degrees, whose cosine is zero point eight
-    nine five. So the step east is six thousand three hundred and seventy one, times zero point eight nine five, times minus zero point zero zero nine six five: about
-    minus fifty five kilometres. [beat] So going up the coast, we move about ninety one and a half kilometres north, and fifty five kilometres west.'
+  voiceover: 'First, we need two points on the coastline. Let''s take one near Naples, in Florida, at twenty six point one zero degrees north and eighty one
+    point eight zero degrees west. And one near Englewood, further up the coast, at twenty six point nine two degrees north and eighty two point three five
+    degrees west. Both come from a world map of coastlines. Going from Naples to Englewood, the latitude grows by zero point eight two three degrees. [beat]
+    The longitude changes by minus zero point five five three degrees. It''s minus because we go west. [beat] Now let''s turn these angles into kilometres,
+    with the rules from Part 3. The step north is the Earth''s radius times the change in latitude, in radians. Zero point eight two three degrees is zero
+    point zero one four three six radians, so the step north is six thousand three hundred and seventy one times zero point zero one four three six: about
+    ninety one and a half kilometres. [beat] The step east is the radius, times cosine phi, times the change in longitude in radians. For phi, we use the
+    middle latitude, twenty six and a half degrees, whose cosine is zero point eight nine five. So the step east is six thousand three hundred and seventy
+    one, times zero point eight nine five, times minus zero point zero zero nine six five: about minus fifty five kilometres. [beat] So going up the coast,
+    we move about ninety one and a half kilometres north, and fifty five kilometres west.'
   on_screen_eq:
     latex: \Delta y=a\,\Delta\varphi,\qquad \Delta x=a\cos\varphi\,\Delta\lambda
     vallis_eq: 'none: Part 3''s arc rules (Vallis §2.2.1 metric, δy = a δϑ, δx = a cos ϑ δλ)'
@@ -1232,7 +1233,7 @@ scenes:
     steps:
     - - pick two coastline points
       - A=(26.099,-81.801),\ B=(26.922,-82.354)
-      - nearest Natural Earth 10 m coastline vertices to Naples and Venice (build-1 manifest pN, pV)
+      - nearest Natural Earth 10 m coastline vertices to Naples and Englewood (build-1 manifest pN, pV)
       - two points on the real shore
     - - differences in angle
       - \Delta\varphi=+0.823^\circ,\ \Delta\lambda=-0.553^\circ
@@ -1271,37 +1272,37 @@ scenes:
     timing_source: dryrun1
 - id: s12_coast_angle
   t:
-  - 900.95
-  - 999.1
+  - 901.9937
+  - 1000.1437
   sentence_times:
-  - - 900.95
-    - 909.55
-  - - 909.9
-    - 912.2
-  - - 912.55
-    - 917.325
-  - - 917.675
-    - 925.025
-  - - 925.375
-    - 932.325
-  - - 933.825
-    - 939.575
-  - - 941.075
-    - 944.725
-  - - 945.075
-    - 951.975
-  - - 952.325
-    - 962.9
-  - - 964.4
-    - 968.125
-  - - 968.475
-    - 975.75
-  - - 976.1
-    - 983.825
-  - - 984.175
-    - 989.275
-  - - 989.625
-    - 998.3
+  - - 901.9937
+    - 910.5937
+  - - 910.9437
+    - 913.2437
+  - - 913.5937
+    - 918.3687
+  - - 918.7187
+    - 926.0687
+  - - 926.4187
+    - 933.3687
+  - - 934.8687
+    - 940.6187
+  - - 942.1187
+    - 945.7687
+  - - 946.1187
+    - 953.0187
+  - - 953.3687
+    - 963.9437
+  - - 965.4437
+    - 969.1687
+  - - 969.5187
+    - 976.7937
+  - - 977.1437
+    - 984.8687
+  - - 985.2187
+    - 990.3187
+  - - 990.6687
+    - 999.3437
   beat: 'derivation D21 (4)-(6): the triangle, the angle from north, the bearing 329°'
   visual: 'The two legs from s11 slide out of the map into a clean right triangle in the picture zone (north leg 91.5 km up, west leg 55.0 km left, the coast as the
     long side, orange). A local north arrow j-hat (orange) at A; the angle between j-hat and the coast marked (gold arc ''31°''). S6-S8: a compass rose (slate) behind
@@ -1385,27 +1386,27 @@ scenes:
     timing_source: dryrun1
 - id: s13_alpha
   t:
-  - 999.1
-  - 1071.75
+  - 1000.1437
+  - 1072.7937
   sentence_times:
-  - - 999.1
-    - 1003.9
-  - - 1004.25
-    - 1009.85
-  - - 1010.2
-    - 1016.4
-  - - 1017.9
-    - 1027.025
-  - - 1028.525
-    - 1037.0
-  - - 1037.35
-    - 1039.05
-  - - 1040.55
-    - 1055.15
-  - - 1056.65
-    - 1066.775
-  - - 1067.125
-    - 1070.25
+  - - 1000.1437
+    - 1004.9437
+  - - 1005.2937
+    - 1010.8937
+  - - 1011.2437
+    - 1017.4437
+  - - 1018.9437
+    - 1028.0687
+  - - 1029.5687
+    - 1038.0437
+  - - 1038.3937
+    - 1040.0937
+  - - 1041.5937
+    - 1056.1937
+  - - 1057.6937
+    - 1067.8187
+  - - 1068.1687
+    - 1071.2937
   beat: 'derivation D22 (1)-(2): α = 90° − 329° ≡ 121°; the along and across arrows'
   visual: 'Local coast diagram: east and north (i-hat, j-hat, faint orange), a slate arc from east anticlockwise to the coast direction labelled ''α = 121°'' built
     as ''90°'' (to north) + ''31°'' (on to the coast). x-hat'' (orange) along the coast and y-hat'' (orange) turned +90° from it, pointing WSW out to sea (''Gulf
@@ -1474,51 +1475,51 @@ scenes:
     timing_source: dryrun1
 - id: s14_along_across
   t:
-  - 1071.75
-  - 1178.475
+  - 1072.7937
+  - 1179.5874
   sentence_times:
-  - - 1071.75
-    - 1073.6
-  - - 1073.95
-    - 1088.275
-  - - 1088.625
-    - 1095.175
-  - - 1096.675
-    - 1101.15
-  - - 1101.5
-    - 1110.375
-  - - 1110.725
-    - 1118.425
-  - - 1119.925
-    - 1132.25
-  - - 1132.6
-    - 1141.9
-  - - 1143.4
-    - 1148.825
-  - - 1149.175
-    - 1160.175
-  - - 1161.675
-    - 1165.675
-  - - 1166.025
-    - 1173.4
-  - - 1173.75
-    - 1177.675
+  - - 1072.7937
+    - 1074.6437
+  - - 1074.9937
+    - 1089.3187
+  - - 1089.6687
+    - 1096.2187
+  - - 1097.7187
+    - 1102.1937
+  - - 1102.5437
+    - 1111.4187
+  - - 1111.7687
+    - 1119.4687
+  - - 1120.9687
+    - 1133.2937
+  - - 1133.6437
+    - 1142.9437
+  - - 1144.4437
+    - 1149.8687
+  - - 1150.2187
+    - 1161.2874
+  - - 1162.7874
+    - 1166.7874
+  - - 1167.1374
+    - 1174.5124
+  - - 1174.8624
+    - 1178.7874
   beat: 'application D22 (3)-(5): Ian''s wind at Fort Myers Beach, along 9.4 and across −31.6 m/s'
   visual: 'Real map (HRRR local frame as build-1 s39, Fix: drop the GOES underlay if it fights the arrows) of the SW Florida coast, HRRR 10-m wind speed shaded (perceptual
     LUT, 0-50 m/s) with animated streaks; ''Fort Myers Beach'' labelled at the spot on its word; the eye (gold dot, HRRR wind centre at 20 UTC) north of it. The wind
     arrow at Fort Myers Beach (teal, moving dashes, ''33 m/s from the SW''). S3-S5: shadows on x-hat'' (''9.4 along'', teal band) and on y-hat'' (rose band with hatch
     and ''−'' glyph, ''−31.6 -> onto the land''). Column: inputs row ''u = 22.2, v = 24.3 m/s'' then the two dot products with every product written; the length check.
     S9: a water-colour arrow pushing onto the beach. Colour bar beside the map in the column (m/s, 52-px ticks). Sound: waves breaking, −28 LUFS, under S9 only.'
-  voiceover: 'Now Ian''s wind. At eight in the evening, universal time, on the twenty eighth of September, about an hour after Ian came ashore, a weather model gave
-    the wind at Fort Myers Beach as about thirty three metres per second, from the south-west. Its east part was twenty two point two, and its north part twenty four
-    point three metres per second. [beat] The part along the coast is the dot product with x hat prime. That''s twenty two point two times minus zero point five one
-    five, plus twenty four point three times zero point eight five seven. That''s minus eleven point four, plus twenty point eight: about nine point four metres per
-    second along the shore. [beat] The part across is the dot product with y hat prime: twenty two point two times minus zero point eight five seven, plus twenty
-    four point three times minus zero point five one five. That''s minus nineteen point zero, minus twelve point five: about minus thirty one and a half, roughly
-    minus thirty two metres per second. [beat] Minus means against y hat prime: not out to sea, but onto the land. A check: nine point four squared, plus thirty one
-    point six squared, is about one thousand and eighty seven, and its square root is thirty three, the full wind. [beat] So almost the whole wind was pushing the
-    sea onto the coast. That push piles the water up against the shore: the storm surge that flooded Fort Myers Beach that afternoon. Storm surges get their own movie
-    later in this series.'
+  voiceover: 'Now Ian''s wind. At eight in the evening, universal time, on the twenty eighth of September, about an hour after Ian came ashore, a weather
+    model gave the wind at Fort Myers Beach as about thirty three metres per second, from the south-west. Its east part was twenty two point two, and its
+    north part twenty four point three metres per second. [beat] The part along the coast is the dot product with x hat prime. That''s twenty two point two
+    times minus zero point five one five, plus twenty four point three times zero point eight five seven. That''s minus eleven point four, plus twenty point
+    eight: about nine point four metres per second along the shore. [beat] The part across is the dot product with y hat prime: twenty two point two times
+    minus zero point eight five seven, plus twenty four point three times minus zero point five one five. That''s minus nineteen point zero, minus twelve
+    point five: about minus thirty one and a half, roughly minus thirty two metres per second. [beat] Minus means against y hat prime: not out to sea, but
+    onto the land. A check: nine point four squared, plus thirty one point five squared, is about one thousand and eighty, and its square root is about thirty
+    three, the full wind. [beat] So almost the whole wind was pushing the sea onto the coast. That push piles the water up against the shore: the storm surge
+    that flooded Fort Myers Beach that afternoon. Storm surges get their own movie later in this series.'
   on_screen_eq:
     latex: \text{along}=\mathbf v\cdot\hat{\mathbf x}'=22.2\times(-0.515)+24.3\times0.857\approx9.4\ \text{m/s}
     vallis_eq: 'none: dot product (Part 1)'
@@ -1586,35 +1587,35 @@ scenes:
     timing_source: dryrun1
 - id: s15_arrows_turn
   t:
-  - 1178.475
-  - 1265.925
+  - 1179.5874
+  - 1267.0374
   sentence_times:
-  - - 1178.475
-    - 1180.85
-  - - 1181.2
-    - 1186.05
-  - - 1186.4
-    - 1193.325
-  - - 1193.675
-    - 1201.375
-  - - 1202.875
-    - 1213.125
-  - - 1214.625
-    - 1227.175
-  - - 1227.525
-    - 1230.075
-  - - 1230.425
-    - 1238.575
-  - - 1238.925
-    - 1244.35
-  - - 1244.7
-    - 1249.95
-  - - 1250.3
-    - 1258.05
-  - - 1258.4
-    - 1261.7
-  - - 1262.05
-    - 1265.125
+  - - 1179.5874
+    - 1181.9624
+  - - 1182.3124
+    - 1187.1624
+  - - 1187.5124
+    - 1194.4374
+  - - 1194.7874
+    - 1202.4874
+  - - 1203.9874
+    - 1214.2374
+  - - 1215.7374
+    - 1228.2874
+  - - 1228.6374
+    - 1231.1874
+  - - 1231.5374
+    - 1239.6874
+  - - 1240.0374
+    - 1245.4624
+  - - 1245.8124
+    - 1251.0624
+  - - 1251.4124
+    - 1259.1624
+  - - 1259.5124
+    - 1262.8124
+  - - 1263.1624
+    - 1266.2374
   beat: 'intuition: the local arrows turn by themselves as you move (build-1 s25, kept and re-voiced)'
   visual: 'Globe from above the North Pole (unzoomed); a plane glyph flies east along Brest''s parallel (slate trail) for one hour (time compressed); its i-hat (orange)
     and k-hat (teal) drawn at start and end; the angle swept round the axis ''≈ 12°'' (gold arc at the axis). Column CalcStack: ''250 × 3600 = 900 km'', ''900 / 74
@@ -1664,33 +1665,33 @@ scenes:
     timing_source: dryrun1
 - id: s16_toolkit
   t:
-  - 1265.925
-  - 1348.225
+  - 1267.0374
+  - 1349.3374
   sentence_times:
-  - - 1265.925
-    - 1269.7
-  - - 1270.05
-    - 1273.425
-  - - 1273.775
-    - 1280.375
-  - - 1280.725
-    - 1283.55
-  - - 1283.9
-    - 1292.025
-  - - 1292.375
-    - 1300.375
-  - - 1300.725
-    - 1309.075
-  - - 1310.575
-    - 1320.5
-  - - 1320.85
-    - 1330.075
-  - - 1330.425
-    - 1335.275
-  - - 1336.775
-    - 1338.95
-  - - 1339.3
-    - 1347.425
+  - - 1267.0374
+    - 1270.8124
+  - - 1271.1624
+    - 1274.5374
+  - - 1274.8874
+    - 1281.4874
+  - - 1281.8374
+    - 1284.6624
+  - - 1285.0124
+    - 1293.1374
+  - - 1293.4874
+    - 1301.4874
+  - - 1301.8374
+    - 1310.1874
+  - - 1311.6874
+    - 1321.6124
+  - - 1321.9624
+    - 1331.1874
+  - - 1331.5374
+    - 1336.3874
+  - - 1337.8874
+    - 1340.0624
+  - - 1340.4124
+    - 1348.5374
   beat: recap of Part 2's turning rules (the only tools D35-D38 need)
   visual: 'Picture zone: Part 2''s circle with a point, r-hat and θ-hat (orange) at the point; the point slides a little round the circle and the two arrows turn:
     r-hat''s tip moves towards θ-hat (gold short arrow), θ-hat''s tip towards −r-hat (gold short arrow). A small speed arrow ''v'' (teal) and the radius ''r'' (slate)
@@ -1740,27 +1741,27 @@ scenes:
     timing_source: splice2
 - id: s17_which_moves
   t:
-  - 1348.225
-  - 1400.075
+  - 1349.3374
+  - 1401.1874
   sentence_times:
-  - - 1348.225
-    - 1352.875
-  - - 1353.225
-    - 1357.2
-  - - 1357.55
-    - 1360.025
-  - - 1360.375
-    - 1369.025
-  - - 1369.375
-    - 1373.825
-  - - 1375.325
-    - 1378.675
-  - - 1379.025
-    - 1384.2
-  - - 1384.55
-    - 1387.325
-  - - 1388.825
-    - 1399.275
+  - - 1349.3374
+    - 1353.9874
+  - - 1354.3374
+    - 1358.3124
+  - - 1358.6624
+    - 1361.1374
+  - - 1361.4874
+    - 1370.1374
+  - - 1370.4874
+    - 1374.9374
+  - - 1376.4374
+    - 1379.7874
+  - - 1380.1374
+    - 1385.3124
+  - - 1385.6624
+    - 1388.4374
+  - - 1389.9374
+    - 1400.3874
   beat: 'plan of the derivation: three motions, what each one leaves alone'
   visual: 'Column: the three formulas of s04-s06 at 68 px with φ and λ highlighted (gold) wherever they appear; S3-S4 an ''up'' arrow (teal) with a strike over ''turns
     nothing''; S5-S6 the i-hat formula with no φ, gold tick ''north leaves i-hat alone''. Picture zone: a 3 × 3 grid of small icons (rows i-hat, j-hat, k-hat; columns
@@ -1796,31 +1797,31 @@ scenes:
     timing_source: dryrun1
 - id: s18_i_east_a
   t:
-  - 1400.075
-  - 1476.75
+  - 1401.1874
+  - 1477.8624
   sentence_times:
-  - - 1400.075
-    - 1402.875
-  - - 1403.225
-    - 1414.75
-  - - 1415.1
-    - 1423.6
-  - - 1423.95
-    - 1427.225
-  - - 1427.575
-    - 1434.95
-  - - 1435.3
-    - 1439.2
-  - - 1440.7
-    - 1445.825
-  - - 1446.175
-    - 1454.975
-  - - 1456.475
-    - 1460.175
-  - - 1460.525
-    - 1469.05
-  - - 1470.55
-    - 1475.95
+  - - 1401.1874
+    - 1403.9874
+  - - 1404.3374
+    - 1415.8624
+  - - 1416.2124
+    - 1424.7124
+  - - 1425.0624
+    - 1428.3374
+  - - 1428.6874
+    - 1436.0624
+  - - 1436.4124
+    - 1440.3124
+  - - 1441.8124
+    - 1446.9374
+  - - 1447.2874
+    - 1456.0874
+  - - 1457.5874
+    - 1461.2874
+  - - 1461.6374
+    - 1470.1624
+  - - 1471.6624
+    - 1477.0624
   beat: 'derivation D35 (1)-(3): going east turns i-hat towards −R-hat'
   visual: 'Top view from above the North Pole (SVG, as s05): the parallel (gold circle, radius ''a cos φ'' labelled outside the stroke), the parcel at angle λ with
     R-hat and i-hat (orange); the parcel slides east by Δλ (magnified) and both arrows turn; i-hat''s tip moves towards −R-hat (gold short arrow). Column CalcStack:
@@ -1895,45 +1896,45 @@ scenes:
     timing_source: dryrun1
 - id: s19_i_east_b
   t:
-  - 1476.75
-  - 1583.9
+  - 1477.8624
+  - 1585.0124
   sentence_times:
-  - - 1476.75
-    - 1480.375
-  - - 1480.725
-    - 1483.45
-  - - 1483.8
-    - 1486.85
-  - - 1487.2
-    - 1492.85
-  - - 1493.2
-    - 1498.725
-  - - 1499.075
-    - 1505.425
-  - - 1505.775
-    - 1509.575
-  - - 1509.925
-    - 1516.775
-  - - 1517.125
-    - 1523.325
-  - - 1523.675
-    - 1529.225
-  - - 1530.725
-    - 1535.95
-  - - 1536.3
-    - 1540.575
-  - - 1540.925
-    - 1553.6
-  - - 1555.1
-    - 1560.575
-  - - 1560.925
-    - 1562.5
-  - - 1562.85
-    - 1573.325
-  - - 1573.675
-    - 1578.9
-  - - 1580.4
-    - 1583.1
+  - - 1477.8624
+    - 1481.4874
+  - - 1481.8374
+    - 1484.5624
+  - - 1484.9124
+    - 1487.9624
+  - - 1488.3124
+    - 1493.9624
+  - - 1494.3124
+    - 1499.8374
+  - - 1500.1874
+    - 1506.5374
+  - - 1506.8874
+    - 1510.6874
+  - - 1511.0374
+    - 1517.8874
+  - - 1518.2374
+    - 1524.4374
+  - - 1524.7874
+    - 1530.3374
+  - - 1531.8374
+    - 1537.0624
+  - - 1537.4124
+    - 1541.6874
+  - - 1542.0374
+    - 1554.7124
+  - - 1556.2124
+    - 1561.6874
+  - - 1562.0374
+    - 1563.6124
+  - - 1563.9624
+    - 1574.4374
+  - - 1574.7874
+    - 1580.0124
+  - - 1581.5124
+    - 1584.2124
   beat: 'derivation D35 (4)-(7): R-hat in local arrows; Di/Dt; the Brest number'
   visual: 'Meridian slice diagram (SVG, as s06): k-hat and j-hat at Brest, and R-hat drawn at Brest too (orange dashed), split into a ''cos φ k-hat'' leg (up) and
     a ''−sin φ j-hat'' leg (south), gold-linked to the CalcStack. Column: the two s06 lines, multiplied (step 4, the multipliers in gold), subtracted (step 5, the
@@ -2016,29 +2017,29 @@ scenes:
     timing_source: dryrun1
 - id: s20_jk_north
   t:
-  - 1583.9
-  - 1657.15
+  - 1585.0124
+  - 1658.2624
   sentence_times:
-  - - 1583.9
-    - 1587.85
-  - - 1588.2
-    - 1596.95
-  - - 1597.3
-    - 1602.675
-  - - 1603.025
-    - 1607.45
-  - - 1607.8
-    - 1613.3
-  - - 1614.8
-    - 1618.325
-  - - 1618.675
-    - 1625.925
-  - - 1626.275
-    - 1635.0
-  - - 1636.5
-    - 1641.75
-  - - 1642.1
-    - 1655.65
+  - - 1585.0124
+    - 1588.9624
+  - - 1589.3124
+    - 1598.0624
+  - - 1598.4124
+    - 1603.7874
+  - - 1604.1374
+    - 1608.5624
+  - - 1608.9124
+    - 1614.4124
+  - - 1615.9124
+    - 1619.4374
+  - - 1619.7874
+    - 1627.0374
+  - - 1627.3874
+    - 1636.1124
+  - - 1637.6124
+    - 1642.8624
+  - - 1643.2124
+    - 1656.7624
   beat: 'derivation D36: going north turns k-hat towards j-hat and j-hat towards −k-hat'
   visual: 'Meridian slice (half-Earth face, kit_cp, then the SVG copy): the meridian circle of radius ''a'' round the centre (gold), the parcel at angle φ with k-hat
     (teal) and j-hat (orange); it slides north by Δφ (magnified) and both arrows turn (gold short arrows: k-hat towards j-hat, j-hat towards −k-hat). Role tags ''k-hat
@@ -2115,33 +2116,33 @@ scenes:
     timing_source: dryrun1
 - id: s21_jk_east
   t:
-  - 1657.15
-  - 1741.425
+  - 1658.2624
+  - 1742.5374
   sentence_times:
-  - - 1657.15
-    - 1661.125
-  - - 1661.475
-    - 1673.625
-  - - 1673.975
-    - 1679.225
-  - - 1679.575
-    - 1683.725
-  - - 1684.075
-    - 1686.575
-  - - 1686.925
-    - 1694.425
-  - - 1694.775
-    - 1702.75
-  - - 1704.25
-    - 1708.7
-  - - 1709.05
-    - 1713.525
-  - - 1715.025
-    - 1726.1
-  - - 1726.45
-    - 1733.325
-  - - 1734.825
-    - 1740.625
+  - - 1658.2624
+    - 1662.2374
+  - - 1662.5874
+    - 1674.7374
+  - - 1675.0874
+    - 1680.3374
+  - - 1680.6874
+    - 1684.8374
+  - - 1685.1874
+    - 1687.6874
+  - - 1688.0374
+    - 1695.5374
+  - - 1695.8874
+    - 1703.8624
+  - - 1705.3624
+    - 1709.8124
+  - - 1710.1624
+    - 1714.6374
+  - - 1716.1374
+    - 1727.2124
+  - - 1727.5624
+    - 1734.4374
+  - - 1735.9374
+    - 1741.7374
   beat: 'derivation D37: going east also tilts k-hat (towards east) and j-hat (towards west)'
   visual: 'Side-by-side: left, the top view (s18) with R-hat turning towards i-hat (gold short arrow) as the parcel goes east; right, the meridian slice with k-hat
     and j-hat written as R-hat and z-hat legs (z-hat pinned, a small padlock-free ''never turns'' tag in slate). Column CalcStack: DR/Dt = i-hat u/(a cos φ), Dk/Dt
@@ -2216,41 +2217,41 @@ scenes:
     timing_source: dryrun1
 - id: s22_add_motions
   t:
-  - 1741.425
-  - 1850.075
+  - 1742.5374
+  - 1851.1874
   sentence_times:
-  - - 1741.425
-    - 1743.65
-  - - 1744.0
-    - 1748.45
-  - - 1748.8
-    - 1755.125
-  - - 1755.475
-    - 1767.875
-  - - 1768.225
-    - 1777.5
-  - - 1777.85
-    - 1785.65
-  - - 1787.15
-    - 1793.4
-  - - 1793.75
-    - 1797.3
-  - - 1797.65
-    - 1799.45
-  - - 1799.8
-    - 1809.05
-  - - 1809.4
-    - 1811.3
-  - - 1811.65
-    - 1818.825
-  - - 1820.325
-    - 1823.725
-  - - 1824.075
-    - 1831.925
-  - - 1832.275
-    - 1838.425
-  - - 1838.775
-    - 1849.275
+  - - 1742.5374
+    - 1744.7624
+  - - 1745.1124
+    - 1749.5624
+  - - 1749.9124
+    - 1756.2374
+  - - 1756.5874
+    - 1768.9874
+  - - 1769.3374
+    - 1778.6124
+  - - 1778.9624
+    - 1786.7624
+  - - 1788.2624
+    - 1794.5124
+  - - 1794.8624
+    - 1798.4124
+  - - 1798.7624
+    - 1800.5624
+  - - 1800.9124
+    - 1810.1624
+  - - 1810.5124
+    - 1812.4124
+  - - 1812.7624
+    - 1819.9374
+  - - 1821.4374
+    - 1824.8374
+  - - 1825.1874
+    - 1833.0374
+  - - 1833.3874
+    - 1839.5374
+  - - 1839.8874
+    - 1850.3874
   beat: 'derivation D38: add the motions -> the three rates; check; the link to Ω × B'
   visual: 'The s17 icon grid now full; its cells slide into the column and stack into the three final lines (84 px), each term coloured by its motion (east terms
     teal-outlined, north terms slate-outlined), every ''speed / radius'' fragment underbraced gold. S6-S8: a check per line: a strike-through ''no i-hat part'', ''no
@@ -2329,37 +2330,37 @@ scenes:
     timing_source: splice2
 - id: s23_whole_vector
   t:
-  - 1850.075
-  - 1938.4
+  - 1851.1874
+  - 1939.5124
   sentence_times:
-  - - 1850.075
-    - 1852.0
-  - - 1852.35
-    - 1854.45
-  - - 1854.8
-    - 1858.925
-  - - 1859.275
-    - 1866.45
-  - - 1866.8
-    - 1877.075
-  - - 1877.425
-    - 1882.4
-  - - 1882.75
-    - 1888.875
-  - - 1889.225
-    - 1892.225
-  - - 1892.575
-    - 1900.625
-  - - 1902.125
-    - 1905.475
-  - - 1905.825
-    - 1915.175
-  - - 1915.525
-    - 1922.05
-  - - 1922.4
-    - 1929.6
-  - - 1931.1
-    - 1937.6
+  - - 1851.1874
+    - 1853.1124
+  - - 1853.4624
+    - 1855.5624
+  - - 1855.9124
+    - 1860.0374
+  - - 1860.3874
+    - 1867.5624
+  - - 1867.9124
+    - 1878.1874
+  - - 1878.5374
+    - 1883.5124
+  - - 1883.8624
+    - 1889.9874
+  - - 1890.3374
+    - 1893.3374
+  - - 1893.6874
+    - 1901.7374
+  - - 1903.2374
+    - 1906.5874
+  - - 1906.9374
+    - 1916.2874
+  - - 1916.6374
+    - 1923.1624
+  - - 1923.5124
+    - 1930.7124
+  - - 1932.2124
+    - 1938.7124
   beat: 'why it matters: Newton''s law needs D(bold v)/Dt; the product rule gives six terms (D39 (1)-(2))'
   visual: 'Column: ''F = m a'' keyword, then bold v = u i-hat + v j-hat + w k-hat (u, v, w coloured as their arrows), then the product rule recalled from Part 2 (68
     px, faint ''Part 2''), then the six-term line built pair by pair (84 px), each pair underbraced: ''change of the number'' (slate) / ''change of the arrow'' (orange).
@@ -2414,33 +2415,33 @@ scenes:
     timing_source: splice2
 - id: s24_dot_i_a
   t:
-  - 1938.4
-  - 2001.225
+  - 1939.5124
+  - 2002.3374
   sentence_times:
-  - - 1938.4
-    - 1942.025
-  - - 1942.375
-    - 1945.675
-  - - 1946.025
-    - 1949.125
-  - - 1949.475
-    - 1953.5
-  - - 1953.85
-    - 1958.725
-  - - 1959.075
-    - 1963.5
-  - - 1965.0
-    - 1970.1
-  - - 1970.45
-    - 1977.45
-  - - 1977.8
-    - 1979.85
-  - - 1981.35
-    - 1986.35
-  - - 1986.7
-    - 1991.125
-  - - 1992.625
-    - 1999.725
+  - - 1939.5124
+    - 1943.1374
+  - - 1943.4874
+    - 1946.7874
+  - - 1947.1374
+    - 1950.2374
+  - - 1950.5874
+    - 1954.6124
+  - - 1954.9624
+    - 1959.8374
+  - - 1960.1874
+    - 1964.6124
+  - - 1966.1124
+    - 1971.2124
+  - - 1971.5624
+    - 1978.5624
+  - - 1978.9124
+    - 1980.9624
+  - - 1982.4624
+    - 1987.4624
+  - - 1987.8124
+    - 1992.2374
+  - - 1993.7374
+    - 2000.8374
   beat: 'derivation D39 (3)-(4): dot with i-hat; terms 1, 2, 3, 5'
   visual: 'The six-term line stays at the top of the column; a gold ''dot i-hat'' tag slides along it, stopping at each term in turn. Term 1 -> ''Du/Dt'' (kept, warm
     white). Terms 2, 3, 5 -> ''0'' (each struck with Strike as its reason appears: ''D i-hat/Dt has only j-hat, k-hat parts'', ''j-hat ⟂ i-hat'', ''k-hat ⟂ i-hat'').
@@ -2509,35 +2510,35 @@ scenes:
     timing_source: dryrun1
 - id: s25_dot_i_b
   t:
-  - 2001.225
-  - 2094.675
+  - 2002.3374
+  - 2095.7874
   sentence_times:
-  - - 2001.225
-    - 2003.7
-  - - 2004.05
-    - 2009.0
-  - - 2009.35
-    - 2019.5
-  - - 2019.85
-    - 2027.9
-  - - 2029.4
-    - 2034.675
-  - - 2035.025
-    - 2040.15
-  - - 2040.5
-    - 2044.05
-  - - 2045.55
-    - 2058.425
-  - - 2059.925
-    - 2063.525
-  - - 2063.875
-    - 2068.45
-  - - 2068.8
-    - 2070.975
-  - - 2071.325
-    - 2080.3
-  - - 2081.8
-    - 2093.875
+  - - 2002.3374
+    - 2004.8124
+  - - 2005.1624
+    - 2010.1124
+  - - 2010.4624
+    - 2020.6124
+  - - 2020.9624
+    - 2029.0124
+  - - 2030.5124
+    - 2035.7874
+  - - 2036.1374
+    - 2041.2624
+  - - 2041.6124
+    - 2045.1624
+  - - 2046.6624
+    - 2059.5374
+  - - 2061.0374
+    - 2064.6374
+  - - 2064.9874
+    - 2069.5624
+  - - 2069.9124
+    - 2072.0874
+  - - 2072.4374
+    - 2081.4124
+  - - 2082.9124
+    - 2094.9874
   beat: 'derivation D39 (5)-(7): terms 4 and 6; the result; metric terms named'
   visual: 'The gold ''dot i-hat'' tag stops on term 4: Dj/Dt from s22 slides in, its i-hat part highlighted (gold band) and its k-hat part struck; the product ''v
     × (−(u/a) tan φ)'' builds to ''−uv tan φ / a''. Term 6: Dk/Dt slides in, i-hat part highlighted, j-hat part struck; ''+uw/a''. Then the result (96 px) with underbraces
@@ -2618,37 +2619,37 @@ scenes:
     timing_source: splice2
 - id: s26_glider
   t:
-  - 2094.675
-  - 2178.75
+  - 2095.7874
+  - 2179.8624
   sentence_times:
-  - - 2094.675
-    - 2097.0
-  - - 2097.35
-    - 2099.775
-  - - 2100.125
-    - 2106.875
-  - - 2107.225
-    - 2114.475
-  - - 2114.825
-    - 2123.5
-  - - 2123.85
-    - 2132.075
-  - - 2132.425
-    - 2136.975
-  - - 2137.325
-    - 2144.55
-  - - 2144.9
-    - 2152.925
-  - - 2154.425
-    - 2158.475
-  - - 2159.975
-    - 2164.85
-  - - 2165.2
-    - 2167.875
-  - - 2168.225
-    - 2172.35
-  - - 2172.7
-    - 2177.95
+  - - 2095.7874
+    - 2098.1124
+  - - 2098.4624
+    - 2100.8874
+  - - 2101.2374
+    - 2107.9874
+  - - 2108.3374
+    - 2115.5874
+  - - 2115.9374
+    - 2124.6124
+  - - 2124.9624
+    - 2133.1874
+  - - 2133.5374
+    - 2138.0874
+  - - 2138.4374
+    - 2145.6624
+  - - 2146.0124
+    - 2154.0374
+  - - 2155.5374
+    - 2159.5874
+  - - 2161.0874
+    - 2165.9624
+  - - 2166.3124
+    - 2168.9874
+  - - 2169.3374
+    - 2173.4624
+  - - 2173.8124
+    - 2179.0624
   beat: 'intuition: the force-free puck (Must 16, re-voiced): numbers change, speed does not'
   visual: 'Globe (non-spinning, unzoomed): a puck glides from 45° N, 0° E heading north-east along its great circle (gold path, 1 day, time compressed); at start
     and after one day its local tripod and its velocity arrow (teal) are drawn; readouts in the column (never on the globe), gold-linked to the puck: ''u = 10.0 ->
@@ -2705,31 +2706,31 @@ scenes:
     timing_source: splice3
 - id: s27_metric_size
   t:
-  - 2178.75
-  - 2260.775
+  - 2179.8624
+  - 2261.8874
   sentence_times:
-  - - 2178.75
-    - 2180.45
-  - - 2180.8
-    - 2188.8
-  - - 2189.15
-    - 2197.675
-  - - 2198.025
-    - 2203.675
-  - - 2205.175
-    - 2213.25
-  - - 2213.6
-    - 2224.975
-  - - 2225.325
-    - 2231.25
-  - - 2232.75
-    - 2236.675
-  - - 2238.175
-    - 2241.65
-  - - 2242.0
-    - 2252.1
-  - - 2252.45
-    - 2259.975
+  - - 2179.8624
+    - 2181.5624
+  - - 2181.9124
+    - 2189.9124
+  - - 2190.2624
+    - 2198.7874
+  - - 2199.1374
+    - 2204.7874
+  - - 2206.2874
+    - 2214.3624
+  - - 2214.7124
+    - 2226.0874
+  - - 2226.4374
+    - 2232.3624
+  - - 2233.8624
+    - 2237.7874
+  - - 2239.2874
+    - 2242.7624
+  - - 2243.1124
+    - 2253.2124
+  - - 2253.5624
+    - 2261.0874
   beat: 'why it matters: size of the metric term vs Coriolis (log bars)'
   visual: 'Column CalcStack: ''10 × 10 × 1 / 6.371 × 10⁶ ≈ 1.6 × 10⁻⁵ m/s²''; ''f = 2 Ω sin φ = 2 × 7.29 × 10⁻⁵ × 0.707 ≈ 1.03 × 10⁻⁴ s⁻¹''; ''f v ≈ 1.0 × 10⁻³ m/s²''.
     Picture zone: two horizontal log-scale bars (house Balance style): metric (orange) and Coriolis (violet), tick labels 10⁻⁶ … 10⁻² at 52 px, a gold bracket ''≈
@@ -2780,25 +2781,25 @@ scenes:
     timing_source: dryrun1
 - id: s28_recap
   t:
-  - 2260.775
-  - 2338.075
+  - 2261.8874
+  - 2339.1874
   sentence_times:
-  - - 2260.775
-    - 2272.8
-  - - 2273.15
-    - 2282.1
-  - - 2282.45
-    - 2288.775
-  - - 2289.125
-    - 2301.05
-  - - 2301.4
-    - 2307.15
-  - - 2307.5
-    - 2320.65
-  - - 2321.0
-    - 2329.425
-  - - 2329.775
-    - 2337.275
+  - - 2261.8874
+    - 2273.9124
+  - - 2274.2624
+    - 2283.2124
+  - - 2283.5624
+    - 2289.8874
+  - - 2290.2374
+    - 2302.1624
+  - - 2302.5124
+    - 2308.2624
+  - - 2308.6124
+    - 2321.7624
+  - - 2322.1124
+    - 2330.5374
+  - - 2330.8874
+    - 2338.3874
   beat: recap ('To sum up'); last sentence the teaser to Part 5, Moving frames (seven-part series)
   visual: 'One beat per sentence, mini pictures reused (no headings): Brest''s tripod with ''v = u i + v j + w k''; the top view and the meridian slice side by side;
     Brest and Khulna ups with ''75.8°''; the coast with ''329°'', ''9 along'', ''−32 onto the land''; the turning tripod with ''speed / radius''; the i-row of (2.45)
@@ -2834,15 +2835,15 @@ scenes:
     timing_source: splice3
 - id: s29_end
   t:
-  - 2338.075
-  - 2360.975
+  - 2339.1874
+  - 2362.0874
   sentence_times:
-  - - 2338.075
-    - 2344.275
-  - - 2344.625
-    - 2352.675
-  - - 2353.025
-    - 2360.675
+  - - 2339.1874
+    - 2345.3874
+  - - 2345.7374
+    - 2353.7874
+  - - 2354.1374
+    - 2361.7874
   beat: 'series end card (maths ending, HOUSE_STYLE §3, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (Brest''s tripod, the turning tripod on a parallel, the coast frame, the metric-term log bars); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates
     notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with a 24-px gap under the icon row (Should 14). Then a 2.5-s silent hold while

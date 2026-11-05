@@ -225,6 +225,7 @@ const S18: React.FC = () => {
         <SideCallout f={f} lines="≈ 30.7 km along 30° N" at={[XC + 14, 670]} appear={AT(k, 7, "thirty point seven")} target={[z30[0] + 14, z30[1]]} c={C.gold} bend={-20} />
         <Keyword f={f} text="stratospheric polar vortex" at={[XC, 820]} appear={AT(k, 11, "stratospheric polar vortex")} c={C.gold} />
       </Svg>
+      <TeX s={String.raw`10\ \text{hPa}\div1013\ \text{hPa}\approx0.01`} x={XC} y={250} size={50} c={C.key} o={win(f, AT(k, 2, "a hundredth"), t3 - 18)} />
       <TeX s={String.raw`79\ \text{m/s}\times3.6\approx284\ \text{km/h}`} x={XC} y={750} size={58} c={C.key} o={fin(f, AT(k, 10, "nearly eighty")) * fout(f, t11 - 10)} />
       <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s18 src" />
     </Scene>
@@ -410,18 +411,19 @@ const S21: React.FC = () => {
         </g>
         <Lbl x={XC} y={320} t="ring 2000 km about the pole" c={C.muted} s={T.floor} b={false} o={fin(f, t3)} />
         {bar(370, VX.vtP, C.first, "round ≈ 17.5 m/s", fin(f, AT(k, 4, "seventeen")))}
-        {bar(420, VX.rmsP, C.neg, "in/out ≈ 33 m/s", fin(f, AT(k, 4, "thirty three")))}
-        <Lbl x={XC} y={470} t="ratio ≈ 1.9" c={C.gold} s={T.key} o={fin(f, AT(k, 4, "one point nine"))} />
+        {bar(420, VX.rmsP, C.neg, "in/out (rms) ≈ 33", fin(f, AT(k, 4, "thirty three")))}
         <Lbl x={XC} y={540} t="ring 2000 km about its own centre" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         {bar(590, VX.vtC, C.first, "round ≈ 47 m/s", fin(f, AT(k, 6, "forty seven")))}
-        {bar(640, VX.rmsC, C.neg, "in/out ≈ 20 m/s", fin(f, AT(k, 6, "about twenty")))}
-        <Lbl x={XC} y={690} t="ratio ≈ 0.4" c={C.gold} s={T.key} o={fin(f, AT(k, 6, "zero point four"))} />
+        {bar(640, VX.rmsC, C.neg, "in/out (rms) ≈ 20", fin(f, AT(k, 6, "about twenty")))}
         <Keyword f={f} text="mostly spin, like the hurricane" at={[XC, 770]} s={T.floor} appear={t7} out={t8 - 18} />
         <Keyword f={f} text="origin: the centre of what turns" at={[XC, 770]} s={T.floor} appear={t8} out={t9 - 18} c={C.gold} />
         <Keyword f={f} text="cold air can spill south" at={[XC, 770]} s={T.floor} appear={t9} out={AT(k, 10, "Waves on the jet") - 18} />
         <Keyword f={f} text="more: Waves on the jet" at={[XC, 770]} appear={AT(k, 10, "Waves on the jet")} out={AT(k, 10, "The polar vortex") - 18} />
         <Keyword f={f} text="more: The polar vortex" at={[XC, 770]} appear={AT(k, 10, "The polar vortex")} />
       </Svg>
+      <TeX s={String.raw`(90^\circ-72.9^\circ)\times111.2\approx1900\ \text{km}`} x={XC} y={360} size={46} c={C.gold} o={win(f, AT(k, 2, "about one thousand"), t3 - 18)} />
+      <TeX s={String.raw`\text{ratio}=33\div17.5\approx1.9`} x={XC} y={475} size={54} c={C.gold} o={fin(f, AT(k, 4, "one point nine"))} />
+      <TeX s={String.raw`\text{ratio}=20\div47\approx0.4`} x={XC} y={695} size={54} c={C.gold} o={fin(f, AT(k, 6, "zero point four"))} />
       <SourceBelow text={SRC_VX} pic={VPIC} w={760} name="s21 src" />
     </Scene>
   );

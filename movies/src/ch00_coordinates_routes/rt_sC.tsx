@@ -89,9 +89,6 @@ const S11: React.FC = () => {
           over={(P) => { const a = P(cities[0], cities[1]), b = P(cities[2], cities[3]); return <>
             <circle cx={a[0]} cy={a[1]} r={8} fill={C.key} /><circle cx={b[0]} cy={b[1]} r={8} fill={C.key} /></>; }} />
         <Lbl x={XC} y={MBf.y + MBf.h + 78} t="flat map: west-south-west" c={SLATE} s={T.floor} o={mapO} />
-        <Lbl x={XC} y={600} t="leaves at ≈ 312° (north-west)" c={C.key} s={T.floor} o={fin(f, tB0)} />
-        <Lbl x={XC} y={670} t="highest ≈ 62.4° N" c={C.gold} s={T.floor} o={fin(f, tVx)} />
-        <Lbl x={XC} y={740} t="arrives at ≈ 214° (south-west)" c={C.key} s={T.floor} o={fin(f, tB1)} />
         <Keyword f={f} text="heading changes by almost 100°" at={[XC, 140]} s={T.floor} appear={tChg} />
         <g opacity={fin(f, tChg)}>
           <line x1={SX} y1={SY} x2={SX + SW} y2={SY} stroke={C.muted} strokeWidth={4} />
@@ -104,6 +101,25 @@ const S11: React.FC = () => {
         <Keyword f={f} text="over Greenland and Canada" at={[XC, 820]} s={T.floor} appear={tWhy} />
       </Svg>
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={600} o={mapO} name="s11 src map" />
+      {/* audit F1: the three route numbers from Part 4's local arrows and the cross product (each on its spoken words) */}
+      <CalcStack f={f} x={XC} y={500} size={44} maxLines={2} o={fout(f, tChg - 18)} rows={[
+        { rhs: String.raw`\hat{\mathbf i}_1=(0.002,\ 1.000,\ 0)`, at: SS(k, 4), c: C.muted, h: 56 },
+        { rhs: String.raw`\hat{\mathbf j}_1=(-0.783,\ 0.002,\ 0.622)`, at: SS(k, 4) + 12, c: C.muted, cont: true, h: 56 },
+        { rhs: String.raw`e=\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1,\ \ n=\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1`, at: SS(k, 4) + 25, c: C.muted, h: 56 },
+        { rhs: String.raw`e=-0.001-0.730=-0.731`, at: SS(k, 4) + 40, h: 56 },
+        { rhs: String.raw`n=0.307-0.001+0.348`, at: SS(k, 4) + 60, h: 56 },
+        { rhs: String.raw`=0.654`, at: SS(k, 4) + 75, cont: true, h: 56 },
+        { rhs: String.raw`\tan\beta=0.731\div0.654\approx1.12\Rightarrow48^\circ`, at: tB0 - 30, h: 56 },
+        { rhs: String.raw`360^\circ-48^\circ=312^\circ\ \text{(north-west)}`, at: tB0, c: C.gold, cont: true, h: 56 },
+        { rhs: String.raw`\text{axis }\hat{\mathbf n}=\hat{\mathbf r}_1\times\hat{\mathbf r}_2\div\sin\sigma`, at: SS(k, 5), c: C.muted, h: 56 },
+        { rhs: String.raw`n_z=(-0.454-0.000)\div0.981`, at: SS(k, 5) + 20, h: 56 },
+        { rhs: String.raw`\approx-0.463`, at: SS(k, 5) + 35, cont: true, h: 56 },
+        { rhs: String.raw`\text{highest point: }90^\circ\text{ from }\hat{\mathbf n}`, at: SS(k, 5) + 50, c: C.muted, h: 56 },
+        { rhs: String.raw`\cos\varphi_{\max}=|n_z|=0.463\Rightarrow62.4^\circ\text{N}`, at: tVx - 10, c: C.gold, cont: true, h: 56 },
+        { rhs: String.raw`\text{at LA: east }0.549,\ \text{north }0.813`, at: SS(k, 6), c: C.muted, h: 56 },
+        { rhs: String.raw`\tan=0.549\div0.813\approx0.675\Rightarrow34^\circ`, at: SS(k, 6) + 30, cont: true, h: 56 },
+        { rhs: String.raw`34^\circ+180^\circ=214^\circ\ \text{(south-west)}`, at: tB1, c: C.gold, cont: true, h: 56 },
+      ]} />
       {void tCan}
     </Scene>
   );
@@ -157,6 +173,19 @@ const S12: React.FC = () => {
         { lhs: String.raw`978\ \text{km}\div900\ \text{km/h}`, rhs: String.raw`\approx1.1\ \text{h}`, at: tHr },
       ]} />
       <TeX s={String.raw`+11\,\%`} x={XC} y={660} size={60} c={C.gold} o={fin(f, tPct)} />
+      <CalcStack f={f} x={XC} y={400} size={44} maxLines={3} o={fout(f, tHow - 12)} rows={[
+        { rhs: String.raw`\psi=\ln\tan(45^\circ+\varphi/2)\ \text{(Part 7)}`, at: tSame, c: C.muted, h: 58 },
+        { rhs: String.raw`\psi_{\text{London}}=\ln\tan70.755^\circ=1.0523`, at: tSame + 30, h: 58 },
+        { rhs: String.raw`\psi_{\text{LA}}=\ln\tan62.025^\circ=0.6327`, at: tSame + 55, cont: true, h: 58 },
+        { rhs: String.raw`\Delta\psi=0.6327-1.0523=-0.4196`, at: SS(k, 2), h: 58 },
+        { rhs: String.raw`\Delta\lambda=-118.11^\circ=-2.0614\ \text{rad}`, at: SS(k, 2) + 20, cont: true, h: 58 },
+        { rhs: String.raw`\tan\alpha=2.0614\div0.4196\approx4.913`, at: SS(k, 2) + 45, h: 58 },
+        { rhs: String.raw`\alpha\approx78.49^\circ\text{ west of south}`, at: SS(k, 2) + 65, cont: true, h: 58 },
+        { rhs: String.raw`180^\circ+78.49^\circ\approx258.5^\circ`, at: tB, c: SLATE, cont: true, h: 58 },
+        { rhs: String.raw`\Delta\varphi=-17.46^\circ=-0.30473\ \text{rad}`, at: SS(k, 3), c: C.muted, h: 58 },
+        { rhs: String.raw`s=6371\times0.30473\div\cos78.49^\circ`, at: SS(k, 3) + 25, h: 58 },
+        { rhs: String.raw`=1941.4\div0.19947\approx9733\ \text{km}`, at: tLen, c: SLATE, cont: true, h: 58 },
+      ]} />
       {void tS}
     </Scene>
   );
@@ -215,8 +244,9 @@ const S13: React.FC = () => {
         <Lbl x={1360} y={700} t="a lot of calculation" c={C.key} s={T.floor} o={r1o * fin(f, tCalc)} />
         {/* reason 2 */}
         <Lbl x={XC} y={380} t="Brest → Lisbon ≈ 1138 km" c={C.key} s={T.floor} o={r2o * fin(f, tBL)} />
-        <Magnifier c={[1260, 560]} r={48} o={r2o * fin(f, tBLx)} />
-        <Lbl x={1360} y={560} t="rhumb: + ≈ 150 m" c={SLATE} s={T.floor} o={r2o * fin(f, tBLx)} />
+        <Magnifier c={[1260, 750]} r={44} o={r2o * fin(f, tBLx)} />
+        <Lbl x={1360} y={750} t="rhumb: + ≈ 150 m" c={SLATE} s={T.floor} o={r2o * fin(f, tBLx)} />
+        <Lbl x={XC} y={820} t="(the length rule, more digits)" c={C.muted} s={T.floor} o={r2o * fin(f, tBLx + 20)} />
         {/* reason 3: the Mercator chart, a ruler along the straight rhumb line and the 258.5° reading */}
         <MercMap id="s13" B={MB13} E={ME13} o={r3o * fin(f, tMerc)}
           inside={(P) => <path d={flatPath(P, D.mc.rh)} fill="none" stroke={SLATE} strokeWidth={6} />}
@@ -233,6 +263,13 @@ const S13: React.FC = () => {
         <Keyword f={f} text="Part 7: maps" at={[XC, 840]} s={T.floor} appear={tP7} c={C.gold} />
       </Svg>
       <SourceBelow text="Map: Natural Earth (Mercator)" pic={MBf} w={700} o={r3o * fin(f, tMerc)} name="s13 src map" />
+      <CalcStack f={f} x={XC} y={430} size={44} maxLines={2} o={r2o} rows={[
+        { rhs: String.raw`\Delta y=9.67^\circ\times111.2\approx1075\ \text{km}`, at: tBL + 10 },
+        { rhs: String.raw`\Delta x=4.65^\circ\times111.2\times\cos43.56^\circ`, at: tBL + 45 },
+        { rhs: String.raw`\approx375\ \text{km}`, at: tBL + 60, cont: true },
+        { rhs: String.raw`\sqrt{1075^2+375^2}\approx1139\ \text{km}`, at: tBL + 80 },
+        { rhs: String.raw`\text{(great circle: }1138\text{)}`, at: tBL + 100, c: C.muted, cont: true },
+      ]} />
       {void [dim, tLegs]}
     </Scene>
   );

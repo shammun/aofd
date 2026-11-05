@@ -169,61 +169,61 @@
   },
   {
    "time": "12:10",
-   "t_s": 730.2,
+   "t_s": 730.135,
    "title": "A frame turned to a coast",
    "scene": "s10_coast_frame"
   },
   {
    "time": "13:12",
-   "t_s": 792.875,
+   "t_s": 792.81,
    "title": "Every step: the coast's bearing, 329 degrees",
    "scene": "s11_coast_points"
   },
   {
-   "time": "17:51",
-   "t_s": 1071.75,
+   "time": "17:52",
+   "t_s": 1072.794,
    "title": "Ian's wind along and across the coast",
    "scene": "s14_along_across"
   },
   {
-   "time": "19:38",
-   "t_s": 1178.475,
+   "time": "19:39",
+   "t_s": 1179.587,
    "title": "The arrows turn as you move",
    "scene": "s15_arrows_turn"
   },
   {
-   "time": "21:05",
-   "t_s": 1265.925,
+   "time": "21:07",
+   "t_s": 1267.037,
    "title": "Every step: how fast the arrows turn",
    "scene": "s16_toolkit"
   },
   {
-   "time": "30:50",
-   "t_s": 1850.075,
+   "time": "30:51",
+   "t_s": 1851.187,
    "title": "Every step: Newton's law and the metric terms",
    "scene": "s23_whole_vector"
   },
   {
-   "time": "34:54",
-   "t_s": 2094.675,
+   "time": "34:55",
+   "t_s": 2095.787,
    "title": "What metric terms mean",
    "scene": "s26_glider"
   },
   {
-   "time": "36:18",
-   "t_s": 2178.75,
+   "time": "36:19",
+   "t_s": 2179.862,
    "title": "How big they are",
    "scene": "s27_metric_size"
   },
   {
-   "time": "37:40",
-   "t_s": 2260.775,
+   "time": "37:41",
+   "t_s": 2261.887,
    "title": "Recap",
    "scene": "s28_recap"
   },
   {
-   "time": "38:58",
-   "t_s": 2338.075,
+   "time": "38:59",
+   "t_s": 2339.187,
    "title": "End",
    "scene": "s29_end"
   }
@@ -242,18 +242,18 @@
    "block": "B",
    "chip_scene": "s16_toolkit",
    "chip_sentence": 2,
-   "chip_at_s": 1273.775,
-   "skip_to": "30:38",
-   "skip_to_s": 1838.775,
+   "chip_at_s": 1274.887,
+   "skip_to": "30:39",
+   "skip_to_s": 1839.887,
    "keep_line": "If you skipped, here's what to keep: as air moves over the round Earth, its east, north and up arrows turn, at about its speed divided by the Earth's radius."
   },
   {
    "block": "C",
    "chip_scene": "s23_whole_vector",
    "chip_sentence": 3,
-   "chip_at_s": 1859.275,
-   "skip_to": "34:41",
-   "skip_to_s": 2081.8,
+   "chip_at_s": 1860.387,
+   "skip_to": "34:42",
+   "skip_to_s": 2082.912,
    "keep_line": "If you skipped, here's what to keep: because the arrows turn, the wind's numbers can change even when nothing pushes the air, and the extra terms that say so are called metric terms."
   }
  ],
@@ -267,10 +267,7 @@
   "movies/ch00/ch00_cross_product_why/data/real/ne_lines_110m.json": "90b928269bf4c23edf6a91a194f64fc81a0be04d5a5bd60735d10457645748c3",
   "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b"
  },
- "render_assets": {
-  "fr_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
-  "fr_ian_speed_20.png": "5a9d61245c05d107b0f295195747bc6f1866a301716ac97e69311530d1d75e67"
- },
+ "render_assets": {},
  "data_files": {
   "fr.json": "876e9eb94677882c5989e6d0707c7ca0100d1e91413c9059290dae557c4ba5bf",
   "img/ian_speed_20.png": "5a9d61245c05d107b0f295195747bc6f1866a301716ac97e69311530d1d75e67"
@@ -796,17 +793,20 @@
   },
   {
    "id": "DP09",
-   "name": "Amphan's closest approach to Khulna ≈ 78 km (data report §3), centre WEST of Khulna",
+   "name": "Amphan's closest approach to Khulna 79.4 km → 'about seventy nine' (Part 2 s21: 79.36 km; audit D1), centre WEST of Khulna",
    "value": [
     79.371484,
+    79.0,
     1.0
    ],
    "ref": [
-    78.0,
+    79.37,
+    79.0,
     1.0
    ],
    "tol": [
-    4.0,
+    0.05,
+    0,
     0
    ],
    "pass": true
@@ -1110,18 +1110,55 @@
   },
   {
    "id": "DP14",
-   "name": "screen check: 9.4² + 31.6² = 1087; √ = 33.0",
+   "name": "audit D4: 2-dp products 22.2 × (−0.857) = −19.03, 24.3 × (−0.515) = −12.51; sum −31.54 ≈ −31.5; data −31.57 within 0.05 of −31.54",
    "value": [
-    1086.92,
-    32.96847
+    -19.03,
+    -12.51,
+    -31.54,
+    -31.568735
    ],
    "ref": [
-    1087.0,
-    33.0
+    -19.03,
+    -12.51,
+    -31.54,
+    -31.54
    ],
    "tol": [
-    0.5,
+    0,
+    0,
+    1e-09,
     0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "audit D4: −31.54 rounds to −31.5 (screen and voice use 31.5 everywhere)",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP14",
+   "name": "audit D4 check: 9.4² ≈ 88, 31.5² ≈ 992, 88 + 992 = 1080, √1080 = 32.9 ≈ 33",
+   "value": [
+    88.36,
+    992.25,
+    1080.0,
+    32.863353
+   ],
+   "ref": [
+    88.36,
+    992.25,
+    1080.0,
+    32.86
+   ],
+   "tol": [
+    1e-09,
+    1e-09,
+    0,
+    0.005
    ],
    "pass": true
   },
@@ -1404,6 +1441,271 @@
    "pass": true
   },
   {
+   "id": "DP30",
+   "name": "D6 j at Brest with Part 3's 4-dp factors: −0.7478 × 0.9969 = −0.745, −0.7478 × (−0.0785) = 0.059, cos φ = 0.6639 → 0.664",
+   "value": [
+    -0.745482,
+    0.058702,
+    0.6639,
+    0.747682,
+    0.996931,
+    -0.078285
+   ],
+   "ref": [
+    -0.7455,
+    0.0587,
+    0.6639,
+    0.7478,
+    0.9969,
+    -0.0783
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    1e-09,
+    0.0005,
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D6 roundings: −0.7455 → −0.745, 0.0587 → 0.059, 0.6639 → 0.664",
+   "value": true,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D8 s07: j·k = −0.745 × 0.662 + 0.059 × (−0.052) + 0.664 × 0.748 = −0.493 − 0.003 + 0.497 ≈ 0; k·i = 0.662 × 0.078 − 0.052 × 0.997 = 0.052 − 0.052 = 0",
+   "value": [
+    -0.49319,
+    -0.003068,
+    0.496672,
+    0.001,
+    0.051636,
+    -0.051844,
+    -0.0,
+    0.0
+   ],
+   "ref": [
+    -0.493,
+    -0.003,
+    0.497,
+    0.001,
+    0.052,
+    -0.052,
+    0.0,
+    0.0
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.0005,
+    1e-09,
+    0.0005,
+    0.0005,
+    1e-12,
+    1e-12
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D8 s08: Trappes 2.01° E − (−4.49°) = 6.50°; 6.50 × 73.8 km = 479.7 ≈ 480 km (great circle 480.4)",
+   "value": [
+    6.5,
+    479.7,
+    479.879003
+   ],
+   "ref": [
+    6.5,
+    479.7,
+    480.0
+   ],
+   "tol": [
+    1e-09,
+    0.05,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D2 Khulna: cos 22.8° = 0.922, sin 22.8° = 0.388 (Part 3: 0.9219, 0.3875), cos 89.6° = 0.007, sin 89.6° = 1.000",
+   "value": [
+    0.921863,
+    0.387516,
+    0.006981,
+    0.999976
+   ],
+   "ref": [
+    0.922,
+    0.388,
+    0.007,
+    1.0
+   ],
+   "tol": [
+    0.0005,
+    0.0006,
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D2 dot: 0.662 × 0.006 = 0.004, −0.052 × 0.922 = −0.048, 0.748 × 0.388 = 0.290; sum 0.246; cos⁻¹ 0.246 = 75.8°",
+   "value": [
+    0.003972,
+    -0.047944,
+    0.290224,
+    0.246,
+    75.759062
+   ],
+   "ref": [
+    0.004,
+    -0.048,
+    0.29,
+    0.246,
+    75.76
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.0005,
+    1e-09,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D2 east: i_K = (−sin 89.6°, cos 89.6°, 0) = (−1.000, 0.007, 0); i_B·i_K = 0.078 × (−1.000) + 0.997 × 0.007 = −0.078 + 0.007 = −0.071; cos⁻¹ = 94.1°",
+   "value": [
+    -0.999976,
+    0.006981,
+    -0.078,
+    0.006979,
+    -0.071,
+    94.071426
+   ],
+   "ref": [
+    -1.0,
+    0.007,
+    -0.078,
+    0.007,
+    -0.071,
+    94.07
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    1e-09,
+    0.0005,
+    1e-09,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D3 radians: 1° = 0.01745 rad; 0.823 × 0.01745 = 0.01436; −0.553 × 0.01745 = −0.00965; middle latitude (26.10 + 26.92) / 2 = 26.51 ≈ 26.5; cos 26.5° = 0.895",
+   "value": [
+    0.017453,
+    0.014361,
+    -0.00965,
+    26.51,
+    0.894934
+   ],
+   "ref": [
+    0.01745,
+    0.01436,
+    -0.00965,
+    26.51,
+    0.895
+   ],
+   "tol": [
+    5e-06,
+    5e-06,
+    5e-06,
+    1e-09,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D3 (a): the second coast point is near Englewood FL (26.96 N, 82.35 W; < 6 km), not Venice FL (27.10 N, 82.45 W; > 20 km)",
+   "value": [
+    4.4,
+    22.1
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D5: 10 / 4 230 000 = 2.36e-6 ≈ 2.4e-6 rad/s; 2.36e-6 × 86 400 = 0.204 rad; 0.204 × 57.3° = 11.7° ≈ 12°",
+   "value": [
+    2.364066,
+    0.203904,
+    11.6892,
+    57.29578
+   ],
+   "ref": [
+    2.364,
+    0.204,
+    11.69,
+    57.3
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.005,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D7 puck first guess: 10 × 10 × 1 / 6 371 000 = 1.57e-5 m/s²; × 86 400 s = 1.36 ≈ 1.4 m/s; 10 + 1.4 = 11.4 (full path 11.52 → 11.5)",
+   "value": [
+    1.569612,
+    1.35648,
+    11.4,
+    11.519849
+   ],
+   "ref": [
+    1.57,
+    1.356,
+    11.4,
+    11.52
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    1e-09,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DP30",
+   "name": "D8 s27: sin 45° = 0.707",
+   "value": [
+    0.707107
+   ],
+   "ref": [
+    0.707
+   ],
+   "tol": 0.0005,
+   "pass": true
+  },
+  {
    "id": "DP27",
    "name": "f = 1.031e-4 s⁻¹; f v = 1.031e-3; ratio f v / (uv tan φ / a) = 65.7 ('about 66'); DC25",
    "value": [
@@ -1478,44 +1780,12 @@
  ],
  "flags": [
   {
-   "id": "DP06",
-   "scene": "s06",
-   "what": "j = (−0.748×0.997, −0.748×(−0.078), 0.664) ≈ (−0.745, 0.059, 0.664)",
-   "screen_or_voice": "−0.745, 0.059 (exact −0.7454, 0.0585)",
-   "hand_check": "0.748 × 0.997 = 0.7458; 0.748 × 0.078 = 0.0583",
-   "note": "the products of the rounded factors round to −0.746 and 0.058; the screen keeps '≈' with the exact values (voice says ·745, ·059)"
-  },
-  {
    "id": "DP07",
    "scene": "s07",
    "what": "i × j third part",
    "screen_or_voice": "0.748 (voice and screen)",
    "hand_check": "0.078×0.059 + 0.997×0.745 = 0.7474",
    "note": "with the rounded parts it is 0.747; the exact cross product is 0.7477 (k). '≈' kept"
-  },
-  {
-   "id": "DP09",
-   "scene": "s09",
-   "what": "Amphan closest approach",
-   "screen_or_voice": "'about seventy eight kilometres' (data report §3)",
-   "hand_check": "79.4 km at 2020-05-20T16:50 (our 10-min linear interpolation of the IBTrACS NI fixes)",
-   "note": "both 'about 78-79 km west'; the screen bracket shows the data report's ≈ 78 km as voiced"
-  },
-  {
-   "id": "DP11",
-   "scene": "s11",
-   "what": "Δy = 6371 × 0.0144 ≈ 91.5 km (storyboard row and voice: 'zero point zero one four four')",
-   "screen_or_voice": "0.0144 → 91.5",
-   "hand_check": "6371 × 0.0144 = 91.74; 6371 × 0.01436 = 91.49",
-   "note": "screen shows 0.0144 rad as spoken, and the Δy row multiplies 0.01436 (= 0.823° in radians, = 91.5; arc_lengths with the exact points 91.57). Director: voice 'zero point zero one four four' with 'about ninety one and a half' is off by 0.2 km; suggest saying 'zero point zero one four three six' or keep and accept"
-  },
-  {
-   "id": "DP14",
-   "scene": "s14",
-   "what": "across row",
-   "screen_or_voice": "storyboard calc row '≈ −19.0 − 12.5 ≈ −31.6'",
-   "hand_check": "−19.0 − 12.5 = −31.5 (unrounded data −31.57)",
-   "note": "screen shows '≈ −31.5' (= the voice 'about minus thirty one and a half'); the check row keeps the voice's 31.6 with a muted 'unrounded: −31.6' keyword"
   }
  ],
  "physics": [

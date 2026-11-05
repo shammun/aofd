@@ -236,80 +236,80 @@
    "scene": "s04_plate_carree"
   },
   {
-   "time": "6:13",
-   "t_s": 373.975,
+   "time": "6:14",
+   "t_s": 374.255,
    "title": "Scale factors on weather grids",
    "scene": "s06_gradient_preview"
   },
   {
    "time": "7:41",
-   "t_s": 461.05,
+   "t_s": 461.33,
    "title": "Mercator's idea",
    "scene": "s07_mercator_idea"
   },
   {
    "time": "9:06",
-   "t_s": 546.25,
+   "t_s": 546.53,
    "title": "Every step: Mercator's formula (optional maths)",
    "scene": "s08_mercator_dy"
   },
   {
    "time": "16:15",
-   "t_s": 975.05,
+   "t_s": 975.76,
    "title": "Why the rhumb line is straight",
    "scene": "s12_rhumb_straight"
   },
   {
-   "time": "17:47",
-   "t_s": 1067.775,
+   "time": "17:48",
+   "t_s": 1068.485,
    "title": "The price: areas",
    "scene": "s13_area_stretch"
   },
   {
-   "time": "19:13",
-   "t_s": 1153.625,
+   "time": "19:14",
+   "t_s": 1154.335,
    "title": "Equal-area maps: pick the map for the job",
    "scene": "s14_equal_earth"
   },
   {
-   "time": "20:45",
-   "t_s": 1245.8,
+   "time": "20:46",
+   "t_s": 1246.51,
    "title": "Why so many coordinate systems",
    "scene": "s15_why_many"
   },
   {
-   "time": "21:49",
-   "t_s": 1309.975,
+   "time": "21:50",
+   "t_s": 1310.685,
    "title": "The view from the pole",
    "scene": "s16_globe_to_pole"
   },
   {
    "time": "23:10",
-   "t_s": 1390.05,
+   "t_s": 1390.76,
    "title": "A tour of the polar map",
    "scene": "s17_where_is_what"
   },
   {
-   "time": "24:53",
-   "t_s": 1493.85,
+   "time": "24:54",
+   "t_s": 1494.56,
    "title": "The stratospheric polar vortex",
    "scene": "s18_vortex"
   },
   {
-   "time": "26:21",
-   "t_s": 1581.725,
+   "time": "26:22",
+   "t_s": 1582.435,
    "title": "East is round, north is in",
    "scene": "s19_vortex_components"
   },
   {
-   "time": "27:36",
-   "t_s": 1656.625,
+   "time": "27:37",
+   "t_s": 1657.335,
    "title": "Choosing the origin",
    "scene": "s20_origin_wheel"
   },
   {
    "time": "30:59",
-   "t_s": 1859.25,
+   "t_s": 1859.96,
    "title": "To sum up",
    "scene": "s22_recap"
   }
@@ -320,8 +320,8 @@
    "chip_scene": "s04_plate_carree",
    "chip_sentence": 2,
    "chip_at_s": 131.75,
-   "skip_to": "6:13",
-   "skip_to_s": 373.975,
+   "skip_to": "6:14",
+   "skip_to_s": 374.255,
    "keep_scene": "s06_gradient_preview",
    "keep_line": "If you skipped, here's what to keep."
   },
@@ -329,9 +329,9 @@
    "block": "B",
    "chip_scene": "s08_mercator_dy",
    "chip_sentence": 2,
-   "chip_at_s": 561.775,
+   "chip_at_s": 562.055,
    "skip_to": "16:15",
-   "skip_to_s": 975.05,
+   "skip_to_s": 975.76,
    "keep_scene": "s12_rhumb_straight",
    "keep_line": "If you skipped, here's what to keep."
   }
@@ -346,20 +346,9 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-50m-land\\ne_50m_land.zip": "0b8e670cf80dce9cbebe2a193bc44ba5602758c22e1fa603980553646d7ff162"
  },
- "render_assets": {
-  "mp_bm_ee.png": "e3139faa08768b2e3820243e9f5aa5ac4297364526e99794a79ca64732e6b2e1",
-  "mp_bm_mc.jpg": "a09bce48e555859ebcbb248b38ad8004901fa89dec0aa67516996aa32e87c47d",
-  "mp_bm_pc.jpg": "079377a8a629f71d3cd307b11c92c4b96da7e4c963d71421de4eba48d1b1e6fc",
-  "mp_bm_ps.jpg": "236411da56568439ba06814181fcf531805ed09b742f00bc077a2f696f1b8023",
-  "mp_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
-  "mp_brest_crop.jpg": "8f86241b2784d0e25f380784b3cb4d54aec1846c847142a9ad0b30a4485f9c95",
-  "mp_t2m_ee.png": "9f1ab95dac14fa0bde36508c6c949ea62bf1df98f3abfadae465484012da3383",
-  "mp_t2m_mc.png": "0266c832ed1da950e5d863dca38d541df344603fa9b6b87e9c4891a866f7e25a",
-  "mp_trails.bin": "8ae187bd1a388c7b318592a2dfaaa2f1ca53f84959a72ef75ac9b5a83d595a5f",
-  "mp_z10_ps.png": "582aa7117a9031ab9f7abd739fa74b9f720686461d02f9926e432aec2bd19342"
- },
+ "render_assets": {},
  "data_files": {
-  "mp.json": "6f3d2a339b142f6d082a1133bde0ddb2a9f3784da73b6356b443c84470cc40ed",
+  "mp.json": "a8a38115e96f966e510c195e955feb8322546c40410bd052f68ed5259292cbfa",
   "img/bm_ee.png": "e3139faa08768b2e3820243e9f5aa5ac4297364526e99794a79ca64732e6b2e1",
   "img/bm_mc.jpg": "a09bce48e555859ebcbb248b38ad8004901fa89dec0aa67516996aa32e87c47d",
   "img/bm_pc.jpg": "079377a8a629f71d3cd307b11c92c4b96da7e4c963d71421de4eba48d1b1e6fc",
@@ -495,6 +484,43 @@
     0.05,
     0.05
    ],
+   "pass": true
+  },
+  {
+   "id": "DM16",
+   "name": "audit G2: 48.4 × π/180 = 0.84474 ≈ 0.8447 rad, −4.5 × π/180 = −0.07854 ≈ −0.0785; 6371 × −0.0785 = −500.1 ≈ −500; 6371 × 0.8447 = 5381.6 ≈ 5382 (exact 5381.8, Part 3 s23)",
+   "value": [
+    0.844739,
+    -0.07854,
+    -500.1235,
+    5381.5837,
+    -500.37717,
+    5381.83445
+   ],
+   "ref": [
+    0.8447,
+    -0.0785,
+    -500.1,
+    5381.6,
+    -500.4,
+    5381.8
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM16",
+   "name": "audit G2 roundings: 5381.6 and 5381.8 → 5382; −500.1 → −500",
+   "value": true,
+   "ref": true,
+   "tol": 0,
    "pass": true
   },
   {
@@ -1295,6 +1321,119 @@
    "pass": true
   },
   {
+   "id": "DM20",
+   "name": "audit G1 table rows 30-80°: 1/cos 35° 45° 55° 65° 75° = 1.221 1.414 1.743 2.366 3.864; drawn 0.213 0.247 0.304 0.413 0.674",
+   "value": [
+    1.220775,
+    1.414214,
+    1.743447,
+    2.366202,
+    3.863703,
+    0.213065,
+    0.246827,
+    0.304289,
+    0.41298,
+    0.674343
+   ],
+   "ref": [
+    1.221,
+    1.414,
+    1.743,
+    2.366,
+    3.864,
+    0.2131,
+    0.2468,
+    0.3043,
+    0.413,
+    0.6743
+   ],
+   "tol": [
+    0.0005,
+    0.0005,
+    0.0005,
+    0.0005,
+    0.0005,
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "audit G1: 0.1745 × the shown 1/cos = the shown drawn step (to 3 dp): 0.213, 0.247, 0.304, 0.413, 0.674",
+   "value": [
+    0.213,
+    0.247,
+    0.304,
+    0.413,
+    0.674
+   ],
+   "ref": [
+    0.213,
+    0.247,
+    0.304,
+    0.413,
+    0.674
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "audit G1: the shown running totals = sums of the shown steps: 0.175 0.356 0.549 0.762 1.009 1.313 1.726 2.400 (exact 1.0084 → said 'one point zero one')",
+   "value": [
+    0.175,
+    0.356,
+    0.549,
+    0.762,
+    1.009,
+    1.313,
+    1.726,
+    2.4
+   ],
+   "ref": [
+    0.175,
+    0.356,
+    0.549,
+    0.762,
+    1.009,
+    1.313,
+    1.726,
+    2.4
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DM20",
+   "name": "audit G1: each shown total within 0.001 of the exact running total",
+   "value": [
+    0.0002,
+    0.000111,
+    0.000535,
+    0.000469,
+    0.000643,
+    0.000354,
+    0.000374,
+    3e-05
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": 0.0011,
+   "pass": true
+  },
+  {
    "id": "DM21",
    "name": "ln tan 75° = 1.31696; 1° midpoint sum = 1.31691; Brest 0.96768 a = 6165.1 km",
    "value": [
@@ -1344,6 +1483,40 @@
     0.0005,
     0.0005
    ],
+   "pass": true
+  },
+  {
+   "id": "DM21",
+   "name": "audit G3: tan 69.2° = 2.6325; ln 2.6325 = 0.96794 ≈ 0.968; 0.968 × 6371 = 6167.1 ≈ 6167 (exact 0.96794 × 6371 = 6166.8; coordinator 6167)",
+   "value": [
+    2.632519,
+    0.967934,
+    0.967941,
+    6167.128,
+    6166.752257
+   ],
+   "ref": [
+    2.6325,
+    0.96794,
+    0.96794,
+    6167.1,
+    6166.8
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM21",
+   "name": "audit G3 roundings: 6167.1 and 6166.8 → 6167; ln 2.6325 → 0.968",
+   "value": true,
+   "ref": true,
+   "tol": 0,
    "pass": true
   },
   {
@@ -1415,6 +1588,38 @@
     0.0005,
     0.0005,
     1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DM22",
+   "name": "audit G4 (cross-check of Part 6): y/a London 1.0523, LA 0.6327; Δy/a −0.4196; Δx/a = −118.11° = −2.0614; 2.0614 / 0.4196 = 4.913 ≈ 4.9 → 78.49° → 258.5°",
+   "value": [
+    1.052346,
+    0.632711,
+    -0.419635,
+    -2.061408,
+    4.912774,
+    258.494571,
+    258.493681
+   ],
+   "ref": [
+    1.0523,
+    0.6327,
+    -0.4196,
+    -2.0614,
+    4.913,
+    258.49,
+    258.49
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-05,
+    5e-05,
+    0.0005,
+    0.005,
+    0.005
    ],
    "pass": true
   },
@@ -1823,6 +2028,46 @@
   },
   {
    "id": "DC37",
+   "name": "audit G5: (90 − 72.9) × 111.2 = 1901.5 ≈ 1900 km; 33 / 17.5 = 1.89 ≈ 1.9; 20 / 47 = 0.43 ≈ 0.4; 'typically' = root-mean-square",
+   "value": [
+    1901.52,
+    1.885714,
+    0.425532
+   ],
+   "ref": [
+    1901.5,
+    1.886,
+    0.4255
+   ],
+   "tol": [
+    0.05,
+    0.0005,
+    0.0005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC37",
+   "name": "audit G7: 10 hPa / 1013 hPa = 0.0099 ≈ 0.01; y(85°) = 3.1313 a; 3.131 × 6371 = 19 948 ≈ 19 950",
+   "value": [
+    0.009872,
+    3.131301,
+    19947.601
+   ],
+   "ref": [
+    0.0099,
+    3.1313,
+    19947.6
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    0.5
+   ],
+   "pass": true
+  },
+  {
+   "id": "DC37",
    "name": "ring 2000 km: mean round 17.49 (pole) vs 47.39 (centre); rms in/out 32.9 vs 19.9; ratio 1.883 vs 0.419",
    "value": [
     17.493081,
@@ -1994,14 +2239,6 @@
    "note": "voice kept ('167.4' = the exact 167.45 to 1 dp); the SCREEN writes the unrounded factors '111.19 × 1.5059 ≈ 167.4' so its arithmetic checks by hand (director: optional re-voice)"
   },
   {
-   "id": "F2",
-   "scene": "s10_ln_formula",
-   "what": "Brest height in km",
-   "screen_or_voice": "'0.968 × 6371 ≈ 6165' (screen row and voice 'about six thousand one hundred and sixty five')",
-   "hand_check": "0.968 × 6371 = 6167.1; the exact 0.96768 × 6371 = 6165.1",
-   "note": "voice kept ('6165' from the unrounded ln); the SCREEN row writes '0.9677 × 6371 ≈ 6165' (hand check 6165.2) instead of the storyboard's '0.968 × 6371 ≈ 6165' (hand check 6167)"
-  },
-  {
    "id": "F4",
    "scene": "s13_area_stretch",
    "what": "Greenland and Africa areas",
@@ -2046,6 +2283,19 @@
     "a": 6371000.0
    },
    "sha256": "4828f3ee1a650cd8d6b3552d4d8b5f80f5922838ce0b9e64dfb4645d917f75ce"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s04",
+   "data": "data/mp.json",
+   "eq": "plate carrée at the spoken Brest (48.4 N, 4.5 W)",
+   "params": {
+    "name": "platecarree",
+    "lat": 48.4,
+    "lon": -4.5,
+    "a": 6371000.0
+   },
+   "sha256": "06d2899c7e53b440d11c39b14ed5309d0b031a6cb529bf293406ca847bc35024"
   },
   {
    "fn": "fluidpy.geo.mapproj.scale_factors",
@@ -2113,6 +2363,19 @@
     "a": 1.0
    },
    "sha256": "615cb66b5409dfd1b4bd11da00d074864124abea8aa6a5e72a9ec06f8a4c55a7"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.forward",
+   "scene": "s10",
+   "data": "data/mp.json",
+   "eq": "Mercator y at the spoken Brest 48.4 N (a = 1)",
+   "params": {
+    "name": "mercator",
+    "lat": 48.4,
+    "lon": 0.0,
+    "a": 1.0
+   },
+   "sha256": "3108a39a026725c608735ec1b4ca3d1e274301f8e2986d79fb64fec8fc894bef"
   },
   {
    "fn": "fluidpy.geo.mapproj.scale_factors",

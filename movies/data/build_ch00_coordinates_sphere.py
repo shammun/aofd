@@ -302,17 +302,24 @@ def main() -> int:
     # ================================================================ s20-s21 the spinning ground
     T_s = 2 * np.pi / OMEGA
     row("DS17", "T = 2π / Ω = 86164.1 s (sidereal day 23 h 56 min 4 s); Ω = 7.292e-5 rad/s", [T_s, OMEGA * 1e5, 23 * 3600 + 56 * 60 + 4], [86164.1, 7.292, 86164], [0.05, 5e-4, 0.1])
-    flag("DS17", "s21", "S4 'Twenty three hours and fifty six minutes is eighty six thousand one hundred and sixty four seconds'", "voice: 23 h 56 min = 86 164 s",
-         "23 h 56 min = 86 160 s; the sidereal day is 23 h 56 min 4 s = 86 164 s", "MUST before the final TTS: say 'Twenty three hours, fifty six minutes and four seconds is …' (screen shows 'T ≈ 86 164 s' and '23 h 56 min 4 s')")
+    row("DS17", "audit C1 (fixed): 23 × 3600 = 82 800, 56 × 60 = 3 360, 82 800 + 3 360 + 4 = 86 164 s (voice: 'twenty three hours, fifty six minutes and four seconds')",
+        [23 * 3600, 56 * 60, 23 * 3600 + 56 * 60 + 4, round(T_s)], [82800, 3360, 86164, 86164], 0)
+    row("DS17", "audit C5: 360° ÷ 365 days ≈ 1° a day (0.986); 24 h = 1440 min; 1440 ÷ 360 = 4 min per 1°; 86 400 − 86 164 = 236 s ≈ 4 min",
+        [360 / 365, 24 * 60, 24 * 60 / 360, 86400 - 86164, (86400 - 86164) / 60], [0.986, 1440, 4, 236, 3.93], [5e-4, 0, 0, 0, 5e-3])
     lats_U = [0.0, SING[0], KHULNA[0], BREST[0], LYB[0], 90.0]
     U = OMEGA * EARTH_RADIUS * np.cos(np.deg2rad(lats_U))
     row("DS18", "U = Ω a cos φ: equator 464.6, Singapore 464.5, Khulna 428.3, Brest 308.5, Longyearbyen 95.0, pole 0 m/s", U, [464.6, 464.5, 428.3, 308.5, 95.0, 0.0], 0.06)
     row("DS18", "screen: 2π / 86 164 ≈ 7.29e-5; 40 000 km ÷ 24 h ≈ 1670 km/h; cos 78.2° ≈ 0.2045", [2 * np.pi / 86164 * 1e5, 40000 / 24, np.cos(LYB[0] * D2R)], [7.292, 1666.7, 0.2045], [5e-4, 0.05, 5e-5])
-    truth("DS18", "spoken/screen speeds = round(U): 465, 464, 428, 308, 95, 0", [round(x) for x in U] == [465, 464, 428, 308, 95, 0], [round(x, 2) for x in U])
-    flag("DS18", "s21", "7.29 × 10⁻⁵ × 6.371 × 10⁶ m ≈ 465 m/s", "screen and voice", "with the rounded 7.29 the product is 464.4 (exact Ω 7.2921e-5 gives 464.6)",
-         "≈ kept: 465 is the exact value rounded; the factor 7.29 is rounded")
-    flag("DS18", "s21", "storyboard rows '465 × 0.9219 ≈ 428', '465 × 0.6639 ≈ 308'", "screen", "465 × 0.9219 = 428.7, 465 × 0.6639 = 308.7 (exact 428.3, 308.5)",
-         "screen writes 'U_eq × 0.9219 ≈ 428' and 'U_eq × 0.6639 ≈ 308' (U_eq = the exact 464.6, said 'about four hundred and sixty five'): no rounded factor to contradict")
+    truth("DS18", "spoken/screen speeds: equator 464.6 (one decimal, audit C3), then round(U): 464, 428, 308, 95, 0",
+          round(U[0], 1) == 464.6 and [round(x) for x in U[1:]] == [464, 428, 308, 95, 0], [round(x, 2) for x in U])
+    row("DS18", "audit C3 rows: 7.292e-5 × 6.371e6 = 464.6; 464.6 × 0.9997 ≈ 464 (464.5), × 0.9219 ≈ 428 (428.3), × 0.6639 ≈ 308 (308.4), × 0.2045 ≈ 95 (95.0)",
+        [7.292e-5 * 6.371e6, 464.6 * 0.9997, 464.6 * 0.9219, 464.6 * 0.6639, 464.6 * 0.2045, np.cos(SING[0] * D2R)], [464.6, 464.46, 428.3, 308.4, 95.0, 0.9997], [0.05, 0.05, 0.05, 0.05, 0.05, 5e-5])
+    truth("DS18", "audit C3 roundings: 464.46 → 464, 428.3 → 428, 308.4 → 308, 95.0 → 95",
+          [round(464.6 * c) for c in (0.9997, 0.9219, 0.6639, 0.2045)] == [464, 428, 308, 95])
+    row("DS18", "audit C4: 2π × 6400 ≈ 40 200 ('about 40 000 km'); 40 000 ÷ 24 ≈ 1667 ≈ 1670 km/h; 464.6 × 3.6 = 1672.6 ≈ 1670; 1670 ÷ 900 ≈ 1.86 ≈ 1.9",
+        [2 * np.pi * 6400, 40000 / 24, 464.6 * 3.6, 1670 / 900], [40212, 1666.7, 1672.6, 1.856], [0.5, 0.05, 0.05, 5e-4])
+    truth("DS18", "audit C4 roundings: 40 212 → 'about 40 000'; 1667 and 1673 → 1670; 1.856 → 1.9",
+          round(2 * np.pi * 6400, -4) == 40000 and round(40000 / 24, -1) == 1670 and round(464.6 * 3.6, -1) == 1670 and round(1670 / 900, 1) == 1.9)
     V["spin"] = {"T": T_s, "Om": OMEGA, "lat": lats_U, "U": B1.r6(U, 3)}
 
     # ================================================================ s22-s25 distances
@@ -446,6 +453,22 @@ def main() -> int:
     gp = float(np.nanmean(TK)) - 273.15
     row("DS29", "Sep 2026 t2m: weighted 16.27 °C, plain 7.11 °C, difference > 9 (screen 16.3, 7.1)", [gw, gp, gw - gp], [16.27, 7.11, 9.16], [0.005, 0.005, 0.01])
     row("DS29", "toy: (30 + 0) ÷ 2 = 15; cos 60° = ½; (30 × 1 + 0 × ½) ÷ 1.5 = 20", [(30 + 0) / 2, np.cos(60 * D2R), (30 * 1 + 0 * 0.5) / 1.5], [15, 0.5, 20], 1e-12)
+    # ================================================================ calc & sync audit #5c (2026-11-05): every new screen number
+    row("DS30", "C6 Khulna: sin 22.8° ≈ 0.3875, cos 22.8° ≈ 0.9219, cos 89.6° ≈ 0.00698, sin 89.6° ≈ 1.000",
+        [np.sin(22.8 * D2R), np.cos(22.8 * D2R), np.cos(89.6 * D2R), np.sin(89.6 * D2R)], [0.3875, 0.9219, 0.00698, 1.000], [5e-5, 5e-5, 5e-6, 5e-4])
+    row("DS30", "C7 box widths: 27.8 × 0.9997 ≈ 27.8, × 0.9219 ≈ 25.6, × 0.6639 ≈ 18.5, × 0.2045 ≈ 5.7",
+        [27.8 * 0.9997, 27.8 * 0.9219, 27.8 * 0.6639, 27.8 * 0.2045], [27.8, 25.6, 18.5, 5.7], 0.05)
+    row("DS30", "C8 steps: sin 10° ≈ 0.174, sin 20° ≈ 0.342, sin 30° = 0.500; 0.174 − 0 = 0.174, 0.342 − 0.174 = 0.168, 0.500 − 0.342 = 0.158",
+        [np.sin(10 * D2R), np.sin(20 * D2R), np.sin(30 * D2R), 0.174 - 0, 0.342 - 0.174, 0.500 - 0.342], [0.174, 0.342, 0.500, 0.174, 0.168, 0.158], [5e-4, 5e-4, 1e-12, 1e-12, 1e-12, 1e-12])
+    row("DS30", "C9 Brest squares: 4217² ≈ 17 783 000, 332² ≈ 110 000, sum ≈ 17 893 000, √ ≈ 4230; 4230² ≈ 17 893 000, 4764² ≈ 22 696 000, sum ≈ 40 589 000, √ ≈ 6371",
+        [4217 ** 2 / 1e3, 332 ** 2 / 1e3, (4217 ** 2 + 332 ** 2) / 1e3, np.sqrt(17893000), 4230 ** 2 / 1e3, 4764 ** 2 / 1e3, (4230 ** 2 + 4764 ** 2) / 1e3, np.sqrt(40589000)],
+        [17783, 110, 17893, 4230, 17893, 22696, 40589, 6371], [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5])
+    row("DS30", "C9 Khulna squares: 41² = 1681, 5873² ≈ 34 492 000, 2469² ≈ 6 096 000, sum ≈ 40 590 000, √ ≈ 6371",
+        [41 ** 2, 5873 ** 2 / 1e3, 2469 ** 2 / 1e3, (41 ** 2 + 5873 ** 2 + 2469 ** 2) / 1e4, np.sqrt(40590000)], [1681, 34492, 6096, 4059, 6371], [0, 0.5, 0.5, 0.5, 0.5])
+    row("DS30", "C9 areas: a² = 6371² ≈ 40.6 × 10⁶ km²; 2π × 40.6 × 10⁶ ≈ 255 × 10⁶; 2 × 255 = 510",
+        [6371 ** 2 / 1e6, 2 * np.pi * 40.6, 2 * 255], [40.6, 255.1, 510], [0.05, 0.05, 0])
+    truth("DS30", "C9 roundings: 2π × 40.6 = 255.1 → 255", round(2 * np.pi * 40.6) == 255)
+    row("DS30", "C9 global mean: 16.3 − 7.1 = 9.2 °C (exact 9.16)", [16.3 - 7.1, gw - gp], [9.2, 9.16], [1e-9, 0.01])
     TC = TK - 273.15
     lut = B1.lut_rgb("cmocean.thermal")
     import fluidpy.geo.mapproj as MP

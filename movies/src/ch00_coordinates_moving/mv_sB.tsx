@@ -10,12 +10,13 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { CurvedLink } from "../house/kit/extras";
 import {
-  AT, Arrow, BREST, CI, CIA_PIC, CalcStack, CiaMap, ClockText, D2R, HOUR, HouseIcon, K, Keyword, LEN, Lbl, Layered, MapBox, Place, Proj, SE, SRC_CIA, SRC_CIA3, SS,
+  AT, Arrow, BREST, CI, CIA_PIC, CalcStack, CiaMap, ClockText, D, D2R, HOUR, HouseIcon, K, Keyword, LEN, Lbl, Layered, MapBox, Place, Proj, SE, SRC_CIA, SRC_CIA3, SS,
   Scene, SideCallout, SpeedBar, Svg, TRK, TeX, XC, arcD, boxAt, clamp, fin, fout, lin, mapP, mix, nf, pieces, prog, ringD, sectorD, win,
 } from "./mv_lib";
 import { EQ_S08, EQ_S10 } from "./mv_eq";
 
 const RG = CI.ring, SEC = CI.sec, PTS = CI.pts, U = CI.U as number[];
+const E3 = D.e3, E4 = D.e4;
 // ---------------------------------------------------------------- numbers on screen = the data (the render fails otherwise)
 const CHECK_B: [string, number, number, number][] = [
   ["p00", TRK[3][3], 954.5, 0.05], ["spd", CI.spd, 14.6, 0.05], ["brg", CI.brg, 71, 0.5], ["Ue", 14.6 * Math.sin(71 * D2R), 13.8, 0.05], ["Un", 14.6 * Math.cos(71 * D2R), 4.8, 0.05],
@@ -26,6 +27,11 @@ const CHECK_B: [string, number, number, number][] = [
   ["vtm s", CI.vtm[1], 13.8, 0.05], ["vrm g", CI.vrm[0], -6, 0.5], ["vrm s", CI.vrm[1], -6, 0.5], ["uni", CI.vtm[2], 0.3, 0.05], ["gust", CI.gust_kt, 84, 0],
   ["gust kmh", CI.gust_kt * 1.852, 156, 0.5], ["round 18", Math.round(SEC.S_g), 18, 0], ["round 7", Math.round(SEC.N_g), 7, 0], ["13 S", Math.round(SEC.S_u), 13, 0],
   ["13 N", Math.round(-SEC.N_u), 13, 0], ["5", Math.round(SEC.S_s), 5, 0], ["20", Math.round(SEC.N_s), 20, 0], ["15", Math.round(CI.spd), 15, 0],
+  // calc & sync audit #5e: the new rows
+  ["gS u 2dp", PTS.S.g[0], 13.47, 0.005], ["gS v 2dp", PTS.S.g[1], 8.44, 0.005], ["Ue 2dp", U[0], 13.78, 0.005], ["Un 2dp", U[1], 4.75, 0.005],
+  ["e3 la0", E3.ll0[0], 49.667, 0], ["e3 lo0", E3.ll0[1], -5.717, 0], ["e3 la6", E3.ll6[0], 50.516, 0], ["e3 lo6", E3.ll6[1], -1.505, 0],
+  ["e3 dy", E3.dy, 94.4, 0.05], ["e3 dx", E3.dx, 300.4, 0.05], ["mcos", E4.mcos, 0.906, 5e-4],
+  ...(E4.tu5 as number[]).map((v, i) => [`tu5 ${i}`, v, [11.4, 13.8, 14.6, 13.7, 11.3][i], 0.05] as [string, number, number, number]),
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -75,8 +81,25 @@ const S08: React.FC = () => {
         <Keyword f={f} text="towards 71°: east-north-east" at={[XC, 180]} appear={tBrg} s={T.floor} c={C.second} />
         <SpeedBar x={XC} y={770} />
       </Svg>
+      <CalcStack f={f} x={XC} y={250} size={44} maxLines={3} o={fout(f, t5 - 12)} rows={[
+        { rhs: String.raw`00\ \text{h}:\ 49.667^\circ\text{N},\ 5.717^\circ\text{W}`, at: t4, c: C.muted },
+        { rhs: String.raw`06\ \text{h}:\ 50.516^\circ\text{N},\ 1.505^\circ\text{W}`, at: t4 + 15, c: C.muted, cont: true },
+        { rhs: String.raw`\Delta y=6371\times0.849\times0.01745`, at: t4 + 35 },
+        { rhs: String.raw`\approx94.4\ \text{km}`, at: t4 + 50, cont: true },
+        { rhs: String.raw`\varphi_{\text{mid}}=(49.667+50.516)\div2`, at: t4 + 65, c: C.muted },
+        { rhs: String.raw`=50.09^\circ`, at: t4 + 75, c: C.muted, cont: true },
+        { rhs: String.raw`\Delta\lambda=4.212\times0.01745`, at: t4 + 90, c: C.muted },
+        { rhs: String.raw`=0.07350\ \text{rad}`, at: t4 + 100, c: C.muted, cont: true },
+        { rhs: String.raw`\Delta x=6371\times\cos50.09^\circ\times0.07350`, at: t4 + 115 },
+        { rhs: String.raw`\approx300.4\ \text{km}`, at: t4 + 135, cont: true },
+        { rhs: String.raw`\tan\beta=300.4\div94.4\approx3.18`, at: tBrg - 20 },
+        { rhs: String.raw`\Rightarrow\beta\approx72.6^\circ\ \text{on average}`, at: tBrg - 5, cont: true },
+        { rhs: String.raw`\text{at the start: }71^\circ`, at: tBrg + 10, c: C.muted, cont: true },
+        { rhs: String.raw`\sqrt{94.4^2+300.4^2}\approx315\ \text{km}`, at: tSp - 50 },
+        { rhs: String.raw`315\,000\ \text{m}\div21\,600\ \text{s}\approx14.6\ \text{m/s}`, at: tSp - 20, cont: true },
+      ]} />
       <CalcStack f={f} x={1270} y={250} size={48} maxLines={3} rows={[
-        { lhs: String.raw`|\mathbf U|`, rhs: String.raw`\approx14.6\ \text{m/s}\approx15`, at: tSp, c: C.second },
+        { lhs: String.raw`|\mathbf U|`, rhs: String.raw`\approx14.6\ \text{m/s}\approx15`, at: t5, c: C.second },
         { lhs: String.raw`\text{east}`, rhs: String.raw`=14.6\sin71^\circ\approx13.8`, at: AT(k, 5, "fourteen point six times sine") },
         { lhs: String.raw`\text{north}`, rhs: String.raw`=14.6\cos71^\circ\approx4.8`, at: AT(k, 6, "fourteen point six times cosine") },
       ]} />
@@ -188,12 +211,14 @@ const S10: React.FC = () => {
       <TeX s={String.raw`\mathbf v'`} x={OS[0] + sS[0] - 22} y={OS[1] + sS[1] + 8} size={46} c={C.key} ax={1} o={fin(f, sV)} halo />
       <Layered parts={parts} x={XC} y={330} size={58} layers={[{ t: [0], o: fin(f, t2) }, { t: [1], o: fin(f, t3) }]} />
       <CalcStack f={f} x={XC} y={480} size={44} maxLines={3} rows={[
-        { rhs: String.raw`\text{south: }\mathbf v=(13.5,\ 8.4)`, at: sG },
-        { rhs: String.raw`\mathbf v'=(13.5,\ 8.4)-(13.8,\ 4.8)`, at: sU },
-        { rhs: String.raw`\approx(-0.3,\ 3.7),\ \ |\mathbf v'|\approx3.7`, at: sV, c: C.key },
+        { rhs: String.raw`\text{south: }\mathbf v=(13.47,\ 8.44)`, at: sG },
+        { rhs: String.raw`\mathbf v'=(13.47,\ 8.44)-(13.78,\ 4.75)`, at: sU },
+        { rhs: String.raw`=(-0.31,\ 3.69)\approx(-0.3,\ 3.7)`, at: sV, c: C.key },
+        { rhs: String.raw`|\mathbf v'|=\sqrt{0.31^2+3.69^2}\approx3.7`, at: AT(k, 7, "a gentle"), c: C.key },
         { rhs: String.raw`\text{north: }\mathbf v=(-4.2,\ -5.3)`, at: nG },
         { rhs: String.raw`\mathbf v'=(-4.2,\ -5.3)-(13.8,\ 4.8)`, at: nU },
-        { rhs: String.raw`=(-18.0,\ -10.1),\ |\mathbf v'|\approx20.6`, at: nV, c: C.key },
+        { rhs: String.raw`=(-18.0,\ -10.1)`, at: nV, c: C.key },
+        { rhs: String.raw`|\mathbf v'|=\sqrt{324+102}\approx20.6`, at: AT(k, 10, "about twenty"), c: C.key },
       ]} />
       <SourceBelow text={SRC_CIA3} pic={S10P} w={540} name="s10 src" />
     </Scene>
@@ -208,6 +233,7 @@ const S11: React.FC = () => {
   const aS = prog(f, AT(k, 2, "drops from eighteen"), AT(k, 2, "drops from eighteen") + 60), aN = prog(f, AT(k, 4, "grows from seven"), AT(k, 4, "grows from seven") + 60);
   const vS = mix(SEC.S_g, SEC.S_s, aS), vN = mix(SEC.N_g, SEC.N_s, aN);
   const GX = { n: 1560, s: 1740 }, GY = { h: 230, g: 310, m: 390, r: 470 };
+  const oDot = win(f, AT(k, 1, "same way as the spin"), AT(k, 2, "about five") - 10), uU: Pt = [Math.sin(CI.brg * D2R) * 60, -Math.cos(CI.brg * D2R) * 60];
   const cell = (x: number, y: number, t: string, c: string, o: number) => <Lbl x={x} y={y} t={t} c={c} s={T.key} a="middle" o={o} />;
   return (
     <Scene>
@@ -219,6 +245,13 @@ const S11: React.FC = () => {
             <path d={sectorD(Pm, RG.south)} fill="none" stroke={C.gold} strokeWidth={16} opacity={0.5} />
             <path d={sectorD(Pm, RG.north)} fill="none" stroke={C.gold} strokeWidth={16} opacity={0.5} />
             {at(PTS.S.i, vS, aS > 0.5 ? C.key : C.first)}
+            {(E4.di as number[]).map((d, j) => { const n = RG.lat.length, i = (PTS.S.i + d + n) % n, p0 = ptOf(Pm, i), t = tanAt(Pm, i), o = oDot;
+              if (o <= 0) return null;
+              return <g key={d} opacity={o}>
+                <Arrow p={p0} q={[p0[0] + t[0] * 60, p0[1] + t[1] * 60]} color={C.key} w={5} head={18} halo={false} />
+                <Arrow p={p0} q={[p0[0] + uU[0], p0[1] + uU[1]]} color={C.second} w={5} head={18} halo={false} />
+                {j % 2 === 0 ? <Lbl x={p0[0] + 14} y={p0[1] + 52} t={(E4.tu5[j] as number).toFixed(1)} c={C.second} s={T.floor} /> : null}
+              </g>; })}
             {at(PTS.N.i, vN, aN > 0.5 ? C.key : C.first)}
           </>;
         }}
@@ -241,6 +274,12 @@ const S11: React.FC = () => {
         <Keyword f={f} text="rider: the storm's own shape" at={[XC, 790]} appear={t6} s={T.floor} />
         <Keyword f={f} text="a storm's own structure" at={[XC, 715]} appear={t7} s={T.floor} c={C.gold} />
       </Svg>
+      <CalcStack f={f} x={XC} y={520} size={44} maxLines={3} o={fout(f, AT(k, 2, "about five") - 10)} rows={[
+        { rhs: String.raw`\text{middle: }\mathbf U\cdot\hat{\boldsymbol\theta}=|\mathbf U|\approx14.6`, at: AT(k, 1, "same way as the spin") },
+        { rhs: String.raw`\text{out to }\pm45^\circ:\ \text{average }\cos\approx0.906`, at: AT(k, 1, "same way as the spin") + 40, c: C.muted },
+        { rhs: String.raw`14.6\times0.906\approx13.2`, at: AT(k, 1, "adds about thirteen") },
+      ]} />
+      <TeX s={String.raw`\text{north: against the spin}\approx-13.0`} x={XC} y={690} size={44} c={C.neg} o={win(f, AT(k, 3, "takes away about thirteen"), t5 - 22)} />
       <TeX s={String.raw`\text{south: }18.2-13.2\approx5.0`} x={XC} y={560} size={48} o={fin(f, AT(k, 2, "about five"))} />
       <TeX s={String.raw`\text{north: }6.9-(-13.0)\approx19.9`} x={XC} y={625} size={48} o={fin(f, AT(k, 4, "about twenty"))} />
       <SourceBelow text={SRC_CIA3} pic={CIA_PIC} w={920} name="s11 src" />

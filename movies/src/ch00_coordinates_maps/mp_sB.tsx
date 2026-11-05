@@ -23,7 +23,11 @@ const CHECK_B: [string, number, number, number][] = [
   ["step2", L9.step[1], 0.181, 5e-4], ["step3", L9.step[2], 0.193, 5e-4], ["tot2", L9.tot[1], 0.356, 5e-4], ["tot3 (0.356 + 0.193)", 0.356 + 0.193, 0.549, 1e-9],
   ["tot5", L9.tot[4], 1.01, 0.005], ["tot6", L9.tot[5], 1.31, 0.005], ["tot7", L9.tot[6], 1.73, 0.005], ["tot8", L9.tot[7], 2.4, 0.005], ["last", L9.step[8], 2, 0.01],
   ["km1", L9.step[0] * D.consts.a_km, 1116, 0.5], ["y60", LN.y60, 1.317, 5e-4], ["s1", LN.s1, 1.317, 5e-4], ["s10", LN.s10, 1.313, 5e-4], ["tan75", LN.tan75, 3.732, 5e-4],
-  ["tanB", LN.tanB, 2.632, 5e-4], ["yB", LN.yB, 0.968, 5e-4], ["yB 4", LN.yB, 0.9677, 5e-5], ["yBkm", LN.yB_km, 6165, 0.5], ["0.9677*6371", 0.9677 * 6371, 6165, 0.5],
+  ["tanB", LN.tanB_s, 2.6325, 5e-5], ["yB", LN.yB_s, 0.968, 5e-4], ["yBkm", LN.yB_s_km, 6167, 0.5], ["0.968*6371", 0.968 * 6371, 6167, 0.5], ["ln 2.6325", Math.log(2.6325), 0.968, 5e-4],
+  ["3.131*6371", 3.131 * 6371, 19950, 5], ["y85 4dp", SL.y85, 3.131, 5e-4], ["10/1013", 10 / 1013, 0.01, 5e-4],
+  ...[1.221, 1.414, 1.743, 2.366, 3.864].map((c, i) => [`sec ${35 + 10 * i}`, L9.sec[3 + i], c, 5e-4] as [string, number, number, number]),
+  ...[0.213, 0.247, 0.304, 0.413, 0.674].map((c, i) => [`step ${3 + i}`, L9.step[3 + i], c, 5e-4] as [string, number, number, number]),
+  ...[0.762, 1.009, 1.313, 1.726, 2.400].map((c, i) => [`run ${3 + i}`, L9.tot[3 + i], c, 1.1e-3] as [string, number, number, number]),
   ["y61", SL.y61, 1.3524, 5e-5], ["y59", SL.y59, 1.2826, 5e-5], ["slope", SL.slope, 2.0, 0.005], ["y85", SL.y85, 3.13, 0.005], ["y85km", SL.y85_km, 19950, 1],
   ["slant", D.rh.slant, 4.9, 0.02], ["areal60", D.areas.areal[0], 4, 1e-6], ["arealLYB", D.areas.areal[1], 24, 0.01], ["Af/Gl (cited)", 30.4 / 2.17, 14, 0.05],
   ["Af/Gl (ours)", AR.af_Mkm2 / AR.gl_Mkm2, 14, 0.1], ["omega", D.ee.omega60_30, 31, 0.5],
@@ -118,7 +122,12 @@ const S09: React.FC = () => {
   const blockAt = [r1, AT(k, 7, "the step is"), AT(k, 9, "the step is"), a50 - 20, a50, a60, a70, a80];
   const show = blockAt.map((a) => fin(f, a));
   const rowO = (a: number, next?: number) => fin(f, a) * (next !== undefined ? mix(1, 0.6, fin(f, next)) : 1);
-  const cell = (c: number, y: number, t: string, o: number, col: string = C.key) => <Lbl x={TCOL[c]} y={y} t={t} c={col} s={52} o={o} />;
+  const cell = (c: number, y: number, t: string, o: number, col: string = C.key) => <Lbl x={TCOL[c]} y={y} t={t} c={col} s={46} o={o} />;
+  // audit G1: the "speed up" rows 30-80° in full (step, middle, 1/cos, drawn, running total of the drawn steps shown)
+  const FAST = [["30–40°", "35°", "1.221", "0.213", "0.762"], ["40–50°", "45°", "1.414", "0.247", "1.009"], ["50–60°", "55°", "1.743", "0.304", "1.313"],
+    ["60–70°", "65°", "2.366", "0.413", "1.726"], ["70–80°", "75°", "3.864", "0.674", "2.400"]];
+  const fTot = [SS(k, 10) + 20, a50, a60, a70, a80], fRow = [SS(k, 10), a50 - 40, a60 - 40, a70 - 40, a80 - 40];
+  const RY = (i: number) => 415 + 52 * i;
   const SC: Pt = [560, 800], SR = 400;
   const sp = (a: number): Pt => [SC[0] + SR * Math.cos(a * D2R), SC[1] - SR * Math.sin(a * D2R)];
   return (
@@ -133,16 +142,16 @@ const S09: React.FC = () => {
         <Lbl x={TCOL[2]} y={360} t="1/cos" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         <Lbl x={TCOL[3]} y={360} t="drawn" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
         <Lbl x={TCOL[4]} y={360} t="total" c={C.muted} s={T.floor} b={false} o={fin(f, t5)} />
-        {cell(0, 425, "0–10°", rowO(t5, t7))}{cell(1, 425, "5°", rowO(AT(k, 5, "five degrees"), t7))}{cell(2, 425, "1.004", rowO(AT(k, 5, "one point zero zero four"), t7))}
-        {cell(3, 425, "0.175", rowO(r1, t7))}{cell(4, 425, "0.175", rowO(r1, t7), C.gold)}
-        {cell(0, 490, "10–20°", rowO(t7, t9))}{cell(1, 490, "15°", rowO(AT(k, 7, "fifteen"), t9))}{cell(2, 490, "1.035", rowO(AT(k, 7, "one point zero three five"), t9))}
-        {cell(3, 490, "0.181", rowO(AT(k, 7, "the step is"), t9))}{cell(4, 490, "0.356", rowO(t8, t9), C.gold)}
-        {cell(0, 555, "20–30°", rowO(t9, t11))}{cell(1, 555, "25°", rowO(t9, t11))}{cell(2, 555, "1.103", rowO(AT(k, 9, "one point one zero three"), t11))}
-        {cell(3, 555, "0.193", rowO(AT(k, 9, "the step is"), t11))}{cell(4, 555, "0.549", rowO(AT(k, 9, "the total"), t11), C.gold)}
-        {cell(0, 620, "up to 50°", rowO(a50, a60))}{cell(4, 620, "1.01", rowO(a50, a60), C.gold)}
-        {cell(0, 685, "up to 60°", rowO(a60, a70))}{cell(4, 685, "1.31", rowO(a60, a70), C.gold)}
-        {cell(0, 750, "up to 70°", rowO(a70, a80))}{cell(4, 750, "1.73", rowO(a70, a80), C.gold)}
-        {cell(0, 815, "up to 80°", rowO(a80))}{cell(4, 815, "2.4", rowO(a80), C.gold)}
+        {cell(0, RY(0), "0–10°", rowO(t5, t7))}{cell(1, RY(0), "5°", rowO(AT(k, 5, "five degrees"), t7))}{cell(2, RY(0), "1.004", rowO(AT(k, 5, "one point zero zero four"), t7))}
+        {cell(3, RY(0), "0.175", rowO(r1, t7))}{cell(4, RY(0), "0.175", rowO(r1, t7), C.gold)}
+        {cell(0, RY(1), "10–20°", rowO(t7, t9))}{cell(1, RY(1), "15°", rowO(AT(k, 7, "fifteen"), t9))}{cell(2, RY(1), "1.035", rowO(AT(k, 7, "one point zero three five"), t9))}
+        {cell(3, RY(1), "0.181", rowO(AT(k, 7, "the step is"), t9))}{cell(4, RY(1), "0.356", rowO(t8, t9), C.gold)}
+        {cell(0, RY(2), "20–30°", rowO(t9, t11))}{cell(1, RY(2), "25°", rowO(t9, t11))}{cell(2, RY(2), "1.103", rowO(AT(k, 9, "one point one zero three"), t11))}
+        {cell(3, RY(2), "0.193", rowO(AT(k, 9, "the step is"), t11))}{cell(4, RY(2), "0.549", rowO(AT(k, 9, "the total"), t11), C.gold)}
+        {FAST.map((r, i) => <g key={i}>
+          {r.slice(0, 4).map((t, c) => <g key={c}>{cell(c, RY(3 + i), t, rowO(fRow[i] + 8 * c, i < 4 ? fRow[i + 1] : undefined))}</g>)}
+          {cell(4, RY(3 + i), r[4], rowO(fTot[i], i < 4 ? fRow[i + 1] : undefined), C.gold)}
+        </g>)}
         <Lbl x={LX + 190} y={ladY(0.175) + 40} t="≈ 1116 km" c={C.first} s={T.floor} o={win(f, r1 + 20, t8)} />
         <Lbl x={LX + 190} y={110} t="≥ 2 more" c={C.gold} s={T.floor} o={fin(f, AT(k, 13, "at least two more"))} />
         <OptTag f={f} />
@@ -182,9 +191,9 @@ const S10: React.FC = () => {
           <line x1={lnX(Math.E)} y1={lnY(0)} x2={lnX(Math.E)} y2={lnY(1)} stroke={C.gold} strokeWidth={3} strokeDasharray="8 6" opacity={fin(f, t5)} />
         </g>
         <line x1={lad - 60} y1={yBr} x2={lad + 230} y2={yBr} stroke={C.gold} strokeWidth={6} opacity={fin(f, t15)} />
-        <Lbl x={lad - 70} y={yBr - 22} t="≈ 6165 km" c={C.gold} s={T.floor} a="end" o={fin(f, AT(k, 15, "about six thousand"))} />
+        <Lbl x={lad - 70} y={yBr - 22} t="≈ 6167 km" c={C.gold} s={T.floor} a="end" o={fin(f, AT(k, 15, "about six thousand"))} />
         <line x1={lad - 60} y1={yPc} x2={lad + 230} y2={yPc} stroke={C.local} strokeWidth={6} strokeDasharray="12 8" opacity={fin(f, t16)} />
-        <Lbl x={lad - 70} y={yPc + 30} t="5381 km" c={C.local} s={T.floor} a="end" o={fin(f, t16)} />
+        <Lbl x={lad - 70} y={yPc + 30} t="5382 km" c={C.local} s={T.floor} a="end" o={fin(f, t16)} />
         <OptTag f={f} />
         <Keyword f={f} text="an exact answer" at={[XC, 160]} appear={0} out={t1 - 18} />
         <Keyword f={f} text="natural logarithm: ln" at={[XC, 160]} appear={t1} out={t6 - 18} />
@@ -208,9 +217,9 @@ const S10: React.FC = () => {
         { rhs: String.raw`10^\circ\text{ steps: }1.313`, at: AT(k, 11, "one point three one three") },
         { rhs: String.raw`1^\circ\text{ steps: }1.317`, at: AT(k, 12, "one point three one seven") },
         { rhs: String.raw`45^\circ+24.2^\circ=69.2^\circ`, at: t13 },
-        { rhs: String.raw`\tan 69.2^\circ\approx2.632`, at: t14 },
-        { rhs: String.raw`\ln 2.632\approx0.968`, at: AT(k, 14, "its l n") },
-        { rhs: String.raw`0.9677\times6371\approx6165\ \text{km}`, at: t15, c: C.gold },
+        { rhs: String.raw`\tan 69.2^\circ\approx2.6325`, at: t14 },
+        { rhs: String.raw`\ln 2.6325\approx0.968`, at: AT(k, 14, "its l n") },
+        { rhs: String.raw`0.968\times6371\approx6167\ \text{km}`, at: AT(k, 15, "about six thousand") - 20, c: C.gold },
       ]} />
       <TeX s={String.raw`0.968\,a`} x={lad + 240} y={yBr} size={50} c={C.gold} o={fin(f, t15)} />
     </Scene>
@@ -278,7 +287,8 @@ const S11: React.FC = () => {
         { rhs: String.raw`y(59^\circ)/a\approx1.2826`, at: AT(k, 4, "one point two") },
         { rhs: String.raw`\frac{0.0698}{0.0349}\approx2.00`, at: AT(k, 6, "about two"), h: 120 },
         { rhs: String.raw`\tan 45^\circ=1,\ \ \ln1=0\ \Rightarrow\ y=0`, at: t10 + 30, size: 48 },
-        { rhs: String.raw`85^\circ:\ y\approx3.13\,a\approx19\,950\ \text{km}`, at: AT(k, 13, "about nineteen"), c: C.gold },
+        { rhs: String.raw`85^\circ:\ y\approx3.131\,a`, at: AT(k, 13, "three point one three"), c: C.gold },
+        { rhs: String.raw`3.131\times6371\approx19\,950\ \text{km}`, at: AT(k, 13, "about nineteen"), c: C.gold, cont: true },
       ]} />
       <TeX s={EQ_S11} x={XC} y={620} size={60} o={win(f, t7, t10 - 10)} />
       <SourceBelow text={SRC_BM} pic={mapBox(V11, "mc", 85)} w={760} o={mO} name="s11 src" />
@@ -355,6 +365,12 @@ const S12: React.FC = () => {
       <TeX s={eq12[0]} x={XC} y={250} size={56} o={win(f, t7, t12 - 18)} />
       <TeX s={"=" + eq12[1]} x={XC} y={360} size={56} o={win(f, t7 + 10, t12 - 18)} />
       <TeX s={String.raw`\frac{4.9\,k}{1\,k}=4.9`} x={XC} y={480} size={64} c={C.gold} o={win(f, t10, t12 - 18)} />
+      <CalcStack f={f} x={XC} y={560} size={44} maxLines={4} o={fout(f, t8 - 12)} rows={[
+        { rhs: String.raw`\text{check: }y=a\ln\tan(45^\circ+\varphi/2)`, at: t7, c: C.muted },
+        { rhs: String.raw`\text{London }1.0523\,a,\ \ \text{LA }0.6327\,a`, at: t7 + 30 },
+        { rhs: String.raw`\Delta y=-0.4196\,a,\ \ \Delta x=-2.0614\,a`, at: t7 + 60 },
+        { rhs: String.raw`2.0614\div0.4196\approx4.9\Rightarrow258.5^\circ`, at: AT(k, 7, "four point nine"), c: C.gold },
+      ]} />
       <SourceBelow text={SRC_BM} pic={{ x: G12.x, y: G12.y, w: G12.w, h: G12.h }} w={460} o={sO} gap={12} name="s12 src g" />
       <SourceBelow text={SRC_BM} pic={B12} w={440} o={sO} name="s12 src m" />
       <Svg><CurvedLink f={f} from={[400, 560]} to={[mix(G12.x, G12.x + G12.w, 0.4), 330]} start={t4 + 10} end={t8} bend={30} /></Svg>
@@ -466,6 +482,8 @@ const S14: React.FC = () => {
         <Keyword f={f} text="Mercator: the far north looks huge" at={[80, 80]} appear={t7} out={t8 - 18} />
         <Keyword f={f} text="Equal Earth: true size" at={[80, 80]} appear={t8} out={t9 - 18} />
         <Keyword f={f} text="the price: shape — angles off ≈ 31° at 60° N, 30° E" at={[80, 80]} appear={t9 + 10} out={t11 - 18} />
+        <Lbl x={80} y={770} t="31°: from the" c={C.muted} s={T.floor} b={false} o={win(f, AT(k, 10, "thirty one"), t11 - 18)} />
+        <Lbl x={80} y={825} t="Equal Earth formulas" c={C.muted} s={T.floor} b={false} o={win(f, AT(k, 10, "thirty one"), t11 - 18)} />
         <Keyword f={f} text="no flat map keeps both" at={[80, 80]} appear={t11} out={t12 - 18} />
         <Keyword f={f} text="pick the map for the job" at={[80, 80]} appear={t12} out={t13 - 18} c={C.gold} />
         <Keyword f={f} text="conformal → winds, directions · equal-area → amounts" at={[80, 80]} appear={t13} out={t14 - 18} />

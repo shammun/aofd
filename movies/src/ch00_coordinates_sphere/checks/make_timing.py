@@ -6,7 +6,11 @@ checks that every sentence time equals the storyboard's `sentence_times` (to 1 m
 voiceover (with "[beat]" removed) and that the total equals `target_duration_s`, and writes timing.json marked provisional (the
 final TTS of the heavy phase replaces it; the composition reads only scenes / sentences / total_frames).
 
-usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_sphere/checks/make_timing.py
+Calc & sync audit #5c (2026-11-05): the re-voiced sentences in checks/revoice.py (REVOICE) get ESTIMATED clip lengths (measured
+length x new/old characters) and everything after them shifts (revoice.apply); `--sync` first writes those estimated times into the
+storyboard (scene t, sentence_times, target_duration_s, dry_run.audio_s, chapter_marks, skip_blocks). The final TTS replaces it.
+
+usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_sphere/checks/make_timing.py [--sync]
 """
 from __future__ import annotations
 
@@ -17,6 +21,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import revoice  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[4]
 OUT = ROOT / "movies" / "ch00" / "ch00_coordinates_sphere"
 DRY = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/dryrun3/timing.json")
@@ -25,6 +32,10 @@ DRY = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordina
 def main() -> int:
     sb = yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))
     tm = json.loads(DRY.read_text(encoding="utf-8"))
+    shift = revoice.apply(tm)
+    if "--sync" in sys.argv:
+        revoice.sync(OUT / "storyboard.yaml", tm, target=tm["total_s"], audio_s=tm["total_s"])
+        sb = yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))
     bad = 0
     if [s["id"] for s in tm["scenes"]] != [s["id"] for s in sb["scenes"]]:
         print("FAIL scene ids differ between dry run 3 and the storyboard")
@@ -46,7 +57,10 @@ def main() -> int:
         print(f"make_timing: {bad} failure(s); timing.json NOT written")
         return 1
     keep = {k: tm[k] for k in ("voice", "speed", "fps", "sample_rate", "gaps", "scenes", "total_s", "total_frames", "cues", "warnings")}
-    keep["provisional"] = "copied from the measured dry run 3 (G:/.../ch00_coordinates_sphere/dryrun3) by checks/make_timing.py; the final TTS replaces it"
+    keep["provisional"] = ("copied from the measured dry run 3 (G:/.../ch00_coordinates_sphere/dryrun3) by checks/make_timing.py; "
+                           f"{len(tm.get('estimated_sentences', []))} re-voiced sentences ESTIMATED (calc & sync audit #5c, checks/revoice.py; shift {shift:+.3f} s); "
+                           "the final TTS replaces it")
+    keep["estimated_sentences"] = tm.get("estimated_sentences", [])
     (OUT / "timing.json").write_text(json.dumps(keep, indent=1, ensure_ascii=False), encoding="utf-8")
     n = sum(len(s["sentences"]) for s in tm["scenes"])
     print(f"make_timing: {len(tm['scenes'])} scenes, {n} sentences, total {tm['total_s']:.3f} s ({tm['total_frames']} frames); "

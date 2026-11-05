@@ -15,7 +15,7 @@ concepts:
 - 'the air parcel''s acceleration: local change + advection; each piece frame-dependent, the sum not'
 - storm-relative wind v' = v - U; ring means unchanged by a uniform shift (Storm Ciaran)
 - 'change of variables to a moving frame: tau, dp/dt = dp/dtau - U.grad p (Kundu (B.2.2)); a fixed barometer at Plymouth'
-target_duration_s: 1318.575
+target_duration_s: 1319.5477
 fps: 30
 size:
 - 1920
@@ -65,7 +65,7 @@ dry_run:
     splice3: 'G:\Geophysical Fluid Dynamics\aofd-data\scratch\movies\ch00_coordinates_frames\splice3 (the split: new titles, hooks, recaps, Part 5 opening)'
   method: every sentence clip length comes from one of the three runs (scene field measured.timing_source); times recomputed with the tools/tts.py gap rules (lead
     0.3, sentence 0.35, beat 1.5, scene 0.8, tail 0.3); the method reproduces dryrun1's total exactly
-  audio_s: 1318.575
+  audio_s: 1319.5477
   with_hold_s: 1321.075
   speech_s: 1198.28
   sentences: 193
@@ -167,13 +167,13 @@ skip_guidance:
     what: linking the barometer and the rider (D44)
     chip_scene: s14_tau_derive
     chip_sentence: 3
-    chip_at_s: 989.8
-    chip_at: '16:29'
+    chip_at_s: 990.7727
+    chip_at: '16:30'
     skip_to_scene: s14_tau_derive
     skip_to_sentence: 17
-    skip_to_s: 1082.75
-    skip_to: '18:02'
-    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 18:02
+    skip_to_s: 1083.7227
+    skip_to: '18:03'
+    chip_text: every step, for those who want it · not needed for weather, climate or GIS · skip to 18:03
     takeaway: 'If you skipped, here''s what to keep: what the barometer sees is the storm changing, minus the pattern sliding past.'
 scenes:
 - id: s00_title
@@ -717,60 +717,61 @@ scenes:
 - id: s07_sliding_pattern
   t:
   - 428.875
-  - 564.15
+  - 565.1227
   sentence_times:
   - - 428.875
     - 436.6
   - - 436.95
     - 442.975
   - - 443.325
-    - 455.425
-  - - 456.925
-    - 462.0
-  - - 462.35
-    - 466.9
-  - - 467.25
-    - 477.85
-  - - 478.2
-    - 488.725
-  - - 489.075
-    - 493.375
-  - - 494.875
-    - 500.7
-  - - 501.05
-    - 507.7
-  - - 508.05
-    - 518.45
-  - - 519.95
-    - 527.35
-  - - 528.85
-    - 536.575
-  - - 538.075
-    - 544.8
-  - - 545.15
-    - 549.225
-  - - 549.575
-    - 558.325
-  - - 558.675
-    - 563.35
+    - 455.7434
+  - - 457.2434
+    - 462.3184
+  - - 462.6684
+    - 467.2184
+  - - 467.5684
+    - 478.8227
+  - - 479.1727
+    - 489.6977
+  - - 490.0477
+    - 494.3477
+  - - 495.8477
+    - 501.6727
+  - - 502.0227
+    - 508.6727
+  - - 509.0227
+    - 519.4227
+  - - 520.9227
+    - 528.3227
+  - - 529.8227
+    - 537.5477
+  - - 539.0477
+    - 545.7727
+  - - 546.1227
+    - 550.1977
+  - - 550.5477
+    - 559.2977
+  - - 559.6477
+    - 564.3227
   beat: 'derivation D42 (4)-(6): a sliding pattern: each piece differs, the sum agrees (-4.0 + 5.4 = 1.4 = 0 + 1.4)'
   visual: 'Picture zone: a 1-D wind profile (teal curve, wind speed vs east distance, 0-400 km, ticks at 52 px) sliding right at 10 m/s, its shape unchanged; the
     chosen place marked by a fixed anemometer icon (slate) and a rider icon (orange) sharing the spot at this moment; a gold tangent on the curve ''0.111 m/s per
     km''. Two columns of numbers under ''rider'' and ''ground'' (house three-row grid, s19d pattern): ''local'' 0 | −4.0, ''advection'' +1.4 | +5.4, ''sum'' +1.4
     | +1.4 (m/s per hour), each number gold-linked to its factor (speed or slope) in the picture. TimeGraph inset: the anemometer''s wind falling, the parcel''s wind
     rising, over one hour. Labels sit beside bars and curves, never on them.'
-  voiceover: 'Picture a pattern of stronger and weaker winds, two hundred kilometres from one gust to the next, all blowing east. The whole pattern slides east at
-    a steady ten metres per second, without changing its shape. Take one moment, at a place where the wind is thirteen and a half metres per second, and is getting
-    stronger towards the east by zero point one one one metres per second for every kilometre. [beat] First, ride with the pattern, at capital U, ten metres per second.
-    To you, the pattern is frozen, so the local change is zero. Relative to you, the air at that place moves east at thirteen and a half minus ten: three and a half
-    metres per second, or twelve point seven kilometres per hour. It''s carried into stronger wind, so the advection is twelve point seven kilometres per hour, times
-    zero point one one one metres per second per kilometre. That''s plus one point four metres per second, every hour. [beat] Now stand on the ground, beside an anemometer,
-    a wind meter that never moves. The pattern slides past at thirty six kilometres per hour, bringing the weaker wind from the west. So the anemometer sees a local
-    change of minus thirty six times zero point one one one: minus four point zero metres per second, every hour. [beat] The advection, with the full wind of forty
-    eight point seven kilometres per hour, is plus five point four. [beat] Add them: minus four point zero, plus five point four, is plus one point four, the same
-    as for the rider. [beat] So each piece depends on who measures it, but their sum, the air parcel''s acceleration, doesn''t. That only works for a frame moving
-    steadily in a straight line. A frame that turns, like the spinning Earth, adds the Coriolis and centrifugal effects, as we saw in the cross product movies. We''ll
-    build all of this fully in a later movie: The material derivative.'
+  voiceover: 'Picture a pattern of stronger and weaker winds, two hundred kilometres from one gust to the next, all blowing east. The whole pattern slides
+    east at a steady ten metres per second, without changing its shape. Take one moment, at a place where the wind is thirteen point five four metres per
+    second, and is getting stronger towards the east by zero point one one one metres per second for every kilometre. [beat] First, ride with the pattern,
+    at capital U, ten metres per second. To you, the pattern is frozen, so the local change is zero. Relative to you, the air at that place moves east at
+    thirteen point five four minus ten: three point five four metres per second, or twelve point seven kilometres per hour. It''s carried into stronger wind,
+    so the advection is twelve point seven kilometres per hour, times zero point one one one metres per second per kilometre. That''s plus one point four
+    metres per second, every hour. [beat] Now stand on the ground, beside an anemometer, a wind meter that never moves. The pattern slides past at thirty
+    six kilometres per hour, bringing the weaker wind from the west. So the anemometer sees a local change of minus thirty six times zero point one one one:
+    minus four point zero metres per second, every hour. [beat] The advection, with the full wind of forty eight point seven kilometres per hour, is plus
+    five point four. [beat] Add them: minus four point zero, plus five point four, is plus one point four, the same as for the rider. [beat] So each piece
+    depends on who measures it, but their sum, the air parcel''s acceleration, doesn''t. That only works for a frame moving steadily in a straight line. A
+    frame that turns, like the spinning Earth, adds the Coriolis and centrifugal effects, as we saw in the cross product movies. We''ll build all of this
+    fully in a later movie: The material derivative.'
   on_screen_eq:
     latex: \frac{\partial u}{\partial t}+u\,\frac{\partial u}{\partial x}=\frac{\partial u'}{\partial t'}+u'\,\frac{\partial u'}{\partial x'}
     vallis_eq: none in Vallis; Kundu (3.9), one-dimensional form
@@ -837,25 +838,25 @@ scenes:
     timing_source: dryrun1
 - id: s08_ciaran
   t:
-  - 564.15
-  - 628.4
+  - 565.1227
+  - 629.3727
   sentence_times:
-  - - 564.15
-    - 566.35
-  - - 566.7
-    - 573.75
-  - - 574.1
-    - 582.675
-  - - 583.025
-    - 592.175
-  - - 593.675
-    - 605.575
-  - - 607.075
-    - 615.575
-  - - 615.925
-    - 622.625
-  - - 624.125
-    - 627.6
+  - - 565.1227
+    - 567.3227
+  - - 567.6727
+    - 574.7227
+  - - 575.0727
+    - 583.6477
+  - - 583.9977
+    - 593.1477
+  - - 594.6477
+    - 606.5477
+  - - 608.0477
+    - 616.5477
+  - - 616.8977
+    - 623.5977
+  - - 625.0977
+    - 628.5727
   beat: 'application: Storm Ciaran, tracked by continuity; U = 14.6 m/s towards 71°'
   visual: 'Real map (LCC, 44-58 N, 15 W-5 E) of ERA5 10-m wind speed (perceptual LUT 0-30 m/s, colour bar beside the map in the column) and isobars every 4 hPa, 1-2
     Nov 2023, animated hourly 21 -> 06 UTC while S2-S3 speak, with the tracked centre (gold dots, one per hour) and the house clock glyph; ''Cornwall'' label on S3;
@@ -901,23 +902,23 @@ scenes:
     timing_source: dryrun1
 - id: s09_lopsided
   t:
-  - 628.4
-  - 675.95
+  - 629.3727
+  - 676.9227
   sentence_times:
-  - - 628.4
-    - 634.425
-  - - 634.775
-    - 640.875
-  - - 641.225
-    - 651.05
-  - - 652.55
-    - 654.6
-  - - 654.95
-    - 660.475
-  - - 660.825
-    - 667.85
-  - - 668.2
-    - 675.15
+  - - 629.3727
+    - 635.3977
+  - - 635.7477
+    - 641.8477
+  - - 642.1977
+    - 652.0227
+  - - 653.5227
+    - 655.5727
+  - - 655.9227
+    - 661.4477
+  - - 661.7977
+    - 668.8227
+  - - 669.1727
+    - 676.1227
   beat: 'application: ground-relative round winds, south ≈ 18, north ≈ 7 (why lopsided)'
   visual: 'Map frozen at 03 UTC; the 200-km ring (teal), the south and north sectors (±45° about the right/left of the track) highlighted as bands; readouts ''≈ 18
     m/s'' (south) and ''≈ 7 m/s'' (north) in the column, north row above south row (Must 13), each with a gold link to its band leaving from the readout''s left edge
@@ -957,33 +958,33 @@ scenes:
     timing_source: dryrun1
 - id: s10_storm_relative
   t:
-  - 675.95
-  - 755.975
+  - 676.9227
+  - 756.9477
   sentence_times:
-  - - 675.95
-    - 682.675
-  - - 683.025
-    - 685.7
-  - - 686.05
-    - 693.375
-  - - 693.725
-    - 698.425
-  - - 699.925
-    - 705.8
-  - - 706.15
-    - 709.425
-  - - 709.775
-    - 714.975
-  - - 715.325
-    - 727.575
-  - - 729.075
-    - 732.45
-  - - 732.8
-    - 738.35
-  - - 738.7
-    - 749.7
-  - - 751.2
-    - 755.175
+  - - 676.9227
+    - 683.6477
+  - - 683.9977
+    - 686.6727
+  - - 687.0227
+    - 694.3477
+  - - 694.6977
+    - 699.3977
+  - - 700.8977
+    - 706.7727
+  - - 707.1227
+    - 710.3977
+  - - 710.7477
+    - 715.9477
+  - - 716.2977
+    - 728.5477
+  - - 730.0477
+    - 733.4227
+  - - 733.7727
+    - 739.3227
+  - - 739.6727
+    - 750.6727
+  - - 752.1727
+    - 756.1477
   beat: 'derivation D43: v'' = v − U; arrow subtraction at two points with numbers'
   visual: 'Two insets beside the frozen map (picture zone split top/bottom: north point above, south point below, Must 13), each with: the ground wind (teal), the
     storm velocity U (orange), −U drawn tip-to-tail from the ground arrow''s tip (orange dashed), and the result v′ (warm white) closing the triangle; a component
@@ -1061,25 +1062,25 @@ scenes:
     timing_source: dryrun1
 - id: s11_round_parts
   t:
-  - 755.975
-  - 815.125
+  - 756.9477
+  - 816.0977
   sentence_times:
-  - - 755.975
-    - 760.35
-  - - 760.7
-    - 769.65
-  - - 770.0
-    - 775.1
-  - - 776.6
-    - 782.675
-  - - 783.025
-    - 788.275
-  - - 789.775
-    - 796.125
-  - - 796.475
-    - 804.375
-  - - 804.725
-    - 814.325
+  - - 756.9477
+    - 761.3227
+  - - 761.6727
+    - 770.6227
+  - - 770.9727
+    - 776.0727
+  - - 777.5727
+    - 783.6477
+  - - 783.9977
+    - 789.2477
+  - - 790.7477
+    - 797.0977
+  - - 797.4477
+    - 805.3477
+  - - 805.6977
+    - 815.2977
   beat: 'D43 (4): the round parts per side, ground vs rider (18 -> 5, 7 -> 20); pointer U13'
   visual: 'A three-row grid (house s19d pattern) in the column: rows ''ground'', ''storm''s motion'', ''rider'' × columns ''north side'' (top) and ''south side'':
     6.9 | 18.2; −13.0 | +13.2; 19.9 | 5.0 (m/s, the motion row orange, signs with ''−'' glyphs and rose for negative). Picture zone: the ring with sector bands; the
@@ -1122,31 +1123,31 @@ scenes:
     timing_source: dryrun1
 - id: s12_invariant
   t:
-  - 815.125
-  - 887.625
+  - 816.0977
+  - 888.5977
   sentence_times:
-  - - 815.125
-    - 817.85
-  - - 818.2
-    - 822.275
-  - - 822.625
-    - 833.55
-  - - 835.05
-    - 840.15
-  - - 841.65
-    - 843.65
-  - - 844.0
-    - 855.3
-  - - 855.65
-    - 858.975
-  - - 859.325
-    - 866.975
-  - - 868.475
-    - 873.65
-  - - 874.0
-    - 878.15
-  - - 878.5
-    - 886.825
+  - - 816.0977
+    - 818.8227
+  - - 819.1727
+    - 823.2477
+  - - 823.5977
+    - 834.5227
+  - - 836.0227
+    - 841.1227
+  - - 842.6227
+    - 844.6227
+  - - 844.9727
+    - 856.2727
+  - - 856.6227
+    - 859.9477
+  - - 860.2977
+    - 867.9477
+  - - 869.4477
+    - 874.6227
+  - - 874.9727
+    - 879.1227
+  - - 879.4727
+    - 887.7977
   beat: 'intuition: ring averages unchanged (14.1 vs 13.8; −6.0 vs −5.9); the uniform-wind picture; Brest gust 84 kt (build-1 s44, kept)'
   visual: 'Two rings side by side (ground left, rider right) at 03 UTC with their arrows; under each ring the ring-mean round ''≈ 14 m/s'' and ring-mean inflow ''≈
     −6 m/s'' (rose, ''−'' glyph) on S2-S3, gold ''same'' links between the pairs. S5: a uniform arrow field (orange) on a circle, its round parts plus on one side
@@ -1188,41 +1189,41 @@ scenes:
     timing_source: dryrun1
 - id: s13_tau
   t:
-  - 887.625
-  - 984.75
+  - 888.5977
+  - 985.7227
   sentence_times:
-  - - 887.625
-    - 892.125
-  - - 892.475
-    - 895.7
-  - - 896.05
-    - 901.6
-  - - 901.95
-    - 910.225
-  - - 910.575
-    - 916.5
-  - - 916.85
-    - 920.15
-  - - 920.5
-    - 923.35
-  - - 923.7
-    - 930.525
-  - - 930.875
-    - 934.225
-  - - 935.725
-    - 940.95
-  - - 941.3
-    - 949.725
-  - - 950.075
-    - 954.0
-  - - 954.35
-    - 961.15
-  - - 961.5
-    - 969.3
-  - - 970.8
-    - 975.525
-  - - 975.875
-    - 983.95
+  - - 888.5977
+    - 893.0977
+  - - 893.4477
+    - 896.6727
+  - - 897.0227
+    - 902.5727
+  - - 902.9227
+    - 911.1977
+  - - 911.5477
+    - 917.4727
+  - - 917.8227
+    - 921.1227
+  - - 921.4727
+    - 924.3227
+  - - 924.6727
+    - 931.4977
+  - - 931.8477
+    - 935.1977
+  - - 936.6977
+    - 941.9227
+  - - 942.2727
+    - 950.6977
+  - - 951.0477
+    - 954.9727
+  - - 955.3227
+    - 962.1227
+  - - 962.4727
+    - 970.2727
+  - - 971.7727
+    - 976.4977
+  - - 976.8477
+    - 984.9227
   beat: 'building block D44 (1): two observers; tau defined; what ∂p/∂τ means'
   visual: 'Map (as s08, isobars only + msl shading with colour bar 950-1010 hPa beside it) at 23 UTC -> 01 UTC: a frozen-pattern ghost (slate, the 23 UTC isobars
     slid along U by 1 h and 2 h) beside the real field (warm white); a fixed barometer icon (PoleThermometer style, slate) at ''Plymouth'', labelled within 1 s of
@@ -1277,43 +1278,43 @@ scenes:
     timing_source: dryrun1
 - id: s14_tau_derive
   t:
-  - 984.75
-  - 1091.525
+  - 985.7227
+  - 1092.4977
   sentence_times:
-  - - 984.75
-    - 986.9
-  - - 987.25
-    - 989.45
-  - - 989.8
-    - 997.075
-  - - 997.425
-    - 1002.2
-  - - 1002.55
-    - 1012.65
-  - - 1013.0
-    - 1019.875
-  - - 1021.375
-    - 1026.525
-  - - 1026.875
-    - 1034.775
-  - - 1036.275
-    - 1041.15
-  - - 1041.5
-    - 1049.225
-  - - 1050.725
-    - 1052.9
-  - - 1053.25
-    - 1056.25
-  - - 1056.6
-    - 1060.075
-  - - 1060.425
-    - 1068.95
-  - - 1069.3
-    - 1075.775
-  - - 1076.125
-    - 1081.25
-  - - 1082.75
-    - 1090.725
+  - - 985.7227
+    - 987.8727
+  - - 988.2227
+    - 990.4227
+  - - 990.7727
+    - 998.0477
+  - - 998.3977
+    - 1003.1727
+  - - 1003.5227
+    - 1013.6227
+  - - 1013.9727
+    - 1020.8477
+  - - 1022.3477
+    - 1027.4977
+  - - 1027.8477
+    - 1035.7477
+  - - 1037.2477
+    - 1042.1227
+  - - 1042.4727
+    - 1050.1977
+  - - 1051.6977
+    - 1053.8727
+  - - 1054.2227
+    - 1057.2227
+  - - 1057.5727
+    - 1061.0477
+  - - 1061.3977
+    - 1069.9227
+  - - 1070.2727
+    - 1076.7477
+  - - 1077.0977
+    - 1082.2227
+  - - 1083.7227
+    - 1091.6977
   beat: 'derivation D44 (2)-(4): the traveller''s chain rule -> ∂p/∂t = ∂p/∂τ − U·∇p; every term read'
   visual: 'Column builds D44 one row per step: the derivatives movie''s traveller line (68 px, faint), the rider''s version, the move across the ''='' (a gold arrow
     carrying U·∇p to the other side, its sign flipping on arrival), the result (96 px) with underbraces ''barometer'' (slate), ''storm changing'' (orange), ''pattern
@@ -1390,27 +1391,27 @@ scenes:
     timing_source: splice2
 - id: s15_plymouth
   t:
-  - 1091.525
-  - 1173.475
+  - 1092.4977
+  - 1174.4477
   sentence_times:
-  - - 1091.525
-    - 1094.675
-  - - 1095.025
-    - 1105.35
-  - - 1105.7
-    - 1119.175
-  - - 1120.675
-    - 1126.425
-  - - 1126.775
-    - 1134.6
-  - - 1136.1
-    - 1143.15
-  - - 1143.5
-    - 1153.75
-  - - 1155.25
-    - 1164.325
-  - - 1164.675
-    - 1171.975
+  - - 1092.4977
+    - 1095.6477
+  - - 1095.9977
+    - 1106.3227
+  - - 1106.6727
+    - 1120.1477
+  - - 1121.6477
+    - 1127.3977
+  - - 1127.7477
+    - 1135.5727
+  - - 1137.0727
+    - 1144.1227
+  - - 1144.4727
+    - 1154.7227
+  - - 1156.2227
+    - 1165.2977
+  - - 1165.6477
+    - 1172.9477
   beat: 'application D44 (5): Plymouth numbers: −3.8, slope 0.061 hPa/km, U·∇p = 3.2, ∂p/∂τ = −0.6'
   visual: 'Map at 00 UTC (as s13) with Plymouth''s barometer, the tracked centre (''954.5 hPa'', gold), the distance bracket ''≈ 123 km'' and the pressure-gradient
     arrow at Plymouth (slate) next to the motion arrow U (orange), the small angle between them drawn. A TimeGraph inset under the map: Plymouth''s pressure 23-01
@@ -1487,23 +1488,23 @@ scenes:
     timing_source: dryrun1
 - id: s16_meaning
   t:
-  - 1173.475
-  - 1225.075
+  - 1174.4477
+  - 1226.0477
   sentence_times:
-  - - 1173.475
-    - 1183.375
-  - - 1184.875
-    - 1188.825
-  - - 1189.175
-    - 1192.175
-  - - 1192.525
-    - 1194.175
-  - - 1194.525
-    - 1210.15
-  - - 1211.65
-    - 1216.4
-  - - 1216.75
-    - 1224.275
+  - - 1174.4477
+    - 1184.3477
+  - - 1185.8477
+    - 1189.7977
+  - - 1190.1477
+    - 1193.1477
+  - - 1193.4977
+    - 1195.1477
+  - - 1195.4977
+    - 1211.1227
+  - - 1212.6227
+    - 1217.3727
+  - - 1217.7227
+    - 1225.2477
   beat: 'meaning: −3.8 = −0.6 − 3.2 (Balance bars, Must 14 redesign); the centre check; pointers'
   visual: 'Picture zone (full height, x 80-1000): house Balance bars on a zero line, wide spacing: ''−3.8'' total (slate), ''−0.6 storm changing'' (orange), ''−3.2
     pattern sliding past'' (teal), each value label placed BESIDE its bar (to the right, x >= bar end + 24 px), never on or over a bar; the unit ''hPa per hour''
@@ -1549,29 +1550,29 @@ scenes:
     timing_source: dryrun1
 - id: s17_recap
   t:
-  - 1225.075
-  - 1295.675
+  - 1226.0477
+  - 1296.6477
   sentence_times:
-  - - 1225.075
-    - 1236.925
-  - - 1237.275
-    - 1243.925
-  - - 1244.275
-    - 1249.5
-  - - 1249.85
-    - 1253.9
-  - - 1254.25
-    - 1259.375
-  - - 1259.725
-    - 1267.8
-  - - 1268.15
-    - 1275.3
-  - - 1275.65
-    - 1281.425
-  - - 1281.775
-    - 1288.425
-  - - 1288.775
-    - 1294.875
+  - - 1226.0477
+    - 1237.8977
+  - - 1238.2477
+    - 1244.8977
+  - - 1245.2477
+    - 1250.4727
+  - - 1250.8227
+    - 1254.8727
+  - - 1255.2227
+    - 1260.3477
+  - - 1260.6977
+    - 1268.7727
+  - - 1269.1227
+    - 1276.2727
+  - - 1276.6227
+    - 1282.3977
+  - - 1282.7477
+    - 1289.3977
+  - - 1289.7477
+    - 1295.8477
   beat: recap ('To sum up'); last sentence the teaser to Part 6, Routes
   visual: 'One beat per sentence, mini pictures reused (no headings): the train with ''x = x′ + U t'', ''u = u′ + U''; the falling ball ''same 9.8''; the three-row
     grid ''−4.0 + 5.4 = 0 + 1.4''; Ciaran with U ''≈ 15 m/s''; the arrow subtraction triangle; the two rings ''≈ 14''; the Plymouth bars ''−3.8 = −0.6 − 3.2''; a
@@ -1605,15 +1606,15 @@ scenes:
     timing_source: splice3
 - id: s18_end
   t:
-  - 1295.675
-  - 1318.575
+  - 1296.6477
+  - 1319.5477
   sentence_times:
-  - - 1295.675
-    - 1301.875
-  - - 1302.225
-    - 1310.275
-  - - 1310.625
-    - 1318.275
+  - - 1296.6477
+    - 1302.8477
+  - - 1303.1977
+    - 1311.2477
+  - - 1311.5977
+    - 1319.2477
   beat: 'series end card (maths ending, HOUSE_STYLE §3, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the train with two rulers, the arrow-subtraction triangle, Ciaran''s ring
     with U, the Plymouth barometer); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook icon ''coordinates

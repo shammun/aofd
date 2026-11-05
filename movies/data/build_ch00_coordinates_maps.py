@@ -172,7 +172,14 @@ def main() -> int:
     row("DM16", "screen: 48.39° = 0.8446 rad, −4.49° = −0.0784 rad; 6371 × −0.0784 ≈ −500; 6371 × 0.8446 ≈ 5381", [BREST[0] * D2R, BREST[1] * D2R, 6371 * -0.0784, 6371 * 0.8446],
         [0.8446, -0.0784, -499.5, 5380.9], [5e-5, 5e-5, 0.05, 0.05])
     row("DM16", "2πa = 40 030 km ('about forty thousand'); 30° of the equator = 3336 km", [2 * np.pi * A_KM, 2 * np.pi * A_KM / 12], [40030.2, 3335.8], [0.05, 0.05])
-    V["pc"] = {"brest_km": [xB, yB], "brest_rad": [BREST[0] * D2R, BREST[1] * D2R], "eq_km": 2 * np.pi * A_KM, "tick_km": 2 * np.pi * A_KM / 12}
+    BS = (48.4, -4.5)       # the spoken Brest (Part 3's 48.4 N, 4.5 W; coordinator 2026-11-05: 5382 / 6167 in every part)
+    xS, yS = call(GM + "forward", "s04", "plate carrée at the spoken Brest (48.4 N, 4.5 W)", name="platecarree", lat=BS[0], lon=BS[1], a=A_KM * 1e3)
+    xS, yS = float(xS) / 1e3, float(yS) / 1e3
+    row("DM16", "audit G2: 48.4 × π/180 = 0.84474 ≈ 0.8447 rad, −4.5 × π/180 = −0.07854 ≈ −0.0785; 6371 × −0.0785 = −500.1 ≈ −500; 6371 × 0.8447 = 5381.6 ≈ 5382 (exact 5381.8, Part 3 s23)",
+        [BS[0] * D2R, BS[1] * D2R, 6371 * -0.0785, 6371 * 0.8447, xS, yS], [0.8447, -0.0785, -500.1, 5381.6, -500.4, 5381.8], [5e-5, 5e-5, 0.05, 0.05, 0.05, 0.05])
+    truth("DM16", "audit G2 roundings: 5381.6 and 5381.8 → 5382; −500.1 → −500", round(6371 * 0.8447) == 5382 and round(yS) == 5382 and round(6371 * -0.0785) == -500)
+    V["pc"] = {"brest_km": [xB, yB], "brest_rad": [BREST[0] * D2R, BREST[1] * D2R], "eq_km": 2 * np.pi * A_KM, "tick_km": 2 * np.pi * A_KM / 12,
+               "brest_s": list(BS), "brest_s_km": [xS, yS], "brest_s_rad": [BS[0] * D2R, BS[1] * D2R]}
 
     # ================================================================ s05 k = 1/cos φ (DM17) + Tissot (DC32b)
     lat3 = np.array([BREST[0], 60.0, LYB[0]])
@@ -247,6 +254,15 @@ def main() -> int:
         [0.1745, 0.1752, 1116.2, 0.356, 0.549], [5e-5, 5e-4, 0.1, 1e-9, 1e-9])
     truth("DM20", "each 10° midpoint total lies below ln tan by 0.1-1.6 % up to 80°", bool(np.all((tot[:8] < np.asarray(psi)) & (np.asarray(psi) - tot[:8] < 0.016 * np.asarray(psi)))),
           B1.r6(100 * (np.asarray(psi) - tot[:8]) / np.asarray(psi), 2))
+    st3 = [round(float(x), 3) for x in steps[:8]]
+    run3 = list(np.round(np.cumsum(st3), 3))
+    row("DM20", "audit G1 table rows 30-80°: 1/cos 35° 45° 55° 65° 75° = 1.221 1.414 1.743 2.366 3.864; drawn 0.213 0.247 0.304 0.413 0.674",
+        [*(1 / np.cos(mids[3:8] * D2R)), *steps[3:8]], [1.221, 1.414, 1.743, 2.366, 3.864, 0.2131, 0.2468, 0.3043, 0.4130, 0.6743], [5e-4] * 5 + [5e-5] * 5)
+    row("DM20", "audit G1: 0.1745 × the shown 1/cos = the shown drawn step (to 3 dp): 0.213, 0.247, 0.304, 0.413, 0.674",
+        [round(0.1745 * c, 3) for c in (1.221, 1.414, 1.743, 2.366, 3.864)], [0.213, 0.247, 0.304, 0.413, 0.674], 1e-9)
+    row("DM20", "audit G1: the shown running totals = sums of the shown steps: 0.175 0.356 0.549 0.762 1.009 1.313 1.726 2.400 (exact 1.0084 → said 'one point zero one')",
+        run3, [0.175, 0.356, 0.549, 0.762, 1.009, 1.313, 1.726, 2.400], 1e-9)
+    row("DM20", "audit G1: each shown total within 0.001 of the exact running total", np.abs(np.asarray(run3) - tot[:8]), [0] * 8, 1.1e-3)
     V["ladder"] = {"mid": list(mids), "sec": list(1 / np.cos(mids * D2R)), "step": list(steps), "tot": list(tot), "psi": list(np.asarray(psi))}
 
     # ================================================================ s10 ln tan (DM21)
@@ -257,10 +273,13 @@ def main() -> int:
     row("DM21", "screen: e = 2.718; tan 75° = 3.732; ln 3.732 = 1.317; 45 + 24.2 = 69.2; tan 69.2° = 2.632; ln 2.632 = 0.968",
         [np.e, np.tan(75 * D2R), np.log(3.732), 45 + BREST[0] / 2, np.tan((45 + BREST[0] / 2) * D2R), np.log(2.632)], [2.718, 3.732, 1.317, 69.2, 2.632, 0.968],
         [5e-4, 5e-4, 5e-4, 0.01, 5e-4, 5e-4])
-    flag("F2", "s10_ln_formula", "Brest height in km", "'0.968 × 6371 ≈ 6165' (screen row and voice 'about six thousand one hundred and sixty five')",
-         f"0.968 × 6371 = {0.968 * 6371:.1f}; the exact 0.96768 × 6371 = {yB * A_KM:.1f}",
-         "voice kept ('6165' from the unrounded ln); the SCREEN row writes '0.9677 × 6371 ≈ 6165' (hand check 6165.2) instead of the storyboard's '0.968 × 6371 ≈ 6165' (hand check 6167)")
-    V["ln"] = {"y60": y60, "s1": s1, "s10": float(tot[5]), "yB": yB, "yB_km": yB * A_KM, "tan75": float(np.tan(75 * D2R)), "tanB": float(np.tan((45 + BREST[0] / 2) * D2R))}
+    MPS = call(GM + "forward", "s10", "Mercator y at the spoken Brest 48.4 N (a = 1)", name="mercator", lat=48.4, lon=0.0, a=1.0)
+    yBs = float(np.asarray(MPS[1]))
+    row("DM21", "audit G3: tan 69.2° = 2.6325; ln 2.6325 = 0.96794 ≈ 0.968; 0.968 × 6371 = 6167.1 ≈ 6167 (exact 0.96794 × 6371 = 6166.8; coordinator 6167)",
+        [np.tan(69.2 * D2R), np.log(2.6325), yBs, 0.968 * 6371, yBs * A_KM], [2.6325, 0.96794, 0.96794, 6167.1, 6166.8], [5e-5, 5e-5, 5e-5, 0.05, 0.05])
+    truth("DM21", "audit G3 roundings: 6167.1 and 6166.8 → 6167; ln 2.6325 → 0.968", round(0.968 * 6371) == 6167 and round(yBs * A_KM) == 6167 and round(np.log(2.6325), 3) == 0.968)
+    V["ln"] = {"y60": y60, "s1": s1, "s10": float(tot[5]), "yB": yB, "yB_km": yB * A_KM, "tan75": float(np.tan(75 * D2R)), "tanB": float(np.tan((45 + BREST[0] / 2) * D2R)),
+               "yB_s": yBs, "yB_s_km": yBs * A_KM, "tanB_s": float(np.tan(69.2 * D2R))}
 
     # ================================================================ s11 slope check (DM22)
     y61, y59, y85 = (float(MP.forward("mercator", la_, 0.0, a=1.0)[1]) for la_ in (61.0, 59.0, 85.0))
@@ -277,6 +296,10 @@ def main() -> int:
     resid = float(np.max(np.abs(np.polyval(np.polyfit(xr_, yr_, 1), xr_) - yr_)))
     row("DM23", "tan(258.49° − 180°) = 4.91 west per 1 south; stretch 1/cos 40° = 1.31, 1/cos 50° = 1.56; rhumb residual from a straight line on Mercator",
         [np.tan((rh_b - 180) * D2R), np.asarray(SF45.k)[0], np.asarray(SF45.k)[1], resid], [4.91, 1.305, 1.556, 0.0], [0.01, 5e-4, 5e-4, 1e-9])
+    yL_, yA_ = np.log(np.tan((45 + LON[0] / 2) * D2R)), np.log(np.tan((45 + LAX[0] / 2) * D2R))
+    row("DM22", "audit G4 (cross-check of Part 6): y/a London 1.0523, LA 0.6327; Δy/a −0.4196; Δx/a = −118.11° = −2.0614; 2.0614 / 0.4196 = 4.913 ≈ 4.9 → 78.49° → 258.5°",
+        [yL_, yA_, yA_ - yL_, (LAX[1] - LON[1]) * D2R, 2.0614 / 0.4196, np.degrees(np.arctan(2.0614 / 0.4196)) + 180, rh_b],
+        [1.0523, 0.6327, -0.4196, -2.0614, 4.913, 258.49, 258.49], [5e-5, 5e-5, 5e-5, 5e-5, 5e-4, 0.005, 0.005])
     V["rh"] = {"slant": float(np.tan((rh_b - 180) * D2R)), "k40": float(np.asarray(SF45.k)[0]), "k50": float(np.asarray(SF45.k)[1])}
 
     # ================================================================ s13 areas (DM24, DC34)
@@ -496,6 +519,9 @@ def main() -> int:
     truth("DC36", "the vortex centre is over the sea (the Barents Sea; NE 50 m land)", not onl)
     dpole = float(call(GS + "great_circle_distance", "s21", "vortex centre to the pole", lat1=vlat, lon1=vlon, lat2=90.0, lon2=0.0)) / 1e3
     row("DC37", "centre to pole 1902 km ('about one thousand nine hundred')", dpole, 1902, 3)
+    row("DC37", "audit G5: (90 − 72.9) × 111.2 = 1901.5 ≈ 1900 km; 33 / 17.5 = 1.89 ≈ 1.9; 20 / 47 = 0.43 ≈ 0.4; 'typically' = root-mean-square",
+        [(90 - 72.9) * 111.2, 33 / 17.5, 20 / 47], [1901.5, 1.886, 0.4255], [0.05, 5e-4, 5e-4])
+    row("DC37", "audit G7: 10 hPa / 1013 hPa = 0.0099 ≈ 0.01; y(85°) = 3.1313 a; 3.131 × 6371 = 19 948 ≈ 19 950", [10 / 1013, np.log(np.tan(87.5 * D2R)), 3.131 * 6371], [0.0099, 3.1313, 19947.6], [5e-5, 5e-5, 0.5])
     ringP = call(DC + "storm_relative_wind", "s21", "ring 2000 km about the pole", heavy_call=True, u=un, v=vn, lat=nlat, lon=nlon, centre=(89.999, 0.0), radii_km=[2000.0], n_az=72)
     ringC = call(DC + "storm_relative_wind", "s21", "ring 2000 km about the vortex centre", heavy_call=True, u=un, v=vn, lat=nlat, lon=nlon, centre=(vlat, vlon), radii_km=[2000.0], n_az=72)
     rmsP, rmsC = float(np.sqrt(np.nanmean(ringP.radial[0] ** 2))), float(np.sqrt(np.nanmean(ringC.radial[0] ** 2)))

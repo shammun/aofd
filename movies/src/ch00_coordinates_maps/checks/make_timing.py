@@ -8,7 +8,10 @@ that every sentence time equals the storyboard's `sentence_times` (to 1 ms), tha
 voiceovers (with "[beat]" removed) and that the total equals the storyboard's audio length. The file is marked provisional:
 the final TTS (heavy phase) replaces it.
 
-usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_maps/checks/make_timing.py
+Calc & sync audit #5g (2026-11-05): re-voiced sentences (checks/revoice.py REVOICE) get ESTIMATED clip lengths and shift what
+follows; `--sync` writes the estimated times into the storyboard first.
+
+usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_maps/checks/make_timing.py [--sync]
 """
 from __future__ import annotations
 
@@ -19,6 +22,9 @@ import sys
 from pathlib import Path
 
 import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import revoice  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[4]
 OUT = ROOT / "movies" / "ch00" / "ch00_coordinates_maps"
@@ -49,6 +55,12 @@ def main() -> int:
                for q in rs["sentences"]]
         scenes.append({"id": s["id"], "start": round(rs["start"], 4), "sentences": out, "end": round(rs["end"], 4), "start_frame": round(rs["start"] * FPS),
                        "end_frame": round(rs["end"] * FPS), "timing_source": f"dryrun3_spliced:{s['id']}"})
+    tm0 = {"scenes": scenes, "total_s": scenes[-1]["end"]}
+    shift = revoice.apply(tm0)
+    if "--sync" in sys.argv:
+        revoice.sync(OUT / "storyboard.yaml", tm0, target=tm0["total_s"], audio_s=tm0["total_s"])
+        sb = yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))
+    for s, out in zip(sb["scenes"], (x["sentences"] for x in scenes)):
         # gap rules (tools/tts.py) re-checked on the run: 0.35 s between sentences, 1.5 s after a beat
         for j in range(len(out) - 1):
             g = out[j + 1]["start"] - out[j]["end"]
@@ -68,7 +80,9 @@ def main() -> int:
     if abs(total - sb["target_duration_s"]) > 1e-3:
         print(f"FAIL total {total:.3f} vs storyboard {sb['target_duration_s']}"); bad += 1
     tm = {"voice": "af_bella", "speed": 1.0, "fps": FPS, "sample_rate": 24000, "gaps": {"sentence": GS, "scene": GSC, "lead": LEAD, "tail": TAIL},
-          "provisional": "copied from the measured dry run dryrun3_spliced (absolute times, incl. its 0.3-s s02->s03 splice gap) by checks/make_timing.py; s17 S12 'Just inside the thirty degree ring' and s18 S10 'two hundred and eighty four' re-worded after the run (clips not re-measured); the final TTS replaces it",
+          "provisional": "copied from the measured dry run dryrun3_spliced (absolute times, incl. its 0.3-s s02->s03 splice gap) by checks/make_timing.py; s17 S12 'Just inside the thirty degree ring' and s18 S10 'two hundred and eighty four' re-worded after the run (clips not re-measured); "
+                         f"{len(tm0.get('estimated_sentences', []))} sentences re-voiced by the calc & sync audit #5g with ESTIMATED clip lengths (checks/revoice.py; shift {shift:+.3f} s); the final TTS replaces it",
+          "estimated_sentences": tm0.get("estimated_sentences", []),
           "scenes": scenes, "total_s": round(total, 4), "total_frames": int(math.ceil(round(total * FPS, 6)))}
     if bad:
         print(f"make_timing: {bad} failure(s); timing.json NOT written")

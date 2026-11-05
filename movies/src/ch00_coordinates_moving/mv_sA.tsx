@@ -454,8 +454,8 @@ const S07: React.FC = () => {
         {val(GX.g, GY.sum, "+1.4", C.gold, AT(k, 12, "is plus one point four"))}
         {/* callouts ordered like their targets (the tangent's end is above the point): links never cross */}
         <SideCallout f={f} lines="0.111 m/s per km" at={[XC + 40, 110]} appear={AT(k, 2, "zero point one one one")} target={[tg1[0] + 8, tg1[1]]} s={T.floor} c={C.gold} bend={20} />
-        <SideCallout f={f} lines="13.5 m/s" at={[XC + 40, 190]} appear={AT(k, 2, "thirteen and a half")} target={[p0[0] + 16, p0[1] + 4]} s={T.floor} c={C.first} bend={-20} />
-        <Keyword f={f} text="a sliding gust pattern" at={[XC, 600]} appear={0} out={t3 - 18} s={T.floor} />
+        <SideCallout f={f} lines="13.54 m/s" at={[XC + 40, 190]} appear={AT(k, 2, "thirteen point five four")} target={[p0[0] + 16, p0[1] + 4]} s={T.floor} c={C.first} bend={-20} />
+        <Keyword f={f} text="a sliding gust pattern" at={[XC, 600]} appear={0} out={t2 - 18} s={T.floor} />
         <Keyword f={f} text="1. ride with the pattern" at={[XC, 600]} appear={t3} out={t8 - 18} s={T.floor} c={C.second} />
         <Keyword f={f} text="2. stand on the ground" at={[XC, 600]} appear={t8} out={t13 - 18} s={T.floor} c={C.local} />
         <Keyword f={f} text="pieces differ, the sum doesn't" at={[XC, 600]} appear={t13} out={t14 - 18} s={T.floor} c={C.gold} />
@@ -471,13 +471,25 @@ const S07: React.FC = () => {
           <Lbl x={TG.x + TG.w + 16} y={axY(TG)(pa[pa.length - 1])} t="parcel" c={C.first} s={T.floor} o={fin(f, SE(k, 9))} />
         </g>
       </Svg>
-      <CalcStack f={f} x={XC} y={270} size={48} maxLines={3} o={fout(f, t13 - 18)} rows={[
-        { rhs: String.raw`u'=13.5-10=3.5\ \text{m/s}`, at: AT(k, 5, "thirteen and a half minus ten") },
-        { rhs: String.raw`\approx12.7\ \text{km/h}`, at: AT(k, 5, "twelve point seven"), cont: true },
+      {/* audit E2: where 13.54 and 0.111 come from (the pattern's formula at x = 25 km; Part 2's slope of a sine) */}
+      <CalcStack f={f} x={XC} y={250} size={44} maxLines={3} o={fout(f, t5 - 12)} rows={[
+        { rhs: String.raw`u=10+5\sin(2\pi x/200\ \text{km})`, at: t2 },
+        { rhs: String.raw`x=25\ \text{km}:\ \ 10+5\sin45^\circ`, at: t2 + 25 },
+        { rhs: String.raw`=10+3.54=13.54\ \text{m/s}`, at: AT(k, 2, "thirteen point five four"), cont: true },
+        { rhs: String.raw`\text{slope of }\sin(kx)\text{ is }k\cos(kx)`, at: AT(k, 2, "getting stronger"), c: C.muted },
+        { rhs: String.raw`5\times\tfrac{2\pi}{200}\times\cos45^\circ`, at: AT(k, 2, "getting stronger") + 25 },
+        { rhs: String.raw`\approx0.111\ \tfrac{\text{m/s}}{\text{km}}`, at: AT(k, 2, "zero point one one one"), cont: true },
+      ]} />
+      <CalcStack f={f} x={XC} y={270} size={44} maxLines={2} o={fout(f, t13 - 18)} rows={[
+        { rhs: String.raw`u'=13.54-10=3.54\ \text{m/s}`, at: AT(k, 5, "thirteen point five four minus ten") },
+        { rhs: String.raw`3.54\times3.6\approx12.7\ \text{km/h}`, at: AT(k, 5, "twelve point seven"), cont: true },
         { rhs: String.raw`\text{adv.}=12.7\times0.111\approx+1.4`, at: AT(k, 6, "so the advection is") },
-        { rhs: String.raw`U=10\ \text{m/s}=36\ \text{km/h}`, at: AT(k, 9, "thirty six kilometres per hour") },
+        { rhs: String.raw`\tfrac{\text{km}}{\text{h}}\times\tfrac{\text{m/s}}{\text{km}}=\tfrac{\text{m/s}}{\text{h}}`, at: AT(k, 6, "so the advection is") + 30, c: C.muted, cont: true },
+        { rhs: String.raw`U=10\ \text{m/s}`, at: AT(k, 9, "thirty six kilometres per hour") - 20 },
+        { rhs: String.raw`10\times3.6=36\ \text{km/h}`, at: AT(k, 9, "thirty six kilometres per hour"), cont: true },
         { rhs: String.raw`\text{local}=-36\times0.111\approx-4.0`, at: AT(k, 10, "minus thirty six") },
-        { rhs: String.raw`\text{adv.}=48.7\times0.111\approx+5.4`, at: AT(k, 11, "forty eight point seven") },
+        { rhs: String.raw`13.54\times3.6\approx48.7\ \text{km/h}`, at: AT(k, 11, "forty eight point seven") - 15 },
+        { rhs: String.raw`\text{adv.}=48.7\times0.111\approx+5.4`, at: AT(k, 11, "plus five point four"), cont: true },
         { rhs: String.raw`-4.0+5.4=+1.4`, at: AT(k, 12, "Add them") },
       ]} />
       <TeX s={EQ_S07} x={XC} y={380} size={46} o={fin(f, t13)} />

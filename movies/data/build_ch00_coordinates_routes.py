@@ -251,6 +251,27 @@ def main() -> int:
     truth("DM12", "after the vertex the route goes south over Canada: points in Canada (NE 10 m) come after the vertex, and the latitude falls all the way",
           after.size >= 20 and bool(np.all(np.diff(gla[iv:]) < 0)) and not inC[:iv].any(),
           {"points_in_canada": int(after.size), "lat_in": float(gla[after[0]]), "lon_in": float(glo[after[0]]), "lat_out": float(gla[after[-1]]), "lon_out": float(glo[after[-1]])})
+    # ================================================================ calc & sync audit #5f (2026-11-05): every new screen number
+    # F1: the bearings from the local east/north arrows (Part 4) and the highest latitude from the route's axis r̂₁ × r̂₂ (cross product)
+    lo1_, la1_, lo2_, la2_ = LONDON[1] * D2R, LONDON[0] * D2R, LA[1] * D2R, LA[0] * D2R
+    i1 = np.array([-np.sin(lo1_), np.cos(lo1_), 0.0]); j1 = np.array([-np.sin(la1_) * np.cos(lo1_), -np.sin(la1_) * np.sin(lo1_), np.cos(la1_)])
+    i2 = np.array([-np.sin(lo2_), np.cos(lo2_), 0.0]); j2 = np.array([-np.sin(la2_) * np.cos(lo2_), -np.sin(la2_) * np.sin(lo2_), np.cos(la2_)])
+    row("DM20", "F1: London's arrows i₁ = (0.002, 1.000, 0), j₁ = (−0.783, 0.002, 0.622)", [*i1, *j1], [0.002, 1.000, 0, -0.783, 0.002, 0.622], 6e-4)
+    row("DM20", "F1: east r̂₂·i₁ = −0.392 × 0.002 − 0.730 × 1.000 = −0.731; north r̂₂·j₁ = 0.307 − 0.001 + 0.348 = 0.654",
+        [float(r2 @ i1), float(r2 @ j1), -0.392 * 0.002 - 0.730 * 1.000, -0.392 * -0.783, -0.730 * 0.002, 0.560 * 0.622, 0.307 - 0.001 + 0.348],
+        [-0.731, 0.654, -0.731, 0.307, -0.001, 0.348, 0.654], [5e-4, 5e-4, 5e-4, 5e-4, 6e-4, 5e-4, 1e-9])
+    row("DM20", "F1: tan β = 0.731 / 0.654 = 1.118 → 48.2° west of north → 360 − 48 = 312° (initial_bearing 311.8°)",
+        [0.731 / 0.654, np.degrees(np.arctan(0.731 / 0.654)), 360 - 48, brg0], [1.118, 48.18, 312, 311.83], [5e-4, 0.01, 0, 0.01])
+    row("DM20", "F1: at LA east r̂₁·i₂ = 0.549, north r̂₁·j₂ = 0.813; tan = 0.675 → 34.0°; + 180° = 214° (initial_bearing back 34.04°)",
+        [float(r1 @ i2), float(r1 @ j2), 0.549 / 0.813, np.degrees(np.arctan(0.549 / 0.813)), back, 34 + 180], [0.549, 0.813, 0.675, 34.03, 34.04, 214], [5e-4, 5e-4, 5e-4, 0.01, 0.01, 0])
+    nz = (r1[0] * r2[1] - r1[1] * r2[0]) / np.sin(sig)
+    row("DM20", "F1: axis n̂ = r̂₁ × r̂₂ / sin σ; n_z = (0.622 × (−0.730) − (−0.001) × (−0.392)) / 0.981 = (−0.454 − 0.000) / 0.981 = −0.463; cos φ_max = |n_z| → 62.4° (vertex 62.37°)",
+        [np.sin(sig), 0.622 * -0.730, -0.001 * -0.392, (-0.454 - 0.000) / 0.981, nz, np.degrees(np.arccos(abs(nz))), np.degrees(np.arccos(0.463))], [0.981, -0.454, 0.0004, -0.4628, -0.4638, 62.37, 62.42],
+        [5e-4, 5e-4, 5e-4, 5e-4, 5e-4, 0.01, 0.01])
+    truth("DM20", "F1 roundings: arccos 0.463 = 62.42 → 62.4; vertex 62.37 → 62.4", round(float(np.degrees(np.arccos(0.463))), 1) == 62.4 and round(float(vx[0]), 1) == 62.4)
+    # F4: s03's two screen numbers
+    row("DM20", "F4: 1° east at the equator 6371 × 0.01745 = 111.2 ≈ 111 km; at 78.2° N 111.2 × 0.2045 = 22.7 ≈ 23 km",
+        [6371 * 0.01745, np.cos(78.2 * D2R), 111.2 * 0.2045], [111.17, 0.2045, 22.74], [0.01, 5e-5, 0.01])
     V["route"] = {"london": list(LONDON), "la": list(LA), "r1": B1.r6(r1), "r2": B1.r6(r2), "cs1": B1.r6(cs1), "cs2": B1.r6(cs2), "dot": dot,
                   "sig_deg": float(np.degrees(sig)), "sig_rad": sig, "d_km": dgc / 1e3, "brg0": brg0, "brg1": brg1, "vx": [float(vx[0]), float(vx[1])],
                   "gc": [B1.r6(gla, 4), B1.r6(glo, 4)], "head": B1.r6(head, 3)}
@@ -282,6 +303,26 @@ def main() -> int:
     bl_g = float(call(GS + "great_circle_distance", "s13", "Brest → Lisbon great circle", lat1=BREST[0], lon1=BREST[1], lat2=LISBON[0], lon2=LISBON[1])) / 1e3
     bl_r = call(GS + "rhumb_line", "s13", "Brest → Lisbon rhumb line", lat1=BREST[0], lon1=BREST[1], lat2=LISBON[0], lon2=LISBON[1], n=41)
     bgl, bgo = call(GS + "great_circle_points", "s13", "Brest → Lisbon great circle points", lat1=BREST[0], lon1=BREST[1], lat2=LISBON[0], lon2=LISBON[1], n=41)
+    # F2 (decision: derived in Part 6 itself): the rhumb line's bearing and length from the stretched latitude ψ = ln tan(45° + φ/2)
+    psiL, psiA = np.log(np.tan((45 + LONDON[0] / 2) * D2R)), np.log(np.tan((45 + LA[0] / 2) * D2R))
+    dlam_r = (LA[1] - LONDON[1]) * D2R
+    alpha = np.degrees(np.arctan(abs(dlam_r) / abs(psiA - psiL)))
+    aphi = A_KM * abs(LA[0] - LONDON[0]) * D2R
+    row("DM21", "F2: 45 + 51.51/2 = 70.755°, tan = 2.8644, ψ_London = ln 2.8644 = 1.0523; 45 + 34.05/2 = 62.025°, tan = 1.8827, ψ_LA = 0.6327",
+        [45 + LONDON[0] / 2, np.tan(70.755 * D2R), psiL, 45 + LA[0] / 2, np.tan(62.025 * D2R), psiA], [70.755, 2.8644, 1.0523, 62.025, 1.8827, 0.6327], [1e-9, 5e-5, 5e-5, 1e-9, 5e-5, 5e-5])
+    row("DM21", "F2: Δψ = 0.6327 − 1.0523 = −0.4196; Δλ = −118.11° = −2.0614 rad; tan α = 2.0614 / 0.4196 = 4.913 → α = 78.49° from south; 180 + 78.49 = 258.49 ≈ 258.5 (rhumb_line 258.49)",
+        [0.6327 - 1.0523, LA[1] - LONDON[1], dlam_r, 2.0614 / 0.4196, np.degrees(np.arctan(2.0614 / 0.4196)), 180 + alpha, rh.bearing],
+        [-0.4196, -118.11, -2.0614, 4.913, 78.49, 258.49, 258.49], [1e-9, 1e-9, 5e-5, 5e-4, 0.005, 0.005, 0.005])
+    row("DM21", "F2: Δφ = −17.46° = −0.30473 rad; a|Δφ| = 6371 × 0.30473 = 1941.4 km; cos 78.49° = 0.19947; 1941.4 / 0.19947 = 9733 km (rhumb_line 9732.8)",
+        [LA[0] - LONDON[0], abs(LA[0] - LONDON[0]) * D2R, 6371 * 0.30473, np.cos(np.radians(alpha)), 1941.4 / 0.19947, rkm],
+        [-17.46, 0.30473, 1941.4, 0.19947, 9732.8, 9732.8], [1e-9, 5e-6, 0.05, 5e-5, 0.5, 0.05])
+    truth("DM21", "F2: the shown factors give 9733 to the nearest km (1941.4 / 0.19947 = 9732.8)", round(1941.4 / 0.19947) == 9733, round(1941.4 / 0.19947, 1))
+    # F3: Brest–Lisbon with the flat recipe of Parts 3-4 (good on a short trip); the +150 m needs more digits (rhumb_line)
+    dyb, mid, dxb = (BREST[0] - LISBON[0]) * 111.2, (BREST[0] + LISBON[0]) / 2, (BREST[1] - LISBON[1]) * 111.2 * np.cos((BREST[0] + LISBON[0]) / 2 * D2R)
+    row("DM21", "F3: Δφ 9.67°, Δλ 4.65°, middle 43.56°; Δy = 9.67 × 111.2 = 1075 km; Δx = 4.65 × 111.2 × cos 43.56° (0.7247) = 374.7 ≈ 375 km",
+        [BREST[0] - LISBON[0], BREST[1] - LISBON[1], mid, dyb, np.cos(43.56 * D2R), 4.65 * 111.2 * 0.7247], [9.67, 4.65, 43.555, 1075.3, 0.7247, 374.7], [1e-9, 1e-9, 1e-9, 0.05, 5e-5, 0.05])
+    row("DM21", "F3: √(1075² + 375²) = 1138.5 → '≈ 1139 km' on the flat recipe; the great circle 1138.1 ('1138'); difference < 1 km (0.04 %)",
+        [np.hypot(1075, 375), np.hypot(dyb, dxb), bl_g], [1138.53, 1138.73, 1138.12], [5e-3, 0.01, 0.01])
     row("DM14", "Brest–Lisbon 1138.12 / 1138.27 km; rhumb + 0.149 km ('about a hundred and fifty metres'); 'about one thousand one hundred and thirty eight'",
         [bl_g, bl_r.distance / 1e3, bl_r.distance / 1e3 - bl_g, round(bl_g)], [1138.12, 1138.27, 0.149, 1138], [0.005, 0.005, 0.0015, 0])
     lla, llo = call(GS + "great_circle_points", "s13", "5 points on the great circle (4 legs)", lat1=LONDON[0], lon1=LONDON[1], lat2=LA[0], lon2=LA[1], n=5)

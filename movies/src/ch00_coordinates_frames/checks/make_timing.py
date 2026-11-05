@@ -7,7 +7,11 @@ each scene's sentences (text, clip length, beat flag) from that run and lays the
 every sentence time equals the storyboard's `sentence_times` (to 1 ms) and that the scene texts equal the storyboard voiceovers
 (with "[beat]" removed). The file is marked provisional: the final TTS (heavy phase) replaces it.
 
-usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_frames/checks/make_timing.py
+Calc & sync audit #5d (2026-11-05): the re-voiced sentences in checks/revoice.py (REVOICE) get ESTIMATED clip lengths (measured
+length x new/old characters) and everything after them shifts (revoice.apply); `--sync` first writes those estimated times into the
+storyboard (scene t, sentence_times, target_duration_s, dry_run.audio_s, skip_guidance). The final TTS replaces it.
+
+usage: .venv/Scripts/python.exe movies/src/ch00_coordinates_frames/checks/make_timing.py [--sync]
 """
 from __future__ import annotations
 
@@ -17,6 +21,9 @@ import sys
 from pathlib import Path
 
 import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import revoice  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[4]
 OUT = ROOT / "movies" / "ch00" / "ch00_coordinates_frames"
@@ -62,6 +69,13 @@ def main() -> int:
         rec = {"id": s["id"], "start": round(start, 4), "sentences": out, "end": round(t, 4), "start_frame": round(start * FPS), "end_frame": round(t * FPS),
                "timing_source": src}
         scenes.append(rec)
+    tm0 = {"scenes": scenes, "total_s": scenes[-1]["end"]}
+    shift = revoice.apply(tm0)
+    if "--sync" in sys.argv:
+        revoice.sync(OUT / "storyboard.yaml", tm0, target=tm0["total_s"], audio_s=tm0["total_s"])
+        sb = yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))
+    for s, out in zip(sb["scenes"], (x["sentences"] for x in scenes)):
+        src = s["measured"]["timing_source"]
         # checks against the storyboard
         st_sb = s["sentence_times"]
         if len(st_sb) != len(out):
@@ -77,7 +91,9 @@ def main() -> int:
     if abs(total - sb["target_duration_s"]) > 1e-3:
         print(f"FAIL total {total:.3f} vs storyboard {sb['target_duration_s']}"); bad += 1
     tm = {"voice": "af_bella", "speed": 1.0, "fps": FPS, "sample_rate": 24000, "gaps": {"sentence": GS, "scene": GSC, "lead": LEAD, "tail": TAIL},
-          "provisional": "made from the measured dry runs (dryrun1 / splice2 / splice3) by checks/make_timing.py; the final TTS replaces it; s09 S7 and s28 S2 re-worded to 'seventy five point eight' after the dry run (clip lengths not re-measured)",
+          "provisional": "made from the measured dry runs (dryrun1 / splice2 / splice3) by checks/make_timing.py; the final TTS replaces it; s09 S7 and s28 S2 re-worded to 'seventy five point eight' after the dry run (clip lengths not re-measured); "
+                         f"{len(tm0.get('estimated_sentences', []))} sentences re-voiced by the calc & sync audit #5d with ESTIMATED clip lengths (checks/revoice.py; shift {shift:+.3f} s)",
+          "estimated_sentences": tm0.get("estimated_sentences", []),
           "scenes": scenes, "total_s": round(total, 4), "total_frames": int(-(-total * FPS // 1))}
     import math
     tm["total_frames"] = int(math.ceil(round(total * FPS, 6)))
