@@ -1,0 +1,463 @@
+// ch00_coordinates_flat scenes s00-s07: the title, the hook, the flat map (origin, axes, Cartesian coordinates, constant unit
+// vectors), polar coordinates and the way back, compass bearings and the wind "from" convention, radians and the arc rule.
+// s02-s07 are kept from build 1 (src/ch00_coordinates/co_sA.tsx) with the Part-1 sentence indices; every number on screen is
+// asserted against data/cf.json below (the render fails otherwise).
+import React from "react";
+import { useCurrentFrame } from "remotion";
+import { C, T } from "../house/kit/type";
+import { Band, Dash, Pt, RightTick, pulse } from "../house/kit/draw";
+import { CalcStack, TeX } from "../house/kit/tex";
+import { Keyword } from "../house/kit/notes";
+import { CurvedLink } from "../house/kit/extras";
+import { RiseText, TitleGradient } from "../house/kit/title";
+import { SourceBelow } from "../house/kit/frame";
+import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
+import {
+  AT, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
+  Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS,
+} from "./cf_lib";
+import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./cf_eq";
+
+// ---------------------------------------------------------------- numbers on screen = the data
+const CHECK_A: [string, number, number, number][] = [
+  ["r", PL.r, 5, 1e-9], ["theta", PL.th, 53.13, 0.005], ["theta said", Math.round(PL.th), 53, 0], ["bearing", Math.round(90 - PL.th), 37, 0],
+  ["ian vt", IAN.vt, 34.8, 0.05], ["ian vr", IAN.vr, -13.3, 0.05],
+];
+CHECK_A.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
+
+/** Ian's ring (25 km): the model's calm centre, 72 points */
+export const RING = IAN.ring;
+/** tangential (teal) and radial (rose) arrows at ring point i, px per m/s = s, directions from the point's own azimuth */
+export const ringArrows = (P: (la: number, lo: number) => Pt, i: number, s: number, vt?: number, vr?: number) => {
+  const p0 = P(RING.lat[i], RING.lon[i]), a = RING.az[i] * D2R;
+  const T_ = vt ?? RING.vt[i], R_ = vr ?? RING.vr[i];
+  return { p0, tp: [p0[0] - Math.sin(a) * T_ * s, p0[1] - Math.cos(a) * T_ * s] as Pt, rp: [p0[0] + Math.cos(a) * R_ * s, p0[1] - Math.sin(a) * R_ * s] as Pt };
+};
+export const ringPath = (P: (la: number, lo: number) => Pt) => poly((RING.lat as number[]).map((la, i) => P(la, RING.lon[i]))) + "Z";
+/** the Ian map body: the HRRR 10-m speed raster, the coast, streaklines (zoomed tracks when z > 0) */
+export const IanBody: React.FC<{ P: (la: number, lo: number) => Pt; f: number; z?: number; o?: number; parts?: boolean }> = ({ P, f, z = 0, o = 1, parts = true }) => (
+  <g opacity={o}>
+    <GeoImg P={P} href={IMGS.ian} box={IAN.speed_box} o={0.95} />
+    <path d={linesPath(P, IAN.coast)} fill="none" stroke={C.key} strokeOpacity={0.85} strokeWidth={2.2} />
+    {parts ? <FlowParticles P={(la, lo) => P(la, lo)} tracks={IAN.tracks} fr={f / 2} tail={10} w={2.2} o={1 - z} /> : null}
+    {parts ? <FlowParticles P={(la, lo) => P(la, lo)} tracks={IAN.ztracks} fr={f / 2} tail={12} w={2.6} o={z} /> : null}
+  </g>
+);
+
+// ================================================================ s00 title
+const TB = { x: 1150, y: 150, w: 690, h: 480 };
+const S00: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s00_title");
+  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way");
+  const pz = 1 + 0.06 * pulse(f, tEasy, 14);
+  // Part A: polar grid round the station, the balloon (3, 4) km gliding once round the 5-km circle with r̂, θ̂; then the square grid turns 30°
+  const O: Pt = [1445, 400], u = 40;
+  const th = PL.th + 360 * prog(f, 16, 104);
+  const b: Pt = [O[0] + 5 * u * Math.cos(th * D2R), O[1] - 5 * u * Math.sin(th * D2R)];
+  const er: Pt = [Math.cos(th * D2R), -Math.sin(th * D2R)], et = rotS(er, 90);
+  const turn = 30 * prog(f, 112, 150);
+  const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
+  const B = boxAt(IAN.c[0], IAN.c[1], 1.0, TB.x, TB.y, TB.w, TB.h);
+  const L = 92;
+  return (
+    <Scene fadeIn={false}>
+      <Svg>
+        <defs><TitleGradient id="ttl" x1={100} x2={1000} /></defs>
+        {/* title wording (coordinator 2026-11-05, short version): "Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes" */}
+        <RiseText f={f} t="Coordinates · Part 1" x={104} y={110} s={64} at={2} fill={C.key} />
+        <RiseText f={f} t="Arrows on a" x={100} y={265} s={150} at={6} fill="url(#ttl)" />
+        <RiseText f={f} t="flat map" x={100} y={410} s={150} at={16} fill="url(#ttl)" />
+        <g transform={`translate(104 515) scale(${pz}) translate(-104 -515)`}>
+          <RiseText f={f} t="made easy" x={104} y={525} s={88} at={24} fill={C.key} />
+        </g>
+        <RiseText f={f} t="polar coordinates" x={106} y={660} s={68} at={34} fill={C.key} />
+        <RiseText f={f} t="and rotated axes" x={106} y={750} s={68} at={40} fill={C.key} />
+        <g opacity={oA * fin(f, 4, 10)}>
+          {[1, 2, 3, 4, 5].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.local} strokeWidth={2} opacity={0.6} />)}
+          {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={O[0] + 5.6 * u * Math.cos(a * D2R)} y2={O[1] - 5.6 * u * Math.sin(a * D2R)} stroke={C.local} strokeWidth={1.6} opacity={0.45} />)}
+          <g opacity={fin(f, 106, 10)} transform={`rotate(${-turn} ${O[0]} ${O[1]})`}>
+            {[-4, -2, 0, 2, 4].map((q) => <line key={`a${q}`} x1={O[0] + q * u} y1={O[1] - 5.6 * u} x2={O[0] + q * u} y2={O[1] + 5.6 * u} stroke={C.second} strokeWidth={q === 0 ? 4 : 2} opacity={0.75} />)}
+            {[-4, -2, 0, 2, 4].map((q) => <line key={`b${q}`} x1={O[0] - 5.6 * u} y1={O[1] + q * u} x2={O[0] + 5.6 * u} y2={O[1] + q * u} stroke={C.second} strokeWidth={q === 0 ? 4 : 2} opacity={0.75} />)}
+          </g>
+          <circle cx={O[0]} cy={O[1]} r={8} fill={C.local} />
+          <Arrow p={b} q={[b[0] + er[0] * L, b[1] + er[1] * L]} color={C.second} w={8} head={30} />
+          <Arrow p={b} q={[b[0] + et[0] * L, b[1] + et[1] * L]} color={C.second} w={8} head={30} />
+          <BDot p={b} r={11} />
+          <Arrow p={[1190, 600]} q={[1260, 600]} color={C.second} w={6} head={22} o={0.5} />
+          <Arrow p={[1190, 600]} q={[1190, 530]} color={C.second} w={6} head={22} o={0.5} />
+        </g>
+      </Svg>
+      <GeoMap id="s00m" B={B} o={oB} frame={0.6}>
+        {(P) => {
+          const cE = P(IAN.c[0], IAN.c[1]);
+          return <>
+            <IanBody P={P} f={f} z={1} parts={false} />
+            <path d={ringPath(P)} fill="none" stroke={C.first} strokeWidth={5} />
+            <circle cx={cE[0]} cy={cE[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
+            {[0, 18, 36, 54].map((i) => { const ra = ringArrows(P, i, 2.6);
+              return <g key={i}><AnimatedWindArrow from={ra.p0} to={ra.tp} speed={RING.vt[i]} f={f} c={C.first} px={8} head={24} />
+                <AnimatedWindArrow from={ra.p0} to={ra.rp} speed={Math.abs(RING.vr[i])} f={f} c={C.neg} px={8} head={24} /></g>; })}
+          </>;
+        }}
+      </GeoMap>
+      <SourceBelow text={IAN_SRC} pic={TB} w={690} o={oB} name="s00 src" />    </Scene>
+  );
+};
+
+// ================================================================ s01 hook
+const S01: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s01_hook");
+  const tCo = AT(k, 0, "coordinates"), tFive = AT(k, 1, "seven parts"), tBuilt = SS(k, 2), tHur = AT(k, 3, "hurricane");
+  const O: Pt = [440, 360], u = 44;
+  const th = PL.th;
+  const b: Pt = [O[0] + 5 * u * Math.cos(th * D2R), O[1] - 5 * u * Math.sin(th * D2R)];
+  const er: Pt = [Math.cos(th * D2R), -Math.sin(th * D2R)], et = rotS(er, 90);
+  const MB = { x: 1130, y: 50, w: 710, h: 440 };
+  const B = boxAt(IAN.c[0], IAN.c[1], 1.0, MB.x, MB.y, MB.w, MB.h);
+  const bright = 0.55 + 0.45 * fin(f, tBuilt, 20);
+  const moving = f >= tHur ? f - tHur : 0;
+  const TX = Array.from({ length: 7 }, (_, i) => 80 + 251.4 * (i + 0.5)), TY = 690;
+  const TITLES = [["1 flat"], ["2 cyclone"], ["3 sphere"], ["4 turning", "frames"], ["5 moving", "frames"], ["6 routes"], ["7 maps"]];
+  const thumb = (i: number) => {
+    const x = TX[i], y = TY;
+    return (
+      <g key={i} opacity={fin(f, tFive + 4 * i) * (i === 0 ? 1 : 0.4)}>
+        {TITLES[i].map((t, j) => <Lbl key={t} x={x} y={772 + 48 * j} t={t} c={i === 0 ? C.key : C.muted} s={T.floor} a="middle" />)}
+        <g transform={`translate(${x} ${y}) scale(0.8) translate(${-x} ${-y})`}>
+        {i === 0 ? <>{[-40, -20, 0, 20, 40].map((q) => <line key={`v${q}`} x1={x + q} y1={y - 40} x2={x + q} y2={y + 40} stroke={C.second} strokeWidth={2.5} />)}
+          {[-40, -20, 0, 20, 40].map((q) => <line key={`h${q}`} x1={x - 40} y1={y + q} x2={x + 40} y2={y + q} stroke={C.second} strokeWidth={2.5} />)}</> : null}
+        {i === 1 ? <><ellipse cx={x} cy={y - 34} rx={42} ry={12} fill="none" stroke={C.first} strokeWidth={3} /><line x1={x - 42} y1={y - 34} x2={x - 42} y2={y + 34} stroke={C.first} strokeWidth={3} />
+          <line x1={x + 42} y1={y - 34} x2={x + 42} y2={y + 34} stroke={C.first} strokeWidth={3} /><ellipse cx={x} cy={y + 34} rx={42} ry={12} fill="none" stroke={C.first} strokeWidth={3} /></> : null}
+        {i === 2 ? <><circle cx={x} cy={y} r={42} fill="none" stroke={C.first} strokeWidth={3} /><ellipse cx={x} cy={y} rx={42} ry={12} fill="none" stroke={C.first} strokeWidth={2} />
+          <ellipse cx={x} cy={y} rx={14} ry={42} fill="none" stroke={C.first} strokeWidth={2} /></> : null}
+        {i === 3 ? <><Arrow p={[x - 20, y + 30]} q={[x + 40, y + 30]} color={C.second} w={5} head={16} /><Arrow p={[x - 20, y + 30]} q={[x - 20, y - 30]} color={C.second} w={5} head={16} />
+          <Arrow p={[x - 20, y + 30]} q={[x + 18, y - 6]} color={C.second} w={5} head={16} /></> : null}
+        {i === 6 ? <><rect x={x - 46} y={y - 30} width={92} height={60} fill="none" stroke={C.local} strokeWidth={3} />{[-23, 0, 23].map((q) => <line key={q} x1={x + q} y1={y - 30} x2={x + q} y2={y + 30} stroke={C.local} strokeWidth={2} />)}
+          <line x1={x - 46} y1={y} x2={x + 46} y2={y} stroke={C.local} strokeWidth={2} /></> : null}
+        {i === 4 ? <><Arrow p={[x - 40, y + 25]} q={[x - 5, y + 25]} color={C.second} w={4} head={14} /><Arrow p={[x - 40, y + 25]} q={[x - 40, y - 10]} color={C.second} w={4} head={14} />
+          <Arrow p={[x + 5, y + 5]} q={[x + 40, y + 5]} color={C.second} w={4} head={14} /><Arrow p={[x + 5, y + 5]} q={[x + 5, y - 30]} color={C.second} w={4} head={14} />
+          <Arrow p={[x - 30, y + 40]} q={[x + 30, y + 40]} color={C.first} w={4} head={14} /></> : null}
+        {i === 5 ? <><circle cx={x - 40} cy={y + 20} r={8} fill={C.key} /><circle cx={x + 40} cy={y + 10} r={8} fill={C.key} />
+          <path d={`M ${x - 40} ${y + 20} Q ${x} ${y - 50} ${x + 40} ${y + 10}`} fill="none" stroke={C.gold} strokeWidth={4} /></> : null}
+        </g>
+      </g>
+    );
+  };
+  return (
+    <Scene>
+      <Svg>
+        <g opacity={bright}>
+          {[1, 2, 3, 4, 5].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.local} strokeWidth={2.2} opacity={0.7} />)}
+          {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={O[0] + 5.5 * u * Math.cos(a * D2R)} y2={O[1] - 5.5 * u * Math.sin(a * D2R)} stroke={C.local} strokeWidth={1.8} opacity={0.5} />)}
+        </g>
+        <Station at={O} s={0.7} />
+        <Arrow p={b} q={[b[0] + er[0] * 110, b[1] + er[1] * 110]} color={C.second} />
+        <Arrow p={b} q={[b[0] + et[0] * 110, b[1] + et[1] * 110]} color={C.second} />
+        <BDot p={b} />
+        {[0, 1, 2, 3, 4, 5, 6].map(thumb)}
+        <Keyword f={f} text="coordinates" at={[960, 300]} a="middle" appear={tCo} />
+        <SpeedBar x={810} y={470} w={200} />
+      </Svg>
+      <TeX s={String.raw`\hat{\mathbf r}`} x={b[0] + er[0] * 150} y={b[1] + er[1] * 150} size={56} ax={0.5} c={C.second} />
+      <TeX s={String.raw`\hat{\boldsymbol\theta}`} x={b[0] + et[0] * 150} y={b[1] + et[1] * 150} size={56} ax={0.5} c={C.second} />
+      <GeoMap id="s01m" B={B}>
+        {(P) => {
+          const cE = P(IAN.c[0], IAN.c[1]);
+          return <>
+            <IanBody P={P} f={f} z={1} />
+            <path d={ringPath(P)} fill="none" stroke={C.first} strokeWidth={5} />
+            <circle cx={cE[0]} cy={cE[1]} r={9} fill={C.gold} stroke={C.bg} strokeWidth={3} />
+            {[0, 18, 36, 54].map((i) => { const ra = ringArrows(P, i, 2.8);
+              return <g key={i}><AnimatedWindArrow from={ra.p0} to={ra.tp} speed={RING.vt[i]} f={moving} c={C.first} px={8} head={24} />
+                <AnimatedWindArrow from={ra.p0} to={ra.rp} speed={Math.abs(RING.vr[i])} f={moving} c={C.neg} px={8} head={24} /></g>; })}
+          </>;
+        }}
+      </GeoMap>
+      <SourceBelow text={IAN_SRC} pic={MB} w={710} name="s01 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s02 origin, axes, coordinates (kept)
+const S02: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s02_coordinates");
+  const tOrig = AT(k, 2, "origin"), tSta = AT(k, 3, "weather station"), tAx = SS(k, 4), tAxW = AT(k, 5, "axes");
+  const tDrift = SS(k, 6), tPair = AT(k, 7, "three and four"), tCo = AT(k, 8, "coordinates"), tCa = AT(k, 9, "Cartesian");
+  const d = prog(f, tDrift + 10, SE(k, 6) - 10);
+  const bp = pp(3 * d, 4 * d);
+  return (
+    <Scene>
+      <Svg>
+        <Ground />
+        <circle cx={PO[0]} cy={PO[1]} r={14} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tOrig) * (1 - fin(f, tSta))} />
+        <AxesEN f={f} at={tAx} />
+        <KmTicks o={fin(f, tDrift)} />
+        <g opacity={fin(f, tDrift)}>
+          <Dash p={PO} q={pp(3 * Math.min(1, d * 2), 0)} c={C.first} w={6} />
+          {d > 0.5 ? <Dash p={pp(3, 0)} q={pp(3, 4 * Math.min(1, (d - 0.5) * 2))} c={C.first} w={6} /> : null}
+        </g>
+        <Station o={fin(f, tSta)} />
+        <Balloon p={bp} o={fin(f, tDrift)} />
+        <Lbl x={BAL[0] + 40} y={BAL[1] - 20} t="(3, 4)" c={C.key} s={T.calc} o={fin(f, tPair)} />
+        <CurvedLink f={f} from={[BAL[0] + 60, BAL[1] + 10]} to={pp(1.5, 0.1)} start={tPair + 8} bend={60} />
+        <CurvedLink f={f} from={[BAL[0] + 120, BAL[1] + 10]} to={pp(3.1, 2)} start={tPair + 14} bend={-40} />
+        <Keyword f={f} text="a flat map" at={[1100, 160]} appear={0} out={tOrig - 18} />
+        <Keyword f={f} text="origin" at={[1100, 160]} appear={tOrig} />
+        <CurvedLink f={f} from={[1090, 180]} to={[PO[0] + 30, PO[1] - 40]} start={tOrig + 8} end={tPair - 12} bend={60} />
+        <Keyword f={f} text="axes" at={[1100, 270]} appear={tAxW} />
+        <Keyword f={f} text="coordinates" at={[1100, 560]} appear={tCo} />
+        <Keyword f={f} text="Cartesian coordinates" at={[1100, 670]} appear={tCa} />
+        <Lbl x={1100} y={740} t="René Descartes" c={C.muted} s={T.floor} o={fin(f, AT(k, 9, "René Descartes"))} />
+      </Svg>
+      <TeX s={EQ_S02} x={1100} y={420} size={84} o={fin(f, tPair)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s03 constant x-hat, y-hat (kept)
+const S03: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s03_cartesian_arrows");
+  const t1 = SS(k, 0), tSum = SS(k, 2), tSame = AT(k, 4, "the same way everywhere"), tMove = SS(k, 5), tIns = AT(k, 8, "hurricane"), tRing = AT(k, 8, "rings");
+  const places: [number, number][] = [[3, 4], [6, 1.5], [1.8, 5.2], [-0.8, 2.5], [5, 5]];
+  const hop = clamp((f - tMove) / ((SE(k, 5) - tMove) / 4), 0, 4);
+  const i0 = Math.floor(hop), w = hop - i0;
+  const cur: [number, number] = i0 >= 4 ? places[4] : [mix(places[i0][0], places[i0 + 1][0], prog(w, 0, 0.6)), mix(places[i0][1], places[i0 + 1][1], prog(w, 0, 0.6))];
+  const at = f >= tMove ? cur : places[0];
+  const unitAt = (p: [number, number], o: number, key: string) => <g key={key} opacity={o}>
+    <Arrow p={pp(p[0], p[1])} q={pp(p[0] + 1, p[1])} color={C.second} w={7} head={28} />
+    <Arrow p={pp(p[0], p[1])} q={pp(p[0], p[1] + 1)} color={C.second} w={7} head={28} />
+  </g>;
+  const IB = { x: 1100, y: 420, w: 330, h: 300 };
+  const MI = boxAt(IAN.c[0], IAN.c[1], 1.1, IB.x, IB.y, IB.w, IB.h);
+  return (
+    <Scene>
+      <Svg>
+        <Ground />
+        <AxesEN f={f} at={-40} />
+        <KmTicks o={1} />
+        <Station />
+        <Dash p={PO} q={pp(3, 0)} c={C.first} w={5} />
+        <Dash p={pp(3, 0)} q={pp(3, 4)} c={C.first} w={5} />
+        {unitAt([0, 0], fin(f, t1), "o")}
+        {f >= tMove ? places.slice(0, Math.min(5, i0 + 1)).map((p, i) => unitAt(p, 0.35, `g${i}`)) : null}
+        <Balloon p={pp(at[0], at[1])} />
+        {unitAt(at, fin(f, tMove), "b")}
+        <Keyword f={f} text="unit vectors" at={[1100, 160]} appear={0} out={tSum - 18} />
+        <Keyword f={f} text="same everywhere" at={[1100, 300]} appear={tSame} out={tIns - 18} />
+        <CurvedLink f={f} from={[1160, 215]} to={pp(1.5, 0.15)} ctl={[400, 230]} start={tSum + 10} end={tSame - 10} />
+        <CurvedLink f={f} from={[1390, 215]} to={pp(3.15, 2)} start={tSum + 16} end={tSame - 10} bend={40} />
+        <Keyword f={f} text="not in squares" at={[1100, 300]} appear={tIns} />
+      </Svg>
+      <TeX s={String.raw`\hat{\mathbf x}`} x={pp(1, 0)[0] + 10} y={PO[1] - 40} size={60} c={C.second} o={fin(f, t1 + 10)} />
+      <TeX s={String.raw`\hat{\mathbf y}`} x={PO[0] + 20} y={pp(0, 1)[1] - 10} size={60} c={C.second} o={fin(f, t1 + 10)} />
+      <TeX s={EQ_S03} x={1100} y={160} size={84} o={fin(f, tSum) * fout(f, tSame - 18)} />
+      <GeoMap id="s03ian" B={MI} o={fin(f, tIns)} frame={0.8}>
+        {(P) => <>
+          <IanBody P={P} f={f} z={1} parts={false} />
+          {Array.from({ length: 8 }, (_, i) => <line key={`a${i}`} x1={IB.x + i * 47} y1={IB.y} x2={IB.x + i * 47} y2={IB.y + IB.h} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+          {Array.from({ length: 7 }, (_, i) => <line key={`b${i}`} x1={IB.x} y1={IB.y + i * 50} x2={IB.x + IB.w} y2={IB.y + i * 50} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+        </>}
+      </GeoMap>
+      <Svg>
+        <g opacity={fin(f, tRing)}>
+          <rect x={1480} y={420} width={330} height={300} rx={8} fill="#1d2a44" stroke={C.grid} strokeWidth={3} />
+          {[40, 80, 120, 160].map((r) => <circle key={r} cx={1645} cy={570} r={r} fill="none" stroke={C.first} strokeWidth={3} opacity={0.85} />)}
+          {Array.from({ length: 7 }, (_, i) => <line key={`a${i}`} x1={1480 + i * 55} y1={420} x2={1480 + i * 55} y2={720} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+          {Array.from({ length: 6 }, (_, i) => <line key={`b${i}`} x1={1480} y1={420 + i * 60} x2={1810} y2={420 + i * 60} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+          <circle cx={1645} cy={570} r={8} fill={C.local} />
+        </g>
+        <Lbl x={1645} y={760} t="radar rings" c={C.muted} s={T.floor} a="middle" o={fin(f, tRing)} />
+      </Svg>
+      <SourceBelow text="Data: HRRR (NOAA) · Ian, 28 Sep 2022" pic={IB} w={360} o={fin(f, tIns)} name="s03 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s04 polar coordinates (kept)
+const S04: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s04_polar");
+  const tR = AT(k, 1, "called r"), tPy = AT(k, 2, "Pythagoras"), t25 = AT(k, 2, "twenty five"), t5 = AT(k, 2, "five kilometres");
+  const tTh = AT(k, 3, "called theta"), tAnti = AT(k, 4, "anticlockwise"), tTan = AT(k, 5, "tangent"), t53 = AT(k, 5, "fifty three"), tPair = SS(k, 6);
+  const tPol = AT(k, 7, "polar coordinates"), tRad = AT(k, 8, "weather radar");
+  const th = PL.th;
+  const mid: Pt = [(PO[0] + BAL[0]) / 2, (PO[1] + BAL[1]) / 2];
+  return (
+    <Scene>
+      <Svg>
+        <Ground />
+        <defs><clipPath id="s04g"><rect x={110} y={60} width={880} height={780} rx={18} /></clipPath></defs>
+        <g opacity={fin(f, tRad, 20)} clipPath="url(#s04g)">
+          {[1, 2, 3, 4, 5, 6].map((r) => <circle key={r} cx={PO[0]} cy={PO[1]} r={r * PU} fill="none" stroke={C.first} strokeWidth={2.5} opacity={0.55} />)}
+          {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={PO[0]} y1={PO[1]} x2={PO[0] + 650 * Math.cos(a * D2R)} y2={PO[1] - 650 * Math.sin(a * D2R)} stroke={C.first} strokeWidth={1.8} opacity={0.4} />)}
+        </g>
+        <AxesEN f={f} at={-40} />
+        <KmTicks o={1} />
+        <Band p={PO} q={pp(3, 0)} color={C.second} o={0.55 * pulse(f, tPy, 40)} />
+        <Band p={pp(3, 0)} q={BAL} color={C.second} o={0.55 * pulse(f, tPy, 40)} />
+        <Dash p={PO} q={pp(3, 0)} c={C.second} w={5} /><Dash p={pp(3, 0)} q={BAL} c={C.second} w={5} />
+        <line x1={PO[0]} y1={PO[1]} x2={mix(PO[0], BAL[0], prog(f, tR - 6, tR + 18))} y2={mix(PO[1], BAL[1], prog(f, tR - 6, tR + 18))} stroke={C.first} strokeWidth={10} strokeLinecap="round" opacity={fin(f, tR - 6)} />
+        <Station />
+        <Balloon p={BAL} />
+        <Lbl x={mid[0] - 34} y={mid[1] - 20} t="r" c={C.first} s={T.calc} a="end" o={fin(f, tR)} />
+        <path d={arcD(PO, 110, 0, th * prog(f, tTh, tTh + 24))} fill="none" stroke={C.local} strokeWidth={6} opacity={fin(f, tTh)} />
+        <Lbl x={PO[0] + 140} y={PO[1] - 56} t="θ" c={C.local} s={T.calc} o={fin(f, tTh + 10)} />
+        <path d={arcD(PO, 190, 8, 70)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
+        <ArcHead c={PO} r={190} a={70} dir={1} col={C.gold} o={fin(f, tAnti)} />
+        <Lbl x={1100} y={700} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tAnti)} />
+        <Keyword f={f} text="how far · which direction" at={[1100, 700]} s={T.floor} appear={0} out={tAnti - 18} />
+        <Keyword f={f} text="polar coordinates" at={[1100, 790]} appear={tPol} />
+      </Svg>
+      <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={fin(f, tPy)} />
+      <CalcStack f={f} x={1240} y={150} size={60} rows={[
+        { lhs: "r", rhs: String.raw`=\sqrt{3^2+4^2}`, at: tPy },
+        { rhs: String.raw`=\sqrt{25}`, at: t25, cont: true },
+        { rhs: String.raw`=5\ \mathrm{km}`, at: t5, cont: true },
+        { lhs: String.raw`\tan\theta`, rhs: String.raw`=4/3`, at: tTan },
+        { lhs: String.raw`\theta`, rhs: String.raw`\approx 53^{\circ}`, at: t53, cont: true },
+        { lhs: String.raw`(r,\ \theta)`, rhs: String.raw`=(5\ \mathrm{km},\ 53^{\circ})`, at: tPair },
+      ]} />
+    </Scene>
+  );
+};
+
+// ================================================================ s05 back to x, y (kept)
+const S05: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s05_polar_back");
+  const tTri = SS(k, 2), tSides = SS(k, 4), tC = SS(k, 6), t4 = SS(k, 7), tEq = SS(k, 8);
+  return (
+    <Scene>
+      <Svg>
+        <Ground grid={0.3} />
+        <AxesEN f={f} at={-40} />
+        <g opacity={fin(f, tTri)}>
+          <path d={poly([PO, pp(3, 0), BAL, PO])} fill={C.first} fillOpacity={0.08} stroke="none" />
+          <line x1={PO[0]} y1={PO[1]} x2={pp(3, 0)[0]} y2={PO[1]} stroke={C.second} strokeWidth={8} />
+          <line x1={pp(3, 0)[0]} y1={PO[1]} x2={BAL[0]} y2={BAL[1]} stroke={C.second} strokeWidth={8} />
+          <line x1={PO[0]} y1={PO[1]} x2={BAL[0]} y2={BAL[1]} stroke={C.first} strokeWidth={10} />
+          <RightTick at={pp(3, 0)} u1={[-1, 0]} u2={[0, -1]} c={C.ink} />
+          <path d={arcD(PO, 110, 0, PL.th)} fill="none" stroke={C.local} strokeWidth={6} />
+          <Lbl x={PO[0] + 140} y={PO[1] - 56} t="θ" c={C.local} s={T.calc} />
+          <Lbl x={(PO[0] + BAL[0]) / 2 - 34} y={(PO[1] + BAL[1]) / 2 - 20} t="r" c={C.first} s={T.calc} a="end" />
+        </g>
+        <Station />
+        <Balloon p={BAL} />
+        <Keyword f={f} text="back to x and y" at={[1100, 640]} appear={0} out={tEq - 18} />
+        <CurvedLink f={f} from={[1140, 335]} to={pp(1.5, 0.15)} ctl={[900, 700]} start={tC + 10} end={t4 - 4} />
+        <CurvedLink f={f} from={[1250, 420]} to={pp(3.15, 3.2)} start={t4 + 6} end={tEq - 10} bend={20} />
+      </Svg>
+      <TeX s={String.raw`r\cos\theta`} x={pp(1.5, 0)[0]} y={PO[1] + 60} size={60} ax={0.5} c={C.second} o={fin(f, tSides)} />
+      <TeX s={String.raw`r\sin\theta`} x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} size={60} c={C.second} o={fin(f, AT(k, 4, "the side going north"))} />
+      <CalcStack f={f} x={1440} y={290} size={60} rows={[
+        { lhs: String.raw`5\cos53^\circ`, rhs: String.raw`=5\times0.6=3`, at: tC },
+        { lhs: String.raw`5\sin53^\circ`, rhs: String.raw`=5\times0.8=4`, at: t4 },
+      ]} />
+      <TeX s={EQ_S05} x={1100} y={640} size={60} o={fin(f, tEq)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s06 maths angle vs compass bearing vs "from" (kept)
+const S06: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s06_bearings");
+  const tBear = SS(k, 2), tCalc = AT(k, 3, "ninety minus fifty three"), tFrom = SS(k, 4), tWest = SS(k, 5), tCheck = SS(k, 6);
+  const brg = 90 - PL.th;
+  const W0: Pt = [1250, 560], W1: Pt = [1650, 560];
+  const B6 = [String.raw`\text{bearing}`, String.raw`=90^\circ-\theta`, String.raw`=90^\circ-53^\circ`, String.raw`=37^\circ`];
+  if (B6.join("") !== EQ_S06) throw new Error("s06 rows drift from EQ_S06");
+  return (
+    <Scene>
+      <Svg>
+        <Ground grid={0.3} />
+        <AxesEN f={f} at={-40} />
+        <line x1={PO[0]} y1={PO[1]} x2={BAL[0]} y2={BAL[1]} stroke={C.first} strokeWidth={8} />
+        <Station />
+        <Balloon p={BAL} />
+        <path d={arcD(PO, 120, 0, PL.th)} fill="none" stroke={C.local} strokeWidth={6} />
+        <ArcHead c={PO} r={120} a={PL.th} dir={1} col={C.local} />
+        <Lbl x={PO[0] + 150} y={PO[1] - 50} t="53°" c={C.local} s={T.key} />
+        <g opacity={fin(f, tBear)}>
+          <path d={arcD(PO, 210, 90, 90 - brg * prog(f, tBear, tBear + 30))} fill="none" stroke={C.gold} strokeWidth={6} />
+          <ArcHead c={PO} r={210} a={90 - brg * prog(f, tBear, tBear + 30)} dir={-1} col={C.gold} />
+          <Lbl x={PO[0] + 70} y={PO[1] - 250} t="37°" c={C.gold} s={T.key} o={fin(f, tCalc + 20)} />
+        </g>
+        <Lbl x={1100} y={110} t="compass: from north, clockwise" c={C.gold} s={T.floor} o={fin(f, tBear)} />
+        <Keyword f={f} text="from" at={[W0[0] - 20, W0[1] - 70]} a="end" appear={tFrom} />
+        <g opacity={fin(f, tWest)}>
+          <AnimatedWindArrow from={W0} to={W1} speed={10} f={f} c={C.first} px={10} head={40} />
+          <Lbl x={W0[0] - 20} y={W0[1]} t="W" c={C.muted} s={T.key} a="end" />
+          <Lbl x={W1[0] + 24} y={W1[1]} t="E" c={C.muted} s={T.key} />
+        </g>
+        <Lbl x={1250} y={660} t="a west wind blows east" c={C.key} s={T.floor} o={fin(f, AT(k, 5, "towards the east"))} />
+        <Keyword f={f} text="maths angle or compass bearing?" at={[1100, 790]} s={T.floor} appear={0} out={tCheck - 18} />
+        <Keyword f={f} text="check which angle" at={[1100, 790]} appear={tCheck} />
+      </Svg>
+      <CalcStack f={f} x={1360} y={180} size={60} rows={[
+        { lhs: B6[0], rhs: B6[1], at: tBear + 20 },
+        { rhs: B6[2], at: tCalc, cont: true },
+        { rhs: B6[3], at: tCalc + 30, cont: true },
+      ]} />
+      <TeX s={String.raw`u=+10,\ v=0`} x={1250} y={460} size={60} c={C.first} o={fin(f, AT(k, 5, "towards the east") + 20)} />
+    </Scene>
+  );
+};
+
+// ================================================================ s07 radians and arc length (kept; Should 1, Should 18)
+const S07: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s07_radians");
+  const tCir = SS(k, 1), tDiv = SS(k, 2), tArc = AT(k, 3, "arc length"), tFull = SS(k, 4), t57 = SS(k, 5), tEasy = SS(k, 6), t1 = AT(k, 7, "one kilometre"),
+    t10 = SS(k, 8), tSame = SS(k, 9), tKeep = SS(k, 10);
+  const O1: Pt = [460, 440], R1 = 280;
+  const walk = prog(f, tCir + 10, tDiv + 60);
+  const full = prog(f, tFull, tFull + 60);
+  const ang = Math.max(walk * 57.3, full * 360);
+  const oA = fout(f, tEasy - 16, 14), oB = fin(f, tEasy, 14);
+  const O2: Pt = [150, 800], a0 = 22, a1 = a0 + 0.2 / D2R;
+  return (
+    <Scene>
+      <Svg>
+        <g opacity={oA}>
+          <circle cx={O1[0]} cy={O1[1]} r={R1} fill="none" stroke={C.first} strokeWidth={4} opacity={0.6} />
+          <line x1={O1[0]} y1={O1[1]} x2={O1[0] + R1} y2={O1[1]} stroke={C.first} strokeWidth={8} />
+          <Lbl x={O1[0] + R1 / 2} y={O1[1] + 40} t="r" c={C.first} s={T.calc} a="middle" />
+          <path d={arcD(O1, R1, 0, ang)} fill="none" stroke={C.second} strokeWidth={12} strokeLinecap="round" />
+          <circle cx={O1[0] + R1 * Math.cos(ang * D2R)} cy={O1[1] - R1 * Math.sin(ang * D2R)} r={14} fill={C.key} stroke={C.bg} strokeWidth={4} opacity={fin(f, tCir)} />
+          <path d={arcD(O1, 70, 0, ang)} fill="none" stroke={C.local} strokeWidth={5} />
+          <Lbl x={O1[0] + R1 * 1.18 * Math.cos(30 * D2R)} y={O1[1] - R1 * 1.18 * Math.sin(30 * D2R)} t="s" c={C.second} s={T.calc} a="middle" o={fin(f, tArc) * fout(f, tFull)} />
+          <Lbl x={O1[0] + R1 * 1.25 * Math.cos(140 * D2R)} y={O1[1] - R1 * 1.25 * Math.sin(140 * D2R)} t="2π r" c={C.second} s={T.calc} a="end" o={fin(f, tFull + 40)} />
+          <Lbl x={O1[0] - 20} y={O1[1] + 100} t="2π rad" c={C.local} s={T.key} a="middle" o={fin(f, tFull + 50)} />
+          <Lbl x={O1[0] + 110} y={O1[1] - 60} t="θ" c={C.local} s={T.key} o={fin(f, tCir + 10) * fout(f, tFull - 10)} />
+        </g>
+        <g opacity={oB}>
+          <line x1={O2[0]} y1={O2[1]} x2={O2[0] + 780 * Math.cos(a0 * D2R)} y2={O2[1] - 780 * Math.sin(a0 * D2R)} stroke={C.local} strokeWidth={3} />
+          <line x1={O2[0]} y1={O2[1]} x2={O2[0] + 780 * Math.cos(a1 * D2R)} y2={O2[1] - 780 * Math.sin(a1 * D2R)} stroke={C.local} strokeWidth={3} />
+          <path d={arcD(O2, 70, 0, 80)} fill="none" stroke={C.first} strokeWidth={3} opacity={0.6} />
+          <path d={arcD(O2, 700, 0, 70)} fill="none" stroke={C.first} strokeWidth={3} opacity={0.6} />
+          <path d={arcD(O2, 70, a0, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, t1 - 20)} />
+          <path d={arcD(O2, 700, a0, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, t10)} />
+          <Lbl x={O2[0] + 120} y={O2[1] - 10} t="5 km" c={C.first} s={T.floor} o={fin(f, tEasy)} />
+          <Lbl x={O2[0] + 460} y={O2[1] - 60} t="50 km" c={C.first} s={T.floor} o={fin(f, tEasy + 20)} />
+          <Lbl x={O2[0] + 40} y={O2[1] - 155} t="1 km" c={C.second} s={T.key} o={fin(f, t1)} />
+          <Lbl x={O2[0] + 700 * Math.cos(27 * D2R) + 30} y={O2[1] - 700 * Math.sin(27 * D2R) - 30} t="10 km" c={C.second} s={T.key} o={fin(f, t10 + 20)} />
+        </g>
+        <Keyword f={f} text="radians" at={[1100, 420]} appear={0} out={tArc - 18} />
+        <Keyword f={f} text="arc length" at={[1100, 420]} appear={tArc} out={tEasy - 18} />
+        <Keyword f={f} text="same angle, ten times the distance" at={[1080, 700]} appear={tSame} s={T.floor} targets={[[O2[0] + 330 * Math.cos(26 * D2R), O2[1] - 330 * Math.sin(26 * D2R)]]} />
+        <Keyword f={f} text="keep this rule" at={[1080, 800]} appear={tKeep} s={T.floor} />
+      </Svg>
+      <TeX s={EQ_S07} x={1100} y={200} size={72} o={fin(f, tDiv + 40)} />
+      <TeX s={String.raw`\theta=\dfrac{s}{r}`} x={1100} y={320} size={60} c={C.local} o={fin(f, tDiv) * fout(f, tEasy - 18)} />
+      <CalcStack f={f} x={1300} y={520} size={60} rows={[
+        { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\tfrac{360^\circ}{2\pi}\approx57^\circ`, at: t57, out: tEasy - 18, h: 100 },
+      ]} />
+      <CalcStack f={f} x={1300} y={420} size={60} rows={[
+        { lhs: String.raw`5\ \mathrm{km}\times0.2`, rhs: String.raw`=1\ \mathrm{km}`, at: t1 },
+        { lhs: String.raw`50\ \mathrm{km}\times0.2`, rhs: String.raw`=10\ \mathrm{km}`, at: t10 + 10 },
+      ]} />
+    </Scene>
+  );
+};
+
+export const SCENES_A: Record<string, React.FC> = {
+  s00_title: S00, s01_hook: S01, s02_coordinates: S02, s03_cartesian_arrows: S03, s04_polar: S04, s05_polar_back: S05, s06_bearings: S06, s07_radians: S07,
+};
+void [fout, kmPx];

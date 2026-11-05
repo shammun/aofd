@@ -1,0 +1,10 @@
+# ch00_coordinates_flat (#5a): sound cue sheet for tools/sound/mix.py (build 1, 2026-11-05).
+# Score: the storyboard's style 'compass-orbit' is not in tools/sound/styles.py (a tools change, not the builder's), so the
+# storyboard's named runner-up is used: ice-polar, seed 23 (used before only by the unpublished build-1 archive ch00_coordinates).
+# Effect: only where the picture shows the thing (HOUSE_STYLE §8): s21 S1-S3, Ian's HRRR streaklines sweeping round the eye on
+# the full map (storyboard effects_candidates: wind, intensity 0.12); offset = s21-relative seconds of S1 (timing.json).
+music: {style: ice-polar, seed: 23, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects:
+  - {effect: wind_gusty, scene: s21, offset: 3.8, duration: 21.0, intensity: 0.12, lufs: -29, fade_in: 1.5, fade_out: 2.5, seed: 61}

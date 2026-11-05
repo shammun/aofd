@@ -1,0 +1,146 @@
+[
+ [
+  "It's an arrow of length one that points straight away from the station, towards the balloon.",
+  "It's an arrow of length one that points away from the station, towards the balloon."
+ ],
+ [
+  "Adding the north parts gives four point eight minus four point eight, which is zero.",
+  "The north parts give four point eight minus four point eight, which is zero."
+ ],
+ [
+  "The tangential wind averages about thirty seven metres per second.",
+  "The tangential wind averages about thirty five metres per second."
+ ],
+ [
+  "So thirty seven metres per second is about a hundred and thirty kilometres per hour.",
+  "So thirty five metres per second is about a hundred and twenty six kilometres per hour."
+ ],
+ [
+  "The radial wind averages about minus twelve and a half metres per second.",
+  "The radial wind averages about minus thirteen metres per second."
+ ],
+ [
+  "Thirty seven is how fast the air goes round the eye. Twelve and a half is how fast it moves towards the eye.",
+  "Thirty five is how fast the air goes round the eye. Thirteen is how fast it moves towards the eye."
+ ],
+ [
+  "the square root of thirty seven squared plus twelve and a half squared, about thirty nine metres per second.",
+  "the square root of thirty five squared plus thirteen squared, about thirty seven metres per second."
+ ],
+ [
+  "Twelve and a half metres per second, times three point six, is about forty five kilometres per hour, towards the centre.",
+  "Thirteen metres per second, times three point six, is about forty seven kilometres per hour, towards the centre."
+ ],
+ [
+  "Moving in at twelve and a half metres per second, it would cover the twenty five thousand metres to the centre in two thousand seconds, about thirty three minutes.",
+  "Moving in at thirteen metres per second, it would cover the twenty five thousand metres to the centre in about nineteen hundred seconds, about thirty two minutes."
+ ],
+ [
+  "Going round at thirty seven metres per second, one lap of this ring, two pi times twenty five kilometres, about a hundred and fifty seven kilometres, takes about seventy one minutes.",
+  "Going round at thirty five metres per second, one lap of this ring, two pi times twenty five kilometres, about a hundred and fifty seven kilometres, takes about seventy five minutes."
+ ],
+ [
+  "Thirty seven divided by twelve and a half is about three, so for every metre it moves in, it moves about three metres round.",
+  "Thirty five divided by thirteen is about two point seven, so for every metre it moves in, it moves almost three metres round."
+ ],
+ [
+  "There, u is about zero, and v is about thirty eight: the wind blows north.",
+  "There, u is minus eight point seven, and v is thirty eight: the wind blows north, and a little west."
+ ],
+ [
+  "So u sub r is about zero, and u sub theta is about thirty eight. Here, the wind blows almost purely round.",
+  "So u sub r equals u, which is minus eight point seven: a little in. And u sub theta equals v, which is thirty eight: round. Here, the wind blows mostly round."
+ ],
+ [
+  "There, u is minus twenty seven point three, and v is minus twenty point four: the wind blows towards the west, and a little south.",
+  "There, u is minus sixteen point nine, and v is minus thirty seven point four: the wind blows mostly towards the south, and a little west."
+ ],
+ [
+  "So u sub r equals v, which is minus twenty point four: in. And u sub theta equals minus u, which is plus twenty seven point three: round.",
+  "So u sub r equals v, which is minus thirty seven point four: in. And u sub theta equals minus u, which is plus sixteen point nine: round."
+ ],
+ [
+  "There, u is minus nine point eight, and v is minus forty eight point seven.",
+  "There, u is minus ten point one, and v is minus forty four point five."
+ ],
+ [
+  "So u sub r is minus nine point eight times minus zero point seven zero seven, plus minus forty eight point seven times zero point seven zero seven.",
+  "So u sub r is minus ten point one times minus zero point seven zero seven, plus minus forty four point five times zero point seven zero seven."
+ ],
+ [
+  "That's six point nine minus thirty four point four, about minus twenty seven and a half: in.",
+  "That's seven point one minus thirty one point five, about minus twenty four point four: in."
+ ],
+ [
+  "And u sub theta is plus nine point eight times zero point seven zero seven, plus minus forty eight point seven times minus zero point seven zero seven.",
+  "And u sub theta is plus ten point one times zero point seven zero seven, plus minus forty four point five times minus zero point seven zero seven."
+ ],
+ [
+  "That's six point nine plus thirty four point four, about forty one point four: round.",
+  "That's seven point one plus thirty one point five, about thirty eight point six: round."
+ ],
+ [
+  "On the east side it blows north, and on the north side it blows west, and so on, all the way round.",
+  "On the east side it blows north, on the west side it blows south, and on the south side it blows east, all the way round."
+ ],
+ [
+  "The tangential wind stays close to its average of thirty seven, between about twenty five and fifty.",
+  "The tangential wind stays positive all the way round, between about seventeen and forty seven, with an average of thirty five."
+ ],
+ [
+  "The radial wind wobbles more, between about zero and minus thirty five, because the storm isn't perfectly round.",
+  "The radial wind wobbles more, between about minus forty and plus fourteen, because the storm isn't perfectly round."
+ ],
+ [
+  "But it's negative, or nearly zero, all the way round.",
+  "It's negative at fifty eight of the seventy two points, and only on the southwest side does it blow a little outward."
+ ],
+ [
+  "So the air flows in on every side.",
+  "So, on average, the air flows in."
+ ],
+ [
+  "twelve and a half over thirty seven, which is about zero point three four. So the inflow angle is about nineteen degrees.",
+  "thirteen point three over thirty four point eight, which is about zero point three eight. So the inflow angle is about twenty one degrees."
+ ],
+ [
+  "about thirty seven metres per second of spin and twelve and a half of inflow, so the air spirals in at about nineteen degrees.",
+  "so the air spirals in at about twenty one degrees."
+ ],
+ [
+  "Now the second arrow, theta hat.",
+  "The next few minutes build theta hat one step at a time, for anyone who enjoys seeing every move. You don't need these steps for the intuition of weather, climate science or maps, so if it feels like too much, skip ahead to the time on screen. Now the second arrow, theta hat."
+ ],
+ [
+  "Dividing each by eight point seven gives about minus zero point eight and zero point six: theta hat again. [beat]",
+  "Dividing each by eight point seven gives about minus zero point eight and zero point six: theta hat again. [beat] If you skipped, here's what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat is r hat turned by ninety degrees."
+ ],
+ [
+  "Now let's describe a wind in polar coordinates.",
+  "The next two scenes split a wind into its polar parts, number by number, for learners who want every step. If you'd rather keep the big picture, skip ahead to the time on screen; you won't miss anything you need for weather or climate. Now let's describe a wind in polar coordinates."
+ ],
+ [
+  "We'll use these two lines on a real hurricane soon.",
+  "We'll use these two lines on a real hurricane soon. If you skipped, here's what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and each part is a dot product."
+ ],
+ [
+  "Now let's look at a second way to change coordinates.",
+  "The next few scenes turn the axes and build the rotation matrix, one step at a time, for anyone who wants every step. They aren't needed for the intuition of weather, climate science or maps, so feel free to skip ahead to the time on screen. Now let's look at a second way to change coordinates."
+ ],
+ [
+  "With polar coordinates, the angle is theta, so it changes from place to place.",
+  "With polar coordinates, the angle is theta, so it changes from place to place. If you skipped, here's what to keep: turning the axes changes the numbers that describe an arrow, but not the arrow itself, and polar parts are just axes turned by theta."
+ ],
+ [
+  "Where do those averages come from?",
+  "Next, we work out three ring points by hand, for anyone who wants to see every number. If that feels like too much, skip ahead to the time on screen. Where do those averages come from?"
+ ],
+ [
+  "The computer does exactly this at all seventy two points, and then takes the averages.",
+  "The computer does exactly this at all seventy two points, and then takes the averages. If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them."
+ ],
+ [
+  "This is the first of five parts on coordinates",
+  "This is the first of seven parts on coordinates"
+ ]
+]

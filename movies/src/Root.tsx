@@ -7,6 +7,13 @@ import { CP1_FRAMES, CP2_FRAMES, CPW_FPS, CPW_FRAMES, CrossProductPart1, CrossPr
 import { DT_FPS, DT_FRAMES, DerivativesTaylor } from "./ch00_derivatives_taylor/DerivativesTaylor";
 import { CO_FPS, CO_FRAMES, Coordinates } from "./ch00_coordinates/Coordinates";
 import { GR_FPS, GR_FRAMES, Gradient } from "./ch00_gradient/Gradient";
+import { CF_FPS, CF_FRAMES, CoordinatesFlat } from "./ch00_coordinates_flat/CoordinatesFlat";
+import { FR_FPS, FR_FRAMES, CoordinatesFrames } from "./ch00_coordinates_frames/CoordinatesFrames";
+import { CST_FPS, CST_FRAMES, CoordinatesStorm } from "./ch00_coordinates_storm/CoordinatesStorm";
+import { MV_FPS, MV_FRAMES, CoordinatesMoving } from "./ch00_coordinates_moving/CoordinatesMoving";
+import { RT_FPS, RT_FRAMES, CoordinatesRoutes } from "./ch00_coordinates_routes/CoordinatesRoutes";
+import { CS_FPS, CS_FRAMES, CoordinatesSphere } from "./ch00_coordinates_sphere/CoordinatesSphere";
+import { MP_FPS, MP_FRAMES, CoordinatesMaps } from "./ch00_coordinates_maps/CoordinatesMaps";
 
 // Every movie is one <Composition>. Ids: Empty (toolchain test), PocCoriolis (PoC D, movies/src/poc/), and per chapter
 // ChNN<Slug> (movies/src/chNN/<Slug>.tsx). Durations of real movies come from timing.json via calculateMetadata,
@@ -35,5 +42,26 @@ export const Root: React.FC = () => (
     {/* #6 the gradient (movies/ch00/ch00_gradient; also its own entry src/ch00_gradient/index.ts) */}
     <Composition id="Ch00Gradient" component={Gradient} durationInFrames={GR_FRAMES} fps={GR_FPS} width={1920}
       height={1080} defaultProps={{ audio: "narration_music.wav" }} />
+    {/* #5a coordinates Part 1 (movies/ch00/ch00_coordinates_flat; also its own entry src/ch00_coordinates_flat/index.ts) */}
+    <Composition id="Ch00CoordinatesFlat" component={CoordinatesFlat} durationInFrames={CF_FRAMES} fps={CF_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_cf.wav" }} />
+    {/* #5d coordinates Part 4 (movies/ch00/ch00_coordinates_frames; also its own entry src/ch00_coordinates_frames/index.ts) */}
+    <Composition id="Ch00CoordinatesFrames" component={CoordinatesFrames} durationInFrames={FR_FRAMES} fps={FR_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_fr.wav" }} />
+    {/* #5b coordinates Part 2 (movies/ch00/ch00_coordinates_storm; also its own entry src/ch00_coordinates_storm/index.ts) */}
+    <Composition id="Ch00CoordinatesStorm" component={CoordinatesStorm} durationInFrames={CST_FRAMES} fps={CST_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_cst.wav" }} />
+    {/* #5e coordinates Part 5 (movies/ch00/ch00_coordinates_moving; also its own entry src/ch00_coordinates_moving/index.ts) */}
+    <Composition id="Ch00CoordinatesMoving" component={CoordinatesMoving} durationInFrames={MV_FRAMES} fps={MV_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_mv.wav" }} />
+    {/* #5f coordinates Part 6 (movies/ch00/ch00_coordinates_routes; also its own entry src/ch00_coordinates_routes/index.ts) */}
+    <Composition id="Ch00CoordinatesRoutes" component={CoordinatesRoutes} durationInFrames={RT_FRAMES} fps={RT_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_rt.wav" }} />
+    {/* #5c coordinates Part 3 (movies/ch00/ch00_coordinates_sphere; also its own entry src/ch00_coordinates_sphere/index.ts) */}
+    <Composition id="Ch00CoordinatesSphere" component={CoordinatesSphere} durationInFrames={CS_FRAMES} fps={CS_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_cs.wav" }} />
+    {/* #5g coordinates Part 7 (movies/ch00/ch00_coordinates_maps; also its own entry src/ch00_coordinates_maps/index.ts) */}
+    <Composition id="Ch00CoordinatesMaps" component={CoordinatesMaps} durationInFrames={MP_FRAMES} fps={MP_FPS} width={1920}
+      height={1080} defaultProps={{ audio: "narration_music_mp.wav" }} />
   </>
 );
