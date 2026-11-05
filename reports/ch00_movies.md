@@ -7674,3 +7674,347 @@ Recomputed values: 0.1° = 0.0017453 rad; s = 8.7266 m; (2993.01, 4005.23) m; sl
 - I did not open the redesigned s11 render; C16 is checked against the working-tree storyboard rows only.
 
 **Disk.** C: 115 GB free, G: 485 GB free. This audit wrote 30 MB of frames to the ignored `calc_audit/` folder.
+
+## #5c ch00_coordinates_sphere — calculation & sync audit (2026-11-05)
+
+**Scope.** Same method as #5b: `script.md`, `storyboard.yaml`, `timing.json`, `cs_sA/sB/sC.tsx` (the CalcStack rows and their `SS`/`AT` anchors), `data/`. All numbers recomputed in Python. No render yet.
+
+**Recomputed, all agree.**
+- Brest: sin/cos 48.4° = 0.7478 / 0.6639; z = 4764.3 km; a cos φ = 4229.8 km; x = 4217.0 km; y = −331.9 km; Pythagoras checks back to 4230 and 6371.
+- Brest r̂ = (0.662, −0.052, 0.748).
+- Khulna: z = 2469, a cos φ = 5873, x = 41.0, y = 5873 km.
+- Ω = 2π/86 164 = 7.2921 × 10⁻⁵ rad/s.
+- U = 464.6 m/s at the equator; 464.5 Singapore; 428.3 Khulna; 308.4 Brest; 95.0 Longyearbyen.
+- 1° = 111.19 km; 1′ = 1.853 km; 48.4° × 111.2 = 5382 km; one degree east at Brest = 73.8 km.
+- Box widths 27.8 / 25.6 / 18.5 / 5.7 km; 27.8/5.7 = 4.9.
+- Box areas 772.8 / 712.4 / 513.1 / 158.0 km².
+- Strip check 0.1582 vs 0.1580; strips 0.174 + 0.168 + 0.158 = 0.500.
+- 2πa² = 255.0 × 10⁶ km²; 4πa² = 510.1 × 10⁶ km².
+- Weighted average example 20 °C.
+
+**Re-voice needed:** C1 (s20 S6, s21 S4) and C2 (s26 S13). Everything else is visual only.
+
+### Must fix (2)
+
+**C1 — s20 S6 (24:14), s21 S4 (25:55): "Twenty three hours and fifty six minutes is eighty six thousand one hundred and sixty four seconds" is false arithmetic.** 23 h 56 min = 82 800 + 3 360 = 86 160 s. The sidereal day is 23 h 56 min **4 s** = 86 164 s. The screen row "T = 86 164 s" appears with no working.
+- *Narration (re-voice):*
+  - s20 S6: "…the Earth turns once every twenty three hours, fifty six minutes and four seconds."
+  - s21 S4: "Twenty three hours, fifty six minutes and four seconds is eighty six thousand one hundred and sixty four seconds."
+- *Rows (`cs_sB.tsx` S21, on S4):* `T=23\times3600+56\times60+4` then `=82\,800+3\,360+4=86\,164\ \text{s}`.
+- *Visual (S20):* change the label to "one turn: 23 h 56 min 4 s".
+
+**C2 — s26 S13 (34:38): wrong back-reference.** "This is also how we turned the coast's latitudes and longitudes into kilometres in Part 2" is no longer true. The coast derivation moved to Part 4: Part 2 s26 now says "In Part 4, we'll … measure exactly how much". The keyword "Part 2: degrees → km" (`cs_sC.tsx` S26) is wrong too.
+- *Narration:* "This is also how, in Part 4, we'll turn a coast's latitudes and longitudes into kilometres."
+- *Keyword:* "Part 4: degrees → km".
+
+### Should fix (7)
+
+**C3 — s21 S7–S14 (26:19–27:24): rounding makes the shown arithmetic disagree with the voice.**
+- `7.29\times10^{-5}\times6.371\times10^{6}` is 464.4, but the row says ≈ 465.
+- The rows then multiply 465 by cos φ. That gives 428.7 and 308.7, while the screen and voice say 428 and 308.
+- Singapore's "about 464" (S10) has no row at all; it appears only on a map label.
+- *Rows:*
+  - S7: `U_{\text{eq}}=7.292\times10^{-5}\times6.371\times10^{6}\approx464.6\approx465\ \text{m/s}`
+  - S10: `\text{Singapore }1.35^\circ\text{N: }464.6\times0.9997\approx464`
+  - S11–S14: `464.6\times0.9219\approx428`, `464.6\times0.6639\approx308`, `464.6\times0.2045\approx95`
+
+**C4 — s21 S8–S9 (26:33–26:50): the easy check hides two steps.** The "40 000 km" and the "almost twice a jet" have no working.
+- *Rows:*
+  - `2\pi\times6400\approx40\,000\ \text{km}`
+  - `40\,000\div24\approx1670\ \text{km/h}` (exists)
+  - `465\times3.6\approx1670\ \text{km/h}` (links the exact and easy routes)
+  - `1670\div900\approx1.9`
+
+**C5 — s20 S8 (24:24): "four minutes shorter … because the Earth also moves along its orbit" gives the 4 min with no origin.** *Rows:* `360^\circ\div365\ \text{days}\approx1^\circ\ \text{a day}` then `24\ \text{h}\div360=4\ \text{min per }1^\circ`. A small orbit sketch: the Sun direction shifts 1° per day, so the Earth must turn 361° from noon to noon.
+
+**C6 — s19 S3, S5, S8, S9 (22:30–23:24): Khulna's sines and cosines are said but never shown on their own.** Brest got these rows in s15–s17; here the values appear only inside the products. "sine phi is 0.3875" is said at S3, but its row comes at S4.
+- *Rows:*
+  - S3: `\sin22.8^\circ\approx0.3875`
+  - S5: `\cos22.8^\circ\approx0.9219`
+  - S8: `\cos89.6^\circ\approx0.00698`
+  - S9: `\sin89.6^\circ\approx1.000`
+
+**C7 — s26 S6–S9 (33:50–34:17): box widths shown as labels only.** The widths appear ("25.6 km wide" and so on) but the multiplication never does. *Rows on each label's words:*
+- `27.8\times0.9997\approx27.8`
+- `27.8\times0.9219\approx25.6`
+- `27.8\times0.6639\approx18.5`
+- `27.8\times0.2045\approx5.7`
+
+**C8 — s31 S7 (40:53): "their steps in sine phi are 0.174, 0.168 and 0.158" shows no subtractions.** *Rows:*
+- `\sin10^\circ-\sin0^\circ=0.174-0=0.174`
+- `\sin20^\circ-\sin10^\circ=0.342-0.174=0.168`
+- `\sin30^\circ-\sin20^\circ=0.500-0.342=0.158`
+
+**C9 — several scenes: small hidden steps.**
+- s18 S7–S8 (21:00–21:25): add the squares:
+  - `\sqrt{17\,783\,000+110\,000}=\sqrt{17\,893\,000}\approx4230`
+  - `\sqrt{17\,893\,000+22\,696\,000}=\sqrt{40\,589\,000}\approx6371`
+- s19 S11: the same for Khulna.
+- s32 S3 (41:49): `2\pi\times40.6\times10^{6}\approx255\times10^{6}\ \text{km}^2`.
+- s34 S14 (45:36): `16.3-7.1=9.2\ ^\circ\text{C}`.
+
+### Verified (keep)
+- Every derivation in s08, s14–s18 and s27–s33 is one move per sentence, with its rows on the words.
+- The skip chips and "if you skipped" lines are in place.
+- The s04, s07, s11, s23, s24, s28 and s30 rows match the voice digit for digit.
+
+### Verdict: FIX (Part 3 audit: 2 Must, 7 Should)
+
+## #5d ch00_coordinates_frames — calculation & sync audit (2026-11-05)
+
+**Recomputed, all agree.**
+- Brest frame: k̂ = (0.662, −0.052, 0.748), î = (0.078, 0.997, 0), ĵ = (−0.745, 0.059, 0.664); î × ĵ = k̂; î·ĵ = 0.0007 ("zero up to rounding").
+- Trappes 480/6371 = 0.0753 rad = 4.32°.
+- Singapore k̂·k̂_B = −0.191 → 101.0°.
+- Khulna k̂·k̂_B = 0.246 → 75.8°; î_B·î_K = −0.0715 → 94.1°.
+- Coast: Δy = 91.51 km, Δx = −55.03 km; tan = 0.601 → 31.0°; bearing 329°; α = 121°.
+- Ian's wind: along 9.37, across −31.57 m/s; check 32.97.
+- Plane: 900 km / 74 = 12.2°.
+- Turning rate 2.36 × 10⁻⁶ rad/s = 11.7° per day.
+- Metric term 1.57 × 10⁻⁵; f v = 1.03 × 10⁻³; ratio 65.6 ≈ 66.
+- The glider 11.5 / 8.2 → 14.12 m/s, the same speed.
+
+**Physics checked.**
+- Going east, east tips north and down; going east, up leans east and north leans west.
+- Du/Dt = uv tan φ / a with u, v > 0 in the NH makes u grow and v shrink.
+
+**Re-voice needed:** D1 (one word), D3 (place name), and D4 if (b) is chosen. Everything else is visual only.
+
+### Should fix (8)
+
+**D1 — s09 S3 (11:00.8): "about seventy eight kilometres west of Khulna" disagrees with Part 2.** Part 2 s21 S5 says "seventy nine" (data 79.36 km). *Re-voice:* "about seventy nine kilometres".
+
+**D2 — s09 S5–S10 (11:17–11:55): the Khulna arithmetic skips moves that Brest and Singapore showed.**
+- k̂_K appears with no cos/sin inputs.
+- The dot product jumps straight to "0.004 − 0.048 + 0.290"; the products are missing.
+- î_K and î_B·î_K show results only.
+- *Rows:*
+  - `\cos\varphi=0.922,\ \sin\varphi=0.388,\ \cos\lambda=0.007,\ \sin\lambda=1.000` (from Part 3)
+  - `0.662\times0.006+(-0.052)\times0.922+0.748\times0.388` → `=0.004-0.048+0.290` (exists)
+  - `\hat{\mathbf i}_K=(-\sin89.6^\circ,\ \cos89.6^\circ,\ 0)=(-1.000,\ 0.007,\ 0)`
+  - `\hat{\mathbf i}_B\cdot\hat{\mathbf i}_K=0.078\times(-1.000)+0.997\times0.007+0=-0.078+0.007=-0.071`
+  - `\cos^{-1}(-0.071)\approx94^\circ`
+
+**D3 — s11 S2, S9–S12 (13:25–14:52): a place name and several steps.**
+- (a) The point 26.92° N, 82.35° W is about 4 km from **Englewood**, but about 22 km from Venice, Florida (27.10° N, 82.45° W). Part 2's data calls it `englewood`. *Re-voice S2:* "…one near Englewood, further up the coast…"
+- (b) The degree→radian step is not shown, and "0.0144" (row 3) vs "0.01436" (row 4) disagree: 6371 × 0.0144 = 91.7, not 91.5. *Rows:*
+  - `0.823\times0.01745=0.01436\ \text{rad}`
+  - `-0.553\times0.01745=-0.00965\ \text{rad}`
+  - Use 0.01436 in both rows.
+- (c) The middle latitude needs its average: `\frac{26.10+26.92}{2}=26.51^\circ\approx26.5^\circ`.
+
+**D4 — s14 S7, S9 (18:52, 19:09): the across value is both −31.5 and −31.6.** The arithmetic row gives −19.0 − 12.5 = −31.5 ("about minus thirty one and a half"). The check row and the summary say 31.6 / −31.6. *Fix, either one:*
+- (a) Visual only: show the products to 2 dp, −19.03 − 12.51 = −31.54 ≈ −31.5, and use 31.5 everywhere: `9.4^2+31.5^2\approx88+992=1080,\ \sqrt{1080}\approx32.9\approx33`.
+- (b) Re-voice S9 with "thirty one point five".
+
+**D5 — s19 S16–S17 (26:13–26:23): "about twelve degrees in a day" shows no conversion.** *Rows:* `2.4\times10^{-6}\times86\,400\ \text{s}\approx0.20\ \text{rad}` then `0.20\times57.3\approx11.7^\circ\approx12^\circ`.
+
+**D6 — s06 S11 (7:42): ĵ at Brest appears as a result only.** The storyboard's calc row (the products) is not drawn. *Row:* `\hat{\mathbf j}=(-0.748\times0.997,\ -0.748\times(-0.078),\ 0.664)` then `\approx(-0.745,\ 0.059,\ 0.664)`.
+
+**D7 — s26 S8 (35:44.9): the glider's 11.5 and 8.2 have no source on screen.**
+- *Slate line:* "worked out step by step along the great circle (notebook)".
+- *A first-guess row that the viewer can check:* `\frac{Du}{Dt}=1.57\times10^{-5}\ \text{m/s}^2` → `\times86\,400\ \text{s}\approx1.4\ \text{m/s}` → `u\approx10+1.4\approx11.4` (the full path gives 11.5).
+
+**D8 — small steps.**
+- s08 S2 (9:20): `6.5^\circ\times73.8\ \text{km}\approx480\ \text{km}` (Trappes 2.0° E vs Brest 4.5° W).
+- s27 S5 (36:53): `\sin45^\circ=0.707`.
+- s07 S5 "the other pairs work out the same way": show the j·k and k·i values as two slate rows, e.g. `\hat{\mathbf j}\cdot\hat{\mathbf k}\approx0,\ \hat{\mathbf k}\cdot\hat{\mathbf i}\approx0`.
+
+### Verified (keep)
+- s04, s07, s08 (Singapore), s12, s13, s14 and s27 already show every product on its words.
+- The derivations s16–s25 are one move per sentence, with the rows on the words.
+
+### Verdict: FIX (Part 4 audit: 0 Must, 8 Should)
+
+## #5e ch00_coordinates_moving — calculation & sync audit (2026-11-05)
+
+**Recomputed.**
+- Train: 21.5, +0.5 m/s.
+- Pattern: u = 10 + 5 sin(2πx/200 km) at x = 25 km gives 13.536 m/s; slope 0.1111 m/s per km.
+- Rider: 3.536 m/s = 12.73 km/h, advection +1.414.
+- Ground: −4.00 + 5.41 = +1.41.
+- Ciarán: |U| = 14.578 m/s at 70.97°, (13.78, 4.75), 52.48 km/h.
+- South: v′ = (13.47, 8.44) − (13.78, 4.75) = (−0.32, 3.68), |v′| = 3.69.
+- North: (−18.00, −10.08), |v′| = 20.63.
+- Side means 18.20 / 6.91 → 4.99 / 19.94.
+- Ring means 14.06 / 13.81, inflow −6.02 / −5.93.
+- 84 kt = 155.6 km/h.
+- Plymouth: −3.82 + 3.21 = −0.61 hPa/h.
+- Centre check −0.47 hPa/h.
+
+**Physics.** NH anticlockwise spin adds to the motion on the right-hand (southern) side ✓. The sign of U·∇p ahead of the low ✓.
+
+**Re-voice needed:** none required. E2 and E3 have optional narration.
+
+### Must fix (1)
+
+**E1 — s10 S7 (11:55): the shown subtraction is wrong.** The row reads (13.5, 8.4) − (13.8, 4.8) ≈ (−0.3, **3.7**), but 8.4 − 4.8 = 3.6. The 3.7 comes from the unrounded data (8.44 − 4.75). The lengths |v′| ≈ 3.7 and 20.6 also appear with no Pythagoras.
+- *Rows (`mv_sB.tsx` S10), visual only:*
+  - `\mathbf v'=(13.47,\ 8.44)-(13.78,\ 4.75)=(-0.31,\ 3.69)`
+  - `|\mathbf v'|=\sqrt{0.31^2+3.69^2}\approx3.7`
+  - North: `|\mathbf v'|=\sqrt{18.0^2+10.1^2}=\sqrt{324+102}\approx20.6`
+
+### Should fix (5)
+
+**E2 — s07 S2–S11 (7:23–8:48): the sliding-pattern numbers.**
+- (a) Rounding: the screen says u = 13.5, then 13.5 − 10 = 3.5 → "≈ 12.7 km/h" and "48.7 km/h". But 3.5 × 3.6 = 12.6 and 13.5 × 3.6 = 48.6. The true values are 3.54 and 13.54.
+- (b) The × 3.6 conversions are never shown.
+- (c) Where 13.5 and 0.111 come from is not shown. That is a missed link to Part 2's slope of sine.
+- *Rows:*
+  - S0–S2: `u=10+5\sin\!\Big(\frac{2\pi x}{200\ \text{km}}\Big)`; at x = 25 km: `10+5\sin45^\circ=10+3.54=13.54`; slope: `5\times\frac{2\pi}{200}\times\cos45^\circ\approx0.111\ \frac{\text{m/s}}{\text{km}}`
+  - S5: `13.54-10=3.54\ \text{m/s}`, `3.54\times3.6\approx12.7\ \text{km/h}`
+  - S9: `10\times3.6=36\ \text{km/h}`
+  - S11: `13.54\times3.6\approx48.7\ \text{km/h}`
+  - Unit row: `\frac{\text{km}}{\text{h}}\times\frac{\text{m/s}}{\text{km}}=\frac{\text{m/s}}{\text{h}}`
+- *Optional narration S2:* "…where the wind is thirteen point five four metres per second…"
+
+**E3 — s08 S4 (9:53.7): 14.6 m/s and the 71° bearing have no inputs.** They come from the track, but the distance, the time and the angle are never shown. That is Part 4's coast recipe again.
+- *Rows (builder: take the 06 UTC centre from the track and add a CHECK row):*
+  - `\Delta y\approx103\ \text{km north},\ \ \Delta x\approx298\ \text{km east}`
+  - `\sqrt{103^2+298^2}\approx315\ \text{km}`
+  - `\frac{315\,000\ \text{m}}{6\times3600\ \text{s}}=\frac{315\,000}{21\,600}\approx14.6\ \text{m/s}`
+  - `\tan\beta=\frac{298}{103}\approx2.9\ \Rightarrow\ \beta\approx71^\circ`
+- *Optional narration S4:* "In those six hours, it moved about three hundred and fifteen kilometres: about a hundred north and three hundred east."
+
+**E4 — s11 S1–S4 (12:40–13:09): "the motion adds about thirteen" has no origin.** The 13.2 and −13.0 are U·θ̂ averaged over each 85° side of the ring.
+- *Rows:*
+  - `\text{middle of the side: }\hat{\boldsymbol\theta}\parallel\mathbf U\ \Rightarrow\ \mathbf U\cdot\hat{\boldsymbol\theta}=14.6`
+  - `\text{across the side, }\hat{\boldsymbol\theta}\text{ turns up to }\pm42^\circ:\ \text{average}\approx14.6\times0.91\approx13.2`
+  - North: `\approx-13.0`
+- *Visual:* θ̂ arrows at 5 points of the southern arc with U beside them, and their dot products as small numbers.
+
+**E5 — s15 S4 (18:46.8): "rises along the storm's direction by 0.061 hPa/km" hides a dot product.**
+- *Rows:*
+  - `|\nabla p|\approx0.062\ \text{hPa/km},\ \text{pointing }63^\circ`
+  - `\text{along }71^\circ:\ 0.062\times\cos8^\circ\approx0.061\ \text{hPa/km}`
+- *Visual:* the ∇p and U arrows already drawn, with the 8° angle between them marked.
+
+**E6 — s15 S5 (18:56): the m/s → km/h step is missing, and 14.6 × 3.6 gives 52.56, not the "52.5" shown.** *Row:* `14.58\ \text{m/s}\times3.6\approx52.5\ \text{km/h}`.
+
+### Verified (keep)
+- s03–s05: the derivations are one move per sentence.
+- s13–s14: the τ derivation, with its unit row.
+- s16: the centre check.
+
+### Verdict: FIX (Part 5 audit: 1 Must, 5 Should)
+
+## #5f ch00_coordinates_routes — calculation & sync audit (2026-11-05)
+
+**Recomputed, all agree.**
+- London r̂ = (0.622, −0.0014, 0.783); LA r̂ = (−0.392, −0.730, 0.560).
+- cos σ = 0.1953 (3-dp rows give 0.1954); σ = 78.74° = 1.3742 rad; d = 8755 km; 8755/900 = 9.7 h.
+- Initial bearing 311.8°, final 214.0°, vertex 62.37° N.
+- Rhumb 258.49°, 9732.8 km; ratio 1.112; extra 978 km = 1.09 h.
+- Brest–Lisbon great circle 1138.1 km; rhumb +0.149 km.
+- 1° east at Brest = 73.8 km.
+
+**Re-voice needed:** none.
+
+### Should fix (4)
+
+**F1 — s11 S4–S6 (12:16–12:42): 312°, 62.4° N and 214° appear as results with no method.** They can be worked out with tools the viewer already has (Part 4's east/north arrows and dot products). The route leaves London in the plane of r̂₁ and r̂₂, so its ground direction is r̂₂'s part along London's east and north. Put the rows in the maths-skip block, or as a short optional block before s11's keep line.
+- *Rows:*
+  - `\hat{\mathbf i}_1=(0.002,\ 1.000,\ 0),\ \ \hat{\mathbf j}_1=(-0.783,\ 0.002,\ 0.622)`
+  - `\text{east: }\hat{\mathbf r}_2\cdot\hat{\mathbf i}_1\approx-0.731,\qquad \text{north: }\hat{\mathbf r}_2\cdot\hat{\mathbf j}_1\approx0.307-0.001+0.348=0.654`
+  - `\tan\beta=\frac{0.731}{0.654}\approx1.12\ \Rightarrow\ \beta\approx48^\circ\ \text{west of north}\ \Rightarrow\ 360^\circ-48^\circ=312^\circ`
+  - At LA, the same with LA's arrows gives the bearing back to London, ≈ 34°. Add 180° and the arrival heading is 214°.
+  - Highest latitude (optional, a new rule, so give it its own sentence): `\cos\varphi_{\max}=\sin48.2^\circ\times\cos51.5^\circ\approx0.464\ \Rightarrow\ \varphi_{\max}\approx62.4^\circ`.
+- If the user prefers not to add a block: a slate line "worked out from the two position arrows (notebook)".
+
+**F2 — s12 S2–S3 (13:07–13:16): the rhumb's 258.5° and 9733 km have no inputs.** Neither Part 6 nor Part 7 works them out (see G4). *Fix:* a slate line "worked out on Mercator's map in Part 7", plus the G4 rows in Part 7.
+
+**F3 — s13 S7 (14:39): the 1138 km and the "+150 m" appear with no working.** The 1138 km can be checked with the flat-map recipe from Parts 3–4, which is good on a short trip:
+- `\Delta y=9.67^\circ\times111.2\approx1075\ \text{km}`
+- `\Delta x=4.65^\circ\times111.2\times\cos43.6^\circ\approx375\ \text{km}`
+- `\sqrt{1075^2+375^2}\approx1138\ \text{km}`
+
+Add the slate "+150 m: from the notebook's rhumb formula". Lisbon = 38.72° N, 9.14° W. Do **not** use the 3-dp dot-product recipe here: arccos near 1 is ill-conditioned (0.9840 gives 1141 km).
+
+**F4 — s03 S6 (2:14): two screen numbers are never spoken.** "1° east ≈ 111 km (equator)" and "≈ 23 km (78° N)" are on screen, and the 23 has no working. *Row:* `111.2\times\cos78^\circ\approx23\ \text{km}`. Or say it: "…about a hundred and eleven kilometres at the equator, but only twenty three near Svalbard."
+
+### Verified (keep)
+- s04, s08, s09 and s10 show every product and conversion on its words.
+- The σ chain (r̂ → dot → arccos → radians → a σ → quick check) is complete.
+
+### Verdict: FIX (Part 6 audit: 0 Must, 4 Should)
+
+## #5g ch00_coordinates_maps — calculation & sync audit (2026-11-05)
+
+**Recomputed.**
+- Plate carrée: x = −500.4 km; y = 5381.8 km (48.4° = 0.84474 rad).
+- 2πa = 40 030 km; 2π × 4230 = 26 578 km; k = 1.506; 1/0.2045 = 4.89.
+- 1 °C / 73.8 km = 1.36 °C per 100 km.
+- Mercator: 111.2 × 1.506 = 167.47 km per degree.
+- 10° steps (1/cos at the mid-latitude, step, running total):
+  - 1.004, 0.1752, 0.1752
+  - 1.035, 0.1807, 0.3559
+  - 1.103, 0.1926, 0.5485
+  - 1.221, 0.2131, 0.7615
+  - 1.414, 0.2468, 1.0084
+  - 1.743, 0.3043, 1.3126
+  - 2.366, 0.4130, 1.7256
+  - 3.864, 0.6743, 2.4000
+- ln tan 75° = 1.3170; ln tan 69.2° = 0.96794 → 6166.8 km.
+- y(61°) − y(59°) = 0.06984; ÷ 0.034907 = 2.0007.
+- y(85°) = 3.1313 a = 19 950 km.
+- tan 78.5° = 4.92; 4.9² = 24.0; 30.4/2.17 = 14.0.
+- √(500² + 1000²) = 1118.0; u_r = −4.47, u_θ = 8.94; 79 × 3.6 = 284.4 km/h.
+- Vortex centre 17.1° from the pole = 1901 km.
+
+**Re-voice needed:** G3 (optional). Everything else is visual only.
+
+### Must fix (1)
+
+**G1 — s09 S10–S11 (12:03–12:17): "Let's speed up" skips five of the eight steps.** The table shows only totals for 50°, 60°, 70° and 80°. The user's rule is: no calculation skipped. *Fix (`mp_sB.tsx` S09, visual only):* fill the table rows on S10–S11, one row about every 1.5 s. Keep the voice.
+
+| step | middle | 1/cos | drawn | total |
+|---|---|---|---|---|
+| 30–40° | 35° | 1.221 | 0.213 | 0.762 |
+| 40–50° | 45° | 1.414 | 0.247 | 1.008 |
+| 50–60° | 55° | 1.743 | 0.304 | 1.313 |
+| 60–70° | 65° | 2.366 | 0.413 | 1.726 |
+| 70–80° | 75° | 3.864 | 0.674 | 2.400 |
+
+The spoken 1.01 / 1.31 / 1.73 / 2.4 then land on the gold totals. The table needs 5 more rows: shrink the row pitch to 50 px, or scroll the earlier rows up to 60 % opacity.
+
+### Should fix (6)
+
+**G2 — s04 S15–S18 (3:27–4:05): the radian value is off, and the result disagrees with Part 3.** 48.4° = 0.8447 rad, not 0.8446. y = 5381.8 ≈ **5382** km, which Part 3 s23 says ("about five thousand three hundred and eighty two"). Here the screen and voice say 5381 and call it "exactly how far Brest is from the equator". The × 0.01745 conversion is not shown either.
+- *Rows:*
+  - `48.4\times0.01745\approx0.8447\ \text{rad}`
+  - `-4.5\times0.01745\approx-0.0785\ \text{rad}`
+  - `y=6371\times0.8447\approx5382\ \text{km}`
+- *Optional re-voice of S15/S17:* "zero point eight four four seven" and "five thousand three hundred and eighty two".
+
+**G3 — s10 S14–S15 (14:11–14:18): the row uses ln = 0.9677, but ln tan 69.2° = 0.9679 (0.96794).** So 0.968 × 6371 = 6167, while the screen and voice say 6165. *Rows:* `\ln2.6325\approx0.9679` then `0.9679\times6371\approx6167\ \text{km}`. Optional re-voice: "about six thousand one hundred and sixty seven".
+
+**G4 — s12 S7 (16:51): the 258.5° bearing and "4.9 west per south" are used without origin.** Neither Part 6 nor Part 7 works them out. With y = a ln tan(π/4 + φ/2) just built, they come in four lines. This also closes F2 (9733 km).
+- *Rows:*
+  - `y_{\text{London}}/a=\ln\tan70.76^\circ\approx1.052,\quad y_{\text{LA}}/a=\ln\tan62.03^\circ\approx0.633`
+  - `\Delta y/a\approx-0.420,\quad \Delta x/a=\Delta\lambda\approx-118.1^\circ=-2.061\ \text{rad}`
+  - `\tan(\text{angle from south})=\frac{2.061}{0.420}\approx4.9\ \Rightarrow\ 78.5^\circ\ \Rightarrow\ \text{bearing }180^\circ+78.5^\circ=258.5^\circ`
+  - Length: `\frac{a\,|\Delta\varphi|}{\cos78.5^\circ}=\frac{6371\times0.3047}{0.1995}\approx9733\ \text{km}`
+- *Optional narration (one sentence):* "And that's where Part 6's two numbers come from: a slant of four point nine gives a bearing of two hundred and fifty eight and a half degrees, and a length of nine thousand seven hundred and thirty three kilometres."
+
+**G5 — s21 S2–S6 (29:39–30:31): the vortex numbers have no working.**
+- "1900 km from the pole": `(90^\circ-72.9^\circ)\times111.2\ \text{km}\approx1900\ \text{km}`.
+- The ratios: `\frac{33}{17.5}\approx1.9` and `\frac{20}{47}\approx0.4`.
+- "typically" stands for an rms that is never named. Either keep "typically" and add the slate "root-mean-square", or say "the typical size of the in and out part".
+
+**G6 — s14 S10 (20:12): "angles can be off by about thirty one degrees" is a result with no input.** *Fix:* the slate "worked out from the Equal Earth formulas (notebook)". Also mark the point (60° N, 30° E) on both maps with a small distorted-cross glyph.
+
+**G7 — small items.**
+- s11 S13: `3.131\times6371\approx19\,950` (3.13 × 6371 = 19 941).
+- s18 S2: `10\div1013\approx0.01`.
+- s08 S10: the voice says "one point five zero six" while the row multiplies 111.19 × 1.5059. Both give 167.4, so this is fine.
+
+### Verified (keep)
+- s04–s05: the parallel stretch chain.
+- s08: the Mercator step.
+- s10: tan/ln with both table cross-checks.
+- s11: the centred-difference slope check (2.00 vs 2).
+- s13: the area stretch.
+- s20: the origin wheel, with every product on its words.
+- Physics: east = θ̂ and north = −r̂ seen from above the NP; westerlies go anticlockwise.
+
+### Verdict: FIX (Part 7 audit: 1 Must, 6 Should)
