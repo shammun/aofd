@@ -6700,3 +6700,282 @@ None. Every review-3 Must is gone in the rendered frames, and the fresh pass fou
 
 ## Overall: PASS
 ch00_weather_basics UF2 fix 3, review 4: 0 Must and 16 Should. The movie can become `qa_pass`; the user watches it before `/approve-movie`. The Shoulds are optional polish for a §5b retro-fit. If one of them is taken, Should 1 (the recap colour bar) and Should 3 (the s22 axis) are the most visible.
+
+---
+
+# ch00_coordinates build 1, review 1 (fresh eyes) 2026-11-04
+
+**Movie:** `movies/out/ch00/ch00_coordinates/1080.mp4` (rendered 2026-11-04 20:16).
+- Length 48:46.27 (2926.27 s; narration ends 2923.75 s + 2.5-s hold); 154.60 MB; 1920×1080; 30 fps.
+- 49 scenes, 453 sentences, 714 cues.
+
+**How I looked:**
+- 453 frames at 640 px, one 0.25 s before each sentence ends (times from `timing.json`), read as 51 labelled 3×3 sheets.
+- Full-size frames at 34 suspicious moments, and crops of the s11 arrow (8:49, 8:54).
+- Narration checked line by line against the screen; every spoken number re-computed by hand.
+- Frames: `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates/build1/review1/` (25 MB). Nothing large written to C:.
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates build 1 | 48:46.3 (2926.27 s) | 154.60 MB (cap 160) | 14 PASS, halves WARN | numbers PASS. Pictures FIX: s31/s33/s34 bands mirrored into the SH; s11 radial arrow invisible; s26 readouts unexplained | PASS (29 present; one raw-TeX label `u_θ`/`u_r` in s14) | FIX (clipped labels s09/s16/s29; text over text s41/s45; text over globe s29; links through text s11/s43) | mostly PASS (s14b heights unspoken on screen; s27 bottom half empty) | PASS (714 cues = script) | PASS (sequential yellow-green, RdBu, rose+hatch; 0 flashes) | n/a (retired) | **FIX** |
+
+**qa.json:** 14 gates PASS. `halves` is WARN:
+- right half 272.0–276.0 s, 1508.5–1512.0 s and 2020.5–2024.0 s.
+- `overlap`: 4086 frames, 0 hits (1133 INFO).
+- `loudness`: −16.3 LUFS, −3.5 dBTP.
+- `physics`: 72 functions; `equations`: 29.
+
+**The three halves WARN spans** are s07 S0 (4:32–4:36, before "radians"), s24 S9 (25:08–25:12, the zoom-out) and s33 S0 (33:40–33:44, before "area stretch").
+- In each one the left picture is full, and the gap lasts 3.5–4 s.
+- A viewer would barely notice. Should 18.
+
+**K6 0 hits did not catch** these faults:
+- raw-TeX text;
+- labels clipped at a canvas edge (s09, s16, s29);
+- a label touching a KaTeX block (s41);
+- links crossing each other or text (s11, s43);
+- a calculation over the globe limb (s29);
+- an axis line through a word (s45).
+
+Most of the Musts below are in those classes.
+
+## Build-reviewer flags: confirmed or closed
+| flag | verdict |
+|---|---|
+| s44 uniform wind "adds nothing" vs 0.26 m/s on the sphere | **CLOSED.** The argument is exact on a flat circle. On the 200-km ring the residual is 0.26 m/s of spin and 0.09 m/s of inflow, ≈ 2 %, below the spoken precision ("about fourteen", "about six"). The screen says "adds ≈ 0" (45:22). No change needed. |
+| s40 Pinellas coast 353.1° vs 355.4° | **CLOSED, with a manifest note.** The two bearings give +11.5 and +12.1 m/s across the shore; "about eleven and a half" is within 5 %. Record the coast segment used (355.4°) in the manifest. Should 15. |
+| DC12 definition (std of v_t, v_r vs u, v) | **Should 3.** The spin curve is steady, but the inflow curve swings 0 → −35 m/s (10:07–10:19). "Two fairly steady numbers" overstates the inflow; "always negative" is the honest point. |
+| DC42/43 nearest HRRR point | CLOSED. √(9.4² + 31.6²) = 33.0 m/s; the wind comes from ≈ 222° (SW). |
+| DC53 right/left-of-track sectors called "south/north side" | CLOSED. The sectors are centred SSE and NNW. True north/south sectors give 20.6/6.5 m/s, which tell the same story. |
+| s14 GOES eye image never shows | **CONFIRMED → Must 1.** |
+| s45 cramped | **CONFIRMED → Must 14.** |
+| s39 links converge | CONFIRMED, minor. The three links meet at Fort Myers Beach and cross the wind arrow and the across band (40:16). → Should 12 |
+
+## Physics and numbers re-checked by hand (all PASS)
+- s04–s05: √25 = 5; tan⁻¹(4/3) = 53.1°; 5 × 0.6 = 3; 5 × 0.8 = 4.
+- s06: 90 − 53 = 37°; a west wind blows east.
+- s07: 1 rad = 57.3°; 5 × 0.2 = 1 km; 50 × 0.2 = 10 km.
+- s08/s10:
+  - r̂ = (0.6, 0.8); θ̂ = (−0.8, 0.6);
+  - 10 × 0.6 = 6; 10 × (−0.8) = −8, clockwise seen from above;
+  - √100 = 10.
+- s09: dr̂/dθ = θ̂ and dθ̂/dθ = −r̂.
+- s11:
+  - 37 m/s = 133 km/h;
+  - 135 kt = 250 km/h;
+  - anticlockwise in the NH;
+  - inflow angle tan⁻¹(12.5/37) = 18.7° ≈ 19°.
+- s13:
+  - 37²/25 000 = 0.0548 ≈ 0.055 m/s²;
+  - 9.81/0.0548 = 179, "almost 200";
+  - the chain rule gives −v²/r r̂, inward;
+  - f v at 26.6° N = 0.0024 m/s², so "mostly the pressure force" is right.
+- s16–s18:
+  - Brest sin 48.4° = 0.748, so 6371 × 0.748 = 4765 ≈ 4760 km;
+  - cos 48.4° = 0.664, so 4230 km;
+  - λ = −4.5° = 355.5°.
+- s19:
+  - 7.29e-5 × 6.371e6 = 464.5 ≈ 465 m/s;
+  - × 0.664 = 308.5 ≈ 309 m/s;
+  - Longyearbyen (78.2°) gives 95 m/s.
+- s20–s22:
+  - 6371 × 0.017453 = 111.2 km;
+  - 1′ = 1.853 km;
+  - 74, 23 km;
+  - ERA5 0.25° box: 27.8 × 18.5 km at Brest and 27.8 × 5.7 km at Svalbard;
+  - 1/0.2045 = 4.9.
+- s23: dA = a² cos φ dφ dλ; ∫cos = sin; sin 30° = ½.
+- s24: Trappes 480 km/6371 km = 4.3°; Brest–Singapore central angle ≈ 101°.
+- s25: 250 × 3600 = 900 km; 900/74 = 12.2°. The Di/Dt, Dj/Dt, Dk/Dt rows match the spherical-frame rates.
+- s26: 100/6.37e6 = 1.57e-5 m/s²; f v at 45° = 1.03e-3, so the ratio is 66.
+- s29–s30, London → Los Angeles:
+  - great circle: 78.8° and 8760 km, initial bearing 312°, vertex 62.4° N;
+  - rhumb line: 258.5° and 9732 km, which is +11 % and 970 km longer.
+- s31–s33:
+  - 1/0.66 = 1.5; 1/cos² 60° = 4; 1/cos² 78.2° = 23.9;
+  - Africa/Greenland area = 30.4/2.17 = 14;
+  - y = a ln tan(π/4 + φ/2), dy/dφ = a/cos φ.
+- s35–s36:
+  - 10 hPa ≈ 30 km;
+  - westerlies run anticlockwise seen from above the NP;
+  - northward = −radial in the polar view.
+- s37–s38:
+  - 10 cos 30° = 8.66; −10 sin 30° = −5;
+  - C_ij = e_i·e′_j gives C = [[cos, −sin], [sin, cos]], and x′_j = x_i C_ij reproduces s37;
+  - 6, −8 = the east wind in axes turned by 53°.
+- s39–s40:
+  - along 9.4 and across −31.6 m/s (onto the land);
+  - NHC Fort Myers Beach 10–15 ft = 3.0–4.6 m;
+  - Tampa Bay offshore wind, and its water level fell.
+- s41–s42: 20 + 1.5 = 21.5 m/s; dU/dt = 0; the material derivative is Galilean-invariant.
+- s43–s45:
+  - Ciarán 1–2 Nov 2023, moving ENE at ≈ 15 m/s;
+  - stronger on the right of the track;
+  - Brest gust 84 kt = 155.6 km/h;
+  - Plymouth 3.8 − 3.2 = 0.6 hPa/h;
+  - ∂p/∂t = ∂p/∂τ − U·∇p, with the sign right.
+
+## Must fix (17)
+1. **s14, 12:16–13:14: the GOES-16 image does not read as a satellite picture.**
+   - The plate is a near-uniform light grey with a faint smudge (12:25, 12:57). The credit under it names an image the viewer cannot see.
+   - The "eyewall" keyword (12:18–12:30) points at nothing.
+   - The cylinder is a pair of thin white ellipses.
+   - Fix:
+     - render the GOES texture unlit (basic material, sRGB colour space) with its true contrast, so the eye and the cloud ring show;
+     - draw the eyewall ring and link "eyewall" to it;
+     - thicken the cylinder edges.
+2. **s14 S4, 12:47–13:00: raw TeX on the picture.**
+   - The arrow tags read `u_θ` and `u_r` with literal underscores (full frame 12:51.5).
+   - Fix: render them with KaTeX as u_θ and u_r, or use the house TipLabel with subscripts.
+3. **s14b, 13:15–14:42: no layer is labelled with its height.**
+   - The narration says 300 m, 1.5, 6, 12.5 and 15 km, but no height appears on screen (13:30, 14:05).
+   - The column stacks "hardly in or out; rising" (6 km) above "inflow almost gone" (1.5 km) above "≈ −6 m/s" (300 m), and only the last has a link. A viewer cannot tell which layer is which.
+   - Fix:
+     - put a height tag at each layer's right edge ("300 m", "1.5 km", "6 km", "12.5 km", "15 km") as each is spoken;
+     - give each keyword a link to its own layer's ring.
+4. **s11 S6–S13, 8:45–9:42: the radial wind arrow is invisible.**
+   - At 8:49 and 8:54 it is a ≈ 15-px rose stub under the teal arrow, so "radial: in or out" and "−12.5 m/s" have no picture.
+   - Fix: draw the ring-mean radial component (−12.5 m/s, a third of the 37-m/s tangential arrow) as a rose arrow pointing at the eye. Or show the local point's u_r at a visible length and say it is the local value.
+5. **s11 S10–S13, 9:18–9:42: the "−12.5 m/s" link runs through "anticlockwise" and covers its "a"** (full frame 9:20).
+   - Both links leave from inside the text column, and the upper one skims under "southwest Florida".
+   - Fix: start each link at the left edge of its own line (SideCallout), and route both below the "southwest Florida" label.
+6. **s31 S5–S7 (32:16–32:34), s33 S2–S3 (33:51–33:59) and s34 S5–S9 (34:48–35:16): the stretch bands are mirrored into the southern hemisphere.**
+   - On the plate carrée map (32:30) the "Brest" band spans 38.5–59° S and the "Svalbard" band 69–90° S, and the "1.5 ×" and "4.9 ×" links point there.
+   - On Mercator (33:58) the "4 ×" link ends on a 60° S circle and "≈ 24 ×" ends on Antarctica.
+   - On Equal Earth, "angles off ≥ 30°" points at a far-south ellipse while the voice says "at sixty degrees north".
+   - The latitudes are exactly the named northern places with the sign flipped, so this is a y-sign bug.
+   - Fix: draw the bands and link targets at +48.4°, +60° and +78.2° (Brest, 60° N, Svalbard).
+7. **s29 S2–S11, 30:04–31:02: the "Los Angeles" label is clipped to "ngeles" at the globe canvas edge** for ≈ 58 s (30:43.5).
+   - Fix: place the label to the right of or below the dot, inside the canvas, or turn the camera ≈ 10° west.
+8. **s29 S8–S11, 30:37–31:02: the line "d ≈ 6371 × 1.375 ≈ 8760 km" starts at x ≈ 912, on the globe's limb.**
+   - Fix: align the CalcStack at x ≥ 1100 like the line above it.
+9. **s09, 6:17–7:02: "radius 1" is clipped at the frame's left edge ("adius 1").**
+   - Fix: move the label inside the circle or below it.
+10. **s16 S5, 15:35–15:38: the "+90°" tag at the North Pole is cut off by the top of the frame** (full frame 15:38).
+    - The spoken "ninety degrees north" is not readable.
+    - Fix: put the tag to the right of the pole dot, or zoom the camera out ≈ 5 %.
+11. **s19 S8, 19:43–19:54: as the globe turns to Asia, "Svalbard" and "Brest" stack at the top-left limb, over Siberia, away from their dots.**
+    - The pole "0" is cut at the top (19:53.5).
+    - Fix: fade the place labels when their points go behind the limb, or keep the camera on the Atlantic for S8.
+12. **s41 S6–S7, 42:04–42:24: "u′ = 1.5" runs straight into "x = x′ + U t", which reads "u′ = 1.5x = x′ + U t"** (full frame 42:13.3).
+    - Fix: put the equation row at the column x (≥ 1100), like the lines above it, or move the u′ tag left of the walker.
+13. **s43 S4–S7, 44:07–44:36: the "north ≈ 8" and "south ≈ 19" links cross each other near x 1230–1290, and the north link runs under the "s" of "south"** (44:16).
+    - Fix: list "north ≈ 8 m/s" above "south ≈ 19 m/s" so that each link goes straight to its own arc, or start both from the left edge of their own line.
+14. **s45 S3–S8, 46:07–46:54: the column is cramped and overlapped.**
+    - The bar chart's baseline runs through the words "hPa per hour".
+    - "mostly: the storm arriving" (S7) and "advection · material derivative" (S8) sit directly on "hPa per hour".
+    - The equation is split so that "=" floats alone at the end of line 1 (46:46, 46:53.5).
+    - Fix:
+      - write the equation on one line at 64 px, or break it after "=" with the right-hand side indented under it;
+      - move the bars down ≈ 80 px and put "hPa per hour" under the bar values;
+      - put the S7/S8 keywords above the equation, or swap one out.
+15. **s40 (40:22–41:28) and s45 (45:46–46:54): the wind-speed field is drawn in colour with no colour bar.**
+    - s39 has the bar; s40 and s45 drop it.
+    - The s40 credit also lacks the date and time.
+    - Fix (U-WB-R2):
+      - add the 0–50 (s40) and 0–30 (s45) m/s bars beside the map;
+      - write "HRRR (NOAA) · 28 Sep 2022, 20 UTC · NOAA CO-OPS gauges · NHC report".
+16. **s26 S1–S6, 26:32–27:05: unexplained changing readouts.**
+    - The readouts tick from "u = 10.5, v = 9.4" to "u = 13.4, v = 4.6 m/s", with "no force: the arrows turn", while the voice says the extra pieces appear "even when u, v and w stay the same". None of the numbers is spoken.
+    - The great-circle thought experiment is never said, and the screen shows the reverse case to the one narrated.
+    - Fix, either:
+      - TSX only: remove the readouts and the keyword, and let the parcel glide; or
+      - re-voice one sentence: "Here's a thought experiment: an air parcel glides along a great circle with no force at all, yet its u and v change, because the arrows turn."
+17. **s15 S2–S5 (14:49–15:16), then everywhere: the symbol a is never introduced.**
+    - The keyword says "r" while the radius line and the column say "a ≈ 6400 | 6371 km".
+    - From s18 on, every formula uses a (a sin φ, a cos φ, x = aλ, δy = aδφ, dA = a² …) and the voice says "the radius". The "|" easy/exact notation is also unexplained on screen.
+    - Fix:
+      - TSX: write "Earth's radius a ≈ 6400 km (6371 km)" and label the line a;
+      - or add one spoken clause in s15 S3 ("we call it a").
+
+## Should fix (18)
+1. **s07 S4–S5, 4:55–5:05:** "2π r" sits on the orange circle's stroke. Move it outside, at the upper left.
+2. **"θ̂" keywords render the hat beside the θ ("θ' turn")** at:
+   - s14 S6–S8 (13:00–13:14);
+   - s25 S5 (26:04);
+   - s46 S1 (47:09).
+
+   Use KaTeX hat-theta in these keywords.
+3. **s12 S4–S5, 10:07–10:19:** "two fairly steady numbers". The inflow curve swings 0 to −35 m/s. Fix:
+   - draw dashed mean lines at 37 and −12.5;
+   - add the keyword "inflow: negative all the way round";
+   - or soften the words at the next re-voice.
+4. **s11 S12, 9:24–9:42:** "official best track" is jargon that the voice never says ("official estimate"). Write "official estimate: 135 kt ≈ 250 km/h".
+5. **s18:**
+   - S5–S6 (17:27–17:38): φ sits on the orange a sin φ leg.
+   - S9 (17:55): the "a cos φ sin λ" tag almost touches "two right triangles".
+   - S11–S12 (18:09–18:35): the gold links cross the top-view circle and its x label, and the 4230-km link ends on the "a cos φ" tag.
+6. **s22 S5, 22:43–22:53:** "× 4.9 too wide" is not spoken ("several times"). Speak it at the next re-voice, or write "≈ 5 × too wide".
+7. **s23 S1:** the keywords use δ ("height a δφ"), but the equation and the voice use d. Use one symbol.
+8. **s27, 27:42–28:53:** everything sits in the top 45 % of the frame, and y 600–860 is empty for 70 s. Move the three pictures down and enlarge them, or put the scale-factor rows under them.
+9. **s34 S0–S2, 34:18–34:35:** the Equal Earth map's left end slides under the Mercator panel (≈ 20 px of image over image). Leave a 40-px gap.
+10. **s36 S6–S8, 37:02–37:22:** the dense orange and rose ticks round the vortex centre have no legend, and the claim "far more purely tangential" cannot be read from them. Show two numbers (radial share about the pole vs about the vortex centre) as bars.
+11. **s40 S1–S3, 40:26–40:45:** the Fort Myers gauge peaks at ≈ 2.2 m "above tide", while the text says "3–4.5 m" above the ground at Fort Myers Beach. Label the gauge's place (Fort Myers, upriver) and add "above ground" to the NHC line, so the two do not look contradictory.
+12. **s39 S5–S8, 40:05–40:21:**
+    - The three links converge on one point and cross the wind arrow and the across band.
+    - "Fort Myers Beach" touches the x′ arrows.
+    - Fix: end the "along" link on the middle of the along arrow, and end the coast link on the coastline 60 px north.
+13. **s39 S7:** the screen shows "≈ −32 m/s: onto the land", but the voice says "thirty two … towards the land". At the next re-voice say "minus thirty two", which also sets up s40 S7 "the sign flips".
+14. **End card, 48:35–48:46:**
+    - The stacked-notebooks icon touches "vectors and index notation".
+    - The whole card sits in the top 75 % of the frame.
+    - The topic list is extra to the house end card (fine if kept). Leave a 24-px gap under the icon row.
+15. **Manifest:** record which Pinellas coast segment gives 355.4° (the 10-m coast gives 353.1°), so DC43 is reproducible.
+16. **s21 S7–S9, 21:44–21:58:** "74 km" sits on the teal radius line, and the "23 km" tag touches the top edge at 21:58. Nudge both.
+17. **s24 S0, 24:15–24:19:** at the first frame "Brest" stands over the Bay of Biscay before the zoom settles. Hold the label until the camera stops.
+18. **Halves WARN spans (4:32–4:36, 25:08–25:12, 33:40–33:44):** give each an opening keyword from frame 0, for example:
+    - "radians" (4:32–4:36);
+    - "zoom out: other stations" (25:08–25:12);
+    - "conformal has a price" (33:40–33:44).
+
+**Decision for the user (not a defect):** the end card uses the maths-tutorial ending. That is right for a "pure maths" movie (HOUSE_STYLE §3). But about half of this movie is real weather (Ian, the polar vortex, Ciarán), which is the reason the cross-product movie got the weather ending. My recommendation: keep the maths ending, unless the user wants the cross-product exception extended.
+
+## What works (keep)
+- **House arc:**
+  - the title s00 with its globe/great-circle animation;
+  - the hook;
+  - building blocks before the application;
+  - "There are three good reasons" (s28);
+  - the recap, one beat per sentence;
+  - the series end card;
+  - a 2.5-s hold.
+- **Goal before calculation throughout.** For example, s10: "How much of it blows away from the station…?" comes before the dot products.
+- **CalcStacks show every step:**
+  - √ by Pythagoras;
+  - 37²/25 000;
+  - 250 × 3600;
+  - 6371 × 1.375.
+- **The voice defines terms at first use:** origin, axes, coordinates, unit vector, arc length, air parcel, eyewall, parallel, meridian, graticule, colatitude, metric terms, conformal, rhumb line, storm surge, Galilean transformation, storm-relative.
+- "Clockwise" and "anticlockwise" always come with "seen from above", and with the hemisphere where it matters.
+- **Data frames:** source lines sit under every picture, and colour bars stand beside every coloured field except s40/s45 (Must 15).
+- **Colour-blind safety:**
+  - inflow is rose with black hatching, outflow is orange;
+  - the spin/inflow curves are teal/rose;
+  - the anomaly map is a blue-red diverging map.
+- No flashes.
+- **Strong teaching moves:**
+  - s12, the u/v vs u_θ/u_r curves round the real ring;
+  - s25, the plane's east arrow swinging by 12°;
+  - s30, the rhumb-line vs great-circle comparison with its Mercator inset;
+  - s44, the two rings with "same";
+  - s45, the barometer bars −3.8 = −3.2 − 0.6.
+
+## Limits
+- Audio was not heard; the captions = script result comes from QA.
+- Motion was judged from frames 0.25 s before each sentence end, plus 34 full frames. Swaps between those samples were not checked frame by frame.
+- Equations were checked against the storyboard LaTeX and by derivation. I did not re-render the page PNGs.
+- No colour-blind simulation was run.
+- Pixel sizes were judged by eye.
+
+**Disk.** C: 51 GB free at the start and 51 GB at the end; G: 470 GB and then 469 GB. This review wrote 25 MB of frames to G:, and one helper script to the session scratchpad on C:.
+
+## Overall: FIX (ch00_coordinates build 1, review 1: 17 Must, 18 Should)
+The physics and every spoken number are right. The Musts are all TSX/data-overlay fixes:
+- the mirrored stretch bands;
+- the invisible radial arrow and the washed-out GOES plate;
+- unlabelled stack heights;
+- clipped labels;
+- the remaining text/link collisions that K6 cannot see;
+- the missing colour bars.
+
+Only two optional fixes would need narration: the s26 thought-experiment sentence and the "a" clause in s15, and both have TSX-only alternatives. No re-voice is required.
