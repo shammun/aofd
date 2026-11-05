@@ -74,11 +74,11 @@ v5 full, 1:09:15). The #5 build 1 (`ch00_coordinates`, 48:46) is **not** an alte
 
    | Pos | ID | Slug | Title | Est. | Build-1 scenes |
    |---|---|---|---|---|---|
-   | 7 | #5a | `ch00_coordinates_flat` | Coordinates, Part 1 — Arrows on a flat map: Cartesian and polar coordinates, the unit vectors r̂ and θ̂, rotated axes and the rotation matrix, with Hurricane Ian's winds | 25.5 min | s00–s08, s10–s12, s37–s38 |
-   | 8 | #5b | `ch00_coordinates_storm` | Coordinates, Part 2 — Inside a tropical cyclone: turning unit vectors, acceleration on a circle, and cylindrical coordinates, with Hurricane Ian and Cyclone Amphan | 25.6 min | s09, s13, s14, s14b, s39, s40 + Amphan + GEE slider |
-   | 9 | #5c | `ch00_coordinates_sphere` | Coordinates, Part 3 — Our round Earth: spherical coordinates, latitude and longitude, Earth-centred x, y, z, and local distances and areas | 25.4 min | s15–s23 |
-   | 10 | #5d | `ch00_coordinates_frames` | Coordinates, Part 4 — Frames that turn and frames that move: local east-north-up axes, how they turn along a path, moving frames and storm-relative winds | 25.6 min | s24–s26, s41–s45 |
-   | 11 | #5e | `ch00_coordinates_maps` | Coordinates, Part 5 — Routes and maps of a round Earth: great circles, rhumb lines, map projections and how maps stretch | 23.2 min | s27–s36 |
+   | 7 | #5a | `ch00_coordinates_flat` | Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes | 25.5 min | s00–s08, s10–s12, s37–s38 |
+   | 8 | #5b | `ch00_coordinates_storm` | Coordinates, Part 2 — Inside a tropical cyclone: turning arrows and cylindrical coordinates | 25.6 min | s09, s13, s14, s14b, s39, s40 + Amphan + GEE slider |
+   | 9 | #5c | `ch00_coordinates_sphere` | Coordinates, Part 3 — Our round Earth: latitude, longitude, distances and areas | 25.4 min | s15–s23 |
+   | 10 | #5d | `ch00_coordinates_frames` | Coordinates, Part 4 — Moving frames: local axes and storm-relative winds | 25.6 min | s24–s26, s41–s45 |
+   | 11 | #5e | `ch00_coordinates_maps` | Coordinates, Part 5 — Routes and maps: great circles and map projections | 23.2 min | s27–s36 |
 
    Total ≈ 125 min (build 1: 48:46). Lengths are planning estimates; each storyboard gets a `tools/tts.py` dry run.
 2. **Every position from v5 8 on moves by +4.** In the live sections (§3–§7, §9, §10) every "pos N", "position N" and
@@ -514,11 +514,11 @@ in §1c, not here.
 | 4 | #3 | The cross product on our spinning Earth (Part 2: Coriolis, geostrophic wind) | 0–1 basics and maths | done (§5b retro-fit + pointer re-voice queued, §10) | #2, 0.3 | 4 |
 | 5 | 1a | Vectors and index notation | 0–1 basics and maths | done (§5b retro-fit + pointer re-voice queued, §10) | 0.1b | 5 |
 | 6 | #4 | Derivatives and Taylor series | 0–1 basics and maths | done (final 2026-11-04; 14 Shoulds → §5b retro-fit) | 1a | 6 |
-| 7 | #5a | Coordinates, Part 1 — Arrows on a flat map: Cartesian and polar coordinates, the unit vectors r̂ and θ̂, rotated axes and the rotation matrix, with Hurricane Ian's winds (`ch00_coordinates_flat`, ≈ 25.5 min) | 0–1 basics and maths | planned (split plan 2026-11-05; build 1 archived) | 0.1b, 1a | 7 |
-| 8 | #5b | Coordinates, Part 2 — Inside a tropical cyclone: turning unit vectors, acceleration on a circle, and cylindrical coordinates, with Hurricane Ian and Cyclone Amphan (Ian, Amphan, the coast and the surge) (`ch00_coordinates_storm`, ≈ 25.6 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5a, #4, #3 | 7 |
-| 9 | #5c | Coordinates, Part 3 — Our round Earth: spherical coordinates, latitude and longitude, Earth-centred x, y, z, and local distances and areas (`ch00_coordinates_sphere`, ≈ 25.4 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5a, #5b, #3 | 7 |
-| 10 | #5d | Coordinates, Part 4 — Frames that turn and frames that move: local east-north-up axes, how they turn along a path, moving frames and storm-relative winds (`ch00_coordinates_frames`, ≈ 25.6 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5b, #5c, #2, #4 | 7 |
-| 11 | #5e | Coordinates, Part 5 — Routes and maps of a round Earth: great circles, rhumb lines, map projections and how maps stretch (`ch00_coordinates_maps`, ≈ 23.2 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5c, #5d, 0.1b, #4 | 7 |
+| 7 | #5a | Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes (`ch00_coordinates_flat`, ≈ 25.5 min) | 0–1 basics and maths | planned (split plan 2026-11-05; build 1 archived) | 0.1b, 1a | 7 |
+| 8 | #5b | Coordinates, Part 2 — Inside a tropical cyclone: turning arrows and cylindrical coordinates (Ian, Amphan, the coast and the surge) (`ch00_coordinates_storm`, ≈ 25.6 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5a, #4, #3 | 7 |
+| 9 | #5c | Coordinates, Part 3 — Our round Earth: latitude, longitude, distances and areas (`ch00_coordinates_sphere`, ≈ 25.4 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5a, #5b, #3 | 7 |
+| 10 | #5d | Coordinates, Part 4 — Moving frames: local axes and storm-relative winds (`ch00_coordinates_frames`, ≈ 25.6 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5b, #5c, #2, #4 | 7 |
+| 11 | #5e | Coordinates, Part 5 — Routes and maps: great circles and map projections (`ch00_coordinates_maps`, ≈ 23.2 min) | 0–1 basics and maths | planned (split plan 2026-11-05) | #5c, #5d, 0.1b, #4 | 7 |
 | 12 | #6 | The gradient | 0–1 basics and maths | **paused** (build 1 K6-clean, not rendered; revised after #5e: split_plan §3b) | #4, #5c, #5e, 0.1b | 8 |
 | 13 | M01 | Contour maps and isolines | understanding | planned (storyboard + script written) | #5e, #6, 0.3 | 9 |
 | 14 | U01 | Where pressure differences come from: the pressure-gradient force (recap), thermal lows and highs, lee troughs | understanding | planned (re-scoped in v5, §3) | #3, #6, 0.3, M01 | 10 |
