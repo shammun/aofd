@@ -43,11 +43,11 @@ storyboard gets a `tools/tts.py` dry run (HOUSE_STYLE §10.1) before it is built
 
 | Part | ID | Slug | Title | Old scenes | Est. |
 |---|---|---|---|---|---|
-| 1 | #5a | `ch00_coordinates_flat` | Coordinates, Part 1: on a flat map, from Cartesian to polar and turned axes | s00–s08, s10–s12, s37–s38 | 25.5 min |
-| 2 | #5b | `ch00_coordinates_storm` | Coordinates, Part 2: turning arrows, and a hurricane in three dimensions | s09, s13, s14, s14b, s39, s40 | 25.6 min |
-| 3 | #5c | `ch00_coordinates_sphere` | Coordinates, Part 3: our round Earth, latitude, longitude, distances and areas | s15–s23 | 25.4 min |
-| 4 | #5d | `ch00_coordinates_frames` | Coordinates, Part 4: local frames that turn, and frames that move | s24–s26, s41–s45 | 25.6 min |
-| 5 | #5e | `ch00_coordinates_maps` | Coordinates, Part 5: routes and maps of a round Earth | s27–s36 | 23.2 min |
+| 1 | #5a | `ch00_coordinates_flat` | Coordinates, Part 1 — Arrows on a flat map: Cartesian and polar coordinates, the unit vectors r̂ and θ̂, rotated axes and the rotation matrix, with Hurricane Ian's winds | s00–s08, s10–s12, s37–s38 | 25.5 min |
+| 2 | #5b | `ch00_coordinates_storm` | Coordinates, Part 2 — Inside a tropical cyclone: turning unit vectors, acceleration on a circle, and cylindrical coordinates, with Hurricane Ian and Cyclone Amphan | s09, s13, s14, s14b, s39, s40 | 25.6 min |
+| 3 | #5c | `ch00_coordinates_sphere` | Coordinates, Part 3 — Our round Earth: spherical coordinates, latitude and longitude, Earth-centred x, y, z, and local distances and areas | s15–s23 | 25.4 min |
+| 4 | #5d | `ch00_coordinates_frames` | Coordinates, Part 4 — Frames that turn and frames that move: local east-north-up axes, how they turn along a path, moving frames and storm-relative winds | s24–s26, s41–s45 | 25.6 min |
+| 5 | #5e | `ch00_coordinates_maps` | Coordinates, Part 5 — Routes and maps of a round Earth: great circles, rhumb lines, map projections and how maps stretch | s27–s36 | 23.2 min |
 
 Naming follows the cross-product split: descriptive slugs under `movies/ch00/` (`ch00_cross_product`,
 `ch00_cross_product_uses`), "Part 1 … Part 5" in the titles and the voice. The plan IDs are **#5a–#5e** so that #6
@@ -247,7 +247,7 @@ recap ≤ 60 s) → building blocks → intuition → why → application → "T
 the series end card word for word (maths-tutorial ending: decision 2 in §5). Scene ids below are the new part's ids;
 "← sNN" names the build-1 scene reused. **K** = kept (light edits only), **R** = rewritten, **N** = new.
 
-### 2b. Part 1 — `ch00_coordinates_flat` (#5a) · "Coordinates, Part 1: on a flat map, from Cartesian to polar and turned axes"
+### 2b. Part 1 — `ch00_coordinates_flat` (#5a) · "Coordinates, Part 1 — Arrows on a flat map: Cartesian and polar coordinates, the unit vectors r̂ and θ̂, rotated axes and the rotation matrix, with Hurricane Ian's winds"
 - **Starts:** the opening title (a balloon's arrow sweeping round a polar grid, then Ian's ring arrows). **Stops:** after
   Ian's spin and inflow (old s12), recap, end card.
 - **s00 sentence (draft):** "In this video, we'll learn coordinates on a flat map the easy way, and see how meteorology
@@ -326,7 +326,7 @@ the series end card word for word (maths-tutorial ending: decision 2 in §5). Sc
 CalcStack has its piece of the picture highlighted with a gold link (HOUSE_STYLE §6). The ring points are the same three
 dots on the map, on the ring graph and in the column. Ian's map keeps its colour bar (0–50 m/s) and source line.
 
-### 2c. Part 2 — `ch00_coordinates_storm` (#5b) · "Coordinates, Part 2: turning arrows, and a hurricane in three dimensions"
+### 2c. Part 2 — `ch00_coordinates_storm` (#5b) · "Coordinates, Part 2 — Inside a tropical cyclone: turning unit vectors, acceleration on a circle, and cylindrical coordinates, with Hurricane Ian and Cyclone Amphan"
 - **Starts:** title (a parcel going round the eye with its velocity arrow turning, the inward acceleration arrow
   appearing). **Stops:** after the surge and the GEE slider, recap, end card.
 - **s00 sentence (draft):** "In this video, we'll learn how turning arrows and cylinders work the easy way, and see how
@@ -417,7 +417,7 @@ Sentinel data") [pending data report]; Amphan: ERA5 (ARCO) + IBTrACS (`fluidpy.d
 - **Then the curtain:** an r–z section (radius 0–500 km × height 0–16 km) of the ring-mean u_r, with w as arrows, so
   the in-up-out loop reads at once.
 
-### 2d. Part 3 — `ch00_coordinates_sphere` (#5c) · "Coordinates, Part 3: our round Earth, latitude, longitude, distances and areas"
+### 2d. Part 3 — `ch00_coordinates_sphere` (#5c) · "Coordinates, Part 3 — Our round Earth: spherical coordinates, latitude and longitude, Earth-centred x, y, z, and local distances and areas"
 - **Starts:** title (the Earth sliced along Brest's meridian, the latitude arc opening). **Stops:** after band areas and
   the cos φ weighting, recap, end card.
 - **s00 sentence (draft):** "In this video, we'll learn coordinates on our round Earth the easy way, and see how
@@ -493,7 +493,7 @@ Sentinel data") [pending data report]; Amphan: ERA5 (ARCO) + IBTrACS (`fluidpy.d
 diagram on the right, both driven by one list of items {kind, frame}; an item appears in both views on the same frame,
 with one gold tick between its two copies. The equatorial slice (top view) uses the same component.
 
-### 2e. Part 4 — `ch00_coordinates_frames` (#5d) · "Coordinates, Part 4: local frames that turn, and frames that move"
+### 2e. Part 4 — `ch00_coordinates_frames` (#5d) · "Coordinates, Part 4 — Frames that turn and frames that move: local east-north-up axes, how they turn along a path, moving frames and storm-relative winds"
 - **Starts:** title (four stations with their own east-north-up arrows on the globe). **Stops:** after the fixed
   barometer, recap, end card.
 - **s00 sentence (draft):** "In this video, we'll learn local frames, and frames that move, the easy way, and see how
@@ -578,7 +578,7 @@ with one gold tick between its two copies. The equatorial slice (top view) uses 
 `acceleration`; `fluidpy.diag.cyclone.track_by_continuity`, `storm_relative_wind`; `fluidpy.geo.sphere.gradient`
 (Plymouth msl). All exist and are tested (build 1).
 
-### 2f. Part 5 — `ch00_coordinates_maps` (#5e) · "Coordinates, Part 5: routes and maps of a round Earth"
+### 2f. Part 5 — `ch00_coordinates_maps` (#5e) · "Coordinates, Part 5 — Routes and maps of a round Earth: great circles, rhumb lines, map projections and how maps stretch"
 - **Starts:** title (the London–Los Angeles great circle on the globe, then the same route curving on Mercator).
   **Stops:** after the polar vortex in polar coordinates, recap, end card. The next movie is #6 *The gradient*.
 - **s00 sentence (draft):** "In this video, we'll learn routes and maps of our round Earth the easy way, and see how
