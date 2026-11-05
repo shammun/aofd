@@ -195,9 +195,36 @@ def woodblock(f: float, vel: float, rng: np.random.Generator) -> np.ndarray:
     return vel * adsr_exp(n, 0.0015, 100.0) * x
 
 
+def bowed(f: float, vel: float, rng: np.random.Generator) -> np.ndarray:
+    """A soft bowed low string (cello-like) for ostinatos: band-limited saw (1/k, rolled off above ~1.8 kHz), an 80-ms
+    bow attack, a 0.7-s decay and a light delayed vibrato. Never plucky."""
+    n = int(2.4 * SR)
+    t = np.arange(n) / SR
+    vib = 1 + 0.003 * np.clip((t - 0.25) / 0.3, 0, 1) * np.sin(2 * np.pi * rng.uniform(4.6, 5.4) * t)
+    ph = 2 * np.pi * f * np.cumsum(vib) / SR
+    x = np.zeros(n)
+    for k in range(1, 14):
+        if k * f > 4000:
+            break
+        x += (1.0 / k) * np.exp(-k * f / 1800.0) * np.sin(k * ph + rng.uniform(0, 2 * np.pi))
+    return vel * adsr_exp(n, 0.08, 0.7) * lp(x, 2500)
+
+
+def vibraphone(f: float, vel: float, rng: np.random.Generator) -> np.ndarray:
+    """Soft-mallet vibraphone: fundamental + a quickly fading 4th partial (tuned bar), a slow motor tremolo (~4.5 Hz,
+    depth 0.25) and a 2.4-s decay. Glassy, never sharp."""
+    n = int(5 * SR)
+    t = np.arange(n) / SR
+    x = np.sin(2 * np.pi * f * t)
+    if 4 * f < 7000:
+        x += 0.16 * np.sin(2 * np.pi * 4.0 * f * t) * np.exp(-t / 0.25)
+    motor = 1 - 0.25 * (0.5 + 0.5 * np.sin(2 * np.pi * rng.uniform(4.2, 4.8) * t + rng.uniform(0, 2 * np.pi)))
+    return vel * adsr_exp(n, 0.006, 2.4) * motor * x
+
+
 INSTRUMENTS = {"bell": bell, "celesta": celesta, "marimba": marimba, "fm_piano": fm_piano, "pluck": pluck,
                "pluck_muted": pluck_muted, "soft_kick": soft_kick, "heartbeat": heartbeat, "frame_drum": frame_drum,
-               "shaker": shaker, "woodblock": woodblock}
+               "shaker": shaker, "woodblock": woodblock, "bowed": bowed, "vibraphone": vibraphone}
 
 
 # ======================================================================================================= styles
@@ -218,6 +245,10 @@ class Style:
     reverb: dict = field(default_factory=dict)
     fade_in: float = 5.0
     fade_out: float = 8.0
+    # optional shaping of the whole pad bed (empty = untouched; every style before 2026-11-05 leaves it empty):
+    # swell_s/swell_depth (slow level swell), pulse_s/pulse_depth (soft beat pulse), pan_s/pan_depth (slow left↔right
+    # drift, starting left), thin_at/thin_db/thin_ramp_s (pad drops by thin_db from thin_at seconds on)
+    pad_env: dict = field(default_factory=dict)
 
 
 def _bar(bpm: float, beats: int = 4) -> float:
@@ -373,6 +404,130 @@ _add(Style(
       "gain": 0.16, "pan": "centre", "vel": [0.4, 0.6], "start": 1.0 + 4 * 2 * _bar(72)}],
     lp_hz=6000, reverb={"seconds": 3.6, "decay": 0.9, "wet": 0.25, "tone_hz": 3800}, fade_in=5.0, fade_out=8.0))
 
+# ---- the coordinates parts (#5, 2026-11-05): one score per part, each from its storyboard's audio.music.spec. Times
+# given in seconds for layers that enter or leave at a scene (enter_s / exit_s) are that scene's start in the movie's
+# timing.json of 2026-11-05 (PROVISIONAL: re-check after the final TTS; the score is still calm if they drift).
+
+# Part 2 ch00_coordinates_storm (seed 31): D minor with a Dorian B, 6/8 at 76 dotted-quarter (eighth = 60/76/3 s). A
+# bowed low ostinato circles root-fifth-octave-fifth (the ring) on the dotted quarters; tremolo strings swell every 8
+# bars (the eyewall); one soft electric-piano note per chord, stepping up through the chord tones (rising air); a faint
+# filtered-noise wind bed. Restrained: no drums.
+E76 = 60.0 / 76.0 / 3.0
+_add(Style(
+    "eyewall-spiral", "Restrained and circling: a bowed low ostinato going round root-fifth-octave-fifth in 6/8, tremolo "
+    "strings swelling every eight bars, one soft electric-piano note per chord stepping up, a faint wind bed (no drums).",
+    "tropical cyclones, the eyewall, storm structure in cylindrical coordinates (ch00 coordinates Part 2)",
+    "D minor (Dorian B)",
+    [[38, 50, 53, 57, 64], [43, 50, 55, 59, 64], [46, 50, 53, 57, 62], [36, 48, 52, 55, 62]], 4 * 6 * E76, 1.2,
+    "6/8 at 76 dotted-quarter (eighth ≈ 0.263 s); 4-bar chords",
+    [{"timbre": "strings", "gain": 0.36, "octave": 12, "detune": 7.0, "tremolo": 0.14}], 0.30,
+    [{"kind": "arp", "inst": "bowed", "steps": "x..x..", "step_s": E76, "order": "root5", "gain": 0.55,
+      "pan": "centre", "vel": [0.5, 0.7], "breath": 26.0},
+     {"kind": "arp", "inst": "fm_piano", "steps": "x" + "." * 23, "step_s": E76, "octave": 24, "order": "up",
+      "gain": 0.38, "pan": "spread", "vel": [0.28, 0.42], "start": 1.0 + 3 * E76},
+     {"kind": "noise", "slope": -3.0, "centre": 700, "width": 1.0, "gain": 0.035, "rate": 0.1}],
+    lp_hz=2600, reverb={"seconds": 3.2, "decay": 0.8, "wet": 0.30, "tone_hz": 3000}, fade_in=5.0, fade_out=8.0,
+    pad_env={"swell_s": 8 * 6 * E76, "swell_depth": 0.35}))
+
+# Part 3 ch00_coordinates_sphere (seed 31): D-flat major, no pulse, 11-s chords Db - Bbm7 - Gbmaj7 - Absus. A slow
+# high glass pad over a very soft low string pad; every second chord a celesta figure falls by fifths from the top and
+# lands on the chord root (a meridian drawn pole to pole). Long reverb (wet 0.30), low-pass 6 kHz, no drums.
+_add(Style(
+    "meridian-glass", "Calm and spacious: a high glass pad over soft low strings in D-flat major, 11-s chords; every "
+    "second chord a celesta figure falls by fifths from the top and lands on the root (no pulse, no drums).",
+    "the sphere, latitude and longitude, spherical coordinates (ch00 coordinates Part 3)", "D-flat major",
+    [[37, 49, 56, 60, 65], [34, 46, 53, 56, 61], [42, 49, 53, 58, 65], [44, 51, 56, 61, 63]], 11.0, 4.0,
+    "no pulse; 11-s chords",
+    [{"timbre": "glass", "gain": 0.36, "octave": 12, "detune": 4.0},
+     {"timbre": "strings", "gain": 0.12, "octave": 0, "detune": 8.0}], 0.25,
+    [{"kind": "figure", "inst": "celesta", "every_s": 22.0, "start": 2.5, "step_s": 0.9,
+      "figures": [[82, 75, 68, 61], [84, 77, 70], [87, 80, 73, 66], [82, 75, 68]],
+      "gain": 0.26, "pan": "spread", "vel": [0.5, 0.7]}],
+    lp_hz=6000, reverb={"seconds": 5.0, "decay": 1.3, "wet": 0.30, "tone_hz": 4000}, fade_in=6.0, fade_out=10.0))
+
+# Part 4 ch00_coordinates_frames (seed 41): D Dorian, 6/8 at 72 dotted-quarter (eighth = 60/72/3 s), chords Dm9 - G13 -
+# Bbmaj7 - C6/9 of 5 bars (8.33 s, the storyboard's "8 s" rounded to whole bars). A marimba cell of three adjacent chord
+# tones on every half bar, shifted one chord tone each bar (a tripod turning as it moves), over a soft bowed-string pad.
+# From s28 (2260.8 s) a light airy texture and a slow low bowed pulse, once per bar. No drums; wet 0.25; low-pass 7 kHz.
+E72 = 60.0 / 72.0 / 3.0
+_add(Style(
+    "frame-drift", "Moving and turning: D Dorian in 6/8, a marimba cell of three chord tones that shifts one step each "
+    "bar over a soft bowed-string pad; near the end an airy texture and a slow low pulse (no drums).",
+    "local frames, east-north-up axes, moving and turning frames (ch00 coordinates Part 4)", "D Dorian",
+    [[38, 50, 53, 57, 64], [43, 53, 59, 64, 69], [46, 50, 57, 62, 65], [36, 52, 55, 57, 62]], 5 * 6 * E72, 1.2,
+    "6/8 at 72 dotted-quarter (eighth ≈ 0.278 s); 5-bar chords",
+    [{"timbre": "strings", "gain": 0.40, "octave": 12, "detune": 7.0, "vibrato": 0.0015}], 0.28,
+    [{"kind": "figure", "inst": "marimba", "every_s": 3 * E72, "step_s": E72, "degrees": [0, 1, 2], "octave": 24,
+      "shifts": [0, 1, 2, 3, 2, 1], "shift_every": 2, "gain": 0.45, "pan": "spread", "vel": [0.35, 0.55],
+      "breath": 24.0},
+     {"kind": "noise", "slope": -3.0, "centre": 1800, "width": 0.8, "gain": 0.03, "rate": 0.1,
+      "enter_s": 2260.8, "ramp_s": 8.0},
+     {"kind": "arp", "inst": "bowed", "steps": "x.....", "step_s": E72, "order": "root", "gain": 0.40,
+      "pan": "centre", "vel": [0.45, 0.6], "enter_s": 2260.8, "ramp_s": 8.0}],
+    lp_hz=7000, reverb={"seconds": 3.0, "decay": 0.75, "wet": 0.25, "tone_hz": 3800}, fade_in=5.0, fade_out=8.0))
+
+# Part 5 ch00_coordinates_moving (seed 43): A Aeolian, 4/4 at 66 bpm, two-bar chords Am9 - Fmaj7 - C - G. A soft warm
+# pad pulsing on the beat and drifting slowly left to right (a pattern sliding past); a celesta figure that never moves
+# (same notes, same place, centre: the fixed observer); a low airy wind from the Ciarán scene s08 (564.1 s) on. No
+# drums; reverb medium-long (wet 0.28); low-pass 6 kHz.
+Q66 = 60.0 / 66.0
+_add(Style(
+    "passing-front", "Gently sliding: a soft warm pad in A Aeolian pulsing on the beat and drifting left to right, a "
+    "celesta figure that stays put in the centre, a low airy wind from the storm scenes on (no drums).",
+    "moving frames, patterns passing a fixed observer, fronts sweeping by (ch00 coordinates Part 5)", "A Aeolian",
+    [[45, 52, 60, 64, 71], [41, 53, 57, 60, 64], [36, 52, 55, 60, 67], [43, 50, 55, 59, 62]], 2 * _bar(66), 1.6,
+    "4/4 at 66 bpm, soft pad pulse on the beat",
+    [{"timbre": "warm", "gain": 0.46, "octave": 12, "detune": 6.0}], 0.28,
+    [{"kind": "figure", "inst": "celesta", "every_s": 4 * _bar(66), "start": 1.0 + Q66, "step_s": Q66,
+      "figures": [[76, 79, 76]], "gain": 0.22, "pan": "centre", "vel": [0.5, 0.65]},
+     {"kind": "noise", "slope": -4.0, "centre": 500, "width": 1.1, "gain": 0.035, "rate": 0.12,
+      "enter_s": 564.1, "ramp_s": 8.0}],
+    lp_hz=6000, reverb={"seconds": 4.0, "decay": 1.0, "wet": 0.28, "tone_hz": 3600}, fade_in=5.0, fade_out=8.0,
+    pad_env={"pulse_s": Q66, "pulse_depth": 0.22, "pan_s": 4 * 2 * _bar(66), "pan_depth": 0.3}))
+
+# Part 6 ch00_coordinates_routes (seed 29): D Dorian, 6/8 at 66 dotted-quarter (eighth = 60/66/3 s), chords Dm - G - Am
+# - C of 4 bars (7.27 s, the storyboard's "8 s" rounded to whole bars so the bell falls on a downbeat). A warm low string
+# pad that rocks every two bars (a ship's swell); a marimba figure on the dotted quarters that rises a fifth and settles
+# on the chord third (a course being laid); a faint bell on the downbeat every fourth bar (a ship's bell). No drums;
+# reverb long (wet 0.30); low-pass 6 kHz.
+E66 = 60.0 / 66.0 / 3.0
+_add(Style(
+    "chart-voyage", "Slow rocking 6/8 in D Dorian: a warm low string pad swaying like a ship's swell, a marimba figure "
+    "that rises a fifth and settles, a faint ship's bell every fourth bar (no drums).",
+    "routes, great circles, navigation, distances on the sphere (ch00 coordinates Part 6)", "D Dorian",
+    [[38, 50, 53, 57, 62], [43, 50, 55, 59, 62], [45, 52, 57, 60, 64], [36, 48, 55, 60, 64]], 4 * 6 * E66, 1.4,
+    "6/8 at 66 dotted-quarter (eighth ≈ 0.303 s); 4-bar chords",
+    [{"timbre": "strings", "gain": 0.42, "octave": 0, "detune": 8.0}], 0.30,
+    [{"kind": "figure", "inst": "marimba", "every_s": 2 * 6 * E66, "start": 1.0, "step_s": 3 * E66,
+      "figures": [[62, 69, 65], [67, 74, 71], [69, 76, 72], [60, 67, 64]], "gain": 0.45, "pan": "spread",
+      "vel": [0.4, 0.6], "breath": 30.0},
+     {"kind": "figure", "inst": "bell", "every_s": 4 * 6 * E66, "start": 1.0, "figures": [[81]], "gain": 0.08,
+      "pan": "centre", "vel": [0.8, 1.0]}],
+    lp_hz=6000, reverb={"seconds": 4.5, "decay": 1.1, "wet": 0.30, "tone_hz": 3600}, fade_in=5.0, fade_out=8.0,
+    pad_env={"swell_s": 2 * 6 * E66, "swell_depth": 0.15}))
+
+# Part 7 ch00_coordinates_maps (seed 31): E Aeolian, 4/4 at 60 bpm, two-bar chords Em9 - Cmaj7 - G - Dadd9 (8 s). Slow
+# glassy vibraphone chords (a soft roll on every bar) over a soft glass pad and a low bowed E-B drone; a light paper
+# rustle under the map scenes until s16 (1310.0 s); from s16 the pad thins and an airy high drone and a faint wind-chime
+# shimmer enter (the stratosphere). No drums; reverb long (wet 0.32); low-pass 6 kHz.
+_add(Style(
+    "polar-chart", "Slow and glassy: vibraphone chords in E Aeolian over a low bowed drone, a light paper rustle; later "
+    "the pad thins and an airy high drone and a faint wind-chime shimmer come in (no drums).",
+    "map projections, polar maps, the stratosphere and polar vortex (ch00 coordinates Part 7)", "E Aeolian",
+    [[40, 52, 55, 59, 66], [36, 52, 55, 59, 64], [43, 50, 55, 59, 62], [38, 50, 54, 57, 64]], 2 * _bar(60), 2.0,
+    "4/4 at 60 bpm; a vibraphone chord every bar",
+    [{"timbre": "glass", "gain": 0.24, "octave": 12, "detune": 4.0}], 0.25,
+    [{"kind": "figure", "inst": "vibraphone", "every_s": _bar(60), "start": 1.0, "step_s": 0.07, "figures": "chord",
+      "octave": 12, "gain": 0.30, "pan": "spread", "vel": [0.35, 0.5], "breath": 32.0},
+     {"kind": "drone", "notes": [40, 47], "timbre": "strings", "gain": 0.16},
+     {"kind": "noise", "slope": -1.0, "centre": 3500, "width": 0.6, "gain": 0.012, "rate": 1.5,
+      "exit_s": 1310.0, "ramp_s": 6.0},
+     {"kind": "drone", "notes": [83, 88], "timbre": "glass", "gain": 0.05, "enter_s": 1310.0, "ramp_s": 10.0},
+     {"kind": "sparse", "inst": "celesta", "notes": [88, 91, 93, 95, 98], "gap": [1.2, 3.0], "gain": 0.06,
+      "vel": [0.4, 0.7], "enter_s": 1310.0, "ramp_s": 10.0}],
+    lp_hz=6000, reverb={"seconds": 5.5, "decay": 1.4, "wet": 0.32, "tone_hz": 3800}, fade_in=6.0, fade_out=10.0,
+    pad_env={"thin_at": 1310.0, "thin_db": -6.0, "thin_ramp_s": 10.0}))
+
 
 # ===================================================================================================== composer
 def _chord_env(t: np.ndarray, k: int, cs: float, xf: float) -> np.ndarray:
@@ -418,6 +573,8 @@ def _note_pool(st: Style, notes: list[int], ly: dict) -> list[int]:
     if ly.get("order") == "root5":
         r = notes[0] + 12 if notes[0] < 40 else notes[0]
         return [r, r + 7, r + 12, r + 7]
+    if ly.get("order") == "root":
+        return [notes[0] + 12 if notes[0] < 40 else notes[0]]
     upper = sorted(notes[1:])
     return [m + ly.get("octave", 0) - 12 for m in upper]
 
@@ -499,6 +656,40 @@ def _layer(st: Style, ly: dict, n: int, rng: np.random.Generator) -> np.ndarray:
                 x = inst(hz(sc[k]), rng.uniform(*ly.get("vel", [0.5, 0.7])), rng)
                 add_at(out, pan(x * ly["gain"], 0.35 + 0.3 * q / 4), int((tb + q * ly["step_s"]) * SR))
             tb += rng.uniform(*ly["every"])
+    elif kind == "figure":
+        # a short figure every `every_s` seconds from `start`: notes per chord (`figures` = list per chord, cycled),
+        # the current chord's upper notes (`figures: "chord"`, + `octave`), or chord-tone `degrees` shifted by
+        # `shifts[k // shift_every]` (k = figure number); notes `step_s` apart
+        inst = INSTRUMENTS[ly["inst"]]
+        dt = ly.get("step_s", 0.25)
+        per = ly.get("breath")
+        knots = rng.uniform(0.45, 1.0, int(dur / per) + 3) if per else None
+        tb, k = ly.get("start", 1.0), 0
+        while tb < dur - 4.0:
+            ci = int(tb // st.chord_s) % len(st.chords)
+            figs = ly.get("figures")
+            if figs == "chord":
+                notes = [m + ly.get("octave", 0) for m in sorted(st.chords[ci][1:])]
+            elif figs is not None:
+                notes = list(figs[ci % len(figs)])
+            else:
+                pool = _note_pool(st, st.chords[ci], ly)
+                sh = ly.get("shifts", [0])[(k // ly.get("shift_every", 1)) % len(ly.get("shifts", [0]))]
+                notes = [pool[(d + sh) % len(pool)] + 12 * ((d + sh) // len(pool)) for d in ly["degrees"]]
+            for q, m in enumerate(notes):
+                tq = tb + q * dt
+                if tq > dur - 4.0:
+                    break
+                vel = rng.uniform(*ly.get("vel", [0.5, 0.7]))
+                if knots is not None:
+                    j, u = int(tq // per), (tq % per) / per
+                    vel *= knots[j] + (knots[j + 1] - knots[j]) * (0.5 - 0.5 * np.cos(np.pi * u))
+                x = inst(hz(m), vel, rng)
+                mode = ly.get("pan", "centre")
+                p = rng.uniform(0.25, 0.75) if mode == "spread" else (0.5 if mode == "centre" else float(mode))
+                add_at(out, pan(x * ly["gain"], p), int(tq * SR) + int(rng.normal(0, 0.006) * SR))
+            tb += ly["every_s"]
+            k += 1
     elif kind == "drone":
         t = np.arange(n) / SR
         for m in ly["notes"]:
@@ -520,6 +711,45 @@ def _layer(st: Style, ly: dict, n: int, rng: np.random.Generator) -> np.ndarray:
     return out
 
 
+def _ramp(t: np.ndarray, t0: float, width: float) -> np.ndarray:
+    """0 before t0, 1 after t0 + width, a raised-cosine step between (no clicks)."""
+    u = np.clip((t - t0) / max(width, 1e-6), 0, 1)
+    return 0.5 - 0.5 * np.cos(np.pi * u)
+
+
+def _gate(ly: dict, n: int) -> np.ndarray | None:
+    """Level envelope for a layer with ``enter_s`` (fades in over ``ramp_s`` from then) and/or ``exit_s`` (has faded
+    out by then); None when the layer plays throughout."""
+    if "enter_s" not in ly and "exit_s" not in ly:
+        return None
+    t = np.arange(n) / SR
+    r = ly.get("ramp_s", 6.0)
+    g = np.ones(n)
+    if "enter_s" in ly:
+        g *= _ramp(t, ly["enter_s"], r)
+    if "exit_s" in ly:
+        g *= 1 - _ramp(t, ly["exit_s"] - r, r)
+    return g
+
+
+def _apply_pad_env(x: np.ndarray, env: dict) -> np.ndarray:
+    """Shape the pad bed (see ``Style.pad_env``): slow swell, soft beat pulse, slow left↔right drift, late thinning."""
+    n = len(x)
+    t = np.arange(n) / SR
+    g = np.ones(n)
+    if env.get("swell_s"):
+        g *= 1 - env.get("swell_depth", 0.3) * (0.5 + 0.5 * np.cos(2 * np.pi * t / env["swell_s"]))
+    if env.get("pulse_s"):
+        g *= 1 - env.get("pulse_depth", 0.2) * (0.5 - 0.5 * np.cos(2 * np.pi * t / env["pulse_s"]))
+    if env.get("thin_at") is not None:
+        g *= 1 + (10 ** (env.get("thin_db", -6.0) / 20) - 1) * _ramp(t, env["thin_at"], env.get("thin_ramp_s", 8.0))
+    y = x * g[:, None]
+    if env.get("pan_s"):
+        p = 0.5 - env.get("pan_depth", 0.3) * np.cos(2 * np.pi * t / env["pan_s"])     # starts left, drifts right
+        y = y * np.stack([np.sqrt(2 * (1 - p)), np.sqrt(2 * p)], axis=1)
+    return y
+
+
 def compose(style: str, duration: float, seed: int = 7) -> np.ndarray:
     """A music bed for ``style`` as float32 stereo at SR, peak-normalised to 0.5, with the style's fades.
 
@@ -534,8 +764,12 @@ def compose(style: str, duration: float, seed: int = 7) -> np.ndarray:
     n = int(round(duration * SR))
     x = _pads(st, n, np.random.default_rng([seed, 0]))
     peak_pad = np.max(np.abs(x)) + 1e-12
+    if st.pad_env:
+        x = _apply_pad_env(x, st.pad_env)
     for i, ly in enumerate(st.layers, start=1):
-        x += peak_pad * _layer(st, ly, n, np.random.default_rng([seed, i]))
+        y = _layer(st, ly, n, np.random.default_rng([seed, i]))
+        g = _gate(ly, n)
+        x += peak_pad * (y if g is None else y * g[:, None])
     rv = dict(seconds=3.5, decay=0.9, wet=0.35, tone_hz=3000.0)
     rv.update(st.reverb)
     x = reverb(x, np.random.default_rng([seed, 99]), **rv)
