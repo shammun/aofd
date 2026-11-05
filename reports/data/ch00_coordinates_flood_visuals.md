@@ -209,3 +209,79 @@ Sources:
 - [Geography Realm: making colour-blind-friendly maps](https://www.geographyrealm.com/making-color-blind-friendly-maps/)
 - [Visualising Data: colour alternatives to green and red](https://visualisingdata.com/2015/11/colour-swatch-alternatives-to-green-and-red/)
 - [ICIMOD/SERVIR Amphan flood mapping](https://servir.icimod.org/news/mapping-floods-in-bangladesh-caused-by-cyclone-amphan-to-support-humanitarian-response/)
+
+---
+
+## v3 (2026-11-05, after the user rejected every v2 clip: "they look wrong and I see no flood")
+
+Folder `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates/research/flood_v3/` (short: `V3/`).
+The coordinator relayed the new brief: find **one event whose flood is obvious in a plain before/after image** (it need
+not be Amphan); no inundation overlay; a plain MODIS 7-2-1 pair with the same stretch and a gliding line, as in captests A5.
+The "after" image should be the first clear view after landfall and the "before" image a few days earlier. An optional
+middle frame shows the storm itself on landfall day. If Ian's inland flooding does not read, Ian drops the swipe and keeps
+the gauge water-level chart.
+
+### v3.1 How the events were ranked
+Step 1: a metadata survey (`V3/survey_events.json`) of the daily MODIS Terra/Aqua clear fraction (`state_1km`), from
+landfall −12 d to +14 d. Step 2: 7-2-1 pairs fetched for the best dates (`fetch()`, GEE, one stretch for every event:
+R 0–0.32, G 0–0.42, B 0–0.20). Step 3: each pair checked by eye.
+
+| Rank | Event (landfall UTC, source) | Before (gap) | After (gap) | Does the flood read in 2 s? |
+|---|---|---|---|---|
+| **1** | **Nargis**, Irrawaddy delta, ≈ 10–12 UTC 2 May 2008 (IBTrACS: 16.0 N 94.1 E at 09 UTC, 10 km from land; 16.0 N 94.5 E at 12 UTC, over land) | Terra **21 Apr** (−11 d; 80 % clear; popcorn cumulus); alt. 15 Apr (−17 d; 92 % clear; NASA's before date; sun-glint patch in the sea) | Terra **5 May** (+66 h; 61 % clear) | **Yes.** The pink-and-green delta turns dark blue almost everywhere south of Pathein–Yangon. This is NASA Earth Observatory's flagship pair: ≈ 14 400 km² flooded per their UMD estimate. |
+| 2 | **Idai**, Beira, ≈ 23 UTC 14 Mar 2019 (IBTrACS: 19.8 S 35.2 E at 21 UTC, 15 km offshore) | Aqua 11 Mar (−84 h; 61 % clear; dense cumulus) | Terra 25 Mar (+10 d; first clear view) | **Yes in the after image** (the "inland sea" of the Buzi plain), but the before image is cloud-speckled. Sentinel-2 10/25 Mar is cloud-free but its swath misses Beira and Buzi. |
+| 3 | **Harvey**, 03 UTC 26 Aug 2017 (NHC, Rockport, 230 km SW of the frame) | Terra 22 Aug (−82 h) | Terra 31 Aug (+134 h) | Partly: flooded river floodplains east of Houston; the city itself reads poorly. |
+| 4 | **Ian** inland (Peace, Myakka), 19 UTC 28 Sep 2022 | Terra 23 Sep (−5 d; 95 % clear) | Terra 30 Sep (+29 h; 94 % clear) | **No.** The rivers widen only slightly at 250 m. Evidence: `V3/clips/ian2022_inland_modis721_swipe_settle.png`. **→ Ian keeps the NOAA CO-OPS gauge water-level chart** (build-1 s40, with the review-1 fixes). |
+| 5 | **Amphan**, ≈ 10–11 UTC 20 May 2020 | 16 May (−4 d) | first clear day 29 May (+9 d, cumulus) | **No** (the polder flood is small; monsoon clouds). |
+| – | Yaas 2021 / Remal 2024 / Florence 2018 | survey only | Yaas first clear look 4 Jun (+9 d); Remal none above 56 % until 5 Jun; Florence 19 Sep (+5 d, 90 %) | Yaas and Remal have no clear "after" within a week; Florence was fetched but not rendered. |
+
+### v3.2 Recommendation
+- **Use Nargis 2008** for the #5b swipe: MODIS Terra 7-2-1, **21 Apr (−11 d) | 5 May (+66 h)**, one fixed stretch.
+  - The sequence is before → **landfall day, 2 May, Aqua true colour ≈ 07 UTC (−3 h)**, showing the whole storm, its eye,
+    and the swipe box in gold → after → swipe.
+  - No clear day exists between 22 Apr and landfall.
+- **Runner-up: Idai 2019.**
+- **Ian:** no swipe; keep the gauge chart. **Amphan:** zoom, track, landfall and shelf only.
+
+### v3.3 Clips (Python/Pillow → ffmpeg, 1920×1080, 30 fps)
+In `G:/Geophysical Fluid Dynamics/aofd-data/archive/movies/viewing_2026-10-29/viewing_2026-10-29/flood_prototypes_v3/`:
+- `1_nargis2008_sequence_before_storm_after_swipe.mp4`: 19 s, recommended.
+- `1b_nargis2008_swipe_only.mp4`.
+- `1c_nargis2008_sequence_15apr_before.mp4`.
+- `2_idai2019_swipe_runnerup.mp4`.
+- `3_harvey2017_swipe.mp4`.
+- `4_ian2022_inland_evidence_no_flood.png`.
+- `contact_sheet_flood_v3.jpg`.
+
+Rules applied:
+- Date labels give the exact date and the time from landfall.
+- The landfall marker and track come from IBTrACS.
+- The source line sits below the image.
+
+Processing notes:
+- MODIS b7 gaps (−32768; Harvey ≤ 13.6 %, Idai 6.8 %, mostly over the sea) are filled from the nearest valid pixel.
+
+Known blemishes:
+- The Idai and Ian frames have some overlapping labels.
+
+### v3.4 Landfall check
+IBTrACS has Amphan at 21.4 N 88.1 E at 09 UTC (24 km from land) and 22.1 N 88.4 E at 12 UTC (over land), so landfall
+≈ 10–11 UTC is at ≈ 21.7 N 88.2 E. A press caption quoting IMD gives 21.65 N 88.3 E (not verified in an IMD document).
+**The v2 marker at 21.65 N 88.25 E was correct.** It only looked odd because that frame was centred on Khulna, 140 km NE.
+
+### v3.5 Not done
+- **Full S1 acquisition table and change composite:** dropped per the coordinator's second message.
+- **Published Amphan products:** no UNOSAT, ARIA or Charter value-added products found. ICIMOD gives Shyamnagar
+  ≈ 20 790 ha flooded (16/22 May S1). Zenodo 10.5281/zenodo.4390084 has S1 inundation rasters.
+- **Browser capture:** not used in v3. Many chrome-headless-shell processes from the Part 1 builder were running.
+
+### v3.6 Disk
+- All downloads went through `fetch()` (GEE bundles ≈ 0.3 GB, GIBS 0.4 MB).
+- `V3/` is 142 MB; the archive copy is 27 MB. TEMP was on G:. No evictions; nothing committed.
+
+Sources (v3):
+- [NASA EO: Cyclone Nargis Floods Burma](https://earthobservatory.nasa.gov/images/19876/cyclone-nargis-floods-burma-myanmar)
+- [NASA EO: Floodwaters in Burma](https://earthobservatory.nasa.gov/images/8750/floodwaters-in-burma)
+- [IMD press release, 19 May 2020](https://mausam.imd.gov.in/backend/assets/press_release_pdf/PRESS_RELEASE_dated_19th_May_2020_1600_hrs_IST.pdf)
+- [ICIMOD Amphan flood mapping](https://www.icimod.org/article/mapping-floods-in-bangladesh-caused-by-cyclone-amphan-to-support-humanitarian-response/)
+- [Zenodo Amphan inundation dataset](https://zenodo.org/records/4390084)
