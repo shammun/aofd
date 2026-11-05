@@ -23,7 +23,7 @@ import { EQ_S23, EQ_S25 } from "./cs_eq";
 const CHECK_C: [string, number, number, number][] = [
   ["a vt", AMP.vt10[0], 20, 0.15], ["a vr", AMP.vr10[0], -6, 0.05], ["a ring", AMP.ring_km, 50, 0], ["a inflow", AMP.inflow, 17, 0.5], ["i inflow", 20.9, 21, 0.5],
   ["a kt", AMP.best06.kt, 90, 0], ["a hPa", AMP.best06.hpa, 956, 0], ["a peak", AMP.peak.kt, 130, 0], ["Kolkata", AMP.close.Kolkata.km, 17, 1], ["Satkhira", AMP.close.Satkhira.km, 45, 1],
-  ["Khulna", AMP.close.Khulna.km, 78, 1.5], ["a sec min", AMP.sec.min[0], -11, 0.15], ["a sec min r", AMP.sec.min[1], 100, 0], ["a sec max", AMP.sec.max[0], 6, 0.25],
+  ["Khulna", AMP.close.Khulna.km, 79, 0.5], ["a sec min", AMP.sec.min[0], -11, 0.15], ["a sec min r", AMP.sec.min[1], 100, 0], ["a sec max", AMP.sec.max[0], 6, 0.25],
   ["fmb", CST.spF, 33, 0.1], ["fmb from", CST.fromF, 222.5, 0.1], ["coast brg", CST.coast_brg, 329, 0.2], ["fm res", CST.gauges["8725520"].ext, 2.2, 0.01],
   ["stp res", CST.gauges["8726520"].ext, -1.8, 0.05], ["d fs", CST.d_fs, 160, 1], ["shelf", FLD.shelf["89.0E"].km_to_20m, 33, 0.2], ["acc", RING.acc, 0.048, 0.0006],
   ["say a_vt", SAY.a_vt, 20, 0], ["say a_kmh", SAY.a_kmh, 167, 0],

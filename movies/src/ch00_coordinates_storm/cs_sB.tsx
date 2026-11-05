@@ -17,7 +17,7 @@ import { OrbitKey, orbitCam as hOrbitCam, orbitPath as hOrbitPath, projector as 
 import { LayerStack3D, StackLayer } from "../house/kit/stack3d";
 import { useTex } from "./kit_cs/globe";
 import {
-  AT, ArcHead, Arrow, ColourBar, Cross, D, D2R, DashArrow, GeoImg, GeoMap, IMG, K, LEN, LUT_DBZ, Lbl, Parcel, RING, RTick, SAY, SEC, SRC, SS, STK, Scene,
+  AT, ArcHead, Arrow, ColourBar, Cross, D, D2R, DashArrow, GeoImg, GeoMap, IMG, K, LEN, LUT_DBZ, LUT_W, Lbl, Parcel, RING, RTick, SAY, SEC, SRC, SS, STK, Scene, WV,
   SideCallout, SpeedBar, Svg, URBar, Wedge, arcD, boxAt, clamp, fin, fout, linesPath, mix, nf, polar, poly, prog, win,
 } from "./cs_lib";
 import { EQ_S09, EQ_S10, EQ_S11, EQ_S12, EQ_S13, EQ_S14, EQ_S15, EQ_S16, EQ_S20, cutAt } from "./cs_eq";
@@ -33,6 +33,10 @@ const CHECK_B: [string, number, number, number][] = [
   ["vr925", STK.vr100[0], -6.5, 0.05], ["vr850", STK.vr100[1], 0, 0.5], ["vr500", STK.vr100[2], 1, 0.1], ["vr200", STK.vr100[3], 1, 0.1], ["vr150", STK.vr100[4], 6.5, 0.2],
   ["sec min", SEC.min[0], -16, 0.5], ["sec min r", SEC.min[1], 30, 0], ["sec max", SEC.max[0], 9, 0.25], ["sec max r", SEC.max[1], 125, 0], ["vt max", SEC.vtmax[0], 55, 0.05],
   ["vt max r", SEC.vtmax[1], 30, 0], ["vt10", SEC.vt10_25, 34.8, 0.05],
+  // measured rising air (DS29-DS30): the screen strings below
+  ["w peak", WV.tdr.peak[0], 3.3, 0.05], ["w peak z", WV.tdr.peak[1], 8.5, 0], ["w peak r", WV.tdr.peak[2], 45, 0], ["w tower", WV.tdr.point_max[0], 11.6, 0.1],
+  ["w p999", WV.tdr.p999, 8.9, 0.1], ["w cont", WV.cont.mean_18_26, 1.0, 0.1], ["w cont r", WV.cont.slanted[0][2], 18, 0], ["eye", WV.tdr.eye_km, 20, 0],
+  ["dt h", WV.tdr.dt_h, 7.6, 0.05], ["say w", SAY.w_ring, 3, 0], ["say tower", SAY.w_tower, 10, 0], ["say cont", SAY.w_cont, 1, 0],
 ];
 CHECK_B.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -484,13 +488,36 @@ const S17: React.FC = () => {
 const ZX = 15 / 100;
 const zs = (STK.z_km as number[]).map((z) => z * ZX);
 const ringPts = (r: number, z: number): V3[] => circ(r, z, 64);
-const StackBody: React.FC<{ f: number; lit: (i: number) => number; ringO: number; dashO: number; path?: number }> = ({ f, lit, ringO, dashO, path = 0 }) => {
+/** the radar's strong-ascent radius [km] at height z [km]: piecewise linear through the measured 2 / 5 / 8 / 11-km values (DS29), held
+ * constant outside 2-11 km (no extrapolation past the data) */
+export const leanR = (z: number) => {
+  const zz = WV.tdr.lean_z as number[], rr = WV.tdr.lean_r as number[];
+  if (z <= zz[0]) return rr[0];
+  for (let i = 1; i < zz.length; i++) if (z <= zz[i]) return rr[i - 1] + ((rr[i] - rr[i - 1]) * (z - zz[i - 1])) / (zz[i] - zz[i - 1]);
+  return rr[rr.length - 1];
+};
+/** measured rising air on the eyewall ring (three.js only): at 2 / 5 / 8 / 11 km, 8 azimuths, length ∝ the radar's slanted ring max w,
+ * base on the strong-ascent radius, leaning outward along leanR; beads animate (house wind rule) */
+const W_KM_PER_MS = 0.8;                                    // drawn rise per m/s [km of height]: 3.3 m/s → 2.7 km (×15 in the stack)
+const UpArrows3D: React.FC<{ f: number; o: number }> = ({ f, o }) => {
+  if (o <= 0) return null;
+  const sl = WV.tdr.slanted as number[][];
+  return <group>{sl.map(([z, w], li) => Array.from({ length: 8 }, (_, j) => {
+    const a = ((j + 0.5) * Math.PI) / 4, z1 = z + w * W_KM_PER_MS, r0 = leanR(z) / 100, r1 = leanR(z1) / 100;
+    const p: V3 = [r0 * Math.cos(a), r0 * Math.sin(a), z * ZX], q: V3 = [r1 * Math.cos(a), r1 * Math.sin(a), z1 * ZX];
+    return <group key={`w${li}_${j}`}><HArrow3D from={p} to={q} color={C.gold} px={5} head={Math.min(18, 8 + w * 4)} o={o} /><Bead3D f={f} a={p} b={q} speed={w * 3} o={o} /></group>;
+  }))}</group>;
+};
+const StackBody: React.FC<{ f: number; lit: (i: number) => number; ringO: number; dashO: number; path?: number; wO?: number }> = ({ f, lit, ringO, dashO, path = 0, wO = 0 }) => {
   const tex = (STK.levels as number[]).map((lv) => useTex(IMG(`cst_ur_${lv}.png` as "cst_ur_925.png"))); // eslint-disable-line react-hooks/rules-of-hooks
   const H = STK.half_km / 100;
   const layers: StackLayer[] = tex.map((t, i) => ({ tex: t, z: zs[i], o: lit(i) }));
   const reveal = zs.map((_, i) => clamp((f - 4 - i * 6) / 12, 0, 1));
   const top = zs[4];
-  const pth: V3[] = [[2.2, -1.6, zs[0] + 0.02], [0.45, -0.3, zs[0] + 0.02], [0.4, -0.25, top - 0.02], [2.2, -1.6, top - 0.02]];
+  // the in-up-out path at azimuth −36°: the up-leg follows the radar's measured outward lean (leanR), from the bottom layer to the top
+  const ua: [number, number] = [Math.cos(-36 * D2R), Math.sin(-36 * D2R)];
+  const rUp0 = leanR(STK.z_km[0]) / 100, rUp1 = leanR(STK.z_km[4]) / 100;
+  const pth: V3[] = [[2.7 * ua[0], 2.7 * ua[1], zs[0] + 0.02], [rUp0 * ua[0], rUp0 * ua[1], zs[0] + 0.02], [rUp1 * ua[0], rUp1 * ua[1], top - 0.02], [2.7 * ua[0], 2.7 * ua[1], top - 0.02]];
   return (
     <group>
       <LayerStack3D layers={f < 3 ? [] : layers} foot={{ x0: -H, x1: H, y0: -H, y1: H }} sep={1} reveal={reveal}
@@ -504,6 +531,7 @@ const StackBody: React.FC<{ f: number; lit: (i: number) => number; ringO: number
         return <group key={`${li}_${j}`}><HArrow3D from={p} to={q} color={C.key} px={4} head={14} o={0.9 * dashO * reveal[li]} /><Bead3D f={f} a={p} b={q} speed={vt} o={dashO * reveal[li]} /></group>;
       }))}
       {pth.slice(1).map((q, i) => <HArrow3D key={`p${i}`} from={pth[i]} to={q} color={C.gold} px={7} head={26} grow={clamp(path * 3 - i, 0, 1)} o={path > 0 ? 1 : 0} />)}
+      <UpArrows3D f={f} o={wO} />
     </group>
   );
 };
@@ -569,7 +597,7 @@ const S19: React.FC = () => {
   return (
     <Scene>
       <HView3D st={st} x={0} y={0} w={1920} h={1080}>
-        <StackBody f={f} lit={lit} ringO={fin(f, 6)} dashO={1} path={prog(f, tSo, tSo + 60)} />
+        <StackBody f={f} lit={lit} ringO={fin(f, 6)} dashO={1} path={prog(f, tSo, tSo + 60)} wO={fin(f, tSo + 30, 20)} />
       </HView3D>
       <GlobeFrame id="s19k" zoom={1} right={1} name="s19 stack" />
       <Svg>
@@ -583,15 +611,17 @@ const S19: React.FC = () => {
           <SideCallout f={f} lines={`0.7 km: ≈ ${nf(vr[0], 1)} m/s`} at={[1210, 740]} appear={tAvg} target={ringR[0]} s={T.floor} c={C.neg} bend={-20} />
         </g>
         <Lbl x={1210} y={120} t="in → up → out" c={C.gold} s={T.key} o={fin(f, tSo) * fout(f, tOrbit - 20)} />
+        <Lbl x={1210} y={190} t="up: measured by radar" c={C.gold} s={T.floor} o={win(f, tSo + 30, tOrbit - 20)} />
         <Keyword f={f} text="swing round" at={[1210, 120]} s={T.key} appear={tOrbit} out={tLook - 20} />
       </Svg>
-      <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 790 }} w={1400} name="s19 src" />
+      <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 790 }} w={1400} o={fout(f, tSo + 30, 20)} name="s19 src" />
+      <SourceBelow text={SRC.hrrrPlTdr} pic={{ x: 80, y: 40, w: 1000, h: 790 }} w={1740} o={fin(f, tSo + 30, 20)} name="s19 src w" />
     </Scene>
   );
 };
 
 // ================================================================ s20 the radius-height section: in, up and out (D20)
-const SB = { x: 170, y: 80, w: 820, h: 640 };
+const SB = { x: 170, y: 70, w: 820, h: 610 };            // s20: room under the box for a two-line source line
 export const secP = (r: number, z: number, B = SB, rMax = 200): Pt => [B.x + (r / rMax) * B.w, B.y + B.h - (z / 16) * B.h];
 export const SecAxes: React.FC<{ B?: typeof SB; rMax?: number; o?: number; rt?: number[] }> = ({ B = SB, rMax = 200, o = 1, rt = [0, 50, 100, 150, 200] }) => o <= 0 ? null : (
   <g opacity={o}>
@@ -608,15 +638,33 @@ export const InUpOut: React.FC<{ f: number; P: (r: number, z: number) => Pt; rIn
   return <g opacity={o}>{segs.map(([a, b], i) => <g key={i}><Arrow p={a} q={b} color={C.gold} w={8} head={30} />
     <line x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={C.bg} strokeWidth={3} strokeDasharray="8 30" strokeDashoffset={-((f * 1.5) % 38)} /></g>)}</g>;
 };
+/** a gold arrow with moving background dashes (the house wind rule: arrows always animated) */
+const FlowArrow: React.FC<{ f: number; a: Pt; b: Pt; w?: number; head?: number; o?: number; speed?: number }> = ({ f, a, b, w = 8, head = 30, o = 1, speed = 1.5 }) => o <= 0 ? null : (
+  <g opacity={o}>
+    <Arrow p={a} q={b} color={C.gold} w={w} head={head} />
+    <line x1={a[0]} y1={a[1]} x2={a[0] + (b[0] - a[0]) * 0.8} y2={a[1] + (b[1] - a[1]) * 0.8} stroke={C.bg} strokeWidth={3} strokeDasharray="8 30"
+      strokeDashoffset={-((f * speed) % 38)} />
+  </g>
+);
 const S20: React.FC = () => {
   const f = useCurrentFrame(), k = K("s20_ian_curtain");
-  const tAvg = SS(k, 1), tDep = SS(k, 2), tSlice = SS(k, 3), tName = SS(k, 4), tCol = SS(k, 5), tSea = SS(k, 6), tMin = SS(k, 7), tTop = SS(k, 8), tLines = SS(k, 9), tVt = SS(k, 10),
-    tWeak = SS(k, 11), tMust = SS(k, 12), tEw = SS(k, 13), tIUO = SS(k, 14), tMore = SS(k, 15);
+  const tAvg = SS(k, 1), tDep = SS(k, 2), tSlice = SS(k, 3), tName = SS(k, 4), tCol = SS(k, 5), tMin = SS(k, 7), tTop = SS(k, 8), tLines = SS(k, 9), tVt = SS(k, 10),
+    tWeak = SS(k, 11), tMust = SS(k, 12), tRadar = AT(k, 12, "radar on a hurricane-hunter"), tThree = AT(k, 12, "about three metres"), tTower = AT(k, 12, "single towers"),
+    tEw = SS(k, 13), tIUO = SS(k, 14), tMore = SS(k, 15);
   const oSec = fin(f, tSlice);
   const ringE = 1 - prog(f, tAvg, tAvg + 70);
+  // the radar: the axes zoom from r 0-200 / z 0-16 km to the radar panel's r 0-100 / z 0-14 km, then the w panel cross-fades in
+  const zp = prog(f, tRadar, tRadar + 40), xf = prog(f, tRadar + 20, tRadar + 50);
+  const rMax = mix(200, 100, zp), zMax = mix(16, 14, zp);
+  const P = (r: number, z: number): Pt => [SB.x + (r / rMax) * SB.w, SB.y + SB.h - (z / zMax) * SB.h];
+  const oH = 1 - xf;                                           // the HRRR u_r layer
   const vtl = SEC.vt_lines as { level: number; pts: number[] }[];
   const vlab = SEC.vt_labels as { level: number; r: number; z: number }[];
-  const mn = secP(SEC.min[1], SEC.min[2]), mxp = secP(SEC.max[1], SEC.max[2]), vtp = secP(SEC.vtmax[1], SEC.vtmax[2]);
+  const mn = P(SEC.min[1], SEC.min[2]), mxp = P(SEC.max[1], SEC.max[2]), vtp = P(SEC.vtmax[1], SEC.vtmax[2]);
+  const eye = WV.tdr.eye_km as number, sl = WV.tdr.slanted as number[][], pk = WV.tdr.peak as number[];
+  const pkP = P(pk[2], pk[1]);
+  const oAxA = oSec * fout(f, tRadar - 12, 10), oAxB = oSec * fin(f, tRadar + 42, 12);
+  const wUp = (i: number) => fin(f, tRadar + 50 + i * 12, 14);
   return (
     <Scene>
       <Svg>
@@ -627,31 +675,62 @@ const S20: React.FC = () => {
           <Lbl x={580} y={600} t="one ring → one point (r, z)" c={C.key} s={T.floor} a="middle" o={fin(f, tDep)} />
         </g>
         <g opacity={oSec}>
-          <image href={IMG("cst_sec_ian.png")} x={SB.x} y={SB.y} width={SB.w} height={SB.h} preserveAspectRatio="none" />
-          {vtl.map((L, i) => <path key={i} d={poly(Array.from({ length: L.pts.length / 2 }, (_, j) => secP(L.pts[2 * j], L.pts[2 * j + 1])))} fill="none" stroke="#1a1a24"
-            strokeWidth={3.5} opacity={fin(f, tLines)} />)}
-          {vlab.map((L, i) => { const q = secP(L.r, L.z); return <Lbl key={i} x={q[0]} y={q[1]} t={`${L.level}`} c="#1a1a24" s={T.floor} a="middle" o={fin(f, tLines + 10)} />; })}
-          <SecAxes />
-          <line x1={secP(25, 0)[0]} y1={SB.y + SB.h - 4} x2={secP(25, 0)[0]} y2={SB.y + SB.h - 40} stroke={C.first} strokeWidth={8} opacity={fin(f, tWeak)} />
-          <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tMin)} />
-          <circle cx={mxp[0]} cy={mxp[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tTop)} />
-          <circle cx={vtp[0]} cy={vtp[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, tVt)} />
-          <InUpOut f={f} P={(r, z) => secP(r, z)} rIn={[30, 170]} rUp={40} zTop={15.5} o={fin(f, tMust)} />
+          <defs><clipPath id="s20clip"><rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} /></clipPath></defs>
+          <g clipPath="url(#s20clip)">
+            <image href={IMG("cst_sec_ian.png")} x={SB.x} y={SB.y + SB.h - (SB.h * 16) / zMax} width={(SB.w * 200) / rMax} height={(SB.h * 16) / zMax}
+              preserveAspectRatio="none" opacity={oH} />
+            {vtl.map((L, i) => <path key={i} d={poly(Array.from({ length: L.pts.length / 2 }, (_, j) => P(L.pts[2 * j], L.pts[2 * j + 1])))} fill="none" stroke="#1a1a24"
+              strokeWidth={3.5} opacity={fin(f, tLines) * oH} />)}
+            <image href={IMG("cst_tdr_w.png")} x={SB.x} y={SB.y + SB.h - (SB.h * 14) / zMax} width={(SB.w * 100) / rMax} height={(SB.h * 14) / zMax}
+              preserveAspectRatio="none" opacity={xf} />
+            <rect x={SB.x} y={SB.y} width={P(eye, 0)[0] - SB.x} height={SB.h} fill="#5d6577" opacity={0.9 * xf} />
+          </g>
+          {vlab.map((L, i) => { const q = P(L.r, L.z); return <Lbl key={i} x={q[0]} y={q[1]} t={`${L.level}`} c="#1a1a24" s={T.floor} a="middle" o={fin(f, tLines + 10) * oH} />; })}
+          <rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} fill="none" stroke={C.grid} strokeWidth={3} />
+          {[0, 50, 100, 150, 200].map((r) => <Lbl key={`ra${r}`} x={P(r, 0)[0]} y={SB.y + SB.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} o={oAxA} />)}
+          {[0, 25, 50, 75, 100].map((r) => <Lbl key={`rb${r}`} x={P(r, 0)[0]} y={SB.y + SB.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} o={oAxB} />)}
+          {[0, 4, 8, 12, 16].map((z) => <Lbl key={`za${z}`} x={SB.x - 14} y={P(0, z)[1]} t={`${z}`} c={C.muted} s={T.floor} a="end" b={false} o={oAxA} />)}
+          {[0, 4, 8, 12].map((z) => <Lbl key={`zb${z}`} x={SB.x - 14} y={P(0, z)[1]} t={`${z}`} c={C.muted} s={T.floor} a="end" b={false} o={oAxB} />)}
+          <Lbl x={SB.x + SB.w} y={SB.y + SB.h + 84} t="distance from the centre (km)" c={C.muted} s={T.floor} a="end" b={false} />
+          <Lbl x={SB.x - 14} y={SB.y - 30} t="height (km)" c={C.muted} s={T.floor} a="start" b={false} />
+          <Lbl x={(SB.x + P(eye, 0)[0]) / 2} y={SB.y + SB.h * 0.45} t="no echoes" c={C.key} s={T.floor} a="middle" rot={-90} o={xf} />
+          <line x1={P(25, 0)[0]} y1={SB.y + SB.h - 4} x2={P(25, 0)[0]} y2={SB.y + SB.h - 40} stroke={C.first} strokeWidth={8} opacity={fin(f, tWeak) * oH} />
+          <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tMin) * oH} />
+          <circle cx={mxp[0]} cy={mxp[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tTop) * oH} />
+          <circle cx={vtp[0]} cy={vtp[1]} r={12} fill={C.key} stroke={C.bg} strokeWidth={3} opacity={fin(f, tVt) * oH} />
+          {/* the inflow says the air must rise: the continuity w (≈ 1 m/s at r ≈ 18-26 km), dashed, on the HRRR section */}
+          <FlowArrow f={f} a={P(170, 0.8)} b={P(32, 0.8)} o={win(f, tMust, tRadar - 6)} />
+          <Arrow p={P(22, 1.2)} q={P(22, 12)} color={C.gold} w={6} head={28} dash="14 12" o={win(f, tMust + 15, tRadar - 6)} />
+          {/* measured: gold up arrows along the radar's outward-leaning updraught, thickness in proportion to its ring max w */}
+          {[0, 1, 2].map((i) => { const z0 = sl[i][0] + 0.3, z1 = sl[i + 1][0] - 0.3;
+            return <FlowArrow key={`u${i}`} f={f} a={P(leanR(z0), z0)} b={P(leanR(z1), z1)} w={5 + 2.2 * sl[i][1]} head={26 + 3 * sl[i][1]} o={xf * wUp(i)} speed={1 + sl[i][1]} />; })}
+          <circle cx={pkP[0]} cy={pkP[1]} r={13} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={xf * fin(f, tThree)} />
+          {/* in, up and out: schematic in and out on the radar panel with the measured up arrows */}
+          <FlowArrow f={f} a={P(96, 0.8)} b={P(leanR(2) + 4, 0.8)} w={7} o={xf * fin(f, tIUO)} />
+          <FlowArrow f={f} a={P(leanR(11) + 6, 12.6)} b={P(96, 12.6)} w={7} o={xf * fin(f, tIUO + 10)} />
         </g>
         <Keyword f={f} text="average round each ring" at={[MX, 120]} s={T.key} appear={0} out={tSlice - 20} />
         <Keyword f={f} text="radius-height section" at={[MX, 120]} s={T.key} appear={tName} out={tMust - 20} />
-        <URBar x={MX} y={250} w={420} o={fin(f, tCol)} />
+        <URBar x={MX} y={250} w={420} o={fin(f, tCol) * oH} />
+        <ColourBar x={MX} y={250} w={420} lut={LUT_W} lo={0} hi={WV.tdr.lim} unit="m/s" title="rising air (radar)" o={xf}
+          ticks={[{ v: 0, t: "≤ 0" }, { v: 2, t: "2" }, { v: 4, t: "4" }]} />
         <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 540]} appear={tMin} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
         <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 400]} appear={tTop} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
         <SideCallout f={f} lines={`u_θ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 460]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
         <Lbl x={MX} y={620} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
-        <Keyword f={f} text="must rise in between" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tIUO - 20} />
-        <Lbl x={MX} y={460} t="rises in the eyewall" c={C.key} s={T.floor} o={fin(f, tEw)} />
+        <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tRadar - 20} />
+        <SideCallout f={f} lines={`≈ ${nf(WV.cont.mean_18_26, 0)} m/s up, r ≈ 20 km`} at={[MX, 460]} appear={tMust + 15} out={tRadar - 16} target={P(22, 7)} s={T.floor} c={C.gold} />
+        <Keyword f={f} text="measured: aircraft radar" at={[MX, 120]} s={T.key} appear={tRadar} out={tIUO - 20} />
+        <SideCallout f={f} lines={`≈ ${nf(pk[0], 1)} m/s, ${nf(pk[1], 1)} km up`} at={[MX, 440]} appear={tThree} out={tIUO - 20} target={[pkP[0] + 16, pkP[1]]} s={T.floor} c={C.gold} />
+        <Lbl x={MX} y={520} t={`single towers ≈ 10-${Math.round(WV.tdr.point_max[0])} m/s`} c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />
+        <Lbl x={MX} y={600} t="rises in the eyewall" c={C.key} s={T.floor} o={fin(f, tEw)} />
+        <Lbl x={MX} y={660} t="leaning outward" c={C.local} s={T.floor} o={fin(f, tEw + 15)} />
         <Keyword f={f} text="in, up and out" at={[MX, 120]} s={T.key} c={C.gold} appear={tIUO} out={tMore - 20} />
         <Keyword f={f} text="more: How tropical cyclones form" at={[MX, 120]} s={T.floor} appear={tMore} />
       </Svg>
       <TeX s={EQ_S20} x={MX} y={330} size={50} o={win(f, tAvg, tSlice + 40)} />
-      <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 100 }} w={1400} o={oSec} name="s20 src" />
+      <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1400} o={oSec * oH} name="s20 src" />
+      <SourceBelow text={SRC.tdr} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1720} o={xf} name="s20 src w" />
     </Scene>
   );
 };

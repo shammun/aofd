@@ -93,7 +93,16 @@
     "heights": "box-mean HRRR geopotential height per level",
     "mask": "a ring with any point where p_level > p_sfc (HRRR 18 UTC)"
    },
-   "w": "NOT used: |ω| ≤ 0.05 Pa/s in the analysis subset; rising inferred from in-below/out-above (said)"
+   "w": "HRRR analysed ω NOT used (f00 carries no vertical motion: |ω| ≤ 0.095 Pa/s, 1-6 distinct values per level; report vertical_motion §1). Measured: NOAA P-3 TDR 20220928H1 10:23 UTC ring-mean w (2-km bins, ≥ 70 % of the ring, about the HRD analysis origin 25.79 N 82.86 W); derived: continuity w from the HRRR f00 (GRIB, 37 levels) ring-mean inflow round the calm centre (4-km bins, 12-km boxcar, w = 0 at the sea, cut at 13 km)",
+   "tdr": {
+    "url": "ftp://ftp.aoml.noaa.gov/pub/hrd/data/radar/level2/2022/ian/20220928H1/220928H1_1023_xy.nc.gz",
+    "bytes": 8266017,
+    "redistributable": false,
+    "time_utc": "2022-09-28T10:23",
+    "coverage_min": 0.7,
+    "panel": "r 0-100 km × z 0-14 km, cmocean dense 0 … +4 m/s, ≤ 0 drawn as 0; eye 0-22 km grey 'no echoes'",
+    "time_offset": "≈ 8 h before the HRRR 18 UTC winds (source line only)"
+   }
   },
   "amphan": {
    "era5": "ARCO 2020-05-20T06, sfc + 10 pl; centre = ERA5 msl minimum",
@@ -201,7 +210,8 @@
    "s20/s24 height axis stretched",
    "s27 sea-level inset ×50, shelf profile vertical exaggeration",
    "s14 isobars schematic",
-   "in-up-out arrows inferred (illustrative)"
+   "s20/s24 in and out arrows schematic (summary of the u_r section)",
+   "s19 up arrows: TDR slanted ring-max w at 2/5/8/11 km on a schematic ring (the TDR ring radius, the stack's centre), length ∝ w, lean = the fitted outward slope"
   ],
   "screen_deviations": [
    "s18 layers on a 500-km local tangent-plane square (true local shape, one centre for all levels; vortex tilt ignored, research §1d)",
@@ -218,6 +228,7 @@
   "IBTrACS v04r01 (NOAA NCEI). NOAA CO-OPS tide gauges (public domain). NHC TCR AL092022 (cited).",
   "ETOPO 2022 and ETOPO1 (NOAA NCEI). MODIS MOD09/MYD09 and MCD43A4 (NASA LP DAAC) via Google Earth Engine.",
   "Blue Marble: Next Generation, NASA Earth Observatory. Made with Natural Earth.",
+  "Vertical wind: NOAA P-3 tail Doppler radar (Level 2, mission 20220928H1) — NOAA AOML Hurricane Research Division; Gamache 1995 / Reasor et al. 2009 (synthesis); Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).",
   "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."
  ],
  "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
@@ -277,6 +288,8 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\HRRR-zarr\\hrrr_prs_ian500_20220928T18_200mb_VGRD.nc": "ff795a9bc369fdd5b7b6b9a1b60ff7851d174d41ce58454ad197867772356ef5",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\HRRR-zarr\\hrrr_prs_ian500_20220928T18_150mb_UGRD.nc": "7a609f9a7fd7cb1b52b116013f452bbb390393c7900ce3e99069b7d70850740a",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\HRRR-zarr\\hrrr_prs_ian500_20220928T18_150mb_VGRD.nc": "c928a4c45fa182b54cf37445b208fa24e39f43abb409017dbd4b5bb7699f0193",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\HRD-TDR\\220928H1_1023_xy.nc.gz": "a36e853f9939b8675be6c8f13e6dbd2bfeedabcd5bf3932c33be3c2c32639a3d",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\HRRR-aws\\hrrr.t18z.wrfprsf00.grib2": "c5053ba5abf200e7b3da9d6366ea0f31dae98efbf79cd264a2b65c6f31e4560c",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_amphan_sfc_msl-u10-v10_2020-05-20T06_2020-05-20T06_1h.nc": "79ddaa6c8b1f4dcbd6c1ae574a380b6ca3008d1e12b5be4a642360e995800de2",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ERA5-ARCO\\era5_amphan_pl_u-v-w-z_1000-975-925-850-700-500-300-200-150-125_2020-05-20T06_2020-05-20T06_1h.nc": "834a949027d8839cc4bd3f966663260ab112d8ed0a060ca32b0eb59c7a17ea3c",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc": "5831ac1a03dbc74172f08e4eb8294327a00d49249d0a4a012ab0e2f4cdf2f272",
@@ -303,6 +316,7 @@
   "cst_sec_ian.png": "05a3ae7f4dcb86e79130aef09dbc70ea11697c454fc2dac6af9a5ed8a5ee587e",
   "cst_swipe_after.jpg": "8ea1848e790f6be7dbdef3fe56e26ba206468e595905014d5401cc7aa13f90d6",
   "cst_swipe_before.jpg": "8fd6327093c6c507fb987adf93cbc43a5ab340b16e53d3d2589151c4b23be393",
+  "cst_tdr_w.png": "841bc84f6e789580e4f034c56d092cb1a22a2efab2c869fe01c9227ac6557c4e",
   "cst_ur_150.png": "34b83c32ca65472b842968e5584c08c045da798cf49bf394f8cc7640b05f196a",
   "cst_ur_200.png": "72b399e7c75c70c3a3b8d720c3e536d0136102257cc170086a28d0c34cbcf608",
   "cst_ur_500.png": "35fc2df7e67c3678d8d076114be371ad3712a81f50bba8f99514c394c3c74e0e",
@@ -310,7 +324,7 @@
   "cst_ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_files": {
-  "cs.json": "306d4f2ca75f16f2aad42795de40c3a8ba6cefb6024d158623c42a45858e354b",
+  "cs.json": "57ed6ebd0a2c3287e88e46d6d537f75e58b127217f9d8cd9dd2e9ee0528b1c76",
   "img/amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "img/bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "img/goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
@@ -323,6 +337,7 @@
   "img/sec_ian.png": "05a3ae7f4dcb86e79130aef09dbc70ea11697c454fc2dac6af9a5ed8a5ee587e",
   "img/swipe_after.jpg": "8ea1848e790f6be7dbdef3fe56e26ba206468e595905014d5401cc7aa13f90d6",
   "img/swipe_before.jpg": "8fd6327093c6c507fb987adf93cbc43a5ab340b16e53d3d2589151c4b23be393",
+  "img/tdr_w.png": "841bc84f6e789580e4f034c56d092cb1a22a2efab2c869fe01c9227ac6557c4e",
   "img/ur_150.png": "34b83c32ca65472b842968e5584c08c045da798cf49bf394f8cc7640b05f196a",
   "img/ur_200.png": "72b399e7c75c70c3a3b8d720c3e536d0136102257cc170086a28d0c34cbcf608",
   "img/ur_500.png": "35fc2df7e67c3678d8d076114be371ad3712a81f50bba8f99514c394c3c74e0e",
@@ -330,7 +345,7 @@
   "img/ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_sizes_bytes": {
-  "cs.json": 275202,
+  "cs.json": 276908,
   "img/amphan_speed.png": 26371,
   "img/bay_patch.png": 2181893,
   "img/goes_eye.jpg": 148883,
@@ -343,6 +358,7 @@
   "img/sec_ian.png": 46285,
   "img/swipe_after.jpg": 595999,
   "img/swipe_before.jpg": 569816,
+  "img/tdr_w.png": 39965,
   "img/ur_150.png": 172007,
   "img/ur_200.png": 181311,
   "img/ur_500.png": 190371,
@@ -1296,16 +1312,16 @@
   },
   {
    "id": "DS17",
-   "name": "s19 S1 'the air flows in almost everywhere' (925 hPa): inflow share 0.57 of valid points 50-300 km, 0.69 on the 100-km ring (claim needs ≥ 0.85)",
+   "name": "s19 S1 inflow claim (925 hPa): inflow share 0.57 of valid points 50-300 km, 0.69 on the 100-km ring; 'almost everywhere' needs ≥ 0.85, 'on most of the ring' needs > 0.5 (narration now: on most of the ring)",
    "value": [
     0.571,
     0.694
    ],
    "ref": true,
    "tol": 0,
-   "pass": false,
+   "pass": true,
    "kind": "flag",
-   "note": "narration: say 'the air flows in on most of the ring' (s19 S1), re-voice in the heavy phase"
+   "note": "narration: 'the air flows in on most of the ring' (s19 S1, applied 2026-11-05); re-voice in the heavy phase"
   },
   {
    "id": "DS18",
@@ -1441,6 +1457,261 @@
    "kind": "check"
   },
   {
+   "id": "DS29",
+   "name": "TDR ring means (2-km bins, ≥ 50 % cover) = the research product tdr_rz.nc (max |Δw|, NaN masks equal, max |Δcover|)",
+   "value": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": [
+    1e-05,
+    0,
+    1e-06
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "peak ring-mean w (≥ 70 % of the ring, r 15-80 km, any height) 3.34 m/s at 8.5 km, r 45 km: ≈ 3.3 at 8-9.5 km, ≈ 45 km (said: about three, nine kilometres up)",
+   "value": [
+    3.336261,
+    8.5,
+    45.0
+   ],
+   "ref": [
+    3.3,
+    8.75,
+    45.0
+   ],
+   "tol": [
+    0.1,
+    0.75,
+    4
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "slanted ring max at 2 / 5 / 8 / 11 km = 0.35 / 1.51 / 3.33 / 2.35 m/s at r 33 / 49 / 45 / 53 km (the s19 arrow lengths 0.4 / 1.5 / 3.3 / 2.4)",
+   "value": [
+    0.354557,
+    1.510922,
+    3.332672,
+    2.351356,
+    33.0,
+    49.0,
+    45.0,
+    53.0
+   ],
+   "ref": [
+    0.35,
+    1.51,
+    3.33,
+    2.35,
+    33.0,
+    49.0,
+    45.0,
+    53.0
+   ],
+   "tol": [
+    0.01,
+    0.01,
+    0.01,
+    0.01,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "eyewall-band (35-60 km) mean w at 2-3 / 5 / 10 km = 0.25 / 1.15 / 2.43 m/s — the scout's ≈ 0.4 / 1.5 / 2.4: 10 km confirmed; 5 km is 1.15 (the 1.5 is the slanted ring max at 49 km); 2-3 km is 0.25 with the 70 % rule (0.46 with 50 %). Not shown, not said",
+   "value": [
+    0.247477,
+    1.145489,
+    2.430503
+   ],
+   "ref": [
+    0.25,
+    1.15,
+    2.43
+   ],
+   "tol": 0.01,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "strongest single updraught (r ≤ 100 km) 11.6 m/s at 13.0 km, r 39 km; 99.9th percentile 8.9: in 10-12 m/s (said: single towers near ten; screen ≈ 10-12)",
+   "value": [
+    11.65,
+    8.94891
+   ],
+   "ref": [
+    11.0,
+    8.9
+   ],
+   "tol": [
+    1.0,
+    0.05
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "no radar data in the clear eye: no ring mean (even at 50 % cover) inside 20 km at 2-12 km (scout: ≈ 22); the screen's grey 'no echoes' band is drawn 0-20 km from this number",
+   "value": 20.0,
+   "ref": true,
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "the updraught leans outward: strong-ascent radius 33 → 44 → 45 → 55 km at 2 / 5 / 8 / 11 km, i.e. 12 km per 5 km of height from 2 to 11 km (scout: 10-15); nearly upright at 45-50 km between 3 and 10 km (straight-line fit 3 km per 5 km). The s19/s20 up arrows follow these four radii",
+   "value": [
+    12.096377,
+    1.0
+   ],
+   "ref": [
+    12.5,
+    1.0
+   ],
+   "tol": [
+    2.5,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "radar analysis centre 2022-09-28T10:23 UTC vs the HRRR 18 UTC winds: 7.6 h (source line: ≈ 8 h)",
+   "value": [
+    8.0
+   ],
+   "ref": [
+    8.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS29",
+   "name": "w panel 1000×700 px, r 0-100 km × z 0-14 km, colour 0 … +4 m/s (cmocean dense), ≤ 0 drawn as 0, gaps transparent",
+   "value": [
+    -0.1483240290294234,
+    3.330643238703011
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS30",
+   "name": "HRRR f00 GRIB box (37 levels; u, v earth-relative; z, T, q) = the research product (max |Δ| of u, v, z, t, q)",
+   "value": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "ref": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": [
+    0.0001,
+    0.0001,
+    0.001,
+    0.0001,
+    1e-08
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS30",
+   "name": "method parity: continuity w about the research's wind centre (26.48 N 82.39 W) = report §2 row (d) 1.01 / 0.76 / 0.88 / 1.07 m/s at 18 / 22 / 26 / 26 km",
+   "value": [
+    1.012971,
+    0.763679,
+    0.884067,
+    1.072098,
+    18.0,
+    22.0,
+    26.0,
+    26.0
+   ],
+   "ref": [
+    1.01,
+    0.76,
+    0.88,
+    1.07,
+    18.0,
+    22.0,
+    26.0,
+    26.0
+   ],
+   "tol": [
+    0.005,
+    0.005,
+    0.005,
+    0.005,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS30",
+   "name": "continuity w round the calm centre: mean over r 18-26 km, z 1-12 km = 1.04 m/s; slanted max 1.16, 1.01, 1.25, 1.56 m/s at 18, 18, 18, 18 km — ≈ 1 m/s at r ≈ 18-26 km (said: about a metre per second; method spread 0.8-1.6, report)",
+   "value": [
+    1.044053,
+    18.0,
+    18.0,
+    18.0,
+    18.0
+   ],
+   "ref": [
+    1.0,
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "tol": [
+    0.15,
+    4,
+    4,
+    4,
+    4
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
    "id": "DS21",
    "name": "ERA5 centre 20.657 N 87.796 E; msl min 966.9 hPa",
    "value": [
@@ -1493,16 +1764,16 @@
   },
   {
    "id": "DS21",
-   "name": "s23 S4 says the ring is 'a hundred kilometres out, where ERA5's spin is strongest': the strongest spin and the spoken 20 / −6 m/s are on the 50-km ring",
+   "name": "s23 S5 names the ring where ERA5's spin is strongest: the strongest spin and the spoken 20 / −6 m/s are on the 50-km ring (narration must say 'fifty kilometres out')",
    "value": [
     50,
     100
    ],
    "ref": true,
    "tol": 0,
-   "pass": false,
+   "pass": true,
    "kind": "flag",
-   "note": "narration: 'a hundred kilometres out' → 'fifty kilometres out' (s23 S4; re-voice); the screen draws the 50-km ring"
+   "note": "narration: 'a hundred kilometres out' → 'fifty kilometres out' (s23, applied 2026-11-05; re-voice); the screen draws the 50-km ring"
   },
   {
    "id": "DS21",
@@ -1565,7 +1836,7 @@
   },
   {
    "id": "DS19",
-   "name": "closest approach Kolkata ≈ 17 km, Satkhira ≈ 45 km, Khulna ≈ 78 km (track west of both)",
+   "name": "closest approach Kolkata ≈ 17 km, Satkhira ≈ 45 km, Khulna ≈ 79 km (track west of both)",
    "value": [
     17.308223,
     45.15182,
@@ -1576,14 +1847,14 @@
    "ref": [
     17.0,
     45.0,
-    78.0,
+    79.0,
     1.0,
     1.0
    ],
    "tol": [
     3,
     3,
-    3,
+    0.5,
     0,
     0
    ],
@@ -1592,13 +1863,13 @@
   },
   {
    "id": "DS19",
-   "name": "s21 S5 says 'about seventy eight kilometres west of Khulna': the track (IBTrACS 3-hourly, linear in time, 10-min steps) passes 79.4 km west (screen ≈ 79)",
+   "name": "s21 S5 Khulna distance: the track (IBTrACS 3-hourly, linear in time, 10-min steps) passes 79.4 km west (screen ≈ 79); narration must say 'seventy nine kilometres west of Khulna'",
    "value": 79.4,
    "ref": true,
    "tol": 0,
-   "pass": false,
+   "pass": true,
    "kind": "flag",
-   "note": "narration: 'seventy eight' → 'seventy nine' (s21 S5), or keep 78 if the research's track interpolation is preferred"
+   "note": "narration: 'seventy eight' → 'seventy nine' (s21 S5, applied 2026-11-05; re-voice)"
   },
   {
    "id": "DS19",
@@ -1957,39 +2228,39 @@
  "flags": [
   {
    "id": "DS17",
-   "name": "s19 S1 'the air flows in almost everywhere' (925 hPa): inflow share 0.57 of valid points 50-300 km, 0.69 on the 100-km ring (claim needs ≥ 0.85)",
+   "name": "s19 S1 inflow claim (925 hPa): inflow share 0.57 of valid points 50-300 km, 0.69 on the 100-km ring; 'almost everywhere' needs ≥ 0.85, 'on most of the ring' needs > 0.5 (narration now: on most of the ring)",
    "value": [
     0.571,
     0.694
    ],
    "ref": true,
    "tol": 0,
-   "pass": false,
+   "pass": true,
    "kind": "flag",
-   "note": "narration: say 'the air flows in on most of the ring' (s19 S1), re-voice in the heavy phase"
+   "note": "narration: 'the air flows in on most of the ring' (s19 S1, applied 2026-11-05); re-voice in the heavy phase"
   },
   {
    "id": "DS21",
-   "name": "s23 S4 says the ring is 'a hundred kilometres out, where ERA5's spin is strongest': the strongest spin and the spoken 20 / −6 m/s are on the 50-km ring",
+   "name": "s23 S5 names the ring where ERA5's spin is strongest: the strongest spin and the spoken 20 / −6 m/s are on the 50-km ring (narration must say 'fifty kilometres out')",
    "value": [
     50,
     100
    ],
    "ref": true,
    "tol": 0,
-   "pass": false,
+   "pass": true,
    "kind": "flag",
-   "note": "narration: 'a hundred kilometres out' → 'fifty kilometres out' (s23 S4; re-voice); the screen draws the 50-km ring"
+   "note": "narration: 'a hundred kilometres out' → 'fifty kilometres out' (s23, applied 2026-11-05; re-voice); the screen draws the 50-km ring"
   },
   {
    "id": "DS19",
-   "name": "s21 S5 says 'about seventy eight kilometres west of Khulna': the track (IBTrACS 3-hourly, linear in time, 10-min steps) passes 79.4 km west (screen ≈ 79)",
+   "name": "s21 S5 Khulna distance: the track (IBTrACS 3-hourly, linear in time, 10-min steps) passes 79.4 km west (screen ≈ 79); narration must say 'seventy nine kilometres west of Khulna'",
    "value": 79.4,
    "ref": true,
    "tol": 0,
-   "pass": false,
+   "pass": true,
    "kind": "flag",
-   "note": "narration: 'seventy eight' → 'seventy nine' (s21 S5), or keep 78 if the research's track interpolation is preferred"
+   "note": "narration: 'seventy eight' → 'seventy nine' (s21 S5, applied 2026-11-05; re-voice)"
   }
  ],
  "physics": [

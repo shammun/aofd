@@ -66,16 +66,22 @@ export const Scene: React.FC<{ children: React.ReactNode; fadeIn?: boolean }> = 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const D = csJ as any;
 export const SAY = D.say, RING = D.ring, STK = D.stack, SEC = D.sec, AMP = D.amphan, CST = D.coast, FLD = D.flood, NAR = D.flood.nargis;
+/** measured rising air (DS29-DS30): the P-3 tail Doppler radar ring means (tdr) and the continuity w of the HRRR inflow (cont) */
+export const WV = D.w;
 export const ASSET_NAMES = ["cst_goes_eye.jpg", "cst_radar_ktbw.png", "cst_hrrr_s17.png", "cst_ur_925.png", "cst_ur_850.png", "cst_ur_500.png", "cst_ur_200.png",
   "cst_ur_150.png", "cst_sec_ian.png", "cst_sec_amphan.png", "cst_amphan_speed.png", "cst_modis_amphan.jpg", "cst_ian_speed_20.png", "cst_bay_patch.png",
-  "cst_swipe_before.jpg", "cst_swipe_after.jpg", "cst_nargis_storm.jpg", "cst_bmng.jpg"] as const;
+  "cst_swipe_before.jpg", "cst_swipe_after.jpg", "cst_nargis_storm.jpg", "cst_bmng.jpg", "cst_tdr_w.png"] as const;
 export const IMG = (n: (typeof ASSET_NAMES)[number]) => staticFile(n);
 export const LUT_UR = D.luts.ur as string[], LUT_SPEED = D.luts.speed as string[], LUT_DBZ = D.luts.dbz as string[], LUT_DEPTH = D.luts.depth as string[];
+export const LUT_W = D.w.tdr.lut as string[];
 /** source lines (house §5: name, time, place; never on the picture) */
 export const SRC = {
   hrrr18: "Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · centre = the model's calm centre",
   hrrrPl: "Data: NOAA HRRR analysis (pressure levels) · 28 Sep 2022, 18 UTC · centre = the model's calm centre",
   hrrrSec: "Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · ring averages round the model's calm centre",
+  // the measured updraught (user wording 2026-11-05; the ≈ 8-h offset is said here only, never in the voice)
+  tdr: "Vertical wind: NOAA P-3 tail Doppler radar, 28 Sep 2022 ≈ 10 UTC — NOAA AOML Hurricane Research Division · Winds: NOAA HRRR (public domain) · the radar pass is ≈ 8 h before the 18 UTC model winds",
+  hrrrPlTdr: "Data: NOAA HRRR analysis, 28 Sep 2022, 18 UTC · up arrows: NOAA P-3 tail Doppler radar, ≈ 10 UTC (NOAA AOML HRD)",
   hrrr20: "Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · Natural Earth coast",
   surge: "Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · NOAA CO-OPS gauges · NHC report",
   goes: "Image: NOAA GOES-16 ABI mesoscale · 28 Sep 2022, 18:01 UTC · contrast enhanced",

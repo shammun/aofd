@@ -1,5 +1,5 @@
 """Physics and real-data products for the Chapter-0 movie #5b "Coordinates, Part 2 — Inside a tropical cyclone: turning
-arrows and cylindrical coordinates" (movies/ch00/ch00_coordinates_storm/storyboard.yaml, 33 scenes; CHECK rows DS01-DS28).
+arrows and cylindrical coordinates" (movies/ch00/ch00_coordinates_storm/storyboard.yaml, 33 scenes; CHECK rows DS01-DS30).
 
 Run with the main venv (one heavy Python process; TEMP/TMP on G:)::
 
@@ -25,6 +25,11 @@ Every number the movie shows or says is computed here by the tested functions na
     ``fetch(ee://…, retrieve=…)`` as research/flood_v2/_scripts/geefetch.py (proposed fluidpy.data.gee); here every
     array is a cache hit (the retrieve callable refuses to run: Earth Engine lives in .venv-maps);
 * the build-1 files on disk: HRRR sfc 18/20 UTC (G: derived), IBTrACS Ian, CO-OPS gauges, Natural Earth 10 m, Blue Marble.
+* measured rising air (DS29-DS30, reports/data/ch00_coordinates_vertical_motion.md §3): the NOAA P-3 tail Doppler radar Level-2
+  analysis 220928H1_1023 through ``fetch(ftp://…, retrieve=<ftplib>)`` (cache hit; HRD data, original NOT redistributable; a
+  decompressed working copy on G: scratch) → ring means of w; the HRRR f00 wrfprs GRIB2 through ``fetch()`` (cache hit) → a box
+  subset with eccodes (cached on G: scratch) → the continuity w that the analysed inflow implies (method of the research
+  vm_sections.py, proposed for fluidpy.diag.cyclone).
 
 Data report (reports/data/ch00_coordinates_research.md §1b-§1d) applied: wind numbers round HRRR's OWN calm centre
 (26.506 N, 82.441 W, the 10-m wind-speed minimum; = Part 1), pictures of the eye round the radar eye (26.552 N,
@@ -99,6 +104,21 @@ NARGIS = {"EVENT": "Cyclone Nargis", "YEAR": 2008, "PLACE": "Irrawaddy delta, My
           "BEFORE": "21 Apr 2008", "AFTER": "5 May 2008", "LANDFALL": "2 May 2008", "box_wsen": [94.0, 15.6, 96.6, 17.1], "crop_wsen": [94.15, 15.70, 96.45, 17.10],
           "stretch": [[0.0, 0.32], [0.0, 0.42], [0.0, 0.20]],
           "places": [["Yangon", 16.80, 96.16], ["Pathein", 16.78, 94.73], ["Bogale", 16.29, 95.40], ["Labutta", 16.15, 94.76]]}
+# measured rising air (reports/data/ch00_coordinates_vertical_motion.md §3, user 2026-11-05): NOAA P-3 tail Doppler radar (TDR),
+# mission 20220928H1, analysis 09:49-12:47 UTC (centre 10:23), HRD Level 2; anonymous FTP (the AOML HTTPS tree is down).
+# Original files are NOT redistributable (HRD policy): the raw file stays on G:, only ring means and pictures ship.
+TDR_HOST = "ftp.aoml.noaa.gov"
+TDR_PATH = "/pub/hrd/data/radar/level2/2022/ian/20220928H1/220928H1_1023_xy.nc.gz"
+TDR_BYTES = 8_266_017                                      # FTP SIZE (research get_tdr.py, 2026-11-05)
+TDR_T = "2022-09-28T10:23"
+TDR_COV = 0.7                                              # a ring mean needs >= 70 % of the ring's grid cells with data
+W_LIM = 4.0                                                # colour range of the w panel 0 .. +4 m/s (≤ 0 drawn as 0)
+W_LUT = "cmocean.dense"
+# the continuity cross-check needs all 37 HRRR f00 pressure levels with T and q: the NOAA GRIB (the zarr store has 9 levels, no T)
+HRRR_F00_URL = "https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.20220928/conus/hrrr.t18z.wrfprsf00.grib2"
+VM_RES = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates/research/vertical_motion")
+SCR = Path("G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/vm")
+RD_AIR = 287.04
 
 
 def gee_cached(name: str, ext: str = "npy") -> Path:
@@ -110,6 +130,154 @@ def gee_cached(name: str, ext: str = "npy") -> Path:
         raise RuntimeError(f"GEE array {name} is not cached; fetch it with research/flood_v2/_scripts (needs .venv-maps)")
     return fetch(f"ee://ch00_flood_v2/{name}", key="GEE", fname=f"ch00_flood_v2/{name}.{ext}", expected_bytes=20_000_000,
                  retrieve=_refuse, quiet=True)
+
+
+def tdr_retriever(path: str):
+    """the FTP retrieve callable for fetch() (research vertical_motion/_scripts/get_tdr.py)"""
+    def run(out: Path) -> None:
+        import ftplib
+        f = ftplib.FTP(TDR_HOST, timeout=120)
+        f.login()
+        with open(out, "wb") as fh:
+            f.retrbinary(f"RETR {path}", fh.write)
+        f.quit()
+    return run
+
+
+def tdr_ring_mean(F: np.ndarray, r: np.ndarray, edges: np.ndarray, min_cov: float = 0.5) -> tuple[np.ndarray, np.ndarray]:
+    """Azimuthal (ring) means of a TDR field (level, y, x) in radius bins about the analysis origin; a bin with less than
+    `min_cov` of its cells holding data is NaN. Mirrors research vertical_motion/_scripts/tdr_section.py::ring_mean."""
+    nz = F.shape[0]
+    M = np.full((nz, len(edges) - 1), np.nan)
+    Cv = np.zeros_like(M)
+    for j in range(len(edges) - 1):
+        m = (r >= edges[j]) & (r < edges[j + 1])
+        if not m.any():
+            continue
+        sub = F[:, m]
+        Cv[:, j] = np.isfinite(sub).mean(axis=1)
+        with np.errstate(all="ignore"):
+            M[:, j] = np.nanmean(sub, axis=1)
+    M[Cv < min_cov] = np.nan
+    return M, Cv
+
+
+def hrrr_grib_box(p: Path, out: Path, box=PRS_BOX) -> Path:
+    """Box subset of an HRRR wrfprs GRIB2, message by message with eccodes (u, v earth-relative; ω, z, T, q on all isobaric
+    levels 100-1000 hPa). Mirrors research vertical_motion/_scripts/hrrr_grib_prs.py; the product is cached on G: scratch."""
+    if out.exists():
+        return out
+    import eccodes as ec
+    import fluidpy.data.hrrr as HR
+    keep = {"w": "omega", "u": "u", "v": "v", "gh": "z", "t": "t", "q": "q"}
+    fields: dict = {}
+    js = is_ = lat = lon = None
+    with open(p, "rb") as fh_:
+        while True:
+            g = ec.codes_grib_new_from_file(fh_)
+            if g is None:
+                break
+            try:
+                sn, tl = ec.codes_get(g, "shortName"), ec.codes_get(g, "typeOfLevel")
+                if tl != "isobaricInhPa" or sn not in keep:
+                    continue
+                lv = float(ec.codes_get_double(g, "level")) if ec.codes_get(g, "pressureUnits") == "hPa" else ec.codes_get_double(g, "level") / 100.0
+                if lv < 100 or lv > 1000:
+                    continue
+                nj, ni = ec.codes_get(g, "Nj"), ec.codes_get(g, "Ni")
+                if js is None:
+                    la = ec.codes_get_array(g, "latitudes").reshape(nj, ni)
+                    lo = ec.codes_get_array(g, "longitudes").reshape(nj, ni)
+                    lo = np.where(lo > 180, lo - 360, lo)
+                    m = (la >= box[0][0]) & (la <= box[0][1]) & (lo >= box[1][0]) & (lo <= box[1][1])
+                    jj, ii = np.where(m)
+                    js, is_ = slice(jj.min(), jj.max() + 1), slice(ii.min(), ii.max() + 1)
+                    lat, lon = la[js, is_].astype(np.float32), lo[js, is_].astype(np.float32)
+                fields[(keep[sn], lv)] = ec.codes_get_values(g).reshape(nj, ni)[js, is_].astype(np.float32)
+            finally:
+                ec.codes_release(g)
+    levels = sorted({lv for (_, lv) in fields}, reverse=True)
+    st = {k: np.stack([fields[(k, lv)] for lv in levels]) for k in keep.values()}
+    ue, ve = HR.earth_relative(st["u"], st["v"], lon[None].astype(float))
+    st["u"], st["v"] = np.asarray(ue, np.float32), np.asarray(ve, np.float32)
+    ds = xr.Dataset({k: (("level", "y", "x"), v) for k, v in st.items()} | {"lat": (("y", "x"), lat), "lon": (("y", "x"), lon)},
+                    coords={"level": ("level", np.array(levels, np.float32), {"units": "hPa"})},
+                    attrs={"source_url": HRRR_F00_URL, "processing": "box 24.5-28.5N 84.5-80.5W, winds earth-relative; omega = VVEL [Pa/s]; z = HGT [gpm]"})
+    out.parent.mkdir(parents=True, exist_ok=True)
+    tmp = out.with_suffix(".part.nc")
+    ds.to_netcdf(tmp, encoding={k: {"zlib": True, "complevel": 4} for k in ds.data_vars})
+    tmp.replace(out)
+    return out
+
+
+def continuity_w(rc_m: np.ndarray, z_m: np.ndarray, rho: np.ndarray, vr: np.ndarray, smooth_km: float = 12.0, ztop_m: float = 13e3) -> np.ndarray:
+    """Ring-mean w from ring-mean ρ and u_r by the steady (∂ρ/∂t neglected) axisymmetric continuity equation in cylindrical coordinates,
+        (1/r) ∂(r ρ ū_r)/∂r + ∂(ρ w̄)/∂z = 0  ⇒  ρ w̄(r, z) = −∫₀^z (1/r) ∂(r ρ ū_r)/∂r dz′,  w̄(z = 0) = 0
+    (Vallis §1.2 "The Mass Continuity Equation", steady and ring-averaged, written in cylindrical coordinates (Kundu App. B
+    §B.5); provenance only, no equation number transcribed here). rc_m radii [m] (n_r,),
+    z_m heights [m] (n_z,) ascending, rho [kg m⁻³] and vr [m s⁻¹] (n_z, n_r). ū_r is smoothed by a `smooth_km` boxcar in r
+    before the r-derivative; trapezoid rule upward; NaN above `ztop_m` (error piles up). Mirrors research
+    vertical_motion/_scripts/vm_sections.py::continuity_w (proposed for fluidpy.diag.cyclone)."""
+    dr = rc_m[1] - rc_m[0]
+    nsm = max(1, int(round(smooth_km * 1e3 / dr)))
+    if nsm > 1:
+        ker = np.ones(nsm) / nsm
+        vr = np.array([np.convolve(np.pad(row_, nsm // 2, mode="edge"), ker, mode="valid")[: row_.size] for row_ in vr])
+    flux = rc_m[None, :] * rho * vr
+    div = np.gradient(flux, rc_m, axis=1) / rc_m[None, :]
+    rw = np.zeros_like(div)
+    for k_ in range(1, div.shape[0]):
+        rw[k_] = rw[k_ - 1] - 0.5 * (div[k_] + div[k_ - 1]) * (z_m[k_] - z_m[k_ - 1])
+    w_ = rw / rho
+    w_[z_m > ztop_m] = np.nan
+    return w_
+
+
+def hrrr_ring_continuity(H: xr.Dataset, centre, edges_km: np.ndarray) -> dict:
+    """Ring-mean u_r, ρ, z of an HRRR pressure-level box (grid-point bins about `centre`, pressure levels below the sea
+    dropped point by point) and the continuity w (research vm_sections.py::model_section, continuity part). ρ = p/(R_d T_v),
+    T_v = T (1 + 0.608 q); u_r = (u x + v y)/r on the local tangent plane (x = a cos ϑc Δλ, y = a Δϑ; metres)."""
+    g_ = lambda k_: H[k_].values.astype(float)  # noqa: E731
+    lev = H.level.values.astype(float)
+    lat_, lon_ = H.lat.values.astype(float), H.lon.values.astype(float)
+    u_, v_, z_ = g_("u"), g_("v"), g_("z")
+    rho = (lev * 100.0)[:, None, None] / (RD_AIR * g_("t") * (1 + 0.608 * g_("q")))
+    x_ = A_E * np.cos(centre[0] * D2R) * (lon_ - centre[1]) * D2R
+    y_ = A_E * (lat_ - centre[0]) * D2R
+    r_ = np.hypot(x_, y_)
+    ur = (u_ * x_ + v_ * y_) / np.where(r_ > 0, r_, np.nan)
+    below = z_ < 0
+    ur[below], rho[below] = np.nan, np.nan
+    zb = np.where(below, np.nan, z_)
+    rkm = r_ / 1e3
+    rc = 0.5 * (edges_km[1:] + edges_km[:-1])
+
+    def bins(F):
+        out = np.full((F.shape[0], len(rc)), np.nan)
+        for j_ in range(len(rc)):
+            m = (rkm >= edges_km[j_]) & (rkm < edges_km[j_ + 1])
+            if m.sum() >= 3:
+                with np.errstate(all="ignore"):
+                    out[:, j_] = np.nanmean(F[:, m], axis=1)
+        return out
+    VRb, RHb, Zb = bins(ur), bins(rho), bins(zb)
+    o = np.argsort(np.nanmean(Zb, axis=1))
+    VRb, RHb, Zb, lev = VRb[o], RHb[o], Zb[o], lev[o]
+    ok = np.isfinite(Zb).all(axis=1) & np.isfinite(VRb).all(axis=1)
+    Zc = np.vstack([np.zeros((1, Zb.shape[1])), Zb[ok]])
+    WC = continuity_w(rc * 1e3, Zc, np.vstack([RHb[ok][:1], RHb[ok]]), np.vstack([VRb[ok][:1], VRb[ok]]))
+    return {"rc": rc, "z": Zc.mean(axis=1), "wc": WC, "levels": lev[ok], "vr": VRb[ok]}
+
+
+def slanted_max(F: np.ndarray, rc: np.ndarray, zc_km: np.ndarray, heights=(2, 5, 8, 11), rlim=(15, 80)) -> list[list[float]]:
+    """the strongest ring-mean value at each height (nearest level) for rlim[0] ≤ r ≤ rlim[1]: [[z, value, r], …]"""
+    out = []
+    for zk in heights:
+        k_ = int(np.nanargmin(np.abs(zc_km - zk)))
+        f_ = np.where((rc >= rlim[0]) & (rc <= rlim[1]), F[k_], np.nan)
+        j_ = int(np.nanargmax(f_))
+        out.append([float(zc_km[k_]), float(f_[j_]), float(rc[j_])])
+    return out
 
 
 def png_rgba(rgb: np.ndarray, alpha: np.ndarray | None, path: Path) -> None:
@@ -157,6 +325,8 @@ def main() -> int:
     IMG.mkdir(parents=True, exist_ok=True)
     for p in list(IMG.glob("*.png")) + list(IMG.glob("*.jpg")):
         p.unlink()
+    import yaml
+    VO = {s_["id"]: s_["voiceover"] for s_ in yaml.safe_load((OUT / "storyboard.yaml").read_text(encoding="utf-8"))["scenes"]}  # narration flags read the storyboard
     rows: list[dict] = []
     entries: list[dict] = []
     heavy: list[dict] = []
@@ -511,8 +681,11 @@ def main() -> int:
     R100 = call(DC + "storm_relative_wind", "s19", "925-hPa 100-km ring points", heavy_call=True, u=ue[PRS_LEVELS.index(925)], v=ve[PRS_LEVELS.index(925)],
                 lat=PLA, lon=PLO, centre=CALM, radii_km=[100], n_az=72)
     share100 = float(np.mean(np.asarray(R100.radial) < 0))
-    flag("DS17", f"s19 S1 'the air flows in almost everywhere' (925 hPa): inflow share {share:.2f} of valid points 50-300 km, {share100:.2f} on the 100-km ring (claim needs ≥ 0.85)",
-         share >= 0.85, [round(share, 3), round(share100, 3)], "narration: say 'the air flows in on most of the ring' (s19 S1), re-voice in the heavy phase")
+    s19s1 = VO["s19_ian_layers_lit"]
+    flag("DS17", f"s19 S1 inflow claim (925 hPa): inflow share {share:.2f} of valid points 50-300 km, {share100:.2f} on the 100-km ring; 'almost everywhere' needs ≥ 0.85, "
+         f"'on most of the ring' needs > 0.5 (narration now: {'on most of the ring' if 'on most of the ring' in s19s1 else 'almost everywhere'})",
+         ("on most of the ring" in s19s1 and share100 > 0.5) or share >= 0.85, [round(share, 3), round(share100, 3)],
+         "narration: 'the air flows in on most of the ring' (s19 S1, applied 2026-11-05); re-voice in the heavy phase")
     i925 = PRS_LEVELS.index(925)
     jmin = int(np.nanargmin(VR[i925]))
     imx, jmx = np.unravel_index(np.nanargmax(VR), VR.shape)
@@ -641,6 +814,121 @@ def main() -> int:
                 "min": [float(np.nanmin(VR)), radii[jmin], float(zbar[i925])], "max": [float(np.nanmax(VR)), radii[jmx], float(zbar[imx])],
                 "vtmax": [float(np.nanmax(VT)), radii[jtm], float(zbar[itm])], "vt10_25": vt25, "box": [0, 200, 0, 16]}
 
+    # ================================================================ measured rising air (s19-s20, DS29-DS30)
+    # (a) NOAA P-3 tail Doppler radar ring means of w (the measured updraught); (b) the continuity w that the HRRR f00 inflow
+    # implies (the "must rise" number). reports/data/ch00_coordinates_vertical_motion.md §2-§3.
+    import gzip
+    import shutil
+    SCR.mkdir(parents=True, exist_ok=True)
+    tdr_gz = fetch(f"ftp://{TDR_HOST}{TDR_PATH}", key="HRD-TDR", fname=TDR_PATH.rsplit("/", 1)[-1], expected_bytes=TDR_BYTES,
+                   retrieve=tdr_retriever(TDR_PATH), quiet=True)
+    inputs.append(Path(tdr_gz))
+    tdr_nc = SCR / "tdr_220928H1_1023_xy.nc"                # working copy on G: scratch (never redistributed, never committed)
+    if not tdr_nc.exists():
+        with gzip.open(tdr_gz, "rb") as fa, open(SCR / "tdr.part", "wb") as fb:
+            shutil.copyfileobj(fa, fb)
+        (SCR / "tdr.part").replace(tdr_nc)
+    TD = xr.open_dataset(tdr_nc)
+    Wt = TD["W"].isel(time=0).transpose("level", "y", "x").values.astype(float)
+    Wt[(Wt < -900) | (np.abs(Wt) > 1e4)] = np.nan
+    zt = TD.level.values.astype(float)                       # km, 0-18 every 0.5
+    XT, YT = np.meshgrid(TD.x.values.astype(float), TD.y.values.astype(float))
+    rT = np.hypot(XT, YT)                                    # km from the analysis origin (the HRD storm centre)
+    tdr_origin = (float(TD.attrs["ORIGIN_LATITUDE"]), float(TD.attrs["ORIGIN_LONGITUDE"]))
+    RBT = np.arange(0, 152, 2.0)
+    rcT = 0.5 * (RBT[1:] + RBT[:-1])
+    Wr5, CovT = tdr_ring_mean(Wt, rT, RBT, 0.5)              # the research product's rule (≥ 50 %) for the parity row
+    RZ = xr.open_dataset(VM_RES / "tdr_rz.nc")
+    dW = np.abs(Wr5 - RZ.w.values.astype(float))
+    row("DS29", "TDR ring means (2-km bins, ≥ 50 % cover) = the research product tdr_rz.nc (max |Δw|, NaN masks equal, max |Δcover|)",
+        [float(np.nanmax(dW)), float(np.any(np.isfinite(Wr5) != np.isfinite(RZ.w.values))), float(np.max(np.abs(CovT - RZ.w_coverage.values)))], [0, 0, 0], [1e-5, 0, 1e-6])
+    WT = np.where(CovT >= TDR_COV, Wr5, np.nan)              # used everywhere below: ≥ 70 % of the ring
+    m80 = (rcT >= 15) & (rcT <= 80)
+    Wpk = np.where(m80[None, :], WT, np.nan)
+    kpk, jpk = np.unravel_index(np.nanargmax(Wpk), Wpk.shape)
+    row("DS29", f"peak ring-mean w (≥ 70 % of the ring, r 15-80 km, any height) {Wpk[kpk, jpk]:.2f} m/s at {zt[kpk]:.1f} km, r {rcT[jpk]:.0f} km: ≈ 3.3 at 8-9.5 km, ≈ 45 km (said: about three, nine kilometres up)",
+        [Wpk[kpk, jpk], zt[kpk], rcT[jpk]], [3.3, 8.75, 45], [0.1, 0.75, 4])
+    slT = slanted_max(WT, rcT, zt)
+    row("DS29", "slanted ring max at 2 / 5 / 8 / 11 km = 0.35 / 1.51 / 3.33 / 2.35 m/s at r 33 / 49 / 45 / 53 km (the s19 arrow lengths 0.4 / 1.5 / 3.3 / 2.4)",
+        [*[q[1] for q in slT], *[q[2] for q in slT]], [0.35, 1.51, 3.33, 2.35, 33, 49, 45, 53], [0.01] * 4 + [0] * 4)
+    band = (rcT >= 35) & (rcT <= 60)
+    with np.errstate(all="ignore"):
+        wband = np.nanmean(WT[:, band], axis=1)
+    wb23, wb5, wb10 = float(np.nanmean(wband[(zt >= 2) & (zt <= 3)])), float(wband[zt == 5.0][0]), float(wband[zt == 10.0][0])
+    row("DS29", f"eyewall-band (35-60 km) mean w at 2-3 / 5 / 10 km = {wb23:.2f} / {wb5:.2f} / {wb10:.2f} m/s — the scout's ≈ 0.4 / 1.5 / 2.4: 10 km confirmed; "
+        "5 km is 1.15 (the 1.5 is the slanted ring max at 49 km); 2-3 km is 0.25 with the 70 % rule (0.46 with 50 %). Not shown, not said",
+        [wb23, wb5, wb10], [0.25, 1.15, 2.43], 0.01)
+    m100 = rT <= 100
+    Wp = np.where(m100[None], Wt, np.nan)
+    ipt = np.unravel_index(np.nanargmax(Wp), Wp.shape)
+    row("DS29", f"strongest single updraught (r ≤ 100 km) {np.nanmax(Wp):.1f} m/s at {zt[ipt[0]]:.1f} km, r {rT[ipt[1], ipt[2]]:.0f} km; 99.9th percentile "
+        f"{np.nanpercentile(Wp, 99.9):.1f}: in 10-12 m/s (said: single towers near ten; screen ≈ 10-12)",
+        [float(np.nanmax(Wp)), float(np.nanpercentile(Wp, 99.9))], [11.0, 8.9], [1.0, 0.05])
+    eye_edge = float(min(rcT[np.isfinite(Wr5[k_])].min() for k_ in range(len(zt)) if 2 <= zt[k_] <= 12 and np.isfinite(Wr5[k_]).any()) - 1.0)
+    truth("DS29", f"no radar data in the clear eye: no ring mean (even at 50 % cover) inside {eye_edge:.0f} km at 2-12 km (scout: ≈ 22); the screen's grey "
+          f"'no echoes' band is drawn 0-{eye_edge:.0f} km from this number", 18 <= eye_edge <= 23, eye_edge)
+    # outward lean of the updraught: per height, the w-weighted radius of the strong ascent (w ≥ half that height's ring max, r 25-80 km)
+    def r_half(zz):
+        q_ = WT[zt == zz][0]
+        m_ = (rcT >= 25) & (rcT <= 80) & np.isfinite(q_)
+        pk_ = np.nanmax(np.where(m_, q_, np.nan))
+        wgt = np.where(m_ & (q_ >= 0.5 * pk_), q_, 0.0)
+        return float((wgt * rcT).sum() / wgt.sum())
+    zs_ = zt[(zt >= 2) & (zt <= 11)]
+    rbar = [r_half(zz) for zz in zs_]
+    lean_z = [2.0, 5.0, 8.0, 11.0]
+    lean_r = [r_half(zz) for zz in lean_z]
+    slope, r0 = np.polyfit(zs_, rbar, 1)
+    lean5 = (lean_r[-1] - lean_r[0]) / (lean_z[-1] - lean_z[0]) * 5
+    row("DS29", f"the updraught leans outward: strong-ascent radius {' → '.join(f'{q:.0f}' for q in lean_r)} km at 2 / 5 / 8 / 11 km, i.e. {lean5:.0f} km per 5 km "
+        f"of height from 2 to 11 km (scout: 10-15); nearly upright at 45-50 km between 3 and 10 km (straight-line fit {5 * slope:.0f} km per 5 km). "
+        "The s19/s20 up arrows follow these four radii", [lean5, float(np.all(np.diff(lean_r) > 0))], [12.5, 1], [2.5, 0])
+    dt_h = (np.datetime64("2022-09-28T18:00") - np.datetime64(TDR_T)) / np.timedelta64(1, "m") / 60
+    row("DS29", f"radar analysis centre {TDR_T} UTC vs the HRRR 18 UTC winds: {dt_h:.1f} h (source line: ≈ 8 h)", [round(dt_h)], [8], 0)
+    # the w panel raster: x radius 0-100 km (1000 px), y height 0-14 km (700 px); linear between ring bins and levels; NaN transparent
+    nxw, nyw = 1000, 700
+    rqw, zqw = np.linspace(0, 100, nxw), np.linspace(14, 0, nyw)
+    WIMG = np.full((nyw, nxw), np.nan)
+    for j_, zz in enumerate(zqw):
+        kk = int(np.searchsorted(zt, zz))
+        kk = min(max(kk, 1), len(zt) - 1)
+        a_ = (zz - zt[kk - 1]) / (zt[kk] - zt[kk - 1])
+        WIMG[j_] = np.interp(rqw, rcT, (1 - a_) * WT[kk - 1] + a_ * WT[kk], left=np.nan, right=np.nan)
+    lut_w = B1.lut_rgb(W_LUT)
+    rgbW = colour(np.clip(WIMG, 0, None), lut_w, 0.0, W_LIM)
+    png_rgba(rgbW, np.where(np.isfinite(WIMG), 255, 0), IMG / "tdr_w.png")
+    truth("DS29", "w panel 1000×700 px, r 0-100 km × z 0-14 km, colour 0 … +4 m/s (cmocean dense), ≤ 0 drawn as 0, gaps transparent",
+          Image.open(IMG / "tdr_w.png").size == (1000, 700), [float(np.nanmin(WIMG)), float(np.nanmax(WIMG))])
+
+    # (b) continuity: the inflow alone says how fast the air must rise (HRRR f00 GRIB, 37 levels with T and q)
+    f00 = fetch(HRRR_F00_URL, key="HRRR-aws", fname=HRRR_F00_URL.rsplit("/", 1)[-1], quiet=True)
+    inputs.append(Path(f00))
+    f00nc = hrrr_grib_box(Path(f00), SCR / "hrrr_prs_18z_f00.nc")
+    HF = xr.open_dataset(f00nc)
+    HR0 = xr.open_dataset(VM_RES / "hrrr_prs_18z_f00.nc")
+    row("DS30", "HRRR f00 GRIB box (37 levels; u, v earth-relative; z, T, q) = the research product (max |Δ| of u, v, z, t, q)",
+        [float(np.nanmax(np.abs(HF[v_].values - HR0[v_].values))) for v_ in ("u", "v", "z", "t", "q")], [0] * 5, [1e-4, 1e-4, 1e-3, 1e-4, 1e-8])
+    edges4 = np.arange(0, 154, 4.0)
+    CR = hrrr_ring_continuity(HF, (26.48, -82.39), edges4)   # the research's wind centre: reproduces the report's table row (d)
+    slR = slanted_max(CR["wc"], CR["rc"], CR["z"] / 1e3)
+    row("DS30", "method parity: continuity w about the research's wind centre (26.48 N 82.39 W) = report §2 row (d) 1.01 / 0.76 / 0.88 / 1.07 m/s at 18 / 22 / 26 / 26 km",
+        [*[q[1] for q in slR], *[q[2] for q in slR]], [1.01, 0.76, 0.88, 1.07, 18, 22, 26, 26], [0.005] * 4 + [0] * 4)
+    CC = hrrr_ring_continuity(HF, CALM, edges4)              # the movie's centre (the s20 section's)
+    slC = slanted_max(CC["wc"], CC["rc"], CC["z"] / 1e3)
+    selz, selr = (CC["z"] > 1e3) & (CC["z"] < 12e3), (CC["rc"] >= 18) & (CC["rc"] <= 26)
+    wc_mean = float(np.nanmean(CC["wc"][selz][:, selr]))
+    row("DS30", f"continuity w round the calm centre: mean over r 18-26 km, z 1-12 km = {wc_mean:.2f} m/s; slanted max {', '.join(f'{q[1]:.2f}' for q in slC)} m/s at "
+        f"{', '.join(f'{q[2]:.0f}' for q in slC)} km — ≈ 1 m/s at r ≈ 18-26 km (said: about a metre per second; method spread 0.8-1.6, report)",
+        [wc_mean, *[q[2] for q in slC]], [1.0, 22, 22, 22, 22], [0.15, 4, 4, 4, 4])
+    say.update({"w_cont": 1, "w_ring": 3, "w_ring_z": 9, "w_tower": 10})
+    V["w"] = {"tdr": {"origin": tdr_origin, "time_utc": TDR_T, "cov": TDR_COV, "lim": W_LIM, "lut": B1.lut_hex(W_LUT),
+                      "peak": [float(Wpk[kpk, jpk]), float(zt[kpk]), float(rcT[jpk])], "slanted": slT, "band35_60": [wb23, wb5, wb10],
+                      "point_max": [float(np.nanmax(Wp)), float(zt[ipt[0]]), float(rT[ipt[1], ipt[2]])], "p999": float(np.nanpercentile(Wp, 99.9)),
+                      "eye_km": eye_edge, "lean_z": lean_z, "lean_r": lean_r, "lean_km_per_5km": float(lean5), "fit_km_per_km": float(slope),
+                      "rbar": B1.r6(rbar, 2), "rbar_z": zs_.tolist(),
+                      "box": [0, 100, 0, 14], "dt_h": float(dt_h)},
+              "cont": {"mean_18_26": wc_mean, "slanted": slC, "centre": list(CALM), "research_centre_parity": slR}}
+
     # ================================================================ Cyclone Amphan: ERA5, IBTrACS, MODIS (s21-s24, DS19-DS22)
     import fluidpy.data.era5_arco as EA
     ps = EA.fetch_box("2020-05-20T06", "2020-05-20T06", (14.0, 27.0), (81.0, 95.0), variables=("msl", "u10", "v10"), tag="amphan_sfc")
@@ -660,8 +948,9 @@ def main() -> int:
     avt, avr = np.asarray(AR.tangential_mean), np.asarray(AR.radial_mean)
     row("DS21", "the strongest ERA5 spin is on the 50-km ring (v_t 20.1 vs 19.7 at 100 km): v_t 20.08 (≈ 20), v_r −5.97 (≈ −6) m/s, inflow angle 16.55° (≈ 17)", [avt[0], avr[0], int(np.argmax(avt)), float(AR.inflow_angle_mean_deg[0]), avt[1], avr[1]],
         [20.08, -5.97, 0, 16.55, 19.72, -9.07], [0.01, 0.01, 0, 0.01, 0.01, 0.01])
-    flag("DS21", "s23 S4 says the ring is 'a hundred kilometres out, where ERA5's spin is strongest': the strongest spin and the spoken 20 / −6 m/s are on the 50-km ring",
-         False, [50, 100], "narration: 'a hundred kilometres out' → 'fifty kilometres out' (s23 S4; re-voice); the screen draws the 50-km ring")
+    flag("DS21", "s23 S5 names the ring where ERA5's spin is strongest: the strongest spin and the spoken 20 / −6 m/s are on the 50-km ring (narration must say 'fifty kilometres out')",
+         "fifty kilometres out" in VO["s23_amphan_ring"] and "a hundred kilometres out" not in VO["s23_amphan_ring"], [50, 100],
+         "narration: 'a hundred kilometres out' → 'fifty kilometres out' (s23, applied 2026-11-05; re-voice); the screen draws the 50-km ring")
     row("DS21", "screen: 6.0/20.1 = 0.299 (≈ 0.30) → 16.6° (≈ 17°); 13.3/34.8 = 0.382 (≈ 0.38) → 20.9° (≈ 21°); 90 kt × 1.852 = 166.7 (≈ 167) km/h",
         [6.0 / 20.1, np.degrees(np.arctan(6.0 / 20.1)), 13.3 / 34.8, np.degrees(np.arctan(13.3 / 34.8)), 90 * 1.852], [0.30, 16.6, 0.38, 20.9, 166.7], [0.0015, 0.05, 0.003, 0.05, 0.05])
     ni = call("fluidpy.data.ibtracs.storm_table", "s21", "IBTrACS NI Amphan fixes", heavy_call=True, path=F_NI, sid=AMPHAN_SID, agencies=("usa", "newdelhi"))
@@ -682,10 +971,12 @@ def main() -> int:
         dists = np.asarray(call(SPH + "great_circle_distance", "s21", f"track → {nm} (metres)", heavy_call=True, lat1=flat, lon1=flon, lat2=pla, lon2=plo))
         j_ = int(np.argmin(dists))
         close[nm] = {"km": float(dists[j_] / 1e3), "west": bool(flon[j_] < plo), "utc": str(np.datetime64(int(tf[j_]), "s"))}
-    row("DS19", "closest approach Kolkata ≈ 17 km, Satkhira ≈ 45 km, Khulna ≈ 78 km (track west of both)",
-        [close["Kolkata"]["km"], close["Satkhira"]["km"], close["Khulna"]["km"], close["Satkhira"]["west"], close["Khulna"]["west"]], [17, 45, 78, 1, 1], [3, 3, 3, 0, 0])
-    flag("DS19", f"s21 S5 says 'about seventy eight kilometres west of Khulna': the track (IBTrACS 3-hourly, linear in time, 10-min steps) passes {close['Khulna']['km']:.1f} km west (screen ≈ {round(close['Khulna']['km'])})",
-         round(close["Khulna"]["km"]) == 78, round(close["Khulna"]["km"], 1), "narration: 'seventy eight' → 'seventy nine' (s21 S5), or keep 78 if the research's track interpolation is preferred")
+    row("DS19", "closest approach Kolkata ≈ 17 km, Satkhira ≈ 45 km, Khulna ≈ 79 km (track west of both)",
+        [close["Kolkata"]["km"], close["Satkhira"]["km"], close["Khulna"]["km"], close["Satkhira"]["west"], close["Khulna"]["west"]], [17, 45, 79, 1, 1], [3, 3, 0.5, 0, 0])
+    kh_words = {78: "seventy eight", 79: "seventy nine", 80: "eighty"}.get(round(close["Khulna"]["km"]), "?")
+    flag("DS19", f"s21 S5 Khulna distance: the track (IBTrACS 3-hourly, linear in time, 10-min steps) passes {close['Khulna']['km']:.1f} km west (screen ≈ {round(close['Khulna']['km'])}); "
+         f"narration must say '{kh_words} kilometres west of Khulna'", f"{kh_words} kilometres west of Khulna" in VO["s21_amphan_intro"], round(close["Khulna"]["km"], 1),
+         "narration: 'seventy eight' → 'seventy nine' (s21 S5, applied 2026-11-05; re-voice)")
     sel_t = [i_ for i_, t in enumerate(tt) if "2020-05-16" <= t[:10] <= "2020-05-21"]
     track = [[tt[i_], tlat[i_], tlon[i_], ni["wmo_wind_kt"][i_] if ni["wmo_wind_kt"][i_] is not None else None] for i_ in sel_t]
     lf = [i_ for i_ in sel_t if ni["landfall_km"][i_] is not None and ni["landfall_km"][i_] == 0]
@@ -1033,13 +1324,19 @@ def main() -> int:
                     "stack": {"levels_hPa": STACK_LEVELS, "square_km": 2 * half_k, "grid": "256² local tangent plane (x = a cos ϑc Δλ, y = a Δϑ; metres), griddata linear, ×4 order-1",
                               "colour": f"u_r diverging rose (−) ↔ pale ↔ blue (+), ±{UR_LIM} m/s, bold dark zero contour, NO hatch", "vertical_exaggeration": "×15 (stated in the scene list)"},
                     "section": {"radii_km": "5-200 every 5", "n_az": 72, "heights": "box-mean HRRR geopotential height per level", "mask": "a ring with any point where p_level > p_sfc (HRRR 18 UTC)"},
-                    "w": "NOT used: |ω| ≤ 0.05 Pa/s in the analysis subset; rising inferred from in-below/out-above (said)"},
+                    "w": "HRRR analysed ω NOT used (f00 carries no vertical motion: |ω| ≤ 0.095 Pa/s, 1-6 distinct values per level; report vertical_motion §1). "
+                         "Measured: NOAA P-3 TDR 20220928H1 10:23 UTC ring-mean w (2-km bins, ≥ 70 % of the ring, about the HRD analysis origin 25.79 N 82.86 W); "
+                         "derived: continuity w from the HRRR f00 (GRIB, 37 levels) ring-mean inflow round the calm centre (4-km bins, 12-km boxcar, w = 0 at the sea, cut at 13 km)",
+                    "tdr": {"url": f"ftp://{TDR_HOST}{TDR_PATH}", "bytes": TDR_BYTES, "redistributable": False, "time_utc": TDR_T, "coverage_min": TDR_COV,
+                            "panel": "r 0-100 km × z 0-14 km, cmocean dense 0 … +4 m/s, ≤ 0 drawn as 0; eye 0-22 km grey 'no echoes'",
+                            "time_offset": "≈ 8 h before the HRRR 18 UTC winds (source line only)"}},
             "amphan": {"era5": "ARCO 2020-05-20T06, sfc + 10 pl; centre = ERA5 msl minimum", "rings_km": [50, 100, 200, 300], "section_radii_km": arad,
                        "section_mask": "a ring with any point where p_level > msl", "ibtracs_sid": AMPHAN_SID, "modis": "GIBS MODIS Terra 2020-05-18 (1400 px, 12-19 N, 83-90 E)"},
             "flood_v3": {**FLOOD, "nargis": NARGIS},
             "time_compression": {"s01/s09": "one 75-min lap in ≈ 8-10 s", "s15": "streak families illustrative", "s18-s19": "tangential dashes animate one analysis hour"},
             "exaggerations": ["s03-s07 small turns drawn at 20°", "s04 slivers ×20", "s14 5° turn drawn at 15°", "s15-s16 vertical ×4", "s18-s19 vertical ×15",
-                              "s20/s24 height axis stretched", "s27 sea-level inset ×50, shelf profile vertical exaggeration", "s14 isobars schematic", "in-up-out arrows inferred (illustrative)"],
+                              "s20/s24 height axis stretched", "s27 sea-level inset ×50, shelf profile vertical exaggeration", "s14 isobars schematic", "s20/s24 in and out arrows schematic (summary of the u_r section)",
+                              "s19 up arrows: TDR slanted ring-max w at 2/5/8/11 km on a schematic ring (the TDR ring radius, the stack's centre), length ∝ w, lean = the fitted outward slope"],
             "screen_deviations": ["s18 layers on a 500-km local tangent-plane square (true local shape, one centre for all levels; vortex tilt ignored, research §1d)",
                                   "s20 max outflow marker at the data's 125 km (storyboard text: 150 km)"],
             "data_report": "reports/data/ch00_coordinates_research.md (2026-11-05) §1b-§1d, §3 applied"},
@@ -1047,7 +1344,9 @@ def main() -> int:
                     "NOAA GOES-16 ABI L2 CMIPM (public domain), true colour and contrast stretch by our code.", "ERA5: Contains modified Copernicus Climate Change Service information 2026 (ARCO-ERA5).",
                     "NASA Worldview / GIBS MODIS Terra corrected reflectance (NASA open data).", "IBTrACS v04r01 (NOAA NCEI). NOAA CO-OPS tide gauges (public domain). NHC TCR AL092022 (cited).",
                     "ETOPO 2022 and ETOPO1 (NOAA NCEI). MODIS MOD09/MYD09 and MCD43A4 (NASA LP DAAC) via Google Earth Engine.",
-                    "Blue Marble: Next Generation, NASA Earth Observatory. Made with Natural Earth.", "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."],
+                    "Blue Marble: Next Generation, NASA Earth Observatory. Made with Natural Earth.",
+                    "Vertical wind: NOAA P-3 tail Doppler radar (Level 2, mission 20220928H1) — NOAA AOML Hurricane Research Division; Gamache 1995 / Reasor et al. 2009 (synthesis); "
+                    "Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).", "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."],
         "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
         "inputs_sha256": inp, "render_assets": render, "data_files": data_hashes, "data_sizes_bytes": sizes, "checks": rows,
         "flags": [r for r in rows if r["kind"] == "flag"],

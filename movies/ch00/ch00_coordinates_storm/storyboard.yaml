@@ -26,7 +26,7 @@ concepts:
 - 'application: Cyclone Amphan (Bay of Bengal, 2020): eye, ERA5 ring means, inflow angle, section'
 - the wind onshore at a coast (numbers in Part 4); storm surge and its sign flip; tide gauges as the record of Ian's surge
 - 'before/after imagery: Ian (Sentinel-2, aerial) and Amphan (Sentinel-1 new water, 147 km2)'
-target_duration_s: 2481.95
+target_duration_s: 2505.248
 fps: 30
 size:
 - 1920
@@ -167,7 +167,8 @@ data_block:
       max_vt:
       - 55.0
       - 30 km, 850 hPa (1.4 km)
-      w: 'NOT used: the HRRR analysis VVEL in the research subset is ≈ 0 everywhere (|omega| <= 0.02 Pa/s); rising is inferred and said as such'
+      w: 'HRRR analysis VVEL NOT used (f00 carries no vertical motion, |omega| <= 0.095 Pa/s); measured instead: NOAA P-3 tail Doppler radar ring-mean
+        w (peak 3.3 m/s at 8.5 km, r 45 km; DS29) and the continuity w of the HRRR f00 inflow (≈ 1 m/s at r 18-26 km; DS30)'
     coast_for_part4:
       note: D21-D22 moved to Part 4; kept here for the shared CHECK module
       A_Naples:
@@ -408,8 +409,11 @@ honesty_notes:
   on one data picture.'
 - 's18-s20: one centre (the model''s 10-m calm centre) for every level; the vortex tilt is ignored (research §1d: 500-hPa dipole); ring means
   at 100 km and the section average it out.'
-- 's20, s24: ''the air must rise in between'' is inferred from inflow below and outflow above (mass continuity, said in words); the HRRR analysis
-  vertical velocity is not used (≈ 0 in the subset).'
+- 's20: the rising air is computed and measured (2026-11-05): continuity of the HRRR f00 ring-mean inflow says ≈ 1 m/s (said in words, no equation
+  on screen); the NOAA P-3 tail Doppler radar measured a ring-mean peak of 3.3 m/s at 8.5 km (said ''about three … nine kilometres up'') and single
+  updraughts to 11.6 m/s (''single towers near ten''). The radar is ≈ 8 h before the HRRR 18 UTC winds (source line only, not voiced). Sinking in
+  the clear eye is not measured (no echoes): grey band in words only, no number. The HRRR analysis vertical velocity is not used (≈ 0 at hour 0).
+  s24 keeps schematic in-up-out arrows (no measured w for Amphan).'
 - 's20: the 10-m spin (34.8 m/s at 25 km) is weaker than the 850-hPa spin (55 m/s at 30 km): said as the sea slowing the air near the surface.'
 - 's21: ''first super cyclonic storm in the Bay since 1999'' is IMD''s statement (cited in the manifest); intensity classes are left to U15.'
 - 's23: ERA5 cannot resolve Amphan''s eye (0.25-deg boxes vs a pinhole eye); the ring is at ERA5''s strongest-spin radius (100 km), not the eyewall;
@@ -2273,41 +2277,44 @@ scenes:
 - id: s19_ian_layers_lit
   t:
   - 1648.1
-  - 1705.475
+  - 1706.8306
   sentence_times:
   - - 1648.1
     - 1655.775
   - - 1656.125
-    - 1662.375
-  - - 1662.725
-    - 1668.8
-  - - 1670.3
-    - 1673.775
-  - - 1674.125
-    - 1679.45
-  - - 1679.8
-    - 1687.725
-  - - 1689.225
-    - 1693.425
-  - - 1693.775
-    - 1697.925
-  - - 1698.275
-    - 1704.675
+    - 1663.7306
+  - - 1664.0806
+    - 1670.1556
+  - - 1671.6556
+    - 1675.1306
+  - - 1675.4806
+    - 1680.8056
+  - - 1681.1556
+    - 1689.0806
+  - - 1690.5806
+    - 1694.7806
+  - - 1695.1306
+    - 1699.2806
+  - - 1699.6306
+    - 1706.0306
   beat: layers lit bottom to top with readouts; orbit; one close look (<= 6 s)
-  visual: 'Same stack. S1: all layers dim to 40 %; the 100-km ring (teal, 3 px) on every layer. S2-S3: the 925 layer lights (100 %); its ring-mean
-    readout ''0.7 km: ≈ −6.5 m/s'' (rose, ''−'') appears in the column as a SideCallout with a gold link to that layer''s ring (link from the
-    text''s left edge). S4: ''1.4 km: ≈ 0'' (slate) linked to the 850 ring; S5: ''5.8 km: ≈ +1'' and ''12.4 km: ≈ +1'' (blue) linked to their
-    rings; S6: the 150 layer lights, ''14.3 km: ≈ +6.5 m/s'' (blue, ''+''). Readouts stack in the column in the SAME vertical order as the layers
-    (top layer at the top), so no two links cross. S7: a gold three-part path on the stack''s side: in (bottom) → up → out (top). S8: the camera
-    ORBITS from outside, azimuth −40 deg → +40 deg, elevation 20 → 35 deg, eased, <= 30 deg/s; readouts fade to 50 % during the orbit and back.
-    S9: the ONE close look (<= 6 s): the camera eases in to just above the sea at the stack''s side, ground and all five levels visible, looking
-    from bottom to top, then eases back out to the start view (never between or through the layers; the column fades during the close look only).'
-  voiceover: 'Let''s light the layers one at a time, from the bottom up, and read each one on a ring a hundred kilometres from the centre. On
-    the lowest layer, about seven hundred metres up, the air flows in almost everywhere. Round the ring, the radial wind averages about minus
-    six and a half metres per second. [beat] At one and a half kilometres, it''s almost zero. At six and at twelve kilometres, it''s a little
-    positive, about plus one. And at fourteen kilometres, the sign has flipped: the air flows out, at about plus six and a half metres per second.
-    [beat] So the air comes in near the bottom, and goes out near the top. Now let''s swing round the stack, to see it from another side. And
-    here''s one short, closer look from the side, just above the sea, looking up past the layers.'
+  visual: 'Same stack. S1: all layers dim to 40 %; the 100-km ring (teal, 3 px) on every layer. S2-S3: the 925 layer lights (100 %); its ring-mean readout
+    ''0.7 km: ≈ −6.5 m/s'' (rose, ''−'') appears in the column as a SideCallout with a gold link to that layer''s ring (link from the text''s left edge).
+    S4: ''1.4 km: ≈ 0'' (slate) linked to the 850 ring; S5: ''5.8 km: ≈ +1'' and ''12.4 km: ≈ +1'' (blue) linked to their rings; S6: the 150 layer lights,
+    ''14.3 km: ≈ +6.5 m/s'' (blue, ''+''). Readouts stack in the column in the SAME vertical order as the layers (top layer at the top), so no two links cross.
+    S7: a gold three-part path on the stack''s side: in (bottom) → up → out (top). S8: the camera ORBITS from outside, azimuth −40 deg → +40 deg, elevation
+    20 → 35 deg, eased, <= 30 deg/s; readouts fade to 50 % during the orbit and back. S9: the ONE close look (<= 6 s): the camera eases in to just above the
+    sea at the stack''s side, ground and all five levels visible, looking from bottom to top, then eases back out to the start view (never between or through
+    the layers; the column fades during the close look only). S6-S9 (added 2026-11-05, measured rising air): with the gold in-up-out path, gold vertical arrows
+    (three.js only, animated beads) on the eyewall ring at 8 azimuths and 2 / 5 / 8 / 11 km, lengths in proportion to the radar''s ring-mean updraught there
+    (0.35 / 1.51 / 3.33 / 2.35 m/s), based on the radar ring (≈ 30-55 km) and leaning outward with the measured slope (w-weighted ascent radius, DS29); the
+    path''s up-leg follows the same slope; the source line adds the radar.'
+  voiceover: 'Let''s light the layers one at a time, from the bottom up, and read each one on a ring a hundred kilometres from the centre. On the lowest layer,
+    about seven hundred metres up, the air flows in on most of the ring. Round the ring, the radial wind averages about minus six and a half metres per second.
+    [beat] At one and a half kilometres, it''s almost zero. At six and at twelve kilometres, it''s a little positive, about plus one. And at fourteen kilometres,
+    the sign has flipped: the air flows out, at about plus six and a half metres per second. [beat] So the air comes in near the bottom, and goes out near
+    the top. Now let''s swing round the stack, to see it from another side. And here''s one short, closer look from the side, just above the sea, looking
+    up past the layers.'
   on_screen_eq: null
   physics_source:
     fn: fluidpy.diag.cyclone.storm_relative_wind (ring means at 100 km per level, 72 azimuths)
@@ -2323,11 +2330,14 @@ scenes:
       - 26.506
       - -82.441
     test: '../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
-      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS17 ring
-      means at 100 km: 925 −6.5, 850 +0.5, 500 +0.9, 200 +0.9, 150 +6.6 m/s (±0.3); inflow share 50-300 km at 925 hPa >= 0.85 (''almost everywhere'')'
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS17 ring means at
+      100 km: 925 −6.5, 850 +0.5, 500 +0.9, 200 +0.9, 150 +6.6 m/s (±0.3); inflow share 50-300 km at 925 hPa >= 0.85 (''almost everywhere'')'
+    measured_w: 'NOAA P-3 tail Doppler radar 220928H1_1023 ring means (build: tdr_ring_mean, ≥ 70 % of the ring) — CHECK DS29 slanted ring max at 2/5/8/11
+      km = 0.35/1.51/3.33/2.35 m/s at 33/49/45/53 km; outward slope'
   exaggeration:
   - vertical ×15
   - camera orbit and close look are camera moves, not data
+  - 'up arrows: radar ring-mean w on a schematic ring round the stack''s (model) centre; arrow length ∝ w (not to the height scale)'
   calc_rows:
   - \overline{u_r}(100\ \mathrm{km}):\ -6.5,\ +0.5,\ +0.9,\ +0.9,\ +6.6\ \mathrm{m/s}
   kind: 3-D layer stack (data) + readouts
@@ -2339,75 +2349,80 @@ scenes:
   - U-CO-030
   - U-CO-031
   - U-CO-032
-  source_line: 'Data: NOAA HRRR analysis (pressure levels) · 28 Sep 2022, 18 UTC · centre = the model''s calm centre'
+  source_line: 'Data: NOAA HRRR analysis (pressure levels) · 28 Sep 2022, 18 UTC · rising air: NOAA P-3 tail Doppler radar, ≈ 10 UTC (NOAA AOML HRD)'
   layout: Cameras <= 90 deg/s, eased (fix-loop rule 7); stack never under the column (build-1 K6 lesson); colour bar visible except during the
     close look.
 - id: s20_ian_curtain
   t:
-  - 1705.475
-  - 1818.9
+  - 1706.8306
+  - 1831.1919
   sentence_times:
-  - - 1705.475
-    - 1711.1
-  - - 1711.45
-    - 1718.55
-  - - 1718.9
-    - 1727.4
-  - - 1728.9
-    - 1736.55
-  - - 1736.9
-    - 1740.0
-  - - 1740.35
-    - 1746.525
-  - - 1746.875
-    - 1750.7
-  - - 1751.05
-    - 1760.275
-  - - 1761.775
-    - 1769.25
-  - - 1770.75
-    - 1773.8
-  - - 1774.15
-    - 1783.625
-  - - 1785.125
-    - 1791.375
-  - - 1791.725
-    - 1797.15
-  - - 1797.5
-    - 1800.7
-  - - 1801.05
-    - 1809.55
-  - - 1809.9
-    - 1818.1
+  - - 1706.8306
+    - 1712.4556
+  - - 1712.8056
+    - 1719.9056
+  - - 1720.2556
+    - 1728.7556
+  - - 1730.2556
+    - 1737.9056
+  - - 1738.2556
+    - 1741.3556
+  - - 1741.7056
+    - 1747.8806
+  - - 1748.2306
+    - 1752.0556
+  - - 1752.4056
+    - 1761.6306
+  - - 1763.1306
+    - 1770.6056
+  - - 1772.1056
+    - 1775.1556
+  - - 1775.5056
+    - 1784.9806
+  - - 1786.4806
+    - 1792.7306
+  - - 1793.0806
+    - 1808.2919
+  - - 1809.7919
+    - 1812.9919
+  - - 1813.3419
+    - 1821.8419
+  - - 1822.1919
+    - 1830.3919
   beat: 'D20: the ring average → radius-height section (in, up, out); pointer U15'
-  visual: 'Cross-fade from the stack: a vertical slice through the stack''s axis rotates to face the camera and becomes the 2-D radius-height
-    section (picture zone x 80-1000, y 80-800): x = radius 0-200 km (linear, ticks 0, 50, 100, 150, 200 km), y = height 0-16 km (ticks 0, 4, 8,
-    12, 16 km), filled colours = ring-mean u_r from all nine HRRR levels (975 masked where below ground), the stack''s diverging map and zero
-    contour, the SAME colour bar in the column; dark contour lines of ring-mean u_theta every 10 m/s with labels on the lines (no label over another).
-    S1-S3: an animated ring at one height shrinks to a single point on the slice (''average round the ring → one point (r, z)''), Layered TeX
-    of the average in the column. S7-S8: the inflow core marked with a gold dot ''≈ −16 m/s, 30 km, 0.7 km up'' (SideCallout); S9: the outflow
-    region ''≈ +9 m/s'' at 150 km, 15 km up; S10-S11: the u_theta maximum marked ''≈ 55 m/s, 30 km, 1.4 km up''. S12: the 10-m ring mean 34.8
-    at 25 km as a small teal tick at the bottom edge (weaker at the sea surface). S13-S14: in-up-out arrows (gold, animated dashes) drawn on the
-    slice: in along the bottom, up at r ≈ 30-50 km, out along the top — labelled ''must rise'' (inferred from in-below / out-above; the model''s
-    analysed vertical velocity is not used). S15: keyword ''more: How tropical cyclones form''.'
-  voiceover: 'Five layers still leave gaps, and cylindrical coordinates give us a neater picture. On every level, we can average round each ring,
-    just as we averaged round one ring in Part 1. An average round a ring depends only on the distance r and the height z, because going all the
-    way round removes theta. [beat] So we can draw the whole storm on one slice, with the distance from the centre along the bottom, and the height
-    going up. This picture is called a radius-height section. Each colour is a ring average of the radial wind, now from all nine levels of the
-    model. Near the sea, there''s a thin layer of strong inflow. Its strongest ring average is about minus sixteen metres per second, thirty kilometres
-    from the centre, about seven hundred metres up. [beat] Near the top, from about twelve kilometres up, the air flows out, at up to about plus
-    nine metres per second. [beat] The dark lines show the tangential wind. Its strongest ring average is about fifty five metres per second,
-    also thirty kilometres from the centre, about one and a half kilometres up. [beat] It''s weaker right at the sea surface, where the sea slows
-    the air, and it gets weaker higher up. Air that flows in at the bottom and out at the top must rise in between. It rises in the eyewall, close
-    to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical coordinates show it in one picture. How
-    a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
+  visual: 'Cross-fade from the stack: a vertical slice through the stack''s axis rotates to face the camera and becomes the 2-D radius-height section (picture
+    zone x 80-1000, y 80-800): x = radius 0-200 km (linear, ticks 0, 50, 100, 150, 200 km), y = height 0-16 km (ticks 0, 4, 8, 12, 16 km), filled colours
+    = ring-mean u_r from all nine HRRR levels (975 masked where below ground), the stack''s diverging map and zero contour, the SAME colour bar in the column;
+    dark contour lines of ring-mean u_theta every 10 m/s with labels on the lines (no label over another). S1-S3: an animated ring at one height shrinks to
+    a single point on the slice (''average round the ring → one point (r, z)''), Layered TeX of the average in the column. S7-S8: the inflow core marked with
+    a gold dot ''≈ −16 m/s, 30 km, 0.7 km up'' (SideCallout); S9: the outflow region ''≈ +9 m/s'' at 150 km, 15 km up; S10-S11: the u_theta maximum marked
+    ''≈ 55 m/s, 30 km, 1.4 km up''. S12: the 10-m ring mean 34.8 at 25 km as a small teal tick at the bottom edge (weaker at the sea surface). S12 (rewritten
+    2026-11-05, measured rising air): at its start, keyword ''the inflow says: rise ≈ 1 m/s'' (gold) and a dashed gold up-arrow at r ≈ 22 km on the HRRR section
+    (the continuity w that the ring-mean inflow implies, DS30); on ''radar'' the axes zoom to r 0-100 km, z 0-14 km and the radar''s ring-mean w panel cross-fades
+    in (cmocean dense, 0 … +4 m/s, ≤ 0 drawn as 0, its own colour bar ''rising air''), the eye 0-22 km a grey band ''no echoes'' (no number for sinking);
+    gold upward arrows with animated dashes along the outward-leaning updraught (through the measured strong-ascent radii 33 / 44 / 45 / 55 km at 2 / 5 / 8 / 11 km, thickness ∝ w) replace the old ''must rise''
+    arrow; on ''about three'' a gold dot at the ring-mean peak (45 km, 8.5 km) with the readout ''≈ 3.3 m/s, 8.5 km up''; on ''single towers'' the line ''single
+    towers ≈ 10-12 m/s'' (text only). Source line switches to the radar + HRRR line with the caption ''≈ 8 h earlier than the model winds''. S13: ''rises
+    in the eyewall, leaning outward''. S14: schematic in (bottom) and out (top) gold arrows on the w panel with the measured up arrows. S15: keyword ''more:
+    How tropical cyclones form''.'
+  voiceover: 'Five layers still leave gaps, and cylindrical coordinates give us a neater picture. On every level, we can average round each ring, just as
+    we averaged round one ring in Part 1. An average round a ring depends only on the distance r and the height z, because going all the way round removes
+    theta. [beat] So we can draw the whole storm on one slice, with the distance from the centre along the bottom, and the height going up. This picture is
+    called a radius-height section. Each colour is a ring average of the radial wind, now from all nine levels of the model. Near the sea, there''s a thin
+    layer of strong inflow. Its strongest ring average is about minus sixteen metres per second, thirty kilometres from the centre, about seven hundred metres
+    up. [beat] Near the top, from about twelve kilometres up, the air flows out, at up to about plus nine metres per second. [beat] The dark lines show the
+    tangential wind. Its strongest ring average is about fifty five metres per second, also thirty kilometres from the centre, about one and a half kilometres
+    up. [beat] It''s weaker right at the sea surface, where the sea slows the air, and it gets weaker higher up. The inflow alone says the air must rise,
+    at about a metre per second… and radar on a hurricane-hunter aircraft measured it: about three metres per second at nine kilometres up, with single towers
+    near ten. [beat] It rises in the eyewall, close to the eye. In, up and out: that''s a tropical cyclone''s overturning circulation, and cylindrical coordinates
+    show it in one picture. How a tropical cyclone keeps this engine running has its own movie later in this series: How tropical cyclones form.'
   on_screen_eq:
     latex: \overline{u_r}(r,z)=\frac{1}{72}\sum_{k=1}^{72}u_r(r,\theta_k,z)
     vallis_eq: 'none: arithmetic or a definition (no book equation) (the ring average of Part 1, at every r and z)'
     page_png: null
   physics_source:
-    fn: fluidpy.diag.cyclone.storm_relative_wind on all nine HRRR levels (radii 5-200 km every 5 km, 72 azimuths); heights from the box-mean HRRR
-      geopotential height
+    fn: fluidpy.diag.cyclone.storm_relative_wind on all nine HRRR levels (radii 5-200 km every 5 km, 72 azimuths); heights from the box-mean HRRR geopotential
+      height
     params:
       levels_hPa:
       - 975
@@ -2425,11 +2440,15 @@ scenes:
       - -82.441
       mask: p > p_sfc
     test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
-      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS18 min
-      ring-mean u_r = −15.7 m/s at 30 km, 925 hPa; max +8.9 at 150 km, 125 hPa; max u_theta 55.0 at 30 km, 850 hPa; 10-m u_theta(25 km) 34.78
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK DS18 min ring-mean
+      u_r = −15.7 m/s at 30 km, 925 hPa; max +8.9 at 150 km, 125 hPa; max u_theta 55.0 at 30 km, 850 hPa; 10-m u_theta(25 km) 34.78
+    measured_w: 'NOAA P-3 tail Doppler radar 220928H1_1023 (09:49-12:47 UTC) ring-mean w, 2-km bins, ≥ 70 % of the ring — CHECK DS29: peak 3.34 m/s at 8.5
+      km, r 45 km; strongest single updraught 11.6 m/s (13 km); eye: no data inside 22 km'
+    continuity_w: 'HRRR f00 GRIB (37 levels, T, q) ring-mean inflow round the calm centre → (1/r)∂(rρū_r)/∂r + ∂(ρw̄)/∂z = 0 (Vallis §1.2, cylindrical) —
+      CHECK DS30: ≈ 1.0 m/s mean at r 18-26 km, z 1-12 km; method parity with the report''s 1.01/0.76/0.88/1.07'
   exaggeration:
-  - height axis stretched (16 km against 200 km)
-  - in-up-out arrows inferred from the u_r pattern (illustrative), not from w data
+  - height axis stretched (16 km against 200 km; then 14 km against 100 km)
+  - in and out arrows schematic (they summarise the u_r section); the up arrows follow the measured ring-mean w
   calc_rows:
   - \min\overline{u_r}\approx-16\ \mathrm{m/s}\ (30\ \mathrm{km},\ 0.7\ \mathrm{km})
   - \max\overline{u_r}\approx+9\ \mathrm{m/s}\ (150\ \mathrm{km},\ 15\ \mathrm{km})
@@ -2448,10 +2467,10 @@ scenes:
       - a radius-height section
     - - read it
       - \text{in below},\ \text{out above}\Rightarrow\text{rise between}
-      - mass must go somewhere (said, not computed)
-      - the overturning circulation
+      - 'mass must go somewhere: continuity says ≈ 1 m/s (computed, DS30; said in words, no equation on screen)'
+      - the overturning circulation; radar measured ≈ 3 m/s
   kind: 2-D data section
-  data: HRRR-zarr-prs-ian2022 (+ the 10-m field of Part 1)
+  data: HRRR-zarr-prs-ian2022 (+ the 10-m field of Part 1); HRRR f00 GRIB (HRRR-aws); HRD-TDR 220928H1_1023 (not redistributable)
   tool: matplotlib texture + Remotion SVG overlays
   runner_up: ERA5 section (pattern only)
   why: U-CO-030 'values hard to read' → one slice with numbers; why cylindrical coordinates help
@@ -2460,28 +2479,29 @@ scenes:
   feedback:
   - U-CO-030
   - U-CO-099
-  source_line: 'Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · ring averages round the model''s calm centre'
+  source_line: 'Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · ring averages round the model''s calm centre; then: Vertical wind: NOAA P-3 tail Doppler
+    radar, 28 Sep 2022 ≈ 10 UTC — NOAA AOML Hurricane Research Division · Winds: NOAA HRRR (public domain) · radar ≈ 8 h earlier than the model winds'
   layout: Colour bar in the column beside the slice; contour labels on their own lines; SourceBelow; axis titles 'distance from the centre (km)'
     and 'height (km)' >= 44 px.
 - id: s21_amphan_intro
   t:
-  - 1818.9
-  - 1875.1
+  - 1831.1919
+  - 1887.3627
   sentence_times:
-  - - 1818.9
-    - 1828.975
-  - - 1829.325
-    - 1833.85
-  - - 1834.2
-    - 1839.025
-  - - 1839.375
-    - 1849.175
-  - - 1849.525
-    - 1859.05
-  - - 1859.4
-    - 1868.725
-  - - 1869.075
-    - 1874.3
+  - - 1831.1919
+    - 1841.2669
+  - - 1841.6169
+    - 1846.1419
+  - - 1846.4919
+    - 1851.3169
+  - - 1851.6669
+    - 1861.4669
+  - - 1861.8169
+    - 1871.3419
+  - - 1871.6919
+    - 1880.9877
+  - - 1881.3377
+    - 1886.5627
   beat: 'application 2: the Bay of Bengal, Cyclone Amphan (globe zoom tour, zoom back out)'
   visual: 'House globe (cross-product v5 56:35-57:54 look; §5b zoom-reveal): Blue Marble globe on the left, unzoomed, text column right. S1 on
     ''Bay of Bengal'': the globe turns to 15 N, 88 E and zooms (dist 4.3 → 2.4, 1.5 s, full-bleed, right side darkened behind the column); labels
@@ -2492,12 +2512,12 @@ scenes:
     gold distance brackets ''≈ 45 km'', ''≈ 78 km''. S8: the Khulna and Satkhira districts outlined (Natural Earth admin-1/2 or GADM if licence-clear;
     else a dashed circle round the two cities, said). End: the camera zooms back out to the start view (zoom-tour rule). Source line under the
     globe.'
-  voiceover: Now let's meet our second storm, on the other side of the world, in the Bay of Bengal, between India and Myanmar, with Bangladesh
-    at its northern end. Remember, here a tropical cyclone is simply called a cyclone. In May twenty twenty, Cyclone Amphan formed in the south
-    of the Bay. On the eighteenth of May, it became a super cyclonic storm, the strongest class there, and the first in the Bay of Bengal since
-    nineteen ninety nine. On the twentieth, it came ashore in the Sundarbans, the huge mangrove forest on the border between India's state of
-    West Bengal and Bangladesh. Its centre then passed close to Kolkata, about forty five kilometres west of Satkhira, and about seventy eight
-    kilometres west of Khulna. So the Khulna and Satkhira districts of Bangladesh took much of its flooding.
+  voiceover: Now let's meet our second storm, on the other side of the world, in the Bay of Bengal, between India and Myanmar, with Bangladesh at its northern
+    end. Remember, here a tropical cyclone is simply called a cyclone. In May twenty twenty, Cyclone Amphan formed in the south of the Bay. On the eighteenth
+    of May, it became a super cyclonic storm, the strongest class there, and the first in the Bay of Bengal since nineteen ninety nine. On the twentieth,
+    it came ashore in the Sundarbans, the huge mangrove forest on the border between India's state of West Bengal and Bangladesh. Its centre then passed close
+    to Kolkata, about forty five kilometres west of Satkhira, and about seventy nine kilometres west of Khulna. So the Khulna and Satkhira districts of Bangladesh
+    took much of its flooding.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.data.ibtracs.storm_table (NI basin, sid 2020136N10088); fluidpy.geo.sphere.central_angle (closest approaches); fluidpy.data.naturalearth
@@ -2532,15 +2552,15 @@ scenes:
   layout: '§5b: text only on the faded part; names centred within 1 s; zoom back out before the scene ends; source line below the globe.'
 - id: s22_amphan_eye
   t:
-  - 1875.1
-  - 1895.65
+  - 1887.3627
+  - 1907.9127
   sentence_times:
-  - - 1875.1
-    - 1881.475
-  - - 1881.825
-    - 1886.575
-  - - 1886.925
-    - 1894.85
+  - - 1887.3627
+    - 1893.7377
+  - - 1894.0877
+    - 1898.8377
+  - - 1899.1877
+    - 1907.1127
   beat: Amphan's pinhole eye (MODIS 18 May)
   visual: 'Picture zone: the MODIS Terra true-colour image of 18 May 2020 (GIBS, 250 m), cropped round the eye (≈ 600 × 600 km, then a slow zoom
     to ≈ 150 km), the pinhole eye marked by a thin gold ring on ''pinhole eye'' (S2); S3: a ghost of s15''s cylinder (outline only) settles over
@@ -2575,35 +2595,35 @@ scenes:
   layout: SourceBelow; the ring thin enough to leave the eye visible.
 - id: s23_amphan_ring
   t:
-  - 1895.65
-  - 1992.95
+  - 1907.9127
+  - 2004.9134
   sentence_times:
-  - - 1895.65
-    - 1899.525
-  - - 1899.875
-    - 1907.2
-  - - 1907.55
-    - 1914.775
-  - - 1915.125
-    - 1922.95
-  - - 1923.3
-    - 1931.4
-  - - 1931.75
-    - 1940.5
-  - - 1940.85
-    - 1949.55
-  - - 1951.05
-    - 1959.275
-  - - 1959.625
-    - 1969.275
-  - - 1969.625
-    - 1972.4
-  - - 1973.9
-    - 1975.875
-  - - 1976.225
-    - 1985.05
-  - - 1986.55
-    - 1992.15
+  - - 1907.9127
+    - 1911.7877
+  - - 1912.1377
+    - 1919.4627
+  - - 1919.8127
+    - 1927.0377
+  - - 1927.3877
+    - 1935.2127
+  - - 1935.5627
+    - 1943.6627
+  - - 1944.0127
+    - 1952.4634
+  - - 1952.8134
+    - 1961.5134
+  - - 1963.0134
+    - 1971.2384
+  - - 1971.5884
+    - 1981.2384
+  - - 1981.5884
+    - 1984.3634
+  - - 1985.8634
+    - 1987.8384
+  - - 1988.1884
+    - 1997.0134
+  - - 1998.5134
+    - 2004.1134
   beat: Amphan's spin and inflow on a ring, beside Ian's
   visual: 'Left: ERA5 10-m wind speed map 06 UTC 20 May 2020 (85-92 E, 17.5-24.5 N, cmocean speed 0-30 m/s, colour bar beside, Natural Earth coast
     and borders, animated wind arrows from the data), the ERA5 centre (teal cross ''ERA5 centre'') and the 100-km ring with 72 dots; S4 a gold
@@ -2612,16 +2632,15 @@ scenes:
     kt (3-min) ≈ 167 km/h''. S10-S11: a compact two-column comparison in the maths zone (no box): ''Ian · 25 km · HRRR'' | ''Amphan · 100 km ·
     ERA5''; rows ''round 34.8 | 20.1'', ''in −13.3 | −6.0'', ''inflow angle ≈ 21° | ≈ 17°'' with the tan rows ''13.3/34.8 ≈ 0.38'', ''6.0/20.1
     ≈ 0.30''. Source line under the map.'
-  voiceover: 'Let''s measure Amphan''s winds the same way we did Ian''s. There''s no fine model like Ian''s over the Bay of Bengal, so we use
-    a global data set called ERA5. It''s a reanalysis: a best estimate of past weather, made by blending observations with a weather model. Its
-    grid boxes are about twenty eight kilometres wide, wider than Amphan''s eye, so it smooths the storm a lot. Here''s Amphan at six in the morning,
-    universal time, on the twentieth of May, about four hours before landfall. We put the origin at ERA5''s own centre, and draw a ring a hundred
-    kilometres out, where ERA5''s spin is strongest. Ten metres above the sea, the tangential wind averages about twenty metres per second, and
-    the radial wind about minus six. [beat] The air goes round anticlockwise as seen from above, just like Ian''s, because both storms are in
-    the northern hemisphere. The official estimate at that hour, averaged over three minutes, was about ninety knots, or about a hundred and sixty
-    seven kilometres per hour. So the reanalysis is far too weak. [beat] But the shape is right. Six over twenty is zero point three, so Amphan''s
-    inflow angle is about seventeen degrees, close to Ian''s twenty one. [beat] Two storms, in two different oceans, both spiral in at a similar
-    angle.'
+  voiceover: 'Let''s measure Amphan''s winds the same way we did Ian''s. There''s no fine model like Ian''s over the Bay of Bengal, so we use a global data
+    set called ERA5. It''s a reanalysis: a best estimate of past weather, made by blending observations with a weather model. Its grid boxes are about twenty
+    eight kilometres wide, wider than Amphan''s eye, so it smooths the storm a lot. Here''s Amphan at six in the morning, universal time, on the twentieth
+    of May, about four hours before landfall. We put the origin at ERA5''s own centre, and draw a ring fifty kilometres out, where ERA5''s spin is strongest.
+    Ten metres above the sea, the tangential wind averages about twenty metres per second, and the radial wind about minus six. [beat] The air goes round
+    anticlockwise as seen from above, just like Ian''s, because both storms are in the northern hemisphere. The official estimate at that hour, averaged over
+    three minutes, was about ninety knots, or about a hundred and sixty seven kilometres per hour. So the reanalysis is far too weak. [beat] But the shape
+    is right. Six over twenty is zero point three, so Amphan''s inflow angle is about seventeen degrees, close to Ian''s twenty one. [beat] Two storms, in
+    two different oceans, both spiral in at a similar angle.'
   on_screen_eq:
     latex: \tan(\text{inflow angle})=\frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \approx17^\circ
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2663,21 +2682,21 @@ scenes:
   layout: Colour bar beside the map; comparison rows aligned in two columns in the maths zone; no box.
 - id: s24_amphan_curtain
   t:
-  - 1992.95
-  - 2030.475
+  - 2004.9134
+  - 2042.4384
   sentence_times:
-  - - 1992.95
-    - 1998.0
-  - - 1998.35
-    - 2000.5
-  - - 2000.85
-    - 2009.175
-  - - 2010.675
-    - 2014.6
-  - - 2016.1
-    - 2022.225
-  - - 2022.575
-    - 2029.675
+  - - 2004.9134
+    - 2009.9634
+  - - 2010.3134
+    - 2012.4634
+  - - 2012.8134
+    - 2021.1384
+  - - 2022.6384
+    - 2026.5634
+  - - 2028.0634
+    - 2034.1884
+  - - 2034.5384
+    - 2041.6384
   beat: Amphan's radius-height section beside Ian's
   visual: 'Two radius-height sections side by side across the full width (each x-range 0-300 km linear for Amphan, 0-200 km for Ian, both 0-16
     km high), the same diverging colour map and ONE shared colour bar between them in a gap >= 40 px (never on a picture). Ian left (from s20,
@@ -2729,27 +2748,27 @@ scenes:
   layout: One shared colour bar between the two (it is the same scale); two SourceBelow lines, one under each; no text over either picture.
 - id: s25_why_cylindrical
   t:
-  - 2030.475
-  - 2081.75
+  - 2042.4384
+  - 2093.7134
   sentence_times:
-  - - 2030.475
-    - 2036.375
-  - - 2036.725
-    - 2038.9
-  - - 2039.25
-    - 2041.075
-  - - 2041.425
-    - 2050.425
-  - - 2050.775
-    - 2052.825
-  - - 2053.175
-    - 2061.65
-  - - 2062.0
-    - 2068.1
-  - - 2068.45
-    - 2070.375
-  - - 2070.725
-    - 2080.95
+  - - 2042.4384
+    - 2048.3384
+  - - 2048.6884
+    - 2050.8634
+  - - 2051.2134
+    - 2053.0384
+  - - 2053.3884
+    - 2062.3884
+  - - 2062.7384
+    - 2064.7884
+  - - 2065.1384
+    - 2073.6134
+  - - 2073.9634
+    - 2080.0634
+  - - 2080.4134
+    - 2082.3384
+  - - 2082.6884
+    - 2092.9134
   beat: 'why: ''There are three good reasons'''
   visual: 'Three mini pictures built one per reason across the picture zone (no boxes): (1) a messy plan-view u_r layer (s18 925 hPa) folding
     round its axis into the s20 slice (''shape''); (2) the ring with v theta-hat and the inward rose arrow next to an east/north pair whose u,
@@ -2782,21 +2801,21 @@ scenes:
   layout: One small source line under the data minis; keywords only.
 - id: s26_onshore
   t:
-  - 2081.75
-  - 2128.375
+  - 2093.7134
+  - 2140.3384
   sentence_times:
-  - - 2081.75
-    - 2087.35
-  - - 2087.7
-    - 2092.175
-  - - 2092.525
-    - 2100.725
-  - - 2101.075
-    - 2112.45
-  - - 2112.8
-    - 2119.175
-  - - 2119.525
-    - 2127.575
+  - - 2093.7134
+    - 2099.3134
+  - - 2099.6634
+    - 2104.1384
+  - - 2104.4884
+    - 2112.6884
+  - - 2113.0384
+    - 2124.4134
+  - - 2124.7634
+    - 2131.1384
+  - - 2131.4884
+    - 2139.5384
   beat: 'back to Ian''s landfall: the wind blew onshore (D21/D22 moved to Part 4)'
   visual: 'Real map (local true-shape frame) of SW Florida from Naples to Tampa Bay: HRRR 20 UTC 10-m wind speed (cmocean speed 0-50 m/s, colour
     bar beside, Must 15) with animated wind arrows from the data, Natural Earth 10 m coast (white). S1-S2: keyword ''along the shore · across
@@ -2836,33 +2855,33 @@ scenes:
   layout: GeoMap body in an overflow-hidden div; colour bar beside; SourceBelow.
 - id: s27_surge
   t:
-  - 2128.375
-  - 2221.55
+  - 2140.3384
+  - 2233.5134
   sentence_times:
-  - - 2128.375
-    - 2132.15
-  - - 2132.5
-    - 2138.175
-  - - 2138.525
-    - 2146.375
-  - - 2146.725
-    - 2154.35
-  - - 2155.85
-    - 2164.7
-  - - 2166.2
-    - 2173.7
-  - - 2175.2
-    - 2182.325
-  - - 2182.675
-    - 2187.75
-  - - 2188.1
-    - 2195.8
-  - - 2197.3
-    - 2205.5
-  - - 2205.85
-    - 2215.575
-  - - 2215.925
-    - 2220.75
+  - - 2140.3384
+    - 2144.1134
+  - - 2144.4634
+    - 2150.1384
+  - - 2150.4884
+    - 2158.3384
+  - - 2158.6884
+    - 2166.3134
+  - - 2167.8134
+    - 2176.6634
+  - - 2178.1634
+    - 2185.6634
+  - - 2187.1634
+    - 2194.2884
+  - - 2194.6384
+    - 2199.7134
+  - - 2200.0634
+    - 2207.7634
+  - - 2209.2634
+    - 2217.4634
+  - - 2217.8134
+    - 2227.5384
+  - - 2227.8884
+    - 2232.7134
   beat: 'storm surge: Fort Myers Beach up, Tampa Bay down; the sign flip (pointers R06, F19)'
   visual: 'Same map widened to Tampa Bay (colour bar 0-50 m/s beside, Must 15). S1-S2: a water-colour arrow pushes onto the beach and a thin animated
     sea-level sheet in a small three.js side-section inset beside the map (×50 vertical, listed) rises; keyword ''storm surge''. S3: a shallow
@@ -2925,21 +2944,21 @@ scenes:
   layout: Colour bar beside the map (Must 15); gauge graphs under the column, no text on curves; SourceBelow.
 - id: s28_ian_record
   t:
-  - 2221.55
-  - 2263.15
+  - 2233.5134
+  - 2275.1134
   sentence_times:
-  - - 2221.55
-    - 2224.35
-  - - 2224.7
-    - 2227.65
-  - - 2228.0
-    - 2234.975
-  - - 2235.325
-    - 2242.375
-  - - 2242.725
-    - 2257.925
-  - - 2259.425
-    - 2262.35
+  - - 2233.5134
+    - 2236.3134
+  - - 2236.6634
+    - 2239.6134
+  - - 2239.9634
+    - 2246.9384
+  - - 2247.2884
+    - 2254.3384
+  - - 2254.6884
+    - 2269.8884
+  - - 2271.3884
+    - 2274.3134
   beat: 'Ian: no satellite saw the surge; the tide gauges are its record (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
     §v3))'
   visual: 'S0-S2: keyword ''no satellite saw the surge itself'' (warm white, 54 px) in the column, kept through the scene; the s27 map shrinks
@@ -2985,23 +3004,23 @@ scenes:
   layout: Chart labels at line ends (no legend over curves); the NHC reference beside the chart; colour bar beside the locator map (Must 15).
 - id: s29_flood_flight
   t:
-  - 2263.15
-  - 2306.85
+  - 2275.1134
+  - 2318.8134
   sentence_times:
-  - - 2263.15
-    - 2266.7
-  - - 2267.05
-    - 2272.75
-  - - 2273.1
-    - 2276.225
-  - - 2276.575
-    - 2282.75
-  - - 2283.1
-    - 2290.375
-  - - 2291.875
-    - 2298.3
-  - - 2298.65
-    - 2306.05
+  - - 2275.1134
+    - 2278.6634
+  - - 2279.0134
+    - 2284.7134
+  - - 2285.0634
+    - 2288.1884
+  - - 2288.5384
+    - 2294.7134
+  - - 2295.0634
+    - 2302.3384
+  - - 2303.8384
+    - 2310.2634
+  - - 2310.6134
+    - 2318.0134
   beat: zoom flight to the chosen flood event (provisional Amphan, Bay of Bengal) (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
     §v3))
   visual: 'three.js in Remotion (flight() + Patch from movies/src/captests/flights.tsx; v2 prototype V2/clips/amphan_zoom_flight_threejs.mp4 re-timed):
@@ -3043,69 +3062,69 @@ scenes:
   layout: Depth colour bar in the column (never on the globe); §5b edge fades; the last frame matches s30.
 - id: s30_flood_swipe
   t:
-  - 2306.85
-  - 2375.05
+  - 2318.8134
+  - 2398.3476
   sentence_times:
-  - - 2306.85
-    - 2312.2
-  - - 2312.55
-    - 2314.5
-  - - 2314.85
-    - 2325.625
-  - - 2325.975
-    - 2334.375
-  - - 2334.725
-    - 2337.175
-  - - 2337.525
-    - 2342.25
-  - - 2342.6
-    - 2346.75
-  - - 2348.25
-    - 2353.975
-  - - 2355.475
-    - 2362.95
-  - - 2363.3
-    - 2369.1
-  - - 2369.45
-    - 2374.25
-  beat: ONE plain false-colour before/after swipe (captests A5 look), no overlay, for the clearest event (PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md
-    §v3)); pointer F32
-  visual: 'Swipe as captests/A5_before_after/swipe_offline_capture.mp4: a wide false-colour pair in one frame, the gold vertical line GLIDING
-    across at one eased rate (hold BEFORE 1.2 s → glide 3.2 s → pause → back to 62 % → settle 50 %), ''before · <date>'' / ''after · <date>''
-    tags at the top of each half (each dims while its side is hidden), haloed 44-px place names, scale bar + north arrow, NO inundation overlay,
-    same sensor and one fixed stretch on both dates. Provisional: MODIS 7-2-1, Terra 16 May vs Aqua 29 May 2020, 88.05-89.95 E, 21.55-23.0 N.
-    S2-S3: three-row band legend under the image (''shortwave infrared → red'', ''near infrared → green'', ''red light → blue''); S4: colour key
-    swatches ''plants · bare ground · clouds · water''. S6-S7: the date tags on their words. S8: pointers on the darkened areas on their words
-    (from §v3). S10: keyword ''what the surge left, not the surge'' (slate). S11: keyword ''more: Floods from space''. Source line under the image.'
-  voiceover: Here's a before and after picture from NASA's MODIS instrument. It's in false colour. The satellite measures light that our eyes
-    can't see, shortwave infrared and near infrared, and we paint them red and green, with ordinary red light painted blue. In these colours,
-    plants look bright green, bare ground looks brown, clouds look white, and water looks dark blue or black. That makes water easy to spot. On
-    the left is the sixteenth of May, four days before landfall. On the right is the twenty ninth of May, nine days after. [beat] As the line
-    glides across, dark water spreads over land that was green before. [beat] Both pictures are pinned to the same latitudes and longitudes, so
-    every pixel compares the same patch of ground. Even so, the picture shows what the surge left behind, not the surge itself. How to map floods
-    from space has its own movie later in this series.
+  - - 2318.8134
+    - 2328.1092
+  - - 2328.4592
+    - 2333.8092
+  - - 2334.1592
+    - 2336.1092
+  - - 2336.4592
+    - 2347.2342
+  - - 2347.5842
+    - 2355.9842
+  - - 2356.3342
+    - 2358.7842
+  - - 2359.1342
+    - 2364.6272
+  - - 2364.9772
+    - 2370.0476
+  - - 2371.5476
+    - 2377.2726
+  - - 2378.7726
+    - 2386.2476
+  - - 2386.5976
+    - 2392.3976
+  - - 2392.7476
+    - 2397.5476
+  beat: 'ONE plain false-colour before/after swipe (captests A5 look), no overlay: Cyclone Nargis 2008 (flood_visuals v3 DECIDED by the user 2026-11-05);
+    pointer F32'
+  visual: 'Swipe as captests/A5_before_after/swipe_offline_capture.mp4: a wide false-colour pair in one frame, the gold vertical line GLIDING across at one
+    eased rate (hold BEFORE 1.2 s → glide 3.2 s → pause → back to 62 % → settle 50 %), ''before · <date>'' / ''after · <date>'' tags at the top of each half
+    (each dims while its side is hidden), haloed 44-px place names, scale bar + north arrow, NO inundation overlay, same sensor and one fixed stretch on both
+    dates. MODIS Terra 7-2-1, 21 Apr vs 5 May 2008, Irrawaddy delta 94.15-96.45 E, 15.7-17.1 N (S0: the Nargis bridge, keyword ''Cyclone Nargis · Myanmar
+    · 2008''). S3-S4: three-row band legend under the image (''shortwave infrared → red'', ''near infrared → green'', ''red light → blue''); S5: colour key
+    swatches ''plants · bare ground · clouds · water''. S6-S7: the date tags on their words. S8: the line glides; dark water over the delta. S10: keyword
+    ''what the surge left, not the surge'' (slate). S11: keyword ''more: Floods from space''. Source line under the image.'
+  voiceover: Satellites caught a cyclone's flood most clearly for Cyclone Nargis, in the same Bay of Bengal, in May two thousand and eight. Here's a before
+    and after picture from NASA's MODIS instrument. It's in false colour. The satellite measures light that our eyes can't see, shortwave infrared and near
+    infrared, and we paint them red and green, with ordinary red light painted blue. In these colours, plants look bright green, bare ground looks brown,
+    clouds look white, and water looks dark blue or black. That makes water easy to spot. On the left is the twenty first of April, eleven days before landfall.
+    On the right is the fifth of May, about three days after. [beat] As the line glides across, dark water spreads over land that was green before. [beat]
+    Both pictures are pinned to the same latitudes and longitudes, so every pixel compares the same patch of ground. Even so, the picture shows what the surge
+    left behind, not the surge itself. How to map floods from space has its own movie later in this series.
   on_screen_eq: null
   physics_source:
-    fn: NEW fluidpy.data.gee route (or fluidpy.data.gibs) for the §v3 pair; fixed stretch from the before image; cloud QA reported
+    fn: fluidpy.data.fetch(ee://…) cache hit of the v3 GEE pair (MOD09 7-2-1, one fixed stretch), fluidpy.data.ibtracs.storm_table (NI, Nargis), fluidpy.data.gibs.fetch_wms
     params:
-      event: pending v3
-      provisional:
-        sensor: MODIS
-        bands: 7-2-1
-        before: 2020-05-16 (Terra)
-        after: 2020-05-29 (Aqua)
-        bbox_wsen:
-        - 88.05
-        - 21.55
-        - 89.95
-        - 23.0
-    test: NEW route tests (request recorded, same grid both dates, fixed stretch); CHECK clear fraction of both dates stated in the manifest
+      event: Cyclone Nargis 2008
+      sensor: MODIS Terra
+      bands: 7-2-1
+      before: '2008-04-21'
+      after: '2008-05-05'
+      landfall: '2008-05-02'
+      crop_wsen:
+      - 94.15
+      - 15.7
+      - 96.45
+      - 17.1
+    test: 'CHECK DS27: same grid and stretch, b7 gap fill ≤ 15 %; dark (water) share 0.27 → 0.45; IBTrACS landfall 2 May; dates −11 d / +66 h'
   exaggeration:
   - the gliding line animates the comparison, not a time change
-  pending: 'PENDING flood_visuals v3 (reports/data/ch00_coordinates_flood_visuals.md §v3): event, sensor, bands, dates and the ''what shows''
-    sentence from §v3; slots SENSOR, BANDS, BEFORE, AFTER, WHAT_SHOWS; re-voice S0, S6-S8'
   kind: before/after false-colour swipe (no overlay)
-  data: pending flood_visuals §v3 (provisional GEE-MODIS-721-amphan2020)
+  data: GEE-MODIS-721-nargis2008 (v3 pair, cache hit); IBTrACS-NI; GIBS MODIS Aqua 2 May 2008
   tool: Remotion Slider (flights.tsx) + legend/place layers
   why: 'user decision: one plain false-colour swipe for the clearest flood; colours explained before use'
   related:
@@ -3114,33 +3133,33 @@ scenes:
     covers: SAR flood mapping
   feedback:
   - U-CO-092
-  source_line: 'Images: <sensor, dates from §v3> · bands 7-2-1 · processed in Google Earth Engine'
+  source_line: 'Images: NASA MODIS (Terra) via Google Earth Engine · bands 7-2-1 · Cyclone Nargis, 21 Apr and 5 May 2008'
   layout: Legend and colour key under the image beside the source line; nothing on the image but place dots, names and pointers.
 - id: s31_recap
   t:
-  - 2375.05
-  - 2456.55
+  - 2398.3476
+  - 2479.8476
   sentence_times:
-  - - 2375.05
-    - 2384.95
-  - - 2385.3
-    - 2390.575
-  - - 2390.925
-    - 2400.425
-  - - 2400.775
-    - 2405.95
-  - - 2406.3
-    - 2419.375
-  - - 2419.725
-    - 2428.425
-  - - 2428.775
-    - 2439.325
-  - - 2439.675
-    - 2443.475
-  - - 2443.825
-    - 2449.775
-  - - 2450.125
-    - 2455.75
+  - - 2398.3476
+    - 2408.2476
+  - - 2408.5976
+    - 2413.8726
+  - - 2414.2226
+    - 2423.7226
+  - - 2424.0726
+    - 2429.2476
+  - - 2429.5976
+    - 2442.6726
+  - - 2443.0226
+    - 2451.7226
+  - - 2452.0726
+    - 2462.6226
+  - - 2462.9726
+    - 2466.7726
+  - - 2467.1226
+    - 2473.0726
+  - - 2473.4226
+    - 2479.0476
   beat: recap ('To sum up'); last sentence the teaser to Part 3
   visual: 'One beat per sentence, mini pictures reused (no headings): the unit circle with Δθ along θ̂; the two slope graphs; the two turning
     rules with gold swing arrows; the three product-rule pieces; the ring with v/r, v θ̂ and the inward arrow; ''0.048 m/s² ≈ g/200''; the cylinder
@@ -3172,15 +3191,15 @@ scenes:
   layout: Mini pictures one per sentence; small source lines under the data minis. No headings.
 - id: s32_end
   t:
-  - 2456.55
-  - 2479.45
+  - 2479.8476
+  - 2502.7476
   sentence_times:
-  - - 2456.55
-    - 2462.75
-  - - 2463.1
-    - 2471.15
-  - - 2471.5
-    - 2479.15
+  - - 2479.8476
+    - 2486.0476
+  - - 2486.3976
+    - 2494.4476
+  - - 2494.7976
+    - 2502.4476
   beat: 'series end card (maths ending, word for word; decision: maths end card)'
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (unit circle with r-hat and theta-hat, a storm cylinder, a radius-height
     section, a coast with turned axes); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid
