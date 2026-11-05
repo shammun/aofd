@@ -1,5 +1,7 @@
 # ch00_coordinates (#5): split plan after the user's build-1 feedback (movie-director, 2026-11-05)
 
+**Amendment 2026-11-05 (user): seven parts.** (1) Part 4 is split into **#5d `ch00_coordinates_frames`** "Coordinates, Part 4 — Turning frames: local axes and how they turn" and **#5e `ch00_coordinates_moving`** "Coordinates, Part 5 — Moving frames: storm-relative winds" (their storyboards fix the cut). (2) The old Part 5 (35 scenes, 45:18 measured, commit 116f09c) is split at the flattening scene (user option (b)) into **#5f `ch00_coordinates_routes`** "Coordinates, Part 6 — Routes: great circles and rhumb lines" (17.0 min measured) and **#5g `ch00_coordinates_maps`** "Coordinates, Part 7 — Maps: projections and the view from the pole" (32.5 min measured). Only Part 7 names *The gradient* (#6) as next; Part 6's teaser points to Part 7. (3) U-CO-060…063 and 090…091 go to #5d, and the coast angle and along/across derivations (D21–D22) move there from Part 2; U-CO-093…098 go to #5e. (4) Series-wide **maths-skip guidance** (user, 2026-11-05): before each step-by-step derivation block a friendly spoken line and an on-screen chip 'every step · optional · skip to mm:ss'; after it 'If you skipped, here's what to keep: …'; chapter marks in each storyboard. Parts 1–3 keep their titles; their "of five parts" lines become "of seven" (list in the movie-director's reply). Edited below: §0, §1a, §1b, §2a, §2c, §2e, §2f (now Part 6) and §2f2 (Part 7), §2g, §2h, §3a, §4. Older text keeps its old part numbers where it is marked "for the record".
+
 **What this is.** The plan for the major revision of #5 *Coordinates* (build 1, 48:46). The user's feedback
 (`reports/ch00_coordinates_user_feedback.md`, 2026-11-05) asks for many new step-by-step derivations, labels and worked
 calculations, better 3-D, a Bay of Bengal cyclone, a Google Earth Engine (GEE) surge slider, and a **split into at
@@ -34,8 +36,8 @@ storyboard gets a `tools/tts.py` dry run (HOUSE_STYLE §10.1) before it is built
 | Distinct user requests | **103** (U-CO-001 … U-CO-103), §1a |
 | Review-1 items kept | 17 Must + 18 Should: all 17 Musts and 17 Shoulds fixed in fix loop 1; Should 13 (a re-voice) lands in Part 2, §1b |
 | Fix-loop-1 changes carried | 9 data/screen rules, §1c |
-| Parts | **5** (#5a–#5e), each a full house-style movie (title, hook, recap, end card) |
-| Total length (est.) | **≈ 125 min** (build 1: 48:46): Part 1 ≈ 25.5, Part 2 ≈ 25.6, Part 3 ≈ 25.4, Part 4 ≈ 25.6, Part 5 ≈ 23.2 min |
+| Parts | **7** (#5a–#5g; 2026-11-05 amendments), each a full house-style movie (title, hook, recap, end card) |
+| Total length (est.) | **≈ 125 min** (build 1: 48:46): Part 1 ≈ 25.5, Part 2 ≈ 25.6, Part 3 ≈ 25.4, Part 4 ≈ 25.6, Part 5 ≈ 23.2 min (plan). Measured: Part 1 36.5; Parts 4 + 5 (one storyboard before their split, 693c142) 58.7; Part 6 17.0; Part 7 32.5 min |
 | New narration (est.) | **≈ 78 min** (≈ 65 min of new teaching + ≈ 13 min of per-part titles, hooks, recaps and end cards) |
 | Scenes | **131** (49 in build 1): 37 new, 75 rewritten from build-1 scenes, 19 kept with light edits |
 | New derivations | **56** (D01–D56, step lists in §2) |
@@ -46,11 +48,13 @@ storyboard gets a `tools/tts.py` dry run (HOUSE_STYLE §10.1) before it is built
 | 1 | #5a | `ch00_coordinates_flat` | Coordinates, Part 1 — Arrows on a flat map: polar coordinates and rotated axes | s00–s08, s10–s12, s37–s38 | 25.5 min |
 | 2 | #5b | `ch00_coordinates_storm` | Coordinates, Part 2 — Inside a tropical cyclone: turning arrows and cylindrical coordinates | s09, s13, s14, s14b, s39, s40 | 25.6 min |
 | 3 | #5c | `ch00_coordinates_sphere` | Coordinates, Part 3 — Our round Earth: latitude, longitude, distances and areas | s15–s23 | 25.4 min |
-| 4 | #5d | `ch00_coordinates_frames` | Coordinates, Part 4 — Moving frames: local axes and storm-relative winds | s24–s26, s41–s45 | 25.6 min |
-| 5 | #5e | `ch00_coordinates_maps` | Coordinates, Part 5 — Routes and maps: great circles and map projections | s27–s36 | 23.2 min |
+| 4 | #5d | `ch00_coordinates_frames` | Coordinates, Part 4 — Turning frames: local axes and how they turn | s24–s26, s39 (coast, D21–D22) | see its storyboard |
+| 5 | #5e | `ch00_coordinates_moving` | Coordinates, Part 5 — Moving frames: storm-relative winds | s41–s45 | see its storyboard |
+| 6 | #5f | `ch00_coordinates_routes` | Coordinates, Part 6 — Routes: great circles and rhumb lines | s27, s29–s30 | 17.0 min (measured) |
+| 7 | #5g | `ch00_coordinates_maps` | Coordinates, Part 7 — Maps: projections and the view from the pole | s27 (∇T), s28, s31–s36 | 32.5 min (measured) |
 
 Naming follows the cross-product split: descriptive slugs under `movies/ch00/` (`ch00_cross_product`,
-`ch00_cross_product_uses`), "Part 1 … Part 5" in the titles and the voice. The plan IDs are **#5a–#5e** so that #6
+`ch00_cross_product_uses`), "Part 1 … Part 7" in the titles and the voice. The plan IDs are **#5a–#5g** so that #6
 and every later number keep their meaning. The build-1 folder `ch00_coordinates` stays as the archive (not published).
 
 ---
@@ -122,48 +126,48 @@ Time = the user's timestamp; scene = build-1 scene and sentence (S0 = first sent
 | 057 | 23:08 | all | anything not shown or derived before must be explained | §3 rule; primers for the slope of sine/cosine (P2), the product rule (P2), adding up = integration (P3), logs (P5) | all |
 | 058 | 23:08 | s23 S1 | how is dA calculated? | D30: a small patch is nearly a rectangle with sides a dφ and a cos φ dλ, at right angles; ERA5 box areas | P3 s20 |
 | 059 | 23:16–24:16 | s23 S2–S11 | the calculations after it are not understood | D31 one move per step: strip area → slope of sine → stair-steps add up → band area 2π a² sin φ → fraction sin φ → Archimedes' cylinder | P3 s21, s22 |
-| 060 | 25:26 | s24 S11 | after Brest and Singapore add Khulna (or the Bangladesh city the cyclone crossed) | Khulna (22.8° N, 89.6° E) [pending data report: the city nearest Amphan's track]: up differs from Brest's up by ≈ 76° | P4 s06 |
-| 061 | 26:18 | s25 S7 | derive Di/Dt, Dj/Dt, Dk/Dt step by step | D35–D38 from Part 2's turning rules (no new tool) | P4 s08–s11 |
-| 062 | 26:18 | s25 | if another video derived them, say so but still show them | said: "we derive them here; the cross product movie met a related idea" (no earlier movie derived them) | P4 s08 |
-| 063 | 26:30 | s26 S3 | Dv/Dt · i = … not understood: derive step by step | D39: product rule on u i + v j + w k, then dot with i, one term at a time | P4 s12, s13 |
-| 064 | 28:34 | s27 S8 | ∇T without derivation: here or in a later movie? | ≤ 1 min here, named pointer to #6 *The gradient*; #6 s22 rewritten as a full derivation (§3b) | P5 s05, #6 |
-| 065 | 30:12 | s29 S4 | "Los Angeles" cut off at the left | Must 7 fix kept; label right of and below its dot | P5 s07 |
-| 066 | 30:12 | s29 | the visualization of the calculation is hard to see | the slicing plane through London, LA and the centre drawn as a translucent disc; the angle σ drawn at the centre; numbers in the column | P5 s07 |
-| 067 | 30:12 | s29 | why make this calculation, how does it make sense? | goal first: flight distance and fuel; then the plan | P5 s06 |
-| 068 | 30:12 | s29 | how is d = a σ? what is σ? | D45: σ = the angle at the Earth's centre; cos σ = r̂₁·r̂₂ with both r̂ written out; the arc rule | P5 s07, s08 |
-| 069 | 31:56 | s31 S1 | why x = a λ, y = a φ make sense for this flattening | D48: unroll along the equator and the meridians, where lengths are true | P5 s12 |
-| 070 | 32:14 | s31 S4 | how do we write k = 1/cos φ? | D48: a parallel drawn 2π a long, true length 2π a cos φ | P5 s13 |
-| 071 | 32:45 | s32 S1–S2 | explain the Mercator idea in detail, intuitively | D49: a small circle on the globe, its ellipse on the plain map, stretched back into a circle | P5 s14 |
-| 072 | 33:11 | s32 S5 | how is dy what is shown? | D49 | P5 s14 |
-| 073 | 33:11 | s30 / s32 | why is the rhumb line preferred by some? | D47 + D52: one compass setting for the whole trip; straight on Mercator | P5 s10, s16 |
-| 074 | 33:17 | s32 S6 | how do we get y = a ln tan(π/4 + φ/2)? step by step, with numbers | D50: add up the steps (table), the formula that matches the sum, slope check | P5 s15 |
-| 075 | 33:48 | s33 S1 | how is the stretch factor calculated? | D51: k in both directions → k²; 60° → 4, Svalbard → 23.9 | P5 s17 |
-| 076 | 34:07 | s33 S5 | "true size: …" sits on Greenland | maps placed under the text with ≥ 40 px clear | P5 s17 |
-| 077 | 34:18 | s34 S0 | the two maps touch | Should 9 fix kept (41-px gap) | P5 s18 |
-| 078 | 35:19 | s35 S0 | start from the rotating globe, move up and zoom to the top, stop at the map | globe turns, the camera rises to above the North Pole, then the globe opens into the flat polar map (polar stereographic, named) | P5 s20 |
-| 079 | 35:19 | s35 | label longitudes and latitudes | rings 30/45/60/75° N, spokes 0°, 90° E, 180°, 90° W | P5 s20 |
-| 080 | 35:19 | s35 | label a few major areas and say where they are (lat, lon) | short tour: Greenland, Iceland, Scandinavia, Siberia, Alaska, Canada, Barents Sea, with lat/lon spoken for three of them | P5 s21 |
-| 081 | 35:19 | s35 | remove the labels later if cluttered | labels fade to 40 % when the 10-hPa field arrives, then off | P5 s22 |
-| 082 | 36:04 | s35 S6 | make the wind look natural, moving along the lines (as in weather basics) | streak trails advected along the 10-hPa wind (`diag.trajectories.advect_on_sphere`, fading tails) [pending data report: ERA5 10-hPa u, v for 21 Jan 2026] | P5 s22 |
-| 083 | 37:04 | s36 S6 | did not understand what is shown from here | D56 rewritten: two origins, ring arrows round each, the radial share bars 1.9 vs 0.4, a flat wheel analogy first | P5 s24 |
+| 060 | 25:26 | s24 S11 | after Brest and Singapore add Khulna (or the Bangladesh city the cyclone crossed) | Khulna (22.8° N, 89.6° E) [pending data report: the city nearest Amphan's track]: up differs from Brest's up by ≈ 76° | #5d P4 (was P4 s06) |
+| 061 | 26:18 | s25 S7 | derive Di/Dt, Dj/Dt, Dk/Dt step by step | D35–D38 from Part 2's turning rules (no new tool) | #5d P4 (was P4 s08–s11) |
+| 062 | 26:18 | s25 | if another video derived them, say so but still show them | said: "we derive them here; the cross product movie met a related idea" (no earlier movie derived them) | #5d P4 (was P4 s08) |
+| 063 | 26:30 | s26 S3 | Dv/Dt · i = … not understood: derive step by step | D39: product rule on u i + v j + w k, then dot with i, one term at a time | #5d P4 (was P4 s12, s13) |
+| 064 | 28:34 | s27 S8 | ∇T without derivation: here or in a later movie? | ≤ 1 min here, named pointer to #6 *The gradient*; #6 s22 rewritten as a full derivation (§3b) | #5g P7 s06 (pointer), #6 |
+| 065 | 30:12 | s29 S4 | "Los Angeles" cut off at the left | Must 7 fix kept; label right of and below its dot | #5f P6 s01, s06, s11 |
+| 066 | 30:12 | s29 | the visualization of the calculation is hard to see | the slicing plane through London, LA and the centre drawn as a translucent disc; the angle σ drawn at the centre; numbers in the column | #5f P6 s06, s07 |
+| 067 | 30:12 | s29 | why make this calculation, how does it make sense? | goal first: flight distance and fuel; then the plan | #5f P6 s05, s10 |
+| 068 | 30:12 | s29 | how is d = a σ? what is σ? | D45: σ = the angle at the Earth's centre; cos σ = r̂₁·r̂₂ with both r̂ written out; the arc rule | #5f P6 s07–s10 |
+| 069 | 31:56 | s31 S1 | why x = a λ, y = a φ make sense for this flattening | D48: unroll along the equator and the meridians, where lengths are true | #5g P7 s04 |
+| 070 | 32:14 | s31 S4 | how do we write k = 1/cos φ? | D48: a parallel drawn 2π a long, true length 2π a cos φ | #5g P7 s05 |
+| 071 | 32:45 | s32 S1–S2 | explain the Mercator idea in detail, intuitively | D49: a small circle on the globe, its ellipse on the plain map, stretched back into a circle | #5g P7 s07 |
+| 072 | 33:11 | s32 S5 | how is dy what is shown? | D49 | #5g P7 s08 |
+| 073 | 33:11 | s30 / s32 | why is the rhumb line preferred by some? | D47 + D52: one compass setting for the whole trip; straight on Mercator | #5f P6 s12, s13; #5g P7 s12 |
+| 074 | 33:17 | s32 S6 | how do we get y = a ln tan(π/4 + φ/2)? step by step, with numbers | D50: add up the steps (table), the formula that matches the sum, slope check | #5g P7 s09–s11 |
+| 075 | 33:48 | s33 S1 | how is the stretch factor calculated? | D51: k in both directions → k²; 60° → 4, Svalbard → 23.9 | #5g P7 s13 |
+| 076 | 34:07 | s33 S5 | "true size: …" sits on Greenland | maps placed under the text with ≥ 40 px clear | #5g P7 s13 |
+| 077 | 34:18 | s34 S0 | the two maps touch | Should 9 fix kept (41-px gap) | #5g P7 s14 |
+| 078 | 35:19 | s35 S0 | start from the rotating globe, move up and zoom to the top, stop at the map | globe turns, the camera rises to above the North Pole, then the globe opens into the flat polar map (polar stereographic, named) | #5g P7 s16 |
+| 079 | 35:19 | s35 | label longitudes and latitudes | rings 30/45/60/75° N, spokes 0°, 90° E, 180°, 90° W | #5g P7 s16 |
+| 080 | 35:19 | s35 | label a few major areas and say where they are (lat, lon) | short tour: Greenland, Iceland, Scandinavia, Siberia, Alaska, Canada, Barents Sea, with lat/lon spoken for three of them | #5g P7 s17 |
+| 081 | 35:19 | s35 | remove the labels later if cluttered | labels fade to 40 % when the 10-hPa field arrives, then off | #5g P7 s18 |
+| 082 | 36:04 | s35 S6 | make the wind look natural, moving along the lines (as in weather basics) | streak trails advected along the 10-hPa wind (`diag.trajectories.advect_on_sphere`, fading tails) [pending data report: ERA5 10-hPa u, v for 21 Jan 2026] | #5g P7 s18 |
+| 083 | 37:04 | s36 S6 | did not understand what is shown from here | D56 rewritten: two origins, ring arrows round each, the radial share bars 1.9 vs 0.4, a flat wheel analogy first | #5g P7 s19–s21 |
 | 084 | 37:47 | s37 S4 | show the derivation of ŷ′ = (−sin α, cos α), and in the graph | D05: the 90° rule from Part 1 applied to x̂′, drawn | P1 s15 |
 | 085 | 38:00 | s37 S5–S6 | what are x′, y′ and why dot products? | D06: "how much of the arrow lies along each new axis", the shadow from the dot product movie | P1 s16 |
 | 086 | 38:00 | s37 | don't rush | one move per sentence, beats on the numbers | P1 s14–s18 |
 | 087 | 38:36 | s38 S1 | how do we suddenly get the rotation matrix? | D07: line the two equations up, collect the four numbers into a table | P1 s17 |
 | 088 | 38:48 | s38 S2 | what are x_i C_ij and e_i · e′_j? go slowly | D08: index notation recalled (1a), j = 1 and j = 2 written out in full, the four dot products computed | P1 s18 |
 | 089 | 38:48 | s38 S3–S6 | the rest of that frame is not understood | D09: polar components are axes turned by θ, shown with the balloon (53°, 6 and −8) | P1 s18 |
-| 090 | 40:00 | s39 S3 | how do we get 329°, measured from which line? | D21: two coast points on a km map, the triangle, angle west of north, bearing from north clockwise (Part 1's bearing rule) | P2 s22 |
-| 091 | 40:00 | s39 S6–S8 | explain the along/across calculations | D22: α = 90° − 329° ≡ 121°, x̂′ and ŷ′ written, two dot products | P2 s23 |
+| 090 | 40:00 | s39 S3 | how do we get 329°, measured from which line? | D21: two coast points on a km map, the triangle, angle west of north, bearing from north clockwise (Part 1's bearing rule) | #5d P4 (moved from P2 s22) |
+| 091 | 40:00 | s39 S6–S8 | explain the along/across calculations | D22: α = 90° − 329° ≡ 121°, x̂′ and ŷ′ written, two dot products | #5d P4 (moved from P2 s23) |
 | 092 | 40:35 | s40 S1 | GEE before/after inundation slider for Ian's surge | Sentinel-1 (or optical) before and after Fort Myers Beach, a slider moving left to right [pending data report] | P2 s25 |
-| 093 | 42:53 | s42 S2–S4 | du/dt = dU/dt + du′/dt: how is it true? | D41: the change of a sum is the sum of the changes, divide by Δt | P4 s16 |
-| 094 | 43:21 | s42 S8 | explain the equation shown | D42: the parcel's acceleration = local change + advection; a sliding-pattern example where each piece changes but the sum doesn't | P4 s17 |
-| 095 | 44:45 | s43 S9 | explain storm-relative winds clearly | D43: u′ = u − U drawn as arrow subtraction at two ring points | P4 s19 |
-| 096 | 46:12 | s45 S3 | explain each term step by step | D44 one move per step | P4 s21, s22 |
-| 097 | 46:12 | s45 S3 | what is τ and ∂p/∂τ? never shown before | D44: τ is the time on the clock of an observer riding with the storm's pressure pattern; the traveller's chain rule from #4 | P4 s21 |
-| 098 | 46:12 | s45 | "hPa per hour" touches the bars; no text on visuals | Must 14 fix kept; new layout checked by the K6 gate | P4 s22 |
+| 093 | 42:53 | s42 S2–S4 | du/dt = dU/dt + du′/dt: how is it true? | D41: the change of a sum is the sum of the changes, divide by Δt | #5e P5 moving (was P4 s16) |
+| 094 | 43:21 | s42 S8 | explain the equation shown | D42: the parcel's acceleration = local change + advection; a sliding-pattern example where each piece changes but the sum doesn't | #5e P5 moving (was P4 s17) |
+| 095 | 44:45 | s43 S9 | explain storm-relative winds clearly | D43: u′ = u − U drawn as arrow subtraction at two ring points | #5e P5 moving (was P4 s19) |
+| 096 | 46:12 | s45 S3 | explain each term step by step | D44 one move per step | #5e P5 moving (was P4 s21, s22) |
+| 097 | 46:12 | s45 S3 | what is τ and ∂p/∂τ? never shown before | D44: τ is the time on the clock of an observer riding with the storm's pressure pattern; the traveller's chain rule from #4 | #5e P5 moving (was P4 s21) |
+| 098 | 46:12 | s45 | "hPa per hour" touches the bars; no text on visuals | Must 14 fix kept; new layout checked by the K6 gate | #5e P5 moving (was P4 s22) |
 | 099 | — | all | later-movie concepts: ≤ 1 min, then name the movie | §3a table; named in the voice and as a keyword | all |
 | 100 | — | all | explain what is not asked and not planned later | §3a "owner: here" rows (slopes of sine/cosine, product rule, integration, logs, Archimedes) | all |
-| 101 | — | all | split into ≥ 4–5 parts with a smooth flow | §2: 5 parts, recap and teaser at each seam | all |
+| 101 | — | all | split into ≥ 4–5 parts with a smooth flow | §2: 7 parts (amended 2026-11-05), recap and teaser at each seam | all |
 | 102 | — | all | research first: data sources, analyses, additions, time | §4 + the data report | — |
 | 103 | — | all | revise the plan; build the parts in order; then revise #6; pause #6 | `series_plan_v6.md`; #6 paused, §3b | — |
 
@@ -178,16 +182,16 @@ builder must keep.
 | Must 3 | s14b heights unlabelled | fixed (column = stack, SideCallouts) | P2 s15 | superseded by the redesign: height axis + per-layer tags |
 | Must 4 | s11 radial arrow invisible | fixed (ring-mean arrows) | P1 s20 | radial arrow ≥ 90 px, rose, pointing at the eye |
 | Must 5 | s11 link through "anticlockwise" | fixed (SideCallout) | P1 s20 | links leave from their text's left edge |
-| Must 6 | stretch bands mirrored into the SH (tissot a = 1 bug) | fixed in the builder (DC32b) | P5 s13–s18 | DC32b rows kept; every band north of the equator |
-| Must 7 | "Los Angeles" clipped | fixed | P5 s07 | label inside the canvas |
-| Must 8 | s29 calc row on the globe limb | fixed (x 1160) | P5 s07 | CalcStack x ≥ 1100 |
+| Must 6 | stretch bands mirrored into the SH (tissot a = 1 bug) | fixed in the builder (DC32b) | #5g P7 s05–s07, s13, s14 | DC32b rows kept; every band north of the equator |
+| Must 7 | "Los Angeles" clipped | fixed | #5f P6 s01, s06, s11 | label inside the canvas |
+| Must 8 | s29 calc row on the globe limb | fixed (x 1160) | #5f P6 s09–s10 | CalcStack x ≥ 1100 |
 | Must 9 | "radius 1" clipped | fixed | P2 s04 | inside the frame |
 | Must 10 | "+90°" cut at the top | fixed | P3 s05 | inside the frame |
 | Must 11 | s19 labels pile up at the limb | fixed (`facing()` fade) | P3 s15 | keep `facing()` |
-| Must 12 | "u′ = 1.5" runs into the equation | fixed | P4 s15 | column x ≥ 1100 |
-| Must 13 | s43 links cross | fixed | P4 s18 | north above south, SideCallouts |
-| Must 14 | s45 cramped, "hPa per hour" on the bars | fixed | P4 s22 | redesigned with more space (two scenes) |
-| Must 15 | s40/s45 no colour bar; credit without time | fixed | P2 s24, P4 s22 | colour bar + dated credit on every data frame |
+| Must 12 | "u′ = 1.5" runs into the equation | fixed | #5e P5 (was P4 s15) | column x ≥ 1100 |
+| Must 13 | s43 links cross | fixed | #5e P5 (was P4 s18) | north above south, SideCallouts |
+| Must 14 | s45 cramped, "hPa per hour" on the bars | fixed | #5e P5 (was P4 s22) | redesigned with more space (two scenes) |
+| Must 15 | s40/s45 no colour bar; credit without time | fixed | P2 s24, #5e P5 | colour bar + dated credit on every data frame |
 | Must 16 | s26 unexplained readouts | fixed (screen only) | P4 s14 | now re-voiced: the great-circle glider thought experiment is said |
 | Must 17 | the symbol a never introduced | fixed (screen) | P3 s04 | now also spoken: "we call it a" |
 | Should 1 | "2π r" on the circle's stroke | fixed | P1 s07 | outside the circle |
@@ -197,14 +201,14 @@ builder must keep.
 | Should 5 | s18 φ on the leg, tags crowded | fixed | P3 s11–s13 | redesigned two-view |
 | Should 6 | "× 4.9 too wide" not spoken | fixed (screen) | P3 s19 | now spoken |
 | Should 7 | δ vs d | fixed | P3 s20 | one symbol: Δ for finite steps, d for the tiny limit, said once |
-| Should 8 | s27 bottom half empty | fixed | P5 s03–s04 | halves gate |
-| Should 9 | Equal Earth under Mercator | fixed | P5 s18 | ≥ 40-px gap |
-| Should 10 | s36 ticks without legend | fixed (bars 1.9 / 0.4) | P5 s24 | keep the bars |
+| Should 8 | s27 bottom half empty | fixed | #5f P6 s03–s04 | halves gate |
+| Should 9 | Equal Earth under Mercator | fixed | #5g P7 s14 | ≥ 80-px gap (U-CO-077) |
+| Should 10 | s36 ticks without legend | fixed (bars 1.9 / 0.4) | #5g P7 s21 | keep the bars |
 | Should 11 | gauge vs NHC heights look contradictory | fixed (labels) | P2 s24 | keep "Fort Myers (upriver)" and "above the ground" |
-| Should 12 | s39 links converge | fixed | P2 s23 | links end on their own targets |
-| Should 13 | "minus thirty two" not voiced | **deferred → done now** | P2 s23 | the re-voice says "minus thirty two" |
+| Should 12 | s39 links converge | fixed | #5d P4 (moved from P2 s23) | links end on their own targets |
+| Should 13 | "minus thirty two" not voiced | **deferred → done now** | #5d P4 (moved from P2 s23) | the re-voice says "minus thirty two" |
 | Should 14 | end card icon touches text | fixed | all | 24-px gap |
-| Should 15 | coast segment not recorded | fixed (manifest) | P2 s23 | manifest `coast_segment` kept |
+| Should 15 | coast segment not recorded | fixed (manifest) | #5d P4 (moved from P2 s23) | manifest `coast_segment` kept |
 | Should 16 | "74 km" on the radius line | fixed | P3 s18 | nudge kept |
 | Should 17 | "Brest" before the zoom settles | fixed | P4 s05 | label after the camera stops |
 | Should 18 | halves WARN spans | fixed (opening keywords) | all | an opening keyword from frame 0 in every scene |
@@ -237,12 +241,17 @@ P3 the sphere       sliced Earth → latitude, colatitude → meridians, prime m
    teaser: "a forecaster's own arrows: east, north and up, and how they turn as the air moves"
 P4 frames           east-north-up at Brest, Trappes, Singapore, Khulna → how i, j, k turn (derived) → the metric terms
                     → frames that move: Galilean → accelerations agree → a moving storm (Ciarán) → the fixed barometer, ∂p/∂τ
-   teaser: "the shortest way round the Earth, and how to flatten it onto a map"
-P5 maps             great circle (d = a σ) → rhumb line → plate carrée (k) → Mercator (derived) → areas → Equal Earth
-                    → scale factors (∇T pointer to #6) → why so many systems → the view from the pole, the polar vortex
+   (amended 2026-11-05: P4 = turning frames, east-north-up and how i, j, k turn, the metric terms, + the coast angle 329° and
+    along/across from P2 (D21–D22); P5 = moving frames: Galilean, accelerations agree, Ciarán, storm-relative winds, ∂p/∂τ)
+   teaser (P5 → P6): "In Part 6, we'll find the shortest way round the Earth: great circles, and rhumb lines."
+P6 routes           curvilinear coordinates, scale factors → great circle (d = a σ, σ step by step) → route shape
+                    → rhumb line → why navigators liked it
+   teaser: "flatten the Earth onto maps, and why the rhumb line is straight on the most famous map"
+P7 maps             flattening → plate carrée (x, y, k) → ∇T pointer to #6 → Mercator (idea, dy, add-up table, ln tan, slope check)
+                    → rhumb line straight → areas → Equal Earth → why so many systems → the view from the pole, the polar vortex
    next movie: #6 The gradient
 ```
-Each part follows the house arc (HOUSE_STYLE §2): s00 title with one sentence → hook → (Parts 2–5: "In Part N−1, we…"
+Each part follows the house arc (HOUSE_STYLE §2): s00 title with one sentence → hook → (Parts 2–7: "In Part N−1, we…"
 recap ≤ 60 s) → building blocks → intuition → why → application → "To sum up" recap whose last sentence is the teaser →
 the series end card word for word (maths-tutorial ending: decision 2 in §5). Scene ids below are the new part's ids;
 "← sNN" names the build-1 scene reused. **K** = kept (light edits only), **R** = rewritten, **N** = new.
@@ -359,8 +368,8 @@ dots on the map, on the ring graph and in the column. Ian's map keeps its colour
 | s19_amphan_stack | — | N | Amphan's layers (or curtain), its own colour bar and source [pending data report] |
 | s20_why_three_d | s14b S12–S13 | R | "in, up, out" with r, θ, z; "directions, not speeds" |
 | s21_coast_axes | s39 S0–S2 | R | turned axes at a coast (Part 1's rule) |
-| s22_coast_angle | s39 S2–S3 | R | D21: 329° from two coast points on a km map |
-| s23_along_across | s39 S4–S8 | R | D22 with α = 121°: along ≈ 9, across ≈ −32 m/s ("minus thirty two", Should 13); Should 12, 15 kept |
+| s22_coast_angle | s39 S2–S3 | R | **moved to #5d (Part 4), 2026-11-05** — D21: 329° from two coast points on a km map |
+| s23_along_across | s39 S4–S8 | R | **moved to #5d (Part 4), 2026-11-05** — D22 with α = 121°: along ≈ 9, across ≈ −32 m/s ("minus thirty two", Should 13); Should 12, 15 kept |
 | s24_surge | s40 S0–S6 | R | surge 3–4.5 m at Fort Myers Beach; Tampa Bay offshore +11.5, water fell (Must 15, Should 11 kept) |
 | s25_gee_slider | — | N | before/after inundation slider at Fort Myers Beach [pending data report]; pointer to the floods movies (F32) and storm surge (F19) |
 | s26_recap | — | N | "To sum up …", teaser to Part 3 |
@@ -391,11 +400,11 @@ dots on the map, on the ring graph and in the column. Ian's map keeps its colour
   the short difference arrow points at the eye.
 - **D20 the azimuthal mean:** average round each ring at each height = the "θ-average"; why cylindrical coordinates
   make it one line.
-- **D21 the coast angle 329°:** (1) two points on the SW Florida coast, A south and B north [coordinates from the data
+- **(moved to #5d, Part 4, 2026-11-05; kept here for the record)** **D21 the coast angle 329°:** (1) two points on the SW Florida coast, A south and B north [coordinates from the data
   report]; (2) on the local km map (kilometres from latitude and longitude come in Part 3: one sentence): Δeast ≈ −31 km,
   Δnorth ≈ +51 km [exact values from the build]; (3) tan of the angle west of north = 31/51 → ≈ 31°; (4) bearings run
   clockwise from north, so 360° − 31° = 329°.
-- **D22 along and across:** (1) Part 1's rule: maths angle = 90° − bearing = −239°, the same as 121°; (2) x̂′ =
+- **(moved to #5d, Part 4)** **D22 along and across:** (1) Part 1's rule: maths angle = 90° − bearing = −239°, the same as 121°; (2) x̂′ =
   (cos 121°, sin 121°) ≈ (−0.52, 0.86) along the coast, ŷ′ = (−0.86, −0.52) out to sea (WSW); (3) the wind from 222° at
   33 m/s: u ≈ 22, v ≈ 25 m/s [build values]; (4) along = u·x̂′ ≈ 9.4, across = u·ŷ′ ≈ −31.6 m/s: "minus" = onto the land.
 
@@ -494,6 +503,7 @@ diagram on the right, both driven by one list of items {kind, frame}; an item ap
 with one gold tick between its two copies. The equatorial slice (top view) uses the same component.
 
 ### 2e. Part 4 — `ch00_coordinates_frames` (#5d) · "Coordinates, Part 4 — Moving frames: local axes and storm-relative winds"
+**Amendment 2026-11-05: this plan is now two movies.** #5d `ch00_coordinates_frames` "Coordinates, Part 4 — Turning frames: local axes and how they turn" (the local frames, how i, j, k turn, the metric terms, plus the coast angle and along/across D21–D22 from Part 2; U-CO-060…063, 090, 091) and #5e `ch00_coordinates_moving` "Coordinates, Part 5 — Moving frames: storm-relative winds" (D41–D44: Galilean frames, the parcel's acceleration, Ciarán, storm-relative winds, ∂p/∂τ; U-CO-093…098). Their storyboards fix the cut and the scene ids; the table below is the plan of record.
 - **Starts:** title (four stations with their own east-north-up arrows on the globe). **Stops:** after the fixed
   barometer, recap, end card.
 - **s00 sentence (draft):** "In this video, we'll learn local frames, and frames that move, the easy way, and see how
@@ -578,7 +588,66 @@ with one gold tick between its two copies. The equatorial slice (top view) uses 
 `acceleration`; `fluidpy.diag.cyclone.track_by_continuity`, `storm_relative_wind`; `fluidpy.geo.sphere.gradient`
 (Plymouth msl). All exist and are tested (build 1).
 
-### 2f. Part 5 — `ch00_coordinates_maps` (#5e) · "Coordinates, Part 5 — Routes and maps: great circles and map projections"
+### 2f. Part 6 — `ch00_coordinates_routes` (#5f) · "Coordinates, Part 6 — Routes: great circles and rhumb lines" (amended 2026-11-05)
+The 35-scene old Part 5 (commit 116f09c) is split at the flattening scene. Part 6 = its s00–s04, s06–s14 with a new title, hook
+("sixth of seven parts"), a recap that ends on Part 5's moving frames, a recap and an end card; the maths-skip chip before the σ calculation
+(s08) and the takeaway at s11. Storyboard and script: `movies/ch00/ch00_coordinates_routes/` (16 scenes, 17.0 min measured).
+
+| New | ← v1 (116f09c) | One line |
+|---|---|---|
+| s00_title | s00 | card "Coordinates · Part 6" / "Routes" / "great circles and rhumb lines" |
+| s01_hook | s01 | London → Los Angeles; "the sixth of seven parts" |
+| s02_part5_recap | s02 | arc rule, φ, λ, a, r̂, degree lengths; i, j, k (Part 4); storm-relative winds (Part 5) |
+| s03_curvilinear | s03 | three shared features |
+| s04_scale_factors | s04 | r, a, a cos φ; 111.2 and 73.8 km at Brest |
+| s05_shortest_way | s06 | goal first; what a great circle is |
+| s06_great_circle | s07 | the slicing sheet; why shortest |
+| s07_sigma | s08 | σ; the face-on slice = the arc rule; d = a σ |
+| s08_position_arrows | s09 | **maths-skip line + chip**; r̂₁, r̂₂ with every input |
+| s09_cos_sigma | s10 | 0.195 → 78.7° |
+| s10_distance | s11 | 1.3742 rad → 8755 km; check |
+| s11_route_shape | s12 | **"If you skipped, here's what to keep"**; 312° → 62.4° N → 214° |
+| s12_rhumb | s13 | 258.5°, 9733 km, +11 % |
+| s13_why_rhumb | s14 | three reasons; "we'll see why in Part 7" |
+| s14_recap | — | "To sum up", teaser to Part 7 |
+| s15_end | s34 | maths end card |
+
+### 2f2. Part 7 — `ch00_coordinates_maps` (#5g) · "Coordinates, Part 7 — Maps: projections and the view from the pole" (new 2026-11-05)
+Part 7 = v1 s15–s32 with a new title, hook ("last of seven parts"), a ≤ 60-s recap of Parts 1, 3 and 6, the gradient pointer (v1 s05) moved
+after the plate carrée, two maths-skip blocks (s04–s05 plate carrée and k; s08–s11 the Mercator formula) with takeaways at s06 and s12, and
+a recap naming *The gradient* as next. Storyboard and script: `movies/ch00/ch00_coordinates_maps/` (24 scenes, 32.5 min measured).
+
+| New | ← v1 (116f09c) | One line |
+|---|---|---|
+| s00_title | s00 | card "Coordinates · Part 7" / "Maps" / "projections and the view from the pole" |
+| s01_hook | — | Greenland as big as Africa; the Arctic on one page; "last of seven parts" |
+| s02_part6_recap | — | arc rule, a, degree lengths, scale factors, the two routes (≤ 60 s) |
+| s03_flattening | s15 | the orange peel |
+| s04_plate_carree | s16 | **maths-skip line + chip**; x = a λ, y = a φ; Brest |
+| s05_stretch_k | s17 | k = 1/cos φ; 1.5, 2, 4.9 |
+| s06_gradient_preview | s05 | **takeaway**; 1 °C over 73.8 km; next: *The gradient* |
+| s07_mercator_idea | s18 | the photo stretch; conformal |
+| s08_mercator_dy | s19 | **maths-skip line + chip**; dy = a dφ / cos φ |
+| s09_adding_steps | s20 | the add-up table; Edward Wright |
+| s10_ln_formula | s21 | ln primed; the formula matches |
+| s11_slope_check | s22 | 2.00 = 1/cos 60°; the pole at infinity |
+| s12_rhumb_straight | s23 | **takeaway**; same slant → straight |
+| s13_area_stretch | s24 | × 4 at 60° N; 24 at Svalbard; Greenland vs Africa |
+| s14_equal_earth | s25 | two maps apart; anomaly; 31°; *How weather maps are made* |
+| s15_why_many | s26 | three good reasons |
+| s16_globe_to_pole | s27 | globe → above the pole → polar stereographic |
+| s17_where_is_what | s28 | the place tour |
+| s18_vortex | s29 | 10 hPa, trails, labels fade |
+| s19_vortex_components | s30 | i = θ̂, j = −r̂ |
+| s20_origin_wheel | s31 | the flat ring, two origins |
+| s21_origin_vortex | s32 | 1.9 vs 0.4; *Waves on the jet*, *The polar vortex* |
+| s22_recap | — | "To sum up"; "Next in this series … the gradient." |
+| s23_end | s34 | maths end card |
+
+**The plan of record below (written before the amendment) covered both parts as one "Part 5";** its derivations D45–D56 and physics
+sources still hold, split as: D45–D47 and D53 → Part 6; D48–D52, D54–D56 → Part 7.
+
+**Original (one-part) plan, for the record:**
 - **Starts:** title (the London–Los Angeles great circle on the globe, then the same route curving on Mercator).
   **Stops:** after the polar vortex in polar coordinates, recap, end card. The next movie is #6 *The gradient*.
 - **s00 sentence (draft):** "In this video, we'll learn routes and maps of our round Earth the easy way, and see how
@@ -666,10 +735,12 @@ with one gold tick between its two copies. The equatorial slice (top view) uses 
 | P1 → P2 | "In Part 2, we'll ask whether air going round at a steady speed is accelerating, and look at a hurricane in three dimensions." | r, θ, r̂, θ̂, components as dot products, Ian's 37 round and 12.5 in |
 | P2 → P3 | "In Part 3, we'll take these ideas to the biggest round shape of all: the Earth." | turning arrows, v θ̂ and −v²/r, r, θ, z, turned axes at a coast |
 | P3 → P4 | "In Part 4, we'll stand at a weather station, and see how its own east, north and up arrows turn as the air moves." | latitude, longitude, the position vector, a sin φ and a cos φ, δx and δy |
-| P4 → P5 | "In Part 5, we'll find the shortest way round the Earth, and see how to flatten it onto a map." | local arrows, how they turn, the metric terms, frames that move |
-| P5 → #6 | "Next in this series, we'll measure how fast the temperature changes across a map: the gradient." | (#6 opens with its own hook; its s22 recaps Part 3) |
+| P4 → P5 | (the #5d / #5e storyboards; amended 2026-11-05) | (the #5e storyboard) |
+| P5 → P6 | "In Part 6, we'll find the shortest way round the Earth: great circles, and rhumb lines." | arc rule, φ, λ, a, r̂, degree lengths; i, j, k; storm-relative winds (≤ 60 s) |
+| P6 → P7 | "In Part 7, we'll flatten the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight on the most famous map of all." | arc rule, a, degree lengths, scale factors, the great circle and the rhumb line (≤ 60 s) |
+| P7 → #6 | "Next in this series, we'll measure how fast the temperature changes across a map: the gradient." | (#6 opens with its own hook; its s22 recaps Part 3) |
 
-### 2h. Rules for all five parts
+### 2h. Rules for all seven parts (maths-skip guidance added 2026-11-05)
 - **House style binding** (HOUSE_STYLE.md): no headings but the s00 title; keywords only; no boxes; no equation labels
   or book references; a data-source line and a colour bar on every data frame; 44-px floor; caption band empty; picture
   from frame 0; links never cross; the maths-tutorial end card word for word (decision 2).
@@ -683,6 +754,7 @@ with one gold tick between its two copies. The equatorial slice (top view) uses 
 - **Swappable data scenes:** every Ian scene names its product, time and centre in one parameter block; the Bay storm
   scenes take the same block; if the data report rules Ian out, P1 s19–s23 and P2 s14–s16, s21–s25 switch to the Bay storm
   with the same structure (the GEE slider then shows the Sundarbans coast).
+- **Maths-skip guidance** (user, 2026-11-05, series-wide): before each step-by-step derivation block one friendly spoken line + an on-screen chip 'every step · optional · skip to mm:ss' (filled after the final TTS); after it one line "If you skipped, here's what to keep: …"; chapter marks (time, title) listed in each storyboard for the manifest.
 - **Later-movie pointers** (§3a): spoken and written as a keyword ("more: *Vorticity in plain words*"), ≤ 1 min each.
 - **Reuse:** house kit (`type`, `draw`, `tex`, `notes`, `extras`, `title`, `icons`, `frame`, `stack3d`, `wind`, `three3d`,
   `cam`, `bbox`, `col3d`); `kit_co` from build 1; the half-Earth slice and Globe3D from `kit_cp`; the weather-basics
@@ -704,20 +776,20 @@ with one gold tick between its two copies. The equatorial slice (top view) uses 
 | Inundation mapping from Sentinel-1 | P2 s25 | the slider + one sentence | F32 *…floods II* (84) |
 | Coastal upwelling (Ekman) | P2 s24 | one clause | R06 *Friction and Ekman layers* (113) |
 | Centrifugal vs centripetal | P2 s10–s11 | one sentence | R01 *Circular motion* (108) |
-| The gradient ∇T on the sphere | P5 s05 | ≤ 1 min | **#6 *The gradient* (12)**, s22–s23 (see §3b) |
-| Pressure as a vertical coordinate | P5 s05 | one clause | M07 (17) |
+| The gradient ∇T on the sphere | #5g P7 s06 | ≤ 1 min | **#6 *The gradient* (14)**, s22–s23 (see §3b) |
+| Pressure as a vertical coordinate | #5g P7 s06 | one clause | M07 (19) |
 | Metric terms in the momentum equation | P4 s14 | derived here; their use ≤ 20 s | R04 *From F = ma to the equation of motion* (111) |
 | Coriolis and centrifugal in a turning frame | P4 s17 | ≤ 20 s (back-pointer) | #3 (done, 4), R02 (109) |
 | The material derivative, advection of momentum | P4 s17 | ≤ 30 s | T04 (100), T06 (102) |
 | Storm-relative helicity | P4 s19 | one clause | U13 *Severe storms* (36) |
 | Pressure tendency maps, isallobars | P4 s22 | one clause | M25 *Reading maps over time I* (54) |
 | Tensors | P1 s18 | ≤ 15 s | T08 *Tensors made easy* (104) |
-| Chart projections (Lambert conformal), Tissot's indicatrix | P5 s18, s20 | names only | M02 (42) |
-| Polar vortex, sudden warmings | P5 s22–s24 | ≤ 1 min | U09 (32), G03 (139) |
-| Reading weather maps | P5 s18 | one clause | M05 onwards (43–56) |
+| Chart projections (Lambert conformal), Tissot's indicatrix | #5g P7 s14, s16 | names only | M02 (44) |
+| Polar vortex, sudden warmings | #5g P7 s18–s21 | ≤ 1 min | U09 (34), G03 (141) |
+| Reading weather maps | #5g P7 s14 | one clause | M05 onwards (45–58) |
 | **Owned here (explained in full, no later owner):** slopes of sine and cosine (D12), the product rule (D15), adding up = integration (D31), Archimedes' band (D31), natural log as a name (D50), the 90° turn rule (D02), direction cosines (D07–D08), colatitude (D26), great-circle distance (D45), Mercator (D49–D50) | | full | — |
 
-### 3b. What #6 *The gradient* must change (it is **paused**: no render until all five parts are final)
+### 3b. What #6 *The gradient* must change (it is **paused**: no render until all seven parts are final)
 1. **s22_sphere → a full derivation of ∇T on the sphere.** Goal first, then: (1) the eastward slope is ΔT/Δx over a step
    east; (2) Part 3: Δx = a cos φ Δλ; (3) so ΔT/Δx = (1/(a cos φ)) ΔT/Δλ; (4) shrink the step with φ and the height held
    fixed: ∂T/∂x = (1/(a cos φ)) ∂T/∂λ ("partial by partial λ" said and defined); (5) the same northward with Δy = a Δφ;
@@ -748,7 +820,7 @@ Reference rates (build 1, this machine: RTX A1000, one Remotion/Chrome job at a 
 | 2 storm | 25.6 min | ≈ 18 min | 12 / 13 / 3 = 28 | 5: Ian stack v2 + r–z curtain, Amphan ring, Amphan stack/curtain, GEE before/after + mask, coast points [mostly pending] | ≈ 1.5–2 days (RZCurtain, BeforeAfterSlider, new fetcher) | 9 · 40 · 38 min | 2–3 | ≈ 4–5 h |
 | 3 sphere | 25.4 min | ≈ 13 min | 6 / 18 / 1 = 25 | 2: prime-meridian crossings (Natural Earth), Khulna position + ERA5 box at Khulna | ≈ 1.5 days (TwoViewSlice, slice reuse) | 9 · 40 · 38 min | 2–3 | ≈ 3–4 h |
 | 4 frames | 25.6 min | ≈ 14 min | 9 / 12 / 4 = 25 | 1: Khulna ENU + Plymouth ∇p along U (from data on disk) | ≈ 1 day | 9 · 35 · 38 min | 2–3 | ≈ 3–4 h |
-| 5 maps | 23.2 min | ≈ 11 min | 5 / 18 / 4 = 27 | 2: polar-map labels + lat/lon, 10-hPa wind trails [pending] | ≈ 1.5 days (GlobeToPolarMorph) | 8 · 35 · 35 min | 2–3 | ≈ 3–4 h |
+| 5 maps → #5f routes + #5g maps (amended: 17.0 + 32.5 min measured) | 23.2 min | ≈ 11 min | 5 / 18 / 4 = 27 | 2: polar-map labels + lat/lon, 10-hPa wind trails [pending] | ≈ 1.5 days (GlobeToPolarMorph) | 8 · 35 · 35 min | 2–3 | ≈ 3–4 h |
 | **Total** | **≈ 125 min** | **≈ 78 min** | **37 / 75 / 19 = 131** | **12** | **≈ 7 days** | | | **≈ 16–21 h** |
 | #6 revision | +3–4 min | ≈ 4 min | 2 rewritten | 0 | ≈ 0.5 day | splice + K6 + 48-min render | 1–2 | ≈ 2–3 h |
 

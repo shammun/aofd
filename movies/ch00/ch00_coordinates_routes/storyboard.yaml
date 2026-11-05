@@ -1,0 +1,1222 @@
+# ch00_coordinates_routes storyboard v1 (movie-director, 2026-11-05). split of Part 5 v1 (commit 116f09c), 2026-11-05. S<k> = sentence k of the
+# scene (1-based); AT(k, 'words') a phrase inside sentence k. House style movies/HOUSE_STYLE.md binding (no headings except s00,
+# keywords only, no boxes, no references or badges, 44-px floor, caption band empty, source line + colour bar on data frames,
+# source lines below images, no text over images or text). Equation provenance (vallis_eq, page_png) is for QA only and never
+# drawn. calc_rows = every other LaTeX line drawn in the scene (CalcStack rows). Times MEASURED (tools/tts.py dry run,
+# af_bella x 1.0). Data report reports/data/ch00_coordinates_research.md read and followed (polar map + trails).
+id: ch00_coordinates_routes
+title: 'Coordinates, Part 6 — Routes: great circles and rhumb lines'
+title_card:
+  line1: Coordinates · Part 6
+  line2: Routes
+  subtitle: great circles and rhumb lines
+  spoken: short (s00 sentence)
+version: 1
+concepts:
+- curvilinear coordinates (curved coordinate lines, unit vectors that change with place, scale factors); scale factors r, a, a cos phi (Vallis §2.2.2, text
+  before (2.27))
+- 'scale factors r, a, a cos phi (Vallis §2.2.2, text before (2.27)); the gradient itself is left to Part 7 and #6'
+- 'great circles: the plane through both places and the centre; sigma = the angle at the centre; d = a sigma; cos sigma = r1-hat . r2-hat'
+- 'great-circle route shape: initial bearing, vertex latitude, arrival bearing'
+- 'rhumb lines: constant bearing, length, why navigators used them (steering, short trips, straight on Mercator, legs)'
+target_duration_s: 1017.375
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: 'Chapter 0 series (plan v6, amended 2026-11-05: seven coordinates parts)'
+  position: 12
+  plan_id: '#5f'
+  previous: ch00_coordinates_moving (#5e, pos 11)
+  next: ch00_coordinates_maps (#5g, pos 13)
+  split_plan: movies/ch00/ch00_coordinates/split_plan.md §2f (seven parts, 2026-11-05)
+  split_from: 'ch00_coordinates_maps v1 (commit 116f09c, 35 scenes) s00-s14 (+ s03-s04; the gradient pointer moved to #5g)'
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py)'
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    style: chart-voyage (NEW style to add; each coordinates part needs its own score, HOUSE_STYLE §8)
+    spec: D Dorian, 6/8 at 66 bpm, a slow rocking like a ship's swell; a soft marimba figure that rises a fifth and settles (a course being laid), over
+      a warm low string pad (Dm - G - Am - C, 8 s each); a faint bell on the downbeat every fourth bar (a ship's bell); no drums; reverb long, wet 0.30;
+      low-pass 6 kHz
+    seed: 29
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail on the silent end-card hold
+    runner_up: ice-polar, seed 29 (only if no other coordinates part uses it)
+    distinct_from: compass-orbit (Part 1), the other coordinates parts, maths-calm, rotation-turning, index-lattice, tangent-glide, air-flowing, storm-tense
+  effects_candidates: []
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_routes/dryrun2_spliced
+  audio_s: 1017.375
+  with_end_hold_s: 1019.875
+  cues: 255
+  sentences: 140
+  words: 2506
+  beats: 22
+  words_per_minute_overall: 147.8
+  words_per_minute_speaking: 160.5
+  warnings: []
+conventions:
+  latitude and longitude: phi (latitude, north positive), lambda (longitude, east positive; west negative, e.g. London -0.13 deg, Los Angeles -118.24 deg)
+  earth radius: a = 6371 km (easy 6400); spoken "the Earth's radius" (Kokoro reads a lone "a" as the article); once "the letter a" (s02, lexicon proposal)
+  position arrow: r-hat = (cos phi cos lambda, cos phi sin lambda, sin phi); x to 0 deg on the equator, y to 90 E, z to the North Pole (Part 3)
+  bearing: compass bearing from north, clockwise as seen from above (Part 1); true bearings (magnetic variation ignored)
+  delta vs d: Delta for a finite step, d for the tiny limit (Part 3, Should 7)
+  polar map: 'polar stereographic, lat_0 = 90, lat_ts = 60, lon_0 = 0: 0 deg at the bottom, 90 E right, 180 top, 90 W left; east = anticlockwise as seen
+    from above the North Pole'
+  map polar components: i = theta-hat, j = -r-hat; u_theta = u, u_r = -v
+  vortex ratio: rms(u_r) / mean(u_theta) on a 2000-km ring (said "typically" for the rms)
+colour_contract: great circle gold; rhumb line slate; London's r-hat teal, Los Angeles' r-hat orange; sigma arc gold; true lengths teal; map-drawn lengths
+  teal with a gold stretch bracket; unit vectors orange (i, j, r-hat, theta-hat); in/out (radial) rose with a '-' glyph for in; round (tangential) teal;
+  height field sequential perceptual (cmocean deep reversed), anomaly diverging blue-white-red centred on 0; wind trails warm white; gold for pointers,
+  links, 'same' ticks.
+cross_part:
+  relies_on:
+  - 'Part 1 (#5a): polar coordinates (r, theta), the arc rule s = r theta (radians), r-hat, theta-hat, components as dot products u_r = u . r-hat, u_theta
+    = u . theta-hat, compass bearing from north clockwise as seen from above, the 90-deg turn rule, the hurricane ring (spin about 37 m/s, anticlockwise
+    in the NH), "air parcel"'
+  - 'Part 2 (#5b): cylindrical coordinates round a hurricane (named in s03 only)'
+  - 'Part 3 (#5c): latitude phi, longitude lambda, Brest 48.4 N 4.5 W (48.39, -4.49), a = 6371 km (6400), r-hat = (cos phi cos lambda, cos phi sin lambda,
+    sin phi), the parallel''s radius a cos phi (Brest 4230 km), Delta y = a Delta phi (111.2 km per degree), Delta x = a cos phi Delta lambda (Brest 73.8
+    km per degree), Longyearbyen 78.22 N 15.65 E (1/cos = 4.9), adding up = integration, Delta vs d'
+  - 'Part 4 (#5d): i, j, k at a station (recap only); Part 5 (#5e, moving frames): storm-relative winds (recap only)'
+  - '0.1 / 0.1b dot product movie: a . b = |a||b| cos angle, the shadow'
+  - '#4 derivatives: the centred difference, the limit'
+  numbers_shared:
+    a_km: 6371
+    brest:
+    - 48.39
+    - -4.49
+    cos_brest: 0.664
+    a_cos_brest_km: 4230
+    deg_north_km: 111.2
+    deg_east_brest_km: 73.8
+    longyearbyen:
+    - 78.22
+    - 15.65
+    k_longyearbyen: 4.9
+    london:
+    - 51.51
+    - -0.13
+    los_angeles:
+    - 34.05
+    - -118.24
+  owned_here:
+  - curvilinear coordinates and scale factors (named, with numbers)
+  - great-circle distance (D45)
+  - why the great circle is shortest (picture, D46)
+  - rhumb line and why navigators used it (D47)
+  teaser_in: 'Part 5 (#5e) ends: "In Part 6, we''ll find the shortest way round the Earth: great circles, and rhumb lines."'
+  teaser_out: 'this part ends: "In Part 7, we''ll flatten the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight
+    on the most famous map of all."'
+  for_6_the_gradient: 'Part 6 does not name The gradient; Part 7 (#5g) carries the gradient pointer and names #6 as next'
+data_block:
+  status: no weather data in this part (globe imagery and vector data only)
+  imagery:
+    globe: BMNG 2004 (NASA Blue Marble Next Generation)
+    vectors: Natural Earth 10 m / 50 m (public domain)
+    source_line: 'Image: NASA Blue Marble NG · Natural Earth'
+check_rows:
+  note: CHECK rows DM04, DM07, DM09-DM14 in the routes builder (shared _coords_common.py)
+  values:
+    DM09: r1 (0.6224, -0.0014, 0.7827), r2 (-0.3920, -0.7299, 0.5599)
+    DM10: dot 0.1953, sigma 78.738 deg = 1.37424 rad
+    DM11: d 8755.3 km
+    DM12: bearing 311.8 deg, vertex 62.37 N 48.96 W, arrival 214.0 deg
+    DM13: rhumb 9732.8 km, 258.49 deg, x 1.1116, +977.5 km
+    DM14: Brest-Lisbon 1138.12 / 1138.27 km
+guards:
+  review_1:
+  - 'Must 7 (''Los Angeles'' fully inside the frame: right of and below its dot, >= 40 px from the edge)'
+  - Must 8 (CalcStack x >= 1100, never on the globe limb)
+  - 'Should 8 (s03: no empty bottom half)'
+  - Should 14 (end card 24-px gap)
+  - Should 18 (an opening keyword or picture from frame 0 in every scene)
+  fix_loop_1:
+  - tissot_ellipses(..., radius_km=500, a=EARTH_RADIUS) then divide by a (the radius is in metres; a = 1 traced circles round the antipode)
+  - GeoMap body in an overflow-hidden div; SourceBelow, never a bare SourceLine
+  - 'R3F: no lower-case SVG tags in a three tree'
+  - 'halves: picture from frame 0; an opening keyword in the column slot'
+  - keyword swaps >= 8 frames apart; cameras <= 90 deg/s eased; one colour bar per picture, beside it; a source line under every data picture
+  - the builder checks raw TeX, edge clipping, label-on-KaTeX, link crossings, text over a limb, an axis through a word on its own stills
+  - assets staged into movies/public before any bundle; one Remotion/Chrome job at a time; TEMP/TMP on G: null
+honesty_notes:
+- 'City centres, not airports (London 51.51 N 0.13 W; Los Angeles 34.05 N 118.24 W): 8755 km. Build 1''s airports gave 8761 km; flights also add climb,
+  descent and wind routing, so "nearly ten hours" is said "before any help or hindrance from the winds".'
+- s06 "the biggest circle bends the least" and the taut string are a picture, not a proof (said as a picture).
+- 's09 "almost a quarter of the way round": 78.7 deg of 360 deg is 22 % of a full turn.'
+- 's13: compass bearings are true bearings; magnetic variation is ignored (not said; recorded here). "Before satellites and computers" refers to open-ocean
+  navigation by compass and chart.'
+- Exaggerations (title morph, magnified wedges and steps, the morph blends, time-compressed flights and trails) are listed per scene and in the manifest,
+  not badged (HOUSE_STYLE §5).
+quiz_hook: 'A plane flies from 60 deg N, 0 deg E to 60 deg N, 90 deg E. Which is shorter, the rhumb line (due east along the parallel) or the great circle,
+  and which way does the great circle leave? (The great circle: about 4605 km against 5004 km; it leaves heading north-east, at about 49 deg, and bulges
+  towards the pole, up to 67.8 deg N at 45 deg E.)'
+headings_exception: s00_title only
+maths_skip:
+  rule: 'series-wide maths-skip guidance (user, 2026-11-05): before each step-by-step derivation block one friendly spoken line + an on-screen chip ''every
+    step · optional · skip to mm:ss'' (mm:ss = the start of the takeaway scene, filled after the final TTS); after the block one spoken line ''If you skipped,
+    here''s what to keep: …''. Encouraging, never apologetic.'
+  house_style_note: the chip is the one boxed element (HOUSE_STYLE §5 says no chips); the user's new rule wins; HOUSE_STYLE §12 needs a log line (orchestrator)
+  blocks:
+  - chip_scene: s08_position_arrows
+    block:
+    - s08_position_arrows
+    - s10_distance
+    chip_on: AT(1, 'skip ahead') in s08_position_arrows
+    skip_to_scene: s11_route_shape
+    skip_to_t: 712.42
+    skip_to_mmss: '11:52 (provisional: dry run; refill after the final TTS)'
+    keep_line: S1 of s11_route_shape
+chapter_marks:
+- t: 0.3
+  mmss: 0:00
+  title: 'Routes: the question'
+  scene: s00_title
+- t: 34.62
+  mmss: 0:34
+  title: What we use from Parts 1, 3, 4 and 5
+  scene: s02_part5_recap
+- t: 90.92
+  mmss: '1:30'
+  title: Curvilinear coordinates and scale factors
+  scene: s03_curvilinear
+- t: 245.32
+  mmss: '4:05'
+  title: 'The shortest way: great circles'
+  scene: s05_shortest_way
+- t: 355.95
+  mmss: '5:55'
+  title: The angle sigma and d = a sigma
+  scene: s07_sigma
+- t: 418.88
+  mmss: '6:58'
+  title: 'Every step: working out sigma (optional maths)'
+  scene: s08_position_arrows
+- t: 712.42
+  mmss: '11:52'
+  title: Where the route goes
+  scene: s11_route_shape
+- t: 774.67
+  mmss: '12:54'
+  title: The rhumb line
+  scene: s12_rhumb
+- t: 837.75
+  mmss: '13:57'
+  title: Why sailors liked the rhumb line
+  scene: s13_why_rhumb
+- t: 923.05
+  mmss: '15:23'
+  title: To sum up
+  scene: s14_recap
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 10.85
+  sentence_times:
+  - - 0.3
+    - 10.05
+  beat: opening title (HOUSE_STYLE §3)
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Coordinates · Part 6'' (line 1, TitleGradient teal -> gold, weight 800; letters
+    rise 24 px over 8 frames, 2-frame stagger), then ''Routes'' (line 2, warm white, 96 px, pulses x1.06 on AT(1, ''the easy way'')), then the subtitle
+    ''great circles and rhumb lines'' (68 px, ''great circles'' gold, ''rhumb lines'' slate), all >= 50 px clear of the animation. Right x 1130-1840, y
+    180-636: Part A (frame 0 -> AT(1, ''meteorology and aviation'')): a BMNG globe turns; the London-Los Angeles great circle draws in gold through the
+    slicing sheet. Part B (12-frame cross-fade on AT(1, ''shortest flights'')): a plane glyph flies the gold arc while a slate rhumb line draws beside it,
+    with two compass dials (one sweeping, one fixed). Source line ''Image: NASA Blue Marble NG'' below the right column (y <= 860). Poster = frame 200.'
+  voiceover: In this video, we'll learn about routes across our round Earth the easy way, and see how meteorology and aviation use them to plan the shortest
+    flights.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.great_circle_points; fluidpy.geo.sphere.rhumb_line; fluidpy.geo.sphere.initial_bearing
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_great_circle_points_V1_coplanar_equal_steps_V5_pyproj_npts, ::test_rhumb_line_V1_limits_meridian_equator_parallel
+  exaggeration:
+  - title animation time compressed (route drawn in about 3 s)
+  kind: title
+  data: BMNG 2004
+  tool: house title kit + three.js globe (kit_co/globe.tsx) + Remotion SVG panel
+  runner_up: SVG-only orthographic globe (d3-geo)
+  why: the movie's question (the shortest route, and the sailors' route) on frame 0
+  related: []
+  feedback:
+  - U-CO-101
+  layout: Title frame; the globe and panels stay inside x 1130-1840; source line below them, never on them.
+- id: s01_hook
+  t:
+  - 10.85
+  - 34.625
+  sentence_times:
+  - - 10.85
+    - 18.6
+  - - 18.95
+    - 22.325
+  - - 22.675
+    - 27.975
+  - - 28.325
+    - 33.825
+  beat: hook question
+  visual: 'Full width from frame 0. Left x 80-1000: the BMNG globe (>= 760 px across, unzoomed, no edge fade) turned so that London and Los Angeles are
+    both in view, labels ''London'' and ''Los Angeles'' (54 px) right of and below their dots, fully inside the canvas (Must 7, U-CO-065). Right x 1060-1840:
+    a Mercator world map (NE 50 m land) with the same two cities and the dashed slate ''straight-looking'' WSW line. AT(1, ''shortest way'') the gold great
+    circle pulses on the globe. AT(1, ''flat map seems to point'') the dashed line pulses on the map. AT(2, ''sixth of seven parts'') seven small code-drawn
+    thumbnails in a row under both pictures (grid, storm cylinder, globe, station arrows, moving storm, globe with a route, world map; the sixth lit, the
+    others at 35 %); keyword ''routes'' under the sixth. AT(4, ''sailors'') the slate rhumb line draws on the globe.'
+  voiceover: What's the shortest way from London to Los Angeles, and why doesn't a plane fly the way a flat map seems to point? This is the sixth of seven
+    parts on coordinates. Let's find the shortest route over our round Earth, and see how its length is measured. Then let's meet the route that sailors
+    used for centuries, and see why they liked it.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.great_circle_points; fluidpy.geo.mapproj.forward('mercator')
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+      n: 181
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_great_circle_points_V1_coplanar_equal_steps_V5_pyproj_npts; ../Fluid Dynamics/tests/geo/test_mapproj.py::test_forward_V5_vs_pyproj
+  exaggeration: []
+  kind: 3-D globe + flat map
+  data: BMNG 2004; Natural Earth 50 m land
+  tool: three.js globe (kit_co/globe.tsx) + Remotion SVG (d3-geo Mercator)
+  runner_up: SVG orthographic globe
+  why: the core pictures (route on the globe, the same route curved on a map) on the first frame
+  related: []
+  feedback:
+  - U-CO-065
+  - U-CO-101
+  layout: 'Globe and map >= 60 px apart; ''Image: NASA Blue Marble NG · Natural Earth'' below each picture (y <= 860); thumbnails are drawings, not cards.
+    Los Angeles label right of and below its dot, >= 40 px inside the canvas edge.'
+- id: s02_part5_recap
+  t:
+  - 34.625
+  - 90.925
+  sentence_times:
+  - - 34.625
+    - 37.625
+  - - 37.975
+    - 47.4
+  - - 47.75
+    - 60.325
+  - - 60.675
+    - 68.425
+  - - 68.775
+    - 73.7
+  - - 74.05
+    - 78.175
+  - - 78.525
+    - 84.675
+  - - 85.025
+    - 90.625
+  beat: recap of Parts 1, 3 and 4 (<= 60 s), only the tools this part uses
+  visual: 'One beat per sentence, mini pictures (code-drawn, no headings): AT(2, ''polar coordinates'') the Part 1 polar grid with the arc ''s = r θ'' highlighted
+    (gold arc, ''r'' and ''θ'' tags); AT(3, ''latitude, phi'') a small globe with Brest''s φ and λ arcs; AT(3, ''the letter a'') the radius drawn from the
+    centre with ''a ≈ 6400 km (6371 km)''; AT(4, ''position arrow'') r̂ from the centre with its three parts in KaTeX; AT(5, ''One degree of latitude'')
+    ''1° north ≈ 111.2 km'' beside a meridian step; AT(6, ''One degree of longitude'') ''1° east = 111.2 km × cos φ'' beside a parallel step that shrinks
+    as the dot moves north; AT(7, ''In Part 4'') a station with i, j, k (orange) and a tiny moving-frame storm icon.'
+  voiceover: 'Here''s what we''ll use from the earlier parts. In Part 1, we met polar coordinates and the arc rule: the distance along a circle is its radius
+    times the angle, in radians. In Part 3, we gave each place a latitude, phi, and a longitude, lambda, and we wrote the Earth''s radius as the letter
+    a: about six thousand three hundred and seventy one kilometres. A place''s position arrow of length one is cosine phi cosine lambda, cosine phi sine
+    lambda, sine phi. One degree of latitude is about a hundred and eleven kilometres. One degree of longitude is that times cosine phi. In Part 4, a weather
+    station''s east, north and up arrows turned as the air moved. And in Part 5, we saw a moving storm''s winds from a frame that moves with it.'
+  on_screen_eq:
+    latex: \hat{\mathbf r}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)
+    vallis_eq: 'none as written: unit position vector, Vallis §2.2.2 Fig. 2.3 geometry (position r(λ, ϑ, r)); recalled from Part 3 (#5c D23-D24 with a =
+      1)'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - s=r\,\theta
+  - a\approx 6400\ \text{km}\ (6371\ \text{km})
+  - \Delta y=a\,\Delta\varphi\approx 111.2\ \text{km per }1^\circ
+  - \Delta x=a\cos\varphi\,\Delta\lambda
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector; fluidpy.geo.sphere.arc_lengths; fluidpy.geo.constants.EARTH_RADIUS
+    params:
+      lat_brest: 48.39
+      lon_brest: -4.49
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm, ::test_arc_lengths_V1_degree_lengths_RM01_RM02
+  exaggeration: []
+  kind: recap diagrams
+  data: none (code-drawn)
+  tool: Remotion SVG
+  runner_up: —
+  why: Part 5 uses the arc rule, r̂, Δx and Δy, and the letter a; recall them, never re-teach (split plan §2g)
+  related:
+  - movie: '#5a'
+    slug: ch00_coordinates_flat
+    covers: polar coordinates
+    arc rule: null
+    r-hat: null
+    theta-hat: null
+  - movie: '#5c'
+    slug: ch00_coordinates_sphere
+    covers: latitude
+    longitude: null
+    position vector: null
+    delta x and delta y: null
+  - movie: '#5d'
+    slug: ch00_coordinates_frames
+    covers: i, j, k; frames that move
+  feedback:
+  - U-CO-101
+  layout: Pictures left, keywords and the KaTeX rows right; one item per sentence, the previous one dimmed to 60 %.
+- id: s03_curvilinear
+  t:
+  - 90.925
+  - 145.675
+  sentence_times:
+  - - 90.925
+    - 102.65
+  - - 103.0
+    - 108.825
+  - - 109.175
+    - 111.3
+  - - 111.65
+    - 119.25
+  - - 119.6
+    - 129.5
+  - - 129.85
+    - 134.4
+  - - 134.75
+    - 140.375
+  - - 140.725
+    - 144.875
+  beat: 'building block: curvilinear coordinates (the three shared features)'
+  visual: 'Three pictures across the top from frame 0 (centred at y 300, x1.15, Should 8): a radar''s polar grid, the Part 2 hurricane cylinder, a globe
+    graticule. AT(2, ''curvilinear coordinates'') keyword ''curvilinear'' (54 px) below. AT(4, ''coordinate lines are curves'') the rings, the cylinder''s
+    circles and the meridians/parallels light gold in turn. AT(5, ''unit vectors change'') r̂, θ̂ (orange) at three points round the radar grid and i, j
+    at three points on the globe, visibly pointing different ways. AT(7, ''one degree can mean'') two 1° wedges on the globe, one near the equator and one
+    near the pole, their ground arcs in teal, with ''≈ 111 km'' and ''≈ 23 km'' under them (keywords below the pictures, y 560-700).'
+  voiceover: 'Let''s start by putting our coordinate systems side by side: polar coordinates on a flat map, cylindrical coordinates round a hurricane, and
+    latitude and longitude on the Earth. They''re all called curvilinear coordinates, which means coordinates whose lines can curve. They share three features.
+    First, the coordinate lines are curves: the rings round a radar, the circles of latitude, and the meridians. Second, the unit vectors change from place
+    to place: r hat and theta hat turn as we go round, and so do the east and north arrows on the globe. Third, a change in a coordinate isn''t a distance
+    by itself. Turning by one degree can mean a short walk or a long one, depending on where you are. That third feature needs a name, so let''s look at
+    it closely.'
+  on_screen_eq: null
+  calc_rows: []
+  physics_source:
+    fn: fluidpy.core.curvilinear.scale_factors; fluidpy.geo.sphere.parallel_points, meridian_points, arc_lengths
+    params:
+      systems:
+      - polar
+      - cylindrical
+      - spherical
+      wedge_lats:
+      - 0
+      - 78.22
+    test: ../Fluid Dynamics/tests/test_ch04.py::test_curvilinear_V1_operators_match_cartesian; ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat,
+      ::test_arc_lengths_V1_degree_lengths_RM01_RM02
+  exaggeration:
+  - wedges drawn with 1-degree arcs magnified x10 for visibility
+  kind: diagrams
+  data: none (code-drawn)
+  tool: Remotion SVG + small three.js globe
+  runner_up: —
+  why: name the family before the applications
+  related: []
+  kept_from: build-1 s27 S0-S6 (rewritten)
+  feedback:
+  - U-CO-054
+  layout: Should 8 kept (no empty bottom half); keywords below the pictures with >= 40 px gap; nothing over the pictures.
+- id: s04_scale_factors
+  t:
+  - 145.675
+  - 245.325
+  sentence_times:
+  - - 145.675
+    - 150.15
+  - - 150.5
+    - 158.55
+  - - 158.9
+    - 162.975
+  - - 163.325
+    - 169.525
+  - - 169.875
+    - 172.825
+  - - 173.175
+    - 182.675
+  - - 183.025
+    - 191.275
+  - - 191.625
+    - 197.2
+  - - 197.55
+    - 202.325
+  - - 202.675
+    - 207.45
+  - - 207.8
+    - 219.925
+  - - 221.425
+    - 226.675
+  - - 227.025
+    - 236.45
+  - - 237.95
+    - 244.525
+  beat: 'building block: scale factor = metres walked per unit of the coordinate (D53)'
+  visual: 'Left x 80-1000 from frame 0: Part 1''s ring of radius r with a small turn Δθ, the arc drawn teal and tagged ''r Δθ''. AT(4, ''scale factor'')
+    keyword ''scale factor = metres per unit''. AT(6, ''stepping north'') the picture cross-fades to a small globe sliced along Brest''s meridian: the north
+    step a Δφ in teal on the meridian circle (radius a). AT(7, ''Stepping east'') the parallel through Brest (radius a cos φ drawn from the axis, gold link)
+    and the east step a cos φ Δλ in teal. Right x 1060-1840: a three-row table without boxes (θ: r; φ: a; λ: a cos φ), each row on its words. Then the Brest
+    CalcStack with its inputs row ''φ = 48.4°, a = 6371 km, 1° = 0.01745 rad'' written first; each number links (gold) to its arc on the globe.'
+  voiceover: How far do we walk when one coordinate changes by a small step? In Part 1, on a ring of radius r, turning by a small angle delta theta walks
+    r times delta theta. So for theta, the distance walked is r times the step. That multiplier, the metres walked per unit of the coordinate, is called
+    a scale factor. For theta, the scale factor is r. On the Earth, stepping north by delta phi walks the Earth's radius times delta phi, so the scale factor
+    of latitude is the Earth's radius. Stepping east by delta lambda walks round a parallel, a circle whose radius is the Earth's radius times cosine phi.
+    So the scale factor of longitude is the Earth's radius times cosine phi. Let's put numbers on it at Brest, at forty eight point four degrees north.
+    One degree is zero point zero one seven four five radians. So one degree north walks six thousand three hundred and seventy one kilometres times zero
+    point zero one seven four five, about a hundred and eleven point two kilometres. [beat] The cosine of forty eight point four degrees is zero point six
+    six four. So one degree east walks a hundred and eleven point two times zero point six six four, only about seventy three point eight kilometres. [beat]
+    The same one-degree step gives two different distances, and the scale factors keep track of that.
+  on_screen_eq:
+    latex: h_\theta=r,\qquad h_\varphi=a,\qquad h_\lambda=a\cos\varphi
+    vallis_eq: 'text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr) with r = a; ϑ shown as φ (latitude)'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - \varphi=48.4^\circ,\quad a=6371\ \text{km},\quad 1^\circ=0.01745\ \text{rad}
+  - \Delta y=6371\times0.01745\approx 111.2\ \text{km}
+  - \cos 48.4^\circ\approx 0.664
+  - \Delta x=111.2\times0.664\approx 73.8\ \text{km}
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths; fluidpy.core.curvilinear.scale_factors('spherical')
+    params:
+      lat: 48.39
+      dlat: 1.0
+      dlon: 1.0
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector; CHECK
+      DM04 (111.19 km, 73.84 km; shared _coords_common.py with Part 3)
+  exaggeration:
+  - 1-degree steps magnified on the globe for visibility
+  kind: diagram + 3-D slice + calculation
+  data: none (BMNG texture on the globe)
+  tool: three.js half-Earth slice (kit_cp, as in Part 3) + Remotion SVG
+  runner_up: SVG side view only
+  why: the scale factor is the bridge from coordinates to kilometres, used by every map below
+  related: []
+  feedback:
+  - U-CO-054
+  layout: CalcStack x >= 1100 (Must 8 rule), <= 3 rows visible, older rows at 60 %; links never cross the rows.
+- id: s05_shortest_way
+  t:
+  - 245.325
+  - 296.6
+  sentence_times:
+  - - 245.325
+    - 252.875
+  - - 253.225
+    - 258.275
+  - - 258.625
+    - 262.95
+  - - 263.3
+    - 268.75
+  - - 269.1
+    - 273.0
+  - - 273.35
+    - 278.875
+  - - 279.225
+    - 286.05
+  - - 286.4
+    - 295.8
+  beat: 'goal first: the shortest route, and what a great circle is'
+  visual: 'Left from frame 0: the BMNG globe (unzoomed, >= 760 px). AT(2, ''fuel'') two keywords ''distance · fuel · time'' in the column. AT(3, ''straight
+    line'') a small flat sheet with a ruler line beside the globe (right column, upper). AT(5, ''great circle'') a gold circle draws round the globe through
+    its centre (the centre marked through a cut-away), then AT(7, ''The equator'') the equator lights gold and AT(7, ''every meridian'') one meridian with
+    its partner (a full circle) lights gold; AT(8, ''not great circles'') the 60° N parallel lights slate with its centre on the axis above the Earth''s
+    centre (a short slate stub from the axis to the circle''s centre, tagged ''centre on the axis'').'
+  voiceover: 'Now let''s put coordinates to work on a question every airline asks: what''s the shortest way between two places? It matters, because a shorter
+    route burns less fuel and takes less time. On a flat sheet of paper, the shortest way is a straight line. But a plane can''t tunnel through the Earth,
+    so it has to follow the curved surface. On a sphere, the shortest way follows a great circle. A great circle is any circle on the sphere whose centre
+    is the centre of the Earth. The equator is one, and so is every meridian, together with its partner on the other side of the globe. The other circles
+    of latitude are not great circles: their centres sit on the Earth''s axis, above or below the Earth''s centre, so they''re smaller.'
+  on_screen_eq: null
+  calc_rows: []
+  physics_source:
+    fn: fluidpy.geo.sphere.parallel_points, meridian_points, great_circle_points
+    params:
+      parallel_lat: 60
+      meridian_lon: 0
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat, ::test_meridian_points_V1_half_great_circle
+  exaggeration: []
+  kind: 3-D globe
+  data: BMNG 2004
+  tool: three.js globe (house look, cross-product v5 56:35)
+  runner_up: —
+  why: the goal (shortest, cheapest flight) before the calculation (U-CO-067)
+  related: []
+  kept_from: build-1 s29 S0-S2 (rewritten)
+  feedback:
+  - U-CO-067
+  layout: Globe left, keywords right; no text on the globe except the short tag at the slate stub.
+- id: s06_great_circle
+  t:
+  - 296.6
+  - 355.95
+  sentence_times:
+  - - 296.6
+    - 300.7
+  - - 301.05
+    - 306.525
+  - - 306.875
+    - 312.725
+  - - 313.075
+    - 321.1
+  - - 321.45
+    - 328.175
+  - - 328.525
+    - 336.55
+  - - 336.9
+    - 338.9
+  - - 339.25
+    - 343.55
+  - - 343.9
+    - 349.35
+  - - 349.7
+    - 355.15
+  beat: 'D45 (1)-(3), D46: the slicing sheet through both cities and the centre; why the great circle is shortest'
+  visual: Globe from frame 0, turning so that London is centred and labelled within 1 s of AT(1, 'London'); on AT(1, 'Los Angeles') the camera eases (<=
+    90 °/s) until both cities and the whole route are centred; 'Los Angeles' right of and below its dot, fully inside the frame (U-CO-065, Must 7). AT(4,
+    'flat sheet slicing') a translucent disc (warm white, 25 %) through both cities and the Earth's centre cuts the globe; the globe's near half fades to
+    40 % so the centre dot shows; three gold dots (London, Los Angeles, centre) pulse on AT(5, 'three legs steady a stool') beside a tiny three-legged stool
+    glyph in the column. AT(6, 'traces a great circle') the cut line draws gold all round, the London-LA part thicker. AT(8, 'all the circles') three smaller
+    circles through both cities (slate, from tilted planes not through the centre) draw and visibly bend more; AT(9, 'biggest of them') they fade and the
+    gold one stays. AT(10, 'string pulled tight') a taut warm-white string snaps onto the gold arc.
+  voiceover: Let's find the great circle through London and Los Angeles. London is at fifty one and a half degrees north, almost on the prime meridian.
+    Los Angeles is at thirty four degrees north, and a hundred and eighteen degrees west. Picture a flat sheet slicing through the globe, so that it passes
+    through London, through Los Angeles, and through the Earth's centre. Three points that aren't in a line fix exactly one flat sheet, just as three legs
+    steady a stool. Where the sheet cuts the Earth's surface, it traces a great circle, and the part between the two cities is the great circle route. Why
+    is it the shortest? Think of all the circles on the globe that pass through both cities. The great circle is the biggest of them, so between the two
+    cities it bends the least. A string pulled tight between the two cities on a desk globe lies right along it.
+  on_screen_eq: null
+  calc_rows: []
+  physics_source:
+    fn: fluidpy.geo.sphere.great_circle_points; fluidpy.geo.sphere.unit_vector (plane normal r1 x r2); small circles via fluidpy.geo.sphere.destination_point
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+      small_circle_tilts_deg:
+      - 20
+      - 40
+      - 60
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_great_circle_points_V1_coplanar_equal_steps_V5_pyproj_npts, ::test_destination_point_V5_vs_pyproj_and_V1_round_trip;
+      CHECK DM07 (every small circle through both cities is longer between them than the great circle)
+  exaggeration:
+  - disc and string are drawing aids
+  kind: 3-D globe
+  data: BMNG 2004; Natural Earth 50 m coast
+  tool: three.js globe + translucent plane (build-1 s29 scene module)
+  runner_up: Cesium (no gain)
+  why: the plane through the centre is the whole idea of a great circle; 3-D shows it at once (U-CO-066)
+  related: []
+  kept_from: build-1 s29 S3-S6 (rewritten)
+  feedback:
+  - U-CO-065
+  - U-CO-066
+  - U-CO-067
+  layout: 'GlobeFrame whole globe, no edge fade; source ''Image: NASA Blue Marble NG'' below the globe; no text on the globe except the city labels.'
+- id: s07_sigma
+  t:
+  - 355.95
+  - 418.875
+  sentence_times:
+  - - 355.95
+    - 357.925
+  - - 358.275
+    - 362.425
+  - - 362.775
+    - 369.55
+  - - 369.9
+    - 375.1
+  - - 375.45
+    - 380.425
+  - - 380.775
+    - 385.15
+  - - 385.5
+    - 393.85
+  - - 394.2
+    - 399.975
+  - - 401.475
+    - 403.425
+  - - 403.775
+    - 414.5
+  - - 414.85
+    - 418.075
+  beat: 'D45 (1)-(3): what sigma is, and why d = a sigma (the arc rule on the slice)'
+  visual: 'The camera turns (eased, <= 60 °/s) until it looks straight at the slicing disc: the globe fades to a faint outline and the disc becomes a flat
+    circle of radius a (gold rim, ''a'' tag on a radius). AT(4, ''one arrow from the centre'') teal arrow to London; AT(4, ''another one'') orange arrow
+    to Los Angeles (KaTeX tags r̂₁, r̂₂ at the tips). AT(5, ''called sigma'') the angle at the centre draws as a gold arc with ''σ''. AT(6, ''arc of the
+    circle'') the arc between the tips lights gold, tagged ''d''. AT(7, ''arc rule from Part 1'') a small inset (right column) of Part 1''s ring with ''s
+    = r θ'' slides in beside, with gold ''same'' ticks: r ↔ a, θ ↔ σ, s ↔ d. AT(8, ''d equals'') the equation builds in the column. AT(10, ''Every degree'')
+    a 1° wedge at the centre with its 111.2-km arc ticks along the gold arc (78 ticks would be too many: every 10° tick labelled 10°, 20° …).'
+  voiceover: 'How long is this route? Let''s turn the globe, so that we look straight at the slicing sheet. Now it''s just a flat circle, with the Earth''s
+    centre in the middle, and its radius is the Earth''s radius. Draw one arrow from the centre to London, and another one to Los Angeles. The angle between
+    these two arrows, at the Earth''s centre, is called sigma. The route is the arc of the circle between the two arrow tips. And that''s exactly the picture
+    of the arc rule from Part 1: the distance along a circle is the radius times the angle. So the distance d equals the Earth''s radius times sigma, with
+    sigma in radians. [beat] Here''s a way to feel it. Every degree of sigma is one degree of a great circle, about a hundred and eleven point two kilometres
+    on the ground, just like a degree of latitude along a meridian. So once we know sigma, we know the distance.'
+  on_screen_eq:
+    latex: d=a\,\sigma\quad(\sigma\ \text{in radians})
+    vallis_eq: 'none in Vallis: arc length on a circle of radius a (the Part 1 arc rule s = r θ); fluidpy.geo.sphere.great_circle_distance'
+    page_png: null
+  calc_rows:
+  - s=r\,\theta\ \ \longrightarrow\ \ d=a\,\sigma
+  - 1^\circ\ \text{of}\ \sigma\ \approx 111.2\ \text{km}
+  physics_source:
+    fn: fluidpy.geo.sphere.central_angle; fluidpy.geo.sphere.great_circle_distance
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_central_angle_V1_quarter_antipode_and_tiny, ::test_great_circle_distance_V5_vs_pyproj_geod
+  exaggeration: []
+  kind: 3-D globe turned into a 2-D slice
+  data: none beyond the globe
+  tool: three.js (camera turn) + Remotion SVG overlay on the flat disc
+  runner_up: SVG only (loses the link to the globe)
+  why: seeing the slice face-on turns the sphere problem into Part 1's circle (U-CO-068)
+  related: []
+  feedback:
+  - U-CO-066
+  - U-CO-068
+  layout: The disc fills x 80-1000; the column holds the inset and equations from x 1100; links never cross the arc labels.
+- id: s08_position_arrows
+  t:
+  - 418.875
+  - 559.475
+  sentence_times:
+  - - 418.875
+    - 423.7
+  - - 424.05
+    - 432.75
+  - - 433.1
+    - 439.175
+  - - 439.525
+    - 447.875
+  - - 448.225
+    - 454.925
+  - - 455.275
+    - 465.675
+  - - 466.025
+    - 477.3
+  - - 477.65
+    - 480.975
+  - - 482.475
+    - 496.0
+  - - 497.5
+    - 504.0
+  - - 505.5
+    - 517.925
+  - - 518.275
+    - 529.475
+  - - 529.825
+    - 538.925
+  - - 540.425
+    - 549.275
+  - - 550.775
+    - 557.975
+  beat: 'D45 (4)-(5): the two unit position arrows written out with every input'
+  visual: 'Left: the face-on disc stays, small, at the top left with r̂₁ (teal) and r̂₂ (orange). Main area: two rows of three columns, London (teal) then
+    Los Angeles (orange). Each row starts with its inputs ''φ = 51.51°, λ = −0.13°'' / ''φ = 34.05°, λ = −118.24°'' (68 px), then the three parts appear
+    one by one on their words, each as ''cos 51.51° × cos(−0.13°) = 0.622 × 1.000 ≈ 0.622'' style CalcStack rows; finished parts move into the vector r̂₁
+    = (0.622, −0.001, 0.783), r̂₂ = (−0.392, −0.730, 0.560). A small 3-D axes glyph (x to 0° on the equator, y to 90° E, z to the North Pole, as in Part
+    3) shows each arrow. AT(3, ''skip ahead'') the maths-skip chip appears top-right of the column (x 1500-1840, y 50-110): ''every step · optional · skip
+    to mm:ss'' (44 px, warm white on a thin gold outline: the one chip the user''s 2026-11-05 maths-skip rule asks for; mm:ss filled after the final TTS);
+    it stays 6 s, then shrinks to a small ''optional maths'' tag in the same corner until the block ends.'
+  voiceover: The next few minutes work out sigma step by step, with every number. They're here for anyone who enjoys seeing every step, but you don't need
+    them for the intuition behind weather, climate science or GIS. If it feels like a lot, skip ahead to the time on screen, and you won't miss the big
+    idea. To find sigma, we need the two position arrows of length one, r hat one for London and r hat two for Los Angeles. From Part 3, each one is cosine
+    phi cosine lambda, cosine phi sine lambda, sine phi. London is at fifty one point five one degrees north, and zero point one three degrees west, so
+    its lambda is minus zero point one three degrees. The cosine of fifty one point five one degrees is zero point six two two, and the cosine of minus
+    zero point one three degrees is almost exactly one. So the first part is zero point six two two. [beat] The sine of minus zero point one three degrees
+    is minus zero point zero zero two three, so the second part is zero point six two two times that, about minus zero point zero zero one. [beat] The third
+    part is the sine of fifty one point five one degrees, zero point seven eight three. [beat] Los Angeles is at thirty four point zero five degrees north,
+    and a hundred and eighteen point two four degrees west, so its lambda is minus a hundred and eighteen point two four degrees. Its cosine phi is zero
+    point eight two nine, its cosine lambda is minus zero point four seven three, and its sine lambda is minus zero point eight eight one. So its first
+    part is zero point eight two nine times minus zero point four seven three, about minus zero point three nine two. [beat] Its second part is zero point
+    eight two nine times minus zero point eight eight one, about minus zero point seven three zero. [beat] And its third part, the sine of thirty four point
+    zero five degrees, is zero point five six zero. [beat]
+  on_screen_eq:
+    latex: \hat{\mathbf r}_1\approx(0.622,\ -0.001,\ 0.783),\qquad \hat{\mathbf r}_2\approx(-0.392,\ -0.730,\ 0.560)
+    vallis_eq: 'none as written: the unit position vector of Part 3 (D23-D24 with a = 1), Vallis §2.2.2 geometry'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - '\text{London: }\varphi=51.51^\circ,\ \lambda=-0.13^\circ'
+  - \cos 51.51^\circ\times\cos(-0.13^\circ)=0.622\times1.000\approx0.622
+  - 0.622\times\sin(-0.13^\circ)=0.622\times(-0.0023)\approx-0.001
+  - \sin 51.51^\circ\approx0.783
+  - '\text{Los Angeles: }\varphi=34.05^\circ,\ \lambda=-118.24^\circ'
+  - 0.829\times(-0.473)\approx-0.392
+  - 0.829\times(-0.881)\approx-0.730
+  - \sin 34.05^\circ\approx0.560
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector
+    params:
+      london:
+      - 51.51
+      - -0.13
+      los_angeles:
+      - 34.05
+      - -118.24
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; CHECK DM09 (both vectors, every intermediate cos/sin to 3 d.p.)
+  exaggeration: []
+  kind: calculation with a small diagram
+  data: none
+  tool: Remotion SVG + KaTeX (CalcStack)
+  runner_up: —
+  why: the user asked for every input written next to every calculation (U-CO-068)
+  related:
+  - movie: '#5c'
+    slug: ch00_coordinates_sphere
+    covers: the unit position vector
+  feedback:
+  - U-CO-068
+  - U-CO-054
+  layout: CalcStack <= 3 live rows per city, older rows dimmed to 60 % and then folded into the vector; nothing over the disc.
+- id: s09_cos_sigma
+  t:
+  - 559.475
+  - 647.725
+  sentence_times:
+  - - 559.475
+    - 563.1
+  - - 563.45
+    - 570.425
+  - - 570.775
+    - 576.725
+  - - 577.075
+    - 582.5
+  - - 582.85
+    - 587.25
+  - - 587.6
+    - 594.725
+  - - 596.225
+    - 604.8
+  - - 606.3
+    - 613.25
+  - - 614.75
+    - 618.325
+  - - 618.675
+    - 622.65
+  - - 624.15
+    - 628.225
+  - - 628.575
+    - 633.95
+  - - 635.45
+    - 646.925
+  beat: 'D45 (6): cos sigma = r1 . r2 = 0.195, sigma = 78.7 deg'
+  visual: 'Column from frame 0: the two vectors from s09 one above the other, matching parts aligned. AT(2, ''product of their lengths'') the dot-product
+    movie''s shadow picture (small, left): r̂₂''s shadow on r̂₁ as a 20-px band, ''|r̂₁| = |r̂₂| = 1''. AT(5, ''multiply the matching parts'') three gold
+    brackets join the matching parts one at a time; the three products appear under them on their words; AT(9, ''Adding the three'') the sum 0.195. AT(12,
+    ''inverse cosine'') the angle σ ≈ 78.7° grows on the face-on disc (left) as a gold arc with its number linked to the column. AT(13, ''quarter of the
+    way round'') a faint 90° wedge (slate) beside σ for comparison.'
+  voiceover: 'Now let''s use the rule from the dot product movie. The dot product of two arrows is the product of their lengths, times the cosine of the
+    angle between them. Our two arrows both have length one, so their dot product is just the cosine of sigma. That''s the shadow picture again: the shadow
+    of one arrow of length one on the other. To take the dot product, multiply the matching parts and add. Zero point six two two times minus zero point
+    three nine two is minus zero point two four four. [beat] Minus zero point zero zero one times minus zero point seven three zero is about plus zero point
+    zero zero one. [beat] And zero point seven eight three times zero point five six zero is zero point four three eight. [beat] Adding the three gives
+    about zero point one nine five. So the cosine of sigma is zero point one nine five. [beat] Which angle has a cosine of zero point one nine five? A calculator''s
+    inverse cosine says about seventy eight point seven degrees. [beat] A cosine just below zero point two means an angle a little less than ninety degrees,
+    so London and Los Angeles are almost a quarter of the way round the Earth from each other.'
+  on_screen_eq:
+    latex: \cos\sigma=\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2
+    vallis_eq: 'none in Vallis: the dot product of unit vectors (dot product movie); spherical law of cosines (Snyder 1987 eq. 5-3); fluidpy.geo.sphere.central_angle'
+    page_png: null
+  calc_rows:
+  - 0.622\times(-0.392)\approx-0.244
+  - (-0.001)\times(-0.730)\approx+0.001
+  - 0.783\times0.560\approx0.438
+  - \cos\sigma\approx-0.244+0.001+0.438\approx0.195
+  - \sigma=\cos^{-1}(0.195)\approx78.7^\circ
+  physics_source:
+    fn: fluidpy.geo.sphere.central_angle
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_central_angle_V1_quarter_antipode_and_tiny, ::test_great_circle_distance_V5_vs_pyproj_geod; CHECK
+      DM10 (dot 0.1953, sigma 78.738 deg, 1.37424 rad)
+  exaggeration: []
+  kind: calculation + diagram
+  data: none
+  tool: Remotion SVG + KaTeX
+  runner_up: —
+  why: sigma made concrete, every move shown (U-CO-068)
+  related:
+  - movie: 0.1b / 0.1
+    slug: ch00_dot_product_why
+    covers: dot product = |a||b| cos angle; the shadow
+  feedback:
+  - U-CO-068
+  - U-CO-054
+  layout: Calculations x >= 1100; the disc picture left; no link crosses a row.
+- id: s10_distance
+  t:
+  - 647.725
+  - 712.425
+  sentence_times:
+  - - 647.725
+    - 650.65
+  - - 651.0
+    - 658.075
+  - - 658.425
+    - 670.45
+  - - 671.95
+    - 681.975
+  - - 682.325
+    - 687.075
+  - - 688.575
+    - 700.925
+  - - 702.425
+    - 711.625
+  beat: 'D45 (7): sigma in radians, d = a sigma = 8755 km, and the per-degree check'
+  visual: 'Left: the face-on disc with σ and the gold arc; AT(1, ''in radians'') a small ruler shows 1° = π/180 rad. Column: CalcStack rows on their words.
+    AT(''Earth''s radius times sigma'') the gold arc''s label becomes ''≈ 8755 km'' with a gold link from the row. AT(6, ''the quick way'') the arc''s 10°
+    ticks brighten (each ''≈ 1112 km''). AT(7, ''nine hundred kilometres per hour'') a small plane glyph and clock ''≈ 9.7 h''.'
+  voiceover: 'The arc rule needs sigma in radians. One degree is pi over a hundred and eighty radians, about zero point zero one seven four five. So seventy
+    eight point seven four degrees is seventy eight point seven four times zero point zero one seven four five, about one point three seven four two radians.
+    [beat] Now the distance is the Earth''s radius times sigma: six thousand three hundred and seventy one kilometres times one point three seven four two.
+    That''s about eight thousand seven hundred and fifty five kilometres. [beat] Let''s check it the quick way: seventy eight point seven four degrees,
+    times a hundred and eleven point two kilometres per degree, is again about eight thousand seven hundred and fifty five kilometres. [beat] At a cruising
+    speed of about nine hundred kilometres per hour, that''s nearly ten hours in the air, before any help or hindrance from the winds.'
+  on_screen_eq:
+    latex: d=a\,\sigma\approx 6371\times1.3742\approx 8755\ \text{km}
+    vallis_eq: 'none in Vallis: arc rule; fluidpy.geo.sphere.great_circle_distance'
+    page_png: null
+  calc_rows:
+  - 1^\circ=\frac{\pi}{180}\ \text{rad}\approx0.01745\ \text{rad}
+  - \sigma\approx78.74\times0.01745\approx1.3742\ \text{rad}
+  - 78.74\times111.2\ \text{km}\approx8755\ \text{km}
+  - 8755\ \text{km}\div900\ \text{km/h}\approx9.7\ \text{h}
+  physics_source:
+    fn: fluidpy.geo.sphere.great_circle_distance
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+      a_m: 6371000
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_great_circle_distance_V5_vs_pyproj_geod; CHECK DM11 (8755.3 km; 78.738 x 111.195 = 8755.3)
+  exaggeration:
+  - cruise speed 900 km/h is a round easy number; winds ignored (said)
+  kind: calculation + diagram
+  data: none
+  tool: Remotion SVG + KaTeX
+  runner_up: —
+  why: the number the airline wanted, with a second route to the same answer
+  related: []
+  feedback:
+  - U-CO-067
+  - U-CO-068
+  layout: CalcStack x >= 1100 (Must 8); '≈ 8755 km' on the arc is a short label at a spot.
+- id: s11_route_shape
+  t:
+  - 712.425
+  - 774.675
+  sentence_times:
+  - - 712.425
+    - 715.1
+  - - 715.45
+    - 727.925
+  - - 728.275
+    - 730.25
+  - - 730.6
+    - 735.75
+  - - 736.1
+    - 743.2
+  - - 743.55
+    - 751.425
+  - - 751.775
+    - 761.275
+  - - 762.775
+    - 768.125
+  - - 768.475
+    - 773.875
+  beat: the route leaves NW (312 deg), tops out at 62.4 N near SW Greenland, arrives SW (214 deg)
+  visual: 'Back to the globe (camera continuity from s07), the gold route drawn; a plane glyph flies it (time compressed). AT(4, ''west-south-west'') a
+    dashed slate arrow from London towards Los Angeles as it looks on a flat map, in a small Mercator inset in the column. AT(5, ''three hundred and twelve
+    degrees'') a compass rose at London (bearing from north, clockwise as seen from above, gold arc 312°). AT(6, ''sixty two point four degrees north'')
+    the vertex dot and short label ''62.4° N'' near the SW coast of Greenland; ''Greenland'' labelled at AT(6, ''Greenland''). AT(7, ''two hundred and fourteen
+    degrees'') the compass rose at Los Angeles (214°). AT(8, ''almost a hundred degrees'') a heading strip under the globe shows the plane''s heading falling
+    312° -> 214° along the route (data every 1/10 of the route). AT(''here''s what to keep'') keyword ''if you skipped, keep this:'' (54 px, gold) and the
+    takeaway''s numbers as keywords in the column, beside the picture named in the sentence. Here: the globe''s gold route with ''≈ 79°'' at the centre
+    and ''≈ 8755 km'' on the arc.'
+  voiceover: If you skipped, here's what to keep. Seen from the Earth's centre, London and Los Angeles are about seventy nine degrees apart, so the great
+    circle route between them is about eight thousand seven hundred and fifty five kilometres long. Where does this route go? On most flat maps, Los Angeles
+    looks to the west-south-west of London. But the great circle leaves London heading north-west, at a compass bearing of about three hundred and twelve
+    degrees. It climbs to its highest latitude, about sixty two point four degrees north, near the south-west coast of Greenland. Then it turns south over
+    northern Canada, and arrives at Los Angeles heading south-west, at a bearing of about two hundred and fourteen degrees. [beat] So along the way, the
+    compass heading changes by almost a hundred degrees. That's why flights from Europe to California pass over Greenland and Canada.
+  on_screen_eq: null
+  calc_rows:
+  - 312^\circ\ \longrightarrow\ 214^\circ
+  physics_source:
+    fn: fluidpy.geo.sphere.initial_bearing; fluidpy.geo.sphere.great_circle_vertex; fluidpy.geo.sphere.great_circle_points
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_initial_bearing_V5_vs_pyproj_and_V1_cardinals, ::test_great_circle_vertex_V1_clairaut_and_dense_max_RM03;
+      CHECK DM12 (311.8 deg; vertex 62.37 N 48.96 W; arrival 214.0 deg; headings along the route)
+  exaggeration:
+  - flight animation time compressed
+  kind: 3-D globe
+  data: BMNG 2004; Natural Earth 50 m coast
+  tool: three.js globe
+  runner_up: —
+  why: the surprise (north-west, over Greenland) that motivates the rhumb line contrast
+  related: []
+  kept_from: build-1 s29 S9-S11
+  feedback:
+  - U-CO-065
+  layout: Source line below the globe; compass roses beside their cities, never on the column text; Los Angeles label inside the frame.
+- id: s12_rhumb
+  t:
+  - 774.675
+  - 837.75
+  sentence_times:
+  - - 774.675
+    - 777.925
+  - - 778.275
+    - 786.7
+  - - 787.05
+    - 796.1
+  - - 796.45
+    - 804.325
+  - - 805.825
+    - 807.85
+  - - 808.2
+    - 820.325
+  - - 821.825
+    - 829.975
+  - - 831.475
+    - 836.95
+  beat: 'D47: the rhumb line, 258.5 deg, 9733 km, 11 % longer'
+  visual: 'Same globe; AT(2, ''rhumb line'') the slate rhumb line draws beside the gold great circle, with identical small gold angle marks where it crosses
+    five meridians (the same angle at every meridian; no numbers on the globe). AT(3, ''two hundred and fifty eight and a half'') compass rose at London
+    ''258.5°''. Column CalcStack on the words. AT(8, ''spiral round and round'') a short inset: the rhumb line extended on a small polar view, spiralling
+    into the pole (slate).'
+  voiceover: 'Sailors used a different route for centuries. It''s called the rhumb line: a route that keeps the same compass bearing all the way, so it
+    crosses every meridian at the same angle. From London to Los Angeles, the rhumb line holds a bearing of about two hundred and fifty eight and a half
+    degrees, a little south of due west. It stays further south than the great circle, and it''s about nine thousand seven hundred and thirty three kilometres
+    long. [beat] How much longer is that? Nine thousand seven hundred and thirty three divided by eight thousand seven hundred and fifty five is about one
+    point one one, so the rhumb line is about eleven percent longer. [beat] The extra is about nine hundred and seventy eight kilometres, more than an hour
+    of flying at nine hundred kilometres per hour. [beat] And if you kept following a rhumb line, it would spiral round and round towards a pole.'
+  on_screen_eq: null
+  calc_rows:
+  - 9733\ \text{km}\div8755\ \text{km}\approx1.11
+  - 9733-8755\approx978\ \text{km}
+  - 978\ \text{km}\div900\ \text{km/h}\approx1.1\ \text{h}
+  physics_source:
+    fn: fluidpy.geo.sphere.rhumb_line; fluidpy.geo.sphere.great_circle_distance
+    params:
+      from:
+      - 51.51
+      - -0.13
+      to:
+      - 34.05
+      - -118.24
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_rhumb_line_V1_limits_meridian_equator_parallel, ::test_rhumb_line_V3_chord_sum_converges_order2;
+      CHECK DM13 (9732.8 km, 258.49 deg, ratio 1.1116, extra 977.5 km)
+  exaggeration:
+  - the spiral inset extends the line beyond the route
+  - illustrative
+  kind: 3-D globe
+  data: BMNG 2004
+  tool: three.js globe
+  runner_up: —
+  why: the contrast case for the great circle
+  related: []
+  kept_from: build-1 s30
+  feedback:
+  - U-CO-073
+  layout: Globe left, CalcStack right from x 1100; inset below the CalcStack with its own gap.
+- id: s13_why_rhumb
+  t:
+  - 837.75
+  - 923.05
+  sentence_times:
+  - - 837.75
+    - 840.75
+  - - 841.1
+    - 843.025
+  - - 843.375
+    - 845.225
+  - - 845.575
+    - 853.2
+  - - 853.55
+    - 862.8
+  - - 863.15
+    - 873.075
+  - - 873.425
+    - 878.85
+  - - 879.2
+    - 888.625
+  - - 890.125
+    - 892.35
+  - - 892.7
+    - 898.325
+  - - 898.675
+    - 904.5
+  - - 904.85
+    - 916.325
+  - - 916.675
+    - 922.25
+  beat: 'D47: why some prefer the rhumb line (three reasons: steering, short trips, a ruler on Mercator)'
+  visual: 'Three beats, one per reason, the globe staying left. Reason 1 AT(3, ''steering''): two compass dials in the column: the rhumb dial fixed at 258.5°
+    (slate), the great-circle dial sweeping 312° -> 214° while the plane glyph flies the gold route (heading from DM12, same strip as s12). AT(6, ''a lot
+    of calculation'') a small pencil-and-table glyph. Reason 2 AT(7, ''short trips''): the globe turns (eased) to Brest and Lisbon; the two routes drawn
+    there lie on top of each other; column ''Brest -> Lisbon ≈ 1138 km'', ''rhumb + ≈ 150 m'' with a magnifier glyph. Reason 3 AT(10, ''Mercator map''):
+    a small Mercator chart with a ruler laid from London to Los Angeles along the straight slate line and a protractor reading 258.5°. AT(12, ''rhumb-line
+    legs'') on the globe, the gold great circle with four slate rhumb-line legs hugging it. AT(13, ''in Part 7'') keyword ''Part 7: maps'' (54 px) under
+    the Mercator chart.'
+  voiceover: 'So why would anyone choose the longer route? There are three reasons. The first is steering. A rhumb line needs one compass setting for the
+    whole trip: set two hundred and fifty eight and a half degrees, and hold it. The great circle needs a new heading all the time, from three hundred and
+    twelve degrees at London to two hundred and fourteen at Los Angeles. Before satellites and computers, a ship''s navigator with a compass could steer
+    a rhumb line easily, but a great circle only with a lot of calculation. The second reason is that, on short trips, the extra distance is tiny. From
+    Brest to Lisbon, about one thousand one hundred and thirty eight kilometres, the rhumb line is only about a hundred and fifty metres longer. [beat]
+    The third reason is a map. On the most famous flat map, the Mercator map, a rhumb line is a straight line. So a navigator could draw the route with
+    a ruler, read off its angle, and steer by it. That''s why long voyages were often split into a few rhumb-line legs that follow the great circle closely:
+    each leg is easy to steer, and the whole route is nearly the shortest. We''ll see why that map makes rhumb lines straight in Part 7, when we flatten
+    the Earth.'
+  on_screen_eq: null
+  calc_rows:
+  - '\text{Brest}\to\text{Lisbon: } 1138\ \text{km},\quad \text{rhumb} \approx +0.15\ \text{km}'
+  physics_source:
+    fn: fluidpy.geo.sphere.rhumb_line; fluidpy.geo.sphere.great_circle_distance; fluidpy.geo.sphere.initial_bearing; fluidpy.geo.sphere.great_circle_points
+    params:
+      legs: 4
+      brest:
+      - 48.39
+      - -4.49
+      lisbon:
+      - 38.72
+      - -9.14
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_rhumb_line_V1_straight_on_mercator_and_RM09; CHECK DM14 (Brest-Lisbon 1138.12 vs 1138.27 km,
+      +0.149 km; 4 rhumb legs between 5 great-circle points = 8830 km, +0.86 % on the great circle)
+  exaggeration:
+  - the compass is a true-bearing compass (magnetic variation ignored
+  - said nowhere; recorded here)
+  kind: 3-D globe + small charts
+  data: BMNG 2004; Natural Earth 50 m
+  tool: three.js globe + Remotion SVG
+  runner_up: —
+  why: the user did not understand why some prefer it (U-CO-073); each reason is concrete
+  related: []
+  feedback:
+  - U-CO-073
+  layout: One reason at a time in the column; earlier reason keywords dim to 60 %; the Mercator chart has its source line below it.
+- id: s14_recap
+  t:
+  - 923.05
+  - 994.475
+  sentence_times:
+  - - 923.05
+    - 933.0
+  - - 933.35
+    - 941.525
+  - - 941.875
+    - 948.1
+  - - 948.45
+    - 958.1
+  - - 958.45
+    - 967.825
+  - - 968.175
+    - 976.3
+  - - 976.65
+    - 983.7
+  - - 984.05
+    - 993.675
+  beat: recap ('To sum up'); last sentence the teaser to Part 7
+  visual: 'One beat per sentence, mini pictures reused (no headings): the three curvilinear pictures; the scale-factor table (θ: r, φ: a, λ: a cos φ); the
+    globe with the slicing sheet; the face-on disc ''d = a σ'' with ''cos σ = r̂₁ · r̂₂''; ''78.7°'', ''≈ 8755 km''; the compass strip 312° -> 214°; the
+    rhumb line beside the great circle ''+11 %''; a Mercator thumbnail with a straight slate line and a question mark (the Part 7 teaser). Each spoken number
+    on screen at its words.'
+  voiceover: To sum up, curvilinear coordinates have curved lines, unit vectors that turn, and scale factors that turn a change of coordinate into a distance.
+    On the Earth, the scale factor of latitude is the Earth's radius, and of longitude, the radius times cosine phi. The shortest way between two places
+    follows a great circle, whose centre is the Earth's centre. Its length is the Earth's radius times sigma, the angle at the centre, and the cosine of
+    sigma is the dot product of the two position arrows. From London to Los Angeles, that's about seventy eight point seven degrees, or about eight thousand
+    seven hundred and fifty five kilometres. Along the great circle, the compass heading changes all the way, from three hundred and twelve degrees to two
+    hundred and fourteen. A rhumb line keeps one compass bearing, so it's easy to steer, but here it's about eleven percent longer. In Part 7, we'll flatten
+    the Earth onto maps, see what each map stretches, and find out why the rhumb line is straight on the most famous map of all.
+  on_screen_eq:
+    latex: d=a\,\sigma,\qquad \cos\sigma=\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2
+    vallis_eq: 'none in Vallis: arc rule and the dot product of unit vectors; repeated from s07/s09'
+    page_png: null
+  calc_rows:
+  - h_\theta=r,\quad h_\varphi=a,\quad h_\lambda=a\cos\varphi
+  physics_source: null
+  exaggeration:
+  - illustrative recap (pictures and numbers reused from this movie)
+  kind: recap
+  data: reused
+  tool: Remotion SVG
+  runner_up: —
+  why: HOUSE_STYLE §2 beat 6
+  related:
+  - movie: '#5g'
+    slug: ch00_coordinates_maps
+    covers: map projections and the view from the pole (the next part, Part 7)
+  feedback:
+  - U-CO-101
+  layout: One mini picture per sentence, previous ones dimmed; no headings.
+- id: s15_end
+  t:
+  - 994.475
+  - 1017.375
+  sentence_times:
+  - - 994.475
+    - 1000.675
+  - - 1001.025
+    - 1009.075
+  - - 1009.425
+    - 1017.075
+  beat: series end card (maths-tutorial ending, word for word; decision 2)
+  visual: 'House end card (HOUSE_STYLE §3): four faint topic thumbnails along the top (globe with a great circle, compass dial, rhumb line, Mercator map);
+    keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); a notebook icon with ''coordinates
+    notebook''; stacked notebook icons with ''notebooks for the other maths concepts''; 24-px gap between icons and text (Should 14). Then the 2.5-s silent
+    hold while the music fades.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science, meteorology
+    and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths concepts, are on the
+    website that goes with this video.
+  on_screen_eq: null
+  calc_rows: []
+  physics_source: null
+  exaggeration:
+  - decorative end card
+  kind: end card
+  data: none
+  tool: house end card
+  runner_up: —
+  why: the series ending, word for word
+  related: []
+  feedback: []
+  layout: as the reference movie s22
