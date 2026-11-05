@@ -234,7 +234,7 @@ export const PlaneContours: React.FC<{ o?: number; dh?: number; R?: number; c?: 
       const x0 = (h * 30) / 2500, y0 = (h * 40) / 2500, x = x0 - 0.8 * s, y = y0 + 0.6 * s;
       if (Math.abs(x) <= R && Math.abs(y) <= R) pts.push(hp(x, y));
     }
-    if (pts.length > 1) out.push(<path key={h} d={poly(pts)} fill="none" stroke={c} strokeWidth={h === 0 ? 3 : 2} strokeOpacity={h === 0 ? 0.7 : 0.35} />);
+    if (pts.length > 1) out.push(<path key={h} d={poly(pts)} fill="none" stroke={c} strokeWidth={h === 0 ? 2.5 : 2} strokeOpacity={h === 0 ? 0.45 : 0.35} />);
   }
   return <g opacity={o}>{out}</g>;
 };
@@ -243,12 +243,12 @@ export const HillGround: React.FC<{ o?: number; R?: number }> = ({ o = 1, R = 2.
     <rect x={hp(-R, R)[0]} y={hp(-R, R)[1]} width={2 * R * HU} height={2 * R * HU} rx={22} fill="#22304a" />
   </g>
 );
-/** house E/N axes on the hillside plan (labels outside the arrows' tips, above the axis line) */
+/** house E/N axes on the hillside plan ("east" under the right end of the axis: K6 r1, labels and links near the triangle legs kept it busy above) */
 export const AxesEN: React.FC<{ o?: number; R?: number }> = ({ o = 1, R = 2.45 }) => o <= 0 ? null : (
   <g opacity={o}>
     <line x1={hp(-R, 0)[0]} y1={HO[1]} x2={hp(R, 0)[0]} y2={HO[1]} stroke={C.muted} strokeWidth={2.5} strokeDasharray="10 8" />
     <line x1={HO[0]} y1={hp(0, -R)[1]} x2={HO[0]} y2={hp(0, R)[1]} stroke={C.muted} strokeWidth={2.5} strokeDasharray="10 8" />
-    <Lbl x={hp(R, 0)[0] - 4} y={HO[1] - 34} t="east" c={C.muted} s={T.floor} a="end" b={false} />
+    <Lbl x={hp(R, 0)[0] - 4} y={HO[1] + 34} t="east" c={C.muted} s={T.floor} a="end" b={false} />
     <Lbl x={HO[0] + 18} y={hp(0, R)[1] + 26} t="north" c={C.muted} s={T.floor} b={false} />
   </g>
 );
@@ -261,8 +261,8 @@ export const globeG = (cam: GlobeCam, box = GB): GProj => {
   return globeProj(st, box.w, box.h, box.x, box.y);
 };
 export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: number; h: number }; coast?: number; o?: number; dim?: number; grat?: number;
-  over?: (G: GProj) => React.ReactNode; meshO?: number; gratStep?: number; drapes?: Drape[] }> = ({
-  cam, box = GB, coast = 0.45, o = 1, dim = 1, over, grat = 0, meshO = 1, gratStep = 30, drapes = [] }) => {
+  over?: (G: GProj) => React.ReactNode; meshO?: number; gratStep?: number; gratC?: string; drapes?: Drape[] }> = ({
+  cam, box = GB, coast = 0.45, o = 1, dim = 1, over, grat = 0, meshO = 1, gratStep = 30, gratC, drapes = [] }) => {
   const tex = useTex(IMG("bmng.jpg"));
   const st = globeCam({ ...cam, pp: cam.pp ?? [box.w / 2, box.h / 2] }, [box.w / 2, box.h / 2]);
   const G = globeProj(st, box.w, box.h, box.x, box.y);
@@ -276,7 +276,7 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
       <Svg o={o}>
         <defs><clipPath id={id}><rect x={box.x} y={box.y} width={box.w} height={box.h} /></clipPath></defs>
         <g clipPath={`url(#${id})`}>
-          {grat > 0 ? <Graticule G={G} step={gratStep} o={grat} /> : null}
+          {grat > 0 ? <Graticule G={G} step={gratStep} o={grat} c={gratC} /> : null}
           {coast > 0 ? <path d={coastPath(G, D.lines.globe_coast_110m)} fill="none" stroke={C.key} strokeOpacity={coast} strokeWidth={1.6} /> : null}
           {over ? over(G) : null}
         </g>

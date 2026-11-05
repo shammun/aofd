@@ -141,14 +141,15 @@ const S02: React.FC = () => {
   const f = useCurrentFrame(), k = K("s02_fields");
   const tMtn = AT(k, 0, "mountain"), tH = AT(k, 1, "height above sea level"), tField = AT(k, 2, "field"), tScal = AT(k, 3, "scalar field"), tOne = AT(k, 3, "one number");
   const tTP = AT(k, 4, "Temperature"), tPres = AT(k, 4, "pressure"), tQ = SS(k, 5), tWay = AT(k, 6, "which way"), tFast = AT(k, 6, "how fast");
-  const B = boxAt(45.86, 6.865, 0.32, 80, 40, 640, 790);
+  const B = boxAt(45.86, 6.865, 0.32, 80, 40, 640, 780);   // K6 r1: picture ends at y 820 so its source line ends above y 880
   const P = (la: number, lo: number): Pt => [B.x + ((lo - B.lon0) / (B.lon1 - B.lon0)) * B.w, B.y + ((B.lat1 - la) / (B.lat1 - B.lat0)) * B.h];
   const pr = MBD.probes as [number, number, number, string][];
   const hop = [tH, tH + 70, tH + 140];
   const idx = f < hop[1] ? 0 : f < hop[2] ? 1 : 2;
   const a0 = pr[Math.max(0, idx - 1)], a1 = pr[idx], tt = prog(f, hop[idx], hop[idx] + 24);
   const dot: Pt = idx === 0 ? P(a1[0], a1[1]) : (() => { const p = P(a0[0], a0[1]), q = P(a1[0], a1[1]); return [mix(p[0], q[0], tt), mix(p[1], q[1], tt)] as Pt; })();
-  const IB1 = boxAt(48.5, -6.5, 10, 1440, 150, 380, 250), IB2 = boxAt(48.8, -5.5, 10, 1440, 500, 380, 250);
+  // K6 r1: the two-line source under the temperature inset ends at y ≈ 470, so "pressure" sits at 500 and its inset at 530
+  const IB1 = boxAt(48.5, -6.5, 10, 1440, 140, 380, 240), IB2 = boxAt(48.8, -5.5, 10, 1440, 530, 380, 240);
   return (
     <Scene>
       <GeoMap id="s02mb" B={B} frame={0.6}>
@@ -165,7 +166,7 @@ const S02: React.FC = () => {
         <Keyword f={f} text="scalar field" at={[830, 440]} appear={tScal} c={C.key} />
         <Lbl x={830} y={510} t="one number per place" c={C.key} s={T.key} o={fin(f, tOne)} />
         <Lbl x={1430} y={110} t="temperature" c={C.key} s={T.floor} a="start" o={fin(f, tTP)} />
-        <Lbl x={1430} y={460} t="pressure" c={C.key} s={T.floor} a="start" o={fin(f, tPres)} />
+        <Lbl x={1430} y={502} t="pressure" c={C.key} s={T.floor} a="start" o={fin(f, tPres)} />
         <Keyword f={f} text="which way?" at={[830, 640]} appear={tWay} targets={[[dot[0] + 20, dot[1] - 10]]} />
         <Keyword f={f} text="how fast?" at={[830, 740]} appear={tFast} />
       </Svg>
@@ -217,7 +218,8 @@ const S03: React.FC = () => {
       <SoftEdges id="s03" box={HV} px={70} />
       <Svg>
         <Walker x={walker[0]} y={walker[1]} s={0.8} c={C.first} />
-        <Lbl x={pr.p(riseE[1])[0] + 22} y={mix(pr.p(riseE[0])[1], pr.p(riseE[1])[1], 0.5)} t="30 m" c={C.gold} s={T.key} o={fin(f, tE + 70)} />
+        {/* K6 r1 + reviewer (3-D labels on s03): "30 m" above its rod (the link from ∂h/∂x arrives at the rod's side under it) */}
+        <Lbl x={pr.p(riseE[1])[0]} y={pr.p(riseE[1])[1] - 40} t="30 m" c={C.gold} s={T.key} a="middle" o={fin(f, tE + 70)} />
         <Lbl x={pr.p(riseN[1])[0] - 22} y={mix(pr.p(riseN[0])[1], pr.p(riseN[1])[1], 0.5)} t="40 m" c={C.gold} s={T.key} a="end" o={fin(f, tN + 70)} />
         <Lbl x={pr.p([1.05, 0, z(0, 0)])[0]} y={pr.p([1.05, 0, z(0, 0)])[1] + 34} t="1 km east" c={C.muted} s={T.floor} a="middle" b={false} o={fin(f, tE + 30)} />
         <Lbl x={pr.p([0, 1.1, z(0, 0)])[0] - 20} y={pr.p([0, 1.1, z(0, 0)])[1] + 30} t="1 km north" c={C.muted} s={T.floor} a="end" b={false} o={fin(f, tN + 30)} />
@@ -233,8 +235,9 @@ const S03: React.FC = () => {
         <Lbl x={1100} y={760} t="going north" c={C.key} s={T.key} o={fin(f, tPy + 10)} />
       </Svg>
       <Svg>
-        <CurvedLink f={f} from={[1088, 290]} to={[pr.p(riseE[1])[0] + 70, mix(pr.p(riseE[0])[1], pr.p(riseE[1])[1], 0.5) + 30]} start={tNum + 8} bend={40} />
-        <CurvedLink f={f} from={[1088, 630]} to={[pr.p(riseN[1])[0] - 10, mix(pr.p(riseN[0])[1], pr.p(riseN[1])[1], 0.5) + 30]} start={tNum2 + 8} bend={-40} />
+        <CurvedLink f={f} from={[1088, 290]} to={[pr.p(riseE[1])[0] + 14, mix(pr.p(riseE[0])[1], pr.p(riseE[1])[1], 0.5)]} start={tNum + 8} end={LEN(k) - 14} bend={-30} />
+        {/* the ∂h/∂y link runs under "1 km east" and the walker's feet, then up to the north rod (it used to cut through "1 km east") */}
+        <CurvedLink f={f} from={[1088, 630]} to={[pr.p(riseN[1])[0] + 10, mix(pr.p(riseN[0])[1], pr.p(riseN[1])[1], 0.5) + 10]} start={tNum2 + 8} end={LEN(k) - 14} ctl={[460, 700]} />
       </Svg>
     </Scene>
   );
@@ -268,24 +271,26 @@ const S04: React.FC = () => {
         </g>
         <Walker x={HO[0] - 34} y={HO[1] + 4} s={0.7} />
       </Svg>
-      <CalcStack f={f} x={1330} y={110} size={60} rows={[
+      {/* K6 r1: the δh row ended at x 1947 — "=" column at 1220, size 56 */}
+      <CalcStack f={f} x={1220} y={110} size={56} rows={[
         { lhs: String.raw`\text{east}`, rhs: String.raw`=30\ \mathrm{m/km}`, at: tE },
         { lhs: String.raw`\text{north}`, rhs: String.raw`=40\ \mathrm{m/km}`, at: tNo },
         { lhs: String.raw`\delta h`, rhs: String.raw`=30\times0.71+40\times0.71`, at: tSum },
         { rhs: String.raw`\approx 49.5\ \mathrm{m}`, at: tRes, cont: true },
       ]} maxLines={3} o={fout(f, tTurn - 4)} />
       <Svg>
-        <g opacity={fin(f, tTurn)}>
+        <g opacity={fin(f, tTurn + 12)}>
           <Axes A={SWA} xt={[0, 90, 180, 270, 360]} yt={[-50, 0, 50]} yl="climb (m/km)" xl="direction (°)" zero />
           <Curve A={SWA} xs={HL.sweep_deg} ys={HL.sweep} c={C.first} w={6} upto={n / (HL.sweep_deg.length - 1)} />
         </g>
         <circle cx={pk[0]} cy={pk[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tPeak)} />
-        <Lbl x={pk[0] + 24} y={pk[1] - 40} t="50 m/km at 53°" c={C.key} s={T.key} o={fin(f, tPk2)} />
+        <Lbl x={pk[0] + 24} y={pk[1] - 86} t="50 m/km at 53°" c={C.key} s={T.key} o={fin(f, tPk2)} />
         <Lbl x={1150} y={200} t={`climb ${nf(climb, 0)} m/km`} c={C.first} s={T.key} o={fin(f, tTurn + 20) * fout(f, tPeak - 6)} />
-        <Lbl x={1150} y={300} t="better than east and north" c={C.key} s={T.floor} o={win(f, SS(k, 7), tTurn - 6)} />
+        <Lbl x={1150} y={474} t="better than east and north" c={C.key} s={T.floor} o={win(f, SS(k, 7), tTurn - 6)} />
         <Keyword f={f} text="which way is steepest?" at={[1150, 70]} appear={tQ} out={tE - 12} />
       </Svg>
-      <Svg><CurvedLink f={f} from={[1140, 200]} to={[nd[0] + 12, nd[1] - 12]} start={tTurn + 24} end={tPeak - 8} bend={60} /></Svg>
+      {/* K6 r1: no link from the climb readout to the needle (in every direction below the east axis it crossed the axis and its
+          label); the readout is in the needle's teal, and the curve under it is the same sweep */}
     </Scene>
   );
 };
@@ -312,7 +317,8 @@ const S05: React.FC = () => {
         {g > 0.98 ? <RightTick at={hp(30 * s, 0)} u1={[-1, 0]} u2={[0, -1]} s={22} c={C.muted} /> : null}
         <Arrow p={HO} q={hp(30 * s, 40 * s)} color={C.second} o={fin(f, tBuild + 66)} />
         <path d={arcD(HO, 90, 0, HL.angle)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tDir)} />
-        <Lbl x={HO[0] + 104} y={HO[1] - 44} t="53°" c={C.gold} s={T.key} o={fin(f, tDir + 6)} />
+        {/* K6 r1: inside the triangle, clear of the arc (r 90) and of the dashed north leg at x 700 */}
+        <Lbl x={HO[0] + 134} y={HO[1] - 67} t="53°" c={C.gold} s={T.key} a="middle" o={fin(f, tDir + 6)} />
         <Lbl x={hp(30 * s, 40 * s)[0] + 30} y={hp(30 * s, 40 * s)[1] - 20} t="∇h" c={C.second} s={T.calc} o={fin(f, tName)} />
         <Walker x={HO[0] - 34} y={HO[1] + 4} s={0.7} />
         <g opacity={0.55 * fout(f, tBuild)}>
@@ -325,8 +331,8 @@ const S05: React.FC = () => {
         <Lbl x={1150} y={380} t="length = steepest slope" c={C.key} s={T.key} o={fin(f, AT(k, 4, "its length"))} />
         <Keyword f={f} text="gradient" at={[1150, 500]} appear={tName} targets={[[hp(30 * s, 40 * s)[0] + 10, hp(30 * s, 40 * s)[1] + 10]]} />
       </Svg>
-      <TeX s={String.raw`\sqrt{30^2+40^2}=\sqrt{2500}=50`} x={1150} y={160} size={T.calc} o={fin(f, tPy) * fout(f, tBuild - 20)} />
-      <TeX s={String.raw`\sqrt{30^2+40^2}=50`} x={1150} y={160} size={T.calc} o={fin(f, tBuild)} />
+      <TeX s={String.raw`\sqrt{30^2+40^2}=\sqrt{2500}=50`} x={1120} y={160} size={58} o={fin(f, tPy) * fout(f, tBuild - 20)} />
+      <TeX s={String.raw`\sqrt{30^2+40^2}=50`} x={1120} y={160} size={58} o={fin(f, tBuild)} />
     </Scene>
   );
 };
@@ -358,16 +364,16 @@ const S06: React.FC = () => {
           <Lbl x={HO[0] - 26} y={hp(0, 1.0)[1]} t="ŷ" c={C.second} s={T.key} a="end" />
         </g>
       </Svg>
-      <Layered parts={P06} x={1080} y={210} size={T.eq} o={fin(f, tW)} layers={[
+      <Layered parts={P06} x={1060} y={210} size={70} o={fin(f, tW)} layers={[
         { t: "all", o: 1, u: f >= tEq + 30 ? [2, 4] : [] },
       ]} />
       <Svg>
-        <Keyword f={f} text="nabla, del" at={[1090, 420]} appear={tNab} targets={[[1112, 230]]} />
+        <Keyword f={f} text="nabla, del" at={[1090, 420]} appear={tNab} targets={[[1088, 232]]} />
         <Lbl x={1440} y={420} t="“grad h”" c={C.key} s={T.key} o={fin(f, tGrad)} />
         <Lbl x={1090} y={760} t="scalar → vector at every place" c={C.key} s={T.floor} o={fin(f, tVec)} />
       </Svg>
-      <TeX s={String.raw`\nabla h=30\,\hat{\mathbf x}+40\,\hat{\mathbf y}\ \ (\mathrm{m/km})`} x={1080} y={540} size={T.calc} o={fin(f, tNum)} />
-      <TeX s={String.raw`|\nabla h|=\sqrt{30^2+40^2}=50\ \mathrm{m/km}`} x={1080} y={650} size={T.calc} o={fin(f, tLen)} />
+      <TeX s={String.raw`\nabla h=30\,\hat{\mathbf x}+40\,\hat{\mathbf y}\ \ (\mathrm{m/km})`} x={1060} y={540} size={56} o={fin(f, tNum)} />
+      <TeX s={String.raw`|\nabla h|=\sqrt{30^2+40^2}=50\ \mathrm{m/km}`} x={1060} y={650} size={56} o={fin(f, tLen)} />
     </Scene>
   );
 };
@@ -398,7 +404,7 @@ const S07: React.FC = () => {
       </Svg>
       <Layered parts={[{ t: String.raw`\nabla=\hat{\mathbf x}\,\frac{\partial}{\partial x}+\hat{\mathbf y}\,\frac{\partial}{\partial y}+` },
         { t: String.raw`\hat{\mathbf z}\,\frac{\partial}{\partial z}` }]}
-        layers={[{ t: "all", o: 1, tc: { 1: f >= tUp ? C.local : C.ink } }]} x={1080} y={260} size={76} o={fin(f, tArrow)} />
+        layers={[{ t: "all", o: 1, tc: { 1: f >= tUp ? C.local : C.ink } }]} x={1080} y={260} size={68} o={fin(f, tArrow)} />
       <TeX s={eB} x={1080} y={420} size={T.eq} o={fin(f, tIdx)} />
     </Scene>
   );
@@ -416,9 +422,9 @@ const S08: React.FC = () => {
         <BaroIcon x={420} y={720} r={60} o={0.35 + 0.65 * fin(f, tP)} />
         <Lbl x={1080} y={110} t="field’s unit ÷ length" c={C.key} s={T.key} o={fin(f, t0)} />
       </Svg>
-      <TeX s={String.raw`\mathrm{m/km}\ =\ \text{slope}`} x={1080} y={240} size={T.calc} o={fin(f, tH)} />
-      <TeX s={String.raw`\mathrm{K/m}\ \to\ \mathrm{K\ per\ 100\ km}`} x={1080} y={420} size={T.calc} o={fin(f, tT)} />
-      <TeX s={String.raw`\mathrm{Pa/m}\ \to\ \mathrm{hPa\ per\ 100\ km}`} x={1080} y={690} size={T.calc} o={fin(f, tP)} />
+      <TeX s={String.raw`\mathrm{m/km}\ =\ \text{slope}`} x={1080} y={240} size={64} o={fin(f, tH)} />
+      <TeX s={String.raw`\mathrm{K/m}\ \to\ \mathrm{K\ per\ 100\ km}`} x={1080} y={420} size={64} o={fin(f, tT)} />
+      <TeX s={String.raw`\mathrm{Pa/m}\ \to\ \mathrm{hPa\ per\ 100\ km}`} x={1080} y={690} size={64} o={fin(f, tP)} />
       <Svg><Lbl x={1080} y={540} t="1 K step = 1 °C step" c={C.key} s={T.key} o={fin(f, tK)} /></Svg>
     </Scene>
   );

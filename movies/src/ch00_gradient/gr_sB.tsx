@@ -47,8 +47,8 @@ export const T850Map: React.FC<{ id: string; B: MapBox; o?: number; arrows?: num
 );
 
 // ================================================================ s09 a real gradient field: ERA5 850 hPa, 18 UTC 1 Nov 2023
-const MB9: MapBox = boxAt(48.2, -7.0, 11.5, 80, 40, 1100, 790);
-const ZB9: MapBox = boxAt(48.5, -4.5, 2.2, 80, 40, 1100, 790);
+const MB9: MapBox = boxAt(48.2, -7.0, 11.5, 80, 40, 1100, 780);   // K6 r1: h 780 so the source line ends above y 880
+const ZB9: MapBox = boxAt(48.5, -4.5, 2.2, 80, 40, 1100, 780);
 const S09: React.FC = () => {
   const f = useCurrentFrame(), k = K("s09_gradient_field");
   const tArr = SS(k, 0), tName = AT(k, 1, "gradient field"), tBrit = AT(k, 2, "Brittany"), tERA = AT(k, 4, "ERA5"), tRe = AT(k, 4, "reanalysis"), tWarm = SS(k, 5);
@@ -77,11 +77,12 @@ const S09: React.FC = () => {
         <Lbl x={1240} y={330} t="ERA5 = reanalysis" c={C.key} s={T.key} o={win(f, tRe, tBrest - 12)} />
         <Lbl x={1240} y={410} t="towards warmer air" c={C.key} s={T.key} o={win(f, tWarm, tBrest - 12)} />
         <SideCallout f={f} lines="∂T/∂x = −3.2" at={[1240, 270]} appear={tDx} target={[mix(br[0], ex[0], 0.5), br[1] + 6]} s={T.calc} bend={40} out={LEN(k) - 30} />
-        <SideCallout f={f} lines="∂T/∂y = −2.5" at={[1240, 380]} appear={tDy} target={[ex[0] - 8, mix(ex[1], tipB[1], 0.5)]} s={T.calc} bend={30} out={LEN(k) - 30} />
+        <SideCallout f={f} lines="∂T/∂y = −2.5" at={[1240, 380]} appear={tDy} target={[ex[0] - 8, mix(ex[1], tipB[1], 0.5)]} s={T.calc} bend={-30} out={LEN(k) - 30} />
         <Lbl x={1240} y={460} t="K per 100 km" c={C.muted} s={T.floor} b={false} o={fin(f, tDx + 20) * fout(f, LEN(k) - 30)} />
-        <SideCallout f={f} lines="≈ 230° from north" at={[1240, 770]} appear={tBrg} target={[br[0] + 60, br[1] - 104]} s={T.key} bend={-30} out={LEN(k) - 30} />
+        {/* K6 r2: the bearing link points at the arc's south side (below Brest), so the three links reach Brest in the order of their labels */}
+        <SideCallout f={f} lines="≈ 230° from north" at={[1240, 770]} appear={tBrg} target={[br[0] + 8, br[1] + 128]} s={T.key} bend={-30} out={LEN(k) - 30} />
       </Svg>
-      <CalcStack f={f} x={1420} y={540} size={60} rows={[
+      <CalcStack f={f} x={1326} y={540} size={60} rows={[
         { lhs: String.raw`|\nabla T|`, rhs: String.raw`=\sqrt{3.2^2+2.5^2}`, at: tPy },
         { rhs: String.raw`\approx 4.1\ \mathrm{K\ per\ 100\ km}`, at: tPy + 40, cont: true },
       ]} o={fout(f, LEN(k) - 30)} />
@@ -125,10 +126,10 @@ const S10: React.FC = () => {
         { lhs: String.raw`dh`, rhs: String.raw`=\frac{\partial h}{\partial x}\,dx+\frac{\partial h}{\partial y}\,dy`, at: tDh, h: 120 },
         { lhs: String.raw`\div\,ds`, rhs: String.raw`\ `, at: tDiv, c: C.gold, lc: C.gold },
       ]} o={fout(f, tRes - 4)} />
-      <TeX s={EQ_S10} x={1070} y={300} size={58} o={fin(f, tRes) * fout(f, tChk - 6)} />
+      <TeX s={EQ_S10} x={1070} y={300} size={48} o={fin(f, tRes) * fout(f, tChk - 6)} />
       <TeX s={String.raw`\nabla h\cdot\hat{\mathbf n}`} x={1450} y={460} size={T.eq} c={C.second} o={fin(f, tDot) * fout(f, tChk - 6)} />
       <Svg><Lbl x={1440} y={560} t="dot product" c={C.key} s={T.key} o={fin(f, tDot + 10) * fout(f, tChk - 6)} /></Svg>
-      <TeX s={String.raw`\alpha=90^{\circ}:\ \ 30\times0+40\times1=40`} x={1070} y={300} size={T.calc} o={fin(f, tNum)} />
+      <TeX s={String.raw`\alpha=90^{\circ}:\ \ 30\times0+40\times1=40`} x={1070} y={300} size={54} o={fin(f, tNum)} />
     </Scene>
   );
 };
@@ -159,7 +160,7 @@ const S11: React.FC = () => {
         <path d={arcD(HO, 70, g, g + th)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tTh) * (Math.abs(th) > 3 ? 1 : 0)} />
         <Walker x={HO[0] - 34} y={HO[1] + 4} s={0.7} />
         <g opacity={fin(f, tOne)}>
-          <Axes A={CA} xt={[-180, 0, 180]} yt={[-50, 0, 50]} yl="climb (m/km)" xl="θ (°)" zero />
+          <Axes A={CA} xt={[-90, 0, 90]} yt={[-50, 0, 50]} yl="climb (m/km)" xl="θ (°)" zero />
           <Curve A={CA} xs={xs} ys={ys} c={C.first} w={5} />
           <circle cx={cp[0]} cy={cp[1]} r={11} fill={C.first} stroke={C.bg} strokeWidth={3} />
           <circle cx={axP(CA)(0, 50)[0]} cy={axP(CA)(0, 50)[1]} r={12} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tMax)} />
@@ -169,7 +170,7 @@ const S11: React.FC = () => {
         <Lbl x={1150} y={330} t="cos θ ≤ 1" c={C.gold} s={T.key} o={fin(f, tMax)} />
         <Lbl x={1420} y={330} t="fastest rate = |∇h|" c={C.key} s={T.floor} o={fin(f, tWhy)} />
       </Svg>
-      <TeX s={EQ_S11} x={1070} y={200} size={60} o={fin(f, tForm)} />
+      <TeX s={EQ_S11} x={1070} y={200} size={50} o={fin(f, tForm)} />
     </Scene>
   );
 };
@@ -226,12 +227,12 @@ const S12: React.FC = () => {
       <Svg o={oMaps}>
         {T8.ticks.map((t: number[], i: number) => tick(mapP(BL), t, `t${i}`))}
         {MSL.ticks.map((t: number[], i: number) => tick(mapP(BR), [t[0], t[1], t[2], t[3], t[4], t[5]], `p${i}`))}
-        <Lbl x={BL.x + 20} y={BL.y + BL.h + 70} t="isotherms" c={C.key} s={T.key} o={fin(f, AT(k, 5, "isotherms"))} />
-        <Lbl x={BR.x + 20} y={BR.y + BR.h + 70} t="isobars" c={C.key} s={T.key} o={fin(f, AT(k, 5, "isobars"))} />
-        <Lbl x={BL.x + 420} y={BL.y + BL.h + 70} t="contour maps" c={C.muted} s={T.floor} o={0.8 * fin(f, tMovie)} />
-        <Lbl x={BR.x + 240} y={BR.y + BR.h + 70} t="how contour maps are made" c={C.muted} s={T.floor} o={0.8 * fin(f, tMovie + 20)} />
+        <Lbl x={BL.x + 20} y={BL.y + BL.h + 35} t="isotherms" c={C.key} s={T.key} o={fin(f, AT(k, 5, "isotherms"))} />
+        <Lbl x={BR.x + 20} y={BR.y + BR.h + 35} t="isobars" c={C.key} s={T.key} o={fin(f, AT(k, 5, "isobars"))} />
+        <Lbl x={BL.x + 420} y={BL.y + BL.h + 35} t="contour maps" c={C.muted} s={T.floor} o={0.8 * fin(f, tMovie)} />
+        <Lbl x={BR.x + 240} y={BR.y + BR.h + 35} t="how contour maps are made" c={C.muted} s={T.floor} o={0.8 * fin(f, tMovie + 20)} />
       </Svg>
-      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 850 hPa, 1 Nov 2023, 18 UTC · sea level, 2 Nov 2023, 03 UTC" pic={{ x: 80, y: 60, w: 1760, h: 680 }} w={1760} gap={84} o={oMaps} name="s12 src" />
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 850 hPa, 1 Nov 2023, 18 UTC · sea level, 2 Nov 2023, 03 UTC" pic={{ x: 80, y: 60, w: 1760, h: 680 }} w={1760} gap={70} o={oMaps} name="s12 src" />
     </Scene>
   );
 };
@@ -284,7 +285,7 @@ const S14: React.FC = () => {
     <g opacity={o}>
       <rect x={x0} y={70} width={800} height={440} rx={18} fill="#22304a" />
       {Array.from({ length: n }, (_, i) => x0 + 40 + i * sp * u).filter((x) => x < x0 + 790).map((x, i) => (
-        <g key={i}><line x1={x} y1={90} x2={x} y2={490} stroke={C.key} strokeWidth={3} strokeOpacity={0.8} />
+        <g key={i}><line x1={x} y1={90} x2={x} y2={350} stroke={C.key} strokeWidth={3} strokeOpacity={0.8} />
           <Lbl x={x + 8} y={110} t={`${(i + 1) * 100}`} c={C.muted} s={T.floor} b={false} /></g>))}
     </g>
   );
@@ -293,10 +294,11 @@ const S14: React.FC = () => {
       <Svg>
         {panel(80, 2, fin(f, tEvery), 3)}
         {panel(1000, 0.5, fin(f, tSt), 9)}
-        <Bracket p={[120, 420]} q={[120 + 2 * u, 420]} off={0} c={C.gold} o={fin(f, tGen)} />
-        <Lbl x={120 + u} y={380} t="2 km" c={C.gold} s={T.key} a="middle" o={fin(f, tGen + 6)} />
-        <Bracket p={[1040, 420]} q={[1040 + 0.5 * u, 420]} off={0} c={C.gold} o={fin(f, tSt + 10)} />
-        <Lbl x={1040 + 0.25 * u} y={380} t="0.5 km" c={C.gold} s={T.key} a="middle" o={fin(f, tSt + 16)} />
+        {/* K6 r1: the contour lines stop at y 350; brackets and their labels sit under them (a label across five lines was unreadable) */}
+        <Bracket p={[120, 385]} q={[120 + 2 * u, 385]} off={0} c={C.gold} o={fin(f, tGen)} />
+        <Lbl x={120 + u} y={450} t="2 km" c={C.gold} s={T.key} a="middle" o={fin(f, tGen + 6)} />
+        <Bracket p={[1040, 385]} q={[1040 + 0.5 * u, 385]} off={0} c={C.gold} o={fin(f, tSt + 10)} />
+        <Lbl x={1040 + 0.25 * u + 40} y={450} t="0.5 km" c={C.gold} s={T.key} a="middle" o={fin(f, tSt + 16)} />
         <Arrow p={[480, 300]} q={[480 + 50 * 1.5, 300]} color={C.second} o={fin(f, AT(k, 2, "fifty metres per kilometre"))} />
         <Arrow p={[1500, 300]} q={[1500 + 200 * 1.5, 300]} color={C.second} o={fin(f, AT(k, 4, "two hundred metres per kilometre"))} />
         <Lbl x={960} y={720} t="closer lines → bigger gradient" c={C.key} s={T.key} a="middle" o={fin(f, tRule)} />
@@ -346,7 +348,7 @@ const S15: React.FC = () => {
           return <Arrow key={i} p={pr.p(p0)} q={pr.p(p1)} color={C.second} w={5} head={16} o={oA} />;
         })}
         <Place p={pc} t="Chamonix" dx={-22} dy={-36} a="end" o={fin(f, tCham)} />
-        <Place p={ps} t="Mont Blanc" dx={22} dy={-36} o={fin(f, tMB) * fin(f, tSum)} />
+        <Place p={ps} t="Mont Blanc" dx={-22} dy={40} a="end" o={fin(f, tMB) * fin(f, tSum)} />
         <g opacity={fin(f, tTen) * fout(f, tDraw)}>
           <line x1={pc[0]} y1={pc[1]} x2={ps[0]} y2={ps[1]} stroke={C.gold} strokeWidth={5} strokeDasharray="14 10" />
         </g>
@@ -358,12 +360,13 @@ const S15: React.FC = () => {
         <SideCallout f={f} lines="Chamonix ≈ 1035 m" at={[1200, 270]} appear={tCham + 4} target={[pc[0] + 10, pc[1] + 14]} s={T.key} bend={30} out={tDraw - 10} />
         <SideCallout f={f} lines="summit ≈ 4806 m" at={[1200, 350]} appear={tSum + 4} target={[ps[0] + 14, ps[1] + 14]} s={T.key} bend={-30} out={tDraw - 10} />
         <SideCallout f={f} lines="about 60 %" at={[1200, 720]} appear={tSixty} target={[pmax[0] + 10, pmax[1]]} s={T.calc} bend={40} />
-        <SideCallout f={f} lines="≈ 10 km apart" at={[1200, 770]} appear={tTen + 6} out={tDraw - 10} target={[mix(pc[0], ps[0], 0.5) + 10, mix(pc[1], ps[1], 0.5)]} s={T.key} bend={30} />
+        <SideCallout f={f} lines="≈ 10 km apart" at={[1200, 770]} appear={tTen + 6} out={tDraw - 10} target={[mix(pc[0], ps[0], 0.3) + 6, mix(pc[1], ps[1], 0.3) + 8]} s={T.key} ctl={[ps[0] + 10, ps[1] + 200]} />
         <Lbl x={1200} y={620} t="uphill, ⟂ contours" c={C.key} s={T.key} o={fin(f, tUp)} />
       </Svg>
-      <CalcStack f={f} x={1290} y={420} size={56} rows={[
-        { lhs: String.raw`4806-1035`, rhs: String.raw`=3771\ \mathrm{m}`, at: tAvg },
-        { lhs: String.raw`3771\ \mathrm{m}\div 10\,056\ \mathrm{m}`, rhs: String.raw`\approx0.375`, at: tPct },
+      {/* K6 r1: right-hand sides only, from x 1200 (the left-hand sides reached back over the terrain to x 830) */}
+      <CalcStack f={f} x={1190} y={420} size={56} rows={[
+        { rhs: String.raw`4806-1035=3771\ \mathrm{m}`, at: tAvg },
+        { rhs: String.raw`3771\div 10\,056\approx0.375`, at: tPct },
         { rhs: String.raw`\approx37.5\ \mathrm{m\ per\ 100\ m}`, at: tPct + 40, cont: true },
       ]} o={fout(f, tDraw - 6)} />
       <SourceBelow text="Terrain: ETOPO 2022 (NOAA) · imagery: Copernicus Sentinel-2 · 26 Sep 2023" pic={{ x: 0, y: 0, w: 1920, h: 820 }} x={80} w={1100} name="s15 src" />
@@ -374,7 +377,7 @@ const S15: React.FC = () => {
 // ================================================================ s16 water feels the gradient; the scale of a gradient
 const AB: MapBox = boxAt(45.8, 8.5, 3.4, 80, 50, 680, 430);
 const HB: MapBox = boxAt(29.5, 87.5, 9.0, 1120, 50, 720, 430);
-const PA: Ax = { x: 1220, y: 640, w: 560, h: 180, xr: [25, 33], yr: [0, 6] };
+const PA: Ax = { x: 1220, y: 650, w: 560, h: 150, xr: [24, 33], yr: [0, 6] };   // K6 r1: axis words folded into the ticks ("km", "°N")
 const S16: React.FC = () => {
   const f = useCurrentFrame(), k = K("s16_water_scale");
   const tWater = SS(k, 0), tRain = SS(k, 1), tScale = SS(k, 2), tMap = SS(k, 3), tBlocks = SS(k, 4), tPlain = AT(k, 5, "Ganges plain"), tPlat = AT(k, 5, "Tibetan plateau");
@@ -425,12 +428,14 @@ const S16: React.FC = () => {
         <Lbl x={1120} y={575} t="blocks ≈ 35 km" c={C.key} s={T.key} o={fin(f, tBlocks)} />
         <Place p={mapP(HB)(EVEREST_LL[0], EVEREST_LL[1])} t="Everest" dx={18} dy={-32} o={fin(f, tEv)} />
         <g opacity={fin(f, tPlain)}>
-          <Axes A={PA} xt={[26, 28, 30, 32]} yt={[0, 3, 6]} yl="height (km)" xl="latitude (°N)" xf={(v) => `${v}`} />
+          <Axes A={PA} xt={[26, 28, 30, 32]} yt={[0, 3, 6]} xf={(v) => `${v}°N`} yf={(v) => `${v} km`} />
           <Curve A={PA} xs={SCL.prof_lat} ys={(SCL.prof_h as number[]).map((h) => h / 1000)} c={C.key} w={6} upto={prog(f, tPlain, tPlat + 30)} />
         </g>
-        <Lbl x={PA.x + 10} y={PA.y + PA.h - 40} t="≈ 50 m" c={C.key} s={T.floor} o={fin(f, tPlain + 10)} />
-        <Lbl x={PA.x + PA.w - 10} y={PA.y - 6} t="≈ 4900 m" c={C.key} s={T.floor} a="end" o={fin(f, tPlat)} />
-        <SideCallout f={f} lines="≈ 5 %" at={[920, 770]} appear={tEv + 10} target={[pe[0] - 8, pe[1] + 6]} s={T.calc} bend={30} />
+        <Lbl x={PA.x + 8} y={PA.y + PA.h - 30} t="≈ 50 m" c={C.key} s={T.floor} o={fin(f, tPlain + 10)} />
+        <Lbl x={PA.x + PA.w - 10} y={PA.y - 24} t="≈ 4900 m" c={C.key} s={T.floor} a="end" o={fin(f, tPlat)} />
+        {/* K6 r1: the slope readout sits under the plateau, inside the chart, with a short link to the rising flank (from the left of the
+            chart it crossed the y axis and the "3" tick) */}
+        <SideCallout f={f} lines="≈ 5 %" at={[1474, 768]} appear={tEv + 10} target={[pe[0] + 2, pe[1] + 4]} s={T.key} bend={12} />
         <Lbl x={100} y={780} t="both right, each for its scale" c={C.gold} s={T.key} o={fin(f, tBoth)} />
       </Svg>
       <SourceBelow text="Data: ETOPO 2022 (NOAA) · 60″ grid" pic={{ x: AB.x, y: AB.y, w: AB.w, h: AB.h }} w={680} o={oS} name="s16 src alps" />

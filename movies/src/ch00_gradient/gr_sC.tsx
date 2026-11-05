@@ -84,10 +84,11 @@ const S17: React.FC = () => {
         <Lbl x={1540} y={420} t="Europe:" c={C.local} s={T.floor} o={fin(f, tEur)} />
         <Lbl x={1540} y={472} t="≈ 10–13 km" c={C.local} s={T.floor} o={fin(f, tEur)} />
       </Svg>
-      <CalcStack f={f} x={1340} y={690} size={52} rows={[
+      {/* K6 r1: under the chart's "°C" axis word, starting at x 1080 (it reached x 1982 and sat on "at 33 m") */}
+      <CalcStack f={f} x={1165} y={745} size={52} rows={[
         { lhs: String.raw`\frac{\partial T}{\partial z}`, rhs: String.raw`\approx\frac{-109.0\ ^{\circ}\mathrm{C}}{16.1\ \mathrm{km}}\approx-6.8\ ^{\circ}\mathrm{C/km}`, at: tCalc, h: 120 },
       ]} o={fout(f, tLapse - 6)} />
-      <TeX s={String.raw`\Gamma=-\frac{\partial T}{\partial z}\approx+6.8\ ^{\circ}\mathrm{C/km}`} x={1140} y={760} size={58} o={fin(f, tLapse)} />
+      <TeX s={String.raw`\Gamma=-\frac{\partial T}{\partial z}\approx+6.8\ ^{\circ}\mathrm{C/km}`} x={1080} y={800} size={58} o={fin(f, tLapse + 14)} />
       <SourceBelow text="Data: IGRA v2 (NOAA NCEI) · Singapore Changi · 1 Nov 2023, 00 UTC · image: NASA Blue Marble NG" pic={{ x: 40, y: 30, w: 960, h: 750 }} w={980} name="s17 src" />
     </Scene>
   );
@@ -120,7 +121,7 @@ const S18: React.FC = () => {
         <Lbl x={X0} y={zp(13) - 30} t={ex < 1.5 ? "13 km tall: a hairline" : "height × 50"} c={C.muted} s={T.floor} b={false} />
         <Lbl x={1080} y={110} t="sideways ≈ 4.1 °C per 100 km" c={C.key} s={T.floor} o={fin(f, tCmp)} />
       </Svg>
-      <TeX s={String.raw`6.8\ ^{\circ}\mathrm{C/km}=680\ ^{\circ}\mathrm{C\ per\ 100\ km}`} x={1080} y={260} size={58} o={fin(f, t680)} />
+      <TeX s={String.raw`6.8\ ^{\circ}\mathrm{C/km}=680\ ^{\circ}\mathrm{C\ per\ 100\ km}`} x={1080} y={260} size={54} o={fin(f, t680)} />
       <TeX s={String.raw`680\div4.1\approx166>160`} x={1080} y={400} size={T.calc} o={fin(f, t160)} />
       <Svg><Lbl x={1080} y={540} t="isotherms nearly flat" c={C.key} s={T.key} o={fin(f, tFlat)} />
         <Lbl x={1080} y={620} t="∇T almost vertical" c={C.second} s={T.key} o={fin(f, tFlat + 30)} /></Svg>
@@ -226,8 +227,10 @@ const S21: React.FC = () => {
         </g>
         <Lbl x={960} y={680} t="gradient, not value" c={C.gold} s={T.key} a="middle" o={fin(f, tCase)} />
         <g opacity={fin(f, tRoom)}>
-          <rect x={760} y={730} width={400} height={110} rx={12} fill={C.neg} opacity={0.7} />
-          <Lbl x={960} y={785} t="equally warm: no flow" c={C.key} s={T.floor} a="middle" />
+          {/* K6 r1: two equally warm blocks with the words under them (text inside a filled box failed the fill rule) */}
+          <rect x={800} y={722} width={140} height={70} rx={10} fill={C.neg} opacity={0.85} />
+          <rect x={980} y={722} width={140} height={70} rx={10} fill={C.neg} opacity={0.85} />
+          <Lbl x={960} y={830} t="equally warm: no flow" c={C.key} s={T.floor} a="middle" />
         </g>
       </Svg>
     </Scene>
@@ -254,22 +257,23 @@ const S22: React.FC = () => {
   const bE = G.p(B[0] + h, B[1] + h), bN = G.p(B[0] + h, B[1] - h);
   return (
     <Scene>
-      <Globe cam={cam} grat={0.5} gratStep={10} coast={0.5} over={(Gp) => <>
+      {/* K6 r1: the graticule in light slate (#b8c2d6), not the muted axis grey: these are map lines that the side callouts' links cross */}
+      <Globe cam={cam} grat={0.4} gratStep={10} gratC="#b8c2d6" coast={0.5} over={(Gp) => <>
         <path d={cell(B[0], B[1], h)} fill={C.second} fillOpacity={0.25} stroke={C.second} strokeWidth={4} opacity={fin(f, tN)} />
         <path d={cell(Sv[0], Sv[1], h)} fill={C.second} fillOpacity={0.25} stroke={C.second} strokeWidth={4} opacity={fin(f, tE + 40)} />
         <Place p={Gp.p(B[0], B[1])} t="Brest" r={8} dx={-20} dy={34} a="end" o={fin(f, tN)} />
         <Place p={Gp.p(Sv[0], Sv[1])} t="Svalbard" r={8} dx={22} dy={-34} o={fin(f, tE + 40)} />
       </>} />
       <Svg>
-        <SideCallout f={f} lines="a dφ: north–south side" at={[1080, 340]} appear={tN + 20} out={tSlE - 14} target={G.p(B[0], B[1] - h)} s={T.floor} c={C.second} bend={40} />
-        <SideCallout f={f} lines="a cos φ dλ: east–west side" at={[1080, 410]} appear={tE + 10} out={tSlE - 14} target={G.p(B[0] + h, B[1])} s={T.floor} c={C.second} bend={-30} />
+        <SideCallout f={f} lines="a dφ: north–south side" at={[1080, 410]} appear={tN + 20} out={tSlE - 14} target={G.p(B[0], B[1] - h)} s={T.floor} c={C.second} bend={-30} />
+        <SideCallout f={f} lines="a cos φ dλ: east–west side" at={[1080, 340]} appear={tE + 10} out={tSlE - 14} target={G.p(B[0] + h, B[1])} s={T.floor} c={C.second} bend={40} />
         <Lbl x={1080} y={110} t="the Earth is round" c={C.key} s={T.key} o={fin(f, tRound)} />
         <Lbl x={1080} y={190} t="latitude φ, longitude λ" c={C.key} s={T.floor} o={fin(f, tGrid)} />
         <Lbl x={1080} y={260} t="a = Earth’s radius" c={C.key} s={T.floor} o={fin(f, tN)} />
-        <Lbl x={1080} y={760} t="circles of latitude shrink" c={C.gold} s={T.key} o={fin(f, tE + 60)} />
+        <Lbl x={1080} y={822} t="circles of latitude shrink" c={C.gold} s={T.key} o={fin(f, tE + 60)} />
       </Svg>
-      <Layered parts={P22a} x={1080} y={420} size={64} o={fin(f, tSlE)} layers={[{ t: "all", o: 1, u: f >= tSlE + 30 ? [1] : [], glow: pulse(f, tSlE + 10, 30) }]} />
-      <Layered parts={P22b} x={1080} y={600} size={64} o={fin(f, tSlN)} layers={[{ t: "all", o: 1, u: [...(f >= tSlN + 30 ? [1] : []), ...(f >= tAll + 10 ? [3] : [])] }]} />
+      <Layered parts={P22a} x={1080} y={422} size={64} o={fin(f, tSlE)} layers={[{ t: "all", o: 1, u: f >= tSlE + 30 ? [1] : [], glow: pulse(f, tSlE + 10, 30) }]} />
+      <Layered parts={P22b} x={1080} y={662} size={64} o={fin(f, tSlN)} layers={[{ t: "all", o: 1, u: [...(f >= tSlN + 30 ? [1] : []), ...(f >= tAll + 10 ? [3] : [])] }]} />
       <SourceBelow text="Image: NASA Blue Marble Next Generation" pic={GB} w={GB.w} name="s22 src" />
     </Scene>
   );
@@ -304,19 +308,20 @@ const S23: React.FC = () => {
           <Bracket p={[pw[0], pw[1] + 60]} q={[br[0], br[1] + 60]} c={C.gold} />
           <Bracket p={[br[0], br[1] + 60]} q={[pe[0], pe[1] + 60]} c={C.gold} />
         </g>
-        <SideCallout f={f} lines="east: 4.51 °C" at={[1090, 120]} appear={tE} target={[pe[0] + 14, pe[1] - 14]} s={T.key} bend={40} out={SE(k, 8) - 20} />
-        <SideCallout f={f} lines="west: 5.69 °C" at={[1090, 210]} appear={tW} target={[pw[0] + 8, pw[1] - 18]} s={T.key} bend={60} out={SE(k, 8) - 20} />
-        <SideCallout f={f} lines="¼° of longitude = 18.4 km" at={[1090, 300]} appear={tKm} out={tSl - 12} target={[mix(br[0], pe[0], 0.5), br[1] + 66]} s={T.floor} bend={30} />
-        <SideCallout f={f} lines="2 × 18.4 = 36.8 km apart" at={[1090, 370]} appear={tTot} out={tSl - 12} target={[br[0], br[1] + 66]} s={T.floor} bend={-30} />
+        <SideCallout f={f} lines="east: 4.51 °C" at={[1090, 210]} appear={tE} target={[pe[0] + 14, pe[1] - 14]} s={T.key} bend={40} out={SE(k, 8) - 20} />
+        <SideCallout f={f} lines="west: 5.69 °C" at={[1090, 120]} appear={tW} target={[pw[0] + 8, pw[1] - 18]} s={T.key} bend={60} out={SE(k, 8) - 20} />
+        <SideCallout f={f} lines="¼° of longitude = 18.4 km" at={[1090, 370]} appear={tKm} out={tSl - 12} target={[mix(br[0], pe[0], 0.5), br[1] + 66]} s={T.floor} bend={30} />
+        <SideCallout f={f} lines="2 × 18.4 = 36.8 km apart" at={[1090, 300]} appear={tTot} out={tSl - 12} target={[br[0], br[1] + 66]} s={T.floor} bend={-30} />
         <Lbl x={1090} y={760} t="a third too small" c={C.neg} s={T.key} o={fin(f, tWrong + 30)} />
       </Svg>
-      <CalcStack f={f} x={1360} y={300} size={52} maxLines={4} rows={[
+      <CalcStack f={f} x={1320} y={300} size={52} maxLines={4} rows={[
         { lhs: String.raw`\frac{4.51-5.69}{36.8\ \mathrm{km}}`, rhs: String.raw`=\frac{-1.18}{36.8\ \mathrm{km}}`, at: tSl, h: 120 },
         { rhs: String.raw`\approx-3.2\ ^{\circ}\mathrm{C\ per\ 100\ km}`, at: tRes, cont: true },
         { lhs: String.raw`\frac{-1.18}{55.6\ \mathrm{km}}`, rhs: String.raw`\approx-2.1`, at: tWrong, c: C.neg, lc: C.neg, h: 120 },
         { lhs: String.raw`\cos78^{\circ}`, rhs: String.raw`\approx0.2\ \to\ 5\times`, at: tSv },
       ]} />
-      <Svg><Lbl x={1090} y={570} t="2 × 27.8 km" c={C.neg} s={T.floor} o={fin(f, tForget) * fout(f, SE(k, 8) - 20)} /></Svg>
+      {/* K6 r1: out before the −2.1 row takes its place (it overlapped that row's left-hand side) */}
+      <Svg><Lbl x={1090} y={570} t="2 × 27.8 km" c={C.neg} s={T.floor} o={fin(f, tForget) * fout(f, tWrong - 20)} /></Svg>
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 1 Nov 2023, 18 UTC · 850 hPa" pic={{ x: Z0.x, y: Z0.y, w: Z0.w, h: Z0.h }} w={900} name="s23 src" />
     </Scene>
   );
@@ -387,16 +392,18 @@ const S25: React.FC = () => {
       <Svg>
         <Lbl x={pr.p([0, -0.6, 0])[0]} y={pr.p([0, -0.6, 0])[1] + 40} t="δx" c={C.gold} s={T.key} a="middle" o={fin(f, tBox)} />
         <Lbl x={pr.p([-2.2, 0, zc + 0.35])[0]} y={pr.p([-2.2, 0, zc + 0.35])[1]} t="p(x) δA" c={C.key} s={T.key} a="middle" o={fin(f, tW + 10)} />
-        <Lbl x={pr.p([2.4, 0, zc + 0.4])[0]} y={pr.p([2.4, 0, zc + 0.4])[1]} t="p(x + δx) δA" c={C.key} s={T.key} a="middle" o={fin(f, tE + 10)} />
-        <Lbl x={1090} y={160} t="equal pushes: net 0" c={C.gold} s={T.key} o={win(f, tEq, tRise - 20)} />
-        <Lbl x={1090} y={160} t="pressure rises east" c={C.key} s={T.key} o={fin(f, tRise + 4) * fout(f, tNet - 6)} />
+        <Lbl x={pr.p([2.6, 0, zc + 0.75])[0]} y={pr.p([2.6, 0, zc + 0.75])[1]} t="p(x + δx) δA" c={C.key} s={T.key} a="middle" o={fin(f, tE + 10)} />
+        <Lbl x={1090} y={120} t="equal pushes: net 0" c={C.gold} s={T.key} o={win(f, tEq, tRise - 20)} />
+        <Lbl x={1090} y={120} t="pressure rises east" c={C.key} s={T.key} o={fin(f, tRise + 4) * fout(f, tNet - 6)} />
       </Svg>
-      <TeX s={String.raw`p(x+\delta x)\approx p+\frac{\partial p}{\partial x}\,\delta x`} x={1090} y={290} size={60} o={fin(f, tTay)} />
-      <CalcStack f={f} x={1330} y={440} size={52} rows={[
-        { lhs: String.raw`\text{net}`, rhs: String.raw`=${E25a}`, at: tNet },
-        { rhs: String.raw`=${E25b}`, at: tNet + 50, cont: true },
-        { rhs: { parts: [{ t: "=" }, { t: String.raw`-\frac{\partial p}{\partial x}\,` }, { t: String.raw`\delta x\,\delta A`, u: { w: String.raw`\text{volume}`, c: C.gold } }], layers: [{ t: "all", o: 1, u: f >= tVol ? [2] : [] }] }, at: tVol, h: 140, size: 64 },
-        { rhs: String.raw`=${E25c}`, at: tVol + 60, cont: true },
+      <TeX s={String.raw`p(x+\delta x)\approx p+\frac{\partial p}{\partial x}\,\delta x`} x={1090} y={255} size={56} o={fin(f, tTay)} />
+      {/* K6 r1: row heights from the measured glyph boxes (fractions ≈ 103 px at 48, the braced row 178 px at 64): the rows overlapped,
+          and the first row reached x 1929 */}
+      <CalcStack f={f} x={1180} y={340} size={48} rows={[
+        { lhs: String.raw`\text{net}`, rhs: String.raw`=${E25a}`, at: tNet, h: 92 },
+        { rhs: String.raw`=${E25b}`, at: tNet + 50, cont: true, h: 112 },
+        { rhs: { parts: [{ t: "=" }, { t: String.raw`-\frac{\partial p}{\partial x}\,` }, { t: String.raw`\delta x\,\delta A`, u: { w: String.raw`\text{volume}`, c: C.gold } }], layers: [{ t: "all", o: 1, u: f >= tVol ? [2] : [] }] }, at: tVol, h: 186, size: 64 },
+        { rhs: String.raw`=${E25c}`, at: tVol + 60, cont: true, h: 112 },
       ]} maxLines={2} />
     </Scene>
   );
@@ -459,9 +466,9 @@ const S27: React.FC = () => {
         <ClockText x={1110} y={760} t="in 1 h: ≈ 3 m/s" h={hrs} o={fin(f, tHour)} />
       </Svg>
       <CalcStack f={f} x={1450} y={90} size={52} maxLines={4} rows={[
-        { lhs: String.raw`\frac{100\ \mathrm{Pa}}{100\,000\ \mathrm{m}}`, rhs: String.raw`=0.001\ \mathrm{Pa/m}`, at: tUnits, h: 120 },
-        { lhs: String.raw`\frac{0.001}{1}`, rhs: String.raw`\approx0.001\ \mathrm{m/s^2}`, at: tRho1, h: 110 },
-        { lhs: String.raw`\frac{0.001}{1.2}`, rhs: String.raw`\approx0.0008\ \mathrm{m/s^2}`, at: tRho12, h: 110 },
+        { lhs: String.raw`\frac{100\ \mathrm{Pa}}{100\,000\ \mathrm{m}}`, rhs: String.raw`=0.001\ \mathrm{Pa/m}`, at: tUnits, h: 125 },
+        { lhs: String.raw`\frac{0.001}{1}`, rhs: String.raw`\approx0.001\ \mathrm{m/s^2}`, at: tRho1, h: 125 },
+        { lhs: String.raw`\frac{0.001}{1.2}`, rhs: String.raw`\approx0.0008\ \mathrm{m/s^2}`, at: tRho12, h: 125 },
         { lhs: String.raw`0.00083\times3600\ \mathrm{s}`, rhs: String.raw`\approx3\ \mathrm{m/s}`, at: tHour },
       ]} />
     </Scene>

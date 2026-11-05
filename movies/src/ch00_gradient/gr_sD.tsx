@@ -50,8 +50,8 @@ const CiaranMap: React.FC<{ id: string; B: MapBox; o?: number; f: number; speed?
     </>}
   </GeoMap>
 );
-const M28: MapBox = boxAt(49.5, -5.0, 11.0, 80, 40, 1100, 790);
-const Z28: MapBox = boxAt(48.6, -4.5, 2.4, 80, 40, 1100, 790);
+const M28: MapBox = boxAt(49.5, -5.0, 11.0, 80, 40, 1100, 780);   // K6 r1: h 780 (source line above y 880)
+const Z28: MapBox = boxAt(48.6, -4.5, 2.4, 80, 40, 1100, 780);
 
 // ================================================================ s28 Ciarán's pressure gradient force
 const S28: React.FC = () => {
@@ -79,13 +79,15 @@ const S28: React.FC = () => {
         <SideCallout f={f} lines="centre ≈ 954 hPa" at={[1240, 110]} appear={tCen + 10} out={tBr - 6} target={[cen[0] + 20, cen[1]]} s={T.key} bend={30} />
         <Lbl x={1240} y={190} t="isobars every 4 hPa" c={C.key} s={T.floor} o={fin(f, tHere) * fout(f, tBr - 6)} />
         <SideCallout f={f} lines="isobars 31 km apart" at={[1240, 600]} appear={tBr + 34} out={tGrad - 12} target={[mix(b0[0], b1[0], 0.5) + 12, mix(b0[1], b1[1], 0.5)]} s={T.key} bend={30} />
-        <SideCallout f={f} lines="∇p: towards SSW" at={[1240, 500]} appear={tGrad} out={tForce - 6} target={[br[0] + u[0] * 120, br[1] + u[1] * 120]} s={T.key} bend={-30} />
-        <SideCallout f={f} lines="force: towards NNE" at={[1240, 500]} appear={tForce + 12} out={SE(k, 8) - 30} target={[br[0] - u[0] * 120 + 10, br[1] - u[1] * 120]} s={T.key} bend={30} />
+        <SideCallout f={f} lines="∇p: towards SSW" at={[1240, 680]} appear={tGrad} out={tForce - 6} target={[br[0] + u[0] * 120, br[1] + u[1] * 120]} s={T.key} bend={-30} />
+        <SideCallout f={f} lines="force: towards NNE" at={[1240, 680]} appear={tForce + 12} out={SE(k, 8) - 30} target={[br[0] - u[0] * 120 + 10, br[1] - u[1] * 120]} s={T.key} bend={30} />
         <ClockText x={1270} y={790} t="in 1 h" h={clamp((f - tHour - 10) / 60, 0, 1)} o={fin(f, tHour) * fout(f, LEN(k) - 20)} />
       </Svg>
+      {/* K6 r1: "per 100 km" on its own line (the row reached x 1952); fraction rows 115 px (they touched) */}
       <CalcStack f={f} x={1500} y={220} size={50} maxLines={3} rows={[
-        { lhs: String.raw`\frac{4\ \mathrm{hPa}}{31\ \mathrm{km}}`, rhs: String.raw`\approx13\ \mathrm{hPa\ per\ 100\ km}`, at: tCalc, h: 110 },
-        { lhs: String.raw`\frac{0.0129\ \mathrm{Pa/m}}{1.25}`, rhs: String.raw`\approx0.01\ \mathrm{m/s^2}`, at: tDiv, h: 110 },
+        { lhs: String.raw`\frac{4\ \mathrm{hPa}}{31\ \mathrm{km}}`, rhs: String.raw`\approx13\ \mathrm{hPa}`, at: tCalc, h: 115 },
+        { rhs: String.raw`\mathrm{per\ 100\ km}`, at: tCalc, cont: true },
+        { lhs: String.raw`\frac{0.0129\ \mathrm{Pa/m}}{1.25}`, rhs: String.raw`\approx0.01\ \mathrm{m/s^2}`, at: tDiv, h: 115 },
         { lhs: String.raw`0.0103\times3600`, rhs: String.raw`\approx37\ \mathrm{m/s}`, at: tHour + 20 },
       ]} o={fout(f, LEN(k) - 20)} />
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2 Nov 2023, 03 UTC" pic={{ x: M28.x, y: M28.y, w: M28.w, h: M28.h }} w={1100} name="s28 src" />
@@ -95,7 +97,7 @@ const S28: React.FC = () => {
 
 // ================================================================ s29 crowded isobars, strong winds
 const M29: MapBox = boxAt(49.5, -10.0, 15.0, 80, 40, 920, 730);
-const BA: Ax = { x: 1150, y: 240, w: 620, h: 300, xr: [0, 6], yr: [0, 30] };
+const BA: Ax = { x: 1150, y: 270, w: 620, h: 300, xr: [0, 6], yr: [0, 30] };   // K6 r1: the axis word sat on the colour bar's ticks
 const S29: React.FC = () => {
   const f = useCurrentFrame(), k = K("s29_crowded_winds");
   const tWhy = SS(k, 0), tSort = SS(k, 1), tLow = SS(k, 2), tHigh = SS(k, 3), tGust = SS(k, 4), tPow = SS(k, 5);
@@ -173,7 +175,7 @@ const S30: React.FC = () => {
 };
 
 // ================================================================ s31 the latest chart: GFS, 27 Oct 2026, 18 UTC
-const M31: MapBox = boxAt(65.5, -15.0, 21.0, 80, 40, 800, 790);
+const M31: MapBox = boxAt(65.5, -15.0, 21.0, 80, 40, 800, 780);
 const S31: React.FC = () => {
   const f = useCurrentFrame(), k = K("s31_latest_chart");
   const tHere = SS(k, 0), tLow = SS(k, 1), tGrad = SS(k, 2), tWind = SS(k, 3);
@@ -192,8 +194,8 @@ const S31: React.FC = () => {
         <Place p={cen} t="L" r={0} dx={0} dy={0} a="middle" s={T.calc} o={fin(f, tLow)} />
         <Place p={P(64.9, -18.6)} t="Iceland" r={0} dx={0} dy={0} a="middle" italic o={fin(f, AT(k, 1, "Iceland"))} />
         <ColourBar x={940} y={110} w={330} lut={LUT_SP} lo={0} hi={30} unit="m/s" title="10-m wind" ticks={[{ v: 0, t: "0" }, { v: 15, t: "15" }, { v: 30, t: "30" }]} />
-        <SideCallout f={f} lines="low ≈ 961 hPa" at={[940, 300]} appear={tLow + 10} target={[cen[0] + 26, cen[1] - 6]} s={T.key} bend={30} />
-        <SideCallout f={f} lines={["≈ 10 hPa per 100 km", "close to Ciarán’s 13"]} at={[940, 470]} appear={tGrad + 10} target={[pg[0] + 10, pg[1] + 4]} s={T.key} bend={-30} />
+        <SideCallout f={f} lines="low ≈ 961 hPa" at={[940, 470]} appear={tLow + 10} target={[cen[0] + 26, cen[1] - 6]} s={T.key} bend={30} />
+        <SideCallout f={f} lines={["≈ 10 hPa per 100 km", "close to Ciarán’s 13"]} at={[940, 300]} appear={tGrad + 10} target={[pg[0] + 10, pg[1] + 4]} s={T.key} bend={-30} />
         <SideCallout f={f} lines="wind ≈ 25 m/s" at={[940, 690]} appear={tWind + 10} target={[pw[0] - 12, pw[1] + 4]} s={T.key} bend={-40} />
         <circle cx={pg[0]} cy={pg[1]} r={12} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tGrad + 10)} />
         <circle cx={pw[0]} cy={pw[1]} r={12} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tWind + 10)} />
@@ -231,10 +233,11 @@ const S32: React.FC = () => {
         <g opacity={fin(f, tCia) * fout(f, tHyd - 6)}>
           <line x1={1100} y1={260} x2={1100} y2={420} stroke={C.ink} strokeWidth={3} /><line x1={1700} y1={260} x2={1700} y2={420} stroke={C.ink} strokeWidth={3} />
           <Bracket p={[1100, 440]} q={[1700, 440]} c={C.gold} />
-          <Lbl x={1400} y={490} t="Ciarán: 4 hPa in 31 km ≈ 1 hPa per 8 km" c={C.key} s={T.floor} a="middle" />
+          <Lbl x={1100} y={496} t="Ciarán: 4 hPa in 31 km" c={C.key} s={T.floor} />
+          <Lbl x={1100} y={548} t="≈ 1 hPa per 8 km" c={C.key} s={T.floor} />
         </g>
-        <Lbl x={1100} y={600} t="≈ 850× stronger" c={C.gold} s={T.calc} o={fin(f, t850) * fout(f, tHyd - 6)} />
-        <Lbl x={1100} y={690} t="ordinary day ≈ 10 000×" c={C.key} s={T.key} o={fin(f, tOrd) * fout(f, tHyd - 6)} />
+        <Lbl x={1100} y={622} t="≈ 850× stronger" c={C.gold} s={T.calc} o={fin(f, t850) * fout(f, tHyd - 6)} />
+        <Lbl x={1100} y={706} t="ordinary day ≈ 10 000×" c={C.key} s={T.key} o={fin(f, tOrd) * fout(f, tHyd - 6)} />
         <Lbl x={1100} y={790} t="balanced by gravity" c={BROWN} s={T.key} o={fin(f, tGrav)} />
         <Lbl x={1100} y={600} t="weather: the tiny sideways part" c={C.key} s={T.floor} o={fin(f, tCan) * fout(f, tPc)} />
         <Lbl x={1100} y={690} t="pressure coordinates" c={C.muted} s={T.key} o={fin(f, tPc)} />
@@ -250,7 +253,7 @@ const S32: React.FC = () => {
 };
 
 // ================================================================ s33 temperature gradients at fronts
-const M33: MapBox = boxAt(48.5, -9.0, 13.0, 80, 40, 1100, 790);
+const M33: MapBox = boxAt(48.5, -9.0, 13.0, 80, 40, 1100, 780);
 const S33: React.FC = () => {
   const f = useCurrentFrame(), k = K("s33_fronts");
   const tBack = SS(k, 0), tMap = SS(k, 1), tMost = SS(k, 2), tBand = SS(k, 3), tFront = SS(k, 4), tSq = SS(k, 5), tArr = SS(k, 6);
@@ -263,9 +266,9 @@ const S33: React.FC = () => {
       <Svg>
         <path d={linesPath(P, [band])} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tBand)} />
         <circle cx={qt[0]} cy={qt[1]} r={12} fill="none" stroke={C.muted} strokeWidth={5} opacity={fin(f, tMost)} />
-        <ColourBar x={1240} y={110} w={330} lut={LUT_AMP} lo={0} hi={12} unit="K" title={["|∇T|", "per 100 km"]} ticks={[{ v: 0, t: "0" }, { v: 6, t: "6" }, { v: 12, t: "12" }]} />
-        <SideCallout f={f} lines="≈ 1" at={[1240, 330]} appear={tMost + 10} target={[qt[0] + 14, qt[1]]} s={T.calc} c={C.muted} bend={40} />
-        <SideCallout f={f} lines="≈ 11" at={[1240, 450]} appear={tBand + 10} target={[mx[0] + 14, mx[1]]} s={T.calc} bend={-30} />
+        <ColourBar x={1240} y={150} w={330} lut={LUT_AMP} lo={0} hi={12} unit="K" title={["|∇T|", "per 100 km"]} ticks={[{ v: 0, t: "0" }, { v: 6, t: "6" }, { v: 12, t: "12" }]} />
+        <SideCallout f={f} lines="≈ 1" at={[1240, 450]} appear={tMost + 10} target={[qt[0] + 14, qt[1]]} s={T.calc} c={C.muted} bend={40} />
+        <SideCallout f={f} lines="≈ 11" at={[1240, 330]} appear={tBand + 10} target={[mx[0] + 14, mx[1]]} s={T.calc} bend={-30} />
         <Keyword f={f} text="front" at={[1240, 580]} appear={tFront} />
         <Lbl x={1240} y={670} t="over 10× stronger" c={C.key} s={T.key} o={fin(f, tSq)} />
         <Lbl x={1240} y={760} t="arrows → warm side" c={C.second} s={T.key} o={fin(f, tArr)} />
@@ -295,7 +298,7 @@ const S33b: React.FC = () => {
   return (
     <Scene>
       <HView3D st={st} x={0} y={0} w={1920} h={1080}>
-        <LayerStack3D layers={layers} foot={{ x0, x1, y0, y1 }} reveal={reveal} sep={1} mask={{ name: "s33b stack", clipX: 1068 }}
+        <LayerStack3D layers={layers} foot={{ x0, x1, y0, y1 }} reveal={reveal} sep={1} mask={{ name: "s33b stack", clipX: 1068, clipY: 788 }}
           lines={lays.slice(1).map((L, i) => ({ pts: front850.map((q) => fw(q[0], q[1], L.zg_km)), color: C.gold, px: 3, o: 0.6 * fin(f, tCold) * reveal[i + 1] }))
             .concat(lays.map((L, i) => ({ pts: L.front.map((q) => fw(q[0], q[1], L.zg_km)), color: C.gold, px: 6, o: fin(f, tCrowd) * reveal[i] })))} />
       </HView3D>
@@ -309,7 +312,7 @@ const S33b: React.FC = () => {
       </Svg>
       <GlobeFrame id="s33bf" zoom={1} right={1} />
       <Svg>
-        <ColourBar x={1240} y={110} w={330} lut={LUT_AMP} lo={0} hi={8} unit="K" title={["|∇T|", "per 100 km"]} ticks={[{ v: 0, t: "0" }, { v: 4, t: "4" }, { v: 8, t: "8" }]} o={fin(f, tStack)} />
+        <ColourBar x={1240} y={150} w={330} lut={LUT_AMP} lo={0} hi={8} unit="K" title={["|∇T|", "per 100 km"]} ticks={[{ v: 0, t: "0" }, { v: 4, t: "4" }, { v: 8, t: "8" }]} o={fin(f, tStack)} />
         {lays.slice().reverse().map((L, i) => <Lbl key={L.level} x={1240} y={290 + i * 62} t={`${L.level} hPa ≈ ${nf(L.zg_km, 1)} km`} c={C.key} s={T.floor} o={reveal[lays.length - 1 - i]} />)}
         <Lbl x={1240} y={560} t="isotherms crowd: the front" c={C.key} s={T.floor} o={fin(f, tCrowd)} />
         <Lbl x={1240} y={630} t="cold side," c={C.gold} s={T.key} o={fin(f, tCold)} />
@@ -325,7 +328,7 @@ const S33b: React.FC = () => {
 const S34: React.FC = () => {
   const f = useCurrentFrame(), k = K("s34_advection");
   const tFix = SS(k, 0), tWind = SS(k, 1), tAlong = SS(k, 2), tCos = SS(k, 3), tNeg = SS(k, 4), tTimes = SS(k, 5), tAdv = SS(k, 6), tTherm = SS(k, 7), tMat = SS(k, 8);
-  const ZB = boxAt(48.5, -4.5, 2.4, 80, 40, 1000, 790);
+  const ZB = boxAt(48.5, -4.5, 2.4, 80, 40, 1000, 780);
   const P = mapP(ZB);
   const br = P(T8.brest.gp[0], T8.brest.gp[1]);
   const W = T8.wind, gx = T8.brest.gx, gy = T8.brest.gy, gl = Math.hypot(gx, gy);
@@ -351,7 +354,7 @@ const S34: React.FC = () => {
         <g opacity={fin(f, tTherm)}><PoleThermometer x={br[0] + 120} y={br[1] + 250} s={0.7} /></g>
         <SideCallout f={f} lines="+3.7 °C per hour" at={[1130, 700]} appear={tTherm + 10} target={[br[0] + 150, br[1] + 160]} s={T.key} bend={30} />
       </Svg>
-      <CalcStack f={f} x={1500} y={240} size={50} maxLines={3} rows={[
+      <CalcStack f={f} x={1395} y={240} size={44} maxLines={3} rows={[
         { lhs: String.raw`4.1\times\cos138^{\circ}`, rhs: String.raw`\approx-3.0\ ^{\circ}\mathrm{C\ per\ 100\ km}`, at: tCos, c: C.neg },
         { lhs: String.raw`\times\ 34\ \mathrm{m/s}`, rhs: String.raw`\approx-3.7\ ^{\circ}\mathrm{C\ per\ hour}`, at: tTimes, c: C.neg },
       ]} o={fout(f, tTherm - 6)} />
@@ -380,15 +383,16 @@ const S35: React.FC = () => {
       <Svg>
         <circle cx={pl[0]} cy={pl[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tLand)} />
         <circle cx={ps[0]} cy={ps[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tSea)} />
-        <Bracket p={[pl[0] - 50, pl[1]]} q={[ps[0] - 50, ps[1]]} c={C.gold} o={fin(f, tSea + 20)} />
-        <Place p={P(49.3, 1.0)} t="Normandy" r={0} dx={0} dy={0} a="middle" italic o={fin(f, tHere)} />
+        <Bracket p={[pl[0] + 50, pl[1]]} q={[ps[0] + 50, ps[1]]} c={C.gold} o={fin(f, tSea + 20)} />
+        <Place p={P(49.05, 0.6)} t="Normandy" r={0} dx={0} dy={0} a="middle" italic o={fin(f, tHere)} />
         <Place p={P(49.85, -0.9)} t="English Channel" r={0} dx={0} dy={0} a="middle" italic o={fin(f, tHere + 15)} />
         {winds.map((a, i) => { const p0 = P(a[0], a[1]), s = 14, sp = Math.hypot(a[2], a[3]);
           return <AnimatedWindArrow key={i} from={p0} to={[p0[0] + a[2] * s, p0[1] - a[3] * s]} speed={sp} f={f} c={C.first} px={6} head={18} o={fin(f, tPush)} />; })}
-        <SideCallout f={f} lines="land: 24.6 °C" at={[1080, 110]} appear={tLand + 10} target={[pl[0] + 14, pl[1] + 6]} s={T.key} bend={-30} />
-        <SideCallout f={f} lines="sea: 16.1 °C" at={[1080, 200]} appear={tSea + 10} target={[ps[0] + 14, ps[1]]} s={T.key} bend={20} />
-        <Lbl x={1080} y={300} t="clouds over land, clear sea" c={C.key} s={T.floor} o={fin(f, tSat)} />
-        <SideCallout f={f} lines="55 km apart" at={[1080, 700]} appear={tSea + 26} out={tName - 14} target={[pl[0] - 62, mix(pl[1], ps[1], 0.5)]} s={T.key} bend={40} />
+        <SideCallout f={f} lines="land: 24.6 °C" at={[1080, 290]} appear={tLand + 10} target={[pl[0] + 14, pl[1] + 6]} s={T.key} bend={-30} />
+        <SideCallout f={f} lines="sea: 16.1 °C" at={[1080, 110]} appear={tSea + 10} target={[ps[0] + 14, ps[1]]} s={T.key} bend={20} />
+        <Lbl x={1080} y={380} t="clouds over land, clear sea" c={C.key} s={T.floor} o={fin(f, tSat)} />
+        {/* K6 r1: sea (top) → the 55 km bracket (middle) → land (bottom): three links in the order of their targets, so none cross */}
+        <SideCallout f={f} lines="55 km apart" at={[1080, 200]} appear={tSea + 26} out={tName - 14} target={[pl[0] + 64, mix(pl[1], ps[1], 0.5)]} s={T.key} bend={20} />
         <Keyword f={f} text="sea breeze" at={[1080, 790]} appear={tName} />
         <g opacity={fin(f, tSun)}>
           <rect x={80} y={760} width={460} height={60} fill="#5d6677" /><rect x={540} y={760} width={460} height={60} fill="#2d5f8a" />
@@ -397,22 +401,22 @@ const S35: React.FC = () => {
         </g>
         <g opacity={fin(f, tRise)}>
           {[200, 320, 440].map((x) => <Arrow key={x} p={[x, 700 - 30 * ((f % 40) / 40)]} q={[x, 650 - 30 * ((f % 40) / 40)]} color={C.neg} w={6} head={20} />)}
-          <Lbl x={770} y={660} t="pressure a little higher" c={C.key} s={T.floor} a="middle" />
+          <Lbl x={770} y={668} t="pressure a little higher" c={C.key} s={T.floor} a="middle" />
         </g>
         <ForceArrow p={[900, 790]} q={[620, 790]} o={fin(f, tPush)} w={9} head={34} />
       </Svg>
-      <CalcStack f={f} x={1420} y={380} size={52} rows={[
+      <CalcStack f={f} x={1380} y={440} size={52} rows={[
         { lhs: String.raw`\frac{24.6-16.1}{55.6\ \mathrm{km}}`, rhs: String.raw`=\frac{8.5\ ^{\circ}\mathrm{C}}{55.6\ \mathrm{km}}`, at: tGrad, h: 120 },
         { rhs: String.raw`\approx15\ ^{\circ}\mathrm{C\ per\ 100\ km}`, at: tGrad + 40, cont: true },
       ]} />
-      <Svg><Lbl x={1080} y={620} t="sharper than the storm’s front" c={C.gold} s={T.floor} o={fin(f, tGrad + 70)} /></Svg>
-      <SourceBelow text="Image: NASA MODIS Aqua (GIBS) · data: ERA5 · 24 Jun 2024, 13 UTC" pic={{ x: M35.x, y: M35.y, w: M35.w, h: M35.h }} w={920} gap={10} name="s35 src" />
+      <Svg><Lbl x={1080} y={690} t="sharper than the storm’s front" c={C.gold} s={T.floor} o={fin(f, tGrad + 70)} /></Svg>
+      <SourceBelow text="Image: NASA MODIS Aqua (GIBS) · data: ERA5 · 24 Jun 2024, 13 UTC" pic={{ x: M35.x, y: M35.y, w: M35.w, h: M35.h }} w={920} name="s35 src" />
     </Scene>
   );
 };
 
 // ================================================================ s36 the jet above the strongest temperature gradient
-const SA: Ax = { x: 170, y: 70, w: 800, h: 620, xr: [0, 90], yr: [0, 1] };
+const SA: Ax = { x: 170, y: 92, w: 800, h: 598, xr: [0, 90], yr: [0, 1] };   // K6 r2: the "hPa" axis word was cut by the top edge
 const pY = (p: number) => SA.y + ((Math.log(1000) - Math.log(p)) / (Math.log(1000) - Math.log(100))) * -SA.h + SA.h;
 const S36: React.FC = () => {
   const f = useCurrentFrame(), k = K("s36_jet");
@@ -437,13 +441,14 @@ const S36: React.FC = () => {
         <circle cx={jx} cy={jy} r={14} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tJet + 20)} />
         <line x1={SA.x} y1={SA.y + SA.h} x2={SA.x + SA.w} y2={SA.y + SA.h} stroke={C.muted} strokeWidth={3} />
         <line x1={SA.x} y1={SA.y} x2={SA.x} y2={SA.y + SA.h} stroke={C.muted} strokeWidth={3} />
-        {[0, 30, 60, 90].map((la) => <Lbl key={la} x={X(la)} y={SA.y + SA.h + 32} t={`${la}°N`} c={C.muted} s={T.floor} a="middle" b={false} />)}
+        {/* K6 r1: "0°N" starts at the axis corner (centred, it sat on the "1000" tick) */}
+        {[0, 30, 60, 90].map((la) => <Lbl key={la} x={la === 0 ? X(0) + 4 : X(la)} y={SA.y + SA.h + 32} t={`${la}°N`} c={C.muted} s={T.floor} a={la === 0 ? "start" : "middle"} b={false} />)}
         {lv.map((p) => <Lbl key={p} x={SA.x - 12} y={pY(p)} t={`${p}`} c={C.muted} s={T.floor} a="end" b={false} />)}
         <Lbl x={SA.x - 10} y={SA.y - 40} t="hPa" c={C.muted} s={T.floor} b={false} />
         <Lbl x={SA.x + SA.w} y={SA.y + SA.h + 84} t="equator → North Pole" c={C.muted} s={T.floor} a="end" b={false} />
         <ColourBar x={1080} y={110} w={330} lut={LUT_TH} lo={-80} hi={30} unit="°C" title="temperature" ticks={[{ v: -70, t: "−70" }, { v: -20, t: "−20" }, { v: 30, t: "30" }]} />
-        <SideCallout f={f} lines={["≈ 6 °C per 1000 km", "near 45°N"]} at={[1080, 330]} appear={tSteep + 10} target={[X(ZM.steep[0]) + 30, pY(500)]} s={T.key} bend={30} />
-        <SideCallout f={f} lines={["jet ≈ 26 m/s", "≈ 12 km up"]} at={[1080, 560]} appear={tJet + 20} target={[jx + 16, jy]} s={T.key} bend={-20} />
+        <SideCallout f={f} lines={["≈ 6 °C per 1000 km", "near 45°N"]} at={[1080, 560]} appear={tSteep + 10} target={[X(ZM.steep[0]) + 30, pY(500)]} s={T.key} bend={30} />
+        <SideCallout f={f} lines={["jet ≈ 26 m/s", "≈ 12 km up"]} at={[1080, 330]} appear={tJet + 20} target={[jx + 16, jy]} s={T.key} bend={-20} />
       </Svg>
       <Globe cam={cam} o={oG} coast={0.5} drapes={[{ tex: useTex(IMG("jet250.png")), lat: [JT.img_box[0], JT.img_box[1]], lon: [JT.img_box[2], JT.img_box[3]], o: 0.9 }]}
         over={(G) => <>
@@ -456,8 +461,8 @@ const S36: React.FC = () => {
         <SideCallout f={f} lines={["66 m/s", "≈ 240 km/h"]} at={[1080, 380]} appear={tGFS + 20} target={[globeCenter(cam, JT.max)[0] + 16, globeCenter(cam, JT.max)[1]]} s={T.calc} bend={30} />
         <Keyword f={f} text="thermal wind" at={[1080, 720]} appear={tTW} />
       </Svg>
-      <SourceBelow text="Data: ERA5 monthly means (Copernicus C3S) · Sep 2026 · zonal mean" pic={{ x: SA.x, y: SA.y, w: SA.w, h: SA.h + 100 }} w={800} o={oS} name="s36 src era5" />
-      <SourceBelow text="Data: NOAA NCEP GFS analysis · 28 Oct 2026, 18 UTC" pic={{ x: 60, y: 28, w: 960, h: 790 }} w={960} o={oG} name="s36 src gfs" />
+      <SourceBelow text="Data: ERA5 monthly means (Copernicus C3S) · Sep 2026 · zonal mean" pic={{ x: SA.x, y: SA.y, w: SA.w, h: SA.h + 100 }} w={800} o={fout(f, tDays + 4, 10)} name="s36 src era5" />
+      <SourceBelow text="Data: NOAA NCEP GFS analysis · 28 Oct 2026, 18 UTC" pic={{ x: 60, y: 28, w: 960, h: 790 }} w={960} o={fin(f, tDays + 22, 10)} name="s36 src gfs" />
     </Scene>
   );
 };
@@ -502,7 +507,7 @@ const S37: React.FC = () => {
         <Lbl x={1240} y={640} t="storms deepen near it" c={C.key} s={T.key} o={fin(f, tStorm) * fout(f, LEN(k) - 30)} />
         <Lbl x={1240} y={720} t="ocean currents" c={C.muted} s={T.floor} o={fin(f, tMovies)} />
       </Svg>
-      <SourceBelow text="Data: NOAA OISST v2.1 · 29 Oct 2026" pic={{ x: 60, y: 40, w: 1000, h: 790 }} w={1000} name="s37 src" />
+      <SourceBelow text="Data: NOAA OISST v2.1 · 29 Oct 2026" pic={{ x: 60, y: 40, w: 1000, h: 775 }} w={1000} name="s37 src" />
     </Scene>
   );
 };
@@ -516,7 +521,7 @@ const S38: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        {Array.from({ length: 8 }, (_, i) => { const [x, y] = cell(i); return <rect key={i} x={x} y={y} width={400} height={340} rx={18} fill="#1d2740" opacity={0.55 * o(i)} />; })}
+        {Array.from({ length: 8 }, (_, i) => { const [x, y] = cell(i); return <rect key={i} x={x} y={y} width={420} height={340} rx={18} fill="#1d2740" opacity={0.55 * o(i)} />; })}
         <g opacity={o(0)}>
           <HillIcon x={190} y={250} s={0.8} /><ThermoIcon x={310} y={250} s={0.8} /><BaroIcon x={420} y={210} r={36} />
           <Lbl x={120} y={330} t="scalar field" c={C.key} s={T.floor} />
@@ -541,7 +546,7 @@ const S38: React.FC = () => {
           <Lbl x={1430} y={745} t="jet stream" c={C.key} s={T.floor} a="start" />
         </g>
       </Svg>
-      <TeX s={String.raw`\nabla f=\Big(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}\Big)`} x={540} y={230} size={46} o={o(1)} />
+      <TeX s={String.raw`\nabla f=\Big(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}\Big)`} x={552} y={230} size={44} o={o(1)} />
       <TeX s={String.raw`|\nabla f|`} x={1200} y={200} size={60} c={C.second} o={o(2)} />
       <TeX s={String.raw`\frac{\partial f}{\partial s}=\nabla f\cdot\hat{\mathbf n}`} x={120} y={640} size={60} o={o(4)} />
       <TeX s={String.raw`\frac{1}{a\cos\varphi}\frac{\partial}{\partial\lambda}`} x={560} y={640} size={60} o={o(5)} />

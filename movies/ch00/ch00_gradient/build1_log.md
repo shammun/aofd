@@ -161,3 +161,40 @@ render, tmp). Both scripts set TEMP/TMP to `S/tmp`, stop below 45 GB on C: (G: <
 | after | 51.2 GB | 469.7 GB |
 Scratch now: `S/tts/` (run 1, obsolete), `S/tts2/` (final), `S/public/` (3 MB), `S/script.md` + `S/storyboard.yaml` (the v3 copies
 before build 1), `S/ssr_final.log`.
+
+## 7. K6 clean-up (2026-11-04) — 2862 hits → 0
+Pre-render K6 (`S/stills/k6b1`, `S/k6b1.json`): 2993 stills, **2862 hits** (edge 1332, text-text 571, link-link 302, text-stroke 162,
+text-fill 142, text-link 92, src-on-picture 59, text-picture 59, src-gap 55, link-axis 52, text-cbar 25, text-arrow3d 11), which collapse to
+**80 (kind, label, label) faults**. Every fault was looked at on an annotated still (scratch `S/annot_b1/`).
+
+### Triage and fixes
+| | cause | fix (file) |
+|---|---|---|
+| systematic | data pictures 790 px tall ending at y 830: the source line ended at y 884.6 (> 880) — s02, s09, s28, s31, s33, s34, s37 (≈ 800 hits) | picture boxes 780 px (s37: source box 775) (`gr_sA` s02, `gr_sB` MB9/ZB9, `gr_sD` M28/Z28, M31, M33, ZB, s37) |
+| systematic | equations and calc rows wider than the column (s04–s08, s09, s10, s11, s17, s18, s23, s25, s28, s34, s35): right edges 1849–2005 | per row: "=" column moved left and/or size reduced from the measured glyph widths (all ≥ 44 px; `\text{volume}` row stays 64 so its under-word stays ≥ 44); s15 calc as right-hand sides only from x 1200 (its left-hand sides reached over the terrain: text-picture); s28 "per 100 km" on its own line |
+| systematic | CalcStack fraction rows with h 110–120 shorter than the measured glyph boxes (s25, s27) | h from the measured boxes (s25: 92/112/186/112 at size 48/64; s27 125) |
+| systematic | the hillside's h = 0 contour drawn at 3 px / 0.7 under the leg labels ("0.71 km", "30 east", "ds cos α") | zero contour 2.5 px / 0.45 like the others (`gr_lib` PlaneContours); "east" moved under the right end of the axis (`gr_lib` AxesEN: it sat under "ds sin α" and the s04 link) |
+| links | crossing gold links: s09, s15, s22, s23 (×2), s31, s33, s35, s36 | callout slots re-ordered to the order of their targets (s22, s23, s31, s33, s35 sea / 55 km / land, s36 jet / steep); s09 bearing link to the arc's south side; s15 "≈ 10 km" link routed under the summit (ctl); s22 bends swapped |
+| links | s04 climb readout link crossed the east axis + label in every direction below it | link removed (teal readout + same sweep curve) |
+| links | s03 links through "1 km east" / "30 m" and across s04's axis in the cross-fade | "30 m" above its rod, ∂h/∂y link routed under "1 km east" (ctl), both links out 14 frames before the scene ends |
+| links | s16 "≈ 5 %" link across the y axis and the "3" tick | readout under the plateau inside the chart with a short link; chart axis words folded into the ticks ("km", "°N"), which also fixed "latitude (°N)" past y 880 and "height (km)" on "blocks ≈ 35 km" |
+| links | s22 links across the graticule (muted grey = "axis" to the gate) | graticule in light slate #b8c2d6 at 0.4 (map lines, not chart axes) — see proposal |
+| text | s02 "pressure" on the 2-line temperature source; s12 labels on the source; s14 "0.5 km" across five contour lines; s32 the Ciarán line on "1005 hPa"; s29 "mean wind" on the colour-bar ticks; s36 "0°N" on "1000"; s36 two source lines cross-fading on each other; s04 "better…" on the δh row, "50 m/km at 53°" on the axis word; s05 "53°" on the dashed leg; s11 "−180" on "−50" | moved / split / timed apart (s14 lines stop at y 350 with brackets and labels under them; s11 ticks −90/0/90; s36 sources fade one after the other; s23 "2 × 27.8 km" out before the −2.1 row) |
+| fills / masks | s21 text inside a small filled box; s38 recap equation straddling its cell's edge; s33b source under the stack mask (K1 bottom fade); s35 source 10 px under its picture | two warm blocks with the words under them; cells 420 px wide, equation at 44 px; stack mask `clipY: 788`; default 16-px gap |
+| clipped (eye) | s33/s33b two-line colour-bar titles cut by the top edge; s36 "hPa" cut by the top edge; s35 "Normandy" under the land link; s22 ∇F parts on "a = Earth's radius" | colour bars at y 150; section top at y 92; label moved; parts at y 422/662 |
+
+### Rounds (one stills job at a time, `--jobs 3`, bundle rebuilt each round)
+| round | stills | K6 |
+|---|---|---|
+| k6b1 (pre-render) | 2993 | FAIL 2862 |
+| k6r1 (full list) | 2993 | FAIL 102 (s09/s15/s22 link-link 60, s22 equation on "a = Earth's radius" 18, s25 rows 3 px apart 12, s21 fill 5, s03 4 + 3) |
+| k6r2 (817 frames: s03, s04, s09, s15, s21, s22, s25, s26, s33, s33b) | 817 | FAIL 30 (s09 link-link 26, s03→s04 cross-fade link-axis 4) |
+| k6r3 (454 frames: s03, s09, s35, s36) | 454 | PASS 0 |
+| k6r4 (full list, final, bundle rebuilt) | 2993 / 2993 | **PASS, 0 hits** (730 INFO: owner / end-label exemptions) |
+
+Final stills + boxes: `S/stills/k6r4`, report `S/k6r4.json`. **Run the render with `K6TAG=k6r4 bash movies/src/ch00_gradient/checks/gr_render.sh`** (the script's default is still k6b1).
+Static gates after the last change: tsc 0 errors · at_check 342 refs, 0 failures · swap_check 269 text elements, 0 pairs, 0 swaps < 8 frames · cam_speed 0 above 90 °/s ·
+eq_check 9/9 · SSR step 10: 7032 scene-frames, 0 errors, 0 NaN, 0 missing assets · SSR --3d step 15: 5090 scene-frames, 0 errors, 123 154 THREE tags, `<g>` self-test PASS.
+Narration, timing.json, storyboard and the sound cue sheet unchanged. Reviewer screen flag done: s03 3-D labels (rise labels above / beside their rods, links clear of labels). Not done: SVG overlays over 3-D are still drawn without depth occlusion (s00/s01/s15 arrows, s15 contours).
+For the reviewer: s04 has no link from the climb readout to the needle any more; s16 chart axis words are in the ticks ("6 km", "26°N"); s22 graticule is light slate; s15 calc shows "3771 ÷ 10 056" without units; s10 EQ_S10 at 48 px, s34 calc at 44 px (the narrowest column fits).
+Disk: before C: 49.9 GB / G: 467.2 GB free; after C: 49.9 GB / G: 466.0 GB free. Scratch stills: k6b1, k6r1–k6r3 (obsolete), k6r4 (final), annot_b1 (fault sheets).
