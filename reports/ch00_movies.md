@@ -7092,3 +7092,585 @@ The physics, the Ian numbers, the maths-skip times and the captions are right.
 - Must fixes 1–5 are TSX-only; Must 6 is a QA re-run.
 - Two Shoulds need one re-voiced sentence each (s24 S20 if −24.3 is chosen, s25 S11).
 - Two Shoulds change narration lines (s24 S1, s20 S19).
+
+## #5b ch00_coordinates_storm — calculation & sync audit (2026-11-05)
+
+**Scope.** Pre-render audit for the user's rule "show every calculation and derivation; visuals follow the narration". Read: `script.md`, `storyboard.yaml`, `timing.json` (sentence times used for every timestamp below), `cs_sA/sB/sC.tsx`, `cs_eq.ts`, `cs_lib.tsx`, `data/cs.json`, build CHECK rows. Every number spoken or shown was recomputed in Python. There is no render yet, so this audit has no frames. Layout items come from the TSX coordinates.
+
+**Numbers recomputed (all agree with cs.json / CHECK rows unless a finding says otherwise).** 0.1 rad = 5.73°; chord of 0.1 rad = 0.09996; cos/sin(53.13° + 0.01 rad = 53.70°) = 0.5920 / 0.8060; finite-difference slopes −0.803 / 0.596; θ̂(53.70°) = (−0.806, 0.592); (cos 0.1, sin 0.1) = (0.9950, 0.0998); 11 × that = (10.945, 1.098); pieces (1, 0), (−0.050, 0.998), (−0.005, 0.100); halving: piece 3 = 0.1 / 0.025 / 0.0062, ÷Δt = 0.1 / 0.05 / 0.025; ω = 34.80 / 25 000 = 1.392 × 10⁻³ rad/s = 0.0798°/s = 4.79°/min; lap 4513 s = 75.2 min (2π/0.00139 = 4520 s); 34.8² = 1211.0; v²/r = 0.0484 m/s²; 35²/25 000 = 0.049; g/a = 202; 100 km/h = 27.78 m/s, ÷ 0.0484 = 573 s = 9.6 min (screen 27.8/0.048 = 579 ≈ 580 s); Δθ(60 s) = 0.0835 rad = 4.79°; 34.8 × 0.084 = 2.92, exact chord 2.906 m/s, ÷ 60 = 0.0484; f = 2Ω sin 26.5° = 6.51 × 10⁻⁵ s⁻¹, f v = 2.26 × 10⁻³ m/s², ratio 21.4; arctan(13.30/34.80) = 20.9°, arctan(5.97/20.08) = 16.6°; 90 kt = 166.7 km/h = 46.3 m/s, ERA5 ring 20.1 m/s = 72 km/h; 0.25° = 27.8 km N–S (26.0 km E–W at 20.7° N); √(22.23² + 24.29²) = 32.93 m/s from 222.5°; 10–15 ft = 3.05–4.57 m; 1 hPa ↔ 100/(1025 × 9.81) = 0.0099 m; 1013 − 938 = 75 hPa ≈ 0.75 m; box-continuity check w = 2h|u_r|/r = 2 × 1000 × 15.7 / 30 000 = 1.05 m/s (DS30 1.04). Stack heights are 0.699 / 1.429 / 5.80 / 12.44 / 14.25 km. The 100-km ring means are −6.48 / +0.46 / +0.94 / +0.94 / +6.65 m/s. The TDR peak is 3.34 m/s at 8.5 km, r 45 km.
+
+**Re-voice needed (the final TTS is running now).** B1 (s14 S16) is a physics error and must be re-voiced. B13 (s20 S12) and B14 (s23 S8–S9) need new or changed sentences. B12 is one word, or a screen change instead. B4, B6, B19 and B20 have optional narration additions. Everything else is TSX/visual only. Any re-voice shifts the skip-chip times; let `make_timing.py --final` recompute them.
+
+### Must fix (14)
+
+**B1 — s14 S15–S16 (22:24–22:36): the Earth's spin is drawn and said pushing the wrong way (physics).** In a northern-hemisphere cyclone the air goes round anticlockwise (seen from above). The Coriolis deflection is to the right of the motion, so it points **outward**: a = −f k̂ × v θ̂ = +f v r̂. The narration says "The Earth's spin adds a smaller push", and `cs_sB.tsx` S14 draws the violet arrow pointing inward, with no arrowhead (`head={0}`) and only 8 px long. The real balance is pressure push inward ≈ v²/r + f v = 0.048 + 0.002 m/s².
+- *Narration S16 (re-voice):* "The Earth's spin pushes the other way, a little outward, about twenty times weaker, so the pressure force has to be a little stronger than the turning alone needs."
+- *Screen (on S16):* `\text{turning: }0.048\ \mathrm{m/s^2}\ \text{(inward)}` → `\text{Earth's spin: }\approx0.002\ \mathrm{m/s^2}\ \text{(outward)}` → `\frac{0.048}{0.002}\approx20` → `\text{pressure push}\approx0.048+0.002=0.050\ \mathrm{m/s^2}`. Add the slate note "Earth's spin worked out in the Coriolis movie".
+- *Visual (`cs_sB.tsx` S14):* violet arrow outward from the parcel, with a head, ≥ 50 px, tag "drawn 6× longer" (it is 1/21 of the 170-px pressure arrow). Change the label to "Earth's spin: ≈ 1/20, outward". Fix the storyboard visual and the honesty_notes the same way.
+
+**B2 — s11 S6 (17:34) and s12 S7–S8 (18:53–19:05): scene ids on screen.** The labels "θ̂ (s05)", "v/r (s09)" and "−r̂ (s06)" are meaningless to a viewer and break the house no-references rule. *Fix (`cs_sB.tsx` S11, S12):* "θ̂: from the turning rule", "v/r: how fast θ grows", "−r̂: θ̂ swings towards −r̂". In s12 also label the recalled mini picture: "θ̂" on the orange arrow, "−r̂" on the rose one.
+
+**B3 — s08 S20–S22 (13:42–13:59): the key "small × small vanishes" step is not on screen, and the halving bars collide with the grid.**
+- (a) The three Δt groups of bars have no numbers. The division by Δt that makes piece 3 vanish is never shown.
+- (b) The grid group (`fout(f, tRule-10)`) is still visible when the bars come in (`tHalf`, S21). The bars (x 160–1004, y 600–720) sit on the grid and the teal product arrows (y 640). The label "Δt = 1 s" (x 230, y 766) prints over "1 m/s per square" (x 180, y 760).
+- *Fix (`cs_sA.tsx` S08):* fade the grid group out at `tHalf − 10`. Put the numbers under each bar. Add the CalcStack rows:
+  - S21: `\Delta t=1:\ \ 1,\ \ 1,\ \ 0.1`, then `\Delta t=0.5:\ \ 0.5,\ \ 0.5,\ \ 0.025`, then `\Delta t=0.25:\ \ 0.25,\ \ 0.25,\ \ 0.006`
+  - S22: `\div\Delta t:\ \ 0.1\to0.05\to0.025\to0` (the third piece), with "first two stay ≈ 1" in slate
+- *Optional narration after S21:* "Divide each piece by the time step: the first two stay at about one, but the third goes from zero point one to zero point zero five to zero point zero two five, halving every time."
+
+**B4 — s08 S9–S12, S16 (12:29–13:18): the toy numbers appear without their origin, and one row is early.**
+- Δv = 1 is never written.
+- (0.995, 0.1) is never shown as (cos 0.1, sin 0.1), and the turned unit arrow is never drawn (only the wedge).
+- The arrow's change (−0.005, 0.1) is used in pieces 2 and 3 but never derived.
+- The row "11 (0.995, 0.1) = (10.945, 1.1)" appears at `tLater + 30` = 12:29.9, 11 s before S11 says it.
+- *Rows in order (`cs_sA.tsx` S08):*
+  - S9: `\Delta v=11-10=1\ \mathrm{m/s}`
+  - S10: `\hat{\mathbf d}_{\text{new}}=(\cos0.1,\ \sin0.1)\approx(0.995,\ 0.1)` and draw the orange turned unit arrow
+  - S11: `11\,(0.995,\ 0.1)\approx(10.945,\ 1.1)`, moved to `tNow`
+  - S12: `(10.945,\ 1.1)-(10,\ 0)=(0.945,\ 1.1)`
+  - S16, before piece 2: `\Delta\hat{\mathbf d}=(0.995,\ 0.1)-(1,\ 0)=(-0.005,\ 0.1)`
+- *Optional narration S16:* "Second, the old number times the change in the arrow. The arrow went from one, zero to zero point nine nine five, zero point one, a change of minus zero point zero zero five, zero point one. Ten times that is minus zero point zero five, one."
+
+**B5 — s08 S13–S18 (12:54–13:40): the "the change, magnified" picture has no scale and no link, and runs off the top.** This is the same kind of fault as Part 1's 11:21 trigger. The inset is drawn at 260 px per m/s, against the grid's 70, so ×3.7, but the scale is not stated. Nothing links it to the gold change arrow on the grid. Its top arrowhead lands at y ≈ 14 px (`ZO = [700, 300]`, 1.1 × 260), outside the safe area.
+- *Fix (`cs_sA.tsx` S08):* `ZO = [660, 400]`, `Z = 200`, so the inset spans y 180–400 above the grid. Label it "the gold change arrow, drawn 3× larger" and draw a dashed gold leader from the grid's change arrow to the inset. Tag each piece with its value on its words: "(1, 0)" slate, "(−0.05, 1)" orange, "(−0.005, 0.1)" rose. Add "sum (0.945, 1.1)" on the gold arrow at S18.
+
+**B6 — s04 S10–S15 (5:33.8–6:20.6): the numeric check hides where its numbers come from.**
+- "cos θ = 0.6, sin θ = 0.8" is shown without the 3-4-5 balloon.
+- θ + Δθ = 53.70° and the looked-up 0.592 / 0.806 are never shown.
+- During S12 and S14 nothing new is on screen: the rows arrive only at S13 and S15, as one fraction each.
+- *Rows (`cs_sA.tsx` S04), one per sentence:*
+  - S10: `\theta=53.13^\circ:\ \cos\theta=\tfrac35=0.6,\ \ \sin\theta=\tfrac45=0.8`
+  - S11: `\Delta\theta=0.01\ \mathrm{rad}=0.57^\circ\ \Rightarrow\ \theta+\Delta\theta=53.70^\circ`
+  - S12: `\cos53.70^\circ=0.592,\quad 0.592-0.600=-0.008`
+  - S13: `\frac{-0.008}{0.01}=-0.8=-\sin\theta`
+  - S14: `\sin53.70^\circ=0.806,\quad 0.806-0.800=+0.006`
+  - S15: `\frac{0.006}{0.01}=0.6=\cos\theta`
+- *Optional narration S11:* "Turn by zero point zero one radians, about half a degree, to fifty three point seven degrees."
+
+**B7 — s04 S3 and S6 (4:51.0, 5:10.0): two derivation moves are only spoken.**
+- S3 turns the move "Δθ along θ̂" into two components, but nothing is written.
+- S6, "divide both changes by Δθ and let it shrink": the Δ rows fade at `tDiv − 20`, before the sentence. The limit rows appear only at S7. So the division itself is never on screen.
+- *Rows:*
+  - S3: `\text{move}\approx\Delta\theta\,\hat{\boldsymbol\theta}=\Delta\theta\,(-\sin\theta,\ \cos\theta)=(-\sin\theta\,\Delta\theta,\ \ \cos\theta\,\Delta\theta)`
+  - Keep the two Δ rows until S7.
+  - S6: `\frac{\Delta(\cos\theta)}{\Delta\theta}\approx-\sin\theta,\qquad \frac{\Delta(\sin\theta)}{\Delta\theta}\approx\cos\theta`, plus the slate tag "Δθ → 0: ≈ becomes =".
+
+**B8 — s06 S23 (9:16.4): "−r̂" is not opposite the drawn r̂.** The rose −r̂ is drawn at θ + 180° = 233°. The visible r̂ has turned to θ + 20° = 73° (step 3 left it there), so the two are 160° apart, while S23 says "the arrow r hat, flipped". *Fix (`cs_sA.tsx` S06):* at `t5` (S18), ease both arrows back to the un-turned position, or keep a dashed ghost r̂ at θ labelled "r̂ (before the turn)". Then, as the storyboard says, slide the step-4 slide arrow onto −r̂ with a gold "same direction" tick.
+
+**B9 — s07 S11–S14, S17 (10:32–11:21): the check's inputs and subtraction are not shown.**
+- θ̂(53° + 0.01) appears as bare numbers.
+- The change is a text label with no subtraction.
+- r̂ = (0.6, 0.8) is not on screen when S14 says it.
+- S17's "minus r hat again" has no "= −r̂".
+- *Rows (`cs_sA.tsx` S07):*
+  - S11: `\hat{\boldsymbol\theta}(53.70^\circ)=(-\sin53.70^\circ,\ \cos53.70^\circ)=(-0.806,\ 0.592)`, plus the slate tag "same numbers as the slope check"
+  - S12: `\big(-0.806-(-0.800),\ \ 0.592-0.600\big)=(-0.006,\ -0.008)`, replacing the text label
+  - S14: `\hat{\mathbf r}=(0.6,\ 0.8)\ \Rightarrow\ (-0.6,\ -0.8)=-\hat{\mathbf r}`
+  - S17: append `=-\hat{\mathbf r}` to the slope row
+
+**B10 — s09 S7 and S9 (14:44.9, 14:59.2): the arc rule is invoked but not written, and the division by Δt is not shown.** The EQ appears only at S10. *Rows (`cs_sB.tsx` S09):*
+- S7: `\text{arc rule: }\Delta s=r\,\Delta\theta`
+- S8: the existing `\Delta\theta=\frac{\Delta s}{r}=\frac{v\,\Delta t}{r}`
+- S9: `\frac{\Delta\theta}{\Delta t}=\frac{v\,\Delta t}{r\,\Delta t}=\frac{v}{r}`, plus the tag "Δt cancels"
+
+**B11 — s09 S12–S16 (15:14–15:52): silent conversions.**
+- 25 km → 25 000 m is not shown.
+- v switches from the keyword "≈ 35" to 34.8 with no word.
+- "× 57.3" appears with no origin.
+- "≈ 5°/min" appears with no × 60.
+- "2π ÷ 0.00139" is said at S15 but appears at S16.
+- 4500 s → 75 min has no ÷ 60.
+- *Rows:*
+  - S12: `r=25\ \mathrm{km}=25\,000\ \mathrm m,\quad v=34.8\ \mathrm{m/s}\ (\approx35)`, then the existing division
+  - S14: `1\ \mathrm{rad}=\frac{180^\circ}{\pi}\approx57.3^\circ`, `0.00139\times57.3\approx0.08^\circ/\mathrm s`, `0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`
+  - S15: `\frac{2\pi}{0.00139}=\frac{6.283}{0.00139}`
+  - S16: `\approx4500\ \mathrm s,\qquad \frac{4500}{60}=75\ \mathrm{min}`
+
+**B12 — s18 S7 (26:46), s19 S3 (27:50), s20 S10 (29:34): screen and voice disagree on the 850-hPa height.** The tags and callouts say "1.4 km" (data 1.429). The voice says "one and a half kilometres" three times. *Fix, either one:*
+- (a) Re-voice "about one point four kilometres" in those three sentences.
+- (b) Visual only: write "≈ 1.5 km" in the three places and relax `CHECK_B z850` to 1.5 ± 0.1.
+
+While touching these, round the other tags to what is spoken ("≈ 6 km", "≈ 12 km", "≈ 14 km"; the voice says six, twelve, fourteen) or re-voice them to match.
+
+**B13 — s20 S12 (29:52–30:07): "the inflow alone says the air must rise at about a metre per second" is a result with no inputs.** The builder's continuity integral (DS30, 1.04 m/s) cannot be shown in one line, but a box estimate reproduces it. Air comes in through the side of a cylinder r = 30 km in a layer h ≈ 1 km deep at |u_r| ≈ 16 m/s (925-hPa ring mean −15.7 m/s at 30 km; at 850 hPa only −3.8). It leaves through the lid: 2π r h |u_r| = π r² w, so w = 2h|u_r|/r.
+- *Rows (keyword zone, on the new sentences):*
+  - `\text{in through the side: }2\pi r\,h\,|u_r|`
+  - `\text{up through the lid: }\pi r^2\,w`
+  - `w=\frac{2h\,|u_r|}{r}=\frac{2\times1000\times16}{30\,000}\approx1\ \mathrm{m/s}`
+- *Narration (re-voice; replaces the first half of S12):* "Here's a quick check. Air flows in through the side of a cylinder thirty kilometres in radius, in a layer about one kilometre deep, at about sixteen metres per second. All of it has to leave through the cylinder's lid, which is a much bigger area, so it rises more slowly: two times one thousand times sixteen, divided by thirty thousand, is about one metre per second. And radar on a hurricane-hunter aircraft measured it: about three metres per second, eight and a half kilometres up, with single towers near ten."
+- *Visual (`cs_sB.tsx` S20):* on the section, a gold outline rectangle r 0–30 km × z 0–1 km, with the inflow FlowArrow entering its right side and three short up-arrows leaving its top. Add a CHECK row in the builder: box estimate 1.05 vs DS30 1.04 m/s. The new wording also fixes the "nine kilometres" vs "8.5 km up" mismatch with the existing callout.
+
+**B14 — s23 S8–S9 (32:49.9–33:04): "the reanalysis is far too weak" compares unlike quantities in different units.** The screen sets the official 90-kt maximum (3-min) against a 20-m/s ring mean at 50 km. The 90 kt is never converted to m/s, and a ring mean is not a maximum, so the gap is overstated.
+- *Rows:* `90\ \mathrm{kt}\times1.852\approx167\ \mathrm{km/h}` (exists) → `167\div3.6\approx46\ \mathrm{m/s}`. Then a like-for-like pair: ERA5's lowest pressure `967\ \mathrm{hPa}` vs official `956\ \mathrm{hPa}` (both already in cs.json: `amphan.msl`, `best06.hpa`). Or ERA5's own maximum 10-m speed in the box vs 46 m/s (add `amphan.vmax10` and a CHECK row in the builder).
+- *Narration S8–S9 (re-voice):* "The official estimate at that hour, averaged over three minutes, was about ninety knots, which is about forty six metres per second, and a lowest pressure of nine hundred and fifty six hectopascals. ERA5's lowest pressure is only about nine hundred and sixty seven, so the reanalysis storm is much too weak."
+
+### Should fix (11)
+
+**B15 — s03 S15 (3:52.9): "0.1 rad ≈ 6°" shows no conversion, and the picture contradicts it.** The arc labelled "≈ 0.1" is drawn for a 20° turn, about 0.35 rad.
+- *Rows:* `0.1\ \mathrm{rad}\times\frac{180^\circ}{\pi}\approx5.7^\circ\approx6^\circ`, then `s=1\times0.1=0.1`.
+- *Visual (`cs_sA.tsx` S03):* on S15, ease the wedge from 20° to 5.7° and relabel it "0.1 rad ≈ 6°". Ease it back on S16.
+- Also append `=\Delta\theta` to row 1 on S14 (3:45.6); now it shows only at S19.
+
+**B16 — s04 S4–S5: the label "slivers drawn 20× larger" is wrong.** The slivers are the true geometry of a turn drawn at 20° (0.35 rad), so there is no 20× factor. *Fix:* "turn drawn large (20°)".
+
+**B17 — s05 S3–S4, S11 (6:40–7:22): two steps are missing.**
+- (a) S3 says "about" with no reason. The straight arrow Δr̂ is the chord, not the arc. DS02 already has chord(0.1) = 0.09996 vs arc 0.1, but it is unused. Row on S3: `|\Delta\hat{\mathbf r}|=0.09996\ \text{ vs arc }0.1\ \ (\Delta\theta=0.1)`, plus the tag "straight ≈ curved for a small turn".
+- (b) S4 has no division row. Add `\frac{\Delta\hat{\mathbf r}}{\Delta\theta}\approx\hat{\boldsymbol\theta}\ \ \xrightarrow{\ \Delta\theta\to0\ }\ \ \frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta}`.
+- (c) S11 jumps to the answer. Add the middle line `=\Big(\frac{d\cos\theta}{d\theta},\ \frac{d\sin\theta}{d\theta}\Big)` before `=(-\sin\theta,\ \cos\theta)`.
+
+**B18 — s06 S13 (8:27.1) and s07 S1/S5 (9:40.6, 10:00.4): small gaps.**
+- s06 S13 says "slides a distance Δθ" without restating the arc rule. Row: `s=1\times\Delta\theta=\Delta\theta`.
+- s07: the 5-km circle has no "r = 5 km" tag.
+- s07: the tails-together inset has no label. Add "θ̂ at three places, tails together" (slate) and the angles 0°, 25°, 53° at the three balloon dots.
+
+**B19 — s08 S6–S10 (12:15–12:41): a label comes too early, and d̂ is never defined.** "v = 10 → 11 m/s, d̂ turns 0.1 rad" appears at S6, 12–18 s before the numbers are said. The symbol d̂ then appears in the product rule (S23) but is never said or defined. *Fix:* split it into "v = 10 m/s · d̂ = (1, 0): an arrow of length 1" (S7), "→ 11 m/s" (S9), "d̂ turns 0.1 rad" (S10). Optional narration S7: "…along an arrow pointing east, one, zero. We'll call that arrow d hat."
+
+**B20 — s11 S1, S8–S9 (17:04–17:52): the first term is not struck, and the result shows early.**
+- S1 shows only "dr/dt = 0". The s10 line with its first term struck is not on screen (the storyboard asks for it).
+- `EQ_S11` appears whole at S8 ("Now multiply by r"), including "= v θ̂", before S9 says it. `cutAt(EQ_S11, "=v")` is computed but never used.
+- *Fix (`cs_sB.tsx` S11):*
+  - S1: `\mathbf v=\cancel{\tfrac{dr}{dt}\,\hat{\mathbf r}}+r\,\tfrac{d\hat{\mathbf r}}{dt}` (house Strike)
+  - S8: e1 only
+  - S9: append `=v\,\hat{\boldsymbol\theta}`
+
+**B21 — s12 S4, S10–S11 (18:34, 19:12–19:20): the same pattern, plus a skipped move.**
+- At S4 the dv/dt term is not struck.
+- `EQ_S12`, shown at S10, already holds the final "−v²/r r̂".
+- The move v · (−r̂ v/r) = −(v·v/r) r̂ is never written.
+- *Rows:*
+  - S4: strike `\tfrac{dv}{dt}\hat{\boldsymbol\theta}`
+  - S10: `\mathbf a=v\cdot\Big(-\hat{\mathbf r}\,\frac{v}{r}\Big)`
+  - S11: `=-\frac{v\cdot v}{r}\,\hat{\mathbf r}=-\frac{v^2}{r}\,\hat{\mathbf r}`
+
+**B22 — s13 S8 (20:40.4): the car numbers have no conversions.** 100 km/h → 27.8 m/s and 580 s → 10 min are not shown. The storyboard calc_row still says 570 s; the screen says 580; the data give 573.
+- *Rows:*
+  - `100\ \mathrm{km/h}=\frac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}`
+  - `\frac{27.8}{0.048}\approx580\ \mathrm s` (exists)
+  - `\frac{580}{60}\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}`
+- Align the storyboard row to 580.
+
+**B23 — s14 S4, S10 (21:11, 21:45): two pieces are unlabelled or unconverted.**
+- The dashed circle of radius 34.8 m/s, which S10 names, has no label.
+- The wedge "≈ 5°" is drawn at 15°.
+- The 0.084 rad → 5° conversion is missing.
+- *Fix:* label "radius 34.8 m/s" on the dashed arc; slate "turn drawn 3× larger" under the wedge; row `0.084\times57.3\approx4.8^\circ\approx5^\circ`.
+
+**B24 — s23 S11 (33:06.5): the angle step and the term are missing.** The tan → angle step is not shown, and "inflow angle" is used without restating what it is.
+- *Visual:* at the ring point `rp`, draw the actual wind arrow, the sum of the teal and rose ring-mean arrows. Add a gold angle arc between it and the round (teal) arrow, labelled "inflow angle".
+- *Rows (update `EQ_S23` and the storyboard):*
+  - `\tan(\text{inflow angle})=\frac{|u_r|}{u_\theta}`
+  - `\frac{6.0}{20.1}\approx0.30\ \Rightarrow\ \arctan0.30\approx16.6^\circ\approx17^\circ`
+  - `\frac{13.3}{34.8}\approx0.38\ \Rightarrow\ \arctan0.38\approx20.9^\circ\approx21^\circ`
+- Optional row on S3: `0.25^\circ\times111\ \mathrm{km}\approx28\ \mathrm{km}`, with the slate note "Part 3 shows where 111 km comes from".
+
+**B25 — s26 S3, s27 S3–S4, s28, s29 (35:11–38:22): the coast numbers have no arithmetic.**
+- (a) s26 S3: the 33 m/s from the SW comes with no components. Rows:
+  - `u=22.2\ \mathrm{m/s}\ (\text{east}),\ \ v=24.3\ \mathrm{m/s}\ (\text{north})`
+  - `\sqrt{22.2^2+24.3^2}=\sqrt{493+590}\approx32.9\ \mathrm{m/s}`
+  - Tag: "blows towards the NE → from the SW"
+- (b) s27 S3: "1 cm per hPa" never gets Ian's number. Rows:
+  - `1013-938\approx75\ \mathrm{hPa}\ \Rightarrow\ \approx75\ \mathrm{cm}`
+  - Tag "small next to 3-4.5 m"
+  - Optional origin: `\frac{100\ \mathrm{Pa}}{1025\times9.81}\approx0.01\ \mathrm m`
+  - Optional narration: "Ian's centre was about seventy five hectopascals below normal, so that's only about seventy five centimetres."
+- (c) s27 S4: show the factor: `10\times0.3048\approx3.0\ \mathrm m,\ \ 15\times0.3048\approx4.6\ \mathrm m`.
+- (d) s28: the map label "St. Pete" does not match the voice and the chart, which say "Saint Petersburg".
+- (e) s29 S4: put "≈ 33 km" on the gold shelf line itself.
+
+### Verified (keep)
+- Every `SS`/`AT` index in s00–s32 points at the sentence the comment names (checked against `timing.json`).
+- The skip chips point at 11:34 (s08 S0) and 19:49 (s13 S0).
+- The CHECK_A/B/C tolerances hold for the values in cs.json.
+- Hemisphere wording ("anticlockwise as seen from above", "both in the northern hemisphere") is correct.
+- The 17 km WSW bearing (252.5°) is correct, and the two centres are never on one data picture.
+- The radius-height numbers (−15.7 at 30 km and 0.70 km; +9.2 at 125 km and 15.3 km; u_θ 55.0 at 30 km and 1.43 km) are correct.
+- Amphan: the 50-km ring is the ERA5 spin maximum (20.08 > 19.72 at 100 km). Inflow angle 16.5°. Khulna 79 km = the voice. The Nargis dates (−11 d, +66 h) are right.
+
+### Limits
+- Pre-render. No frames exist, so the layout items (B3, B5, B8) come from SVG coordinates and need a frame check after the fix.
+- Audio not heard.
+
+### Verdict: FIX (Part 2 audit: 14 Must, 11 Should)
+B1 is a physics error. B13 and B14 need the narration changed; for B12 the user picks (a) re-voice or (b) a screen change. The rest are TSX/visual edits plus a few optional narration additions.
+
+
+## #5a ch00_coordinates_flat — calculation & sync audit (2026-11-05)
+
+User request (2026-11-05): "don't skip any calculation; show every calculation and derivation thoroughly; where something is skipped, explained too briefly, or the visuals don't follow the narration, review and improve it." Yardstick: the s10/s11 0.1° slide (build 1, 11:21–11:46). That slide is already being redesigned in the working tree (`storyboard.yaml` s11 `calc_rows`, `cf_sB.tsx` CHECK rows at lines 270–273). This audit covers every other spoken or shown number. Items already listed in review 1 (Must 1–6, Should 1–14) are not repeated.
+
+**Method.**
+- I took one frame 0.25 s before the end of every sentence: 376 frames from `movies/out/ch00/ch00_coordinates_flat/1080.mp4` (build 1, 2309.27 s).
+- I tiled them per scene, nine to a sheet, each frame labelled with scene, sentence and time. Then I read every sheet against the build-1 timed script. That script is `timing.json` at HEAD; the working-tree timing is fix-1 and later, and longer.
+- I took full-resolution frames wherever the 640-px tiles were unclear.
+- Everything is in `reports/movies/ch00_coordinates_flat/calc_audit/{sent,sheets,full}/` (ignored), with `sent_times.txt`.
+- I recomputed every number in Python from `data/cf.json` and the script.
+- Timestamps are build 1 (mm:ss in the rendered MP4). Scene and sentence ids (S1 = first sentence) are stable across builds.
+- Letters: (a) result without inputs or arithmetic · (b) derivation jumps more than one move · (c) narration ≠ picture · (d) earlier rule not restated · (e) text/voice disagree or mistimed.
+
+**Verified (no finding).** I recomputed each of these and found it correct:
+- r = 5 and θ = 53.13°; bearing 37°.
+- 0.2 rad: 1 km and 10 km.
+- (−4, 3); r̂ and θ̂ at the balloon.
+- (6, −8) and its rebuild; x̂′ and ŷ′ at 30°.
+- (4.598, 1.964); C₁₁…C₂₂; α = θ gives (6, −8) and (5, 0).
+- Ring means 34.80 / −13.29 (sums 2505.89 / −957.23 over 72 points).
+- 126 km/h; 46.8 km/h; 1923 s = 32.1 min; 157.08 km in 74.8 min; 35/13 = 2.69.
+- The three ring points: 7.14 − 31.46 = −24.32 and 7.14 + 31.46 = 38.60 (data −24.32 / 38.65).
+- u_θ from 16.88 to 46.84; u_r from −40.12 to +14.15, with 58 points negative and positives at 185–250°.
+- 135 kt = 250.0 km/h; inflow angle tan⁻¹(13.3/34.8) = 20.9°.
+- The s25 wording "east side north, west side south, south side east": v(0°) = +38.0, v(180°) = −45.6, u(270°) = +24.6.
+
+**Where the added steps go.** The added steps go inside the four optional blocks: s09–s11, s13–s14, s15–s20 and s24. Outside those blocks, the added lines are one short arithmetic row each, so the pace hardly changes. Re-voiced sentences need re-TTS of that sentence only (splice method of `cf_fix1_splice.py`). Every new number gets a CHECK row in the owning TSX.
+
+### Findings
+
+**C1 · 1:34–1:44 · s03 S3 · (c).** "Three times x hat, plus four times y hat" is said while the picture shows one x̂ and one ŷ with gold links. The three steps and four steps are never drawn.
+- **On screen** (reveal on "three times", "four times", "plus"):
+  1. `3\,\hat{\mathbf x}=3\,(1,\ 0)=(3,\ 0)`
+  2. `4\,\hat{\mathbf y}=4\,(0,\ 1)=(0,\ 4)`
+  3. `(3,\ 0)+(0,\ 4)=(3,\ 4)`
+- **Narration** (after S3): "Three steps of x hat take us three kilometres east, and four steps of y hat take us four kilometres north, which lands exactly on the balloon."
+- **Visual** (`cf_sA.tsx` S03): lay three x̂ arrows tip to tail along the east axis to 3 km, then four ŷ arrows up the dashed line to the balloon. Each group reveals on its words.
+
+**C2 · 2:21–2:35 · s04 S2–S3 · (a)(c).** Pythagoras uses a triangle whose legs are unlabelled: the east leg is the axis itself and the north leg is a bare dashed line. The column also jumps from √(3²+4²) straight to √25.
+- **On screen** (the √(9+16) line on "nine and sixteen"):
+  1. `r=\sqrt{x^2+y^2}`
+  2. `=\sqrt{3^2+4^2}`
+  3. `=\sqrt{9+16}`
+  4. `=\sqrt{25}=5\ \mathrm{km}`
+- **Narration** (S3): "By Pythagoras, r is the square root of three squared plus four squared. Three squared is nine, and four squared is sixteen, so that's the square root of twenty five: five kilometres."
+- **Visual** (`cf_sA.tsx` S04): gold leg labels "3 km" under the east leg and "4 km" beside the dashed north leg, plus a right-angle mark at the foot. Each appears on its number word.
+
+**C3 · 2:45–2:52 · s04 S6 · (a)(b).** "Its tangent is four over three, so theta is about fifty three degrees" has two gaps:
+- the tangent is never defined, here or anywhere else in the movie (s26 relies on it);
+- the inverse step from 1.333 to 53.13° is silent.
+- **On screen:**
+  1. `\tan\theta=\dfrac{\text{north side}}{\text{east side}}=\dfrac{4}{3}\approx1.333`
+  2. `\theta=\tan^{-1}(1.333)\approx53.13^\circ\approx53^\circ`
+- **Narration:** "In a right triangle, the tangent of an angle is the side opposite it divided by the side next to it: here the north side over the east side, four over three, about one point three three. The angle with that tangent is about fifty three point one degrees, so theta is about fifty three degrees."
+- **Visual** (`cf_sA.tsx` S04): gold links from "4" to the north leg and from "3" to the east leg.
+
+**C4 · 3:18–3:43 · s05 S4–S8 · (a)(d).** The definitions of cosine and sine never appear. "5 cos 53° = 5 × 0.6" uses a value whose origin is not shown. It is also not quite right for 53°: cos 53° = 0.602, and only cos 53.13° = 3/5 = 0.6 exactly.
+- **On screen:**
+  1. `\cos\theta=\dfrac{\text{east side}}{r},\quad \sin\theta=\dfrac{\text{north side}}{r}`
+  2. `\cos\theta=\tfrac{3}{5}=0.6,\quad \sin\theta=\tfrac{4}{5}=0.8`
+  3. `x=r\cos\theta=5\times0.6=3`
+  4. `y=r\sin\theta=5\times0.8=4`
+- Replace "cos 53°" with "cos θ (θ ≈ 53.13°)".
+- **Narration** (before S7): "Cosine theta is the east side divided by the long side, and sine theta is the north side divided by the long side. For our balloon that's three fifths, zero point six, and four fifths, zero point eight."
+- **Visual** (`cf_sA.tsx` S05): label the triangle legs "3" and "4" next to "r cos θ" and "r sin θ" while the check runs.
+
+**C5 · 5:03–5:07 · s07 S5–S6 · (a).** "1 rad = 360°/2π ≈ 57°" skips 2π ≈ 6.283 and the division.
+- **On screen:**
+  1. `2\pi\ \mathrm{rad}=360^\circ`
+  2. `1\ \mathrm{rad}=\dfrac{360^\circ}{2\pi}=\dfrac{360^\circ}{6.283}\approx57.3^\circ`
+- **Narration** (S6): "Two pi is about six point two eight, so one radian is three hundred and sixty degrees divided by six point two eight: about fifty seven degrees."
+
+**C6 · 5:10–5:32 · s07 S8–S10 · (c)(a).** Three gaps:
+- The wedge's angle is not labelled: "0.2 rad" never appears on the picture.
+- The 1-km arc on the 5-km ring is only a few pixels long.
+- "Ten times the distance" has no ratio shown.
+- **On screen:**
+  1. `0.2\ \mathrm{rad}\approx0.2\times57.3^\circ\approx11.5^\circ`
+  2. `5\ \mathrm{km}\times0.2=1\ \mathrm{km}` (kept)
+  3. `50\ \mathrm{km}\times0.2=10\ \mathrm{km}` (kept)
+  4. `\dfrac{10\ \mathrm{km}}{1\ \mathrm{km}}=\dfrac{50\ \mathrm{km}}{5\ \mathrm{km}}=10`
+- **Narration** (S8 add): "That's a turn of about eleven and a half degrees."
+- **Visual** (`cf_sA.tsx` S07): label the vertex wedge "0.2 rad" and thicken the inner 1-km arc (or draw a magnified inset of it).
+
+**C7 · 5:46–6:14 · s08 S3–S7 · (e)(b)(a).** Three gaps:
+- r̂ is described at 5:46, but nothing is drawn until 6:06.
+- In one cut the 5-km arrow from the station becomes a length-1 arrow sitting at the balloon. That is two moves (shrink, then move), and neither is shown or said.
+- The spoken "three fifths, four fifths" is not on screen.
+- **On screen:**
+  1. `\hat{\mathbf r}=\dfrac{(3,\ 4)}{5}`
+  2. `=\left(\tfrac{3}{5},\ \tfrac{4}{5}\right)`
+  3. `=(0.6,\ 0.8)`
+- **Narration** (S6 add): "We draw r hat at the balloon, because it tells us the direction there."
+- **Visual** (`cf_sB.tsx` S08):
+  - S3: a ghost r̂ at the balloon.
+  - S6: keep the 5-km arrow labelled "5". Shrink a copy along it to length 1, labelled "1", then slide it out to the balloon.
+  - Tip label "(0.6, 0.8)".
+
+**C8 · 6:14–6:21 · s08 S8 · (a).** "|r̂| = √(0.36 + 0.64) = 1" does not show where 0.36 and 0.64 come from, and the voice leaves out the square root.
+- **On screen:**
+  1. `|\hat{\mathbf r}|=\sqrt{0.6^2+0.8^2}`
+  2. `=\sqrt{0.36+0.64}`
+  3. `=\sqrt{1}=1`
+- **Narration:** "Its length is the square root of zero point six squared plus zero point eight squared. That's zero point three six plus zero point six four, which is one, and the square root of one is one."
+
+**C9 · 7:34–7:49 and 8:03–8:10 · s09 S10–S11, S14 · (c).** The inset shows "5.1 km" and "4.9 km", but neither number is spoken or computed. The rejected clockwise direction is a short rose stub with no label (review 1 Should 8 covered the inset box and the slide/r̂ labels, not these).
+- **On screen:**
+  1. `5+0.1=5.1\ \mathrm{km}\ne5`
+  2. `5-0.1=4.9\ \mathrm{km}\ne5`
+- **Narration** (S10 add): "For example, if the slide had a part of a tenth of a kilometre along r hat, the balloon would end up five point one or four point nine kilometres from the station, not five."
+- **Visual** (`cf_sB.tsx` S09): label the stub "clockwise: θ shrinks", in muted rose with a cross.
+
+**C10 · 8:57–9:12 · s10 S8–S9 · (c).** "Turn the whole drawing": the turned triangle replaces the original, so there is no before/after.
+- **Visual** (`cf_sB.tsx` S10): keep the original "p east, q north" triangle as a 40 % ghost, with a gold 90° arc from it to the turned "p north, q west" triangle.
+
+**C11 · 9:11–9:20 · s10 S9–S11 · (b).** "p(0, 1) + q(−1, 0) = (−q, p)" merges two moves: multiply each vector by its number, then add east parts and north parts.
+- **On screen:**
+  1. `\to p\,(0,\ 1)+q\,(-1,\ 0)`
+  2. `=(0,\ p)+(-q,\ 0)`
+  3. `=(0-q,\ p+0)`
+  4. `=(-q,\ p)`
+- **Narration** (S10 or S11): "p times zero, one is zero, p, and q times minus one, zero is minus q, zero. Adding the east parts gives minus q, and adding the north parts gives p."
+
+**C12 · 9:38–9:45 · s10 S16 · (a).** "|(−4, 3)| = √(16 + 9) = 5" skips the squares, and the "5 as before" is not shown beside it.
+- **On screen:**
+  1. `|(-4,\ 3)|=\sqrt{(-4)^2+3^2}=\sqrt{16+9}=\sqrt{25}=5`
+  2. `|(3,\ 4)|=\sqrt{9+16}=5`
+- **Narration:** "Minus four squared is sixteen and three squared is nine, so its length is the square root of twenty five: five, the same as the balloon's arrow."
+
+**C13 · 10:08–10:16 · s11 S3–S4 · (d).** "Using the rule, we swap them": only the keyword is on screen, not the rule with symbols or the substitution. The redesigned `calc_rows` row 1 still goes from r̂ to θ̂ directly.
+- **On screen:**
+  1. `(p,\ q)\to(-q,\ p)`
+  2. `p=\cos\theta,\ \ q=\sin\theta`
+  3. `\hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)`
+- **Narration:** keep. S3 already says "swap them and put a minus on the first".
+
+**C14 · 10:21–10:39 · s11 S6–S8 · (c)(e).** Two gaps:
+- The turned triangle replaces r̂'s triangle with no before/after.
+- The west leg is labelled "sin θ" while the voice says "minus sine theta becomes the east part".
+- **Visual** (`cf_sB.tsx` S11):
+  - keep r̂'s triangle as a ghost with a gold 90° arc;
+  - label the west leg "sin θ, pointing west" and add a gold link to "−sin θ" in the formula on "minus sine theta".
+
+**C15 · 10:42–11:21 · s11 S10–S15 · (a).** The check rows give results with no substitution, and the length row skips the squares.
+- **On screen:**
+  1. `\theta=0^\circ:\ (-\sin0^\circ,\ \cos0^\circ)=(0,\ 1)`
+  2. `\theta=90^\circ:\ (-\sin90^\circ,\ \cos90^\circ)=(-1,\ 0)`
+  3. `\theta\approx53.13^\circ:\ (-0.8,\ 0.6)`
+  4. `|\hat{\boldsymbol\theta}|=\sqrt{(-0.8)^2+0.6^2}=\sqrt{0.64+0.36}=1`
+- **Narration** (S10): "At theta equals zero, minus sine zero is zero, and cosine zero is one, so theta hat is zero, one." S12: "At ninety degrees, minus sine ninety is minus one, and cosine ninety is zero, so theta hat is minus one, zero."
+- **Visual:** draw r̂ next to θ̂ at the balloon while the dot product is said, because the r̂ · θ̂ row uses it.
+
+**C16 · 11:21–11:47 · s11 S16–S19 · (a)(c)(d), the trigger.** Already being redesigned (working-tree `calc_rows` rows 7–17 and the U1 inset). Check the redesign for four remaining gaps:
+- `5\ \mathrm{km}=5000\ \mathrm{m}` before `s=r\,\Delta\theta`.
+- The calc row `\theta=53^\circ` should become `\theta\approx53.13^\circ`, to match "before 53.13°" (5000 cos 53° = 3009, not 3000).
+- Show the squares: `\sqrt{7.0^2+5.2^2}=\sqrt{49+27.04}=\sqrt{76.04}\approx8.7`.
+- Split the last row into `-7.0/8.7\approx-0.80` and `5.2/8.7\approx0.60`.
+
+Recomputed values: 0.1° = 0.0017453 rad; s = 8.7266 m; (2993.01, 4005.23) m; slide (−6.99, +5.23) m; slide ÷ s = (−0.801, 0.599).
+
+**C17 · 12:04–12:19 · s12 S2–S4 · (a).** The east, north and west rows give r̂ and θ̂ with no θ and no substitution.
+- **On screen:**
+  1. `\theta=0^\circ:\ \hat{\mathbf r}=(\cos0^\circ,\ \sin0^\circ)=(1,\ 0),\ \hat{\boldsymbol\theta}=(0,\ 1)`
+  2. `\theta=90^\circ:\ \hat{\mathbf r}=(0,\ 1),\ \hat{\boldsymbol\theta}=(-1,\ 0)`
+  3. `\theta=180^\circ:\ \hat{\mathbf r}=(\cos180^\circ,\ \sin180^\circ)=(-1,\ 0),\ \hat{\boldsymbol\theta}=(-\sin180^\circ,\ \cos180^\circ)=(0,\ -1)`
+- **Visual** (`cf_sB.tsx` S12): a small "θ = 0°", "90°" or "180°" label at the balloon's position as it stops.
+
+**C18 · 12:59–13:46 · s13 S4–S13 · (c).** The close-up has no context:
+- no station, no circle and no θ = 53°, only "to the station";
+- the wind arrow has no "10 m/s";
+- r̂ and θ̂ (length 1) are drawn longer than the 6 m/s shadow, which mixes two scales without saying so.
+- **Visual** (`cf_sB.tsx` S13):
+  - a small locator in the corner (station, 5-km circle, balloon at 53°), with a gold zoom frame leading into the close-up, as in the s11 redesign;
+  - wind tip label "10 m/s, due east" on "ten metres per second";
+  - keyword "r̂, θ̂: length 1 · wind: its own scale".
+- **Narration:** none needed.
+
+**C19 · 14:55–15:11 · s14 S3–S4 · (b)(a).** Scalar times vector is done in one jump, and the minus-times-minus sign (the classic trap) is never shown.
+- **On screen:**
+  1. `6\,\hat{\mathbf r}=6\,(0.6,\ 0.8)=(6\times0.6,\ 6\times0.8)=(3.6,\ 4.8)`
+  2. `-8\,\hat{\boldsymbol\theta}=-8\,(-0.8,\ 0.6)=\big((-8)(-0.8),\ (-8)(0.6)\big)=(6.4,\ -4.8)`
+- **Narration** (S4): "Minus eight times minus zero point eight is plus six point four, because two minus signs make a plus, and minus eight times zero point six is minus four point eight."
+
+**C20 · 15:28–15:36 · s14 S8 · (a).**
+- **On screen:**
+  1. `\sqrt{6^2+8^2}=\sqrt{36+64}=\sqrt{100}=10\ \mathrm{m/s}`
+  2. `|(10,\ 0)|=\sqrt{10^2+0^2}=10\ \mathrm{m/s}`
+- **Narration:** "Six squared is thirty six and eight squared is sixty four, which makes a hundred, and its square root is ten: the same as the wind's own length."
+
+**C21 · 17:26–17:37 · s15 S14 · (a).** "cos 30° ≈ 0.87 (0.866)" and "sin 30° = 0.5" appear with no origin.
+- **On screen:**
+  1. `\cos30^\circ=\dfrac{\sqrt3}{2}=\dfrac{1.732}{2}\approx0.866`
+  2. `\sin30^\circ=\tfrac12=0.5`
+- **Narration:** "Cosine of thirty degrees is the square root of three over two: one point seven three two over two, about zero point eight six six. Sine of thirty degrees is exactly one half."
+- **Visual** (`cf_sB.tsx` S15): label the x̂′ triangle legs "0.866" and "0.5" next to "cos α" and "sin α".
+
+**C22 · 17:53–18:09 · s16 S3–S4 · (d)(c).** The rule is applied with no symbols, and the ŷ′ triangle legs are unlabelled.
+- **On screen:**
+  1. `(p,\ q)\to(-q,\ p)`
+  2. `p=\cos\alpha,\ \ q=\sin\alpha`
+  3. `\hat{\mathbf y}'=(-\sin\alpha,\ \cos\alpha)`
+- **Visual** (`cf_sB.tsx` S16): label the ŷ′ triangle legs "sin α (west)" and "cos α (north)".
+
+**C23 · 18:09–18:38 · s16 S5–S8 · (a).** Three gaps:
+- The substitution step is missing.
+- The length line skips the squares and says "= 1"; in fact 0.866² = 0.74996, so it should read "≈" (exactly 3/4).
+- The dot product skips its products.
+- **On screen:**
+  1. `\hat{\mathbf y}'=(-\sin30^\circ,\ \cos30^\circ)=(-0.5,\ 0.866)`
+  2. `|\hat{\mathbf y}'|=\sqrt{(-0.5)^2+0.866^2}=\sqrt{0.25+0.75}=1`, with `0.866^2\approx0.75\ (\text{exactly }\tfrac34)`
+  3. `\hat{\mathbf x}'\cdot\hat{\mathbf y}'=0.866\times(-0.5)+0.5\times0.866=-0.433+0.433=0`
+- **Narration** (S8 add): "That's minus zero point four three three plus zero point four three three, which is zero."
+
+**C24 · 19:14–20:18 · s17 S6, S14–S15 · (a)(e).** Two gaps:
+- The length check jumps from √(4.6² + 1.96²) to √25 and writes "=".
+- The keyword "shadow on the new x axis" stays up through the whole y′ part.
+- **On screen:**
+  1. `\text{length}=\sqrt{4.6^2+1.96^2}`
+  2. `=\sqrt{21.16+3.84}`
+  3. `\approx\sqrt{25}=5\ \mathrm{km}`
+- **Narration** (S15): "Four point six squared is about twenty one point one six, and one point nine six squared is about three point eight four. Together that's twenty five, and its square root is five kilometres, as before."
+- **Visual** (`cf_sB.tsx` S17): from S6, the keyword becomes "shadows on the new axes".
+
+**C25 · 20:57–21:11 · s18 S6–S8 · (c).** "Go along one row, multiply… then add" is said, but only the keyword "row × column, then add" is shown.
+- **On screen:**
+  1. `\text{top row: }\cos\alpha\cdot x+\sin\alpha\cdot y=x'`
+  2. `\text{bottom row: }-\sin\alpha\cdot x+\cos\alpha\cdot y=y'`
+- **Visual** (`cf_sB.tsx` S18): a gold sweep along the top row and down the (x, y) column, each pair of entries lit as it is multiplied.
+
+**C26 · 21:11–21:22 · s18 S9 · (a).** "top row: 0.866 × 3 + 0.5 × 4 = 4.60" skips the products, and the bottom row is never computed (review Should 12 asked only for "≈").
+- **On screen:**
+  1. `0.866\times3+0.5\times4=2.598+2\approx4.60=x'`
+  2. `-0.5\times3+0.866\times4=-1.5+3.464\approx1.96=y'`
+- **Narration** (S9 add): "And the bottom row gives minus zero point five times three, plus zero point eight six six times four: one point nine six, our y prime again."
+
+**C27 · 21:25–21:51 · s18 S11–S14 · (d)(b).** "The dot product of two arrows of length one is the cosine of the angle between them": the rule from the dot-product movie is not restated on screen. "So each number is the cosine of…" then jumps over three of the four entries. Only cos α is shown. A viewer is never shown why sin α and −sin α are cosines.
+- **On screen:**
+  1. `\hat{\mathbf a}\cdot\hat{\mathbf b}=|\hat{\mathbf a}|\,|\hat{\mathbf b}|\cos\gamma=1\times1\times\cos\gamma=\cos\gamma`
+  2. `\hat{\mathbf x}'\cdot\hat{\mathbf x}=\cos\alpha`
+  3. `\hat{\mathbf x}'\cdot\hat{\mathbf y}=\cos(90^\circ-\alpha)=\sin\alpha`
+  4. `\hat{\mathbf y}'\cdot\hat{\mathbf x}=\cos(90^\circ+\alpha)=-\sin\alpha`
+  5. `\hat{\mathbf y}'\cdot\hat{\mathbf y}=\cos\alpha`
+  6. At 30°: `\cos60^\circ=0.5,\ \cos120^\circ=-0.5`
+- **Narration** (after S11): "As in the dot product movie: length times length times the cosine of the angle, and both lengths are one." After S14: "The angle between x hat prime and y hat is ninety degrees minus alpha, and its cosine is sine alpha. The angle between y hat prime and x hat is ninety degrees plus alpha, and its cosine is minus sine alpha."
+- **Visual** (`cf_sB.tsx` S18): draw the arcs α, 90° − α and 90° + α between the pairs in turn, each linked in gold to its matrix entry.
+
+**C28 · 22:32–22:58 · s19 S9–S12 · (a).** C₁₁…C₂₂ are shown as "(1, 0) · (cos α, sin α) = cos α", without the term-by-term products.
+- **On screen:**
+  1. `C_{11}=(1,0)\cdot(\cos\alpha,\sin\alpha)=1\cdot\cos\alpha+0\cdot\sin\alpha=\cos\alpha`
+  2. Write C₁₂, C₂₁ and C₂₂ the same way. C₁₂ is `1\cdot(-\sin\alpha)+0\cdot\cos\alpha=-\sin\alpha`.
+- **Narration** (S9): "one times cosine alpha, plus zero times sine alpha: cosine alpha." The other three need no words.
+
+**C29 · 22:58–23:26 · s19 S13–S16 · (d)(b).** The summing rule from the vectors movie appears only as the keyword "i repeated → add i = 1, 2". The j = 1 line then substitutes both the C's and x₁, x₂ → x, y in one move, and there is no number check.
+- **On screen:**
+  1. `x'_j=x_i\,C_{ij}\ \text{means}\ x'_j=\sum_{i=1}^{2}x_i\,C_{ij}`
+  2. `x'_1=x_1C_{11}+x_2C_{21}`
+  3. `=x_1\cos\alpha+x_2\sin\alpha`
+  4. `=x\cos\alpha+y\sin\alpha`
+  5. `=3\times0.866+4\times0.5\approx4.60\ \checkmark`
+- Do the same for j = 2, ending with ≈ 1.96.
+- **Narration** (S16 add): "With our numbers that's four point six again."
+
+**C30 · 24:47–25:13 · s20 S7–S10 · (c)(a).** "Let's check with the east wind" is said, but the wind is never drawn. The picture shows only r̂, θ̂ and the axes. The input "cos = 0.6, sin = 0.8" also does not name θ.
+- **On screen:**
+  1. `\mathbf u=(10,\ 0),\ \cos\theta=0.6,\ \sin\theta=0.8`
+  2. `x'=10\times0.6+0\times0.8=6+0=6`
+  3. `y'=-10\times0.8+0\times0.6=-8+0=-8`
+- **Visual** (`cf_sB.tsx` S20): the 10 m/s east wind at the balloon, its shadow on the x′ (= r̂) axis labelled 6 on "six" and on the y′ (= θ̂) axis labelled −8 on "minus eight", in the u_r rose / u_θ teal colours.
+
+**C31 · 25:51–26:05 · s20 S17–S19 · (c).** "With turned axes, we choose one angle for the whole map" is illustrated with two extra unlabelled arrow pairs (east point and north-west point). Both pairs are polar pairs; the fixed turned-axes pair is never shown. The north-west pair also sits on the "y′" label.
+- **Visual** (`cf_sB.tsx` S20): at three points (θ = 0°, 53°, 150°), draw
+  - the identical turned pair x̂′, ŷ′ at α = 53° (muted), labelled "turned axes: α = 53° everywhere";
+  - the polar pair r̂, θ̂ (bright), labelled "polar: θ = 0°, 53°, 150°".
+- Move the pair off the y′ label.
+
+**C32 · 27:42–28:30 · s22 S5–S10 · (a)(e).** "Add up the seventy two values, and divide by seventy two" is said, but no sum or division with numbers is shown. "≈ 35 m/s" and "−13 m/s" appear as results. The exact means, 34.8 and −13.3, are first seen in s26 (35:41), 7.5 minutes later, with no origin.
+- **On screen** (reveal on "add up" and "divide"):
+  1. `360^\circ\div5^\circ=72\ \text{points}`
+  2. `\overline{u_\theta}=\dfrac{2505.9\ \mathrm{m/s}}{72}\approx34.8\approx35\ \mathrm{m/s}`
+  3. `\overline{u_r}=\dfrac{-957.2\ \mathrm{m/s}}{72}\approx-13.3\approx-13\ \mathrm{m/s}`
+- **Narration** (S6 and S10): "The seventy two tangential winds add up to about two thousand five hundred and six metres per second. Divided by seventy two, that's about thirty four point eight, or about thirty five." "The seventy two radial winds add up to about minus nine hundred and fifty seven. Divided by seventy two, that's about minus thirteen point three, or about minus thirteen."
+- **Visual** (`cf_sC.tsx` S22): the 72 ring dots light in turn while a running sum ticks in the column. Add CHECK rows for 2505.89, −957.23 and 72.
+
+**C33 · 28:39–29:01 · s22 S13–S15 · (a)(c).** "135 kt" ≈ 250 km/h is never put in m/s, so it cannot be compared with the 35 m/s on screen or the 0–50 m/s colour bar. "The model analysis smooths out the strongest winds" also has no number. The comparison mixes the strongest one-minute wind with a ring average, and the narration doesn't say so.
+- **On screen:**
+  1. `135\ \mathrm{kt}\times1.852\approx250\ \mathrm{km/h}`
+  2. `250\ \mathrm{km/h}\div3.6\approx69\ \mathrm{m/s}`
+  3. `\text{strongest on our ring}\approx49\ \mathrm{m/s}` (DF: ring max 48.9 m/s)
+- **Narration** (S14 add / S15): "That's about sixty nine metres per second. It's the single strongest wind, while our thirty five is an average round the ring, and even the strongest wind on our model ring is only about forty nine."
+
+**C34 · 29:18–29:29 · s23 S5 · (a).** "√(35² + 13²) ≈ 37" skips the squares (the case named in the brief). Review Should 2 fixed only the timing.
+- **On screen:**
+  1. `\sqrt{35^2+13^2}`
+  2. `=\sqrt{1225+169}`
+  3. `=\sqrt{1394}\approx37.3\approx37\ \mathrm{m/s}`
+- **Narration:** "Thirty five squared is twelve hundred and twenty five, and thirteen squared is a hundred and sixty nine. Together that's thirteen hundred and ninety four, and its square root is about thirty seven metres per second."
+- **Honesty note:** this is the arrow built from the two averages. The average wind speed on the ring is 40.2 m/s, so don't call 37 "the wind speed".
+
+**C35 · 29:54–30:06 · s23 S10 · (a).** Two silent steps: 25 km becomes 25 000 m, and "≈ 1900 s ≈ 32 min" skips 1923 s and the division by 60.
+- **On screen:**
+  1. `25\ \mathrm{km}=25\,000\ \mathrm{m}`
+  2. `t=\dfrac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}\approx1923\ \mathrm{s}`
+  3. `1923\ \mathrm{s}\div60\ \mathrm{s/min}\approx32\ \mathrm{min}`
+- **Narration:** "Twenty five thousand divided by thirteen is about nineteen hundred and twenty three seconds. Divided by sixty seconds a minute, that's about thirty two minutes."
+
+**C36 · 30:06–30:20 · s23 S11 · (a)(c).** "2π × 25 km ≈ 157 km" and "157 000 m / 35 m/s ≈ 75 min" skip their arithmetic. "One lap of this ring" is also never drawn: the picture still shows the radius.
+- **On screen:**
+  1. `2\pi\times25\ \mathrm{km}=2\times3.1416\times25\approx157\ \mathrm{km}=157\,000\ \mathrm{m}`
+  2. `t=\dfrac{157\,000\ \mathrm{m}}{35\ \mathrm{m/s}}\approx4490\ \mathrm{s}`
+  3. `4490\ \mathrm{s}\div60\approx75\ \mathrm{min}`
+- **Narration:** "…about a hundred and fifty seven kilometres, takes about four thousand four hundred and ninety seconds, which is about seventy five minutes."
+- **Visual** (`cf_sC.tsx` S23): a gold arc sweeps the full ring on "one lap", labelled "157 km".
+
+**C37 · 30:24–30:35 · s23 S13 · (b).** It is never shown why a speed ratio is a distance ratio ("for every metre in, almost three round").
+- **On screen:**
+  1. `\dfrac{\text{distance round}}{\text{distance in}}=\dfrac{35\,t}{13\,t}=\dfrac{35}{13}\approx2.7`
+- **Narration:** "In any stretch of time, it goes thirty five metres round for every thirteen in, and thirty five over thirteen is about two point seven."
+
+**C38 · 31:36–32:30 · s24 S8–S16 · (b).** "So u sub r equals u" and "u sub theta equals minus u, which is plus sixteen point nine" skip the substitution. At 90°, that hides the −(−16.9) double negative.
+- **On screen:**
+  1. `0^\circ:\ u_r=(-8.7)(1)+(38)(0)=-8.7`
+  2. `u_\theta=-(-8.7)(0)+(38)(1)=38`
+  3. `90^\circ:\ u_r=(-16.9)(0)+(-37.4)(1)=-37.4`
+  4. `u_\theta=-(-16.9)(1)+(-37.4)(0)=+16.9`
+- **Narration** (S16): "And u sub theta is minus u times one, plus v times zero. Minus times minus sixteen point nine makes plus sixteen point nine: round."
+
+**C39 · 32:43–32:53 · s24 S19 · (a).** "cos ≈ −0.707, sin ≈ 0.707" appear with no origin.
+- **On screen:**
+  1. `\cos135^\circ=-\cos45^\circ=-\tfrac{1}{\sqrt2}\approx-0.707`
+  2. `\sin135^\circ=\sin45^\circ=\tfrac{1}{\sqrt2}\approx0.707`
+- **Narration:** "A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus one over the square root of two, about minus zero point seven zero seven, and its sine is plus zero point seven zero seven."
+- **Visual** (`cf_sC.tsx` S24): draw r̂ at the 135° point with its equal west and north legs (a 45° triangle).
+
+**C40 · 33:13–33:31 · s24 S22–S23 · (b).** In build 1 the column writes "u_θ = 10.1 × 0.707 + …", with the −u already folded into +10.1. The −(−10.1) step is never shown. The products are now 7.14 / 31.46 (fix 1).
+- **On screen:**
+  1. `u_r=(-10.1)(-0.707)+(-44.5)(0.707)=7.14-31.46\approx-24.3`
+  2. `u_\theta=-(-10.1)(0.707)+(-44.5)(-0.707)=7.14+31.46\approx38.6`
+- **Narration** (S22): "And u sub theta is minus u times sine, so minus minus ten point one, which is plus ten point one, times zero point seven zero seven, plus minus forty four point five times minus zero point seven zero seven."
+
+**C41 · 34:41–35:07 · s25 S10–S12 · (e)(c).** The graph shows none of the spoken numbers: "between about seventeen and forty seven, with an average of thirty five", "between about minus forty and plus fourteen", "negative at fifty eight of the seventy two points". The mean lines are unlabelled dotted lines, and the 14 outward points are not marked.
+- **Visual** (`cf_sC.tsx` S25), each label on its words:
+  - "17" at 90° and "47" at 215° on the teal curve, with "mean 35" on its dotted line;
+  - "−40" at 100° and "+14" at 220° on the rose curve, with "mean −13";
+  - a light rose band over 185°–250° labelled "14 points out".
+- **On screen:** `72-14=58\ \text{points in}`
+
+**C42 · 34:21–34:29 · s25 S7 · (c).** "On the east side it blows north, on the west side south, on the south side east": the graph is not linked to these words.
+- **Visual** (`cf_sC.tsx` S25): gold links on each phrase:
+  - 0°: v ≈ +38;
+  - 180°: v ≈ −46;
+  - 270°: u ≈ +25.
+
+**C43 · 35:41–35:56 · s26 S4–S5 · (a)(c)(d).** Three gaps:
+- "tan(inflow angle) = 13.3/34.8 ≈ 0.38" uses inputs never shown before (fixed by C32).
+- The triangle is not drawn: the wind sits over θ̂ with a wedge, but no legs.
+- The inverse-tangent step is silent. The tangent rule is not restated (C3 adds it in s04).
+- **On screen:**
+  1. `\tan(\text{inflow angle})=\dfrac{\text{in}}{\text{round}}=\dfrac{13.3}{34.8}\approx0.382`
+  2. `\text{inflow angle}=\tan^{-1}(0.382)\approx20.9^\circ\approx21^\circ`
+- **Narration** (S4–S5): "Its tangent is the side opposite the angle over the side next to it: the inward part over the round part, thirteen point three over thirty four point eight, about zero point three eight. The angle with that tangent is about twenty one degrees."
+- **Visual** (`cf_sC.tsx` S26): legs drawn as the wind's two parts, "34.8 round" (teal, along θ̂) and "13.3 in" (rose, toward the eye), with the wind as the long side.
+- **Note:** don't use the rounded 13/35: it gives 0.371 and 20.4°.
+
+### Summary
+
+43 items in total. Every item is tagged above with its letters (a)–(e).
+
+- **Must (a viewer following the maths notices):** C2, C3, C4, C7, C11, C19, C23, C27, C29, C30, C31, C32, C34, C35, C36, C38, C40, C43.
+- **Should:** the rest.
+- **Narration re-voice needed:** about 30 sentences in s03, s04, s05, s07, s08, s09, s10, s11, s14, s15, s16, s17, s18, s19, s22, s23, s24 and s26. In all, this adds about 4–5 minutes, mostly inside the optional blocks (s09–s11, s13–s14, s15–s20, s24). The skip chip times move, so recompute them from `timing.json` as in fix 1.
+- **Visual-only items (no re-voice):** C10, C14, C18, C25, C31, C41, C42.
+
+**Overall: FIX** (calculation and sync, 43 items; 18 Must). The physics and every number are right. The gaps are missing inputs, arithmetic and pictures, not wrong results.
+
+**Limits.**
+- Frames were taken at sentence ends. Motion between them was not checked frame by frame, and audio was not heard.
+- Timestamps are build 1; the fix-1 and s11-redesign builds shift everything after s11.
+- I did not open the redesigned s11 render; C16 is checked against the working-tree storyboard rows only.
+
+**Disk.** C: 115 GB free, G: 485 GB free. This audit wrote 30 MB of frames to the ignored `calc_audit/` folder.
