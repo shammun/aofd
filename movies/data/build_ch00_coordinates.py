@@ -141,6 +141,69 @@ def hexrgb(h: str) -> np.ndarray:
 RADIAL_LUT = ["#d9667f", "#b65a74", "#8a4e66", "#5b4258", "#3a3d55", "#4f4a4f", "#7c5a44", "#b06e3e", "#e8833a"]
 
 
+def tissot_xy(T) -> list[list[float]]:
+    """Tissot outlines in units of the Earth's radius (x/a, y/a), flat [x0, y0, x1, y1, …] per circle (rounded 1e-4).
+
+    Fix loop 1 (review 1 Must 6): `tissot_ellipses` takes `radius_km` and `a` in METRES; build 1 passed a = 1.0 with
+    radius_km = 500, i.e. a 500 000-rad circle on a 1-m sphere (≈ 169.7° angular radius: a ring round the ANTIPODE, which
+    drew the Brest / 60° N / Svalbard bands at the same latitudes in the southern hemisphere). The circles are now traced on
+    the real sphere (default a = EARTH_RADIUS) and divided by that radius here."""
+    from fluidpy.geo.constants import EARTH_RADIUS
+    return [np.round(np.stack([np.asarray(t.x) / EARTH_RADIUS, np.asarray(t.y) / EARTH_RADIUS], -1), 4).ravel().tolist() for t in T]
+
+
+def tissot_check(nm: str, kw: dict, TC: list, xy: list[list[float]]) -> list[tuple[str, float, float, float]]:
+    """(name, value, ref, tol) rows: each outline encloses its own projected centre in y (ymin ≤ y0/a ≤ ymax; a finite
+    circle on Mercator is not symmetric about its centre, so the mid-height is not tested) and spans less than 1.0 a
+    (the tallest, Mercator at Svalbard: 2 × 500 km / a × k ≈ 0.77)."""
+    import fluidpy.geo.mapproj as MP
+    out = []
+    for (la, lo), L in zip(TC, xy):
+        a_ = np.asarray(L).reshape(-1, 2)
+        y0 = float(MP.forward(nm, la, lo, a=1.0, **kw)[1])
+        ok = a_[:, 1].min() <= y0 <= a_[:, 1].max() and (a_[:, 1].max() - a_[:, 1].min()) < 1.0
+        out.append((f"{nm} ({la:.1f}, {lo:.1f}) outline encloses y0/a = {y0:.3f}", float(ok), 1.0, 0.0))
+    return out
+
+
+def eye_stretch(crop, up: int = 4):
+    """GOES true-colour eye crop with a contrast stretch (fix loop 1, review 1 Must 1): the 1.2° crop of a bright cloud
+    shield is almost uniform white (luminance 174–255), so the eye did not read. Linear stretch of the 0.5–99.5 % luminance
+    range to 30–255 with γ = 1.6 (same factors on R, G, B: hues kept). Stated in the manifest and on the source line."""
+    from PIL import Image
+    a = np.asarray(crop).astype(float)
+    lo, hi = np.percentile(a.mean(-1), [0.5, 99.5])
+    o = (30 + 225 * np.clip((a - lo) / (hi - lo), 0, 1) ** 1.6).astype(np.uint8)
+    im = Image.fromarray(o)
+    return im.resize((im.width * up, im.height * up), Image.LANCZOS), {"lum_lo": float(lo), "lum_hi": float(hi), "out": [30, 255], "gamma": 1.6}
+
+
+def pinellas_note(c10: np.ndarray, uS) -> dict:
+    """Which Pinellas coast segment gives the bearing used on screen (fix loop 1, review 1 Should 15 / DC43).
+
+    The s40 across-shore component uses 355.4°: the great-circle bearing between the planning points 27.60 N 82.74 W and
+    28.15 N 82.79 W (data_needs, coast bearings). The NE 10 m nearest-coast-point segment (DC43 row) gives 353.1°, the NE
+    50 m land outline 355.7°. Across components for each, from the same nearest-HRRR-point wind, are recorded too."""
+    import fluidpy.geo.sphere as S
+    import fluidpy.geo.vectors as GVm
+
+    def near(allc, lat, lon):
+        d = (allc[:, 1] - lat) ** 2 + ((allc[:, 0] - lon) * np.cos(lat * D2R)) ** 2
+        return allc[np.argmin(d)]
+    c50 = np.concatenate([p for _, ps in shp_parts(F_NE50L) for p in ps])
+    out = {"used_deg": 355.4, "planning_points": {"from": [27.60, -82.74], "to": [28.15, -82.79],
+                                                  "bearing_deg": float(S.initial_bearing(27.60, -82.74, 28.15, -82.79))}}
+    for nm, c in (("ne_10m_coastline", c10), ("ne_50m_land", c50)):
+        a_, b_ = near(c, 27.60, -82.74), near(c, 28.15, -82.80)
+        out[nm] = {"from": [float(a_[1]), float(a_[0])], "to": [float(b_[1]), float(b_[0])], "bearing_deg": float(S.initial_bearing(a_[1], a_[0], b_[1], b_[0]))}
+    for v in (out["planning_points"], out["ne_10m_coastline"], out["ne_50m_land"]):
+        v["across_ms"] = float(GVm.components_in_axes(u=uS, bearing_deg=v["bearing_deg"])[1])
+    out["note"] = ("355.4° is the planning-point bearing (27.60 N 82.74 W -> 28.15 N 82.79 W); the NE 10 m nearest-point segment gives "
+                   f"{out['ne_10m_coastline']['bearing_deg']:.1f}°, NE 50 m land {out['ne_50m_land']['bearing_deg']:.1f}°; across-shore "
+                   f"+{out['planning_points']['across_ms']:.1f} / +{out['ne_10m_coastline']['across_ms']:.1f} / +{out['ne_50m_land']['across_ms']:.1f} m/s")
+    return out
+
+
 def lut_from_hex(hexes: list[str], n: int = 256) -> np.ndarray:
     pts = np.array([hexrgb(h) for h in hexes])
     x = np.linspace(0, 1, len(hexes))
@@ -246,10 +309,89 @@ def sample_equirect(img: np.ndarray, lat: np.ndarray, lon: np.ndarray) -> np.nda
 
 
 # ---------------------------------------------------------------------------------------------------------- main
+def patch_fl1(publics: list[Path]) -> int:
+    """Fix loop 1 in place (no full rebuild: the machine was busy with another render): recompute ONLY the three blocks that
+    main() now computes differently — the Tissot circles (Must 6), the s14 GOES eye crop (Must 1) and the Pinellas coast-segment
+    note (Should 15) — from the same inputs, rewrite co.json / img/goes_eye.jpg / the public copies, and update the manifest
+    (hashes, heavy-call records, new CHECK rows, notes). A later full `main()` run gives the same bytes for these blocks."""
+    from PIL import Image
+    import fluidpy.geo.mapproj as MP
+    V = json.loads((DATA / "co.json").read_text(encoding="utf-8"))
+    M = json.loads((OUT / "manifest.json").read_text(encoding="utf-8"))
+    rows, heavy_new = [], []
+    TC = [tuple(c) for c in V["proj"]["tissot"]["centres"]]
+    for key, nm in (("pc", "platecarree"), ("mc", "mercator"), ("ee", "equalearth")):
+        T = MP.tissot_ellipses(nm, centres=np.array(TC), radius_km=500.0, n=49)
+        V["proj"]["tissot"][key] = tissot_xy(T)
+        heavy_new.append({"fn": "fluidpy.geo.mapproj.tissot_ellipses", "scene": "s31-s34", "eq": f"Tissot circles 500 km ({nm})",
+                          "params": {"name": nm, "centres": f"array {np.shape(np.array(TC))}, sha256 {parity_hash(np.array(TC))}", "radius_km": 500.0, "n": 49},
+                          "output_sha256": parity_hash(T)})
+        for nm_, v_, r_, t_ in tissot_check(nm, {}, TC, V["proj"]["tissot"][key]):
+            rows.append({"id": "DC32b", "name": f"Tissot {nm_} (northern centres stay north)", "value": r6([v_]), "ref": r6([r_]), "tol": t_, "pass": bool(abs(v_ - r_) <= t_)})
+    # the s31 Brest / Svalbard and s33 60° N / Svalbard ellipses (the ones the callouts point at) are in the northern hemisphere
+    for key, i, lat in (("pc", 1, BREST[0]), ("pc", 2, LYB[0]), ("mc", 4, 60.0), ("mc", 2, LYB[0]), ("ee", 3, 60.0)):
+        a_ = np.asarray(V["proj"]["tissot"][key][i]).reshape(-1, 2)
+        rows.append({"id": "DC32b", "name": f"{key} ellipse {i} ({lat:.1f}° N) lies north of the equator", "value": float(a_[:, 1].min()), "ref": True, "tol": 0,
+                     "pass": bool(a_[:, 1].min() > 0)})
+    # GOES eye crop centred on the IBTrACS centre, contrast-stretched
+    goes = json.loads(F_GOESJ.read_text(encoding="utf-8"))
+    gimg = Image.open(F_GOES).convert("RGB")
+    gw, gh = gimg.size
+    blat, blon = float(V["ian"]["best_lat"]), float(V["ian"]["best_lon"])
+    la0, la1, lo0, lo1 = cy = (blat - 0.6, blat + 0.6, blon - 0.65, blon + 0.65)
+    fx = lambda lo: (lo - goes["lon_edges"][0]) / (goes["lon_edges"][1] - goes["lon_edges"][0]) * gw  # noqa: E731
+    fy = lambda la: (goes["lat_edges"][1] - la) / (goes["lat_edges"][1] - goes["lat_edges"][0]) * gh  # noqa: E731
+    crop, info = eye_stretch(gimg.crop((round(fx(lo0)), round(fy(la1)), round(fx(lo1)), round(fy(la0)))), 4)
+    V["stack"]["eye_box"] = list(cy)
+    V["stack"]["eye_stretch"] = info
+    # Pinellas coast segment note (s40)
+    c10 = np.concatenate([p for _, ps in shp_parts(F_NE10C) for p in ps])
+    PIN = pinellas_note(c10, V["coast"]["uS"])
+    if not all(r["pass"] for r in rows):
+        for r in rows:
+            print(f"  {'PASS' if r['pass'] else 'FAIL'}  {r['id']} {r['name']} -> {r['value']} (ref {r['ref']})")
+        print("patch_fl1: checks FAILED — nothing written")
+        return 1
+    crop.save(IMG / "goes_eye.jpg", quality=90)
+    blob = json.dumps(V, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    (DATA / "co.json").write_bytes(blob)
+    for pub in publics:
+        pub.mkdir(parents=True, exist_ok=True)
+        (pub / "co_goes_eye.jpg").write_bytes((IMG / "goes_eye.jpg").read_bytes())
+    M["data_files"]["co.json"] = hashlib.sha256(blob).hexdigest()
+    M["data_files"]["img/goes_eye.jpg"] = sha_file(IMG / "goes_eye.jpg")
+    if "co_goes_eye.jpg" in M.get("render_assets", {}):
+        M["render_assets"]["co_goes_eye.jpg"] = sha_file(IMG / "goes_eye.jpg")
+    M["physics_heavy"] = [h for h in M["physics_heavy"] if h["fn"] != "fluidpy.geo.mapproj.tissot_ellipses"] + heavy_new
+    M["checks"] = [r for r in M["checks"] if r["id"] != "DC32b"] + rows
+    P = M["parameters"]
+    P["coast_segment_s40"] = PIN
+    P["goes_eye_s14"] = {"box": list(cy), "centre": "IBTrACS 18 UTC (eye in the GOES image; HRRR centre 14 km south)", "contrast_stretch": info}
+    P["exaggerations"] = [e for e in P["exaggerations"] if not e.startswith("s31 Tissot") and not e.startswith("s31-s34 Tissot") and not e.startswith("s14 GOES eye")] + [
+        "s31-s34 Tissot circles 500 km radius (traced on the real sphere, fix loop 1)", "s14 GOES eye crop contrast-stretched (0.5-99.5 % -> 30-255, gamma 1.6)"]
+    M["fix_loop_1"] = {"date": "2026-11-04", "by": "build_ch00_coordinates.py --patch-fl1",
+                       "changes": ["Tissot circles: tissot_ellipses was called with a = 1.0 (metres) and radius_km = 500, i.e. circles of 169.7° angular radius round "
+                                   "the antipodes (bands mirrored into the southern hemisphere, review 1 Must 6); now traced on the Earth (a = EARTH_RADIUS) and "
+                                   "divided by a; DC32b rows: every outline's mid-height = its centre's y/a, the five callout ellipses lie north of the equator",
+                                   "s14 GOES eye crop: centred on the IBTrACS 18 UTC centre, contrast-stretched (Must 1)",
+                                   "s40 coast segment for 355.4° recorded (Should 15)"],
+                       "fluidpy": git_sha(FLUID, {"mapproj_py": "fluidpy/geo/mapproj.py"})}
+    (OUT / "manifest.json").write_text(json.dumps(M, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+    for r in rows:
+        print(f"  PASS  {r['id']} {r['name']} -> {r['value']}")
+    print(f"patch_fl1: co.json {len(blob) / 1e3:.0f} kB sha {M['data_files']['co.json'][:12]}; goes_eye sha {M['data_files']['img/goes_eye.jpg'][:12]}; "
+          f"{len(rows)} DC32b rows; Pinellas: {PIN['note']}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--public", type=Path, help="render public dir for the co_* assets")
+    ap.add_argument("--patch-fl1", nargs="*", type=Path, default=None, metavar="PUBLIC_DIR",
+                    help="fix loop 1 in place: Tissot circles, s14 GOES eye crop, Pinellas note (+ copies to the given public dirs)")
     a = ap.parse_args()
+    if a.patch_fl1 is not None:
+        return patch_fl1(a.patch_fl1)
     from PIL import Image
     Image.MAX_IMAGE_PIXELS = None
     DATA.mkdir(parents=True, exist_ok=True)
@@ -426,6 +568,7 @@ def main() -> int:
         return [float(u20[j]), float(v20[j])], [float(LA2[j]), float(LO2[j])]
     uF, gF = nearest_hrrr(*FMB)
     uS, gS = nearest_hrrr(*STP)
+    PIN = pinellas_note(allc, uS)   # fix loop 1 (Should 15): which coast segment gives the 355.4° used on screen
     spF = float(np.hypot(*uF))
     dirF = float(call(GA + "wind_direction_from", "s39", "direction the wind blows from", u=uF[0], v=uF[1]))
     alF, acF = call(GV + "components_in_axes", "s39", "along = u·e_along, across = u·e_across", u=uF, bearing_deg=329.0)
@@ -517,19 +660,26 @@ def main() -> int:
     gimg = Image.open(F_GOES).convert("RGB")
     gw, gh = gimg.size
 
-    def gcrop(box, path, up=1):
+    def gcrop(box, path, up=1, stretch=False):
         la0, la1, lo0, lo1 = box
         x0 = (lo0 - goes["lon_edges"][0]) / (goes["lon_edges"][1] - goes["lon_edges"][0]) * gw
         x1 = (lo1 - goes["lon_edges"][0]) / (goes["lon_edges"][1] - goes["lon_edges"][0]) * gw
         y0 = (goes["lat_edges"][1] - la1) / (goes["lat_edges"][1] - goes["lat_edges"][0]) * gh
         y1 = (goes["lat_edges"][1] - la0) / (goes["lat_edges"][1] - goes["lat_edges"][0]) * gh
         c = gimg.crop((round(x0), round(y0), round(x1), round(y1)))
-        if up > 1:
+        info = None
+        if stretch:
+            c, info = eye_stretch(c, up)
+        elif up > 1:
             c = c.resize((c.width * up, c.height * up), Image.LANCZOS)
         c.save(path, quality=90)
+        return info
     gcrop(V["stack"]["box_ll"], IMG / "goes_stack.jpg", up=2)
-    cy = (clat - 0.6, clat + 0.6, clon - 0.65, clon + 0.65)
-    gcrop(cy, IMG / "goes_eye.jpg", up=4)
+    # fix loop 1 (Must 1): the s14 eye crop is centred on the IBTrACS 18 UTC centre, where the eye is in the GOES image (the
+    # HRRR pressure-minimum centre lies ≈ 14 km south of it); the s14 cylinder axis goes through the crop's centre
+    blat, blon = float(V["ian"]["best_lat"]), float(V["ian"]["best_lon"])
+    cy = (blat - 0.6, blat + 0.6, blon - 0.65, blon + 0.65)
+    V["stack"]["eye_stretch"] = gcrop(cy, IMG / "goes_eye.jpg", up=4, stretch=True)
     V["stack"]["eye_box"] = list(cy)
 
     # ================================================================ the sphere (s15-s27)
@@ -701,8 +851,11 @@ def main() -> int:
     for key, (nm, kw) in PR.items():
         if key == "go":
             continue
-        T = call(GM + "tissot_ellipses", "s31-s34", f"Tissot circles 500 km ({nm})", heavy_call=True, name=nm, centres=np.array(TC), radius_km=500.0, n=49, a=1.0, **kw)
-        tis[key] = [np.round(np.stack([t.x, t.y], -1), 4).ravel().tolist() for t in T]
+        # fix loop 1 (Must 6): traced on the real sphere (a = EARTH_RADIUS, radius_km in km), then divided by a (tissot_xy)
+        T = call(GM + "tissot_ellipses", "s31-s34", f"Tissot circles 500 km ({nm})", heavy_call=True, name=nm, centres=np.array(TC), radius_km=500.0, n=49, **kw)
+        tis[key] = tissot_xy(T)
+        for nm_, v_, r_, t_ in tissot_check(nm, kw, TC, tis[key]):
+            row("DC32b", f"Tissot {nm_} (northern centres stay north)", v_, r_, t_)
     V["proj"]["tissot"] = {"centres": [list(c) for c in TC], **tis}
     # the two London-Los Angeles routes on the Mercator map (s30, s32): the rhumb line is straight there
     rte = {}
@@ -1113,11 +1266,13 @@ def main() -> int:
                        "stack": {"levels": SL, "box": "±2.75° lat × ±3.05° lon round the ERA5 centre", "colour": "u_r, −10…+10 m/s, rose(−, hatched)/slate/orange(+)",
                                  "exaggeration": "vertical ×10 (said only in the manifest)"},
                        "vortex_day": "2026-01-21 (strongest of winter 2025-26; data_needs §H)",
+                       "coast_segment_s40": PIN,
+                       "goes_eye_s14": {"box": V["stack"]["eye_box"], "centre": "IBTrACS 18 UTC (eye in the GOES image; HRRR centre 14 km south)", "contrast_stretch": V["stack"]["eye_stretch"]},
                        "ciaran": {"seed": [52.5, 1.75, "2023-11-02T12"], "box_deg": [1.2, 2.0], "max_step_km": 120, "ring_km": 200, "motion": "00-06 UTC 2 Nov"},
                        "time_compression": {"s11": "particles 150 s per sample (frozen 18 UTC field), zoom 30 s", "s43": "particles 600 s per sample (frozen 03 UTC field); isobars hourly 21->06 UTC in ~10 s",
                                             "s19": "Earth spin one turn in 20 s", "s25": "1 h flight in ~5 s", "s41": "train at true speed ×1 (illustrative)"},
                        "exaggerations": ["title grid-to-polar morph (schematic)", "s14 cylinder at true aspect (25 km × 15 km), arrows illustrative",
-                                         "s14b vertical ×10", "s20 one-degree step drawn ×5 in angle", "s31 Tissot circles 500 km radius",
+                                         "s14b vertical ×10", "s20 one-degree step drawn ×5 in angle", "s31-s34 Tissot circles 500 km radius (traced on the real sphere, fix loop 1)", "s14 GOES eye crop contrast-stretched (0.5-99.5 % -> 30-255, gamma 1.6)",
                                          "s35 polar map below 20 N cut"],
                        "screen_deviations": ["s02-s05 flat map is a code-drawn local plane (no imagery: a 12-km window is 6 px of Blue Marble)",
                                              "s11/s39 maps in a local equirectangular frame scaled by cos(latitude) (≈ HRRR's Lambert conformal over a 600-km window)",

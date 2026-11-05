@@ -190,3 +190,74 @@ K6 (`S/stills/k6r2`, 2076 + 250 frames re-shot): one interim FAIL (55 link-axis:
 after the colour change **PASS 4086 frames, 0 hits** (`S/k6r5.json`).
 Chunks to re-render (4000-frame chunks): c00 c01 c02 c03 c05 c06 c07 c08 c09 c10 c11 c13 c14 c15 c16 c17 c19
 (unchanged: c04 c12 c18 c20 c21).
+
+## 9. Fix loop 1 (2026-11-04) — review 1: 17 Musts, 17 of 18 Shoulds (source only)
+Scope: TSX + data overlay only. No TTS, no narration or timing change, no Remotion render / still / bundle, no Chrome, no SSR
+(`run.mjs`): another heavy job (#6 gradient pre-render) held the machine. Maths end card kept (reviewer's recommendation).
+
+### Data (`movies/data/build_ch00_coordinates.py`; in-place patch `--patch-fl1`, no full rebuild)
+- **Must 6, root cause.** Not a sign bug in the TSX: `fluidpy.geo.mapproj.tissot_ellipses(…, radius_km=500, a=1.0)` traces the circle
+  by great-circle steps of `radius_km·1e3 / a` RADIANS, so a = 1 m gave 5·10⁵ rad ≡ 169.7°: a 10°-radius ring round each centre's
+  ANTIPODE (Brest band 38.5–59° S, Svalbard 69–90° S, 60° N circles at 60° S). Fixed in the builder: circles traced on the real
+  sphere (default a = EARTH_RADIUS), then divided by a (`tissot_xy`). The library is right (its docstring says a in metres).
+  New CHECK rows DC32b (41, all PASS): every outline encloses its own centre's y/a; the five callout ellipses (pc Brest,
+  pc Svalbard, mc 60° N, mc Svalbard, ee 60° N) lie north of the equator.
+- **Same-bug sweep (every latitude placement).** All other `MP.forward(…, a=1.0)` calls take lat/lon in degrees (a only scales:
+  correct). `storm_relative_wind(radii_km=…)` uses the default Earth radius (correct). In the TSX: `mapP` (y = lat1 − lat), `pv`
+  (cy − y·s), s32 `latTick`, the polar map (`p(0, −r)` = 30° N at lon 0, the bottom of a north-polar map), s19 `LatCircle −BREST`
+  (deliberate southern reference), s46 recap ellipses (cy − 260 sin φ), the globe kit (`ll`) — none mirrored.
+- **Must 1.** The s14 GOES crop is now centred on the IBTrACS 18 UTC centre (26.6 N 82.4 W), where the eye is in the image (the HRRR
+  pressure minimum lies 13.7 km south of it), and contrast-stretched (luminance 0.5–99.5 % = 174–255 → 30–255, γ 1.6; source line
+  says "contrast enhanced"). `goes_eye.jpg` 34556e9b295e…, staged to `movies/public` and `S/public`.
+- **Should 15.** Manifest `parameters.coast_segment_s40`: 355.4° = the planning points 27.60 N 82.74 W → 28.15 N 82.79 W (across
+  +11.5 m/s); NE 10 m nearest points 353.1° (+12.1); NE 50 m land 355.7° (+11.4).
+- `co.json` c33b8e590e0a… (only `proj.tissot`, `stack.eye_box`, `stack.eye_stretch` changed), manifest `fix_loop_1` record,
+  3 tissot heavy records re-hashed, 157 checks all PASS.
+
+### Screen (file: scene)
+| item | fix |
+|---|---|
+| Must 1 | co_sA s14: unlit, non-tone-mapped quad (`toneMapped: false`), opacity 1; gold eyewall ring (9 px) from "eyewall" to "cylindrical coordinates"; "eyewall" is a SideCallout linked to it; cylinder rims 6 px, sides 3 px |
+| Must 2 | co_sA s14: `u_r`, `u_θ`, `w` tags in KaTeX |
+| Must 3 | co_sA s14b: column = the stack, top layer first: "12.5 · 15 km: sign flips" / "≈ +4 m/s, out", "6 km: hardly in or out" / "rising near the eye", "1.5 km: little inflow", "300 m: flowing in" / "≈ −6 m/s on the ring" — each spoken line a SideCallout to its own 200-km ring (point nearest the column); S2 "layers 0.3 – 15 km up"; the never-visible axis-corner tags removed |
+| Must 4 | co_sA s11: `ringArrowsMean` — the ring-mean 37 and −12.5 m/s drawn at ring point 9 along its own r̂, θ̂ (radial arrow 94 px, pointing at the eye) |
+| Must 5 | co_sA s11: both readouts are SideCallouts (links from their own left edge, below "southwest Florida", no crossing) |
+| Must 6 | data (above) + co_sC s31 / s33: SideCallouts ordered like their targets (Svalbard above Brest / 60° N) |
+| Must 7 | co_sB s29: "Los Angeles" right of and below its dot |
+| Must 8 | co_sB s29: CalcStack x 1160, row 2 = `d ≈ 6371 × 1.375 ≈ 8760 km` with lhs `d` (ends ≈ x 1740) |
+| Must 9 | co_sA s09: "radius 1" centred under the circle |
+| Must 10 | co_sB s16: "+90°" right of and below the pole dot |
+| Must 11 | co_sB s19: `facing()` fades "Brest"/"Svalbard" as their points near the limb; the pole "0" right of its dot |
+| Must 12 | co_sC s41: "u′ = 1.5" left of the walker's arrow (anchor end) |
+| Must 13 | co_sC s43: "north ≈ 8" above "south ≈ 19", SideCallouts (checked: north link above south link everywhere, ≥ 80 px) |
+| Must 14 | co_sC s45: equation broken before "=" (line 2 "= ∂p/∂τ − U·∇p" at x 1010, y 370); keywords at y 535; bars from a baseline at y 640 (40 px per hPa/h), values at 832, "hPa per hour" above the baseline's right end |
+| Must 15 | co_sC s40: SpeedBar 0–50 above the chart (chart 230–430); credit "HRRR (NOAA) · 28 Sep 2022, 20 UTC · NOAA CO-OPS gauges · NHC report"; s45: SpeedBar 0–30 at x 1460 |
+| Must 16 | co_sB s26: readouts and "no force" keyword removed (screen-only option); keywords from the spoken words at y 560 from frame 0 ("why does it matter?", "Newton's law: the whole vector", "turning arrows: extra pieces") so the right half is never empty |
+| Must 17 | co_sB s15: "Earth's radius a" + "≈ 6400 km (6371 km)" (the line on the globe stays labelled a); the "|" notation is gone |
+| Should 1 | co_sA s07: "2π r" outside the circle, upper left |
+| Should 2 | KaTeX hat-theta: s14 "r̂, θ̂ turn", s25 "like θ̂ round a circle", s46 beat 1 |
+| Should 3 | co_sA s12: dashed ring-mean lines (37, −12.5) and "inflow: nearly all negative" (66 of 72 ring points < 0; the other six ≤ +1.05 m/s — "negative all the way round" would be false) |
+| Should 4 | s11 "official estimate:" |
+| Should 5 | co_sB s18: smaller φ arc, φ inside the triangle; "two right triangles" at y 520; top view fades before the S11 links; 4230-km link ends on the leg's right part, its tag moved left |
+| Should 6 | s22 "≈ 5 × too wide" (1/cos 78.2° = 4.9) |
+| Should 7 | s23 "width a cos φ dλ", "height a dφ" |
+| Should 8 | co_sB s27: pictures centred at y 300, ×1.15; keywords at y 540–660 (out before the Alps profile); scale-factor rows 540/610, gradient formula 720, keywords 820 |
+| Should 9 | co_sC s34: Equal Earth starts at cx 845 (41 px gap) |
+| Should 10 | co_sC s36: tick legend "radial ticks: in · out"; bars "radial ÷ tangential" about the pole ≈ 1.9 (VX.ratP 1.883) and about the centre ≈ 0.4 (VX.ratC 0.419); CHECK rows added |
+| Should 11 | co_sC s40: "Fort Myers (upriver)", "St. Petersburg"; NHC line + "above the ground" |
+| Should 12 | co_sC s39: coast link → coastline 130 px north (bend 150, ≥ 40 px over the wind arrow); along link → x′ axis 80 px south of the beach; across → band middle; "Fort Myers Beach" 35 px further left |
+| Should 13 | **deferred** (needs a re-voice: "minus thirty two") |
+| Should 14 | co_sC s47: topic list from y 648 (28 px under the icon row) |
+| Should 16 | co_sB s21: tags below their bands from Brest north |
+| Should 17 | co_sB s24: Brest's dot arrives with its name |
+| Should 18 | opening keywords: s07 "radians" from frame 0; s24 "zoom out: other stations" at the zoom-out; s33 "conformal has a price" from frame 0 |
+
+### Static gates (no browser)
+tsc 0 errors (exit 0) · at_check 484 refs in 49 scenes, 0 failures · swap_check 417 text elements, 0 pairs, 0 swaps < 8 frames
+(60 not evaluable: 3-D / frame-dependent) · cam_speed 0 above 90 °/s (peak s29 55) · eq_check 29/29, none unused.
+Not run (forbidden this loop): module-load bundle, SSR `run.mjs`, K6 stills, render, QA.
+
+### Next (one heavy job at a time)
+1. SSR step 10 + `--3d` step 15; 2. K6 re-shoot `S/k6f1_frames.txt` (3789 frames, 30 changed scenes: the house K6 list in those
+scenes + every 1 s through s12 s18 s26 s27 s36 s39 s41 s45) into a copy of `S/stills/k6r2` → 0 hits; 3. re-render chunks c02–c21
+(only c00 c01 hold no changed scene; with the ±10-frame cross-fades) → join → QA → review 2.

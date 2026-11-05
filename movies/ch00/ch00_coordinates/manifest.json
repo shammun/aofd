@@ -126,15 +126,74 @@
    "s14 cylinder at true aspect (25 km × 15 km), arrows illustrative",
    "s14b vertical ×10",
    "s20 one-degree step drawn ×5 in angle",
-   "s31 Tissot circles 500 km radius",
-   "s35 polar map below 20 N cut"
+   "s35 polar map below 20 N cut",
+   "s31-s34 Tissot circles 500 km radius (traced on the real sphere, fix loop 1)",
+   "s14 GOES eye crop contrast-stretched (0.5-99.5 % -> 30-255, gamma 1.6)"
   ],
   "screen_deviations": [
    "s02-s05 flat map is a code-drawn local plane (no imagery: a 12-km window is 6 px of Blue Marble)",
    "s11/s39 maps in a local equirectangular frame scaled by cos(latitude) (≈ HRRR's Lambert conformal over a 600-km window)",
    "s22 panels: Natural Earth 10 m land and the ERA5 0.25° grid in a local frame (true local shape)",
    "s18 side and top views drawn as 2-D cross-sections (schematic geometry)"
-  ]
+  ],
+  "coast_segment_s40": {
+   "used_deg": 355.4,
+   "planning_points": {
+    "from": [
+     27.6,
+     -82.74
+    ],
+    "to": [
+     28.15,
+     -82.79
+    ],
+    "bearing_deg": 355.41720460299007,
+    "across_ms": 11.495383959740485
+   },
+   "ne_10m_coastline": {
+    "from": [
+     27.65965403900009,
+     -82.71886145699995
+    ],
+    "to": [
+     28.160549221000053,
+     -82.78774980399993
+    ],
+    "bearing_deg": 353.08673535011144,
+    "across_ms": 12.100983028487729
+   },
+   "ne_50m_land": {
+    "from": [
+     27.515283203124994,
+     -82.68671875
+    ],
+    "to": [
+     28.23681640625,
+     -82.74853515625
+    ],
+    "bearing_deg": 355.6835540749759,
+    "across_ms": 11.42494002765554
+   },
+   "note": "355.4° is the planning-point bearing (27.60 N 82.74 W -> 28.15 N 82.79 W); the NE 10 m nearest-point segment gives 353.1°, NE 50 m land 355.7°; across-shore +11.5 / +12.1 / +11.4 m/s"
+  },
+  "goes_eye_s14": {
+   "box": [
+    26.0,
+    27.200000000000003,
+    -83.05000000000001,
+    -81.75
+   ],
+   "centre": "IBTrACS 18 UTC (eye in the GOES image; HRRR centre 14 km south)",
+   "contrast_stretch": {
+    "lum_lo": 173.99666666666667,
+    "lum_hi": 254.66666666666666,
+    "out": [
+     30,
+     255
+    ],
+    "gamma": 1.6
+   }
+  }
  },
  "credits": [
   "NOAA HRRR analyses (public domain) via the University of Utah HRRR-zarr archive (Dowell et al. 2022).",
@@ -188,7 +247,7 @@
   "co_cia_speed_08.png": "e4225b95eacd49b0f7ceabf4ef209538df5a15bed5126f0a4d6ebc5b54191f2b",
   "co_cia_speed_09.png": "94c9afe3eaac3c927ae03ed6d349ca62249603f15f3586e89063cb6cc3167537",
   "co_goes.jpg": "90b6138e6be1516d50b8f5bf1b949ddc65123993397049e4abcfb10e9daa3371",
-  "co_goes_eye.jpg": "2e4e38fd69b7dc2a664f629328d86cd5758b18650c56cd17db5dff121606ed2e",
+  "co_goes_eye.jpg": "34556e9b295e7bc117e1dbd810ba8b77581f22f11603a17c8f8ed471d518567f",
   "co_goes_stack.jpg": "fc3c3ba0b49a2f772b26821660d84967e7dd7099101cd1a2b6e676aad8e3798e",
   "co_ian_speed_18.png": "ecb64b9404d3ea6ba3c3ae544d416c6d227331a26ef32d9999f4e3a7bb87efca",
   "co_ian_speed_20.png": "3ac01121373d0275f011375d1f79af67e41cd43cbe67d199ad509fe393b86add",
@@ -201,7 +260,7 @@
   "co_t2m_mc.png": "fcc76a65c46ee3b21ba9f8b0925b79a89b58573bf7eae0ab938ecf1339e6ed83"
  },
  "data_files": {
-  "co.json": "98fe1961cf6475c2c53c3986fa1d56bdb672b79fa022d91bb6be48fd8b47def9",
+  "co.json": "c33b8e590e0a3085942ec3b57596eb12fd8dcec29bfed0493a8c648b9895d902",
   "img/bm_ee.jpg": "eeb026ee84b65da2c42de067227f061eeac9db77f3bb4e2372cbc4bbd8b5f5a1",
   "img/bm_ee_a.png": "ea45133d765b4a6d899fa6cf10a2c776dfb4b5f10e858013aeaa54aff40d9f81",
   "img/bm_go.jpg": "bbeb289541748a67af53fe706870a7c81c35005a3189ed220d0d2765a5c7e9fb",
@@ -220,7 +279,7 @@
   "img/cia_speed_07.png": "0f8a4536a9de97e570542590872c08af008c60083e47f2744ab8c31c1c8c9b15",
   "img/cia_speed_08.png": "e4225b95eacd49b0f7ceabf4ef209538df5a15bed5126f0a4d6ebc5b54191f2b",
   "img/cia_speed_09.png": "94c9afe3eaac3c927ae03ed6d349ca62249603f15f3586e89063cb6cc3167537",
-  "img/goes_eye.jpg": "2e4e38fd69b7dc2a664f629328d86cd5758b18650c56cd17db5dff121606ed2e",
+  "img/goes_eye.jpg": "34556e9b295e7bc117e1dbd810ba8b77581f22f11603a17c8f8ed471d518567f",
   "img/goes_stack.jpg": "fc3c3ba0b49a2f772b26821660d84967e7dd7099101cd1a2b6e676aad8e3798e",
   "img/ian_speed_18.png": "ecb64b9404d3ea6ba3c3ae544d416c6d227331a26ef32d9999f4e3a7bb87efca",
   "img/ian_speed_20.png": "3ac01121373d0275f011375d1f79af67e41cd43cbe67d199ad509fe393b86add",
@@ -1844,6 +1903,478 @@
    ],
    "tol": 1e-09,
    "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (0.0, 0.0) outline encloses y0/a = 0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (48.4, -4.5) outline encloses y0/a = 0.845 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (78.2, 15.7) outline encloses y0/a = 1.365 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (60.0, -100.0) outline encloses y0/a = 1.047 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (60.0, 100.0) outline encloses y0/a = 1.047 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (30.0, -60.0) outline encloses y0/a = 0.524 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (30.0, 60.0) outline encloses y0/a = 0.524 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (0.0, -120.0) outline encloses y0/a = 0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (0.0, 120.0) outline encloses y0/a = 0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (-30.0, 20.0) outline encloses y0/a = -0.524 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (-60.0, -60.0) outline encloses y0/a = -1.047 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot platecarree (60.0, 30.0) outline encloses y0/a = 1.047 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (0.0, 0.0) outline encloses y0/a = -0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (48.4, -4.5) outline encloses y0/a = 0.968 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (78.2, 15.7) outline encloses y0/a = 2.271 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (60.0, -100.0) outline encloses y0/a = 1.317 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (60.0, 100.0) outline encloses y0/a = 1.317 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (30.0, -60.0) outline encloses y0/a = 0.549 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (30.0, 60.0) outline encloses y0/a = 0.549 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (0.0, -120.0) outline encloses y0/a = -0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (0.0, 120.0) outline encloses y0/a = -0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (-30.0, 20.0) outline encloses y0/a = -0.549 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (-60.0, -60.0) outline encloses y0/a = -1.317 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot mercator (60.0, 30.0) outline encloses y0/a = 1.317 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (0.0, 0.0) outline encloses y0/a = 0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (48.4, -4.5) outline encloses y0/a = 0.916 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (78.2, 15.7) outline encloses y0/a = 1.277 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (60.0, -100.0) outline encloses y0/a = 1.088 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (60.0, 100.0) outline encloses y0/a = 1.088 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (30.0, -60.0) outline encloses y0/a = 0.593 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (30.0, 60.0) outline encloses y0/a = 0.593 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (0.0, -120.0) outline encloses y0/a = 0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (0.0, 120.0) outline encloses y0/a = 0.000 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (-30.0, 20.0) outline encloses y0/a = -0.593 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (-60.0, -60.0) outline encloses y0/a = -1.088 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "Tissot equalearth (60.0, 30.0) outline encloses y0/a = 1.088 (northern centres stay north)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0.0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "pc ellipse 1 (48.4° N) lies north of the equator",
+   "value": 0.7661,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "pc ellipse 2 (78.2° N) lies north of the equator",
+   "value": 1.2867,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "mc ellipse 4 (60.0° N) lies north of the equator",
+   "value": 1.1696,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "mc ellipse 2 (78.2° N) lies north of the equator",
+   "value": 1.9449,
+   "ref": true,
+   "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DC32b",
+   "name": "ee ellipse 3 (60.0° N) lies north of the equator",
+   "value": 1.0252,
+   "ref": true,
+   "tol": 0,
+   "pass": true
   }
  ],
  "physics": [
@@ -2995,45 +3526,6 @@
    "output_sha256": "ad79cbdc0899fe23feae09aef3c6e2724a7679628e5ad5cd39d86e01989cba02"
   },
   {
-   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
-   "scene": "s31-s34",
-   "eq": "Tissot circles 500 km (platecarree)",
-   "params": {
-    "name": "platecarree",
-    "centres": "array (12, 2), sha256 8de7f1897480365b0fae92baefbc7eca84d943142beef5c37c3ab5ca0e995e6f",
-    "radius_km": 500.0,
-    "n": 49,
-    "a": 1.0
-   },
-   "output_sha256": "66088bfd5ee5e52a69c2c942f2d015a06e968f2e310091ee2afe1806447908f0"
-  },
-  {
-   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
-   "scene": "s31-s34",
-   "eq": "Tissot circles 500 km (mercator)",
-   "params": {
-    "name": "mercator",
-    "centres": "array (12, 2), sha256 8de7f1897480365b0fae92baefbc7eca84d943142beef5c37c3ab5ca0e995e6f",
-    "radius_km": 500.0,
-    "n": 49,
-    "a": 1.0
-   },
-   "output_sha256": "97f8b76ce6b7629f34b77b23ab6aef2eac59c19e8788eda5fc80b0d9b7309176"
-  },
-  {
-   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
-   "scene": "s31-s34",
-   "eq": "Tissot circles 500 km (equalearth)",
-   "params": {
-    "name": "equalearth",
-    "centres": "array (12, 2), sha256 8de7f1897480365b0fae92baefbc7eca84d943142beef5c37c3ab5ca0e995e6f",
-    "radius_km": 500.0,
-    "n": 49,
-    "a": 1.0
-   },
-   "output_sha256": "54aa54aa99abe9d2c1a5b6cb996d6296671f4fe175d3d6d7711188688327bf22"
-  },
-  {
    "fn": "fluidpy.diag.climatology.global_mean",
    "scene": "s34",
    "eq": "cos-latitude weighted mean",
@@ -3236,6 +3728,56 @@
     "lon": "array (241,), sha256 1bc5bb0517045d1fa4f8c2357870660666a9b329bb8a7096f441d0033d20ded6"
    },
    "output_sha256": "367bf3175252faaa77cbb9965236b10f8cd0b731c06e0d23bcd2c03008b3f6ab"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
+   "scene": "s31-s34",
+   "eq": "Tissot circles 500 km (platecarree)",
+   "params": {
+    "name": "platecarree",
+    "centres": "array (12, 2), sha256 8de7f1897480365b0fae92baefbc7eca84d943142beef5c37c3ab5ca0e995e6f",
+    "radius_km": 500.0,
+    "n": 49
+   },
+   "output_sha256": "e904c183f402eb8ef56d13015cd6593077eb09a699b6163d60dbe1231bfd96b0"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
+   "scene": "s31-s34",
+   "eq": "Tissot circles 500 km (mercator)",
+   "params": {
+    "name": "mercator",
+    "centres": "array (12, 2), sha256 8de7f1897480365b0fae92baefbc7eca84d943142beef5c37c3ab5ca0e995e6f",
+    "radius_km": 500.0,
+    "n": 49
+   },
+   "output_sha256": "f241e4b9451866174075d426ac31814fd02f726f16af6e2e550137a9a947aa62"
+  },
+  {
+   "fn": "fluidpy.geo.mapproj.tissot_ellipses",
+   "scene": "s31-s34",
+   "eq": "Tissot circles 500 km (equalearth)",
+   "params": {
+    "name": "equalearth",
+    "centres": "array (12, 2), sha256 8de7f1897480365b0fae92baefbc7eca84d943142beef5c37c3ab5ca0e995e6f",
+    "radius_km": 500.0,
+    "n": 49
+   },
+   "output_sha256": "5dafe6880d8e6020597a4122de283b7f98f54bbe84ebd780c0be775bdd2b479f"
   }
- ]
+ ],
+ "fix_loop_1": {
+  "date": "2026-11-04",
+  "by": "build_ch00_coordinates.py --patch-fl1",
+  "changes": [
+   "Tissot circles: tissot_ellipses was called with a = 1.0 (metres) and radius_km = 500, i.e. circles of 169.7° angular radius round the antipodes (bands mirrored into the southern hemisphere, review 1 Must 6); now traced on the Earth (a = EARTH_RADIUS) and divided by a; DC32b rows: every outline's mid-height = its centre's y/a, the five callout ellipses lie north of the equator",
+   "s14 GOES eye crop: centred on the IBTrACS 18 UTC centre, contrast-stretched (Must 1)",
+   "s40 coast segment for 355.4° recorded (Should 15)"
+  ],
+  "fluidpy": {
+   "commit": "8cab62ebf6f6fb3ab1979fdbf5d404c2c77400b2",
+   "dirty_tracked": true,
+   "mapproj_py_sha256": "f8da90cb00f90da803adbd4754feceb68775dfc0400ff116a1c2e60d45c64769"
+  }
+ }
 }
