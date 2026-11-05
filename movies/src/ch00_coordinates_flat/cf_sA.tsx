@@ -14,7 +14,7 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import {
   AT, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
-  Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS,
+  SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS,
 } from "./cf_lib";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./cf_eq";
 
@@ -100,7 +100,9 @@ const S00: React.FC = () => {
           </>;
         }}
       </GeoMap>
-      <SourceBelow text={IAN_SRC} pic={TB} w={690} o={oB} name="s00 src" />    </Scene>
+      <SourceBelow text={IAN_SRC} pic={TB} w={690} o={oB} name="s00 src" />
+      <Svg><SpeedBarCompact x={TB.x} y={770} o={oB} /></Svg>
+    </Scene>
   );
 };
 
@@ -181,7 +183,7 @@ const S01: React.FC = () => {
 // ================================================================ s02 origin, axes, coordinates (kept)
 const S02: React.FC = () => {
   const f = useCurrentFrame(), k = K("s02_coordinates");
-  const tOrig = AT(k, 2, "origin"), tSta = AT(k, 3, "weather station"), tAx = SS(k, 4), tAxW = AT(k, 5, "axes");
+  const tStart = AT(k, 1, "a starting point"), tOrig = AT(k, 2, "origin"), tSta = AT(k, 3, "weather station"), tAx = SS(k, 4), tAxW = AT(k, 5, "axes");
   const tDrift = SS(k, 6), tPair = AT(k, 7, "three and four"), tCo = AT(k, 8, "coordinates"), tCa = AT(k, 9, "Cartesian");
   const d = prog(f, tDrift + 10, SE(k, 6) - 10);
   const bp = pp(3 * d, 4 * d);
@@ -189,7 +191,8 @@ const S02: React.FC = () => {
     <Scene>
       <Svg>
         <Ground />
-        <circle cx={PO[0]} cy={PO[1]} r={14} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tOrig) * (1 - fin(f, tSta))} />
+        {/* fix 1 Should 11: the starting point appears on its words (the panel is no longer empty for 9 s) */}
+        <circle cx={PO[0]} cy={PO[1]} r={14 + 6 * pulse(f, tOrig, 24)} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tStart) * (1 - fin(f, tSta))} />
         <AxesEN f={f} at={tAx} />
         <KmTicks o={fin(f, tDrift)} />
         <g opacity={fin(f, tDrift)}>
@@ -218,30 +221,33 @@ const S02: React.FC = () => {
 const S03: React.FC = () => {
   const f = useCurrentFrame(), k = K("s03_cartesian_arrows");
   const t1 = SS(k, 0), tSum = SS(k, 2), tSame = AT(k, 4, "the same way everywhere"), tMove = SS(k, 5), tIns = AT(k, 8, "hurricane"), tRing = AT(k, 8, "rings");
-  const places: [number, number][] = [[3, 4], [6, 1.5], [1.8, 5.2], [-0.8, 2.5], [5, 5]];
+  // fix 1 Should 10: every pair inside the panel (x̂ tip ≤ 6.3 km), clear of the axes and their labels
+  const places: [number, number][] = [[3, 4], [5.3, 1.5], [1.6, 4.6], [1.2, 2.2], [4.6, 4.4]];
   const hop = clamp((f - tMove) / ((SE(k, 5) - tMove) / 4), 0, 4);
   const i0 = Math.floor(hop), w = hop - i0;
   const cur: [number, number] = i0 >= 4 ? places[4] : [mix(places[i0][0], places[i0 + 1][0], prog(w, 0, 0.6)), mix(places[i0][1], places[i0 + 1][1], prog(w, 0, 0.6))];
   const at = f >= tMove ? cur : places[0];
   const unitAt = (p: [number, number], o: number, key: string) => <g key={key} opacity={o}>
-    <Arrow p={pp(p[0], p[1])} q={pp(p[0] + 1, p[1])} color={C.second} w={7} head={28} />
-    <Arrow p={pp(p[0], p[1])} q={pp(p[0], p[1] + 1)} color={C.second} w={7} head={28} />
+    <Arrow p={pp(p[0], p[1])} q={pp(p[0] + 1, p[1])} color={C.second} w={9} head={32} />
+    <Arrow p={pp(p[0], p[1])} q={pp(p[0], p[1] + 1)} color={C.second} w={9} head={32} />
   </g>;
-  const IB = { x: 1100, y: 420, w: 330, h: 300 };
+  const IB = { x: 1100, y: 420, w: 330, h: 260 };   // fix 1 Must 3: 40 px shorter, room for the compact speed bar
   const MI = boxAt(IAN.c[0], IAN.c[1], 1.1, IB.x, IB.y, IB.w, IB.h);
   return (
     <Scene>
       <Svg>
         <Ground />
-        <AxesEN f={f} at={-40} />
+        <AxesEN f={f} at={-40} c={C.muted} />
         <KmTicks o={1} />
         <Station />
         <Dash p={PO} q={pp(3, 0)} c={C.first} w={5} />
         <Dash p={pp(3, 0)} q={pp(3, 4)} c={C.first} w={5} />
         {unitAt([0, 0], fin(f, t1), "o")}
         {f >= tMove ? places.slice(0, Math.min(5, i0 + 1)).map((p, i) => unitAt(p, 0.35, `g${i}`)) : null}
-        <Balloon p={pp(at[0], at[1])} />
+        {/* fix 1 Should 10: the moving balloon becomes the diagram dot, so its unit pair no longer covers the icon */}
+        <Balloon p={pp(at[0], at[1])} o={fout(f, tMove - 12)} />
         {unitAt(at, fin(f, tMove), "b")}
+        <BDot p={pp(at[0], at[1])} o={fin(f, tMove - 12)} />
         <Keyword f={f} text="unit vectors" at={[1100, 160]} appear={0} out={tSum - 18} />
         <Keyword f={f} text="same everywhere" at={[1100, 300]} appear={tSame} out={tIns - 18} />
         <CurvedLink f={f} from={[1160, 215]} to={pp(1.5, 0.15)} ctl={[400, 230]} start={tSum + 10} end={tSame - 10} />
@@ -249,24 +255,26 @@ const S03: React.FC = () => {
         <Keyword f={f} text="not in squares" at={[1100, 300]} appear={tIns} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf x}`} x={pp(1, 0)[0] + 10} y={PO[1] - 40} size={60} c={C.second} o={fin(f, t1 + 10)} />
-      <TeX s={String.raw`\hat{\mathbf y}`} x={PO[0] + 20} y={pp(0, 1)[1] - 10} size={60} c={C.second} o={fin(f, t1 + 10)} />
+      <TeX s={String.raw`\hat{\mathbf y}`} x={PO[0] + 26} y={pp(0, 0.55)[1]} size={60} c={C.second} o={fin(f, t1 + 10)} />
       <TeX s={EQ_S03} x={1100} y={160} size={84} o={fin(f, tSum) * fout(f, tSame - 18)} />
       <GeoMap id="s03ian" B={MI} o={fin(f, tIns)} frame={0.8}>
         {(P) => <>
           <IanBody P={P} f={f} z={1} parts={false} />
           {Array.from({ length: 8 }, (_, i) => <line key={`a${i}`} x1={IB.x + i * 47} y1={IB.y} x2={IB.x + i * 47} y2={IB.y + IB.h} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
-          {Array.from({ length: 7 }, (_, i) => <line key={`b${i}`} x1={IB.x} y1={IB.y + i * 50} x2={IB.x + IB.w} y2={IB.y + i * 50} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+          {Array.from({ length: 6 }, (_, i) => <line key={`b${i}`} x1={IB.x} y1={IB.y + i * 52} x2={IB.x + IB.w} y2={IB.y + i * 52} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
         </>}
       </GeoMap>
       <Svg>
         <g opacity={fin(f, tRing)}>
-          <rect x={1480} y={420} width={330} height={300} rx={8} fill="#1d2a44" stroke={C.grid} strokeWidth={3} />
-          {[40, 80, 120, 160].map((r) => <circle key={r} cx={1645} cy={570} r={r} fill="none" stroke={C.first} strokeWidth={3} opacity={0.85} />)}
-          {Array.from({ length: 7 }, (_, i) => <line key={`a${i}`} x1={1480 + i * 55} y1={420} x2={1480 + i * 55} y2={720} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
-          {Array.from({ length: 6 }, (_, i) => <line key={`b${i}`} x1={1480} y1={420 + i * 60} x2={1810} y2={420 + i * 60} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
-          <circle cx={1645} cy={570} r={8} fill={C.local} />
+          <rect x={1480} y={420} width={330} height={260} rx={8} fill="#1d2a44" stroke={C.grid} strokeWidth={3} />
+          <clipPath id="s03rr"><rect x={1480} y={420} width={330} height={260} rx={8} /></clipPath>
+          <g clipPath="url(#s03rr)">{[40, 80, 120, 160].map((r) => <circle key={r} cx={1645} cy={550} r={r} fill="none" stroke={C.first} strokeWidth={3} opacity={0.85} />)}</g>
+          {Array.from({ length: 7 }, (_, i) => <line key={`a${i}`} x1={1480 + i * 55} y1={420} x2={1480 + i * 55} y2={680} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+          {Array.from({ length: 6 }, (_, i) => <line key={`b${i}`} x1={1480} y1={420 + i * 52} x2={1810} y2={420 + i * 52} stroke={C.gold} strokeWidth={2} opacity={0.6} />)}
+          <circle cx={1645} cy={550} r={8} fill={C.local} />
         </g>
-        <Lbl x={1645} y={760} t="radar rings" c={C.muted} s={T.floor} a="middle" o={fin(f, tRing)} />
+        <Lbl x={1645} y={720} t="radar rings" c={C.muted} s={T.floor} a="middle" o={fin(f, tRing)} />
+        <SpeedBarCompact x={IB.x} y={796} o={fin(f, tIns)} />
       </Svg>
       <SourceBelow text="Data: HRRR (NOAA) · Ian, 28 Sep 2022" pic={IB} w={360} o={fin(f, tIns)} name="s03 src" />
     </Scene>

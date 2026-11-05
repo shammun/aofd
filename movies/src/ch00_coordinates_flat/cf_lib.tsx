@@ -62,7 +62,8 @@ export const IMGS = { ian: staticFile("cf_ian_speed_18.png") };
 export const ASSET_NAMES = ["cf_ian_speed_18.png"];
 export const LUT_SPEED = D.luts.speed as string[];
 /** the source line of every Ian picture (data report §1c: the marker is the model's own calm centre) */
-export const IAN_SRC = "Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC · centre: the model's calm eye, ≈ 17 km SW of the radar eye";
+/** fix 1 (review 1 Should 14): shortened so the centre part never wraps into an orphaned "eye" (≤ 2 lines at 620 px) */
+export const IAN_SRC = "Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC · centre: model's calm eye, ≈ 17 km SW of radar eye";
 export const IAN_SRC_SHORT = "Data: HRRR analysis (NOAA) · 28 Sep 2022, 18 UTC";
 
 export const lutCss = (lut: string[], t: number) => lut[Math.max(0, Math.min(lut.length - 1, Math.round(t * (lut.length - 1))))];
@@ -79,13 +80,14 @@ export const Ground: React.FC<{ o?: number; grid?: number }> = ({ o = 1, grid = 
   </g>
 );
 export const Station: React.FC<{ o?: number; at?: Pt; s?: number }> = ({ o = 1, at = PO, s = 0.9 }) => <PoleThermometer x={at[0]} y={at[1]} s={s} o={o} />;
-export const AxesEN: React.FC<{ f: number; at: number; o?: number }> = ({ f, at, o = 1 }) => {
+/** east and north axes; `c` = axis colour (fix 1 Should 9: muted in s03 so the orange unit vectors stand out) */
+export const AxesEN: React.FC<{ f: number; at: number; o?: number; c?: string }> = ({ f, at, o = 1, c = C.second }) => {
   const g = prog(f, at, at + 30);
   if (g <= 0 || o <= 0) return null;
   return (
     <g opacity={o}>
-      <Arrow p={pp(-1.5, 0)} q={[mix(PO[0], 960, g), PO[1]]} color={C.second} w={6} head={30} />
-      <Arrow p={pp(0, -1.2)} q={[PO[0], mix(PO[1], 90, g)]} color={C.second} w={6} head={30} />
+      <Arrow p={pp(-1.5, 0)} q={[mix(PO[0], 960, g), PO[1]]} color={c} w={6} head={30} />
+      <Arrow p={pp(0, -1.2)} q={[PO[0], mix(PO[1], 90, g)]} color={c} w={6} head={30} />
       <Lbl x={952} y={PO[1] - 44} t="east" c={C.key} s={T.floor} a="end" o={fin(f, at + 24)} />
       <Lbl x={PO[0] + 20} y={110} t="north" c={C.key} s={T.floor} o={fin(f, at + 24)} />
     </g>
@@ -200,7 +202,8 @@ export const keepTime = (id: string) => {
   return `${m}:${ss < 10 ? "0" : ""}${ss}`;
 };
 /** The skip chip (an explicit user exception to "no boxes"): shown while the two skip sentences (S0-S1) are spoken, in the
- * empty lower part of the maths zone: "every step, if you want it" / "skip to mm:ss". Place inside <Svg>. */
+ * empty lower part of the maths zone: "every step · optional" / "skip to mm:ss" (fix 1, review 1 Should 5: the user's word
+ * "optional"). Place inside <Svg>. */
 export const SkipChip: React.FC<{ f: number; k: number; to: string; x0?: number }> = ({ f, k, to, x0 = 1070 }) => {
   const a = SS(k, 0), b = SE(k, 1) + 20;
   const o = ramp(f, a, a + 10) * (1 - ramp(f, b, b + 10));
@@ -208,7 +211,7 @@ export const SkipChip: React.FC<{ f: number; k: number; to: string; x0?: number 
   return (
     <g opacity={o} data-lc-own="skipchip">
       <rect x={x0} y={740} width={640} height={116} rx={22} fill="#1f2a44" stroke={C.gold} strokeWidth={3} />
-      <Lbl x={x0 + 30} y={774} t="every step, if you want it" c={C.key} s={T.floor} />
+      <Lbl x={x0 + 30} y={774} t="every step · optional" c={C.key} s={T.floor} />
       <Lbl x={x0 + 30} y={826} t={`skip to ${to}`} c={C.gold} s={T.floor} />
     </g>
   );
@@ -229,6 +232,17 @@ export const ColourBar: React.FC<{ x: number; y: number; w: number; lut: string[
 export const SpeedBar: React.FC<{ x: number; y: number; o?: number; w?: number }> = ({ x, y, o = 1, w = 300 }) =>
   <ColourBar x={x} y={y} w={w} lut={LUT_SPEED} lo={0} hi={50} unit="m/s" o={o} title="wind speed"
     ticks={[{ v: 0, t: "0" }, { v: 25, t: "25" }, { v: 50, t: "50" }]} />;
+/** a compact wind-speed bar for small data pictures (fix 1, review 1 Must 3: the s00 title map, the s03 thumbnail): bar y-9..y+9,
+ * ticks 0 / 25 / 50 below (44 px, centre y+42), "wind speed (m/s)" to the right of the bar. Height ≈ 70 px. Place inside <Svg>. */
+export const SpeedBarCompact: React.FC<{ x: number; y: number; o?: number; w?: number }> = ({ x, y, o = 1, w = 200 }) =>
+  o <= 0 ? null : (
+    <g opacity={o} data-k6-cbar="1">
+      {Array.from({ length: 40 }, (_, i) => <rect key={i} x={x + (i * w) / 40} y={y - 9} width={w / 40 + 0.8} height={18} fill={lutCss(LUT_SPEED, (i + 0.5) / 40)} />)}
+      <rect x={x} y={y - 9} width={w} height={18} fill="none" stroke={C.muted} strokeWidth={2} />
+      {[0, 25, 50].map((v) => <Lbl key={v} x={x + (v / 50) * w} y={y + 42} t={`${v}`} c={C.muted} s={T.floor} a="middle" b={false} />)}
+      <Lbl x={x + w + 18} y={y} t="wind speed (m/s)" c={C.muted} s={T.floor} b={false} />
+    </g>
+  );
 
 // ---------------------------------------------------------------- x-y charts
 export type Ax = { x: number; y: number; w: number; h: number; xr: [number, number]; yr: [number, number] };

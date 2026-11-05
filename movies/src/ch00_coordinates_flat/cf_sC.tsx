@@ -25,8 +25,15 @@ const CHECK_C: [string, number, number, number][] = [
   ["tan", 13.3 / 34.8, SAY.tan, 0.005], ["angle", Math.atan(13.3 / 34.8) / D2R, SAY.angle, 0.5], ["inflow lib", IAN.inflow, 20.9, 0.05],
   ["p0 u", P0.u, -8.7, 0.05], ["p0 v", P0.v, 38, 0.05], ["p0 ur", P0.ur, -8.7, 0.05], ["p0 ut", P0.ut, 38, 0.05],
   ["p90 u", P90.u, -16.9, 0.05], ["p90 v", P90.v, -37.4, 0.05], ["p135 u", P135.u, -10.1, 0.05], ["p135 v", P135.v, -44.5, 0.05],
-  ["p135 ur", P135.ur, -24.4, 0.1], ["p135 ut", P135.ut, 38.6, 0.06], ["npos", 72 - IAN.npos, 58, 0],
+  ["p135 ur", P135.ur, -24.3, 0.05], ["p135 ut", P135.ut, 38.6, 0.06], ["npos", 72 - IAN.npos, 58, 0],
+  ["7.14", 10.1 * 0.707, 7.14, 0.005], ["31.46", 44.5 * 0.707, 31.46, 0.005], ["7.14-31.46", 7.14 - 31.46, -24.32, 1e-9], ["7.14+31.46", 7.14 + 31.46, 38.6, 1e-9],
+  ["outflow max", Math.max(...(IAN.ring.vr as number[])), 14, 0.5],
 ];
+/** the on-map component labels of s24 (fix 1 Must 2 / Should 3): the same strings as the column, checked against the data */
+const LAB24: Record<number, { ur: string; ut: string; urv: number; utv: number }> = {
+  0: { ur: "-8.7", ut: "38.0", urv: -8.7, utv: 38.0 }, 90: { ur: "-37.4", ut: "16.9", urv: -37.4, utv: 16.9 }, 135: { ur: "-24.3", ut: "38.6", urv: -24.3, utv: 38.6 } };
+[[P0, 0], [P90, 90], [P135, 135]].forEach(([d, az]) => { const L = LAB24[az as number], q = d as { ur: number; ut: number };
+  if (Math.abs(q.ur - L.urv) > 0.06 || Math.abs(q.ut - L.utv) > 0.06) throw new Error(`CHECK s24 labels ${az}: data ${q.ur}, ${q.ut}`); });
 CHECK_C.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
 // ---------------------------------------------------------------- the Ian map frames (s21-s25)
@@ -134,16 +141,19 @@ const S22: React.FC = () => {
         <SideCallout f={f} lines="≈ 35 m/s" at={[CX + 20, 340]} appear={tVt} target={[(mean.p0[0] + mean.tp[0]) / 2, (mean.p0[1] + mean.tp[1]) / 2 - 8]} c={C.first} out={tSm - 22} bend={-20} />
         <Lbl x={CX} y={520} t="anticlockwise," c={C.key} s={T.floor} o={fin(f, tAnti) * blk} />
         <Lbl x={CX} y={572} t="seen from above, NH" c={C.key} s={T.floor} o={fin(f, tAnti) * blk} />
-        <SideCallout f={f} lines="−13 m/s: in" at={[CX + 20, 650]} appear={tVr} target={[(mean.p0[0] + mean.rp[0]) / 2, (mean.p0[1] + mean.rp[1]) / 2 + 6]} c={C.neg} bend={-30} />
+        <SideCallout f={f} lines="−13 m/s: in" at={[CX + 20, 650]} appear={tVr} target={[(mean.p0[0] + mean.rp[0]) / 2 - 4, (mean.p0[1] + mean.rp[1]) / 2 + 8]} c={C.neg}
+          ctl={[mean.p0[0] - 40, mean.p0[1] + 170]} />
         <Lbl x={CX} y={720} t="towards the eye" c={C.neg} s={T.floor} o={fin(f, tIn)} />
         <Lbl x={CX} y={790} t="official estimate: 135 kt" c={C.local} s={T.floor} o={fin(f, tBest)} />
         <Keyword f={f} text="analysis smooths the peak" at={[CX, 420]} s={T.floor} appear={tSm} />
       </Svg>
-      <TeX s={String.raw`u_r`} x={one.rp[0] - 20} y={one.rp[1] + 36} size={50} ax={0.5} c={C.neg} o={win(f, tR, tVt - 12)} />
-      <TeX s={String.raw`u_\theta`} x={one.tp[0] + 36} y={one.tp[1]} size={50} ax={0} c={C.first} o={win(f, tT, tVt - 12)} />
+      {/* fix 1 Must 2: the tags sit beside the middle of their own arrow, on the side away from the other arrow and the coast */}
+      <TeX s={String.raw`\boldsymbol{u_r}`} x={(one.p0[0] + one.rp[0]) / 2 - 42} y={(one.p0[1] + one.rp[1]) / 2 + 42} size={56} ax={0.5} c={C.neg} halo haloW={0.11} o={win(f, tR, tVt - 12)} />
+      <TeX s={String.raw`\boldsymbol{u_\theta}`} x={(one.p0[0] + one.tp[0]) / 2 + 46} y={(one.p0[1] + one.tp[1]) / 2 + 46} size={56} ax={0.5} c={C.first} halo haloW={0.11} o={win(f, tT, tVt - 12)} />
       <TeX s={EQ_S22} x={CX} y={300} size={44} o={win(f, tAvg, tVt - 16)} />
       <TeX s={String.raw`35\times3.6=126\ \mathrm{km/h}`} x={CX} y={420} size={52} o={win(f, tKmh, tSm - 22)} />
-      <TeX s={String.raw`\tfrac{3600\ \mathrm{s}}{1000\ \mathrm{m}}=3.6`} x={CX} y={420} size={46} c={C.muted} o={win(f, tConv + 40, tKmh - 18)} />
+      {/* fix 1 Must 5: a dimensionally right conversion line, ≥ 44 px */}
+      <TeX s={String.raw`1\ \mathrm{m/s}=3600\ \mathrm{m/h}=3.6\ \mathrm{km/h}`} x={CX} y={420} size={48} c={C.muted} o={win(f, tConv + 40, tKmh - 18)} />
       <TeX s={String.raw`135\times1.85\approx250\ \mathrm{km/h}`} x={CX} y={845} size={44} c={C.local} o={fin(f, tKt)} />
       <SourceBelow text={IAN_SRC} pic={MB} w={1100} name="s22 src" />
       {void [tReal]}
@@ -156,6 +166,7 @@ const S23: React.FC = () => {
   const f = useCurrentFrame(), k = K("s23_what_numbers_mean");
   const t35 = SS(k, 1), t13 = SS(k, 2), tRA = SS(k, 3), tPy = SS(k, 4), tMost = SS(k, 5), tKmh = SS(k, 6), tImg = SS(k, 7), tPar = SS(k, 8), tT = SS(k, 9), tLap = SS(k, 10),
     tBoth = SS(k, 11), tRat = SS(k, 12), tSp = SS(k, 13), tRise = SS(k, 14), tMore = SS(k, 15);
+  const tRoot = AT(k, 4, "square root"), t37 = AT(k, 4, "thirty seven");
   const PB = { x: 80, y: 40, w: 900, h: 740 };
   const B = boxAt(IAN.c[0], IAN.c[1], 0.555, PB.x, PB.y, PB.w, PB.h);
   const P = mapP(B);
@@ -178,14 +189,14 @@ const S23: React.FC = () => {
         <circle cx={cE[0]} cy={cE[1]} r={R} fill="none" stroke={C.first} strokeWidth={6 + 6 * lapO * pulse(f, tLap, 40)} />
         <circle cx={cE[0]} cy={cE[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
         <g opacity={fin(f, t35) * fout(f, tImg - 12)}>
-          <Arrow p={pr} q={tip} color={C.first} o={fin(f, tPy)} w={6} head={30} dash="14 8" />
+          <Arrow p={pr} q={tip} color={C.first} o={fin(f, AT(k, 4, "an arrow"))} w={6} head={30} dash="14 8" />
           <Arrow p={pr} q={[pr[0] + et[0] * 35 * s, pr[1] + et[1] * 35 * s]} color={C.first} />
           <g opacity={fin(f, t13)}><Arrow p={pr} q={[pr[0] - er[0] * 13 * s, pr[1] - er[1] * 13 * s]} color={C.neg} /></g>
           <RightTick at={pr} u1={et} u2={[-er[0], -er[1]]} c={C.gold} o={fin(f, tRA)} />
         </g>
         <Lbl x={pr[0] + et[0] * 35 * s + 20} y={pr[1] + et[1] * 35 * s - 30} t="35 round" c={C.first} s={T.floor} o={fin(f, t35) * fout(f, tImg - 12)} />
         <Lbl x={pr[0] - er[0] * 13 * s - 30} y={pr[1] - er[1] * 13 * s + 40} t="13 in" c={C.neg} s={T.floor} a="end" o={fin(f, t13) * fout(f, tImg - 12)} />
-        <Lbl x={tip[0] + 16} y={tip[1] - 34} t="≈ 37 m/s" c={C.key} s={T.floor} o={fin(f, tPy + 30) * fout(f, tImg - 12)} />
+        <Lbl x={tip[0] + 16} y={tip[1] - 34} t="≈ 37 m/s" c={C.key} s={T.floor} o={fin(f, t37) * fout(f, tImg - 12)} />
         <g opacity={par}>
           <line x1={pr[0]} y1={pr[1]} x2={cE[0]} y2={cE[1]} stroke={C.neg} strokeWidth={4} strokeDasharray="12 8" opacity={fout(f, tSp)} />
           <circle cx={pr[0]} cy={pr[1]} r={15} fill={C.first} stroke={C.bg} strokeWidth={4} />
@@ -199,7 +210,7 @@ const S23: React.FC = () => {
         <g opacity={fin(f, tRise)}>
           <Arrow p={[cE[0] + R * 0.95, cE[1] + R * 0.4]} q={[cE[0] + R * 0.95, cE[1] + R * 0.4 - 120]} color={C.key} w={8} head={30} />
         </g>
-        <Keyword f={f} text="what do they mean?" at={[1080, 110]} appear={0} out={tPy - 18} />
+        <Keyword f={f} text="what do they mean?" at={[1080, 110]} appear={0} out={tRoot - 4} />
         <Keyword f={f} text="imagine: nothing changes" at={[1080, 110]} c={C.local} appear={tImg} out={tSp - 18} />
         <Keyword f={f} text="spirals in" at={[1080, 110]} appear={tSp} out={tMore - 18} />
         <Keyword f={f} text="rises (Part 2)" at={[1080, 720]} s={T.floor} appear={tRise} />
@@ -207,7 +218,8 @@ const S23: React.FC = () => {
         <ClockText x={1110} y={720} t={`${Math.round(minNow)} min`} min={minNow} o={win(f, tT, tRat - 18)} />
       </Svg>
       <CalcStack f={f} x={1260} y={190} size={52} maxLines={3} rows={[
-        { lhs: cutAt(EQ_S23, String.raw`\approx`)[0], rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: AT(k, 4, "square root"), h: 90 },
+        { lhs: cutAt(EQ_S23, String.raw`\approx`)[0], rhs: String.raw`\phantom{\approx}`, at: tRoot, h: 90 },
+        { rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: t37, cont: true },
         { lhs: String.raw`13\times3.6`, rhs: String.raw`\approx47\ \mathrm{km/h}`, at: AT(k, 6, "forty seven") },
         { lhs: "t", rhs: String.raw`=\frac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}\approx1900\ \mathrm{s}`, at: AT(k, 9, "nineteen hundred"), h: 120 },
         { rhs: String.raw`\approx32\ \mathrm{min}`, at: AT(k, 9, "thirty two minutes"), cont: true },
@@ -217,12 +229,21 @@ const S23: React.FC = () => {
       ]} />
       <TeX s={String.raw`\text{almost 3 m round per 1 m in}`} x={1080} y={720} size={46} o={win(f, AT(k, 12, "almost three"), tRise - 18)} />
       <SourceBelow text={IAN_SRC} pic={PB} w={900} name="s23 src" />
-      {void [tMost, tKmh, tBoth]}
+      {void [tMost, tKmh, tBoth, tPy]}
     </Scene>
   );
 };
 
 // ================================================================ s24 three ring points by hand (D11)
+/** label centres (fix 1 Must 2), from the review-1 frames (ring 25 km ≈ 155 px round the eye; Florida's coast lies east of x ≈ 740
+ * above the eye and east of x ≈ 790 at its height): 0° both inside the ring between the eye and the arrows; 90° u_θ left of its arrow tip,
+ * u_r just beyond its tip below the eye; 135° u_r outward (up-left), u_θ beyond its tip (down-left); all in open water. */
+const lab24 = (az: number, cE: Pt, q: Pt): { ur: Pt; ut: Pt } => {
+  void q;
+  if (az === 0) return { ur: [cE[0] + 10, cE[1] + 62], ut: [cE[0] + 2, cE[1] - 80] };
+  if (az === 90) return { ur: [cE[0], cE[1] + 62], ut: [cE[0] - 202, cE[1] - 165] };
+  return { ur: [cE[0] - 200, cE[1] - 195], ut: [cE[0] - 318, cE[1] + 100] };
+};
 const S24: React.FC = () => {
   const f = useCurrentFrame(), k = K("s24_ring_points");
   const tRem = SS(k, 4), tA = SS(k, 5), tAuv = SS(k, 6), tAcs = SS(k, 7), tAr = SS(k, 8), tAt = SS(k, 9), tB = SS(k, 11), tBuv = SS(k, 12), tBcs = SS(k, 13), tBr = SS(k, 14), tBt = SS(k, 15),
@@ -277,14 +298,14 @@ const S24: React.FC = () => {
         const er: Pt = [Math.cos(a), -Math.sin(a)], et = rotS(er, 90);
         const live = win(f, p.t0, p.end - 12, 12);
         return <React.Fragment key={n}>
-          <TeX s={`${p.az}^\\circ`} x={q[0] - er[0] * 50} y={q[1] - er[1] * 50} size={46} ax={0.5} c={C.gold} o={fin(f, p.t0) * (1 - live)} />
-          <TeX s={String.raw`u_r=${nf(p.d.ur, 1).replace("−", "-")}`} x={q[0] + er[0] * 130} y={q[1] + er[1] * 130} size={46} ax={0.5} c={C.neg} o={live * fin(f, p.tr + 10)} />
-          <TeX s={String.raw`u_\theta=${nf(p.d.ut, 1)}`} x={q[0] + et[0] * (p.d.ut * su + 70)} y={q[1] + et[1] * (p.d.ut * su + 70)} size={46} ax={0.5} c={C.first} o={live * fin(f, p.tt + 10)} />
+          <TeX s={`${p.az}^\\circ`} x={q[0] + er[0] * (p.az === 0 ? -50 : 52)} y={q[1] + er[1] * (p.az === 0 ? -50 : 52)} size={46} ax={0.5} c={C.gold} halo o={fin(f, p.t0) * (1 - live)} />
+          <TeX s={String.raw`\boldsymbol{u_r=${LAB24[p.az].ur}}`} x={lab24(p.az, cE, q).ur[0]} y={lab24(p.az, cE, q).ur[1]} size={50} ax={0.5} c={C.neg} halo haloW={0.12} o={live * fin(f, p.tr + 10)} />
+          <TeX s={String.raw`\boldsymbol{u_\theta=${LAB24[p.az].ut}}`} x={lab24(p.az, cE, q).ut[0]} y={lab24(p.az, cE, q).ut[1]} size={50} ax={0.5} c={C.first} halo haloW={0.12} o={live * fin(f, p.tt + 10)} />
         </React.Fragment>;
       })}
       <TeX s={eqA} x={CX} y={262} size={46} o={fin(f, tRem)} />
       <TeX s={eqB} x={CX} y={322} size={46} o={fin(f, tRem)} />
-      <TeX s={String.raw`0^\circ:\ u=-8.7,\ v=38`} x={CX} y={395} size={44} c={C.local} o={win(f, tAuv, tB - 18)} />
+      <TeX s={String.raw`0^\circ:\ u=-8.7,\ v=38.0`} x={CX} y={395} size={44} c={C.local} o={win(f, tAuv, tB - 18)} />
       <TeX s={String.raw`\cos0^\circ=1,\ \sin0^\circ=0`} x={CX} y={450} size={44} c={C.local} o={win(f, tAcs, tB - 18)} />
       <TeX s={String.raw`90^\circ:\ u=-16.9,\ v=-37.4`} x={CX} y={395} size={44} c={C.local} o={win(f, tBuv, tC - 18)} />
       <TeX s={String.raw`\cos90^\circ=0,\ \sin90^\circ=1`} x={CX} y={450} size={44} c={C.local} o={win(f, tBcs, tC - 18)} />
@@ -292,7 +313,7 @@ const S24: React.FC = () => {
       <TeX s={String.raw`\cos\approx-0.707,\ \sin\approx0.707`} x={CX} y={450} size={44} c={C.local} o={win(f, tCcs, tAll - 18)} />
       <CalcStack f={f} x={1330} y={500} size={48} maxLines={2} o={fout(f, tB - 18)} rows={[
         { lhs: "u_r", rhs: String.raw`=u=-8.7`, at: tAr },
-        { lhs: String.raw`u_\theta`, rhs: String.raw`=v=38`, at: tAt },
+        { lhs: String.raw`u_\theta`, rhs: String.raw`=v=38.0`, at: tAt },
       ]} />
       <CalcStack f={f} x={1330} y={500} size={48} maxLines={2} o={fout(f, tC - 18)} rows={[
         { lhs: "u_r", rhs: String.raw`=v=-37.4`, at: tBr },
@@ -301,14 +322,14 @@ const S24: React.FC = () => {
       <CalcStack f={f} x={1310} y={500} size={46} maxLines={1} o={fout(f, tAll - 18)} rows={[
         { lhs: "u_r", rhs: String.raw`=-10.1\times(-0.707)`, at: tCr },
         { rhs: String.raw`+(-44.5)\times0.707`, at: tCr + 30, cont: true },
-        { rhs: String.raw`=7.1-31.5\approx-24.4`, at: tCr2, cont: true },
+        { rhs: String.raw`=7.14-31.46\approx-24.3`, at: tCr2, cont: true },
         { lhs: String.raw`u_\theta`, rhs: String.raw`=10.1\times0.707`, at: tCt },
         { rhs: String.raw`+(-44.5)\times(-0.707)`, at: tCt + 30, cont: true },
-        { rhs: String.raw`=7.1+31.5\approx38.6`, at: tCt2, cont: true },
+        { rhs: String.raw`=7.14+31.46\approx38.6`, at: tCt2, cont: true },
       ]} />
-      <TeX s={String.raw`0^\circ:\ u_r\approx-8.7,\ u_\theta\approx38`} x={CX} y={530} size={44} o={fin(f, tAll)} />
+      <TeX s={String.raw`0^\circ:\ u_r\approx-8.7,\ u_\theta\approx38.0`} x={CX} y={530} size={44} o={fin(f, tAll)} />
       <TeX s={String.raw`90^\circ:\ u_r=-37.4,\ u_\theta=16.9`} x={CX} y={600} size={44} o={fin(f, tAll)} />
-      <TeX s={String.raw`135^\circ:\ u_r\approx-24.4,\ u_\theta\approx38.6`} x={CX} y={670} size={44} o={fin(f, tAll)} />
+      <TeX s={String.raw`135^\circ:\ u_r\approx-24.3,\ u_\theta\approx38.6`} x={CX} y={670} size={44} o={fin(f, tAll)} />
       <SourceBelow text={IAN_SRC} pic={MB} w={1100} name="s24 src" />
       {void [tAcs, cur]}
     </Scene>
@@ -324,7 +345,7 @@ const S25: React.FC = () => {
   const Bend = boxAt(26.6, -82.3, 3.5, PB.x, PB.y, PB.w, PB.h);
   const B = zoomBox(boxAt(IAN.c[0], IAN.c[1], 1.08, PB.x, PB.y, PB.w, PB.h), Bend, prog(f, 0, 30));
   const P = mapP(B);
-  const A: Ax = { x: 1180, y: 230, w: 560, h: 370, xr: [0, 360], yr: [-50, 50] };
+  const A: Ax = { x: 1180, y: 300, w: 560, h: 300, xr: [0, 360], yr: [-50, 50] };   // fix 1 Must 3: room for the speed bar above
   const az = RING.az as number[];
   const runUV = prog(f, tUV, tV + 30), runP = prog(f, tTeal - 10, tRose + 40);
   const mi = Math.min(71, Math.floor(prog(f, tUV, SE(k, 12)) * 72));
@@ -359,6 +380,7 @@ const S25: React.FC = () => {
         <Lbl x={1572} y={745} t="northward v" c={C.second} s={T.floor} o={fin(f, tV) * dim} />
         <line x1={1180} y1={805} x2={1240} y2={805} stroke={C.first} strokeWidth={7} opacity={fin(f, tTeal)} />
         <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose)} />
+        <SpeedBar x={1480} y={200} w={240} />
         <Keyword f={f} text="why polar here?" at={[1180, 110]} appear={0} out={tSw - 18} />
         <Keyword f={f} text="u, v swing: the wind turns" at={[1180, 110]} s={T.floor} appear={tSw} out={tNeg - 18} />
         <Keyword f={f} text="negative at 58 of 72 points" at={[1180, 110]} s={T.floor} c={C.neg} appear={tNeg} out={tTwo - 18} />
@@ -465,8 +487,8 @@ const S27: React.FC = () => {
     <Scene>
       <Svg>
         <g opacity={beat(0)}>
-          {[-3, -2, -1, 0, 1, 2, 3].map((q) => <line key={`v${q}`} x1={O[0] + q * 100} y1={O[1] - 300} x2={O[0] + q * 100} y2={O[1] + 300} stroke={C.grid} strokeWidth={q === 0 ? 4 : 2} />)}
-          {[-3, -2, -1, 0, 1, 2, 3].map((q) => <line key={`h${q}`} x1={O[0] - 300} y1={O[1] + q * 100} x2={O[0] + 300} y2={O[1] + q * 100} stroke={C.grid} strokeWidth={q === 0 ? 4 : 2} />)}
+          {[-3, -2, -1, 0, 1, 2, 3].map((q) => <line key={`v${q}`} x1={O[0] + q * 100} y1={O[1] - 300} x2={O[0] + q * 100} y2={O[1] + 300} stroke={q === 0 ? C.second : C.muted} strokeWidth={q === 0 ? 5 : 2} opacity={q === 0 ? 1 : 0.6} />)}
+          {[-3, -2, -1, 0, 1, 2, 3].map((q) => <line key={`h${q}`} x1={O[0] - 300} y1={O[1] + q * 100} x2={O[0] + 300} y2={O[1] + q * 100} stroke={q === 0 ? C.second : C.muted} strokeWidth={q === 0 ? 5 : 2} opacity={q === 0 ? 1 : 0.6} />)}
           <circle cx={O[0]} cy={O[1]} r={12} fill={C.gold} />
           <BDot p={[O[0] + 150, O[1] - 200]} />
         </g>
@@ -499,8 +521,8 @@ const S27: React.FC = () => {
           <BDot p={b} />
         </g>
         <g opacity={beat(6)}>
-          <line x1={O[0] - 100} y1={O[1] + 50} x2={O[0] - 100 + 180 * 0.6} y2={O[1] + 50 - 180 * 0.8} stroke={C.first} strokeWidth={20} opacity={0.6} />
-          <line x1={O[0] - 100} y1={O[1] + 50} x2={O[0] - 100 + 240 * 0.8} y2={O[1] + 50 + 240 * 0.6} stroke={C.neg} strokeWidth={20} opacity={0.5} />
+          <line x1={O[0] - 100} y1={O[1] + 50} x2={O[0] - 100 + 180 * 0.6} y2={O[1] + 50 - 180 * 0.8} stroke={C.neg} strokeWidth={20} opacity={0.6} />
+          <line x1={O[0] - 100} y1={O[1] + 50} x2={O[0] - 100 + 240 * 0.8} y2={O[1] + 50 + 240 * 0.6} stroke={C.first} strokeWidth={20} opacity={0.5} />
           <AnimatedWindArrow from={[O[0] - 100, O[1] + 50]} to={[O[0] + 200, O[1] + 50]} speed={10} f={f} c={C.first} px={10} head={36} />
         </g>
         <g opacity={beat(7)}>
@@ -531,7 +553,8 @@ const S27: React.FC = () => {
             <AnimatedWindArrow from={m.p0} to={m.rp} speed={13} f={f} c={C.neg} px={9} head={30} />
           </>; }}
       </GeoMap>
-      <SourceBelow text={IAN_SRC} pic={PB} w={620} o={beat(9)} name="s27 src" />
+      <SourceBelow text={IAN_SRC} pic={PB} w={720} o={beat(9)} name="s27 src" />
+      <Svg><SpeedBar x={1080} y={600} w={300} o={beat(9)} /></Svg>
       {keys.map((s, j) => <TeX key={j} s={s} x={1080} y={j === 7 ? 430 : 430} size={j === 7 ? 64 : 54} o={beat(j)} />)}
       <Svg><Keyword f={f} text="to sum up" at={[1080, 200]} appear={0} out={st[1] - 18} /></Svg>
     </Scene>

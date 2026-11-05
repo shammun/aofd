@@ -167,6 +167,15 @@ def main() -> int:
     row("DF09", "0.1° slide: (−6.99, 5.23) m, chord 8.73 m (said 7.0 west, 5.2 north, 8.7)", [*dq, np.hypot(*dq)], [-6.99, 5.23, 8.73], 0.01)
     row("DF09", "arc rule: 5000 m × 0.001745 rad = 8.7 m; 0.1° = 0.001745 rad", [5000 * np.deg2rad(0.1), np.deg2rad(0.1)], [8.727, 0.001745], [1e-3, 5e-7])
     row("DF09", "(−7.0, 5.2)/8.7 ≈ (−0.80, 0.60); true direction ≈ θ̂ within 0.1°", [-7.0 / 8.7, 5.2 / 8.7, *(dq / np.hypot(*dq))], [-0.80, 0.60, -0.8, 0.6], [0.01, 0.01, 1e-3, 1e-3])
+    # fix 1, user note U1 (s11 last check, no θ̂ used): the positions before / after the 0.1° turn from x = r cos θ, y = r sin θ
+    th1d = np.degrees(th0) + 0.1
+    row("DF09", "U1: 0.1° = 0.1 × π/180 = 0.001745 rad; s = r Δθ = 5000 × 0.001745 = 8.73 m", [0.1 * np.pi / 180, 5000 * 0.1 * np.pi / 180], [0.001745, 8.727], [5e-7, 1e-3])
+    row("DF09", "U1: before (3000, 4000) m = 5000 (cos 53.13°, sin 53.13°)", [*q0], [3000.0, 4000.0], 1e-6)
+    row("DF09", "U1: after θ = 53.23°: x = 5000 cos 53.23° ≈ 2993.0 m, y = 5000 sin 53.23° ≈ 4005.2 m", [th1d, *q1], [53.23, 2993.0, 4005.2], [0.005, 0.05, 0.05])
+    row("DF09", "U1: cos 53.23° = 0.598603, sin 53.23° = 0.801046; 5000 × those = 2993.0, 4005.2; √(7.0² + 5.2²) = √76.04 = 8.72 ≈ s",
+        [np.cos(np.deg2rad(th1d)), np.sin(np.deg2rad(th1d)), 5000 * 0.598603, 5000 * 0.801046, np.hypot(7.0, 5.2)], [0.598603, 0.801046, 2993.0, 4005.2, 8.72],
+        [5e-7, 5e-7, 0.05, 0.05, 0.005])
+    row("DF09", "U1: moved ≈ 7.0 m west, 5.2 m north (screen 2993.0 − 3000 = −7.0; 4005.2 − 4000 = 5.2)", [*dq, 2993.0 - 3000, 4005.2 - 4000], [-7.0, 5.2, -7.0, 5.2], [0.02, 0.04, 1e-9, 1e-9])
     for tdeg, ref in ((0.0, [1, 0, 0, 1]), (90.0, [0, 1, -1, 0]), (180.0, [-1, 0, 0, -1])):
         Et = call(CS + "unit_vectors_polar", "s12", f"r̂, θ̂ at θ = {tdeg:.0f}°", theta=np.deg2rad(tdeg))
         row("DF10", f"θ = {tdeg:.0f}°: r̂, θ̂ = {ref}", np.ravel(Et), ref, 1e-12)
@@ -197,7 +206,7 @@ def main() -> int:
         [*C53[:, 0], *C53[:, 1], *w53, *p53], [0.6, 0.8, -0.8, 0.6, uc[0], uc[1], 5, 0], 1e-12)
     row("DF18", "screen: 1.8 + 3.2 = 5; −2.4 + 2.4 = 0", [3 * 0.6 + 4 * 0.8, -3 * 0.8 + 4 * 0.6], [5, 0], 1e-12)
     V["plane"] = {"r": r0, "th": np.degrees(th0), "rhat": B1.r6(E[0]), "thhat": B1.r6(E[1]), "ur": float(uc[0]), "ut": float(uc[1]),
-                  "slide_m": B1.r6(dq, 3), "C30": B1.r6(C30), "xp30": B1.r6(xp), "turn34": B1.r6(t34)}
+                  "slide_m": B1.r6(dq, 3), "before_m": B1.r6(q0, 3), "after_m": B1.r6(q1, 3), "th_after": float(np.degrees(th0) + 0.1), "C30": B1.r6(C30), "xp30": B1.r6(xp), "turn34": B1.r6(t34)}
 
     # ================================================================ Hurricane Ian, HRRR 18 UTC (s00, s01, s03, s21-s27)
     H = xr.open_dataset(B1.F_HRRR)
@@ -246,8 +255,10 @@ def main() -> int:
     row("DF24", "θ = 90°: u −16.9, v −37.4 → u_r = v = −37.4, u_θ = −u = 16.9", [pts[90]["u"], pts[90]["v"], pts[90]["ur"], pts[90]["ut"]], [-16.9, -37.4, -37.4, 16.9], 0.05)
     row("DF24", "θ = 135°: u −10.1, v −44.5 → u_r −24.3, u_θ 38.6", [pts[135]["u"], pts[135]["v"], pts[135]["ur"], pts[135]["ut"]], [-10.1, -44.5, -24.3, 38.6], 0.1)
     c135, s135 = np.cos(np.deg2rad(135)), np.sin(np.deg2rad(135))
-    row("DF24", "screen θ = 135°: 10.1 × 0.707 = 7.1; 44.5 × 0.707 = 31.5; 7.1 − 31.5 = −24.4; 7.1 + 31.5 = 38.6",
-        [10.1 * 0.707, 44.5 * 0.707, 7.1 - 31.5, 7.1 + 31.5, -10.1 * c135 + -44.5 * s135], [7.1, 31.5, -24.4, 38.6, -24.31], [0.05, 0.05, 1e-9, 1e-9, 0.02])
+    # fix 1 (review 1 Should 3): one value everywhere, the data's −24.32 → "−24.3"; the screen and voice use 7.14 and 31.46
+    row("DF24", "screen θ = 135°: 10.1 × 0.707 = 7.14; 44.5 × 0.707 = 31.46; 7.14 − 31.46 = −24.32 ≈ −24.3 (= data −24.32); 7.14 + 31.46 = 38.60 ≈ 38.6",
+        [10.1 * 0.707, 44.5 * 0.707, 7.14 - 31.46, 7.14 + 31.46, pts[135]["ur"], -10.1 * c135 + -44.5 * s135], [7.14, 31.46, -24.32, 38.60, -24.3, -24.31],
+        [0.005, 0.005, 1e-9, 1e-9, 0.05, 0.02])
     row("DF24", "the rule u cos θ + v sin θ, −u sin θ + v cos θ reproduces the library at the three points",
         [p["u"] * np.cos(np.deg2rad(az)) + p["v"] * np.sin(np.deg2rad(az)) - p["ur"] for az, p in pts.items()], [0, 0, 0], 0.15)
     npos = int(np.sum(ring["vr"] >= 0))

@@ -5,7 +5,7 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
-import { Band, Dash, Pt, RightTick, pulse } from "../house/kit/draw";
+import { Band, Dash, Pt, RightTick, pulse, textW } from "../house/kit/draw";
 import { CalcStack, TeX } from "../house/kit/tex";
 import { Keyword } from "../house/kit/notes";
 import { Check } from "../house/kit/icons";
@@ -60,6 +60,9 @@ const S08: React.FC = () => {
     <Scene>
       <Svg>
         <circle cx={OC[0]} cy={OC[1]} r={RC} fill="none" stroke={C.local} strokeWidth={3} opacity={0.5} />
+        {/* fix 1 Should 7: θ is measured from a dashed east ray, and the radius is drawn from the first frame */}
+        <Dash p={OC} q={[OC[0] + RC + 60, OC[1]]} c={C.muted} w={3} />
+        <line x1={OC[0]} y1={OC[1]} x2={BC[0]} y2={BC[1]} stroke={C.first} strokeWidth={4} opacity={0.55} />
         <path d={arcD(OC, 80, 0, TH)} fill="none" stroke={C.local} strokeWidth={5} opacity={0.8} />
         <Lbl x={OC[0] + 104} y={OC[1] - 40} t="θ" c={C.local} s={T.key} />
         <Station at={OC} s={0.75} />
@@ -106,8 +109,8 @@ const S09: React.FC = () => {
   const th = TH + wob;
   const b = onC(OC, RC, th);
   const er: Pt = [Math.cos(th * D2R), -Math.sin(th * D2R)];
-  // inset (magnified slide) x 700-990, y 470-800
-  const IO: Pt = [800, 690], IL = 130;
+  // inset (magnified slide), no box (fix 1 Should 8): lower right of the picture zone, ≥ 50 px off the circle (centre OC, R 300)
+  const IO: Pt = [860, 820], IL = 130;
   const inset = win(f, tDist, tEdge - 10, 12);
   const ghost = win(f, tAny, tNo + 20, 10);
   const cand = fin(f, tTwo);
@@ -117,6 +120,7 @@ const S09: React.FC = () => {
     <Scene>
       <Svg>
         <circle cx={OC[0]} cy={OC[1]} r={RC} fill="none" stroke={C.first} strokeWidth={4} opacity={0.6} />
+        <Dash p={OC} q={[OC[0] + RC + 60, OC[1]]} c={C.muted} w={3} />
         <path d={arcD(OC, 80, 0, th)} fill="none" stroke={C.local} strokeWidth={5} />
         <Lbl x={OC[0] + 104} y={OC[1] - 40} t="θ" c={C.local} s={T.key} />
         <line x1={OC[0]} y1={OC[1]} x2={b[0]} y2={b[1]} stroke={C.first} strokeWidth={4} opacity={0.55} />
@@ -146,7 +150,6 @@ const S09: React.FC = () => {
         <BDot p={b} />
         {/* the magnified slide (inset) */}
         <g opacity={inset} data-lc-own="s09inset">
-          <rect x={700} y={470} width={290} height={330} rx={14} fill="#1d2740" stroke={C.grid} strokeWidth={3} />
           <Arrow p={IO} q={at(IO, ER, 110)} color={C.second} w={7} head={26} />
           <Arrow p={IO} q={sl} color={C.gold} w={7} head={26} />
           <circle cx={IO[0]} cy={IO[1]} r={8} fill={C.key} />
@@ -156,8 +159,9 @@ const S09: React.FC = () => {
           </g>
           <RightTick at={IO} u1={ER} u2={ET} c={C.gold} o={fin(f, tNo)} />
         </g>
-        <g data-lc-own="s09inset"><Lbl x={at(sl, ER, 45)[0] - 12} y={at(sl, ER, 45)[1] - 28} t="5.1 km" c={C.local} s={T.floor} a="end" o={ghost * inset} />
-        <Lbl x={at(sl, ER, -45)[0] - 16} y={at(sl, ER, -45)[1] + 34} t="4.9 km" c={C.local} s={T.floor} a="end" o={ghost * inset} /></g>
+        <g data-lc-own="s09inset"><Lbl x={at(sl, ER, 45)[0]} y={at(sl, ER, 45)[1] - 36} t="5.1 km" c={C.local} s={T.floor} a="middle" o={ghost * inset} />
+        <Lbl x={at(sl, ER, -45)[0] - 14} y={at(sl, ER, -45)[1] + 60} t="4.9 km" c={C.local} s={T.floor} a="end" o={ghost * inset} />
+        <Lbl x={(IO[0] + sl[0]) / 2 + ER[0] * 40} y={(IO[1] + sl[1]) / 2 + ER[1] * 40} t="slide" c={C.gold} s={T.floor} a="middle" o={inset * (1 - ghost)} /></g>
         <Lbl x={1080} y={220} t="r stays 5 km" c={C.key} s={T.key} o={fin(f, tDist)} />
         <Lbl x={1080} y={430} t="edge at right angles to the radius" c={C.key} s={T.floor} o={fin(f, tEdge)} />
         <Lbl x={1080} y={500} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tAnti)} />
@@ -167,6 +171,7 @@ const S09: React.FC = () => {
       </Svg>
       <Tip p={b} v={er} L={LU} s={RHAT} />
       <Tip p={BC} v={ET} L={LU} s={THAT} o={pick} />
+      <Tip p={IO} v={ER} L={110} s={RHAT} d={34} size={50} o={inset} />
       <KX s={String.raw`\text{no part along }\hat{\mathbf r}`} x={1080} y={110} o={fin(f, tNo)} />
       <KX s={String.raw`\text{slide}\perp\hat{\mathbf r}`} x={1080} y={320} o={fin(f, AT(k, 10, "at right angles"))} />
       <TeX s={EQ_S09} x={1080} y={640} size={64} o={fin(f, tSo)} />
@@ -257,21 +262,43 @@ const S10: React.FC = () => {
 
 // ================================================================ s11 θ̂ = (−sin θ, cos θ) and four checks (D03)
 const O11: Pt = [430, 500], R11 = 300;
+// fix 1, user note U1 (11:23): the last check rebuilt with every input on screen, one line per spoken phrase, no θ̂ used.
+// Wide view (station, 5-km circle, balloon (3, 4) km, r, θ) → a zoom box → the magnified inset (the circle's arc, r̂, before / after,
+// the 8.7-m slide, its west and north parts). Numbers from data/cf.json (CHECK rows DF09 U1 in the build, CHECK_U1 below).
+const U1 = { th: PL.th_after as number, b: PL.before_m as number[], a: PL.after_m as number[], d: PL.slide_m as number[] };
+const CHECK_U1: [string, number, number, number][] = [
+  ["dtheta rad", 0.1 * Math.PI / 180, 0.001745, 5e-7], ["s", 5000 * 0.001745, 8.7, 0.05], ["th after", U1.th, 53.23, 0.005],
+  ["before x", U1.b[0], 3000, 1e-6], ["before y", U1.b[1], 4000, 1e-6], ["after x", U1.a[0], 2993.0, 0.05], ["after y", U1.a[1], 4005.2, 0.05],
+  ["cos 53.23", Math.cos(U1.th * D2R), 0.598603, 5e-7], ["sin 53.23", Math.sin(U1.th * D2R), 0.801046, 5e-7],
+  ["5000 cos", 5000 * 0.598603, 2993.0, 0.05], ["5000 sin", 5000 * 0.801046, 4005.2, 0.05], ["len", Math.hypot(7.0, 5.2), 8.7, 0.03], ["76.04", 7 * 7 + 5.2 * 5.2, 76.04, 1e-9],
+  ["dx", U1.d[0], -7.0, 0.02], ["dy", U1.d[1], 5.2, 0.04], ["dx/8.7", -7.0 / 8.7, -0.80, 0.01], ["dy/8.7", 5.2 / 8.7, 0.60, 0.01],
+];
+CHECK_U1.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK U1 ${n}: data ${v} vs screen ${r}`); });
+const OW: Pt = [300, 580], RW = 220, BW = onC(OW, RW, TH);          // wide view: 5 km = 220 px
+const IFR = { x: 570, y: 420, w: 420, h: 380 };                    // the magnified inset (frame), 25 px per metre
+const MG = 25, B0: Pt = [870, 700], A1: Pt = [B0[0] + U1.d[0] * MG, B0[1] - U1.d[1] * MG], CN: Pt = [A1[0], B0[1]];
+/** the circle's own arc through both balloon positions at the inset scale (radius 5000 m × 25 px/m: straight to the eye, but drawn as the arc) */
+const arcU1 = (() => {
+  const Rr = 5000 * MG, Cc: Pt = [B0[0] - ER[0] * Rr, B0[1] - ER[1] * Rr], pts: Pt[] = [];
+  for (let i = 0; i <= 28; i++) { const a = (TH - 0.01 + (0.12 * i) / 28) * D2R; pts.push([Cc[0] + Rr * Math.cos(a), Cc[1] - Rr * Math.sin(a)]); }
+  return pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join("");
+})();
 const S11: React.FC = () => {
   const f = useCurrentFrame(), k = K("s11_theta_hat");
-  const tR = SS(k, 1), tRule = SS(k, 2), tRes = AT(k, 3, "minus sine theta"), tPic = SS(k, 5), tN = AT(k, 6, "now points north"), tW = AT(k, 7, "now points west"),
-    tChk = SS(k, 8), t0 = AT(k, 9, "zero, one"), t90 = AT(k, 11, "minus one, zero"), tBal = SS(k, 13), tLen = SS(k, 14), tDotW = AT(k, 14, "dot product"),
-    tLast = SS(k, 15), tTurn = SS(k, 16), t87 = AT(k, 17, "eight point seven"), tDiv = SS(k, 18);
+  const tR = SS(k, 1), tRule = SS(k, 2), tRes = AT(k, 3, "minus sine theta"), tPic = SS(k, 5), tW = AT(k, 7, "now points west"),
+    tChk = SS(k, 8), t0 = AT(k, 9, "zero, one"), t90 = AT(k, 11, "minus one, zero"), tBal = SS(k, 13), tLen = SS(k, 14), tDotW = AT(k, 14, "dot product");
+  // U1 block: S16-S24 (1-based)
+  const tLast = SS(k, 15), tB5 = SS(k, 16), t34 = AT(k, 16, "three kilometres east"), tTurn = SS(k, 17), tRadA = AT(k, 18, "a tenth times pi"),
+    tRadB = AT(k, 18, "about zero point"), tArc = AT(k, 19, "s equals r times theta"), t5000 = AT(k, 19, "five thousand metres"), t87 = AT(k, 19, "eight point seven"),
+    tXY = SS(k, 20), tFrom = AT(k, 21, "three thousand"), tTo = AT(k, 21, "two thousand nine hundred"), tTo2 = AT(k, 21, "four thousand and five"), tAft = AT(k, 21, "to about"),
+    tWest = AT(k, 22, "seven metres west"), tNorth = AT(k, 22, "five point two"), tDiv = SS(k, 23), tGives = AT(k, 23, "gives about"), tAgain = AT(k, 23, "theta hat again");
   const rot = 90 * prog(f, tPic + 15, tPic + 60);
   const tip = onC(O11, R11, TH), foot: Pt = [tip[0], O11[1]];
   const R = (p: Pt) => rotP(p, O11, rot);
   const triO = win(f, 0, t0 - 30, 12);
-  const pts = fin(f, tChk) * fout(f, tTurn - 14, 12);
-  const big = fin(f, tTurn, 14);
-  // the magnified 0.1° slide (whole picture zone): 1 m = 52 px
-  const M = 40, Z0: Pt = [640, 560];
-  const s = PL.slide_m as number[];
-  const Z1: Pt = [Z0[0] + s[0] * M, Z0[1] - s[1] * M];
+  const pts = fin(f, tChk) * fout(f, tB5 - 14, 12);
+  const big = fin(f, tB5, 14);
+  const ins = fin(f, tTurn, 14);
   return (
     <Scene>
       <Svg>
@@ -297,21 +324,41 @@ const S11: React.FC = () => {
             <RightTick at={tip} u1={[-ER[0], -ER[1]]} u2={ET} c={C.gold} o={fin(f, tLen)} />
           </g>
         </g>
+        {/* U1 wide view: the station, the 5-km circle, the balloon at (3, 4) km, r and θ */}
         <g opacity={big}>
-          <line x1={Z0[0] - ER[1] * 0 + ET[0] * -260} y1={Z0[1] + ET[1] * -260} x2={Z0[0] + ET[0] * 640} y2={Z0[1] + ET[1] * 640} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" opacity={0.7} />
-          <Dash p={Z0} q={[Z1[0], Z0[1]]} c={C.second} w={6} d="16 10" />
-          <Dash p={[Z1[0], Z0[1]]} q={Z1} c={C.second} w={6} d="16 10" />
-          <Arrow p={Z0} q={Z1} color={C.gold} />
-          <Arrow p={Z0} q={at(Z0, ER, 200)} color={C.second} w={7} head={28} />
-          <circle cx={Z0[0]} cy={Z0[1]} r={10} fill={C.key} />
-          <circle cx={Z1[0]} cy={Z1[1]} r={8} fill={C.key} opacity={0.7} />
+          <circle cx={OW[0]} cy={OW[1]} r={RW} fill="none" stroke={C.first} strokeWidth={4} opacity={0.6} />
+          <Dash p={OW} q={[OW[0] + RW + 40, OW[1]]} c={C.muted} w={3} />
+          <line x1={OW[0]} y1={OW[1]} x2={BW[0]} y2={BW[1]} stroke={C.first} strokeWidth={5} />
+          <path d={arcD(OW, 60, 0, TH)} fill="none" stroke={C.local} strokeWidth={5} />
+          <Station at={OW} s={0.6} />
+          <BDot p={BW} r={11} />
+          <Lbl x={OW[0] + 78} y={OW[1] - 34} t="θ ≈ 53°" c={C.local} s={T.floor} />
+          <Lbl x={360} y={470} t="r = 5 km" c={C.first} s={T.floor} a="end" o={fin(f, tB5 + 6)} />
+          <Lbl x={BW[0] + 30} y={BW[1] - 32} t="(3 km, 4 km)" c={C.key} s={T.floor} o={fin(f, t34)} />
         </g>
-        <Lbl x={(Z0[0] + Z1[0]) / 2} y={Z0[1] + 46} t="≈ 7.0 m west" c={C.second} s={T.floor} a="middle" o={big * fin(f, AT(k, 17, "seven metres west"))} />
-        <Lbl x={Z1[0] - 22} y={(Z0[1] + Z1[1]) / 2 + 30} t="north" c={C.second} s={T.floor} a="end" o={big * fin(f, AT(k, 17, "five point two"))} />
-        <Lbl x={Z1[0] - 22} y={(Z0[1] + Z1[1]) / 2 - 30} t="≈ 5.2 m" c={C.second} s={T.floor} a="end" o={big * fin(f, AT(k, 17, "five point two"))} />
-        <Lbl x={(Z0[0] + Z1[0]) / 2 + 40} y={(Z0[1] + Z1[1]) / 2 - 50} t="≈ 8.7 m" c={C.gold} s={T.floor} o={big * fin(f, t87 - 20)} />
-        <Lbl x={120} y={110} t="the circle, magnified" c={C.muted} s={T.floor} o={big} />
-        <Check x={1780} y={790} o={fin(f, tDiv + 40)} />
+        {/* the zoom box round the balloon, leading to the magnified inset */}
+        <g opacity={ins}>
+          <rect x={BW[0] - 20} y={BW[1] - 20} width={40} height={40} fill="none" stroke={C.gold} strokeWidth={3} />
+          <line x1={BW[0] + 20} y1={BW[1] - 20} x2={IFR.x} y2={IFR.y} stroke={C.gold} strokeWidth={2} opacity={0.7} />
+          <line x1={BW[0] + 20} y1={BW[1] + 20} x2={IFR.x} y2={IFR.y + IFR.h} stroke={C.gold} strokeWidth={2} opacity={0.7} />
+          <rect x={IFR.x} y={IFR.y} width={IFR.w} height={IFR.h} rx={12} fill="#1d2740" stroke={C.gold} strokeWidth={3} />
+          <Lbl x={IFR.x + 20} y={IFR.y + 30} t="magnified" c={C.muted} s={T.floor} />
+          <path d={arcU1} fill="none" stroke={C.first} strokeWidth={4} opacity={0.75} />
+          <Arrow p={B0} q={at(B0, ER, 90)} color={C.second} w={7} head={26} />
+          <circle cx={B0[0]} cy={B0[1]} r={10} fill={C.key} />
+          <circle cx={A1[0]} cy={A1[1]} r={10} fill={C.key} opacity={0.85} />
+          <Lbl x={B0[0] + 25} y={B0[1] + 50} t="before" c={C.key} s={T.floor} a="middle" />
+          <Lbl x={A1[0]} y={A1[1] - 44} t="after 0.1°" c={C.key} s={T.floor} a="middle" />
+          <g opacity={fin(f, t87)}>
+            <Arrow p={B0} q={A1} color={C.gold} w={7} head={26} />
+            <Lbl x={(B0[0] + A1[0]) / 2 + ER[0] * 48} y={(B0[1] + A1[1]) / 2 + ER[1] * 48} t="≈ 8.7 m" c={C.gold} s={T.floor} a="middle" />
+          </g>
+          <Dash p={B0} q={CN} c={C.second} w={5} o={fin(f, tWest)} />
+          <Lbl x={(B0[0] + CN[0]) / 2 - 30} y={B0[1] + 48} t="7.0 m" c={C.second} s={T.floor} a="middle" o={fin(f, tWest)} />
+          <Dash p={CN} q={A1} c={C.second} w={5} o={fin(f, tNorth)} />
+          <Lbl x={CN[0] - 20} y={(CN[1] + A1[1]) / 2} t="5.2 m" c={C.second} s={T.floor} a="end" o={fin(f, tNorth)} />
+        </g>
+        <Check x={1780} y={790} o={fin(f, tAgain)} />
         <Lbl x={(O11[0] + R(foot)[0]) / 2 + (rot > 45 ? 22 : 0)} y={(O11[1] + R(foot)[1]) / 2 + (rot > 45 ? 30 : 44)} t="cos θ" c={C.second} s={T.floor} a={rot > 45 ? "start" : "middle"}
           o={triO * (1 - big) * (rot > 5 && rot < 85 ? 0 : 1)} />
         <Lbl x={(R(foot)[0] + R(tip)[0]) / 2 + (rot > 45 ? 0 : 110)} y={(R(foot)[1] + R(tip)[1]) / 2 - (rot > 45 ? 40 : 0)} t="sin θ" c={C.second} s={T.floor} a={rot > 45 ? "middle" : "start"}
@@ -319,23 +366,40 @@ const S11: React.FC = () => {
         <Lbl x={O11[0] + R11 + 26} y={O11[1] - 150} t="north" c={C.key} s={T.floor} o={pts * fin(f, AT(k, 10, "It points north"))} />
         <Lbl x={O11[0] - 160} y={O11[1] - R11 - 40} t="west" c={C.key} s={T.floor} a="middle" o={pts * fin(f, SS(k, 12))} />
         <Keyword f={f} text="swap, minus on the first" at={[1080, 300]} s={T.floor} appear={tRule} out={tChk - 18} />
+        <Keyword f={f} text="without the θ̂ formula" at={[1080, 300]} s={T.floor} c={C.gold} appear={tLast} />
       </Svg>
       <Tip p={O11} v={rotS(ER, rot)} L={R11} s={rot > 45 ? THAT : RHAT} o={triO * (1 - big) * (rot > 5 && rot < 85 ? 0 : 1) * (rot > 45 ? fin(f, tW + 10) : 1)} d={40} />
       <Tip p={tip} v={ET} L={150} s={THAT} o={pts * fin(f, tBal)} d={36} size={50} />
-      <TeX s={RHAT} x={at(Z0, ER, 230)[0]} y={at(Z0, ER, 230)[1]} size={50} ax={0.5} c={C.second} o={big} />
+      <Tip p={B0} v={ER} L={90} s={RHAT} d={30} size={50} o={ins} />
       <KX s={String.raw`\text{turn }\hat{\mathbf r}`} x={1080} y={110} o={fout(f, tR - 18) * fin(f, 0)} />
       <TeX s={String.raw`\hat{\mathbf r}=(\cos\theta,\ \sin\theta)`} x={1080} y={110} size={60} c={C.ink} o={fin(f, tR)} />
       <TeX s={EQ_S11} x={1080} y={210} size={72} c={C.second} o={fin(f, tRes)} />
-      <CalcStack f={f} x={1240} y={380} size={48} maxLines={3} rows={[
+      <CalcStack f={f} x={1240} y={380} size={48} maxLines={3} o={fout(f, tLast)} rows={[
         { lhs: String.raw`\theta=0:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(0,\ 1)`, at: t0 },
         { lhs: String.raw`\theta=90^\circ:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(-1,\ 0)`, at: t90 },
         { lhs: String.raw`\theta=53^\circ:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(-0.8,\ 0.6)`, at: tBal },
         { lhs: String.raw`|\hat{\boldsymbol\theta}|`, rhs: String.raw`=\sqrt{0.64+0.36}=1`, at: tLen },
         { lhs: String.raw`\hat{\mathbf r}\cdot\hat{\boldsymbol\theta}`, rhs: String.raw`=0.6\times(-0.8)+0.8\times0.6`, at: tDotW },
         { rhs: String.raw`=-0.48+0.48=0`, at: tDotW + 50, cont: true },
-        { lhs: "s", rhs: String.raw`=5000\ \mathrm{m}\times0.001745`, at: t87 },
-        { rhs: String.raw`\approx8.7\ \mathrm{m}`, at: t87 + 20, cont: true },
-        { lhs: String.raw`\frac{(-7.0,\ 5.2)}{8.7}`, rhs: String.raw`\approx(-0.80,\ 0.60)`, at: tDiv, h: 120 },
+      ]} />
+      {/* U1 column: one line per spoken phrase */}
+      <CalcStack f={f} x={1250} y={370} size={46} maxLines={3} rows={[
+        { lhs: String.raw`\Delta\theta`, rhs: String.raw`=0.1^\circ=0.1\times\pi/180`, at: tRadA },
+        { rhs: String.raw`\approx0.001745\ \mathrm{rad}`, at: tRadB, cont: true },
+        { lhs: "s", rhs: String.raw`=r\,\Delta\theta`, at: tArc },
+        { rhs: String.raw`=5000\ \mathrm{m}\times0.001745`, at: t5000, cont: true },
+        { rhs: String.raw`\approx8.7\ \mathrm{m}`, at: t87, cont: true },
+        { lhs: String.raw`(x,\ y)`, rhs: String.raw`=(r\cos\theta,\ r\sin\theta)`, at: tXY },
+        { lhs: String.raw`\text{before},\ 53.13^\circ`, rhs: String.raw`=(3000,\ 4000)\ \mathrm{m}`, at: tFrom },
+        { lhs: String.raw`\text{after}`, rhs: String.raw`=53.13^\circ+0.1^\circ=53.23^\circ`, at: tAft },
+        { lhs: "x", rhs: String.raw`=5000\times\cos53.23^\circ`, at: tTo },
+        { rhs: String.raw`=5000\times0.598603\approx2993.0\ \mathrm{m}`, at: tTo + 40, cont: true },
+        { lhs: "y", rhs: String.raw`=5000\times\sin53.23^\circ`, at: tTo2 },
+        { rhs: String.raw`=5000\times0.801046\approx4005.2\ \mathrm{m}`, at: tTo2 + 40, cont: true },
+        { lhs: String.raw`\Delta x`, rhs: String.raw`=2993.0-3000=-7.0\ \mathrm{m}\ \text{(west)}`, at: tWest },
+        { lhs: String.raw`\Delta y`, rhs: String.raw`=4005.2-4000=+5.2\ \mathrm{m}\ \text{(north)}`, at: tNorth },
+        { lhs: String.raw`\sqrt{7.0^2+5.2^2}`, rhs: String.raw`=\sqrt{76.04}\approx8.7\ \mathrm{m}=s`, at: tDiv, h: 90 },
+        { lhs: String.raw`\frac{(-7.0,\ 5.2)}{8.7}`, rhs: String.raw`\approx(-0.80,\ 0.60)=\hat{\boldsymbol\theta}`, at: tGives, h: 120 },
       ]} />
     </Scene>
   );
@@ -394,7 +458,8 @@ const S13: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <defs><pattern id="h13" width={16} height={16} patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1={0} y1={0} x2={0} y2={16} stroke={C.neg} strokeWidth={6} /></pattern></defs>
+        {/* fix 1 Should 1: one colour per quantity everywhere: radial u_r rose, tangential u_θ teal (the negative u_θ keeps its hatch and "−") */}
+        <defs><pattern id="h13" width={16} height={16} patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1={0} y1={0} x2={0} y2={16} stroke={C.first} strokeWidth={6} /></pattern></defs>
         <Dash p={at(B13, ER13, -260)} q={at(B13, ER13, 330)} c={C.second} w={2.5} o={0.5} />
         <Dash p={at(B13, ET13, -330)} q={at(B13, ET13, 280)} c={C.second} w={2.5} o={0.5} />
         <Lbl x={at(B13, ER13, -240)[0] + 20} y={at(B13, ER13, -240)[1] + 36} t="to the station" c={C.muted} s={T.floor} />
@@ -402,17 +467,17 @@ const S13: React.FC = () => {
           <Dash p={W} q={footR} c={C.key} w={4} />
           <Dash p={W} q={footT} c={C.key} w={4} />
         </g>
-        <Band p={B13} q={fr} color={C.first} o={fin(f, tR6 - 4)} w={22} />
+        <Band p={B13} q={fr} color={C.neg} o={fin(f, tR6 - 4)} w={22} />
         {f >= tT8 - 4 ? <line x1={B13[0]} y1={B13[1]} x2={ft[0]} y2={ft[1]} stroke="url(#h13)" strokeWidth={22} /> : null}
-        <Band p={B13} q={ft} color={C.neg} o={0.5 * fin(f, tT8 - 4)} w={22} />
+        <Band p={B13} q={ft} color={C.first} o={0.5 * fin(f, tT8 - 4)} w={22} />
         <Arrow p={B13} q={at(B13, ER13, L13)} color={C.second} />
         <Arrow p={B13} q={at(B13, ET13, L13)} color={C.second} />
         <g opacity={fin(f, tWind)}><AnimatedWindArrow from={B13} to={W} speed={10} f={f} c={C.first} px={10} head={40} /></g>
         <BDot p={B13} />
-        <path d={arcD([B13[0] - 6 * 60 * ER13[0], B13[1] - 6 * 60 * ER13[1]], 300, TH + 25, TH - 25)} fill="none" stroke={C.neg} strokeWidth={5} opacity={fin(f, tCw)} />
-        <ArcHead c={[B13[0] - 6 * 60 * ER13[0], B13[1] - 6 * 60 * ER13[1]]} r={300} a={TH - 25} dir={-1} col={C.neg} o={fin(f, tCw)} />
+        <path d={arcD([B13[0] - 6 * 60 * ER13[0], B13[1] - 6 * 60 * ER13[1]], 300, TH + 25, TH - 25)} fill="none" stroke={C.first} strokeWidth={5} opacity={fin(f, tCw)} />
+        <ArcHead c={[B13[0] - 6 * 60 * ER13[0], B13[1] - 6 * 60 * ER13[1]]} r={300} a={TH - 25} dir={-1} col={C.first} o={fin(f, tCw)} />
         <Lbl x={1080} y={770} t="6 m/s away · 8 m/s round" c={C.key} s={T.floor} o={fin(f, tSay)} />
-        <Lbl x={1080} y={830} t="clockwise, seen from above" c={C.neg} s={T.floor} o={fin(f, tCw)} />
+        <Lbl x={1080} y={830} t="clockwise, seen from above" c={C.first} s={T.floor} o={fin(f, tCw)} />
         <Keyword f={f} text="wind in polar coordinates" at={[1080, 110]} appear={0} out={tUV - 18} />
         <SkipChip f={f} k={k} to={keepTime("s14_rebuild_general")} />
         <Keyword f={f} text="shadow" at={[at(W, [0, 1], 0)[0] + 20, W[1] + 70]} s={T.floor} appear={tSh} out={tR1 - 18} />
@@ -420,15 +485,15 @@ const S13: React.FC = () => {
       <Tip p={B13} v={ER13} L={L13} s={RHAT} />
       <Tip p={B13} v={ET13} L={L13} s={THAT} />
       <TeX s={String.raw`\mathbf u`} x={W[0] + 50} y={W[1]} size={60} c={C.first} o={fin(f, tBold)} />
-      <TeX s={String.raw`u_r=6`} x={footR[0] - 30} y={footR[1] - 40} ax={1} size={52} c={C.first} o={fin(f, tR6 + 10)} />
-      <TeX s={String.raw`u_\theta=-8`} x={footT[0] + 30} y={footT[1] + 40} size={52} c={C.neg} o={fin(f, tT8 + 10)} />
+      <TeX s={String.raw`u_r=6`} x={footR[0] - 30} y={footR[1] - 40} ax={1} size={52} c={C.neg} o={fin(f, tR6 + 10)} />
+      <TeX s={String.raw`u_\theta=-8`} x={footT[0] + 30} y={footT[1] + 40} size={52} c={C.first} o={fin(f, tT8 + 10)} />
       <TeX s={String.raw`\mathbf u=(u,\ v)=(10,\ 0)\ \mathrm{m/s}`} x={1080} y={110} size={54} o={fin(f, tUV) * fout(f, tIn - 18)} />
       <TeX s={String.raw`\mathbf u=(10,\ 0)\ \mathrm{m/s}`} x={1080} y={110} size={50} o={fin(f, tIW)} />
       <TeX s={String.raw`\theta=53^\circ`} x={1560} y={110} size={50} c={C.local} o={fin(f, tITh)} />
       <TeX s={String.raw`\hat{\mathbf r}=(0.6,\ 0.8)`} x={1080} y={185} size={50} c={C.second} o={fin(f, tIR)} />
       <TeX s={String.raw`\hat{\boldsymbol\theta}=(-0.8,\ 0.6)`} x={1490} y={185} size={50} c={C.second} o={fin(f, tIT)} />
-      <TeX s={String.raw`u_r:\ \text{along }\hat{\mathbf r}`} x={1080} y={290} size={50} c={C.first} o={fin(f, tRad)} />
-      <TeX s={String.raw`u_\theta:\ \text{along }\hat{\boldsymbol\theta}`} x={1460} y={290} size={50} c={C.neg} o={fin(f, tTan)} />
+      <TeX s={String.raw`u_r:\ \text{along }\hat{\mathbf r}`} x={1080} y={290} size={50} c={C.neg} o={fin(f, tRad)} />
+      <TeX s={String.raw`u_\theta:\ \text{along }\hat{\boldsymbol\theta}`} x={1460} y={290} size={50} c={C.first} o={fin(f, tTan)} />
       <TeX s={EQ_S13} x={1080} y={390} size={60} o={fin(f, tDot)} />
       <CalcStack f={f} x={1180} y={440} size={50} rows={[
         { lhs: "u_r", rhs: String.raw`=10\times0.6+0\times0.8`, at: tR1 },
@@ -453,13 +518,13 @@ const S14: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <Band p={B13} q={A1} color={C.first} o={0.35} w={22} />
-        <Band p={B13} q={at(B13, ET13, -8 * MS)} color={C.neg} o={0.25} w={22} />
+        <Band p={B13} q={A1} color={C.neg} o={0.35} w={22} />
+        <Band p={B13} q={at(B13, ET13, -8 * MS)} color={C.first} o={0.25} w={22} />
         <Arrow p={B13} q={at(B13, ER13, L13)} color={C.second} o={0.6} />
         <Arrow p={B13} q={at(B13, ET13, L13)} color={C.second} o={0.6} />
         <AnimatedWindArrow from={B13} to={W} speed={10} f={f} c={C.first} px={10} head={40} o={0.55} />
-        <Arrow p={B13} q={at(B13, ER13, 6 * MS * g1)} color={C.first} o={fin(f, t6)} />
-        {g1 >= 1 ? <Arrow p={A1} q={at(A1, ET13, -8 * MS * g2)} color={C.neg} o={fin(f, t8)} /> : null}
+        <Arrow p={B13} q={at(B13, ER13, 6 * MS * g1)} color={C.neg} o={fin(f, t6)} />
+        {g1 >= 1 ? <Arrow p={A1} q={at(A1, ET13, -8 * MS * g2)} color={C.first} o={fin(f, t8)} /> : null}
         <g opacity={win(f, tE, tBack + 20)}>
           <line x1={B13[0]} y1={B13[1] + 60} x2={A1[0]} y2={B13[1] + 60} stroke={C.gold} strokeWidth={10} opacity={0.8} />
           <line x1={A1[0]} y1={B13[1] + 60} x2={A2[0]} y2={B13[1] + 60} stroke={C.gold} strokeWidth={10} opacity={0.5} />
@@ -475,8 +540,11 @@ const S14: React.FC = () => {
         <Keyword f={f} text="same wind?" at={[1080, 110]} appear={0} out={t6 - 18} />
         <Keyword f={f} text="used on a hurricane soon" at={[1080, 820]} s={T.floor} appear={tSoon} />
       </Svg>
-      <TeX s={String.raw`6\,\hat{\mathbf r}`} x={at(B13, ER13, 6 * MS)[0] - 40} y={at(B13, ER13, 6 * MS)[1] - 30} size={52} ax={1} c={C.first} o={fin(f, t6 + 20)} />
-      <TeX s={String.raw`-8\,\hat{\boldsymbol\theta}`} x={(A1[0] + A2[0]) / 2 + 30} y={(A1[1] + A2[1]) / 2 - 30} size={52} c={C.neg} o={fin(f, t8 + 20)} />
+      <TeX s={String.raw`6\,\hat{\mathbf r}`} x={at(B13, ER13, 6 * MS)[0] - 40} y={at(B13, ER13, 6 * MS)[1] - 30} size={52} ax={1} c={C.neg} o={fin(f, t6 + 20)} />
+      <TeX s={String.raw`-8\,\hat{\boldsymbol\theta}`} x={(A1[0] + A2[0]) / 2 + 30} y={(A1[1] + A2[1]) / 2 - 30} size={52} c={C.first} o={fin(f, t8 + 20)} />
+      {/* fix 1 Should 14: r̂ and θ̂ are named while the voice says "six times r hat plus minus eight times theta hat" */}
+      <Tip p={B13} v={ER13} L={L13} s={RHAT} o={0.8} />
+      <Tip p={B13} v={ET13} L={L13} s={THAT} o={0.8} />
       <TeX s={String.raw`\mathbf u`} x={W[0] + 50} y={W[1] + 10} size={56} c={C.first} o={0.7} />
       <CalcStack f={f} x={1220} y={110} size={46} maxLines={4} o={old} rows={[
         { lhs: String.raw`6\,\hat{\mathbf r}`, rhs: String.raw`=6\,(0.6,\ 0.8)=(3.6,\ 4.8)`, at: t6 + 10 },
@@ -610,6 +678,8 @@ const S16: React.FC = () => {
 };
 
 // ================================================================ s17 x′, y′ as shadows on the new rulers (D06)
+const S17L = ["(x′, y′)", "= (4.6, 1.96)"];
+S17L.forEach((t) => { if (ARR34[0] + 24 + textW(t, T.floor) > 1000) throw new Error(`s17 label "${t}" leaves the picture zone`); });
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = K("s17_new_components");
   const tQ = SS(k, 2), tSh = SS(k, 3), tX = AT(k, 4, "x times cosine"), tY = SS(k, 5), tIn = SS(k, 6), tX1 = SS(k, 7), tX46 = AT(k, 8, "about four point six"), tY1 = SS(k, 9),
@@ -629,7 +699,10 @@ const S17: React.FC = () => {
         <Dash p={ARR34} q={fx} c={C.key} w={4} o={fin(f, tSh)} />
         <Dash p={ARR34} q={fy} c={C.key} w={4} o={fin(f, tY)} />
         <Arrow p={O15} q={ARR34} color={C.first} w={10 + 4 * pulse(f, tL1, 30)} />
-        <Lbl x={ARR34[0] + 24} y={ARR34[1] - 26} t={f < tAt ? "(3, 4)" : "(x′, y′) = (4.6, 1.96)"} c={C.key} s={f < tAt ? T.key : T.floor} o={f < tAt - 10 ? 1 : fin(f, tAt)} />
+        {/* fix 1 Must 4: the turned-axes coordinates on two lines, inside the picture zone (x ≤ 1000, asserted) */}
+        <Lbl x={ARR34[0] + 24} y={ARR34[1] - 26} t="(3, 4)" c={C.key} s={T.key} o={f < tAt - 10 ? 1 : 0} />
+        <Lbl x={ARR34[0] + 24} y={ARR34[1] - 82} t={S17L[0]} c={C.key} s={T.floor} o={f < tAt ? 0 : fin(f, tAt)} />
+        <Lbl x={ARR34[0] + 24} y={ARR34[1] - 26} t={S17L[1]} c={C.key} s={T.floor} o={f < tAt ? 0 : fin(f, tAt)} />
         <Lbl x={fx[0] + 20} y={fx[1] + 44} t="x′ = 4.6" c={C.first} s={T.floor} o={fin(f, tX46)} />
         <Lbl x={fy[0] - 26} y={fy[1] - 10} t="y′ = 1.96" c={C.first} s={T.floor} a="end" o={fin(f, tY196)} />
         <Keyword f={f} text="new coordinates x′, y′" at={[1080, 110]} appear={0} out={tQ - 18} />
@@ -698,7 +771,7 @@ const S18: React.FC = () => {
       <TeX s={bot} x={1080} y={450} size={56} o={ph === 2 ? 1 : 0} />
       <TeX s={tl} x={1080} y={450} size={56} o={ph === 4 ? 1 : 0} />
       <TeX s={String.raw`\begin{pmatrix}0.866 & 0.5\\ -0.5 & 0.866\end{pmatrix}\begin{pmatrix}3\\ 4\end{pmatrix}`} x={1070} y={745} size={44} o={win(f, tNum, tDC - 18)} />
-      <TeX s={String.raw`\text{top row: }0.866\times3+0.5\times4=4.60`} x={1070} y={835} size={44} o={win(f, tNum, tDC - 18)} />
+      <TeX s={String.raw`\text{top row: }0.866\times3+0.5\times4\approx4.60`} x={1070} y={835} size={44} o={win(f, tNum, tDC - 18)} />
       <TeX s={String.raw`\hat{\mathbf x}'\cdot\hat{\mathbf x}=\cos\alpha`} x={1080} y={770} size={60} o={fin(f, tEx)} />
     </Scene>
   );
@@ -760,10 +833,16 @@ const S19: React.FC = () => {
       <TeX s={String.raw`\hat{\mathbf x}\to\mathbf e_1,\ \ \hat{\mathbf y}\to\mathbf e_2,\ \ \hat{\mathbf x}'\to\mathbf e'_1,\ \ \hat{\mathbf y}'\to\mathbf e'_2`} x={1070} y={180} size={46} o={win(f, tE, tRule - 22)} />
       <TeX s={cdef} x={1080} y={260} size={60} o={fin(f, tC)} />
       <TeX s={rule} x={1080} y={110} size={68} o={fin(f, tRule)} />
-      <TeX s={String.raw`\mathbf e_1`} x={GX - 20} y={GY + CH / 2} size={48} ax={1} c={C.second} o={fin(f, tC + 30)} />
-      <TeX s={String.raw`\mathbf e_2`} x={GX - 20} y={GY + 1.5 * CH} size={48} ax={1} c={C.second} o={fin(f, tC + 30)} />
-      <TeX s={String.raw`\mathbf e'_1`} x={GX + CW / 2} y={GY - 30} size={48} ax={0.5} c={C.second} o={fin(f, tC + 30) * fout(f, tFlip)} />
-      <TeX s={String.raw`\mathbf e'_2`} x={GX + 1.5 * CW} y={GY - 30} size={48} ax={0.5} c={C.second} o={fin(f, tC + 30) * fout(f, tFlip)} />
+      {/* fix 1 Must 1: after the flip the rows are the new arrows e′1, e′2 and the columns the old e1, e2, so every cell still
+          reads C_ij = e_i · e′_j (row e′2, column e1 = −sin α = C12); the old labels go before the cells move, the new ones come after */}
+      <TeX s={String.raw`\mathbf e_1`} x={GX - 20} y={GY + CH / 2} size={48} ax={1} c={C.second} o={fin(f, tC + 30) * fout(f, tFlip + 8)} />
+      <TeX s={String.raw`\mathbf e_2`} x={GX - 20} y={GY + 1.5 * CH} size={48} ax={1} c={C.second} o={fin(f, tC + 30) * fout(f, tFlip + 8)} />
+      <TeX s={String.raw`\mathbf e'_1`} x={GX + CW / 2} y={GY - 30} size={48} ax={0.5} c={C.second} o={fin(f, tC + 30) * fout(f, tFlip + 8)} />
+      <TeX s={String.raw`\mathbf e'_2`} x={GX + 1.5 * CW} y={GY - 30} size={48} ax={0.5} c={C.second} o={fin(f, tC + 30) * fout(f, tFlip + 8)} />
+      <TeX s={String.raw`\mathbf e'_1`} x={GX - 20} y={GY + CH / 2} size={48} ax={1} c={C.second} o={fin(f, tFlip + 50)} />
+      <TeX s={String.raw`\mathbf e'_2`} x={GX - 20} y={GY + 1.5 * CH} size={48} ax={1} c={C.second} o={fin(f, tFlip + 50)} />
+      <TeX s={String.raw`\mathbf e_1`} x={GX + CW / 2} y={GY - 30} size={48} ax={0.5} c={C.second} o={fin(f, tFlip + 50)} />
+      <TeX s={String.raw`\mathbf e_2`} x={GX + 1.5 * CW} y={GY - 30} size={48} ax={0.5} c={C.second} o={fin(f, tFlip + 50)} />
       {[0, 1].map((i) => [0, 1].map((j) => { const p = cellAt(i, j);
         return <TeX key={`${i}${j}`} s={vals[i][j]} x={p[0]} y={p[1]} size={56} ax={0.5} o={cellO(i, j)} />; }))}
       {dots.map((d, i) => <React.Fragment key={i}>
@@ -829,7 +908,7 @@ const S20: React.FC = () => {
       <TeX s={String.raw`\mathbf u=(10,\ 0):\ \cos=0.6,\ \sin=0.8`} x={1080} y={390} size={46} c={C.local} o={win(f, tW, tPos - 18)} />
       <TeX s={String.raw`x'=10\times0.6+0\times0.8=6`} x={1080} y={470} size={50} o={win(f, tWx, tPos - 18)} />
       <TeX s={String.raw`y'=-10\times0.8+0\times0.6=-8`} x={1080} y={545} size={50} o={win(f, tWy, tPos - 18)} />
-      <TeX s={String.raw`x'=u_r,\ \ y'=u_\theta`} x={1080} y={625} size={50} c={C.first} o={win(f, tSame, tPos - 18)} />
+      <TeX s={String.raw`x'=u_r,\ \ y'=u_\theta`} x={1080} y={625} size={50} o={win(f, tSame, tPos - 18)} />
       <TeX s={String.raw`\text{the position }(3,\ 4)`} x={1080} y={390} size={46} c={C.local} o={win(f, tPos, tOne - 18)} />
       <CalcStack f={f} x={1160} y={440} size={50} maxLines={2} o={fout(f, tOne - 18)} rows={[
         { lhs: "x'", rhs: String.raw`=3\times0.6+4\times0.8`, at: tPx },
