@@ -105,92 +105,92 @@
    "scene": "s02_coordinates"
   },
   {
-   "time": "2:13",
-   "t_s": 133.125,
+   "time": "2:23",
+   "t_s": 143.475,
    "title": "Polar coordinates",
    "scene": "s04_polar"
   },
   {
-   "time": "3:53",
-   "t_s": 233.9,
+   "time": "4:37",
+   "t_s": 277.35,
    "title": "Maths angle, compass bearing and wind 'from'",
    "scene": "s06_bearings"
   },
   {
-   "time": "4:33",
-   "t_s": 273.75,
+   "time": "5:17",
+   "t_s": 317.2,
    "title": "Radians and arc length",
    "scene": "s07_radians"
   },
   {
-   "time": "5:37",
-   "t_s": 337.9,
+   "time": "6:31",
+   "t_s": 391.15,
    "title": "The unit vector r-hat",
    "scene": "s08_r_hat"
   },
   {
-   "time": "6:49",
-   "t_s": 409.15,
+   "time": "7:55",
+   "t_s": 475.175,
    "title": "Every step: theta-hat and the 90-degree turn rule",
    "scene": "s09_where_theta_grows"
   },
   {
-   "time": "12:41",
-   "t_s": 761.325,
+   "time": "14:23",
+   "t_s": 863.425,
    "title": "Polar unit vectors depend on place",
    "scene": "s12_arrows_depend"
   },
   {
-   "time": "13:21",
-   "t_s": 801.175,
+   "time": "15:03",
+   "t_s": 903.275,
    "title": "Every step: a wind's radial and tangential parts",
    "scene": "s13_components"
   },
   {
-   "time": "16:59",
-   "t_s": 1019.9,
+   "time": "18:50",
+   "t_s": 1130.7,
    "title": "Every step: turned axes and the rotation matrix",
    "scene": "s15_turn_axes"
   },
   {
-   "time": "27:01",
-   "t_s": 1621.0,
+   "time": "29:56",
+   "t_s": 1796.05,
    "title": "Hurricane Ian in polar coordinates",
    "scene": "s21_ian_polar"
   },
   {
-   "time": "29:44",
-   "t_s": 1784.925,
+   "time": "33:11",
+   "t_s": 1991.725,
    "title": "What 35 and 13 mean",
    "scene": "s23_what_numbers_mean"
   },
   {
-   "time": "31:43",
-   "t_s": 1903.625,
+   "time": "35:43",
+   "t_s": 2143.575,
    "title": "Every step: three ring points by hand",
    "scene": "s24_ring_points"
   },
   {
-   "time": "34:40",
-   "t_s": 2080.65,
+   "time": "38:55",
+   "t_s": 2335.05,
    "title": "Why hurricane scientists use polar coordinates",
    "scene": "s25_why_polar_storm"
   },
   {
-   "time": "36:18",
-   "t_s": 2178.225,
+   "time": "40:32",
+   "t_s": 2432.625,
    "title": "The inflow angle and four angles",
    "scene": "s26_inflow_angle"
   },
   {
-   "time": "37:31",
-   "t_s": 2251.625,
+   "time": "41:50",
+   "t_s": 2510.7,
    "title": "Recap",
    "scene": "s27_recap"
   },
   {
-   "time": "38:56",
-   "t_s": 2336.2,
+   "time": "43:15",
+   "t_s": 2595.275,
    "title": "End",
    "scene": "s28_end"
   }
@@ -198,30 +198,30 @@
  "maths_skips": [
   {
    "block_from": "s09_where_theta_grows",
-   "skip_line_s": 409.15,
-   "skip_to": "12:29",
-   "skip_to_s": 749.425,
+   "skip_line_s": 475.175,
+   "skip_to": "14:11",
+   "skip_to_s": 851.525,
    "keep_line": "If you skipped, here's what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat is r hat turned by ninety degrees."
   },
   {
    "block_from": "s13_components",
-   "skip_line_s": 801.175,
-   "skip_to": "16:48",
-   "skip_to_s": 1008.225,
+   "skip_line_s": 903.275,
+   "skip_to": "18:39",
+   "skip_to_s": 1119.025,
    "keep_line": "If you skipped, here's what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and each part is a dot product."
   },
   {
    "block_from": "s15_turn_axes",
-   "skip_line_s": 1019.9,
-   "skip_to": "26:47",
-   "skip_to_s": 1607.475,
+   "skip_line_s": 1130.7,
+   "skip_to": "29:42",
+   "skip_to_s": 1782.525,
    "keep_line": "If you skipped, here's what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the arrow itself, and polar parts are just axes turned by theta."
   },
   {
    "block_from": "s24_ring_points",
-   "skip_line_s": 1903.625,
-   "skip_to": "34:29",
-   "skip_to_s": 2069.2,
+   "skip_line_s": 2143.575,
+   "skip_to": "38:43",
+   "skip_to_s": 2323.6,
    "keep_line": "If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them."
   }
  ],
@@ -234,7 +234,7 @@
   "cf_ian_speed_18.png": "2158c2dff625784c022b410027a5848559cb8eee47b8989db49ff664f6361dcb"
  },
  "data_files": {
-  "cf.json": "d0477fd0bb6a82aac5d5a6bfab35439fe14b7e67e50e3f646a23eef65a4414c0",
+  "cf.json": "8b7a25b85b6ada639eea0b0886212a4eac42cbc9ec140be486ec3a20710c474a",
   "img/ian_speed_18.png": "2158c2dff625784c022b410027a5848559cb8eee47b8989db49ff664f6361dcb"
  },
  "checks": [
@@ -1280,6 +1280,309 @@
    ],
    "ref": true,
    "tol": 0,
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C1/C2/C4/C5/C6: 3x̂+4ŷ = (3, 4); 9+16 = 25; cos = 3/5 = 0.6, sin = 4/5 = 0.8; 2π = 6.283; 360/6.283 = 57.3; 0.2 rad = 11.5°; 10/1 = 50/5 = 10",
+   "value": [
+    3.0,
+    4.0,
+    25.0,
+    0.6,
+    0.8,
+    6.283185,
+    57.297469,
+    11.46,
+    10.0
+   ],
+   "ref": [
+    3.0,
+    4.0,
+    25.0,
+    0.6,
+    0.8,
+    6.283,
+    57.3,
+    11.46,
+    10.0
+   ],
+   "tol": [
+    0,
+    0,
+    0,
+    1e-12,
+    1e-12,
+    0.0005,
+    0.01,
+    0.01,
+    0
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C3: tan θ = 4/3 = 1.333; tan⁻¹(1.333) = 53.13°",
+   "value": [
+    1.333333,
+    53.130102
+   ],
+   "ref": [
+    1.333,
+    53.13
+   ],
+   "tol": [
+    0.0005,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C8/C15/C23: 0.6² + 0.8² = 0.36 + 0.64 = 1; 0.866² = 0.74996 ≈ 0.75; 0.866 × 0.5 = 0.433; √3/2 = 0.866",
+   "value": [
+    0.36,
+    0.64,
+    0.749956,
+    0.433,
+    0.866025,
+    0.866
+   ],
+   "ref": [
+    0.36,
+    0.64,
+    0.75,
+    0.433,
+    0.866,
+    0.866
+   ],
+   "tol": [
+    1e-12,
+    1e-12,
+    0.0001,
+    1e-12,
+    0.0005,
+    1e-12
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C9: 5 ± 0.1 = 5.1 / 4.9; C11: p(0,1) + q(−1,0) = (−q, p); C12: (−4)² + 3² = 16 + 9 = 25",
+   "value": [
+    5.1,
+    4.9,
+    16.0,
+    9.0
+   ],
+   "ref": [
+    5.1,
+    4.9,
+    16.0,
+    9.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C19/C20: 6 × 0.6 = 3.6, 6 × 0.8 = 4.8, (−8)(−0.8) = 6.4, (−8)(0.6) = −4.8; 36 + 64 = 100; |(10, 0)| = 10",
+   "value": [
+    3.6,
+    4.8,
+    6.4,
+    -4.8,
+    100.0,
+    10.0
+   ],
+   "ref": [
+    3.6,
+    4.8,
+    6.4,
+    -4.8,
+    100.0,
+    10.0
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C24/C26: 4.6² = 21.16, 1.96² = 3.84, sum 25.0; 0.866 × 3 = 2.598; −0.5 × 3 + 0.866 × 4 = −1.5 + 3.464 = 1.964",
+   "value": [
+    21.16,
+    3.8416,
+    25.0016,
+    2.598,
+    1.964
+   ],
+   "ref": [
+    21.16,
+    3.84,
+    25.0,
+    2.598,
+    1.964
+   ],
+   "tol": [
+    1e-09,
+    0.002,
+    0.003,
+    1e-09,
+    1e-09
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C27: cos(90° − 30°) = cos 60° = 0.5 = sin 30°; cos(90° + 30°) = cos 120° = −0.5 = −sin 30°",
+   "value": [
+    0.5,
+    -0.5
+   ],
+   "ref": [
+    0.5,
+    -0.5
+   ],
+   "tol": 1e-12,
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C29: x′₂ = 3 × (−0.5) + 4 × 0.866 = 1.964 ≈ 1.96",
+   "value": [
+    1.964
+   ],
+   "ref": [
+    1.964
+   ],
+   "tol": 1e-09,
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C32: 360/5 = 72 points; Σu_θ = 2505.9, Σu_r = −957.2 m/s; /72 = 34.8, −13.3",
+   "value": [
+    72.0,
+    2505.931808,
+    -957.223909,
+    34.804608,
+    -13.294777
+   ],
+   "ref": [
+    72.0,
+    2505.9,
+    -957.2,
+    34.8,
+    -13.3
+   ],
+   "tol": [
+    0,
+    0.05,
+    0.05,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C33: 135 kt × 1.852 = 250 km/h; ÷ 3.6 = 69 m/s; strongest speed on the 25-km ring 48.9 m/s",
+   "value": [
+    250.02,
+    69.444444,
+    48.882204
+   ],
+   "ref": [
+    250.0,
+    69.4,
+    48.9
+   ],
+   "tol": [
+    0.1,
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C34-C37: 35² + 13² = 1225 + 169 = 1394, √ = 37.3; 25000/13 = 1923 s, /60 = 32; 2 × 3.1416 × 25 = 157.1 km; 157000/35 = 4486 ≈ 4490 s, /60 = 75",
+   "value": [
+    1225.0,
+    169.0,
+    37.336309,
+    1923.076923,
+    32.05,
+    157.08,
+    4485.714286,
+    74.833333
+   ],
+   "ref": [
+    1225.0,
+    169.0,
+    37.3,
+    1923.0,
+    32.05,
+    157.08,
+    4486.0,
+    74.83
+   ],
+   "tol": [
+    0,
+    0,
+    0.05,
+    1,
+    0.01,
+    0.01,
+    1,
+    0.01
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C38-C40: (−16.9)(0) + (−37.4)(1) = −37.4; −(−16.9)(1) = 16.9; cos 135° = −1/√2 = −0.707; −(−10.1)(0.707) = 7.14",
+   "value": [
+    -37.4,
+    16.9,
+    -0.707107,
+    -0.707107,
+    7.1407
+   ],
+   "ref": [
+    -37.4,
+    16.9,
+    -0.7071,
+    -0.7071,
+    7.14
+   ],
+   "tol": [
+    1e-12,
+    1e-12,
+    0.0001,
+    0.0001,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF28",
+   "name": "C41/C43: 72 − 14 = 58 points in; tan⁻¹(13.3/34.8 = 0.382) = 20.9°",
+   "value": [
+    58.0,
+    0.382184,
+    20.906857
+   ],
+   "ref": [
+    58.0,
+    0.382,
+    20.9
+   ],
+   "tol": [
+    0,
+    0.0005,
+    0.05
+   ],
    "pass": true
   },
   {

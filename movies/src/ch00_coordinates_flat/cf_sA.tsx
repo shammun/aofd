@@ -14,7 +14,7 @@ import { SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow, FlowParticles } from "../house/kit/wind";
 import {
   AT, ArcHead, Arrow, AxesEN, BAL, BDot, Balloon, D2R, GeoImg, GeoMap, Ground, IAN, IAN_SRC, IMGS, K, KmTicks, Lbl, PL, PO, PU, SE, SS, Scene, SpeedBar,
-  SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS,
+  SpeedBarCompact, Station, Svg, arcD, boxAt, clamp, fin, fout, kmPx, linesPath, mix, poly, pp, prog, rotS, win,
 } from "./cf_lib";
 import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./cf_eq";
 
@@ -22,6 +22,9 @@ import { EQ_S02, EQ_S03, EQ_S04, EQ_S05, EQ_S06, EQ_S07, cutAt } from "./cf_eq";
 const CHECK_A: [string, number, number, number][] = [
   ["r", PL.r, 5, 1e-9], ["theta", PL.th, 53.13, 0.005], ["theta said", Math.round(PL.th), 53, 0], ["bearing", Math.round(90 - PL.th), 37, 0],
   ["ian vt", IAN.vt, 34.8, 0.05], ["ian vr", IAN.vr, -13.3, 0.05],
+  // fix 1c (calculation audit C1-C6)
+  ["9+16", 3 ** 2 + 4 ** 2, 25, 0], ["tan", 4 / 3, 1.333, 5e-4], ["atan", Math.atan2(4, 3) / D2R, 53.13, 0.005], ["cos 3/5", 3 / 5, 0.6, 1e-12], ["sin 4/5", 4 / 5, 0.8, 1e-12],
+  ["2pi", 2 * Math.PI, 6.283, 5e-4], ["360/6.283", 360 / 6.283, 57.3, 0.01], ["0.2 rad", 0.2 * 57.3, 11.5, 0.05], ["ratio", 50 / 5, 10, 0],
 ];
 CHECK_A.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
 
@@ -221,6 +224,7 @@ const S02: React.FC = () => {
 const S03: React.FC = () => {
   const f = useCurrentFrame(), k = K("s03_cartesian_arrows");
   const t1 = SS(k, 0), tSum = SS(k, 2), tSame = AT(k, 4, "the same way everywhere"), tMove = SS(k, 5), tIns = AT(k, 8, "hurricane"), tRing = AT(k, 8, "rings");
+  const tX3 = AT(k, 2, "Three steps"), tY4 = AT(k, 2, "four steps"), tLand = AT(k, 2, "lands exactly");
   // fix 1 Should 10: every pair inside the panel (x̂ tip ≤ 6.3 km), clear of the axes and their labels
   const places: [number, number][] = [[3, 4], [5.3, 1.5], [1.6, 4.6], [1.2, 2.2], [4.6, 4.4]];
   const hop = clamp((f - tMove) / ((SE(k, 5) - tMove) / 4), 0, 4);
@@ -250,13 +254,23 @@ const S03: React.FC = () => {
         <BDot p={pp(at[0], at[1])} o={fin(f, tMove - 12)} />
         <Keyword f={f} text="unit vectors" at={[1100, 160]} appear={0} out={tSum - 18} />
         <Keyword f={f} text="same everywhere" at={[1100, 300]} appear={tSame} out={tIns - 18} />
-        <CurvedLink f={f} from={[1160, 215]} to={pp(1.5, 0.15)} ctl={[400, 230]} start={tSum + 10} end={tSame - 10} />
-        <CurvedLink f={f} from={[1390, 215]} to={pp(3.15, 2)} start={tSum + 16} end={tSame - 10} bend={40} />
+        <CurvedLink f={f} from={[1160, 215]} to={pp(1.5, 0.15)} ctl={[400, 230]} start={tSum + 10} end={tX3 - 10} />
+        <CurvedLink f={f} from={[1390, 215]} to={pp(3.15, 2)} start={tSum + 16} end={tX3 - 10} bend={40} />
+        {/* fix 1c C1: three x̂ steps tip to tail to 3 km, then four ŷ steps up to the balloon, each group on its words */}
+        <g opacity={fout(f, tMove - 12)}>
+          {[0, 1, 2].map((i) => <Arrow key={`sx${i}`} p={pp(i, 0)} q={pp(i + 1, 0)} color={C.gold} w={7} head={24} o={fin(f, tX3 + 10 * i)} />)}
+          {[0, 1, 2, 3].map((j) => <Arrow key={`sy${j}`} p={pp(3, j)} q={pp(3, j + 1)} color={C.gold} w={7} head={24} o={fin(f, tY4 + 10 * j)} />)}
+        </g>
         <Keyword f={f} text="not in squares" at={[1100, 300]} appear={tIns} />
       </Svg>
       <TeX s={String.raw`\hat{\mathbf x}`} x={pp(1, 0)[0] + 10} y={PO[1] - 40} size={60} c={C.second} o={fin(f, t1 + 10)} />
       <TeX s={String.raw`\hat{\mathbf y}`} x={PO[0] + 26} y={pp(0, 0.55)[1]} size={60} c={C.second} o={fin(f, t1 + 10)} />
       <TeX s={EQ_S03} x={1100} y={160} size={84} o={fin(f, tSum) * fout(f, tSame - 18)} />
+      <CalcStack f={f} x={1240} y={260} size={50} rows={[
+        { lhs: String.raw`3\,\hat{\mathbf x}`, rhs: String.raw`=3\,(1,\ 0)=(3,\ 0)`, at: tX3, out: tSame - 18 },
+        { lhs: String.raw`4\,\hat{\mathbf y}`, rhs: String.raw`=4\,(0,\ 1)=(0,\ 4)`, at: tY4, out: tSame - 18 },
+        { lhs: String.raw`(3,\ 0)+(0,\ 4)`, rhs: String.raw`=(3,\ 4)`, at: tLand, out: tSame - 18 },
+      ]} />
       <GeoMap id="s03ian" B={MI} o={fin(f, tIns)} frame={0.8}>
         {(P) => <>
           <IanBody P={P} f={f} z={1} parts={false} />
@@ -300,13 +314,17 @@ const S04: React.FC = () => {
         </g>
         <AxesEN f={f} at={-40} />
         <KmTicks o={1} />
-        <Band p={PO} q={pp(3, 0)} color={C.second} o={0.55 * pulse(f, tPy, 40)} />
-        <Band p={pp(3, 0)} q={BAL} color={C.second} o={0.55 * pulse(f, tPy, 40)} />
+        <Band p={PO} q={pp(3, 0)} color={C.second} o={0.55 * Math.max(pulse(f, tPy, 40), pulse(f, AT(k, 5, "east side"), 40))} />
+        <Band p={pp(3, 0)} q={BAL} color={C.second} o={0.55 * Math.max(pulse(f, tPy, 40), pulse(f, AT(k, 5, "north side"), 40))} />
         <Dash p={PO} q={pp(3, 0)} c={C.second} w={5} /><Dash p={pp(3, 0)} q={BAL} c={C.second} w={5} />
         <line x1={PO[0]} y1={PO[1]} x2={mix(PO[0], BAL[0], prog(f, tR - 6, tR + 18))} y2={mix(PO[1], BAL[1], prog(f, tR - 6, tR + 18))} stroke={C.first} strokeWidth={10} strokeLinecap="round" opacity={fin(f, tR - 6)} />
         <Station />
         <Balloon p={BAL} />
         <Lbl x={mid[0] - 34} y={mid[1] - 20} t="r" c={C.first} s={T.calc} a="end" o={fin(f, tR)} />
+        {/* fix 1c C2: the legs carry their lengths; a right-angle mark at the foot */}
+        <Lbl x={pp(1.5, 0)[0]} y={PO[1] + 92} t="3 km" c={C.gold} s={T.floor} a="middle" o={fin(f, AT(k, 2, "Three squared"))} />
+        <Lbl x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} t="4 km" c={C.gold} s={T.floor} o={fin(f, AT(k, 2, "four squared is"))} />
+        <RightTick at={pp(3, 0)} u1={[-1, 0]} u2={[0, -1]} c={C.gold} o={fin(f, tPy)} />
         <path d={arcD(PO, 110, 0, th * prog(f, tTh, tTh + 24))} fill="none" stroke={C.local} strokeWidth={6} opacity={fin(f, tTh)} />
         <Lbl x={PO[0] + 140} y={PO[1] - 56} t="θ" c={C.local} s={T.calc} o={fin(f, tTh + 10)} />
         <path d={arcD(PO, 190, 8, 70)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
@@ -316,12 +334,14 @@ const S04: React.FC = () => {
         <Keyword f={f} text="polar coordinates" at={[1100, 790]} appear={tPol} />
       </Svg>
       <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={fin(f, tPy)} />
-      <CalcStack f={f} x={1240} y={150} size={60} rows={[
+      <CalcStack f={f} x={1240} y={150} size={54} maxLines={2} rows={[
         { lhs: "r", rhs: String.raw`=\sqrt{3^2+4^2}`, at: tPy },
+        { rhs: String.raw`=\sqrt{9+16}`, at: AT(k, 2, "is nine"), cont: true },
         { rhs: String.raw`=\sqrt{25}`, at: t25, cont: true },
         { rhs: String.raw`=5\ \mathrm{km}`, at: t5, cont: true },
-        { lhs: String.raw`\tan\theta`, rhs: String.raw`=4/3`, at: tTan },
-        { lhs: String.raw`\theta`, rhs: String.raw`\approx 53^{\circ}`, at: t53, cont: true },
+        { lhs: String.raw`\tan\theta`, rhs: String.raw`=\dfrac{\text{north side}}{\text{east side}}`, at: tTan, h: 110 },
+        { rhs: String.raw`=\dfrac{4}{3}\approx1.333`, at: AT(k, 5, "four over three"), cont: true, h: 100 },
+        { lhs: String.raw`\theta`, rhs: String.raw`=\tan^{-1}(1.333)\approx53.13^\circ\approx53^{\circ}`, at: t53 },
         { lhs: String.raw`(r,\ \theta)`, rhs: String.raw`=(5\ \mathrm{km},\ 53^{\circ})`, at: tPair },
       ]} />
     </Scene>
@@ -331,7 +351,7 @@ const S04: React.FC = () => {
 // ================================================================ s05 back to x, y (kept)
 const S05: React.FC = () => {
   const f = useCurrentFrame(), k = K("s05_polar_back");
-  const tTri = SS(k, 2), tSides = SS(k, 4), tC = SS(k, 6), t4 = SS(k, 7), tEq = SS(k, 8);
+  const tTri = SS(k, 2), tSides = SS(k, 4), tC = SS(k, 6), t4 = SS(k, 7), tEq = SS(k, 8), tX5 = AT(k, 6, "So five times");
   return (
     <Scene>
       <Svg>
@@ -349,16 +369,24 @@ const S05: React.FC = () => {
         </g>
         <Station />
         <Balloon p={BAL} />
-        <Keyword f={f} text="back to x and y" at={[1100, 640]} appear={0} out={tEq - 18} />
-        <CurvedLink f={f} from={[1140, 335]} to={pp(1.5, 0.15)} ctl={[900, 700]} start={tC + 10} end={t4 - 4} />
+        <Keyword f={f} text="back to x and y" at={[1100, 640]} appear={0} out={tC - 18} />
+        <CurvedLink f={f} from={[1140, 335]} to={pp(1.5, 0.15)} ctl={[900, 700]} start={tX5 + 10} end={t4 - 4} />
+        {/* fix 1c C4: the legs' lengths beside r cos θ and r sin θ while the check runs */}
+        <Lbl x={pp(1.5, 0)[0]} y={PO[1] + 118} t="= 3 km" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 6, "three fifths"), tEq - 10)} />
+        <Lbl x={pp(3, 0)[0] + 24} y={pp(3, 2)[1] + 62} t="= 4 km" c={C.gold} s={T.floor} o={win(f, AT(k, 6, "four fifths"), tEq - 10)} />
         <CurvedLink f={f} from={[1250, 420]} to={pp(3.15, 3.2)} start={t4 + 6} end={tEq - 10} bend={20} />
       </Svg>
       <TeX s={String.raw`r\cos\theta`} x={pp(1.5, 0)[0]} y={PO[1] + 60} size={60} ax={0.5} c={C.second} o={fin(f, tSides)} />
       <TeX s={String.raw`r\sin\theta`} x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} size={60} c={C.second} o={fin(f, AT(k, 4, "the side going north"))} />
-      <CalcStack f={f} x={1440} y={290} size={60} rows={[
-        { lhs: String.raw`5\cos53^\circ`, rhs: String.raw`=5\times0.6=3`, at: tC },
-        { lhs: String.raw`5\sin53^\circ`, rhs: String.raw`=5\times0.8=4`, at: t4 },
+      <CalcStack f={f} x={1400} y={250} size={56} maxLines={2} rows={[
+        { lhs: String.raw`\cos\theta`, rhs: String.raw`=\dfrac{\text{east side}}{r}`, at: tC, h: 110 },
+        { rhs: String.raw`=\tfrac{3}{5}=0.6`, at: AT(k, 6, "three fifths"), cont: true },
+        { lhs: String.raw`\sin\theta`, rhs: String.raw`=\dfrac{\text{north side}}{r}`, at: AT(k, 6, "and sine theta"), h: 110 },
+        { rhs: String.raw`=\tfrac{4}{5}=0.8`, at: AT(k, 6, "four fifths"), cont: true },
+        { lhs: String.raw`x=r\cos\theta`, rhs: String.raw`=5\times0.6=3`, at: tX5 },
+        { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8=4`, at: t4 },
       ]} />
+      <TeX s={String.raw`(\theta\approx53.13^\circ)`} x={1100} y={190} size={46} c={C.local} o={win(f, tC, tEq - 10)} />
       <TeX s={EQ_S05} x={1100} y={640} size={60} o={fin(f, tEq)} />
     </Scene>
   );
@@ -440,7 +468,9 @@ const S07: React.FC = () => {
           <line x1={O2[0]} y1={O2[1]} x2={O2[0] + 780 * Math.cos(a1 * D2R)} y2={O2[1] - 780 * Math.sin(a1 * D2R)} stroke={C.local} strokeWidth={3} />
           <path d={arcD(O2, 70, 0, 80)} fill="none" stroke={C.first} strokeWidth={3} opacity={0.6} />
           <path d={arcD(O2, 700, 0, 70)} fill="none" stroke={C.first} strokeWidth={3} opacity={0.6} />
-          <path d={arcD(O2, 70, a0, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, t1 - 20)} />
+          <path d={arcD(O2, 70, a0, a1)} fill="none" stroke={C.second} strokeWidth={20} opacity={fin(f, t1 - 20)} />
+          <circle cx={O2[0] + 70 * Math.cos(((a0 + a1) / 2) * D2R)} cy={O2[1] - 70 * Math.sin(((a0 + a1) / 2) * D2R)} r={22} fill="none" stroke={C.gold} strokeWidth={3} opacity={fin(f, t1 - 20)} />
+          <Lbl x={O2[0] + 92} y={O2[1] - 92} t="0.2 rad" c={C.gold} s={T.floor} a="end" o={fin(f, AT(k, 7, "zero point two radians"))} />
           <path d={arcD(O2, 700, a0, a1)} fill="none" stroke={C.second} strokeWidth={12} opacity={fin(f, t10)} />
           <Lbl x={O2[0] + 120} y={O2[1] - 10} t="5 km" c={C.first} s={T.floor} o={fin(f, tEasy)} />
           <Lbl x={O2[0] + 460} y={O2[1] - 60} t="50 km" c={C.first} s={T.floor} o={fin(f, tEasy + 20)} />
@@ -454,12 +484,17 @@ const S07: React.FC = () => {
       </Svg>
       <TeX s={EQ_S07} x={1100} y={200} size={72} o={fin(f, tDiv + 40)} />
       <TeX s={String.raw`\theta=\dfrac{s}{r}`} x={1100} y={320} size={60} c={C.local} o={fin(f, tDiv) * fout(f, tEasy - 18)} />
-      <CalcStack f={f} x={1300} y={520} size={60} rows={[
-        { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\tfrac{360^\circ}{2\pi}\approx57^\circ`, at: t57, out: tEasy - 18, h: 100 },
+      <CalcStack f={f} x={1300} y={500} size={56} rows={[
+        { lhs: String.raw`2\pi\ \mathrm{rad}`, rhs: String.raw`=360^\circ,\quad 2\pi\approx6.283`, at: t57, out: tEasy - 18 },
+        { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\tfrac{360^\circ}{2\pi}`, at: AT(k, 5, "three hundred and sixty"), out: tEasy - 18, h: 100 },
+        { rhs: String.raw`=\tfrac{360^\circ}{6.283}\approx57.3^\circ`, at: AT(k, 5, "about fifty seven"), out: tEasy - 18, cont: true, h: 100 },
       ]} />
-      <CalcStack f={f} x={1300} y={420} size={60} rows={[
+      {/* fix 1c C6: the turn in degrees, then the two rings, then the ratio */}
+      <CalcStack f={f} x={1300} y={300} size={56} maxLines={3} rows={[
+        { lhs: String.raw`0.2\ \mathrm{rad}`, rhs: String.raw`\approx0.2\times57.3^\circ\approx11.5^\circ`, at: AT(k, 7, "eleven and a half") },
         { lhs: String.raw`5\ \mathrm{km}\times0.2`, rhs: String.raw`=1\ \mathrm{km}`, at: t1 },
         { lhs: String.raw`50\ \mathrm{km}\times0.2`, rhs: String.raw`=10\ \mathrm{km}`, at: t10 + 10 },
+        { lhs: String.raw`\tfrac{10\ \mathrm{km}}{1\ \mathrm{km}}`, rhs: String.raw`=\tfrac{50\ \mathrm{km}}{5\ \mathrm{km}}=10`, at: tSame, h: 100 },
       ]} />
     </Scene>
   );

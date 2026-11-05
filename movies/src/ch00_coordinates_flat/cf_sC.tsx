@@ -28,6 +28,14 @@ const CHECK_C: [string, number, number, number][] = [
   ["p135 ur", P135.ur, -24.3, 0.05], ["p135 ut", P135.ut, 38.6, 0.06], ["npos", 72 - IAN.npos, 58, 0],
   ["7.14", 10.1 * 0.707, 7.14, 0.005], ["31.46", 44.5 * 0.707, 31.46, 0.005], ["7.14-31.46", 7.14 - 31.46, -24.32, 1e-9], ["7.14+31.46", 7.14 + 31.46, 38.6, 1e-9],
   ["outflow max", Math.max(...(IAN.ring.vr as number[])), 14, 0.5],
+  // fix 1c (calculation audit)
+  ["sum vt", IAN.sum_vt, 2505.9, 0.05], ["sum vr", IAN.sum_vr, -957.2, 0.05], ["vt/72", IAN.sum_vt / 72, 34.8, 0.05], ["vr/72", IAN.sum_vr / 72, -13.3, 0.05],
+  ["72 pts", 360 / 5, 72, 0], ["kt", 135 * 1.85, 250, 0.3], ["250/3.6", 250 / 3.6, 69, 0.5], ["ring max", IAN.ring_vmax, 49, 0.2],
+  ["35^2", 35 * 35, 1225, 0], ["13^2", 13 * 13, 169, 0], ["sqrt1394", Math.sqrt(1394), 37.3, 0.05], ["25000/13", 25000 / 13, 1923, 0.5], ["1923/60", 1923 / 60, 32, 0.1],
+  ["2pi25", 2 * 3.1416 * 25, 157, 0.1], ["157000/35", 157000 / 35, 4490, 5], ["4490/60", 4490 / 60, 75, 0.2], ["35/13", 35 / 13, 2.7, 0.01],
+  ["cos135", Math.cos(135 * D2R), -0.707, 5e-4], ["1/sqrt2", 1 / Math.SQRT2, 0.707, 5e-4], ["13.3/34.8", 13.3 / 34.8, 0.382, 5e-4], ["atan .382", Math.atan(0.382) / D2R, 20.9, 0.05],
+  ["vt min", Math.min(...(IAN.ring.vt as number[])), 17, 0.2], ["vt max", Math.max(...(IAN.ring.vt as number[])), 47, 0.2], ["vr min", Math.min(...(IAN.ring.vr as number[])), -40, 0.2],
+  ["v 0", IAN.ring.v[0], 38, 0.1], ["v 180", IAN.ring.v[36], -46, 0.5], ["u 270", IAN.ring.u[54], 25, 0.5], ["58", 72 - 14, 58, 0],
 ];
 /** the on-map component labels of s24 (fix 1 Must 2 / Should 3): the same strings as the column, checked against the data */
 const LAB24: Record<number, { ur: string; ut: string; urv: number; utv: number }> = {
@@ -112,7 +120,13 @@ const S22: React.FC = () => {
   const ringDraw = prog(f, tRing, tRing + 30);
   const Rpx = kmPx(ZOOM, 25);
   const dots = Math.round(72 * prog(f, t72, t72 + 30));
-  const blk = fout(f, tSm - 22, 12);
+  const blk = fout(f, tBest - 10, 12);
+  const tAddT = AT(k, 5, "add up"), tDivT = AT(k, 5, "Divided by"), t35c = AT(k, 5, "or about thirty five"), tAddR = AT(k, 9, "add up"), tDivR = AT(k, 9, "Divided by"),
+    t13c = AT(k, 9, "or about minus thirteen"), t69 = AT(k, 13, "sixty nine"), t49 = AT(k, 14, "forty nine"), tSmW = AT(k, 14, "The model analysis");
+  // the running sums (fix 1c C32): the 72 values added in turn while their dots light
+  const nT = Math.min(72, Math.round(72 * prog(f, tAddT, tDivT - 8))), nR = Math.min(72, Math.round(72 * prog(f, tAddR, tDivR - 8)));
+  const sumT = (RING.vt as number[]).slice(0, nT).reduce((a2, b2) => a2 + b2, 0), sumR = (RING.vr as number[]).slice(0, nR).reduce((a2, b2) => a2 + b2, 0);
+  const runI = f < tVr ? nT : nR, runOn = win(f, tAddT, tDivT, 6) + win(f, tAddR, tDivR, 6);
   return (
     <Scene>
       <GeoMap id="s22m" B={ZOOM} fade={1}>
@@ -121,6 +135,7 @@ const S22: React.FC = () => {
           <circle cx={cE[0]} cy={cE[1]} r={10} fill={C.gold} stroke={C.bg} strokeWidth={3} />
           <path d={ringPath(Pm)} fill="none" stroke={C.first} strokeWidth={6} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ringDraw} />
           {Array.from({ length: dots }, (_, i) => { const q = Pm(RING.lat[i], RING.lon[i]); return <circle key={i} cx={q[0]} cy={q[1]} r={5} fill={C.key} opacity={0.85} />; })}
+          {runOn > 0 ? Array.from({ length: runI }, (_, i) => { const q = Pm(RING.lat[i], RING.lon[i]); return <circle key={`g${i}`} cx={q[0]} cy={q[1]} r={7} fill={C.gold} opacity={runOn} />; }) : null}
         </>}
       </GeoMap>
       <Svg>
@@ -130,31 +145,38 @@ const S22: React.FC = () => {
           <AnimatedWindArrow from={one.p0} to={one.rp} speed={Math.abs(RING.vr[i0])} f={f} c={C.neg} px={9} head={30} />
           <g opacity={fin(f, tT)}><AnimatedWindArrow from={one.p0} to={one.tp} speed={RING.vt[i0]} f={f} c={C.first} px={9} head={30} /></g>
         </g>
-        <g opacity={fin(f, tVt)}>
+        <g opacity={fin(f, tDivT)}>
           <AnimatedWindArrow from={mean.p0} to={mean.tp} speed={IAN.vt} f={f} c={C.first} px={10} head={36} />
-          <g opacity={fin(f, tVr)}><AnimatedWindArrow from={mean.p0} to={mean.rp} speed={Math.abs(IAN.vr)} f={f} c={C.neg} px={10} head={36} /></g>
+          <g opacity={fin(f, tDivR)}><AnimatedWindArrow from={mean.p0} to={mean.rp} speed={Math.abs(IAN.vr)} f={f} c={C.neg} px={10} head={36} /></g>
         </g>
         <path d={arcD(cE, Rpx * 1.5, 200, 290)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
         <ArcHead c={cE} r={Rpx * 1.5} a={290} dir={1} col={C.gold} o={fin(f, tAnti)} />
         <SpeedBar x={CX} y={110} w={300} />
         <Keyword f={f} text="two polar parts" at={[CX, 260]} appear={0} out={tAvg - 18} />
-        <SideCallout f={f} lines="≈ 35 m/s" at={[CX + 20, 340]} appear={tVt} target={[(mean.p0[0] + mean.tp[0]) / 2, (mean.p0[1] + mean.tp[1]) / 2 - 8]} c={C.first} out={tSm - 22} bend={-20} />
+        <SideCallout f={f} lines="≈ 35 m/s" at={[CX + 20, 340]} appear={t35c} target={[(mean.p0[0] + mean.tp[0]) / 2, (mean.p0[1] + mean.tp[1]) / 2 - 8]} c={C.first} out={tSm - 22} bend={-20} />
         <Lbl x={CX} y={520} t="anticlockwise," c={C.key} s={T.floor} o={fin(f, tAnti) * blk} />
-        <Lbl x={CX} y={572} t="seen from above, NH" c={C.key} s={T.floor} o={fin(f, tAnti) * blk} />
-        <SideCallout f={f} lines="−13 m/s: in" at={[CX + 20, 650]} appear={tVr} target={[(mean.p0[0] + mean.rp[0]) / 2 - 4, (mean.p0[1] + mean.rp[1]) / 2 + 8]} c={C.neg}
+        <Lbl x={CX} y={584} t="seen from above, NH" c={C.key} s={T.floor} o={fin(f, tAnti) * blk} />
+        <SideCallout f={f} lines="−13 m/s: in" at={[CX + 20, 650]} appear={t13c} target={[(mean.p0[0] + mean.rp[0]) / 2 - 4, (mean.p0[1] + mean.rp[1]) / 2 + 8]} c={C.neg}
           ctl={[mean.p0[0] - 40, mean.p0[1] + 170]} />
         <Lbl x={CX} y={720} t="towards the eye" c={C.neg} s={T.floor} o={fin(f, tIn)} />
         <Lbl x={CX} y={790} t="official estimate: 135 kt" c={C.local} s={T.floor} o={fin(f, tBest)} />
-        <Keyword f={f} text="analysis smooths the peak" at={[CX, 420]} s={T.floor} appear={tSm} />
+        <Keyword f={f} text="analysis smooths the peak" at={[CX, 420]} s={T.floor} appear={tSmW} />
+        <Lbl x={CX} y={470} t={`sum so far: ${sumT.toFixed(1)} m/s (${nT} of 72)`} c={C.gold} s={T.floor} o={win(f, tAddT, tDivT - 20)} />
+        <Lbl x={CX + 20} y={660} t={`sum so far: ${sumR.toFixed(1)} m/s (${nR} of 72)`} c={C.gold} s={T.floor} o={win(f, tAddR, tDivR - 20)} />
       </Svg>
       {/* fix 1 Must 2: the tags sit beside the middle of their own arrow, on the side away from the other arrow and the coast */}
       <TeX s={String.raw`\boldsymbol{u_r}`} x={(one.p0[0] + one.rp[0]) / 2 - 42} y={(one.p0[1] + one.rp[1]) / 2 + 42} size={56} ax={0.5} c={C.neg} halo haloW={0.11} o={win(f, tR, tVt - 12)} />
       <TeX s={String.raw`\boldsymbol{u_\theta}`} x={(one.p0[0] + one.tp[0]) / 2 + 46} y={(one.p0[1] + one.tp[1]) / 2 + 46} size={56} ax={0.5} c={C.first} halo haloW={0.11} o={win(f, tT, tVt - 12)} />
-      <TeX s={EQ_S22} x={CX} y={300} size={44} o={win(f, tAvg, tVt - 16)} />
+      <TeX s={EQ_S22} x={CX} y={300} size={44} o={win(f, tAvg, t35c - 16)} />
+      <TeX s={String.raw`360^\circ\div5^\circ=72\ \text{points}`} x={CX} y={380} size={46} o={win(f, t72, tDivT - 10)} />
+      <TeX s={String.raw`\overline{u_\theta}=\dfrac{2505.9\ \mathrm{m/s}}{72}\approx34.8\approx35\ \mathrm{m/s}`} x={CX} y={470} size={44} o={win(f, tDivT, tConv + 20)} />
+      <TeX s={String.raw`\overline{u_r}=\dfrac{-957.2\ \mathrm{m/s}}{72}\approx-13.3\approx-13\ \mathrm{m/s}`} x={CX} y={660} size={44} o={win(f, tDivR, t13c - 8)} />
+      <TeX s={String.raw`250\ \mathrm{km/h}\div3.6\approx69\ \mathrm{m/s}`} x={CX} y={520} size={46} c={C.local} o={fin(f, t69)} />
+      <TeX s={String.raw`\text{strongest on our ring}\approx49\ \mathrm{m/s}`} x={CX} y={590} size={46} o={fin(f, t49)} />
       <TeX s={String.raw`35\times3.6=126\ \mathrm{km/h}`} x={CX} y={420} size={52} o={win(f, tKmh, tSm - 22)} />
       {/* fix 1 Must 5: a dimensionally right conversion line, ≥ 44 px */}
       <TeX s={String.raw`1\ \mathrm{m/s}=3600\ \mathrm{m/h}=3.6\ \mathrm{km/h}`} x={CX} y={420} size={48} c={C.muted} o={win(f, tConv + 40, tKmh - 18)} />
-      <TeX s={String.raw`135\times1.85\approx250\ \mathrm{km/h}`} x={CX} y={845} size={44} c={C.local} o={fin(f, tKt)} />
+      <TeX s={String.raw`135\ \mathrm{kt}\times1.85\approx250\ \mathrm{km/h}`} x={CX} y={845} size={44} c={C.local} o={fin(f, tKt)} />
       <SourceBelow text={IAN_SRC} pic={MB} w={1100} name="s22 src" />
       {void [tReal]}
     </Scene>
@@ -188,6 +210,11 @@ const S23: React.FC = () => {
       <Svg>
         <circle cx={cE[0]} cy={cE[1]} r={R} fill="none" stroke={C.first} strokeWidth={6 + 6 * lapO * pulse(f, tLap, 40)} />
         <circle cx={cE[0]} cy={cE[1]} r={11} fill={C.gold} stroke={C.bg} strokeWidth={3} />
+        {/* fix 1c C36: one lap, swept round the ring */}
+        <g opacity={win(f, AT(k, 10, "one lap"), tBoth)}>
+          <path d={arcD(cE, R, a0, a0 + 359.9 * prog(f, AT(k, 10, "one lap"), AT(k, 10, "one lap") + 60))} fill="none" stroke={C.gold} strokeWidth={9} />
+          <Lbl x={cE[0]} y={cE[1] - R - 34} t="157 km" c={C.gold} s={T.floor} a="middle" o={fin(f, AT(k, 10, "a hundred and fifty seven"))} />
+        </g>
         <g opacity={fin(f, t35) * fout(f, tImg - 12)}>
           <Arrow p={pr} q={tip} color={C.first} o={fin(f, AT(k, 4, "an arrow"))} w={6} head={30} dash="14 8" />
           <Arrow p={pr} q={[pr[0] + et[0] * 35 * s, pr[1] + et[1] * 35 * s]} color={C.first} />
@@ -217,15 +244,22 @@ const S23: React.FC = () => {
         <Keyword f={f} text="more: How tropical cyclones form" at={[1080, 800]} s={T.floor} appear={tMore} />
         <ClockText x={1110} y={720} t={`${Math.round(minNow)} min`} min={minNow} o={win(f, tT, tRat - 18)} />
       </Svg>
-      <CalcStack f={f} x={1260} y={190} size={52} maxLines={3} rows={[
+      {/* fix 1c C34-C37: squares, unit changes, divisions by 60 and why a speed ratio is a distance ratio, one move per line */}
+      <CalcStack f={f} x={1260} y={190} size={52} maxLines={2} rows={[
         { lhs: cutAt(EQ_S23, String.raw`\approx`)[0], rhs: String.raw`\phantom{\approx}`, at: tRoot, h: 90 },
+        { rhs: String.raw`=\sqrt{1225+169}`, at: AT(k, 4, "twelve hundred"), cont: true },
+        { rhs: String.raw`=\sqrt{1394}\approx37.3`, at: AT(k, 4, "thirteen hundred"), cont: true },
         { rhs: String.raw`\approx${cutAt(EQ_S23, String.raw`\approx`)[1]}`, at: t37, cont: true },
         { lhs: String.raw`13\times3.6`, rhs: String.raw`\approx47\ \mathrm{km/h}`, at: AT(k, 6, "forty seven") },
-        { lhs: "t", rhs: String.raw`=\frac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}\approx1900\ \mathrm{s}`, at: AT(k, 9, "nineteen hundred"), h: 120 },
-        { rhs: String.raw`\approx32\ \mathrm{min}`, at: AT(k, 9, "thirty two minutes"), cont: true },
-        { lhs: String.raw`2\pi\times25\ \mathrm{km}`, rhs: String.raw`\approx157\ \mathrm{km}`, at: AT(k, 10, "a hundred and fifty seven") },
-        { lhs: String.raw`\frac{157\,000\ \mathrm{m}}{35\ \mathrm{m/s}}`, rhs: String.raw`\approx75\ \mathrm{min}`, at: AT(k, 10, "seventy five minutes"), cont: true, h: 120 },
-        { lhs: String.raw`\frac{35}{13}`, rhs: String.raw`\approx2.7`, at: AT(k, 12, "two point seven"), h: 110 },
+        { lhs: String.raw`25\ \mathrm{km}`, rhs: String.raw`=25\,000\ \mathrm{m}`, at: AT(k, 9, "twenty five thousand metres") },
+        { lhs: "t", rhs: String.raw`=\frac{25\,000\ \mathrm{m}}{13\ \mathrm{m/s}}\approx1923\ \mathrm{s}`, at: AT(k, 9, "nineteen hundred and twenty three"), h: 120 },
+        { rhs: String.raw`\approx\tfrac{1923}{60}\ \mathrm{min}\approx32\ \mathrm{min}`, at: AT(k, 9, "thirty two minutes"), cont: true, h: 90 },
+        { lhs: String.raw`2\pi\times25\ \mathrm{km}`, rhs: String.raw`=2\times3.1416\times25`, at: AT(k, 10, "two pi times") },
+        { rhs: String.raw`\approx157\ \mathrm{km}=157\,000\ \mathrm{m}`, at: AT(k, 10, "a hundred and fifty seven"), cont: true },
+        { lhs: "t", rhs: String.raw`=\frac{157\,000\ \mathrm{m}}{35\ \mathrm{m/s}}\approx4490\ \mathrm{s}`, at: AT(k, 10, "four thousand four hundred"), h: 120 },
+        { rhs: String.raw`\approx\tfrac{4490}{60}\ \mathrm{min}\approx75\ \mathrm{min}`, at: AT(k, 10, "seventy five minutes"), cont: true, h: 90 },
+        { lhs: String.raw`\frac{\text{distance round}}{\text{distance in}}`, rhs: String.raw`=\frac{35\,t}{13\,t}`, at: AT(k, 12, "In any stretch"), h: 120 },
+        { rhs: String.raw`=\frac{35}{13}\approx2.7`, at: AT(k, 12, "two point seven"), cont: true, h: 110 },
       ]} />
       <TeX s={String.raw`\text{almost 3 m round per 1 m in}`} x={1080} y={720} size={46} o={win(f, AT(k, 12, "almost three"), tRise - 18)} />
       <SourceBelow text={IAN_SRC} pic={PB} w={900} name="s23 src" />
@@ -292,6 +326,14 @@ const S24: React.FC = () => {
         <Keyword f={f} text="three points by hand" at={[CX, 260]} appear={0} out={tRem - 18} />
         <SkipChip f={f} k={k} to={keepTime("s24_ring_points")} x0={1210} />
         <Lbl x={CX} y={800} t="all 72, then average" c={C.key} s={T.floor} o={fin(f, tAll)} />
+        {/* fix 1c C39: r̂ at 135° with its equal west and north legs (a 45° triangle) */}
+        {(() => { const j = iAz(135), q = P(RING.lat[j], RING.lon[j]), L = 100, c = L / Math.SQRT2; const o = win(f, AT(k, 18, "forty five degrees"), tCr);
+          return o <= 0 ? null : <g opacity={o}>
+            <Arrow p={q} q={[q[0] - c, q[1] - c]} color={C.second} w={7} head={24} />
+            <Dash p={q} q={[q[0] - c, q[1]]} c={C.second} w={4} /><Dash p={[q[0] - c, q[1]]} q={[q[0] - c, q[1] - c]} c={C.second} w={4} />
+            <Lbl x={q[0] - c / 2} y={q[1] + 30} t="west" c={C.second} s={T.floor} a="middle" />
+            <Lbl x={q[0] - c - 14} y={q[1] - c / 2} t="north" c={C.second} s={T.floor} a="end" />
+          </g>; })()}
       </Svg>
       {pts.map((p, n) => {
         const j = iAz(p.az), q = P(RING.lat[j], RING.lon[j]), a = p.az * D2R;
@@ -310,21 +352,24 @@ const S24: React.FC = () => {
       <TeX s={String.raw`90^\circ:\ u=-16.9,\ v=-37.4`} x={CX} y={395} size={44} c={C.local} o={win(f, tBuv, tC - 18)} />
       <TeX s={String.raw`\cos90^\circ=0,\ \sin90^\circ=1`} x={CX} y={450} size={44} c={C.local} o={win(f, tBcs, tC - 18)} />
       <TeX s={String.raw`135^\circ:\ u=-10.1,\ v=-44.5`} x={CX} y={395} size={44} c={C.local} o={win(f, tCuv, tAll - 18)} />
-      <TeX s={String.raw`\cos\approx-0.707,\ \sin\approx0.707`} x={CX} y={450} size={44} c={C.local} o={win(f, tCcs, tAll - 18)} />
+      <TeX s={String.raw`\cos135^\circ=-\cos45^\circ=-\tfrac{1}{\sqrt2}\approx-0.707`} x={CX} y={478} size={44} c={C.local} o={win(f, AT(k, 18, "its cosine"), tAll - 18)} />
+      <TeX s={String.raw`\sin135^\circ=\sin45^\circ=\tfrac{1}{\sqrt2}\approx0.707`} x={CX} y={584} size={44} c={C.local} o={win(f, AT(k, 18, "and its sine"), tCr - 18)} />
       <CalcStack f={f} x={1330} y={500} size={48} maxLines={2} o={fout(f, tB - 18)} rows={[
-        { lhs: "u_r", rhs: String.raw`=u=-8.7`, at: tAr },
-        { lhs: String.raw`u_\theta`, rhs: String.raw`=v=38.0`, at: tAt },
+        { lhs: "u_r", rhs: String.raw`=(-8.7)(1)+(38.0)(0)=-8.7`, at: tAr },
+        { lhs: String.raw`u_\theta`, rhs: String.raw`=-(-8.7)(0)+(38.0)(1)=38.0`, at: tAt },
       ]} />
       <CalcStack f={f} x={1330} y={500} size={48} maxLines={2} o={fout(f, tC - 18)} rows={[
-        { lhs: "u_r", rhs: String.raw`=v=-37.4`, at: tBr },
-        { lhs: String.raw`u_\theta`, rhs: String.raw`=-u=16.9`, at: tBt },
+        { lhs: "u_r", rhs: String.raw`=(-16.9)(0)+(-37.4)(1)=-37.4`, at: tBr },
+        { lhs: String.raw`u_\theta`, rhs: String.raw`=-(-16.9)(1)+(-37.4)(0)`, at: tBt },
+        { rhs: String.raw`=+16.9`, at: AT(k, 15, "makes plus"), cont: true },
       ]} />
       <CalcStack f={f} x={1310} y={500} size={46} maxLines={1} o={fout(f, tAll - 18)} rows={[
-        { lhs: "u_r", rhs: String.raw`=-10.1\times(-0.707)`, at: tCr },
+        { lhs: "u_r", rhs: String.raw`=(-10.1)\times(-0.707)`, at: tCr },
         { rhs: String.raw`+(-44.5)\times0.707`, at: tCr + 30, cont: true },
         { rhs: String.raw`=7.14-31.46\approx-24.3`, at: tCr2, cont: true },
-        { lhs: String.raw`u_\theta`, rhs: String.raw`=10.1\times0.707`, at: tCt },
-        { rhs: String.raw`+(-44.5)\times(-0.707)`, at: tCt + 30, cont: true },
+        { lhs: String.raw`u_\theta`, rhs: String.raw`=-(-10.1)(0.707)`, at: tCt },
+        { rhs: String.raw`=10.1\times0.707`, at: AT(k, 21, "which is plus ten point one"), cont: true },
+        { rhs: String.raw`+(-44.5)\times(-0.707)`, at: AT(k, 21, "plus minus forty four"), cont: true },
         { rhs: String.raw`=7.14+31.46\approx38.6`, at: tCt2, cont: true },
       ]} />
       <TeX s={String.raw`0^\circ:\ u_r\approx-8.7,\ u_\theta\approx38.0`} x={CX} y={530} size={44} o={fin(f, tAll)} />
@@ -372,6 +417,21 @@ const S25: React.FC = () => {
           <circle cx={PA(az[i], RING.v[i])[0]} cy={PA(az[i], RING.v[i])[1]} r={9} fill={C.gold} /></g>)}
         <g opacity={fin(f, tRange) * 0.9}><line x1={A.x} y1={Y(IAN.vt)} x2={A.x + A.w} y2={Y(IAN.vt)} stroke={C.first} strokeWidth={3} strokeDasharray="6 10" /></g>
         <g opacity={fin(f, tAvg) * 0.9}><line x1={A.x} y1={Y(IAN.vr)} x2={A.x + A.w} y2={Y(IAN.vr)} stroke={C.neg} strokeWidth={3} strokeDasharray="6 10" /></g>
+        {/* fix 1c C41: the spoken numbers on the graph, each on its words; the 14 outward points shaded */}
+        <rect x={PA(185, 0)[0]} y={A.y} width={PA(250, 0)[0] - PA(185, 0)[0]} height={A.h} fill={C.neg} opacity={0.12 * fin(f, tNeg)} />
+        <Lbl x={PA(217.5, 0)[0]} y={Y(-30)} t="14 out" c={C.neg} s={T.floor} a="middle" o={fin(f, AT(k, 11, "blow outward"))} />
+        <Lbl x={PA(90, 0)[0]} y={Y(16.9) + 26} t="17" c={C.first} s={T.floor} a="middle" o={fin(f, AT(k, 9, "seventeen"))} />
+        <Lbl x={PA(215, 0)[0] + 22} y={Y(46.8) + 8} t="47" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "forty seven"))} />
+        <Lbl x={A.x + 8} y={Y(IAN.vt) - 22} t="mean 35" c={C.first} s={T.floor} o={fin(f, AT(k, 9, "average of thirty five"))} />
+        <Lbl x={PA(100, 0)[0] - 18} y={Y(-40.1)} t="−40" c={C.neg} s={T.floor} a="end" o={fin(f, AT(k, 10, "minus forty"))} />
+        <Lbl x={PA(220, 0)[0]} y={Y(14.15) - 28} t="+14" c={C.neg} s={T.floor} a="middle" o={fin(f, AT(k, 10, "plus fourteen"))} />
+        <Lbl x={A.x + A.w - 8} y={Y(IAN.vr) + 26} t="mean −13" c={C.neg} s={T.floor} a="end" o={fin(f, tAvg)} />
+        {/* fix 1c C42: the three spoken sides linked to the graph */}
+        {([[0, RING.v[0], "v ≈ +38", AT(k, 6, "east side"), "start", 18, -26], [180, RING.v[36], "v ≈ −46", AT(k, 6, "west side"), "end", -16, 0],
+           [270, RING.u[54], "u ≈ +25", AT(k, 6, "south side"), "middle", 0, -30]] as [number, number, string, number, "start" | "end" | "middle", number, number][]).map(([az0, val, t, ta, an, dx, dy]) => {
+          const q = PA(az0, val), o = win(f, ta, SS(k, 7) - 6);
+          return o <= 0 ? null : <g key={t} opacity={o}><circle cx={q[0]} cy={q[1]} r={11} fill="none" stroke={C.gold} strokeWidth={4} />
+            <Lbl x={q[0] + dx} y={q[1] + dy} t={t} c={C.gold} s={T.floor} a={an} /></g>; })}
         <Lbl x={A.x + A.w + 14} y={Y(RING.u[71]) - 6} t="u" c={C.second} s={T.floor} o={fin(f, tUV + 30) * fout(f, tTeal - 12)} />
         <Lbl x={A.x + A.w + 14} y={Y(RING.v[71]) + 10} t="v" c={C.second} s={T.floor} o={fin(f, tV + 30) * fout(f, tTeal - 12)} />
         <line x1={1180} y1={745} x2={1240} y2={745} stroke={C.second} strokeWidth={6} opacity={fin(f, tUV) * dim} />
@@ -383,7 +443,7 @@ const S25: React.FC = () => {
         <SpeedBar x={1480} y={200} w={240} />
         <Keyword f={f} text="why polar here?" at={[1180, 110]} appear={0} out={tSw - 18} />
         <Keyword f={f} text="u, v swing: the wind turns" at={[1180, 110]} s={T.floor} appear={tSw} out={tNeg - 18} />
-        <Keyword f={f} text="negative at 58 of 72 points" at={[1180, 110]} s={T.floor} c={C.neg} appear={tNeg} out={tTwo - 18} />
+        <Keyword f={f} text="72 − 14 = 58 points in" at={[1180, 110]} s={T.floor} c={C.neg} appear={tNeg} out={tTwo - 18} />
         <Keyword f={f} text="spin 35 · inflow −13" at={[1180, 110]} s={T.floor} appear={tTwo} />
       </Svg>
       <TeX s={String.raw`\text{round }u_\theta`} x={1252} y={805} size={44} c={C.first} o={fin(f, tTeal)} />
@@ -414,6 +474,13 @@ const S26: React.FC = () => {
         <Lbl x={Pp[0] + 20} y={Pp[1] - 260} t="eye" c={C.muted} s={T.floor} />
         <Arrow p={Pp} q={[Pp[0] + L, Pp[1]]} color={C.second} />
         <AnimatedWindArrow from={Pp} to={w} speed={37} f={f} c={C.first} px={10} head={40} o={fin(f, tSlant)} />
+        {/* fix 1c C43: the wind's two parts as the triangle's legs */}
+        <g opacity={fin(f, AT(k, 3, "the inward part"))}>
+          <line x1={Pp[0]} y1={Pp[1]} x2={w[0]} y2={Pp[1]} stroke={C.first} strokeWidth={8} opacity={0.8} />
+          <line x1={w[0]} y1={Pp[1]} x2={w[0]} y2={w[1]} stroke={C.neg} strokeWidth={8} opacity={0.9} />
+          <Lbl x={(Pp[0] + w[0]) / 2 - 90} y={Pp[1] + 42} t="34.8 round" c={C.first} s={T.floor} a="middle" />
+          <Lbl x={w[0] + 18} y={(Pp[1] + w[1]) / 2} t="13.3 in" c={C.neg} s={T.floor} />
+        </g>
         <path d={`M ${Pp[0]} ${Pp[1]} L ${Pp[0] + 200} ${Pp[1]} A 200 200 0 0 0 ${Pp[0] + 200 * Math.cos(ang * D2R)} ${Pp[1] - 200 * Math.sin(ang * D2R)} Z`} fill={C.neg} fillOpacity={0.35} stroke={C.neg} strokeWidth={4} opacity={fin(f, tName)} />
         <circle cx={Pp[0]} cy={Pp[1]} r={12} fill={C.key} />
         <Lbl x={Pp[0] + 230} y={Pp[1] + 70} t="inflow angle" c={C.neg} s={T.floor} o={fin(f, tName) * fout(f, tAng - 14)} />
@@ -454,8 +521,10 @@ const S26: React.FC = () => {
       <TeX s={String.raw`\hat{\boldsymbol\theta}`} x={Pp[0] + L + 50} y={Pp[1]} size={56} ax={0.5} c={C.second} />
       <TeX s={String.raw`\mathbf u`} x={w[0] + 40} y={w[1] - 10} size={56} c={C.first} o={fin(f, tSlant)} />
       <TeX s={tl} x={1080} y={160} size={56} o={fin(f, tTan)} />
-      <TeX s={`=${tr}`} x={1200} y={260} size={56} o={fin(f, AT(k, 3, "thirteen point three over"))} />
-      <TeX s={String.raw`\text{inflow angle}\approx21^\circ`} x={1080} y={500} size={56} c={C.neg} o={fin(f, tAng) * fout(f, tFour - 18)} />
+      <TeX s={String.raw`=\dfrac{\text{opposite}}{\text{next to it}}=\dfrac{\text{in}}{\text{round}}`} x={1200} y={260} size={52} o={win(f, AT(k, 3, "the side opposite"), tFour - 18)} />
+      <TeX s={`=${tr}`} x={1200} y={370} size={56} o={win(f, AT(k, 3, "thirteen point three over"), tFour - 18)} />
+      <TeX s={String.raw`\text{inflow angle}=\tan^{-1}(0.38)\approx20.9^\circ\approx21^\circ`} x={1080} y={480} size={50} c={C.neg} o={win(f, AT(k, 4, "the angle with that tangent"), tFour - 18)} />
+
     </Scene>
   );
 };

@@ -21,7 +21,7 @@ concepts:
 - polar components = axes turned by the local angle theta
 - 'application: a hurricane''s ring-mean tangential and radial winds, their meaning, three ring points by hand, the inflow angle (pending data
   report)'
-target_duration_s: 2359.1
+target_duration_s: 2618.175
 fps: 30
 size:
 - 1920
@@ -402,38 +402,39 @@ scenes:
 - id: s03_cartesian_arrows
   t:
   - 82.55
-  - 133.125
+  - 143.475
   sentence_times:
   - - 82.55
     - 88.2
   - - 88.55
     - 94.25
   - - 94.6
-    - 99.7
-  - - 100.05
-    - 104.175
-  - - 104.525
-    - 109.575
-  - - 109.925
-    - 114.375
-  - - 114.725
-    - 118.85
-  - - 119.2
-    - 122.8
-  - - 123.15
-    - 128.3
-  - - 128.65
-    - 132.325
+    - 110.05
+  - - 110.4
+    - 114.525
+  - - 114.875
+    - 119.925
+  - - 120.275
+    - 124.725
+  - - 125.075
+    - 129.2
+  - - 129.55
+    - 133.15
+  - - 133.5
+    - 138.65
+  - - 139.0
+    - 142.675
   beat: 'building block: Cartesian unit vectors are the same everywhere (kept)'
   visual: 'Same map. S1: unit arrows x-hat and y-hat (orange, 10 px, 40-px heads) grow at the origin; KaTeX TipLabels. S3: ''3 x-hat + 4 y-hat''
     (68 px) beside the balloon, the 3 and the 4 gold-linked to the legs. S5-S6: the balloon jumps to four other places; at each, a copy of x-hat,
     y-hat appears identical, with a gold ''same'' tick between two copies. S8-S9: two small inserts beside the patch: Ian''s eye spiral and a
     radar''s range rings, each with the square grid overlaid and visibly not matching.'
   voiceover: 'Each axis comes with a unit vector: an arrow of length one that points along it. We write x hat for the arrow pointing east, and
-    y hat for the arrow pointing north. The balloon''s position is three times x hat, plus four times y hat. We met arrows like these in the vectors
-    movie of this series. Here''s their key property: x hat points the same way everywhere on the map. Move the balloon anywhere you like, and
-    the two arrows don''t change. That''s what makes Cartesian coordinates so easy to work with. But many things in the weather aren''t laid out
-    in squares. A hurricane spins round its eye, and a weather radar looks out in rings. For those, there''s a better way to say where something
+    y hat for the arrow pointing north. The balloon''s position is three times x hat, plus four times y hat. Three steps of x hat take us three
+    kilometres east, and four steps of y hat take us four kilometres north, which lands exactly on the balloon. We met arrows like these in the
+    vectors movie of this series. Here''s their key property: x hat points the same way everywhere on the map. Move the balloon anywhere you like,
+    and the two arrows don''t change. That''s what makes Cartesian coordinates so easy to work with. But many things in the weather aren''t laid
+    out in squares. A hurricane spins round its eye, and a weather radar looks out in rings. For those, there''s a better way to say where something
     is.'
   on_screen_eq:
     latex: 3\,\hat{\mathbf x}+4\,\hat{\mathbf y}
@@ -455,27 +456,27 @@ scenes:
   layout: SourceBelow under the patch; each insert has its own source line below it; no overlap with the patch.
 - id: s04_polar
   t:
-  - 133.125
-  - 189.95
+  - 143.475
+  - 219.225
   sentence_times:
-  - - 133.125
-    - 140.925
-  - - 141.275
-    - 144.2
-  - - 144.55
-    - 153.5
-  - - 155.0
-    - 158.15
-  - - 158.5
-    - 164.925
-  - - 165.275
-    - 170.45
-  - - 171.95
-    - 178.275
-  - - 178.625
-    - 181.925
-  - - 182.275
-    - 189.15
+  - - 143.475
+    - 151.275
+  - - 151.625
+    - 154.55
+  - - 154.9
+    - 168.0
+  - - 169.5
+    - 172.65
+  - - 173.0
+    - 179.425
+  - - 179.775
+    - 199.725
+  - - 201.225
+    - 207.55
+  - - 207.9
+    - 211.2
+  - - 211.55
+    - 218.425
   beat: 'building block: polar coordinates (r, theta) (kept)'
   visual: 'Picture: the balloon at (3, 4) on the map; a teal line from the station to it labelled ''r'' at its midpoint on AT(2,''called r'').
     S3: CalcStack ''r = sqrt(3^2 + 4^2) = sqrt(25) = 5 km'', legs highlighted and gold-linked to 3^2 and 4^2. S5: a slate arc from the east axis
@@ -483,9 +484,11 @@ scenes:
     -> theta = 53 deg''. S8: ''(r, theta) = (5 km, 53 deg)'' at the tip (68 px). S10 on AT(10,''weather radar''): range rings every 1 km and spokes
     every 30 deg fade in (radar look).'
   voiceover: 'Instead of going east and north, we can give two other numbers: how far away the balloon is, and in which direction. The distance
-    from the origin is called r. By Pythagoras, r is the square root of three squared plus four squared, which is the square root of twenty five:
-    five kilometres. [beat] The direction is an angle, called theta. Mathematicians measure it from the east axis, turning anticlockwise as seen
-    from above. Its tangent is four over three, so theta is about fifty three degrees. [beat] So the same balloon is at r equals five kilometres,
+    from the origin is called r. By Pythagoras, r is the square root of three squared plus four squared. Three squared is nine, and four squared
+    is sixteen, so that''s the square root of twenty five: five kilometres. [beat] The direction is an angle, called theta. Mathematicians measure
+    it from the east axis, turning anticlockwise as seen from above. In a right triangle, the tangent of an angle is the side opposite it divided
+    by the side next to it: here the north side over the east side, four over three, about one point three three. The angle with that tangent
+    is about fifty three point one degrees, so theta is about fifty three degrees. [beat] So the same balloon is at r equals five kilometres,
     and theta equals fifty three degrees. These two numbers are called polar coordinates. A weather radar measures exactly this pair: how far
     away the raindrops are, and in which direction.'
   on_screen_eq:
@@ -514,37 +517,39 @@ scenes:
   layout: Map patch with SourceBelow; calculations in the maths zone only.
 - id: s05_polar_back
   t:
-  - 189.95
-  - 233.9
+  - 219.225
+  - 277.35
   sentence_times:
-  - - 189.95
-    - 192.25
-  - - 192.6
-    - 193.95
-  - - 194.3
-    - 197.775
-  - - 198.125
-    - 202.6
-  - - 202.95
-    - 209.9
-  - - 210.25
-    - 211.825
-  - - 212.175
-    - 218.75
-  - - 219.1
-    - 221.975
-  - - 223.475
-    - 228.325
-  - - 228.675
-    - 233.1
+  - - 219.225
+    - 221.525
+  - - 221.875
+    - 223.225
+  - - 223.575
+    - 227.05
+  - - 227.4
+    - 231.875
+  - - 232.225
+    - 239.175
+  - - 239.525
+    - 241.1
+  - - 241.45
+    - 262.2
+  - - 262.55
+    - 265.425
+  - - 266.925
+    - 271.775
+  - - 272.125
+    - 276.55
   beat: 'building block: back to x and y (kept)'
   visual: 'Picture: the right triangle station-balloon, hypotenuse r (teal), angle theta (slate) at the station, east leg and north leg (orange
     dashed). S4: tags ''r cos theta'' on the east leg, ''r sin theta'' on the north leg. S6-S7: CalcStack ''5 cos 53 deg = 5 x 0.6 = 3'', ''5
     sin 53 deg = 5 x 0.8 = 4'', each linked to its leg. S8: the two lines (84 px).'
   voiceover: Can we go back the other way? Yes. Think of the right triangle with the balloon at its tip. Its long side is r, and its angle at
-    the station is theta. The side going east is r times cosine theta, and the side going north is r times sine theta. Let's check. Five times
-    the cosine of fifty three degrees is five times zero point six, which is three. And five times zero point eight is four. [beat] So x equals
-    r cosine theta, and y equals r sine theta. These two lines are all we need to switch between the two systems.
+    the station is theta. The side going east is r times cosine theta, and the side going north is r times sine theta. Let's check. Cosine theta
+    is the east side divided by the long side, and sine theta is the north side divided by the long side. For our balloon that's three fifths,
+    zero point six, and four fifths, zero point eight. So five times the cosine of theta is five times zero point six, which is three. And five
+    times zero point eight is four. [beat] So x equals r cosine theta, and y equals r sine theta. These two lines are all we need to switch between
+    the two systems.
   on_screen_eq:
     latex: x=r\cos\theta,\qquad y=r\sin\theta
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build 1): x = R
@@ -571,23 +576,23 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s06_bearings
   t:
-  - 233.9
-  - 273.75
+  - 277.35
+  - 317.2
   sentence_times:
-  - - 233.9
-    - 236.375
-  - - 236.725
-    - 241.375
-  - - 241.725
-    - 246.85
-  - - 247.2
-    - 252.925
-  - - 254.425
-    - 263.025
-  - - 263.375
-    - 266.275
-  - - 266.625
-    - 272.95
+  - - 277.35
+    - 279.825
+  - - 280.175
+    - 284.825
+  - - 285.175
+    - 290.3
+  - - 290.65
+    - 296.375
+  - - 297.875
+    - 306.475
+  - - 306.825
+    - 309.725
+  - - 310.075
+    - 316.4
   beat: 'convention: maths angle vs compass bearing vs wind ''from'' (kept)'
   visual: 'Picture: the same point with two angle arcs: the maths angle from east, anticlockwise (slate, ''53 deg'') and the compass bearing from
     north, clockwise (gold, ''37 deg''). Maths: ''90 deg - 53 deg = 37 deg''. S4-S5: an arrow ''from the west'' (teal, moving dashes) blowing
@@ -623,31 +628,31 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s07_radians
   t:
-  - 273.75
-  - 337.9
+  - 317.2
+  - 391.15
   sentence_times:
-  - - 273.75
-    - 281.4
-  - - 281.75
-    - 285.7
-  - - 286.05
-    - 291.25
-  - - 291.6
-    - 297.55
-  - - 297.9
-    - 303.475
-  - - 303.825
-    - 307.475
-  - - 307.825
-    - 310.1
-  - - 310.45
-    - 320.3
-  - - 321.8
-    - 326.9
-  - - 328.4
-    - 331.725
-  - - 332.075
-    - 337.1
+  - - 317.2
+    - 324.85
+  - - 325.2
+    - 329.15
+  - - 329.5
+    - 334.7
+  - - 335.05
+    - 341.0
+  - - 341.35
+    - 346.925
+  - - 347.275
+    - 357.4
+  - - 357.75
+    - 360.025
+  - - 360.375
+    - 373.55
+  - - 375.05
+    - 380.15
+  - - 381.65
+    - 384.975
+  - - 385.325
+    - 390.35
   beat: 'building block: radians and arc length (kept; Should 1, Should 18)'
   visual: 'Keyword ''radians'' in the maths zone from frame 0 (Should 18). Picture: a circle round the station with radius r (teal); a walker
     dot moves along the edge leaving an orange arc; the arc length s and the angle theta (rad) tick together; keyword ''arc length'' on AT(3,''arc
@@ -656,9 +661,10 @@ scenes:
     ''5 x 0.2 = 1 km'', ''50 x 0.2 = 10 km''. S9: brace ''same angle'' across both wedges.'
   voiceover: 'Before polar coordinates can do their real work, we need one more building block: measuring angles in radians. Take a circle of
     radius r, and walk along its edge. The angle in radians is the distance you walked, divided by the radius. So the distance along the edge,
-    called the arc length, is the radius times the angle. A full circle is two pi radians, because its edge is two pi times the radius. So one
-    radian is about fifty seven degrees. Let''s try easy numbers. On a ring five kilometres from the station, turning by zero point two radians
-    walks you five times zero point two, which is one kilometre. [beat] On a ring fifty kilometres out, the same turn walks you ten kilometres.
+    called the arc length, is the radius times the angle. A full circle is two pi radians, because its edge is two pi times the radius. Two pi
+    is about six point two eight, so one radian is three hundred and sixty degrees divided by six point two eight: about fifty seven degrees.
+    Let''s try easy numbers. On a ring five kilometres from the station, turn by zero point two radians: that''s about eleven and a half degrees.
+    It walks you five times zero point two, which is one kilometre. [beat] On a ring fifty kilometres out, the same turn walks you ten kilometres.
     [beat] The same angle gives ten times the distance. Keep this rule in mind, because it explains a lot about maps of the Earth.'
   on_screen_eq:
     latex: s=r\,\theta\quad(\theta\ \text{in radians})
@@ -688,37 +694,37 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s08_r_hat
   t:
-  - 337.9
-  - 409.15
+  - 391.15
+  - 475.175
   sentence_times:
-  - - 337.9
-    - 343.625
-  - - 343.975
-    - 346.275
-  - - 346.625
-    - 351.75
-  - - 352.1
-    - 353.925
-  - - 354.275
-    - 360.975
-  - - 361.325
-    - 366.775
-  - - 367.125
-    - 373.175
-  - - 374.675
-    - 380.525
-  - - 380.875
-    - 383.125
-  - - 383.475
-    - 388.725
-  - - 389.075
-    - 394.75
-  - - 396.25
-    - 398.425
-  - - 398.775
-    - 405.2
-  - - 405.55
-    - 408.35
+  - - 391.15
+    - 396.875
+  - - 397.225
+    - 399.525
+  - - 399.875
+    - 405.0
+  - - 405.35
+    - 407.175
+  - - 407.525
+    - 414.225
+  - - 414.575
+    - 420.025
+  - - 420.375
+    - 431.5
+  - - 433.0
+    - 446.55
+  - - 446.9
+    - 449.15
+  - - 449.5
+    - 454.75
+  - - 455.1
+    - 460.775
+  - - 462.275
+    - 464.45
+  - - 464.8
+    - 471.225
+  - - 471.575
+    - 474.375
   beat: 'building block: r-hat built (arrow divided by its length); the way r grows'
   visual: 'Keyword ''unit vectors'' in the maths zone from frame 0. Picture zone: station, the 5-km circle (faint slate), the balloon at (3, 4)
     km. S5 on AT(5,''three, four''): the teal position arrow station -> balloon with tip label ''(3, 4)'' and length tag ''r = 5 km'' on AT(5,''five
@@ -730,10 +736,11 @@ scenes:
   voiceover: Polar coordinates come with their own unit vectors, so let's build them one at a time. The first is called r hat. It's an arrow of
     length one that points away from the station, towards the balloon. Here's how to get it. The arrow from the station to the balloon is three,
     four, and its length is r, five kilometres. Dividing an arrow by its own length keeps its direction, and makes its length one. So r hat is
-    three fifths, four fifths, which is zero point six, zero point eight. [beat] Its length is one, because zero point three six plus zero point
-    six four is one. The same works for any point. The arrow to it is r cosine theta, r sine theta, as we just saw. Dividing by r, the r cancels,
-    so r hat is cosine theta, sine theta. [beat] Why is it called r hat? Hold theta fixed and let r grow, and the balloon slides straight outward,
-    along this arrow. So r hat points the way r grows.
+    three fifths, four fifths, which is zero point six, zero point eight. We draw r hat at the balloon, because it tells us the direction there.
+    [beat] Its length is the square root of zero point six squared plus zero point eight squared. That's zero point three six plus zero point
+    six four, which is one, and the square root of one is one. The same works for any point. The arrow to it is r cosine theta, r sine theta,
+    as we just saw. Dividing by r, the r cancels, so r hat is cosine theta, sine theta. [beat] Why is it called r hat? Hold theta fixed and let
+    r grow, and the balloon slides straight outward, along this arrow. So r hat points the way r grows.
   on_screen_eq:
     latex: \hat{\mathbf r}=\frac{(r\cos\theta,\ r\sin\theta)}{r}=(\cos\theta,\ \sin\theta)
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build 1): x = R
@@ -792,41 +799,41 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s09_where_theta_grows
   t:
-  - 409.15
-  - 505.15
+  - 475.175
+  - 581.625
   sentence_times:
-  - - 409.15
-    - 415.85
-  - - 416.2
-    - 425.65
-  - - 426.0
-    - 428.75
-  - - 429.1
-    - 432.2
-  - - 432.55
-    - 436.275
-  - - 436.625
-    - 441.275
-  - - 441.625
-    - 447.05
-  - - 447.4
-    - 449.75
-  - - 450.1
-    - 454.4
-  - - 454.75
-    - 461.725
-  - - 462.075
-    - 468.975
-  - - 469.325
-    - 474.6
-  - - 474.95
-    - 483.125
-  - - 483.475
-    - 489.825
-  - - 490.175
-    - 495.375
-  - - 496.875
-    - 504.35
+  - - 475.175
+    - 481.875
+  - - 482.225
+    - 491.675
+  - - 492.025
+    - 494.775
+  - - 495.125
+    - 498.225
+  - - 498.575
+    - 502.3
+  - - 502.65
+    - 507.3
+  - - 507.65
+    - 513.075
+  - - 513.425
+    - 515.775
+  - - 516.125
+    - 520.425
+  - - 520.775
+    - 538.2
+  - - 538.55
+    - 545.45
+  - - 545.8
+    - 551.075
+  - - 551.425
+    - 559.6
+  - - 559.95
+    - 566.3
+  - - 566.65
+    - 571.85
+  - - 573.35
+    - 580.825
   beat: 'derivation D01: theta-hat is the way theta grows; why +90 deg'
   visual: 'Keyword ''the way theta grows'' (KaTeX theta) in the maths zone from frame 0. Picture zone: station, the 5-km circle (teal), the balloon
     with r-hat (orange, labelled). S4-S5 on AT(4,''let theta grow''): the ''r = 5 km'' tag on the radius stays fixed (slate ''r fixed''), theta''s
@@ -844,10 +851,12 @@ scenes:
     hat. Its job is to point the way theta grows. So let''s do the same experiment, with the roles swapped. Hold r fixed at five kilometres, and
     let theta grow a little. The balloon slides along the circle of radius five kilometres round the station. Which way is that, exactly? While
     it slides, its distance from the station doesn''t change. If its move had any part along r hat, the balloon would get further from the station,
-    or closer to it. So a small slide along the circle has no part along r hat: it''s at right angles to r hat. That''s why the edge of a circle
-    always runs at right angles to its radius. But there are two directions at right angles to r hat: one turned anticlockwise from it, and one
-    turned clockwise. Theta grows anticlockwise, as seen from above, so the balloon slides anticlockwise. So theta hat is r hat, turned by ninety
-    degrees anticlockwise. [beat] To turn that picture into numbers, we need one small tool: a rule for turning any arrow by ninety degrees.'
+    or closer to it. For example, with a part of a tenth of a kilometre along r hat, it would end up five point one or four point nine kilometres
+    from the station, not five. So a small slide along the circle has no part along r hat: it''s at right angles to r hat. That''s why the edge
+    of a circle always runs at right angles to its radius. But there are two directions at right angles to r hat: one turned anticlockwise from
+    it, and one turned clockwise. Theta grows anticlockwise, as seen from above, so the balloon slides anticlockwise. So theta hat is r hat, turned
+    by ninety degrees anticlockwise. [beat] To turn that picture into numbers, we need one small tool: a rule for turning any arrow by ninety
+    degrees.'
   on_screen_eq:
     latex: \hat{\boldsymbol\theta}=\hat{\mathbf r}\ \text{turned by}\ +90^\circ
     vallis_eq: 'none: arithmetic or a definition (no book equation); Kundu App. B §B.5 (printed p. 865) gives the formula, derived in s10-s11'
@@ -898,45 +907,45 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s10_turn_90
   t:
-  - 505.15
-  - 600.275
+  - 581.625
+  - 692.85
   sentence_times:
-  - - 505.15
-    - 508.025
-  - - 508.375
-    - 514.475
-  - - 514.825
-    - 517.15
-  - - 518.65
-    - 522.4
-  - - 522.75
-    - 525.6
-  - - 527.1
-    - 531.7
-  - - 532.05
-    - 537.1
-  - - 537.45
-    - 544.925
-  - - 545.275
-    - 551.8
-  - - 552.15
-    - 555.975
-  - - 556.325
-    - 559.475
-  - - 560.975
-    - 565.975
-  - - 566.325
-    - 569.775
-  - - 570.125
-    - 574.4
-  - - 575.9
-    - 578.25
-  - - 578.6
-    - 584.9
-  - - 585.25
-    - 592.35
-  - - 593.85
-    - 599.475
+  - - 581.625
+    - 584.5
+  - - 584.85
+    - 590.95
+  - - 591.3
+    - 593.625
+  - - 595.125
+    - 598.875
+  - - 599.225
+    - 602.075
+  - - 603.575
+    - 608.175
+  - - 608.525
+    - 613.575
+  - - 613.925
+    - 621.4
+  - - 621.75
+    - 628.275
+  - - 628.625
+    - 632.45
+  - - 632.8
+    - 648.525
+  - - 650.025
+    - 655.025
+  - - 655.375
+    - 658.825
+  - - 659.175
+    - 663.45
+  - - 664.95
+    - 667.3
+  - - 667.65
+    - 677.475
+  - - 677.825
+    - 684.925
+  - - 686.425
+    - 692.05
   beat: 'derivation D02: the 90-deg turn rule (p, q) -> (-q, p)'
   visual: 'Keyword ''90 deg turn'' from frame 0. Picture zone: a clean x-y grid (no map), origin at x 540, y 500, unit 120 px, orange x and y
     axes faint. S1-S2 on AT(2,''it points north''): x-hat (orange) TURNS (real rigid rotation about the origin over 1 s, TurnRule90, a gold quarter-circle
@@ -952,11 +961,12 @@ scenes:
     it becomes zero, one. [beat] Turn y hat, which points north, and it points west. So it becomes minus one, zero. [beat] Now take any arrow,
     with an east part p and a north part q. It''s p steps along x hat, followed by q steps along y hat. If we turn the whole drawing by ninety
     degrees, both pieces turn together, and they stay joined, tip to tail. So the p steps east become p steps north, and the q steps north become
-    q steps west. Steps to the west count as minus in the east part. So the turned arrow is minus q, p. [beat] In words: swap the two numbers,
-    and put a minus sign on the first one. Let''s try it on the balloon''s arrow, three, four. Swap them, and put a minus on the first: minus
-    four, three. [beat] Is that really a quarter turn? Its length is the square root of sixteen plus nine, which is five, the same as before.
-    And its dot product with three, four is three times minus four, plus four times three, which is zero. [beat] A zero dot product means a right
-    angle, as we saw in the dot product movie.'
+    q steps west. Steps to the west count as minus in the east part. p times zero, one is zero, p, and q times minus one, zero is minus q, zero.
+    Adding the east parts gives minus q, and adding the north parts gives p. So the turned arrow is minus q, p. [beat] In words: swap the two
+    numbers, and put a minus sign on the first one. Let''s try it on the balloon''s arrow, three, four. Swap them, and put a minus on the first:
+    minus four, three. [beat] Is that really a quarter turn? Minus four squared is sixteen and three squared is nine, so its length is the square
+    root of twenty five: five, the same as the balloon''s arrow. And its dot product with three, four is three times minus four, plus four times
+    three, which is zero. [beat] A zero dot product means a right angle, as we saw in the dot product movie.'
   on_screen_eq:
     latex: (p,\ q)\ \longrightarrow\ (-q,\ p)
     vallis_eq: 'none: arithmetic or a definition (no book equation) (rotation by +90 deg; the active form of rotation_matrix_2d(pi/2))'
@@ -1025,59 +1035,59 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s11_theta_hat
   t:
-  - 600.275
-  - 761.325
+  - 692.85
+  - 863.425
   sentence_times:
-  - - 600.275
-    - 602.65
-  - - 603.0
-    - 607.825
-  - - 608.175
-    - 612.3
-  - - 612.65
-    - 616.65
-  - - 618.15
-    - 620.675
-  - - 621.025
-    - 624.75
-  - - 625.1
-    - 631.825
-  - - 632.175
-    - 639.0
-  - - 639.35
-    - 641.775
-  - - 642.125
-    - 648.7
-  - - 649.05
-    - 653.8
-  - - 655.3
-    - 661.025
-  - - 661.375
-    - 663.175
-  - - 664.675
-    - 669.8
-  - - 671.3
-    - 681.5
-  - - 681.85
-    - 686.1
-  - - 686.45
-    - 692.55
-  - - 692.9
-    - 695.175
-  - - 695.525
-    - 703.825
-  - - 705.325
-    - 715.0
-  - - 716.5
-    - 722.7
-  - - 723.05
-    - 733.875
-  - - 734.225
-    - 738.925
-  - - 740.425
-    - 747.925
-  - - 749.425
-    - 760.525
+  - - 692.85
+    - 695.225
+  - - 695.575
+    - 700.4
+  - - 700.75
+    - 704.875
+  - - 705.225
+    - 709.225
+  - - 710.725
+    - 713.25
+  - - 713.6
+    - 717.325
+  - - 717.675
+    - 724.4
+  - - 724.75
+    - 731.575
+  - - 731.925
+    - 734.35
+  - - 734.7
+    - 745.575
+  - - 745.925
+    - 750.675
+  - - 752.175
+    - 763.125
+  - - 763.475
+    - 765.275
+  - - 766.775
+    - 771.9
+  - - 773.4
+    - 783.6
+  - - 783.95
+    - 788.2
+  - - 788.55
+    - 794.65
+  - - 795.0
+    - 797.275
+  - - 797.625
+    - 805.925
+  - - 807.425
+    - 817.1
+  - - 818.6
+    - 824.8
+  - - 825.15
+    - 835.975
+  - - 836.325
+    - 841.025
+  - - 842.525
+    - 850.025
+  - - 851.525
+    - 862.625
   beat: 'derivation D03: theta-hat = (-sin theta, cos theta), checked four ways'
   visual: 'Keyword ''turn r-hat'' from frame 0. Picture zone: a unit circle (radius drawn 300 px, slate) round the origin, r-hat at theta = 53
     deg with its triangle: east leg ''cos theta'' (orange solid), north leg ''sin theta'' (orange dashed), slate theta arc. Maths S1-S4: r-hat
@@ -1094,17 +1104,18 @@ scenes:
     put a minus on the first. So theta hat is minus sine theta, cosine theta. [beat] Here''s the same thing as a picture. Turn r hat''s little
     triangle by ninety degrees. Its east side, cosine theta, now points north, so cosine theta becomes the north part. Its north side, sine theta,
     now points west, so minus sine theta becomes the east part. Let''s check that this makes sense. At theta equals zero, the point is due east
-    of the station, and theta hat is zero, one. It points north, which is the way the point slides when theta grows. [beat] At ninety degrees,
-    the point is due north, and theta hat is minus one, zero. It points west. [beat] At the balloon, theta hat is minus zero point eight, zero
-    point six. [beat] Its length is one, and its dot product with r hat is minus zero point four eight plus zero point four eight, which is zero,
-    so it''s at right angles. And one last check, without using the theta hat formula. The balloon is five kilometres from the station: three
-    kilometres east and four north. Turn it by a tenth of a degree. In radians, that''s a tenth times pi over one hundred and eighty, about zero
-    point zero zero one seven four five. [beat] By the arc rule, s equals r times theta, so it slides five thousand metres times that: about eight
-    point seven metres along the circle. [beat] Its position comes from x equals r cosine theta, and y equals r sine theta. It moves from three
-    thousand metres east and four thousand metres north, to about two thousand nine hundred and ninety three, and four thousand and five point
-    two. That''s about seven metres west, and five point two metres north. [beat] Dividing each by eight point seven gives about minus zero point
-    eight and zero point six: theta hat again. [beat] If you skipped, here''s what to keep: r hat points away from the centre, theta hat points
-    round it, anticlockwise, and theta hat is r hat turned by ninety degrees.'
+    of the station. Minus sine zero is zero, and cosine zero is one, so theta hat is zero, one. It points north, which is the way the point slides
+    when theta grows. [beat] At ninety degrees, the point is due north. Minus sine ninety is minus one, and cosine ninety is zero, so theta hat
+    is minus one, zero. It points west. [beat] At the balloon, theta hat is minus zero point eight, zero point six. [beat] Its length is one,
+    and its dot product with r hat is minus zero point four eight plus zero point four eight, which is zero, so it''s at right angles. And one
+    last check, without using the theta hat formula. The balloon is five kilometres from the station: three kilometres east and four north. Turn
+    it by a tenth of a degree. In radians, that''s a tenth times pi over one hundred and eighty, about zero point zero zero one seven four five.
+    [beat] By the arc rule, s equals r times theta, so it slides five thousand metres times that: about eight point seven metres along the circle.
+    [beat] Its position comes from x equals r cosine theta, and y equals r sine theta. It moves from three thousand metres east and four thousand
+    metres north, to about two thousand nine hundred and ninety three, and four thousand and five point two. That''s about seven metres west,
+    and five point two metres north. [beat] Dividing each by eight point seven gives about minus zero point eight and zero point six: theta hat
+    again. [beat] If you skipped, here''s what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta
+    hat is r hat turned by ninety degrees.'
   on_screen_eq:
     latex: \hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build 1): x = R
@@ -1130,6 +1141,16 @@ scenes:
   - \theta=53^\circ:\ \hat{\boldsymbol\theta}=(-0.8,\ 0.6)
   - '|\hat{\boldsymbol\theta}|=\sqrt{0.64+0.36}=1'
   - \hat{\mathbf r}\cdot\hat{\boldsymbol\theta}=0.6\times(-0.8)+0.8\times0.6=-0.48+0.48=0
+  - \Delta\theta=0.1^\circ=0.1\times\pi/180\approx0.001745\ \mathrm{rad}
+  - s=r\,\Delta\theta=5000\ \mathrm{m}\times0.001745\approx8.7\ \mathrm{m}
+  - (x,\ y)=(r\cos\theta,\ r\sin\theta)
+  - \text{before},\ 53.13^\circ=(3000,\ 4000)\ \mathrm{m}
+  - \text{after}=53.13^\circ+0.1^\circ=53.23^\circ
+  - x=5000\times\cos53.23^\circ=5000\times0.598603\approx2993.0\ \mathrm{m}
+  - y=5000\times\sin53.23^\circ=5000\times0.801046\approx4005.2\ \mathrm{m}
+  - \Delta x=2993.0-3000=-7.0\ \mathrm{m}
+  - \Delta y=4005.2-4000=+5.2\ \mathrm{m}
+  - \sqrt{7.0^2+5.2^2}=\sqrt{76.04}\approx8.7\ \mathrm{m}=s
   - \Delta\theta=0.1^\circ=0.1\times\pi/180\approx0.001745\ \mathrm{rad}
   - s=r\,\Delta\theta=5000\ \mathrm{m}\times0.001745\approx8.7\ \mathrm{m}
   - (x,\ y)=(r\cos\theta,\ r\sin\theta)
@@ -1186,23 +1207,23 @@ scenes:
     its 7.0-m west and 5.2-m north legs; the column shows one line per phrase (calc_rows); no theta-hat formula used'
 - id: s12_arrows_depend
   t:
-  - 761.325
-  - 801.175
+  - 863.425
+  - 903.275
   sentence_times:
-  - - 761.325
-    - 765.85
-  - - 766.2
-    - 771.5
-  - - 771.85
-    - 776.15
-  - - 776.5
-    - 780.85
-  - - 781.2
-    - 787.975
-  - - 788.325
-    - 794.6
-  - - 794.95
-    - 800.375
+  - - 863.425
+    - 867.95
+  - - 868.3
+    - 873.6
+  - - 873.95
+    - 878.25
+  - - 878.6
+    - 882.95
+  - - 883.3
+    - 890.075
+  - - 890.425
+    - 896.7
+  - - 897.05
+    - 902.475
   beat: 'intuition: polar unit vectors depend on place'
   visual: 'Keyword ''depend on where you are'' waits; frame 0 shows the station, the 5-km circle and the balloon with r-hat and theta-hat (labelled).
     A ghost x-hat, y-hat pair (GhostArrow, labelled) sits fixed in the picture zone''s lower left. S1: the balloon glides round the circle (one
@@ -1241,55 +1262,55 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s13_components
   t:
-  - 801.175
-  - 928.025
+  - 903.275
+  - 1030.125
   sentence_times:
-  - - 801.175
-    - 808.3
-  - - 808.65
-    - 816.825
-  - - 817.175
-    - 820.95
-  - - 821.3
-    - 826.625
-  - - 826.975
-    - 829.45
-  - - 829.8
-    - 834.1
-  - - 834.45
-    - 837.2
-  - - 838.7
-    - 843.975
-  - - 844.325
-    - 848.875
-  - - 849.225
-    - 854.425
-  - - 854.775
-    - 862.15
-  - - 862.5
-    - 866.475
-  - - 866.825
-    - 868.725
-  - - 869.075
-    - 871.5
-  - - 871.85
-    - 875.1
-  - - 875.45
-    - 883.05
-  - - 883.4
-    - 885.825
-  - - 886.175
-    - 893.325
-  - - 893.675
-    - 898.5
-  - - 900.0
-    - 907.2
-  - - 907.55
-    - 913.35
-  - - 914.85
-    - 920.25
-  - - 920.6
-    - 927.225
+  - - 903.275
+    - 910.4
+  - - 910.75
+    - 918.925
+  - - 919.275
+    - 923.05
+  - - 923.4
+    - 928.725
+  - - 929.075
+    - 931.55
+  - - 931.9
+    - 936.2
+  - - 936.55
+    - 939.3
+  - - 940.8
+    - 946.075
+  - - 946.425
+    - 950.975
+  - - 951.325
+    - 956.525
+  - - 956.875
+    - 964.25
+  - - 964.6
+    - 968.575
+  - - 968.925
+    - 970.825
+  - - 971.175
+    - 973.6
+  - - 973.95
+    - 977.2
+  - - 977.55
+    - 985.15
+  - - 985.5
+    - 987.925
+  - - 988.275
+    - 995.425
+  - - 995.775
+    - 1000.6
+  - - 1002.1
+    - 1009.3
+  - - 1009.65
+    - 1015.45
+  - - 1016.95
+    - 1022.35
+  - - 1022.7
+    - 1029.325
   beat: 'building block D04: a wind''s radial and tangential parts, every input on screen'
   visual: 'Keyword ''wind in polar coordinates'' from frame 0. Picture zone (zoomed on the balloon): r-hat and theta-hat (orange, tip labels for
     the whole scene, U-CO-008), the wind arrow bold u (teal, moving dashes) pointing east, 300 px = 10 m/s, tip label ''u'' (bold). S3-S5: maths
@@ -1374,35 +1395,35 @@ scenes:
     is a wind). Inputs row never overlaps the CalcStack (row 1 at y 120-260, CalcStack from y 300).'
 - id: s14_rebuild_general
   t:
-  - 928.025
-  - 1019.9
+  - 1030.125
+  - 1130.7
   sentence_times:
-  - - 928.025
-    - 931.875
-  - - 932.225
-    - 937.275
-  - - 937.625
-    - 943.525
-  - - 945.025
-    - 951.975
-  - - 953.475
-    - 958.925
-  - - 959.275
-    - 964.1
-  - - 965.6
-    - 970.475
-  - - 970.825
-    - 977.25
-  - - 978.75
-    - 982.95
-  - - 983.3
-    - 992.375
-  - - 993.875
-    - 1002.775
-  - - 1004.275
-    - 1007.875
-  - - 1008.225
-    - 1019.1
+  - - 1030.125
+    - 1033.975
+  - - 1034.325
+    - 1039.375
+  - - 1039.725
+    - 1045.625
+  - - 1047.125
+    - 1058.3
+  - - 1059.8
+    - 1065.25
+  - - 1065.6
+    - 1070.425
+  - - 1071.925
+    - 1076.8
+  - - 1077.15
+    - 1088.05
+  - - 1089.55
+    - 1093.75
+  - - 1094.1
+    - 1103.175
+  - - 1104.675
+    - 1113.575
+  - - 1115.075
+    - 1118.675
+  - - 1119.025
+    - 1129.9
   beat: 'check D04: rebuild the wind; the general formulas'
   visual: 'Keyword ''same wind?'' from frame 0. Picture: same zoom; the bands from s13 stay. S2-S4: tip-to-tail chain: 6 r-hat (teal arrow, label
     ''6 r-hat'') from the balloon, then -8 theta-hat (rose arrow, label ''-8 theta-hat'') from its tip, landing on the wind''s tip; gold ''same''
@@ -1411,14 +1432,15 @@ scenes:
     inputs ''(u, v)'', ''(cos theta, sin theta)'', ''(-sin theta, cos theta)'' written above each dot product; older rows dim to 60 %. S12: keyword
     ''used on a hurricane soon''.'
   voiceover: 'Let''s check that these two parts really make up the same wind. We rebuild it: six times r hat, plus minus eight times theta hat.
-    Six times zero point six, zero point eight is three point six, four point eight. [beat] Minus eight times minus zero point eight, zero point
-    six is six point four, minus four point eight. [beat] Adding the east parts gives three point six plus six point four, which is ten. The north
-    parts give four point eight minus four point eight, which is zero. [beat] We''re back to ten, zero: the same wind, measured with new arrows.
-    Its length agrees too: six squared plus eight squared is a hundred, and its square root is ten. [beat] The same dot products work for any
-    wind and any angle. With the wind u, v, and r hat equal to cosine theta, sine theta, u sub r is u cosine theta plus v sine theta. [beat] And
-    with theta hat equal to minus sine theta, cosine theta, u sub theta is minus u sine theta plus v cosine theta. [beat] We''ll use these two
-    lines on a real hurricane soon. If you skipped, here''s what to keep: any wind splits into an in or out part along r hat, and a round part
-    along theta hat, and each part is a dot product.'
+    Six times zero point six, zero point eight is three point six, four point eight. [beat] Minus eight times minus zero point eight is plus six
+    point four, because two minus signs make a plus, and minus eight times zero point six is minus four point eight. [beat] Adding the east parts
+    gives three point six plus six point four, which is ten. The north parts give four point eight minus four point eight, which is zero. [beat]
+    We''re back to ten, zero: the same wind, measured with new arrows. Its length agrees too: six squared is thirty six and eight squared is sixty
+    four, which makes a hundred, and its square root is ten: the same as the wind''s own length. [beat] The same dot products work for any wind
+    and any angle. With the wind u, v, and r hat equal to cosine theta, sine theta, u sub r is u cosine theta plus v sine theta. [beat] And with
+    theta hat equal to minus sine theta, cosine theta, u sub theta is minus u sine theta plus v cosine theta. [beat] We''ll use these two lines
+    on a real hurricane soon. If you skipped, here''s what to keep: any wind splits into an in or out part along r hat, and a round part along
+    theta hat, and each part is a dot product.'
   on_screen_eq:
     latex: u_r=u\cos\theta+v\sin\theta,\qquad u_\theta=-u\sin\theta+v\cos\theta
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build 1): x = R
@@ -1454,39 +1476,39 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s15_turn_axes
   t:
-  - 1019.9
-  - 1105.6
+  - 1130.7
+  - 1219.475
   sentence_times:
-  - - 1019.9
-    - 1028.125
-  - - 1028.475
-    - 1036.25
-  - - 1036.6
-    - 1040.4
-  - - 1040.75
-    - 1045.875
-  - - 1046.225
-    - 1048.15
-  - - 1048.5
-    - 1056.575
-  - - 1056.925
-    - 1059.5
-  - - 1059.85
-    - 1062.725
-  - - 1063.075
-    - 1069.325
-  - - 1069.675
-    - 1072.575
-  - - 1072.925
-    - 1077.175
-  - - 1077.525
-    - 1083.75
-  - - 1085.25
-    - 1088.325
-  - - 1088.675
-    - 1099.0
-  - - 1099.35
-    - 1104.1
+  - - 1130.7
+    - 1138.925
+  - - 1139.275
+    - 1147.05
+  - - 1147.4
+    - 1151.2
+  - - 1151.55
+    - 1156.675
+  - - 1157.025
+    - 1158.95
+  - - 1159.3
+    - 1167.375
+  - - 1167.725
+    - 1170.3
+  - - 1170.65
+    - 1173.525
+  - - 1173.875
+    - 1180.125
+  - - 1180.475
+    - 1183.375
+  - - 1183.725
+    - 1187.975
+  - - 1188.325
+    - 1194.55
+  - - 1196.05
+    - 1199.125
+  - - 1199.475
+    - 1212.875
+  - - 1213.225
+    - 1217.975
   beat: 'building block: turning the axes; x-hat-prime'
   visual: 'Keyword ''turn the axes'' from frame 0. Picture zone: grid with origin; the balloon''s arrow (3, 4) teal; the old axes x, y (orange,
     then 40 %). S4 on AT(4,''coastline, a runway or a valley''): a small code-drawn coastline sketch beside the grid with ''along'' and ''across''
@@ -1494,14 +1516,15 @@ scenes:
     the arrow stays put and pulses (''same arrow''). S7: gold alpha arc from x to x'' with ''alpha'', curved arrow ''anticlockwise (seen from
     above)''. S8-S9: x-hat-prime (orange) with its tip label (KaTeX x-hat prime); keyword ''prime = new''. S10: x-hat-prime''s triangle legs ''cos
     alpha'', ''sin alpha'' and the row. S11-S13: rows with the numbers.'
-  voiceover: The next few scenes turn the axes and build the rotation matrix, one step at a time, for anyone who wants every step. They aren't
-    needed for the intuition of weather, climate science or maps, so feel free to skip ahead to the time on screen. Now let's look at a second
+  voiceover: 'The next few scenes turn the axes and build the rotation matrix, one step at a time, for anyone who wants every step. They aren''t
+    needed for the intuition of weather, climate science or maps, so feel free to skip ahead to the time on screen. Now let''s look at a second
     way to change coordinates. This time, we keep the origin where it is, and we just turn the axes. Why would we want that? Along a coastline,
-    a runway or a valley, it's often more useful to measure along it and across it than east and north. The arrow itself stays the same. Only
+    a runway or a valley, it''s often more useful to measure along it and across it than east and north. The arrow itself stays the same. Only
     the rulers we measure it with turn. Say the new x axis is turned by an angle alpha, anticlockwise as seen from above. We call its unit vector
-    x hat prime. The little dash is read prime, and it marks the new axes. Like r hat, it's an arrow of length one at an angle, so it's cosine
-    alpha, sine alpha. [beat] Let's use alpha equals thirty degrees. Cosine of thirty degrees is about zero point eight seven, or more exactly
-    zero point eight six six, and sine of thirty degrees is exactly one half. So x hat prime is zero point eight six six, zero point five. [beat]
+    x hat prime. The little dash is read prime, and it marks the new axes. Like r hat, it''s an arrow of length one at an angle, so it''s cosine
+    alpha, sine alpha. [beat] Let''s use alpha equals thirty degrees. Cosine of thirty degrees is the square root of three over two: one point
+    seven three two over two, about zero point eight six six. Sine of thirty degrees is exactly one half. So x hat prime is zero point eight six
+    six, zero point five. [beat]'
   on_screen_eq:
     latex: \hat{\mathbf x}'=(\cos\alpha,\ \sin\alpha)
     vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
@@ -1529,27 +1552,27 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s16_y_prime
   t:
-  - 1105.6
-  - 1166.075
+  - 1219.475
+  - 1285.45
   sentence_times:
-  - - 1105.6
-    - 1107.875
-  - - 1108.225
-    - 1115.825
-  - - 1116.175
-    - 1126.0
-  - - 1126.35
-    - 1130.0
-  - - 1131.5
-    - 1137.9
-  - - 1139.4
-    - 1141.05
-  - - 1141.4
-    - 1147.45
-  - - 1147.8
-    - 1159.45
-  - - 1160.95
-    - 1165.275
+  - - 1219.475
+    - 1221.75
+  - - 1222.1
+    - 1229.7
+  - - 1230.05
+    - 1239.875
+  - - 1240.225
+    - 1243.875
+  - - 1245.375
+    - 1251.775
+  - - 1253.275
+    - 1254.925
+  - - 1255.275
+    - 1261.325
+  - - 1261.675
+    - 1278.825
+  - - 1280.325
+    - 1284.65
   beat: 'derivation D05: y-hat-prime by the 90-deg rule, drawn'
   visual: 'Keyword ''the new y axis'' from frame 0. Picture: the turned axes with x-hat-prime; S3-S4 on AT(3,''turned by ninety degrees''): x-hat-prime
     and its triangle turn 90 deg rigidly (TurnRule90, as in s10/s11) into y-hat-prime (orange, tip label); legs relabel ''cos alpha'' north-ish,
@@ -1559,8 +1582,8 @@ scenes:
     east. So y hat prime is x hat prime turned by ninety degrees, and we already have the rule for that: swap the two numbers, and put a minus
     on the first. That gives minus sine alpha, cosine alpha. [beat] With thirty degrees, y hat prime is minus zero point five, zero point eight
     six six. [beat] Let''s check it. Its length is one, because zero point two five plus zero point seven five is one. And its dot product with
-    x hat prime is zero point eight six six times minus zero point five, plus zero point five times zero point eight six six, which is zero. [beat]
-    So the new axes are at right angles, just like the old ones.'
+    x hat prime is zero point eight six six times minus zero point five, plus zero point five times zero point eight six six. That''s minus zero
+    point four three three plus zero point four three three, which is zero. [beat] So the new axes are at right angles, just like the old ones.'
   on_screen_eq:
     latex: \hat{\mathbf y}'=(-\sin\alpha,\ \cos\alpha)
     vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
@@ -1612,43 +1635,43 @@ scenes:
     intermediate -0.433 + 0.433 is not spoken, so not written).'
 - id: s17_new_components
   t:
-  - 1166.075
-  - 1269.875
+  - 1285.45
+  - 1398.425
   sentence_times:
-  - - 1166.075
-    - 1171.1
-  - - 1171.45
-    - 1175.4
-  - - 1175.75
-    - 1181.65
-  - - 1182.0
-    - 1188.575
-  - - 1188.925
-    - 1195.675
-  - - 1197.175
-    - 1205.6
-  - - 1207.1
-    - 1213.6
-  - - 1213.95
-    - 1220.05
-  - - 1220.4
-    - 1224.4
-  - - 1225.9
-    - 1232.375
-  - - 1232.725
-    - 1238.525
-  - - 1240.025
-    - 1246.125
-  - - 1246.475
-    - 1248.4
-  - - 1248.75
-    - 1254.7
-  - - 1255.05
-    - 1259.775
-  - - 1261.275
-    - 1263.225
-  - - 1263.575
-    - 1269.075
+  - - 1285.45
+    - 1290.475
+  - - 1290.825
+    - 1294.775
+  - - 1295.125
+    - 1301.025
+  - - 1301.375
+    - 1307.95
+  - - 1308.3
+    - 1315.05
+  - - 1316.55
+    - 1324.975
+  - - 1326.475
+    - 1332.975
+  - - 1333.325
+    - 1339.425
+  - - 1339.775
+    - 1343.775
+  - - 1345.275
+    - 1351.75
+  - - 1352.1
+    - 1357.9
+  - - 1359.4
+    - 1365.5
+  - - 1365.85
+    - 1367.775
+  - - 1368.125
+    - 1374.075
+  - - 1374.425
+    - 1388.325
+  - - 1389.825
+    - 1391.775
+  - - 1392.125
+    - 1397.625
   beat: 'derivation D06: x'', y'' as shadows on the new rulers; (3, 4) -> (4.6, 1.96)'
   visual: 'Keyword ''new coordinates x'', y'''' from frame 0. Picture: the turned axes x'', y'' (orange, with km ticks along them) and the arrow
     (3, 4) (teal). S3-S4: dashed perpendicular from the tip to the x'' axis; teal band along x'' from the origin to the foot (the shadow), keyword
@@ -1663,8 +1686,9 @@ scenes:
     equals four, and alpha equals thirty degrees. X prime is three times zero point eight six six, plus four times zero point five. That''s two
     point six plus two, about four point six. [beat] Y prime is minus three times zero point five, plus four times zero point eight six six. That''s
     minus one point five plus three point four six, about one point nine six. [beat] So in the turned axes, the balloon is at about four point
-    six, one point nine six. Is it the same arrow? Its length is the square root of four point six squared plus one point nine six squared. That''s
-    the square root of twenty five: five kilometres, as before. [beat] The arrow didn''t move. Only the numbers that describe it changed, because
+    six, one point nine six. Is it the same arrow? Its length is the square root of four point six squared plus one point nine six squared. Four
+    point six squared is about twenty one point one six, and one point nine six squared is about three point eight four. Together that''s twenty
+    five, and its square root is five kilometres, as before. [beat] The arrow didn''t move. Only the numbers that describe it changed, because
     we measure it with different rulers.'
   on_screen_eq:
     latex: x'=x\cos\alpha+y\sin\alpha,\qquad y'=-x\sin\alpha+y\cos\alpha
@@ -1732,37 +1756,37 @@ scenes:
     wind (10, 0) to the balloon''s arrow (3, 4) so that both terms of each line are non-zero.'
 - id: s18_matrix
   t:
-  - 1269.875
-  - 1354.075
+  - 1398.425
+  - 1517.675
   sentence_times:
-  - - 1269.875
-    - 1273.725
-  - - 1274.075
-    - 1280.525
-  - - 1280.875
-    - 1284.625
-  - - 1284.975
-    - 1292.55
-  - - 1292.9
-    - 1299.925
-  - - 1300.275
-    - 1303.05
-  - - 1303.4
-    - 1308.95
-  - - 1309.3
-    - 1313.9
-  - - 1314.25
-    - 1323.3
-  - - 1324.8
-    - 1327.85
-  - - 1328.2
-    - 1333.9
-  - - 1334.25
-    - 1340.6
-  - - 1340.95
-    - 1343.85
-  - - 1344.2
-    - 1353.275
+  - - 1398.425
+    - 1402.275
+  - - 1402.625
+    - 1409.075
+  - - 1409.425
+    - 1413.175
+  - - 1413.525
+    - 1421.1
+  - - 1421.45
+    - 1428.475
+  - - 1428.825
+    - 1431.6
+  - - 1431.95
+    - 1437.5
+  - - 1437.85
+    - 1442.45
+  - - 1442.8
+    - 1462.175
+  - - 1463.675
+    - 1466.725
+  - - 1467.075
+    - 1480.45
+  - - 1480.8
+    - 1487.15
+  - - 1487.5
+    - 1490.4
+  - - 1490.75
+    - 1516.875
   beat: 'derivation D07: line the two equations up -> the rotation matrix; direction cosines'
   visual: 'Keyword ''line them up'' from frame 0. Full width maths, a small picture top-left. S1-S2: the two lines from s17 slide into an aligned
     block: x-terms in one column, y-terms in another (x-terms tinted warm white, y-terms slate), aligned at ''=''. S3-S4: the four coefficients
@@ -1777,9 +1801,12 @@ scenes:
     is minus sine alpha and cosine alpha. That square of four numbers is called a rotation matrix, because it turns old coordinates into new ones.
     To use it, go along one row. Multiply its first number by x, and its second number by y, then add. The top row gives x prime, and the bottom
     row gives y prime. With our numbers, the top row gives zero point eight six six times three, plus zero point five times four: four point six
+    again. And the bottom row gives minus zero point five times three, plus zero point eight six six times four: one point nine six, our y prime
     again. [beat] Each of the four numbers has a meaning, too. The dot product of two arrows of length one is the cosine of the angle between
-    them. So each number is the cosine of the angle between one new axis and one old axis. That''s why they''re called direction cosines. For
-    example, the angle between x hat prime and x hat is alpha, so their dot product is cosine alpha: the top left number.'
+    them. As in the dot product movie: length times length times the cosine of the angle, and both lengths are one. So each number is the cosine
+    of the angle between one new axis and one old axis. That''s why they''re called direction cosines. For example, the angle between x hat prime
+    and x hat is alpha, so their dot product is cosine alpha: the top left number. The angle between x hat prime and y hat is ninety degrees minus
+    alpha, and its cosine is sine alpha. The angle between y hat prime and x hat is ninety degrees plus alpha, and its cosine is minus sine alpha.'
   on_screen_eq:
     latex: \begin{pmatrix}x'\\ y'\end{pmatrix}=\begin{pmatrix}\cos\alpha & \sin\alpha\\ -\sin\alpha & \cos\alpha\end{pmatrix}\begin{pmatrix}x\\
       y\end{pmatrix}
@@ -1831,53 +1858,53 @@ scenes:
     the picture x 80-1000 from frame 0 (halves gate).'
 - id: s19_index_form
   t:
-  - 1354.075
-  - 1494.15
+  - 1517.675
+  - 1669.2
   sentence_times:
-  - - 1354.075
-    - 1359.775
-  - - 1360.125
-    - 1362.825
-  - - 1363.175
-    - 1365.05
-  - - 1365.4
-    - 1370.45
-  - - 1370.8
-    - 1380.85
-  - - 1381.2
-    - 1384.975
-  - - 1385.325
-    - 1391.55
-  - - 1391.9
-    - 1394.025
-  - - 1394.375
-    - 1399.275
-  - - 1400.775
-    - 1406.125
-  - - 1407.625
-    - 1412.5
-  - - 1414.0
-    - 1419.3
-  - - 1420.8
-    - 1426.4
-  - - 1426.75
-    - 1435.225
-  - - 1435.575
-    - 1442.625
-  - - 1442.975
-    - 1447.55
-  - - 1449.05
-    - 1455.9
-  - - 1456.25
-    - 1461.175
-  - - 1462.675
-    - 1467.0
-  - - 1467.35
-    - 1476.175
-  - - 1476.525
-    - 1483.625
-  - - 1483.975
-    - 1493.35
+  - - 1517.675
+    - 1523.375
+  - - 1523.725
+    - 1526.425
+  - - 1526.775
+    - 1528.65
+  - - 1529.0
+    - 1534.05
+  - - 1534.4
+    - 1544.45
+  - - 1544.8
+    - 1548.575
+  - - 1548.925
+    - 1555.15
+  - - 1555.5
+    - 1557.625
+  - - 1557.975
+    - 1567.125
+  - - 1568.625
+    - 1573.975
+  - - 1575.475
+    - 1580.35
+  - - 1581.85
+    - 1587.15
+  - - 1588.65
+    - 1594.25
+  - - 1594.6
+    - 1603.075
+  - - 1603.425
+    - 1610.475
+  - - 1610.825
+    - 1619.05
+  - - 1620.55
+    - 1627.4
+  - - 1627.75
+    - 1636.225
+  - - 1637.725
+    - 1642.05
+  - - 1642.4
+    - 1651.225
+  - - 1651.575
+    - 1658.675
+  - - 1659.025
+    - 1668.4
   beat: 'derivation D08: x''_j = x_i C_ij, all four C''s computed, j = 1 and 2 written out'
   visual: 'Keyword ''index notation'' from frame 0; picture zone from frame 0: the origin with x-hat, y-hat, x-hat-prime, y-hat-prime. S3-S5:
     the names table builds (three rows), and the picture''s tip labels change to e_1, e_2, e''_1, e''_2 (KaTeX) on their words. S6-S7: ''C_ij
@@ -1892,15 +1919,16 @@ scenes:
   voiceover: 'In the vectors movie, we met index notation, a short way to write all of this. Let''s rewrite it one step at a time. First, the
     names. The old coordinates x and y become x sub one and x sub two. The old unit vectors x hat and y hat become e sub one and e sub two, and
     the new ones become e prime sub one and e prime sub two. Next, each direction cosine gets two labels. C sub i j is the dot product of old
-    arrow number i with new arrow number j. Let''s work out all four. C one one is x hat dot x hat prime, which is cosine alpha. [beat] C one
-    two is x hat dot y hat prime, which is minus sine alpha. [beat] C two one is y hat dot x hat prime, which is sine alpha. [beat] And C two
-    two is y hat dot y hat prime, which is cosine alpha. [beat] Now the rule: new coordinate number j is x sub i times C sub i j. The index i
-    appears twice, so, as in the vectors movie, we add up the terms for i equals one and i equals two. For j equals one, that''s x sub one times
-    C one one, plus x sub two times C two one. That''s x cosine alpha plus y sine alpha: our x prime. [beat] For j equals two, it''s x sub one
-    times C one two, plus x sub two times C two two. That''s minus x sine alpha plus y cosine alpha: our y prime. [beat] So the short line says
-    exactly what our two long lines say. If we set the four C''s in a square, with i for the row and j for the column, we get our rotation matrix
-    flipped over its diagonal. That''s only because this form reads down the columns instead of along the rows, and the four numbers are the same.
-    The same rule works in three dimensions, and for things called tensors, which have their own movie later in this series: Tensors made easy.'
+    arrow number i with new arrow number j. Let''s work out all four. C one one is x hat dot x hat prime: one times cosine alpha, plus zero times
+    sine alpha, which is cosine alpha. [beat] C one two is x hat dot y hat prime, which is minus sine alpha. [beat] C two one is y hat dot x hat
+    prime, which is sine alpha. [beat] And C two two is y hat dot y hat prime, which is cosine alpha. [beat] Now the rule: new coordinate number
+    j is x sub i times C sub i j. The index i appears twice, so, as in the vectors movie, we add up the terms for i equals one and i equals two.
+    For j equals one, that''s x sub one times C one one, plus x sub two times C two one. That''s x cosine alpha plus y sine alpha: our x prime.
+    With our numbers that''s four point six again. [beat] For j equals two, it''s x sub one times C one two, plus x sub two times C two two. That''s
+    minus x sine alpha plus y cosine alpha: our y prime. With our numbers that''s one point nine six. [beat] So the short line says exactly what
+    our two long lines say. If we set the four C''s in a square, with i for the row and j for the column, we get our rotation matrix flipped over
+    its diagonal. That''s only because this form reads down the columns instead of along the rows, and the four numbers are the same. The same
+    rule works in three dimensions, and for things called tensors, which have their own movie later in this series: Tensors made easy.'
   on_screen_eq:
     latex: x'_j=x_i\,C_{ij},\qquad C_{ij}=\mathbf e_i\cdot\mathbf e'_j
     vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
@@ -1975,49 +2003,49 @@ scenes:
     box). ''more: Tensors made easy'' is a keyword line, not a card; the voice says the title.'
 - id: s20_polar_is_turned
   t:
-  - 1494.15
-  - 1621.0
+  - 1669.2
+  - 1796.05
   sentence_times:
-  - - 1494.15
-    - 1497.125
-  - - 1497.475
-    - 1505.075
-  - - 1505.425
-    - 1510.575
-  - - 1510.925
-    - 1516.4
-  - - 1517.9
-    - 1524.15
-  - - 1524.5
-    - 1529.775
-  - - 1530.125
-    - 1533.65
-  - - 1534.0
-    - 1540.6
-  - - 1542.1
-    - 1549.6
-  - - 1551.1
-    - 1555.6
-  - - 1555.95
-    - 1559.625
-  - - 1559.975
-    - 1565.4
-  - - 1565.75
-    - 1569.725
-  - - 1571.225
-    - 1576.975
-  - - 1577.325
-    - 1581.8
-  - - 1583.3
-    - 1593.95
-  - - 1594.3
-    - 1596.475
-  - - 1596.825
-    - 1601.1
-  - - 1601.45
-    - 1607.125
-  - - 1607.475
-    - 1620.2
+  - - 1669.2
+    - 1672.175
+  - - 1672.525
+    - 1680.125
+  - - 1680.475
+    - 1685.625
+  - - 1685.975
+    - 1691.45
+  - - 1692.95
+    - 1699.2
+  - - 1699.55
+    - 1704.825
+  - - 1705.175
+    - 1708.7
+  - - 1709.05
+    - 1715.65
+  - - 1717.15
+    - 1724.65
+  - - 1726.15
+    - 1730.65
+  - - 1731.0
+    - 1734.675
+  - - 1735.025
+    - 1740.45
+  - - 1740.8
+    - 1744.775
+  - - 1746.275
+    - 1752.025
+  - - 1752.375
+    - 1756.85
+  - - 1758.35
+    - 1769.0
+  - - 1769.35
+    - 1771.525
+  - - 1771.875
+    - 1776.15
+  - - 1776.5
+    - 1782.175
+  - - 1782.525
+    - 1795.25
   beat: 'derivation D09: polar parts are turned-axes coordinates (alpha = theta)'
   visual: 'Keyword ''alpha = theta'' from frame 0. Picture: the balloon at 53 deg on its circle with r-hat and theta-hat (labelled); the turned
     axes x'', y'' through the station at alpha = 0 at first. S2: alpha grows to 53 deg (gold arc) so that the x'' axis passes through the balloon;
@@ -2099,27 +2127,27 @@ scenes:
     see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s21_ian_polar
   t:
-  - 1621.0
-  - 1683.825
+  - 1796.05
+  - 1858.875
   sentence_times:
-  - - 1621.0
-    - 1624.425
-  - - 1624.775
-    - 1636.7
-  - - 1637.05
-    - 1645.75
-  - - 1646.1
-    - 1653.625
-  - - 1653.975
-    - 1657.15
-  - - 1657.5
-    - 1661.375
-  - - 1661.725
-    - 1670.175
-  - - 1670.525
-    - 1674.4
-  - - 1674.75
-    - 1683.025
+  - - 1796.05
+    - 1799.475
+  - - 1799.825
+    - 1811.75
+  - - 1812.1
+    - 1820.8
+  - - 1821.15
+    - 1828.675
+  - - 1829.025
+    - 1832.2
+  - - 1832.55
+    - 1836.425
+  - - 1836.775
+    - 1845.225
+  - - 1845.575
+    - 1849.45
+  - - 1849.8
+    - 1858.075
   beat: 'application: Ian in polar coordinates (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Full-width map (projection of the product;
     Lambert conformal for HRRR) of SW Florida 24-29.5 N, 85-79.5 W: 10-m wind speed shaded (cmocean ''speed'', 0-50 m/s), streaklines animated
@@ -2181,39 +2209,39 @@ scenes:
     the start of s25 (the camera returns to this scene''s start view before the curves).'
 - id: s22_spin_inflow
   t:
-  - 1683.825
-  - 1784.925
+  - 1858.875
+  - 1991.725
   sentence_times:
-  - - 1683.825
-    - 1687.325
-  - - 1687.675
-    - 1691.45
-  - - 1691.8
-    - 1696.25
-  - - 1696.6
-    - 1705.75
-  - - 1706.1
-    - 1713.1
-  - - 1713.45
-    - 1718.525
-  - - 1720.025
-    - 1732.075
-  - - 1732.425
-    - 1738.55
-  - - 1740.05
-    - 1747.275
-  - - 1747.625
-    - 1752.525
-  - - 1754.025
-    - 1759.5
-  - - 1759.85
-    - 1762.475
-  - - 1762.825
-    - 1770.875
-  - - 1771.225
-    - 1778.775
-  - - 1780.275
-    - 1784.125
+  - - 1858.875
+    - 1862.375
+  - - 1862.725
+    - 1866.5
+  - - 1866.85
+    - 1871.3
+  - - 1871.65
+    - 1880.8
+  - - 1881.15
+    - 1888.15
+  - - 1888.5
+    - 1903.125
+  - - 1904.625
+    - 1916.675
+  - - 1917.025
+    - 1923.15
+  - - 1924.65
+    - 1931.875
+  - - 1932.225
+    - 1946.025
+  - - 1947.525
+    - 1953.0
+  - - 1953.35
+    - 1955.975
+  - - 1956.325
+    - 1964.375
+  - - 1964.725
+    - 1974.975
+  - - 1976.475
+    - 1990.925
   beat: 'application: ring means 37 round, -12.5 in (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Zoomed map continues (colour bar beside,
     source below). S1-S3: at one ring point a teal tangential arrow and a rose radial arrow (pointing at the eye) with KaTeX tags ''u_theta'',
@@ -2226,14 +2254,17 @@ scenes:
     135 kt'' then ''135 x 1.85 = about 250 km/h'' (Should 4). S15: keyword ''the analysis smooths the peak''.'
   voiceover: 'Every wind on the map now has two polar parts. The radial wind, u sub r, blows in or out. The tangential wind, u sub theta, blows
     round the eye. Let''s draw a ring twenty five kilometres from the centre, and work out both parts at seventy two points round it, one every
-    five degrees. Then we average each part round the ring: we add up the seventy two values, and divide by seventy two. The tangential wind averages
-    about thirty five metres per second. [beat] To turn metres per second into kilometres per hour, we multiply by three point six, because an
-    hour has three thousand six hundred seconds, and a kilometre has a thousand metres. So thirty five metres per second is about a hundred and
-    twenty six kilometres per hour. [beat] The air goes round anticlockwise, as seen from above, as in every northern hemisphere hurricane. The
-    radial wind averages about minus thirteen metres per second. [beat] The minus sign means that, on average, the air is flowing in, towards
-    the eye. The real storm was even stronger. The official estimate of its strongest wind at that hour, averaged over a minute, is about a hundred
-    and thirty five knots. One knot is one point eight five kilometres per hour, so that''s about two hundred and fifty kilometres per hour. [beat]
-    The model analysis smooths out the strongest winds.'
+    five degrees. Then we average each part round the ring: we add up the seventy two values, and divide by seventy two. The seventy two tangential
+    winds add up to about two thousand five hundred and six metres per second. Divided by seventy two, that''s about thirty four point eight,
+    or about thirty five metres per second. [beat] To turn metres per second into kilometres per hour, we multiply by three point six, because
+    an hour has three thousand six hundred seconds, and a kilometre has a thousand metres. So thirty five metres per second is about a hundred
+    and twenty six kilometres per hour. [beat] The air goes round anticlockwise, as seen from above, as in every northern hemisphere hurricane.
+    The seventy two radial winds add up to about minus nine hundred and fifty seven. Divided by seventy two, that''s about minus thirteen point
+    three, or about minus thirteen metres per second. [beat] The minus sign means that, on average, the air is flowing in, towards the eye. The
+    real storm was even stronger. The official estimate of its strongest wind at that hour, averaged over a minute, is about a hundred and thirty
+    five knots. One knot is about one point eight five kilometres per hour, so that''s about two hundred and fifty kilometres per hour, or about
+    sixty nine metres per second. [beat] That''s the single strongest wind, while our thirty five is an average round the ring, and even the strongest
+    wind on our model ring is only about forty nine. The model analysis smooths out the strongest winds.'
   on_screen_eq:
     latex: \text{average}=\frac{\text{sum of the 72 values}}{72}
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2270,41 +2301,41 @@ scenes:
   layout: Readouts in the column x 1500-1840; links leave from their text's left edge and never cross (Must 5); colour bar beside the map; SourceBelow.
 - id: s23_what_numbers_mean
   t:
-  - 1784.925
-  - 1903.625
+  - 1991.725
+  - 2143.575
   sentence_times:
-  - - 1784.925
-    - 1788.775
-  - - 1789.125
-    - 1792.75
-  - - 1793.1
-    - 1796.65
-  - - 1797.0
-    - 1801.575
-  - - 1801.925
-    - 1811.575
-  - - 1813.075
-    - 1816.3
-  - - 1816.65
-    - 1824.475
-  - - 1825.975
-    - 1829.7
-  - - 1830.05
-    - 1837.875
-  - - 1838.225
-    - 1848.525
-  - - 1850.025
-    - 1862.3
-  - - 1863.8
-    - 1868.05
-  - - 1868.4
-    - 1877.125
-  - - 1878.625
-    - 1882.625
-  - - 1882.975
-    - 1892.25
-  - - 1892.6
-    - 1902.825
+  - - 1991.725
+    - 1995.575
+  - - 1995.925
+    - 1999.55
+  - - 1999.9
+    - 2003.45
+  - - 2003.8
+    - 2008.375
+  - - 2008.725
+    - 2030.925
+  - - 2032.425
+    - 2035.65
+  - - 2036.0
+    - 2043.825
+  - - 2045.325
+    - 2049.05
+  - - 2049.4
+    - 2057.225
+  - - 2057.575
+    - 2077.9
+  - - 2079.4
+    - 2096.55
+  - - 2098.05
+    - 2102.3
+  - - 2102.65
+    - 2117.075
+  - - 2118.575
+    - 2122.575
+  - - 2122.925
+    - 2132.2
+  - - 2132.55
+    - 2142.775
   beat: 'D10: what 37 and 12.5 mean (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture zone: a clean top view of the 25-km
     ring round the eye drawn from the data (ring, centre dot, the zoomed map at 30 % underneath, colour bar removed while the map is faded; source
@@ -2317,16 +2348,19 @@ scenes:
     at the ring of strongest winds with keyword ''rises (Part 2)''. S16: keyword ''more: How tropical cyclones form''.'
   voiceover: 'So what do these two numbers mean, and how are they different? Thirty five is how fast the air goes round the eye. Thirteen is how
     fast it moves towards the eye. They''re two parts of the same wind, at right angles to each other. By Pythagoras, together they make an arrow
-    of the square root of thirty five squared plus thirteen squared, about thirty seven metres per second. [beat] It points mostly round, and
-    a little in. Thirteen metres per second, times three point six, is about forty seven kilometres per hour, towards the centre. [beat] Now imagine,
-    just for a moment, that nothing changed. An air parcel, a small volume of air that moves with the flow, starts on this ring, twenty five kilometres
-    out. Moving in at thirteen metres per second, it would cover the twenty five thousand metres to the centre in about nineteen hundred seconds,
-    about thirty two minutes. [beat] Going round at thirty five metres per second, one lap of this ring, two pi times twenty five kilometres,
-    about a hundred and fifty seven kilometres, takes about seventy five minutes. [beat] So the air is moving round and moving in at the same
-    time. Thirty five divided by thirteen is about two point seven, so for every metre it moves in, it moves almost three metres round. [beat]
-    The air doesn''t fall straight into the eye: it spirals in. In the real storm, the inflow slows down near the ring of strongest winds, and
-    the air rises there instead, in towering clouds. We''ll look at that rising air in Part 2, and the whole story of how hurricanes work has
-    its own movie later in this series: How tropical cyclones form.'
+    of the square root of thirty five squared plus thirteen squared. Thirty five squared is twelve hundred and twenty five, and thirteen squared
+    is a hundred and sixty nine. Together that''s thirteen hundred and ninety four, and its square root is about thirty seven metres per second.
+    [beat] It points mostly round, and a little in. Thirteen metres per second, times three point six, is about forty seven kilometres per hour,
+    towards the centre. [beat] Now imagine, just for a moment, that nothing changed. An air parcel, a small volume of air that moves with the
+    flow, starts on this ring, twenty five kilometres out. Moving in at thirteen metres per second, it would have to cover twenty five kilometres,
+    which is twenty five thousand metres. Twenty five thousand divided by thirteen is about nineteen hundred and twenty three seconds. Divided
+    by sixty seconds a minute, that''s about thirty two minutes. [beat] Going round at thirty five metres per second, one lap of this ring, two
+    pi times twenty five kilometres, is about a hundred and fifty seven kilometres. That takes about four thousand four hundred and ninety seconds,
+    which is about seventy five minutes. [beat] So the air is moving round and moving in at the same time. In any stretch of time, it goes thirty
+    five metres round for every thirteen in, and thirty five over thirteen is about two point seven. So for every metre it moves in, it moves
+    almost three metres round. [beat] The air doesn''t fall straight into the eye: it spirals in. In the real storm, the inflow slows down near
+    the ring of strongest winds, and the air rises there instead, in towering clouds. We''ll look at that rising air in Part 2, and the whole
+    story of how hurricanes work has its own movie later in this series: How tropical cyclones form.'
   on_screen_eq:
     latex: \sqrt{35^2+13^2}\approx37\ \mathrm{m/s}
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2397,59 +2431,59 @@ scenes:
   layout: 'Source line kept under the faded map; keywords in the column; ''more: How tropical cyclones form'' is a keyword line.'
 - id: s24_ring_points
   t:
-  - 1903.625
-  - 2080.65
+  - 2143.575
+  - 2335.05
   sentence_times:
-  - - 1903.625
-    - 1909.7
-  - - 1910.05
-    - 1919.5
-  - - 1919.85
-    - 1922.4
-  - - 1922.75
-    - 1926.375
-  - - 1926.725
-    - 1932.025
-  - - 1932.375
-    - 1936.675
-  - - 1937.025
-    - 1943.925
-  - - 1945.425
-    - 1950.875
-  - - 1951.225
-    - 1956.725
-  - - 1957.075
-    - 1961.5
-  - - 1961.85
-    - 1964.8
-  - - 1966.3
-    - 1970.425
-  - - 1970.775
-    - 1980.625
-  - - 1982.125
-    - 1985.725
-  - - 1986.075
-    - 1991.8
-  - - 1992.15
-    - 1997.875
-  - - 1999.375
-    - 2004.55
-  - - 2004.9
-    - 2010.4
-  - - 2011.9
-    - 2021.975
-  - - 2022.325
-    - 2033.75
-  - - 2034.1
-    - 2041.35
-  - - 2042.85
-    - 2054.1
-  - - 2054.45
-    - 2061.45
-  - - 2062.95
-    - 2068.85
-  - - 2069.2
-    - 2079.85
+  - - 2143.575
+    - 2149.65
+  - - 2150.0
+    - 2159.45
+  - - 2159.8
+    - 2162.35
+  - - 2162.7
+    - 2166.325
+  - - 2166.675
+    - 2171.975
+  - - 2172.325
+    - 2176.625
+  - - 2176.975
+    - 2183.875
+  - - 2185.375
+    - 2190.825
+  - - 2191.175
+    - 2196.675
+  - - 2197.025
+    - 2201.45
+  - - 2201.8
+    - 2204.75
+  - - 2206.25
+    - 2210.375
+  - - 2210.725
+    - 2220.575
+  - - 2222.075
+    - 2225.675
+  - - 2226.025
+    - 2231.75
+  - - 2232.1
+    - 2243.0
+  - - 2244.5
+    - 2249.675
+  - - 2250.025
+    - 2255.525
+  - - 2257.025
+    - 2272.125
+  - - 2272.475
+    - 2283.9
+  - - 2284.25
+    - 2291.5
+  - - 2293.0
+    - 2308.5
+  - - 2308.85
+    - 2315.85
+  - - 2317.35
+    - 2323.25
+  - - 2323.6
+    - 2334.25
   beat: 'D11: three ring points by hand (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture: the zoomed ring (map at 60 %,
     colour bar beside, source below) with three gold dots at theta = 0, 90 and 135 deg, each tagged with its angle. Column top, pinned all scene:
@@ -2469,15 +2503,16 @@ scenes:
     a little in. And u sub theta equals v, which is thirty eight: round. Here, the wind blows mostly round. [beat] Next, the point due north of
     the eye, at ninety degrees. There, u is minus sixteen point nine, and v is minus thirty seven point four: the wind blows mostly towards the
     south, and a little west. [beat] Now the cosine is zero and the sine is one. So u sub r equals v, which is minus thirty seven point four:
-    in. And u sub theta equals minus u, which is plus sixteen point nine: round. [beat] Last, the point to the northwest, at a hundred and thirty
-    five degrees. There, u is minus ten point one, and v is minus forty four point five. [beat] The cosine of a hundred and thirty five degrees
-    is minus zero point seven zero seven, and the sine is plus zero point seven zero seven. So u sub r is minus ten point one times minus zero
+    in. And u sub theta is minus u times one, plus v times zero. Minus times minus sixteen point nine makes plus sixteen point nine: round. [beat]
+    Last, the point to the northwest, at a hundred and thirty five degrees. There, u is minus ten point one, and v is minus forty four point five.
+    [beat] A hundred and thirty five degrees is forty five degrees short of due west, so its cosine is minus one over the square root of two,
+    about minus zero point seven zero seven, and its sine is plus zero point seven zero seven. So u sub r is minus ten point one times minus zero
     point seven zero seven, plus minus forty four point five times zero point seven zero seven. That''s seven point one four minus thirty one
-    point four six, about minus twenty four point three: in. [beat] And u sub theta is plus ten point one times zero point seven zero seven, plus
-    minus forty four point five times minus zero point seven zero seven. That''s seven point one four plus thirty one point four six, about thirty
-    eight point six: round. [beat] The computer does exactly this at all seventy two points, and then takes the averages. If you skipped, here''s
-    what to keep: at every point round the ring, the wind''s east and north parts turn into an in or out part and a round part, and then we average
-    them.'
+    point four six, about minus twenty four point three: in. [beat] And u sub theta is minus u times sine, so minus minus ten point one, which
+    is plus ten point one, times zero point seven zero seven, plus minus forty four point five times minus zero point seven zero seven. That''s
+    seven point one four plus thirty one point four six, about thirty eight point six: round. [beat] The computer does exactly this at all seventy
+    two points, and then takes the averages. If you skipped, here''s what to keep: at every point round the ring, the wind''s east and north parts
+    turn into an in or out part and a round part, and then we average them.'
   on_screen_eq:
     latex: u_r=u\cos\theta+v\sin\theta,\qquad u_\theta=-u\sin\theta+v\cos\theta
     vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build 1): x = R
@@ -2540,39 +2575,39 @@ scenes:
   layout: Calculations in the column only; tags on the map are short labels at their points; SourceBelow; colour bar beside.
 - id: s25_why_polar_storm
   t:
-  - 2080.65
-  - 2178.225
+  - 2335.05
+  - 2432.625
   sentence_times:
-  - - 2080.65
-    - 2083.475
-  - - 2083.825
-    - 2089.0
-  - - 2089.35
-    - 2096.85
-  - - 2097.2
-    - 2099.75
-  - - 2100.1
-    - 2105.975
-  - - 2106.325
-    - 2110.95
-  - - 2111.3
-    - 2119.4
-  - - 2119.75
-    - 2123.425
-  - - 2123.775
-    - 2131.375
-  - - 2131.725
-    - 2140.65
-  - - 2141.0
-    - 2149.15
-  - - 2149.5
-    - 2159.025
-  - - 2159.375
-    - 2162.375
-  - - 2162.725
-    - 2173.075
-  - - 2173.425
-    - 2177.425
+  - - 2335.05
+    - 2337.875
+  - - 2338.225
+    - 2343.4
+  - - 2343.75
+    - 2351.25
+  - - 2351.6
+    - 2354.15
+  - - 2354.5
+    - 2360.375
+  - - 2360.725
+    - 2365.35
+  - - 2365.7
+    - 2373.8
+  - - 2374.15
+    - 2377.825
+  - - 2378.175
+    - 2385.775
+  - - 2386.125
+    - 2395.05
+  - - 2395.4
+    - 2403.55
+  - - 2403.9
+    - 2413.425
+  - - 2413.775
+    - 2416.775
+  - - 2417.125
+    - 2427.475
+  - - 2427.825
+    - 2431.825
   beat: 'intuition: why polar helps; labelled curves (PENDING DATA REPORT)'
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). On frame 0 the map zooms back out to s21''s
     start view (1 s) and settles into the left picture zone (ring view, x 80-1000) with a gold marker that goes round the ring as the curves draw.
@@ -2620,33 +2655,33 @@ scenes:
     inside x <= 1840; legend never over the curves.
 - id: s26_inflow_angle
   t:
-  - 2178.225
-  - 2251.625
+  - 2432.625
+  - 2510.7
   sentence_times:
-  - - 2178.225
-    - 2181.875
-  - - 2182.225
-    - 2186.225
-  - - 2186.575
-    - 2193.125
-  - - 2193.475
-    - 2202.775
-  - - 2203.125
-    - 2206.75
-  - - 2208.25
-    - 2212.875
-  - - 2213.225
-    - 2219.2
-  - - 2219.55
-    - 2226.35
-  - - 2226.7
-    - 2229.8
-  - - 2230.15
-    - 2235.125
-  - - 2235.475
-    - 2241.25
-  - - 2241.6
-    - 2250.825
+  - - 2432.625
+    - 2436.275
+  - - 2436.625
+    - 2440.625
+  - - 2440.975
+    - 2447.525
+  - - 2447.875
+    - 2459.775
+  - - 2460.125
+    - 2465.825
+  - - 2467.325
+    - 2471.95
+  - - 2472.3
+    - 2478.275
+  - - 2478.625
+    - 2485.425
+  - - 2485.775
+    - 2488.875
+  - - 2489.225
+    - 2494.2
+  - - 2494.55
+    - 2500.325
+  - - 2500.675
+    - 2509.9
   beat: the inflow angle, and four angles side by side (PENDING DATA REPORT for the numbers)
   visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05) (numbers). Picture: one ring point enlarged:
     the ring''s tangent direction theta-hat (orange) and the ring-mean wind arrow (teal), a rose wedge between them labelled ''inflow angle''
@@ -2656,13 +2691,13 @@ scenes:
     wind, ''how far the wind leans in''); each with ''(seen from above)'' where it has a sense. S11: keyword ''four questions''. S12: keyword
     ''more: Vorticity in plain words''.'
   voiceover: 'There''s one more angle that hurricane scientists use. The wind crosses each ring at a slant, a little inward. The angle between
-    the wind and the ring''s own direction, theta hat, is called the inflow angle. Its tangent is the inward part over the round part: thirteen
-    point three over thirty four point eight, which is about zero point three eight. So the inflow angle is about twenty one degrees. [beat] We''ve
-    now met four different angles, so let''s put them side by side. Theta says where a point is, measured from east, anticlockwise as seen from
-    above. The compass bearing says which way something points, measured from north, clockwise as seen from above. Alpha says how far we turned
-    our axes. And the inflow angle says how far the wind leans inward from the ring. They answer four different questions, so it''s always worth
-    checking which angle you''re looking at. The storm''s spin also has its own measure, called vorticity, which has its own movie later in this
-    series: Vorticity in plain words.'
+    the wind and the ring''s own direction, theta hat, is called the inflow angle. Its tangent is the side opposite the angle over the side next
+    to it: the inward part over the round part, thirteen point three over thirty four point eight, about zero point three eight. So the inflow
+    angle, the angle with that tangent, is about twenty one degrees. [beat] We''ve now met four different angles, so let''s put them side by side.
+    Theta says where a point is, measured from east, anticlockwise as seen from above. The compass bearing says which way something points, measured
+    from north, clockwise as seen from above. Alpha says how far we turned our axes. And the inflow angle says how far the wind leans inward from
+    the ring. They answer four different questions, so it''s always worth checking which angle you''re looking at. The storm''s spin also has
+    its own measure, called vorticity, which has its own movie later in this series: Vorticity in plain words.'
   on_screen_eq:
     latex: \tan(\text{inflow angle})=\frac{13.3}{34.8}\approx0.38
     vallis_eq: 'none: arithmetic or a definition (no book equation)'
@@ -2696,31 +2731,31 @@ scenes:
     of the mean wind; no map.)'
 - id: s27_recap
   t:
-  - 2251.625
-  - 2336.2
+  - 2510.7
+  - 2595.275
   sentence_times:
-  - - 2251.625
-    - 2258.85
-  - - 2259.2
-    - 2266.75
-  - - 2267.1
-    - 2276.125
-  - - 2276.475
-    - 2280.775
-  - - 2281.125
-    - 2283.775
-  - - 2284.125
-    - 2292.15
-  - - 2292.5
-    - 2299.125
-  - - 2299.475
-    - 2308.625
-  - - 2308.975
-    - 2314.675
-  - - 2315.025
-    - 2326.625
-  - - 2326.975
-    - 2335.4
+  - - 2510.7
+    - 2517.925
+  - - 2518.275
+    - 2525.825
+  - - 2526.175
+    - 2535.2
+  - - 2535.55
+    - 2539.85
+  - - 2540.2
+    - 2542.85
+  - - 2543.2
+    - 2551.225
+  - - 2551.575
+    - 2558.2
+  - - 2558.55
+    - 2567.7
+  - - 2568.05
+    - 2573.75
+  - - 2574.1
+    - 2585.7
+  - - 2586.05
+    - 2594.475
   beat: recap ('To sum up'); last sentence the teaser to Part 2
   visual: 'One beat per sentence, mini pictures reused (no headings): grid + origin; fixed x-hat, y-hat; r and theta with x = r cos theta, y =
     r sin theta; the arc rule; r-hat and theta-hat with the +90 deg arc and (-sin theta, cos theta); the wind''s two shadow bands; turned axes
@@ -2752,15 +2787,15 @@ scenes:
   layout: Mini pictures one per sentence; a small source line under the real-data mini picture. No headings.
 - id: s28_end
   t:
-  - 2336.2
-  - 2359.1
+  - 2595.275
+  - 2618.175
   sentence_times:
-  - - 2336.2
-    - 2342.4
-  - - 2342.75
-    - 2350.8
-  - - 2351.15
-    - 2358.8
+  - - 2595.275
+    - 2601.475
+  - - 2601.825
+    - 2609.875
+  - - 2610.225
+    - 2617.875
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (a square grid, polar rings with r-hat and theta-hat, turned axes,
     a storm ring); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook
@@ -2790,9 +2825,9 @@ build_1:
     sentences: 376
   fix1_tts:
     tool: movies/src/ch00_coordinates_flat/checks/cf_fix1_splice.py (six sentences re-voiced, af_bella x1.0, spliced)
-    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix1b/tts
-    audio_s: 2359.1
-    cues: 555
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix1c/tts
+    audio_s: 2618.175
+    cues: 619
     warnings: []
     sentences: 381
     replaced:
@@ -2802,33 +2837,70 @@ build_1:
     - s24_ring_points S21
     - s24_ring_points S23
     - s25_why_polar_storm S12
+    - s03_cartesian_arrows S3 (C1, fix 1c)
+    - s04_polar S3 (C2, fix 1c)
+    - s04_polar S6 (C3, fix 1c)
+    - s05_polar_back S7 (C4, fix 1c)
+    - s07_radians S6 (C5, fix 1c)
+    - s07_radians S8 (C6, fix 1c)
+    - s08_r_hat S7 (C7, fix 1c)
+    - s08_r_hat S8 (C8, fix 1c)
+    - s09_where_theta_grows S10 (C9, fix 1c)
+    - s10_turn_90 S11 (C11, fix 1c)
+    - s10_turn_90 S16 (C12, fix 1c)
+    - s11_theta_hat S10 (C15, fix 1c)
+    - s11_theta_hat S12 (C15, fix 1c)
+    - s14_rebuild_general S4 (C19, fix 1c)
+    - s14_rebuild_general S8 (C20, fix 1c)
+    - s15_turn_axes S14 (C21, fix 1c)
+    - s16_y_prime S8 (C23, fix 1c)
+    - s17_new_components S15 (C24, fix 1c)
+    - s18_matrix S9 (C26, fix 1c)
+    - s18_matrix S11 (C27, fix 1c)
+    - s18_matrix S14 (C27, fix 1c)
+    - s19_index_form S9 (C28, fix 1c)
+    - s19_index_form S16 (C29, fix 1c)
+    - s19_index_form S18 (C29, fix 1c)
+    - s22_spin_inflow S6 (C32, fix 1c)
+    - s22_spin_inflow S10 (C32, fix 1c)
+    - s22_spin_inflow S14 (C33, fix 1c)
+    - s22_spin_inflow S15 (C33, fix 1c)
+    - s23_what_numbers_mean S5 (C34, fix 1c)
+    - s23_what_numbers_mean S10 (C35, fix 1c)
+    - s23_what_numbers_mean S11 (C36, fix 1c)
+    - s23_what_numbers_mean S13 (C37, fix 1c)
+    - s24_ring_points S16 (C38, fix 1c)
+    - s24_ring_points S19 (C39, fix 1c)
+    - s24_ring_points S22 (C40, fix 1c)
+    - s26_inflow_angle S4 (C43, fix 1c)
+    - s26_inflow_angle S5 (C43, fix 1c)
     - s11_theta_hat S16-S19 -> 9 sentences (user note U1, cf_fix1b_splice.py)
 maths_skip:
   rule: 'user 2026-11-05: before each step-by-step block a friendly spoken line + an on-screen chip (''every step · optional'' / ''skip to mm:ss'');
     after it, ''If you skipped, here''s what to keep: ...''. The chip is an explicit user exception to ''no boxes''.'
   blocks:
   - block_from: s09_where_theta_grows
-    skip_line_s: 409.15
-    skip_to: '12:29'
-    skip_to_s: 749.425
+    skip_line_s: 475.175
+    skip_to: '14:11'
+    skip_to_s: 851.525
     keep_line: 'If you skipped, here''s what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat
       is r hat turned by ninety degrees.'
   - block_from: s13_components
-    skip_line_s: 801.175
-    skip_to: '16:48'
-    skip_to_s: 1008.225
+    skip_line_s: 903.275
+    skip_to: '18:39'
+    skip_to_s: 1119.025
     keep_line: 'If you skipped, here''s what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and
       each part is a dot product.'
   - block_from: s15_turn_axes
-    skip_line_s: 1019.9
-    skip_to: '26:47'
-    skip_to_s: 1607.475
+    skip_line_s: 1130.7
+    skip_to: '29:42'
+    skip_to_s: 1782.525
     keep_line: 'If you skipped, here''s what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the
       arrow itself, and polar parts are just axes turned by theta.'
   - block_from: s24_ring_points
-    skip_line_s: 1903.625
-    skip_to: '34:29'
-    skip_to_s: 2069.2
+    skip_line_s: 2143.575
+    skip_to: '38:43'
+    skip_to_s: 2323.6
     keep_line: 'If you skipped, here''s what to keep: at every point round the ring, the wind''s east and north parts turn into an in or out part
       and a round part, and then we average them.'
 chapters:
@@ -2844,63 +2916,63 @@ chapters:
   t_s: 31.275
   title: Origin, axes and Cartesian coordinates
   scene: s02_coordinates
-- time: '2:13'
-  t_s: 133.125
+- time: '2:23'
+  t_s: 143.475
   title: Polar coordinates
   scene: s04_polar
-- time: '3:53'
-  t_s: 233.9
+- time: '4:37'
+  t_s: 277.35
   title: Maths angle, compass bearing and wind 'from'
   scene: s06_bearings
-- time: '4:33'
-  t_s: 273.75
+- time: '5:17'
+  t_s: 317.2
   title: Radians and arc length
   scene: s07_radians
-- time: '5:37'
-  t_s: 337.9
+- time: '6:31'
+  t_s: 391.15
   title: The unit vector r-hat
   scene: s08_r_hat
-- time: '6:49'
-  t_s: 409.15
+- time: '7:55'
+  t_s: 475.175
   title: 'Every step: theta-hat and the 90-degree turn rule'
   scene: s09_where_theta_grows
-- time: '12:41'
-  t_s: 761.325
+- time: '14:23'
+  t_s: 863.425
   title: Polar unit vectors depend on place
   scene: s12_arrows_depend
-- time: '13:21'
-  t_s: 801.175
+- time: '15:03'
+  t_s: 903.275
   title: 'Every step: a wind''s radial and tangential parts'
   scene: s13_components
-- time: '16:59'
-  t_s: 1019.9
+- time: '18:50'
+  t_s: 1130.7
   title: 'Every step: turned axes and the rotation matrix'
   scene: s15_turn_axes
-- time: '27:01'
-  t_s: 1621.0
+- time: '29:56'
+  t_s: 1796.05
   title: Hurricane Ian in polar coordinates
   scene: s21_ian_polar
-- time: '29:44'
-  t_s: 1784.925
+- time: '33:11'
+  t_s: 1991.725
   title: What 35 and 13 mean
   scene: s23_what_numbers_mean
-- time: '31:43'
-  t_s: 1903.625
+- time: '35:43'
+  t_s: 2143.575
   title: 'Every step: three ring points by hand'
   scene: s24_ring_points
-- time: '34:40'
-  t_s: 2080.65
+- time: '38:55'
+  t_s: 2335.05
   title: Why hurricane scientists use polar coordinates
   scene: s25_why_polar_storm
-- time: '36:18'
-  t_s: 2178.225
+- time: '40:32'
+  t_s: 2432.625
   title: The inflow angle and four angles
   scene: s26_inflow_angle
-- time: '37:31'
-  t_s: 2251.625
+- time: '41:50'
+  t_s: 2510.7
   title: Recap
   scene: s27_recap
-- time: '38:56'
-  t_s: 2336.2
+- time: '43:15'
+  t_s: 2595.275
   title: End
   scene: s28_end

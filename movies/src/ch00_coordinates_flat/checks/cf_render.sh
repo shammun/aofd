@@ -10,7 +10,7 @@ K6TAG="${K6TAG:-k6r4}"
 cd "$R" || exit 1
 mkdir -p "$S/tmp" "$O"; export TEMP="$S/tmp" TMP="$S/tmp"
 "$PY" tools/disk_guard.py --report | tail -2
-SND="${SND:-sound5}"   # fix 1: the re-mix on the spliced narration (fix1/tts) lives in build1/sound5
+SND="${SND:-sound6}"   # fix 1c: the final re-mix on the fix1c narration lives in build1/sound6
 cp "$S/$SND/narration_music_cf.wav" "$S/bundle/public/" || exit 1
 "$PY" movies/src/ch00_coordinates_flat/checks/cf_run.py render --conc 2 "$@" 2>&1 | tee -a "$S/render.log" || exit 1
 "$PY" movies/src/ch00_coordinates_flat/checks/cf_run.py join --mb 150 2>&1 | tee -a "$S/render.log" || exit 1
