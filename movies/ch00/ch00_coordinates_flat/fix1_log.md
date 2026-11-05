@@ -198,3 +198,60 @@ storyboard equations, all present).
   cue sheet passes `--check-only`):
   `.venv/Scripts/python.exe tools/sound/mix.py --narration "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix1c/tts/narration.wav" --cues movies/ch00/ch00_coordinates_flat/sound.yaml --out-dir "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/build1/sound6"`
   then rename `build1/sound6/narration_music.wav` → `narration_music_cf.wav`. `cf_render.sh` and `cf_run.py join` now default to `sound6`.
+
+# K6 after fix 1c (2026-11-05)
+Input: orchestrator run k6c1 (bundle of 3c1ec65, 3654 frames, `tools/k6_overlap.py` without `--timing`): FAIL, 3165 hits. Build-1 practice
+(k6r1 → k6r4) runs the gate with `--timing movies/ch00/ch00_coordinates_flat/timing.json` (k6r4: 0 hits, 124 cross-fade text-text as INFO);
+k6c1 with `--timing`: **2929 hits in 85 distinct faults** (text-stroke 1218, edge 974, text-fill 250, text-cbar 259, text-text 228). The
+236 hits that `--timing` removes are the 10-frame scene cross-fades (both scenes' axes / source lines drawn at once).
+Only the scene files changed (cf_sA/B/C.tsx); cf_lib.tsx, the house kit, audio, narration and timing are untouched.
+
+## Rounds (all `--timing`; stills `cf_run.py stills TAG --jobs 3`)
+| tag | frames | scope | hits |
+|---|---|---|---|
+| k6c1 | 3654 | full (orchestrator) | 2929 (3165 without `--timing`) |
+| k6c2 | 2738 | the 17 changed scenes + 16 frames into the next scene (`k6c2_frames.txt`) | 706 (s04 slide, s11 "before", s12/s16/s24 rows still too wide, s15 fractions, s24 slide) |
+| k6c3 | 1482 | the 7 scenes changed again (`k6c3_frames.txt`) | **0** |
+| **k6c4** | **3654** | **full, final** | **0 (PASS, 685 INFO)**; without `--timing` 168, all in 39 frames within ±10 of a scene cut (cross-fades) |
+Lesson: the `edge` box in the K6 json is the first glyph past 1842, not the row's end: real row ends were up to x 2069 (s24 90° u_r);
+measure `max(r[2])` over the block before choosing a split or a size.
+
+## Fixes (scene · what · how)
+- **s04** θ = tan⁻¹ row split (`=tan⁻¹(1.333)` / `≈53.13°≈53°`, the second on "fifty three"+20); fraction rows h 110/100 → 132/128;
+  "anticlockwise, seen from above" y 700 → 820, now `win(tAnti, tPol−18)` (the stack reaches y 717 before it slides); the r formula
+  `r=√(x²+y²)` leaves at "fifty three"−12 with the r rows, so the rows sliding out over the stack's top never cross it.
+- **s05** fraction rows h 110 → 132 (cos/sin θ over r touched their 3/5, 4/5 lines).
+- **s10** "q west" (after the turn) at the west end of its step above "(−q, p)", off the gold 90° arc and the teal arrow.
+- **s11** turned label "sin θ, pointing west" from x 185 (right of the θ̂ tip label), gold link from its right end; the reference circle
+  0.55 → 0.45 opacity (background line); θ = 0° / 90° rows split at the result (`=(0, 1)` on "zero, one", `=(−1, 0)` on "minus one, zero");
+  U1: "θ ≈ 53.13°" under the east ray inside the circle, inset frame x 570 → 540, w 420 → 450 ("5.2 m", "before" inside it); U1 column "="
+  1250 → 1290, two lines visible (tallest pair 6 rows, y 370-760), x / y / Δx / Δy rows split at "=" / "≈" (+20…+50 frames).
+- **s12** rows split at their results (180° rows ran to x 1980), two lines visible (the stop being spoken stays); **sync fix:** the balloon
+  now waits at each stop for its sentence and moves in the sentence's last 40 frames (it used to leave 10 frames after "Due east", so the
+  "θ = 0°" label rode along to 89°); stop labels 100 px inside the circle, shown while the balloon is at the stop.
+- **s13** "shadow" 22 px lower (it touched "due east").
+- **s14** `6r̂` row: `=(6×0.6, 6×0.8)` on "zero point six, zero point eight", `=(3.6, 4.8)` on "three point six".
+- **s15** "cos α" starts right of the turned y′ ruler (x O+48), "sin α" 40 px right (clear of the α label); √3/2 rows h 100 → 140/130.
+- **s16** rulers 0.55 → 0.45 opacity; "cos α (north)" right of its leg near the top (above x̂′), "sin α (west)" above its leg from the
+  west end; x̂′ tip label beyond/below the tip; column "=" 1300 → 1240; x̂′·ŷ′ row split (`+0.5×0.866` on "plus zero point five times").
+- **s18** "top/bottom row" 48 → 44 px; number matrix y 640 → 582 and the two products as a "="-aligned CalcStack (`x′ = 0.866×3+0.5×4`
+  / `=2.598+2≈4.60` on "four point six again", `y′ = …` / `=−1.5+3.464≈1.96` on "one point nine six"); α = 30° row split; "90° + α"
+  beside the arc's end, left of the ŷ′ arrow.
+- **s19** both j-columns "=" 1250 → 1190.
+- **s20** x′ / y′ as a CalcStack split at the results ("which is six", "which is minus eight"); `x′=u_r, y′=u_θ` y 625 → 750.
+- **s22** ū_θ and ū_r on two lines each (division, then `≈34.8≈35 m/s` / `≈−13.3≈−13 m/s` under it, +20 frames); the m/s → km/h line 48 → 44 px.
+- **s24** 0° / 90° rows split at their results ("minus eight point seven", "thirty eight", "minus thirty seven point four", "makes plus"),
+  "=" 1250 at 44 px; cos 135° on two lines (`=−1/√2≈−0.707` on "minus one over"); the 135° work as two pages (u_r fades at u_θ's
+  sentence −14 frames, u_θ in the same place, y 590) instead of one sliding stack; "west" at the leg's west end; the 0°/90°/135° tags
+  come back only after their point's labels have gone (`fin(end)`).
+- **s25** keywords y 110 → 96 (12 px clear of the colour bar); "v ≈ −46" above its ring between the curves, "u ≈ +25" up-left of its ring;
+  "mean −13" under the rose curve right of "14 out".
+- **s26** `=13.3/34.8≈0.38` y 370 → 400; the inverse on two lines (`≈20.9°≈21°` on "twenty one degrees").
+No calculation row was removed; nothing below 44 px; every new row is tied to a spoken phrase (`AT`) or its row's frame + 15…50.
+
+## Gates after the last change
+tsc 0 · at_check 474 references, 0 failures · swap_check 367 text elements, 0 overlaps, 0 swaps < 8 frames · cam_speed 0 · eq_check 23/23 ·
+SSR `--step 10` 9296 scene-frames, 0 errors, 0 NaN. Data build not touched (76/76 CHECK unchanged).
+Re-render: picture changes in s04, s05, s10-s16, s18-s20, s22, s24-s26 (from 2:08, frame 4304); audio unchanged (sound6 mix).
+Known, accepted: CalcStack's own slide (old lines fade while sliding up 12 frames) can cross text above a stack for 2-4 frames between
+K6 samples (seen in s05 under "(θ ≈ 53.13°)"); s04 and s24 were changed where K6 caught it.

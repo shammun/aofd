@@ -329,19 +329,23 @@ const S04: React.FC = () => {
         <Lbl x={PO[0] + 140} y={PO[1] - 56} t="θ" c={C.local} s={T.calc} o={fin(f, tTh + 10)} />
         <path d={arcD(PO, 190, 8, 70)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tAnti)} />
         <ArcHead c={PO} r={190} a={70} dir={1} col={C.gold} o={fin(f, tAnti)} />
-        <Lbl x={1100} y={700} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={fin(f, tAnti)} />
+        {/* K6 after fix 1c: below the stack's lowest reach (y 717), gone before "polar coordinates" takes its row */}
+        <Lbl x={1100} y={820} t="anticlockwise, seen from above" c={C.key} s={T.floor} o={win(f, tAnti, tPol - 18)} />
         <Keyword f={f} text="how far · which direction" at={[1100, 700]} s={T.floor} appear={0} out={tAnti - 18} />
         <Keyword f={f} text="polar coordinates" at={[1100, 790]} appear={tPol} />
       </Svg>
-      <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={fin(f, tPy)} />
+      {/* K6 after fix 1c: the r formula leaves with the r rows (just before "fifty three"), so the rows sliding out above the stack
+          never pass through it */}
+      <TeX s={String.raw`r=${cutAt(EQ_S04, String.raw`,\qquad r=`)[1]}`} x={1100} y={85} size={50} c={C.local} o={win(f, tPy, t53 - 12)} />
       <CalcStack f={f} x={1240} y={150} size={54} maxLines={2} rows={[
         { lhs: "r", rhs: String.raw`=\sqrt{3^2+4^2}`, at: tPy },
         { rhs: String.raw`=\sqrt{9+16}`, at: AT(k, 2, "is nine"), cont: true },
         { rhs: String.raw`=\sqrt{25}`, at: t25, cont: true },
         { rhs: String.raw`=5\ \mathrm{km}`, at: t5, cont: true },
-        { lhs: String.raw`\tan\theta`, rhs: String.raw`=\dfrac{\text{north side}}{\text{east side}}`, at: tTan, h: 110 },
-        { rhs: String.raw`=\dfrac{4}{3}\approx1.333`, at: AT(k, 5, "four over three"), cont: true, h: 100 },
-        { lhs: String.raw`\theta`, rhs: String.raw`=\tan^{-1}(1.333)\approx53.13^\circ\approx53^{\circ}`, at: t53 },
+        { lhs: String.raw`\tan\theta`, rhs: String.raw`=\dfrac{\text{north side}}{\text{east side}}`, at: tTan, h: 132 },
+        { rhs: String.raw`=\dfrac{4}{3}\approx1.333`, at: AT(k, 5, "four over three"), cont: true, h: 128 },
+        { lhs: String.raw`\theta`, rhs: String.raw`=\tan^{-1}(1.333)`, at: t53 },
+        { rhs: String.raw`\approx53.13^\circ\approx53^{\circ}`, at: t53 + 20, cont: true },
         { lhs: String.raw`(r,\ \theta)`, rhs: String.raw`=(5\ \mathrm{km},\ 53^{\circ})`, at: tPair },
       ]} />
     </Scene>
@@ -379,9 +383,9 @@ const S05: React.FC = () => {
       <TeX s={String.raw`r\cos\theta`} x={pp(1.5, 0)[0]} y={PO[1] + 60} size={60} ax={0.5} c={C.second} o={fin(f, tSides)} />
       <TeX s={String.raw`r\sin\theta`} x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} size={60} c={C.second} o={fin(f, AT(k, 4, "the side going north"))} />
       <CalcStack f={f} x={1400} y={250} size={56} maxLines={2} rows={[
-        { lhs: String.raw`\cos\theta`, rhs: String.raw`=\dfrac{\text{east side}}{r}`, at: tC, h: 110 },
+        { lhs: String.raw`\cos\theta`, rhs: String.raw`=\dfrac{\text{east side}}{r}`, at: tC, h: 132 },
         { rhs: String.raw`=\tfrac{3}{5}=0.6`, at: AT(k, 6, "three fifths"), cont: true },
-        { lhs: String.raw`\sin\theta`, rhs: String.raw`=\dfrac{\text{north side}}{r}`, at: AT(k, 6, "and sine theta"), h: 110 },
+        { lhs: String.raw`\sin\theta`, rhs: String.raw`=\dfrac{\text{north side}}{r}`, at: AT(k, 6, "and sine theta"), h: 132 },
         { rhs: String.raw`=\tfrac{4}{5}=0.8`, at: AT(k, 6, "four fifths"), cont: true },
         { lhs: String.raw`x=r\cos\theta`, rhs: String.raw`=5\times0.6=3`, at: tX5 },
         { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8=4`, at: t4 },
