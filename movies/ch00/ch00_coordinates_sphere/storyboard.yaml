@@ -1,0 +1,3304 @@
+# ch00_coordinates_sphere storyboard v1 (movie-director, 2026-11-05). Part 3 of the #5 split (#5c). S<k> = sentence k of
+# the scene; AT(k, 'words') a phrase inside it. House style movies/HOUSE_STYLE.md binding (no headings except s00, keywords
+# only, no boxes, no references or badges, 44-px floor, caption band empty, source line + colour bar on data frames, source
+# lines below images, no text over pictures or other text). Equation provenance (vallis_eq, page_png) is for QA only and never
+# drawn. calc_rows = every other LaTeX line drawn in the scene (CalcStack rows). derivation = the D-step list (move, line, why,
+# in words). Times MEASURED (tools/tts.py dry run, af_bella x 1.0). CHECK ids DS01-DS29 belong to the Part 3 build script
+# (movies/data/build_ch00_coordinates_sphere.py, shared _coords_common.py, split plan §2h). Generated from the narration in
+# script.md and the dry run's timing.json; edit both together.
+id: ch00_coordinates_sphere
+title: 'Coordinates, Part 3 — Our round Earth: latitude, longitude, distances and areas'
+version: 1
+concepts:
+- 'spherical coordinates: origin at the Earth''s centre, a distance r and two angles; the Earth''s radius a (Vallis §2.2.2)'
+- latitude phi as an angle at the centre; colatitude 90 deg - phi and the sine/cosine swap (Kundu App. B uses colatitude)
+- parallels (circles round the axis, radius a cos phi) and meridians (half great circles round the centre); the prime meridian
+- longitude lambda (east positive; the 0-360 convention); the graticule; meridians cross parallels at right angles
+- Earth-fixed axes x, y, z; the position vector x = a cos phi cos lambda, y = a cos phi sin lambda, z = a sin phi; r-hat
+- ground speed of the spinning Earth U = Omega a cos phi, Omega = 2 pi / T (sidereal day)
+- 'arc lengths on the sphere: Delta y = a Delta phi, Delta x = a cos phi Delta lambda (Vallis §2.2.2, text before (2.27))'
+- latitude-longitude grid boxes of reanalysis data (ERA5 0.25 deg) and their true sizes
+- area element dA = a^2 cos phi dphi dlambda; band area 2 pi a^2 sin phi by adding strips (integration, owned here); Archimedes' cylinder
+- cos-latitude weighting of global means (fluidpy.diag.climatology.global_mean)
+target_duration_s: 2896.05
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: Chapter 0 series (plan v6)
+  position: 9
+  plan_id: '#5c'
+  previous: ch00_coordinates_storm (#5b, pos 8)
+  next: Part 4, Turning frames (#5d, pos 10; slug per the coordinator)
+  parts: seven (1 flat, 2 cyclone, 3 sphere, 4 turning frames, 5 moving frames, 6 routes, 7 maps; coordinator 2026-11-05)
+  split_plan: movies/ch00/ch00_coordinates/split_plan.md §2d (commit 73044df)
+  archive: movies/ch00/ch00_coordinates (build 1 s15-s23, unpublished archive; decision 7)
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py)'
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    style: meridian-glass (NEW style to add to tools/sound/styles.py; spec below)
+    spec: D-flat major, no pulse, 11-s chords (Db - Bbm7 - Gbmaj7 - Ab sus); a slow high glass pad; every second chord a celesta figure that falls
+      by fifths from the top (a meridian drawn pole to pole) and lands on the root; a very soft low string swell under each chord change; no drums;
+      reverb long, wet 0.30; low-pass 6 kHz. Calm and spacious (a turning globe), distinct from compass-orbit (Part 1).
+    runner_up: planet-wide (C major / A minor) seed 31, if the new style is not added (check that no finished movie uses that seed and style)
+    seed: 31
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail
+    distinct_from: compass-orbit (Part 1), maths-calm, rotation-turning, index-lattice, tangent-glide, air-flowing, storm-tense, data-curious
+  effects_candidates: []
+  effects_note: no sound effects (no water, wind or storm is shown); HOUSE_STYLE §8
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/dryrun3
+  audio_s: 2896.05
+  cues: 711
+  sentences: 445
+  words: 6984
+  words_per_minute_overall: 144.7
+  warnings: []
+conventions:
+  latitude: phi (Vallis writes theta-variant; Kundu App. B uses the colatitude theta from the pole) - bridge in s07-s08
+  longitude: lambda, east positive, -180...180; 0-360 data sets said in s11
+  earth_radius: 'a = 6371 km (easy 6400); spoken ''the Earth''s radius'' or ''the radius'', the letter ''a'' only at the end of a sentence (Kokoro
+    reads a lone ''a'' mid-sentence as the article: G2P checked 2026-11-05)'
+  axes: x from the centre to (0 N, 0 E), y to (0 N, 90 E), z up the spin axis to the North Pole; right-handed (x cross y = z); Earth-fixed
+  steps: 'Delta = a small finite step, d = the tiny limit (said once in s27: Should 7)'
+  angles: radians inside every formula; degrees on screen with the conversion written (1 deg = pi/180 = 0.01745 rad)
+  rotation_sense: east = anticlockwise as seen from above the North Pole (said in s11)
+  area_symbol: 'spoken ''d capital A'' (G2P: ''d A'' reads ''dee uh'')'
+colour_contract: latitude phi gold arc and wedge; colatitude slate wedge; longitude lambda orange arc; the Earth's centre gold dot, the spin axis
+  slate; the position arrow and the radius a teal; axes x, y, z and the legs of the triangles orange (the measured parts); parallels orange rings,
+  meridians slate (the prime meridian gold); Omega violet (rotation family, teaching-style §1l); ground-speed arrows teal with moving dashes;
+  area tiles gold; negative numbers rose with a '-' glyph; links, 'same' ticks and pointers gold.
+places:
+  rule: one set of places and numbers across Parts 1-5 and
+  Brest:
+  - 48.4
+  - -4.5
+  Khulna:
+  - 22.8
+  - 89.6
+  Singapore:
+  - 1.35
+  - 103.8
+  Longyearbyen:
+  - 78.2
+  - 15.6
+  Greenwich:
+  - 51.48
+  - 0.0
+data_block:
+  khulna:
+    status: PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05)
+    rule: Khulna stays (decision); if the report names a different Bangladesh landfall city for Amphan, s19 swaps the name and coordinates and
+      the builder recomputes DS16, DS18, DS22-DS24; the sentence 'close to where Cyclone Amphan, from Part 2, came ashore' is kept only if the
+      IBTrACS track passes within about 100 km of the city (else 'near the path of Cyclone Amphan').
+  era5_t2m:
+    product: data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc (registry ERA5-CDS-monthly-t2m; CC-BY 4.0, redistributable)
+    weighted_mean_C: 16.27
+    plain_mean_C: 7.11
+    computed: 2026-11-05 with fluidpy.diag.climatology.global_mean (weighted) and xarray .mean() (plain)
+guards:
+  review_1:
+  - Must 10 ('+90 deg' / '90 deg N' label right of and below the pole dot, inside the frame; s05)
+  - Must 11 (facing() fades place labels near the limb; the pole '0' right of its dot; s21)
+  - 'Must 17 (the symbol a written AND spoken: ''We call it a.''; s04)'
+  - Should 2 (KaTeX hats only)
+  - Should 5 (phi inside the triangle near the centre; leg tags beside their legs; two-view uncrowded; s14-s17)
+  - Should 6 ('four point nine times, so about five times, too wide' spoken; s26)
+  - 'Should 7 (one symbol: Delta for finite steps, d for the limit, said once; s27)'
+  - Should 14 (end card 24-px gap)
+  - Should 16 (tags below their bands; s25)
+  - Should 18 (an opening keyword from frame 0 in every scene)
+  fix_loop_1:
+  - GeoMap body in an overflow-hidden div; SourceBelow, never a bare SourceLine (s26, s34)
+  - 'R3F: no lower-case SVG tags in a three tree (TwoViewSlice keeps SVG outside the Canvas)'
+  - 'halves: picture from frame 0'
+  - keyword swaps >= 8 frames apart; cameras <= 90 deg/s eased; one colour bar per picture, beside it; a source line under every data picture
+  - the builder checks raw TeX, edge clipping, label-on-KaTeX, link crossings, text over a limb, axis through a word on its own stills
+  - assets staged into movies/public before any bundle; one Remotion/Chrome job at a time
+cross_part:
+  assumed_from_part1: x = r cos theta, y = r sin theta (next side = long x cos, opposite = long x sin); radians and the arc rule s = r theta;
+    theta anticlockwise seen from above; r-hat
+  assumed_from_part2: 'slope of sine and cosine: Delta(sin theta) ~ cos theta Delta theta (D12); speed = radius x turning rate (D16); cylindrical
+    (r, theta, z); Ian and Amphan; the coast points (D21) turned into km'
+  introduced_here_reused_later:
+    a_km: 6371 (easy 6400); a^2 = 40.6 million km^2
+    Omega: 7.29e-5 rad/s = 2 pi / 86164 s (T = 23 h 56 min)
+    brest: z = 4764 km, a cos phi = 4230 km, x = 4217 km, y = -332 km, r-hat = (0.662, -0.052, 0.748), colatitude 41.6 deg, sin 0.7478, cos 0.6639
+    khulna: z = 2469 km, a cos phi = 5873 km, x = 41 km, y = 5873 km, r-hat = (0.006, 0.922, 0.388), sin 0.3875, cos 0.9219
+    ground_speed_ms: equator 465 (464.6), Singapore 464, Khulna 428, Brest 308, Longyearbyen 95, pole 0
+    degree_km: '1 deg north 111.2 everywhere (1 min = 1.85 km); 1 deg east: Singapore 111.2, Khulna 102.5, Brest 73.8, Longyearbyen 22.7'
+    era5_box_km: '0.25 deg: 27.8 tall; wide 27.8 / 25.6 / 18.5 / 5.7 (Brest 18.5: #6 must use 18.5, not 18.4); ratio 4.9 at Longyearbyen'
+    era5_box_area_km2: equator 773, Khulna 712, Brest 513 (exact 513.06), Longyearbyen 158
+    band: 2 pi a^2 = 255 million km^2; Earth 510 million km^2; share sin phi; half the Earth within 30 deg of the equator
+    brest_khulna_up_angle_deg: '75.8 with these rounded coordinates (split plan D34 says 75.7 with 89.55 E): Part 4 should use 75.8'
+    symbols: phi, lambda, a, Omega, U, Delta x, Delta y, dA, r-hat (Earth), x-hat y-hat z-hat (Earth axes), colatitude (no new letter)
+honesty_notes:
+- The Earth is drawn and computed as a sphere of radius 6371 km (WGS-84 flattening ignored; < 0.5 % in distance, < 0.2 deg in latitude); the narration
+  says 'very nearly a ball' (s03).
+- Every sliced view is a thought experiment ('imagine slicing'); the interior layers are decorative and listed as illustrative.
+- T = 23 h 56 min is the sidereal day; the four minutes to the solar day are explained in one sentence (s20). Omega = 7.292e-5 rad/s (fluidpy.geo.constants.OMEGA).
+- U is the speed relative to the Earth's axis (an inertial frame not moving with the Earth's orbit), stated as 'how fast the ground is carried
+  round'; 'we don't feel it' because everything moves with the ground.
+- 's10: land crossings of the prime meridian are computed from Natural Earth 10 m admin-0 (shapely, 2026-11-05); sea names are the standard ones;
+  Greenwich at 51.48 N (Airy transit circle; the modern IERS reference meridian lies about 100 m east, not mentioned).'
+- 's06: the countries on 48.4 N are said in groups (central Europe, Ukraine, Kazakhstan, Mongolia, the northern United States, eastern Canada)
+  and asserted by CHECK DS05.'
+- 's19: Khulna as Amphan''s nearby city is pending the data report; the track drawn is IBTrACS.'
+- 's26: ERA5''s 0.25-deg grid is the delivered latitude-longitude grid (interpolated from its ~31 km model grid); ''many modern models use other
+  kinds of grid'' is said without naming them.'
+- 's28: the flat-rectangle box area differs from the exact spherical cell area by < 0.02 % (Brest 513.13 vs 513.06 km2).'
+- 's31: sin 30 deg = 1/2 is exact on a sphere; the 10-deg midpoint strips overestimate the 0-30 band by 0.13 %, 1-deg strips by 0.001 % (said
+  only as ''thinner strips'').'
+- 's34: the two-box planet is a thought experiment said as such; the ERA5 numbers are September 2026 monthly means (ERA5T may still be preliminary),
+  1-deg grid, weighted 16.27 C vs plain 7.11 C.'
+- Exaggerations (1-deg steps x5, 4.5-deg wedge x6 inset, one-minute step x60 inset, balloon height x50, area patch x20, lifted caps) and time
+  compression (globe spins, the camera tour) are listed per scene and in the manifest, not badged (HOUSE_STYLE §5).
+quiz_hook: Singapore is almost on the equator and Longyearbyen is at 78.2 N. How many kilometres is one degree of longitude at each, how fast
+  does the ground move east at each, and what share of the northern hemisphere lies south of 78.2 N? (111.2 and 22.7 km; about 464 and 95 m/s;
+  sin 78.2 deg = 0.979, about 98 %.)
+headings_exception: s00_title only
+chapter_marks:
+- t: 0.3
+  mmss: '0:00.3'
+  title: title, hook and look back
+  scene: s00_title
+- t: 98.75
+  mmss: '1:38.8'
+  title: the sphere, latitude and the parallel
+  scene: s03_sphere
+- t: 351.525
+  mmss: '5:51.5'
+  title: colatitude and the sine-cosine swap
+  scene: s07_colatitude
+- t: 530.25
+  mmss: '8:50.2'
+  title: meridians, the prime meridian, longitude
+  scene: s09_meridians
+- t: 826.75
+  mmss: '13:46.8'
+  title: Earth-centred x, y, z
+  scene: s13_earth_axes
+- t: 899.55
+  mmss: '14:59.5'
+  title: Brest's position, step by step
+  scene: s14_brest_side
+- t: 1327.975
+  mmss: '22:08.0'
+  title: Khulna
+  scene: s19_khulna
+- t: 1426.55
+  mmss: '23:46.5'
+  title: the spinning ground
+  scene: s20_spin_rate
+- t: 1679.1
+  mmss: '27:59.1'
+  title: distances north and east
+  scene: s22_distance_north
+- t: 1989.4
+  mmss: '33:09.4'
+  title: ERA5 grid boxes
+  scene: s26_grid_boxes
+- t: 2093.925
+  mmss: '34:53.9'
+  title: areas, step by step
+  scene: s27_area_patch
+- t: 2568.775
+  mmss: '42:48.8'
+  title: Archimedes
+  scene: s33_archimedes
+- t: 2649.35
+  mmss: '44:09.3'
+  title: global averages
+  scene: s34_global_mean
+- t: 2754.8
+  mmss: '45:54.8'
+  title: to sum up
+  scene: s35_recap
+skip_blocks:
+- id: K1
+  chip_scene: s08_sin_cos_swap
+  chip_sentence: 4
+  chip_t: 415.8
+  skip_to_scene: s09_meridians
+  skip_to_t: 530.25
+  skip_to_mmss: '8:50.2'
+  keep_sentence: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever
+    we have a sine of the latitude, and the other way round. Now for the second angle.
+  takeaway_keyword: 'colatitude from the pole: sin ↔ cos'
+  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+- id: K2
+  chip_scene: s14_brest_side
+  chip_sentence: 3
+  chip_t: 914.65
+  skip_to_scene: s21_ground_speeds
+  skip_to_t: 1531.875
+  skip_to_mmss: '25:31.9'
+  keep_sentence: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane,
+    and the radius times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance
+    from the axis.
+  takeaway_keyword: height a sin φ · from the axis a cos φ · ground east at Ω a cos φ
+  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+- id: K3
+  chip_scene: s22_distance_north
+  chip_sentence: 2
+  chip_t: 1683.7
+  skip_to_scene: s25_degree_east
+  skip_to_t: 1908.35
+  skip_to_mmss: '31:48.3'
+  keep_sentence: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude
+    is that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side.
+  takeaway_keyword: 1° north ≈ 111 km · 1° east = 111 km × cos φ
+  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+- id: K4
+  chip_scene: s27_area_patch
+  chip_sentence: 5
+  chip_t: 2114.675
+  skip_to_scene: s34_global_mean
+  skip_to_t: 2649.35
+  skip_to_mmss: '44:09.3'
+  keep_sentence: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar
+    caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate.'
+  takeaway_keyword: boxes shrink by cos φ · half the Earth within 30° of the equator
+  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 11.475
+  sentence_times:
+  - - 0.3
+    - 10.675
+  beat: opening title (HOUSE_STYLE §3)
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, top to bottom: ''Coordinates · Part 3'' (68 px, warm white); the title ''Our round
+    Earth'' as RiseText (150 px, weight 800, two lines ''Our round'' / ''Earth'', TitleGradient teal -> gold; letters rise 24 px over 8 frames,
+    2-frame stagger); ''made easy'' (96 px, warm white) pulses x1.06 on AT(1,''the easy way''); the subtitle ''latitude, longitude, distances
+    and areas'' (68 px, warm white, one or two lines); >= 50 px clear of the animation. The spoken sentence stays short. Right x 1130-1840, y
+    180-636: Part A (frame 0 -> AT(1,''meteorology'')): the globe turns to Brest, the half facing the camera slides away along Brest''s meridian
+    plane (HalfEarthMesh), the centre dot appears, the arrow to Brest draws, and the gold latitude wedge opens from the equator line to 48.4 deg
+    (no number). Part B (12-frame cross-fade on ''meteorology''): the whole globe with ERA5-style grid lines over Europe and the Arctic, the boxes
+    visibly thinning northwards; one box at Brest and one at Svalbard light up gold. SourceBelow under the animation ''Image: NASA Blue Marble
+    Next Generation'' (y <= 860). Poster = frame 200.'
+  voiceover: In this video, we'll learn coordinates on our round Earth the easy way, and see how meteorology uses them to measure distances and
+    areas on its weather grids.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector, meridian_points, parallel_points, arc_lengths (0.25 deg)
+    params:
+      brest:
+      - 48.4
+      - -4.5
+      grid_deg: 0.25
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; ../Fluid Dynamics/tests/geo/test_sphere.py::test_meridian_points_V1_half_great_circle;
+      ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat; ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02,
+      ::test_arc_lengths_V2_metric_from_position_vector
+  exaggeration:
+  - title animation time compressed (slice opens in about 3 s)
+  - grid lines drawn every 1 deg in the overview (every 4th ERA5 line) so they read at title size
+  kind: title
+  data: A6 BMNG (registry BMNG-2004)
+  tool: house title kit + three.js (@remotion/three)
+  runner_up: SVG orthographic globe (no slice)
+  why: 'the movie''s two halves on frame 0: the sliced Earth with its angle, and the grid boxes that thin to the poles'
+  related: []
+  feedback:
+  - U-CO-033
+  - U-CO-101
+  - 'coordinator 2026-11-05: topic title'
+  layout: Title frame; the source line below the animation, never on it. No other text.
+- id: s01_hook
+  t:
+  - 11.475
+  - 39.0
+  sentence_times:
+  - - 11.475
+    - 17.0
+  - - 17.35
+    - 24.8
+  - - 25.15
+    - 30.55
+  - - 30.9
+    - 38.2
+  beat: hook question
+  visual: 'Full width from frame 0. Left (picture zone): the unzoomed globe turning slowly (Atlantic, Europe, Asia), three gold dots at Brest,
+    Khulna, Singapore (no labels: no place is spoken here). Right column: S1 on AT(1,''where a place is'') keyword ''where?'' (54 px warm white);
+    on AT(1,''how far apart'') a faint great-circle arc Brest -> Khulna on the globe and the keyword ''how far?''. S2 on AT(2,''seven parts''):
+    seven small code-drawn thumbnails in a row under the column (grid, storm cylinder, globe, a station''s turning east-north-up arrows, a storm
+    moving past a station, a great-circle route, world map), the third lit, the others at 35 %, keyword ''round Earth'' under the third. S3 on
+    AT(3,''latitude and longitude''): the graticule brightens; AT(3,''kilometres''): keyword ''degrees -> km''. S4 on AT(4,''grid boxes''): a
+    few 0.25-deg boxes drawn near Svalbard; AT(4,''tropics''): the band 30 S - 30 N tints teal for 2 s.'
+  voiceover: How do we say where a place is on a round Earth, and how far apart two places are? This is the third of seven parts on coordinates,
+    and in this part, we leave the flat map and go round the globe. Let's see how latitude and longitude are built, and how they turn into kilometres.
+    Then let's see what they tell us about the grid boxes of weather data, and about how much of the Earth lies in the tropics.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector, great_circle_points, arc_lengths
+    params:
+      places: Brest, Khulna, Singapore
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; ../Fluid Dynamics/tests/geo/test_sphere.py::test_great_circle_points_V1_coplanar_equal_steps_V5_pyproj_npts
+  exaggeration: []
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js globe
+  runner_up: —
+  why: the core picture on the first frame; the part's place in the five
+  related: []
+  feedback:
+  - U-CO-101
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Thumbnails are
+    drawings, not cards. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own
+    stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s02_part2_recap
+  t:
+  - 39.0
+  - 98.75
+  sentence_times:
+  - - 39.0
+    - 41.375
+  - - 41.725
+    - 52.05
+  - - 52.4
+    - 57.775
+  - - 58.125
+    - 65.6
+  - - 65.95
+    - 71.8
+  - - 72.15
+    - 78.6
+  - - 78.95
+    - 84.95
+  - - 85.3
+    - 92.85
+  - - 93.2
+    - 97.95
+  beat: recap of Parts 1-2 (<= 60 s, split plan §2g)
+  visual: 'One mini picture per sentence in the picture zone, cross-fading (no headings, no cards): S2 the polar grid with the balloon, r and
+    the theta arc (slate) ''anticlockwise, seen from above''; S3 the 3-4-5 triangle with ''x = r cos θ'', ''y = r sin θ''; S4 an arc on a circle
+    with ''s = r θ''; S5-S6 r-hat''s tip moving a small step along the unit circle with ''Δ(sin θ) ≈ cos θ Δθ'' (Part 2''s slope picture, reused);
+    S7 a parcel on a ring, velocity arrows tail to tail, the inward acceleration arrow (rose); S8 the cylinder (r, θ, z) round Ian''s eye and
+    a thumbnail of Amphan, with a source line under the storm thumbnails (''Data: <Part 2 products> · Ian 28 Sep 2022 · Amphan 20 May 2020'');
+    S9 the cylinder rounds into the globe. Keywords in the column, one per sentence, each <= 4 words.'
+  voiceover: 'First, a quick look back. In Part 1, we met polar coordinates on a flat map: a distance r, and an angle theta, measured anticlockwise
+    from east, as seen from above. We found that x equals r cosine theta, and y equals r sine theta. We met radians, and the arc length rule:
+    the length of an arc is the radius times the angle, in radians. In Part 2, we watched arrows turn, and we found the slopes of sine and cosine.
+    When an angle grows by a tiny step, its sine grows by about its cosine times that step. We saw that air going round a ring is always accelerating,
+    towards the centre of the ring. Then we added a height z, to get cylindrical coordinates, and looked inside Hurricane Ian and Cyclone Amphan.
+    Now let''s take these ideas to the biggest round shape of all: the Earth.'
+  on_screen_eq: null
+  physics_source:
+    fn: reuses Part 1 and Part 2 pictures (fluidpy.core.coords.unit_vectors_polar; fluidpy.diag.cyclone.storm_relative_wind)
+    params:
+      note: no new number
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections
+  exaggeration:
+  - mini pictures, schematic (illustrative)
+  kind: recap montage
+  data: Part 1-2 data (storm thumbnails)
+  tool: Remotion SVG
+  runner_up: —
+  why: 'split plan §2g: opening recap of the earlier parts and the tools this part needs (x = r cos θ, s = r θ, the slope of sine)'
+  related: []
+  feedback:
+  - U-CO-101
+  - U-CO-057
+  layout: 'Source line under the storm thumbnails only. No text over the picture or over other text; links never cross text, ticks or each other
+    (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s03_sphere
+  t:
+  - 98.75
+  - 153.175
+  sentence_times:
+  - - 98.75
+    - 100.75
+  - - 101.1
+    - 105.7
+  - - 106.05
+    - 109.425
+  - - 109.775
+    - 113.625
+  - - 113.975
+    - 120.85
+  - - 121.2
+    - 127.275
+  - - 127.625
+    - 134.0
+  - - 134.35
+    - 139.25
+  - - 139.6
+    - 145.525
+  - - 145.875
+    - 149.05
+  - - 149.4
+    - 152.375
+  beat: 'building block: spherical coordinates (origin at the centre; a distance and two angles)'
+  visual: 'Unzoomed globe from frame 0, keyword ''sphere'' in the column. S2-S4: the globe turns slowly; on AT(4,''the Earth''s centre'') the
+    globe becomes 70 % transparent for 2 s and a gold dot shows the centre inside it, then the globe returns to opaque. S5: three points light
+    up (a dot on the ground at Brest, a balloon 10 km up drawn exaggerated, a dot underground), each with a faint teal line from the centre. S6
+    on AT(6,''which we call r''): the line to Brest is labelled ''r'' at its middle (teal). S7: two small angle arcs at the centre fade in, unlabelled
+    (slate). S8: keyword ''spherical coordinates'' (54 px). S9: keywords ''latitude'', ''longitude''. S10-S11: a gold knife plane fades in through
+    the axis and Brest (preview of s04).'
+  voiceover: 'Let''s start with the shape. The Earth is very nearly a ball, a sphere, so let''s treat it as one. On the flat map, we measured
+    from an origin. On the Earth, the natural origin is the Earth''s centre. Then any point, on the ground, up in the air, or deep underground,
+    can be pinned down by three numbers. The first is its distance from the centre, which we call r, just as on the flat map. The other two are
+    angles, which say in which direction the point lies, as seen from the centre. A distance and two angles like this are called spherical coordinates.
+    On the Earth, the two angles are the ones you know from maps: latitude and longitude. But the centre is hidden deep inside the Earth. So to
+    see it, let''s cut the Earth open.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector; fluidpy.core.coords.spherical_from_cartesian (r and two angles)
+    params:
+      point:
+      - 48.4
+      - -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections
+  exaggeration:
+  - Earth drawn as a perfect sphere (WGS-84 flattening ignored, < 0.5 % in distance)
+  - the balloon's height drawn about x50
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js globe
+  runner_up: —
+  why: 'the origin moves to the Earth''s centre: the step from Part 2''s cylinder to the sphere'
+  related: []
+  feedback:
+  - U-CO-033
+  - U-CO-057
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s04_slice_radius
+  t:
+  - 153.175
+  - 216.45
+  sentence_times:
+  - - 153.175
+    - 163.75
+  - - 164.1
+    - 169.325
+  - - 169.675
+    - 172.85
+  - - 173.2
+    - 176.875
+  - - 177.225
+    - 181.5
+  - - 181.85
+    - 189.15
+  - - 190.65
+    - 194.975
+  - - 195.325
+    - 197.0
+  - - 197.35
+    - 200.85
+  - - 201.2
+    - 209.175
+  - - 209.525
+    - 215.65
+  beat: 'building block: the sliced Earth, r from the centre, the Earth''s radius a (Must 17, U-CO-033, U-CO-050)'
+  visual: 'Sliced Earth: kit_cp HalfEarthMesh (the cross-product Part 2 slice, UV2-20) with lon0 = the meridian of the place; outside textured,
+    the flat cut face a warm dark-grey section with faint interior rings (decorative), the Earth''s centre a gold dot, the spin axis slate through
+    both poles. Camera continuity from s03. S1 on AT(1,''slicing the Earth in half''): the gold knife plane passes through the poles and Brest
+    (lon0 = -4.5), the eastern half slides away to the right and fades (1.5 s), leaving the western half with its flat face turned 15 deg from
+    frontal (so angles on it read as angles). ''Brest'' label at its rim point on AT(1,''Brest''); ''North Pole'', ''South Pole'' at the axis
+    ends. S2: the centre dot pulses. S3: the teal arrow draws from the centre to Brest. S4: ''r'' at its middle, left side. S5-S6: column ''Earth''s
+    radius'', then ''a ≈ 6400 km'' (easy, 68 px) and ''(6371 km)'' (exact, 54 px, muted), each on its spoken number, with a gold link from the
+    column to the arrow''s middle. S7-S8 on AT(8,''We call it a''): the arrow''s tag changes ''r'' -> ''a'' (KaTeX), the keyword ''a'' pulses.
+    S9: column ''r = a on the ground''. S10: a tiny balloon icon 10 km above Brest (height drawn x50) with the calc row ''10 ÷ 6371 ≈ 0.16 %''.'
+  voiceover: Imagine slicing the Earth in half with a flat knife that passes through the North Pole, the South Pole, and the city of Brest, a
+    port at the western tip of France. Now we can see the flat face of the cut, with the Earth's centre in the middle of it. Let's draw an arrow
+    from the centre to Brest. Its length is Brest's distance from the centre, r. For any place on the ground, that length is the Earth's radius.
+    It's about six thousand four hundred kilometres, or more exactly, six thousand three hundred and seventy one. [beat] It's used in so many
+    formulas that it gets its own letter. We call it a. So for places on the ground, r equals a. A weather balloon ten kilometres up is only ten
+    kilometres farther from the centre, about a sixth of one percent more. That's why, for the weather, we can usually use the Earth's radius
+    for every height in the air.
+  on_screen_eq:
+    latex: a\approx 6400\ \text{km}\quad(6371\ \text{km})
+    vallis_eq: 'Vallis §2.2.2 (p. 61): ''If a is the radius of the Earth'' (the symbol a); value fluidpy.geo.constants.EARTH_RADIUS (mean radius)'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - r=a\ \ \text{on the ground}
+  - 10\ \text{km}\div 6371\ \text{km}\approx 0.16\,\%
+  physics_source:
+    fn: fluidpy.geo.constants.EARTH_RADIUS; fluidpy.geo.sphere.unit_vector
+    params:
+      a_m: 6371000.0
+      point:
+      - 48.4
+      - -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; CHECK DS01 a = 6.371e6 m; DS02 10/6371 = 0.157 %
+  exaggeration:
+  - balloon height drawn x50
+  - Earth's interior rings decorative (illustrative)
+  kind: 3-D sliced globe
+  data: A6 BMNG
+  tool: three.js (kit_cp HalfEarthMesh)
+  runner_up: Cesium globe with a clipping plane (no gain)
+  why: 'the user''s request: see that r starts at the centre (the cross-product Part 2 slice)'
+  related: []
+  feedback:
+  - U-CO-033
+  - U-CO-050
+  - Must 17
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. The slice keeps
+    the whole half-Earth in frame (no zoom). No text over the picture or over other text; links never cross text, ticks or each other (the builder
+    checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s05_latitude
+  t:
+  - 216.45
+  - 272.15
+  sentence_times:
+  - - 216.45
+    - 219.0
+  - - 219.35
+    - 223.825
+  - - 224.175
+    - 230.2
+  - - 230.55
+    - 233.275
+  - - 233.625
+    - 240.05
+  - - 241.55
+    - 246.025
+  - - 246.375
+    - 248.925
+  - - 249.275
+    - 253.975
+  - - 254.325
+    - 258.2
+  - - 258.55
+    - 264.025
+  - - 264.375
+    - 271.35
+  beat: 'building block: latitude phi as an angle at the centre (U-CO-034: the 48.4-deg angle visibly drawn)'
+  visual: 'The half-Earth from s04, face turned 15 deg from frontal (never edge-on: U-CO-034), camera fixed. S1-S2: a slate line draws from the
+    centre to the equator point on the face''s rim (''equator'' label outside the globe edge). S3 on AT(3,''the angle between''): a gold arc (8
+    px, radius 220 px on screen) opens at the centre from the equator line up to the Brest arrow, filled with a 15 % gold wedge; KaTeX ''φ'' inside
+    the wedge on AT(4,''phi''). S5 on AT(5,''forty eight point four''): column ''48.4°'' (84 px) with a gold link to the wedge; S6: ''48.4° N''.
+    S7-S10: a ghost arrow swings to the equator (''φ = 0°''), to 45 deg (''45°''), to the North Pole (''90° N'', right of and below the pole dot,
+    inside the frame: Must 10), to the South Pole (''−90°'' with the ''−'' glyph, rose); each label on its words; then the ghost returns to Brest.
+    S11: the column shows the range ''−90° … +90°''.'
+  voiceover: Now let's measure the first angle. On the cut face, draw a line from the centre out to the equator. Latitude is the angle between
+    that line and the arrow to the place, measured at the centre. We write it with the Greek letter phi. For Brest, the arrow is turned up from
+    the equator line by about forty eight point four degrees. [beat] That's why we say Brest is at forty eight point four degrees north. At the
+    equator, phi is zero. Halfway from the equator to the North Pole, it's forty five degrees. At the North Pole itself, it's ninety degrees north.
+    At the South Pole, it's ninety degrees south, which we write as minus ninety. So latitude says how far north or south a place is, from minus
+    ninety to plus ninety degrees.
+  on_screen_eq:
+    latex: \varphi_{\text{Brest}}\approx 48.4^\circ\ \text{N}
+    vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
+      θ = π/2 − latitude and azimuth = longitude (convention bridge, page image only)
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - -90^\circ\le\varphi\le+90^\circ
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector (angle of the Brest arrow above the equator plane = asin z)
+    params:
+      lat: 48.4
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; CHECK DS03 asin(z/a) = 48.4 deg
+  exaggeration: []
+  kind: 3-D sliced globe
+  data: A6 BMNG
+  tool: three.js (HalfEarthMesh) + SVG overlay projected through the camera
+  runner_up: —
+  why: the angle at the centre seen on a face, not a line
+  related: []
+  feedback:
+  - U-CO-034
+  - Must 10
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Angle labels
+    inside the wedge or beside the pole dot, never on the arc or the globe limb. No text over the picture or over other text; links never cross
+    text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s06_parallel
+  t:
+  - 272.15
+  - 351.525
+  sentence_times:
+  - - 272.15
+    - 275.225
+  - - 275.575
+    - 278.675
+  - - 279.025
+    - 289.125
+  - - 289.475
+    - 293.975
+  - - 294.325
+    - 299.35
+  - - 299.7
+    - 306.025
+  - - 306.375
+    - 314.15
+  - - 314.5
+    - 321.675
+  - - 322.025
+    - 326.625
+  - - 326.975
+    - 330.5
+  - - 330.85
+    - 334.75
+  - - 335.1
+    - 338.65
+  - - 339.0
+    - 346.925
+  - - 347.275
+    - 350.725
+  beat: 'building block: the parallel (a circle round the axis), then sliced across (U-CO-036)'
+  visual: 'S1-S2: the halves rejoin (1 s) and the whole globe turns slowly eastwards. S3: Brest''s arrow sweeps round the axis like a cone (the
+    gold wedge kept at 48.4 deg to the equator plane), its tip leaving an orange trail: the parallel. S4: column ''same latitude 48.4°''. S5 on
+    AT(5,''parallel''): keyword ''parallel'' (54 px), the orange ring brightens. S6-S7: the camera follows the ring east; labels ''central Europe'',
+    ''Ukraine'', ''Kazakhstan'', ''Mongolia'', ''United States'', ''Canada'', ''Atlantic'' on their words, each a short label at its spot, centred
+    within 1 s (Natural Earth crossings, CHECK DS05); the camera returns to Brest. S8 on AT(8,''straight across''): a horizontal knife plane cuts
+    at 48.4 N; the cap above lifts away 300 px and fades to 20 %, showing the flat disc (orange rim). S9-S10: the disc''s centre dot (slate) on
+    the axis; the Earth''s centre dot (gold) below it; a short slate bracket ''not the same centre''. S11: column ''parallel = circle round the
+    axis''. S12: six thin parallel rings (0, 15 … 75 deg) shrinking towards the pole. S13: the cap returns.'
+  voiceover: 'Which other places share Brest''s latitude? Let''s put the Earth back together and turn it. Brest''s arrow sweeps round the Earth''s
+    axis, always at forty eight point four degrees above the equator plane, and its tip traces a circle round the globe. Every place on that circle
+    has the same latitude as Brest. This circle is called a parallel, because it runs parallel to the equator. Brest''s parallel runs east through
+    central Europe, Ukraine, Kazakhstan and Mongolia. Then it runs on round through the northern United States and eastern Canada, and back across
+    the Atlantic to Brest. Now let''s slice the Earth the other way: straight across, through Brest''s parallel, at right angles to the axis.
+    The cut face is a flat disc, and its rim is Brest''s parallel. The centre of this disc is not the Earth''s centre. It sits on the Earth''s
+    axis, above the equator plane. So a parallel is a circle round the Earth''s axis. The equator is the biggest parallel, and the parallels get
+    smaller and smaller towards the poles, where they shrink to a point. We''ll measure the size of Brest''s parallel very soon.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.parallel_points (radius a cos phi); fluidpy.data.naturalearth.read_records (admin-0 crossings of 48.4 N)
+    params:
+      lat: 48.4
+    test: '../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat; CHECK DS05 countries crossed by 48.4 N (NE 10
+      m admin-0: France, Germany, Austria, Slovakia, Hungary, Ukraine, Moldova, Russia, Kazakhstan, China, Mongolia, USA, Canada; computed 2026-11-05)'
+  exaggeration:
+  - cap lifted for the view (illustrative)
+  kind: 3-D globe + slice
+  data: A6 BMNG; NE 10 m admin-0 (registry NE-10m-admin)
+  tool: three.js (globe + clipping plane)
+  runner_up: —
+  why: 'a parallel is a circle round the axis, not the centre: the root of a cos phi'
+  related: []
+  feedback:
+  - U-CO-036
+  - U-CO-035
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s07_colatitude
+  t:
+  - 351.525
+  - 402.55
+  sentence_times:
+  - - 351.525
+    - 354.95
+  - - 355.3
+    - 358.4
+  - - 358.75
+    - 366.425
+  - - 366.775
+    - 369.675
+  - - 370.025
+    - 376.45
+  - - 376.8
+    - 381.1
+  - - 381.45
+    - 387.75
+  - - 389.25
+    - 392.325
+  - - 392.675
+    - 396.425
+  - - 396.775
+    - 401.75
+  beat: 'building block: colatitude (an angle from the pole) vs the parallel (a circle) (U-CO-035)'
+  visual: 'Back to the half-Earth face (camera continuity with s05). The gold phi wedge stays. S2 on AT(2,''start from the North Pole''): a slate
+    arc opens at the centre from the axis down to the Brest arrow (slate 15 % wedge); S3 on AT(3,''colatitude''): keyword ''colatitude'' (slate)
+    beside the wedge''s outer edge. S4: a right-angle tick between the axis and the equator line; both wedges pulse in turn; column ''φ + colatitude
+    = 90°''. S5: ''colatitude = 90° − φ''. S6: CalcStack ''90° − 48.4° = 41.6°''. S7-S9: contrast in the column: a small slate angle glyph with
+    ''colatitude: an angle'', a small orange ring glyph with ''parallel: a circle''; on the globe the parallel ring (orange) fades in for S9 only.'
+  voiceover: There's a second way to measure the same direction. You'll meet it in many maths and physics books. Instead of starting from the
+    equator, start from the North Pole, and measure the angle down from the Earth's axis to the arrow. This angle is called the colatitude. Latitude
+    and colatitude together fill the right angle between the equator plane and the axis. So the colatitude is ninety degrees minus the latitude.
+    For Brest, it's ninety minus forty eight point four, which is forty one point six degrees. [beat] Be careful not to mix up two words here.
+    The colatitude is an angle, measured at the centre. A parallel is a circle, made of all the places with the same latitude.
+  on_screen_eq:
+    latex: \text{colatitude}=90^\circ-\varphi
+    vallis_eq: 'Vallis §2.2.2 (p. 61): ''In some other fields of study co-latitude is used''; Kundu App. B §B.5 uses colatitude θ (page image)'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - 90^\circ-48.4^\circ=41.6^\circ
+  physics_source:
+    fn: fluidpy.core.coords.cartesian_from_spherical with theta = 90 deg - phi (the colatitude bridge) == fluidpy.geo.sphere.unit_vector
+    params:
+      lat: 48.4
+      colat: 41.6
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS06 both routes agree to 1e-12 km
+  exaggeration: []
+  kind: 3-D sliced globe
+  data: A6 BMNG
+  tool: three.js (HalfEarthMesh) + SVG overlay
+  runner_up: —
+  why: the user could not tell colatitude from a parallel
+  related: []
+  feedback:
+  - U-CO-035
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s08_sin_cos_swap
+  t:
+  - 402.55
+  - 530.25
+  sentence_times:
+  - - 402.55
+    - 405.7
+  - - 406.05
+    - 409.075
+  - - 409.425
+    - 415.45
+  - - 415.8
+    - 423.625
+  - - 423.975
+    - 426.75
+  - - 427.1
+    - 430.775
+  - - 431.125
+    - 436.975
+  - - 437.325
+    - 441.6
+  - - 441.95
+    - 451.35
+  - - 451.7
+    - 455.4
+  - - 455.75
+    - 460.75
+  - - 461.1
+    - 465.9
+  - - 466.25
+    - 470.625
+  - - 470.975
+    - 475.975
+  - - 476.325
+    - 481.45
+  - - 481.8
+    - 488.35
+  - - 488.7
+    - 497.15
+  - - 497.5
+    - 502.325
+  - - 502.675
+    - 509.5
+  - - 509.85
+    - 519.675
+  - - 521.175
+    - 529.45
+  beat: 'derivation D26: sine and cosine swap places (U-CO-037)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). Left the half-Earth face, right the same face flat (unit circle
+    for this scene, tag ''length 1''). S4: the arrow shrinks to length 1 in both views. S5: a dashed slate line drops from the tip, parallel to
+    the axis, to the equator line; S6: right-angle tick; the triangle fills 10 % white. S7: the column recalls Part 1 with a mini 3-4-5 glyph:
+    ''next = long × cos'', ''opposite = long × sin''. S8-S10: phi at the centre (gold); the bottom leg (in the equator plane) tagged ''cos φ''
+    (orange, below the leg); the upright leg tagged ''sin φ'' (orange, right of the leg). S11-S14: the angle at Brest''s end lights (slate wedge);
+    CalcStack ''180° − 90° − φ = 90° − φ'' and the keyword ''colatitude''. S15: as seen from the colatitude corner the upright leg is ''next''
+    and the bottom leg ''opposite'' (a gold swap arrow between the two role tags). S16-S17: rows ''sin(90° − φ) = cos φ'', ''cos(90° − φ) = sin
+    φ''. S18: CalcStack ''sin 41.6° ≈ 0.6639 = cos 48.4°''. S19: keyword ''books with colatitude: cos ↔ sin''. SKIP CHIP (user rule 2026-11-05;
+    the one allowed chip): on AT(4,''skip ahead'') a small rounded chip, top-right of the column (x 1500-1840, y 60-150, 44 px, warm white on
+    a 20 % gold fill, no border): ''every step: optional'' / ''not needed for the intuition'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s
+    start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never over the picture.'
+  voiceover: Why does it matter which angle a book uses? Because sine and cosine swap places. The next minute and a half shows exactly why, for
+    anyone who likes to see every step. You don't need it for the intuition of weather, climate science or mapping, so feel free to skip ahead
+    to the time on screen. Let's see why, on one triangle. Take the arrow to Brest, but shrink it to length one. From its tip, drop a line straight
+    down to the equator plane, parallel to the axis. Together with the equator line, this makes a right triangle. From Part 1, the side next to
+    an angle is the long side times the cosine, and the side opposite it is the long side times the sine. At the centre, the angle is the latitude,
+    phi. The side next to it lies along the equator plane, so it's cosine phi. The side opposite it runs parallel to the axis, so it's sine phi.
+    Now look from the triangle's other sharp corner, at Brest's end. The three angles of a triangle add up to a hundred and eighty degrees. The
+    right angle takes ninety, so the two sharp angles share the other ninety. So the angle at Brest's end is ninety degrees minus phi, which is
+    exactly the colatitude. From that corner, the side next to it is the one parallel to the axis, and the side opposite it is the one in the
+    equator plane. Same triangle, same sides, but next and opposite have swapped. So the sine of the colatitude equals cosine phi, and the cosine
+    of the colatitude equals sine phi. For Brest, the sine of forty one point six degrees is zero point six six three nine, and so is the cosine
+    of forty eight point four degrees. [beat] So wherever this video has a sine of the latitude, a book that uses the colatitude has a cosine,
+    and the other way round.
+  on_screen_eq:
+    latex: \sin(90^\circ-\varphi)=\cos\varphi,\qquad \cos(90^\circ-\varphi)=\sin\varphi
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (trigonometry; the bridge between Vallis''s latitude and Kundu App. B''s colatitude)'
+    page_png: null
+  calc_rows:
+  - 180^\circ-90^\circ-\varphi=90^\circ-\varphi
+  - \sin 41.6^\circ\approx 0.6639=\cos 48.4^\circ
+  physics_source:
+    fn: numpy sin/cos (CHECK DS07); bridge fluidpy.core.coords.cartesian_from_spherical vs fluidpy.geo.sphere.unit_vector
+    params:
+      lat: 48.4
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DS07 sin(41.6 deg) = cos(48.4 deg) = 0.6639
+  exaggeration: []
+  derivation:
+    id: D26
+    goal: why sine and cosine swap between latitude and colatitude
+    steps:
+    - - shrink the arrow to length 1
+      - '|\hat{\mathbf r}|=1'
+      - only the direction matters for the angles
+      - a unit arrow to Brest
+    - - drop a line parallel to the axis
+      - \text{right angle at the foot}
+      - the axis is at right angles to the equator plane
+      - a right triangle
+    - - read the legs from phi
+      - \text{next}=\cos\varphi,\ \text{opposite}=\sin\varphi
+      - 'Part 1: next = long side × cos, opposite = long side × sin'
+      - flat leg cos, upright leg sin
+    - - angle at the other corner
+      - 180^\circ-90^\circ-\varphi=90^\circ-\varphi
+      - the angles of a triangle add to 180 deg
+      - it is the colatitude
+    - - read the same legs from there
+      - \sin(90^\circ-\varphi)=\cos\varphi,\ \cos(90^\circ-\varphi)=\sin\varphi
+      - next and opposite swap
+      - sine and cosine swap
+    - - check at Brest
+      - \sin 41.6^\circ\approx0.6639=\cos48.4^\circ
+      - numbers
+      - it works
+  kind: two-view derivation
+  data: A6 BMNG
+  tool: TwoViewSlice (three.js + SVG)
+  runner_up: —
+  why: the swap seen on one triangle, globe and diagram together
+  related: []
+  feedback:
+  - U-CO-037
+  - U-CO-043
+  - U-CO-054
+  - maths-skip rule (chip)
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s09_meridians
+  t:
+  - 530.25
+  - 591.6
+  sentence_times:
+  - - 530.25
+    - 532.925
+  - - 533.275
+    - 542.675
+  - - 543.025
+    - 545.2
+  - - 545.55
+    - 549.175
+  - - 549.525
+    - 557.55
+  - - 557.9
+    - 560.925
+  - - 561.275
+    - 569.25
+  - - 569.6
+    - 575.425
+  - - 575.775
+    - 580.7
+  - - 581.05
+    - 585.825
+  - - 586.175
+    - 590.8
+  beat: 'building block: meridians (U-CO-038, U-CO-039)'
+  visual: 'Whole globe, camera at 30 deg N above the Atlantic. S2 on AT(2,''Start at the North Pole''): the camera rises to look at the pole from
+    60 deg N; S2-S3: an orange line draws from the North Pole due south while the camera follows its tip down the globe (top -> bottom, about
+    6 s, <= 30 deg/s), past the equator to the South Pole (U-CO-038); S4: keyword ''meridian'', tag ''half circle'' beside the line. S5: a small
+    code-drawn sun glyph above the meridian with ''midday''. S6: the camera returns to the equator view and the globe turns east (one full turn
+    in 12 s) while eleven more meridians draw, one every 30 deg, as each passes the centre of the view (U-CO-039). S7: the camera tilts up: all
+    meet at the pole. S8: one meridian''s full circle completed faintly through the back (globe semi-transparent 2 s), its centre the Earth''s
+    centre (gold dot). S9: a parallel ring beside it, its centre on the axis (slate); keyword ''centre vs axis''. KEEP LINE (user rule 2026-11-05):
+    S1 is the ''If you skipped, here''s what to keep'' sentence; during it the takeaway keyword ''colatitude from the pole: sin ↔ cos'' (54 px,
+    warm white, gold underline) sits at the top of the column, then moves to its usual place.'
+  voiceover: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever
+    we have a sine of the latitude, and the other way round. Now for the second angle. First, we need another kind of line on the globe. Start
+    at the North Pole, and draw a line straight down the globe, heading due south all the way, until it reaches the South Pole. This half circle
+    is called a meridian. All along one meridian, the Sun is highest in the sky at the same moment, at midday, and that's where the name comes
+    from. Let's turn the globe and draw more of them, twelve, evenly spaced all the way round. Every meridian runs from pole to pole, and they
+    all meet at the poles. Each one is half of a big circle whose centre is the Earth's centre. That's the difference from the parallels, whose
+    centres sit on the axis.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.meridian_points (half great circles)
+    params:
+      lons:
+      - -180
+      - -150
+      - -120
+      - -90
+      - -60
+      - -30
+      - 0
+      - 30
+      - 60
+      - 90
+      - 120
+      - 150
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_meridian_points_V1_half_great_circle
+  exaggeration:
+  - globe turn time-compressed (one turn in 12 s)
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js globe
+  runner_up: —
+  why: the user asked to see a meridian drawn top to bottom, then across the globe
+  related: []
+  feedback:
+  - U-CO-038
+  - U-CO-039
+  - maths-skip rule (keep line)
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s10_prime_meridian
+  t:
+  - 591.6
+  - 681.55
+  sentence_times:
+  - - 591.6
+    - 595.2
+  - - 595.55
+    - 602.5
+  - - 602.85
+    - 605.15
+  - - 605.5
+    - 609.2
+  - - 609.55
+    - 614.3
+  - - 614.65
+    - 624.1
+  - - 624.45
+    - 630.95
+  - - 631.3
+    - 639.175
+  - - 639.525
+    - 645.975
+  - - 646.325
+    - 652.7
+  - - 653.05
+    - 662.075
+  - - 662.425
+    - 668.025
+  - - 668.375
+    - 675.925
+  - - 676.275
+    - 680.75
+  beat: 'building block: the prime meridian tour, pole to pole (U-CO-040)'
+  visual: 'Zoom-reveal (HOUSE_STYLE §5b): the globe goes full-bleed (dist 4.3 -> 2.4 over 1.5 s), the keyword column on the faded right. S1: the
+    0-deg meridian turns gold. S2 on AT(2,''Greenwich''): ''Greenwich'' with a gold dot in London. S4: the camera flies to the North Pole and
+    follows the gold line south at <= 25 deg/s, the line drawing ahead of the camera; short place labels (44 px) appear at their spots on their
+    words and fade 2 s later: ''Arctic Ocean'', ''Greenland'', ''Norway'', ''Norwegian Sea'', ''North Sea'', ''Yorkshire'', ''Greenwich'', ''Brighton'',
+    ''English Channel'', ''Normandy'', ''France'', ''Pyrenees'', ''Spain'', ''Valencia'', ''Mediterranean Sea'', ''Algeria'', ''Sahara'', ''Mali'',
+    ''Burkina Faso'', ''Togo'', ''Ghana'', ''Accra'', ''Gulf of Guinea'', ''equator'' (a gold tick where 0 deg meets the equator), ''South Atlantic'',
+    ''Southern Ocean'', ''Antarctica'', ''South Pole''. The camera eases to a ~1-s hover at each land crossing (Natural Earth admin-0: UK 53.8-50.8
+    N, France 49.3-42.7 N, Spain 42.7-39.9 N, Algeria 35.8-21.9 N, Mali 21.9-15.0 N, Burkina Faso 15.0-11.1 N, Togo/Ghana border 11.1-10.6 N,
+    Ghana 10.6-5.6 N, Antarctica from 71.5 S). Column: the current latitude ticks down beside the keyword ''0° longitude''. End: zoom out to the
+    start view (whole globe) before s11.'
+  voiceover: One meridian is chosen as the starting line. It passes through Greenwich, in London, and it was agreed at an international meeting
+    in eighteen eighty four. It's called the prime meridian. Let's follow it from the top of the globe to the bottom. It starts at the North Pole,
+    in the middle of the frozen Arctic Ocean. It runs south between Greenland and Norway, over the Norwegian Sea and the North Sea, and comes
+    ashore on the east coast of England, in Yorkshire. It passes through Greenwich, in east London, and leaves England on the south coast, near
+    Brighton. It crosses the English Channel, and runs right through France, from Normandy in the north to the Pyrenees mountains in the south.
+    Then it crosses the east of Spain, and reaches the Mediterranean Sea a little north of Valencia. In Africa, it crosses the Sahara desert in
+    Algeria, then Mali, and Burkina Faso. Further south, it runs for a short way along the border between Togo and Ghana, then through Ghana,
+    to the coast near the capital, Accra. Out in the Gulf of Guinea, part of the Atlantic Ocean, it crosses the equator. Then it runs south over
+    the open South Atlantic and the Southern Ocean, for more than eight thousand kilometres. It reaches the ice of Antarctica, and finally the
+    South Pole.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.data.naturalearth.read_records (ne_10m_admin_0_countries) intersected with the 0-deg meridian (shapely); fluidpy.geo.sphere.meridian_points
+    params:
+      lon: 0.0
+      crossings_deg_N:
+        United Kingdom:
+        - 53.76
+        - 50.79
+        France:
+        - 49.33
+        - 42.69
+        Spain:
+        - 42.69
+        - 39.94
+        Algeria:
+        - 35.84
+        - 21.85
+        Mali:
+        - 21.85
+        - 14.99
+        Burkina Faso:
+        - 14.99
+        - 11.1
+        Togo/Ghana border:
+        - 11.1
+        - 10.6
+        Ghana:
+        - 10.6
+        - 5.62
+        Antarctica:
+        - -71.5
+        - -90.0
+      ocean_names: standard sea names between the land crossings; the builder confirms them against Natural Earth 10 m marine polygons (new fetch
+        through the disk guard) or keeps the planning names
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_meridian_points_V1_half_great_circle; CHECK DS08 land crossings (9 rows, computed 2026-11-05);
+      DS09 Greenwich 51.48 N within 0.01 deg of lon 0
+  exaggeration:
+  - camera tour time-compressed
+  kind: 3-D globe zoom tour
+  data: A6 BMNG; NE 10 m admin-0 (registry NE-10m-admin)
+  tool: three.js house globe (zoom-reveal)
+  runner_up: —
+  why: the user asked which continents, countries and oceans the prime meridian crosses
+  related: []
+  feedback:
+  - U-CO-040
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Place labels
+    are short labels at their spot (allowed on the globe); everything else in the faded column. No text over the picture or over other text; links
+    never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0
+    (Should 18).'
+- id: s11_longitude
+  t:
+  - 681.55
+  - 770.175
+  sentence_times:
+  - - 681.55
+    - 684.325
+  - - 684.675
+    - 688.55
+  - - 688.9
+    - 694.625
+  - - 694.975
+    - 701.025
+  - - 701.375
+    - 707.4
+  - - 707.75
+    - 714.55
+  - - 714.9
+    - 717.75
+  - - 718.1
+    - 725.625
+  - - 725.975
+    - 732.225
+  - - 732.575
+    - 738.3
+  - - 738.65
+    - 745.675
+  - - 747.175
+    - 753.75
+  - - 754.1
+    - 762.325
+  - - 763.825
+    - 769.375
+  beat: 'building block: longitude lambda as an angle at the centre (top view, equatorial slice)'
+  visual: 'S1-S2: the camera rises above the North Pole (<= 60 deg/s); the meridians look like spokes. S3 on AT(4,''slice the Earth across''):
+    a horizontal knife plane at the equator; the northern half lifts and fades to 20 %; the round face of the equatorial cut faces the camera,
+    tilted 20 deg so it reads as a disc. S4: spokes on the face from the gold centre to the rim (slate), the prime meridian''s spoke gold. S5
+    on AT(5,''Longitude is the angle''): an orange arc at the centre from the gold spoke to Brest''s spoke, the 4.5-deg wedge filled 25 % orange,
+    with a x6 magnifier inset in the column; KaTeX ''λ'' at the wedge. S7: a curved arrow on the rim ''east'' (anticlockwise seen from above).
+    S8-S9: ''+'' arc to the east up to 180, ''−'' (rose, with the glyph) to the west. S10: column ''λ = −4.5°'' (84 px). S11-S12: a 0-360 ruler
+    slides under it: ''360° − 4.5° = 355.5°''. S13: a gold ''same meridian'' tick linking the two numbers.'
+  voiceover: Now we can define the second angle. Let's look down on the Earth from far above the North Pole. From up here, every meridian looks
+    like a spoke of a wheel, running out from the pole. Now slice the Earth across, along the equator, and look at the round face of the cut.
+    Its centre is the Earth's centre, and the meridians meet its rim like the ends of the spokes. Longitude is the angle at the centre, from the
+    prime meridian round to the meridian of the place. We write it with the Greek letter lambda. Seen from above the North Pole, east is anticlockwise,
+    the same way the angle theta turned in Part 1. Places east of Greenwich have positive longitude, up to a hundred and eighty degrees east.
+    Places to the west have negative longitude, down to minus a hundred and eighty. Brest is about four and a half degrees west of Greenwich,
+    so its lambda is minus four point five degrees. [beat] Some data sets count longitude from zero to three hundred and sixty degrees, always
+    going east. Then Brest is at three hundred and sixty minus four point five, which is three hundred and fifty five point five degrees. [beat]
+    Both numbers point to the same meridian, so always check which way your data counts.
+  on_screen_eq:
+    latex: \lambda_{\text{Brest}}\approx-4.5^\circ\ \ (=355.5^\circ\ \text{in }0\text{–}360)
+    vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
+      θ = π/2 − latitude and azimuth = longitude (convention bridge, page image only)
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - 360^\circ-4.5^\circ=355.5^\circ
+  physics_source:
+    fn: fluidpy.geo.sphere.wrap_lon; meridian_points
+    params:
+      lon: -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_wrap_lon_V7_round_trip_and_edges; CHECK DS10 wrap_lon(355.5) = -4.5
+  exaggeration:
+  - the 4.5-deg wedge magnified x6 in an inset (illustrative)
+  kind: 3-D sliced globe (top)
+  data: A6 BMNG
+  tool: three.js (clipping plane at the equator)
+  runner_up: —
+  why: the second angle, measured at the centre in the equator plane
+  related: []
+  feedback:
+  - U-CO-041
+  - U-CO-045
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s12_graticule
+  t:
+  - 770.175
+  - 826.75
+  sentence_times:
+  - - 770.175
+    - 773.675
+  - - 774.025
+    - 782.575
+  - - 782.925
+    - 794.075
+  - - 794.425
+    - 798.65
+  - - 799.0
+    - 808.0
+  - - 808.35
+    - 812.9
+  - - 813.25
+    - 817.85
+  - - 818.2
+    - 825.95
+  beat: 'building block: the graticule, drawn line by line (U-CO-041)'
+  visual: 'Whole globe, camera at 20 deg N. S1-S2: meridians every 15 deg draw one by one (slate, 4 px), the spoken ones tagged ''0°'', ''15°
+    E'', ''30° E'' at the equator; the globe turns so each one passes the centre. S3: parallels every 15 deg draw from the equator up and down
+    (orange, 4 px), tags ''0°'', ''15° N'', ''30° N'', ''45°'', ''60°'', ''75°'' on their words at the left limb (facing() fade at the limb).
+    S4 on AT(4,''graticule''): keyword ''graticule'' (54 px). S5: one crossing near the camera gets a gold right-angle tick. S6-S7: column ''place
+    = (latitude, longitude)''. S8: Brest''s parallel and meridian highlight (orange, slate) and meet in a gold dot with ''Brest (48.4° N, 4.5°
+    W)''.'
+  voiceover: 'Now let''s cover the globe with both kinds of line. First, the meridians, one every fifteen degrees of longitude: zero, fifteen
+    east, thirty east, and all the way round. Then the parallels, one every fifteen degrees of latitude: the equator, fifteen north, thirty north,
+    forty five, sixty and seventy five, and the same to the south. Together, they make a grid on the globe, called the graticule. Every meridian
+    crosses every parallel at a right angle, because the meridians run north and south, and the parallels run east and west. Any place on Earth
+    sits where one parallel meets one meridian. So two numbers, its latitude and its longitude, pin it down. Brest sits where the parallel at
+    forty eight point four degrees north meets the meridian at four point five degrees west.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.parallel_points, meridian_points
+    params:
+      step_deg: 15
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat; ../Fluid Dynamics/tests/geo/test_sphere.py::test_meridian_points_V1_half_great_circle
+  exaggeration: []
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js globe
+  runner_up: —
+  why: the user asked to see the graticule clearly; the right angles are needed for the area later
+  related: []
+  feedback:
+  - U-CO-041
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s13_earth_axes
+  t:
+  - 826.75
+  - 899.55
+  sentence_times:
+  - - 826.75
+    - 831.5
+  - - 831.85
+    - 842.025
+  - - 842.375
+    - 847.525
+  - - 847.875
+    - 852.625
+  - - 852.975
+    - 861.45
+  - - 861.8
+    - 869.5
+  - - 869.85
+    - 875.125
+  - - 875.475
+    - 878.75
+  - - 879.1
+    - 885.375
+  - - 885.725
+    - 890.55
+  - - 890.9
+    - 894.725
+  - - 895.075
+    - 898.75
+  beat: 'derivation D23 (1): the Earth-centred x, y, z axes (U-CO-046)'
+  visual: 'Globe 60 % transparent so the centre shows. S3: gold centre dot. S4 on AT(4,''The z axis''): an orange axis line from the centre up
+    the spin axis, out through the North Pole, KaTeX ''z'' at its tip. S5 on AT(5,''The x axis''): an axis line to (0 N, 0 E), tip ''x'', with
+    a short label ''Gulf of Guinea'' at the spot (the camera turns so it faces us within 1 s). S6 on AT(6,''The y axis''): an axis line to (0
+    N, 90 E), tip ''y'', label ''Indian Ocean''; the Bay of Bengal visible north of it. S7 on AT(7,''x hat, y hat and z hat''): three short unit
+    arrows from the centre along the axes, tagged x̂, ŷ, ẑ (KaTeX hats, orange); column ''x̂ → 0° N 0° E'', ''ŷ → 0° N 90° E'', ''ẑ → North Pole''.
+    S8: right-angle ticks between the three. S9: column ''x̂ × ŷ = ẑ'' with a small curl glyph (cross product movie). S10: the globe and the arrows
+    turn together (axes fixed to the Earth). S11: column ''goal: Brest''s x, y, z''. S12: two small icons ''side view'', ''top view''.'
+  voiceover: Latitude and longitude tell us where a place is on the surface. But in physics, we often want the place as an arrow in space, from
+    the Earth's centre, with x, y and z parts, like the balloon's arrow in Part 1. For that, we first need three axes, all starting at the Earth's
+    centre. The z axis runs up the Earth's spin axis, towards the North Pole. The x axis runs out to the point where the prime meridian meets
+    the equator, in the Gulf of Guinea, off the coast of West Africa. The y axis runs out to the equator at ninety degrees east, in the Indian
+    Ocean, south of the Bay of Bengal. The arrows of length one along them are called x hat, y hat and z hat. All three are at right angles to
+    each other. They're arranged so that x hat cross y hat gives z hat, as in the cross product movie. And they turn with the Earth, so a city's
+    x, y and z never change. Our goal now is to find Brest's x, y and z. We'll do it in two steps, with one slice each time.
+  on_screen_eq:
+    latex: \hat{\mathbf x}\times\hat{\mathbf y}=\hat{\mathbf z}
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (definition of Earth-fixed axes; right-handed as in the cross product movie)'
+    page_png: null
+  physics_source:
+    fn: 'fluidpy.geo.sphere.unit_vector: (0, 0) = x-hat, (0, 90) = y-hat, (90, 0) = z-hat'
+    params: {}
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm
+  exaggeration: []
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js globe
+  runner_up: —
+  why: z must be defined before z = a sin phi (the user asked which way z points)
+  related: []
+  feedback:
+  - U-CO-046
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s14_brest_side
+  t:
+  - 899.55
+  - 976.95
+  sentence_times:
+  - - 899.55
+    - 906.3
+  - - 906.65
+    - 914.3
+  - - 914.65
+    - 918.925
+  - - 919.275
+    - 921.45
+  - - 921.8
+    - 929.05
+  - - 929.4
+    - 934.775
+  - - 935.125
+    - 938.1
+  - - 938.45
+    - 943.75
+  - - 944.1
+    - 948.95
+  - - 949.3
+    - 954.25
+  - - 954.6
+    - 961.425
+  - - 961.775
+    - 967.5
+  - - 967.85
+    - 971.05
+  - - 971.4
+    - 976.15
+  beat: 'derivation D23 (2): the side view, globe and diagram drawn together (U-CO-042, U-CO-043)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). Left: the half-Earth sliced along Brest''s meridian (lon0 = -4.5),
+    face 15 deg from frontal. Right: the same half-disc flat (radius 330 px), axis vertical. Items in order, each in BOTH views on its words:
+    AT(4,''the centre'') gold dot; AT(5,''Earth''s axis'') slate vertical line, ''z'' at the top (orange KaTeX) and ''North Pole''; AT(6,''out
+    to the equator'') slate horizontal line ''equator plane''; AT(7,''the arrow from the centre to Brest'') teal arrow with ''a'' at its middle;
+    AT(8,''forty eight point four degrees'') gold arc and ''φ = 48.4°'' inside the wedge; AT(9,''drop a line'') dashed slate line from Brest down
+    to the equator line; AT(10,''right angle'') right-angle tick; AT(11,''right triangle'') the triangle fills 10 % white in both views, keyword
+    ''right triangle''. SKIP CHIP (user rule 2026-11-05; the one allowed chip): on AT(3,''skip ahead'') a small rounded chip, top-right of the
+    column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step: optional'' / ''not needed for the intuition''
+    / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5
+    s, never over the picture.'
+  voiceover: 'The next few minutes build Brest''s position, and then the speed of the spinning ground, one step at a time. They''re here for anyone
+    who wants every step, and you don''t need them for the intuition of weather, climate science or mapping. So if it feels like a lot, skip ahead
+    to the time on screen. First, the side view. Let''s slice the Earth along Brest''s meridian again, and next to it, draw the same cut face
+    flat on the page. Everything we draw on the globe, we''ll draw on the flat diagram at the same moment. Here''s the centre, in both pictures.
+    Here''s the Earth''s axis, pointing up to the North Pole: that''s the z direction. Here''s the line from the centre out to the equator, on
+    Brest''s meridian. Here''s the arrow from the centre to Brest, as long as the Earth''s radius. And here''s the latitude, phi, forty eight
+    point four degrees, between the equator line and the arrow. Now drop a line from Brest straight down to the equator plane, parallel to the
+    axis. It meets the equator line at a right angle. So we have a right triangle, and the arrow to Brest is its long side.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector (Brest); geometry of the meridian plane
+    params:
+      lat: 48.4
+      lon: -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm
+  exaggeration: []
+  kind: two-view
+  data: A6 BMNG
+  tool: TwoViewSlice (three.js + SVG)
+  runner_up: flat SVG only (loses the 3-D link)
+  why: every update mirrored on the globe and the flat figure
+  related: []
+  feedback:
+  - U-CO-042
+  - U-CO-043
+  - Should 5
+  - maths-skip rule (chip)
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s15_brest_z
+  t:
+  - 976.95
+  - 1054.475
+  sentence_times:
+  - - 976.95
+    - 980.0
+  - - 980.35
+    - 986.975
+  - - 987.325
+    - 990.3
+  - - 990.65
+    - 995.125
+  - - 995.475
+    - 999.1
+  - - 999.45
+    - 1001.225
+  - - 1001.575
+    - 1007.925
+  - - 1008.275
+    - 1013.75
+  - - 1014.1
+    - 1025.55
+  - - 1027.05
+    - 1034.275
+  - - 1035.775
+    - 1044.075
+  - - 1044.425
+    - 1053.675
+  beat: 'derivation D23 (3): z = a sin phi with every value labelled (U-CO-046, U-CO-047, U-CO-048)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). The triangle from s14 in both views. S1-S2: the upright leg glows
+    orange in both views; keyword ''height above the equator plane''. S3: a gold arc marks ''opposite φ''. S4: mini Part 1 glyph ''opposite =
+    long × sin''. S5: ''z = a sin φ'' (main equation 96 px) under the flat diagram; underbraces ''Earth''s radius'' under a, ''sine of the latitude''
+    under sin φ. S6-S8: CalcStack replaces the flat diagram''s lower part: ''a = 6371 km'' (gold link to the teal arrow), ''sin 48.4° ≈ 0.7478'',
+    ''z = 6371 km × 0.7478 ≈ 4764 km''; at the result the leg tag ''z ≈ 4764 km'' appears in BOTH views on the same frame, beside the leg. S9:
+    easy row ''6400 × 3/4 = 4800''. S10: an arrowhead on the leg pointing up, ''towards the North Pole''. S11: a ghost southern place (30 S) with
+    its leg pointing down and ''z < 0'' (rose, ''−'' glyph).'
+  voiceover: 'What''s Brest''s height above the equator plane? That height is the side of the triangle that runs parallel to the axis, so it''s
+    measured along z. It''s the side opposite the angle phi. By the rule from Part 1, it''s the long side times sine phi. So z equals the Earth''s
+    radius times sine phi. Now the numbers. The long side is the Earth''s radius, six thousand three hundred and seventy one kilometres. The sine
+    of forty eight point four degrees is zero point seven four seven eight. So z is six thousand three hundred and seventy one times zero point
+    seven four seven eight, which is about four thousand seven hundred and sixty four kilometres. [beat] With easy numbers, six thousand four
+    hundred times three quarters is four thousand eight hundred: about the same. [beat] So Brest sits about four thousand seven hundred and sixty
+    four kilometres above the equator plane, on the North Pole''s side. A place in the southern hemisphere has a negative latitude, so its sine,
+    and its z, are negative: it lies below the equator plane.'
+  on_screen_eq:
+    latex: z=a\sin\varphi
+    vallis_eq: 'Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
+      θ = π/2 − latitude and azimuth = longitude (convention bridge, page image only); z = r sin(latitude) (Kundu B.5: z = r cos θ with θ the
+      colatitude)'
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - a=6371\ \text{km},\quad \sin48.4^\circ\approx0.7478
+  - z=6371\ \text{km}\times0.7478\approx4764\ \text{km}
+  - 6400\times\tfrac34=4800
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector x EARTH_RADIUS (z part)
+    params:
+      lat: 48.4
+      lon: -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; CHECK DS11 z = 4764.2 km
+  exaggeration: []
+  derivation:
+    id: D23
+    goal: Brest's height above the equator plane, z
+    steps:
+    - - name the side
+      - z=\text{leg parallel to the axis}
+      - z is measured along the spin axis
+      - the height above the equator plane
+    - - opposite side rule
+      - z=a\sin\varphi
+      - 'Part 1: opposite side = long side × sine'
+      - the radius times sine of the latitude
+    - - put in the numbers
+      - 6371\times0.7478\approx4764\ \text{km}
+      - a = 6371 km, sin 48.4 deg = 0.7478
+      - Brest is 4764 km above the equator plane
+    - - sign
+      - \varphi<0\Rightarrow z<0
+      - the sine of a negative angle is negative
+      - southern places lie below the plane
+  kind: two-view derivation
+  data: A6 BMNG
+  tool: TwoViewSlice
+  runner_up: —
+  why: z = a sin phi with every factor named and labelled on both pictures
+  related: []
+  feedback:
+  - U-CO-046
+  - U-CO-047
+  - U-CO-048
+  - U-CO-054
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s16_brest_axis_distance
+  t:
+  - 1054.475
+  - 1115.175
+  sentence_times:
+  - - 1054.475
+    - 1060.125
+  - - 1060.475
+    - 1065.95
+  - - 1066.3
+    - 1071.85
+  - - 1072.2
+    - 1083.925
+  - - 1085.425
+    - 1093.7
+  - - 1095.2
+    - 1101.9
+  - - 1102.25
+    - 1114.375
+  beat: 'derivation D23 (4)-(5): the distance from the axis a cos phi (U-CO-049)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). S1: the flat leg glows orange in both views; keyword ''distance
+    from the axis'' with a slate bracket from the axis to the foot. S2: ''next to φ'' and the Part 1 glyph ''next = long × cos''. S3-S4: CalcStack
+    ''cos 48.4° ≈ 0.6639'', ''a cos φ = 6371 km × 0.6639 ≈ 4230 km''; the leg tag ''a cos φ ≈ 4230 km'' appears below the leg in both views on
+    the result''s words. S5: easy row ''6400 × 2/3 ≈ 4270''. S6: in the 3-D view the parallel disc of s06 fades in round the axis; its radius
+    is the same leg (gold ''same'' tick between the leg and the disc radius). S7: both views show both tags ''4764 km'' (up) and ''4230 km'' (out
+    from the axis).'
+  voiceover: 'Next, the triangle''s other short side: Brest''s distance from the Earth''s axis. It''s the side next to the angle phi, so it''s
+    the long side times cosine phi. The cosine of forty eight point four degrees is zero point six six three nine. So the distance from the axis
+    is six thousand three hundred and seventy one times zero point six six three nine, which is about four thousand two hundred and thirty kilometres.
+    [beat] With easy numbers, six thousand four hundred times two thirds is about four thousand two hundred and seventy: close. [beat] This distance
+    is exactly the radius of Brest''s parallel, the disc we sliced across earlier. On both pictures, the two short sides now carry their lengths:
+    four thousand seven hundred and sixty four kilometres up, and four thousand two hundred and thirty kilometres out from the axis.'
+  on_screen_eq:
+    latex: a\cos\varphi
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface (the parallel''s radius r cos ϑ)'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - \cos48.4^\circ\approx0.6639
+  - a\cos\varphi=6371\ \text{km}\times0.6639\approx4230\ \text{km}
+  - 6400\times\tfrac23\approx4270
+  physics_source:
+    fn: fluidpy.geo.sphere.parallel_points (radius a cos phi); unit_vector
+    params:
+      lat: 48.4
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat; CHECK DS12 a cos phi = 4229.9 km
+  exaggeration: []
+  derivation:
+    id: D23
+    goal: Brest's distance from the spin axis
+    steps:
+    - - name the side
+      - \text{leg in the equator plane}
+      - it runs from the axis out to the foot of Brest
+      - the distance from the axis
+    - - next side rule
+      - a\cos\varphi
+      - 'Part 1: next side = long side × cosine'
+      - the radius times cosine of the latitude
+    - - numbers
+      - 6371\times0.6639\approx4230\ \text{km}
+      - cos 48.4 deg = 0.6639
+      - Brest is 4230 km from the axis
+    - - meaning
+      - a\cos\varphi=\text{radius of the parallel}
+      - the parallel is a circle round the axis through Brest
+      - the size of Brest's circle
+  kind: two-view derivation
+  data: A6 BMNG
+  tool: TwoViewSlice
+  runner_up: —
+  why: the second calculation, labelled the same way (U-CO-049)
+  related: []
+  feedback:
+  - U-CO-049
+  - U-CO-048
+  - U-CO-054
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s17_brest_top
+  t:
+  - 1115.175
+  - 1221.0
+  sentence_times:
+  - - 1115.175
+    - 1117.8
+  - - 1118.15
+    - 1126.55
+  - - 1126.9
+    - 1130.675
+  - - 1131.025
+    - 1138.2
+  - - 1138.55
+    - 1146.375
+  - - 1146.725
+    - 1155.45
+  - - 1155.8
+    - 1166.45
+  - - 1166.8
+    - 1174.075
+  - - 1174.425
+    - 1176.2
+  - - 1176.55
+    - 1182.275
+  - - 1182.625
+    - 1192.675
+  - - 1194.175
+    - 1200.325
+  - - 1200.675
+    - 1210.725
+  - - 1212.225
+    - 1220.2
+  beat: 'derivation D24: the top view, x = a cos phi cos lambda, y = a cos phi sin lambda (U-CO-044, U-CO-045)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). Left: the equatorial slice seen from above the North Pole (face
+    tilted 20 deg), the northern half faded to 20 % with Brest''s dot above the plane and a dashed slate drop line to its foot. Right: the same
+    equatorial disc flat (radius 330 px), x axis to the right (towards 0 deg), y axis up (towards 90 E), both orange. In both views on the words:
+    AT(4,''the foot'') the foot dot; AT(5,''four thousand two hundred and thirty'') the teal leg from the centre to the foot, tag ''4230 km'';
+    AT(6,''minus four and a half'') an orange lambda arc from the x axis, 4.5 deg westward (clockwise seen from above), with a x6 magnifier inset
+    in the flat view only; AT(7,''polar coordinates'') keyword ''Part 1: r → a cos φ, θ → λ''. S8: the leg splits into its x part and y part,
+    dashed. S9-S12: CalcStack ''cos(−4.5°) ≈ 0.9969'', ''x = 4230 × 0.9969 ≈ 4217 km''; ''sin(−4.5°) ≈ −0.0785'', ''y = 4230 × (−0.0785) ≈ −332
+    km'' (rose ''−'' glyph); each part''s tag appears at its leg in both views on the result''s words. S13: keyword ''just west of 0°''.'
+  voiceover: 'Second step: the top view. Now look down on the Earth from far above the North Pole, and slice it across along the equator plane,
+    as we did for longitude. Next to it, again, the same face is drawn flat. Brest itself is above this plane, but straight below Brest, in the
+    plane, is the foot of the line we dropped. That foot is four thousand two hundred and thirty kilometres from the centre, the distance from
+    the axis we just found. And it lies on Brest''s meridian, so it''s at Brest''s longitude, lambda, minus four and a half degrees, measured
+    from the x axis. That''s polar coordinates on a flat face, exactly as in Part 1, with the distance from the axis playing the part of r, and
+    lambda playing the part of theta. So the x part is that distance times cosine lambda, and the y part is that distance times sine lambda. Now
+    the numbers. The cosine of minus four point five degrees is zero point nine nine six nine. So x is four thousand two hundred and thirty times
+    zero point nine nine six nine, about four thousand two hundred and seventeen kilometres. [beat] The sine of minus four point five degrees
+    is minus zero point zero seven eight five. So y is four thousand two hundred and thirty times minus zero point zero seven eight five, about
+    minus three hundred and thirty two kilometres. [beat] The y part is small, because Brest is close to the prime meridian, and it''s negative,
+    because Brest is just west of it.'
+  on_screen_eq:
+    latex: x=a\cos\varphi\cos\lambda,\qquad y=a\cos\varphi\sin\lambda
+    vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
+      θ = π/2 − latitude and azimuth = longitude (convention bridge, page image only)
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - \cos(-4.5^\circ)\approx0.9969,\quad x=4230\times0.9969\approx4217\ \text{km}
+  - \sin(-4.5^\circ)\approx-0.0785,\quad y=4230\times(-0.0785)\approx-332\ \text{km}
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector x EARTH_RADIUS; fluidpy.core.coords.cartesian_from_polar_coords (r = a cos phi, theta = lambda)
+    params:
+      lat: 48.4
+      lon: -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections;
+      CHECK DS13 x = 4216.8 km, y = -331.9 km
+  exaggeration:
+  - the 4.5-deg angle magnified x6 in the flat-view inset (illustrative)
+  derivation:
+    id: D24
+    goal: Brest's x and y
+    steps:
+    - - look from above and slice at the equator
+      - \text{foot of Brest at }a\cos\varphi
+      - the drop line is parallel to the axis, so it lands in the plane
+      - Brest's shadow in the equator plane
+    - - the angle of the foot
+      - \lambda=-4.5^\circ
+      - the foot lies on Brest's meridian
+      - longitude measured from x
+    - - polar rule
+      - x=a\cos\varphi\cos\lambda,\ y=a\cos\varphi\sin\lambda
+      - 'Part 1: x = r cos theta, y = r sin theta with r = a cos phi, theta = lambda'
+      - the shadow splits into x and y
+    - - numbers
+      - 4217,\ -332\ \text{km}
+      - cos(-4.5) = 0.9969, sin(-4.5) = -0.0785
+      - 'almost all x; a little negative y: just west of 0'
+  kind: two-view derivation
+  data: A6 BMNG
+  tool: TwoViewSlice
+  runner_up: —
+  why: the user asked for a cos phi cos lambda and a cos phi sin lambda computed and drawn on the globe and the figure together
+  related: []
+  feedback:
+  - U-CO-044
+  - U-CO-045
+  - U-CO-043
+  - U-CO-054
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s18_position_vector
+  t:
+  - 1221.0
+  - 1327.975
+  sentence_times:
+  - - 1221.0
+    - 1223.5
+  - - 1223.85
+    - 1228.775
+  - - 1229.125
+    - 1234.675
+  - - 1235.025
+    - 1240.3
+  - - 1240.65
+    - 1244.25
+  - - 1244.6
+    - 1254.4
+  - - 1255.9
+    - 1260.45
+  - - 1260.8
+    - 1271.625
+  - - 1273.125
+    - 1283.9
+  - - 1285.4
+    - 1291.1
+  - - 1291.45
+    - 1295.45
+  - - 1295.8
+    - 1301.525
+  - - 1301.875
+    - 1305.3
+  - - 1305.65
+    - 1311.675
+  - - 1312.025
+    - 1320.15
+  - - 1321.65
+    - 1327.175
+  beat: 'derivation D23-D24 assembled: the position vector, its length check, r-hat'
+  visual: 'Left (picture zone): the whole globe, semi-transparent, with the teal position arrow from the centre to Brest and its three parts drawn
+    as a dashed box path (x along x, y along y, z up; orange), each tagged with its km (''4217'', ''−332'', ''4764''). Right (maths zone): the
+    three-line equation (96 px) building line by line on S2-S4, with an underbrace ''distance from the axis'' under a cos φ. S5: Brest row ''(4217,
+    −332, 4764) km''. S6-S8: CalcStack ''√(4217² + 332²) ≈ 4230'' with a gold link to the in-plane diagonal, then ''√(4230² + 4764²) ≈ 6371''
+    with a link to the arrow. S9: ''cos²φ + sin²φ = 1''. S10-S12: the arrow shrinks to length 1 (orange r-hat, KaTeX hat) pointing out of Brest;
+    S13: ''r̂ = (cos φ cos λ, cos φ sin λ, sin φ)''; S14: ''≈ (0.662, −0.052, 0.748)''. S15: keyword ''Part 4: up''.'
+  voiceover: 'Let''s put the two steps together. The distance from the axis is the Earth''s radius times cosine phi. So x is the Earth''s radius,
+    times cosine phi, times cosine lambda. And y is the Earth''s radius, times cosine phi, times sine lambda. And z is the Earth''s radius times
+    sine phi. For Brest, that''s four thousand two hundred and seventeen, minus three hundred and thirty two, and four thousand seven hundred
+    and sixty four kilometres. [beat] Let''s check that this arrow really is as long as the Earth''s radius. First, Pythagoras in the equator
+    plane: the square root of x squared plus y squared gives back the distance from the axis, four thousand two hundred and thirty. [beat] Then
+    Pythagoras in the side view: the square root of four thousand two hundred and thirty squared, plus z squared, gives six thousand three hundred
+    and seventy one. [beat] It works for every place, because cosine squared plus sine squared is always one. Now divide the arrow by its length,
+    the Earth''s radius. We get an arrow of length one, pointing straight up from the place, away from the centre. We call it r hat, just as on
+    the flat map. Its parts are cosine phi cosine lambda, cosine phi sine lambda, and sine phi. For Brest, they''re about zero point six six two,
+    minus zero point zero five two, and zero point seven four eight. [beat] We''ll use this arrow again in Part 4, as the up direction of a weather
+    station.'
+  on_screen_eq:
+    latex: x=a\cos\varphi\cos\lambda,\quad y=a\cos\varphi\sin\lambda,\quad z=a\sin\varphi
+    vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
+      θ = π/2 − latitude and azimuth = longitude (convention bridge, page image only)
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - \sqrt{4217^2+332^2}\approx4230\ \text{km}
+  - \sqrt{4230^2+4764^2}\approx6371\ \text{km}
+  - \cos^2\varphi+\sin^2\varphi=1
+  - \hat{\mathbf r}=(\cos\varphi\cos\lambda,\ \cos\varphi\sin\lambda,\ \sin\varphi)\approx(0.662,\ -0.052,\ 0.748)
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector; fluidpy.core.coords.cartesian_from_spherical (colatitude bridge, agree to 1e-9)
+    params:
+      lat: 48.4
+      lon: -4.5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections;
+      CHECK DS14 |r| = 6371.0 km; DS15 r-hat = (0.6619, -0.0521, 0.7478)
+  exaggeration: []
+  kind: 3-D globe + equation
+  data: A6 BMNG
+  tool: three.js globe + KaTeX
+  runner_up: —
+  why: the position vector in one line, checked; r-hat is Part 4's k
+  related: []
+  feedback:
+  - U-CO-044
+  - U-CO-054
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Calculations
+    in the maths zone only. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own
+    stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s19_khulna
+  t:
+  - 1327.975
+  - 1426.55
+  sentence_times:
+  - - 1327.975
+    - 1331.7
+  - - 1332.05
+    - 1344.375
+  - - 1344.725
+    - 1350.425
+  - - 1350.775
+    - 1355.4
+  - - 1355.75
+    - 1368.125
+  - - 1369.625
+    - 1379.35
+  - - 1380.85
+    - 1387.65
+  - - 1388.0
+    - 1395.325
+  - - 1395.675
+    - 1402.725
+  - - 1404.225
+    - 1411.5
+  - - 1413.0
+    - 1419.075
+  - - 1419.425
+    - 1425.75
+  beat: 'derivation D25: the same for Khulna (Bay of Bengal city; Amphan from Part 2)'
+  visual: 'S1-S2: zoom-reveal flight to Khulna (globe full-bleed, Bay of Bengal centred within 1 s of ''Khulna''): labels ''Khulna'', ''Bangladesh'',
+    ''Sundarbans'' (the mangrove green visible in BMNG), ''Bay of Bengal'', and a thin Amphan track line (IBTrACS) on their words, its source
+    line below the globe ''Track: IBTrACS v04r01 · Amphan, 16-21 May 2020''; then zoom out to the whole globe. S3: column ''22.8° N, 89.6° E''.
+    S4-S7: TwoViewSlice side view on Khulna''s meridian (lon0 = 89.6): legs ''z ≈ 2469 km'' and ''a cos φ ≈ 5873 km'' with CalcStack ''6371 ×
+    0.3875 ≈ 2469'', ''6371 × 0.9219 ≈ 5873''; a faint ghost of Brest''s triangle for comparison. S8-S10: top view: the foot at 89.6 deg from
+    x, legs ''x ≈ 41 km'', ''y ≈ 5873 km''; CalcStack ''5873 × 0.00698 ≈ 41'', ''5873 × 1.000 ≈ 5873''. S11: the 3-D arrow almost along y, tilted
+    up. S12: ''√(41² + 5873² + 2469²) ≈ 6371 km''.'
+  voiceover: Let's do the same for a city on the other side of Asia. Khulna is in the southwest of Bangladesh, near the Sundarbans, the world's
+    largest mangrove forest, close to where Cyclone Amphan, from Part 2, came ashore in May twenty twenty. It's at about twenty two point eight
+    degrees north, and eighty nine point six degrees east. In the side view, sine phi is zero point three eight seven five. So Khulna's height
+    above the equator plane is six thousand three hundred and seventy one times zero point three eight seven five, about two thousand four hundred
+    and sixty nine kilometres. [beat] Cosine phi is zero point nine two one nine, so its distance from the axis is about five thousand eight hundred
+    and seventy three kilometres. [beat] Khulna is much closer to the equator than Brest, so it sits lower, and much farther from the axis. In
+    the top view, lambda is eighty nine point six degrees, almost a right angle from the prime meridian. Its cosine is only zero point zero zero
+    six nine eight, so x is about forty one kilometres. [beat] Its sine is almost exactly one, so y is about five thousand eight hundred and seventy
+    three kilometres. [beat] So Khulna's arrow points almost straight along the y axis, tilted up towards the North Pole. And once again, its
+    length comes out at six thousand three hundred and seventy one kilometres.
+  on_screen_eq:
+    latex: x=a\cos\varphi\cos\lambda,\quad y=a\cos\varphi\sin\lambda,\quad z=a\sin\varphi
+    vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
+      θ = π/2 − latitude and azimuth = longitude (convention bridge, page image only)
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - z=6371\times0.3875\approx2469\ \text{km}
+  - a\cos\varphi=6371\times0.9219\approx5873\ \text{km}
+  - x=5873\times0.00698\approx41\ \text{km},\quad y=5873\times1.000\approx5873\ \text{km}
+  - \sqrt{41^2+5873^2+2469^2}\approx6371\ \text{km}
+  physics_source:
+    fn: fluidpy.geo.sphere.unit_vector x EARTH_RADIUS; fluidpy.data.ibtracs (Amphan track)
+    params:
+      khulna:
+      - 22.8
+      - 89.6
+      pending: landfall city per reports/data/ch00_coordinates_research.md (not written on 2026-11-05)
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_unit_vector_V1_axes_and_norm; CHECK DS16 Khulna (41.0, 5873.0, 2468.9) km, |r| = 6371.0
+  exaggeration: []
+  kind: globe zoom + two-view
+  data: A6 BMNG; IBTrACS v04r01 (registry IBTrACS-v04r01)
+  tool: three.js house globe + TwoViewSlice
+  runner_up: —
+  why: 'a second city next to Brest, on the Bay of Bengal storm''s coast (decision: Amphan, Khulna)'
+  related: []
+  pending_data: true
+  feedback:
+  - U-CO-044
+  - U-CO-060 (Khulna introduced here; Part 4 reuses it)
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Track source
+    line below the globe. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own
+    stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s20_spin_rate
+  t:
+  - 1426.55
+  - 1531.875
+  sentence_times:
+  - - 1426.55
+    - 1430.3
+  - - 1430.65
+    - 1437.775
+  - - 1438.125
+    - 1444.75
+  - - 1445.1
+    - 1447.5
+  - - 1447.85
+    - 1450.875
+  - - 1451.225
+    - 1454.1
+  - - 1454.45
+    - 1461.4
+  - - 1461.75
+    - 1464.25
+  - - 1464.6
+    - 1471.875
+  - - 1472.225
+    - 1475.85
+  - - 1476.2
+    - 1481.1
+  - - 1481.45
+    - 1485.975
+  - - 1486.325
+    - 1489.875
+  - - 1490.225
+    - 1498.675
+  - - 1499.025
+    - 1505.475
+  - - 1505.825
+    - 1510.225
+  - - 1510.575
+    - 1517.05
+  - - 1517.4
+    - 1523.7
+  - - 1525.2
+    - 1531.075
+  beat: 'derivation D27 (1)-(4): ground speed U = Omega a cos phi (U-CO-051)'
+  visual: 'Globe with the spin axis (slate) and Brest''s parallel (orange ring, radius tag ''a cos φ''), spinning slowly. S5-S6: a clock glyph
+    with a star icon, ''one turn: 23 h 56 min'', ''T'' (KaTeX). S7: a small sun-and-orbit glyph in the column (the Earth moving along its orbit:
+    the extra 4 minutes). S8-S9: Brest''s dot travels once round its ring (gold trail); the column builds ''distance = 2π × a cos φ''. S10-S11:
+    ''U = 2π a cos φ / T'' (Layered; the 2π/T part violet). S12-S14: the 2π/T part lifts out: ''Ω = 2π / T'' (violet, rotation colour), keyword
+    ''spin rate, rad/s''. S15: ''U = Ω a cos φ'' (96 px). S16: mini Part 2 ring glyph ''speed = radius × turning rate''.'
+  voiceover: 'That distance from the axis has a second meaning. The Earth spins round its axis, so every place on the ground is carried round
+    a circle: its parallel. The radius of that circle is the distance from the axis, the Earth''s radius times cosine phi. How fast is the ground
+    moving? Let''s work it out, one step at a time. First, how long does one turn take? Measured against the distant stars, the Earth turns once
+    every twenty three hours and fifty six minutes. We call this time capital T. It''s four minutes shorter than a day from noon to noon, because
+    the Earth also moves along its orbit round the Sun. Second, how far does the place travel in one turn? Once round its circle, which is two
+    pi times the radius of the circle. That''s two pi, times the Earth''s radius, times cosine phi. Third, speed is distance divided by time.
+    So the ground speed, capital U, is two pi, times the Earth''s radius, times cosine phi, divided by capital T. Fourth, we pull out the part
+    that''s the same for every place: two pi divided by capital T. That''s the angle the Earth turns through each second, in radians. It''s called
+    the Earth''s spin rate, and we write it capital Omega, as in the cross product movie. So capital U equals capital Omega, times the Earth''s
+    radius, times cosine phi. [beat] It''s Part 2''s rule for a ring again: the speed is the radius times the turning rate.'
+  on_screen_eq:
+    latex: U=\frac{2\pi\,a\cos\varphi}{T}=\Omega\,a\cos\varphi,\qquad \Omega=\frac{2\pi}{T}
+    vallis_eq: 'our step: the speed of a point on its parallel; cf. Vallis (2.36) Ω = Ω(j cos ϑ + k sin ϑ) (p. 62) for the vector Ω; |Ω × r| =
+      Ω a cos ϑ (cross product movie)'
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - \text{distance}=2\pi\,a\cos\varphi
+  - \text{speed}=\text{distance}\div T
+  physics_source:
+    fn: fluidpy.geo.constants.OMEGA, EARTH_RADIUS; fluidpy.geo.sphere.parallel_points
+    params:
+      lat: 48.4
+      T_s: 86164.1
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_parallel_points_V1_radius_a_cos_lat; CHECK DS17 2 pi / OMEGA = 86164.1 s
+  exaggeration:
+  - globe spin time-compressed (one turn in about 12 s)
+  derivation:
+    id: D27
+    goal: how fast the ground at latitude phi moves
+    steps:
+    - - time for one turn
+      - T=23\ \text{h}\ 56\ \text{min}
+      - one turn against the stars (sidereal day)
+      - the Earth's spin period
+    - - distance in one turn
+      - 2\pi\,a\cos\varphi
+      - circumference of the parallel, radius a cos phi (s16)
+      - one lap of its circle
+    - - speed
+      - U=2\pi a\cos\varphi/T
+      - speed = distance / time
+      - the ground speed
+    - - pull out the spin rate
+      - \Omega=2\pi/T
+      - the part that is the same for every place
+      - angle turned per second
+    - - result
+      - U=\Omega\,a\cos\varphi
+      - substitute
+      - radius times turning rate (Part 2)
+  kind: 3-D globe + derivation
+  data: A6 BMNG
+  tool: three.js globe + KaTeX
+  runner_up: —
+  why: the user asked what U is and how U = Omega a cos phi comes about
+  related: []
+  feedback:
+  - U-CO-051
+  - U-CO-054
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s21_ground_speeds
+  t:
+  - 1531.875
+  - 1679.1
+  sentence_times:
+  - - 1531.875
+    - 1534.55
+  - - 1534.9
+    - 1545.125
+  - - 1545.475
+    - 1552.6
+  - - 1552.95
+    - 1554.725
+  - - 1555.075
+    - 1562.325
+  - - 1562.675
+    - 1574.625
+  - - 1576.125
+    - 1579.2
+  - - 1579.55
+    - 1591.625
+  - - 1593.125
+    - 1605.725
+  - - 1606.075
+    - 1609.775
+  - - 1610.125
+    - 1616.6
+  - - 1618.1
+    - 1625.075
+  - - 1626.575
+    - 1633.1
+  - - 1634.6
+    - 1644.275
+  - - 1644.625
+    - 1649.4
+  - - 1650.9
+    - 1656.325
+  - - 1656.675
+    - 1660.975
+  - - 1661.325
+    - 1667.65
+  - - 1668.0
+    - 1678.3
+  beat: 'derivation D27 (5)-(6): numbers at the equator, Singapore, Khulna, Brest, Longyearbyen, the pole (Must 11)'
+  visual: 'Globe spinning slowly (one turn in 20 s), the axis slate; rings for the equator, Khulna, Brest, Longyearbyen (Singapore''s ring is
+    the equator''s within 0.03 %); each ring gets a teal speed arrow pointing east with moving dashes, length ∝ Ω a cos φ. S1-S2: CalcStack ''T
+    = 86 164 s'', ''Ω = 2π / 86 164 s ≈ 7.29 × 10⁻⁵ rad/s''. S3-S4: ''7.29 × 10⁻⁵ × 6.371 × 10⁶ m ≈ 465 m/s'' at the equator arrow. S5-S6: easy
+    row ''40 000 km ÷ 24 h ≈ 1670 km/h'' and a jet icon ''≈ 900 km/h''. S7-S11: each place turns to face the camera (the spin eases to a pause)
+    and is labelled within 1 s; its tip number appears on its words: ''Singapore ≈ 464'', ''Khulna 465 × 0.9219 ≈ 428'', ''Brest 465 × 0.6639
+    ≈ 308'', ''Longyearbyen 465 × 0.2045 ≈ 95'' (m/s); facing() fades labels near the limb (Must 11); the pole ''0'' right of its dot. S12: a
+    curved ''east'' arrow round the axis. S13-S14: column ''we move with the ground''; keyword ''cross product movie'' (pointer, spoken). KEEP
+    LINE (user rule 2026-11-05): S1 is the ''If you skipped, here''s what to keep'' sentence; during it the takeaway keyword ''height a sin φ
+    · from the axis a cos φ · ground east at Ω a cos φ'' (54 px, warm white, gold underline) sits at the top of the column, then moves to its
+    usual place.'
+  voiceover: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and
+    the radius times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance from
+    the axis. Now the numbers. Twenty three hours and fifty six minutes is eighty six thousand one hundred and sixty four seconds. So capital
+    Omega is two pi divided by eighty six thousand one hundred and sixty four, which is about seven point two nine times ten to the minus five
+    radians per second. [beat] At the equator, cosine phi is one. So the ground moves at seven point two nine times ten to the minus five, times
+    six point three seven one million metres, which is about four hundred and sixty five metres per second. [beat] With easy numbers, the equator
+    is about forty thousand kilometres round, and forty thousand kilometres in twenty four hours is about one thousand six hundred and seventy
+    kilometres per hour. That's almost twice as fast as a passenger jet. Singapore, almost on the equator, moves at about four hundred and sixty
+    four metres per second. [beat] At Khulna, cosine phi is zero point nine two one nine, so it's about four hundred and twenty eight. [beat]
+    At Brest, cosine phi is zero point six six three nine, so it's about three hundred and eight. [beat] At Longyearbyen, on the Arctic islands
+    of Svalbard, seventy eight point two degrees north, cosine phi is zero point two zero four five. So the ground there moves at only about ninety
+    five metres per second. [beat] And at the poles, cosine phi is zero, so the ground just turns on the spot. Every one of these speeds points
+    east, the way the Earth turns. We don't feel any of it, because the air, the sea and we ourselves all move along with the ground. But this
+    shrinking circle is part of the reason why the Earth's spin affects the winds differently at different latitudes, as we saw in the cross product
+    movie.
+  on_screen_eq:
+    latex: U=\Omega\,a\cos\varphi
+    vallis_eq: our step (see s20)
+    page_png: chapters/pages/ch02/p082.png
+  calc_rows:
+  - \Omega=\dfrac{2\pi}{86\,164\ \text{s}}\approx7.29\times10^{-5}\ \text{rad/s}
+  - U_{\text{eq}}=7.29\times10^{-5}\times6.371\times10^{6}\ \text{m}\approx465\ \text{m/s}
+  - 40\,000\ \text{km}\div24\ \text{h}\approx1670\ \text{km/h}
+  - 465\times0.9219\approx428,\quad 465\times0.6639\approx308,\quad 465\times0.2045\approx95\ \text{m/s}
+  physics_source:
+    fn: fluidpy.geo.constants.OMEGA, EARTH_RADIUS (U = OMEGA * a * cos(lat))
+    params:
+      lat:
+      - 0
+      - 1.35
+      - 22.8
+      - 48.4
+      - 78.2
+      - 90
+    test: CHECK DS18 464.6, 464.5, 428.3, 308.4, 95.0, 0.0 m/s
+  exaggeration:
+  - globe spin time-compressed
+  - speed arrows scaled 1 px per 1.5 m/s (manifest)
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js house globe
+  runner_up: —
+  why: cos phi with a physical meaning at real places
+  related:
+  - movie: '#3'
+    slug: ch00_cross_product_uses
+    covers: Omega x r, the spinning Earth, Coriolis
+  feedback:
+  - U-CO-051
+  - Must 11
+  - maths-skip rule (keep line)
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Speed numbers
+    at the arrow tips (short labels at a spot); Omega and the CalcStack in the column. No text over the picture or over other text; links never
+    cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should
+    18).'
+- id: s22_distance_north
+  t:
+  - 1679.1
+  - 1785.825
+  sentence_times:
+  - - 1679.1
+    - 1683.35
+  - - 1683.7
+    - 1693.55
+  - - 1693.9
+    - 1696.1
+  - - 1696.45
+    - 1699.45
+  - - 1699.8
+    - 1707.025
+  - - 1707.375
+    - 1711.825
+  - - 1712.175
+    - 1719.425
+  - - 1719.775
+    - 1727.775
+  - - 1728.125
+    - 1736.725
+  - - 1737.075
+    - 1739.675
+  - - 1740.025
+    - 1745.025
+  - - 1745.375
+    - 1752.8
+  - - 1754.3
+    - 1762.125
+  - - 1763.625
+    - 1772.625
+  - - 1774.125
+    - 1779.825
+  - - 1780.175
+    - 1785.025
+  beat: 'derivation D28: Delta y = a Delta phi on the meridian slice (U-CO-052)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). Left: the half-Earth sliced along Brest''s meridian; right: the
+    flat half-disc. S2-S4: the meridian arc on the rim glows orange in both views, ''radius a'' from the centre (teal) to the rim; keyword ''circle
+    round the centre''. S5: a walker dot moves north along the rim; two radii to the ends of its step, the angle ''Δφ'' at the centre (gold),
+    the arc ''Δy'' along the rim (orange band), drawn 5 x larger than one degree. S6: mini Part 1 glyph ''s = r θ''. S7: ''Δy = a Δφ'' (96 px),
+    underbraces ''Earth''s radius'', ''change in latitude (rad)''. S8-S10: CalcStack ''1° = π/180 ≈ 0.01745 rad'', ''Δy = 6371 km × 0.01745 ≈
+    111.2 km'', easy ''6400 × 0.0175 = 112''. S11: the step slides from 10 to 80 deg N along the rim with a constant ''111.2 km'' tag and a gold
+    ''same'' tick. SKIP CHIP (user rule 2026-11-05; the one allowed chip): on AT(2,''skip ahead'') a small rounded chip, top-right of the column
+    (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill, no border): ''every step: optional'' / ''not needed for the intuition'' / ''skip
+    to {mm:ss}'' (mm:ss = the landing sentence''s start in the final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never
+    over the picture.'
+  voiceover: 'Now let''s measure distances on the ground, step by step. If you''d rather keep to the big picture, skip ahead to the time on screen:
+    these steps aren''t needed for the intuition of weather, climate science or mapping. Let''s start with going north. Slice the Earth along
+    a meridian again. Walking due north, you follow the meridian, and a meridian is part of a circle whose centre is the Earth''s centre. So the
+    radius of that circle is the full radius of the Earth. As you walk north, your latitude grows, and latitude is exactly the angle at the centre
+    of this circle. So by the arc length rule from Part 1, the distance walked is the radius times the change of angle, in radians. We write it
+    like this: delta y, the distance north, equals the Earth''s radius times delta phi, the change in latitude. Let''s find the length of one
+    degree. A full turn is three hundred and sixty degrees, or two pi radians. So one degree is pi over one hundred and eighty, which is zero
+    point zero one seven four five radians. [beat] Times six thousand three hundred and seventy one kilometres, that''s about one hundred and
+    eleven point two kilometres. [beat] With easy numbers, six thousand four hundred times zero point zero one seven five is one hundred and twelve:
+    about the same. [beat] And it''s the same at every latitude, because every meridian has the same radius. So a degree north is always about
+    a hundred and eleven kilometres.'
+  on_screen_eq:
+    latex: \Delta y=a\,\Delta\varphi
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - 1^\circ=\pi/180\approx0.01745\ \text{rad}
+  - \Delta y=6371\ \text{km}\times0.01745\approx111.2\ \text{km}
+  - 6400\times0.0175=112
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths
+    params:
+      dlat: 1.0
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector;
+      CHECK DS19 111.19 km
+  exaggeration:
+  - the one-degree step drawn x5 in angle
+  derivation:
+    id: D28
+    goal: the distance of a step north
+    steps:
+    - - slice along a meridian
+      - \text{circle of radius }a
+      - a meridian is half of a circle round the Earth's centre
+      - walking north is walking round this circle
+    - - the angle
+      - \Delta\varphi
+      - latitude is the angle at that circle's centre
+      - the step's angle
+    - - arc rule
+      - \Delta y=a\,\Delta\varphi
+      - 'Part 1: arc = radius × angle (radians)'
+      - distance north
+    - - one degree
+      - 6371\times0.01745\approx111.2\ \text{km}
+      - 1 deg = pi/180 rad
+      - the same at every latitude
+  kind: two-view derivation
+  data: A6 BMNG
+  tool: TwoViewSlice
+  runner_up: —
+  why: the user asked how delta y and its values come about
+  related: []
+  feedback:
+  - U-CO-052
+  - U-CO-054
+  - Should 7
+  - maths-skip rule (chip)
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s23_north_examples
+  t:
+  - 1785.825
+  - 1839.25
+  sentence_times:
+  - - 1785.825
+    - 1787.6
+  - - 1787.95
+    - 1798.45
+  - - 1799.95
+    - 1805.3
+  - - 1805.65
+    - 1811.35
+  - - 1811.7
+    - 1821.625
+  - - 1823.125
+    - 1831.2
+  - - 1831.55
+    - 1834.675
+  - - 1835.025
+    - 1838.45
+  beat: 'worked examples: one minute = the nautical mile; Brest to the equator 5382 km (arc vs straight height)'
+  visual: 'Same two-view. S1-S2: the step shrinks to one minute (x60 magnifier inset in the flat view); CalcStack ''111.2 km ÷ 60 ≈ 1.85 km'',
+    keyword ''nautical mile''. S3-S4: the walker goes from Brest down the rim to the equator (orange arc, both views); CalcStack ''48.4 × 111.2
+    km ≈ 5382 km''. S5-S6: the straight upright leg ''z ≈ 4764 km'' (from s15) beside the arc in both views, tags ''5382 km along the curve''
+    and ''4764 km straight''.'
+  voiceover: Two examples. One minute of latitude is a sixtieth of a degree, so it's one hundred and eleven point two divided by sixty, which
+    is about one point eight five kilometres. [beat] That's the nautical mile from the weather basics movie, and that's where it comes from. Next,
+    how far is Brest from the equator, walking due south along its meridian? Forty eight point four degrees, times one hundred and eleven point
+    two kilometres per degree, is about five thousand three hundred and eighty two kilometres. [beat] Notice that's longer than Brest's height
+    above the equator plane, four thousand seven hundred and sixty four kilometres. The walk follows the curved surface of the Earth. The height
+    is a straight line, through the inside.
+  on_screen_eq: null
+  calc_rows:
+  - 111.2\ \text{km}\div60\approx1.85\ \text{km}
+  - 48.4\times111.2\ \text{km}\approx5382\ \text{km}
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths (dlat = 1/60 and 48.4)
+    params:
+      dlat:
+      - 0.016667
+      - 48.4
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector;
+      CHECK DS20 1.853 km, 5381.8 km
+  exaggeration:
+  - the one-minute step magnified x60 in an inset
+  kind: two-view
+  data: A6 BMNG
+  tool: TwoViewSlice
+  runner_up: —
+  why: two worked numbers; the arc vs the straight leg removes a likely confusion
+  related:
+  - movie: '0.3'
+    slug: ch00_weather_basics
+    covers: the nautical mile and knots
+  feedback:
+  - U-CO-052
+  - U-CO-054
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s24_distance_east
+  t:
+  - 1839.25
+  - 1908.35
+  sentence_times:
+  - - 1839.25
+    - 1841.4
+  - - 1841.75
+    - 1844.875
+  - - 1845.225
+    - 1852.8
+  - - 1853.15
+    - 1859.125
+  - - 1859.475
+    - 1862.8
+  - - 1863.15
+    - 1871.875
+  - - 1872.225
+    - 1879.825
+  - - 1880.175
+    - 1887.475
+  - - 1887.825
+    - 1899.3
+  - - 1900.8
+    - 1907.55
+  beat: 'derivation D29: Delta x = a cos phi Delta lambda on the parallel slice (U-CO-053)'
+  visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
+    cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
+    line, right-angle tick, leg, length label) appears in both on the same frame; a short gold ''same'' tick pair marks the newest item in both
+    copies for 1 s. Calculations sit below the flat diagram (y 560-840) or replace it when long, never on the 3-D view; leg labels beside their
+    legs, never on a line; phi inside the triangle near the centre (Should 5). Left: the globe sliced across at 48.4 N (cap lifted, as in s06),
+    the disc face tilted 25 deg towards the camera; right: the same disc flat, centre on the axis, radius tag ''a cos φ ≈ 4230 km''. S1-S3: a
+    walker dot moves east along the rim (both views); keyword ''circle round the axis''. S4: the Earth''s full radius (teal, faint) to the Earth''s
+    centre beside the disc radius, keyword ''not round the centre''. S5-S6: two radii of the disc to the ends of a step, ''Δλ'' at the disc centre
+    (gold), the arc ''Δx'' (orange band), drawn x5. S7: ''Δx = a cos φ Δλ'' (96 px) with an underbrace ''radius of the parallel'' under a cos
+    φ. S8: CalcStack ''Δx = 4230 km × 0.01745 ≈ 73.8 km''. S9: a bar comparison ''73.8 vs 111.2'' and ''cos 48.4° ≈ 2/3''.'
+  voiceover: 'Going east is different. Walking due east, you follow a parallel. And a parallel, as we saw when we sliced across, is a circle round
+    the Earth''s axis, not round its centre. Its radius is the distance from the axis: the Earth''s radius times cosine phi. Let''s slice across
+    at Brest''s latitude again. As you walk east along this circle, your longitude grows, and longitude is the angle at the centre of this circle,
+    on the axis. So by the same arc length rule, the distance east is the radius of the parallel times the change in longitude. We write it like
+    this: delta x equals the Earth''s radius, times cosine phi, times delta lambda. For one degree at Brest, that''s four thousand two hundred
+    and thirty kilometres times zero point zero one seven four five, which is about seventy three point eight kilometres. [beat] That''s only
+    two thirds of a degree north, because Brest''s parallel is only two thirds as big as the equator.'
+  on_screen_eq:
+    latex: \Delta x=a\cos\varphi\,\Delta\lambda
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - \Delta x=4230\ \text{km}\times0.01745\approx73.8\ \text{km}
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths
+    params:
+      lat: 48.4
+      dlon: 1.0
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector;
+      CHECK DS21 73.83 km
+  exaggeration:
+  - one-degree step drawn x5 in angle
+  - cap lifted (illustrative)
+  derivation:
+    id: D29
+    goal: the distance of a step east
+    steps:
+    - - slice across at the latitude
+      - \text{circle of radius }a\cos\varphi
+      - a parallel is a circle round the axis (s06, s16)
+      - walking east is walking round this circle
+    - - the angle
+      - \Delta\lambda
+      - longitude is the angle at that circle's centre, on the axis
+      - the step's angle
+    - - arc rule
+      - \Delta x=a\cos\varphi\,\Delta\lambda
+      - 'Part 1: arc = radius × angle'
+      - distance east
+    - - one degree at Brest
+      - 4230\times0.01745\approx73.8\ \text{km}
+      - numbers
+      - two thirds of a degree north
+  kind: two-view derivation
+  data: A6 BMNG
+  tool: TwoViewSlice
+  runner_up: —
+  why: the user asked how delta x comes about; the globe used better
+  related: []
+  feedback:
+  - U-CO-053
+  - U-CO-055
+  - U-CO-056
+  - U-CO-054
+  layout: 'SourceBelow under the 3-D view only. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s25_degree_east
+  t:
+  - 1908.35
+  - 1989.4
+  sentence_times:
+  - - 1908.35
+    - 1911.025
+  - - 1911.375
+    - 1921.6
+  - - 1921.95
+    - 1926.85
+  - - 1927.2
+    - 1932.85
+  - - 1933.2
+    - 1943.675
+  - - 1945.175
+    - 1952.425
+  - - 1953.925
+    - 1957.2
+  - - 1958.7
+    - 1968.075
+  - - 1969.575
+    - 1973.475
+  - - 1973.825
+    - 1981.4
+  - - 1981.75
+    - 1988.6
+  beat: 'intuition: one degree east at four latitudes, globe and flat strip side by side (U-CO-055, U-CO-056; Should 16)'
+  visual: 'Two-view: left the globe (camera at 35 N) with four parallel discs cut at 1.35 N (Singapore), 22.8 N (Khulna), 48.4 N (Brest), 78.2
+    N (Longyearbyen), each a thin translucent disc with its radius drawn from the axis (teal) and a gold 1-deg step on its rim (x5); right a flat
+    strip chart: four horizontal gold bars to scale (111.2, 102.5, 73.8, 22.7 km) on a km axis 0-120 (52-px ticks), each bar''s place name left
+    of it, its number right of it, tags below their bands (Should 16). On each sentence S3-S6 its disc lights on the globe and its bar grows on
+    the same frame (gold ''same'' tick between them), with its CalcStack row in the column (''111.2 × 0.9219 ≈ 102.5'' etc.). S7: the pole: the
+    bar shrinks to a dot ''0''. S8: the globe''s meridians fill orange as gores tapering to the poles. S9: keywords ''Like: orange segments''
+    / ''Unlike: a meridian through every place''. KEEP LINE (user rule 2026-11-05): S1 is the ''If you skipped, here''s what to keep'' sentence;
+    during it the takeaway keyword ''1° north ≈ 111 km · 1° east = 111 km × cos φ'' (54 px, warm white, gold underline) sits at the top of the
+    column, then moves to its usual place.'
+  voiceover: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude
+    is that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side. Each one is
+    one hundred and eleven point two kilometres, times cosine phi. At Singapore, cosine phi is almost exactly one, so one degree east is about
+    one hundred and eleven point two kilometres, the same as a degree north. [beat] At Khulna, cosine phi is zero point nine two one nine, so
+    it's about one hundred and two point five. [beat] At Brest, it's about seventy three point eight. [beat] At Longyearbyen, cosine phi is zero
+    point two zero four five, so one degree east is only about twenty two point seven kilometres. [beat] And at the pole, where all the meridians
+    meet, it's zero. Like the segments of a peeled orange, the meridians are widest apart at the equator, and they come together at the poles.
+    Unlike an orange, which has a fixed number of segments, there's a meridian through every single place.
+  on_screen_eq:
+    latex: \Delta x=111.2\ \text{km}\times\cos\varphi\quad(\Delta\lambda=1^\circ)
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - 111.2\times0.9997\approx111.2
+  - 111.2\times0.9219\approx102.5
+  - 111.2\times0.6639\approx73.8
+  - 111.2\times0.2045\approx22.7
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths
+    params:
+      lat:
+      - 1.35
+      - 22.8
+      - 48.4
+      - 78.2
+      - 90
+      dlon: 1.0
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector;
+      CHECK DS22 111.16, 102.51, 73.83, 22.74, 0.00 km
+  exaggeration:
+  - 1-deg steps drawn x5 on the globe; the strip chart is to scale
+  kind: two-view (globe + bar strip)
+  data: A6 BMNG
+  tool: TwoViewSlice variant (three.js + SVG bars)
+  runner_up: —
+  why: every number with its circle drawn on the globe
+  related: []
+  feedback:
+  - U-CO-055
+  - U-CO-056
+  - Should 16
+  - maths-skip rule (keep line)
+  layout: 'SourceBelow under the globe only. No text over the picture or over other text; links never cross text, ticks or each other (the builder
+    checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s26_grid_boxes
+  t:
+  - 1989.4
+  - 2093.925
+  sentence_times:
+  - - 1989.4
+    - 1993.075
+  - - 1993.425
+    - 2004.45
+  - - 2004.8
+    - 2010.675
+  - - 2011.025
+    - 2016.25
+  - - 2016.6
+    - 2025.45
+  - - 2026.95
+    - 2029.7
+  - - 2030.05
+    - 2036.1
+  - - 2037.6
+    - 2042.075
+  - - 2043.575
+    - 2046.425
+  - - 2047.925
+    - 2055.875
+  - - 2057.375
+    - 2061.05
+  - - 2061.4
+    - 2069.125
+  - - 2070.625
+    - 2078.1
+  - - 2078.45
+    - 2085.15
+  - - 2085.5
+    - 2093.125
+  beat: 'application: ERA5 grid boxes thin towards the poles (Should 6 spoken)'
+  visual: 'Four real map panels side by side, each 400 px wide with 20-px gaps (x 80-480, 500-900, 920-1320, 1340-1740; y 140-600), each in a
+    polar-aspect LAEA centred on its place so the boxes keep their true shape: Singapore (Strait of Singapore), Khulna (the Sundarbans and the
+    Bay of Bengal coast), Brest (Brittany), Longyearbyen (Svalbard, Isfjorden). Each panel: BMNG + NE 10 m coast, the 0.25-deg ERA5 grid lines
+    (slate, 2 px), one box highlighted gold with bracket labels outside its sides: ''27.8 km'' (tall) and its width on the words ''27.8'', ''25.6'',
+    ''18.5'', ''5.7 km''; the place name under the panel. SourceBelow under the panel row: ''Image: NASA BMNG · Natural Earth · ERA5 0.25° grid
+    (Copernicus C3S)''. Keywords and CalcStack in the band y 680-840 below the source line. S2-S4: keyword ''reanalysis = observations + model''.
+    S5: ''height: 111.2 ÷ 4 ≈ 27.8 km''. S11-S12: at Longyearbyen a ghost box (rose, dashed) 4.9 x too wide, ''× 4.9 too wide'' (spoken: Should
+    6). S14: a Part 2 callback thumbnail (coast with two points) ''degrees → km''. S15: the panels shrink and a small whole-globe insert shows
+    the lat-lon grid crowding at the pole beside a faint icosahedral mesh, keyword ''other grids''.'
+  voiceover: 'This matters every time we use weather data. ERA5, the reanalysis we''ve used throughout this series, is a reconstruction of the
+    past weather everywhere, made by combining observations with a weather model. It gives its values on a grid of latitude and longitude, every
+    quarter of a degree. So each grid box is a quarter of a degree tall, and a quarter of a degree wide. The height is easy: a quarter of one
+    hundred and eleven point two is about twenty seven point eight kilometres, at every latitude. [beat] The width depends on cosine phi. At Singapore,
+    a box is about twenty seven point eight kilometres wide: nearly square. [beat] At Khulna, it''s about twenty five point six kilometres wide.
+    [beat] At Brest, about eighteen and a half. [beat] At Longyearbyen, a box is still twenty seven point eight kilometres tall, but only about
+    five point seven wide. [beat] So the boxes get thinner and thinner towards the poles. Forget the cosine, and a box at Longyearbyen comes out
+    four point nine times, so about five times, too wide. [beat] Every east-west distance there would be five times too big, and every east-west
+    slope five times too small. This is also how we turned the coast''s latitudes and longitudes into kilometres in Part 2. And it''s one reason
+    why many modern weather models use other kinds of grid, which don''t crowd together at the poles.'
+  on_screen_eq: null
+  calc_rows:
+  - 111.2\div4\approx27.8\ \text{km}
+  - 27.8\ \text{km}\div5.7\ \text{km}\approx4.9
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths (0.25 deg); fluidpy.geo.mapproj.forward('laea')
+    params:
+      dlat: 0.25
+      dlon: 0.25
+      lat:
+      - 1.35
+      - 22.8
+      - 48.4
+      - 78.2
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector;
+      CHECK DS23 27.80 km tall; 27.79, 25.63, 18.46, 5.69 km wide; ratio 4.89
+  exaggeration: []
+  kind: real maps
+  data: A6 BMNG patches; NE 10 m coast; ERA5 0.25-deg grid geometry (no field values)
+  tool: cartopy LAEA base (pre-rendered PNG) + Remotion SVG grid overlay (build-1 s22 reused; Khulna and Singapore panels new)
+  runner_up: three.js globe close-ups (box shape less readable)
+  why: the data grid of every later movie; the cos phi in kilometres
+  related:
+  - movie: '#5b'
+    slug: ch00_coordinates_storm
+    covers: coast points turned into kilometres (D21)
+  feedback:
+  - U-CO-054
+  - Should 6
+  layout: 'Panels with 20-px gaps (no touching); no colour bar (no coloured field); SourceBelow fully below the panels (>= 16 px gap, y <= 860).
+    No text over the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see
+    these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s27_area_patch
+  t:
+  - 2093.925
+  - 2201.2
+  sentence_times:
+  - - 2093.925
+    - 2096.5
+  - - 2096.85
+    - 2098.475
+  - - 2098.825
+    - 2106.5
+  - - 2106.85
+    - 2114.325
+  - - 2114.675
+    - 2122.5
+  - - 2122.85
+    - 2128.1
+  - - 2128.45
+    - 2133.025
+  - - 2133.375
+    - 2139.425
+  - - 2139.775
+    - 2145.65
+  - - 2146.0
+    - 2151.15
+  - - 2151.5
+    - 2155.575
+  - - 2155.925
+    - 2160.875
+  - - 2161.225
+    - 2168.7
+  - - 2169.05
+    - 2173.975
+  - - 2174.325
+    - 2181.65
+  - - 2182.0
+    - 2188.6
+  - - 2188.95
+    - 2197.175
+  - - 2197.525
+    - 2200.4
+  beat: 'derivation D30: dA = a^2 cos phi dphi dlambda (U-CO-058; Should 7)'
+  visual: 'Globe zoomed to a patch at Brest (zoom-reveal), between two meridians and two parallels 5 deg apart (x20 an ERA5 box so it reads);
+    the patch gold, slightly curved. S4: its north-south side tagged ''a Δφ'' (orange); S5: its east-west side ''a cos φ Δλ'' (orange), each a
+    KaTeX tag beside its side. S6: a gold right-angle tick at a corner. S7: the patch lifts off the globe as a flat 3-D tile with visible east
+    (x) and north (y) edges (HOUSE_STYLE 3-D for areas), keyword ''almost a rectangle''. S8-S10: Layered equation builds ''ΔA ≈ (a cos φ Δλ)(a
+    Δφ)'' -> ''ΔA ≈ a² cos φ Δφ Δλ''. S11-S12: the tile shrinks, Δ morphs to d (gold): ''dA = a² cos φ dφ dλ'' (96 px), cos φ highlighted. S13:
+    keyword ''Δ: small step · d: tiny step''. S14: ''angles in radians''. Ends with the zoom out. SKIP CHIP (user rule 2026-11-05; the one allowed
+    chip): on AT(5,''skip ahead'') a small rounded chip, top-right of the column (x 1500-1840, y 60-150, 44 px, warm white on a 20 % gold fill,
+    no border): ''every step: optional'' / ''not needed for the intuition'' / ''skip to {mm:ss}'' (mm:ss = the landing sentence''s start in the
+    final timing.json, filled by the builder); it stays 8 s, fades over 0.5 s, never over the picture.'
+  voiceover: Distances give us areas. Why do we care? Because to average anything over the Earth, like the temperature, we need to know how much
+    area each grid box covers. The next few minutes build the area of a small patch, and then of whole bands round the Earth, one step at a time.
+    They're for anyone who wants every step, and not needed for the intuition, so feel free to skip ahead to the time on screen. Take a small
+    patch of the surface, between two meridians and two parallels. Its north-south side is the Earth's radius times delta phi. Its east-west side
+    is the Earth's radius times cosine phi times delta lambda. The two sides meet at a right angle, because meridians cross parallels at right
+    angles. And when the patch is small, it's almost flat, so it's almost a rectangle. The area of a rectangle is its width times its height.
+    So the patch's area is about the east-west side times the north-south side. Collecting the pieces, that's the radius squared, times cosine
+    phi, times delta phi, times delta lambda. As the patch shrinks, the bending of the surface matters less and less. In the limit, we write the
+    tiny area as d capital A, and the tiny steps as d phi and d lambda. So d capital A equals the radius squared, times cosine phi, d phi, d lambda.
+    From here on, delta means a small step, and a small d means a step so tiny that the approximation becomes exact. And the angles are always
+    in radians.
+  on_screen_eq:
+    latex: dA=a^2\cos\varphi\,d\varphi\,d\lambda
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface; area = δx δy (product of the two increments); Kundu App. B §B.5 surface element in colatitude form'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - \Delta A\approx(a\cos\varphi\,\Delta\lambda)(a\,\Delta\varphi)
+  - \Delta A\approx a^2\cos\varphi\,\Delta\varphi\,\Delta\lambda
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths; polygon_area (exact patch)
+    params:
+      lat: 48.4
+      dlat: 5
+      dlon: 5
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_arc_lengths_V1_degree_lengths_RM01_RM02, ::test_arc_lengths_V2_metric_from_position_vector;
+      ../Fluid Dynamics/tests/geo/test_sphere.py::test_polygon_area_V1_octant_and_hemisphere, ::test_polygon_area_V3_latlon_cell_densified
+  exaggeration:
+  - patch drawn 5 deg wide (x20 an ERA5 box) so it reads
+  derivation:
+    id: D30
+    goal: the area of a small patch between two meridians and two parallels
+    steps:
+    - - the two sides
+      - a\,\Delta\varphi\ \text{and}\ a\cos\varphi\,\Delta\lambda
+      - D28 and D29
+      - north-south and east-west lengths
+    - - right angle
+      - \perp
+      - meridians cross parallels at right angles (s12)
+      - the corners are square
+    - - almost flat
+      - \Delta A\approx\text{width}\times\text{height}
+      - a small patch of a sphere is nearly flat
+      - a rectangle
+    - - multiply
+      - \Delta A\approx a^2\cos\varphi\,\Delta\varphi\,\Delta\lambda
+      - collect the factors
+      - the patch area
+    - - the limit
+      - dA=a^2\cos\varphi\,d\varphi\,d\lambda
+      - the bending matters less as the patch shrinks (limit, derivatives movie)
+      - exact for tiny patches
+  kind: 3-D globe + derivation
+  data: A6 BMNG
+  tool: three.js house globe + KaTeX
+  runner_up: —
+  why: the user was lost at dA
+  related: []
+  feedback:
+  - U-CO-058
+  - U-CO-054
+  - Should 7
+  - maths-skip rule (chip)
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s28_box_areas
+  t:
+  - 2201.2
+  - 2281.1
+  sentence_times:
+  - - 2201.2
+    - 2204.925
+  - - 2205.275
+    - 2210.725
+  - - 2211.075
+    - 2219.325
+  - - 2220.825
+    - 2233.45
+  - - 2234.95
+    - 2238.525
+  - - 2238.875
+    - 2248.0
+  - - 2249.5
+    - 2255.475
+  - - 2256.975
+    - 2263.675
+  - - 2265.175
+    - 2270.9
+  - - 2271.25
+    - 2279.6
+  beat: 'worked numbers: ERA5 box areas 773, 712, 513, 158 km^2; the exact curved patch'
+  visual: 'Left: four 3-D tiles (flat, to scale with each other) in a row like the s26 boxes, each with x and y edge tags (27.8 × 27.8, 27.8 ×
+    25.6, 27.8 × 18.5, 27.8 × 5.7 km) and its place name below; right: CalcStack. S1: ''0.25° ≈ 0.00436 rad''. S2: ''a² = 6371² ≈ 40.6 million
+    km²''. S3: ''40.6 × 10⁶ × 0.00436 × 0.00436 ≈ 773 km²'' -> the equator tile fills gold. S4: ''× cos φ''. S5-S7: ''773 × 0.9219 ≈ 712'', ''773
+    × 0.6639 ≈ 513'', ''773 × 0.2045 ≈ 158'' km², each tile filling on its words with a gold link from its number. S8-S9: Brest''s tile becomes
+    the true curved patch beside the flat one, ''exact: 513.1 km²'' with a gold ''same'' tick.'
+  voiceover: Let's work out the area of one ERA5 box. A quarter of a degree is zero point zero zero four three six radians. The radius squared
+    is six thousand three hundred and seventy one squared, about forty point six million square kilometres. [beat] Times zero point zero zero
+    four three six, and times zero point zero zero four three six again, that's about seven hundred and seventy three square kilometres, for a
+    box on the equator. [beat] Every other box is that, times cosine phi. At Khulna, seven hundred and seventy three times zero point nine two
+    one nine is about seven hundred and twelve square kilometres. [beat] At Brest, times zero point six six three nine, it's about five hundred
+    and thirteen. [beat] At Longyearbyen, times zero point two zero four five, it's only about a hundred and fifty eight. [beat] As a check, a
+    computer can work out the exact area of the curved patch at Brest. It's also about five hundred and thirteen point one square kilometres,
+    so the flat rectangle is a very good approximation. [beat]
+  on_screen_eq:
+    latex: \Delta A\approx a^2\cos\varphi\,\Delta\varphi\,\Delta\lambda
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - 0.25^\circ\approx0.00436\ \text{rad}
+  - a^2=6371^2\approx40.6\times10^{6}\ \text{km}^2
+  - 40.6\times10^{6}\times0.00436\times0.00436\approx773\ \text{km}^2
+  - 773\times0.9219\approx712,\quad773\times0.6639\approx513,\quad773\times0.2045\approx158\ \text{km}^2
+  physics_source:
+    fn: fluidpy.geo.sphere.arc_lengths (0.25 deg); fluidpy.geo.sphere.polygon_area (exact cell)
+    params:
+      lat:
+      - 0
+      - 22.8
+      - 48.4
+      - 78.2
+    test: ../Fluid Dynamics/tests/geo/test_sphere.py::test_polygon_area_V1_octant_and_hemisphere, ::test_polygon_area_V3_latlon_cell_densified;
+      CHECK DS24 772.8, 712.4, 513.1, 158.0 km2; polygon_area(Brest cell) = 513.06 km2 (rel diff < 2e-4)
+  exaggeration: []
+  kind: 3-D tiles + calc
+  data: —
+  tool: three.js tiles + KaTeX
+  runner_up: —
+  why: every number worked with its inputs written
+  related: []
+  feedback:
+  - U-CO-058
+  - U-CO-054
+  layout: 'No real-data picture: no source line. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s29_strip_round
+  t:
+  - 2281.1
+  - 2340.425
+  sentence_times:
+  - - 2281.1
+    - 2283.1
+  - - 2283.45
+    - 2289.95
+  - - 2290.3
+    - 2291.725
+  - - 2292.075
+    - 2300.575
+  - - 2300.925
+    - 2303.875
+  - - 2304.225
+    - 2312.45
+  - - 2312.8
+    - 2317.425
+  - - 2317.775
+    - 2326.725
+  - - 2327.075
+    - 2331.975
+  - - 2332.325
+    - 2339.625
+  beat: 'derivation D31 (1)-(2): a strip all round the Earth (U-CO-059)'
+  visual: 'Globe at a 20 deg N view. S1-S3: column keyword ''area between 0° and φ?''; the band 0-30 N tints teal. S4: a thin gold strip all round
+    between phi and phi + Δphi (drawn 5 deg wide at 25 N). S5 on AT(5,''Cut it and unroll it''): the strip cuts at one meridian and unrolls into
+    a long thin flat ribbon below the globe (3-D, 2 s), keyword ''almost a rectangle''. S6: its length tag ''2π a cos φ'' (link to the parallel''s
+    radius on the globe). S7: its width tag ''a Δφ''. S8: ''strip ≈ 2π a cos φ × a Δφ = 2π a² cos φ Δφ''.'
+  voiceover: 'Now a bigger question. How much of the Earth''s surface lies between the equator and some latitude, say thirty degrees north? Why
+    care? Because that''s how much of the planet is tropical and subtropical, and it tells us how much each part of the world counts in a global
+    average. Let''s build that area from thin strips. Take one strip that goes all the way round the Earth, between latitude phi and a little
+    further north, phi plus delta phi. Cut it and unroll it, and it''s almost a long, thin rectangle. Its length is the length of the parallel:
+    two pi times its radius, which is two pi, times the Earth''s radius, times cosine phi. Its width is the step north: the Earth''s radius times
+    delta phi. So the strip''s area is about two pi, times the radius squared, times cosine phi, times delta phi.'
+  on_screen_eq:
+    latex: \text{strip}\approx2\pi a\cos\varphi\times a\,\Delta\varphi=2\pi a^2\cos\varphi\,\Delta\varphi
+    vallis_eq: 'Vallis §2.2.2 (p. 61), text before (2.27): (δx, δy, δz) = (r cos ϑ δλ, r δϑ, δr); Vallis writes latitude ϑ, we write φ; r = a
+      on the surface (summed round a parallel)'
+    page_png: chapters/pages/ch02/p081.png
+  physics_source:
+    fn: fluidpy.geo.sphere.band_area (thin band)
+    params:
+      lat: 25
+      dlat: 5
+    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_band_area_V1_closed_form_values_and_DC22, ::test_band_area_V3_midpoint_sum_of_grid_cells_order2,
+      ::test_band_fraction_V1_equals_area_over_sphere_and_bounds
+  exaggeration:
+  - strip drawn 5 deg wide
+  derivation:
+    id: D31
+    goal: the area between the equator and latitude phi
+    steps:
+    - - one strip all round
+      - \text{length }2\pi a\cos\varphi
+      - circumference of the parallel (radius a cos phi)
+      - the strip's length
+    - - its width
+      - a\,\Delta\varphi
+      - D28
+      - the strip's width
+    - - its area
+      - 2\pi a^2\cos\varphi\,\Delta\varphi
+      - a thin strip is almost a rectangle
+      - one strip
+  kind: 3-D globe + unrolled strip
+  data: A6 BMNG
+  tool: three.js
+  runner_up: —
+  why: the user did not follow the band-area steps; one move per sentence
+  related: []
+  feedback:
+  - U-CO-059
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s30_slope_of_sine
+  t:
+  - 2340.425
+  - 2415.0
+  sentence_times:
+  - - 2340.425
+    - 2343.725
+  - - 2344.075
+    - 2346.725
+  - - 2347.075
+    - 2353.575
+  - - 2353.925
+    - 2359.9
+  - - 2360.25
+    - 2362.75
+  - - 2363.1
+    - 2368.475
+  - - 2368.825
+    - 2373.4
+  - - 2373.75
+    - 2380.3
+  - - 2380.65
+    - 2390.8
+  - - 2392.3
+    - 2400.4
+  - - 2400.75
+    - 2404.05
+  - - 2405.55
+    - 2414.2
+  beat: 'derivation D31 (3)-(4): the slope of sine from Part 2 turns cos phi dphi into Delta(sin phi)'
+  visual: 'Left: Part 2''s unit-circle picture (reused module): the arrow at angle phi, a small step Δphi, the tip rising by Δ(sin φ) (orange)
+    ≈ cos φ Δφ; right: CalcStack. S3-S4: ''cos φ Δφ ≈ Δ(sin φ)''. S5-S8: the check with a 20-30 deg strip: ''Δφ = 10° ≈ 0.1745 rad'', ''cos 25°
+    ≈ 0.906'', ''0.906 × 0.1745 ≈ 0.158''; S9-S10: ''sin 30° − sin 20° = 0.5 − 0.342 = 0.158'' with a gold ''same'' tick. S11: ''strip ≈ 2π a²
+    Δ(sin φ)''.'
+  voiceover: 'Adding up lots of cosines like this looks hard. But Part 2 gave us a shortcut. When an angle grows by a small step, its sine grows
+    by about its cosine times that step. So cosine phi times delta phi is just how much sine phi grows across the strip. We call that delta sine
+    phi. Let''s check it with a strip ten degrees wide, from twenty to thirty degrees north. Ten degrees is zero point one seven four five radians.
+    Cosine phi at the middle of the strip, at twenty five degrees, is zero point nine zero six. So cosine phi times delta phi is zero point nine
+    zero six times zero point one seven four five, about zero point one five eight. [beat] And sine phi grows from zero point three four two,
+    at twenty degrees, to zero point five, at thirty degrees. That''s a step of zero point one five eight too. [beat] So the strip''s area is
+    two pi, times the radius squared, times delta sine phi: the change in sine phi across the strip.'
+  on_screen_eq:
+    latex: \cos\varphi\,\Delta\varphi\approx\Delta(\sin\varphi)
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (the slope of sine, derived in Part 2 D12)'
+    page_png: null
+  calc_rows:
+  - 10^\circ\approx0.1745\ \text{rad},\quad\cos25^\circ\approx0.906
+  - 0.906\times0.1745\approx0.158
+  - \sin30^\circ-\sin20^\circ=0.5-0.342=0.158
+  - \text{strip}\approx2\pi a^2\,\Delta(\sin\varphi)
+  physics_source:
+    fn: numpy sin/cos (CHECK DS25); fluidpy.geo.sphere.band_area(20, 30)
+    params:
+      lat:
+      - 20
+      - 30
+    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_band_area_V1_closed_form_values_and_DC22, ::test_band_area_V3_midpoint_sum_of_grid_cells_order2,
+      ::test_band_fraction_V1_equals_area_over_sphere_and_bounds; CHECK DS25 0.1582 vs 0.1580
+  exaggeration: []
+  derivation:
+    id: D31
+    goal: turn cos phi dphi into a change of sine
+    steps:
+    - - recall the slope of sine
+      - \Delta(\sin\varphi)\approx\cos\varphi\,\Delta\varphi
+      - Part 2 D12
+      - sine grows by cos times the step
+    - - check on 20-30 deg
+      - 0.158\approx0.158
+      - numbers
+      - it holds
+    - - substitute
+      - \text{strip}\approx2\pi a^2\,\Delta(\sin\varphi)
+      - replace cos phi dphi
+      - each strip adds a step of sine
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG (Part 2's unit-circle module)
+  runner_up: —
+  why: the shortcut that makes the sum easy, from Part 2
+  related: []
+  feedback:
+  - U-CO-059
+  - U-CO-057
+  layout: 'No real-data picture: no source line. No text over the picture or over other text; links never cross text, ticks or each other (the
+    builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s31_adding_strips
+  t:
+  - 2415.0
+  - 2495.9
+  sentence_times:
+  - - 2415.0
+    - 2419.975
+  - - 2420.325
+    - 2425.4
+  - - 2425.75
+    - 2431.475
+  - - 2431.825
+    - 2434.825
+  - - 2435.175
+    - 2438.7
+  - - 2439.05
+    - 2446.825
+  - - 2448.325
+    - 2453.05
+  - - 2453.4
+    - 2461.475
+  - - 2462.975
+    - 2468.525
+  - - 2470.025
+    - 2474.65
+  - - 2475.0
+    - 2480.225
+  - - 2480.575
+    - 2487.75
+  - - 2488.1
+    - 2495.1
+  beat: 'derivation D31 (5)-(6): the staircase sum; integration named'
+  visual: 'Left: three ten-degree strips on the globe (0-10, 10-20, 20-30 N), each lighting in turn; right: a staircase graph (x latitude 0-90
+    deg, y sin φ 0-1, 52-px ticks) with the sine curve and three steps (gold risers 0.174, 0.168, 0.158) appearing with their strips on the same
+    frame. S2-S3: keyword ''steps add up: top − bottom''. S5: ''band = 2π a² sin φ'' (96 px). S6-S8: CalcStack ''0.174 + 0.168 + 0.158 = 0.500
+    = sin 30°''. S9-S12: the steps get thinner (1 deg) until the staircase is the curve; the tall S draws: ''∫₀^φ cos φ′ dφ′ = sin φ'' with underbraces
+    ''sum'' (∫), ''tiny step'' (dφ′), ''latitude of each strip'' (φ′).'
+  voiceover: 'Now stack the strips, from the equator all the way up to latitude phi. Each strip adds its own step in sine phi, like the steps
+    of a staircase. And all the steps of a staircase add up to the height of the top, minus the height of the bottom. At the equator, sine phi
+    is zero. So all the steps together add up to just sine phi. That means the area between the equator and latitude phi is two pi, times the
+    radius squared, times sine phi. [beat] Let''s check with ten degree strips, from the equator to thirty degrees. Their steps in sine phi are
+    zero point one seven four, zero point one six eight, and zero point one five eight. [beat] They add up to zero point five, which is exactly
+    the sine of thirty degrees. [beat] This adding up of thinner and thinner strips has a name: integration. We write it with a tall S, for sum,
+    and a small d for the tiny steps. Inside, we call the latitude of each strip phi prime, so it isn''t mixed up with the top latitude, phi.
+    So the integral of cosine phi prime, d phi prime, from zero up to phi, equals sine phi.'
+  on_screen_eq:
+    latex: \int_0^{\varphi}\cos\varphi'\,d\varphi'=\sin\varphi,\qquad A_{0\to\varphi}=2\pi a^2\sin\varphi
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (integration of the area element of Vallis §2.2.2 p. 61; fluidpy.geo.sphere.band_area)'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - 0.174+0.168+0.158=0.500=\sin30^\circ
+  physics_source:
+    fn: fluidpy.geo.sphere.band_area
+    params:
+      lat:
+      - 0
+      - 10
+      - 20
+      - 30
+    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_band_area_V1_closed_form_values_and_DC22, ::test_band_area_V3_midpoint_sum_of_grid_cells_order2,
+      ::test_band_fraction_V1_equals_area_over_sphere_and_bounds; CHECK DS26 steps 0.1736, 0.1684, 0.1580 sum 0.5000; 10-deg midpoint strip sum
+      1.0013 x exact, 1-deg 1.00001 x
+  exaggeration: []
+  derivation:
+    id: D31
+    goal: add up the strips
+    steps:
+    - - stack the strips
+      - \sum\Delta(\sin\varphi)
+      - each strip adds its own step
+      - a staircase
+    - - telescoping
+      - \sin\varphi-\sin0
+      - steps add up to top minus bottom
+      - only the ends matter
+    - - result
+      - A=2\pi a^2\sin\varphi
+      - sin 0 = 0
+      - band area
+    - - check with 10-deg strips
+      - 0.174+0.168+0.158=0.5
+      - numbers
+      - sin 30 deg
+    - - name it
+      - \int_0^\varphi\cos\varphi'\,d\varphi'=\sin\varphi
+      - adding thinner and thinner strips = integration
+      - the integral of cosine is sine
+  kind: globe + chart
+  data: A6 BMNG
+  tool: three.js globe + Remotion SVG chart
+  runner_up: —
+  why: 'integration is owned here (split plan §3a): built from the staircase, then named'
+  related: []
+  feedback:
+  - U-CO-059
+  - U-CO-057
+  - U-CO-100
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Chart in the
+    maths zone, its ticks 52 px. No text over the picture or over other text; links never cross text, ticks or each other (the builder checks
+    its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s32_band_fraction
+  t:
+  - 2495.9
+  - 2568.775
+  sentence_times:
+  - - 2495.9
+    - 2498.05
+  - - 2498.4
+    - 2500.925
+  - - 2501.275
+    - 2508.75
+  - - 2509.1
+    - 2513.825
+  - - 2515.325
+    - 2523.45
+  - - 2524.95
+    - 2531.425
+  - - 2531.775
+    - 2534.7
+  - - 2535.05
+    - 2540.85
+  - - 2542.35
+    - 2544.625
+  - - 2544.975
+    - 2550.775
+  - - 2552.275
+    - 2561.75
+  - - 2563.25
+    - 2567.975
+  beat: 'derivation D31 (7)-(8): checks and the share sin phi; half the Earth within 30 deg of the equator'
+  visual: 'Globe (whole, unzoomed). S1-S3: the band fills from the equator to the pole (teal), ''sin 90° = 1'', CalcStack ''2π a² ≈ 255 million
+    km²''. S4: the southern hemisphere fills too: ''4π a² ≈ 510 million km²''. S5: ''share = sin φ''. S6-S7: the band 0-30 N teal, the rest of
+    the NH slate, ''1/2'' on each part. S8-S9: 30 S - 30 N teal, ''half of the Earth''. S10: Brest''s parallel, ''0.7478 ≈ 3/4 lies south of Brest''.
+    S11: keywords ''tropics: huge'', ''polar caps: small''.'
+  voiceover: 'Let''s check the formula. Go all the way up to the North Pole. The sine of ninety degrees is one, so the northern hemisphere has
+    an area of two pi times the radius squared. That''s about two hundred and fifty five million square kilometres. [beat] The whole Earth is
+    twice that, four pi times the radius squared: about five hundred and ten million square kilometres. [beat] So the share of the northern hemisphere
+    between the equator and latitude phi is simply sine phi. The sine of thirty degrees is one half. So half of the northern hemisphere lies between
+    the equator and thirty degrees north. [beat] The same goes for the south. So half of the whole Earth lies between thirty degrees south and
+    thirty degrees north. [beat] At Brest''s latitude, sine phi is zero point seven four seven eight, so about three quarters of the northern
+    hemisphere lies south of Brest. [beat] The tropics and subtropics are huge, and the polar caps are small.'
+  on_screen_eq:
+    latex: \frac{2\pi a^2\sin\varphi}{2\pi a^2}=\sin\varphi
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  calc_rows:
+  - 2\pi a^2\approx255\times10^{6}\ \text{km}^2
+  - 4\pi a^2\approx510\times10^{6}\ \text{km}^2
+  - \sin30^\circ=\tfrac12
+  - \sin48.4^\circ\approx0.7478\approx\tfrac34
+  physics_source:
+    fn: fluidpy.geo.sphere.band_area, band_fraction
+    params:
+      bands:
+      - - 0
+        - 90
+      - - -90
+        - 90
+      - - 0
+        - 30
+      - - -30
+        - 30
+      - - 0
+        - 48.4
+    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_band_area_V1_closed_form_values_and_DC22, ::test_band_area_V3_midpoint_sum_of_grid_cells_order2,
+      ::test_band_fraction_V1_equals_area_over_sphere_and_bounds; CHECK DS27 255.03, 510.06 million km2; fraction(-30, 30) = 0.5000; sin 48.4
+      = 0.7478
+  exaggeration: []
+  kind: 3-D globe
+  data: A6 BMNG
+  tool: three.js globe
+  runner_up: —
+  why: the surprising, checkable result
+  related: []
+  feedback:
+  - U-CO-059
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. No text over
+    the picture or over other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings.
+    Opening keyword from frame 0 (Should 18).'
+- id: s33_archimedes
+  t:
+  - 2568.775
+  - 2649.35
+  sentence_times:
+  - - 2568.775
+    - 2575.1
+  - - 2575.45
+    - 2583.375
+  - - 2583.725
+    - 2592.7
+  - - 2593.05
+    - 2598.7
+  - - 2599.05
+    - 2603.25
+  - - 2603.6
+    - 2607.15
+  - - 2607.5
+    - 2613.4
+  - - 2613.75
+    - 2621.5
+  - - 2623.0
+    - 2624.75
+  - - 2625.1
+    - 2632.175
+  - - 2632.525
+    - 2639.875
+  - - 2640.225
+    - 2642.975
+  - - 2643.325
+    - 2648.55
+  beat: 'intuition: Archimedes'' cylinder (equal heights, equal areas)'
+  visual: 'Globe inside a snug translucent cylinder (radius a, slate wireframe, 3-D, the camera orbiting slowly from outside at 15 deg elevation).
+    S3: the band 0-phi (phi = 48.4) on the globe teal; horizontal arrows push it out onto the cylinder, where a matching teal band appears. S4:
+    a bracket on the cylinder ''height a sin φ = z'' (ghost of s15''s z leg). S6: the cylinder band unrolls into a flat rectangle: ''length 2π
+    a'', ''height a sin φ''. S7: ''2π a × a sin φ = 2π a² sin φ'' with a gold ''same'' tick to the band formula. S8-S10: a close look at one thin
+    strip near 70 N on both surfaces: on the globe ''shorter round × cos φ'', along the slanted surface ''wider × 1/cos φ'', a cancel glyph. S11:
+    keyword ''equal heights, equal areas''.'
+  voiceover: 'There''s a lovely picture of this result, found by Archimedes more than two thousand years ago. Wrap the Earth in a cylinder that
+    just touches it all round the equator, so the cylinder has the same radius as the Earth. Now take our band, from the equator up to latitude
+    phi, and push it straight out sideways, away from the axis, onto the cylinder. On the cylinder, it covers a band whose height is the Earth''s
+    radius times sine phi. That''s z, the height above the equator plane, from earlier. A cylinder band is a rectangle rolled up. Its length is
+    two pi times the radius, and its height is the radius times sine phi. So its area is two pi, times the radius squared, times sine phi: exactly
+    the same as the Earth''s band. [beat] Why do they match? Near the pole, a strip on the Earth is shorter round than on the cylinder, by a factor
+    of cosine phi. But the Earth''s surface there is steep, so the strip is wider along the surface than its height, by the same factor. The two
+    effects cancel exactly. So slices of the Earth of equal height have equal areas, wherever they are.'
+  on_screen_eq:
+    latex: 2\pi a\times a\sin\varphi=2\pi a^2\sin\varphi
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (Archimedes'' hat-box theorem)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.sphere.band_area (equal-height bands)
+    params:
+      heights: bands with equal steps in z = a sin phi
+    test: ../Fluid Dynamics/tests/geo/test_sphere_enu_band.py::test_band_area_V1_closed_form_values_and_DC22, ::test_band_area_V3_midpoint_sum_of_grid_cells_order2,
+      ::test_band_fraction_V1_equals_area_over_sphere_and_bounds; CHECK DS28 band_area equal for equal steps in sin phi (0-0.1 vs 0.8-0.9)
+  exaggeration: []
+  kind: 3-D globe + cylinder
+  data: A6 BMNG
+  tool: three.js
+  runner_up: —
+  why: a second picture of the same result (owned here, §3a)
+  related: []
+  feedback:
+  - U-CO-059
+  - U-CO-100
+  layout: 'House globe (HOUSE_STYLE §5b, kit_cp Globe3D + kit_co cam): BMNG topo-bathy texture, Natural Earth coast and borders, soft graticule;
+    unzoomed whole globe in the picture zone x 80-1000 (>= 760 px across), clearly separate from the keyword column x 1060-1840; SourceBelow ''Image:
+    NASA Blue Marble Next Generation · Natural Earth'' fully below the globe (y <= 860), never on it; place labels only for places spoken, centred
+    and labelled within 1 s of the word; zoom-reveal state (full-bleed, dist 4.3 -> 2.4, right gradient x 980-1160, 82 % overlay, bottom fade
+    y 760-830) only where a tour adds insight, and every zoom ends with a zoom out to the start view; cameras <= 90 deg/s, eased. Cylinder edges
+    run to the top and bottom of its region. No text over the picture or over other text; links never cross text, ticks or each other (the builder
+    checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s34_global_mean
+  t:
+  - 2649.35
+  - 2754.8
+  sentence_times:
+  - - 2649.35
+    - 2652.025
+  - - 2652.375
+    - 2665.025
+  - - 2665.375
+    - 2667.975
+  - - 2668.325
+    - 2673.5
+  - - 2673.85
+    - 2677.575
+  - - 2677.925
+    - 2682.575
+  - - 2682.925
+    - 2685.8
+  - - 2686.15
+    - 2694.2
+  - - 2694.55
+    - 2702.35
+  - - 2702.7
+    - 2704.75
+  - - 2706.25
+    - 2711.375
+  - - 2711.725
+    - 2722.225
+  - - 2722.575
+    - 2728.5
+  - - 2730.0
+    - 2734.525
+  - - 2736.025
+    - 2748.775
+  - - 2749.125
+    - 2754.0
+  beat: 'application: the cos phi weighting of a global mean (toy, then ERA5 September 2026: 7.1 vs 16.3 C)'
+  visual: 'S1-S6 (toy): two 3-D tiles from s28, the equator one (area 1) and the 60 N one (area 1/2), each with a thermometer icon ''30 °C'' and
+    ''0 °C''; CalcStack ''plain: (30 + 0) ÷ 2 = 15'', ''weights: cos 0° = 1, cos 60° = 1/2'', ''weighted: (30 × 1 + 0 × 1/2) ÷ 1.5 = 20 °C''.
+    S7 on AT(7,''real data''): an Equal Earth map of ERA5 2-m temperature, September 2026 monthly mean, 1-deg grid (perceptual map, cmocean ''thermal''),
+    colour bar beside it ''°C'' (−40 … +40, 52-px text), SourceBelow ''Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 monthly
+    mean · 1° grid''. S8: column ''plain average ≈ 7.1 °C'' (slate). S9: ''weighted by cos φ ≈ 16.3 °C'' (teal). S10: the map''s polar rows outlined
+    as their many thin boxes (plate-carrée inset under the column at 40 %), keyword ''9 °C too cold''. S11: keyword ''cos φ weighting''. KEEP
+    LINE (user rule 2026-11-05): S1 is the ''If you skipped, here''s what to keep'' sentence; during it the takeaway keyword ''boxes shrink by
+    cos φ · half the Earth within 30° of the equator'' (54 px, warm white, gold underline) sits at the top of the column, then moves to its usual
+    place.'
+  voiceover: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps
+    are small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate. Imagine
+    a planet with just two grid boxes, the same size in degrees. One is on the equator, at thirty degrees Celsius. The other is at sixty degrees
+    north, at zero degrees Celsius. A plain average says fifteen degrees. But the box at sixty degrees covers only cosine sixty degrees, which
+    is one half of the area of the equator box. So the area-weighted average is thirty times one, plus zero times one half, all divided by one
+    and a half. That''s twenty degrees. [beat] That''s why a global average gives each latitude a weight of cosine phi. Now let''s do it with
+    real data: ERA5''s air temperature two metres above the ground, averaged over September twenty twenty six, on a one degree grid. A plain average
+    of all the grid boxes gives about seven point one degrees Celsius. [beat] Weighted by cosine phi, it''s about sixteen point three degrees.
+    [beat] The plain average is more than nine degrees too cold, because the many thin boxes near the poles, over the cold Arctic and the frozen
+    Antarctic, count as much as the big tropical ones. This cosine weighting is how global average temperatures are worked out.'
+  on_screen_eq:
+    latex: \overline{T}=\frac{\sum_j\cos\varphi_j\,T_j}{\sum_j\cos\varphi_j}
+    vallis_eq: 'our step: weights from dA = a² cos ϑ dϑ dλ (Vallis §2.2.2); fluidpy.diag.climatology.global_mean'
+    page_png: chapters/pages/ch02/p081.png
+  calc_rows:
+  - '\text{plain: }(30+0)\div2=15\ ^\circ\text{C}'
+  - '\text{weighted: }(30\times1+0\times\tfrac12)\div1.5=20\ ^\circ\text{C}'
+  physics_source:
+    fn: fluidpy.diag.climatology.global_mean (cos-latitude weights); plain mean with numpy
+    params:
+      product: data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc (variable t2m)
+      month: 2026-09
+    test: ../Fluid Dynamics/tests/diag/test_global_mean_trend.py::test_global_mean_V1_exact_cell_areas_on_cell_centre_grid, ::test_data_era5_global_t2m_snapshot_plausible_and_exact_area;
+      CHECK DS29 weighted 16.27 C, plain 7.11 C (computed 2026-11-05)
+  exaggeration:
+  - the two-box planet is a thought experiment (said)
+  kind: toy + real data map
+  data: ERA5-CDS-monthly-t2m (era5_t2m_anom_2026-09_1deg.nc, redistributable, CC-BY 4.0)
+  tool: Remotion SVG + d3-geo Equal Earth (raster pre-rendered by Python)
+  runner_up: three.js globe with the field (less readable as an average)
+  why: why cos phi matters for climate numbers
+  related: []
+  feedback:
+  - U-CO-054
+  - maths-skip rule (keep line)
+  layout: 'Colour bar beside the map, never on it; SourceBelow fully below the map (>= 16 px gap, y <= 860). No text over the picture or over
+    other text; links never cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword
+    from frame 0 (Should 18).'
+- id: s35_recap
+  t:
+  - 2754.8
+  - 2873.15
+  sentence_times:
+  - - 2754.8
+    - 2763.45
+  - - 2763.8
+    - 2771.6
+  - - 2771.95
+    - 2777.7
+  - - 2778.05
+    - 2785.325
+  - - 2785.675
+    - 2790.675
+  - - 2791.025
+    - 2796.025
+  - - 2796.375
+    - 2804.125
+  - - 2804.475
+    - 2818.275
+  - - 2818.625
+    - 2829.075
+  - - 2829.425
+    - 2836.85
+  - - 2837.2
+    - 2844.45
+  - - 2844.8
+    - 2851.575
+  - - 2851.925
+    - 2863.95
+  - - 2864.3
+    - 2872.35
+  beat: recap ('To sum up'); the last sentence is the teaser to Part 4 (split plan §2g)
+  visual: 'One beat per sentence, mini pictures reused (no headings): the globe with the centre and r; the sliced face with ''a ≈ 6400 km''; the
+    phi wedge; the colatitude wedge with ''sin ↔ cos''; a parallel disc and a meridian; the lambda wedge from Greenwich; the two-view triangles
+    with x, y, z; the spinning globe with the 465 m/s arrow; the 111-km step; the shrinking east steps; the dA tile; the staircase and the half-Earth
+    band (30 S - 30 N); a small weather station at Brest with three arrows (east, north, up) and a question mark for the Part 4 teaser. Each spoken
+    number on screen at its words.'
+  voiceover: 'To sum up, a point on or around the Earth is pinned down by spherical coordinates: its distance from the centre, and two angles.
+    On the ground, that distance is the Earth''s radius, about six thousand four hundred kilometres, which we call a. Latitude, phi, is the angle
+    up from the equator plane, measured at the centre. The colatitude is ninety degrees minus phi, measured down from the pole, and it swaps sine
+    and cosine. A parallel is a circle of constant latitude, round the Earth''s axis. A meridian is a half circle from pole to pole, round the
+    Earth''s centre. Longitude, lambda, is the angle round the axis, from the prime meridian through Greenwich, positive to the east. Two slices
+    give the position arrow: x is the radius times cosine phi times cosine lambda, y is the radius times cosine phi times sine lambda, and z is
+    the radius times sine phi. The ground is carried east at capital Omega, times the radius, times cosine phi: about four hundred and sixty five
+    metres per second at the equator. A step north is the radius times delta phi, about a hundred and eleven kilometres per degree, everywhere.
+    A step east is the radius, times cosine phi, times delta lambda, and it shrinks towards the poles. So a small patch has an area of the radius
+    squared, times cosine phi, d phi, d lambda. Adding up strips shows that the band from the equator to latitude phi holds a share sine phi of
+    its hemisphere, which is why global averages weight each latitude by cosine phi. In Part 4, we''ll stand at a weather station, and see how
+    its own east, north and up arrows turn as the air moves.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative summary of earlier scenes
+  kind: recap
+  data: reused
+  tool: Remotion SVG + three.js minis
+  runner_up: —
+  why: HOUSE_STYLE §2 beat 6
+  related:
+  - movie: '#5d'
+    slug: ch00_coordinates_frames
+    covers: east-north-up frames, how they turn, frames that move
+  feedback:
+  - U-CO-101
+  layout: 'Mini pictures one per sentence; no real-data mini picture, so no source line. No text over the picture or over other text; links never
+    cross text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should
+    18).'
+- id: s36_end
+  t:
+  - 2873.15
+  - 2896.05
+  sentence_times:
+  - - 2873.15
+    - 2879.35
+  - - 2879.7
+    - 2887.75
+  - - 2888.1
+    - 2895.75
+  beat: series end card (maths ending, HOUSE_STYLE §3, word for word; decision 2)
+  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the sliced globe with phi, the graticule, the two-view triangle,
+    the dA tile); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook
+    icon ''coordinates notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with a 24-px gap under the icon row (Should
+    14). Then a 2.5-s silent hold while the music fades.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric science,
+    meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks for the other maths
+    concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - decorative end card (illustrative)
+  kind: end card
+  data: —
+  tool: house EndCard
+  runner_up: —
+  why: 'series ending word for word (decision 2: the maths ending)'
+  related: []
+  feedback:
+  - Should 14
+  layout: End card. No source line.
