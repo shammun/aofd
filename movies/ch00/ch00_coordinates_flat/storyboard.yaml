@@ -1,0 +1,2723 @@
+# ch00_coordinates_flat storyboard v1 (movie-director, 2026-11-05). Part 1 of the #5 split (#5a). S<k> = sentence k of
+# the scene; AT(k, 'words') a phrase inside it. House style movies/HOUSE_STYLE.md binding (no headings except s00,
+# keywords only, no boxes, no references or badges, 44-px floor, caption band empty, source line + colour bar on data
+# frames). Equation provenance (vallis_eq, page_png) is for QA only and never drawn. calc_rows = every other LaTeX line
+# drawn in the scene (CalcStack rows). Times MEASURED (tools/tts.py dry run, af_bella x 1.0). s21-s26: PENDING the
+# data report (data_block + swap_rules).
+id: ch00_coordinates_flat
+title: 'Coordinates, Part 1: on a flat map, from Cartesian to polar and turned axes'
+version: 1
+concepts:
+- origin, axes, Cartesian coordinates and constant unit vectors x-hat, y-hat
+- 'plane polar coordinates (r, theta): x = r cos theta, y = r sin theta, r = sqrt(x^2 + y^2); maths angle vs compass bearing vs wind
+  ''from'''
+- radians and arc length s = r theta
+- r-hat = (cos theta, sin theta) as the arrow divided by its length, the way r grows (Kundu App. B §B.5)
+- theta-hat as the way theta grows; the 90-deg turn rule (p, q) -> (-q, p); theta-hat = (-sin theta, cos theta) (Kundu App. B §B.5)
+- polar unit vectors depend on place
+- 'radial and tangential components as dot products: u_r = u cos theta + v sin theta, u_theta = -u sin theta + v cos theta'
+- 'rotation of axes: x-hat'' = (cos alpha, sin alpha), y-hat'' = (-sin alpha, cos alpha); x'' = x cos alpha + y sin alpha, y'' = -x
+  sin alpha + y cos alpha'
+- the rotation matrix and direction cosines; index form x'_j = x_i C_ij, C_ij = e_i . e'_j (Kundu (2.4)-(2.5))
+- polar components = axes turned by the local angle theta
+- 'application: a hurricane''s ring-mean tangential and radial winds, their meaning, three ring points by hand, the inflow angle (pending
+  data report)'
+target_duration_s: 2185.75
+fps: 30
+size:
+- 1920
+- 1080
+style: house-dark-v1
+headings: false
+footnote_strip: false
+scale_badges: false
+series:
+  name: Chapter 0 series (plan v6)
+  position: 7
+  plan_id: '#5a'
+  previous: ch00_derivatives_taylor (#4, pos 6)
+  next: ch00_coordinates_storm (#5b, pos 8)
+  split_plan: movies/ch00/ch00_coordinates/split_plan.md §2b (commit 73044df)
+  archive: movies/ch00/ch00_coordinates (build 1, unpublished archive; decision 7)
+audio:
+  voice: af_bella
+  speed: 1.0
+  loudness_lufs: -16
+  beats: '[beat] = 1.5-s hold after worked calculations (tools/tts.py)'
+  music:
+    source: tools/music.py --style (tools/sound/styles.py; procedural, our own, CC0)
+    style: compass-orbit (spec in the build-1 storyboard; NEW style still to add to tools/sound/styles.py)
+    runner_up: ice-polar, seed 23 (what build 1 used; build 1 is unpublished, so no clash)
+    seed: 23
+    level: bed -28 LUFS, ducked 5 dB under speech; mix -16 LUFS, true peak <= -1.5 dBTP; 2.5-s tail
+    note: 'Parts 2-5 need their own styles (HOUSE_STYLE §8: no two movies share a score)'
+  effects_candidates:
+  - scene: s21_ian_polar
+    kind: wind_strong_far
+    intensity: 0.12
+    shows: the streaklines moving (S2-S4 only)
+dry_run:
+  tool: tools/tts.py
+  run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/dryrun3
+  audio_s: 2185.75
+  cues: 508
+  warnings:
+  - 's08_r_hat s3: 17.2 chars/s > 17.0 (slow the speed or shorten)'
+  - 'cue 212: 7.3 s / 2 lines out of house limits'
+  sentences: 363
+  words: 5195
+  words_per_minute_overall: 142.6
+conventions:
+  polar angle: theta from east, anticlockwise as seen from above; compass bearing from north, clockwise as seen from above; wind direction
+    = 'from'
+  wind: 'bold u = (u, v): u eastward, v northward (said ''bold u'', ''u'', ''v'')'
+  rotation of axes: alpha anticlockwise as seen from above; C_ij = e_i . e'_j (rotation_matrix_2d); the s18 table is C^T
+  turn rule letters: 'p, q (never a lone ''a'': Kokoro reads it as the article)'
+  hemisphere: 'Ian (or Amphan) is northern hemisphere: cyclonic = anticlockwise seen from above'
+colour_contract: 'unit vectors and axes orange (x-hat, y-hat, r-hat, theta-hat, x-hat'', y-hat''); the arrow being measured (position,
+  wind) teal with moving dashes when it is a wind; a component band takes the measured arrow''s teal when positive and rose with a hatch
+  and a ''-'' glyph when negative; in the storm: tangential teal, radial rose (inflow); theta arc slate, bearing gold, alpha orange
+  arc, inflow angle rose wedge; gold for pointers, links, the +90 deg arc and ''same'' ticks. u and v curves orange solid / orange dashed
+  with end labels.'
+data_block:
+  status: PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05)
+  rule: Every number spoken or written in s00, s01, s21-s27 that comes from the storm is a parameter of this block. The builder recomputes
+    them with fluidpy.diag.cyclone about the centre the data report fixes, asserts them in CHECK rows, and the movie-director re-voices
+    only the sentences in 'spoken_in' whose rounded value changed (tools/tts.py splice).
+  storm: Hurricane Ian (AL092022)
+  hemisphere: 'northern: cyclonic = anticlockwise as seen from above'
+  time_utc: 2022-09-28T18:00
+  landfall: Cayo Costa, SW Florida, about 19:05 UTC 28 Sep 2022 ('an hour before it came ashore')
+  product:
+    now: HRRR 3-km analysis, 10-m u, v and msl (registry HRRR-zarr-ian2022)
+    pending: kept, or replaced by the data report's better product (U-CO-027); the sentence 'a weather model analysis with grid points
+      every three kilometres' changes with it
+  centre:
+    build1: HRRR msl minimum 26.456 N, 82.399 W (960.3 hPa) via fluidpy.diag.cyclone.storm_centre
+    problem: 'user U-CO-010: the eye is not at the centre (move up and left); build1_log §9: the HRRR pressure minimum lies 13.7 km
+      S of the IBTrACS 18 UTC centre 26.6 N, 82.4 W, where the GOES eye is'
+    pending: the data report fixes the method (IBTrACS-interpolated, GOES eye centroid, wind-minimum or circulation centre); the screen
+      marks the chosen centre and the source line names the method
+  ring_km: 25
+  n_az: 72
+  numbers_build1_about_hrrr_minimum:
+    vt_mean_ms: 37.1
+    vr_mean_ms: -12.5
+    inflow_angle_deg: 18.6
+    vt_kmh: 133.6
+    vr_kmh: 45.0
+    mean_wind_ms: 39.1
+    t_to_centre_s: 2000
+    t_to_centre_min: 33.3
+    lap_km: 157.1
+    lap_min: 70.6
+    round_per_in: 2.97
+    tan_inflow: 0.338
+    ring_vt_range_ms:
+    - 23.5
+    - 49.2
+    ring_vr_range_ms:
+    - -35.7
+    - 1.05
+    ring_vr_negative_points: 66 of 72
+    u_range_ms:
+    - -30.5
+    - 32.1
+    v_range_ms:
+    - -49.0
+    - 44.6
+    points:
+      az0:
+        u: -0.08
+        v: 38.28
+        u_r: -0.15
+        u_theta: 38.28
+        spoken: u about zero, v about 38
+      az90:
+        u: -27.33
+        v: -20.4
+        u_r: -20.4
+        u_theta: 27.33
+      az135:
+        u: -9.81
+        v: -48.69
+        u_r: -27.43
+        u_theta: 41.36
+        rounded_cos_sin: cos 135 = -0.707, sin 135 = +0.707; -9.8 x -0.707 = 6.9; -48.7 x 0.707 = -34.4
+    best_track_kt: 135
+    best_track_kmh: 250
+  spoken_in:
+    s21: date, hour, landfall phrase, product sentence
+    s22: 25 km, 72 points, 37, 130 (x 3.6), -12.5, 135 kt, 1.85, 250
+    s23: 37, 12.5, 39, 45, 25 000 m, 2000 s, 33 min, 157 km, 71 min, 3
+    s24: the three points' u, v, u_r, u_theta
+    s25: 37; 25-50; 0 to -35
+    s26: 12.5 / 37, 0.34, 19 degrees
+    s27: 37, 12.5, 19
+  point_choice: theta = 0, 90 and 135 degrees (cosines 1, 0, -0.707 are easy to say). After re-centring keep these three unless one
+    of them has u_r and u_theta both near zero or a positive u_r; then take the nearest multiple of 45 degrees where both parts are
+    clearly non-zero, and say its cosine and sine.
+swap_rules:
+- 'Ian kept, new centre (most likely): re-run fluidpy.diag.cyclone.storm_relative_wind about the new centre; update data_block numbers;
+  re-voice only the sentences that speak a changed rounded value (spoken_in); the centre dot, the ring and the polar grid follow the
+  new centre; the source line names the centre method.'
+- 'Ian kept, new product (e.g. a finer analysis): also change the s21 product sentence and the source line; the ring radius stays 25
+  km if the product resolves the eyewall (ring-mean v_t peaks within 15-40 km), else the radius of the ring-mean v_t maximum is used
+  and spoken.'
+- 'Ian ruled out (the report cannot correct it): Cyclone Amphan, Bay of Bengal, 20 May 2020 (decision 3 of the split plan), at the last
+  analysis hour before landfall near the Sundarbans (West Bengal / Bangladesh coast). The scene structure, the CalcStacks and the three-point
+  method stay; the place sentence becomes the Bay of Bengal, the Sundarbans mangrove coast and the Ganges delta; ''northern hemisphere''
+  and ''anticlockwise'' stay; the best-track line uses IBTrACS (the agency the report names, e.g. IMD or JTWC; 1-min vs 3-min averaging
+  said correctly); with ERA5 0.25 degree the eye is smoothed, so the ring radius is the radius of the ring-mean v_t maximum (likely
+  50-100 km) and the narration says the product smooths the eye.'
+- Part 2 must take the same storm and centre (one shared CHECK module, split plan §2h).
+guards:
+  review_1:
+  - Must 4 (s22 radial arrow >= 90 px, rose, at the eye)
+  - Must 5 (s22 links from their text's left edge)
+  - Should 1 (s07 '2 pi r' outside the circle)
+  - Should 2 (KaTeX hats only, everywhere)
+  - Should 3 (s25 'negative, or nearly zero, all the way round' + dashed means)
+  - Should 4 (s22 'official estimate')
+  - Should 14 (s28 24-px gap)
+  - Should 18 (an opening keyword from frame 0 in every scene)
+  fix_loop_1:
+  - GOES crop centred on the eye, contrast-stretched, unlit (s21 underlay)
+  - GeoMap body in an overflow-hidden div; SourceBelow, never a bare SourceLine
+  - 'R3F: no lower-case SVG tags in a three tree'
+  - 'halves: picture from frame 0'
+  - keyword swaps >= 8 frames apart; cameras <= 90 deg/s eased; one colour bar per picture, beside it; a source line under every data
+    picture
+  - the builder checks raw TeX, edge clipping, label-on-KaTeX, link crossings, text over a limb, axis through a word on its own stills
+  - assets staged into movies/public before any bundle; one Remotion/Chrome job at a time
+honesty_notes:
+- 's21-s26 PENDING the data report: the centre, the product and every storm number may change; the scenes are written to swap (data_block,
+  swap_rules).'
+- 's22: the analysis is weaker than the official estimate (IBTrACS USA 135 kt at 18 UTC 28 Sep 2022, 1-min sustained); the narration
+  says so.'
+- 's23: the 33-min trip to the centre is a thought experiment said as such (''imagine ... nothing changed''); no laps-to-the-centre
+  claim (laps diverge near the centre with a constant round speed); ''three metres round per metre in'' is the local ratio on the ring.'
+- 's23: ''the inflow slows down near the ring of strongest winds, and the air rises there'' — ring-mean v_r is weaker inside 25 km (-6.5
+  m/s at 10 km vs -13.6 at 30 km, build-1 HRRR); rising is the standard eyewall picture, shown in Part 2 with data.'
+- 's25: the radial wind is negative at 66 of 72 ring points and at most +1.05 m/s at the other six: ''negative, or nearly zero, all
+  the way round''.'
+- 's11: the 0.1-deg slide is a chord, so its direction differs from theta-hat by 0.05 deg; said ''about''.'
+- 's13: the balloon picture is zoomed so unit arrows and the wind share one picture; unit vectors have no km length.'
+- Exaggerations (title morph and lap, the 15-deg 'little' turn in s09, the magnified 0.1-deg slide, map zooms) and time compression
+  (streaklines, laps) are listed per scene and in the manifest, not badged (HOUSE_STYLE §5).
+- Every spoken number comes from tested fluidpy functions (coords, tensors, diag.cyclone) and is asserted by CHECK rows DF02-DF26 in
+  the Part 1 build script (shared _coords_common.py, split plan §2h).
+quiz_hook: 'At a point 5 km due east of a northern-hemisphere hurricane''s eye, the wind blows towards the north-west at u = -10, v
+  = 10 m/s. What are u_r and u_theta, is the air flowing in, and which way does it go round, seen from above? (u_r = -10, in; u_theta
+  = +10, anticlockwise: cyclonic.)'
+headings_exception: s00_title only
+scenes:
+- id: s00_title
+  t:
+  - 0.3
+  - 10.775
+  sentence_times:
+  - - 0.3
+    - 9.975
+  beat: opening title (HOUSE_STYLE §3)
+  visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075: RiseText ''Coordinates'' / ''Part 1'' (150 px, weight 800, TitleGradient
+    teal -> gold; letters rise 24 px over 8 frames, 2-frame stagger); ''made easy'' (96 px, warm white) pulses x1.06 on AT(1,''the easy
+    way''); subtitle on two lines ''on a flat map, and how'' / ''meteorology uses them'' (68 px, ''meteorology'' teal), >= 50 px clear
+    of the animation. Right x 1130-1840, y 180-636: Part A (frame 0 -> AT(1,''meteorology'')): a polar grid (rings 1-5 km, spokes every
+    30 deg, slate) round a station; the balloon at (3, 4) km with r-hat and theta-hat (orange, KaTeX tip labels) glides once round the
+    5-km circle, both arrows turning, while a ghost x-hat, y-hat pair stays fixed in the corner; then the square grid turns by 30 deg
+    (x'', y''). Part B (12-frame cross-fade on ''meteorology''): Ian''s 10-m wind speed round the eye (data_block), the 25-km ring with
+    teal tangential and rose inward arrows with moving dashes; its source line below the column (y <= 860). Poster = frame 200.'
+  voiceover: In this video, we'll learn coordinates on a flat map the easy way, and see how meteorology uses them to measure the winds
+    round a hurricane's eye.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar; fluidpy.core.tensors.rotation_matrix_2d; fluidpy.diag.cyclone.storm_relative_wind
+    params:
+      balloon_km:
+      - 3
+      - 4
+      alpha_deg: 30
+      storm: data_block
+      ring_km: 25
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes;
+      ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact
+  exaggeration:
+  - title animation time compressed (one lap of the balloon in about 4 s)
+  - arrow lengths in the title not to wind scale
+  kind: title
+  data: data_block (pending)
+  tool: house title kit + Remotion SVG
+  runner_up: three.js polar grid (no gain in 2-D)
+  why: the movie's two halves (turning arrows on a flat map; a hurricane's ring) on frame 0
+  related: []
+  pending_data: true
+  feedback:
+  - U-CO-101
+  layout: 'Title frame; the Ian mini-map in the right column has its source line ''Data: <product> · 28 Sep 2022, 18 UTC'' below it
+    (>= 28 px, y <= 860); ring arrows animated with moving dashes. No other text.'
+- id: s01_hook
+  t:
+  - 10.775
+  - 31.175
+  sentence_times:
+  - - 10.775
+    - 14.675
+  - - 15.025
+    - 21.2
+  - - 21.55
+    - 25.8
+  - - 26.15
+    - 30.375
+  beat: hook question
+  visual: 'Full width from frame 0. Left x 80-900: the polar grid with the station and the balloon (r-hat, theta-hat). Right x 1000-1840:
+    Ian''s wind-speed map round the eye with the 25-km ring (data_block), colour bar beside it in the gap (never on it), source line
+    below it. S1 on AT(1,''coordinates''): keyword ''coordinates'' (54 px, warm white) in the gap between the two pictures. S2 on AT(2,''five
+    parts''): five small code-drawn thumbnails in a row under both pictures, above the caption band (a grid, a storm cylinder, a globe,
+    a station''s east-north-up arrows, a world map); the first one lit, the other four at 35 %; keyword ''flat map'' under the first
+    on AT(2,''flat map''). S3: the polar grid brightens. S4 on AT(4,''hurricane''): the ring arrows start moving.'
+  voiceover: What are coordinates, and why do we need more than one kind? This is the first of five parts on coordinates, and in this
+    part, we stay on a flat map. Let's see what coordinates are, and why they're built the way they are. Then let's see what they tell
+    us about the winds round a hurricane.
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_centre + storm_relative_wind
+    params:
+      storm: data_block
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_storm_centre_V1_paraboloid_recovered_exactly, ::test_real_era5_V5_centre_near_ibtracs_and_cyclonic_inflow;
+      ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact
+  exaggeration: []
+  kind: diagram + data map
+  data: data_block (pending)
+  tool: Remotion SVG
+  runner_up: —
+  why: the core pictures on the first frame (HOUSE_STYLE §2); the part's place in the five
+  related:
+  - &id002
+    movie: '#5b'
+    slug: ch00_coordinates_storm
+    covers: turning arrows, acceleration on a ring, the hurricane in 3-D
+  pending_data: true
+  feedback:
+  - U-CO-101
+  layout: Map with SourceBelow (fully below, >= 16 px gap, y <= 860) and a colour bar 0-50 m/s with unit beside it. The five thumbnails
+    are drawings, not cards (no boxes, no numbers on them).
+- id: s02_coordinates
+  t:
+  - 31.175
+  - 82.45
+  sentence_times:
+  - - 31.175
+    - 33.475
+  - - 33.825
+    - 39.775
+  - - 40.125
+    - 43.125
+  - - 43.475
+    - 45.95
+  - - 46.3
+    - 50.875
+  - - 51.225
+    - 53.8
+  - - 54.15
+    - 60.225
+  - - 60.575
+    - 65.0
+  - - 66.5
+    - 72.475
+  - - 72.825
+    - 81.65
+  beat: 'building block: origin, axes, coordinates (kept from build 1)'
+  visual: 'Picture zone x 80-1000: a flat, real map patch round Trappes (BMNG + NE 10 m admin lines, 30 x 30 km window) as the ''flat
+    map''; a slate station icon (PoleThermometer) at the origin on AT(4,''weather station''). S5: an east axis and a north axis (orange)
+    draw through it; keyword ''axes'' on AT(6,''axes''). S7: a balloon glyph drifts 3 km east and 4 km north (dashed teal path, km ticks
+    52 px). S8: ''(3, 4)'' at the balloon tip (68 px) with gold links to the two dashed legs. S9: keyword ''coordinates''; S10: ''Cartesian''
+    (54 px). Maths zone x 1060-1840: ''(x, y) = (3, 4)'' builds with the legs'' colours.'
+  voiceover: Let's start with a flat map. To say where something is, we need a starting point, and some directions to count from. The
+    starting point is called the origin. Let's put it at a weather station. Now draw one line through it pointing east, and one pointing
+    north. These lines are called the axes. A weather balloon drifts three kilometres east and four kilometres north of the station.
+    So we can write its position as the pair of numbers three and four. [beat] These two numbers are called its coordinates, and together
+    they pin down one place on the map. Measuring along straight axes at right angles, like this, is called Cartesian coordinates, after
+    the French thinker René Descartes.
+  on_screen_eq:
+    latex: (x,\ y)=(3,\ 4)
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: builder-only geometry (km offsets on a local tangent plane)
+    params:
+      east_km: 3
+      north_km: 4
+    test: CHECK DF02 (shared _coords_common.py)
+  exaggeration:
+  - balloon drift is an easy-number example, not a real trajectory
+  kind: map + diagram
+  data: BMNG patch, Natural Earth 10 m lines (Trappes)
+  tool: Remotion SVG over a pre-cut BMNG patch
+  runner_up: MapLibre static frame
+  why: a real place keeps the flat map honest
+  related:
+  - &id001
+    movie: 1a
+    slug: ch00_vectors_index_notation
+    covers: unit vectors, components, index notation, summation
+  kept_from: build-1 s02
+  layout: 'SourceBelow ''Image: NASA Blue Marble NG · Natural Earth'' fully below the patch (y <= 860). ''(3, 4)'' may sit on the map
+    (short label at a spot); ''(x, y) = (3, 4)'' and keywords in the maths zone.'
+- id: s03_cartesian_arrows
+  t:
+  - 82.45
+  - 133.025
+  sentence_times:
+  - - 82.45
+    - 88.1
+  - - 88.45
+    - 94.15
+  - - 94.5
+    - 99.6
+  - - 99.95
+    - 104.075
+  - - 104.425
+    - 109.475
+  - - 109.825
+    - 114.275
+  - - 114.625
+    - 118.75
+  - - 119.1
+    - 122.7
+  - - 123.05
+    - 128.2
+  - - 128.55
+    - 132.225
+  beat: 'building block: Cartesian unit vectors are the same everywhere (kept)'
+  visual: 'Same map. S1: unit arrows x-hat and y-hat (orange, 10 px, 40-px heads) grow at the origin; KaTeX TipLabels. S3: ''3 x-hat
+    + 4 y-hat'' (68 px) beside the balloon, the 3 and the 4 gold-linked to the legs. S5-S6: the balloon jumps to four other places;
+    at each, a copy of x-hat, y-hat appears identical, with a gold ''same'' tick between two copies. S8-S9: two small inserts beside
+    the patch: Ian''s eye spiral and a radar''s range rings, each with the square grid overlaid and visibly not matching.'
+  voiceover: 'Each axis comes with a unit vector: an arrow of length one that points along it. We write x hat for the arrow pointing
+    east, and y hat for the arrow pointing north. The balloon''s position is three times x hat, plus four times y hat. We met arrows
+    like these in the vectors movie of this series. Here''s their key property: x hat points the same way everywhere on the map. Move
+    the balloon anywhere you like, and the two arrows don''t change. That''s what makes Cartesian coordinates so easy to work with.
+    But many things in the weather aren''t laid out in squares. A hurricane spins round its eye, and a weather radar looks out in rings.
+    For those, there''s a better way to say where something is.'
+  on_screen_eq:
+    latex: 3\,\hat{\mathbf x}+4\,\hat{\mathbf y}
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: builder-only (constant basis)
+    params: {}
+    test: CHECK DF02
+  exaggeration: []
+  kind: diagram on map
+  data: BMNG patch; Ian insert (data_block)
+  tool: Remotion SVG
+  runner_up: —
+  why: the contrast for every later system
+  related:
+  - *id001
+  kept_from: build-1 s03
+  layout: SourceBelow under the patch; each insert has its own source line below it; no overlap with the patch.
+- id: s04_polar
+  t:
+  - 133.025
+  - 189.85
+  sentence_times:
+  - - 133.025
+    - 140.825
+  - - 141.175
+    - 144.1
+  - - 144.45
+    - 153.4
+  - - 154.9
+    - 158.05
+  - - 158.4
+    - 164.825
+  - - 165.175
+    - 170.35
+  - - 171.85
+    - 178.175
+  - - 178.525
+    - 181.825
+  - - 182.175
+    - 189.05
+  beat: 'building block: polar coordinates (r, theta) (kept)'
+  visual: 'Picture: the balloon at (3, 4) on the map; a teal line from the station to it labelled ''r'' at its midpoint on AT(2,''called
+    r''). S3: CalcStack ''r = sqrt(3^2 + 4^2) = sqrt(25) = 5 km'', legs highlighted and gold-linked to 3^2 and 4^2. S5: a slate arc
+    from the east axis to the line labelled ''theta'' on AT(5,''called theta''); a small curved arrow ''anticlockwise (seen from above)''.
+    S7: ''tan theta = 4/3 -> theta = 53 deg''. S8: ''(r, theta) = (5 km, 53 deg)'' at the tip (68 px). S10 on AT(10,''weather radar''):
+    range rings every 1 km and spokes every 30 deg fade in (radar look).'
+  voiceover: 'Instead of going east and north, we can give two other numbers: how far away the balloon is, and in which direction. The
+    distance from the origin is called r. By Pythagoras, r is the square root of three squared plus four squared, which is the square
+    root of twenty five: five kilometres. [beat] The direction is an angle, called theta. Mathematicians measure it from the east axis,
+    turning anticlockwise as seen from above. Its tangent is four over three, so theta is about fifty three degrees. [beat] So the same
+    balloon is at r equals five kilometres, and theta equals fifty three degrees. These two numbers are called polar coordinates. A
+    weather radar measures exactly this pair: how far away the raindrops are, and in which direction.'
+  on_screen_eq:
+    latex: x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.core.coords.polar_from_cartesian
+    params:
+      x: 3.0
+      y: 4.0
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_round_trips_and_ranges; CHECK DF03 r = 5, theta = 53.13 deg
+  exaggeration: []
+  calc_rows:
+  - r=\sqrt{3^2+4^2}=\sqrt{25}=5\ \mathrm{km}
+  - \tan\theta=\tfrac{4}{3}\ \Rightarrow\ \theta\approx53^\circ
+  - (r,\ \theta)=(5\ \mathrm{km},\ 53^\circ)
+  kind: diagram + calc
+  data: BMNG patch
+  tool: Remotion SVG + house CalcStack
+  runner_up: —
+  why: easy numbers first
+  related: []
+  kept_from: build-1 s04
+  layout: Map patch with SourceBelow; calculations in the maths zone only.
+- id: s05_polar_back
+  t:
+  - 189.85
+  - 233.8
+  sentence_times:
+  - - 189.85
+    - 192.15
+  - - 192.5
+    - 193.85
+  - - 194.2
+    - 197.675
+  - - 198.025
+    - 202.5
+  - - 202.85
+    - 209.8
+  - - 210.15
+    - 211.725
+  - - 212.075
+    - 218.65
+  - - 219.0
+    - 221.875
+  - - 223.375
+    - 228.225
+  - - 228.575
+    - 233.0
+  beat: 'building block: back to x and y (kept)'
+  visual: 'Picture: the right triangle station-balloon, hypotenuse r (teal), angle theta (slate) at the station, east leg and north
+    leg (orange dashed). S4: tags ''r cos theta'' on the east leg, ''r sin theta'' on the north leg. S6-S7: CalcStack ''5 cos 53 deg
+    = 5 x 0.6 = 3'', ''5 sin 53 deg = 5 x 0.8 = 4'', each linked to its leg. S8: the two lines (84 px).'
+  voiceover: Can we go back the other way? Yes. Think of the right triangle with the balloon at its tip. Its long side is r, and its
+    angle at the station is theta. The side going east is r times cosine theta, and the side going north is r times sine theta. Let's
+    check. Five times the cosine of fifty three degrees is five times zero point six, which is three. And five times zero point eight
+    is four. [beat] So x equals r cosine theta, and y equals r sine theta. These two lines are all we need to switch between the two
+    systems.
+  on_screen_eq:
+    latex: x=r\cos\theta,\qquad y=r\sin\theta
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.core.coords.cartesian_from_polar_coords
+    params:
+      r: 5.0
+      theta_deg: 53.13
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_round_trips_and_ranges; CHECK DF03
+  exaggeration: []
+  calc_rows:
+  - 5\cos53^\circ=5\times0.6=3
+  - 5\sin53^\circ=5\times0.8=4
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG
+  runner_up: —
+  why: the way back
+  related: []
+  kept_from: build-1 s05
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s06_bearings
+  t:
+  - 233.8
+  - 273.65
+  sentence_times:
+  - - 233.8
+    - 236.275
+  - - 236.625
+    - 241.275
+  - - 241.625
+    - 246.75
+  - - 247.1
+    - 252.825
+  - - 254.325
+    - 262.925
+  - - 263.275
+    - 266.175
+  - - 266.525
+    - 272.85
+  beat: 'convention: maths angle vs compass bearing vs wind ''from'' (kept)'
+  visual: 'Picture: the same point with two angle arcs: the maths angle from east, anticlockwise (slate, ''53 deg'') and the compass
+    bearing from north, clockwise (gold, ''37 deg''). Maths: ''90 deg - 53 deg = 37 deg''. S4-S5: an arrow ''from the west'' (teal,
+    moving dashes) blowing towards the east, keyword ''from'' (54 px) at its tail. S6: two rulers (a protractor from east, a compass
+    from north) side by side.'
+  voiceover: 'One warning before we go on. Meteorologists and navigators measure directions differently. A compass bearing starts from
+    north, and turns clockwise as seen from above. So the balloon''s bearing is ninety minus fifty three, which is thirty seven degrees.
+    [beat] Weather reports add one more twist: a wind''s direction says where the wind blows from, as we saw in the weather basics movie.
+    So a west wind blows towards the east. Same arrows, different rulers, so it''s always worth checking which angle a data set uses.'
+  on_screen_eq:
+    latex: \text{bearing}=90^\circ-\theta=90^\circ-53^\circ=37^\circ
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.geo.atmos.wind_components (meteorological 'from' direction)
+    params:
+      speed: 10.0
+      from_deg: 270.0
+    test: ../Fluid Dynamics/tests/diag/test_sounding.py::test_drift_V5_metpy_wind_components_and_scipy_trapezoid; CHECK DF04 bearing
+      36.87 deg; west wind -> u = +10, v = 0
+  exaggeration: []
+  kind: diagram
+  data: —
+  tool: Remotion SVG
+  runner_up: —
+  why: the most common bug in real data is the angle convention
+  related:
+  - &id004
+    movie: '0.3'
+    slug: ch00_weather_basics
+    covers: wind 'from' convention, knots, reanalysis
+  kept_from: build-1 s06
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s07_radians
+  t:
+  - 273.65
+  - 337.8
+  sentence_times:
+  - - 273.65
+    - 281.3
+  - - 281.65
+    - 285.6
+  - - 285.95
+    - 291.15
+  - - 291.5
+    - 297.45
+  - - 297.8
+    - 303.375
+  - - 303.725
+    - 307.375
+  - - 307.725
+    - 310.0
+  - - 310.35
+    - 320.2
+  - - 321.7
+    - 326.8
+  - - 328.3
+    - 331.625
+  - - 331.975
+    - 337.0
+  beat: 'building block: radians and arc length (kept; Should 1, Should 18)'
+  visual: 'Keyword ''radians'' in the maths zone from frame 0 (Should 18). Picture: a circle round the station with radius r (teal);
+    a walker dot moves along the edge leaving an orange arc; the arc length s and the angle theta (rad) tick together; keyword ''arc
+    length'' on AT(3,''arc length''). S5: a full circle sweeps, ''2 pi r'' OUTSIDE the circle at the upper left (Should 1), ''2 pi rad''
+    at the centre; ''1 rad = 57 deg''. S7-S8: two rings at 5 km and 50 km with the same 0.2-rad wedge; arcs labelled ''1 km'' and ''10
+    km'' (68 px), gold links to CalcStack ''5 x 0.2 = 1 km'', ''50 x 0.2 = 10 km''. S9: brace ''same angle'' across both wedges.'
+  voiceover: 'Before polar coordinates can do their real work, we need one more building block: measuring angles in radians. Take a
+    circle of radius r, and walk along its edge. The angle in radians is the distance you walked, divided by the radius. So the distance
+    along the edge, called the arc length, is the radius times the angle. A full circle is two pi radians, because its edge is two pi
+    times the radius. So one radian is about fifty seven degrees. Let''s try easy numbers. On a ring five kilometres from the station,
+    turning by zero point two radians walks you five times zero point two, which is one kilometre. [beat] On a ring fifty kilometres
+    out, the same turn walks you ten kilometres. [beat] The same angle gives ten times the distance. Keep this rule in mind, because
+    it explains a lot about maps of the Earth.'
+  on_screen_eq:
+    latex: s=r\,\theta\quad(\theta\ \text{in radians})
+    vallis_eq: 'none: definition of the radian (standard)'
+    page_png: null
+  physics_source:
+    fn: builder-only arithmetic (s = r theta); np.degrees(1)
+    params:
+      r_km:
+      - 5
+      - 50
+      theta_rad: 0.2
+    test: CHECK DF05 57.30 deg; 1 km, 10 km
+  exaggeration: []
+  calc_rows:
+  - 1\ \mathrm{rad}=\tfrac{360^\circ}{2\pi}\approx57^\circ
+  - 5\ \mathrm{km}\times0.2=1\ \mathrm{km}
+  - 50\ \mathrm{km}\times0.2=10\ \mathrm{km}
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG
+  runner_up: —
+  why: the arc rule is used again in s11 (the 0.1-deg slide) and s23 (one lap)
+  related: []
+  kept_from: build-1 s07
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s08_r_hat
+  t:
+  - 337.8
+  - 409.275
+  sentence_times:
+  - - 337.8
+    - 343.525
+  - - 343.875
+    - 346.175
+  - - 346.525
+    - 351.875
+  - - 352.225
+    - 354.05
+  - - 354.4
+    - 361.1
+  - - 361.45
+    - 366.9
+  - - 367.25
+    - 373.3
+  - - 374.8
+    - 380.65
+  - - 381.0
+    - 383.25
+  - - 383.6
+    - 388.85
+  - - 389.2
+    - 394.875
+  - - 396.375
+    - 398.55
+  - - 398.9
+    - 405.325
+  - - 405.675
+    - 408.475
+  beat: 'building block: r-hat built (arrow divided by its length); the way r grows'
+  visual: 'Keyword ''unit vectors'' in the maths zone from frame 0. Picture zone: station, the 5-km circle (faint slate), the balloon
+    at (3, 4) km. S5 on AT(5,''three, four''): the teal position arrow station -> balloon with tip label ''(3, 4)'' and length tag ''r
+    = 5 km'' on AT(5,''five kilometres''). S6: the arrow shrinks to one fifth (animated scaling about the station, 1 s), turns orange
+    and slides to the balloon: r-hat, KaTeX tip label at once; keyword ''divide by its length''. S7: CalcStack row 1. S8: row 2 (|r-hat|
+    = 1). S10-S11: row 3 with the two r''s struck (Strike) on AT(11,''the r cancels''). S12-S14: theta held (the slate arc frozen, a
+    padlock-free ''theta fixed'' keyword), r grows from 5 to 6 km: the balloon slides straight out along a dashed teal ray, r-hat pulses;
+    keyword ''the way r grows'' (54 px). r-hat keeps its tip label for the whole scene (U-CO-008).'
+  voiceover: Polar coordinates come with their own unit vectors, so let's build them one at a time. The first is called r hat. It's
+    an arrow of length one that points straight away from the station, towards the balloon. Here's how to get it. The arrow from the
+    station to the balloon is three, four, and its length is r, five kilometres. Dividing an arrow by its own length keeps its direction,
+    and makes its length one. So r hat is three fifths, four fifths, which is zero point six, zero point eight. [beat] Its length is
+    one, because zero point three six plus zero point six four is one. The same works for any point. The arrow to it is r cosine theta,
+    r sine theta, as we just saw. Dividing by r, the r cancels, so r hat is cosine theta, sine theta. [beat] Why is it called r hat?
+    Hold theta fixed and let r grow, and the balloon slides straight outward, along this arrow. So r hat points the way r grows.
+  on_screen_eq:
+    latex: \hat{\mathbf r}=\frac{(r\cos\theta,\ r\sin\theta)}{r}=(\cos\theta,\ \sin\theta)
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar
+    params:
+      theta_deg: 53.13
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DF06 (0.6, 0.8), |r-hat| = 1
+  exaggeration:
+  - unit arrows drawn about 180 px long on a km map (a unit vector has no km length)
+  calc_rows:
+  - \hat{\mathbf r}=\frac{(3,\ 4)}{5}=(0.6,\ 0.8)
+  - '|\hat{\mathbf r}|=\sqrt{0.36+0.64}=1'
+  - \hat{\mathbf r}=\frac{(r\cos\theta,\ r\sin\theta)}{r}=(\cos\theta,\ \sin\theta)
+  derivation:
+    id: D08a (split plan s08)
+    goal: the unit vector that points away from the station
+    steps:
+    - - take the arrow to the balloon
+      - (3,\,4),\ |(3,4)|=5
+      - it points the right way
+      - the arrow from the station to the balloon is 5 km long
+    - - divide by its length
+      - (3,4)/5=(0.6,\,0.8)
+      - dividing by a positive number keeps the direction and scales the length to 1
+      - r-hat at the balloon
+    - - check the length
+      - \sqrt{0.36+0.64}=1
+      - a unit vector has length 1
+      - it is a unit vector
+    - - do it for any point
+      - (r\cos\theta,\,r\sin\theta)/r
+      - s05 gave x = r cos theta, y = r sin theta
+      - the same recipe everywhere
+    - - cancel r
+      - (\cos\theta,\,\sin\theta)
+      - r is not zero away from the station
+      - r-hat depends only on the angle
+    - - name it
+      - \theta\ \text{fixed},\ r\uparrow
+      - 'hold theta, grow r: the point moves along this arrow'
+      - r-hat points the way r grows
+  kind: diagram derivation
+  data: —
+  tool: Remotion SVG + house CalcStack/Strike
+  runner_up: —
+  why: build r-hat from what the viewer already has (s04-s05), and name the 'way r grows' idea that s09 reuses
+  related:
+  - *id001
+  feedback:
+  - U-CO-001
+  - U-CO-008
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s09_where_theta_grows
+  t:
+  - 409.275
+  - 488.425
+  sentence_times:
+  - - 409.275
+    - 412.025
+  - - 412.375
+    - 415.475
+  - - 415.825
+    - 419.55
+  - - 419.9
+    - 424.55
+  - - 424.9
+    - 430.325
+  - - 430.675
+    - 433.025
+  - - 433.375
+    - 437.675
+  - - 438.025
+    - 445.0
+  - - 445.35
+    - 452.25
+  - - 452.6
+    - 457.875
+  - - 458.225
+    - 466.4
+  - - 466.75
+    - 473.1
+  - - 473.45
+    - 478.65
+  - - 480.15
+    - 487.625
+  beat: 'derivation D01: theta-hat is the way theta grows; why +90 deg'
+  visual: 'Keyword ''the way theta grows'' (KaTeX theta) in the maths zone from frame 0. Picture zone: station, the 5-km circle (teal),
+    the balloon with r-hat (orange, labelled). S4-S5 on AT(4,''let theta grow''): the ''r = 5 km'' tag on the radius stays fixed (slate
+    ''r fixed''), theta''s slate arc grows from 53 deg to 68 deg (exaggerated, said ''a little'') and the balloon slides anticlockwise
+    along the circle leaving a gold trail; it slides back and repeats once. S7-S8: a zoomed inset (x 600-1000, y 420-820, soft edge)
+    at the balloon: the small slide (gold arrow) and r-hat; on AT(8,''further from the station, or closer''): two ghost moves with a
+    part along r-hat (one outward, one inward, slate dashed) show the distance tag changing ''5.1 km'' / ''4.9 km'', then fade. S9:
+    keyword ''no part along r-hat'' and a gold RightTick between the slide and r-hat. S10: on the main circle, the radius and the tangent
+    line at the balloon with a RightTick; keyword ''edge at right angles to the radius''. S11: two candidate arrows at right angles
+    to r-hat at the balloon: one turned anticlockwise (orange dashed) and one clockwise (slate dashed), each with a small curved arrow
+    at r-hat''s tail. S12-S13: the clockwise one fades with a strike; the anticlockwise one turns solid orange, tip label theta-hat
+    (KaTeX), a gold curved ''+90 deg'' arc from r-hat to theta-hat; keyword ''anticlockwise (seen from above)''. S14: keyword ''a rule
+    for a 90 deg turn'' (teaser for s10).'
+  voiceover: 'Now the second arrow, theta hat. Its job is to point the way theta grows. So let''s do the same experiment, with the roles
+    swapped. Hold r fixed at five kilometres, and let theta grow a little. The balloon slides along the circle of radius five kilometres
+    round the station. Which way is that, exactly? While it slides, its distance from the station doesn''t change. If its move had any
+    part along r hat, the balloon would get further from the station, or closer to it. So a small slide along the circle has no part
+    along r hat: it''s at right angles to r hat. That''s why the edge of a circle always runs at right angles to its radius. But there
+    are two directions at right angles to r hat: one turned anticlockwise from it, and one turned clockwise. Theta grows anticlockwise,
+    as seen from above, so the balloon slides anticlockwise. So theta hat is r hat, turned by ninety degrees anticlockwise. [beat] To
+    turn that picture into numbers, we need one small tool: a rule for turning any arrow by ninety degrees.'
+  on_screen_eq:
+    latex: \hat{\boldsymbol\theta}=\hat{\mathbf r}\ \text{turned by}\ +90^\circ
+    vallis_eq: 'none: arithmetic or a definition (no book equation); Kundu App. B §B.5 (printed p. 865) gives the formula, derived in
+      s10-s11'
+    page_png: null
+  physics_source:
+    fn: fluidpy.core.coords.cartesian_from_polar_coords (positions at theta and theta + dtheta); unit_vectors_polar
+    params:
+      r_km: 5
+      theta_deg:
+      - 53.13
+      - 68.13
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DF07 slide direction . r-hat
+      = 0 to 1e-6 for dtheta = 1e-4 rad
+  exaggeration:
+  - the 'little' turn is drawn at 15 deg so it is visible; the inset is magnified
+  derivation:
+    id: D01
+    goal: show where theta-hat points, and why anticlockwise
+    steps:
+    - - hold r, let theta grow
+      - r=5\ \mathrm{km},\ \theta\uparrow
+      - theta-hat is defined as the way theta grows (like r-hat for r, s08)
+      - the balloon slides along its circle
+    - - look at the distance
+      - r\ \text{stays}\ 5\ \mathrm{km}
+      - on a circle round the station every point is 5 km away
+      - the slide does not change the distance
+    - - no part along r-hat
+      - \text{slide}\perp\hat{\mathbf r}
+      - any part along r-hat would change the distance (contrapositive of the step before)
+      - the slide is at right angles to r-hat
+    - - choose the sense
+      - +90^\circ\ \text{(anticlockwise)}
+      - theta is measured anticlockwise (s04), so growing theta moves the point anticlockwise
+      - theta-hat is r-hat turned a quarter turn anticlockwise
+  kind: diagram derivation
+  data: —
+  tool: Remotion SVG (inset with soft edges)
+  runner_up: —
+  why: 'answers U-CO-002/003: where theta-hat is drawn and why that way, before any formula'
+  related: []
+  feedback:
+  - U-CO-001
+  - U-CO-002
+  - U-CO-003
+  - U-CO-008
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s10_turn_90
+  t:
+  - 488.425
+  - 583.55
+  sentence_times:
+  - - 488.425
+    - 491.3
+  - - 491.65
+    - 497.75
+  - - 498.1
+    - 500.425
+  - - 501.925
+    - 505.675
+  - - 506.025
+    - 508.875
+  - - 510.375
+    - 514.975
+  - - 515.325
+    - 520.375
+  - - 520.725
+    - 528.2
+  - - 528.55
+    - 535.075
+  - - 535.425
+    - 539.25
+  - - 539.6
+    - 542.75
+  - - 544.25
+    - 549.25
+  - - 549.6
+    - 553.05
+  - - 553.4
+    - 557.675
+  - - 559.175
+    - 561.525
+  - - 561.875
+    - 568.175
+  - - 568.525
+    - 575.625
+  - - 577.125
+    - 582.75
+  beat: 'derivation D02: the 90-deg turn rule (p, q) -> (-q, p)'
+  visual: 'Keyword ''90 deg turn'' from frame 0. Picture zone: a clean x-y grid (no map), origin at x 540, y 500, unit 120 px, orange
+    x and y axes faint. S1-S2 on AT(2,''it points north''): x-hat (orange) TURNS (real rigid rotation about the origin over 1 s, TurnRule90,
+    a gold quarter-circle arrow) to north; its tip label changes ''(1, 0)'' -> ''(0, 1)'' on S3. S4-S5: y-hat turns to west: ''(0, 1)''
+    -> ''(-1, 0)''. S6-S7: a general arrow (teal) as a chain: p steps east (orange solid leg ''p'') then q steps north (orange dashed
+    leg ''q''), tip label ''(p, q)''. S8 on AT(8,''turn the whole drawing''): the whole chain turns 90 deg about the origin as one rigid
+    piece (2 s); the legs stay joined; their tags follow and change to ''p north'' and ''q west'' (S9). S10-S11: the maths rows build
+    term by term, each term gold-linked to its turned leg. S12: the rule ''(p, q) -> (-q, p)'' at 84 px and the keyword ''swap, minus
+    on the first'' (54 px), with two small curved swap arrows (gold) over the numbers. S13-S14: the balloon''s arrow (3, 4) (teal) and
+    its 3-4 triangle turn rigidly into (-4, 3) (teal dashed); legs relabel ''3 north'', ''4 west''. S15-S17: CalcStack checks; a RightTick
+    between (3, 4) and (-4, 3) at the origin on AT(18,''right angle''); keyword ''dot product 0 -> right angle''.'
+  voiceover: 'Let''s start with the two easiest arrows. Turn x hat, which points east, by ninety degrees anticlockwise, and it points
+    north. So it becomes zero, one. [beat] Turn y hat, which points north, and it points west. So it becomes minus one, zero. [beat]
+    Now take any arrow, with an east part p and a north part q. It''s p steps along x hat, followed by q steps along y hat. If we turn
+    the whole drawing by ninety degrees, both pieces turn together, and they stay joined, tip to tail. So the p steps east become p
+    steps north, and the q steps north become q steps west. Steps to the west count as minus in the east part. So the turned arrow is
+    minus q, p. [beat] In words: swap the two numbers, and put a minus sign on the first one. Let''s try it on the balloon''s arrow,
+    three, four. Swap them, and put a minus on the first: minus four, three. [beat] Is that really a quarter turn? Its length is the
+    square root of sixteen plus nine, which is five, the same as before. And its dot product with three, four is three times minus four,
+    plus four times three, which is zero. [beat] A zero dot product means a right angle, as we saw in the dot product movie.'
+  on_screen_eq:
+    latex: (p,\ q)\ \longrightarrow\ (-q,\ p)
+    vallis_eq: 'none: arithmetic or a definition (no book equation) (rotation by +90 deg; the active form of rotation_matrix_2d(pi/2))'
+    page_png: null
+  physics_source:
+    fn: 'fluidpy.core.tensors.rotation_matrix_2d(pi/2) (active use: C @ v turns v by +90 deg); fluidpy.core.tensors.dot'
+    params:
+      theta_rad: 1.5707963
+      v:
+      - 3
+      - 4
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes; CHECK DF08 C(pi/2) @ (3, 4) = (-4, 3)
+      to 1e-12, dot = 0
+  exaggeration: []
+  calc_rows:
+  - \hat{\mathbf x}=(1,\ 0)\ \to\ (0,\ 1),\qquad \hat{\mathbf y}=(0,\ 1)\ \to\ (-1,\ 0)
+  - (p,\ q)=p\,\hat{\mathbf x}+q\,\hat{\mathbf y}\ \to\ p\,(0,\ 1)+q\,(-1,\ 0)=(-q,\ p)
+  - (3,\ 4)\ \to\ (-4,\ 3)
+  - '|(-4,\ 3)|=\sqrt{16+9}=5'
+  - (3,\ 4)\cdot(-4,\ 3)=3\times(-4)+4\times3=-12+12=0
+  derivation:
+    id: D02
+    goal: a rule that turns any arrow by 90 deg anticlockwise
+    steps:
+    - - turn x-hat
+      - (1,0)\to(0,1)
+      - east turned a quarter turn anticlockwise is north
+      - the first building block
+    - - turn y-hat
+      - (0,1)\to(-1,0)
+      - north turned anticlockwise is west; west is minus in the east part
+      - the second building block
+    - - split any arrow
+      - (p,q)=p\,\hat{\mathbf x}+q\,\hat{\mathbf y}
+      - 'components (vectors movie): p steps east then q steps north'
+      - an arrow is two joined pieces
+    - - turn both pieces
+      - p\,(0,1)+q\,(-1,0)
+      - a rigid turn turns every piece by the same angle and keeps them joined tip to tail
+      - east steps become north steps, north steps become west steps
+    - - add up
+      - (-q,\ p)
+      - add the east parts and the north parts separately
+      - swap the numbers, minus on the first
+    - - check on (3, 4)
+      - (-4,3):\ \text{length }5,\ \text{dot }0
+      - a turn keeps length; zero dot product = right angle (dot product movie)
+      - it really is a quarter turn
+  kind: diagram derivation
+  data: —
+  tool: 'Remotion SVG (TurnRule90: a true rigid rotation, not a cross-fade)'
+  runner_up: —
+  why: the one tool D03, D05 (and Part 2's D14) need; owned here (split plan §3a)
+  related:
+  - &id003
+    movie: 0.1b
+    slug: ch00_dot_product_v01b
+    covers: dot product, shadow, zero dot product = right angle
+  - *id001
+  feedback:
+  - U-CO-001
+  - U-CO-003
+  - U-CO-057
+  - U-CO-100
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s11_theta_hat
+  t:
+  - 583.55
+  - 690.825
+  sentence_times:
+  - - 583.55
+    - 585.925
+  - - 586.275
+    - 591.1
+  - - 591.45
+    - 595.575
+  - - 595.925
+    - 599.925
+  - - 601.425
+    - 603.95
+  - - 604.3
+    - 608.025
+  - - 608.375
+    - 615.1
+  - - 615.45
+    - 622.275
+  - - 622.625
+    - 625.05
+  - - 625.4
+    - 631.975
+  - - 632.325
+    - 637.075
+  - - 638.575
+    - 644.3
+  - - 644.65
+    - 646.45
+  - - 647.95
+    - 653.075
+  - - 654.575
+    - 664.775
+  - - 665.125
+    - 668.525
+  - - 668.875
+    - 671.85
+  - - 672.2
+    - 681.475
+  - - 681.825
+    - 689.325
+  beat: 'derivation D03: theta-hat = (-sin theta, cos theta), checked four ways'
+  visual: 'Keyword ''turn r-hat'' from frame 0. Picture zone: a unit circle (radius drawn 300 px, slate) round the origin, r-hat at
+    theta = 53 deg with its triangle: east leg ''cos theta'' (orange solid), north leg ''sin theta'' (orange dashed), slate theta arc.
+    Maths S1-S4: r-hat = (cos theta, sin theta) with the two numbers coloured like the legs; two gold swap arrows move them (cos theta
+    to slot 2, sin theta to slot 1 gaining a rose ''-''), result theta-hat = (-sin theta, cos theta) (84 px) on AT(4,''minus sine theta,
+    cosine theta''). S5-S8: the triangle turns 90 deg rigidly (TurnRule90, 1.5 s): the ''cos theta'' leg now points north, the ''sin
+    theta'' leg now points west, their tags follow on AT(7,''now points north'') and AT(8,''now points west''); the result arrow gets
+    the tip label theta-hat. S9-S11: a point due east on the circle (theta = 0): r-hat east, theta-hat north (tangent); row ''theta
+    = 0: theta-hat = (0, 1)'' and keyword ''north''. S12-S13: due north (theta = 90 deg): theta-hat west; row ''theta = 90 deg: theta-hat
+    = (-1, 0)''. S14: back at 53 deg: ''theta-hat = (-0.8, 0.6)''. S15: CalcStack length and dot product; RightTick between r-hat and
+    theta-hat. S16-S19: zoomed inset at the balloon on its 5-km circle (soft edges): the 0.1-deg slide magnified; legs ''about 7.0 m
+    west'', ''about 5.2 m north'', the slide ''about 8.7 m''; CalcStack ''s = 5000 m x 0.001745 = 8.7 m'' then ''(-7.0, 5.2) / 8.7 =
+    (-0.80, 0.60)'' with a gold ''same'' tick to theta-hat = (-0.8, 0.6).'
+  voiceover: 'Now let''s turn r hat itself. Its east part is cosine theta, and its north part is sine theta. Using the rule, we swap
+    them and put a minus on the first. So theta hat is minus sine theta, cosine theta. [beat] Here''s the same thing as a picture. Turn
+    r hat''s little triangle by ninety degrees. Its east side, cosine theta, now points north, so cosine theta becomes the north part.
+    Its north side, sine theta, now points west, so minus sine theta becomes the east part. Let''s check that this makes sense. At theta
+    equals zero, the point is due east of the station, and theta hat is zero, one. It points north, which is the way the point slides
+    when theta grows. [beat] At ninety degrees, the point is due north, and theta hat is minus one, zero. It points west. [beat] At
+    the balloon, theta hat is minus zero point eight, zero point six. [beat] Its length is one, and its dot product with r hat is minus
+    zero point four eight plus zero point four eight, which is zero, so it''s at right angles. And one last check, with no formula at
+    all. Turn the balloon by a tenth of a degree. By the arc rule, it slides about eight point seven metres along the circle: about
+    seven metres west, and five point two metres north. Dividing each by eight point seven gives about minus zero point eight and zero
+    point six: theta hat again. [beat]'
+  on_screen_eq:
+    latex: \hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar; cartesian_from_polar_coords (0.1-deg slide)
+    params:
+      theta_deg:
+      - 0
+      - 90
+      - 53.13
+      r_m: 5000
+      dtheta_deg: 0.1
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DF09 slide (-6.99, 5.23) m,
+      length 8.73 m, direction (-0.8005, 0.5993)
+  exaggeration:
+  - the 0.1-deg slide is magnified about 40 x in the inset (said 'a tenth of a degree')
+  calc_rows:
+  - \hat{\mathbf r}=(\cos\theta,\ \sin\theta)\ \to\ \hat{\boldsymbol\theta}=(-\sin\theta,\ \cos\theta)
+  - \theta=0:\ \hat{\boldsymbol\theta}=(0,\ 1)
+  - \theta=90^\circ:\ \hat{\boldsymbol\theta}=(-1,\ 0)
+  - \theta=53^\circ:\ \hat{\boldsymbol\theta}=(-0.8,\ 0.6)
+  - '|\hat{\boldsymbol\theta}|=\sqrt{0.64+0.36}=1'
+  - \hat{\mathbf r}\cdot\hat{\boldsymbol\theta}=0.6\times(-0.8)+0.8\times0.6=-0.48+0.48=0
+  - s=5000\ \mathrm{m}\times0.001745\approx8.7\ \mathrm{m}
+  - \frac{(-7.0,\ 5.2)}{8.7}\approx(-0.80,\ 0.60)
+  derivation:
+    id: D03
+    goal: theta-hat in numbers
+    steps:
+    - - start from r-hat
+      - (\cos\theta,\ \sin\theta)
+      - s08
+      - east part cos theta, north part sin theta
+    - - apply the 90 deg rule
+      - p=\cos\theta,\ q=\sin\theta\ \to\ (-q,\ p)
+      - theta-hat is r-hat turned +90 deg (s09); the rule (s10)
+      - swap, minus on the first
+    - - result
+      - (-\sin\theta,\ \cos\theta)
+      - substitution
+      - 'the turned triangle: cos theta now north, sin theta now west'
+    - - check theta = 0 and 90 deg
+      - (0,1),\ (-1,0)
+      - cos 0 = 1, sin 0 = 0; cos 90 = 0, sin 90 = 1
+      - 'north at the east point, west at the north point: the way the point slides'
+    - - check the balloon
+      - (-0.8,\,0.6):\ \text{length }1,\ \text{dot }0
+      - unit length and right angle
+      - a unit vector at right angles to r-hat
+    - - check without the formula
+      - \Delta\theta=0.1^\circ:\ (-7.0,\,5.2)\,\mathrm{m}/8.7\,\mathrm{m}
+      - 'arc rule s = r theta (s07): 5000 m x 0.001745 rad; positions from s05'
+      - the real slide points along theta-hat
+  kind: diagram derivation
+  data: —
+  tool: Remotion SVG (TurnRule90) + house CalcStack
+  runner_up: —
+  why: 'answers U-CO-001: the formula only after its derivation, then four independent checks'
+  related: []
+  feedback:
+  - U-CO-001
+  - U-CO-003
+  - U-CO-008
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s12_arrows_depend
+  t:
+  - 690.825
+  - 730.675
+  sentence_times:
+  - - 690.825
+    - 695.35
+  - - 695.7
+    - 701.0
+  - - 701.35
+    - 705.65
+  - - 706.0
+    - 710.35
+  - - 710.7
+    - 717.475
+  - - 717.825
+    - 724.1
+  - - 724.45
+    - 729.875
+  beat: 'intuition: polar unit vectors depend on place'
+  visual: 'Keyword ''depend on where you are'' waits; frame 0 shows the station, the 5-km circle and the balloon with r-hat and theta-hat
+    (labelled). A ghost x-hat, y-hat pair (GhostArrow, labelled) sits fixed in the picture zone''s lower left. S1: the balloon glides
+    round the circle (one lap over S2-S4, eased, pausing at due east on AT(2,''Due east''), due north on AT(3,''Due north''), due west
+    on AT(4,''Due west'')); r-hat and theta-hat turn with it and keep their tip labels. Maths rows build on each pause. S5: keyword
+    ''x-hat, y-hat: never change'' beside the ghost pair. S6: keyword ''depend on where you are'' (54 px). S7: keyword ''Part 2: turning
+    arrows''.'
+  voiceover: 'Now let''s move the balloon round the circle, and watch both arrows. Due east of the station, r hat points east, and theta
+    hat points north. Due north, r hat points north, and theta hat points west. Due west, r hat points west, and theta hat points south.
+    So r hat and theta hat turn as the balloon goes round, while x hat and y hat never change. That''s the big difference between the
+    two systems: polar unit vectors depend on where you are. Keep this in mind, because these turning arrows will matter a lot in Part
+    2.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.core.coords.unit_vectors_polar
+    params:
+      theta_deg:
+      - 0
+      - 90
+      - 180
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DF10
+  exaggeration:
+  - the lap is time-compressed
+  calc_rows:
+  - '\text{east: }\hat{\mathbf r}=(1,0),\ \hat{\boldsymbol\theta}=(0,1)'
+  - '\text{north: }\hat{\mathbf r}=(0,1),\ \hat{\boldsymbol\theta}=(-1,0)'
+  - '\text{west: }\hat{\mathbf r}=(-1,0),\ \hat{\boldsymbol\theta}=(0,-1)'
+  kind: diagram animation
+  data: —
+  tool: Remotion SVG
+  runner_up: —
+  why: the central idea of curvilinear coordinates, set up for Part 2
+  related:
+  - *id002
+  feedback:
+  - U-CO-008
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s13_components
+  t:
+  - 730.675
+  - 841.525
+  sentence_times:
+  - - 730.675
+    - 734.45
+  - - 734.8
+    - 740.125
+  - - 740.475
+    - 742.95
+  - - 743.3
+    - 747.6
+  - - 747.95
+    - 750.7
+  - - 752.2
+    - 757.475
+  - - 757.825
+    - 762.375
+  - - 762.725
+    - 767.925
+  - - 768.275
+    - 775.65
+  - - 776.0
+    - 779.975
+  - - 780.325
+    - 782.225
+  - - 782.575
+    - 785.0
+  - - 785.35
+    - 788.6
+  - - 788.95
+    - 796.55
+  - - 796.9
+    - 799.325
+  - - 799.675
+    - 806.825
+  - - 807.175
+    - 812.0
+  - - 813.5
+    - 820.7
+  - - 821.05
+    - 826.85
+  - - 828.35
+    - 833.75
+  - - 834.1
+    - 840.725
+  beat: 'building block D04: a wind''s radial and tangential parts, every input on screen'
+  visual: 'Keyword ''wind in polar coordinates'' from frame 0. Picture zone (zoomed on the balloon): r-hat and theta-hat (orange, tip
+    labels for the whole scene, U-CO-008), the wind arrow bold u (teal, moving dashes) pointing east, 300 px = 10 m/s, tip label ''u''
+    (bold). S3-S5: maths row ''u = (u, v) = (10, 0) m/s'' builds on AT(3,''bold u'') and AT(5,''v is zero''). S7-S8: keywords ''radial
+    wind u_r: along r-hat'' and ''tangential wind u_theta: along theta-hat'' (KaTeX). S9-S10: dashed perpendiculars from the wind''s
+    tip to the r-hat line and the theta-hat line (the shadows), keyword ''shadow'' on AT(10,''shadow''). S11-S14 (U-CO-007): the INPUTS
+    row pinned at the top of the column for the rest of the scene: ''u = (10, 0) m/s   theta = 53 deg'' and ''r-hat = (0.6, 0.8)   theta-hat
+    = (-0.8, 0.6)'', each appearing on its own words. S15-S17: CalcStack u_r rows; on AT(17,''u sub r is six'') the radial part grows
+    along r-hat from the balloon as a teal band 6/10 of the wind''s length, tip label ''u_r = 6'' at that moment (U-CO-009); gold link
+    band -> ''6''. S18-S19: u_theta rows; on AT(19,''minus eight'') the tangential part grows along MINUS theta-hat as a rose hatched
+    band with a ''-'' glyph, tip label ''u_theta = -8'' (U-CO-009); gold link. S20: keywords ''6 m/s away'', ''8 m/s round''. S21: a
+    small clockwise arc arrow round the station (rose) and ''clockwise (seen from above)''.'
+  voiceover: 'Now let''s describe a wind in polar coordinates. Suppose that at the balloon, the wind blows due east at ten metres per
+    second. We''ll call the wind arrow bold u. Its eastward part is called u, and its northward part v. Here, u is ten and v is zero.
+    [beat] How much of this wind blows away from the station, and how much blows round it? The part along r hat is called the radial
+    wind, u sub r. The part along theta hat is called the tangential wind, u sub theta. To find each one, we take the dot product of
+    the wind with that unit vector, as in the dot product movie. It gives the length of the wind''s shadow along that arrow. Here are
+    the inputs. The wind is ten, zero. The angle theta is fifty three degrees. R hat is zero point six, zero point eight, and theta
+    hat is minus zero point eight, zero point six. First, the radial wind. Multiply the matching parts, and add: ten times zero point
+    six, plus zero times zero point eight. That''s six plus zero, so u sub r is six metres per second. [beat] Next, the tangential wind:
+    ten times minus zero point eight, plus zero times zero point six. That''s minus eight plus zero, so u sub theta is minus eight metres
+    per second. [beat] So six metres per second blow away from the station, and eight blow round it. The minus sign means the wind goes
+    round against theta hat: clockwise, as seen from above.'
+  on_screen_eq:
+    latex: u_r=\mathbf u\cdot\hat{\mathbf r},\qquad u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.core.coords.velocity_components
+    params:
+      u:
+      - 10.0
+      - 0.0
+      x:
+      - 3.0
+      - 4.0
+      system: polar
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; ../Fluid Dynamics/tests/test_ch02.py::test_polar_components_V1_equals_rotation_of_axes;
+      CHECK DF11 (6, -8)
+  exaggeration:
+  - the balloon point is zoomed so the unit arrows and the wind share one picture (no km scale shown)
+  calc_rows:
+  - \mathbf u=(u,\ v)=(10,\ 0)\ \mathrm{m/s}
+  - \mathbf u=(10,\ 0)\ \mathrm{m/s}\quad \theta=53^\circ\quad \hat{\mathbf r}=(0.6,\ 0.8)\quad \hat{\boldsymbol\theta}=(-0.8,\ 0.6)
+  - u_r=\mathbf u\cdot\hat{\mathbf r}=10\times0.6+0\times0.8=6+0=6\ \mathrm{m/s}
+  - u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}=10\times(-0.8)+0\times0.6=-8+0=-8\ \mathrm{m/s}
+  derivation:
+    id: D04
+    goal: how much of the wind blows away from the station, and how much round it
+    steps:
+    - - name the parts
+      - u_r,\ u_\theta
+      - radial = along r-hat, tangential = along theta-hat
+      - two questions, two numbers
+    - - use the dot product
+      - u_r=\mathbf u\cdot\hat{\mathbf r}
+      - the dot product with a unit vector is the shadow length (dot product movie)
+      - the part of the wind along r-hat
+    - - multiply matching parts and add
+      - 10\times0.6+0\times0.8=6
+      - definition of the dot product
+      - 6 m/s away from the station
+    - - same for theta-hat
+      - 10\times(-0.8)+0\times0.6=-8
+      - definition of the dot product
+      - '8 m/s round, against theta-hat: clockwise seen from above'
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG (house Band shadows) + CalcStack
+  runner_up: —
+  why: 'answers U-CO-007/008/009: inputs on screen, arrows labelled, components labelled as computed'
+  related:
+  - *id003
+  feedback:
+  - U-CO-007
+  - U-CO-008
+  - U-CO-009
+  - U-CO-054
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). The wind arrow has
+    moving dashes (it is a wind). Inputs row never overlaps the CalcStack (row 1 at y 120-260, CalcStack from y 300).'
+- id: s14_rebuild_general
+  t:
+  - 841.525
+  - 922.575
+  sentence_times:
+  - - 841.525
+    - 845.375
+  - - 845.725
+    - 850.775
+  - - 851.125
+    - 857.025
+  - - 858.525
+    - 865.475
+  - - 866.975
+    - 872.425
+  - - 872.775
+    - 878.0
+  - - 879.5
+    - 884.375
+  - - 884.725
+    - 891.15
+  - - 892.65
+    - 896.85
+  - - 897.2
+    - 906.275
+  - - 907.775
+    - 916.675
+  - - 918.175
+    - 921.775
+  beat: 'check D04: rebuild the wind; the general formulas'
+  visual: 'Keyword ''same wind?'' from frame 0. Picture: same zoom; the bands from s13 stay. S2-S4: tip-to-tail chain: 6 r-hat (teal
+    arrow, label ''6 r-hat'') from the balloon, then -8 theta-hat (rose arrow, label ''-8 theta-hat'') from its tip, landing on the
+    wind''s tip; gold ''same'' tick at the tip on AT(7,''ten, zero''). East parts (the chain''s horizontal legs, dashed) highlighted
+    on AT(5,''east parts''), north parts on AT(6,''north parts''). Maths: CalcStack rows 1-3 on their sentences, row 4 (length) on S8.
+    S9-S11: the general pair (84 px) built: the inputs ''(u, v)'', ''(cos theta, sin theta)'', ''(-sin theta, cos theta)'' written above
+    each dot product; older rows dim to 60 %. S12: keyword ''used on a hurricane soon''.'
+  voiceover: 'Let''s check that these two parts really make up the same wind. We rebuild it: six times r hat, plus minus eight times
+    theta hat. Six times zero point six, zero point eight is three point six, four point eight. [beat] Minus eight times minus zero
+    point eight, zero point six is six point four, minus four point eight. [beat] Adding the east parts gives three point six plus six
+    point four, which is ten. Adding the north parts gives four point eight minus four point eight, which is zero. [beat] We''re back
+    to ten, zero: the same wind, measured with new arrows. Its length agrees too: six squared plus eight squared is a hundred, and its
+    square root is ten. [beat] The same dot products work for any wind and any angle. With the wind u, v, and r hat equal to cosine
+    theta, sine theta, u sub r is u cosine theta plus v sine theta. [beat] And with theta hat equal to minus sine theta, cosine theta,
+    u sub theta is minus u sine theta plus v cosine theta. [beat] We''ll use these two lines on a real hurricane soon.'
+  on_screen_eq:
+    latex: u_r=u\cos\theta+v\sin\theta,\qquad u_\theta=-u\sin\theta+v\cos\theta
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.core.coords.velocity_components + unit_vectors_polar
+    params:
+      u:
+      - 10.0
+      - 0.0
+      theta_deg: 53.13
+    test: ../Fluid Dynamics/tests/test_ch03.py::test_coordinates_V1_unit_vectors_and_projections; CHECK DF12 6 r-hat - 8 theta-hat =
+      (10, 0) to 1e-12
+  exaggeration: []
+  calc_rows:
+  - 6\,\hat{\mathbf r}=6\,(0.6,\ 0.8)=(3.6,\ 4.8)
+  - -8\,\hat{\boldsymbol\theta}=-8\,(-0.8,\ 0.6)=(6.4,\ -4.8)
+  - (3.6+6.4,\ 4.8-4.8)=(10,\ 0)
+  - \sqrt{6^2+8^2}=\sqrt{100}=10\ \mathrm{m/s}
+  - u_r=(u,\ v)\cdot(\cos\theta,\ \sin\theta)=u\cos\theta+v\sin\theta
+  - u_\theta=(u,\ v)\cdot(-\sin\theta,\ \cos\theta)=-u\sin\theta+v\cos\theta
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG + CalcStack
+  runner_up: —
+  why: the check that nothing was lost, and the general formulas used in s24
+  related:
+  - *id003
+  feedback:
+  - U-CO-054
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s15_turn_axes
+  t:
+  - 922.575
+  - 991.575
+  sentence_times:
+  - - 922.575
+    - 926.375
+  - - 926.725
+    - 931.85
+  - - 932.2
+    - 934.125
+  - - 934.475
+    - 942.55
+  - - 942.9
+    - 945.475
+  - - 945.825
+    - 948.7
+  - - 949.05
+    - 955.3
+  - - 955.65
+    - 958.55
+  - - 958.9
+    - 963.15
+  - - 963.5
+    - 969.725
+  - - 971.225
+    - 974.3
+  - - 974.65
+    - 984.975
+  - - 985.325
+    - 990.075
+  beat: 'building block: turning the axes; x-hat-prime'
+  visual: 'Keyword ''turn the axes'' from frame 0. Picture zone: grid with origin; the balloon''s arrow (3, 4) teal; the old axes x,
+    y (orange, then 40 %). S4 on AT(4,''coastline, a runway or a valley''): a small code-drawn coastline sketch beside the grid with
+    ''along'' and ''across'' arrows (no map data), fades after S5. S5-S6: the rulers (x, y axes with their ticks) turn rigidly by 30
+    deg about the origin (1.5 s) while the arrow stays put and pulses (''same arrow''). S7: gold alpha arc from x to x'' with ''alpha'',
+    curved arrow ''anticlockwise (seen from above)''. S8-S9: x-hat-prime (orange) with its tip label (KaTeX x-hat prime); keyword ''prime
+    = new''. S10: x-hat-prime''s triangle legs ''cos alpha'', ''sin alpha'' and the row. S11-S13: rows with the numbers.'
+  voiceover: Now let's look at a second way to change coordinates. This time, we keep the origin where it is, and we just turn the axes.
+    Why would we want that? Along a coastline, a runway or a valley, it's often more useful to measure along it and across it than east
+    and north. The arrow itself stays the same. Only the rulers we measure it with turn. Say the new x axis is turned by an angle alpha,
+    anticlockwise as seen from above. We call its unit vector x hat prime. The little dash is read prime, and it marks the new axes.
+    Like r hat, it's an arrow of length one at an angle, so it's cosine alpha, sine alpha. [beat] Let's use alpha equals thirty degrees.
+    Cosine of thirty degrees is about zero point eight seven, or more exactly zero point eight six six, and sine of thirty degrees is
+    exactly one half. So x hat prime is zero point eight six six, zero point five. [beat]
+  on_screen_eq:
+    latex: \hat{\mathbf x}'=(\cos\alpha,\ \sin\alpha)
+    vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
+      read 2026-11-05)
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p069.png
+  physics_source:
+    fn: fluidpy.core.tensors.rotation_matrix_2d (first column = x-hat-prime)
+    params:
+      alpha_deg: 30.0
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes; CHECK DF13 (0.8660, 0.5000)
+  exaggeration: []
+  calc_rows:
+  - \alpha=30^\circ:\ \cos30^\circ\approx0.87\ (0.866),\quad \sin30^\circ=0.5
+  - \hat{\mathbf x}'=(0.866,\ 0.5)
+  kind: diagram
+  data: —
+  tool: Remotion SVG
+  runner_up: —
+  why: keep the arrow, turn the rulers (Part 2 uses it along a coast)
+  related:
+  - *id002
+  feedback:
+  - U-CO-086
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s16_y_prime
+  t:
+  - 991.575
+  - 1052.05
+  sentence_times:
+  - - 991.575
+    - 993.85
+  - - 994.2
+    - 1001.8
+  - - 1002.15
+    - 1011.975
+  - - 1012.325
+    - 1015.975
+  - - 1017.475
+    - 1023.875
+  - - 1025.375
+    - 1027.025
+  - - 1027.375
+    - 1033.425
+  - - 1033.775
+    - 1045.425
+  - - 1046.925
+    - 1051.25
+  beat: 'derivation D05: y-hat-prime by the 90-deg rule, drawn'
+  visual: 'Keyword ''the new y axis'' from frame 0. Picture: the turned axes with x-hat-prime; S3-S4 on AT(3,''turned by ninety degrees''):
+    x-hat-prime and its triangle turn 90 deg rigidly (TurnRule90, as in s10/s11) into y-hat-prime (orange, tip label); legs relabel
+    ''cos alpha'' north-ish, ''sin alpha'' west-ish. Maths: the swap arrows over (cos alpha, sin alpha) -> (-sin alpha, cos alpha) (84
+    px). S5: numbers row. S6-S9: checks and a RightTick between x-hat-prime and y-hat-prime; keyword ''at right angles, like the old
+    axes''.'
+  voiceover: 'What about the new y axis? It must be at right angles to the new x axis, and turned anticlockwise from it, just as north
+    is from east. So y hat prime is x hat prime turned by ninety degrees, and we already have the rule for that: swap the two numbers,
+    and put a minus on the first. That gives minus sine alpha, cosine alpha. [beat] With thirty degrees, y hat prime is minus zero point
+    five, zero point eight six six. [beat] Let''s check it. Its length is one, because zero point two five plus zero point seven five
+    is one. And its dot product with x hat prime is zero point eight six six times minus zero point five, plus zero point five times
+    zero point eight six six, which is zero. [beat] So the new axes are at right angles, just like the old ones.'
+  on_screen_eq:
+    latex: \hat{\mathbf y}'=(-\sin\alpha,\ \cos\alpha)
+    vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
+      read 2026-11-05)
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p069.png
+  physics_source:
+    fn: fluidpy.core.tensors.rotation_matrix_2d (second column = y-hat-prime)
+    params:
+      alpha_deg: 30.0
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes; ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V7_orthogonality_and_properness;
+      CHECK DF14 (-0.5, 0.8660)
+  exaggeration: []
+  calc_rows:
+  - (\cos\alpha,\ \sin\alpha)\ \to\ (-\sin\alpha,\ \cos\alpha)
+  - \alpha=30^\circ:\ \hat{\mathbf y}'=(-0.5,\ 0.866)
+  - '|\hat{\mathbf y}''|=\sqrt{0.25+0.75}=1'
+  - \hat{\mathbf x}'\cdot\hat{\mathbf y}'=0.866\times(-0.5)+0.5\times0.866=0
+  derivation:
+    id: D05
+    goal: the second new unit vector
+    steps:
+    - - what it must be
+      - \hat{\mathbf y}'\perp\hat{\mathbf x}',\ \text{anticlockwise}
+      - 'the new axes keep the old layout: north is east turned +90 deg'
+      - x-hat-prime turned a quarter turn
+    - - apply the rule
+      - p=\cos\alpha,\ q=\sin\alpha\ \to\ (-\sin\alpha,\ \cos\alpha)
+      - s10
+      - swap, minus on the first
+    - - numbers
+      - (-0.5,\ 0.866)
+      - sin 30 = 0.5, cos 30 = 0.866
+      - y-hat-prime at 30 deg
+    - - check
+      - \text{length }1,\ \text{dot }0
+      - 0.25 + 0.75 = 1; -0.433 + 0.433 = 0
+      - a unit vector at right angles
+  kind: diagram derivation
+  data: —
+  tool: Remotion SVG (TurnRule90)
+  runner_up: —
+  why: 'answers U-CO-084: y-hat-prime derived and drawn'
+  related: []
+  feedback:
+  - U-CO-084
+  - U-CO-086
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). The check row shows
+    only ''= 0'' (the intermediate -0.433 + 0.433 is not spoken, so not written).'
+- id: s17_new_components
+  t:
+  - 1052.05
+  - 1155.85
+  sentence_times:
+  - - 1052.05
+    - 1057.075
+  - - 1057.425
+    - 1061.375
+  - - 1061.725
+    - 1067.625
+  - - 1067.975
+    - 1074.55
+  - - 1074.9
+    - 1081.65
+  - - 1083.15
+    - 1091.575
+  - - 1093.075
+    - 1099.575
+  - - 1099.925
+    - 1106.025
+  - - 1106.375
+    - 1110.375
+  - - 1111.875
+    - 1118.35
+  - - 1118.7
+    - 1124.5
+  - - 1126.0
+    - 1132.1
+  - - 1132.45
+    - 1134.375
+  - - 1134.725
+    - 1140.675
+  - - 1141.025
+    - 1145.75
+  - - 1147.25
+    - 1149.2
+  - - 1149.55
+    - 1155.05
+  beat: 'derivation D06: x'', y'' as shadows on the new rulers; (3, 4) -> (4.6, 1.96)'
+  visual: 'Keyword ''new coordinates x'', y'''' from frame 0. Picture: the turned axes x'', y'' (orange, with km ticks along them) and
+    the arrow (3, 4) (teal). S3-S4: dashed perpendicular from the tip to the x'' axis; teal band along x'' from the origin to the foot
+    (the shadow), keyword ''shadow on the new x axis''. S5: maths row x'' = ...; S6: dashed perpendicular to y'', band along y'', row
+    y'' = .... S7 (U-CO-007 rule): INPUTS row pinned ''x = 3, y = 4, alpha = 30 deg'' (+ ''cos 30 = 0.866, sin 30 = 0.5''). S8-S9: CalcStack
+    x'' row; on AT(9,''about four point six'') the band''s tip label ''x'' = 4.6'' appears, gold link. S10-S11: y'' row; label ''y''
+    = 1.96'' on its words. S12: ''(x'', y'') = (4.6, 1.96)'' at the arrow''s tip in the new axes. S13-S15: length row with the arrow
+    pulsing; S16-S17: keyword ''same arrow, new numbers''.'
+  voiceover: 'Now we can measure the balloon''s arrow, three, four, with the new rulers. Its new coordinates are called x prime and
+    y prime. X prime answers one question: how much of the arrow lies along the new x axis? That''s the length of the arrow''s shadow
+    on that axis, which is its dot product with x hat prime. Multiply the matching parts, and add: x times cosine alpha, plus y times
+    sine alpha. [beat] In the same way, y prime is the dot product with y hat prime: minus x sine alpha, plus y cosine alpha. [beat]
+    Now the numbers, with x equals three, y equals four, and alpha equals thirty degrees. X prime is three times zero point eight six
+    six, plus four times zero point five. That''s two point six plus two, about four point six. [beat] Y prime is minus three times
+    zero point five, plus four times zero point eight six six. That''s minus one point five plus three point four six, about one point
+    nine six. [beat] So in the turned axes, the balloon is at about four point six, one point nine six. Is it the same arrow? Its length
+    is the square root of four point six squared plus one point nine six squared. That''s the square root of twenty five: five kilometres,
+    as before. [beat] The arrow didn''t move. Only the numbers that describe it changed, because we measure it with different rulers.'
+  on_screen_eq:
+    latex: x'=x\cos\alpha+y\sin\alpha,\qquad y'=-x\sin\alpha+y\cos\alpha
+    vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
+      read 2026-11-05)
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p069.png
+  physics_source:
+    fn: fluidpy.core.tensors.rotation_matrix_2d + transform_vector (x' = C^T x)
+    params:
+      alpha_deg: 30.0
+      x:
+      - 3.0
+      - 4.0
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes; CHECK DF15 (4.598, 1.964), |x'| = 5
+      to 1e-12
+  exaggeration: []
+  calc_rows:
+  - x'=(x,\ y)\cdot(\cos\alpha,\ \sin\alpha)=x\cos\alpha+y\sin\alpha
+  - y'=(x,\ y)\cdot(-\sin\alpha,\ \cos\alpha)=-x\sin\alpha+y\cos\alpha
+  - x=3,\ \ y=4,\ \ \alpha=30^\circ
+  - x'=3\times0.866+4\times0.5=2.60+2=4.60
+  - y'=-3\times0.5+4\times0.866=-1.5+3.46=1.96
+  - \sqrt{4.6^2+1.96^2}=\sqrt{25}=5\ \mathrm{km}
+  derivation:
+    id: D06
+    goal: the arrow's coordinates in the turned axes
+    steps:
+    - - ask the question
+      - x'=\text{part along }\hat{\mathbf x}'
+      - a coordinate is how far along its axis the arrow reaches
+      - the shadow on the new x axis
+    - - dot product
+      - (x,y)\cdot(\cos\alpha,\sin\alpha)
+      - shadow on a unit vector = dot product (dot product movie, Kundu (2.4))
+      - same move as s13
+    - - multiply out
+      - x\cos\alpha+y\sin\alpha
+      - definition of the dot product
+      - x prime
+    - - same with y-hat-prime
+      - -x\sin\alpha+y\cos\alpha
+      - s16 gave y-hat-prime
+      - y prime
+    - - numbers
+      - (4.60,\ 1.96)
+      - x = 3, y = 4, alpha = 30 deg
+      - the balloon in the turned axes
+    - - check
+      - \sqrt{25}=5
+      - a turn does not change length
+      - the same arrow
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG (shadow bands) + CalcStack
+  runner_up: —
+  why: 'answers U-CO-085: what x'', y'' are and why dot products (both terms non-zero, unlike build 1''s east wind)'
+  related:
+  - *id003
+  feedback:
+  - U-CO-085
+  - U-CO-086
+  - U-CO-007
+  - U-CO-054
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). Example changed from
+    build 1''s east wind (10, 0) to the balloon''s arrow (3, 4) so that both terms of each line are non-zero.'
+- id: s18_matrix
+  t:
+  - 1155.85
+  - 1240.05
+  sentence_times:
+  - - 1155.85
+    - 1159.7
+  - - 1160.05
+    - 1166.5
+  - - 1166.85
+    - 1170.6
+  - - 1170.95
+    - 1178.525
+  - - 1178.875
+    - 1185.9
+  - - 1186.25
+    - 1189.025
+  - - 1189.375
+    - 1194.925
+  - - 1195.275
+    - 1199.875
+  - - 1200.225
+    - 1209.275
+  - - 1210.775
+    - 1213.825
+  - - 1214.175
+    - 1219.875
+  - - 1220.225
+    - 1226.575
+  - - 1226.925
+    - 1229.825
+  - - 1230.175
+    - 1239.25
+  beat: 'derivation D07: line the two equations up -> the rotation matrix; direction cosines'
+  visual: 'Keyword ''line them up'' from frame 0. Full width maths, a small picture top-left. S1-S2: the two lines from s17 slide into
+    an aligned block: x-terms in one column, y-terms in another (x-terms tinted warm white, y-terms slate), aligned at ''=''. S3-S4:
+    the four coefficients get gold underlines one by one on their words, then lift out into a 2 x 2 square in brackets beside the column
+    (x, y) (animated, 1.5 s), giving the matrix equation (84 px). S5: keyword ''rotation matrix''. S6-S8: row-times-column: the top
+    row highlighted, gold arcs from cos alpha to x and from sin alpha to y, ''+''; then the bottom row likewise. S9: numbers row (68
+    px). S10-S13: picture zone: x-hat, y-hat, x-hat-prime, y-hat-prime from the origin; on AT(14,''For example'') the angle alpha between
+    x-hat-prime and x-hat is shaded gold and gold-linked to the top-left entry; keyword ''direction cosines'' (54 px). Each entry gets
+    a tiny angle tag under it: ''alpha'', ''90 deg - alpha'', ''90 deg + alpha'', ''alpha'' (keywords, not spoken beyond the example:
+    they are angle labels).'
+  voiceover: 'These two lines have the same shape, so let''s line them up. Write x prime above y prime, with the x terms in one column
+    and the y terms in the other. Now look at just the four numbers in front of x and y. The top row is cosine alpha and sine alpha,
+    and the bottom row is minus sine alpha and cosine alpha. That square of four numbers is called a rotation matrix, because it turns
+    old coordinates into new ones. To use it, go along one row. Multiply its first number by x, and its second number by y, then add.
+    The top row gives x prime, and the bottom row gives y prime. With our numbers, the top row gives zero point eight six six times
+    three, plus zero point five times four: four point six again. [beat] Each of the four numbers has a meaning, too. The dot product
+    of two arrows of length one is the cosine of the angle between them. So each number is the cosine of the angle between one new axis
+    and one old axis. That''s why they''re called direction cosines. For example, the angle between x hat prime and x hat is alpha,
+    so their dot product is cosine alpha: the top left number.'
+  on_screen_eq:
+    latex: \begin{pmatrix}x'\\ y'\end{pmatrix}=\begin{pmatrix}\cos\alpha & \sin\alpha\\ -\sin\alpha & \cos\alpha\end{pmatrix}\begin{pmatrix}x\\
+      y\end{pmatrix}
+    vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
+      read 2026-11-05)
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p069.png
+  physics_source:
+    fn: 'fluidpy.core.tensors.rotation_matrix_2d (transposed: the table that multiplies (x, y) is C^T)'
+    params:
+      alpha_deg: 30.0
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes; CHECK DF16 C^T(30 deg) @ (3, 4) = (4.598,
+      1.964)
+  exaggeration: []
+  calc_rows:
+  - \begin{aligned}x'&=\ \ \cos\alpha\,x+\sin\alpha\,y\\ y'&=-\sin\alpha\,x+\cos\alpha\,y\end{aligned}
+  - \begin{pmatrix}0.866 & 0.5\\ -0.5 & 0.866\end{pmatrix}\begin{pmatrix}3\\ 4\end{pmatrix}:\ \ 0.866\times3+0.5\times4=4.60
+  - \hat{\mathbf x}'\cdot\hat{\mathbf x}=\cos\alpha
+  derivation:
+    id: D07
+    goal: where the rotation matrix comes from
+    steps:
+    - - line the equations up
+      - x'=cos a x + sin a y; y'=-sin a x + cos a y
+      - 'same shape: a number times x plus a number times y'
+      - two rows, two columns
+    - - collect the four numbers
+      - \begin{pmatrix}\cos\alpha&\sin\alpha\\-\sin\alpha&\cos\alpha\end{pmatrix}
+      - they are all that changes with alpha
+      - the rotation matrix
+    - - row times column
+      - 0.866\times3+0.5\times4=4.60
+      - 'this is how the table is used: along a row, times the old coordinates, add'
+      - the top row gives x' again
+    - - meaning of the numbers
+      - \hat{\mathbf x}'\cdot\hat{\mathbf x}=\cos\alpha
+      - dot product of two unit vectors = cosine of the angle between them (dot product movie)
+      - direction cosines
+  kind: equation build
+  data: —
+  tool: Remotion Layered TeX (house tex kit) + small SVG
+  runner_up: —
+  why: 'answers U-CO-087: the matrix appears only as the two lines lined up'
+  related: []
+  feedback:
+  - U-CO-087
+  - U-CO-086
+  - U-CO-057
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). Matrix equation centred
+    in x 1060-1840; the picture x 80-1000 from frame 0 (halves gate).'
+- id: s19_index_form
+  t:
+  - 1240.05
+  - 1380.125
+  sentence_times:
+  - - 1240.05
+    - 1245.75
+  - - 1246.1
+    - 1248.8
+  - - 1249.15
+    - 1251.025
+  - - 1251.375
+    - 1256.425
+  - - 1256.775
+    - 1266.825
+  - - 1267.175
+    - 1270.95
+  - - 1271.3
+    - 1277.525
+  - - 1277.875
+    - 1280.0
+  - - 1280.35
+    - 1285.25
+  - - 1286.75
+    - 1292.1
+  - - 1293.6
+    - 1298.475
+  - - 1299.975
+    - 1305.275
+  - - 1306.775
+    - 1312.375
+  - - 1312.725
+    - 1321.2
+  - - 1321.55
+    - 1328.6
+  - - 1328.95
+    - 1333.525
+  - - 1335.025
+    - 1341.875
+  - - 1342.225
+    - 1347.15
+  - - 1348.65
+    - 1352.975
+  - - 1353.325
+    - 1362.15
+  - - 1362.5
+    - 1369.6
+  - - 1369.95
+    - 1379.325
+  beat: 'derivation D08: x''_j = x_i C_ij, all four C''s computed, j = 1 and 2 written out'
+  visual: 'Keyword ''index notation'' from frame 0; picture zone from frame 0: the origin with x-hat, y-hat, x-hat-prime, y-hat-prime.
+    S3-S5: the names table builds (three rows), and the picture''s tip labels change to e_1, e_2, e''_1, e''_2 (KaTeX) on their words.
+    S6-S7: ''C_ij = e_i . e''_j'' (84 px) with gold labels ''old i'', ''new j''. S9-S12: a 2 x 2 grid (no box: thin slate lines) with
+    row labels e_1, e_2 (old) and column labels e''_1, e''_2 (new); each cell fills on its words with its dot product written small
+    above the result (inputs on screen: ''(1, 0) . (cos alpha, sin alpha) = cos alpha'', ''(1, 0) . (-sin alpha, cos alpha) = -sin alpha'',
+    ''(0, 1) . (cos alpha, sin alpha) = sin alpha'', ''(0, 1) . (-sin alpha, cos alpha) = cos alpha''); the two arrows of each dot product
+    pulse in the picture. S13-S14: ''x''_j = x_i C_ij'' (84 px) and keyword ''i repeated -> add i = 1, 2''. S15-S16: the j = 1 row;
+    column 1 of the grid highlighted gold; gold ''same'' tick to a small recall of s17''s x'' line. S17-S18: the j = 2 row; column 2
+    highlighted; ''same'' tick to y''. S19: keyword ''same two lines''. S20-S21: the grid flips over its diagonal (animated, 1 s) and
+    matches s18''s matrix (shown small beside it), keyword ''same four numbers, read down the columns''. S22: keyword ''more: Tensors
+    made easy'' (54 px).'
+  voiceover: 'In the vectors movie, we met index notation, a short way to write all of this. Let''s rewrite it one step at a time. First,
+    the names. The old coordinates x and y become x sub one and x sub two. The old unit vectors x hat and y hat become e sub one and
+    e sub two, and the new ones become e prime sub one and e prime sub two. Next, each direction cosine gets two labels. C sub i j is
+    the dot product of old arrow number i with new arrow number j. Let''s work out all four. C one one is x hat dot x hat prime, which
+    is cosine alpha. [beat] C one two is x hat dot y hat prime, which is minus sine alpha. [beat] C two one is y hat dot x hat prime,
+    which is sine alpha. [beat] And C two two is y hat dot y hat prime, which is cosine alpha. [beat] Now the rule: new coordinate number
+    j is x sub i times C sub i j. The index i appears twice, so, as in the vectors movie, we add up the terms for i equals one and i
+    equals two. For j equals one, that''s x sub one times C one one, plus x sub two times C two one. That''s x cosine alpha plus y sine
+    alpha: our x prime. [beat] For j equals two, it''s x sub one times C one two, plus x sub two times C two two. That''s minus x sine
+    alpha plus y cosine alpha: our y prime. [beat] So the short line says exactly what our two long lines say. If we set the four C''s
+    in a square, with i for the row and j for the column, we get our rotation matrix flipped over its diagonal. That''s only because
+    this form reads down the columns instead of along the rows, and the four numbers are the same. The same rule works in three dimensions,
+    and for things called tensors, which have their own movie later in this series: Tensors made easy.'
+  on_screen_eq:
+    latex: x'_j=x_i\,C_{ij},\qquad C_{ij}=\mathbf e_i\cdot\mathbf e'_j
+    vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
+      read 2026-11-05)
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p069.png
+  physics_source:
+    fn: fluidpy.core.tensors.direction_cosines(E_old, E_new) + transform_vector
+    params:
+      alpha_deg: 30.0
+      E_old: identity
+      E_new: rows x-hat-prime, y-hat-prime
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_direction_cosines_V1_columns_are_new_axes; CHECK DF17 C = direction_cosines = rotation_matrix_2d(30
+      deg); x_i C_ij = (4.598, 1.964)
+  exaggeration: []
+  calc_rows:
+  - x\to x_1,\ \ y\to x_2
+  - \hat{\mathbf x}\to\mathbf e_1,\ \ \hat{\mathbf y}\to\mathbf e_2,\ \ \hat{\mathbf x}'\to\mathbf e'_1,\ \ \hat{\mathbf y}'\to\mathbf
+    e'_2
+  - C_{11}=\hat{\mathbf x}\cdot\hat{\mathbf x}'=(1,0)\cdot(\cos\alpha,\sin\alpha)=\cos\alpha
+  - C_{12}=\hat{\mathbf x}\cdot\hat{\mathbf y}'=(1,0)\cdot(-\sin\alpha,\cos\alpha)=-\sin\alpha
+  - C_{21}=\hat{\mathbf y}\cdot\hat{\mathbf x}'=(0,1)\cdot(\cos\alpha,\sin\alpha)=\sin\alpha
+  - C_{22}=\hat{\mathbf y}\cdot\hat{\mathbf y}'=(0,1)\cdot(-\sin\alpha,\cos\alpha)=\cos\alpha
+  - j=1:\ x'_1=x_1C_{11}+x_2C_{21}=x\cos\alpha+y\sin\alpha
+  - j=2:\ x'_2=x_1C_{12}+x_2C_{22}=-x\sin\alpha+y\cos\alpha
+  derivation:
+    id: D08
+    goal: read x'_j = x_i C_ij slowly and see it is our two lines
+    steps:
+    - - rename
+      - x_1,x_2;\ \mathbf e_1,\mathbf e_2;\ \mathbf e'_1,\mathbf e'_2
+      - index notation (vectors movie)
+      - numbers instead of letters
+    - - define C
+      - C_{ij}=\mathbf e_i\cdot\mathbf e'_j
+      - a direction cosine for each old-new pair (s18)
+      - four numbers
+    - - compute the four
+      - \cos\alpha,\ -\sin\alpha,\ \sin\alpha,\ \cos\alpha
+      - dot products of (1,0), (0,1) with s15-s16's arrows
+      - the table
+    - - read the rule
+      - x'_j=x_i C_{ij}
+      - a repeated index is summed (Einstein convention, vectors movie)
+      - add over i = 1, 2
+    - - j = 1
+      - x\cos\alpha+y\sin\alpha
+      - substitute C_11, C_21
+      - x prime
+    - - j = 2
+      - -x\sin\alpha+y\cos\alpha
+      - substitute C_12, C_22
+      - y prime
+    - - compare with s18
+      - C=R^{\mathsf T}
+      - the index form reads down column j; the s18 table is read along rows
+      - same four numbers, flipped over the diagonal
+  kind: equation build + diagram
+  data: —
+  tool: Remotion Layered TeX + SVG grid
+  runner_up: —
+  why: 'answers U-CO-088: every symbol named, all four C''s computed, both j written out'
+  related:
+  - *id001
+  - movie: T08
+    slug: Tensors made easy (planned, v6 pos 104)
+    covers: tensors and x'_j = x_i C_ij in full
+  feedback:
+  - U-CO-088
+  - U-CO-086
+  - U-CO-099
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). The grid has thin slate
+    rules only (no box). ''more: Tensors made easy'' is a keyword line, not a card; the voice says the title.'
+- id: s20_polar_is_turned
+  t:
+  - 1380.125
+  - 1493.9
+  sentence_times:
+  - - 1380.125
+    - 1383.1
+  - - 1383.45
+    - 1391.05
+  - - 1391.4
+    - 1396.55
+  - - 1396.9
+    - 1402.375
+  - - 1403.875
+    - 1410.125
+  - - 1410.475
+    - 1415.75
+  - - 1416.1
+    - 1419.625
+  - - 1419.975
+    - 1426.575
+  - - 1428.075
+    - 1435.575
+  - - 1437.075
+    - 1441.575
+  - - 1441.925
+    - 1445.6
+  - - 1445.95
+    - 1451.375
+  - - 1451.725
+    - 1455.7
+  - - 1457.2
+    - 1462.95
+  - - 1463.3
+    - 1467.775
+  - - 1469.275
+    - 1479.925
+  - - 1480.275
+    - 1482.45
+  - - 1482.8
+    - 1487.075
+  - - 1487.425
+    - 1493.1
+  beat: 'derivation D09: polar parts are turned-axes coordinates (alpha = theta)'
+  visual: 'Keyword ''alpha = theta'' from frame 0. Picture: the balloon at 53 deg on its circle with r-hat and theta-hat (labelled);
+    the turned axes x'', y'' through the station at alpha = 0 at first. S2: alpha grows to 53 deg (gold arc) so that the x'' axis passes
+    through the balloon; S3-S4: copies of x-hat-prime and y-hat-prime slide along the x'' axis to the balloon and land on r-hat and
+    theta-hat with gold ''same'' ticks on their words. S5-S6: keyword ''polar parts = turned-axes coordinates''. S7-S10 (U-CO-007):
+    inputs row ''u = (10, 0) m/s, alpha = 53 deg: cos = 0.6, sin = 0.8'' pinned; CalcStack x'', y'' for the wind; gold ''same'' ticks
+    to ''u_r = 6'', ''u_theta = -8'' recalled small from s13. S11-S16: the position arrow (3, 4) (teal): rows; the arrow lies exactly
+    on the x'' axis, tag ''5 along r-hat, 0 along theta-hat''. S17-S19: three places on the circle (theta = 0, 53, 150 deg) each with
+    its own small turned-axes pair; keywords ''turned axes: one angle for the whole map'' and ''polar: theta changes from place to place''.'
+  voiceover: 'Here''s a nice link between the two ideas. Go back to the balloon, at fifty three degrees, and turn the axes by alpha
+    equals theta, fifty three degrees. Then x hat prime is cosine theta, sine theta, which is r hat. And y hat prime is minus sine theta,
+    cosine theta, which is theta hat. [beat] So r hat and theta hat are just the east and north arrows, turned by the angle theta. That
+    means the polar parts of any arrow are its coordinates in turned axes. Let''s check with the east wind, ten, zero. X prime is ten
+    times zero point six, plus zero times zero point eight, which is six. [beat] Y prime is minus ten times zero point eight, plus zero
+    times zero point six, which is minus eight. [beat] Those are exactly u sub r and u sub theta from before. Now the balloon''s own
+    position arrow, three, four. X prime is three times zero point six, plus four times zero point eight. That''s one point eight plus
+    three point two, which is five. [beat] Y prime is minus three times zero point eight, plus four times zero point six. That''s minus
+    two point four plus two point four, which is zero. [beat] So the balloon is at five, zero in these axes: five kilometres along r
+    hat, and nothing along theta hat, because r hat points straight at the balloon. There''s one difference, though. With turned axes,
+    we choose one angle for the whole map. With polar coordinates, the angle is theta, so it changes from place to place.'
+  on_screen_eq:
+    latex: \alpha=\theta:\quad \hat{\mathbf x}'=\hat{\mathbf r},\quad \hat{\mathbf y}'=\hat{\boldsymbol\theta}
+    vallis_eq: none in Vallis; Kundu (2.4) x . e'_1 = x'_1 and (2.5) x'_j = x_i C_ij, C_ij = e_i . e'_j (page image ../Fluid Dynamics/chapters/pages/ch02/p069.png
+      read 2026-11-05)
+    page_png: ../Fluid Dynamics/chapters/pages/ch02/p069.png
+  physics_source:
+    fn: fluidpy.core.tensors.rotation_matrix_2d(theta) + transform_vector; fluidpy.core.coords.velocity_components
+    params:
+      theta_deg: 53.13
+      u:
+      - 10.0
+      - 0.0
+      x:
+      - 3.0
+      - 4.0
+    test: ../Fluid Dynamics/tests/test_ch02.py::test_polar_components_V1_equals_rotation_of_axes; CHECK DF18 C^T(53.13 deg) @ (10, 0)
+      = (6, -8) = velocity_components; @ (3, 4) = (5, 0)
+  exaggeration: []
+  calc_rows:
+  - \alpha=53^\circ:\ \hat{\mathbf x}'=(\cos\theta,\ \sin\theta)=\hat{\mathbf r},\ \ \hat{\mathbf y}'=(-\sin\theta,\ \cos\theta)=\hat{\boldsymbol\theta}
+  - \mathbf u=(10,\ 0):\ x'=10\times0.6+0\times0.8=6,\quad y'=-10\times0.8+0\times0.6=-8
+  - (3,\ 4):\ x'=3\times0.6+4\times0.8=1.8+3.2=5
+  - y'=-3\times0.8+4\times0.6=-2.4+2.4=0
+  derivation:
+    id: D09
+    goal: see that polar components are a rotation by theta
+    steps:
+    - - set alpha = theta
+      - \hat{\mathbf x}'=\hat{\mathbf r},\ \hat{\mathbf y}'=\hat{\boldsymbol\theta}
+      - s15-s16 with alpha = theta give s08 and s11's arrows
+      - the polar arrows are turned axes
+    - - components
+      - (u_r,\,u_\theta)=(x',\,y')
+      - both are dot products with the same two unit vectors
+      - the same numbers
+    - - 'check: the wind'
+      - (6,\,-8)
+      - s13
+      - identical
+    - - 'check: the position'
+      - (5,\,0)
+      - r-hat points at the balloon
+      - all along r-hat
+    - - the one difference
+      - \alpha=\text{const}\ \text{vs}\ \theta(x,y)
+      - polar axes turn by the local angle
+      - they change from place to place
+  kind: diagram + calc
+  data: —
+  tool: Remotion SVG + CalcStack
+  runner_up: —
+  why: 'answers U-CO-089: the link said with the balloon''s numbers'
+  related: []
+  feedback:
+  - U-CO-089
+  - U-CO-054
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18).'
+- id: s21_ian_polar
+  t:
+  - 1493.9
+  - 1556.725
+  sentence_times:
+  - - 1493.9
+    - 1497.325
+  - - 1497.675
+    - 1509.6
+  - - 1509.95
+    - 1518.65
+  - - 1519.0
+    - 1526.525
+  - - 1526.875
+    - 1530.05
+  - - 1530.4
+    - 1534.275
+  - - 1534.625
+    - 1543.075
+  - - 1543.425
+    - 1547.3
+  - - 1547.65
+    - 1555.925
+  beat: 'application: Ian in polar coordinates (PENDING DATA REPORT)'
+  visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Full-width map (projection of
+    the product; Lambert conformal for HRRR) of SW Florida 24-29.5 N, 85-79.5 W: 10-m wind speed shaded (cmocean ''speed'', 0-50 m/s),
+    streaklines animated (moving only while S2-S4 speak), NE 10 m coast and state lines; the GOES-16 true colour (18:01 UTC, contrast-stretched
+    as in fix loop 1) faint underneath. Map x 80-1380, y 40-800; colour bar 0-50 m/s with unit beside the map in the column (never on
+    it, every zoom state); source line below. S4 on AT(4,''eastward part u''): one wind arrow at a point south of the eye split into
+    its east leg ''u'' (orange solid) and north leg ''v'' (orange dashed) with KaTeX tags. S5 on AT(5,''the eye''): keyword ''eye''.
+    S6 on AT(6,''zoom in''): MapCamera zooms to 60 km round the CENTRE FIXED BY THE DATA REPORT (U-CO-010: the clear eye in the GOES
+    image and the calm in the wind field sit at the middle of the frame); gold centre dot; km ticks re-labelled; soft frame edges while
+    zoomed. S7: area labels ''Gulf of Mexico'' (italic water) and ''southwest Florida'' on their words. S8: keyword ''strongest winds''
+    with a gold link to the ring of highest speed. S9: a polar grid centred on the eye fades in (rings every 10 km, spokes every 30
+    deg, slate), one point with its ''r'' line (teal) and ''theta'' arc from east (slate).'
+  voiceover: 'Now let''s take polar coordinates to a real storm. Here is Hurricane Ian on the twenty eighth of September, twenty twenty-two,
+    at six in the evening, universal time, an hour before it came ashore on the southwest coast of Florida. The colours show the wind
+    speed ten metres above the ground, from a weather model analysis with grid points every three kilometres. Like most weather data,
+    it gives each wind as two numbers: its eastward part u, and its northward part v. The calm centre of the storm is called the eye.
+    Let''s put the origin in the middle of the eye, and zoom in. The eye sits just off the coast, over the warm Gulf of Mexico, with
+    the flat, low land of southwest Florida to its east. Round the eye, the winds are the strongest in the storm. Now every point round
+    the eye gets its polar coordinates: its distance r from the centre, and its angle theta from east.'
+  on_screen_eq:
+    latex: (r,\ \theta)
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_centre (or the data report's centre method) + storm_relative_wind (curvilinear path)
+    params:
+      storm: data_block
+      time: 2022-09-28T18
+      radii_km:
+      - 25
+      n_az: 72
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_storm_centre_V1_paraboloid_recovered_exactly, ::test_real_era5_V5_centre_near_ibtracs_and_cyclonic_inflow;
+      ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK
+      DF20 centre = data report centre (distance to IBTrACS 18 UTC < 5 km, stated)
+  exaggeration:
+  - streaklines time-compressed (about 10 min of flow in 4 s)
+  - zoom x6 with re-labelled km ticks
+  kind: real data map + zoom
+  data: data_block (HRRR-zarr-ian2022; GOES16-ABI-ian2022; IBTrACS-v04r01) — PENDING
+  tool: Remotion SVG/canvas map (d3-geo) + house MapCamera; streaklines precomputed (fluidpy.diag.trajectories.advect_on_sphere)
+  runner_up: the data report's recommended renderer/product (U-CO-028)
+  why: the eye at the middle of the frame (U-CO-010) and u, v named before they are used (U-CO-013)
+  related:
+  - movie: '#3'
+    slug: ch00_cross_product_uses
+    covers: hurricane spin sense by hemisphere
+  - *id004
+  pending_data: true
+  feedback:
+  - U-CO-010
+  - U-CO-022
+  - U-CO-025
+  - U-CO-026
+  - U-CO-027
+  - U-CO-028
+  layout: 'SourceBelow ''Data: <product> (NOAA) · GOES-16 (NOAA, contrast enhanced) · 28 Sep 2022, 18 UTC · centre: <method>'' fully
+    below the map (y <= 860). Colour bar beside the map. ZOOM TOUR: the place is centred and labelled within 1 s of being spoken; the
+    zoom-out happens at the start of s25 (the camera returns to this scene''s start view before the curves).'
+- id: s22_spin_inflow
+  t:
+  - 1556.725
+  - 1657.95
+  sentence_times:
+  - - 1556.725
+    - 1560.225
+  - - 1560.575
+    - 1564.35
+  - - 1564.7
+    - 1569.15
+  - - 1569.5
+    - 1578.65
+  - - 1579.0
+    - 1586.0
+  - - 1586.35
+    - 1591.45
+  - - 1592.95
+    - 1605.0
+  - - 1605.35
+    - 1611.325
+  - - 1612.825
+    - 1620.05
+  - - 1620.4
+    - 1625.55
+  - - 1627.05
+    - 1632.525
+  - - 1632.875
+    - 1635.5
+  - - 1635.85
+    - 1643.9
+  - - 1644.25
+    - 1651.8
+  - - 1653.3
+    - 1657.15
+  beat: 'application: ring means 37 round, -12.5 in (PENDING DATA REPORT)'
+  visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Zoomed map continues (colour
+    bar beside, source below). S1-S3: at one ring point a teal tangential arrow and a rose radial arrow (pointing at the eye) with KaTeX
+    tags ''u_theta'', ''u_r'' on their words. S4 on AT(4,''twenty five kilometres''): the 25-km ring draws (teal) with a ''25 km'' radius
+    tag; 72 small dots appear round it on AT(4,''seventy two points''). S5: maths row ''average = sum of the 72 values / 72''. S6: the
+    ring-mean arrows at one ring point (Must 4: the radial arrow >= 90 px, rose, pointing at the eye; tangential teal, to the same m/s
+    scale); ''37 m/s'' flies into the column as a SideCallout whose link leaves from its own left edge (Must 5). S7: CalcStack ''37
+    x 3.6 = 133 = about 130 km/h'' (S7-S8; on ''multiply by three point six'' the ''3600 s / 1000 m'' reason appears small under it).
+    S9: anticlockwise arc arrow on the ring + keyword ''anticlockwise (seen from above) · northern hemisphere''. S10-S11: ''-12.5 m/s''
+    (rose, ''-'' glyph) + ''in'', SideCallout. S12-S14: slate ''official estimate: 135 kt'' then ''135 x 1.85 = about 250 km/h'' (Should
+    4). S15: keyword ''the analysis smooths the peak''.'
+  voiceover: 'Every wind on the map now has two polar parts. The radial wind, u sub r, blows in or out. The tangential wind, u sub theta,
+    blows round the eye. Let''s draw a ring twenty five kilometres from the centre, and work out both parts at seventy two points round
+    it, one every five degrees. Then we average each part round the ring: we add up the seventy two values, and divide by seventy two.
+    The tangential wind averages about thirty seven metres per second. [beat] To turn metres per second into kilometres per hour, we
+    multiply by three point six, because an hour has three thousand six hundred seconds, and a kilometre has a thousand metres. So thirty
+    seven metres per second is about a hundred and thirty kilometres per hour. [beat] The air goes round anticlockwise, as seen from
+    above, as in every northern hemisphere hurricane. The radial wind averages about minus twelve and a half metres per second. [beat]
+    The minus sign means that, on average, the air is flowing in, towards the eye. The real storm was even stronger. The official estimate
+    of its strongest wind at that hour, averaged over a minute, is about a hundred and thirty five knots. One knot is one point eight
+    five kilometres per hour, so that''s about two hundred and fifty kilometres per hour. [beat] The model analysis smooths out the
+    strongest winds.'
+  on_screen_eq:
+    latex: \text{average}=\frac{\text{sum of the 72 values}}{72}
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (ring means of u_r, u_theta at 25 km, 72 azimuths)
+    params:
+      storm: data_block
+      radii_km:
+      - 25
+      n_az: 72
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK
+      DF21 v_t, v_r ring means (data_block); DF22 IBTrACS 135 kt at 18 UTC; 1 kt = 1.852 km/h
+  exaggeration:
+  - ring-mean arrows drawn at one ring point to a common m/s scale (stated in the manifest)
+  calc_rows:
+  - \overline{u_\theta}\approx37\ \mathrm{m/s}
+  - 37\times3.6\approx133\approx130\ \mathrm{km/h}
+  - \overline{u_r}\approx-12.5\ \mathrm{m/s}
+  - 135\ \mathrm{kt}\times1.85\approx250\ \mathrm{km/h}
+  kind: real data map + calc
+  data: data_block — PENDING
+  tool: Remotion SVG map + house SideCallout/CalcStack
+  runner_up: —
+  why: the two numbers hurricane scientists use, with every conversion shown
+  related:
+  - *id004
+  pending_data: true
+  feedback:
+  - U-CO-022
+  - U-CO-054
+  layout: Readouts in the column x 1500-1840; links leave from their text's left edge and never cross (Must 5); colour bar beside the
+    map; SourceBelow.
+- id: s23_what_numbers_mean
+  t:
+  - 1657.95
+  - 1776.875
+  sentence_times:
+  - - 1657.95
+    - 1661.8
+  - - 1662.15
+    - 1666.075
+  - - 1666.425
+    - 1670.225
+  - - 1670.575
+    - 1675.15
+  - - 1675.5
+    - 1685.4
+  - - 1686.9
+    - 1690.125
+  - - 1690.475
+    - 1698.65
+  - - 1700.15
+    - 1703.875
+  - - 1704.225
+    - 1712.05
+  - - 1712.4
+    - 1722.375
+  - - 1723.875
+    - 1735.95
+  - - 1737.45
+    - 1741.7
+  - - 1742.05
+    - 1750.375
+  - - 1751.875
+    - 1755.875
+  - - 1756.225
+    - 1765.5
+  - - 1765.85
+    - 1776.075
+  beat: 'D10: what 37 and 12.5 mean (PENDING DATA REPORT)'
+  visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture zone: a clean top view
+    of the 25-km ring round the eye drawn from the data (ring, centre dot, the zoomed map at 30 % underneath, colour bar removed while
+    the map is faded; source line kept below). S2-S6: at one ring point the ring-mean wind arrow (teal outline, ''about 39 m/s'') split
+    into ''37 round'' (teal, along theta-hat) and ''12.5 in'' (rose, along -r-hat) with a RightTick; maths row Pythagoras (S5). S7:
+    ''12.5 x 3.6 = 45 km/h''. S8: keyword ''imagine: nothing changes'' (slate, thought experiment). S9: an air parcel (teal dot) on
+    the ring; a dashed rose line from it to the centre labelled ''25 km''. S10: time row; a clock glyph runs to ''33 min'' at one constant
+    rate. S11: the ring highlighted as one lap: rows; the clock to ''71 min''. S12-S13: the ratio row; at the parcel a small ''3 round,
+    1 in'' arrow pair. S14: a short spiral segment (quarter turn) drawn from the parcel inward at the ring''s inflow angle, keyword
+    ''spirals in''. S15: the spiral stops short of the eye; a small upward arrow glyph at the ring of strongest winds with keyword ''rises
+    (Part 2)''. S16: keyword ''more: How tropical cyclones form''.'
+  voiceover: 'So what do these two numbers mean, and how are they different? Thirty seven is how fast the air goes round the eye. Twelve
+    and a half is how fast it moves towards the eye. They''re two parts of the same wind, at right angles to each other. By Pythagoras,
+    together they make an arrow of the square root of thirty seven squared plus twelve and a half squared, about thirty nine metres
+    per second. [beat] It points mostly round, and a little in. Twelve and a half metres per second, times three point six, is about
+    forty five kilometres per hour, towards the centre. [beat] Now imagine, just for a moment, that nothing changed. An air parcel,
+    a small volume of air that moves with the flow, starts on this ring, twenty five kilometres out. Moving in at twelve and a half
+    metres per second, it would cover the twenty five thousand metres to the centre in two thousand seconds, about thirty three minutes.
+    [beat] Going round at thirty seven metres per second, one lap of this ring, two pi times twenty five kilometres, about a hundred
+    and fifty seven kilometres, takes about seventy one minutes. [beat] So the air is moving round and moving in at the same time. Thirty
+    seven divided by twelve and a half is about three, so for every metre it moves in, it moves about three metres round. [beat] The
+    air doesn''t fall straight into the eye: it spirals in. In the real storm, the inflow slows down near the ring of strongest winds,
+    and the air rises there instead, in towering clouds. We''ll look at that rising air in Part 2, and the whole story of how hurricanes
+    work has its own movie later in this series: How tropical cyclones form.'
+  on_screen_eq:
+    latex: \sqrt{37^2+12.5^2}\approx39\ \mathrm{m/s}
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (ring means) + builder arithmetic
+    params:
+      storm: data_block
+      radii_km:
+      - 25
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK
+      DF23 39.1, 45.0, 2000 s, 33.3 min, 157.1 km, 70.6 min, 2.97 (data_block)
+  exaggeration:
+  - 'thought experiment: constant 12.5 m/s inflow and 37 m/s spin (said as ''imagine ... nothing changed'')'
+  - the spiral segment is illustrative (constant inflow angle), not a computed trajectory
+  calc_rows:
+  - \sqrt{37^2+12.5^2}\approx39\ \mathrm{m/s}
+  - 12.5\times3.6=45\ \mathrm{km/h}
+  - t=\frac{25\,000\ \mathrm{m}}{12.5\ \mathrm{m/s}}=2000\ \mathrm{s}\approx33\ \mathrm{min}
+  - 2\pi\times25\ \mathrm{km}\approx157\ \mathrm{km},\quad \frac{157\,000\ \mathrm{m}}{37\ \mathrm{m/s}}\approx4240\ \mathrm{s}\approx71\
+    \mathrm{min}
+  - \frac{37}{12.5}\approx3
+  derivation:
+    id: D10
+    goal: what the 12.5 means, and how it differs from the 37 (U-CO-011)
+    steps:
+    - - two parts at right angles
+      - 37\ \text{round},\ 12.5\ \text{in}
+      - u_theta and u_r are along theta-hat and r-hat (s13)
+      - two different motions
+    - - the whole arrow
+      - \sqrt{37^2+12.5^2}\approx39
+      - Pythagoras on perpendicular parts
+      - mostly round, a little in
+    - - in everyday units
+      - 12.5\times3.6=45\ \mathrm{km/h}
+      - 3600 s per hour / 1000 m per km
+      - a car's speed on a town road
+    - - time to the centre (thought experiment)
+      - 25\,000/12.5=2000\ \mathrm{s}
+      - time = distance / speed, if nothing changed
+      - about 33 min
+    - - time for one lap
+      - 2\pi\times25\ \mathrm{km}/37\ \mathrm{m/s}\approx71\ \mathrm{min}
+      - 'arc rule: a full circle is 2 pi r (s07)'
+      - the same order as the time to come in
+    - - the ratio
+      - 37/12.5\approx3
+      - both speeds act at once
+      - 'three metres round per metre in: a spiral'
+  kind: diagram on faded data + calc
+  data: data_block — PENDING
+  tool: Remotion SVG + clock glyph + CalcStack
+  runner_up: —
+  why: answers U-CO-011
+  related:
+  - movie: U15
+    slug: How tropical cyclones form, and how their strength is classed (planned, v6 pos 38)
+    covers: eyewall, rising air, intensity
+  - *id002
+  honesty: 'No ''half a lap'' or laps-to-the-centre claim: with a constant round speed the number of laps diverges near the centre,
+    so only the ring''s own lap time and the local ratio are said.'
+  pending_data: true
+  feedback:
+  - U-CO-011
+  - U-CO-054
+  - U-CO-099
+  layout: 'Source line kept under the faded map; keywords in the column; ''more: How tropical cyclones form'' is a keyword line.'
+- id: s24_ring_points
+  t:
+  - 1776.875
+  - 1917.275
+  sentence_times:
+  - - 1776.875
+    - 1779.425
+  - - 1779.775
+    - 1783.4
+  - - 1783.75
+    - 1789.05
+  - - 1789.4
+    - 1793.7
+  - - 1794.05
+    - 1799.6
+  - - 1801.1
+    - 1806.55
+  - - 1806.9
+    - 1811.925
+  - - 1812.275
+    - 1815.575
+  - - 1817.075
+    - 1821.2
+  - - 1821.55
+    - 1830.3
+  - - 1831.8
+    - 1835.4
+  - - 1835.75
+    - 1840.85
+  - - 1841.2
+    - 1847.15
+  - - 1848.65
+    - 1853.825
+  - - 1854.175
+    - 1859.775
+  - - 1861.275
+    - 1871.35
+  - - 1871.7
+    - 1883.1
+  - - 1883.45
+    - 1889.95
+  - - 1891.45
+    - 1902.7
+  - - 1903.05
+    - 1909.075
+  - - 1910.575
+    - 1916.475
+  beat: 'D11: three ring points by hand (PENDING DATA REPORT)'
+  visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). Picture: the zoomed ring (map
+    at 60 %, colour bar beside, source below) with three gold dots at theta = 0, 90 and 135 deg, each tagged with its angle. Column
+    top, pinned all scene: ''u_r = u cos theta + v sin theta'' and ''u_theta = -u sin theta + v cos theta'' (68 px). For each point
+    in turn (S4-S8, S9-S13, S14-S20): the point is circled; the data wind arrow (teal, moving dashes) appears, split into its east leg
+    ''u'' (orange solid) and north leg ''v'' (orange dashed) with their numbers on the legs (U-CO-013); the inputs row ''theta = ...,
+    cos theta = ..., sin theta = ...; u = ..., v = ...'' appears on the words; r-hat and theta-hat (orange, labelled) are drawn at the
+    point; then the u_r part (rose, along -r-hat, tip label ''u_r = ...'') and the u_theta part (teal, along theta-hat, tip label ''u_theta
+    = ...'') grow exactly on their result words (U-CO-009/015), each with a gold link to its number. A finished point''s rows shrink
+    into a three-row table at the column''s foot (''0 deg: about 0, 38 · 90 deg: -20.4, 27.3 · 135 deg: -27.5, 41.4''). S21: all 72
+    dots flash on in turn round the ring (no flashes: a 2-s sweep at 40 % brightness) with keyword ''all 72, then average''.'
+  voiceover: 'Where do those averages come from? Let''s work out three of the seventy two points by hand. Remember, the data give us
+    u and v, the eastward and northward parts. First, the point due east of the eye, at theta equals zero. There, u is about zero, and
+    v is about thirty eight: the wind blows north. [beat] Our rule has cosine of zero, which is one, and sine of zero, which is zero.
+    So u sub r is about zero, and u sub theta is about thirty eight. Here, the wind blows almost purely round. [beat] Next, the point
+    due north of the eye, at ninety degrees. There, u is minus twenty seven point three, and v is minus twenty point four: the wind
+    blows towards the west, and a little south. [beat] Now the cosine is zero and the sine is one. So u sub r equals v, which is minus
+    twenty point four: in. And u sub theta equals minus u, which is plus twenty seven point three: round. [beat] Last, the point to
+    the northwest, at a hundred and thirty five degrees. There, u is minus nine point eight, and v is minus forty eight point seven.
+    [beat] The cosine of a hundred and thirty five degrees is minus zero point seven zero seven, and the sine is plus zero point seven
+    zero seven. So u sub r is minus nine point eight times minus zero point seven zero seven, plus minus forty eight point seven times
+    zero point seven zero seven. That''s six point nine minus thirty four point four, about minus twenty seven and a half: in. [beat]
+    And u sub theta is plus nine point eight times zero point seven zero seven, plus minus forty eight point seven times minus zero
+    point seven zero seven. That''s six point nine plus thirty four point four, about forty one point four: round. [beat] The computer
+    does exactly this at all seventy two points, and then takes the averages.'
+  on_screen_eq:
+    latex: u_r=u\cos\theta+v\sin\theta,\qquad u_\theta=-u\sin\theta+v\cos\theta
+    vallis_eq: 'none in Vallis; Kundu App. B §B.5 cylindrical position and unit vectors (printed p. 865, page image checked in build
+      1): x = R cos phi, y = R sin phi; e_R = e_x cos phi + e_y sin phi, e_phi = -e_x sin phi + e_y cos phi; plane-polar form with theta
+      for the angle'
+    page_png: _private/Kundu_AppendixB_Mathematical_Tools.pdf page 9 (printed 865)
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (per-azimuth u, v, u_r, u_theta)
+    params:
+      storm: data_block
+      radii_km:
+      - 25
+      azimuths_deg:
+      - 0
+      - 90
+      - 135
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK
+      DF24 the three points' u_r, u_theta = u cos + v sin, -u sin + v cos to 1e-9 (data_block)
+  exaggeration:
+  - wind arrows at the three points drawn to one m/s scale (manifest)
+  calc_rows:
+  - \theta=0^\circ:\ u\approx0,\ v\approx38\ \Rightarrow\ u_r\approx0,\ u_\theta\approx38
+  - \theta=90^\circ:\ u=-27.3,\ v=-20.4\ \Rightarrow\ u_r=v=-20.4,\ u_\theta=-u=27.3
+  - \theta=135^\circ:\ \cos\theta\approx-0.707,\ \sin\theta\approx0.707,\ u=-9.8,\ v=-48.7
+  - u_r=-9.8\times(-0.707)+(-48.7)\times0.707=6.9-34.4\approx-27.5
+  - u_\theta=9.8\times0.707+(-48.7)\times(-0.707)=6.9+34.4\approx41.4
+  derivation:
+    id: D11
+    goal: show where the ring numbers come from (U-CO-013, U-CO-015)
+    steps:
+    - - read u, v at the point
+      - u,\ v
+      - the model stores east and north parts (s21)
+      - the wind in Cartesian parts
+    - - cos and sin of the point's angle
+      - \cos\theta,\ \sin\theta
+      - theta from east, anticlockwise (s04)
+      - the local r-hat and theta-hat
+    - - apply s14's two lines
+      - u_r,\ u_\theta
+      - dot products with r-hat and theta-hat
+      - in-or-out and round
+    - - repeat and average
+      - 72\ \text{points}
+      - s22
+      - the ring means
+  kind: real data + calc
+  data: data_block — PENDING
+  tool: Remotion SVG + CalcStack
+  runner_up: —
+  why: 'answers U-CO-013/015: the calculation shown at three points before the curves'
+  related: []
+  pending_data: true
+  feedback:
+  - U-CO-009
+  - U-CO-013
+  - U-CO-015
+  - U-CO-007
+  - U-CO-054
+  layout: Calculations in the column only; tags on the map are short labels at their points; SourceBelow; colour bar beside.
+- id: s25_why_polar_storm
+  t:
+  - 1917.275
+  - 2005.6
+  sentence_times:
+  - - 1917.275
+    - 1920.1
+  - - 1920.45
+    - 1925.625
+  - - 1925.975
+    - 1933.475
+  - - 1933.825
+    - 1936.375
+  - - 1936.725
+    - 1942.6
+  - - 1942.95
+    - 1947.575
+  - - 1947.925
+    - 1954.775
+  - - 1955.125
+    - 1958.8
+  - - 1959.15
+    - 1966.75
+  - - 1967.1
+    - 1974.1
+  - - 1974.45
+    - 1982.5
+  - - 1982.85
+    - 1986.725
+  - - 1987.075
+    - 1989.75
+  - - 1990.1
+    - 2000.45
+  - - 2000.8
+    - 2004.8
+  beat: 'intuition: why polar helps; labelled curves (PENDING DATA REPORT)'
+  visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05). On frame 0 the map zooms back
+    out to s21''s start view (1 s) and settles into the left picture zone (ring view, x 80-1000) with a gold marker that goes round
+    the ring as the curves draw. Right (x 1060-1840): a chart against theta (0-360 deg, ticks every 90 deg, 52 px; y from -50 to +50
+    m/s, ticks every 25, 52 px); a legend in the column above the chart with swatches and names: ''eastward u'' (orange solid), ''northward
+    v'' (orange dashed), later ''round: u_theta'' (teal) and ''in or out: u_r'' (rose). S3 on AT(3,''solid orange line'') / AT(3,''dashed
+    orange line''): u and v draw with END LABELS at their right ends (U-CO-012). S4: the three points from s24 appear as gold dots on
+    both curves and on the ring. S7: at the east point and the north point of the ring, the wind arrows pulse (''north'', ''west'').
+    S8-S9: u_theta (teal) and u_r (rose) draw with end labels ''round: u_theta'' and ''in or out: u_r'' (U-CO-014); u and v dim to 40
+    %. S10: a dashed teal line at the mean 37 (label ''37''); band 25-50 shaded faintly. S11: dashed rose line at -12.5 (label ''-12.5'');
+    S12-S13: keyword ''negative, or nearly zero, all the way round'' (Should 3). S14: keywords ''spin'' and ''inflow'' at the two dashed
+    lines.'
+  voiceover: 'Why bother with polar coordinates here? Let''s go all the way round the ring, and plot the winds against the angle theta.
+    First, the eastward wind u, the solid orange line, and the northward wind v, the dashed orange line. Our three points sit on these
+    lines. Both lines swing up and down, from plus to minus, by tens of metres per second. They swing because the wind keeps turning
+    as we go round the eye. On the east side it blows north, and on the north side it blows west, and so on, all the way round. Now
+    let''s plot the two polar parts round the same ring. The tangential wind, u sub theta, is the teal line, and the radial wind, u
+    sub r, is the rose line. The tangential wind stays close to its average of thirty seven, between about twenty five and fifty. The
+    radial wind wobbles more, between about zero and minus thirty five, because the storm isn''t perfectly round. But it''s negative,
+    or nearly zero, all the way round. So the air flows in on every side. Instead of two lines that swing from plus to minus, we get
+    two numbers that mean something: how fast the storm spins, and how fast the air flows in. That''s why hurricane scientists use polar
+    coordinates.'
+  on_screen_eq: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (per-azimuth u, v, u_theta, u_r)
+    params:
+      storm: data_block
+      radii_km:
+      - 25
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_rankine_vortex_V1_tangential_exact_radial_zero, ::test_spiral_inflow_V1_angle_is_atan_vr_over_vt,
+      ::test_hemisphere_mirror_V7_vt_flips_vr_and_inflow_angle_unchanged, ::test_curvilinear_V1_sheared_grid_affine_field_exact; CHECK
+      DF25 ranges (data_block); vr negative at 66 of 72 points, the rest <= +1.05 m/s
+  exaggeration: []
+  kind: data chart
+  data: data_block — PENDING
+  tool: Remotion SVG chart (house TimeGraph axes)
+  runner_up: polar plot of the ring (less clear for 'steady')
+  why: 'answers U-CO-012/014/016: labelled curves, one idea per sentence'
+  related: []
+  pending_data: true
+  feedback:
+  - U-CO-012
+  - U-CO-014
+  - U-CO-016
+  layout: SourceBelow under the ring view; the chart is not a real-data map but plots data, so it carries the same source line under
+    it; end labels inside x <= 1840; legend never over the curves.
+- id: s26_inflow_angle
+  t:
+  - 2005.6
+  - 2077.85
+  sentence_times:
+  - - 2005.6
+    - 2009.25
+  - - 2009.6
+    - 2013.6
+  - - 2013.95
+    - 2020.5
+  - - 2020.85
+    - 2029.175
+  - - 2029.525
+    - 2032.975
+  - - 2034.475
+    - 2039.1
+  - - 2039.45
+    - 2045.425
+  - - 2045.775
+    - 2052.575
+  - - 2052.925
+    - 2056.025
+  - - 2056.375
+    - 2061.35
+  - - 2061.7
+    - 2067.475
+  - - 2067.825
+    - 2077.05
+  beat: the inflow angle, and four angles side by side (PENDING DATA REPORT for the numbers)
+  visual: 'PENDING DATA REPORT (reports/data/ch00_coordinates_research.md, not written on 2026-11-05) (numbers). Picture: one ring point
+    enlarged: the ring''s tangent direction theta-hat (orange) and the ring-mean wind arrow (teal), a rose wedge between them labelled
+    ''inflow angle'' (S3); S4-S5: rows; ''19 deg'' at the wedge on its words. S7-S10: four small drawings side by side across the full
+    width (no boxes), each built on its sentence: theta (slate arc from east, anticlockwise, ''where a point is''), the compass bearing
+    (gold arc from north, clockwise, ''which way it points''), alpha (orange arc between x and x'', ''how far the axes turned''), the
+    inflow angle (rose wedge between theta-hat and the wind, ''how far the wind leans in''); each with ''(seen from above)'' where it
+    has a sense. S11: keyword ''four questions''. S12: keyword ''more: Vorticity in plain words''.'
+  voiceover: 'There''s one more angle that hurricane scientists use. The wind crosses each ring at a slant, a little inward. The angle
+    between the wind and the ring''s own direction, theta hat, is called the inflow angle. Its tangent is the inward part over the round
+    part: twelve and a half over thirty seven, which is about zero point three four. So the inflow angle is about nineteen degrees.
+    [beat] We''ve now met four different angles, so let''s put them side by side. Theta says where a point is, measured from east, anticlockwise
+    as seen from above. The compass bearing says which way something points, measured from north, clockwise as seen from above. Alpha
+    says how far we turned our axes. And the inflow angle says how far the wind leans inward from the ring. They answer four different
+    questions, so it''s always worth checking which angle you''re looking at. The storm''s spin also has its own measure, called vorticity,
+    which has its own movie later in this series: Vorticity in plain words.'
+  on_screen_eq:
+    latex: \tan(\text{inflow angle})=\frac{12.5}{37}\approx0.34
+    vallis_eq: 'none: arithmetic or a definition (no book equation)'
+    page_png: null
+  physics_source:
+    fn: fluidpy.diag.cyclone.storm_relative_wind (inflow_angle)
+    params:
+      storm: data_block
+      radii_km:
+      - 25
+    test: ../Fluid Dynamics/tests/diag/test_cyclone.py::test_spiral_inflow_V1_angle_is_atan_vr_over_vt; CHECK DF26 atan(12.5/37.1) =
+      18.6 deg
+  exaggeration: []
+  calc_rows:
+  - \tan(\text{inflow angle})=\frac{12.5}{37}\approx0.34
+  - \text{inflow angle}\approx19^\circ
+  kind: diagram + calc
+  data: data_block — PENDING
+  tool: Remotion SVG
+  runner_up: —
+  why: 'answers U-CO-017: the inflow angle against theta, the bearing and alpha'
+  related:
+  - movie: U10
+    slug: Vorticity in plain words (planned, v6 pos 33)
+    covers: vorticity
+  pending_data: true
+  feedback:
+  - U-CO-017
+  - U-CO-099
+  layout: 'No real-data picture: no source line. No text over the drawing or over other text; links never cross text or each other (K6
+    cannot see these: the builder checks its own stills). No headings. Opening keyword from frame 0 (Should 18). (The ring point drawing
+    is a schematic of the mean wind; no map.)'
+- id: s27_recap
+  t:
+  - 2077.85
+  - 2162.85
+  sentence_times:
+  - - 2077.85
+    - 2085.075
+  - - 2085.425
+    - 2092.975
+  - - 2093.325
+    - 2102.35
+  - - 2102.7
+    - 2107.0
+  - - 2107.35
+    - 2110.0
+  - - 2110.35
+    - 2118.375
+  - - 2118.725
+    - 2125.35
+  - - 2125.7
+    - 2134.85
+  - - 2135.2
+    - 2140.9
+  - - 2141.25
+    - 2153.275
+  - - 2153.625
+    - 2162.05
+  beat: recap ('To sum up'); last sentence the teaser to Part 2
+  visual: 'One beat per sentence, mini pictures reused (no headings): grid + origin; fixed x-hat, y-hat; r and theta with x = r cos
+    theta, y = r sin theta; the arc rule; r-hat and theta-hat with the +90 deg arc and (-sin theta, cos theta); the wind''s two shadow
+    bands; turned axes with the 2 x 2 matrix; the balloon with alpha = theta; Ian''s ring with ''37'', ''12.5'' and the 19-deg wedge
+    (small source line under it); a parcel circling with a question mark (Part 2 teaser). Each spoken number on screen at its words.'
+  voiceover: 'To sum up, coordinates are numbers that pin down a place, measured from an origin along chosen directions. Cartesian coordinates
+    use x and y, and their unit vectors, x hat and y hat, are the same everywhere. Polar coordinates use the distance r and the angle
+    theta, with x equals r cosine theta, and y equals r sine theta. The arc length is the radius times the angle, in radians. R hat
+    points the way r grows. Theta hat points the way theta grows: it''s r hat turned by ninety degrees, minus sine theta, cosine theta.
+    The parts of a wind along these two arrows are dot products: the radial and the tangential wind. Turning the axes by an angle alpha
+    gives new coordinates for the same arrow, and the four direction cosines make the rotation matrix. Polar parts are just turned axes,
+    with an angle that changes from place to place. Round Hurricane Ian''s eye, they split the wind into about thirty seven metres per
+    second of spin and twelve and a half of inflow, so the air spirals in at about nineteen degrees. In Part 2, we''ll ask whether air
+    going round at a steady speed is accelerating, and look at a hurricane in three dimensions.'
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - illustrative summary of earlier scenes
+  kind: recap
+  data: reused
+  tool: Remotion SVG
+  runner_up: —
+  why: HOUSE_STYLE §2 beat 6
+  related:
+  - *id002
+  pending_data: true
+  feedback:
+  - U-CO-101
+  layout: Mini pictures one per sentence; a small source line under the real-data mini picture. No headings.
+- id: s28_end
+  t:
+  - 2162.85
+  - 2185.75
+  sentence_times:
+  - - 2162.85
+    - 2169.05
+  - - 2169.4
+    - 2177.45
+  - - 2177.8
+    - 2185.45
+  beat: series end card (maths ending, HOUSE_STYLE §3, word for word)
+  visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (a square grid, polar rings with r-hat and theta-hat,
+    turned axes, a storm ring); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid
+    dynamics'' (54 px); notebook icon ''coordinates notebook''; stacked notebook icons ''notebooks for the other maths concepts'' with
+    a 24-px gap under the icon row (Should 14). Then a 2.5-s silent hold while the music fades.'
+  voiceover: This video is one of a series of related maths tutorials, so watch out for the others. They're made for students of atmospheric
+    science, meteorology and fluid dynamics, and anyone else who needs these ideas. The notebook for coordinates, and the notebooks
+    for the other maths concepts, are on the website that goes with this video.
+  on_screen_eq: null
+  physics_source: null
+  exaggeration:
+  - decorative end card (illustrative)
+  kind: end card
+  data: —
+  tool: house EndCard
+  runner_up: —
+  why: 'series ending word for word (decision 2: the maths ending)'
+  related: []
+  layout: End card. No source line.
