@@ -11,3 +11,6 @@ echo "== swap_check"; node movies/src/ch00_coordinates_storm/checks/swap_check.m
 echo "== cam_speed";  node movies/src/ch00_coordinates_storm/checks/cam_speed.mjs 2>&1 | tail -3
 echo "== eq_check";   "$PY" movies/src/ch00_coordinates_storm/checks/eq_check.py
 echo "== ssr";        (cd movies && node src/ch00_coordinates_storm/checks/ssr/run.mjs --step 10 --public "$S/public" 2>&1 | grep -v "THREE_CJS\|Replace \`const\|trace-deprecation" | tail -30)
+echo "== stack_frame"; (npx --prefix movies esbuild movies/src/ch00_coordinates_storm/checks/stack_frame.ts --bundle --platform=node --format=esm --outfile="$S/stack_frame.mjs" --log-level=warning && node "$S/stack_frame.mjs")
+echo "== symbol lint"; "$PY" tools/movie_symbol_lint.py --strict movies/src/ch00_coordinates_storm | tail -1
+echo "== ssr --3d";   (cd movies && node src/ch00_coordinates_storm/checks/ssr/run.mjs --step 10 --3d --public "$S/public" 2>&1 | grep -v "THREE_CJS\|Replace \`const\|trace-deprecation" | tail -6)

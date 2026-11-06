@@ -1292,7 +1292,248 @@ def main() -> int:
     V["flood"] = {**FLOOD, **{"nargis": {**NARGIS, "track": ntrack, "landfall_fix": [nt["lat"][nl[0]], nt["lon"][nl[0]], ntt[nl[0]]], "storm_img_box": [12.6, 19.6, 89.5, 100.5],
                   "gaps": [gb_, ga_], "wet": [wb_, wa_], "swipe_px": list(bef.shape[:2])}},
                   "shelf": shelf, "iso": iso, "depth_lut": depth_lut}
-    V["luts"] = {"ur": UR_LUT, "speed": B1.lut_hex(SPEED_LUT), "dbz": B1.lut_hex(DBZ_LUT), "depth": depth_lut}
+
+    # ================================================================ user notes 2026-11-06 (prompt_b.docx): the flood section (s30-s34, DS31-DS36)
+    # Natural colour first (MODIS bands 1-4-3, the same granules, box and pinning as the 7-2-1 pair), the Nargis and Idai case studies
+    # (IBTrACS tracks, intensity at landfall, NASA pictures of the storms), the Idai before/after back (v3 runner-up), and the Amphan
+    # Sentinel-1 radar pair (optical pictures cloud-covered for days). Every array is a cache hit of the flood research fetches.
+    def gapfill(raw):
+        gaps = []
+        for c in range(raw.shape[-1]):
+            bad = raw[..., c] < -1000
+            gaps.append(float(bad.mean()))
+            if bad.any():
+                idx = NDI.distance_transform_edt(bad, return_distances=False, return_indices=True)
+                raw[..., c] = raw[..., c][tuple(idx)]
+        return raw, gaps
+
+    def crop_px(img_, box_wsen, crop_wsen):
+        hh, ww = img_.shape[:2]
+        Wb, Sb, Eb, Nb = box_wsen
+        Wc_, Sc_, Ec_, Nc_ = crop_wsen
+        x0, x1 = round((Wc_ - Wb) / (Eb - Wb) * ww), round((Ec_ - Wb) / (Eb - Wb) * ww)
+        y0, y1 = round((Nb - Nc_) / (Nb - Sb) * hh), round((Nb - Sc_) / (Nb - Sb) * hh)
+        return img_[y0:y1, x0:x1]
+    TC_STRETCH = {"hi": 0.28, "gamma": 1.5}                 # natural colour: reflectance 0 … 0.28 → 0 … 1, then ^(1/1.5); one stretch for every date
+
+    def modis_pair(npz, key, box_wsen, crop_wsen):
+        """(true colour 1-4-3, false colour 7-2-1, gap fractions) of one MODIS day, cropped; one fixed stretch each (7-2-1 = the Nargis one)"""
+        a_ = npz[key]
+        tc, gtc = gapfill(np.dstack([a_[b].astype("f4") for b in ("sur_refl_b01", "sur_refl_b04", "sur_refl_b03")]))
+        fc, gfc = gapfill(np.dstack([a_[b].astype("f4") for b in ("sur_refl_b07", "sur_refl_b02", "sur_refl_b01")]))
+        # b1 is 250 m, b4 and b3 are 500 m on the same grid: one Gaussian (σ = half a 500-m pixel) on all three bands so the colours line
+        # up (no red / cyan fringes at cloud edges); stated in the manifest
+        px_m = (box_wsen[2] - box_wsen[0]) * 111320.0 * np.cos(np.deg2rad(0.5 * (box_wsen[1] + box_wsen[3]))) / tc.shape[1]
+        sig = 0.5 * 500.0 / px_m
+        tc = np.dstack([gaussian_filter(tc[..., c], sig) for c in range(3)])
+        tco = (np.clip(tc / 1e4 / TC_STRETCH["hi"], 0, 1) ** (1 / TC_STRETCH["gamma"]) * 255 + 0.5).astype(np.uint8)
+        fco = np.empty(fc.shape, np.float32)
+        for b in range(3):
+            lo_b, hi_b = NARGIS["stretch"][b]
+            fco[..., b] = np.clip((fc[..., b] / 1e4 - lo_b) / (hi_b - lo_b), 0, 1)
+        fco = (fco * 255 + 0.5).astype(np.uint8)
+        return crop_px(tco, box_wsen, crop_wsen), crop_px(fco, box_wsen, crop_wsen), max(gtc + gfc)
+
+    # ---- Nargis in natural colour (s32): the same two granules (Terra 21 Apr, 5 May), the same crop
+    tcb, fcb, g1_ = modis_pair(NZ, "2008-04-21_MOD", NARGIS["box_wsen"], NARGIS["crop_wsen"])
+    tca, fca, g2_ = modis_pair(NZ, "2008-05-05_MOD", NARGIS["box_wsen"], NARGIS["crop_wsen"])
+    row("DS31", "Nargis natural-colour pair: same grid and crop as the 7-2-1 pair; the 7-2-1 crop here = the swipe images (pinning); gap fill ≤ 15 %",
+        [tcb.shape == bef.shape, tca.shape == aft.shape, int(np.abs(fcb.astype(int) - bef.astype(int)).max()), int(np.abs(fca.astype(int) - aft.astype(int)).max()), max(g1_, g2_)],
+        [1, 1, 0, 0, 0], [0, 0, 0, 0, 0.15])
+    Image.fromarray(tcb).save(IMG / "nargis_tc_before.jpg", quality=92)
+    Image.fromarray(tca).save(IMG / "nargis_tc_after.jpg", quality=92)
+
+    def brownness(img_):
+        """share of pixels whose colour is brownish (R ≥ G ≥ B, R − B ≥ 25 grey levels, not cloud-white): 'floodwater and wet soil both look brown'"""
+        r_, g_, b_ = (img_[..., i].astype(int) for i in range(3))
+        return float(np.mean((r_ >= g_) & (g_ >= b_) & (r_ - b_ >= 25) & (r_ < 200)))
+    # where the 7-2-1 'after' picture shows new dark water, the natural-colour 'after' picture is brown, not blue (why false colour is needed)
+    new_w = ((aft[..., 0] < 60) & (aft[..., 1] < 90)) & ~((bef[..., 0] < 60) & (bef[..., 1] < 90))
+    tca_new = tca[new_w]
+    tc_new_brown = brownness(tca_new[None]) if tca_new.size else 0.0
+    tc_new_blue = float(np.mean(tca_new[:, 2].astype(int) > tca_new[:, 0].astype(int) + 20)) if tca_new.size else 1.0
+    row("DS31", f"natural colour hides the flood: of the pixels that turn to dark water in 7-2-1 ({new_w.mean():.2f} of the picture), {tc_new_brown:.2f} look brown "
+        f"and only {tc_new_blue:.2f} look blue in natural colour", [tc_new_brown >= 0.5, tc_new_blue <= 0.15], [1, 1], 0)
+    # the colour key from the picture itself (s32 swatches): median colour of each class in the 7-2-1 'before' picture
+    rB, gB, bB = (bef[..., i].astype(int) for i in range(3))
+    cls = {"plants": (gB > rB + 40) & (gB > 120), "dry fields": (rB > gB + 25) & (rB > 150) & (bB > 100) & (bB < 200), "clouds": (rB > 215) & (gB > 215) & (bB > 215),
+           "water": (rB < 40) & (gB < 50) & (bB > 60)}
+    key_rgb = {k_: [int(np.median(bef[m_][:, i])) for i in range(3)] for k_, m_ in cls.items()}
+    truth("DS31", "7-2-1 colour key from the picture: dry fields pink (R > G, B mid), plants green, water dark blue, clouds white; each class ≥ 0.5 % of the picture",
+          all(m_.mean() >= 0.005 for m_ in cls.values()) and key_rgb["dry fields"][0] > key_rgb["dry fields"][1] and key_rgb["water"][2] > key_rgb["water"][0],
+          {k_: [round(float(m_.mean()), 3), key_rgb[k_]] for k_, m_ in cls.items()})
+
+    # ---- Nargis as a case study (s31): IBTrACS NI track, phases, landfall intensity, the closest approach to Yangon
+    YANGON = (16.80, 96.16)
+    nlat, nlon = np.array(nt["lat"], float), np.array(nt["lon"], float)
+    wkt = nt["wmo_wind_kt"]
+    k25 = 0
+    kw = int(np.argmin(nlon[:ntt.index("2008-05-01 00:00:00")]))                 # the westernmost fix before the turn
+    row("DS32", "Nargis (IBTrACS NI 2008117N11090): first fix 25 Apr 12 UTC at 10.5 N 90.3 E (south of the Bay); west to 85.4 E by 28 Apr; north to 15.6 N by 1 May 00 UTC",
+        [int(ntt[k25][8:10]), nlat[k25], nlon[k25], nlon[kw], int(ntt[kw][8:10]), nlat[ntt.index("2008-05-01 00:00:00")]], [25, 10.5, 90.3, 85.4, 28, 15.6], [0, 0.05, 0.05, 0.05, 0, 0.05])
+    row("DS32", "then east: 88.5 E (1 May 00 UTC) → 94.1 E at the first land fix (09 UTC 2 May, 16.0 N): the delta's south-western corner (Cape Negrais ≈ 16.0 N 94.2 E)",
+        [nlon[ntt.index("2008-05-01 00:00:00")], nlon[k09], nlat[k09], abs(nlon[k09] - 94.2) <= 0.2], [88.5, 94.1, 16.0, 1], [0.05, 0.05, 0.05, 0])
+    row("DS32", "landfall intensity (WMO = IMD, 3-min) 09-12 UTC 2 May: 90 kt, 962 hPa; 90 × 1.852 = 166.7 (≈ 167) km/h; ÷ 3.6 = 46.3 (≈ 46) m/s",
+        [wkt[k09], wkt[k12], nt["wmo_pres_hPa"][k09], 90 * 1.852, 90 * 1.852 / 3.6], [90, 90, 962, 166.7, 46.3], [0, 0, 0, 0.05, 0.05])
+    tN = np.array([np.datetime64(t.replace(" ", "T")) for t in ntt]).astype("datetime64[s]").astype(float)
+    tfN = np.arange(tN[k09], tN[-1], 600.0)
+    dY = np.asarray(call(SPH + "great_circle_distance", "s31", "Nargis track → Yangon (metres)", heavy_call=True, lat1=np.interp(tfN, tN, nlat), lon1=np.interp(tfN, tN, nlon),
+                         lat2=YANGON[0], lon2=YANGON[1]))
+    row("DS32", f"then it crossed the delta eastward: 95.6 E at 18 UTC 2 May, closest approach to Yangon {dY.min() / 1e3:.0f} km (≤ 30 km) on 3 May",
+        [nlon[ntt.index("2008-05-02 18:00:00")], dY.min() / 1e3 <= 30], [95.6, 1], [0.05, 0])
+    # the MODIS Aqua picture of 2 May (s31): the eye is the darkest spot within 80 km of the 06 UTC fix (16.0 N 93.6 E), just off the coast
+    sim = np.asarray(Image.open(gst).convert("RGB")).astype(float)
+    sh_, sw_ = sim.shape[:2]
+    slat = 19.6 - (np.arange(sh_) + 0.5) / sh_ * 7.0
+    slon = 89.5 + (np.arange(sw_) + 0.5) / sw_ * 11.0
+    SLO, SLA = np.meshgrid(slon, slat)
+    k06 = ntt.index("2008-05-02 06:00:00")
+    Ls_ = gaussian_filter(sim.mean(-1), 2.0)
+    dk_ = np.hypot((SLA - nlat[k06]) * 111.2, (SLO - nlon[k06]) * 111.2 * np.cos(nlat[k06] * D2R))
+    ei_, ej_ = np.unravel_index(np.argmin(np.where(dk_ < 80, Ls_, 1e9)), Ls_.shape)
+    neye = (float(SLA[ei_, ej_]), float(SLO[ei_, ej_]))
+    row("DS32", "the eye in the MODIS Aqua picture of 2 May (darkest spot, σ = 2 px) lies within 30 km of the IBTrACS 06 UTC fix and ≥ 30 km west of the coast (94.2 E)",
+        [gcd(neye, (nlat[k06], nlon[k06])) / 1e3 <= 30, (94.2 - neye[1]) * 111.2 * np.cos(16 * D2R) >= 30], [1, 1], 0)
+    # the delta is low: ETOPO 2022 60″ land heights in the swipe box (NEW small OPeNDAP subset through fetch() and the guard)
+    epd = fetch(ETOPO_URL, key="ETOPO2022-60s", fname="etopo2022_60s_irrawaddy_15.6-17.6N_94-96.6E.nc", quiet=True,
+                subset={"vars": ["z"], "sel": {"lat": slice(15.6, 17.6), "lon": slice(94.0, 96.6)}})
+    inputs.append(Path(epd))
+    ETd = xr.open_dataset(epd)
+    zd = ETd.z.values.astype(float)
+    dl, dn = ETd.lat.values, ETd.lon.values
+    insw = (dl[:, None] >= 15.7) & (dl[:, None] <= 17.1) & (dn[None, :] >= 94.6) & (dn[None, :] <= 96.0)   # the delta plain (the hills of the Arakan Yoma west of 94.6 E left out)
+    landd = zd[insw & (zd > 0)]
+    share5 = float(np.mean(landd <= 5.0))
+    row("DS32", f"the Irrawaddy delta is low: of the land in 15.7-17.1 N, 94.6-96.0 E, {share5:.2f} lies ≤ 5 m above sea level, median {np.median(landd):.1f} m "
+        "('most of it only a few metres above the sea')", [share5 >= 0.5], [1], 0)
+    nlines = B1.box_lines(coast, (14.0, 18.5, 93.0, 97.5), nd=3)
+    V["nargis"] = {"track": [[t, nlat[i_], nlon[i_], wkt[i_]] for i_, t in enumerate(ntt) if t[:10] <= "2008-05-03"], "landfall": [nlat[k09], nlon[k09], ntt[k09]],
+                   "lf_kt": wkt[k09], "lf_hpa": nt["wmo_pres_hPa"][k09], "west": [nlat[kw], nlon[kw], ntt[kw]], "turn": [nlat[ntt.index("2008-05-01 00:00:00")], nlon[ntt.index("2008-05-01 00:00:00")]],
+                   "yangon": list(YANGON), "yangon_km": float(dY.min() / 1e3), "eye": list(neye), "eye_fix": [nlat[k06], nlon[k06]], "storm_box": [12.6, 19.6, 89.5, 100.5],
+                   "low_share5": share5, "low_median": float(np.median(landd)), "coast": nlines, "tc_stretch": TC_STRETCH, "key_rgb": key_rgb,
+                   "tc_new_brown": tc_new_brown, "tc_new_blue": tc_new_blue}
+    say.update({"n_kt": 90, "n_kmh": 167, "n_ms": 46})
+
+    # ---- Idai (s33-s34): IBTrACS SI track, landfall, the VIIRS picture of 14 Mar, the MODIS pair (v3 runner-up) in both colourings
+    F_SI = RAWD / "IBTrACS-v04r01" / "IBTrACS.SI.v04r01.nc"
+    it_ = call("fluidpy.data.ibtracs.storm_table", "s33", "IBTrACS SI Idai fixes", heavy_call=True, path=F_SI, sid="2019063S18038", agencies=("usa", "reunion"))
+    inputs.append(F_SI)
+    itt = it_["time"]
+    ilat, ilon, iwk = np.array(it_["lat"], float), np.array(it_["lon"], float), it_["wmo_wind_kt"]
+    ki0 = itt.index("2019-03-09 06:00:00")
+    klf = next(i_ for i_, t in enumerate(itt) if t >= "2019-03-14" and it_["landfall_km"][i_] == 0)
+    k15 = itt.index("2019-03-15 00:00:00")
+    row("DS33", "Idai (IBTrACS SI 2019063S18038) in the Mozambique Channel: WMO (Réunion, 10-min) 30 kt at 06 UTC 9 Mar (40.2 E) → 105 kt on 13-14 Mar (38.5-37.9 E)",
+        [iwk[ki0], ilon[ki0], max(w for w in iwk[ki0:klf] if w is not None)], [30, 40.2, 105], [0, 0.05, 0])
+    row("DS33", "first land fix 21 UTC 14 Mar (19.8 S 35.2 E); WMO at 00 UTC 15 Mar 85 kt, 960 hPa (19.7 S 34.8 E, at Beira); 85 × 1.852 = 157.4 km/h ÷ 3.6 = 43.7 (≈ 44) m/s",
+        [int(itt[klf][11:13]), int(itt[klf][8:10]), ilat[klf], ilon[klf], iwk[k15], it_["wmo_pres_hPa"][k15], 85 * 1.852, 85 * 1.852 / 3.6], [21, 14, -19.8, 35.2, 85, 960, 157.4, 43.7],
+        [0, 0, 0.05, 0.05, 0, 0, 0.05, 0.05])
+    truth("DS33", "21 UTC 14 Mar - 00 UTC 15 Mar = 23:00-02:00 local time in Beira (UTC+2): 'around midnight, between the fourteenth and the fifteenth'", True, ["23:00", "02:00"])
+    igb = GB2.fetch_wms("VIIRS_SNPP_CorrectedReflectance_TrueColor", "2019-03-14", (-30.0, -10.0), (30.0, 50.0), width=2000, tag="idai")   # cache hit (registry NASA-GIBS-idai2019)
+    inputs.append(Path(igb))
+    vim = Image.open(igb).convert("RGB")
+    vim.resize((1600, 1600), Image.LANCZOS).save(IMG / "idai_viirs.jpg", quality=90)
+    iz_path = gee_cached("v3_idai2019", "npz")
+    inputs.append(iz_path)
+    IZ = np.load(iz_path)
+    IBOX, ICROP = [33.6, -20.6, 35.2, -19.3], [33.8, -20.2, 34.95, -19.35]
+    itb, ifb, g3_ = modis_pair(IZ, "2019-03-11_MYD", IBOX, ICROP)
+    ita, ifa, g4_ = modis_pair(IZ, "2019-03-25_MOD", IBOX, ICROP)
+    row("DS34", "Idai pair: Aqua 11 Mar | Terra 25 Mar 2019 on one grid (same crop 33.80-34.95 E, 20.20-19.35 S), the Nargis stretches; gap fill ≤ 15 %",
+        [itb.shape == ita.shape, ifb.shape == ifa.shape, max(g3_, g4_)], [1, 1, 0], [0, 0, 0.15])
+    for nm_, im_ in (("idai_tc_before", itb), ("idai_tc_after", ita), ("idai_721_before", ifb), ("idai_721_after", ifa)):
+        Image.fromarray(im_).save(IMG / f"{nm_}.jpg", quality=92)
+    dk_b, dk_a = (ifb[..., 0] < 60) & (ifb[..., 1] < 90), (ifa[..., 0] < 60) & (ifa[..., 1] < 90)
+    cl_b = (ifb.astype(int).sum(-1) > 600)
+    new_i = float(np.mean(dk_a & ~dk_b & ~cl_b))
+    row("DS34", f"the Idai flood reads in 7-2-1: pixels dark (water) on 25 Mar that were neither dark nor cloud on 11 Mar = {new_i:.3f} of the picture (≥ 0.05; "
+        f"dark share {wet(ifb):.2f} → {wet(ifa):.2f}, the sea is in both)", [new_i >= 0.05], [1], 0)
+    lf_t = np.datetime64("2019-03-14T21:00")
+    row("DS34", "dates from landfall (21 UTC 14 Mar): Aqua 11 Mar ≈ 11 UTC = −3.4 d ('three and a half days before'); Terra 25 Mar ≈ 08 UTC = +10.5 d ('about ten days after')",
+        [(lf_t - np.datetime64("2019-03-11T11:00")) / np.timedelta64(1, "h") / 24, (np.datetime64("2019-03-25T08:00") - lf_t) / np.timedelta64(1, "h") / 24], [3.4, 10.5], [0.1, 0.1])
+    ilines = B1.box_lines(coast, (-32.0, -8.0, 28.0, 52.0), nd=2, step=2)
+    V["idai"] = {"track": [[t, ilat[i_], ilon[i_], iwk[i_]] for i_, t in enumerate(itt) if "2019-03-09" <= t[:10] <= "2019-03-16"], "landfall": [ilat[klf], ilon[klf], itt[klf]],
+                 "lf_kt": iwk[k15], "lf_hpa": it_["wmo_pres_hPa"][k15], "viirs_box": [-30.0, -10.0, 30.0, 50.0], "box_wsen": IBOX, "crop_wsen": ICROP,
+                 "before": "11 Mar 2019", "after": "25 Mar 2019", "places": [["Beira", -19.84, 34.84], ["Buzi", -19.87, 34.62], ["Dondo", -19.61, 34.74]],
+                 "coast": ilines, "coast_zoom": B1.box_lines(coast, (-21.0, -18.5, 33.5, 35.5), nd=3), "wet": [wet(ifb), wet(ifa)]}
+    say.update({"i_kt": 85, "i_kmh": 157, "i_ms": 44})
+
+    # ---- Amphan (s30): optical pictures cloud-covered for days (GIBS MODIS Terra 21 and 22 May), then the Sentinel-1 radar pair
+    SBOX = [88.8, 22.12, 89.92, 22.75]
+    cl_imgs = {}
+    for d_ in ("2020-05-21", "2020-05-22"):
+        gp_ = GB2.fetch_wms("MODIS_Terra_CorrectedReflectance_TrueColor", d_, (21.45, 23.35), (87.6, 90.8), width=1000, tag="amphan_after_clouds", expected_bytes=1_500_000)
+        inputs.append(Path(gp_))
+        cl_imgs[d_] = np.asarray(Image.open(gp_).convert("RGB"))
+        Image.fromarray(crop_px(cl_imgs[d_], (87.6, 21.45, 90.8, 23.35), SBOX)).resize((1120, 660), Image.LANCZOS).save(IMG / f"amphan_clouds_{d_[-2:]}.jpg", quality=90)
+    cloudy = {d_: float(np.mean(crop_px(cl_imgs[d_], (87.6, 21.45, 90.8, 23.35), SBOX).mean(-1) > 170)) for d_ in cl_imgs}
+    row("DS35", f"Amphan's coast hidden by cloud after landfall: bright (cloud) share of the radar box in MODIS Terra true colour 21 May {cloudy['2020-05-21']:.2f}, 22 May {cloudy['2020-05-22']:.2f} (≥ 0.6)",
+        [cloudy["2020-05-21"] >= 0.6, cloudy["2020-05-22"] >= 0.6], [1, 1], 0)
+    s1p, jrp = gee_cached("close_s1", "npz"), gee_cached("close_jrc", "npz")
+    inputs += [s1p, jrp]
+    S1 = np.load(s1p)
+    JR = np.load(jrp)["jrc"]
+    vb_ = S1["s1_o150_2020-05-16"]["VV"].astype(np.float32)
+    va_ = S1["s1_o150_2020-05-22"]["VV"].astype(np.float32)
+    vb_[vb_ == 0], va_[va_ == 0] = np.nan, np.nan
+    s1w = vb_.shape[1]
+    km2_px = ((SBOX[2] - SBOX[0]) * 111.32 * np.cos(np.deg2rad(0.5 * (SBOX[1] + SBOX[3]))) / s1w) ** 2
+    valid = np.isfinite(vb_) & np.isfinite(va_)
+    wb_s, wa_s = (vb_ < -18.0) & valid, (va_ < -18.0) & valid
+    new_raw = wa_s & ~wb_s & ((va_ - vb_) <= -3.0) & ~(JR["seasonality"] >= 10)
+    lab_, nlab_ = NDI.label(new_raw, structure=np.ones((3, 3)))
+    sizes_ = NDI.sum(new_raw, lab_, index=np.arange(1, nlab_ + 1))
+    new_s1 = np.isin(lab_, 1 + np.where(sizes_ >= 9)[0])
+    new_km2 = float(new_s1.sum() * km2_px)
+    row("DS36", "Sentinel-1 (orbit 150, VV) 16 → 22 May 2020, 88.80-89.92 E, 22.12-22.75 N: new water (VV < −18 dB after, not before, drop ≥ 3 dB, not permanent water "
+        "(JRC seasonality ≥ 10 months), blobs ≥ 9 px) = 124.9 km² ('about a hundred and twenty five'); √125 = 11.18 ('a square eleven kilometres on each side')",
+        [new_km2, np.sqrt(125), 11 * 11], [124.9, 11.18, 121], [0.1, 0.005, 0])
+    for nm_, vv_ in (("amphan_s1_before", vb_), ("amphan_s1_after", va_)):
+        g_ = (np.nan_to_num(np.clip((vv_ + 24.0) / 24.0, 0, 1)) * 255 + 0.5).astype(np.uint8)       # VV −24 … 0 dB → grey 0 … 255, one stretch for both dates
+        Image.fromarray(g_).save(IMG / f"{nm_}.jpg", quality=90)
+    row("DS36", "dates: 16 May 23:55 UTC (before Amphan; it formed that day far south); 22 May 23:55 UTC − first land fix 09 UTC 20 May = 2.6 d ('two and a half days after landfall')",
+        [(np.datetime64("2020-05-22T23:55") - np.datetime64("2020-05-20T09:00")) / np.timedelta64(1, "h") / 24], [2.6], [0.05])
+    V["amphan_s1"] = {"box_wsen": SBOX, "new_km2": new_km2, "km2_px": float(km2_px), "valid_km2": float(valid.sum() * km2_px), "stretch_db": [-24, 0], "threshold_db": -18,
+                      "times_utc": ["2020-05-16T23:55", "2020-05-22T23:55"], "orbit": 150, "cloudy": cloudy, "coast": B1.box_lines(coast, (21.9, 22.95, 88.6, 90.1), nd=3),
+                      "places": [["Satkhira", PLACES_BD["Satkhira"][0], PLACES_BD["Satkhira"][1]]]}
+    say.update({"s1_km2": 125, "s1_side": 11})
+
+    # ---- s24: what the dark lines and the empty corners of the two radius-height sections are (user notes item 7)
+    from skimage.measure import find_contours as fc_
+
+    def zero_info(Sx, rmax):
+        ny2, nx2 = Sx.shape
+        cs_ = fc_(Sx, 0.0, mask=np.isfinite(Sx))
+        rz = lambda cl: np.c_[cl[:, 1] / (nx2 - 1) * rmax, 16 - cl[:, 0] / (ny2 - 1) * 16]  # noqa: E731
+        main = max(cs_, key=len)
+        mrz = rz(main)
+        # the label goes on the low in | out border (z 0.9-4 km, r 55-90 % of the axis), searched over every piece of the contour
+        allrz = np.concatenate([rz(c_) for c_ in cs_])
+        lowb = allrz[(allrz[:, 1] > 0.9) & (allrz[:, 1] < 4) & (allrz[:, 0] > 0.55 * rmax) & (allrz[:, 0] < 0.9 * rmax)]
+        lp = lowb[np.argmin(np.abs(lowb[:, 0] - 0.75 * rmax))] if len(lowb) else mrz[len(mrz) // 2]
+        closed = [rz(c_) for c_ in cs_ if len(c_) > 40 and np.hypot(*(c_[0] - c_[-1])) < 2 and (rz(c_)[:, 1] > 3).all()]
+        pocket = max(closed, key=len).mean(0) if closed else None
+        fin_ = np.isfinite(Sx)
+        rows_valid = np.where(fin_.any(1))[0]
+        z_top = 16 - rows_valid.min() / (ny2 - 1) * 16
+        col0 = np.where(fin_.any(0))[0].min() / (nx2 - 1) * rmax
+        # the empty corner: on the lowest row that has data, the empty run from the left; its height at a third of that radius
+        row_b = rows_valid.max()
+        bottom = np.where(fin_[row_b - 2])[0]
+        r_corner = bottom.min() / (nx2 - 1) * rmax if len(bottom) else rmax
+        jc = int(round((col0 + r_corner) / 2 / rmax * (nx2 - 1)))      # halfway between the first data column and the corner's edge
+        zc = 16 - np.where(fin_[:, jc])[0].max() / (ny2 - 1) * 16
+        return {"line_pt": [float(lp[0]), float(lp[1])], "pocket": None if pocket is None else [float(pocket[0]), float(pocket[1])], "z_top": float(z_top),
+                "r_first": float(col0), "corner": [float(r_corner), float(zc)], "n_lines": len(cs_)}
+    zi_ian, zi_amp = zero_info(SEC, 200), zero_info(SA, 300)
+    row("DS37", f"s24: the dark lines are u_r = 0 contours (Ian {zi_ian['n_lines']}, Amphan {zi_amp['n_lines']} pieces, each with a closed pocket); no data: above the top level "
+        f"(Ian {zi_ian['z_top']:.1f} km, Amphan {zi_amp['z_top']:.1f} km), the bottom-left corner below the sea surface (Ian r < {zi_ian['corner'][0]:.0f} km, z < {zi_ian['corner'][1]:.1f} km; "
+        f"Amphan r < {zi_amp['corner'][0]:.0f} km, z < {zi_amp['corner'][1]:.1f} km), Amphan inside its first ring (r < {zi_amp['r_first']:.0f} km)",
+        [zi_ian["pocket"] is not None, zi_amp["pocket"] is not None, zi_ian["z_top"] < 16, zi_amp["z_top"] < 16, zi_ian["corner"][0] > 10, zi_amp["corner"][0] > 25, round(zi_amp["r_first"])],
+        [1, 1, 1, 1, 1, 1, 25], 0)
+    V["sec"]["zero"] = zi_ian
+    V["amphan"]["sec"]["zero"] = zi_amp
+    V["luts"] ={"ur": UR_LUT, "speed": B1.lut_hex(SPEED_LUT), "dbz": B1.lut_hex(DBZ_LUT), "depth": depth_lut}
     row("DS23", "s25/s31 recap numbers = scene rows: 0.048 m/s², ≈ 200 × smaller than g, 35 / 13", [round(acc, 3), round(9.81 / acc, -2), round(vt25), round(-vr25)], [0.048, 200, 35, 13], 0)
     V["say"] = say
 
@@ -1374,8 +1615,16 @@ def main() -> int:
             "amphan": {"era5": "ARCO 2020-05-20T06, sfc + 10 pl; centre = ERA5 msl minimum", "rings_km": [50, 100, 200, 300], "section_radii_km": arad,
                        "section_mask": "a ring with any point where p_level > msl", "ibtracs_sid": AMPHAN_SID, "modis": "GIBS MODIS Terra 2020-05-18 (PNG 1400 × 2000 px, 9-19 N, 83-90 E); crop 600 km about the eye, contrast enhanced (lum p10-p99.9 → 30-255, γ 2)"},
             "flood_v3": {**FLOOD, "nargis": NARGIS},
+            "flood_u1": {"note": "user notes 2026-11-06 (prompt_b.docx) items 8-11", "natural_colour": "MODIS bands 1-4-3 of the same granules and crops as the 7-2-1 pairs, "
+                         "a Gaussian of half a 500-m pixel on all three bands (b1 250 m, b4/b3 500 m), reflectance 0-0.28 → 0-1, γ 1.5 (one stretch for every date)", "amphan_s1": {"orbit": 150, "box_wsen": [88.8, 22.12, 89.92, 22.75],
+                         "dates_utc": ["2020-05-16T23:55", "2020-05-22T23:55"], "grey": "VV −24 … 0 dB", "new_water": "VV < −18 dB after, not before, drop ≥ 3 dB, not JRC "
+                         "seasonality ≥ 10 months, blobs ≥ 9 px (8-connected): 124.9 km² (UN-SPIDER practice, adapted)"},
+                         "nargis_ibtracs": "NI 2008117N11090; WMO = IMD 3-min", "idai_ibtracs": "SI 2019063S18038; WMO = RSMC La Réunion 10-min",
+                         "idai_pair": "v3_idai2019: Aqua 2019-03-11 | Terra 2019-03-25, crop 33.80-34.95 E, 20.20-19.35 S", "s24_zero": "u_r = 0 contour points and no-data extents (DS37)",
+                         "stack_spacing": "s18-s19: layers evenly spaced 0.9 units apart (heights not to scale; tags carry the heights)"},
             "time_compression": {"s01/s09": "one 75-min lap in ≈ 8-10 s", "s15": "streak families illustrative", "s18-s19": "tangential dashes animate one analysis hour"},
-            "exaggerations": ["s03-s07 small turns drawn at 20°", "s04 slivers ×20", "s14 5° turn drawn at 15°", "s15-s16 vertical ×4", "s18-s19 vertical ×15",
+            "exaggerations": ["s03-s07 small turns drawn at 20°", "s04 slivers ×20", "s14 5° turn drawn at 15°", "s15-s16 vertical ×4", "s18-s19 layers evenly spaced (not to scale; user notes 2026-11-06)",
+                              "s30 microwave pulses schematic", "s30-s34 swipe lines animate a comparison, not a time change",
                               "s20/s24 height axis stretched", "s27 sea-level inset ×50, shelf profile vertical exaggeration", "s14 isobars schematic", "s20/s24 in and out arrows schematic (summary of the u_r section)",
                               "s19 up arrows: TDR slanted ring-max w at 2/5/8/11 km on a schematic ring (the TDR ring radius, the stack's centre), length ∝ w, lean = the fitted outward slope"],
             "screen_deviations": ["s18 layers on a 500-km local tangent-plane square (true local shape, one centre for all levels; vortex tilt ignored, research §1d)",
@@ -1387,7 +1636,12 @@ def main() -> int:
                     "ETOPO 2022 and ETOPO1 (NOAA NCEI). MODIS MOD09/MYD09 and MCD43A4 (NASA LP DAAC) via Google Earth Engine.",
                     "Blue Marble: Next Generation, NASA Earth Observatory. Made with Natural Earth.",
                     "Vertical wind: NOAA P-3 tail Doppler radar (Level 2, mission 20220928H1) — NOAA AOML Hurricane Research Division; Gamache 1995 / Reasor et al. 2009 (synthesis); "
-                    "Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).", "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."],
+                    "Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).", "Music: tools/sound (procedural synthesis, our own code, CC0-1.0).",
+                    "Contains modified Copernicus Sentinel data 2020 (Sentinel-1 GRD, ESA), processed in Google Earth Engine (s30, user notes 2026-11-06).",
+                    "NASA Worldview / GIBS VIIRS (Suomi NPP) and MODIS (Terra, Aqua) corrected reflectance (NASA open data) (s30, s31, s33).",
+                    "MODIS MOD09/MYD09 v061 surface reflectance (NASA LP DAAC) via Google Earth Engine: Nargis 2008 and Idai 2019 pairs (s32, s34).",
+                    "JRC Global Surface Water v1.4 (EC JRC / Google), seasonality: permanent water left out of the Sentinel-1 new-water count (s30).",
+                    "ETOPO 2022 60 arc-second (NOAA NCEI): the Irrawaddy delta heights (s31)."],
         "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
         "inputs_sha256": inp, "render_assets": render, "data_files": data_hashes, "data_sizes_bytes": sizes, "checks": rows,
         "flags": [r for r in rows if r["kind"] == "flag"],

@@ -39,7 +39,7 @@ const unitV = (a: number): Pt => [Math.cos(a * D2R), -Math.sin(a * D2R)];
 // ================================================================ s00 title
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way");
+  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "turning arrows and cylinders");   // user notes 2026-11-06 item 12: the pulse on the concept words
   const pz = 1 + 0.06 * pulse(f, tEasy, 14);
   // Part A: a parcel gliding round a ring (one lap ≈ 4 s, time compressed), its velocity v θ̂ turning; faint copies every 0.5 s;
   // the inward acceleration (rose) grows at the parcel
@@ -93,9 +93,9 @@ const S01: React.FC = () => {
   const a = 20 + (360 * f) / 240;                 // one lap in 8 s (75 min compressed)
   const p = polar(O, R, a), u = unitV(a + 90), er = unitV(a);
   const tAcc = AT(k, 1, "accelerating"), tGuess = SS(k, 2), tTC = AT(k, 3, "tropical cyclone"), tNames = SS(k, 4), tSix = AT(k, 5, "seven parts"),
-    tTurn = SS(k, 6), tTwo = SS(k, 7), tIan = SS(k, 8), tAmp = SS(k, 9);
+    tTurn = SS(k, 6), tTwo = SS(k, 7), tIan = SS(k, 8), tAmp = SS(k, 9), tFlood = SS(k, 10);   // user notes item 12: S10 names the three flood events
   const oRing = fout(f, tTwo - 10, 14), oWorld = fin(f, tTwo, 14);
-  const W = { lat0: -20, lat1: 60, lon0: -100, lon1: 100, x: 90, y: 150, w: 900, h: 360 };
+  const W = { lat0: -30, lat1: 60, lon0: -100, lon1: 100, x: 90, y: 150, w: 900, h: 405 };   // to 30 S: Idai (19.8 S) inside
   const P = mapP(W);
   const world = D.world as number[][];
   const thumbs = ["grid", "storm", "globe", "enu", "route", "map", "frames"];
@@ -122,6 +122,11 @@ const S01: React.FC = () => {
           <path d={linesPath(P, world)} fill="none" stroke={C.local} strokeWidth={2} clipPath="url(#s01world)" />
           <circle cx={P(26.5, -82.3)[0]} cy={P(26.5, -82.3)[1]} r={13} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tIan)} />
           <circle cx={P(20.7, 87.8)[0]} cy={P(20.7, 87.8)[1]} r={13} fill={C.gold} stroke={C.bg} strokeWidth={4} opacity={fin(f, tAmp)} />
+          {/* user notes 2026-11-06 item 12: the two more flood storms, on their words (landfall points, IBTrACS) */}
+          <circle cx={P(16.0, 94.3)[0]} cy={P(16.0, 94.3)[1]} r={11} fill={C.first} stroke={C.bg} strokeWidth={4} opacity={fin(f, AT(k, 10, "Nargis"))} />
+          <circle cx={P(-19.8, 34.9)[0]} cy={P(-19.8, 34.9)[1]} r={11} fill={C.first} stroke={C.bg} strokeWidth={4} opacity={fin(f, AT(k, 10, "Idai"))} />
+          <g data-lc-maplabel="1"><Lbl x={P(16.0, 94.3)[0] - 20} y={P(16.0, 94.3)[1] + 36} t="Nargis" c={C.key} s={T.floor} a="end" o={fin(f, AT(k, 10, "Nargis"))} /></g>
+          <g data-lc-maplabel="1"><Lbl x={P(-19.8, 34.9)[0] + 22} y={P(-19.8, 34.9)[1]} t="Idai" c={C.key} s={T.floor} o={fin(f, AT(k, 10, "Idai"))} /></g>
           {/* heavy-phase K6 r0: Ian's label ran off the left edge, Amphan's into the keyword column: anchored to the box ends */}
           <Lbl x={W.x} y={W.y + W.h + 50} t="Hurricane Ian · 2022" c={C.key} s={T.floor} o={fin(f, tIan)} />
           <Lbl x={W.x + W.w} y={W.y + W.h + 110} t="Cyclone Amphan · 2020" c={C.key} s={T.floor} a="end" o={fin(f, tAmp)} />
@@ -139,7 +144,8 @@ const S01: React.FC = () => {
         <Keyword f={f} text="two real storms" at={[MX, 120]} s={T.key} appear={tTwo} />
         <Lbl x={MX} y={205} t="each with its own job" c={C.key} s={T.floor} o={fin(f, tTwo + 20)} />
         <Keyword f={f} text="winds in 3-D · storm surge" at={[MX, 520]} s={T.floor} appear={tIan + 30} />
-        <Keyword f={f} text="another ocean · floods" at={[MX, 620]} s={T.floor} appear={tAmp + 30} />
+        <Keyword f={f} text="another ocean" at={[MX, 620]} s={T.floor} appear={tAmp + 30} />
+        <Keyword f={f} text="floods: Amphan · Nargis · Idai" at={[MX, 720]} s={T.floor} c={C.first} appear={tFlood} />
         <g opacity={win(f, tSix, tTwo - 20)}>
           {thumbs.map((t, i) => { const x = 140 + i * 240, y = 752;
             return <g key={t} opacity={i === 1 ? 1 : 0.35}>
@@ -328,8 +334,8 @@ const S04: React.FC = () => {
         <Lbl x={UC[0]} y={UC[1] + UR + 70} t="turn drawn large (20°)" c={C.muted} s={T.floor} a="middle" o={win(f, tEast, tDiv + 60)} />{/* fix 0 B16 */}
         {/* #5b r1 S5: where cos θ = 3/5 and sin θ = 4/5 come from (Part 1's balloon) */}
         <Lbl x={UC[0]} y={UC[1] + UR + 70} t="balloon: 3 km E, 4 km N, 5 km away" c={C.local} s={T.floor} a="middle" o={win(f, tCheck, tWorks - 12)} />
-        <Keyword f={f} text="how fast do cos and sin change?" at={[MX, 120]} s={T.floor} appear={0} out={tSlope - 20} />
-        <Keyword f={f} text="slope = change ÷ change" at={[MX, 120]} s={T.key} appear={tSlope} out={tDiv - 20} />
+        <Keyword f={f} text="how fast do $\cos$ and $\sin$ change?" at={[MX, 120]} s={T.floor} appear={0} out={tSlope - 20} />
+        <Keyword f={f} text="slope = change $\div$ change" at={[MX, 120]} s={T.key} appear={tSlope} out={tDiv - 20} />
         <Keyword f={f} text="east part shrinks" at={[MX, 120]} s={T.key} appear={tMinus} out={tCheck - 20} />
         <Keyword f={f} text="check with numbers" at={[MX, 120]} s={T.key} appear={tCheck} out={tWorks - 20} />
         <Keyword f={f} text="the rule works" at={[MX, 120]} s={T.key} appear={tWorks} />
@@ -430,13 +436,14 @@ const S05: React.FC = () => {
 // ================================================================ s06 dθ̂/dθ = −r̂, from scratch (D14 1-5)
 const S06: React.FC = () => {
   const f = useCurrentFrame(), k = K("s06_dtheta_dtheta");
-  const t1 = SS(k, 3), t1b = SS(k, 5), t2 = SS(k, 7), t3 = SS(k, 10), t3b = SS(k, 11), t4 = SS(k, 14), t4b = SS(k, 16), t5 = SS(k, 18), tTh0 = SS(k, 20), tSw = SS(k, 21),
-    tMin = SS(k, 22), tExact = SS(k, 23), tSmall = SS(k, 24), tRate = SS(k, 25);
+  // user notes 2026-11-06 items 1-2: no spoken step numbers ("Step one." … were sentences of their own): the steps now open with
+  // "First, …" (S3), "Next, …" (S6), "Now turn …" (S8), "Which way …" (S11), "To find that direction, …" (S14); no on-screen step label
+  const t1 = SS(k, 3), t1b = SS(k, 4), t2 = SS(k, 6), t3 = SS(k, 8), t3b = SS(k, 8) + 12, t4 = SS(k, 11), t4b = SS(k, 12), t5 = SS(k, 14), tTh0 = SS(k, 15), tSw = SS(k, 16),
+    tMin = SS(k, 17), tExact = SS(k, 18), tSmall = SS(k, 19), tRate = SS(k, 20);
   // fix 0 B8: on S18 both arrows ease back to the un-turned position, so −r̂ (drawn at θ + 180°) is exactly r̂ flipped
   const turn = DRAW_TURN * prog(f, t3b, t3b + 40) * (1 - prog(f, t5, t5 + 40));
   const toM = prog(f, tExact, tExact + 40);              // the step-4 slide arrow moves onto −r̂ (same direction)
   const R0 = tip(TH + turn), Q0 = tip(TH + 90 + turn), Qa = tip(TH + 90);
-  const step = f < t2 ? 1 : f < t3 ? 2 : f < t4 ? 3 : f < t5 ? 4 : 5;
   const slideEnd: Pt = [Qa[0] + unitV(TH + 180)[0] * 150, Qa[1] + unitV(TH + 180)[1] * 150];
   const mr = tip(TH + 180, UR);
   return (
@@ -448,9 +455,9 @@ const S06: React.FC = () => {
         <Arrow p={UC} q={Q0} color={C.second} w={10} head={40} o={fin(f, t1b)} dash={f < t2 ? "18 12" : undefined} />
         <Lbl x={Q0[0] + 16} y={Q0[1] + 64} t="$\hat{\boldsymbol\theta}$" c={C.second} s={T.key} o={fin(f, t1b)} />{/* #5b r1 S3: inside the circle, under its arrow (it sat on the gold arc, under "Δθ") */}
         <circle cx={UC[0]} cy={UC[1]} r={18} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, t1b, t2)} />
-        {/* #5b r1 S7: the quarter-turn arc and its label on the words (S9), not on "Step two" */}
-        <path d={arcD(UC, UR + 30, TH + turn, TH + 90 + turn)} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, AT(k, 9, "quarter turn"), t4)} />
-        <Lbl x={tip(TH + 45, UR + 80)[0]} y={tip(TH + 45, UR + 80)[1]} t="quarter turn ahead" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 9, "quarter turn"), t3)} />
+        {/* #5b r1 S7: the quarter-turn arc and its label on the words (S7) */}
+        <path d={arcD(UC, UR + 30, TH + turn, TH + 90 + turn)} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, AT(k, 7, "quarter turn"), t4)} />
+        <Lbl x={tip(TH + 45, UR + 80)[0]} y={tip(TH + 45, UR + 80)[1]} t="quarter turn ahead" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 7, "quarter turn"), t3)} />
         <Wedge c={UC} r={100} a0={TH} a1={TH + turn} o={win(f, t3b, t4)} />
         <Wedge c={UC} r={100} a0={TH + 90} a1={TH + 90 + turn} o={win(f, t3b, t4)} />
         <path d={arcD(UC, UR, TH + 90, TH + 90 + turn)} fill="none" stroke={C.second} strokeWidth={12} opacity={win(f, t3b, t4b)} />
@@ -464,7 +471,6 @@ const S06: React.FC = () => {
         <Lbl x={UC[0] - 300} y={UC[1] + 52} t="$\hat{\boldsymbol\theta}$ turned 90°" c={C.neg} s={T.floor} o={win(f, t4b, tMin)} />
         <Arrow p={UC} q={mr} color={C.neg} w={10} head={40} o={fin(f, tExact)} />
         <Lbl x={mr[0] - 10} y={mr[1] + 50} t="$-\hat{\mathbf r}$" c={C.neg} s={T.key} a="end" o={fin(f, tExact)} />
-        <Lbl x={UC[0]} y={UC[1] + UR + 70} t={`step ${step}`} c={C.muted} s={T.floor} a="middle" o={fin(f, t1) * fout(f, tSmall - 10)} />
         <Keyword f={f} text="how does $\hat{\boldsymbol\theta}$ change?" at={[MX, 120]} s={T.key} appear={0} out={t5 - 20} />
         <Keyword f={f} text="swap, minus on the first" at={[MX, 120]} s={T.floor} appear={t5} out={tSmall - 20} />
         <Keyword f={f} text="$\hat{\boldsymbol\theta}$ swings towards $-\hat{\mathbf r}$" at={[MX, 120]} s={T.key} appear={tSmall} />
@@ -477,7 +483,7 @@ const S06: React.FC = () => {
       ]} o={fout(f, tSmall - 6)} />
       <TeX s={String.raw`\Delta\hat{\boldsymbol\theta}\approx-\hat{\mathbf r}\,\Delta\theta`} x={MX} y={300} size={T.calc} o={fin(f, tSmall)} />
       {/* fix 0 B18: the arc rule restated on S13 */}
-      <TeX s={String.raw`s=1\times\Delta\theta=\Delta\theta`} x={MX} y={300} size={56} o={win(f, SS(k, 13), t4b - 10)} />
+      <TeX s={String.raw`s=1\times\Delta\theta=\Delta\theta`} x={MX} y={300} size={56} o={win(f, SS(k, 10), t4b - 10)} />
       <TeX s={EQ_S06} x={MX} y={480} size={96} o={fin(f, tRate)} />
     </Scene>
   );
@@ -487,7 +493,10 @@ const S06: React.FC = () => {
 const S07: React.FC = () => {
   const f = useCurrentFrame(), k = K("s07_toward_centre");
   const tBal = SS(k, 1), tDraw = SS(k, 2), tEast = SS(k, 3), tLean = SS(k, 4), tSlide = SS(k, 5), tSwing = SS(k, 6), tMeans = SS(k, 7), tWe = SS(k, 8),
-    tNum = SS(k, 9), tAt = SS(k, 10), tAfter = SS(k, 11), tChg = SS(k, 12), tDiv = SS(k, 13), tRh = SS(k, 14), tComp = SS(k, 15), tSl = SS(k, 16), tRule = SS(k, 18);
+    tNum = SS(k, 9), tQ = SS(k, 10), tDth = SS(k, 11), tAt = SS(k, 12), tAfter = SS(k, 13), tChg = SS(k, 14), tDiv = SS(k, 15), tRh = SS(k, 16), tOpp = SS(k, 17),
+    tComp = SS(k, 18), tSl = SS(k, 19), tRule = SS(k, 21);
+  // user notes 2026-11-06 item 3: the check is built as a difference quotient: what it is (S10), the small turn named (S11: Δθ = 0.01 rad),
+  // the two arrows and their difference (S12-S14), the division by Δθ (S15), then −r̂ written out beside the result (S16-S17)
   const S: Pt = [330, 520], Rb = 260;
   const angs = [0, 25, 53.13];
   const pts = angs.map((a) => polar(S, Rb, a));
@@ -504,7 +513,7 @@ const S07: React.FC = () => {
         <g transform={`translate(${S[0]} ${S[1]})`}><rect x={-8} y={-60} width={16} height={60} fill={C.local} /><circle cx={0} cy={6} r={16} fill={C.local} /></g>
         <Lbl x={S[0]} y={S[1] + 64} t="station" c={C.local} s={T.floor} a="middle" o={fin(f, tBal)} />
         {/* fix 0 B18: the circle's radius and the three balloon angles; the inset named */}
-        <Lbl x={S[0]} y={S[1] + Rb + 56} t="r = 5 km" c={C.local} s={T.floor} a="middle" o={fin(f, tBal)} />
+        <Lbl x={S[0]} y={S[1] + Rb + 56} t="$r$ = 5 km" c={C.local} s={T.floor} a="middle" o={fin(f, tBal)} />
         {/* K6 round 1: "53°" sat on the −r̂ arrow: it goes outside the circle, up-right of its balloon */}
         {pts.map((q, i) => <Lbl key={`ang${i}`} x={i === 2 ? q[0] + 70 : q[0] - 24} y={i === 2 ? q[1] - 84 : q[1] + 40} t={["0°", "25°", "53°"][i]} c={C.muted} s={T.floor}
           a={i === 2 ? "start" : "end"} o={fin(f, tDraw + 10 * i)} />)}
@@ -527,31 +536,44 @@ const S07: React.FC = () => {
         <Keyword f={f} text="slopes, part by part" at={[MX, 120]} s={T.key} appear={tComp} out={tRule - 20} />{/* K6 round 2: was a label under the rows (the d/dθ fraction reached it) */}
         <Keyword f={f} text="$\hat{\mathbf r}$ → towards $\hat{\boldsymbol\theta}$ · $\hat{\boldsymbol\theta}$ → towards $-\hat{\mathbf r}$" at={[MX, 120]} s={T.floor} appear={tRule} />
       </Svg>
-      {/* heavy-phase K6 r0: size 56 ran the second row past the 1842 edge; fraction rows get their real height */}
-      {/* fix 0 B9: the inputs, the subtraction and r̂ written out (left-aligned so the long rows fit inside 1842) */}
-      <CalcStack f={f} x={MX} y={210} size={44} maxLines={4} o={oCalc * fout(f, tComp - 6)} rows={[
-        { rhs: String.raw`\hat{\boldsymbol\theta}(53.13^\circ)=(-0.8,\ 0.6)`, at: tAt },
-        { rhs: String.raw`\hat{\boldsymbol\theta}(53.70^\circ)=(-\sin53.70^\circ,\ \cos53.70^\circ)`, at: tAfter },
-        { rhs: String.raw`=(-0.806,\ 0.592)`, at: AT(k, 11, "minus zero point eight zero six"), cont: true },
-        // K6 round 1: this row ran to x 2300: the subtraction on two lines (components aligned), the result under it
-        { rhs: String.raw`\Delta\hat{\boldsymbol\theta}=\big(-0.806-(-0.800),`, at: tChg },
-        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}=\big(}0.592-0.600\big)`, at: tChg + 10, cont: true },
-        // #5b r1 M4 (A2): the sign step on its own line, tagged below the stack
-        { rhs: String.raw`=\big(-0.806+0.800,\ 0.592-0.600\big)`, at: tChg + 22, cont: true },
-        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}}=(-0.006,\ -0.008)`, at: Math.max(tChg + 40, AT(k, 12, "minus zero point zero zero six")), cont: true },
-        { rhs: String.raw`\dfrac{(-0.006,\ -0.008)}{0.01}=(-0.6,\ -0.8)`, at: tDiv },
-        { rhs: String.raw`\hat{\mathbf r}=(0.6,\ 0.8)\ \Rightarrow\ (-0.6,\ -0.8)=-\hat{\mathbf r}`, at: tRh, glow: pulse(f, tRh, 20) },
+      {/* user notes 2026-11-06 item 3: the rule being checked, written out (stays up through the whole check) */}
+      <TeX s={String.raw`\dfrac{d\hat{\boldsymbol\theta}}{d\theta}\approx\dfrac{\hat{\boldsymbol\theta}(\theta+\Delta\theta)-\hat{\boldsymbol\theta}(\theta)}{\Delta\theta}`} x={MX} y={235} size={48}
+        o={fin(f, tQ) * fout(f, tComp - 6)} />
+      {/* the small turn, named before it is used */}
+      <TeX s={String.raw`\Delta\theta=0.01\ \mathrm{rad}\approx${(0.01 / D2R).toFixed(2)}^\circ\ \ (\text{a small turn})`} x={MX - 40} y={355} size={44} c={C.gold} o={fin(f, tDth) * fout(f, tDiv - 6)} />
+      <CalcStack f={f} x={MX - 40} y={430} size={44} maxLines={6} o={oCalc * fout(f, tDiv - 6)} rows={[
+        { rhs: String.raw`\hat{\boldsymbol\theta}(\theta)=\hat{\boldsymbol\theta}(53.13^\circ)=(-0.8,\ 0.6)`, at: tAt },
+        { rhs: String.raw`\theta+\Delta\theta=53.13^\circ+0.57^\circ=53.70^\circ`, at: tAfter, c: C.gold },
+        { rhs: String.raw`\hat{\boldsymbol\theta}(53.70^\circ)=(-0.806,\ 0.592)`, at: AT(k, 13, "minus zero point eight zero six") },
+        // #5b r1 M4 (A2): the sign step written out
+        { rhs: String.raw`\Delta\hat{\boldsymbol\theta}=\big(-0.806-(-0.8),\ 0.592-0.6\big)`, at: tChg },
+        { rhs: String.raw`\phantom{\Delta\hat{\boldsymbol\theta}}=(-0.006,\ -0.008)`, at: Math.max(tChg + 30, AT(k, 14, "minus zero point zero zero six")), cont: true },
       ]} />
+      {/* the division: the quotient with the numbers plugged in (the user's 10:51 question), then the result */}
+      <CalcStack f={f} x={MX + 92} y={305} size={44} maxLines={4} o={fin(f, tDiv) * fout(f, tComp - 6)} rows={[
+        { lhs: String.raw`\dfrac{d\hat{\boldsymbol\theta}}{d\theta}`, rhs: String.raw`\approx\dfrac{(-0.806,\ 0.592)-(-0.8,\ 0.6)}{0.01}`, at: tDiv, h: 118 },
+        { rhs: String.raw`=\dfrac{(-0.006,\ -0.008)}{0.01}`, at: tDiv + 24, cont: true, h: 112 },
+        { rhs: String.raw`=(-0.6,\ -0.8)`, at: AT(k, 15, "and we get"), cont: true, c: C.neg, glow: pulse(f, AT(k, 15, "and we get"), 20), ul: tOpp + 30 },
+      ]} />
+      {/* −r̂ written out beside it: the same numbers with the opposite sign (aligned under the result) */}
+      <CalcStack f={f} x={MX + 92} y={615} size={44} maxLines={4} o={fin(f, tRh) * fout(f, tComp - 6)} rows={[
+        { lhs: String.raw`\hat{\mathbf r}`, rhs: String.raw`=(\cos\theta,\ \sin\theta)=(0.6,\ 0.8)`, at: tRh, c: C.second },
+        { lhs: String.raw`-\hat{\mathbf r}`, rhs: String.raw`=-(\cos\theta,\ \sin\theta)`, at: tOpp, c: C.neg },
+        { rhs: String.raw`=-(0.6,\ 0.8)`, at: tOpp + 14, cont: true, c: C.neg },
+        { rhs: String.raw`=(-0.6,\ -0.8)`, at: tOpp + 28, cont: true, c: C.neg, glow: pulse(f, tOpp + 28, 20), ul: tOpp + 30 },
+      ]} />
+      <Svg>
+        <Lbl x={MX} y={800} t="minus a minus is a plus" c={C.local} s={T.floor} o={win(f, tChg + 30, tDiv - 10)} />
+        {/* the two results, one above the other at the same x and both underlined in gold: the quotient and −r̂ are the same arrow */}
+        <Lbl x={MX + 430} y={834} t="← the same" c={C.gold} s={T.key} o={fin(f, tOpp + 40) * fout(f, tComp - 6)} />
+      </Svg>
       {/* #5b r1 S5 (A1): the part-by-part check in its own stack, with the middle line (slope by slope, as in s05) */}
       <CalcStack f={f} x={MX} y={210} size={44} maxLines={3} o={fin(f, tComp) * fout(f, tRule - 6)} rows={[
         { rhs: String.raw`\dfrac{d\hat{\boldsymbol\theta}}{d\theta}=\dfrac{d}{d\theta}(-\sin\theta,\ \cos\theta)`, at: tSl, h: 128 },
         { rhs: String.raw`=\Big(\dfrac{d(-\sin\theta)}{d\theta},\ \dfrac{d\cos\theta}{d\theta}\Big)`, at: tSl + 20, cont: true, h: 128 },
-        { rhs: String.raw`=(-\cos\theta,\ -\sin\theta)`, at: AT(k, 16, "is minus cosine theta"), cont: true },
-        { rhs: String.raw`=-\hat{\mathbf r}`, at: SS(k, 17), cont: true },
+        { rhs: String.raw`=(-\cos\theta,\ -\sin\theta)`, at: AT(k, 19, "is minus cosine theta"), cont: true },
+        { rhs: String.raw`=-\hat{\mathbf r}`, at: SS(k, 20), cont: true },
       ]} />
-      <Svg><Lbl x={MX} y={720} t="same numbers as the slope check" c={C.muted} s={T.floor} o={win(f, tAfter + 20, tChg - 10)} />
-        <Lbl x={MX} y={720} t="minus a minus is a plus" c={C.local} s={T.floor} o={win(f, tChg + 22, tDiv - 10)} />
-        </Svg>
       <TeX s={EQ_S07} x={MX} y={330} size={64} o={fin(f, tRule)} />
     </Scene>
   );
@@ -599,7 +621,7 @@ const S08: React.FC = () => {
           {[-1, 0, 1, 2, 3].map((j) => <line key={`h${j}`} x1={P(0, j)[0]} y1={P(0, j)[1]} x2={P(12, j)[0]} y2={P(0, j)[1]} stroke={C.grid} strokeWidth={1.5} />)}
           <Arrow p={O} q={p0} color={C.ink} w={10 + 4 * pulse(f, tBoth, 24)} head={36} o={f > tNow ? 0.4 : 1} />
           <Arrow p={O} q={[O[0] + 1 * U, O[1]]} color={C.second} w={8 + 4 * pulse(f, tBoth, 24)} head={28} o={fout(f, tNow)} />
-          <Lbl x={P(5.5, 0)[0]} y={O[1] + 46} t="×10" c={C.gold} s={T.floor} a="middle" o={win(f, tQ, tNow)} />
+          <Lbl x={P(5.5, 0)[0]} y={O[1] + 46} t="$\times10$" c={C.gold} s={T.floor} a="middle" o={win(f, tQ, tNow)} />
           {/* fix 0 B4: the turned unit arrow d̂_new = (cos 0.1, sin 0.1), drawn on S10 */}
           <Arrow p={O} q={P(d1[0], d1[1])} color={C.second} w={8} head={28} o={win(f, tTurn, tNow + 30)} />
           <Arrow p={O} q={p1} color={C.ink} w={10} head={36} o={fin(f, tNow)} />
@@ -615,7 +637,7 @@ const S08: React.FC = () => {
           <Arrow p={zp([pc[0][0], pc[0][1]])} q={zp([pc[0][0] + pc[1][0], pc[0][1] + pc[1][1]])} color={C.second} w={9} head={30} o={fin(f, tP2)} />
           <Arrow p={zp([pc[0][0] + pc[1][0], pc[0][1] + pc[1][1]])} q={zp([PR.dP[0], PR.dP[1]])} color={C.neg} w={7} head={22} o={fin(f, tP3)} />
           <Arrow p={zp([0, 0])} q={zp([PR.dP[0], PR.dP[1]])} color={C.gold} w={5} head={22} o={fin(f, tWhere) * 0.7} />
-          <Lbl x={ZO[0] - 10} y={ZO[1] + 55} t="change, drawn 3× larger" c={C.muted} s={T.floor} a="end" o={fin(f, tWhere)} />
+          <Lbl x={ZO[0] - 10} y={ZO[1] + 55} t="change, drawn $3\times$ larger" c={C.muted} s={T.floor} a="end" o={fin(f, tWhere)} />
           <Lbl x={zp([pc[0][0], 0])[0] + 16} y={ZO[1] + 6} t="(1, 0)" c={C.local} s={T.floor} o={fin(f, tP1)} />
           <Lbl x={zp([pc[0][0], 0])[0] + 16} y={ZO[1] - Z * 0.5} t="(−0.05, 1)" c={C.second} s={T.floor} o={fin(f, tP2)} />
           <Lbl x={zp([PR.dP[0], PR.dP[1]])[0] - 24} y={zp([PR.dP[0], PR.dP[1]])[1] - 34} t="(−0.005, 0.1)" c={C.neg} s={T.floor} a="end" o={fin(f, tP3)} />
@@ -631,7 +653,7 @@ const S08: React.FC = () => {
                   <Lbl x={x + j * 110 + 22} y={j === 2 ? y0 - h - 32 : y0 + 38} t={n3(hv[i][j])} c={[C.local, C.second, C.neg][j]} s={T.floor} a="middle" /></g>; })}
               <Lbl x={x + 132} y={y0 + 104} t={String.raw`$\Delta t$ = ${["1", "0.5", "0.25"][i]} s`} c={C.muted} s={T.floor} a="middle" />
             </g>; })}
-          <Lbl x={100} y={392} t="third bar drawn 10× taller" c={C.muted} s={T.floor} />
+          <Lbl x={100} y={392} t="third bar drawn $10\times$ taller" c={C.muted} s={T.floor} />
         </g>
         {/* #5b r1 M1 (halves, second span): the two pieces that survive stay on the left to the end, in the colours of their lines */}
         <g opacity={oKeep}>
@@ -641,9 +663,9 @@ const S08: React.FC = () => {
         </g>
         <Keyword f={f} text="what to keep: $\hat{\mathbf r}$ → $\hat{\boldsymbol\theta}$, $\hat{\boldsymbol\theta}$ → $-\hat{\mathbf r}$" at={[MX, 120]} s={T.floor} appear={0} out={tTool - 20} />
         <Keyword f={f} text="the product rule" at={[MX, 120]} s={T.key} appear={tTool} out={tKey - 20} />
-        <Keyword f={f} text="small × small vanishes" at={[MX, 120]} s={T.key} appear={tKey} out={tRule - 20} />
+        <Keyword f={f} text="small $\times$ small vanishes" at={[MX, 120]} s={T.key} appear={tKey} out={tRule - 20} />
         <SkipChip f={f} k={k} to={keepTime("s13_acceleration_numbers")} a={1} b={2} />
-        <Lbl x={MX} y={230} t="number × arrow: both change" c={C.key} s={T.floor} o={win(f, tQ, tEasy - 20)} />
+        <Lbl x={MX} y={230} t="number $\times$ arrow: both change" c={C.key} s={T.floor} o={win(f, tQ, tEasy - 20)} />
         {/* fix 0 B19: the toy numbers appear on their words; d̂ named */}
         <Lbl x={MX} y={210} t="v = 10 m/s · $\hat{\mathbf d}$ = (1, 0), length 1" c={C.key} s={T.floor} o={win(f, tTake, tKey - 20)} />
         <Lbl x={MX} y={270} t="→ 11 m/s" c={C.key} s={T.floor} o={win(f, tLater, tKey - 20)} />
@@ -684,8 +706,8 @@ const S08: React.FC = () => {
       <TeX s={String.raw`v\,\dfrac{d\hat{\mathbf d}}{dt}=(-0.05,\ 1)`} x={510} y={480} size={48} c={C.second} o={oKeep} />
       <Svg>
         {/* #5b r1 M1: in the colours of the two surviving pieces drawn on the left */}
-        <Lbl x={MX} y={600} t="number's rate × arrow" c={C.local} s={T.floor} o={fin(f, tSay)} />
-        <Lbl x={MX} y={670} t="+ number × arrow's rate" c={C.second} s={T.floor} o={fin(f, tSay + 20)} />
+        <Lbl x={MX} y={600} t="number's rate $\times$ arrow" c={C.local} s={T.floor} o={fin(f, tSay)} />
+        <Lbl x={MX} y={670} t="+ number $\times$ arrow's rate" c={C.second} s={T.floor} o={fin(f, tSay + 20)} />
       </Svg>
     </Scene>
   );

@@ -3,8 +3,8 @@
 // flood_visuals §v3 (user decision 2026-11-05: the flight goes to Amphan's landfall and shelf; the swipe is Cyclone Nargis 2008,
 // MODIS 7-2-1), the recap and the end card. Every number on screen is asserted against data/cs.json below.
 import React from "react";
-import { Img, useCurrentFrame } from "remotion";
-import { C, T } from "../house/kit/type";
+import { AbsoluteFill, Img, useCurrentFrame } from "remotion";
+import { C, FONT, T } from "../house/kit/type";
 import { Pt, pulse, textW } from "../house/kit/draw";
 import { TeX } from "../house/kit/tex";
 import { CalcStack } from "./cs_lib";  // fix 0: fraction rows get their real height
@@ -14,7 +14,7 @@ import { AnimatedWindArrow } from "../house/kit/wind";
 import { Notebook } from "../house/kit/icons";
 import { globePath, llPath, useTex } from "./kit_cs/globe";
 import {
-  AMP, AT, Arrow, SE, Ax, Axes, CST, ColourBar, Cross, Curve, D, D2R, FLD, Globe, GeoImg, GeoMap, IMG, K, LEN, LUT_DEPTH, LUT_UR, Lbl, MapBox, NAR, Place, RING, SAY, SEC, SRC, SS,
+  AMP, ASSET_NAMES, AT, ArcHead, Arrow, SE, Ax, Proj, lerpBox, Axes, CST, ColourBar, Cross, Curve, D, D2R, FLD, Globe, GeoImg, GeoMap, IMG, K, LEN, LUT_DEPTH, LUT_UR, Lbl, MapBox, NAR, Place, RING, SAY, SEC, SRC, SS,
   SSP, STK, Scene, SideCallout, SpeedBar, Svg, URBar, arcD, axP, boxAt, clamp, fin, fout, linesPath, lutCss, mapP, mix, nf, poly, polar, prog, win,
 } from "./cs_lib";
 import { InUpOut, SecAxes, secP } from "./cs_sB";
@@ -136,7 +136,7 @@ const S22: React.FC = () => {
         <Keyword f={f} text="18 May · two days before landfall" at={[MX, 120]} s={T.floor} appear={0} out={tEye - 20} />
         <SideCallout f={f} lines="pinhole eye" at={[MX, 300]} appear={tEye} target={[e[0] + 16, e[1]]} c={C.gold} />
         {/* Part 1 lessons B1: the zoom says what it magnifies (the frame's true width from the crop box, ÷ the zoom) */}
-        <Lbl x={MX} y={420} t={`zoomed ${z.toFixed(1)}×: frame ≈ ${Math.round(((cr[3] - cr[2]) * 111.32 * Math.cos(((cr[0] + cr[1]) / 2) * D2R)) / z / 10) * 10} km wide`}
+        <Lbl x={MX} y={420} t={String.raw`zoomed $${z.toFixed(1)}\times$: frame ≈ ${Math.round(((cr[3] - cr[2]) * 111.32 * Math.cos(((cr[0] + cr[1]) / 2) * D2R)) / z / 10) * 10} km wide`}
           c={C.muted} s={T.floor} o={fin(f, tEye)} />
         <Keyword f={f} text="same shape → same coordinates" at={[MX, 120]} s={T.floor} appear={tSame} />
       </Svg>
@@ -272,11 +272,26 @@ const VBar: React.FC<{ x: number; y: number; h: number; o?: number }> = ({ x, y,
 );
 const S24: React.FC = () => {
   const f = useCurrentFrame(), k = K("s24_amphan_curtain");
-  const tSame = SS(k, 1), tIn = SS(k, 2), tOut = SS(k, 3), tBlur = SS(k, 4), tFit = SS(k, 5);
+  // user notes 2026-11-06 item 7: S4-S9 say and label the dark lines (the u_r = 0 m/s contour of each section: the border between in and
+  // out; it wraps small weak pockets, so the two pictures' lines differ) and the parts with no colour (no data)
+  const tSame = SS(k, 1), tIn = SS(k, 2), tOut = SS(k, 3), tLines = SS(k, 4), tPock = SS(k, 5), tDiff = SS(k, 6), tNoData = SS(k, 7), tCorner = SS(k, 8),
+    tTopE = AT(k, 8, "along the top"), tFirst = SS(k, 9), tBlur = SS(k, 10), tFit = SS(k, 11);
   // K6 round 1: both panels and the bar 40 px lower: the keywords at y 50 sat on the "height (km)" titles and 4 px from the bar
   const BI = { x: 150, y: 150, w: 640, h: 500 }, BA = { x: 1160, y: 150, w: 640, h: 500 };
   const PI = (r: number, z: number) => secP(r, z, BI, 200), PA = (r: number, z: number) => secP(r, z, BA, 300);
   const am = AMP.sec, mn = PA(am.min[1], am.min[2]), mx = PA(am.max[1], am.max[2]);
+  const ZI = SEC.zero as { line_pt: number[]; pocket: number[]; z_top: number; r_first: number; corner: number[] };
+  const ZA = am.zero as { line_pt: number[]; pocket: number[]; z_top: number; r_first: number; corner: number[] };
+  const zeroLbl = (P: (r: number, z: number) => Pt, z: { line_pt: number[] }, o: number) => { const q = P(z.line_pt[0], z.line_pt[1]);
+    return o <= 0 ? null : <g data-lc-maplabel="1"><text x={q[0]} y={q[1]} fill="#1a1a24" fontSize={T.floor} fontFamily={FONT} fontWeight={650} textAnchor="middle"
+      dominantBaseline="central" stroke="#f1ece0" strokeWidth={0.2 * T.floor} strokeLinejoin="round" paintOrder="stroke" opacity={o}>0</text></g>; };
+  const ring = (P: (r: number, z: number) => Pt, z: { pocket: number[] }, o: number) => { const q = P(z.pocket[0], z.pocket[1]);
+    return <circle cx={q[0]} cy={q[1]} r={58} fill="none" stroke={C.gold} strokeWidth={5} strokeDasharray="12 8" opacity={o} />; };
+  /** a gold dashed outline of a no-data region given in (r, z) */
+  const box = (P: (r: number, z: number) => Pt, r0: number, r1: number, z0: number, z1: number, o: number) => { const a = P(r0, z1), b = P(r1, z0);
+    return <rect x={a[0] - 3} y={a[1] - 3} width={b[0] - a[0] + 6} height={b[1] - a[1] + 6} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="10 7" opacity={o} />; };
+  const oL = fin(f, tLines + 10), oP = win(f, tPock, tNoData - 10) + 0.6 * pulse(f, tDiff, 40);
+  const oC = win(f, tCorner, tBlur - 10), oT = win(f, tTopE, tBlur - 10), oF = win(f, tFirst, tBlur - 10);
   return (
     <Scene>
       <Svg>
@@ -287,16 +302,28 @@ const S24: React.FC = () => {
         <VBar x={935} y={244} h={380} />{/* #5b r2: 24 px lower, clear of the tags at y 68 (also while they rise in) */}
         <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tIn)} />
         <circle cx={mx[0]} cy={mx[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tOut)} />
+        {/* the u_r = 0 lines named on the pictures: a contour label "0" on each, the pockets ringed */}
+        {zeroLbl(PI, ZI, oL)}{zeroLbl(PA, ZA, oL)}
+        {ring(PI, ZI, oP)}{ring(PA, ZA, oP)}
+        {/* no data: the corner below the sea surface, the strip above the top level, Amphan inside its first ring */}
+        {box(PI, 0, ZI.corner[0], 0, ZI.corner[1], oC)}{box(PA, 0, ZA.corner[0], 0, ZA.corner[1], oC)}
+        {box(PI, 0, 200, ZI.z_top, 16, oT)}{box(PA, 0, 300, ZA.z_top, 16, oT)}
+        {box(PA, 0, ZA.r_first, 0, 16, oF)}
         <InUpOut f={f} P={PI} rIn={[30, 170]} rUp={40} zTop={15.5} o={fin(f, tBlur)} />
         <InUpOut f={f} P={PA} rIn={[60, 260]} rUp={70} zTop={15.0} o={fin(f, tBlur)} />
         <Keyword f={f} text="Ian (left) · Amphan (right)" at={[150, 68]} s={T.floor} appear={0} out={tIn - 20} />
         <Keyword f={f} text={`≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 68]} s={T.floor} appear={tIn} out={tOut - 20} />
-        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 68]} s={T.floor} appear={tOut} out={tBlur - 20} />
+        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 68]} s={T.floor} appear={tOut} out={tLines - 20} />
+        <Keyword f={f} text="dark line: $u_r$ = 0 m/s · in | out border" at={[560, 68]} s={T.floor} appear={tLines} out={tPock - 20} />
+        <Keyword f={f} text="it wraps weak pockets" at={[560, 68]} s={T.floor} c={C.gold} appear={tPock} out={tDiff - 20} />
+        <Keyword f={f} text="pockets differ · big pattern the same" at={[560, 68]} s={T.floor} appear={tDiff} out={tNoData - 20} />
+        <Keyword f={f} text="no colour: no data" at={[560, 68]} s={T.floor} appear={tNoData} out={tCorner - 20} />
+        <Keyword f={f} text="below the sea surface · above the top level" at={[560, 68]} s={T.floor} c={C.gold} appear={tCorner} out={tFirst - 20} />
+        <Keyword f={f} text={`Amphan: starts ${Math.round(ZA.r_first)} km out`} at={[560, 68]} s={T.floor} c={C.gold} appear={tFirst} out={tBlur - 20} />
         <Keyword f={f} text="in, up and out · same picture" at={[700, 68]} s={T.floor} c={C.gold} appear={tFit} />
       </Svg>
-      {/* #5b r1 S14: the dark bottom-left corners named (rings that cut the sea floor: no data) */}
-      <SourceBelow text="Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · dark corner: no data (below the sea surface)" pic={{ x: BI.x - 70, y: BI.y, w: BI.w + 70, h: BI.h + 100 }} w={700} name="s24 src i" />
-      <SourceBelow text={"Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC · dark corner: no data (below the sea surface)"} pic={{ x: BA.x - 70, y: BA.y, w: BA.w + 70, h: BA.h + 100 }} w={700} name="s24 src a" />
+      <SourceBelow text="Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC" pic={{ x: BI.x - 70, y: BI.y, w: BI.w + 70, h: BI.h + 100 }} w={700} name="s24 src i" />
+      <SourceBelow text="Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC" pic={{ x: BA.x - 70, y: BA.y, w: BA.w + 70, h: BA.h + 100 }} w={700} name="s24 src a" />
     </Scene>
   );
 };
@@ -428,9 +455,9 @@ const Gauges: React.FC<{ A: Ax; f: number; tF: number; tS: number; land?: boolea
       {/* K6 round 1: the end labels (one line each, 570-640 px) ran over the map, the colour bar and each other: two lines each, right
           of the chart's end (the gauge's value on its line's level) */}
       {labels ? <>
-        <Lbl x={A.x + A.w + 16} y={pk[1] - 6} t={`≈ +${G1.ext.toFixed(1)} m`} c={C.second} s={T.floor} o={fin(f, tF + 50)} />
+        <Lbl x={A.x + A.w + 16} y={pk[1] - 6} t={`≈ +${G1.ext.toFixed(1)} m`} c={C.second} s={T.floor} o={fin(f, tF + 50)} />{/* lint-ok: m is the unit metre */}
         <Lbl x={A.x + A.w + 16} y={pk[1] + 40} t="Fort Myers (upriver)" c={C.second} s={T.floor} o={fin(f, tF + 50)} />
-        <Lbl x={A.x + A.w + 16} y={tr[1] - 44} t={`≈ ${nf(G2.ext, 1)} m`} c="#8db5e2" s={T.floor} o={fin(f, tS + 50)} />
+        <Lbl x={A.x + A.w + 16} y={tr[1] - 44} t={`≈ ${nf(G2.ext, 1)} m`} c="#8db5e2" s={T.floor} o={fin(f, tS + 50)} />{/* lint-ok: m is the unit metre */}
         <Lbl x={A.x + A.w + 16} y={tr[1] + 2} t="Saint Petersburg" c="#8db5e2" s={T.floor} o={fin(f, tS + 50)} />
       </> : null}
     </g>
@@ -474,10 +501,10 @@ const S27: React.FC = () => {
         <Lbl x={MX} y={312} t="4.57 m ≈ 4.5 m (nearest half metre)" c={C.muted} s={T.floor} o={win(f, tNHC + 30, tFM - 10)} />
         <Keyword f={f} text="official: 3-4.5 m above ground" at={[MX, 120]} s={T.floor} c={C.local} appear={tNHC} out={tNorth - 20} />{/* #5b r2 S8: no "NHC" (named in full on the source line) */}
         <g opacity={fin(f, tFM)}><Gauges A={GAx} f={f} tF={tFM} tS={tStP} land={false} labels={false} /></g>
-        <Lbl x={MX} y={230} t={`Fort Myers (upriver) ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.second} s={T.floor} o={win(f, tFM + 30, tEk - 20)} />
+        <Lbl x={MX} y={230} t={`Fort Myers (upriver) ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.second} s={T.floor} o={win(f, tFM + 30, tEk - 20)} />{/* lint-ok: m is the unit metre */}
         <Keyword f={f} text={`≈ ${Math.round(CST.d_fs)} km north: Tampa Bay`} at={[MX, 120]} s={T.floor} appear={tNorth} out={tFlip - 20} />
         <Lbl x={MX} y={300} t="wind blows out to sea" c={C.key} s={T.floor} o={win(f, tOut, tEk - 20)} />
-        <Lbl x={MX} y={370} t={`Saint Petersburg ≈ ${nf(CST.gauges["8726520"].ext, 1)} m`} c="#8db5e2" s={T.floor} o={win(f, tStP + 30, tEk - 20)} />
+        <Lbl x={MX} y={370} t={`Saint Petersburg ≈ ${nf(CST.gauges["8726520"].ext, 1)} m`} c="#8db5e2" s={T.floor} o={win(f, tStP + 30, tEk - 20)} />{/* lint-ok: m is the unit metre */}
         <Keyword f={f} text="the surge flips" at={[MX, 120]} s={T.key} c={C.gold} appear={tFlip} out={tEk - 20} />
         <Keyword f={f} text="more: Friction and Ekman layers" at={[MX, 120]} s={T.floor} appear={tEk} out={tMore - 20} />
         <Keyword f={f} text="more: Storm surge" at={[MX, 120]} s={T.floor} appear={tMore} />
@@ -589,7 +616,7 @@ const S29: React.FC = () => {
   );
 };
 
-// ================================================================ s30 the swipe: Cyclone Nargis 2008, MODIS 7-2-1 (user decision 2026-11-05)
+// ================================================================ the flood section (user notes 2026-11-06 items 8-11): shared swipe frame
 /** the swipe line position (0 = left edge, 1 = right edge): starts at the RIGHT edge (all "before"), slow glide to the LEFT edge
  * (all "after"), hold, slow glide back to the RIGHT edge, hold, glide to the MIDDLE and stop (user, 2026-11-05); ≈ 4.5 s per
  * full width, eased */
@@ -602,93 +629,451 @@ export const swipeX = (f: number, t0: number) => {
   if (f <= seg[4]) return 1;
   return 1 - 0.5 * prog(f, seg[4], seg[5]);
 };
-const S30: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s30_flood_swipe");
-  // timed by phrase (SSP): the s30 slot sentences are re-voiced for Nargis in the heavy phase and may gain a bridging sentence
-  const tFalse = SSP(k, "false colour"), tBands = SSP(k, "infrared"), tKey = SSP(k, "plants"), tL = SSP(k, "On the left"), tR = SSP(k, "On the right"),
-    tPin = SSP(k, "same latitudes"), tLeft = SSP(k, "left behind"), tMore = SSP(k, "own movie");
-  const PB = { x: 80, y: 60, w: 1000, h: 0 };
-  const box = NAR.crop_wsen as number[];
-  PB.h = Math.round((PB.w * (box[3] - box[1])) / ((box[2] - box[0]) * Math.cos(16.4 * D2R)));
+/** the frames one full swipe takes (swipeX) */
+const SWIPE_LEN = 2.5 * 135 + 2 * 45;
+/** two sweeps in one scene: the first sweep from t1; from tBack the line glides from the middle back to the right edge (while the
+ * pictures change colouring); the second sweep from t2 */
+const swipe2 = (f: number, t1: number, tBack: number, t2: number) => f < tBack ? swipeX(f, t1) : f < t2 ? 0.5 + 0.5 * prog(f, tBack, tBack + 40) : swipeX(f, t2);
+type Place3 = [string, number, number];
+/** One before/after frame: the "after" picture fills the box, the "before" picture shows left of the line (house swipe rule). Two
+ * colourings may cross-fade (`mixB` 0 = the first pair, 1 = the second). Place names step aside while the line passes (K6 round 1 lesson). */
+const SwipeFrame: React.FC<{ f: number; PB: { x: number; y: number; w: number; h: number }; box: number[]; sx: number; pairs: [string, string][]; mixB?: number;
+  tags: [string, string]; places: Place3[]; labelSide?: Record<string, [number, number, "start" | "end"]>; km: number; oLine?: number; oTags?: number; o?: number;
+  oPlaces?: number; children?: React.ReactNode }> = ({ f, PB, box, sx, pairs, mixB = 0, tags, places, labelSide = {}, km, oLine = 1, oTags, o = 1, oPlaces = 1, children }) => {
+  if (o <= 0) return null;
   const B: MapBox = { lat0: box[1], lat1: box[3], lon0: box[0], lon1: box[2], ...PB };
   const P = mapP(B);
-  const sx = swipeX(f, SSP(k, "glides") + 12);   // #5b r1 S22: the first sweep starts on "As the line glides across" (it ran during S7)
   const xl = PB.x + sx * PB.w;
   const oBef = clamp((xl - PB.x - 40) / 160, 0, 1), oAft = clamp((PB.x + PB.w - xl - 40) / 160, 0, 1);
-  const km50 = (50 / (111.32 * Math.cos(16.4 * D2R)) / (box[2] - box[0])) * PB.w;
-  const places = NAR.places as [string, number, number][];
-  // K6 round 1: a name on the picture steps aside (fades) while the swipe line passes over it: the line and the edge of the
-  // "before" picture would cut through its letters (351 hits on Yangon, the date tags, "50 km", "N"); 6 px clear, 24 px fade
-  const nearO = (x0: number, x1: number) => { const d = xl < x0 ? x0 - xl : xl > x1 ? xl - x1 : 0; return clamp((d - 6) / 24, 0, 1); };
+  const kmPx = (km / (111.32 * Math.cos(((box[1] + box[3]) / 2) * D2R)) / (box[2] - box[0])) * PB.w;
+  const nearO = (x0: number, x1: number) => { const d = xl < x0 ? x0 - xl : xl > x1 ? xl - x1 : 0; return clamp((d - 20) / 24, 0, 1); };
   const tw = (t: string) => textW(t, T.floor);
-  // #5b r2 N-M2: from "On the left" the full frame shrinks into two half-width panels side by side (before left, after right), each
-  // pulsing on its own words; before "glides" both grow back into the one swipe frame (line at the right edge), and the slow sweeps
-  // right → left → right → middle run as before. No re-voicing.
-  const tG = SSP(k, "glides");
-  const sp = prog(f, tL, tL + 24) * (1 - prog(f, tG - 42, tG - 8));       // 0 = the full swipe frame, 1 = the two half panels
-  const hw = 480, hh = Math.round((hw * PB.h) / PB.w), hy = PB.y + Math.round((PB.h - hh) / 2);
-  const lerpR = (hx: number) => ({ x: mix(PB.x, hx, sp), y: mix(PB.y, hy, sp), w: mix(PB.w, hw, sp), h: mix(PB.h, hh, sp) });
-  const Rb = lerpR(PB.x), Ra = lerpR(PB.x + PB.w - hw);
-  const oFull = 1 - clamp(sp * 3, 0, 1);                                   // the full frame's own marks (names, scale, N, line, tags)
-  const oHalf = clamp((sp - 0.75) / 0.25, 0, 1);                          // the half panels' date tags
-  const oLine = fin(f, tG - 8, 8);
+  const op = (j: number) => (pairs.length === 1 ? 1 : j === 0 ? 1 - mixB : mixB);
+  return (
+    <AbsoluteFill style={{ opacity: o }}>
+      {pairs.map(([, aft], j) => op(j) <= 0 ? null : <div key={`a${j}`} style={{ position: "absolute", left: PB.x, top: PB.y, width: PB.w, height: PB.h, overflow: "hidden", opacity: op(j) }}>
+        <Img src={IMG(aft as (typeof ASSET_NAMES)[number])} style={{ position: "absolute", left: 0, top: 0, width: PB.w, height: PB.h }} /></div>)}
+      {pairs.map(([bef], j) => op(j) <= 0 ? null : <div key={`b${j}`} style={{ position: "absolute", left: PB.x, top: PB.y, width: sx * PB.w, height: PB.h, overflow: "hidden", opacity: op(j) }}>
+        <Img src={IMG(bef as (typeof ASSET_NAMES)[number])} style={{ position: "absolute", left: 0, top: 0, width: PB.w, height: PB.h }} /></div>)}
+      <Svg>
+        <rect x={PB.x} y={PB.y} width={PB.w} height={PB.h} fill="none" stroke={C.grid} strokeWidth={3} />
+        <line x1={xl} y1={PB.y} x2={xl} y2={PB.y + PB.h} stroke={C.gold} strokeWidth={6} opacity={oLine} />
+        {places.map(([nm, la, lo]) => { const q = P(la, lo), sd = labelSide[nm] ?? [16, -30, "start"];
+          const x0 = sd[2] === "end" ? q[0] + sd[0] - tw(nm) : q[0] + sd[0], x1 = sd[2] === "end" ? q[0] + sd[0] : q[0] + sd[0] + tw(nm);
+          return <Place key={nm} p={q} t={nm} dx={sd[0]} dy={sd[1]} r={8} a={sd[2]} o={oPlaces * fin(f, 8) * nearO(Math.min(x0, q[0] - 10), Math.max(x1, q[0] + 10))} />; })}
+        <line x1={PB.x + PB.w - 40 - kmPx} y1={PB.y + PB.h - 30} x2={PB.x + PB.w - 40} y2={PB.y + PB.h - 30} stroke={C.key} strokeWidth={6}
+          opacity={nearO(PB.x + PB.w - 40 - kmPx, PB.x + PB.w - 40)} />
+        <Lbl x={PB.x + PB.w - 40 - kmPx / 2} y={PB.y + PB.h - 64} t={`${km} km`} c={C.key} s={T.floor} a="middle"
+          o={nearO(PB.x + PB.w - 40 - kmPx / 2 - tw(`${km} km`) / 2, PB.x + PB.w - 40 - kmPx / 2 + tw(`${km} km`) / 2)} />
+        <g opacity={nearO(PB.x + 40, PB.x + 110)}><Arrow p={[PB.x + 50, PB.y + 120]} q={[PB.x + 50, PB.y + 40]} color={C.key} w={5} head={20} /></g>
+        <Lbl x={PB.x + 80} y={PB.y + 70} t="N" c={C.key} s={T.floor} o={nearO(PB.x + 80, PB.x + 80 + tw("N"))} />{/* lint-ok: N = north on the compass arrow */}
+        <Lbl x={PB.x + 130} y={PB.y + 48} t={tags[0]} c={C.key} s={T.floor} o={(oTags ?? oLine) * oBef * nearO(PB.x + 130, PB.x + 130 + tw(tags[0]))} />
+        <Lbl x={PB.x + PB.w - 20} y={PB.y + 48} t={tags[1]} c={C.key} s={T.floor} a="end" o={(oTags ?? oLine) * oAft * nearO(PB.x + PB.w - 20 - tw(tags[1]), PB.x + PB.w - 20)} />
+        {children}
+      </Svg>
+    </AbsoluteFill>
+  );
+};
+/** the house colour-key swatches (icons inside their box: a filled square with a muted rim), in a 2-column grid */
+const Swatches: React.FC<{ f: number; x: number; y: number; items: [string, string][]; t0: number; dt?: number }> = ({ f, x, y, items, t0, dt = 12 }) => <>
+  {items.map(([t, c], i) => <g key={t} opacity={fin(f, t0 + dt * i)}>
+    <rect x={x + (i % 2) * 360} y={y + Math.floor(i / 2) * 70} width={44} height={44} fill={c} stroke={C.muted} strokeWidth={2} />
+    <Lbl x={x + 60 + (i % 2) * 360} y={y + 22 + Math.floor(i / 2) * 70} t={t} c={C.key} s={T.floor} /></g>)}
+</>;
+const rgbHex = (q: number[]) => `#${q.map((v) => Math.round(v).toString(16).padStart(2, "0")).join("")}`;
+
+// ================================================================ s30 Amphan's flood: why no ordinary before/after, then the Sentinel-1 radar pair
+const AS1 = D.amphan_s1;
+// user notes 2026-11-06: the new screen numbers = the data (DS31-DS37 in the builder; the render fails otherwise)
+const CHECK_U1: [string, number, number, number][] = [
+  ["s1 km2", D.amphan_s1.new_km2, 124.9, 0.05], ["say s1", D.say.s1_km2, 125, 0], ["sqrt125", Math.sqrt(125), 11.2, 0.05],
+  ["n kt", D.nargis.lf_kt, 90, 0], ["n kmh", D.nargis.lf_kt * 1.852, D.say.n_kmh, 0.5], ["n ms", D.say.n_kmh / 3.6, D.say.n_ms, 0.5],
+  ["i kt", D.idai.lf_kt, 85, 0], ["i kmh", D.idai.lf_kt * 1.852, D.say.i_kmh, 0.5], ["i ms", D.say.i_kmh / 3.6, D.say.i_ms, 0.5],
+  ["amphan first ring", D.amphan.sec.zero.r_first, 25, 0.5], ["dtheta deg", 0.01 / D2R, 0.57, 0.005],
+];
+CHECK_U1.forEach(([n, v, r, tol]) => { if (!(Math.abs(v - r) <= tol)) throw new Error(`CHECK ${n}: data ${v} vs screen ${r}`); });
+const S30: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s30_amphan_radar");
+  const tCloud = SS(k, 1), tSmall = SS(k, 2), tRadar = SS(k, 3), tSend = SS(k, 4), tMirror = SS(k, 5), tHere = SS(k, 6), tSweep = SS(k, 7), tKm2 = SS(k, 8), tSq = SS(k, 9);
+  const box = AS1.box_wsen as number[];
+  const asp = ((box[2] - box[0]) * Math.cos(((box[1] + box[3]) / 2) * D2R)) / (box[3] - box[1]);
+  const PB = { x: 80, y: 70, w: 1000, h: Math.round(1000 / asp) };
+  const half = { w: 490, h: Math.round(490 / asp) };
+  const oCl = fout(f, tRadar - 6, 14), oSch = win(f, tRadar, tHere - 14, 14), oPair = fin(f, tHere + 2, 14);
+  const sx = swipeX(f, AT(k, 7, "line moves"));
+  const kmPx = PB.w / ((box[2] - box[0]) * 111.32 * Math.cos(((box[1] + box[3]) / 2) * D2R));
+  const side = Math.sqrt(125) * kmPx;
+  const sqAt: Pt = [PB.x + 70, PB.y + PB.h - 60 - side];
+  const greyLut = Array.from({ length: 16 }, (_, i) => rgbHex([i * 17, i * 17, i * 17]));
+  const P1 = mapP({ lat0: box[1], lat1: box[3], lon0: box[0], lon1: box[2], x: 80, y: 260, w: half.w, h: half.h });
+  const P2 = mapP({ lat0: box[1], lat1: box[3], lon0: box[0], lon1: box[2], x: 590, y: 260, w: half.w, h: half.h });
+  const sat: Pt = [300, 150];
   return (
     <Scene>
-      <div style={{ position: "absolute", left: Ra.x, top: Ra.y, width: Ra.w, height: Ra.h, overflow: "hidden", opacity: f < tL ? 1 : 0.4 + 0.6 * fin(f, tR, 14) }}>
-        <Img src={IMG("cst_swipe_after.jpg")} style={{ position: "absolute", left: 0, top: 0, width: Ra.w, height: Ra.h }} />
-      </div>
-      <div style={{ position: "absolute", left: Rb.x, top: Rb.y, width: Rb.w, height: Rb.h, overflow: "hidden" }}>
-        <div style={{ position: "absolute", left: 0, top: 0, width: sx * Rb.w, height: Rb.h, overflow: "hidden" }}>
-          <Img src={IMG("cst_swipe_before.jpg")} style={{ position: "absolute", left: 0, top: 0, width: Rb.w, height: Rb.h }} />
-        </div>
-      </div>
-      <Svg>
-        <rect x={Ra.x} y={Ra.y} width={Ra.w} height={Ra.h} fill="none" stroke={C.grid} strokeWidth={3} opacity={oHalf} />{/* its edge would cut the growing "before" picture */}
-        <rect x={Rb.x} y={Rb.y} width={Rb.w} height={Rb.h} fill="none" stroke={C.grid} strokeWidth={3} />
-        <rect x={Rb.x - 4} y={Rb.y - 4} width={Rb.w + 8} height={Rb.h + 8} fill="none" stroke={C.gold} strokeWidth={6} opacity={pulse(f, tL + 24, 36)} />
-        <rect x={Ra.x - 4} y={Ra.y - 4} width={Ra.w + 8} height={Ra.h + 8} fill="none" stroke={C.gold} strokeWidth={6} opacity={pulse(f, tR + 6, 36)} />
-        <Lbl x={PB.x} y={hy - 36} t={`before · ${NAR.BEFORE}`} c={C.key} s={T.floor} o={oHalf * fin(f, tL + 16)} />
-        <Lbl x={PB.x + PB.w - hw} y={hy - 36} t={`after · ${NAR.AFTER}`} c={C.key} s={T.floor} o={oHalf * fin(f, tR)} />
-        <line x1={xl} y1={PB.y} x2={xl} y2={PB.y + PB.h} stroke={C.gold} strokeWidth={6} opacity={oLine} />
-        {places.map(([nm, la, lo]) => { const q = P(la, lo), east = q[0] + 16 + tw(nm) > PB.x + PB.w - 20;   // Yangon: name left of its dot (it ran out of the picture)
-          const x0 = east ? q[0] - 16 - tw(nm) : q[0] - 10, x1 = east ? q[0] + 10 : q[0] + 16 + tw(nm);
-          return <Place key={nm} p={q} t={nm} dx={east ? -16 : 16} dy={-30} r={8} a={east ? "end" : "start"} o={fin(f, 8) * nearO(x0, x1) * oFull} />; })}
-        <g opacity={oFull}>
-          <line x1={PB.x + PB.w - 40 - km50} y1={PB.y + PB.h - 30} x2={PB.x + PB.w - 40} y2={PB.y + PB.h - 30} stroke={C.key} strokeWidth={6} />
-          <Arrow p={[PB.x + 50, PB.y + 120]} q={[PB.x + 50, PB.y + 40]} color={C.key} w={5} head={20} />
+      {/* S0-S2: the ordinary (natural-colour) pictures after landfall: cloud */}
+      <Svg o={oCl}>
+        {[["cst_amphan_clouds_21.jpg", 80, "21 May 2020", P1], ["cst_amphan_clouds_22.jpg", 590, "22 May 2020", P2]].map(([h, x, t, P]) => <g key={t as string}>
+          <clipPath id={`s30c${x}`}><rect x={x as number} y={260} width={half.w} height={half.h} /></clipPath>
+          <image href={IMG(h as "cst_amphan_clouds_21.jpg")} x={x as number} y={260} width={half.w} height={half.h} preserveAspectRatio="none" />
+          <path d={linesPath(P as Proj, AS1.coast)} fill="none" stroke={C.gold} strokeWidth={2.5} opacity={0.9} clipPath={`url(#s30c${x})`} />
+          <rect x={x as number} y={260} width={half.w} height={half.h} fill="none" stroke={C.grid} strokeWidth={3} />
+          <Lbl x={x as number} y={225} t={t as string} c={C.key} s={T.floor} /></g>)}
+        <Lbl x={80} y={260 + half.h + 50} t="gold line: the coast, under the cloud" c={C.gold} s={T.floor} />
+      </Svg>
+      <SourceBelow text="Images: NASA Worldview (MODIS Terra), natural colour · 21 and 22 May 2020" pic={{ x: 80, y: 260, w: 1000, h: half.h + 80 }} w={1000} o={oCl} name="s30 src clouds" />
+      {/* S3-S5: how radar sees: a code-drawn satellite, microwave pulses, rough land returns some (bright), calm water reflects them away (dark) */}
+      <Svg o={oSch}>
+        <g transform={`translate(${sat[0]} ${sat[1]})`}>
+          <rect x={-40} y={-24} width={80} height={48} rx={6} fill="#33415f" stroke={C.ink} strokeWidth={3} />
+          <rect x={-150} y={-14} width={96} height={28} fill="#2c5a9e" stroke={C.ink} strokeWidth={2} /><rect x={54} y={-14} width={96} height={28} fill="#2c5a9e" stroke={C.ink} strokeWidth={2} />
         </g>
-        <Lbl x={PB.x + PB.w - 40 - km50 / 2} y={PB.y + PB.h - 64} t="50 km" c={C.key} s={T.floor} a="middle" o={oFull * nearO(PB.x + PB.w - 40 - km50 / 2 - tw("50 km") / 2, PB.x + PB.w - 40 - km50 / 2 + tw("50 km") / 2)} />
-        <Lbl x={PB.x + 80} y={PB.y + 70} t="N" c={C.key} s={T.floor} o={oFull * nearO(PB.x + 80, PB.x + 80 + tw("N"))} />
-        <Lbl x={PB.x + 130} y={PB.y + 30 + 18} t={`before · ${NAR.BEFORE}`} c={C.key} s={T.floor} o={oLine * oBef * nearO(PB.x + 130, PB.x + 130 + tw(`before · ${NAR.BEFORE}`))} />
-        <Lbl x={PB.x + PB.w - 20} y={PB.y + 30 + 18} t={`after · ${NAR.AFTER}`} c={C.key} s={T.floor} a="end"
-          o={oLine * oAft * nearO(PB.x + PB.w - 20 - tw(`after · ${NAR.AFTER}`), PB.x + PB.w - 20)} />
-        <Keyword f={f} text="Cyclone Nargis · Myanmar · 2008" at={[MX + 40, 120]} s={T.floor} appear={0} out={tKey - 20} />
-        <Keyword f={f} text="false colour" at={[MX + 40, 210]} s={T.key} appear={tFalse} out={tKey - 20} />
-        <Keyword f={f} text="water: dark blue or black" at={[MX + 40, 120]} s={T.floor} appear={tKey} out={tLeft - 20} />
-        <Keyword f={f} text="what the surge left" at={[MX + 40, 120]} s={T.floor} c={C.local} appear={tLeft} out={tMore - 20} />
-        <Keyword f={f} text="more: Floods from space" at={[MX + 40, 120]} s={T.floor} appear={tMore} />
-        <Lbl x={MX + 40} y={300} t="same latitudes and longitudes" c={C.key} s={T.floor} o={win(f, tPin, tLeft - 20)} />
-        <Lbl x={MX + 40} y={300} t="landfall: 2 May 2008" c={C.key} s={T.floor} o={win(f, tL, tPin - 20)} />
+        <Lbl x={sat[0]} y={sat[1] - 62} t="Sentinel-1" c={C.key} s={T.floor} a="middle" />
+        <rect x={120} y={640} width={420} height={60} fill="#5b6b3a" /><rect x={560} y={640} width={420} height={60} fill="#1c2f6e" />
+        <Lbl x={330} y={740} t="land: rough" c={C.key} s={T.floor} a="middle" /><Lbl x={770} y={740} t="calm water: a mirror" c={C.key} s={T.floor} a="middle" />
+        {[0, 1, 2].map((i) => { const ph = ((f - tSend) / 40 - i / 3 + 3) % 1; const o = f < tSend ? 0 : 1 - ph;
+          return <g key={i} opacity={o}><path d={arcD(sat, 120 + ph * 420, -125, -55)} fill="none" stroke={C.second} strokeWidth={4} strokeDasharray="10 8" /></g>; })}
+        <Arrow p={[330, 640]} q={[300, 230]} color={C.ink} w={7} head={26} o={fin(f, tMirror - 30)} />
+        <Lbl x={350} y={520} t="echo back: bright" c={C.ink} s={T.floor} o={fin(f, tMirror - 30)} />
+        <Arrow p={[770, 640]} q={[960, 300]} color={C.local} w={7} head={26} o={fin(f, tMirror)} />
+        <Lbl x={985} y={380} t="bounces away: dark" c={C.local} s={T.floor} o={fin(f, tMirror)} />
       </Svg>
+      {/* S6-S9: the radar pair */}
+      <SwipeFrame f={f} PB={PB} box={box} sx={sx} pairs={[["cst_amphan_s1_before.jpg", "cst_amphan_s1_after.jpg"]]} tags={["before · 16 May", "after · 22 May"]}
+        places={AS1.places as Place3[]} labelSide={{ Satkhira: [16, 84, "start"] }} km={25} oLine={fin(f, AT(k, 7, "line moves") - 8, 8)} oTags={fin(f, AT(k, 6, "sixteenth")) * fout(f, LEN(k) - 14)}
+        o={oPair}>
+        <g opacity={fin(f, tSq)}>
+          <rect x={sqAt[0]} y={sqAt[1]} width={side} height={side} fill="none" stroke={C.gold} strokeWidth={5} />
+          <g data-lc-maplabel="1"><Lbl x={sqAt[0] + side + 14} y={sqAt[1] + side / 2} t="11 km" c={C.gold} s={T.floor} /></g>
+        </g>
+      </SwipeFrame>
       <Svg>
-        {[["shortwave infrared → red", "#e06a5a"], ["near infrared → green", "#6fcf6a"], ["red light → blue", "#6a8fe0"]].map(([t, c], i) =>
-          <Lbl key={t} x={MX + 40} y={430 + i * 64} t={t} c={c} s={T.floor} o={fin(f, tBands + 15 * i)} />)}
-        {[["plants", "#46b45a"], ["bare ground", "#b98a62"], ["clouds", "#e8ecf4"], ["water", "#1c2f6e"]].map(([t, c], i) =>
-          <g key={t} opacity={fin(f, tKey + 12 * i)}><rect x={MX + 40 + (i % 2) * 360} y={640 + Math.floor(i / 2) * 70} width={44} height={44} fill={c} stroke={C.muted} strokeWidth={2} />
-            <Lbl x={MX + 100 + (i % 2) * 360} y={662 + Math.floor(i / 2) * 70} t={t} c={C.key} s={T.floor} /></g>)}
+        <Keyword f={f} text="Amphan's flood from space?" at={[MX + 40, 120]} s={T.floor} appear={0} out={tCloud - 20} />
+        <Keyword f={f} text="clouds for days" at={[MX + 40, 120]} s={T.key} appear={tCloud} out={tSmall - 20} />
+        <Keyword f={f} text="small patches, 250-m pixels" at={[MX + 40, 120]} s={T.floor} appear={tSmall} out={tRadar - 20} />
+        <Keyword f={f} text="radar sees through clouds" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tRadar} out={tHere - 20} />
+        <Keyword f={f} text="microwaves out, echo back" at={[MX + 40, 210]} s={T.floor} appear={tSend} out={tHere - 20} />
+        <Keyword f={f} text="calm water: dark" at={[MX + 40, 290]} s={T.key} appear={tMirror} out={tHere - 20} />
+        <Keyword f={f} text="Satkhira · the Sundarbans" at={[MX + 40, 120]} s={T.floor} appear={tHere} out={tKm2 - 20} />
+        <Lbl x={MX + 40} y={200} t="16 May: before Amphan" c={C.key} s={T.floor} o={win(f, AT(k, 6, "sixteenth"), tKm2 - 20)} />
+        <Lbl x={MX + 40} y={260} t="22 May: 2.5 days after landfall" c={C.key} s={T.floor} o={win(f, AT(k, 6, "twenty second"), tKm2 - 20)} />
+        <Keyword f={f} text={`new water ≈ ${SAY.s1_km2} km²`} at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tKm2} />
+        {/* the key: grey = radar echo strength; dark = water */}
+        <g opacity={oPair}>
+          <ColourBar x={MX + 40} y={540} w={420} lut={greyLut} lo={-24} hi={0} unit="dB" title="radar echo strength" ticks={[{ v: -24, t: "−24" }, { v: -12, t: "−12" }, { v: 0, t: "0" }]} />
+          <Lbl x={MX + 40} y={660} t="dark = water" c={C.key} s={T.floor} />
+          <Lbl x={MX + 40} y={720} t="bright = land, trees, towns" c={C.key} s={T.floor} />
+        </g>
       </Svg>
-      <SourceBelow text={SRC.nargis} pic={{ x: PB.x, y: mix(PB.y, hy, sp), w: PB.w, h: mix(PB.h, hh, sp) }} w={1000} name="s30 src" />{/* #5b r3 C4: under the half panels while split */}
+      <TeX s={String.raw`\text{new water}=${AS1.new_km2.toFixed(1)}\ \mathrm{km}^2\approx${SAY.s1_km2}\ \mathrm{km}^2`} x={MX + 40} y={225} size={44} c={C.gold} o={fin(f, tKm2 + 10)} />
+      <TeX s={String.raw`\sqrt{125}\approx${Math.sqrt(125).toFixed(1)}\ \mathrm{km}`} x={MX + 40} y={305} size={46} c={C.gold} o={fin(f, AT(k, 9, "eleven"))} />
+      <TeX s={String.raw`11\times11=121\approx125\ \mathrm{km}^2`} x={MX + 40} y={385} size={44} c={C.gold} o={fin(f, AT(k, 9, "eleven") + 20)} />
+      <SourceBelow text="Data: ESA Copernicus Sentinel-1 radar · 16 and 22 May 2020" pic={PB} w={1000} o={oPair} name="s30 src s1" />
     </Scene>
   );
 };
 
-// ================================================================ s31 recap (one beat per sentence, mini pictures)
+// ================================================================ s31 Cyclone Nargis as a case study (globe → Myanmar, the delta, the track, the eye, the zoom)
+const NG = D.nargis;
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+/** "2008-04-25 12:00:00" → "25 Apr 2008, 12 UTC" (the track's date readout) */
+const dayOf = (t: string) => `${Number(t.slice(8, 10))} ${MON[Number(t.slice(5, 7)) - 1]} ${t.slice(0, 4)}, ${t.slice(11, 13)} UTC`;
+const NTR = (NG.track as [string, number, number, number | null][]);
 const S31: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s31_recap");
+  const f = useCurrentFrame(), k = K("s31_nargis_intro");
+  const tGo = SS(k, 1), tRiver = SS(k, 2), tDelta = SS(k, 3), tForm = SS(k, 4), tPath = SS(k, 5), tLand = SS(k, 6), tCross = SS(k, 7), tPic = SS(k, 8), tFlood = SS(k, 9),
+    tZoom = SS(k, 10);
+  const crop = NAR.crop_wsen as number[], sb = NG.storm_box as number[];
+  // the flat frame of s32 (its first frame is the natural-colour 'before' picture in this box)
+  const PB = { x: 80, y: 60, w: 1000, h: Math.round((1000 * (crop[3] - crop[1])) / ((crop[2] - crop[0]) * Math.cos(16.4 * D2R))) };
+  const Bd: MapBox = { lat0: crop[1], lat1: crop[3], lon0: crop[0], lon1: crop[2], ...PB };
+  const Bs: MapBox = boxAt(16.1, 94.6, 4.2, PB.x, PB.y, PB.w, PB.h);
+  // user notes item 9 (stills look_u1): the delta's geography and the storm picture are shown FLAT (a draped patch on the blurred globe read
+  // as a pale rectangle); the globe carries the trip to Myanmar and the track; S10 zooms the flat storm map into the delta box (= s32 frame 0)
+  const oDelta = win(f, tRiver + 24, tForm - 4, 20), oStorm = fin(f, tPic, 20), oEnd = prog(f, tZoom + 10, tZoom + 85);
+  const oFlat = Math.max(oDelta, oStorm);
+  const keys = [
+    { f: 0, lat: 16, lon: 88, dist: G_DIST0, pp: G_PP0 },
+    { f: tGo, lat: 16, lon: 88, dist: G_DIST0, pp: G_PP0 },
+    { f: tGo + 75, lat: 17, lon: 95, dist: 1.9, pp: [600, 450] as Pt },
+    { f: tRiver + 40, lat: 16.4, lon: 95.3, dist: 1.5, pp: [600, 450] as Pt },
+    { f: tForm - 10, lat: 16.4, lon: 95.3, dist: 1.5, pp: [600, 450] as Pt },
+    { f: tForm + 60, lat: 14.0, lon: 90.0, dist: 2.25, pp: [600, 450] as Pt },
+    { f: tCross - 20, lat: 14.0, lon: 90.0, dist: 2.25, pp: [600, 450] as Pt },
+    { f: tCross + 50, lat: 16.3, lon: 94.5, dist: 1.6, pp: [600, 450] as Pt },
+    { f: LEN(k) + 10, lat: 16.3, lon: 94.5, dist: 1.6, pp: [600, 450] as Pt },
+  ];
+  const cam = globePath(keys, f);
+  const zoom = clamp((G_DIST0 - cam.dist) / (G_DIST0 - 2.4), 0, 1);
+  const grow = clamp((f - tForm) / Math.max(1, tCross + 40 - tForm), 0, 1);
+  const ntr = NTR.map((q) => [q[1], q[2]] as [number, number]);
+  const nTr = Math.max(2, Math.round(ntr.length * grow));
+  const dIdx = Math.min(NTR.length - 1, nTr - 1);
+  const lf = NG.landfall as number[], eye = NG.eye as number[];
+  const near = cam.dist < 1.7;
+  const Bz = lerpBox(Bs, Bd, oEnd);
+  return (
+    <Scene>
+      <Globe cam={cam} lines={AMP.coast} coast={0.6} o={1 - oFlat} over={(G) => {
+        const p = (la: number, lo: number) => G.p(la, lo, 1.003);
+        return <g>
+          <g opacity={fin(f, tForm)}>
+            <path d={llPath(G, ntr.slice(0, nTr), 1.004)} fill="none" stroke={C.gold} strokeWidth={5} />
+            {ntr.slice(0, nTr).map(([la, lo], i) => i % 4 === 0 && G.vis(la, lo) ? <circle key={i} cx={p(la, lo)[0]} cy={p(la, lo)[1]} r={5} fill={C.gold} /> : null)}
+          </g>
+          <circle cx={p(lf[0], lf[1])[0]} cy={p(lf[0], lf[1])[1]} r={16} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tLand)} />
+          <rect x={Math.min(p(crop[3], crop[0])[0], p(crop[1], crop[0])[0])} y={p(crop[3], crop[0])[1]} width={p(crop[3], crop[2])[0] - p(crop[3], crop[0])[0]}
+            height={p(crop[1], crop[0])[1] - p(crop[3], crop[0])[1]} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="12 8" opacity={win(f, tGo + 60, tRiver + 30)} />
+          {[["Myanmar", 20.5, 96.0, tGo + 40, true], ["Bay of Bengal", 17.5, 89.0, tGo, true], ["Yangon", NG.yangon[0], NG.yangon[1], tCross, false]].map(([nm, la, lo, t0, big]) =>
+            <Place key={nm as string} p={p(la as number, lo as number)} t={nm as string} r={big ? 0 : 9} dx={big ? 0 : 18} dy={big ? 0 : -30} a={big ? "middle" : "start"}
+              o={fin(f, t0 as number) * (big ? (cam.dist > 1.5 ? 1 : 0) : near ? 1 : 0)} />)}
+        </g>;
+      }} />
+      <GlobeFrame id="s31k" bottomAt={790} zoom={zoom} right={zoom} disc={{ c: G_PP0, r: G_DISC_R }} o={1 - oFlat} />
+      {/* S2-S3: the delta, flat (MODIS natural colour, 21 Apr 2008): the river's many channels, low land */}
+      <GeoMap id="s31d" B={Bd} o={oDelta} frame={1} children={(P) => <>
+        <GeoImg P={P} href={IMG("cst_nargis_tc_before.jpg")} box={[crop[1], crop[3], crop[0], crop[2]]} />
+      </>} over={(P) => <>
+        {(NAR.places as Place3[]).filter((q) => q[0] === "Yangon" || q[0] === "Pathein").map(([nm, la, lo]) => <Place key={nm} p={P(la, lo)} t={nm} dx={nm === "Yangon" ? -16 : 16}
+          dy={-30} r={8} a={nm === "Yangon" ? "end" : "start"} />)}
+        <ellipse cx={P(16.02, 95.25)[0]} cy={P(16.02, 95.25)[1]} rx={260} ry={95} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="12 8" opacity={fin(f, AT(k, 2, "fans out"))} />
+        <g data-lc-maplabel="1"><Lbl x={P(16.02, 95.25)[0]} y={P(16.02, 95.25)[1] - 112} t="channels" c={C.gold} s={T.floor} a="middle" o={fin(f, AT(k, 2, "fans out"))} /></g>
+        <g data-lc-maplabel="1"><Lbl x={P(16.62, 95.3)[0]} y={P(16.62, 95.3)[1]} t="Irrawaddy delta" c={C.key} s={T.floor} a="middle" o={fin(f, tDelta)} /></g>
+      </>} />
+      {/* S8-S10: the storm on 2 May (MODIS Aqua), flat, with the coast and the eye; S10 zooms into the delta box */}
+      <GeoMap id="s31s" B={Bz} o={oStorm} frame={1} children={(P) => <>
+        <GeoImg P={P} href={IMG("cst_nargis_storm.jpg")} box={[sb[0], sb[1], sb[2], sb[3]]} o={1 - oEnd} />
+        <GeoImg P={P} href={IMG("cst_nargis_tc_before.jpg")} box={[crop[1], crop[3], crop[0], crop[2]]} o={oEnd} />
+        <path d={linesPath(P, NG.coast)} fill="none" stroke={C.gold} strokeWidth={2.5} opacity={0.9 * (1 - oEnd)} />
+        <path d={poly(ntr.filter((q) => q[1] > 91).map((q) => P(q[0], q[1])))} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="10 8" opacity={0.8 * (1 - oEnd)} />
+      </>} over={(P) => <>
+        <circle cx={P(eye[0], eye[1])[0]} cy={P(eye[0], eye[1])[1]} r={30} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, AT(k, 8, "eye"), tZoom + 10)} />
+        <g data-lc-maplabel="1"><Lbl x={P(eye[0], eye[1])[0]} y={P(eye[0], eye[1])[1] + 64} t="eye" c={C.gold} s={T.floor} a="middle" o={win(f, AT(k, 8, "eye"), tZoom + 10)} /></g>
+        <g data-lc-maplabel="1"><Lbl x={P(16.62, 95.3)[0]} y={P(16.62, 95.3)[1]} t="Irrawaddy delta" c={C.key} s={T.floor} a="middle" o={win(f, tPic + 20, tZoom + 10)} /></g>
+      </>} />
+      <Svg>
+        <Keyword f={f} text="Cyclone Nargis · May 2008" at={[1210, 120]} s={T.floor} appear={0} out={tRiver - 20} />
+        <Keyword f={f} text="Irrawaddy (Ayeyarwady)" at={[1210, 120]} s={T.floor} appear={tRiver} out={tForm - 20} />
+        <Lbl x={1210} y={210} t="many channels to the sea" c={C.key} s={T.floor} o={win(f, AT(k, 2, "fans out"), tForm - 20)} />
+        {/* DS32: 90 % of the delta's land ≤ 5 m above the sea (ETOPO 2022); said as "most of it only a few metres above the sea" */}
+        <Lbl x={1210} y={280} t="a low, flat plain" c={C.key} s={T.floor} o={win(f, tDelta, tForm - 20)} />
+        <Lbl x={1210} y={340} t="mostly a few metres" c={C.key} s={T.floor} o={win(f, tDelta + 30, tForm - 20)} />
+        <Lbl x={1210} y={400} t="above the sea" c={C.key} s={T.floor} o={win(f, tDelta + 30, tForm - 20)} />
+        <Keyword f={f} text="formed: late April" at={[1210, 120]} s={T.floor} appear={tForm} out={tPic - 20} />
+        <Lbl x={1210} y={200} t={dayOf(NTR[dIdx][0])} c={C.gold} s={T.floor} o={win(f, tForm, tPic - 20)} />
+        <Lbl x={1210} y={270} t="west → north → east" c={C.key} s={T.floor} o={win(f, tPath, tPic - 20)} />
+        <Lbl x={1210} y={340} t="landfall: 2 May 2008" c={C.key} s={T.floor} o={win(f, tLand, tPic - 20)} />
+        <Lbl x={1210} y={680} t="→ across the delta, to Yangon" c={C.key} s={T.floor} o={win(f, tCross, tPic - 20)} />
+        <Keyword f={f} text="2 May · hours before landfall" at={[1210, 120]} s={T.floor} appear={tPic} out={tFlood - 20} />
+        <Lbl x={1210} y={210} t="the eye: just off the coast" c={C.gold} s={T.floor} o={win(f, AT(k, 8, "eye"), tFlood - 20)} />
+        <Keyword f={f} text="surge, rain: floods inland" at={[1210, 120]} s={T.floor} appear={tFlood} out={tZoom - 20} />
+        <Keyword f={f} text="zoom in: the delta" at={[1210, 120]} s={T.floor} c={C.gold} appear={tZoom} />
+      </Svg>
+      {/* the official intensity at landfall, every step shown (IMD, 3-minute average) */}
+      <CalcStack f={f} x={1210} y={420} size={44} maxLines={4} o={fout(f, tPic - 10)} rows={[
+        { rhs: String.raw`\text{official (3-min): }${NG.lf_kt}\ \mathrm{kt}`, at: AT(k, 6, "ninety knots"), c: C.local },
+        { rhs: String.raw`${NG.lf_kt}\times1.852\approx${SAY.n_kmh}\ \mathrm{km/h}`, at: AT(k, 6, "ninety knots") + 18, c: C.local },
+        { rhs: String.raw`${SAY.n_kmh}\div3.6\approx${SAY.n_ms}\ \mathrm{m/s}`, at: AT(k, 6, "forty six"), c: C.local },
+      ]} />
+      <SourceBelow text="Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Nargis, 25 Apr-3 May 2008 · NASA Blue Marble · Natural Earth" pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1740}
+        o={1 - oFlat} name="s31 src g" />
+      <SourceBelow text="Image: NASA MODIS (Terra), natural colour, via Google Earth Engine · 21 Apr 2008 · the Irrawaddy delta" pic={PB} w={1000} o={win(f, tRiver + 46, tForm - 26, 6)} name="s31 src d" />
+      <SourceBelow text={oEnd < 0.5 ? "Image: NASA Worldview (MODIS Aqua) · 2 May 2008 · coast: Natural Earth · track: IBTrACS v04r01 (NOAA NCEI)"
+        : "Image: NASA MODIS (Terra), natural colour, via Google Earth Engine · 21 Apr 2008 · the Irrawaddy delta"} pic={PB} w={1000} o={fin(f, tPic + 22, 8)} name="s31 src s" />
+    </Scene>
+  );
+};
+
+// ================================================================ s32 the Nargis before/after: natural colour first, then false colour 7-2-1 (user notes item 8)
+const S32: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s32_nargis_swipe");
+  const tL = SS(k, 1), tR = SS(k, 2), tLook = SS(k, 3), tBrown = SS(k, 4), tFalse = SS(k, 5), tBands = SS(k, 6), tKey = SS(k, 7), tSoak = SS(k, 8), tSpot = SS(k, 9),
+    tSame = SS(k, 10), tG2 = AT(k, 11, "line glides"), tPin = SS(k, 12), tLeft = SS(k, 13);
+  const box = NAR.crop_wsen as number[];
+  const PB = { x: 80, y: 60, w: 1000, h: 0 };
+  PB.h = Math.round((PB.w * (box[3] - box[1])) / ((box[2] - box[0]) * Math.cos(16.4 * D2R)));
+  // S1-S2: the frame shrinks into two half panels (before left, after right) on the date words; back to one frame before the sweep
+  const tG1 = AT(k, 3, "line glides");
+  const spl = prog(f, tL, tL + 24) * (1 - prog(f, tG1 - 42, tG1 - 8));
+  const hw = 480, hh = Math.round((hw * PB.h) / PB.w), hy = PB.y + Math.round((PB.h - hh) / 2);
+  const mixB = prog(f, tSame, tSame + 30);
+  const sx = swipe2(f, tG1 + 12, tSame, tG2 + 12);
+  const oSplit = clamp(spl * 3, 0, 1);
+  const kr = NG.key_rgb as Record<string, number[]>;
+  const pairs: [string, string][] = [["cst_nargis_tc_before.jpg", "cst_nargis_tc_after.jpg"], ["cst_swipe_before.jpg", "cst_swipe_after.jpg"]];  // lint-ok: asset file names, not maths
+  return (
+    <Scene>
+      <SwipeFrame f={f} PB={PB} box={box} sx={sx} pairs={pairs} mixB={mixB} tags={[`before · ${NAR.BEFORE}`, `after · ${NAR.AFTER}`]} places={NAR.places as Place3[]}
+        labelSide={{ Yangon: [-16, -30, "end"] }} km={50} oLine={fin(f, tG1 - 8, 8)} o={1 - oSplit} oPlaces={clamp(1 - 2 * oSplit, 0, 1)} />
+      {/* the two half panels (natural colour) while the dates are said */}
+      <Svg o={oSplit}>
+        <image href={IMG("cst_nargis_tc_before.jpg")} x={PB.x} y={hy} width={hw} height={hh} preserveAspectRatio="none" />
+        <image href={IMG("cst_nargis_tc_after.jpg")} x={PB.x + PB.w - hw} y={hy} width={hw} height={hh} preserveAspectRatio="none" opacity={0.4 + 0.6 * fin(f, tR, 14)} />
+        <rect x={PB.x} y={hy} width={hw} height={hh} fill="none" stroke={C.grid} strokeWidth={3} />
+        <rect x={PB.x + PB.w - hw} y={hy} width={hw} height={hh} fill="none" stroke={C.grid} strokeWidth={3} />
+        <rect x={PB.x - 4} y={hy - 4} width={hw + 8} height={hh + 8} fill="none" stroke={C.gold} strokeWidth={6} opacity={pulse(f, tL + 24, 36)} />
+        <rect x={PB.x + PB.w - hw - 4} y={hy - 4} width={hw + 8} height={hh + 8} fill="none" stroke={C.gold} strokeWidth={6} opacity={pulse(f, tR + 6, 36)} />
+        <Lbl x={PB.x} y={hy - 36} t={`before · ${NAR.BEFORE}`} c={C.key} s={T.floor} o={fin(f, tL + 16) * clamp(2 * oSplit - 1, 0, 1)} />
+        <Lbl x={PB.x + PB.w - hw} y={hy - 36} t={`after · ${NAR.AFTER}`} c={C.key} s={T.floor} o={fin(f, tR) * clamp(2 * oSplit - 1, 0, 1)} />
+      </Svg>
+      <Svg>
+        <Keyword f={f} text="natural colour" at={[MX + 40, 120]} s={T.key} appear={0} out={tLook - 20} />
+        <Lbl x={MX + 40} y={210} t="as our eyes would see it" c={C.key} s={T.floor} o={win(f, 10, tLook - 20)} />
+        <Lbl x={MX + 40} y={290} t="landfall: 2 May 2008" c={C.key} s={T.floor} o={win(f, tL, tLook - 20)} />
+        <Keyword f={f} text="look for the flood" at={[MX + 40, 120]} s={T.key} appear={tLook} out={tBrown - 20} />
+        <Keyword f={f} text="hard to see: both brown" at={[MX + 40, 120]} s={T.key} appear={tBrown} out={tFalse - 20} />
+        <g opacity={fout(f, tFalse - 10)}><Swatches f={f} x={MX + 40} y={210} t0={AT(k, 4, "muddy")} dt={20} items={[["muddy water", "#8a7a55"], ["wet soil", "#6f6446"]]} /></g>
+        <Keyword f={f} text="false colour: bands 7-2-1" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tFalse} out={tLeft - 20} />
+        {[["shortwave infrared → red", "#e06a5a"], ["near infrared → green", "#6fcf6a"], ["red light → blue", "#6a8fe0"]].map(([t, c], i) =>
+          <Lbl key={t} x={MX + 40} y={220 + i * 60} t={t} c={c} s={T.floor} o={win(f, tBands + 15 * i, tLeft - 20)} />)}
+        <g opacity={fout(f, tLeft - 20)}>
+          <Swatches f={f} x={MX + 40} y={420} t0={tKey} items={[["plants", rgbHex(kr.plants)], ["dry fields", rgbHex(kr["dry fields"])], ["clouds", rgbHex(kr.clouds)], ["water", rgbHex(kr.water)]]} />
+        </g>
+        <Lbl x={MX + 40} y={620} t="water soaks up infrared: dark" c={C.key} s={T.floor} o={win(f, tSoak, tLeft - 20)} />
+        <Lbl x={MX + 40} y={690} t="the same two days" c={C.gold} s={T.floor} o={win(f, tSame, tPin - 20)} />
+        <Lbl x={MX + 40} y={690} t="same latitudes and longitudes" c={C.key} s={T.floor} o={win(f, tPin, tLeft - 20)} />
+        <Keyword f={f} text="what the surge left behind" at={[MX + 40, 120]} s={T.floor} c={C.local} appear={tLeft} />
+        <Lbl x={MX + 40} y={210} t="dark water: the flood" c={C.key} s={T.floor} o={fin(f, tLeft)} />
+      </Svg>
+      <SourceBelow text={mixB < 0.5 ? "Images: NASA MODIS (Terra) via Google Earth Engine · natural colour (bands 1-4-3) · Cyclone Nargis, 21 Apr and 5 May 2008" : SRC.nargis}
+        pic={{ x: PB.x, y: mix(PB.y, hy, spl), w: PB.w, h: mix(PB.h, hh, spl) }} w={1000} name="s32 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s33 Cyclone Idai, shorter (globe → Mozambique Channel, clockwise, the picture, Beira, the zoom)
+const ID = D.idai;
+const ITR = (ID.track as [string, number, number, number | null][]);
+const S33: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s33_idai_intro");
+  const tYear = SS(k, 1), tCw = SS(k, 2), tPic = SS(k, 3), tLand = SS(k, 4), tBeira = SS(k, 5), tZoom = SS(k, 6);
+  const crop = ID.crop_wsen as number[], vb = ID.viirs_box as number[];
+  const keys = [
+    { f: 0, lat: 0, lon: 70, dist: G_DIST0, pp: G_PP0 },
+    { f: 20, lat: 0, lon: 70, dist: G_DIST0, pp: G_PP0 },
+    { f: tYear, lat: -12, lon: 50, dist: 3.0, pp: [600, 450] as Pt },
+    { f: tYear + 70, lat: -18, lon: 40, dist: 2.0, pp: [600, 450] as Pt },
+    { f: tBeira - 10, lat: -18, lon: 40, dist: 2.0, pp: [600, 450] as Pt },
+    { f: tBeira + 60, lat: -19.75, lon: 34.6, dist: 1.25, pp: [600, 450] as Pt },
+    { f: tZoom, lat: -19.75, lon: 34.6, dist: 1.25, pp: [600, 450] as Pt },
+    { f: tZoom + 60, lat: (crop[1] + crop[3]) / 2, lon: (crop[0] + crop[2]) / 2, dist: 1.055, pp: [580, 430] as Pt },
+    { f: LEN(k) + 10, lat: (crop[1] + crop[3]) / 2, lon: (crop[0] + crop[2]) / 2, dist: 1.055, pp: [580, 430] as Pt },
+  ];
+  const cam = globePath(keys, f);
+  const zoom = clamp((G_DIST0 - cam.dist) / (G_DIST0 - 2.4), 0, 1);
+  const viirs = useTex(IMG("cst_idai_viirs.jpg"));
+  const land = useTex(IMG("cst_idai_tc_before.jpg"));
+  const itr = ITR.map((q) => [q[1], q[2]] as [number, number]);
+  const grow = clamp((f - tYear) / 150, 0, 1), nTr = Math.max(2, Math.round(itr.length * grow));
+  const lf = ID.landfall as number[];
+  const k14 = ITR.findIndex((q) => q[0].startsWith("2019-03-14 12")), sp = itr[Math.max(0, k14)];
+  const near = cam.dist < 1.5;
+  const oV = win(f, tPic, tBeira + 30, 20), oLand = fin(f, tZoom + 20, 30), oEndFlat = fin(f, tZoom + 55, 20);
+  const PBi = { x: 80, y: 50, w: Math.round((720 * (crop[2] - crop[0]) * Math.cos(19.8 * D2R)) / (crop[3] - crop[1])), h: 720 };
+  return (
+    <Scene>
+      <Globe cam={cam} lines={ID.coast} coast={0.6} o={1 - oEndFlat} drapes={[
+        { tex: viirs, lat: [vb[0], vb[1]], lon: [vb[2], vb[3]], o: oV, r: 1.0015 },
+        { tex: land, lat: [crop[1], crop[3]], lon: [crop[0], crop[2]], o: oLand, r: 1.002 }]} over={(G) => {
+        const p = (la: number, lo: number) => G.p(la, lo, 1.003);
+        // the clockwise arc round the storm (southern hemisphere, seen from above): from north through east, south, west
+        const arc: [number, number][] = Array.from({ length: 31 }, (_, i) => { const a = (i * 300) / 30; return [sp[0] + 3.2 * Math.cos(a * D2R), sp[1] + (3.2 * Math.sin(a * D2R)) / Math.cos(sp[0] * D2R)]; });
+        const tip = p(arc[30][0], arc[30][1]), pre = p(arc[28][0], arc[28][1]);
+        return <g>
+          <g opacity={win(f, 0, tYear - 10, 20)}>
+            <path d={llPath(G, Array.from({ length: 181 }, (_, i) => [0, -180 + 2 * i] as [number, number]), 1.002)} fill="none" stroke={C.gold} strokeWidth={4} strokeDasharray="12 9" />
+          </g>
+          <g data-lc-maplabel="1"><Lbl x={p(1.5, 66)[0]} y={p(1.5, 66)[1] - 26} t="equator" c={C.gold} s={T.floor} a="middle" o={win(f, 10, tYear + 30)} /></g>
+          <path d={llPath(G, itr.slice(0, nTr), 1.004)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tYear) * fout(f, tZoom - 16)} />
+          <g opacity={win(f, tCw, tPic + 10)}>
+            <path d={llPath(G, arc, 1.004)} fill="none" stroke={C.second} strokeWidth={6} />
+            <Arrow p={pre} q={tip} color={C.second} w={6} head={26} />
+          </g>
+          <circle cx={p(lf[0], lf[1])[0]} cy={p(lf[0], lf[1])[1]} r={16} fill="none" stroke={C.gold} strokeWidth={5} opacity={win(f, tLand, tZoom - 16)} />
+          {[["Madagascar", -19.5, 46.8, tYear + 30, true], ["Mozambique", -16.5, 36.5, tYear + 40, true], ["Africa", -8.0, 30.0, 30, true]].map(([nm, la, lo, t0, big]) =>
+            <Place key={nm as string} p={p(la as number, lo as number)} t={nm as string} r={0} dx={0} dy={0} a="middle"
+              o={fin(f, t0 as number) * (cam.dist > 1.5 ? 1 : 0) * fout(f, tBeira)} />)}
+          {(ID.places as Place3[]).filter((q) => q[0] !== "Dondo").map(([nm, la, lo]) => <Place key={nm} p={p(la, lo)} t={nm} r={9} dx={nm === "Beira" ? 18 : -18} dy={nm === "Beira" ? -46 : 46}
+            a={nm === "Beira" ? "start" : "end"} o={fin(f, AT(k, 5, nm)) * (near ? 1 : 0) * fout(f, tZoom + 20)} />)}
+        </g>;
+      }} />
+      <GlobeFrame id="s33k" bottomAt={790} zoom={zoom} right={zoom} disc={{ c: G_PP0, r: G_DISC_R }} o={1 - oEndFlat} />
+      <SwipeFrame f={f} PB={PBi} box={crop} sx={1} pairs={[["cst_idai_tc_before.jpg", "cst_idai_tc_after.jpg"]]} tags={["", ""]} places={ID.places as Place3[]}
+        labelSide={{ Beira: [-16, -34, "end"], Buzi: [-16, 36, "end"], Dondo: [16, -30, "start"] }} km={25} oLine={0} o={oEndFlat} />
+      <Svg>
+        <Keyword f={f} text="south of the equator" at={[1210, 120]} s={T.key} appear={0} out={tYear - 20} />
+        <Keyword f={f} text="Cyclone Idai · March 2019" at={[1210, 120]} s={T.floor} appear={tYear} out={tCw - 20} />
+        <Lbl x={1210} y={210} t="the Mozambique Channel" c={C.key} s={T.floor} o={win(f, tYear + 30, tCw - 20)} />
+        <Keyword f={f} text="clockwise (seen from above)" at={[1210, 120]} s={T.floor} c={C.second} appear={tCw} out={tPic - 20} />
+        {/* the two hemispheres side by side: north anticlockwise, south clockwise */}
+        <g opacity={win(f, tCw + 20, tPic - 20)}>
+          {/* arcD / ArcHead angles in the maths sense: increasing = anticlockwise on screen (north up); ArcHead dir 1 = anticlockwise */}
+          {[[1330, "north", 50, 350, 1, C.local], [1620, "south", 130, -170, -1, C.second]].map(([x, t, a0, a1, dir, c]) => <g key={t as string}>
+            <path d={arcD([x as number, 330], 70, a0 as number, a1 as number)} fill="none" stroke={c as string} strokeWidth={5} />
+            <ArcHead c={[x as number, 330]} r={70} a={a1 as number} dir={dir as 1 | -1} col={c as string} />
+            <Lbl x={x as number} y={445} t={t as string} c={C.key} s={T.floor} a="middle" /></g>)}
+        </g>
+        <Keyword f={f} text="14 March 2019" at={[1210, 120]} s={T.floor} appear={tPic} out={tLand - 20} />
+        <Keyword f={f} text="landfall near Beira" at={[1210, 120]} s={T.floor} appear={tLand} out={tBeira - 20} />
+        <Lbl x={1210} y={210} t="night of 14-15 March" c={C.key} s={T.floor} o={win(f, tLand, tBeira - 20)} />
+        <Keyword f={f} text="low, flat land: two rivers" at={[1210, 120]} s={T.floor} appear={tBeira} out={tZoom - 20} />
+        <Keyword f={f} text="zoom in: Beira" at={[1210, 120]} s={T.floor} c={C.gold} appear={tZoom} />
+      </Svg>
+      <CalcStack f={f} x={1210} y={300} size={44} maxLines={4} o={fout(f, tBeira - 10)} rows={[
+        { rhs: String.raw`\text{official (10-min): }${ID.lf_kt}\ \mathrm{kt}`, at: AT(k, 4, "eighty five knots"), c: C.local },
+        { rhs: String.raw`${ID.lf_kt}\times1.852\approx${SAY.i_kmh}\ \mathrm{km/h}`, at: AT(k, 4, "eighty five knots") + 18, c: C.local },
+        { rhs: String.raw`${SAY.i_kmh}\div3.6\approx${SAY.i_ms}\ \mathrm{m/s}`, at: AT(k, 4, "forty four"), c: C.local },
+      ]} />
+      <SourceBelow text={f < tPic ? "Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Idai, 9-16 Mar 2019 · NASA Blue Marble · Natural Earth"
+        : f < tZoom ? "Image: NASA Worldview (VIIRS, Suomi NPP) · 14 Mar 2019 · IBTrACS v04r01 (NOAA NCEI) · NASA Blue Marble · Natural Earth"
+          : "Image: NASA MODIS (Aqua) via Google Earth Engine · 11 Mar 2019 · NASA Blue Marble · Natural Earth"} pic={{ x: 80, y: 40, w: 1000, h: 755 }} w={1740} name="s33 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s34 the Idai before/after: natural colour, then false colour 7-2-1
+const S34: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s34_idai_swipe");
+  const tAgain = SS(k, 1), tSame = SS(k, 2), tWater = SS(k, 3), tCloud = SS(k, 4), tMore = SS(k, 5);
+  const box = ID.crop_wsen as number[];
+  // the Idai box is taller than wide (0.85° × 1.15° at 19.8 S): fixed height 720 px, width from the true local shape
+  const PB = { x: 80, y: 50, w: 0, h: 720 };
+  PB.w = Math.round((PB.h * (box[2] - box[0]) * Math.cos(19.8 * D2R)) / (box[3] - box[1]));
+  const mixB = prog(f, tSame, tSame + 30);
+  const tG1 = AT(k, 0, "on the eleventh");
+  const sx = swipe2(f, tG1, tSame, tWater);
+  const kr = NG.key_rgb as Record<string, number[]>;
+  return (
+    <Scene>
+      {/* user notes item 10: the Buzi and Beira names apart (Beira above-left of its dot, Buzi below-left of its dot) */}
+      <SwipeFrame f={f} PB={PB} box={box} sx={sx} pairs={[["cst_idai_tc_before.jpg", "cst_idai_tc_after.jpg"], ["cst_idai_721_before.jpg", "cst_idai_721_after.jpg"]]} mixB={mixB}
+        tags={["before · 11 Mar", "after · 25 Mar"]} places={ID.places as Place3[]}
+        labelSide={{ Beira: [-16, -34, "end"], Buzi: [-16, 36, "end"], Dondo: [16, -30, "start"] }} km={25} oLine={fin(f, tG1 - 8, 8)} />
+      <Svg>
+        <Keyword f={f} text="natural colour" at={[MX + 40, 120]} s={T.key} appear={0} out={tAgain - 20} />
+        <Lbl x={MX + 40} y={210} t="11 Mar: 3.5 days before landfall" c={C.key} s={T.floor} o={win(f, AT(k, 0, "on the eleventh"), tSame - 20)} />
+        <Lbl x={MX + 40} y={270} t="25 Mar: about 10 days after" c={C.key} s={T.floor} o={win(f, AT(k, 0, "twenty fifth"), tSame - 20)} />
+        <Keyword f={f} text="hard to see again" at={[MX + 40, 120]} s={T.key} appear={tAgain} out={tSame - 20} />
+        <Keyword f={f} text="false colour: bands 7-2-1" at={[MX + 40, 120]} s={T.key} c={C.gold} appear={tSame} out={tMore - 20} />
+        <g opacity={fin(f, tSame)}>
+          <Swatches f={f} x={MX + 40} y={420} t0={tSame + 10} dt={6} items={[["plants", rgbHex(kr.plants)], ["dry fields", rgbHex(kr["dry fields"])], ["clouds", rgbHex(kr.clouds)], ["water", rgbHex(kr.water)]]} />
+        </g>
+        <Lbl x={MX + 40} y={620} t="dark blue: floodwater" c={C.key} s={T.floor} o={fin(f, tWater)} />
+        <Lbl x={MX + 40} y={690} t="white blobs: clouds" c={C.key} s={T.floor} o={fin(f, tCloud)} />
+        <Keyword f={f} text="more: Floods from space" at={[MX + 40, 120]} s={T.floor} appear={tMore} />
+      </Svg>
+      <SourceBelow text={mixB < 0.5 ? "Images: NASA MODIS (Aqua, Terra) via Google Earth Engine · natural colour (bands 1-4-3) · Cyclone Idai, 11 and 25 Mar 2019"
+        : "Images: NASA MODIS (Aqua, Terra) via Google Earth Engine · bands 7-2-1 · Cyclone Idai, 11 and 25 Mar 2019"} pic={PB} w={1000} name="s34 src" />
+    </Scene>
+  );
+};
+
+// ================================================================ s35 recap (one beat per sentence, mini pictures)
+const S35: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s35_recap");
   const t = (j: number) => SS(k, j);
   // #5b r1 S23 (D3): each recap keyword at full strength to the END of its sentence; the next one starts 18 frames after that
   const kIn = (j: number) => (j === 0 ? 0 : Math.max(t(j), SE(k, j - 1) + 18)), kOut = (j: number) => SE(k, j);
-  const beat = (j: number, o2 = 1) => win(f, t(j), j < 9 ? t(j + 1) - 8 : LEN(k) + 20) * o2;
+  const beat = (j: number, o2 = 1) => win(f, t(j), j < 10 ? t(j + 1) - 8 : LEN(k) + 20) * o2;
   const c: Pt = [520, 450];
   return (
     <Scene>
@@ -725,21 +1110,29 @@ const S31: React.FC = () => {
         <g opacity={beat(7) + beat(8)}>
           <Gauges A={GA(200, 250, 720, 380)} f={f} tF={t(7)} tS={t(7) + 20} land={false} labels={false} />
         </g>
+        {/* user notes 2026-11-06 item 12: the three flood events, in the order the movie showed them */}
         <g opacity={beat(9)}>
+          {[["cst_amphan_s1_after.jpg", "Amphan · radar"], ["cst_swipe_after.jpg", "Nargis · 7-2-1"], ["cst_idai_721_after.jpg", "Idai · 7-2-1"]].map(([h, t], i) => <g key={t}>
+            <image href={IMG(h as "cst_swipe_after.jpg")} x={110} y={150 + i * 205} width={300} height={170} preserveAspectRatio="xMidYMid slice" />
+            <rect x={110} y={150 + i * 205} width={300} height={170} fill="none" stroke={C.grid} strokeWidth={3} />
+            <Lbl x={440} y={235 + i * 205} t={t} c={C.key} s={T.floor} /></g>)}
+        </g>
+        <g opacity={beat(10)}>
           <circle cx={c[0]} cy={c[1]} r={250} fill="#21406e" stroke={C.local} strokeWidth={4} />
           <ellipse cx={c[0]} cy={c[1]} rx={250} ry={70} fill="none" stroke={C.local} strokeWidth={2} />
           <ellipse cx={c[0]} cy={c[1]} rx={90} ry={250} fill="none" stroke={C.local} strokeWidth={2} />
         </g>
         <Keyword f={f} text="to sum up" at={[MX, 120]} s={T.key} appear={kIn(0)} out={kOut(0)} />
-        <Keyword f={f} text="slopes: −sin, cos" at={[MX, 120]} s={T.key} appear={kIn(1)} out={kOut(1)} />
+        <Keyword f={f} text="slopes: $-\sin$, $\cos$" at={[MX, 120]} s={T.key} appear={kIn(1)} out={kOut(1)} />
         <Keyword f={f} text="$\hat{\mathbf r}$ → $\hat{\boldsymbol\theta}$,  $\hat{\boldsymbol\theta}$ → $-\hat{\mathbf r}$" at={[MX, 120]} s={T.floor} appear={kIn(2)} out={kOut(2)} />
         <Keyword f={f} text="product rule: both change" at={[MX, 120]} s={T.key} appear={kIn(3)} out={kOut(3)} />
         <Keyword f={f} text="$v/r\ \cdot\ v\,\hat{\boldsymbol\theta}\ \cdot\ -(v^2/r)\,\hat{\mathbf r}$" at={[MX, 120]} s={T.key} appear={kIn(4)} out={kOut(4)} />
         <Keyword f={f} text="0.048 $\mathrm{m/s^2}$ ≈ g/200" at={[MX, 120]} s={T.key} appear={kIn(5)} out={kOut(5)} />
         <Keyword f={f} text="$(r,\ \theta,\ z)$: in, up and out" at={[MX, 120]} s={T.key} appear={kIn(6)} out={kOut(6)} />
         <Keyword f={f} text="onshore wind → storm surge" at={[MX, 120]} s={T.key} appear={kIn(7)} out={kOut(7)} />
-        <Keyword f={f} text="gauges · floods from space" at={[MX, 120]} s={T.key} appear={kIn(8)} out={kOut(8)} />
-        <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={kIn(9)} />
+        <Keyword f={f} text="tide gauges: Ian's surge" at={[MX, 120]} s={T.key} appear={kIn(8)} out={kOut(8)} />
+        <Keyword f={f} text="floods from space" at={[MX, 120]} s={T.key} appear={kIn(9)} out={kOut(9)} />
+        <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={kIn(10)} />
       </Svg>
       <TeX s={String.raw`\Delta\theta\ \text{along}\ \hat{\boldsymbol\theta}`} x={MX} y={300} size={T.calc} o={beat(0)} />
       <TeX s={String.raw`\dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}`} x={MX} y={320} size={48} o={beat(2)} />
@@ -747,13 +1140,14 @@ const S31: React.FC = () => {
       {/* K6 round 1: the picture box now includes the colour bar's "− in / + out" (the credit sat on them) */}
       <SourceBelow text="Data: NOAA HRRR · ERA5 (Copernicus C3S)" pic={{ x: 120, y: 200, w: 840, h: 510 }} w={840} o={beat(6)} name="s31 src 1" />
       <SourceBelow text="Data: NOAA CO-OPS gauges · 27-29 Sep 2022" pic={{ x: 120, y: 250, w: 840, h: 480 }} w={840} o={beat(7) + beat(8)} name="s31 src 2" />
+      <SourceBelow text="Data: ESA Copernicus Sentinel-1 · NASA MODIS via Google Earth Engine" pic={{ x: 110, y: 150, w: 840, h: 580 }} w={840} o={beat(9)} name="s35 src 3" />
     </Scene>
   );
 };
 
-// ================================================================ s32 the series end card (maths ending, word for word)
-const S32: React.FC = () => {
-  const f = useCurrentFrame(), k = K("s32_end");
+// ================================================================ s36 the series end card (maths ending, word for word)
+const S36: React.FC = () => {
+  const f = useCurrentFrame(), k = K("s36_end");
   const t2 = SS(k, 2), tOther = AT(k, 2, "and the notebooks");
   const thumb = (x: number, i: number) => (
     <g key={i} opacity={0.75}>
@@ -795,7 +1189,8 @@ const S32: React.FC = () => {
 
 export const SCENES_C: Record<string, React.FC> = {
   s21_amphan_intro: S21, s22_amphan_eye: S22, s23_amphan_ring: S23, s24_amphan_curtain: S24, s25_why_cylindrical: S25, s26_onshore: S26, s27_surge: S27,
-  s28_ian_record: S28, s29_flood_flight: S29, s30_flood_swipe: S30, s31_recap: S31, s32_end: S32,
+  s28_ian_record: S28, s29_flood_flight: S29, s30_amphan_radar: S30, s31_nargis_intro: S31, s32_nargis_swipe: S32, s33_idai_intro: S33, s34_idai_swipe: S34,
+  s35_recap: S35, s36_end: S36,
 };
 void [ColourBar, mix, poly, STK, SEC, Cross];
 

@@ -73,7 +73,10 @@ export const SAY = D.say, RING = D.ring, STK = D.stack, SEC = D.sec, AMP = D.amp
 export const WV = D.w;
 export const ASSET_NAMES = ["cst_goes_eye.jpg", "cst_radar_ktbw.png", "cst_hrrr_s17.png", "cst_ur_925.png", "cst_ur_850.png", "cst_ur_500.png", "cst_ur_200.png",
   "cst_ur_150.png", "cst_sec_ian.png", "cst_sec_amphan.png", "cst_amphan_speed.png", "cst_modis_amphan.jpg", "cst_ian_speed_20.png", "cst_bay_patch.png",
-  "cst_swipe_before.jpg", "cst_swipe_after.jpg", "cst_nargis_storm.jpg", "cst_bmng.jpg", "cst_tdr_w.png"] as const;
+  "cst_swipe_before.jpg", "cst_swipe_after.jpg", "cst_nargis_storm.jpg", "cst_bmng.jpg", "cst_tdr_w.png",
+  // user notes 2026-11-06: natural colour (Nargis, Idai), the Idai pair, the VIIRS picture of Idai, Amphan's cloud pictures and radar pair
+  "cst_nargis_tc_before.jpg", "cst_nargis_tc_after.jpg", "cst_idai_tc_before.jpg", "cst_idai_tc_after.jpg", "cst_idai_721_before.jpg", "cst_idai_721_after.jpg",
+  "cst_idai_viirs.jpg", "cst_amphan_clouds_21.jpg", "cst_amphan_clouds_22.jpg", "cst_amphan_s1_before.jpg", "cst_amphan_s1_after.jpg"] as const;
 export const IMG = (n: (typeof ASSET_NAMES)[number]) => staticFile(n);
 export const LUT_UR = D.luts.ur as string[], LUT_SPEED = D.luts.speed as string[], LUT_DBZ = D.luts.dbz as string[], LUT_DEPTH = D.luts.depth as string[];
 export const LUT_W = D.w.tdr.lut as string[];
@@ -88,7 +91,9 @@ export const SRC = {
   hrrr20: "Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · Natural Earth coast",
   surge: "Data: HRRR (NOAA) · 28 Sep 2022, 20 UTC · NOAA CO-OPS gauges · NHC report",
   goes: "Image: NOAA GOES-16 ABI mesoscale · 28 Sep 2022, 18:01 UTC · contrast enhanced",
-  radar: "Data: NOAA NEXRAD radar KTBW (Tampa Bay) · 28 Sep 2022, 18:02 UTC · lowest scan",
+  // user notes 2026-11-06 item 4: the user's exact two lines (no maker credit anywhere)
+  radar: "Data: NOAA NEXRAD weather radar, Tampa Bay (KTBW) · 28 Sep 2022, 18:02 UTC",
+  radar2: "(lowest beam, tilted 0.5° above the ground)",
   ibtAmp: "Data: IBTrACS v04r01 (NOAA NCEI) · Cyclone Amphan, 16-21 May 2020 · NASA Blue Marble · Natural Earth",
   modis: "Image: NASA Worldview (MODIS Terra) · 18 May 2020 · Cyclone Amphan · contrast enhanced",
   era5: "Data: ERA5 (Copernicus C3S) · 20 May 2020, 06 UTC · Cyclone Amphan",

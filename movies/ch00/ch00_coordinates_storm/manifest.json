@@ -196,6 +196,30 @@
     ]
    }
   },
+  "flood_u1": {
+   "note": "user notes 2026-11-06 (prompt_b.docx) items 8-11",
+   "natural_colour": "MODIS bands 1-4-3 of the same granules and crops as the 7-2-1 pairs, a Gaussian of half a 500-m pixel on all three bands (b1 250 m, b4/b3 500 m), reflectance 0-0.28 → 0-1, γ 1.5 (one stretch for every date)",
+   "amphan_s1": {
+    "orbit": 150,
+    "box_wsen": [
+     88.8,
+     22.12,
+     89.92,
+     22.75
+    ],
+    "dates_utc": [
+     "2020-05-16T23:55",
+     "2020-05-22T23:55"
+    ],
+    "grey": "VV −24 … 0 dB",
+    "new_water": "VV < −18 dB after, not before, drop ≥ 3 dB, not JRC seasonality ≥ 10 months, blobs ≥ 9 px (8-connected): 124.9 km² (UN-SPIDER practice, adapted)"
+   },
+   "nargis_ibtracs": "NI 2008117N11090; WMO = IMD 3-min",
+   "idai_ibtracs": "SI 2019063S18038; WMO = RSMC La Réunion 10-min",
+   "idai_pair": "v3_idai2019: Aqua 2019-03-11 | Terra 2019-03-25, crop 33.80-34.95 E, 20.20-19.35 S",
+   "s24_zero": "u_r = 0 contour points and no-data extents (DS37)",
+   "stack_spacing": "s18-s19: layers evenly spaced 0.9 units apart (heights not to scale; tags carry the heights)"
+  },
   "time_compression": {
    "s01/s09": "one 75-min lap in ≈ 8-10 s",
    "s15": "streak families illustrative",
@@ -206,7 +230,9 @@
    "s04 slivers ×20",
    "s14 5° turn drawn at 15°",
    "s15-s16 vertical ×4",
-   "s18-s19 vertical ×15",
+   "s18-s19 layers evenly spaced (not to scale; user notes 2026-11-06)",
+   "s30 microwave pulses schematic",
+   "s30-s34 swipe lines animate a comparison, not a time change",
    "s20/s24 height axis stretched",
    "s27 sea-level inset ×50, shelf profile vertical exaggeration",
    "s14 isobars schematic",
@@ -229,7 +255,12 @@
   "ETOPO 2022 and ETOPO1 (NOAA NCEI). MODIS MOD09/MYD09 and MCD43A4 (NASA LP DAAC) via Google Earth Engine.",
   "Blue Marble: Next Generation, NASA Earth Observatory. Made with Natural Earth.",
   "Vertical wind: NOAA P-3 tail Doppler radar (Level 2, mission 20220928H1) — NOAA AOML Hurricane Research Division; Gamache 1995 / Reasor et al. 2009 (synthesis); Fischer, Rogers, Reasor and Gamache 2022, Mon. Wea. Rev. 150, 2255-2278, doi:10.1175/MWR-D-21-0223.1. Original files not redistributed; courtesy note to the HRD radar lead before publishing (user).",
-  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0)."
+  "Music: tools/sound (procedural synthesis, our own code, CC0-1.0).",
+  "Contains modified Copernicus Sentinel data 2020 (Sentinel-1 GRD, ESA), processed in Google Earth Engine (s30, user notes 2026-11-06).",
+  "NASA Worldview / GIBS VIIRS (Suomi NPP) and MODIS (Terra, Aqua) corrected reflectance (NASA open data) (s30, s31, s33).",
+  "MODIS MOD09/MYD09 v061 surface reflectance (NASA LP DAAC) via Google Earth Engine: Nargis 2008 and Idai 2019 pairs (s32, s34).",
+  "JRC Global Surface Water v1.4 (EC JRC / Google), seasonality: permanent water left out of the Sentinel-1 new-water count (s30).",
+  "ETOPO 2022 60 arc-second (NOAA NCEI): the Irrawaddy delta heights (s31)."
  ],
  "js_selftest": "none — every number is read from data/cs.json (TSX CHECK rows re-assert the screen strings)",
  "inputs_sha256": {
@@ -300,17 +331,36 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GEE\\ch00_flood_v2\\zoom_base.npz": "1586cfe598e0700a7622e392bf8b0b8df0868a86c096f47cd278b200a94fb8ea",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GEE\\ch00_flood_v2\\v3_nargis2008.npz": "3f034c753b08266bd3583eb3ff64e2974356297ff266eaedd93ac750fc77ffa6",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NASA-GIBS\\gibs_nargis_storm_MODIS_Aqua_CorrectedReflectance_TrueColor_2008-05-02.jpg": "65f10cca0e4440a3e1e9c613a586fcca6aff8aadec7587f944fd1f3457763119",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\ETOPO2022-60s\\etopo2022_60s_irrawaddy_15.6-17.6N_94-96.6E.nc": "894d7007a21c20c03ee0f88dccc7e2250c264be064316c110625190b8bc6b6c5",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.SI.v04r01.nc": "b3621c8e24b0e551fddd4785753e1ccfbca6428b80b171c22a998855be399b17",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NASA-GIBS\\gibs_idai_VIIRS_SNPP_CorrectedReflectance_TrueColor_2019-03-14.jpg": "567f1044ffed88fc6404f67150fa3035d49a492ca8a5f9dc83571fcafc82cb97",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GEE\\ch00_flood_v2\\v3_idai2019.npz": "261aa65f153b3f23e11fbf314bc920b6de2e741bb9c417c062bb44433a4f9cc5",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NASA-GIBS\\gibs_amphan_after_clouds_MODIS_Terra_CorrectedReflectance_TrueColor_2020-05-21.jpg": "0271bf95ce060ff5c2fe3c64352f114f0203cd23fead8990996de2ddbfdce273",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NASA-GIBS\\gibs_amphan_after_clouds_MODIS_Terra_CorrectedReflectance_TrueColor_2020-05-22.jpg": "db1ceac9ca3626dd2d74c003726cb9cef44bc73597d7bba0f853a053b5a3f5ae",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GEE\\ch00_flood_v2\\close_s1.npz": "932647a25f43d57f1fb26a2005c73b6e818bb6c2b184c6fdff129ee2a5b9002c",
+  "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\GEE\\ch00_flood_v2\\close_jrc.npz": "8113a725696e504abe316f15e84a190c0db789ffecd6e0a21cb2597bf87c8f85",
   "movies/ch00/ch00_cross_product_why/data/real/globe_bmng_topo_bathy_200409_5400x2700.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b"
  },
  "render_assets": {
+  "cst_amphan_clouds_21.jpg": "ffc02bd6210c4169c83a36e046b66e783552da29a696444ee98e147d91cac7fc",
+  "cst_amphan_clouds_22.jpg": "112ee4bca11fadc655bf7206c832f0df4e84d27946652902e0225c0bd1652b7b",
+  "cst_amphan_s1_after.jpg": "cc0a1e3aae3f2b08b056e6f730895b24e6fcd84848bbf3e98bf73578692c1dc8",
+  "cst_amphan_s1_before.jpg": "7aa174d63498eb2a06e64a8ac026cfe88d7cdf0a46fc550ccd614110d9abf003",
   "cst_amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "cst_bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "cst_bmng.jpg": "4c6723e79dc7c1bdb8c193cdf8f946b10b9407bc9fd1164cdf5e75d0aa79ad3b",
   "cst_goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
   "cst_hrrr_s17.png": "aa9048928abf801898a1ac57a58a04355e689d6bf7871515a6eb2d72ec2e6016",
   "cst_ian_speed_20.png": "552ffa5931fc55243feb1b5717c94a0743857fa048da87482ac9a2ec01e47d02",
+  "cst_idai_721_after.jpg": "3e4967cdb897e48d96ff602a858874c2d4a648d58bcff4b99b810e0faf0ab3d4",
+  "cst_idai_721_before.jpg": "08d1c72b65b2bf5d9c8d38a0c60a6450cf5c45aa48e4c78424fed875f4315d5b",
+  "cst_idai_tc_after.jpg": "f4697bb3499da75ff6c938a6c850cc48b14f5ba8860aeb7ea150bc91285a761c",
+  "cst_idai_tc_before.jpg": "f690c4ab276920f4ef8e19fec9bfc08b8b03df6e0557971f21e3fda8c63cb11d",
+  "cst_idai_viirs.jpg": "93ed23d070a3220ab9bc5a77254450310bab1858553f758bda17c77301d5d5fb",
   "cst_modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
   "cst_nargis_storm.jpg": "3ff7716c3c9dca7a6e6a88718079969d27440daedc4c004afc267ae5b3c9004c",
+  "cst_nargis_tc_after.jpg": "dea436122718c132917ba56eb3924b576ed00fb1db078043ec747d9a7426fde1",
+  "cst_nargis_tc_before.jpg": "a27d36ed1d33355bc4b04ee0e52cb9d4fee3ba706c16cdbcd3bba62ff3188156",
   "cst_radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
   "cst_sec_amphan.png": "c47ebbb8cf95c1ee5bc78b2d2d9de993fa83015888139a831302a0872ae592db",
   "cst_sec_ian.png": "05a3ae7f4dcb86e79130aef09dbc70ea11697c454fc2dac6af9a5ed8a5ee587e",
@@ -324,14 +374,25 @@
   "cst_ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_files": {
-  "cs.json": "0ab38b557bfa471933fa8e00c8b523ded78ed2aebf1768c0e473adde7f5ae6b8",
+  "cs.json": "631a2b6192aca449f16983cfacf7cea38b9e7a92816b8fb0c28b6581cc527895",
+  "img/amphan_clouds_21.jpg": "ffc02bd6210c4169c83a36e046b66e783552da29a696444ee98e147d91cac7fc",
+  "img/amphan_clouds_22.jpg": "112ee4bca11fadc655bf7206c832f0df4e84d27946652902e0225c0bd1652b7b",
+  "img/amphan_s1_after.jpg": "cc0a1e3aae3f2b08b056e6f730895b24e6fcd84848bbf3e98bf73578692c1dc8",
+  "img/amphan_s1_before.jpg": "7aa174d63498eb2a06e64a8ac026cfe88d7cdf0a46fc550ccd614110d9abf003",
   "img/amphan_speed.png": "385d78f2531adc3f4f59feb7c047f82ff74a297866d9ee49e21b44480e8ca856",
   "img/bay_patch.png": "568a40ed1507fc15e3bca6591ecf07287b8b8db43de38dc01d0a682ac580480e",
   "img/goes_eye.jpg": "7c365ab70a682f5efc3c3fc2c95069628a7d895ab159045377e255df7dd85d79",
   "img/hrrr_s17.png": "aa9048928abf801898a1ac57a58a04355e689d6bf7871515a6eb2d72ec2e6016",
   "img/ian_speed_20.png": "552ffa5931fc55243feb1b5717c94a0743857fa048da87482ac9a2ec01e47d02",
+  "img/idai_721_after.jpg": "3e4967cdb897e48d96ff602a858874c2d4a648d58bcff4b99b810e0faf0ab3d4",
+  "img/idai_721_before.jpg": "08d1c72b65b2bf5d9c8d38a0c60a6450cf5c45aa48e4c78424fed875f4315d5b",
+  "img/idai_tc_after.jpg": "f4697bb3499da75ff6c938a6c850cc48b14f5ba8860aeb7ea150bc91285a761c",
+  "img/idai_tc_before.jpg": "f690c4ab276920f4ef8e19fec9bfc08b8b03df6e0557971f21e3fda8c63cb11d",
+  "img/idai_viirs.jpg": "93ed23d070a3220ab9bc5a77254450310bab1858553f758bda17c77301d5d5fb",
   "img/modis_amphan.jpg": "a3d6cfce156dbee8158d46baa902b00aed29fda1a7bea0aa9da97db061ebd790",
   "img/nargis_storm.jpg": "3ff7716c3c9dca7a6e6a88718079969d27440daedc4c004afc267ae5b3c9004c",
+  "img/nargis_tc_after.jpg": "dea436122718c132917ba56eb3924b576ed00fb1db078043ec747d9a7426fde1",
+  "img/nargis_tc_before.jpg": "a27d36ed1d33355bc4b04ee0e52cb9d4fee3ba706c16cdbcd3bba62ff3188156",
   "img/radar_ktbw.png": "b99f189328e9e0b64dc5b60a048972510446ab8af6027b6fbf6e54f9824dce95",
   "img/sec_amphan.png": "c47ebbb8cf95c1ee5bc78b2d2d9de993fa83015888139a831302a0872ae592db",
   "img/sec_ian.png": "05a3ae7f4dcb86e79130aef09dbc70ea11697c454fc2dac6af9a5ed8a5ee587e",
@@ -345,14 +406,25 @@
   "img/ur_925.png": "34d6f5fa262cfb012b83f00114fe546f04ce66cd50ceae87b8ba8094a559978a"
  },
  "data_sizes_bytes": {
-  "cs.json": 277053,
+  "cs.json": 324581,
+  "img/amphan_clouds_21.jpg": 33118,
+  "img/amphan_clouds_22.jpg": 66447,
+  "img/amphan_s1_after.jpg": 1197775,
+  "img/amphan_s1_before.jpg": 1158087,
   "img/amphan_speed.png": 26371,
   "img/bay_patch.png": 2181893,
   "img/goes_eye.jpg": 148883,
   "img/hrrr_s17.png": 101669,
   "img/ian_speed_20.png": 106524,
+  "img/idai_721_after.jpg": 342205,
+  "img/idai_721_before.jpg": 448544,
+  "img/idai_tc_after.jpg": 142894,
+  "img/idai_tc_before.jpg": 203898,
+  "img/idai_viirs.jpg": 972738,
   "img/modis_amphan.jpg": 287917,
   "img/nargis_storm.jpg": 355710,
+  "img/nargis_tc_after.jpg": 256613,
+  "img/nargis_tc_before.jpg": 241068,
   "img/radar_ktbw.png": 268614,
   "img/sec_amphan.png": 37501,
   "img/sec_ian.png": 46285,
@@ -2310,6 +2382,414 @@
    "kind": "check"
   },
   {
+   "id": "DS31",
+   "name": "Nargis natural-colour pair: same grid and crop as the 7-2-1 pair; the 7-2-1 crop here = the swipe images (pinning); gap fill ≤ 15 %",
+   "value": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.000455
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tol": [
+    0,
+    0,
+    0,
+    0,
+    0.15
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS31",
+   "name": "natural colour hides the flood: of the pixels that turn to dark water in 7-2-1 (0.24 of the picture), 0.76 look brown and only 0.01 look blue in natural colour",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS31",
+   "name": "7-2-1 colour key from the picture: dry fields pink (R > G, B mid), plants green, water dark blue, clouds white; each class ≥ 0.5 % of the picture",
+   "value": {
+    "plants": [
+     0.237,
+     [
+      117,
+      195,
+      138
+     ]
+    ],
+    "dry fields": [
+     0.056,
+     [
+      209,
+      156,
+      178
+     ]
+    ],
+    "clouds": [
+     0.043,
+     [
+      255,
+      255,
+      255
+     ]
+    ],
+    "water": [
+     0.183,
+     [
+      8,
+      31,
+      156
+     ]
+    ]
+   },
+   "ref": true,
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS32",
+   "name": "Nargis (IBTrACS NI 2008117N11090): first fix 25 Apr 12 UTC at 10.5 N 90.3 E (south of the Bay); west to 85.4 E by 28 Apr; north to 15.6 N by 1 May 00 UTC",
+   "value": [
+    25.0,
+    10.5,
+    90.3,
+    85.4,
+    28.0,
+    15.6
+   ],
+   "ref": [
+    25.0,
+    10.5,
+    90.3,
+    85.4,
+    28.0,
+    15.6
+   ],
+   "tol": [
+    0,
+    0.05,
+    0.05,
+    0.05,
+    0,
+    0.05
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS32",
+   "name": "then east: 88.5 E (1 May 00 UTC) → 94.1 E at the first land fix (09 UTC 2 May, 16.0 N): the delta's south-western corner (Cape Negrais ≈ 16.0 N 94.2 E)",
+   "value": [
+    88.5,
+    94.1,
+    16.0,
+    1.0
+   ],
+   "ref": [
+    88.5,
+    94.1,
+    16.0,
+    1.0
+   ],
+   "tol": [
+    0.05,
+    0.05,
+    0.05,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS32",
+   "name": "landfall intensity (WMO = IMD, 3-min) 09-12 UTC 2 May: 90 kt, 962 hPa; 90 × 1.852 = 166.7 (≈ 167) km/h; ÷ 3.6 = 46.3 (≈ 46) m/s",
+   "value": [
+    90.0,
+    90.0,
+    962.0,
+    166.68,
+    46.3
+   ],
+   "ref": [
+    90.0,
+    90.0,
+    962.0,
+    166.7,
+    46.3
+   ],
+   "tol": [
+    0,
+    0,
+    0,
+    0.05,
+    0.05
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS32",
+   "name": "then it crossed the delta eastward: 95.6 E at 18 UTC 2 May, closest approach to Yangon 2 km (≤ 30 km) on 3 May",
+   "value": [
+    95.6,
+    1.0
+   ],
+   "ref": [
+    95.6,
+    1.0
+   ],
+   "tol": [
+    0.05,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS32",
+   "name": "the eye in the MODIS Aqua picture of 2 May (darkest spot, σ = 2 px) lies within 30 km of the IBTrACS 06 UTC fix and ≥ 30 km west of the coast (94.2 E)",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS32",
+   "name": "the Irrawaddy delta is low: of the land in 15.7-17.1 N, 94.6-96.0 E, 0.90 lies ≤ 5 m above sea level, median 2.4 m ('most of it only a few metres above the sea')",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS33",
+   "name": "Idai (IBTrACS SI 2019063S18038) in the Mozambique Channel: WMO (Réunion, 10-min) 30 kt at 06 UTC 9 Mar (40.2 E) → 105 kt on 13-14 Mar (38.5-37.9 E)",
+   "value": [
+    30.0,
+    40.2,
+    105.0
+   ],
+   "ref": [
+    30.0,
+    40.2,
+    105.0
+   ],
+   "tol": [
+    0,
+    0.05,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS33",
+   "name": "first land fix 21 UTC 14 Mar (19.8 S 35.2 E); WMO at 00 UTC 15 Mar 85 kt, 960 hPa (19.7 S 34.8 E, at Beira); 85 × 1.852 = 157.4 km/h ÷ 3.6 = 43.7 (≈ 44) m/s",
+   "value": [
+    21.0,
+    14.0,
+    -19.8,
+    35.2,
+    85.0,
+    960.0,
+    157.42,
+    43.727778
+   ],
+   "ref": [
+    21.0,
+    14.0,
+    -19.8,
+    35.2,
+    85.0,
+    960.0,
+    157.4,
+    43.7
+   ],
+   "tol": [
+    0,
+    0,
+    0.05,
+    0.05,
+    0,
+    0,
+    0.05,
+    0.05
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS33",
+   "name": "21 UTC 14 Mar - 00 UTC 15 Mar = 23:00-02:00 local time in Beira (UTC+2): 'around midnight, between the fourteenth and the fifteenth'",
+   "value": [
+    "23:00",
+    "02:00"
+   ],
+   "ref": true,
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS34",
+   "name": "Idai pair: Aqua 11 Mar | Terra 25 Mar 2019 on one grid (same crop 33.80-34.95 E, 20.20-19.35 S), the Nargis stretches; gap fill ≤ 15 %",
+   "value": [
+    1.0,
+    1.0,
+    0.06758
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    0.0
+   ],
+   "tol": [
+    0,
+    0,
+    0.15
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS34",
+   "name": "the Idai flood reads in 7-2-1: pixels dark (water) on 25 Mar that were neither dark nor cloud on 11 Mar = 0.090 of the picture (≥ 0.05; dark share 0.10 → 0.16, the sea is in both)",
+   "value": [
+    1.0
+   ],
+   "ref": [
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS34",
+   "name": "dates from landfall (21 UTC 14 Mar): Aqua 11 Mar ≈ 11 UTC = −3.4 d ('three and a half days before'); Terra 25 Mar ≈ 08 UTC = +10.5 d ('about ten days after')",
+   "value": [
+    3.416667,
+    10.458333
+   ],
+   "ref": [
+    3.4,
+    10.5
+   ],
+   "tol": [
+    0.1,
+    0.1
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS35",
+   "name": "Amphan's coast hidden by cloud after landfall: bright (cloud) share of the radar box in MODIS Terra true colour 21 May 1.00, 22 May 0.65 (≥ 0.6)",
+   "value": [
+    1.0,
+    1.0
+   ],
+   "ref": [
+    1.0,
+    1.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS36",
+   "name": "Sentinel-1 (orbit 150, VV) 16 → 22 May 2020, 88.80-89.92 E, 22.12-22.75 N: new water (VV < −18 dB after, not before, drop ≥ 3 dB, not permanent water (JRC seasonality ≥ 10 months), blobs ≥ 9 px) = 124.9 km² ('about a hundred and twenty five'); √125 = 11.18 ('a square eleven kilometres on each side')",
+   "value": [
+    124.920769,
+    11.18034,
+    121.0
+   ],
+   "ref": [
+    124.9,
+    11.18,
+    121.0
+   ],
+   "tol": [
+    0.1,
+    0.005,
+    0
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS36",
+   "name": "dates: 16 May 23:55 UTC (before Amphan; it formed that day far south); 22 May 23:55 UTC − first land fix 09 UTC 20 May = 2.6 d ('two and a half days after landfall')",
+   "value": [
+    2.621528
+   ],
+   "ref": [
+    2.6
+   ],
+   "tol": [
+    0.05
+   ],
+   "pass": true,
+   "kind": "check"
+  },
+  {
+   "id": "DS37",
+   "name": "s24: the dark lines are u_r = 0 contours (Ian 3, Amphan 5 pieces, each with a closed pocket); no data: above the top level (Ian 15.3 km, Amphan 15.5 km), the bottom-left corner below the sea surface (Ian r < 50 km, z < 0.7 km; Amphan r < 75 km, z < 0.7 km), Amphan inside its first ring (r < 25 km)",
+   "value": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    25.0
+   ],
+   "ref": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    25.0
+   ],
+   "tol": 0,
+   "pass": true,
+   "kind": "check"
+  },
+  {
    "id": "DS23",
    "name": "s25/s31 recap numbers = scene rows: 0.048 m/s², ≈ 200 × smaller than g, 35 / 13",
    "value": [
@@ -2678,6 +3158,19 @@
     "lon2": -82.63
    },
    "sha256": "291edde201fc5603461dcb47d8f157b01f29bcf2faba62afbe65a30d2a150209"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "-",
+   "data": "data/cs.json",
+   "eq": "s = a σ (metres)",
+   "params": {
+    "lat1": 15.862274959083472,
+    "lon1": 93.56484375,
+    "lat2": 16.0,
+    "lon2": 93.6
+   },
+   "sha256": "ae0aebfd67f4c5a199d073cdcb90adcc3a2d5e0616a5210a094af83e1296b947"
   }
  ],
  "physics_recorded": [],
@@ -12226,6 +12719,32 @@
     ]
    },
    "output_sha256": "437ce5df60ee3ba77c72b93a921b404b9db3eba0b3e56c4bc35d935cbd28562d"
+  },
+  {
+   "fn": "fluidpy.geo.sphere.great_circle_distance",
+   "scene": "s31",
+   "eq": "Nargis track → Yangon (metres)",
+   "params": {
+    "lat1": "array (234,), sha256 35858422e5d3561facfdded7a011f73524c36859a3746812954de16e196236e6",
+    "lon1": "array (234,), sha256 81b2767cb6eaae1f5e9bbffe42d2bd1cb95e919afce423d4336d874a5bf996a2",
+    "lat2": 16.8,
+    "lon2": 96.16
+   },
+   "output_sha256": "5b7868804a32612141ca5cdd077289ecdc86b985befcc1b9586713080dd82298"
+  },
+  {
+   "fn": "fluidpy.data.ibtracs.storm_table",
+   "scene": "s33",
+   "eq": "IBTrACS SI Idai fixes",
+   "params": {
+    "path": "array (), sha256 e17fd52950330fc03e625eedd948db2eb3ac56d1cbc3d75226faf666244bde4e",
+    "sid": "2019063S18038",
+    "agencies": [
+     "usa",
+     "reunion"
+    ]
+   },
+   "output_sha256": "9927a7779dcc860df89aa05e93d4832594060741aa7f04076037dfb56098bb4a"
   }
  ]
 }

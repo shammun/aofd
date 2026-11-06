@@ -97,7 +97,7 @@ const S09: React.FC = () => {
           <line x1={RC[0]} y1={RC[1]} x2={P0[0]} y2={P0[1]} stroke={C.ink} strokeWidth={5} opacity={fin(f, tArc)} />
           <Lbl x={mix(RC[0], P0[0], 0.55)} y={mix(RC[1], P0[1], 0.55) + 46} t="$r$" c={C.ink} s={T.key} o={fin(f, tArc)} />
         </g>
-        <ClockG x={140} y={120} t={f < tLap ? "t" : `t = ${Math.round(lapFrac * 75)} min`} frac={f < tLap ? (f / 300) % 1 : lapFrac} />
+        <ClockG x={140} y={120} t={f < tLap ? "$t$" : `$t$ = ${Math.round(lapFrac * 75)} min`} frac={f < tLap ? (f / 300) % 1 : lapFrac} />
         <Keyword f={f} text="how fast does $\theta$ grow?" at={[MX, 120]} s={T.key} appear={0} out={tNum - 20} />
         <Keyword f={f} text={`v ≈ ${SAY.vt} m/s on this ring`} at={[MX, 220]} s={T.floor} appear={tV35} out={tDt - 20} />
         <Keyword f={f} text="the numbers" at={[MX, 120]} s={T.key} appear={tNum} out={tLap - 20} />
@@ -128,7 +128,7 @@ const S09: React.FC = () => {
         { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: tLap2 },
       ]} />
       <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
-      <Svg><Lbl x={MX} y={800} t={`${nf(RING.v, 1)} m/s ÷ 25 000 m`} c={C.muted} s={T.floor} o={0 * tGrow} /></Svg>
+      <Svg><Lbl x={MX} y={800} t={String.raw`${nf(RING.v, 1)} m/s $\div$ 25 000 m`} c={C.muted} s={T.floor} o={0 * tGrow} /></Svg>
     </Scene>
   );
 };
@@ -158,7 +158,7 @@ const S10: React.FC = () => {
         { lhs: String.raw`\hat{\mathbf r}`, rhs: String.raw`=\dfrac{\text{arrow}}{r}\ \Rightarrow\ \text{arrow}=r\,\hat{\mathbf r}`, at: tFlip, size: 52 },
         { lhs: String.raw`\text{arrow}`, rhs: String.raw`=25\ \mathrm{km}\times\hat{\mathbf r}`, at: tIan },
       ]} />
-      <Svg><Keyword f={f} text="number × arrow → product rule" at={[MX, 120]} s={T.floor} appear={tRate} /></Svg>
+      <Svg><Keyword f={f} text="number $\times$ arrow → product rule" at={[MX, 120]} s={T.floor} appear={tRate} /></Svg>
       <TeX s={String.raw`\dfrac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\dfrac{dv}{dt}\,\hat{\mathbf d}+v\,\dfrac{d\hat{\mathbf d}}{dt}`} x={MX} y={300} size={52} c={C.local} o={win(f, tProd, LEN(k) + 20)} />
       <Svg><Lbl x={MX} y={400} t="$v\to r,\quad \hat{\mathbf d}\to\hat{\mathbf r}$" c={C.gold} s={T.floor} o={fin(f, tProd + 20)} /></Svg>
       <TeX s={EQ_S10} x={MX} y={530} size={56} o={fin(f, tRes)} />
@@ -283,7 +283,7 @@ const S13: React.FC = () => {
         <Parcel p={p} />
         <Keyword f={f} text="keep: $v^2/r$, towards the centre" at={[MX, 120]} s={T.floor} appear={0} out={tHow - 20} />
         <Keyword f={f} text="how big?" at={[MX, 120]} s={T.key} appear={tHow} out={tBig - 20} />
-        <Keyword f={f} text="≈ 200 × smaller than gravity" at={[MX, 120]} s={T.floor} appear={tG} out={tCar - 20} />
+        <Keyword f={f} text="≈ 200 $\times$ smaller than gravity" at={[MX, 120]} s={T.floor} appear={tG} out={tCar - 20} />
         <Keyword f={f} text="all of it turns the parcel" at={[MX, 120]} s={T.key} appear={tTurn} />
         <g opacity={win(f, tG + 14, tCar - 20)}>{/* K6 round 2: in after the stack has slid up for its 9.81 / 0.048 row (the new row crossed the bars while sliding) */}
           {/* K6 r0: 50 px lower, clear of the (taller) fraction rows; K6 round 1: 15 px more (the fraction rows are 2.4 × size now) */}
@@ -339,7 +339,7 @@ const S14: React.FC = () => {
         <g opacity={oPic}>
           <Wedge c={RC} r={110} a0={a0} a1={a1} o={fin(f, tMin)} />
           <Lbl x={polar(RC, 160, a0 + DT / 2)[0]} y={polar(RC, 160, a0 + DT / 2)[1]} t="≈ 5°" c={C.gold} s={T.floor} a="middle" o={fin(f, tMin)} />
-          <Lbl x={RC[0]} y={RC[1] + RR + 70} t="turn drawn 3× larger" c={C.muted} s={T.floor} a="middle" o={fin(f, tMin)} />
+          <Lbl x={RC[0]} y={RC[1] + RR + 70} t="turn drawn $3\times$ larger" c={C.muted} s={T.floor} a="middle" o={fin(f, tMin)} />
           <Parcel p={p0} o={fin(f, tTwo)} /><Parcel p={p1} o={fin(f, tTwo)} />
           <Arrow p={tail} q={q0} color={C.first} w={10} head={36} o={fin(f, tTwo)} />
           <Arrow p={tail1} q={q1} color={C.first} w={10} head={36} o={fin(f, tTwo + 10)} />
@@ -352,7 +352,7 @@ const S14: React.FC = () => {
         </g>
         <g opacity={oPush}>
           {[60, 100, 140].map((r) => <circle key={r} cx={RC[0]} cy={RC[1]} r={r} fill="none" stroke={C.local} strokeWidth={3} strokeDasharray="12 8" />)}
-          <Lbl x={RC[0]} y={RC[1]} t="L" c={C.key} s={T.key} a="middle" />
+          <Lbl x={RC[0]} y={RC[1]} t="L" c={C.key} s={T.key} a="middle" />{/* lint-ok: weather-map symbol for the low-pressure centre, not a maths letter */}
           <Arrow p={polar(RC, RR, 120)} q={polar(RC, RR - 170, 120)} color={C.second} w={10} head={36} />
           {/* fix 0 B1 (physics): in this northern-hemisphere cyclone the air goes round anticlockwise (seen from above); the Coriolis
               push is to the RIGHT of the motion, i.e. OUTWARD (a = −f ẑ × v θ̂ = +f v r̂). True length 170/20 ≈ 8.5 px: drawn 6× longer */}
@@ -375,11 +375,11 @@ const S14: React.FC = () => {
         {/* fix 0 B1: the two pushes keyed by colour beside the picture (the ring leaves no room for labels at the parcel).
             #5b r1 S12 / M10: the key 80 px higher; the spin push named as seen on the turning Earth; Ω and φ named for the f row */}
         <Lbl x={MX} y={220} t="pressure force: inward" c={C.second} s={T.floor} o={win(f, tP, tM1 - 20)} />
-        <Lbl x={MX} y={280} t="Earth's spin: ≈ 1/20, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
+        <Lbl x={MX} y={280} t="Earth's spin: ≈ $1/20$, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
         <Lbl x={MX} y={335} t="(as seen on the turning Earth)" c="#b49cf0" s={T.floor} b={false} o={win(f, tEarth, tM1 - 20)} />
         {/* #5b r2 S4: f named here; Ω (with its unit) and φ (Ian's latitude) as rows of the stack below */}
         <Lbl x={MX} y={390} t="$f$: Coriolis parameter" c={C.local} s={T.floor} o={win(f, AT(k, 16, "pushes the other way"), tM1 - 20)} />
-        <Lbl x={RC[0]} y={790} t="(violet arrow drawn 6× longer)" c={C.muted} s={T.floor} a="middle" o={win(f, tEarth, tM1 - 20)} />
+        <Lbl x={RC[0]} y={790} t="(violet arrow drawn $6\times$ longer)" c={C.muted} s={T.floor} a="middle" o={win(f, tEarth, tM1 - 20)} />
         {/* K6 round 1: under the ring (the balance rows now reach y 840 in the text column) */}
         <Lbl x={RC[0]} y={845} t="why: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
       </Svg>
@@ -467,15 +467,15 @@ const S15: React.FC = () => {
           return <HRod3D key={`v${i}`} a={[CYL_R * Math.cos(a), CYL_R * Math.sin(a), 0]} b={[CYL_R * Math.cos(a), CYL_R * Math.sin(a), CYL_H]} px={3} color={C.key} o={0.6 * oCyl} />; })}
       </HView3D>
       <Svg>
-        <Lbl x={pr.p([0, 0, 7.6])[0] + 20} y={pr.p([0, 0, 7.6])[1]} t="z" c={C.second} s={T.key} o={oZ} />
+        <Lbl x={pr.p([0, 0, 7.6])[0] + 20} y={pr.p([0, 0, 7.6])[1]} t="$z$" c={C.second} s={T.key} o={oZ} />
         <Keyword f={f} text="a tall storm" at={[MX + 20, 120]} s={T.key} appear={0} out={tEw - 20} />
         <Lbl x={MX + 20} y={230} t="in near the sea" c={C.neg} s={T.floor} o={win(f, tIn, tIan - 20)} />
         <Lbl x={MX + 20} y={300} t="up in the eyewall" c={C.local} s={T.floor} o={win(f, AT(k, 3, "rises"), tIan - 20)} />
         <Lbl x={MX + 20} y={370} t="out at 12-15 km" c="#8db5e2" s={T.floor} o={win(f, tOut, tIan - 20)} />
         <SideCallout f={f} lines="eyewall" at={[MX + 20, 120]} s={T.key} appear={tEw} out={tZ - 20} target={ewT} c={C.gold} bend={-30} />
         <Keyword f={f} text="cylindrical coordinates" at={[MX + 20, 120]} s={T.key} appear={tCyl} />
-        <Lbl x={MX + 20} y={560} t="heights drawn ×4" c={C.muted} s={T.floor} o={fin(f, tZ)} />
-        <Lbl x={MX + 20} y={640} t="r = 30 km: a cylinder" c={C.key} s={T.floor} o={fin(f, tWhy)} />
+        <Lbl x={MX + 20} y={560} t="heights drawn $\times4$" c={C.muted} s={T.floor} o={fin(f, tZ)} />
+        <Lbl x={MX + 20} y={640} t="$r$ = 30 km: a cylinder" c={C.key} s={T.floor} o={fin(f, tWhy)} />
       </Svg>
       <TeX s={EQ_S15} x={MX + 20} y={300} size={T.eq} o={fin(f, tCyl + 10)} />
       <SourceBelow text={SRC.goes} pic={{ x: 20, y: 20, w: 1040, h: 800 }} w={1400} name="s15 src" />
@@ -531,9 +531,9 @@ const S16: React.FC = () => {
 // ================================================================ s17 is Ian shown right? (radar eye vs the model's calm centre)
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = K("s17_ian_check");
-  const tRadar = SS(k, 1), tRing = SS(k, 2), tBest = SS(k, 3), tModel = SS(k, 4), tP = SS(k, 5), tOff = SS(k, 6), tRule = SS(k, 8), tR1 = SS(k, 9), tR2 = SS(k, 10), tR3 = SS(k, 11);
+  const tRadar = SS(k, 1), tRing = SS(k, 2), tBest = SS(k, 3), tModel = SS(k, 4), tP = SS(k, 5), tOff = SS(k, 6), tRule = SS(k, 8), tR1 = SS(k, 9), tR2 = SS(k, 10);   // user notes item 5: S11 ('never mix the two centres') removed
   const bx = S17D.box as number[];
-  const PB = { x: 100, y: 60, w: 740, h: 740 };
+  const PB = { x: 100, y: 60, w: 700, h: 700 };   // user notes item 4: 40 px smaller, room for the two-line radar source line
   const B = { lat0: bx[0], lat1: bx[1], lon0: bx[2], lon1: bx[3], ...PB };
   const oR = fout(f, tModel - 4, 14), oM = fin(f, tModel, 14);
   const ewR = (S17D.r_fit / 111.2 / (bx[1] - bx[0])) * PB.h;
@@ -576,17 +576,28 @@ const S17: React.FC = () => {
         <Keyword f={f} text="our rule" at={[MX, 120]} s={T.key} appear={tRule} />
         <Lbl x={MX} y={430} t="where the eye is: radar, satellite" c={C.key} s={T.floor} o={fin(f, tR1)} />
         <Lbl x={MX} y={510} t="winds: model, own centre" c={C.first} s={T.floor} o={fin(f, tR2)} />
-        <Lbl x={MX} y={590} t="never mixed" c={C.gold} s={T.key} o={fin(f, tR3)} />
       </Svg>
-      <SourceBelow text={SRC.radar} pic={PB} w={1400} o={oR} name="s17 src r" />
-      <SourceBelow text={SRC.hrrr18} pic={PB} w={1400} o={oM} name="s17 src m" />
+      <SourceBelow text={SRC.radar} pic={PB} w={1400} o={oR} name="s17 src r" />{/* lint-ok: the name prop is a probe id, never drawn */}
+      <SourceBelow text={SRC.radar2} pic={{ ...PB, h: PB.h + 36 }} w={1400} o={oR} name="s17 src r2" />
+      <SourceBelow text={SRC.hrrr18} pic={PB} w={960} o={oM} name="s17 src m" />
     </Scene>
   );
 };
 
-// ================================================================ the HRRR layer stack (s18, s19): 1 unit = 100 km, heights ×15
-const ZX = 15 / 100;
-const zs = (STK.z_km as number[]).map((z) => z * ZX);
+// ================================================================ the HRRR layer stack (s18, s19): 1 unit = 100 km across
+// user notes 2026-11-06 item 6: the five layers EVENLY spaced (0.9 units apart: the bottom two and the top two no longer nearly touch) in a
+// much taller stack (≈ 4 units tall over a 5-unit square). The height axis is therefore no longer linear in km: each layer's tag carries its
+// pressure and height, and every other height (the radar's up arrows, the in-up-out path) goes through zMap, piecewise linear through the
+// five (height, layer) pairs. Listed in the storyboard / manifest exaggerations ("layers evenly spaced, not to scale").
+const zs = [0.35, 1.25, 2.15, 3.05, 3.95];
+const STACK_TGT: V3 = [0, 0, 1.95];
+/** height [km] → stack units: through (0, 0) and the five (z_km[i], zs[i]); above the top layer at the top segment's slope */
+export const zMap = (zkm: number) => {
+  const zk = [0, ...(STK.z_km as number[])], zu = [0, ...zs];
+  for (let i = 1; i < zk.length; i++) if (zkm <= zk[i]) return zu[i - 1] + ((zu[i] - zu[i - 1]) * (zkm - zk[i - 1])) / (zk[i] - zk[i - 1]);
+  const n = zk.length - 1;
+  return zu[n] + ((zu[n] - zu[n - 1]) * (zkm - zk[n])) / (zk[n] - zk[n - 1]);
+};
 const ringPts = (r: number, z: number): V3[] => circ(r, z, 64);
 /** the radar's strong-ascent radius [km] at height z [km]: piecewise linear through the measured 2 / 5 / 8 / 11-km values (DS29), held
  * constant outside 2-11 km (no extrapolation past the data) */
@@ -597,14 +608,14 @@ export const leanR = (z: number) => {
   return rr[rr.length - 1];
 };
 /** measured rising air on the eyewall ring (three.js only): at 2 / 5 / 8 / 11 km, 8 azimuths, length ∝ the radar's slanted ring max w,
- * base on the strong-ascent radius, leaning outward along leanR; beads animate (house wind rule) */
-const W_KM_PER_MS = 0.8;                                    // drawn rise per m/s [km of height]: 3.3 m/s → 2.7 km (×15 in the stack)
+ * base on the strong-ascent radius, leaning outward along leanR; heights through zMap; beads animate (house wind rule) */
+const W_KM_PER_MS = 0.8;                                    // drawn rise per m/s [km of height]: 3.3 m/s → 2.7 km
 const UpArrows3D: React.FC<{ f: number; o: number }> = ({ f, o }) => {
   if (o <= 0) return null;
   const sl = WV.tdr.slanted as number[][];
   return <group>{sl.map(([z, w], li) => Array.from({ length: 8 }, (_, j) => {
     const a = ((j + 0.5) * Math.PI) / 4, z1 = z + w * W_KM_PER_MS, r0 = leanR(z) / 100, r1 = leanR(z1) / 100;
-    const p: V3 = [r0 * Math.cos(a), r0 * Math.sin(a), z * ZX], q: V3 = [r1 * Math.cos(a), r1 * Math.sin(a), z1 * ZX];
+    const p: V3 = [r0 * Math.cos(a), r0 * Math.sin(a), zMap(z)], q: V3 = [r1 * Math.cos(a), r1 * Math.sin(a), zMap(z1)];
     return <group key={`w${li}_${j}`}><HArrow3D from={p} to={q} color={C.gold} px={5} head={Math.min(18, 8 + w * 4)} o={o} /><Bead3D f={f} a={p} b={q} speed={w * 3} o={o} /></group>;
   }))}</group>;
 };
@@ -630,8 +641,7 @@ const StackBody: React.FC<{ f: number; lit: (i: number) => number; ringO: number
       <LayerStack3D layers={f < 3 ? [] : layers} foot={{ x0: -H, x1: H, y0: -H, y1: H }} sep={1} reveal={reveal} mask={{ name: "stack", clipX: 1068, clipY: 788 }}
         lines={zs.map((z) => ({ pts: ringPts(1, z + 0.01), color: C.first, px: 3, o: 0.9 * ringO }))} />
       {[[-H, -H], [H, -H], [H, H], [-H, H]].map(([x, y], i) => <HRod3D key={`e${i}`} a={[x, y, 0]} b={[x, y, top + 0.05]} px={2} color={C.muted} o={0.6} />)}
-      <HArrow3D from={[-H, -H, 0]} to={[-H, -H, 16 * ZX + 0.2]} color={C.second} px={5} head={22} />
-      {[0, 3, 6, 9, 12, 15].map((km) => <HRod3D key={`t${km}`} a={[-H, -H, km * ZX]} b={[-H - 0.18, -H - 0.18, km * ZX]} px={3} color={C.muted} />)}
+      <HArrow3D from={[-H, -H, 0]} to={[-H, -H, top + 0.9]} color={C.second} px={5} head={22} />
       {(STK.dash_vt as number[][]).map((vts, li) => vts.map((vt, j) => {
         const a = (j * Math.PI) / 4, p: V3 = [Math.cos(a), Math.sin(a), zs[li] + 0.02], L = (vt / 35) * 0.55;
         const q: V3 = [p[0] - Math.sin(a) * L, p[1] + Math.cos(a) * L, p[2]];
@@ -646,15 +656,25 @@ const S18: React.FC = () => {
   const f = useCurrentFrame(), k = K("s18_ian_stack");
   const tLev = SS(k, 1), tHt = SS(k, 2), tFive = SS(k, 3), tSq = SS(k, 4), tLow = SS(k, 5), tNo = SS(k, 6), tRest = SS(k, 7), tCol = SS(k, 8), tRose = SS(k, 9), tBlue = SS(k, 10),
     tPale = SS(k, 11), tTall = SS(k, 12);
-  // K6 round 1+: camera 12.5 → 16 and principal point x 540 → 600 (s18 and s19): at 12.5 the stack's corner left the frame (x −64) and
-  // its km ticks with it (x −150) as the orbit reached az −76; checks/stack_frame.ts projects every frame: corner x ≥ 151, labels x ≥ 71
-  const keys: OrbitKey[] = [{ f: 0, az: -100, el: 20, dist: 16, target: [0, 0, 0.75] }, { f: LEN(k) + 10, az: -76, el: 22, dist: 16, target: [0, 0, 0.75], linear: true }];
-  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [600, 400]);
+  // user notes 2026-11-06 item 6: the camera reads the values: the whole (taller) stack from the side; on "Here are five layers" it eases in
+  // close from an oblique angle (every layer centre stays in frame), hovers and orbits slowly while the levels are named; then it pulls back
+  // a little and orbits round the stack again. checks/stack_frame.ts projects every frame (keys copied there).
+  const keys: OrbitKey[] = [
+    { f: 0, az: -100, el: 16, dist: 16.5, target: STACK_TGT },
+    { f: tFive, az: -86, el: 18, dist: 16.5, target: STACK_TGT },
+    { f: tFive + 150, az: -68, el: 24, dist: 13.5, target: STACK_TGT },
+    { f: tCol, az: -40, el: 26, dist: 13.5, target: STACK_TGT },
+    { f: tCol + 150, az: -30, el: 22, dist: 18, target: STACK_TGT },
+    { f: LEN(k) + 10, az: -86, el: 22, dist: 18, target: STACK_TGT, linear: true },
+  ];
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [600, 405]);
   const pr = hProjector(st, 1920, 1080, 0, 0);
   const H = STK.half_km / 100;
-  const tagAt = (i: number) => pr.p([H, -H, zs[i]]);
+  const tagAt = (i: number) => pr.p([H, 0, zs[i]]);   // the middle of each layer's right edge: on screen and above the bottom fade in every view (stack_frame probe)
   const tTag = [tLow, AT(k, 7, "eight hundred"), AT(k, 7, "five hundred,"), AT(k, 7, "two hundred,"), AT(k, 7, "one hundred and fifty")];
   const tags = ["925 hPa ≈ 0.7 km", "850 hPa ≈ 1.4 km", "500 hPa ≈ 6 km", "200 hPa ≈ 12 km", "150 hPa ≈ 14 km"]; // fix 0 B12: rounded as spoken
+  const tagY = [780, 692, 604, 516, 428];                                       // the tags in the column, bottom → top as the layers
+  const upTip = pr.p([-H, -H, zs[4] + 1.0]);
   return (
     <Scene>
       <HView3D st={st} x={0} y={0} w={1920} h={1080}>
@@ -662,21 +682,19 @@ const S18: React.FC = () => {
       </HView3D>
       <GlobeFrame id="s18k" zoom={1} right={1} name="s18 stack" />
       <Svg>
-        {[0, 3, 6, 9, 12, 15].map((km) => { const q = pr.p([-H - 0.2, -H - 0.2, km * ZX]); return <Lbl key={km} x={q[0] - 10} y={q[1]} t={`${km}`} c={C.muted} s={T.floor} a="end" b={false} />; })}
-        <Lbl x={pr.p([-H - 0.2, -H - 0.2, 16 * ZX + 0.3])[0] - 10} y={pr.p([-H - 0.2, -H - 0.2, 16 * ZX + 0.3])[1] - 10} t="km" c={C.muted} s={T.floor} a="end" b={false} />
-        {/* K6 round 1: the 500-hPa tag y 560 → 575 (it sat 2 px under the colour bar's box; 12 px needed) */}
-        {tags.map((t, i) => { const q = tagAt(i); const y = [790, 700, 575, 300, 210][i];
+        <g data-lc-maplabel="1"><Lbl x={upTip[0] - 12} y={upTip[1] - 16} t="height" c={C.second} s={T.floor} a="end" b={false} o={fin(f, tHt)} /></g>
+        {tags.map((t, i) => { const q = tagAt(i), y = tagY[i];
           return <g key={t} opacity={fin(f, tTag[i])}><Lbl x={1210} y={y} t={t} c={C.key} s={T.floor} />
             <line x1={1196} y1={y} x2={q[0] + 8} y2={q[1]} stroke={C.gold} strokeWidth={3} opacity={0.8} /></g>; })}
         <Keyword f={f} text="layer by layer" at={[1210, 120]} s={T.key} appear={0} out={tLev - 20} />
-        <Keyword f={f} text="pressure levels" at={[1210, 120]} s={T.key} appear={tLev} out={tCol - 20} />
-        {/* #5b r1 M7(a): the colour bar from the first frame, with the coloured layers; the two notes move under it, one after the other */}
-        <Lbl x={1210} y={640} t="square ≈ 500 km" c={C.local} s={T.floor} o={win(f, tSq, tNo - 20)} />
-        <Lbl x={1210} y={640} t="975 hPa: under the sea" c={C.local} s={T.floor} o={win(f, tNo, tRest - 20)} />
-        <URBar x={1210} y={400} w={420} o={fin(f, 6) * fout(f, LEN(k) + 20)} />{/* K6 r0: its title sat on the 200-hPa tag */}
+        <Keyword f={f} text="pressure levels" at={[1210, 120]} s={T.key} appear={tLev} out={tSq - 20} />
+        <Keyword f={f} text="square ≈ 500 km" at={[1210, 120]} s={T.key} appear={tSq} out={tNo - 20} />
+        <Keyword f={f} text="975 hPa: under the sea" at={[1210, 120]} s={T.floor} c={C.local} appear={tNo} out={tRest - 20} />
+        <Keyword f={f} text="five levels, five heights" at={[1210, 120]} s={T.floor} appear={tRest} out={tCol - 20} />
+        <URBar x={1210} y={196} w={420} title={false} o={fin(f, 6) * fout(f, LEN(k) + 20)} />
         <Keyword f={f} text="rose −: in · blue +: out" at={[1210, 120]} s={T.floor} appear={tRose} out={tPale - 20} />
         <Keyword f={f} text="dark line: zero" at={[1210, 120]} s={T.floor} appear={tPale} out={tTall - 20} />
-        <Keyword f={f} text="heights drawn ×15" at={[1210, 120]} s={T.floor} appear={tTall} />
+        <Keyword f={f} text="spread out evenly" at={[1210, 120]} s={T.key} appear={tTall} />
       </Svg>
       <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1400} name="s18 src" />{/* K6 r0: was in the caption band */}
     </Scene>
@@ -688,17 +706,19 @@ const S19: React.FC = () => {
   const f = useCurrentFrame(), k = K("s19_ian_layers_lit");
   const tLow = SS(k, 1), tAvg = SS(k, 2), t15 = SS(k, 3), t6 = SS(k, 4), tTop = SS(k, 5), tSo = SS(k, 6), tOrbit = SS(k, 7), tLook = SS(k, 8);
   const top = zs[4];
+  // user notes 2026-11-06 item 6: starts where s18 ended (az −86, dist 18) and drifts slowly while the layers are lit and read; from S7 the
+  // swing round and the one close look are KEPT as the user liked them (same moves, distances scaled to the taller stack)
   const keys: OrbitKey[] = [
-    { f: 0, az: -76, el: 22, dist: 16, target: [0, 0, 0.75] },
-    { f: tOrbit, az: -76, el: 22, dist: 16, target: [0, 0, 0.75] },
-    { f: Math.min(tOrbit + 150, tLook - 12), az: 4, el: 34, dist: 16, target: [0, 0, 0.75] },
-    { f: tLook, az: 4, el: 30, dist: 16, target: [0, 0, 0.75] },
-    { f: tLook + 45, az: -6, el: 6, dist: 6.8, target: [0, -1.6, top * 0.45] },
-    { f: tLook + 45 + 40, az: -2, el: 6, dist: 6.8, target: [0, -1.6, top * 0.5], linear: true },
-    { f: tLook + 45 + 40 + 45, az: -20, el: 24, dist: 16, target: [0, 0, 0.75] },
-    { f: LEN(k) + 10, az: -26, el: 24, dist: 16, target: [0, 0, 0.75], linear: true },
+    { f: 0, az: -86, el: 22, dist: 18, target: STACK_TGT },
+    { f: tOrbit, az: -76, el: 22, dist: 18, target: STACK_TGT },
+    { f: Math.min(tOrbit + 150, tLook - 12), az: 4, el: 30, dist: 19, target: STACK_TGT },
+    { f: tLook, az: 4, el: 28, dist: 19, target: STACK_TGT },
+    { f: tLook + 45, az: -6, el: 6, dist: 7.5, target: [0, -1.6, top * 0.45] },
+    { f: tLook + 45 + 40, az: -2, el: 6, dist: 7.5, target: [0, -1.6, top * 0.5], linear: true },
+    { f: tLook + 45 + 40 + 45, az: -20, el: 24, dist: 19, target: STACK_TGT },
+    { f: LEN(k) + 10, az: -26, el: 24, dist: 19, target: STACK_TGT, linear: true },
   ];
-  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [600, 400]);
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [600, 405]);
   const pr = hProjector(st, 1920, 1080, 0, 0);
   const sel = f < tLow ? null : f < t15 ? [0] : f < t6 ? [1] : f < tTop ? [2, 3] : f < tSo ? [4] : null;
   const lit = (i: number) => (f < SS(k, 0) + 20 ? 0.92 : sel === null ? 0.85 : sel.includes(i) ? 1 : 0.4);
@@ -797,7 +817,7 @@ const S20: React.FC = () => {
           <circle cx={RB.x + RB.w / 2} cy={RB.y + RB.h / 2} r={14} fill={C.gold} opacity={fin(f, tDep + 60)} />
           <URBar x={RB.x + 40} y={RB.y + RB.h + 70} w={360} o={fin(f, 14, 8)} />{/* K6 r4: in after the cross-fade from the s19 stack */}
         </g>
-        <Lbl x={MX} y={700} t="one ring → one point (r, z)" c={C.key} s={T.floor} o={win(f, tDep + 60, tSlice - 6) * fin(f, 0, 10)} />
+        <Lbl x={MX} y={700} t="one ring → one point $(r,\ z)$" c={C.key} s={T.floor} o={win(f, tDep + 60, tSlice - 6) * fin(f, 0, 10)} />
       </Svg>
       {/* K6 round 1: the section pictures sit in an overflow-hidden <div> of the section box (the GeoMap pattern): during the radar
           zoom the HRRR picture grows past the box, and the nested-svg crop was not seen by the box probe (text-img on the colour bar
