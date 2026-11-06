@@ -10,7 +10,8 @@ Coordinates Part 1. The checks are:
   The lint flags these:
     - combining marks U+0300–036F and U+20D0–20FF (hats, dots, bars, arrows);
     - `^` or `_` used as a super/subscript (`v^2`, `u_r`);
-    - primes on a letter (`x′`, `e'1`; English apostrophes such as "Earth's" are not flagged);
+    - primes on a letter (`x′`, `Δx′`, `ŷ′`, `e₁′`, `e'1`; a U+2032/2033/2034 prime after any letter, accent or sub/superscript;
+      English apostrophes such as "Earth's" are not flagged);
     - Unicode super/subscripts on a letter or number (`v²`, `e′₁`, `10⁻⁵`); see the unit whitelist below;
     - a Greek letter carrying any of those modifiers.
   A label with `$…$` maths (Part 2's Lbl/Keyword) is plain text outside the dollars and `\\textstyle` KaTeX inside them.
@@ -91,7 +92,10 @@ UNIT_EXP = re.compile(r"(?:(?<=[\s/·(\d])|^)(?:k?m|s|kg|hPa|Pa|K|W|J|N|rad|cm|m
 COMB = f"{chr(0x0300)}-{chr(0x036F)}{chr(0x20D0)}-{chr(0x20FF)}"   # combining marks (written by code point: invisible in source)
 RX_COMBINING = re.compile(f"[{COMB}]")
 RX_SUPSUB_SCRIPT = re.compile(rf"[{LETTER}0-9)\]]\s?[\^_]\s?[{{(]?[{LETTER}0-9\-−+′']")
-RX_PRIME = re.compile(rf"(?<![{LETTER}])[{LETTER}][′″‴]|(?<![{LETTER}])[{LETTER}]'(?![A-Za-z])")
+# a typographic prime (U+2032-2034) after ANY letter: Latin or Greek, inside a word ("Δx′"), precomposed with an accent ("ŷ′"),
+# after a combining mark ("x̂′") or a sub/superscript ("e₁′"). U+2032 has no English use, so no word boundary is needed (Part 1
+# review 3: "x′" / "(x′, y′)" labels in the sans font). The ASCII apostrophe keeps the word-boundary rule ("Earth's" is English).
+RX_PRIME = re.compile(rf"(?:[^\W\d_]|[{COMB}]|[{SUPSUB}])[′″‴]|(?<![{LETTER}])[{LETTER}]'(?![A-Za-z])")
 RX_UNICODE_SS = re.compile(rf"[{LETTER}0-9′)\]][{SUPSUB}]+")
 RX_GREEK_MOD = re.compile(rf"[{GREEK}](?:[{COMB}]|[{SUPSUB}]|[′']|\s?[\^_])"
                           rf"|[\^_]\s?[{{]?[{GREEK}]")   # a Greek letter with a modifier, or as a sub/superscript (u_θ)

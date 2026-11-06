@@ -384,7 +384,7 @@ const S05: React.FC = () => {
       </Svg>
       <TeX s={String.raw`r\cos\theta`} x={pp(1.5, 0)[0]} y={PO[1] + 60} size={60} ax={0.5} c={C.second} o={fin(f, tSides)} />
       <TeX s={String.raw`r\sin\theta`} x={pp(3, 0)[0] + 24} y={pp(3, 2)[1]} size={60} c={C.second} o={fin(f, AT(k, 4, "the side going north"))} />
-      <CalcStack f={f} x={1400} y={250} size={56} maxLines={2} rows={[
+      <CalcStack f={f} x={1400} y={250} size={56} maxLines={3} rows={[
         { lhs: String.raw`\cos\theta`, rhs: String.raw`=\dfrac{\text{east side}}{r}`, at: tC, h: 132 },
         { rhs: String.raw`=\dfrac{3}{5}=0.6`, at: AT(k, 6, "three fifths"), cont: true, h: 128 },
         { lhs: String.raw`\sin\theta`, rhs: String.raw`=\dfrac{\text{north side}}{r}`, at: AT(k, 6, "and sine theta"), h: 132 },
@@ -393,7 +393,7 @@ const S05: React.FC = () => {
         { lhs: String.raw`y=r\sin\theta`, rhs: String.raw`=5\times0.8=4`, at: t4 },
       ]} />
       <TeX s={String.raw`(\theta\approx53.13^\circ)`} x={1100} y={190} size={46} c={C.local} o={win(f, tC, tEq - 10)} />
-      <TeX s={EQ_S05} x={1100} y={640} size={60} o={fin(f, tEq)} />
+      <TeX s={EQ_S05} x={1100} y={770} size={60} o={fin(f, tEq)} />
     </Scene>
   );
 };
@@ -423,7 +423,7 @@ const S06: React.FC = () => {
           <Lbl x={PO[0] + 70} y={PO[1] - 250} t="37°" c={C.gold} s={T.key} o={fin(f, tCalc + 20)} />
         </g>
         <Lbl x={1100} y={110} t="compass: from north, clockwise" c={C.gold} s={T.floor} o={fin(f, tBear)} />
-        <Keyword f={f} text="from" at={[W0[0] - 20, W0[1] - 70]} a="end" appear={tFrom} />
+        <Keyword f={f} text="from" at={[W0[0] - 20, W0[1] - 92]} a="end" appear={tFrom} />
         <g opacity={fin(f, tWest)}>
           <AnimatedWindArrow from={W0} to={W1} speed={10} f={f} c={C.ink} px={10} head={40} />
           <Lbl x={W0[0] - 20} y={W0[1]} t="W" c={C.muted} s={T.key} a="end" />
@@ -438,7 +438,8 @@ const S06: React.FC = () => {
         { rhs: B6[2], at: tCalc, cont: true },
         { rhs: B6[3], at: tCalc + 30, cont: true },
       ]} />
-      <TeX s={String.raw`u=+10,\ v=0`} x={1250} y={460} size={60} c={C.ink} o={fin(f, AT(k, 5, "towards the east") + 20)} />
+      {/* fix 3 (review 3 Must 6): the "u = +10, v = 0" row is gone (u and v are first defined in s13); "from" keeps its own line
+          above the arrow and the words "a west wind blows east" sit under it */}
     </Scene>
   );
 };

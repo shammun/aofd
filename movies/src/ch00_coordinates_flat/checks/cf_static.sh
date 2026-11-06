@@ -11,3 +11,4 @@ echo "== swap_check"; node movies/src/ch00_coordinates_flat/checks/swap_check.mj
 echo "== cam_speed";  node movies/src/ch00_coordinates_flat/checks/cam_speed.mjs 2>&1 | tail -3
 echo "== eq_check";   "$PY" movies/src/ch00_coordinates_flat/checks/eq_check.py
 echo "== ssr";        (cd movies && node src/ch00_coordinates_flat/checks/ssr/run.mjs --step 10 --public "$S/public" 2>&1 | grep -v "THREE_CJS\|Replace \`const\|trace-deprecation" | tail -30)
+echo "== symbol lint (--strict)"; "$PY" tools/movie_symbol_lint.py movies/src/ch00_coordinates_flat --strict | tail -3

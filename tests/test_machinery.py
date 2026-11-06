@@ -288,9 +288,31 @@ def test_movie_symbol_lint_rules(tmp_path):
     assert M.main([str(bad)]) == 1 and M.main([str(good)]) == 0
 
 
-@pytest.mark.parametrize("part", ["sphere", "frames", "moving", "routes", "maps"])
+def test_movie_symbol_lint_plain_primes():
+    """C1 primes (Part 1 review 3): a U+2032/2033 prime on a Latin or Greek letter in a plain-text label is flagged in every label
+    form (t=, label=, text=, a string array used as labels, a template literal), also inside a word, after an accent or a
+    subscript; arc minutes, English apostrophes and KaTeX primes are not."""
+    import movie_symbol_lint as M
+
+    def rules(src: str) -> list[str]:
+        return sorted(f.rule for f in M.lint_source(src, "t.tsx", strict=True) if not f.ok)
+
+    assert rules('const A = () => <Lbl x={1} y={2} t="x′ = 4.6" />;') == ["C1-prime"]
+    assert rules('const A = () => <Rulers a={30} label={["x′", "y′"]} />;') == ["C1-prime", "C1-prime"]
+    assert rules('const A = () => <Keyword f={f} text="new coordinates x′, y′" at={[1, 2]} appear={0} />;') == ["C1-prime"]
+    assert rules('const S17L = ["(x′, y′)", "= (4.6, 1.96)"];\nconst A = () => <Lbl t={S17L[0]} />;') == ["C1-prime"]
+    assert rules('const A = () => <Lbl t={`x′ = ${v}`} />;') == ["C1-prime"]
+    assert rules('const A = () => <Lbl t="Δx′ east" />;') == ["C1-prime"]          # inside a word (Greek + Latin)
+    assert rules('const A = () => <Lbl t="ŷ′ axis" />;') == ["C1-prime"]           # precomposed accent
+    assert rules('const A = () => <Lbl t="e₁′ axis" />;') == ["C1-prime", "C1-unicode-script"]   # after a subscript
+    # not flagged: arc minutes after a digit, English apostrophes, KaTeX primes (TeX props / tex= arrays), comments
+    assert rules('const A = () => <Lbl t="26°30′ N, Earth\'s spin" />;') == []
+    assert rules("const A = () => <g><TeX s=\"x'\" x={1} y={2} /><RulerTeX a={30} tex={[\"x'\", \"y'\"]} /></g>; // x′ here") == []
+
+
+@pytest.mark.parametrize("part", ["flat", "sphere", "frames", "moving", "routes", "maps"])
 def test_movie_symbol_lint_coordinates_parts_clean(part):
-    """Coordinates Parts 3-7 carry the Part 1 lessons C1/C2/C4: their sources lint clean, --strict included (every \\dfrac)."""
+    """Coordinates Part 1 and Parts 3-7 carry the Part 1 lessons C1/C2/C4: their sources lint clean, --strict included (every \\dfrac)."""
     import movie_symbol_lint as M
 
     d = ROOT / "movies" / "src" / f"ch00_coordinates_{part}"

@@ -37,6 +37,9 @@ const onC = (o: Pt, R: number, deg: number): Pt => [o[0] + R * Math.cos(deg * D2
 /** a KaTeX tip label just beyond the tip of an arrow from p along unit v of length L */
 const Tip: React.FC<{ p: Pt; v: Pt; L: number; s: string; c?: string; o?: number; d?: number; size?: number }> = ({ p, v, L, s, c = C.second, o = 1, d = 46, size = 56 }) =>
   <TeX s={s} x={p[0] + v[0] * (L + d)} y={p[1] + v[1] * (L + d)} size={size} ax={0.5} c={c} o={o} />;
+// fix 3 (review 3 cosmetic): "+90°" as a unary plus ({+}90°: no binary-operator spacing); the storyboard string stays in cf_eq.ts
+const EQ_S09V = EQ_S09.replace(String.raw`\ +90`, String.raw`\ {+}90`);
+if (EQ_S09V === EQ_S09) throw new Error("EQ_S09: +90 not found");
 const RHAT = String.raw`\hat{\mathbf r}`, THAT = String.raw`\hat{\boldsymbol\theta}`;
 const XP = String.raw`\hat{\mathbf x}'`, YP = String.raw`\hat{\mathbf y}'`;
 const KX: React.FC<{ s: string; x: number; y: number; o: number; size?: number; c?: string }> = ({ s, x, y, o, size = 54, c = C.key }) => <TeX s={s} x={x} y={y} size={size} c={c} o={o} />;
@@ -108,7 +111,7 @@ const S08: React.FC = () => {
 };
 /** EQ_S08 with the three r's of the fraction struck (rose cancel lines) */
 const rep2 = (s: string) => {
-  const a = String.raw`\frac{(r\cos\theta,\ r\sin\theta)}{r}`;
+  const a = String.raw`\frac{(r\cos\theta,\ r\sin\theta)}{r}`;   // lint-ok: search pattern for EQ_S08 (storyboard verbatim), not drawn as written
   if (!s.includes(a)) throw new Error("s08 cancel variant drifts from EQ_S08");
   const cr = String.raw`\textcolor{#d9667f}{\cancel{\textcolor{#e8ecf4}{r}}}`;
   return s.replace(a, String.raw`\frac{(${cr}\cos\theta,\ ${cr}\sin\theta)}{${cr}}`);
@@ -196,7 +199,7 @@ const S09: React.FC = () => {
       <KX s={String.raw`\text{slide}\perp\hat{\mathbf r}`} x={1080} y={320} o={fin(f, AT(k, 10, "at right angles"))} />
       <TeX s={String.raw`5+0.1=5.1\ \mathrm{km}\ne5`} x={1080} y={300} size={50} o={win(f, AT(k, 9, "five point one"), tNo - 12)} />
       <TeX s={String.raw`5-0.1=4.9\ \mathrm{km}\ne5`} x={1080} y={370} size={50} o={win(f, AT(k, 9, "four point nine"), tNo - 12)} />
-      <TeX s={EQ_S09} x={1080} y={640} size={64} o={fin(f, tSo)} />
+      <TeX s={EQ_S09V} x={1080} y={640} size={64} o={fin(f, tSo)} />
     </Scene>
   );
 };
@@ -250,7 +253,7 @@ const S10: React.FC = () => {
         <g opacity={chainO}>
           <line x1={A0[0]} y1={A0[1]} x2={A1[0]} y2={A1[1]} stroke={C.second} strokeWidth={9} strokeLinecap="round" />
           <line x1={A1[0]} y1={A1[1]} x2={A2[0]} y2={A2[1]} stroke={C.second} strokeWidth={9} strokeDasharray="16 10" strokeLinecap="round" />
-          <Arrow p={A0} q={A2} color={C.first} o={fin(f, tSteps)} />
+          <Arrow p={A0} q={A2} color={C.ink} o={fin(f, tSteps)} />   {/* fix 3 (review 3 Should 9): plain arrows are ink */}
           {rot > 0 && rot < 90 ? <path d={arcD(O10, 60, 0, rot)} fill="none" stroke={C.gold} strokeWidth={5} /> : null}
           <Lbl x={(A0[0] + A1[0]) / 2 + (rot > 45 ? 34 : 0)} y={(A0[1] + A1[1]) / 2 + (rot > 45 ? 0 : 40)} t={pTag} c={C.second} s={T.floor} a={rot > 45 ? "start" : "middle"} o={fin(f, tSteps)} />
           {/* K6 after fix 1c: once turned, "q west" sits at the west end of its step, above "(−q, p)", off the gold 90° arc and the teal arrow */}
@@ -258,11 +261,11 @@ const S10: React.FC = () => {
           <Lbl x={A2[0] + (rot > 45 ? -24 : 24)} y={A2[1] + (rot > 45 ? 14 : -40)} t={rot > 45 ? "(−q, p)" : "(p, q)"} c={C.key} s={T.key} a={rot > 45 ? "end" : "start"} o={fin(f, tPQ) * (rot > 5 && rot < 85 ? 0 : 1) * (rot > 45 ? fin(f, tRes) : 1)} />
         </g>
         <g opacity={balO}>
-          <Arrow p={B0} q={B2} color={C.first} />
+          <Arrow p={B0} q={B2} color={C.ink} />
           <Dash p={B0} q={B1} c={C.second} w={4} /><Dash p={B1} q={B2} c={C.second} w={4} />
           <Lbl x={B2[0] + 24} y={B2[1] - 10} t="(3, 4)" c={C.key} s={T.key} />
           <g opacity={fin(f, tSw - 30)}>
-            <Arrow p={R2(B0)} q={R2(B2)} color={C.first} dash="18 10" />
+            <Arrow p={R2(B0)} q={R2(B2)} color={C.ink} dash="18 10" />
             <Dash p={R2(B0)} q={R2(B1)} c={C.second} w={4} /><Dash p={R2(B1)} q={R2(B2)} c={C.second} w={4} />
           </g>
           {/* fix 2 (review 2 Should 8): "(−4, 3)" centred above the turned tip (it started at x 28), "4 west" right of it over its leg */}
@@ -346,7 +349,7 @@ const S11: React.FC = () => {
   const ins = fin(f, tTurn, 14) * u1out;
   const KO: Pt = [400, 520], KR = 280, KB = onC(KO, KR, TH), KL = 160;   // keep picture: circle, balloon at θ ≈ 53°
   // the final θ̂ row (5th-last line of the U1 stack) sits on the stack's 2nd visible line: y 370 + one 46-px row (1.42 × 46)
-  const yTh = 390 + 46 * 1.42 + (46 * 1.42) / 2;
+  const yTh = 390 + 4 * 46 * 1.42 + (46 * 1.42) / 2;   // fix 3: 5th line of the division column
   return (
     <Scene>
       <Svg>
@@ -459,7 +462,7 @@ const S11: React.FC = () => {
       <TeX s={String.raw`\text{without the }\hat{\boldsymbol\theta}\text{ formula}`} x={1080} y={294} size={48} c={C.gold} o={fin(f, tLast, 8) * fout(f, tAft - 14)} />   {/* K6 k6f2b: leaves before the long U1 rows slide up through it */}
       <Tip p={KB} v={ER} L={KL} s={RHAT} o={keepO * fin(f, AT(k, 24, "r hat points away"))} />
       <Tip p={KB} v={ET} L={KL} s={THAT} o={keepO * fin(f, AT(k, 24, "theta hat points round"))} />
-      <TeX s={EQ_S09} x={1080} y={340} size={60} c={C.second} o={keepO * fin(f, AT(k, 24, "turned by ninety"))} />
+      <TeX s={EQ_S09V} x={1080} y={340} size={60} c={C.second} o={keepO * fin(f, AT(k, 24, "turned by ninety"))} />
       <KX s={String.raw`\text{turn }\hat{\mathbf r}`} x={1080} y={110} o={fout(f, tR - 18) * fin(f, 0)} />
       <TeX s={String.raw`\hat{\mathbf r}=(\cos\theta,\ \sin\theta)`} x={1080} y={110} size={60} c={C.ink} o={fin(f, tR)} />
       <TeX s={EQ_S11} x={1080} y={210} size={72} c={C.second} o={fin(f, tRes)} />
@@ -470,7 +473,9 @@ const S11: React.FC = () => {
         { rhs: String.raw`=(0,\ 1)`, at: t0, cont: true },
         { lhs: String.raw`\theta=90^\circ:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(-\sin90^\circ,\ \cos90^\circ)`, at: AT(k, 11, "Minus sine ninety") },
         { rhs: String.raw`=(-1,\ 0)`, at: t90, cont: true },
-        { lhs: String.raw`\theta\approx53.13^\circ:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(-0.8,\ 0.6)`, at: tBal },
+        // fix 3 (review 3 Should 2): the balloon's θ̂ with its inputs (sin 53.13° = 0.8, cos 53.13° = 0.6 from s05), then the result
+        { lhs: String.raw`\theta\approx53.13^\circ:\ \hat{\boldsymbol\theta}`, rhs: String.raw`=(-\sin53.13^\circ,\ \cos53.13^\circ)`, at: tBal },
+        { rhs: String.raw`=(-0.8,\ 0.6)`, at: AT(k, 13, "minus zero point eight"), cont: true },
         { lhs: String.raw`|\hat{\boldsymbol\theta}|`, rhs: String.raw`=\sqrt{(-0.8)^2+0.6^2}`, at: tLen },
         { rhs: String.raw`=\sqrt{0.64+0.36}=1`, at: tLen + 40, cont: true },
         { lhs: String.raw`\hat{\mathbf r}\cdot\hat{\boldsymbol\theta}`, rhs: String.raw`=0.6\times(-0.8)+0.8\times0.6`, at: tDotW },
@@ -479,7 +484,7 @@ const S11: React.FC = () => {
       {/* U1 column: one line per spoken phrase */}
       {/* K6 after fix 1c: "=" column 1250 → 1290 (the "before" label clears the inset), long rows split at their "≈"/"=", two lines
           visible (the tallest pair, x and y, is six rows: y 370-760) */}
-      <CalcStack f={f} x={1290} y={390} size={46} maxLines={2} o={u1out} rows={[   /* K6 k6f2: 20 px lower, clear of the keyword while rows slide out */
+      <CalcStack f={f} x={1290} y={390} size={46} maxLines={2} o={u1out * fout(f, tDiv - 14, 12)} rows={[   /* K6 k6f2: 20 px lower, clear of the keyword while rows slide out */
         { lhs: String.raw`\Delta\theta`, rhs: String.raw`=0.1^\circ=0.1\times\pi/180`, at: tRadA },
         { rhs: String.raw`\approx0.001745\ \mathrm{rad}`, at: tRadB, cont: true },
         { lhs: "r", rhs: String.raw`=5\ \mathrm{km}=5000\ \mathrm{m}`, at: tArc },
@@ -509,6 +514,12 @@ const S11: React.FC = () => {
         { rhs: String.raw`=\sqrt{49+27.04}`, at: AT(k, 22, "twenty seven point zero four"), cont: true, h: 84 },
         { rhs: String.raw`=\sqrt{76.04}`, at: tRoot, cont: true, h: 84 },
         { rhs: String.raw`\approx8.7\ \mathrm{m}=s`, at: t87b, cont: true, h: 70 },
+      ]} />
+      {/* fix 3 (review 3 Should 1): the divisions get their own column (the U1 stack above leaves as "Dividing" starts), so both
+          divisions stay up with the θ̂ row and its tick; the two inputs (Δx, Δy) and s are carried over on top */}
+      <CalcStack f={f} x={1290} y={390} size={46} maxLines={5} o={u1out} rows={[
+        { lhs: String.raw`(\Delta x,\ \Delta y)`, rhs: String.raw`=(-7.0,\ +5.2)\ \mathrm{m}`, at: tDiv - 2 },
+        { lhs: "s", rhs: String.raw`\approx8.7\ \mathrm{m}`, at: tDiv - 2 },
         { lhs: String.raw`-7.0/8.7`, rhs: String.raw`\approx-0.80`, at: tGives },
         { lhs: String.raw`5.2/8.7`, rhs: String.raw`\approx0.60`, at: tGives + 30 },
         { lhs: String.raw`\hat{\boldsymbol\theta}`, rhs: String.raw`\approx(-0.80,\ 0.60)`, at: tAgain },
@@ -563,10 +574,10 @@ const S12: React.FC = () => {
         { rhs: String.raw`=(0,\ 1)`, at: tN + 35, cont: true },
         { lhs: String.raw`\hat{\boldsymbol\theta}`, rhs: String.raw`=(-\sin90^\circ,\ \cos90^\circ)`, at: tN + 50 },
         { rhs: String.raw`=(-1,\ 0)`, at: tN + 65, cont: true },
-        { lhs: String.raw`\theta=180^\circ:\ \hat{\mathbf r}`, rhs: String.raw`=(\cos180^\circ,\ \sin180^\circ)`, at: tW + 20 },
-        { rhs: String.raw`=(-1,\ 0)`, at: tW + 35, cont: true },
-        { lhs: String.raw`\hat{\boldsymbol\theta}`, rhs: String.raw`=(-\sin180^\circ,\ \cos180^\circ)`, at: tW + 50 },
-        { rhs: String.raw`=(0,\ -1)`, at: tW + 65, cont: true },
+        { lhs: String.raw`\theta=180^\circ:\ \hat{\mathbf r}`, rhs: String.raw`=(\cos180^\circ,\ \sin180^\circ)`, at: tW + 20, out: SS(k, 4) },
+        { rhs: String.raw`=(-1,\ 0)`, at: tW + 35, cont: true, out: SS(k, 4) },
+        { lhs: String.raw`\hat{\boldsymbol\theta}`, rhs: String.raw`=(-\sin180^\circ,\ \cos180^\circ)`, at: tW + 50, out: SS(k, 4) },
+        { rhs: String.raw`=(0,\ -1)`, at: tW + 65, cont: true, out: SS(k, 4) },
       ]} />
     </Scene>
   );
@@ -603,7 +614,8 @@ const S13: React.FC = () => {
           <Lbl x={LOC[0] + 74} y={LOC[1] + 40} t="θ = 53°" c={C.local} s={T.floor} />
         </g>
 
-        <Lbl x={560} y={162} t="wind: its own scale" c={C.muted} s={T.floor} o={fin(f, tWind)} />
+        {/* fix 3 (review 3 Should 12): 48 px at key contrast (was 44 px grey) */}
+        <Lbl x={560} y={174} t="wind: its own scale" c={C.key} s={48} o={fin(f, tWind)} />
         <Lbl x={W[0] + 104} y={W[1] - 24} t="10 m/s" c={C.ink} s={T.floor} o={fin(f, AT(k, 3, "ten metres per second"))} />
         <Lbl x={W[0] + 104} y={W[1] + 30} t="due east" c={C.ink} s={T.floor} o={fin(f, AT(k, 3, "ten metres per second"))} />
         <g opacity={fin(f, tSh)}>
@@ -629,7 +641,7 @@ const S13: React.FC = () => {
       <Tip p={B13} v={ET13} L={L13} s={THAT} />
       <TeX s={String.raw`\mathbf u`} x={W[0] + 50} y={W[1]} size={60} c={C.ink} o={fin(f, tBold)} />
       {/* fix 2 (review 2 Should 2): r̂, θ̂ set in KaTeX (the sans label drew θ̂'s hat offset) */}
-      <TeX s={String.raw`\hat{\mathbf r},\ \hat{\boldsymbol\theta}:\ \text{length 1}`} x={560} y={110} size={44} c={C.muted} o={fin(f, tWind)} />
+      <TeX s={String.raw`\hat{\mathbf r},\ \hat{\boldsymbol\theta}:\ \text{length 1}`} x={560} y={110} size={52} c={C.key} o={fin(f, tWind)} />
       <TeX s={String.raw`u_r=6`} x={footR[0] - 30} y={footR[1] - 40} ax={1} size={52} c={C.neg} o={fin(f, tR6 + 10)} />
       <TeX s={String.raw`u_\theta=-8`} x={footT[0] + 30} y={footT[1] + 40} size={52} c={C.first} o={fin(f, tT8 + 10)} />
       <TeX s={String.raw`\mathbf u=(u,\ v)=(10,\ 0)\ \mathrm{m/s}`} x={1080} y={110} size={54} o={fin(f, tUV) * fout(f, tIn - 18)} />
@@ -660,6 +672,10 @@ const S14: React.FC = () => {
   const [ur, ut] = cutAt(EQ_S14, String.raw`,\qquad `);
   const [urL, urR] = cutAt(ur, "="), [utL, utR] = cutAt(ut, "=");
   const old = fout(f, tAny - 6, 20) * 0.6 + 0.4;
+  // fix 3 (review 3 Should 3): the keep line shows the split, not the rebuild: the number column and the tick leave, the two
+  // parts are named on the picture (rose in/out along r̂, teal round along θ̂), the two general formulas stay
+  const tKeep = SS(k, 12), kOut = fout(f, tKeep - 12, 12);
+  const tKIn = AT(k, 12, "an in or out part"), tKRd = AT(k, 12, "a round part"), tKDot = AT(k, 12, "each part is a dot product");
   return (
     <Scene>
       <Svg>
@@ -681,24 +697,32 @@ const S14: React.FC = () => {
           <Lbl x={A2[0] + 74} y={(B13[1] + A1[1]) / 2} t="4.8 up, 4.8 down" c={C.gold} s={T.floor} />
         </g>
         <BDot p={B13} />
-        <Check x={W[0] + 30} y={W[1] - 50} o={fin(f, tBack)} />
+        <Check x={W[0] + 30} y={W[1] - 50} o={fin(f, tBack) * kOut} />
         <Keyword f={f} text="same wind?" at={[1080, 110]} appear={0} out={t6 - 18} />
         <Keyword f={f} text="used on a hurricane soon" at={[1080, 820]} s={T.floor} appear={tSoon} />
       </Svg>
-      <TeX s={String.raw`6\,\hat{\mathbf r}`} x={at(B13, ER13, 6 * MS)[0] - 40} y={at(B13, ER13, 6 * MS)[1] - 30} size={52} ax={1} c={C.neg} o={fin(f, t6 + 20)} />
-      <TeX s={String.raw`-8\,\hat{\boldsymbol\theta}`} x={(A1[0] + A2[0]) / 2 + 30} y={(A1[1] + A2[1]) / 2 - 30} size={52} c={C.first} o={fin(f, t8 + 20)} />
+      <TeX s={String.raw`6\,\hat{\mathbf r}`} x={at(B13, ER13, 6 * MS)[0] - 40} y={at(B13, ER13, 6 * MS)[1] - 30} size={52} ax={1} c={C.neg} o={fin(f, t6 + 20) * fout(f, tKIn - 10)} />
+      <TeX s={String.raw`-8\,\hat{\boldsymbol\theta}`} x={(A1[0] + A2[0]) / 2 + 30} y={(A1[1] + A2[1]) / 2 - 30} size={52} c={C.first} o={fin(f, t8 + 20) * fout(f, tKRd - 10)} />
+      {/* fix 3 (review 3 Should 3): the keep line names the two parts on the picture, then writes each as a dot product */}
+      <TeX s={String.raw`\text{in/out: }u_r`} x={at(B13, ER13, 6 * MS)[0] - 40} y={at(B13, ER13, 6 * MS)[1] - 30} size={48} ax={1} c={C.neg} o={fin(f, tKIn)} />
+      <TeX s={String.raw`\text{round: }u_\theta`} x={(A1[0] + A2[0]) / 2 + 30} y={(A1[1] + A2[1]) / 2 - 30} size={48} c={C.first} o={fin(f, tKRd)} />
+      <TeX s={String.raw`u_r=\mathbf u\cdot\hat{\mathbf r}`} x={1080} y={150} size={60} c={C.neg} o={fin(f, tKDot)} />
+      <TeX s={String.raw`u_\theta=\mathbf u\cdot\hat{\boldsymbol\theta}`} x={1080} y={260} size={60} c={C.first} o={fin(f, tKDot + 20)} />
       {/* fix 1 Should 14: r̂ and θ̂ are named while the voice says "six times r hat plus minus eight times theta hat" */}
       <Tip p={B13} v={ER13} L={L13} s={RHAT} o={0.8} />
       <Tip p={B13} v={ET13} L={L13} s={THAT} o={0.8} />
       <TeX s={String.raw`\mathbf u`} x={W[0] + 50} y={W[1] + 10} size={56} c={C.ink} o={0.7} />
       {/* fix 1c C19/C20: scalar × vector part by part, the double minus, and the lengths with their squares */}
-      <CalcStack f={f} x={1220} y={110} size={46} maxLines={2} o={old} rows={[
+      <CalcStack f={f} x={1270} y={110} size={46} maxLines={2} o={old * kOut} rows={[
         { lhs: String.raw`6\,\hat{\mathbf r}`, rhs: String.raw`=6\,(0.6,\ 0.8)`, at: t6 + 10 },
         { rhs: String.raw`=(6\times0.6,\ 6\times0.8)`, at: AT(k, 2, "zero point six, zero point eight"), cont: true },
         { rhs: String.raw`=(3.6,\ 4.8)`, at: AT(k, 2, "three point six"), cont: true },
         { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=-8\,(-0.8,\ 0.6)`, at: t8 + 10 },
-        { rhs: String.raw`=\big((-8)(-0.8),\ (-8)(0.6)\big)`, at: AT(k, 3, "is plus six point four"), cont: true },
-        { rhs: String.raw`=(6.4,\ -4.8)`, at: AT(k, 3, "minus four point eight"), cont: true },
+        // fix 3 (review 3 Should 4, A2): each product on its words, and the sign move on its own line
+        { rhs: String.raw`(-8)(-0.8)=+6.4`, at: AT(k, 3, "is plus six point four"), cont: true },
+        { rhs: String.raw`\text{minus}\times\text{minus}=\text{plus}`, at: AT(k, 3, "two minus signs"), cont: true },
+        { rhs: String.raw`(-8)(0.6)=-4.8`, at: AT(k, 3, "minus eight times zero point six"), cont: true },
+        { lhs: String.raw`-8\,\hat{\boldsymbol\theta}`, rhs: String.raw`=(6.4,\ -4.8)`, at: AT(k, 3, "minus four point eight") + 20, cont: true },
         { lhs: "\\text{sum}", rhs: String.raw`=(3.6+6.4,\ 4.8-4.8)`, at: tE },
         { rhs: String.raw`=(10,\ 0)`, at: tBack, cont: true },
         { lhs: String.raw`\sqrt{6^2+8^2}`, rhs: String.raw`=\sqrt{36+64}`, at: tLen },
@@ -718,7 +742,7 @@ const S14: React.FC = () => {
 // ================================================================ turned axes (s15-s19): origin O15, 80 px per km
 const O15: Pt = [400, 560], U15 = 80, A30 = 30;
 const P15 = (x: number, y: number): Pt => [O15[0] + x * U15, O15[1] - y * U15];
-const Rulers: React.FC<{ a: number; o?: number; c?: string; ticks?: boolean; label?: [string, string] }> = ({ a, o = 1, c = C.second, ticks = true, label }) => {
+const Rulers: React.FC<{ a: number; o?: number; c?: string; ticks?: boolean }> = ({ a, o = 1, c = C.second, ticks = true }) => {
   if (o <= 0) return null;
   const ex = rotS([1, 0], a), ey = rotS([0, -1], a);
   const L0 = 3.2 * U15, L1 = 6.2 * U15, Ly = 5.4 * U15;
@@ -729,9 +753,19 @@ const Rulers: React.FC<{ a: number; o?: number; c?: string; ticks?: boolean; lab
       {ticks ? [1, 2, 3, 4, 5].map((i) => { const p = at(O15, ex, i * U15), q = at(O15, ey, i * U15), nx = rotS(ex, 90), ny = rotS(ey, 90);
         return <g key={i}><line x1={p[0] - nx[0] * 10} y1={p[1] - nx[1] * 10} x2={p[0] + nx[0] * 10} y2={p[1] + nx[1] * 10} stroke={c} strokeWidth={3} />
           {i <= 4 ? <line x1={q[0] - ny[0] * 10} y1={q[1] - ny[1] * 10} x2={q[0] + ny[0] * 10} y2={q[1] + ny[1] * 10} stroke={c} strokeWidth={3} /> : null}</g>; }) : null}
-      {label ? <Lbl x={at(O15, ex, L1 + 30)[0]} y={at(O15, ex, L1 + 30)[1]} t={label[0]} c={c} s={T.key} /> : null}
-      {label ? <Lbl x={at(O15, ey, Ly + 30)[0]} y={at(O15, ey, Ly + 30)[1]} t={label[1]} c={c} s={T.key} a="middle" /> : null}
     </g>
+  );
+};
+/** fix 3 (review 3 Must 2): the ruler names in KaTeX (x′, y′ were drawn by the sans font next to KaTeX rows); place outside <Svg> */
+const RulerTeX: React.FC<{ a: number; o?: number; c?: string; tex: [string, string] }> = ({ a, o = 1, c = C.second, tex: label }) => {
+  if (o <= 0) return null;
+  const ex = rotS([1, 0], a), ey = rotS([0, -1], a);
+  const L1 = 6.2 * U15, Ly = 5.4 * U15;
+  return (
+    <>
+      <TeX s={label[0]} x={at(O15, ex, L1 + 30)[0]} y={at(O15, ex, L1 + 30)[1]} size={T.key} c={c} o={o} />
+      <TeX s={label[1]} x={at(O15, ey, Ly + 30)[0]} y={at(O15, ey, Ly + 30)[1]} size={T.key} ax={0.5} c={c} o={o} />
+    </>
   );
 };
 const ARR34 = P15(3, 4);
@@ -748,13 +782,15 @@ const S15: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <Rulers a={0} o={0.35} ticks={false} label={["x", "y"]} />
-        <Rulers a={a} o={fin(f, tRul - 30)} label={a > 1 ? ["x′", "y′"] : undefined} />
-        <Arrow p={O15} q={ARR34} color={C.first} w={10 + 4 * pulse(f, tSame, 30)} />
+        <Rulers a={0} o={0.35} ticks={false} />
+        <Rulers a={a} o={fin(f, tRul - 30)} />
+        {/* fix 3 (review 3 Should 9): a position arrow is ink (teal means u_θ) */}
+        <Arrow p={O15} q={ARR34} color={C.ink} w={10 + 4 * pulse(f, tSame, 30)} />
         <Lbl x={ARR34[0] + 26} y={ARR34[1] - 20} t="(3, 4)" c={C.key} s={T.key} />
-        <path d={arcD(O15, 110, 0, a)} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tAl)} />
-        <ArcHead c={O15} r={110} a={a} dir={1} col={C.gold} o={fin(f, tAl)} />
-        <Lbl x={O15[0] + 165 * Math.cos(15 * D2R)} y={O15[1] - 165 * Math.sin(15 * D2R)} t="α" c={C.gold} s={T.calc} a="middle" o={fin(f, tAl)} />
+        {/* fix 3 (review 3 Should 8): the arc is tighter (r 70) and α sits inside the triangle, left of the dashed sin leg (x 539) */}
+        <path d={arcD(O15, 70, 0, a)} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tAl)} />
+        <ArcHead c={O15} r={70} a={a} dir={1} col={C.gold} o={fin(f, tAl)} s={14} />
+        {/* fix 3 (review 3 Should 5): "α = 30°" on "thirty degrees", in the column and in the picture (right of the triangle) */}
         <g opacity={fin(f, tXp)}>
           <Arrow p={O15} q={XPt} color={C.second} w={10} head={36} />
           <Dash p={O15} q={[XPt[0], O15[1]]} c={C.second} w={5} o={fin(f, tCS)} />
@@ -775,10 +811,15 @@ const S15: React.FC = () => {
         <Keyword f={f} text="prime = new" at={[1080, 450]} s={T.floor} appear={tPrime} out={t30 - 18} />
         <Keyword f={f} text="why?" at={[1080, 220]} s={T.floor} appear={tWhy} out={tCoast - 18} />
       </Svg>
+      <RulerTeX a={0} o={0.35} tex={["x", "y"]} />
+      <RulerTeX a={a} o={fin(f, tRul - 30) * (a > 1 ? 1 : 0)} tex={["x'", "y'"]} />
+      <TeX s={String.raw`\alpha`} x={O15[0] + 112 * Math.cos(12 * D2R)} y={O15[1] - 112 * Math.sin(12 * D2R)} size={T.key} ax={0.5} c={C.gold} o={fin(f, tAl)} />
+      <TeX s={String.raw`\alpha=30^\circ`} x={1080} y={182} size={52} c={C.gold} o={fin(f, AT(k, 12, "thirty degrees"))} />
+      <TeX s={String.raw`\alpha=30^\circ`} x={700} y={450} size={T.floor} c={C.gold} o={fin(f, AT(k, 12, "thirty degrees"))} />
       <TeX s={XP} x={XPt[0] + ex[0] * 40 + nx[0] * 40} y={XPt[1] + ex[1] * 40 + nx[1] * 40} size={56} ax={0.5} c={C.second} o={fin(f, tXp + 10)} />
       {/* K6 after fix 1c: "cos α" starts right of the turned y′ ruler (it ran across it), "sin α" clears the α label */}
       <TeX s={f < tNum ? String.raw`\cos\alpha` : String.raw`\cos\alpha\approx0.866`} x={O15[0] + 48} y={O15[1] + 46} size={48} c={C.second} o={fin(f, tCS)} />
-      <TeX s={f < tNum ? String.raw`\sin\alpha` : String.raw`\sin\alpha=0.5`} x={XPt[0] + 56} y={(O15[1] + XPt[1]) / 2 + 4} size={48} c={C.second} o={fin(f, tCS)} />
+      <TeX s={f < tNum ? String.raw`\sin\alpha` : String.raw`\sin\alpha=0.5`} x={XPt[0] + 30} y={(O15[1] + XPt[1]) / 2 + 4} size={48} c={C.second} o={fin(f, tCS)} />
       <TeX s={EQ_S15} x={1080} y={652} size={68} o={fin(f, tCS)} />
       <CalcStack f={f} x={1260} y={230} size={50} maxLines={2} rows={[   /* K6 k6f2: ends above x̂′ = (cos α, sin α) */
         { lhs: String.raw`\cos30^\circ`, rhs: String.raw`=\dfrac{\sqrt3}{2}`, at: tCos, h: 132 },
@@ -805,7 +846,7 @@ const S16: React.FC = () => {
     <Scene>
       <Svg>
         {/* K6 after fix 1c: the rulers are a faint background (0.45) under the turned triangle's leg labels */}
-        <Rulers a={A30} o={0.45} label={["x′", "y′"]} />
+        <Rulers a={A30} o={0.45} />
         <Arrow p={O15} q={tipX} color={C.second} />
         <g opacity={fin(f, tRule - 10)}>
           <line x1={R(O15)[0]} y1={R(O15)[1]} x2={R(foot)[0]} y2={R(foot)[1]} stroke={C.second} strokeWidth={6} />
@@ -826,6 +867,7 @@ const S16: React.FC = () => {
           <Lbl x={R(tipX)[0] + 2} y={R(foot)[1] - 87} t="sin α (west)" c={C.second} s={T.floor} />
         </g>
       </Svg>
+      <RulerTeX a={A30} o={0.45} tex={["x'", "y'"]} />
       <TeX s={XP} x={tipX[0] + ex[0] * 40 - ey[0] * 52} y={tipX[1] + ex[1] * 40 - ey[1] * 52} size={56} ax={0.5} c={C.second} />
       <TeX s={YP} x={at(O15, ey, 2 * U15)[0] - ex[0] * 48} y={at(O15, ey, 2 * U15)[1] - ex[1] * 48} size={56} ax={0.5} c={C.second} o={fin(f, tRule + 45)} />
       <TeX s={String.raw`(p,\ q)\to(-q,\ p)`} x={1080} y={110} size={52} o={win(f, tRl, tRes - 20)} />
@@ -848,8 +890,9 @@ const S16: React.FC = () => {
 };
 
 // ================================================================ s17 x′, y′ as shadows on the new rulers (D06)
-const S17L = ["(x′, y′)", "= (4.6, 1.96)"];
-S17L.forEach((t) => { if (ARR34[0] + 24 + textW(t, T.floor) > 1000) throw new Error(`s17 label "${t}" leaves the picture zone`); });
+// fix 3 (review 3 Must 2): the pair is KaTeX; its width at 44 px is about that of the sans text (asserted on a sans proxy)
+const S17L = [String.raw`(x',\ y')`, String.raw`=(4.6,\ 1.96)`];
+["(x, y)", "= (4.6, 1.96)"].forEach((t) => { if (ARR34[0] + 24 + textW(t, T.floor) > 1000) throw new Error(`s17 label "${t}" leaves the picture zone`); });
 const S17: React.FC = () => {
   const f = useCurrentFrame(), k = K("s17_new_components");
   const tQ = SS(k, 2), tSh = SS(k, 3), tX = AT(k, 4, "x times cosine"), tY = SS(k, 5), tIn = SS(k, 6), tX1 = SS(k, 7), tX46 = AT(k, 8, "about four point six"), tY1 = SS(k, 9),
@@ -863,23 +906,26 @@ const S17: React.FC = () => {
   return (
     <Scene>
       <Svg>
-        <Rulers a={A30} label={["x′", "y′"]} />
-        <Band p={O15} q={fx} color={C.first} o={fin(f, tSh + 20)} w={22} />
-        <Band p={O15} q={fy} color={C.first} o={fin(f, tY)} w={22} />
+        <Rulers a={A30} />
+        {/* fix 3 (review 3 Should 9): the shadows and their labels are gold (teal means u_θ), the position arrow ink */}
+        <Band p={O15} q={fx} color={C.gold} o={fin(f, tSh + 20)} w={22} />
+        <Band p={O15} q={fy} color={C.gold} o={fin(f, tY)} w={22} />
         <Dash p={ARR34} q={fx} c={C.key} w={4} o={fin(f, tSh)} />
         <Dash p={ARR34} q={fy} c={C.key} w={4} o={fin(f, tY)} />
-        <Arrow p={O15} q={ARR34} color={C.first} w={10 + 4 * pulse(f, tL1, 30)} />
+        <Arrow p={O15} q={ARR34} color={C.ink} w={10 + 4 * pulse(f, tL1, 30)} />
         {/* fix 1 Must 4: the turned-axes coordinates on two lines, inside the picture zone (x ≤ 1000, asserted) */}
         <Lbl x={ARR34[0] + 24} y={ARR34[1] - 26} t="(3, 4)" c={C.key} s={T.key} o={f < tAt - 10 ? 1 : 0} />
-        <Lbl x={ARR34[0] + 24} y={ARR34[1] - 82} t={S17L[0]} c={C.key} s={T.floor} o={f < tAt ? 0 : fin(f, tAt)} />
-        <Lbl x={ARR34[0] + 24} y={ARR34[1] - 26} t={S17L[1]} c={C.key} s={T.floor} o={f < tAt ? 0 : fin(f, tAt)} />
-        <Lbl x={fx[0] + 20} y={fx[1] + 44} t="x′ = 4.6" c={C.first} s={T.floor} o={fin(f, tX46)} />
-        <Lbl x={fy[0] - 26} y={fy[1] - 10} t="y′ = 1.96" c={C.first} s={T.floor} a="end" o={fin(f, tY196)} />
-        <Keyword f={f} text="new coordinates x′, y′" at={[1080, 110]} appear={0} out={tQ - 18} />
+
         <Keyword f={f} text="shadow on the new x axis" at={[1080, 820]} s={T.floor} appear={tSh} out={tY - 18} />
         <Keyword f={f} text="shadows on the new axes" at={[1080, 820]} s={T.floor} appear={tY} out={tNew - 18} />
         <Keyword f={f} text="same arrow, new numbers" at={[1080, 820]} appear={tNew} />
       </Svg>
+      <RulerTeX a={A30} tex={["x'", "y'"]} />
+      <TeX s={S17L[0]} x={ARR34[0] + 24} y={ARR34[1] - 82} size={T.floor} c={C.key} o={f < tAt ? 0 : fin(f, tAt)} />
+      <TeX s={S17L[1]} x={ARR34[0] + 24} y={ARR34[1] - 26} size={T.floor} c={C.key} o={f < tAt ? 0 : fin(f, tAt)} />
+      <TeX s={String.raw`x'=4.6`} x={fx[0] + 20} y={fx[1] + 44} size={T.floor} c={C.gold} o={fin(f, tX46)} />
+      <TeX s={String.raw`y'=1.96`} x={fy[0] - 26} y={fy[1] - 10} size={T.floor} ax={1} c={C.gold} o={fin(f, tY196)} />
+      <TeX s={String.raw`\text{new coordinates }x',\ y'`} x={1080} y={110} size={54} c={C.key} o={fin(f, 0, 8) * fout(f, tQ - 18)} />
       <TeX s={String.raw`x'=\text{part along }\hat{\mathbf x}'`} x={1080} y={110} size={54} o={fin(f, tQ)} />
       <CalcStack f={f} x={1160} y={200} size={52} maxLines={4} o={gen} rows={[
         { lhs: x1L, rhs: String.raw`=(x,\ y)\cdot(\cos\alpha,\ \sin\alpha)`, at: AT(k, 3, "dot product") },
@@ -974,10 +1020,10 @@ const S18: React.FC = () => {
         { lhs: String.raw`\hat{\mathbf x}'\cdot\hat{\mathbf x}`, rhs: String.raw`=\cos\alpha`, at: tEx },
         { lhs: String.raw`\hat{\mathbf x}'\cdot\hat{\mathbf y}`, rhs: String.raw`=\cos(90^\circ-\alpha)=\sin\alpha`, at: AT(k, 13, "ninety degrees minus") },
         { lhs: String.raw`\hat{\mathbf y}'\cdot\hat{\mathbf x}`, rhs: String.raw`=\cos(90^\circ+\alpha)=-\sin\alpha`, at: AT(k, 13, "ninety degrees plus") },
-        { lhs: String.raw`\hat{\mathbf y}'\cdot\hat{\mathbf y}`, rhs: String.raw`=\cos\alpha`, at: AT(k, 13, "ninety degrees plus") + 75 },
-        { lhs: String.raw`\alpha=30^\circ:`, rhs: String.raw`\ \cos60^\circ=0.5,`, at: AT(k, 13, "ninety degrees plus") + 150 },
-        { rhs: String.raw`\ \cos120^\circ=-0.5`, at: AT(k, 13, "ninety degrees plus") + 170, cont: true },
+        // fix 3 (review 3 Should 6): the unspoken rows (ŷ′·ŷ, cos 60°, cos 120°) that flashed into the fade-out are gone
       ]} />
+      {/* fix 3 (review 3 cosmetic): γ named on "the angle between them" */}
+      <TeX s={String.raw`\gamma:\ \text{the angle between them}`} x={1080} y={540} size={46} c={C.key} o={win(f, AT(k, 10, "the angle between them"), tDC - 18)} />
     </Scene>
   );
 };
@@ -1091,36 +1137,64 @@ const S20: React.FC = () => {
   const three = fin(f, tOne);
   const [lhs20, rhs20] = cutAt(EQ_S20, String.raw`:\quad `);
   const others = [0, 150].map((d) => ({ p: onC(OC, RC, d), e: rotS([1, 0], d) }));
+  // fix 3 (review 3 Must 4): the keep line (S20) shows its own picture. Everything from the block's middle (turned x′/y′ axes,
+  // α = θ, the S18-S19 labels, the extra arrow pairs, the position arrow, the checks) leaves as it starts. In: a small
+  // "same arrow, new numbers" picture in the column (the (3, 4) arrow, ink, on the old axes and on axes turned by α = 30°, with
+  // both number pairs), then on "axes turned by theta" the balloon's x̂, ŷ (dashed) turning by θ into r̂, θ̂ (gold arc).
+  const tKeep = SS(k, 19), kOut = fout(f, tKeep - 14, 12), kIn = fin(f, tKeep + 8, 14);
+  const tKPol = AT(k, 19, "polar parts are just axes"), tKNum = AT(k, 19, "changes the numbers");
+  const MO: Pt = [1250, 640], MU = 52, ex30 = rotS([1, 0], 30), ey30 = rotS(ex30, 90);   // the column picture: origin, px per km
+  const M34: Pt = [MO[0] + 3 * MU, MO[1] - 4 * MU];
+  // fix 3 (review 3 cosmetic): "x′" beside its axis, off the r̂ tip label (they touched)
+  const XPL = at(at(OC, ex, RC + 270), [-ey[0], -ey[1]], 46);
   return (
     <Scene>
       <Svg>
         <circle cx={OC[0]} cy={OC[1]} r={RC} fill="none" stroke={C.first} strokeWidth={3} opacity={0.5} />
+        <g opacity={kOut}>
         <line x1={at(OC, ex, -120)[0]} y1={at(OC, ex, -120)[1]} x2={at(OC, ex, RC + 260)[0]} y2={at(OC, ex, RC + 260)[1]} stroke={C.second} strokeWidth={3} opacity={0.6} />
         <line x1={at(OC, ey, -120)[0]} y1={at(OC, ey, -120)[1]} x2={at(OC, ey, 260)[0]} y2={at(OC, ey, 260)[1]} stroke={C.second} strokeWidth={3} opacity={0.6} />
-        <Lbl x={at(OC, ex, RC + 290)[0]} y={at(OC, ex, RC + 290)[1]} t="x′" c={C.second} s={T.key} a="middle" />
-        <Lbl x={at(OC, ey, 215)[0] + 30} y={at(OC, ey, 215)[1] + 40} t="y′" c={C.second} s={T.key} a="middle" />
         <path d={arcD(OC, 110, 0, al)} fill="none" stroke={C.gold} strokeWidth={6} opacity={fin(f, tTurn)} />
-        <Lbl x={OC[0] + 130} y={OC[1] + 20} t="α = θ" c={C.gold} s={T.floor} o={fin(f, tTurn + 30)} />
+        </g>
         <Station at={OC} s={0.7} />
         <Arrow p={BC} q={at(BC, ER, LU)} color={C.second} />
         <Arrow p={BC} q={at(BC, ET, LU)} color={C.second} />
-        <Arrow p={OC} q={BC} color={C.ink} w={8} head={32} o={fin(f, tPos)} />
+        <Arrow p={OC} q={BC} color={C.ink} w={8} head={32} o={fin(f, tPos) * kOut} />
+        {/* keep picture, balloon: x̂, ŷ dashed at the balloon, turned by θ (gold arc) into r̂, θ̂ */}
+        <g opacity={kIn * fin(f, tKPol)}>
+          <Arrow p={BC} q={at(BC, [1, 0], LU * 0.8)} color={C.muted} w={5} head={22} dash="10 7" />
+          <Arrow p={BC} q={at(BC, [0, -1], LU * 0.8)} color={C.muted} w={5} head={22} dash="10 7" />
+          <path d={arcD(BC, 80, 0, TH)} fill="none" stroke={C.gold} strokeWidth={5} />
+          <ArcHead c={BC} r={80} a={TH} dir={1} col={C.gold} s={18} />
+          <path d={arcD(OC, 90, 0, TH)} fill="none" stroke={C.local} strokeWidth={5} />
+        </g>
+        {/* keep picture, column: same arrow, new numbers */}
+        <g opacity={kIn}>
+          <Arrow p={[MO[0] - 40, MO[1]]} q={[MO[0] + 6 * MU, MO[1]]} color={C.muted} w={4} head={20} halo={false} />
+          <Arrow p={[MO[0], MO[1] + 40]} q={[MO[0], MO[1] - 5.2 * MU]} color={C.muted} w={4} head={20} halo={false} />
+          <g opacity={fin(f, tKNum)}>
+            <Arrow p={at(MO, ex30, -30)} q={at(MO, ex30, 6.2 * MU)} color={C.second} w={4} head={20} halo={false} />
+            <Arrow p={at(MO, ey30, -30)} q={at(MO, ey30, 3.6 * MU)} color={C.second} w={4} head={20} halo={false} />
+            <path d={arcD(MO, 70, 0, 30)} fill="none" stroke={C.gold} strokeWidth={5} />
+          </g>
+          <Arrow p={MO} q={M34} color={C.ink} w={8} head={30} />
+        </g>
         <g opacity={fin(f, tX) * fout(f, tY + 50)}>
           <Arrow p={xb} q={at(xb, ex, LU)} color={C.gold} w={6} head={24} />
           <Arrow p={xb} q={at(xb, ey, LU)} color={C.gold} w={6} head={24} o={fin(f, tY)} />
         </g>
-        <Check x={at(BC, ER, LU)[0] + 70} y={at(BC, ER, LU)[1] + 30} s={0.8} o={fin(f, tX + 40)} />
-        <Check x={at(BC, ET, LU)[0] - 20} y={at(BC, ET, LU)[1] + 60} s={0.8} o={fin(f, tY + 20)} />
+        <Check x={at(BC, ER, LU)[0] + 70} y={at(BC, ER, LU)[1] + 30} s={0.8} o={fin(f, tX + 40) * kOut} />
+        <Check x={at(BC, ET, LU)[0] - 20} y={at(BC, ET, LU)[1] + 60} s={0.8} o={fin(f, tY + 20) * kOut} />
         <BDot p={BC} />
         {/* fix 1c C31: the same turned pair (α = 53°) at three points, muted; then the polar pair at each, bright */}
-        <g opacity={three * 0.5}>
+        <g opacity={three * 0.5 * kOut}>
           {[...others.map((q) => q.p), BC].map((pt, i) => <g key={`t${i}`}><Arrow p={pt} q={at(pt, ER, 110)} color={C.muted} w={5} head={22} dash="10 7" />
             <Arrow p={pt} q={at(pt, ET, 110)} color={C.muted} w={5} head={22} dash="10 7" /></g>)}
         </g>
-        <g opacity={fin(f, tChg)}>
+        <g opacity={fin(f, tChg) * kOut}>
           {others.map((q, i) => <g key={i}><Arrow p={q.p} q={at(q.p, q.e, 120)} color={C.second} w={6} head={24} /><Arrow p={q.p} q={at(q.p, rotS(q.e, 90), 120)} color={C.second} w={6} head={24} /></g>)}
         </g>
-        <g opacity={three}>{others.map((q, i) => <circle key={i} cx={q.p[0]} cy={q.p[1]} r={9} fill={C.key} />)}</g>
+        <g opacity={three * kOut}>{others.map((q, i) => <circle key={i} cx={q.p[0]} cy={q.p[1]} r={9} fill={C.key} />)}</g>
         {/* fix 1c C30: the 10 m/s east wind at the balloon and its two shadows (u_r rose on r̂, u_θ teal on θ̂) */}
         <g opacity={win(f, tW, tPos - 18)}>
           <defs><pattern id="h20" width={16} height={16} patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1={0} y1={0} x2={0} y2={16} stroke={C.first} strokeWidth={6} /></pattern></defs>
@@ -1135,15 +1209,29 @@ const S20: React.FC = () => {
         </g>
         <Lbl x={1080} y={320} t="polar parts =" c={C.key} s={T.floor} o={win(f, tMeans, tW - 20)} />
         <Lbl x={1080} y={372} t="turned-axes coordinates" c={C.key} s={T.floor} o={win(f, tMeans, tW - 20)} />
-        <Lbl x={1080} y={720} t="turned axes: α = 53° everywhere" c={C.muted} s={T.floor} o={fin(f, tOne)} />
-        <Lbl x={1080} y={800} t="polar: θ = 0°, 53°, 150°" c={C.key} s={T.floor} o={fin(f, tChg)} />
+        <Lbl x={1080} y={720} t="turned axes: α = 53° everywhere" c={C.muted} s={T.floor} o={fin(f, tOne) * kOut} />
+        <Lbl x={1080} y={800} t="polar: θ = 0°, 53°, 150°" c={C.key} s={T.floor} o={fin(f, tChg) * kOut} />
+        <Keyword f={f} text="same arrow, new numbers" at={[1080, 110]} appear={tKeep + 8} />
       </Svg>
+      {/* fix 3 (review 3 Must 2): the turned axes' names in KaTeX */}
+      <TeX s="x'" x={XPL[0]} y={XPL[1]} size={T.key} ax={0.5} c={C.second} o={kOut} />
+      <TeX s="y'" x={at(OC, ey, 215)[0] + 30} y={at(OC, ey, 215)[1] + 40} size={T.key} ax={0.5} c={C.second} o={kOut} />
+      {/* fix 3 (review 3 Should 14): the angle's value on "fifty three degrees" */}
+      <TeX s={String.raw`\alpha=\theta\approx53^\circ`} x={OC[0] + 130} y={OC[1] + 24} size={T.floor} c={C.gold} o={fin(f, tTurn + 30) * fout(f, tChg - 12) * kOut} />   {/* K6 k6f3: leaves before the 0° pair is drawn across it */}
+      {/* keep: the column picture's labels and the two number pairs */}
+      <TeX s={String.raw`(x,\ y)=(3,\ 4)`} x={1080} y={250} size={50} c={C.ink} o={kIn} />
+      <TeX s={String.raw`(x',\ y')\approx(4.6,\ 1.96)`} x={1080} y={320} size={50} c={C.second} o={kIn * fin(f, tKNum)} />
+      <TeX s={String.raw`\alpha=30^\circ`} x={MO[0] + 84} y={MO[1] + 34} size={T.floor} c={C.gold} o={kIn * fin(f, tKNum)} />
+      <TeX s={String.raw`\hat{\mathbf r},\ \hat{\boldsymbol\theta}=\hat{\mathbf x},\ \hat{\mathbf y}\ \text{turned by }\theta`} x={1080} y={180} size={50} c={C.key} o={kIn * fin(f, tKPol)} />
+      <TeX s={String.raw`\hat{\mathbf x}`} x={at(BC, [1, 0], LU * 0.8 + 34)[0]} y={BC[1]} size={46} c={C.muted} o={kIn * fin(f, tKPol)} />
+      <TeX s={String.raw`\hat{\mathbf y}`} x={BC[0] - 34} y={at(BC, [0, -1], LU * 0.8 + 20)[1]} size={46} ax={1} c={C.muted} o={kIn * fin(f, tKPol)} />
+      <TeX s={String.raw`\theta`} x={OC[0] + 112} y={OC[1] - 42} size={T.key} c={C.local} o={kIn * fin(f, tKPol)} />
       <Tip p={BC} v={ER} L={LU} s={RHAT} />
       <Tip p={BC} v={ET} L={LU} s={THAT} />
-      <TeX s={String.raw`\alpha=\theta`} x={1080} y={110} size={60} c={C.gold} o={fout(f, tX - 18)} />
-      <TeX s={`${lhs20}:\\quad ${rhs20}`} x={1080} y={110} size={56} o={fin(f, tX)} />
-      <TeX s={String.raw`\hat{\mathbf x}'=(\cos\theta,\ \sin\theta)=\hat{\mathbf r}`} x={1080} y={200} size={50} o={fin(f, AT(k, 2, "which is r hat"))} />
-      <TeX s={String.raw`\hat{\mathbf y}'=(-\sin\theta,\ \cos\theta)=\hat{\boldsymbol\theta}`} x={1080} y={260} size={50} o={fin(f, AT(k, 3, "which is theta hat")) * 1} />
+      <TeX s={String.raw`\alpha=\theta\approx53^\circ`} x={1080} y={110} size={60} c={C.gold} o={fout(f, tX - 18)} />
+      <TeX s={`${lhs20}:\\quad ${rhs20}`} x={1080} y={110} size={56} o={fin(f, tX) * kOut} />
+      <TeX s={String.raw`\hat{\mathbf x}'=(\cos\theta,\ \sin\theta)=\hat{\mathbf r}`} x={1080} y={200} size={50} o={fin(f, AT(k, 2, "which is r hat")) * kOut} />
+      <TeX s={String.raw`\hat{\mathbf y}'=(-\sin\theta,\ \cos\theta)=\hat{\boldsymbol\theta}`} x={1080} y={260} size={50} o={fin(f, AT(k, 3, "which is theta hat")) * kOut} />
       <TeX s={String.raw`\mathbf u=(10,\ 0),\ \ \cos\theta=0.6,\ \ \sin\theta=0.8`} x={1080} y={390} size={46} c={C.local} o={win(f, tW, tPos - 18)} />
       {/* K6 after fix 1c: each line split at its result (they ran to x 1880), aligned at "=", the result on "which is …" */}
       <CalcStack f={f} x={1130} y={440} size={50} maxLines={2} o={fout(f, tPos - 18)} rows={[
