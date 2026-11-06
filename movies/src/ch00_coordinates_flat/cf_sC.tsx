@@ -680,8 +680,9 @@ const S28: React.FC = () => {
       <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
       {i === 0 ? <>{[-60, -30, 0, 30, 60].map((q) => <line key={`v${q}`} x1={x + q} y1={95} x2={x + q} y2={215} stroke={C.second} strokeWidth={2} />)}
         {[-60, -30, 0, 30, 60].map((q) => <line key={`h${q}`} x1={x - 60} y1={155 + q} x2={x + 60} y2={155 + q} stroke={C.second} strokeWidth={2} opacity={Math.abs(q) <= 60 ? 1 : 0} />)}</> : null}
-      {i === 1 ? <>{[25, 50, 75].map((r) => <circle key={r} cx={x - 30} cy={175} r={r} fill="none" stroke={C.local} strokeWidth={2} />)}
-        <Arrow p={[x + 30, 120]} q={[x + 80, 90]} color={C.second} w={5} head={18} /><Arrow p={[x + 30, 120]} q={[x + 60, 165]} color={C.second} w={5} head={18} /></> : null}
+      {/* rings centred in the box (box y 70–240): r ≤ 60 keeps every ring ≥ 25 px inside the frame (user note 43:15) */}
+      {i === 1 ? <>{[20, 40, 60].map((r) => <circle key={r} cx={x - 40} cy={155} r={r} fill="none" stroke={C.local} strokeWidth={2} />)}
+        <Arrow p={[x + 2, 113]} q={[x + 60, 92]} color={C.second} w={5} head={18} /><Arrow p={[x + 2, 113]} q={[x + 48, 158]} color={C.second} w={5} head={18} /></> : null}
       {i === 2 ? <>{[0, 30].map((a, j) => { const e = rotS([1, 0], a), n2 = rotS(e, 90);
         return <g key={j} opacity={j ? 1 : 0.4}><line x1={x - 40} y1={195} x2={x - 40 + e[0] * 110} y2={195 + e[1] * 110} stroke={C.second} strokeWidth={4} />
           <line x1={x - 40} y1={195} x2={x - 40 + n2[0] * 110} y2={195 + n2[1] * 110} stroke={C.second} strokeWidth={4} /></g>; })}</> : null}
