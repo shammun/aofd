@@ -8992,3 +8992,139 @@ Every new number was recomputed by hand. Sources read: review 1, `part1_lessons_
 - N-M2 is a TSX change in s30 (or a 2-sentence re-voice).
 - S1–S3 turn three of the four halves WARN spans into supported teaching.
 - After the fixes, re-render s01, s02, s09, s14, s17, s20 and s23–s30 by chunk, re-run K6 on s25, s27 and s30, then run `movie_qa`. One more short verification review should be enough for `qa_pass`.
+
+## #5b fix 2 review 3 (verification)
+2026-11-06 · fresh eyes · movie `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/build1_1080.mp4` (153 408 206 bytes, rendered 09:02, the file `qa.json` measured) · source commit 70d44e0
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_storm (#5b) fix 2 | 42:48 (2568.33 s) | 153.4 MB | 14 PASS + 1 WARN (halves 136–142.5 s) | PASS | PASS | PASS (1 crowding nit) | PASS (s02 6-s empty right half; one skipped division in s20) | PASS | PASS | n/a (retired) | **PASS with notes** |
+
+**Method.** 288 frames were extracted with ffmpeg into `reports/movies/ch00_coordinates_storm/review3/` (not committed):
+- `s30/`: 84 frames, one every 0.5 s from 40:20 to 41:01.5;
+- `touch/` and `touch2/`: 88 frames at the review-2 item times and through the touched scenes (s01, s02, s09, s14, s16, s17, s20, s23–s30);
+- `sweep/`: 103 frames, one every 25 s from 00:12.5 (whole-movie checklist sweep);
+- `full/`: 13 full-resolution frames for the close checks;
+- `tiles/`: the sheets used, at 640 px (touched scenes) and 480 px (sweep) per frame.
+
+A 10-fps pixel tracker followed the gold swipe line from 40:34 to 40:51. The captions were re-checked by script: 626 cues, 0 cues with a line over 42 characters, over 17 cps, shorter than 1 s, longer than 7 s, or out of order. Sources read: the review-2 section, `part1_lessons_checklist.md`, the `git show 70d44e0` diff of `cs_sA/sB/sC.tsx`, `timing.json`, `en.vtt` and `qa.json`.
+
+**qa.json.** 14 gates PASS. `halves` is WARN: "right 136.0–142.5 s (6.5 s) [WARN > 3 s]". This is the only span left of the four in review 2. It is judged under Should 1.
+
+### Review-2 items at their timestamps
+| item | status | evidence (frame) |
+|---|---|---|
+| N-M1 s20 colour bar | **fixed** | 29:16.0: the radius-height section and its radial-wind bar ("−16 · 0 · +16 m/s, − in / + out") come in together on S3 (29:15.60). 29:19, 29:22 and 29:25 hold the bar. The formula and its Σ / ū_r names have left by 29:15.3, so nothing collides. |
+| N-M2 s30 "on the right" | **fixed** | See "The new s30 opening" below. |
+| S1 s01 keywords | **fixed** | 00:56.0 and 00:58.0: "Part 2: how r̂, θ̂ change" (TeX hats, at y 440) appears on S6. 01:02.0 and 01:04.0: "two real storms" with "each with its own job" on S7. `halves` no longer reports 59.5–65.5. |
+| S2 s02 r, θ, viewpoint | **fixed** | 01:34.0: "r: distance from the origin". 01:36.0: "θ: angle from east,". 01:38.0: "anticlockwise (seen from above)". Each appears on its words in S1 and they fade on S2. `halves` no longer reports 94–100.5. |
+| S3 s02 25 km, 13 m/s | **partly fixed** | 02:19.0: an ink radius and "r = 25 km" appear on "twenty five". 02:25.0: "≈ 13 m/s in (−)" appears on "in at about". 02:26.5–02:27.5: the ū row holds ≈ 1.9 s (it was < 0.3 s). **Left:** the right half is still empty from 02:16.4 to 02:22.4 (the remaining `halves` WARN; see Should 1). |
+| S4 s14 Coriolis inputs | **fixed** | 22:55.0, all rows inside x 1100–1815: "f: Coriolis parameter", "Ω = 7.29 × 10⁻⁵ s⁻¹: Earth's spin rate", "φ = 26.5°: Ian's latitude", "f v = 2Ω sin φ · v", the numbers, and "≈ 0.0023 m/s² (out)". 22:57.5: a second stack shows 0.048 (turning) / 0.0023 ≈ 21. 23:00.0: the sum ≈ 0.050 m/s². |
+| S5 s09 Δt strikes | **fixed** | 15:21.5 and 15:23.0: both Δt are struck, with "Δt cancels" under the row. |
+| S6 s17 dBZ | **fixed** | 25:10 and 25:30: "radar echo strength", then "dBZ: higher = heavier rain" under the bar, clear of "radar eye". |
+| S7 s23 knot | **fixed** | 33:46.0: "1 kt = 1.852 km/h (kt: knot)". 33:48.0: "90 × 1.852 ≈ 167 km/h", then "167 ÷ 3.6 ≈ 46 m/s". |
+| S8 s27 | **fixed** | 37:05: "≈ 1 cm per hPa" is ≈ 28 px clear of the "100 Pa" numerator. 37:10: "1013 − 938 = 75 hPa ⇒ ≈ 75 cm", "1013 hPa: normal at sea level", "938 hPa: Ian's centre (official)". 37:16: "75 cm: small next to 3-4.5 m" under them. The keyword reads "official: 3-4.5 m above ground". The source line spells out "NHC (US National Hurricane Center) report" and ends at x ≈ 1690. |
+| S9 s28 datum | **fixed** | 38:50 and 38:57 (full frame): "Fort Myers Beach: 3-4.5 m" / "above the ground, not the tide", 20 px above the inset map. |
+| S10 s25 icons | **fixed** (a crowding nit is listed under Cosmetic) | 35:22–35:48: the ring (r 90, centre y 540) sits below the map strip. The parcel is at −20°, with the teal arrow anticlockwise and the rose arrow inward, both clear of the map and the chart. The chart reads "u (m/s)" / "v (m/s)". The disc and its "up" arrow sit 30 px lower, clear of the source line. |
+| S11 captions (S24) | **fixed** | `en.vtt` line 49: "In this part, we find out / exactly how the arrows", 00:53.125–00:56.527 (3.4 s). Lines 1725–1736: "…India's state of West / Bengal and Bangladesh." ends at 31:59.775. "Its centre then passed close to Kolkata," runs 32:00.125–32:02.953 (39 chars, 14 cps), so no cue spans the S4/S5 gap. S25 (the qa list) was closed in 45f201f. |
+| cosmetic s16 | **fixed** | 24:55: "only r̂, θ̂ turn" in the sans keyword style. 24:47.5: "ẑ: the same everywhere" with a TeX hat. |
+| cosmetic s24 tag | **fixed** | 34:38 (full frame): the tag "≈ −11 m/s, 100 km, ≈ 0.2 km up" is at y ≈ 70, clear of "height (km)" (y 123) and "m/s" (y 150). The bar moved 24 px down. |
+| cosmetic s20 towers | **fixed** | 30:56.3 (full frame): "single towers ≈ 10 m/s", as spoken. |
+| cosmetic s29 33 km | **fixed** | 39:30 (full frame): "≈ 33 km" is left of the gold line, clear of the white 20-m contour. |
+| cosmetic s02 grid | **fixed** | 01:28.5 and 01:30.0: the S0 grid is brighter, then dims on S1. |
+
+**Summary: 17 of the 18 review-2 items are fixed. S3 is partly fixed: its numbers are fixed, and its empty-half span remains.**
+
+### The new s30 opening (40:20–41:01), frame by frame
+- **40:20–40:23.5 (S5, S6 start):** the full swipe frame shows the 21 April image with the place names, N arrow and 50-km bar.
+- **40:24.0 (S6 "On the left…", 40:23.45):** the frame shrinks into two 480-px panels side by side. The "after" panel is dimmed to 40 %. The "landfall: 2 May 2008" keyword comes in.
+- **40:24.5–40:25.0: the left panel pulses gold** on "On the left", and "before · 21 Apr 2008" sits above it.
+- **40:29.5–40:30.0 (S7 "On the right…", 40:29.10): the right panel goes to full strength and pulses gold**, and "after · 5 May 2008" appears above it.
+- **40:30.5–40:33.0:** both dated panels are shown together while the voice says "about three days after". The dates agree: 21 Apr + 11 d = 2 May, and 2 May + 3 d = 5 May.
+- **40:33.5–40:34.4:** both panels grow back into one frame. The before image covers it and the line sits at the right edge. The gold line fades in at 40:34.6, on S8 (40:34.62, "As the line glides across").
+- **Tracker (gold-line x, panel 80–1080):**
+  - R → L 40:35.4–40:39.3 (3.9 s, eased), starting 0.8 s into "glides";
+  - hold at x 78;
+  - L → R 40:41.3–40:45.2 (3.9 s), in the 1.5-s pause before S9 and into S9;
+  - hold at x 1078;
+  - to the middle (x 578) 40:47.3–40:49.3 (2.0 s), during S9.
+  - The order is right → left → right → middle, as the user asked.
+- **40:50–41:01:** "what the surge left" sits over the half-and-half picture.
+
+**Verdict on N-M2: fixed.** Every spoken "left / right" now has its own dated picture, each pulses on its own words, and the sweeps are unchanged from review 2.
+
+### Regression check, touched scenes
+| scene | frames | result |
+|---|---|---|
+| s01 | 00:53–01:04, 00:58 full | PASS. The new keyword (y 440) clears "= one kind of storm" (y 350). The icon row is unchanged. |
+| s02 | 01:28.5–02:35 (20 frames) | PASS, except for the S3 residue (Should 1). The new slate rows (y 220/285/345) clear the "Part 1" keyword, which fades at 01:33.8. |
+| s09 | 15:20–15:25 | PASS |
+| s14 | 22:52.5–23:02 | PASS. The two stacks hand over cleanly at "twenty times weaker". Four rows arrive within 0.75 s of "pushes the other way" (Cosmetic 2). |
+| s16, s17 | 24:20–26:10 | PASS |
+| s20 | 28:57.5–31:05 (15 frames) | PASS, except for one skipped division that review 2 missed (Should 2). |
+| s23 | 33:32.5–34:22.5 | PASS. The rows end at y ≈ 795, above the caption band. |
+| s24 | 34:22.5–34:55 | PASS |
+| s25 | 35:10–35:48 | PASS (Cosmetic 1) |
+| s26–s29 | 35:51–39:43 | PASS |
+| s30 | 39:44–41:01 | PASS |
+
+### Whole-movie checklist sweep (103 frames, one every 25 s, plus the frames above)
+- **Inputs on screen for every spoken number: PASS, with one exception.** At 30:44.8 the row reads "= 2 × 1000 × 16 / 30 000 ≈ 1 m/s". The product 32 000 and the quotient 1.07 are never shown (Should 2). Every other calculation seen shows its inputs and steps on its words: s03–s08 derivations, 15:37–16:02 lap, 21:02.5 the car, 21:52–22:17 the Δv arc, 33:48 the knots, 34:22.5 the arctans, 36:22 √1083, 37:05–37:16 the surge.
+- **Signs get their own lines: PASS.** 11:02.5: "= (−0.806 + 0.800, 0.592 − 0.600)". 06:02.5: "0.592 − 0.600 = −0.008".
+- **TeX symbols and `\dfrac`: PASS.** Hats render on r̂, θ̂, ẑ, d̂ (00:58, 07:17.5, 24:47.5). Every fraction is display style. No KaTeX error boxes were seen. A few picture labels are still plain sans: "r" and "θ" on the s02 grid, "Ian's ring: r = 25 km" and "v Δt" in s09–s14. These are unchanged since review 1 (Cosmetic 3).
+- **Text inside x 60–1842: PASS.** The widest lines are the s27 source line (x ≈ 1690), the s14 Ω row (x ≈ 1815) and the s23 arctan rows (x ≈ 1710). Nothing enters the caption band (y 880–1040).
+- **Colour bar and source line on every data frame: PASS.** s20 S3–S4 is now covered. Every map and section seen has both: s17 radar, s18–s19 stack, s23 ERA5, s24 sections, s26–s28 HRRR, s29 depth, and s30 (the RGB key, plus a source line through the side-by-side).
+- **Colour convention: PASS.**
+  - u_θ is teal and u_r is rose (02:19, 33:44, 35:22). The radius and the full wind are ink.
+  - The pressure force is orange and the Coriolis push violet.
+  - The s25 u/v chart is Cartesian (orange / slate dashed), not u_r / u_θ.
+- **Keep-lines with their own pictures: PASS.** 11:52.5: the swinging r̂/θ̂ arrows with "what to keep". 20:12.5: the ring with the inward arrow and "keep: v²/r, towards the centre".
+- **Recap at full contrast: PASS.** Each beat fades in at its sentence start (41:27.5 is 0.35 s into S3).
+- **Accessibility: PASS.** The diverging rose–blue and yellow–green bars are colour-blind safe, `flashes` reports 0 per second, and there is no noise.
+
+### Physics spot-check
+- **The NH Coriolis push points outward: PASS.** At 22:55 (full frame) the parcel at the top left of the ring moves anticlockwise (teal arrow down-left), and the violet arrow points outward, which is to the right of the motion. It is labelled "(as seen on the turning Earth)" and "drawn 6× longer". f v = 2 × 7.29e-5 × sin 26.5° × 34.8 = 2.26e-3 m/s², and the ratio 0.048/0.0023 ≈ 21.
+- **w ≈ 1 m/s: PASS.** At 30:44.8, 2πr h|u_r| = πr² w → w = 2h|u_r|/r = 2 × 1000 × 16 / 30 000 = 1.07 m/s. The aircraft radar's ≈ 3.3 m/s at 8.5 km is beside it (30:56.3), with the 8-h offset stated on the source line.
+- **u_r is negative for inflow: PASS.**
+  - The values are −13 (02:26.5), −16 (29:40), −6.5 (28:32.5), −11 (34:38) and −6.0 (34:22.5).
+  - The key reads "− in / + out" everywhere.
+  - The s02 callout reads "≈ 13 m/s in (−)".
+- **Hemisphere and viewpoint: PASS.** "anticlockwise (seen from above)" is now on screen at 01:38. Every circulation drawn turns anticlockwise (02:19, 22:55, 33:32.5).
+
+### Must fix (0)
+
+### Should fix (2)
+1. **02:16.4–02:22.4 (s02 S7; the remaining `halves` WARN 136–142.5 s): the right half is empty for 6 s.** The voice says "Round Hurricane Ian's eye, twenty five kilometres out, the air went round…" before the first callout arrives at 02:23.5. HOUSE_STYLE §10 says no empty half for more than 3 s.
+   - *Fix* (`cs_sA.tsx`, in the keyword `<Svg>` after line 232): add `<Keyword f={f} text="Hurricane Ian · 28 Sep 2022" at={[MX, 120]} s={T.key} appear={tIan} out={tHold} />`.
+   - Optionally, also repeat the radius as a side callout on its words: `<SideCallout f={f} lines="r = 25 km" at={[MX, 200]} appear={AT(k, 7, "twenty five")} out={tHold} target={[c0[0] - rr * 0.35, c0[1] + rr * 0.35]} c={C.ink} />` beside lines 226–227.
+   - After the change, `halves` should report no span.
+2. **30:39–30:45.5 (s20 S14): the division is skipped.** The row goes from "2 × 1000 × 16 / 30 000" straight to "≈ 1 m/s". The product 32 000 and the quotient 1.07 are never shown, which breaks A1 (divisions with their arithmetic, "show every calculation").
+   - *Fix* (`cs_sB.tsx` line 891): end the row at `=\dfrac{2\times1000\times${SAY.w_box.ur}}{30\,000}`.
+   - Then add a row `{ rhs: String.raw`\phantom{w}=\dfrac{32\,000}{30\,000}\approx1.07\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "is about one"), cont: true }` to the same stack.
+   - The stack has `maxLines={4}` (line 886), so the first row "2πr h|u_r| = πr² w" pages out. The "inflow ⇒ rise ≈ 1 m/s" keyword stays.
+   - Check that the last row ends above y 860.
+
+### Cosmetic (optional)
+1. 35:40 (s25 S6–S8): the u/v chart's "0°" tick (x ≈ 540–580, y ≈ 637) sits 25 px right of the end of the source line "Data: NOAA HRRR analysis" (y ≈ 657), so they read as one line. Fix: `cs_sC.tsx` line 314, `G.x: 560 → 600`.
+2. 22:51.8–22:52.6 (s14 S16): four rows ("Ω = …", "φ = …", "f v = 2Ω sin φ · v" and the numbers) arrive within 0.75 s of "pushes the other way", and none is spoken. Stagger them by 20 frames each (`cs_sB.tsx` S14, `+ 6 / + 12 / + 22` → `+ 20 / + 40 / + 60`). Better still, split S16 into two sentences if the voice is ever re-made.
+3. Plain-sans maths in picture labels (C1), unchanged since review 1, for consistency with the TeX rows beside them:
+   - "r", "θ" on the s02/s03 grids;
+   - "Ian's ring: r = 25 km", "v Δt" and "Δθ" in s09–s14.
+4. 40:24–40:33 (s30 side-by-side): the source line stays at y ≈ 730, under the old full frame, ≈ 200 px below the half panels (which end at y 530). Optionally pass the half-panel box to `SourceBelow` while `sp > 0` (`cs_sC.tsx` line 680).
+
+### What works (keep)
+- The s30 opening is now a clear teaching sequence. Two dated panels, each pulsing on its own words, then the grow into the swipe frame, then three slow, eased sweeps (R → L → R → middle) that start on "glides".
+- The s20 bar arrives with the section. The Coriolis inputs are all named, with units. The r/θ definitions and the viewpoint are written on screen.
+- The captions are re-cued within sentences: 626 cues, all inside the rules.
+- No regression was found in the 15 touched scenes. The maths, physics and colour conventions hold across the whole-movie sweep.
+
+### Limits
+- Audio was not listened to. Sync comes from `timing.json`, the VTT and the frames.
+- The frames come from the CRF render, so fine colour judgements are approximate.
+- Chapter marks are not embedded in this scratch MP4, so they were not re-checked.
+
+### Verdict: PASS with notes (#5b fix 2 review 3: 0 Must, 2 Should, 4 cosmetic)
+- All review-2 Musts are closed (N-M1 at 29:16, N-M2 at 40:23–40:34), and 17 of the 18 review-2 items are fixed.
+- Nothing left is wrong for a learner.
+- The two Should items are a 6-s empty right half in s02 (the last `halves` WARN) and one division shown without its result in s20. Both are small TSX changes: re-render s02 and s20 by chunk, then re-run `movie_qa`. That can be done before or after the user's viewing.
+- Ready for the user (`qa_pass`).
