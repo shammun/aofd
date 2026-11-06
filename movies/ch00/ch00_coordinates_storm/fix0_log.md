@@ -98,3 +98,71 @@ did not move inside their scenes).
    `.venv/Scripts/python.exe tools/k6_overlap.py <build1>/stills/k6r1 --json <build1>/k6r1.json --timing movies/ch00/ch00_coordinates_storm/timing.json`,
    `python <build1>/k6sum.py <build1>/k6r1.json`; fix to 0 hits (re-shoot only the faulty frames into a copy of the tag).
 3. Render: `K6TAG=<clean tag> bash movies/src/ch00_coordinates_storm/checks/cst_render.sh` (resumable `--from N`).
+
+# K6 round 1+ (2026-11-05)
+Input: orchestrator run k6r1 (bundle of 1f4943d, 4215 frames, `--timing`): FAIL 2235 hits in 116 distinct faults (text-text 641, text-img 551,
+text-stroke 358, edge 344, text-cbar 218, text-picture 54, src-on-picture 42, text-fill 27). Audio, narration, timing, data, house kit untouched;
+only cs_lib.tsx, cs_sA/B/C.tsx changed. Method as Part 1 (fix1_log "K6 after fix 1c"): always `--timing`; measure max(r[2]) per block.
+
+## Rounds (stills `cst_run.py stills TAG --jobs 3`; gate `tools/k6_overlap.py … --timing timing.json`)
+| tag | frames | scope | hits |
+|---|---|---|---|
+| k6r1 | 4215 | full (orchestrator) | 2235 (116 faults) |
+| k6r2 | 3612 | every scene except s00-s02, s15-s17, s22, s25 (unchanged) ± 16 frames (`k6r2_frames.txt`) | 29 (8 faults: s07 ×2, s12, s13 ×3, s20, s26) |
+| k6r3 | 761 | s07, s11, s12, s13, s20, s26 ± 16 (`k6r3_frames.txt`) | NOT SHOT: held by the orchestrator (Part 1 has Chrome/GPU) |
+| k6r4 | 4215 | full, final | to do after k6r3 |
+All 8 k6r2 faults are fixed in source (below); the fixes after k6r2 are static- and SSR-checked only.
+
+## Root causes
+- **cs_lib `CalcStack` fraction height never applied**: the test was `/\frac/`, a regex for FORM FEED + "rac", so no `\frac` row got its
+  height and every fraction row printed over the next (≈ 640 text-text hits in s03-s14). Now `/\d?frac/` (not `\tfrac`), h = 2.4 × size;
+  rows with a hat or superscripts over a fraction get an explicit h (s12 140 @ 52 px, s13 130 @ 50 px).
+- **s11 `e1.replace(/^\mathbf v/, "")`**: same bug (`\m` = "m"), so the row read "v v = r …" (a CONTENT error, now "v = r …").
+- Rows wider than 1842 (s04, s05, s07, s08, s09, s14, s20, s23, s26, s27): split at "=", "⇒" or a comma, second part on its words.
+
+## Fixes (scene · what)
+- s03 "0.1 rad ≈ 6°" moves to 76° (left of both r̂ arrows) while the example plays.
+- s04 move rows: the two divisions on two rows; check rows: each split (cos/sin values, Δθ ⇒ 53.70°, cos 53.70° / change, sin 53.70° /
+  change, cont rows on "the sine is", "to fifty three point seven", "a change of"); the rows leave on "So the rule works" and the slope
+  graphs come in then, larger (y 330, 300 × 220, ticks 90°/270°, titles 64 px up) — before they sat under the rows in the caption band.
+- s05 "along θ̂" outside the unit circle; chord row split ("vs arc 0.1 (Δθ=0.1)" cont); "straight ≈ curved" y 560 → 630.
+- s06 "same direction" inside the circle right of −r̂ (was across the circle and the arrow).
+- s07 "53°" outside the circle (up-right of its balloon, clear of the gold link); "−r̂" up-left of the arrow tip; Δθ̂ row (to x 2300) as
+  three aligned lines (\phantom), result on "minus zero point zero zero eight"; "slopes, part by part" became the keyword on S15.
+- s08 Δd̂ row split, result on "a change of".
+- s09 r / v on two lines; "Δt cancels" 610 → 645 and out at tRate − 20 (swap gap).
+- s10 "r = 25 km" inside the ring under the arrow. s11 turning arc RR+70 → RR+34 (it ran through "Ian's ring" at the bottom); "v v" fix.
+- s12 product-rule and a-rows h 140; "dv/dt = 0" y 560 → 596.
+- s13 first stack y 220, fraction rows h 130, ends before EQ_S13 comes in (tAll − 12); gravity bars +15 px and in at tG + 14 (after the
+  stack's slide); car rows' "=" column 1390 → 1300.
+- s14 "radius 34.8 m/s" above the ring (y 128); balance rows: "(in)/(out)" (the colour keys above say inward/outward), pressure sum split
+  at "= 0.050 m/s²", column y 470; "worked out: Coriolis movie" under the ring.
+- s18 500-hPa tag y 560 → 575 (12 px from the colour bar). s19 the radar credit steps aside during the swing round / close look (the
+  stack reached below y 810).
+- s20 callouts +14 px (12 px under the bar); box rows: w = 2h|u_r|/r, then the numbers on "two times one thousand"; "r = 30 km …" y 786;
+  the section pictures in an overflow-hidden div (the nested-svg crop was invisible to the probe during the radar zoom); the line
+  labels fade near the box edge during the zoom; the two credits one after the other.
+- s21 / s29 unzoomed globe dist 4.3 → 4.75 about (560, 430): disc r ≈ 369, bottom ≈ 799 (was 880: the credit sat on the disc); country
+  names only for the opening view; "Sundarbans" an outlined map label.
+- s23 "inflow angle" centred under the arrow tips (was out of the map's left edge); 90 kt row split on "ninety knots"; EQ_S23 and Ian's
+  angle row each on two lines (cutAt at "⇒"); "a similar spiral angle" as the keyword on S12; storm labels moved up.
+- s24 panels and bar 40 px lower (keywords sat on "height (km)" and 4 px from the bar).
+- s26 (u, v) = (22.2 E, 24.3 N) m/s on one row; the length's result on its own line.
+- s27 feet rows on two lines; 75 cm row/label and shelf axes moved down; gauge axes 1010 × 680 (date ticks overlapped); "Saint
+  Petersburg" centred above its dot.
+- s28 relayout: chart 160-760, two-line end labels right of it, notes above the map, Fort Myers inside the map, Saint Petersburg left of
+  the map with a leader, colour bar under the map.
+- s30 Yangon's name left of its dot; every name on the swipe picture (places, dates, "50 km", "N") fades within 6-30 px of the line.
+- s31 the HRRR/ERA5 credit under the bar's "− in / + out". s32 end-card list rows 650 + 46 r (the fifth row reached y 882).
+No calculation row removed; nothing below 44 px; every new row tied to a spoken phrase (AT) or its row's frame + 15…20.
+
+## Gates after the last change
+tsc 0 · at_check 372 refs, 0 failures · swap_check 381 elements, 0 overlaps, 0 swaps < 8 frames · cam_speed 0 > 90°/s (peak 20°/s s29) ·
+eq_check 18/18 · SSR `--step 10` 9213 scene-frames, 0 errors, NaN 0 · SSR `--3d` 9213, THREE guard 922 3-D frames, 0 errors.
+
+## Still to do (after the orchestrator's go-ahead; one Chrome job)
+1. `.venv/Scripts/python.exe movies/src/ch00_coordinates_storm/checks/cst_run.py stills k6r3 --bundle --frames-file "<S>/k6r3_frames.txt" --jobs 3`
+   then `tools/k6_overlap.py <S>/stills/k6r3 --timing movies/ch00/ch00_coordinates_storm/timing.json --json <S>/stills/k6r3_overlap.json`.
+2. Final full pass `stills k6r4 --jobs 3` (4215 frames, ≈ 50 min, bundle unchanged) → 0 hits → render with `K6TAG=k6r4`.
+Seen, not fixed (no K6 rule): s18 the stack's left corner and its km ticks leave the frame as the camera orbits to az −76 (ticks at
+x −123…−6 by the end); s28 the four date ticks are 12 px apart (pass, but crowded).

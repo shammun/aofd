@@ -4,7 +4,7 @@
 // one close look) and the radius-height section. Every number on screen is asserted against data/cs.json below.
 import React, { useLayoutEffect, useMemo } from "react";
 import { useThree } from "@react-three/fiber";
-import { useCurrentFrame } from "remotion";
+import { AbsoluteFill, useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import { C, T } from "../house/kit/type";
 import { Pt, pulse } from "../house/kit/draw";
@@ -100,11 +100,13 @@ const S09: React.FC = () => {
         { lhs: String.raw`\Delta\theta`, rhs: String.raw`=\frac{\Delta s}{r}=\frac{v\,\Delta t}{r}`, at: tAng },
         { lhs: String.raw`\frac{\Delta\theta}{\Delta t}`, rhs: String.raw`=\frac{v\,\Delta t}{r\,\Delta t}=\frac{v}{r}`, at: tDiv },
       ]} />
-      <Svg><Lbl x={MX} y={610} t="Δt cancels" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tRate - 10)} /></Svg>
+      <Svg><Lbl x={MX} y={645} t="Δt cancels" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tRate - 20)} /></Svg>{/* K6 round 1: under the taller fraction rows */}
       <TeX s={EQ_S09} x={MX} y={705} size={88} o={fin(f, tRate) * fout(f, tNum - 6)} glow={pulse(f, tRate, 20)} />
       {/* fix 0 B11: every conversion on screen, on its words */}
       <CalcStack f={f} x={MX + 20} y={230} size={50} maxLines={3} o={fin(f, tNum)} rows={[
-        { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m,\quad v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1, size: 46 },
+        // K6 round 1: ran to x 2024: r and v on two lines
+        { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m`, at: tN1, size: 46 },
+        { rhs: String.raw`v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1 + 15, size: 46, cont: true },
         { rhs: String.raw`\frac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 12, "divided by") },
         { rhs: String.raw`1\ \mathrm{rad}=\frac{180^\circ}{\pi}\approx57.3^\circ`, at: tDeg },
         { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 14, "zero point zero eight") },
@@ -131,7 +133,8 @@ const S10: React.FC = () => {
         <Arrow p={RC} q={p} color={C.first} w={10} head={40} o={fin(f, tPos)} />
         <Arrow p={RC} q={polar(RC, 120, a)} color={C.second} w={8} head={30} o={fin(f, tLen)} />
         <Lbl x={polar(RC, 160, a + 12)[0]} y={polar(RC, 160, a + 12)[1]} t="r̂" c={C.second} s={T.key} o={fin(f, tLen)} />
-        <Lbl x={polar(RC, RR * 0.62, a - 14)[0]} y={polar(RC, RR * 0.62, a - 14)[1]} t="r = 25 km" c={C.first} s={T.floor} o={fin(f, tIan)} />
+        {/* K6 round 1: ran across the ring (x 650-851): now inside it, under the arrow */}
+        <Lbl x={RC[0] + 85} y={RC[1] - 20} t="r = 25 km" c={C.first} s={T.floor} o={fin(f, tIan)} />
         <Parcel p={p} />
         <Keyword f={f} text="velocity next" at={[MX, 120]} s={T.key} appear={0} out={tWhy - 20} />
         <Lbl x={1075} y={120} t="acceleration ← velocity ← position" c={C.key} s={T.floor} o={win(f, tWhy, tRate - 20)} />
@@ -165,8 +168,9 @@ const S11: React.FC = () => {
         <DashArrow f={f} p={p} q={[p[0] + u[0] * 170, p[1] + u[1] * 170]} o={fin(f, tYes)} />
         <RTick p={p} u1={[-er[0], -er[1]]} u2={u} o={fin(f, tSize)} />
         <Parcel p={p} />
-        <path d={arcD(RC, RR + 70, a - 60, a - 10)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tIan)} />
-        <ArcHead c={RC} r={RR + 70} a={a - 10} dir={1} col={C.gold} o={fin(f, tIan)} />
+        {/* K6 round 1: at RR + 70 the turning arc ran through "Ian's ring: r = 25 km" at the bottom; RR + 34 clears it */}
+        <path d={arcD(RC, RR + 34, a - 60, a - 10)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tIan)} />
+        <ArcHead c={RC} r={RR + 34} a={a - 10} dir={1} col={C.gold} o={fin(f, tIan)} />
         <Keyword f={f} text="one term at a time" at={[MX, 120]} s={T.key} appear={0} out={tChain - 20} />
         <Keyword f={f} text="the chain rule" at={[MX, 120]} s={T.key} appear={tChain} out={tYes - 20} />
         <Keyword f={f} text={`${nf(RING.v, 1)} m/s along θ̂`} at={[MX, 120]} s={T.key} appear={tIan} />
@@ -181,7 +185,8 @@ const S11: React.FC = () => {
       <TeX s={String.raw`\frac{d\hat{\mathbf r}}{dt}=\frac{d\hat{\mathbf r}}{d\theta}\,\frac{d\theta}{dt}=\hat{\boldsymbol\theta}\,\frac{v}{r}`} x={MX} y={330} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
       {/* fix 0 B20: e1 on "Now multiply by r", "= v θ̂" only when S9 says it (EQ_S11 = e1 + "=v θ̂") */}
       <CalcStack f={f} x={MX + 60} y={280} size={46} maxLines={3} o={fout(f, tYes - 14)} rows={[
-        { lhs: String.raw`\mathbf v`, rhs: e1.replace(/^\mathbf v/, ""), at: tMul },
+        // K6 round 2: the regex was /^\mathbf v/ (\m = "m", no backslash), so nothing was cut and the row read "v v = r …"
+        { lhs: String.raw`\mathbf v`, rhs: e1.replace(/^\\mathbf v/, ""), at: tMul },
         { rhs: EQ_S11.slice(e1.length), at: tCancel, cont: true },
       ]} />
       <TeX s={String.raw`\mathbf v=v\,\hat{\boldsymbol\theta}`} x={MX} y={360} size={96} o={win(f, tYes, tIan - 20)} glow={pulse(f, tCancel + 20, 20)} />
@@ -226,15 +231,15 @@ const S12: React.FC = () => {
       </Svg>
       {/* fix 0 B21: the product rule, then the same line with the dv/dt term struck (steady speed) */}
       <CalcStack f={f} x={MX + 230} y={220} size={52} maxLines={3} o={fout(f, tChain - 14)} rows={[
-        { lhs: String.raw`\frac{d}{dt}(v\hat{\boldsymbol\theta})`, rhs: String.raw`=\frac{dv}{dt}\hat{\boldsymbol\theta}+v\frac{d\hat{\boldsymbol\theta}}{dt}`, at: tPR },
-        { rhs: String.raw`=\cancel{\frac{dv}{dt}\hat{\boldsymbol\theta}}+v\frac{d\hat{\boldsymbol\theta}}{dt}`, at: tSteady, cont: true },
+        { lhs: String.raw`\frac{d}{dt}(v\hat{\boldsymbol\theta})`, rhs: String.raw`=\frac{dv}{dt}\hat{\boldsymbol\theta}+v\frac{d\hat{\boldsymbol\theta}}{dt}`, at: tPR, h: 140 },   // K6 round 2: hat over a fraction: 125 px of ink at 52 px
+        { rhs: String.raw`=\cancel{\frac{dv}{dt}\hat{\boldsymbol\theta}}+v\frac{d\hat{\boldsymbol\theta}}{dt}`, at: tSteady, cont: true, h: 140 },
       ]} />
-      <TeX s={String.raw`\frac{dv}{dt}=0`} x={MX} y={560} size={T.calc} c={C.local} o={win(f, tSteady, tChain - 20)} />
+      <TeX s={String.raw`\frac{dv}{dt}=0`} x={MX} y={596} size={T.calc} c={C.local} o={win(f, tSteady, tChain - 20)} />
       <TeX s={String.raw`\frac{d\hat{\boldsymbol\theta}}{dt}=\frac{d\hat{\boldsymbol\theta}}{d\theta}\frac{d\theta}{dt}=-\hat{\mathbf r}\,\frac{v}{r}`} x={MX} y={300} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
       {/* fix 0 B21: the skipped move written out: a = v·(−r̂ v/r) on "multiply by v", then = −(v·v/r) r̂ = −(v²/r) r̂ on S11 */}
       <CalcStack f={f} x={MX + 80} y={230} size={52} maxLines={3} o={fout(f, tMinus - 10)} rows={[
-        { lhs: String.raw`\mathbf a`, rhs: String.raw`=v\,\frac{d\hat{\boldsymbol\theta}}{dt}=v\cdot\Big(-\hat{\mathbf r}\,\frac{v}{r}\Big)`, at: tMul },
-        { rhs: String.raw`=-\frac{v\cdot v}{r}\,\hat{\mathbf r}=-\frac{v^2}{r}\,\hat{\mathbf r}`, at: tRes, cont: true },
+        { lhs: String.raw`\mathbf a`, rhs: String.raw`=v\,\frac{d\hat{\boldsymbol\theta}}{dt}=v\cdot\Big(-\hat{\mathbf r}\,\frac{v}{r}\Big)`, at: tMul, h: 140 },
+        { rhs: String.raw`=-\frac{v\cdot v}{r}\,\hat{\mathbf r}=-\frac{v^2}{r}\,\hat{\mathbf r}`, at: tRes, cont: true, h: 140 },
       ]} />
       {/* the whole derivation in one line, as a summary under the result (EQ_S12) */}
       <TeX s={EQ_S12} x={MX} y={700} size={44} o={fin(f, tCentri)} />
@@ -261,13 +266,13 @@ const S13: React.FC = () => {
         <Keyword f={f} text="how big?" at={[MX, 120]} s={T.key} appear={tHow} out={tBig - 20} />
         <Keyword f={f} text="≈ 200 × smaller than gravity" at={[MX, 120]} s={T.floor} appear={tG} out={tCar - 20} />
         <Keyword f={f} text="all of it turns the parcel" at={[MX, 120]} s={T.key} appear={tTurn} />
-        <g opacity={win(f, tBig, tCar - 20)}>
-          {/* K6 r0: 50 px lower, clear of the (taller) fraction rows */}
-          <line x1={MX} y1={730} x2={MX + 700} y2={730} stroke={C.muted} strokeWidth={3} />
-          <rect x={MX} y={650} width={700} height={50} fill={C.local} opacity={0.85} />
-          <rect x={MX} y={750} width={Math.max(4, (700 * RING.acc) / 9.81)} height={50} fill={C.neg} opacity={0.95} />
-          <Lbl x={MX + 10} y={620} t="gravity 9.81 m/s²" c={C.local} s={T.floor} />
-          <Lbl x={MX + 30} y={838} t="0.048 m/s²" c={C.neg} s={T.floor} />
+        <g opacity={win(f, tG + 14, tCar - 20)}>{/* K6 round 2: in after the stack has slid up for its 9.81 / 0.048 row (the new row crossed the bars while sliding) */}
+          {/* K6 r0: 50 px lower, clear of the (taller) fraction rows; K6 round 1: 15 px more (the fraction rows are 2.4 × size now) */}
+          <line x1={MX} y1={745} x2={MX + 700} y2={745} stroke={C.muted} strokeWidth={3} />
+          <rect x={MX} y={665} width={700} height={50} fill={C.local} opacity={0.85} />
+          <rect x={MX} y={765} width={Math.max(4, (700 * RING.acc) / 9.81)} height={50} fill={C.neg} opacity={0.95} />
+          <Lbl x={MX + 10} y={635} t="gravity 9.81 m/s²" c={C.local} s={T.floor} />
+          <Lbl x={MX + 30} y={842} t="0.048 m/s²" c={C.neg} s={T.floor} />
         </g>
         <g opacity={fin(f, tCar)}>
           <rect x={MX + 20} y={750} width={150} height={50} rx={14} fill={C.second} />
@@ -276,15 +281,17 @@ const S13: React.FC = () => {
           <ClockG x={MX + 470} y={775} t={`≈ ${Math.round(10 * carT)} min`} frac={carT} />
         </g>
       </Svg>
-      <CalcStack f={f} x={MX + 230} y={250} size={50} maxLines={3} o={fout(f, tAll)} rows={[
+      {/* K6 round 1: gone before the summary line comes in at the same place (they cross-faded on top of each other) */}
+      <CalcStack f={f} x={MX + 230} y={220} size={50} maxLines={3} o={fout(f, tAll - 12)} rows={[
         { lhs: String.raw`34.8^2`, rhs: String.raw`\approx1211`, at: tSq },
-        { lhs: String.raw`\frac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv },
-        { lhs: String.raw`\frac{35^2}{25\,000}`, rhs: String.raw`\approx0.049`, at: tEasy, c: C.local },
-        { lhs: String.raw`\frac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG },
+        { lhs: String.raw`\frac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv, h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
+        { lhs: String.raw`\frac{35^2}{25\,000}`, rhs: String.raw`\approx0.049`, at: tEasy, c: C.local, h: 130 },
+        { lhs: String.raw`\frac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG, h: 130 },
       ]} />
       <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
       {/* fix 0 B22: the car's conversions, one row at a time */}
-      <CalcStack f={f} x={MX + 290} y={350} size={46} maxLines={3} rows={[
+      {/* K6 round 1: "=" column 1390 → 1300 (the first row ran to x 1879) */}
+      <CalcStack f={f} x={MX + 200} y={350} size={46} maxLines={3} rows={[
         { lhs: String.raw`100\ \mathrm{km/h}`, rhs: String.raw`=\frac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}`, at: tCar },
         { lhs: String.raw`\frac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}`, rhs: String.raw`\approx580\ \mathrm s`, at: tCar + 45 },
         { lhs: String.raw`\frac{580\ \mathrm s}{60}`, rhs: String.raw`\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}`, at: tCar + 90 },
@@ -319,7 +326,8 @@ const S14: React.FC = () => {
           <Arrow p={q0} q={q1} color={C.neg} w={7} head={24} o={fin(f, tShort)} />
           <path d={arcD(tail, L, a0 + 90, a1 + 90)} fill="none" stroke={C.local} strokeWidth={4} strokeDasharray="10 8" opacity={fin(f, tEnds)} />
           {/* fix 0 B23: the dashed arc S10 names, and the drawn turn's scale */}
-          <Lbl x={polar(tail, L + 40, a1 + 100)[0]} y={polar(tail, L + 40, a1 + 100)[1]} t={`radius ${nf(RING.v, 1)} m/s`} c={C.local} s={T.floor} a="end" o={fin(f, tEnds)} />
+          {/* K6 round 1: was on the ring's top (y 182-218): lifted above the ring, left of the dashed arc */}
+          <Lbl x={polar(tail, L + 40, a1 + 100)[0]} y={128} t={`radius ${nf(RING.v, 1)} m/s`} c={C.local} s={T.floor} a="end" o={fin(f, tEnds)} />
           <CurvedLink f={f} from={[(q0[0] + q1[0]) / 2, (q0[1] + q1[1]) / 2 + 20]} to={[RC[0] + 30, RC[1] - 30]} start={tEye} end={tHow} bend={-40} />
         </g>
         <g opacity={oPush}>
@@ -343,7 +351,8 @@ const S14: React.FC = () => {
         <Lbl x={MX} y={300} t="pressure force: inward" c={C.second} s={T.floor} o={win(f, tP, tM1 - 20)} />
         <Lbl x={MX} y={360} t="Earth's spin: ≈ 1/20, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
         <Lbl x={MX} y={420} t="(violet arrow drawn 6× longer)" c={C.muted} s={T.floor} o={win(f, tEarth, tM1 - 20)} />
-        <Lbl x={MX} y={830} t="worked out: Coriolis movie" c={C.muted} s={T.floor} o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
+        {/* K6 round 1: under the ring (the balance rows now reach y 840 in the text column) */}
+        <Lbl x={RC[0]} y={830} t="worked out: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
       </Svg>
       <CalcStack f={f} x={MX + 20} y={262} size={56} maxLines={3} o={fout(f, tOnly - 6)} rows={[
         { rhs: String.raw`\Delta\theta=0.00139\times60`, at: tMin, size: 50 },
@@ -354,11 +363,14 @@ const S14: React.FC = () => {
       ]} />
       <TeX s={EQ_S14} x={MX} y={745} size={44} o={win(f, tArc + 30, tOnly - 20)} />
       {/* fix 0 B1: the balance in numbers on S16 (f v = 6.51e-5 × 34.8 ≈ 0.0023 m/s², ratio 21 from data/cs.json) */}
-      <CalcStack f={f} x={MX} y={480} size={46} maxLines={4} o={fout(f, tM1 - 10)} rows={[
-        { rhs: String.raw`\text{turning: }${nf(RING.acc, 3)}\ \mathrm{m/s^2}\ \text{(inward)}`, at: AT(k, 16, "pushes the other way") },
-        { rhs: String.raw`\text{Earth's spin: }\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(outward)}`, at: AT(k, 16, "a little outward") },
+      {/* K6 round 1: the spin row ran to x 1877 and the pressure row to x 1971: "(inward)/(outward)" → "(in)/(out)" (the colour key above
+          says inward / outward in full), the pressure sum split at its result; the column starts 10 px higher */}
+      <CalcStack f={f} x={MX} y={470} size={46} maxLines={4} o={fout(f, tM1 - 10)} rows={[
+        { rhs: String.raw`\text{turning: }${nf(RING.acc, 3)}\ \mathrm{m/s^2}\ \text{(in)}`, at: AT(k, 16, "pushes the other way") },
+        { rhs: String.raw`\text{Earth's spin: }\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: AT(k, 16, "a little outward") },
         { rhs: String.raw`\frac{${nf(RING.acc, 3)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") },
-        { rhs: String.raw`\text{pressure push}\approx0.048+0.002=0.050\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") },
+        { rhs: String.raw`\text{pressure push}\approx0.048+0.002`, at: AT(k, 16, "a little stronger") },
+        { rhs: String.raw`=0.050\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") + 20, cont: true },
       ]} />
       <Svg><Lbl x={MX} y={832} t="same as v²/r" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tOnly - 20)} /></Svg>
     </Scene>
@@ -611,7 +623,8 @@ const S18: React.FC = () => {
       <Svg>
         {[0, 3, 6, 9, 12, 15].map((km) => { const q = pr.p([-H - 0.2, -H - 0.2, km * ZX]); return <Lbl key={km} x={q[0] - 10} y={q[1]} t={`${km}`} c={C.muted} s={T.floor} a="end" b={false} />; })}
         <Lbl x={pr.p([-H - 0.2, -H - 0.2, 16 * ZX + 0.3])[0] - 10} y={pr.p([-H - 0.2, -H - 0.2, 16 * ZX + 0.3])[1] - 10} t="km" c={C.muted} s={T.floor} a="end" b={false} />
-        {tags.map((t, i) => { const q = tagAt(i); const y = [790, 700, 560, 300, 210][i];
+        {/* K6 round 1: the 500-hPa tag y 560 → 575 (it sat 2 px under the colour bar's box; 12 px needed) */}
+        {tags.map((t, i) => { const q = tagAt(i); const y = [790, 700, 575, 300, 210][i];
           return <g key={t} opacity={fin(f, tTag[i])}><Lbl x={1210} y={y} t={t} c={C.key} s={T.floor} />
             <line x1={1196} y1={y} x2={q[0] + 8} y2={q[1]} stroke={C.gold} strokeWidth={3} opacity={0.8} /></g>; })}
         <Keyword f={f} text="layer by layer" at={[1210, 120]} s={T.key} appear={0} out={tLev - 20} />
@@ -672,7 +685,8 @@ const S19: React.FC = () => {
       </Svg>
       {/* K6 r0: the two credits cross-faded on top of each other and sat in the caption band: one after the other, 30 px higher */}
       <SourceBelow text={SRC.hrrrPl} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1400} o={fout(f, tSo + 16, 12)} name="s19 src" />
-      <SourceBelow text={SRC.hrrrPlTdr} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1740} o={fin(f, tSo + 30, 12)} name="s19 src w" />
+      {/* K6 round 1: during the swing round and the close look the stack reaches below y 810: the credit steps aside meanwhile */}
+      <SourceBelow text={SRC.hrrrPlTdr} pic={{ x: 80, y: 40, w: 1000, h: 760 }} w={1740} o={fin(f, tSo + 30, 12) * (1 - win(f, tOrbit - 12, tLook + 140, 12))} name="s19 src w" />
     </Scene>
   );
 };
@@ -732,20 +746,32 @@ const S20: React.FC = () => {
           <circle cx={580} cy={420} r={14} fill={C.gold} opacity={fin(f, tDep)} />
           <Lbl x={580} y={600} t="one ring → one point (r, z)" c={C.key} s={T.floor} a="middle" o={fin(f, tDep)} />
         </g>
-        <g opacity={oSec}>
-          <defs><clipPath id="s20clip"><rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} /></clipPath></defs>
-          <svg x={SB.x} y={SB.y} width={SB.w} height={SB.h} viewBox={`${SB.x} ${SB.y} ${SB.w} ${SB.h}`} overflow="hidden">
-          <g clipPath="url(#s20clip)">
-            <image href={IMG("cst_sec_ian.png")} x={SB.x} y={SB.y + SB.h - (SB.h * 16) / zMax} width={(SB.w * 200) / rMax} height={(SB.h * 16) / zMax}
-              preserveAspectRatio="none" opacity={oH} />
-            {vtl.map((L, i) => <path key={i} d={poly(Array.from({ length: L.pts.length / 2 }, (_, j) => P(L.pts[2 * j], L.pts[2 * j + 1])))} fill="none" stroke="#1a1a24"
-              strokeWidth={3.5} opacity={fin(f, tLines) * oH} />)}
-            <image href={IMG("cst_tdr_w.png")} x={SB.x} y={SB.y + SB.h - (SB.h * 14) / zMax} width={(SB.w * 100) / rMax} height={(SB.h * 14) / zMax}
-              preserveAspectRatio="none" opacity={xf} />
-            <g data-lc-own="s20eye"><rect x={SB.x} y={SB.y} width={P(eye, 0)[0] - SB.x} height={SB.h} fill="#5d6577" opacity={0.9 * xf} /></g>
-          </g>
+      </Svg>
+      {/* K6 round 1: the section pictures sit in an overflow-hidden <div> of the section box (the GeoMap pattern): during the radar
+          zoom the HRRR picture grows past the box, and the nested-svg crop was not seen by the box probe (text-img on the colour bar
+          title and the keyword at 30:48, frame 55430) */}
+      <AbsoluteFill style={{ opacity: oSec }}>
+        <div style={{ position: "absolute", left: SB.x, top: SB.y, width: SB.w, height: SB.h, overflow: "hidden" }}>
+          <svg width={1920} height={1080} style={{ position: "absolute", left: -SB.x, top: -SB.y }}>
+            <defs><clipPath id="s20clip"><rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} /></clipPath></defs>
+            <g clipPath="url(#s20clip)">
+              <image href={IMG("cst_sec_ian.png")} x={SB.x} y={SB.y + SB.h - (SB.h * 16) / zMax} width={(SB.w * 200) / rMax} height={(SB.h * 16) / zMax}
+                preserveAspectRatio="none" opacity={oH} />
+              {vtl.map((L, i) => <path key={i} d={poly(Array.from({ length: L.pts.length / 2 }, (_, j) => P(L.pts[2 * j], L.pts[2 * j + 1])))} fill="none" stroke="#1a1a24"
+                strokeWidth={3.5} opacity={fin(f, tLines) * oH} />)}
+              <image href={IMG("cst_tdr_w.png")} x={SB.x} y={SB.y + SB.h - (SB.h * 14) / zMax} width={(SB.w * 100) / rMax} height={(SB.h * 14) / zMax}
+                preserveAspectRatio="none" opacity={xf} />
+              <g data-lc-own="s20eye"><rect x={SB.x} y={SB.y} width={P(eye, 0)[0] - SB.x} height={SB.h} fill="#5d6577" opacity={0.9 * xf} /></g>
+            </g>
           </svg>
-          {vlab.map((L, i) => { const q = P(L.r, L.z); return <Lbl key={i} x={q[0]} y={q[1]} t={`${L.level}`} c="#1a1a24" s={T.floor} a="middle" o={fin(f, tLines + 10) * oH} />; })}
+        </div>
+      </AbsoluteFill>
+      <Svg>
+        <g opacity={oSec}>
+          {/* K6 round 2: during the radar zoom the line labels ride out of the section box: each fades as it nears the box edge */}
+          {vlab.map((L, i) => { const q = P(L.r, L.z);
+            const inB = Math.min(q[0] - 30 - SB.x, SB.x + SB.w - 30 - q[0], q[1] - 18 - SB.y, SB.y + SB.h - 18 - q[1]);
+            return <Lbl key={i} x={q[0]} y={q[1]} t={`${L.level}`} c="#1a1a24" s={T.floor} a="middle" o={fin(f, tLines + 10) * oH * clamp(inB / 8, 0, 1)} />; })}
           <rect x={SB.x} y={SB.y} width={SB.w} height={SB.h} fill="none" stroke={C.grid} strokeWidth={3} />
           {[0, 50, 100, 150, 200].map((r) => <Lbl key={`ra${r}`} x={P(r, 0)[0]} y={SB.y + SB.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} o={oAxA} />)}
           {[0, 25, 50, 75, 100].map((r) => <Lbl key={`rb${r}`} x={P(r, 0)[0]} y={SB.y + SB.h + 34} t={`${r}`} c={C.muted} s={T.floor} a="middle" b={false} o={oAxB} />)}
@@ -778,13 +804,15 @@ const S20: React.FC = () => {
         <URBar x={MX} y={250} w={420} o={fin(f, tCol) * oH} />
         <ColourBar x={MX} y={250} w={420} lut={LUT_W} lo={0} hi={WV.tdr.lim} unit="m/s" title="rising air (radar)" o={xf}
           ticks={[{ v: 0, t: "≤ 0" }, { v: 2, t: "2" }, { v: 4, t: "4" }]} />
-        <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 540]} appear={tMin} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
-        <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 420]} appear={tTop} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
-        <SideCallout f={f} lines={`u_θ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 480]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
-        <Lbl x={MX} y={620} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
+        {/* K6 round 1: the three callouts 14 px lower (the top one sat 12 px under the colour bar's "+ out") */}
+        <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 554]} appear={tMin} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
+        <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 434]} appear={tTop} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
+        <SideCallout f={f} lines={`u_θ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 494]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
+        <Lbl x={MX} y={630} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
         <Keyword f={f} text="a quick check" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tLid - 20} />
         <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tLid} out={tRadar - 20} />
-        <Lbl x={MX} y={710} t="r = 30 km, h = 1 km, 16 m/s in" c={C.key} s={T.floor} o={win(f, tSide, tRadar - 20)} />
+        {/* K6 round 1: under the (now taller) box rows */}
+        <Lbl x={MX} y={786} t="r = 30 km, h = 1 km, 16 m/s in" c={C.key} s={T.floor} o={win(f, tSide, tRadar - 20)} />
         <Keyword f={f} text="measured: aircraft radar" at={[MX, 120]} s={T.key} appear={tRadar} out={tIUO - 20} />
         <SideCallout f={f} lines={`≈ ${nf(pk[0], 1)} m/s, ${nf(pk[1], 1)} km up`} at={[MX, 440]} appear={tThree} out={tIUO - 20} target={[pkP[0] + 16, pkP[1]]} s={T.floor} c={C.gold} />
         <Lbl x={MX} y={520} t={`single towers ≈ 10-${Math.round(WV.tdr.point_max[0])} m/s`} c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />
@@ -795,13 +823,16 @@ const S20: React.FC = () => {
       </Svg>
       <TeX s={EQ_S20} x={MX} y={330} size={50} o={win(f, tAvg, tSlice + 40)} />
       {/* fix 0 B13: the box continuity, one row per sentence (in = up: 2πr h|u_r| = πr² w) */}
-      <CalcStack f={f} x={MX} y={420} size={46} maxLines={3} o={fout(f, tRadar - 10)} rows={[
+      {/* K6 round 1: the w row ran to x 1854: the formula, then the numbers on "two times one thousand"; the column 15 px higher */}
+      <CalcStack f={f} x={MX} y={405} size={46} maxLines={3} o={fout(f, tRadar - 10)} rows={[
         { rhs: String.raw`\text{in through the side: }2\pi r\,h\,|u_r|`, at: tSide + 30 },
         { rhs: String.raw`\text{up through the lid: }\pi r^2\,w`, at: tLid },
-        { rhs: String.raw`w=\frac{2h\,|u_r|}{r}=\frac{2\times1000\times${SAY.w_box.ur}}{30\,000}\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "two times one thousand") },
+        { rhs: String.raw`w=\frac{2h\,|u_r|}{r}`, at: AT(k, 14, "so it rises more slowly") },
+        { rhs: String.raw`\phantom{w}=\frac{2\times1000\times${SAY.w_box.ur}}{30\,000}\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "two times one thousand"), cont: true },
       ]} />
-      <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1400} o={oSec * oH} name="s20 src" />
-      <SourceBelow text={SRC.tdr} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1720} o={xf} name="s20 src w" />
+      {/* K6 round 1: one credit after the other (they cross-faded on top of each other for 30 frames) */}
+      <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1400} o={oSec * fout(f, tRadar + 16, 10)} name="s20 src" />
+      <SourceBelow text={SRC.tdr} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1720} o={fin(f, tRadar + 28, 12)} name="s20 src w" />
     </Scene>
   );
 };

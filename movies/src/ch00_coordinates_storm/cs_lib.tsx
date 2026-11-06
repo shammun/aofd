@@ -341,9 +341,13 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
 export { Arrow, Lbl, Svg, clamp };
 
 // ---------------------------------------------------------------- calc stacks (heavy phase, K6 r0)
-/** The house CalcStack with the real height of a fraction row: a row whose TeX has a \frac and no explicit `h` is ~2.2× its
- * type size tall, not the default 1.42× (K6 r0 found fraction rows printed over the next row in s04, s07, s09, s13, s14). */
+/** The house CalcStack with the real height of a fraction row: a row whose TeX has a \frac / \dfrac and no explicit `h` is ~2.2× its
+ * type size tall (ink), not the default 1.42× (K6 r0 found fraction rows printed over the next row in s04, s07, s09, s13, s14).
+ * K6 round 1: the old test `/\frac/` was a regex for FORM FEED + "rac" (\f), so it never matched and no row got the height; the
+ * test is now on the literal backslash, and the row is 2.4× its size (2.2× left 1 px to the next row's ink; K6 needs 4). \tfrac
+ * (a small inline fraction) keeps the plain height. */
+const FRAC = /\\d?frac/;
 export const CalcStack: typeof HouseCalcStack = (p) => (
-  <HouseCalcStack {...p} rows={p.rows.map((r) => (r.h !== undefined || !/\frac/.test(`${typeof r.lhs === "string" ? r.lhs : ""}${typeof r.rhs === "string" ? r.rhs : ""}`)
-    ? r : { ...r, h: (r.size ?? p.size ?? 68) * 2.2 }))} />
+  <HouseCalcStack {...p} rows={p.rows.map((r) => (r.h !== undefined || !FRAC.test(`${typeof r.lhs === "string" ? r.lhs : ""}${typeof r.rhs === "string" ? r.rhs : ""}`)
+    ? r : { ...r, h: (r.size ?? p.size ?? 68) * 2.4 }))} />
 );
