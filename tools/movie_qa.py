@@ -447,10 +447,13 @@ def main() -> int:
                         halves.append((key, s, e))
             halves.sort(key=lambda x: x[1])
             hard = [x for x in halves if x[2] - x[1] > a.half_max]
+            soft = [x for x in halves if x not in hard]
+            span = lambda xs: "; ".join(f"{k} {s:.1f}–{e:.1f} s ({e - s:.1f} s)" for k, s, e in xs)
+            # with a FAIL, the WARN spans are listed too, so one fix loop can clear both (review 1 of #5b, S25)
             gate("halves", "FAIL" if hard else ("WARN" if halves else "PASS"),
-                 ("; ".join(f"{k} {s:.1f}–{e:.1f} s ({e - s:.1f} s)" for k, s, e in (hard or halves))
-                  + (f" [FAIL > {a.half_max:g} s; {len(halves)} span(s) > {a.half_warn:g} s in all]" if hard else
-                     f" [WARN > {a.half_warn:g} s]")) if halves else
+                 ((span(hard) + f" [FAIL > {a.half_max:g} s]"
+                   + (f"; WARN > {a.half_warn:g} s: " + span(soft) if soft else "")) if hard else
+                  span(halves) + f" [WARN > {a.half_warn:g} s]") if halves else
                  f"no picture or maths zone empty > {a.half_warn:g} s")
 
     timing = None
