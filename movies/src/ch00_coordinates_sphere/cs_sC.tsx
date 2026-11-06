@@ -84,7 +84,8 @@ const S26: React.FC = () => {
         <Earth cam={camG} box={GBOX} o={fin(f, tOther, 20)} coast={0.4} over={(G) => <>
           {(() => { let d = ""; for (let la = 60; la <= 88; la += 2) d += parPath(G, la); for (let lo = -180; lo < 180; lo += 6) d += merPath(G, lo, 60, 90); return <path d={d} fill="none" stroke={C.ink} strokeOpacity={0.6} strokeWidth={1.5} />; })()}
         </>} />
-        <SourceBelow text={SRC_G} pic={GBOX} w={800} o={fin(f, tOther, 20)} name="s26 globe src" />
+        {/* K6 k6r1: the globe's source line comes in after the panels' one has gone (they cross-faded on one row) */}
+        <SourceBelow text={SRC_G} pic={GBOX} w={800} o={fin(f, tOther + 26, 12)} name="s26 globe src" />
       </> : null}
       <Svg>
         <Keyword f={f} text="weather data" at={[XC, 770]} appear={0} out={tRe - 20} />
@@ -115,10 +116,12 @@ const S27: React.FC = () => {
   const tWhy = SS(k, 1), tAvg = SS(k, 2), tTake = SS(k, 5), tNS = SS(k, 6), tEW = SS(k, 7), tRight = SS(k, 8), tFlat = SS(k, 9), tRect = SS(k, 10), tMul = SS(k, 11),
     tColl = SS(k, 12), tShrink = SS(k, 13), tLimit = SS(k, 14), tDA = SS(k, 15), tDelta = SS(k, 16), tRad = SS(k, 17);
   const zOut = SE(k, 16);
-  const cam = globePath([{ f: 0, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }, { f: tTake, lat: 32, lon: -2, dist: 4.3, pp: [520, 420] },
+  const cam = globePath([{ f: 0, lat: 30, lon: 0, dist: 4.6, pp: [520, 400] }, { f: tTake, lat: 32, lon: -2, dist: 4.6, pp: [520, 400] },
     { f: tTake + 45, lat: PHI, lon: BREST[1], dist: 1.35, pp: [560, 470] }, { f: zOut, lat: PHI, lon: BREST[1], dist: 1.35, pp: [560, 470] },
-    { f: zOut + 45, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }, { f: LEN(k) + 10, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }], f);
-  const zoom = clamp((4.3 - cam.dist) / (4.3 - 1.35), 0, 1);
+    { f: zOut + 45, lat: 30, lon: 0, dist: 4.6, pp: [520, 400] }, { f: LEN(k) + 10, lat: 30, lon: 0, dist: 4.6, pp: [520, 400] }], f);
+  // K6 k6r1: as s10 (dist 4.6, centre y 400, picture h 790, the source line steps aside while the growing disc covers it)
+  const zoom = clamp((4.6 - cam.dist) / (4.6 - 1.35), 0, 1);
+  const dk = discOf(cam, GFULL), srcO = zoom >= 0.5 ? 1 : clamp((814 - (dk.c[1] + dk.r)) / 12, 0, 1);
   const la0 = PHI - 2.5, la1 = PHI + 2.5, lo0 = BREST[1] - 2.5, lo1 = BREST[1] + 2.5;
   const lift = 0.06 * prog(f, tFlat, tFlat + 40) * (1 - prog(f, tShrink, tShrink + 60));
   const G = globeG(cam, GFULL);
@@ -128,7 +131,7 @@ const S27: React.FC = () => {
   const sc = (p: Pt, c: Pt): Pt => [c[0] + (p[0] - c[0]) * shrink, c[1] + (p[1] - c[1]) * shrink];
   const cc = G.pw(ll(PHI, BREST[1], 1 + lift));
   const tile = ring(1 + lift).map((p) => sc(p, cc)), base = ring(1.001);
-  const sW = sc(G.pw(ll(PHI, lo0, 1 + lift)), cc), sS = sc(G.pw(ll(la0, BREST[1], 1 + lift)), cc);
+  const sW = sc(G.pw(ll(PHI, lo0, 1 + lift)), cc), sS = sc(G.pw(ll(la0, BREST[1], 1 + lift)), cc), sE = sc(G.pw(ll(PHI, lo1, 1 + lift)), cc);
   const cornerSW = sc(G.pw(ll(la0, lo0, 1 + lift)), cc), cornerSE = sc(G.pw(ll(la0, lo1, 1 + lift)), cc), cornerNW = sc(G.pw(ll(la1, lo0, 1 + lift)), cc);
   const u = (a: Pt, b: Pt): Pt => { const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1; return [(b[0] - a[0]) / d, (b[1] - a[1]) / d]; };
   const eD = rep(EQ_S27, String.raw`\cos\varphi`, String.raw`\textcolor{${C.gold}}{\cos\varphi}`);
@@ -144,11 +147,15 @@ const S27: React.FC = () => {
           <path d={`M${cornerSW[0] + 26 * u(cornerSW, cornerSE)[0]} ${cornerSW[1] + 26 * u(cornerSW, cornerSE)[1]}l${26 * u(cornerSW, cornerNW)[0]} ${26 * u(cornerSW, cornerNW)[1]}l${-26 * u(cornerSW, cornerSE)[0]} ${-26 * u(cornerSW, cornerSE)[1]}`}
             fill="none" stroke={C.gold} strokeWidth={4} opacity={fin(f, tRight)} />
         </g>} />
-      <TeX s={String.raw`a\,\Delta\varphi`} x={sW[0] - 26} y={sW[1]} size={T.key} c={C.second} ax={1} o={oP * fin(f, tNS) * fout(f, tShrink)} halo />
-      <TeX s={String.raw`a\cos\varphi\,\Delta\lambda`} x={sS[0]} y={sS[1] + 44} size={T.key} c={C.second} ax={0.5} o={oP * fin(f, tEW) * fout(f, tShrink)} halo />
+      {/* K6 k6r1: the two side lengths sit on the darkened panel with gold links to their sides (on the sharp picture they were must-class
+          text on imagery) */}
+      <TeX s={String.raw`a\,\Delta\varphi`} x={XZ} y={470} size={T.key} c={C.second} ax={0} o={oP * fin(f, tNS) * fout(f, tShrink)} />
+      <TeX s={String.raw`a\cos\varphi\,\Delta\lambda`} x={XZ} y={560} size={T.key} c={C.second} ax={0} o={oP * fin(f, tEW) * fout(f, tShrink)} />
       <GlobeFrame id="s27k" zoom={zoom} right={zoom} disc={discOf(cam, GFULL)} />
-      <SourceBelow text={SRC_G} pic={{ x: 60, y: 20, w: 960, h: 810 }} w={960} name="globe src" />
+      <SourceBelow text={SRC_G} pic={{ x: 60, y: 20, w: 960, h: 790 }} w={960} o={srcO} name="globe src" />
       <Svg>
+        <CurvedLink f={f} from={[XZ - 14, 466]} to={[sE[0] + 10, sE[1]]} start={tNS + 6} end={tShrink} bend={30} o={oP} />
+        <CurvedLink f={f} from={[XZ - 14, 556]} to={[sS[0], sS[1] + 10]} start={tEW + 6} end={tShrink} bend={-40} o={oP} />
         <Keyword f={f} text="areas" at={[XZ, 160]} appear={0} out={chipA - 20} />
         <Keyword f={f} text="why do we care?" at={[XZ, 470]} appear={tWhy} out={tTake - 20} />
         <Keyword f={f} text="to average over the Earth" at={[XZ, 560]} appear={tAvg} out={tTake - 20} s={T.floor + 4} />
@@ -174,7 +181,8 @@ const S28: React.FC = () => {
   const f = useCurrentFrame(), k = K("s28_box_areas");
   const tRad = SS(k, 1), tA2 = SS(k, 2), tEq = AT(k, 3, "that's about"), tCos = SS(k, 4), tK = AT(k, 5, "is about"), tB = AT(k, 6, "it's about"), tL = AT(k, 7, "it's only about"),
     tChk = SS(k, 8), tEx = SS(k, 9);
-  const st = orbitCam({ az: -62, el: 38, dist: 260, target: [60, 0, 0], fov: 30 }, [520, 430]);
+  // still review k6r2: the tile row 80 px right (its left tags "27.8 km" / "wide:" started at x 20, left of the x 60 margin)
+  const st = orbitCam({ az: -62, el: 38, dist: 260, target: [60, 0, 0], fov: 30 }, [600, 430]);
   const pr = projector(st, 1920, 1080);
   const tiles = [{ w: E5.wide[0], n: "equator", at: tEq, A: AR.flat[0] }, { w: E5.wide[1], n: "Khulna", at: tK, A: AR.flat[1] },
     { w: E5.wide[2], n: "Brest", at: tB, A: AR.flat[2] }, { w: E5.wide[3], n: "Longyearbyen", at: tL, A: AR.flat[3] }];
@@ -183,7 +191,9 @@ const S28: React.FC = () => {
   const H = E5.tall;
   const P = (x: number, y: number, z = 0): Pt => pr.p([x, y, z] as V3);
   const quad = (x: number, w: number) => `M${P(x, 0)[0]} ${P(x, 0)[1]}L${P(x + w, 0)[0]} ${P(x + w, 0)[1]}L${P(x + w, H)[0]} ${P(x + w, H)[1]}L${P(x, H)[0]} ${P(x, H)[1]}Z`;
-  const rows = [String.raw`0.25^\circ\approx0.00436\ \text{rad}`, String.raw`a^2=6371^2\approx40.6\times10^{6}\ \text{km}^2`];
+  // build 1: one more digit on screen, then the spoken rounding, so every product below is true to its last digit (A1/A6; DS24)
+  const rows = [String.raw`0.25^\circ=0.25\times\dfrac{\pi}{180}`, String.raw`=0.0043633\approx0.00436\ \text{rad}`,
+    String.raw`a^2=6371^2=40.59\times10^{6}`, String.raw`\approx40.6\times10^{6}\ \text{km}^2`];
   return (
     <Scene>
       <Svg>
@@ -192,27 +202,32 @@ const S28: React.FC = () => {
             <path d={quad(t.x, t.w)} fill={C.gold} fillOpacity={0.12 + 0.5 * o} stroke={C.gold} strokeWidth={4} />
             <path d={`M${P(t.x, 0)[0]} ${P(t.x, 0)[1]}L${P(t.x + t.w, 0)[0]} ${P(t.x + t.w, 0)[1]}`} stroke={C.second} strokeWidth={6} />
             <path d={`M${P(t.x, 0)[0]} ${P(t.x, 0)[1]}L${P(t.x, H)[0]} ${P(t.x, H)[1]}`} stroke={C.second} strokeWidth={6} />
-            <Lbl x={(P(t.x, 0)[0] + P(t.x + t.w, 0)[0]) / 2} y={(P(t.x, 0)[1] + P(t.x + t.w, 0)[1]) / 2 + 40} t={`${t.w.toFixed(1)}`} c={C.second} s={T.floor} a="middle" />
-            <Lbl x={(P(t.x + t.w / 2, 0)[0])} y={P(t.x + t.w / 2, 0)[1] + 100} t={t.n} c={C.key} s={T.floor} a="middle" />
+            <Lbl x={(P(t.x, 0)[0] + P(t.x + t.w, 0)[0]) / 2} y={(P(t.x, 0)[1] + P(t.x + t.w, 0)[1]) / 2 + 58} t={`${t.w.toFixed(1)} km`} c={C.second} s={T.floor} a="middle" />
+            <Lbl x={(P(t.x + t.w / 2, 0)[0])} y={P(t.x + t.w / 2, 0)[1] + 118} t={t.n} c={C.key} s={T.floor} a="middle" />
           </g>; })}
-        <Lbl x={P(0, H / 2)[0] - 20} y={P(0, H / 2)[1]} t="27.8 km" c={C.second} s={T.floor} a="end" />
-        <Lbl x={P(0, 0)[0] - 20} y={P(0, 0)[1] + 40} t="km wide:" c={C.muted} s={T.floor} a="end" />
+        <Lbl x={P(0, H / 2)[0] - 40} y={P(0, H / 2)[1] + 6} t="27.8 km" c={C.second} s={T.floor} a="end" />
+        {/* still review k6r2: the row label "km wide:" (it started at x −66) is gone; each width carries its "km" */}
 
         <g opacity={fin(f, tEx)}>
           <Lbl x={1100} y={790} t="exact: 513.1 km²" c={C.gold} s={T.key} />
           <Check x={1560} y={790} s={0.8} />
         </g>
-        <Keyword f={f} text="every other box: × cos φ" at={[XC, 400]} appear={tCos} out={tK - 15} s={T.floor + 4} />
+        {/* K6 k6r1: the keyword and the box-area formula sit under the tiles (the paging rows slid up into the formula at y 140 and the
+            keyword at y 400 sat on the rows) */}
+        <Keyword f={f} text="every other box: × cos φ" at={[120, 710]} appear={tCos} out={tK - 15} s={T.floor + 4} />
       </Svg>
-      <TeX s={EQ_S28} x={XC} y={140} size={T.calc} c={C.ink} o={fin(f, 0)} />
+      <TeX s={EQ_S28} x={120} y={800} size={T.calc} c={C.ink} o={fin(f, 0)} />
       <CalcStack f={f} x={XC} y={230} size={52} maxLines={4} rows={[
         { lhs: "", rhs: rows[0], at: tRad },
-        { lhs: "", rhs: rows[1], at: tA2 },
-        { lhs: "", rhs: String.raw`40.6\times10^{6}\times0.00436\times0.00436`, at: tEq - 40, size: 46 },
-        { lhs: "", rhs: String.raw`\approx773\ \text{km}^2`, at: tEq, cont: true },
-        { lhs: "", rhs: String.raw`773\times0.9219\approx712\ \text{km}^2`, at: tK - 20 },
-        { lhs: "", rhs: String.raw`773\times0.6639\approx513\ \text{km}^2`, at: tB - 20 },
-        { lhs: "", rhs: String.raw`773\times0.2045\approx158\ \text{km}^2`, at: tL - 20 },
+        { lhs: "", rhs: rows[1], at: AT(k, 1, "is zero point"), cont: true },
+        { lhs: "", rhs: rows[2], at: tA2 },
+        { lhs: "", rhs: rows[3], at: AT(k, 2, "about forty"), cont: true },
+        { lhs: "", rhs: String.raw`40.59\times10^{6}\times0.0043633`, at: SS(k, 3), size: 46 },
+        { lhs: "", rhs: String.raw`\times0.0043633`, at: AT(k, 3, "and times"), size: 46, cont: true },
+        { lhs: "", rhs: String.raw`\approx772.8\approx773\ \text{km}^2`, at: tEq, cont: true },
+        { lhs: "", rhs: String.raw`772.8\times0.9219\approx712.4\approx712\ \text{km}^2`, at: tK - 20, size: 46 },
+        { lhs: "", rhs: String.raw`772.8\times0.6639\approx513.1\approx513\ \text{km}^2`, at: tB - 20, size: 46 },
+        { lhs: "", rhs: String.raw`772.8\times0.2045\approx158.0\approx158\ \text{km}^2`, at: tL - 20, size: 46 },
       ]} />
     </Scene>
   );
@@ -292,10 +307,11 @@ const S30: React.FC = () => {
         <Check x={1780} y={730} s={0.8} o={fin(f, tToo)} />
       </Svg>
       <TeX s={String.raw`\Delta\varphi`} x={at(25, R + 30)[0]} y={at(25, R + 30)[1]} size={T.key} c={C.gold} ax={0} o={fin(f, tStep)} halo />
-      <TeX s={String.raw`\Delta(\sin\varphi)`} x={xb - 20} y={(y20 + y30) / 2 - 70} size={T.key} c={C.second} ax={1} o={fin(f, tCall)} halo />
+      {/* K6 k6r1: right of the orange step bar (above it, it sat on the "30°" tag and the arrow tip) */}
+      <TeX s={String.raw`\Delta(\sin\varphi)`} x={xb + 22} y={(y20 + y30) / 2} size={T.key} c={C.second} ax={0} o={fin(f, tCall)} halo />
       <TeX s={EQ_S30} x={XC} y={160} size={T.calc} c={C.ink} o={fin(f, tSo)} />
       <CalcStack f={f} x={XC + 40} y={260} size={52} maxLines={4} rows={[
-        { lhs: String.raw`10^\circ`, rhs: String.raw`\approx0.1745\ \text{rad}`, at: tTen },
+        { lhs: String.raw`10^\circ`, rhs: String.raw`=10\times\dfrac{\pi}{180}\approx0.1745\ \text{rad}`, at: tTen },   // still review: the conversion's arithmetic (A1)
         { lhs: String.raw`\cos25^\circ`, rhs: String.raw`\approx0.906`, at: tMid + 30 },
         { lhs: "", rhs: String.raw`0.906\times0.1745\approx0.158`, at: tProd - 20, ul: tToo },
         { lhs: "", rhs: String.raw`\sin30^\circ-\sin20^\circ=0.5-0.342`, at: tGrow + 40, size: 46 },
@@ -332,8 +348,9 @@ const S31: React.FC = () => {
       <Svg>
         <line x1={A.x} y1={A.y + A.h} x2={A.x + A.w + 10} y2={A.y + A.h} stroke={C.muted} strokeWidth={3} />
         <line x1={A.x} y1={A.y - 10} x2={A.x} y2={A.y + A.h} stroke={C.muted} strokeWidth={3} />
-        {[0, 30, 60, 90].map((d) => <Lbl key={d} x={X(d)} y={A.y + A.h + 36} t={`${d}°`} c={C.muted} s={48} a="middle" b={false} />)}
-        {[0, 0.5, 1].map((s) => <Lbl key={s} x={A.x - 14} y={Y(s)} t={`${s}`} c={C.muted} s={48} a="end" b={false} />)}
+        {/* K6 k6r1: the x ticks 8 px lower and the y tick "0" 12 px higher (the two origin labels touched) */}
+        {[0, 30, 60, 90].map((d) => <Lbl key={d} x={X(d)} y={A.y + A.h + 44} t={`${d}°`} c={C.muted} s={48} a="middle" b={false} />)}
+        {[0, 0.5, 1].map((s) => <Lbl key={s} x={A.x - 14} y={Y(s) - (s === 0 ? 12 : 0)} t={`${s}`} c={C.muted} s={48} a="end" b={false} />)}
         <Lbl x={A.x + 14} y={A.y - 30} t="sin φ" c={C.muted} s={T.floor} b={false} />
         <path d={curve} fill="none" stroke={C.second} strokeWidth={5} opacity={0.8} />
         <path d={stairs} fill="none" stroke={C.gold} strokeWidth={width === 10 ? 7 : 4} opacity={fin(f, tStair)} />
@@ -344,8 +361,8 @@ const S31: React.FC = () => {
         <Keyword f={f} text="integration" at={[XC, 820]} appear={tName} out={tPrime - 20} />
       </Svg>
       {/* Part 1 lessons C1: φ′ set in KaTeX (a prime in the sans label is not maths) */}
-      <TeX s={String.raw`\varphi'\text{: the latitude of each strip}`} x={XC} y={830} size={T.floor} c={C.key} o={fin(f, tPrime)} />
-      <TeX s={eqs[1]} x={XC} y={630} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, SS(k, 7) - 12)} />
+      <TeX s={String.raw`\varphi'\text{: latitude of each strip}`} x={XC + 104} y={830} size={T.floor} c={C.key} o={fin(f, tPrime)} />{/* k6r2: right of the integral's "sum" */}
+      <TeX s={eqs[1]} x={XC} y={665} size={T.eq} c={C.ink} o={fin(f, tBand) * fout(f, SS(k, 7) - 12)} />
       <CalcStack f={f} x={XC} y={600} size={44} maxLines={4} rows={[
         { lhs: "", rhs: String.raw`\sin10^\circ\approx0.174,\ \ \sin20^\circ\approx0.342`, at: SS(k, 7), out: SS(k, 8) - 8, c: C.muted },
         { lhs: "", rhs: String.raw`0^\circ\to10^\circ:\ \ 0.174-0=0.174`, at: AT(k, 7, "zero point one seven four"), out: SS(k, 8) - 8 },
@@ -355,7 +372,7 @@ const S31: React.FC = () => {
       <TeX s={String.raw`0.174+0.168+0.158`} x={XC} y={730} size={52} c={C.ink} o={win(f, SS(k, 8), tName - 22)} />
       <TeX s={String.raw`=0.500=\sin30^\circ`} x={XC + 60} y={800} size={52} c={C.ink} o={win(f, AT(k, 8, "They add up"), tName - 22)} />
       <Layered parts={[{ t: String.raw`\int_0^{\varphi}`, u: { w: String.raw`\text{sum}`, c: C.gold } }, { t: String.raw`\cos\varphi'` },
-        { t: String.raw`\,d\varphi'`, u: { w: String.raw`\text{tiny step}`, c: C.gold } }, { t: String.raw`=\sin\varphi` }]} x={XC} y={660} size={72}
+        { t: String.raw`\,d\varphi'`, u: { w: String.raw`\text{tiny step}`, c: C.gold } }, { t: String.raw`=\sin\varphi` }]} x={XC} y={705} size={64}
         layers={[{ t: "all", o: fin(f, tInt) }, { t: [], u: [0, 2], o: fin(f, tInt + 25) }]} />
       {void [tZero, tSum, tFive, SE, eqs[0]]}
     </Scene>
@@ -390,10 +407,12 @@ const S32: React.FC = () => {
           <Lbl x={G.p(55, cam.lon)[0]} y={G.p(55, cam.lon)[1]} t="½" c={C.key} s={T.key} a="middle" o={win(f, tHalfNH, tBoth)} />
         </g>
         <Keyword f={f} text="check the formula" at={[XC, 150]} appear={0} out={t255 - 60} />
-        <Keyword f={f} text="half of the Earth" at={[XC, 830]} appear={tBoth + 20} out={tTrop - 20} />
-        <Keyword f={f} text="tropics: huge · polar caps: small" at={[XC, 830]} appear={tTrop} s={46} />
+        {/* K6 k6r1: the rows start at y 210 with 2 lines (3 reached the share formula, the top one sat on "check the formula"); the formula,
+            the sin 30° / sin 48.4° lines move down and the last two keywords move to the top row */}
+        <Keyword f={f} text="half of the Earth" at={[XC, 150]} appear={tBoth + 20} out={tTrop - 20} />
+        <Keyword f={f} text="tropics: huge · polar caps: small" at={[XC, 150]} appear={tTrop} s={46} />
       </Svg>
-      <CalcStack f={f} x={XC + 40} y={110} size={52} maxLines={3} rows={[
+      <CalcStack f={f} x={XC + 40} y={210} size={52} maxLines={2} rows={[
         { lhs: String.raw`\sin90^\circ`, rhs: "=1", at: AT(k, 2, "is one") },
         { lhs: String.raw`a^2`, rhs: String.raw`=6371^2\approx40.6\times10^{6}\ \text{km}^2`, at: SS(k, 3) },
         { lhs: String.raw`2\pi a^2`, rhs: String.raw`\approx2\pi\times40.6\times10^{6}`, at: t255 - 20 },
@@ -401,9 +420,9 @@ const S32: React.FC = () => {
         { lhs: String.raw`4\pi a^2`, rhs: String.raw`=2\times255\times10^{6}`, at: AT(k, 4, "twice that") },
         { lhs: "", rhs: String.raw`=510\times10^{6}\ \text{km}^2`, at: AT(k, 4, "about five hundred") - 20, cont: true },
       ]} />
-      <TeX s={EQ_S32} x={XC} y={460} size={T.eq} c={C.ink} o={fin(f, tShare)} />
-      <TeX s={String.raw`\sin30^\circ=\dfrac12`} x={XC} y={635} size={60} c={C.ink} o={win(f, tHalf, tBrest - 22)} />
-      <TeX s={String.raw`\sin48.4^\circ\approx0.7478\approx\dfrac34`} x={XC} y={740} size={60} c={C.second} o={fin(f, AT(k, 10, "zero point seven four"))} />
+      <TeX s={EQ_S32} x={XC} y={610} size={T.eq} c={C.ink} o={fin(f, tShare)} />
+      <TeX s={String.raw`\sin30^\circ=\dfrac12`} x={XC} y={770} size={60} c={C.ink} o={win(f, tHalf, tBrest - 22)} />
+      <TeX s={String.raw`\sin48.4^\circ\approx0.7478\approx\dfrac34`} x={XC} y={770} size={60} c={C.second} o={fin(f, AT(k, 10, "zero point seven four"))} />
       {void [tSouth]}
     </Scene>
   );
@@ -508,16 +527,19 @@ const S34: React.FC = () => {
         <Keyword f={f} text="cos φ weighting" at={[XC, 830]} appear={tHow} />
       </Svg>
       <SourceBelow text="Data: ERA5 (Copernicus C3S) · 2-m temperature · September 2026 monthly mean · 1° grid" pic={MB} w={900} o={oMap} name="s34 src" />
-      <TeX s={String.raw`\approx7.1\ ^\circ\text{C}`} x={1570} y={360} size={60} c={C.local} o={fin(f, tP) * oMap} />
-      <TeX s={String.raw`\approx16.3\ ^\circ\text{C}`} x={1570} y={470} size={60} c={C.first} o={fin(f, tWt) * oMap} />
+      <TeX s={String.raw`\approx7.1\ ^\circ\text{C}`} x={1594} y={360} size={54} c={C.local} o={fin(f, tP) * oMap} />
+      <TeX s={String.raw`\approx16.3\ ^\circ\text{C}`} x={1594} y={470} size={54} c={C.first} o={fin(f, tWt) * oMap} />
       <TeX s={String.raw`16.3-7.1=9.2\ ^\circ\text{C}\ \text{too cold}`} x={XC} y={760} size={50} c={C.neg} o={fin(f, AT(k, 14, "more than nine")) * oMap} />
-      <CalcStack f={f} x={XC} y={250} size={50} maxLines={3} o={fout(f, tReal - 10)} rows={[
+      <CalcStack f={f} x={XC} y={230} size={50} maxLines={4} o={fout(f, tWhy - 20)} rows={[
         { lhs: "", rhs: String.raw`\text{plain: }(30+0)\div2=15\ ^\circ\text{C}`, at: tPlain },
         { lhs: "", rhs: String.raw`\text{weights: }\cos0^\circ=1,\ \cos60^\circ=\dfrac12`, at: tHalf + 20 },
         { lhs: "", rhs: String.raw`\text{weighted: }(30\times1+0\times\dfrac12)`, at: tW + 30, size: 46 },
-        { lhs: "", rhs: String.raw`\div1.5=20\ ^\circ\text{C}`, at: tW + 60, size: 46, cont: true },
+        // still review k6r2 (A1): the divisor is the sum of the weights, 1 + ½ = 1.5, and the numerator 30; then 30 ÷ 1.5 on "That's twenty"
+        { lhs: "", rhs: String.raw`\div(1+\dfrac12)`, at: AT(k, 8, "all divided"), size: 46, cont: true },
+        { lhs: "", rhs: String.raw`=30\div1.5=20\ ^\circ\text{C}`, at: SS(k, 9), size: 46 },
       ]} />
-      <TeX s={EQ_S34} x={XC} y={620} size={T.eq} c={C.ink} o={fin(f, tWhy) * fout(f, tReal - 10)} />
+      {/* k6r3: the toy rows (all worked by "That's twenty") leave before the general formula comes in on the next sentence, in their place */}
+      <TeX s={EQ_S34} x={XC} y={520} size={T.eq} c={C.ink} o={fin(f, tWhy) * fout(f, tReal - 10)} />
       <KeepLine f={f} k={k} lines={["boxes shrink by cos φ ·", "half the Earth within", "30° of the equator"]} />
       {/* Part 1 lessons B4: the keep line's own picture, in the empty picture zone (the band 30° S-30° N, narrower boxes near the pole) */}
       <KeepPic kind="band" c={[470, 450]} R={300} o={fin(f, 4, 10) * fout(f, SE(k, 1), 10)} />

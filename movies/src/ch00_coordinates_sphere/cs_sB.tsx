@@ -5,7 +5,7 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { C, T } from "../house/kit/type";
-import { Pt, RightTick, pulse } from "../house/kit/draw";
+import { Pt, RightTick, pulse, textW } from "../house/kit/draw";
 import { ClockGlyph } from "../house/kit/icons";
 import { SunGlyph, CurvedLink } from "../house/kit/extras";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
@@ -61,7 +61,7 @@ const S13: React.FC = () => {
           {gseg(Gg, [0, 0, 0], [ey[0] * 1.4, ey[1] * 1.4, ey[2] * 1.4], C.second, 5, fin(f, tY))}
           {gdot(Gg, 0, 0, C.second, 9, fin(f, tX))}{gdot(Gg, 0, 90, C.second, 9, fin(f, tY))}
           {plab(Gg, 0, 0, "Gulf of Guinea", win(f, tGG, tHat) * facing(Gg, 0, 0), 20, 36, "start", true)}
-          {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), 20, 36, "start", true)}
+          {plab(Gg, 0, 90, "Indian Ocean", win(f, tIO, tHat) * facing(Gg, 0, 90), -20, 40, "end", true)}{/* K6 k6r1: below-left of its dot (it ran over the y axis and its tag) */}
           {plab(Gg, 15, 89, "Bay of Bengal", win(f, tIO + 20, tHat) * facing(Gg, 15, 89), 20, -30, "start", true)}
           <g opacity={fin(f, tHat)}>
             <Arrow p={c0} q={xh} color={C.second} w={9} head={30} />
@@ -73,9 +73,7 @@ const S13: React.FC = () => {
         <RightTick at={c0} u1={u(ex)} u2={u(ey)} s={24} c={C.ink} o={fin(f, tRA)} />
         <RightTick at={c0} u1={u(ey)} u2={u(ez)} s={24} c={C.ink} o={fin(f, tRA + 10)} />
         <RightTick at={c0} u1={u(ex)} u2={u(ez)} s={24} c={C.ink} o={fin(f, tRA + 20)} />
-        <Lbl x={tip(ez, 1.48)[0] + 20} y={tip(ez, 1.48)[1]} t="z" c={C.second} s={T.key} o={fin(f, tZ)} />
-        <Lbl x={tip(ex, 1.5)[0]} y={tip(ex, 1.5)[1] - 30} t="x" c={C.second} s={T.key} a="middle" o={fin(f, tX)} />
-        <Lbl x={tip(ey, 1.5)[0]} y={tip(ey, 1.5)[1] - 30} t="y" c={C.second} s={T.key} a="middle" o={fin(f, tY)} />
+        {void 0}
         <Keyword f={f} text="an arrow in space" at={[XC, 150]} appear={0} out={tAx - 30} />
         <Keyword f={f} text="three axes from the centre" at={[XC, 150]} appear={tAx} />
         <path d={arcD([1640, 560], 50, 200, -60)} fill="none" stroke={VIOLET} strokeWidth={5} opacity={fin(f, tCross)} />
@@ -93,6 +91,10 @@ const S13: React.FC = () => {
       <TeX s={String.raw`${H.y}\to 0^\circ\,\text{N},\ 90^\circ\,\text{E}`} x={XC} y={345} size={56} c={C.ink} o={fin(f, tHat + 25)} />
       <TeX s={String.raw`${H.z}\to\text{North Pole}`} x={XC} y={430} size={56} c={C.ink} o={fin(f, tHat + 40)} />
       <TeX s={EQ_S13} x={XC} y={560} size={T.eq} c={C.ink} o={fin(f, tCross)} />
+      {/* checklist "all maths is TeX": the axis names x, y, z are KaTeX */}
+      <TeX s="z" x={tip(ez, 1.48)[0] + 20} y={tip(ez, 1.48)[1] - 16} size={T.key} c={C.second} ax={0} o={fin(f, tZ)} halo />
+      <TeX s="x" x={Math.max(80, tip(ex, 1.5)[0])} y={tip(ex, 1.5)[1] - 46} size={T.key} c={C.second} ax={0.5} o={fin(f, tX)} halo />
+      <TeX s="y" x={tip(ey, 1.5)[0]} y={tip(ey, 1.5)[1] - 46} size={T.key} c={C.second} ax={0.5} o={fin(f, tY)} halo />
       <TeX s={H.x} x={xh[0] + 10} y={xh[1] + 34} size={48} c={C.second} ax={0.5} o={fin(f, tHat)} halo />
       <TeX s={H.y} x={yh[0] + 10} y={yh[1] + 34} size={48} c={C.second} ax={0.5} o={fin(f, tHat)} halo />
       <TeX s={H.z} x={zh[0] + 34} y={zh[1]} size={48} c={C.second} ax={0} o={fin(f, tHat)} halo />
@@ -107,16 +109,18 @@ const S13: React.FC = () => {
 const sideItems = (t: { c: number; ax: number; eq: number; ar: number; phi: number; drop: number; rt: number; tri: number }): FItem[] => [
   { k: "dot", p: [0, 0], c: C.gold, at: t.c },
   { k: "seg", a: [0, -1.1], b: [0, 1.18], c: C.local, w: 4, at: t.ax },
-  { k: "tex", p: [0, 1.18], t: "z", c: C.second, size: 54, dx: -34, dy: -6, at: t.ax, same: false },
-  { k: "lbl", p: [0, 1.0], t: "North Pole", c: C.key, dx: 26, dy: -40, dx3: -26, a3: "end", at: t.ax + 6, same: false },
+  // K6 k6r1: the pole end of the axis is above the 3-D view's frame, so its two tags are drawn in the flat view only (they overlapped
+  // each other off-frame); flat-view tags sit clear of the axis, rim and dashed leg (t2 = shorter flat text)
+  { k: "tex", p: [0, 1.18], t: "z", c: C.second, size: 54, dx: -34, dy: -6, at: t.ax, same: false, only: "2" },
+  { k: "lbl", p: [0, 1.0], t: "North Pole", c: C.key, dx: 26, dy: -40, at: t.ax + 6, same: false, only: "2" },
   { k: "seg", a: [0, 0], b: [1, 0], c: C.local, w: 4, at: t.eq },
-  { k: "lbl", p: [0.55, 0], t: "equator plane", c: C.muted, dy: 40, a: "middle", dy3: 40, a3: "middle", at: t.eq + 6, same: false, out: t.drop - 20 },
+  { k: "lbl", p: [0.55, 0], t: "equator plane", t2: "equator", c: C.muted, dy: 40, a: "middle", dy3: 40, a3: "middle", at: t.eq + 6, same: false, out: t.drop - 20 },
   { k: "arrow", a: [0, 0], b: [BU, BV], c: RAD, at: t.ar },
   { k: "tex", p: [BU / 2, BV / 2], t: "a", c: RAD, size: 54, dx: -30, dy: -26, at: t.ar + 6, same: false },
   { k: "wedge", r: 0.34, a0: 0, a1: PHI, c: C.gold, fo: 0.2, at: t.phi },
   { k: "arc", r: 0.34, a0: 0, a1: PHI, c: C.gold, w: 6, at: t.phi, same: false },
   { k: "tex", p: [0.22 * Math.cos(CB / 2), 0.22 * Math.sin(CB / 2)], t: String.raw`\varphi`, c: C.gold, size: 48, at: t.phi + 4, same: false },
-  { k: "lbl", p: [0.36 * Math.cos(CB / 2), 0.36 * Math.sin(CB / 2)], t: "48.4°", c: C.gold, dx: 16, dy: 8, at: t.phi + 10, same: false, only: "2" },
+  { k: "lbl", p: [0, 0], t: "48.4°", c: C.gold, dx: -18, dy: 46, a: "end", at: t.phi + 10, same: false, only: "2" },   // left of the axis, under the equator line (it sat on the dashed leg)
   { k: "seg", a: [BU, BV], b: [BU, 0], c: C.local, w: 5, dash: "12 8", at: t.drop },
   { k: "tick", p: [BU, 0], d1: [-1, 0], d2: [0, 1], s: 0.08, at: t.rt },
   { k: "fill", pts: [[0, 0], [BU, 0], [BU, BV]], c: C.ink, fo: 0.1, at: t.tri },
@@ -159,12 +163,17 @@ const S15: React.FC = () => {
   const items: FItem[] = [
     ...allOld(sideItems(ALL0)),
     { k: "band", a: [BU, 0], b: [BU, BV], c: C.second, w: 16, at: tUp },
-    { k: "lbl", p: [BU, BV / 2], t: "opposite φ", c: C.gold, dx: 20, dy: 0, at: tOpp, out: tRes - 20, only: "2" },
-    { k: "tex", p: [BU, BV / 2], t: String.raw`z\approx4764\ \text{km}`, c: C.second, size: 48, dx: 22, ax: 0, dx3: 22, ax3: 0, at: tRes },
+    // K6 k6r1: flat tags start right of the rim (they straddled it); the radius glows in both views on "six thousand three hundred …"
+    // (it replaces a gold link from the a-row that had to cross the axis and the equator line)
+    { k: "band", a: [0, 0], b: [BU, BV], c: RAD, w: 18, fo: 0.35, at: tA, out: tSin + 30 },
+    { k: "lbl", p: [BU, BV / 2], t: "opposite φ", c: C.gold, dx: 70, dy: 0, at: tOpp, out: tRes - 20, only: "2" },
+    // 3-D: just "z" at the leg (the full tag ran past the 3-D frame into the flat view's 48.4°); the flat tag and the rows carry the number
+    { k: "tex", p: [BU, BV / 2], t: "z", t2: String.raw`z\approx4764\ \text{km}`, c: C.second, size: 48, dx: 70, ax: 0, dx3: 22, ax3: 0, at: tRes },
     { k: "arrow", a: [BU + 0.06, BV * 0.55], b: [BU + 0.06, BV * 0.95], c: C.gold, w: 5, head: 22, at: tPole },
     { k: "arrow", a: [0, 0], b: [Math.cos(30 * D2R), -Math.sin(30 * D2R)], c: RAD, w: 6, head: 24, o: 0.6, at: tSouth },
     { k: "band", a: [Math.cos(30 * D2R), 0], b: [Math.cos(30 * D2R), -Math.sin(30 * D2R)], c: C.neg, w: 12, at: tSouth + 15, same: false },
-    { k: "lbl", p: [Math.cos(30 * D2R), -0.25], t: "−  z < 0", c: C.neg, dx: 22, at: tSouth + 25, same: false },
+    // 3-D only, under the southern tip (it ran off the 3-D frame's right edge; the flat side has the keyword "south: z < 0")
+    { k: "lbl", p: [Math.cos(30 * D2R), -0.5], t: "−  z < 0", c: C.neg, dy: 56, a: "middle", at: tSouth + 25, same: false, only: "3" },
   ];
   const P2 = faceFlat(FLAT_C, FLAT_R);
   return (
@@ -177,12 +186,13 @@ const S15: React.FC = () => {
         <Keyword f={f} text="North Pole" at={[KX3, 500]} appear={tPole} s={48} out={tSouth - 22} />
         <Keyword f={f} text="south: z < 0" at={[KX3, 440]} appear={tSouth + 20} c={C.neg} s={48} />
         <Lbl x={XC} y={660} t="opposite = long × sin" c={C.key} s={T.floor} o={win(f, tRule, tEq - 15)} />
-        <CurvedLink f={f} from={[XC - 10, 640]} to={ptOf(P2, [BU * 0.45, BV * 0.45])} start={tA + 10} end={tSin + 30} bend={-40} />
+        {void P2}
       </Svg>
-      <Layered parts={[{ t: "z=" }, { t: "a", c: RAD, u: { w: String.raw`\text{Earth's radius}`, c: C.gold } }, { t: String.raw`\sin\varphi`, u: { w: String.raw`\text{sine of the latitude}`, c: C.gold } }]}
-        x={XC} y={680} size={T.eq} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tNum - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 20) * fout(f, tNum - 15) }]} />
+      {/* K6 k6r1: the under-words ran past x 1842 (to 2099): calc size and shorter words */}
+      <Layered parts={[{ t: "z=" }, { t: "a", c: RAD, u: { w: String.raw`\text{radius}`, c: C.gold } }, { t: String.raw`\sin\varphi`, u: { w: String.raw`\text{sine of latitude}`, c: C.gold } }]}
+        x={XC} y={680} size={T.calc} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tNum - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 20) * fout(f, tNum - 15) }]} />
       <TeX s={EQ_S15} x={KX3} y={330} size={T.calc} c={C.ink} o={fin(f, tNum)} />
-      <CalcStack f={f} x={XC + 60} y={600} size={52} maxLines={2} rows={[
+      <CalcStack f={f} x={XC + 60} y={560} size={52} maxLines={2} rows={[
         { lhs: "a", rhs: String.raw`=6371\ \text{km}`, at: tA },
         { lhs: "", rhs: String.raw`\sin48.4^\circ\approx0.7478`, at: tSin, cont: true },
         { lhs: "z", rhs: String.raw`=6371\ \text{km}\times0.7478\approx4764\ \text{km}`, at: tRes - 30, size: 46 },
@@ -200,10 +210,12 @@ const S16: React.FC = () => {
   const items: FItem[] = [
     ...allOld(sideItems(ALL0)),
     { k: "band", a: [BU, 0], b: [BU, BV], c: C.second, w: 10, fo: 0.4, at: 0, same: false },
-    { k: "tex", p: [BU, BV / 2], t: String.raw`4764\ \text{km}`, c: C.second, size: 44, dx: 22, ax: 0, dx3: 22, ax3: 0, at: 0, same: false },
+    // K6 k6r1: flat tags right of the rim / clear of the axis; the flat leg tag is a cos φ alone (the number is in the 3-D view and the rows);
+    // the 3-D leg tag starts right of the 3-D axis
+    { k: "tex", p: [BU, BV / 2], t: String.raw`4764\ \text{km}`, c: C.second, size: 44, dx: 70, ax: 0, dx3: 22, ax3: 0, at: 0, same: false },
     { k: "band", a: [0, 0], b: [BU, 0], c: C.second, w: 16, at: 4 },
-    { k: "lbl", p: [BU / 2, 0], t: "next to φ", c: C.gold, dy: 44, a: "middle", at: tNext, out: tRes - 20, only: "2" },
-    { k: "tex", p: [BU / 2, 0], t: String.raw`${EQ_S16}\approx4230\ \text{km}`, c: C.second, size: 48, dy: 50, dy3: 50, at: tRes },
+    { k: "lbl", p: [BU / 2, 0], t: "next to φ", c: C.gold, dx: 30, dy: 44, a: "middle", at: tNext, out: tRes - 20, only: "2" },
+    { k: "tex", p: [BU / 2, 0], t: String.raw`${EQ_S16}\approx4230\ \text{km}`, t2: EQ_S16, c: C.second, size: 48, dx: 16, dx3: 80, dy: 50, dy3: 50, at: tRes },
   ];
   const disc3 = (G: GProj) => {
     const o = fin(f, tDisc);
@@ -229,7 +241,7 @@ const S16: React.FC = () => {
         <Lbl x={XC} y={660} t="next = long × cos" c={C.key} s={T.floor} o={win(f, tNext, tCos - 15)} />
         <Keyword f={f} text="up 4764 · out 4230 km" at={[XC, 820]} appear={tBoth} s={T.floor} />
       </Svg>
-      <CalcStack f={f} x={XC + 160} y={600} size={52} maxLines={2} rows={[
+      <CalcStack f={f} x={XC + 160} y={545} size={52} maxLines={2} rows={[   // K6 k6r1: y 600 put the fraction row into the caption band (y 920)
         { lhs: String.raw`\cos48.4^\circ`, rhs: String.raw`\approx0.6639`, at: tCos },
         { lhs: String.raw`a\cos\varphi`, rhs: String.raw`=6371\ \text{km}\times0.6639`, at: tRes - 30 },
         { lhs: "", rhs: String.raw`\approx4230\ \text{km}`, at: tRes, cont: true },
@@ -250,7 +262,7 @@ const S17: React.FC = () => {
     { k: "dot", p: [0, 0], c: C.gold, at: 0, same: false },
     { k: "arrow", a: [0, 0], b: [1.2, 0], c: C.second, w: 5, head: 24, at: 0, same: false },
     { k: "arrow", a: [0, 0], b: [0, 1.2], c: C.second, w: 5, head: 24, at: 0, same: false },
-    { k: "tex", p: [1.2, 0], t: "x", c: C.second, size: 54, dx: 10, dy: 40, at: 0, same: false },
+    { k: "tex", p: [1.2, 0], t: "x", c: C.second, size: 54, dx: 10, dy: -34, dx3: -14, dy3: -34, at: 0, same: false },   // K6 k6r1: above the tip
     { k: "tex", p: [0, 1.2], t: "y", c: C.second, size: 54, dx: 34, at: 0, same: false },
     { k: "dot", p: [fu, fv], c: C.key, r: 9, at: tFoot },
     { k: "seg", a: [0, 0], b: [fu, fv], c: RAD, w: 8, at: tLeg },
@@ -258,8 +270,10 @@ const S17: React.FC = () => {
     { k: "arc", r: 0.45, a0: 0, a1: BREST[1], c: C.second, w: 7, at: tLam },
     { k: "seg", a: [0, 0], b: [fu, 0], c: C.second, w: 6, dash: "14 8", at: tParts },
     { k: "seg", a: [fu, 0], b: [fu, fv], c: C.second, w: 6, dash: "14 8", at: tParts + 15, same: false },
-    { k: "lbl", p: [fu * 0.5, 0], t: "x ≈ 4217 km", c: C.second, dy: 46, a: "middle", dy3: 46, a3: "middle", at: tX },
-    { k: "lbl", p: [fu, fv], t: "y ≈ −332 km", c: C.neg, dx: 24, dy: 40, dx3: 24, dy3: 40, at: tY },
+    // K6 k6r1: the x and y tags are TeX (maths), the flat y tag sits right of the rim (the y leg is 10 px long there), the 3-D y tag
+    // under the x tag (it ran off the 3-D frame); the flat x tag drops "km" to stay inside the disc
+    { k: "tex", p: [fu * 0.5, 0], t: String.raw`x\approx4217\ \text{km}`, t2: String.raw`x\approx4217`, c: C.second, size: 46, dy: 46, dy3: 46, at: tX },
+    { k: "tex", p: [fu, fv], t: String.raw`y\approx-332\ \text{km}`, c: C.neg, size: 46, dx: 90, dy: 62, ax: 0, dx3: 20, dy3: 104, ax3: 1, at: tY },
   ];
   const G = globeG(CAM_TOP, TV3);
   const pB = G.pw(ll(BREST[0], BREST[1])), pF = G.pw(facePt(eqFace, fu, fv));
@@ -315,6 +329,8 @@ const S18: React.FC = () => {
   const r = BR.rhat as number[];
   const pX: V3 = [ex[0] * r[0], ex[1] * r[0], ex[2] * r[0]], pXY: V3 = [pX[0] + ey[0] * r[1], pX[1] + ey[1] * r[1], pX[2] + ey[2] * r[1]], pB = ll(BREST[0], BREST[1]);
   const c0 = G.pw([0, 0, 0]), sB = G.pw(pB), sX = G.pw(pX), sXY = G.pw(pXY);
+  // K6 k6r2: the 4217 tag sits 58 px off the x leg along its upward normal (straight above, it sat on the sloping leg and the x axis)
+  const lX = Math.hypot(sX[0] - c0[0], sX[1] - c0[1]) || 1, nX0: Pt = [(sX[1] - c0[1]) / lX, -(sX[0] - c0[0]) / lX], nX: Pt = nX0[1] > 0 ? [-nX0[0], -nX0[1]] : nX0;
   const hatO = fin(f, tUnit), tealO = 1 - 0.7 * fin(f, tDiv);
   const sHat = G.pw([pB[0] * 1.32, pB[1] * 1.32, pB[2] * 1.32]);
   const lines = cutAt(EQ_S18, String.raw`,\quad `);
@@ -341,7 +357,7 @@ const S18: React.FC = () => {
       <TeX s={H.r} x={sHat[0] + 30} y={sHat[1] - 10} size={T.key} c={C.second} ax={0} o={fin(f, tHat)} halo />
       <GSrc />
       <Svg>
-        <Lbl x={(c0[0] + sX[0]) / 2} y={(c0[1] + sX[1]) / 2 + 40} t="4217" c={C.second} s={T.floor} a="middle" o={fin(f, tB) * fade1} />
+        <Lbl x={(c0[0] + sX[0]) / 2 + 58 * nX[0]} y={(c0[1] + sX[1]) / 2 + 58 * nX[1] + 14} t="4217" c={C.second} s={T.floor} a="middle" o={fin(f, tB) * fade1} />
         <Lbl x={(sX[0] + sXY[0]) / 2 + 26} y={(sX[1] + sXY[1]) / 2 + 30} t="−332" c={C.neg} s={T.floor} o={fin(f, tB + 10) * fade1} />
         <Lbl x={(sXY[0] + sB[0]) / 2 + 22} y={(sXY[1] + sB[1]) / 2} t="4764" c={C.second} s={T.floor} o={fin(f, tB + 20) * fade1} />
         <Keyword f={f} text="two steps together" at={[XC, 130]} appear={0} out={t1 - 20} />
@@ -349,10 +365,11 @@ const S18: React.FC = () => {
         <CurvedLink f={f} from={[XC - 10, 480]} to={[(c0[0] + sB[0]) / 2, (c0[1] + sB[1]) / 2]} start={tPy2 + 20} end={tOne} bend={50} />
         <Keyword f={f} text="Part 4: up" at={[XC, 470]} appear={tP4} />
       </Svg>
-      <Layered parts={[{ t: P1[0] }, { t: String.raw`a\cos\varphi`, u: { w: String.raw`\text{distance from the axis}`, c: C.gold } }, { t: P1[1] }]} x={XC} y={150} size={T.eq}
+      {/* K6 k6r1: the 4217 tag above the x leg (it sat on the −332 tag); the three lines at calc size (the under-word ran to x 2004) */}
+      <Layered parts={[{ t: P1[0] }, { t: String.raw`a\cos\varphi`, u: { w: String.raw`\text{distance from the axis}`, c: C.gold } }, { t: P1[1] }]} x={XC} y={150} size={T.calc}
         layers={[{ t: "all", o: fin(f, t1) * fadeF }, { t: [], u: [1], o: fin(f, tAx) * fadeF }]} />
-      <TeX s={lines[1]} x={XC} y={305} size={T.eq} c={C.ink} o={fin(f, t2) * fadeF} />
-      <TeX s={lines[2]} x={XC} y={420} size={T.eq} c={C.ink} o={fin(f, t3) * fadeF} />
+      <TeX s={lines[1]} x={XC} y={305} size={T.calc} c={C.ink} o={fin(f, t2) * fadeF} />
+      <TeX s={lines[2]} x={XC} y={420} size={T.calc} c={C.ink} o={fin(f, t3) * fadeF} />
       <TeX s={String.raw`(4217,\ -332,\ 4764)\ \text{km}`} x={XC} y={520} size={60} c={C.ink} o={fin(f, tB) * fadeF} />
       <TeX s={String.raw`(4217,\ -332,\ 4764)\ \text{km}`} x={XC} y={130} size={52} c={C.ink} o={fin(f, tChk - 10) * fade1} />
       <CalcStack f={f} x={XC + 20} y={250} size={46} maxLines={3} rows={[
@@ -379,9 +396,13 @@ const S19: React.FC = () => {
     tZ = AT(k, 4, "about two thousand four hundred"), tR = AT(k, 5, "five thousand eight hundred"), tLow = SS(k, 6), tTop = SS(k, 7), tX = AT(k, 8, "about forty one"),
     tY = AT(k, 9, "five thousand eight hundred"), tAlong = SS(k, 10), tLen = SS(k, 11);
   const zOut = tLL + 40;
-  const cam = globePath([{ f: 0, lat: 28, lon: 40, dist: 4.3, pp: [520, 420] }, { f: tKh + 10, lat: 21, lon: 89.5, dist: 2.4, pp: [600, 470] },
-    { f: tLL, lat: 21, lon: 89.5, dist: 2.4, pp: [600, 470] }, { f: zOut + 30, lat: 22, lon: 70, dist: 4.3, pp: [520, 420] }, { f: LEN(k) + 10, lat: 22, lon: 70, dist: 4.3, pp: [520, 420] }], f);
-  const zoom = clamp((4.3 - cam.dist) / (4.3 - 2.4), 0, 1);
+  // K6 k6r1: unzoomed dist 4.3 → 4.6 and centre y 420 → 400 (the disc reached y 829, on the source line); the place names show only
+  // when zoomed in (≥ 85 %: they piled up while the camera zoomed), and the source line steps aside while the growing disc covers it
+  const cam = globePath([{ f: 0, lat: 28, lon: 40, dist: 4.6, pp: [520, 400] }, { f: tKh + 10, lat: 21, lon: 89.5, dist: 2.4, pp: [600, 470] },
+    { f: tLL, lat: 21, lon: 89.5, dist: 2.4, pp: [600, 470] }, { f: zOut + 30, lat: 22, lon: 70, dist: 4.6, pp: [520, 400] }, { f: LEN(k) + 10, lat: 22, lon: 70, dist: 4.6, pp: [520, 400] }], f);
+  const zoom = clamp((4.6 - cam.dist) / (4.6 - 2.4), 0, 1);
+  const gz = clamp((zoom - 0.85) / 0.15, 0, 1);
+  const dk = discOf(cam, GFULL), srcO = zoom >= 0.5 ? 1 : clamp((814 - (dk.c[1] + dk.r)) / 12, 0, 1);
   const oA = fout(f, tSide - 12, 12), oB = win(f, tSide, tTop - 12, 12), oC = fin(f, tTop, 12);
   const CK = KH.ll[0] * D2R, KU = Math.cos(CK), KV = Math.sin(CK);
   const am: [number, number][] = KH.amphan.lat.map((la: number, i: number) => [la, KH.amphan.lon[i]]);
@@ -406,8 +427,9 @@ const S19: React.FC = () => {
     { k: "dot", p: [fu, fv], c: C.key, r: 9, at: tTop + 10 },
     { k: "seg", a: [0, 0], b: [fu, fv], c: RAD, w: 8, at: tTop + 20, same: false },
     { k: "arc", r: 0.4, a0: 0, a1: KH.ll[1], c: C.second, w: 6, at: tTop + 30, same: false },
-    { k: "lbl", p: [fu, 0], t: "x ≈ 41 km", c: C.second, dx: 18, dy: 40, dx3: 18, dy3: 40, at: tX },
-    { k: "lbl", p: [fu, fv / 2], t: "y ≈ 5873 km", c: C.second, dx: 24, dx3: 24, at: tY },
+    // checklist "all maths is TeX": the x and y tags are KaTeX
+    { k: "tex", p: [fu, 0], t: String.raw`x\approx41\ \text{km}`, c: C.second, size: 46, dx: -18, dy: 40, ax: 1, dx3: 18, dy3: 40, ax3: 0, at: tX },   // flat: left of the y axis (it ran into the x-axis name)
+    { k: "tex", p: [fu, fv / 2], t: String.raw`y\approx5873\ \text{km}`, c: C.second, size: 46, dx: 24, ax: 0, dx3: 24, ax3: 0, at: tY },
   ];
   const Gt = globeG(CAM_TOP, TV3);
   const pK = Gt.pw(ll(KH.ll[0], KH.ll[1])), c0t = Gt.pw([0, 0, 0]);
@@ -419,14 +441,14 @@ const S19: React.FC = () => {
           over={(Gg) => <>
             <path d={llPath(Gg, am, 1.003)} fill="none" stroke={C.key} strokeWidth={4} strokeOpacity={0.85} opacity={fin(f, tAm)} />
             {gdot(Gg, KH.ll[0], KH.ll[1], C.gold, 11, fin(f, tKh))}
-            {plab(Gg, KH.ll[0], KH.ll[1], "Khulna", fin(f, tKh), 20, -32)}
-            {plab(Gg, 24.2, 90.3, "Bangladesh", fin(f, tBd), 0, 0, "middle")}
-            {plab(Gg, 21.8, 89.2, "Sundarbans", fin(f, tSb), -16, 30, "end", true)}
-            {plab(Gg, 17.5, 88.5, "Bay of Bengal", fin(f, tBd + 20), 0, 0, "middle", true)}
-            {plab(Gg, am[Math.floor(am.length * 0.35)][0], am[Math.floor(am.length * 0.35)][1], "Amphan", fin(f, tAm), 22, 0, "start", true)}
+            {plab(Gg, KH.ll[0], KH.ll[1], "Khulna", fin(f, tKh) * gz, 20, -32)}
+            {plab(Gg, 27.2, 90.3, "Bangladesh", fin(f, tBd) * gz, 0, 0, "middle")}
+            {plab(Gg, 21.8, 89.2, "Sundarbans", fin(f, tSb) * gz, -16, 30, "end", true)}
+            {plab(Gg, 17.5, 88.5, "Bay of Bengal", fin(f, tBd + 20) * gz, 0, 0, "middle", true)}
+            {plab(Gg, am[Math.floor(am.length * 0.35)][0], am[Math.floor(am.length * 0.35)][1], "Amphan", fin(f, tAm) * gz, 22, 0, "start", true)}
           </>} />
         <GlobeFrame id="s19k" zoom={zoom * oA} right={zoom * oA} disc={discOf(cam, GFULL)} />
-        <SourceBelow text="Image: NASA BMNG · Natural Earth · Track: IBTrACS v04r01 (Amphan, 16–21 May 2020)" pic={{ x: 60, y: 20, w: 1300, h: 790 }} w={1300} o={oA} name="s19 src" />
+        <SourceBelow text="Image: NASA BMNG · Natural Earth · Track: IBTrACS v04r01 (Amphan, 16–21 May 2020)" pic={{ x: 60, y: 20, w: 1300, h: 790 }} w={1300} o={oA * srcO} name="s19 src" />
       </> : null}
       {oB > 0 ? <TwoView f={f} cam={camFace(KH.ll[1])} cut={merCut(1, KH.ll[1])} face={merFace(KH.ll[1])} flatC={FLAT_C} flatR={FLAT_R} items={sideK} o3={oB} flatO={oB}
         flatBase={(P) => <MerFlatBase P={P} />} /> : null}
@@ -490,7 +512,9 @@ const S20: React.FC = () => {
             {gdot(Gg, PHI, lonD, C.gold, 12, 1)}
           </>;
         }} />
-      <TeX s={String.raw`a\cos\varphi`} x={(pc[0] + pb[0]) / 2} y={(pc[1] + pb[1]) / 2 - 40} size={48} c={C.second} ax={0.5} o={fin(f, tRad) * fout(f, tDist - 10)} halo />
+      {/* K6 k6r1: right of the axis (the dashed axis ran through the tag at the segment's middle) */}
+      {/* k6r2: the globe turns Brest across the axis, so the tag starts right of whichever end is further right (continuous), under the parallel (k6r3: above it, the ring crossed it) */}
+      <TeX s={String.raw`a\cos\varphi`} x={Math.max(pc[0], pb[0]) + 18} y={pb[1] + 44} size={48} c={C.second} ax={0} o={fin(f, tRad) * fout(f, tDist - 10)} halo />
       <GSrc />
       <Svg>
         <Keyword f={f} text="a second meaning" at={[XC, 140]} appear={0} out={tHow - 20} />
@@ -511,7 +535,8 @@ const S20: React.FC = () => {
         </g>
         <Lbl x={1180} y={800} t="speed = radius × turning rate" c={C.key} s={T.floor} o={fin(f, tRing)} />
       </Svg>
-      <TeX s="T" x={1180} y={300} size={T.key} c={C.ink} o={fin(f, tCapT)} />
+      {/* still review k6r2: T names the "one turn" row, left of its clock (under the star icon it sat on the star) */}
+      <TeX s="T" x={1084} y={236} size={T.key} c={C.ink} ax={1} o={win(f, tCapT, tRes - 22)} />
       <CalcStack f={f} x={XC} y={430} size={46} maxLines={4} rows={[
         { lhs: "", rhs: String.raw`360^\circ\div365\ \text{days}\approx1^\circ\ \text{a day}`, at: AT(k, 8, "orbit"), out: tDist - 10, c: C.muted },
         { lhs: "", rhs: String.raw`\text{noon to noon: }360^\circ+1^\circ=361^\circ`, at: AT(k, 8, "orbit") + 40, out: tDist - 10, c: C.muted },
@@ -562,7 +587,9 @@ const S21: React.FC = () => {
       <GSrc />
       <Svg>
         {places.slice(1).map((p) => { const [, b] = tipOf(p.la, p.lo, p.U); const o = win(f, p.at + 20, p.at + 260) * facing(G, p.la, p.lo);
-          return o > 0 ? <g key={p.name} data-lc-maplabel="1"><Lbl x={b[0] + 14} y={b[1] - 30} t={`${p.name} ≈ ${Math.round(p.U)}`} c={C.key} s={T.floor} o={o} /></g> : null; })}
+          // K6 k6r1: the tag stays left of x 1070 (Khulna's ran into the maths column)
+          const tg = `${p.name} ≈ ${Math.round(p.U)}`;
+          return o > 0 ? <g key={p.name} data-lc-maplabel="1"><Lbl x={Math.min(b[0] + 14, 1070 - textW(tg, T.floor))} y={b[1] - 30} t={tg} c={C.key} s={T.floor} o={o} /></g> : null; })}
         <g data-lc-maplabel="1"><Lbl x={G.p(90, 0)[0] + 20} y={G.p(90, 0)[1] + 34} t="0" c={C.key} s={T.floor} o={fin(f, tPole) * (G.vis(90, 0) ? 1 : 0)} /></g>
         <Keyword f={f} text="east, the way the Earth turns" at={[XC, 620]} appear={tEast} out={tFeel - 20} s={T.floor + 4} />
         <Keyword f={f} text="we move with the ground" at={[XC, 620]} appear={tFeel} />
@@ -599,22 +626,23 @@ const S22: React.FC = () => {
   const chipA = AT(k, 1, "skip ahead"), chipEnd = chipA + 255;
   const tNorth = SS(k, 2), tSlice = SS(k, 3), tMer = AT(k, 4, "a meridian is part of"), tRad = SS(k, 5), tWalk = SS(k, 6), tRule = SS(k, 7), tEq = SS(k, 8), tOne = SS(k, 9),
     tTurn = SS(k, 10), tDeg = AT(k, 11, "which is zero point"), tKm = AT(k, 12, "that's about"), tEasy = SS(k, 13), tSame = SS(k, 14), tAlways = SS(k, 15);
-  const s0 = 20 + 60 * prog(f, tSame, tSame + 120), s1 = s0 + 5;
+  // K6 k6r1: the moving 5° wedge stops at 60° (at 80° its Δy tag left the 3-D frame) and the radius a is drawn at −45°, clear of the wedge
+  const s0 = 20 + 40 * prog(f, tSame, tSame + 120), s1 = s0 + 5;
   const step = (a: number): [number, number] => [Math.cos(a * D2R), Math.sin(a * D2R)];
   const items: FItem[] = [
     { k: "dot", p: [0, 0], c: C.gold, at: 0, same: false },
     { k: "seg", a: [0, -1.1], b: [0, 1.15], c: C.local, w: 3, at: 0, same: false },
     { k: "arc", r: 1, a0: -90, a1: 90, c: C.second, w: 8, at: tMer },
-    { k: "seg", a: [0, 0], b: step(60), c: RAD, w: 6, at: tRad },
-    { k: "tex", p: [0.5 * Math.cos(60 * D2R), 0.5 * Math.sin(60 * D2R)], t: "a", c: RAD, size: 54, dx: -30, dy: -20, at: tRad + 6, same: false },
+    { k: "seg", a: [0, 0], b: step(-45), c: RAD, w: 6, at: tRad },
+    { k: "tex", p: [0.5 * Math.cos(-45 * D2R), 0.5 * Math.sin(-45 * D2R)], t: "a", c: RAD, size: 54, dx: -30, dy: 30, at: tRad + 6, same: false },
     { k: "seg", a: [0, 0], b: step(s0), c: C.key, w: 4, at: tWalk },
     { k: "seg", a: [0, 0], b: step(s1), c: C.key, w: 4, at: tWalk, same: false },
     { k: "arc", r: 0.32, a0: s0, a1: s1, c: C.gold, w: 7, at: tWalk + 20, same: false },
     { k: "arc", r: 1.03, a0: s0, a1: s1, c: C.second, w: 16, at: tWalk + 30, same: false },
     { k: "tex", p: [0.42 * Math.cos((s0 + 2.5) * D2R), 0.42 * Math.sin((s0 + 2.5) * D2R)], t: String.raw`\Delta\varphi`, c: C.gold, size: 44, dx: 34, at: tWalk + 20, same: false },
-    { k: "tex", p: [1.1 * Math.cos((s0 + 2.5) * D2R), 1.1 * Math.sin((s0 + 2.5) * D2R)], t: String.raw`\Delta y`, c: C.second, size: 48, dx: 30, ax: 0, dx3: 30, ax3: 0, at: tWalk + 30, same: false },
+    { k: "tex", p: [1.1 * Math.cos((s0 + 2.5) * D2R), 1.1 * Math.sin((s0 + 2.5) * D2R)], t: String.raw`\Delta y`, c: C.second, size: 48, dx: 30, ax: 0, dx3: 30, dy3: 30, ax3: 0, at: tWalk + 30, same: false },
     { k: "dot", p: step(s1), c: C.key, r: 11, at: tWalk + 30, same: false },
-    { k: "lbl", p: step(s0 + 2.5), t: "111.2 km", c: C.second, dx: 70, dy: 40, at: tSame, only: "2" },
+    { k: "lbl", p: [0, Math.sin((s0 + 2.5) * D2R)], t: "111.2 km", c: C.second, dx: -16, dy: 14, a: "end", at: tSame, only: "2" },   // left of the axis (it ran into the keywords)
   ];
   const flatIn = Math.max(chipEnd, tNorth);
   return (
@@ -629,8 +657,9 @@ const S22: React.FC = () => {
         <Keyword f={f} text="same everywhere" at={[KX3, 380]} appear={tSame} s={48} />
       </Svg>
       <TeX s={String.raw`s=r\,\theta`} x={XC} y={660} size={60} c={C.ink} o={win(f, tRule, tEq - 15)} />
-      <Layered parts={[{ t: String.raw`\Delta y=` }, { t: "a", c: RAD, u: { w: String.raw`\text{Earth's radius}`, c: C.gold } },
-        { t: String.raw`\,\Delta\varphi`, u: { w: String.raw`\text{change in latitude (rad)}`, c: C.gold } }]} x={XC} y={680} size={T.eq}
+      {/* K6 k6r1: calc size and shorter under-words (they ran to x 2299) */}
+      <Layered parts={[{ t: String.raw`\Delta y=` }, { t: "a", c: RAD, u: { w: String.raw`\text{radius}`, c: C.gold } },
+        { t: String.raw`\,\Delta\varphi`, u: { w: String.raw`\text{change in }\varphi\text{ (rad)}`, c: C.gold } }]} x={XC} y={680} size={T.calc}
         layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTurn - 15) }, { t: [], u: [1, 2], o: fin(f, tEq + 25) * fout(f, tTurn - 15) }]} />
       <TeX s={EQ_S22} x={KX3} y={460} size={T.eq} c={C.ink} o={fin(f, tTurn)} />
       <CalcStack f={f} x={XC + 50} y={600} size={44} maxLines={3} rows={[
@@ -654,7 +683,11 @@ const S23: React.FC = () => {
     ...allOld(sideItems(ALL0)).filter((x) => x.k !== "fill" && x.k !== "tick" && !(x.k === "seg" && x.dash)),
     { k: "arc", r: 1.025, a0: PHI * (1 - walk), a1: PHI, c: C.second, w: 14, at: tSouth + 20 },
     { k: "seg", a: [BU, BV], b: [BU, 0], c: C.second, w: 8, dash: "14 8", at: tLonger },
-    { k: "tex", p: [BU, BV / 2], t: String.raw`4764\ \text{km}`, c: C.second, size: 44, dx: -16, ax: 1, dx3: -16, ax3: 1, at: tLonger + 10, same: false },
+    // K6 k6r1: the 4764 tag sat on the radius arrow and its "a" (3-D: now right of the leg); the flat view names both lengths right of the rim
+    // instead of two gold callouts whose links crossed the rim, the axis and the rows
+    { k: "tex", p: [BU, BV / 2], t: "z", c: C.second, size: 48, dx3: 22, ax3: 0, at: tLonger + 10, same: false, only: "3" },   // k6r2: "4764 km" crossed the curve's arc
+    { k: "lbl", p: [1.03 * Math.cos(40 * D2R), 1.03 * Math.sin(40 * D2R)], t: "along the curve: 5382 km", c: C.second, dx: 30, dy: -6, at: tCurve, only: "2" },
+    { k: "lbl", p: [BU, BV / 2], t: "straight: 4764 km", c: C.second, dx: 70, dy: 30, at: tStraight, only: "2" },
   ];
   const P2 = faceFlat(FLAT_C, FLAT_R);
   const IC: Pt = [1600, 470], IR = 110;
@@ -672,11 +705,10 @@ const S23: React.FC = () => {
         <g opacity={win(f, tMin + 10, tSouth - 15)}>
           <Magnify src={ptOf(P2, [1.025 * BU, 1.025 * BV])} srcR={24} at={IC} r={IR + 12} label="1′ magnified 60×" ly={IC[1] - IR - 46} o={1} />
         </g>
-        <SideCallout f={f} lines={["5382 km along the curve"]} at={[XC + 4, 800]} appear={tCurve} target={ptOf(P2, [1.03 * Math.cos(CB / 2), 1.03 * Math.sin(CB / 2)])} bend={-40} s={T.floor + 2} />
-        <SideCallout f={f} lines={["4764 km straight"]} at={[KX3 + 4, 330]} appear={tStraight} target={ptOf(P2, [BU + 0.03, BV * 0.55])} bend={30} s={T.floor + 2} />
+        {void P2}
       </Svg>
       <CalcStack f={f} x={XC + 40} y={600} size={56} maxLines={2} rows={[
-        { lhs: "", rhs: String.raw`111.2\ \text{km}\div60\approx1.85\ \text{km}`, at: AT(k, 1, "which is about") },
+        { lhs: "", rhs: String.raw`111.2\ \text{km}\div60\approx1.85\ \text{km}`, at: AT(k, 1, "which is about"), out: tCurve - 15 },
         { lhs: "", rhs: String.raw`48.4\times111.2\ \text{km}\approx5382\ \text{km}`, at: tMul - 20, out: tCurve - 15 },
       ]} />
     </Scene>
@@ -721,11 +753,12 @@ const S24: React.FC = () => {
           <line x1={pC[0]} y1={pC[1]} x2={cE[0]} y2={cE[1]} stroke={C.local} strokeWidth={3} strokeDasharray="8 8" />
         </g>} />
       <Svg>
-        <Keyword f={f} text="going east" at={[1450, 150]} appear={0} out={tRound - 20} s={50} />
-        <Keyword f={f} text="circle round" at={[1450, 150]} appear={tRound} s={50} />
-        <Keyword f={f} text="the axis" at={[1450, 215]} appear={tRound} s={50} />
-        <Keyword f={f} text="not round" at={[1450, 330]} appear={tRad} s={50} />
-        <Keyword f={f} text="the centre" at={[1450, 395]} appear={tRad} s={50} />
+        {/* K6 k6r1: the keyword column 1450 → 1540 (the flat Δx tag reached "the axis") */}
+        <Keyword f={f} text="going east" at={[1540, 150]} appear={0} out={tRound - 20} s={50} />
+        <Keyword f={f} text="circle round" at={[1540, 150]} appear={tRound} s={50} />
+        <Keyword f={f} text="the axis" at={[1540, 215]} appear={tRound} s={50} />
+        <Keyword f={f} text="not round" at={[1540, 330]} appear={tRad} s={50} />
+        <Keyword f={f} text="the centre" at={[1540, 395]} appear={tRad} s={50} />
         <g opacity={fin(f, tTwo)}>
           {bar(XC + 220, 760, 73.8 * 3, C.second, 1)}{bar(XC + 220, 820, 111.2 * 3, C.local, 0.7)}
           <Lbl x={XC + 200} y={760} t="east 73.8" c={C.key} s={T.floor} a="end" />
@@ -733,7 +766,7 @@ const S24: React.FC = () => {
         </g>
       </Svg>
       <Layered parts={[{ t: String.raw`\Delta x=` }, { t: String.raw`a\cos\varphi`, u: { w: String.raw`\text{radius of the parallel}`, c: C.gold } }, { t: String.raw`\,\Delta\lambda` }]}
-        x={XC} y={620} size={T.eq} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTwo - 15) }, { t: [], u: [1], o: fin(f, tEq + 25) * fout(f, tTwo - 15) }]} />
+        x={XC} y={650} size={T.calc} layers={[{ t: "all", o: fin(f, tEq) * fout(f, tTwo - 15) }, { t: [], u: [1], o: fin(f, tEq + 25) * fout(f, tTwo - 15) }]} />
       <TeX s={EQ_S24} x={XC} y={610} size={60} c={C.ink} o={fin(f, tTwo)} />
       <TeX s={String.raw`\Delta x=4230\ \text{km}\times0.01745\approx73.8\ \text{km}`} x={XC} y={790} size={44} c={C.ink} o={win(f, tNum - 20, tTwo - 22)} />
       <TeX s={String.raw`\cos48.4^\circ\approx\dfrac23`} x={1560} y={760} size={46} c={C.ink} o={fin(f, tTwo + 20)} />

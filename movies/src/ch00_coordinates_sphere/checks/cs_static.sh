@@ -13,4 +13,4 @@ echo "== symbol lint (Part 1 lessons C1/C2/C4, --strict)"; "$PY" tools/movie_sym
 echo "== eq_check";   "$PY" movies/src/ch00_coordinates_sphere/checks/eq_check.py
 echo "== ssr";        (cd movies && node src/ch00_coordinates_sphere/checks/ssr/run.mjs --step 10 --public "$S/public" 2>&1 | tail -30)
 echo "== ssr --3d";   (cd movies && node src/ch00_coordinates_sphere/checks/ssr/run.mjs --step 15 --3d 2>&1 | tail -10)
-echo "== timing";     "$PY" movies/src/ch00_coordinates_sphere/checks/make_timing.py
+echo "== timing (final TTS, build 1)"; "$PY" -c "import json,sys; t=json.load(open('movies/ch00/ch00_coordinates_sphere/timing.json',encoding='utf-8')); ok='provisional' not in t and not t['warnings'] and t['self_check']['len_ok'] and t['self_check']['cues_ok']; print('final' if ok else 'NOT FINAL', t['total_s'], 's', t['total_frames'], 'frames', t['cues'], 'cues'); sys.exit(0 if ok else 1)"

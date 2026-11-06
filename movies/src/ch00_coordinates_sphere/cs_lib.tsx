@@ -244,8 +244,12 @@ export const gseg = (G: GProj, a: V3, b: V3, c: string, w = 8, o = 1, dash?: str
   <line x1={G.pw(a)[0]} y1={G.pw(a)[1]} x2={G.pw(b)[0]} y2={G.pw(b)[1]} stroke={c} strokeWidth={w} strokeLinecap="round" opacity={o} strokeDasharray={dash} />;
 export const garrow = (G: GProj, a: V3, b: V3, c: string, w = 8, head = 30, o = 1) => <Arrow p={G.pw(a)} q={G.pw(b)} color={c} w={w} head={head} o={o} />;
 /** an outlined place name at a spot on the globe (house K6 spot-label class) */
-export const plab = (G: GProj, la: number, lo: number, t: string, o = 1, dx = 16, dy = 0, a: "start" | "middle" | "end" = "start", italic = false, rad = 1) =>
-  o <= 0 || !G.vis(la, lo, rad) ? null : <g data-lc-maplabel="1"><Lbl x={G.p(la, lo, rad)[0] + dx} y={G.p(la, lo, rad)[1] + dy} t={t} c={C.key} s={T.floor} a={a} o={o} italic={italic} /></g>;
+export const plab = (G: GProj, la: number, lo: number, t: string, o = 1, dx = 16, dy = 0, a: "start" | "middle" | "end" = "start", italic = false, rad = 1) => {
+  if (o <= 0 || !G.vis(la, lo, rad)) return null;
+  // still review k6r2: a map label never starts left of the x 60 margin (s12's "15° N" started at x 45)
+  const x = G.p(la, lo, rad)[0] + dx, w = textW(t, T.floor), left = a === "start" ? x : a === "end" ? x - w : x - w / 2;
+  return <g data-lc-maplabel="1"><Lbl x={x + Math.max(0, 60 - left)} y={G.p(la, lo, rad)[1] + dy} t={t} c={C.key} s={T.floor} a={a} o={o} italic={italic} /></g>;
+};
 /** how squarely a surface point faces the camera (1 ≥ 25° above the limb, 0 at 5°): labels leave before their point does */
 export const facing = (G: GProj, la: number, lo: number): number => {
   const q = G.w(la, lo), c = G.camPos, d: V3 = [c[0] - q[0], c[1] - q[1], c[2] - q[2]], n = Math.hypot(...d) || 1;
@@ -309,7 +313,8 @@ export const faceTick = (P: FP, u: number, v: number, d1: [number, number], d2: 
 export const SameMark: React.FC<{ f: number; at: number; p: Pt }> = ({ f, at, p }) => {
   const u = (f - at) / 30;
   if (u < 0 || u > 1) return null;
-  return <circle cx={p[0]} cy={p[1]} r={22 + 18 * u} fill="none" stroke={C.gold} strokeWidth={4} opacity={0.9 * Math.sin(Math.PI * u)} />;
+  // a 1-s emphasis ring (like the house Keyword pulse ring that the K6 probe skips): data-lc-ok keeps it out of the overlap shapes
+  return <g data-lc-ok="1"><circle cx={p[0]} cy={p[1]} r={22 + 18 * u} fill="none" stroke={C.gold} strokeWidth={4} opacity={0.9 * Math.sin(Math.PI * u)} /></g>;
 };
 
 // ---------------------------------------------------------------- arcs and arrow heads (SVG)
@@ -456,7 +461,7 @@ export const KeepPic: React.FC<{ kind: "swap" | "slice" | "steps" | "band"; c: P
         <TeX s={String.raw`a\sin\varphi`} x={Bt[0] + 18} y={(Bt[1] + F[1]) / 2 + 40} size={50} c={C.second} o={o} halo />
         <TeX s={String.raw`a\cos\varphi`} x={(c[0] + Bt[0]) / 2} y={Bt[1] - 40} size={50} c={C.second} ax={0.5} o={o} halo />
         <TeX s={String.raw`\Omega\,a\cos\varphi`} x={Bt[0] + 30} y={Bt[1] + 40} size={50} c={C.first} o={o} halo />
-        <TeX s={String.raw`\Omega`} x={c[0] + 60} y={top[1] + 66} size={46} c={VIOLET} o={o} halo />
+        <TeX s={String.raw`\Omega`} x={c[0] - 24} y={top[1]} size={46} c={VIOLET} ax={1} o={o} halo />{/* K6 k6r1: left of the axis, above its spin arc (it sat on the a cos φ tag) */}
       </>}
     </>;
   }
@@ -476,9 +481,11 @@ export const KeepPic: React.FC<{ kind: "swap" | "slice" | "steps" | "band"; c: P
         <path d={run(0, -12, 12)} fill="none" stroke={C.second} strokeWidth={12} />
         <path d={run(BREST[0], -12, 12)} fill="none" stroke={C.second} strokeWidth={12} />
         <line x1={front(0, 0)[0] - 0.62 * R} y1={front(0, 0)[1]} x2={front(0, 0)[0] - 0.62 * R} y2={front(0, 0)[1] - 0.34 * R} stroke={C.gold} strokeWidth={12} />
-        <Lbl x={front(0, 0)[0] - 0.62 * R - 18} y={front(0, 0)[1] - 0.17 * R} t="north" c={C.gold} s={T.floor} a="end" />
+        {/* K6 k6r1: "north" left of the sphere (it sat on the equator ellipse), "east × cos φ" right of it (it crossed the outline) */}
+        <Lbl x={c[0] - R - 16} y={front(0, 0)[1] - 0.17 * R} t="north" c={C.gold} s={T.floor} a="end" />
         <Lbl x={front(0, 14)[0] + 16} y={front(0, 14)[1] + 30} t="east" c={C.second} s={T.floor} />
-        <Lbl x={front(BREST[0], 14)[0] + 16} y={front(BREST[0], 14)[1] + 30} t="east × cos φ" c={C.second} s={T.floor} />
+        <Lbl x={c[0] + R + 16} y={front(BREST[0], 14)[1] + 6} t="east" c={C.second} s={T.floor} />
+        <Lbl x={c[0] + R + 16} y={front(BREST[0], 14)[1] + 58} t="× cos φ" c={C.second} s={T.floor} />
       </> : <>
         <rect x={c[0] - 0.12 * R} y={par(0).y + par(0).ry - 0.1 * R} width={0.24 * R} height={0.1 * R} fill={C.gold} stroke={C.gold} strokeWidth={3} />
         <rect x={c[0] - 0.12 * R * Math.cos(70 * D2R)} y={par(70).y + par(70).ry - 0.1 * R * 0.6} width={0.24 * R * Math.cos(70 * D2R)} height={0.1 * R * 0.6} fill={C.gold} stroke={C.gold} strokeWidth={3} />

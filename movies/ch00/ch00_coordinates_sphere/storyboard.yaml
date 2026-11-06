@@ -20,7 +20,7 @@ concepts:
 - latitude-longitude grid boxes of reanalysis data (ERA5 0.25 deg) and their true sizes
 - area element dA = a^2 cos phi dphi dlambda; band area 2 pi a^2 sin phi by adding strips (integration, owned here); Archimedes' cylinder
 - cos-latitude weighting of global means (fluidpy.diag.climatology.global_mean)
-target_duration_s: 2902.4641
+target_duration_s: 2902.85
 fps: 30
 size:
 - 1920
@@ -163,6 +163,117 @@ honesty_notes:
   1-deg grid, weighted 16.27 C vs plain 7.11 C.'
 - Exaggerations (1-deg steps x5, 4.5-deg wedge x6 inset, one-minute step x60 inset, balloon height x50, area patch x20, lifted caps) and time
   compression (globe spins, the camera tour) are listed per scene and in the manifest, not badged (HOUSE_STYLE §5).
+build_1:
+  tts:
+    tool: tools/tts.py
+    run: G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_sphere/build1/fix1/tts
+    voice: af_bella
+    speed: 1.0
+    audio_s: 2900.35
+    total_frames: 87011
+    cues: 712
+    warnings: []
+    sentences: 445
+    words: 6997
+    render_s: 1017.8
+    self_check:
+      expected_s: 2900.35
+      audio_s: 2900.35
+      diff_ms: 0.0
+      len_ok: true
+      cues_ok: true
+      spliced_fix1:
+        method: BS.1770-4 loudness match to the nearest unchanged neighbours + look-ahead limiter (-1.5 dBTP)
+        corr_resynth: 0.9955
+        replaced:
+        - scene: s00_title
+          neighbours:
+          - S0
+          - S1
+          neighbours_lufs:
+          - -16.78
+          - -16.18
+          target_lufs: -16.47
+          raw_lufs: -24.41
+          gain_db: 8.56
+          limiter_gr_db: -3.29
+          final_lufs: -16.5
+          true_peak_dbtp: -1.97
+          within_1p5_lu: true
+          dur_s: 9.5
+          new: In this video, we'll learn coordinates on our round Earth, and see how meteorology uses them to measure distances and areas on its weather
+            grids.
+          item: R1
+          sentence: 0
+          part: 0
+          old: In this video, we'll learn coordinates on our round Earth the easy way, and see how meteorology uses them to measure distances and areas
+            on its weather grids.
+          old_dur_s: 10.375
+          beat: false
+        - scene: s17_brest_top
+          neighbours:
+          - S1
+          neighbours_lufs:
+          - -15.79
+          target_lufs: -15.79
+          raw_lufs: -24.69
+          gain_db: 9.43
+          limiter_gr_db: -2.13
+          final_lufs: -15.84
+          true_peak_dbtp: -2.04
+          within_1p5_lu: true
+          dur_s: 2.0
+          new: Now for the top view.
+          item: R2
+          sentence: 0
+          part: 0
+          old: 'Second step: the top view.'
+          old_dur_s: 2.625
+          beat: false
+        - scene: s20_spin_rate
+          neighbours:
+          - S8
+          - S10
+          neighbours_lufs:
+          - -16.21
+          - -16.31
+          target_lufs: -16.26
+          raw_lufs: -24.98
+          gain_db: 9.01
+          limiter_gr_db: -2.48
+          final_lufs: -16.27
+          true_peak_dbtp: -1.75
+          within_1p5_lu: true
+          dur_s: 3.625
+          new: Next, how far does the place travel in one turn?
+          item: R2
+          sentence: 9
+          part: 0
+          old: Second, how far does the place travel in one turn?
+          old_dur_s: 3.625
+          beat: false
+        - scene: s20_spin_rate
+          neighbours:
+          - S11
+          - S13
+          neighbours_lufs:
+          - -16.75
+          - -16.22
+          target_lufs: -16.48
+          raw_lufs: -25.91
+          gain_db: 10.0
+          limiter_gr_db: -3.19
+          final_lufs: -16.54
+          true_peak_dbtp: -1.93
+          within_1p5_lu: true
+          dur_s: 3.125
+          new: So, speed is distance divided by time.
+          item: R2
+          sentence: 12
+          part: 0
+          old: Third, speed is distance divided by time.
+          old_dur_s: 3.55
+          beat: false
 quiz_hook: Singapore is almost on the equator and Longyearbyen is at 78.2 N. How many kilometres is one degree of longitude at each, how fast
   does the ground move east at each, and what share of the northern hemisphere lies south of 78.2 N? (111.2 and 22.7 km; about 464 and 95 m/s;
   sin 78.2 deg = 0.979, about 98 %.)
@@ -172,124 +283,126 @@ chapter_marks:
   mmss: '0:00.3'
   title: title, hook and look back
   scene: s00_title
-- t: 98.75
-  mmss: '1:38.8'
+- t: 97.875
+  mmss: '1:37.9'
   title: the sphere, latitude and the parallel
   scene: s03_sphere
-- t: 351.525
-  mmss: '5:51.5'
+- t: 350.65
+  mmss: '5:50.6'
   title: colatitude and the sine-cosine swap
   scene: s07_colatitude
-- t: 530.25
-  mmss: '8:50.2'
+- t: 529.375
+  mmss: '8:49.4'
   title: meridians, the prime meridian, longitude
   scene: s09_meridians
-- t: 826.75
-  mmss: '13:46.8'
+- t: 825.875
+  mmss: '13:45.9'
   title: Earth-centred x, y, z
   scene: s13_earth_axes
-- t: 899.55
-  mmss: '14:59.5'
+- t: 898.675
+  mmss: '14:58.7'
   title: Brest's position, step by step
   scene: s14_brest_side
-- t: 1327.975
-  mmss: '22:08.0'
+- t: 1326.475
+  mmss: '22:06.5'
   title: Khulna
   scene: s19_khulna
-- t: 1426.55
-  mmss: '23:46.5'
+- t: 1425.05
+  mmss: '23:45.0'
   title: the spinning ground
   scene: s20_spin_rate
-- t: 1682.2725
-  mmss: '28:02.3'
+- t: 1680.3
+  mmss: '28:00.3'
   title: distances north and east
   scene: s22_distance_north
-- t: 1992.5725
-  mmss: '33:12.6'
+- t: 1990.6
+  mmss: '33:10.6'
   title: ERA5 grid boxes
   scene: s26_grid_boxes
-- t: 2097.1719
-  mmss: '34:57.2'
+- t: 2095.35
+  mmss: '34:55.3'
   title: areas, step by step
   scene: s27_area_patch
-- t: 2574.483
-  mmss: '42:54.5'
+- t: 2572.575
+  mmss: '42:52.6'
   title: Archimedes
   scene: s33_archimedes
-- t: 2655.058
-  mmss: '44:15.1'
+- t: 2653.15
+  mmss: '44:13.2'
   title: global averages
   scene: s34_global_mean
-- t: 2760.508
-  mmss: '46:00.5'
+- t: 2758.6
+  mmss: '45:58.6'
   title: to sum up
   scene: s35_recap
 skip_blocks:
 - id: K1
   chip_scene: s08_sin_cos_swap
   chip_sentence: 4
-  chip_t: 415.8
+  chip_t: 414.925
   skip_to_scene: s09_meridians
-  skip_to_t: 530.25
-  skip_to_mmss: '8:50.2'
-  keep_sentence: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever
-    we have a sine of the latitude, and the other way round. Now for the second angle.
+  skip_to_t: 529.375
+  skip_to_mmss: '8:49'
+  keep_sentence: If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever we have
+    a sine of the latitude, and the other way round. Now for the second angle.
   takeaway_keyword: 'colatitude from the pole: sin ↔ cos'
-  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+  note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
+  chip: every step · optional / skip to 8:49
 - id: K2
   chip_scene: s14_brest_side
   chip_sentence: 3
-  chip_t: 914.65
+  chip_t: 913.775
   skip_to_scene: s21_ground_speeds
-  skip_to_t: 1532.8106
-  skip_to_mmss: '25:32.8'
-  keep_sentence: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane,
-    and the radius times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance
-    from the axis.
+  skip_to_t: 1531.05
+  skip_to_mmss: '25:31'
+  keep_sentence: If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius
+    times cosine phi from the Earth's axis. As the Earth spins, that place is carried east at capital Omega, times its distance from the axis.
   takeaway_keyword: height a sin φ · from the axis a cos φ · ground east at Ω a cos φ
-  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+  note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
+  chip: every step · optional / skip to 25:31
 - id: K3
   chip_scene: s22_distance_north
   chip_sentence: 2
-  chip_t: 1686.8725
+  chip_t: 1684.9
   skip_to_scene: s25_degree_east
-  skip_to_t: 1911.5225
-  skip_to_mmss: '31:51.5'
-  keep_sentence: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude
-    is that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side.
+  skip_to_t: 1909.55
+  skip_to_mmss: '31:49'
+  keep_sentence: If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is
+    that times cosine phi, so it shrinks towards the poles. Let's compare one degree of longitude at four places, side by side.
   takeaway_keyword: 1° north ≈ 111 km · 1° east = 111 km × cos φ
-  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+  note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
+  chip: every step · optional / skip to 31:49
 - id: K4
   chip_scene: s27_area_patch
   chip_sentence: 5
-  chip_t: 2117.9219
+  chip_t: 2116.1
   skip_to_scene: s34_global_mean
-  skip_to_t: 2655.058
-  skip_to_mmss: '44:15.1'
-  keep_sentence: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar
-    caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate.'
+  skip_to_t: 2653.15
+  skip_to_mmss: '44:13'
+  keep_sentence: 'If you skipped, here''s what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are
+    small: half of the whole Earth lies between thirty degrees south and thirty degrees north. Here''s where this matters for climate.'
   takeaway_keyword: boxes shrink by cos φ · half the Earth within 30° of the equator
-  note: skip_to_mmss is from this dry run; the builder refills it from the final TTS
+  note: final TTS (build 1, make_timing.py --final); the chip shows skip_to_mmss = floor of the keep sentence start (cs_lib keepTime)
+  chip: every step · optional / skip to 44:13
 scenes:
 - id: s00_title
   t:
   - 0.3
-  - 11.475
+  - 10.6
   sentence_times:
   - - 0.3
-    - 10.675
+    - 9.8
   beat: opening title (HOUSE_STYLE §3)
   visual: 'TITLE FRAME (house/kit/title.tsx). Left x 100-1075, top to bottom: ''Coordinates · Part 3'' (68 px, warm white); the title ''Our round
     Earth'' as RiseText (150 px, weight 800, two lines ''Our round'' / ''Earth'', TitleGradient teal -> gold; letters rise 24 px over 8 frames,
-    2-frame stagger); ''made easy'' (96 px, warm white) pulses x1.06 on AT(1,''the easy way''); the subtitle ''latitude, longitude, distances
+    2-frame stagger); ''made easy'' (96 px, warm white) pulses x1.06 on AT(0,''coordinates on our round Earth'') (HOUSE_STYLE §3, 2026-11-06: never voice "the easy way"); the subtitle ''latitude, longitude, distances
     and areas'' (68 px, warm white, one or two lines); >= 50 px clear of the animation. The spoken sentence stays short. Right x 1130-1840, y
     180-636: Part A (frame 0 -> AT(1,''meteorology'')): the globe turns to Brest, the half facing the camera slides away along Brest''s meridian
     plane (HalfEarthMesh), the centre dot appears, the arrow to Brest draws, and the gold latitude wedge opens from the equator line to 48.4 deg
     (no number). Part B (12-frame cross-fade on ''meteorology''): the whole globe with ERA5-style grid lines over Europe and the Arctic, the boxes
     visibly thinning northwards; one box at Brest and one at Svalbard light up gold. SourceBelow under the animation ''Image: NASA Blue Marble
     Next Generation'' (y <= 860). Poster = frame 200.'
-  voiceover: In this video, we'll learn coordinates on our round Earth the easy way, and see how meteorology uses them to measure distances and
-    areas on its weather grids.
+  voiceover: In this video, we'll learn coordinates on our round Earth, and see how meteorology uses them to measure distances and areas on its weather grids.
   on_screen_eq: null
   physics_source:
     fn: fluidpy.geo.sphere.unit_vector, meridian_points, parallel_points, arc_lengths (0.25 deg)
@@ -317,17 +430,17 @@ scenes:
   layout: Title frame; the source line below the animation, never on it. No other text.
 - id: s01_hook
   t:
-  - 11.475
-  - 39.0
+  - 10.6
+  - 38.125
   sentence_times:
-  - - 11.475
-    - 17.0
-  - - 17.35
-    - 24.8
-  - - 25.15
-    - 30.55
-  - - 30.9
-    - 38.2
+  - - 10.6
+    - 16.125
+  - - 16.475
+    - 23.925
+  - - 24.275
+    - 29.675
+  - - 30.025
+    - 37.325
   beat: hook question
   visual: 'Full width from frame 0. Left (picture zone): the unzoomed globe turning slowly (Atlantic, Europe, Asia), three gold dots at Brest,
     Khulna, Singapore (no labels: no place is spoken here). Right column: S1 on AT(1,''where a place is'') keyword ''where?'' (54 px warm white);
@@ -363,27 +476,27 @@ scenes:
     stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s02_part2_recap
   t:
-  - 39.0
-  - 98.75
+  - 38.125
+  - 97.875
   sentence_times:
-  - - 39.0
-    - 41.375
-  - - 41.725
-    - 52.05
-  - - 52.4
-    - 57.775
-  - - 58.125
-    - 65.6
-  - - 65.95
-    - 71.8
-  - - 72.15
-    - 78.6
-  - - 78.95
-    - 84.95
-  - - 85.3
-    - 92.85
-  - - 93.2
-    - 97.95
+  - - 38.125
+    - 40.5
+  - - 40.85
+    - 51.175
+  - - 51.525
+    - 56.9
+  - - 57.25
+    - 64.725
+  - - 65.075
+    - 70.925
+  - - 71.275
+    - 77.725
+  - - 78.075
+    - 84.075
+  - - 84.425
+    - 91.975
+  - - 92.325
+    - 97.075
   beat: recap of Parts 1-2 (<= 60 s, split plan §2g)
   visual: 'One mini picture per sentence in the picture zone, cross-fading (no headings, no cards): S2 the polar grid with the balloon, r and
     the theta arc (slate) ''anticlockwise, seen from above''; S3 the 3-4-5 triangle with ''x = r cos θ'', ''y = r sin θ''; S4 an arc on a circle
@@ -418,31 +531,31 @@ scenes:
     (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s03_sphere
   t:
-  - 98.75
-  - 153.175
+  - 97.875
+  - 152.3
   sentence_times:
-  - - 98.75
-    - 100.75
-  - - 101.1
-    - 105.7
-  - - 106.05
-    - 109.425
-  - - 109.775
-    - 113.625
-  - - 113.975
-    - 120.85
-  - - 121.2
-    - 127.275
-  - - 127.625
-    - 134.0
-  - - 134.35
-    - 139.25
-  - - 139.6
-    - 145.525
-  - - 145.875
-    - 149.05
-  - - 149.4
-    - 152.375
+  - - 97.875
+    - 99.875
+  - - 100.225
+    - 104.825
+  - - 105.175
+    - 108.55
+  - - 108.9
+    - 112.75
+  - - 113.1
+    - 119.975
+  - - 120.325
+    - 126.4
+  - - 126.75
+    - 133.125
+  - - 133.475
+    - 138.375
+  - - 138.725
+    - 144.65
+  - - 145.0
+    - 148.175
+  - - 148.525
+    - 151.5
   beat: 'building block: spherical coordinates (origin at the centre; a distance and two angles)'
   visual: 'Unzoomed globe from frame 0, keyword ''sphere'' in the column. S2-S4: the globe turns slowly; on AT(4,''the Earth''s centre'') the
     globe becomes 70 % transparent for 2 s and a gold dot shows the centre inside it, then the globe returns to opaque. S5: three points light
@@ -485,31 +598,31 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s04_slice_radius
   t:
-  - 153.175
-  - 216.45
+  - 152.3
+  - 215.575
   sentence_times:
-  - - 153.175
-    - 163.75
-  - - 164.1
-    - 169.325
-  - - 169.675
-    - 172.85
-  - - 173.2
-    - 176.875
-  - - 177.225
-    - 181.5
-  - - 181.85
-    - 189.15
-  - - 190.65
-    - 194.975
-  - - 195.325
-    - 197.0
-  - - 197.35
-    - 200.85
-  - - 201.2
-    - 209.175
-  - - 209.525
-    - 215.65
+  - - 152.3
+    - 162.875
+  - - 163.225
+    - 168.45
+  - - 168.8
+    - 171.975
+  - - 172.325
+    - 176.0
+  - - 176.35
+    - 180.625
+  - - 180.975
+    - 188.275
+  - - 189.775
+    - 194.1
+  - - 194.45
+    - 196.125
+  - - 196.475
+    - 199.975
+  - - 200.325
+    - 208.3
+  - - 208.65
+    - 214.775
   beat: 'building block: the sliced Earth, r from the centre, the Earth''s radius a (Must 17, U-CO-033, U-CO-050)'
   visual: 'Sliced Earth: kit_cp HalfEarthMesh (the cross-product Part 2 slice, UV2-20) with lon0 = the meridian of the place; outside textured,
     the flat cut face a warm dark-grey section with faint interior rings (decorative), the Earth''s centre a gold dot, the spin axis slate through
@@ -564,31 +677,31 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s05_latitude
   t:
-  - 216.45
-  - 272.15
+  - 215.575
+  - 271.275
   sentence_times:
-  - - 216.45
-    - 219.0
-  - - 219.35
-    - 223.825
-  - - 224.175
-    - 230.2
-  - - 230.55
-    - 233.275
-  - - 233.625
-    - 240.05
-  - - 241.55
-    - 246.025
-  - - 246.375
-    - 248.925
-  - - 249.275
-    - 253.975
-  - - 254.325
-    - 258.2
-  - - 258.55
-    - 264.025
-  - - 264.375
-    - 271.35
+  - - 215.575
+    - 218.125
+  - - 218.475
+    - 222.95
+  - - 223.3
+    - 229.325
+  - - 229.675
+    - 232.4
+  - - 232.75
+    - 239.175
+  - - 240.675
+    - 245.15
+  - - 245.5
+    - 248.05
+  - - 248.4
+    - 253.1
+  - - 253.45
+    - 257.325
+  - - 257.675
+    - 263.15
+  - - 263.5
+    - 270.475
   beat: 'building block: latitude phi as an angle at the centre (U-CO-034: the 48.4-deg angle visibly drawn)'
   visual: 'The half-Earth from s04, face turned 15 deg from frontal (never edge-on: U-CO-034), camera fixed. S1-S2: a slate line draws from the
     centre to the equator point on the face''s rim (''equator'' label outside the globe edge). S3 on AT(3,''the angle between''): a gold arc (8
@@ -634,37 +747,37 @@ scenes:
     text, ticks or each other (the builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s06_parallel
   t:
-  - 272.15
-  - 351.525
+  - 271.275
+  - 350.65
   sentence_times:
-  - - 272.15
-    - 275.225
-  - - 275.575
-    - 278.675
-  - - 279.025
-    - 289.125
-  - - 289.475
-    - 293.975
-  - - 294.325
-    - 299.35
-  - - 299.7
-    - 306.025
-  - - 306.375
-    - 314.15
-  - - 314.5
-    - 321.675
-  - - 322.025
-    - 326.625
-  - - 326.975
-    - 330.5
-  - - 330.85
-    - 334.75
-  - - 335.1
-    - 338.65
-  - - 339.0
-    - 346.925
-  - - 347.275
-    - 350.725
+  - - 271.275
+    - 274.35
+  - - 274.7
+    - 277.8
+  - - 278.15
+    - 288.25
+  - - 288.6
+    - 293.1
+  - - 293.45
+    - 298.475
+  - - 298.825
+    - 305.15
+  - - 305.5
+    - 313.275
+  - - 313.625
+    - 320.8
+  - - 321.15
+    - 325.75
+  - - 326.1
+    - 329.625
+  - - 329.975
+    - 333.875
+  - - 334.225
+    - 337.775
+  - - 338.125
+    - 346.05
+  - - 346.4
+    - 349.85
   beat: 'building block: the parallel (a circle round the axis), then sliced across (U-CO-036)'
   visual: 'S1-S2: the halves rejoin (1 s) and the whole globe turns slowly eastwards. S3: Brest''s arrow sweeps round the axis like a cone (the
     gold wedge kept at 48.4 deg to the equator plane), its tip leaving an orange trail: the parallel. S4: column ''same latitude 48.4°''. S5 on
@@ -709,29 +822,29 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s07_colatitude
   t:
-  - 351.525
-  - 402.55
+  - 350.65
+  - 401.675
   sentence_times:
-  - - 351.525
-    - 354.95
-  - - 355.3
-    - 358.4
-  - - 358.75
-    - 366.425
-  - - 366.775
-    - 369.675
-  - - 370.025
-    - 376.45
-  - - 376.8
-    - 381.1
-  - - 381.45
-    - 387.75
-  - - 389.25
-    - 392.325
-  - - 392.675
-    - 396.425
-  - - 396.775
-    - 401.75
+  - - 350.65
+    - 354.075
+  - - 354.425
+    - 357.525
+  - - 357.875
+    - 365.55
+  - - 365.9
+    - 368.8
+  - - 369.15
+    - 375.575
+  - - 375.925
+    - 380.225
+  - - 380.575
+    - 386.875
+  - - 388.375
+    - 391.45
+  - - 391.8
+    - 395.55
+  - - 395.9
+    - 400.875
   beat: 'building block: colatitude (an angle from the pole) vs the parallel (a circle) (U-CO-035)'
   visual: 'Back to the half-Earth face (camera continuity with s05). The gold phi wedge stays. S2 on AT(2,''start from the North Pole''): a slate
     arc opens at the centre from the axis down to the Brest arrow (slate 15 % wedge); S3 on AT(3,''colatitude''): keyword ''colatitude'' (slate)
@@ -773,51 +886,51 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s08_sin_cos_swap
   t:
-  - 402.55
-  - 530.25
+  - 401.675
+  - 529.375
   sentence_times:
-  - - 402.55
-    - 405.7
-  - - 406.05
-    - 409.075
-  - - 409.425
-    - 415.45
-  - - 415.8
-    - 423.625
-  - - 423.975
-    - 426.75
-  - - 427.1
-    - 430.775
-  - - 431.125
-    - 436.975
-  - - 437.325
-    - 441.6
-  - - 441.95
-    - 451.35
-  - - 451.7
-    - 455.4
-  - - 455.75
-    - 460.75
-  - - 461.1
-    - 465.9
-  - - 466.25
-    - 470.625
-  - - 470.975
-    - 475.975
-  - - 476.325
-    - 481.45
-  - - 481.8
-    - 488.35
-  - - 488.7
-    - 497.15
-  - - 497.5
-    - 502.325
-  - - 502.675
-    - 509.5
-  - - 509.85
-    - 519.675
-  - - 521.175
-    - 529.45
+  - - 401.675
+    - 404.825
+  - - 405.175
+    - 408.2
+  - - 408.55
+    - 414.575
+  - - 414.925
+    - 422.75
+  - - 423.1
+    - 425.875
+  - - 426.225
+    - 429.9
+  - - 430.25
+    - 436.1
+  - - 436.45
+    - 440.725
+  - - 441.075
+    - 450.475
+  - - 450.825
+    - 454.525
+  - - 454.875
+    - 459.875
+  - - 460.225
+    - 465.025
+  - - 465.375
+    - 469.75
+  - - 470.1
+    - 475.1
+  - - 475.45
+    - 480.575
+  - - 480.925
+    - 487.475
+  - - 487.825
+    - 496.275
+  - - 496.625
+    - 501.45
+  - - 501.8
+    - 508.625
+  - - 508.975
+    - 518.8
+  - - 520.3
+    - 528.575
   beat: 'derivation D26: sine and cosine swap places (U-CO-037)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -903,31 +1016,31 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s09_meridians
   t:
-  - 530.25
-  - 591.6
+  - 529.375
+  - 590.725
   sentence_times:
-  - - 530.25
-    - 532.925
-  - - 533.275
-    - 542.675
-  - - 543.025
-    - 545.2
-  - - 545.55
-    - 549.175
-  - - 549.525
-    - 557.55
-  - - 557.9
-    - 560.925
-  - - 561.275
-    - 569.25
-  - - 569.6
-    - 575.425
-  - - 575.775
-    - 580.7
-  - - 581.05
-    - 585.825
-  - - 586.175
-    - 590.8
+  - - 529.375
+    - 532.05
+  - - 532.4
+    - 541.8
+  - - 542.15
+    - 544.325
+  - - 544.675
+    - 548.3
+  - - 548.65
+    - 556.675
+  - - 557.025
+    - 560.05
+  - - 560.4
+    - 568.375
+  - - 568.725
+    - 574.55
+  - - 574.9
+    - 579.825
+  - - 580.175
+    - 584.95
+  - - 585.3
+    - 589.925
   beat: 'building block: meridians (U-CO-038, U-CO-039)'
   visual: 'Whole globe, camera at 30 deg N above the Atlantic. S2 on AT(2,''Start at the North Pole''): the camera rises to look at the pole from
     60 deg N; S2-S3: an orange line draws from the North Pole due south while the camera follows its tip down the globe (top -> bottom, about
@@ -984,37 +1097,37 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s10_prime_meridian
   t:
-  - 591.6
-  - 681.55
+  - 590.725
+  - 680.675
   sentence_times:
-  - - 591.6
-    - 595.2
-  - - 595.55
-    - 602.5
-  - - 602.85
-    - 605.15
-  - - 605.5
-    - 609.2
-  - - 609.55
-    - 614.3
-  - - 614.65
-    - 624.1
-  - - 624.45
-    - 630.95
-  - - 631.3
-    - 639.175
-  - - 639.525
-    - 645.975
-  - - 646.325
-    - 652.7
-  - - 653.05
-    - 662.075
-  - - 662.425
-    - 668.025
-  - - 668.375
-    - 675.925
-  - - 676.275
-    - 680.75
+  - - 590.725
+    - 594.325
+  - - 594.675
+    - 601.625
+  - - 601.975
+    - 604.275
+  - - 604.625
+    - 608.325
+  - - 608.675
+    - 613.425
+  - - 613.775
+    - 623.225
+  - - 623.575
+    - 630.075
+  - - 630.425
+    - 638.3
+  - - 638.65
+    - 645.1
+  - - 645.45
+    - 651.825
+  - - 652.175
+    - 661.2
+  - - 661.55
+    - 667.15
+  - - 667.5
+    - 675.05
+  - - 675.4
+    - 679.875
   beat: 'building block: the prime meridian tour, pole to pole (U-CO-040)'
   visual: 'Zoom-reveal (HOUSE_STYLE §5b): the globe goes full-bleed (dist 4.3 -> 2.4 over 1.5 s), the keyword column on the faded right. S1: the
     0-deg meridian turns gold. S2 on AT(2,''Greenwich''): ''Greenwich'' with a gold dot in London. S4: the camera flies to the North Pole and
@@ -1093,37 +1206,37 @@ scenes:
     (Should 18).'
 - id: s11_longitude
   t:
-  - 681.55
-  - 770.175
+  - 680.675
+  - 769.3
   sentence_times:
-  - - 681.55
-    - 684.325
-  - - 684.675
-    - 688.55
-  - - 688.9
-    - 694.625
-  - - 694.975
-    - 701.025
-  - - 701.375
-    - 707.4
-  - - 707.75
-    - 714.55
-  - - 714.9
-    - 717.75
-  - - 718.1
-    - 725.625
-  - - 725.975
-    - 732.225
-  - - 732.575
-    - 738.3
-  - - 738.65
-    - 745.675
-  - - 747.175
-    - 753.75
-  - - 754.1
-    - 762.325
-  - - 763.825
-    - 769.375
+  - - 680.675
+    - 683.45
+  - - 683.8
+    - 687.675
+  - - 688.025
+    - 693.75
+  - - 694.1
+    - 700.15
+  - - 700.5
+    - 706.525
+  - - 706.875
+    - 713.675
+  - - 714.025
+    - 716.875
+  - - 717.225
+    - 724.75
+  - - 725.1
+    - 731.35
+  - - 731.7
+    - 737.425
+  - - 737.775
+    - 744.8
+  - - 746.3
+    - 752.875
+  - - 753.225
+    - 761.45
+  - - 762.95
+    - 768.5
   beat: 'building block: longitude lambda as an angle at the centre (top view, equatorial slice)'
   visual: 'S1-S2: the camera rises above the North Pole (<= 60 deg/s); the meridians look like spokes. S3 on AT(4,''slice the Earth across''):
     a horizontal knife plane at the equator; the northern half lifts and fades to 20 %; the round face of the equatorial cut faces the camera,
@@ -1173,25 +1286,25 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s12_graticule
   t:
-  - 770.175
-  - 826.75
+  - 769.3
+  - 825.875
   sentence_times:
-  - - 770.175
-    - 773.675
-  - - 774.025
-    - 782.575
-  - - 782.925
-    - 794.075
-  - - 794.425
-    - 798.65
-  - - 799.0
-    - 808.0
-  - - 808.35
-    - 812.9
-  - - 813.25
-    - 817.85
-  - - 818.2
-    - 825.95
+  - - 769.3
+    - 772.8
+  - - 773.15
+    - 781.7
+  - - 782.05
+    - 793.2
+  - - 793.55
+    - 797.775
+  - - 798.125
+    - 807.125
+  - - 807.475
+    - 812.025
+  - - 812.375
+    - 816.975
+  - - 817.325
+    - 825.075
   beat: 'building block: the graticule, drawn line by line (U-CO-041)'
   visual: 'Whole globe, camera at 20 deg N. S1-S2: meridians every 15 deg draw one by one (slate, 4 px), the spoken ones tagged ''0°'', ''15°
     E'', ''30° E'' at the equator; the globe turns so each one passes the centre. S3: parallels every 15 deg draw from the equator up and down
@@ -1229,33 +1342,33 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s13_earth_axes
   t:
-  - 826.75
-  - 899.55
+  - 825.875
+  - 898.675
   sentence_times:
-  - - 826.75
-    - 831.5
-  - - 831.85
-    - 842.025
-  - - 842.375
-    - 847.525
-  - - 847.875
-    - 852.625
-  - - 852.975
-    - 861.45
-  - - 861.8
-    - 869.5
-  - - 869.85
-    - 875.125
-  - - 875.475
-    - 878.75
-  - - 879.1
-    - 885.375
-  - - 885.725
-    - 890.55
-  - - 890.9
-    - 894.725
-  - - 895.075
-    - 898.75
+  - - 825.875
+    - 830.625
+  - - 830.975
+    - 841.15
+  - - 841.5
+    - 846.65
+  - - 847.0
+    - 851.75
+  - - 852.1
+    - 860.575
+  - - 860.925
+    - 868.625
+  - - 868.975
+    - 874.25
+  - - 874.6
+    - 877.875
+  - - 878.225
+    - 884.5
+  - - 884.85
+    - 889.675
+  - - 890.025
+    - 893.85
+  - - 894.2
+    - 897.875
   beat: 'derivation D23 (1): the Earth-centred x, y, z axes (U-CO-046)'
   visual: 'Globe 60 % transparent so the centre shows. S3: gold centre dot. S4 on AT(4,''The z axis''): an orange axis line from the centre up
     the spin axis, out through the North Pole, KaTeX ''z'' at its tip. S5 on AT(5,''The x axis''): an axis line to (0 N, 0 E), tip ''x'', with
@@ -1297,37 +1410,37 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s14_brest_side
   t:
-  - 899.55
-  - 976.95
+  - 898.675
+  - 976.075
   sentence_times:
-  - - 899.55
-    - 906.3
-  - - 906.65
-    - 914.3
-  - - 914.65
-    - 918.925
-  - - 919.275
-    - 921.45
-  - - 921.8
-    - 929.05
-  - - 929.4
-    - 934.775
-  - - 935.125
-    - 938.1
-  - - 938.45
-    - 943.75
-  - - 944.1
-    - 948.95
-  - - 949.3
-    - 954.25
-  - - 954.6
-    - 961.425
-  - - 961.775
-    - 967.5
-  - - 967.85
-    - 971.05
-  - - 971.4
-    - 976.15
+  - - 898.675
+    - 905.425
+  - - 905.775
+    - 913.425
+  - - 913.775
+    - 918.05
+  - - 918.4
+    - 920.575
+  - - 920.925
+    - 928.175
+  - - 928.525
+    - 933.9
+  - - 934.25
+    - 937.225
+  - - 937.575
+    - 942.875
+  - - 943.225
+    - 948.075
+  - - 948.425
+    - 953.375
+  - - 953.725
+    - 960.55
+  - - 960.9
+    - 966.625
+  - - 966.975
+    - 970.175
+  - - 970.525
+    - 975.275
   beat: 'derivation D23 (2): the side view, globe and diagram drawn together (U-CO-042, U-CO-043)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1373,33 +1486,33 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s15_brest_z
   t:
-  - 976.95
-  - 1054.475
+  - 976.075
+  - 1053.6
   sentence_times:
-  - - 976.95
-    - 980.0
-  - - 980.35
-    - 986.975
-  - - 987.325
-    - 990.3
-  - - 990.65
-    - 995.125
-  - - 995.475
-    - 999.1
-  - - 999.45
-    - 1001.225
-  - - 1001.575
-    - 1007.925
-  - - 1008.275
-    - 1013.75
-  - - 1014.1
-    - 1025.55
-  - - 1027.05
-    - 1034.275
-  - - 1035.775
-    - 1044.075
-  - - 1044.425
-    - 1053.675
+  - - 976.075
+    - 979.125
+  - - 979.475
+    - 986.1
+  - - 986.45
+    - 989.425
+  - - 989.775
+    - 994.25
+  - - 994.6
+    - 998.225
+  - - 998.575
+    - 1000.35
+  - - 1000.7
+    - 1007.05
+  - - 1007.4
+    - 1012.875
+  - - 1013.225
+    - 1024.675
+  - - 1026.175
+    - 1033.4
+  - - 1034.9
+    - 1043.2
+  - - 1043.55
+    - 1052.8
   beat: 'derivation D23 (3): z = a sin phi with every value labelled (U-CO-046, U-CO-047, U-CO-048)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1472,23 +1585,23 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s16_brest_axis_distance
   t:
-  - 1054.475
-  - 1115.175
+  - 1053.6
+  - 1114.3
   sentence_times:
-  - - 1054.475
-    - 1060.125
-  - - 1060.475
-    - 1065.95
-  - - 1066.3
-    - 1071.85
-  - - 1072.2
-    - 1083.925
-  - - 1085.425
-    - 1093.7
-  - - 1095.2
-    - 1101.9
-  - - 1102.25
-    - 1114.375
+  - - 1053.6
+    - 1059.25
+  - - 1059.6
+    - 1065.075
+  - - 1065.425
+    - 1070.975
+  - - 1071.325
+    - 1083.05
+  - - 1084.55
+    - 1092.825
+  - - 1094.325
+    - 1101.025
+  - - 1101.375
+    - 1113.5
   beat: 'derivation D23 (4)-(5): the distance from the axis a cos phi (U-CO-049)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1555,37 +1668,37 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s17_brest_top
   t:
-  - 1115.175
-  - 1221.0
+  - 1114.3
+  - 1219.5
   sentence_times:
-  - - 1115.175
-    - 1117.8
-  - - 1118.15
-    - 1126.55
-  - - 1126.9
-    - 1130.675
-  - - 1131.025
-    - 1138.2
-  - - 1138.55
-    - 1146.375
-  - - 1146.725
-    - 1155.45
-  - - 1155.8
-    - 1166.45
-  - - 1166.8
-    - 1174.075
-  - - 1174.425
-    - 1176.2
-  - - 1176.55
-    - 1182.275
-  - - 1182.625
-    - 1192.675
-  - - 1194.175
-    - 1200.325
-  - - 1200.675
-    - 1210.725
-  - - 1212.225
-    - 1220.2
+  - - 1114.3
+    - 1116.3
+  - - 1116.65
+    - 1125.05
+  - - 1125.4
+    - 1129.175
+  - - 1129.525
+    - 1136.7
+  - - 1137.05
+    - 1144.875
+  - - 1145.225
+    - 1153.95
+  - - 1154.3
+    - 1164.95
+  - - 1165.3
+    - 1172.575
+  - - 1172.925
+    - 1174.7
+  - - 1175.05
+    - 1180.775
+  - - 1181.125
+    - 1191.175
+  - - 1192.675
+    - 1198.825
+  - - 1199.175
+    - 1209.225
+  - - 1210.725
+    - 1218.7
   beat: 'derivation D24: the top view, x = a cos phi cos lambda, y = a cos phi sin lambda (U-CO-044, U-CO-045)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -1599,17 +1712,16 @@ scenes:
     in the flat view only; AT(7,''polar coordinates'') keyword ''Part 1: r → a cos φ, θ → λ''. S8: the leg splits into its x part and y part,
     dashed. S9-S12: CalcStack ''cos(−4.5°) ≈ 0.9969'', ''x = 4230 × 0.9969 ≈ 4217 km''; ''sin(−4.5°) ≈ −0.0785'', ''y = 4230 × (−0.0785) ≈ −332
     km'' (rose ''−'' glyph); each part''s tag appears at its leg in both views on the result''s words. S13: keyword ''just west of 0°''.'
-  voiceover: 'Second step: the top view. Now look down on the Earth from far above the North Pole, and slice it across along the equator plane,
-    as we did for longitude. Next to it, again, the same face is drawn flat. Brest itself is above this plane, but straight below Brest, in the
-    plane, is the foot of the line we dropped. That foot is four thousand two hundred and thirty kilometres from the centre, the distance from
-    the axis we just found. And it lies on Brest''s meridian, so it''s at Brest''s longitude, lambda, minus four and a half degrees, measured
-    from the x axis. That''s polar coordinates on a flat face, exactly as in Part 1, with the distance from the axis playing the part of r, and
-    lambda playing the part of theta. So the x part is that distance times cosine lambda, and the y part is that distance times sine lambda. Now
-    the numbers. The cosine of minus four point five degrees is zero point nine nine six nine. So x is four thousand two hundred and thirty times
-    zero point nine nine six nine, about four thousand two hundred and seventeen kilometres. [beat] The sine of minus four point five degrees
-    is minus zero point zero seven eight five. So y is four thousand two hundred and thirty times minus zero point zero seven eight five, about
-    minus three hundred and thirty two kilometres. [beat] The y part is small, because Brest is close to the prime meridian, and it''s negative,
-    because Brest is just west of it.'
+  voiceover: Now for the top view. Now look down on the Earth from far above the North Pole, and slice it across along the equator plane, as we did for longitude.
+    Next to it, again, the same face is drawn flat. Brest itself is above this plane, but straight below Brest, in the plane, is the foot of the line we dropped.
+    That foot is four thousand two hundred and thirty kilometres from the centre, the distance from the axis we just found. And it lies on Brest's meridian,
+    so it's at Brest's longitude, lambda, minus four and a half degrees, measured from the x axis. That's polar coordinates on a flat face, exactly as in
+    Part 1, with the distance from the axis playing the part of r, and lambda playing the part of theta. So the x part is that distance times cosine lambda,
+    and the y part is that distance times sine lambda. Now the numbers. The cosine of minus four point five degrees is zero point nine nine six nine. So x
+    is four thousand two hundred and thirty times zero point nine nine six nine, about four thousand two hundred and seventeen kilometres. [beat] The sine
+    of minus four point five degrees is minus zero point zero seven eight five. So y is four thousand two hundred and thirty times minus zero point zero seven
+    eight five, about minus three hundred and thirty two kilometres. [beat] The y part is small, because Brest is close to the prime meridian, and it's negative,
+    because Brest is just west of it.
   on_screen_eq:
     latex: x=a\cos\varphi\cos\lambda,\qquad y=a\cos\varphi\sin\lambda
     vallis_eq: Vallis §2.2.2 (p. 61) coordinates (λ, ϑ, r) and Fig. 2.3 (p. 62); Kundu App. B §B.5 spherical polar coordinates with colatitude
@@ -1662,41 +1774,41 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s18_position_vector
   t:
-  - 1221.0
-  - 1327.975
+  - 1219.5
+  - 1326.475
   sentence_times:
-  - - 1221.0
-    - 1223.5
-  - - 1223.85
-    - 1228.775
-  - - 1229.125
-    - 1234.675
-  - - 1235.025
-    - 1240.3
-  - - 1240.65
-    - 1244.25
-  - - 1244.6
-    - 1254.4
-  - - 1255.9
-    - 1260.45
-  - - 1260.8
-    - 1271.625
-  - - 1273.125
-    - 1283.9
-  - - 1285.4
-    - 1291.1
-  - - 1291.45
-    - 1295.45
-  - - 1295.8
-    - 1301.525
-  - - 1301.875
-    - 1305.3
-  - - 1305.65
-    - 1311.675
-  - - 1312.025
-    - 1320.15
-  - - 1321.65
-    - 1327.175
+  - - 1219.5
+    - 1222.0
+  - - 1222.35
+    - 1227.275
+  - - 1227.625
+    - 1233.175
+  - - 1233.525
+    - 1238.8
+  - - 1239.15
+    - 1242.75
+  - - 1243.1
+    - 1252.9
+  - - 1254.4
+    - 1258.95
+  - - 1259.3
+    - 1270.125
+  - - 1271.625
+    - 1282.4
+  - - 1283.9
+    - 1289.6
+  - - 1289.95
+    - 1293.95
+  - - 1294.3
+    - 1300.025
+  - - 1300.375
+    - 1303.8
+  - - 1304.15
+    - 1310.175
+  - - 1310.525
+    - 1318.65
+  - - 1320.15
+    - 1325.675
   beat: 'derivation D23-D24 assembled: the position vector, its length check, r-hat'
   visual: 'Left (picture zone): the whole globe, semi-transparent, with the teal position arrow from the centre to Brest and its three parts drawn
     as a dashed box path (x along x, y along y, z up; orange), each tagged with its km (''4217'', ''−332'', ''4764''). Right (maths zone): the
@@ -1751,33 +1863,33 @@ scenes:
     stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s19_khulna
   t:
-  - 1327.975
-  - 1426.55
+  - 1326.475
+  - 1425.05
   sentence_times:
-  - - 1327.975
-    - 1331.7
-  - - 1332.05
-    - 1344.375
-  - - 1344.725
-    - 1350.425
-  - - 1350.775
-    - 1355.4
-  - - 1355.75
-    - 1368.125
-  - - 1369.625
-    - 1379.35
-  - - 1380.85
-    - 1387.65
-  - - 1388.0
-    - 1395.325
-  - - 1395.675
-    - 1402.725
-  - - 1404.225
-    - 1411.5
-  - - 1413.0
-    - 1419.075
-  - - 1419.425
-    - 1425.75
+  - - 1326.475
+    - 1330.2
+  - - 1330.55
+    - 1342.875
+  - - 1343.225
+    - 1348.925
+  - - 1349.275
+    - 1353.9
+  - - 1354.25
+    - 1366.625
+  - - 1368.125
+    - 1377.85
+  - - 1379.35
+    - 1386.15
+  - - 1386.5
+    - 1393.825
+  - - 1394.175
+    - 1401.225
+  - - 1402.725
+    - 1410.0
+  - - 1411.5
+    - 1417.575
+  - - 1417.925
+    - 1424.25
   beat: 'derivation D25: the same for Khulna (Bay of Bengal city; Amphan from Part 2)'
   visual: 'S1-S2: zoom-reveal flight to Khulna (globe full-bleed, Bay of Bengal centred within 1 s of ''Khulna''): labels ''Khulna'', ''Bangladesh'',
     ''Sundarbans'' (the mangrove green visible in BMNG), ''Bay of Bengal'', and a thin Amphan track line (IBTrACS) on their words, its source
@@ -1834,47 +1946,47 @@ scenes:
     stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s20_spin_rate
   t:
-  - 1426.55
-  - 1532.8106
+  - 1425.05
+  - 1531.05
   sentence_times:
-  - - 1426.55
-    - 1430.3
-  - - 1430.65
-    - 1437.775
-  - - 1438.125
-    - 1444.75
-  - - 1445.1
-    - 1447.5
-  - - 1447.85
-    - 1450.875
-  - - 1451.225
-    - 1454.1
-  - - 1454.45
-    - 1462.3356
-  - - 1462.6856
-    - 1465.1856
-  - - 1465.5356
-    - 1472.8106
-  - - 1473.1606
-    - 1476.7856
-  - - 1477.1356
-    - 1482.0356
-  - - 1482.3856
-    - 1486.9106
-  - - 1487.2606
-    - 1490.8106
-  - - 1491.1606
-    - 1499.6106
-  - - 1499.9606
-    - 1506.4106
-  - - 1506.7606
-    - 1511.1606
-  - - 1511.5106
-    - 1517.9856
-  - - 1518.3356
-    - 1524.6356
-  - - 1526.1356
-    - 1532.0106
+  - - 1425.05
+    - 1428.8
+  - - 1429.15
+    - 1436.275
+  - - 1436.625
+    - 1443.25
+  - - 1443.6
+    - 1446.0
+  - - 1446.35
+    - 1449.375
+  - - 1449.725
+    - 1452.6
+  - - 1452.95
+    - 1461.0
+  - - 1461.35
+    - 1463.85
+  - - 1464.2
+    - 1471.475
+  - - 1471.825
+    - 1475.45
+  - - 1475.8
+    - 1480.7
+  - - 1481.05
+    - 1485.575
+  - - 1485.925
+    - 1489.05
+  - - 1489.4
+    - 1497.85
+  - - 1498.2
+    - 1504.65
+  - - 1505.0
+    - 1509.4
+  - - 1509.75
+    - 1516.225
+  - - 1516.575
+    - 1522.875
+  - - 1524.375
+    - 1530.25
   beat: 'derivation D27 (1)-(4): ground speed U = Omega a cos phi (U-CO-051)'
   visual: 'Globe with the spin axis (slate) and Brest''s parallel (orange ring, radius tag ''a cos φ''), spinning slowly. S5-S6: a clock glyph
     with a star icon, ''one turn: 23 h 56 min'', ''T'' (KaTeX). S7: a small sun-and-orbit glyph in the column (the Earth moving along its orbit:
@@ -1885,8 +1997,8 @@ scenes:
     parallel. The radius of that circle is the distance from the axis, the Earth''s radius times cosine phi. How fast is the ground moving? Let''s work it
     out, one step at a time. First, how long does one turn take? Measured against the distant stars, the Earth turns once every twenty three hours, fifty
     six minutes and four seconds. We call this time capital T. It''s four minutes shorter than a day from noon to noon, because the Earth also moves along
-    its orbit round the Sun. Second, how far does the place travel in one turn? Once round its circle, which is two pi times the radius of the circle. That''s
-    two pi, times the Earth''s radius, times cosine phi. Third, speed is distance divided by time. So the ground speed, capital U, is two pi, times the Earth''s
+    its orbit round the Sun. Next, how far does the place travel in one turn? Once round its circle, which is two pi times the radius of the circle. That''s
+    two pi, times the Earth''s radius, times cosine phi. So, speed is distance divided by time. So the ground speed, capital U, is two pi, times the Earth''s
     radius, times cosine phi, divided by capital T. Fourth, we pull out the part that''s the same for every place: two pi divided by capital T. That''s the
     angle the Earth turns through each second, in radians. It''s called the Earth''s spin rate, and we write it capital Omega, as in the cross product movie.
     So capital U equals capital Omega, times the Earth''s radius, times cosine phi. [beat] It''s Part 2''s rule for a ring again: the speed is the radius
@@ -1949,47 +2061,47 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s21_ground_speeds
   t:
-  - 1532.8106
-  - 1682.2725
+  - 1531.05
+  - 1680.3
   sentence_times:
-  - - 1532.8106
-    - 1535.4856
-  - - 1535.8356
-    - 1546.0606
-  - - 1546.4106
-    - 1553.5356
-  - - 1553.8856
-    - 1555.6606
-  - - 1556.0106
-    - 1564.2859
-  - - 1564.6359
-    - 1576.8687
-  - - 1578.3687
-    - 1581.4437
-  - - 1581.7937
-    - 1594.7975
-  - - 1596.2975
-    - 1608.8975
-  - - 1609.2475
-    - 1612.9475
-  - - 1613.2975
-    - 1619.7725
-  - - 1621.2725
-    - 1628.2475
-  - - 1629.7475
-    - 1636.2725
-  - - 1637.7725
-    - 1647.4475
-  - - 1647.7975
-    - 1652.5725
-  - - 1654.0725
-    - 1659.4975
-  - - 1659.8475
-    - 1664.1475
-  - - 1664.4975
-    - 1670.8225
-  - - 1671.1725
-    - 1681.4725
+  - - 1531.05
+    - 1533.725
+  - - 1534.075
+    - 1544.3
+  - - 1544.65
+    - 1551.775
+  - - 1552.125
+    - 1553.9
+  - - 1554.25
+    - 1562.075
+  - - 1562.425
+    - 1574.625
+  - - 1576.125
+    - 1579.2
+  - - 1579.55
+    - 1592.825
+  - - 1594.325
+    - 1606.925
+  - - 1607.275
+    - 1610.975
+  - - 1611.325
+    - 1617.8
+  - - 1619.3
+    - 1626.275
+  - - 1627.775
+    - 1634.3
+  - - 1635.8
+    - 1645.475
+  - - 1645.825
+    - 1650.6
+  - - 1652.1
+    - 1657.525
+  - - 1657.875
+    - 1662.175
+  - - 1662.525
+    - 1668.85
+  - - 1669.2
+    - 1679.5
   beat: 'derivation D27 (5)-(6): numbers at the equator, Singapore, Khulna, Brest, Longyearbyen, the pole (Must 11)'
   visual: 'Globe spinning slowly (one turn in 20 s), the axis slate; rings for the equator, Khulna, Brest, Longyearbyen (Singapore''s ring is
     the equator''s within 0.03 %); each ring gets a teal speed arrow pointing east with moving dashes, length ∝ Ω a cos φ. S1-S2: CalcStack ''T
@@ -2061,41 +2173,41 @@ scenes:
     18).'
 - id: s22_distance_north
   t:
-  - 1682.2725
-  - 1788.9975
+  - 1680.3
+  - 1787.025
   sentence_times:
-  - - 1682.2725
-    - 1686.5225
-  - - 1686.8725
-    - 1696.7225
-  - - 1697.0725
-    - 1699.2725
-  - - 1699.6225
-    - 1702.6225
-  - - 1702.9725
-    - 1710.1975
-  - - 1710.5475
-    - 1714.9975
-  - - 1715.3475
-    - 1722.5975
-  - - 1722.9475
-    - 1730.9475
-  - - 1731.2975
-    - 1739.8975
-  - - 1740.2475
-    - 1742.8475
-  - - 1743.1975
-    - 1748.1975
-  - - 1748.5475
-    - 1755.9725
-  - - 1757.4725
-    - 1765.2975
-  - - 1766.7975
-    - 1775.7975
-  - - 1777.2975
-    - 1782.9975
-  - - 1783.3475
-    - 1788.1975
+  - - 1680.3
+    - 1684.55
+  - - 1684.9
+    - 1694.75
+  - - 1695.1
+    - 1697.3
+  - - 1697.65
+    - 1700.65
+  - - 1701.0
+    - 1708.225
+  - - 1708.575
+    - 1713.025
+  - - 1713.375
+    - 1720.625
+  - - 1720.975
+    - 1728.975
+  - - 1729.325
+    - 1737.925
+  - - 1738.275
+    - 1740.875
+  - - 1741.225
+    - 1746.225
+  - - 1746.575
+    - 1754.0
+  - - 1755.5
+    - 1763.325
+  - - 1764.825
+    - 1773.825
+  - - 1775.325
+    - 1781.025
+  - - 1781.375
+    - 1786.225
   beat: 'derivation D28: Delta y = a Delta phi on the meridian slice (U-CO-052)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2174,25 +2286,25 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s23_north_examples
   t:
-  - 1788.9975
-  - 1842.4225
+  - 1787.025
+  - 1840.45
   sentence_times:
-  - - 1788.9975
-    - 1790.7725
-  - - 1791.1225
-    - 1801.6225
-  - - 1803.1225
-    - 1808.4725
-  - - 1808.8225
-    - 1814.5225
-  - - 1814.8725
-    - 1824.7975
-  - - 1826.2975
-    - 1834.3725
-  - - 1834.7225
-    - 1837.8475
-  - - 1838.1975
-    - 1841.6225
+  - - 1787.025
+    - 1788.8
+  - - 1789.15
+    - 1799.65
+  - - 1801.15
+    - 1806.5
+  - - 1806.85
+    - 1812.55
+  - - 1812.9
+    - 1822.825
+  - - 1824.325
+    - 1832.4
+  - - 1832.75
+    - 1835.875
+  - - 1836.225
+    - 1839.65
   beat: 'worked examples: one minute = the nautical mile; Brest to the equator 5382 km (arc vs straight height)'
   visual: 'Same two-view. S1-S2: the step shrinks to one minute (x60 magnifier inset in the flat view); CalcStack ''111.2 km ÷ 60 ≈ 1.85 km'',
     keyword ''nautical mile''. S3-S4: the walker goes from Brest down the rim to the equator (orange arc, both views); CalcStack ''48.4 × 111.2
@@ -2234,29 +2346,29 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s24_distance_east
   t:
-  - 1842.4225
-  - 1911.5225
+  - 1840.45
+  - 1909.55
   sentence_times:
-  - - 1842.4225
-    - 1844.5725
-  - - 1844.9225
-    - 1848.0475
-  - - 1848.3975
-    - 1855.9725
-  - - 1856.3225
-    - 1862.2975
-  - - 1862.6475
-    - 1865.9725
-  - - 1866.3225
-    - 1875.0475
-  - - 1875.3975
-    - 1882.9975
-  - - 1883.3475
-    - 1890.6475
-  - - 1890.9975
-    - 1902.4725
-  - - 1903.9725
-    - 1910.7225
+  - - 1840.45
+    - 1842.6
+  - - 1842.95
+    - 1846.075
+  - - 1846.425
+    - 1854.0
+  - - 1854.35
+    - 1860.325
+  - - 1860.675
+    - 1864.0
+  - - 1864.35
+    - 1873.075
+  - - 1873.425
+    - 1881.025
+  - - 1881.375
+    - 1888.675
+  - - 1889.025
+    - 1900.5
+  - - 1902.0
+    - 1908.75
   beat: 'derivation D29: Delta x = a cos phi Delta lambda on the parallel slice (U-CO-053)'
   visual: 'TwoViewSlice (new kit_co component, promote to house/kit on second use): left x 80-940 the three.js slice, right x 980-1840 the same
     cut face drawn flat in SVG; ONE item list {kind, frame} drives both views, so every item (centre, axis, equator line, arrow, angle arc, dropped
@@ -2327,31 +2439,31 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s25_degree_east
   t:
-  - 1911.5225
-  - 1992.5725
+  - 1909.55
+  - 1990.6
   sentence_times:
-  - - 1911.5225
-    - 1914.1975
-  - - 1914.5475
-    - 1924.7725
-  - - 1925.1225
-    - 1930.0225
-  - - 1930.3725
-    - 1936.0225
-  - - 1936.3725
-    - 1946.8475
-  - - 1948.3475
-    - 1955.5975
-  - - 1957.0975
-    - 1960.3725
-  - - 1961.8725
-    - 1971.2475
-  - - 1972.7475
-    - 1976.6475
-  - - 1976.9975
-    - 1984.5725
-  - - 1984.9225
-    - 1991.7725
+  - - 1909.55
+    - 1912.225
+  - - 1912.575
+    - 1922.8
+  - - 1923.15
+    - 1928.05
+  - - 1928.4
+    - 1934.05
+  - - 1934.4
+    - 1944.875
+  - - 1946.375
+    - 1953.625
+  - - 1955.125
+    - 1958.4
+  - - 1959.9
+    - 1969.275
+  - - 1970.775
+    - 1974.675
+  - - 1975.025
+    - 1982.6
+  - - 1982.95
+    - 1989.8
   beat: 'intuition: one degree east at four latitudes, globe and flat strip side by side (U-CO-055, U-CO-056; Should 16)'
   visual: 'Two-view: left the globe (camera at 35 N) with four parallel discs cut at 1.35 N (Singapore), 22.8 N (Khulna), 48.4 N (Brest), 78.2
     N (Longyearbyen), each a thin translucent disc with its radius drawn from the axis (teal) and a gold 1-deg step on its rim (x5); right a flat
@@ -2409,39 +2521,39 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s26_grid_boxes
   t:
-  - 1992.5725
-  - 2097.1719
+  - 1990.6
+  - 2095.35
   sentence_times:
-  - - 1992.5725
-    - 1996.2475
-  - - 1996.5975
-    - 2007.6225
-  - - 2007.9725
-    - 2013.8475
-  - - 2014.1975
-    - 2019.4225
-  - - 2019.7725
-    - 2028.6225
-  - - 2030.1225
-    - 2032.8725
-  - - 2033.2225
-    - 2039.2725
-  - - 2040.7725
-    - 2045.2475
-  - - 2046.7475
-    - 2049.5975
-  - - 2051.0975
-    - 2059.0475
-  - - 2060.5475
-    - 2064.2225
-  - - 2064.5725
-    - 2072.2975
-  - - 2073.7975
-    - 2081.2725
-  - - 2081.6225
-    - 2088.3969
-  - - 2088.7469
-    - 2096.3719
+  - - 1990.6
+    - 1994.275
+  - - 1994.625
+    - 2005.65
+  - - 2006.0
+    - 2011.875
+  - - 2012.225
+    - 2017.45
+  - - 2017.8
+    - 2026.65
+  - - 2028.15
+    - 2030.9
+  - - 2031.25
+    - 2037.3
+  - - 2038.8
+    - 2043.275
+  - - 2044.775
+    - 2047.625
+  - - 2049.125
+    - 2057.075
+  - - 2058.575
+    - 2062.25
+  - - 2062.6
+    - 2070.325
+  - - 2071.825
+    - 2079.3
+  - - 2079.65
+    - 2086.575
+  - - 2086.925
+    - 2094.55
   beat: 'application: ERA5 grid boxes thin towards the poles (Should 6 spoken)'
   visual: 'Four real map panels side by side, each 400 px wide with 20-px gaps (x 80-480, 500-900, 920-1320, 1340-1740; y 140-600), each in a
     polar-aspect LAEA centred on its place so the boxes keep their true shape: Singapore (Strait of Singapore), Khulna (the Sundarbans and the
@@ -2495,45 +2607,45 @@ scenes:
     these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s27_area_patch
   t:
-  - 2097.1719
-  - 2206.908
+  - 2095.35
+  - 2205.0
   sentence_times:
-  - - 2097.1719
-    - 2099.7469
-  - - 2100.0969
-    - 2101.7219
-  - - 2102.0719
-    - 2109.7469
-  - - 2110.0969
-    - 2117.5719
-  - - 2117.9219
-    - 2128.208
-  - - 2128.558
-    - 2133.808
-  - - 2134.158
-    - 2138.733
-  - - 2139.083
-    - 2145.133
-  - - 2145.483
-    - 2151.358
-  - - 2151.708
-    - 2156.858
-  - - 2157.208
-    - 2161.283
-  - - 2161.633
-    - 2166.583
-  - - 2166.933
-    - 2174.408
-  - - 2174.758
-    - 2179.683
-  - - 2180.033
-    - 2187.358
-  - - 2187.708
-    - 2194.308
-  - - 2194.658
-    - 2202.883
-  - - 2203.233
-    - 2206.108
+  - - 2095.35
+    - 2097.925
+  - - 2098.275
+    - 2099.9
+  - - 2100.25
+    - 2107.925
+  - - 2108.275
+    - 2115.75
+  - - 2116.1
+    - 2126.3
+  - - 2126.65
+    - 2131.9
+  - - 2132.25
+    - 2136.825
+  - - 2137.175
+    - 2143.225
+  - - 2143.575
+    - 2149.45
+  - - 2149.8
+    - 2154.95
+  - - 2155.3
+    - 2159.375
+  - - 2159.725
+    - 2164.675
+  - - 2165.025
+    - 2172.5
+  - - 2172.85
+    - 2177.775
+  - - 2178.125
+    - 2185.45
+  - - 2185.8
+    - 2192.4
+  - - 2192.75
+    - 2200.975
+  - - 2201.325
+    - 2204.2
   beat: 'derivation D30: dA = a^2 cos phi dphi dlambda (U-CO-058; Should 7)'
   visual: 'Globe zoomed to a patch at Brest (zoom-reveal), between two meridians and two parallels 5 deg apart (x20 an ERA5 box so it reads);
     the patch gold, slightly curved. S4: its north-south side tagged ''a Δφ'' (orange); S5: its east-west side ''a cos φ Δλ'' (orange), each a
@@ -2617,29 +2729,29 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s28_box_areas
   t:
-  - 2206.908
-  - 2286.808
+  - 2205.0
+  - 2284.9
   sentence_times:
-  - - 2206.908
-    - 2210.633
-  - - 2210.983
-    - 2216.433
-  - - 2216.783
-    - 2225.033
-  - - 2226.533
-    - 2239.158
-  - - 2240.658
-    - 2244.233
-  - - 2244.583
-    - 2253.708
-  - - 2255.208
-    - 2261.183
-  - - 2262.683
-    - 2269.383
-  - - 2270.883
-    - 2276.608
-  - - 2276.958
-    - 2285.308
+  - - 2205.0
+    - 2208.725
+  - - 2209.075
+    - 2214.525
+  - - 2214.875
+    - 2223.125
+  - - 2224.625
+    - 2237.25
+  - - 2238.75
+    - 2242.325
+  - - 2242.675
+    - 2251.8
+  - - 2253.3
+    - 2259.275
+  - - 2260.775
+    - 2267.475
+  - - 2268.975
+    - 2274.7
+  - - 2275.05
+    - 2283.4
   beat: 'worked numbers: ERA5 box areas 773, 712, 513, 158 km^2; the exact curved patch'
   visual: 'Left: four 3-D tiles (flat, to scale with each other) in a row like the s26 boxes, each with x and y edge tags (27.8 × 27.8, 27.8 ×
     25.6, 27.8 × 18.5, 27.8 × 5.7 km) and its place name below; right: CalcStack. S1: ''0.25° ≈ 0.00436 rad''. S2: ''a² = 6371² ≈ 40.6 million
@@ -2660,10 +2772,12 @@ scenes:
       on the surface'
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
-  - 0.25^\circ\approx0.00436\ \text{rad}
-  - a^2=6371^2\approx40.6\times10^{6}\ \text{km}^2
-  - 40.6\times10^{6}\times0.00436\times0.00436\approx773\ \text{km}^2
-  - 773\times0.9219\approx712,\quad773\times0.6639\approx513,\quad773\times0.2045\approx158\ \text{km}^2
+  - 0.25^\circ=0.25\times\dfrac{\pi}{180}=0.0043633\approx0.00436\ \text{rad}
+  - a^2=6371^2=40.59\times10^{6}\approx40.6\times10^{6}\ \text{km}^2
+  - 40.59\times10^{6}\times0.0043633\times0.0043633\approx772.8\approx773\ \text{km}^2
+  - 772.8\times0.9219\approx712.4\approx712,\quad772.8\times0.6639\approx513.1\approx513,\quad772.8\times0.2045\approx158.0\approx158\ \text{km}^2
+  # build 1 (2026-11-06): one more digit on screen, then the spoken rounding, so each shown product is true to its last digit (the two former
+  # DS24 flags; the voice is unchanged)
   physics_source:
     fn: fluidpy.geo.sphere.arc_lengths (0.25 deg); fluidpy.geo.sphere.polygon_area (exact cell)
     params:
@@ -2688,29 +2802,29 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s29_strip_round
   t:
-  - 2286.808
-  - 2346.133
+  - 2284.9
+  - 2344.225
   sentence_times:
-  - - 2286.808
-    - 2288.808
-  - - 2289.158
-    - 2295.658
-  - - 2296.008
-    - 2297.433
-  - - 2297.783
-    - 2306.283
-  - - 2306.633
-    - 2309.583
-  - - 2309.933
-    - 2318.158
-  - - 2318.508
-    - 2323.133
-  - - 2323.483
-    - 2332.433
-  - - 2332.783
-    - 2337.683
-  - - 2338.033
-    - 2345.333
+  - - 2284.9
+    - 2286.9
+  - - 2287.25
+    - 2293.75
+  - - 2294.1
+    - 2295.525
+  - - 2295.875
+    - 2304.375
+  - - 2304.725
+    - 2307.675
+  - - 2308.025
+    - 2316.25
+  - - 2316.6
+    - 2321.225
+  - - 2321.575
+    - 2330.525
+  - - 2330.875
+    - 2335.775
+  - - 2336.125
+    - 2343.425
   beat: 'derivation D31 (1)-(2): a strip all round the Earth (U-CO-059)'
   visual: 'Globe at a 20 deg N view. S1-S3: column keyword ''area between 0° and φ?''; the band 0-30 N tints teal. S4: a thin gold strip all round
     between phi and phi + Δphi (drawn 5 deg wide at 25 N). S5 on AT(5,''Cut it and unroll it''): the strip cuts at one meridian and unrolls into
@@ -2769,33 +2883,33 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s30_slope_of_sine
   t:
-  - 2346.133
-  - 2420.708
+  - 2344.225
+  - 2418.8
   sentence_times:
-  - - 2346.133
-    - 2349.433
-  - - 2349.783
-    - 2352.433
-  - - 2352.783
-    - 2359.283
-  - - 2359.633
-    - 2365.608
-  - - 2365.958
-    - 2368.458
-  - - 2368.808
-    - 2374.183
-  - - 2374.533
-    - 2379.108
-  - - 2379.458
-    - 2386.008
-  - - 2386.358
-    - 2396.508
-  - - 2398.008
-    - 2406.108
-  - - 2406.458
-    - 2409.758
-  - - 2411.258
-    - 2419.908
+  - - 2344.225
+    - 2347.525
+  - - 2347.875
+    - 2350.525
+  - - 2350.875
+    - 2357.375
+  - - 2357.725
+    - 2363.7
+  - - 2364.05
+    - 2366.55
+  - - 2366.9
+    - 2372.275
+  - - 2372.625
+    - 2377.2
+  - - 2377.55
+    - 2384.1
+  - - 2384.45
+    - 2394.6
+  - - 2396.1
+    - 2404.2
+  - - 2404.55
+    - 2407.85
+  - - 2409.35
+    - 2418.0
   beat: 'derivation D31 (3)-(4): the slope of sine from Part 2 turns cos phi dphi into Delta(sin phi)'
   visual: 'Left: Part 2''s unit-circle picture (reused module): the arrow at angle phi, a small step Δphi, the tip rising by Δ(sin φ) (orange)
     ≈ cos φ Δφ; right: CalcStack. S3-S4: ''cos φ Δφ ≈ Δ(sin φ)''. S5-S8: the check with a 20-30 deg strip: ''Δφ = 10° ≈ 0.1745 rad'', ''cos 25°
@@ -2813,7 +2927,7 @@ scenes:
     vallis_eq: 'none: arithmetic or a definition (no book equation) (the slope of sine, derived in Part 2 D12)'
     page_png: null
   calc_rows:
-  - 10^\circ\approx0.1745\ \text{rad},\quad\cos25^\circ\approx0.906
+  - 10^\circ=10\times\dfrac{\pi}{180}\approx0.1745\ \text{rad},\quad\cos25^\circ\approx0.906
   - 0.906\times0.1745\approx0.158
   - \sin30^\circ-\sin20^\circ=0.5-0.342=0.158
   - \text{strip}\approx2\pi a^2\,\Delta(\sin\varphi)
@@ -2855,35 +2969,35 @@ scenes:
     builder checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s31_adding_strips
   t:
-  - 2420.708
-  - 2501.608
+  - 2418.8
+  - 2499.7
   sentence_times:
-  - - 2420.708
-    - 2425.683
-  - - 2426.033
-    - 2431.108
-  - - 2431.458
-    - 2437.183
-  - - 2437.533
-    - 2440.533
-  - - 2440.883
-    - 2444.408
-  - - 2444.758
-    - 2452.533
-  - - 2454.033
-    - 2458.758
-  - - 2459.108
-    - 2467.183
-  - - 2468.683
-    - 2474.233
-  - - 2475.733
-    - 2480.358
-  - - 2480.708
-    - 2485.933
-  - - 2486.283
-    - 2493.458
-  - - 2493.808
-    - 2500.808
+  - - 2418.8
+    - 2423.775
+  - - 2424.125
+    - 2429.2
+  - - 2429.55
+    - 2435.275
+  - - 2435.625
+    - 2438.625
+  - - 2438.975
+    - 2442.5
+  - - 2442.85
+    - 2450.625
+  - - 2452.125
+    - 2456.85
+  - - 2457.2
+    - 2465.275
+  - - 2466.775
+    - 2472.325
+  - - 2473.825
+    - 2478.45
+  - - 2478.8
+    - 2484.025
+  - - 2484.375
+    - 2491.55
+  - - 2491.9
+    - 2498.9
   beat: 'derivation D31 (5)-(6): the staircase sum; integration named'
   visual: 'Left: three ten-degree strips on the globe (0-10, 10-20, 20-30 N), each lighting in turn; right: a staircase graph (x latitude 0-90
     deg, y sin φ 0-1, 52-px ticks) with the sine curve and three steps (gold risers 0.174, 0.168, 0.158) appearing with their strips on the same
@@ -2959,33 +3073,33 @@ scenes:
     its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s32_band_fraction
   t:
-  - 2501.608
-  - 2574.483
+  - 2499.7
+  - 2572.575
   sentence_times:
-  - - 2501.608
-    - 2503.758
-  - - 2504.108
-    - 2506.633
-  - - 2506.983
-    - 2514.458
-  - - 2514.808
-    - 2519.533
-  - - 2521.033
-    - 2529.158
-  - - 2530.658
-    - 2537.133
-  - - 2537.483
-    - 2540.408
-  - - 2540.758
-    - 2546.558
-  - - 2548.058
-    - 2550.333
-  - - 2550.683
-    - 2556.483
-  - - 2557.983
-    - 2567.458
-  - - 2568.958
-    - 2573.683
+  - - 2499.7
+    - 2501.85
+  - - 2502.2
+    - 2504.725
+  - - 2505.075
+    - 2512.55
+  - - 2512.9
+    - 2517.625
+  - - 2519.125
+    - 2527.25
+  - - 2528.75
+    - 2535.225
+  - - 2535.575
+    - 2538.5
+  - - 2538.85
+    - 2544.65
+  - - 2546.15
+    - 2548.425
+  - - 2548.775
+    - 2554.575
+  - - 2556.075
+    - 2565.55
+  - - 2567.05
+    - 2571.775
   beat: 'derivation D31 (7)-(8): checks and the share sin phi; half the Earth within 30 deg of the equator'
   visual: 'Globe (whole, unzoomed). S1-S3: the band fills from the equator to the pole (teal), ''sin 90° = 1'', CalcStack ''2π a² ≈ 255 million
     km²''. S4: the southern hemisphere fills too: ''4π a² ≈ 510 million km²''. S5: ''share = sin φ''. S6-S7: the band 0-30 N teal, the rest of
@@ -3042,35 +3156,35 @@ scenes:
     Opening keyword from frame 0 (Should 18).'
 - id: s33_archimedes
   t:
-  - 2574.483
-  - 2655.058
+  - 2572.575
+  - 2653.15
   sentence_times:
-  - - 2574.483
-    - 2580.808
-  - - 2581.158
-    - 2589.083
-  - - 2589.433
-    - 2598.408
-  - - 2598.758
-    - 2604.408
-  - - 2604.758
-    - 2608.958
-  - - 2609.308
-    - 2612.858
-  - - 2613.208
-    - 2619.108
-  - - 2619.458
-    - 2627.208
-  - - 2628.708
-    - 2630.458
-  - - 2630.808
-    - 2637.883
-  - - 2638.233
-    - 2645.583
-  - - 2645.933
-    - 2648.683
-  - - 2649.033
-    - 2654.258
+  - - 2572.575
+    - 2578.9
+  - - 2579.25
+    - 2587.175
+  - - 2587.525
+    - 2596.5
+  - - 2596.85
+    - 2602.5
+  - - 2602.85
+    - 2607.05
+  - - 2607.4
+    - 2610.95
+  - - 2611.3
+    - 2617.2
+  - - 2617.55
+    - 2625.3
+  - - 2626.8
+    - 2628.55
+  - - 2628.9
+    - 2635.975
+  - - 2636.325
+    - 2643.675
+  - - 2644.025
+    - 2646.775
+  - - 2647.125
+    - 2652.35
   beat: 'intuition: Archimedes'' cylinder (equal heights, equal areas)'
   visual: 'Globe inside a snug translucent cylinder (radius a, slate wireframe, 3-D, the camera orbiting slowly from outside at 15 deg elevation).
     S3: the band 0-phi (phi = 48.4) on the globe teal; horizontal arrows push it out onto the cylinder, where a matching teal band appears. S4:
@@ -3115,41 +3229,41 @@ scenes:
     checks its own stills: K6 cannot see these). No headings. Opening keyword from frame 0 (Should 18).'
 - id: s34_global_mean
   t:
-  - 2655.058
-  - 2760.508
+  - 2653.15
+  - 2758.6
   sentence_times:
-  - - 2655.058
-    - 2657.733
-  - - 2658.083
-    - 2670.733
-  - - 2671.083
-    - 2673.683
-  - - 2674.033
-    - 2679.208
-  - - 2679.558
-    - 2683.283
-  - - 2683.633
-    - 2688.283
-  - - 2688.633
-    - 2691.508
-  - - 2691.858
-    - 2699.908
-  - - 2700.258
-    - 2708.058
-  - - 2708.408
-    - 2710.458
-  - - 2711.958
-    - 2717.083
-  - - 2717.433
-    - 2727.933
-  - - 2728.283
-    - 2734.208
-  - - 2735.708
-    - 2740.233
-  - - 2741.733
-    - 2754.483
-  - - 2754.833
-    - 2759.708
+  - - 2653.15
+    - 2655.825
+  - - 2656.175
+    - 2668.825
+  - - 2669.175
+    - 2671.775
+  - - 2672.125
+    - 2677.3
+  - - 2677.65
+    - 2681.375
+  - - 2681.725
+    - 2686.375
+  - - 2686.725
+    - 2689.6
+  - - 2689.95
+    - 2698.0
+  - - 2698.35
+    - 2706.15
+  - - 2706.5
+    - 2708.55
+  - - 2710.05
+    - 2715.175
+  - - 2715.525
+    - 2726.025
+  - - 2726.375
+    - 2732.3
+  - - 2733.8
+    - 2738.325
+  - - 2739.825
+    - 2752.575
+  - - 2752.925
+    - 2757.8
   beat: 'application: the cos phi weighting of a global mean (toy, then ERA5 September 2026: 7.1 vs 16.3 C)'
   visual: 'S1-S6 (toy): two 3-D tiles from s28, the equator one (area 1) and the 60 N one (area 1/2), each with a thermometer icon ''30 °C'' and
     ''0 °C''; CalcStack ''plain: (30 + 0) ÷ 2 = 15'', ''weights: cos 0° = 1, cos 60° = 1/2'', ''weighted: (30 × 1 + 0 × 1/2) ÷ 1.5 = 20 °C''.
@@ -3176,7 +3290,7 @@ scenes:
     page_png: chapters/pages/ch02/p081.png
   calc_rows:
   - '\text{plain: }(30+0)\div2=15\ ^\circ\text{C}'
-  - '\text{weighted: }(30\times1+0\times\dfrac12)\div1.5=20\ ^\circ\text{C}'
+  - '\text{weighted: }(30\times1+0\times\dfrac12)\div(1+\dfrac12)=30\div1.5=20\ ^\circ\text{C}'
   physics_source:
     fn: fluidpy.diag.climatology.global_mean (cos-latitude weights); plain mean with numpy
     params:
@@ -3200,37 +3314,37 @@ scenes:
     from frame 0 (Should 18).'
 - id: s35_recap
   t:
-  - 2760.508
-  - 2879.5641
+  - 2758.6
+  - 2877.45
   sentence_times:
-  - - 2760.508
-    - 2769.158
-  - - 2769.508
-    - 2777.308
-  - - 2777.658
-    - 2783.408
-  - - 2783.758
-    - 2791.033
-  - - 2791.383
-    - 2796.383
-  - - 2796.733
-    - 2801.733
-  - - 2802.083
-    - 2809.833
-  - - 2810.183
-    - 2823.983
-  - - 2824.333
-    - 2835.4891
-  - - 2835.8391
-    - 2843.2641
-  - - 2843.6141
-    - 2850.8641
-  - - 2851.2141
-    - 2857.9891
-  - - 2858.3391
-    - 2870.3641
-  - - 2870.7141
-    - 2878.7641
+  - - 2758.6
+    - 2767.25
+  - - 2767.6
+    - 2775.4
+  - - 2775.75
+    - 2781.5
+  - - 2781.85
+    - 2789.125
+  - - 2789.475
+    - 2794.475
+  - - 2794.825
+    - 2799.825
+  - - 2800.175
+    - 2807.925
+  - - 2808.275
+    - 2822.075
+  - - 2822.425
+    - 2833.375
+  - - 2833.725
+    - 2841.15
+  - - 2841.5
+    - 2848.75
+  - - 2849.1
+    - 2855.875
+  - - 2856.225
+    - 2868.25
+  - - 2868.6
+    - 2876.65
   beat: recap ('To sum up'); the last sentence is the teaser to Part 4 (split plan §2g)
   visual: 'One beat per sentence, mini pictures reused (no headings): the globe with the centre and r; the sliced face with ''a ≈ 6400 km''; the
     phi wedge; the colatitude wedge with ''sin ↔ cos''; a parallel disc and a meridian; the lambda wedge from Greenwich; the two-view triangles
@@ -3268,15 +3382,15 @@ scenes:
     18).'
 - id: s36_end
   t:
-  - 2879.5641
-  - 2902.4641
+  - 2877.45
+  - 2900.35
   sentence_times:
-  - - 2879.5641
-    - 2885.7641
-  - - 2886.1141
-    - 2894.1641
-  - - 2894.5141
-    - 2902.1641
+  - - 2877.45
+    - 2883.65
+  - - 2884.0
+    - 2892.05
+  - - 2892.4
+    - 2900.05
   beat: series end card (maths ending, HOUSE_STYLE §3, word for word; decision 2)
   visual: 'END CARD (house EndCard): four faint topic thumbnails along the top (the sliced globe with phi, the graticule, the two-view triangle,
     the dA tile); keyword lines ''a series of maths tutorials'' (68 px) and ''atmospheric science · meteorology · fluid dynamics'' (54 px); notebook

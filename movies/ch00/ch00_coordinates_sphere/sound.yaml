@@ -1,0 +1,8 @@
+# ch00_coordinates_sphere (#5c, Part 3): sound cue sheet for tools/sound/mix.py (build 1, 2026-11-06, final TTS timing).
+# Score: the storyboard's own style 'meridian-glass' (tools/sound/styles.py), seed 31. The style has no scene-timed layers
+# (no enter_s / exit_s: re-checked against the final timing.json, 2026-11-06), so nothing in it depends on the timing.
+# Effects: none. The storyboard's effects_candidates is empty (no water, wind or storm is shown; HOUSE_STYLE §8).
+music: {style: meridian-glass, seed: 31, bed_lufs: -28, duck_db: 5, tail_s: 2.5}
+timing: timing.json
+sfx_duck_db: 5
+effects: []

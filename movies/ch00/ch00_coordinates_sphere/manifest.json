@@ -104,80 +104,80 @@
    "scene": "s00_title"
   },
   {
-   "time": "1:38",
-   "t_s": 98.75,
+   "time": "1:37",
+   "t_s": 97.875,
    "title": "the sphere, latitude and the parallel",
    "scene": "s03_sphere"
   },
   {
-   "time": "5:51",
-   "t_s": 351.525,
+   "time": "5:50",
+   "t_s": 350.65,
    "title": "colatitude and the sine-cosine swap",
    "scene": "s07_colatitude"
   },
   {
-   "time": "8:50",
-   "t_s": 530.25,
+   "time": "8:49",
+   "t_s": 529.375,
    "title": "meridians, the prime meridian, longitude",
    "scene": "s09_meridians"
   },
   {
-   "time": "13:46",
-   "t_s": 826.75,
+   "time": "13:45",
+   "t_s": 825.875,
    "title": "Earth-centred x, y, z",
    "scene": "s13_earth_axes"
   },
   {
-   "time": "14:59",
-   "t_s": 899.55,
+   "time": "14:58",
+   "t_s": 898.675,
    "title": "Brest's position, step by step",
    "scene": "s14_brest_side"
   },
   {
-   "time": "22:07",
-   "t_s": 1327.975,
+   "time": "22:06",
+   "t_s": 1326.475,
    "title": "Khulna",
    "scene": "s19_khulna"
   },
   {
-   "time": "23:46",
-   "t_s": 1426.55,
+   "time": "23:45",
+   "t_s": 1425.05,
    "title": "the spinning ground",
    "scene": "s20_spin_rate"
   },
   {
-   "time": "28:02",
-   "t_s": 1682.273,
+   "time": "28:00",
+   "t_s": 1680.3,
    "title": "distances north and east",
    "scene": "s22_distance_north"
   },
   {
-   "time": "33:12",
-   "t_s": 1992.572,
+   "time": "33:10",
+   "t_s": 1990.6,
    "title": "ERA5 grid boxes",
    "scene": "s26_grid_boxes"
   },
   {
-   "time": "34:57",
-   "t_s": 2097.172,
+   "time": "34:55",
+   "t_s": 2095.35,
    "title": "areas, step by step",
    "scene": "s27_area_patch"
   },
   {
-   "time": "42:54",
-   "t_s": 2574.483,
+   "time": "42:52",
+   "t_s": 2572.575,
    "title": "Archimedes",
    "scene": "s33_archimedes"
   },
   {
-   "time": "44:15",
-   "t_s": 2655.058,
+   "time": "44:13",
+   "t_s": 2653.15,
    "title": "global averages",
    "scene": "s34_global_mean"
   },
   {
-   "time": "46:00",
-   "t_s": 2760.508,
+   "time": "45:58",
+   "t_s": 2758.6,
    "title": "to sum up",
    "scene": "s35_recap"
   }
@@ -187,9 +187,9 @@
    "block": "K1",
    "chip_scene": "s08_sin_cos_swap",
    "chip_sentence": 3,
-   "chip_at_s": 415.8,
-   "skip_to": "8:50",
-   "skip_to_s": 530.25,
+   "chip_at_s": 414.925,
+   "skip_to": "8:49",
+   "skip_to_s": 529.375,
    "keep_scene": "s09_meridians",
    "keep_line": "If you skipped, here's what to keep. The colatitude is measured down from the pole, so a book that uses it has a cosine wherever we have a sine of the latitude, and the other way round."
   },
@@ -197,9 +197,9 @@
    "block": "K2",
    "chip_scene": "s14_brest_side",
    "chip_sentence": 2,
-   "chip_at_s": 914.65,
-   "skip_to": "25:32",
-   "skip_to_s": 1532.811,
+   "chip_at_s": 913.775,
+   "skip_to": "25:31",
+   "skip_to_s": 1531.05,
    "keep_scene": "s21_ground_speeds",
    "keep_line": "If you skipped, here's what to keep. A place at latitude phi sits the Earth's radius times sine phi above the equator plane, and the radius times cosine phi from the Earth's axis."
   },
@@ -207,9 +207,9 @@
    "block": "K3",
    "chip_scene": "s22_distance_north",
    "chip_sentence": 1,
-   "chip_at_s": 1686.872,
-   "skip_to": "31:51",
-   "skip_to_s": 1911.523,
+   "chip_at_s": 1684.9,
+   "skip_to": "31:49",
+   "skip_to_s": 1909.55,
    "keep_scene": "s25_degree_east",
    "keep_line": "If you skipped, here's what to keep. A degree of latitude is always about a hundred and eleven kilometres, but a degree of longitude is that times cosine phi, so it shrinks towards the poles."
   },
@@ -217,14 +217,14 @@
    "block": "K4",
    "chip_scene": "s27_area_patch",
    "chip_sentence": 4,
-   "chip_at_s": 2117.922,
-   "skip_to": "44:15",
-   "skip_to_s": 2655.058,
+   "chip_at_s": 2116.1,
+   "skip_to": "44:13",
+   "skip_to_s": 2653.15,
    "keep_scene": "s34_global_mean",
    "keep_line": "If you skipped, here's what to keep. Grid boxes shrink towards the poles by cosine phi, so the tropics are huge and the polar caps are small: half of the whole Earth lies between thirty degrees south and thirty degrees north."
   }
  ],
- "timing_provisional": true,
+ "timing_provisional": false,
  "inputs_sha256": {
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\IBTrACS-v04r01\\IBTrACS.NI.v04r01.nc": "5831ac1a03dbc74172f08e4eb8294327a00d49249d0a4a012ab0e2f4cdf2f272",
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\NE-10m-admin\\ne_10m_coastline.zip": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
@@ -235,9 +235,17 @@
   "G:\\Geophysical Fluid Dynamics\\aofd-data\\raw\\BMNG-2004\\world.topo.bathy.200409.3x21600x10800.jpg": "863036b622ba3dab4eb4ffb7149730b02cfa433ce49672e9b7267022051e04a2",
   "data/derived/ch00/era5_t2m_anom_2026-09_1deg.nc": "c5335076dfdf761c47fa71e8ec1129cb08a8047a3a907c662104328ee2d18824"
  },
- "render_assets": {},
+ "render_assets": {
+  "cs_bmng.jpg": "39e1e08c0edeffca2ee04b030e689733b494eed018e4f5c357b4b982e5c130d8",
+  "cs_panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
+  "cs_panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
+  "cs_panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
+  "cs_panel_sing.jpg": "505938614bd1ffe4063567055a6af18771dbe72e5ee106995dd2d78983ddfe11",
+  "cs_t2m_ee.png": "8a74899c2dd05b8668b22360a732dac250894f6a98a34f2d53121a2aacb9d022",
+  "cs_t2m_pc_polar.png": "7e9b6cea4a4c7fc759aa18fef88293eb1a0bdce3400d0b85ee79f2d22ea5b6f2"
+ },
  "data_files": {
-  "cs.json": "cd799d59bf617aa4250fa33adce3e17d7255a14b8d7686deac9d035dce256abb",
+  "cs.json": "9f45126c8f8bcecf73734a5ed0f096f38f00f05f6feca8ac5f47558ead496e7c",
   "img/panel_brest.jpg": "8f6d9495c0c2eece67ebc5d8717b3123672feda59ee4809f73817b92c996fb32",
   "img/panel_khulna.jpg": "0b247a68d0ab9830607ee0c25a8eff15dd1703998229e96e018b69d0a0e9e159",
   "img/panel_lyb.jpg": "1e650089f0c04494cacf04eadaa93f2cc922ad4b10750f852f350229ea89d7b0",
@@ -1304,16 +1312,71 @@
   },
   {
    "id": "DS24",
-   "name": "screen: 773 × 0.6639 ≈ 513, 773 × 0.2045 ≈ 158",
+   "name": "screen: 0.25° = 0.25 × π/180 = 0.0043633 ≈ 0.00436 rad; 6371² = 40.59 × 10⁶ ≈ 40.6 × 10⁶ km²",
    "value": [
-    513.1947,
-    158.0785
+    0.004363,
+    0.004363,
+    40.589641
    ],
    "ref": [
-    513.2,
-    158.1
+    0.004363,
+    0.004363,
+    40.59
+   ],
+   "tol": [
+    5e-08,
+    5e-08,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "screen: 40.59 × 10⁶ × 0.0043633 × 0.0043633 ≈ 772.8 ≈ 773 km² (= the exact a² cos 0 (0.25° in rad)²)",
+   "value": [
+    772.768124,
+    772.769482
+   ],
+   "ref": [
+    772.8,
+    772.8
+   ],
+   "tol": [
+    0.05,
+    0.05
+   ],
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "screen: 772.8 × 0.9219 ≈ 712.4, × 0.6639 ≈ 513.1, × 0.2045 ≈ 158.0",
+   "value": [
+    712.44432,
+    513.06192,
+    158.0376
+   ],
+   "ref": [
+    712.4,
+    513.1,
+    158.0
    ],
    "tol": 0.05,
+   "pass": true
+  },
+  {
+   "id": "DS24",
+   "name": "screen roundings: 712.4 → 712, 513.1 → 513, 158.0 → 158 (the spoken values)",
+   "value": [
+    712.0,
+    513.0,
+    158.0
+   ],
+   "ref": [
+    712.0,
+    513.0,
+    158.0
+   ],
+   "tol": 0,
    "pass": true
   },
   {
@@ -1680,24 +1743,7 @@
    "pass": true
   }
  ],
- "flags": [
-  {
-   "id": "DS24",
-   "scene": "s28",
-   "what": "'40.6 × 10⁶ × 0.00436 × 0.00436 ≈ 773'",
-   "screen_or_voice": "screen and voice",
-   "hand_check": "with the rounded factors 771.8 (exact 772.8)",
-   "note": "≈ kept (773 is the exact value rounded); director may prefer 'zero point zero zero four three six three' — not changed"
-  },
-  {
-   "id": "DS24",
-   "scene": "s28",
-   "what": "'773 × 0.9219 ≈ 712'",
-   "screen_or_voice": "screen and voice",
-   "hand_check": "773 × 0.9219 = 712.6 (exact 712.4 from 772.8)",
-   "note": "≈ kept (712 is the exact area rounded)"
-  }
- ],
+ "flags": [],
  "physics": [
   {
    "fn": "fluidpy.geo.sphere.unit_vector",

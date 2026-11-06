@@ -409,10 +409,13 @@ def main() -> int:
     exact_band = a2 * q * (np.sin((BREST[0] + 0.125) * D2R) - np.sin((BREST[0] - 0.125) * D2R))
     row("DS24", "Brest cell exact a² Δλ (sin φ₂ − sin φ₁) = polygon_area = 513.06 km² ('five hundred and thirteen point one')", [ex_cells[2], exact_band], [513.06, 513.06], 0.01)
     row("DS24", "screen: 0.25° ≈ 0.00436 rad; 6371² ≈ 40.6 million km²", [q, a2 / 1e6], [0.00436, 40.59], [4e-6, 0.005])
-    flag("DS24", "s28", "'40.6 × 10⁶ × 0.00436 × 0.00436 ≈ 773'", "screen and voice", "with the rounded factors 771.8 (exact 772.8)",
-         "≈ kept (773 is the exact value rounded); director may prefer 'zero point zero zero four three six three' — not changed")
-    flag("DS24", "s28", "'773 × 0.9219 ≈ 712'", "screen and voice", "773 × 0.9219 = 712.6 (exact 712.4 from 772.8)", "≈ kept (712 is the exact area rounded)")
-    row("DS24", "screen: 773 × 0.6639 ≈ 513, 773 × 0.2045 ≈ 158", [773 * 0.6639, 773 * 0.2045], [513.2, 158.1], 0.05)
+    # build 1 (2026-11-06): the two former DS24 flags (40.6 × 0.00436² = 771.8, not 773; 773 × 0.9219 = 712.6, not 712) are
+    # fixed on screen: the rows carry one more digit (0.0043633, 40.59, 772.8) and then the spoken rounding, so every shown
+    # product is true to its last digit (Part 1 lessons A1/A6). The voice keeps "0.00436", "40.6 million", "773", "712".
+    row("DS24", "screen: 0.25° = 0.25 × π/180 = 0.0043633 ≈ 0.00436 rad; 6371² = 40.59 × 10⁶ ≈ 40.6 × 10⁶ km²", [0.25 * np.pi / 180, q, a2 / 1e6], [0.0043633, 0.0043633, 40.59], [5e-8, 5e-8, 0.005])
+    row("DS24", "screen: 40.59 × 10⁶ × 0.0043633 × 0.0043633 ≈ 772.8 ≈ 773 km² (= the exact a² cos 0 (0.25° in rad)²)", [40.59e6 * 0.0043633 ** 2, flat[0]], [772.8, 772.8], [0.05, 0.05])
+    row("DS24", "screen: 772.8 × 0.9219 ≈ 712.4, × 0.6639 ≈ 513.1, × 0.2045 ≈ 158.0", [772.8 * 0.9219, 772.8 * 0.6639, 772.8 * 0.2045], [712.4, 513.1, 158.0], 0.05)
+    row("DS24", "screen roundings: 712.4 → 712, 513.1 → 513, 158.0 → 158 (the spoken values)", [round(712.4), round(513.1), round(158.0)], [712, 513, 158], 0)
     # the s27 patch at Brest, 5° × 5° (×20 an ERA5 box): exact vs flat
     pl5, po5 = cell_poly(BREST[0], BREST[1], 5.0, 200)
     p5 = float(call(GS + "polygon_area", "s27", "the 5° patch at Brest (exact)", heavy_call=True, lat=pl5, lon=po5)) / 1e6

@@ -40,7 +40,7 @@ const CAMF = camFace(LON0, 3.3);
 const TB = { x: 1150, y: 160, w: 690, h: 480 };
 const S00: React.FC = () => {
   const f = useCurrentFrame(), k = K("s00_title");
-  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "the easy way");
+  const tMet = AT(k, 0, "meteorology"), tEasy = AT(k, 0, "coordinates on our round Earth");   // HOUSE_STYLE §3 (2026-11-06): the promise pulses on the concept words, never "the easy way"
   const pz = 1 + 0.06 * pulse(f, tEasy, 14);
   const oA = fout(f, tMet, 12), oB = fin(f, tMet, 12);
   const camA = globePath([{ f: 0, lat: 14, lon: LON0 - 40, dist: 3.2 }, { f: 60, lat: 8, lon: LON0 - 75, dist: 3.2 }], f);
@@ -315,7 +315,7 @@ const S04: React.FC = () => {
   const G = globeG(cam);
   const c0 = G.pw([0, 0, 0]), pb = G.pw(fpt(BU, BV)), mid: Pt = [(c0[0] + pb[0]) / 2, (c0[1] + pb[1]) / 2];
   const balP = G.pw(fpt(BU * (1 + 500 / 6371), BV * (1 + 500 / 6371)));
-  const isA = fin(f, tA, 10);
+  const isA = fin(f, tA + 8, 10);
   return (
     <Scene>
       <Earth cam={cam} cut={merCut(slide)} coast={0.4}
@@ -334,7 +334,8 @@ const S04: React.FC = () => {
       <GSrc />
       <Svg>
         <g data-lc-maplabel="1"><Lbl x={pb[0] + 22} y={pb[1] - 28} t="Brest" c={C.key} s={T.floor} o={fin(f, tBrest)} /></g>
-        <Lbl x={mid[0] - 28} y={mid[1] - 18} t="r" c={RAD} s={T.key} a="end" o={fin(f, tR) * (1 - isA)} />
+        {/* K6 k6r1: r fades out over the 8 frames before "We call it a", a fades in 8 frames after (no cross-fade on one spot) */}
+        <Lbl x={mid[0] - 28} y={mid[1] - 18} t="r" c={RAD} s={T.key} a="end" o={fin(f, tR) * (1 - fin(f, tA - 8, 8))} />
         <Lbl x={mid[0] - 28} y={mid[1] - 18} t="a" c={RAD} s={T.key} a="end" o={isA} />
         <Balloon p={balP} s={0.9} o={fin(f, tBal)} />
         <Keyword f={f} text="slice" at={[XC, 150]} appear={0} out={tRad - 30} />
@@ -382,7 +383,7 @@ const S05: React.FC = () => {
       <GSrc />
       <Svg>
         <g data-lc-maplabel="1">
-          <Lbl x={P(1.06, 0)[0] + 6} y={P(1.06, 0)[1] + 34} t="equator" c={C.key} s={T.floor} o={fin(f, tEq)} />
+          <Lbl x={P(0.97, 0)[0]} y={P(0.97, 0)[1] + 44} t="equator" c={C.key} s={T.floor} a="end" o={fin(f, tEq)} />{/* K6 k6r1: inside the face, under the line end (it sat on the range row) */}
           <Lbl x={lab(0)[0] + 10} y={lab(0)[1] - 34} t="0°" c={C.key} s={T.floor} o={win(f, t0 + 20, t45)} />
           <Lbl x={lab(45)[0] + 10} y={lab(45)[1] - 10} t="45°" c={C.key} s={T.floor} o={win(f, t45 + 20, t90)} />
           <Lbl x={P(0, 1)[0] + 24} y={P(0, 1)[1] + 40} t="90° N" c={C.key} s={T.floor} o={win(f, t90 + 20, tS)} />
@@ -438,7 +439,8 @@ const S06: React.FC = () => {
               {gseg(Gg, [0, 0, 0], ll(0, lonNow, 0.42), C.local, 3, 0.8, "8 8")}
             </g> : null}
             {gdot(Gg, BREST[0], BREST[1], C.gold, 10)}
-            {LAB48.map((l, i) => plab(Gg, PHI + 3.2, l.lon, l.t, win(f, at[i], at[i] + 75) * facing(Gg, PHI, l.lon), 0, -26, "middle", l.t === "Atlantic"))}
+            {/* K6 k6r1: each name is gone (10-frame fade) 8 frames before the next one comes in (they cross-faded on one spot) */}
+            {LAB48.map((l, i) => plab(Gg, PHI + 3.2, l.lon, l.t, win(f, at[i], i + 1 < at.length ? Math.min(at[i] + 75, at[i + 1] - 18) : at[i] + 75) * facing(Gg, PHI, l.lon), 0, -26, "middle", l.t === "Atlantic"))}
             {f >= tAcross ? <g opacity={fin(f, tDisc)}>
               {gseg(Gg, [0, -0.05, 0], [0, Math.sin(CB), 0], C.local, 4, 1, "10 8")}
               <circle cx={dc[0]} cy={dc[1]} r={10} fill={C.local} stroke={C.bg} strokeWidth={3} />
@@ -524,7 +526,7 @@ const S08: React.FC = () => {
     { k: "seg", a: [0, -1.1], b: [0, 1.15], c: C.local, w: 4, at: 0, same: false },
     { k: "seg", a: [0, 0], b: [1, 0], c: C.local, w: 4, at: 0, same: false },
     { k: "arrow", a: [0, 0], b, c: RAD, at: 0, same: false },
-    { k: "lbl", p: [b[0] / 2, b[1] / 2], t: "length 1", c: RAD, dx: -24, dy: -26, a: "end", at: tShrink + 30 },
+    { k: "lbl", p: [b[0] / 2, b[1] / 2], t: "length 1", t2: "1", c: RAD, dx: -24, dy: -26, a: "end", at: tShrink + 30 },   // K6 k6r1: flat "1" (the long label crossed the axis)
     { k: "seg", a: b, b: ft, c: C.local, w: 5, dash: "12 8", at: tDrop },
     { k: "tick", p: ft, d1: [-1, 0], d2: [0, 1], s: 0.08, at: tDrop + 20 },
     { k: "fill", pts: [[0, 0], ft, b], c: C.ink, fo: 0.1, at: tRT },
@@ -532,9 +534,9 @@ const S08: React.FC = () => {
     { k: "arc", r: 0.3, a0: 0, a1: PHI, c: C.gold, w: 6, at: tPhi, same: false },
     { k: "tex", p: [0.2 * Math.cos(CB / 2), 0.2 * Math.sin(CB / 2)], t: String.raw`\varphi`, c: C.gold, size: 48, at: tPhi + 4, same: false },
     { k: "band", a: [0, 0], b: ft, c: C.second, w: 16, at: tCos },
-    { k: "tex", p: [ft[0] / 2, 0], t: String.raw`\cos\varphi`, c: C.second, size: 48, dy: 44, at: tCos, same: false },
+    { k: "tex", p: [ft[0] / 2, 0], t: String.raw`\cos\varphi`, c: C.second, size: 48, dx: 16, dx3: 0, dy: 44, at: tCos, same: false },
     { k: "band", a: ft, b, c: C.second, w: 16, at: tSin },
-    { k: "tex", p: [ft[0], b[1] / 2], t: String.raw`\sin\varphi`, c: C.second, size: 48, dx: 22, ax: 0, dx3: 22, ax3: 0, at: tSin, same: false },
+    { k: "tex", p: [ft[0], b[1] / 2], t: String.raw`\sin\varphi`, c: C.second, size: 48, dx: 100, ax: 0, dx3: 22, ax3: 0, at: tSin, same: false },   // flat: right of the rim (K6 k6r1)
   ];
   // the colatitude corner wedge is centred at Brest's end (items' wedges are centred on the face origin): drawn in the extra layers
   const corner = (P: (u: number, v: number) => Pt) => {
@@ -557,8 +559,9 @@ const S08: React.FC = () => {
           <Lbl x={XC} y={710} t="opposite = long × sin" c={C.key} s={T.floor} />
         </g>
         <g opacity={roleO * fout(f, tEq - 20)}>
-          <Lbl x={ptOf(P2, [ft[0], b[1] / 2])[0] + 150} y={ptOf(P2, [ft[0], b[1] / 2])[1]} t="next" c={C.gold} s={T.floor} />
-          <Lbl x={ptOf(P2, [ft[0] / 2, 0])[0]} y={ptOf(P2, [ft[0] / 2, 0])[1] + 110} t="opposite" c={C.gold} s={T.floor} a="middle" />
+          {/* K6 k6r1: "next" right of the moved sin φ tag; "opposite" left of the axis on the cos φ row (it crossed the axis and the rim) */}
+          <Lbl x={1450} y={ptOf(P2, [ft[0], b[1] / 2])[1]} t="next" c={C.gold} s={T.floor} />
+          <Lbl x={FLAT_C[0] - 16} y={ptOf(P2, [ft[0] / 2, 0])[1] + 58} t="opposite" c={C.gold} s={T.floor} a="end" />
         </g>
         <Keyword f={f} text="colatitude" at={[1420, 450]} appear={tCo} out={tEq - 20} c={C.local} />
         <Keyword f={f} text="same sides, swapped roles" at={[XC, 790]} appear={tSame} out={tEq - 20} s={T.floor} />
@@ -644,11 +647,14 @@ const S10: React.FC = () => {
   const keys = TOUR.filter((p) => !["Greenland", "Norway", "Arctic Ocean"].includes(p.t)).map((p) => ({ f: tOf(p.t) - 12, lat: clamp(p.lat, -82, 84), lon: 0, dist: 2.4, pp: [600, 470] as Pt }));
   const zEnd = LEN(k) - 50;
   const cam = globePath([
-    { f: 0, lat: 30, lon: 0, dist: 4.3, pp: [520, 420] }, { f: tFollow - 50, lat: 51, lon: 0, dist: 4.3, pp: [520, 420] }, { f: tFollow, lat: 60, lon: 0, dist: 2.4, pp: [600, 470] },
+    { f: 0, lat: 30, lon: 0, dist: 4.6, pp: [520, 400] }, { f: tFollow - 50, lat: 51, lon: 0, dist: 4.6, pp: [520, 400] }, { f: tFollow, lat: 60, lon: 0, dist: 2.4, pp: [600, 470] },
     { f: tPole - 10, lat: 84, lon: 0, dist: 2.4, pp: [600, 470] }, { f: tOf("Norwegian Sea") - 12, lat: 70, lon: 0, dist: 2.4, pp: [600, 470] }, ...keys.slice(1),
-    { f: zEnd, lat: -30, lon: 0, dist: 4.3, pp: [520, 420] }, { f: LEN(k) + 10, lat: -10, lon: 0, dist: 4.3, pp: [520, 420] },
+    { f: zEnd, lat: -30, lon: 0, dist: 4.6, pp: [520, 400] }, { f: LEN(k) + 10, lat: -10, lon: 0, dist: 4.6, pp: [520, 400] },
   ], f);
-  const zoom = clamp((4.3 - cam.dist) / (4.3 - 2.4), 0, 1);
+  // K6 k6r1: unzoomed dist 4.3 → 4.6, centre y 420 → 400 and picture box h 810 → 790 (the disc and the source line's box reached the
+  // caption band / each other); the source line steps aside while the growing disc covers it (zoom < 50 %: disc mask)
+  const zoom = clamp((4.6 - cam.dist) / (4.6 - 2.4), 0, 1);
+  const dk = discOf(cam, GFULL), srcO = zoom >= 0.5 ? 1 : clamp((814 - (dk.c[1] + dk.r)) / 12, 0, 1);
   const drawTo = f < tPole ? 90 : Math.max(-90, cam.lat - 22);
   const latTxt = `${Math.abs(Math.round(cam.lat))}° ${cam.lat >= 0.5 ? "N" : cam.lat <= -0.5 ? "S" : ""}`;
   return (
@@ -664,7 +670,7 @@ const S10: React.FC = () => {
               {plab(Gg, p.lat, p.lon, p.t, o, p.lon < 0 ? -18 : 18, -28, p.lon < 0 ? "end" : "start", /Sea|Ocean|Gulf|Atlantic|Channel|equator/.test(p.t))}</g> : null; })}
         </>} />
       <GlobeFrame id="s10k" zoom={zoom} right={zoom} disc={discOf(cam, GFULL)} />
-      <SourceBelow text={SRC_G} pic={{ x: 60, y: 20, w: 960, h: 810 }} w={960} name="globe src" />
+      <SourceBelow text={SRC_G} pic={{ x: 60, y: 20, w: 960, h: 790 }} w={960} o={srcO} name="globe src" />
       <Svg>
         <Keyword f={f} text="the starting line" at={[XZ, 180]} appear={0} out={tPrime - 30} />
         <Keyword f={f} text="prime meridian" at={[XZ, 180]} appear={tPrime} />

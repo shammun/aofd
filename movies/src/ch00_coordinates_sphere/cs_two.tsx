@@ -25,8 +25,8 @@ export type FItem = Base & (
   | { k: "wedge"; r: number; a0: number; a1: number; c: string; fo?: number; px?: number }
   | { k: "tick"; p: UV; d1: UV; d2: UV; s: number; c?: string }
   | { k: "fill"; pts: UV[]; c: string; fo?: number }
-  | { k: "lbl"; p: UV; t: string; c?: string; s?: number; dx?: number; dy?: number; a?: "start" | "middle" | "end"; dx3?: number; dy3?: number; a3?: "start" | "middle" | "end" }
-  | { k: "tex"; p: UV; t: string; c?: string; size?: number; dx?: number; dy?: number; ax?: number; dx3?: number; dy3?: number; ax3?: number }
+  | { k: "lbl"; p: UV; t: string; t2?: string; c?: string; s?: number; dx?: number; dy?: number; a?: "start" | "middle" | "end"; dx3?: number; dy3?: number; a3?: "start" | "middle" | "end" }
+  | { k: "tex"; p: UV; t: string; t2?: string; c?: string; size?: number; dx?: number; dy?: number; ax?: number; dx3?: number; dy3?: number; ax3?: number }
   | { k: "band"; a: UV; b: UV; c: string; w?: number; fo?: number }
 );
 
@@ -67,7 +67,7 @@ export const FaceSvg: React.FC<{ f: number; P: FP; items: FItem[]; which: "3" | 
       case "band": { const p = pr(it.a), q = pr(it.b);
         out.push(<line key={i} x1={p[0]} y1={p[1]} x2={q[0]} y2={q[1]} stroke={it.c} strokeWidth={it.w ?? 18} strokeOpacity={it.fo ?? 0.55} strokeLinecap="round" opacity={o} />); break; }
       case "lbl": { const q = pr(it.p), dx = which === "3" ? it.dx3 ?? it.dx ?? 0 : it.dx ?? 0, dy = which === "3" ? it.dy3 ?? it.dy ?? 0 : it.dy ?? 0;
-        out.push(<g key={i} data-lc-maplabel="1"><Lbl x={q[0] + dx} y={q[1] + dy} t={it.t} c={it.c ?? C.key} s={it.s ?? T.floor} a={which === "3" ? it.a3 ?? it.a ?? "start" : it.a ?? "start"} o={o} /></g>); break; }
+        out.push(<g key={i} data-lc-maplabel="1" data-lc-own={which === "2" ? "face2" : undefined}><Lbl x={q[0] + dx} y={q[1] + dy} t={which === "2" ? it.t2 ?? it.t : it.t} c={it.c ?? C.key} s={it.s ?? T.floor} a={which === "3" ? it.a3 ?? it.a ?? "start" : it.a ?? "start"} o={o} /></g>); break; }
       default: break;
     }
   });
@@ -82,7 +82,7 @@ export const FaceTex: React.FC<{ f: number; P: FP; items: FItem[]; which: "3" | 
     if (o <= 0) return null;
     const q = P(it.p[0], it.p[1]);
     const dx = which === "3" ? it.dx3 ?? it.dx ?? 0 : it.dx ?? 0, dy = which === "3" ? it.dy3 ?? it.dy ?? 0 : it.dy ?? 0, ax = which === "3" ? it.ax3 ?? it.ax ?? 0.5 : it.ax ?? 0.5;
-    return <TeX key={i} s={it.t} x={q[0] + dx} y={q[1] + dy} size={it.size ?? 54} c={it.c ?? C.key} ax={ax} o={o} halo />;
+    return <TeX key={i} s={which === "2" ? it.t2 ?? it.t : it.t} x={q[0] + dx} y={q[1] + dy} size={it.size ?? 54} c={it.c ?? C.key} ax={ax} o={o} halo />;
   })}</>
 );
 
@@ -108,8 +108,9 @@ export const TwoView: React.FC<{ f: number; cam: GlobeCam; cut: Cut; face: Face;
         <FaceSvg f={f} P={P2} items={items} which="2" R={flatR} />
         {extraFlat ? extraFlat(P2) : null}
       </Svg>
-      {flatO > 0 ? <div style={{ position: "absolute", inset: 0, opacity: flatO }}><FaceTex f={f} P={P2} items={items} which="2" /></div> : null}
-      <SourceBelow text={SRC_G} pic={box} w={880} o={src * o3} name="two-view src" />
+      {/* K6 k6r1: the flat face's labels own its half-disc fill (labels drawn on their own diagram's ground); its rim, axis and legs stay checked */}
+      {flatO > 0 ? <div data-lc-own="face2" style={{ position: "absolute", inset: 0, opacity: flatO }}><FaceTex f={f} P={P2} items={items} which="2" /></div> : null}
+      <SourceBelow text={SRC_G} pic={box} x={Math.max(60, box.x)} w={880} o={src * o3} name="two-view src" />{/* still review: inside the x 60 margin */}
     </>
   );
 };
@@ -132,7 +133,7 @@ export const TOP_C: Pt = [1210, 330], TOP_R = 200;
 /** the static outline of the meridian half-disc (flat): rim from the South Pole to the North Pole through the equator, the axis */
 export const MerFlatBase: React.FC<{ P: FP; o?: number; fill?: boolean }> = ({ P, o = 1, fill = true }) => o <= 0 ? null : (
   <g opacity={o}>
-    {fill ? <path d={`${faceArc(P, 0, 0, 1, -90, 90, 90)}Z`} fill="#4a3d36" fillOpacity={0.55} stroke="none" /> : null}
+    {fill ? <g data-lc-own="face2"><path d={`${faceArc(P, 0, 0, 1, -90, 90, 90)}Z`} fill="#4a3d36" fillOpacity={0.55} stroke="none" /></g> : null}
     <path d={faceArc(P, 0, 0, 1, -90, 90, 90)} fill="none" stroke={C.muted} strokeWidth={4} />
     <line x1={P(0, -1)[0]} y1={P(0, -1)[1]} x2={P(0, 1)[0]} y2={P(0, 1)[1]} stroke={C.grid} strokeWidth={3} />
   </g>
@@ -140,7 +141,8 @@ export const MerFlatBase: React.FC<{ P: FP; o?: number; fill?: boolean }> = ({ P
 /** the static outline of a full disc (flat): the equator face or a parallel's disc */
 export const DiscFlatBase: React.FC<{ P: FP; o?: number; rim?: string }> = ({ P, o = 1, rim = C.muted }) => o <= 0 ? null : (
   <g opacity={o}>
-    <path d={`${faceArc(P, 0, 0, 1, 0, 360, 120)}Z`} fill="#4a3d36" fillOpacity={0.55} stroke={rim} strokeWidth={4} />
+    <g data-lc-own="face2"><path d={`${faceArc(P, 0, 0, 1, 0, 360, 120)}Z`} fill="#4a3d36" fillOpacity={0.55} stroke="none" /></g>
+    <path d={`${faceArc(P, 0, 0, 1, 0, 360, 120)}Z`} fill="none" stroke={rim} strokeWidth={4} />
   </g>
 );
 export const ptOf = (P: FP, p: UV): Pt => P(p[0], p[1]);
