@@ -255,3 +255,64 @@ SSR `--step 10` 9296 scene-frames, 0 errors, 0 NaN. Data build not touched (76/7
 Re-render: picture changes in s04, s05, s10-s16, s18-s20, s22, s24-s26 (from 2:08, frame 4304); audio unchanged (sound6 mix).
 Known, accepted: CalcStack's own slide (old lines fade while sliding up 12 frames) can cross text above a stack for 2-4 frames between
 K6 samples (seen in s05 under "(θ ≈ 53.13°)"); s04 and s24 were changed where K6 caught it.
+
+
+# fix 2 — review 2 (2026-11-05)
+
+Input: `reports/ch00_movies.md` → "#5a ch00_coordinates_flat — fix 1, review 2" (5 Must, 13 Should). Start: commit 80af52e (fix 1c + K6).
+Every item applied. Not rendered (no stills, K6 or render in this loop; the orchestrator schedules them).
+
+## Narration (`checks/cf_fix2_splice.py`, fix1c/tts → fix2/tts; method of cf_fix1c_splice.py)
+| item | s11 sentence | old → new | Δt | LUFS (neighbours) | TP |
+|---|---|---|---|---|---|
+| Must 2b | S20 | "s equals r times theta" → "s equals r times **the change in** theta" | +0.850 s | −15.93 (−15.85 / −15.99) | −1.82 dBTP |
+| Must 2a | S23 | "That's about seven metres west, and five point two metres north." + "Check: seven squared is forty nine, and five point two squared is twenty seven point zero four." + "The square root of seventy six point zero four is about eight point seven: the same slide." (compound entry, 3 clips, 0.35-s gaps) | +13.675 s | −15.90 / −15.89 / −15.87 (−15.85 / −15.84) | ≤ −1.63 dBTP |
+
+Result: **2632.700 s narration** (+14.525 s), 78 981 frames + 75 hold = 79 056 (**43:55.2**), 381 timing sentences, **623 cues, 0 warnings**,
+self-check 0.0 ms. Timing unchanged before s11 S20 (807.425 s = 13:27.4); after it everything shifts +0.850 s, then +14.525 s after S23.
+Skip chips **14:26, 18:53, 29:57, 38:58** (were 14:11, 18:39, 29:42, 38:43); chapters from s12 move +14.5 s (manifest + storyboard).
+Sync: `cf_fix1_sync.py` now also reads `spliced_fix2` (idempotent); the s11 calc_rows duplicate-append of earlier runs is fixed (18 rows).
+
+## Must
+| id | scene | change |
+|---|---|---|
+| M1 | s11 S25 | the U1 wide view, inset, column, tick and link fade at the keep line (−10 f); the keep picture comes in: the balloon on its circle (station, east ray, θ arc), r̂ out on "r hat points away", θ̂ round on "theta hat points round", the gold +90° arc and "+90°" on "turned by ninety", an anticlockwise arc on the circle; the right column keeps r̂ = (cos θ, sin θ) and θ̂ = (−sin θ, cos θ) and adds "θ̂ = r̂ turned by +90°" (EQ_S09) and "anticlockwise, seen from above" |
+| M2a | s11 U1 | √ rows on the new spoken check: "length = √(7.0² + 5.2²)" on "seven squared", "= √(49 + 27.04)" on "twenty seven point zero four", "= √76.04" on "The square root of seventy six", "≈ 8.7 m = s" on "is about eight point seven" (short left side "length": measured x ≥ 1156) |
+| M2b | s11 U1 | re-voiced "s equals r times the change in theta" (matches s = rΔθ); the row's AT phrase follows |
+| M2c | s11 U1 | "before: θ ≈ 53.13°" and "(x, y) = (3000, 4000) m" as two "="-aligned rows (left sides measured from x 1108) |
+| M2d | s11 U1 | the gold tick right of "θ̂ ≈ (−0.80, 0.60)" (x 1660, the row's centre y 468) and a gold link up to θ̂ = (−sin θ, cos θ) |
+| M3 | s03 S3 | the sum row is "3x̂ + 4ŷ = (3, 0) + (0, 4) = (3, 4)", "=" column 1240 → 1272: measured x 1079.6-1837.5 (it started at x 922, over the panel) |
+| M4 | s22 S6/S10 | each running sum on two lines ("sum so far: … m/s" / "61 of 72 points"); the ū_r division in its own slot (y 688, top ≥ 24 px under "seen from above, NH"), up through S10-S11; the result row "ū_r ≈ −13.3 ≈ −13 m/s" (rose, y 780) stays to the end of the scene, linked to the rose mean arrow; "in: towards the eye" under it |
+| M5 | s22 S12-S15 | the knots chain top-down in spoken order at y 500 / 565 / 630 / 695: official estimate 135 kt → 135 kt × 1.85 ≈ 250 km/h → 250 km/h ÷ 3.6 ≈ 69 m/s → strongest on our ring ≈ 49 m/s; the "−13 m/s: in" callout is gone (the ū_r row below the chain replaces it); the anticlockwise labels and the ū_r division leave 12 f before the chain starts |
+
+## Should
+| id | scene | change |
+|---|---|---|
+| S1 | s05, s07, s08, s15, s16, s23, s24 | \tfrac → \dfrac (row heights raised) for 3/5, 4/5, 360°/2π, 360°/6.283, 10 km/1 km = 50 km/5 km, (3/5, 4/5), ½, ¾, 1/√2 (both); s23 "1923 ÷ 60" and "4490 ÷ 60" inline |
+| S2 | s11, s13 | "without the θ̂ formula" and "r̂, θ̂: length 1" set in KaTeX (\hat{\boldsymbol\theta}) |
+| S3 | s04-s09, s11-s14, s20-s24, s26, s27 | the full wind u (arrows, "u", "10 m/s", "due east", "u = +10, v = 0") and the radius r (lines, "r", "r = 5 km", the 5 km / 50 km radii, s21 "r: from the centre", the s22 ring radius) in ink; teal stays for u_θ (and the rings); storyboard colour contract updated |
+| S4 | s19, s24 | s19: "x′₁ = …" / "x′₂ = …" pinned on the first line while the three rows under it page (two visible); s24: the u_θ first row holds the whole sum on two lines ("= −(−10.1)(0.707)" / "+ (−44.5)(−0.707)"), then "= 10.1(0.707) + 44.5(0.707)" and "= 7.14 + 31.46 ≈ 38.6" (stack "=" 1250, measured ≤ x 1807) |
+| S5 | s18 | the symbolic matrix y 450 → 420; "α = 30°:" then the number matrix at (1250, 572), ≈ 27 px clear below it; the products stack y 648 → 642 (rows 52 px) |
+| S6 | s25 | u, v and their gold dots at 30 % from S8; colour bar y 200 → 186; the axis unit "m/s" left of the axis top; "47" above its peak; "mean 35" above the mean line at θ 22°-130° (clear of the θ = 0 dots and the teal curve); "+14" left of its peak with a rose leader tick; "14 out" up to −27; "mean −13" at θ 272°, 74 px under the mean line (no longer runs into "14 out") |
+| S7 | s26 | the "tan(inflow angle)" left side fades with its rows (tFour − 18) |
+| S8 | s10, s20 | s10 "(−4, 3)" centred above the turned tip (x 129-299), "4 west" right of it over its leg; s20 drawn on its own centre 70 px to the right (150° pair tip x ≈ 106; everything ≤ x 960) |
+| S9 | s11 U1 | after: θ = 53.1301° + 0.1° = 53.2301°; x = 5000 × cos 53.2301° = 5000 × 0.598603 ≈ 2993.0 m; y = 5000 × sin 53.2301° = 5000 × 0.801046 ≈ 4005.2 m. CHECK rows: build DF09 "U1 fix 2" (53.1301, 53.2301, cos/sin 53.2301° and of the exact angle, 6 d.p.) and the spoken √ check row; TSX CHECK_U1 +6 |
+| S10 | s11 U1 | inset 440 px tall and an outline only; "7.0 m" under the leg's middle; "before" under its dot, below "7.0 m"; "≈ 8.7 m" 86 px off the slide (was 48, on the arrowhead); "after 0.1°" up-left of its dot |
+| S11 | s16 | the x′ ruler ran through "cos α (north)": "cos α" / "(north)" on two short lines right of the leg's top, clear of the ruler; "sin α (west)" 53 px higher |
+| S12 | s23 S15 | the white upward arrow → a ⊙ mark (towards the viewer) with "rising" / "(out of the screen)" |
+| S13 | s27 | each beat at full strength until its own sentence ends (it faded 22 f before the next sentence, while still spoken), the next ≥ 10 f later; keys in warm white; circles 0.5-0.6 → 0.9, grid 0.6 → 0.8; radius, hypotenuse and wind in ink |
+
+## Checks (no browser renders)
+- Data build: **78/78 CHECK** (76 + 2 DF09 fix-2 rows); `cf.json` unchanged; manifest chapters / maths_skips regenerated.
+- tsc 0 · at_check 496 references, 0 failures · swap_check 379 text elements, 0 overlaps, 0 swaps < 8 frames · cam_speed 0 · eq_check 23/23 ·
+  SSR `--step 10` 9323 scene-frames, 0 errors, 0 NaN; `--3d` the same.
+- KaTeX widths of every new or changed row measured in headless Edge with the house sizing (\displaystyle, size/1.21): all inside x 1079.6-1837.5
+  (s22 "strongest on our ring ≈ 49 m/s" unchanged, 1844.9 by CSS box, passed K6 in fix 1c).
+- script.md = timing; storyboard voiceovers = timing (sync check); the sound cue sheet passes `--check-only` on the fix-2 narration (2635.2 s).
+
+## Re-render and mix
+- First changed frame: s03 at 1:39.6 (frame 2988; the s03 stack moved). Timing first changes at s11 S20, 13:27.4. Re-render the whole movie
+  (chunk 0 already holds frame 2988). Content changed: s03-s16, s18-s27; s17 and s28 only shift in time.
+- Mix NOT run: 13.5 GB RAM free (< 18 GB rule). Command (music identical, ice-polar seed 23; cue sheet validated):
+  `.venv/Scripts/python.exe tools/sound/mix.py --narration "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix2/tts/narration.wav" --cues movies/ch00/ch00_coordinates_flat/sound.yaml --out-dir "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/build1/sound7"`
+  then rename `build1/sound7/narration_music.wav` → `narration_music_cf.wav`. `cf_render.sh` and `cf_run.py join` now default to `sound7`.

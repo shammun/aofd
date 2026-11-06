@@ -175,6 +175,11 @@ def main() -> int:
     row("DF09", "U1: cos 53.23° = 0.598603, sin 53.23° = 0.801046; 5000 × those = 2993.0, 4005.2; √(7.0² + 5.2²) = √76.04 = 8.72 ≈ s",
         [np.cos(np.deg2rad(th1d)), np.sin(np.deg2rad(th1d)), 5000 * 0.598603, 5000 * 0.801046, np.hypot(7.0, 5.2)], [0.598603, 0.801046, 2993.0, 4005.2, 8.72],
         [5e-7, 5e-7, 0.05, 0.05, 0.005])
+    # fix 2 (review 2 Should 9): the screen angle and the cos/sin it uses agree to the shown digits: 53.1301° + 0.1° = 53.2301°
+    row("DF09", "U1 fix 2: θ = 53.1301° + 0.1° = 53.2301°; cos 53.2301° = 0.598603, sin 53.2301° = 0.801046 (6 d.p.)",
+        [np.degrees(th0), th1d, np.cos(np.deg2rad(53.2301)), np.sin(np.deg2rad(53.2301)), np.cos(np.deg2rad(th1d)), np.sin(np.deg2rad(th1d))],
+        [53.1301, 53.2301, 0.598603, 0.801046, 0.598603, 0.801046], [5e-5, 5e-5, 5e-7, 5e-7, 5e-7, 5e-7])
+    row("DF09", "U1 fix 2: spoken check 7.0² = 49, 5.2² = 27.04, √76.04 ≈ 8.7 (the same slide)", [7.0 ** 2, 5.2 ** 2, np.sqrt(76.04)], [49.0, 27.04, 8.72], [1e-12, 1e-12, 0.005])
     row("DF09", "U1: moved ≈ 7.0 m west, 5.2 m north (screen 2993.0 − 3000 = −7.0; 4005.2 − 4000 = 5.2)", [*dq, 2993.0 - 3000, 4005.2 - 4000], [-7.0, 5.2, -7.0, 5.2], [0.02, 0.04, 1e-9, 1e-9])
     for tdeg, ref in ((0.0, [1, 0, 0, 1]), (90.0, [0, 1, -1, 0]), (180.0, [-1, 0, 0, -1])):
         Et = call(CS + "unit_vectors_polar", "s12", f"r̂, θ̂ at θ = {tdeg:.0f}°", theta=np.deg2rad(tdeg))

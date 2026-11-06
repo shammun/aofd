@@ -739,1567 +739,1582 @@ times pi over one hundred and
 eighty, about
 zero point zero zero one seven four five.
 
-00:13:27.425 --> 00:13:30.335
-By the arc rule, s equals r times theta,
+00:13:27.425 --> 00:13:31.291
+By the arc rule, s equals r times
+the change in theta,
 
-00:13:30.335 --> 00:13:33.608
+00:13:31.291 --> 00:13:34.513
 so it slides five thousand
 metres times that:
 
-00:13:33.608 --> 00:13:37.100
+00:13:34.513 --> 00:13:37.950
 about eight point seven
 metres along the circle.
 
-00:13:38.600 --> 00:13:44.800
+00:13:39.450 --> 00:13:45.650
 Its position comes from x equals r cosine
 theta, and y equals r sine theta.
 
-00:13:45.150 --> 00:13:49.991
+00:13:46.000 --> 00:13:50.841
 It moves from three thousand metres
 east and four thousand metres north,
 
-00:13:49.991 --> 00:13:52.546
+00:13:50.841 --> 00:13:53.396
 to about two thousand nine hundred and
 
-00:13:52.546 --> 00:13:55.975
+00:13:53.396 --> 00:13:56.825
 ninety three, and four
 thousand and five point two.
 
-00:13:56.325 --> 00:14:01.025
-That's about seven metres
-west, and five point two metres north.
+00:13:57.175 --> 00:13:59.481
+That's about seven metres west,
 
-00:14:02.525 --> 00:14:07.739
+00:13:59.481 --> 00:14:04.540
+and five point two metres north. Check:
+seven squared is forty nine,
+
+00:14:04.540 --> 00:14:09.747
+and five point two squared is twenty
+seven point zero four. The square
+
+00:14:09.747 --> 00:14:14.434
+root of seventy six point zero four
+is about eight point seven:
+
+00:14:14.434 --> 00:14:15.550
+the same slide.
+
+00:14:17.050 --> 00:14:22.264
 Dividing each by eight point seven
 gives about minus zero point eight and
 
-00:14:07.739 --> 00:14:10.025
+00:14:22.264 --> 00:14:24.550
 zero point six: theta hat again.
 
-00:14:11.525 --> 00:14:16.451
+00:14:26.050 --> 00:14:30.976
 If you skipped, here's what to keep:
 r hat points away from the centre,
 
-00:14:16.451 --> 00:14:19.295
+00:14:30.976 --> 00:14:33.820
 theta hat points round it, anticlockwise,
 
-00:14:19.295 --> 00:14:22.625
+00:14:33.820 --> 00:14:37.150
 and theta hat is r hat
 turned by ninety degrees.
 
-00:14:23.425 --> 00:14:27.950
+00:14:37.950 --> 00:14:42.475
 Now let's move the balloon round
 the circle, and watch both arrows.
 
-00:14:28.300 --> 00:14:33.600
+00:14:42.825 --> 00:14:48.125
 Due east of the station, r hat points
 east, and theta hat points north.
 
-00:14:33.950 --> 00:14:38.250
+00:14:48.475 --> 00:14:52.775
 Due north, r hat points
 north, and theta hat points west.
 
-00:14:38.600 --> 00:14:42.950
+00:14:53.125 --> 00:14:57.475
 Due west, r hat points
 west, and theta hat points south.
 
-00:14:43.300 --> 00:14:47.411
+00:14:57.825 --> 00:15:01.936
 So r hat and theta hat turn
 as the balloon goes round,
 
-00:14:47.411 --> 00:14:50.075
+00:15:01.936 --> 00:15:04.600
 while x hat and y hat never change.
 
-00:14:50.425 --> 00:14:53.799
+00:15:04.950 --> 00:15:08.324
 That's the big difference
 between the two systems:
 
-00:14:53.799 --> 00:14:56.700
+00:15:08.324 --> 00:15:11.225
 polar unit vectors
 depend on where you are.
 
-00:14:57.050 --> 00:15:02.475
+00:15:11.575 --> 00:15:17.000
 Keep this in mind, because these turning
 arrows will matter a lot in Part 2.
 
-00:15:03.275 --> 00:15:06.939
+00:15:17.800 --> 00:15:21.464
 The next two scenes split a wind
 into its polar parts,
 
-00:15:06.939 --> 00:15:10.400
+00:15:21.464 --> 00:15:24.925
 number by number, for learners
 who want every step.
 
-00:15:10.750 --> 00:15:15.114
+00:15:25.275 --> 00:15:29.639
 If you'd rather keep the big picture,
 skip ahead to the time on screen;
 
-00:15:15.114 --> 00:15:18.925
+00:15:29.639 --> 00:15:33.450
 you won't miss anything you need
 for weather, climate or maps.
 
-00:15:19.275 --> 00:15:23.050
+00:15:33.800 --> 00:15:37.575
 Now let's describe a wind
 in polar coordinates.
 
-00:15:23.400 --> 00:15:28.725
+00:15:37.925 --> 00:15:43.250
 Suppose that at the balloon, the wind
 blows due east at ten metres per second.
 
-00:15:29.075 --> 00:15:31.550
+00:15:43.600 --> 00:15:46.075
 We'll call the wind arrow bold u.
 
-00:15:31.900 --> 00:15:36.200
+00:15:46.425 --> 00:15:50.725
 Its eastward part
 is called u, and its northward part v.
 
-00:15:36.550 --> 00:15:39.300
+00:15:51.075 --> 00:15:53.825
 Here, u is ten and v is zero.
 
-00:15:40.800 --> 00:15:46.075
+00:15:55.325 --> 00:16:00.600
 How much of this wind blows away from
 the station, and how much blows round it?
 
-00:15:46.425 --> 00:15:50.975
+00:16:00.950 --> 00:16:05.500
 The part along r hat is called
 the radial wind, u sub r.
 
-00:15:51.325 --> 00:15:56.525
+00:16:05.850 --> 00:16:11.050
 The part along theta hat is called
 the tangential wind, u sub theta.
 
-00:15:56.875 --> 00:16:02.264
+00:16:11.400 --> 00:16:16.789
 To find each one, we take the dot product
 of the wind with that unit vector,
 
-00:16:02.264 --> 00:16:04.250
+00:16:16.789 --> 00:16:18.775
 as in the dot product movie.
 
-00:16:04.600 --> 00:16:08.575
+00:16:19.125 --> 00:16:23.100
 It gives the length of the wind's
 shadow along that arrow.
 
-00:16:08.925 --> 00:16:10.825
+00:16:23.450 --> 00:16:25.350
 Here are the inputs.
 
-00:16:11.175 --> 00:16:13.600
+00:16:25.700 --> 00:16:28.125
 The wind is ten, zero.
 
-00:16:13.950 --> 00:16:17.200
+00:16:28.475 --> 00:16:31.725
 The angle theta is fifty three degrees.
 
-00:16:17.550 --> 00:16:20.807
+00:16:32.075 --> 00:16:35.332
 R hat is zero point six, zero point eight,
 
-00:16:20.807 --> 00:16:25.150
+00:16:35.332 --> 00:16:39.675
 and theta hat is minus
 zero point eight, zero point six.
 
-00:16:25.500 --> 00:16:27.925
+00:16:40.025 --> 00:16:42.450
 First, the radial wind.
 
-00:16:28.275 --> 00:16:31.031
+00:16:42.800 --> 00:16:45.556
 Multiply the matching parts, and add:
 
-00:16:31.031 --> 00:16:35.425
+00:16:45.556 --> 00:16:49.950
 ten times zero point six, plus
 zero times zero point eight.
 
-00:16:35.775 --> 00:16:40.600
+00:16:50.300 --> 00:16:55.125
 That's six plus zero, so u sub r is six
 metres per second.
 
-00:16:42.100 --> 00:16:46.847
+00:16:56.625 --> 00:17:01.372
 Next, the tangential wind:
 ten times minus zero point eight,
 
-00:16:46.847 --> 00:16:49.300
+00:17:01.372 --> 00:17:03.825
 plus zero times zero point six.
 
-00:16:49.650 --> 00:16:55.450
+00:17:04.175 --> 00:17:09.975
 That's minus eight plus zero, so u sub
 theta is minus eight metres per second.
 
-00:16:56.950 --> 00:17:02.350
+00:17:11.475 --> 00:17:16.875
 So six metres per second blow away
 from the station, and eight blow round it.
 
-00:17:02.700 --> 00:17:07.092
+00:17:17.225 --> 00:17:21.617
 The minus sign means the wind
 goes round against theta hat:
 
-00:17:07.092 --> 00:17:09.325
+00:17:21.617 --> 00:17:23.850
 clockwise, as seen from above.
 
-00:17:10.125 --> 00:17:13.975
+00:17:24.650 --> 00:17:28.500
 Let's check that these two parts
 really make up the same wind.
 
-00:17:14.325 --> 00:17:19.375
+00:17:28.850 --> 00:17:33.900
 We rebuild it: six times r hat, plus
 minus eight times theta hat.
 
-00:17:19.725 --> 00:17:25.625
+00:17:34.250 --> 00:17:40.150
 Six times zero point six, zero point eight
 is three point six, four point eight.
 
-00:17:27.125 --> 00:17:31.513
+00:17:41.650 --> 00:17:46.038
 Minus eight times minus zero point eight
 is plus six point four,
 
-00:17:31.513 --> 00:17:33.981
+00:17:46.038 --> 00:17:48.506
 because two minus signs make a plus,
 
-00:17:33.981 --> 00:17:38.300
+00:17:48.506 --> 00:17:52.825
 and minus eight times zero point six
 is minus four point eight.
 
-00:17:39.800 --> 00:17:45.250
+00:17:54.325 --> 00:17:59.775
 Adding the east parts gives three point
 six plus six point four, which is ten.
 
-00:17:45.600 --> 00:17:50.425
+00:18:00.125 --> 00:18:04.950
 The north parts give four point eight
 minus four point eight, which is zero.
 
-00:17:51.925 --> 00:17:56.800
+00:18:06.450 --> 00:18:11.325
 We're back to ten, zero: the same
 wind, measured with new arrows.
 
-00:17:57.150 --> 00:18:00.585
+00:18:11.675 --> 00:18:15.110
 Its length agrees too:
 six squared is thirty six and
 
-00:18:00.585 --> 00:18:02.435
+00:18:15.110 --> 00:18:16.960
 eight squared is sixty four,
 
-00:18:02.435 --> 00:18:08.050
+00:18:16.960 --> 00:18:22.575
 which makes a hundred, and its square root
 is ten: the same as the wind's own length.
 
-00:18:09.550 --> 00:18:13.750
+00:18:24.075 --> 00:18:28.275
 The same dot products work
 for any wind and any angle.
 
-00:18:14.100 --> 00:18:18.469
+00:18:28.625 --> 00:18:32.994
 With the wind u, v, and r hat
 equal to cosine theta,
 
-00:18:18.469 --> 00:18:23.175
+00:18:32.994 --> 00:18:37.700
 sine theta, u sub r is u cosine
 theta plus v sine theta.
 
-00:18:24.675 --> 00:18:29.322
+00:18:39.200 --> 00:18:43.847
 And with theta hat equal
 to minus sine theta, cosine theta,
 
-00:18:29.322 --> 00:18:33.575
+00:18:43.847 --> 00:18:48.100
 u sub theta is minus u sine
 theta plus v cosine theta.
 
-00:18:35.075 --> 00:18:38.675
+00:18:49.600 --> 00:18:53.200
 We'll use these two lines
 on a real hurricane soon.
 
-00:18:39.025 --> 00:18:41.601
+00:18:53.550 --> 00:18:56.126
 If you skipped, here's what to keep:
 
-00:18:41.601 --> 00:18:45.250
+00:18:56.126 --> 00:18:59.775
 any wind splits into
 an in or out part along r hat,
 
-00:18:45.250 --> 00:18:49.900
+00:18:59.775 --> 00:19:04.425
 and a round part along
 theta hat, and each part is a dot product.
 
-00:18:50.700 --> 00:18:55.238
+00:19:05.225 --> 00:19:09.763
 The next few scenes turn the axes
 and build the rotation matrix,
 
-00:18:55.238 --> 00:18:58.925
+00:19:09.763 --> 00:19:13.450
 one step at a time, for anyone
 who wants every step.
 
-00:18:59.275 --> 00:19:02.334
+00:19:13.800 --> 00:19:16.859
 They aren't needed
 for the intuition of weather,
 
-00:19:02.334 --> 00:19:07.050
+00:19:16.859 --> 00:19:21.575
 climate science or maps, so feel free
 to skip ahead to the time on screen.
 
-00:19:07.400 --> 00:19:11.200
+00:19:21.925 --> 00:19:25.725
 Now let's look at a second
 way to change coordinates.
 
-00:19:11.550 --> 00:19:16.675
+00:19:26.075 --> 00:19:31.200
 This time, we keep the origin where
 it is, and we just turn the axes.
 
-00:19:17.025 --> 00:19:18.950
+00:19:31.550 --> 00:19:33.475
 Why would we want that?
 
-00:19:19.300 --> 00:19:22.061
+00:19:33.825 --> 00:19:36.586
 Along a coastline, a runway or a valley,
 
-00:19:22.061 --> 00:19:27.375
+00:19:36.586 --> 00:19:41.900
 it's often more useful to measure along
 it and across it than east and north.
 
-00:19:27.725 --> 00:19:30.300
+00:19:42.250 --> 00:19:44.825
 The arrow itself stays the same.
 
-00:19:30.650 --> 00:19:33.525
+00:19:45.175 --> 00:19:48.050
 Only the rulers we measure it with turn.
 
-00:19:33.875 --> 00:19:40.125
+00:19:48.400 --> 00:19:54.650
 Say the new x axis is turned by an angle
 alpha, anticlockwise as seen from above.
 
-00:19:40.475 --> 00:19:43.375
+00:19:55.000 --> 00:19:57.900
 We call its unit vector x hat prime.
 
-00:19:43.725 --> 00:19:47.975
+00:19:58.250 --> 00:20:02.500
 The little dash is read
 prime, and it marks the new axes.
 
-00:19:48.325 --> 00:19:52.133
+00:20:02.850 --> 00:20:06.658
 Like r hat, it's an arrow
 of length one at an angle,
 
-00:19:52.133 --> 00:19:54.550
+00:20:06.658 --> 00:20:09.075
 so it's cosine alpha, sine alpha.
 
-00:19:56.050 --> 00:19:59.125
+00:20:10.575 --> 00:20:13.650
 Let's use alpha equals thirty degrees.
 
-00:19:59.475 --> 00:20:04.305
+00:20:14.000 --> 00:20:18.830
 Cosine of thirty degrees
 is the square root of three over two:
 
-00:20:04.305 --> 00:20:07.032
+00:20:18.830 --> 00:20:21.557
 one point seven three two over two,
 
-00:20:07.032 --> 00:20:12.875
+00:20:21.557 --> 00:20:27.400
 about zero point eight six six. Sine
 of thirty degrees is exactly one half.
 
-00:20:13.225 --> 00:20:17.975
+00:20:27.750 --> 00:20:32.500
 So x hat prime is
 zero point eight six six, zero point five.
 
-00:20:19.475 --> 00:20:21.750
+00:20:34.000 --> 00:20:36.275
 What about the new y axis?
 
-00:20:22.100 --> 00:20:25.326
+00:20:36.625 --> 00:20:39.851
 It must be at right
 angles to the new x axis,
 
-00:20:25.326 --> 00:20:29.700
+00:20:39.851 --> 00:20:44.225
 and turned anticlockwise
 from it, just as north is from east.
 
-00:20:30.050 --> 00:20:33.803
+00:20:44.575 --> 00:20:48.328
 So y hat prime is x hat prime
 turned by ninety degrees,
 
-00:20:33.803 --> 00:20:36.395
+00:20:48.328 --> 00:20:50.920
 and we already have the rule for that:
 
-00:20:36.395 --> 00:20:39.875
+00:20:50.920 --> 00:20:54.400
 swap the two numbers,
 and put a minus on the first.
 
-00:20:40.225 --> 00:20:43.875
+00:20:54.750 --> 00:20:58.400
 That gives minus sine alpha, cosine alpha.
 
-00:20:45.375 --> 00:20:51.775
+00:20:59.900 --> 00:21:06.300
 With thirty degrees, y hat prime is minus
 zero point five, zero point eight six six.
 
-00:20:53.275 --> 00:20:54.925
+00:21:07.800 --> 00:21:09.450
 Let's check it.
 
-00:20:55.275 --> 00:21:01.325
+00:21:09.800 --> 00:21:15.850
 Its length is one, because zero point two
 five plus zero point seven five is one.
 
-00:21:01.675 --> 00:21:04.928
+00:21:16.200 --> 00:21:19.453
 And its dot product
 with x hat prime is zero
 
-00:21:04.928 --> 00:21:08.476
+00:21:19.453 --> 00:21:23.001
 point eight six six times
 minus zero point five,
 
-00:21:08.476 --> 00:21:13.281
+00:21:23.001 --> 00:21:27.806
 plus zero point five times
 zero point eight six six. That's minus
 
-00:21:13.281 --> 00:21:17.790
+00:21:27.806 --> 00:21:32.315
 zero point four three three
 plus zero point four three three,
 
-00:21:17.790 --> 00:21:18.825
+00:21:32.315 --> 00:21:33.350
 which is zero.
 
-00:21:20.325 --> 00:21:24.650
+00:21:34.850 --> 00:21:39.175
 So the new axes are at right
 angles, just like the old ones.
 
-00:21:25.450 --> 00:21:30.475
+00:21:39.975 --> 00:21:45.000
 Now we can measure the balloon's
 arrow, three, four, with the new rulers.
 
-00:21:30.825 --> 00:21:34.775
+00:21:45.350 --> 00:21:49.300
 Its new coordinates are
 called x prime and y prime.
 
-00:21:35.125 --> 00:21:41.025
+00:21:49.650 --> 00:21:55.550
 X prime answers one question: how much
 of the arrow lies along the new x axis?
 
-00:21:41.375 --> 00:21:45.043
+00:21:55.900 --> 00:21:59.568
 That's the length of the arrow's
 shadow on that axis,
 
-00:21:45.043 --> 00:21:47.950
+00:21:59.568 --> 00:22:02.475
 which is its dot product with x hat prime.
 
-00:21:48.300 --> 00:21:51.309
+00:22:02.825 --> 00:22:05.834
 Multiply the matching parts, and add:
 
-00:21:51.309 --> 00:21:55.050
+00:22:05.834 --> 00:22:09.575
 x times cosine
 alpha, plus y times sine alpha.
 
-00:21:56.550 --> 00:22:01.638
+00:22:11.075 --> 00:22:16.163
 In the same way, y prime
 is the dot product with y hat prime:
 
-00:22:01.638 --> 00:22:04.975
+00:22:16.163 --> 00:22:19.500
 minus x sine alpha, plus y cosine alpha.
 
-00:22:06.475 --> 00:22:09.338
+00:22:21.000 --> 00:22:23.863
 Now the numbers, with x equals three,
 
-00:22:09.338 --> 00:22:12.975
+00:22:23.863 --> 00:22:27.500
 y equals four, and alpha
 equals thirty degrees.
 
-00:22:13.325 --> 00:22:19.425
+00:22:27.850 --> 00:22:33.950
 X prime is three times zero point eight
 six six, plus four times zero point five.
 
-00:22:19.775 --> 00:22:23.775
+00:22:34.300 --> 00:22:38.300
 That's two point six
 plus two, about four point six.
 
-00:22:25.275 --> 00:22:28.663
+00:22:39.800 --> 00:22:43.188
 Y prime is minus three
 times zero point five,
 
-00:22:28.663 --> 00:22:31.750
+00:22:43.188 --> 00:22:46.275
 plus four times zero point eight six six.
 
-00:22:32.100 --> 00:22:37.900
+00:22:46.625 --> 00:22:52.425
 That's minus one point five plus three
 point four six, about one point nine six.
 
-00:22:39.400 --> 00:22:45.500
+00:22:53.925 --> 00:23:00.025
 So in the turned axes, the balloon is at
 about four point six, one point nine six.
 
-00:22:45.850 --> 00:22:47.775
+00:23:00.375 --> 00:23:02.300
 Is it the same arrow?
 
-00:22:48.125 --> 00:22:51.066
+00:23:02.650 --> 00:23:05.591
 Its length is the square
 root of four point
 
-00:22:51.066 --> 00:22:54.075
+00:23:05.591 --> 00:23:08.600
 six squared
 plus one point nine six squared.
 
-00:22:54.425 --> 00:22:58.427
+00:23:08.950 --> 00:23:12.952
 Four point six squared is about
 twenty one point one six,
 
-00:22:58.427 --> 00:23:01.586
+00:23:12.952 --> 00:23:16.111
 and one point nine six
 squared is about three
 
-00:23:01.586 --> 00:23:04.815
+00:23:16.111 --> 00:23:19.340
 point eight four. Together
 that's twenty five,
 
-00:23:04.815 --> 00:23:08.325
+00:23:19.340 --> 00:23:22.850
 and its square root is five
 kilometres, as before.
 
-00:23:09.825 --> 00:23:11.775
+00:23:24.350 --> 00:23:26.300
 The arrow didn't move.
 
-00:23:12.125 --> 00:23:14.811
+00:23:26.650 --> 00:23:29.336
 Only the numbers that describe it changed,
 
-00:23:14.811 --> 00:23:17.625
+00:23:29.336 --> 00:23:32.150
 because we measure it
 with different rulers.
 
-00:23:18.425 --> 00:23:22.275
+00:23:32.950 --> 00:23:36.800
 These two lines have the same
 shape, so let's line them up.
 
-00:23:22.625 --> 00:23:24.677
+00:23:37.150 --> 00:23:39.202
 Write x prime above y prime,
 
-00:23:24.677 --> 00:23:29.075
+00:23:39.202 --> 00:23:43.600
 with the x terms in one column
 and the y terms in the other.
 
-00:23:29.425 --> 00:23:33.175
+00:23:43.950 --> 00:23:47.700
 Now look at just the four
 numbers in front of x and y.
 
-00:23:33.525 --> 00:23:36.815
+00:23:48.050 --> 00:23:51.340
 The top row is cosine
 alpha and sine alpha,
 
-00:23:36.815 --> 00:23:41.100
+00:23:51.340 --> 00:23:55.625
 and the bottom row is minus sine
 alpha and cosine alpha.
 
-00:23:41.450 --> 00:23:45.269
+00:23:55.975 --> 00:23:59.794
 That square of four numbers
 is called a rotation matrix,
 
-00:23:45.269 --> 00:23:48.475
+00:23:59.794 --> 00:24:03.000
 because it turns old
 coordinates into new ones.
 
-00:23:48.825 --> 00:23:51.600
+00:24:03.350 --> 00:24:06.125
 To use it, go along one row.
 
-00:23:51.950 --> 00:23:57.500
+00:24:06.475 --> 00:24:12.025
 Multiply its first number by x, and
 its second number by y, then add.
 
-00:23:57.850 --> 00:24:02.450
+00:24:12.375 --> 00:24:16.975
 The top row gives x prime, and
 the bottom row gives y prime.
 
-00:24:02.800 --> 00:24:08.117
+00:24:17.325 --> 00:24:22.642
 With our numbers, the top row gives
 zero point eight six six times three,
 
-00:24:08.117 --> 00:24:10.448
+00:24:22.642 --> 00:24:24.973
 plus zero point five times four:
 
-00:24:10.448 --> 00:24:16.348
+00:24:24.973 --> 00:24:30.873
 four point six again. And the bottom row
 gives minus zero point five times three,
 
-00:24:16.348 --> 00:24:22.175
+00:24:30.873 --> 00:24:36.700
 plus zero point eight six six times four:
 one point nine six, our y prime again.
 
-00:24:23.675 --> 00:24:26.725
+00:24:38.200 --> 00:24:41.250
 Each of the four numbers
 has a meaning, too.
 
-00:24:27.075 --> 00:24:31.130
+00:24:41.600 --> 00:24:45.655
 The dot product of two arrows
 of length one is the cosine
 
-00:24:31.130 --> 00:24:35.043
+00:24:45.655 --> 00:24:49.568
 of the angle between them.
 As in the dot product movie:
 
-00:24:35.043 --> 00:24:40.450
+00:24:49.568 --> 00:24:54.975
 length times length times the cosine
 of the angle, and both lengths are one.
 
-00:24:40.800 --> 00:24:47.150
+00:24:55.325 --> 00:25:01.675
 So each number is the cosine of the angle
 between one new axis and one old axis.
 
-00:24:47.500 --> 00:24:50.400
+00:25:02.025 --> 00:25:04.925
 That's why they're
 called direction cosines.
 
-00:24:50.750 --> 00:24:55.765
+00:25:05.275 --> 00:25:10.290
 For example, the angle between x hat
 prime and x hat is alpha,
 
-00:24:55.765 --> 00:24:58.757
+00:25:10.290 --> 00:25:13.282
 so their dot product is cosine alpha:
 
-00:24:58.757 --> 00:25:03.125
+00:25:13.282 --> 00:25:17.650
 the top left number. The angle
 between x hat prime and
 
-00:25:03.125 --> 00:25:06.037
+00:25:17.650 --> 00:25:20.562
 y hat is ninety degrees minus alpha,
 
-00:25:06.037 --> 00:25:11.132
+00:25:20.562 --> 00:25:25.657
 and its cosine is sine alpha.
 The angle between y hat prime and
 
-00:25:11.132 --> 00:25:16.875
+00:25:25.657 --> 00:25:31.400
 x hat is ninety degrees plus alpha, and
 its cosine is minus sine alpha.
 
-00:25:17.675 --> 00:25:20.932
+00:25:32.200 --> 00:25:35.457
 In the vectors movie, we
 met index notation,
 
-00:25:20.932 --> 00:25:23.375
+00:25:35.457 --> 00:25:37.900
 a short way to write all of this.
 
-00:25:23.725 --> 00:25:26.425
+00:25:38.250 --> 00:25:40.950
 Let's rewrite it one step at a time.
 
-00:25:26.775 --> 00:25:28.650
+00:25:41.300 --> 00:25:43.175
 First, the names.
 
-00:25:29.000 --> 00:25:34.050
+00:25:43.525 --> 00:25:48.575
 The old coordinates x and y become x sub
 one and x sub two.
 
-00:25:34.400 --> 00:25:39.739
+00:25:48.925 --> 00:25:54.264
 The old unit vectors x hat and y hat
 become e sub one and e sub two,
 
-00:25:39.739 --> 00:25:44.450
+00:25:54.264 --> 00:25:58.975
 and the new ones become e prime
 sub one and e prime sub two.
 
-00:25:44.800 --> 00:25:48.575
+00:25:59.325 --> 00:26:03.100
 Next, each direction
 cosine gets two labels.
 
-00:25:48.925 --> 00:25:55.150
+00:26:03.450 --> 00:26:09.675
 C sub i j is the dot product of old
 arrow number i with new arrow number j.
 
-00:25:55.500 --> 00:25:57.625
+00:26:10.025 --> 00:26:12.150
 Let's work out all four.
 
-00:25:57.975 --> 00:26:02.928
+00:26:12.500 --> 00:26:17.453
 C one one is x hat dot x hat
 prime: one times cosine alpha,
 
-00:26:02.928 --> 00:26:07.125
+00:26:17.453 --> 00:26:21.650
 plus zero times sine
 alpha, which is cosine alpha.
 
-00:26:08.625 --> 00:26:13.975
+00:26:23.150 --> 00:26:28.500
 C one two is x hat dot y hat
 prime, which is minus sine alpha.
 
-00:26:15.475 --> 00:26:20.350
+00:26:30.000 --> 00:26:34.875
 C two one is y hat dot x hat
 prime, which is sine alpha.
 
-00:26:21.850 --> 00:26:27.150
+00:26:36.375 --> 00:26:41.675
 And C two two is y hat dot y hat
 prime, which is cosine alpha.
 
-00:26:28.650 --> 00:26:34.250
+00:26:43.175 --> 00:26:48.775
 Now the rule: new coordinate
 number j is x sub i times C sub i j.
 
-00:26:34.600 --> 00:26:38.876
+00:26:49.125 --> 00:26:53.401
 The index i appears
 twice, so, as in the vectors movie,
 
-00:26:38.876 --> 00:26:43.075
+00:26:53.401 --> 00:26:57.600
 we add up the terms for i equals
 one and i equals two.
 
-00:26:43.425 --> 00:26:47.810
+00:26:57.950 --> 00:27:02.335
 For j equals one, that's x sub
 one times C one one,
 
-00:26:47.810 --> 00:26:50.475
+00:27:02.335 --> 00:27:05.000
 plus x sub two times C two one.
 
-00:26:50.825 --> 00:26:54.182
+00:27:05.350 --> 00:27:08.707
 That's x cosine alpha plus y sine alpha:
 
-00:26:54.182 --> 00:26:59.050
+00:27:08.707 --> 00:27:13.575
 our x prime. With our numbers
 that's four point six again.
 
-00:27:00.550 --> 00:27:07.400
+00:27:15.075 --> 00:27:21.925
 For j equals two, it's x sub one times C
 one two, plus x sub two times C two two.
 
-00:27:07.750 --> 00:27:11.572
+00:27:22.275 --> 00:27:26.097
 That's minus x sine alpha
 plus y cosine alpha:
 
-00:27:11.572 --> 00:27:16.225
+00:27:26.097 --> 00:27:30.750
 our y prime. With our numbers
 that's one point nine six.
 
-00:27:17.725 --> 00:27:22.050
+00:27:32.250 --> 00:27:36.575
 So the short line says exactly
 what our two long lines say.
 
-00:27:22.400 --> 00:27:26.368
+00:27:36.925 --> 00:27:40.893
 If we set the four C's
 in a square, with i for the row and
 
-00:27:26.368 --> 00:27:31.225
+00:27:40.893 --> 00:27:45.750
 j for the column, we get our rotation
 matrix flipped over its diagonal.
 
-00:27:31.575 --> 00:27:36.539
+00:27:46.100 --> 00:27:51.064
 That's only because this form reads down
 the columns instead of along the rows,
 
-00:27:36.539 --> 00:27:38.675
+00:27:51.064 --> 00:27:53.200
 and the four numbers are the same.
 
-00:27:39.025 --> 00:27:43.848
+00:27:53.550 --> 00:27:58.373
 The same rule works in three dimensions,
 and for things called tensors,
 
-00:27:43.848 --> 00:27:48.400
+00:27:58.373 --> 00:28:02.925
 which have their own movie later
 in this series: Tensors made easy.
 
-00:27:49.200 --> 00:27:52.175
+00:28:03.725 --> 00:28:06.700
 Here's a nice link between the two ideas.
 
-00:27:52.525 --> 00:27:55.832
+00:28:07.050 --> 00:28:10.357
 Go back to the balloon,
 at fifty three degrees,
 
-00:27:55.832 --> 00:28:00.125
+00:28:10.357 --> 00:28:14.650
 and turn the axes by alpha equals
 theta, fifty three degrees.
 
-00:28:00.475 --> 00:28:05.625
+00:28:15.000 --> 00:28:20.150
 Then x hat prime is cosine
 theta, sine theta, which is r hat.
 
-00:28:05.975 --> 00:28:11.450
+00:28:20.500 --> 00:28:25.975
 And y hat prime is minus sine
 theta, cosine theta, which is theta hat.
 
-00:28:12.950 --> 00:28:16.224
+00:28:27.475 --> 00:28:30.749
 So r hat and theta hat
 are just the east and
 
-00:28:16.224 --> 00:28:19.200
+00:28:30.749 --> 00:28:33.725
 north arrows, turned by the angle theta.
 
-00:28:19.550 --> 00:28:24.825
+00:28:34.075 --> 00:28:39.350
 That means the polar parts of any arrow
 are its coordinates in turned axes.
 
-00:28:25.175 --> 00:28:28.700
+00:28:39.700 --> 00:28:43.225
 Let's check with the east wind, ten, zero.
 
-00:28:29.050 --> 00:28:35.650
+00:28:43.575 --> 00:28:50.175
 X prime is ten times zero point six, plus
 zero times zero point eight, which is six.
 
-00:28:37.150 --> 00:28:40.552
+00:28:51.675 --> 00:28:55.077
 Y prime is minus ten
 times zero point eight,
 
-00:28:40.552 --> 00:28:44.650
+00:28:55.077 --> 00:28:59.175
 plus zero times zero point six, which
 is minus eight.
 
-00:28:46.150 --> 00:28:50.650
+00:29:00.675 --> 00:29:05.175
 Those are exactly u sub r and u sub
 theta from before.
 
-00:28:51.000 --> 00:28:54.675
+00:29:05.525 --> 00:29:09.200
 Now the balloon's own
 position arrow, three, four.
 
-00:28:55.025 --> 00:29:00.450
+00:29:09.550 --> 00:29:14.975
 X prime is three times zero point
 six, plus four times zero point eight.
 
-00:29:00.800 --> 00:29:04.775
+00:29:15.325 --> 00:29:19.300
 That's one point eight
 plus three point two, which is five.
 
-00:29:06.275 --> 00:29:12.025
+00:29:20.800 --> 00:29:26.550
 Y prime is minus three times zero point
 eight, plus four times zero point six.
 
-00:29:12.375 --> 00:29:16.850
+00:29:26.900 --> 00:29:31.375
 That's minus two point four
 plus two point four, which is zero.
 
-00:29:18.350 --> 00:29:23.711
+00:29:32.875 --> 00:29:38.236
 So the balloon is at five, zero in these
 axes: five kilometres along r hat,
 
-00:29:23.711 --> 00:29:29.000
+00:29:38.236 --> 00:29:43.525
 and nothing along theta hat, because r hat
 points straight at the balloon.
 
-00:29:29.350 --> 00:29:31.525
+00:29:43.875 --> 00:29:46.050
 There's one difference, though.
 
-00:29:31.875 --> 00:29:36.150
+00:29:46.400 --> 00:29:50.675
 With turned axes, we choose
 one angle for the whole map.
 
-00:29:36.500 --> 00:29:42.175
+00:29:51.025 --> 00:29:56.700
 With polar coordinates, the angle is
 theta, so it changes from place to place.
 
-00:29:42.525 --> 00:29:44.988
+00:29:57.050 --> 00:29:59.513
 If you skipped, here's what to keep:
 
-00:29:44.988 --> 00:29:50.324
+00:29:59.513 --> 00:30:04.849
 turning the axes by an angle alpha changes
 the numbers that describe an arrow,
 
-00:29:50.324 --> 00:29:55.250
+00:30:04.849 --> 00:30:09.775
 but not the arrow itself, and polar
 parts are just axes turned by theta.
 
-00:29:56.050 --> 00:29:59.475
+00:30:10.575 --> 00:30:14.000
 Now let's take polar
 coordinates to a real storm.
 
-00:29:59.825 --> 00:30:03.598
+00:30:14.350 --> 00:30:18.123
 Here is Hurricane Ian
 on the twenty eighth of September,
 
-00:30:03.598 --> 00:30:06.360
+00:30:18.123 --> 00:30:20.885
 twenty twenty-two, at six in the evening,
 
-00:30:06.360 --> 00:30:11.750
+00:30:20.885 --> 00:30:26.275
 universal time, an hour before it came
 ashore on the southwest coast of Florida.
 
-00:30:12.100 --> 00:30:16.115
+00:30:26.625 --> 00:30:30.640
 The colours show the wind speed
 ten metres above the ground,
 
-00:30:16.115 --> 00:30:20.800
+00:30:30.640 --> 00:30:35.325
 from a weather model analysis with grid
 points every three kilometres.
 
-00:30:21.150 --> 00:30:25.347
+00:30:35.675 --> 00:30:39.872
 Like most weather data, it
 gives each wind as two numbers:
 
-00:30:25.347 --> 00:30:28.675
+00:30:39.872 --> 00:30:43.200
 its eastward part u, and
 its northward part v.
 
-00:30:29.025 --> 00:30:32.200
+00:30:43.550 --> 00:30:46.725
 The calm centre of the storm
 is called the eye.
 
-00:30:32.550 --> 00:30:36.425
+00:30:47.075 --> 00:30:50.950
 Let's put the origin in the middle
 of the eye, and zoom in.
 
-00:30:36.775 --> 00:30:41.178
+00:30:51.300 --> 00:30:55.703
 The eye sits just off
 the coast, over the warm Gulf of Mexico,
 
-00:30:41.178 --> 00:30:45.225
+00:30:55.703 --> 00:30:59.750
 with the flat, low land
 of southwest Florida to its east.
 
-00:30:45.575 --> 00:30:49.450
+00:31:00.100 --> 00:31:03.975
 Round the eye, the winds are
 the strongest in the storm.
 
-00:30:49.800 --> 00:30:53.764
+00:31:04.325 --> 00:31:08.289
 Now every point round the eye
 gets its polar coordinates:
 
-00:30:53.764 --> 00:30:58.075
+00:31:08.289 --> 00:31:12.600
 its distance r from the centre, and
 its angle theta from east.
 
-00:30:58.875 --> 00:31:02.375
+00:31:13.400 --> 00:31:16.900
 Every wind on the map
 now has two polar parts.
 
-00:31:02.725 --> 00:31:06.500
+00:31:17.250 --> 00:31:21.025
 The radial wind, u sub r, blows in or out.
 
-00:31:06.850 --> 00:31:11.300
+00:31:21.375 --> 00:31:25.825
 The tangential wind, u sub
 theta, blows round the eye.
 
-00:31:11.650 --> 00:31:15.485
+00:31:26.175 --> 00:31:30.010
 Let's draw a ring twenty five
 kilometres from the centre,
 
-00:31:15.485 --> 00:31:20.800
+00:31:30.010 --> 00:31:35.325
 and work out both parts at seventy two
 points round it, one every five degrees.
 
-00:31:21.150 --> 00:31:23.992
+00:31:35.675 --> 00:31:38.517
 Then we average each part round the ring:
 
-00:31:23.992 --> 00:31:28.150
+00:31:38.517 --> 00:31:42.675
 we add up the seventy two
 values, and divide by seventy two.
 
-00:31:28.500 --> 00:31:34.175
+00:31:43.025 --> 00:31:48.700
 The seventy two tangential winds add up
 to about two thousand five hundred and
 
-00:31:34.175 --> 00:31:37.522
+00:31:48.700 --> 00:31:52.047
 six metres per second.
 Divided by seventy two,
 
-00:31:37.522 --> 00:31:43.125
+00:31:52.047 --> 00:31:57.650
 that's about thirty four point eight, or
 about thirty five metres per second.
 
-00:31:44.625 --> 00:31:50.308
+00:31:59.150 --> 00:32:04.833
 To turn metres per second into kilometres
 per hour, we multiply by three point six,
 
-00:31:50.308 --> 00:31:54.073
+00:32:04.833 --> 00:32:08.598
 because an hour has three
 thousand six hundred seconds,
 
-00:31:54.073 --> 00:31:56.675
+00:32:08.598 --> 00:32:11.200
 and a kilometre has a thousand metres.
 
-00:31:57.025 --> 00:32:00.942
+00:32:11.550 --> 00:32:15.467
 So thirty five metres per second
 is about a hundred and
 
-00:32:00.942 --> 00:32:03.150
+00:32:15.467 --> 00:32:17.675
 twenty six kilometres per hour.
 
-00:32:04.650 --> 00:32:08.681
+00:32:19.175 --> 00:32:23.206
 The air goes round anticlockwise,
 as seen from above,
 
-00:32:08.681 --> 00:32:11.875
+00:32:23.206 --> 00:32:26.400
 as in every northern hemisphere hurricane.
 
-00:32:12.225 --> 00:32:17.196
+00:32:26.750 --> 00:32:31.721
 The seventy two radial winds add
 up to about minus nine hundred and
 
-00:32:17.196 --> 00:32:19.867
+00:32:31.721 --> 00:32:34.392
 fifty seven. Divided by seventy two,
 
-00:32:19.867 --> 00:32:26.025
+00:32:34.392 --> 00:32:40.550
 that's about minus thirteen point three,
 or about minus thirteen metres per second.
 
-00:32:27.525 --> 00:32:33.000
+00:32:42.050 --> 00:32:47.525
 The minus sign means that, on average,
 the air is flowing in, towards the eye.
 
-00:32:33.350 --> 00:32:35.975
+00:32:47.875 --> 00:32:50.500
 The real storm was even stronger.
 
-00:32:36.325 --> 00:32:40.086
+00:32:50.850 --> 00:32:54.611
 The official estimate
 of its strongest wind at that hour,
 
-00:32:40.086 --> 00:32:44.375
+00:32:54.611 --> 00:32:58.900
 averaged over a minute, is about a hundred
 and thirty five knots.
 
-00:32:44.725 --> 00:32:48.627
+00:32:59.250 --> 00:33:03.152
 One knot is about one point eight five
 kilometres per hour,
 
-00:32:48.627 --> 00:32:50.677
+00:33:03.152 --> 00:33:05.202
 so that's about two hundred and
 
-00:32:50.677 --> 00:32:54.975
+00:33:05.202 --> 00:33:09.500
 fifty kilometres per hour, or about
 sixty nine metres per second.
 
-00:32:56.475 --> 00:32:58.790
+00:33:11.000 --> 00:33:13.315
 That's the single strongest wind,
 
-00:32:58.790 --> 00:33:02.367
+00:33:13.315 --> 00:33:16.892
 while our thirty five
 is an average round the ring,
 
-00:33:02.367 --> 00:33:06.506
+00:33:16.892 --> 00:33:21.031
 and even the strongest wind
 on our model ring is only about
 
-00:33:06.506 --> 00:33:10.925
+00:33:21.031 --> 00:33:25.450
 forty nine. The model analysis
 smooths out the strongest winds.
 
-00:33:11.725 --> 00:33:15.575
+00:33:26.250 --> 00:33:30.100
 So what do these two numbers
 mean, and how are they different?
 
-00:33:15.925 --> 00:33:19.550
+00:33:30.450 --> 00:33:34.075
 Thirty five is how fast
 the air goes round the eye.
 
-00:33:19.900 --> 00:33:23.450
+00:33:34.425 --> 00:33:37.975
 Thirteen is how fast it
 moves towards the eye.
 
-00:33:23.800 --> 00:33:28.375
+00:33:38.325 --> 00:33:42.900
 They're two parts of the same
 wind, at right angles to each other.
 
-00:33:28.725 --> 00:33:34.538
+00:33:43.250 --> 00:33:49.063
 By Pythagoras, together they make an arrow
 of the square root of thirty five squared
 
-00:33:34.538 --> 00:33:39.020
+00:33:49.063 --> 00:33:53.545
 plus thirteen squared. Thirty
 five squared is twelve hundred and
 
-00:33:39.020 --> 00:33:42.451
+00:33:53.545 --> 00:33:56.976
 twenty five, and thirteen
 squared is a hundred and
 
-00:33:42.451 --> 00:33:45.813
+00:33:56.976 --> 00:34:00.338
 sixty nine. Together
 that's thirteen hundred and
 
-00:33:45.813 --> 00:33:50.925
+00:34:00.338 --> 00:34:05.450
 ninety four, and its square root
 is about thirty seven metres per second.
 
-00:33:52.425 --> 00:33:55.650
+00:34:06.950 --> 00:34:10.175
 It points mostly round, and a little in.
 
-00:33:56.000 --> 00:33:59.525
+00:34:10.525 --> 00:34:14.050
 Thirteen metres
 per second, times three point six,
 
-00:33:59.525 --> 00:34:03.825
+00:34:14.050 --> 00:34:18.350
 is about forty seven kilometres
 per hour, towards the centre.
 
-00:34:05.325 --> 00:34:09.050
+00:34:19.850 --> 00:34:23.575
 Now imagine,
 just for a moment, that nothing changed.
 
-00:34:09.400 --> 00:34:13.810
+00:34:23.925 --> 00:34:28.335
 An air parcel, a small volume
 of air that moves with the flow,
 
-00:34:13.810 --> 00:34:17.225
+00:34:28.335 --> 00:34:31.750
 starts on this ring, twenty
 five kilometres out.
 
-00:34:17.575 --> 00:34:20.468
+00:34:32.100 --> 00:34:34.993
 Moving in at thirteen metres per second,
 
-00:34:20.468 --> 00:34:23.795
+00:34:34.993 --> 00:34:38.320
 it would have to cover
 twenty five kilometres,
 
-00:34:23.795 --> 00:34:27.991
+00:34:38.320 --> 00:34:42.516
 which is twenty five thousand
 metres. Twenty five thousand
 
-00:34:27.991 --> 00:34:31.535
+00:34:42.516 --> 00:34:46.060
 divided by thirteen is about
 nineteen hundred and
 
-00:34:31.535 --> 00:34:35.585
+00:34:46.060 --> 00:34:50.110
 twenty three seconds.
 Divided by sixty seconds a minute,
 
-00:34:35.585 --> 00:34:37.900
+00:34:50.110 --> 00:34:52.425
 that's about thirty two minutes.
 
-00:34:39.400 --> 00:34:44.015
+00:34:53.925 --> 00:34:58.540
 Going round at thirty five metres
 per second, one lap of this ring,
 
-00:34:44.015 --> 00:34:48.078
+00:34:58.540 --> 00:35:02.603
 two pi times twenty five kilometres,
 is about a hundred and
 
-00:34:48.078 --> 00:34:52.968
+00:35:02.603 --> 00:35:07.493
 fifty seven kilometres. That takes
 about four thousand four hundred and
 
-00:34:52.968 --> 00:34:56.550
+00:35:07.493 --> 00:35:11.075
 ninety seconds, which
 is about seventy five minutes.
 
-00:34:58.050 --> 00:35:02.300
+00:35:12.575 --> 00:35:16.825
 So the air is moving round
 and moving in at the same time.
 
-00:35:02.650 --> 00:35:08.348
+00:35:17.175 --> 00:35:22.873
 In any stretch of time, it goes thirty
 five metres round for every thirteen in,
 
-00:35:08.348 --> 00:35:11.377
+00:35:22.873 --> 00:35:25.902
 and thirty five over thirteen is about two
 
-00:35:11.377 --> 00:35:14.551
+00:35:25.902 --> 00:35:29.076
 point seven. So for every
 metre it moves in,
 
-00:35:14.551 --> 00:35:17.075
+00:35:29.076 --> 00:35:31.600
 it moves almost three metres round.
 
-00:35:18.575 --> 00:35:22.575
+00:35:33.100 --> 00:35:37.100
 The air doesn't fall straight
 into the eye: it spirals in.
 
-00:35:22.925 --> 00:35:28.372
+00:35:37.450 --> 00:35:42.897
 In the real storm, the inflow slows
 down near the ring of strongest winds,
 
-00:35:28.372 --> 00:35:32.200
+00:35:42.897 --> 00:35:46.725
 and the air rises there instead,
 in towering clouds.
 
-00:35:32.550 --> 00:35:35.295
+00:35:47.075 --> 00:35:49.820
 We'll look at that rising air in Part 2,
 
-00:35:35.295 --> 00:35:40.922
+00:35:49.820 --> 00:35:55.447
 and the whole story of how hurricanes work
 has its own movie later in this series:
 
-00:35:40.922 --> 00:35:42.775
+00:35:55.447 --> 00:35:57.300
 How tropical cyclones form.
 
-00:35:43.575 --> 00:35:46.720
+00:35:58.100 --> 00:36:01.245
 Next, we work out three
 ring points by hand,
 
-00:35:46.720 --> 00:35:49.650
+00:36:01.245 --> 00:36:04.175
 for anyone who wants to see every number.
 
-00:35:50.000 --> 00:35:53.650
+00:36:04.525 --> 00:36:08.175
 You don't need these steps
 for the intuition of weather,
 
-00:35:53.650 --> 00:35:55.214
+00:36:08.175 --> 00:36:09.739
 climate science or maps,
 
-00:35:55.214 --> 00:35:59.450
+00:36:09.739 --> 00:36:13.975
 so if that feels like too much, skip
 ahead to the time on screen.
 
-00:35:59.800 --> 00:36:02.350
+00:36:14.325 --> 00:36:16.875
 Where do those averages come from?
 
-00:36:02.700 --> 00:36:06.325
+00:36:17.225 --> 00:36:20.850
 Let's work out three
 of the seventy two points by hand.
 
-00:36:06.675 --> 00:36:11.975
+00:36:21.200 --> 00:36:26.500
 Remember, the data give us u and v, the
 eastward and northward parts.
 
-00:36:12.325 --> 00:36:16.625
+00:36:26.850 --> 00:36:31.150
 First, the point due east
 of the eye, at theta equals zero.
 
-00:36:16.975 --> 00:36:21.087
+00:36:31.500 --> 00:36:35.612
 There, u is minus
 eight point seven, and v is thirty eight:
 
-00:36:21.087 --> 00:36:23.875
+00:36:35.612 --> 00:36:38.400
 the wind blows north, and a little west.
 
-00:36:25.375 --> 00:36:30.825
+00:36:39.900 --> 00:36:45.350
 Our rule has cosine of zero, which
 is one, and sine of zero, which is zero.
 
-00:36:31.175 --> 00:36:36.675
+00:36:45.700 --> 00:36:51.200
 So u sub r equals u, which
 is minus eight point seven: a little in.
 
-00:36:37.025 --> 00:36:41.450
+00:36:51.550 --> 00:36:55.975
 And u sub theta equals v, which
 is thirty eight: round.
 
-00:36:41.800 --> 00:36:44.750
+00:36:56.325 --> 00:36:59.275
 Here, the wind blows mostly round.
 
-00:36:46.250 --> 00:36:50.375
+00:37:00.775 --> 00:37:04.900
 Next, the point due north
 of the eye, at ninety degrees.
 
-00:36:50.725 --> 00:36:56.302
+00:37:05.250 --> 00:37:10.827
 There, u is minus sixteen point nine, and
 v is minus thirty seven point four:
 
-00:36:56.302 --> 00:37:00.575
+00:37:10.827 --> 00:37:15.100
 the wind blows mostly towards
 the south, and a little west.
 
-00:37:02.075 --> 00:37:05.675
+00:37:16.600 --> 00:37:20.200
 Now the cosine is zero
 and the sine is one.
 
-00:37:06.025 --> 00:37:11.750
+00:37:20.550 --> 00:37:26.275
 So u sub r equals v, which
 is minus thirty seven point four: in.
 
-00:37:12.100 --> 00:37:15.226
+00:37:26.625 --> 00:37:29.751
 And u sub theta is minus u times one,
 
-00:37:15.226 --> 00:37:18.944
+00:37:29.751 --> 00:37:33.469
 plus v times zero.
 Minus times minus sixteen
 
-00:37:18.944 --> 00:37:23.000
+00:37:33.469 --> 00:37:37.525
 point nine makes
 plus sixteen point nine: round.
 
-00:37:24.500 --> 00:37:29.675
+00:37:39.025 --> 00:37:44.200
 Last, the point to the northwest,
 at a hundred and thirty five degrees.
 
-00:37:30.025 --> 00:37:35.525
+00:37:44.550 --> 00:37:50.050
 There, u is minus ten point one, and v is
 minus forty four point five.
 
-00:37:37.025 --> 00:37:42.151
+00:37:51.550 --> 00:37:56.676
 A hundred and thirty five degrees
 is forty five degrees short of due west,
 
-00:37:42.151 --> 00:37:45.960
+00:37:56.676 --> 00:38:00.485
 so its cosine is minus one
 over the square root of two,
 
-00:37:45.960 --> 00:37:48.731
+00:38:00.485 --> 00:38:03.256
 about minus zero point seven zero seven,
 
-00:37:48.731 --> 00:37:52.125
+00:38:03.256 --> 00:38:06.650
 and its sine is plus
 zero point seven zero seven.
 
-00:37:52.475 --> 00:37:58.471
+00:38:07.000 --> 00:38:12.996
 So u sub r is minus ten point one times
 minus zero point seven zero seven,
 
-00:37:58.471 --> 00:38:03.900
+00:38:12.996 --> 00:38:18.425
 plus minus forty four point five
 times zero point seven zero seven.
 
-00:38:04.250 --> 00:38:08.600
+00:38:18.775 --> 00:38:23.125
 That's seven point one four
 minus thirty one point four six,
 
-00:38:08.600 --> 00:38:11.500
+00:38:23.125 --> 00:38:26.025
 about minus twenty four point three: in.
 
-00:38:13.000 --> 00:38:15.901
+00:38:27.525 --> 00:38:30.426
 And u sub theta is minus u times sine,
 
-00:38:15.901 --> 00:38:20.330
+00:38:30.426 --> 00:38:34.855
 so minus minus ten point one, which
 is plus ten point one,
 
-00:38:20.330 --> 00:38:22.926
+00:38:34.855 --> 00:38:37.451
 times zero point seven zero seven,
 
-00:38:22.926 --> 00:38:28.500
+00:38:37.451 --> 00:38:43.025
 plus minus forty four point five times
 minus zero point seven zero seven.
 
-00:38:28.850 --> 00:38:33.197
+00:38:43.375 --> 00:38:47.722
 That's seven point one four
 plus thirty one point four six,
 
-00:38:33.197 --> 00:38:35.850
+00:38:47.722 --> 00:38:50.375
 about thirty eight point six: round.
 
-00:38:37.350 --> 00:38:41.306
+00:38:51.875 --> 00:38:55.831
 The computer does exactly this
 at all seventy two points,
 
-00:38:41.306 --> 00:38:43.250
+00:38:55.831 --> 00:38:57.775
 and then takes the averages.
 
-00:38:43.600 --> 00:38:45.882
+00:38:58.125 --> 00:39:00.407
 If you skipped, here's what to keep:
 
-00:38:45.882 --> 00:38:49.052
+00:39:00.407 --> 00:39:03.577
 at every point round
 the ring, the wind's east and
 
-00:38:49.052 --> 00:38:51.778
+00:39:03.577 --> 00:39:06.303
 north parts turn into
 an in or out part and
 
-00:38:51.778 --> 00:38:54.250
+00:39:06.303 --> 00:39:08.775
 a round part, and then we average them.
 
-00:38:55.050 --> 00:38:57.875
+00:39:09.575 --> 00:39:12.400
 Why bother with polar coordinates here?
 
-00:38:58.225 --> 00:39:03.400
+00:39:12.750 --> 00:39:17.925
 Let's go all the way round the ring, and
 plot the winds against the angle theta.
 
-00:39:03.750 --> 00:39:07.538
+00:39:18.275 --> 00:39:22.063
 First, the eastward
 wind u, the solid orange line,
 
-00:39:07.538 --> 00:39:11.250
+00:39:22.063 --> 00:39:25.775
 and the northward
 wind v, the dashed orange line.
 
-00:39:11.600 --> 00:39:14.150
+00:39:26.125 --> 00:39:28.675
 Our three points sit on these lines.
 
-00:39:14.500 --> 00:39:20.375
+00:39:29.025 --> 00:39:34.900
 Both lines swing up and down, from plus
 to minus, by tens of metres per second.
 
-00:39:20.725 --> 00:39:25.350
+00:39:35.250 --> 00:39:39.875
 They swing because the wind keeps
 turning as we go round the eye.
 
-00:39:25.700 --> 00:39:30.087
+00:39:40.225 --> 00:39:44.612
 On the east side it blows
 north, on the west side it blows south,
 
-00:39:30.087 --> 00:39:33.800
+00:39:44.612 --> 00:39:48.325
 and on the south side it
 blows east, all the way round.
 
-00:39:34.150 --> 00:39:37.825
+00:39:48.675 --> 00:39:52.350
 Now let's plot the two polar
 parts round the same ring.
 
-00:39:38.175 --> 00:39:42.130
+00:39:52.700 --> 00:39:56.655
 The tangential wind, u sub
 theta, is the teal line,
 
-00:39:42.130 --> 00:39:45.775
+00:39:56.655 --> 00:40:00.300
 and the radial
 wind, u sub r, is the rose line.
 
-00:39:46.125 --> 00:39:49.909
+00:40:00.650 --> 00:40:04.434
 The tangential wind stays
 positive all the way round,
 
-00:39:49.909 --> 00:39:55.050
+00:40:04.434 --> 00:40:09.575
 between about seventeen and forty
 seven, with an average of thirty five.
 
-00:39:55.400 --> 00:39:59.618
+00:40:09.925 --> 00:40:14.143
 The radial wind wobbles more,
 between about minus forty and
 
-00:39:59.618 --> 00:40:03.550
+00:40:14.143 --> 00:40:18.075
 plus fourteen, because
 the storm isn't perfectly round.
 
-00:40:03.900 --> 00:40:07.416
+00:40:18.425 --> 00:40:21.941
 It's negative at fifty eight
 of the seventy two points,
 
-00:40:07.416 --> 00:40:10.740
+00:40:21.941 --> 00:40:25.265
 and only on the southwest
 side does it blow outward,
 
-00:40:10.740 --> 00:40:13.425
+00:40:25.265 --> 00:40:27.950
 by up to about fourteen metres per second.
 
-00:40:13.775 --> 00:40:16.775
+00:40:28.300 --> 00:40:31.300
 So, on average, the air flows in.
 
-00:40:17.125 --> 00:40:20.740
+00:40:31.650 --> 00:40:35.265
 Instead of two lines that
 swing from plus to minus,
 
-00:40:20.740 --> 00:40:23.505
+00:40:35.265 --> 00:40:38.030
 we get two numbers that mean something:
 
-00:40:23.505 --> 00:40:27.475
+00:40:38.030 --> 00:40:42.000
 how fast the storm spins, and
 how fast the air flows in.
 
-00:40:27.825 --> 00:40:31.825
+00:40:42.350 --> 00:40:46.350
 That's why hurricane scientists
 use polar coordinates.
 
-00:40:32.625 --> 00:40:36.275
+00:40:47.150 --> 00:40:50.800
 There's one more angle that
 hurricane scientists use.
 
-00:40:36.625 --> 00:40:40.625
+00:40:51.150 --> 00:40:55.150
 The wind crosses each ring
 at a slant, a little inward.
 
-00:40:40.975 --> 00:40:44.877
+00:40:55.500 --> 00:40:59.402
 The angle between the wind
 and the ring's own direction,
 
-00:40:44.877 --> 00:40:47.525
+00:40:59.402 --> 00:41:02.050
 theta hat, is called the inflow angle.
 
-00:40:47.875 --> 00:40:52.273
+00:41:02.400 --> 00:41:06.798
 Its tangent is the side opposite
 the angle over the side next to it:
 
-00:40:52.273 --> 00:40:54.601
+00:41:06.798 --> 00:41:09.126
 the inward part over the round part,
 
-00:40:54.601 --> 00:40:59.775
+00:41:09.126 --> 00:41:14.300
 thirteen point three over thirty four
 point eight, about zero point three eight.
 
-00:41:00.125 --> 00:41:05.825
+00:41:14.650 --> 00:41:20.350
 So the inflow angle, the angle with that
 tangent, is about twenty one degrees.
 
-00:41:07.325 --> 00:41:11.950
+00:41:21.850 --> 00:41:26.475
 We've now met four different
 angles, so let's put them side by side.
 
-00:41:12.300 --> 00:41:18.275
+00:41:26.825 --> 00:41:32.800
 Theta says where a point is, measured from
 east, anticlockwise as seen from above.
 
-00:41:18.625 --> 00:41:22.092
+00:41:33.150 --> 00:41:36.617
 The compass bearing says
 which way something points,
 
-00:41:22.092 --> 00:41:25.425
+00:41:36.617 --> 00:41:39.950
 measured from north,
 clockwise as seen from above.
 
-00:41:25.775 --> 00:41:28.875
+00:41:40.300 --> 00:41:43.400
 Alpha says how far we turned our axes.
 
-00:41:29.225 --> 00:41:34.200
+00:41:43.750 --> 00:41:48.725
 And the inflow angle says how far
 the wind leans inward from the ring.
 
-00:41:34.550 --> 00:41:36.753
+00:41:49.075 --> 00:41:51.278
 They answer four different questions,
 
-00:41:36.753 --> 00:41:40.325
+00:41:51.278 --> 00:41:54.850
 so it's always worth checking
 which angle you're looking at.
 
-00:41:40.675 --> 00:41:44.900
+00:41:55.200 --> 00:41:59.425
 The storm's spin also has its own
 measure, called vorticity,
 
-00:41:44.900 --> 00:41:49.900
+00:41:59.425 --> 00:42:04.425
 which has its own movie later in this
 series: Vorticity in plain words.
 
-00:41:50.700 --> 00:41:54.622
+00:42:05.225 --> 00:42:09.147
 To sum up, coordinates are
 numbers that pin down a place,
 
-00:41:54.622 --> 00:41:57.925
+00:42:09.147 --> 00:42:12.450
 measured from an origin
 along chosen directions.
 
-00:41:58.275 --> 00:42:02.698
+00:42:12.800 --> 00:42:17.223
 Cartesian coordinates
 use x and y, and their unit vectors,
 
-00:42:02.698 --> 00:42:05.825
+00:42:17.223 --> 00:42:20.350
 x hat and y hat, are the same everywhere.
 
-00:42:06.175 --> 00:42:10.727
+00:42:20.700 --> 00:42:25.252
 Polar coordinates use
 the distance r and the angle theta,
 
-00:42:10.727 --> 00:42:15.200
+00:42:25.252 --> 00:42:29.725
 with x equals r cosine
 theta, and y equals r sine theta.
 
-00:42:15.550 --> 00:42:19.850
+00:42:30.075 --> 00:42:34.375
 The arc length is the radius
 times the angle, in radians.
 
-00:42:20.200 --> 00:42:22.850
+00:42:34.725 --> 00:42:37.375
 R hat points the way r grows.
 
-00:42:23.200 --> 00:42:26.028
+00:42:37.725 --> 00:42:40.553
 Theta hat points the way theta grows:
 
-00:42:26.028 --> 00:42:31.225
+00:42:40.553 --> 00:42:45.750
 it's r hat turned by ninety degrees,
 minus sine theta, cosine theta.
 
-00:42:31.575 --> 00:42:35.759
+00:42:46.100 --> 00:42:50.284
 The parts of a wind along these
 two arrows are dot products:
 
-00:42:35.759 --> 00:42:38.200
+00:42:50.284 --> 00:42:52.725
 the radial and the tangential wind.
 
-00:42:38.550 --> 00:42:43.818
+00:42:53.075 --> 00:42:58.343
 Turning the axes by an angle alpha gives
 new coordinates for the same arrow,
 
-00:42:43.818 --> 00:42:47.700
+00:42:58.343 --> 00:43:02.225
 and the four direction cosines
 make the rotation matrix.
 
-00:42:48.050 --> 00:42:53.750
+00:43:02.575 --> 00:43:08.275
 Polar parts are just turned axes, with an
 angle that changes from place to place.
 
-00:42:54.100 --> 00:42:55.895
+00:43:08.625 --> 00:43:10.420
 Round Hurricane Ian's eye,
 
-00:42:55.895 --> 00:43:00.867
+00:43:10.420 --> 00:43:15.392
 they split the wind into about thirty
 five metres per second of spin and
 
-00:43:00.867 --> 00:43:05.700
+00:43:15.392 --> 00:43:20.225
 thirteen of inflow, so the air spirals
 in at about twenty one degrees.
 
-00:43:06.050 --> 00:43:11.461
+00:43:20.575 --> 00:43:25.986
 In Part 2, we'll ask whether air going
 round at a steady speed is accelerating,
 
-00:43:11.461 --> 00:43:14.475
+00:43:25.986 --> 00:43:29.000
 and look at a hurricane
 in three dimensions.
 
-00:43:15.275 --> 00:43:19.433
+00:43:29.800 --> 00:43:33.958
 This video is one of a series
 of related maths tutorials,
 
-00:43:19.433 --> 00:43:21.475
+00:43:33.958 --> 00:43:36.000
 so watch out for the others.
 
-00:43:21.825 --> 00:43:26.222
+00:43:36.350 --> 00:43:40.747
 They're made for students
 of atmospheric science, meteorology and
 
-00:43:26.222 --> 00:43:29.875
+00:43:40.747 --> 00:43:44.400
 fluid dynamics, and anyone
 else who needs these ideas.
 
-00:43:30.225 --> 00:43:35.053
+00:43:44.750 --> 00:43:49.578
 The notebook for coordinates, and the
 notebooks for the other maths concepts,
 
-00:43:35.053 --> 00:43:37.875
+00:43:49.578 --> 00:43:52.400
 are on the website that
 goes with this video.

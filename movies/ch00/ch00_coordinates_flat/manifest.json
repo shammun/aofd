@@ -135,62 +135,62 @@
    "scene": "s09_where_theta_grows"
   },
   {
-   "time": "14:23",
-   "t_s": 863.425,
+   "time": "14:37",
+   "t_s": 877.95,
    "title": "Polar unit vectors depend on place",
    "scene": "s12_arrows_depend"
   },
   {
-   "time": "15:03",
-   "t_s": 903.275,
+   "time": "15:17",
+   "t_s": 917.8,
    "title": "Every step: a wind's radial and tangential parts",
    "scene": "s13_components"
   },
   {
-   "time": "18:50",
-   "t_s": 1130.7,
+   "time": "19:05",
+   "t_s": 1145.225,
    "title": "Every step: turned axes and the rotation matrix",
    "scene": "s15_turn_axes"
   },
   {
-   "time": "29:56",
-   "t_s": 1796.05,
+   "time": "30:10",
+   "t_s": 1810.575,
    "title": "Hurricane Ian in polar coordinates",
    "scene": "s21_ian_polar"
   },
   {
-   "time": "33:11",
-   "t_s": 1991.725,
+   "time": "33:26",
+   "t_s": 2006.25,
    "title": "What 35 and 13 mean",
    "scene": "s23_what_numbers_mean"
   },
   {
-   "time": "35:43",
-   "t_s": 2143.575,
+   "time": "35:58",
+   "t_s": 2158.1,
    "title": "Every step: three ring points by hand",
    "scene": "s24_ring_points"
   },
   {
-   "time": "38:55",
-   "t_s": 2335.05,
+   "time": "39:09",
+   "t_s": 2349.575,
    "title": "Why hurricane scientists use polar coordinates",
    "scene": "s25_why_polar_storm"
   },
   {
-   "time": "40:32",
-   "t_s": 2432.625,
+   "time": "40:47",
+   "t_s": 2447.15,
    "title": "The inflow angle and four angles",
    "scene": "s26_inflow_angle"
   },
   {
-   "time": "41:50",
-   "t_s": 2510.7,
+   "time": "42:05",
+   "t_s": 2525.225,
    "title": "Recap",
    "scene": "s27_recap"
   },
   {
-   "time": "43:15",
-   "t_s": 2595.275,
+   "time": "43:29",
+   "t_s": 2609.8,
    "title": "End",
    "scene": "s28_end"
   }
@@ -199,29 +199,29 @@
   {
    "block_from": "s09_where_theta_grows",
    "skip_line_s": 475.175,
-   "skip_to": "14:11",
-   "skip_to_s": 851.525,
+   "skip_to": "14:26",
+   "skip_to_s": 866.05,
    "keep_line": "If you skipped, here's what to keep: r hat points away from the centre, theta hat points round it, anticlockwise, and theta hat is r hat turned by ninety degrees."
   },
   {
    "block_from": "s13_components",
-   "skip_line_s": 903.275,
-   "skip_to": "18:39",
-   "skip_to_s": 1119.025,
+   "skip_line_s": 917.8,
+   "skip_to": "18:53",
+   "skip_to_s": 1133.55,
    "keep_line": "If you skipped, here's what to keep: any wind splits into an in or out part along r hat, and a round part along theta hat, and each part is a dot product."
   },
   {
    "block_from": "s15_turn_axes",
-   "skip_line_s": 1130.7,
-   "skip_to": "29:42",
-   "skip_to_s": 1782.525,
+   "skip_line_s": 1145.225,
+   "skip_to": "29:57",
+   "skip_to_s": 1797.05,
    "keep_line": "If you skipped, here's what to keep: turning the axes by an angle alpha changes the numbers that describe an arrow, but not the arrow itself, and polar parts are just axes turned by theta."
   },
   {
    "block_from": "s24_ring_points",
-   "skip_line_s": 2143.575,
-   "skip_to": "38:43",
-   "skip_to_s": 2323.6,
+   "skip_line_s": 2158.1,
+   "skip_to": "38:58",
+   "skip_to_s": 2338.125,
    "keep_line": "If you skipped, here's what to keep: at every point round the ring, the wind's east and north parts turn into an in or out part and a round part, and then we average them."
   }
  ],
@@ -638,6 +638,55 @@
     5e-07,
     0.05,
     0.05,
+    0.005
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF09",
+   "name": "U1 fix 2: θ = 53.1301° + 0.1° = 53.2301°; cos 53.2301° = 0.598603, sin 53.2301° = 0.801046 (6 d.p.)",
+   "value": [
+    53.130102,
+    53.230102,
+    0.598603,
+    0.801046,
+    0.598603,
+    0.801046
+   ],
+   "ref": [
+    53.1301,
+    53.2301,
+    0.598603,
+    0.801046,
+    0.598603,
+    0.801046
+   ],
+   "tol": [
+    5e-05,
+    5e-05,
+    5e-07,
+    5e-07,
+    5e-07,
+    5e-07
+   ],
+   "pass": true
+  },
+  {
+   "id": "DF09",
+   "name": "U1 fix 2: spoken check 7.0² = 49, 5.2² = 27.04, √76.04 ≈ 8.7 (the same slide)",
+   "value": [
+    49.0,
+    27.04,
+    8.720092
+   ],
+   "ref": [
+    49.0,
+    27.04,
+    8.72
+   ],
+   "tol": [
+    1e-12,
+    1e-12,
     0.005
    ],
    "pass": true

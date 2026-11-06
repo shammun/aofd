@@ -22,6 +22,7 @@ man = json.loads((M / "manifest.json").read_text(encoding="utf-8"))
 rep = tm["self_check"]["spliced_fix1"]["replaced"]
 u1 = tm["self_check"].get("spliced_fix1b_U1")
 c1 = (tm["self_check"].get("spliced_fix1c") or {}).get("replaced", [])   # fix 1c: calculation audit (compound entries)
+c2 = (tm["self_check"].get("spliced_fix2") or {}).get("replaced", [])    # fix 2: review 2 Must 2a/2b (s11 S20, S23)
 byid = {s["id"]: s for s in tm["scenes"]}
 for sc in sb["scenes"]:
     v = re.sub(r"\s+", " ", sc["voiceover"])
@@ -34,6 +35,11 @@ for sc in sb["scenes"]:
         if r_["scene"] == sc["id"] and r_["new"] not in v:
             if r_["old"] not in v:
                 sys.exit(f"{sc['id']}: fix-1c old sentence not in voiceover: {r_['old']}")
+            v = v.replace(r_["old"], r_["new"])
+    for r_ in c2:
+        if r_["scene"] == sc["id"] and r_["new"] not in v:
+            if r_["old"] not in v:
+                sys.exit(f"{sc['id']}: fix-2 old sentence not in voiceover: {r_['old']}")
             v = v.replace(r_["old"], r_["new"])
     if u1 and sc["id"] == u1["scene"] and u1["new"][0]["new"] not in v:   # user note U1: the s11 block (beats between new sentences)
         pat = r"\s*(?:\[beat\]\s*)?".join(re.escape(x) for x in u1["old"])
@@ -50,10 +56,11 @@ for sc in sb["scenes"]:
         sys.exit(f"voiceover drift in {sc['id']}")
 sb["target_duration_s"] = tm["total_s"]
 sb["build_1"]["fix1_tts"] = {"tool": "movies/src/ch00_coordinates_flat/checks/cf_fix1_splice.py (six sentences re-voiced, af_bella x1.0, spliced)",
-                             "run": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/" + ("fix1c/tts" if c1 else "fix1b/tts" if u1 else "fix1/tts"), "audio_s": tm["total_s"],
+                             "run": "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/" + ("fix2/tts" if c2 else "fix1c/tts" if c1 else "fix1b/tts" if u1 else "fix1/tts"), "audio_s": tm["total_s"],
                              "cues": tm["cues"], "warnings": tm["warnings"], "sentences": sum(len(s["sentences"]) for s in tm["scenes"]),
                              "replaced": [f"{r_['scene']} S{r_['sentence']}" for r_ in rep]
                              + [f"{r_['scene']} S{r_['sentence']} ({r_['item']}, fix 1c)" for r_ in c1]
+                             + [f"{r_['scene']} S{r_['sentence']} ({r_['item']}, fix 2)" for r_ in c2]
                              + ([f"{u1['scene']} S{u1['replaced_sentences'][0]}-S{u1['replaced_sentences'][1]} -> {len(u1['new'])} sentences (user note U1, cf_fix1b_splice.py)"] if u1 else [])}
 sb["maths_skip"]["blocks"] = man["maths_skips"]
 sb["maths_skip"]["rule"] = sb["maths_skip"]["rule"].replace("('every step, if you want it' / 'skip to\n    mm:ss')", "").replace(
@@ -92,19 +99,23 @@ S["s22_spin_inflow"]["calc_rows"] = [r if "3600" not in r else r"1\ \mathrm{m/s}
 if not any("3600" in r for r in S["s22_spin_inflow"]["calc_rows"]):
     S["s22_spin_inflow"]["calc_rows"].insert(1, r"1\ \mathrm{m/s}=3600\ \mathrm{m/h}=3.6\ \mathrm{km/h}")
 if u1:
-    rows11 = [r for r in S["s11_theta_hat"]["calc_rows"] if not r.startswith("s=5000") and not r.startswith(r"\frac{(-7.0")]
+    old11 = S["s11_theta_hat"]["calc_rows"]
+    # fix 2: keep only the rows before the U1 block (earlier runs appended the U1 rows twice)
+    cut = next((i for i, r in enumerate(old11) if r.startswith(r"\Delta\theta")), len(old11))
+    rows11 = [r for r in old11[:cut] if not r.startswith("s=5000") and not r.startswith(r"\frac{(-7.0")]
     S["s11_theta_hat"]["calc_rows"] = rows11 + [
         r"\Delta\theta=0.1^\circ=0.1\times\pi/180\approx0.001745\ \mathrm{rad}", r"s=r\,\Delta\theta=5000\ \mathrm{m}\times0.001745\approx8.7\ \mathrm{m}",
-        r"(x,\ y)=(r\cos\theta,\ r\sin\theta)", r"\text{before},\ 53.13^\circ=(3000,\ 4000)\ \mathrm{m}", r"\text{after}=53.13^\circ+0.1^\circ=53.23^\circ",
-        r"x=5000\times\cos53.23^\circ=5000\times0.598603\approx2993.0\ \mathrm{m}", r"y=5000\times\sin53.23^\circ=5000\times0.801046\approx4005.2\ \mathrm{m}",
-        r"\Delta x=2993.0-3000=-7.0\ \mathrm{m}", r"\Delta y=4005.2-4000=+5.2\ \mathrm{m}", r"\sqrt{7.0^2+5.2^2}=\sqrt{76.04}\approx8.7\ \mathrm{m}=s",
+        r"(x,\ y)=(r\cos\theta,\ r\sin\theta)", r"\text{before: }\theta\approx53.13^\circ", r"(x,\ y)=(3000,\ 4000)\ \mathrm{m}",
+        r"\text{after: }\theta=53.1301^\circ+0.1^\circ=53.2301^\circ",
+        r"x=5000\times\cos53.2301^\circ=5000\times0.598603\approx2993.0\ \mathrm{m}", r"y=5000\times\sin53.2301^\circ=5000\times0.801046\approx4005.2\ \mathrm{m}",
+        r"\Delta x=2993.0-3000=-7.0\ \mathrm{m}", r"\Delta y=4005.2-4000=+5.2\ \mathrm{m}", r"\sqrt{7.0^2+5.2^2}=\sqrt{49+27.04}=\sqrt{76.04}\approx8.7\ \mathrm{m}=s",
         r"\frac{(-7.0,\ 5.2)}{8.7}\approx(-0.80,\ 0.60)=\hat{\boldsymbol\theta}"]
     S["s11_theta_hat"]["u1_visual"] = ("user note U1 (fix 1): from S16 a wide view (station, 5-km circle, balloon (3, 4) km, r = 5 km, theta 53 deg); S17 a gold zoom box "
         "leads to a framed inset 'magnified' (25 px/m): the circle's arc, r-hat, 'before' and 'after 0.1 deg'; S19 the gold 8.7-m slide; S22 its 7.0-m west "
         "and 5.2-m north legs; the column shows one line per phrase (calc_rows); no theta-hat formula used")
 S["s18_matrix"]["calc_rows"] = [r.replace(r"=4.60", r"\approx4.60") for r in S["s18_matrix"]["calc_rows"]]
-sb["colour_contract"] = ("unit vectors and axes orange (x-hat, y-hat, r-hat, theta-hat, x-hat', y-hat'); the arrow being measured (position, wind) teal "
-                         "with moving dashes when it is a wind; polar parts of a wind ALWAYS tangential teal and radial rose (fix 1, review 1 Should 1: "
+sb["colour_contract"] = ("unit vectors and axes orange (x-hat, y-hat, r-hat, theta-hat, x-hat', y-hat'); a position arrow teal; the full wind u and the "
+                         "radius r ink/white, the wind dashed and moving (fix 2, review 2 Should 3: teal means u_theta); polar parts of a wind ALWAYS tangential teal and radial rose (fix 1, review 1 Should 1: "
                          "s13, s14, s21-s27 and the thumbnails); a negative component keeps its colour and gets a hatch and a '-' glyph; theta arc slate, "
                          "bearing gold, alpha orange arc, inflow angle rose wedge; gold for pointers, links, the +90 deg arc and 'same' ticks. u and v "
                          "curves orange solid / orange dashed with end labels.")
