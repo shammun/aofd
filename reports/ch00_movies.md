@@ -8018,3 +8018,168 @@ The spoken 1.01 / 1.31 / 1.73 / 2.4 then land on the gold totals. The table need
 - Physics: east = θ̂ and north = −r̂ seen from above the NP; westerlies go anticlockwise.
 
 ### Verdict: FIX (Part 7 audit: 1 Must, 6 Should)
+
+## #5a ch00_coordinates_flat — fix 1, review 2 (2026-11-05)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat (Part 1, fix 1c) | 43:40.7 (2620.70 s; narration 2618.18 s) | 151.4 MB | 15/15 PASS | PASS | PASS | FIX (1 overlap, 1 edge, small fractions) | FIX (keep-line picture, unspoken rows, row order) | PASS (619 cues, = script) | PASS | n/a (retired) | **FIX** |
+
+**Method.**
+- One frame 0.25 s before the end of each of the 381 sentences, tiled per scene at 640 px (55 sheets).
+- 1-s frames through the whole tenth-of-a-degree block (13:03–14:12, 70 frames).
+- Dense crops at s08 (6:54–7:05) and s22 (31:20–31:43, 32:12–32:27).
+- 25 full-resolution frames wherever a tile was unclear.
+- Everything is in `reports/movies/ch00_coordinates_flat/review2/` (ignored, 48 MB), with `timed_script.txt`.
+- Numbers recomputed in Python. Chapter marks and skip blocks checked against `timing.json`; VTT checked against the source.
+- Audio proxy: the soundtrack decoded to 16 kHz. I measured speech level per sentence, and in 2-s windows inside 7 re-voiced compound sentences (s04 S3, s05 S7, s11 S16–S24, s18 S14, s22 S6, s23 S5, s24 S16).
+
+**Review-1 items, checked on frames: all fixed.**
+- M1: the s19 flipped table now has rows e′₁, e′₂ and columns e₁, e₂.
+- M2: the s22/s24 map labels are bold, haloed and placed off the arrows.
+- M3: colour bars are on s00, s03, s25 and s27.
+- M4: the s17 tip label is on two lines inside the picture.
+- M5: the conversion line reads 1 m/s = 3600 m/h = 3.6 km/h.
+- M6: qa 15/15.
+- Shoulds 1–14 are applied. One leftover: the wind arrow is still teal (Should 3 below).
+
+**C1–C43: all present in the render.**
+- Every listed row, gold link and picture element is on screen and appears on its words: C1, C2/C3 (leg labels, tan⁻¹), C4, C5/C6 (0.2 rad ≈ 11.5°, ratio), C7 (the shrink "5 → 1" animation at 6:56–6:57), C8, C9 ("clockwise: θ shrinks"), C10/C11, C12, C13–C15, C17 (θ = 0°/90°/180° rows), C18 (locator), C19–C24, C25–C29 (C₁₁…C₂₂ term by term, Σ form, ✓ checks), C30/C31 (wind with its 6/−8 shadows; turned pair muted against the polar pairs), C32 (running "sum so far" plus the ÷72 rows), C33, C34–C37 (gold lap "157 km"), C38–C40, C41/C42 (graph labels, rose band "14 out", "72 − 14 = 58 points in"), C43 (legs "34.8 round" and "13.3 in").
+- What remains is layout and timing, listed below.
+
+**User note U1, the tenth-of-a-degree check (13:03.95–14:10.0).** Every requested element is on screen, on its words:
+- the wide view with the station, the 5-km circle, the dashed east ray, "r = 5 km", "θ ≈ 53.13°" and "(3 km, 4 km)";
+- the gold zoom box and the "magnified" inset with before, after 0.1° and r̂;
+- Δθ = 0.1 × π/180 ≈ 0.001745 rad (13:17–13:26);
+- r = 5 km = 5000 m, then s = rΔθ = 5000 m × 0.001745 ≈ 8.7 m, with the gold 8.7-m slide (13:27–13:37);
+- (x, y) = (r cos θ, r sin θ); before (3000, 4000) m; after = 53.13° + 0.1° = 53.23°; x = 5000 × 0.598603 ≈ 2993.0 m and y = 5000 × 0.801046 ≈ 4005.2 m (13:38–13:56);
+- Δx = −7.0 m (west) and Δy = +5.2 m (north), with the dashed legs "7.0 m" and "5.2 m" (13:56–14:01);
+- √(7.0² + 5.2²) = √(49 + 27.04) = √76.04 ≈ 8.7 m = s;
+- −7.0/8.7 ≈ −0.80 and 5.2/8.7 ≈ 0.60, then θ̂ ≈ (−0.80, 0.60) with a gold tick (14:02–14:10).
+
+Recomputed: Δθ = 0.00174533; s = 8.7266 m; after (2993.014, 4005.230); slide (−6.986, +5.230), length 8.7266; √76.04 = 8.720; −7.0/8.7 = −0.805; 5.2/8.7 = 0.598. All screen values round correctly.
+
+As a first-time learner, I can follow it. One move per row, each on its spoken phrase, and the picture matches the voice. Four things still trip a learner (Must 2, Should 9, Should 10):
+1. The √ length check is shown but never said.
+2. The row "before, 53.13° = (3000, 4000) m" sets an angle equal to a position, and it hangs left of the column into the inset (x ≈ 1005).
+3. The voice says "s equals r times theta" while the screen says s = rΔθ.
+4. The final tick sits in empty space at (1780, 790), far from θ̂ ≈ (−0.80, 0.60), and never links back to the θ̂ formula above.
+
+**Numbers re-checked (all PASS).**
+- 360/6.283 = 57.30; 0.2 × 57.3 = 11.46.
+- 1923.08 s ÷ 60 = 32.05 min; 2π × 25 = 157.08 km; 157 000/35 = 4486 s (screen "≈ 4490") = 74.8 min.
+- √1394 = 37.34; 35/13 = 2.69.
+- 135 × 1.852 = 250.0 km/h; ÷ 3.6 = 69.4 m/s.
+- 2505.9/72 = 34.80; −957.2/72 = −13.29.
+- 10.1 × 0.707 = 7.14 and 44.5 × 0.707 = 31.46, giving −24.32 and 38.60.
+- tan⁻¹(13.3/34.8) = 20.92°.
+- 3 × 0.866 + 2 = 4.598; −1.5 + 3.464 = 1.964; 4.6² + 1.96² = 25.0016.
+
+**Physics.**
+- NH anticlockwise "seen from above, NH", and the gold arc runs the right way.
+- u_r is negative and inward (rose); u_θ is positive and round (teal).
+- At 0°/90°/135° the u_θ arrows point N/W/SW, which is anticlockwise.
+- In s20 the polar pairs at 0° and 150° are r̂ outward and θ̂ +90°. The turned pair is the same at all three points.
+- The s23 spiral leans in while it goes round.
+
+**Data frames and references.**
+- Every Ian frame has the HRRR source line and a colour bar.
+- No equation numbers, book names or badges on screen. The skip chips are house components.
+
+**Skip chips and chapters.**
+
+| Block | Chip | VTT keep line |
+|---|---|---|
+| s09 | "every step · optional / skip to 14:11" | 14:11.52 |
+| s13 | "skip to 18:39" | 18:39.03 |
+| s15 | "skip to 29:42" | 29:42.53 |
+| s24 | "skip to 38:43" | 38:43.60 |
+
+- Every block has a spoken lead-in naming weather, climate and maps, and a keep line.
+- All 18 manifest chapter marks equal the `timing.json` scene starts (Δ = 0, title −0.3 s).
+- `out/en.vtt` is byte-identical to the source.
+
+**Audio proxy.** I found no level step at any splice:
+- inside the re-voiced compound sentences, speech windows stay within −15…−20 dB, so no sub-clip stands out;
+- per-sentence outliers are all short sentences ("Yes.", "Let's check."), where the window is mostly pause: a measurement artefact;
+- the gate reads −16.3 LUFS and a peak of −4.1 dBTP.
+
+I did not listen to it. The fix-1c log says the limiter took up to 8.3 dB off single peaks, so give s11 S16–S24 and s23 S5 one listen.
+
+### Must fix (5)
+1. **14:11.5–14:22.6, s11 S25 keep line: the picture is the U1 check, not the keep line.**
+   - The skip chip sends skippers to 14:11. They land on the magnified inset ("5.2 m", "7.0 m before"), "5.2/8.7 ≈ 0.60" and "without the θ̂ formula". They skipped all of that.
+   - Meanwhile the voice says "r hat points away from the centre, theta hat points round it…".
+   - **Fix** (`cf_sB.tsx` S11, last sentence): clear the U1 inset and rows at S25 start. Show the balloon on its circle with r̂ (out) and θ̂ (round, anticlockwise), the +90° arc, and the two formulas r̂ = (cos θ, sin θ), θ̂ = (−sin θ, cos θ). The s14 and s24 keep lines already do this.
+2. **13:27–14:10, s11 U1: one unspoken row and two layout faults.**
+   - (a) The rows √(7.0² + 5.2²) = √(49 + 27.04) and = √76.04 ≈ 8.7 m = s (14:02–14:05) are never spoken; the voice is already on "Dividing each by eight point seven". Re-voice: after S23 add "Check: seven squared is forty nine, and five point two squared is twenty seven point zero four. The square root of seventy six point zero four is about eight point seven: the same slide." Reveal each row on its words.
+   - (b) S20 says "s equals r times theta". Re-voice to "s equals r times the change in theta", to match s = rΔθ.
+   - (c) The row "before, 53.13° = (3000, 4000) m" (13:46–13:52) equates an angle with a position, and it starts at x ≈ 1005, against the inset frame. Write it as two "="-aligned rows: "before: θ ≈ 53.13°" and "(x, y) = (3000, 4000) m". Keep them inside the column (x ≥ 1080).
+   - (d) The gold tick (14:08) sits alone at (1780, 790). Put it right of "θ̂ ≈ (−0.80, 0.60)" and add a gold link up to θ̂ = (−sin θ, cos θ).
+3. **1:50–2:00, s03 S3–S4: a calculation row overlaps the map panel.** "(3, 0) + (0, 4) = (3, 4)" starts at x ≈ 922, over the panel's right border (x 990). The "=" alignment pushes the long left side left. **Fix** (`cf_sA.tsx` S03): left-align this stack at x ≥ 1080, or write the row as "= (3, 0) + (0, 4) = (3, 4)" under the two rows above.
+4. **31:28–31:43 and 32:12–32:27, s22 S6/S10: running sums run off the frame, and the ū_r rows flash.**
+   - The gold "sum so far: 2074.8 m/s (61 of 72)" and "…−906.1 m/s (67 of 72)" end at x ≈ 1915, past the 1842 limit and at the frame edge.
+   - The ū_r = −957.2 m/s / 72 ≈ −13.3 ≈ −13 m/s rows are visible only 32:19–32:22. They are squeezed under "seen from above, NH" (the numerator touches it). They leave 3 s before "about minus thirteen" ends, so only "−13 m/s: in" remains with no origin. The ū_θ rows, by contrast, stay.
+   - **Fix** (`cf_sC.tsx` S22): put the sum on two lines ("sum so far: 2074.8 m/s" / "61 of 72 points") inside x ≤ 1842. Give the ū_r rows their own slot, 24 px clear of the keyword, and keep them to the end of the scene like ū_θ.
+5. **32:44–33:11, s22 S13–S15: the knots chain reads bottom-up and is split by an unrelated label.** "250 km/h ÷ 3.6 ≈ 69 m/s" (and later "strongest on our ring ≈ 49 m/s") sits above "−13 m/s: in / towards the eye". Its input, "official estimate: 135 kt / 135 kt × 1.85 ≈ 250 km/h", sits below it. A learner meets the result before its input. **Fix:** stack top-down in spoken order: 135 kt → × 1.85 ≈ 250 km/h → ÷ 3.6 ≈ 69 m/s → ring max ≈ 49 m/s. Move or shrink the −13 label group out of that column.
+
+### Should fix (13)
+1. **Text-style fractions are below 44 px.** These \frac/\tfrac read at about 28–32 px (about 10 px at 640 width):
+   - 4:01–4:22: 3/5, 4/5
+   - 5:47–5:57: 360°/2π, 360°/6.283
+   - 6:21–6:30: 10 km/1 km = 50 km/5 km
+   - 7:00–7:26: (3/5, 4/5)
+   - 21:01–21:24: "exactly ¾"
+   - 34:17–35:42: 1923/60 and 4490/60
+   - 37:37–38:35: 1/√2
+
+   **Fix:** use \dfrac, or write "÷ 60" / "= 0.6" inline.
+2. **13:04–14:22 and 15:23–17:09: the θ̂ glyph is broken in sans keywords.** "without the θ̂ formula" and "r̂, θ̂: length 1" render the combining hat offset ("θ`"). **Fix:** set the symbol in KaTeX (\hat{\boldsymbol\theta}) inside the keyword.
+3. **The colour contract leaks: wind and radius are teal.** The east wind **u** is drawn as a teal dashed arrow (15:23–17:09, 17:10–18:50, 28:25–28:50; the 0°/90°/135° winds 36:16–38:35). The radius "r = 5 km" is teal in s04 and the U1 wide view. Teal means u_θ. **Fix:** draw the full wind and the radius in ink/white (dashed). Keep teal for u_θ only.
+4. **Paged stacks lose their left-hand side.**
+   - 26:50–27:16 (s19 S15–S18): "= x₁ cos α + x₂ sin α" and the next rows show with no "x′₁ =" or "x′₂ =" above them.
+   - 38:13–38:35 (s24 S22–S23): the first row "u_θ = −(−10.1)(0.707)" holds only half the sum, so the stack reads u_θ = 10.1 × 0.707.
+
+   **Fix:** pin the left-hand-side row while paging. Write the full first row: u_θ = −(−10.1)(0.707) + (−44.5)(−0.707).
+5. **24:02–24:22, s18 S9: the number matrix is cramped.** It sits 15 px under the symbolic matrix with no "α = 30°:" label. **Fix:** add 30 px of space and the label "α = 30°:" before the number matrix.
+6. **39:46–40:31, s25 graph: labels sit on curves.**
+   - "mean 35" sits on the θ = 0 dot and the teal curve.
+   - "47" sits on the dashed v line, and "−40" on the u curve.
+   - "14 out" and "mean −13" run together.
+   - The colour bar crowds the graph's "m/s" title.
+
+   **Fix:** move the labels into clear space with leader ticks, and fade the u/v curves to 30 % from S8.
+7. **41:07–41:50, s26 S6–S11:** an orphan "tan(inflow angle)" row stays alone at the top while the four-angles panel runs. Fade it with its rows.
+8. **Safe area.** "(−4, 3)" starts at x 28 (11:04–11:32, s10). The 150° arrow pair reaches x ≈ 38 (29:31–29:55, s20). Keep both ≥ 96 px from the edge.
+9. **13:52–13:56, U1: last-digit mismatch.** cos 53.23° = 0.598604 and sin 53.23° = 0.801045 on a calculator. The screen's 0.598603 and 0.801046 are for 53.2301°. **Fix:** show "53.2301°" in the after row, or use the 53.23° values. 2993.0 and 4005.2 are unchanged either way.
+10. **13:20–14:22, U1 inset.**
+    - "7.0 m" abuts "before" and reads "7.0 m before".
+    - "≈ 8.7 m" touches the slide's arrowhead.
+    - **Fix:** move "7.0 m" under the leg's middle and "≈ 8.7 m" 20 px off the arrow.
+    - Optional: drop the inset's filled frame to an outline (house style "no boxes"; review-1 Should 8 removed the s09 inset box).
+11. **21:01–21:24, s16:** the x′ ruler line runs through "cos α (north)". Move the label left of its leg, or above the ruler.
+12. **35:22–35:42, s23 S15:** a white upward arrow on a plan view reads as a northward wind. Use a ⊙ "rising (out of the screen)" mark instead.
+13. **Dim recap.** 41:50–42:54, s27: the beat text and pictures run at about 60 % contrast and look washed out at 640 px. Brighten the current beat to full ink.
+
+### Verified (keep)
+- The U1 picture-to-number chain.
+- Every C-item row is on its words.
+- The s12 balloon waits at each stop.
+- Skip chips: "every step · optional" with the exact times.
+- Data frames: source line plus colour bar.
+- NH sense correct everywhere.
+- Captions are 619 cues equal to the script.
+- QA 15/15.
+
+### Limits
+- Audio not heard; loudness judged by a level proxy only.
+- Motion sampled at sentence ends, plus 1-s sampling in U1 and dense crops at s08 and s22. Swaps between samples elsewhere were not checked frame by frame.
+- No colour-blind simulation (teal/rose plus dash pattern were already accepted in review 1).
+
+**Disk.** C: 116 GB free, G: 481 GB free (unchanged). Review frames: 48 MB in the ignored `review2/`.
+
+### Overall: FIX (#5a fix 1, review 2: 5 Must, 13 Should)
+- The physics and every number are right, and U1 and C1–C43 are delivered.
+- Must 1, 3, 4 and 5 are TSX-only.
+- Must 2 needs two re-voiced sentences (s11 S20, plus one new sentence after S23); the splice method is in `cf_fix1c_splice.py`.
+- Re-render s03, s11 (from 13:03), s22, and anything after the new sentence shifts by about 9 s (skip chips 18:39 → about 18:48 and the later ones; chapter marks from s12).
