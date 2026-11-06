@@ -166,3 +166,15 @@ eq_check 18/18 · SSR `--step 10` 9213 scene-frames, 0 errors, NaN 0 · SSR `--3
 2. Final full pass `stills k6r4 --jobs 3` (4215 frames, ≈ 50 min, bundle unchanged) → 0 hits → render with `K6TAG=k6r4`.
 Seen, not fixed (no K6 rule): s18 the stack's left corner and its km ticks leave the frame as the camera orbits to az −76 (ticks at
 x −123…−6 by the end); s28 the four date ticks are 12 px apart (pass, but crowded).
+
+## K6 round 1+ addendum: s18/s19 framing and the gauge date ticks (source only, no stills)
+- **s18 / s19 stack camera**: dist 12.5 → 16 and principal point (540, 400) → (600, 400) in every non-close-look key (the s19 close look,
+  dist 6.8, is unchanged). New check `movies/src/ch00_coordinates_storm/checks/stack_frame.ts` (esbuild-bundled, node) projects the stack's
+  8 corners, the height-arrow tip, the tick ends and the s18 km labels with the house `orbitCam` / `projector` every frame. Before:
+  s18 stack x −64…1080, km labels x −150…110; s19 x −88…1124, y −17…844. After: s18 stack x 151…1001, y 146…656, km labels x 71…280;
+  s19 stack x 124…1044, y 68…727 (close look tLook…tLook+130 excluded: the camera is among the layers on purpose). All inside the
+  GlobeFrame box x 40-1068 / y 40-788; labels start ≥ 60. cam_speed: s19 peak 67°/s (was 70), 0 above 90°/s.
+- **Gauges date ticks (s27, s28, s31)**: "27 Sep 12 / 28 Sep 00 / 28 Sep 12 / 29 Sep 00" (188-196 px, 12 px apart in s28) →
+  "12 UTC / 28 Sep / 12 UTC / 29 Sep" (≈ 140-145 px; ≥ 55 px apart in s28, ≥ 80 in s27, ≥ 95 in s31).
+- Gates: tsc 0 · at_check 372 / 0 · swap_check 381, 0 overlaps, 0 swaps < 8 · cam_speed 0 > 90°/s · eq_check 18/18 · SSR 9213 / 0 errors /
+  NaN 0 · SSR --3d 9213 / 0 errors. s18, s19, s27, s28, s31 join the k6r3 frame list (rebuild it before shooting).

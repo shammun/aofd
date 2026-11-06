@@ -10,7 +10,7 @@ import { C, T } from "../house/kit/type";
 import { Pt, pulse } from "../house/kit/draw";
 import { TeX } from "../house/kit/tex";
 import { CalcStack } from "./cs_lib";  // K6 r0: fraction rows get their real height
-import { Keyword } from "../house/kit/notes";
+import { Keyword } from "./cs_lib";   // Part 1 lessons C1: maths in $…$
 import { CurvedLink } from "../house/kit/extras";
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { View3D as HView3D, Arrow3D as HArrow3D, Rod3D as HRod3D, Ball3D as HBall3D } from "../house/kit/three3d";
@@ -83,8 +83,8 @@ const S09: React.FC = () => {
           <Lbl x={polar(RC, RR + 60, a0 + aW / 2)[0]} y={polar(RC, RR + 60, a0 + aW / 2)[1]} t="v Δt" c={C.first} s={T.key} />
           <Wedge c={RC} r={110} a0={a0} a1={a0 + aW} o={fin(f, tAng)} />
           <Lbl x={polar(RC, 160, a0 + aW / 2)[0]} y={polar(RC, 160, a0 + aW / 2)[1]} t="Δθ" c={C.gold} s={T.key} a="middle" o={fin(f, tAng)} />
-          <line x1={RC[0]} y1={RC[1]} x2={P0[0]} y2={P0[1]} stroke={C.local} strokeWidth={5} opacity={fin(f, tArc)} />
-          <Lbl x={mix(RC[0], P0[0], 0.55)} y={mix(RC[1], P0[1], 0.55) + 46} t="r" c={C.local} s={T.key} o={fin(f, tArc)} />
+          <line x1={RC[0]} y1={RC[1]} x2={P0[0]} y2={P0[1]} stroke={C.ink} strokeWidth={5} opacity={fin(f, tArc)} />
+          <Lbl x={mix(RC[0], P0[0], 0.55)} y={mix(RC[1], P0[1], 0.55) + 46} t="r" c={C.ink} s={T.key} o={fin(f, tArc)} />
         </g>
         <ClockG x={140} y={120} t={f < tLap ? "t" : `t = ${Math.round(lapFrac * 75)} min`} frac={f < tLap ? (f / 300) % 1 : lapFrac} />
         <Keyword f={f} text="how fast does θ grow?" at={[MX, 120]} s={T.key} appear={0} out={tNum - 20} />
@@ -97,8 +97,8 @@ const S09: React.FC = () => {
       <CalcStack f={f} x={MX + 330} y={250} size={56} maxLines={3} o={fout(f, tNum - 6)} rows={[
         { lhs: String.raw`\Delta s`, rhs: String.raw`=v\,\Delta t`, at: tDt },
         { lhs: String.raw`\text{arc rule: }\Delta s`, rhs: String.raw`=r\,\Delta\theta`, at: tArc },
-        { lhs: String.raw`\Delta\theta`, rhs: String.raw`=\frac{\Delta s}{r}=\frac{v\,\Delta t}{r}`, at: tAng },
-        { lhs: String.raw`\frac{\Delta\theta}{\Delta t}`, rhs: String.raw`=\frac{v\,\Delta t}{r\,\Delta t}=\frac{v}{r}`, at: tDiv },
+        { lhs: String.raw`\Delta\theta`, rhs: String.raw`=\dfrac{\Delta s}{r}=\dfrac{v\,\Delta t}{r}`, at: tAng },
+        { lhs: String.raw`\dfrac{\Delta\theta}{\Delta t}`, rhs: String.raw`=\dfrac{v\,\Delta t}{r\,\Delta t}=\dfrac{v}{r}`, at: tDiv },
       ]} />
       <Svg><Lbl x={MX} y={645} t="Δt cancels" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tRate - 20)} /></Svg>{/* K6 round 1: under the taller fraction rows */}
       <TeX s={EQ_S09} x={MX} y={705} size={88} o={fin(f, tRate) * fout(f, tNum - 6)} glow={pulse(f, tRate, 20)} />
@@ -107,12 +107,12 @@ const S09: React.FC = () => {
         // K6 round 1: ran to x 2024: r and v on two lines
         { rhs: String.raw`r=25\ \mathrm{km}=25\,000\ \mathrm m`, at: tN1, size: 46 },
         { rhs: String.raw`v=34.8\ \mathrm{m/s}\ (\approx35)`, at: tN1 + 15, size: 46, cont: true },
-        { rhs: String.raw`\frac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 12, "divided by") },
-        { rhs: String.raw`1\ \mathrm{rad}=\frac{180^\circ}{\pi}\approx57.3^\circ`, at: tDeg },
+        { rhs: String.raw`\dfrac{34.8\ \mathrm{m/s}}{25\,000\ \mathrm{m}}\approx0.00139\ \mathrm{rad/s}`, at: AT(k, 12, "divided by") },
+        { rhs: String.raw`1\ \mathrm{rad}=\dfrac{180^\circ}{\pi}\approx57.3^\circ`, at: tDeg },
         { rhs: String.raw`0.00139\times57.3\approx0.08^\circ/\mathrm{s}`, at: AT(k, 14, "zero point zero eight") },
         { rhs: String.raw`0.08\times60\approx4.8\approx5^\circ/\mathrm{min}`, at: AT(k, 14, "five degrees") },
-        { rhs: String.raw`\frac{2\pi}{0.00139}=\frac{6.283}{0.00139}`, at: AT(k, 15, "divided by") },
-        { rhs: String.raw`\approx4500\ \mathrm s,\qquad \frac{4500}{60}=75\ \mathrm{min}`, at: tLap2 },
+        { rhs: String.raw`\dfrac{2\pi}{0.00139}=\dfrac{6.283}{0.00139}`, at: AT(k, 15, "divided by") },
+        { rhs: String.raw`\approx4500\ \mathrm s,\qquad \dfrac{4500}{60}=75\ \mathrm{min}`, at: tLap2 },
       ]} />
       <Svg><Lbl x={MX} y={720} t="metres cancel: rad/s left" c={C.local} s={T.floor} o={win(f, tCancel, tLap - 20)} /></Svg>
       <Svg><Lbl x={MX} y={800} t={`${nf(RING.v, 1)} m/s ÷ 25 000 m`} c={C.muted} s={T.floor} o={0 * tGrow} /></Svg>
@@ -130,11 +130,11 @@ const S10: React.FC = () => {
     <Scene>
       <Svg>
         <RingBase />
-        <Arrow p={RC} q={p} color={C.first} w={10} head={40} o={fin(f, tPos)} />
+        <Arrow p={RC} q={p} color={C.ink} w={10} head={40} o={fin(f, tPos)} />
         <Arrow p={RC} q={polar(RC, 120, a)} color={C.second} w={8} head={30} o={fin(f, tLen)} />
-        <Lbl x={polar(RC, 160, a + 12)[0]} y={polar(RC, 160, a + 12)[1]} t="r̂" c={C.second} s={T.key} o={fin(f, tLen)} />
+        <Lbl x={polar(RC, 160, a + 12)[0]} y={polar(RC, 160, a + 12)[1]} t="$\hat{\mathbf r}$" c={C.second} s={T.key} o={fin(f, tLen)} />
         {/* K6 round 1: ran across the ring (x 650-851): now inside it, under the arrow */}
-        <Lbl x={RC[0] + 85} y={RC[1] - 20} t="r = 25 km" c={C.first} s={T.floor} o={fin(f, tIan)} />
+        <Lbl x={RC[0] + 85} y={RC[1] - 20} t="r = 25 km" c={C.ink} s={T.floor} o={fin(f, tIan)} />
         <Parcel p={p} />
         <Keyword f={f} text="velocity next" at={[MX, 120]} s={T.key} appear={0} out={tWhy - 20} />
         <Lbl x={1075} y={120} t="acceleration ← velocity ← position" c={C.key} s={T.floor} o={win(f, tWhy, tRate - 20)} />
@@ -142,12 +142,12 @@ const S10: React.FC = () => {
       </Svg>
       <CalcStack f={f} x={MX + 120} y={280} size={60} maxLines={3} o={fout(f, tRate - 6)} rows={[
         { lhs: String.raw`\text{position}`, rhs: String.raw`=r\,\hat{\mathbf r}`, at: tRr },
-        { lhs: String.raw`\hat{\mathbf r}`, rhs: String.raw`=\frac{\text{arrow}}{r}\ \Rightarrow\ \text{arrow}=r\,\hat{\mathbf r}`, at: tFlip, size: 52 },
+        { lhs: String.raw`\hat{\mathbf r}`, rhs: String.raw`=\dfrac{\text{arrow}}{r}\ \Rightarrow\ \text{arrow}=r\,\hat{\mathbf r}`, at: tFlip, size: 52 },
         { lhs: String.raw`\text{arrow}`, rhs: String.raw`=25\ \mathrm{km}\times\hat{\mathbf r}`, at: tIan },
       ]} />
       <Svg><Keyword f={f} text="number × arrow → product rule" at={[MX, 120]} s={T.floor} appear={tRate} /></Svg>
-      <TeX s={String.raw`\frac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\frac{dv}{dt}\,\hat{\mathbf d}+v\,\frac{d\hat{\mathbf d}}{dt}`} x={MX} y={300} size={52} c={C.local} o={win(f, tProd, LEN(k) + 20)} />
-      <Svg><Lbl x={MX} y={400} t="v → r,  d̂ → r̂" c={C.gold} s={T.floor} o={fin(f, tProd + 20)} /></Svg>
+      <TeX s={String.raw`\dfrac{d}{dt}\big(v\,\hat{\mathbf d}\big)=\dfrac{dv}{dt}\,\hat{\mathbf d}+v\,\dfrac{d\hat{\mathbf d}}{dt}`} x={MX} y={300} size={52} c={C.local} o={win(f, tProd, LEN(k) + 20)} />
+      <Svg><Lbl x={MX} y={400} t="$v\to r,\quad \hat{\mathbf d}\to\hat{\mathbf r}$" c={C.gold} s={T.floor} o={fin(f, tProd + 20)} /></Svg>
       <TeX s={EQ_S10} x={MX} y={530} size={56} o={fin(f, tRes)} />
     </Scene>
   );
@@ -164,7 +164,7 @@ const S11: React.FC = () => {
     <Scene>
       <Svg>
         <RingBase />
-        <Arrow p={RC} q={p} color={C.first} w={8} head={30} o={0.6} />
+        <Arrow p={RC} q={p} color={C.ink} w={8} head={30} o={0.6} />
         <DashArrow f={f} p={p} q={[p[0] + u[0] * 170, p[1] + u[1] * 170]} o={fin(f, tYes)} />
         <RTick p={p} u1={[-er[0], -er[1]]} u2={u} o={fin(f, tSize)} />
         <Parcel p={p} />
@@ -173,16 +173,16 @@ const S11: React.FC = () => {
         <ArcHead c={RC} r={RR + 34} a={a - 10} dir={1} col={C.gold} o={fin(f, tIan)} />
         <Keyword f={f} text="one term at a time" at={[MX, 120]} s={T.key} appear={0} out={tChain - 20} />
         <Keyword f={f} text="the chain rule" at={[MX, 120]} s={T.key} appear={tChain} out={tYes - 20} />
-        <Keyword f={f} text={`${nf(RING.v, 1)} m/s along θ̂`} at={[MX, 120]} s={T.key} appear={tIan} />
+        <Keyword f={f} text={`${nf(RING.v, 1)} m/s along $\\hat{\\boldsymbol\\theta}$`} at={[MX, 120]} s={T.key} appear={tIan} />
         <Lbl x={MX} y={210} t="anticlockwise (seen from above)" c={C.key} s={T.floor} o={fin(f, tIan + 20)} />
-        <Lbl x={MX} y={190} t="r fixed: dr/dt = 0" c={C.local} s={T.floor} o={win(f, tZero, tChain - 20)} />
+        <Lbl x={MX} y={190} t="r fixed: $dr/dt=0$" c={C.local} s={T.floor} o={win(f, tZero, tChain - 20)} />
         {/* fix 0 B2: no scene ids on screen; say where each piece came from */}
-        <Lbl x={MX} y={450} t="θ̂: from the turning rule" c={C.gold} s={T.floor} o={win(f, tBoth, tMul - 20)} />
+        <Lbl x={MX} y={450} t="$\hat{\boldsymbol\theta}$: from the turning rule" c={C.gold} s={T.floor} o={win(f, tBoth, tMul - 20)} />
         <Lbl x={MX} y={510} t="v/r: how fast θ grows" c={C.gold} s={T.floor} o={win(f, tBoth, tMul - 20)} />
       </Svg>
       {/* fix 0 B20: the s10 line with its first term struck (r fixed) */}
-      <TeX s={String.raw`\mathbf v=\cancel{\frac{dr}{dt}\,\hat{\mathbf r}}+r\,\frac{d\hat{\mathbf r}}{dt}`} x={MX} y={330} size={56} o={win(f, tZero, tChain - 20)} />
-      <TeX s={String.raw`\frac{d\hat{\mathbf r}}{dt}=\frac{d\hat{\mathbf r}}{d\theta}\,\frac{d\theta}{dt}=\hat{\boldsymbol\theta}\,\frac{v}{r}`} x={MX} y={330} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
+      <TeX s={String.raw`\mathbf v=\cancel{\dfrac{dr}{dt}\,\hat{\mathbf r}}+r\,\dfrac{d\hat{\mathbf r}}{dt}`} x={MX} y={330} size={56} o={win(f, tZero, tChain - 20)} />
+      <TeX s={String.raw`\dfrac{d\hat{\mathbf r}}{dt}=\dfrac{d\hat{\mathbf r}}{d\theta}\,\dfrac{d\theta}{dt}=\hat{\boldsymbol\theta}\,\dfrac{v}{r}`} x={MX} y={330} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
       {/* fix 0 B20: e1 on "Now multiply by r", "= v θ̂" only when S9 says it (EQ_S11 = e1 + "=v θ̂") */}
       <CalcStack f={f} x={MX + 60} y={280} size={46} maxLines={3} o={fout(f, tYes - 14)} rows={[
         // K6 round 2: the regex was /^\mathbf v/ (\m = "m", no backslash), so nothing was cut and the row read "v v = r …"
@@ -217,34 +217,34 @@ const S12: React.FC = () => {
           <Arrow p={mC} q={polar(mC, mR, 140)} color={C.second} w={5} head={18} />
           <Arrow p={mC} q={polar(mC, mR, 230)} color={C.neg} w={5} head={18} />
           <path d={arcD(mC, mR + 20, 145, 220)} fill="none" stroke={C.gold} strokeWidth={4} />
-          <Lbl x={polar(mC, mR + 30, 125)[0]} y={polar(mC, mR + 30, 125)[1]} t="θ̂" c={C.second} s={T.floor} a="middle" />
-          <Lbl x={polar(mC, mR + 34, 250)[0]} y={polar(mC, mR + 34, 250)[1]} t="−r̂" c={C.neg} s={T.floor} a="middle" />
+          <Lbl x={polar(mC, mR + 30, 125)[0]} y={polar(mC, mR + 30, 125)[1]} t="$\hat{\boldsymbol\theta}$" c={C.second} s={T.floor} a="middle" />
+          <Lbl x={polar(mC, mR + 34, 250)[0]} y={polar(mC, mR + 34, 250)[1]} t="$-\hat{\mathbf r}$" c={C.neg} s={T.floor} a="middle" />
         </g>
         <Keyword f={f} text="the opening question" at={[MX, 120]} s={T.key} appear={0} out={tPR - 20} />
-        <Keyword f={f} text="steady speed: dv/dt = 0" at={[MX, 120]} s={T.key} appear={tSteady} out={tRes - 20} />
+        <Keyword f={f} text="steady speed: $dv/dt=0$" at={[MX, 120]} s={T.key} appear={tSteady} out={tRes - 20} />
         <Keyword f={f} text="centripetal: towards the centre" at={[MX, 120]} s={T.floor} appear={tCentri} out={tUnits - 20} />
         <Keyword f={f} text="units check" at={[MX, 120]} s={T.key} appear={tUnits} />
         <Lbl x={MX} y={210} t="a = rate of change of velocity" c={C.key} s={T.floor} o={win(f, tAcc, tPR - 20)} />
         {/* fix 0 B2: no scene ids on screen */}
-        <Lbl x={MX} y={470} t="−r̂: θ̂ swings towards −r̂" c={C.gold} s={T.floor} o={win(f, tRem, tMul - 20)} />
+        <Lbl x={MX} y={470} t="$-\hat{\mathbf r}$: $\hat{\boldsymbol\theta}$ swings towards $-\hat{\mathbf r}$" c={C.gold} s={T.floor} o={win(f, tRem, tMul - 20)} />
         <Lbl x={MX} y={530} t="v/r: how fast θ grows" c={C.gold} s={T.floor} o={win(f, tVr, tMul - 20)} />
       </Svg>
       {/* fix 0 B21: the product rule, then the same line with the dv/dt term struck (steady speed) */}
       <CalcStack f={f} x={MX + 230} y={220} size={52} maxLines={3} o={fout(f, tChain - 14)} rows={[
-        { lhs: String.raw`\frac{d}{dt}(v\hat{\boldsymbol\theta})`, rhs: String.raw`=\frac{dv}{dt}\hat{\boldsymbol\theta}+v\frac{d\hat{\boldsymbol\theta}}{dt}`, at: tPR, h: 140 },   // K6 round 2: hat over a fraction: 125 px of ink at 52 px
-        { rhs: String.raw`=\cancel{\frac{dv}{dt}\hat{\boldsymbol\theta}}+v\frac{d\hat{\boldsymbol\theta}}{dt}`, at: tSteady, cont: true, h: 140 },
+        { lhs: String.raw`\dfrac{d}{dt}(v\hat{\boldsymbol\theta})`, rhs: String.raw`=\dfrac{dv}{dt}\hat{\boldsymbol\theta}+v\dfrac{d\hat{\boldsymbol\theta}}{dt}`, at: tPR, h: 140 },   // K6 round 2: hat over a fraction: 125 px of ink at 52 px
+        { rhs: String.raw`=\cancel{\dfrac{dv}{dt}\hat{\boldsymbol\theta}}+v\dfrac{d\hat{\boldsymbol\theta}}{dt}`, at: tSteady, cont: true, h: 140 },
       ]} />
-      <TeX s={String.raw`\frac{dv}{dt}=0`} x={MX} y={596} size={T.calc} c={C.local} o={win(f, tSteady, tChain - 20)} />
-      <TeX s={String.raw`\frac{d\hat{\boldsymbol\theta}}{dt}=\frac{d\hat{\boldsymbol\theta}}{d\theta}\frac{d\theta}{dt}=-\hat{\mathbf r}\,\frac{v}{r}`} x={MX} y={300} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
+      <TeX s={String.raw`\dfrac{dv}{dt}=0`} x={MX} y={596} size={T.calc} c={C.local} o={win(f, tSteady, tChain - 20)} />
+      <TeX s={String.raw`\dfrac{d\hat{\boldsymbol\theta}}{dt}=\dfrac{d\hat{\boldsymbol\theta}}{d\theta}\dfrac{d\theta}{dt}=-\hat{\mathbf r}\,\dfrac{v}{r}`} x={MX} y={300} size={60} o={win(f, tCR, tMul - 20) * (f < tSo ? 0.85 : 1)} />
       {/* fix 0 B21: the skipped move written out: a = v·(−r̂ v/r) on "multiply by v", then = −(v·v/r) r̂ = −(v²/r) r̂ on S11 */}
       <CalcStack f={f} x={MX + 80} y={230} size={52} maxLines={3} o={fout(f, tMinus - 10)} rows={[
-        { lhs: String.raw`\mathbf a`, rhs: String.raw`=v\,\frac{d\hat{\boldsymbol\theta}}{dt}=v\cdot\Big(-\hat{\mathbf r}\,\frac{v}{r}\Big)`, at: tMul, h: 140 },
-        { rhs: String.raw`=-\frac{v\cdot v}{r}\,\hat{\mathbf r}=-\frac{v^2}{r}\,\hat{\mathbf r}`, at: tRes, cont: true, h: 140 },
+        { lhs: String.raw`\mathbf a`, rhs: String.raw`=v\,\dfrac{d\hat{\boldsymbol\theta}}{dt}=v\cdot\Big(-\hat{\mathbf r}\,\dfrac{v}{r}\Big)`, at: tMul, h: 140 },
+        { rhs: String.raw`=-\dfrac{v\cdot v}{r}\,\hat{\mathbf r}=-\dfrac{v^2}{r}\,\hat{\mathbf r}`, at: tRes, cont: true, h: 140 },
       ]} />
       {/* the whole derivation in one line, as a summary under the result (EQ_S12) */}
       <TeX s={EQ_S12} x={MX} y={700} size={44} o={fin(f, tCentri)} />
-      <TeX s={String.raw`\mathbf a=-\frac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={300} size={96} o={fin(f, tMinus)} glow={pulse(f, tRes + 20, 20)} />
-      <TeX s={String.raw`\frac{\mathrm{m^2/s^2}}{\mathrm m}=\mathrm{m/s^2}`} x={MX} y={520} size={T.calc} o={fin(f, tU2)} />
+      <TeX s={String.raw`\mathbf a=-\dfrac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={300} size={96} o={fin(f, tMinus)} glow={pulse(f, tRes + 20, 20)} />
+      <TeX s={String.raw`\dfrac{\mathrm{m^2/s^2}}{\mathrm m}=\mathrm{m/s^2}`} x={MX} y={520} size={T.calc} o={fin(f, tU2)} />
     </Scene>
   );
 };
@@ -262,7 +262,7 @@ const S13: React.FC = () => {
         <DashArrow f={f} p={p} q={[p[0] + u[0] * 150, p[1] + u[1] * 150]} />
         <Arrow p={p} q={[p[0] - er[0] * 120, p[1] - er[1] * 120]} color={C.neg} w={10 + 4 * pulse(f, tTurn, 24)} head={40} />
         <Parcel p={p} />
-        <Keyword f={f} text="keep: v²/r, towards the centre" at={[MX, 120]} s={T.floor} appear={0} out={tHow - 20} />
+        <Keyword f={f} text="keep: $v^2/r$, towards the centre" at={[MX, 120]} s={T.floor} appear={0} out={tHow - 20} />
         <Keyword f={f} text="how big?" at={[MX, 120]} s={T.key} appear={tHow} out={tBig - 20} />
         <Keyword f={f} text="≈ 200 × smaller than gravity" at={[MX, 120]} s={T.floor} appear={tG} out={tCar - 20} />
         <Keyword f={f} text="all of it turns the parcel" at={[MX, 120]} s={T.key} appear={tTurn} />
@@ -271,8 +271,8 @@ const S13: React.FC = () => {
           <line x1={MX} y1={745} x2={MX + 700} y2={745} stroke={C.muted} strokeWidth={3} />
           <rect x={MX} y={665} width={700} height={50} fill={C.local} opacity={0.85} />
           <rect x={MX} y={765} width={Math.max(4, (700 * RING.acc) / 9.81)} height={50} fill={C.neg} opacity={0.95} />
-          <Lbl x={MX + 10} y={635} t="gravity 9.81 m/s²" c={C.local} s={T.floor} />
-          <Lbl x={MX + 30} y={842} t="0.048 m/s²" c={C.neg} s={T.floor} />
+          <Lbl x={MX + 10} y={635} t="gravity 9.81 $\mathrm{m/s^2}$" c={C.local} s={T.floor} />
+          <Lbl x={MX + 30} y={842} t="0.048 $\mathrm{m/s^2}$" c={C.neg} s={T.floor} />
         </g>
         <g opacity={fin(f, tCar)}>
           <rect x={MX + 20} y={750} width={150} height={50} rx={14} fill={C.second} />
@@ -284,17 +284,17 @@ const S13: React.FC = () => {
       {/* K6 round 1: gone before the summary line comes in at the same place (they cross-faded on top of each other) */}
       <CalcStack f={f} x={MX + 230} y={220} size={50} maxLines={3} o={fout(f, tAll - 12)} rows={[
         { lhs: String.raw`34.8^2`, rhs: String.raw`\approx1211`, at: tSq },
-        { lhs: String.raw`\frac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv, h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
-        { lhs: String.raw`\frac{35^2}{25\,000}`, rhs: String.raw`\approx0.049`, at: tEasy, c: C.local, h: 130 },
-        { lhs: String.raw`\frac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG, h: 130 },
+        { lhs: String.raw`\dfrac{1211}{25\,000}`, rhs: String.raw`\approx0.048\ \mathrm{m/s^2}`, at: tDiv, h: 130 },   // K6 round 2: 116-118 px of ink at 50 px (superscripts)
+        { lhs: String.raw`\dfrac{35^2}{25\,000}`, rhs: String.raw`\approx0.049`, at: tEasy, c: C.local, h: 130 },
+        { lhs: String.raw`\dfrac{9.81}{0.048}`, rhs: String.raw`\approx200`, at: tG, h: 130 },
       ]} />
       <TeX s={EQ_S13} x={MX} y={250} size={60} o={win(f, tAll, LEN(k) + 20)} />
       {/* fix 0 B22: the car's conversions, one row at a time */}
       {/* K6 round 1: "=" column 1390 → 1300 (the first row ran to x 1879) */}
       <CalcStack f={f} x={MX + 200} y={350} size={46} maxLines={3} rows={[
-        { lhs: String.raw`100\ \mathrm{km/h}`, rhs: String.raw`=\frac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}`, at: tCar },
-        { lhs: String.raw`\frac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}`, rhs: String.raw`\approx580\ \mathrm s`, at: tCar + 45 },
-        { lhs: String.raw`\frac{580\ \mathrm s}{60}`, rhs: String.raw`\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}`, at: tCar + 90 },
+        { lhs: String.raw`100\ \mathrm{km/h}`, rhs: String.raw`=\dfrac{100\,000\ \mathrm m}{3600\ \mathrm s}\approx27.8\ \mathrm{m/s}`, at: tCar },
+        { lhs: String.raw`\dfrac{27.8\ \mathrm{m/s}}{0.048\ \mathrm{m/s^2}}`, rhs: String.raw`\approx580\ \mathrm s`, at: tCar + 45 },
+        { lhs: String.raw`\dfrac{580\ \mathrm s}{60}`, rhs: String.raw`\approx9.7\ \mathrm{min}\approx10\ \mathrm{min}`, at: tCar + 90 },
       ]} />
     </Scene>
   );
@@ -359,7 +359,7 @@ const S14: React.FC = () => {
         { rhs: String.raw`\approx0.084\ \mathrm{rad}`, at: AT(k, 4, "zero point zero eight four"), size: 50, cont: true },
         { rhs: String.raw`0.084\times57.3\approx4.8^\circ\approx5^\circ`, at: AT(k, 4, "five degrees"), size: 50, cont: true },
         { rhs: String.raw`34.8\times0.084\approx2.9\ \mathrm{m/s}`, at: tArc },
-        { rhs: String.raw`\frac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}`, at: tDiv, glow: pulse(f, tDiv + 30, 20) },
+        { rhs: String.raw`\dfrac{2.9\ \mathrm{m/s}}{60\ \mathrm s}\approx0.048\ \mathrm{m/s^2}`, at: tDiv, glow: pulse(f, tDiv + 30, 20) },
       ]} />
       <TeX s={EQ_S14} x={MX} y={745} size={44} o={win(f, tArc + 30, tOnly - 20)} />
       {/* fix 0 B1: the balance in numbers on S16 (f v = 6.51e-5 × 34.8 ≈ 0.0023 m/s², ratio 21 from data/cs.json) */}
@@ -368,11 +368,11 @@ const S14: React.FC = () => {
       <CalcStack f={f} x={MX} y={470} size={46} maxLines={4} o={fout(f, tM1 - 10)} rows={[
         { rhs: String.raw`\text{turning: }${nf(RING.acc, 3)}\ \mathrm{m/s^2}\ \text{(in)}`, at: AT(k, 16, "pushes the other way") },
         { rhs: String.raw`\text{Earth's spin: }\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: AT(k, 16, "a little outward") },
-        { rhs: String.raw`\frac{${nf(RING.acc, 3)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") },
+        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") },
         { rhs: String.raw`\text{pressure push}\approx0.048+0.002`, at: AT(k, 16, "a little stronger") },
         { rhs: String.raw`=0.050\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") + 20, cont: true },
       ]} />
-      <Svg><Lbl x={MX} y={832} t="same as v²/r" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tOnly - 20)} /></Svg>
+      <Svg><Lbl x={MX} y={832} t="same as $v^2/r$" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tOnly - 20)} /></Svg>
     </Scene>
   );
 };
@@ -607,8 +607,10 @@ const S18: React.FC = () => {
   const f = useCurrentFrame(), k = K("s18_ian_stack");
   const tLev = SS(k, 1), tHt = SS(k, 2), tFive = SS(k, 3), tSq = SS(k, 4), tLow = SS(k, 5), tNo = SS(k, 6), tRest = SS(k, 7), tCol = SS(k, 8), tRose = SS(k, 9), tBlue = SS(k, 10),
     tPale = SS(k, 11), tTall = SS(k, 12);
-  const keys: OrbitKey[] = [{ f: 0, az: -100, el: 20, dist: 12.5, target: [0, 0, 0.75] }, { f: LEN(k) + 10, az: -76, el: 22, dist: 12.5, target: [0, 0, 0.75], linear: true }];
-  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [540, 400]);
+  // K6 round 1+: camera 12.5 → 16 and principal point x 540 → 600 (s18 and s19): at 12.5 the stack's corner left the frame (x −64) and
+  // its km ticks with it (x −150) as the orbit reached az −76; checks/stack_frame.ts projects every frame: corner x ≥ 151, labels x ≥ 71
+  const keys: OrbitKey[] = [{ f: 0, az: -100, el: 20, dist: 16, target: [0, 0, 0.75] }, { f: LEN(k) + 10, az: -76, el: 22, dist: 16, target: [0, 0, 0.75], linear: true }];
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [600, 400]);
   const pr = hProjector(st, 1920, 1080, 0, 0);
   const H = STK.half_km / 100;
   const tagAt = (i: number) => pr.p([H, -H, zs[i]]);
@@ -647,16 +649,16 @@ const S19: React.FC = () => {
   const tLow = SS(k, 1), tAvg = SS(k, 2), t15 = SS(k, 3), t6 = SS(k, 4), tTop = SS(k, 5), tSo = SS(k, 6), tOrbit = SS(k, 7), tLook = SS(k, 8);
   const top = zs[4];
   const keys: OrbitKey[] = [
-    { f: 0, az: -76, el: 22, dist: 12.5, target: [0, 0, 0.75] },
-    { f: tOrbit, az: -76, el: 22, dist: 12.5, target: [0, 0, 0.75] },
-    { f: Math.min(tOrbit + 150, tLook - 12), az: 4, el: 34, dist: 12.5, target: [0, 0, 0.75] },
-    { f: tLook, az: 4, el: 30, dist: 12.5, target: [0, 0, 0.75] },
+    { f: 0, az: -76, el: 22, dist: 16, target: [0, 0, 0.75] },
+    { f: tOrbit, az: -76, el: 22, dist: 16, target: [0, 0, 0.75] },
+    { f: Math.min(tOrbit + 150, tLook - 12), az: 4, el: 34, dist: 16, target: [0, 0, 0.75] },
+    { f: tLook, az: 4, el: 30, dist: 16, target: [0, 0, 0.75] },
     { f: tLook + 45, az: -6, el: 6, dist: 6.8, target: [0, -1.6, top * 0.45] },
     { f: tLook + 45 + 40, az: -2, el: 6, dist: 6.8, target: [0, -1.6, top * 0.5], linear: true },
-    { f: tLook + 45 + 40 + 45, az: -20, el: 24, dist: 12.5, target: [0, 0, 0.75] },
-    { f: LEN(k) + 10, az: -26, el: 24, dist: 12.5, target: [0, 0, 0.75], linear: true },
+    { f: tLook + 45 + 40 + 45, az: -20, el: 24, dist: 16, target: [0, 0, 0.75] },
+    { f: LEN(k) + 10, az: -26, el: 24, dist: 16, target: [0, 0, 0.75], linear: true },
   ];
-  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [540, 400]);
+  const st = hOrbitCam({ ...hOrbitPath(keys, f), fov: 32 }, [600, 400]);
   const pr = hProjector(st, 1920, 1080, 0, 0);
   const sel = f < tLow ? null : f < t15 ? [0] : f < t6 ? [1] : f < tTop ? [2, 3] : f < tSo ? [4] : null;
   const lit = (i: number) => (f < SS(k, 0) + 20 ? 0.92 : sel === null ? 0.85 : sel.includes(i) ? 1 : 0.4);
@@ -807,7 +809,7 @@ const S20: React.FC = () => {
         {/* K6 round 1: the three callouts 14 px lower (the top one sat 12 px under the colour bar's "+ out") */}
         <SideCallout f={f} lines={`≈ ${nf(SEC.min[0], 0)} m/s, 30 km, 0.7 km up`} at={[MX, 554]} appear={tMin} out={tMust - 20} target={[mn[0] + 14, mn[1] - 10]} s={T.floor} c={C.neg} />
         <SideCallout f={f} lines={`≈ +${Math.round(SEC.max[0])} m/s, 125 km, 15 km up`} at={[MX, 434]} appear={tTop} out={tMust - 20} target={[mxp[0] + 14, mxp[1]]} s={T.floor} c="#8db5e2" />
-        <SideCallout f={f} lines={`u_θ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 494]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
+        <SideCallout f={f} lines={`$u_\\theta$ ≈ ${Math.round(SEC.vtmax[0])} m/s, 30 km, 1.4 km up`} at={[MX, 494]} appear={tVt} out={tMust - 20} target={[vtp[0] + 14, vtp[1] + 6]} s={T.floor} c={C.key} />
         <Lbl x={MX} y={630} t={`at the sea: ${nf(SEC.vt10_25, 1)} m/s (25 km, 10 m)`} c={C.first} s={T.floor} o={win(f, tWeak, tMust - 20)} />
         <Keyword f={f} text="a quick check" at={[MX, 120]} s={T.key} c={C.gold} appear={tMust} out={tLid - 20} />
         <Keyword f={f} text={`inflow ⇒ rise ≈ ${SAY.w_cont} m/s`} at={[MX, 120]} s={T.key} c={C.gold} appear={tLid} out={tRadar - 20} />
@@ -827,8 +829,8 @@ const S20: React.FC = () => {
       <CalcStack f={f} x={MX} y={405} size={46} maxLines={3} o={fout(f, tRadar - 10)} rows={[
         { rhs: String.raw`\text{in through the side: }2\pi r\,h\,|u_r|`, at: tSide + 30 },
         { rhs: String.raw`\text{up through the lid: }\pi r^2\,w`, at: tLid },
-        { rhs: String.raw`w=\frac{2h\,|u_r|}{r}`, at: AT(k, 14, "so it rises more slowly") },
-        { rhs: String.raw`\phantom{w}=\frac{2\times1000\times${SAY.w_box.ur}}{30\,000}\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "two times one thousand"), cont: true },
+        { rhs: String.raw`w=\dfrac{2h\,|u_r|}{r}`, at: AT(k, 14, "so it rises more slowly") },
+        { rhs: String.raw`\phantom{w}=\dfrac{2\times1000\times${SAY.w_box.ur}}{30\,000}\approx${SAY.w_cont}\ \mathrm{m/s}`, at: AT(k, 14, "two times one thousand"), cont: true },
       ]} />
       {/* K6 round 1: one credit after the other (they cross-faded on top of each other for 30 frames) */}
       <SourceBelow text={SRC.hrrrSec} pic={{ x: SB.x - 70, y: SB.y, w: SB.w + 70, h: SB.h + 110 }} w={1400} o={oSec * fout(f, tRadar + 16, 10)} name="s20 src" />

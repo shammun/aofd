@@ -8,7 +8,7 @@ import { C, T } from "../house/kit/type";
 import { Pt, pulse, textW } from "../house/kit/draw";
 import { TeX } from "../house/kit/tex";
 import { CalcStack } from "./cs_lib";  // fix 0: fraction rows get their real height
-import { Keyword } from "../house/kit/notes";
+import { Keyword } from "./cs_lib";   // Part 1 lessons C1: maths in $…$
 import { GlobeFrame, SourceBelow } from "../house/kit/frame";
 import { AnimatedWindArrow } from "../house/kit/wind";
 import { Notebook } from "../house/kit/icons";
@@ -133,6 +133,9 @@ const S22: React.FC = () => {
         </g>
         <Keyword f={f} text="18 May · two days before landfall" at={[MX, 120]} s={T.floor} appear={0} out={tEye - 20} />
         <SideCallout f={f} lines="pinhole eye" at={[MX, 300]} appear={tEye} target={[e[0] + 16, e[1]]} c={C.gold} />
+        {/* Part 1 lessons B1: the zoom says what it magnifies (the frame's true width from the crop box, ÷ the zoom) */}
+        <Lbl x={MX} y={420} t={`zoomed ${z.toFixed(1)}×: frame ≈ ${Math.round(((cr[3] - cr[2]) * 111.32 * Math.cos(((cr[0] + cr[1]) / 2) * D2R)) / z / 10) * 10} km wide`}
+          c={C.muted} s={T.floor} o={fin(f, tEye)} />
         <Keyword f={f} text="same shape → same coordinates" at={[MX, 120]} s={T.floor} appear={tSame} />
       </Svg>
       <SourceBelow text={SRC.modis} pic={PB} w={1400} name="s22 src" />
@@ -214,11 +217,26 @@ const S23: React.FC = () => {
         <Keyword f={f} text="a similar spiral angle" at={[MX, 120]} s={T.key} c={C.gold} appear={tTwo} />
       </Svg>
       {/* fix 0 B24: what the inflow angle is, then the angle step for each storm */}
-      <TeX s={String.raw`\tan(\text{inflow angle})=\frac{|u_r|}{u_\theta}`} x={MX} y={215} size={46} o={fin(f, tTan)} />
+      <TeX s={String.raw`\tan(\text{inflow angle})=\dfrac{|u_r|}{u_\theta}`} x={MX} y={215} size={46} o={fin(f, tTan)} />
       <TeX s={EQ23a} x={MX} y={440} size={44} o={fin(f, tTan + 20)} />
       <TeX s={String.raw`\Rightarrow\ ` + EQ23b} x={MX + 40} y={518} size={44} o={fin(f, tTan + 30)} />
-      <TeX s={String.raw`\frac{13.3}{34.8}\approx0.38`} x={MX} y={720} size={44} o={fin(f, tTan + 40)} />
+      <TeX s={String.raw`\dfrac{13.3}{34.8}\approx0.38`} x={MX} y={720} size={44} o={fin(f, tTan + 40)} />
       <TeX s={String.raw`\Rightarrow\ \arctan0.38\approx20.9^\circ\approx21^\circ`} x={MX + 40} y={798} size={44} o={fin(f, tTan + 50)} />
+      {/* Part 1 lessons A7 / B2: each storm's inputs drawn as the right triangle the tangent is read from (legs: round u_θ teal, in |u_r|
+          rose; the actual wind ink; the angle gold), at one scale (4.6 px per m/s), sides labelled */}
+      <Svg>
+        {[{ vt: AMP.vt10[0], vr: Math.abs(AMP.vr10[0]), x0: 1560, y0: 405, o: fin(f, tTan + 20), lt: nf(AMP.vt10[0], 1), lr: nf(Math.abs(AMP.vr10[0]), 1) },
+          { vt: 34.8, vr: 13.3, x0: 1540, y0: 690, o: fin(f, tTan + 40), lt: "34.8", lr: "13.3" }].map((q, i) => {
+          const sc = 4.6, x1 = q.x0 + q.vt * sc, y1 = q.y0 - q.vr * sc, ang = Math.atan2(q.vr, q.vt) / D2R;
+          return <g key={i} opacity={q.o}>
+            <line x1={q.x0} y1={q.y0} x2={x1} y2={q.y0} stroke={C.first} strokeWidth={5} />
+            <line x1={x1} y1={q.y0} x2={x1} y2={y1} stroke={C.neg} strokeWidth={5} />
+            <line x1={q.x0} y1={q.y0} x2={x1} y2={y1} stroke={C.ink} strokeWidth={4} />
+            <path d={arcD([q.x0, q.y0], 46, 0, ang)} fill="none" stroke={C.gold} strokeWidth={4} />
+            <Lbl x={(q.x0 + x1) / 2} y={q.y0 + 28} t={q.lt} c={C.first} s={T.floor} a="middle" />
+            <Lbl x={x1 + 12} y={(q.y0 + y1) / 2} t={q.lr} c={C.neg} s={T.floor} />
+          </g>; })}
+      </Svg>
       {/* fix 0 B14: like with like: the official 90 kt in m/s, and the two lowest pressures; K6 round 1: the first row (to x 1897) split */}
       <CalcStack f={f} x={MX} y={440} size={44} maxLines={3} o={fout(f, tShape - 10)} rows={[
         { rhs: String.raw`\text{official (3-min): }90\ \mathrm{kt}`, at: tOff, c: C.local },
@@ -344,7 +362,7 @@ const S26: React.FC = () => {
       <GeoMap id="s26m" B={Bx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
       <Svg>
         <Place p={fm} t="Fort Myers Beach" dx={-20} dy={44} a="end" o={fin(f, tWind)} />
-        <AnimatedWindArrow from={[fm[0] - u[0] * s, fm[1] + u[1] * s]} to={fm} speed={CST.spF} f={f} c={C.first} px={10} head={36} o={fin(f, tWind)} />
+        <AnimatedWindArrow from={[fm[0] - u[0] * s, fm[1] + u[1] * s]} to={fm} speed={CST.spF} f={f} c={C.ink} px={10} head={36} o={fin(f, tWind)} />
         <line x1={n1[0]} y1={n1[1]} x2={n2[0]} y2={n2[1]} stroke={C.second} strokeWidth={5} opacity={fin(f, tCoast)} />
         <g opacity={win(f, tAlong, tWind - 20)}>
           <Arrow p={fm} q={[fm[0] + (n2[0] - n1[0]) * 0.35, fm[1] + (n2[1] - n1[1]) * 0.35]} color={C.second} w={8} head={28} />
@@ -380,7 +398,9 @@ const Gauges: React.FC<{ A: Ax; f: number; tF: number; tS: number; land?: boolea
   const pk = P(G1.ext_h, G1.ext), tr = P(G2.ext_h, G2.ext);
   return (
     <g>
-      <Axes A={A} xt={[0, 12, 24, 36]} yt={[-2, 0, 2]} xf={(v) => ["27 Sep 12", "28 Sep 00", "28 Sep 12", "29 Sep 00"][v / 12]} yf={(v) => nf(v, 0, true)} zero
+      {/* K6 round 1+: the date ticks were 12 px apart in s28 ("27 Sep 12" … 188-196 px wide): the days at midnight ("28 Sep"), noon as
+          "12 UTC" (≥ 60 px apart at the narrowest chart, s28; the landfall tag says "≈ 19 UTC" on the same clock) */}
+      <Axes A={A} xt={[0, 12, 24, 36]} yt={[-2, 0, 2]} xf={(v) => ["12 UTC", "28 Sep", "12 UTC", "29 Sep"][v / 12]} yf={(v) => nf(v, 0, true)} zero
         yl="vs predicted tide (m)" />{/* K6 r0: the long axis title ran past 1842 */}
       <line x1={P(CST.land_h, 0)[0]} y1={A.y} x2={P(CST.land_h, 0)[0]} y2={A.y + A.h} stroke={C.local} strokeWidth={3} strokeDasharray="10 8" opacity={land ? 1 : 0} />
       <Lbl x={P(CST.land_h, 0)[0] - 10} y={A.y + 26} t="landfall ≈ 19 UTC" c={C.local} s={T.floor} a="end" o={land ? 1 : 0} />
@@ -416,8 +436,8 @@ const S27: React.FC = () => {
         <Place p={fm} t="Fort Myers Beach" dx={-20} dy={44} a="end" />
         {/* K6 round 1: anchored at its end the name ran out of the map's left edge; centred above the marker it stays inside */}
         <Place p={sp} t="Saint Petersburg" dx={0} dy={-40} a="middle" o={fin(f, tNorth)} />
-        <AnimatedWindArrow from={[fm[0] - uF[0] * s, fm[1] + uF[1] * s]} to={fm} speed={CST.spF} f={f} c={C.first} px={10} head={36} />
-        <AnimatedWindArrow from={sp} to={[sp[0] + uS[0] * s, sp[1] - uS[1] * s]} speed={Math.hypot(uS[0], uS[1])} f={f} c={C.first} px={10} head={36} o={fin(f, tOut)} />
+        <AnimatedWindArrow from={[fm[0] - uF[0] * s, fm[1] + uF[1] * s]} to={fm} speed={CST.spF} f={f} c={C.ink} px={10} head={36} />
+        <AnimatedWindArrow from={sp} to={[sp[0] + uS[0] * s, sp[1] - uS[1] * s]} speed={Math.hypot(uS[0], uS[1])} f={f} c={C.ink} px={10} head={36} o={fin(f, tOut)} />
         <g opacity={win(f, tWind, tFM - 20)}>
           <Axes A={SA} xt={[0, 50, 100, 150]} yt={[-80, -40, 0]} xl="km from Fort Myers Beach (WSW)" yl="sea floor (m)" xf={(v) => `${v}`} />
           <Curve A={SA} xs={sh.km} ys={sh.z} c="#8a6f4e" w={6} />
@@ -662,18 +682,18 @@ const S31: React.FC = () => {
         </g>
         <Keyword f={f} text="to sum up" at={[MX, 120]} s={T.key} appear={0} out={t(1) - 20} />
         <Keyword f={f} text="slopes: −sin, cos" at={[MX, 120]} s={T.key} appear={t(1)} out={t(2) - 20} />
-        <Keyword f={f} text="r̂ → θ̂,  θ̂ → −r̂" at={[MX, 120]} s={T.floor} appear={t(2)} out={t(3) - 20} />
+        <Keyword f={f} text="$\hat{\mathbf r}$ → $\hat{\boldsymbol\theta}$,  $\hat{\boldsymbol\theta}$ → $-\hat{\mathbf r}$" at={[MX, 120]} s={T.floor} appear={t(2)} out={t(3) - 20} />
         <Keyword f={f} text="product rule: both change" at={[MX, 120]} s={T.key} appear={t(3)} out={t(4) - 20} />
-        <Keyword f={f} text="v/r · v θ̂ · −(v²/r) r̂" at={[MX, 120]} s={T.key} appear={t(4)} out={t(5) - 20} />
-        <Keyword f={f} text="0.048 m/s² ≈ g/200" at={[MX, 120]} s={T.key} appear={t(5)} out={t(6) - 20} />
+        <Keyword f={f} text="$v/r\ \cdot\ v\,\hat{\boldsymbol\theta}\ \cdot\ -(v^2/r)\,\hat{\mathbf r}$" at={[MX, 120]} s={T.key} appear={t(4)} out={t(5) - 20} />
+        <Keyword f={f} text="0.048 $\mathrm{m/s^2}$ ≈ g/200" at={[MX, 120]} s={T.key} appear={t(5)} out={t(6) - 20} />
         <Keyword f={f} text="(r, θ, z): in, up and out" at={[MX, 120]} s={T.key} appear={t(6)} out={t(7) - 20} />
         <Keyword f={f} text="onshore wind → storm surge" at={[MX, 120]} s={T.key} appear={t(7)} out={t(8) - 20} />
         <Keyword f={f} text="gauges · floods from space" at={[MX, 120]} s={T.key} appear={t(8)} out={t(9) - 20} />
         <Keyword f={f} text="Part 3: the Earth" at={[MX, 120]} s={T.key} appear={t(9)} />
       </Svg>
       <TeX s={String.raw`\Delta\theta\ \text{along}\ \hat{\boldsymbol\theta}`} x={MX} y={300} size={T.calc} o={beat(0)} />
-      <TeX s={String.raw`\frac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \frac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}`} x={MX} y={320} size={48} o={beat(2)} />
-      <TeX s={String.raw`\mathbf a=-\frac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={330} size={T.eq} o={beat(4) + beat(5)} />
+      <TeX s={String.raw`\dfrac{d\hat{\mathbf r}}{d\theta}=\hat{\boldsymbol\theta},\qquad \dfrac{d\hat{\boldsymbol\theta}}{d\theta}=-\hat{\mathbf r}`} x={MX} y={320} size={48} o={beat(2)} />
+      <TeX s={String.raw`\mathbf a=-\dfrac{v^2}{r}\,\hat{\mathbf r}`} x={MX} y={330} size={T.eq} o={beat(4) + beat(5)} />
       {/* K6 round 1: the picture box now includes the colour bar's "− in / + out" (the credit sat on them) */}
       <SourceBelow text="Data: NOAA HRRR · ERA5 (Copernicus C3S)" pic={{ x: 120, y: 200, w: 840, h: 510 }} w={840} o={beat(6)} name="s31 src 1" />
       <SourceBelow text="Data: NOAA CO-OPS gauges · 27-29 Sep 2022" pic={{ x: 120, y: 250, w: 840, h: 480 }} w={840} o={beat(7) + beat(8)} name="s31 src 2" />
@@ -690,9 +710,13 @@ const S32: React.FC = () => {
       <rect x={x - 150} y={70} width={300} height={170} rx={16} fill="#18213a" stroke={C.grid} strokeWidth={3} />
       {i === 0 ? <><circle cx={x - 30} cy={160} r={60} fill="none" stroke={C.local} strokeWidth={3} /><Arrow p={[x - 30, 160]} q={[x + 20, 115]} color={C.second} w={5} head={18} />
         <Arrow p={[x - 30, 160]} q={[x - 75, 115]} color={C.second} w={5} head={18} /></> : null}
-      {i === 1 ? <><ellipse cx={x} cy={110} rx={70} ry={18} fill="none" stroke={C.key} strokeWidth={3} /><ellipse cx={x} cy={205} rx={70} ry={18} fill="none" stroke={C.key} strokeWidth={3} />
-        <line x1={x - 70} y1={110} x2={x - 70} y2={205} stroke={C.key} strokeWidth={3} /><line x1={x + 70} y1={110} x2={x + 70} y2={205} stroke={C.key} strokeWidth={3} /></> : null}
-      {i === 2 ? <image href={IMG("cst_sec_ian.png")} x={x - 120} y={90} width={240} height={130} preserveAspectRatio="none" /> : null}
+      {/* Part 1 lessons B5 / D2: every icon ≥ 20 px inside its card (the cylinder's lower rim reached 17 px); the section thumbnail is a
+          drawn in-up-out schematic (a data picture would need its own source line and colour bar) */}
+      {i === 1 ? <><ellipse cx={x} cy={110} rx={70} ry={18} fill="none" stroke={C.key} strokeWidth={3} /><ellipse cx={x} cy={198} rx={70} ry={18} fill="none" stroke={C.key} strokeWidth={3} />
+        <line x1={x - 70} y1={110} x2={x - 70} y2={198} stroke={C.key} strokeWidth={3} /><line x1={x + 70} y1={110} x2={x + 70} y2={198} stroke={C.key} strokeWidth={3} /></> : null}
+      {i === 2 ? <><rect x={x - 110} y={95} width={220} height={120} fill="none" stroke={C.grid} strokeWidth={3} />
+        <Arrow p={[x + 95, 198]} q={[x - 55, 198]} color={C.gold} w={5} head={18} /><Arrow p={[x - 72, 192]} q={[x - 72, 118]} color={C.gold} w={5} head={18} />
+        <Arrow p={[x - 55, 112]} q={[x + 95, 112]} color={C.gold} w={5} head={18} /></> : null}
       {i === 3 ? <><path d={`M${x - 120} 210 L${x - 40} 140 L${x + 30} 120 L${x + 120} 90`} fill="none" stroke={C.key} strokeWidth={4} />
         <Arrow p={[x - 20, 180]} q={[x + 40, 150]} color={C.second} w={5} head={18} /><Arrow p={[x - 20, 180]} q={[x - 50, 130]} color={C.second} w={5} head={18} /></> : null}
     </g>

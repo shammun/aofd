@@ -164,7 +164,9 @@ for (const id of IDS) {
       if (E.kind === "TeX") { const tex = String(run(E.t, scope) ?? ""), w = texW(tex, sz), h = sz * (/dfrac|frac/.test(tex) ? 2.2 : 1.2), ax = run(E.ax, scope) ?? 0, ay = run(E.ay, scope) ?? 0.5;
         E.txt = tex.slice(0, 40); E.ok++; vis.push({ E, box: [x - ax * w, y - ay * h, x - ax * w + w, y - ay * h + h] }); continue; }
       let txt = run(E.t, scope), nl = 1; if (E.kind === "Callout" || E.kind === "SideCallout") { const L = run(E.lines, scope); if (Array.isArray(L)) { txt = L.reduce((p, q) => (q.length > p.length ? q : p), ""); nl = L.length; } else txt = L; }
-      txt = String(txt ?? "");
+      // Part 1 lessons C1 (2026-11-05): maths in $…$ is KaTeX; measure its plain look-alike (= cs_lib plainOf)
+      const MC = { theta: "θ", Delta: "Δ", to: "→", cdot: "·", approx: "≈", times: "×", pi: "π", alpha: "α", Rightarrow: "⇒" };
+      txt = String(txt ?? "").replace(/\$([^$]*)\$/g, (_m, g) => g.replace(/\\([A-Za-z]+)/g, (_c, n) => MC[n] ?? "").replace(/[{}^_]/g, "").replace(/\s+/g, " "));
       const w = textW(txt, sz), x0 = an === "start" ? x : an === "end" ? x - w : x - w / 2;
       E.txt = txt; E.ok++;
       vis.push({ E, box: [x0, y - 0.45 * sz, x0 + w, y + 0.45 * sz + (nl - 1) * 1.25 * sz] });

@@ -10,11 +10,13 @@ import { ramp } from "../house";
 import timing from "../../ch00/ch00_coordinates_storm/timing.json";
 import csJ from "../../ch00/ch00_coordinates_storm/data/cs.json";
 import { C, T } from "../house/kit/type";
-import { Arrow, Lbl, Pt, Svg, clamp, textW } from "../house/kit/draw";
+import { Arrow, Lbl as HLbl, Pt, Svg, clamp, textW as hTextW } from "../house/kit/draw";
+import { Keyword as HKeyword } from "../house/kit/notes";
+import { FONT } from "../house/kit/type";
 import { CurvedLink } from "../house/kit/extras";
 import { Drape, GProj, GlobeCam, GlobeMesh, Graticule, coastPath, globeCam, globeProj, useTex } from "./kit_cs/globe";
 import { View3D } from "./kit_cs/three3d";
-import { CalcStack as HouseCalcStack } from "../house/kit/tex";
+import { CalcStack as HouseCalcStack, KX, texHtml } from "../house/kit/tex";
 
 export const FPS = 30;
 type Snt = { text: string; start: number; end: number };
@@ -183,6 +185,53 @@ export const Txt: React.FC<{ x: number; y: number; t: string; c?: string; s?: nu
   return <Lbl x={x} y={y} t={t} c={c} s={s} o={o} a={a} b={b} />;
 };
 
+// ---------------------------------------------------------------- maths inside labels (Part 1 lessons C1, 2026-11-05)
+/** A label's text with its maths in $…$ (KaTeX). A combining hat in the plain sans font sits beside the letter (the user saw θ̂ broken
+ * in Part 1), so every symbol with a hat, bar, prime, subscript or superscript is typeset: "along $\hat{\boldsymbol\theta}$". */
+const MATH_CMD: Record<string, string> = { theta: "θ", Delta: "Δ", to: "→", cdot: "·", approx: "≈", times: "×", pi: "π", alpha: "α", Rightarrow: "⇒" };
+/** the plain-text look-alike of a label (for widths and the static checks): $\hat{\mathbf r}$ → r */
+export const plainOf = (t: string) => t.replace(/\$([^$]*)\$/g, (_m, g: string) => g.replace(/\\([A-Za-z]+)/g, (_c, n: string) => MATH_CMD[n] ?? "")
+  .replace(/[{}^_]/g, "").replace(/\s+/g, " "));
+export const textW = (t: string, s: number) => hTextW(plainOf(t), s);
+/** the house Lbl; with $…$ in its text the maths parts are KaTeX (an HTML label in a foreignObject, same font, size, weight, colour,
+ * anchor and dark halo as the SVG label) */
+export const Lbl: React.FC<{ x: number; y: number; t: string; c?: string; s?: number; a?: "start" | "middle" | "end"; o?: number; b?: boolean; rot?: number;
+  italic?: boolean }> = (p) => {
+  if (!p.t.includes("$")) return <HLbl {...p} />;
+  const { x, y, t, c = C.ink, s = 54, a = "start", o = 1, b = true } = p;
+  if (s < 44) throw new Error(`label "${t}" below 44 px`);
+  if (o <= 0) return null;
+  const tx = a === "start" ? 0 : a === "middle" ? -50 : -100, hw = Math.max(2, 0.07 * s);
+  const halo = [[1, 0], [-1, 0], [0, 1], [0, -1], [0.7, 0.7], [-0.7, 0.7], [0.7, -0.7], [-0.7, -0.7]].map(([u, v]) => `${u * hw}px ${v * hw}px 0 ${C.bg}`).join(",");
+  return (
+    <foreignObject x={0} y={0} width={1920} height={1080} opacity={o} style={{ overflow: "visible", pointerEvents: "none" }}>
+      <div style={{ position: "relative", width: 1920, height: 1080 }}>
+        <div style={{ position: "absolute", left: x, top: y, transform: `translate(${tx}%, -50%)`, whiteSpace: "nowrap", fontFamily: FONT, fontSize: s,
+          fontWeight: b ? 650 : 500, color: c, lineHeight: 1.15, textShadow: halo }}>
+          {t.split("$").map((q, i) => (i % 2 ? <span key={i} style={{ fontSize: s / KX }} dangerouslySetInnerHTML={{ __html: texHtml(String.raw`\textstyle ` + q) }} />
+            : <span key={i}>{q}</span>))}
+        </div>
+      </div>
+    </foreignObject>
+  );
+};
+/** the house Keyword; with $…$ in its text, the same rise / fade / gold target links, drawn with the maths label above */
+export const Keyword: React.FC<React.ComponentProps<typeof HKeyword>> = (p) => {
+  if (!p.text.includes("$")) return <HKeyword {...p} />;
+  const { f, text, at, a = "start", s = 54, c = C.key, appear, out, o = 1, targets = [] } = p;
+  const oT = ramp(f, appear, appear + 8) * (out !== undefined ? 1 - ramp(f, out, out + 10) : 1) * o;
+  if (oT <= 0) return null;
+  const rise = 12 * (1 - ramp(f, appear, appear + 8));
+  // the target links as gold CurvedLinks from the word box's near side
+  const w = textW(text, s), x0 = a === "start" ? at[0] : a === "middle" ? at[0] - w / 2 : at[0] - w;
+  return (
+    <g opacity={oT}>
+      {targets.map((tg, k) => <CurvedLink key={k} f={f} from={[tg[0] < x0 ? x0 - 12 : x0 + w + 12, at[1]]} to={tg} start={appear + 8 + 4 * k} bend={40} />)}
+      <Lbl x={at[0]} y={at[1] + rise} t={text} c={c} s={s} a={a} />
+    </g>
+  );
+};
+
 // ---------------------------------------------------------------- maths-skip guidance (user rule 2026-11-05)
 /** mm:ss of the "If you skipped, here's what to keep" sentence (the FIRST sentence of the target scene) */
 export const keepTime = (id: string) => {
@@ -338,7 +387,7 @@ export const Globe: React.FC<{ cam: GlobeCam; box?: { x: number; y: number; w: n
     </AbsoluteFill>
   );
 };
-export { Arrow, Lbl, Svg, clamp };
+export { Arrow, Svg, clamp };
 
 // ---------------------------------------------------------------- calc stacks (heavy phase, K6 r0)
 /** The house CalcStack with the real height of a fraction row: a row whose TeX has a \frac / \dfrac and no explicit `h` is ~2.2× its
