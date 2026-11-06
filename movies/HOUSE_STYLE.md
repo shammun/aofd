@@ -64,7 +64,7 @@ Transitions are spoken bridges, never cards:
 
 **Never say "the easy way"** (user, 2026-11-06: it sounds unnatural). The on-screen promise pulses on the concept's name instead.
 
-**Spoken wording rules (user, 2026-11-06, all movies):**
+**Spoken wording rules (user, 2026-11-06, all movies; checked by `tools/script_wording_lint.py` before every TTS):**
 - No numbered spoken steps ("Step one … Step two …"). Let a step-by-step explanation flow: "First, …", "Next, …", "Now …", "So …". On-screen step labels are fine.
 - Never voice private reassurances or replies to the user's own questions ("assume nothing", "we never mix the two centres"). Say only what a first-time viewer needs.
 - Every number used in a calculation is named on screen and in the voice before it is used (e.g. "Δθ = 0.01, a small turn in radians"), with the formula it plugs into.
