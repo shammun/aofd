@@ -8418,3 +8418,243 @@ Frames at every sentence end (about 7 s apart on average), plus every calculatio
   - "35" on screen in s22 S15;
   - u/v in s06.
 - Re-render s06, s11 and s13–s27 (or the whole movie), then re-run qa (`halves`) and K6.
+
+
+## #5b build 1 review 1 (with calculation & sync audit)
+2026-11-06 · fresh eyes · movie `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_storm/build1/build1_1080.mp4`
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_storm (#5b) build 1 | 42:48 (2568.33 s) | 153.9 MB | 14/15 (halves FAIL) | PASS (1 honesty Should) | PASS | FIX (clipped label, colliding bar numbers) | FIX (2 empty halves, lap clock, s22 zoom off the eye) | PASS (2 minor) | PASS | n/a (retired; exaggerations labelled on screen) | **FIX** |
+
+**Method.** 507 frames extracted with ffmpeg into `reports/movies/ch00_coordinates_storm/review1/frames/` (not committed): one at
+the end of every one of the 399 sentences (end − 0.15 s; the largest gap between two frames is 17 s), plus extra frames for the
+halves FAIL spans, the s09 lap (every 1.5 s), the s19 swing round / close look (every 1.5 s), s22 (every 2 s), the s30 swipe
+(every 1 s, plus a 10-fps tracker of the gold swipe line) and mid-sentence checks. They are tiled with time stamps in
+`review1/tiles/` (calculation scenes at 960 px, the rest at 640 px, which is also the legibility check), with full-resolution crops
+in `review1/crop_*.jpg`. Every number on screen was recomputed in Python. Sources read: `part1_lessons_checklist.md`, the #5b audit
+B1–B25, `fix0_log.md`, `part1_lessons_log.md`, `script.md`, `timing.json`, `en.vtt`, `qa.json`, `cs_sA/sB/sC.tsx`, `cs_eq.ts`.
+The C–G audit items in this report belong to Parts 3–7. None of them targets #5b; their cross-part rules are the checklist rows
+checked below.
+
+**qa.json.** 14/15 PASS. The one FAIL is `halves`: "left 720.0–739.0 s (19.0 s); left 859.5–872.0 s (12.5 s) [FAIL > 10 s; 7 span(s)
+> 3 s in all]" (see M1). Captions re-checked independently: 625 cues, text = script, 0 lines > 42 characters, 0 cues > 17 cps.
+
+### Physics checks (asked for)
+- **NH Coriolis on cyclonic flow points outward: PASS.** At 22:51–23:02 (s14 S16) the violet arrow points outward from the parcel,
+  with its head, and is tagged "drawn 6× longer". The numbers are right: f = 2Ω sin 26.5° = 6.51 × 10⁻⁵ s⁻¹; f v = 0.00226 m/s²;
+  0.048 / 0.0023 = 21. The inputs for 0.0023 are not on screen (M10), and the force is not called apparent (S12).
+- **Box continuity w = 2h|u_r|/r ≈ 1 m/s: PASS.** At 30:21–30:45 (s20 S13–S14): 2 × 1000 × 16 / 30 000 = 1.07 m/s (1.05 with 15.7).
+  The gold box r 0–30 km × z 0–1 km is drawn, with the inflow arrow into its side and three up arrows out of its lid. One step is
+  missing: the equality and its cancellation (S15).
+- **Signs of u_r: PASS.** Inflow is negative everywhere: "≈ 13 m/s in (−)", "−6.5", "−16", "−6", "−11"; the colour key is
+  "rose −: in · blue +: out". One wording is ambiguous, "in −6.0" (S16).
+- **Hemisphere and viewpoint wording: PASS.** "Anticlockwise as seen from above" appears at 1:31, 18:23 and 33:31, with "both
+  storms are in the northern hemisphere". Every drawn circulation (s01, s02, s09–s14, s15 GOES plate, s23 ERA5, s26 HRRR) turns
+  anticlockwise, and the s15 inflow arrows spiral in cyclonically.
+- **Flood swipe right → left → right → middle, slow full sweeps: PASS on motion.** The 10-fps tracker gives: line at the right
+  edge (x 1078) to 40:29.3; R → L 40:29.4–40:33.3 to x 78; hold; L → R 40:35.5–40:39.3; hold; → middle (x 578) 40:41.3–40:43.2;
+  hold to 41:01. That is ≈ 4 s eased per full width (`swipeX` G = 135 frames). The sync is a Should (S22).
+- Ian 960 vs 938 hPa, 17 km WSW, ring tags −6.5 / 0 / +1 / +1 / +6.5, section −16 / +9 / 55 m/s, radar 3.3 m/s at 8.5 km, Amphan
+  90 kt = 46 m/s and 967 vs 956 hPa, Nargis dates (21 Apr / 2 May / 5 May), 75 hPa → 75 cm, shelf ≈ 33 km: all match the voice and
+  the data.
+
+### Calculation & sync audit (sentence-end frames, scene by scene)
+| scene | calculation / derivation | on screen, in sync? | result |
+|---|---|---|---|
+| s03 (2:35–4:26) | arc s = 1 × Δθ; 0.1 rad × 180°/π ≈ 5.7° ≈ 6°; s = 1 × 0.1 | every row on its sentence; wedge eases to 5.7° and back | PASS (S3 label overlaps) |
+| s04 (4:26–6:31) | move ≈ Δθ θ̂ = (−sin θ Δθ, cos θ Δθ); ÷Δθ; check at 53.13°: 0.592 − 0.600 = −0.008, ÷0.01 = −0.8; 0.806 − 0.800 = +0.006, ÷0.01 = 0.6 | one row per sentence; the Δ rows stay to S7 | PASS (S5: 3/5 origin, 0.57°) |
+| s05 (6:31–7:41) | chord 0.09996 vs arc 0.1; Δr̂/Δθ → dr̂/dθ = θ̂; middle slope line | in sync | PASS (S6: "Δθ→0" 30 px) |
+| s06 (7:41–9:41) | five steps; swap → (cos θ, −sin θ); minus first → (−cos θ, −sin θ) = −r̂ | in sync; −r̂ opposite r̂ (B8 fixed) | **M5** clipped label; S7 early arc |
+| s07 (9:41–11:38) | θ̂(53.70°) = (−0.806, 0.592); Δθ̂ = (−0.806 − (−0.800), 0.592 − 0.600) = (−0.006, −0.008); ÷0.01; = −r̂ | in sync | **M4** sign line missing |
+| s08 (11:38–14:32) | 10(1, 0); Δv = 1; d̂_new; 11(0.995, 0.1); (10.945, 1.1) − (10, 0); 1(1, 0); Δd̂ = (−0.005, 0.1); 10(…); 1(…); sum; halving; ÷Δt | rows on their words (B3, B4, B19 fixed) | **M1, M2, M3** |
+| s09 (14:32–16:13) | Δs = vΔt; arc rule; Δθ/Δt = v/r; 34.8/25 000 = 0.00139; × 57.3 = 0.08°/s; × 60 = 4.8 ≈ 5°/min; 6.283/0.00139 ≈ 4500 s; /60 = 75 min | in sync | **M6** lap clock |
+| s10–s11 (16:13–18:32) | position = r r̂; product rule; dr/dt = 0 struck; chain rule; v = r θ̂ v/r = v θ̂ | in sync (B20 fixed) | PASS (S6: r's not struck, row ≈ 40 px) |
+| s12 (18:32–20:09) | product rule, dv/dt struck; chain rule; a = v·(−r̂ v/r) = −(v·v/r) r̂ = −(v²/r) r̂; units | in sync (B21 fixed) | PASS (S9 "−" tag) |
+| s13 (20:09–21:15) | 34.8² ≈ 1211; /25 000 ≈ 0.048; 35²/25 000 ≈ 0.049; 9.81/0.048 ≈ 200; 100 000 m/3600 s ≈ 27.8; /0.048 ≈ 580 s; /60 ≈ 9.7 ≈ 10 min | in sync | PASS (S5: 35² = 1225 not shown) |
+| s14 (21:15–23:19) | Δθ = 0.00139 × 60 ≈ 0.084 rad; × 57.3 ≈ 4.8°; 34.8 × 0.084 ≈ 2.9; /60 ≈ 0.048; balance 0.048 in / 0.0023 out / ratio 21 / 0.050 | in sync; arc-rule row printed twice | **M10** (inputs, one rounding) |
+| s20 (28:52–31:19) | ring average (1/72) Σ; box: 2πr h\|u_r\|, πr² w, w = 2h\|u_r\|/r = 2 × 1000 × 16/30 000 ≈ 1 | in sync | PASS (S15 one move, km → m) |
+| s23 (32:36–34:22) | 90 kt × 1.852 ≈ 167 km/h; ÷ 3.6 ≈ 46 m/s; 967 vs 956; tan = \|u_r\|/u_θ; 6.0/20.1 ≈ 0.30 ⇒ 16.6°; 13.3/34.8 ≈ 0.38 ⇒ 20.9° | 956 row one sentence late | Should (S16) |
+| s26 (35:51–36:37) | (22.2 E, 24.3 N); √(22.2² + 24.3²) = √(494 + 590) ≈ 32.9 | in sync | **M9** 22.2² = 492.8, not 494 |
+| s27 (36:37–38:18) | 1013 − 938 ≈ 75 hPa ⇒ ≈ 75 cm; 10 × 0.3048 ≈ 3.0; 15 × 0.3048 ≈ 4.6 | in sync | Should (S18: units, 4.6 vs 4.5, 1 cm/hPa origin) |
+| skip chips | "skip to 11:38" (s08 S0 at 11:38.60), "skip to 20:09" (s13 S0 at 20:09.95) = VTT | — | PASS |
+
+**Audit items B1–B25 in the frames.** Applied: B1, B2, B4–B8, B10–B12, B14, B15–B23, B25(c)–(e). Partly applied:
+- B3: the bar numbers collide, and the divisions are missing (M2, M3).
+- B9: no sign line (M4).
+- B13: one step is skipped (S15).
+- B24: the angles are rounded inconsistently (S16).
+- B25(a): the squared value is wrong (M9).
+- B25(b): the origin of "1 cm per hPa" is still missing (S18).
+
+### Must fix (10)
+1. **M1 — 12:00–12:19 and 14:19.8–14:32 (s08 S3–S5 and S23–S24): the left half is empty (`halves` FAIL, 19.0 s and 12.5 s).**
+   - *Cause* (`cs_sA.tsx` S08): the keep picture fades out at `tTool − 14` (line 541), and the grid only comes in at `tEasy`
+     (line 549). Later, the bars leave at `fout(f, tRule − 10)` (line 575), and EQ_S08 sits on the right.
+   - *Fix, first span:* bring the grid group in at `tTool` with the unit arrow d̂ = (1, 0) and the ink (10, 0) arrow. Show a gold
+     "×10" tag on S5 ("a number times an arrow") and let both pulse on "both change".
+   - *Fix, second span:* keep the two surviving pieces of the inset on the left from `tRule` to the end of the scene. Draw (1, 0)
+     in slate, tagged "$\tfrac{dv}{dt}\hat{\mathbf d}$", and (−0.05, 1) in orange, tagged "$v\tfrac{d\hat{\mathbf d}}{dt}$", in
+     the colours of the two gold lines "number's rate × arrow" and "+ number × arrow's rate". Then re-run `halves`.
+2. **M2 — 13:57–14:20 (s08 S21–S22): the bar numbers run together.** They read "0.5 0.0250.25 0.250.006". The bars are 100 px
+   apart, but "0.025" at 44 px is ≈ 110 px wide (`cs_sA.tsx` S08 lines 577–582, `x + j * 100`).
+   - *Fix:* bars 120 px apart, groups 340 px apart (x 80…1000), or put each rose number above its bar.
+3. **M3 — 13:43–14:19 (s08 S18, S22): two spoken results have no arithmetic.**
+   - (a) S18 "sum = (0.945, 1.1)" is shown without the addition (line 610). Add
+     `(1,\ 0)+(-0.05,\ 1)+(-0.005,\ 0.1)=(1-0.05-0.005,\ \ 0+1+0.1)` and then `=(0.945,\ 1.1)`.
+   - (b) S22 "÷Δt: 0.1 → 0.05 → 0.025 → 0" (line 617) shows no division, and "the first two stay at about one" is not
+     computed. Add the row `\dfrac{1}{1}=1,\ \dfrac{0.5}{0.5}=1,\ \dfrac{0.25}{0.25}=1` on "the first two stay", and the row
+     `\dfrac{0.1}{1}=0.1,\ \ \dfrac{0.025}{0.5}=0.05,\ \ \dfrac{0.00625}{0.25}=0.025` on "the third goes".
+   - (c) The third bar and its row show "0.006", but 0.006 / 0.25 = 0.024, not the spoken 0.025. Show 0.00625 in the
+     Δt = 0.25 row and under the bar (A6, one rounding; lines 581 `n3`, 616).
+4. **M4 — 10:44.9–10:50.6 (s07 S12): the sign step is skipped.** "−0.806 − (−0.800)" jumps straight to −0.006 (A2: signs get
+   their own lines).
+   - *Fix* (`cs_sA.tsx` S07 lines 504–506): insert `\phantom{\Delta\hat{\boldsymbol\theta}}=\big(-0.806+0.800,\ \ 0.592-0.600\big)`
+     with the slate tag "minus a minus is a plus" before the result row.
+5. **M5 — 08:41–09:16 (s06 S16–S22): the rose label "θ̂ turned 90°" runs off the left frame edge.** It reads "rned 90°".
+   - *Fix* (`cs_sA.tsx` S06 line 431): the label is end-anchored at `slideEnd[0] − 10`. Anchor it at start, below the
+     circle (x ≥ 60), or right of the slide arrow inside the circle.
+6. **M6 — 15:58.7–16:13 (s09 S15–S16): the lap clock contradicts the parcel.**
+   - *What's wrong:* the clock runs 0 → 75 min over the lap phase. The parcel uses `lapA(f)` with `per = 300` frames (10 s per
+     lap). So it is at −40° at "t = 7 min", back at −40° at "t = 62 min", and 1.3 laps round at "t = 69 min", while the rows
+     say one lap = 75 min.
+   - *Fix* (`cs_sB.tsx` S09 lines 70, 73, 89): from `tLap` on, set `a = aLap0 + 360 * lapFrac`, where `aLap0` is the parcel's
+     angle at `tLap`.
+7. **M7 — data frames without their colour bar or source line (D2).**
+   - (a) 26:22–27:28 (s18 S0–S7): the coloured u_r layers show for 66 s before the colour bar comes in on S8. The bar is
+     `URBar … o={fin(f, tCol)…}` at `cs_sB.tsx` line 636. Show the bar from S3 (when the layers are named), or keep the layers
+     grey until `tCol`.
+   - (b) 28:41–28:50 (s19 S7–S8): during the swing round and close look, the source line is faded out (line 691,
+     `1 − win(f, tOrbit − 12, tLook + 140)`) and the colour bar goes too (line 666 `colO`). Keep both. For example, put the credit
+     at top right beside the picture during the close look, and keep the bar at least half visible.
+   - (c) 01:01–01:14 (s01 S6–S8): the world map has no source line until the Ian dot. In `cs_sA.tsx` S01 line 155, change
+     `o={oWorld * fin(f, tIan)}` to `o={oWorld}`.
+8. **M8 — 32:16–32:36 (s22): the zoom drifts off Amphan's eye.**
+   - *What's wrong:* at z = 1 (32:16.5) the dark pinhole eye sits ≈ 126 px below the gold ring (≈ 100 km, ≈ 0.9° latitude).
+     The zoom is centred on `AMP.modis.eye`, so the real eye slides down and leaves the frame by 32:24. From 32:27 the "pinhole
+     eye" ring and the cylinder circle blank, flat-white cloud. The voice ("a tiny clear dot") has no picture.
+   - *Fix:* correct `amphan.modis.eye` in `movies/data/build_ch00_coordinates_storm.py`. Locate the dark local minimum in the
+     MODIS crop, and add a CHECK row "eye within 5 px of the darkest pixel".
+   - Then re-run the zoom (`cs_sC.tsx` S22 lines 114–121). Contrast-stretch the crop, as the GOES plate is ("contrast enhanced";
+     note it on the source line), so the 3.4× view is not uniform white.
+   - Draw the cylinder in ink with a dark halo; at present it is invisible on white.
+9. **M9 — 36:10–36:37 (s26 S3–S5): the arithmetic on screen is wrong.** The row reads "√(22.2² + 24.3²) = √(494 + 590)", but
+   22.2² = 492.8. The 494 comes from the unrounded 22.23.
+   - *Fix* (`cs_sC.tsx` S26 line 386): square the displayed values, `Math.round(Number(nf(u[0], 1)) ** 2)`, which gives
+     √(493 + 590) = √1083 ≈ 32.9.
+10. **M10 — 22:51.8–23:02 (s14 S16): "Earth's spin ≈ 0.0023 m/s²" appears with no inputs (A1), and the sum rounds it a second
+    time (A6).**
+    - *Fix* (`cs_sB.tsx` S14 lines 368–373): before the 0.0023 row, add
+      `f\,v=2\Omega\sin\varphi\cdot v\approx6.5\times10^{-5}\ \mathrm{s^{-1}}\times34.8\ \mathrm{m/s}\approx0.0023\ \mathrm{m/s^2}`,
+      with the slate tag "Ω: Earth's spin rate · φ = 26.5°: Ian's latitude · why: Coriolis movie".
+    - Make the sum `0.048+0.0023\approx0.050` (it now reads 0.048 + 0.002).
+
+### Should fix (25)
+1. **S1 — s02.**
+   - 02:16–02:31 (S7): the Ian-ring panel's coastline spills out of its box, up to the frame top and to the right. Clip the
+     coast path to `IB` (`cs_sA.tsx` S02).
+   - 02:27–02:35 (S8–S9): the gold turning arc and the r̂ head reach y ≈ 10–50 px. Move the polar picture 60 px down.
+2. **S2 — 00:49–01:00 (s01 S5): the parcel and its arrow run over the highlighted cylinder icon in the series row.** Raise the
+   ring or lower the icon row (`cs_sA.tsx` S01 lines 100–150).
+3. **S3 — labels on strokes.**
+   - 03:34–04:26 (s03): "Δθ" sits on the turned r̂ arrow, and "≈ 0.1" sits under the gold leader's arrowhead.
+   - 08:22–08:36 (s06 S12–S13): "Δθ" and "θ̂" are stacked on the thick arc.
+   - 10:04 (s07 S4): "leans west" sits on the 53° θ̂ arrow.
+4. **S4 — 04:26–06:31 (s04): the arrow colours swap roles.** In s03 and s05 orange is the turned r̂ and brown the old one. In s04
+   orange is the old (53°) arrow and brown the turned (73°) one. Use one convention (`cs_sA.tsx` S04).
+5. **S5 — small missing inputs (A1).**
+   - 05:44 (s04 S10): "cos θ = 3/5" comes without its origin. Add the slate tag "balloon: 3 km E, 4 km N, 5 km away".
+   - 05:51 (s04 S11): "0.01 rad = 0.57°" comes without `0.01\times57.3\approx0.57^\circ`.
+   - 11:10 (s07 S16): the middle line `\tfrac{d}{d\theta}(-\sin\theta,\ \cos\theta)=\big(\tfrac{d(-\sin\theta)}{d\theta},\ \tfrac{d\cos\theta}{d\theta}\big)` is missing (as in s05; use `\dfrac`).
+   - 20:37 (s13 S4): `35^2=1225` is missing.
+6. **S6 — maths below 44 px, or not shown cancelling.**
+   - 06:48–07:00 (s05 S4): the "Δθ→0" label over `\xrightarrow` is ≈ 30 px (`cs_sA.tsx` line 388). Make it its own 44-px row,
+     "as Δθ → 0".
+   - 19:48–20:09 (s12, `EQ_S12`, `cs_sB.tsx` line 245) and 18:04–18:12 (s11 S8–S9 row): the summary rows render at ≈ 36–40 px.
+   - "The two r's cancel" (s11 S9) shows no strike. Strike both r's, as s09 does for "Δt cancels".
+7. **S7 — 08:07 (s06 S7): the "quarter turn ahead" arc and label appear on "Step two",** ≈ 5 s before S9 says it. Put them on
+   `AT(k, 9, "quarter turn")`.
+8. **S8 — 19:47–20:21 (s12 S12–s13): the inward acceleration arrow is tagged with a lone "−"** (`cs_sB.tsx` line 213), which
+   reads as a dash. Write `$-\hat{\mathbf r}$` or "inward".
+9. **S9 — 21:00–21:15 (s13 S8): the car rows are crowded.** The "0.048 m/s²" denominator touches "580 s" below it.
+10. **S10 — 22:12–22:33 (s14 S11–S12): the arc-rule row is printed twice.** It appears in the stack and again as `EQ_S14` at 44 px
+    (line 364). Keep one.
+11. **S11 — 22:34–22:44 (s14 S13–S14): the parcel and its arrows vanish** while the voice says "something must push the parcel
+    inward"; only an empty ring shows. Keep the parcel.
+12. **S12 — physics honesty (R1): s14 says and labels "Earth's spin pushes …" without saying it is an apparent push seen in the
+    rotating frame.**
+    - Change the label (line 352) to "Earth's spin, as seen on the turning Earth: ≈ 1/20, outward".
+    - In a later voice pass, consider "…the Earth's spin seems to push the other way…".
+13. **S13 — 29:01–29:15 (s20 S1–S2): for ≈ 14 s the left half holds only a shrinking ring, then a dot.**
+    - The formula says 72 points, but the ring shows 12.
+    - Draw the ring of 72 samples on the 925-hPa layer image.
+    - Add the slate tags "Σ: add up the 72 values" and "bar: the ring average". This is new notation for this audience.
+14. **S14 — s20 sections.**
+    - 29:58–31:19: the tangential-wind contour labels (10–50) are near-black with a dark halo, which reads as smudges at 640 px
+      (`cs_sB.tsx` line 776, `c="#1a1a24"`). Use dark text on a pale halo.
+    - The dark notch at the bottom left of the section (0–45 km, lowest ≈ 0.3 km) has no label. So does the matching one on
+      Amphan's section (34:22–35:00, 0–75 km). Label it, for example "no data: below the sea surface".
+15. **S15 — 30:31–30:45 (s20 S13–S14): one move per step in the box check.**
+    - Add `2\pi r\,h\,|u_r|=\pi r^2\,w`.
+    - Then add `w=\dfrac{2\pi r\,h\,|u_r|}{\pi r^2}`, with π and one r struck, before `w=\dfrac{2h|u_r|}{r}`.
+    - Write `h=1\ \mathrm{km}=1000\ \mathrm m,\ \ r=30\ \mathrm{km}=30\,000\ \mathrm m` (lines 830–833, label line 817).
+16. **S16 — s23.**
+    - 32:40–34:22: the colour bar's "m/s" touches the keyword. Move the bar under the map.
+    - 33:03 (S3): "one box ≈ 28 km" needs `0.25^\circ\times111\ \mathrm{km}\approx28\ \mathrm{km}`.
+    - 33:50 (S8): the official 956 hPa is spoken in S8 but its row comes in on S9 (line 245). Split the row.
+    - 34:05 (S11): `\arctan0.30=16.7^\circ` and `\arctan0.38=20.8^\circ`. Write 0.299 and 0.382 so that 16.6° and 20.9° hold
+      (`cs_eq.ts` line 19, `cs_sC.tsx` line 224).
+    - "round 20.1 · in −6.0" reads as a double negative. Write "u_θ = 20.1 · u_r = −6.0 (in)" (lines 204, 213, 215).
+17. **S17 — 36:12–38:18 (s26–s27): the white wind arrows cross the map labels.**
+    - The arrow at Fort Myers Beach cuts through "Beach" ("Beac|h"); the St Pete arrow does the same to "Saint Petersburg".
+      Offset the labels.
+    - 36:22: "towards the NE = from the SW" sits ≤ 10 px above the "wind speed" bar title.
+18. **S18 — 37:12–37:22 (s27 S3–S4).**
+    - The feet rows have no units. Write `10\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx3.0\ \mathrm m`.
+    - 15 ft is shown as 4.6 m, but the keyword and the voice say 4.5. Use one rounding (lines 465–466).
+    - "75 cm: small next to 3–4.5 m" is printed above its own input row.
+    - "≈ 1 cm per hPa" needs its origin, `\dfrac{100\ \mathrm{Pa}}{1025\times9.81}\approx0.01\ \mathrm m`.
+19. **S19 — s21.**
+    - 31:49: "130 kt (IMD)" is unspoken, unconverted, and the abbreviation is undefined (`cs_sC.tsx` line 95). Write ≈ 67 m/s
+      and "India Meteorological Department", or drop it.
+    - 32:05: "Kolkata ≈ 17 km" is ambiguous. Write "closest to Kolkata ≈ 17 km" (line 97).
+    - 32:10–32:16 (S6): the view zooms out to the globe while the voice names the Khulna and Satkhira districts, and the right
+      half is empty. Hold the zoomed map with the two districts outlined until S6 ends.
+20. **S20 — 34:22–35:00 (s24): the vertical colour bar's "+ out" overlaps "+16".**
+21. **S21 — 35:37 (s25 S6).**
+    - The north component v is drawn teal, which the series reserves for u_θ. Use ink or slate dashes.
+    - The gold "–" between the two mini pictures should be an arrow.
+22. **S22 — 40:29–40:40 (s30 S7–S8): the swipe plays against the voice.**
+    - The first sweep (R → L) runs during S7. "As the line glides across, dark water spreads over land that was green before"
+      (S8) then plays over the L → R return, where the water recedes.
+    - Start the sequence on `AT(k, 8, "glides")` instead of `tR` (`cs_sC.tsx` line 587). The order and speed are right.
+23. **S23 — 41:01–42:22 (s31): each recap keyword fades about 0.5 s before its sentence ends** (`out={t(j+1) − 20}`, `cs_sC.tsx`
+    lines 683–691). D3 requires full strength to the end of the sentence. Use `t(j+1) − 4`.
+24. **S24 — captions.**
+    - Cue 00:53.12 "In this part," lasts 0.92 s (< 1 s).
+    - Cue 31:59.03–32:02.95 spans the S4/S5 gap ("Bangladesh. Its centre then…"). Break cues at sentence ends (`make_timing.py`).
+25. **S25 — the five WARN half-spans (> 3 s) are not itemised in qa.json.**
+    - The ones seen here are 28:44–28:49 (s19 close look, right half), 29:01–29:15 (s20, dot only, see S13) and 32:10–32:16
+      (s21 S6).
+    - The gauge axes (s27, s28, s31) begin with an ambiguous "12 UTC" (27 Sep). Write "27 Sep 12 UTC".
+    - Add the WARN list to the qa output.
+
+### What works (keep)
+- The derivation blocks from s03 to s14 read row by row on their words. The halving bars, the "change, drawn 3× larger" inset with
+  its gold leader, the tails-together inset, the s23 triangles and the B8 −r̂ slide are clear.
+- Data frames have source lines below the picture (≥ 28 px), except the M7 gaps. Diverging rose–blue for u_r and a yellow–green
+  sequential for speed are colour-blind safe. There are no flashes (max 0 per second), and loudness is −16.3 LUFS.
+- The skip pattern is correct: lead-ins at 2:35 and 11:49, keep lines at 11:38 and 20:09, and the chips equal the VTT times. The
+  chapter marks equal the scene starts.
+- The title and the end card follow the house style; the end card is the maths ending, word for word.
+
+### Limits
+- Audio was not listened to. Captions and sync come from `timing.json`, the VTT and the frames.
+- Frames come from the H.264 render (CRF), so fine-colour judgements are approximate. The s18/s19 layer colours were not checked
+  against data. The physics parity gate covers them (28 functions reproduce their hashes).
+
+### Verdict: FIX (#5b build 1 review 1: 10 Must, 25 Should)
+M1 fails the house `halves` gate. M6 and M8 make the picture contradict the voice. M9 and M3(c) are wrong arithmetic on screen.
+M3, M4 and M10 skip calculation steps. M2 and M5 are illegible or clipped text. M7 leaves data frames without their colour bar or
+source line. All of these are TSX/data edits; no re-voicing is needed. After the fixes, re-run K6 on s01, s06–s09, s14, s18–s22,
+s26 and s31, then a full render and `movie_qa`.
