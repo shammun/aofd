@@ -8658,3 +8658,160 @@ M1 fails the house `halves` gate. M6 and M8 make the picture contradict the voic
 M3, M4 and M10 skip calculation steps. M2 and M5 are illegible or clipped text. M7 leaves data frames without their colour bar or
 source line. All of these are TSX/data edits; no re-voicing is needed. After the fixes, re-run K6 on s01, s06–s09, s14, s18–s22,
 s26 and s31, then a full render and `movie_qa`.
+
+
+## #5a fix 3 review 4 (verification)
+2026-11-06 · fresh eyes · movie `G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/build1/build1_1080.mp4` (151 835 881 bytes, the file `qa.json` measured) · source commit 6aa7d66
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_flat (Part 1, fix 3) | 43:55.2 (2635.20 s; narration 2632.70 s) | 151.8 MB | **15/15 PASS** | PASS | PASS | PASS with notes (s12, s25 label crowding) | PASS | PASS (623 cues = script; timing unchanged since fix 2) | PASS | n/a (retired) | **PASS with notes** |
+
+**Method.**
+- 270 frames, extracted with ffmpeg into `reports/movies/ch00_coordinates_flat/review4/` (ignored; tiles in `review4/tiles/`).
+- Each review-3 item checked at its timestamp, with 2–6 frames around it. Full-resolution crops at 14:56, 19:02, 20:30, 20:56, 30:09.5, 40:35, 16:00, 04:19, 43:15 and 43:50.
+- U1 block (13:05–14:37.5): 24 frames, about one every 3.5 s.
+- Whole-movie sweep: one frame every 30 s (57 frames) outside the stretches already covered densely.
+- Fix 3 changed only TSX, so `timing.json`, `en.vtt` and the skip-chip times are those of review 3. I checked them again on screen: 14:26, 18:53, 29:57 and 38:58.
+
+### qa.json
+15/15 PASS. Changes since review 3:
+- `halves` now PASS ("no picture or maths zone empty > 3 s"; it was 19.0 s FAIL).
+- overlap: 3680 frames, 0 hits.
+- captions: 623 cues = script.
+- physics: 19 functions reproduce their hashes.
+- equations: 23/23.
+- loudness: −16.3 LUFS, peak −1.6 dBTP.
+- flashes: 0.
+
+### Review-3 items, checked on the frames
+| item | status | evidence |
+|---|---|---|
+| Must 1 (s26 halves) | **fixed** | 41:23: all four slots are ghosted across x 250…1600, with "four angles" at the top right. Each slot comes up on its own sentence: θ at 41:28, the bearing at 41:35, α at 41:41 and inflow at 41:46. The tan⁻¹ rows end at 41:20.3, after "twenty one degrees". |
+| Must 2 (x′, y′ in TeX) | **fixed** | 19:50–23:30 and 28:10–29:40: the ruler labels x′/y′, "new coordinates x′, y′", "x′ = 4.6", "y′ = 1.96", "(x′, y′) = (4.6, 1.96)" and the s20 axis labels are all KaTeX. The s15 x/y axis letters are KaTeX too. |
+| Must 3 (s23 ⊙ label) | **fixed** | 35:39–35:55: the ratio rows have gone before the ⊙ appears. "rising / (out of the screen)" stands alone beside the ring. |
+| Must 4 (s20 keep picture) | **fixed** (one Should left) | 29:58: the leftovers are gone, and "same arrow, new numbers" shows with (x, y) = (3, 4). 30:03: "(x′, y′) ≈ (4.6, 1.96)", with an inset of the old axes and the axes turned by α = 30°. 30:09: "r̂, θ̂ = x̂, ŷ turned by θ", with dashed x̂, ŷ at the balloon. See R4-4 below. |
+| Must 5 (s22 "35") | **fixed** | 33:08–33:25: "≈ 35 m/s" (teal) stays to the end of the scene above the knots chain. "strongest on our ring ≈ 49 m/s" follows. |
+| Must 6 (s06 u, v) | **fixed** | 5:08–5:15: the u, v row is gone. "from" stands on its own line, the W → E arrow sits under it, and "a west wind blows east" sits under that. Nothing touches "= 37°". |
+| Should 1 (U1 maxLines) | fixed | 14:21–14:24.4: both divisions and θ̂ ≈ (−0.80, 0.60) are up together with the tick and the gold link. |
+| Should 2 (θ̂ at the balloon) | fixed | 12:51.5: "θ ≈ 53.13° : θ̂ = (−sin 53.13°, cos 53.13°) = (−0.8, 0.6)". |
+| Should 3 (s14 keep) | fixed | 18:55: the √ rows are gone. 19:00–19:04: "in/out: u_r" (rose) and "round: u_θ" (teal) label the picture, and "u_r = u·r̂" and "u_θ = u·θ̂" sit above the general formulas. |
+| Should 4 (A2 sign lines) | fixed | 17:52.5: "(−8)(−0.8) = +6.4 / minus × minus = plus". 37:37: "−(−16.9) = +16.9". 38:25.8: "(−10.1)(−0.707) = +7.14" and "(−44.5)(0.707) = −31.46". 38:42.8: "−(−10.1) = +10.1", "10.1 × 0.707 = 7.14" and "(−44.5)(−0.707) = +31.46". |
+| Should 5 (α = 30°) | fixed | 20:13.0: the row "α = 30°" and the arc label "α = 30°", on "thirty degrees". |
+| Should 6 (s18 unspoken rows) | fixed | 25:29–25:33: only the two spoken direction-cosine rows show, and they leave with the scene. |
+| Should 7 (ASCII minus) | fixed | 32:31.5: "sum so far: −906.1 m/s". `nf()` in `cf_lib.tsx:45` writes U+2212. |
+| Should 8 (α touches sin α) | fixed | 20:30 crop: "sin α = 0.5" starts at x 568. The α sits about 13 px left of the dashed leg. |
+| Should 9 (teal position arrows) | fixed | 11:05, 19:50–23:30 and 43:00: the position arrows are ink. The shadows and x′/y′ labels are gold. |
+| Should 10 ("Florid a") | fixed | 30:59.5–31:12: "southwest Florida" sits inside the map, near the top. |
+| Should 11 (s25 labels) | **partly** | 40:22–40:46: "mean −13" now sits at the right end of the dotted line, and "14 points out" counts points. But "+14" has no "m/s", and three new crowding problems appear (R4-2). |
+| Should 12 (36-px grey keyword) | fixed | 16:00 crop: "r̂, θ̂ : length 1" is KaTeX at about 50 px, and "wind: its own scale" is about 44 px in key colour. |
+| Should 13 (θ = 180° rows) | fixed | 14:57: the rows are up during S4. 15:03: they are gone. |
+| Should 14 (α = θ ≈ 53°) | fixed | 28:10. |
+| Cosmetic: s05 cos row pages out | fixed | 4:19–4:21.5: "cos θ = 3/5 = 0.6" stays up while "5 × 0.6" is spoken. |
+| Cosmetic: s24 sin 135° pages out | fixed | 38:50: "sin 135° ≈ 0.707" is still up. |
+| Cosmetic: γ unnamed | fixed | 24:50: "γ : the angle between them". |
+| Cosmetic: "+ 90°" spacing | fixed | 9:30 and 14:36.5: "turned by +90°" uses unary spacing. |
+| Cosmetic: s20 "r̂" and "x′" touch | not fixed | 28:30 and 29:00: the two tip labels still touch (R4-6). |
+| Cosmetic: s09 sparse right | unchanged (intentional) | 8:05–8:35. |
+
+### The user's original notes
+- **11:00–14:30 (the 8.7-m slide, and −7 and 5.2): still fixed, no regression.**
+  - 13:09 → 13:16.5: the wide view, the zoom box, the "magnified / after 0.1° / before" inset.
+  - 13:21 → 13:25.5: Δθ = 0.1° = 0.1 × π/180 ≈ 0.001745 rad.
+  - 13:30 → 13:41: r = 5 km = 5000 m, then s = rΔθ = 5000 m × 0.001745 ≈ 8.7 m, with the gold slide labelled "≈ 8.7 m".
+  - 13:50: (x, y) = (r cos θ, r sin θ); before θ ≈ 53.13°, (3000, 4000) m.
+  - 13:55.5 → 14:00: x = 5000 × cos 53.2301° = 5000 × 0.598603 ≈ 2993.0 m; y ≈ 4005.2 m; Δx = 2993.0 − 3000 = −7.0 m (west).
+  - 14:03.5: Δy = +5.2 m (north).
+  - 14:03.5 → 14:13: √(7.0² + 5.2²) = √(49 + 27.04) = √76.04 ≈ 8.7 m = s, each row on its words.
+  - 14:21 → 14:24.4: −7.0/8.7 ≈ −0.80 and 5.2/8.7 ≈ 0.60, then θ̂ ≈ (−0.80, 0.60) ✓.
+  - 14:26.5–14:37.5: the keep picture (r̂ out, θ̂ round, the +90° arc, "anticlockwise, seen from above").
+  - 11:00–12:51 (the (−4, 3) checks, θ̂ by the swap rule and by the turned triangle, θ = 0° and 90°) is unchanged and complete.
+- **13:06 hat: fixed.** At 13:05 and 13:07, "without the θ̂ formula" is KaTeX with the hat over the θ.
+- **15:23 hat: fixed.** At 15:23 and 15:45, θ̂ and r̂ in the picture and in "r̂, θ̂ : length 1" are KaTeX.
+- **43:15 rings (end card, 43:30–43:55): fixed.** The 43:50 crop shows the rings and both arrows inside the second box with at least 25 px of margin. The fourth icon's arrow tip is about 30 px below the box top. 43:15 itself is the recap: "35 m/s round, 13 m/s in, ≈ 21°", with the source line and the colour bar.
+
+### Regressions and sweep (part1_lessons_checklist A–E)
+I looked at the touched scenes (s05, s06, s11, s12–s15, s17, s18, s20–s26) and at the 30-s sweep.
+
+- **A (calculations).** Every spoken number has its inputs on screen. I recomputed:
+  - 0.866 × 3 + 2 = 4.598;
+  - −1.5 + 3.464 = 1.964;
+  - (−8)(−0.8) = 6.4;
+  - (−10.1)(−0.707) = 7.14 and (−44.5)(0.707) = −31.46, giving −24.3;
+  - 7.14 + 31.46 = 38.6;
+  - 13.3/34.8 = 0.382, so tan⁻¹ = 20.9°.
+
+  All match the screen.
+- **B (pictures follow the voice).**
+  - The s14 and s20 keep pictures now show their key idea.
+  - No row vanishes before it is spoken.
+  - Exceptions:
+    - R4-1: s12 labels sit on the radius line, and one tip label is outside the safe area.
+    - R4-4: the s20 θ arc has no rays.
+    - R4-5: "≈ 21°" in the s26 picture comes about 2.5 s early.
+- **C (symbols).**
+  - Hats and primes are correct everywhere I looked.
+  - The remaining plain-font maths is an unaccented α or θ in sans: R4-3 in s16, and the R4-7 list.
+- **D (colours and data).**
+  - Every HRRR frame has its source line and colour bar (30:35, 31:50, 33:25, 36:05, 37:05, 39:05, 40:35, 43:15).
+  - u_θ is teal and u_r is rose. The wind and the radius are ink.
+  - The recap is at full contrast (42:15–43:05).
+- **E (skip guidance).**
+  - Chips at 8:10, 15:23, 19:05 and 36:05 point to 14:26, 18:53, 29:57 and 38:58.
+  - These match the keep lines (14:26.05, 18:53.55, 29:57.05, 38:58.12).
+- **No new overlaps** in the fix-3 changes, apart from the s25 crowding in R4-2.
+- **Physics (unchanged, re-seen):**
+  - The NH storm turns anticlockwise, seen from above (32:29).
+  - u_r is negative and inward.
+  - Rising air on the plan view is drawn as ⊙.
+  - Bearing 37°; "a west wind blows east".
+
+### MUST fix
+None.
+
+### SHOULD fix (5; none blocks the user's viewing)
+1. **R4-1 · 14:43–14:58, s12: the moving "θ = 0°", "θ = 90°" and "θ = 180°" labels sit on the grey radius line, which strikes through them (14:45, 14:50, 14:55). At θ = 180°, the "r̂" tip label sits at x ≈ 10–36, outside the x ≥ 60 safe area (14:53–14:58).** This is old code that was not changed in fix 3; it shows only between sentence ends, so earlier reviews missed it.
+   - **Fix** (`cf_sB.tsx` line 553): offset the label 40 px off the radius, along the perpendicular (b − er·100 + et·40), and set it in TeX: `\theta=0^\circ`.
+   - For θ = 180°, place the r̂ tip label above its arrow, or shorten L12 so the tip stays at x ≥ 60.
+2. **R4-2 · 40:10–40:46, s25: graph labels crowd (crop 40:35).**
+   - "17" (teal) and "+14" (rose) sit side by side at x 1268–1398 and read as "17+14".
+   - "14 points out" sits on the plot's bottom frame line (y −50) and over the dashed u_r curve.
+   - "mean −13" begins about 8 px after "out".
+   - "+14" still has no unit (review-3 Should 11).
+   - **Fix:**
+     - Move "17" below its trough (y + 40), or move "+14 m/s" to the right of the u_r peak (θ ≈ 230°).
+     - Raise "14 points out" by 30 px, above the frame line, inside the shaded band.
+     - Start "mean −13" at least 24 px right of "out", or put it under the dotted line at the right end.
+3. **R4-3 · 20:44–21:39, s16: "sin α (west)", "cos α" and "(north)" are bold sans with a sans α, stacked in one 3-line block about 15 px apart, beside the KaTeX α of "ŷ′ = (−sin α, cos α)" (crop 20:56).** This is the same two-font problem as review-3 Must 2, for α. The block also leaves unclear which label belongs to which leg.
+   - **Fix** (`cf_sB.tsx`, S16 labels): set them in TeX, `\sin\alpha\ \text{(west)}` and `\cos\alpha\ \text{(north)}`.
+   - Put the sin label above the dashed top leg, and the cos label right of the vertical leg at its midpoint, with at least 24 px between them.
+4. **R4-4 · 30:03–30:10, s20 keep picture: the θ arc at the station has no east ray and no radius to the balloon, so it floats beside the station mast like a bracket (crop 30:09.5; checklist B2).**
+   - **Fix** (`cf_sB.tsx` S20 keep): draw the dashed east ray from the station and the faint radius line to the balloon, both visible while "turned by θ" is shown.
+5. **R4-5 · 41:16–41:19.5, s26 S5: the picture's "≈ 21°" replaces "inflow angle" at about 41:16, about 2.5 s before the voice says "twenty one" and before the row "≈ 20.9° ≈ 21°" (41:19.5).** The result appears before its arithmetic (checklist B3).
+   - **Fix** (`cf_sC.tsx` S26): give the picture label the same `appear` as the "≈ 20.9° ≈ 21°" row, i.e. AT(k, 5, "twenty one").
+
+### COSMETIC (optional)
+6. 28:15–29:56, s20: the "r̂" and "x′" tip labels still touch. Offset x′ by 30 px along the axis.
+7. Some unaccented Greek letters are still in the sans font next to KaTeX:
+   - "θ" and "α" in the s26 four-angle icons (41:23–41:55);
+   - "θ round the eye (°)" on the s25 axis;
+   - "θ = 53°" in the s13 inset;
+   - the s05/s07/s08 triangle "θ" labels.
+
+   They read correctly. For full C1 consistency, set them in TeX.
+8. 42:50, s27 S7: the u_r and u_θ shadow bars are drawn at reduced strength (dull rose and teal) while their sentence is spoken. Raise them to full strength like the other recap beats.
+
+### Limits
+- I did not listen to the audio. The narration is unchanged since fix 2.
+- Motion was sampled: densely in U1, s26 S5–S10 and s12, and every 30 s elsewhere.
+- No colour-blind simulation (accepted in review 1).
+
+**Disk.** C: 112 GB free, G: 475 GB free. `review4/` holds 72 MB of frames (ignored, not committed).
+
+### Overall: PASS with notes (#5a fix 3 review 4: 0 Must, 5 Should, 3 Cosmetic)
+- All 6 review-3 Musts are fixed, along with 13 of the 14 Shoulds (Should 11 partly) and 4 of the 6 cosmetic items.
+- The user's four notes are fixed, with no regressions.
+- `qa.json` is 15/15, and `halves` passes.
+- The maths, the physics and every on-screen number check out.
+- Nothing left is wrong for a learner. R4-1 and R4-2 are label-placement nits, legible but crowded, worth a TSX-only touch if s12, s16, s20, s25 and s26 are re-rendered for another reason.
+- **Ready for the user to watch (`qa_pass`).**
