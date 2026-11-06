@@ -245,7 +245,9 @@ const S23: React.FC = () => {
       {/* fix 0 B14: like with like: the official 90 kt in m/s, and the two lowest pressures; K6 round 1: the first row (to x 1897) split */}
       <CalcStack f={f} x={MX} y={440} size={44} maxLines={3} o={fout(f, tShape - 10)} rows={[
         { rhs: String.raw`\text{official (3-min): }90\ \mathrm{kt}`, at: tOff, c: C.local },
-        { rhs: String.raw`90\ \mathrm{kt}\times1.852\approx167\ \mathrm{km/h}`, at: AT(k, 8, "ninety knots"), c: C.local, cont: true },
+        // #5b r2 S7: the factor with its unit, and "kt" named, before it is used
+        { rhs: String.raw`1\ \mathrm{kt}=1.852\ \mathrm{km/h}\quad(\text{kt: knot})`, at: AT(k, 8, "ninety knots"), c: C.local, cont: true },
+        { rhs: String.raw`90\times1.852\approx167\ \mathrm{km/h}`, at: AT(k, 8, "ninety knots") + 18, c: C.local, cont: true },
         { rhs: String.raw`167\div3.6\approx${SAY.a_ms}\ \mathrm{m/s}`, at: AT(k, 8, "forty six"), c: C.local },
         // #5b r1 S16: the official 956 hPa on S8, where it is spoken; ERA5's 967 on S9
         { rhs: String.raw`\text{official lowest pressure: }${AMP.best06.hpa}\ \mathrm{hPa}`, at: AT(k, 8, "nine hundred and fifty six"), c: C.local },
@@ -282,15 +284,15 @@ const S24: React.FC = () => {
         <SecAxes B={BI} rMax={200} />
         <image href={IMG("cst_sec_amphan.png")} x={BA.x} y={BA.y} width={BA.w} height={BA.h} preserveAspectRatio="none" />
         <SecAxes B={BA} rMax={300} rt={[0, 100, 200, 300]} />
-        <VBar x={935} y={220} h={380} />
+        <VBar x={935} y={244} h={380} />{/* #5b r2: 24 px lower, clear of the tags at y 68 (also while they rise in) */}
         <circle cx={mn[0]} cy={mn[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tIn)} />
         <circle cx={mx[0]} cy={mx[1]} r={12} fill={C.gold} stroke={C.bg} strokeWidth={3} opacity={fin(f, tOut)} />
         <InUpOut f={f} P={PI} rIn={[30, 170]} rUp={40} zTop={15.5} o={fin(f, tBlur)} />
         <InUpOut f={f} P={PA} rIn={[60, 260]} rUp={70} zTop={15.0} o={fin(f, tBlur)} />
-        <Keyword f={f} text="Ian (left) · Amphan (right)" at={[150, 50]} s={T.floor} appear={0} out={tIn - 20} />
-        <Keyword f={f} text={`≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 50]} s={T.floor} appear={tIn} out={tOut - 20} />
-        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 50]} s={T.floor} appear={tOut} out={tBlur - 20} />
-        <Keyword f={f} text="in, up and out · same picture" at={[700, 50]} s={T.floor} c={C.gold} appear={tFit} />
+        <Keyword f={f} text="Ian (left) · Amphan (right)" at={[150, 68]} s={T.floor} appear={0} out={tIn - 20} />
+        <Keyword f={f} text={`≈ ${nf(am.min[0], 0)} m/s, 100 km, ≈ 0.2 km up`} at={[700, 68]} s={T.floor} appear={tIn} out={tOut - 20} />
+        <Keyword f={f} text={`≈ +${Math.round(am.max[0])} m/s near the top`} at={[700, 68]} s={T.floor} appear={tOut} out={tBlur - 20} />
+        <Keyword f={f} text="in, up and out · same picture" at={[700, 68]} s={T.floor} c={C.gold} appear={tFit} />
       </Svg>
       {/* #5b r1 S14: the dark bottom-left corners named (rings that cut the sea floor: no data) */}
       <SourceBelow text="Data: NOAA HRRR analysis · 28 Sep 2022, 18 UTC · dark corner: no data (below the sea surface)" pic={{ x: BI.x - 70, y: BI.y, w: BI.w + 70, h: BI.h + 100 }} w={700} name="s24 src i" />
@@ -303,7 +305,9 @@ const S24: React.FC = () => {
 const S25: React.FC = () => {
   const f = useCurrentFrame(), k = K("s25_why_cylindrical");
   const tThree = SS(k, 1), tShape = SS(k, 2), tPhys = SS(k, 4), tEN = SS(k, 6), tMean = SS(k, 7), tParts = SS(k, 8);
-  const c1: Pt = [280, 300], c2: Pt = [280, 520];
+  // #5b r2 S10: the ring smaller and 20 px clear of the map above it (it overlapped by 20 px); the parcel at -20° so that its arrows
+  // stay off the map's bottom edge and the u/v chart
+  const c1: Pt = [280, 300], c2: Pt = [280, 540], rc = 90, aP = -20;
   const mini = { x: 470, y: 170, w: 420, h: 260 };
   const ring = (c: Pt, r: number) => <circle cx={c[0]} cy={c[1]} r={r} fill="none" stroke={C.local} strokeWidth={4} />;
   const xs = Array.from({ length: 73 }, (_, i) => i * 5);
@@ -318,22 +322,24 @@ const S25: React.FC = () => {
           <rect x={mini.x} y={mini.y} width={mini.w} height={mini.h} fill="none" stroke={C.grid} strokeWidth={3} />
         </g>
         <g opacity={fin(f, tPhys)}>
-          {ring(c2, 110)}
-          <Arrow p={polar(c2, 110, 60)} q={[polar(c2, 110, 60)[0] - 80 * Math.sin(60 * D2R), polar(c2, 110, 60)[1] - 80 * Math.cos(60 * D2R)]} color={C.first} w={8} head={28} />
-          <Arrow p={polar(c2, 110, 60)} q={polar(c2, 40, 60)} color={C.neg} w={8} head={28} />
+          {ring(c2, rc)}
+          <Arrow p={polar(c2, rc, aP)} q={[polar(c2, rc, aP)[0] - 80 * Math.sin(aP * D2R), polar(c2, rc, aP)[1] - 80 * Math.cos(aP * D2R)]} color={C.first} w={8} head={28} />
+          <Arrow p={polar(c2, rc, aP)} q={polar(c2, 30, aP)} color={C.neg} w={8} head={28} />
           <g opacity={fin(f, tEN)}>
             <Axes A={G} xt={[0, 180, 360]} yt={[-40, 0, 40]} xf={(v) => `${v}°`} zero />
             <Curve A={G} xs={(RING.az as number[]).concat([360])} ys={(RING.u as number[]).concat([RING.u[0]])} c={C.second} w={4} />
             <Curve A={G} xs={(RING.az as number[]).concat([360])} ys={(RING.vv as number[]).concat([RING.vv[0]])} c={C.local} w={4} dash="10 8" />{/* #5b r1 S21: slate (teal is u_θ) */}
-            <Lbl x={G.x + G.w + 10} y={G.y + 20} t="u" c={C.second} s={T.floor} />
-            <Lbl x={G.x + G.w + 10} y={G.y + 80} t="v" c={C.local} s={T.floor} />
+            {/* #5b r2 S10: the unit on the chart */}
+            <Lbl x={G.x + G.w + 10} y={G.y + 20} t="u (m/s)" c={C.second} s={T.floor} />
+            <Lbl x={G.x + G.w + 10} y={G.y + 80} t="v (m/s)" c={C.local} s={T.floor} />
           </g>
         </g>
-        <g opacity={fin(f, tMean)}>
+        {/* #5b r2 S10: the disc 30 px lower, so the "up" arrow stays clear of the source line above it */}
+        <g opacity={fin(f, tMean)} transform="translate(0 30)">
           <ellipse cx={280} cy={800 - 40} rx={110} ry={26} fill="none" stroke={C.key} strokeWidth={3} />
           <Arrow p={[390, 760]} q={[330, 760]} color={C.neg} w={7} head={24} o={fin(f, tParts)} />
           <Arrow p={[280, 735]} q={[360, 720]} color={C.first} w={7} head={24} o={fin(f, tParts + 20)} />
-          <Arrow p={[200, 760]} q={[200, 680]} color={C.local} w={7} head={24} o={fin(f, tParts + 40)} />
+          <Arrow p={[200, 760]} q={[200, 705]} color={C.local} w={7} head={24} o={fin(f, tParts + 40)} />
           <Lbl x={430} y={760} t="in · round · up" c={C.key} s={T.floor} o={fin(f, tParts)} />
         </g>
         <Keyword f={f} text="why cylindrical?" at={[MX, 120]} s={T.key} appear={0} out={tThree - 20} />
@@ -434,6 +440,7 @@ const S27: React.FC = () => {
   const f = useCurrentFrame(), k = K("s27_surge");
   const tSurge = AT(k, 1, "storm surge"), tWind = SS(k, 2), tCm = SS(k, 3), tNHC = SS(k, 4), tFM = SS(k, 5), tNorth = SS(k, 6), tOut = SS(k, 7), tStP = SS(k, 8), tFlip = SS(k, 9),
     tEk = SS(k, 10), tMore = SS(k, 11);
+  const tIanC = AT(k, 3, "Ian's centre");   // #5b r2 S8: the shelf chart leaves before the 1013 / 938 tag comes in under the 75-hPa row
   const B = coastMap(28.4, 60, 760);
   const Bx: MapBox = { ...B, x: 340 - B.w / 2 + 120 };
   const P = mapP(Bx), fm = P(CST.fmb[0], CST.fmb[1]), sp = P(CST.stp[0], CST.stp[1]);
@@ -451,7 +458,7 @@ const S27: React.FC = () => {
         <Place p={sp} t="Saint Petersburg" dx={0} dy={-40} a="middle" o={fin(f, tNorth)} />
         <AnimatedWindArrow from={[fm[0] - uF[0] * s, fm[1] + uF[1] * s]} to={fm} speed={CST.spF} f={f} c={C.ink} px={10} head={36} />
         <AnimatedWindArrow from={sp} to={[sp[0] + uS[0] * s, sp[1] - uS[1] * s]} speed={Math.hypot(uS[0], uS[1])} f={f} c={C.ink} px={10} head={36} o={fin(f, tOut)} />
-        <g opacity={win(f, tWind, tNHC - 20)}>
+        <g opacity={win(f, tWind, tIanC - 20)}>
           <Axes A={SA} xt={[0, 50, 100, 150]} yt={[-80, -40, 0]} xl="km from Fort Myers Beach (WSW)" yl="sea floor (m)" xf={(v) => `${v}`} />
           <Curve A={SA} xs={sh.km} ys={sh.z} c="#8a6f4e" w={6} />
           <rect x={SA.x} y={axP(SA)(0, 0)[1] - 30 * rise} width={SA.w} height={30 * rise + 2} fill="#7cc4ff" opacity={0.35} />
@@ -460,9 +467,12 @@ const S27: React.FC = () => {
         <Keyword f={f} text="storm surge" at={[MX, 120]} s={T.key} appear={tSurge} out={tNHC - 20} />
         <Lbl x={MX} y={210} t="wide, shallow shelf" c={C.key} s={T.floor} o={win(f, tWind, tNHC - 20)} />
         <Lbl x={MX} y={270} t="≈ 1 cm per hPa" c={C.local} s={T.floor} o={win(f, tCm, tNHC - 20)} />
-        <Lbl x={MX} y={520} t="75 cm: small next to 3-4.5 m" c={C.muted} s={T.floor} o={win(f, tNHC + 40, tFM - 10)} />{/* #5b r1 S18: under its input row */}
+        <Lbl x={MX} y={645} t="75 cm: small next to 3-4.5 m" c={C.muted} s={T.floor} o={win(f, tNHC + 40, tFM - 10)} />{/* #5b r2 S8: under the 1013 / 938 tag */}
+        {/* #5b r2 S8: both pressures named */}
+        <Lbl x={MX} y={528} t="1013 hPa: normal at sea level" c={C.local} s={T.floor} o={win(f, tIanC, tFM - 10)} />
+        <Lbl x={MX} y={583} t="938 hPa: Ian's centre (official)" c={C.local} s={T.floor} o={win(f, tIanC + 12, tFM - 10)} />{/* #5b r1 S18: under its input row */}
         <Lbl x={MX} y={312} t="4.57 m ≈ 4.5 m (nearest half metre)" c={C.muted} s={T.floor} o={win(f, tNHC + 30, tFM - 10)} />
-        <Keyword f={f} text="NHC: 3-4.5 m above the ground" at={[MX, 120]} s={T.floor} c={C.local} appear={tNHC} out={tNorth - 20} />
+        <Keyword f={f} text="official: 3-4.5 m above ground" at={[MX, 120]} s={T.floor} c={C.local} appear={tNHC} out={tNorth - 20} />{/* #5b r2 S8: no "NHC" (named in full on the source line) */}
         <g opacity={fin(f, tFM)}><Gauges A={GAx} f={f} tF={tFM} tS={tStP} land={false} labels={false} /></g>
         <Lbl x={MX} y={230} t={`Fort Myers (upriver) ≈ +${CST.gauges["8725520"].ext.toFixed(1)} m`} c={C.second} s={T.floor} o={win(f, tFM + 30, tEk - 20)} />
         <Keyword f={f} text={`≈ ${Math.round(CST.d_fs)} km north: Tampa Bay`} at={[MX, 120]} s={T.floor} appear={tNorth} out={tFlip - 20} />
@@ -474,13 +484,13 @@ const S27: React.FC = () => {
         <SpeedBar x={770} y={90} w={180} hi={50} />{/* #5b r1 (as S16): its "m/s" ended 10 px before the keyword */}
       </Svg>
       {/* fix 0 B25b: Ian's number for the inverted barometer; B25c: the feet-to-metres factor */}
-      <TeX s={String.raw`1013-${(D.s17 as { best: number }).best}\approx75\ \mathrm{hPa}\ \Rightarrow\ \approx75\ \mathrm{cm}`} x={MX} y={445} size={46} c={C.local} o={win(f, AT(k, 3, "Ian's centre"), tFM - 10)} />
+      <TeX s={String.raw`1013-${(D.s17 as { best: number }).best}=75\ \mathrm{hPa}\ \Rightarrow\ \approx75\ \mathrm{cm}`} x={MX} y={465} size={46} c={C.local} o={win(f, AT(k, 3, "Ian's centre"), tFM - 10)} />
       {/* #5b r1 S18: where "1 cm per hPa" comes from: 1 hPa = 100 Pa of pressure holds up 100 / (ρ g) metres of sea water */}
-      <TeX s={String.raw`\dfrac{100\ \mathrm{Pa}}{1025\ \mathrm{kg/m^3}\times9.81\ \mathrm{m/s^2}}\approx0.01\ \mathrm m`} x={MX} y={350} size={44} c={C.local} o={win(f, AT(k, 3, "for every hectopascal"), tNHC - 20)} />
+      <TeX s={String.raw`\dfrac{100\ \mathrm{Pa}}{1025\ \mathrm{kg/m^3}\times9.81\ \mathrm{m/s^2}}\approx0.01\ \mathrm m`} x={MX} y={365} size={44} c={C.local} o={win(f, AT(k, 3, "for every hectopascal"), tNHC - 20)} />
       {/* K6 round 1: the feet → metres row ran to x 1943: ten and fifteen feet on two lines. #5b r1 S18: with units; 4.57, as the data */}
       <TeX s={String.raw`10\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx3.0\ \mathrm m`} x={MX} y={195} size={46} c={C.local} o={win(f, tNHC + 10, tFM - 10)} />
       <TeX s={String.raw`15\ \mathrm{ft}\times0.3048\ \mathrm{m/ft}\approx4.57\ \mathrm m`} x={MX} y={252} size={46} c={C.local} o={win(f, tNHC + 25, tFM - 10)} />
-      <SourceBelow text={SRC.surge} pic={Bx} w={1400} name="s27 src" />
+      <SourceBelow text={SRC.surge.replace("NHC report", "NHC (US National Hurricane Center) report")} pic={Bx} w={1640} name="s27 src" />{/* #5b r2 S8 */}
     </Scene>
   );
 };
@@ -505,8 +515,9 @@ const S28: React.FC = () => {
         <Keyword f={f} text="no satellite saw the surge itself" at={[220, 100]} s={T.key} appear={tNo} />
         <Keyword f={f} text="the surge, measured" at={[220, 180]} s={T.key} c={C.gold} appear={tMeas} />
         <Lbl x={1120} y={150} t="tide gauges, every 6 min" c={C.key} s={T.floor} o={fin(f, tGauge)} />
-        <Lbl x={1120} y={210} t="NHC: 3-4.5 m above the ground" c={C.local} s={T.floor} o={fin(f, tLines)} />
-        <Lbl x={1120} y={260} t="Fort Myers Beach, other datum" c={C.local} s={T.floor} o={fin(f, tLines)} />
+        {/* #5b r2 S9: no "NHC" and no "datum": the beach report measured height above the ground, the gauges height above the tide */}
+        <Lbl x={1120} y={210} t="Fort Myers Beach: 3-4.5 m" c={C.local} s={T.floor} o={fin(f, tLines)} />
+        <Lbl x={1120} y={260} t="above the ground, not the tide" c={C.local} s={T.floor} o={fin(f, tLines)} />
         <SpeedBar x={1500} y={790} w={230} hi={50} />
       </Svg>
       <GeoMap id="s28m" B={Lx}>{(Pp) => <CoastBody P={Pp} f={f} />}</GeoMap>
@@ -551,8 +562,9 @@ const S29: React.FC = () => {
             <line x1={G.p(sh.coast_lat, 89.0, 1.003)[0]} y1={G.p(sh.coast_lat, 89.0, 1.003)[1]} x2={G.p(sh.coast_lat - sh.km_to_20m / 111.2, 89.0, 1.003)[0]}
               y2={G.p(sh.coast_lat - sh.km_to_20m / 111.2, 89.0, 1.003)[1]} stroke={C.gold} strokeWidth={6} />
             {/* fix 0 B25e: the number on the shelf line itself */}
-            <g data-lc-maplabel="1"><Lbl x={G.p(sh.coast_lat - sh.km_to_20m / 222.4, 89.0, 1.003)[0] + 18} y={G.p(sh.coast_lat - sh.km_to_20m / 222.4, 89.0, 1.003)[1]}
-              t={`≈ ${Math.round(sh.km_to_20m)} km`} c={C.gold} s={T.floor} /></g>
+            {/* #5b r2 cosmetic: left of the line (on its right it sat on the white 20-m contour) */}
+            <g data-lc-maplabel="1"><Lbl x={G.p(sh.coast_lat - sh.km_to_20m / 222.4, 89.0, 1.003)[0] - 18} y={G.p(sh.coast_lat - sh.km_to_20m / 222.4, 89.0, 1.003)[1] - 8}
+              t={`≈ ${Math.round(sh.km_to_20m)} km`} c={C.gold} s={T.floor} a="end" /></g>
           </g>
           <path d={llPath(G, trackLL.slice(0, nTr), 1.004)} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, tTrack)} />
           <circle cx={G.p(AMP.landfall[0], AMP.landfall[1], 1.004)[0]} cy={G.p(AMP.landfall[0], AMP.landfall[1], 1.004)[1]} r={16} fill="none" stroke={C.gold} strokeWidth={5} opacity={fin(f, t20)} />
@@ -609,27 +621,47 @@ const S30: React.FC = () => {
   // "before" picture would cut through its letters (351 hits on Yangon, the date tags, "50 km", "N"); 6 px clear, 24 px fade
   const nearO = (x0: number, x1: number) => { const d = xl < x0 ? x0 - xl : xl > x1 ? xl - x1 : 0; return clamp((d - 6) / 24, 0, 1); };
   const tw = (t: string) => textW(t, T.floor);
+  // #5b r2 N-M2: from "On the left" the full frame shrinks into two half-width panels side by side (before left, after right), each
+  // pulsing on its own words; before "glides" both grow back into the one swipe frame (line at the right edge), and the slow sweeps
+  // right → left → right → middle run as before. No re-voicing.
+  const tG = SSP(k, "glides");
+  const sp = prog(f, tL, tL + 24) * (1 - prog(f, tG - 42, tG - 8));       // 0 = the full swipe frame, 1 = the two half panels
+  const hw = 480, hh = Math.round((hw * PB.h) / PB.w), hy = PB.y + Math.round((PB.h - hh) / 2);
+  const lerpR = (hx: number) => ({ x: mix(PB.x, hx, sp), y: mix(PB.y, hy, sp), w: mix(PB.w, hw, sp), h: mix(PB.h, hh, sp) });
+  const Rb = lerpR(PB.x), Ra = lerpR(PB.x + PB.w - hw);
+  const oFull = 1 - clamp(sp * 3, 0, 1);                                   // the full frame's own marks (names, scale, N, line, tags)
+  const oHalf = clamp((sp - 0.75) / 0.25, 0, 1);                          // the half panels' date tags
+  const oLine = fin(f, tG - 8, 8);
   return (
     <Scene>
-      <div style={{ position: "absolute", left: PB.x, top: PB.y, width: PB.w, height: PB.h, overflow: "hidden" }}>
-        <Img src={IMG("cst_swipe_after.jpg")} style={{ position: "absolute", left: 0, top: 0, width: PB.w, height: PB.h }} />
-        <div style={{ position: "absolute", left: 0, top: 0, width: sx * PB.w, height: PB.h, overflow: "hidden" }}>
-          <Img src={IMG("cst_swipe_before.jpg")} style={{ position: "absolute", left: 0, top: 0, width: PB.w, height: PB.h }} />
+      <div style={{ position: "absolute", left: Ra.x, top: Ra.y, width: Ra.w, height: Ra.h, overflow: "hidden", opacity: f < tL ? 1 : 0.4 + 0.6 * fin(f, tR, 14) }}>
+        <Img src={IMG("cst_swipe_after.jpg")} style={{ position: "absolute", left: 0, top: 0, width: Ra.w, height: Ra.h }} />
+      </div>
+      <div style={{ position: "absolute", left: Rb.x, top: Rb.y, width: Rb.w, height: Rb.h, overflow: "hidden" }}>
+        <div style={{ position: "absolute", left: 0, top: 0, width: sx * Rb.w, height: Rb.h, overflow: "hidden" }}>
+          <Img src={IMG("cst_swipe_before.jpg")} style={{ position: "absolute", left: 0, top: 0, width: Rb.w, height: Rb.h }} />
         </div>
       </div>
       <Svg>
-        <rect x={PB.x} y={PB.y} width={PB.w} height={PB.h} fill="none" stroke={C.grid} strokeWidth={3} />
-        <line x1={xl} y1={PB.y} x2={xl} y2={PB.y + PB.h} stroke={C.gold} strokeWidth={6} opacity={fin(f, tL)} />
+        <rect x={Ra.x} y={Ra.y} width={Ra.w} height={Ra.h} fill="none" stroke={C.grid} strokeWidth={3} opacity={oHalf} />{/* its edge would cut the growing "before" picture */}
+        <rect x={Rb.x} y={Rb.y} width={Rb.w} height={Rb.h} fill="none" stroke={C.grid} strokeWidth={3} />
+        <rect x={Rb.x - 4} y={Rb.y - 4} width={Rb.w + 8} height={Rb.h + 8} fill="none" stroke={C.gold} strokeWidth={6} opacity={pulse(f, tL + 24, 36)} />
+        <rect x={Ra.x - 4} y={Ra.y - 4} width={Ra.w + 8} height={Ra.h + 8} fill="none" stroke={C.gold} strokeWidth={6} opacity={pulse(f, tR + 6, 36)} />
+        <Lbl x={PB.x} y={hy - 36} t={`before · ${NAR.BEFORE}`} c={C.key} s={T.floor} o={oHalf * fin(f, tL + 16)} />
+        <Lbl x={PB.x + PB.w - hw} y={hy - 36} t={`after · ${NAR.AFTER}`} c={C.key} s={T.floor} o={oHalf * fin(f, tR)} />
+        <line x1={xl} y1={PB.y} x2={xl} y2={PB.y + PB.h} stroke={C.gold} strokeWidth={6} opacity={oLine} />
         {places.map(([nm, la, lo]) => { const q = P(la, lo), east = q[0] + 16 + tw(nm) > PB.x + PB.w - 20;   // Yangon: name left of its dot (it ran out of the picture)
           const x0 = east ? q[0] - 16 - tw(nm) : q[0] - 10, x1 = east ? q[0] + 10 : q[0] + 16 + tw(nm);
-          return <Place key={nm} p={q} t={nm} dx={east ? -16 : 16} dy={-30} r={8} a={east ? "end" : "start"} o={fin(f, 8) * nearO(x0, x1)} />; })}
-        <line x1={PB.x + PB.w - 40 - km50} y1={PB.y + PB.h - 30} x2={PB.x + PB.w - 40} y2={PB.y + PB.h - 30} stroke={C.key} strokeWidth={6} />
-        <Lbl x={PB.x + PB.w - 40 - km50 / 2} y={PB.y + PB.h - 64} t="50 km" c={C.key} s={T.floor} a="middle" o={nearO(PB.x + PB.w - 40 - km50 / 2 - tw("50 km") / 2, PB.x + PB.w - 40 - km50 / 2 + tw("50 km") / 2)} />
-        <Arrow p={[PB.x + 50, PB.y + 120]} q={[PB.x + 50, PB.y + 40]} color={C.key} w={5} head={20} />
-        <Lbl x={PB.x + 80} y={PB.y + 70} t="N" c={C.key} s={T.floor} o={nearO(PB.x + 80, PB.x + 80 + tw("N"))} />
-        <Lbl x={PB.x + 130} y={PB.y + 30 + 18} t={`before · ${NAR.BEFORE}`} c={C.key} s={T.floor} o={fin(f, tL) * oBef * nearO(PB.x + 130, PB.x + 130 + tw(`before · ${NAR.BEFORE}`))} />
+          return <Place key={nm} p={q} t={nm} dx={east ? -16 : 16} dy={-30} r={8} a={east ? "end" : "start"} o={fin(f, 8) * nearO(x0, x1) * oFull} />; })}
+        <g opacity={oFull}>
+          <line x1={PB.x + PB.w - 40 - km50} y1={PB.y + PB.h - 30} x2={PB.x + PB.w - 40} y2={PB.y + PB.h - 30} stroke={C.key} strokeWidth={6} />
+          <Arrow p={[PB.x + 50, PB.y + 120]} q={[PB.x + 50, PB.y + 40]} color={C.key} w={5} head={20} />
+        </g>
+        <Lbl x={PB.x + PB.w - 40 - km50 / 2} y={PB.y + PB.h - 64} t="50 km" c={C.key} s={T.floor} a="middle" o={oFull * nearO(PB.x + PB.w - 40 - km50 / 2 - tw("50 km") / 2, PB.x + PB.w - 40 - km50 / 2 + tw("50 km") / 2)} />
+        <Lbl x={PB.x + 80} y={PB.y + 70} t="N" c={C.key} s={T.floor} o={oFull * nearO(PB.x + 80, PB.x + 80 + tw("N"))} />
+        <Lbl x={PB.x + 130} y={PB.y + 30 + 18} t={`before · ${NAR.BEFORE}`} c={C.key} s={T.floor} o={oLine * oBef * nearO(PB.x + 130, PB.x + 130 + tw(`before · ${NAR.BEFORE}`))} />
         <Lbl x={PB.x + PB.w - 20} y={PB.y + 30 + 18} t={`after · ${NAR.AFTER}`} c={C.key} s={T.floor} a="end"
-          o={fin(f, tR) * oAft * nearO(PB.x + PB.w - 20 - tw(`after · ${NAR.AFTER}`), PB.x + PB.w - 20)} />
+          o={oLine * oAft * nearO(PB.x + PB.w - 20 - tw(`after · ${NAR.AFTER}`), PB.x + PB.w - 20)} />
         <Keyword f={f} text="Cyclone Nargis · Myanmar · 2008" at={[MX + 40, 120]} s={T.floor} appear={0} out={tKey - 20} />
         <Keyword f={f} text="false colour" at={[MX + 40, 210]} s={T.key} appear={tFalse} out={tKey - 20} />
         <Keyword f={f} text="water: dark blue or black" at={[MX + 40, 120]} s={T.floor} appear={tKey} out={tLeft - 20} />

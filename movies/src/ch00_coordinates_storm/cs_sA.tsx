@@ -134,6 +134,10 @@ const S01: React.FC = () => {
         <Lbl x={MX} y={215} t="hurricane: near America" c={C.key} s={T.floor} o={win(f, tNames, tTwo - 20)} />
         <Lbl x={MX} y={280} t="cyclone: near India, Bangladesh" c={C.key} s={T.floor} o={win(f, tNames + 20, tTwo - 20)} />
         <Lbl x={MX} y={350} t="= one kind of storm" c={C.gold} s={T.floor} o={win(f, AT(k, 4, "same kind"), tTwo - 20)} />
+        {/* #5b r2 S1: a keyword for S6 ("how the arrows change") and for S7 ("two real storms, each with its own job") */}
+        <Keyword f={f} text="Part 2: how $\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ change" at={[MX, 440]} s={T.key} appear={tTurn} out={tTwo - 20} />
+        <Keyword f={f} text="two real storms" at={[MX, 120]} s={T.key} appear={tTwo} />
+        <Lbl x={MX} y={205} t="each with its own job" c={C.key} s={T.floor} o={fin(f, tTwo + 20)} />
         <Keyword f={f} text="winds in 3-D · storm surge" at={[MX, 520]} s={T.floor} appear={tIan + 30} />
         <Keyword f={f} text="another ocean · floods" at={[MX, 620]} s={T.floor} appear={tAmp + 30} />
         <g opacity={win(f, tSix, tTwo - 20)}>
@@ -162,11 +166,12 @@ const S02: React.FC = () => {
   const f = useCurrentFrame(), k = K("s02_part1_recap");
   const O: Pt = [330, 660], u = 80;                // the Part 1 grid: 1 km = 80 px; #5b r1 S1: 60 px lower (the turning arc and r̂ reached y 10-50)
   const tR = SS(k, 1), tArc = SS(k, 2), tUnit = SS(k, 3), tRh = SS(k, 4), tTh = SS(k, 5), tPart = SS(k, 6), tIan = SS(k, 7), tTurn = SS(k, 8);
-  const thB = TH + 40 * prog(f, tTurn, tTurn + 120);
+  const tHold = tTurn + 30;                       // #5b r2 S3: the Ian panel holds 1 s into S8 (its 13 m/s label came on the last word)
+  const thB = TH + 40 * prog(f, tHold + 10, tHold + 130);
   const B = polar(O, 5 * u, thB);
   const er = unitV(thB), et = unitV(thB + 90);
   const [e1, e2] = cutAt(EQ_S02, String.raw`,\qquad `);
-  const oGrid = fout(f, tIan - 12, 12), oIan = win(f, tIan, tTurn - 20, 12), oG2 = fin(f, tTurn, 12);
+  const oGrid = fout(f, tIan - 12, 12), oIan = win(f, tIan, tHold, 12), oG2 = fin(f, tHold + 10, 12);
   const IB = { x: 140, y: 120, w: 720, h: 640 };
   const MB = boxAt(D.ian_c[0], D.ian_c[1], 0.9, IB.x, IB.y, IB.w, IB.h);
   const P = mapP(MB);
@@ -179,6 +184,11 @@ const S02: React.FC = () => {
         <g opacity={Math.max(oGrid, oG2)} clipPath="url(#s02grid)">
           {[1, 2, 3, 4, 5, 6].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.grid} strokeWidth={2} />)}
           {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={polar(O, 6.3 * u, a)[0]} y2={polar(O, 6.3 * u, a)[1]} stroke={C.grid} strokeWidth={2} />)}
+          {/* #5b r2 cosmetic: on S0 ("we met polar coordinates") the grid itself is the picture: brighter, dimming to the usual grid on S1 */}
+          <g opacity={0.55 * (1 - prog(f, tR, tR + 30))}>
+            {[1, 2, 3, 4, 5, 6].map((r) => <circle key={r} cx={O[0]} cy={O[1]} r={r * u} fill="none" stroke={C.local} strokeWidth={2.5} />)}
+            {Array.from({ length: 12 }, (_, i) => i * 30).map((a) => <line key={a} x1={O[0]} y1={O[1]} x2={polar(O, 6.3 * u, a)[0]} y2={polar(O, 6.3 * u, a)[1]} stroke={C.local} strokeWidth={2.5} />)}
+          </g>
           <line x1={O[0]} y1={O[1]} x2={B[0]} y2={B[1]} stroke={C.ink} strokeWidth={6} opacity={fin(f, tR)} />
           <path d={arcD(O, 90, 0, thB)} fill="none" stroke={C.local} strokeWidth={6} opacity={fin(f, tR)} />
           <Lbl x={mix(O[0], B[0], 0.5) - 30} y={mix(O[1], B[1], 0.5) - 20} t="r" c={C.ink} s={T.key} a="end" o={fin(f, tR)} />
@@ -205,19 +215,26 @@ const S02: React.FC = () => {
         <path d={linesPath(P, D.coast_ian)} fill="none" stroke={C.key} strokeWidth={2.5} opacity={0.8} clipPath="url(#s02ian)" />
         <circle cx={c0[0]} cy={c0[1]} r={rr} fill="none" stroke={C.local} strokeWidth={4} />
         <circle cx={c0[0]} cy={c0[1]} r={8} fill={C.local} />
+        {/* #5b r2 S3: "twenty five kilometres out" drawn: the radius (ink) and its length, on those words */}
+        <line x1={c0[0]} y1={c0[1]} x2={c0[0] - rr * Math.SQRT1_2} y2={c0[1] + rr * Math.SQRT1_2} stroke={C.ink} strokeWidth={4} opacity={fin(f, AT(k, 7, "twenty five"))} />
+        <Lbl x={c0[0]} y={c0[1] - 62} t={`$r$ = ${RING.r_km} km`} c={C.ink} s={T.floor} a="middle" o={fin(f, AT(k, 7, "twenty five"))} />
         {[0, 18, 36, 54].map((i) => { const az = RING.az[i] * D2R, p0: Pt = [c0[0] + rr * Math.cos(az), c0[1] - rr * Math.sin(az)], s = 4.2;
           return <g key={i}>
             <DashArrow f={f} p={p0} q={[p0[0] - Math.sin(az) * RING.v * s, p0[1] - Math.cos(az) * RING.v * s]} w={8} head={28} />
             <DashArrow f={f} p={p0} q={[p0[0] + Math.cos(az) * RING.vr * s, p0[1] - Math.sin(az) * RING.vr * s]} c={C.neg} w={8} head={28} />
           </g>; })}
-        <SideCallout f={f} lines={`≈ ${SAY.vt} m/s round`} at={[MX, 300]} appear={AT(k, 7, "thirty five")} out={tTurn - 20} target={[c0[0] + rr + 6, c0[1] - 140]} c={C.first} />
-        <SideCallout f={f} lines={`≈ ${Math.abs(SAY.vr)} m/s in  (−)`} at={[MX, 420]} appear={AT(k, 7, "thirteen")} out={tTurn - 20} target={[c0[0] + rr - 40, c0[1] + 30]} c={C.neg} />
+        <SideCallout f={f} lines={`≈ ${SAY.vt} m/s round`} at={[MX, 300]} appear={AT(k, 7, "thirty five")} out={tHold} target={[c0[0] + rr + 6, c0[1] - 140]} c={C.first} />
+        <SideCallout f={f} lines={`≈ ${Math.abs(SAY.vr)} m/s in  (−)`} at={[MX, 420]} appear={AT(k, 7, "in at about")} out={tHold} target={[c0[0] + rr - 40, c0[1] + 30]} c={C.neg} />
       </Svg>
-      <TeX s={String.raw`\overline{u_\theta}\approx35\ \mathrm{m/s},\qquad \overline{u_r}\approx-13\ \mathrm{m/s}`} x={MX} y={580} size={50} o={oIan * fin(f, AT(k, 7, "thirteen") + 20)} />
+      <TeX s={String.raw`\overline{u_\theta}\approx35\ \mathrm{m/s},\qquad \overline{u_r}\approx-13\ \mathrm{m/s}`} x={MX} y={580} size={50} o={oIan * fin(f, AT(k, 7, "thirteen"))} />
       <SourceBelow text={SRC.hrrr18} pic={IB} w={760} o={oIan} name="s02 src" />
       <Svg>
         <Keyword f={f} text="Part 1: polar coordinates" at={[MX, 120]} s={T.key} appear={0} out={tR + 60} />
-        <Keyword f={f} text="$\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ turn as we go round" at={[MX, 300]} s={T.key} appear={tTurn} />
+        {/* #5b r2 S2 (1h): r, θ and the viewpoint written on S1 (they were only spoken) */}
+        <Lbl x={MX} y={220} t="$r$: distance from the origin" c={C.local} s={T.floor} o={win(f, tR + 10, tArc - 10)} />
+        <Lbl x={MX} y={285} t="$\theta$: angle from east," c={C.local} s={T.floor} o={win(f, AT(k, 1, "theta"), tArc - 10)} />
+        <Lbl x={MX} y={345} t="anticlockwise (seen from above)" c={C.local} s={T.floor} o={win(f, AT(k, 1, "anticlockwise"), tArc - 10)} />
+        <Keyword f={f} text="$\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ turn as we go round" at={[MX, 300]} s={T.key} appear={tHold + 18} />
         <Keyword f={f} text="how fast?" at={[MX, 420]} s={T.key} appear={SS(k, 9)} />
       </Svg>
     </Scene>

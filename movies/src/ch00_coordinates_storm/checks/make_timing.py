@@ -149,7 +149,118 @@ def final(tts: Path) -> int:
     return 0
 
 
+def recue(write: bool) -> int:
+    """RECUE mode (#5b fix 2, review 2 S11, 2026-11-06): re-segment the caption cues ONLY; the audio, timing.json's sentence times
+    and the cue words stay exactly as they are.
+
+    tools/tts.py merges a cue shorter than 1 s into the NEXT cue even across a sentence end; when that would not fit in 2 × 42
+    characters it keeps the short cue. Both happen in this movie (00:53.125 "In this part," 0.92 s; 31:59.032-32:02.953
+    "Bangladesh. Its centre then passed close to Kolkata," spanning the s21 S4/S5 gap). Here the cues are rebuilt from timing.json
+    with tts.py's own split_for_cues / wrap and the same character-proportional times, but a short cue is merged only WITHIN its
+    sentence: forward if it fits, else backward, else the short cue and its neighbour are re-split at the word boundary that
+    balances them (both ≤ 2 lines). Checks: the cue words equal the sentence words in order, every cue lies inside one sentence,
+    ≤ 2 lines × 42 characters, 1-7 s; the cps warnings are reported. Prints every cue that differs from the current en.vtt.
+    usage: make_timing.py --recue [--write]   (without --write: dry run)
+    """
+    import types
+    sys.modules.setdefault("soundfile", types.ModuleType("soundfile"))   # tts.py imports it at the top; not needed for cues
+    sys.path.insert(0, str(ROOT / "tools"))
+    import tts as T  # noqa: N812
+    tm = json.loads((OUT / "timing.json").read_text(encoding="utf-8"))
+    cues: list[list] = []                       # [t0, t1, text, sentence index]
+    sents = [x for s in tm["scenes"] for x in s["sentences"]]
+    for si, x in enumerate(sents):
+        sent, dur, start = x["text"], x["dur"], x["start"]
+        parts = T.split_for_cues(sent, dur)
+        n = sum(len(p) for p in parts)
+        c0, mine = start, []
+        for p in parts:
+            c1 = c0 + dur * len(p) / n
+            mine.append([c0, c1, p, si])
+            c0 = c1
+        # short cues: merge inside the sentence only
+        i = 0
+        while i < len(mine):
+            a = mine[i]
+            if a[1] - a[0] >= T.CUE_MIN or len(mine) == 1:
+                i += 1
+                continue
+            if i + 1 < len(mine) and len(T.wrap(a[2] + " " + mine[i + 1][2])) <= T.MAX_LINES:
+                mine[i:i + 2] = [[a[0], mine[i + 1][1], a[2] + " " + mine[i + 1][2], si]]
+                continue
+            if i > 0 and len(T.wrap(mine[i - 1][2] + " " + a[2])) <= T.MAX_LINES:
+                mine[i - 1:i + 1] = [[mine[i - 1][0], a[1], mine[i - 1][2] + " " + a[2], si]]
+                i -= 1
+                continue
+            j = i + 1 if i + 1 < len(mine) else i - 1     # rebalance with a neighbour
+            lo, hi = min(i, j), max(i, j)
+            words = (mine[lo][2] + " " + mine[hi][2]).split()
+            t0, t1 = mine[lo][0], mine[hi][1]
+            best = None
+            for kk in range(1, len(words)):
+                l, r = " ".join(words[:kk]), " ".join(words[kk:])
+                if len(T.wrap(l)) > T.MAX_LINES or len(T.wrap(r)) > T.MAX_LINES:
+                    continue
+                score = abs(len(l) - len(r)) - (10 if re.search(r"[,;:]$", l) else 0)
+                if best is None or score < best[0]:
+                    best = (score, l, r)
+            if best is None:
+                print(f"FAIL sentence {si}: cannot rebalance the short cue {a[2]!r}")
+                return 1
+            _, l, r = best
+            tc = t0 + (t1 - t0) * len(l) / (len(l) + len(r))
+            mine[lo:hi + 1] = [[t0, tc, l, si], [tc, t1, r, si]]
+            i = lo + 2
+        cues += mine
+    # checks
+    bad = []
+    if " ".join(c[2] for c in cues).split() != " ".join(x["text"] for x in sents).split():
+        bad.append("cue words differ from the sentence words")
+    for k_, c in enumerate(cues):
+        x = sents[c[3]]
+        if c[0] < x["start"] - 1e-6 or c[1] > x["end"] + 1e-6:
+            bad.append(f"cue {k_ + 1} leaves its sentence")
+        lines = T.wrap(c[2])
+        if len(lines) > T.MAX_LINES or any(len(ln) > T.MAX_LINE for ln in lines):
+            bad.append(f"cue {k_ + 1}: {lines}")
+        d = c[1] - c[0]
+        if d > T.CUE_MAX + 1e-6 or (d < T.CUE_MIN - 1e-6 and len([q for q in cues if q[3] == c[3]]) > 1):
+            bad.append(f"cue {k_ + 1}: {d:.2f} s")
+    if bad:
+        print("FAIL", *bad, sep="\n  ")
+        return 1
+    # differences from the current en.vtt
+    old = (OUT / "en.vtt").read_text(encoding="utf-8").strip().split("\n\n")[1:]
+    oldc = [(b.split("\n")[0], " ".join(b.split("\n")[1:])) for b in old]
+    newc = [(f"{T.fmt_ts(c[0], '.')} --> {T.fmt_ts(c[1], '.')}", c[2]) for c in cues]
+    so, sn = set(oldc), set(newc)
+    print(f"recue: {len(oldc)} cues -> {len(newc)} cues; removed {len(so - sn)}, added {len(sn - so)}")
+    for c in oldc:
+        if c not in sn:
+            print("  - ", c[0], "|", c[1])
+    for c in newc:
+        if c not in so:
+            print("  + ", c[0], "|", c[1])
+    cps = [(c[2], len(c[2]) / (c[1] - c[0])) for c in cues if len(c[2]) / (c[1] - c[0]) > T.MAX_CPS]
+    print(f"  cues above {T.MAX_CPS} cps: {len(cps)}", *[f"{v:.1f} cps {t!r}" for t, v in cps[:8]], sep="\n    ")
+    if write:
+        vtt, srt = ["WEBVTT", ""], []
+        for i, (c0, c1, txt, _) in enumerate(cues, 1):
+            lines = T.wrap(txt)
+            vtt += [f"{T.fmt_ts(c0, '.')} --> {T.fmt_ts(c1, '.')}", *lines, ""]
+            srt += [str(i), f"{T.fmt_ts(c0, ',')} --> {T.fmt_ts(c1, ',')}", *lines, ""]
+        (OUT / "en.vtt").write_text("\n".join(vtt), encoding="utf-8")
+        (OUT / "en.srt").write_text("\n".join(srt), encoding="utf-8")
+        tm["cues"] = len(cues)
+        tm["recue"] = "make_timing.py --recue (2026-11-06, #5b fix 2 S11): short cues merged within their sentence only; audio and words unchanged"
+        (OUT / "timing.json").write_text(json.dumps(tm, indent=1, ensure_ascii=False), encoding="utf-8")
+        print("  wrote en.vtt, en.srt, timing.json (cues)")
+    return 0
+
+
 def main() -> int:
+    if "--recue" in sys.argv:
+        return recue("--write" in sys.argv)
     if "--final" in sys.argv:
         return final(Path(sys.argv[sys.argv.index("--final") + 1]))
     sbp = OUT / "storyboard.yaml"

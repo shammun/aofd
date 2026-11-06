@@ -101,7 +101,9 @@ const S09: React.FC = () => {
         { lhs: String.raw`\Delta s`, rhs: String.raw`=v\,\Delta t`, at: tDt },
         { lhs: String.raw`\text{arc rule: }\Delta s`, rhs: String.raw`=r\,\Delta\theta`, at: tArc },
         { lhs: String.raw`\Delta\theta`, rhs: String.raw`=\dfrac{\Delta s}{r}=\dfrac{v\,\Delta t}{r}`, at: tAng },
-        { lhs: String.raw`\dfrac{\Delta\theta}{\Delta t}`, rhs: String.raw`=\dfrac{v\,\Delta t}{r\,\Delta t}=\dfrac{v}{r}`, at: tDiv },
+        // #5b r2 S5: both Δt struck on "Δt cancels" (as the two r's are in s11)
+        { lhs: String.raw`\dfrac{\Delta\theta}{\Delta t}`, rhs: f < tDiv + 20 ? String.raw`=\dfrac{v\,\Delta t}{r\,\Delta t}=\dfrac{v}{r}`
+          : String.raw`=\dfrac{v\,\cancel{\Delta t}}{r\,\cancel{\Delta t}}=\dfrac{v}{r}`, at: tDiv },
       ]} />
       <Svg><Lbl x={MX} y={645} t="Δt cancels" c={C.gold} s={T.floor} o={win(f, tDiv + 20, tRate - 20)} /></Svg>{/* K6 round 1: under the taller fraction rows */}
       <TeX s={EQ_S09} x={MX} y={705} size={88} o={fin(f, tRate) * fout(f, tNum - 6)} glow={pulse(f, tRate, 20)} />
@@ -367,7 +369,8 @@ const S14: React.FC = () => {
         <Lbl x={MX} y={220} t="pressure force: inward" c={C.second} s={T.floor} o={win(f, tP, tM1 - 20)} />
         <Lbl x={MX} y={280} t="Earth's spin: ≈ 1/20, outward" c="#b49cf0" s={T.floor} o={win(f, tEarth, tM1 - 20)} />
         <Lbl x={MX} y={335} t="(as seen on the turning Earth)" c="#b49cf0" s={T.floor} b={false} o={win(f, tEarth, tM1 - 20)} />
-        <Lbl x={MX} y={390} t="$\Omega$: Earth's spin · $\varphi$: latitude" c={C.local} s={T.floor} o={win(f, AT(k, 16, "pushes the other way"), tM1 - 20)} />
+        {/* #5b r2 S4: f named here; Ω (with its unit) and φ (Ian's latitude) as rows of the stack below */}
+        <Lbl x={MX} y={390} t="$f$: Coriolis parameter" c={C.local} s={T.floor} o={win(f, AT(k, 16, "pushes the other way"), tM1 - 20)} />
         <Lbl x={RC[0]} y={790} t="(violet arrow drawn 6× longer)" c={C.muted} s={T.floor} a="middle" o={win(f, tEarth, tM1 - 20)} />
         {/* K6 round 1: under the ring (the balance rows now reach y 840 in the text column) */}
         <Lbl x={RC[0]} y={845} t="why: Coriolis movie" c={C.muted} s={T.floor} a="middle" o={win(f, AT(k, 16, "a little stronger"), tM1 - 20)} />
@@ -383,11 +386,17 @@ const S14: React.FC = () => {
       ]} />
       {/* fix 0 B1: the balance in numbers on S16 (f v = 6.51e-5 × 34.8 ≈ 0.0023 m/s², ratio 21 from data/cs.json) */}
       {/* #5b r1 M10 (A1, A6): the inputs of 0.0023 on screen (f = 2Ω sin φ with Ω and Ian's latitude), and one rounding in the sum */}
-      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tM1 - 10)} rows={[
-        { rhs: String.raw`f\,v=2\Omega\sin\varphi\cdot v`, at: AT(k, 16, "pushes the other way") },
+      {/* #5b r2 S4: two stacks, one after the other: (A) the inputs Ω (unit) and φ (Ian's latitude) and the product, to "twenty times
+          weaker"; (B) the ratio and the sum, which restate 0.048 and 0.0023 (one stack of eight rows ran past the content area) */}
+      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, AT(k, 16, "twenty times weaker") - 6)} rows={[
+        { rhs: String.raw`\Omega=7.29\times10^{-5}\,\mathrm{s^{-1}}\text{: Earth's spin rate}`, at: AT(k, 16, "pushes the other way"), c: C.local },
+        { rhs: String.raw`\varphi=${nf(D.ian_c[0], 1)}^\circ\text{: Ian's latitude}`, at: AT(k, 16, "pushes the other way") + 6, cont: true, c: C.local },
+        { rhs: String.raw`f\,v=2\Omega\sin\varphi\cdot v`, at: AT(k, 16, "pushes the other way") + 12, cont: true },
         { rhs: String.raw`=2\times7.29\times10^{-5}\times\sin${nf(D.ian_c[0], 1)}^\circ\times${nf(RING.v, 1)}`, at: AT(k, 16, "pushes the other way") + 22, cont: true },
         { rhs: String.raw`\approx${nf(RING.f * RING.v, 4)}\ \mathrm{m/s^2}\ \text{(out)}`, at: AT(k, 16, "a little outward"), cont: true },
-        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") },
+      ]} />
+      <CalcStack f={f} x={MX} y={440} size={44} maxLines={4} o={fout(f, tM1 - 10)} rows={[
+        { rhs: String.raw`\dfrac{${nf(RING.acc, 3)}\ \text{(turning)}}{${nf(RING.f * RING.v, 4)}}\approx${Math.round(RING.fratio)}`, at: AT(k, 16, "twenty times weaker") + 6 },
         { rhs: String.raw`\text{pressure push}\approx${nf(RING.acc, 3)}+${nf(RING.f * RING.v, 4)}`, at: AT(k, 16, "a little stronger") },
         { rhs: String.raw`\approx${(Number(nf(RING.acc, 3)) + Number(nf(RING.f * RING.v, 4))).toFixed(3)}\ \mathrm{m/s^2}`, at: AT(k, 16, "a little stronger") + 20, cont: true },
       ]} />
@@ -500,11 +509,12 @@ const S16: React.FC = () => {
       <Svg>
         <Keyword f={f} text="three parts" at={[MX + 20, 120]} s={T.key} appear={0} out={tZh - 20} />
         <Lbl x={MX + 20} y={210} t="in or out · round · up or down" c={C.key} s={T.floor} o={win(f, tW + 20, tZh - 20)} />
-        <Keyword f={f} text="ẑ: the same everywhere" at={[MX + 20, 120]} s={T.key} appear={tZh} out={tOnly - 20} />
+        {/* #5b r2 cosmetic: both s16 beats in the Keyword style (sans text, maths in $…$); the second was a serif orange TeX line */}
+        <Keyword f={f} text="$\hat{\mathbf z}$: the same everywhere" at={[MX + 20, 120]} s={T.key} appear={tZh} out={tOnly - 20} />
+        <Keyword f={f} text="only $\hat{\mathbf r}$, $\hat{\boldsymbol\theta}$ turn" at={[MX + 20, 120]} s={T.key} appear={tOnly} out={tAll - 20} />
         <Keyword f={f} text="works in 3-D too" at={[MX + 20, 120]} s={T.key} appear={tAll} />
       </Svg>
       <TeX s={EQ_S16} x={MX + 20} y={380} size={56} o={fin(f, tEq)} />
-      <TeX s={String.raw`\text{only }\hat{\mathbf r},\ \hat{\boldsymbol\theta}\text{ turn}`} x={MX + 20} y={120} size={T.key} c={C.second} o={win(f, tOnly, tAll - 20)} />
       <SourceBelow text={SRC.goes} pic={{ x: 20, y: 20, w: 1040, h: 800 }} w={1400} name="s16 src" />
     </Scene>
   );
@@ -538,7 +548,9 @@ const S17: React.FC = () => {
       </GeoMap>
       <Svg>
         <Keyword f={f} text="where was the eye?" at={[MX, 120]} s={T.key} appear={0} out={tRing - 20} />
-        <ColourBar x={MX} y={250} w={420} lut={LUT_DBZ} lo={0} hi={60} unit="dBZ" title="radar echo" o={oR} ticks={[{ v: 0, t: "0" }, { v: 30, t: "30" }, { v: 60, t: "60" }]} />
+        <ColourBar x={MX} y={250} w={420} lut={LUT_DBZ} lo={0} hi={60} unit="dBZ" title="radar echo strength" o={oR} ticks={[{ v: 0, t: "0" }, { v: 30, t: "30" }, { v: 60, t: "60" }]} />
+        {/* #5b r2 S6: the unit dBZ said in plain words */}
+        <Lbl x={MX} y={372} t="dBZ: higher = heavier rain" c={C.local} s={T.floor} o={oR} />
         <SideCallout f={f} lines="eyewall ≈ 30 km radius" at={[MX, 120]} appear={tRing} out={tModel - 20} target={[PB.x + PB.w / 2 + ewR * 0.7, PB.y + PB.h / 2 - ewR * 0.7]} s={T.floor} c={C.gold} />
         <Lbl x={MX} y={440} t="radar eye" c={C.key} s={T.floor} o={win(f, tBest, tModel - 20)} />
         <SpeedBar x={MX} y={250} w={420} hi={55} o={oM} />
@@ -744,7 +756,7 @@ const FlowArrow: React.FC<{ f: number; a: Pt; b: Pt; w?: number; head?: number; 
 );
 const S20: React.FC = () => {
   const f = useCurrentFrame(), k = K("s20_ian_curtain");
-  const tAvg = SS(k, 1), tDep = SS(k, 2), tSlice = SS(k, 3), tName = SS(k, 4), tCol = SS(k, 5), tMin = SS(k, 7), tTop = SS(k, 8), tLines = SS(k, 9), tVt = SS(k, 10),
+  const tAvg = SS(k, 1), tDep = SS(k, 2), tSlice = SS(k, 3), tName = SS(k, 4), tMin = SS(k, 7), tTop = SS(k, 8), tLines = SS(k, 9), tVt = SS(k, 10),
     // fix 0 B13: S12 became four sentences (quick check · in through the side · up through the lid · the radar): later indices +3
     tWeak = SS(k, 11), tMust = SS(k, 12), tSide = SS(k, 13), tLid = SS(k, 14), tRadar = SS(k, 15), tThree = AT(k, 15, "about three metres"),
     tTower = AT(k, 15, "single towers"), tEw = SS(k, 16), tIUO = SS(k, 17), tMore = SS(k, 18);
@@ -836,10 +848,12 @@ const S20: React.FC = () => {
         </g>
         <Keyword f={f} text="average round each ring" at={[MX, 120]} s={T.key} appear={0} out={tSlice - 20} />
         {/* #5b r1 S13: the new notation named */}
-        <Lbl x={MX} y={470} t="$\Sigma$: add up the 72 values" c={C.local} s={T.floor} o={win(f, tAvg + 30, tSlice + 40)} />
-        <Lbl x={MX} y={530} t="$\overline{u_r}$: the ring average" c={C.local} s={T.floor} o={win(f, tAvg + 50, tSlice + 40)} />
+        {/* #5b r2 N-M1: the formula and its names leave by tSlice, so the section's colour bar can come in WITH the section */}
+        <Lbl x={MX} y={470} t="$\Sigma$: add up the 72 values" c={C.local} s={T.floor} o={win(f, tAvg + 30, tSlice - 10)} />
+        <Lbl x={MX} y={530} t="$\overline{u_r}$: the ring average" c={C.local} s={T.floor} o={win(f, tAvg + 50, tSlice - 10)} />
         <Keyword f={f} text="radius-height section" at={[MX, 120]} s={T.key} appear={tName} out={tMust - 20} />
-        <URBar x={MX} y={250} w={420} o={fin(f, tCol) * oH} />
+        {/* #5b r2 N-M1 (D2): the bar comes in with the section picture (it waited for S5, 11.5 s of colours without a bar) */}
+        <URBar x={MX} y={250} w={420} o={fin(f, tSlice) * oH} />
         <ColourBar x={MX} y={250} w={420} lut={LUT_W} lo={0} hi={WV.tdr.lim} unit="m/s" title="rising air (radar)" o={xf}
           ticks={[{ v: 0, t: "≤ 0" }, { v: 2, t: "2" }, { v: 4, t: "4" }]} />
         {/* K6 round 1: the three callouts 14 px lower (the top one sat 12 px under the colour bar's "+ out") */}
@@ -852,13 +866,13 @@ const S20: React.FC = () => {
         {/* K6 round 1: under the (now taller) box rows */}
         <Keyword f={f} text="measured: aircraft radar" at={[MX, 120]} s={T.key} appear={tRadar} out={tIUO - 20} />
         <SideCallout f={f} lines={`≈ ${nf(pk[0], 1)} m/s, ${nf(pk[1], 1)} km up`} at={[MX, 440]} appear={tThree} out={tIUO - 20} target={[pkP[0] + 16, pkP[1]]} s={T.floor} c={C.gold} />
-        <Lbl x={MX} y={520} t={`single towers ≈ 10-${Math.round(WV.tdr.point_max[0])} m/s`} c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />
+        <Lbl x={MX} y={520} t="single towers ≈ 10 m/s" c={C.key} s={T.floor} o={win(f, tTower, tIUO - 20)} />{/* #5b r2 cosmetic (A6): as the voice says ("near ten") */}
         <Lbl x={MX} y={600} t="rises in the eyewall" c={C.key} s={T.floor} o={fin(f, tEw)} />
         <Lbl x={MX} y={660} t="leaning outward" c={C.local} s={T.floor} o={fin(f, tEw + 15)} />
         <Keyword f={f} text="in, up and out" at={[MX, 120]} s={T.key} c={C.gold} appear={tIUO} out={tMore - 20} />
         <Keyword f={f} text="more: How tropical cyclones form" at={[MX, 120]} s={T.floor} appear={tMore} />
       </Svg>
-      <TeX s={EQ_S20} x={MX} y={330} size={50} o={win(f, tAvg, tSlice + 40)} />
+      <TeX s={EQ_S20} x={MX} y={330} size={50} o={win(f, tAvg, tSlice - 10)} />
       {/* fix 0 B13: the box continuity, one row per sentence (in = up: 2πr h|u_r| = πr² w) */}
       {/* K6 round 1: the w row ran to x 1854: the formula, then the numbers on "two times one thousand"; the column 15 px higher */}
       {/* K6 r4: two stacks, one after the other (a sliding stack ran its old rows up into the colour bar) */}
