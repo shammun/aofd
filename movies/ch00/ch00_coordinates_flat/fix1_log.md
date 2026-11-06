@@ -316,3 +316,21 @@ Sync: `cf_fix1_sync.py` now also reads `spliced_fix2` (idempotent); the s11 calc
 - Mix NOT run: 13.5 GB RAM free (< 18 GB rule). Command (music identical, ice-polar seed 23; cue sheet validated):
   `.venv/Scripts/python.exe tools/sound/mix.py --narration "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/fix2/tts/narration.wav" --cues movies/ch00/ch00_coordinates_flat/sound.yaml --out-dir "G:/Geophysical Fluid Dynamics/aofd-data/scratch/movies/ch00_coordinates_flat/build1/sound7"`
   then rename `build1/sound7/narration_music.wav` → `narration_music_cf.wav`. `cf_render.sh` and `cf_run.py join` now default to `sound7`.
+
+## K6 after fix 2 (k6f2: 404 hits → k6f2z: 0)
+| tag | frames | hits |
+|---|---|---|
+| k6f2 | 3680 (orchestrator) | 404 (367 text-cbar in s25; s16, s15, s18, s07, s11 text-text) |
+| k6f2b | 1168 (s07, s11, s15, s16, s18, s25) | 122 ("47" vs colour bar 108; s15 cos 30° rows 12; s11 keyword 2) |
+| k6f2c | 851 (s11, s15, s25) | 0 |
+| **k6f2z** | **3680, full** | **0 (PASS, 686 INFO)** |
+
+Fixes (source only; the S28 end-card change of 966bb77 is kept):
+- s25: colour bar back at y 200; the graph moved down and made shorter (A y 300 → 340, h 300 → 260), so the bar is clear of the keywords and of "47".
+- s16: "at right angles, like the old axes" moved from y 790 to 830.
+- s15: the cos/sin 30° stack moved from y 250 to 230 (row heights 132 / 128 / 110); EQ_S15 moved from y 630 to 652.
+- s18: the number matrix moved from x 1250 to 1272, clear of "α = 30°:".
+- s07: the two 1-rad rows are 135 px tall (were 125).
+- s11: the U1 stack moved from y 370 to 390 (the tick's yTh follows). The keyword "without the θ̂ formula" moved from y 300 to 294 and now leaves at "to about" − 14 f (before the long rows slide up through it).
+
+Static gates after these fixes: tsc 0 · at_check 496 / 0 · swap_check 0 · cam_speed 0 · eq_check 23/23 · SSR 9323 scene-frames, 0 errors.

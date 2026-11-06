@@ -492,8 +492,8 @@ const S07: React.FC = () => {
       <TeX s={String.raw`\theta=\dfrac{s}{r}`} x={1100} y={320} size={60} c={C.local} o={fin(f, tDiv) * fout(f, tEasy - 18)} />
       <CalcStack f={f} x={1300} y={500} size={56} rows={[
         { lhs: String.raw`2\pi\ \mathrm{rad}`, rhs: String.raw`=360^\circ,\quad 2\pi\approx6.283`, at: t57, out: tEasy - 18 },
-        { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\dfrac{360^\circ}{2\pi}`, at: AT(k, 5, "three hundred and sixty"), out: tEasy - 18, h: 125 },
-        { rhs: String.raw`=\dfrac{360^\circ}{6.283}\approx57.3^\circ`, at: AT(k, 5, "about fifty seven"), out: tEasy - 18, cont: true, h: 125 },
+        { lhs: String.raw`1\ \mathrm{rad}`, rhs: String.raw`=\dfrac{360^\circ}{2\pi}`, at: AT(k, 5, "three hundred and sixty"), out: tEasy - 18, h: 135 },
+        { rhs: String.raw`=\dfrac{360^\circ}{6.283}\approx57.3^\circ`, at: AT(k, 5, "about fifty seven"), out: tEasy - 18, cont: true, h: 135 },
       ]} />
       {/* fix 1c C6: the turn in degrees, then the two rings, then the ratio */}
       <CalcStack f={f} x={1300} y={300} size={56} maxLines={3} rows={[

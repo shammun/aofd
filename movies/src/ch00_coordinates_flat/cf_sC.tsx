@@ -420,7 +420,7 @@ const S25: React.FC = () => {
   const Bend = boxAt(26.6, -82.3, 3.5, PB.x, PB.y, PB.w, PB.h);
   const B = zoomBox(boxAt(IAN.c[0], IAN.c[1], 1.08, PB.x, PB.y, PB.w, PB.h), Bend, prog(f, 0, 30));
   const P = mapP(B);
-  const A: Ax = { x: 1180, y: 300, w: 560, h: 300, xr: [0, 360], yr: [-50, 50] };   // fix 1 Must 3: room for the speed bar above
+  const A: Ax = { x: 1180, y: 340, w: 560, h: 260, xr: [0, 360], yr: [-50, 50] };   // K6 k6f2: 30 px lower, the colour bar (y 200) clear of the keywords and "47"   // fix 1 Must 3: room for the speed bar above
   const az = RING.az as number[];
   const runUV = prog(f, tUV, tV + 30), runP = prog(f, tTeal - 10, tRose + 40);
   const mi = Math.min(71, Math.floor(prog(f, tUV, SE(k, 12)) * 72));
@@ -477,7 +477,7 @@ const S25: React.FC = () => {
         <Lbl x={1572} y={745} t="northward v" c={C.second} s={T.floor} o={fin(f, tV) * dim} />
         <line x1={1180} y1={805} x2={1240} y2={805} stroke={C.first} strokeWidth={7} opacity={fin(f, tTeal)} />
         <line x1={1500} y1={805} x2={1560} y2={805} stroke={C.neg} strokeWidth={7} strokeDasharray="14 8" opacity={fin(f, tRose)} />
-        <SpeedBar x={1480} y={186} w={240} />
+        <SpeedBar x={1480} y={200} w={240} />
         <Keyword f={f} text="why polar here?" at={[1180, 96]} appear={0} out={tSw - 18} />
         <Keyword f={f} text="u, v swing: the wind turns" at={[1180, 96]} s={T.floor} appear={tSw} out={tNeg - 18} />
         <Keyword f={f} text="72 − 14 = 58 points in" at={[1180, 96]} s={T.floor} c={C.neg} appear={tNeg} out={tTwo - 18} />

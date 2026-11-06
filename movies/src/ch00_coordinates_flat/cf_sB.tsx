@@ -346,7 +346,7 @@ const S11: React.FC = () => {
   const ins = fin(f, tTurn, 14) * u1out;
   const KO: Pt = [400, 520], KR = 280, KB = onC(KO, KR, TH), KL = 160;   // keep picture: circle, balloon at θ ≈ 53°
   // the final θ̂ row (5th-last line of the U1 stack) sits on the stack's 2nd visible line: y 370 + one 46-px row (1.42 × 46)
-  const yTh = 370 + 46 * 1.42 + (46 * 1.42) / 2;
+  const yTh = 390 + 46 * 1.42 + (46 * 1.42) / 2;
   return (
     <Scene>
       <Svg>
@@ -456,7 +456,7 @@ const S11: React.FC = () => {
       <Tip p={tip} v={ER} L={150} s={RHAT} o={pts * fin(f, tDotW - 10)} d={36} size={50} />
       <Tip p={B0} v={ER} L={90} s={RHAT} d={30} size={50} o={ins} />
       {/* fix 2 (review 2 Should 2): θ̂ set in KaTeX (the sans keyword drew the combining hat offset) */}
-      <TeX s={String.raw`\text{without the }\hat{\boldsymbol\theta}\text{ formula}`} x={1080} y={300} size={48} c={C.gold} o={fin(f, tLast, 8) * fout(f, tKeep - 12)} />
+      <TeX s={String.raw`\text{without the }\hat{\boldsymbol\theta}\text{ formula}`} x={1080} y={294} size={48} c={C.gold} o={fin(f, tLast, 8) * fout(f, tAft - 14)} />   {/* K6 k6f2b: leaves before the long U1 rows slide up through it */}
       <Tip p={KB} v={ER} L={KL} s={RHAT} o={keepO * fin(f, AT(k, 24, "r hat points away"))} />
       <Tip p={KB} v={ET} L={KL} s={THAT} o={keepO * fin(f, AT(k, 24, "theta hat points round"))} />
       <TeX s={EQ_S09} x={1080} y={340} size={60} c={C.second} o={keepO * fin(f, AT(k, 24, "turned by ninety"))} />
@@ -479,7 +479,7 @@ const S11: React.FC = () => {
       {/* U1 column: one line per spoken phrase */}
       {/* K6 after fix 1c: "=" column 1250 → 1290 (the "before" label clears the inset), long rows split at their "≈"/"=", two lines
           visible (the tallest pair, x and y, is six rows: y 370-760) */}
-      <CalcStack f={f} x={1290} y={370} size={46} maxLines={2} o={u1out} rows={[
+      <CalcStack f={f} x={1290} y={390} size={46} maxLines={2} o={u1out} rows={[   /* K6 k6f2: 20 px lower, clear of the keyword while rows slide out */
         { lhs: String.raw`\Delta\theta`, rhs: String.raw`=0.1^\circ=0.1\times\pi/180`, at: tRadA },
         { rhs: String.raw`\approx0.001745\ \mathrm{rad}`, at: tRadB, cont: true },
         { lhs: "r", rhs: String.raw`=5\ \mathrm{km}=5000\ \mathrm{m}`, at: tArc },
@@ -779,11 +779,11 @@ const S15: React.FC = () => {
       {/* K6 after fix 1c: "cos α" starts right of the turned y′ ruler (it ran across it), "sin α" clears the α label */}
       <TeX s={f < tNum ? String.raw`\cos\alpha` : String.raw`\cos\alpha\approx0.866`} x={O15[0] + 48} y={O15[1] + 46} size={48} c={C.second} o={fin(f, tCS)} />
       <TeX s={f < tNum ? String.raw`\sin\alpha` : String.raw`\sin\alpha=0.5`} x={XPt[0] + 56} y={(O15[1] + XPt[1]) / 2 + 4} size={48} c={C.second} o={fin(f, tCS)} />
-      <TeX s={EQ_S15} x={1080} y={630} size={68} o={fin(f, tCS)} />
-      <CalcStack f={f} x={1260} y={250} size={50} maxLines={2} rows={[
-        { lhs: String.raw`\cos30^\circ`, rhs: String.raw`=\dfrac{\sqrt3}{2}`, at: tCos, h: 140 },
-        { rhs: String.raw`=\dfrac{1.732}{2}\approx0.866`, at: AT(k, 13, "one point seven three two"), cont: true, h: 130 },
-        { lhs: String.raw`\sin30^\circ`, rhs: String.raw`=\dfrac12=0.5`, at: AT(k, 13, "exactly one half"), h: 120 },
+      <TeX s={EQ_S15} x={1080} y={652} size={68} o={fin(f, tCS)} />
+      <CalcStack f={f} x={1260} y={230} size={50} maxLines={2} rows={[   /* K6 k6f2: ends above x̂′ = (cos α, sin α) */
+        { lhs: String.raw`\cos30^\circ`, rhs: String.raw`=\dfrac{\sqrt3}{2}`, at: tCos, h: 132 },
+        { rhs: String.raw`=\dfrac{1.732}{2}\approx0.866`, at: AT(k, 13, "one point seven three two"), cont: true, h: 128 },
+        { lhs: String.raw`\sin30^\circ`, rhs: String.raw`=\dfrac12=0.5`, at: AT(k, 13, "exactly one half"), h: 110 },
       ]} />
       <TeX s={String.raw`\hat{\mathbf x}'=(0.866,\ 0.5)`} x={1120} y={750} size={60} o={fin(f, tNum)} />
     </Scene>
@@ -815,7 +815,7 @@ const S16: React.FC = () => {
         </g>
         <RightTick at={O15} u1={ex} u2={ey} c={C.gold} o={fin(f, tLen)} />
         <Keyword f={f} text="the new y axis" at={[1080, 110]} appear={0} out={tRl - 18} />
-        <Lbl x={1080} y={790} t="at right angles, like the old axes" c={C.key} s={T.floor} o={fin(f, tRA)} />
+        <Lbl x={1080} y={830} t="at right angles, like the old axes" c={C.key} s={T.floor} o={fin(f, tRA)} />
         <Lbl x={1080} y={220} t="⟂ to the new x axis, anticlockwise" c={C.key} s={T.floor} o={fin(f, tMust) * fout(f, tRl - 18)} />
         {/* fix 1c C22: the turned triangle's legs named */}
         {/* K6 after fix 1c: both leg labels moved off the turned arrow / y′ ruler: "cos α (north)" right of its leg near the top
@@ -960,7 +960,7 @@ const S18: React.FC = () => {
       {/* fix 1c C26: both rows with numbers and products. K6 after fix 1c: the matrix moves up under EQ_S18 and each row becomes
           two lines aligned at "=" (they ran to x 1885), the products on "gives", the results on their spoken values */}
       <TeX s={String.raw`\alpha=30^\circ:`} x={1080} y={572} size={44} c={C.local} o={win(f, tNum, tMean - 10)} />
-      <TeX s={String.raw`\begin{pmatrix}0.866 & 0.5\\ -0.5 & 0.866\end{pmatrix}\begin{pmatrix}3\\ 4\end{pmatrix}`} x={1250} y={572} size={44} o={win(f, tNum, tMean - 10)} />
+      <TeX s={String.raw`\begin{pmatrix}0.866 & 0.5\\ -0.5 & 0.866\end{pmatrix}\begin{pmatrix}3\\ 4\end{pmatrix}`} x={1272} y={572} size={44} o={win(f, tNum, tMean - 10)} />
       <CalcStack f={f} x={1150} y={642} size={46} maxLines={2} o={fout(f, tMean - 10)} rows={[
         { lhs: "x'", rhs: String.raw`=0.866\times3+0.5\times4`, at: tNum + 20, h: 52 },
         { rhs: String.raw`=2.598+2\approx4.60`, at: AT(k, 8, "four point six again"), cont: true, h: 52 },
