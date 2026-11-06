@@ -9128,3 +9128,149 @@ A 10-fps pixel tracker followed the gold swipe line from 40:34 to 40:51. The cap
 - Nothing left is wrong for a learner.
 - The two Should items are a 6-s empty right half in s02 (the last `halves` WARN) and one division shown without its result in s20. Both are small TSX changes: re-render s02 and s20 by chunk, then re-run `movie_qa`. That can be done before or after the user's viewing.
 - Ready for the user (`qa_pass`).
+
+## #5c ch00_coordinates_sphere — build 1, review 1 (2026-11-06, fresh eyes, calculation & sync audit)
+
+| movie | duration | size | qa gates | physics | equations | legibility | pacing | captions | access | badges | verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| ch00_coordinates_sphere build 1 | 48:22.87 (2902.87 s) | 158.85 MB | 13 of 15 PASS; **content FAIL** (2669–2678 s); **halves FAIL** (right 2669–2687 s) + 4 WARN | all numbers check; 1 geography inconsistency (top view); 1 overstated distance | 24 of 24 present, KaTeX clean | 1 clipped label, 1 near-invisible label pair, 1 brace glitch | 1 blank stretch, 4 short empty halves, 2 unnarrated calculations | 712 cues PASS | plasma-type map, numbers labelled, 0 flashes | n/a (retired) | **FIX** |
+
+**Method.** I extracted one frame per sentence (445 frames, each at 75 % of its sentence, 640 px wide, tiled 3×3). I also pulled full-resolution frames at every suspicious time, a 2.5-s strip through the s10 tour and a 1-s strip through the title. All frames are in `reports/movies/ch00_coordinates_sphere/review1/` (`t/`, `f/`, `sentences.tsv`).
+
+**Numbers.** I recomputed every number on screen by hand, and all of them are right:
+- 4764, 4230, 4217 and −332 km; 6371 km by both Pythagoras steps.
+- 86 164 s, Ω = 7.292 × 10⁻⁵ rad/s; ground speeds 464.6, 428, 308 and 95 m/s.
+- 111.2 km, 1.85 km, 5382 km; 73.8, 102.5 and 22.7 km per degree east.
+- Box widths 27.8, 25.6, 18.5 and 5.7 km; ×4.9.
+- Box areas 773, 712, 513 and 158 km².
+- 0.158 = 0.158; 0.174 + 0.168 + 0.158 = 0.5.
+- 255 and 510 million km²; the two-box mean 20 °C; 16.3 − 7.1 = 9.2 °C.
+
+**Wording and credits.** The wording lint is clean apart from "Fourth" (M5). There is no "the easy way" and no private line. No source line carries a maker credit. The end card uses the maths ending word for word.
+
+### Must fix
+- **M1 · 44:29–44:47 (2669.2–2687 s) · s34_global_mean S3–S6. The blank stretch is confirmed.**
+  - The whole content area is empty for 9 s while the voice says "Here's where this matters for climate. Imagine a planet with just two grid boxes…". The right half then stays empty until S7, 18 s in all.
+  - The label "60° N · area ½" appears only at S8 (2690 s), three sentences after "60° N" is spoken.
+  - **Fix:**
+    - Draw both boxes from the first frame of S3: the equator box with "30 °C" and the 60° N box with "0 °C".
+    - Put the goal keyword "global average?" on the right.
+    - Reveal "equator" on its words in S5, "60° N" on its words in S6, and "area ½" on "one half" in S8.
+- **M2 · 11:36–12:50, 18:36–20:21 and 23:06–23:46 · s11_longitude S4–S14, s17_brest_top and the s19_khulna top view. The "top view from above the North Pole" is not a polar view.**
+  - Through the semi-transparent equatorial cut face, the globe texture shows North America seen obliquely.
+  - As a result, the origin of x and y (the North Pole) sits on northern Canada, and Greenland lies about +50° anticlockwise of x, where Siberia belongs.
+  - A few seconds earlier (11:26–11:31) the true polar view correctly puts the Arctic Ocean at the centre. A viewer who knows the map will see the axes drawn on the wrong place.
+  - **Fix:**
+    - Make the cut face opaque, or texture it with a true north-polar projection, so that the 0° spoke runs towards Europe and the 90° E spoke towards India.
+    - Then re-check the foot points in s17 and s19.
+- **M3 · 22:34–22:58 (1354–1378 s) · s19_khulna side view. A label is clipped.**
+  - On the 3-D slice, the z label "2469 km" is clipped to "246" at the edge of the canvas.
+  - **Fix:** put the label inside the slice, to the left of the leg, or widen the canvas.
+- **M4 · 35:32–36:13 (2132–2173 s) · s27_area_patch S7–S13. The two side labels are practically invisible.**
+  - "a Δφ" and "a cos φ Δλ" are drawn in dark rose on the darkened globe and cannot be read even at 1080p. They are the point of the scene, and the gold links point at nothing readable.
+  - **Fix:**
+    - Draw both labels in KaTeX at 68 px or more, in ink and orange, on the solid background (x ≥ 1160).
+    - Keep them on screen until "Collecting the pieces".
+- **M5 · 24:58 (1498.2 s) · s20_spin_rate S15. A numbered spoken step is left in.**
+  - "Fourth, we pull out…" breaks the house rule of 2026-11-06. No "second" or "third" comes before it, so it sounds odd.
+  - S13–S14 also read "So, speed is distance divided by time. So the ground speed…".
+  - **Fix:**
+    - Re-voice S13 as "Then, speed is distance divided by time."
+    - Re-voice S15 as "Now we pull out the part that's the same for every place: two pi divided by capital T."
+    - This is a TTS splice of two sentences followed by a re-time of s20.
+- **M6 · 20:22–20:27 (1222–1227 s) · s18_position_vector S2. An underbrace sits on the wrong text.**
+  - The underbrace and its label "distance from the axis" appear before the equation "x = a cos φ cos λ" does, so the brace sits under the keyword "two steps together".
+  - **Fix:** reveal the brace together with the a cos φ term, or remove the keyword when the equation enters.
+
+### Should fix
+- **S1 · empty halves (the four QA WARN stretches).**
+  - Confirmed at 1:32–1:36.5 (s02 S9), 3:43.5–3:52 (s05 S3), 9:28.5–9:35 (s09 S8) and 36:45.5–36:49 (s28 S1): only the globe or the slice is on screen, with no keyword.
+  - **Fix:**
+    - s02: add "the Earth: the biggest round shape".
+    - s05: put "latitude: angle at the centre" on its words in S3, and add φ in S4.
+    - s09: add "12 meridians, 30° apart".
+    - s28: add "area of one box?".
+  - The same applies to s22 S1–S2 (28:00–28:15), where only the skip chip is on the right.
+- **S2 · 24:31–24:35 (1471.8–1475.5 s) · s20 S10. A calculation is shown but never spoken.**
+  - A dim four-line calculation ("360° ÷ 365 days ≈ 1° a day … 1440 ÷ 360 = 4 min per 1°") appears after the voice has moved on to "how far does the place travel".
+  - **Fix:** voice it in S9 and put each line on its words, or drop it.
+- **S3 · 26:34–26:51 · s21 S9–S10. Numbers on screen are never named.**
+  - "2π × 6400 km ≈ 40 000 km", "× 3.6 ≈ 1670 km/h", "1670 ÷ 900 ≈ 1.9" and "passenger jet ≈ 900 km/h" are shown, but 900 km/h, the × 3.6 conversion and 2π × 6400 are never said.
+  - **Fix:**
+    - Add the sentence "A passenger jet flies at about nine hundred kilometres per hour."
+    - Say that times three point six turns metres per second into kilometres per hour.
+    - Brighten the current line, which is drawn as dim as the older ones.
+- **S4 · 29:01–29:06 (1741–1746 s) · s22 S11. A spoken step has no line on screen.**
+  - "A full turn is 360 degrees, or 2π radians" is said but not shown.
+  - **Fix:** add "360° = 2π rad" in S11, before "1° = π/180 ≈ 0.01745 rad" in S12.
+- **S5 · 11:07–11:15 (667.5–675 s) · s10 S13. A distance is overstated.**
+  - The voice says the meridian runs south "for more than eight thousand kilometres" after it crosses the equator. To the ice at 71.5° S (the latitude in the manifest) it is 71.5 × 111.2 ≈ 7950 km.
+  - **Fix:** say "for almost eight thousand kilometres".
+- **S6 · 7:21–8:40 · s08 S9–S21. The flat diagram is too small, and the key angle is never drawn.**
+  - The flat twin diagram is about 200 px wide, so the "1", the φ and the side tags are near the 44-px floor.
+  - The angle at Brest's corner (90° − φ), which is the key move of the swap, is never drawn, and the word "colatitude" floats unlinked.
+  - **Fix:** double the size of the diagram, draw the colatitude wedge at Brest's corner in S16, and add a gold link from the word "colatitude".
+- **S7 · 45:28–45:52 · s34 S12–S15. The polar strip names only the Arctic.**
+  - The strip is labelled "60–90° N", but the voice names the Arctic and the Antarctic, and in September the Antarctic is the colder one.
+  - **Fix:** show and label both polar caps.
+  - The colour bar clips values below −60 °C (as the manifest notes): give it an end arrow.
+  - Its tick labels are about 44 px, below the 52-px colour-bar size.
+- **S8 · 45:10–45:15 · s34 S11. New symbols are not explained.**
+  - The formula "T̄ = Σⱼ cos φⱼ Tⱼ / Σⱼ cos φⱼ" introduces Σ, the index j, Tⱼ and the overbar, and none of them is explained.
+  - **Fix:** say "add up cosine phi times the temperature over all boxes, and divide by the sum of the cosines", and add braces reading "sum over boxes" and "weight".
+- **S9 · 34:46–34:54 · s26 S15. The picture for "other grids" shows the wrong grid.**
+  - The small globe shows the converging latitude-longitude grid, which is the problem, not another kind of grid. It sits off-centre, with a two-line source line in the middle of the screen.
+  - **Fix:** show a cubed-sphere or icosahedral grid beside the latitude-longitude one, both large, with the source line below them.
+- **S10 · 43:48–44:04 · s33 S10–S11. The strip comparison has no clear pair.**
+  - The "strip near the pole" is a gold line at the top edge of the frame, and the cylinder runs off the top. There is no visible pair of matching strips to compare.
+  - **Fix:** frame the whole cylinder. Draw one band at about 60° on the sphere and its partner on the cylinder, labelled "× cos φ" (round) and "× 1/cos φ" (width).
+  - Change the voice from "by the same factor" to "by one over that factor".
+- **S11 · 28:33–29:46 · s22 S7–S16. A tag collides with a keyword.**
+  - The orange "Δy" tag on the flat diagram touches the keyword "the centre".
+  - **Fix:** move the tag, or move the keyword down by 60 px.
+- **S12 · 21:10 (1270 s) · s18 S8. A link crosses the picture.**
+  - The gold link from the Pythagoras stack crosses the Brest arrow and the "4217" tag.
+  - **Fix:** bend the link above the arrow.
+- **S13 · plain-text maths symbols (the known issue).** These lines set φ, λ, Ω, a, r, θ and z in the sans keyword font instead of KaTeX:
+  - s02: "r and θ, from east" and "cylindrical: r, θ, z" (0:41–1:32).
+  - s03: "distance r" (2:00–2:33).
+  - s05: "latitude φ" (3:52–4:31).
+  - s11: "longitude λ" (11:57–12:50).
+  - s13: "goal: Brest's x, y, z" (14:50).
+  - s15: "opposite φ" (16:27–17:34).
+  - s16: "next to φ" (17:36–18:35).
+  - s21 keep line (25:31–25:52): "height a sin φ · from the axis a cos φ · ground east at Ω a cos φ".
+  - s25 keep line and sphere tags (31:49–32:08): "1° east = 111 km × cos φ" and "× cos φ".
+  - s26: "width depends on cos φ" (33:48–34:20).
+  - s29: "area between 0° and φ?" (38:07–39:00).
+  - s31: the graph axis "sin φ" (40:15–41:36).
+  - s33 (43:16–44:04): "height a sin φ = z", "shorter round: × cos φ" and "wider along the surface: × 1/cos φ".
+  - s34: "boxes shrink by cos φ" (44:13–44:29), "weighted by cos φ" and "cos φ weighting" (45:33–45:58).
+  - s35 recap:
+    - the letter "a" on the arrow (45:59);
+    - "latitude φ" (46:15);
+    - "longitude λ: east +" (46:40);
+    - "a cos φ cos λ, a cos φ sin λ" (46:48), which is also muted and about 40 px, below the 44-px floor;
+    - "share sin φ · weights cos φ" (47:36).
+  - s08, s15 and s16: "next = long × cos" and "opposite = long × sin".
+  - **Fix:** render each line with `InlineTeX`, keeping the words in sans and the symbols in KaTeX.
+- **S14 · 13:03–13:15 · s12 S3. Parallel labels sit on the globe.**
+  - The labels "60°, 45°, 30° N, 15° N, 0°" sit on the rim of the globe, and "75°" is cut off at the top.
+  - **Fix:** move them 40 px clear of the limb.
+
+### Cosmetic
+- **C1 · s15, s22 and s24.** Pairs of underbrace labels run together into one phrase ("radius" next to "change in φ (rad)"). Add 40 px between them.
+- **C2 · s18, s21 and s28.** The calculation stacks run 5 to 8 lines at about 44–46 px, and the older lines are not dimmed (house CalcStack: at most 3 lines, 68 px, older lines at 60 %). Orphan lines such as "×0.0043633" should be joined to the line above.
+- **C3 · s29 S6 (38:28).** The strip on the globe is not labelled φ and φ + Δφ.
+- **C4 · s00 title.** The subtitle has no teal application word (house style: "and how meteorology uses them"), and the animation column is smaller than in the reference movie.
+- **C5 · s24 S1–S5 (30:40–31:04).** The camera stays on North America while Brest's parallel is discussed, and Brest is not visible.
+- **C6 · s21 S11 (26:51).** Singapore's cos φ (0.9997) is on screen but is not said.
+
+### What works (keep)
+- The maths is honest. Every result checks, and the ERA5 means come from a named data product, with its source line below the map and its colour bar beside it.
+- The s10 prime-meridian tour labels each place on its words, shows a live latitude readout, and zooms back out at the end.
+- The sequences for Archimedes, the staircase of sines and the two-view slices are clear.
+- The skip chips (8:49, 25:31, 31:49, 44:13) land on the right scenes.
+- The end card follows the house style (maths ending), with no URL and no book name.
+
+### Verdict: FIX (#5c build 1 review 1: 6 Must, 14 Should, 6 cosmetic)
